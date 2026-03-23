@@ -1,0 +1,3073 @@
+{
+  "1330-20-7": {
+    "name_tr": "Ksilen, karışık izomerler, saf",
+    "tw_ppm": 50.0,
+    "tw_mgm3": 221.0,
+    "stel_ppm": 100.0,
+    "stel_mgm3": 442.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "108-88-3": {
+    "name_tr": "Toluen",
+    "tw_ppm": 50.0,
+    "tw_mgm3": 192.0,
+    "stel_ppm": 100.0,
+    "stel_mgm3": 384.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "67-56-1": {
+    "name_tr": "Metanol",
+    "tw_ppm": 200.0,
+    "tw_mgm3": 260.0,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "64-17-5": {
+    "name_tr": "Etil alkol (Etanol)",
+    "tw_ppm": 1000.0,
+    "tw_mgm3": 1900.0,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "67-64-1": {
+    "name_tr": "Aseton",
+    "tw_ppm": 500.0,
+    "tw_mgm3": 1210.0,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "71-43-2": {
+    "name_tr": "Benzen",
+    "tw_ppm": 1,
+    "tw_mgm3": 3.25,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": true,
+    "carcinogen": true,
+    "regulation": "Kanserojen Yönetmeliği Ek-1"
+  },
+  "7664-41-7": {
+    "name_tr": "Amonyak, susuz",
+    "tw_ppm": 20.0,
+    "tw_mgm3": 14.0,
+    "stel_ppm": 50.0,
+    "stel_mgm3": 36.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7647-01-0": {
+    "name_tr": "Hidrojen klorür",
+    "tw_ppm": 5.0,
+    "tw_mgm3": 8.0,
+    "stel_ppm": 10.0,
+    "stel_mgm3": 15.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7664-93-9": {
+    "name_tr": "Sülfürik asit (sis) (8) (9)",
+    "tw_ppm": null,
+    "tw_mgm3": 0.05,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "1310-73-2": {
+    "name_tr": "Sodyum hidroksit",
+    "tw_ppm": null,
+    "tw_mgm3": 2.0,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "75-09-2": {
+    "name_tr": "Metilen klorür; diklorometan",
+    "tw_ppm": 100.0,
+    "tw_mgm3": 353.0,
+    "stel_ppm": 200.0,
+    "stel_mgm3": 706.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "79-01-6": {
+    "name_tr": "Trikloroetilen",
+    "tw_ppm": 10,
+    "tw_mgm3": 54.7,
+    "stel_ppm": 30,
+    "stel_mgm3": 164.1,
+    "skin": true,
+    "carcinogen": true,
+    "regulation": "Kanserojen Yönetmeliği Ek-1"
+  },
+  "13463-67-7": {
+    "name_tr": "Titanyum dioksit (solunabilir toz)",
+    "tw_ppm": null,
+    "tw_mgm3": 10,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": false,
+    "notes": "Solunabilir fraksiyonu için",
+    "regulation": "EK-1"
+  },
+  "14808-60-7": {
+    "name_tr": "Kristalize silika (kuvars - solunabilir)",
+    "tw_ppm": null,
+    "tw_mgm3": 0.1,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": true,
+    "regulation": "Kanserojen Yönetmeliği Ek-1"
+  },
+  "110-54-3": {
+    "name_tr": "N-Hekzan",
+    "tw_ppm": 20.0,
+    "tw_mgm3": 72.0,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "2682-20-4": {
+    "name_tr": "Metilizotiyazolinon (MIT)",
+    "tw_ppm": null,
+    "tw_mgm3": 0.0002,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": true,
+    "carcinogen": false,
+    "regulation": "EK-1"
+  },
+  "111-30-8": {
+    "name_tr": "Glutaraldehit",
+    "tw_ppm": 0.05,
+    "tw_mgm3": 0.2,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": true,
+    "carcinogen": false,
+    "regulation": "EK-1"
+  },
+  "100-41-4": {
+    "name_tr": "Etilbenzen",
+    "tw_ppm": 100.0,
+    "tw_mgm3": 442.0,
+    "stel_ppm": 200.0,
+    "stel_mgm3": 884.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7440-02-0": {
+    "name_tr": "Nikel ve bileşikleri (solunum fraksiyonu)",
+    "tw_ppm": null,
+    "tw_mgm3": 0.01,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": true,
+    "carcinogen": true,
+    "regulation": "Kanserojen Yönetmeliği Ek-1"
+  },
+  "7440-43-9": {
+    "name_tr": "Kadmiyum ve bileşikleri",
+    "tw_ppm": null,
+    "tw_mgm3": 0.004,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": true,
+    "regulation": "Kanserojen Yönetmeliği Ek-1"
+  },
+  "123-86-4": {
+    "name_tr": "n-Bütil asetat",
+    "tw_ppm": 50.0,
+    "tw_mgm3": 241.0,
+    "stel_ppm": 150.0,
+    "stel_mgm3": 723.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "141-78-6": {
+    "name_tr": "Etil asetat",
+    "tw_ppm": 400,
+    "tw_mgm3": 1468,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "EK-1"
+  },
+  "108-94-1": {
+    "name_tr": "Sikloheksanon",
+    "tw_ppm": 10.0,
+    "tw_mgm3": 40.8,
+    "stel_ppm": 20.0,
+    "stel_mgm3": 81.6,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "110-82-7": {
+    "name_tr": "Siklohekzan",
+    "tw_ppm": 200.0,
+    "tw_mgm3": 700.0,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "142-82-5": {
+    "name_tr": "n-Heptan",
+    "tw_ppm": 500,
+    "tw_mgm3": 2085,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "EK-1"
+  },
+  "111-65-9": {
+    "name_tr": "Oktan",
+    "tw_ppm": 500.0,
+    "tw_mgm3": 2350.0,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "109-99-9": {
+    "name_tr": "Tetrahidrofuran",
+    "tw_ppm": 50.0,
+    "tw_mgm3": 150.0,
+    "stel_ppm": 100.0,
+    "stel_mgm3": 300.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "872-50-4": {
+    "name_tr": "n-Metil-2-pirolidon",
+    "tw_ppm": 10.0,
+    "tw_mgm3": 40.0,
+    "stel_ppm": 20.0,
+    "stel_mgm3": 80.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7697-37-2": {
+    "name_tr": "Nitrik asit",
+    "tw_ppm": null,
+    "tw_mgm3": null,
+    "stel_ppm": 1.0,
+    "stel_mgm3": 2.6,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7446-09-5": {
+    "name_tr": "Sülfür dioksit",
+    "tw_ppm": 0.5,
+    "tw_mgm3": 1.3,
+    "stel_ppm": 1.0,
+    "stel_mgm3": 2.7,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "630-08-0": {
+    "name_tr": "Karbonmonoksit (CO)",
+    "tw_ppm": 20,
+    "tw_mgm3": 23,
+    "stel_ppm": 100,
+    "stel_mgm3": 117,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "EK-1"
+  },
+  "124-38-9": {
+    "name_tr": "Karbon dioksit",
+    "tw_ppm": 5000.0,
+    "tw_mgm3": 9000.0,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "50-00-0": {
+    "name_tr": "Formaldehit",
+    "tw_ppm": 0.3,
+    "tw_mgm3": 0.37,
+    "stel_ppm": 0.6,
+    "stel_mgm3": 0.74,
+    "skin": true,
+    "carcinogen": true,
+    "regulation": "Kanserojen Yönetmeliği Ek-1"
+  },
+  "64-18-6": {
+    "name_tr": "Formik asit",
+    "tw_ppm": 5.0,
+    "tw_mgm3": 9.0,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "79-09-4": {
+    "name_tr": "Propiyonik asit",
+    "tw_ppm": 10.0,
+    "tw_mgm3": 31.0,
+    "stel_ppm": 20.0,
+    "stel_mgm3": 62.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "60-35-5": {
+    "name_tr": "Asetamit",
+    "tw_ppm": 10,
+    "tw_mgm3": 30,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": true,
+    "regulation": "Kanserojen Yönetmeliği"
+  },
+  "98-82-8": {
+    "name_tr": "Kümen",
+    "tw_ppm": 20.0,
+    "tw_mgm3": 100.0,
+    "stel_ppm": 50.0,
+    "stel_mgm3": 250.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "75-15-0": {
+    "name_tr": "Karbon disülfür",
+    "tw_ppm": 5.0,
+    "tw_mgm3": 15.0,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "106-97-8": {
+    "name_tr": "Bütan",
+    "tw_ppm": 1000,
+    "tw_mgm3": 2350,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "EK-1"
+  },
+  "115-10-6": {
+    "name_tr": "Dimetil eter",
+    "tw_ppm": 1000,
+    "tw_mgm3": 1920,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "EK-1"
+  },
+  "107-98-2": {
+    "name_tr": "1-Metoksipropanol-2",
+    "tw_ppm": 100.0,
+    "tw_mgm3": 375.0,
+    "stel_ppm": 150.0,
+    "stel_mgm3": 568.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "109-87-5": {
+    "name_tr": "Dimetoksimetan; bkz. Metilal",
+    "tw_ppm": 1000.0,
+    "tw_mgm3": 3100.0,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7439-97-6": {
+    "name_tr": "Cıva (buhar) (Hg olarak)",
+    "tw_ppm": null,
+    "tw_mgm3": 0.05,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7440-38-2": {
+    "name_tr": "Arsenik ve bileşikleri (As olarak)",
+    "tw_ppm": null,
+    "tw_mgm3": 0.01,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7440-47-3": {
+    "name_tr": "Krom metal ve çözünmeyen tuzlar (Cr olarak)",
+    "tw_ppm": null,
+    "tw_mgm3": 0.5,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7440-50-8": {
+    "name_tr": "Bakır metali dumanı (Cu olarak)",
+    "tw_ppm": null,
+    "tw_mgm3": 0.1,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7440-66-6": {
+    "name_tr": "Çinko oksit (duman)",
+    "tw_ppm": null,
+    "tw_mgm3": 2,
+    "stel_ppm": null,
+    "stel_mgm3": 6,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "EK-1"
+  },
+  "7440-21-3": {
+    "name_tr": "Silisyum (kristalize, amorf)",
+    "tw_ppm": null,
+    "tw_mgm3": 4,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "EK-1"
+  },
+  "1345-16-0": {
+    "name_tr": "Kobalt oksit",
+    "tw_ppm": null,
+    "tw_mgm3": 0.02,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": true,
+    "carcinogen": true,
+    "regulation": "Kanserojen Yönetmeliği"
+  },
+  "INERT_DUST": {
+    "name_tr": "İnert toz (solunabilir fraksiyonu)",
+    "tw_ppm": null,
+    "tw_mgm3": 5,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "EK-2"
+  },
+  "INERT_DUST_TOTAL": {
+    "name_tr": "İnert toz (toplam)",
+    "tw_ppm": null,
+    "tw_mgm3": 10,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "EK-2"
+  },
+  "9005-64-5": {
+    "name_tr": "Polisorbat 80 (Tween 80)",
+    "tw_ppm": null,
+    "tw_mgm3": 5,
+    "stel_ppm": null,
+    "stel_mgm3": 10,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "EK-2"
+  },
+  "67-66-3": {
+    "name_tr": "Kloroform",
+    "tw_ppm": 2.0,
+    "tw_mgm3": 10.0,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "79-34-5": {
+    "name_tr": "1,1,2,2-Tetrakloroetan",
+    "tw_ppm": 1.0,
+    "tw_mgm3": 7.0,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "127-18-4": {
+    "name_tr": "Tetrakloroetilen (PERC)",
+    "tw_ppm": 20,
+    "tw_mgm3": 138,
+    "stel_ppm": 40,
+    "stel_mgm3": 275,
+    "skin": false,
+    "carcinogen": true,
+    "regulation": "Kanserojen Yönetmeliği"
+  },
+  "822-06-0": {
+    "name_tr": "Heksametilen diizosiyant (HDI)",
+    "tw_ppm": 0.02,
+    "tw_mgm3": 0.14,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": true,
+    "carcinogen": false,
+    "regulation": "EK-1"
+  },
+  "101-68-8": {
+    "name_tr": "Metilen bisfenil izosiyanat (MDI)",
+    "tw_ppm": 0.005,
+    "tw_mgm3": 0.05,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "584-84-9": {
+    "name_tr": "TDI (Toluen diizosiyant)",
+    "tw_ppm": 0.005,
+    "tw_mgm3": 0.04,
+    "stel_ppm": 0.02,
+    "stel_mgm3": 0.14,
+    "skin": true,
+    "carcinogen": true,
+    "regulation": "Kanserojen Yönetmeliği"
+  },
+  "79-06-1": {
+    "name_tr": "Akrilamit",
+    "tw_ppm": 0.03,
+    "tw_mgm3": 0.1,
+    "stel_ppm": null,
+    "stel_mgm3": null,
+    "skin": true,
+    "carcinogen": true,
+    "regulation": "Kanserojen Yönetmeliği Ek-1"
+  },
+  "140-88-5": {
+    "name_tr": "Etil akrilat",
+    "tw_ppm": 5,
+    "tw_mgm3": 21,
+    "stel_ppm": 15,
+    "stel_mgm3": 61,
+    "skin": false,
+    "carcinogen": true,
+    "regulation": "Kanserojen Yönetmeliği"
+  },
+  "96-33-3": {
+    "name_tr": "Metilakrilat",
+    "tw_ppm": 5.0,
+    "tw_mgm3": 18.0,
+    "stel_ppm": 10.0,
+    "stel_mgm3": 36.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "80-62-6": {
+    "name_tr": "Metil metakrilat",
+    "tw_ppm": 50.0,
+    "tw_mgm3": null,
+    "stel_ppm": 100.0,
+    "stel_mgm3": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "60-29-7": {
+    "name_tr": "Dietileter",
+    "tw_mgm3": 308.0,
+    "tw_ppm": 100.0,
+    "stel_mgm3": 616.0,
+    "stel_ppm": 200.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "71-55-6": {
+    "name_tr": "1,1,1-Trikloroetan",
+    "tw_mgm3": 555.0,
+    "tw_ppm": 100.0,
+    "stel_mgm3": 1110.0,
+    "stel_ppm": 200.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "75-04-7": {
+    "name_tr": "Etilamin",
+    "tw_mgm3": 9.4,
+    "tw_ppm": 5.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "75-34-3": {
+    "name_tr": "1,1-Dikloretan",
+    "tw_mgm3": 412.0,
+    "tw_ppm": 100.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "75-44-5": {
+    "name_tr": "Fosgen",
+    "tw_mgm3": 0.08,
+    "tw_ppm": 0.02,
+    "stel_mgm3": 0.4,
+    "stel_ppm": 0.1,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "75-45-6": {
+    "name_tr": "Klorodiflorometan",
+    "tw_mgm3": 3600.0,
+    "tw_ppm": 1000.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "78-93-3": {
+    "name_tr": "2-Bütanon",
+    "tw_mgm3": 600.0,
+    "tw_ppm": 200.0,
+    "stel_mgm3": 900.0,
+    "stel_ppm": 300.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "95-47-6": {
+    "name_tr": "o-Ksilen",
+    "tw_mgm3": 221.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 442.0,
+    "stel_ppm": 100.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "95-50-1": {
+    "name_tr": "1,2-Diklorobenzen",
+    "tw_mgm3": 122.0,
+    "tw_ppm": 20.0,
+    "stel_mgm3": 306.0,
+    "stel_ppm": 50.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "95-63-6": {
+    "name_tr": "1,2,4-Trimetilbenzen",
+    "tw_mgm3": 100.0,
+    "tw_ppm": 20.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "98-83-9": {
+    "name_tr": "2- Fenilpropen",
+    "tw_mgm3": 246.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 492.0,
+    "stel_ppm": 100.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "105-60-2": {
+    "name_tr": "e-Kaprolaktam, (toz ve buhar)",
+    "tw_mgm3": 10.0,
+    "tw_ppm": null,
+    "stel_mgm3": 40.0,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "106-35-4": {
+    "name_tr": "Heptan-3-bir",
+    "tw_mgm3": 95.0,
+    "tw_ppm": 20.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "106-42-3": {
+    "name_tr": "p-Ksilen",
+    "tw_mgm3": 221.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 442.0,
+    "stel_ppm": 100.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "107-18-6": {
+    "name_tr": "Alil Alkol",
+    "tw_mgm3": 4.8,
+    "tw_ppm": 2.0,
+    "stel_mgm3": 12.1,
+    "stel_ppm": 5.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "107-21-1": {
+    "name_tr": "Etilen Glikol",
+    "tw_mgm3": 52.0,
+    "tw_ppm": 20.0,
+    "stel_mgm3": 104.0,
+    "stel_ppm": 40.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "108-10-1": {
+    "name_tr": "4-Metilpentan-2-bir",
+    "tw_mgm3": 83.0,
+    "tw_ppm": 20.0,
+    "stel_mgm3": 208.0,
+    "stel_ppm": 50.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "108-38-3": {
+    "name_tr": "m-Ksilen",
+    "tw_mgm3": 221.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 442.0,
+    "stel_ppm": 100.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "108-65-6": {
+    "name_tr": "2-Metoksi-1-metiletilasetat",
+    "tw_mgm3": 275.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 550.0,
+    "stel_ppm": 100.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "108-67-8": {
+    "name_tr": "Mesitilen (Trimetilbenzen)",
+    "tw_mgm3": 100.0,
+    "tw_ppm": 20.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "110-12-3": {
+    "name_tr": "5-Metilheksan-2-bir",
+    "tw_mgm3": 95.0,
+    "tw_ppm": 20.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "110-43-0": {
+    "name_tr": "Heptan-2-bir",
+    "tw_mgm3": 238.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 475.0,
+    "stel_ppm": 100.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "110-85-0": {
+    "name_tr": "Piperazin",
+    "tw_mgm3": 0.1,
+    "tw_ppm": null,
+    "stel_mgm3": 0.3,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "111-76-2": {
+    "name_tr": "2-Bütoksietanol",
+    "tw_mgm3": 98.0,
+    "tw_ppm": 20.0,
+    "stel_mgm3": 246.0,
+    "stel_ppm": 50.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "112-07-2": {
+    "name_tr": "2- Bütoksietil asetat",
+    "tw_mgm3": 133.0,
+    "tw_ppm": 20.0,
+    "stel_mgm3": 333.0,
+    "stel_ppm": 50.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "120-82-1": {
+    "name_tr": "1,2,4-Triklorobenzen",
+    "tw_mgm3": 15.1,
+    "tw_ppm": 2.0,
+    "stel_mgm3": 37.8,
+    "stel_ppm": 5.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "121-44-8": {
+    "name_tr": "Trietilamin",
+    "tw_mgm3": 8.4,
+    "tw_ppm": 2.0,
+    "stel_mgm3": 12.6,
+    "stel_ppm": 3.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "123-92-2": {
+    "name_tr": "İzopentilasetat",
+    "tw_mgm3": 270.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 540.0,
+    "stel_ppm": 100.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "124-40-3": {
+    "name_tr": "Dimetilamin",
+    "tw_mgm3": 3.8,
+    "tw_ppm": 2.0,
+    "stel_mgm3": 9.4,
+    "stel_ppm": 5.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "141-32-2": {
+    "name_tr": "n-Bütilakrilat",
+    "tw_mgm3": 11.0,
+    "tw_ppm": 2.0,
+    "stel_mgm3": 53.0,
+    "stel_ppm": 10.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "526-73-8": {
+    "name_tr": "1,2,3- Trimetilbenzen",
+    "tw_mgm3": 100.0,
+    "tw_ppm": 20.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "541-85-5": {
+    "name_tr": "5- Metilheptan-3-bir",
+    "tw_mgm3": 53.0,
+    "tw_ppm": 10.0,
+    "stel_mgm3": 107.0,
+    "stel_ppm": 20.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "626-38-0": {
+    "name_tr": "1- Metilbütilasetat",
+    "tw_mgm3": 270.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 540.0,
+    "stel_ppm": 100.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "628-63-7": {
+    "name_tr": "Pentilasetat",
+    "tw_mgm3": 270.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 540.0,
+    "stel_ppm": 100.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "620-11-1": {
+    "name_tr": "3- Pentilasetat",
+    "tw_mgm3": 270.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 540.0,
+    "stel_ppm": 100.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "625-16-1": {
+    "name_tr": "Amilasetat, tert",
+    "tw_mgm3": 270.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 540.0,
+    "stel_ppm": 100.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "3689-24-5": {
+    "name_tr": "Sülfotep",
+    "tw_mgm3": 0.1,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7664-39-3": {
+    "name_tr": "Hidrojen florür",
+    "tw_mgm3": 1.5,
+    "tw_ppm": 1.8,
+    "stel_mgm3": 2.5,
+    "stel_ppm": 3.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7440-22-4": {
+    "name_tr": "Gümüş, metalik",
+    "tw_mgm3": 0.1,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7664-38-2": {
+    "name_tr": "Ortofosforik asit",
+    "tw_mgm3": 1.0,
+    "tw_ppm": null,
+    "stel_mgm3": 2.0,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7782-41-4": {
+    "name_tr": "Flor",
+    "tw_mgm3": 1.58,
+    "tw_ppm": 1.0,
+    "stel_mgm3": 3.16,
+    "stel_ppm": 2.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7783-07-5": {
+    "name_tr": "Dihidrojen selenit",
+    "tw_mgm3": 0.07,
+    "tw_ppm": 0.02,
+    "stel_mgm3": 0.17,
+    "stel_ppm": 0.05,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "10035-10-6": {
+    "name_tr": "Hidrojen bromür",
+    "tw_mgm3": null,
+    "tw_ppm": null,
+    "stel_mgm3": 6.7,
+    "stel_ppm": 2.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "26628-22-8": {
+    "name_tr": "Sodyum azit",
+    "tw_mgm3": 0.1,
+    "tw_ppm": null,
+    "stel_mgm3": 0.3,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "34590-94-8": {
+    "name_tr": "Florür, inorganik",
+    "tw_mgm3": 2.5,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "54-11-5": {
+    "name_tr": "Nikotin",
+    "tw_mgm3": 0.5,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "75-00-3": {
+    "name_tr": "Kloroetan",
+    "tw_mgm3": 268.0,
+    "tw_ppm": 100.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "75-05-8": {
+    "name_tr": "Asetonitril",
+    "tw_mgm3": 70.0,
+    "tw_ppm": 40.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "78-78-4": {
+    "name_tr": "İzopentan",
+    "tw_mgm3": 3000.0,
+    "tw_ppm": 1000.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "98-95-3": {
+    "name_tr": "Nitrobenzen",
+    "tw_mgm3": 1.0,
+    "tw_ppm": 0.2,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "108-46-3": {
+    "name_tr": "Resorsinol",
+    "tw_mgm3": 45.0,
+    "tw_ppm": 10.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "108-90-7": {
+    "name_tr": "Monoklorobenzen",
+    "tw_mgm3": 23.0,
+    "tw_ppm": 5.0,
+    "stel_mgm3": 70.0,
+    "stel_ppm": 15.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "109-66-0": {
+    "name_tr": "Pentan",
+    "tw_mgm3": 3000.0,
+    "tw_ppm": 1000.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "109-89-7": {
+    "name_tr": "Dietilamin",
+    "tw_mgm3": 15.0,
+    "tw_ppm": 5.0,
+    "stel_mgm3": 30.0,
+    "stel_ppm": 10.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "110-91-8": {
+    "name_tr": "Morpolin",
+    "tw_mgm3": 36.0,
+    "tw_ppm": 10.0,
+    "stel_mgm3": 72.0,
+    "stel_ppm": 20.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "111-77-3": {
+    "name_tr": "2-(2-Metoksietoksi)etanol",
+    "tw_mgm3": 50.1,
+    "tw_ppm": 10.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "112-34-5": {
+    "name_tr": "2-(2-Bütoksietoksi)etanol",
+    "tw_mgm3": 67.5,
+    "tw_ppm": 10.0,
+    "stel_mgm3": 101.2,
+    "stel_ppm": 15.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "141-43-5": {
+    "name_tr": "2-Aminoetanol",
+    "tw_mgm3": 2.5,
+    "tw_ppm": 1.0,
+    "stel_mgm3": 7.6,
+    "stel_ppm": 3.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "144-62-7": {
+    "name_tr": "Oksalik asit",
+    "tw_mgm3": 1.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "420-04-2": {
+    "name_tr": "Siyanamit",
+    "tw_mgm3": 1.0,
+    "tw_ppm": 0.58,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "463-82-1": {
+    "name_tr": "Neopentan",
+    "tw_mgm3": 3000.0,
+    "tw_ppm": 1000.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "1314-56-3": {
+    "name_tr": "Difosfor pentaoksit",
+    "tw_mgm3": 1.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "1314-80-3": {
+    "name_tr": "Difosfor pentasülfit",
+    "tw_mgm3": 1.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7726-95-6": {
+    "name_tr": "Brom",
+    "tw_mgm3": 0.7,
+    "tw_ppm": 0.1,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7782-50-5": {
+    "name_tr": "Klor",
+    "tw_mgm3": null,
+    "tw_ppm": null,
+    "stel_mgm3": 1.5,
+    "stel_ppm": 0.5,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7803-51-2": {
+    "name_tr": "Fosfin",
+    "tw_mgm3": 0.14,
+    "tw_ppm": 0.1,
+    "stel_mgm3": 0.28,
+    "stel_ppm": 0.2,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "8003-34-7": {
+    "name_tr": "Piretrum (hassaslaştırıcı laktonlardan arındırılmış)",
+    "tw_mgm3": 1.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "10026-13-8": {
+    "name_tr": "Fosfor pentaklorür",
+    "tw_mgm3": 1.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "108-05-4": {
+    "name_tr": "Vinil asetat",
+    "tw_mgm3": 17.6,
+    "tw_ppm": 5.0,
+    "stel_mgm3": 35.2,
+    "stel_ppm": 10.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "108-95-2": {
+    "name_tr": "Fenol",
+    "tw_mgm3": 8.0,
+    "tw_ppm": 2.0,
+    "stel_mgm3": 16.0,
+    "stel_ppm": 4.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "109-86-4": {
+    "name_tr": "2-Metoksietanol",
+    "tw_mgm3": null,
+    "tw_ppm": 1.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "110-49-6": {
+    "name_tr": "2-Metoksietil asetat",
+    "tw_mgm3": null,
+    "tw_ppm": 1.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "110-80-5": {
+    "name_tr": "2-Etoksi etanol",
+    "tw_mgm3": 8.0,
+    "tw_ppm": 2.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "111-15-9": {
+    "name_tr": "2-Etoksietil asetat",
+    "tw_mgm3": 11.0,
+    "tw_ppm": 2.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "624-83-9": {
+    "name_tr": "Metilizosiyanat",
+    "tw_mgm3": null,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": 0.02,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "1634-04-4": {
+    "name_tr": "Tersiyer-bütil-metil eter",
+    "tw_mgm3": 183.5,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 367.0,
+    "stel_ppm": 100.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7783-06-4": {
+    "name_tr": "Hidrojen sülfür",
+    "tw_mgm3": 7.0,
+    "tw_ppm": 5.0,
+    "stel_mgm3": 14.0,
+    "stel_ppm": 10.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "55-63-0": {
+    "name_tr": "Gliserol trinitrat",
+    "tw_mgm3": 0.095,
+    "tw_ppm": 0.01,
+    "stel_mgm3": 0.19,
+    "stel_ppm": 0.02,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "56-23-5": {
+    "name_tr": "Karbon tetraklorür; Tetraklorometan",
+    "tw_mgm3": 6.4,
+    "tw_ppm": 1.0,
+    "stel_mgm3": 32.0,
+    "stel_ppm": 5.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "61-82-5": {
+    "name_tr": "Amitrol",
+    "tw_mgm3": 0.2,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "64-19-7": {
+    "name_tr": "Asetik asit",
+    "tw_mgm3": 25.0,
+    "tw_ppm": 10.0,
+    "stel_mgm3": 50.0,
+    "stel_ppm": 20.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "74-90-8": {
+    "name_tr": "Hidrojen siyanür (siyanür olarak)",
+    "tw_mgm3": 1.0,
+    "tw_ppm": 0.9,
+    "stel_mgm3": 5.0,
+    "stel_ppm": 4.5,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "75-35-4": {
+    "name_tr": "Viniliden klorür; 1,1-Dikloroetilen",
+    "tw_mgm3": 8.0,
+    "tw_ppm": 2.0,
+    "stel_mgm3": 20.0,
+    "stel_ppm": 5.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "78-10-4": {
+    "name_tr": "Tetraetil ortosilikat",
+    "tw_mgm3": 44.0,
+    "tw_ppm": 5.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "79-24-3": {
+    "name_tr": "Nitroetan",
+    "tw_mgm3": 62.0,
+    "tw_ppm": 20.0,
+    "stel_mgm3": 312.0,
+    "stel_ppm": 100.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "101-84-8": {
+    "name_tr": "Difenil eter",
+    "tw_mgm3": 7.0,
+    "tw_ppm": 1.0,
+    "stel_mgm3": 14.0,
+    "stel_ppm": 2.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "104-76-7": {
+    "name_tr": "2-etilhekzan-1-ol",
+    "tw_mgm3": 5.4,
+    "tw_ppm": 1.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "106-46-7": {
+    "name_tr": "1,4-Diklorobenzen; p- Diklorobenzen",
+    "tw_mgm3": 12.0,
+    "tw_ppm": 2.0,
+    "stel_mgm3": 60.0,
+    "stel_ppm": 10.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "107-02-8": {
+    "name_tr": "Akrolein; akrilaldehit; prop-2-enal",
+    "tw_mgm3": 0.05,
+    "tw_ppm": 0.02,
+    "stel_mgm3": 0.12,
+    "stel_ppm": 0.05,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "107-31-3": {
+    "name_tr": "Metil format",
+    "tw_mgm3": 125.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 250.0,
+    "stel_ppm": 100.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "110-65-6": {
+    "name_tr": "2-büten-1,4-diol",
+    "tw_mgm3": 0.5,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "143-33-9": {
+    "name_tr": "Sodyum siyanür",
+    "tw_mgm3": 1.0,
+    "tw_ppm": null,
+    "stel_mgm3": 5.0,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "151-50-8": {
+    "name_tr": "Potasyum siyanit (siyanit formunda)",
+    "tw_mgm3": 1.0,
+    "tw_ppm": null,
+    "stel_mgm3": 5.0,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "431-03-8": {
+    "name_tr": "Diasetil; Bütandion",
+    "tw_mgm3": 0.07,
+    "tw_ppm": 0.02,
+    "stel_mgm3": 0.36,
+    "stel_ppm": 0.1,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "10102-43-9": {
+    "name_tr": "Nitrojen monoksit",
+    "tw_mgm3": 2.5,
+    "tw_ppm": 2.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "10102-44-0": {
+    "name_tr": "Nitrojen dioksit",
+    "tw_mgm3": 0.96,
+    "tw_ppm": 0.5,
+    "stel_mgm3": 1.91,
+    "stel_ppm": 1.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "61788-32-7": {
+    "name_tr": "Terfenil, hidrojene edilmiş",
+    "tw_mgm3": 19.0,
+    "tw_ppm": 2.0,
+    "stel_mgm3": 48.0,
+    "stel_ppm": 5.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "74-87-3": {
+    "name_tr": "Klorometan",
+    "tw_mgm3": 42.0,
+    "tw_ppm": 20.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "75-50-3": {
+    "name_tr": "Trimetilamin",
+    "tw_mgm3": 4.9,
+    "tw_ppm": 2.0,
+    "stel_mgm3": 12.5,
+    "stel_ppm": 5.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "106-49-0": {
+    "name_tr": "4-aminotoluen",
+    "tw_mgm3": 4.46,
+    "tw_ppm": 1.0,
+    "stel_mgm3": 8.92,
+    "stel_ppm": 2.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "110-19-0": {
+    "name_tr": "İzobütil asetat",
+    "tw_mgm3": 241.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 723.0,
+    "stel_ppm": 150.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "123-51-3": {
+    "name_tr": "İzoamil alkol",
+    "tw_mgm3": 18.0,
+    "tw_ppm": 5.0,
+    "stel_mgm3": 37.0,
+    "stel_ppm": 10.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "10025-87-3": {
+    "name_tr": "Fosforil triklorür",
+    "tw_mgm3": 0.064,
+    "tw_ppm": 0.01,
+    "stel_mgm3": 0.12,
+    "stel_ppm": 0.02,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "2426-08-6": {
+    "name_tr": "n-Bütil glisidil eter (BGE)",
+    "tw_mgm3": 270.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7440-36-0": {
+    "name_tr": "Antimon ve bileşikleri (Sb olarak)",
+    "tw_mgm3": 0.5,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "100-00-5": {
+    "name_tr": "P-nitroklorobenzen",
+    "tw_mgm3": 1.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "100-01-6": {
+    "name_tr": "P-Nitroanilin",
+    "tw_mgm3": 6.0,
+    "tw_ppm": 1.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "10028-15-6": {
+    "name_tr": "Ozon",
+    "tw_mgm3": 0.2,
+    "tw_ppm": 0.1,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "100-37-8": {
+    "name_tr": "2-Dietilaminoetanol",
+    "tw_mgm3": 50.0,
+    "tw_ppm": 10.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "100-42-5": {
+    "name_tr": "Stiren",
+    "tw_mgm3": null,
+    "tw_ppm": 100.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "10049-04-4": {
+    "name_tr": "Klor dioksit",
+    "tw_mgm3": 0.3,
+    "tw_ppm": 0.1,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "100-61-8": {
+    "name_tr": "Monometil anilin",
+    "tw_mgm3": 9.0,
+    "tw_ppm": 2.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "106-50-3": {
+    "name_tr": "p-Fenilen diamin",
+    "tw_mgm3": 0.1,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "106-51-4": {
+    "name_tr": "p-Benzokinon, Kinon",
+    "tw_mgm3": 0.4,
+    "tw_ppm": 0.1,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "106-92-3": {
+    "name_tr": "Alil Glisidil Eter (AGE)",
+    "tw_mgm3": 22.0,
+    "tw_ppm": 5.0,
+    "stel_mgm3": 44.0,
+    "stel_ppm": 10.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "107-07-3": {
+    "name_tr": "Etilen klorohidrin",
+    "tw_mgm3": 16.0,
+    "tw_ppm": 5.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "107-15-3": {
+    "name_tr": "Etilendiamin",
+    "tw_mgm3": 25.0,
+    "tw_ppm": 10.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "107-20-0": {
+    "name_tr": "Kloroasetaldehit",
+    "tw_mgm3": null,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "107-49-3": {
+    "name_tr": "TEPP (Tetraetil pirofosfat)",
+    "tw_mgm3": 0.05,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "107-66-4": {
+    "name_tr": "Dibütil fosfat",
+    "tw_mgm3": 5.0,
+    "tw_ppm": 1.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "107-87-9": {
+    "name_tr": "2-Pentanon (Metilpropil keton)",
+    "tw_mgm3": 700.0,
+    "tw_ppm": 200.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "108-03-2": {
+    "name_tr": "1-Nitropropan",
+    "tw_mgm3": 90.0,
+    "tw_ppm": 25.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "108-11-2": {
+    "name_tr": "Metil izobütil karbinol",
+    "tw_mgm3": 100.0,
+    "tw_ppm": 25.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "108-20-3": {
+    "name_tr": "İzopropil eter",
+    "tw_mgm3": 2100.0,
+    "tw_ppm": 500.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "108-21-4": {
+    "name_tr": "İzopropil asetat",
+    "tw_mgm3": 950.0,
+    "tw_ppm": 250.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "108-24-7": {
+    "name_tr": "Asetik anhidrit",
+    "tw_mgm3": 20.0,
+    "tw_ppm": 5.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "108-31-6": {
+    "name_tr": "Maleik anhidrit",
+    "tw_mgm3": 1.0,
+    "tw_ppm": 0.25,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "108-83-8": {
+    "name_tr": "Diizobütil keton",
+    "tw_mgm3": 290.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "108-84-9": {
+    "name_tr": "sec-Heksil asetat",
+    "tw_mgm3": 300.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "108-87-2": {
+    "name_tr": "Metilsikloheksan",
+    "tw_mgm3": 2000.0,
+    "tw_ppm": 500.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "108-93-0": {
+    "name_tr": "Sikloheksanol",
+    "tw_mgm3": 200.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "109-60-4": {
+    "name_tr": "n-propil asetat",
+    "tw_mgm3": 840.0,
+    "tw_ppm": 200.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "13952-84-6": {
+    "name_tr": "n-Bütilamin, Bütilamin, tüm izomerler",
+    "tw_mgm3": null,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "109-94-4": {
+    "name_tr": "Etil format",
+    "tw_mgm3": 300.0,
+    "tw_ppm": 100.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "118-96-7": {
+    "name_tr": "2,4,6-Trinitrotoluen (TNT)",
+    "tw_mgm3": 1.5,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "121-69-7": {
+    "name_tr": "Dimetilanilin (N,N-Dimetilanilin)",
+    "tw_mgm3": 25.0,
+    "tw_ppm": 5.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "123-31-9": {
+    "name_tr": "Hidrokinon",
+    "tw_mgm3": 2.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "123-42-2": {
+    "name_tr": "Diaseton alkol (4-Hidroksi-4-metil-2-pentanon)",
+    "tw_mgm3": 240.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "123-73-9": {
+    "name_tr": "Krotonaldehit (2-butenal)",
+    "tw_mgm3": 6.0,
+    "tw_ppm": 2.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "126-73-8": {
+    "name_tr": "Tribütil fosfat",
+    "tw_mgm3": 2.5,
+    "tw_ppm": 0.2,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "1300-73-8": {
+    "name_tr": "Ksilidin",
+    "tw_mgm3": 25.0,
+    "tw_ppm": 5.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "131-11-3": {
+    "name_tr": "Dimetil ftalat",
+    "tw_mgm3": 5.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "137-26-8": {
+    "name_tr": "Tiram",
+    "tw_mgm3": 5.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "141-79-7": {
+    "name_tr": "Mesitil oksit",
+    "tw_mgm3": 100.0,
+    "tw_ppm": 25.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "17702-41-9": {
+    "name_tr": "Dekaboran",
+    "tw_mgm3": 0.3,
+    "tw_ppm": 0.05,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "19287-45-7": {
+    "name_tr": "Diboran",
+    "tw_mgm3": 0.1,
+    "tw_ppm": 0.1,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "19624-22-7": {
+    "name_tr": "Pentaboran",
+    "tw_mgm3": 0.01,
+    "tw_ppm": 0.005,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "2104-64-5": {
+    "name_tr": "EPN",
+    "tw_mgm3": 0.5,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "2179-59-1": {
+    "name_tr": "Alil propil disülfür",
+    "tw_mgm3": 12.0,
+    "tw_ppm": 2.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "622-97-9": {
+    "name_tr": "Vinil toluen, orto, meta, para",
+    "tw_mgm3": 480.0,
+    "tw_ppm": 100.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "2551-62-4": {
+    "name_tr": "Sülfür hekzaflorid",
+    "tw_mgm3": 6000.0,
+    "tw_ppm": 1000.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "25639-42-3": {
+    "name_tr": "Metilsiklohekzanol",
+    "tw_mgm3": 470.0,
+    "tw_ppm": 100.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "2699-79-8": {
+    "name_tr": "Sülfüril florür",
+    "tw_mgm3": 20.0,
+    "tw_ppm": 5.0,
+    "stel_mgm3": 40.0,
+    "stel_ppm": 10.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "299-84-3": {
+    "name_tr": "Fenklorfos",
+    "tw_mgm3": 15.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "334-88-3": {
+    "name_tr": "Diazometan",
+    "tw_mgm3": 0.4,
+    "tw_ppm": 0.2,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "4016-14-2": {
+    "name_tr": "İzopropil glisidil eter (IGE)",
+    "tw_mgm3": 240.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "50-29-3": {
+    "name_tr": "Diklorodifeniltrikloroetan (DDT)",
+    "tw_mgm3": 1.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "504-29-0": {
+    "name_tr": "2-Aminopiridin",
+    "tw_mgm3": 2.0,
+    "tw_ppm": 0.5,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "509-14-8": {
+    "name_tr": "Tetranitrometan",
+    "tw_mgm3": 8.0,
+    "tw_ppm": 1.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "532-27-4": {
+    "name_tr": "a-Kloroasetofenon (Fenasil klorür)",
+    "tw_mgm3": 0.3,
+    "tw_ppm": 0.05,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "534-52-1": {
+    "name_tr": "Dinitro-o-kresol",
+    "tw_mgm3": 0.2,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "540-59-0": {
+    "name_tr": "1,2-Dikloroetilen",
+    "tw_mgm3": 790.0,
+    "tw_ppm": 200.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "540-88-5": {
+    "name_tr": "tert-Bütil-asetat",
+    "tw_mgm3": 950.0,
+    "tw_ppm": 200.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "542-92-7": {
+    "name_tr": "Siklopentadien",
+    "tw_mgm3": 200.0,
+    "tw_ppm": 75.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "556-52-5": {
+    "name_tr": "Glisidol (2,3-Epoksi-1-propanol)",
+    "tw_mgm3": 150.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "55720-99-5": {
+    "name_tr": "Klorlu difenil oksit",
+    "tw_mgm3": 0.5,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "57-24-9": {
+    "name_tr": "Striknin",
+    "tw_mgm3": 0.15,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "583-60-8": {
+    "name_tr": "o-Metilsiklohekzanon",
+    "tw_mgm3": 460.0,
+    "tw_ppm": 100.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "594-72-9": {
+    "name_tr": "1,1-Dikloro-1-nitroetan",
+    "tw_mgm3": 10.0,
+    "tw_ppm": 2.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "600-25-9": {
+    "name_tr": "1-Kloro-1-nitropropan",
+    "tw_mgm3": 10.0,
+    "tw_ppm": 2.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "60-57-1": {
+    "name_tr": "Dieldrin",
+    "tw_mgm3": 0.25,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "627-13-4": {
+    "name_tr": "n-Propil nitrat",
+    "tw_mgm3": 110.0,
+    "tw_ppm": 25.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "62-73-7": {
+    "name_tr": "Diklorvos (DDVP)",
+    "tw_mgm3": 1.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "628-96-6": {
+    "name_tr": "Etilen glikol dinitrat",
+    "tw_mgm3": null,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "63-25-2": {
+    "name_tr": "Karbaril (Sevin)",
+    "tw_mgm3": 5.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "67-63-0": {
+    "name_tr": "İzopropil alkol",
+    "tw_mgm3": 980.0,
+    "tw_ppm": 400.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "68476-85-7": {
+    "name_tr": "LPG (Sıvılaştırılmış petrol gazı)",
+    "tw_mgm3": 1800.0,
+    "tw_ppm": 1000.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "71-23-8": {
+    "name_tr": "n-Propil alkol",
+    "tw_mgm3": 500.0,
+    "tw_ppm": 200.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "71-36-3": {
+    "name_tr": "n-Bütil alkol",
+    "tw_mgm3": 300.0,
+    "tw_ppm": 100.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "72-20-8": {
+    "name_tr": "Endrin",
+    "tw_mgm3": 0.1,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7440-28-0": {
+    "name_tr": "Talyum, çözünür bileşikler (Tl olarak)",
+    "tw_mgm3": 0.1,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7440-31-5": {
+    "name_tr": "Kalay ve bileşikleri  (Sn olarak)",
+    "tw_mgm3": 2.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7440-58-6": {
+    "name_tr": "Hafniyum",
+    "tw_mgm3": 0.5,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7440-65-5": {
+    "name_tr": "İtriyum",
+    "tw_mgm3": 1.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7440-67-7": {
+    "name_tr": "Zirkonyum bileşikleri (Zr olarak)",
+    "tw_mgm3": 5.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "74-89-5": {
+    "name_tr": "Metilamin",
+    "tw_mgm3": 12.0,
+    "tw_ppm": 10.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "74-93-1": {
+    "name_tr": "Metil merkaptan",
+    "tw_mgm3": 1.0,
+    "tw_ppm": 0.5,
+    "stel_mgm3": 1.0,
+    "stel_ppm": 0.5,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "74-96-4": {
+    "name_tr": "Etil bromür",
+    "tw_mgm3": 23.0,
+    "tw_ppm": 5.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "74-97-5": {
+    "name_tr": "Klorobromometan",
+    "tw_mgm3": 1050.0,
+    "tw_ppm": 200.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "74-98-6": {
+    "name_tr": "Propan",
+    "tw_mgm3": 1800.0,
+    "tw_ppm": 1000.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "75-08-1": {
+    "name_tr": "Etil merkaptan",
+    "tw_mgm3": 1.3,
+    "tw_ppm": 0.5,
+    "stel_mgm3": 2.6,
+    "stel_ppm": 1.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "75-25-2": {
+    "name_tr": "Bromoform",
+    "tw_mgm3": 5.0,
+    "tw_ppm": 0.5,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "75-31-0": {
+    "name_tr": "İzopropilamin",
+    "tw_mgm3": 12.0,
+    "tw_ppm": 5.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "75-43-4": {
+    "name_tr": "Dikloromonofluorometan",
+    "tw_mgm3": 40.0,
+    "tw_ppm": 10.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "75-52-5": {
+    "name_tr": "Nitrometan",
+    "tw_mgm3": 250.0,
+    "tw_ppm": 100.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "75-61-6": {
+    "name_tr": "Diflorodibromometan",
+    "tw_mgm3": 860.0,
+    "tw_ppm": 100.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "75-63-8": {
+    "name_tr": "Triflorobromometan",
+    "tw_mgm3": 6100.0,
+    "tw_ppm": 1000.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "75-65-0": {
+    "name_tr": "tert-Bütil alkol",
+    "tw_mgm3": 300.0,
+    "tw_ppm": 100.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "75-69-4": {
+    "name_tr": "Florotriklorometan (Trikloroflorometan)",
+    "tw_mgm3": 5600.0,
+    "tw_ppm": 1000.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "75-71-8": {
+    "name_tr": "Diklorodiflorometan",
+    "tw_mgm3": 4950.0,
+    "tw_ppm": 1000.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "75-74-1": {
+    "name_tr": "Tetrametil kurşun, (Pb olarak)",
+    "tw_mgm3": 0.075,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "76-11-9": {
+    "name_tr": "1,1,1,2-Tetrakloro-2,2-difloroetan",
+    "tw_mgm3": 4170.0,
+    "tw_ppm": 500.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "76-12-0": {
+    "name_tr": "1,1,2,2-Tetrakloro-1,2-difloroetan",
+    "tw_mgm3": 4170.0,
+    "tw_ppm": 500.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "76-13-1": {
+    "name_tr": "1,1,2-Trikloro-1,2,2-trifluoroetan",
+    "tw_mgm3": 7600.0,
+    "tw_ppm": 1000.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "76-14-2": {
+    "name_tr": "Diklorotetrafloroetan",
+    "tw_mgm3": 7000.0,
+    "tw_ppm": 1000.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "76-22-2": {
+    "name_tr": "Kafur, sentetik",
+    "tw_mgm3": 2.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7637-07-2": {
+    "name_tr": "Bor triflorür",
+    "tw_mgm3": null,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7646-85-7": {
+    "name_tr": "Çinko klorür, duman veya solunabilir toz",
+    "tw_mgm3": 1.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7722-84-1": {
+    "name_tr": "Hidrojen peroksit",
+    "tw_mgm3": 1.4,
+    "tw_ppm": 1.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7723-14-0": {
+    "name_tr": "Fosfor (sarı)",
+    "tw_mgm3": 0.1,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7782-49-2": {
+    "name_tr": "Hidrojen selenid hariç selenyum bileşikleri (Se olarak)",
+    "tw_mgm3": 0.2,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7786-34-7": {
+    "name_tr": "Fosdrin (Mevinfos)",
+    "tw_mgm3": 0.1,
+    "tw_ppm": 0.01,
+    "stel_mgm3": 0.3,
+    "stel_ppm": 0.03,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "78-00-2": {
+    "name_tr": "Tetraetil kurşun (Pb olarak)",
+    "tw_mgm3": 0.075,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "78-30-8": {
+    "name_tr": "Triortokresil fosfat",
+    "tw_mgm3": 0.1,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "78-59-1": {
+    "name_tr": "İzoforon",
+    "tw_mgm3": 23.0,
+    "tw_ppm": 4.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "78-83-1": {
+    "name_tr": "İzobütil alkol",
+    "tw_mgm3": 300.0,
+    "tw_ppm": 100.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "78-92-2": {
+    "name_tr": "sec-Bütil alkol",
+    "tw_mgm3": 450.0,
+    "tw_ppm": 150.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "79-20-9": {
+    "name_tr": "Metil asetat",
+    "tw_mgm3": 610.0,
+    "tw_ppm": 200.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "79-27-6": {
+    "name_tr": "Asetilen tetrabromür",
+    "tw_mgm3": 14.0,
+    "tw_ppm": 1.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "8001-35-2": {
+    "name_tr": "Klorlu kamfen",
+    "tw_mgm3": 0.5,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "8006-64-2": {
+    "name_tr": "Terebentin",
+    "tw_mgm3": 560.0,
+    "tw_ppm": 100.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "8012-95-1": {
+    "name_tr": "Yağ sisi, mineral",
+    "tw_mgm3": 5.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "8030-30-6": {
+    "name_tr": "Nafta (Kömür katranı)",
+    "tw_mgm3": 400.0,
+    "tw_ppm": 100.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "8065-48-3": {
+    "name_tr": "Demeton (Sistoks)",
+    "tw_mgm3": 0.1,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "81-81-2": {
+    "name_tr": "Varfarin",
+    "tw_mgm3": 0.1,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "83-79-4": {
+    "name_tr": "Rotenon",
+    "tw_mgm3": 5.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "84-74-2": {
+    "name_tr": "Dibütil ftalat",
+    "tw_mgm3": 5.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "85-44-9": {
+    "name_tr": "Ftalik anhidrit",
+    "tw_mgm3": 12.0,
+    "tw_ppm": 2.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "86-50-0": {
+    "name_tr": "Azinfos-metil",
+    "tw_mgm3": 0.2,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "87-86-5": {
+    "name_tr": "Pentaklorofenol",
+    "tw_mgm3": 0.5,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "88-72-2": {
+    "name_tr": "2-Nitrotoluen",
+    "tw_mgm3": 30.0,
+    "tw_ppm": 5.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "92-52-4": {
+    "name_tr": "Difenil (Bifenil)",
+    "tw_mgm3": 1.0,
+    "tw_ppm": 0.2,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "94-36-0": {
+    "name_tr": "Benzoil peroksit",
+    "tw_mgm3": 5.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "94-75-7": {
+    "name_tr": "2,4-D (Diklorofen-oksiasetik asit)",
+    "tw_mgm3": 10.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "98-00-0": {
+    "name_tr": "Furfuril alkol",
+    "tw_mgm3": 200.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "98-01-1": {
+    "name_tr": "Furfural",
+    "tw_mgm3": 20.0,
+    "tw_ppm": 5.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "98-51-1": {
+    "name_tr": "p-tert-Bütiltoluen",
+    "tw_mgm3": 60.0,
+    "tw_ppm": 10.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "99-08-1": {
+    "name_tr": "3-Nitrotoluen",
+    "tw_mgm3": 30.0,
+    "tw_ppm": 5.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "99-99-0": {
+    "name_tr": "4-Nitrotoluen",
+    "tw_mgm3": 30.0,
+    "tw_ppm": 5.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "109-79-5": {
+    "name_tr": "Bütanetiol; bkz. Bütil merkaptan",
+    "tw_mgm3": 1.9,
+    "tw_ppm": 0.5,
+    "stel_mgm3": 3.8,
+    "stel_ppm": 1.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "25154-54-5": {
+    "name_tr": "Dinitrobenzen (tüm izomerler)",
+    "tw_mgm3": 1.0,
+    "tw_ppm": 0.15,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "591-78-6": {
+    "name_tr": "Metil bütil keton; bkz. 2-Hekzanon",
+    "tw_mgm3": 21.0,
+    "tw_ppm": 5.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "74-99-7": {
+    "name_tr": "Propin; bkz. Metilasetilen",
+    "tw_mgm3": 1650.0,
+    "tw_ppm": 1000.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "121-82-4": {
+    "name_tr": "RDX: bkz. Siklonit (Hekzahidro-1,3,5-trinitro-1,3,5-triazin)",
+    "tw_mgm3": 1.5,
+    "tw_ppm": null,
+    "stel_mgm3": 3.0,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "7439-92-1": {
+    "name_tr": "İnorganik kurşun ve bileşikleri",
+    "tw_mgm3": 0.15,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  }
+}

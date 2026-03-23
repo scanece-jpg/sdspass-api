@@ -1,0 +1,1814 @@
+{
+  "UN1993": {
+    "name": "FLAMMABLE LIQUID, N.O.S.",
+    "name_tr": "ALEVLENİR SIVI, B.N.O.",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "I": {
+        "kemler": "33",
+        "tunnel": "B/D",
+        "label": "3"
+      },
+      "II": {
+        "kemler": "33",
+        "tunnel": "D/E",
+        "label": "3"
+      },
+      "III": {
+        "kemler": "30",
+        "tunnel": "D/E",
+        "label": "3"
+      }
+    },
+    "special_provisions": [
+      "640E"
+    ],
+    "limited_qty": {
+      "I": 0,
+      "II": "1L",
+      "III": "5L"
+    }
+  },
+  "UN1224": {
+    "name": "KETONES, LIQUID, N.O.S.",
+    "name_tr": "KETON SIVILAR, B.N.O.",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "I": {
+        "kemler": "33",
+        "tunnel": "B/D",
+        "label": "3"
+      },
+      "II": {
+        "kemler": "33",
+        "tunnel": "D/E",
+        "label": "3"
+      },
+      "III": {
+        "kemler": "30",
+        "tunnel": "D/E",
+        "label": "3"
+      }
+    }
+  },
+  "UN1133": {
+    "name": "ADHESIVES",
+    "name_tr": "YAPIŞTIRICILAR",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "I": {
+        "kemler": "33",
+        "tunnel": "B/D",
+        "label": "3"
+      },
+      "II": {
+        "kemler": "33",
+        "tunnel": "D/E",
+        "label": "3"
+      },
+      "III": {
+        "kemler": "30",
+        "tunnel": "D/E",
+        "label": "3"
+      }
+    }
+  },
+  "UN1263": {
+    "name": "PAINT",
+    "name_tr": "BOYA",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "I": {
+        "kemler": "33",
+        "tunnel": "B/D",
+        "label": "3"
+      },
+      "II": {
+        "kemler": "33",
+        "tunnel": "D/E",
+        "label": "3"
+      },
+      "III": {
+        "kemler": "30",
+        "tunnel": "D/E",
+        "label": "3"
+      }
+    }
+  },
+  "UN1170": {
+    "name": "ETHANOL SOLUTION",
+    "name_tr": "ETANOL ÇÖZELTİSİ",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "II": {
+        "kemler": "33",
+        "tunnel": "D/E",
+        "label": "3"
+      },
+      "III": {
+        "kemler": "30",
+        "tunnel": "D/E",
+        "label": "3"
+      }
+    }
+  },
+  "UN1230": {
+    "name": "METHANOL",
+    "name_tr": "METANOL",
+    "class": "3",
+    "classification_code": "FT1",
+    "packing_groups": {
+      "II": {
+        "kemler": "336",
+        "tunnel": "C/D",
+        "label": "3+6.1"
+      }
+    }
+  },
+  "UN2810": {
+    "name": "TOXIC LIQUID, ORGANIC, N.O.S.",
+    "name_tr": "TOKSİK SIVI, ORGANİK, B.N.O.",
+    "class": "6.1",
+    "classification_code": "T1",
+    "packing_groups": {
+      "I": {
+        "kemler": "66",
+        "tunnel": "C/D",
+        "label": "6.1"
+      },
+      "II": {
+        "kemler": "60",
+        "tunnel": "D/E",
+        "label": "6.1"
+      },
+      "III": {
+        "kemler": "60",
+        "tunnel": "E",
+        "label": "6.1"
+      }
+    }
+  },
+  "UN1760": {
+    "name": "CORROSIVE LIQUID, N.O.S.",
+    "name_tr": "KOROZİF SIVI, B.N.O.",
+    "class": "8",
+    "classification_code": "C9",
+    "packing_groups": {
+      "I": {
+        "kemler": "88",
+        "tunnel": "B/E",
+        "label": "8"
+      },
+      "II": {
+        "kemler": "80",
+        "tunnel": "E",
+        "label": "8"
+      },
+      "III": {
+        "kemler": "80",
+        "tunnel": "E",
+        "label": "8"
+      }
+    }
+  },
+  "UN1824": {
+    "name": "SODIUM HYDROXIDE SOLUTION",
+    "name_tr": "SODYUM HİDROKSİT ÇÖZELTİSİ",
+    "class": "8",
+    "classification_code": "C5",
+    "packing_groups": {
+      "II": {
+        "kemler": "80",
+        "tunnel": "E",
+        "label": "8"
+      },
+      "III": {
+        "kemler": "80",
+        "tunnel": "E",
+        "label": "8"
+      }
+    }
+  },
+  "UN2672": {
+    "name": "AMMONIA SOLUTION",
+    "name_tr": "AMONYAK ÇÖZELTİSİ",
+    "class": "8",
+    "classification_code": "C7",
+    "packing_groups": {
+      "III": {
+        "kemler": "80",
+        "tunnel": "E",
+        "label": "8"
+      }
+    }
+  },
+  "UN3139": {
+    "name": "OXIDIZING LIQUID, N.O.S.",
+    "name_tr": "OKSİTLEYİCİ SIVI, B.N.O.",
+    "class": "5.1",
+    "classification_code": "O2",
+    "packing_groups": {
+      "I": {
+        "kemler": "58",
+        "tunnel": "B/D",
+        "label": "5.1"
+      },
+      "II": {
+        "kemler": "50",
+        "tunnel": "D/E",
+        "label": "5.1"
+      },
+      "III": {
+        "kemler": "50",
+        "tunnel": "E",
+        "label": "5.1"
+      }
+    }
+  },
+  "UN3077": {
+    "name": "ENVIRONMENTALLY HAZARDOUS SUBSTANCE, SOLID, N.O.S.",
+    "name_tr": "ÇEVREYE ZARARLI MADDE, KATI, B.N.O.",
+    "class": "9",
+    "classification_code": "M7",
+    "packing_groups": {
+      "III": {
+        "kemler": "90",
+        "tunnel": "—",
+        "label": "9"
+      }
+    }
+  },
+  "UN3082": {
+    "name": "ENVIRONMENTALLY HAZARDOUS SUBSTANCE, LIQUID, N.O.S.",
+    "name_tr": "ÇEVREYE ZARARLI MADDE, SIVI, B.N.O.",
+    "class": "9",
+    "classification_code": "M6",
+    "packing_groups": {
+      "III": {
+        "kemler": "90",
+        "tunnel": "—",
+        "label": "9"
+      }
+    }
+  },
+  "UN1325": {
+    "name": "FLAMMABLE SOLID, ORGANIC, N.O.S.",
+    "name_tr": "YANICI KATI, ORGANİK, B.N.O.",
+    "class": "4.1",
+    "classification_code": "F3",
+    "packing_groups": {
+      "II": {
+        "kemler": "40",
+        "tunnel": "E",
+        "label": "4.1"
+      },
+      "III": {
+        "kemler": "40",
+        "tunnel": "E",
+        "label": "4.1"
+      }
+    }
+  },
+  "UN1090": {
+    "name": "ACETONE",
+    "name_tr": "ASETON",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "I": {
+        "kemler": "33",
+        "tunnel": "B/D",
+        "label": "3"
+      },
+      "II": {
+        "kemler": "33",
+        "tunnel": "D/E",
+        "label": "3"
+      }
+    }
+  },
+  "UN1173": {
+    "name": "ETHYL ACETATE",
+    "name_tr": "ETİL ASETAT",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "II": {
+        "kemler": "33",
+        "tunnel": "D/E",
+        "label": "3"
+      }
+    }
+  },
+  "UN1188": {
+    "name": "ETHYLENE GLYCOL MONOETHYL ETHER",
+    "name_tr": "ETİLEN GLİKOL MONOETİL ETER",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "III": {
+        "kemler": "30",
+        "tunnel": "D/E",
+        "label": "3"
+      }
+    }
+  },
+  "UN1219": {
+    "name": "ISOPROPANOL",
+    "name_tr": "İZOPROPANOL",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "II": {
+        "kemler": "33",
+        "tunnel": "D/E",
+        "label": "3"
+      }
+    }
+  },
+  "UN1245": {
+    "name": "METHYL ISOBUTYL KETONE",
+    "name_tr": "METİL İZOBÜTİL KETON",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "II": {
+        "kemler": "33",
+        "tunnel": "D/E",
+        "label": "3"
+      }
+    }
+  },
+  "UN1266": {
+    "name": "PERFUMERY PRODUCTS",
+    "name_tr": "PARFÜM ÜRÜNLERİ",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "I": {
+        "kemler": "33",
+        "tunnel": "B/D",
+        "label": "3"
+      },
+      "II": {
+        "kemler": "33",
+        "tunnel": "D/E",
+        "label": "3"
+      },
+      "III": {
+        "kemler": "30",
+        "tunnel": "D/E",
+        "label": "3"
+      }
+    }
+  },
+  "UN1268": {
+    "name": "PETROLEUM DISTILLATES",
+    "name_tr": "PETROL DİSTİLLATLARI",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "I": {
+        "kemler": "33",
+        "tunnel": "B/D",
+        "label": "3"
+      },
+      "II": {
+        "kemler": "33",
+        "tunnel": "D/E",
+        "label": "3"
+      },
+      "III": {
+        "kemler": "30",
+        "tunnel": "D/E",
+        "label": "3"
+      }
+    }
+  },
+  "UN1294": {
+    "name": "TOLUENE",
+    "name_tr": "TOLUEN",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "II": {
+        "kemler": "33",
+        "tunnel": "D/E",
+        "label": "3"
+      }
+    }
+  },
+  "UN1307": {
+    "name": "XYLENES",
+    "name_tr": "KSİLENLER",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "II": {
+        "kemler": "33",
+        "tunnel": "D/E",
+        "label": "3"
+      },
+      "III": {
+        "kemler": "30",
+        "tunnel": "D/E",
+        "label": "3"
+      }
+    }
+  },
+  "UN1381": {
+    "name": "PHOSPHORUS WHITE",
+    "name_tr": "BEYAZ FOSFOR",
+    "class": "4.2",
+    "classification_code": "SW2",
+    "packing_groups": {
+      "I": {
+        "kemler": "46",
+        "tunnel": "C/E",
+        "label": "4.2+6.1"
+      }
+    }
+  },
+  "UN1848": {
+    "name": "PROPIONIC ACID",
+    "name_tr": "PROPİYONİK ASİT",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "III": {
+        "kemler": "80",
+        "tunnel": "E",
+        "label": "8"
+      }
+    }
+  },
+  "UN1583": {
+    "name": "CHLOROPICRIN MIXTURE",
+    "name_tr": "KLOROPİKRİN KARIŞIMI",
+    "class": "6.1",
+    "classification_code": "T1",
+    "packing_groups": {
+      "I": {
+        "kemler": "66",
+        "tunnel": "C/D",
+        "label": "6.1"
+      },
+      "II": {
+        "kemler": "60",
+        "tunnel": "D/E",
+        "label": "6.1"
+      }
+    }
+  },
+  "UN1648": {
+    "name": "ACETONITRILE",
+    "name_tr": "ASETONİTRİL",
+    "class": "3",
+    "classification_code": "FT1",
+    "packing_groups": {
+      "II": {
+        "kemler": "336",
+        "tunnel": "C/D",
+        "label": "3+6.1"
+      }
+    }
+  },
+  "UN1654": {
+    "name": "NICOTINE",
+    "name_tr": "NİKOTİN",
+    "class": "6.1",
+    "classification_code": "T1",
+    "packing_groups": {
+      "I": {
+        "kemler": "66",
+        "tunnel": "C/D",
+        "label": "6.1"
+      },
+      "II": {
+        "kemler": "60",
+        "tunnel": "D/E",
+        "label": "6.1"
+      }
+    }
+  },
+  "UN2927": {
+    "name": "TOXIC LIQUID, CORROSIVE, ORGANIC, N.O.S.",
+    "name_tr": "TOKSİK SIVI, KOROZİF, ORGANİK, B.N.O.",
+    "class": "6.1",
+    "classification_code": "TC1",
+    "packing_groups": {
+      "I": {
+        "kemler": "668",
+        "tunnel": "C/D",
+        "label": "6.1+8"
+      },
+      "II": {
+        "kemler": "60",
+        "tunnel": "D/E",
+        "label": "6.1+8"
+      }
+    }
+  },
+  "UN1789": {
+    "name": "HYDROCHLORIC ACID",
+    "name_tr": "HİDROKLORİK ASİT",
+    "class": "8",
+    "classification_code": "C1",
+    "packing_groups": {
+      "II": {
+        "kemler": "80",
+        "tunnel": "E",
+        "label": "8"
+      },
+      "III": {
+        "kemler": "80",
+        "tunnel": "E",
+        "label": "8"
+      }
+    }
+  },
+  "UN1823": {
+    "name": "SODIUM HYDROXIDE, SOLID",
+    "name_tr": "SODYUM HİDROKSİT, KATI",
+    "class": "8",
+    "classification_code": "C6",
+    "packing_groups": {
+      "II": {
+        "kemler": "80",
+        "tunnel": "E",
+        "label": "8"
+      }
+    }
+  },
+  "UN1830": {
+    "name": "SULPHURIC ACID",
+    "name_tr": "SÜLFÜRİK ASİT",
+    "class": "8",
+    "classification_code": "C1",
+    "packing_groups": {
+      "II": {
+        "kemler": "80",
+        "tunnel": "E",
+        "label": "8"
+      }
+    }
+  },
+  "UN1832": {
+    "name": "SULPHURIC ACID, SPENT",
+    "name_tr": "SÜLFÜRİK ASİT, KULLANILMIŞ",
+    "class": "8",
+    "classification_code": "C1",
+    "packing_groups": {
+      "II": {
+        "kemler": "80",
+        "tunnel": "E",
+        "label": "8"
+      }
+    }
+  },
+  "UN1805": {
+    "name": "PHOSPHORIC ACID",
+    "name_tr": "FOSFORİK ASİT",
+    "class": "8",
+    "classification_code": "C1",
+    "packing_groups": {
+      "III": {
+        "kemler": "80",
+        "tunnel": "E",
+        "label": "8"
+      }
+    }
+  },
+  "UN2031": {
+    "name": "NITRIC ACID",
+    "name_tr": "NİTRİK ASİT",
+    "class": "8",
+    "classification_code": "CO1",
+    "packing_groups": {
+      "I": {
+        "kemler": "856",
+        "tunnel": "B/E",
+        "label": "8+05"
+      },
+      "II": {
+        "kemler": "85",
+        "tunnel": "B/E",
+        "label": "8+05"
+      }
+    }
+  },
+  "UN2256": {
+    "name": "CYCLOHEXENE",
+    "name_tr": "SİKLOHEKSEN",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "II": {
+        "kemler": "33",
+        "tunnel": "D/E",
+        "label": "3"
+      }
+    }
+  },
+  "UN2796": {
+    "name": "BATTERY FLUID, ACID",
+    "name_tr": "AKÜ SIVISI, ASİT",
+    "class": "8",
+    "classification_code": "C1",
+    "packing_groups": {
+      "II": {
+        "kemler": "80",
+        "tunnel": "E",
+        "label": "8"
+      }
+    }
+  },
+  "UN1461": {
+    "name": "CHLORATES, INORGANIC, N.O.S.",
+    "name_tr": "KLORATLAR, ANORGANİK, B.N.O.",
+    "class": "5.1",
+    "classification_code": "O1",
+    "packing_groups": {
+      "II": {
+        "kemler": "50",
+        "tunnel": "D/E",
+        "label": "5.1"
+      },
+      "III": {
+        "kemler": "50",
+        "tunnel": "E",
+        "label": "5.1"
+      }
+    }
+  },
+  "UN1479": {
+    "name": "OXIDIZING SOLID, N.O.S.",
+    "name_tr": "OKSİTLEYİCİ KATI, B.N.O.",
+    "class": "5.1",
+    "classification_code": "O1",
+    "packing_groups": {
+      "I": {
+        "kemler": "59",
+        "tunnel": "B/D",
+        "label": "5.1"
+      },
+      "II": {
+        "kemler": "50",
+        "tunnel": "D/E",
+        "label": "5.1"
+      },
+      "III": {
+        "kemler": "50",
+        "tunnel": "E",
+        "label": "5.1"
+      }
+    }
+  },
+  "UN1942": {
+    "name": "AMMONIUM NITRATE",
+    "name_tr": "AMONYUM NİTRAT",
+    "class": "5.1",
+    "classification_code": "O2",
+    "packing_groups": {
+      "III": {
+        "kemler": "50",
+        "tunnel": "E",
+        "label": "5.1"
+      }
+    }
+  },
+  "UN2015": {
+    "name": "HYDROGEN PEROXIDE, CONCENTRATED",
+    "name_tr": "HİDROJEN PEROKSİT, KONSANTRELENMİŞ",
+    "class": "5.1",
+    "classification_code": "CO1",
+    "packing_groups": {
+      "I": {
+        "kemler": "558",
+        "tunnel": "B/D",
+        "label": "5.1+8"
+      }
+    }
+  },
+  "UN2014": {
+    "name": "HYDROGEN PEROXIDE AQUEOUS SOLUTION",
+    "name_tr": "HİDROJEN PEROKSİT SULU ÇÖZELTİ",
+    "class": "5.1",
+    "classification_code": "CO1",
+    "packing_groups": {
+      "II": {
+        "kemler": "58",
+        "tunnel": "B/D",
+        "label": "5.1+8"
+      }
+    }
+  },
+  "UN1013": {
+    "name": "CARBON DIOXIDE",
+    "name_tr": "KARBONDİOKSİT",
+    "class": "2",
+    "classification_code": "A",
+    "packing_groups": {
+      "-": {
+        "kemler": "20",
+        "tunnel": "—",
+        "label": "2.2"
+      }
+    }
+  },
+  "UN1017": {
+    "name": "CHLORINE",
+    "name_tr": "KLOR",
+    "class": "2",
+    "classification_code": "2TC",
+    "packing_groups": {
+      "-": {
+        "kemler": "265",
+        "tunnel": "B/D",
+        "label": "2.3+5.1+8"
+      }
+    }
+  },
+  "UN1072": {
+    "name": "OXYGEN, COMPRESSED",
+    "name_tr": "OKSİJEN, SIKIŞTIRILMIŞ",
+    "class": "2",
+    "classification_code": "3O",
+    "packing_groups": {
+      "-": {
+        "kemler": "25",
+        "tunnel": "E",
+        "label": "2.2+5.1"
+      }
+    }
+  },
+  "UN1075": {
+    "name": "PETROLEUM GASES, LIQUEFIED",
+    "name_tr": "PETROL GAZLARI, SIVILAŞTIRILMIŞ (LPG)",
+    "class": "2",
+    "classification_code": "2F",
+    "packing_groups": {
+      "-": {
+        "kemler": "23",
+        "tunnel": "B/D",
+        "label": "2.1"
+      }
+    }
+  },
+  "UN1978": {
+    "name": "PROPANE",
+    "name_tr": "PROPAN",
+    "class": "2",
+    "classification_code": "2F",
+    "packing_groups": {
+      "-": {
+        "kemler": "23",
+        "tunnel": "B/D",
+        "label": "2.1"
+      }
+    }
+  },
+  "UN1001": {
+    "name": "ACETYLENE, DISSOLVED",
+    "name_tr": "ASETİLEN, ÇÖZÜNMÜŞ",
+    "class": "2",
+    "classification_code": "4F",
+    "packing_groups": {
+      "-": {
+        "kemler": "239",
+        "tunnel": "B/D",
+        "label": "2.1"
+      }
+    }
+  },
+  "UN1376": {
+    "name": "IRON OXIDE, SPENT",
+    "name_tr": "DEMİR OKSİT, KULLANILMIŞ",
+    "class": "4.2",
+    "classification_code": "S4",
+    "packing_groups": {
+      "II": {
+        "kemler": "40",
+        "tunnel": "E",
+        "label": "4.2"
+      }
+    }
+  },
+  "UN1415": {
+    "name": "LITHIUM",
+    "name_tr": "LİTYUM",
+    "class": "4.3",
+    "classification_code": "W2",
+    "packing_groups": {
+      "I": {
+        "kemler": "423",
+        "tunnel": "B/E",
+        "label": "4.3"
+      }
+    }
+  },
+  "UN1428": {
+    "name": "SODIUM",
+    "name_tr": "SODYUM",
+    "class": "4.3",
+    "classification_code": "W2",
+    "packing_groups": {
+      "I": {
+        "kemler": "423",
+        "tunnel": "B/E",
+        "label": "4.3"
+      }
+    }
+  },
+  "UN2503": {
+    "name": "ZIRCONIUM TETRACHLORIDE",
+    "name_tr": "ZİRKONYUM TETRAKLORİT",
+    "class": "8",
+    "classification_code": "C1",
+    "packing_groups": {
+      "II": {
+        "kemler": "80",
+        "tunnel": "E",
+        "label": "8"
+      }
+    }
+  },
+  "UN3291": {
+    "name": "CLINICAL WASTE, UNSPECIFIED",
+    "name_tr": "KLİNİK ATIK, BELİRTİLMEMİŞ",
+    "class": "6.2",
+    "classification_code": "I4",
+    "packing_groups": {
+      "II": {
+        "kemler": "606",
+        "tunnel": "E",
+        "label": "6.2"
+      }
+    }
+  },
+  "UN3480": {
+    "name": "LITHIUM ION BATTERIES",
+    "name_tr": "LİTYUM İYON PİLLER",
+    "class": "9",
+    "classification_code": "M4",
+    "packing_groups": {
+      "II": {
+        "kemler": "90",
+        "tunnel": "—",
+        "label": "9"
+      }
+    }
+  },
+  "UN3481": {
+    "name": "LITHIUM ION BATTERIES IN EQUIPMENT",
+    "name_tr": "CİHAZ İÇİNDEKİ LİTYUM İYON PİLLER",
+    "class": "9",
+    "classification_code": "M4",
+    "packing_groups": {
+      "II": {
+        "kemler": "90",
+        "tunnel": "—",
+        "label": "9"
+      }
+    }
+  },
+  "UN1114": {
+    "name": "BENZENE",
+    "name_tr": "BENZEN",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "II": {
+        "kemler": "33",
+        "tunnel_code": "D/E",
+        "label": "3"
+      }
+    }
+  },
+  "UN1120": {
+    "name": "BUTANOLS",
+    "name_tr": "BUTANOLLER",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "II": {
+        "kemler": "33",
+        "tunnel_code": "D/E",
+        "label": "3"
+      },
+      "III": {
+        "kemler": "30",
+        "tunnel_code": "D/E",
+        "label": "3"
+      }
+    }
+  },
+  "UN1145": {
+    "name": "CYCLOHEXANE",
+    "name_tr": "SİKLOHEKSAN",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "II": {
+        "kemler": "33",
+        "tunnel_code": "D/E",
+        "label": "3"
+      }
+    }
+  },
+  "UN1155": {
+    "name": "DIETHYL ETHER",
+    "name_tr": "DİETİL ETER",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "I": {
+        "kemler": "33",
+        "tunnel_code": "B/D",
+        "label": "3"
+      }
+    }
+  },
+  "UN1160": {
+    "name": "DIMETHYLAMINE SOLUTION",
+    "name_tr": "DİMETİLAMİN ÇÖZELTİSİ",
+    "class": "3",
+    "classification_code": "FC",
+    "packing_groups": {
+      "II": {
+        "kemler": "338",
+        "tunnel_code": "B/D",
+        "label": "3+8"
+      }
+    }
+  },
+  "UN1165": {
+    "name": "DIOXANE",
+    "name_tr": "DİOKSAN",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "II": {
+        "kemler": "33",
+        "tunnel_code": "D/E",
+        "label": "3"
+      }
+    }
+  },
+  "UN1185": {
+    "name": "ETHYLENEIMINE, STABILIZED",
+    "name_tr": "ETİLENİMİN, STABİLİZE",
+    "class": "6.1",
+    "classification_code": "TF1",
+    "packing_groups": {
+      "I": {
+        "kemler": "663",
+        "tunnel_code": "C/D",
+        "label": "6.1+3"
+      }
+    }
+  },
+  "UN1199": {
+    "name": "FURALDEHYDES",
+    "name_tr": "FURFURAL",
+    "class": "3",
+    "classification_code": "FT1",
+    "packing_groups": {
+      "III": {
+        "kemler": "60",
+        "tunnel_code": "D/E",
+        "label": "6.1"
+      }
+    }
+  },
+  "UN1203": {
+    "name": "MOTOR SPIRIT / GASOLINE",
+    "name_tr": "MOTORİN / BENZİN",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "II": {
+        "kemler": "33",
+        "tunnel_code": "D/E",
+        "label": "3"
+      }
+    }
+  },
+  "UN1210": {
+    "name": "PRINTING INK",
+    "name_tr": "MATBAA MÜREKKEBİ",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "II": {
+        "kemler": "33",
+        "tunnel_code": "D/E",
+        "label": "3"
+      },
+      "III": {
+        "kemler": "30",
+        "tunnel_code": "D/E",
+        "label": "3"
+      }
+    }
+  },
+  "UN1247": {
+    "name": "METHYL METHACRYLATE MONOMER, STABILIZED",
+    "name_tr": "METİL METAKRİLAT MONOMERI, STABİLİZE",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "II": {
+        "kemler": "339",
+        "tunnel_code": "B/D",
+        "label": "3"
+      }
+    }
+  },
+  "UN1259": {
+    "name": "NICKEL CARBONYL",
+    "name_tr": "NİKEL KARBONİL",
+    "class": "6.1",
+    "classification_code": "TF1",
+    "packing_groups": {
+      "I": {
+        "kemler": "663",
+        "tunnel_code": "B/D",
+        "label": "6.1+3"
+      }
+    }
+  },
+  "UN1274": {
+    "name": "n-PROPANOL",
+    "name_tr": "n-PROPANOL",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "III": {
+        "kemler": "30",
+        "tunnel_code": "D/E",
+        "label": "3"
+      }
+    }
+  },
+  "UN1277": {
+    "name": "PROPYLAMINE",
+    "name_tr": "PROPİLAMİN",
+    "class": "3",
+    "classification_code": "FC",
+    "packing_groups": {
+      "II": {
+        "kemler": "338",
+        "tunnel_code": "B/D",
+        "label": "3+8"
+      }
+    }
+  },
+  "UN1280": {
+    "name": "PROPYLENE OXIDE",
+    "name_tr": "PROPİLEN OKSİT",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "I": {
+        "kemler": "339",
+        "tunnel_code": "B/D",
+        "label": "3"
+      }
+    }
+  },
+  "UN1282": {
+    "name": "PYRIDINE",
+    "name_tr": "PİRİDİN",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "II": {
+        "kemler": "33",
+        "tunnel_code": "D/E",
+        "label": "3"
+      }
+    }
+  },
+  "UN1296": {
+    "name": "TRIETHYLAMINE",
+    "name_tr": "TRİETİLAMİN",
+    "class": "3",
+    "classification_code": "FC",
+    "packing_groups": {
+      "II": {
+        "kemler": "338",
+        "tunnel_code": "B/D",
+        "label": "3+8"
+      }
+    }
+  },
+  "UN1299": {
+    "name": "TURPENTINE",
+    "name_tr": "TEREBENTIN",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "III": {
+        "kemler": "30",
+        "tunnel_code": "D/E",
+        "label": "3"
+      }
+    }
+  },
+  "UN1300": {
+    "name": "TURPENTINE SUBSTITUTE",
+    "name_tr": "TEREBENTIN İKAMESİ",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "III": {
+        "kemler": "30",
+        "tunnel_code": "D/E",
+        "label": "3"
+      }
+    }
+  },
+  "UN1301": {
+    "name": "VINYL ACETATE, STABILIZED",
+    "name_tr": "VİNİL ASETAT, STABİLİZE",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "II": {
+        "kemler": "339",
+        "tunnel_code": "D/E",
+        "label": "3"
+      }
+    }
+  },
+  "UN1302": {
+    "name": "VINYL ETHYL ETHER, STABILIZED",
+    "name_tr": "VİNİL ETİL ETER, STABİLİZE",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "I": {
+        "kemler": "339",
+        "tunnel_code": "B/D",
+        "label": "3"
+      }
+    }
+  },
+  "UN1750": {
+    "name": "CHLOROACETIC ACID SOLUTION",
+    "name_tr": "KLOROASETİK ASİT ÇÖZELTİSİ",
+    "class": "6.1",
+    "classification_code": "TC1",
+    "packing_groups": {
+      "II": {
+        "kemler": "60",
+        "tunnel_code": "D/E",
+        "label": "6.1+8"
+      }
+    }
+  },
+  "UN1791": {
+    "name": "HYPOCHLORITE SOLUTION",
+    "name_tr": "HİPOKLORİT ÇÖZELTİSİ",
+    "class": "8",
+    "classification_code": "C9",
+    "packing_groups": {
+      "II": {
+        "kemler": "80",
+        "tunnel_code": "E",
+        "label": "8"
+      },
+      "III": {
+        "kemler": "80",
+        "tunnel_code": "E",
+        "label": "8"
+      }
+    }
+  },
+  "UN1814": {
+    "name": "POTASSIUM HYDROXIDE SOLUTION",
+    "name_tr": "POTASYUM HİDROKSİT ÇÖZELTİSİ",
+    "class": "8",
+    "classification_code": "C5",
+    "packing_groups": {
+      "II": {
+        "kemler": "80",
+        "tunnel_code": "E",
+        "label": "8"
+      },
+      "III": {
+        "kemler": "80",
+        "tunnel_code": "E",
+        "label": "8"
+      }
+    }
+  },
+  "UN1863": {
+    "name": "FUEL, AVIATION, TURBINE ENGINE",
+    "name_tr": "YAKIT, HAVACILIIK, TÜRBİN MOTORU",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "I": {
+        "kemler": "33",
+        "tunnel_code": "B/D",
+        "label": "3"
+      },
+      "II": {
+        "kemler": "33",
+        "tunnel_code": "D/E",
+        "label": "3"
+      },
+      "III": {
+        "kemler": "30",
+        "tunnel_code": "D/E",
+        "label": "3"
+      }
+    }
+  },
+  "UN1866": {
+    "name": "RESIN SOLUTION",
+    "name_tr": "REÇİNE ÇÖZELTİSİ",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "I": {
+        "kemler": "33",
+        "tunnel_code": "B/D",
+        "label": "3"
+      },
+      "II": {
+        "kemler": "33",
+        "tunnel_code": "D/E",
+        "label": "3"
+      },
+      "III": {
+        "kemler": "30",
+        "tunnel_code": "D/E",
+        "label": "3"
+      }
+    }
+  },
+  "UN1897": {
+    "name": "TETRACHLOROETHYLENE",
+    "name_tr": "TETRAKLOROETİLEN (PERC)",
+    "class": "6.1",
+    "classification_code": "T1",
+    "packing_groups": {
+      "III": {
+        "kemler": "60",
+        "tunnel_code": "E",
+        "label": "6.1"
+      }
+    }
+  },
+  "UN1908": {
+    "name": "CHLORITE SOLUTION",
+    "name_tr": "KLORİT ÇÖZELTİSİ",
+    "class": "8",
+    "classification_code": "C9",
+    "packing_groups": {
+      "II": {
+        "kemler": "80",
+        "tunnel_code": "E",
+        "label": "8"
+      },
+      "III": {
+        "kemler": "80",
+        "tunnel_code": "E",
+        "label": "8"
+      }
+    }
+  },
+  "UN1593": {
+    "name": "DICHLOROMETHANE",
+    "name_tr": "DİKLOROETAN (KLOROFORM)",
+    "class": "6.1",
+    "classification_code": "T1",
+    "packing_groups": {
+      "III": {
+        "kemler": "60",
+        "tunnel_code": "E",
+        "label": "6.1"
+      }
+    }
+  },
+  "UN1710": {
+    "name": "TRICHLOROETHYLENE",
+    "name_tr": "TRİKLOROETİLEN",
+    "class": "6.1",
+    "classification_code": "T1",
+    "packing_groups": {
+      "III": {
+        "kemler": "60",
+        "tunnel_code": "E",
+        "label": "6.1"
+      }
+    }
+  },
+  "UN1719": {
+    "name": "CAUSTIC ALKALI LIQUID, N.O.S.",
+    "name_tr": "KOSTİK ALKALİ SIVI, B.N.O.",
+    "class": "8",
+    "classification_code": "C5",
+    "packing_groups": {
+      "II": {
+        "kemler": "80",
+        "tunnel_code": "E",
+        "label": "8"
+      },
+      "III": {
+        "kemler": "80",
+        "tunnel_code": "E",
+        "label": "8"
+      }
+    }
+  },
+  "UN1736": {
+    "name": "BENZOYL CHLORIDE",
+    "name_tr": "BENZOİL KLORÜR",
+    "class": "8",
+    "classification_code": "CT1",
+    "packing_groups": {
+      "II": {
+        "kemler": "80",
+        "tunnel_code": "E",
+        "label": "8+6.1"
+      }
+    }
+  },
+  "UN2215": {
+    "name": "MALEIC ANHYDRIDE, MOLTEN",
+    "name_tr": "MALEİK ANHİDRİT, ERİMİŞ",
+    "class": "8",
+    "classification_code": "C3",
+    "packing_groups": {
+      "III": {
+        "kemler": "80",
+        "tunnel_code": "E",
+        "label": "8"
+      }
+    }
+  },
+  "UN2289": {
+    "name": "ISOPHORONEDIAMINE",
+    "name_tr": "İZOFORONDİAMİN",
+    "class": "8",
+    "classification_code": "C7",
+    "packing_groups": {
+      "III": {
+        "kemler": "80",
+        "tunnel_code": "E",
+        "label": "8"
+      }
+    }
+  },
+  "UN1748": {
+    "name": "CALCIUM HYPOCHLORITE, DRY",
+    "name_tr": "KALSİYUM HİPOKLORİT, KURU",
+    "class": "5.1",
+    "classification_code": "O2",
+    "packing_groups": {
+      "II": {
+        "kemler": "50",
+        "tunnel_code": "D/E",
+        "label": "5.1"
+      }
+    }
+  },
+  "UN2880": {
+    "name": "CALCIUM HYPOCHLORITE, HYDRATED",
+    "name_tr": "KALSİYUM HİPOKLORİT, HİDRATLI",
+    "class": "5.1",
+    "classification_code": "O2",
+    "packing_groups": {
+      "II": {
+        "kemler": "50",
+        "tunnel_code": "D/E",
+        "label": "5.1"
+      }
+    }
+  },
+  "UN1309": {
+    "name": "ALUMINIUM POWDER, COATED",
+    "name_tr": "ALÜMİNYUM TOZU, KAPLI",
+    "class": "4.1",
+    "classification_code": "F3",
+    "packing_groups": {
+      "II": {
+        "kemler": "40",
+        "tunnel_code": "E",
+        "label": "4.1"
+      },
+      "III": {
+        "kemler": "40",
+        "tunnel_code": "E",
+        "label": "4.1"
+      }
+    }
+  },
+  "UN1350": {
+    "name": "SULPHUR",
+    "name_tr": "KÜKÜRT",
+    "class": "4.1",
+    "classification_code": "F3",
+    "packing_groups": {
+      "III": {
+        "kemler": "40",
+        "tunnel_code": "E",
+        "label": "4.1"
+      }
+    }
+  },
+  "UN2304": {
+    "name": "NAPHTHALENE, MOLTEN",
+    "name_tr": "NAFTALEN, ERİMİŞ",
+    "class": "4.1",
+    "classification_code": "F1",
+    "packing_groups": {
+      "III": {
+        "kemler": "40",
+        "tunnel_code": "E",
+        "label": "4.1"
+      }
+    }
+  },
+  "UN3175": {
+    "name": "SOLIDS OR MIXTURES CONTAINING FLAMMABLE LIQUID",
+    "name_tr": "YANICI SIVI İÇEREN KATI VEYA KARIŞIMLAR",
+    "class": "4.1",
+    "classification_code": "F1",
+    "packing_groups": {
+      "II": {
+        "kemler": "40",
+        "tunnel_code": "E",
+        "label": "4.1"
+      },
+      "III": {
+        "kemler": "40",
+        "tunnel_code": "E",
+        "label": "4.1"
+      }
+    }
+  },
+  "UN1016": {
+    "name": "CARBON MONOXIDE, COMPRESSED",
+    "name_tr": "KARBONMONOKSİT, SIKIŞTIRILMIŞ",
+    "class": "2",
+    "classification_code": "2TF",
+    "packing_groups": {
+      "-": {
+        "kemler": "263",
+        "tunnel_code": "C/D",
+        "label": "2.3+2.1+6.1"
+      }
+    }
+  },
+  "UN1040": {
+    "name": "ETHYLENE OXIDE",
+    "name_tr": "ETİLEN OKSİT",
+    "class": "2",
+    "classification_code": "2TF",
+    "packing_groups": {
+      "-": {
+        "kemler": "263",
+        "tunnel_code": "B/D",
+        "label": "2.3+2.1"
+      }
+    }
+  },
+  "UN1045": {
+    "name": "FLUORINE, COMPRESSED",
+    "name_tr": "FLOR, SIKIŞTIRILMIŞ",
+    "class": "2",
+    "classification_code": "2TOC",
+    "packing_groups": {
+      "-": {
+        "kemler": "265",
+        "tunnel_code": "B/D",
+        "label": "2.3+5.1+8"
+      }
+    }
+  },
+  "UN1066": {
+    "name": "NITROGEN, COMPRESSED",
+    "name_tr": "AZOT, SIKIŞTIRILMIŞ",
+    "class": "2",
+    "classification_code": "1A",
+    "packing_groups": {
+      "-": {
+        "kemler": "20",
+        "tunnel_code": "—",
+        "label": "2.2"
+      }
+    }
+  },
+  "UN1073": {
+    "name": "OXYGEN, REFRIGERATED LIQUID",
+    "name_tr": "OKSİJEN, SOĞUTULMUŞ SIVI",
+    "class": "2",
+    "classification_code": "3O",
+    "packing_groups": {
+      "-": {
+        "kemler": "225",
+        "tunnel_code": "E",
+        "label": "2.2+5.1"
+      }
+    }
+  },
+  "UN1076": {
+    "name": "PHOSGENE",
+    "name_tr": "FOSGEN",
+    "class": "2",
+    "classification_code": "2TC",
+    "packing_groups": {
+      "-": {
+        "kemler": "265",
+        "tunnel_code": "B/D",
+        "label": "2.3+8"
+      }
+    }
+  },
+  "UN1079": {
+    "name": "SULPHUR DIOXIDE",
+    "name_tr": "KÜKÜRT DİOKSİT",
+    "class": "2",
+    "classification_code": "2TC",
+    "packing_groups": {
+      "-": {
+        "kemler": "268",
+        "tunnel_code": "C/D",
+        "label": "2.3+8"
+      }
+    }
+  },
+  "UN1080": {
+    "name": "SULPHUR HEXAFLUORIDE",
+    "name_tr": "KÜKÜRT HEKZAFLORİT",
+    "class": "2",
+    "classification_code": "2A",
+    "packing_groups": {
+      "-": {
+        "kemler": "20",
+        "tunnel_code": "—",
+        "label": "2.2"
+      }
+    }
+  },
+  "UN1956": {
+    "name": "COMPRESSED GAS, N.O.S.",
+    "name_tr": "SIKIŞTIRILMIŞ GAZ, B.N.O.",
+    "class": "2",
+    "classification_code": "1A",
+    "packing_groups": {
+      "-": {
+        "kemler": "20",
+        "tunnel_code": "—",
+        "label": "2.2"
+      }
+    }
+  },
+  "UN3159": {
+    "name": "1,1,1,2-TETRAFLUOROETHANE (R134a)",
+    "name_tr": "1,1,1,2-TETRAFLOROETİLEN (R134a)",
+    "class": "2",
+    "classification_code": "2A",
+    "packing_groups": {
+      "-": {
+        "kemler": "20",
+        "tunnel_code": "—",
+        "label": "2.2"
+      }
+    }
+  },
+  "UN3161": {
+    "name": "LIQUEFIED GAS, FLAMMABLE, N.O.S.",
+    "name_tr": "SIVILAŞTIRILMIŞ GAZ, YANICI, B.N.O.",
+    "class": "2",
+    "classification_code": "2F",
+    "packing_groups": {
+      "-": {
+        "kemler": "23",
+        "tunnel_code": "B/D",
+        "label": "2.1"
+      }
+    }
+  },
+  "UN3163": {
+    "name": "LIQUEFIED GAS, N.O.S.",
+    "name_tr": "SIVILAŞTIRILMIŞ GAZ, B.N.O.",
+    "class": "2",
+    "classification_code": "2A",
+    "packing_groups": {
+      "-": {
+        "kemler": "20",
+        "tunnel_code": "—",
+        "label": "2.2"
+      }
+    }
+  },
+  "UN1845": {
+    "name": "CARBON DIOXIDE, SOLID (DRY ICE)",
+    "name_tr": "KARBONDİOKSİT, KATI (KURU BUZ)",
+    "class": "9",
+    "classification_code": "M11",
+    "packing_groups": {
+      "III": {
+        "kemler": "90",
+        "tunnel_code": "—",
+        "label": "9"
+      }
+    }
+  },
+  "UN2212": {
+    "name": "BLUE ASBESTOS or WHITE ASBESTOS",
+    "name_tr": "MAVİ ASBEST veya BEYAZ ASBEST",
+    "class": "9",
+    "classification_code": "M1",
+    "packing_groups": {
+      "II": {
+        "kemler": "90",
+        "tunnel_code": "—",
+        "label": "9"
+      }
+    }
+  },
+  "UN2315": {
+    "name": "POLYCHLORINATED BIPHENYLS, LIQUID",
+    "name_tr": "POLİKLORLU BİFENİLLER, SIVI",
+    "class": "9",
+    "classification_code": "M2",
+    "packing_groups": {
+      "II": {
+        "kemler": "90",
+        "tunnel_code": "—",
+        "label": "9"
+      }
+    }
+  },
+  "UN3166": {
+    "name": "VEHICLE, FLAMMABLE GAS POWERED",
+    "name_tr": "ARAÇ, YANICI GAZLA ÇALIŞAN",
+    "class": "9",
+    "classification_code": "M3",
+    "packing_groups": {
+      "-": {
+        "kemler": "90",
+        "tunnel_code": "—",
+        "label": "9"
+      }
+    }
+  },
+  "UN3171": {
+    "name": "BATTERY-POWERED VEHICLE",
+    "name_tr": "BATARYALI ARAÇ",
+    "class": "9",
+    "classification_code": "M3",
+    "packing_groups": {
+      "-": {
+        "kemler": "90",
+        "tunnel_code": "—",
+        "label": "9"
+      }
+    }
+  },
+  "UN3264": {
+    "name": "CORROSIVE LIQUID, ACIDIC, INORGANIC, N.O.S.",
+    "name_tr": "KOROZİF SIVI, ASİDİK, ANORGANİK, B.N.O.",
+    "class": "8",
+    "classification_code": "C1",
+    "packing_groups": {
+      "I": {
+        "kemler": "88",
+        "tunnel_code": "B/E",
+        "label": "8"
+      },
+      "II": {
+        "kemler": "80",
+        "tunnel_code": "E",
+        "label": "8"
+      },
+      "III": {
+        "kemler": "80",
+        "tunnel_code": "E",
+        "label": "8"
+      }
+    }
+  },
+  "UN3265": {
+    "name": "CORROSIVE LIQUID, ACIDIC, ORGANIC, N.O.S.",
+    "name_tr": "KOROZİF SIVI, ASİDİK, ORGANİK, B.N.O.",
+    "class": "8",
+    "classification_code": "C3",
+    "packing_groups": {
+      "I": {
+        "kemler": "88",
+        "tunnel_code": "B/E",
+        "label": "8"
+      },
+      "II": {
+        "kemler": "80",
+        "tunnel_code": "E",
+        "label": "8"
+      },
+      "III": {
+        "kemler": "80",
+        "tunnel_code": "E",
+        "label": "8"
+      }
+    }
+  },
+  "UN3266": {
+    "name": "CORROSIVE LIQUID, BASIC, INORGANIC, N.O.S.",
+    "name_tr": "KOROZİF SIVI, BAZİK, ANORGANİK, B.N.O.",
+    "class": "8",
+    "classification_code": "C5",
+    "packing_groups": {
+      "I": {
+        "kemler": "88",
+        "tunnel_code": "B/E",
+        "label": "8"
+      },
+      "II": {
+        "kemler": "80",
+        "tunnel_code": "E",
+        "label": "8"
+      },
+      "III": {
+        "kemler": "80",
+        "tunnel_code": "E",
+        "label": "8"
+      }
+    }
+  },
+  "UN3267": {
+    "name": "CORROSIVE LIQUID, BASIC, ORGANIC, N.O.S.",
+    "name_tr": "KOROZİF SIVI, BAZİK, ORGANİK, B.N.O.",
+    "class": "8",
+    "classification_code": "C7",
+    "packing_groups": {
+      "I": {
+        "kemler": "88",
+        "tunnel_code": "B/E",
+        "label": "8"
+      },
+      "II": {
+        "kemler": "80",
+        "tunnel_code": "E",
+        "label": "8"
+      },
+      "III": {
+        "kemler": "80",
+        "tunnel_code": "E",
+        "label": "8"
+      }
+    }
+  },
+  "UN3295": {
+    "name": "HYDROCARBONS, LIQUID, N.O.S.",
+    "name_tr": "HİDROKARBONLAR, SIVI, B.N.O.",
+    "class": "3",
+    "classification_code": "F1",
+    "packing_groups": {
+      "I": {
+        "kemler": "33",
+        "tunnel_code": "B/D",
+        "label": "3"
+      },
+      "II": {
+        "kemler": "33",
+        "tunnel_code": "D/E",
+        "label": "3"
+      },
+      "III": {
+        "kemler": "30",
+        "tunnel_code": "D/E",
+        "label": "3"
+      }
+    }
+  },
+  "UN3316": {
+    "name": "CHEMICAL KIT",
+    "name_tr": "KİMYASAL KİT",
+    "class": "9",
+    "classification_code": "M11",
+    "packing_groups": {
+      "II": {
+        "kemler": "90",
+        "tunnel_code": "—",
+        "label": "9"
+      },
+      "III": {
+        "kemler": "90",
+        "tunnel_code": "—",
+        "label": "9"
+      }
+    }
+  }
+}

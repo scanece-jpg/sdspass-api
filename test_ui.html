@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HazardDesk - CLP Hesaplayıcı Test</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        header h1 { font-size: 2em; margin-bottom: 10px; }
+        header p { opacity: 0.9; font-size: 0.95em; }
+        
+        .content {
+            padding: 40px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        .section { padding: 20px; background: #f8f9fa; border-radius: 8px; }
+        .section h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #333;
+        }
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+        input[type="text"]:focus,
+        input[type="number"]:focus,
+        select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+        
+        .component-item {
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 4px solid #667eea;
+            border-radius: 5px;
+        }
+        
+        .hazard-tags {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        
+        .hazard-tag {
+            background: #e7f0ff;
+            color: #667eea;
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        button {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 14px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        button.secondary {
+            background: #6c757d;
+            margin-left: 10px;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .result-item {
+            background: white;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            border-left: 4px solid #28a745;
+        }
+        
+        .result-item.danger {
+            border-left-color: #dc3545;
+        }
+        
+        .result-item.warning {
+            border-left-color: #ffc107;
+        }
+        
+        .h-code {
+            font-weight: 700;
+            font-size: 1.2em;
+            color: #667eea;
+            margin-bottom: 5px;
+        }
+        
+        .signal-word {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 5px;
+            font-weight: 700;
+            margin-top: 10px;
+        }
+        
+        .signal-danger {
+            background: #dc3545;
+            color: white;
+        }
+        
+        .signal-warning {
+            background: #ffc107;
+            color: #333;
+        }
+        
+        .status {
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .status.loading {
+            background: #e7f3ff;
+            color: #667eea;
+        }
+        
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+        }
+        
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+        }
+        
+        .empty-state {
+            text-align: center;
+            color: #999;
+            padding: 30px;
+        }
+        
+        .empty-state i {
+            font-size: 3em;
+            margin-bottom: 10px;
+        }
+        
+        @media (max-width: 768px) {
+            .content {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Modal Stilleri */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+        }
+        
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #667eea;
+        }
+        
+        .modal-header h2 {
+            margin: 0;
+            color: #667eea;
+        }
+        
+        .modal-close {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-close:hover {
+            color: #dc3545;
+        }
+        
+        .search-results {
+            margin-top: 20px;
+        }
+        
+        .result-item-modal {
+            background: #f8f9fa;
+            border: 1px solid #ddd;
+            border-left: 4px solid #667eea;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        
+        .result-item-modal:hover {
+            background: #e7f0ff;
+            border-left-color: #764ba2;
+        }
+        
+        .result-item-modal strong {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+        }
+        
+        .result-item-modal small {
+            display: block;
+            color: #666;
+            margin-bottom: 5px;
+        }
+        
+        .result-item-modal .cas {
+            font-family: monospace;
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        .result-item-modal .hazards {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+            margin-top: 5px;
+        }
+        
+        .hazard-badge {
+            background: #667eea;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 3px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+        
+        .no-results {
+            text-align: center;
+            color: #999;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>HazardDesk CLP Hesaplayıcı</h1>
+            <p>Karışım bileşenlerinden H kodları ve P kodlarını otomatik hesapla</p>
+        </header>
+        
+        <div class="content">
+            <!-- SOL PANEL: GİRDİ -->
+            <div class="section">
+                <h2>Bileşenleri Ekle</h2>
+                
+                <div class="form-group">
+                    <label for="compName">Bileşen Adı</label>
+                    <input type="text" id="compName" placeholder="Örn: Benzene, Acetone">
+                </div>
+                
+                <div class="form-group">
+                    <label for="compCAS">CAS Numarası</label>
+                    <input type="text" id="compCAS" placeholder="Örn: 71-43-2">
+                </div>
+                
+                <div class="form-group">
+                    <label for="compConc">Konsantrasyon (%)</label>
+                    <input type="number" id="compConc" min="0" max="100" value="50" placeholder="50">
+                </div>
+                
+                <div class="form-group">
+                    <label>Durumu</label>
+                    <div id="compStatus" style="color: #666; padding: 10px; background: #f0f0f0; border-radius: 5px; text-align: center;">
+                        CAS girin, H kodları otomatik çekilecek
+                    </div>
+                </div>
+                
+                <div class="button-group">
+                    <button onclick="addComponent()">+ Bileşen Ekle</button>
+                    <button class="secondary" onclick="clearForm()">Temizle</button>
+                </div>
+                
+                <div id="componentsList"></div>
+                
+                <button onclick="calculate()" style="width: 100%; margin-top: 20px; padding: 15px; font-size: 16px;">
+                    🔄 HESAPLA
+                </button>
+            </div>
+            
+            <!-- SAĞ PANEL: ÇIKTI -->
+            <div class="section">
+                <h2>Sonuçlar</h2>
+                
+                <div id="results" class="empty-state">
+                    <p>Bileşen ekleyip "HESAPLA" butonuna basın</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- ARAMA MODAL'I -->
+    <div id="searchModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Bileşen Ara</h2>
+                <button class="modal-close" onclick="closeSearchModal()">&times;</button>
+            </div>
+            
+            <div class="form-group">
+                <label for="searchInput">CAS Numarası veya İsim</label>
+                <input type="text" id="searchInput" placeholder="Benzene, 71-43-2, acetone..." 
+                    onkeyup="performSearch()" autofocus>
+            </div>
+            
+            <div id="searchResults" class="search-results"></div>
+        </div>
+    </div>
+    
+    <script>
+        // Kütüphane verileri (dinamik yükleme)
+        let CLP_DATA = {};
+        
+        // clp_full_data.json'dan tüm kimyasalları yükle
+        async function loadLibrary() {
+            try {
+                const response = await fetch('../data/clp_full_data.json');
+                const fullData = await response.json();
+                
+                // Format dönüştür
+                for (const [cas, item] of Object.entries(fullData)) {
+                    const hCodes = item.hazards 
+                        ? item.hazards.map(h => h.h_code) 
+                        : [];
+                    
+                    CLP_DATA[cas] = {
+                        'n': item.chemical_name || 'Unknown',
+                        'h': hCodes
+                    };
+                }
+                
+                console.log(`Kütüphane yüklendi: ${Object.keys(CLP_DATA).length} kimyasal`);
+                document.getElementById('searchInput').placeholder = `${Object.keys(CLP_DATA).length} kimyasaldan ara...`;
+            } catch (error) {
+                console.error('Kütüphane yükleme hatası:', error);
+                document.getElementById('searchInput').placeholder = 'Kütüphane yüklenemedi';
+            }
+        }
+        
+        let components = [];
+        
+        // CLP Annex I - Cut-off kuralları
+        const CLP_CUTOFFS = {
+            'H300': 1.0, 'H301': 1.0, 'H302': 5.0, 'H303': 10.0,
+            'H310': 1.0, 'H311': 1.0, 'H312': 5.0, 'H313': 10.0,
+            'H314': 1.0, 'H315': 10.0, 'H316': 20.0,
+            'H317': 1.0, 'H318': 1.0, 'H319': 10.0,
+            'H330': 1.0, 'H331': 1.0, 'H332': 5.0, 'H333': 10.0,
+            'H334': 0.1, 'H335': 0.1,
+            'H304': 10.0,
+            'H340': 0.1, 'H341': 1.0,
+            'H350': 0.1, 'H351': 1.0,
+            'H360': 0.1, 'H361': 1.0, 'H362': 0.1,
+            'H370': 10.0, 'H371': 10.0, 'H336': 20.0,
+            'H372': 1.0, 'H373': 10.0,
+            'H290': 0.0, 'H220': 0.0, 'H221': 0.0, 'H224': 1.0, 'H225': 10.0, 'H226': 10.0,
+            'H400': 0.1, 'H410': 0.1, 'H411': 1.0, 'H412': 10.0, 'H413': 25.0,
+        };
+        
+        // ATE varsayılan değerleri (mg/kg için oral)
+        const ATE_DEFAULTS = {
+            'H300': 5,      // Acute Tox. 1
+            'H301': 300,    // Acute Tox. 3
+            'H302': 2000,   // Acute Tox. 4
+            'H310': 50,     // Dermal Tox. 1
+            'H311': 1000,   // Dermal Tox. 3
+            'H312': 2000,   // Dermal Tox. 4
+        };
+        
+        // ATE aralıkları: ATE değeri → H-kod
+        const ATE_ROUTES = {
+            'H300': {min: 0, max: 5},
+            'H301': {min: 5, max: 50},
+            'H302': {min: 50, max: 300},
+            'H303': {min: 300, max: 2000},
+        };
+        
+        // Modal aç
+        function openSearchModal(inputType) {
+            document.getElementById('searchModal').classList.add('show');
+            document.getElementById('searchInput').value = '';
+            document.getElementById('searchResults').innerHTML = '';
+            
+            // Hangi input'tan açıldığını kaydet
+            window.searchFromInput = inputType; // 'cas' veya 'name'
+            
+            let initialValue = '';
+            if (inputType === 'cas') {
+                initialValue = document.getElementById('compCAS').value.trim();
+            } else {
+                initialValue = document.getElementById('compName').value.trim();
+            }
+            
+            document.getElementById('searchInput').value = initialValue;
+            if (initialValue) {
+                performSearch();
+            }
+            
+            setTimeout(() => document.getElementById('searchInput').focus(), 100);
+        }
+        
+        // Modal kapat
+        function closeSearchModal() {
+            document.getElementById('searchModal').classList.remove('show');
+            document.getElementById('searchInput').value = '';
+            document.getElementById('searchResults').innerHTML = '';
+        }
+        
+        // Arama yap
+        function performSearch() {
+            const query = document.getElementById('searchInput').value.trim().toLowerCase();
+            const resultsDiv = document.getElementById('searchResults');
+            
+            if (!query) {
+                resultsDiv.innerHTML = '<div class="no-results">Arama yapmak için en az 2 karakter girin</div>';
+                return;
+            }
+            
+            // Veritabanında ara (CAS veya isim)
+            const results = [];
+            for (const [cas, data] of Object.entries(CLP_DATA)) {
+                if (cas.includes(query) || data.n.toLowerCase().includes(query)) {
+                    results.push({ cas, ...data });
+                }
+            }
+            
+            if (results.length === 0) {
+                resultsDiv.innerHTML = '<div class="no-results">Sonuç bulunamadı</div>';
+                return;
+            }
+            
+            // Sonuçları göster
+            resultsDiv.innerHTML = results.map((result, idx) => `
+                <div class="result-item-modal" data-index="${idx}" onclick="selectComponentByIndex(${idx})">
+                    <strong>${result.n}</strong>
+                    <small>CAS: <span class="cas">${result.cas}</span></small>
+                    <small>H Kodları:</small>
+                    <div class="hazards">
+                        ${result.h.map(h => `<span class="hazard-badge">${h}</span>`).join('')}
+                    </div>
+                </div>
+            `).join('');
+            
+            // Sonuçları global'e kaydet
+            window.lastSearchResults = results;
+        }
+        
+        // Index ile bileşen seç
+        function selectComponentByIndex(idx) {
+            const result = window.lastSearchResults[idx];
+            if (!result) return;
+            
+            selectComponent(result.cas, result.n, result.h);
+        }
+        
+        // Bileşen seç
+        function selectComponent(cas, name, hazards) {
+            document.getElementById('compCAS').value = cas;
+            document.getElementById('compName').value = name;
+            
+            const status = document.getElementById('compStatus');
+            status.innerHTML = '<strong style="color: #28a745;">✓ Seçildi:</strong> ' + hazards.join(', ');
+            status.style.color = '#28a745';
+            
+            closeSearchModal();
+        }
+        
+        // Input'lara tıklama event'i ekle
+        document.addEventListener('DOMContentLoaded', function() {
+            loadLibrary();
+            
+            document.getElementById('compCAS').addEventListener('focus', () => openSearchModal('cas'));
+            document.getElementById('compName').addEventListener('focus', () => openSearchModal('name'));
+            
+            // Modal dışına tıklanırsa kapat
+            document.getElementById('searchModal').addEventListener('click', function(event) {
+                if (event.target === this) {
+                    closeSearchModal();
+                }
+            });
+        });
+        
+        function addComponent() {
+            const name = document.getElementById('compName').value;
+            const cas = document.getElementById('compCAS').value;
+            const conc = parseFloat(document.getElementById('compConc').value) || 0;
+            
+            if (!name) {
+                alert('Lütfen bileşen adı girin!');
+                return;
+            }
+            
+            // C&L'dan H kodlarını al (arka planda tutma)
+            const hazards = CLP_DATA[cas]?.h || [];
+            
+            components.push({ 
+                name, 
+                cas, 
+                concentration: conc, 
+                hazards_hidden: hazards // Arka planda tutma
+            });
+            
+            updateComponentsList();
+            clearForm();
+        }
+        
+        function updateComponentsList() {
+            const list = document.getElementById('componentsList');
+            list.innerHTML = components.map((c, i) => `
+                <div class="component-item">
+                    <strong>${c.name}</strong> (CAS: ${c.cas || '—'})
+                    <br>
+                    <small>Konsantrasyon: ${c.concentration}%</small>
+                    <button class="secondary" style="margin-top: 10px; width: 100%;" onclick="removeComponent(${i})">
+                        Sil
+                    </button>
+                </div>
+            `).join('');
+        }
+        
+        function removeComponent(index) {
+            components.splice(index, 1);
+            updateComponentsList();
+        }
+        
+        function clearForm() {
+            document.getElementById('compName').value = '';
+            document.getElementById('compCAS').value = '';
+            document.getElementById('compConc').value = '50';
+            document.getElementById('compStatus').textContent = 'CAS girin, H kodları otomatik çekilecek';
+            document.getElementById('compStatus').style.color = '#666';
+        }
+        
+        function calculate() {
+            if (components.length === 0) {
+                alert('Lütfen en az bir bileşen ekleyin!');
+                return;
+            }
+            
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '<div class="status loading">Gerçek API sunucusundan hesaplanıyor...</div>';
+            
+            // API'ye gönder
+            const payload = {
+                components: components.map(c => ({
+                    name: c.name,
+                    cas_no: c.cas,
+                    concentration: c.concentration,
+                    hazards: c.hazards_hidden.map(h => ({
+                        h_code: h,
+                        h_class: getHClassName(h)
+                    }))
+                }))
+            };
+            
+            fetch('http://localhost:8001/api/v1/clp/calculate', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            })
+            .then(res => {
+                if (!res.ok) throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+                return res.json();
+            })
+            .then(clpResult => {
+                const mockResult = {
+                    h_codes: clpResult.h_codes || [],
+                    signal_word: clpResult.signal_word || 'Warning',
+                    signal_word_tr: clpResult.signal_word === 'Danger' ? 'Tehlike' : 'Uyarı',
+                    passed: (clpResult.h_codes || []).map(h => ({
+                        h_code: h,
+                        h_class: getHClassName(h),
+                        reason: 'API Sonucu'
+                    })),
+                    warnings: [],
+                    p_codes: generatePCodes(clpResult.h_codes || [])
+                };
+                
+                displayResults(mockResult);
+            })
+            .catch(err => {
+                resultsDiv.innerHTML = `<div class="status error">🔴 API Hatası: ${err.message}</div>
+                    <p style="margin-top: 10px; color: #888; font-size: 0.9em;">
+                    FastAPI sunucusu http://localhost:8001 adresinde çalışıyor olmalı.<br>
+                    <code style="background: #f0f0f0; padding: 2px 6px; border-radius: 3px;">python -m uvicorn app.main:app --port 8001 --reload</code>
+                    </p>`;
+                console.error('API Error:', err);
+            });
+        }
+        
+        function calculateFinalHCodes(comps) {
+            const passed = [];
+            const warnings = [];
+            const h_codes_set = new Set();
+            const danger_codes = new Set(['H300','H301','H304','H310','H311','H314','H318','H330','H331','H334','H340','H350','H360','H370','H372','H290','H220','H224','H225']);
+            
+            // Track Skin Corr.1 ve Eye Dam.1 için toplam konsantrasyon
+            let sum_skin_corr1 = 0;
+            let sum_eye_dam1 = 0;
+            
+            // ATE hesabı: H302/H303 için Acute Tox Estimate
+            let ate_oral_sum = 0;  // Σ(ci/ATEi)
+            let has_acute_tox = false;
+            
+            // Tüm H-kodlarını kontrol et
+            for (let comp of comps) {
+                for (let h of comp.hazards_hidden) {
+                    const cutoff = CLP_CUTOFFS[h] !== undefined ? CLP_CUTOFFS[h] : 1.0;
+                    
+                    // Secondary rules için skin/eye'ı takip et
+                    if (['H314'].includes(h)) sum_skin_corr1 += comp.concentration;
+                    if (['H318'].includes(h)) sum_eye_dam1 += comp.concentration;
+                    
+                    // ATE hesabı: H302/H303 için
+                    if (['H300', 'H301', 'H302', 'H303'].includes(h)) {
+                        has_acute_tox = true;
+                        const ate_value = (comp.ate && comp.ate.oral) || ATE_DEFAULTS[h] || ATE_DEFAULTS['H302'];
+                        ate_oral_sum += (comp.concentration / ate_value);
+                    }
+                    
+                    if (comp.concentration >= cutoff) {
+                        // Eşik GEÇTI
+                        h_codes_set.add(h);
+                        passed.push({
+                            h_code: h,
+                            h_class: getHClassName(h),
+                            concentration: comp.concentration,
+                            cutoff: cutoff,
+                            reason: 'CLP Annex I kuralından'
+                        });
+                    } else {
+                        // Eşik GEÇMEDI
+                        warnings.push({
+                            h_code: h,
+                            h_class: getHClassName(h),
+                            concentration: comp.concentration,
+                            cutoff: cutoff,
+                            reason: 'Cut-off altında'
+                        });
+                    }
+                }
+            }
+            
+            // ATE hesabı sonuç
+            if (has_acute_tox && ate_oral_sum > 0) {
+                const ate_mixture = 100 / ate_oral_sum;
+                
+                // ATE kategorisini belirle
+                let ate_h_code = null;
+                if (ate_mixture <= 5) {
+                    ate_h_code = 'H300';
+                } else if (ate_mixture <= 50) {
+                    ate_h_code = 'H301';
+                } else if (ate_mixture <= 300) {
+                    ate_h_code = 'H302';
+                } else if (ate_mixture <= 2000) {
+                    ate_h_code = 'H303';
+                }
+                
+                // H302/H303 eğer cut-off geçmediyse ama ATE geçiyorsa ekle
+                if (ate_h_code && !h_codes_set.has(ate_h_code) && (ate_h_code === 'H302' || ate_h_code === 'H303')) {
+                    h_codes_set.add(ate_h_code);
+                    passed.push({
+                        h_code: ate_h_code,
+                        h_class: getHClassName(ate_h_code),
+                        concentration: ate_mixture.toFixed(1),
+                        cutoff: ATE_DEFAULTS[ate_h_code],
+                        reason: `ATE hesapla: 100/Σ(ci/ATEi) = ${ate_mixture.toFixed(1)} mg/kg`
+                    });
+                }
+            }
+            
+            // SECONDARY RULES (Annex I Tablo 3.2.3 / 3.3.3)
+            // Rule 1: H314 yoksa VE H315 yoksa, eğer Σ Skin Corr.1 ∈ [1%, 10%)
+            if (!h_codes_set.has('H314') && !h_codes_set.has('H315') && sum_skin_corr1 >= 1.0 && sum_skin_corr1 < 10.0) {
+                h_codes_set.add('H315');
+                passed.push({
+                    h_code: 'H315',
+                    h_class: 'Skin Irrit. 2 (Secondary)',
+                    concentration: sum_skin_corr1,
+                    cutoff: 1.0,
+                    reason: `Secondary Rule: Σ Skin Corr.1 = ${sum_skin_corr1.toFixed(1)}% ∈ [1%, 10%)`
+                });
+            }
+            
+            // Rule 2: H318 yoksa VE H319 yoksa, eğer Σ Eye Dam.1 ∈ [1%, 3%)
+            if (!h_codes_set.has('H318') && !h_codes_set.has('H319') && sum_eye_dam1 >= 1.0 && sum_eye_dam1 < 3.0) {
+                h_codes_set.add('H319');
+                passed.push({
+                    h_code: 'H319',
+                    h_class: 'Eye Irrit. 2 (Secondary)',
+                    concentration: sum_eye_dam1,
+                    cutoff: 1.0,
+                    reason: `Secondary Rule: Σ Eye Dam.1 = ${sum_eye_dam1.toFixed(1)}% ∈ [1%, 3%)`
+                });
+            }
+            
+            // MASKING RULES (İkincil kurallar üstüne yazılır)
+            // Eğer H314 varsa H315/H316 sil
+            if (h_codes_set.has('H314')) {
+                h_codes_set.delete('H315');
+                h_codes_set.delete('H316');
+            }
+            
+            // Eğer H318 varsa H319 sil
+            if (h_codes_set.has('H318')) {
+                h_codes_set.delete('H319');
+            }
+            
+            // Tekrarları kaldır (warnings'te duplicate olabilir)
+            const uniqueWarnings = [];
+            const warningHCodes = new Set();
+            for (let w of warnings) {
+                if (!h_codes_set.has(w.h_code) && !warningHCodes.has(w.h_code)) {
+                    uniqueWarnings.push(w);
+                    warningHCodes.add(w.h_code);
+                }
+            }
+            
+            const h_codes_array = Array.from(h_codes_set).sort();
+            const signal_word = Array.from(h_codes_set).some(h => danger_codes.has(h)) ? 'Danger' : 'Warning';
+            
+            return {
+                h_codes: h_codes_array,
+                signal_word: signal_word,
+                signal_word_tr: signal_word === 'Danger' ? 'Tehlike' : 'Uyarı',
+                passed: passed,
+                warnings: uniqueWarnings
+            };
+        }
+        
+        function generatePCodes(hCodes) {
+            const pMap = {
+                'H225': ['P201', 'P202', 'P210', 'P280', 'P303', 'P307', 'P311', 'P370', 'P378', 'P403'],
+                'H314': ['P201', 'P202', 'P260', 'P264', 'P280', 'P301', 'P303', 'P305', 'P310', 'P315', 'P330', 'P335', 'P338', 'P361', 'P363', 'P405', 'P501'],
+                'H315': ['P261', 'P264', 'P272', 'P280', 'P302', 'P352', 'P321', 'P330', 'P337', 'P343', 'P501'],
+                'H319': ['P305', 'P351', 'P338', 'P337', 'P313'],
+                'H350': ['P201', 'P202', 'P280', 'P308', 'P313'],
+                'H304': ['P301', 'P310', 'P331'],
+                'H335': ['P261', 'P271', 'P304', 'P340', 'P403']
+            };
+            
+            const allP = new Set();
+            for (let h of hCodes) {
+                (pMap[h] || []).forEach(p => allP.add(p));
+            }
+            
+            return Array.from(allP).sort();
+        }
+        
+        function getHClassName(h) {
+            const names = {
+                'H220': 'Flam. Gas 1',
+                'H225': 'Flam. Liq. 2',
+                'H304': 'Asp. Tox. 1',
+                'H314': 'Skin Corr. 1B',
+                'H315': 'Skin Irrit. 2',
+                'H319': 'Eye Irrit. 2',
+                'H335': 'Resp. Irrit.',
+                'H336': 'STOT SE 3',
+                'H340': 'Muta. 1A',
+                'H350': 'Carc. 1B',
+                'H372': 'STOT RE 1'
+            };
+            return names[h] || 'Hazard';
+        }
+        
+        function displayResults(result) {
+            const resultsDiv = document.getElementById('results');
+            let html = '';
+            
+            // H Kodları
+            html += `
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: #333; margin-bottom: 10px;">Hesaplanan H Kodları</h3>
+                    <div class="signal-word signal-${result.signal_word === 'Danger' ? 'danger' : 'warning'}">
+                        ${result.signal_word_tr.toUpperCase()}
+                    </div>
+                    <div style="margin-top: 10px;">
+                        ${result.h_codes.map(h => `
+                            <div class="result-item ${result.signal_word === 'Danger' ? 'danger' : 'warning'}">
+                                <div class="h-code">${h}</div>
+                                <small style="color: #666;">${getHCodeMeaning(h)}</small>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            `;
+            
+            // P Kodları
+            html += `
+                <div style="margin-bottom: 20px;">
+                    <h3 style="color: #333; margin-bottom: 10px;">Önerilen P Kodları (${result.p_codes.length})</h3>
+                    <div style="background: white; padding: 10px; border-radius: 5px; max-height: 150px; overflow-y: auto;">
+                        ${result.p_codes.slice(0, 10).join(', ')} ${result.p_codes.length > 10 ? '...' : ''}
+                    </div>
+                </div>
+            `;
+            
+            // Cut-off altında kalan kodlar (Uyarı)
+            if (result.warnings && result.warnings.length > 0) {
+                html += `
+                    <div style="margin-bottom: 20px; padding: 15px; background: #fff3cd; border-left: 4px solid #ffc107; border-radius: 5px;">
+                        <h3 style="color: #856404; margin-top: 0;">Eşik Geçmeyen H-Kodlar (Cut-off Altında)</h3>
+                        <div style="font-size: 13px; color: #856404;">
+                            ${result.warnings.map(w => `
+                                <div style="margin-bottom: 10px;">
+                                    <strong>${w.h_code}</strong> - ${w.h_class}<br>
+                                    <small>Konsantrasyon: ${w.concentration}% &lt; Cut-off: ${w.cutoff}%</small>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
+            
+            html += '<div class="status success">✓ Hesaplama bitti!</div>';
+            
+            resultsDiv.innerHTML = html;
+        }
+        
+        function getHCodeMeaning(code) {
+            const meanings = {
+                'H220': 'Parlayıcı gaz',
+                'H225': 'Parlayıcı sıvı',
+                'H226': 'Az parlayıcı sıvı',
+                'H290': 'Metal aşındırıcı',
+                'H302': 'Hafif zehirli',
+                'H304': 'Akciğerlere nüfuz riski',
+                'H314': 'Cilt erimesi',
+                'H315': 'Cilt tahrişi',
+                'H318': 'Ciddi göz hasarı',
+                'H319': 'Göz tahrişi',
+                'H340': 'Mutajen şüphesi',
+                'H350': 'Kanser şüphesi',
+                'H372': 'Organ hasarı (tekrarlanan)',
+                'H335': 'Solunum tahrişi',
+                'H336': 'Bilinçsizlik riski',
+                'H411': 'Sucul ortama zararlı'
+            };
+            return meanings[code] || 'Tehlike sınıfı';
+        }
+        
+        // Başlangıçta örnek veri
+        window.onload = () => {
+            components = [
+                { 
+                    name: 'Phosphoric Acid', 
+                    cas: '7664-38-2', 
+                    concentration: 7.5, 
+                    hazards_hidden: ['H314', 'H290'],
+                    ate: {} // ATE bilgisi yok
+                },
+                { 
+                    name: 'Sulphuric Acid', 
+                    cas: '7664-93-9', 
+                    concentration: 1.75, 
+                    hazards_hidden: ['H314'],
+                    ate: {}
+                },
+                { 
+                    name: 'Benzotriazole', 
+                    cas: '95-14-7', 
+                    concentration: 1.75, 
+                    hazards_hidden: ['H302', 'H319', 'H411'],
+                    ate: {'oral': 1500} // ATE = 1500 mg/kg (varsayılan H302 = 2000)
+                }
+            ];
+            updateComponentsList();
+        };
+    </script>
+</body>
+</html>

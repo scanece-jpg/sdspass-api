@@ -5,11 +5,11 @@
   <script>
     // HazardDesk API URL — Railway deploy sonrası güncelle
     // ── API URL — Deploy sonrası burası güncellenir ──────────────────────
-    // Render deploy sonrası: window.HAZARDDESK_API_URL = 'https://sdspass-api-2.onrender.com/api/v1/sds/pdf';
+    // Render deploy sonrası: window.HAZARDDESK_API_URL = 'https://sdspass-api-3.onrender.com/api/v1/sds/pdf';
     // Hetzner deploy sonrası: window.HAZARDDESK_API_URL = 'https://api.sdspass.com/api/v1/sds/pdf';
-    // Lokal test: window.HAZARDDESK_API_URL = 'https://sdspass-api-2.onrender.com/api/v1/sds/pdf';
-    window.HAZARDDESK_API_URL = 'https://sdspass-api-2.onrender.com/api/v1/sds/pdf';
-    // Lokal test için: // window.HAZARDDESK_API_URL = 'https://sdspass-api-2.onrender.com/api/v1/sds/pdf'; // local dev
+    // Lokal test: window.HAZARDDESK_API_URL = 'https://sdspass-api-3.onrender.com/api/v1/sds/pdf';
+    window.HAZARDDESK_API_URL = 'https://sdspass-api-3.onrender.com/api/v1/sds/pdf';
+    // Lokal test için: // window.HAZARDDESK_API_URL = 'https://sdspass-api-3.onrender.com/api/v1/sds/pdf'; // local dev
   </script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>EUH Hesaplayıcı — HazardDesk</title>
@@ -2390,16 +2390,20 @@ function calculate(showExtra){
     reason:  r.reason||r.cutoff_used||'',
     cutoff_used: r.cutoff_used||r.reason||'',
   }));
-  renderResults(euhRes,physRes,stotRes,ecoRes,pRes,comps,showExtra||false);
+  renderResults(euhRes,physRes,stotRes,ecoRes,pRes,comps,showExtra||false,[...new Set(chipHCodes)]);
 }
-function renderResults(r, phys, stot, eco, p, comps, showExtra){
+function renderResults(r, phys, stot, eco, p, comps, showExtra, extraHCodes=[]){
   const el=document.getElementById('results');
   let h='';
 
-  // Tüm H kodlarını topla (EUH + Fiziksel)
+  // Tüm H kodlarını topla (Fiziksel + STOT + Chip sağlık tehlikeleri)
   const allH=[];
   const physShown=(phys&&phys.results)||[];
   physShown.forEach(p=>allH.push(p.h||p.h_code));
+  // STOT kodlarını ekle
+  if(stot&&stot.results) stot.results.forEach(s=>{ if(!allH.includes(s.h)) allH.push(s.h); });
+  // Chip'lerden gelen sağlık tehlikesi H kodlarını ekle (CLP kesme değeri geçmiş)
+  extraHCodes.forEach(code=>{ if(code&&!allH.includes(code)) allH.push(code); });
 
   // ── Sonuç Banner ───────────────────────────────────────────
   const totalEUH=r.codes?r.codes.length:0;
@@ -2412,11 +2416,12 @@ function renderResults(r, phys, stot, eco, p, comps, showExtra){
       <h3>Classification Summary</h3>
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:8px">
         <span class="signal-badge signal-${sig}">${sig==='danger'?'DANGER':'WARNING'}</span>
-        <span style="font-size:11px;color:var(--text3)">${totalPhys} Fiziksel · ${totalEUH} EUH ifadesi</span>
+        <span style="font-size:11px;color:var(--text3)">${totalPhys} Fiziksel · ${extraHCodes.length} Sağlık · ${totalEUH} EUH ifadesi</span>
       </div>
       <div class="hcode-list">
         ${physShown.map(p=>`<span class="hcode-pill ${hcodePillClass(p.h||p.h_code)}">${p.h||p.h_code}</span>`).join('')}
         ${stot&&stot.results?stot.results.map(s=>`<span class="hcode-pill ${hcodePillClass(s.h)}">${s.h}</span>`).join(''):''}
+        ${[...new Set(extraHCodes)].filter(c=>!physShown.some(p=>(p.h||p.h_code)===c)&&!(stot&&stot.results&&stot.results.some(s=>s.h===c))).map(c=>`<span class="hcode-pill ${hcodePillClass(c)}">${c}</span>`).join('')}
         ${(r.codes||[]).map(c=>`<span class="hcode-pill hcode-info">${c}</span>`).join('')}
       </div>
       ${buildPictogramRow(allH)}

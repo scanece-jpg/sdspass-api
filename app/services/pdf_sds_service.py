@@ -630,8 +630,17 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     story += section_block(section_title(lang, 2), styles)
     story += sub_block(f"2.1 {sub_title(lang,'2.1')}", styles)
 
-    # Sınıflandırma
-    signal = clp.get('signal_word','None')
+    # Sınıflandırma — signal_word: CLP Annex I DANGER_H ile doğrula
+    _DANGER_H = {
+        'H200','H201','H202','H203','H204','H205',
+        'H220','H221','H222','H224','H225','H228',
+        'H240','H241','H250','H260','H270','H271',
+        'H300','H301','H304','H310','H311',
+        'H314','H318','H330','H331',
+        'H334','H340','H350','H360','H370','H372',
+    }
+    _hc_set = {h.split()[0] for h in h_codes}
+    signal = 'Danger' if (_hc_set & _DANGER_H) else 'Warning'
     sig_color = C_DANGER if signal=='Danger' else (C_WARNING if signal=='Warning' else black)
 
     clf_rows = []

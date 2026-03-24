@@ -24,17 +24,8 @@ app = FastAPI(
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=[
-        "https://sdspass.com",
-        "https://www.sdspass.com",
-        "https://sdspass.com.tr",
-        "https://www.sdspass.com.tr",
-        "https://app.sdspass.com",
-        "http://localhost:3000",   # local dev
-        "http://localhost:8080",   # local dev
-        "null",                    # file:// protokolü (lokal HTML testi)
-    ],
-    allow_credentials=True,
+    allow_origins=["*"],
+    allow_credentials=False,
     allow_methods=["GET", "POST", "OPTIONS"],
     allow_headers=["Content-Type", "Authorization"],
 )

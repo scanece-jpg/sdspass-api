@@ -1043,13 +1043,15 @@ async function downloadSdsPdf(){
     document.body.appendChild(a);a.click();document.body.removeChild(a);
   }catch(e){
     const d=document.createElement('div');
-    d.style.cssText='position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#1e2130;border:1px solid var(--accent);border-radius:12px;padding:22px 26px;z-index:9999;min-width:300px;box-shadow:0 20px 50px rgba(0,0,0,.6)';
-    const hc=(window._lastHCodes||[]).join(' ')||'(no calculation)';
-    d.innerHTML='<b style="color:var(--accent)">\ud83d\udcc4 '+U('pb')+'</b><br><br>'
-      +'<div style="font-size:11px;color:var(--text2);line-height:1.8">Urun: <b>'+getProductName(selectedLang)+'</b><br>Dil: <b>'+selectedLang+'</b><br>H: '+hc+'</div>'
-      +'<div style="margin-top:12px;padding:9px;background:rgba(251,191,36,.08);border-radius:6px;font-size:10px;color:var(--warn)">'
-      +'\u26a0 Backend baglantisi bekleniyor: <code style="color:var(--accent)">POST /api/sds/pdf</code></div>'
-      +'<button onclick="this.parentNode.remove()" style="margin-top:12px;width:100%;padding:8px;border-radius:6px;border:none;background:var(--accent);color:#000;font-weight:700;cursor:pointer">OK</button>';
+    d.style.cssText='position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:#1e2130;border:1px solid var(--accent);border-radius:12px;padding:22px 26px;z-index:9999;min-width:320px;box-shadow:0 20px 50px rgba(0,0,0,.6)';
+    const hc=(window._lastHCodes||[]).join(' ')||'(hesaplama yok - once Hesapla\'ya basin)';
+    const errMsg=e&&e.message?e.message:'';
+    const isCors=errMsg==='Failed to fetch'||errMsg.includes('NetworkError')||errMsg.includes('CORS');
+    d.innerHTML='<b style="color:var(--danger)">PDF Hatasi</b><br><br>'
+      +'<div style="font-size:11px;color:var(--text2);line-height:1.8">H kodlari: <b>'+hc+'</b></div>'
+      +(isCors?'<div style="margin-top:10px;padding:9px;background:rgba(239,68,68,.08);border-radius:6px;font-size:10px;color:var(--danger)">CORS/Baglanti hatasi. Render uyanik mi? <a href="https://sdspass-api-3.onrender.com/health" target="_blank" style="color:var(--accent)">Health check</a></div>':'')
+      +'<div style="margin-top:8px;padding:8px;background:rgba(100,100,100,.1);border-radius:5px;font-size:9px;color:var(--text3);word-break:break-all">'+errMsg+'</div>'
+      +'<button onclick="this.parentNode.remove()" style="margin-top:12px;width:100%;padding:8px;border-radius:6px;border:none;background:var(--accent);color:#000;font-weight:700;cursor:pointer">Tamam</button>';
     document.body.appendChild(d);
   }finally{
     if(pb){pb.innerHTML=U('pb')+' <span style="opacity:.5;font-size:10px">('+selectedLang+')</span>';pb.disabled=false;}

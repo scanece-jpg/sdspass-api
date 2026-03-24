@@ -39,6 +39,7 @@ async def health():
 # ─── PDF ENDPOINT ─────────────────────────────────────────────────────────────
 
 from app.services.pdf_sds_service import generate_sds_pdf
+from app.services.clp_service import DANGER_H
 from app.services.p_code_service import (
     assign_p_codes, select_label_p_codes, classify_sds_p_codes
 )
@@ -65,17 +66,12 @@ async def generate_pdf(data: dict = Body(...)):
         revision_in = data.get('revision', {})
         usage       = product.get('usage', 'industrial')
 
-        # Signal word
-        # Signal word: frontend'den gelen değeri öncelikli kullan
-        # Fallback: h_codes'dan hesapla
+        # Signal word — clp_service.DANGER_H kullan (H225 dahil, doğru liste)
+        # Frontend'den gelen signal_word öncelikli, fallback hesaplama
         signal = data.get('signal_word', '')
         if signal not in ('Danger', 'Warning'):
-            danger_h = {
-                'H224','H225','H228','H250','H260','H270','H271','H240','H241',
-                'H300','H301','H310','H311','H330','H331',
-                'H314','H318','H334','H340','H350','H360','H370','H372','H304',
-            }
-            signal = 'Danger' if any(h.split()[0] in danger_h for h in h_codes) else 'Warning'
+            clean = {h.split()[0] for h in h_codes}
+            signal = 'Danger' if clean & DANGER_H else 'Warning'
 
         # P kodları
         p_result = assign_p_codes(h_codes, signal, usage=usage)

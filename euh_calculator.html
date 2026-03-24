@@ -1025,11 +1025,12 @@ async function downloadSdsPdf(){
       lang: selectedLang,
       product: {name:pName, code:pCode, usage:pUsage, form:pForm},
       supplier: supplier,
-      components: getComps(),
+      components: getComps().map(c=>({...c, ec_no:c.ec||'', reach_no:c.reach||''})),
       h_codes: window._lastHCodes||[],
       euh_codes: window._lastEuhCodes||[],
       euh_details: window._lastEuhDetails||[],
       p_codes: window._lastPCodes||[],
+      clp_passed: window._lastClpPassed||[],
       disclosure_map: disclosureMap,
       phys_props: physProps,
       revision: {date:revDate, no:revNo, version:'1.0'},
@@ -2385,13 +2386,40 @@ function calculate(showExtra){
   window._lastEuhCodes=(euhRes.euh_codes||[]);
   window._lastEuhDetails=(euhRes.euh_details||[]);
   window._lastPCodes=(pRes.codes||pRes.p_codes||[]);
-  // CLP passed — physRes.results'tan oluştur (hangi H kodunun neden geldiği)
-  window._lastClpPassed=(physRes.results||[]).map(r=>({
+  // CLP passed — fiziksel motor + chip sağlık tehlikeleri (tam sınıflandırma tablosu)
+  const _physPassed=(physRes.results||[]).map(r=>({
     h_class: r.h_class||r.hazard_class||'',
     h_code:  r.h||r.h_code||'',
     reason:  r.reason||r.cutoff_used||'',
     cutoff_used: r.cutoff_used||r.reason||'',
   }));
+  const _physCodes=new Set(_physPassed.map(e=>(e.h_code||'').replace(/[*\s]/g,'').substring(0,4)));
+  // Chip'ten gelen sağlık tehlikelerini ekle (cutoff geçmiş olanlar)
+  const _chipPassed=comps.flatMap(c=>{
+    const conc=parseFloat(c.concMax||c.conc)||0;
+    return (c.hazards||[]).flatMap(h=>{
+      const code=(h.h_code||'').replace(/[*\s]/g,'').substring(0,4);
+      if(!code.startsWith('H')||_physCodes.has(code)) return [];
+      if(['H220','H221','H222','H223','H224','H225','H226','H227','H228','H229'].includes(code)) return [];
+      const cutoff=CLP_CUTOFFS[code];
+      if(cutoff===undefined||conc>=cutoff){
+        return [{
+          h_class: h.h_class||'',
+          h_code:  h.h_code||'',
+          reason:  cutoff!==undefined?`%${conc} ≥ %${cutoff} kesme değeri`:'Bileşen sınıflandırması',
+          cutoff_used: cutoff!==undefined?`%${cutoff}`:'—',
+        }];
+      }
+      return [];
+    });
+  });
+  // Deduplikasyon
+  const _seenCP=new Set();
+  window._lastClpPassed=[..._physPassed,..._chipPassed].filter(e=>{
+    const c=(e.h_code||'').replace(/[*\s]/g,'').substring(0,4);
+    if(_seenCP.has(c)) return false;
+    _seenCP.add(c); return true;
+  });
   renderResults(euhRes,physRes,stotRes,ecoRes,pRes,comps,showExtra||false,[...new Set(chipHCodes)]);
 }
 function renderResults(r, phys, stot, eco, p, comps, showExtra, extraHCodes=[]){

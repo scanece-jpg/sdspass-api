@@ -635,7 +635,12 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     sig_color = C_DANGER if signal=='Danger' else (C_WARNING if signal=='Warning' else black)
 
     clf_rows = []
+    seen_clf = set()
     for entry in clp.get('passed', []):
+        hc = (entry.get('h_code','') or '').replace('*','').strip()[:4]
+        if hc in seen_clf:
+            continue
+        seen_clf.add(hc)
         reason = entry.get('reason','')
         conc_info = reason or entry.get('cutoff_used','—')
         clf_rows.append([
@@ -643,6 +648,13 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             entry.get('h_code',''),
             conc_info,
         ])
+    # passed boş veya eksikse h_codes'dan fallback satırlar ekle
+    for hc_raw in h_codes:
+        hc = (hc_raw or '').replace('*','').strip()[:4]
+        if not hc or hc in seen_clf:
+            continue
+        seen_clf.add(hc)
+        clf_rows.append([translate_hclass('', lang), hc_raw, '—'])
 
     if clf_rows:
         reason_lbl = 'Kesme Değeri / Gerekçe' if lang=='TR' else 'Cut-off / Reason'

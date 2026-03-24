@@ -66,21 +66,16 @@ async def generate_pdf(data: dict = Body(...)):
         usage       = product.get('usage', 'industrial')
 
         # Signal word
-        # CLP Ek-1: Tehlike (Danger) sinyal kelimesi gerektiren H kodları
-        danger_h = {
-            # Alevlenir Sıvı Kat.1-2, Alevlenir Gas Kat.1, Piroforik, vs.
-            'H224','H225','H228','H250','H260','H270','H271',
-            'H240','H241',
-            # Akut Toksisite Kat.1-3
-            'H300','H301','H310','H311','H330','H331',
-            # Aşındırıcı, Ciddi Göz Hasarı
-            'H314','H318',
-            # Solunum Duyarlılaştırıcı, Üreme Toks., Mutajenik, Kanserojen
-            'H334','H340','H350','H360',
-            # STOT Tek Maruziyet Kat.1, Aspirasyon Toks.
-            'H370','H372','H304',
-        }
-        signal = 'Danger' if any(h.split()[0] in danger_h for h in h_codes) else 'Warning'
+        # Signal word: frontend'den gelen değeri öncelikli kullan
+        # Fallback: h_codes'dan hesapla
+        signal = data.get('signal_word', '')
+        if signal not in ('Danger', 'Warning'):
+            danger_h = {
+                'H224','H225','H228','H250','H260','H270','H271','H240','H241',
+                'H300','H301','H310','H311','H330','H331',
+                'H314','H318','H334','H340','H350','H360','H370','H372','H304',
+            }
+            signal = 'Danger' if any(h.split()[0] in danger_h for h in h_codes) else 'Warning'
 
         # P kodları
         p_result = assign_p_codes(h_codes, signal, usage=usage)

@@ -748,6 +748,7 @@ async function confirmSdsPdf(){
         hazards: comp.hazards||[],
       })),
     h_codes:       window._lastHCodes||[],
+    signal_word:   window._lastSignal||'',
     euh_codes:     window._lastEuhCodes||[],
     euh_details:   window._lastEuhDetails||[],
     p_codes:       window._lastPCodes||[],
@@ -1027,6 +1028,7 @@ async function downloadSdsPdf(){
       supplier: supplier,
       components: getComps().map(c=>({...c, ec_no:c.ec||'', reach_no:c.reach||''})),
       h_codes: window._lastHCodes||[],
+      signal_word: window._lastSignal||'',
       euh_codes: window._lastEuhCodes||[],
       euh_details: window._lastEuhDetails||[],
       p_codes: window._lastPCodes||[],
@@ -2383,14 +2385,15 @@ function calculate(showExtra){
   pRes.usage=usage;
   pRes.sds=classifySdsPCodes(pRes.codes);
   window._lastHCodes=allHCodesArr;
+  window._lastSignal=sig;
   window._lastEuhCodes=(euhRes.euh_codes||[]);
   window._lastEuhDetails=(euhRes.euh_details||[]);
   window._lastPCodes=(pRes.codes||pRes.p_codes||[]);
   // CLP passed — fiziksel motor + chip sağlık tehlikeleri (tam sınıflandırma tablosu)
   const _physPassed=(physRes.results||[]).map(r=>({
-    h_class: r.h_class||r.hazard_class||'',
+    h_class: r.h_class||r.hazard_class||r.label||'',
     h_code:  r.h||r.h_code||'',
-    reason:  r.reason||r.cutoff_used||'',
+    reason:  r.reason||r.source||r.cutoff_used||'',
     cutoff_used: r.cutoff_used||r.reason||'',
   }));
   const _physCodes=new Set(_physPassed.map(e=>(e.h_code||'').replace(/[*\s]/g,'').substring(0,4)));

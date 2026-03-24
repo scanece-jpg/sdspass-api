@@ -18,7 +18,7 @@ os.environ.setdefault('CLP_DATA_DIR', os.path.abspath(DATA_DIR))
 app = FastAPI(
     title="HazardDesk API",
     description="KKDİK/CLP SDS PDF üretim servisi",
-    version="1.1.0",
+    version="1.2.0-DANGER_H_FIX",
     docs_url="/docs",
 )
 

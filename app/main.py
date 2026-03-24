@@ -166,6 +166,24 @@ async def generate_pdf(data: dict = Body(...)):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+@app.post("/api/v1/sds/debug")
+async def debug_signal(data: dict = Body(...)):
+    """Signal word hesaplama debug endpoint."""
+    h_codes = data.get('h_codes', [])
+    signal_from_fe = data.get('signal_word', '')
+    clean = {h.split()[0] for h in h_codes}
+    computed = 'Danger' if clean & DANGER_H else 'Warning'
+    final = signal_from_fe if signal_from_fe in ('Danger', 'Warning') else computed
+    return {
+        "api_version": "1.2.0-DANGER_H_FIX",
+        "h_codes_received": h_codes,
+        "signal_from_frontend": signal_from_fe,
+        "signal_computed": computed,
+        "signal_final": final,
+        "DANGER_H_has_H225": 'H225' in DANGER_H,
+        "h225_in_hcodes": 'H225' in clean,
+    }
+
 # ─── SUBSTANCE LOOKUP ─────────────────────────────────────────────────────────
 
 from app.services.echa_service import lookup_substance

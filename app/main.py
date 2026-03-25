@@ -57,8 +57,9 @@ async def generate_pdf(data: dict = Body(...)):
         lang        = data.get('lang', 'TR')
         product     = data.get('product', {})
         components  = data.get('components', [])
-        h_codes     = data.get('h_codes', [])
-        euh_codes   = data.get('euh_codes', [])
+        # Tüm H kodlarını str'e normalize et — int/None gelirse PDF çökmez
+        h_codes     = [str(h) for h in data.get('h_codes', []) if h is not None]
+        euh_codes   = [str(h) for h in data.get('euh_codes', []) if h is not None]
         p_codes_in  = data.get('p_codes', [])
         disc_map    = data.get('disclosure_map', {})
         supplier_in = data.get('supplier', {})
@@ -70,7 +71,7 @@ async def generate_pdf(data: dict = Body(...)):
         # Frontend'den gelen signal_word öncelikli, fallback hesaplama
         signal = data.get('signal_word', '')
         if signal not in ('Danger', 'Warning'):
-            clean = {h.split()[0] for h in h_codes}
+            clean = {h.split()[0] for h in h_codes if isinstance(h, str)}
             signal = 'Danger' if clean & DANGER_H else 'Warning'
 
         # P kodları
@@ -84,7 +85,7 @@ async def generate_pdf(data: dict = Body(...)):
 
         # Ekoloji
         eco_comps = [{'cas': c.get('cas',''), 'name': c.get('name',''),
-                      'conc': c.get('conc', c.get('concentration',0)),
+                      'conc': float(c.get('conc', c.get('concentration',0)) or 0),
                       'hazards': c.get('hazards',[])} for c in components]
         try:
             eco_result = calculate_ecological(eco_comps)
@@ -208,6 +209,7 @@ async def substance_lookup(cas: str):
             "reach_no": get_reg_no(cas),
             "annex_vi": result.get("annex_vi", False),
             "signal": result.get("signal",""),
+            "pictograms": result.get("pictograms",[]),
             "hazards": result.get("hazards",[]),
             "m_factors": result.get("m_factors",{}),
             "oel": oel,

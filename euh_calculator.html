@@ -614,15 +614,18 @@ async function echaLookup(casInput, compId){
     if(!r.ok) return;
     const data = await r.json();
 
-    if(data.source === 'not_found') return;
+    if(!data.found) return;
 
     // Madde adını doldur
     const ni = document.getElementById(`ni${compId}`);
     if(ni && !ni.value && data.name) ni.value = data.name;
 
+    // hazards[] → hazard_classes[] dönüşümü
+    const hazardClasses = (data.hazards||[]).map(h=>h.h_class).filter(Boolean);
+
     // Hazard class'ları otomatik ekle
-    if(data.hazard_classes && data.hazard_classes.length > 0){
-      data.hazard_classes.forEach(hc => {
+    if(hazardClasses.length > 0){
+      hazardClasses.forEach(hc => {
         if(hc) addChip(compId, hc, '');
       });
     }
@@ -644,8 +647,22 @@ async function echaLookup(casInput, compId){
 
     console.log(`[ECHA] ${cas}: ${data.name} (${data.source})`);
 
+    // EventBus: madde bulundu — diğer modüller dinleyebilir
+    if(typeof EventBus!=='undefined'){
+      EventBus.emit('SUBSTANCE_FOUND',{
+        cas, compId, name:data.name||'',
+        hazard_classes:hazardClasses,
+        hazards:data.hazards||[],
+        ec_no:data.ec_no||'', reach_no:data.reach_no||'',
+        signal:data.signal||'', pictograms:data.pictograms||[],
+        source:data.source||'',
+      });
+    }
   }catch(e){
     // API yoksa sessizce geç
+    if(typeof EventBus!=='undefined'){
+      EventBus.emit('SUBSTANCE_NOT_FOUND',{cas,compId});
+    }
   }
 }
 
@@ -2576,8 +2593,20 @@ function getComps(){
     const name=w.querySelector('.ni').value.trim();
     const minEl=w.querySelector('.kimin');   // hidden input
     const maxEl=w.querySelector('.kimax');   // hidden input
-    const concMin=parseFloat(minEl?.value)||0;
-    const concMax=parseFloat(maxEl?.value)||null;
+    let concMin=parseFloat(minEl?.value)||0;
+    let concMax=parseFloat(maxEl?.value)||null;
+    // Fallback: hidden inputs henüz dolu değilse (refinement bekleniyor veya seçilmedi)
+    // dropdown'daki seçili aralığı kullan — CLP worst case için üst sınırı al
+    if(!concMin&&(concMax==null||concMax===0)){
+      const sel=w.querySelector('.conc-sel');
+      if(sel&&sel.value){
+        const parts=sel.value.split('|').map(Number);
+        if(parts.length===2&&!isNaN(parts[0])&&!isNaN(parts[1])){
+          concMin=parts[0];
+          concMax=parts[1];
+        }
+      }
+    }
     // CLP worst case: aralık varsa max al
     const conc=concMax!=null&&concMax>0?concMax:concMin;
     const hazards=[...w.querySelectorAll('.hchip')].map(c=>({h_class:c.dataset.hc,h_code:c.dataset.code}));
@@ -2715,6 +2744,17 @@ function calculate(showExtra){
   window._lastTheoPhys=theoPhys;
   _fillPhysFormFields(theoPhys);
   renderResults(euhRes,physRes,stotRes,ecoRes,pRes,comps,showExtra||false,[...new Set(chipHCodes)]);
+  // EventBus: hesaplama tamamlandı — modüller bu event'i dinleyebilir
+  if(typeof EventBus!=='undefined'){
+    EventBus.emit('CALC_COMPLETE',{
+      hCodes:allHCodesArr, signal:sig, pictograms:getGhsCodes(allHCodesArr),
+      stot:stotRes, euh:euhRes, euhCodes:euhRes.euh_codes||[],
+      euhDetails:euhRes.euh_details||[], pCodes:pRes.codes||[],
+      pRes, eco:ecoRes, clpPassed:window._lastClpPassed||[],
+      phys:physRes, theoPhys, phAssess, chipHCodes:[...new Set(chipHCodes)],
+      comps, showExtra:showExtra||false,
+    });
+  }
 }
 function renderResults(r, phys, stot, eco, p, comps, showExtra, extraHCodes=[]){
   const el=document.getElementById('results');
@@ -3339,7 +3379,7 @@ function _crpBuildPanel(id,lo,hi,thresholds,entries){
 
   for(const thr of thresholds){
     const below=_crpClassify(thr,entries,true);   /* < thr */
-    const above=_crpClassify(hi, entries,false);   /* ≥ thr */
+    const above=_crpClassify(thr,entries,false);   /* ≥ thr */
     const changes=JSON.stringify([...below.classes].sort())!==JSON.stringify([...above.classes].sort());
     const badge=changes
       ?`<span class="crp-badge changes">⚠ Sınıf değişiyor</span>`
@@ -3395,13 +3435,16 @@ function _crpSave(id,lo,hi){
   /* Seçim metnini güncelle — seçilen option'ı işaretle */
   if(sel){
     const lbl=lo===0?`≤ %${_crpFmt(hi)}`:`%${_crpFmt(lo)} – %${_crpFmt(hi)}`;
-    /* option value'yu güncelle (refined aralık) */
     let opt=[...sel.options].find(o=>o.value===`${lo}|${hi}`);
     if(!opt){
       opt=new Option(`${lbl} ✓`,`${lo}|${hi}`,false,true);
       sel.appendChild(opt);
     }
     opt.selected=true;
+  }
+  // EventBus: konsantrasyon kaydedildi
+  if(typeof EventBus!=='undefined'){
+    EventBus.emit('CONCENTRATION_SET',{id,lo,hi});
   }
 }
 
@@ -3611,7 +3654,7 @@ function _crpShowStep2(lo,hi,thresholds,entries){
   let refHtml='';
   for(const thr of thresholds){
     const below=_crpClassify(thr,entries,true);  // < thr
-    const above=_crpClassify(hi, entries,false);  // ≥ thr üst sınıra kadar
+    const above=_crpClassify(thr,entries,false);  // ≥ thr
 
     const bSty=_crpStyle(below.classes);
     const aSty=_crpStyle(above.classes);
@@ -3701,5 +3744,25 @@ document.addEventListener('click',function(e){
 <div id="crpOverlay">
   <div id="crpBox"></div>
 </div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     MODÜLER MİMARİ — EventBus + StateStore + Modüller
+     Sıra önemli: önce altyapı, sonra modüller, en son app.js
+     ═══════════════════════════════════════════════════════════════ -->
+
+<!-- Altyapı -->
+<script src="js/event-bus.js"></script>
+<script src="js/state-store.js"></script>
+
+<!-- Modüller -->
+<script src="js/modules/cas-lookup.js"></script>
+<script src="js/modules/component-manager.js"></script>
+<script src="js/modules/conc-selector.js"></script>
+<script src="js/modules/calculator.js"></script>
+<script src="js/modules/results-renderer.js"></script>
+<script src="js/modules/pdf-exporter.js"></script>
+
+<!-- Uygulama başlatma -->
+<script src="js/app.js"></script>
 
 </body></html>

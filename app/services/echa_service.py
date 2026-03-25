@@ -10,10 +10,12 @@ Seçim mantığı (kullanıcı isteği):
   "Joint Notification" ibareli grup seçilir.
 
 Akış:
-  1. Lokal DB (substances_annex_vi + substances_custom) → hızlı döner
-  2. ECHA C&L lokal dosyaları (clp_cl_data, annex_vi_lookup)
-  3. PubChem GHS API → ECHA C&L notification'larını parse et
-  4. Sonuç substances_custom.json'a otomatik kaydedilir
+  1. substances_annex_vi.json + substances_custom.json → hızlı döner
+  2. PubChem GHS API → ECHA C&L notification'larını parse et
+  3. Sonuç substances_custom.json'a otomatik kaydedilir
+
+NOT: clp_cl_data.json ve annex_vi_lookup.json artık kullanılmıyor.
+     substances_annex_vi.json (4155 madde, tam format) ikisini de kapsar.
 """
 
 import re, httpx, asyncio, json, os
@@ -21,10 +23,6 @@ from pathlib import Path
 
 # Lokal cache dosyası (oturum boyunca tekrar çekmeyelim)
 CACHE_FILE = Path(__file__).parent / 'echa_cache.json'
-
-# Lokal CLP veritabanları
-_cl_data  = None
-_av_data  = None
 
 # H kodu → hazard class mapping (CLP Annex VI / GHS)
 _H_TO_CLASS = {
@@ -70,46 +68,27 @@ _PICT_MAP = {
 
 
 # ---------------------------------------------------------------------------
-# Lokal DB
+# Lokal DB — substance_lookup üzerinden (annex_vi + custom)
 # ---------------------------------------------------------------------------
 
-def _load_local_dbs():
-    global _cl_data, _av_data
-    base = Path(__file__).parent.parent.parent / 'data'
-    if _cl_data is None:
-        try:
-            with open(base / 'clp_cl_data.json', encoding='utf-8') as f:
-                _cl_data = json.load(f)
-        except Exception:
-            _cl_data = {}
-    if _av_data is None:
-        try:
-            with open(base / 'annex_vi_lookup.json', encoding='utf-8') as f:
-                _av_data = json.load(f)
-        except Exception:
-            _av_data = {}
-
-
 def lookup_local(cas: str) -> dict | None:
-    """Lokal CLP dosyalarında CAS ara (annex_vi_lookup + clp_cl_data)."""
-    _load_local_dbs()
-    cas = cas.strip()
-
-    if cas in _av_data:
-        e = _av_data[cas]
-        return {
-            'cas': cas, 'name': e.get('n', ''), 'source': 'Annex VI',
-            'h_codes': [h['h'] for h in e.get('h', []) if h.get('h')],
-            'hazard_classes': [h.get('c', '') for h in e.get('h', [])],
-        }
-    if cas in _cl_data:
-        e = _cl_data[cas]
-        return {
-            'cas': cas, 'name': e.get('n', ''), 'source': 'C&L Inventory (local)',
-            'h_codes': [h['h'] for h in e.get('h', []) if h.get('h')],
-            'hazard_classes': [h.get('c', '') for h in e.get('h', [])],
-        }
-    return None
+    """
+    substances_annex_vi.json + substances_custom.json içinde CAS ara.
+    clp_cl_data.json ve annex_vi_lookup.json artık kullanılmıyor.
+    """
+    from app.services.substance_lookup import lookup_substance
+    entry = lookup_substance(cas.strip())
+    if not entry:
+        return None
+    return {
+        'cas'           : cas,
+        'name'          : entry.get('name', ''),
+        'source'        : 'Annex VI' if entry.get('annex_vi') else 'Custom DB',
+        'h_codes'       : [h['h_code'] for h in entry.get('hazards', []) if h.get('h_code')],
+        'hazard_classes': [h['h_class'] for h in entry.get('hazards', []) if h.get('h_class')],
+        'signal'        : entry.get('signal', ''),
+        'pictograms'    : entry.get('pictograms', []),
+    }
 
 
 # ---------------------------------------------------------------------------
@@ -360,32 +339,22 @@ async def lookup_echa_api(cas: str) -> dict | None:
 
 async def lookup_substance(cas: str) -> dict:
     """
-    Sıra: substances_unified (annex+custom) → lokal CLP dosyaları
+    Sıra: substances_annex_vi + substances_custom → PubChem/ECHA C&L
            → PubChem/ECHA C&L API → boş sonuç
     Lokal DB'de yoksa PubChem'den çeker ve custom'a kaydeder.
     """
     cas = cas.strip()
 
-    # 1. Birleşik lokal DB (annex_vi + custom)
-    from app.services.substance_lookup import lookup_substance as _local_main
-    local_main = _local_main(cas)
-    if local_main:
+    # 1. Lokal DB (annex_vi + custom) — lookup_local içinde birleşik
+    local = lookup_local(cas)
+    if local:
         from app.services.reach_db import get_ec_no, get_reg_no
-        local_main['ec_no']     = local_main.get('ec_no') or get_ec_no(cas) or ''
-        local_main['reach_no']  = get_reg_no(cas) or ''
-        local_main['source']    = 'Annex VI' if local_main.get('annex_vi') else 'Custom DB'
-        return local_main
+        local['ec_no']    = local.get('ec_no') or get_ec_no(cas) or ''
+        local['reach_no'] = get_reg_no(cas) or ''
+        return local
 
-    # 2. Lokal CLP dosyaları
-    local_clp = lookup_local(cas)
-    if local_clp:
-        from app.services.reach_db import get_ec_no, get_reg_no
-        local_clp['ec_no']    = get_ec_no(cas) or ''
-        local_clp['reach_no'] = get_reg_no(cas) or ''
-        return local_clp
-
-    # 3. PubChem → ECHA C&L
-    echa = await lookup_echa_api(cas)
+    # 2. PubChem → ECHA C&L
+    echa = await lookup_echa_api(cas)  # cache'den veya canlı çekim
     if echa:
         from app.services.reach_db import get_ec_no, get_reg_no
         echa['ec_no']    = echa.get('ec_no') or get_ec_no(cas) or ''

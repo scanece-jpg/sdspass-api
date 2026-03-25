@@ -1523,5 +1523,41 @@
     "m_factors": {},
     "index_no": "",
     "atp": "PubChem/35 notif"
+  },
+  "87-69-4": {
+    "name": "(2R,3R)-2,3-dihydroxybutanedioic acid",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "Danger",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Acute Tox. 4 (oral)",
+        "h_code": "H302"
+      },
+      {
+        "h_class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "h_class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "h_class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "h_class": "STOT SE 3 (resp.)",
+        "h_code": "H335"
+      }
+    ],
+    "m_factors": {},
+    "index_no": "",
+    "atp": "PubChem/33 notif"
   }
 }

@@ -11,3 +11,5 @@ build/
 .venv/
 venv/
 *.log
+app/services/echa_cache.json
+data/substances_unified.json.bak

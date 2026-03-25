@@ -599,3 +599,49 @@ async def all_codes(lang: str = "TR"):
         "euh_codes": EUH_STMTS.get(l, {}),
     }
 
+
+
+# ── Konsantrasyon Aralığı Dropdown ────────────────────────────────────────────
+
+@app.get("/api/v1/sds/concentration-ranges/{cas}")
+async def concentration_ranges(
+    cas: str,
+    lang: str = "TR",
+    scl: str = "",          # örn. "0.5,2.0,5.0" — virgülle ayrılmış SCL değerleri
+    m_acute: int = 1,
+    m_chronic: int = 1,
+):
+    """
+    CAS numarası için konsantrasyon aralığı dropdown listesi.
+    Her aralık için aktif karışım sınıflandırması, sinyal sözcüğü ve piktogramlar döner.
+
+    Parametreler:
+      cas       : CAS numarası
+      lang      : TR | EN | DE
+      scl       : Virgülle ayrılmış özel eşik değerleri (%) — Annex VI SCL
+      m_acute   : Akut M-faktörü (su ortamı için)
+      m_chronic : Kronik M-faktörü
+    """
+    from app.services.concentration_ranges import build_concentration_ranges
+
+    scl_list = []
+    if scl:
+        try:
+            scl_list = [float(v.strip()) for v in scl.split(",") if v.strip()]
+        except ValueError:
+            pass
+
+    ranges = build_concentration_ranges(
+        cas=cas,
+        scl_thresholds=scl_list or None,
+        m_factor_acute=m_acute,
+        m_factor_chronic=m_chronic,
+        lang=lang.upper(),
+    )
+
+    return {
+        "cas"   : cas,
+        "lang"  : lang.upper(),
+        "count" : len(ranges),
+        "ranges": ranges,
+    }

@@ -645,3 +645,59 @@ async def concentration_ranges(
         "count" : len(ranges),
         "ranges": ranges,
     }
+
+
+@app.get("/api/v1/sds/concentration-ranges/{cas}/standard")
+async def concentration_standard_ranges(
+    cas: str,
+    lang: str = "TR",
+    scl: str = "",
+    m_acute: int = 1,
+    m_chronic: int = 1,
+):
+    """
+    Aşama 1 — Standart 7-seçenekli dropdown.
+    needs_refinement=True olan aralıklar için /refine endpoint'i çağırılmalı.
+    """
+    from app.services.concentration_ranges import build_standard_ranges
+    scl_list = [float(v.strip()) for v in scl.split(",") if v.strip()] if scl else []
+    ranges = build_standard_ranges(
+        cas=cas, scl_thresholds=scl_list or None,
+        m_factor_acute=m_acute, m_factor_chronic=m_chronic, lang=lang.upper(),
+    )
+    return {"cas": cas, "lang": lang.upper(), "count": len(ranges), "ranges": ranges}
+
+
+@app.get("/api/v1/sds/concentration-ranges/{cas}/refine")
+async def concentration_refine(
+    cas: str,
+    lower: float,
+    upper: float,
+    lang: str = "TR",
+    scl: str = "",
+    m_acute: int = 1,
+    m_chronic: int = 1,
+):
+    """
+    Aşama 2 — Seçilen aralık içindeki kritik eşikler ve alt/üst seçenekler.
+
+    Her eşik için döner:
+      threshold, question (kullanıcıya sorulacak), below{}, above{},
+      classification_changes (True → eşiğin iki tarafı farklı sınıf)
+
+    classification_changes=False ise → iki taraf aynı sınıf,
+    kullanıcıya soruda sadece ticari sır koruması için göster.
+    """
+    from app.services.concentration_ranges import get_refinements
+    scl_list = [float(v.strip()) for v in scl.split(",") if v.strip()] if scl else []
+    refs = get_refinements(
+        lower=lower, upper=upper, cas=cas,
+        scl_thresholds=scl_list or None,
+        m_factor_acute=m_acute, m_factor_chronic=m_chronic, lang=lang.upper(),
+    )
+    return {
+        "cas": cas, "lower": lower, "upper": upper,
+        "lang": lang.upper(),
+        "refinement_count": len(refs),
+        "refinements": refs,
+    }

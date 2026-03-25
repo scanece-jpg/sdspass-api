@@ -334,117 +334,22 @@ def build_concentration_ranges(
     if hazard_classes is None:
         hazard_classes = _fetch_hazard_classes(cas)
 
-    # --- 2. Bu sınıflar için GCL eşiklerini topla ---
-    gcl_thresholds: set[float] = set()
-    # Her sınıf için GCL tablosuna bak
-    comp_gcl: list[tuple] = []   # (eşik, karışım_sınıfı, h_kodu)
-    for hc in hazard_classes:
-        nkey = _normalize_class(hc)
-        entries = GCL.get(nkey, [])
-        # M-faktörü uygulaması (su ortamı)
-        if 'aquatic' in nkey:
-            mf = m_factor_acute if 'acute' in nkey else m_factor_chronic
-            entries = [(t / mf, cls, h) for t, cls, h in entries]
-        comp_gcl.extend(entries)
-        for t, _, _ in entries:
-            gcl_thresholds.add(round(t, 4))
+    # --- 2. GCL eşiklerini topla ---
+    comp_gcl, gcl_thresholds = _build_comp_gcl(
+        hazard_classes, scl_thresholds or [], m_factor_acute, m_factor_chronic
+    )
 
-    # --- 3. Tüm kırılım noktalarını birleştir ve sırala ---
-    all_points: list[float] = sorted(set(
-        STANDARD_BREAKPOINTS +
-        list(gcl_thresholds) +
-        (scl_thresholds or [])
-    ))
-    # 0 ve 100'ü sınır olarak ekle
-    if 0.0 not in all_points:
-        all_points = [0.0] + all_points
-    if 100.0 not in all_points:
-        all_points.append(100.0)
-    all_points = sorted(set(all_points))
+    # --- 3. Tüm kırılım noktalarını birleştir ---
+    all_points = sorted({0.0, 100.0} | set(STANDARD_BREAKPOINTS) | gcl_thresholds)
 
-    # --- 4. Her aralık için aktif sınıflandırmayı belirle ---
-    ranges = []
-    for i in range(len(all_points) - 1):
-        lo = all_points[i]
-        hi = all_points[i + 1]
+    # --- 4. Her aralığı sınıflandır ---
+    ranges = [
+        _classify_range(all_points[i], all_points[i+1], comp_gcl, hazard_classes, lang, gcl_thresholds)
+        for i in range(len(all_points) - 1)
+    ]
 
-        # Aralığın "temsil konsantrasyonu" → üst sınır (en kötü durum)
-        rep_conc = hi
-
-        # Bu konsantrasyonda hangi karışım sınıfları aktif?
-        raw_active: list[str] = []
-        active_h: list[str] = []
-        for threshold, mix_class, h_code in comp_gcl:
-            if rep_conc >= threshold and mix_class not in raw_active:
-                raw_active.append(mix_class)
-                for h in h_code.split('/'):
-                    if h and h not in active_h:
-                        active_h.append(h)
-        # Üst kategori varsa alt kategoriyi kaldır
-        active_classes = _apply_dominance(raw_active)
-
-        # Sinyal ve piktogram
-        signal  = _dominant_signal(active_classes)
-        picts   = _pictograms(active_classes)
-        color   = SIGNAL_COLORS.get(signal, SIGNAL_COLORS[''])
-
-        # Etiket
-        if active_classes:
-            hazard_label = ' + '.join(_label(c, lang) for c in active_classes[:3])
-            if len(active_classes) > 3:
-                hazard_label += f' (+{len(active_classes)-3})'
-        else:
-            hazard_label = LABELS['unclassified'].get(lang, 'Sınıflandırılmamış')
-
-        # Aralık etiketi
-        if lo == 0.0:
-            range_label = f'≤ %{_fmt(hi)}'
-        elif hi == 100.0:
-            range_label = f'%{_fmt(lo)} – %100'
-        else:
-            range_label = f'%{_fmt(lo)} – %{_fmt(hi)}'
-
-        # Select option metni
-        select_option = f'{range_label}   [{hazard_label}]'
-
-        ranges.append({
-            'lower'          : lo,
-            'upper'          : hi,
-            'range_label'    : range_label,
-            'mixture_classes': active_classes,
-            'h_codes'        : active_h,
-            'hazard_label'   : hazard_label,
-            'signal'         : signal,
-            'pictograms'     : picts,
-            'color'          : color,
-            'select_option'  : select_option,
-            'is_pure'        : False,
-        })
-
-    # --- 5. Saf madde seçeneği ekle (%100) ---
-    raw_classes = [hc for hc in hazard_classes if hc]
-    raw_signal  = _dominant_signal(raw_classes)
-    raw_picts   = _pictograms(raw_classes)
-    pure_label  = ' + '.join(_label(hc, lang) for hc in raw_classes[:3])
-    if len(raw_classes) > 3:
-        pure_label += f' (+{len(raw_classes)-3})'
-    if not pure_label:
-        pure_label = LABELS['unclassified'].get(lang, 'Sınıflandırılmamış')
-
-    ranges.append({
-        'lower'          : 100.0,
-        'upper'          : 100.0,
-        'range_label'    : '%100 (Saf Madde)',
-        'mixture_classes': raw_classes,
-        'h_codes'        : [],
-        'hazard_label'   : pure_label,
-        'signal'         : raw_signal,
-        'pictograms'     : raw_picts,
-        'color'          : SIGNAL_COLORS.get(raw_signal, SIGNAL_COLORS['']),
-        'select_option'  : f'%100 (Saf Madde)   [{pure_label}]',
-        'is_pure'        : True,
-    })
-
+    # --- 5. Saf madde ---
+    ranges.append(_pure_option(hazard_classes, lang))
     return ranges
 
 
@@ -458,6 +363,261 @@ def _fetch_hazard_classes(cas: str) -> list[str]:
     except Exception:
         pass
     return []
+
+
+# ---------------------------------------------------------------------------
+# Standart Dropdown + Refinement (İki Aşamalı Akış)
+# ---------------------------------------------------------------------------
+
+def build_standard_ranges(
+    cas: str,
+    hazard_classes: Optional[list[str]] = None,
+    scl_thresholds: Optional[list[float]] = None,
+    m_factor_acute: int = 1,
+    m_factor_chronic: int = 1,
+    lang: str = 'TR',
+) -> list[dict]:
+    """
+    AŞAMA 1 — Sadece standart kırılım noktalarını kullanarak kaba dropdown.
+
+    Her seçeneğe 'split_points' eklenir:
+      [] → aralık içinde eşik yok, doğrudan kullanılabilir
+      [20.0] → aralık içinde 20% eşiği var → refinement sorusu gösterilmeli
+
+    Bu sayede kullanıcıya 7-8 temiz seçenek sunulur; eğer seçilen
+    aralıkta kritik bir sınır varsa yazılım 'Aşama 2'yi tetikler.
+    """
+    if hazard_classes is None:
+        hazard_classes = _fetch_hazard_classes(cas)
+
+    # Tüm GCL eşiklerini topla (standart dropdown için referans)
+    comp_gcl, gcl_thresholds = _build_comp_gcl(
+        hazard_classes, scl_thresholds or [], m_factor_acute, m_factor_chronic
+    )
+
+    # Sadece standart noktaları kullan
+    std_points = sorted({0.0} | set(STANDARD_BREAKPOINTS))
+
+    ranges = []
+    for i in range(len(std_points) - 1):
+        lo, hi = std_points[i], std_points[i + 1]
+
+        # Bu standart aralığın içinde kalan GCL eşikleri
+        internal = sorted(
+            t for t in gcl_thresholds
+            if lo < t < hi  # sınırlar hariç, içeride olanlar
+        )
+
+        # En kötü durum sınıflandırması (üst sınırı baz al)
+        r = _classify_range(lo, hi, comp_gcl, hazard_classes, lang, gcl_thresholds)
+        r['split_points'] = internal
+        r['needs_refinement'] = len(internal) > 0
+        ranges.append(r)
+
+    # Saf madde seçeneği
+    ranges.append(_pure_option(hazard_classes, lang))
+    return ranges
+
+
+def get_refinements(
+    lower: float,
+    upper: float,
+    cas: str,
+    hazard_classes: Optional[list[str]] = None,
+    scl_thresholds: Optional[list[float]] = None,
+    m_factor_acute: int = 1,
+    m_factor_chronic: int = 1,
+    lang: str = 'TR',
+) -> list[dict]:
+    """
+    AŞAMA 2 — Seçilen aralıktaki her eşik için 'altında mı / üstünde mi?' seçenekleri.
+
+    Dönüş: [
+      {
+        'threshold'   : 20.0,
+        'question'    : 'Seçtiğiniz aralıkta kritik bir yasal sınır (%20) var...',
+        'below'       : { range dict — üst sınır = eşik },
+        'above'       : { range dict — alt sınır = eşik },
+        'classification_changes': True/False,  # eşik gerçekten sınıfı değiştiriyor mu
+      }
+    ]
+
+    Eğer liste boşsa → aralık zaten net, refinement gerekmez.
+    """
+    if hazard_classes is None:
+        hazard_classes = _fetch_hazard_classes(cas)
+
+    comp_gcl, gcl_thresholds = _build_comp_gcl(
+        hazard_classes, scl_thresholds or [], m_factor_acute, m_factor_chronic
+    )
+
+    # Seçilen aralığın içindeki eşikler
+    internal = sorted(t for t in gcl_thresholds if lower < t < upper)
+
+    refinements = []
+    for thr in internal:
+        # "altında" → thr dahil değil (exclusive_upper=True)
+        # "üstünde" → thr dahil (normal üst sınır mantığı)
+        below = _classify_range(lower, thr,  comp_gcl, hazard_classes, lang,
+                                gcl_thresholds, exclusive_upper=True)
+        above = _classify_range(thr,   upper, comp_gcl, hazard_classes, lang,
+                                gcl_thresholds, exclusive_upper=False)
+
+        # Eşik gerçekten sınıfı değiştiriyor mu?
+        changes = (
+            set(below['mixture_classes']) != set(above['mixture_classes']) or
+            below['signal'] != above['signal']
+        )
+
+        # Soru metni (çok dilli)
+        q_texts = {
+            'TR': (f'Seçtiğiniz aralıkta kritik bir yasal sınır '
+                   f'(%{_fmt(thr)}) bulunmaktadır.\n'
+                   f'Gerçek konsantrasyonunuz bu sınırın altında mı, üstünde mi?'),
+            'EN': (f'Your selected range contains a critical legal limit '
+                   f'({_fmt(thr)}%).\n'
+                   f'Is your actual concentration below or above this limit?'),
+            'DE': (f'Ihr gewählter Bereich enthält einen kritischen Grenzwert '
+                   f'({_fmt(thr)} %).\n'
+                   f'Liegt Ihre tatsächliche Konzentration darunter oder darüber?'),
+        }
+
+        refinements.append({
+            'threshold'              : thr,
+            'threshold_label'        : f'%{_fmt(thr)}',
+            'question'               : q_texts.get(lang, q_texts['TR']),
+            'below'                  : below,
+            'above'                  : above,
+            'classification_changes' : changes,
+            'below_label'            : _btn_label(lower, thr, lang, 'below'),
+            'above_label'            : _btn_label(thr, upper, lang, 'above'),
+        })
+
+    return refinements
+
+
+# ---------------------------------------------------------------------------
+# Dahili yardımcılar
+# ---------------------------------------------------------------------------
+
+def _build_comp_gcl(
+    hazard_classes: list[str],
+    scl_thresholds: list[float],
+    m_acute: int,
+    m_chronic: int,
+) -> tuple[list[tuple], set[float]]:
+    """GCL giriş listesini ve eşik kümesini oluştur."""
+    comp_gcl: list[tuple] = []
+    gcl_thresholds: set[float] = set()
+    for hc in hazard_classes:
+        nkey = _normalize_class(hc)
+        entries = list(GCL.get(nkey, []))
+        if 'aquatic' in nkey:
+            mf = m_acute if 'acute' in nkey else m_chronic
+            entries = [(t / mf, cls, h) for t, cls, h in entries]
+        comp_gcl.extend(entries)
+        for t, _, _ in entries:
+            gcl_thresholds.add(round(t, 4))
+    for t in scl_thresholds:
+        gcl_thresholds.add(round(t, 4))
+    return comp_gcl, gcl_thresholds
+
+
+def _classify_range(
+    lo: float,
+    hi: float,
+    comp_gcl: list[tuple],
+    hazard_classes: list[str],
+    lang: str,
+    gcl_thresholds: set[float],
+    exclusive_upper: bool = False,
+) -> dict:
+    """
+    Tek bir [lo, hi] aralığını sınıflandır ve dict döndür.
+
+    exclusive_upper=True → üst sınır eşiğin tam altı anlamına gelir
+      (kullanıcı '%10-%20 aralığındayım' seçtiğinde %20 dahil değil)
+    """
+    # En kötü durum = üst sınır.
+    # exclusive_upper → eşiğin hemen altı (< threshold mantığı için)
+    rep_conc = hi - 1e-9 if exclusive_upper and hi > 0 else hi
+
+    raw_active: list[str] = []
+    active_h:   list[str] = []
+    for threshold, mix_class, h_code in comp_gcl:
+        if rep_conc >= threshold and mix_class not in raw_active:
+            raw_active.append(mix_class)
+            for h in h_code.split('/'):
+                if h and h not in active_h:
+                    active_h.append(h)
+
+    active_classes = _apply_dominance(raw_active)
+    signal  = _dominant_signal(active_classes)
+    picts   = _pictograms(active_classes)
+    color   = SIGNAL_COLORS.get(signal, SIGNAL_COLORS[''])
+
+    if active_classes:
+        hazard_label = ' + '.join(_label(c, lang) for c in active_classes[:3])
+        if len(active_classes) > 3:
+            hazard_label += f' (+{len(active_classes)-3})'
+    else:
+        hazard_label = LABELS['unclassified'].get(lang, 'Sınıflandırılmamış')
+
+    if lo == 0.0:
+        range_label = f'≤ %{_fmt(hi)}'
+    elif hi == 100.0:
+        range_label = f'%{_fmt(lo)} – %100'
+    else:
+        range_label = f'%{_fmt(lo)} – %{_fmt(hi)}'
+
+    return {
+        'lower'          : lo,
+        'upper'          : hi,
+        'range_label'    : range_label,
+        'mixture_classes': active_classes,
+        'h_codes'        : active_h,
+        'hazard_label'   : hazard_label,
+        'signal'         : signal,
+        'pictograms'     : picts,
+        'color'          : color,
+        'select_option'  : f'{range_label}   [{hazard_label}]',
+        'is_pure'        : False,
+        'split_points'   : [],
+        'needs_refinement': False,
+    }
+
+
+def _pure_option(hazard_classes: list[str], lang: str) -> dict:
+    """Saf madde (%100) seçeneği."""
+    raw_classes = [hc for hc in hazard_classes if hc]
+    raw_signal  = _dominant_signal(raw_classes)
+    raw_picts   = _pictograms(raw_classes)
+    pure_label  = ' + '.join(_label(hc, lang) for hc in raw_classes[:3])
+    if len(raw_classes) > 3:
+        pure_label += f' (+{len(raw_classes)-3})'
+    if not pure_label:
+        pure_label = LABELS['unclassified'].get(lang, 'Sınıflandırılmamış')
+    return {
+        'lower': 100.0, 'upper': 100.0,
+        'range_label': '%100 (Saf Madde)',
+        'mixture_classes': raw_classes, 'h_codes': [],
+        'hazard_label': pure_label,
+        'signal': raw_signal, 'pictograms': raw_picts,
+        'color': SIGNAL_COLORS.get(raw_signal, SIGNAL_COLORS['']),
+        'select_option': f'%100 (Saf Madde)   [{pure_label}]',
+        'is_pure': True, 'split_points': [], 'needs_refinement': False,
+    }
+
+
+def _btn_label(lo: float, hi: float, lang: str, side: str) -> str:
+    """Refinement butonu etiketi: '%10 – %20 aralığındayım' """
+    rng = f'%{_fmt(lo)} – %{_fmt(hi)}'
+    tmpl = {
+        'TR': f'{rng} aralığındayım',
+        'EN': f'I am in the {rng} range',
+        'DE': f'Ich bin im Bereich {rng}',
+    }
+    return tmpl.get(lang, tmpl['TR'])
 
 
 # ---------------------------------------------------------------------------

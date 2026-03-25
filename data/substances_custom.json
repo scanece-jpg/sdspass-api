@@ -1,4 +1,19 @@
 {
+  "68439-46-3": {
+    "name": "Alcohols, C12-14, ethoxylated",
+    "ec_no": "614-482-0",
+    "annex_vi": false,
+    "signal": "Danger",
+    "pictograms": ["GHS05", "GHS07"],
+    "hazards": [
+      {"h_class": "Eye Dam. 1", "h_code": "H318"},
+      {"h_class": "Skin Irrit. 2", "h_code": "H315"},
+      {"h_class": "Aquatic Chronic 3", "h_code": "H412"}
+    ],
+    "m_factors": {},
+    "index_no": "",
+    "atp": "custom"
+  },
   "121-43-7": {
     "name": "trimethyl borate",
     "ec_no": "",

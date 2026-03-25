@@ -366,7 +366,7 @@ select option{background:var(--bg3)}
     </div>
     <div class="tf-field">
       <label>pH <span>0–14</span></label>
-      <input class="tf-input" id="tf_ph" type="number" placeholder="e.g. 7.5" step="0.1" min="0" max="14">
+      <input class="tf-input" id="tf_ph" type="number" placeholder="e.g. 7.5" step="0.1" min="0" max="14" oninput="onPHInput(this)">
     </div>
     <div class="tf-field">
       <label>Flash Point <span>°C</span></label>
@@ -1991,6 +1991,93 @@ function _autoFillPhysProps(pp, comps2){
   if(pp.uel==null&&theo.uel!=null) pp.uel=theo.uel;
   if(pp.vapor_density==null&&theo.vapor_density!=null) pp.vapor_density=theo.vapor_density;
   if(!pp.vapor_pressure&&theo.vapor_pressure!=null) pp.vapor_pressure=String(theo.vapor_pressure)+' hPa';
+  // pH mevzuat değerlendirmesi (REACH Annex II / KKDİK / CLP Tablo 3.2.3)
+  if(pp.ph==null){
+    const _pha=window._lastPHAssessment||assessPH(comps2);
+    const _pht=getPHSdsText(_pha.status,typeof selectedLang!=='undefined'?selectedLang:'TR');
+    if(_pht) pp.ph=_pht;
+  }
+}
+
+// ─── pH Değerlendirme Modülü (REACH Annex II / KKDİK / CLP Tablo 3.2.3) ─────
+const STRONG_ACID_CAS=new Set(['7664-93-9','7647-01-0','7697-37-2','7664-38-2','10043-35-3','75-31-0','124-38-9']);
+const STRONG_BASE_CAS=new Set(['1310-73-2','1310-58-3','1336-21-6','7664-41-5','1313-82-2','7782-50-5']);
+const PH_TEXTS={
+  non_aqueous:{
+    TR:'Geçerli değildir (susuz/organik bazlı karışım)',
+    EN:'Not applicable (non-aqueous/organic mixture)',
+    DE:'Nicht anwendbar (nicht wässriges Gemisch)',
+    PL:'Nie dotyczy (mieszanina niewodna)',
+    RO:'Nu se aplică (amestec ne-apos)',
+    BG:'Неприложимо (неводна смес)',
+    HU:'Nem alkalmazható (nem vizes keverék)',
+  },
+  measurement_required:{
+    TR:'Mevcut değil — ölçüm gereklidir (EN ISO 10523)',
+    EN:'Not available — measurement required (EN ISO 10523)',
+    DE:'Nicht verfügbar — Messung erforderlich (EN ISO 10523)',
+    PL:'Niedostępne — wymagany pomiar (EN ISO 10523)',
+    RO:'Nedisponibil — măsurare necesară (EN ISO 10523)',
+    BG:'Не е налично — изисква се измерване (EN ISO 10523)',
+    HU:'Nem elérhető — mérés szükséges (EN ISO 10523)',
+  },
+  acid_extreme:{
+    TR:'Düşük pH beklenmektedir (pH < 2) — H314 korozif sınıflandırma uygulanır (CLP Tablo 3.2.3)',
+    EN:'Low pH expected (pH < 2) — H314 corrosive classification applies (CLP Table 3.2.3)',
+    DE:'Niedriger pH-Wert erwartet (pH < 2) — H314 ätzend, Kat. 1 (CLP Tabelle 3.2.3)',
+    PL:'Oczekiwane niskie pH (pH < 2) — H314 żrący, kat. 1 (CLP tabela 3.2.3)',
+    RO:'pH scăzut așteptat (pH < 2) — H314 coroziv, cat. 1 (CLP tabel 3.2.3)',
+    BG:'Очаква се ниско рН (pH < 2) — H314 корозивен кат. 1 (CLP таблица 3.2.3)',
+    HU:'Alacsony pH várható (pH < 2) — H314 maró kat. 1 (CLP 3.2.3 táblázat)',
+  },
+  base_extreme:{
+    TR:'Yüksek pH beklenmektedir (pH > 11,5) — H314 korozif sınıflandırma uygulanır (CLP Tablo 3.2.3)',
+    EN:'High pH expected (pH > 11.5) — H314 corrosive classification applies (CLP Table 3.2.3)',
+    DE:'Hoher pH-Wert erwartet (pH > 11.5) — H314 ätzend, Kat. 1 (CLP Tabelle 3.2.3)',
+    PL:'Oczekiwane wysokie pH (pH > 11,5) — H314 żrący, kat. 1 (CLP tabela 3.2.3)',
+    RO:'pH ridicat așteptat (pH > 11.5) — H314 coroziv, cat. 1 (CLP tabel 3.2.3)',
+    BG:'Очаква се високо рН (pH > 11.5) — H314 корозивен кат. 1 (CLP таблица 3.2.3)',
+    HU:'Magas pH várható (pH > 11.5) — H314 maró kat. 1 (CLP 3.2.3 táblázat)',
+  },
+};
+function assessPH(comps){
+  let waterPct=0,hasAcid=false,hasBase=false;
+  for(const c of comps){
+    const cas=(c.cas||'').trim();
+    const conc=parseFloat(c.concMax||c.conc)||0;
+    if(cas==='7732-18-5') waterPct+=conc;
+    if(STRONG_ACID_CAS.has(cas)&&conc>0) hasAcid=true;
+    if(STRONG_BASE_CAS.has(cas)&&conc>0) hasBase=true;
+  }
+  if(waterPct<10) return {status:'non_aqueous',waterPct,hasAcid,hasBase};
+  if(hasAcid)     return {status:'acid_extreme',waterPct};
+  if(hasBase)     return {status:'base_extreme',waterPct};
+  return {status:'measurement_required',waterPct};
+}
+function getPHSdsText(status,lang){
+  const L=lang||(typeof selectedLang!=='undefined'?selectedLang:'TR');
+  const entry=PH_TEXTS[status];
+  if(!entry) return null;
+  return entry[L]||entry['EN']||null;
+}
+// pH form alanı — CLP Tablo 3.2.3 uyarısı
+function onPHInput(el){
+  let warn=document.getElementById('ph-extreme-warn');
+  const v=parseFloat(el.value);
+  if(!isNaN(v)&&(v<=2||v>=11.5)){
+    if(!warn){
+      warn=document.createElement('div');
+      warn.id='ph-extreme-warn';
+      warn.style.cssText='background:rgba(252,129,74,.13);border:1px solid rgba(252,129,74,.45);border-radius:6px;padding:7px 10px;margin-top:4px;font-size:10px;color:#fc8a4a;line-height:1.65';
+      el.parentNode.insertAdjacentElement('afterend',warn);
+    }
+    warn.innerHTML='⚠ <b>pH '+v.toFixed(1)+'</b> — CLP Annex I Tablo 3.2.3:<br>'
+      +(v<=2?'pH ≤ 2':'pH ≥ 11,5')+' → Karışım <b>Cilt Korozyon Kat. 1 / H314</b> (Tehlike) sınıfını karşılar.<br>'
+      +'⚡ <i>Hesapla</i> butonuna basıldığında H314 sınıflandırmaya otomatik eklenir.';
+    warn.style.display='block';
+  } else if(warn){
+    warn.style.display='none';
+  }
 }
 
 // ─── Teorik Hesaplama Modülü ─────────────────────────────────────────────────
@@ -2500,6 +2587,12 @@ function calculate(showExtra){
   });
   // Teorik fiziksel hesaplama — renderResults'tan önce (kutu için global'e yaz)
   const theoPhys=calcPhysProps_theoretical(comps);
+  // pH mevzuat değerlendirmesi — kullanıcı girişi varsa onu kullan
+  const userPHEntered=parseFloat(document.getElementById('tf_ph')?.value);
+  const phAssess=assessPH(comps);
+  window._lastPHAssessment=phAssess;
+  theoPhys.phAssess=phAssess;
+  theoPhys.userPH=isNaN(userPHEntered)?null:userPHEntered;
   window._lastTheoPhys=theoPhys;
   _fillPhysFormFields(theoPhys);
   renderResults(euhRes,physRes,stotRes,ecoRes,pRes,comps,showExtra||false,[...new Set(chipHCodes)]);
@@ -2873,6 +2966,15 @@ function renderResults(r, phys, stot, eco, p, comps, showExtra, extraHCodes=[]){
     if(_tp.vapor_pressure!=null)_rows.push(['Buhar Basıncı',_tp.vapor_pressure+' hPa @ 20°C','Raoult Yasası']);
     if(_tp.lel!=null)           _rows.push(['LEL',_tp.lel+' %v/v','Le Chatelier']);
     if(_tp.uel!=null)           _rows.push(['UEL',_tp.uel+' %v/v','Le Chatelier']);
+    // pH durum satırı
+    if(_tp.phAssess){
+      const _phs=_tp.phAssess.status;
+      const _phColors={non_aqueous:'#90cdf4',measurement_required:'#fbbf24',acid_extreme:'#fc8181',base_extreme:'#fc8181'};
+      const _phLabels={non_aqueous:'Geçerli değil (susuz)',measurement_required:'Ölçüm gereklidir',acid_extreme:'⚠ Güçlü asit — H314!',base_extreme:'⚠ Güçlü baz — H314!'};
+      const _phMeth={non_aqueous:'REACH Annex II',measurement_required:'EN ISO 10523',acid_extreme:'CLP Tablo 3.2.3',base_extreme:'CLP Tablo 3.2.3'};
+      const _phVal=_tp.userPH!=null?('pH = '+_tp.userPH+(_tp.userPH<=2||_tp.userPH>=11.5?' ⚠':'')):(_phLabels[_phs]||_phs);
+      _rows.push(['<span style="color:'+(_phColors[_phs]||'#e2e8f0')+'">pH</span>',_phVal,_phMeth[_phs]||'—']);
+    }
     if(_rows.length){
       h+=`<div style="background:rgba(99,179,237,.07);border:1px solid rgba(99,179,237,.3);border-radius:8px;padding:10px 12px;margin-top:8px">
         <div style="font-size:10px;font-weight:700;color:#63b3ed;margin-bottom:7px;font-family:var(--mono);letter-spacing:.04em">

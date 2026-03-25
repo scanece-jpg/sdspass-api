@@ -35,12 +35,16 @@ def validate_sds(
     def info(code, section, msg):
         issues.append({"level":"info","code":code,"section":section,"msg":msg,"rule":""})
 
-    fp = phys_props.get("flash_point")
-    bp = phys_props.get("boiling_point")
-    vis = phys_props.get("viscosity")
-    ph  = phys_props.get("ph")
-    sol = phys_props.get("solubility","")
-    density = phys_props.get("density")
+    def _f(v):
+        try: return float(v)
+        except: return None
+
+    fp      = _f(phys_props.get("flash_point"))
+    bp      = _f(phys_props.get("boiling_point"))
+    vis     = _f(phys_props.get("viscosity"))
+    ph      = _f(phys_props.get("ph"))
+    sol     = phys_props.get("solubility","")
+    density = _f(phys_props.get("density"))
 
     # ── B Fiziksel Doğrulama ────────────────────────────────────────────
     

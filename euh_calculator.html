@@ -1983,6 +1983,58 @@ function _autoFillPhysProps(pp, comps2){
   if(pp.boiling_point==null){const v=bestFrom(BP_DB);if(v!=null)pp.boiling_point=v;}
   if(!pp.density){const v=bestFrom(DENSITY_DB);if(v!=null)pp.density=v;}
   if(!pp.solubility){const v=bestFrom(SOLUBILITY_DB);if(v)pp.solubility=v;}
+  // Teorik hesaplama sonuçları (daha güvenilir — karışım formülü)
+  const theo=window._lastTheoPhys||{};
+  if(pp.density==null&&theo.density!=null) pp.density=theo.density;
+  if(pp.boiling_point==null&&theo.boiling_point!=null) pp.boiling_point=theo.boiling_point;
+  if(pp.lel==null&&theo.lel!=null) pp.lel=theo.lel;
+  if(pp.uel==null&&theo.uel!=null) pp.uel=theo.uel;
+  if(pp.vapor_density==null&&theo.vapor_density!=null) pp.vapor_density=theo.vapor_density;
+  if(!pp.vapor_pressure&&theo.vapor_pressure!=null) pp.vapor_pressure=String(theo.vapor_pressure)+' hPa';
+}
+
+// ─── Teorik Hesaplama Modülü ─────────────────────────────────────────────────
+const MW_DB={'110-54-3':86.18,'142-82-5':100.20,'110-82-7':84.16,'111-65-9':114.23,'108-88-3':92.14,'1330-20-7':106.16,'71-43-2':78.11,'100-41-4':106.17,'95-47-6':106.16,'95-63-6':120.19,'67-64-1':58.08,'78-93-3':72.11,'108-10-1':100.16,'141-78-6':88.11,'123-86-4':116.16,'64-17-5':46.07,'67-63-0':60.10,'71-36-3':74.12,'78-83-1':74.12,'111-76-2':118.17,'7732-18-5':18.02,'64742-47-8':120.0,'64742-48-9':100.0,'8052-41-3':145.0};
+const LEL_DB={'110-54-3':1.1,'142-82-5':1.05,'110-82-7':1.3,'111-65-9':1.0,'108-88-3':1.1,'1330-20-7':1.0,'71-43-2':1.2,'100-41-4':1.0,'95-47-6':1.0,'67-64-1':2.5,'78-93-3':1.4,'108-10-1':1.2,'141-78-6':2.0,'123-86-4':1.4,'64-17-5':3.1,'67-63-0':2.0,'71-36-3':1.4,'78-83-1':1.7,'111-76-2':1.1,'64742-47-8':1.1,'64742-48-9':1.2,'8052-41-3':0.6};
+const UEL_DB={'110-54-3':7.5,'142-82-5':6.7,'110-82-7':8.4,'111-65-9':6.5,'108-88-3':7.1,'1330-20-7':7.0,'71-43-2':8.0,'100-41-4':7.8,'95-47-6':7.6,'67-64-1':12.8,'78-93-3':11.4,'108-10-1':8.0,'141-78-6':11.5,'123-86-4':7.6,'64-17-5':19.0,'67-63-0':12.7,'71-36-3':11.2,'78-83-1':10.9,'111-76-2':12.7,'64742-47-8':7.0,'64742-48-9':7.7,'8052-41-3':6.5};
+const VP_DB={'110-54-3':160,'142-82-5':48,'110-82-7':103,'111-65-9':14,'108-88-3':29,'1330-20-7':8,'71-43-2':100,'100-41-4':9.5,'95-47-6':9,'67-64-1':240,'78-93-3':96,'108-10-1':21,'141-78-6':97,'123-86-4':12.5,'64-17-5':59,'67-63-0':43,'71-36-3':6,'78-83-1':12,'111-76-2':1,'7732-18-5':23,'64742-47-8':50,'64742-48-9':160,'8052-41-3':1};
+
+function calcPhysProps_theoretical(comps){
+  const rows=comps.map(c=>({cas:(c.cas||'').trim(),w:(parseFloat(c.concMax||c.conc)||0)/100})).filter(r=>r.w>0);
+  if(!rows.length) return {};
+  let densNum=0,densDenom=0,mwDenom=0,totalW=0,lelInv=0,uelInv=0,flamW=0;
+  const vpData=[]; let minBP=null;
+  for(const{cas,w}of rows){
+    const rho=DENSITY_DB[cas],mw=MW_DB[cas],lel=LEL_DB[cas],uel=UEL_DB[cas],vp=VP_DB[cas],bp=BP_DB[cas];
+    if(rho){densNum+=w;densDenom+=w/rho;}
+    if(mw){mwDenom+=w/mw;totalW+=w;}
+    if(mw&&vp) vpData.push({n:w/mw,vp});
+    if(lel&&uel){lelInv+=w/lel;uelInv+=w/uel;flamW+=w;}
+    if(bp!=null&&w*100>=1&&(minBP===null||bp<minBP)) minBP=bp;
+  }
+  const res={coverage:Math.round(totalW*100)};
+  if(densDenom>0) res.density=parseFloat((densNum/densDenom).toFixed(3));
+  if(mwDenom>0&&totalW>0){
+    const mwMix=totalW/mwDenom;
+    res.vapor_density=parseFloat((mwMix/29).toFixed(2));
+    if(vpData.length){
+      const totN=vpData.reduce((s,e)=>s+e.n,0);
+      res.vapor_pressure=parseFloat(vpData.reduce((s,e)=>s+(e.n/totN)*e.vp,0).toFixed(1));
+    }
+  }
+  if(lelInv>0){res.lel=parseFloat((flamW/lelInv).toFixed(1));res.uel=parseFloat((flamW/uelInv).toFixed(1));}
+  if(minBP!==null) res.boiling_point=minBP;
+  return res;
+}
+
+function _fillPhysFormFields(tp){
+  const map={density:'tf_density',boiling_point:'tf_bp',lel:'tf_lel',uel:'tf_uel',vapor_density:'tf_vd',vapor_pressure:'tf_vp'};
+  for(const[key,id]of Object.entries(map)){
+    const el=document.getElementById(id);
+    if(!el||el.value.trim()) continue;
+    const v=tp[key];
+    if(v!=null) el.value=v;
+  }
 }
 const ASP_CAS=new Set(['110-54-3','110-82-7','142-82-5','111-65-9','108-88-3','71-43-2','1330-20-7','95-47-6','100-41-4','95-63-6','64742-47-8','64742-48-9','64742-82-1','64741-41-9','64741-42-0','64741-44-2','64741-45-3','64741-47-5','64741-48-6','8052-41-3','64742-54-7']);
 const OX_LIQ_S=new Set(['7722-84-1','7601-90-3']);
@@ -2446,6 +2498,10 @@ function calculate(showExtra){
     if(_seenCP.has(c)) return false;
     _seenCP.add(c); return true;
   });
+  // Teorik fiziksel hesaplama — renderResults'tan önce (kutu için global'e yaz)
+  const theoPhys=calcPhysProps_theoretical(comps);
+  window._lastTheoPhys=theoPhys;
+  _fillPhysFormFields(theoPhys);
   renderResults(euhRes,physRes,stotRes,ecoRes,pRes,comps,showExtra||false,[...new Set(chipHCodes)]);
 }
 function renderResults(r, phys, stot, eco, p, comps, showExtra, extraHCodes=[]){
@@ -2806,6 +2862,36 @@ function renderResults(r, phys, stot, eco, p, comps, showExtra, extraHCodes=[]){
       <div class="mchips">${(r.manual||[]).map(m=>`<span class="mc">${m}</span>`).join('')}</div>
       <div class="mnote">EUH018 · EUH019 · EUH044 · EUH401 — SDS Author assessment required</div>
     </div>`;
+
+  // ── Teorik Fiziksel Özellikler Kutusu ────────────────────────────────────
+  const _tp=window._lastTheoPhys||{};
+  if(_tp.coverage>0){
+    const _rows=[];
+    if(_tp.density!=null)       _rows.push(['Yoğunluk',_tp.density+' g/cm³','ρ<sub>mix</sub> = Σwᵢ/Σ(wᵢ/ρᵢ)']);
+    if(_tp.boiling_point!=null) _rows.push(['Kaynama Noktası (başlangıç)',_tp.boiling_point+' °C','En düşük KN bileşeni']);
+    if(_tp.vapor_density!=null) _rows.push(['Buhar Yoğunluğu (hava=1)',_tp.vapor_density,'MW<sub>mix</sub> / 29']);
+    if(_tp.vapor_pressure!=null)_rows.push(['Buhar Basıncı',_tp.vapor_pressure+' hPa @ 20°C','Raoult Yasası']);
+    if(_tp.lel!=null)           _rows.push(['LEL',_tp.lel+' %v/v','Le Chatelier']);
+    if(_tp.uel!=null)           _rows.push(['UEL',_tp.uel+' %v/v','Le Chatelier']);
+    if(_rows.length){
+      h+=`<div style="background:rgba(99,179,237,.07);border:1px solid rgba(99,179,237,.3);border-radius:8px;padding:10px 12px;margin-top:8px">
+        <div style="font-size:10px;font-weight:700;color:#63b3ed;margin-bottom:7px;font-family:var(--mono);letter-spacing:.04em">
+          🧮 TEORİK FİZİKSEL ÖZELLİKLER
+          <span style="font-weight:400;opacity:.65;margin-left:6px">DB kapsama: %${_tp.coverage}</span>
+        </div>
+        ${_rows.map(([lbl,val,meth])=>`
+          <div style="display:flex;justify-content:space-between;align-items:baseline;padding:3px 0;border-bottom:1px solid rgba(255,255,255,.04)">
+            <span style="font-size:10px;color:var(--text2);flex:1">${lbl}</span>
+            <span style="font-family:var(--mono);font-size:11px;font-weight:700;color:#e2e8f0;margin:0 12px">${val}</span>
+            <span style="font-size:9px;color:var(--text3);white-space:nowrap">${meth}</span>
+          </div>`).join('')}
+        <div style="font-size:9px;color:var(--text3);margin-top:6px;line-height:1.5">
+          ⚠ Teorik tahmin — test verileri mevcutsa lütfen kullanın.<br>
+          Boş form alanları bu değerlerle otomatik doldurulur (PDF Bölüm 9).
+        </div>
+      </div>`;
+    }
+  }
 
   el.innerHTML=h;
 

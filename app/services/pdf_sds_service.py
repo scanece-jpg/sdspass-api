@@ -1062,12 +1062,39 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     # ─────────────────────────────────────────────────────────────────────────
     story += section_block(section_title(lang, 10), styles)
 
-    # ── 10.4 Kaçınılması gereken koşullar — H kodlarından dinamik ──────────────
+    # ── Bileşen CAS setleri (Bölüm 10 dinamik mantığı için) ──────────────────
+    comp_cas_set = {
+        comp.get('cas_no', comp.get('cas',''))
+        for comp in components
+    }
+    # Alkol CAS'ları
+    ALCOHOL_CAS = {'64-17-5','67-63-0','71-36-3','71-23-8','78-83-1','67-56-1',
+                   '71-41-0','75-65-0','100-51-6'}
+    # Klorlu bileşik CAS'ları
+    CHLORINATED_CAS = {'75-09-2','67-66-3','71-55-6','79-01-6','127-18-4',
+                       '7647-01-0','75-00-3','79-00-5','106-93-4'}
+    has_alcohol     = bool(comp_cas_set & ALCOHOL_CAS)
+    has_chlorinated = bool(comp_cas_set & CHLORINATED_CAS)
+    is_flammable    = any(h in h_codes for h in ['H224','H225','H226','H228'])
+    is_acid         = any(h in h_codes for h in ['H290','H314']) and any(
+                        comp.get('cas_no', comp.get('cas','')) in
+                        {'7664-93-9','7647-01-0','7697-37-2','7664-38-2','64-19-7'}
+                        for comp in components)
+    is_base         = 'H314' in h_codes and any(
+                        comp.get('cas_no', comp.get('cas','')) in
+                        {'1310-73-2','1310-58-3','1336-21-6','7664-41-7'}
+                        for comp in components)
+
+    # ── 10.4 Kaçınılması gereken koşullar — dinamik ──────────────────────────
     avoid_parts = []
-    if any(h in h_codes for h in ['H224','H225','H226','H228']):
+    if is_flammable:
         avoid_parts.append(
             'Açık alev, ısı kaynakları, kıvılcım ve statik elektrik' if lang=='TR'
             else 'Open flames, heat sources, sparks and static electricity'
+        )
+        avoid_parts.append(
+            'Yüksek sıcaklıklar ve doğrudan güneş ışığı' if lang=='TR'
+            else 'High temperatures and direct sunlight'
         )
     if any(h in h_codes for h in ['H270','H271','H272']):
         avoid_parts.append('Yanıcı maddeler' if lang=='TR' else 'Combustible materials')
@@ -1080,16 +1107,15 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     avoid_str = '; '.join(avoid_parts) + '.'
 
     # ── 10.5 Bağdaşmayan maddeler — bileşenlerden dinamik ───────────────────
-    incompat_parts = []
-    # Her tehlikeli bileşen için uyumsuzluk kontrolü
     comp_incompat = {
-        # CAS → [uyumsuz gruplar]
-        '1330-20-7': ['güçlü oksitleyiciler', 'kuvvetli asitler'],   # Ksilol
-        '64-17-5':   ['güçlü oksitleyiciler', 'kuvvetli asitler', 'alkali metaller'],  # Etanol
-        '67-56-1':   ['güçlü oksitleyiciler', 'klorin bileşikleri'],  # Metanol
-        '67-64-1':   ['güçlü oksitleyiciler', 'kloroform'],           # Aseton
-        '1310-73-2': ['asitler', 'su (ekzotermik)'],                   # NaOH
-        '7647-01-0': ['bazlar', 'oksitleyiciler'],                     # HCl
+        '1330-20-7': ['güçlü oksitleyiciler', 'kuvvetli asitler'],
+        '64-17-5':   ['güçlü oksitleyiciler', 'kuvvetli asitler', 'alkali metaller'],
+        '67-56-1':   ['güçlü oksitleyiciler', 'klorin bileşikleri'],
+        '67-64-1':   ['güçlü oksitleyiciler', 'kloroform'],
+        '1310-73-2': ['asitler', 'su (ekzotermik)'],
+        '7647-01-0': ['bazlar', 'oksitleyiciler'],
+        '71-43-2':   ['güçlü oksitleyiciler', 'kuvvetli asitler'],
+        '108-88-3':  ['güçlü oksitleyiciler', 'kuvvetli asitler'],
     }
     incompat_set = set()
     for comp in components:
@@ -1098,39 +1124,56 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             for item in comp_incompat[cas]:
                 incompat_set.add(item)
 
-    # H kodlarından ek uyumsuzluklar
-    if any(h in h_codes for h in ['H224','H225','H226']):
+    if is_flammable:
         incompat_set.add('güçlü oksitleyiciler' if lang=='TR' else 'strong oxidising agents')
-    if 'H314' in h_codes:
+    if has_alcohol:
+        incompat_set.add('alkali metaller' if lang=='TR' else 'alkali metals')
+        incompat_set.add('alüminyum (yüksek sıcaklıkta)' if lang=='TR'
+                         else 'aluminium (at elevated temperatures)')
+    if is_acid:
+        incompat_set.add('bazlar ve aktif metaller' if lang=='TR' else 'bases and reactive metals')
+    if is_base:
+        incompat_set.add('asitler' if lang=='TR' else 'acids')
+    if 'H314' in h_codes and not is_acid and not is_base:
         incompat_set.add('asitler ve bazlar' if lang=='TR' else 'acids and bases')
     if not incompat_set:
         incompat_set.add('güçlü oksitleyiciler, kuvvetli asitler ve bazlar' if lang=='TR'
                          else 'strong oxidising agents, strong acids and bases')
 
-    # Türkçe / İngilizce çeviri
     if lang != 'TR':
         tr_en = {
             'güçlü oksitleyiciler': 'strong oxidising agents',
             'kuvvetli asitler': 'strong acids',
             'alkali metaller': 'alkali metals',
+            'alüminyum (yüksek sıcaklıkta)': 'aluminium (at elevated temperatures)',
             'klorin bileşikleri': 'chlorine compounds',
             'kloroform': 'chloroform',
             'asitler, su (ekzotermik)': 'acids, water (exothermic)',
             'bazlar, oksitleyiciler': 'bases, oxidising agents',
             'asitler ve bazlar': 'acids and bases',
+            'bazlar ve aktif metaller': 'bases and reactive metals',
+            'asitler': 'acids',
         }
-        incompat_set = {tr_en.get(i,i) for i in incompat_set}
+        incompat_set = {tr_en.get(i, i) for i in incompat_set}
 
     incompat_str = (', '.join(sorted(incompat_set)) + '.').capitalize()
 
-    # ── 10.6 Bozunma ürünleri — H kodlarından dinamik ───────────────────────
+    # ── 10.6 Bozunma ürünleri — sadece gerçek bileşenlere göre ──────────────
     decomp_parts = []
-    if any(h in h_codes for h in ['H224','H225','H226','H228']):
-        decomp_parts.append('CO₂, CO' if lang=='TR'
-                            else 'CO₂, CO (carbon oxides)')
-    if 'H314' in h_codes:
-        decomp_parts.append('HCl, Cl₂ (asit içeriyorsa)' if lang=='TR'
-                            else 'HCl, Cl₂ (if chlorinated)')
+    if is_flammable or any(h in h_codes for h in ['H228','H242']):
+        decomp_parts.append(
+            'Karbon oksitler (CO, CO\u2082)' if lang=='TR'
+            else 'Carbon oxides (CO, CO\u2082)'
+        )
+    if has_chlorinated:
+        decomp_parts.append(
+            'Klorür bileşikleri (HCl, Cl\u2082)' if lang=='TR'
+            else 'Chloride compounds (HCl, Cl\u2082)'
+        )
+    if is_base or any(h in h_codes for h in ['H314']) and any(
+            comp.get('cas_no', comp.get('cas','')) in {'1336-21-6','7664-41-7'}
+            for comp in components):
+        decomp_parts.append('NH\u2083' if lang=='TR' else 'NH\u2083 (ammonia)')
     if 'H400' in h_codes or 'H411' in h_codes:
         decomp_parts.append(
             'Sucul ortama zararlı organik fragmentler' if lang=='TR'

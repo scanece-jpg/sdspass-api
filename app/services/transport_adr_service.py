@@ -21,7 +21,7 @@ def _load():
     if _ADR_DATA is None:
         p = Path(__file__).parent.parent.parent / 'data' / 'adr_data.json'
         if p.exists():
-            with open(p) as f:
+            with open(p, encoding='utf-8') as f:
                 _ADR_DATA = json.load(f)
         else:
             _ADR_DATA = {}

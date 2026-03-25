@@ -162,8 +162,9 @@ async def generate_pdf(data: dict = Body(...)):
 
     except Exception as e:
         import traceback
+        tb = traceback.format_exc()
         traceback.print_exc()
-        raise HTTPException(status_code=500, detail=str(e))
+        raise HTTPException(status_code=500, detail=str(e) + '\n\nTRACEBACK:\n' + tb)
 
 
 @app.post("/api/v1/sds/debug")

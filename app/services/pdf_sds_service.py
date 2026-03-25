@@ -1157,11 +1157,6 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     story += sub_block(f"11.1 {sub_title(lang,'11.1')}", styles)
 
     tox_rows = [[S(lang,'route_label'), term(lang,'information')]]
-    # CLP sınıflandırmasından gelen bilgiler
-    for entry in clp.get('passed', []):
-        hc = entry.get('h_class','')
-        if any(x in hc for x in ['Acute Tox','STOT','Asp.']):
-            tox_rows.append([hc, entry.get('reason','')])
 
     # Test verilerinden LD50/LC50
     phys_tox = sds_data.get('phys_props', {})
@@ -1172,7 +1167,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     if phys_tox.get('lc50_inhal'):
         tox_rows.append([f"LC50 Inhalation ({term(lang,'rat')}, 4h)", f"{phys_tox['lc50_inhal']} mg/L"])
 
-    # Maruziyet yolları — H kodlarından
+    # Maruziyet yolları — yalnızca sağlık tehlikesi H kodları (CLP Bölüm 3-5)
+    # H224/H225/H226 fiziksel tehlikedir, Section 11'e dahil edilmez
     if lang == 'TR':
         exposure_map = {
             'H300':'Akut oral toksisite','H301':'Akut oral toksisite','H302':'Akut oral toksisite',
@@ -1181,15 +1177,16 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             'H314':'Cilt/mukoza aşındırıcısı','H315':'Cilt tahrişi',
             'H317':'Cilt duyarlılaştırması','H318':'Ciddi göz hasarı','H319':'Göz tahrişi',
             'H334':'Solunum duyarlılaştırması',
-            'H370':'STOT-TE','H371':'STOT-TE','H372':'STOT-TM','H373':'STOT-TM',
+            'H335':'Solunum yolu tahrişi — Merkezi sinir sistemi',
+            'H336':'Narkotik etki — Merkezi sinir sistemi (baş dönmesi, uyuşukluk)',
+            'H340':'Genetik hasar (in vivo)',
+            'H341':'Genetik hasar (şüpheli)',
+            'H350':'Kanserojen (kategori 1)','H351':'Kanserojen (kategori 2)',
+            'H360':'Üreme toksisitesi (kategori 1)','H361':'Üreme toksisitesi (kategori 2)',
+            'H362':'Emzirilen çocuklara zarar',
+            'H370':'STOT-TE (tek maruziyet)','H371':'STOT-TE (tek maruziyet)',
+            'H372':'STOT-TM (tekrarlanan maruziyet)','H373':'STOT-TM (tekrarlanan maruziyet)',
             'H304':'Aspirasyon tehlikesi',
-            'H224':'Alevlenir sıvı — narkotik etki (yüksek konsantrasyonda)',
-            'H225':'Alevlenir sıvı — narkotik etki (yüksek konsantrasyonda)',
-            'H226':'Alevlenir sıvı — yüksek konsantrasyonda solunum yolu tahrişi ve narkotik etki',
-            'H335':'Solunum yolu tahrişi','H336':'Narkotik etki (baş dönmesi, uyuşukluk)',
-            'H400':'Akut sucul toksisite','H410':'Kronik sucul toksisite',
-            'H411':'Kronik sucul toksisite — uzun süreli çevresel etki',
-            'H412':'Kronik sucul toksisite','H413':'Kronik sucul toksisite',
         }
     else:
         exposure_map = {
@@ -1199,7 +1196,14 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             'H314':'Corrosive to skin/mucous membranes','H315':'Skin irritation',
             'H317':'Skin sensitisation','H318':'Serious eye damage','H319':'Eye irritation',
             'H334':'Respiratory sensitisation',
-            'H370':'STOT-SE','H371':'STOT-SE','H372':'STOT-RE','H373':'STOT-RE',
+            'H335':'Respiratory tract irritation — CNS',
+            'H336':'Narcotic effects — CNS (dizziness, drowsiness)',
+            'H340':'Germ cell mutagenicity (cat.1)','H341':'Germ cell mutagenicity (cat.2)',
+            'H350':'Carcinogenicity (cat.1)','H351':'Carcinogenicity (cat.2)',
+            'H360':'Reproductive toxicity (cat.1)','H361':'Reproductive toxicity (cat.2)',
+            'H362':'Effects on/via lactation',
+            'H370':'STOT-SE (single exposure)','H371':'STOT-SE (single exposure)',
+            'H372':'STOT-RE (repeated exposure)','H373':'STOT-RE (repeated exposure)',
             'H304':'Aspiration hazard',
         }
     added_routes = set()

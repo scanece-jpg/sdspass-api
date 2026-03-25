@@ -1499,5 +1499,29 @@
       }
     ],
     "m_factors": {}
+  },
+  "50-21-5": {
+    "name": "2-hydroxypropanoic acid",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "Danger",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Skin Corr. 1",
+        "h_code": "H314"
+      },
+      {
+        "h_class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "h_class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "index_no": "",
+    "atp": "PubChem/35 notif"
   }
 }

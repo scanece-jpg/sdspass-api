@@ -232,10 +232,44 @@ async def substance_search(q: str, limit: int = 20):
 @app.get("/api/v1/sds/substance/stats")
 async def substance_stats():
     """Veritabanı istatistikleri."""
-    from app.services.substance_lookup import get_substance_count, get_oel_count
+    from app.services.substance_lookup import get_substance_count, get_oel_count, get_custom_count
     return {
         "substances": get_substance_count(),
         "oel_entries": get_oel_count(),
+        "custom_substances": get_custom_count(),
+    }
+
+
+@app.post("/api/v1/sds/substance/save-custom")
+async def save_custom_substance_endpoint(body: dict):
+    """
+    Annex VI dışı maddeyi custom listeye kaydet.
+    Body: { "cas": "7732-18-5", "name": "water", "ec_no": "231-791-2",
+            "signal": "", "pictograms": [], "hazards": [], "m_factors": {} }
+    """
+    from app.services.substance_lookup import save_custom_substance, is_annex_vi
+    cas = (body.get("cas") or "").strip()
+    if not cas:
+        from fastapi import HTTPException
+        raise HTTPException(status_code=400, detail="CAS numarası gerekli")
+    if is_annex_vi(cas):
+        return {"status": "skipped", "reason": "Bu madde zaten Annex VI listesinde", "cas": cas}
+    entry = {
+        "name":       body.get("name", ""),
+        "ec_no":      body.get("ec_no", ""),
+        "annex_vi":   False,
+        "signal":     body.get("signal", ""),
+        "pictograms": body.get("pictograms", []),
+        "hazards":    body.get("hazards", []),
+        "m_factors":  body.get("m_factors", {}),
+        "index_no":   body.get("index_no", ""),
+        "atp":        "custom",
+    }
+    is_new = save_custom_substance(cas, entry)
+    return {
+        "status": "created" if is_new else "updated",
+        "cas": cas,
+        "name": entry["name"],
     }
 
 

@@ -1,0 +1,1503 @@
+{
+  "121-43-7": {
+    "name": "trimethyl borate",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS08",
+      "GHS07"
+    ],
+    "hazards": [
+      {
+        "h_class": "Flam. Liq. 3",
+        "h_code": "H226"
+      },
+      {
+        "h_class": "Repr. 1B",
+        "h_code": "H360FD"
+      },
+      {
+        "h_class": "Acute Tox. 4 *",
+        "h_code": "H312"
+      }
+    ],
+    "m_factors": {}
+  },
+  "10024-97-2": {
+    "name": "dinitrogen oxide",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "hazards": [
+      {
+        "h_class": "Repr. 1B",
+        "h_code": "H360Df"
+      },
+      {
+        "h_class": "STOT SE 3",
+        "h_code": "H336"
+      },
+      {
+        "h_class": "STOT RE 1",
+        "h_code": "H372 (nervous system)"
+      },
+      {
+        "h_class": "Ozone 1",
+        "h_code": "H420"
+      }
+    ],
+    "m_factors": {}
+  },
+  "10028-15-6": {
+    "name": "ozone",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "Danger",
+    "pictograms": [
+      "GHS03",
+      "GHS08",
+      "GHS06",
+      "GHS09"
+    ],
+    "hazards": [
+      {
+        "h_class": "Ox. Gas 1",
+        "h_code": "H270"
+      },
+      {
+        "h_class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "h_class": "Muta. 2",
+        "h_code": "H341"
+      },
+      {
+        "h_class": "Acute Tox. 1",
+        "h_code": "H330"
+      },
+      {
+        "h_class": "STOT SE 1",
+        "h_code": "H370 (nervous system, respiratory system, cardiovascular system)"
+      },
+      {
+        "h_class": "STOT RE 1",
+        "h_code": "H372 (nervous system, respiratory system)"
+      },
+      {
+        "h_class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "h_class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 100,
+      "chronic": 1
+    }
+  },
+  "1314-85-8": {
+    "name": "tetraphosphorus trisulphide; phosphorus sesquisulphid",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS07"
+    ],
+    "hazards": [
+      {
+        "h_class": "Flam. Sol. 1",
+        "h_code": "H228"
+      },
+      {
+        "h_class": "Self-heat. 1",
+        "h_code": "H251"
+      },
+      {
+        "h_class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {}
+  },
+  "512-56-1": {
+    "name": "trimethyl phosphate",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "hazards": [
+      {
+        "h_class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "h_class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "h_class": "Repr. 1B",
+        "h_code": "H360FD"
+      },
+      {
+        "h_class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "h_class": "STOT RE 2",
+        "h_code": "H373 (nervous system)"
+      }
+    ],
+    "m_factors": {}
+  },
+  "75-08-1": {
+    "name": "ethanethiol; ethyl mercaptan",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS06",
+      "GHS09"
+    ],
+    "hazards": [
+      {
+        "h_class": "Flam. Liq. 1",
+        "h_code": "H224"
+      },
+      {
+        "h_class": "Acute Tox. 3",
+        "h_code": "H331"
+      },
+      {
+        "h_class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "h_class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "h_class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {}
+  },
+  "7440-50-8": {
+    "name": "copper [specific surface area > 0,67 mm2/mg]",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "Warning",
+    "pictograms": [
+      "GHS09"
+    ],
+    "hazards": [
+      {
+        "h_class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "h_class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 10,
+      "chronic": 1
+    }
+  },
+  "7440-22-4": {
+    "name": "silver nano: [particle diameter > 1 nm â‰¤ 100 nm]",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS09"
+    ],
+    "hazards": [
+      {
+        "h_class": "Repr. 2",
+        "h_code": "H361f"
+      },
+      {
+        "h_class": "STOT RE 2",
+        "h_code": "H373 (nervous system)"
+      },
+      {
+        "h_class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "h_class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 1000,
+      "chronic": 1000
+    }
+  },
+  "10294-40-3": {
+    "name": "barium chromate",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "hazards": [
+      {
+        "h_class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {}
+  },
+  "75-35-4": {
+    "name": "1,1-dichloroethylene; vinylidene chloride",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS08",
+      "GHS06"
+    ],
+    "hazards": [
+      {
+        "h_class": "Flam. Liq. 1",
+        "h_code": "H224"
+      },
+      {
+        "h_class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "h_class": "Muta. 2",
+        "h_code": "H341"
+      },
+      {
+        "h_class": "Acute Tox. 1",
+        "h_code": "H330"
+      },
+      {
+        "h_class": "Acute Tox. 3",
+        "h_code": "H301"
+      },
+      {
+        "h_class": "STOT RE 1",
+        "h_code": "H372 (respiratory tract, kidney, liver)"
+      },
+      {
+        "h_class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {}
+  },
+  "75-02-5": {
+    "name": "fluoroethylene",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "hazards": [
+      {
+        "h_class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "h_class": "Muta. 2",
+        "h_code": "H341"
+      }
+    ],
+    "m_factors": {}
+  },
+  "1514-82-5": {
+    "name": "2-bromo-3,3,3-trifluoroprop-1-ene",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "hazards": [
+      {
+        "h_class": "Repr. 1B",
+        "h_code": "H360FD"
+      },
+      {
+        "h_class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "h_class": "STOT SE 3",
+        "h_code": "H336"
+      }
+    ],
+    "m_factors": {}
+  },
+  "4016-14-2": {
+    "name": "2,3-epoxypropyl isopropyl ether",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "hazards": [
+      {
+        "h_class": "Repr. 1B",
+        "h_code": "H360F"
+      }
+    ],
+    "m_factors": {}
+  },
+  "94-91-7": {
+    "name": "Î±,Î±-propylenedinitrilodi-o-cresol",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "hazards": [
+      {
+        "h_class": "Repr. 1B",
+        "h_code": "H360FD"
+      }
+    ],
+    "m_factors": {}
+  },
+  "119344-86-4": {
+    "name": "2-(dimethylamino)-2-[(4-methylphenyl)methyl]-1-[4-(morpholin-4-yl)phenyl]butan-1-one",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS09"
+    ],
+    "hazards": [
+      {
+        "h_class": "Repr. 1B",
+        "h_code": "H360Df"
+      },
+      {
+        "h_class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "h_class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 1,
+      "chronic": 1
+    }
+  },
+  "85114-00-7": {
+    "name": "2-ethylhexanoic acid, monoester with propane-1,2-diol",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "hazards": [
+      {
+        "h_class": "Repr. 1B",
+        "h_code": "H360D"
+      }
+    ],
+    "m_factors": {}
+  },
+  "5160-02-1": {
+    "name": "barium bis[2-chloro-5-[(2-hydroxy-1-naphthyl)azo]toluene-4-sulphonate]; C.I. Pigment Red 53:1",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08"
+    ],
+    "hazards": [
+      {
+        "h_class": "Carc. 2",
+        "h_code": "H351"
+      }
+    ],
+    "m_factors": {}
+  },
+  "68609-93-8": {
+    "name": "9-octadecenoic acid (Z)-, sulfonated, potassium salts [1]\nReaction products of fatty acids, C18 (unsaturated) alkyl with sulfur trioxide, potassium salts [2]\n9(or 10)-sulphooctadecanoic acid, potassium salt [3]",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "hazards": [
+      {
+        "h_class": "Repr. 1B",
+        "h_code": "H360D"
+      }
+    ],
+    "m_factors": {}
+  },
+  "67968-63-2": {
+    "name": "9-octadecenoic acid (Z)-, sulfonated, potassium salts [1]\nReaction products of fatty acids, C18 (unsaturated) alkyl with sulfur trioxide, potassium salts [2]\n9(or 10)-sulphooctadecanoic acid, potassium salt [3]",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "hazards": [
+      {
+        "h_class": "Repr. 1B",
+        "h_code": "H360D"
+      }
+    ],
+    "m_factors": {}
+  },
+  "89-61-2": {
+    "name": "1,4-dichloro-2-nitrobenzene",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "hazards": [
+      {
+        "h_class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {}
+  },
+  "165252-70-0": {
+    "name": "dinotefuran (ISO); (RS)-1-methyl-2-nitro-3-(tetrahydro-3-furylmethyl)guanidine",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "hazards": [
+      {
+        "h_class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "h_class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "h_class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 10,
+      "chronic": 10
+    }
+  },
+  "95-14-7": {
+    "name": "1H-benzotriazole",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [
+      "GHS09"
+    ],
+    "hazards": [
+      {
+        "h_class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {}
+  },
+  "29385-43-1": {
+    "name": "methyl-1H-benzotriazole",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [
+      "GHS09"
+    ],
+    "hazards": [
+      {
+        "h_class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {}
+  },
+  "81777-95-9": {
+    "name": "bixlozone (ISO); 2-(2,4-dichlorobenzyl)-4,4-dimethyl-1,2-oxazolidin-3-one",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "Warning",
+    "pictograms": [
+      "GHS09"
+    ],
+    "hazards": [
+      {
+        "h_class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "h_class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 1,
+      "chronic": 10
+    }
+  },
+  "189278-12-4": {
+    "name": "proquinazid (ISO); 6-iodo-2-propoxy-3-propylquinazolin-4(3H)-one",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS09"
+    ],
+    "hazards": [
+      {
+        "h_class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "h_class": "STOT RE 1",
+        "h_code": "H372 (thyroid, liver)"
+      },
+      {
+        "h_class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "h_class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 1,
+      "chronic": 10
+    }
+  },
+  "110-26-9": {
+    "name": "N,N'-methylenediacrylamide",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "hazards": [
+      {
+        "h_class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {}
+  },
+  "7732-18-5": {
+    "name": "water; eau; Wasser",
+    "ec_no": "231-791-2",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [],
+    "m_factors": {},
+    "index_no": null,
+    "atp": null
+  },
+  "56-81-5": {
+    "name": "glycerol; glycerin; propane-1,2,3-triol",
+    "ec_no": "200-289-5",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [],
+    "m_factors": {},
+    "index_no": null,
+    "atp": null
+  },
+  "37971-36-1": {
+    "name": "2-phosphono-1,2,4-butanetricarboxylic acid (PBTC)",
+    "ec_no": "253-733-5",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "h_class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "h_class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {}
+  },
+  "2809-21-4": {
+    "name": "1-hydroxyethane-1,1-diphosphonic acid (HEDP/EHDP)",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "h_class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {}
+  },
+  "6419-19-8": {
+    "name": "nitrilotris(methylenephosphonic acid) (ATMP)",
+    "ec_no": "229-146-5",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "h_class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {}
+  },
+  "15827-60-8": {
+    "name": "diethylenetriaminepenta(methylenephosphonic acid) (DTPMPA)",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "h_class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {}
+  },
+  "9003-01-4": {
+    "name": "polyacrylic acid (PAA)",
+    "ec_no": "618-339-6",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "h_class": "Skin Irrit. 2",
+        "h_code": "H315"
+      }
+    ],
+    "m_factors": {}
+  },
+  "527-07-1": {
+    "name": "sodium gluconate",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [],
+    "m_factors": {}
+  },
+  "102-71-6": {
+    "name": "triethanolamine (TEA)",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {}
+  },
+  "7631-95-0": {
+    "name": "sodium molybdate",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Repr. 1B",
+        "h_code": "H360D"
+      },
+      {
+        "h_class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {}
+  },
+  "55566-30-8": {
+    "name": "tetrakis(hydroxymethyl)phosphonium sulfate (THPS)",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "h_class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "h_class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "h_class": "Aquatic Acute 1",
+        "h_code": "H400"
+      }
+    ],
+    "m_factors": {}
+  },
+  "7758-29-4": {
+    "name": "sodium tripolyphosphate (STPP)",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {}
+  },
+  "40623-75-4": {
+    "name": "2-acrylamido-2-methylpropane sulfonic acid (AMPS)",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "h_class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {}
+  },
+  "7414-83-7": {
+    "name": "sodium (1-hydroxyethylidene)bis(phosphonate) monohydrate; HEDP.Na; sodium etidronate",
+    "ec_no": "231-025-7",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "h_class": "Skin Irrit. 2",
+        "h_code": "H315"
+      }
+    ],
+    "m_factors": {}
+  },
+  "25384-17-2": {
+    "name": "disodium (1-hydroxyethylidene)bis(phosphonate); HEDP.Na2; disodium etidronate",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {}
+  },
+  "3794-83-0": {
+    "name": "tetrasodium (1-hydroxyethylidene)bis(phosphonate); HEDP.Na4; tetrasodium etidronate",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {}
+  },
+  "20592-85-2": {
+    "name": "pentasodium nitrilotris(methylenephosphonate); ATMP.Na5; aminotrimethylenephosphonic acid pentasodium salt",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "h_class": "Skin Irrit. 2",
+        "h_code": "H315"
+      }
+    ],
+    "m_factors": {}
+  },
+  "40372-66-5": {
+    "name": "sodium 2-phosphonobutane-1,2,4-tricarboxylate; PBTC.Na; sodium PBTC",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "h_class": "Skin Irrit. 2",
+        "h_code": "H315"
+      }
+    ],
+    "m_factors": {}
+  },
+  "22042-96-2": {
+    "name": "pentasodium diethylenetriaminepenta(methylenephosphonate); DTPMPA.Na5",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {}
+  },
+  "1429-50-1": {
+    "name": "ethylenediamine-N,N,N',N'-tetrakis(methylenephosphonic acid); EDTMPA",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "h_class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {}
+  },
+  "51274-37-4": {
+    "name": "polyepoxysuccinic acid sodium salt (PESA)",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {}
+  },
+  "70715-06-9": {
+    "name": "2-hydroxyphosphonocarboxylic acid (HPCA)",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "h_class": "Skin Irrit. 2",
+        "h_code": "H315"
+      }
+    ],
+    "m_factors": {}
+  },
+  "29329-71-3": {
+    "name": "tetrasodium etidronate; HEDP.4Na; tetrasodium 1-hydroxyethane-1,1-diphosphonate",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {}
+  },
+  "22036-77-7": {
+    "name": "monosodium etidronate; HEDP.Na; sodium 1-hydroxyethane-1,1-diphosphonate",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "h_class": "Skin Irrit. 2",
+        "h_code": "H315"
+      }
+    ],
+    "m_factors": {}
+  },
+  "9000-30-0": {
+    "name": "guar gum; guaran",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [],
+    "m_factors": {}
+  },
+  "25655-41-8": {
+    "name": "polyepoxysuccinic acid (PESA)",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {}
+  },
+  "68604-75-1": {
+    "name": "polyaspartic acid; polyaspartate",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [],
+    "m_factors": {}
+  },
+  "51274-00-1": {
+    "name": "2-hydroxyphosphonocarboxylic acid; HPAA",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "h_class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {}
+  },
+  "4408-78-0": {
+    "name": "1,2,4,5-benzenetetracarboxylic acid; pyromellitic acid; BTCA",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {}
+  },
+  "150-38-9": {
+    "name": "trisodium ethylenediaminetetraacetate; EDTA.3Na",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {}
+  },
+  "139-33-3": {
+    "name": "disodium EDTA; disodium ethylenediaminetetraacetate; EDTA.2Na",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {}
+  },
+  "74-79-3": {
+    "name": "arginine; L-arginine",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [],
+    "m_factors": {}
+  },
+  "57-13-6": {
+    "name": "urea; carbamide",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [],
+    "m_factors": {}
+  },
+  "577-11-7": {
+    "name": "dioctyl sodium sulfosuccinate; DOSS; docusate sodium",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "h_class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {}
+  },
+  "139-96-8": {
+    "name": "sodium laureth sulfate; SLES; sodium lauryl ether sulfate",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "h_class": "Skin Irrit. 2",
+        "h_code": "H315"
+      }
+    ],
+    "m_factors": {}
+  },
+  "1918-02-1": {
+    "name": "picloram; 4-amino-3,5,6-trichloropicolinic acid",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "h_class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {}
+  },
+  "4390-41-4": {
+    "name": "2-Phosphonobutane-1,2,4-tricarboxylic acid (PBTC)",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "Warning",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {}
+  },
+  "26172-55-4": {
+    "name": "5-Chloro-2-methylisothiazolinone (CMIT)",
+    "ec_no": "247-500-7",
+    "annex_vi": false,
+    "signal": "Danger",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Acute Tox. 3",
+        "h_code": "H301"
+      },
+      {
+        "h_class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "h_class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "h_class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "h_class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {}
+  },
+  "109-87-5": {
+    "name": "Dimethoxymethane",
+    "ec_no": "203-714-2",
+    "annex_vi": false,
+    "signal": "Warning",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "h_class": "STOT SE 3",
+        "h_code": "H336"
+      }
+    ],
+    "m_factors": {}
+  },
+  "10043-01-3": {
+    "name": "Aluminum sulfate",
+    "ec_no": "233-135-0",
+    "annex_vi": false,
+    "signal": "Warning",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "h_class": "STOT SE 3",
+        "h_code": "H335"
+      }
+    ],
+    "m_factors": {}
+  },
+  "9016-45-9": {
+    "name": "Nonylphenol ethoxylate (NPE)",
+    "ec_no": "500-315-8",
+    "annex_vi": false,
+    "signal": "Warning",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "h_class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      },
+      {
+        "h_class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {}
+  },
+  "151-21-3": {
+    "name": "Sodium lauryl sulfate (SLS/SDS)",
+    "ec_no": "205-788-1",
+    "annex_vi": false,
+    "signal": "Danger",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "h_class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {}
+  },
+  "9004-82-4": {
+    "name": "Sodium laureth sulfate (SLES)",
+    "ec_no": "500-234-8",
+    "annex_vi": false,
+    "signal": "Warning",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {}
+  },
+  "61789-40-0": {
+    "name": "Coconut fatty acid diethanolamide (CDEA)",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "Warning",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {}
+  },
+  "7558-79-4": {
+    "name": "Disodium hydrogen phosphate",
+    "ec_no": "231-448-7",
+    "annex_vi": false,
+    "signal": "Warning",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {}
+  },
+  "10124-56-8": {
+    "name": "Sodium hexametaphosphate (SHMP)",
+    "ec_no": "233-343-1",
+    "annex_vi": false,
+    "signal": "Warning",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {}
+  },
+  "7772-98-7": {
+    "name": "Sodium thiosulfate",
+    "ec_no": "231-867-5",
+    "annex_vi": false,
+    "signal": "Warning",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {}
+  },
+  "25987-30-8": {
+    "name": "Polyepoxysuccinic acid (PESA)",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "Warning",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {}
+  },
+  "71050-62-9": {
+    "name": "Polyaspartic acid (PASP)",
+    "ec_no": "",
+    "annex_vi": false,
+    "signal": "Warning",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {}
+  },
+  "7783-20-2": {
+    "name": "Ammonium sulfate",
+    "ec_no": "231-984-1",
+    "annex_vi": false,
+    "signal": "Warning",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {}
+  },
+  "7447-40-7": {
+    "name": "Potassium chloride",
+    "ec_no": "231-211-8",
+    "annex_vi": false,
+    "signal": "Warning",
+    "pictograms": [],
+    "hazards": [],
+    "m_factors": {}
+  },
+  "7757-82-6": {
+    "name": "Sodium sulfate",
+    "ec_no": "231-820-9",
+    "annex_vi": false,
+    "signal": "Warning",
+    "pictograms": [],
+    "hazards": [],
+    "m_factors": {}
+  },
+  "10102-06-4": {
+    "name": "Uranyl nitrate",
+    "ec_no": "233-276-9",
+    "annex_vi": false,
+    "signal": "Danger",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Acute Tox. 3",
+        "h_code": "H301"
+      },
+      {
+        "h_class": "Acute Tox. 2",
+        "h_code": "H330"
+      },
+      {
+        "h_class": "Repr. 1B",
+        "h_code": "H360"
+      },
+      {
+        "h_class": "Aquatic Acute 1",
+        "h_code": "H400"
+      }
+    ],
+    "m_factors": {}
+  },
+  "131-11-3": {
+    "name": "DMP (Dimethyl phthalate)",
+    "ec_no": "205-011-6",
+    "annex_vi": false,
+    "signal": "Warning",
+    "pictograms": [],
+    "hazards": [
+      {
+        "h_class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {}
+  }
+}

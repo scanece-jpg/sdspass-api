@@ -816,16 +816,19 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 f"<font size='6'>{ec or '—'}<br/>{reg or '—'}</font>",
                 styles['small']
             )
+            # Her sınıflandırma kendi satırında — uzun metinde kelime kırılmasını önle
+            _clf_str = translate_hclass_list(r.get('hazards',''), lang) or term(lang,'not_classified')
+            _clf_para = Paragraph(_clf_str.replace('; ', '<br/>'), styles['body'])
             tbl_data.append([
                 cas_cell,
                 r['name'],
                 r['concentration'],
-                translate_hclass_list(r.get('hazards',''), lang) or term(lang,'not_classified'),
+                _clf_para,
             ])
 
-        # Toplam 175mm: CAS(38) + Ad(72) + Konst.(18) + Sınıf(47)
+        # Toplam 175mm: CAS(35) + Ad(60) + Konst.(18) + Sınıf(62)
         story.append(data_table(tbl_data,
-            [38*mm, 72*mm, 18*mm, 47*mm], styles))
+            [35*mm, 60*mm, 18*mm, 62*mm], styles))
         # REACH eksik not
         if missing_reach:
             story.append(Paragraph(

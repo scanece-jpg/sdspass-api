@@ -721,6 +721,8 @@ async function confirmSdsPdf(){
   physProps.is_flammable  = document.getElementById('tf_flammable')?.checked||false;
   physProps.is_explosive  = document.getElementById('tf_explosive')?.checked||false;
   physProps.is_oxidising  = document.getElementById('tf_oxidising')?.checked||false;
+  // DB'den eksik fiziksel değerleri otomatik doldur
+  _autoFillPhysProps(physProps, getComps());
 
   // Ürün kullanım açıklaması
   const pDesc=document.getElementById('pusage_desc')?.value||'';
@@ -1018,6 +1020,8 @@ async function downloadSdsPdf(){
     };
     // Null değerleri temizle
     Object.keys(physProps).forEach(k=>{ if(!physProps[k]) delete physProps[k]; });
+    // DB'den eksik fiziksel değerleri otomatik doldur
+    _autoFillPhysProps(physProps, getComps());
 
     const today = new Date();
     const revDate = `${String(today.getDate()).padStart(2,'0')}.${String(today.getMonth()+1).padStart(2,'0')}.${today.getFullYear()}`;
@@ -1960,7 +1964,26 @@ function _loadJSON(id){
 // Physical Hazards Module — Flam.Liq / Asp.Tox / Ox.Liq
 // ============================================================
 const FP_DB={'110-54-3':-22,'110-82-7':-18,'142-82-5':-4,'111-65-9':13,'108-88-3':4,'71-43-2':-11,'1330-20-7':27,'95-47-6':17,'100-41-4':21,'95-63-6':44,'67-64-1':-18,'78-93-3':-9,'108-10-1':14,'67-63-0':12,'71-23-8':23,'71-36-3':29,'78-83-1':28,'64-17-5':13,'111-76-2':62,'112-34-5':78,'64742-47-8':21,'64742-48-9':-20,'64742-82-1':61,'64742-54-7':220,'8052-41-3':38};
-const BP_DB={'110-54-3':69,'110-82-7':81,'67-64-1':56,'71-43-2':80,'78-93-3':80,'67-63-0':82,'64-17-5':78,'71-23-8':97,'64742-48-9':60};
+const BP_DB={'110-54-3':69,'110-82-7':81,'67-64-1':56,'71-43-2':80,'78-93-3':80,'67-63-0':82,'64-17-5':78,'71-23-8':97,'64742-48-9':60,'71-36-3':118,'78-83-1':108,'111-76-2':171,'141-78-6':77,'123-86-4':126};
+const DENSITY_DB={'64-17-5':0.789,'67-64-1':0.791,'108-88-3':0.867,'110-54-3':0.659,'110-82-7':0.684,'71-43-2':0.879,'1330-20-7':0.860,'67-63-0':0.786,'71-36-3':0.810,'78-93-3':0.805,'111-76-2':0.902,'78-83-1':0.802,'64742-47-8':0.780,'8052-41-3':0.780,'141-78-6':0.902,'123-86-4':0.882,'7732-18-5':1.000,'100-41-4':0.867,'108-10-1':0.801,'95-47-6':0.879,'95-63-6':0.900};
+const SOLUBILITY_DB={'64-17-5':'Su ile tamamen karışır','67-64-1':'Su ile tamamen karışır','108-88-3':'Suda çözünmez (≈0.5 g/L)','110-54-3':'Suda çözünmez','110-82-7':'Suda çözünmez','71-43-2':'Suda az çözünür (1.8 g/L)','1330-20-7':'Suda çözünmez','67-63-0':'Su ile tamamen karışır','71-36-3':'Su ile karışır (~78 g/L)','111-76-2':'Su ile tamamen karışır','7732-18-5':'—','141-78-6':'Su ile karışır (8.7 g/L)','123-86-4':'Suda az çözünür (0.7 g/L)','100-41-4':'Suda çözünmez'};
+// Bileşen veritabanından eksik fiziksel özellikleri otomatik doldur
+function _autoFillPhysProps(pp, comps2){
+  function bestFrom(db){
+    let best=null,bestC=0;
+    for(const c of comps2){
+      const v=db[(c.cas||'').trim()];
+      if(v==null) continue;
+      const conc=parseFloat(c.concMax||c.conc)||0;
+      if(conc>bestC){bestC=conc;best=v;}
+    }
+    return best;
+  }
+  if(pp.flash_point==null){const v=bestFrom(FP_DB);if(v!=null)pp.flash_point=v;}
+  if(pp.boiling_point==null){const v=bestFrom(BP_DB);if(v!=null)pp.boiling_point=v;}
+  if(!pp.density){const v=bestFrom(DENSITY_DB);if(v!=null)pp.density=v;}
+  if(!pp.solubility){const v=bestFrom(SOLUBILITY_DB);if(v)pp.solubility=v;}
+}
 const ASP_CAS=new Set(['110-54-3','110-82-7','142-82-5','111-65-9','108-88-3','71-43-2','1330-20-7','95-47-6','100-41-4','95-63-6','64742-47-8','64742-48-9','64742-82-1','64741-41-9','64741-42-0','64741-44-2','64741-45-3','64741-47-5','64741-48-6','8052-41-3','64742-54-7']);
 const OX_LIQ_S=new Set(['7722-84-1','7601-90-3']);
 const OX_SOL_S=new Set(['7778-54-3','7778-50-9','7789-09-5','10588-01-9']);

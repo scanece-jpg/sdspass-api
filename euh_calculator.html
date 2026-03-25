@@ -235,6 +235,32 @@ select option{background:var(--bg3)}
 .ui-lang-bar select:focus{outline:none}
 .sds-lang-label{font-size:9px;color:var(--text3);margin-bottom:3px;letter-spacing:.04em}
 
+/* ── Konsantrasyon Dropdown ────────────────────────────────── */
+.conc-sel{width:100%;padding:6px 8px;border-radius:6px;border:1px solid var(--border2,#444);background:var(--bg,#16162a);color:var(--text1,#e0e0e0);font-family:var(--mono,'monospace');font-size:12px;cursor:pointer;box-sizing:border-box}
+.conc-sel:focus{outline:2px solid var(--accent,#7c6af7);border-color:transparent}
+
+/* ── Inline Refinement Panel ───────────────────────────────── */
+.conc-refine{margin-top:8px;border-radius:8px;overflow:hidden;animation:crpFadeIn .18s ease}
+@keyframes crpFadeIn{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:translateY(0)}}
+.crp-warn-head{display:flex;align-items:center;gap:8px;padding:10px 12px;background:rgba(251,191,36,.1);border:1px solid #f59e0b55;border-bottom:none;border-radius:8px 8px 0 0}
+.crp-warn-head .crp-warn-ico{font-size:16px}
+.crp-warn-head .crp-warn-title{font-size:11px;font-weight:600;color:#fbbf24}
+.crp-warn-head .crp-warn-thr{font-size:10px;color:var(--text3,#666);margin-top:1px}
+.crp-warn-q{padding:8px 12px 10px;background:rgba(251,191,36,.06);border-left:1px solid #f59e0b55;border-right:1px solid #f59e0b55;font-size:10px;color:var(--text2,#aaa);line-height:1.6}
+.crp-opt-row{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid #f59e0b55;border-radius:0 0 8px 8px;overflow:hidden}
+.crp-opt{padding:10px 12px;cursor:pointer;border:none;background:var(--bg2,#1e1e2e);text-align:left;transition:background .12s;border-right:1px solid var(--border,#333)}
+.crp-opt:last-child{border-right:none}
+.crp-opt:hover{background:var(--bg3,#252540)}
+.crp-opt .crp-opt-range{font-size:12px;font-weight:700;color:var(--text1,#e0e0e0);font-family:var(--mono)}
+.crp-opt .crp-opt-cls{font-size:9px;color:var(--text3,#888);margin-top:3px;line-height:1.4}
+.crp-opt .crp-opt-h{font-size:9px;font-family:var(--mono);color:#6ee7b7;margin-top:2px;letter-spacing:.02em}
+.crp-opt.danger .crp-opt-range{color:#f87171}
+.crp-opt.warning .crp-opt-range{color:#fbbf24}
+.crp-opt.safe .crp-opt-range{color:#4ade80}
+.crp-badge{display:inline-block;font-size:8px;padding:1px 5px;border-radius:3px;margin-top:4px}
+.crp-badge.changes{background:#fbbf2422;color:#fbbf24;border:1px solid #fbbf2444}
+.crp-badge.same{background:#22c55e22;color:#22c55e;border:1px solid #22c55e44}
+
 /* ── Konsantrasyon Aralık Seçici Modal ─────────────────────── */
 #crpOverlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:9000;display:none;align-items:center;justify-content:center}
 #crpOverlay.open{display:flex}
@@ -2424,13 +2450,25 @@ function addComp(pf={}){
         <input class="ci" id="ci${id}" type="text" placeholder="e.g. 7631-90-5" value="${pf.cas||''}" oninput="onCas(${id})" onblur="echaLookup(this,${id})"></div>
       <div class="field"><div class="flbl"><span id="lbl_mname">Substance Name</span></div>
         <input class="ni" type="text" placeholder="Search substance name" value="${pf.name||''}" oninput="showNameDropdown(this,${id})" onpaste="setTimeout(()=>showNameDropdown(this,${id}),50)" autocomplete="off"></div>
-      <div class="field"><div class="flbl"><span id="lbl_conc">Concentration</span></div>
-        <div class="cw2" style="display:flex;align-items:center;gap:3px">
-          <input class="ki kimin" type="number" placeholder="min" min="0" max="100" step="0.001" value="${pf.conc||''}" style="width:52px">
-          <span style="color:var(--text3);font-size:10px">-</span>
-          <input class="kimax" type="number" placeholder="max" min="0" max="100" step="0.001" value="" style="width:52px;background:var(--bg);border:1px solid var(--border2);border-radius:5px;padding:4px 6px;color:var(--text1);font-family:var(--mono);font-size:12px"><span class="pct">%</span>
-          <button class="crp-picker-btn" onclick="openConcPicker(${id})" title="Konsantrasyon aralığı seç">📊 Aralık</button>
-          <button onclick="(function(b){const levels=['show','range','hide'];const labels={show:'B3:Full',range:'B3:Range',hide:'B3:Hidden'};const colors={show:'var(--accent)',range:'var(--warn)',hide:'var(--danger)'};const ci=b.closest('.cw').querySelector('.ci');const cas=ci?ci.value.trim():'';if(!cas) return;const cur=disclosureMap[cas]||'show';const next=levels[(levels.indexOf(cur)+1)%3];disclosureMap[cas]=next;b.textContent=labels[next];b.style.color=colors[next];})(this)" style="font-size:8px;padding:2px 5px;border-radius:3px;border:1px solid var(--border2);background:transparent;color:var(--accent);cursor:pointer;white-space:nowrap;margin-left:2px" title="SDS Bölüm 3 gizleme seviyesi">B3:Full</button>
+      <div class="field"><div class="flbl" style="display:flex;justify-content:space-between;align-items:center">
+          <span id="lbl_conc">Konsantrasyon</span>
+          <button onclick="(function(b){const levels=['show','range','hide'];const labels={show:'B3:Full',range:'B3:Range',hide:'B3:Hidden'};const colors={show:'var(--accent)',range:'var(--warn)',hide:'var(--danger)'};const ci=b.closest('.cw').querySelector('.ci');const cas=ci?ci.value.trim():'';if(!cas) return;const cur=disclosureMap[cas]||'show';const next=levels[(levels.indexOf(cur)+1)%3];disclosureMap[cas]=next;b.textContent=labels[next];b.style.color=colors[next];})(this)" style="font-size:8px;padding:2px 5px;border-radius:3px;border:1px solid var(--border2);background:transparent;color:var(--accent);cursor:pointer;white-space:nowrap" title="SDS Bölüm 3 gizleme seviyesi">B3:Full</button>
+        </div>
+        <div>
+          <select class="conc-sel" id="csel${id}" onchange="onConcRangeChange(${id})">
+            <option value="">— Konsantrasyon aralığı seçin —</option>
+            <option value="0|0.1">≤ %0,1</option>
+            <option value="0.1|1">%0,1 – %1</option>
+            <option value="1|5">%1 – %5</option>
+            <option value="5|10">%5 – %10</option>
+            <option value="10|25">%10 – %25</option>
+            <option value="25|50">%25 – %50</option>
+            <option value="50|100">%50 – %100</option>
+            <option value="100|100">%100 — Saf Madde</option>
+          </select>
+          <div class="conc-refine" id="crp${id}" style="display:none"></div>
+          <input type="hidden" class="kimin" id="cmin${id}" value="${pf.conc||''}">
+          <input type="hidden" class="kimax" id="cmax${id}" value="">
         </div>
       </div>
     </div>
@@ -2536,8 +2574,8 @@ function getComps(){
   return[...document.querySelectorAll('.cw')].map(w=>{
     const cas=w.querySelector('.ci').value.trim();
     const name=w.querySelector('.ni').value.trim();
-    const minEl=w.querySelector('.kimin');
-    const maxEl=w.querySelector('.kimax');
+    const minEl=w.querySelector('.kimin');   // hidden input
+    const maxEl=w.querySelector('.kimax');   // hidden input
     const concMin=parseFloat(minEl?.value)||0;
     const concMax=parseFloat(maxEl?.value)||null;
     // CLP worst case: aralık varsa max al
@@ -3254,8 +3292,118 @@ window.onload=function(){
 /* ═══════════════════════════════════════════════════════════
    KONSANTRASYON ARALIK SEÇİCİ
    CLP Annex I Table 3.1 — Generic Concentration Limits (GCL)
-   İki aşamalı: Standart 7 aralık → gerekirse refinement
+   Dropdown seçimi → inline refinement panel
    ═══════════════════════════════════════════════════════════ */
+
+/* ─── Dropdown seçilince çağrılır ─── */
+function onConcRangeChange(id){
+  const sel=document.getElementById('csel'+id);
+  const panel=document.getElementById('crp'+id);
+  const minEl=document.getElementById('cmin'+id);
+  const maxEl=document.getElementById('cmax'+id);
+  if(!sel||!panel) return;
+
+  const val=sel.value;
+  if(!val){panel.style.display='none';if(minEl)minEl.value='';if(maxEl)maxEl.value='';return;}
+
+  const [lo,hi]=val.split('|').map(Number);
+
+  /* Hazard sınıflarını bu komponent kartından al */
+  const card=document.getElementById('cc'+id);
+  const hazards=card?[...card.querySelectorAll('.hchip')].map(c=>c.dataset.hc).filter(Boolean):[];
+  const entries=_crpGetEntries(hazards);
+  const allThresholds=new Set(entries.map(e=>e[0]));
+
+  /* Bu aralığın içinde kalan GCL eşikleri */
+  const internal=[...allThresholds].filter(t=>t>lo&&t<hi).sort((a,b)=>a-b);
+
+  if(!internal.length){
+    /* Eşik yok — doğrudan kaydet, paneli gizle */
+    _crpSave(id,lo,hi);
+    panel.style.display='none';
+    return;
+  }
+
+  /* Eşik var — refinement panelini oluştur */
+  panel.innerHTML=_crpBuildPanel(id,lo,hi,internal,entries);
+  panel.style.display='block';
+  /* min/max henüz kaydedilmedi — kullanıcı seçim yapana kadar bekle */
+  if(minEl) minEl.value='';
+  if(maxEl) maxEl.value='';
+}
+
+/* ─── Refinement HTML oluştur ─── */
+function _crpBuildPanel(id,lo,hi,thresholds,entries){
+  const rangeLbl=lo===0?`≤ %${_crpFmt(hi)}`:`%${_crpFmt(lo)} – %${_crpFmt(hi)}`;
+  let html='';
+
+  for(const thr of thresholds){
+    const below=_crpClassify(thr,entries,true);   /* < thr */
+    const above=_crpClassify(hi, entries,false);   /* ≥ thr */
+    const changes=JSON.stringify([...below.classes].sort())!==JSON.stringify([...above.classes].sort());
+    const badge=changes
+      ?`<span class="crp-badge changes">⚠ Sınıf değişiyor</span>`
+      :`<span class="crp-badge same">ℹ Sınıf aynı — ticari gizlilik</span>`;
+
+    const bSty=_crpStyle(below.classes);
+    const aSty=_crpStyle(above.classes);
+
+    const bCls=below.classes.length
+      ?below.classes.slice(0,2).join(' + ')+(below.classes.length>2?`…`:'')
+      :'Sınıflandırılmamış';
+    const aCls=above.classes.length
+      ?above.classes.slice(0,2).join(' + ')+(above.classes.length>2?`…`:'')
+      :'Sınıflandırılmamış';
+
+    html+=`
+      <div class="crp-warn-head">
+        <span class="crp-warn-ico">⚠</span>
+        <div>
+          <div class="crp-warn-title">Kritik Yasal Sınır: %${_crpFmt(thr)}</div>
+          <div class="crp-warn-thr">${rangeLbl} aralığında sınıflandırma eşiği bulundu</div>
+        </div>
+      </div>
+      <div class="crp-warn-q">
+        Gerçek konsantrasyonunuz <b>%${_crpFmt(thr)}</b> sınırının altında mı yoksa üstünde mi?<br>
+        ${badge}
+      </div>
+      <div class="crp-opt-row">
+        <button class="crp-opt ${bSty}" onclick="_crpSave(${id},${lo},${thr})">
+          <div class="crp-opt-range">%${_crpFmt(lo)} – %${_crpFmt(thr)}</div>
+          <div class="crp-opt-cls">${bCls}</div>
+          ${below.hcodes.length?`<div class="crp-opt-h">${below.hcodes.slice(0,5).join(' · ')}</div>`:''}
+        </button>
+        <button class="crp-opt ${aSty}" onclick="_crpSave(${id},${thr},${hi})">
+          <div class="crp-opt-range">%${_crpFmt(thr)} – %${_crpFmt(hi)}</div>
+          <div class="crp-opt-cls">${aCls}</div>
+          ${above.hcodes.length?`<div class="crp-opt-h">${above.hcodes.slice(0,5).join(' · ')}</div>`:''}
+        </button>
+      </div>`;
+  }
+  return html;
+}
+
+/* ─── Seçim kaydedildi ─── */
+function _crpSave(id,lo,hi){
+  const minEl=document.getElementById('cmin'+id);
+  const maxEl=document.getElementById('cmax'+id);
+  const panel=document.getElementById('crp'+id);
+  const sel=document.getElementById('csel'+id);
+  if(minEl) minEl.value=lo>0?lo:0;
+  if(maxEl) maxEl.value=hi;
+  if(panel) panel.style.display='none';
+  /* Seçim metnini güncelle — seçilen option'ı işaretle */
+  if(sel){
+    const lbl=lo===0?`≤ %${_crpFmt(hi)}`:`%${_crpFmt(lo)} – %${_crpFmt(hi)}`;
+    /* option value'yu güncelle (refined aralık) */
+    let opt=[...sel.options].find(o=>o.value===`${lo}|${hi}`);
+    if(!opt){
+      opt=new Option(`${lbl} ✓`,`${lo}|${hi}`,false,true);
+      sel.appendChild(opt);
+    }
+    opt.selected=true;
+  }
+}
 
 /* GCL tablosu: normalize_class → [[eşik%, karışım_sınıfı, H_kodu], ...] */
 const _CRP_GCL={

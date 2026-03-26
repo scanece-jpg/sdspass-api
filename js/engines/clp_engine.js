@@ -99,7 +99,11 @@ const CLPEngine = (() => {
   function classify(comps) {
     // 1. Her bileşenden kesme değeri geçen H kodlarını topla
     //    Öncelik: SCL (maddeye özel) → GCL (genel tablo)
-    //    comp.scl = { 'H314': 0.5, 'H318': 1.0, ... }  — CAS lookup'tan gelir
+    //    comp.scl = { 'H314': 2.0, 'H315': 0.5, ... }  — CAS lookup'tan gelir
+
+    // cutoffUsed: hangi H kodu için hangi eşik kullanıldı + kaynak (SCL/GCL)
+    const cutoffUsed = {}; // { 'H314': { value: 2.0, source: 'SCL', cas: '1310-73-2' } }
+
     const raw = comps.flatMap(c => {
       const conc = parseFloat(c.concMax || c.conc) || 0;
       return (c.hazards || []).flatMap(h => {
@@ -115,9 +119,17 @@ const CLPEngine = (() => {
 
         // Hangi eşiği kullanacağız?
         const cutoff = scl !== null ? scl : gcl;
+        const source = scl !== null ? 'SCL' : 'GCL';
 
         if (cutoff === undefined) return [code]; // Bilinmeyen → muhafazakâr
-        return conc >= cutoff ? [code] : [];
+        if (conc >= cutoff) {
+          // En düşük (en kısıtlayıcı) eşiği kaydet
+          if (!cutoffUsed[code] || cutoff < cutoffUsed[code].value) {
+            cutoffUsed[code] = { value: cutoff, source, cas: c.cas || '' };
+          }
+          return [code];
+        }
+        return [];
       });
     });
 
@@ -141,7 +153,7 @@ const CLPEngine = (() => {
     // 5. Piktogramlar
     const pictograms = getGhsCodes(result);
 
-    return { hCodes: result, signal, pictograms, dominated, getGhsCodes };
+    return { hCodes: result, signal, pictograms, dominated, cutoffUsed, getGhsCodes };
   }
 
   function init() {

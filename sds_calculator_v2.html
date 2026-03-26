@@ -837,10 +837,21 @@ function renderAll(s) {
     healthH.forEach((code,i) => {
       const cls = DANGER_H.has(code) ? 'danger' : 'warning';
       const tag = DANGER_H.has(code) ? '<span class="sbadge danger">DANGER</span>' : '<span class="sbadge warning">WARNING</span>';
-      const cutoff = CLPEngine.CUTOFFS[code];
+
+      // cutoffUsed: CLPEngine'den gelen gerçek eşik (SCL varsa SCL, yoksa GCL)
+      const cu = clp.cutoffUsed && clp.cutoffUsed[code];
+      const cutoffVal  = cu ? cu.value : CLPEngine.CUTOFFS[code];
+      const cutoffSrc  = cu ? cu.source : 'GCL';
+      const isSCL      = cutoffSrc === 'SCL';
+      const cutoffNote = cutoffVal !== undefined
+        ? ` · ${isSCL
+            ? `<span style="color:var(--safe);font-weight:700">SCL</span> ≥ %${cutoffVal} <span style="opacity:.6;font-size:9px">(Annex VI maddeye özgü)</span>`
+            : `GCL ≥ %${cutoffVal}`}`
+        : '';
+
       h += `<div class="ecard ${cls}" style="animation-delay:${i*.03}s">
         <div class="ecard-head"><span class="ecard-code">${code}</span>${tag}</div>
-        <div class="ecard-source">KKDİK Ek-2 / CLP (AT) 1272/2008${cutoff?` · Kesme değeri ≥ %${cutoff}`:''}</div>
+        <div class="ecard-source">KKDİK Ek-2 / CLP (AT) 1272/2008${cutoffNote}</div>
       </div>`;
     });
   }

@@ -98,13 +98,24 @@ const CLPEngine = (() => {
 
   function classify(comps) {
     // 1. Her bileşenden kesme değeri geçen H kodlarını topla
+    //    Öncelik: SCL (maddeye özel) → GCL (genel tablo)
+    //    comp.scl = { 'H314': 0.5, 'H318': 1.0, ... }  — CAS lookup'tan gelir
     const raw = comps.flatMap(c => {
       const conc = parseFloat(c.concMax || c.conc) || 0;
       return (c.hazards || []).flatMap(h => {
         const code = (h.h_code || '').replace(/[*\s]/g,'').substring(0,4);
         if (!code.startsWith('H')) return [];
         if (FLAM_SKIP.has(code)) return []; // Yanıcılık fiziksel engine'de
-        const cutoff = CUTOFFS[code];
+
+        // ── Öncelik 1: SCL — maddeye özel (Annex VI, KKDİK Ek-1) ──────────────
+        const scl = c.scl && c.scl[code] !== undefined ? c.scl[code] : null;
+
+        // ── Öncelik 3: GCL — genel CLP tablo (Annex I §3.x) ──────────────────
+        const gcl = CUTOFFS[code];
+
+        // Hangi eşiği kullanacağız?
+        const cutoff = scl !== null ? scl : gcl;
+
         if (cutoff === undefined) return [code]; // Bilinmeyen → muhafazakâr
         return conc >= cutoff ? [code] : [];
       });

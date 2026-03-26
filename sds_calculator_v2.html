@@ -271,6 +271,11 @@ const DANGER_H = new Set(['H300','H301','H304','H310','H311','H314','H318','H330
 
 // ── Bileşen yönetimi ──────────────────────────────────────────────────────────
 let _compId = 0;
+
+// SCL deposu: { compId: { 'H314': 0.5, 'H318': 1.0, ... } }
+// CAS lookup'tan gelir; CLPEngine'e comp.scl olarak geçirilir
+const _sclMap = {};
+
 const CLP_CUTOFFS = {
   'H300':1.0,'H301':1.0,'H302':5.0,'H310':1.0,'H311':1.0,'H312':5.0,
   'H330':1.0,'H331':1.0,'H332':5.0,'H314':1.0,'H315':10.0,'H318':1.0,'H319':10.0,
@@ -376,6 +381,22 @@ async function onCas(id) {
     const reach = document.getElementById('reach'+id);
     if (reach && !reach.value && data.reach_no) reach.value = data.reach_no;
     if (data.hazards) data.hazards.forEach(h => addChip(id, h.h_class, h.h_code));
+
+    // ── SCL — maddeye özel kesme değerleri (Annex VI / KKDİK Ek-1) ────────────
+    // Backend { scl: { 'H314': 0.5, 'H318': 1.0, ... } } döndürüyorsa sakla
+    if (data.scl && typeof data.scl === 'object' && Object.keys(data.scl).length > 0) {
+      _sclMap[id] = data.scl;
+      // SCL badge'i göster
+      const chips = document.getElementById('chips'+id);
+      if (chips) {
+        const badge = document.createElement('span');
+        badge.style.cssText = 'font-size:9px;color:var(--safe);border:1px solid rgba(0,229,176,.3);border-radius:3px;padding:1px 5px;margin-left:4px';
+        badge.title = 'Maddeye özgü SCL değerleri: ' + Object.entries(data.scl).map(([k,v])=>`${k}=%${v}`).join(', ');
+        badge.textContent = '⚖ SCL';
+        chips.appendChild(badge);
+      }
+    }
+
     // Seçili aralıkta dropdown'u yenile
     const sel = document.getElementById('csel'+id);
     if (sel && sel.value) onConcChange(id);
@@ -650,7 +671,11 @@ function getComps() {
     const ec    = w.querySelector('.ec-input')?.value?.trim() || '';
     const reach = w.querySelector('.reach-input')?.value?.trim() || '';
     const mf    = parseFloat(w.querySelector('.mf-input')?.value) || 1;
-    return { cas, name, conc, concMin, concMax, hazards, ec, reach, m_factors:{ acute: mf, chronic: mf } };
+    // Bileşen ID'sini DOM'dan al (cw{id} → id)
+    const cwId  = parseInt((w.id || '').replace('cw','')) || 0;
+    // SCL: maddeye özel kesme değerleri — Öncelik 1 (GCL'yi ezer)
+    const scl   = _sclMap[cwId] || {};
+    return { cas, name, conc, concMin, concMax, hazards, ec, reach, m_factors:{ acute: mf, chronic: mf }, scl };
   }).filter(c => c.cas || c.name);
 }
 

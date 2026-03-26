@@ -212,6 +212,7 @@ async def substance_lookup(cas: str):
             "pictograms": result.get("pictograms",[]),
             "hazards": result.get("hazards",[]),
             "m_factors": result.get("m_factors",{}),
+            "scl": result.get("scl", []),   # Annex VI özel kesme değerleri (SCL)
             "oel": oel,
         }
     # DB'de yoksa REACH DB'ye bak

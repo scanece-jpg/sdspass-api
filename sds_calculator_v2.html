@@ -383,15 +383,22 @@ async function onCas(id) {
     if (data.hazards) data.hazards.forEach(h => addChip(id, h.h_class, h.h_code));
 
     // ── SCL — maddeye özel kesme değerleri (Annex VI / KKDİK Ek-1) ────────────
-    // Backend { scl: { 'H314': 0.5, 'H318': 1.0, ... } } döndürüyorsa sakla
-    if (data.scl && typeof data.scl === 'object' && Object.keys(data.scl).length > 0) {
-      _sclMap[id] = data.scl;
+    // Backend: scl = [{h_code:"H314", c_min:2.0, c_max:15.0}, ...]
+    // CLPEngine: {H314: 2.0, H315: 0.5, ...}  (h_code → c_min)
+    const sclRaw = Array.isArray(data.scl) ? data.scl : [];
+    if (sclRaw.length > 0) {
+      const sclDict = {};
+      sclRaw.forEach(s => {
+        if (s.h_code && s.c_min !== undefined) sclDict[s.h_code] = s.c_min;
+      });
+      _sclMap[id] = sclDict;
       // SCL badge'i göster
       const chips = document.getElementById('chips'+id);
       if (chips) {
         const badge = document.createElement('span');
         badge.style.cssText = 'font-size:9px;color:var(--safe);border:1px solid rgba(0,229,176,.3);border-radius:3px;padding:1px 5px;margin-left:4px';
-        badge.title = 'Maddeye özgü SCL değerleri: ' + Object.entries(data.scl).map(([k,v])=>`${k}=%${v}`).join(', ');
+        const sclDict = _sclMap[id] || {};
+        badge.title = 'Maddeye ozgu SCL degerleri: ' + Object.entries(sclDict).map(([k,v])=>`${k}=%${v}`).join(', ');
         badge.textContent = '⚖ SCL';
         chips.appendChild(badge);
       }

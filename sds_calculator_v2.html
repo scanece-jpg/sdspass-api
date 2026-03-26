@@ -383,13 +383,57 @@ async function onCas(id) {
   } catch(e) { console.warn('[CAS lookup]', e); }
 }
 
-// ── Konsantrasyon seçici ──────────────────────────────────────────────────────
-function onConcChange(id) {
+// ── Konsantrasyon seçici — backend API ile SCL dahil eşik tespiti ─────────────
+async function onConcChange(id) {
   const sel = document.getElementById('csel'+id);
   if (!sel || !sel.value) return;
   const [lo, hi] = sel.value.split('|').map(Number);
-  // GCL eşiği var mı kontrol et
+  const cas = document.getElementById('ci'+id)?.value?.trim() || '';
+
+  // Chip'lerden tehlike sınıflarını al
   const chips = [...document.querySelectorAll(`#chips${id} .hchip`)];
+  const hazardClasses = chips.map(c => c.dataset.hc).filter(Boolean);
+
+  // CAS varsa → backend /refine endpoint'ini çağır (SCL + GCL dahil)
+  if (cas && hazardClasses.length > 0) {
+    try {
+      const params = new URLSearchParams({
+        lower: lo, upper: hi,
+        hazard_classes: hazardClasses.join(','),
+      });
+      const r = await fetch(`${API_BASE}/sds/concentration-ranges/${encodeURIComponent(cas)}/refine?${params}`);
+      if (r.ok) {
+        const data = await r.json();
+        // Backend split_points döndürüyorsa refinement göster
+        // Backend: { refinements: [{threshold, question, below, above, classification_changes}] }
+        const refs = data.refinements || [];
+        const changing = refs.filter(r => r.classification_changes);
+        if (changing.length > 0) {
+          // Her kritik eşiği threshold formatına çevir
+          const thresholds = changing.map(r => ({
+            thr: r.threshold,
+            question: r.question || '',
+            below: r.below || {},
+            above: r.above || {},
+            items: (r.above?.active_classes || []).map(c => ({
+              code: r.above?.h_codes?.[0] || '',
+              label: c,
+            })),
+          }));
+          showRefinementFromAPI(id, lo, hi, thresholds);
+          return;
+        } else if (refs.length > 0) {
+          // Eşik var ama sınıf değişmiyor — sadece kaydet
+          saveConc(id, lo, hi);
+          return;
+        }
+      }
+    } catch(e) {
+      console.warn('[ConcChange] API hatası, fallback GCL kullanılıyor:', e);
+    }
+  }
+
+  // Fallback: CAS yoksa veya API başarısız olursa yerel GCL tablosu
   const hazards = chips.map(c => ({ h_class: c.dataset.hc, h_code: c.dataset.code }));
   const thresholds = findThresholds(lo, hi, hazards);
   if (thresholds.length > 0) {
@@ -491,6 +535,87 @@ function showRefinement(id, lo, hi, thresholds) {
     </div>
     <div style="padding:6px 10px;font-size:9px;color:var(--text3);background:var(--bg3);border-top:1px solid var(--border)">
       ℹ KKDİK Ek-2 / CLP (AT) 1272/2008 — eşik değeri %${thr}
+    </div>`;
+}
+
+// ── API'den gelen SCL/GCL eşiklerini göster ────────────────────────────────────
+function showRefinementFromAPI(id, lo, hi, thresholds) {
+  const crp = document.getElementById('crp' + id);
+  if (!crp || !thresholds.length) return;
+
+  // En kritik (en düşük) eşiği seç
+  const t = thresholds.reduce((min, x) => x.thr < min.thr ? x : min, thresholds[0]);
+  const thr = t.thr;
+
+  // Üst ("above") tarafa düşen H kodları ve sınıf etiketleri
+  const aboveHCodes  = (t.above?.h_codes  || []).filter(Boolean);
+  const aboveClasses = (t.above?.active_classes || []).filter(Boolean);
+  const belowHCodes  = (t.below?.h_codes  || []).filter(Boolean);
+  const belowClasses = (t.below?.active_classes || []).filter(Boolean);
+
+  // H kodu badge'leri
+  const makeBadges = (codes, color) => codes.map(c =>
+    `<span style="display:inline-block;background:rgba(${color},.18);border:1px solid rgba(${color},.4);color:var(${color==='255,107,107'?'--danger':'--safe'});border-radius:3px;padding:1px 6px;font-size:10px;font-family:var(--mono);font-weight:700">${c}</span>`
+  ).join(' ');
+
+  const dangerBadges = makeBadges(aboveHCodes, '255,107,107');
+  const safeBadges   = belowHCodes.length
+    ? makeBadges(belowHCodes, '0,229,176')
+    : `<span style="font-size:10px;color:var(--safe)">Sınıflandırılmamış</span>`;
+
+  // Görsel sınır değerleri
+  const safeHi   = thr % 1 === 0 ? thr - 1 : parseFloat(thr.toFixed(2));
+  const dangerLo = thr;
+
+  // Soru metni: API'den geliyorsa kullan, yoksa default
+  const questionText = t.question
+    || `Formulasyonunuzun %${lo}–%${hi} aralığındaki konsantrasyonu %${thr} eşiğini geçiyor mu?`;
+
+  // Eşik kaynağı (SCL mi GCL mi)
+  const sourceNote = t.above?.source
+    ? `⚖ Kaynak: ${t.above.source}`
+    : `ℹ KKDİK Ek-2 / CLP (AT) 1272/2008 — kritik eşik %${thr}`;
+
+  crp.style.display = 'block';
+  crp.innerHTML = `
+    <div class="crp-head">
+      ⚠️ <b>Kritik eşik %${thr} bu aralığın içinde!</b>
+      <div style="font-size:10px;margin-top:3px;opacity:.85">${questionText}</div>
+    </div>
+    <div style="padding:10px 10px 6px;background:var(--bg3);font-size:10px;color:var(--text3);border-bottom:1px solid var(--border)">
+      Lütfen formulasyonunuzun konsantrasyon aralığını seçin:
+    </div>
+    <div class="crp-btns">
+      <button class="crp-btn safe-border" onclick="saveConc(${id},${lo},${safeHi})">
+        <div style="font-size:13px;font-weight:800;color:var(--safe);margin-bottom:4px">
+          %${lo} – %${safeHi}
+        </div>
+        <div style="font-size:10px;color:var(--text2);margin-bottom:4px">
+          ${belowClasses.length ? belowClasses.join(' / ') : 'Tehlikesiz aralık'}
+        </div>
+        <div>${safeBadges}</div>
+      </button>
+      <button class="crp-btn danger-border" onclick="saveConc(${id},${dangerLo},${hi})">
+        <div style="font-size:13px;font-weight:800;color:var(--danger);margin-bottom:4px">
+          %${dangerLo} – %${hi}
+        </div>
+        <div style="font-size:10px;color:var(--text2);margin-bottom:4px">
+          ${aboveClasses.length ? aboveClasses.join(' / ') : 'Tehlike sınıfı değişir'}
+        </div>
+        <div>${dangerBadges}</div>
+      </button>
+    </div>
+    ${thresholds.length > 1 ? `
+    <div style="padding:6px 10px;background:var(--bg3);border-top:1px solid var(--border)">
+      ${thresholds.slice(1).map(tx => {
+        const txHCodes = (tx.above?.h_codes||[]).join(', ');
+        return `<div style="font-size:9px;color:var(--text3);padding:2px 0">
+          ▶ %${tx.thr} eşiğinde de sınıf değişimi var${txHCodes?' ('+txHCodes+')':''}
+        </div>`;
+      }).join('')}
+    </div>` : ''}
+    <div style="padding:6px 10px;font-size:9px;color:var(--text3);background:var(--bg3);border-top:1px solid var(--border)">
+      ${sourceNote}
     </div>`;
 }
 

@@ -4008,21 +4008,27 @@
         "c_min": 25.0
       },
       {
-        "h_code": "H318",
-        "h_class": "Eye Dam. 1",
-        "c_min": 25.0
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 10.0,
+        "c_max": 25.0
       },
       {
         "h_code": "H315",
         "h_class": "Skin Irrit. 2",
-        "c_min": 10.0,
-        "c_max": 25.0
+        "c_min": 5.0,
+        "c_max": 10.0
+      },
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 5.0
       },
       {
         "h_code": "H319",
         "h_class": "Eye Irrit. 2",
-        "c_min": 10.0,
-        "c_max": 25.0
+        "c_min": 5.0,
+        "c_max": 10.0
       },
       {
         "h_code": "H335",
@@ -4153,21 +4159,27 @@
         "c_min": 5.0
       },
       {
-        "h_code": "H318",
-        "h_class": "Eye Dam. 1",
-        "c_min": 5.0
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 1.0,
+        "c_max": 5.0
       },
       {
         "h_code": "H315",
         "h_class": "Skin Irrit. 2",
-        "c_min": 1.0,
-        "c_max": 5.0
+        "c_min": 0.5,
+        "c_max": 1.0
+      },
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 1.0
       },
       {
         "h_code": "H319",
         "h_class": "Eye Irrit. 2",
-        "c_min": 1.0,
-        "c_max": 5.0
+        "c_min": 0.5,
+        "c_max": 1.0
       }
     ]
   },
@@ -4967,28 +4979,6 @@
     "atp": "CLP00",
     "scl": [
       {
-        "h_code": "H314",
-        "h_class": "Skin Corr. 1A",
-        "c_min": 8.0
-      },
-      {
-        "h_code": "H318",
-        "h_class": "Eye Dam. 1",
-        "c_min": 8.0
-      },
-      {
-        "h_code": "H315",
-        "h_class": "Skin Irrit. 2",
-        "c_min": 5.0,
-        "c_max": 8.0
-      },
-      {
-        "h_code": "H319",
-        "h_class": "Eye Irrit. 2",
-        "c_min": 5.0,
-        "c_max": 8.0
-      },
-      {
         "h_code": "H271",
         "h_class": "Ox. Liq. 1",
         "c_min": 70.0
@@ -4998,6 +4988,34 @@
         "h_class": "Ox. Liq. 2",
         "c_min": 50.0,
         "c_max": 70.0
+      },
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1A",
+        "c_min": 8.0
+      },
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 5.0,
+        "c_max": 8.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 3.0,
+        "c_max": 5.0
+      },
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 3.0,
+        "c_max": 5.0
       }
     ]
   },
@@ -5549,18 +5567,24 @@
       {
         "h_code": "H314",
         "h_class": "Skin Corr. 1A",
-        "c_min": 2.0
+        "c_min": 5.0
       },
       {
-        "h_code": "H318",
-        "h_class": "Eye Dam. 1",
-        "c_min": 2.0
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 2.0,
+        "c_max": 5.0
       },
       {
         "h_code": "H315",
         "h_class": "Skin Irrit. 2",
         "c_min": 0.5,
         "c_max": 2.0
+      },
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 2.0
       },
       {
         "h_code": "H319",
@@ -7097,15 +7121,15 @@
         "c_min": 25.0
       },
       {
-        "h_code": "H318",
-        "h_class": "Eye Dam. 1",
-        "c_min": 25.0
-      },
-      {
         "h_code": "H315",
         "h_class": "Skin Irrit. 2",
         "c_min": 10.0,
         "c_max": 25.0
+      },
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 25.0
       },
       {
         "h_code": "H319",
@@ -12610,21 +12634,27 @@
         "c_min": 15.0
       },
       {
-        "h_code": "H318",
-        "h_class": "Eye Dam. 1",
-        "c_min": 15.0
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 5.0,
+        "c_max": 15.0
       },
       {
         "h_code": "H315",
         "h_class": "Skin Irrit. 2",
-        "c_min": 5.0,
-        "c_max": 15.0
+        "c_min": 1.0,
+        "c_max": 5.0
+      },
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 5.0
       },
       {
         "h_code": "H319",
         "h_class": "Eye Irrit. 2",
-        "c_min": 5.0,
-        "c_max": 15.0
+        "c_min": 1.0,
+        "c_max": 5.0
       }
     ]
   },
@@ -14111,21 +14141,27 @@
         "c_min": 10.0
       },
       {
-        "h_code": "H318",
-        "h_class": "Eye Dam. 1",
-        "c_min": 10.0
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 3.0,
+        "c_max": 10.0
       },
       {
         "h_code": "H315",
         "h_class": "Skin Irrit. 2",
         "c_min": 1.0,
-        "c_max": 10.0
+        "c_max": 3.0
+      },
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 3.0
       },
       {
         "h_code": "H319",
         "h_class": "Eye Irrit. 2",
         "c_min": 1.0,
-        "c_max": 10.0
+        "c_max": 3.0
       },
       {
         "h_code": "H335",
@@ -14371,15 +14407,15 @@
         "c_min": 5.0
       },
       {
-        "h_code": "H318",
-        "h_class": "Eye Dam. 1",
-        "c_min": 0.5
-      },
-      {
         "h_code": "H315",
         "h_class": "Skin Irrit. 2",
         "c_min": 1.0,
         "c_max": 5.0
+      },
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 0.5
       },
       {
         "h_code": "H319",
@@ -14742,18 +14778,24 @@
       {
         "h_code": "H314",
         "h_class": "Skin Corr. 1A",
-        "c_min": 2.0
+        "c_min": 5.0
       },
       {
-        "h_code": "H318",
-        "h_class": "Eye Dam. 1",
-        "c_min": 2.0
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 2.0,
+        "c_max": 5.0
       },
       {
         "h_code": "H315",
         "h_class": "Skin Irrit. 2",
         "c_min": 0.5,
         "c_max": 2.0
+      },
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 2.0
       },
       {
         "h_code": "H319",
@@ -49098,21 +49140,27 @@
         "c_min": 25.0
       },
       {
-        "h_code": "H318",
-        "h_class": "Eye Dam. 1",
-        "c_min": 25.0
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 10.0,
+        "c_max": 25.0
       },
       {
         "h_code": "H315",
         "h_class": "Skin Irrit. 2",
-        "c_min": 10.0,
-        "c_max": 25.0
+        "c_min": 3.0,
+        "c_max": 10.0
+      },
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 10.0
       },
       {
         "h_code": "H319",
         "h_class": "Eye Irrit. 2",
-        "c_min": 10.0,
-        "c_max": 25.0
+        "c_min": 3.0,
+        "c_max": 10.0
       }
     ]
   },

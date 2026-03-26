@@ -272,9 +272,12 @@ const DANGER_H = new Set(['H300','H301','H304','H310','H311','H314','H318','H330
 // ── Bileşen yönetimi ──────────────────────────────────────────────────────────
 let _compId = 0;
 
-// SCL deposu: { compId: { 'H314': 0.5, 'H318': 1.0, ... } }
-// CAS lookup'tan gelir; CLPEngine'e comp.scl olarak geçirilir
+// SCL deposu (CLPEngine için): { compId: { 'H314': 2.0, 'H315': 0.5, ... } }
+// Aynı H kodu birden fazla kayıtta varsa (1A/1B) en küçük c_min alınır
 const _sclMap = {};
+
+// SCL ham liste (refinement paneli için): { compId: [{h_code,h_class,c_min,c_max?},...] }
+const _sclRaw = {};
 
 const CLP_CUTOFFS = {
   'H300':1.0,'H301':1.0,'H302':5.0,'H310':1.0,'H311':1.0,'H312':5.0,
@@ -387,9 +390,16 @@ async function onCas(id) {
     // CLPEngine: {H314: 2.0, H315: 0.5, ...}  (h_code → c_min)
     const sclRaw = Array.isArray(data.scl) ? data.scl : [];
     if (sclRaw.length > 0) {
+      // Ham listeyi sakla (refinement paneli için tüm c_min/c_max değerleri gerekli)
+      _sclRaw[id] = sclRaw;
+      // Engine için dict: aynı H kodu varsa en küçük c_min (en erken tetik)
       const sclDict = {};
       sclRaw.forEach(s => {
-        if (s.h_code && s.c_min !== undefined) sclDict[s.h_code] = s.c_min;
+        if (s.h_code && s.c_min !== undefined) {
+          if (sclDict[s.h_code] === undefined || s.c_min < sclDict[s.h_code]) {
+            sclDict[s.h_code] = s.c_min;
+          }
+        }
       });
       _sclMap[id] = sclDict;
       // SCL badge'i göster
@@ -461,15 +471,75 @@ async function onConcChange(id) {
     }
   }
 
-  // Fallback: CAS yoksa veya API başarısız olursa yerel GCL tablosu
+  // Fallback: CAS yoksa veya API başarısız olursa
   const hazards = chips.map(c => ({ h_class: c.dataset.hc, h_code: c.dataset.code }));
-  const thresholds = findThresholds(lo, hi, hazards);
-  if (thresholds.length > 0) {
-    showRefinement(id, lo, hi, thresholds);
+
+  // Önce SCL ham listesine bak (CAS lookup'tan geldiyse)
+  const rawScl = _sclRaw[id] || [];
+  const sclThresholds = findThresholdsFromSCL(lo, hi, rawScl);
+
+  if (sclThresholds.length > 0) {
+    // SCL eşikleri bulundu — API formatına çevir ve göster
+    showRefinementFromAPI(id, lo, hi, sclThresholds);
   } else {
-    saveConc(id, lo, hi);
-    document.getElementById('crp'+id).style.display = 'none';
+    // Son çare: GCL tablosu
+    const thresholds = findThresholds(lo, hi, hazards);
+    if (thresholds.length > 0) {
+      showRefinement(id, lo, hi, thresholds);
+    } else {
+      saveConc(id, lo, hi);
+      document.getElementById('crp'+id).style.display = 'none';
+    }
   }
+}
+
+// SCL ham listesinden (c_min/c_max) aralık içindeki eşikleri çıkar
+// Döndürür: showRefinementFromAPI formatında threshold dizisi
+function findThresholdsFromSCL(lo, hi, sclRaw) {
+  if (!sclRaw.length) return [];
+
+  // Aralık içinde kalan tüm c_min değerlerini bul
+  const thrMap = new Map(); // c_min → { below:[], above:[] }
+
+  for (const s of sclRaw) {
+    const thr = s.c_min;
+    if (thr === undefined || thr <= lo || thr >= hi) continue; // sınır dışı
+
+    if (!thrMap.has(thr)) thrMap.set(thr, { below: [], above: [] });
+    const entry = thrMap.get(thr);
+
+    // Bu eşiğin ÜSTÜNDE hangi sınıf geçerli?
+    entry.above.push({ h_code: s.h_code, h_class: s.h_class });
+  }
+
+  // Eşiğin ALTINDA hangi sınıflar geçerli? → bir sonraki c_min katmanı (varsa)
+  // En az bir eşik içeride olmalı
+  if (!thrMap.size) return [];
+
+  // thrMap'i sıralı listeye çevir
+  const sorted = [...thrMap.entries()].sort((a,b) => a[0]-b[0]);
+
+  return sorted.map(([thr, sides], idx) => {
+    const aboveHCodes  = [...new Set(sides.above.map(x => x.h_code))];
+    const aboveClasses = [...new Set(sides.above.map(x => x.h_class))];
+
+    // Eşiğin altındaki sınıflar: bir önceki katmanın above'u (yoksa lo aralığındaki)
+    const prevAbove = idx > 0 ? sorted[idx-1][1].above : [];
+    const belowClasses = prevAbove.length
+      ? [...new Set(prevAbove.map(x => x.h_class))]
+      : ['Sınıflandırılmamış'];
+    const belowHCodes = prevAbove.length
+      ? [...new Set(prevAbove.map(x => x.h_code))]
+      : [];
+
+    return {
+      thr,
+      question: `%${thr} kritik eşiği bu aralığın içinde — formulasyon hangi tarafa düşüyor?`,
+      above: { h_codes: aboveHCodes, active_classes: aboveClasses, source: 'KKDİK Ek-1 / CLP (AT) 1272/2008 Annex VI — SCL' },
+      below: { h_codes: belowHCodes, active_classes: belowClasses },
+      classification_changes: true,
+    };
+  });
 }
 
 function findThresholds(lo, hi, hazards) {

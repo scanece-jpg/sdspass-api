@@ -2770,7 +2770,7 @@ function renderResults(r, phys, stot, eco, p, comps, showExtra, extraHCodes=[]){
   const totalPhys=physShown.length;
   const totalAll=totalEUH+totalPhys;
 
-  if(totalAll>0){
+  if(allH.length>0){
     const sig=hcodeSignal(allH);
     h+=`<div class="result-banner">
       <h3>Classification Summary</h3>

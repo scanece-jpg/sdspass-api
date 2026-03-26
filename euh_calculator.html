@@ -2694,18 +2694,31 @@ function calculate(showExtra){
   // P kodu için tüm H kodlarını topla: fiziksel + STOT + bileşen chip'leri
   // CLP_CUTOFFS global scope'ta tanımlı
   // Chip'lerden gelen H kodlarını CUT-OFF ile filtrele
-  const chipHCodes = comps.flatMap(c=>{
-    const conc = parseFloat(c.concMax||c.conc)||0;
-    return (c.hazards||[]).flatMap(h=>{
-      const code = (h.h_code||'').replace(/[*\s]/g,'').substring(0,4);
-      if(!code.startsWith('H')) return [];
-      // Yanıcılık H kodları fiziksel engine'den gelir — chip'ten alma
-      if(['H220','H221','H222','H223','H224','H225','H226','H227','H228','H229'].includes(code)) return [];
-      const cutoff = CLP_CUTOFFS[code];
-      if(cutoff === undefined) return [code]; // Bilinmeyen → geç (muhafazakâr)
-      return conc >= cutoff ? [code] : [];
+  const chipHCodes = (()=>{
+    const raw = comps.flatMap(c=>{
+      const conc = parseFloat(c.concMax||c.conc)||0;
+      const codes = (c.hazards||[]).flatMap(h=>{
+        const code = (h.h_code||'').replace(/[*\s]/g,'').substring(0,4);
+        if(!code.startsWith('H')) return [];
+        if(['H220','H221','H222','H223','H224','H225','H226','H227','H228','H229'].includes(code)) return [];
+        const cutoff = CLP_CUTOFFS[code];
+        if(cutoff === undefined) return [code];
+        return conc >= cutoff ? [code] : [];
+      });
+      // CLP §3.3.4.1.1: Skin Corr. 1 (H314) bileşeni aynı zamanda Eye Dam. 1 (H318) için sayılır
+      if(codes.includes('H314') && conc >= CLP_CUTOFFS['H318'] && !codes.includes('H318'))
+        codes.push('H318');
+      // CLP §3.3.4.1.1: Eye Dam. 1 (H318) bileşeni aynı zamanda Skin Corr. 1 katkısı taşır
+      // ama H315 / H319 varsa H314/H318 onları süpürür
+      return codes;
     });
-  });
+    const result = [...new Set(raw)];
+    // Dominance kuralları: üst sınıf alt sınıfı süpürür
+    if(result.includes('H314')) result.splice(result.indexOf('H315'),1); // Skin Corr.1 → Skin Irrit.2 dışlanır
+    if(result.includes('H318') || result.includes('H314'))
+      { const i=result.indexOf('H319'); if(i>-1) result.splice(i,1); } // Eye Dam.1 → Eye Irrit.2 dışlanır
+    return result;
+  })();
   const allHCodes=new Set([
     ...(physRes.results||[]).map(r=>r.h||r.h_code),
     ...(stotRes.h_codes||[]),

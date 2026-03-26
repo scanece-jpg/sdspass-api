@@ -827,7 +827,19 @@
         "h_code": "H318"
       }
     ],
-    "m_factors": {}
+    "m_factors": {},
+    "scl": [
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 22.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 14.0
+      }
+    ]
   },
   "12040-72-1": {
     "name": "perboric acid, sodium salt [1]\nperboric acid, sodium salt, monohydrate [2]\nperboric acid (HBO(O2)), sodium salt, monohydrate [3]\nsodium peroxoborate [4]\nsodium perborate [5]",
@@ -866,7 +878,19 @@
         "h_code": "H318"
       }
     ],
-    "m_factors": {}
+    "m_factors": {},
+    "scl": [
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 22.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 14.0
+      }
+    ]
   },
   "10332-33-9": {
     "name": "perboric acid, sodium salt [1]\nperboric acid, sodium salt, monohydrate [2]\nperboric acid (HBO(O2)), sodium salt, monohydrate [3]\nsodium peroxoborate [4]\nsodium perborate [5]",
@@ -905,7 +929,19 @@
         "h_code": "H318"
       }
     ],
-    "m_factors": {}
+    "m_factors": {},
+    "scl": [
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 22.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 14.0
+      }
+    ]
   },
   "15120-21-5": {
     "name": "perboric acid, sodium salt [1]\nperboric acid, sodium salt, monohydrate [2]\nperboric acid (HBO(O2)), sodium salt, monohydrate [3]\nsodium peroxoborate [4]\nsodium perborate [5]",
@@ -944,7 +980,19 @@
         "h_code": "H318"
       }
     ],
-    "m_factors": {}
+    "m_factors": {},
+    "scl": [
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 22.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 14.0
+      }
+    ]
   },
   "13517-20-9": {
     "name": "perboric acid (H3BO2(O2)), monosodium salt trihydrate [1]\nperboric acid, sodium salt, tetrahydrate [2]\nperboric acid (HBO(O2)), sodium salt, tetrahydrate [3]\nsodium peroxoborate, hexahydrate [4]",
@@ -974,7 +1022,19 @@
         "h_code": "H318"
       }
     ],
-    "m_factors": {}
+    "m_factors": {},
+    "scl": [
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 36.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 22.0
+      }
+    ]
   },
   "37244-98-7": {
     "name": "perboric acid (H3BO2(O2)), monosodium salt trihydrate [1]\nperboric acid, sodium salt, tetrahydrate [2]\nperboric acid (HBO(O2)), sodium salt, tetrahydrate [3]\nsodium peroxoborate, hexahydrate [4]",
@@ -1004,7 +1064,19 @@
         "h_code": "H318"
       }
     ],
-    "m_factors": {}
+    "m_factors": {},
+    "scl": [
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 36.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 22.0
+      }
+    ]
   },
   "10486-00-7": {
     "name": "perboric acid (H3BO2(O2)), monosodium salt trihydrate [1]\nperboric acid, sodium salt, tetrahydrate [2]\nperboric acid (HBO(O2)), sodium salt, tetrahydrate [3]\nsodium peroxoborate, hexahydrate [4]",
@@ -1034,7 +1106,19 @@
         "h_code": "H318"
       }
     ],
-    "m_factors": {}
+    "m_factors": {},
+    "scl": [
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 36.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 22.0
+      }
+    ]
   },
   "7632-04-4": {
     "name": "sodium peroxometaborate",
@@ -1073,7 +1157,19 @@
         "h_code": "H318"
       }
     ],
-    "m_factors": {}
+    "m_factors": {},
+    "scl": [
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 22.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 14.0
+      }
+    ]
   },
   "630-08-0": {
     "name": "carbon monoxide",
@@ -1174,7 +1270,24 @@
     ],
     "m_factors": {},
     "index_no": "006-003-00-3",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H361fd",
+        "h_class": "Repr. 2",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.2
+      }
+    ]
   },
   "75-20-7": {
     "name": "calcium carbide",
@@ -2331,7 +2444,14 @@
     ],
     "m_factors": {},
     "index_no": "006-041-00-0",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H350",
+        "h_class": "Carc. 1B",
+        "c_min": 0.001
+      }
+    ]
   },
   "150-68-5": {
     "name": "monuron (ISO); 3-(4-chlorophenyl)-1,1-dimethylurea",
@@ -4115,7 +4235,14 @@
     ],
     "m_factors": {},
     "index_no": "007-002-00-0",
-    "atp": "ATP01"
+    "atp": "ATP01",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 0.5
+      }
+    ]
   },
   "10544-72-6": {
     "name": "nitrogen dioxide [1]\ndinitrogen tetraoxide [2]",
@@ -4148,7 +4275,14 @@
     ],
     "m_factors": {},
     "index_no": "007-002-00-0",
-    "atp": "ATP01"
+    "atp": "ATP01",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 0.5
+      }
+    ]
   },
   "999-81-5": {
     "name": "chlormequat chloride (ISO); 2-chloroethyltrimethylammonium chloride",
@@ -4546,7 +4680,14 @@
     ],
     "m_factors": {},
     "index_no": "007-013-00-0",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H350",
+        "h_class": "Carc. 1B",
+        "c_min": 0.01
+      }
+    ]
   },
   "624-86-2": {
     "name": "O-ethylhydroxylamine",
@@ -5310,7 +5451,24 @@
     ],
     "m_factors": {},
     "index_no": "009-007-00-3",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 0.1
+      }
+    ]
   },
   "7789-29-9": {
     "name": "potassium bifluoride; potassium hydrogen difluoride",
@@ -5333,7 +5491,24 @@
     ],
     "m_factors": {},
     "index_no": "009-008-00-9",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 0.1
+      }
+    ]
   },
   "1341-49-7": {
     "name": "ammonium bifluoride; ammonium hydrogen difluoride",
@@ -5356,7 +5531,24 @@
     ],
     "m_factors": {},
     "index_no": "009-009-00-4",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 0.1
+      }
+    ]
   },
   "16872-11-0": {
     "name": "fluoroboric acid ... %",
@@ -5374,7 +5566,24 @@
     ],
     "m_factors": {},
     "index_no": "009-010-00-X",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 25.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 10.0
+      }
+    ]
   },
   "16961-83-4": {
     "name": "fluorosilicic acid ... %",
@@ -6113,7 +6322,24 @@
     ],
     "m_factors": {},
     "index_no": "014-004-00-5",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 1.0
+      }
+    ]
   },
   "78-10-4": {
     "name": "tetraethyl silicate; ethyl silicate",
@@ -7345,7 +7571,19 @@
     ],
     "m_factors": {},
     "index_no": "015-015-00-8",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H370",
+        "h_class": "STOT SE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H371",
+        "h_class": "STOT SE 2",
+        "c_min": 0.2
+      }
+    ]
   },
   "78-32-0": {
     "name": "tricresyl phosphate (m-m-m-, m-m-p-, m-p-p-, p-p-p-); tritolyl phosphate (m-m-m-, m-m-p-, m-p-p-, p-p-p-)",
@@ -9972,7 +10210,19 @@
     ],
     "m_factors": {},
     "index_no": "015-105-00-7",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 5.0
+      }
+    ]
   },
   "680-31-9": {
     "name": "hexamethylphosphoric triamide; hexamethylphosphoramide",
@@ -9994,7 +10244,14 @@
     ],
     "m_factors": {},
     "index_no": "015-106-00-2",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H350",
+        "h_class": "Carc. 1B",
+        "c_min": 0.01
+      }
+    ]
   },
   "13194-48-4": {
     "name": "ethoprophos (ISO); ethyl-S,S-dipropyl phosphorodithioate",
@@ -12128,7 +12385,24 @@
     ],
     "m_factors": {},
     "index_no": "015-200-00-3",
-    "atp": "ATP03"
+    "atp": "ATP03",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H350",
+        "h_class": "Carc. 1B",
+        "c_min": 0.01
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.01
+      }
+    ]
   },
   "25155-23-1": {
     "name": "trixylyl phosphate",
@@ -12623,7 +12897,14 @@
     ],
     "m_factors": {},
     "index_no": "016-012-00-4",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 1.0
+      }
+    ]
   },
   "10545-99-0": {
     "name": "sulphur dichloride",
@@ -12651,7 +12932,14 @@
     ],
     "m_factors": {},
     "index_no": "016-013-00-X",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "13451-08-6": {
     "name": "sulphur tetrachloride",
@@ -12674,7 +12962,14 @@
     ],
     "m_factors": {},
     "index_no": "016-014-00-5",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "7719-09-7": {
     "name": "thionyl dichloride; thionyl chloride",
@@ -12701,7 +12996,14 @@
     ],
     "m_factors": {},
     "index_no": "016-015-00-0",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 1.0
+      }
+    ]
   },
   "7791-25-5": {
     "name": "sulphuryl chloride",
@@ -12895,7 +13197,24 @@
     ],
     "m_factors": {},
     "index_no": "016-023-00-4",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H350",
+        "h_class": "Carc. 1B",
+        "c_min": 0.01
+      },
+      {
+        "h_code": "H341",
+        "h_class": "Muta. 2",
+        "c_min": 0.01
+      },
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "1468-37-7": {
     "name": "dimexano(ISO); bis(methoxythiocarbonyl) disulphide",
@@ -13088,7 +13407,14 @@
     ],
     "m_factors": {},
     "index_no": "016-030-00-2",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 20.0
+      }
+    ]
   },
   "126-33-0": {
     "name": "tetrahydrothiophene-1,1-dioxide; sulpholane",
@@ -13133,7 +13459,14 @@
     ],
     "m_factors": {},
     "index_no": "016-032-00-3",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H350",
+        "h_class": "Carc. 1B",
+        "c_min": 0.01
+      }
+    ]
   },
   "13360-57-1": {
     "name": "dimethylsulfamoylchloride",
@@ -14477,7 +14810,39 @@
     ],
     "m_factors": {},
     "index_no": "017-006-00-4",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1A",
+        "c_min": 50.0
+      },
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H271",
+        "h_class": "Ox. Liq. 1",
+        "c_min": 50.0
+      },
+      {
+        "h_code": "H272",
+        "h_class": "Ox. Liq. 2",
+        "c_min": 50.0
+      }
+    ]
   },
   "13465-95-7": {
     "name": "barium perchlorate",
@@ -14671,7 +15036,29 @@
       "acute": 10
     },
     "index_no": "017-012-00-7",
-    "atp": "ATP01corr"
+    "atp": "ATP01corr",
+    "scl": [
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 3.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 0.5
+      }
+    ]
   },
   "10043-52-4": {
     "name": "calcium chloride",
@@ -14935,7 +15322,34 @@
       "acute": 10
     },
     "index_no": "017-026-01-0",
-    "atp": "ATP01corr"
+    "atp": "ATP01corr",
+    "scl": [
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 3.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 0.3
+      },
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 3.0
+      }
+    ]
   },
   "7440-09-7": {
     "name": "potassium",
@@ -15296,7 +15710,14 @@
     ],
     "m_factors": {},
     "index_no": "024-001-00-0",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 1.0
+      }
+    ]
   },
   "7778-50-9": {
     "name": "potassium dichromate",
@@ -15483,7 +15904,24 @@
     ],
     "m_factors": {},
     "index_no": "024-003-00-1",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H334",
+        "h_class": "Resp. Sens. 1",
+        "c_min": 0.2
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.2
+      }
+    ]
   },
   "10588-01-9": {
     "name": "sodium dichromate",
@@ -15553,7 +15991,24 @@
     ],
     "m_factors": {},
     "index_no": "024-004-00-7",
-    "atp": "ATP01corr"
+    "atp": "ATP01corr",
+    "scl": [
+      {
+        "h_code": "H334",
+        "h_class": "Resp. Sens. 1",
+        "c_min": 0.2
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.2
+      },
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "14977-61-8": {
     "name": "chromyl dichloride; chromic oxychloride",
@@ -15599,7 +16054,39 @@
     ],
     "m_factors": {},
     "index_no": "024-005-00-2",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1A",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 0.5
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 0.5
+      },
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 0.5
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.5
+      }
+    ]
   },
   "7789-00-6": {
     "name": "potassium chromate",
@@ -15647,7 +16134,14 @@
     ],
     "m_factors": {},
     "index_no": "024-006-00-8",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.5
+      }
+    ]
   },
   "13765-19-0": {
     "name": "calcium chromate",
@@ -15889,7 +16383,19 @@
     ],
     "m_factors": {},
     "index_no": "024-018-00-3",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H334",
+        "h_class": "Resp. Sens. 1",
+        "c_min": 0.2
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.2
+      }
+    ]
   },
   "1313-13-9": {
     "name": "manganese dioxide",
@@ -16112,7 +16618,14 @@
     ],
     "m_factors": {},
     "index_no": "026-003-01-4",
-    "atp": "ATP01"
+    "atp": "ATP01",
+    "scl": [
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 25.0
+      }
+    ]
   },
   "12160-44-0": {
     "name": "potassium ferrite",
@@ -16301,7 +16814,14 @@
       "acute": 10
     },
     "index_no": "027-004-00-5",
-    "atp": "ATP01"
+    "atp": "ATP01",
+    "scl": [
+      {
+        "h_code": "H350i",
+        "h_class": "Carc. 1B",
+        "c_min": 0.01
+      }
+    ]
   },
   "10124-43-3": {
     "name": "cobalt sulfate",
@@ -16351,7 +16871,14 @@
       "acute": 10
     },
     "index_no": "027-005-00-0",
-    "atp": "ATP01"
+    "atp": "ATP01",
+    "scl": [
+      {
+        "h_code": "H350i",
+        "h_class": "Carc. 1B",
+        "c_min": 0.01
+      }
+    ]
   },
   "71-48-7": {
     "name": "cobalt di(acetate)",
@@ -16396,7 +16923,14 @@
       "acute": 10
     },
     "index_no": "027-006-00-6",
-    "atp": "ATP01corr"
+    "atp": "ATP01corr",
+    "scl": [
+      {
+        "h_code": "H350i",
+        "h_class": "Carc. 1B",
+        "c_min": 0.01
+      }
+    ]
   },
   "10141-05-6": {
     "name": "cobalt dinitrate",
@@ -16441,7 +16975,14 @@
       "acute": 10
     },
     "index_no": "027-009-00-2",
-    "atp": "ATP01corr"
+    "atp": "ATP01corr",
+    "scl": [
+      {
+        "h_code": "H350i",
+        "h_class": "Carc. 1B",
+        "c_min": 0.01
+      }
+    ]
   },
   "513-79-1": {
     "name": "cobalt carbonate",
@@ -16486,7 +17027,14 @@
       "acute": 10
     },
     "index_no": "027-010-00-8",
-    "atp": "ATP01"
+    "atp": "ATP01",
+    "scl": [
+      {
+        "h_code": "H350i",
+        "h_class": "Carc. 1B",
+        "c_min": 0.01
+      }
+    ]
   },
   "13463-39-3": {
     "name": "tetracarbonylnickel; nickel tetracarbonyl",
@@ -17103,7 +17651,29 @@
       "acute": 1
     },
     "index_no": "028-009-00-5",
-    "atp": "ATP01corr"
+    "atp": "ATP01corr",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 20.0
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "3333-67-3": {
     "name": "nickel carbonate; basic nickel carbonate; carbonic acid, nickel (2+) salt [1]\ncarbonic acid, nickel salt [2]\n[Âµ-[carbonato(2-)-O:O']] dihydroxy trinickel [3]\n[carbonato(2-)] tetrahydroxytrinickel [4]",
@@ -17405,7 +17975,29 @@
       "acute": 1
     },
     "index_no": "028-011-00-6",
-    "atp": "ATP01corr"
+    "atp": "ATP01corr",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 20.0
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "13138-45-9": {
     "name": "nickel dinitrate [1]\nnitric acid, nickel salt [2]",
@@ -17477,7 +18069,29 @@
       "acute": 1
     },
     "index_no": "028-012-00-1",
-    "atp": "ATP01corr"
+    "atp": "ATP01corr",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 20.0
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "14216-75-2": {
     "name": "nickel dinitrate [1]\nnitric acid, nickel salt [2]",
@@ -17549,7 +18163,29 @@
       "acute": 1
     },
     "index_no": "028-012-00-1",
-    "atp": "ATP01corr"
+    "atp": "ATP01corr",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 20.0
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "69012-50-6": {
     "name": "nickel matte",
@@ -17647,7 +18283,24 @@
       "acute": 1
     },
     "index_no": "028-014-00-2",
-    "atp": "ATP01"
+    "atp": "ATP01",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "94551-87-8": {
     "name": "slimes and sludges, copper electrolyte refining, decopperised",
@@ -17748,7 +18401,24 @@
       "acute": 1
     },
     "index_no": "028-016-00-3",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "13842-46-1": {
     "name": "nickel dipotassium bis(sulfate) [1]\ndiammonium nickel bis(sulfate) [2]",
@@ -17806,7 +18476,24 @@
       "acute": 1
     },
     "index_no": "028-017-00-9",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "15699-18-0": {
     "name": "nickel dipotassium bis(sulfate) [1]\ndiammonium nickel bis(sulfate) [2]",
@@ -17864,7 +18551,24 @@
       "acute": 1
     },
     "index_no": "028-017-00-9",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "13770-89-3": {
     "name": "nickel bis(sulfamidate); nickel sulfamate",
@@ -17918,7 +18622,24 @@
       "acute": 1
     },
     "index_no": "028-018-00-4",
-    "atp": "ATP14"
+    "atp": "ATP14",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "14708-14-6": {
     "name": "nickel bis(tetrafluoroborate)",
@@ -17967,7 +18688,24 @@
       "acute": 1
     },
     "index_no": "028-019-00-X",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "3349-06-2": {
     "name": "nickel diformate [1]\nformic acid, nickel salt [2]\nformic acid, copper nickel salt [3]",
@@ -18016,7 +18754,24 @@
       "acute": 1
     },
     "index_no": "028-021-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "15843-02-4": {
     "name": "nickel diformate [1]\nformic acid, nickel salt [2]\nformic acid, copper nickel salt [3]",
@@ -18065,7 +18820,24 @@
       "acute": 1
     },
     "index_no": "028-021-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "68134-59-8": {
     "name": "nickel diformate [1]\nformic acid, nickel salt [2]\nformic acid, copper nickel salt [3]",
@@ -18114,7 +18886,24 @@
       "acute": 1
     },
     "index_no": "028-021-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "373-02-4": {
     "name": "nickel di(acetate) [1]\nnickel acetate [2]",
@@ -18172,7 +18961,24 @@
       "acute": 1
     },
     "index_no": "028-022-00-6",
-    "atp": "ATP01corr"
+    "atp": "ATP01corr",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "14998-37-9": {
     "name": "nickel di(acetate) [1]\nnickel acetate [2]",
@@ -18230,7 +19036,24 @@
       "acute": 1
     },
     "index_no": "028-022-00-6",
-    "atp": "ATP01corr"
+    "atp": "ATP01corr",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "553-71-9": {
     "name": "nickel dibenzoate",
@@ -18279,7 +19102,24 @@
       "acute": 1
     },
     "index_no": "028-024-00-7",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "3906-55-6": {
     "name": "nickel bis(4-cyclohexylbutyrate)",
@@ -18328,7 +19168,24 @@
       "acute": 1
     },
     "index_no": "028-025-00-2",
-    "atp": "ATP01"
+    "atp": "ATP01",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "2223-95-2": {
     "name": "nickel(II) stearate; nickel(II) octadecanoate",
@@ -18377,7 +19234,24 @@
       "acute": 1
     },
     "index_no": "028-026-00-8",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "16039-61-5": {
     "name": "nickel dilactate",
@@ -18426,7 +19300,24 @@
       "acute": 1
     },
     "index_no": "028-027-00-3",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "4995-91-9": {
     "name": "nickel(II) octanoate",
@@ -18480,7 +19371,24 @@
       "acute": 1
     },
     "index_no": "028-028-00-9",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "10028-18-9": {
     "name": "nickel difluoride [1]\nnickel dibromide [2]\nnickel diiodide [3]\nnickel potassium fluoride [4]",
@@ -18529,7 +19437,24 @@
       "acute": 1
     },
     "index_no": "028-029-00-4",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "13462-88-9": {
     "name": "nickel difluoride [1]\nnickel dibromide [2]\nnickel diiodide [3]\nnickel potassium fluoride [4]",
@@ -18578,7 +19503,24 @@
       "acute": 1
     },
     "index_no": "028-029-00-4",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "13462-90-3": {
     "name": "nickel difluoride [1]\nnickel dibromide [2]\nnickel diiodide [3]\nnickel potassium fluoride [4]",
@@ -18627,7 +19569,24 @@
       "acute": 1
     },
     "index_no": "028-029-00-4",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "11132-10-8": {
     "name": "nickel difluoride [1]\nnickel dibromide [2]\nnickel diiodide [3]\nnickel potassium fluoride [4]",
@@ -18676,7 +19635,24 @@
       "acute": 1
     },
     "index_no": "028-029-00-4",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "26043-11-8": {
     "name": "nickel hexafluorosilicate",
@@ -18725,7 +19701,24 @@
       "acute": 1
     },
     "index_no": "028-030-00-X",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "15060-62-5": {
     "name": "nickel selenate",
@@ -18774,7 +19767,24 @@
       "acute": 1
     },
     "index_no": "028-031-00-5",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "14332-34-4": {
     "name": "nickel hydrogen phosphate [1]\nnickel bis(dihydrogen phosphate) [2]\ntrinickel bis(orthophosphate) [3]\ndinickel diphosphate [4]\nnickel bis(phosphinate) [5]\nnickel phosphinate [6]\nphosphoric acid, calcium nickel salt [7]\ndiphosphoric acid, nickel(II) salt [8]",
@@ -19819,7 +20829,24 @@
       "acute": 1
     },
     "index_no": "028-046-00-7",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "15586-38-6": {
     "name": "nickel dichromate",
@@ -19868,7 +20895,24 @@
       "acute": 1
     },
     "index_no": "028-047-00-2",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "10101-96-9": {
     "name": "nickel(II) selenite",
@@ -20131,7 +21175,24 @@
       "acute": 1
     },
     "index_no": "028-053-00-5",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "14550-87-9": {
     "name": "nickel dichlorate [1]\nnickel dibromate [2]\nethyl hydrogen sulfate, nickel(II) salt [3]",
@@ -20180,7 +21241,24 @@
       "acute": 1
     },
     "index_no": "028-053-00-5",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "71720-48-4": {
     "name": "nickel dichlorate [1]\nnickel dibromate [2]\nethyl hydrogen sulfate, nickel(II) salt [3]",
@@ -20229,7 +21307,24 @@
       "acute": 1
     },
     "index_no": "028-053-00-5",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "16083-14-0": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -20278,7 +21373,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "3349-08-4": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -20327,7 +21439,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "39819-65-3": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -20376,7 +21505,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "18721-51-2": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -20425,7 +21571,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "18283-82-4": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -20474,7 +21637,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "22605-92-1": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -20523,7 +21703,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "4454-16-4": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -20572,7 +21769,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "7580-31-6": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -20621,7 +21835,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "93983-68-7": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -20670,7 +21901,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "29317-63-3": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -20719,7 +21967,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "27637-46-3": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -20768,7 +22033,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "84852-37-9": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -20817,7 +22099,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "93920-10-6": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -20866,7 +22165,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "85508-43-6": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -20915,7 +22231,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "85508-44-7": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -20964,7 +22297,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "51818-56-5": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -21013,7 +22363,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "93920-09-3": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -21062,7 +22429,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "71957-07-8": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -21111,7 +22495,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "52625-25-9": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -21160,7 +22561,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "13654-40-5": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -21209,7 +22627,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "85508-45-8": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -21258,7 +22693,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "85508-46-9": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -21307,7 +22759,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "84852-35-7": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -21356,7 +22825,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "84852-39-1": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -21405,7 +22891,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "85135-77-9": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -21454,7 +22957,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "85166-19-4": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -21503,7 +23023,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "84852-36-8": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -21552,7 +23089,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "85551-28-6": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -21601,7 +23155,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "91697-41-5": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -21650,7 +23221,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "84776-45-4": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -21699,7 +23287,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "72319-19-8": {
     "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
@@ -21748,7 +23353,24 @@
       "acute": 1
     },
     "index_no": "028-054-00-0",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "7757-95-1": {
     "name": "nickel(II) sulfite [1]\nnickel tellurium trioxide [2]\nnickel tellurium tetraoxide [3]\nmolybdenum nickel hydroxide oxide phosphate [4]",
@@ -23218,7 +24840,14 @@
     ],
     "m_factors": {},
     "index_no": "030-003-00-2",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "544-97-8": {
     "name": "dimethylzinc [1]\ndiethylzinc [2]",
@@ -24216,7 +25845,14 @@
     ],
     "m_factors": {},
     "index_no": "048-003-00-6",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.25
+      }
+    ]
   },
   "542-83-6": {
     "name": "cadmium cyanide",
@@ -24260,7 +25896,14 @@
     ],
     "m_factors": {},
     "index_no": "048-004-00-1",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      }
+    ]
   },
   "17010-21-8": {
     "name": "cadmiumhexafluorosilicate(2-); cadmium fluorosilica",
@@ -24300,7 +25943,14 @@
     ],
     "m_factors": {},
     "index_no": "048-005-00-7",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      }
+    ]
   },
   "7790-79-6": {
     "name": "cadmium fluoride",
@@ -24348,7 +25998,24 @@
     ],
     "m_factors": {},
     "index_no": "048-006-00-2",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H350",
+        "h_class": "Carc. 1B",
+        "c_min": 0.01
+      },
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 7.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      }
+    ]
   },
   "7790-80-9": {
     "name": "cadmium iodide",
@@ -24388,7 +26055,14 @@
     ],
     "m_factors": {},
     "index_no": "048-007-00-8",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      }
+    ]
   },
   "10108-64-2": {
     "name": "cadmium chloride",
@@ -24436,7 +26110,24 @@
     ],
     "m_factors": {},
     "index_no": "048-008-00-3",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H350",
+        "h_class": "Carc. 1B",
+        "c_min": 0.01
+      },
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 7.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      }
+    ]
   },
   "10124-36-4": {
     "name": "cadmium sulphate",
@@ -24484,7 +26175,24 @@
     ],
     "m_factors": {},
     "index_no": "048-009-00-9",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H350",
+        "h_class": "Carc. 1B",
+        "c_min": 0.01
+      },
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 7.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      }
+    ]
   },
   "1306-23-6": {
     "name": "cadmium sulphide",
@@ -24523,7 +26231,19 @@
     ],
     "m_factors": {},
     "index_no": "048-010-00-4",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      }
+    ]
   },
   "513-78-0": {
     "name": "cadmium carbonate",
@@ -24667,7 +26387,14 @@
     ],
     "m_factors": {},
     "index_no": "048-014-00-6",
-    "atp": "ATP10"
+    "atp": "ATP10",
+    "scl": [
+      {
+        "h_code": "H350",
+        "h_class": "Carc. 1B",
+        "c_min": 0.01
+      }
+    ]
   },
   "7646-78-8": {
     "name": "tin tetrachloride; stannic chloride",
@@ -24689,7 +26416,14 @@
     ],
     "m_factors": {},
     "index_no": "050-001-00-5",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "13121-70-5": {
     "name": "cyhexatin (ISO); hydroxytricyclohexylstannane; tri(cyclohexyl)tin hydroxide",
@@ -25231,7 +26965,14 @@
     ],
     "m_factors": {},
     "index_no": "050-021-00-4",
-    "atp": "ATP15"
+    "atp": "ATP15",
+    "scl": [
+      {
+        "h_code": "H360D",
+        "h_class": "Repr. 1B",
+        "c_min": 0.03
+      }
+    ]
   },
   "683-18-1": {
     "name": "dibutyltin dichloride; (DBTC)",
@@ -25286,7 +27027,29 @@
       "acute": 10
     },
     "index_no": "050-022-00-X",
-    "atp": "ATP01"
+    "atp": "ATP01",
+    "scl": [
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 0.01
+      },
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 3.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 0.01
+      }
+    ]
   },
   "993-16-8": {
     "name": "trichloromethylstannane",
@@ -25653,7 +27416,14 @@
     ],
     "m_factors": {},
     "index_no": "051-001-00-8",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "7647-18-9": {
     "name": "antimony pentachloride",
@@ -25676,7 +27446,14 @@
     ],
     "m_factors": {},
     "index_no": "051-002-00-3",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "7783-56-4": {
     "name": "antimony trifluoride",
@@ -25841,7 +27618,34 @@
     ],
     "m_factors": {},
     "index_no": "053-002-00-9",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1A",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 0.2
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 0.02
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 0.02
+      },
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 0.02
+      }
+    ]
   },
   "696-33-3": {
     "name": "iodoxybenzene",
@@ -26594,7 +28398,14 @@
     ],
     "m_factors": {},
     "index_no": "080-007-00-3",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.05
+      }
+    ]
   },
   "627-44-1": {
     "name": "dimethylmercury [1]\ndiethylmercury [2]",
@@ -26634,7 +28445,14 @@
     ],
     "m_factors": {},
     "index_no": "080-007-00-3",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.05
+      }
+    ]
   },
   "55-68-5": {
     "name": "phenylmercury nitrate [1]\nphenylmercury hydroxide [2]\nbasic phenylmercury nitrate [3]",
@@ -29705,7 +31523,14 @@
     ],
     "m_factors": {},
     "index_no": "601-025-00-5",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 25.0
+      }
+    ]
   },
   "100-42-5": {
     "name": "styrene",
@@ -29811,7 +31636,14 @@
         "h_code": "H411"
       }
     ],
-    "m_factors": {}
+    "m_factors": {},
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 25.0
+      }
+    ]
   },
   "611-15-4": {
     "name": "2-methylstyrene; 2-vinyltoluene",
@@ -30063,7 +31895,14 @@
     ],
     "m_factors": {},
     "index_no": "601-032-00-3",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H350",
+        "h_class": "Carc. 1B",
+        "c_min": 0.01
+      }
+    ]
   },
   "56-55-3": {
     "name": "benz[a]anthracene",
@@ -30272,7 +32111,14 @@
       "acute": 100
     },
     "index_no": "601-041-00-2",
-    "atp": "ATP01"
+    "atp": "ATP01",
+    "scl": [
+      {
+        "h_code": "H350",
+        "h_class": "Carc. 1B",
+        "c_min": 0.01
+      }
+    ]
   },
   "92-52-4": {
     "name": "biphenyl; diphenyl",
@@ -31346,7 +33192,14 @@
     ],
     "m_factors": {},
     "index_no": "601-092-00-0",
-    "atp": "ATP15"
+    "atp": "ATP15",
+    "scl": [
+      {
+        "h_code": "H350",
+        "h_class": "Carc. 1B",
+        "c_min": 0.001
+      }
+    ]
   },
   "571-58-4": {
     "name": "1,4-dimethylnaphthalene",
@@ -32188,7 +34041,19 @@
     ],
     "m_factors": {},
     "index_no": "602-017-00-4",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.2
+      }
+    ]
   },
   "540-54-5": {
     "name": "1-chloropropane [1]\n2-chloropropane [2]",
@@ -33214,7 +35079,14 @@
     ],
     "m_factors": {},
     "index_no": "602-039-00-4",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.005
+      }
+    ]
   },
   "95-49-8": {
     "name": "2-chlorotoluene [1]\n3-chlorotoluene [2]\n4-chlorotoluene [3]\nchlorotoluene [4]",
@@ -34333,7 +36205,19 @@
     ],
     "m_factors": {},
     "index_no": "602-073-00-X",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H350",
+        "h_class": "Carc. 1B",
+        "c_min": 0.01
+      },
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "608-93-5": {
     "name": "pentachlorobenzene",
@@ -34440,7 +36324,14 @@
     ],
     "m_factors": {},
     "index_no": "602-076-00-6",
-    "atp": "ATP01"
+    "atp": "ATP01",
+    "scl": [
+      {
+        "h_code": "H351",
+        "h_class": "Carc. 2",
+        "c_min": 0.1
+      }
+    ]
   },
   "2385-85-5": {
     "name": "dodecachloropentacyclo[5.2.1.02,6.03,9.05,8]decane; mirex",
@@ -35663,7 +37554,14 @@
     ],
     "m_factors": {},
     "index_no": "603-008-00-8",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 25.0
+      }
+    ]
   },
   "108-93-0": {
     "name": "cyclohexanol",
@@ -35964,7 +37862,14 @@
     ],
     "m_factors": {},
     "index_no": "603-016-00-1",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 10.0
+      }
+    ]
   },
   "98-00-0": {
     "name": "furfuryl alcohol",
@@ -36245,7 +38150,19 @@
     ],
     "m_factors": {},
     "index_no": "603-025-00-0",
-    "atp": "ATP03"
+    "atp": "ATP03",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 25.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 25.0
+      }
+    ]
   },
   "106-89-8": {
     "name": "1-chloro-2,3-epoxypropane; epichlorhydrin",
@@ -36408,7 +38325,14 @@
     ],
     "m_factors": {},
     "index_no": "603-030-00-8",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "110-71-4": {
     "name": "1,2-dimethoxyethane; ethylene glycol dimethyl ether; EGDME",
@@ -36970,7 +38894,14 @@
     ],
     "m_factors": {},
     "index_no": "603-046-00-5",
-    "atp": "ATP01"
+    "atp": "ATP01",
+    "scl": [
+      {
+        "h_code": "H350",
+        "h_class": "Carc. 1A",
+        "c_min": 0.001
+      }
+    ]
   },
   "108-01-0": {
     "name": "2-dimethylaminoethanol; N,N-dimethylethanolamine",
@@ -37006,7 +38937,14 @@
     ],
     "m_factors": {},
     "index_no": "603-047-00-0",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "100-37-8": {
     "name": "2-diethylaminoethanol; N,N-diethylethanolamine",
@@ -37042,7 +38980,14 @@
     ],
     "m_factors": {},
     "index_no": "603-048-00-6",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "80-06-8": {
     "name": "chlorfenethol (ISO); 1,1-bis (4-chlorophenyl) ethanol",
@@ -37188,7 +39133,14 @@
     ],
     "m_factors": {},
     "index_no": "603-054-00-9",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 10.0
+      }
+    ]
   },
   "75-56-9": {
     "name": "propylene oxide; 1,2-epoxypropane; methyloxirane",
@@ -37528,7 +39480,14 @@
     ],
     "m_factors": {},
     "index_no": "603-062-00-2",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 10.0
+      }
+    ]
   },
   "556-52-5": {
     "name": "2,3-epoxypropan-1-ol; glycidol; oxiranemethanol",
@@ -37897,7 +39856,19 @@
     ],
     "m_factors": {},
     "index_no": "603-073-00-2",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 5.0
+      }
+    ]
   },
   "25068-38-6": {
     "name": "reaction product: bisphenol-A-(epichlorhydrin); epoxy resin (number average molecular weight â‰¤ 700)",
@@ -37928,7 +39899,19 @@
     ],
     "m_factors": {},
     "index_no": "603-074-00-8",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 5.0
+      }
+    ]
   },
   "107-30-2": {
     "name": "chlormethyl methyl ether; chlorodimethyl ether",
@@ -38004,7 +39987,24 @@
     ],
     "m_factors": {},
     "index_no": "603-076-00-9",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 50.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 25.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 25.0
+      }
+    ]
   },
   "108-16-7": {
     "name": "1-dimethylaminopropan-2-ol; dimepranol (INN)",
@@ -38118,7 +40118,14 @@
     ],
     "m_factors": {},
     "index_no": "603-080-00-0",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "111-48-8": {
     "name": "2,2'-thiodiethanol; thiodiglycol",
@@ -38745,7 +40752,14 @@
     ],
     "m_factors": {},
     "index_no": "603-107-00-6",
-    "atp": "ATP18"
+    "atp": "ATP18",
+    "scl": [
+      {
+        "h_code": "H360D",
+        "h_class": "Repr. 1B",
+        "c_min": 3.0
+      }
+    ]
   },
   "78-83-1": {
     "name": "2-methylpropan-1-ol; iso-butanol",
@@ -40303,7 +42317,19 @@
     ],
     "m_factors": {},
     "index_no": "603-180-00-4",
-    "atp": "ATP13"
+    "atp": "ATP13",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 3.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.3
+      }
+    ]
   },
   "1634-04-4": {
     "name": "tert-butyl methyl ether; MTBE; 2-methoxy-2-methylpropane",
@@ -40344,7 +42370,19 @@
     ],
     "m_factors": {},
     "index_no": "603-183-00-0",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 30.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 20.0
+      }
+    ]
   },
   "146925-83-9": {
     "name": "2-(hydroxymethyl)-2-[[2-hydroxy-3-(isooctadecyloxy)propoxy]methyl]-1,3-propanediol",
@@ -40562,7 +42600,14 @@
     ],
     "m_factors": {},
     "index_no": "603-194-00-0",
-    "atp": "ATP01corr"
+    "atp": "ATP01corr",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "154825-62-4": {
     "name": "2-[4-(4-methoxyphenyl)-6-phenyl-1,3,5-triazin-2-yl]-phenol",
@@ -41719,7 +43764,24 @@
     ],
     "m_factors": {},
     "index_no": "604-001-00-2",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 3.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 1.0
+      }
+    ]
   },
   "87-86-5": {
     "name": "pentachlorophenol",
@@ -42538,7 +44600,14 @@
     ],
     "m_factors": {},
     "index_no": "604-012-00-2",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 1.0
+      }
+    ]
   },
   "58-90-2": {
     "name": "2,3,4,6-tetrachlorophenol",
@@ -42573,7 +44642,19 @@
     ],
     "m_factors": {},
     "index_no": "604-013-00-8",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 5.0
+      }
+    ]
   },
   "59-50-7": {
     "name": "chlorocresol; 4-chloro-m-cresol; 4-chloro-3-methylphenol",
@@ -42724,7 +44805,19 @@
     ],
     "m_factors": {},
     "index_no": "604-017-00-X",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 5.0
+      }
+    ]
   },
   "88-06-2": {
     "name": "2,4,6-trichlorophenol",
@@ -44032,7 +46125,14 @@
     ],
     "m_factors": {},
     "index_no": "604-076-00-1",
-    "atp": "ATP01corr"
+    "atp": "ATP01corr",
+    "scl": [
+      {
+        "h_code": "H350",
+        "h_class": "Carc. 1B",
+        "c_min": 1.0
+      }
+    ]
   },
   "98809-58-6": {
     "name": "2-benzotriazol-2-yl-4-methyl-6-(2-methylallyl)phenol",
@@ -44447,7 +46547,14 @@
     ],
     "m_factors": {},
     "index_no": "604-094-00-X",
-    "atp": "ATP13"
+    "atp": "ATP13",
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1A",
+        "c_min": 0.01
+      }
+    ]
   },
   "5932-68-3": {
     "name": "isoeugenol [1]\n(E)-2-methoxy-4-(prop-1-enyl)phenol [2]\n(Z)-2-methoxy-4-(prop-1-enyl)phenol [3]",
@@ -44465,7 +46572,14 @@
     ],
     "m_factors": {},
     "index_no": "604-094-00-X",
-    "atp": "ATP13"
+    "atp": "ATP13",
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1A",
+        "c_min": 0.01
+      }
+    ]
   },
   "5912-86-7": {
     "name": "isoeugenol [1]\n(E)-2-methoxy-4-(prop-1-enyl)phenol [2]\n(Z)-2-methoxy-4-(prop-1-enyl)phenol [3]",
@@ -44483,7 +46597,14 @@
     ],
     "m_factors": {},
     "index_no": "604-094-00-X",
-    "atp": "ATP13"
+    "atp": "ATP13",
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1A",
+        "c_min": 0.01
+      }
+    ]
   },
   "119-47-1": {
     "name": "6,6'-di-tert-butyl-2,2'-methylenedi-p-cresol; [DBMC]",
@@ -44881,7 +47002,14 @@
       "chronic": 1
     },
     "index_no": "605-008-00-3",
-    "atp": "ATP06"
+    "atp": "ATP06",
+    "scl": [
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 0.1
+      }
+    ]
   },
   "4170-30-3": {
     "name": "crotonaldehyde; 2-butenal [1]\n(E)-2-butenal; (E)-crotonaldehyde [2]",
@@ -45369,7 +47497,14 @@
       "acute": 1
     },
     "index_no": "605-022-00-X",
-    "atp": "ATP09"
+    "atp": "ATP09",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 0.5
+      }
+    ]
   },
   "3380-30-1": {
     "name": "5-chloro-2-(4-chlorophenoxy)phenol; [DCPP]",
@@ -45463,7 +47598,14 @@
     ],
     "m_factors": {},
     "index_no": "605-025-00-6",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "114119-97-0": {
     "name": "2,5,7,7-tetramethyloctanal",
@@ -46238,7 +48380,14 @@
     ],
     "m_factors": {},
     "index_no": "606-005-00-X",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 10.0
+      }
+    ]
   },
   "96-22-0": {
     "name": "pentan-3-one; diethyl ketone",
@@ -46395,7 +48544,14 @@
     ],
     "m_factors": {},
     "index_no": "606-012-00-8",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 10.0
+      }
+    ]
   },
   "106-51-4": {
     "name": "p-benzoquinone; quinone",
@@ -46483,7 +48639,24 @@
       "chronic": 1
     },
     "index_no": "606-014-00-9",
-    "atp": "ATP09"
+    "atp": "ATP09",
+    "scl": [
+      {
+        "h_code": "H360D",
+        "h_class": "Repr. 1B",
+        "c_min": 0.003
+      },
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.01
+      }
+    ]
   },
   "83-26-1": {
     "name": "pindone (ISO); 2-pivaloylindan-1,3-dione",
@@ -46636,7 +48809,14 @@
     ],
     "m_factors": {},
     "index_no": "606-020-00-1",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 10.0
+      }
+    ]
   },
   "872-50-4": {
     "name": "N-methyl-2-pyrrolidone; 1-methyl-2-pyrrolidone",
@@ -46667,7 +48847,14 @@
     ],
     "m_factors": {},
     "index_no": "606-021-00-7",
-    "atp": "ATP09"
+    "atp": "ATP09",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 10.0
+      }
+    ]
   },
   "92-43-3": {
     "name": "1-phenyl-3-pyrazolidone",
@@ -49249,7 +51436,19 @@
       "acute": 10000
     },
     "index_no": "606-143-00-0",
-    "atp": "ATP03"
+    "atp": "ATP03",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.5
+      }
+    ]
   },
   "65195-55-3": {
     "name": "abamectin (combination of avermectin B1a and avermectin B1b) (ISO) [1]\navermectin B1a (purity â‰¥80 %) [2]",
@@ -49291,7 +51490,19 @@
       "acute": 10000
     },
     "index_no": "606-143-00-0",
-    "atp": "ATP03"
+    "atp": "ATP03",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.5
+      }
+    ]
   },
   "57960-19-7": {
     "name": "acequinocyl (ISO); 3-dodecyl-1,4-dioxo-1,4-dihydronaphthalen-2-yl acetate",
@@ -49663,7 +51874,14 @@
     ],
     "m_factors": {},
     "index_no": "606-155-00-6",
-    "atp": "ATP21"
+    "atp": "ATP21",
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "14371-10-9": {
     "name": "cinnamaldehyde; 3-phenylprop-2-enal; cinnamic aldehyde; cinnamal [1]\n(2E)-3-phenylprop-2-enal [2]",
@@ -49681,7 +51899,14 @@
     ],
     "m_factors": {},
     "index_no": "606-155-00-6",
-    "atp": "ATP21"
+    "atp": "ATP21",
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.01
+      }
+    ]
   },
   "127-06-0": {
     "name": "acetone oxime",
@@ -49787,7 +52012,39 @@
         "h_code": "H318"
       }
     ],
-    "m_factors": {}
+    "m_factors": {},
+    "scl": [
+      {
+        "h_code": "H226",
+        "h_class": "Flam. Liq. 3",
+        "c_min": 85.0
+      },
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1A",
+        "c_min": 90.0
+      },
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 2.0
+      },
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 2.0
+      }
+    ]
   },
   "64-19-7": {
     "name": "acetic acid ... %",
@@ -49876,7 +52133,14 @@
     ],
     "m_factors": {},
     "index_no": "607-003-00-1",
-    "atp": "ATP01"
+    "atp": "ATP01",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "76-03-9": {
     "name": "TCA (ISO); trichloroacetic acid",
@@ -49903,7 +52167,14 @@
     ],
     "m_factors": {},
     "index_no": "607-004-00-7",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 1.0
+      }
+    ]
   },
   "650-51-1": {
     "name": "TCA-sodium (ISO); sodium trichloroacetate",
@@ -50007,7 +52278,34 @@
     ],
     "m_factors": {},
     "index_no": "607-008-00-9",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 25.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "85-44-9": {
     "name": "phthalic anhydride",
@@ -50065,7 +52363,24 @@
     ],
     "m_factors": {},
     "index_no": "607-010-00-X",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 25.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 10.0
+      }
+    ]
   },
   "75-36-5": {
     "name": "acetyl chloride",
@@ -50888,7 +53203,24 @@
     ],
     "m_factors": {},
     "index_no": "607-032-00-X",
-    "atp": "ATP21"
+    "atp": "ATP21",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 5.0
+      }
+    ]
   },
   "97-88-1": {
     "name": "n-butyl methacrylate",
@@ -51484,7 +53816,24 @@
     ],
     "m_factors": {},
     "index_no": "607-056-00-0",
-    "atp": "ATP09"
+    "atp": "ATP09",
+    "scl": [
+      {
+        "h_code": "H360D",
+        "h_class": "Repr. 1A",
+        "c_min": 0.003
+      },
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 0.5
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.05
+      }
+    ]
   },
   "5543-57-7": {
     "name": "warfarin (ISO); 4-hydroxy-3-(3-oxo-1-phenylbutyl)-2H-chromen-2-one [1]\n(S)-4-hydroxy-3-(3-oxo-1-phenylbutyl)-2-benzopyrone [2]\n(R)-4-hydroxy-3-(3-oxo-1-phenylbutyl)-2-benzopyrone [3]",
@@ -51524,7 +53873,24 @@
     ],
     "m_factors": {},
     "index_no": "607-056-00-0",
-    "atp": "ATP09"
+    "atp": "ATP09",
+    "scl": [
+      {
+        "h_code": "H360D",
+        "h_class": "Repr. 1A",
+        "c_min": 0.003
+      },
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 0.5
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.05
+      }
+    ]
   },
   "5543-58-8": {
     "name": "warfarin (ISO); 4-hydroxy-3-(3-oxo-1-phenylbutyl)-2H-chromen-2-one [1]\n(S)-4-hydroxy-3-(3-oxo-1-phenylbutyl)-2-benzopyrone [2]\n(R)-4-hydroxy-3-(3-oxo-1-phenylbutyl)-2-benzopyrone [3]",
@@ -51564,7 +53930,24 @@
     ],
     "m_factors": {},
     "index_no": "607-056-00-0",
-    "atp": "ATP09"
+    "atp": "ATP09",
+    "scl": [
+      {
+        "h_code": "H360D",
+        "h_class": "Repr. 1A",
+        "c_min": 0.003
+      },
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 0.5
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.05
+      }
+    ]
   },
   "81-82-3": {
     "name": "coumachlor (ISO); 3-[1-(4-chlorophenyl)-3-oxobutyl]-4-hydroxycoumarin",
@@ -51655,7 +54038,24 @@
       "acute": 10
     },
     "index_no": "607-059-00-7",
-    "atp": "ATP09"
+    "atp": "ATP09",
+    "scl": [
+      {
+        "h_code": "H360D",
+        "h_class": "Repr. 1B",
+        "c_min": 0.003
+      },
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.1
+      }
+    ]
   },
   "66-76-2": {
     "name": "dicoumarol; 4,4'-dihydroxy-3,3'-methylenebis(2H-chromen-2-one)",
@@ -51724,7 +54124,14 @@
     ],
     "m_factors": {},
     "index_no": "607-061-00-8",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 1.0
+      }
+    ]
   },
   "141-32-2": {
     "name": "n-butyl acrylate",
@@ -51808,7 +54215,14 @@
     ],
     "m_factors": {},
     "index_no": "607-064-00-4",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "79-08-3": {
     "name": "bromoacetic acid",
@@ -52041,7 +54455,14 @@
     ],
     "m_factors": {},
     "index_no": "607-072-00-8",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.2
+      }
+    ]
   },
   "122-88-3": {
     "name": "4-CPA (ISO); 4-chlorophenoxyacetic acid",
@@ -52384,7 +54805,14 @@
     ],
     "m_factors": {},
     "index_no": "607-088-00-5",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 1.0
+      }
+    ]
   },
   "79-09-4": {
     "name": "propionic acid ... %",
@@ -52667,7 +55095,14 @@
     "m_factors": {
       "acute": 10,
       "chronic": 100
-    }
+    },
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 1.0
+      }
+    ]
   },
   "110-16-7": {
     "name": "maleic acid",
@@ -52701,7 +55136,14 @@
     ],
     "m_factors": {},
     "index_no": "607-095-00-3",
-    "atp": "ATP01"
+    "atp": "ATP01",
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.1
+      }
+    ]
   },
   "108-31-6": {
     "name": "maleic anhydride",
@@ -52741,7 +55183,14 @@
     ],
     "m_factors": {},
     "index_no": "607-096-00-9",
-    "atp": "ATP13"
+    "atp": "ATP13",
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1A",
+        "c_min": 0.001
+      }
+    ]
   },
   "552-30-7": {
     "name": "benzene-1,2,4-tricarboxylic acid 1,2-anhydride; trimellitic anhydride",
@@ -52946,7 +55395,19 @@
     ],
     "m_factors": {},
     "index_no": "607-100-00-9",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 1.0
+      }
+    ]
   },
   "115-27-5": {
     "name": "1,4,5,6,7,7-hexachlorobicyclo [2,2,1]hept-5-ene-2,3-dicarboxylic anhydride chlorendic anhydride",
@@ -52972,7 +55433,24 @@
     ],
     "m_factors": {},
     "index_no": "607-101-00-4",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 1.0
+      }
+    ]
   },
   "85-42-7": {
     "name": "cyclohexane-1,2-dicarboxylic anhydride [1]\ncis-cyclohexane-1,2-dicarboxylic anhydride [2]\ntrans-cyclohexane-1,2-dicarboxylic anhydride [3]",
@@ -53111,7 +55589,19 @@
     ],
     "m_factors": {},
     "index_no": "607-104-00-0",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 1.0
+      }
+    ]
   },
   "129-64-6": {
     "name": "8,9,10-trinorborn-5-ene-2,3-dicarboxylic anhydride [1]\n1,2,3,6-tetrahydro-3,6-methanophthalic anhydride [2]\n(1Î±,2Î±,3Î²,6Î²)-1,2,3,6-tetrahydro-3,6-methanophthalic anhydride [3]",
@@ -53227,7 +55717,14 @@
     ],
     "m_factors": {},
     "index_no": "607-106-00-1",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 10.0
+      }
+    ]
   },
   "103-11-7": {
     "name": "2-ethylhexyl acrylate",
@@ -53288,7 +55785,14 @@
     ],
     "m_factors": {},
     "index_no": "607-108-00-2",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.2
+      }
+    ]
   },
   "999-61-1": {
     "name": "2-hydroxy-1-methylethylacrylate [1]\n2-hydroxypropylacrylate [2]\nacrylic acid, monoester with propane-1,2-diol [3]",
@@ -53323,7 +55827,14 @@
     ],
     "m_factors": {},
     "index_no": "607-108-00-2",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.2
+      }
+    ]
   },
   "25584-83-2": {
     "name": "2-hydroxy-1-methylethylacrylate [1]\n2-hydroxypropylacrylate [2]\nacrylic acid, monoester with propane-1,2-diol [3]",
@@ -53358,7 +55869,14 @@
     ],
     "m_factors": {},
     "index_no": "607-108-00-2",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.2
+      }
+    ]
   },
   "13048-33-4": {
     "name": "hexamethylene diacrylate; hexane-1,6-diol diacrylate",
@@ -53536,7 +56054,14 @@
     ],
     "m_factors": {},
     "index_no": "607-114-00-5",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 10.0
+      }
+    ]
   },
   "106-63-8": {
     "name": "isobutyl acrylate",
@@ -53598,7 +56123,14 @@
     ],
     "m_factors": {},
     "index_no": "607-116-00-6",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 10.0
+      }
+    ]
   },
   "106-90-1": {
     "name": "2,3-epoxypropyl acrylate; glycidyl acrylate",
@@ -53633,7 +56165,14 @@
     ],
     "m_factors": {},
     "index_no": "607-117-00-1",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.2
+      }
+    ]
   },
   "19485-03-1": {
     "name": "1-methyltrimethylene diacrylate; 1,3-butylene glycol diacrylate",
@@ -53717,7 +56256,14 @@
     ],
     "m_factors": {},
     "index_no": "607-120-00-8",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.2
+      }
+    ]
   },
   "10027-06-2": {
     "name": "8,9,10-trinorborn-2-yl acrylate",
@@ -54795,7 +57341,24 @@
       "chronic": 10
     },
     "index_no": "607-157-00-X",
-    "atp": "ATP09"
+    "atp": "ATP09",
+    "scl": [
+      {
+        "h_code": "H360D",
+        "h_class": "Repr. 1B",
+        "c_min": 0.003
+      },
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 0.02
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.002
+      }
+    ]
   },
   "3926-62-3": {
     "name": "sodium salt of chloroacetic acid; sodium chloroacetate",
@@ -55170,7 +57733,24 @@
       "chronic": 10
     },
     "index_no": "607-172-00-1",
-    "atp": "ATP09"
+    "atp": "ATP09",
+    "scl": [
+      {
+        "h_code": "H360D",
+        "h_class": "Repr. 1A",
+        "c_min": 0.003
+      },
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 0.02
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.002
+      }
+    ]
   },
   "39562-27-1": {
     "name": "methyl 2-(2-nitrobenzylidene)acetoacetate",
@@ -56399,7 +58979,14 @@
     ],
     "m_factors": {},
     "index_no": "607-235-00-3",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 10.0
+      }
+    ]
   },
   "7085-85-0": {
     "name": "ethyl 2-cyanoacrylate",
@@ -56425,7 +59012,14 @@
     ],
     "m_factors": {},
     "index_no": "607-236-00-9",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 10.0
+      }
+    ]
   },
   "72850-64-7": {
     "name": "benzyl 2-chloro-4-(trifluoromethyl)thiazole-5-carboxylate; flurazole",
@@ -56925,7 +59519,14 @@
     ],
     "m_factors": {},
     "index_no": "607-244-00-2",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 10.0
+      }
+    ]
   },
   "1663-39-4": {
     "name": "tert-butyl acrylate",
@@ -57027,7 +59628,14 @@
     ],
     "m_factors": {},
     "index_no": "607-247-00-9",
-    "atp": "ATP14"
+    "atp": "ATP14",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 10.0
+      }
+    ]
   },
   "132-67-2": {
     "name": "naptalam-sodium (ISO); sodium N-naphth-1-ylphthalamate",
@@ -57080,7 +59688,14 @@
     ],
     "m_factors": {},
     "index_no": "607-249-00-X",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 10.0
+      }
+    ]
   },
   "118-48-9": {
     "name": "4H-3,1-benzoxazine-2,4(1H)-dione",
@@ -58163,7 +60778,14 @@
     ],
     "m_factors": {},
     "index_no": "607-312-00-1",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "40292-82-8": {
     "name": "neodecanoyl chloride",
@@ -58190,7 +60812,14 @@
     ],
     "m_factors": {},
     "index_no": "607-313-00-7",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "26225-79-6": {
     "name": "ethofumesate (ISO); (RS)-2-ethoxy-2,3-dihydro-3,3-dimethylbenzofuran-5-yl methanesulfonate",
@@ -59427,7 +62056,24 @@
       "chronic": 10
     },
     "index_no": "607-375-00-5",
-    "atp": "ATP09"
+    "atp": "ATP09",
+    "scl": [
+      {
+        "h_code": "H360D",
+        "h_class": "Repr. 1A",
+        "c_min": 0.003
+      },
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 0.05
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.005
+      }
+    ]
   },
   "23085-60-1": {
     "name": "benzyl 2,4-dibromobutanoate",
@@ -63586,7 +66232,14 @@
     ],
     "m_factors": {},
     "index_no": "607-620-00-6",
-    "atp": "ATP01"
+    "atp": "ATP01",
+    "scl": [
+      {
+        "h_code": "H351",
+        "h_class": "Carc. 2",
+        "c_min": 5.0
+      }
+    ]
   },
   "7425-14-1": {
     "name": "2-ethylhexyl-2-ethylhexanoate",
@@ -63880,7 +66533,14 @@
       "acute": 1
     },
     "index_no": "607-625-00-3",
-    "atp": "ATP01"
+    "atp": "ATP01",
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.001
+      }
+    ]
   },
   "103112-35-2": {
     "name": "ethyl 1-(2,4-dichlorophenyl)-5-(trichloromethyl)-1H-1,2,4-triazole-3-carboxylate",
@@ -65589,7 +68249,24 @@
       "chronic": 1
     },
     "index_no": "607-716-00-8",
-    "atp": "ATP09"
+    "atp": "ATP09",
+    "scl": [
+      {
+        "h_code": "H360D",
+        "h_class": "Repr. 1B",
+        "c_min": 0.003
+      },
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 0.005
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 4.0
+      }
+    ]
   },
   "104653-34-1": {
     "name": "difethialone (ISO); 3-[3-(4â€²-bromobiphenyl-4-yl)-1,2,3,4-tetrahydronaphthalen-1-yl]-4-hydroxy-2H-1-benzothiopyran-2-one",
@@ -65636,7 +68313,24 @@
       "chronic": 100
     },
     "index_no": "607-717-00-3",
-    "atp": "ATP09"
+    "atp": "ATP09",
+    "scl": [
+      {
+        "h_code": "H360D",
+        "h_class": "Repr. 1B",
+        "c_min": 0.003
+      },
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 0.02
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.002
+      }
+    ]
   },
   "375-95-1": {
     "name": "perfluorononan-1-oic acid [1]\nperfluorononan-1-oic acid, sodium salts [2]\nperfluorononan-1-oic acid, ammonium salts [3]",
@@ -66365,7 +69059,14 @@
     ],
     "m_factors": {},
     "index_no": "607-734-00-6",
-    "atp": "ATP18"
+    "atp": "ATP18",
+    "scl": [
+      {
+        "h_code": "H360D",
+        "h_class": "Repr. 1B",
+        "c_min": 3.0
+      }
+    ]
   },
   "67-43-6": {
     "name": "N-carboxymethyliminobis(ethylenenitrilo)tetra(acetic acid)",
@@ -66396,7 +69097,14 @@
     ],
     "m_factors": {},
     "index_no": "607-735-00-1",
-    "atp": "ATP18"
+    "atp": "ATP18",
+    "scl": [
+      {
+        "h_code": "H360D",
+        "h_class": "Repr. 1B",
+        "c_min": 3.0
+      }
+    ]
   },
   "140-01-2": {
     "name": "pentasodium (carboxylatomethyl)iminobis(ethylenenitrilo)tetraacetate",
@@ -66423,7 +69131,14 @@
     ],
     "m_factors": {},
     "index_no": "607-736-00-7",
-    "atp": "ATP18"
+    "atp": "ATP18",
+    "scl": [
+      {
+        "h_code": "H360D",
+        "h_class": "Repr. 1B",
+        "c_min": 3.0
+      }
+    ]
   },
   "71850-09-4": {
     "name": "diisohexyl phthalate",
@@ -67095,7 +69810,14 @@
     ],
     "m_factors": {},
     "index_no": "607-760-00-8",
-    "atp": "ATP18"
+    "atp": "ATP18",
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1A",
+        "c_min": 0.001
+      }
+    ]
   },
   "375-85-9": {
     "name": "Perfluoroheptanoic acid; tridecafluoroheptanoic acid",
@@ -67268,7 +69990,14 @@
         "h_code": "H317"
       }
     ],
-    "m_factors": {}
+    "m_factors": {},
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1A",
+        "c_min": 0.001
+      }
+    ]
   },
   "177406-68-7": {
     "name": "benthiavalicarb-isopropyl (ISO); isopropyl [(S)-1-{[(R)-1-(6-fluoro-1,3-benzothiazol-2-yl)ethyl]carbamoyl}-2-methylpropyl]carbamate",
@@ -67825,7 +70554,14 @@
     ],
     "m_factors": {},
     "index_no": "608-010-00-2",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.2
+      }
+    ]
   },
   "460-19-5": {
     "name": "oxalonitrile; cyanogen",
@@ -69182,7 +71918,14 @@
         "h_code": "H411"
       }
     ],
-    "m_factors": {}
+    "m_factors": {},
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1A",
+        "c_min": 0.001
+      }
+    ]
   },
   "108-03-2": {
     "name": "1-nitropropane",
@@ -71302,7 +74045,14 @@
     ],
     "m_factors": {},
     "index_no": "609-056-00-6",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 1.0
+      }
+    ]
   },
   "3847-58-3": {
     "name": "3-chloro-2,4-difluoronitrobenzene",
@@ -74622,7 +77372,14 @@
         "h_code": "H317"
       }
     ],
-    "m_factors": {}
+    "m_factors": {},
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1A",
+        "c_min": 0.001
+      }
+    ]
   },
   "74-89-5": {
     "name": "mono-methylamine ... % [1]\ndi-methylamine ... % [2]\ntri-methylamine ... % [3]",
@@ -74654,7 +77411,14 @@
     ],
     "m_factors": {},
     "index_no": "612-001-01-6",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "124-40-3": {
     "name": "mono-methylamine ... % [1]\ndi-methylamine ... % [2]\ntri-methylamine ... % [3]",
@@ -74686,7 +77450,14 @@
     ],
     "m_factors": {},
     "index_no": "612-001-01-6",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "75-50-3": {
     "name": "mono-methylamine ... % [1]\ndi-methylamine ... % [2]\ntri-methylamine ... % [3]",
@@ -74718,7 +77489,14 @@
     ],
     "m_factors": {},
     "index_no": "612-001-01-6",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "75-04-7": {
     "name": "ethylamine",
@@ -74786,7 +77564,14 @@
     ],
     "m_factors": {},
     "index_no": "612-003-00-X",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 1.0
+      }
+    ]
   },
   "121-44-8": {
     "name": "triethylamine",
@@ -74826,7 +77611,14 @@
     ],
     "m_factors": {},
     "index_no": "612-004-00-5",
-    "atp": "ATP21"
+    "atp": "ATP21",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 1.0
+      }
+    ]
   },
   "109-73-9": {
     "name": "butylamine",
@@ -74862,7 +77654,14 @@
     ],
     "m_factors": {},
     "index_no": "612-005-00-0",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 1.0
+      }
+    ]
   },
   "107-15-3": {
     "name": "ethylenediamine; 1,2-diaminoethane",
@@ -75447,7 +78246,14 @@
     ],
     "m_factors": {},
     "index_no": "612-022-00-3",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H350",
+        "h_class": "Carc. 1A",
+        "c_min": 0.01
+      }
+    ]
   },
   "100-63-0": {
     "name": "phenylhydrazine [1]\nphenylhydrazinium chloride [2]\nphenylhydrazine hydrochloride [3]\nphenylhydrazinium sulphate (2:1) [4]",
@@ -76258,7 +79064,14 @@
     ],
     "m_factors": {},
     "index_no": "612-042-00-2",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H350",
+        "h_class": "Carc. 1A",
+        "c_min": 0.01
+      }
+    ]
   },
   "2810-74-4": {
     "name": "N,N'-dimethylbenzidine",
@@ -76418,7 +79231,14 @@
     ],
     "m_factors": {},
     "index_no": "612-048-00-5",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 1.0
+      }
+    ]
   },
   "111-92-2": {
     "name": "di-n-butylamine",
@@ -77215,7 +80035,14 @@
     ],
     "m_factors": {},
     "index_no": "612-067-00-9",
-    "atp": "ATP17"
+    "atp": "ATP17",
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1A",
+        "c_min": 0.001
+      }
+    ]
   },
   "91-94-1": {
     "name": "3,3'-dichlorobenzidine; 3,3'-dichlorobiphenyl-4,4'-ylenediamine",
@@ -77414,7 +80241,14 @@
     ],
     "m_factors": {},
     "index_no": "612-077-00-3",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H350",
+        "h_class": "Carc. 1B",
+        "c_min": 0.001
+      }
+    ]
   },
   "101-14-4": {
     "name": "2,2'-dichloro-4,4'-methylenedianiline; 4,4'-methylene bis(2-chloroaniline)",
@@ -77537,7 +80371,14 @@
     ],
     "m_factors": {},
     "index_no": "612-083-00-6",
-    "atp": "ATP01"
+    "atp": "ATP01",
+    "scl": [
+      {
+        "h_code": "H350",
+        "h_class": "Carc. 1B",
+        "c_min": 0.01
+      }
+    ]
   },
   "80-08-0": {
     "name": "dapsone; 4,4'-diamino diphenyl sulfone",
@@ -77971,7 +80812,14 @@
     ],
     "m_factors": {},
     "index_no": "612-098-00-8",
-    "atp": "ATP01"
+    "atp": "ATP01",
+    "scl": [
+      {
+        "h_code": "H350",
+        "h_class": "Carc. 1B",
+        "c_min": 0.001
+      }
+    ]
   },
   "95-80-7": {
     "name": "4-methyl-m-phenylenediamine; 2,4-toluenediamine",
@@ -78980,7 +81828,14 @@
     ],
     "m_factors": {},
     "index_no": "612-129-00-5",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "2095-01-4": {
     "name": "2,6-diamino-3,5-diethyltoluene; 4,6-diethyl-2-methyl-1,3-benzenediamine [1]\n2,4-diamino-3,5-diethyltoluene; 2,4-diethyl-6-methyl-1,3-benzenediamine [2]\ndiethylmethylbenzenediamine [3]",
@@ -79279,7 +82134,14 @@
     ],
     "m_factors": {},
     "index_no": "612-136-00-3",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.1
+      }
+    ]
   },
   "106-47-8": {
     "name": "4-chloroaniline",
@@ -84055,7 +86917,14 @@
     ],
     "m_factors": {},
     "index_no": "613-009-00-5",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "834-12-8": {
     "name": "ametryn (ISO); N-ethyl-N'-isopropyl-6-(methylthio)-1,3,5-triazine-2,4-diamine",
@@ -84669,7 +87538,14 @@
     ],
     "m_factors": {},
     "index_no": "613-030-00-X",
-    "atp": "ATP01"
+    "atp": "ATP01",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 10.0
+      }
+    ]
   },
   "2893-78-9": {
     "name": "troclosene potassium [1]\ntroclosene sodium [2]",
@@ -84709,7 +87585,14 @@
     ],
     "m_factors": {},
     "index_no": "613-030-00-X",
-    "atp": "ATP01"
+    "atp": "ATP01",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 10.0
+      }
+    ]
   },
   "51580-86-0": {
     "name": "troclosene sodium, dihydrate",
@@ -84860,7 +87743,14 @@
     ],
     "m_factors": {},
     "index_no": "613-033-00-6",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H350",
+        "h_class": "Carc. 1B",
+        "c_min": 0.01
+      }
+    ]
   },
   "1739-84-0": {
     "name": "1,2-dimethylimidazole",
@@ -85161,7 +88051,29 @@
     ],
     "m_factors": {},
     "index_no": "613-043-01-8",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 50.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 30.0
+      },
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 15.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 5.0
+      }
+    ]
   },
   "83918-57-4": {
     "name": "imazalil sulphate (ISO), aqueous solution; 1- [2-(allyloxy)ethyl-2-(2,4-dichlorophenyl)]-1H-imidazolium hydrogen sulphate [1]\n(Â±)-1-[2-(allyloxy)ethyl-2-(2,4-dichlorophenyl)]-1H-imidazolium hydrogen sulphate [2]",
@@ -85197,7 +88109,29 @@
     ],
     "m_factors": {},
     "index_no": "613-043-01-8",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 50.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 30.0
+      },
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 15.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 5.0
+      }
+    ]
   },
   "133-06-2": {
     "name": "captan (ISO); 1,2,3,6-tetrahydro-N-(trichloromethylthio)phthalimide",
@@ -85247,7 +88181,14 @@
     "m_factors": {
       "acute": 10,
       "chronic": 10
-    }
+    },
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1A",
+        "c_min": 0.001
+      }
+    ]
   },
   "133-07-3": {
     "name": "folpet (ISO); N-(trichloromethylthio)phthalimide",
@@ -85293,7 +88234,24 @@
     "m_factors": {
       "acute": 10,
       "chronic": 10
-    }
+    },
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.5
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1A",
+        "c_min": 0.001
+      }
+    ]
   },
   "2425-06-1": {
     "name": "captafol (ISO); 1,2,3,6-tetrahydro-N-(1,1,2,2-tetrachloroethylthio)phthalimide",
@@ -86435,7 +89393,14 @@
       "chronic": 1
     },
     "index_no": "613-088-00-6",
-    "atp": "ATP21"
+    "atp": "ATP21",
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1A",
+        "c_min": 0.036
+      }
+    ]
   },
   "85-00-7": {
     "name": "diquat dibromide [1]\ndiquat dichloride [2]\n6,7-dihydrodipyrido[1,2-Î±:2',1'-c]pyrazinediylium dihydroxide [3]",
@@ -87231,7 +90196,14 @@
       "chronic": 100
     },
     "index_no": "613-112-00-5",
-    "atp": "ATP15"
+    "atp": "ATP15",
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1A",
+        "c_min": 0.0015
+      }
+    ]
   },
   "102-77-2": {
     "name": "2-(morpholinothio)benzothiazole",
@@ -87284,7 +90256,14 @@
     ],
     "m_factors": {},
     "index_no": "613-114-00-6",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.1
+      }
+    ]
   },
   "10004-44-1": {
     "name": "hymexazol (ISO); 3-hydroxy-5-methylisoxazole",
@@ -88622,7 +91601,34 @@
       "chronic": 100
     },
     "index_no": "613-167-00-5",
-    "atp": "ATP13"
+    "atp": "ATP13",
+    "scl": [
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1C",
+        "c_min": 0.6
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 0.06
+      },
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 0.6
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 0.06
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1A",
+        "c_min": 0.0015
+      }
+    ]
   },
   "88-12-0": {
     "name": "1-vinyl-2-pyrrolidone",
@@ -88991,7 +91997,14 @@
     ],
     "m_factors": {},
     "index_no": "613-178-00-5",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "111337-53-2": {
     "name": "lithium 3-oxo-1,2(2H)-benzisothiazol-2-ide",
@@ -92405,7 +95418,14 @@
       "chronic": 1
     },
     "index_no": "613-326-00-9",
-    "atp": "ATP13"
+    "atp": "ATP13",
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1A",
+        "c_min": 0.0015
+      }
+    ]
   },
   "422556-08-9": {
     "name": "pyroxsulam (ISO); N-(5,7-dimethoxy[1,2,4]triazolo[1,5-a]pyrimidin-2-yl)-2-methoxy-4-(trifluoromethyl)pyridine-3-sulfonamide",
@@ -92453,7 +95473,14 @@
     ],
     "m_factors": {},
     "index_no": "613-328-00-X",
-    "atp": "ATP13"
+    "atp": "ATP13",
+    "scl": [
+      {
+        "h_code": "H360D",
+        "h_class": "Repr. 1B",
+        "c_min": 0.03
+      }
+    ]
   },
   "100784-20-1": {
     "name": "halosulfuron-methyl (ISO); methyl 3-chloro-5-{[(4,6-dimethoxypyrimidin-2-yl)carbamoyl]sulfamoyl}-1-methyl-1H-pyrazole-4-carboxylate",
@@ -92685,7 +95712,24 @@
       "chronic": 100
     },
     "index_no": "613-335-00-8",
-    "atp": "ATP15"
+    "atp": "ATP15",
+    "scl": [
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 0.025
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 0.025
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1A",
+        "c_min": 0.0015
+      }
+    ]
   },
   "2527-66-4": {
     "name": "2-methyl-1,2-benzothiazol-3(2H)-one; [MBIT]",
@@ -92731,7 +95775,14 @@
       "acute": 1
     },
     "index_no": "613-336-00-3",
-    "atp": "ATP15"
+    "atp": "ATP15",
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1A",
+        "c_min": 0.0015
+      }
+    ]
   },
   "178928-70-6": {
     "name": "prothioconazole (ISO); 2-[2-(1-chlorocyclopropyl)-3-(2-chlorophenyl)-2-hydroxypropyl]-2,4-dihydro-3H-1,2,4-triazole-3-thione",
@@ -93097,7 +96148,14 @@
     ],
     "m_factors": {},
     "index_no": "613-346-00-8",
-    "atp": "ATP21"
+    "atp": "ATP21",
+    "scl": [
+      {
+        "h_code": "H350",
+        "h_class": "Carc. 1B",
+        "c_min": 0.001
+      }
+    ]
   },
   "119446-68-3": {
     "name": "difenoconazole (ISO); 1-({2-[2-chloro-4-(4-chlorophenoxy)phenyl]-4-methylâ€“1,3-dioxolan-2-yl}methyl)-1H-1,2,4-triazole; 3-chloro-4-[(2RS,4RS;2RS,4SR)-4-methyl-2-(1H-1,2,4-triazol-1-ylmethyl)-1,3-dioxolan-2-yl]phenyl 4-chlorophenyl ether",
@@ -93246,7 +96304,14 @@
     "m_factors": {
       "acute": 10,
       "chronic": 1
-    }
+    },
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1A",
+        "c_min": 0.0015
+      }
+    ]
   },
   "54-11-5": {
     "name": "nicotine (ISO); 3-[(2S)-1-methylpyrrolidin-2-yl]pyridine",
@@ -93802,7 +96867,19 @@
       "chronic": 10000
     },
     "index_no": "614-030-00-2",
-    "atp": "ATP17"
+    "atp": "ATP17",
+    "scl": [
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 0.5
+      }
+    ]
   },
   "624-83-9": {
     "name": "methyl isocyanate",
@@ -94060,7 +97137,29 @@
     ],
     "m_factors": {},
     "index_no": "615-005-00-9",
-    "atp": "ATP01"
+    "atp": "ATP01",
+    "scl": [
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H334",
+        "h_class": "Resp. Sens. 1",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "5873-54-1": {
     "name": "4,4'-methylenediphenyl diisocyanate; diphenylmethane-4,4'-diisocyanate [1]\n2,2'-methylenediphenyl diisocyanate; diphenylmethane-2,2'-diisocyanate [2]\no-(p-isocyanatobenzyl)phenyl isocyanate; diphenylmethane-2,4'-diisocyanate [3]\nmethylenediphenyl diisocyanate [4]",
@@ -94107,7 +97206,29 @@
     ],
     "m_factors": {},
     "index_no": "615-005-00-9",
-    "atp": "ATP01"
+    "atp": "ATP01",
+    "scl": [
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H334",
+        "h_class": "Resp. Sens. 1",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "26447-40-5": {
     "name": "4,4'-methylenediphenyl diisocyanate; diphenylmethane-4,4'-diisocyanate [1]\n2,2'-methylenediphenyl diisocyanate; diphenylmethane-2,2'-diisocyanate [2]\no-(p-isocyanatobenzyl)phenyl isocyanate; diphenylmethane-2,4'-diisocyanate [3]\nmethylenediphenyl diisocyanate [4]",
@@ -94154,7 +97275,29 @@
     ],
     "m_factors": {},
     "index_no": "615-005-00-9",
-    "atp": "ATP01"
+    "atp": "ATP01",
+    "scl": [
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H334",
+        "h_class": "Resp. Sens. 1",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "91-08-7": {
     "name": "2-methyl-m-phenylene diisocyanate; toluene-2,4-di-isocyanate [1]\n4-methyl-m-phenylene diisocyanate; toluene-2,6-di-isocyanate [2]\nm-tolylidene diisocyanate; toluene-diisocyanate [3]",
@@ -94201,7 +97344,14 @@
     ],
     "m_factors": {},
     "index_no": "615-006-00-4",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H334",
+        "h_class": "Resp. Sens. 1",
+        "c_min": 0.1
+      }
+    ]
   },
   "584-84-9": {
     "name": "2-methyl-m-phenylene diisocyanate; toluene-2,4-di-isocyanate [1]\n4-methyl-m-phenylene diisocyanate; toluene-2,6-di-isocyanate [2]\nm-tolylidene diisocyanate; toluene-diisocyanate [3]",
@@ -94248,7 +97398,14 @@
     ],
     "m_factors": {},
     "index_no": "615-006-00-4",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H334",
+        "h_class": "Resp. Sens. 1",
+        "c_min": 0.1
+      }
+    ]
   },
   "26471-62-5": {
     "name": "2-methyl-m-phenylene diisocyanate; toluene-2,4-di-isocyanate [1]\n4-methyl-m-phenylene diisocyanate; toluene-2,6-di-isocyanate [2]\nm-tolylidene diisocyanate; toluene-diisocyanate [3]",
@@ -94295,7 +97452,14 @@
     ],
     "m_factors": {},
     "index_no": "615-006-00-4",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H334",
+        "h_class": "Resp. Sens. 1",
+        "c_min": 0.1
+      }
+    ]
   },
   "4098-71-9": {
     "name": "3-isocyanatomethyl-3,5,5-trimethylcyclohexyl isocyanate; isophorone di-isocyanate",
@@ -94334,7 +97498,19 @@
         "h_code": "H411"
       }
     ],
-    "m_factors": {}
+    "m_factors": {},
+    "scl": [
+      {
+        "h_code": "H334",
+        "h_class": "Resp. Sens. 1",
+        "c_min": 0.5
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1A",
+        "c_min": 0.001
+      }
+    ]
   },
   "5124-30-1": {
     "name": "4,4'-methylenedi(cyclohexyl isocyanate); dicyclohexylmethane-4,4'-di-isocyanate",
@@ -94373,7 +97549,19 @@
     ],
     "m_factors": {},
     "index_no": "615-009-00-0",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H334",
+        "h_class": "Resp. Sens. 1",
+        "c_min": 0.5
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.5
+      }
+    ]
   },
   "16938-22-0": {
     "name": "2,2,4-trimethylhexamethylene-1,6-di-isocyanate [1]\n2,4,4-trimethylhexamethylene-1,6-di-isocyanate [2]",
@@ -94408,7 +97596,19 @@
     ],
     "m_factors": {},
     "index_no": "615-010-00-6",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H334",
+        "h_class": "Resp. Sens. 1",
+        "c_min": 0.5
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.5
+      }
+    ]
   },
   "15646-96-5": {
     "name": "2,2,4-trimethylhexamethylene-1,6-di-isocyanate [1]\n2,4,4-trimethylhexamethylene-1,6-di-isocyanate [2]",
@@ -94443,7 +97643,19 @@
     ],
     "m_factors": {},
     "index_no": "615-010-00-6",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H334",
+        "h_class": "Resp. Sens. 1",
+        "c_min": 0.5
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.5
+      }
+    ]
   },
   "822-06-0": {
     "name": "hexamethylene-di-isocyanate",
@@ -94545,7 +97757,24 @@
     ],
     "m_factors": {},
     "index_no": "615-012-00-7",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 5.0
+      }
+    ]
   },
   "420-04-2": {
     "name": "cyanamide; carbamonitril",
@@ -95177,7 +98406,14 @@
     ],
     "m_factors": {},
     "index_no": "615-047-00-8",
-    "atp": "ATP18"
+    "atp": "ATP18",
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1A",
+        "c_min": 0.001
+      }
+    ]
   },
   "2162-73-4": {
     "name": "2,4,6-triisopropyl-m-phenylene diisocyanate",
@@ -95268,7 +98504,14 @@
     ],
     "m_factors": {},
     "index_no": "615-051-00-X",
-    "atp": "ATP21"
+    "atp": "ATP21",
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1A",
+        "c_min": 0.001
+      }
+    ]
   },
   "68-12-2": {
     "name": "N,N-dimethylformamide; dimethyl formamide",
@@ -96290,7 +99533,14 @@
     ],
     "m_factors": {},
     "index_no": "616-036-00-0",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.1
+      }
+    ]
   },
   "34256-82-1": {
     "name": "acetochlor (ISO); 2-chloro-N-(ethoxymethyl)-N-(2-ethyl-6-methylphenyl)acetamide",
@@ -100375,7 +103625,14 @@
       "chronic": 10
     },
     "index_no": "616-240-00-X",
-    "atp": "ATP18"
+    "atp": "ATP18",
+    "scl": [
+      {
+        "h_code": "H360D",
+        "h_class": "Repr. 1B",
+        "c_min": 3.0
+      }
+    ]
   },
   "173159-57-4": {
     "name": "foramsulfuron (ISO); 2-{[(4,6-dimethoxypyrimidin-2-yl)carbamoyl]sulfamoyl}-4-formamido-N,N-dimethylbenzamide; 1-(4,6-dimethoxypyrimidin-2-yl)-3-(2-dimethylcarbamoyl-5-formamidophenylsulfonyl)urea",
@@ -100508,7 +103765,34 @@
     ],
     "m_factors": {},
     "index_no": "617-002-00-8",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 3.0
+      },
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 3.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 10.0
+      }
+    ]
   },
   "105-74-8": {
     "name": "dilauroyl peroxide",
@@ -100563,7 +103847,14 @@
     ],
     "m_factors": {},
     "index_no": "617-004-00-9",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "80-43-3": {
     "name": "bis(Î±,Î±-dimethylbenzyl) peroxide",
@@ -100694,7 +103985,14 @@
     ],
     "m_factors": {},
     "index_no": "617-010-01-9",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "2407-94-5": {
     "name": "1-hydroperoxycyclohexyl 1-hydroxycyclohexyl peroxide; [â‰¤ 91 % solution] [1]\n1,1'-dioxybiscyclohexan-1-ol [2]\ncyclohexylidene hydroperoxide [3]\ncyclohexanone, peroxide [4]",
@@ -100722,7 +104020,14 @@
     ],
     "m_factors": {},
     "index_no": "617-010-01-9",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "2699-11-8": {
     "name": "1-hydroperoxycyclohexyl 1-hydroxycyclohexyl peroxide; [â‰¤ 91 % solution] [1]\n1,1'-dioxybiscyclohexan-1-ol [2]\ncyclohexylidene hydroperoxide [3]\ncyclohexanone, peroxide [4]",
@@ -100750,7 +104055,14 @@
     ],
     "m_factors": {},
     "index_no": "617-010-01-9",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "12262-58-7": {
     "name": "1-hydroperoxycyclohexyl 1-hydroxycyclohexyl peroxide; [â‰¤ 91 % solution] [1]\n1,1'-dioxybiscyclohexan-1-ol [2]\ncyclohexylidene hydroperoxide [3]\ncyclohexanone, peroxide [4]",
@@ -100778,7 +104090,14 @@
     ],
     "m_factors": {},
     "index_no": "617-010-01-9",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "80-47-7": {
     "name": "8-p-menthyl hydroperoxide; p-menthane hydroperoxide",
@@ -100806,7 +104125,14 @@
     ],
     "m_factors": {},
     "index_no": "617-012-00-2",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 5.0
+      }
+    ]
   },
   "116753-76-5": {
     "name": "O,O-tert-butyl O-docosyl monoperoxyoxalate",

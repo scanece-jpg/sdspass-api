@@ -811,34 +811,57 @@ function renderAll(s) {
   if (!el) return;
   const { clp, stot, eco, euh, phys, pcodes, transport, ppe } = s;
 
-  // Tüm H kodlarını birleştir
-  const allH = [...new Set([
+  // Tüm H kodlarını birleştir (tüm motorlardan)
+  const allHRaw = [...new Set([
     ...(clp.hCodes || []),
     ...(stot.h_codes || []),
     ...(eco.h_codes || []),
     ...(phys.results||[]).map(r => r.h || r.h_code),
-  ])];
+  ])].filter(Boolean).map(c => c.replace(/[*\s]/g,'').substring(0,4));
+
+  // Motorlar arası dominance — CLPEngine DOMINANCE tablosunu uygula
+  // Örn: EcoEngine H410+H400 üretirse → H400 süpürülür
+  //      STOTEngine H372 + CLPEngine H373 → H373 süpürülür
+  const allH = [...allHRaw];
+  if (typeof CLPEngine !== 'undefined' && CLPEngine.DOMINANCE) {
+    Object.entries(CLPEngine.DOMINANCE).forEach(([dominant, subs]) => {
+      if (allH.includes(dominant)) {
+        subs.forEach(sub => {
+          const i = allH.indexOf(sub);
+          if (i > -1) allH.splice(i, 1);
+        });
+      }
+    });
+  }
+
+  // Sinyal kelimesi — birleşik H kodlarından yeniden hesapla
+  const _dH = CLPEngine.DANGER_H;
+  const _wH = CLPEngine.WARNING_H;
+  const combinedSignal = allH.some(c => _dH && _dH.has(c)) ? 'Danger'
+    : allH.some(c => _wH && _wH.has(c)) ? 'Warning' : 'None';
 
   let h = '';
 
   // ── Banner ────────────────────────────────────────────────────────────────
   if (allH.length > 0) {
-    const sigClass = clp.signal === 'Danger' ? 'signal-danger'
-                   : clp.signal === 'Warning' ? 'signal-warning' : 'signal-none';
-    const sigLabel = clp.signal === 'Danger'  ? '🔴 DANGER'
-                   : clp.signal === 'Warning' ? '🟡 WARNING'
+    const sigClass = combinedSignal === 'Danger'  ? 'signal-danger'
+                   : combinedSignal === 'Warning' ? 'signal-warning' : 'signal-none';
+    const sigLabel = combinedSignal === 'Danger'  ? '🔴 DANGER'
+                   : combinedSignal === 'Warning' ? '🟡 WARNING'
                    : '⚪ Uyarı kelimesi yok (CLP Annex III)';
 
-    // H kodu pill rengi: CLPEngine DANGER_H/WARNING_H kullan (düzeltilmiş liste)
-    const _dangerH  = CLPEngine.DANGER_H  || DANGER_H;
-    const _warnH    = CLPEngine.WARNING_H;
-    const pillClass = c => _dangerH.has(c) ? 'hp-danger' : (_warnH && _warnH.has(c) ? 'hp-warn' : 'hp-info');
+    // Piktogramlar — tüm H kodlarından (dominance uygulanmış) yeniden hesapla
+    const combinedPics = CLPEngine.getGhsCodes ? CLPEngine.getGhsCodes(allH) : (clp.pictograms || []);
+
+    // Pill rengi
+    const pillClass = c => (_dH && _dH.has(c)) ? 'hp-danger'
+                         : (_wH && _wH.has(c)) ? 'hp-warn' : 'hp-info';
 
     h += `<div class="result-banner">
       <div class="${sigClass}" style="margin-bottom:8px">${sigLabel}</div>
       <div class="hcode-pills">${allH.map(c => `<span class="hpill ${pillClass(c)}">${c}</span>`).join('')}</div>
-      <div class="pictogram-row">${(clp.pictograms||[]).map(g => `<div class="ghs-icon"><div class="sym">${GHS_DATA[g]?.sym||'?'}</div><div class="lbl">${g}</div></div>`).join('')}</div>
-      ${clp.signal === 'None' ? `<div style="font-size:10px;color:var(--text3);margin-top:6px">ℹ H412/H413 gibi kodlar etiket üzerinde piktogram ve uyarı kelimesi gerektirmez.</div>` : ''}
+      <div class="pictogram-row">${combinedPics.map(g => `<div class="ghs-icon"><div class="sym">${GHS_DATA[g]?.sym||'?'}</div><div class="lbl">${g}</div></div>`).join('')}</div>
+      ${combinedSignal === 'None' ? `<div style="font-size:10px;color:var(--text3);margin-top:6px">ℹ H412/H413 gibi kodlar etiket üzerinde piktogram ve uyarı kelimesi gerektirmez.</div>` : ''}
     </div>`;
   }
 

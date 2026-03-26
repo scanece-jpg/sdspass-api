@@ -25,27 +25,49 @@ const CLPEngine = (() => {
   };
 
   // ── CLP Dominance (Üstünlük) Kuralları ──────────────────────────────────────
-  // Üst sınıf → alt sınıfları kaldır
+  // Kaynak: CLP (AT) No 1272/2008, Annex I + Annex V
+  // Üst sınıf → alt sınıfları kaldır (etiket + SDS Bölüm 2)
   const DOMINANCE = {
-    // Cilt/Göz: H314 "ciddi cilt yanıkları VE göz hasarı" — H318/H315/H319 gereksiz
+    // Cilt/Göz — CLP Annex I §3.2 / §3.3
     'H314': ['H318','H315','H319'],
     'H318': ['H319'],
-    // Akut Toksisite — aynı yolda üst kategori alttakileri süpürür
+
+    // Akut Toksisite — aynı yolda üst kategori alttakileri süpürür — §3.1
     'H300': ['H301','H302'], 'H301': ['H302'],
     'H310': ['H311','H312'], 'H311': ['H312'],
     'H330': ['H331','H332'], 'H331': ['H332'],
-    // STOT SE
+
+    // STOT SE — §3.8
     'H370': ['H371','H335','H336'], 'H371': ['H335','H336'],
-    // STOT RE
+    // STOT RE — §3.9
     'H372': ['H373'],
-    // CMR
+
+    // CMR — §3.5 / §3.6 / §3.7
     'H340': ['H341'], 'H350': ['H351'], 'H360': ['H361'],
-    // Sucul Kronik
-    'H410': ['H411','H412','H413'],
+
+    // Sucul — CLP Annex V §1.3
+    // H410 (Chronic 1) → H400 etiket üzerinde gösterilmez + alt kronikler
+    'H410': ['H400','H411','H412','H413'],
     'H411': ['H412','H413'],
     'H412': ['H413'],
-    // Yanıcı Sıvı
+
+    // Yanıcı Sıvı — §2.6
     'H224': ['H225','H226'], 'H225': ['H226'],
+
+    // Okside Edici Sıvı/Katı — §2.13/§2.14
+    // H271 (Kat.1, Danger) → H272 (Kat.2/3, Warning) süpürür
+    'H271': ['H272'],
+
+    // Su ile Temas / Su ile Reaksiyon — §2.12
+    // H260 (Kat.1) → H261 (Kat.2/3) süpürür
+    'H260': ['H261'],
+
+    // Kendiliğinden Isınan Maddeler — §2.11
+    'H251': ['H252'],
+
+    // Organik Peroksitler / Kendiliğinden Parçalananlar — §2.8 / §2.15
+    'H240': ['H241','H242'],
+    'H241': ['H242'],
   };
 
   // ── H kodu → GHS piktogram ───────────────────────────────────────────────────
@@ -60,11 +82,14 @@ const CLPEngine = (() => {
     // Yanıcı gazlar/sıvılar/katılar
     'H220':'GHS02','H221':'GHS02','H222':'GHS02','H223':'GHS02',
     'H224':'GHS02','H225':'GHS02','H226':'GHS02','H228':'GHS02',
+    'H229':'GHS02',                               // Pressurised container — GHS02 (flame)
+    'H232':'GHS02',                               // Flam. Gas (reacts w/air) — GHS02
     'H240':'GHS01','H241':'GHS01','H242':'GHS02',
     'H250':'GHS02','H251':'GHS02','H252':'GHS02',
     'H260':'GHS02','H261':'GHS02',
     // Oksitleyiciler
     'H270':'GHS03','H271':'GHS03','H272':'GHS03',
+    // H273 (Ox. Liq./Sol. 3) → piktogram YOK (CLP Annex V), sadece Warning sinyal kelimesi
     // Basınçlı gaz
     'H280':'GHS04','H281':'GHS04',
     // Aşındırıcı / Metal korozif
@@ -116,8 +141,8 @@ const CLPEngine = (() => {
   // WARNING: CLP Annex III Tablo 1.2
   const WARNING_H = new Set([
     'H221','H223','H226','H227',                     // Yanıcı Gaz 1B, Aer.2/3, Sıvı 3/4
-    'H229',                                          // Aer. basınçlı
-    'H242','H252','H261','H272','H280','H281',       // Self-react.G, Self-heat.2, Su/H2-2, Ox.3, Gaz
+    'H229','H232',                                   // Aer. basınçlı, Flam. Gas (hava ile)
+    'H242','H252','H261','H272','H273','H280','H281',// Self-react.G, Self-heat.2, Su/H2-2, Ox.2/3, Gaz
     'H290',                                          // Met. Corr. 1 — WARNING (Danger değil!)
     'H302','H303','H312','H313','H332','H333',       // Acute Tox. 4/5
     'H315','H316','H317','H319','H320',              // Skin/Eye Irrit. + Skin Sens.
@@ -127,9 +152,13 @@ const CLPEngine = (() => {
     'H400','H410','H411',                            // Aquatic Acute 1, Chronic 1/2
     'H420',                                          // Ozon
     // H412, H413 → WARNING_H'da YOK → sinyal kelimesi yok
+    // H273 → WARNING (Ox. Liq./Sol. 3) — piktogram yok, sadece Warning sinyal
   ]);
 
-  const FLAM_SKIP = new Set(['H220','H221','H222','H223','H224','H225','H226','H227','H228','H229']);
+  // Yanıcılık/basınç H kodları — fiziksel engine'de hesaplanır, CLPEngine atlar
+  const FLAM_SKIP = new Set([
+    'H220','H221','H222','H223','H224','H225','H226','H227','H228','H229','H232',
+  ]);
 
   function getGhsCodes(hcodes) {
     const pics = new Set();

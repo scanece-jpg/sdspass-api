@@ -620,15 +620,11 @@ async function echaLookup(casInput, compId){
     const ni = document.getElementById(`ni${compId}`);
     if(ni && !ni.value && data.name) ni.value = data.name;
 
-    // hazards[] → hazard_classes[] dönüşümü
-    const hazardClasses = (data.hazards||[]).map(h=>h.h_class).filter(Boolean);
-
-    // Hazard class'ları otomatik ekle
-    if(hazardClasses.length > 0){
-      hazardClasses.forEach(hc => {
-        if(hc) addChip(compId, hc, '');
-      });
-    }
+    // Hazard class + h_code birlikte ekle
+    (data.hazards||[]).forEach(h => {
+      if(h.h_class) addChip(compId, h.h_class, h.h_code||'');
+    });
+    const hazardClasses=(data.hazards||[]).map(h=>h.h_class).filter(Boolean);
 
     // EC No alanını doldur
     const ecInput = document.getElementById('ec'+compId);

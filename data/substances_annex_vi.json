@@ -422,7 +422,20 @@
     ],
     "m_factors": {},
     "index_no": "005-007-00-2",
-    "atp": "ATP20"
+    "atp": "ATP20",
+    "scl": [
+      {
+        "h_code": "H360FD",
+        "h_class": "Repr. 1B",
+        "c_min": 4.5
+      },
+      {
+        "h_code": "H361",
+        "h_class": "Repr. 2",
+        "c_min": 0.3,
+        "c_max": 4.5
+      }
+    ]
   },
   "11113-50-1": {
     "name": "boric acid [1]\nboric acid [2]",
@@ -589,7 +602,14 @@
     ],
     "m_factors": {},
     "index_no": "005-011-00-4",
-    "atp": "ATP20"
+    "atp": "ATP20",
+    "scl": [
+      {
+        "h_code": "H360FD",
+        "h_class": "Repr. 1B",
+        "c_min": 0.55
+      }
+    ]
   },
   "12179-04-3": {
     "name": "tetraboron disodium heptaoxide, hydrate [1]\ndisodium tetraborate, anhydrous [2]\northoboric acid, sodium salt [3]\ndisodium tetraborate decahydrate [4]\ndisodium tetraborate pentahydrate [5]",
@@ -3977,7 +3997,34 @@
     ],
     "m_factors": {},
     "index_no": "007-001-00-5",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1A",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H331",
+        "h_class": "Acute Tox. 3 (Inhal.)",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 0.5
+      },
+      {
+        "h_code": "H400",
+        "h_class": "Aquatic Acute 1",
+        "c_min": 0.1
+      }
+    ]
   },
   "1336-21-6": {
     "name": "ammonia â€¦.%",
@@ -4289,7 +4336,49 @@
     ],
     "m_factors": {},
     "index_no": "007-008-00-3",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H350",
+        "h_class": "Carc. 1B",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H341",
+        "h_class": "Muta. 2",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H331",
+        "h_class": "Acute Tox. 3 (Inhal.)",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H311",
+        "h_class": "Acute Tox. 3 (Derm.)",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H301",
+        "h_class": "Acute Tox. 3 (Oral)",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1A",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.2
+      },
+      {
+        "h_code": "H410",
+        "h_class": "Aquatic Chronic 1",
+        "c_min": 0.1
+      }
+    ]
   },
   "3129-91-7": {
     "name": "dicyclohexylammonium nitrite",
@@ -4339,7 +4428,19 @@
     ],
     "m_factors": {},
     "index_no": "007-010-00-4",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H302",
+        "h_class": "Acute Tox. 4 (Oral)",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H400",
+        "h_class": "Aquatic Acute 1",
+        "c_min": 0.1
+      }
+    ]
   },
   "7758-09-0": {
     "name": "potassium nitrite",
@@ -5081,7 +5182,34 @@
     ],
     "m_factors": {},
     "index_no": "009-003-00-1",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H300",
+        "h_class": "Acute Tox. 2 (Oral)",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H310",
+        "h_class": "Acute Tox. 1 (Derm.)",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H330",
+        "h_class": "Acute Tox. 2 (Inhal.)",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1A",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 0.1
+      }
+    ]
   },
   "7681-49-4": {
     "name": "sodium fluoride",
@@ -5660,7 +5788,19 @@
     ],
     "m_factors": {},
     "index_no": "011-005-00-2",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 10.0
+      }
+    ]
   },
   "917-61-3": {
     "name": "sodium cyanate",
@@ -12429,7 +12569,29 @@
     ],
     "m_factors": {},
     "index_no": "016-011-00-9",
-    "atp": "ATP21"
+    "atp": "ATP21",
+    "scl": [
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H331",
+        "h_class": "Acute Tox. 3 (Inhal.)",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 1.0
+      }
+    ]
   },
   "10025-67-9": {
     "name": "disulphur dichloride; sulfur monochloride",
@@ -12813,7 +12975,31 @@
     ],
     "m_factors": {},
     "index_no": "016-026-00-0",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 1.0,
+        "c_max": 5.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 1.0,
+        "c_max": 5.0
+      }
+    ]
   },
   "64-67-5": {
     "name": "diethyl sulphate",
@@ -14105,7 +14291,29 @@
       "acute": 100
     },
     "index_no": "017-001-00-7",
-    "atp": "ATP01corr"
+    "atp": "ATP01corr",
+    "scl": [
+      {
+        "h_code": "H330",
+        "h_class": "Acute Tox. 2 (Inhal.)",
+        "c_min": 0.5
+      },
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1A",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 0.5
+      }
+    ]
   },
   "7647-01-0": {
     "name": "hydrogen chloride",
@@ -15158,7 +15366,54 @@
     ],
     "m_factors": {},
     "index_no": "024-002-00-6",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H340",
+        "h_class": "Muta. 1B",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H350i",
+        "h_class": "Carc. 1B (inhal.)",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H331",
+        "h_class": "Acute Tox. 3 (Inhal.)",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H311",
+        "h_class": "Acute Tox. 3 (Derm.)",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H301",
+        "h_class": "Acute Tox. 3 (Oral)",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H410",
+        "h_class": "Aquatic Chronic 1",
+        "c_min": 0.1
+      }
+    ]
   },
   "7789-09-5": {
     "name": "ammonium dichromate",
@@ -15693,7 +15948,29 @@
     ],
     "m_factors": {},
     "index_no": "025-002-00-9",
-    "atp": "ATP13"
+    "atp": "ATP13",
+    "scl": [
+      {
+        "h_code": "H302",
+        "h_class": "Acute Tox. 4 (Oral)",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1A",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H410",
+        "h_class": "Aquatic Chronic 1",
+        "c_min": 0.1
+      }
+    ]
   },
   "7785-87-7": {
     "name": "manganese sulphate",
@@ -29086,7 +29363,39 @@
     ],
     "m_factors": {},
     "index_no": "601-020-00-8",
-    "atp": "ATP10"
+    "atp": "ATP10",
+    "scl": [
+      {
+        "h_code": "H340",
+        "h_class": "Muta. 1B",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H350",
+        "h_class": "Carc. 1A",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H304",
+        "h_class": "Asp. Tox. 1",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H336",
+        "h_class": "STOT SE 3 (narcos)",
+        "c_min": 20.0
+      }
+    ]
   },
   "108-88-3": {
     "name": "toluene",
@@ -29126,7 +29435,34 @@
     ],
     "m_factors": {},
     "index_no": "601-021-00-3",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H361d",
+        "h_class": "Repr. 2 (gelisim)",
+        "c_min": 3.3
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H336",
+        "h_class": "STOT SE 3",
+        "c_min": 20.0
+      },
+      {
+        "h_code": "H304",
+        "h_class": "Asp. Tox. 1",
+        "c_min": 10.0
+      }
+    ]
   },
   "95-47-6": {
     "name": "o-xylene [1]\np-xylene [2]\nm-xylene [3]\nxylene [4]",
@@ -29250,7 +29586,29 @@
     ],
     "m_factors": {},
     "index_no": "601-022-00-9",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3 (DART)",
+        "c_min": 20.0
+      },
+      {
+        "h_code": "H304",
+        "h_class": "Asp. Tox. 1",
+        "c_min": 10.0
+      }
+    ]
   },
   "100-41-4": {
     "name": "ethylbenzene",
@@ -29387,7 +29745,34 @@
     ],
     "m_factors": {},
     "index_no": "601-026-00-0",
-    "atp": "ATP06"
+    "atp": "ATP06",
+    "scl": [
+      {
+        "h_code": "H361",
+        "h_class": "Repr. 2",
+        "c_min": 3.3
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 20.0
+      }
+    ]
   },
   "98-83-9": {
     "name": "2-phenylpropene; Î±-methylstyrene",
@@ -29831,7 +30216,34 @@
         "h_code": "H411"
       }
     ],
-    "m_factors": {}
+    "m_factors": {},
+    "scl": [
+      {
+        "h_code": "H361f",
+        "h_class": "Repr. 2 (fertilite)",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2 (sinir)",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H336",
+        "h_class": "STOT SE 3",
+        "c_min": 20.0
+      },
+      {
+        "h_code": "H304",
+        "h_class": "Asp. Tox. 1",
+        "c_min": 10.0
+      }
+    ]
   },
   "53-70-3": {
     "name": "dibenz[a,h]anthracene",
@@ -31247,7 +31659,29 @@
     ],
     "m_factors": {},
     "index_no": "602-004-00-3",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H351",
+        "h_class": "Carc. 2",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H336",
+        "h_class": "STOT SE 3",
+        "c_min": 20.0
+      }
+    ]
   },
   "74-88-4": {
     "name": "methyl iodide; iodomethane",
@@ -31329,7 +31763,39 @@
     ],
     "m_factors": {},
     "index_no": "602-006-00-4",
-    "atp": "ATP05"
+    "atp": "ATP05",
+    "scl": [
+      {
+        "h_code": "H351",
+        "h_class": "Carc. 2",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H302",
+        "h_class": "Acute Tox. 4 (Oral)",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H332",
+        "h_class": "Acute Tox. 4 (Inhal.)",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H336",
+        "h_class": "STOT SE 3",
+        "c_min": 20.0
+      }
+    ]
   },
   "75-25-2": {
     "name": "bromoform; tribromomethane",
@@ -31407,7 +31873,34 @@
     ],
     "m_factors": {},
     "index_no": "602-008-00-5",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H351",
+        "h_class": "Carc. 2",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H331",
+        "h_class": "Acute Tox. 3 (Inhal.)",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H311",
+        "h_class": "Acute Tox. 3 (Derm.)",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H302",
+        "h_class": "Acute Tox. 4 (Oral)",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1 (karaciger)",
+        "c_min": 1.0
+      }
+    ]
   },
   "75-00-3": {
     "name": "chloroethane",
@@ -32141,7 +32634,34 @@
     ],
     "m_factors": {},
     "index_no": "602-027-00-9",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H350",
+        "h_class": "Carc. 1B",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H340",
+        "h_class": "Muta. 1B",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H331",
+        "h_class": "Acute Tox. 3 (Inhal.)",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H336",
+        "h_class": "STOT SE 3",
+        "c_min": 20.0
+      }
+    ]
   },
   "127-18-4": {
     "name": "tetrachloroethylene",
@@ -32164,7 +32684,24 @@
     ],
     "m_factors": {},
     "index_no": "602-028-00-4",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H351",
+        "h_class": "Carc. 2",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H336",
+        "h_class": "STOT SE 3",
+        "c_min": 20.0
+      }
+    ]
   },
   "107-05-1": {
     "name": "3-chloropropene; allyl chloride",
@@ -34882,7 +35419,34 @@
     ],
     "m_factors": {},
     "index_no": "603-001-00-X",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H331",
+        "h_class": "Acute Tox. 3 (Inhal.)",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H311",
+        "h_class": "Acute Tox. 3 (Derm.)",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H301",
+        "h_class": "Acute Tox. 3 (Oral)",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H370",
+        "h_class": "STOT SE 1 (goz/sinir)",
+        "c_min": 3.0
+      },
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1",
+        "c_min": 10.0
+      }
+    ]
   },
   "64-17-5": {
     "name": "ethanol; ethyl alcohol",
@@ -34935,7 +35499,24 @@
     ],
     "m_factors": {},
     "index_no": "603-003-00-0",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H302",
+        "h_class": "Acute Tox. 4 (Oral)",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H336",
+        "h_class": "STOT SE 3",
+        "c_min": 20.0
+      }
+    ]
   },
   "71-36-3": {
     "name": "butan-1-ol; n-butanol",
@@ -34975,7 +35556,29 @@
     ],
     "m_factors": {},
     "index_no": "603-004-00-6",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H302",
+        "h_class": "Acute Tox. 4 (Oral)",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H336",
+        "h_class": "STOT SE 3",
+        "c_min": 20.0
+      }
+    ]
   },
   "75-65-0": {
     "name": "2-methylpropan-2-ol; tert-butyl alcohol",
@@ -35268,7 +35871,34 @@
     ],
     "m_factors": {},
     "index_no": "603-014-00-0",
-    "atp": "ATP18"
+    "atp": "ATP18",
+    "scl": [
+      {
+        "h_code": "H302",
+        "h_class": "Acute Tox. 4 (Oral)",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H312",
+        "h_class": "Acute Tox. 4 (Derm.)",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H332",
+        "h_class": "Acute Tox. 4 (Inhal.)",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 10.0
+      }
+    ]
   },
   "107-18-6": {
     "name": "allyl alcohol",
@@ -35473,7 +36103,19 @@
     ],
     "m_factors": {},
     "index_no": "603-022-00-4",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H336",
+        "h_class": "STOT SE 3",
+        "c_min": 20.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 10.0
+      }
+    ]
   },
   "75-21-8": {
     "name": "ethylene oxide; oxirane",
@@ -35666,7 +36308,19 @@
     ],
     "m_factors": {},
     "index_no": "603-027-00-1",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H302",
+        "h_class": "Acute Tox. 4 (Oral)",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H373",
+        "h_class": "STOT RE 2 (bobrek)",
+        "c_min": 5.0
+      }
+    ]
   },
   "107-07-3": {
     "name": "2-chloroethanol; ethylene chlorohydrin",
@@ -37794,7 +38448,19 @@
     ],
     "m_factors": {},
     "index_no": "603-096-00-8",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H302",
+        "h_class": "Acute Tox. 4 (Oral)",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 10.0
+      }
+    ]
   },
   "122-20-3": {
     "name": "1,1â€™,1â€™-nitrilotripropan-2-ol; triisopropanolamine",
@@ -45474,7 +46140,19 @@
     ],
     "m_factors": {},
     "index_no": "606-002-00-3",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H336",
+        "h_class": "STOT SE 3",
+        "c_min": 20.0
+      }
+    ]
   },
   "106-35-4": {
     "name": "heptan-3-one; butyl ethyl ketone",
@@ -49274,7 +49952,30 @@
     ],
     "m_factors": {},
     "index_no": "607-006-00-8",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H302",
+        "h_class": "Acute Tox. 4 (Oral)",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H312",
+        "h_class": "Acute Tox. 4 (Derm.)",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 0.5,
+        "c_max": 1.0
+      }
+    ]
   },
   "108-24-7": {
     "name": "acetic anhydride",
@@ -49829,7 +50530,19 @@
     ],
     "m_factors": {},
     "index_no": "607-022-00-5",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H336",
+        "h_class": "STOT SE 3",
+        "c_min": 20.0
+      }
+    ]
   },
   "108-05-4": {
     "name": "vinyl acetate",
@@ -51689,7 +52402,37 @@
     ],
     "m_factors": {},
     "index_no": "607-089-00-0",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1A",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 2.0,
+        "c_max": 10.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 1.0,
+        "c_max": 2.0
+      },
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 2.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 1.0,
+        "c_max": 2.0
+      }
+    ]
   },
   "68-11-1": {
     "name": "thioglycolic acid",
@@ -59804,7 +60547,25 @@
     ],
     "m_factors": {},
     "index_no": "607-428-00-2",
-    "atp": "ATP01"
+    "atp": "ATP01",
+    "scl": [
+      {
+        "h_code": "H302",
+        "h_class": "Acute Tox. 4 (Oral)",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 0.5,
+        "c_max": 1.0
+      }
+    ]
   },
   "60-00-4": {
     "name": "edetic acid; (EDTA)",
@@ -65815,7 +66576,31 @@
     ],
     "m_factors": {},
     "index_no": "607-743-00-5",
-    "atp": "ATP15"
+    "atp": "ATP15",
+    "scl": [
+      {
+        "h_code": "H314",
+        "h_class": "Skin Corr. 1B",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H318",
+        "h_class": "Eye Dam. 1",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 5.0,
+        "c_max": 10.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 5.0,
+        "c_max": 10.0
+      }
+    ]
   },
   "3121-61-7": {
     "name": "2-methoxyethyl acrylate",
@@ -68503,7 +69288,39 @@
     ],
     "m_factors": {},
     "index_no": "609-003-00-7",
-    "atp": "ATP05"
+    "atp": "ATP05",
+    "scl": [
+      {
+        "h_code": "H351",
+        "h_class": "Carc. 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H361",
+        "h_class": "Repr. 2",
+        "c_min": 0.3
+      },
+      {
+        "h_code": "H331",
+        "h_class": "Acute Tox. 3 (Inhal.)",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H311",
+        "h_class": "Acute Tox. 3 (Derm.)",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H301",
+        "h_class": "Acute Tox. 3 (Oral)",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1 (kan)",
+        "c_min": 1.0
+      }
+    ]
   },
   "25154-54-5": {
     "name": "dinitrobenzene [1]\n1,4-dinitrobenzene [2]\n1,3-dinitrobenzene [3]\n1,2-dinitrobenzene [4]",
@@ -74170,7 +74987,39 @@
     ],
     "m_factors": {},
     "index_no": "612-008-00-7",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H351",
+        "h_class": "Carc. 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H331",
+        "h_class": "Acute Tox. 3 (Inhal.)",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H311",
+        "h_class": "Acute Tox. 3 (Derm.)",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H301",
+        "h_class": "Acute Tox. 3 (Oral)",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H372",
+        "h_class": "STOT RE 1 (kan)",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H400",
+        "h_class": "Aquatic Acute 1",
+        "c_min": 0.1
+      }
+    ]
   },
   "659-49-4": {
     "name": "4-nitrosoaniline",
@@ -93127,7 +93976,44 @@
     ],
     "m_factors": {},
     "index_no": "615-005-00-9",
-    "atp": "ATP01"
+    "atp": "ATP01",
+    "scl": [
+      {
+        "h_code": "H334",
+        "h_class": "Resp. Sens. 1",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H351",
+        "h_class": "Carc. 2",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H332",
+        "h_class": "Acute Tox. 4 (Inhal.)",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 1.0
+      }
+    ]
   },
   "2536-05-2": {
     "name": "4,4'-methylenediphenyl diisocyanate; diphenylmethane-4,4'-diisocyanate [1]\n2,2'-methylenediphenyl diisocyanate; diphenylmethane-2,2'-diisocyanate [2]\no-(p-isocyanatobenzyl)phenyl isocyanate; diphenylmethane-2,4'-diisocyanate [3]\nmethylenediphenyl diisocyanate [4]",
@@ -93596,7 +94482,39 @@
     ],
     "m_factors": {},
     "index_no": "615-011-00-1",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H334",
+        "h_class": "Resp. Sens. 1",
+        "c_min": 0.02
+      },
+      {
+        "h_code": "H317",
+        "h_class": "Skin Sens. 1",
+        "c_min": 0.1
+      },
+      {
+        "h_code": "H332",
+        "h_class": "Acute Tox. 4 (Inhal.)",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 1.0
+      },
+      {
+        "h_code": "H335",
+        "h_class": "STOT SE 3",
+        "c_min": 1.0
+      }
+    ]
   },
   "4083-64-1": {
     "name": "4-isocyanatosulphonyltoluene; tosyl isocyanate",
@@ -94381,7 +95299,29 @@
     ],
     "m_factors": {},
     "index_no": "616-001-00-X",
-    "atp": "CLP00"
+    "atp": "CLP00",
+    "scl": [
+      {
+        "h_code": "H360D",
+        "h_class": "Repr. 1B (gelisim)",
+        "c_min": 0.3
+      },
+      {
+        "h_code": "H312",
+        "h_class": "Acute Tox. 4 (Derm.)",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H332",
+        "h_class": "Acute Tox. 4 (Inhal.)",
+        "c_min": 5.0
+      },
+      {
+        "h_code": "H319",
+        "h_class": "Eye Irrit. 2",
+        "c_min": 10.0
+      }
+    ]
   },
   "640-19-7": {
     "name": "2-fluoroacetamide",
@@ -114399,7 +115339,24 @@
     ],
     "m_factors": {},
     "index_no": "649-422-00-2",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H304",
+        "h_class": "Asp. Tox. 1",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H336",
+        "h_class": "STOT SE 3",
+        "c_min": 20.0
+      }
+    ]
   },
   "64742-81-0": {
     "name": "Kerosine (petroleum), hydrodesulfurized; Kerosine â€” unspecified; [A complex combination of hydrocarbons obtained from a petroleum stock by treating with hydrogen to convert organic sulfur to hydrogen sulfide which is removed. It consists of hydrocarbons having carbon numbers predominantly in the range of C9 through C16 and boiling in the range of approximately 150 Â°C to 290 Â°C (302 Â°F to 554 Â°F).]",
@@ -115209,7 +116166,19 @@
     ],
     "m_factors": {},
     "index_no": "649-467-00-8",
-    "atp": "ATP02"
+    "atp": "ATP02",
+    "scl": [
+      {
+        "h_code": "H304",
+        "h_class": "Asp. Tox. 1",
+        "c_min": 10.0
+      },
+      {
+        "h_code": "H315",
+        "h_class": "Skin Irrit. 2",
+        "c_min": 10.0
+      }
+    ]
   },
   "64742-55-8": {
     "name": "Distillates (petroleum), hydrotreated light paraffinic; Baseoil â€” unspecified; [A complex combination of hydrocarbons obtained by treating a petroleum fraction with hydrogen in the presence of a catalyst. It consists of hydrocarbons having carbon numbers predominantly in the range of C15 through C30 and produces a finished oil with a viscosity of less than 100 SUS at 100 Â°F (19cSt at 40 Â°C). It contains a relatively large proportion of saturated hydrocarbons.]",

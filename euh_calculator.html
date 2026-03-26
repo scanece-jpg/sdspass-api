@@ -2611,6 +2611,61 @@ function getComps(){
     return{cas,name,conc,concMin,concMax,hazards,ec,reach};
   }).filter(c=>c.cas||c.name);
 }
+// ── CLP Annex I Cut-off tablosu (KKDİK Ek-2) — global scope ──────────────────
+const CLP_CUTOFFS = {
+  'H300':1.0,'H310':1.0,'H330':1.0,
+  'H301':1.0,'H311':1.0,'H331':1.0,
+  'H302':5.0,'H312':5.0,'H332':5.0,
+  'H314':1.0,'H315':10.0,'H318':1.0,'H319':10.0,
+  'H317':1.0,'H334':0.1,
+  'H340':0.1,'H341':1.0,
+  'H350':0.1,'H351':1.0,
+  'H360':0.1,'H361':1.0,
+  'H362':0.1,
+  'H370':10.0,'H371':10.0,'H372':1.0,'H373':10.0,
+  'H335':20.0,'H336':20.0,
+  'H304':10.0,
+  'H400':0.1,'H410':0.1,'H411':1.0,'H412':10.0,'H413':25.0,
+};
+
+// ── KKDİK / CLP mevzuat atıf tablosu ─────────────────────────────────────────
+const H_CODE_REG = {
+  'H300':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §3.1, Tablo 3.1.3 — Akut Toks. Kat.1-2 (Oral)',
+  'H301':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §3.1, Tablo 3.1.3 — Akut Toks. Kat.3 (Oral)',
+  'H302':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §3.1, Tablo 3.1.3 — Akut Toks. Kat.4 (Oral)',
+  'H310':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §3.1, Tablo 3.1.3 — Akut Toks. Kat.1-2 (Dermal)',
+  'H311':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §3.1, Tablo 3.1.3 — Akut Toks. Kat.3 (Dermal)',
+  'H312':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §3.1, Tablo 3.1.3 — Akut Toks. Kat.4 (Dermal)',
+  'H330':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §3.1, Tablo 3.1.3 — Akut Toks. Kat.1-2 (İnhalasyon)',
+  'H331':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §3.1, Tablo 3.1.3 — Akut Toks. Kat.3 (İnhalasyon)',
+  'H332':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §3.1, Tablo 3.1.3 — Akut Toks. Kat.4 (İnhalasyon)',
+  'H314':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §3.2, Tablo 3.2.1 — Cilt Korozivitesi Kat.1',
+  'H315':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §3.2, Tablo 3.2.3 — Cilt Tahrişi Kat.2 (Toplamsal hesaplama)',
+  'H318':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §3.3, Tablo 3.3.1 — Ciddi Göz Hasarı Kat.1',
+  'H319':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §3.3, Tablo 3.3.3 — Göz Tahrişi Kat.2 (Toplamsal hesaplama)',
+  'H317':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §3.4, Tablo 3.4.2 — Deri Duyarlaştırma Kat.1',
+  'H334':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §3.4, Tablo 3.4.2 — Solunum Duyarlaştırma Kat.1',
+  'H340':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §3.5, Tablo 3.5.2 — Germ Hücre Mutajenitesi Kat.1A/1B',
+  'H341':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §3.5, Tablo 3.5.2 — Germ Hücre Mutajenitesi Kat.2',
+  'H350':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §3.6, Tablo 3.6.2 — Kanserojenite Kat.1A/1B',
+  'H351':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §3.6, Tablo 3.6.2 — Kanserojenite Kat.2',
+  'H360':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §3.7, Tablo 3.7.2 — Üreme Toksisitesi Kat.1A/1B',
+  'H361':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §3.7, Tablo 3.7.2 — Üreme Toksisitesi Kat.2',
+  'H362':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §3.7, Tablo 3.7.2 — Laktasyon Toksisitesi',
+  'H370':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §3.8, Tablo 3.8.2 — STOT Tek Maruziyet Kat.1',
+  'H371':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §3.8, Tablo 3.8.2 — STOT Tek Maruziyet Kat.2',
+  'H335':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §3.8, Tablo 3.8.3 — STOT SE Kat.3 (Solunum Yolu Tahrişi)',
+  'H336':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §3.8, Tablo 3.8.3 — STOT SE Kat.3 (Uyuşturucu Etki)',
+  'H372':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §3.9, Tablo 3.9.3 — STOT Tekrarlı Maruziyet Kat.1',
+  'H373':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §3.9, Tablo 3.9.3 — STOT Tekrarlı Maruziyet Kat.2',
+  'H304':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §3.10, Tablo 3.10.3 — Aspirasyon Toksisitesi Kat.1',
+  'H400':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §4.1, Tablo 4.1.0 — Sucul Ortam Akut Kat.1',
+  'H410':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §4.1, Tablo 4.1.0 — Sucul Ortam Kronik Kat.1',
+  'H411':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §4.1, Tablo 4.1.0 — Sucul Ortam Kronik Kat.2',
+  'H412':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §4.1, Tablo 4.1.0 — Sucul Ortam Kronik Kat.3',
+  'H413':'KKDİK Ek-2 / CLP (AT) 1272/2008, Ek I §4.1, Tablo 4.1.0 — Sucul Ortam Kronik Kat.4',
+};
+
 function calculate(showExtra){
   const comps=getComps();
   if(!comps.length){renderErr('En az bir bileşen girin.');return;}
@@ -2637,33 +2692,7 @@ function calculate(showExtra){
   }
   const ecoRes=calcEcological(comps,{});
   // P kodu için tüm H kodlarını topla: fiziksel + STOT + bileşen chip'leri
-  // ── CLP Annex I Cut-off tablosu (KKDİK Ek-2) ──────────────────────────────
-  // Konsantrasyon eşiği altındaki bileşenler sınıflandırmaya katılmaz
-  const CLP_CUTOFFS = {
-    // Akut Toksisite (3.1) — oral/dermal/inhal
-    'H300':1.0,'H310':1.0,'H330':1.0,  // Kat 1-2: %1
-    'H301':1.0,'H311':1.0,'H331':1.0,  // Kat 3:   %1
-    'H302':5.0,'H312':5.0,'H332':5.0,  // Kat 4:   %5 (ECHA Guidance Table 3.1.2)
-    // Cilt/Göz (3.2/3.3)
-    'H314':1.0,'H315':10.0,'H318':1.0,'H319':10.0,
-    // Duyarlılaştırma (3.4)
-    'H317':1.0,'H334':0.1,
-    // CMR (3.5/3.6/3.7) — Kat 1A/1B: %0.1, Kat 2: %1
-    'H340':0.1,'H341':1.0,
-    'H350':0.1,'H351':1.0,
-    'H360':0.1,'H361':1.0,
-    // Laktasyon (3.7) — %0.1
-    'H362':0.1,
-    // STOT SE (3.8) — Kat1: %10, Kat2: %10, Kat3: %20
-    'H370':10.0,'H371':10.0,'H372':1.0,'H373':10.0,
-    'H335':20.0,'H336':20.0,
-    // Aspirasyon (3.10) — %10
-    'H304':10.0,
-    // Sucul (4.1) — M-faktör dahil (ecological engine ile hesaplanıyor)
-    'H400':0.1,'H410':0.1,'H411':1.0,'H412':10.0,'H413':25.0,
-    // Yanıcılık — fiziksel hesaplama engine'de, chip'ten alınmaz
-    // 'H224','H225','H226' → calcFlamLiq tarafından hesaplanıyor
-  };
+  // CLP_CUTOFFS global scope'ta tanımlı
   // Chip'lerden gelen H kodlarını CUT-OFF ile filtrele
   const chipHCodes = comps.flatMap(c=>{
     const conc = parseFloat(c.concMax||c.conc)||0;
@@ -2905,6 +2934,35 @@ function renderResults(r, phys, stot, eco, p, comps, showExtra, extraHCodes=[]){
       h+=`<div class="wbox"><div class="wt">⚠ STOT RE</div><div class="wtxt">${w}</div></div>`;
     });
   }
+  // ── Sağlık Tehlikeleri ────────────────────────────────────
+  const _dangerH=new Set(['H300','H301','H310','H311','H314','H318','H330','H331','H334','H340','H350','H360','H362','H370','H372']);
+  const _stotCodes=new Set((stot&&stot.results?stot.results.map(s=>s.h):[]).concat(stot&&stot.analytic_results?stot.analytic_results.map(s=>s.h):[]));
+  const _physCodes2=new Set((phys&&phys.results?phys.results.map(r=>r.h||r.h_code):[]).map(c=>(c||'').replace(/[*\s]/g,'').substring(0,4)));
+  const healthCodes=[...new Set(extraHCodes)].filter(c=>!_physCodes2.has(c)&&!_stotCodes.has(c));
+  if(healthCodes.length>0){
+    h+=`<div class="section-label">🧪 Sağlık Tehlikeleri</div>`;
+    healthCodes.forEach((code,i)=>{
+      const contributors=comps.filter(c=>(c.hazards||[]).some(hz=>(hz.h_code||'').replace(/[*\s]/g,'').substring(0,4)===code));
+      const hclass=(contributors.flatMap(c=>c.hazards||[]).find(hz=>(hz.h_code||'').startsWith(code))||{}).h_class||'';
+      const cls=_dangerH.has(code)?'danger':'warning';
+      const tag=_dangerH.has(code)
+        ?'<span class="signal-badge signal-danger" style="font-size:9px">DANGER</span>'
+        :'<span class="signal-badge signal-warning" style="font-size:9px">WARNING</span>';
+      const reg=H_CODE_REG[code]||'KKDİK Ek-2 / CLP (AT) No 1272/2008, Ek I';
+      const cutoffVal=CLP_CUTOFFS[code];
+      const cutoffTxt=cutoffVal!==undefined?` · Karışım kesme değeri: ≥ %${cutoffVal}`:'';
+      const contribNames=contributors.map(c=>c.name||c.cas||'?').filter(Boolean);
+      h+=`<div class="ecard2 ${cls}" style="animation-delay:${i*.03}s">
+        <div class="ecard2-header">
+          <span class="ecard2-code">${code}</span>${tag}
+          <span class="ecard2-label">${hclass}</span>
+        </div>
+        <div class="ecard2-source">⚖ ${reg}${cutoffTxt}</div>
+        ${contribNames.length?`<div class="ecard2-note" style="color:var(--text3);margin-top:4px">📦 Katkıda bulunan: <b>${contribNames.join(', ')}</b></div>`:''}
+      </div>`;
+    });
+  }
+
   // ── Bölüm 3 Önizleme ─────────────────────────────────────
   const sec3rows=buildSection3Table(comps);
   const hasHidden=sec3rows.some(r=>r.note);

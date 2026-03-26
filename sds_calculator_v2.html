@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>SDSPass v2 — Modüler Hesaplama</title>
+<style>
+:root{
+  --bg:#0f0f1a;--bg2:#16162a;--bg3:#1e1e32;
+  --accent:#7c6af7;--accent2:#5b4dd4;
+  --text:#e0e0f0;--text2:#b0b0c8;--text3:#6a6a88;
+  --border:#2a2a44;--border2:#3a3a58;
+  --danger:#ff6b6b;--warn:#f5a623;--safe:#00e5b0;--info:#64b5f6;
+  --mono:'JetBrains Mono',monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min-height:100vh}
+.app{display:grid;grid-template-columns:1fr 380px;gap:0;min-height:100vh}
+.left{padding:20px;overflow-y:auto;border-right:1px solid var(--border)}
+.right{padding:20px;overflow-y:auto;background:var(--bg2)}
+
+/* Header */
+.hdr{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.hdr-logo{font-size:20px;font-weight:800;color:var(--accent);font-family:var(--mono)}
+.hdr-sub{font-size:11px;color:var(--text3)}
+.version-badge{font-size:9px;background:var(--accent);color:#fff;padding:2px 6px;border-radius:10px;font-family:var(--mono)}
+
+/* Product info */
+.product-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:16px}
+.product-card label{font-size:10px;color:var(--text3);display:block;margin-bottom:4px;text-transform:uppercase;letter-spacing:.05em}
+.product-card input,.product-card select{width:100%;background:var(--bg2);border:1px solid var(--border2);color:var(--text);border-radius:6px;padding:7px 10px;font-size:12px;font-family:var(--mono)}
+.product-card input:focus,.product-card select:focus{outline:2px solid var(--accent);border-color:transparent}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+
+/* Component rows */
+.comps-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+.comps-title{font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.1em}
+.btn-add{background:var(--accent);color:#fff;border:none;border-radius:6px;padding:6px 14px;font-size:11px;cursor:pointer;font-weight:600}
+.btn-add:hover{background:var(--accent2)}
+
+.cw{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:10px;position:relative}
+.cw-row{display:grid;grid-template-columns:140px 1fr;gap:8px;margin-bottom:8px}
+.cw-row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px}
+.cw input,.cw select{background:var(--bg2);border:1px solid var(--border2);color:var(--text);border-radius:6px;padding:6px 9px;font-size:11px;font-family:var(--mono);width:100%}
+.cw input:focus,.cw select:focus{outline:2px solid var(--accent);border-color:transparent}
+.cw label{font-size:9px;color:var(--text3);display:block;margin-bottom:3px;text-transform:uppercase}
+.cdel{position:absolute;top:10px;right:10px;background:transparent;border:1px solid var(--border);color:var(--text3);width:22px;height:22px;border-radius:4px;cursor:pointer;font-size:14px;display:flex;align-items:center;justify-content:center}
+.cdel:hover{border-color:var(--danger);color:var(--danger)}
+
+/* Hazard chips */
+.chip-area{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px;min-height:24px}
+.hchip{display:inline-flex;align-items:center;gap:4px;background:rgba(124,106,247,.15);border:1px solid rgba(124,106,247,.3);color:var(--accent);border-radius:4px;padding:2px 7px;font-size:10px;font-family:var(--mono);cursor:default}
+.hchip.danger{background:rgba(255,107,107,.12);border-color:rgba(255,107,107,.3);color:var(--danger)}
+.hchip.warn{background:rgba(245,166,35,.12);border-color:rgba(245,166,35,.3);color:var(--warn)}
+.hchip-del{background:none;border:none;color:inherit;cursor:pointer;font-size:11px;padding:0;line-height:1;opacity:.6}
+.hchip-del:hover{opacity:1}
+.add-chip-btn{background:none;border:1px dashed var(--border2);color:var(--text3);border-radius:4px;padding:2px 8px;font-size:10px;cursor:pointer}
+.add-chip-btn:hover{border-color:var(--accent);color:var(--accent)}
+
+/* Concentration select */
+.conc-sel{width:100%;padding:6px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-family:var(--mono);font-size:11px;cursor:pointer}
+
+/* Refinement panel */
+.crp{margin-top:6px;border-radius:8px;overflow:hidden;border:1px solid var(--border2);display:none}
+.crp-head{background:rgba(245,166,35,.08);border-bottom:1px solid rgba(245,166,35,.2);padding:8px 12px;font-size:11px;color:var(--warn)}
+.crp-btns{display:flex;gap:6px;padding:8px 10px;background:var(--bg3)}
+.crp-btn{flex:1;border:1px solid var(--border2);background:var(--bg2);color:var(--text2);border-radius:6px;padding:8px;font-size:10px;font-family:var(--mono);cursor:pointer;text-align:center}
+.crp-btn:hover{border-color:var(--accent);color:var(--accent)}
+.crp-btn.danger-border{border-color:rgba(255,107,107,.4);color:var(--danger)}
+.crp-btn.warn-border{border-color:rgba(245,166,35,.4);color:var(--warn)}
+.crp-btn.safe-border{border-color:rgba(0,229,176,.4);color:var(--safe)}
+
+/* Calc bar */
+.calc-bar{display:flex;gap:8px;margin-bottom:20px;padding:14px;background:var(--bg3);border-radius:10px;border:1px solid var(--border)}
+.bcalc{flex:1;background:var(--accent);color:#fff;border:none;border-radius:8px;padding:10px;font-size:13px;font-weight:700;cursor:pointer}
+.bcalc:hover{background:var(--accent2)}
+.bcalc:active{transform:scale(.98)}
+
+/* Results right panel */
+.r-section{margin-bottom:16px}
+.r-title{font-size:10px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.1em;padding:8px 0 6px;border-top:1px solid var(--border);margin-top:8px}
+.r-title:first-child{border-top:none;padding-top:0}
+.result-banner{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:12px}
+.signal-danger{color:var(--danger);font-weight:700;font-size:13px}
+.signal-warning{color:var(--warn);font-weight:700;font-size:13px}
+.hcode-pills{display:flex;flex-wrap:wrap;gap:4px;margin:8px 0}
+.hpill{padding:3px 8px;border-radius:4px;font-family:var(--mono);font-size:11px;font-weight:700}
+.hpill.hp-danger{background:rgba(255,107,107,.15);color:var(--danger);border:1px solid rgba(255,107,107,.3)}
+.hpill.hp-warn{background:rgba(245,166,35,.15);color:var(--warn);border:1px solid rgba(245,166,35,.3)}
+.hpill.hp-info{background:rgba(100,181,246,.1);color:var(--info);border:1px solid rgba(100,181,246,.25)}
+.pictogram-row{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.ghs-icon{width:48px;height:48px;display:flex;flex-direction:column;align-items:center;gap:2px}
+.ghs-icon .sym{font-size:28px;line-height:1}
+.ghs-icon .lbl{font-size:8px;color:var(--text3);font-family:var(--mono)}
+
+.ecard{background:var(--bg3);border:1px solid var(--border);border-left:3px solid var(--border);border-radius:8px;padding:10px 12px;margin-bottom:6px}
+.ecard.danger{border-left-color:var(--danger)}
+.ecard.warning{border-left-color:var(--warn)}
+.ecard.info{border-left-color:var(--info)}
+.ecard-head{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.ecard-code{font-family:var(--mono);font-size:13px;font-weight:800}
+.ecard-label{font-size:10px;color:var(--text2);flex:1}
+.ecard-source{font-size:10px;color:var(--text3);font-family:var(--mono);margin-top:3px}
+.sbadge{font-size:9px;padding:2px 6px;border-radius:10px;font-weight:700}
+.sbadge.danger{background:rgba(255,107,107,.2);color:var(--danger)}
+.sbadge.warning{background:rgba(245,166,35,.2);color:var(--warn)}
+
+/* Transport */
+.transport-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.transport-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:8px;text-align:center}
+.transport-card .t-mode{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.transport-card .t-un{font-family:var(--mono);font-size:12px;font-weight:700;color:var(--accent)}
+.transport-card .t-class{font-size:10px;color:var(--text2);margin-top:2px}
+
+/* PPE */
+.ppe-category{margin-bottom:8px}
+.ppe-cat-title{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin-bottom:4px}
+.ppe-item{font-size:11px;color:var(--text2);padding:3px 0;display:flex;align-items:flex-start;gap:6px}
+.ppe-item::before{content:'✓';color:var(--safe);flex-shrink:0;font-size:10px;margin-top:1px}
+
+.empty-state{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 20px;text-align:center;color:var(--text3);gap:8px}
+.empty-state .es-icon{font-size:32px;opacity:.3}
+.empty-state .es-text{font-size:12px}
+
+.warn-box{background:rgba(245,166,35,.06);border:1px solid rgba(245,166,35,.2);border-radius:8px;padding:10px 12px;margin-bottom:8px;font-size:11px;color:var(--warn)}
+
+/* Section 3 table */
+.s3-table{width:100%;border-collapse:collapse;font-size:10px;margin-bottom:8px}
+.s3-table th{color:var(--text3);text-align:left;padding:3px 6px;border-bottom:1px solid var(--border);font-weight:600}
+.s3-table td{padding:4px 6px;border-bottom:1px solid rgba(255,255,255,.04);color:var(--text2)}
+.s3-table td:first-child{font-family:var(--mono);color:var(--text3)}
+.s3-table td:last-child{color:var(--accent);font-family:var(--mono)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.ecard,.result-banner{animation:fadeUp .2s ease both}
+</style>
+</head>
+<body>
+<div class="app">
+<!-- ═══ SOL PANEL — Girdi ═══════════════════════════════════════════════════ -->
+<div class="left">
+  <div class="hdr">
+    <div>
+      <div class="hdr-logo">SDSPass</div>
+      <div class="hdr-sub">KKDİK / CLP Karışım Sınıflandırma</div>
+    </div>
+    <span class="version-badge">v2.0 Modüler</span>
+  </div>
+
+  <!-- Ürün Bilgileri -->
+  <div class="product-card">
+    <label>Ürün Adı</label>
+    <input type="text" id="productName" placeholder="Ürün / Formülasyon adı">
+    <div class="row2">
+      <div>
+        <label>Form</label>
+        <select id="pform">
+          <option value="liquid">Sıvı</option>
+          <option value="solid">Katı</option>
+          <option value="gas">Gaz</option>
+          <option value="paste">Pasta / Gel</option>
+          <option value="powder">Toz</option>
+        </select>
+      </div>
+      <div>
+        <label>Kullanım Tipi</label>
+        <select id="pusage">
+          <option value="industrial">Endüstriyel</option>
+          <option value="professional">Profesyonel</option>
+          <option value="consumer">Tüketici</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bileşenler -->
+  <div class="comps-header">
+    <span class="comps-title">🧪 Bileşenler</span>
+    <button class="btn-add" onclick="addComp()">+ Madde Ekle</button>
+  </div>
+  <div id="comps"></div>
+
+  <!-- Hesapla -->
+  <div class="calc-bar">
+    <button class="bcalc" onclick="doCalculate()">⚡ Hesapla</button>
+  </div>
+</div>
+
+<!-- ═══ SAĞ PANEL — Sonuçlar ════════════════════════════════════════════════ -->
+<div class="right">
+  <div id="results">
+    <div class="empty-state">
+      <div class="es-icon">⚗️</div>
+      <div class="es-text">Bileşen ekleyip Hesapla'ya basın</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ══ ENGINE SCRIPTS ═══════════════════════════════════════════════════════ -->
+<script src="js/event-bus.js"></script>
+<script src="js/state-store.js"></script>
+<script src="js/engines/clp_engine.js"></script>
+<script src="js/engines/pcode_engine.js"></script>
+<script src="js/engines/eco_engine.js"></script>
+<script src="js/engines/stot_engine.js"></script>
+<script src="js/engines/euh_engine.js"></script>
+<script src="js/engines/transport_engine.js"></script>
+<script src="js/engines/ppe_engine.js"></script>
+<script src="js/engines/physical_engine.js"></script>
+
+<script>
+// ══════════════════════════════════════════════════════════════════════════════
+//  SDSPass v2 — UI Shell
+//  Tüm hesaplama mantığı engine'lerde. Bu dosya sadece:
+//  1. DOM yönetimi (bileşen ekle/sil, girdi oku)
+//  2. EventBus üzerinden engine'leri tetikle
+//  3. Engine çıktılarını ekrana yaz
+// ══════════════════════════════════════════════════════════════════════════════
+
+const API_BASE = (window.HAZARDDESK_API_URL || '/api/v1/sds/pdf').replace('/sds/pdf','');
+
+// ── GHS Piktogram verileri ────────────────────────────────────────────────────
+const GHS_DATA = {
+  'GHS01':{ sym:'💥', lbl:'GHS01' }, 'GHS02':{ sym:'🔥', lbl:'GHS02' },
+  'GHS03':{ sym:'🔆', lbl:'GHS03' }, 'GHS04':{ sym:'⚗️', lbl:'GHS04' },
+  'GHS05':{ sym:'🧪', lbl:'GHS05' }, 'GHS06':{ sym:'☠️', lbl:'GHS06' },
+  'GHS07':{ sym:'⚠️', lbl:'GHS07' }, 'GHS08':{ sym:'⚕️', lbl:'GHS08' },
+  'GHS09':{ sym:'🌿', lbl:'GHS09' },
+};
+
+const DANGER_H = new Set(['H300','H301','H304','H310','H311','H314','H318','H330','H331','H334','H340','H341','H350','H351','H360','H361','H362','H370','H371','H372','H200','H201','H202','H224','H225']);
+
+// ── Bileşen yönetimi ──────────────────────────────────────────────────────────
+let _compId = 0;
+const CLP_CUTOFFS = {
+  'H300':1.0,'H301':1.0,'H302':5.0,'H310':1.0,'H311':1.0,'H312':5.0,
+  'H330':1.0,'H331':1.0,'H332':5.0,'H314':1.0,'H315':10.0,'H318':1.0,'H319':10.0,
+  'H317':1.0,'H334':0.1,'H340':0.1,'H341':1.0,'H350':0.1,'H351':1.0,
+  'H360':0.1,'H361':1.0,'H362':0.1,'H370':10.0,'H371':10.0,'H372':1.0,'H373':10.0,
+  'H335':20.0,'H336':20.0,'H304':10.0,'H400':0.1,'H410':0.1,'H411':1.0,'H412':10.0,'H413':25.0,
+};
+
+function addComp(pf = {}) {
+  const id = ++_compId;
+  const div = document.createElement('div');
+  div.className = 'cw'; div.id = 'cw' + id;
+  div.innerHTML = `
+    <button class="cdel" onclick="delComp(${id})" title="Kaldır">×</button>
+    <div class="cw-row">
+      <div>
+        <label>CAS No</label>
+        <input type="text" class="ci" id="ci${id}" placeholder="7664-93-9"
+               value="${pf.cas||''}" onblur="onCas(${id})">
+      </div>
+      <div>
+        <label>Madde Adı</label>
+        <input type="text" class="ni" id="ni${id}" placeholder="Madde adı" value="${pf.name||''}">
+      </div>
+    </div>
+    <div>
+      <label>Konsantrasyon Aralığı</label>
+      <select class="conc-sel" id="csel${id}" onchange="onConcChange(${id})">
+        <option value="">— Seçin —</option>
+        <option value="0|0.1">≤ %0,1</option>
+        <option value="0.1|1">%0,1 – %1</option>
+        <option value="1|5">%1 – %5</option>
+        <option value="5|10">%5 – %10</option>
+        <option value="10|25">%10 – %25</option>
+        <option value="25|50">%25 – %50</option>
+        <option value="50|100">%50 – %100</option>
+        <option value="100|100">%100 — Saf Madde</option>
+      </select>
+      <div class="crp" id="crp${id}"></div>
+      <input type="hidden" class="kimin" id="cmin${id}" value="${pf.conc||''}">
+      <input type="hidden" class="kimax" id="cmax${id}" value="">
+    </div>
+    <div style="margin-top:8px">
+      <label>Tehlike Sınıfları <button class="add-chip-btn" onclick="showChipInput(${id})">+ Ekle</button></label>
+      <div class="chip-area" id="chips${id}"></div>
+      <input type="hidden" id="chipinput${id}" style="display:none">
+    </div>
+    <div class="cw-row3" style="margin-top:8px">
+      <div><label>EC No</label><input type="text" class="ec-input" id="ec${id}" placeholder="231-639-5"></div>
+      <div><label>REACH No</label><input type="text" class="reach-input" id="reach${id}" placeholder="01-xxx"></div>
+      <div><label>M-Faktör (Akut)</label><input type="number" class="mf-input" id="mf${id}" placeholder="1" min="1" value="1"></div>
+    </div>`;
+  document.getElementById('comps').appendChild(div);
+  if (pf.hazards) pf.hazards.forEach(h => addChip(id, h.h_class, h.h_code));
+  return id;
+}
+
+function delComp(id) { document.getElementById('cw'+id)?.remove(); }
+
+function addChip(id, hclass, hcode) {
+  const chips = document.getElementById('chips'+id);
+  if (!chips) return;
+  const code = (hcode||'').replace(/[*\s]/g,'').substring(0,4);
+  if ([...chips.querySelectorAll('.hchip')].some(c => c.dataset.code === code)) return;
+  const cls = DANGER_H.has(code) ? 'danger' : 'warn';
+  const span = document.createElement('span');
+  span.className = `hchip ${cls}`;
+  span.dataset.hc = hclass; span.dataset.code = hcode;
+  span.innerHTML = `${hcode||hclass} <button class="hchip-del" onclick="this.parentNode.remove()">×</button>`;
+  chips.appendChild(span);
+}
+
+function showChipInput(id) {
+  const hc = prompt('Tehlike sınıfı girin (örn: Skin Corr. 1A):');
+  if (!hc) return;
+  const hcode = prompt('H kodu girin (örn: H314):') || '';
+  addChip(id, hc.trim(), hcode.trim());
+}
+
+// ── CAS Lookup ────────────────────────────────────────────────────────────────
+async function onCas(id) {
+  const cas = document.getElementById('ci'+id)?.value?.trim();
+  if (!cas || cas.length < 5) return;
+  try {
+    const r = await fetch(`${API_BASE}/sds/substance/lookup?cas=${encodeURIComponent(cas)}`);
+    if (!r.ok) return;
+    const data = await r.json();
+    if (!data.found) return;
+    const ni = document.getElementById('ni'+id);
+    if (ni && !ni.value && data.name) ni.value = data.name;
+    const ec = document.getElementById('ec'+id);
+    if (ec && !ec.value && data.ec_no) ec.value = data.ec_no;
+    const reach = document.getElementById('reach'+id);
+    if (reach && !reach.value && data.reach_no) reach.value = data.reach_no;
+    if (data.hazards) data.hazards.forEach(h => addChip(id, h.h_class, h.h_code));
+    // Seçili aralıkta dropdown'u yenile
+    const sel = document.getElementById('csel'+id);
+    if (sel && sel.value) onConcChange(id);
+    EventBus.emit('SUBSTANCE_FOUND', { id, cas, ...data });
+  } catch(e) { console.warn('[CAS lookup]', e); }
+}
+
+// ── Konsantrasyon seçici ──────────────────────────────────────────────────────
+function onConcChange(id) {
+  const sel = document.getElementById('csel'+id);
+  if (!sel || !sel.value) return;
+  const [lo, hi] = sel.value.split('|').map(Number);
+  // GCL eşiği var mı kontrol et
+  const chips = [...document.querySelectorAll(`#chips${id} .hchip`)];
+  const hazards = chips.map(c => ({ h_class: c.dataset.hc, h_code: c.dataset.code }));
+  const thresholds = findThresholds(lo, hi, hazards);
+  if (thresholds.length > 0) {
+    showRefinement(id, lo, hi, thresholds);
+  } else {
+    saveConc(id, lo, hi);
+  }
+}
+
+function findThresholds(lo, hi, hazards) {
+  const GCL = {
+    'Skin Corr. 1':[[1,'H314'],[5,'H315']], 'Skin Corr. 1A':[[1,'H314'],[5,'H315']],
+    'Eye Dam. 1':[[1,'H318'],[3,'H319']], 'STOT SE 1':[[10,'H370']],
+    'STOT SE 2':[[10,'H371']], 'STOT SE 3':[[20,'H335']],
+    'Acute Tox. 1':[[1,'H300']], 'Acute Tox. 2':[[1,'H301']], 'Acute Tox. 3':[[1,'H301']],
+    'Acute Tox. 4':[[5,'H302']],
+  };
+  const found = new Set();
+  for (const h of hazards) {
+    const entries = GCL[h.h_class] || [];
+    for (const [thr] of entries) {
+      if (thr > lo && thr < hi) found.add(thr);
+    }
+  }
+  return [...found].sort((a,b) => a-b);
+}
+
+function showRefinement(id, lo, hi, thresholds) {
+  const crp = document.getElementById('crp'+id);
+  if (!crp) return;
+  const thr = thresholds[0];
+  crp.style.display = 'block';
+  crp.innerHTML = `
+    <div class="crp-head">⚖ Kritik sınır <b>%${thr}</b> bu aralık içinde — konumunuzu belirtin</div>
+    <div class="crp-btns">
+      <button class="crp-btn warn-border" onclick="saveConc(${id},${lo},${thr-0.001})">
+        %${lo} – %${thr}<br><span style="font-size:9px;opacity:.7">altında</span>
+      </button>
+      <button class="crp-btn danger-border" onclick="saveConc(${id},${thr},${hi})">
+        %${thr} – %${hi}<br><span style="font-size:9px;opacity:.7">üstünde</span>
+      </button>
+    </div>`;
+}
+
+function saveConc(id, lo, hi) {
+  document.getElementById('cmin'+id).value = lo;
+  document.getElementById('cmax'+id).value = hi;
+  const crp = document.getElementById('crp'+id);
+  if (crp) crp.style.display = 'none';
+  const sel = document.getElementById('csel'+id);
+  if (sel) sel.style.borderColor = 'var(--safe)';
+  setTimeout(() => { if(sel) sel.style.borderColor=''; }, 1500);
+}
+
+// ── Bileşen okuyucu ───────────────────────────────────────────────────────────
+function getComps() {
+  return [...document.querySelectorAll('.cw')].map(w => {
+    const cas  = w.querySelector('.ci')?.value?.trim() || '';
+    const name = w.querySelector('.ni')?.value?.trim() || '';
+    const minEl = w.querySelector('.kimin');
+    const maxEl = w.querySelector('.kimax');
+    let concMin = parseFloat(minEl?.value) || 0;
+    let concMax = parseFloat(maxEl?.value) || null;
+    if (!concMin && (!concMax || concMax === 0)) {
+      const sel = w.querySelector('.conc-sel');
+      if (sel && sel.value) {
+        const parts = sel.value.split('|').map(Number);
+        if (parts.length === 2) { concMin = parts[0]; concMax = parts[1]; }
+      }
+    }
+    const conc = concMax != null && concMax > 0 ? concMax : concMin;
+    const hazards = [...w.querySelectorAll('.hchip')].map(c => ({ h_class: c.dataset.hc, h_code: c.dataset.code }));
+    const ec    = w.querySelector('.ec-input')?.value?.trim() || '';
+    const reach = w.querySelector('.reach-input')?.value?.trim() || '';
+    const mf    = parseFloat(w.querySelector('.mf-input')?.value) || 1;
+    return { cas, name, conc, concMin, concMax, hazards, ec, reach, m_factors:{ acute: mf, chronic: mf } };
+  }).filter(c => c.cas || c.name);
+}
+
+// ── Ana hesaplama tetikleyici ─────────────────────────────────────────────────
+function doCalculate() {
+  const comps = getComps();
+  if (!comps.length) { showError('En az bir bileşen girin.'); return; }
+  const form   = document.getElementById('pform')?.value || 'liquid';
+  const userFP = parseFloat(document.getElementById('tf_fp')?.value) || null;
+  // Pipeline başlat — tüm engine'ler EventBus üzerinden çalışır
+  EventBus.emit('PIPELINE_START', { comps, form, userFP });
+}
+
+// ── Pipeline orkestratörü ─────────────────────────────────────────────────────
+function initPipeline() {
+  EventBus.on('PIPELINE_START', ({ comps, form, userFP }) => {
+    // Tüm engine'leri paralel tetikle
+    EventBus.emit('CLP_CALCULATE',      { comps });
+    EventBus.emit('STOT_CALCULATE',     { comps });
+    EventBus.emit('ECO_CALCULATE',      { comps });
+    EventBus.emit('EUH_CALCULATE',      { comps });
+    EventBus.emit('PHYSICAL_CALCULATE', { comps, form, userFP });
+    // State'e comps kaydet
+    if (typeof StateStore !== 'undefined') StateStore.set('comps', comps);
+  });
+
+  // H kodları hazır olunca P kodu ve diğerleri zaten otomatik tetiklenir
+  // (PCodeEngine, TransportEngine, PPEEngine H_CODES_READY'yi dinliyor)
+
+  // Tüm sonuçları topla ve render et
+  const _state = {};
+  const REQUIRED = ['clp','stot','eco','euh','phys','pcodes','transport','ppe'];
+
+  function tryRender() {
+    if (REQUIRED.every(k => _state[k])) renderAll(_state);
+  }
+
+  EventBus.on('H_CODES_READY',    r => { _state.clp = r; tryRender(); });
+  EventBus.on('STOT_READY',       r => { _state.stot = r; tryRender(); });
+  EventBus.on('ECO_READY',        r => { _state.eco = r; tryRender(); });
+  EventBus.on('EUH_READY',        r => { _state.euh = r; tryRender(); });
+  EventBus.on('PHYSICAL_READY',   r => { _state.phys = r; tryRender(); });
+  EventBus.on('P_CODES_READY',    r => { _state.pcodes = r; tryRender(); });
+  EventBus.on('TRANSPORT_READY',  r => { _state.transport = r; tryRender(); });
+  EventBus.on('PPE_READY',        r => { _state.ppe = r; tryRender(); });
+
+  EventBus.on('PIPELINE_START', () => {
+    REQUIRED.forEach(k => delete _state[k]);
+  });
+}
+
+// ── Render ────────────────────────────────────────────────────────────────────
+function renderAll(s) {
+  const el = document.getElementById('results');
+  if (!el) return;
+  const { clp, stot, eco, euh, phys, pcodes, transport, ppe } = s;
+
+  // Tüm H kodlarını birleştir
+  const allH = [...new Set([
+    ...(clp.hCodes || []),
+    ...(stot.h_codes || []),
+    ...(eco.h_codes || []),
+    ...(phys.results||[]).map(r => r.h || r.h_code),
+  ])];
+
+  let h = '';
+
+  // ── Banner ────────────────────────────────────────────────────────────────
+  if (allH.length > 0) {
+    const sigClass = clp.signal === 'Danger' ? 'signal-danger' : 'signal-warning';
+    h += `<div class="result-banner">
+      <div class="${sigClass}" style="margin-bottom:8px">${clp.signal === 'Danger' ? '🔴 DANGER' : '🟡 WARNING'}</div>
+      <div class="hcode-pills">${allH.map(c => `<span class="hpill ${DANGER_H.has(c)?'hp-danger':'hp-warn'}">${c}</span>`).join('')}</div>
+      <div class="pictogram-row">${(clp.pictograms||[]).map(g => `<div class="ghs-icon"><div class="sym">${GHS_DATA[g]?.sym||'?'}</div><div class="lbl">${g}</div></div>`).join('')}</div>
+    </div>`;
+  }
+
+  // ── Bölüm 2.1 — Sağlık Tehlikeleri ─────────────────────────────────────
+  const healthH = (clp.hCodes||[]).filter(c => !['H224','H225','H226','H228'].includes(c) && !(phys.results||[]).some(r=>(r.h||r.h_code)===c));
+  if (healthH.length) {
+    h += `<div class="r-title">🧪 Bölüm 2.1 — Sağlık Tehlikeleri</div>`;
+    healthH.forEach((code,i) => {
+      const cls = DANGER_H.has(code) ? 'danger' : 'warning';
+      const tag = DANGER_H.has(code) ? '<span class="sbadge danger">DANGER</span>' : '<span class="sbadge warning">WARNING</span>';
+      const cutoff = CLPEngine.CUTOFFS[code];
+      h += `<div class="ecard ${cls}" style="animation-delay:${i*.03}s">
+        <div class="ecard-head"><span class="ecard-code">${code}</span>${tag}</div>
+        <div class="ecard-source">KKDİK Ek-2 / CLP (AT) 1272/2008${cutoff?` · Kesme değeri ≥ %${cutoff}`:''}</div>
+      </div>`;
+    });
+  }
+
+  // ── Fiziksel Tehlikeler ──────────────────────────────────────────────────
+  if ((phys.results||[]).length) {
+    h += `<div class="r-title">⚡ Fiziksel Tehlikeler</div>`;
+    phys.results.forEach((p,i) => {
+      const code = p.h || p.h_code;
+      const cls = p.signal === 'Danger' ? 'danger' : 'warning';
+      h += `<div class="ecard ${cls}" style="animation-delay:${i*.03}s">
+        <div class="ecard-head"><span class="ecard-code">${code}</span><span class="ecard-label">${p.label||''}</span></div>
+        ${p.source ? `<div class="ecard-source">📦 ${p.source}</div>` : ''}
+      </div>`;
+    });
+  }
+
+  // ── STOT RE ──────────────────────────────────────────────────────────────
+  if ((stot.results||[]).length) {
+    h += `<div class="r-title">🫁 STOT RE — Tekrarlı Maruziyet</div>`;
+    stot.results.forEach((s,i) => {
+      const cls = s.signal === 'Danger' ? 'danger' : 'warning';
+      h += `<div class="ecard ${cls}" style="animation-delay:${i*.03}s">
+        <div class="ecard-head"><span class="ecard-code">${s.h}</span><span class="ecard-label">${s.h_class} — ${s.organ}</span></div>
+        <div class="ecard-source">${s.reason}</div>
+      </div>`;
+    });
+  }
+
+  // ── EUH Kodları ──────────────────────────────────────────────────────────
+  if ((euh.codes||[]).length) {
+    h += `<div class="r-title">📋 EUH İfadeleri</div>`;
+    (euh.details||[]).forEach((d,i) => {
+      const cls = d.type === 'auto' ? 'danger' : 'info';
+      h += `<div class="ecard ${cls}" style="animation-delay:${i*.03}s">
+        <div class="ecard-head">
+          <span class="ecard-code">${d.code}</span>
+          <span class="sbadge ${d.type==='auto'?'danger':'warning'}">${d.type==='auto'?'Zorunlu':'Tavsiye'}</span>
+        </div>
+        <div class="ecard-label" style="font-size:11px;margin:4px 0;color:var(--text2)">${d.text||''}</div>
+        <div class="ecard-source">Kaynak: ${d.source||''}</div>
+      </div>`;
+    });
+  }
+
+  // ── Ekolojik ─────────────────────────────────────────────────────────────
+  if (eco.aquatic) {
+    h += `<div class="r-title">🌿 Bölüm 12 — Ekolojik</div>`;
+    h += `<div class="ecard warning">
+      <div class="ecard-head"><span class="ecard-code">${eco.aquatic.h}</span><span class="ecard-label">${eco.aquatic.cls}</span></div>
+      <div class="ecard-source">${eco.aquatic.formula}</div>
+    </div>`;
+  }
+
+  // ── P Kodları ─────────────────────────────────────────────────────────────
+  if ((pcodes.codes||[]).length) {
+    h += `<div class="r-title">🛡 Bölüm 2.2 — P Kodları (${pcodes.total} adet)</div>`;
+    h += `<div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">`;
+    (pcodes.codes||[]).forEach(code => {
+      h += `<span style="background:rgba(100,181,246,.1);border:1px solid rgba(100,181,246,.2);color:var(--info);border-radius:4px;padding:2px 7px;font-family:var(--mono);font-size:10px">${code}</span>`;
+    });
+    h += `</div>`;
+  }
+
+  // ── Taşımacılık ──────────────────────────────────────────────────────────
+  h += `<div class="r-title">🚛 Bölüm 14 — Taşımacılık</div>`;
+  if (transport.not_regulated) {
+    h += `<div class="ecard info"><div class="ecard-head"><span class="ecard-code">Tehlikeli değil</span></div><div class="ecard-source">${transport.note}</div></div>`;
+  } else {
+    h += `<div class="transport-grid">
+      <div class="transport-card"><div class="t-mode">🚚 Kara (ADR)</div><div class="t-un">${transport.road?.un||'—'}</div><div class="t-class">Sınıf ${transport.road?.class||'—'} · PG ${transport.road?.pg||'—'}</div></div>
+      <div class="transport-card"><div class="t-mode">🚢 Deniz (IMDG)</div><div class="t-un">${transport.sea?.un||'—'}</div><div class="t-class">Sınıf ${transport.sea?.class||'—'} · PG ${transport.sea?.pg||'—'}</div></div>
+      <div class="transport-card"><div class="t-mode">✈️ Hava (IATA)</div><div class="t-un">${transport.air?.un||'—'}</div><div class="t-class">Sınıf ${transport.air?.class||'—'} · PG ${transport.air?.pg||'—'}</div></div>
+    </div>`;
+    if (transport.road?.note) h += `<div class="warn-box" style="margin-top:6px">⚠ ${transport.road.note}</div>`;
+  }
+
+  // ── KKD / Bölüm 8 ────────────────────────────────────────────────────────
+  const hasPPE = Object.values(ppe).some(arr => arr.length > 0);
+  if (hasPPE) {
+    h += `<div class="r-title">🧤 Bölüm 8 — Kişisel Koruyucu Donanım</div>`;
+    const cats = [
+      ['respiratory','🌬️ Solunum'], ['hands','🧤 El'],
+      ['eyes','👓 Göz/Yüz'], ['body','🦺 Vücut'],
+    ];
+    cats.forEach(([key, label]) => {
+      if (!(ppe[key]||[]).length) return;
+      h += `<div class="ppe-category"><div class="ppe-cat-title">${label}</div>`;
+      ppe[key].forEach(item => { h += `<div class="ppe-item">${item.ppe}</div>`; });
+      h += `</div>`;
+    });
+  }
+
+  el.innerHTML = h;
+}
+
+function showError(msg) {
+  document.getElementById('results').innerHTML = `<div class="warn-box">⚠ ${msg}</div>`;
+}
+
+// ── Başlatma ──────────────────────────────────────────────────────────────────
+window.addEventListener('DOMContentLoaded', () => {
+  // Engine'leri başlat
+  CLPEngine.init();
+  PCodeEngine.init();
+  EcoEngine.init();
+  STOTEngine.init();
+  EUHEngine.init();
+  TransportEngine.init();
+  PPEEngine.init();
+  PhysicalEngine.init();
+
+  // Pipeline orkestratörünü başlat
+  initPipeline();
+
+  // İlk bileşeni ekle
+  addComp();
+
+  console.log('[SDSPass v2] Modüler pipeline hazır — EventBus.debug() ile olayları izle');
+});
+</script>
+</body>
+</html>

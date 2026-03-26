@@ -449,30 +449,48 @@ function showRefinement(id, lo, hi, thresholds) {
   const crp = document.getElementById('crp'+id);
   if (!crp) return;
   const { thr, items } = thresholds[0];
-  const hcodes = [...new Set(items.map(i => i.code))].join(', ');
-  const labels = [...new Set(items.map(i => i.label))].join(' · ');
+  const hcodes = [...new Set(items.map(i => i.code))];
+  const labels = [...new Set(items.map(i => i.label.replace(' başlar','')))]
+    .join(', ');
 
-  // Alt aralık: lo → thr'nin hemen altı  (bu sınıflandırma BAŞLAMAZ)
-  // Üst aralık: thr → hi                 (bu sınıflandırma BAŞLAR)
-  const aboveHtml = items.map(i =>
-    `<span style="background:rgba(255,107,107,.15);border:1px solid rgba(255,107,107,.3);color:var(--danger);border-radius:3px;padding:1px 5px;font-size:9px;font-family:var(--mono)">${i.code}</span>`
+  // Alt sub-aralık: lo % → (thr-epsilon) %  → tehlike sınıfı DEĞİŞMEZ
+  // Üst sub-aralık: thr % → hi %            → tehlike sınıfı DEĞİŞİR
+  const safeHi  = thr % 1 === 0 ? thr - 1 : Math.floor(thr);   // görsel üst sınır (tamsayı)
+  const dangerLo = thr;
+
+  const hcodeBadges = hcodes.map(c =>
+    `<span style="display:inline-block;background:rgba(255,107,107,.18);border:1px solid rgba(255,107,107,.4);color:var(--danger);border-radius:3px;padding:1px 6px;font-size:10px;font-family:var(--mono);font-weight:700">${c}</span>`
   ).join(' ');
 
   crp.style.display = 'block';
   crp.innerHTML = `
     <div class="crp-head">
-      ⚖ <b>Kritik Yasal Sınır: %${thr}</b> bu aralık içinde<br>
-      <span style="font-size:10px;opacity:.8">${labels}</span>
+      ⚠️ <b>Kritik eşik %${thr} bu aralığın içinde!</b>
+      <div style="font-size:10px;margin-top:3px;opacity:.85">
+        ${labels} — formulasyonunuz hangi aralığa giriyor?
+      </div>
+    </div>
+    <div style="padding:10px 10px 6px;background:var(--bg3);font-size:10px;color:var(--text3);border-bottom:1px solid var(--border)">
+      Lütfen formulasyonunuzun konsantrasyon aralığını seçin:
     </div>
     <div class="crp-btns">
-      <button class="crp-btn safe-border" onclick="saveConc(${id},${lo},${thr-0.001})">
-        <div style="font-weight:700">%${lo} – %${thr} altında</div>
-        <div style="font-size:9px;margin-top:3px;opacity:.7">${hcodes} uygulanmaz</div>
+      <button class="crp-btn safe-border" onclick="saveConc(${id},${lo},${thr}-0.001)">
+        <div style="font-size:13px;font-weight:800;color:var(--safe);margin-bottom:4px">
+          %${lo} – %${safeHi}
+        </div>
+        <div style="font-size:10px;color:var(--text2);margin-bottom:4px">Tehlikesiz aralık</div>
+        <div style="font-size:9px;color:var(--text3)">${hcodes.join(', ')} uygulanmaz</div>
       </button>
-      <button class="crp-btn danger-border" onclick="saveConc(${id},${thr},${hi})">
-        <div style="font-weight:700">%${thr} – %${hi} üstünde</div>
-        <div style="font-size:9px;margin-top:4px">${aboveHtml}</div>
+      <button class="crp-btn danger-border" onclick="saveConc(${id},${dangerLo},${hi})">
+        <div style="font-size:13px;font-weight:800;color:var(--danger);margin-bottom:4px">
+          %${dangerLo} – %${hi}
+        </div>
+        <div style="font-size:10px;color:var(--text2);margin-bottom:4px">Tehlike sınıfı değişir</div>
+        <div>${hcodeBadges}</div>
       </button>
+    </div>
+    <div style="padding:6px 10px;font-size:9px;color:var(--text3);background:var(--bg3);border-top:1px solid var(--border)">
+      ℹ KKDİK Ek-2 / CLP (AT) 1272/2008 — eşik değeri %${thr}
     </div>`;
 }
 

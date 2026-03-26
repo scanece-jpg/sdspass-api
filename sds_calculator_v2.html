@@ -83,6 +83,7 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
 .result-banner{background:var(--bg3);border:1px solid var(--border);border-radius:10px;padding:14px;margin-bottom:12px}
 .signal-danger{color:var(--danger);font-weight:700;font-size:13px}
 .signal-warning{color:var(--warn);font-weight:700;font-size:13px}
+.signal-none{color:var(--text3);font-weight:600;font-size:12px}
 .hcode-pills{display:flex;flex-wrap:wrap;gap:4px;margin:8px 0}
 .hpill{padding:3px 8px;border-radius:4px;font-family:var(--mono);font-size:11px;font-weight:700}
 .hpill.hp-danger{background:rgba(255,107,107,.15);color:var(--danger);border:1px solid rgba(255,107,107,.3)}
@@ -822,11 +823,22 @@ function renderAll(s) {
 
   // ── Banner ────────────────────────────────────────────────────────────────
   if (allH.length > 0) {
-    const sigClass = clp.signal === 'Danger' ? 'signal-danger' : 'signal-warning';
+    const sigClass = clp.signal === 'Danger' ? 'signal-danger'
+                   : clp.signal === 'Warning' ? 'signal-warning' : 'signal-none';
+    const sigLabel = clp.signal === 'Danger'  ? '🔴 DANGER'
+                   : clp.signal === 'Warning' ? '🟡 WARNING'
+                   : '⚪ Uyarı kelimesi yok (CLP Annex III)';
+
+    // H kodu pill rengi: CLPEngine DANGER_H/WARNING_H kullan (düzeltilmiş liste)
+    const _dangerH  = CLPEngine.DANGER_H  || DANGER_H;
+    const _warnH    = CLPEngine.WARNING_H;
+    const pillClass = c => _dangerH.has(c) ? 'hp-danger' : (_warnH && _warnH.has(c) ? 'hp-warn' : 'hp-info');
+
     h += `<div class="result-banner">
-      <div class="${sigClass}" style="margin-bottom:8px">${clp.signal === 'Danger' ? '🔴 DANGER' : '🟡 WARNING'}</div>
-      <div class="hcode-pills">${allH.map(c => `<span class="hpill ${DANGER_H.has(c)?'hp-danger':'hp-warn'}">${c}</span>`).join('')}</div>
+      <div class="${sigClass}" style="margin-bottom:8px">${sigLabel}</div>
+      <div class="hcode-pills">${allH.map(c => `<span class="hpill ${pillClass(c)}">${c}</span>`).join('')}</div>
       <div class="pictogram-row">${(clp.pictograms||[]).map(g => `<div class="ghs-icon"><div class="sym">${GHS_DATA[g]?.sym||'?'}</div><div class="lbl">${g}</div></div>`).join('')}</div>
+      ${clp.signal === 'None' ? `<div style="font-size:10px;color:var(--text3);margin-top:6px">ℹ H412/H413 gibi kodlar etiket üzerinde piktogram ve uyarı kelimesi gerektirmez.</div>` : ''}
     </div>`;
   }
 
@@ -835,8 +847,14 @@ function renderAll(s) {
   if (healthH.length) {
     h += `<div class="r-title">🧪 Bölüm 2.1 — Sağlık Tehlikeleri</div>`;
     healthH.forEach((code,i) => {
-      const cls = DANGER_H.has(code) ? 'danger' : 'warning';
-      const tag = DANGER_H.has(code) ? '<span class="sbadge danger">DANGER</span>' : '<span class="sbadge warning">WARNING</span>';
+      const _dH = CLPEngine.DANGER_H || DANGER_H;
+      const _wH = CLPEngine.WARNING_H;
+      const cls = _dH.has(code) ? 'danger' : 'warning';
+      const tag = _dH.has(code)
+        ? '<span class="sbadge danger">DANGER</span>'
+        : (_wH && _wH.has(code)
+            ? '<span class="sbadge warning">WARNING</span>'
+            : '<span class="sbadge" style="background:rgba(100,181,246,.1);color:var(--info)">H-beyanı</span>');
 
       // cutoffUsed: CLPEngine'den gelen gerçek eşik (SCL varsa SCL, yoksa GCL)
       const cu = clp.cutoffUsed && clp.cutoffUsed[code];

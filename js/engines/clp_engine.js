@@ -49,39 +49,84 @@ const CLPEngine = (() => {
   };
 
   // ── H kodu → GHS piktogram ───────────────────────────────────────────────────
+  // Kaynak: CLP (AT) No 1272/2008, Annex V, Tablo 1.3
+  // ÖNEMLİ KURALLAR:
+  //   H412 (Aquatic Chronic 3) → piktogram YOK (CLP Annex V §1.3)
+  //   H413 (Aquatic Chronic 4) → piktogram YOK
+  //   H412/H413 → uyarı kelimesi YOK (etiket kuralı)
   const H_TO_GHS = {
+    // Patlayıcılar
     'H200':'GHS01','H201':'GHS01','H202':'GHS01','H203':'GHS01','H204':'GHS01','H205':'GHS01',
+    // Yanıcı gazlar/sıvılar/katılar
     'H220':'GHS02','H221':'GHS02','H222':'GHS02','H223':'GHS02',
     'H224':'GHS02','H225':'GHS02','H226':'GHS02','H228':'GHS02',
     'H240':'GHS01','H241':'GHS01','H242':'GHS02',
     'H250':'GHS02','H251':'GHS02','H252':'GHS02',
     'H260':'GHS02','H261':'GHS02',
+    // Oksitleyiciler
     'H270':'GHS03','H271':'GHS03','H272':'GHS03',
+    // Basınçlı gaz
     'H280':'GHS04','H281':'GHS04',
-    'H290':'GHS05',
-    'H300':'GHS06','H301':'GHS06','H302':'GHS07',
+    // Aşındırıcı / Metal korozif
+    'H290':'GHS05',                             // Met. Corr. 1 — GHS05 ✓
+    'H314':'GHS05','H318':'GHS05',
+    // Toksik
+    'H300':'GHS06','H301':'GHS06',
+    'H310':'GHS06','H311':'GHS06',
+    'H330':'GHS06','H331':'GHS06',
+    // Zararlı / Tahriş edici
+    'H302':'GHS07','H312':'GHS07','H332':'GHS07',
+    'H315':'GHS07','H317':'GHS07','H319':'GHS07',
+    'H335':'GHS07','H336':'GHS07','H420':'GHS07',
+    // Aspirasyon / CMR / STOT
     'H304':'GHS08',
-    'H310':'GHS06','H311':'GHS06','H312':'GHS07',
-    'H314':'GHS05','H315':'GHS07','H317':'GHS07',
-    'H318':'GHS05','H319':'GHS07',
-    'H330':'GHS06','H331':'GHS06','H332':'GHS07',
-    'H334':'GHS08','H335':'GHS07','H336':'GHS07',
-    'H340':'GHS08','H341':'GHS08','H350':'GHS08','H351':'GHS08',
+    'H334':'GHS08',
+    'H340':'GHS08','H341':'GHS08',
+    'H350':'GHS08','H351':'GHS08',
     'H360':'GHS08','H361':'GHS08','H362':'GHS08',
     'H370':'GHS08','H371':'GHS08','H372':'GHS08','H373':'GHS08',
-    'H400':'GHS09','H410':'GHS09','H411':'GHS09','H412':'GHS09','H413':'GHS09',
-    'H420':'GHS07',
+    // Sucul tehlike — SADECE Acute 1, Chronic 1 ve 2 piktogram alır
+    // H412 (Chronic 3) ve H413 (Chronic 4) → piktogram YOK (CLP Annex V §1.3)
+    'H400':'GHS09','H410':'GHS09','H411':'GHS09',
+    // H412: piktogram yok
+    // H413: piktogram yok
   };
   const GHS_ORDER = ['GHS01','GHS02','GHS03','GHS04','GHS05','GHS06','GHS07','GHS08','GHS09'];
 
+  // ── Sinyal kelimesi — CLP Annex III ──────────────────────────────────────────
+  // DANGER: CLP Annex III Tablo 1.1
   const DANGER_H = new Set([
-    'H200','H201','H202','H203','H204','H205',
-    'H220','H221','H222','H224','H225','H240','H241',
-    'H250','H251','H252','H260','H261','H270','H271',
-    'H290','H300','H301','H304','H310','H311',
-    'H314','H317','H318','H330','H331','H334',
-    'H340','H341','H350','H351','H360','H361','H362',
-    'H370','H371','H372',
+    'H200','H201','H202','H203','H204','H205',       // Patlayıcı Kat.1-3
+    'H220','H222','H224','H225',                     // Yanıcı Gaz 1A, Aer.1, Sıvı 1/2
+    'H228',                                          // Yanıcı Katı 1
+    'H240','H241',                                   // Self-react. A/B
+    'H250','H251',                                   // Piroforik / Self-heat.1
+    'H260',                                          // Su ile temas → H2
+    'H270','H271',                                   // Ox. Gas 1, Ox. Liq. 1
+    'H300','H301',                                   // Acute Tox. 1-2-3 (Oral)
+    'H304',                                          // Asp. Tox. 1
+    'H310','H311',                                   // Acute Tox. 1-2-3 (Derm.)
+    'H314','H318',                                   // Skin Corr. 1, Eye Dam. 1
+    'H330','H331',                                   // Acute Tox. 1-2-3 (Inhal.)
+    'H334',                                          // Resp. Sens. 1
+    'H340','H350','H360',                            // CMR Kat.1
+    'H370','H372',                                   // STOT SE 1, STOT RE 1
+  ]);
+
+  // WARNING: CLP Annex III Tablo 1.2
+  const WARNING_H = new Set([
+    'H221','H223','H226','H227',                     // Yanıcı Gaz 1B, Aer.2/3, Sıvı 3/4
+    'H229',                                          // Aer. basınçlı
+    'H242','H252','H261','H272','H280','H281',       // Self-react.G, Self-heat.2, Su/H2-2, Ox.3, Gaz
+    'H290',                                          // Met. Corr. 1 — WARNING (Danger değil!)
+    'H302','H303','H312','H313','H332','H333',       // Acute Tox. 4/5
+    'H315','H316','H317','H319','H320',              // Skin/Eye Irrit. + Skin Sens.
+    'H335','H336',                                   // STOT SE 3
+    'H341','H351','H361','H362',                     // CMR Kat.2 + Laktasyon
+    'H371','H373',                                   // STOT SE 2, STOT RE 2
+    'H400','H410','H411',                            // Aquatic Acute 1, Chronic 1/2
+    'H420',                                          // Ozon
+    // H412, H413 → WARNING_H'da YOK → sinyal kelimesi yok
   ]);
 
   const FLAM_SKIP = new Set(['H220','H221','H222','H223','H224','H225','H226','H227','H228','H229']);
@@ -147,8 +192,11 @@ const CLPEngine = (() => {
       }
     });
 
-    // 4. Sinyal sözcüğü
-    const signal = result.some(h => DANGER_H.has(h)) ? 'Danger' : 'Warning';
+    // 4. Sinyal sözcüğü — CLP Annex III
+    // H412/H413 gibi kodlar ne DANGER ne WARNING'de → sinyal kelimesi YOK
+    const hasDanger  = result.some(h => DANGER_H.has(h));
+    const hasWarning = result.some(h => WARNING_H.has(h));
+    const signal = hasDanger ? 'Danger' : (hasWarning ? 'Warning' : 'None');
 
     // 5. Piktogramlar
     const pictograms = getGhsCodes(result);
@@ -166,5 +214,5 @@ const CLPEngine = (() => {
     console.log('[CLPEngine] init OK');
   }
 
-  return { init, classify, getGhsCodes, CUTOFFS, DOMINANCE };
+  return { init, classify, getGhsCodes, CUTOFFS, DOMINANCE, DANGER_H, WARNING_H };
 })();

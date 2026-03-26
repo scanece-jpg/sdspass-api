@@ -173,6 +173,41 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
     </div>
   </div>
 
+  <!-- Test Verileri -->
+  <div class="product-card" style="margin-top:10px">
+    <label style="font-weight:700;color:var(--text2);margin-bottom:8px;display:block">🔬 Test Verileri (opsiyonel)</label>
+    <div class="row2">
+      <div>
+        <label>Parlama Noktası (°C)</label>
+        <input type="number" id="tf_fp" placeholder="Ör: 60">
+      </div>
+      <div>
+        <label>pH Değeri</label>
+        <input type="number" id="tf_ph" placeholder="Ör: 7.0" step="0.1" min="0" max="14">
+      </div>
+    </div>
+    <div class="row2" style="margin-top:8px">
+      <div>
+        <label>Kaynama Noktası (°C)</label>
+        <input type="number" id="tf_bp" placeholder="Ör: 100">
+      </div>
+      <div>
+        <label>Yoğunluk (g/mL)</label>
+        <input type="number" id="tf_density" placeholder="Ör: 1.0" step="0.01">
+      </div>
+    </div>
+    <div class="row2" style="margin-top:8px">
+      <div>
+        <label>Viskozite (mPa·s)</label>
+        <input type="number" id="tf_visc" placeholder="Ör: 20">
+      </div>
+      <div>
+        <label>Su Çözünürlüğü (mg/L)</label>
+        <input type="number" id="tf_sol" placeholder="Ör: 1000">
+      </div>
+    </div>
+  </div>
+
   <!-- Bileşenler -->
   <div class="comps-header">
     <span class="comps-title">🧪 Bileşenler</span>
@@ -254,7 +289,7 @@ function addComp(pf = {}) {
       <div>
         <label>CAS No</label>
         <input type="text" class="ci" id="ci${id}" placeholder="7664-93-9"
-               value="${pf.cas||''}" onblur="onCas(${id})">
+               value="${pf.cas||''}" oninput="debounceCas(${id})" onblur="onCas(${id})">
       </div>
       <div>
         <label>Madde Adı</label>
@@ -315,7 +350,17 @@ function showChipInput(id) {
   addChip(id, hc.trim(), hcode.trim());
 }
 
-// ── CAS Lookup ────────────────────────────────────────────────────────────────
+// ── CAS Lookup — debounce ile otomatik tetikle ────────────────────────────────
+const _casTimers = {};
+function debounceCas(id) {
+  clearTimeout(_casTimers[id]);
+  const val = document.getElementById('ci'+id)?.value?.trim() || '';
+  // CAS formatı tamamlandıysa (ör: 7664-93-9) hemen sorgula
+  if (/^\d{1,7}-\d{2}-\d$/.test(val)) {
+    _casTimers[id] = setTimeout(() => onCas(id), 300);
+  }
+}
+
 async function onCas(id) {
   const cas = document.getElementById('ci'+id)?.value?.trim();
   if (!cas || cas.length < 5) return;
@@ -351,40 +396,82 @@ function onConcChange(id) {
     showRefinement(id, lo, hi, thresholds);
   } else {
     saveConc(id, lo, hi);
+    document.getElementById('crp'+id).style.display = 'none';
   }
 }
 
 function findThresholds(lo, hi, hazards) {
-  const GCL = {
-    'Skin Corr. 1':[[1,'H314'],[5,'H315']], 'Skin Corr. 1A':[[1,'H314'],[5,'H315']],
-    'Eye Dam. 1':[[1,'H318'],[3,'H319']], 'STOT SE 1':[[10,'H370']],
-    'STOT SE 2':[[10,'H371']], 'STOT SE 3':[[20,'H335']],
-    'Acute Tox. 1':[[1,'H300']], 'Acute Tox. 2':[[1,'H301']], 'Acute Tox. 3':[[1,'H301']],
-    'Acute Tox. 4':[[5,'H302']],
+  // H kodu bazlı GCL eşik tablosu — CLP Annex I Tablo 3.x
+  const GCL_BY_HCODE = {
+    'H314':[[1,'Skin Corr. 1 başlar'],[5,'Skin Irrit. 2 başlar']],
+    'H318':[[1,'Eye Dam. 1 başlar'],[3,'Eye Irrit. 2 başlar']],
+    'H315':[[10,'Skin Irrit. 2 başlar']],
+    'H319':[[10,'Eye Irrit. 2 başlar']],
+    'H317':[[1,'Deri Duyarlaştırma başlar']],
+    'H334':[[0.1,'Solunum Duyarlaştırma başlar']],
+    'H340':[[0.1,'Mutajenisite Kat.1 başlar'],[1,'Mutajenisite Kat.2 başlar']],
+    'H350':[[0.1,'Kanserojenite Kat.1 başlar'],[1,'Kanserojenite Kat.2 başlar']],
+    'H360':[[0.1,'Üreme Toks. Kat.1 başlar'],[1,'Üreme Toks. Kat.2 başlar']],
+    'H370':[[10,'STOT SE 1 başlar']],
+    'H371':[[10,'STOT SE 2 başlar']],
+    'H335':[[20,'STOT SE 3 başlar']],
+    'H336':[[20,'STOT SE 3 başlar']],
+    'H372':[[1,'STOT RE 1 başlar']],
+    'H373':[[10,'STOT RE 2 başlar']],
+    'H300':[[1,'Akut Toks. Kat.1-2 başlar']],
+    'H301':[[1,'Akut Toks. Kat.3 başlar']],
+    'H302':[[5,'Akut Toks. Kat.4 başlar']],
+    'H310':[[1,'Akut Toks. Kat.1-2 başlar']],
+    'H330':[[1,'Akut Toks. Kat.1-2 başlar']],
+    'H400':[[0.1,'Sucul Akut 1 başlar']],
+    'H410':[[0.1,'Sucul Kronik 1 başlar']],
+    'H411':[[1,'Sucul Kronik 2 başlar']],
+    'H412':[[10,'Sucul Kronik 3 başlar']],
   };
-  const found = new Set();
+
+  const found = new Map(); // thr → label
   for (const h of hazards) {
-    const entries = GCL[h.h_class] || [];
-    for (const [thr] of entries) {
-      if (thr > lo && thr < hi) found.add(thr);
+    const code = (h.h_code || '').replace(/[*\s]/g,'').substring(0,4);
+    const entries = GCL_BY_HCODE[code] || [];
+    for (const [thr, label] of entries) {
+      if (thr > lo && thr < hi) {
+        if (!found.has(thr)) found.set(thr, []);
+        found.get(thr).push({ code, label });
+      }
     }
   }
-  return [...found].sort((a,b) => a-b);
+  return [...found.entries()]
+    .sort((a,b) => a[0]-b[0])
+    .map(([thr, items]) => ({ thr, items }));
 }
 
 function showRefinement(id, lo, hi, thresholds) {
   const crp = document.getElementById('crp'+id);
   if (!crp) return;
-  const thr = thresholds[0];
+  const { thr, items } = thresholds[0];
+  const hcodes = [...new Set(items.map(i => i.code))].join(', ');
+  const labels = [...new Set(items.map(i => i.label))].join(' · ');
+
+  // Alt aralık: lo → thr'nin hemen altı  (bu sınıflandırma BAŞLAMAZ)
+  // Üst aralık: thr → hi                 (bu sınıflandırma BAŞLAR)
+  const aboveHtml = items.map(i =>
+    `<span style="background:rgba(255,107,107,.15);border:1px solid rgba(255,107,107,.3);color:var(--danger);border-radius:3px;padding:1px 5px;font-size:9px;font-family:var(--mono)">${i.code}</span>`
+  ).join(' ');
+
   crp.style.display = 'block';
   crp.innerHTML = `
-    <div class="crp-head">⚖ Kritik sınır <b>%${thr}</b> bu aralık içinde — konumunuzu belirtin</div>
+    <div class="crp-head">
+      ⚖ <b>Kritik Yasal Sınır: %${thr}</b> bu aralık içinde<br>
+      <span style="font-size:10px;opacity:.8">${labels}</span>
+    </div>
     <div class="crp-btns">
-      <button class="crp-btn warn-border" onclick="saveConc(${id},${lo},${thr-0.001})">
-        %${lo} – %${thr}<br><span style="font-size:9px;opacity:.7">altında</span>
+      <button class="crp-btn safe-border" onclick="saveConc(${id},${lo},${thr-0.001})">
+        <div style="font-weight:700">%${lo} – %${thr} altında</div>
+        <div style="font-size:9px;margin-top:3px;opacity:.7">${hcodes} uygulanmaz</div>
       </button>
       <button class="crp-btn danger-border" onclick="saveConc(${id},${thr},${hi})">
-        %${thr} – %${hi}<br><span style="font-size:9px;opacity:.7">üstünde</span>
+        <div style="font-weight:700">%${thr} – %${hi} üstünde</div>
+        <div style="font-size:9px;margin-top:4px">${aboveHtml}</div>
       </button>
     </div>`;
 }

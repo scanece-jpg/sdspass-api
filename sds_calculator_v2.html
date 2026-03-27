@@ -1450,18 +1450,26 @@ async function generatePDF() {
       });
     });
     const cutoffUsed = clp?.cutoffUsed || {};
+
+    // Fiziksel H kodları için gerekçe (parlama noktası / aspirasyon kaynağı)
+    const physReasonMap = {};
+    (phys?.results || []).forEach(r => {
+      const hc = r.h || r.h_code;
+      if (!hc) return;
+      if (r.source) physReasonMap[hc] = r.source;
+    });
+
     const clpPassed = allH.map(hc => {
       const cu = cutoffUsed[hc];
       let reason = '';
       if (cu) {
-        // SCL veya GCL eşiği geçildi
         reason = `${cu.source} ≥ %${cu.value}`;
       } else if (CLP_CUTOFFS[hc] !== undefined) {
-        // Standart GCL — SCL bulunamadı
         reason = `GCL ≥ %${CLP_CUTOFFS[hc]}`;
+      } else if (physReasonMap[hc]) {
+        // Fiziksel tehlike: parlama noktası / asp. toksisitesi kaynağı
+        reason = physReasonMap[hc];
       }
-      // Fiziksel tehlike H kodları (H224, H225 vb.) konsantrasyon eşiğine tabi değil →
-      // reason boş kalır, PDF'de '—' gösterilir
       return {
         h_code:      hc,
         h_class:     hClassMap[hc] || '',

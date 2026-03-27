@@ -1429,16 +1429,23 @@ async function generatePDF() {
     const form  = document.getElementById('pform')?.value  || 'liquid';
     const usage = document.getElementById('pusage')?.value || 'industrial';
 
-    // phys_props — theoProps'tan düz objeye çevir
+    // phys_props — theoProps'tan düz objeye çevir (alan isimleri backend ile eşleşmeli)
     const tp = phys?.theoProps || {};
     const flatPhys = {};
+    // Doğrudan eşleşen alanlar
     const physKeys = ['density','boiling_point','flash_point','lel','uel','ph','viscosity',
-      'solubility','appearance','odor','odor_threshold','melting_point','auto_ignition',
-      'decomp_temp','log_kow','evap_rate','flam_sg','explosive','oxidizing','sol_other'];
+      'solubility','appearance','odor','melting_point','auto_ignition',
+      'vapor_pressure','vapor_density','log_kow'];
     physKeys.forEach(k => {
       if (!tp[k]) return;
-      flatPhys[k] = (tp[k].value !== undefined) ? tp[k].value : tp[k].value;
+      flatPhys[k] = tp[k].value !== undefined ? tp[k].value : tp[k];
     });
+    // Alan adı dönüşümleri (frontend → backend)
+    if (tp.odor_threshold)  flatPhys.odour_threshold    = tp.odor_threshold.value;
+    if (tp.decomp_temp)     flatPhys.decomposition_temp = tp.decomp_temp.value;
+    if (tp.explosive)       flatPhys.is_explosive       = tp.explosive.value;
+    if (tp.oxidizing)       flatPhys.is_oxidising       = tp.oxidizing.value;
+    if (tp.flam_sg)         flatPhys.is_flammable       = tp.flam_sg.value;
 
     // clp_passed — her H kodu için h_class + kesme değeri bilgisi
     // h_class'ı bileşen hazards listesinden bul

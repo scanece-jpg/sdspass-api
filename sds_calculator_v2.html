@@ -1425,7 +1425,7 @@ async function generatePDF() {
   if (btn) { btn.textContent = '⏳ Oluşturuluyor...'; btn.disabled = true; }
 
   try {
-    const { allH, combinedSignal, transport, euh, phys, clp, comps, eco, ppe } = _lastCalcState;
+    const { allH, combinedSignal, transport, euh, phys, clp, comps, eco, ppe, pcodes } = _lastCalcState;
     const productName = document.getElementById('productName')?.value?.trim() || 'Ürün';
     const form  = document.getElementById('pform')?.value  || 'liquid';
     const usage = document.getElementById('pusage')?.value || 'industrial';

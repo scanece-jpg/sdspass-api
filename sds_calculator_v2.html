@@ -1548,12 +1548,18 @@ async function generatePDF() {
       lang: 'TR',
       product: { name: productName, form, usage },
       supplier: (() => {
-        const tel = document.getElementById('supplierEmergencyTel')?.value?.trim();
+        const raw = document.getElementById('supplierEmergencyTel')?.value?.replace(/\D/g,'') || '';
         const hours = document.querySelector('input[name="telHours"]:checked')?.value || '24_7';
-        const note = hours === 'business'
-          ? 'Bu numara yalnızca hafta içi 09:00 - 18:00 saatleri arasında hizmet vermektedir.'
-          : '';
-        return tel ? { emergency_tel: `+90 ${tel}${note ? ' — ' + note : ''}` } : {};
+        if (!raw) return {};
+        // Format: (+90) 5xx xxx xx xx
+        const d = raw.replace(/^90/,'').replace(/^0/,'');
+        const fmt = d.length >= 10
+          ? `(+90) ${d.slice(0,3)} ${d.slice(3,6)} ${d.slice(6,8)} ${d.slice(8,10)}`
+          : `(+90) ${d}`;
+        const hoursLabel = hours === '24_7'
+          ? '7 gün / 24 saat'
+          : 'Hafta içi 09:00–18:00';
+        return { emergency_tel: `${fmt} — ${hoursLabel}` };
       })(),
       components: comps.map(c => ({
         cas:      c.cas,

@@ -619,9 +619,14 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     story.append(Spacer(1, 3))
 
     story += sub_block(f"1.4 {sub_title(lang,'1.4')}", styles)
-    _uzem = 'UZEM — Ulusal Zehir Danışma Merkezi: 114 (T.C. Sağlık Bakanlığı, 7/24)'
-    emergency = supplier.get('emergency_tel') or (_uzem if lang == 'TR' else 'National Poison Control Center: see local directory')
-    story.append(Paragraph(emergency, styles['body']))
+    # UZEM her zaman gösterilir — zorunlu (KKDİK Ek-2)
+    _uzem = 'UZEM — Ulusal Zehir Danışma Merkezi: <b>114</b> (T.C. Sağlık Bakanlığı, 7/24)' if lang == 'TR' \
+            else 'National Poison Control Center: <b>114</b> (UZEM, Ministry of Health, 24/7)'
+    story.append(Paragraph(_uzem, styles['body']))
+    # Tedarikçi acil hattı — varsa ayrı satırda
+    supplier_tel = supplier.get('emergency_tel', '').strip()
+    if supplier_tel:
+        story.append(Paragraph(f"Tel: {supplier_tel}", styles['body']))
 
     # ─────────────────────────────────────────────────────────────────────────
     # BÖLÜM 2 — Zararlılık

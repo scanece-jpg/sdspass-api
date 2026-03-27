@@ -1042,7 +1042,8 @@ function getComps() {
     const cwId  = parseInt((w.id || '').replace('cw','')) || 0;
     // SCL: maddeye özel kesme değerleri — Öncelik 1 (GCL'yi ezer)
     const scl   = _sclMap[cwId] || {};
-    return { cas, name, conc, concMin, concMax, hazards, ec, reach, m_factors:{ acute: mf, chronic: mf }, scl };
+    const concStr = w.querySelector('.conc-manual')?.value?.trim() || '';
+    return { cas, name, conc, concMin, concMax, concStr, hazards, ec, reach, m_factors:{ acute: mf, chronic: mf }, scl };
   }).filter(c => c.cas || c.name);
 }
 
@@ -1598,9 +1599,13 @@ async function generatePDF() {
         cas:      c.cas,
         name:     c.name,
         conc:     c.conc,
+        conc_str: c.concStr || '',   // kullanıcının girdiği orijinal metin (ör: "25-50")
+        conc_min: c.concMin || 0,
+        conc_max: c.concMax || c.conc,
         ec_no:    c.ec || '',
         reach_no: c.reach || '',
         hazards:  c.hazards || [],
+        scl:      c.scl || {},
       })),
       h_codes:      allH,
       clp_passed:   clpPassed,

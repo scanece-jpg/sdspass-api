@@ -113,7 +113,7 @@ def format_section3_component(
     """
     cas = comp.get('cas_no', comp.get('cas', '')).strip()
     name = comp.get('name', '') or cas
-    conc = float(comp.get('worst_case_conc', comp.get('concentration', 0)) or 0)
+    conc = float(comp.get('worst_case_conc', comp.get('conc', comp.get('concentration', 0))) or 0)
     hazards = comp.get('hazards', [])
     haz_str = '; '.join(
         h.get('h_class', '').replace('*', '').strip()
@@ -121,10 +121,21 @@ def format_section3_component(
         if h.get('h_class')
     )
 
+    # Kullanıcının girdiği orijinal konsantrasyon metni (ör: "25-50")
+    conc_str = comp.get('conc_str', '').strip()
+    conc_min = comp.get('conc_min')
+    conc_max = comp.get('conc_max')
+    if conc_str:
+        conc_display = f'%{conc_str}'
+    elif conc_min is not None and conc_max is not None and conc_min != conc_max:
+        conc_display = f'%{conc_min}–%{conc_max}'
+    else:
+        conc_display = f'%{conc:.1f}'
+
     if disclosure_level == 'show':
         return {
             'cas': cas, 'name': name,
-            'concentration': f'%{conc:.1f}',
+            'concentration': conc_display,
             'hazards': haz_str, 'is_hidden': False, 'note': '',
         }
 

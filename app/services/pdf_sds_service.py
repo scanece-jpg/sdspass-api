@@ -571,7 +571,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
 
     # Ürün bilgi tablosu
     story.append(data_table([
-        [term(lang,'product_name'), Paragraph(f"<b>{product_name}</b>", styles['body'])],
+        [term(lang,'product_name'), Paragraph(f"<b>{product_name.upper()}</b>", styles['body'])],
         [term(lang,'product_code'), product.get('code','—')],
         [term(lang,'revision_date'), rev_date],
         ['Version', version],

@@ -1504,6 +1504,13 @@ async function generatePDF() {
       signal_word:  combinedSignal,
       transport:    transport || {},
       phys_props:   flatPhys,
+      eco: {
+        aquatic:      eco?.aquatic   || null,
+        h_codes:      eco?.h_codes   || [],
+        ozone:        eco?.ozone     || [],
+        pbt:          eco?.pbt       || [],
+      },
+      ppe:          ppe || [],
       revision:     { date: new Date().toLocaleDateString('tr-TR'), no: '1', version: '1.0', notes: 'İlk yayın' },
     };
 

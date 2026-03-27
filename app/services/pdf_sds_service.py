@@ -951,8 +951,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             tbl_data.append(format_oel_row(row, lang))
         story.append(data_table(tbl_data, [22*mm, 45*mm, 35*mm, 35*mm, 25*mm], styles))
         story.append(Paragraph(
-            'Kaynak: ÇSGB Kimyasal Maddelerle Çalışmalarda SG Önlemleri Yönetmeliği Ek-1' if lang=='TR'
-            else 'Source: Turkish OSHA Chemical Agents Regulation Annex-1',
+            'Kaynak: 12.08.2013 tarihli ve 28733 sayılı Kimyasal Maddelerle Çalışmalarda Sağlık ve Güvenlik Önlemleri Hakkında Yönetmelik Ek-1' if lang=='TR'
+            else 'Source: Turkish Chemical Agents Regulation (OG No. 28733, 12.08.2013) Annex-1',
             styles['small']
         ))
     else:
@@ -1431,11 +1431,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             "• TSCA Inventory listed"
         )
     else:
-        regulatory_text = (
-            "This product is classified under:\n"
-            "• EU CLP Regulation (EC) No 1272/2008\n"
-            "• REACH Regulation (EC) No 1907/2006"
-        )
+        regulatory_text = get_section15_text(h_codes, has_biocide=False, lang='EN')
 
     for line in (regulatory_text or '').split('\n'):
         story.append(Paragraph(line, styles['body']))

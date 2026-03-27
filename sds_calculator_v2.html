@@ -431,25 +431,12 @@ function addComp(pf = {}) {
       </div>
     </div>
     <div>
-      <label>Konsantrasyon Aralığı</label>
-      <select class="conc-sel" id="csel${id}" onchange="onConcChange(${id}); document.getElementById('cmanual${id}').value=''; updateConcTotal()">
-        <option value="">— Seçin —</option>
-        <option value="0|0.1">0 &lt; c ≤ %0,1</option>
-        <option value="0.1|1">%0,1 &lt; c ≤ %1</option>
-        <option value="1|5">%1 &lt; c ≤ %5</option>
-        <option value="5|10">%5 &lt; c ≤ %10</option>
-        <option value="10|25">%10 &lt; c ≤ %25</option>
-        <option value="25|50">%25 &lt; c ≤ %50</option>
-        <option value="50|100">%50 &lt; c ≤ %100</option>
-        <option value="100|100">c = %100 — Saf Madde</option>
-      </select>
-      <div style="display:flex;align-items:center;gap:6px;margin-top:5px">
-        <span style="font-size:10px;color:var(--text3);white-space:nowrap">veya manuel gir:</span>
-        <input type="text" class="conc-manual" id="cmanual${id}"
-               placeholder="örn: 3.5  veya  2-8"
-               oninput="onManualConc(${id});updateConcTotal()"
-               style="flex:1;padding:5px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-family:var(--mono);font-size:11px">
-      </div>
+      <label>Konsantrasyon (%) <span style="font-size:9px;color:var(--text3)">— tek değer veya aralık</span></label>
+      <input type="text" class="conc-manual" id="cmanual${id}"
+             placeholder="örn: 40  veya  25-50"
+             oninput="onManualConc(${id});updateConcTotal()"
+             value="${pf.conc||''}"
+             style="width:100%;padding:6px 10px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-family:var(--mono);font-size:12px;box-sizing:border-box">
       <div class="crp" id="crp${id}"></div>
       <input type="hidden" class="kimin" id="cmin${id}" value="${pf.conc||''}">
       <input type="hidden" class="kimax" id="cmax${id}" value="">
@@ -490,9 +477,8 @@ function completeToHundred() {
     alert(`Toplam zaten %${Math.round(total * 10) / 10} — tamamlama gerekmiyor.`);
     return;
   }
-  // Su veya zararsız çözücü olarak ekle
-  addComp({ cas: '7732-18-5', name: 'Su', conc: remaining });
-  // Manuel konsantrasyon alanını doldur
+  // Kalan kısım — mevzuata göre ayrıca belirtilmesi gerekmiyor
+  addComp({ name: 'Mevzuata göre gerekli değildir', conc: remaining });
   const id = _compId;
   const manualEl = document.getElementById('cmanual' + id);
   if (manualEl) { manualEl.value = remaining; onManualConc(id); }

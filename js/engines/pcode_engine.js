@@ -51,7 +51,38 @@ const PCodeEngine = (() => {
     'H420':['P502'],
   };
 
-  const SUPERSEDES = { 'P310':['P311','P312'], 'P260':['P261'], 'P271':['P261'] };
+  // Geçersiz kılma: güçlü kod varsa zayıfları sil (SEA / CLP Annex III)
+  const SUPERSEDES = {
+    'P310':  ['P311','P312'],
+    'P260':  ['P261'],
+    'P271':  ['P261'],
+    'P301+P310': ['P301+P312'],
+    'P314':  ['P312'],
+  };
+
+  // Etiket öncelik puanı (yüksek = önce seçilir)
+  // Fiziksel tehlike > Hayati sağlık > Organ/Kronik > Genel önlem > Bertaraf
+  const LABEL_PRIORITY = {
+    'P210':100, 'P233':90,                         // Yanıcılık — en kritik
+    'P301+P310':95, 'P331':90,                     // Yutma + kusturma
+    'P304+P340':88, 'P310':85,                     // Solunum + acil
+    'P308+P313':80,                                // CMR / üreme
+    'P303+P361+P353':78, 'P370+P378':75,           // Yangın müdahale
+    'P260':70, 'P271':68,                          // Solunumdan kaçın
+    'P280':65,                                     // KKD giy
+    'P305+P351+P338':60, 'P337+P313':55,           // Göz
+    'P302+P352':50, 'P332+P313':45,                // Deri
+    'P403+P235':40,                                // Serin/havalandırılmış
+    'P264':35, 'P270':33,                          // Yıkama / yeme/içme yok
+    'P273':30,                                     // Sucul — çevreye verme
+    'P501':10,                                     // Bertaraf — en düşük
+  };
+
+  // Birbirini tamamlayan çiftler — birini alırsan diğerini de al
+  const PAIRS = [
+    ['P301+P310', 'P331'],   // Yuttuysan → kusturma
+    ['P304+P340', 'P310'],   // Nefes aldıysa → acil
+  ];
 
   const P_CATEGORIES = { 1:'general', 2:'prevention', 3:'response', 4:'storage', 5:'disposal' };
 
@@ -89,7 +120,43 @@ const PCodeEngine = (() => {
       (cats[cat] || cats.general).push(d);
     }
 
-    return { codes: sorted, details, by_category: cats, total: sorted.length };
+    // ── Etiket için "Akıllı Seçim" — max 6 (10'a kadar çıkabilir) ──────────────
+    // SEA / KKDİK Ek-2: etiket üzerinde 6 P-kodu önerilir
+    const labelSelected = [];
+
+    // 1. Öncelik puanına göre sırala
+    const byPriority = [...sorted].sort((a, b) => {
+      const pa = LABEL_PRIORITY[a] || 20;
+      const pb = LABEL_PRIORITY[b] || 20;
+      return pb - pa;
+    });
+
+    // 2. İlk 6'yı al
+    for (const code of byPriority) {
+      if (labelSelected.length >= 6) break;
+      labelSelected.push(code);
+    }
+
+    // 3. Çift kuralı: seçilmiş bir kodun partneri eksikse ve 10 limiti aşılmıyorsa ekle
+    for (const [a, b] of PAIRS) {
+      if (labelSelected.includes(a) && !labelSelected.includes(b) && labelSelected.length < 10) {
+        labelSelected.push(b);
+      }
+      if (labelSelected.includes(b) && !labelSelected.includes(a) && labelSelected.length < 10) {
+        labelSelected.unshift(a); // partneri daha öne al
+      }
+    }
+
+    // 4. Tekrar öncelik sıralaması
+    labelSelected.sort((a, b) => (LABEL_PRIORITY[b] || 20) - (LABEL_PRIORITY[a] || 20));
+
+    return {
+      codes: sorted,
+      details,
+      by_category: cats,
+      total: sorted.length,
+      label_codes: labelSelected,        // etiket için seçilmiş (max 10)
+    };
   }
 
   function init() {

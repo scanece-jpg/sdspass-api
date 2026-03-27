@@ -1512,6 +1512,8 @@ async function generatePDF() {
         pbt:          eco?.pbt       || [],
       },
       ppe:          ppe || [],
+      p_codes:      pcodes?.codes       || [],
+      p_label:      pcodes?.label_codes || [],   // etiket için seçilmiş max 6-10
       revision:     { date: new Date().toLocaleDateString('tr-TR'), no: '1', version: '1.0', notes: 'İlk yayın' },
     };
 

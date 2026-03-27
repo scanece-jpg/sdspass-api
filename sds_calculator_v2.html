@@ -202,6 +202,42 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
     </div>
   </div>
 
+  <!-- Acil Telefon — Bölüm 1.4 -->
+  <div class="product-card" style="margin-top:10px">
+    <label style="font-weight:700;color:var(--text2);margin:0 0 8px;display:block">📞 Bölüm 1.4 — Acil Telefon</label>
+    <!-- Sabit — Silinemez -->
+    <div style="background:rgba(99,179,237,.08);border:1px solid rgba(99,179,237,.2);border-radius:8px;padding:8px 12px;margin-bottom:8px;display:flex;align-items:center;gap:10px">
+      <span style="font-size:18px">🏥</span>
+      <div>
+        <div style="font-weight:700;font-family:var(--mono);font-size:13px;color:#63b3ed">114 — UZEM</div>
+        <div style="font-size:10px;color:var(--text3)">Ulusal Zehir Danışma Merkezi · 7/24 · T.C. Sağlık Bakanlığı</div>
+      </div>
+      <span style="margin-left:auto;font-size:9px;background:rgba(99,179,237,.15);color:#63b3ed;padding:2px 7px;border-radius:4px">Zorunlu</span>
+    </div>
+    <!-- Kullanıcı girişi -->
+    <div class="row2">
+      <div>
+        <label>Tedarikçi Acil Hattı</label>
+        <div style="display:flex;align-items:center;gap:4px">
+          <span style="font-size:11px;color:var(--text3);white-space:nowrap;font-family:var(--mono)">+90</span>
+          <input type="text" id="supplierEmergencyTel" placeholder="___ ___ __ __"
+                 style="flex:1;padding:5px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-family:var(--mono);font-size:12px">
+        </div>
+      </div>
+      <div>
+        <label>Hizmet Saati</label>
+        <div style="display:flex;flex-direction:column;gap:5px;margin-top:4px">
+          <label style="display:flex;align-items:center;gap:6px;font-weight:400;color:var(--text2);cursor:pointer">
+            <input type="radio" name="telHours" value="24_7" checked id="tel24_7"> 7 Gün / 24 Saat
+          </label>
+          <label style="display:flex;align-items:center;gap:6px;font-weight:400;color:var(--text2);cursor:pointer">
+            <input type="radio" name="telHours" value="business" id="telBusiness"> Sadece Mesai Saatleri
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Bileşenler -->
   <div class="comps-header">
     <span class="comps-title">🧪 Bileşenler</span>
@@ -1511,7 +1547,14 @@ async function generatePDF() {
     const payload = {
       lang: 'TR',
       product: { name: productName, form, usage },
-      supplier: {},
+      supplier: (() => {
+        const tel = document.getElementById('supplierEmergencyTel')?.value?.trim();
+        const hours = document.querySelector('input[name="telHours"]:checked')?.value || '24_7';
+        const note = hours === 'business'
+          ? 'Bu numara yalnızca hafta içi 09:00 - 18:00 saatleri arasında hizmet vermektedir.'
+          : '';
+        return tel ? { emergency_tel: `+90 ${tel}${note ? ' — ' + note : ''}` } : {};
+      })(),
       components: comps.map(c => ({
         cas:      c.cas,
         name:     c.name,

@@ -34,11 +34,11 @@ TR_REGULATIONS = {
         'rg_date': '23.06.2017',
         'eu_equivalent': 'EU CLP 2020/878 (SDS Annex)',
     },
-    'clp_tr': {
-        'name': 'KKDİK CLP Kısmı',
-        'full': 'Madde ve Karışımların Sınıflandırılması, Etiketlenmesi ve Ambalajlanması',
-        'rg_no': '29120',
-        'rg_date': '11.09.2014',
+    'sea': {
+        'name': 'SEA Yönetmeliği',
+        'full': 'Maddelerin ve Karışımların Sınıflandırılması, Etiketlenmesi ve Ambalajlanması Hakkında Yönetmelik',
+        'rg_no': '28848',
+        'rg_date': '11.12.2013',
         'eu_equivalent': 'CLP (EC) No 1272/2008',
     },
     'kanserojen': {
@@ -51,22 +51,22 @@ TR_REGULATIONS = {
     'kimyasal_is': {
         'name': 'Kimyasal Maddeler Yönetmeliği',
         'full': 'Kimyasal Maddelerle Çalışmalarda Sağlık ve Güvenlik Önlemleri Hakkında Yönetmelik',
-        'rg_no': '25328',
-        'rg_date': '26.12.2003',
+        'rg_no': '28733',
+        'rg_date': '12.08.2013',
         'eu_equivalent': 'Chemical Agents Directive 98/24/EC',
     },
     'atik': {
-        'name': 'Tehlikeli Atık Yönetmeliği',
-        'full': 'Tehlikeli Atıkların Kontrolü Yönetmeliği',
-        'rg_no': '25755',
-        'rg_date': '14.03.2005',
+        'name': 'Atık Yönetimi Yönetmeliği',
+        'full': 'Atık Yönetimi Yönetmeliği',
+        'rg_no': '29314',
+        'rg_date': '02.04.2015',
         'eu_equivalent': 'Waste Framework Directive 2008/98/EC',
     },
     'adr_tr': {
         'name': 'ADR (Türkiye)',
         'full': 'Tehlikeli Maddelerin Karayoluyla Taşınması Hakkında Yönetmelik',
-        'rg_no': '28801',
-        'rg_date': '24.10.2013',
+        'rg_no': '30754',
+        'rg_date': '24.04.2019',
         'eu_equivalent': 'ADR 2023',
     },
 }
@@ -81,7 +81,7 @@ def get_section15_text(
     H kodlarına göre ilgili mevzuatı otomatik seç.
     SDS Bölüm 15.1 için metin oluştur.
     """
-    applicable = ['kkdik', 'kkdik_ek2', 'clp_tr', 'kimyasal_is']
+    applicable = ['kkdik', 'sea', 'kimyasal_is', 'adr_tr', 'atik']
 
     # Kanserojenik/mutajenik maddeler
     cancer_h = {'H340','H341','H350','H351','H360','H361','H362'}
@@ -92,10 +92,11 @@ def get_section15_text(
     if has_biocide:
         applicable.append('bkk')
 
-    # Taşımacılık kısıtlaması varsa
-    hazmat_h = {'H224','H225','H226','H300','H301','H310','H314','H330','H331'}
-    if any(h in h_codes for h in hazmat_h):
-        applicable.append('adr_tr')
+    # Kanserojenik/mutajenik — ek yönetmelik
+    cancer_h_extra = {'H340','H341','H350','H351'}
+    if any(h in h_codes for h in cancer_h_extra):
+        if 'kanserojen' not in applicable:
+            applicable.append('kanserojen')
 
     # Metin oluştur
     if lang == 'TR':

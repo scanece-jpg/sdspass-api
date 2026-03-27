@@ -21,7 +21,7 @@ const CLPEngine = (() => {
     'H370':10.0,'H371':10.0,'H372':1.0,'H373':10.0,
     'H335':20.0,'H336':20.0,
     'H304':10.0,
-    'H400':0.1,'H410':0.1,'H411':1.0,'H412':10.0,'H413':25.0,
+    // H400-H413 → EcoEngine'de M-faktörlü toplamlı yöntem (Annex V §4.1.2) — burada yok
   };
 
   // ── CLP Dominance (Üstünlük) Kuralları ──────────────────────────────────────
@@ -160,6 +160,11 @@ const CLPEngine = (() => {
     'H220','H221','H222','H223','H224','H225','H226','H227','H228','H229','H232',
   ]);
 
+  // Sucul tehlike H kodları — EcoEngine M-faktörlü toplamlı yöntemle hesaplar
+  // CLP Annex V Tablo 4.1.0: M-faktörsüz eşik %25, basit %0.1 GCL YANLIŞ.
+  // Bu kodlar CLPEngine'de atlanır; EcoEngine'den gelir.
+  const ECO_SKIP = new Set(['H400','H410','H411','H412','H413']);
+
   function getGhsCodes(hcodes) {
     const pics = new Set();
     hcodes.forEach(h => {
@@ -184,6 +189,7 @@ const CLPEngine = (() => {
         const code = (h.h_code || '').replace(/[*\s]/g,'').substring(0,4);
         if (!code.startsWith('H')) return [];
         if (FLAM_SKIP.has(code)) return []; // Yanıcılık fiziksel engine'de
+        if (ECO_SKIP.has(code))  return []; // Sucul tehlike EcoEngine'de (M-faktörlü)
 
         // ── Öncelik 1: SCL — maddeye özel (Annex VI, KKDİK Ek-1) ──────────────
         const scl = c.scl && c.scl[code] !== undefined ? c.scl[code] : null;

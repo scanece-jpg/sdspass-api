@@ -60,6 +60,34 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
 /* Concentration select */
 .conc-sel{width:100%;padding:6px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-family:var(--mono);font-size:11px;cursor:pointer}
 
+/* ── Fiziksel Özellikler Modal ────────────────────────────────────────── */
+.phys-modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:1000;display:none;align-items:center;justify-content:center}
+.phys-modal-overlay.open{display:flex}
+.phys-modal{background:var(--bg2);border:1px solid var(--border2);border-radius:12px;width:min(640px,96vw);max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 64px rgba(0,0,0,.6)}
+.phys-modal-head{display:flex;align-items:center;justify-content:space-between;padding:14px 16px;border-bottom:1px solid var(--border2);background:var(--bg3)}
+.phys-modal-head h3{margin:0;font-size:13px;color:var(--text);font-family:var(--mono)}
+.phys-modal-close{background:none;border:none;color:var(--text3);font-size:18px;cursor:pointer;padding:2px 6px;border-radius:4px;line-height:1}
+.phys-modal-close:hover{color:var(--text);background:var(--border2)}
+.phys-modal-body{overflow-y:auto;padding:12px 16px;flex:1}
+.phys-modal-body::-webkit-scrollbar{width:6px}
+.phys-modal-body::-webkit-scrollbar-track{background:var(--bg3)}
+.phys-modal-body::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+.pm-row{display:grid;grid-template-columns:160px 1fr;gap:4px 12px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04);align-items:start}
+.pm-row:last-child{border-bottom:none}
+.pm-label{font-size:10px;color:var(--text3);padding-top:2px}
+.pm-val{font-family:var(--mono);font-size:11px;font-weight:700;color:#e2e8f0}
+.pm-na{font-size:10px;color:var(--text3);font-style:italic}
+.pm-meta{font-size:9px;color:var(--text3);margin-top:2px;font-style:italic;line-height:1.5}
+.pm-badge-meas{font-size:8px;padding:1px 5px;border-radius:8px;background:rgba(104,211,145,.15);color:#68d391;font-weight:600;margin-left:5px;vertical-align:middle}
+.pm-badge-err{font-size:9px;color:#f6ad55;margin-left:5px}
+
+/* Compact phys summary card */
+.phys-summary{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:6px;margin-bottom:8px}
+.phys-chip{background:var(--bg3);border:1px solid var(--border2);border-radius:8px;padding:7px 10px}
+.phys-chip-label{font-size:9px;color:var(--text3);margin-bottom:3px}
+.phys-chip-val{font-family:var(--mono);font-size:12px;font-weight:700;color:#e2e8f0}
+.phys-chip-sub{font-size:8px;color:var(--text3);margin-top:2px}
+
 /* Refinement panel */
 .crp{margin-top:6px;border-radius:8px;overflow:hidden;border:1px solid var(--border2);display:none}
 .crp-head{background:rgba(245,166,35,.08);border-bottom:1px solid rgba(245,166,35,.2);padding:8px 12px;font-size:11px;color:var(--warn)}
@@ -174,41 +202,6 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
     </div>
   </div>
 
-  <!-- Test Verileri -->
-  <div class="product-card" style="margin-top:10px">
-    <label style="font-weight:700;color:var(--text2);margin-bottom:8px;display:block">🔬 Test Verileri (opsiyonel)</label>
-    <div class="row2">
-      <div>
-        <label>Parlama Noktası (°C)</label>
-        <input type="number" id="tf_fp" placeholder="Ör: 60">
-      </div>
-      <div>
-        <label>pH Değeri</label>
-        <input type="number" id="tf_ph" placeholder="Ör: 7.0" step="0.1" min="0" max="14">
-      </div>
-    </div>
-    <div class="row2" style="margin-top:8px">
-      <div>
-        <label>Kaynama Noktası (°C)</label>
-        <input type="number" id="tf_bp" placeholder="Ör: 100">
-      </div>
-      <div>
-        <label>Yoğunluk (g/mL)</label>
-        <input type="number" id="tf_density" placeholder="Ör: 1.0" step="0.01">
-      </div>
-    </div>
-    <div class="row2" style="margin-top:8px">
-      <div>
-        <label>Viskozite (mPa·s)</label>
-        <input type="number" id="tf_visc" placeholder="Ör: 20">
-      </div>
-      <div>
-        <label>Su Çözünürlüğü (mg/L)</label>
-        <input type="number" id="tf_sol" placeholder="Ör: 1000">
-      </div>
-    </div>
-  </div>
-
   <!-- Bileşenler -->
   <div class="comps-header">
     <span class="comps-title">🧪 Bileşenler</span>
@@ -216,10 +209,134 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
   </div>
   <div id="comps"></div>
 
+  <!-- Bölüm 9 — Fiziksel ve Kimyasal Özellikler -->
+  <div class="product-card" style="margin-top:10px">
+    <label style="font-weight:700;color:var(--text2);margin:0 0 10px;display:block">🧪 Bölüm 9 — Fiziksel ve Kimyasal Özellikler</label>
+
+    <!-- 4 alan her zaman görünür -->
+    <div class="row2">
+      <div>
+        <label>Fiziksel Form / Renk</label>
+        <input type="text" id="tf_appearance" placeholder="Ör: Şeffaf, renksiz sıvı">
+      </div>
+      <div>
+        <label>Koku</label>
+        <input type="text" id="tf_odor" placeholder="Ör: Keskin, karakteristik">
+      </div>
+    </div>
+    <div class="row2" style="margin-top:8px">
+      <div>
+        <label>pH Değeri <span style="color:var(--safe);font-size:8px">● motor</span></label>
+        <input type="number" id="tf_ph" placeholder="Ör: 7.0 — override için girin" step="0.1" min="0" max="14">
+      </div>
+      <div>
+        <label>Yoğunluk (g/mL) <span style="color:var(--safe);font-size:8px">● motor</span></label>
+        <input type="number" id="tf_density" placeholder="ISO 2811 — override için girin" step="0.001">
+      </div>
+    </div>
+
+    <!-- Daha fazla... toggle -->
+    <div id="sec9Extra" style="display:none;margin-top:10px">
+
+      <!-- Görünüm / Koku devamı -->
+      <div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin:0 0 6px;padding-bottom:4px;border-bottom:1px solid var(--border2)">Görünüm</div>
+      <div class="row2">
+        <div>
+          <label>Koku Eşiği (ppm)</label>
+          <input type="number" id="tf_odor_thresh" placeholder="Ör: 0.5" step="0.01">
+        </div>
+      </div>
+
+      <!-- Termal Özellikler -->
+      <div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin:12px 0 6px;padding-bottom:4px;border-bottom:1px solid var(--border2)">Termal Özellikler</div>
+      <div class="row2">
+        <div>
+          <label>Erime / Donma Noktası (°C)</label>
+          <input type="number" id="tf_mp" placeholder="Ör: -20">
+        </div>
+        <div>
+          <label>Kaynama Noktası (°C) <span style="color:var(--safe);font-size:8px">● motor</span></label>
+          <input type="number" id="tf_bp" placeholder="IBP — override için girin">
+        </div>
+      </div>
+      <div class="row2" style="margin-top:8px">
+        <div>
+          <label>Parlama Noktası (°C) <span style="color:var(--safe);font-size:8px">● motor</span></label>
+          <input type="number" id="tf_fp" placeholder="DB'den hesaplanır — override">
+        </div>
+        <div>
+          <label>Buharlaşma Hızı</label>
+          <input type="text" id="tf_evap" placeholder="Ör: &lt;1 (n-BuAc=1), Yavaş">
+        </div>
+      </div>
+      <div class="row2" style="margin-top:8px">
+        <div>
+          <label>Kendiliğinden Tutuşma (°C)</label>
+          <input type="number" id="tf_ait" placeholder="Ör: 400">
+        </div>
+        <div>
+          <label>Bozunma Sıcaklığı (°C)</label>
+          <input type="number" id="tf_decomp" placeholder="Ör: 250">
+        </div>
+      </div>
+
+      <!-- Alevlenirlik / Patlama -->
+      <div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin:12px 0 6px;padding-bottom:4px;border-bottom:1px solid var(--border2)">Alevlenirlik (LEL/UEL motorda hesaplanır)</div>
+      <div class="row2">
+        <div>
+          <label>Alevlenirlik — Katı/Gaz</label>
+          <input type="text" id="tf_flam_sg" placeholder="Ör: Yanmaz / Uygulanamaz">
+        </div>
+        <div>
+          <label>Patlayıcı Özellikler</label>
+          <input type="text" id="tf_expl" placeholder="Ör: Uygulanamaz">
+        </div>
+      </div>
+
+      <!-- Yoğunluk ve Basınç -->
+      <div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin:12px 0 6px;padding-bottom:4px;border-bottom:1px solid var(--border2)">Diğer <span style="font-size:8px;color:var(--safe)">(●●● motor hesaplar)</span></div>
+      <div class="row2">
+        <div>
+          <label>Oksitleyici Özellikler</label>
+          <input type="text" id="tf_oxid" placeholder="Ör: Uygulanamaz">
+        </div>
+      </div>
+
+      <!-- Çözünürlük ve Diğer -->
+      <div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin:12px 0 6px;padding-bottom:4px;border-bottom:1px solid var(--border2)">Çözünürlük ve Diğer</div>
+      <div class="row2">
+        <div>
+          <label>Su Çözünürlüğü <span style="color:var(--safe);font-size:8px">● motor</span></label>
+          <input type="number" id="tf_sol" placeholder="mg/L — override için girin">
+        </div>
+        <div>
+          <label>Dağılım Katsayısı (log Kow)</label>
+          <input type="number" id="tf_logkow" placeholder="Ör: 2.5" step="0.01">
+        </div>
+      </div>
+      <div class="row2" style="margin-top:8px">
+        <div>
+          <label>Viskozite (mPa·s) <span style="color:var(--safe);font-size:8px">● motor</span></label>
+          <input type="number" id="tf_visc" placeholder="override için girin">
+        </div>
+        <div>
+          <label>Diğer Çözücülerde Çözünürlük</label>
+          <input type="text" id="tf_sol_other" placeholder="Ör: Etanol'de karışabilir">
+        </div>
+      </div>
+    </div>
+
+    <button onclick="toggleSec9Extra()" id="sec9ExtraBtn"
+            style="margin-top:10px;width:100%;background:none;border:1px dashed var(--border2);color:var(--text3);font-size:11px;padding:6px;border-radius:6px;cursor:pointer">
+      ▼ Daha fazla...
+    </button>
+  </div>
+
   <!-- Hesapla -->
   <div class="calc-bar">
     <button class="bcalc" onclick="doCalculate()">⚡ Hesapla</button>
   </div>
+
 </div>
 
 <!-- ═══ SAĞ PANEL — Sonuçlar ════════════════════════════════════════════════ -->
@@ -307,17 +424,24 @@ function addComp(pf = {}) {
     </div>
     <div>
       <label>Konsantrasyon Aralığı</label>
-      <select class="conc-sel" id="csel${id}" onchange="onConcChange(${id})">
+      <select class="conc-sel" id="csel${id}" onchange="onConcChange(${id}); document.getElementById('cmanual${id}').value='';">
         <option value="">— Seçin —</option>
-        <option value="0|0.1">≤ %0,1</option>
-        <option value="0.1|1">%0,1 – %1</option>
-        <option value="1|5">%1 – %5</option>
-        <option value="5|10">%5 – %10</option>
-        <option value="10|25">%10 – %25</option>
-        <option value="25|50">%25 – %50</option>
-        <option value="50|100">%50 – %100</option>
-        <option value="100|100">%100 — Saf Madde</option>
+        <option value="0|0.1">0 &lt; c ≤ %0,1</option>
+        <option value="0.1|1">%0,1 &lt; c ≤ %1</option>
+        <option value="1|5">%1 &lt; c ≤ %5</option>
+        <option value="5|10">%5 &lt; c ≤ %10</option>
+        <option value="10|25">%10 &lt; c ≤ %25</option>
+        <option value="25|50">%25 &lt; c ≤ %50</option>
+        <option value="50|100">%50 &lt; c ≤ %100</option>
+        <option value="100|100">c = %100 — Saf Madde</option>
       </select>
+      <div style="display:flex;align-items:center;gap:6px;margin-top:5px">
+        <span style="font-size:10px;color:var(--text3);white-space:nowrap">veya manuel gir:</span>
+        <input type="text" class="conc-manual" id="cmanual${id}"
+               placeholder="örn: 3.5  veya  2-8"
+               oninput="onManualConc(${id})"
+               style="flex:1;padding:5px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-family:var(--mono);font-size:11px">
+      </div>
       <div class="crp" id="crp${id}"></div>
       <input type="hidden" class="kimin" id="cmin${id}" value="${pf.conc||''}">
       <input type="hidden" class="kimax" id="cmax${id}" value="">
@@ -371,19 +495,38 @@ function debounceCas(id) {
 }
 
 async function onCas(id) {
-  const cas = document.getElementById('ci'+id)?.value?.trim();
+  const casEl = document.getElementById('ci'+id);
+  const cas = casEl?.value?.trim();
   if (!cas || cas.length < 5) return;
+
+  // Loading göstergesi
+  if (casEl) { casEl.style.borderColor = '#63b3ed'; casEl.title = 'Sorgulanıyor…'; }
+
   try {
     const r = await fetch(`${API_BASE}/sds/substance/lookup?cas=${encodeURIComponent(cas)}`);
-    if (!r.ok) return;
+    if (!r.ok) {
+      if (casEl) { casEl.style.borderColor = 'var(--danger)'; casEl.title = `API hatası: ${r.status}`; }
+      return;
+    }
     const data = await r.json();
-    if (!data.found) return;
+    if (!data.found) {
+      if (casEl) { casEl.style.borderColor = '#f6ad55'; casEl.title = 'CAS bulunamadı'; }
+      setTimeout(() => { if(casEl){ casEl.style.borderColor=''; casEl.title=''; }}, 2500);
+      return;
+    }
+
+    // Alanları doldur — mevcut değer varsa üzerine yaz (kullanıcı görebilsin diye)
     const ni = document.getElementById('ni'+id);
-    if (ni && !ni.value && data.name) ni.value = data.name;
+    if (ni && data.name) ni.value = data.name;
     const ec = document.getElementById('ec'+id);
-    if (ec && !ec.value && data.ec_no) ec.value = data.ec_no;
+    if (ec && data.ec_no) ec.value = data.ec_no;
     const reach = document.getElementById('reach'+id);
-    if (reach && !reach.value && data.reach_no) reach.value = data.reach_no;
+    if (reach && data.reach_no) reach.value = data.reach_no;
+
+    // Başarı göstergesi
+    if (casEl) { casEl.style.borderColor = 'var(--safe)'; casEl.title = data.name || ''; }
+    setTimeout(() => { if(casEl){ casEl.style.borderColor=''; }}, 1800);
+
     if (data.hazards) data.hazards.forEach(h => addChip(id, h.h_class, h.h_code));
 
     // ── SCL — maddeye özel kesme değerleri (Annex VI / KKDİK Ek-1) ────────────
@@ -420,6 +563,57 @@ async function onCas(id) {
     if (sel && sel.value) onConcChange(id);
     EventBus.emit('SUBSTANCE_FOUND', { id, cas, ...data });
   } catch(e) { console.warn('[CAS lookup]', e); }
+}
+
+// ── Manuel konsantrasyon girişi ───────────────────────────────────────────────
+// Kabul edilen formatlar: "3.5"  "2-8"  "%5"  "1.5-3"  "≥2"  "≤10"
+function parseManualConc(val) {
+  const s = val.trim().replace(/\s/g,'').replace('%','').replace(',','.');
+  if (!s) return null;
+  // Aralık: "2-8" veya "2–8"
+  const rangeMatch = s.match(/^(\d+\.?\d*)[–\-](\d+\.?\d*)$/);
+  if (rangeMatch) {
+    const lo = parseFloat(rangeMatch[1]);
+    const hi = parseFloat(rangeMatch[2]);
+    if (!isNaN(lo) && !isNaN(hi) && hi >= lo) return { lo, hi };
+    return null;
+  }
+  // Tekil değer: "3.5" → lo=0, hi=3.5 (nokta değer)
+  const single = parseFloat(s.replace(/[^0-9.]/g,''));
+  if (!isNaN(single) && single >= 0 && single <= 100) return { lo: single, hi: single };
+  return null;
+}
+
+const _manualDebounce = {};
+function onManualConc(id) {
+  clearTimeout(_manualDebounce[id]);
+  _manualDebounce[id] = setTimeout(async () => {
+    const manEl = document.getElementById('cmanual'+id);
+    if (!manEl) return;
+    const parsed = parseManualConc(manEl.value);
+    if (!parsed) {
+      manEl.style.borderColor = manEl.value.trim() ? 'var(--danger)' : '';
+      return;
+    }
+    manEl.style.borderColor = 'var(--safe)';
+    // Dropdown'u sıfırla
+    const sel = document.getElementById('csel'+id);
+    if (sel) sel.value = '';
+    // Hidden alanları güncelle
+    document.getElementById('cmin'+id).value = parsed.lo;
+    document.getElementById('cmax'+id).value = parsed.hi;
+    // Refinement panelini göster (SCL eşik kontrolü)
+    const cas = document.getElementById('ci'+id)?.value?.trim() || '';
+    const sclRaw = _sclRaw[id] || [];
+    const thresholds = findThresholdsFromSCL(parsed.lo, parsed.hi, sclRaw);
+    if (thresholds.length) {
+      showRefinementFromAPI(id, parsed.lo, parsed.hi, thresholds);
+    } else {
+      const crp = document.getElementById('crp'+id);
+      if (crp) crp.style.display = 'none';
+    }
+    setTimeout(() => { manEl.style.borderColor = ''; }, 1500);
+  }, 400);
 }
 
 // ── Konsantrasyon seçici — backend API ile SCL dahil eşik tespiti ─────────────
@@ -743,6 +937,14 @@ function getComps() {
         const parts = sel.value.split('|').map(Number);
         if (parts.length === 2) { concMin = parts[0]; concMax = parts[1]; }
       }
+      // Manuel giriş alanından doğrudan oku (debounce henüz tetiklenmediyse)
+      if (!concMin && (!concMax || concMax === 0)) {
+        const manEl = w.querySelector('.conc-manual');
+        if (manEl && manEl.value.trim()) {
+          const parsed = parseManualConc(manEl.value);
+          if (parsed) { concMin = parsed.lo; concMax = parsed.hi; }
+        }
+      }
     }
     const conc = concMax != null && concMax > 0 ? concMax : concMin;
     const hazards = [...w.querySelectorAll('.hchip')].map(c => ({ h_class: c.dataset.hc, h_code: c.dataset.code }));
@@ -763,19 +965,56 @@ function doCalculate() {
   if (!comps.length) { showError('En az bir bileşen girin.'); return; }
   const form   = document.getElementById('pform')?.value || 'liquid';
   const userFP = parseFloat(document.getElementById('tf_fp')?.value) || null;
-  // Pipeline başlat — tüm engine'ler EventBus üzerinden çalışır
-  EventBus.emit('PIPELINE_START', { comps, form, userFP });
+
+  // Bölüm 9 — Fiziksel ve Kimyasal Özellikler (kullanıcı girdiyse teorik hesabı ezer)
+  const testData = {};
+  const g = id => document.getElementById(id)?.value?.trim();
+  const n = id => parseFloat(document.getElementById(id)?.value);
+
+  // Metin alanları
+  if (g('tf_appearance')) testData.appearance  = g('tf_appearance');
+  if (g('tf_odor'))       testData.odor        = g('tf_odor');
+  if (g('tf_evap'))       testData.evap_rate   = g('tf_evap');
+  if (g('tf_flam_sg'))    testData.flam_sg     = g('tf_flam_sg');
+  if (g('tf_expl'))       testData.explosive   = g('tf_expl');
+  if (g('tf_oxid'))       testData.oxidizing   = g('tf_oxid');
+  if (g('tf_sol_other'))  testData.sol_other   = g('tf_sol_other');
+
+  // Sayısal alanlar (motor değerlerini ezer)
+  const tfDens   = n('tf_density');
+  const tfBP     = n('tf_bp');
+  const tfPH     = n('tf_ph');
+  const tfVisc   = n('tf_visc');
+  const tfSol    = n('tf_sol');
+  const tfMP     = n('tf_mp');
+  const tfAIT    = n('tf_ait');
+  const tfDecomp = n('tf_decomp');
+  const tfLogKow = n('tf_logkow');
+  const tfOdorTh = n('tf_odor_thresh');
+
+  if (!isNaN(tfDens)   && tfDens > 0)   testData.density          = tfDens;
+  if (!isNaN(tfBP))                     testData.boiling_point     = tfBP;
+  if (!isNaN(tfPH)     && tfPH >= 0)    testData.ph                = tfPH;
+  if (!isNaN(tfVisc)   && tfVisc > 0)   testData.viscosity         = tfVisc;
+  if (!isNaN(tfSol)    && tfSol >= 0)   testData.solubility        = tfSol;
+  if (!isNaN(tfMP))                     testData.melting_point     = tfMP;
+  if (!isNaN(tfAIT)    && tfAIT > 0)    testData.auto_ignition     = tfAIT;
+  if (!isNaN(tfDecomp) && tfDecomp > 0) testData.decomp_temp       = tfDecomp;
+  if (!isNaN(tfLogKow))                 testData.log_kow           = tfLogKow;
+  if (!isNaN(tfOdorTh) && tfOdorTh > 0) testData.odor_threshold   = tfOdorTh;
+
+  EventBus.emit('PIPELINE_START', { comps, form, userFP, testData });
 }
 
 // ── Pipeline orkestratörü ─────────────────────────────────────────────────────
 function initPipeline() {
-  EventBus.on('PIPELINE_START', ({ comps, form, userFP }) => {
+  EventBus.on('PIPELINE_START', ({ comps, form, userFP, testData }) => {
     // Tüm engine'leri paralel tetikle
     EventBus.emit('CLP_CALCULATE',      { comps });
     EventBus.emit('STOT_CALCULATE',     { comps });
     EventBus.emit('ECO_CALCULATE',      { comps });
     EventBus.emit('EUH_CALCULATE',      { comps });
-    EventBus.emit('PHYSICAL_CALCULATE', { comps, form, userFP });
+    EventBus.emit('PHYSICAL_CALCULATE', { comps, form, userFP, testData: testData || {} });
     // State'e comps kaydet
     if (typeof StateStore !== 'undefined') StateStore.set('comps', comps);
   });
@@ -784,8 +1023,9 @@ function initPipeline() {
   // (PCodeEngine, TransportEngine, PPEEngine H_CODES_READY'yi dinliyor)
 
   // Tüm sonuçları topla ve render et
+  // Not: pcodes/transport/ppe renderAll içinde allH ile hesaplanır (doğru sıra için)
   const _state = {};
-  const REQUIRED = ['clp','stot','eco','euh','phys','pcodes','transport','ppe'];
+  const REQUIRED = ['clp','stot','eco','euh','phys'];
 
   function tryRender() {
     if (REQUIRED.every(k => _state[k])) renderAll(_state);
@@ -796,9 +1036,6 @@ function initPipeline() {
   EventBus.on('ECO_READY',        r => { _state.eco = r; tryRender(); });
   EventBus.on('EUH_READY',        r => { _state.euh = r; tryRender(); });
   EventBus.on('PHYSICAL_READY',   r => { _state.phys = r; tryRender(); });
-  EventBus.on('P_CODES_READY',    r => { _state.pcodes = r; tryRender(); });
-  EventBus.on('TRANSPORT_READY',  r => { _state.transport = r; tryRender(); });
-  EventBus.on('PPE_READY',        r => { _state.ppe = r; tryRender(); });
 
   EventBus.on('PIPELINE_START', () => {
     REQUIRED.forEach(k => delete _state[k]);
@@ -809,7 +1046,7 @@ function initPipeline() {
 function renderAll(s) {
   const el = document.getElementById('results');
   if (!el) return;
-  const { clp, stot, eco, euh, phys, pcodes, transport, ppe } = s;
+  const { clp, stot, eco, euh, phys } = s;
 
   // Tüm H kodlarını birleştir (tüm motorlardan)
   const allHRaw = [...new Set([
@@ -839,6 +1076,13 @@ function renderAll(s) {
   const _wH = CLPEngine.WARNING_H;
   const combinedSignal = allH.some(c => _dH && _dH.has(c)) ? 'Danger'
     : allH.some(c => _wH && _wH.has(c)) ? 'Warning' : 'None';
+
+  // ── P Kodu / Taşımacılık / KKD — TÜM H kodlarıyla hesapla ──────────────
+  // (H_CODES_READY sadece CLP kodlarını içerir; fiziksel H225, H304 vb. eksik kalırdı)
+  const usage = document.getElementById('pusage')?.value || 'industrial';
+  const pcodes   = PCodeEngine.calculate({ hCodes: allH, signal: combinedSignal, usage });
+  const transport = TransportEngine.classify(allH);
+  const ppe       = PPEEngine.select(allH);
 
   let h = '';
 
@@ -908,6 +1152,57 @@ function renderAll(s) {
         ${p.source ? `<div class="ecard-source">📦 ${p.source}</div>` : ''}
       </div>`;
     });
+  }
+
+  // ── Bölüm 9 — Fiziksel Özellikler (kompakt özet + modal) ────────────────
+  const tp = phys.theoProps;
+  _lastTheoProps = tp || null;   // modal için kaydet
+
+  if (tp) {
+    const coverageColor = tp.coverage >= 80 ? '#68d391' : tp.coverage >= 50 ? '#f6ad55' : '#fc8181';
+    const measuredCount = ['density','boiling_point','flash_point','lel','ph','viscosity'].filter(p => tp[p]?.measured).length;
+
+    // Kompakt chip yardımcısı
+    function chip(label, d, unit = '') {
+      if (!d || (d.value === null || d.value === undefined)) {
+        return `<div class="phys-chip"><div class="phys-chip-label">${label}</div><div class="phys-chip-val" style="color:var(--text3);font-size:10px">—</div></div>`;
+      }
+      const badge = d.measured
+        ? `<span style="font-size:8px;color:#68d391">✓</span> `
+        : (d.error ? `<span style="font-size:8px;color:#f6ad55">±%${d.error.pct}</span> ` : '');
+      return `<div class="phys-chip">
+        <div class="phys-chip-label">${label}</div>
+        <div class="phys-chip-val">${badge}${d.value}${unit ? ' <span style="font-size:9px;font-weight:400;color:var(--text3)">' + unit + '</span>' : ''}</div>
+      </div>`;
+    }
+
+    const headerBadge = measuredCount > 0
+      ? `<span style="font-size:9px;padding:2px 7px;border-radius:10px;background:rgba(104,211,145,.15);color:#68d391">${measuredCount} ölçülen değer</span>`
+      : tp.coverage > 0
+      ? `<span style="font-size:9px;padding:2px 7px;border-radius:10px;background:rgba(99,179,237,.1);color:${coverageColor}">DB kapsama %${tp.coverage}</span>`
+      : '';
+
+    h += `<div class="r-title">🧮 Bölüm 9 — Fiziksel Özellikler</div>
+    <div class="ecard info" style="padding:10px 12px">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">
+        <span style="font-size:10px;font-weight:700;color:#63b3ed;font-family:var(--mono)">FİZİKSEL ÖZELLİKLER</span>
+        ${headerBadge}
+      </div>
+      <div class="phys-summary">
+        ${chip('Parlama Noktası', tp.flash_point, '°C')}
+        ${chip('Kaynama Noktası', tp.boiling_point, '°C')}
+        ${chip('Yoğunluk', tp.density, 'g/cm³')}
+        ${chip('LEL', tp.lel, '%v/v')}
+        ${chip('UEL', tp.uel, '%v/v')}
+        ${chip('pH', tp.ph)}
+      </div>
+      <button onclick="openPhysModal()"
+        style="width:100%;margin-top:6px;padding:7px;border-radius:6px;border:1px dashed var(--border2);background:none;color:var(--text3);font-size:10px;cursor:pointer;font-family:var(--mono)"
+        onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'"
+        onmouseout="this.style.borderColor='var(--border2)';this.style.color='var(--text3)'">
+        📋 Tüm Özellikler — Bölüm 9.1 (24 parametre) →
+      </button>
+    </div>`;
   }
 
   // ── STOT RE ──────────────────────────────────────────────────────────────
@@ -986,7 +1281,24 @@ function renderAll(s) {
     });
   }
 
-  el.innerHTML = h;
+  // PDF butonu — sonuçların üstüne ekle
+  const pdfBar = `<div style="display:flex;justify-content:flex-end;margin-bottom:10px">
+    <button onclick="generatePDF()"
+      style="background:linear-gradient(135deg,#e53e3e,#c53030);color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;font-family:var(--mono)"
+      onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
+      📄 PDF Oluştur
+    </button>
+  </div>`;
+  el.innerHTML = pdfBar + h;
+
+  // Son hesaplama durumunu sakla
+  _lastCalcState = {
+    allH, combinedSignal, transport,
+    euh: s.euh,
+    phys: s.phys,
+    clp: s.clp,
+    comps: getComps(),
+  };
 }
 
 function showError(msg) {
@@ -1013,6 +1325,212 @@ window.addEventListener('DOMContentLoaded', () => {
 
   console.log('[SDSPass v2] Modüler pipeline hazır — EventBus.debug() ile olayları izle');
 });
+</script>
+
+<!-- ══ FİZİKSEL ÖZELLİKLER MODAL ══════════════════════════════════════════ -->
+<div class="phys-modal-overlay" id="physModalOverlay" onclick="if(event.target===this)closePhysModal()">
+  <div class="phys-modal">
+    <div class="phys-modal-head">
+      <h3>📋 Bölüm 9.1 — Fiziksel ve Kimyasal Özellikler</h3>
+      <button class="phys-modal-close" onclick="closePhysModal()">✕</button>
+    </div>
+    <div class="phys-modal-body" id="physModalBody">
+      <div style="color:var(--text3);font-size:11px;padding:20px 0;text-align:center">Önce hesaplama yapın</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Fiziksel Özellikler Modal ─────────────────────────────────────────────────
+let _lastTheoProps = null;
+
+// ── Son hesaplama sonuçları (PDF için) ────────────────────────────────────────
+let _lastCalcState = null;
+
+function openPhysModal() {
+  const tp = _lastTheoProps;
+  const body = document.getElementById('physModalBody');
+  if (!body) return;
+
+  // Tüm SDS 9.1 satırları — sıra PDF ile aynı
+  const NA = '<span class="pm-na">Uygun veri yoktur</span>';
+
+  function fmtVal(d, unit = '') {
+    if (!d || d.value === null || d.value === undefined) return NA;
+    const vs = `${d.value}${unit ? ' ' + unit : ''}`;
+    const badge = d.measured
+      ? `<span class="pm-badge-meas">✓ Ölçülen</span>`
+      : (d.error ? `<span class="pm-badge-err">±${d.error.abs} (±%${d.error.pct})</span>` : '');
+    const meta = d.method || d.standard
+      ? `<div class="pm-meta">${[d.method, d.standard].filter(Boolean).join(' · ')}</div>`
+      : '';
+    return `<div><span class="pm-val">${vs}</span>${badge}</div>${meta}`;
+  }
+
+  function fmtStr(d) {
+    if (!d || !d.value) return NA;
+    return `<span class="pm-val">${d.value}</span><span class="pm-badge-meas">✓ Beyan</span>`;
+  }
+
+  // SDS 9.1 yasal sıralama (REACH Ek II / KKDİK Ek-2)
+  const rows = [
+    ['Görünüm (fiziksel hal, renk)',      tp?.appearance   ? fmtStr(tp.appearance)                          : NA],
+    ['Koku',                              tp?.odor         ? fmtStr(tp.odor)                                : NA],
+    ['Koku eşiği',                        tp?.odor_threshold ? fmtVal(tp.odor_threshold, 'ppm')             : NA],
+    ['pH değeri',                         fmtVal(tp?.ph)],
+    ['Erime noktası / Donma noktası',     tp?.melting_point  ? fmtVal(tp.melting_point, '°C')               : NA],
+    ['Başlangıç kaynama noktası (IBP)',   fmtVal(tp?.boiling_point, '°C')],
+    ['Parlama noktası',                   tp?.flash_point    ? fmtVal(tp.flash_point, '°C')                 : NA],
+    ['Buharlaşma hızı',                   tp?.evap_rate      ? fmtStr(tp.evap_rate)                         : NA],
+    ['Alevlenirlik (katı, gaz)',          tp?.flam_sg        ? fmtStr(tp.flam_sg)                           : NA],
+    ['Üst patlama limiti (UEL)',          fmtVal(tp?.uel, '%v/v')],
+    ['Alt patlama limiti (LEL)',          fmtVal(tp?.lel, '%v/v')],
+    ['Buhar basıncı',                     fmtVal(tp?.vapor_pressure, 'hPa @ 20°C')],
+    ['Buhar yoğunluğu (hava=1)',          fmtVal(tp?.vapor_density)],
+    ['Göreceli (bağıl) yoğunluk',         fmtVal(tp?.density, 'g/cm³')],
+    ['Su içinde çözünürlük',              tp?.solubility     ? fmtVal(tp.solubility, 'mg/L')               : NA],
+    ['Diğer çözücülerdeki çözünürlük',   tp?.sol_other      ? fmtStr(tp.sol_other)                         : NA],
+    ['Dağılım katsayısı (log Kow)',       tp?.log_kow        ? fmtVal(tp.log_kow)                          : NA],
+    ['Kendiliğinden tutuşma sıcaklığı',  tp?.auto_ignition  ? fmtVal(tp.auto_ignition, '°C')              : NA],
+    ['Bozunma sıcaklığı',                tp?.decomp_temp    ? fmtVal(tp.decomp_temp, '°C')                 : NA],
+    ['Viskozite (dinamik)',               tp?.viscosity      ? fmtVal(tp.viscosity, 'mPa·s')               : NA],
+    ['Patlayıcılık özellikleri',         tp?.explosive      ? fmtStr(tp.explosive)                         : NA],
+    ['Oksitleyici özellikler',           tp?.oxidizing      ? fmtStr(tp.oxidizing)                         : NA],
+  ];
+
+  const covBadge = tp?.coverage > 0
+    ? `<div style="font-size:9px;color:var(--text3);padding:8px 0 4px">
+        DB kapsama: <strong style="color:${tp.coverage>=80?'#68d391':tp.coverage>=50?'#f6ad55':'#fc8181'}">%${tp.coverage}</strong>
+        &nbsp;·&nbsp; Teorik tahminler: ISO 2811 · Raoult/Le Chatelier · ISO 10156/EN 1839 · NIST WebBook
+       </div>` : '';
+
+  body.innerHTML = covBadge + rows.map(([lbl, val]) => `
+    <div class="pm-row">
+      <div class="pm-label">${lbl}</div>
+      <div>${val}</div>
+    </div>`).join('');
+
+  document.getElementById('physModalOverlay').classList.add('open');
+}
+
+function closePhysModal() {
+  document.getElementById('physModalOverlay')?.classList.remove('open');
+}
+
+async function generatePDF() {
+  if (!_lastCalcState) { alert('Önce Hesapla\'ya basın.'); return; }
+
+  const btn = document.querySelector('[onclick="generatePDF()"]');
+  if (btn) { btn.textContent = '⏳ Oluşturuluyor...'; btn.disabled = true; }
+
+  try {
+    const { allH, combinedSignal, transport, euh, phys, clp, comps } = _lastCalcState;
+    const productName = document.getElementById('productName')?.value?.trim() || 'Ürün';
+    const form  = document.getElementById('pform')?.value  || 'liquid';
+    const usage = document.getElementById('pusage')?.value || 'industrial';
+
+    // phys_props — theoProps'tan düz objeye çevir
+    const tp = phys?.theoProps || {};
+    const flatPhys = {};
+    const physKeys = ['density','boiling_point','flash_point','lel','uel','ph','viscosity',
+      'solubility','appearance','odor','odor_threshold','melting_point','auto_ignition',
+      'decomp_temp','log_kow','evap_rate','flam_sg','explosive','oxidizing','sol_other'];
+    physKeys.forEach(k => {
+      if (!tp[k]) return;
+      flatPhys[k] = (tp[k].value !== undefined) ? tp[k].value : tp[k].value;
+    });
+
+    // clp_passed — her H kodu için h_class + kesme değeri bilgisi
+    // h_class'ı bileşen hazards listesinden bul
+    const hClassMap = {};
+    comps.forEach(c => {
+      (c.hazards || []).forEach(hz => {
+        const code = (hz.h_code || '').replace(/[*\s]/g,'').substring(0,4);
+        if (code && !hClassMap[code]) hClassMap[code] = hz.h_class || '';
+      });
+    });
+    const cutoffUsed = clp?.cutoffUsed || {};
+    // Fiziksel tehlike H kodları — CLP konsantrasyon eşiği yok, motor hesaplar
+    const PHYS_H = new Set(['H200','H201','H202','H203','H204','H205',
+      'H220','H221','H222','H223','H224','H225','H226','H228','H229',
+      'H230','H231','H240','H241','H242','H250','H251','H252',
+      'H260','H261','H270','H271','H272']);
+    const clpPassed = allH.map(hc => {
+      const cu = cutoffUsed[hc];
+      let reason = '';
+      if (cu) {
+        reason = `${cu.source} ≥ %${cu.value}`;
+      } else if (PHYS_H.has(hc)) {
+        reason = 'Fiziksel tehlike — motor hesabı';
+      } else if (CLP_CUTOFFS[hc] !== undefined) {
+        reason = `GCL ≥ %${CLP_CUTOFFS[hc]}`;
+      }
+      return {
+        h_code:      hc,
+        h_class:     hClassMap[hc] || '',
+        reason,
+        cutoff_used: reason || '—',
+      };
+    });
+
+    const payload = {
+      lang: 'TR',
+      product: { name: productName, form, usage },
+      supplier: {},
+      components: comps.map(c => ({
+        cas:      c.cas,
+        name:     c.name,
+        conc:     c.conc,
+        ec_no:    c.ec || '',
+        reach_no: c.reach || '',
+        hazards:  c.hazards || [],
+      })),
+      h_codes:      allH,
+      clp_passed:   clpPassed,
+      euh_codes:    euh?.codes || [],
+      euh_details:  euh?.details || [],
+      signal_word:  combinedSignal,
+      transport:    transport || {},
+      phys_props:   flatPhys,
+      revision:     { date: new Date().toLocaleDateString('tr-TR'), no: '1', version: '1.0', notes: 'İlk yayın' },
+    };
+
+    const res = await fetch(API_BASE + '/sds/pdf', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+
+    if (!res.ok) {
+      const err = await res.text();
+      throw new Error(`API hatası ${res.status}: ${err}`);
+    }
+
+    const blob = await res.blob();
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    a.download = `${productName.replace(/\s+/g,'_')}_SDS.pdf`;
+    a.click();
+    URL.revokeObjectURL(url);
+
+  } catch (e) {
+    alert('PDF oluşturma hatası: ' + e.message);
+    console.error('[PDF]', e);
+  } finally {
+    if (btn) { btn.innerHTML = '📄 PDF Oluştur'; btn.disabled = false; }
+  }
+}
+
+function toggleSec9Extra() {
+  const el  = document.getElementById('sec9Extra');
+  const btn = document.getElementById('sec9ExtraBtn');
+  const open = el.style.display !== 'none';
+  el.style.display  = open ? 'none' : 'block';
+  btn.textContent   = open ? '▼ Daha fazla...' : '▲ Daha az';
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closePhysModal(); });
 </script>
 </body>
 </html>

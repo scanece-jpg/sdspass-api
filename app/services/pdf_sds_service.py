@@ -672,6 +672,14 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             [[term(lang,'classification'), h_code_lbl, reason_lbl]] + clf_rows,
             [90*mm, 30*mm, 60*mm], styles
         ))
+        if lang == 'TR':
+            story.append(Spacer(1, 4))
+            story.append(Paragraph(
+                '<i>H-kodları, 11 Aralık 2013 tarihli ve 28848 sayılı Resmî Gazete\'de yayımlanan '
+                'Maddelerin ve Karışımların Sınıflandırılması, Etiketlenmesi ve Ambalajlanması '
+                'Hakkında Yönetmelik (SEA) esaslarına göre belirlenmiştir.</i>',
+                styles['small']
+            ))
     else:
         story.append(Paragraph(term(lang,'not_classified'), styles['body']))
     story.append(Spacer(1, 3))

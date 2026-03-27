@@ -32,7 +32,7 @@ LANG_DATA: Dict[str, Dict] = {
     'TR': {
         'name': 'Türkçe',
         'code': 'TR',
-        'regulation': 'KKDİK (2013/30466)',
+        'regulation': 'KKDİK (30105/2017)',
         'date_format': '%d.%m.%Y',
         'decimal_sep': ',',
 

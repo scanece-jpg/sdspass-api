@@ -347,17 +347,30 @@ const PhysicalEngine = (() => {
       catTriggers[cls.cat].push({ cas, name: c.name, conc, fp });
     }
 
-    // Eşik kontrolü: Cat.1 ≥ %1, Cat.2 ≥ %1, Cat.3 ≥ %10
-    const thresholds = { 1: 1, 2: 1, 3: 10 };
-    for (const cat of [1, 2, 3]) {
-      if (catSum[cat] >= thresholds[cat]) {
-        const triggers = catTriggers[cat];
-        const cls = cat === 1 ? { h:'H224', cat:1, label:'Flam. Liq. 1', signal:'Danger' }
-                  : cat === 2 ? { h:'H225', cat:2, label:'Flam. Liq. 2', signal:'Danger' }
-                              : { h:'H226', cat:3, label:'Flam. Liq. 3', signal:'Warning' };
-        const src = triggers.map(t => `${t.name||t.cas} (%${t.conc}, FP=${t.fp}°C)`).join(' + ');
-        return { result: cls, source: src, fp: catFP[cat] };
-      }
+    // CLP Annex I Tablo 2.6 kademeli eşik:
+    //   Cat.1 : Σ(Cat.1)           ≥ %1
+    //   Cat.2 : Σ(Cat.1 + Cat.2)   ≥ %1   (üst kategoriler de sayılır)
+    //   Cat.3 : Σ(Cat.1+2+3)       ≥ %10  (tüm yanıcı bileşenler)
+    const sum1   = catSum[1];
+    const sum12  = catSum[1] + catSum[2];
+    const sum123 = catSum[1] + catSum[2] + catSum[3];
+
+    const allTriggers = [...catTriggers[1], ...catTriggers[2], ...catTriggers[3]];
+    const minFPAll = [catFP[1], catFP[2], catFP[3]].filter(v => v !== null);
+    const lowestFP = minFPAll.length ? Math.min(...minFPAll) : null;
+
+    if (sum1 >= 1) {
+      const src = catTriggers[1].map(t => `${t.name||t.cas} (%${t.conc}, FP=${t.fp}°C)`).join(' + ');
+      return { result: { h:'H224', cat:1, label:'Flam. Liq. 1', signal:'Danger' }, source: src, fp: catFP[1] };
+    }
+    if (sum12 >= 1) {
+      const triggers = [...catTriggers[1], ...catTriggers[2]];
+      const src = triggers.map(t => `${t.name||t.cas} (%${t.conc}, FP=${t.fp}°C)`).join(' + ');
+      return { result: { h:'H225', cat:2, label:'Flam. Liq. 2', signal:'Danger' }, source: src, fp: Math.min(...[catFP[1],catFP[2]].filter(v=>v!==null)) };
+    }
+    if (sum123 >= 10) {
+      const src = allTriggers.map(t => `${t.name||t.cas} (%${t.conc}, FP=${t.fp}°C)`).join(' + ');
+      return { result: { h:'H226', cat:3, label:'Flam. Liq. 3', signal:'Warning' }, source: src, fp: lowestFP };
     }
     return { result: null, source: null, fp: null };
   }

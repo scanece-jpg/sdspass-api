@@ -202,6 +202,35 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
     </div>
   </div>
 
+  <!-- Firma Bilgileri — Bölüm 1.3 -->
+  <div class="product-card" style="margin-top:10px">
+    <label style="font-weight:700;color:var(--text2);margin:0 0 8px;display:block">🏢 Bölüm 1.3 — Tedarikçi Bilgileri</label>
+    <div class="row2">
+      <div>
+        <label>Firma Adı</label>
+        <input type="text" id="suppName" placeholder="Örn: ABC Kimya A.Ş.">
+      </div>
+      <div>
+        <label>Sorumlu Kişi / Ünvan</label>
+        <input type="text" id="suppContact" placeholder="Örn: Güvenlik Uzmanı">
+      </div>
+    </div>
+    <div style="margin-top:8px">
+      <label>Adres</label>
+      <input type="text" id="suppAddress" placeholder="Cadde, İlçe, İl, Posta Kodu">
+    </div>
+    <div class="row2" style="margin-top:8px">
+      <div>
+        <label>Telefon</label>
+        <input type="text" id="suppPhone" placeholder="+90 xxx xxx xx xx">
+      </div>
+      <div>
+        <label>E-posta</label>
+        <input type="email" id="suppEmail" placeholder="info@firma.com">
+      </div>
+    </div>
+  </div>
+
   <!-- Acil Telefon — Bölüm 1.4 -->
   <div class="product-card" style="margin-top:10px">
     <label style="font-weight:700;color:var(--text2);margin:0 0 8px;display:block">📞 Bölüm 1.4 — Acil Telefon</label>
@@ -1548,18 +1577,22 @@ async function generatePDF() {
       lang: 'TR',
       product: { name: productName, form, usage },
       supplier: (() => {
-        const raw = document.getElementById('supplierEmergencyTel')?.value?.replace(/\D/g,'') || '';
+        const g = id => document.getElementById(id)?.value?.trim() || '';
+        const raw = g('supplierEmergencyTel').replace(/\D/g,'');
         const hours = document.querySelector('input[name="telHours"]:checked')?.value || '24_7';
-        if (!raw) return {};
-        // Format: (+90) 5xx xxx xx xx
         const d = raw.replace(/^90/,'').replace(/^0/,'');
         const fmt = d.length >= 10
           ? `(+90) ${d.slice(0,3)} ${d.slice(3,6)} ${d.slice(6,8)} ${d.slice(8,10)}`
-          : `(+90) ${d}`;
-        const hoursLabel = hours === '24_7'
-          ? '7 gün / 24 saat'
-          : 'Hafta içi 09:00–18:00';
-        return { emergency_tel: `${fmt} — ${hoursLabel}` };
+          : d ? `(+90) ${d}` : '';
+        const hoursLabel = hours === '24_7' ? '7 gün / 24 saat' : 'Hafta içi 09:00–18:00';
+        return {
+          name:          g('suppName'),
+          address:       g('suppAddress'),
+          phone:         g('suppPhone'),
+          email:         g('suppEmail'),
+          contact:       g('suppContact'),
+          emergency_tel: fmt ? `Tel: ${fmt} — ${hoursLabel}` : '',
+        };
       })(),
       components: comps.map(c => ({
         cas:      c.cas,

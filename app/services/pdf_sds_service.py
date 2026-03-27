@@ -598,7 +598,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     story += sub_block(f"1.1 {sub_title(lang,'1.1')}", styles)
 
     story.append(data_table([
-        [term(lang,'product_name'), Paragraph(f"<b>{product_name}</b>", styles['body'])],
+        [term(lang,'product_name'), Paragraph(f"<b>{product_name.upper()}</b>", styles['body'])],
         [term(lang,'product_code'), product.get('code','—')],
     ], [55*mm, 125*mm], styles, header=False))
     story.append(Spacer(1, 3))
@@ -610,9 +610,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     story.append(Spacer(1, 3))
 
     story += sub_block(f"1.3 {sub_title(lang,'1.3')}", styles)
+    def _up(v): return str(v).upper() if v and v != '—' else '—'
     story.append(data_table([
-        [term(lang,'manufacturer'), supplier.get('name','—')],
-        [term(lang,'address'),      supplier.get('address','—')],
+        [term(lang,'manufacturer'), _up(supplier.get('name','—'))],
+        [term(lang,'address'),      _up(supplier.get('address','—'))],
         [term(lang,'phone'),        supplier.get('phone','—')],
         [term(lang,'email'),        supplier.get('email','—')],
     ], [45*mm, 135*mm], styles, header=False))

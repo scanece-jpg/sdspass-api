@@ -1591,7 +1591,7 @@ async function generatePDF() {
           phone:         g('suppPhone'),
           email:         g('suppEmail'),
           contact:       g('suppContact'),
-          emergency_tel: fmt ? `Tel: ${fmt} — ${hoursLabel}` : '',
+          emergency_tel: fmt ? `${fmt} — ${hoursLabel}` : '',
         };
       })(),
       components: comps.map(c => ({

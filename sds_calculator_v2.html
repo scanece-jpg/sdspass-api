@@ -1450,21 +1450,18 @@ async function generatePDF() {
       });
     });
     const cutoffUsed = clp?.cutoffUsed || {};
-    // Fiziksel tehlike H kodları — CLP konsantrasyon eşiği yok, motor hesaplar
-    const PHYS_H = new Set(['H200','H201','H202','H203','H204','H205',
-      'H220','H221','H222','H223','H224','H225','H226','H228','H229',
-      'H230','H231','H240','H241','H242','H250','H251','H252',
-      'H260','H261','H270','H271','H272']);
     const clpPassed = allH.map(hc => {
       const cu = cutoffUsed[hc];
       let reason = '';
       if (cu) {
+        // SCL veya GCL eşiği geçildi
         reason = `${cu.source} ≥ %${cu.value}`;
-      } else if (PHYS_H.has(hc)) {
-        reason = 'Fiziksel tehlike — motor hesabı';
       } else if (CLP_CUTOFFS[hc] !== undefined) {
+        // Standart GCL — SCL bulunamadı
         reason = `GCL ≥ %${CLP_CUTOFFS[hc]}`;
       }
+      // Fiziksel tehlike H kodları (H224, H225 vb.) konsantrasyon eşiğine tabi değil →
+      // reason boş kalır, PDF'de '—' gösterilir
       return {
         h_code:      hc,
         h_class:     hClassMap[hc] || '',

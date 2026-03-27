@@ -327,7 +327,13 @@ const PhysicalEngine = (() => {
     if (userFP !== null && userFP !== undefined && !isNaN(userFP)) {
       return { result: clsFlamLiq(userFP, null), source:`Kullanıcı girişi (${userFP}°C)`, fp: userFP };
     }
-    let best = null, bestFP = null, trigger = null;
+
+    // CLP Annex I Tablo 2.6 — Toplamlı eşik yaklaşımı
+    // Her kategori için konsantrasyonları topla; birden fazla bileşen birlikte eşiği geçebilir
+    const catSum = { 1: 0, 2: 0, 3: 0 };
+    const catTriggers = { 1: [], 2: [], 3: [] };
+    const catFP = { 1: null, 2: null, 3: null };
+
     for (const c of comps) {
       const cas  = (c.cas || '').trim();
       const conc = parseFloat(c.concMax || c.conc) || 0;
@@ -336,15 +342,24 @@ const PhysicalEngine = (() => {
       const bp  = BP_DB[cas] !== undefined ? BP_DB[cas] : null;
       const cls = clsFlamLiq(fp, bp);
       if (!cls) continue;
-      const th = cls.cat <= 2 ? 1 : 10;
-      if (conc < th) continue;
-      if (!best || cls.cat < best.cat) { best = cls; bestFP = fp; trigger = { cas, name: c.name, conc, fp }; }
+      catSum[cls.cat]     = (catSum[cls.cat] || 0) + conc;
+      catFP[cls.cat]      = catFP[cls.cat] === null ? fp : Math.min(catFP[cls.cat], fp);
+      catTriggers[cls.cat].push({ cas, name: c.name, conc, fp });
     }
-    return {
-      result: best,
-      source: trigger ? `${trigger.name || trigger.cas} (%${trigger.conc}, FP=${trigger.fp}°C)` : null,
-      fp: bestFP,
-    };
+
+    // Eşik kontrolü: Cat.1 ≥ %1, Cat.2 ≥ %1, Cat.3 ≥ %10
+    const thresholds = { 1: 1, 2: 1, 3: 10 };
+    for (const cat of [1, 2, 3]) {
+      if (catSum[cat] >= thresholds[cat]) {
+        const triggers = catTriggers[cat];
+        const cls = cat === 1 ? { h:'H224', cat:1, label:'Flam. Liq. 1', signal:'Danger' }
+                  : cat === 2 ? { h:'H225', cat:2, label:'Flam. Liq. 2', signal:'Danger' }
+                              : { h:'H226', cat:3, label:'Flam. Liq. 3', signal:'Warning' };
+        const src = triggers.map(t => `${t.name||t.cas} (%${t.conc}, FP=${t.fp}°C)`).join(' + ');
+        return { result: cls, source: src, fp: catFP[cat] };
+      }
+    }
+    return { result: null, source: null, fp: null };
   }
 
   function calcAspTox(comps) {

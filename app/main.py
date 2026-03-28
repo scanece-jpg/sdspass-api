@@ -93,17 +93,37 @@ async def generate_pdf(data: dict = Body(...)):
             eco_result = {'sds_section_12': {}}
 
         # Bileşenler
-        mapped_comps = [
-            {
-                'cas_no':        c.get('cas', c.get('cas_no','')),
-                'name':          c.get('name',''),
-                'concentration': float(c.get('conc', c.get('concentration', 0)) or 0),
-                'hazards':       [{'h_class': h.get('h_class','')} for h in c.get('hazards',[])],
-                'ec_no':         c.get('ec_no',''),
-                'reach_no':      c.get('reach_no',''),
+        def _map_comp(c):
+            name = c.get('name', '')
+            # "%100'e tamamla" bileşeni — PDF'de standart metin
+            if name and 'mevzuata' in name.lower():
+                name = 'Mevzuata göre sınıflandırılmamıştır'
+            conc     = float(c.get('conc', c.get('concentration', 0)) or 0)
+            conc_min = c.get('conc_min')
+            conc_max = c.get('conc_max')
+            conc_str = c.get('conc_str', '').strip()
+            # conc_str yoksa conc_min/max'tan oluştur
+            if not conc_str and conc_min is not None and conc_max is not None:
+                lo = float(conc_min or 0)
+                hi = float(conc_max or 0)
+                if hi > 0 and hi != lo:
+                    conc_str = f'{lo}-{hi}'
+                elif hi > 0:
+                    conc_str = f'{hi}'
+                elif lo > 0:
+                    conc_str = f'{lo}'
+            return {
+                'cas_no':        c.get('cas', c.get('cas_no', '')),
+                'name':          name,
+                'concentration': conc,
+                'conc_str':      conc_str,
+                'conc_min':      conc_min,
+                'conc_max':      conc_max,
+                'hazards':       [{'h_class': h.get('h_class', '')} for h in c.get('hazards', [])],
+                'ec_no':         c.get('ec_no', ''),
+                'reach_no':      c.get('reach_no', ''),
             }
-            for c in components
-        ]
+        mapped_comps = [_map_comp(c) for c in components]
 
         # Revizyon tarihi
         import datetime
@@ -150,8 +170,10 @@ async def generate_pdf(data: dict = Body(...)):
 
         pdf_bytes = generate_sds_pdf(sds_data, lang=lang)
 
-        safe = ''.join(x if x.isalnum() or x in '-_' else '_'
-                       for x in product.get('name','SDS'))[:30]
+        _tr_map = str.maketrans('ıİğĞüÜşŞçÇöÖ', 'iIgGuUsScCoO')
+        _name_ascii = product.get('name', 'SDS').translate(_tr_map)
+        safe = ''.join(x if (x.isalnum() and x.isascii()) or x in '-_' else '_'
+                       for x in _name_ascii)[:30]
         rev_no = revision_in.get('no','1')
 
         return Response(

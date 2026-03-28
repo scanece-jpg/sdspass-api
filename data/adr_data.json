@@ -1898,7 +1898,7 @@
   },
   "UN1992": {
     "name": "FLAMMABLE LIQUID, TOXIC, N.O.S.",
-    "name_tr": "ALEVLENİR SIVI, ZEHİRLİ, B.N.O.",
+    "name_tr": "YANICI SIVI, TOKSİK, B.N.O.",
     "class": "3",
     "classification_code": "FT1",
     "packing_groups": {
@@ -1924,6 +1924,125 @@
         "kemler": "50",
         "tunnel": "E",
         "label": "5.1"
+      }
+    }
+  },
+  "UN2924": {
+    "name": "FLAMMABLE LIQUID, CORROSIVE, N.O.S.",
+    "name_tr": "YANICI SIVI, KOROZİF, B.N.O.",
+    "class": "3",
+    "classification_code": "FC",
+    "packing_groups": {
+      "I": {
+        "kemler": "338",
+        "tunnel": "B/D",
+        "label": "3+8"
+      },
+      "II": {
+        "kemler": "338",
+        "tunnel": "D/E",
+        "label": "3+8"
+      },
+      "III": {
+        "kemler": "38",
+        "tunnel": "E",
+        "label": "3+8"
+      }
+    }
+  },
+  "UN1954": {
+    "name": "COMPRESSED GAS, FLAMMABLE, N.O.S.",
+    "name_tr": "SIKIŞTIRIŞMIŞ GAZ, YANICI, B.N.O.",
+    "class": "2.1",
+    "classification_code": "F",
+    "packing_groups": {
+      "-": {
+        "kemler": "23",
+        "tunnel": "B/D",
+        "label": "2.1"
+      }
+    }
+  },
+  "UN3156": {
+    "name": "COMPRESSED GAS, OXIDIZING, N.O.S.",
+    "name_tr": "SIKIŞTIRIŞMIŞ GAZ, OKSİTLEYİCİ, B.N.O.",
+    "class": "2.2",
+    "classification_code": "O",
+    "packing_groups": {
+      "-": {
+        "kemler": "25",
+        "tunnel": "B/E",
+        "label": "2.2+5.1"
+      }
+    }
+  },
+  "UN2845": {
+    "name": "PYROPHORIC LIQUID, ORGANIC, N.O.S.",
+    "name_tr": "PİROFOR SIVI, ORGANİK, B.N.O.",
+    "class": "4.2",
+    "classification_code": "S2",
+    "packing_groups": {
+      "I": {
+        "kemler": "X333",
+        "tunnel": "B/E",
+        "label": "4.2"
+      }
+    }
+  },
+  "UN3088": {
+    "name": "SELF-HEATING SOLID, ORGANIC, N.O.S.",
+    "name_tr": "KENDİLİĞİNDEN ISINAN KATI, ORGANİK, B.N.O.",
+    "class": "4.2",
+    "classification_code": "S4",
+    "packing_groups": {
+      "II": {
+        "kemler": "40",
+        "tunnel": "E",
+        "label": "4.2"
+      },
+      "III": {
+        "kemler": "40",
+        "tunnel": "E",
+        "label": "4.2"
+      }
+    }
+  },
+  "UN3190": {
+    "name": "SELF-HEATING SOLID, INORGANIC, N.O.S.",
+    "name_tr": "KENDİLİĞİNDEN ISINAN KATI, İNORGANİK, B.N.O.",
+    "class": "4.2",
+    "classification_code": "S4",
+    "packing_groups": {
+      "III": {
+        "kemler": "40",
+        "tunnel": "E",
+        "label": "4.2"
+      }
+    }
+  },
+  "UN3105": {
+    "name": "ORGANIC PEROXIDE TYPE D, LIQUID",
+    "name_tr": "ORGANİK PEROKSİT, TİP D, SIVI",
+    "class": "5.2",
+    "classification_code": "P4",
+    "packing_groups": {
+      "-": {
+        "kemler": "539",
+        "tunnel": "B/E",
+        "label": "5.2"
+      }
+    }
+  },
+  "UN3109": {
+    "name": "ORGANIC PEROXIDE TYPE F, LIQUID",
+    "name_tr": "ORGANİK PEROKSİT, TİP F, SIVI",
+    "class": "5.2",
+    "classification_code": "P6",
+    "packing_groups": {
+      "-": {
+        "kemler": "59",
+        "tunnel": "E",
+        "label": "5.2"
       }
     }
   }

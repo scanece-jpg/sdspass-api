@@ -344,77 +344,135 @@ def get_h_stmt(code: str, lang: str) -> str:
 
 # ─── UN NUMARASI OTOMATİK TESPİTİ (ADR/RID Tablo A) ─────────────────────────
 def _auto_un(h_codes: list) -> dict | None:
-    """H kodlarından en kritik UN numarasını tespit et (ADR 2023)"""
-    # Önce adr_data.json'dan CAS bazlı arama yapılacak
-    # Bu fonksiyon sadece H kodu fallback için
+    """H kodlarından en kritik UN numarasını tespit et — ADR 2023 Tablo 2.1.3.10
+    Öncelik sırası: 1 > 5.2 > 4.2 > 4.3 > 2 > 5.1 > 6.1 > 3+8 > 6.1+8 > 3+6.1 > 3 > 8 > 9
+    Bu fonksiyon yalnızca frontend transport verisinin gelmediği fallback durumlar için çalışır.
+    """
+    h = set(h_codes)
 
-    # Patlayıcılar
-    if any(h in h_codes for h in ['H200','H201','H202','H203','H204']):
+    # ── Sınıf 1: Patlayıcı ───────────────────────────────────────────────────
+    if h & {'H200','H201','H202','H203','H204','H205'}:
         return {'un_no':'UN0000','shipping_name':'PATLAYICI MADDE — Uzman değerlendirmesi gerekli',
                 'hazard_class':'1','packing_group':'I','auto':True}
-    # Pirofor
-    if any(h in h_codes for h in ['H250','H251','H252']):
-        return {'un_no':'UN2845','shipping_name':'PIROFOR SIVI, ORGANİK, B.N.O.',
+
+    # ── Sınıf 5.2: Organik Peroksit ──────────────────────────────────────────
+    if 'H241' in h:
+        return {'un_no':'UN3105','shipping_name':'ORGANİK PEROKSİT, TİP D, E veya F, SIVI',
+                'hazard_class':'5.2','packing_group':None,
+                'note':'Tip belirlenmesi (A-G) gereklidir — uzman laboratuvarı','auto':True}
+    if 'H242' in h:
+        return {'un_no':'UN3109','shipping_name':'ORGANİK PEROKSİT, TİP F, SIVI',
+                'hazard_class':'5.2','packing_group':None,
+                'note':'Tip G ise taşımacılık düzenlemesi kapsamı dışındadır','auto':True}
+
+    # ── Sınıf 4.2: Pirofor / Kendiliğinden Isınan ────────────────────────────
+    if 'H250' in h:
+        return {'un_no':'UN2845','shipping_name':'PİROFOR SIVI, ORGANİK, B.N.O.',
                 'hazard_class':'4.2','packing_group':'I','auto':True}
-    # Su reaktif
-    if any(h in h_codes for h in ['H260','H261']):
-        return {'un_no':'UN3148','shipping_name':'SU İLE TEMKİFLİ SIVI, B.N.O.',
+    if 'H251' in h:
+        return {'un_no':'UN3088','shipping_name':'KENDİLİĞİNDEN ISINAN KATI, ORGANİK, B.N.O.',
+                'hazard_class':'4.2','packing_group':'II','auto':True}
+    if 'H252' in h:
+        return {'un_no':'UN3190','shipping_name':'KENDİLİĞİNDEN ISINAN KATI, ORGANİK, B.N.O.',
+                'hazard_class':'4.2','packing_group':'III','auto':True}
+
+    # ── Sınıf 4.3: Su ile Tepkiyen ───────────────────────────────────────────
+    if 'H260' in h:
+        return {'un_no':'UN3148','shipping_name':'SU İLE TEPKİYEN SIVI, B.N.O.',
+                'hazard_class':'4.3','packing_group':'I','auto':True}
+    if 'H261' in h:
+        return {'un_no':'UN3148','shipping_name':'SU İLE TEPKİYEN SIVI, B.N.O.',
                 'hazard_class':'4.3','packing_group':'II','auto':True}
-    # Oksitleyici gaz
-    if 'H270' in h_codes:
+
+    # ── Sınıf 2.2(O): Oksitleyici Gaz ───────────────────────────────────────
+    if 'H270' in h:
         return {'un_no':'UN3156','shipping_name':'SIKIŞTIRILMIŞ GAZ, OKSİTLEYİCİ, B.N.O.',
-                'hazard_class':'2','packing_group':'-','auto':True}
-    # Korozif + Oksitleyici (H314+H271/H272) — ADR 2023: UN3093, öncelik yüksek
-    if 'H314' in h_codes and 'H271' in h_codes:
-        return {'un_no':'UN3093','shipping_name':'KOROZİF SIVI, OKSİTLEYİCİ, B.N.O.',
-                'hazard_class':'8','sub_class':'5.1','packing_group':'I','auto':True}
-    if 'H314' in h_codes and 'H272' in h_codes:
-        return {'un_no':'UN3093','shipping_name':'KOROZİF SIVI, OKSİTLEYİCİ, B.N.O.',
-                'hazard_class':'8','sub_class':'5.1','packing_group':'II','auto':True}
-    # Toksik + alevlenir
-    if any(h in h_codes for h in ['H300','H310','H330']) and \
-       any(h in h_codes for h in ['H224','H225','H226']):
-        return {'un_no':'UN1992','shipping_name':'ALEVLENİR SIVI, TOKSİK, B.N.O.',
-                'hazard_class':'3','sub_class':'6.1','packing_group':'I','auto':True}
-    # Toksik + korozif
-    if 'H314' in h_codes and any(h in h_codes for h in ['H300','H310','H330']):
-        return {'un_no':'UN2927','shipping_name':'ZEHİRLİ SIVI, KOROZİF, ORGANİK, B.N.O.',
-                'hazard_class':'6.1','sub_class':'8','packing_group':'I','auto':True}
-    if 'H314' in h_codes and any(h in h_codes for h in ['H301','H311','H331']):
-        return {'un_no':'UN2927','shipping_name':'ZEHİRLİ SIVI, KOROZİF, ORGANİK, B.N.O.',
-                'hazard_class':'6.1','sub_class':'8','packing_group':'II','auto':True}
-    # Toksik
-    if any(h in h_codes for h in ['H300','H310','H330']):
-        return {'un_no':'UN2810','shipping_name':'ZEHİRLİ SIVI, ORGANİK, B.N.O.',
-                'hazard_class':'6.1','packing_group':'I','auto':True}
-    if any(h in h_codes for h in ['H301','H311','H331']):
-        return {'un_no':'UN2810','shipping_name':'ZEHİRLİ SIVI, ORGANİK, B.N.O.',
-                'hazard_class':'6.1','packing_group':'II','auto':True}
-    # Alevlenir sıvı — parlama noktasına göre
-    if 'H224' in h_codes:
-        return {'un_no':'UN1993','shipping_name':'ALEVLENİR SIVI, B.N.O.',
-                'hazard_class':'3','packing_group':'I','auto':True}
-    if 'H225' in h_codes:
-        return {'un_no':'UN1993','shipping_name':'ALEVLENİR SIVI, B.N.O.',
-                'hazard_class':'3','packing_group':'II','auto':True}
-    if 'H226' in h_codes:
-        return {'un_no':'UN1993','shipping_name':'ALEVLENİR SIVI, B.N.O.',
-                'hazard_class':'3','packing_group':'III','auto':True}
-    # Alevlenir katı
-    if 'H228' in h_codes:
-        return {'un_no':'UN1325','shipping_name':'YANICI KATI, ORGANİK, B.N.O.',
-                'hazard_class':'4.1','packing_group':'II','auto':True}
-    # Aşındırıcı (tek başına)
-    if 'H314' in h_codes:
-        return {'un_no':'UN1760','shipping_name':'KOROZİF SIVI, B.N.O.',
-                'hazard_class':'8','packing_group':'II','auto':True}
-    # Oksitleyici sıvı
-    if 'H271' in h_codes:
+                'hazard_class':'2.2','packing_group':None,'auto':True}
+
+    # ── Sınıf 2.1: Yanıcı Gaz ───────────────────────────────────────────────
+    if h & {'H220','H221'}:
+        return {'un_no':'UN1954','shipping_name':'YANICI GAZ, B.N.O.',
+                'hazard_class':'2.1','packing_group':None,
+                'note':'Maddeye özgü UN numarası varsa önceliklidir (ör. propan→UN1978)','auto':True}
+
+    # ── Sınıf 5.1: Oksitleyici Sıvı ─────────────────────────────────────────
+    if 'H271' in h:
         return {'un_no':'UN2912','shipping_name':'OKSİTLEYİCİ SIVI, B.N.O.',
                 'hazard_class':'5.1','packing_group':'I','auto':True}
-    if 'H272' in h_codes:
+    if 'H272' in h:
         return {'un_no':'UN3139','shipping_name':'OKSİTLEYİCİ SIVI, B.N.O.',
                 'hazard_class':'5.1','packing_group':'II','auto':True}
+
+    # ── Kombinasyon: Korozif + Oksitleyici → UN 3093 ─────────────────────────
+    if 'H314' in h and 'H271' in h:
+        return {'un_no':'UN3093','shipping_name':'KOROZİF SIVI, OKSİTLEYİCİ, B.N.O.',
+                'hazard_class':'8','sub_class':'5.1','packing_group':'I','auto':True}
+    if 'H314' in h and 'H272' in h:
+        return {'un_no':'UN3093','shipping_name':'KOROZİF SIVI, OKSİTLEYİCİ, B.N.O.',
+                'hazard_class':'8','sub_class':'5.1','packing_group':'II','auto':True}
+
+    # ── Kombinasyon: Yanıcı + Korozif → UN 2924 ──────────────────────────────
+    if 'H314' in h and 'H224' in h:
+        return {'un_no':'UN2924','shipping_name':'YANICI SIVI, KOROZİF, B.N.O.',
+                'hazard_class':'3','sub_class':'8','packing_group':'I','auto':True}
+    if 'H314' in h and 'H225' in h:
+        return {'un_no':'UN2924','shipping_name':'YANICI SIVI, KOROZİF, B.N.O.',
+                'hazard_class':'3','sub_class':'8','packing_group':'II','auto':True}
+    if 'H314' in h and 'H226' in h:
+        return {'un_no':'UN2924','shipping_name':'YANICI SIVI, KOROZİF, B.N.O.',
+                'hazard_class':'3','sub_class':'8','packing_group':'III','auto':True}
+
+    # ── Kombinasyon: Toksik + Korozif → UN 2927 ──────────────────────────────
+    if 'H314' in h and h & {'H300','H310','H330'}:
+        return {'un_no':'UN2927','shipping_name':'ZEHİRLİ SIVI, KOROZİF, ORGANİK, B.N.O.',
+                'hazard_class':'6.1','sub_class':'8','packing_group':'I','auto':True}
+    if 'H314' in h and h & {'H301','H311','H331'}:
+        return {'un_no':'UN2927','shipping_name':'ZEHİRLİ SIVI, KOROZİF, ORGANİK, B.N.O.',
+                'hazard_class':'6.1','sub_class':'8','packing_group':'II','auto':True}
+
+    # ── Kombinasyon: Yanıcı + Toksik → UN 1992 ───────────────────────────────
+    if h & {'H224','H225'} and h & {'H300','H310','H330'}:
+        return {'un_no':'UN1992','shipping_name':'YANICI SIVI, TOKSİK, B.N.O.',
+                'hazard_class':'3','sub_class':'6.1','packing_group':'I','auto':True}
+    if h & {'H224','H225'} and h & {'H301','H311','H331'}:
+        return {'un_no':'UN1992','shipping_name':'YANICI SIVI, TOKSİK, B.N.O.',
+                'hazard_class':'3','sub_class':'6.1','packing_group':'II','auto':True}
+
+    # ── Sınıf 6.1: Toksik (tekil) ────────────────────────────────────────────
+    if h & {'H300','H310','H330'}:
+        return {'un_no':'UN2810','shipping_name':'ZEHİRLİ SIVI, ORGANİK, B.N.O.',
+                'hazard_class':'6.1','packing_group':'I',
+                'note':'UN2810 organik için; inorganik → UN3287','auto':True}
+    if h & {'H301','H311','H331'}:
+        return {'un_no':'UN2810','shipping_name':'ZEHİRLİ SIVI, ORGANİK, B.N.O.',
+                'hazard_class':'6.1','packing_group':'II',
+                'note':'UN2810 organik için; inorganik → UN3287','auto':True}
+    if h & {'H302','H312','H332'}:
+        return {'un_no':'UN2810','shipping_name':'ZEHİRLİ SIVI, ORGANİK, B.N.O.',
+                'hazard_class':'6.1','packing_group':'III',
+                'note':'Akut toksisite Kat.4 — ADR kriterini sağlamıyorsa düzenlemeye tabi olmayabilir','auto':True}
+
+    # ── Sınıf 3: Yanıcı Sıvı ─────────────────────────────────────────────────
+    if 'H224' in h:
+        return {'un_no':'UN1993','shipping_name':'YANICI SIVI, B.N.O.',
+                'hazard_class':'3','packing_group':'I','auto':True}
+    if 'H225' in h:
+        return {'un_no':'UN1993','shipping_name':'YANICI SIVI, B.N.O.',
+                'hazard_class':'3','packing_group':'II','auto':True}
+    if 'H226' in h:
+        return {'un_no':'UN1993','shipping_name':'YANICI SIVI, B.N.O.',
+                'hazard_class':'3','packing_group':'III','auto':True}
+
+    # ── Sınıf 4.1: Yanıcı Katı ───────────────────────────────────────────────
+    if 'H228' in h:
+        return {'un_no':'UN1325','shipping_name':'YANICI KATI, ORGANİK, B.N.O.',
+                'hazard_class':'4.1','packing_group':'II','auto':True}
+
+    # ── Sınıf 8: Korozif (tek başına) ────────────────────────────────────────
+    if 'H314' in h:
+        return {'un_no':'UN1760','shipping_name':'KOROZİF SIVI, B.N.O.',
+                'hazard_class':'8','packing_group':'II',
+                'note':'Asidik inorganik→UN3264 | Bazik inorganik→UN3266 | Organik→UN1760','auto':True}
     # Çevre için tehlikeli (sadece)
     if any(h in h_codes for h in ['H400','H410','H411']):
         return {'un_no':'UN3082','shipping_name':'ÇEVRE İÇİN TEHLİKELİ MADDE, SIVI, B.N.O.',

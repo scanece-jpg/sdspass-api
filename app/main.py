@@ -194,7 +194,7 @@ async def generate_pdf(data: dict = Body(...)):
                 'signal_word': signal,
                 'passed': [
                     {'h_class': h.get('h_class',''), 'h_code': h.get('h_code',''),
-                     'reason': h.get('reason',''), 'cutoff_used': h.get('cutoff_used','')}
+                     'reason': _safe(h.get('reason','')), 'cutoff_used': _safe(h.get('cutoff_used',''))}
                     for h in data.get('clp_passed', [])
                 ],
             },

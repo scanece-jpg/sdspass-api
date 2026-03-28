@@ -427,16 +427,16 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
 <script>
   window.HAZARDDESK_API_URL = 'https://sdspass-api-3.onrender.com/api/v1/sds/pdf';
 </script>
-<script src="js/event-bus.js"></script>
-<script src="js/state-store.js"></script>
-<script src="js/engines/clp_engine.js"></script>
-<script src="js/engines/pcode_engine.js"></script>
-<script src="js/engines/eco_engine.js"></script>
-<script src="js/engines/stot_engine.js"></script>
-<script src="js/engines/euh_engine.js"></script>
-<script src="js/engines/transport_engine.js"></script>
-<script src="js/engines/ppe_engine.js"></script>
-<script src="js/engines/physical_engine.js"></script>
+<script src="js/event-bus.js?v=20250328"></script>
+<script src="js/state-store.js?v=20250328"></script>
+<script src="js/engines/clp_engine.js?v=20250328"></script>
+<script src="js/engines/pcode_engine.js?v=20250328"></script>
+<script src="js/engines/eco_engine.js?v=20250328"></script>
+<script src="js/engines/stot_engine.js?v=20250328"></script>
+<script src="js/engines/euh_engine.js?v=20250328"></script>
+<script src="js/engines/transport_engine.js?v=20250328"></script>
+<script src="js/engines/ppe_engine.js?v=20250328"></script>
+<script src="js/engines/physical_engine.js?v=20250328"></script>
 
 <script>
 // ══════════════════════════════════════════════════════════════════════════════
@@ -1685,11 +1685,34 @@ async function generatePDF() {
       const cu = cutoffUsed[hc];
       let reason = '';
       if (cu) {
-        reason = `${cu.source} ≥ %${cu.value}`;
+        // SCL varsa: bileşen konsantrasyonuna göre hangi kategori eşiği aşıldı?
+        // sclRaw'dan doğru eşiği bul (en yüksek c_min değeri aşılan)
+        let displayVal = cu.value;
+        let catLabel = '';
+        if (cu.source === 'SCL' && cu.cas) {
+          // cu.cas ile hangi bileşenin SCL verisi olduğunu bul
+          const compIdx = Object.keys(_sclMap).find(id => {
+            const cw = document.getElementById('cw' + id);
+            return cw && cw.querySelector('.ci')?.value?.trim() === cu.cas;
+          });
+          if (compIdx) {
+            const raw = (_sclRaw[compIdx] || []).filter(s => s.h_code === hc);
+            // Bileşenin konsantrasyonu
+            const concVal = parseFloat(document.getElementById('cmax' + compIdx)?.value
+                          || document.getElementById('cmin' + compIdx)?.value) || 0;
+            // Konsantrasyonun aştığı en yüksek eşik = doğru kategori
+            const matched = raw.filter(s => concVal >= (s.c_min || 0))
+                               .sort((a,b) => b.c_min - a.c_min)[0];
+            if (matched) {
+              displayVal = matched.c_min;
+              catLabel = matched.h_class ? ` (${matched.h_class})` : '';
+            }
+          }
+        }
+        reason = `${cu.source} >= %${displayVal}${catLabel}`;
       } else if (CLP_CUTOFFS[hc] !== undefined) {
-        reason = `GCL ≥ %${CLP_CUTOFFS[hc]}`;
+        reason = `GCL >= %${CLP_CUTOFFS[hc]}`;
       } else if (physReasonMap[hc]) {
-        // Fiziksel tehlike: parlama noktası / asp. toksisitesi kaynağı
         reason = physReasonMap[hc];
       }
       return {

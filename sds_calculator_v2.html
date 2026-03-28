@@ -507,9 +507,92 @@ function addComp(pf = {}) {
       <input type="hidden" class="kimax" id="cmax${id}" value="">
     </div>
     <div style="margin-top:8px">
-      <label>Tehlike Sınıfları <button class="add-chip-btn" onclick="showChipInput(${id})">+ Ekle</button></label>
+      <label>Tehlike Sınıfları <button class="add-chip-btn" onclick="toggleHazardPicker(${id})">+ Ekle</button></label>
       <div class="chip-area" id="chips${id}"></div>
       <input type="hidden" id="chipinput${id}" style="display:none">
+      <div id="hpicker${id}" style="display:none;margin-top:6px;background:var(--bg2);border:1px solid var(--border2);border-radius:8px;padding:10px;gap:6px;flex-direction:column" class="hpicker-box">
+        <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
+          <select id="hpsel${id}" style="flex:1;min-width:200px;padding:5px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:12px">
+            <option value="">— Tehlike sınıfı seçin —</option>
+            <optgroup label="Yanıcı Sıvılar">
+              <option value="Flam. Liq. 1|H224">H224 — Flam. Liq. 1 (Aşırı yanıcı sıvı)</option>
+              <option value="Flam. Liq. 2|H225">H225 — Flam. Liq. 2 (Çok kolay alevlenir sıvı)</option>
+              <option value="Flam. Liq. 3|H226">H226 — Flam. Liq. 3 (Yanıcı sıvı)</option>
+            </optgroup>
+            <optgroup label="Yanıcı Katılar / Aerosol">
+              <option value="Flam. Sol. 1|H228">H228 — Flam. Sol. 1 (Yanıcı katı)</option>
+              <option value="Flam. Aerosol 1|H222">H222 — Flam. Aerosol 1</option>
+              <option value="Flam. Aerosol 2|H223">H223 — Flam. Aerosol 2</option>
+            </optgroup>
+            <optgroup label="Oksitleyici / Patlayıcı">
+              <option value="Ox. Liq. 1|H271">H271 — Ox. Liq. 1 (Oksitleyici sıvı)</option>
+              <option value="Ox. Liq. 2|H272">H272 — Ox. Liq. 2</option>
+              <option value="Expl. 1.1|H201">H201 — Expl. 1.1 (Patlayıcı)</option>
+              <option value="Self-react. A|H240">H240 — Self-react. A (Kendiliğinden tepkimeli)</option>
+            </optgroup>
+            <optgroup label="Akut Toksisite">
+              <option value="Acute Tox. 1 (oral)|H300">H300 — Acute Tox. 1 oral (ölümcül)</option>
+              <option value="Acute Tox. 2 (oral)|H300">H300 — Acute Tox. 2 oral</option>
+              <option value="Acute Tox. 3 (oral)|H301">H301 — Acute Tox. 3 oral (toksik)</option>
+              <option value="Acute Tox. 4 (oral)|H302">H302 — Acute Tox. 4 oral (zararlı)</option>
+              <option value="Acute Tox. 1 (deri)|H310">H310 — Acute Tox. 1 deri (ölümcül)</option>
+              <option value="Acute Tox. 3 (deri)|H311">H311 — Acute Tox. 3 deri (toksik)</option>
+              <option value="Acute Tox. 4 (deri)|H312">H312 — Acute Tox. 4 deri (zararlı)</option>
+              <option value="Acute Tox. 1 (inhalasyon)|H330">H330 — Acute Tox. 1 inhal. (ölümcül)</option>
+              <option value="Acute Tox. 3 (inhalasyon)|H331">H331 — Acute Tox. 3 inhal. (toksik)</option>
+              <option value="Acute Tox. 4 (inhalasyon)|H332">H332 — Acute Tox. 4 inhal. (zararlı)</option>
+              <option value="Acute Tox. 1 (aspirasyon)|H304">H304 — Asp. Tox. 1 (aspirasyon tehlikesi)</option>
+            </optgroup>
+            <optgroup label="Deri / Göz">
+              <option value="Skin Corr. 1A|H314">H314 — Skin Corr. 1A (ciddi yanık)</option>
+              <option value="Skin Corr. 1B|H314">H314 — Skin Corr. 1B</option>
+              <option value="Skin Irrit. 2|H315">H315 — Skin Irrit. 2 (deri tahrişi)</option>
+              <option value="Skin Sens. 1|H317">H317 — Skin Sens. 1 (alerji)</option>
+              <option value="Eye Dam. 1|H318">H318 — Eye Dam. 1 (ciddi göz hasarı)</option>
+              <option value="Eye Irrit. 2|H319">H319 — Eye Irrit. 2 (göz tahrişi)</option>
+            </optgroup>
+            <optgroup label="Solunum / STOT">
+              <option value="Resp. Sens. 1|H334">H334 — Resp. Sens. 1 (solunum alerjeni)</option>
+              <option value="STOT SE 1|H370">H370 — STOT SE 1 (tek maruziyet organ hasarı)</option>
+              <option value="STOT SE 2|H371">H371 — STOT SE 2</option>
+              <option value="STOT SE 3|H335">H335 — STOT SE 3 (solunum yolu tahrişi)</option>
+              <option value="STOT SE 3 (narkoz)|H336">H336 — STOT SE 3 (uyuşturucu etki)</option>
+              <option value="STOT RE 1|H372">H372 — STOT RE 1 (tekrar maruziyet)</option>
+              <option value="STOT RE 2|H373">H373 — STOT RE 2</option>
+            </optgroup>
+            <optgroup label="CMR (Kanserojen / Mutajen / Üreme)">
+              <option value="Muta. 1A|H340">H340 — Muta. 1A (mutajen)</option>
+              <option value="Muta. 1B|H341">H341 — Muta. 1B</option>
+              <option value="Carc. 1A|H350">H350 — Carc. 1A (kanserojen)</option>
+              <option value="Carc. 1B|H351">H351 — Carc. 1B</option>
+              <option value="Repr. 1A|H360">H360 — Repr. 1A (üreme toksisitesi)</option>
+              <option value="Repr. 1B|H361">H361 — Repr. 1B</option>
+              <option value="Lact.|H362">H362 — Lact. (emzirme toksisitesi)</option>
+            </optgroup>
+            <optgroup label="Çevre">
+              <option value="Aquatic Acute 1|H400">H400 — Aquatic Acute 1 (çok toksik, akut)</option>
+              <option value="Aquatic Chronic 1|H410">H410 — Aquatic Chronic 1 (çok toksik, kronik)</option>
+              <option value="Aquatic Chronic 2|H411">H411 — Aquatic Chronic 2 (toksik, kronik)</option>
+              <option value="Aquatic Chronic 3|H412">H412 — Aquatic Chronic 3 (zararlı, kronik)</option>
+              <option value="Aquatic Chronic 4|H413">H413 — Aquatic Chronic 4</option>
+            </optgroup>
+            <optgroup label="Diğer">
+              <option value="Press. Gas|H280">H280 — Press. Gas (basınçlı gaz)</option>
+              <option value="Press. Gas (çözünmüş)|H281">H281 — Press. Gas çözünmüş</option>
+              <option value="Ozone|H420">H420 — Ozone (ozon tabakası zararı)</option>
+            </optgroup>
+          </select>
+          <button class="add-chip-btn" onclick="addChipFromPicker(${id})" style="white-space:nowrap">✓ Ekle</button>
+        </div>
+        <details style="margin-top:2px">
+          <summary style="font-size:11px;color:var(--text3);cursor:pointer">Manuel giriş (listede yoksa)</summary>
+          <div style="display:flex;gap:6px;margin-top:6px;flex-wrap:wrap;align-items:center">
+            <input type="text" id="hpmanual_hc${id}" placeholder="Tehlike sınıfı (örn: Skin Corr. 1A)" style="flex:2;min-width:150px;padding:5px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:12px">
+            <input type="text" id="hpmanual_code${id}" placeholder="H kodu (örn: H314)" style="width:110px;padding:5px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:12px;font-family:var(--mono)">
+            <button class="add-chip-btn" onclick="addChipManual(${id})" style="white-space:nowrap">✓ Manuel Ekle</button>
+          </div>
+        </details>
+      </div>
     </div>
     <div class="cw-row3" style="margin-top:8px">
       <div><label>EC No</label><input type="text" class="ec-input" id="ec${id}" placeholder="231-639-5"></div>
@@ -563,11 +646,31 @@ function addChip(id, hclass, hcode) {
   chips.appendChild(span);
 }
 
-function showChipInput(id) {
-  const hc = prompt('Tehlike sınıfı girin (örn: Skin Corr. 1A):');
-  if (!hc) return;
-  const hcode = prompt('H kodu girin (örn: H314):') || '';
-  addChip(id, hc.trim(), hcode.trim());
+function toggleHazardPicker(id) {
+  const box = document.getElementById('hpicker'+id);
+  if (!box) return;
+  const visible = box.style.display !== 'none';
+  box.style.display = visible ? 'none' : 'flex';
+}
+
+function addChipFromPicker(id) {
+  const sel = document.getElementById('hpsel'+id);
+  if (!sel || !sel.value) return;
+  const [hclass, hcode] = sel.value.split('|');
+  addChip(id, hclass, hcode);
+  sel.value = '';
+  // keep picker open so user can add more
+}
+
+function addChipManual(id) {
+  const hcEl   = document.getElementById('hpmanual_hc'+id);
+  const codeEl = document.getElementById('hpmanual_code'+id);
+  const hc   = hcEl?.value?.trim();
+  const code = codeEl?.value?.trim();
+  if (!hc && !code) return;
+  addChip(id, hc || code, code || hc);
+  if (hcEl)   hcEl.value   = '';
+  if (codeEl) codeEl.value = '';
 }
 
 // ── CAS Lookup — debounce ile otomatik tetikle ────────────────────────────────
@@ -645,9 +748,13 @@ async function onCas(id) {
       }
     }
 
-    // Seçili aralıkta dropdown'u yenile
-    const sel = document.getElementById('csel'+id);
-    if (sel && sel.value) onConcChange(id);
+    // CAS lookup tamamlandı — konsantrasyon alanında değer varsa refinement'ı yeniden kontrol et
+    // (race condition: kullanıcı konsantrasyonu CAS lookup'tan önce girdiyse SCL boştu)
+    const manField = document.getElementById('cmanual'+id);
+    if (manField && manField.value.trim()) {
+      // Kısa gecikme: chip'lerin DOM'a eklenmesini bekle
+      setTimeout(() => onManualConc(id), 50);
+    }
     EventBus.emit('SUBSTANCE_FOUND', { id, cas, ...data });
   } catch(e) { console.warn('[CAS lookup]', e); }
 }
@@ -689,15 +796,22 @@ function onManualConc(id) {
     // Hidden alanları güncelle
     document.getElementById('cmin'+id).value = parsed.lo;
     document.getElementById('cmax'+id).value = parsed.hi;
-    // Refinement panelini göster (SCL eşik kontrolü)
-    const cas = document.getElementById('ci'+id)?.value?.trim() || '';
+    // Refinement panelini göster — önce SCL, sonra GCL fallback
     const sclRaw = _sclRaw[id] || [];
-    const thresholds = findThresholdsFromSCL(parsed.lo, parsed.hi, sclRaw);
-    if (thresholds.length) {
-      showRefinementFromAPI(id, parsed.lo, parsed.hi, thresholds);
+    const sclThresholds = findThresholdsFromSCL(parsed.lo, parsed.hi, sclRaw);
+    if (sclThresholds.length) {
+      showRefinementFromAPI(id, parsed.lo, parsed.hi, sclThresholds);
     } else {
-      const crp = document.getElementById('crp'+id);
-      if (crp) crp.style.display = 'none';
+      // GCL — chip'lerden H kodlarını al ve genel eşikleri kontrol et
+      const chips = [...document.querySelectorAll(`#chips${id} .hchip`)];
+      const hazards = chips.map(c => ({ h_class: c.dataset.hc, h_code: c.dataset.code }));
+      const gclThresholds = findThresholds(parsed.lo, parsed.hi, hazards);
+      if (gclThresholds.length) {
+        showRefinement(id, parsed.lo, parsed.hi, gclThresholds);
+      } else {
+        const crp = document.getElementById('crp'+id);
+        if (crp) crp.style.display = 'none';
+      }
     }
     setTimeout(() => { manEl.style.borderColor = ''; }, 1500);
   }, 400);
@@ -869,132 +983,137 @@ function findThresholds(lo, hi, hazards) {
     .map(([thr, items]) => ({ thr, items }));
 }
 
+// ── Ortak yardımcı: H kodu badge'leri ────────────────────────────────────────
+function _hBadges(codes, danger = true) {
+  if (!codes.length) return `<span style="font-size:10px;color:var(--safe)">Sınıflandırılmamış</span>`;
+  const rgb = danger ? '255,107,107' : '0,229,176';
+  const clr = danger ? 'var(--danger)' : 'var(--safe)';
+  return codes.map(c =>
+    `<span style="display:inline-block;background:rgba(${rgb},.18);border:1px solid rgba(${rgb},.4);color:${clr};border-radius:3px;padding:1px 6px;font-size:10px;font-family:var(--mono);font-weight:700">${c}</span>`
+  ).join(' ');
+}
+
+// ── Ortak render: segment listesinden buton HTML'i üret ────────────────────────
+// Her segment: { lo, hi, hiExclusive, hcodes, classes, unclassified }
+function _renderSegments(id, segments) {
+  return segments.map((seg, idx) => {
+    const fmtLo = Math.round(seg.lo * 1000) / 1000;
+    const fmtHi = Math.round(seg.hi * 1000) / 1000;
+    const rangeLabel = seg.hiExclusive
+      ? `%${fmtLo} – <%${fmtHi}`
+      : `%${fmtLo} – %${fmtHi}`;
+    // saveConc için exclusive üst sınır → gerçek üst sınır - epsilon
+    const saveHi = seg.hiExclusive ? Math.round((seg.hi - 0.001) * 1000) / 1000 : seg.hi;
+    const danger  = !seg.unclassified && seg.hcodes.length > 0;
+    const borderCls = seg.unclassified ? 'safe-border' : idx === segments.length - 1 ? 'danger-border' : 'warn-border';
+    const clrVar  = seg.unclassified ? 'var(--safe)' : idx === segments.length - 1 ? 'var(--danger)' : 'var(--warn)';
+    const clsLabel = seg.unclassified ? 'Sınıflandırılmamış' : seg.classes.join(' / ') || 'Tehlike sınıfı uygulanır';
+    const badges  = _hBadges(seg.hcodes, danger);
+    return `<button class="crp-btn ${borderCls}" onclick="saveConc(${id},${seg.lo},${saveHi})">
+      <div style="font-size:12px;font-weight:800;color:${clrVar};margin-bottom:3px">${rangeLabel}</div>
+      <div style="font-size:10px;color:var(--text2);margin-bottom:3px">${clsLabel}</div>
+      <div>${badges}</div>
+    </button>`;
+  }).join('');
+}
+
 function showRefinement(id, lo, hi, thresholds) {
   const crp = document.getElementById('crp'+id);
-  if (!crp) return;
-  const { thr, items } = thresholds[0];
-  const hcodes = [...new Set(items.map(i => i.code))];
-  const labels = [...new Set(items.map(i => i.label.replace(' başlar','')))]
-    .join(', ');
+  if (!crp || !thresholds.length) return;
 
-  // Alt sub-aralık: lo % → (thr-epsilon) %  → tehlike sınıfı DEĞİŞMEZ
-  // Üst sub-aralık: thr % → hi %            → tehlike sınıfı DEĞİŞİR
-  const safeHi  = thr % 1 === 0 ? thr - 1 : Math.floor(thr);   // görsel üst sınır (tamsayı)
-  const dangerLo = thr;
+  // Tüm N+1 segmenti oluştur (GCL: her eşik yeni bir sınıf ekler)
+  const sorted = [...thresholds].sort((a, b) => a.thr - b.thr);
+  const segments = [];
 
-  const hcodeBadges = hcodes.map(c =>
-    `<span style="display:inline-block;background:rgba(255,107,107,.18);border:1px solid rgba(255,107,107,.4);color:var(--danger);border-radius:3px;padding:1px 6px;font-size:10px;font-family:var(--mono);font-weight:700">${c}</span>`
-  ).join(' ');
+  // İlk segment: lo → thr[0]  (bu H kodları henüz uygulanmıyor)
+  segments.push({ lo, hi: sorted[0].thr, hiExclusive: true, hcodes: [], classes: [], unclassified: true });
 
+  // Orta segmentler
+  for (let i = 0; i < sorted.length; i++) {
+    const segLo = sorted[i].thr;
+    const segHi = i + 1 < sorted.length ? sorted[i + 1].thr : hi;
+    const exclusive = i + 1 < sorted.length;
+    const hcodes = [...new Set(sorted.slice(0, i + 1).flatMap(t => t.items.map(x => x.code)))];
+    const classes = [...new Set(sorted.slice(0, i + 1).flatMap(t => t.items.map(x => x.label.replace(' başlar',''))))];
+    segments.push({ lo: segLo, hi: segHi, hiExclusive: exclusive, hcodes, classes, unclassified: false });
+  }
+
+  const eşikler = sorted.map(t => `%${t.thr}`).join(', ');
   crp.style.display = 'block';
   crp.innerHTML = `
     <div class="crp-head">
-      ⚠️ <b>Kritik eşik %${thr} bu aralığın içinde!</b>
-      <div style="font-size:10px;margin-top:3px;opacity:.85">
-        ${labels} — formulasyonunuz hangi aralığa giriyor?
-      </div>
+      ⚠️ <b>${sorted.length > 1 ? sorted.length + ' kritik eşik' : 'Kritik eşik %' + sorted[0].thr} bu aralığın içinde!</b>
+      <div style="font-size:10px;margin-top:3px;opacity:.85">Formulasyonunuz hangi aralığa giriyor?</div>
     </div>
-    <div style="padding:10px 10px 6px;background:var(--bg3);font-size:10px;color:var(--text3);border-bottom:1px solid var(--border)">
-      Lütfen formulasyonunuzun konsantrasyon aralığını seçin:
+    <div style="padding:6px 10px 4px;background:var(--bg3);font-size:10px;color:var(--text3);border-bottom:1px solid var(--border)">
+      Lütfen gerçek konsantrasyon aralığını seçin (eşik değerleri: ${eşikler}):
     </div>
-    <div class="crp-btns">
-      <button class="crp-btn safe-border" onclick="saveConc(${id},${lo},${thr}-0.001)">
-        <div style="font-size:13px;font-weight:800;color:var(--safe);margin-bottom:4px">
-          %${lo} – %${safeHi}
-        </div>
-        <div style="font-size:10px;color:var(--text2);margin-bottom:4px">Tehlikesiz aralık</div>
-        <div style="font-size:9px;color:var(--text3)">${hcodes.join(', ')} uygulanmaz</div>
-      </button>
-      <button class="crp-btn danger-border" onclick="saveConc(${id},${dangerLo},${hi})">
-        <div style="font-size:13px;font-weight:800;color:var(--danger);margin-bottom:4px">
-          %${dangerLo} – %${hi}
-        </div>
-        <div style="font-size:10px;color:var(--text2);margin-bottom:4px">Tehlike sınıfı değişir</div>
-        <div>${hcodeBadges}</div>
-      </button>
-    </div>
-    <div style="padding:6px 10px;font-size:9px;color:var(--text3);background:var(--bg3);border-top:1px solid var(--border)">
-      ℹ KKDİK Ek-2 / CLP (AT) 1272/2008 — eşik değeri %${thr}
+    <div class="crp-btns" style="flex-wrap:wrap">${_renderSegments(id, segments)}</div>
+    <div style="padding:5px 10px;font-size:9px;color:var(--text3);background:var(--bg3);border-top:1px solid var(--border)">
+      ℹ KKDİK Ek-2 / CLP (AT) 1272/2008 — GCL eşikleri
     </div>`;
 }
 
-// ── API'den gelen SCL/GCL eşiklerini göster ────────────────────────────────────
+// ── API'den gelen SCL eşiklerini göster (tüm segmentler) ─────────────────────
 function showRefinementFromAPI(id, lo, hi, thresholds) {
   const crp = document.getElementById('crp' + id);
   if (!crp || !thresholds.length) return;
 
-  // En kritik (en düşük) eşiği seç
-  const t = thresholds.reduce((min, x) => x.thr < min.thr ? x : min, thresholds[0]);
-  const thr = t.thr;
+  // Artan sırada sırala
+  const sorted = [...thresholds].sort((a, b) => a.thr - b.thr);
 
-  // Üst ("above") tarafa düşen H kodları ve sınıf etiketleri
-  const aboveHCodes  = (t.above?.h_codes  || []).filter(Boolean);
-  const aboveClasses = (t.above?.active_classes || []).filter(Boolean);
-  const belowHCodes  = (t.below?.h_codes  || []).filter(Boolean);
-  const belowClasses = (t.below?.active_classes || []).filter(Boolean);
+  // N+1 segment oluştur
+  const segments = [];
 
-  // H kodu badge'leri
-  const makeBadges = (codes, color) => codes.map(c =>
-    `<span style="display:inline-block;background:rgba(${color},.18);border:1px solid rgba(${color},.4);color:var(${color==='255,107,107'?'--danger':'--safe'});border-radius:3px;padding:1px 6px;font-size:10px;font-family:var(--mono);font-weight:700">${c}</span>`
-  ).join(' ');
+  // Segment 0: [lo, thr[0])  → below thr[0]
+  const first = sorted[0];
+  const firstBelow = (first.below?.active_classes || []).filter(Boolean);
+  const firstBelowH = (first.below?.h_codes || []).filter(Boolean);
+  segments.push({
+    lo, hi: first.thr, hiExclusive: true,
+    hcodes: firstBelowH, classes: firstBelow,
+    unclassified: firstBelowH.length === 0,
+  });
 
-  const dangerBadges = makeBadges(aboveHCodes, '255,107,107');
-  const safeBadges   = belowHCodes.length
-    ? makeBadges(belowHCodes, '0,229,176')
-    : `<span style="font-size:10px;color:var(--safe)">Sınıflandırılmamış</span>`;
+  // Segmentler 1..N-1: [thr[i], thr[i+1])
+  for (let i = 0; i < sorted.length - 1; i++) {
+    const t = sorted[i + 1]; // eşiğin "below" bilgisi bir sonraki eşiğin altındaki durumu
+    const cls  = (t.below?.active_classes || []).filter(Boolean);
+    const hcds = (t.below?.h_codes || []).filter(Boolean);
+    // Eğer below boşsa, bu katmanın above'unu kullan (SCL verisindeki tutarsızlık için fallback)
+    const useCls  = cls.length  ? cls  : (sorted[i].above?.active_classes || []).filter(Boolean);
+    const useHcds = hcds.length ? hcds : (sorted[i].above?.h_codes || []).filter(Boolean);
+    segments.push({
+      lo: sorted[i].thr, hi: t.thr, hiExclusive: true,
+      hcodes: useHcds, classes: useCls, unclassified: false,
+    });
+  }
 
-  // Görsel sınır değerleri
-  const safeHi   = thr % 1 === 0 ? thr - 1 : parseFloat(thr.toFixed(2));
-  const dangerLo = thr;
+  // Son segment: [thr[N-1], hi] → above thr[N-1]
+  const last = sorted[sorted.length - 1];
+  const lastAbove = (last.above?.active_classes || []).filter(Boolean);
+  const lastAboveH = (last.above?.h_codes || []).filter(Boolean);
+  segments.push({
+    lo: last.thr, hi, hiExclusive: false,
+    hcodes: lastAboveH, classes: lastAbove, unclassified: false,
+  });
 
-  // Soru metni: API'den geliyorsa kullan, yoksa default
-  const questionText = t.question
-    || `Formulasyonunuzun %${lo}–%${hi} aralığındaki konsantrasyonu %${thr} eşiğini geçiyor mu?`;
-
-  // Eşik kaynağı (SCL mi GCL mi)
-  const sourceNote = t.above?.source
-    ? `⚖ Kaynak: ${t.above.source}`
-    : `ℹ KKDİK Ek-2 / CLP (AT) 1272/2008 — kritik eşik %${thr}`;
+  const sourceNote = sorted[0].above?.source
+    ? `⚖ Kaynak: ${sorted[0].above.source}`
+    : `ℹ KKDİK Ek-2 / CLP (AT) 1272/2008 — SCL`;
+  const eşikler = sorted.map(t => `%${t.thr}`).join(', ');
 
   crp.style.display = 'block';
   crp.innerHTML = `
     <div class="crp-head">
-      ⚠️ <b>Kritik eşik %${thr} bu aralığın içinde!</b>
-      <div style="font-size:10px;margin-top:3px;opacity:.85">${questionText}</div>
+      ⚠️ <b>${sorted.length > 1 ? sorted.length + ' kritik SCL eşiği' : 'Kritik eşik %' + sorted[0].thr} bu aralığın içinde!</b>
+      <div style="font-size:10px;margin-top:3px;opacity:.85">Formulasyonunuzun gerçek konsantrasyon aralığını seçin:</div>
     </div>
-    <div style="padding:10px 10px 6px;background:var(--bg3);font-size:10px;color:var(--text3);border-bottom:1px solid var(--border)">
-      Lütfen formulasyonunuzun konsantrasyon aralığını seçin:
+    <div style="padding:6px 10px 4px;background:var(--bg3);font-size:10px;color:var(--text3);border-bottom:1px solid var(--border)">
+      Eşik değerleri: ${eşikler}
     </div>
-    <div class="crp-btns">
-      <button class="crp-btn safe-border" onclick="saveConc(${id},${lo},${safeHi})">
-        <div style="font-size:13px;font-weight:800;color:var(--safe);margin-bottom:4px">
-          %${lo} – %${safeHi}
-        </div>
-        <div style="font-size:10px;color:var(--text2);margin-bottom:4px">
-          ${belowClasses.length ? belowClasses.join(' / ') : 'Tehlikesiz aralık'}
-        </div>
-        <div>${safeBadges}</div>
-      </button>
-      <button class="crp-btn danger-border" onclick="saveConc(${id},${dangerLo},${hi})">
-        <div style="font-size:13px;font-weight:800;color:var(--danger);margin-bottom:4px">
-          %${dangerLo} – %${hi}
-        </div>
-        <div style="font-size:10px;color:var(--text2);margin-bottom:4px">
-          ${aboveClasses.length ? aboveClasses.join(' / ') : 'Tehlike sınıfı değişir'}
-        </div>
-        <div>${dangerBadges}</div>
-      </button>
-    </div>
-    ${thresholds.length > 1 ? `
-    <div style="padding:6px 10px;background:var(--bg3);border-top:1px solid var(--border)">
-      ${thresholds.slice(1).map(tx => {
-        const txHCodes = (tx.above?.h_codes||[]).join(', ');
-        return `<div style="font-size:9px;color:var(--text3);padding:2px 0">
-          ▶ %${tx.thr} eşiğinde de sınıf değişimi var${txHCodes?' ('+txHCodes+')':''}
-        </div>`;
-      }).join('')}
-    </div>` : ''}
-    <div style="padding:6px 10px;font-size:9px;color:var(--text3);background:var(--bg3);border-top:1px solid var(--border)">
+    <div class="crp-btns" style="flex-wrap:wrap">${_renderSegments(id, segments)}</div>
+    <div style="padding:5px 10px;font-size:9px;color:var(--text3);background:var(--bg3);border-top:1px solid var(--border)">
       ${sourceNote}
     </div>`;
 }
@@ -1002,11 +1121,16 @@ function showRefinementFromAPI(id, lo, hi, thresholds) {
 function saveConc(id, lo, hi) {
   document.getElementById('cmin'+id).value = lo;
   document.getElementById('cmax'+id).value = hi;
+  // Manuel input'u seçilen alt-aralıkla güncelle → PDF'de doğru değer görünsün
+  const manEl = document.getElementById('cmanual'+id);
+  if (manEl) {
+    const loR = Math.round(lo * 100) / 100;
+    const hiR = Math.round(hi * 100) / 100;
+    manEl.value = loR === hiR ? `${loR}` : `${loR}-${hiR}`;
+  }
   const crp = document.getElementById('crp'+id);
   if (crp) crp.style.display = 'none';
-  const sel = document.getElementById('csel'+id);
-  if (sel) sel.style.borderColor = 'var(--safe)';
-  setTimeout(() => { if(sel) sel.style.borderColor=''; }, 1500);
+  updateConcTotal();
 }
 
 // ── Bileşen okuyucu ───────────────────────────────────────────────────────────
@@ -1513,7 +1637,9 @@ async function generatePDF() {
   if (btn) { btn.textContent = '⏳ Oluşturuluyor...'; btn.disabled = true; }
 
   try {
-    const { allH, combinedSignal, transport, euh, phys, clp, comps, eco, ppe, pcodes } = _lastCalcState;
+    const { allH, combinedSignal, transport, euh, phys, clp, eco, ppe, pcodes } = _lastCalcState;
+    // Konsantrasyon seçimi sonradan değişmiş olabilir → DOM'dan taze oku
+    const comps = getComps();
     const productName = document.getElementById('productName')?.value?.trim() || 'Ürün';
     const form  = document.getElementById('pform')?.value  || 'liquid';
     const usage = document.getElementById('pusage')?.value || 'industrial';

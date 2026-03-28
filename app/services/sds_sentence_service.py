@@ -586,19 +586,84 @@ H_SENTENCES: Dict[str, Dict[int, str]] = {
 }
 
 # Bölüm 8 — KKE: H kodundan ekipman listesi
-H_TO_PPE: Dict[str, Dict] = {    'H330': {
+H_TO_PPE: Dict[str, Dict] = {
+    # ── Solunum Toksisitesi ───────────────────────────────────────────────────
+    'H330': {   # Kat.1-2 — ÖLÜMCÜL solunursa
         'resp':   'ABEK filtreli tam yüz maskesi veya SCBA (bağımsız solunum cihazı)',
         'gloves': 'Kimyasala dayanıklı eldiven',
+        'eyes':   'Kimyasal gözlük veya tam yüz koruyucu',
+    },
+    'H331': {   # Kat.3 — TOKSİK solunursa
+        'resp':   'Organik/inorganik gaz filtreli yarım veya tam yüz maskesi',
+        'gloves': 'Kimyasala dayanıklı eldiven',
         'eyes':   'Kimyasal gözlük',
-    },    'H225': {
+    },
+    'H332': {   # Kat.4 — zararlı solunursa
+        'resp':   'OEL aşılma riskinde P2/P3 filtreli toz maskesi veya gaz filtreli maske',
+        'gloves': 'Nitril eldiven',
+        'eyes':   'Güvenlik gözlüğü',
+    },
+    # ── Cilt Korozif / Aşındırıcı ────────────────────────────────────────────
+    'H314': {   # Kat.1A/1B/2 — cilt yanığı/göz hasarı
+        'resp':   'Buhar/aerosol oluşursa: ABEK filtreli maske veya ortama uygun solunum koruyucu',
+        'gloves': 'Kimyasala dayanıklı eldiven (nitril ≥0.4mm veya neopren/butil)',
+        'eyes':   'Kimyasal gözlük ve yüz siperi',
+        'body':   'Kimyasala dayanıklı koruyucu giysi ve çizme',
+    },
+    # ── Akut Toksisite — Deri ────────────────────────────────────────────────
+    'H310': {   # Kat.1-2 — ÖLÜMCÜL deri temasında
+        'resp':   'Buhar oluşursa SCBA veya ABEK filtreli tam yüz maskesi',
+        'gloves': 'Çift eldiven — kimyasala dayanıklı dış eldiven',
+        'eyes':   'Tam yüz koruyucu',
+        'body':   'Kimyasala dayanıklı tulum',
+    },
+    'H311': {   # Kat.3 — toksik deri temasında
+        'resp':   'Buhar/aerosol oluşursa uygun solunum koruyucu',
+        'gloves': 'Kimyasala dayanıklı eldiven',
+        'eyes':   'Kimyasal gözlük',
+    },
+    # ── Oksitleyici ──────────────────────────────────────────────────────────
+    'H271': {   # Kat.1 — yangın veya patlama yapabilir
+        'resp':   'SCBA veya ABEK-P3 filtreli tam yüz maskesi',
+        'gloves': 'Oksidana dayanıklı eldiven (butil veya neopren)',
+        'eyes':   'Kimyasal gözlük ve yüz siperi',
+        'body':   'Yanmaz/kimyasala dayanıklı koruyucu giysi',
+    },
+    'H272': {   # Kat.2-3 — yangını şiddetlendirebilir
+        'resp':   'OEL aşılma riskinde inorganik gaz filtreli yarım maske',
+        'gloves': 'Kimyasala dayanıklı eldiven (nitril veya neopren)',
+        'eyes':   'Kimyasal gözlük',
+    },
+    # ── Yanıcı Sıvı ──────────────────────────────────────────────────────────
+    'H225': {
         'resp':   'Organik buhar filtreli maske (konsantrasyona bağlı)',
         'gloves': 'Çözücüye dayanıklı eldiven',
         'eyes':   'Kimyasal gözlük',
         'body':   'Antistatik giysiler',
-    },    'H350': {
+    },
+    'H224': {
+        'resp':   'Organik buhar filtreli tam yüz maskesi',
+        'gloves': 'Çözücüye dayanıklı eldiven',
+        'eyes':   'Kimyasal gözlük',
+        'body':   'Antistatik ve kimyasala dayanıklı giysi',
+    },
+    # ── Karsinojen / Mutajen / Üreme Toksik ─────────────────────────────────
+    'H350': {
         'resp':   'HEPA + gaz filtreli solunum koruyucu (ALARA ilkesi)',
         'gloves': 'Kimyasala dayanıklı eldiven',
         'body':   'Koruyucu giysi',
+    },
+    'H340': {
+        'resp':   'P3 filtreli toz maskesi veya gaz filtreli solunum koruyucu',
+        'gloves': 'Kimyasala dayanıklı eldiven',
+        'body':   'Koruyucu giysi',
+    },
+    # ── Su Reaktif ───────────────────────────────────────────────────────────
+    'H260': {
+        'resp':   'Su geçirmez tam yüz maskesi — H2 gazı oluşabilir',
+        'gloves': 'Su geçirmez kimyasal koruyucu eldiven',
+        'eyes':   'Tam yüz koruyucu',
+        'body':   'Su geçirmez koruyucu giysi',
     },    'H241': {
         4: 'Yanık veya patlama yaralanması için acil tıbbi yardım alın.',
         5: 'Yangın veya patlama riski. Su spreyi veya CO₂ kullanın.',

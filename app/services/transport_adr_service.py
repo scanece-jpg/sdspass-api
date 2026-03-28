@@ -73,7 +73,7 @@ def get_adr_details(un_no: str, packing_group: str = 'II') -> dict:
         'name':                entry.get('name', ''),
         'name_tr':             entry.get('name_tr', ''),
         'class':               entry.get('class', '—'),
-        'classification_code': entry.get('classification_code', '—'),
+        'classification_code': pg_data.get('classification_code') or entry.get('classification_code', '—'),
         'kemler':              pg_data.get('kemler', '—'),
         'tunnel_code':         pg_data.get('tunnel', '—'),
         'label':               pg_data.get('label', entry.get('class', '—')),

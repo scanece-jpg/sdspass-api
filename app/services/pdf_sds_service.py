@@ -1472,10 +1472,11 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     ship_name = t_src.get('shipping_name', na)
     haz_class  = t_src.get('hazard_class', '—')
     sub_class  = t_src.get('sub_class', '') or ''
-    # Yan tehlike varsa "8 + 5.1" formatında göster
+    # Yan tehlike varsa "8 (5.1)" formatında göster — ADR/KKDİK Ek-2 standardı
+    # Parantez dışı = asli tehlike, parantez içi = yan tehlike
     if sub_class and sub_class not in haz_class:
-        haz_class = f"{haz_class} + {sub_class}"
-    # ADR veritabanından label ile doğrula (örn. "8+5.1")
+        haz_class = f"{haz_class} ({sub_class})"
+    # ADR veritabanından label ile doğrula
     pack_grp = t_src.get('packing_group', '—')
     # Çevre tehlikesi — H kodlarına göre otomatik tespit
     env_h_codes = {

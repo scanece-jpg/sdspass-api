@@ -8,17 +8,20 @@
       "I": {
         "kemler": "33",
         "tunnel": "B/D",
-        "label": "3"
+        "label": "3",
+        "classification_code": "F1"
       },
       "II": {
         "kemler": "33",
         "tunnel": "D/E",
-        "label": "3"
+        "label": "3",
+        "classification_code": "F1"
       },
       "III": {
         "kemler": "30",
         "tunnel": "D/E",
-        "label": "3"
+        "label": "3",
+        "classification_code": "F3"
       }
     },
     "special_provisions": [
@@ -126,7 +129,7 @@
       "II": {
         "kemler": "336",
         "tunnel": "C/D",
-        "label": "3+6.1"
+        "label": "3 (6.1)"
       }
     }
   },
@@ -139,17 +142,20 @@
       "I": {
         "kemler": "66",
         "tunnel": "C/D",
-        "label": "6.1"
+        "label": "6.1",
+        "classification_code": "T1"
       },
       "II": {
         "kemler": "60",
         "tunnel": "D/E",
-        "label": "6.1"
+        "label": "6.1",
+        "classification_code": "T2"
       },
       "III": {
         "kemler": "60",
         "tunnel": "E",
-        "label": "6.1"
+        "label": "6.1",
+        "classification_code": "T4"
       }
     }
   },
@@ -162,17 +168,20 @@
       "I": {
         "kemler": "88",
         "tunnel": "B/E",
-        "label": "8"
+        "label": "8",
+        "classification_code": "C1"
       },
       "II": {
         "kemler": "80",
         "tunnel": "E",
-        "label": "8"
+        "label": "8",
+        "classification_code": "C3"
       },
       "III": {
         "kemler": "80",
         "tunnel": "E",
-        "label": "8"
+        "label": "8",
+        "classification_code": "C9"
       }
     }
   },
@@ -216,7 +225,8 @@
       "II": {
         "kemler": "50",
         "tunnel": "D/E",
-        "label": "5.1"
+        "label": "5.1",
+        "classification_code": "O2"
       },
       "III": {
         "kemler": "50",
@@ -247,7 +257,8 @@
       "III": {
         "kemler": "90",
         "tunnel": "—",
-        "label": "9"
+        "label": "9",
+        "classification_code": "M6"
       }
     }
   },
@@ -469,7 +480,7 @@
       "II": {
         "kemler": "336",
         "tunnel": "C/D",
-        "label": "3+6.1"
+        "label": "3 (6.1)"
       }
     }
   },
@@ -500,12 +511,14 @@
       "I": {
         "kemler": "668",
         "tunnel": "C/D",
-        "label": "6.1+8"
+        "label": "6.1 (8)",
+        "classification_code": "TC1"
       },
       "II": {
         "kemler": "60",
         "tunnel": "D/E",
-        "label": "6.1+8"
+        "label": "6.1 (8)",
+        "classification_code": "TC2"
       }
     }
   },
@@ -686,7 +699,7 @@
       "I": {
         "kemler": "558",
         "tunnel": "B/D",
-        "label": "5.1+8"
+        "label": "5.1 (8)"
       }
     }
   },
@@ -699,7 +712,7 @@
       "II": {
         "kemler": "58",
         "tunnel": "B/D",
-        "label": "5.1+8"
+        "label": "5.1 (8)"
       }
     }
   },
@@ -938,7 +951,7 @@
       "II": {
         "kemler": "338",
         "tunnel_code": "B/D",
-        "label": "3+8"
+        "label": "3 (8)"
       }
     }
   },
@@ -1060,7 +1073,7 @@
       "II": {
         "kemler": "338",
         "tunnel_code": "B/D",
-        "label": "3+8"
+        "label": "3 (8)"
       }
     }
   },
@@ -1099,7 +1112,7 @@
       "II": {
         "kemler": "338",
         "tunnel_code": "B/D",
-        "label": "3+8"
+        "label": "3 (8)"
       }
     }
   },
@@ -1164,7 +1177,7 @@
       "II": {
         "kemler": "60",
         "tunnel_code": "D/E",
-        "label": "6.1+8"
+        "label": "6.1 (8)"
       }
     }
   },
@@ -1334,7 +1347,7 @@
       "II": {
         "kemler": "80",
         "tunnel_code": "E",
-        "label": "8+6.1"
+        "label": "8 (6.1)"
       }
     }
   },
@@ -1810,12 +1823,14 @@
       "I": {
         "kemler": "885",
         "tunnel": "B/E",
-        "label": "8+5.1"
+        "label": "8 (5.1)",
+        "classification_code": "CO1"
       },
       "II": {
         "kemler": "85",
         "tunnel": "E",
-        "label": "8+5.1"
+        "label": "8 (5.1)",
+        "classification_code": "CO2"
       }
     }
   },
@@ -1846,12 +1861,12 @@
       "I": {
         "kemler": "66",
         "tunnel": "C/D",
-        "label": "6.1+8"
+        "label": "6.1 (8)"
       },
       "II": {
         "kemler": "60",
         "tunnel": "D/E",
-        "label": "6.1+8"
+        "label": "6.1 (8)"
       }
     }
   },
@@ -1864,12 +1879,12 @@
       "I": {
         "kemler": "668",
         "tunnel": "C/D",
-        "label": "6.1+8"
+        "label": "6.1 (8)"
       },
       "II": {
         "kemler": "60",
         "tunnel": "D/E",
-        "label": "6.1+8"
+        "label": "6.1 (8)"
       }
     }
   },
@@ -1905,12 +1920,14 @@
       "I": {
         "kemler": "336",
         "tunnel": "B/D",
-        "label": "3+6.1"
+        "label": "3 (6.1)",
+        "classification_code": "FT1"
       },
       "II": {
         "kemler": "336",
         "tunnel": "D/E",
-        "label": "3+6.1"
+        "label": "3 (6.1)",
+        "classification_code": "FT1"
       }
     }
   },
@@ -1923,7 +1940,8 @@
       "I": {
         "kemler": "50",
         "tunnel": "E",
-        "label": "5.1"
+        "label": "5.1",
+        "classification_code": "O1"
       }
     }
   },
@@ -1936,17 +1954,20 @@
       "I": {
         "kemler": "338",
         "tunnel": "B/D",
-        "label": "3+8"
+        "label": "3 (8)",
+        "classification_code": "CF1"
       },
       "II": {
         "kemler": "338",
         "tunnel": "D/E",
-        "label": "3+8"
+        "label": "3 (8)",
+        "classification_code": "CF2"
       },
       "III": {
         "kemler": "38",
         "tunnel": "E",
-        "label": "3+8"
+        "label": "3 (8)",
+        "classification_code": "CF2"
       }
     }
   },

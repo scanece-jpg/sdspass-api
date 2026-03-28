@@ -63,28 +63,63 @@ const PCodeEngine = (() => {
     'P403+P233':   ['P233'],
   };
 
-  // Etiket öncelik puanı (yüksek = önce seçilir)
-  // Fiziksel tehlike > Hayati sağlık > Organ/Kronik > Genel önlem > Bertaraf
+  // ── Etiket öncelik puanı (yüksek = önce seçilir) ────────────────────────────
+  // Kaynak: CLP Annex IV Not 3 — tehlike şiddeti öncelik sırası
+  // Fiziksel tehlike > Akut hayat tehlikesi > Akut sağlık > Kronik > Önlem > Bertaraf
   const LABEL_PRIORITY = {
-    'P210':100, 'P233':90,                         // Yanıcılık — en kritik
-    'P301+P310':95, 'P331':90,                     // Yutma + kusturma
-    'P304+P340':88, 'P310':85,                     // Solunum + acil
-    'P308+P313':80,                                // CMR / üreme
-    'P303+P361+P353':78, 'P370+P378':75,           // Yangın müdahale
-    'P260':70, 'P271':68,                          // Solunumdan kaçın
-    'P280':65,                                     // KKD giy
-    'P305+P351+P338':60, 'P337+P313':55,           // Göz
-    'P302+P352':50, 'P332+P313':45,                // Deri
-    'P403+P235':40,                                // Serin/havalandırılmış
-    'P264':35, 'P270':33,                          // Yıkama / yeme/içme yok
-    'P273':30,                                     // Sucul — çevreye verme
-    'P501':10,                                     // Bertaraf — en düşük
+    // ── Yangın / Patlama (Fiziksel — en kritik) ──────────────────────────────
+    'P210': 100,                   // Tutuşma kaynağından uzak tut
+    'P220': 97,                    // Oksitleyici — yanıcılardan uzak tut
+    'P370+P378': 95,               // Yangın müdahale
+    'P306+P360': 94,               // Giysiye temas — hemen durula
+
+    // ── Akut hayati müdahale ──────────────────────────────────────────────────
+    'P301+P310': 93,               // Yutulursa → derhal ara (H300/H301)
+    'P301+P330+P331': 92,          // Yutulursa → ağzı çalkala, kusturma (H314 korozif)
+    'P310': 90,                    // Derhal ZEHİR MERKEZİ ara
+    'P311': 88,                    // ZEHİR MERKEZİ ara
+    'P331': 87,                    // Kusturmayın (korozif)
+    'P304+P340': 86,               // Solunursa → temiz havaya çık
+    'P342+P311': 85,               // Solunum belirtisi → ara
+    'P308+P313': 83,               // CMR/üreme toksik — maruz kalırsa
+
+    // ── Cilt / Göz müdahale ───────────────────────────────────────────────────
+    'P303+P361+P353': 80,          // Cilde/saça temas → hemen çıkar, duş al
+    'P305+P351+P338': 78,          // Göze temas → su ile yıka
+    'P302+P350': 75,               // Cilt temas → sabunla yıka (H310)
+    'P302+P352': 72,               // Cilt temas → su ile yıka
+    'P337+P313': 68,               // Göz tahrişi devam → doktor
+
+    // ── Önleyici — kritik ─────────────────────────────────────────────────────
+    'P260': 70,                    // Solunum koruma — mutlak
+    'P221': 67,                    // Oksitleyici — yanıcı karışımı önle
+    'P280': 65,                    // KKD giy
+    'P284': 63,                    // Solunum cihazı
+    'P271': 60,                    // Açık hava / iyi havalandırma
+    'P201': 58,                    // CMR — talimat al
+    'P202': 57,                    // CMR — oku anla
+
+    // ── Depolama / Saklama ────────────────────────────────────────────────────
+    'P403+P235': 45,               // Serin + havalandırılmış
+    'P403+P233': 44,               // Havalandırılmış + kapalı kap
+    'P405': 42,                    // Kilitli sakla
+    'P233': 40,                    // Kabı kapalı tut
+
+    // ── Genel / Hijyen ────────────────────────────────────────────────────────
+    'P264': 35,                    // Kullanım sonrası yıka
+    'P270': 33,                    // Yeme/içme/sigara yok
+    'P273': 30,                    // Çevreye verme
+
+    // ── Bertaraf ─────────────────────────────────────────────────────────────
+    'P501': 10,                    // İmha
   };
 
-  // Birbirini tamamlayan çiftler — birini alırsan diğerini de al
+  // ── Birbirini tamamlayan çiftler — biri seçilirse diğeri de eklenir ─────────
   const PAIRS = [
-    ['P301+P310', 'P331'],   // Yuttuysan → kusturma
-    ['P304+P340', 'P310'],   // Nefes aldıysa → acil
+    ['P301+P310',      'P331'],            // H300/H301: yuttuysan → kusturma
+    ['P301+P330+P331', 'P310'],            // H314: korozif yutma → derhal ara
+    ['P304+P340',      'P310'],            // Solunum → acil
+    ['P303+P361+P353', 'P305+P351+P338'], // Cilt temas → göz de kontrol et
   ];
 
   const P_CATEGORIES = { 1:'general', 2:'prevention', 3:'response', 4:'storage', 5:'disposal' };

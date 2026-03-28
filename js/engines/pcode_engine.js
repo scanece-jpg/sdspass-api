@@ -14,7 +14,7 @@ const PCodeEngine = (() => {
     'H226':['P210','P233','P280','P370+P378','P403+P235','P501'],
     'H228':['P210','P240','P241','P280','P370+P378','P501'],
     'H271':['P210','P220','P280','P306+P360','P370+P378','P405','P501'],
-    'H272':['P210','P220','P280','P370+P378','P501'],
+    'H272':['P210','P220','P221','P280','P370+P378','P501'],
     'H300':['P264','P270','P301+P310','P321','P330','P405','P501'],
     'H301':['P264','P270','P301+P310','P321','P330','P405','P501'],
     'H302':['P264','P270','P301+P312','P330','P501'],
@@ -53,11 +53,14 @@ const PCodeEngine = (() => {
 
   // Geçersiz kılma: güçlü kod varsa zayıfları sil (SEA / CLP Annex III)
   const SUPERSEDES = {
-    'P310':  ['P311','P312'],
-    'P260':  ['P261'],
-    'P271':  ['P261'],
-    'P301+P310': ['P301+P312'],
-    'P314':  ['P312'],
+    // P310 (derhal ara) daha güçlü — zayıf acil kodlarını ezer
+    'P310':        ['P311','P312','P301+P312'],   // H314+H302: P310+P301+P330+P331 kalır
+    'P301+P310':   ['P301+P312'],                 // Doğrudan P301+P310 varsa da ezer
+    'P260':        ['P261'],                       // Tam solunumdan kaçın > kısmen kaçın
+    'P271':        ['P261'],                       // Açık hava > az soluma
+    'P314':        ['P312'],                       // Tıbbi yardım al > hissetmiyorsan ara
+    // P403+P233 varsa ayrı P233 gereksiz (aynı bilgi kombine formda)
+    'P403+P233':   ['P233'],
   };
 
   // Etiket öncelik puanı (yüksek = önce seçilir)

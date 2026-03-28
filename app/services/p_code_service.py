@@ -247,7 +247,7 @@ H_TO_P: Dict[str, List[str]] = {
     # ── Oksitleyici ───────────────────────────────────────────────────────────
     'H271': ['P210','P220','P221','P280','P283',
              'P306+P360','P370+P378','P405','P501'],
-    'H272': ['P210','P220','P221','P280','P370+P378','P501'],
+    'H272': ['P210','P220','P221','P280','P370+P378','P501'],   # P221 zorunlu (CLP Annex III)
 
     # ── Yanıcı Katı ───────────────────────────────────────────────────────────
     'H228': ['P210','P240','P241','P280','P370+P378','P501'],
@@ -292,12 +292,17 @@ H_TO_P: Dict[str, List[str]] = {
 # ─── P KODU ÇAKIŞMA KURALLARI ────────────────────────────────────────────────
 # Daha güçlü P kodu varsa zayıfı çıkar
 P_SUPERSEDES: Dict[str, List[str]] = {
-    'P310': ['P311', 'P312'],      # P310 varsa P311, P312 gereksiz
-    'P301+P310': ['P301+P312'],
-    'P304+P340': ['P304+P341'],    # P340 daha kapsamlı
+    # P310 (derhal ara) daha güçlü — P311/P312 ve P301+P312 kombine kodunu da ezer
+    # H314+H302 kombinasyonunda: P310 gelir (H314'ten), P301+P312 silinir (H302'den)
+    # Sonuç: P301+P330+P331 + P310 kalır → korozif yutma için doğru
+    'P310':           ['P311', 'P312', 'P301+P312'],
+    'P301+P310':      ['P301+P312'],
+    'P304+P340':      ['P304+P341'],    # P340 daha kapsamlı
     'P305+P351+P338': [],
-    'P260': ['P261'],              # P260 (solunum) daha güçlü
-    'P271': ['P261'],
+    'P260':           ['P261'],         # P260 (solunum) daha güçlü
+    'P271':           ['P261'],
+    # P403+P233 varsa ayrı P233 gereksiz
+    'P403+P233':      ['P233'],
 }
 
 
@@ -537,6 +542,8 @@ P_SDS_PRIORITY: Dict[str, str] = {
     'P371+P380+P375': 'mandatory',
     # ── MUTLAKA YAZ (Prevention — kritik) ────────────────────
     'P210':           'mandatory',   # Yanıcı — tutuşma kaynağı
+    'P220':           'mandatory',   # Oksitleyici — yanıcılardan uzak tut (CLP Annex III H271/H272)
+    'P221':           'evaluate',    # Oksitleyici — yanıcılarla karışımı önle
     'P260':           'mandatory',   # Solunum koruma
     'P273':           'mandatory',   # Çevre — salınım
     'P280':           'mandatory',   # KKE
@@ -571,7 +578,7 @@ P_SDS_PRIORITY: Dict[str, str] = {
     'P410+P403':      'evaluate',
     'P402+P404':      'evaluate',
     # ── OPSİYONEL ────────────────────────────────────────────
-    'P264':           'optional',    # El yıkama — aşikar
+    'P264':           'evaluate',    # El yıkama — aşikar değil, korozif/toksik ürünlerde SEA zorunlu
     'P314':           'optional',    # Hissetmiyorsan — genel
     'P501':           'optional',    # İmha — yasal zorunlu ama aşikar
     'P502':           'optional',    # Geri dönüşüm

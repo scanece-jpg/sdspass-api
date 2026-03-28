@@ -6,6 +6,7 @@ DB gerektirmez, sadece PDF üretimi + madde lookup
 from fastapi import FastAPI, Body, Response, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 import sys, os
 
 # Data yolu — deploy'da /app/data, lokalde /home/claude
@@ -42,6 +43,13 @@ async def serve_frontend():
     """SDS Hesaplama arayüzü"""
     html_path = os.path.join(os.path.dirname(__file__), '..', 'static', 'index.html')
     return FileResponse(html_path, media_type="text/html")
+
+
+# ─── STATIC DOSYALAR (js/ klasörü) ────────────────────────────────────────────
+_BASE = os.path.join(os.path.dirname(__file__), '..')
+_JS_DIR = os.path.abspath(os.path.join(_BASE, 'js'))
+if os.path.exists(_JS_DIR):
+    app.mount("/js", StaticFiles(directory=_JS_DIR), name="js")
 
 
 # ─── PDF ENDPOINT ─────────────────────────────────────────────────────────────

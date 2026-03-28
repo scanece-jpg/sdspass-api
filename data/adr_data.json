@@ -132,7 +132,7 @@
   },
   "UN2810": {
     "name": "TOXIC LIQUID, ORGANIC, N.O.S.",
-    "name_tr": "TOKSİK SIVI, ORGANİK, B.N.O.",
+    "name_tr": "ZEHİRLİ SIVI, ORGANİK, B.N.O.",
     "class": "6.1",
     "classification_code": "T1",
     "packing_groups": {
@@ -213,11 +213,6 @@
     "class": "5.1",
     "classification_code": "O2",
     "packing_groups": {
-      "I": {
-        "kemler": "58",
-        "tunnel": "B/D",
-        "label": "5.1"
-      },
       "II": {
         "kemler": "50",
         "tunnel": "D/E",
@@ -498,7 +493,7 @@
   },
   "UN2927": {
     "name": "TOXIC LIQUID, CORROSIVE, ORGANIC, N.O.S.",
-    "name_tr": "TOKSİK SIVI, KOROZİF, ORGANİK, B.N.O.",
+    "name_tr": "ZEHİRLİ SIVI, KOROZİF, ORGANİK, B.N.O.",
     "class": "6.1",
     "classification_code": "TC1",
     "packing_groups": {
@@ -650,11 +645,11 @@
     "name": "OXIDIZING SOLID, N.O.S.",
     "name_tr": "OKSİTLEYİCİ KATI, B.N.O.",
     "class": "5.1",
-    "classification_code": "O1",
+    "classification_code": "O2",
     "packing_groups": {
       "I": {
-        "kemler": "59",
-        "tunnel": "B/D",
+        "kemler": "50",
+        "tunnel": "D/E",
         "label": "5.1"
       },
       "II": {
@@ -1680,23 +1675,23 @@
   },
   "UN3264": {
     "name": "CORROSIVE LIQUID, ACIDIC, INORGANIC, N.O.S.",
-    "name_tr": "KOROZİF SIVI, ASİDİK, ANORGANİK, B.N.O.",
+    "name_tr": "KOROZİF SIVI, ASİDİK, İNORGANİK, B.N.O.",
     "class": "8",
     "classification_code": "C1",
     "packing_groups": {
       "I": {
         "kemler": "88",
-        "tunnel_code": "B/E",
+        "tunnel": "B/E",
         "label": "8"
       },
       "II": {
         "kemler": "80",
-        "tunnel_code": "E",
+        "tunnel": "E",
         "label": "8"
       },
       "III": {
         "kemler": "80",
-        "tunnel_code": "E",
+        "tunnel": "E",
         "label": "8"
       }
     }
@@ -1709,40 +1704,40 @@
     "packing_groups": {
       "I": {
         "kemler": "88",
-        "tunnel_code": "B/E",
+        "tunnel": "B/E",
         "label": "8"
       },
       "II": {
         "kemler": "80",
-        "tunnel_code": "E",
+        "tunnel": "E",
         "label": "8"
       },
       "III": {
         "kemler": "80",
-        "tunnel_code": "E",
+        "tunnel": "E",
         "label": "8"
       }
     }
   },
   "UN3266": {
     "name": "CORROSIVE LIQUID, BASIC, INORGANIC, N.O.S.",
-    "name_tr": "KOROZİF SIVI, BAZİK, ANORGANİK, B.N.O.",
+    "name_tr": "KOROZİF SIVI, BAZİK, İNORGANİK, B.N.O.",
     "class": "8",
     "classification_code": "C5",
     "packing_groups": {
       "I": {
         "kemler": "88",
-        "tunnel_code": "B/E",
+        "tunnel": "B/E",
         "label": "8"
       },
       "II": {
         "kemler": "80",
-        "tunnel_code": "E",
+        "tunnel": "E",
         "label": "8"
       },
       "III": {
         "kemler": "80",
-        "tunnel_code": "E",
+        "tunnel": "E",
         "label": "8"
       }
     }
@@ -1753,19 +1748,14 @@
     "class": "8",
     "classification_code": "C7",
     "packing_groups": {
-      "I": {
-        "kemler": "88",
-        "tunnel_code": "B/E",
-        "label": "8"
-      },
       "II": {
         "kemler": "80",
-        "tunnel_code": "E",
+        "tunnel": "E",
         "label": "8"
       },
       "III": {
         "kemler": "80",
-        "tunnel_code": "E",
+        "tunnel": "E",
         "label": "8"
       }
     }
@@ -1808,6 +1798,132 @@
         "kemler": "90",
         "tunnel_code": "—",
         "label": "9"
+      }
+    }
+  },
+  "UN3093": {
+    "name": "CORROSIVE LIQUID, OXIDIZING, N.O.S.",
+    "name_tr": "KOROZİF SIVI, OKSİTLEYİCİ, B.N.O.",
+    "class": "8",
+    "classification_code": "CO1",
+    "packing_groups": {
+      "I": {
+        "kemler": "885",
+        "tunnel": "B/E",
+        "label": "8+5.1"
+      },
+      "II": {
+        "kemler": "85",
+        "tunnel": "E",
+        "label": "8+5.1"
+      }
+    }
+  },
+  "UN3094": {
+    "name": "CORROSIVE LIQUID, WATER-REACTIVE, N.O.S.",
+    "name_tr": "KOROZİF SIVI, SU İLE TEPKİYEN, B.N.O.",
+    "class": "8",
+    "classification_code": "CW1",
+    "packing_groups": {
+      "I": {
+        "kemler": "X88",
+        "tunnel": "B/E",
+        "label": "8+4.3"
+      },
+      "II": {
+        "kemler": "X80",
+        "tunnel": "E",
+        "label": "8+4.3"
+      }
+    }
+  },
+  "UN2928": {
+    "name": "TOXIC SOLID, CORROSIVE, ORGANIC, N.O.S.",
+    "name_tr": "ZEHİRLİ KATI, KOROZİF, ORGANİK, B.N.O.",
+    "class": "6.1",
+    "classification_code": "TC2",
+    "packing_groups": {
+      "I": {
+        "kemler": "66",
+        "tunnel": "C/D",
+        "label": "6.1+8"
+      },
+      "II": {
+        "kemler": "60",
+        "tunnel": "D/E",
+        "label": "6.1+8"
+      }
+    }
+  },
+  "UN3289": {
+    "name": "TOXIC LIQUID, CORROSIVE, INORGANIC, N.O.S.",
+    "name_tr": "ZEHİRLİ SIVI, KOROZİF, İNORGANİK, B.N.O.",
+    "class": "6.1",
+    "classification_code": "TC1",
+    "packing_groups": {
+      "I": {
+        "kemler": "668",
+        "tunnel": "C/D",
+        "label": "6.1+8"
+      },
+      "II": {
+        "kemler": "60",
+        "tunnel": "D/E",
+        "label": "6.1+8"
+      }
+    }
+  },
+  "UN3287": {
+    "name": "TOXIC LIQUID, INORGANIC, N.O.S.",
+    "name_tr": "ZEHİRLİ SIVI, İNORGANİK, B.N.O.",
+    "class": "6.1",
+    "classification_code": "T4",
+    "packing_groups": {
+      "I": {
+        "kemler": "66",
+        "tunnel": "C/D",
+        "label": "6.1"
+      },
+      "II": {
+        "kemler": "60",
+        "tunnel": "D/E",
+        "label": "6.1"
+      },
+      "III": {
+        "kemler": "60",
+        "tunnel": "E",
+        "label": "6.1"
+      }
+    }
+  },
+  "UN1992": {
+    "name": "FLAMMABLE LIQUID, TOXIC, N.O.S.",
+    "name_tr": "ALEVLENİR SIVI, ZEHİRLİ, B.N.O.",
+    "class": "3",
+    "classification_code": "FT1",
+    "packing_groups": {
+      "I": {
+        "kemler": "336",
+        "tunnel": "B/D",
+        "label": "3+6.1"
+      },
+      "II": {
+        "kemler": "336",
+        "tunnel": "D/E",
+        "label": "3+6.1"
+      }
+    }
+  },
+  "UN2912": {
+    "name": "RADIOACTIVE MATERIAL, LOW SPECIFIC ACTIVITY (LSA-I)",
+    "name_tr": "OKSİTLEYİCİ SIVI, B.N.O.",
+    "class": "5.1",
+    "classification_code": "O1",
+    "packing_groups": {
+      "I": {
+        "kemler": "50",
+        "tunnel": "E",
+        "label": "5.1"
       }
     }
   }

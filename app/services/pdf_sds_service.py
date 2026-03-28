@@ -364,38 +364,56 @@ def _auto_un(h_codes: list) -> dict | None:
     if 'H270' in h_codes:
         return {'un_no':'UN3156','shipping_name':'SIKIŞTIRILMIŞ GAZ, OKSİTLEYİCİ, B.N.O.',
                 'hazard_class':'2','packing_group':'-','auto':True}
+    # Korozif + Oksitleyici (H314+H271/H272) — ADR 2023: UN3093, öncelik yüksek
+    if 'H314' in h_codes and 'H271' in h_codes:
+        return {'un_no':'UN3093','shipping_name':'KOROZİF SIVI, OKSİTLEYİCİ, B.N.O.',
+                'hazard_class':'8','sub_class':'5.1','packing_group':'I','auto':True}
+    if 'H314' in h_codes and 'H272' in h_codes:
+        return {'un_no':'UN3093','shipping_name':'KOROZİF SIVI, OKSİTLEYİCİ, B.N.O.',
+                'hazard_class':'8','sub_class':'5.1','packing_group':'II','auto':True}
     # Toksik + alevlenir
-    if any(h in h_codes for h in ['H300','H310','H330']) and        any(h in h_codes for h in ['H224','H225','H226']):
+    if any(h in h_codes for h in ['H300','H310','H330']) and \
+       any(h in h_codes for h in ['H224','H225','H226']):
         return {'un_no':'UN1992','shipping_name':'ALEVLENİR SIVI, TOKSİK, B.N.O.',
-                'hazard_class':'3','packing_group':'I','auto':True}
+                'hazard_class':'3','sub_class':'6.1','packing_group':'I','auto':True}
+    # Toksik + korozif
+    if 'H314' in h_codes and any(h in h_codes for h in ['H300','H310','H330']):
+        return {'un_no':'UN2927','shipping_name':'ZEHİRLİ SIVI, KOROZİF, ORGANİK, B.N.O.',
+                'hazard_class':'6.1','sub_class':'8','packing_group':'I','auto':True}
+    if 'H314' in h_codes and any(h in h_codes for h in ['H301','H311','H331']):
+        return {'un_no':'UN2927','shipping_name':'ZEHİRLİ SIVI, KOROZİF, ORGANİK, B.N.O.',
+                'hazard_class':'6.1','sub_class':'8','packing_group':'II','auto':True}
     # Toksik
     if any(h in h_codes for h in ['H300','H310','H330']):
-        return {'un_no':'UN2810','shipping_name':'TOKSİK SIVI, ORGANİK, B.N.O.',
+        return {'un_no':'UN2810','shipping_name':'ZEHİRLİ SIVI, ORGANİK, B.N.O.',
                 'hazard_class':'6.1','packing_group':'I','auto':True}
     if any(h in h_codes for h in ['H301','H311','H331']):
-        return {'un_no':'UN2810','shipping_name':'TOKSİK SIVI, ORGANİK, B.N.O.',
+        return {'un_no':'UN2810','shipping_name':'ZEHİRLİ SIVI, ORGANİK, B.N.O.',
                 'hazard_class':'6.1','packing_group':'II','auto':True}
     # Alevlenir sıvı — parlama noktasına göre
     if 'H224' in h_codes:
-        return {'un_no':'UN1993','shipping_name':'ALEVLENİR SIVI, B.N.O. (FLAMMABLE LIQUID, N.O.S.)',
+        return {'un_no':'UN1993','shipping_name':'ALEVLENİR SIVI, B.N.O.',
                 'hazard_class':'3','packing_group':'I','auto':True}
     if 'H225' in h_codes:
-        return {'un_no':'UN1993','shipping_name':'ALEVLENİR SIVI, B.N.O. (FLAMMABLE LIQUID, N.O.S.)',
+        return {'un_no':'UN1993','shipping_name':'ALEVLENİR SIVI, B.N.O.',
                 'hazard_class':'3','packing_group':'II','auto':True}
     if 'H226' in h_codes:
-        return {'un_no':'UN1993','shipping_name':'ALEVLENİR SIVI, B.N.O. (FLAMMABLE LIQUID, N.O.S.)',
+        return {'un_no':'UN1993','shipping_name':'ALEVLENİR SIVI, B.N.O.',
                 'hazard_class':'3','packing_group':'III','auto':True}
     # Alevlenir katı
     if 'H228' in h_codes:
         return {'un_no':'UN1325','shipping_name':'YANICI KATI, ORGANİK, B.N.O.',
                 'hazard_class':'4.1','packing_group':'II','auto':True}
-    # Aşındırıcı
+    # Aşındırıcı (tek başına)
     if 'H314' in h_codes:
         return {'un_no':'UN1760','shipping_name':'KOROZİF SIVI, B.N.O.',
                 'hazard_class':'8','packing_group':'II','auto':True}
-    # Oksitleyici katı
-    if any(h in h_codes for h in ['H271','H272']):
-        return {'un_no':'UN1479','shipping_name':'OKSİTLEYİCİ KATI, B.N.O.',
+    # Oksitleyici sıvı
+    if 'H271' in h_codes:
+        return {'un_no':'UN2912','shipping_name':'OKSİTLEYİCİ SIVI, B.N.O.',
+                'hazard_class':'5.1','packing_group':'I','auto':True}
+    if 'H272' in h_codes:
+        return {'un_no':'UN3139','shipping_name':'OKSİTLEYİCİ SIVI, B.N.O.',
                 'hazard_class':'5.1','packing_group':'II','auto':True}
     # Çevre için tehlikeli (sadece)
     if any(h in h_codes for h in ['H400','H410','H411']):
@@ -1394,7 +1412,12 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     t_src = transport if transport.get('un_no') else (auto_t or {})
     un_no = t_src.get('un_no', '—')
     ship_name = t_src.get('shipping_name', na)
-    haz_class = t_src.get('hazard_class', '—')
+    haz_class  = t_src.get('hazard_class', '—')
+    sub_class  = t_src.get('sub_class', '') or ''
+    # Yan tehlike varsa "8 + 5.1" formatında göster
+    if sub_class and sub_class not in haz_class:
+        haz_class = f"{haz_class} + {sub_class}"
+    # ADR veritabanından label ile doğrula (örn. "8+5.1")
     pack_grp = t_src.get('packing_group', '—')
     # Çevre tehlikesi — H kodlarına göre otomatik tespit
     env_h_codes = {

@@ -108,9 +108,38 @@ async def generate_pdf(data: dict = Body(...)):
         except Exception:
             eco_result = {'sds_section_12': {}}
 
+        # ── PDF için Unicode → ASCII güvenli metin dönüşümü ──────────────────────
+        # Avrupa kaynaklı DB'lerde (ECHA, CLP Annex VI) "…", "≤", "≥" karakterleri
+        # sık geçer. DejaVu font yüklenemezse Helvetica fallback → WinAnsiEncoding
+        # bu karakterleri karşılamaz ve UTF-8 byte'ları Latin-1 olarak görünür.
+        _UNICODE_SAFE = str.maketrans({
+            '\u2026': '...',   # … → ...
+            '\u2264': '<=',    # ≤ → <=
+            '\u2265': '>=',    # ≥ → >=
+            '\u2248': '~',     # ≈ → ~
+            '\u00b1': '+/-',   # ± → +/-
+            '\u00d7': 'x',     # × → x
+            '\u00f7': '/',     # ÷ → /
+            '\u2013': '-',     # – → -
+            '\u2014': '-',     # — → -
+            '\u2018': "'",     # ' → '
+            '\u2019': "'",     # ' → '
+            '\u201c': '"',     # " → "
+            '\u201d': '"',     # " → "
+            '\u00b5': 'u',     # µ → u
+            '\u00b0': 'C',     # ° → C (derece sembolü için)
+            '\u00b2': '2',     # ² → 2
+            '\u00b3': '3',     # ³ → 3
+        })
+        def _safe(text: str) -> str:
+            """PDF için güvenli metin — sorunlu Unicode karakterleri ASCII'ye çevir"""
+            if not text:
+                return text
+            return text.translate(_UNICODE_SAFE)
+
         # Bileşenler
         def _map_comp(c):
-            name = c.get('name', '')
+            name = _safe(c.get('name', ''))
             # "%100'e tamamla" bileşeni — PDF'de standart metin
             if name and 'mevzuata' in name.lower():
                 name = 'Mevzuata göre sınıflandırılmamıştır'
@@ -147,15 +176,15 @@ async def generate_pdf(data: dict = Body(...)):
 
         sds_data = {
             'product': {
-                'name':       product.get('name', 'Product'),
-                'code':       product.get('code', ''),
+                'name':       _safe(product.get('name', 'Product')),
+                'code':       _safe(product.get('code', '')),
                 'form':       product.get('form', 'liquid'),
-                'usage':      usage,
-                'usage_desc': product.get('usage_desc'),
+                'usage':      _safe(usage),
+                'usage_desc': _safe(product.get('usage_desc') or ''),
             },
             'supplier': {
-                'name':          supplier_in.get('name', ''),
-                'address':       supplier_in.get('address', ''),
+                'name':          _safe(supplier_in.get('name', '')),
+                'address':       _safe(supplier_in.get('address', '')),
                 'phone':         supplier_in.get('phone', ''),
                 'email':         supplier_in.get('email', ''),
                 'emergency_tel': supplier_in.get('emergency_tel', ''),

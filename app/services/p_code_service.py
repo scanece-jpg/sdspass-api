@@ -488,10 +488,11 @@ def select_label_p_codes(all_p_codes: List[str], max_codes: int = 6) -> Dict:
             for weak in SUPERSEDE_LABEL.get(code, []):
                 excluded_by_supersede.add(weak)
 
-    # Sıralı final liste
+    # Tehlike şiddetine göre sırala (yüksek öncelik önce) — CLP Annex IV Not 3
     selected = sorted(
         list(selected_set),
-        key=lambda p: (p.split('+')[0])
+        key=lambda p: P_LABEL_PRIORITY.get(p, 5),
+        reverse=True
     )
     excluded = [p for p in candidates if p not in selected_set]
 
@@ -598,12 +599,17 @@ def classify_sds_p_codes(p_codes: List[str]) -> Dict:
     """
     P kodlarını SDS'e yazılma önceliğine göre sınıflandır.
     CLP Annex IV Not 3 — üretici/KDU seçim yapabilir.
+    Her grup içi sıralama: tehlike şiddetine göre (yüksek önce).
     """
     groups = {'mandatory': [], 'evaluate': [], 'optional': []}
 
     for code in p_codes:
         priority = P_SDS_PRIORITY.get(code, 'evaluate')  # Bilinmeyenler evaluate
         groups[priority].append(code)
+
+    # Her grup içinde şiddet sırası — P_LABEL_PRIORITY kullan
+    for grp in groups:
+        groups[grp].sort(key=lambda p: P_LABEL_PRIORITY.get(p, 5), reverse=True)
 
     total_mandatory = len(groups['mandatory'])
     total_evaluate = len(groups['evaluate'])

@@ -846,23 +846,27 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 text = get_euh(lang, code, substance)
             story.append(Paragraph(f"• <b>{code}:</b> {text}", styles['bullet']))
 
-    # P ifadeleri (etiket - maks 6)
+    # P ifadeleri (etiket - maks 6) — tehlike şiddetine göre sıralı
     label_p = p_data.get('label', {})
     if label_p.get('selected'):
         story.append(Spacer(1, 3))
         story.append(Paragraph(f"<b>{label_term(lang,'precaut_stmts')}:</b>",
                                styles['body_bold']))
-        from app.services.p_code_service import P_COMBOS, P_TEXTS
-        for code in label_p['selected']:
+        from app.services.p_code_service import P_COMBOS, P_TEXTS, P_LABEL_PRIORITY
+        # Etiket kodları şiddet sırasına göre göster (en kritik önce)
+        label_codes_sorted = sorted(
+            label_p['selected'],
+            key=lambda p: P_LABEL_PRIORITY.get(p, 5),
+            reverse=True
+        )
+        for code in label_codes_sorted:
             txt = get_p(lang, code) or P_COMBOS.get(code) or P_TEXTS.get(code, code)
             story.append(Paragraph(f"• <b>{code}:</b> {txt}", styles['bullet']))
         mandatory = label_p.get('mandatory', [])
         if mandatory:
-            story.append(Paragraph(
-                f"• {' + '.join(mandatory)}: " +
-                ('Keep out of reach of children.' if 'P102' in mandatory else ''),
-                styles['bullet']
-            ))
+            for m in mandatory:
+                txt = get_p(lang, m) or P_TEXTS.get(m, m)
+                story.append(Paragraph(f"• <b>{m}:</b> {txt}", styles['bullet']))
 
     story += sub_block(f"2.3 {sub_title(lang,'2.3')}", styles)
     # PBT/vPvB
@@ -1620,7 +1624,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             f"<b>{S(lang,'precaut_full')}:</b>",
             styles['body_bold']
         ))
-        from app.services.p_code_service import P_COMBOS, P_TEXTS, classify_sds_p_codes
+        from app.services.p_code_service import P_COMBOS, P_TEXTS, P_LABEL_PRIORITY, classify_sds_p_codes
         sds_cls = classify_sds_p_codes(p_data['p_codes'])
         for grp_key, icon, lbl in [
             ('mandatory','✓',S(lang,'mandatory_label')),
@@ -1630,7 +1634,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             codes = sds_cls['groups'].get(grp_key, [])
             if codes:
                 story.append(Paragraph(f"<b>{icon} {lbl}:</b>", styles['small']))
-                for code in codes:
+                # Grup içi şiddet sırası (yüksek önce)
+                codes_sorted = sorted(codes, key=lambda p: P_LABEL_PRIORITY.get(p, 5), reverse=True)
+                for code in codes_sorted:
                     txt = get_p(lang, code) or P_COMBOS.get(code) or P_TEXTS.get(code, code)
                     story.append(Paragraph(f"  {code}: {txt}", styles['small']))
 

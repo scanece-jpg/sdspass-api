@@ -21,6 +21,7 @@ const TransportEngine = (() => {
 
   // ── Kombinasyon kuralları — ADR Tablo 2.1.3.10 öncelik sırası ──────────────
   // Çoklu tehlike varlığında ÖNCE bu kombinasyonlar kontrol edilir
+  // ÖNEMLİ: Daha spesifik/yüksek öncelikli kurallar ÖNCE gelmelidir
   const COMBO_RULES = [
     // Patlayıcı her şeyin önünde
     {
@@ -28,6 +29,24 @@ const TransportEngine = (() => {
       un:'UN 0000*', class:'1', pg:null,
       label:'Patlayıcı',
       note:'UN numarası maddeye özgü belirlenir; patlayıcı sınıfı tüm yan tehlikeleri ezer',
+    },
+    // Korozif + Oksitleyici (Kat.1) — ADR: UN 3093
+    // NOT: Bu kural Toksik+Korozif kuralından ÖNCE gelmeli; oksitleyici özellik belirleyicidir
+    {
+      must:['H314'], any:['H271'],
+      un:'UN 3093', class:'8', pg:'I',
+      label:'Korozif Sıvı, Oksitleyici, B.N.O.',
+      sub_class:'5.1',
+      note:'ADR 2023: H314 + H271 kombinasyonu — yan tehlike Sınıf 5.1',
+    },
+    // Korozif + Oksitleyici (Kat.2-3) — ADR: UN 3093
+    // NOT: HNO3 karışımları (H314+H272+H331) buraya düşmeli — UN 3093 doğru
+    {
+      must:['H314'], any:['H272'],
+      un:'UN 3093', class:'8', pg:'II',
+      label:'Korozif Sıvı, Oksitleyici, B.N.O.',
+      sub_class:'5.1',
+      note:'ADR 2023: H314 + H272 kombinasyonu — yan tehlike Sınıf 5.1',
     },
     // Toksik (Kat.1-2) + Korozif — ADR Tablo 3.1: UN 2927 / UN 2928
     {
@@ -44,22 +63,6 @@ const TransportEngine = (() => {
       label:'Zehirli Sıvı, Korozif, Organik B.N.O.',
       sub_class:'8',
       note:'Organik yapı için UN 2927; inorganik yapı için UN 3289 kullanın',
-    },
-    // Korozif + Oksitleyici (Kat.1) — ADR: UN 3093
-    {
-      must:['H314'], any:['H271'],
-      un:'UN 3093', class:'8', pg:'I',
-      label:'Korozif Sıvı, Oksitleyici, B.N.O.',
-      sub_class:'5.1',
-      note:'ADR 2023: H314 + H271 kombinasyonu — yan tehlike Sınıf 5.1',
-    },
-    // Korozif + Oksitleyici (Kat.2-3) — ADR: UN 3093
-    {
-      must:['H314'], any:['H272'],
-      un:'UN 3093', class:'8', pg:'II',
-      label:'Korozif Sıvı, Oksitleyici, B.N.O.',
-      sub_class:'5.1',
-      note:'ADR 2023: H314 + H272 kombinasyonu — yan tehlike Sınıf 5.1',
     },
     // Yanıcı + Toksik (Kat.1-2) — Öncelik tabloya göre değişir; yan tehlike belirt
     {

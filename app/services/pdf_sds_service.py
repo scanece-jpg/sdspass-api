@@ -44,20 +44,53 @@ from reportlab.pdfbase.ttfonts import TTFont
 import os
 
 def _register_fonts():
-    """DejaVu Sans — 12 dil Unicode desteği"""
-    base = '/usr/share/fonts/truetype/dejavu/'
-    fonts = [
-        ('DejaVuSans',          base + 'DejaVuSans.ttf'),
-        ('DejaVuSans-Bold',     base + 'DejaVuSans-Bold.ttf'),
-        ('DejaVuSans-Oblique',  base + 'DejaVuSans-Oblique.ttf'),
-        ('DejaVuSansMono',      base + 'DejaVuSansMono.ttf'),
-        ('DejaVuSansMono-Bold', base + 'DejaVuSansMono-Bold.ttf'),
+    """DejaVu Sans — 12 dil Unicode desteği (TR/PL/RO/BG/CZ/HR vs.)
+
+    Font arama sırası:
+    1. Uygulama ile gelen fonts/ klasörü (Render.com için güvenilir)
+    2. Linux sistem klasörü (/usr/share/fonts/truetype/dejavu/)
+    3. Debian/Ubuntu alternatif yollar
+    """
+    # Olası font dizinleri — önce yerel, sonra sistem
+    _THIS_DIR = os.path.dirname(os.path.abspath(__file__))
+    _APP_ROOT  = os.path.dirname(os.path.dirname(_THIS_DIR))  # proje kökü
+    candidates = [
+        os.path.join(_APP_ROOT, 'fonts'),                        # /app/fonts/
+        os.path.join(_THIS_DIR, 'fonts'),                        # app/services/fonts/
+        '/usr/share/fonts/truetype/dejavu',                      # Debian/Ubuntu standart
+        '/usr/share/fonts/dejavu',                               # bazı dağıtımlar
+        '/usr/share/fonts/truetype/ttf-dejavu',                  # eski Ubuntu
+        '/usr/local/share/fonts/truetype/dejavu',                # manuel kurulum
     ]
-    for name, path in fonts:
-        if name not in pdfmetrics.getRegisteredFontNames():
+
+    font_files = {
+        'DejaVuSans':          'DejaVuSans.ttf',
+        'DejaVuSans-Bold':     'DejaVuSans-Bold.ttf',
+        'DejaVuSans-Oblique':  'DejaVuSans-Oblique.ttf',
+        'DejaVuSansMono':      'DejaVuSansMono.ttf',
+        'DejaVuSansMono-Bold': 'DejaVuSansMono-Bold.ttf',
+    }
+
+    registered = 0
+    for name, fname in font_files.items():
+        if name in pdfmetrics.getRegisteredFontNames():
+            registered += 1
+            continue
+        for base in candidates:
+            path = os.path.join(base, fname)
             if os.path.exists(path):
-                pdfmetrics.registerFont(TTFont(name, path))
-    
+                try:
+                    pdfmetrics.registerFont(TTFont(name, path))
+                    registered += 1
+                    break
+                except Exception as e:
+                    print(f'[Font] {name} kayıt hatası ({path}): {e}')
+
+    if registered == 0:
+        print('[Font] UYARI: DejaVu fontları bulunamadı — Helvetica kullanılacak (Unicode desteği sınırlı)')
+    else:
+        print(f'[Font] {registered}/{len(font_files)} DejaVu fontu kayıt edildi')
+
     # Font ailesi tanımla (bold/italic otomatik seçim için)
     from reportlab.pdfbase.pdfmetrics import registerFontFamily
     try:

@@ -5,6 +5,7 @@ DB gerektirmez, sadece PDF üretimi + madde lookup
 
 from fastapi import FastAPI, Body, Response, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
 import sys, os
 
 # Data yolu — deploy'da /app/data, lokalde /home/claude
@@ -34,6 +35,13 @@ app.add_middleware(
 @app.get("/health")
 async def health():
     return {"status": "ok", "service": "HazardDesk PDF API"}
+
+
+@app.get("/")
+async def serve_frontend():
+    """SDS Hesaplama arayüzü"""
+    html_path = os.path.join(os.path.dirname(__file__), '..', 'static', 'index.html')
+    return FileResponse(html_path, media_type="text/html")
 
 
 # ─── PDF ENDPOINT ─────────────────────────────────────────────────────────────

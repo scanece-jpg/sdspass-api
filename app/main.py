@@ -137,6 +137,31 @@ async def generate_pdf(data: dict = Body(...)):
                 return text
             return text.translate(_UNICODE_SAFE)
 
+        # Transport verisi dönüştürme: frontend {road,sea,air} → backend {un_no, ...}
+        def _map_transport(t: dict) -> dict:
+            """Frontend TransportEngine çıktısını PDF servisinin beklediği formata çevirir.
+            Frontend: { road:{un, class, pg, label, ...}, sea:{...}, air:{...} }
+            Backend:  { un_no, shipping_name, hazard_class, packing_group, ... }
+            """
+            road = t.get('road') or {}
+            un_raw = road.get('un', '')
+            if not un_raw or t.get('not_regulated'):
+                return t  # PDF servisi kendi _auto_un'ını çalıştırsın
+            return {
+                'un_no':         un_raw,
+                'shipping_name': road.get('label', ''),
+                'hazard_class':  road.get('class', ''),
+                'packing_group': road.get('pg', '') or '',
+                'sub_class':     road.get('sub_class', '') or '',
+                'note':          road.get('note', '') or '',
+                'env_hazard':    road.get('env_mark', False),
+                # orijinal yapıyı da sakla (sea/air için)
+                'road': road,
+                'sea':  t.get('sea') or {},
+                'air':  t.get('air') or {},
+                'not_regulated': False,
+            }
+
         # Bileşenler
         def _map_comp(c):
             name = _safe(c.get('name', ''))
@@ -204,7 +229,7 @@ async def generate_pdf(data: dict = Body(...)):
             'disclosure_map': disc_map,
             'phys_props':   phys_in,
             'eco':          eco_result,
-            'transport':    data.get('transport', {}),
+            'transport':    _map_transport(data.get('transport', {})),
             'revision': {
                 'date':    rev_date,
                 'no':      revision_in.get('no', '1'),

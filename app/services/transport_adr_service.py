@@ -41,8 +41,8 @@ def get_adr_details(un_no: str, packing_group: str = 'II') -> dict:
     """
     db = _load()
 
-    # UN no formatını normalize et
-    un_key = un_no.upper().strip()
+    # UN no formatını normalize et — "UN 3093", "un3093", "3093" hepsini kabul et
+    un_key = un_no.upper().replace(' ', '').strip()
     if not un_key.startswith('UN'):
         un_key = 'UN' + un_key
 

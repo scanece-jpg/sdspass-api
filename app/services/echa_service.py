@@ -75,21 +75,30 @@ _PICT_MAP = {
 
 def lookup_local(cas: str) -> dict | None:
     """
-    substances_annex_vi.json + substances_custom.json içinde CAS ara.
-    clp_cl_data.json ve annex_vi_lookup.json artık kullanılmıyor.
+    Sıra 1 — SEA Ek-6 / CLP Annex VI  (substances_annex_vi.json)
+    Sıra 4 — Tedarikçi/Kullanıcı girişi (substances_custom.json)
+
+    SEA Yönetmeliği Ek-6, CLP Annex VI'nın Türkiye'ye aktarımıdır.
+    annex_vi=True → SEA Ek-6 kaynağı (mutlak öncelik)
+    annex_vi=False → kullanıcı/tedarikçi girişi
     """
     from app.services.substance_lookup import lookup_substance
     entry = lookup_substance(cas.strip())
     if not entry:
         return None
+    is_sea = entry.get('annex_vi', False)
     return {
         'cas'           : cas,
         'name'          : entry.get('name', ''),
-        'source'        : 'Annex VI' if entry.get('annex_vi') else 'Custom DB',
+        'source'        : 'SEA Ek-6 / CLP Annex VI' if is_sea else 'Tedarikçi/Kullanıcı Girişi',
+        'source_priority': 1 if is_sea else 4,
         'h_codes'       : [h['h_code'] for h in entry.get('hazards', []) if h.get('h_code')],
         'hazard_classes': [h['h_class'] for h in entry.get('hazards', []) if h.get('h_class')],
         'signal'        : entry.get('signal', ''),
         'pictograms'    : entry.get('pictograms', []),
+        'm_factors'     : entry.get('m_factors', {}),
+        'index_no'      : entry.get('index_no', ''),
+        'atp'           : entry.get('atp', ''),
     }
 
 
@@ -395,10 +404,10 @@ async def lookup_echa_api(cas: str) -> dict | None:
 async def lookup_substance(cas: str) -> dict:
     """
     TR SDS Arama Hiyerarşisi:
-      1. substances_annex_vi.json  — Annex VI (mutlak, yerel)
-      2. data/echa_cl_archive.json — Kalıcı ECHA C&L arşivi
-      3. PubChem/ECHA C&L API     — Canlı çekim → arşive kaydet
-      4. substances_custom.json    — Kullanıcı girişi (fallback)
+      Sıra 1 — SEA Ek-6 / CLP Annex VI  (substances_annex_vi.json, annex_vi=True)  MUTLAK
+      Sıra 2 — ECHA C&L Arşivi          (data/echa_cl_archive.json)
+      Sıra 3 — ECHA C&L Canlı API       (PubChem → arşive kaydet)
+      Sıra 4 — Tedarikçi/Kullanıcı      (substances_custom.json, annex_vi=False)
     """
     cas = cas.strip()
     from app.services.reach_db import get_ec_no, get_reg_no
@@ -408,9 +417,10 @@ async def lookup_substance(cas: str) -> dict:
         d['reach_no'] = d.get('reach_no') or get_reg_no(cas)   or ''
         return d
 
-    # ── Sıra 1: Annex VI (substances_annex_vi.json) ──────────────────────────
     local = lookup_local(cas)
-    if local:
+
+    # ── Sıra 1: SEA Ek-6 (annex_vi=True) — MUTLAK, hemen dön ────────────────
+    if local and local.get('source_priority') == 1:
         return _enrich(local)
 
     # ── Sıra 2: Kalıcı ECHA C&L arşivi ──────────────────────────────────────
@@ -422,13 +432,15 @@ async def lookup_substance(cas: str) -> dict:
     echa = await lookup_echa_api(cas)
     if echa:
         _enrich(echa)
-        # Arşive kalıcı kaydet (Sıra 2'yi besler)
-        _save_to_archive(cas, echa)
-        # substances_custom.json'a da kaydet (kullanıcı arayüzünde görünür)
-        _auto_save_custom(cas, echa)
+        _save_to_archive(cas, echa)   # arşive kalıcı kaydet → Sıra 2'yi besler
+        _auto_save_custom(cas, echa)  # UI'da görünmesi için custom'a da yaz
         return echa
 
-    # ── Sıra 4: Bulunamadı ───────────────────────────────────────────────────
+    # ── Sıra 4: Tedarikçi/Kullanıcı girişi (annex_vi=False) ─────────────────
+    if local and local.get('source_priority') == 4:
+        return _enrich(local)
+
+    # ── Bulunamadı ────────────────────────────────────────────────────────────
     return {
         'cas': cas, 'name': '', 'ec_no': get_ec_no(cas) or '',
         'reach_no': get_reg_no(cas) or '', 'source': 'not_found',

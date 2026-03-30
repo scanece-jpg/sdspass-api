@@ -343,10 +343,11 @@ def get_h_stmt(code: str, lang: str) -> str:
     return get_h(lang, code)
 
 # ─── UN NUMARASI OTOMATİK TESPİTİ (ADR/RID Tablo A) ─────────────────────────
-def _auto_un(h_codes: list) -> dict | None:
+def _auto_un(h_codes: list, state: str = 'liquid') -> dict | None:
     """H kodlarından en kritik UN numarasını tespit et — ADR 2023 Tablo 2.1.3.10
     Öncelik sırası: 1 > 5.2 > 4.2 > 4.3 > 2 > 5.1 > 6.1 > 3+8 > 6.1+8 > 3+6.1 > 3 > 8 > 9
     Bu fonksiyon yalnızca frontend transport verisinin gelmediği fallback durumlar için çalışır.
+    state: 'liquid' | 'solid' | 'gas' (fiziksel hal — katı/sıvı ayrımı için)
     """
     h = set(h_codes)
 
@@ -468,11 +469,16 @@ def _auto_un(h_codes: list) -> dict | None:
         return {'un_no':'UN1325','shipping_name':'YANICI KATI, ORGANİK, B.N.O.',
                 'hazard_class':'4.1','packing_group':'II','auto':True}
 
-    # ── Sınıf 8: Korozif (tek başına) ────────────────────────────────────────
+    # ── Sınıf 8: Korozif (tek başına) — hal bazlı ────────────────────────────
     if 'H314' in h:
-        return {'un_no':'UN1760','shipping_name':'KOROZİF SIVI, B.N.O.',
-                'hazard_class':'8','packing_group':'II',
-                'note':'Asidik inorganik→UN3264 | Bazik inorganik→UN3266 | Organik→UN1760','auto':True}
+        if state == 'solid':
+            return {'un_no':'UN1759','shipping_name':'KOROZİF KATI, B.N.O.',
+                    'hazard_class':'8','packing_group':'II',
+                    'note':'Asidik inorganik→UN3260 | Bazik inorganik→UN3262 | Organik→UN1759','auto':True}
+        else:
+            return {'un_no':'UN1760','shipping_name':'KOROZİF SIVI, B.N.O.',
+                    'hazard_class':'8','packing_group':'II',
+                    'note':'Asidik inorganik→UN3264 | Bazik inorganik→UN3266 | Organik→UN1760','auto':True}
     # Çevre için tehlikeli (sadece)
     if any(h in h_codes for h in ['H400','H410','H411']):
         return {'un_no':'UN3082','shipping_name':'ÇEVRE İÇİN TEHLİKELİ MADDE, SIVI, B.N.O.',
@@ -688,8 +694,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     ], [45*mm, 135*mm], styles, header=False))
     story.append(Spacer(1, 8))
 
-    # H kodları özeti
-    h_codes = clp.get('h_codes', [])
+    # H kodları — etiket için (dominance uygulanmış) ve SDS 2.1 için (tam sınıflandırma)
+    h_codes     = clp.get('h_codes', [])             # Bölüm 2.2 etiket — dominant H-kodları
+    all_h_codes = clp.get('all_h_codes') or h_codes  # Bölüm 2.1 sınıflandırma — tüm H-kodları
     if h_codes:
         hc_str = '  '.join(h_codes)
         story.append(Paragraph(
@@ -745,10 +752,14 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     story += sub_block(f"2.1 {sub_title(lang,'2.1')}", styles)
 
     # Sınıflandırma — signal_word: CLP Annex I DANGER_H ile doğrula
+    # H221 (Flam.Gas 2) = Warning → kaldırıldı
+    # H251 (Self-heat.1) = Danger → eklendi
+    # H232 (Pyrophoric gas) = Danger → eklendi
     _DANGER_H = {
         'H200','H201','H202','H203','H204','H205',
-        'H220','H221','H222','H224','H225','H228',
-        'H240','H241','H250','H260','H270','H271',
+        'H220','H222','H224','H225','H228',
+        'H232',
+        'H240','H241','H250','H251','H260','H270','H271',
         'H300','H301','H304','H310','H311',
         'H314','H318','H330','H331',
         'H334','H340','H350','H360','H370','H372',
@@ -771,8 +782,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             entry.get('h_code',''),
             conc_info,
         ])
-    # passed boş veya eksikse h_codes'dan fallback satırlar ekle
-    for hc_raw in h_codes:
+    # passed boş veya eksikse all_h_codes'dan fallback satırlar ekle
+    # all_h_codes: domine edilenler dahil tüm sınıflandırmalar (CLP Ek I § 1.2.2)
+    for hc_raw in all_h_codes:
         hc = (hc_raw or '').replace('*','').strip()[:4]
         if not hc or hc in seen_clf:
             continue
@@ -1050,6 +1062,18 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         get_sentence(lang,'storage_default') or S(lang,'storage_default'),
         styles['body']
     ))
+
+    story += sub_block(f"7.3 {sub_title(lang,'7.3')}", styles)
+    specific_use = sds_data.get('specific_use', '')
+    if specific_use:
+        story.append(Paragraph(specific_use, styles['body']))
+    else:
+        story.append(Paragraph(
+            'Belirli bir son kullanım önerilmemektedir. Müşteri uygulamalarına yönelik genişletilmiş maruziyet senaryosu için tedarikçiye başvurunuz.'
+            if lang == 'TR' else
+            'No specific end use is recommended. Contact the supplier for extended exposure scenarios tailored to customer applications.',
+            styles['body']
+        ))
 
     # ─────────────────────────────────────────────────────────────────────────
     # BÖLÜM 8 — Maruziyet / KKE
@@ -1470,7 +1494,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     transport = sds_data.get('transport', {})
 
     # Otomatik UN tespiti — kullanıcı vermemişse H kodlarından
-    auto_t = _auto_un(h_codes) if not transport.get('un_no') else None
+    _phys_state = (phys.get('state') or phys.get('physical_state') or 'liquid').lower()
+    auto_t = _auto_un(h_codes, state=_phys_state) if not transport.get('un_no') else None
     t_src = transport if transport.get('un_no') else (auto_t or {})
     un_no = t_src.get('un_no', '—')
     ship_name = t_src.get('shipping_name', na)
@@ -1562,10 +1587,24 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         story.append(Paragraph(line, styles['body']))
 
     story += sub_block(f"15.2 {sub_title(lang,'15.2') if '15.2' in L.get('sub',{}) else 'Kimyasal güvenlik değerlendirmesi'}", styles)
-    story.append(Paragraph(
-        S(lang,'no_csa'),
-        styles['small']
-    ))
+
+    # CSA zorunluluğu kontrolü — KKDİK Madde 14: yıllık ≥1 ton üretim/ithalat +
+    # SVHC/kanserojen/mutajen/üreme toksik ise KGA (Kimyasal Güvenlik Değerlendirmesi) zorunlu
+    _cmr_h = {'H340','H341','H350','H350i','H351','H360','H360D','H360F','H361','H361d','H361f','H334'}
+    _has_cmr = bool(set(h_codes) & _cmr_h)
+    if _has_cmr:
+        story.append(Paragraph(
+            '<font color="#cc0000"><b>⚠ KKDİK Uyarısı:</b></font> Bu karışım kanserojen/mutajen/üreme toksik veya '
+            'solunum duyarlılaştırıcı madde içermektedir. Yıllık ≥1 ton üretim veya ithalat durumunda '
+            'KKDİK Madde 14 kapsamında Kimyasal Güvenlik Değerlendirmesi (KGA) zorunludur.'
+            if lang == 'TR' else
+            '<font color="#cc0000"><b>⚠ Regulatory Note:</b></font> This mixture contains CMR or respiratory sensitizer '
+            'substances. A Chemical Safety Assessment (CSA) is mandatory under REACH Art.14 / KKDİK '
+            'when annual production or import volume is ≥1 tonne.',
+            styles['small']
+        ))
+    else:
+        story.append(Paragraph(S(lang,'no_csa'), styles['small']))
 
     story.append(PageBreak())
 

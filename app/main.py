@@ -75,6 +75,8 @@ async def generate_pdf(data: dict = Body(...)):
         components  = data.get('components', [])
         # Tüm H kodlarını str'e normalize et — int/None gelirse PDF çökmez
         h_codes     = [str(h) for h in data.get('h_codes', []) if h is not None]
+        # all_h_codes: dominance öncesi tam sınıflandırma (SDS Bölüm 2.1 için)
+        all_h_codes = [str(h) for h in data.get('all_h_codes', []) if h is not None] or h_codes
         euh_codes   = [str(h) for h in data.get('euh_codes', []) if h is not None]
         p_codes_in  = data.get('p_codes', [])
         disc_map    = data.get('disclosure_map', {})
@@ -126,10 +128,8 @@ async def generate_pdf(data: dict = Body(...)):
             '\u2019': "'",     # ' → '
             '\u201c': '"',     # " → "
             '\u201d': '"',     # " → "
-            '\u00b5': 'u',     # µ → u
-            '\u00b0': 'C',     # ° → C (derece sembolü için)
-            '\u00b2': '2',     # ² → 2
-            '\u00b3': '3',     # ³ → 3
+            # NOT: µ (U+00B5), ² (U+00B2), ³ (U+00B3) DejaVu'da desteklenir —
+            # dönüştürme yapılmaz (25 µg/mL → 25 ug/mL hatası engellendi)
         })
         def _safe(text: str) -> str:
             """PDF için güvenli metin — sorunlu Unicode karakterleri ASCII'ye çevir"""
@@ -215,7 +215,8 @@ async def generate_pdf(data: dict = Body(...)):
                 'emergency_tel': supplier_in.get('emergency_tel', ''),
             },
             'clp': {
-                'h_codes':    h_codes,
+                'h_codes':     h_codes,      # etiket için (dominance uygulanmış)
+                'all_h_codes': all_h_codes,  # SDS Bölüm 2.1 için (tam sınıflandırma)
                 'signal_word': signal,
                 'passed': [
                     {'h_class': h.get('h_class',''), 'h_code': h.get('h_code',''),
@@ -279,9 +280,6 @@ async def debug_signal(data: dict = Body(...)):
     }
 
 # ─── SUBSTANCE LOOKUP ─────────────────────────────────────────────────────────
-
-from app.services.echa_service import lookup_substance
-
 
 @app.get("/api/v1/sds/substance/lookup")
 async def substance_lookup(cas: str):

@@ -202,6 +202,25 @@ const CLPEngine = (() => {
         const source = scl !== null ? 'SCL' : 'GCL';
 
         if (cutoff === undefined) return [code]; // Bilinmeyen → muhafazakâr
+
+        // ── STOT SE 1→2 geçiş kuralı (CLP Ek I Tablo 3.8.2) ──────────────────
+        // H370 (STOT SE 1) bileşeni:
+        //   %≥10 → karışım H370 (STOT SE 1)
+        //   %1–10 → karışım H371 (STOT SE 2)  ← SCL yoksa GCL kuralı
+        if (code === 'H370' && scl === null) {
+          if (conc >= 10.0) {
+            cutoffUsed['H370'] = { value: 10.0, source: 'GCL', cas: c.cas || '' };
+            return ['H370'];
+          }
+          if (conc >= 1.0) {
+            if (!cutoffUsed['H371'] || 1.0 < (cutoffUsed['H371'].value || Infinity)) {
+              cutoffUsed['H371'] = { value: 1.0, source: 'GCL-transition', cas: c.cas || '' };
+            }
+            return ['H371'];
+          }
+          return [];
+        }
+
         if (conc >= cutoff) {
           // En düşük (en kısıtlayıcı) eşiği kaydet
           if (!cutoffUsed[code] || cutoff < cutoffUsed[code].value) {

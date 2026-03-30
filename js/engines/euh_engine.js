@@ -43,11 +43,82 @@ const EUHEngine = (() => {
 
   // Belirli CAS'lar için zorunlu EUH kodları
   const CAS_TO_EUH = {
-    '7681-52-9': ['EUH031'],           // Sodyum hipoklorit — asitle EUH031
-    '7664-39-3': ['EUH071'],           // Hidroflorik asit
-    '107-13-1':  ['EUH071'],           // Akrilonitril
+    // EUH019 — Patlayıcı peroksit oluşturanlar
     '75-21-8':   ['EUH019'],           // Etilen oksit
     '7722-84-1': ['EUH019'],           // Hidrojen peroksit
+    '109-99-9':  ['EUH019'],           // Tetrahidrofuran (THF)
+    '123-91-1':  ['EUH019'],           // 1,4-Dioksan
+    '60-29-7':   ['EUH019'],           // Dietil eter
+    '108-20-3':  ['EUH019'],           // Diizopropil eter
+    '107-30-2':  ['EUH019'],           // Klorometil metil eter
+
+    // EUH029 — Su ile temas → zehirli gaz (PH3, AsH3, vb.)
+    '20859-73-8':['EUH029'],           // Alüminyum fosfür → PH3
+    '1314-84-7': ['EUH029'],           // Çinko fosfür → PH3
+    '12057-74-8':['EUH029'],           // Magnezyum fosfür → PH3
+    '10124-50-2':['EUH029'],           // Potasyum arsenat → AsH3 riski
+    '26628-22-8':['EUH029','EUH032'],  // Sodyum azit → HN3
+
+    // EUH031 — Asitlerle temas → zehirli gaz (SO2, H2S, HCN, vb.)
+    '7681-52-9': ['EUH031'],           // Sodyum hipoklorit → Cl2
+    '7757-83-7': ['EUH031'],           // Sodyum sülfit → SO2
+    '1313-82-2': ['EUH031'],           // Sodyum sülfür → H2S
+    '1312-73-8': ['EUH031'],           // Potasyum sülfür → H2S
+    '16721-80-5':['EUH031'],           // Sodyum hidrosülfür → H2S
+    '1317-37-9': ['EUH031'],           // Demir(II) sülfür → H2S
+
+    // EUH032 — Asitlerle temas → çok zehirli gaz (HCN, PH3, vb.)
+    '143-33-9':  ['EUH032'],           // Sodyum siyanür → HCN
+    '151-50-8':  ['EUH032'],           // Potasyum siyanür → HCN
+    '592-01-8':  ['EUH032'],           // Kalsiyum siyanür → HCN
+    '460-19-5':  ['EUH032'],           // Siyanür → HCN (genel)
+    '20859-73-8':['EUH029','EUH032'],  // Alüminyum fosfür (zaten EUH029'da)
+
+    // EUH066 — Tekrarlayan maruziyet → deri kuruluğu/çatlama
+    '110-54-3':  ['EUH066'],           // n-Hekzan
+    '142-82-5':  ['EUH066'],           // n-Heptan
+    '110-82-7':  ['EUH066'],           // Siklohekzan
+    '108-87-2':  ['EUH066'],           // Metilsiklohekzan
+    '8052-41-3': ['EUH066'],           // Stoddard solvent / White spirit
+    '64742-82-1':['EUH066'],           // Nafta (hafif aromatik)
+    '64742-89-8':['EUH066'],           // Nafta (hafif alifatik)
+
+    // EUH071 — Solunum yolunu aşındırıcı
+    '7664-39-3': ['EUH071'],           // Hidroflorik asit
+    '107-13-1':  ['EUH071'],           // Akrilonitril
+    '75-44-5':   ['EUH071'],           // Fosgen
+
+    // EUH201 / EUH201A — Kurşun içeriği
+    '7439-92-1': ['EUH201'],           // Kurşun (element)
+    '1317-36-8': ['EUH201'],           // Kurşun(II) oksit
+    '7446-14-2': ['EUH201'],           // Kurşun(II) sülfat
+    '301-04-2':  ['EUH201'],           // Kurşun(II) asetat
+    '1344-37-2': ['EUH201'],           // Kurşun kromat
+    '78-00-2':   ['EUH201'],           // Tetraetilkurşun
+    '75-74-1':   ['EUH201'],           // Tetrametilkurşun
+
+    // EUH202 — Siyanoakrilat yapıştırıcılar
+    '7085-85-0': ['EUH202'],           // Etil siyanoakrilat
+    '137-05-3':  ['EUH202'],           // Metil siyanoakrilat
+    '133978-15-1':['EUH202'],          // Oktil siyanoakrilat
+    '1069-48-3': ['EUH202'],           // Butil siyanoakrilat
+
+    // EUH203 — Krom(VI)
+    '1333-82-0': ['EUH203'],           // Krom trioksit (CrO3)
+    '7778-50-9': ['EUH203'],           // Potasyum dikromat
+    '10588-01-9':['EUH203'],           // Sodyum dikromat
+    '7789-00-6': ['EUH203'],           // Potasyum kromat
+    '7789-09-5': ['EUH203'],           // Amonyum dikromat
+    '13530-65-9':['EUH203'],           // Çinko kromat
+    '1189-85-1': ['EUH203'],           // tert-Butil kromat
+
+    // EUH207 — Kadmiyum
+    '7440-43-9': ['EUH207'],           // Kadmiyum (element)
+    '1306-19-0': ['EUH207'],           // Kadmiyum oksit
+    '1306-23-6': ['EUH207'],           // Kadmiyum sülfür
+    '10108-64-2':['EUH207'],           // Kadmiyum klorür
+    '10124-36-4':['EUH207'],           // Kadmiyum sülfat
+    '543-90-8':  ['EUH207'],           // Kadmiyum asetat
   };
 
   // H kodu eşlemesi bazında EUH
@@ -56,6 +127,17 @@ const EUHEngine = (() => {
     'H260': ['EUH014'],
     'H261': ['EUH014'],
   };
+
+  // İsim bazlı tespitler (CAS bilinmese de bileşen adından tetiklenir)
+  // Kaynak: CLP (AT) No 1272/2008 Ek II
+  const NAME_PATTERNS = [
+    { pattern: /izosiyanat|isocyanate/i,      code: 'EUH204' },
+    { pattern: /epoksi|epoxy|bisfenol|bisphenol/i, code: 'EUH205' },
+    { pattern: /hipoklorit|hypochlorite/i,    code: 'EUH031' },
+    { pattern: /sülfür|sülfid|sulfide|sulphide/i, code: 'EUH031' },
+    { pattern: /siyanür|cyanide/i,            code: 'EUH032' },
+    { pattern: /fosfür|phosphide/i,           code: 'EUH029' },
+  ];
 
   // Ozon tüketen CAS
   const OZONE_CAS = new Set([
@@ -96,6 +178,28 @@ const EUHEngine = (() => {
         }
       }
 
+      // EUH209 / EUH209A — CLP Ek II §2.8
+      // Karışım sınıflandırma eşiğinin ALTINDA kalan yanıcı bileşenler için
+      // H224/H225 (Flam. Liq. 1/2): eşik %1 → %0.1–1 arası bileşen → EUH209
+      // H226   (Flam. Liq. 3):      eşik %10 → %1–10 arası bileşen → EUH209A
+      const flamCodes = (c.hazards || []).map(h => (h.h_code||'').replace(/[*\s]/g,'').substring(0,4));
+      if (!codes.has('EUH209') && (flamCodes.includes('H224') || flamCodes.includes('H225')) && conc >= 0.1 && conc < 1.0) {
+        codes.add('EUH209');
+        details.push({ code:'EUH209', text: EUH_TEXTS['EUH209'], source: `${name} — H224/H225, %${conc} (eşik altı yanıcı bileşen)`, type:'auto' });
+      }
+      if (!codes.has('EUH209A') && flamCodes.includes('H226') && conc >= 1.0 && conc < 10.0) {
+        codes.add('EUH209A');
+        details.push({ code:'EUH209A', text: EUH_TEXTS['EUH209A'], source: `${name} — H226, %${conc} (eşik altı yanıcı bileşen)`, type:'auto' });
+      }
+
+      // İsim bazlı tespitler (EUH204, EUH205 vb.)
+      for (const { pattern, code } of NAME_PATTERNS) {
+        if (pattern.test(name) && !codes.has(code)) {
+          codes.add(code);
+          details.push({ code, text: EUH_TEXTS[code] || code, source: `${name} — isim eşleşmesi`, type:'auto' });
+        }
+      }
+
       // Ozon tüketen maddeler
       if (OZONE_CAS.has(cas) && conc >= 0.1) {
         if (!codes.has('EUH059')) {
@@ -105,16 +209,21 @@ const EUHEngine = (() => {
       }
 
       // EUH208 — duyarlılaştırıcı içerik
-      const hasSensitizer = (c.hazards || []).some(h =>
-        ['H317','H334'].includes((h.h_code||'').replace(/[*\s]/g,'').substring(0,4))
+      // CLP Ek II: Resp. Sens. 1 (H334) → %0.01 eşik; Skin Sens. 1 (H317) → %0.1 eşik
+      const hasRespSens  = (c.hazards || []).some(h =>
+        (h.h_code||'').replace(/[*\s]/g,'').substring(0,4) === 'H334'
       );
-      if (hasSensitizer && conc >= 0.1) {
+      const hasSkinSens  = (c.hazards || []).some(h =>
+        (h.h_code||'').replace(/[*\s]/g,'').substring(0,4) === 'H317'
+      );
+      const sensitizerThreshold = hasRespSens ? 0.01 : 0.1;
+      if ((hasRespSens || hasSkinSens) && conc >= sensitizerThreshold) {
         if (!codes.has('EUH208')) {
           codes.add('EUH208');
           details.push({
             code:'EUH208',
             text: EUH_TEXTS['EUH208'].replace('...', name),
-            source: `${name} — H317/H334 duyarlılaştırıcı, %${conc} ≥ %0.1 eşik`,
+            source: `${name} — ${hasRespSens?'H334 Resp.Sens.':'H317 Skin Sens.'}, %${conc} ≥ %${sensitizerThreshold} eşik`,
             type:'auto',
           });
         }

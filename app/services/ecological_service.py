@@ -42,6 +42,11 @@ PBT_CAS = {
     '757-58-4',  # hexaethyl tetraphosphate
     '36355-01-8',# hexabromobiphenyl
     '67774-32-7',# polychlorinated biphenyls (PCB)
+    # ECHA SVHC PBT — KKDİK Ek-17 uyarınca ek maddeler
+    '85535-84-8',# SCCP (kısa zincirli klorlu parafinler) — PBT/vPvB
+    '68920-70-7',# MCCP (orta zincirli klorlu parafinler, CAS aralığı)
+    '72629-94-8',# decabromodiphenyl ether (deca-BDE)
+    '1163-19-5', # decabromodiphenyl oxide
 }
 
 VPVB_CAS = {

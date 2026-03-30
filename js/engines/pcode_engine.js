@@ -9,6 +9,40 @@
 const PCodeEngine = (() => {
 
   const H_TO_P = {
+    // ── Patlayıcılar (CLP Ek III Tablo 1) ───────────────────────────────────
+    'H200':['P210','P230','P234','P240','P250','P280','P370+P380','P372','P373','P401','P501'],
+    'H201':['P210','P230','P234','P240','P250','P280','P370+P380','P372','P373','P401','P501'],
+    'H202':['P210','P230','P234','P240','P250','P280','P370+P380','P372','P373','P401','P501'],
+    'H203':['P210','P234','P240','P250','P280','P370+P378','P401','P501'],
+    'H204':['P210','P234','P240','P250','P280','P370+P378','P401','P501'],
+    // ── Yanıcı Gazlar ───────────────────────────────────────────────────────
+    'H220':['P210','P377','P381','P403'],
+    'H221':['P210','P377','P381','P403'],
+    'H232':['P210','P222','P280','P377','P381','P403'],   // Pirofor gaz — hava teması önle
+    // ── Aerosoller ──────────────────────────────────────────────────────────
+    'H222':['P210','P211','P251','P410+P412'],
+    'H223':['P210','P211','P251','P410+P412'],
+    'H229':['P251','P410+P412'],
+    // ── Kendiliğinden Parçalanmalar / Organik Peroksitler ───────────────────
+    'H240':['P201','P210','P220','P234','P280','P283','P370+P378','P401','P405','P501'],
+    'H241':['P210','P220','P234','P280','P283','P370+P378','P401','P405','P501'],
+    'H242':['P210','P220','P234','P280','P370+P378','P401','P405','P501'],
+    // ── Pirofor / Kendiliğinden Isınan ──────────────────────────────────────
+    'H250':['P222','P231+P232','P233','P280','P302+P334','P370+P378','P422'],
+    'H251':['P235','P280','P407','P413','P420','P501'],
+    'H252':['P235','P280','P407','P413','P420','P501'],
+    // ── Su ile Reaksiyon Veren ───────────────────────────────────────────────
+    'H260':['P223','P231+P232','P280','P335+P334','P370+P378','P402+P404','P501'],
+    'H261':['P223','P231+P232','P280','P335+P334','P370+P378','P402+P404','P501'],
+    // ── Oksitleyici Gaz / Basınçlı Gaz ─────────────────────────────────────
+    'H270':['P220','P244','P370+P376','P403'],
+    'H280':['P403','P410+P403'],
+    'H281':['P403','P410+P403'],
+    // ── Metal Korozifi ───────────────────────────────────────────────────────
+    'H290':['P234','P390','P406'],
+    // ── Laktasyon Toksisitesi ────────────────────────────────────────────────
+    'H362':['P201','P260','P263','P264','P270','P308+P313'],
+    // ── Yanıcı Sıvılar ──────────────────────────────────────────────────────
     'H224':['P210','P233','P241','P242','P243','P280','P303+P361+P353','P370+P378','P403+P235','P501'],
     'H225':['P210','P233','P241','P242','P243','P280','P303+P361+P353','P370+P378','P403+P235','P501'],
     'H226':['P210','P233','P280','P370+P378','P403+P235','P501'],
@@ -61,6 +95,14 @@ const PCodeEngine = (() => {
     'P314':        ['P312'],                       // Tıbbi yardım al > hissetmiyorsan ara
     // P403+P233 varsa ayrı P233 gereksiz (aynı bilgi kombine formda)
     'P403+P233':   ['P233'],
+    // P410+P403 varsa ayrı P403 gereksiz
+    'P410+P403':   ['P403'],
+    // P231+P232 varsa ayrı P231 gereksiz
+    'P231+P232':   ['P231','P232'],
+    // P335+P334 varsa ayrı P334/P335 gereksiz
+    'P335+P334':   ['P334','P335'],
+    // P402+P404 varsa ayrı P402/P404 gereksiz
+    'P402+P404':   ['P402','P404'],
   };
 
   // ── Etiket öncelik puanı (yüksek = önce seçilir) ────────────────────────────
@@ -69,9 +111,23 @@ const PCodeEngine = (() => {
   const LABEL_PRIORITY = {
     // ── Yangın / Patlama (Fiziksel — en kritik) ──────────────────────────────
     'P210': 100,                   // Tutuşma kaynağından uzak tut
+    'P211': 99,                    // Aleve veya diğer tutuşma kaynaklarına sıkma
+    'P222': 98,                    // Hava ile temasına izin verme (pirofor)
+    'P223': 98,                    // Su ile temasına izin verme
     'P220': 97,                    // Oksitleyici — yanıcılardan uzak tut
+    'P370+P380': 96,               // Yangın → bölgeyi boşalt
+    'P372': 96,                    // Yangında patlama riski
     'P370+P378': 95,               // Yangın müdahale
+    'P370+P376': 95,               // Yangın → gaz beslemesini kapat
     'P306+P360': 94,               // Giysiye temas — hemen durula
+    'P373': 93,                    // Yangın patlamaya ulaştığında söndürme
+    'P377': 92,                    // Yanan sızdırma gazı — söndürmeyiniz
+    'P381': 91,                    // Tutuşma kaynaklarını ortadan kaldır
+    'P244': 89,                    // Oksitleyici gaz — yağ/gres'ten uzak tut
+    'P283': 88,                    // Yanmaya dayanıklı/alev almaz giysiler giy
+    'P250': 87,                    // Sürtme/şoka/titreşime maruz bırakma
+    'P230': 86,                    // ... ile ıslatılmış halde tut
+    'P231+P232': 85,               // İnert gaz altında işle, nem'den koru
 
     // ── Akut hayati müdahale ──────────────────────────────────────────────────
     'P301+P310': 93,               // Yutulursa → derhal ara (H300/H301)
@@ -102,8 +158,19 @@ const PCodeEngine = (() => {
     // ── Depolama / Saklama ────────────────────────────────────────────────────
     'P403+P235': 45,               // Serin + havalandırılmış
     'P403+P233': 44,               // Havalandırılmış + kapalı kap
+    'P410+P403': 44,               // Güneşten koru + havalandırılmış
+    'P410+P412': 43,               // Güneşten koru + 50°C'yi aşma
     'P405': 42,                    // Kilitli sakla
+    'P407': 42,                    // Yığınlar arasında hava aralığı bırak
+    'P413': 41,                    // Dökme yığın — sınırlı sıcaklıkta sakla
+    'P420': 40,                    // Diğer maddelerden uzakta sakla
     'P233': 40,                    // Kabı kapalı tut
+    'P401': 39,                    // Uygun yerde sakla
+    'P402+P404': 38,               // Kuru yerde + kapalı kapta sakla
+    'P403': 37,                    // İyi havalandırılmış yerde sakla
+    'P406': 36,                    // Korozyona dayanıklı kapta sakla
+    'P422': 35,                    // İçeriği ... altında sakla
+    'P390': 34,                    // Çevre kirlenmesini önle — döküleni emer
 
     // ── Genel / Hijyen ────────────────────────────────────────────────────────
     'P264': 35,                    // Kullanım sonrası yıka

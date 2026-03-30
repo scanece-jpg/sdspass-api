@@ -2,7 +2,7 @@ services:
   - type: web
     name: sdspass-api-3
     runtime: python
-    buildCommand: apt-get install -y fonts-dejavu-core && pip install -r requirements.txt
+    buildCommand: apt-get install -y fonts-dejavu && pip install -r requirements.txt
     startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: ENV

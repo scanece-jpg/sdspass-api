@@ -137,6 +137,18 @@ const PhysicalEngine = (() => {
   const OXIDIZING_CAS = new Set(['7722-84-1','7790-98-9','7775-09-9','7727-54-0']);
   const FLAM_SOL_CAS  = new Set(['7704-34-9','1333-86-4','12185-10-3']);
 
+  // ── PİROFOR GAZ CAS LİSTESİ (H232) — CLP Ek I §2.2 ─────────────────────────
+  // Havayla temas halinde kendiliğinden tutuşan gazlar
+  const PYRO_GAS_CAS = new Set([
+    '7803-62-5',   // Silan (SiH4)
+    '19287-45-7',  // Diboran (B2H6)
+    '7782-65-2',   // Jerman (GeH4)
+    '7803-52-3',   // Stibin (SbH3)
+    '13765-25-8',  // Diklorosilan (SiH2Cl2) — piroforic özelliği var
+    '992-94-9',    // Metilsilan (CH3SiH3)
+    '7784-42-1',   // Arsin (AsH3) — piroforic, H232
+  ]);
+
   // ── HATA PAYI METAVERİSİ ─────────────────────────────────────────────────────
   // Her hesap metodu için literatür tabanlı belirsizlik değerleri
   const ERROR_META = {
@@ -375,7 +387,45 @@ const PhysicalEngine = (() => {
     return { result: null, source: null, fp: null };
   }
 
-  function calcAspTox(comps) {
+  // ── H232 — Pirofor Gaz (CLP Ek I §2.2.3) ────────────────────────────────────
+  // Bileşen H232 içeriyorsa VEYA bilinen pirofor CAS listesindeyse:
+  //   konsantrasyon ≥ %1 → karışım H220 (Flam. Gas 1A) + H232 alır
+  function calcFlamGas(comps) {
+    const triggers = [];
+    for (const c of comps) {
+      const cas  = (c.cas || '').trim();
+      const conc = parseFloat(c.concMax || c.conc) || 0;
+      if (conc < 1.0) continue;
+      const hasH232 = (c.hazards || []).some(h =>
+        (h.h_code || '').replace(/[*\s]/g,'').substring(0,4) === 'H232'
+      );
+      if (hasH232 || PYRO_GAS_CAS.has(cas)) {
+        triggers.push({ cas, name: c.name || cas, conc });
+      }
+    }
+    if (triggers.length) return {
+      result_h220: { h:'H220', label:'Flam. Gas 1A', signal:'Danger' },
+      result_h232: { h:'H232', label:'Flam. Gas 1A — Pirofor', signal:'Danger' },
+      source: triggers.map(t => `${t.name} (%${t.conc})`).join(', '),
+    };
+    return { result_h220: null, result_h232: null, source: null };
+  }
+
+  function calcAspTox(comps, testData = {}) {
+    // ── CLP Ek I §3.10.4 Viskozite Filtresi ─────────────────────────────────
+    // Karışımın kinematik viskozitesi > 20.5 mm²/s (40°C) ise H304 uygulanmaz.
+    // testData.viscosity değeri kinematik viskozite (mm²/s = cSt) olarak kabul edilir.
+    // Değer girilmemişse kural muhafazakâr şekilde uygulanır (H304 eklenir).
+    const kinVisc = testData.viscosity != null ? parseFloat(testData.viscosity) : null;
+    if (kinVisc !== null && !isNaN(kinVisc) && kinVisc > 20.5) {
+      return {
+        result: null,
+        source: `Kinematik viskozite ${kinVisc} mm²/s > 20.5 mm²/s — CLP §3.10.4 gereği H304 uygulanmaz`,
+        total: 0,
+        viscosityExcluded: true,
+      };
+    }
+
     let total = 0;
     const triggers = [];
     for (const c of comps) {
@@ -385,11 +435,16 @@ const PhysicalEngine = (() => {
       const hasClass = (c.hazards || []).some(h => h.h_class === 'Asp. Tox. 1');
       if ((inList || hasClass) && conc > 0) { triggers.push({ cas, name: c.name, conc }); total += conc; }
     }
-    if (total >= 10) return {
-      result: { h:'H304', label:'Asp. Tox. 1', signal:'Danger' },
-      source: triggers.map(t => `${t.name || t.cas} (%${t.conc})`).join(', '),
-      total,
-    };
+    if (total >= 10) {
+      const viscNote = kinVisc === null
+        ? ' (viskozite girilmedi — doğrulayın)'
+        : '';
+      return {
+        result: { h:'H304', label:'Asp. Tox. 1', signal:'Danger' },
+        source: triggers.map(t => `${t.name || t.cas} (%${t.conc})`).join(', ') + viscNote,
+        total,
+      };
+    }
     return { result: null, source: null, total };
   }
 
@@ -456,9 +511,17 @@ const PhysicalEngine = (() => {
     const fl = calcFlamLiq(comps, userFP);
     if (fl.result) primary.push({ type:'flam_liq', ...fl.result, source: fl.source, fp: fl.fp });
 
-    // Aspirasyon Toksisitesi
-    const asp = calcAspTox(comps);
+    // Aspirasyon Toksisitesi — viskozite kontrolü dahil (CLP §3.10.4)
+    const asp = calcAspTox(comps, testData);
     if (asp.result) primary.push({ type:'asp_tox', ...asp.result, source: asp.source, total: asp.total });
+    if (asp.viscosityExcluded) warnings.push('H304: ' + asp.source);
+
+    // Pirofor Gaz — H232 (CLP Ek I §2.2.3)
+    const fg = calcFlamGas(comps);
+    if (fg.result_h232) {
+      primary.push({ type:'flam_gas', ...fg.result_h220, source: fg.source });
+      primary.push({ type:'flam_gas_pyro', ...fg.result_h232, source: fg.source });
+    }
 
     // Yanıcı Katı
     const fs = comps.filter(c => FLAM_SOL_CAS.has((c.cas||'').trim()) && (parseFloat(c.concMax||c.conc)||0) >= 1);

@@ -429,14 +429,14 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
 </script>
 <script src="js/event-bus.js?v=20250328"></script>
 <script src="js/state-store.js?v=20250328"></script>
-<script src="js/engines/clp_engine.js?v=20250328"></script>
-<script src="js/engines/pcode_engine.js?v=20260330"></script>
+<script src="js/engines/clp_engine.js?v=20260330"></script>
+<script src="js/engines/pcode_engine.js?v=20260330b"></script>
 <script src="js/engines/eco_engine.js?v=20250328"></script>
 <script src="js/engines/stot_engine.js?v=20250328"></script>
-<script src="js/engines/euh_engine.js?v=20250328"></script>
+<script src="js/engines/euh_engine.js?v=20260330"></script>
 <script src="js/engines/transport_engine.js?v=20260329"></script>
 <script src="js/engines/ppe_engine.js?v=20250328"></script>
-<script src="js/engines/physical_engine.js?v=20250328"></script>
+<script src="js/engines/physical_engine.js?v=20260330"></script>
 
 <script>
 // ══════════════════════════════════════════════════════════════════════════════
@@ -1757,6 +1757,7 @@ async function generatePDF() {
         scl:      c.scl || {},
       })),
       h_codes:      allH,
+      all_h_codes:  [...new Set([...allH, ...(clp?.dominated || [])])], // SDS 2.1 tam sınıflandırma
       clp_passed:   clpPassed,
       euh_codes:    euh?.codes || [],
       euh_details:  euh?.details || [],

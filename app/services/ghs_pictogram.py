@@ -66,12 +66,33 @@ GHS_LABELS_EN = {
 
 
 def get_ghs_codes(h_codes: list) -> list:
-    """H kodlarından ilgili GHS piktogram kodlarını döndür."""
-    result = []
+    """H kodlarından ilgili GHS piktogram kodlarını döndür.
+    SEA Madde 28 öncelik kuralları uygulanır.
+    """
+    pics = set()
     for ghs, h_set in H_TO_GHS.items():
         if any(h in h_set for h in h_codes):
-            result.append(ghs)
-    return sorted(result)
+            pics.add(ghs)
+
+    # ── SEA Madde 28 — Piktogram Öncelik İlkeleri ────────────────────────────
+    # (a) GHS01 varsa GHS02 ve GHS03 isteğe bağlı
+    if 'GHS01' in pics:
+        pics.discard('GHS02')
+        pics.discard('GHS03')
+    # (b) GHS06 varsa GHS07 kaldırılır
+    if 'GHS06' in pics:
+        pics.discard('GHS07')
+    # (c) GHS05 varsa deri/göz tahrişi için GHS07 kaldırılır
+    if 'GHS05' in pics and 'GHS06' not in pics:
+        pics.discard('GHS07')
+    # (ç) GHS08 solunum hassasiyeti (H334) için geçerliyse GHS07 kaldırılır
+    if 'GHS08' in pics and any(h.startswith('H334') for h in h_codes):
+        pics.discard('GHS07')
+    # (d) GHS02 veya GHS06 varsa GHS04 isteğe bağlı
+    if 'GHS02' in pics or 'GHS06' in pics:
+        pics.discard('GHS04')
+
+    return sorted(pics)
 
 
 def get_icon_path(ghs_code: str) -> Path | None:

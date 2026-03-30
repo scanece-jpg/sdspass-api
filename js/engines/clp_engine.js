@@ -172,6 +172,20 @@ const CLPEngine = (() => {
       const ghs = H_TO_GHS[base] || H_TO_GHS[h];
       if (ghs) pics.add(ghs);
     });
+
+    // ── SEA Madde 28 Piktogram Önceliği ─────────────────────────────────────
+    // (a) GHS01 varsa GHS02 ve GHS03 isteğe bağlı (burada kaldırıyoruz)
+    if (pics.has('GHS01')) { pics.delete('GHS02'); pics.delete('GHS03'); }
+    // (b) GHS06 varsa GHS07 kaldırılır
+    if (pics.has('GHS06')) pics.delete('GHS07');
+    // (c) GHS05 varsa deri/göz tahrişi için GHS07 kaldırılır
+    //     (GHS05 aynı zamanda GHS06 gerektirmiyorsa GHS07'yi kaldır)
+    if (pics.has('GHS05') && !pics.has('GHS06')) pics.delete('GHS07');
+    // (ç) GHS08 solunum hassasiyeti (H334) için geçerliyse GHS07 kaldırılır
+    if (pics.has('GHS08') && hcodes.some(h => h.startsWith('H334'))) pics.delete('GHS07');
+    // (d) GHS02 veya GHS06 varsa GHS04 isteğe bağlı
+    if (pics.has('GHS02') || pics.has('GHS06')) pics.delete('GHS04');
+
     return GHS_ORDER.filter(g => pics.has(g));
   }
 

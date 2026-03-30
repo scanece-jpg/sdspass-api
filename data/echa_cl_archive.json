@@ -1,0 +1,8 @@
+{
+  "_meta": {
+    "description": "ECHA C&L Inventory kalıcı arşivi — PubChem üzerinden çekilen en yüksek bildirimli sınıflandırmalar",
+    "format": "CAS → {name, signal, pictograms, hazards, m_factors, notif_count, fetched_at}",
+    "priority": "Sıra 3 — Annex VI'dan sonra, canlı API'den önce kontrol edilir",
+    "auto_updated": true
+  }
+}

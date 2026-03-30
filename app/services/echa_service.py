@@ -4,25 +4,27 @@ ECHA / PubChem Lookup Servisi
 Lokal DB'de bulunamayan maddeleri PubChem üzerinden çeker.
 PubChem, ECHA C&L Inventory bildirim verilerini barındırır (GHS Classification).
 
-Seçim mantığı (kullanıcı isteği):
-  Birden fazla bildirim grubu varsa → bildirim sayısı EN YÜKSEK olan
+Seçim mantığı: Birden fazla bildirim grubu varsa → bildirim sayısı EN YÜKSEK olan
   (= "Aggregated GHS information ... from N notifications") veya
   "Joint Notification" ibareli grup seçilir.
 
-Akış:
-  1. substances_annex_vi.json + substances_custom.json → hızlı döner
-  2. PubChem GHS API → ECHA C&L notification'larını parse et
-  3. Sonuç substances_custom.json'a otomatik kaydedilir
-
-NOT: clp_cl_data.json ve annex_vi_lookup.json artık kullanılmıyor.
-     substances_annex_vi.json (4155 madde, tam format) ikisini de kapsar.
+Arama Hiyerarşisi (SDS TR):
+  1. substances_annex_vi.json  — Annex VI / SEA Ek-6 (mutlak, yerel)
+  2. data/echa_cl_archive.json — Kalıcı ECHA C&L arşivi (önceki çekimler)
+  3. PubChem/ECHA C&L API     — Canlı çekim, sonuç arşive kaydedilir
+  4. substances_custom.json    — Kullanıcı girişleri (API'de de bulunamazsa)
 """
 
 import re, httpx, asyncio, json, os
+from datetime import datetime, timezone
 from pathlib import Path
 
-# Lokal cache dosyası (oturum boyunca tekrar çekmeyelim)
+# Oturum içi hızlı önbellek (bellek bazlı)
 CACHE_FILE = Path(__file__).parent / 'echa_cache.json'
+
+# Kalıcı ECHA C&L arşivi — proje kökü/data/
+_DATA_DIR    = Path(__file__).parent.parent.parent / 'data'
+ARCHIVE_FILE = _DATA_DIR / 'echa_cl_archive.json'
 
 # H kodu → hazard class mapping (CLP Annex VI / GHS)
 _H_TO_CLASS = {
@@ -92,7 +94,7 @@ def lookup_local(cas: str) -> dict | None:
 
 
 # ---------------------------------------------------------------------------
-# Cache
+# Oturum önbelleği (bellek + dosya)
 # ---------------------------------------------------------------------------
 
 def _load_cache() -> dict:
@@ -111,6 +113,58 @@ def _save_cache(cache: dict):
             json.dump(cache, f, ensure_ascii=False, indent=2)
     except Exception:
         pass
+
+
+# ---------------------------------------------------------------------------
+# Kalıcı ECHA C&L Arşivi — data/echa_cl_archive.json
+# ---------------------------------------------------------------------------
+
+_archive_mem: dict | None = None  # bellek önbelleği (sunucu yeniden başlayana kadar)
+
+
+def _load_archive() -> dict:
+    global _archive_mem
+    if _archive_mem is not None:
+        return _archive_mem
+    try:
+        if ARCHIVE_FILE.exists():
+            with open(ARCHIVE_FILE, encoding='utf-8') as f:
+                _archive_mem = json.load(f)
+                return _archive_mem
+    except Exception:
+        pass
+    _archive_mem = {}
+    return _archive_mem
+
+
+def _save_to_archive(cas: str, result: dict):
+    """ECHA C&L API sonucunu kalıcı arşive kaydet."""
+    global _archive_mem
+    archive = _load_archive()
+    archive[cas] = {
+        **result,
+        'fetched_at': datetime.now(timezone.utc).strftime('%Y-%m-%dT%H:%M:%SZ'),
+        'source': result.get('source', 'ECHA C&L Archive'),
+    }
+    _archive_mem = archive
+    try:
+        with open(ARCHIVE_FILE, 'w', encoding='utf-8') as f:
+            json.dump(archive, f, ensure_ascii=False, indent=2)
+        print(f'[archive] Kaydedildi: {cas} ({result.get("name","")}) '
+              f'— {result.get("notif_count", 0)} bildirim')
+    except Exception as ex:
+        print(f'[archive] Kayıt hatası {cas}: {ex}')
+
+
+def lookup_archive(cas: str) -> dict | None:
+    """Kalıcı arşivde CAS ara. Bulunursa döndür, yoksa None."""
+    archive = _load_archive()
+    entry = archive.get(cas.strip())
+    if entry and isinstance(entry, dict) and entry.get('h_codes'):
+        entry = dict(entry)
+        entry['source'] = f'ECHA C&L Arşiv ({entry.get("notif_count", "?")} bildirim)'
+        return entry
+    return None
 
 
 # ---------------------------------------------------------------------------
@@ -257,6 +311,7 @@ async def lookup_echa_api(cas: str) -> dict | None:
     """
     PubChem GHS endpoint'inden ECHA C&L bildirim verisi çek.
     En yüksek bildirim sayılı grubu seç.
+    Oturum önbelleği kontrol edilir (arşiv kontrolü lookup_substance'da yapılır).
     """
     cas = cas.strip()
     cache = _load_cache()
@@ -339,33 +394,41 @@ async def lookup_echa_api(cas: str) -> dict | None:
 
 async def lookup_substance(cas: str) -> dict:
     """
-    Sıra: substances_annex_vi + substances_custom → PubChem/ECHA C&L
-           → PubChem/ECHA C&L API → boş sonuç
-    Lokal DB'de yoksa PubChem'den çeker ve custom'a kaydeder.
+    TR SDS Arama Hiyerarşisi:
+      1. substances_annex_vi.json  — Annex VI (mutlak, yerel)
+      2. data/echa_cl_archive.json — Kalıcı ECHA C&L arşivi
+      3. PubChem/ECHA C&L API     — Canlı çekim → arşive kaydet
+      4. substances_custom.json    — Kullanıcı girişi (fallback)
     """
     cas = cas.strip()
+    from app.services.reach_db import get_ec_no, get_reg_no
 
-    # 1. Lokal DB (annex_vi + custom) — lookup_local içinde birleşik
+    def _enrich(d: dict) -> dict:
+        d['ec_no']    = d.get('ec_no')    or get_ec_no(cas)    or ''
+        d['reach_no'] = d.get('reach_no') or get_reg_no(cas)   or ''
+        return d
+
+    # ── Sıra 1: Annex VI (substances_annex_vi.json) ──────────────────────────
     local = lookup_local(cas)
     if local:
-        from app.services.reach_db import get_ec_no, get_reg_no
-        local['ec_no']    = local.get('ec_no') or get_ec_no(cas) or ''
-        local['reach_no'] = get_reg_no(cas) or ''
-        return local
+        return _enrich(local)
 
-    # 2. PubChem → ECHA C&L
-    echa = await lookup_echa_api(cas)  # cache'den veya canlı çekim
+    # ── Sıra 2: Kalıcı ECHA C&L arşivi ──────────────────────────────────────
+    archived = lookup_archive(cas)
+    if archived:
+        return _enrich(archived)
+
+    # ── Sıra 3: PubChem / ECHA C&L canlı çekim ───────────────────────────────
+    echa = await lookup_echa_api(cas)
     if echa:
-        from app.services.reach_db import get_ec_no, get_reg_no
-        echa['ec_no']    = echa.get('ec_no') or get_ec_no(cas) or ''
-        echa['reach_no'] = get_reg_no(cas) or ''
-
-        # Annex VI'da yoksa → custom listesine otomatik kaydet
+        _enrich(echa)
+        # Arşive kalıcı kaydet (Sıra 2'yi besler)
+        _save_to_archive(cas, echa)
+        # substances_custom.json'a da kaydet (kullanıcı arayüzünde görünür)
         _auto_save_custom(cas, echa)
         return echa
 
-    # 4. Bulunamadı
-    from app.services.reach_db import get_ec_no, get_reg_no
+    # ── Sıra 4: Bulunamadı ───────────────────────────────────────────────────
     return {
         'cas': cas, 'name': '', 'ec_no': get_ec_no(cas) or '',
         'reach_no': get_reg_no(cas) or '', 'source': 'not_found',

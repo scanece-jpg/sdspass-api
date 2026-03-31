@@ -887,6 +887,36 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 txt = get_p(lang, m) or P_TEXTS.get(m, m)
                 story.append(Paragraph(f"• <b>{m}:</b> {txt}", styles['bullet']))
 
+    # ─── Zararlılığa Katkıda Bulunan Maddeler — CLP Ek II §2.8 ───────────────────
+    # H317 (cilt duyarlılaştırıcı) ve sucul tehlike (H400/H410/H411/H412) için
+    # bileşen kimliklerinin etikette yer alması zorunludur.
+    SENS_H    = {'H317','H334'}
+    AQUATIC_H = {'H400','H410','H411','H412'}
+    contrib_sens    = []
+    contrib_aquatic = []
+    for comp_c in components:
+        comp_hcodes = {h.get('h_code','').replace('*','').strip() for h in comp_c.get('hazards',[])}
+        if comp_hcodes & SENS_H:
+            _cn = comp_c.get('name_tr','') if lang=='TR' else ''
+            _cn = _cn or comp_c.get('name','') or comp_c.get('cas_no','')
+            if _cn:
+                contrib_sens.append(_cn)
+        if comp_hcodes & AQUATIC_H:
+            _cn = comp_c.get('name_tr','') if lang=='TR' else ''
+            _cn = _cn or comp_c.get('name','') or comp_c.get('cas_no','')
+            if _cn:
+                contrib_aquatic.append(_cn)
+    if contrib_sens or contrib_aquatic:
+        lbl_contrib = 'Zararlılığa Katkıda Bulunan Maddeler' if lang=='TR' else 'Substances Contributing to Hazard Classification'
+        story.append(Spacer(1, 3))
+        story.append(Paragraph(f"<b>{lbl_contrib} (CLP Ek II §2.8):</b>", styles['body_bold']))
+        if contrib_sens:
+            lbl_s = 'Cilt/solunum duyarlılaştırıcı' if lang=='TR' else 'Skin/respiratory sensitiser'
+            story.append(Paragraph(f"• {lbl_s}: {', '.join(set(contrib_sens))}", styles['bullet']))
+        if contrib_aquatic:
+            lbl_a = 'Sucul tehlike' if lang=='TR' else 'Aquatic hazard'
+            story.append(Paragraph(f"• {lbl_a}: {', '.join(set(contrib_aquatic))}", styles['bullet']))
+
     story += sub_block(f"2.3 {sub_title(lang,'2.3')}", styles)
     # PBT/vPvB
     story.append(Paragraph('PBT/vPvB: ' + term(lang,'pbt_not'), styles['small']))
@@ -1434,18 +1464,59 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             break
     mix_has_acute = bool(set(h_codes) & ACUTE_H)
     if comp_has_acute and not mix_has_acute:
+        # CLP Ek I Tablo 3.1.2 — Akut Toksisite Kat.4 varsayılan ATE değerleri
+        ATE_CAT4_DEFAULTS = {'oral': 2000, 'dermal': 2000, 'inhalation_vapour': 20.0, 'inhalation_dust': 5.0}
+        ACUTE_TOX_HCODE_ROUTE = {
+            'H302':'oral','H301':'oral','H300':'oral',
+            'H312':'dermal','H311':'dermal','H310':'dermal',
+            'H332':'inhalation','H331':'inhalation','H330':'inhalation',
+        }
+        # Bileşen bazlı ATE tablosu
+        ate_comp_rows = [[
+            ('Madde' if lang=='TR' else 'Substance'),
+            ('Konsantrasyon' if lang=='TR' else 'Concentration'),
+            ('H Kodu' if lang=='TR' else 'H Code'),
+            ('ATE (mg/kg veya mg/L)' if lang=='TR' else 'ATE (mg/kg or mg/L)'),
+        ]]
+        for comp_item in sds_data.get('components', []):
+            comp_acute_hz = [
+                hz for hz in comp_item.get('hazards', [])
+                if hz.get('h_class','').replace('*','').strip() in ACUTE_TOX_CLASSES
+            ]
+            if not comp_acute_hz:
+                continue
+            comp_n = comp_item.get('name_tr','') if lang=='TR' else ''
+            comp_n = comp_n or comp_item.get('name','') or comp_item.get('cas_no','')
+            comp_conc = comp_item.get('concentration', comp_item.get('conc', 0))
+            for hz in comp_acute_hz:
+                hc = hz.get('h_code','').replace('*','').strip()
+                route = ACUTE_TOX_HCODE_ROUTE.get(hc, 'oral')
+                cat_str = hz.get('h_class','').replace('*','').strip()
+                # Kategori numarasını çıkar (Acute Tox. 4 → 4)
+                try:
+                    cat_n = int(cat_str.split('.')[-1].strip())
+                except Exception:
+                    cat_n = 4
+                # ATE varsayılan (oral Cat.4 = 2000 mg/kg)
+                from app.services.clp_service import ATE_DEFAULTS
+                ate_val = ATE_DEFAULTS.get(route, ATE_DEFAULTS.get('oral', {})).get(f'Acute Tox. {cat_n}', 2000)
+                ate_comp_rows.append([comp_n, f'%{comp_conc}', hc, f'{ate_val} (varsayılan)' if lang=='TR' else f'{ate_val} (default)'])
         ate_note = (
             'CLP Tüzüğü (EC) No 1272/2008 Ek I Bölüm 3.1 uyarınca karışım için '
             'ATE (Akut Toksisite Tahmini) toplama yöntemi uygulanmıştır. '
-            'Hesaplama sonucunda karışımın ATE değeri sınıflandırma eşiğini aşmadığından '
+            'Aşağıdaki bileşen ATE değerleri kullanılmıştır; hesaplama sonucunda '
+            'karışımın ATE değeri sınıflandırma eşiğini aşmadığından '
             'akut toksisite sınıflandırması yapılmamıştır.'
         ) if lang == 'TR' else (
             'The summation method for ATE (Acute Toxicity Estimate) was applied to this '
             'mixture in accordance with CLP Regulation (EC) No 1272/2008, Annex I, Section 3.1. '
-            'The calculated mixture ATE did not exceed the classification threshold; '
-            'therefore no acute toxicity classification applies to the mixture.'
+            'Component ATE values used are shown below; the calculated mixture ATE did not '
+            'exceed the classification threshold, therefore no acute toxicity classification applies.'
         )
         story.append(Paragraph(ate_note, styles['body']))
+        if len(ate_comp_rows) > 1:
+            story.append(Spacer(1, 3))
+            story.append(data_table(ate_comp_rows, [55*mm, 25*mm, 20*mm, 80*mm], styles))
 
     # ─────────────────────────────────────────────────────────────────────────
     # BÖLÜM 12 — Ekoloji

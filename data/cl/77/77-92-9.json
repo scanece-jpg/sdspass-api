@@ -1,0 +1,34 @@
+{
+  "cas": "77-92-9",
+  "name": "2-hydroxypropane-1,2,3-tricarboxylic acid",
+  "name_tr": "sitrik asit",
+  "ec_no": "201-069-1",
+  "index_no": "",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319",
+      "H335"
+    ],
+    "suppl_h": []
+  }
+}

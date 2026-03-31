@@ -75,28 +75,42 @@ _PICT_MAP = {
 
 def lookup_local(cas: str) -> dict | None:
     """
-    Sıra 1 — SEA Ek-6 / CLP Annex VI  (substances_annex_vi.json)
-    Sıra 4 — Tedarikçi/Kullanıcı girişi (substances_custom.json)
-
-    SEA Yönetmeliği Ek-6, CLP Annex VI'nın Türkiye'ye aktarımıdır.
-    annex_vi=True → SEA Ek-6 kaynağı (mutlak öncelik)
-    annex_vi=False → kullanıcı/tedarikçi girişi
+    Öncelik sırası:
+      1 — SEA Ek-6            (sea_ek6=True)          MUTLAK
+      2 — AB CLP Annex VI     (annex_vi=True, sea_ek6=False)
+      4 — Tedarikçi/Kullanıcı (annex_vi=False, sea_ek6=False)
     """
     from app.services.substance_lookup import lookup_substance
     entry = lookup_substance(cas.strip())
     if not entry:
         return None
-    is_sea = entry.get('annex_vi', False)
+
+    sea_ek6   = entry.get('sea_ek6', False)
+    annex_vi  = entry.get('annex_vi', False)
+
+    if sea_ek6:
+        priority = 1
+        source   = f'SEA Ek-6 ({entry.get("atp","?")})'
+    elif annex_vi:
+        priority = 2
+        source   = f'AB CLP Annex VI ({entry.get("atp","?")})'
+    else:
+        priority = 4
+        source   = 'Tedarikçi/Kullanıcı Girişi'
+
     return {
         'cas'           : cas,
         'name'          : entry.get('name', ''),
-        'source'        : 'SEA Ek-6 / CLP Annex VI' if is_sea else 'Tedarikçi/Kullanıcı Girişi',
-        'source_priority': 1 if is_sea else 4,
+        'name_tr'       : entry.get('name_tr', ''),
+        'source'        : source,
+        'source_priority': priority,
         'h_codes'       : [h['h_code'] for h in entry.get('hazards', []) if h.get('h_code')],
         'hazard_classes': [h['h_class'] for h in entry.get('hazards', []) if h.get('h_class')],
         'signal'        : entry.get('signal', ''),
         'pictograms'    : entry.get('pictograms', []),
         'm_factors'     : entry.get('m_factors', {}),
+        'scl'           : entry.get('scl', []),
+        'suppl_hazards' : entry.get('suppl_hazards', []),
         'index_no'      : entry.get('index_no', ''),
         'atp'           : entry.get('atp', ''),
     }
@@ -232,6 +246,7 @@ def _parse_ghs_groups(info_list: list) -> list:
                 'hazard_classes': [],
                 'pictograms': [],
                 'summary': '',
+                'm_factors': {},
             }
             # Pictogram'ları markup'tan çıkar
             for s in val.get('StringWithMarkup', []):
@@ -249,7 +264,7 @@ def _parse_ghs_groups(info_list: list) -> list:
             current['signal'] = text
 
         elif name == 'GHS Hazard Statements':
-            # "H225 (> 99.9%): Highly Flammable liquid and vapor [...]"
+            # "H225 (> 99.9%): Highly Flammable liquid and vapor [M-factor: 10]"
             for s in val.get('StringWithMarkup', []):
                 raw = s.get('String', '')
                 m = re.match(r'(H\d+|EUH\d+)', raw)
@@ -260,30 +275,114 @@ def _parse_ghs_groups(info_list: list) -> list:
                     hcls = _H_TO_CLASS.get(hcode, '')
                     if hcls and hcls not in current['hazard_classes']:
                         current['hazard_classes'].append(hcls)
-
-        elif name == 'ECHA C&L Notifications Summary':
-            current['summary'] = text
-            current['notif_count'] = _extract_notif_count(text)
+                # M-faktör: "... [M-factor: 10]" veya "M factor: 10"
+                m_match = re.search(r'[Mm][- ]?[Ff]actor[:\s]+(\d+)', raw)
+                if m_match:
+                    try:
+                        mval = int(m_match.group(1))
+                        hbase = m.group(1) if m else ''
+                        if hbase in ('H400', 'H401', 'H402'):
+                            current.setdefault('m_factors', {})['acute'] = mval
+                        elif hbase in ('H410', 'H411'):
+                            current.setdefault('m_factors', {})['chronic'] = mval
+                        else:
+                            current.setdefault('m_factors', {})['acute'] = mval
+                    except (ValueError, AttributeError):
+                        pass
 
     if current is not None:
         groups.append(current)
+
+    # Fiziksel hal çakışması tespiti: aynı grupta hem gaz hem sıvı H-kodu varsa
+    GAS_H   = {'H220', 'H221', 'H280', 'H281'}
+    LIQ_H   = {'H224', 'H225', 'H226'}
+    SOL_H   = {'H228', 'H229'}
+    for g in groups:
+        h_set = set(g['h_codes'])
+        states = []
+        if h_set & GAS_H:   states.append('gas')
+        if h_set & LIQ_H:   states.append('liquid')
+        if h_set & SOL_H:   states.append('solid')
+        if len(states) > 1:
+            g['physical_state_conflict'] = states
 
     return groups
 
 
 def _best_group(groups: list) -> dict | None:
     """
-    Bildirim sayısı en yüksek grubu seç.
-    Eşitlik durumunda Joint Notification öncelikli.
+    Sınıflandırma grubu seçimi — "tedbirli olma" ilkesi (CLP Madde 10).
+
+    Öncelik sırası:
+      1. Joint Notification (resmi birleşik bildirim)
+      2. CMR (Carc./Repr./Muta./Resp.Sens.) H-kodu içeren herhangi bir grup
+         → bu H-kodları çoğunluk grubuna eklenir (birleştirme)
+      3. En çok bildirim alan grup (baseline)
+
+    Gerekçe: Mevzuatta "tedbirli olma" ilkesi gereği 1000 bildirim "tehlikesiz"
+    dese bile 10 bildirim kanıtlı karsinojen diyorsa bu dikkate alınmalıdır.
     """
     if not groups:
         return None
+
+    # Öncelik 1: Joint Notification
+    for g in groups:
+        if g['notif_count'] == 9999:
+            return g
+
     # Sadece ECHA C&L summary içeren gruplara bak
     echa_groups = [g for g in groups if g['notif_count'] > 0]
-    if echa_groups:
-        return max(echa_groups, key=lambda g: g['notif_count'])
-    # ECHA summary yoksa (örn. sadece tek grup) ilkini al
-    return groups[0]
+    if not echa_groups:
+        return groups[0]
+
+    # Öncelik 3: En çok bildirim → baseline grup
+    majority = max(echa_groups, key=lambda g: g['notif_count'])
+
+    # CMR H-kodları: her koşulda eklenmesi gereken tehlikeler
+    CMR_HCODES = {
+        'H340', 'H341',                          # Mutajenite
+        'H350', 'H350i', 'H351',                 # Kanserojenite
+        'H360', 'H360D', 'H360F', 'H360FD',      # Üreme
+        'H361', 'H361d', 'H361f', 'H361fd',
+        'H362',                                  # Emzirme
+        'H334',                                  # Solunum hassaslaştırıcı
+        'H372', 'H373',                          # STOT RE (hedef organ)
+        'H400', 'H410',                          # Yüksek akut/kronik sucul (M-faktörlü)
+    }
+
+    # Öncelik 2: Diğer gruplardan CMR H-kodlarını topla
+    extra_h = []
+    extra_cls = []
+    extra_pict = []
+
+    for g in echa_groups:
+        if g is majority:
+            continue
+        for hcode in g['h_codes']:
+            base = re.match(r'(H\d+[A-Za-z]*)', hcode)
+            if base and base.group(1) in CMR_HCODES:
+                if hcode not in majority['h_codes'] and hcode not in extra_h:
+                    extra_h.append(hcode)
+                    cls = _H_TO_CLASS.get(base.group(1), '')
+                    if cls and cls not in majority['hazard_classes'] and cls not in extra_cls:
+                        extra_cls.append(cls)
+        for pic in g['pictograms']:
+            if pic not in majority['pictograms'] and pic not in extra_pict:
+                extra_pict.append(pic)
+
+    if not extra_h:
+        return majority
+
+    # Birleştirilmiş grup oluştur
+    merged = dict(majority)
+    merged['h_codes']        = majority['h_codes'] + extra_h
+    merged['hazard_classes'] = majority['hazard_classes'] + extra_cls
+    merged['pictograms']     = list(dict.fromkeys(majority['pictograms'] + extra_pict))
+    # CMR eklendiyse sinyal Danger'a çekilebilir
+    if any(p in ('GHS08',) for p in extra_pict) and merged['signal'] == 'Warning':
+        merged['signal'] = 'Danger'
+    merged['_cmr_merged']    = True   # bilgi amaçlı flag
+    return merged
 
 
 async def _get_pubchem_cid(cas: str, client: httpx.AsyncClient) -> int | None:
@@ -374,18 +473,25 @@ async def lookup_echa_api(cas: str) -> dict | None:
             props = await _get_pubchem_props(cid, client)
             name  = props.get('IUPACName', '') or cas
 
+            # Kaynağı belirle
+            src_note = 'CMR birleştirme aktif' if best.get('_cmr_merged') else ''
             result = {
-                'cas'          : cas,
-                'name'         : name,
-                'ec_no'        : '',
-                'source'       : f'ECHA C&L / PubChem ({best["notif_count"]} bildirim)',
-                'signal'       : best['signal'],
-                'pictograms'   : best['pictograms'],
-                'h_codes'      : best['h_codes'],
+                'cas'           : cas,
+                'name'          : name,
+                'ec_no'         : '',
+                'source'        : f'ECHA C&L / PubChem ({best["notif_count"]} bildirim)',
+                'source_note'   : src_note,
+                'signal'        : best['signal'],
+                'pictograms'    : best['pictograms'],
+                'h_codes'       : best['h_codes'],
                 'hazard_classes': best['hazard_classes'],
-                'notif_count'  : best['notif_count'],
-                'notif_summary': best['summary'],
+                'm_factors'     : best.get('m_factors', {}),
+                'notif_count'   : best['notif_count'],
+                'notif_summary' : best['summary'],
             }
+            # Fiziksel hal çakışması → kullanıcıya onaylatma gerekebilir
+            if best.get('physical_state_conflict'):
+                result['physical_state_conflict'] = best['physical_state_conflict']
 
             # Cache'e kaydet
             cache[cas] = result
@@ -404,10 +510,11 @@ async def lookup_echa_api(cas: str) -> dict | None:
 async def lookup_substance(cas: str) -> dict:
     """
     TR SDS Arama Hiyerarşisi:
-      Sıra 1 — SEA Ek-6 / CLP Annex VI  (substances_annex_vi.json, annex_vi=True)  MUTLAK
-      Sıra 2 — ECHA C&L Arşivi          (data/echa_cl_archive.json)
-      Sıra 3 — ECHA C&L Canlı API       (PubChem → arşive kaydet)
-      Sıra 4 — Tedarikçi/Kullanıcı      (substances_custom.json, annex_vi=False)
+      Sıra 1 — SEA Ek-6                MUTLAK (uyumlaştırılmış — KKDİK)
+      Sıra 2 — AB CLP Annex VI         (SEA güncellenmemişse en güncel bilimsel veri)
+      Sıra 3 — Tedarikçi/Kullanıcı     (manuel onaylı, substances_custom.json)
+      Sıra 4 — ECHA C&L Arşivi         (önceki canlı çekimler, kalıcı)
+      Sıra 5 — ECHA C&L Canlı API      (PubChem → arşive kaydet)
     """
     cas = cas.strip()
     from app.services.reach_db import get_ec_no, get_reg_no
@@ -419,26 +526,30 @@ async def lookup_substance(cas: str) -> dict:
 
     local = lookup_local(cas)
 
-    # ── Sıra 1: SEA Ek-6 (annex_vi=True) — MUTLAK, hemen dön ────────────────
+    # ── Sıra 1: SEA Ek-6 — MUTLAK, tartışma biter ───────────────────────────
     if local and local.get('source_priority') == 1:
         return _enrich(local)
 
-    # ── Sıra 2: Kalıcı ECHA C&L arşivi ──────────────────────────────────────
+    # ── Sıra 2: AB CLP Annex VI ───────────────────────────────────────────────
+    if local and local.get('source_priority') == 2:
+        return _enrich(local)
+
+    # ── Sıra 3: Tedarikçi/Kullanıcı girişi (manuel onaylı) ──────────────────
+    if local and local.get('source_priority') == 4:
+        return _enrich(local)
+
+    # ── Sıra 4: Kalıcı ECHA C&L arşivi ──────────────────────────────────────
     archived = lookup_archive(cas)
     if archived:
         return _enrich(archived)
 
-    # ── Sıra 3: PubChem / ECHA C&L canlı çekim ───────────────────────────────
+    # ── Sıra 5: PubChem / ECHA C&L canlı çekim ───────────────────────────────
     echa = await lookup_echa_api(cas)
     if echa:
         _enrich(echa)
-        _save_to_archive(cas, echa)   # arşive kalıcı kaydet → Sıra 2'yi besler
-        _auto_save_custom(cas, echa)  # UI'da görünmesi için custom'a da yaz
+        _save_to_archive(cas, echa)
+        _auto_save_custom(cas, echa)
         return echa
-
-    # ── Sıra 4: Tedarikçi/Kullanıcı girişi (annex_vi=False) ─────────────────
-    if local and local.get('source_priority') == 4:
-        return _enrich(local)
 
     # ── Bulunamadı ────────────────────────────────────────────────────────────
     return {

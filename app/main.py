@@ -92,10 +92,7 @@ async def generate_pdf(data: dict = Body(...)):
             clean = {h.split()[0] for h in h_codes if isinstance(h, str)}
             signal = 'Danger' if clean & DANGER_H else 'Warning'
 
-        # P kodları
-        p_result = assign_p_codes(h_codes, signal, usage=usage)
-        p_result['label'] = select_label_p_codes(p_result['p_codes'], 6)
-        p_result['sds']   = classify_sds_p_codes(p_result['p_codes'])
+        # P kodları — eko H kodu eklendikten SONRA hesaplanacak (aşağıda)
 
         # EUH
         euh_details = data.get('euh_details', []) or [{'code':c,'text':''} for c in euh_codes]
@@ -108,7 +105,26 @@ async def generate_pdf(data: dict = Body(...)):
         try:
             eco_result = calculate_ecological(eco_comps)
         except Exception:
-            eco_result = {'sds_section_12': {}}
+            eco_result = None
+
+        # Backend eko sonucunu h_codes/all_h_codes'a ekle
+        # Frontend JS eco_engine ile Python ecological_service farklı eşik kullanabilir;
+        # Python sonucu daha güvenilir → Bölüm 2.1, etiket, taşımacılık, P kodu için kullan
+        _eco_h = None
+        if eco_result and hasattr(eco_result, 'aquatic') and eco_result.aquatic:
+            _eco_h = eco_result.aquatic.h_code
+        if _eco_h and _eco_h not in h_codes:
+            h_codes = list(h_codes) + [_eco_h]
+        if _eco_h and _eco_h not in all_h_codes:
+            all_h_codes = list(all_h_codes) + [_eco_h]
+
+        # P kodlarını güncel h_codes ile yeniden hesapla (eko H kodu dahil)
+        p_result = assign_p_codes(h_codes, signal, usage=usage)
+        p_result['label'] = select_label_p_codes(p_result['p_codes'], 6)
+        p_result['sds']   = classify_sds_p_codes(p_result['p_codes'])
+
+        if eco_result is None:
+            eco_result = {'sds_section_12': {}}  # boş fallback — dict olarak
 
         # ── PDF için Unicode → ASCII güvenli metin dönüşümü ──────────────────────
         # Avrupa kaynaklı DB'lerde (ECHA, CLP Annex VI) "…", "≤", "≥" karakterleri
@@ -164,10 +180,13 @@ async def generate_pdf(data: dict = Body(...)):
 
         # Bileşenler
         def _map_comp(c):
-            name = _safe(c.get('name', ''))
+            name    = _safe(c.get('name', ''))
+            name_tr = _safe(c.get('name_tr', ''))
             # "%100'e tamamla" bileşeni — PDF'de standart metin
             if name and 'mevzuata' in name.lower():
                 name = 'Mevzuata göre sınıflandırılmamıştır'
+            if name_tr and 'mevzuata' in name_tr.lower():
+                name_tr = 'Mevzuata göre sınıflandırılmamıştır'
             conc     = float(c.get('conc', c.get('concentration', 0)) or 0)
             conc_min = c.get('conc_min')
             conc_max = c.get('conc_max')
@@ -185,6 +204,7 @@ async def generate_pdf(data: dict = Body(...)):
             return {
                 'cas_no':        c.get('cas', c.get('cas_no', '')),
                 'name':          name,
+                'name_tr':       name_tr,   # Türkçe SDS için
                 'concentration': conc,
                 'conc_str':      conc_str,
                 'conc_min':      conc_min,

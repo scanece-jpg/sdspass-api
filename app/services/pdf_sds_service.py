@@ -849,12 +849,19 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         for d in euh_details:
             code = d.get('code','')
             # euh_service'den gelen tam metin öncelikli (EUH208 madde adı içeriyor)
-            source_text = d.get('text','').strip()
+            # lang='TR' → text_tr kullan (Türkçe madde adı içerir)
+            if lang == 'TR':
+                source_text = (d.get('text_tr') or d.get('text', '')).strip()
+            else:
+                source_text = d.get('text', '').strip()
             if source_text:
                 text = source_text
             else:
                 # codes_i18n'den al — EUH208 için source_name'i ilet
-                substance = d.get('source_name','')
+                if lang == 'TR':
+                    substance = d.get('source_name_tr') or d.get('source_name', '')
+                else:
+                    substance = d.get('source_name', '')
                 text = get_euh(lang, code, substance)
             story.append(Paragraph(f"• <b>{code}:</b> {text}", styles['bullet']))
 
@@ -908,7 +915,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     story += section_block(section_title(lang, 3), styles)
     story += sub_block(f"3.2 {sub_title(lang,'3.2')}", styles)
 
-    sec3_rows = generate_section3(components, disclosure)
+    sec3_rows = generate_section3(components, disclosure, lang=lang)
     if sec3_rows:
         # B3.2 Tablo — 4 sütun, A4'e sığacak şekilde
         # CAS No | Madde Adı | Konst. | Sınıflandırma
@@ -1638,10 +1645,17 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             if hc.startswith('EUH'):
                 # Önce euh_details'dan tam metin
                 detail = next((d for d in euh.get('euh_details',[]) if d.get('code')==hc), {})
-                if detail.get('text','').strip():
-                    stmt = detail['text']
+                if lang == 'TR':
+                    raw_text = (detail.get('text_tr') or detail.get('text', '')).strip()
                 else:
-                    substance = detail.get('source_name','')
+                    raw_text = detail.get('text', '').strip()
+                if raw_text:
+                    stmt = raw_text
+                else:
+                    if lang == 'TR':
+                        substance = detail.get('source_name_tr') or detail.get('source_name', '')
+                    else:
+                        substance = detail.get('source_name', '')
                     stmt = get_euh(lang, hc, substance)
             else:
                 stmt = get_h_stmt(hc, lang)

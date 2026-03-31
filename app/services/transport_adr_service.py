@@ -90,26 +90,38 @@ def get_adr_details(un_no: str, packing_group: str = 'II') -> dict:
 def auto_detect_un(h_codes: list, form: str = 'liquid') -> dict | None:
     """
     H kodlarından UN numarası otomatik tespit et.
+    form: 'liquid' | 'solid' | 'aerosol'
     Dönen dict doğrudan get_adr_details'e geçilebilir.
     """
+    is_solid = (form == 'solid')
+
+    # (trigger_codes, un_liquid, un_solid, pg)
     mapping = [
-        (['H224'],                    'UN1224', 'I'),
-        (['H225'],                    'UN1993', 'II'),
-        (['H226'],                    'UN1993', 'III'),
-        (['H228'],                    'UN1325', 'II'),
-        (['H300', 'H310', 'H330'],    'UN2810', 'I'),
-        (['H301', 'H311', 'H331'],    'UN2810', 'II'),
-        (['H302', 'H312', 'H332'],    'UN2810', 'III'),
-        (['H400', 'H410'],            'UN3082' if form=='liquid' else 'UN3077', 'III'),
-        (['H314'],                    'UN1760', 'II'),
-        (['H272'],                    'UN3139', 'III'),
-        (['H271'],                    'UN3139', 'I'),
+        # Yanıcı sıvılar — H kodu zaten sıvı; katı form için geçersiz
+        (['H224'],                 'UN1993', 'UN1993', 'I'),
+        (['H225'],                 'UN1993', 'UN1993', 'II'),
+        (['H226'],                 'UN1993', 'UN1993', 'III'),
+        # Yanıcı katı — H228 zaten katı kodudur
+        (['H228'],                 'UN1325', 'UN1325', 'II'),
+        # Akut toksisite — sıvı: UN2810 / katı: UN2811
+        (['H300', 'H310', 'H330'], 'UN2810', 'UN2811', 'I'),
+        (['H301', 'H311', 'H331'], 'UN2810', 'UN2811', 'II'),
+        (['H302', 'H312', 'H332'], 'UN2810', 'UN2811', 'III'),
+        # Çevre tehlikesi — sıvı: UN3082 / katı: UN3077
+        (['H400', 'H410'],         'UN3082', 'UN3077', 'III'),
+        # Korozif — sıvı: UN1760 / katı: UN1759
+        (['H314'],                 'UN1760', 'UN1759', 'II'),
+        # Oksitleyici
+        (['H271'],                 'UN3139', 'UN3139', 'I'),
+        (['H272'],                 'UN3139', 'UN3139', 'II'),
     ]
 
-    for trigger_codes, un_no, pg in mapping:
+    for trigger_codes, un_liquid, un_solid, pg in mapping:
         if any(h in h_codes for h in trigger_codes):
+            un_no = un_solid if is_solid else un_liquid
             details = get_adr_details(un_no, pg)
             details['auto_detected'] = True
+            details['form'] = form
             return details
 
     return None

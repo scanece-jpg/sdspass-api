@@ -30,42 +30,59 @@ const EcoEngine = (() => {
 
   function calculate(comps, ecoTestData = {}) {
     const h_codes = [];
-    let sumAcute1=0, sumChronic1=0, sumChronic2=0, sumChronic3=0, sumChronic4=0;
+    // CLP Annex I Tablo 4.1.3 — Python ecological_service.py ile aynı formül
+    // sumAcuteM    = Σ(Ci × M_acute)   / 100  → H400 ≥ 0.25
+    // sumChronicM  = Σ(Ci × M_chronic) / 100  → H410 ≥ 0.1 | H411 ≥ 0.01
+    //   (Chronic 1 M-faktörlü, Chronic 2 M=1 olarak eklenir)
+    // sumChronicP  = Σ(Ci)             / 100  → H412 ≥ 0.25 | H413 ≥ 0.025
+    let sumAcuteM = 0, sumChronicM = 0, sumChronicP = 0;
     const ozone=[], pbt=[];
 
     for (const c of comps) {
-      const cas = (c.cas || '').trim();
+      const cas  = (c.cas || '').trim();
       const conc = parseFloat(c.concMax || c.conc) || 0;
       if (conc <= 0) continue;
 
       const mAcute   = (c.m_factors?.acute)   || 1;
       const mChronic = (c.m_factors?.chronic)  || 1;
 
-      let contributed = false;
       for (const h of (c.hazards || [])) {
         const code = (h.h_code || '').replace(/[*\s]/g,'').substring(0,4);
-        if (code === 'H400') { sumAcute1   += (conc / 100) * mAcute   * 100; contributed = true; }
-        if (code === 'H410') { sumChronic1 += (conc / 100) * mChronic * 100; sumAcute1 += (conc/100)*mAcute*100; contributed = true; }
-        if (code === 'H411') { sumChronic2 += conc; contributed = true; }
-        if (code === 'H412') { sumChronic3 += conc; contributed = true; }
-        if (code === 'H413') { sumChronic4 += conc; contributed = true; }
+        // H400 (Aquatic Acute 1) — akut katkı
+        if (code === 'H400') {
+          sumAcuteM += (conc * mAcute) / 100;
+        }
+        // H410 (Aquatic Chronic 1) — hem akut hem kronik katkı (M-faktörlü)
+        if (code === 'H410') {
+          sumAcuteM   += (conc * mAcute)   / 100;
+          sumChronicM += (conc * mChronic) / 100;
+        }
+        // H411 (Aquatic Chronic 2) — kronik katkı (M=1 varsayılan)
+        if (code === 'H411') {
+          sumChronicM += conc / 100;
+        }
+        // H412 (Aquatic Chronic 3) ve H413 (Chronic 4) — düz toplam
+        if (code === 'H412' || code === 'H413') {
+          sumChronicP += conc / 100;
+        }
       }
 
       if (OZONE_CAS.has(cas) && conc >= 0.1) ozone.push({ name: c.name || cas, cas, conc });
-      if (PBT_CAS.has(cas) && conc >= 0.1)   pbt.push({ name: c.name || cas, cas, conc });
+      if (PBT_CAS.has(cas)   && conc >= 0.1) pbt.push(  { name: c.name || cas, cas, conc });
     }
 
-    // Akut sınıflandırma
+    // Kronik sınıflandırma (öncelik sırası)
     let aquatic = null;
-    if      (sumChronic1 >= 25) aquatic = { h:'H410', cls:'Aquatic Chronic 1', formula:`ΣChronic1×M=%${sumChronic1.toFixed(1)} ≥ 25%` };
-    else if (sumChronic1 >= 10) aquatic = { h:'H411', cls:'Aquatic Chronic 2', formula:`ΣChronic1×M=%${sumChronic1.toFixed(1)} ≥ 10%` };
-    else if (sumChronic2 >= 25) aquatic = { h:'H411', cls:'Aquatic Chronic 2', formula:`ΣChronic2=%${sumChronic2.toFixed(1)} ≥ 25%` };
-    else if (sumChronic2 >= 10 || sumChronic3 >= 25) aquatic = { h:'H412', cls:'Aquatic Chronic 3', formula:`ΣChronic2=%${sumChronic2.toFixed(1)}, ΣChronic3=%${sumChronic3.toFixed(1)}` };
-    else if (sumChronic4 >= 25) aquatic = { h:'H413', cls:'Aquatic Chronic 4', formula:`ΣChronic4=%${sumChronic4.toFixed(1)} ≥ 25%` };
+    if      (sumChronicM >= 0.1)  aquatic = { h:'H410', cls:'Aquatic Chronic 1', formula:`Σ(Ci×M)/100=${sumChronicM.toFixed(4)} ≥ 0.1` };
+    else if (sumChronicM >= 0.01) aquatic = { h:'H411', cls:'Aquatic Chronic 2', formula:`Σ(Ci×M)/100=${sumChronicM.toFixed(4)} ≥ 0.01` };
+    else if (sumChronicP >= 0.25) aquatic = { h:'H412', cls:'Aquatic Chronic 3', formula:`Σ(Ci)/100=${sumChronicP.toFixed(4)} ≥ 0.25` };
+    else if (sumChronicP >= 0.025)aquatic = { h:'H413', cls:'Aquatic Chronic 4', formula:`Σ(Ci)/100=${sumChronicP.toFixed(4)} ≥ 0.025` };
 
     if (aquatic) h_codes.push(aquatic.h);
-    if (sumAcute1 >= 25) { if (!h_codes.includes('H400')) h_codes.push('H400'); }
-    if (ozone.length)    h_codes.push('H420');
+
+    // Akut sınıflandırma — H410/H400 kaynaklı
+    if (sumAcuteM >= 0.25 && !h_codes.includes('H400')) h_codes.push('H400');
+    if (ozone.length) h_codes.push('H420');
 
     return { aquatic, ozone, pbt, h_codes };
   }

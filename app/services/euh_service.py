@@ -220,6 +220,7 @@ def check_euh(components: List[Dict]) -> Dict:
     for comp in components:
         cas = str(comp.get('cas', '')).strip()
         name = comp.get('name', '') or ''
+        name_tr = comp.get('name_tr', '') or name  # Türkçe isim (yoksa İngilizce)
         name_lower = name.lower()
         hazards = comp.get('hazards', [])
         hazard_classes = {h.get('h_class', '').replace('*', '').strip() for h in hazards}
@@ -375,6 +376,7 @@ def check_euh(components: List[Dict]) -> Dict:
             if comp_conc >= euh208_threshold:
                 skin_sens_substances.append({
                     'name': name or cas,
+                    'name_tr': name_tr or name or cas,
                     'cas': cas,
                     'conc': comp_conc,
                     'threshold': euh208_threshold,
@@ -383,7 +385,8 @@ def check_euh(components: List[Dict]) -> Dict:
 
     # EUH208: Deri sensitizeri varsa + SCL/10 eşiği kontrolü
     if skin_sens_substances and 'EUH208' not in detected_codes:
-        sub_names = '; '.join(s['name'] for s in skin_sens_substances)
+        sub_names    = '; '.join(s['name']    for s in skin_sens_substances)
+        sub_names_tr = '; '.join(s['name_tr'] for s in skin_sens_substances)
         scl_notes = []
         for s in skin_sens_substances:
             if s['has_scl']:
@@ -392,10 +395,12 @@ def check_euh(components: List[Dict]) -> Dict:
                 )
         detected.append({
             'code': 'EUH208',
-            'text': f'İçerir: {sub_names}. Alerjik reaksiyona yol açabilir.',
-            'source_cas': '; '.join(s['cas'] for s in skin_sens_substances),
-            'source_name': sub_names,
-            'scl_note': '; '.join(scl_notes) if scl_notes else None,
+            'text'         : f'Contains: {sub_names}. May produce an allergic reaction.',
+            'text_tr'      : f'İçerir: {sub_names_tr}. Alerjik reaksiyona yol açabilir.',
+            'source_cas'   : '; '.join(s['cas'] for s in skin_sens_substances),
+            'source_name'  : sub_names,
+            'source_name_tr': sub_names_tr,
+            'scl_note'     : '; '.join(scl_notes) if scl_notes else None,
         })
         detected_codes.add('EUH208')
 

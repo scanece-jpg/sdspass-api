@@ -153,7 +153,7 @@ const EUHEngine = (() => {
     for (const c of comps) {
       const cas = (c.cas || '').trim();
       const conc = parseFloat(c.concMax || c.conc) || 0;
-      const name = c.name || cas;
+      const name = c.name_tr || c.name || cas;  // Türkçe isim öncelikli
 
       // CAS'a özel EUH kodları
       if (CAS_TO_EUH[cas]) {

@@ -97,6 +97,7 @@ def get_echa_range(concentration: float) -> str:
 def format_section3_component(
     comp: Dict,
     disclosure_level: str = 'show',  # 'show' | 'range' | 'hide'
+    lang: str = 'TR',
 ) -> Dict:
     """
     Bölüm 3 bileşen satırı formatla.
@@ -112,7 +113,11 @@ def format_section3_component(
         }
     """
     cas = comp.get('cas_no', comp.get('cas', '')).strip()
-    name = comp.get('name', '') or cas
+    # Türkçe SDS → name_tr öncelikli, yoksa name
+    if lang == 'TR':
+        name = comp.get('name_tr', '') or comp.get('name', '') or cas
+    else:
+        name = comp.get('name', '') or cas
     conc = float(comp.get('worst_case_conc', comp.get('conc', comp.get('concentration', 0))) or 0)
     hazards = comp.get('hazards', [])
     haz_str = '; '.join(
@@ -914,17 +919,19 @@ H_TO_EXTINGUISHER: Dict[str, str] = {
 def generate_section3(
     components: List[Dict],
     disclosure_map: Optional[Dict[str, str]] = None,
+    lang: str = 'TR',
 ) -> List[Dict]:
     """
     SDS Bölüm 3 — Bileşenler tablosu
     disclosure_map: {cas: 'show'|'range'|'hide'} — varsayılan 'show'
+    lang: 'TR' | 'EN' — Türkçe SDS için name_tr kullanılır
     """
     disclosure_map = disclosure_map or {}
     rows = []
     for comp in components:
         cas = comp.get('cas_no', comp.get('cas', '')).strip()
         level = disclosure_map.get(cas, 'show')
-        row = format_section3_component(comp, level)
+        row = format_section3_component(comp, level, lang=lang)
         rows.append(row)
     return rows
 
@@ -1019,12 +1026,13 @@ def generate_all_sections(
     components: List[Dict],
     mixture_form: str = 'liquid',
     disclosure_map: Optional[Dict[str, str]] = None,
+    lang: str = 'TR',
 ) -> Dict:
     """
     Tüm SDS bölümlerini tek seferde üret.
     """
     return {
-        'section3':  generate_section3(components, disclosure_map),
+        'section3':  generate_section3(components, disclosure_map, lang=lang),
         'section4':  generate_section(4, h_codes, mixture_form),
         'section5':  generate_section(5, h_codes, mixture_form),
         'section6':  generate_section(6, h_codes, mixture_form),

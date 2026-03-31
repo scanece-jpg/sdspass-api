@@ -1,0 +1,27 @@
+{
+  "cas": "69377-81-7",
+  "name": "fluroxypyr (ISO); 4-amino-3,5-dichloro-6-fluoro- 2-pyridyloxyacetic acid",
+  "name_tr": "fluroksipir; 4-amino-3,5-dikloro- 6-floro-2-piridiloksiasetikasit",
+  "ec_no": "",
+  "index_no": "607-255-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

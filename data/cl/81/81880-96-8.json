@@ -1,0 +1,56 @@
+{
+  "cas": "81880-96-8",
+  "name": "(4-hydrazinophenyl)-N- methylmethanesulfonamide hydrochloride",
+  "name_tr": "(4-hidrazinofenil)-N- metilmetansülfonamid hidroklorür",
+  "ec_no": "406-090-1",
+  "index_no": "007-025-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H341",
+      "H301",
+      "H372",
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

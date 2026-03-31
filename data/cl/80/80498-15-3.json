@@ -1,0 +1,29 @@
+{
+  "cas": "80498-15-3",
+  "name": "laccase",
+  "name_tr": "lakkaz",
+  "ec_no": "420-150-4",
+  "index_no": "647-017-00-5",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Resp. Sens. 1",
+        "h_code": "H334"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H334"
+    ],
+    "suppl_h": []
+  }
+}

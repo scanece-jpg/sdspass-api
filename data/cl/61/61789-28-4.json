@@ -1,0 +1,31 @@
+{
+  "cas": "61789-28-4",
+  "name": "Creosote oil; [A complex combination of hydrocarbons obtained by the distillation of coal tar. It consists primarily of aromatic hydrocarbons and may contain appreciable quantities of tar acids and tar bases. It distills at the approximate range of 200°C to 325°C (392°F to 617°F).]",
+  "name_tr": "Kreosot yağı; [Kömür zifti damıtılması sonucu elde edilen hidrokarbonların kompleks bileşimi.Ağırlıklı olarak aromatik hidrokarbonve oldukça yüksek miktarda zift asitleri ve bazları içerir. Damıtma sıcaklığı yaklaşık 200°C ile 325 oC arasındadır (392°F-617°F).]",
+  "ec_no": "263-047-8",
+  "index_no": "648-099-00-5",
+  "atp": "",
+  "notes": [
+    "M"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

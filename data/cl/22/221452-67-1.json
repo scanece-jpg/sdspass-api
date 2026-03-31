@@ -1,0 +1,27 @@
+{
+  "cas": "221452-67-1",
+  "name": "ethyl 2-{[3-acetylamino-4-(6- bromo-2-methyl-1,3-dioxo-2,3- dihydro-1H-isoindol-5- ylazo)phenyl]ethylamino}propio nate",
+  "name_tr": "etil 2-{[3-asetilamino-4-(6- bromo-2-metil-1,3-diokso-2,3- dihidro-1H-isoindol-5- ilazo)fenil]etilamino}propiyonat",
+  "ec_no": "430-480-0",
+  "index_no": "607-484-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

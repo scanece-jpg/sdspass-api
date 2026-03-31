@@ -1,0 +1,48 @@
+{
+  "cas": "111-41-1",
+  "name": "2-(2-aminoethylamino)ethanol; (AEEA)",
+  "name_tr": "2-(2-aminoetilamino)etanol; (AEEA)",
+  "ec_no": "203-867-5",
+  "index_no": "603-194-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360Df"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H335",
+        "class": "STOT SE 3",
+        "c_min": 5.0,
+        "c_max": null
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H360Df",
+      "H314",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

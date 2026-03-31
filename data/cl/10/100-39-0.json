@@ -1,0 +1,39 @@
+{
+  "cas": "100-39-0",
+  "name": "α-bromotoluene; benzyl bromide",
+  "name_tr": "α-bromotoluen; benzil bromür",
+  "ec_no": "202-847-3",
+  "index_no": "602-057-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319",
+      "H335",
+      "H315"
+    ],
+    "suppl_h": []
+  }
+}

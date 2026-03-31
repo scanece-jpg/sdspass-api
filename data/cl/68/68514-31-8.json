@@ -1,0 +1,44 @@
+{
+  "cas": "68514-31-8",
+  "name": "Hydrocarbons, C1-4; Petroleum gas; [A complex combination of hydrocarbons provided by thermal cracking and absorber operations and by distillation of crude oil. It consists of hydrocarbons having carbon numbers predominantly in the range of C1 through C4 and boiling in the range of approximately minus 164°C to minus 0.5°C (-263°F to 31°F).]",
+  "name_tr": "Hidrokarbonlar, C1-4; Petrol gazı; [Isıl parçalama ve soğurma işlemleri ve ham petrolün damıtılması ile elde edilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla, C1 ila C4 aralığında karbon sayısına sahip ve yaklaşık eksi 164 oC ila eksi 0,5 oC (-263 oF ila 31 oF) aralığında kaynayan, hidrokarbonlardan oluşur.]",
+  "ec_no": "271-032-2",
+  "index_no": "649-088-00-8",
+  "atp": "",
+  "notes": [
+    "K",
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H220"
+      },
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS04",
+      "GHS02",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

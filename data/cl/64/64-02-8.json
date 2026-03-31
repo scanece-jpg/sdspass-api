@@ -1,0 +1,35 @@
+{
+  "cas": "64-02-8",
+  "name": "tetrasodium ethylene diamine tetraacetate",
+  "name_tr": "tetrasodyum etilen daimin tetraasetat",
+  "ec_no": "200-573-9",
+  "index_no": "607-428-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302",
+      "H318"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "cas": "1918-13-4",
+  "name": "chlorthiamid (ISO); 2,6-dichloro (thiobenzamide)",
+  "name_tr": "klorotiyamid (ISO); 2,6-dikloro (tiyobenzamid)",
+  "ec_no": "217-637-7",
+  "index_no": "616-005-00-1",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

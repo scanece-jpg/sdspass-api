@@ -1,0 +1,34 @@
+{
+  "cas": "7439-92-1",
+  "name": "lead massive; [particule diameter≥1mm]",
+  "name_tr": "kurşun masif; [partikül çapı≥1mm]",
+  "ec_no": "231-100-4",
+  "index_no": "082-014-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1A",
+        "h_code": "H360FD"
+      },
+      {
+        "class": "Lact.",
+        "h_code": "H362"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H360FD",
+      "H362"
+    ],
+    "suppl_h": []
+  }
+}

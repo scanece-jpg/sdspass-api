@@ -1,0 +1,49 @@
+{
+  "cas": "10026-13-8",
+  "name": "phosphorus pentachloride",
+  "name_tr": "Fosfor pentaklorür",
+  "ec_no": "233-060-3",
+  "index_no": "015-008-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS08",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H330",
+      "H302",
+      "H373",
+      "H314"
+    ],
+    "suppl_h": [
+      "EUH014",
+      "EUH029"
+    ]
+  }
+}

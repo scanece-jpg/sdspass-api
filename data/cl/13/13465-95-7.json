@@ -1,0 +1,40 @@
+{
+  "cas": "13465-95-7",
+  "name": "barium perchlorate",
+  "name_tr": "Baryum perklorat",
+  "ec_no": "236-710-4",
+  "index_no": "017-007-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Ox. Sol. 1",
+        "h_code": "H271"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS03",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H271",
+      "H332",
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

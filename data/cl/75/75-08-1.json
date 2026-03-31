@@ -1,0 +1,46 @@
+{
+  "cas": "75-08-1",
+  "name": "ethanethiol; ethyl mercaptan",
+  "name_tr": "etantiyol; etil merkaptan",
+  "ec_no": "200-837-3",
+  "index_no": "016-022-00-9",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H225",
+      "H332",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

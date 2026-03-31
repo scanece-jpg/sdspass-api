@@ -1,0 +1,38 @@
+{
+  "cas": "75-01-4",
+  "name": "vinyl chloride; chloroethylene",
+  "name_tr": "vinil klorür; kloroetilen",
+  "ec_no": "200-831-0",
+  "index_no": "602-023-00-7",
+  "atp": "",
+  "notes": [
+    "D",
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H220"
+      },
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

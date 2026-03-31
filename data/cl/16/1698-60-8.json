@@ -1,0 +1,40 @@
+{
+  "cas": "1698-60-8",
+  "name": "chloridazon (ISO); 5-amino-4-chloro-2- phenylpyridazine-3-(2H)-one; pyrazon",
+  "name_tr": "kloridazon (ISO); 5-amino-4-kloro-2- fenilpiridazin-3-(2H)-on; pirazon",
+  "ec_no": "216-920-2",
+  "index_no": "606-035-00-3",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

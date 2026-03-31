@@ -1,0 +1,27 @@
+{
+  "cas": "3147-77-1",
+  "name": "2-(2-hydroxy-4- octyloxyphenyl)-2H- benzotriazole",
+  "name_tr": "2-(2-hidroksi-4-oktiloksifenil)- 2H-benzotriazol",
+  "ec_no": "448-630-9",
+  "index_no": "613-305-00-4",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

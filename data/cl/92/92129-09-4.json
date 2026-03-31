@@ -1,0 +1,31 @@
+{
+  "cas": "92129-09-4",
+  "name": "Paraffin oils (petroleum), solvent-refined dewaxed heavy; Baseoil - unspecified; [A complex combination of hydrocarbons obtained from sulfur-containing paraffinic crude oil. It consists predominantly of a solvent refined deparaffinated lubricating oil with a viscosity of 65cSt at 50 °C.]",
+  "name_tr": "Parafin yağları (petrol), çözücü ile rafine edilmiş ve cilası alınmış ağır; bazyağlar – tanımlanmamış [Kükürt içeren parafinik ham petrolden elde edilen hidrokarbonların kompleks bileşimi. Ağırlıklı olarak 50 oC’de 65 cSt viskoziteye sahip çözücü ile rafine edilmiş parafini alınmış yağlama yağlarından oluşur.]",
+  "ec_no": "295-810-6",
+  "index_no": "649-500-00-6",
+  "atp": "",
+  "notes": [
+    "L"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "cas": "1680-21-3",
+  "name": "2,2'-(ethylenedioxy)diethyl diacrylate; triethylene glycol diacrylate",
+  "name_tr": "2,2'-(etilendioksi)dietildiakrilat; trietilen glikol diakrilat",
+  "ec_no": "216-853-9",
+  "index_no": "607-126-00-0",
+  "atp": "",
+  "notes": [
+    "D"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319",
+      "H315",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

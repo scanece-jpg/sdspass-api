@@ -1,0 +1,41 @@
+{
+  "cas": "15159-40-7",
+  "name": "morpholine-4-carbonyl chloride",
+  "name_tr": "morfolin-4-karbonilklorür",
+  "ec_no": "239-213-0",
+  "index_no": "613-041-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H351",
+      "H319",
+      "H315"
+    ],
+    "suppl_h": [
+      "EUH014"
+    ]
+  }
+}

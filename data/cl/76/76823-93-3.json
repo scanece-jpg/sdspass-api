@@ -1,0 +1,34 @@
+{
+  "cas": "76823-93-3",
+  "name": "3-(2- (diaminomethyleneamino)thiazo l-4-ylmethylthio)propionitrile",
+  "name_tr": "3-(2- (diaminometilenamino)tiazol-4- ilmetiltiyo)propiyonitril",
+  "ec_no": "403-710-2",
+  "index_no": "608-021-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

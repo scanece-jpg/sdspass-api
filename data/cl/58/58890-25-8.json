@@ -1,0 +1,27 @@
+{
+  "cas": "58890-25-8",
+  "name": "3,3'-dicyclohexyl-1,1'- methylenebis(4,1- phenylene)diurea",
+  "name_tr": "3,3'-disiklohekzil-1,1'- metilenbis(4,1-fenilen)diüre",
+  "ec_no": "406-370-3",
+  "index_no": "616-094-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

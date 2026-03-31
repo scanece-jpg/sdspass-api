@@ -1,0 +1,34 @@
+{
+  "cas": "86393-33-1",
+  "name": "7-chloro-1-cyclopropyl-6-fluoro- 1,4-dihydro-4-oxoquinoline-3- carboxylic acid",
+  "name_tr": "7-kloro-1-siklopropil-6-flor-1,4- dihidro-4-oksokinolin-3- karboksilik asit",
+  "ec_no": "405-050-0",
+  "index_no": "607-262-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

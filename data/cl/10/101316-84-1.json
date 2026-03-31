@@ -1,0 +1,29 @@
+{
+  "cas": "101316-84-1",
+  "name": "Tar, brown-coal, low-temp.; [A tar obtained from low temperature carbonization and low temperature gasification of brown coal. Composed primarily of aliphatic, naphthenic and cyclic aromatic hydrocarbons, heteroaromatic hydrocarbons and cyclic phenols.]",
+  "name_tr": "zift, linyit kömürü, düşük- sıcaklık; [Linyitin düşük sıcaklıkta karbonlaştırılması ve gazlaştırılmasından elde edilen zift. Esas olarak alifatik, naftenik ve siklik aromatik hidrokarbonlardan, heteroaromatik hidrokarbonlardan ve siklik fenollerden oluşur.]",
+  "ec_no": "309-886-6",
+  "index_no": "648-146-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1A",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

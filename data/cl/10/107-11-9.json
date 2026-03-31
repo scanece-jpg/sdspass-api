@@ -1,0 +1,51 @@
+{
+  "cas": "107-11-9",
+  "name": "allylamine",
+  "name_tr": "Allilamin",
+  "ec_no": "203-463-9",
+  "index_no": "612-046-00-4",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H331"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H311"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS06",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H225",
+      "H331",
+      "H311",
+      "H301",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

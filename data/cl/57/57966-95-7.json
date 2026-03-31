@@ -1,0 +1,56 @@
+{
+  "cas": "57966-95-7",
+  "name": "cymoxanil (ISO); 2-cyano-N- [(ethylamino)carbonyl]-2- (methoxyimino)acetamide",
+  "name_tr": "simoksanil (ISO); 2-siyano-N- [(etilamino)karbonil]-2- (metoksiimino)asetamid",
+  "ec_no": "261-043-0",
+  "index_no": "616-035-00-5",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 2",
+        "h_code": "H361fd"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373(kan,"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "timus)"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H400"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H361fd",
+      "H302",
+      "H373(kan,",
+      "timus)",
+      "H317",
+      "H400"
+    ],
+    "suppl_h": []
+  }
+}

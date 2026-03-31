@@ -1,0 +1,39 @@
+{
+  "cas": "50-01-1",
+  "name": "guanidinium chloride; guanadine hydrochloride",
+  "name_tr": "guanidinyum klorür; guanadin hidroklorür",
+  "ec_no": "200-002-3",
+  "index_no": "607-148-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302",
+      "H319",
+      "H315"
+    ],
+    "suppl_h": []
+  }
+}

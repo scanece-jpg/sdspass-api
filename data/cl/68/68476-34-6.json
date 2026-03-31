@@ -1,0 +1,29 @@
+{
+  "cas": "68476-34-6",
+  "name": "Fuels, diesel, No 2; Gasoil - unspecified; [A distillate oil having a minimum viscosity of 32,6 SUS at 37,7 °C (100 °F).]",
+  "name_tr": "Dizel yakıtları, No 2; Gaz yağı – tanımlanmamış; [37,7 oC’de (100 oF) 32,6 SUS minimum viskoziteye sahip bir damıtık yağı.]",
+  "ec_no": "270-676-1",
+  "index_no": "649-227-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H351"
+    ],
+    "suppl_h": []
+  }
+}

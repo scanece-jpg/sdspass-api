@@ -1,0 +1,27 @@
+{
+  "cas": "204277-61-2",
+  "name": "6-(2-chloro-6-cyano-4- nitrophenylazo)-4-methoxy-3- [N-(methoxycarbonylmethyl)-N- (1- methoxycarbonylethyl)amino]ac etanilide",
+  "name_tr": "6-(2-kloro-6-siyano-4- nitrofenilazo)-4-metoksi-3-[N- (metoksikarbonilmetil)-N-(1- metoksicarboniletil)amino]aseta nilid",
+  "ec_no": "430-500-8",
+  "index_no": "616-156-00-3",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

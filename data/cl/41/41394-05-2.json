@@ -1,0 +1,35 @@
+{
+  "cas": "41394-05-2",
+  "name": "metamitron (ISO); 4-amino-3-methyl-6-phenyl- 1,2,4-triazin-5-one",
+  "name_tr": "metamitron (ISO); 4-amino-3- metil-6-fenil-1,2,4-triazin-5-on",
+  "ec_no": "255-349-3",
+  "index_no": "613-129-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H400"
+    ],
+    "suppl_h": []
+  }
+}

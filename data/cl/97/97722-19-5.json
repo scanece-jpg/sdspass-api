@@ -1,0 +1,44 @@
+{
+  "cas": "97722-19-5",
+  "name": "Raffinates (petroleum), steam- cracked C4 fraction cuprous ammonium acetate extn., C3-5 and C3-5 unsatd., butadiene-free; Petroleum gas",
+  "name_tr": "Rafinatlar (petrol), buharla parçalanmış C4 fraksiyon bakır(+1) amonyum asetat özütü., C3-5 ve C3-5 doymamış, bütadien içermeyen; Petrol gazı",
+  "ec_no": "307-769-4",
+  "index_no": "649-119-00-5",
+  "atp": "",
+  "notes": [
+    "K",
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H220"
+      },
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS04",
+      "GHS02",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "cas": "124-41-4",
+  "name": "sodium methanolate; sodium methoxide; [1] potassium methanolate; potassium methoxide; [2] lithium methanolate; lithium methoxide [3]",
+  "name_tr": "sodyum metanolat; sodyum metoksit [1]; potasyum metanolat; potasyum metoksit [2]; lityum metanolat; lityum metoksit [3]",
+  "ec_no": "204-699-5",
+  "index_no": "603-040-00-2",
+  "atp": "",
+  "notes": [
+    "T"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Self-heat. 1",
+        "h_code": "H251"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H251",
+      "H314"
+    ],
+    "suppl_h": [
+      "EUH014"
+    ]
+  }
+}

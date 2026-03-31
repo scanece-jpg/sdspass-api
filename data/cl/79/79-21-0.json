@@ -1,0 +1,72 @@
+{
+  "cas": "79-21-0",
+  "name": "peracetic acid . . . %",
+  "name_tr": "perasetik asit ….%",
+  "ec_no": "201-186-8",
+  "index_no": "607-094-00-8",
+  "atp": "",
+  "notes": [
+    "B",
+    "D"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      },
+      {
+        "class": "Org. Perox. Type D",
+        "h_code": "H242"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1A",
+        "h_code": "H314"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H335",
+        "class": "STOT SE 3",
+        "c_min": 1.0,
+        "c_max": null
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS05",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H226",
+      "H242",
+      "H332",
+      "H312",
+      "H302",
+      "H314",
+      "H400"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "cas": "616-47-7",
+  "name": "1-methylimidazole",
+  "name_tr": "1-metilimidazol",
+  "ec_no": "210-484-7",
+  "index_no": "613-035-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H312",
+      "H302",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

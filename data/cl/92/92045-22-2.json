@@ -1,0 +1,44 @@
+{
+  "cas": "92045-22-2",
+  "name": "Gases (petroleum), steam- cracker C3-rich; Petroleum gas; [A complex combination of hydrocarbons produced by the distillation of products from a steam cracking process. It consists predominantly of propylene with some propane and boils in the range of approximately -70°C to 0°C (- 94°F to 32°F).]",
+  "name_tr": "Gazlar (petrol), C3-zengin buharlı parçalayıcı; Petrol gazı [Buharla parçalama prosesi ürünlerinin damıtılması ile üretilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla biraz propanlı propilenden oluşur ve yaklaşık - 70 oC ila 0 oC (- 94 oF ila 32 oF) aralığında kaynar.]",
+  "ec_no": "295-404-9",
+  "index_no": "649-115-00-3",
+  "atp": "",
+  "notes": [
+    "K",
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H220"
+      },
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS04",
+      "GHS02",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

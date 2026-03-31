@@ -1,0 +1,37 @@
+{
+  "cas": "7440-09-7",
+  "name": "potassium",
+  "name_tr": "potasyum",
+  "ec_no": "231-119-8",
+  "index_no": "019-001-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Water-react. 1",
+        "h_code": "H260"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H260",
+      "H314"
+    ],
+    "suppl_h": [
+      "EUH014"
+    ]
+  }
+}

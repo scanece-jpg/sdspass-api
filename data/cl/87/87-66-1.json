@@ -1,0 +1,50 @@
+{
+  "cas": "87-66-1",
+  "name": "pyrogallol; 1,2,3-trihydroxybenzene",
+  "name_tr": "pirogallol; 1,2,3- trihidroksibenzen",
+  "ec_no": "201-762-9",
+  "index_no": "604-009-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H341",
+      "H332",
+      "H312",
+      "H302",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

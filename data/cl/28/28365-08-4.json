@@ -1,0 +1,41 @@
+{
+  "cas": "28365-08-4",
+  "name": "2,6-diamino-3-((pyridine-3- yl)azo)pyridine",
+  "name_tr": "2,6-diamino-3-((piridin-3- il)azo)piridin",
+  "ec_no": "421-430-9",
+  "index_no": "613-231-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H373",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

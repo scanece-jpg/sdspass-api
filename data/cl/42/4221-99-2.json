@@ -1,0 +1,47 @@
+{
+  "cas": "4221-99-2",
+  "name": "butan-2-ol; [1] (S)-butan-2-ol; [2] (R)-butan-2-ol; [3] (±)-butan-2-ol [4]",
+  "name_tr": "bütan-2-ol [1]; (S)-bütan-2-ol [2]; (R)-bütan-2-ol [3]; (±)-bütan-2-ol [4]",
+  "ec_no": "201-158-5",
+  "index_no": "603-127-00-5",
+  "atp": "",
+  "notes": [
+    "C"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H336"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS02",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H226",
+      "H319",
+      "H335",
+      "H336"
+    ],
+    "suppl_h": []
+  }
+}

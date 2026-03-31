@@ -1,0 +1,31 @@
+{
+  "cas": "101316-85-2",
+  "name": "Tar, coal, low-temp., distn. residues; Tar Oil, intermediate boiling; [Residues from fractional distillation of low temperature coal tar to remove oils that boil in a range up to approximately 300 °C (572 °F). Composed primarily of aromatic compounds.]",
+  "name_tr": "zift, kömür, düşük-sıcaklık, damıtma. artıkları; zift yağı, orta kaynama sıcaklığı; [Düşük sıcaklık kömür ziftinden yağları uzaklaştırmak için uygulanan ayrımsal damıtma işleminin yaklaşık 300 oC (572 oF) aralığında kaynayan artıkları. Büyük ölçüde aromatik bileşiklerden oluşur.]",
+  "ec_no": "309-887-1",
+  "index_no": "648-068-00-6",
+  "atp": "",
+  "notes": [
+    "M"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

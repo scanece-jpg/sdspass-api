@@ -1,0 +1,29 @@
+{
+  "cas": "1314-56-3",
+  "name": "phosphorus pentoxide",
+  "name_tr": "Fosfor pentoksit",
+  "ec_no": "215-236-1",
+  "index_no": "015-010-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Corr. 1A",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

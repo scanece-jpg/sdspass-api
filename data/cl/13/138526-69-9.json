@@ -1,0 +1,52 @@
+{
+  "cas": "138526-69-9",
+  "name": "1-bromo-3,4,5-trifluorobenzene",
+  "name_tr": "1-bromo-3,4,5-triflorobenzen",
+  "ec_no": "418-480-9",
+  "index_no": "602-092-00-3",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      },
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS08",
+      "GHS05",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H226",
+      "H351",
+      "H315",
+      "H318",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

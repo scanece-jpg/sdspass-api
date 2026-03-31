@@ -1,0 +1,31 @@
+{
+  "cas": "90622-53-0",
+  "name": "Alkanes, C12-26-branched and linear",
+  "name_tr": "Alkanlar, C12-26-dallanmış ve düz",
+  "ec_no": "292-454-3",
+  "index_no": "649-242-00-4",
+  "atp": "",
+  "notes": [
+    "N"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

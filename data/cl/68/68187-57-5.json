@@ -1,0 +1,31 @@
+{
+  "cas": "68187-57-5",
+  "name": "Pitch, coal tar-petroleum; Pitch Residues; [The residue from the distillation of a mixture of coal tar and aromatic petroleum streams. A solid with a softening point from 40 °C to 180 °C (140 °F to 356 °F). Composed primarily of a complex combination of three or more membered condensed ring aromatic hydrocarbons.]",
+  "name_tr": "zift, kömür zifti-petrol; ziftli artıklar; [Kömür zifti ve aromatik petrol karışımının damıtma artığı. Yumuşama noktası 40 oC ile 180oC (140 oF-356 oF) arasında olan katı. Büyük ölçüde üç veya daha fazla elemanlı sıkışık halka aromatik hidrokarbonların kompleks bileşiminden oluşur.]",
+  "ec_no": "269-109-0",
+  "index_no": "648-076-00-X",
+  "atp": "",
+  "notes": [
+    "M"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

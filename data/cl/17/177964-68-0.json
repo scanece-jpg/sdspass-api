@@ -1,0 +1,39 @@
+{
+  "cas": "177964-68-0",
+  "name": "(E)-3-(4-(4-fluorophenyl)-5- methoxymethyl-2,6-bis(1- methoxymethyl)pyridin-3- yl)prop-2-enal",
+  "name_tr": "(E)-3-(4-(4-florofenil)-5- metoksimetil-2,6-bis(1- metoksimetil)pridin-3-il)prop-2- enal",
+  "ec_no": "426-330-9",
+  "index_no": "605-035-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319",
+      "H317",
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

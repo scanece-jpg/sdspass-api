@@ -1,0 +1,41 @@
+{
+  "cas": "93165-19-6",
+  "name": "Distillates (petroleum), C6-rich; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons obtained from the distillation of a petroleum feedstock. It consists predominantly of hydrocarbons having carbon numbers of C5 through C7, rich in C6, and boiling in the range of approximately 60°C to 70°C (140°F to 158°F).]",
+  "name_tr": "Damıtıklar (petrol), C6-zengin; düşük kaynama noktalı nafta – tanımlanmamış; [Petrol besleme stokunun damıtılmasından elde edilen kompleks hidrokarbon bileşimi. C6 bol olmak üzere, karbon sayıları ağırlıklı olarak C5 ila C7 aralığında olan ve yaklaşık 60°C ila 70°C (140°F ila 158°F) aralığında kaynayan hidrokarbonlardan oluşur.]",
+  "ec_no": "296-903-4",
+  "index_no": "649-388-00-9",
+  "atp": "",
+  "notes": [
+    "P"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

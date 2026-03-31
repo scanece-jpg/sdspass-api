@@ -1,0 +1,37 @@
+{
+  "cas": "84989-06-0",
+  "name": "Tar acids, xylenol fraction; Distillate Phenols; [The fraction of tar acids, rich in 2,4- and 2,5-dimethylphenol, recovered by distillation of low- temperature coal tar crude tar acids.]",
+  "name_tr": "zift asitler, ksilenol fraksiyonu; damıtık fenoller; [Düşük sıcaklık kömür zifti ham zift asitlerinin damıtılması ile geri kazanılan ve 2,4- ve 2,5- dimetilfenol bakımından zengin zift fraksiyonu.]",
+  "ec_no": "284-895-5",
+  "index_no": "648-122-00-9",
+  "atp": "",
+  "notes": [
+    "J",
+    "M"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

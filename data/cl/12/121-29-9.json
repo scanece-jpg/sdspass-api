@@ -1,0 +1,50 @@
+{
+  "cas": "121-29-9",
+  "name": "2-methyl-4-oxo-3-(penta-2,4- dienyl)cyclopent-2-enyl[1R- [1α[S(Z)](3β)]]-3-(3-methoxy-2- methyl-3-oxoprop-1-enyl)-2,2- dimethylcyclopropanecarboxylat e; pyrethrin II",
+  "name_tr": "2-metil-4-okso-3-(penta-2,4- dienil)siklopent-2-enil-[1R- [1α[S(Z)](3β)]]-3-(3-metoksi-2- metil-3-oksoprop-1-enil)-2,2- dimetilsiklopropankarboksilat; piretrin II",
+  "ec_no": "204-462-6",
+  "index_no": "613-024-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H332",
+      "H312",
+      "H302",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

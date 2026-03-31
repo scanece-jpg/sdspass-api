@@ -1,0 +1,40 @@
+{
+  "cas": "85702-90-5",
+  "name": "S-(3-trimethoxysilyl)propyl 19- isocyanato-11-(6- isocyanatohexyl)-10,12-dioxo- 2,9,11,13- tetraazanonadecanethioate",
+  "name_tr": "S-(3-trimetoksisilil)propil-19- izosiyanato-11-(6- izosiyanatohekzil)-10,12-diokso- 2,9,11,13- tetraazanonadekantiyoat",
+  "ec_no": "402-290-8",
+  "index_no": "607-184-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      },
+      {
+        "class": "Resp. Sens. 1",
+        "h_code": "H334"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H226",
+      "H334",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

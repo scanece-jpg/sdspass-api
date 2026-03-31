@@ -1,0 +1,51 @@
+{
+  "cas": "36362-09-1",
+  "name": "2-(decylthio)ethylammonium chloride",
+  "name_tr": "2-(desiltiyo)etilamonyum klorür",
+  "ec_no": "405-640-8",
+  "index_no": "007-024-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS05",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H373",
+      "H315",
+      "H318",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

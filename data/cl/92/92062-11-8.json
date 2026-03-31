@@ -1,0 +1,31 @@
+{
+  "cas": "92062-11-8",
+  "name": "Slack wax (petroleum), low- melting, hydrotreated; Slack wax; [A complex combination of hydrocarbons obtained by treatment of low-melting petroleum slack wax with hydrogen in the presence of a catalyst. It consists predominantly of saturated straight and branched chain hydrocarbons having carbon numbers predominantly greater than C12.]",
+  "name_tr": "Yağlı mum (petrol),düşük erime, hidrojenle muamele edilmiş; Yağlı mum; [Düşük erime noktalı petrol yağlı mumunun, katalizör varlığında, hidrojen ile muamele edilmesi ile elde edilen hidrokarbonların kompleks bir bileşimi. Genelde, ağırlıklı olarak C12’den büyük karbon sayısına sahip doymuş düz ve dallanmış zincirli hidrokarbonlardan oluşur.]",
+  "ec_no": "295-525-7",
+  "index_no": "649-249-00-2",
+  "atp": "",
+  "notes": [
+    "N"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

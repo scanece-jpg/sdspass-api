@@ -1,0 +1,49 @@
+{
+  "cas": "10486-00-7",
+  "name": "perboric acid (H3BO2(O2)), monosodium salt trihydrate; [1] perboric acid, sodium salt, tetrahydrate; [2] perboric acid (HBO(O2)), sodium salt, tetrahydrate; [3] sodium peroxoborate hexahydrate; [containing < 0.1 % (w/w) of particles with an aerodynamic diameter of below 50 μm]",
+  "name_tr": "perborik asit (H3BO2(O2)), monosodyum tuzu, trihidrat; [1] perborik asit, sodyum tuzu, tetrahidrat; [2] perborik asit (HBO(O2)), sodyum tuzu, tetrahidrat; [3] sodyum peroksoborat hekzahidrat; [(a/a) < % 0,1 aerodinamik çapı 50 μm’den düşük olan partikül içeren]",
+  "ec_no": "239-172-9",
+  "index_no": "005-018-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H318",
+        "class": "Eye Dam. 1",
+        "c_min": 36.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H319",
+        "class": "Eye Irrit. 2",
+        "c_min": 22.0,
+        "c_max": 36.0
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H335",
+      "H318"
+    ],
+    "suppl_h": []
+  }
+}

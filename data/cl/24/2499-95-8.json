@@ -1,0 +1,50 @@
+{
+  "cas": "2499-95-8",
+  "name": "hexyl acrylate",
+  "name_tr": "hekzilakrilat",
+  "ec_no": "219-698-5",
+  "index_no": "607-233-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H319",
+      "H335",
+      "H315",
+      "H317",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

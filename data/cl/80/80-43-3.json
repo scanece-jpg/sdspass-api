@@ -1,0 +1,46 @@
+{
+  "cas": "80-43-3",
+  "name": "bis(α,α-dimethylbenzyl) peroxide",
+  "name_tr": "bis(α,α-dimetilbenzil)peroksit",
+  "ec_no": "201-279-3",
+  "index_no": "617-006-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Org. Perox. Type F",
+        "h_code": "H242"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS02",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H242",
+      "H319",
+      "H315",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

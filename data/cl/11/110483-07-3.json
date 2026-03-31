@@ -1,0 +1,27 @@
+{
+  "cas": "110483-07-3",
+  "name": "N-(3-hexadecyloxy-2- hydroxyprop-1-yl)-N-(2- hydroxyethyl)palmitamide",
+  "name_tr": "N-(3-hekzadesiloksi-2- hidroksiprop-1-il)-N-(2- hidroksietil)palmitamid",
+  "ec_no": "408-110-4",
+  "index_no": "616-096-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

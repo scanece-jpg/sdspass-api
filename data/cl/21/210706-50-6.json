@@ -1,0 +1,27 @@
+{
+  "cas": "210706-50-6",
+  "name": "hexadecyl 3-[2-(5,5-dimethyl- 2,4-dioxo-1,3-oxazolidin-3-yl)- 4,4-dimethyl-3-oxovaleramido]- 4-isopropoxybenzoate",
+  "name_tr": "hekzadesil 3-[2-(5,5-dimetil-2,4- diokso-1,3-oksazolidin-3-il)- 4,4dimetil-3-oksovalerimido]-4- izopopoksibenzoat",
+  "ec_no": "428-140-1",
+  "index_no": "607-590-00-4",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

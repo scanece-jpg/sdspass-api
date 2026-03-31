@@ -1,0 +1,44 @@
+{
+  "cas": "137193-60-3",
+  "name": "2-chloro-5-sec- hexadecylhydroquinone",
+  "name_tr": "2-kloro-5-sek- hekzadesilhidrokinon",
+  "ec_no": "407-750-1",
+  "index_no": "606-083-00-5",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319",
+      "H315",
+      "H317",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

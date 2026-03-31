@@ -1,0 +1,31 @@
+{
+  "cas": "72623-85-9",
+  "name": "Lubricating oils (petroleum), C20-50, hydrotreated neutral oil- based, high-viscosity; Baseoil - unspecified; [A complex combination of hydrocarbons obtained by treating light vacuum gas oil, heavy vacuum gas oil, and solvent deasphalted residual oil with hydrogen in the presence of a catalyst in a two stage process with dewaxing being carried out between the two stages. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C20 through C50 and produces a finished oil having a viscosity of approximately 112cSt at 40 °C. It contains a relatively large proportion of saturated hydrocarbons.]",
+  "name_tr": "Yağlama yağları (petrol), C20-50, hidrojenle muamele edilmiş nötr yağ bazlı, yüksek viskoziteli; bazyağlar-tanımlanmamış [Hafif vakum gaz yağı, ağır vakum gaz yağı ve çözücü asfaltı giderilmiş artık yağ ile hidrojenin katalizör varlığında, cila giderilmenin iki aşama arasında gerçekleştirildiği iki aşamalı proseste muamele edilmesi ile elde edilen hidrokarbonların kompleks bir bileşimi. Genelde, ağırlıklı olarak C20 ila C50 aralığında karbon sayısına sahip hidrokarbonlardan oluşur ve 40 oC’de yaklaşık 112 cSt viskoziteye sahip son yağ üretir. Bağıl olarak büyük bir oranda doymuş hidrokarbonlar içerir.]",
+  "ec_no": "276-736-3",
+  "index_no": "649-481-00-4",
+  "atp": "",
+  "notes": [
+    "L"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

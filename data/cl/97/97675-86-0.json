@@ -1,0 +1,31 @@
+{
+  "cas": "97675-86-0",
+  "name": "Hydrocarbons, C12-20, hydrotreated paraffinic, distn. lights; Gasoil - unspecified; [A complex combination of hydrocarbons obtained as first runnings from the vacuum distillation of effluents from the treatment of heavy paraffins with hydrogen in the presence of a catalyst. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C12 through C20 and boiling in the range of approximately 230 °C to 350 °C (446 °F to 662 °F). It produces a finished oil having a viscosity of 2cSt at 100 °C (212 °F).]",
+  "name_tr": "Hidrokarbonlar, C12-20, hidrojenle muamele edilmiş parafinik, damıtma hafif; Gaz yağı – tanımlanmamış; [Ağır parafinlerin katalizör varlığında, hidrojen ile muamele edilmesinden artıkların vakum damıtmasından ilk işletim olarak elde edilen hidrokarbonların kompleks bir bileşimi. Genelde, ağırlıklı olarak C12 ila C20 aralığında karbon sayısına sahip ve yaklaşık 230°C ila 350°C (446°F ila 662°F) aralığında kaynayan hidrokarbonlardan oluşur. 100 oC (212 oF)de 2cSt viskoziteye sahip son yağ üretir.]",
+  "ec_no": "307-660-1",
+  "index_no": "649-236-00-1",
+  "atp": "",
+  "notes": [
+    "N"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

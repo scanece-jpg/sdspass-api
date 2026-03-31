@@ -1,0 +1,59 @@
+{
+  "cas": "61788-45-2",
+  "name": "amines,hydrogenated tallow alkyl",
+  "name_tr": "aminler hidrojenlenmiş yağ alkilleri",
+  "ec_no": "262-976-6",
+  "index_no": "612-284-00-9",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "(mide-"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "bağırsak"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "yolu,karac"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "iğer,bağışı"
+      }
+    ],
+    "m_factors": {
+      "acute": 10,
+      "chronic": 10
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS05",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H304",
+      "H373",
+      "(mide-",
+      "bağırsak",
+      "yolu,karac",
+      "iğer,bağışı"
+    ],
+    "suppl_h": []
+  }
+}

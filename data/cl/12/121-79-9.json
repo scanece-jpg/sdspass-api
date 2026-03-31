@@ -1,0 +1,34 @@
+{
+  "cas": "121-79-9",
+  "name": "propyl 3,4,5-trihydroxybenzoate",
+  "name_tr": "propil-3,4,5-trihidroksibenzoat",
+  "ec_no": "204-498-2",
+  "index_no": "607-198-00-3",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

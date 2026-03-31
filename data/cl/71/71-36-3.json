@@ -1,0 +1,56 @@
+{
+  "cas": "71-36-3",
+  "name": "butan-1-ol; n-butanol",
+  "name_tr": "bütan-1-ol; n-bütanol",
+  "ec_no": "200-751-6",
+  "index_no": "603-004-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H336"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS05",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H226",
+      "H302",
+      "H335",
+      "H315",
+      "H318",
+      "H336"
+    ],
+    "suppl_h": []
+  }
+}

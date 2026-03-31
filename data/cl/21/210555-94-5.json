@@ -1,0 +1,54 @@
+{
+  "cas": "210555-94-5",
+  "name": "phenol, dodecly-,branched; [1] phenol, 2-dodecly-,branched; [2] phenol,3- dodecly-,branched; [3] phenol, 4-dodecly-,branched; [4] phenol,(tetrapropenly)derivative s [5]",
+  "name_tr": "fenol, dodesil-,dallanmış; [1] fenol, 2-dodesil-,dallanmış; [2] fenol,3- dodesil-,dallanmış; [3] fenol, 4-dodesil-,dallanmış; [4] fenol, (tetrapropenil) türevleri[5]",
+  "ec_no": "310-154-3",
+  "index_no": "604-092-00-9",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360F"
+      },
+      {
+        "class": "Skin Corr. 1C",
+        "h_code": "H314"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 10,
+      "chronic": 10
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS05",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H360F",
+      "H314",
+      "H318",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "cas": "92045-23-3",
+  "name": "Hydrocarbons, C4, steam-cracker distillate; Petroleum gas; [A complex combination of hydrocarbons produced by the distillation of the products of a steam cracking process. It consists predominantly of hydrocarbons having a carbon number of C4, predominantly 1- butene and 2-butene, containing also butane and isobutene and boiling in the range of approximately minus 12°C to 5°C (10.4°F to 41°F).]",
+  "name_tr": "Hidrokarbonlar, C4, buharlı parçalayıcı damıtığı; Petrol gazı; [ Buharlı bir parçalama işlemi ürünlerinin damıtılması ile üretilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla, C4 , genelde 1-büten ve 2-büten,karbon sayısına sahip, ayrıca bütan ve izobüten içeren ve yaklaşık eksi 12oC ila -5oC (10.4oF ila 41oF) aralığında kaynayan, hidrokarbonlardan oluşur.]",
+  "ec_no": "295-405-4",
+  "index_no": "649-116-00-9",
+  "atp": "",
+  "notes": [
+    "K",
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H220"
+      },
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS04",
+      "GHS02",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

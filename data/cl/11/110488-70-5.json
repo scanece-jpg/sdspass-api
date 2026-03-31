@@ -1,0 +1,29 @@
+{
+  "cas": "110488-70-5",
+  "name": "dimethomorph (ISO); 4-(3-(4-chlorophenyl)-3-(3,4- dimethoxyphenyl)acryloyl)morp holine",
+  "name_tr": "dimetomorf (ISO); 4-(3-(4-klorofenil)-3-(3,4- dimetoksifenil)akriloil)morfolin",
+  "ec_no": "404-200-2",
+  "index_no": "613-102-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [
+      "GHS09"
+    ],
+    "h_codes": [
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

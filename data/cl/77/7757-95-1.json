@@ -1,0 +1,24 @@
+{
+  "cas": "7757-95-1",
+  "name": "nickel(II) sulfite; [1] nickel tellurium trioxide; [2] nickel tellurium tetraoxide; [3] molybdenum nickel hydroxide oxide phosphate [4]",
+  "name_tr": "nikel(II) sülfit; [1] nikel telleryum trioksit; [2] nikel telleryum tetraoksit; [3] molibdenum nikel hidroksit oksit fosfat [4]",
+  "ec_no": "231-827-7",
+  "index_no": "028-055-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [],
+    "suppl_h": [
+      "GHS08",
+      "GHS09",
+      "Thl"
+    ]
+  }
+}

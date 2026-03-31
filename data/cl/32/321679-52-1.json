@@ -1,0 +1,29 @@
+{
+  "cas": "321679-52-1",
+  "name": "2-{4-[4-[4-fluoro-6-(2-(2- vinylsulfonylethoxy)ethylamino) -1,3,5-triazin-2- ylamino]phenylazo]phenylazo}n aphthalene-4,6,8-trisulfonate, trisodium salt",
+  "name_tr": "2-{4-[4-[4-floro-6-(2-(2- vinilsülfoniletoksi)etilamino)- 1,3,5-triazin-2- ilamino]fenilazo]fenilazo}naftal en-4,6,8-trisülfonat, trisodyum tuzu",
+  "ec_no": "442-230-8",
+  "index_no": "607-660-00-4",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H318"
+    ],
+    "suppl_h": []
+  }
+}

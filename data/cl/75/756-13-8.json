@@ -1,0 +1,27 @@
+{
+  "cas": "756-13-8",
+  "name": "1,1,1,2,2,4,5,5,5-nonafluoro-4- (trifluoromethyl )-3-pentanone",
+  "name_tr": "1,1,1,2,2,4,5,5,5-nonafloro-4- (triflorometil )-3-pentanon",
+  "ec_no": "436-710-6",
+  "index_no": "606-108-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

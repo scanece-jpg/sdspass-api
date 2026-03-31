@@ -1,0 +1,42 @@
+{
+  "cas": "1070-70-8",
+  "name": "tetramethylene diacrylate; 1,4-butyleneglycol diacrylate",
+  "name_tr": "tetrametilendiakrilat; 1,4-bütilenglikol diakrilat",
+  "ec_no": "213-979-6",
+  "index_no": "607-119-00-2",
+  "atp": "",
+  "notes": [
+    "D"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H312",
+      "H314",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

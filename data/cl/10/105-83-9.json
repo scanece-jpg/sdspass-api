@@ -1,0 +1,45 @@
+{
+  "cas": "105-83-9",
+  "name": "N,N-bis(3- aminopropyl)methylamine",
+  "name_tr": "N,N-bis(3- aminopropil)metilamin",
+  "ec_no": "203-336-8",
+  "index_no": "612-102-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H331"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H311"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H331",
+      "H311",
+      "H302",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

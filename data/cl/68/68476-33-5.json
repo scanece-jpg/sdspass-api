@@ -1,0 +1,29 @@
+{
+  "cas": "68476-33-5",
+  "name": "Fuel oil, residual; Heavy Fuel oil; [The liquid product from various refinery streams, usually residues. The composition is complex and varies with the source of the crude oil.]",
+  "name_tr": "Fuel oil, artık; Ağır fuel oil; Çeşitli rafineri buharlardan, genellikle artıklar, sıvı ürün. Bileşim komplekstir ve ham petrolün kaynağına göre değişir.]",
+  "ec_no": "270-675-6",
+  "index_no": "649-024-00-9",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

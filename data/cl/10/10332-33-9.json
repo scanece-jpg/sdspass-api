@@ -1,0 +1,59 @@
+{
+  "cas": "10332-33-9",
+  "name": "perboric acid, sodium salt; [1] perboric acid, sodium salt, monohydrate; [2] perboric acid (HBO(O2)), sodium salt, monohydrate; [3] sodium peroxoborate; [containing < 0.1 % (w/w) of particles with an aerodynamic diameter of below 50 μm]",
+  "name_tr": "Perborik asit, sodyum tuzu; [1] perborik asit, sodyum tuzu, monohidrat; [2] perborik asit (HBO(O2)), mono sodyum tuzu, monohidrat; [3] sodyum peroksoborat; [(a/a) <% 0,1 aerodinamik çapı 50 μm’den düşük olan partikül içeren]",
+  "ec_no": "234-390-0",
+  "index_no": "005-019-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Ox. Sol. 3",
+        "h_code": "H272"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H318",
+        "class": "Eye Dam. 1",
+        "c_min": 22.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H335",
+        "class": "C < %22 BHOT Tek Mrz. 3",
+        "c_min": 20.0,
+        "c_max": null
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS03",
+      "GHS05",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H272",
+      "H302",
+      "H335",
+      "H318"
+    ],
+    "suppl_h": []
+  }
+}

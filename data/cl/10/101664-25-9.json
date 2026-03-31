@@ -1,0 +1,27 @@
+{
+  "cas": "101664-25-9",
+  "name": "3',5'-dichloro-2-(2,4-di-tert- pentylphenoxy)-4'-ethyl-2'- hydroxyhexananilide",
+  "name_tr": "3',5'-dikloro-2-(2,4-di-ter- pentilfenoksi)-4'-etil-2'-hidroksi- hekzananilid",
+  "ec_no": "406-840-8",
+  "index_no": "616-041-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

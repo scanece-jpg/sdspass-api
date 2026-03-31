@@ -1,0 +1,36 @@
+{
+  "cas": "101896-26-8",
+  "name": "Distillates (coal tar), benzole fraction, BTX-rich; Light Oil Redistillate, low boiling; [A residue from the distillation of crude benzole to remove benzole fronts. Composed primarily of benzene, toluene and xylenes boiling in the range of approximately 75°C to 200°C (167°F to 392°F).]",
+  "name_tr": "Damıtıklar (kömür zifti), benzol fraksiyon, BTX-zengin; tekrar damıtılmış hafif yağ, düşük sıcaklıkta kaynayan; [Benzol öncüllerini kaldırmak için damıtılan ham benzoldeki kalıntı. Esas olarak, yaklaşık 75oC ila 200oC (167 oF ila 392 oF) arasında kaynayan, benzen, toluen ve ksilenlerden oluşur.]",
+  "ec_no": "309-984-9",
+  "index_no": "648-004-00-7",
+  "atp": "",
+  "notes": [
+    "J"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

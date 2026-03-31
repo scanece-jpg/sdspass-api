@@ -1,0 +1,36 @@
+{
+  "cas": "92062-28-7",
+  "name": "Tar bases, coal, collidine fraction; Distillate Bases; [The distillation fraction boiling in the range of approximately 181 °C to 186 °C (356 °F to 367 °F) from the crude bases obtained from the neutralized, acid-extracted base-containing tar fractions obtained by the distillation of bituminous coal tar. It contains chiefly aniline and collidines.]",
+  "name_tr": "Zift bazları , kömür, kollidin fraksiyonu; damıtık bazları; [Bitümlü kömür ziftinin damıtılmasından elde edilen baz içeren zift fraksiyonunun nötrlenmesi ve asitle ekstraksiyonundan elde edilen ham bazların yaklaşık 181°C ile 186°C (356°F - 367°F) aralığında kaynayan damıtma fraksiyonu. Başlıca anilin ve kollidin içerir.]",
+  "ec_no": "295-543-5",
+  "index_no": "648-033-00-5",
+  "atp": "",
+  "notes": [
+    "J"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

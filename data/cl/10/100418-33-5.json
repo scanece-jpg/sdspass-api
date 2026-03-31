@@ -1,0 +1,39 @@
+{
+  "cas": "100418-33-5",
+  "name": "2-((4-methyl-2- nitrophenyl)amino)ethanol",
+  "name_tr": "2-((4-metil-2- nitrofenil)amino)etanol",
+  "ec_no": "408-090-7",
+  "index_no": "603-126-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302",
+      "H317",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

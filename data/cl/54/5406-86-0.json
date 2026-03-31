@@ -1,0 +1,46 @@
+{
+  "cas": "5406-86-0",
+  "name": "2-(4-tert-butylphenyl)ethanol",
+  "name_tr": "2-(4-ter-bütilfenil)etanol",
+  "ec_no": "410-020-5",
+  "index_no": "603-152-00-1",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 2",
+        "h_code": "H361f"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS05",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H361f",
+      "H373",
+      "H318",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "cas": "10039-54-0",
+  "name": "hydroxylammonium chloride; hydroxylamine hydrochloride; [1] bis(hydroxylammonium) sulfate; hydroxylamine sulfate (2:1) [2]",
+  "name_tr": "hidroksilamonyum klorür; hidroksilamin hidroklorür; [1] bis(hidroksilamonyum) sülfat; hidroksilamin sülfat (2:1) [2]",
+  "ec_no": "226-798-2",
+  "index_no": "612-123-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Met. Corr. 1",
+        "h_code": "H290"
+      },
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS05",
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H290",
+      "H351",
+      "H312",
+      "H302",
+      "H373",
+      "H319",
+      "H315",
+      "H317",
+      "H400"
+    ],
+    "suppl_h": []
+  }
+}

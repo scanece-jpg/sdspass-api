@@ -1,0 +1,51 @@
+{
+  "cas": "99-99-0",
+  "name": "4-nitrotoluene",
+  "name_tr": "4-nitrotoluen",
+  "ec_no": "202-808-0",
+  "index_no": "609-006-00-3",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H331"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H311"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H331",
+      "H311",
+      "H301",
+      "H373",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

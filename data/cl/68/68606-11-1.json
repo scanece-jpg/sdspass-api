@@ -1,0 +1,41 @@
+{
+  "cas": "68606-11-1",
+  "name": "Gasoline, straight-run, topping- plant; Low boiling point naphtha; [A complex combination of hydrocarbons produced from the topping plant by the distillation of crude oil. It boils in the range of approximately 36.1°C to 193.3°C (97°F to 380°F).]",
+  "name_tr": "Benzin, normal üretim, üst birim; düşük kaynama noktalı nafta; [Üst birim tesislerinde ham petrolün damıtılması ile üretilen hidrokarbonların kompleks bir bileşimi. Yaklaşık olarak 36,1°C ila 193,3°C (97°F-380°F) aralığında kaynayan hidrokarbonlardan oluşur.]",
+  "ec_no": "271-727-0",
+  "index_no": "649-270-00-7",
+  "atp": "",
+  "notes": [
+    "P"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

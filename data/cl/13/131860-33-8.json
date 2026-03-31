@@ -1,0 +1,40 @@
+{
+  "cas": "131860-33-8",
+  "name": "azoxystrobin (ISO); methyl (E)-2-{}{2-[6-(2- cyanophenoxy)pyrimidin-4- yloxy]phenyl}}-3- methoxyacrylate",
+  "name_tr": "Azoksistrobin (ISO); methyl (E)-2-{}{2-[6-(2- siyanofenoksi)primidin-4- iloksi]fenil}}-3-metoksiakrilat",
+  "ec_no": "",
+  "index_no": "607-256-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H331"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H331",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "cas": "90641-11-5",
+  "name": "Light oil (coal), semi-coking process; Fresh oil; [The volatile organic liquid condensed from the gas evolved in the low-temperature (less than 700°C (1292°F)) destructive distillation of coal. Composed primarily of C6-10 hydrocarbons.]",
+  "name_tr": "hafif yağ (kömür), yarı- koklaştırma prosesi; taze yağ; [Kömürün, 700oC’den (1292oF)daha düşük sıcaklıkta parçalayıcı damıtılmasından oluşan gazın yoğuşmasından elde edilen uçucu organik sıvı. Büyük ölçüde, C6-10 hidrokarbonlarından oluşur.]",
+  "ec_no": "292-635-7",
+  "index_no": "648-156-00-4",
+  "atp": "",
+  "notes": [
+    "J"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

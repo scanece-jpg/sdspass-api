@@ -1,0 +1,40 @@
+{
+  "cas": "114565-66-1",
+  "name": "4-[4-(1,3-dihydroxyprop-2- yl)phenylamino]-1,8-dihydroxy- 5-nitroanthraquinone",
+  "name_tr": "4-[4-(1,3-dihidroksiprop-2- il)fenilamino]-1,8-dihidroksi-5- nitroantrakinon",
+  "ec_no": "406-057-1",
+  "index_no": "603-121-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H351",
+      "H317",
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

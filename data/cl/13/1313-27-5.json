@@ -1,0 +1,40 @@
+{
+  "cas": "1313-27-5",
+  "name": "molybdenum trioxide",
+  "name_tr": "molibden trioksit",
+  "ec_no": "215-204-7",
+  "index_no": "042-001-00-9",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H351",
+      "H319",
+      "H335"
+    ],
+    "suppl_h": []
+  }
+}

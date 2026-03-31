@@ -1,0 +1,41 @@
+{
+  "cas": "68527-21-9",
+  "name": "Naphtha (petroleum), clay- treated full-range straight-run; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons resulting from treatment of full-range straight- run naphtha with natural or modified clay, usually in a percolation process to remove the trace amounts of polar compounds and impurities present. It consists of hydrocarbons having carbon numbers predominantly in the range of C4 through C11 and boiling in the range of approximately -20°C to 220°C (- 4°F to 429°F).]",
+  "name_tr": "Nafta (petrol), kil ile muamele edilmiş tam ölçekli normal üretim; düşük kaynama noktalı nafta – tanımlanmamış; [Tam ölçekli normal üretim naftada mevcut eser miktardaki polar bileşiklerin ve safsızlıkların uzaklaştırılması için, bu naftanın doğal veya modifiye kil ile genelde perkolasyon prosesinde muamele edilmesi sonucunda oluşan kompleks bir hidrokarbon bileşimi. Büyük çoğunlukla, C4 ila C11 aralığında karbon sayısına sahip ve yaklaşık -20°C ila 220°C (-4°F ila 429°F) aralığında kaynayan hidrokarbonlardan oluşur.]",
+  "ec_no": "271-262-3",
+  "index_no": "649-368-00-X",
+  "atp": "",
+  "notes": [
+    "P"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

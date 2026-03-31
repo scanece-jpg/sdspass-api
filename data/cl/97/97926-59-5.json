@@ -1,0 +1,29 @@
+{
+  "cas": "97926-59-5",
+  "name": "Gas oils (petroleum), light vacuum, thermal-cracked hydrodesulfurized; Cracked gasoil; [A complex combination of hydrocarbons obtained by catalytic dehydrosulfurization of thermal-cracked light vacuum petroleum. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C14 through C20 and boiling in the range of approximately",
+  "name_tr": "Gazyağları (petrol),hafif vakum, ısıl-parçalanmış hidrojenle kükürtü giderilmiş; Parçalanmış gaz yağı; [Isıl-parçalanmış hafif vakum petrolün katalitik olarak hidrojenle kükürtünün giderilmesi ile elde edilen hidrokarbonların kompleks bir bileşimi. Genelde, ağırlıklı olarak C14 ila C20 aralığında karbon sayısına sahip ve yaklaşık 270°C ila 370°C (518°F ila 698°F) aralığında kaynayan",
+  "ec_no": "308-278-8",
+  "index_no": "649-450-00-5",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

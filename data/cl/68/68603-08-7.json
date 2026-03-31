@@ -1,0 +1,41 @@
+{
+  "cas": "68603-08-7",
+  "name": "Naphtha (petroleum), arom.- contg.; Low boiling point naphtha - unspecified",
+  "name_tr": "Nafta (petrol), aromatiklik- içeren; düşük kaynama noktalı nafta - tanımlanmamış",
+  "ec_no": "271-635-0",
+  "index_no": "649-372-00-1",
+  "atp": "",
+  "notes": [
+    "P"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

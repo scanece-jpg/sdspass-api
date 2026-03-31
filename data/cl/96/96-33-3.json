@@ -1,0 +1,67 @@
+{
+  "cas": "96-33-3",
+  "name": "methyl acrylate; methyl propenoate",
+  "name_tr": "metil akrilat; metil propinoat",
+  "ec_no": "202-500-6",
+  "index_no": "607-034-00-0",
+  "atp": "",
+  "notes": [
+    "D"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H225",
+      "H332",
+      "H312",
+      "H302",
+      "H319",
+      "H335",
+      "H315",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

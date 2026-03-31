@@ -1,0 +1,40 @@
+{
+  "cas": "133467-41-1",
+  "name": "4-[4-(2- ethylhexyloxy)phenyl](1,4- thiazinane-1,1-dioxide)",
+  "name_tr": "4-[4-(2-etilhekziloksi)fenil](1,4- tiyazinan-1,1-dioksit)",
+  "ec_no": "418-320-8",
+  "index_no": "613-212-00-9",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "cas": "110560-22-0",
+  "name": "1-hydroxy-5-(2- methylpropyloxycarbonylamino) -N-(3-dodecyloxypropyl)-2- naphthoamide",
+  "name_tr": "1-hidroksi-5-(2- metilpropiloksikarbonilamino)- N-(3-dodesiloksipropil)-2- naftoamid",
+  "ec_no": "406-210-2",
+  "index_no": "616-069-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

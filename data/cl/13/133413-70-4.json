@@ -1,0 +1,34 @@
+{
+  "cas": "133413-70-4",
+  "name": "(3S,6R,9S,12R,15S,18R,21S,24 R)-6,18-dibenzyl-3,9,15,21- tetraisobutyl-4,10,12,16,22,24- hexamethyl-1,7,13,19-tetraoxa- 4,10,16,22-tetraazacyclo- tetracosane- 2,5,8,11,14,17,20,23-octaone",
+  "name_tr": "(3S,6R,9S,12R,15S,18R,21S,24 R)-6,18-dibenzil-3,9,15,21- tetraizobütil-4,10,12,16,22,24- hekzametil-1,7,13,19-tetraoksa- 4,10,16,22-tetraazasiklo- tetrakozan-2,5,8,11,14,17,20,23- oktaon",
+  "ec_no": "444-350-6",
+  "index_no": "606-136-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319",
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

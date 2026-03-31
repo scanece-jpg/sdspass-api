@@ -1,0 +1,47 @@
+{
+  "cas": "460-19-5",
+  "name": "oxalonitrile; cyanogen",
+  "name_tr": "oksalonitril; siyanojen",
+  "ec_no": "207-306-5",
+  "index_no": "608-011-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H220"
+      },
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H331"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04",
+      "GHS06",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H220",
+      "H331",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

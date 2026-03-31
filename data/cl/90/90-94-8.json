@@ -1,0 +1,40 @@
+{
+  "cas": "90-94-8",
+  "name": "4,4'- bis(dimethylamino)benzophenon e; Michler's ketone",
+  "name_tr": "4,4'- bis(dimetilamino)benzofenon; Michler's keton",
+  "ec_no": "202-027-5",
+  "index_no": "606-073-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H350",
+      "H341",
+      "H318"
+    ],
+    "suppl_h": []
+  }
+}

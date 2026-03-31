@@ -1,0 +1,35 @@
+{
+  "cas": "96-45-7",
+  "name": "ethylene thiourea; imidazolidine-2-thione; 2-imidazoline-2-thiol",
+  "name_tr": "etilentiyoüre; imidazolidin-2-tiyon; 2-imidazolin-2-tiyol",
+  "ec_no": "202-506-9",
+  "index_no": "613-039-00-9",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360D"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H360D",
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

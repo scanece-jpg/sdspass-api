@@ -1,0 +1,40 @@
+{
+  "cas": "544-16-1",
+  "name": "butyl nitrite",
+  "name_tr": "Bütil nitrit",
+  "ec_no": "208-862-1",
+  "index_no": "007-016-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H331"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS06"
+    ],
+    "h_codes": [
+      "H225",
+      "H331",
+      "H301"
+    ],
+    "suppl_h": []
+  }
+}

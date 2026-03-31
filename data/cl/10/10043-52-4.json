@@ -1,0 +1,29 @@
+{
+  "cas": "10043-52-4",
+  "name": "calcium chloride",
+  "name_tr": "Kalsiyum klorür",
+  "ec_no": "233-140-8",
+  "index_no": "017-013-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319"
+    ],
+    "suppl_h": []
+  }
+}

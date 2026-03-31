@@ -1,0 +1,48 @@
+{
+  "cas": "109-95-5",
+  "name": "ethyl nitrite",
+  "name_tr": "etil nitrit",
+  "ec_no": "203-722-6",
+  "index_no": "007-006-00-2",
+  "atp": "",
+  "notes": [
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H220",
+      "H332",
+      "H312",
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

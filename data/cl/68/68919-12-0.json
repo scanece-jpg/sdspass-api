@@ -1,0 +1,44 @@
+{
+  "cas": "68919-12-0",
+  "name": "Gases (petroleum), unifiner stripper off; Refinery gas; [A combination of hydrogen and methane obtained by fractionation of the products from the unifiner unit.]",
+  "name_tr": "Gazlar (petrol), birleştirici sıyırıcı çalışmazken; Rafineri gazı; [Birleştirici ünitesinden elde edilen ürünlerin ayrımsal damıtılması ile elde edilen hidrojen ve metanın bir bileşimi.]",
+  "ec_no": "272-885-3",
+  "index_no": "649-164-00-0",
+  "atp": "",
+  "notes": [
+    "K",
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H220"
+      },
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS04",
+      "GHS02",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

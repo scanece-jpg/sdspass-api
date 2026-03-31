@@ -1,0 +1,45 @@
+{
+  "cas": "103-69-5",
+  "name": "N-ethylaniline",
+  "name_tr": "N-etilanilin",
+  "ec_no": "203-135-5",
+  "index_no": "612-053-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H331"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H311"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H331",
+      "H311",
+      "H301",
+      "H373"
+    ],
+    "suppl_h": []
+  }
+}

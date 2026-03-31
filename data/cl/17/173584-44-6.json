@@ -1,0 +1,59 @@
+{
+  "cas": "173584-44-6",
+  "name": "indoxacarb (ISO); methyl (4aS)- 7-chloro-2- {(methoxycarbonyl)[4- (trifluoromethoxy)phenyl]carba moyl}-2,5- dihydroindeno[1,2- e][1,3,4]oxadiazine-4a(3H)- carboxylate [1] reaction mass of (S)- Indoxacarb and (R)- Indoxacarb 75:25; methyl 7-chloro-2- {(methoxycarbonyl)[4- (trifluoromethoxy)phenyl]carba moyl}-2,5-dihydroindeno[1,2- e][1,3,4]oxadiazine- 4a(3H)-",
+  "name_tr": "indoksakarb (ISO); metil (4aS)- 7-kloro-2-{(metoksikarbonil)[4- (triflorometoksi)fenil]karbamoil }-2,5- dihidroindeno[1,2- e][1,3,4]okzadiazin-4a(3H)- karboksilat [1] (S)- Indoksakarb ve (R)- Indoksakarb 75:25; metil 7- kloro-2-{(metoksikarbonil)[4- (triflorometoksi)fenil]karbamoil }-2,5-dihidroindeno[1,2- e][1,3,4]okzadiazin- 4a(3H)- karboksilat [2] ın tepkime kütlesi",
+  "ec_no": "",
+  "index_no": "607-700-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372(kan,"
+      },
+      {
+        "class": "Skin Sens. 1B",
+        "h_code": "sinir"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "sistemi,kal"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "p)"
+      }
+    ],
+    "m_factors": {
+      "acute": 1,
+      "chronic": 1
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H301",
+      "H332",
+      "H372(kan,",
+      "sinir",
+      "sistemi,kal",
+      "p)"
+    ],
+    "suppl_h": []
+  }
+}

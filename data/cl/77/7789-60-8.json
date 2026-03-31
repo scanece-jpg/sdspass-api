@@ -1,0 +1,37 @@
+{
+  "cas": "7789-60-8",
+  "name": "phosphorus tribromide",
+  "name_tr": "Fosfor tribromür",
+  "ec_no": "232-178-2",
+  "index_no": "015-103-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H314",
+      "H335"
+    ],
+    "suppl_h": [
+      "EUH014"
+    ]
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "cas": "118658-99-4",
+  "name": "(methylenebis(4,1- phenylenazo(1-(3- (dimethylamino)propyl)-1,2- dihydro-6-hydroxy-4-methyl-2- oxopyridine-5,3-diyl)))-1,1'- dipyridinium dichloride dihydrochloride",
+  "name_tr": "(metilenbis(4,1-fenilazo(1-(3- (dimetilamino)propil)-1,2- dihidro-6-hidroksi-4-metil-2- oksopridin-5,3-diil)))-1,1’- dipridinyum diklorür dihidroklorür",
+  "ec_no": "401-500-5",
+  "index_no": "611-099-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H350",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "cas": "71626-11-4",
+  "name": "benalaxyl (ISO); methyl N-(2,6-dimethylphenyl)- N-(phenylacetyl)-DL-alaninate",
+  "name_tr": "benalaksil (ISO); metil N-(2,6-dimetilfenil)-N- (fenilasetil)-DL-alaninat",
+  "ec_no": "275-728-7",
+  "index_no": "616-104-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS09"
+    ],
+    "h_codes": [
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

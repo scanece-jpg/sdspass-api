@@ -1,0 +1,56 @@
+{
+  "cas": "65322-65-8",
+  "name": "1-(1- naphthylmethyl)quinolinium chloride",
+  "name_tr": "1-(1- naftilmetil)kinolinyumklorür",
+  "ec_no": "406-220-7",
+  "index_no": "613-182-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS05",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H351",
+      "H341",
+      "H302",
+      "H315",
+      "H318",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

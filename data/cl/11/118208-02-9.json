@@ -1,0 +1,41 @@
+{
+  "cas": "118208-02-9",
+  "name": "2,4-bis[2,2'-[2-(N,N- dimethylamino)ethyloxycarbony l]phenylazo]-1,3- dihydroxybenzene, dihydrochloride",
+  "name_tr": "2,4-bis[2,2'-[2-(N,N- dimetilamino)etiloksikarbonil]fe nilazo]-1,3-dihidroksibenzen, dihidroklorür",
+  "ec_no": "407-010-8",
+  "index_no": "611-072-00-3",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H318",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

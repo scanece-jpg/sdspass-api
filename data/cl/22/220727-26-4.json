@@ -1,0 +1,29 @@
+{
+  "cas": "220727-26-4",
+  "name": "S-(3- (triethoxysilyl)propyl)octanethio ate",
+  "name_tr": "S-(3-(trietoksisilil)propil) oktanetioat",
+  "ec_no": "436-690-9",
+  "index_no": "014-038-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

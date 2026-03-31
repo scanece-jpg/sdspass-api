@@ -1,0 +1,58 @@
+{
+  "cas": "142-84-7",
+  "name": "dipropylamine",
+  "name_tr": "Dipropilamin",
+  "ec_no": "205-565-9",
+  "index_no": "612-048-00-5",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1A",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H335",
+        "class": "STOT SE 3",
+        "c_min": 1.0,
+        "c_max": null
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS05",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H225",
+      "H332",
+      "H312",
+      "H302",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

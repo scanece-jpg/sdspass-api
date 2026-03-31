@@ -1,0 +1,68 @@
+{
+  "cas": "1663-39-4",
+  "name": "tert-butyl acrylate",
+  "name_tr": "ter-bütilakrilat",
+  "ec_no": "216-768-7",
+  "index_no": "607-245-00-8",
+  "atp": "",
+  "notes": [
+    "D"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS02",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H225",
+      "H332",
+      "H312",
+      "H302",
+      "H335",
+      "H315",
+      "H317",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

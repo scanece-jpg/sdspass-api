@@ -1,0 +1,45 @@
+{
+  "cas": "110895-43-7",
+  "name": "1-(N,N-dimethylcarbamoyl)-3- tert-butyl-5- carbethoxymethylthio-1H-1,2,4- triazole",
+  "name_tr": "1-(N,N-dimetilkarbamoil)-3-ter- bütil-5-karbetoksimetiltiyo-1H- 1,2,4-triyazol",
+  "ec_no": "411-650-3",
+  "index_no": "607-368-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H331"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H331",
+      "H301",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

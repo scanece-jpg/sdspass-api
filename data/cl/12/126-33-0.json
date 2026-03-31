@@ -1,0 +1,29 @@
+{
+  "cas": "126-33-0",
+  "name": "tetrahydrothiophene-1,1-dioxide; sulpholane",
+  "name_tr": "tetrahidrotiyofen-1,1- dioksit; sülfolan",
+  "ec_no": "204-783-1",
+  "index_no": "016-031-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "cas": "7723-14-0",
+  "name": "red phosphorus",
+  "name_tr": "kırmızı fosfor",
+  "ec_no": "231-768-7",
+  "index_no": "015-002-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Sol. 1",
+        "h_code": "H228"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02"
+    ],
+    "h_codes": [
+      "H228",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "cas": "1333-74-0",
+  "name": "hydrogen",
+  "name_tr": "hidrojen",
+  "ec_no": "215-605-7",
+  "index_no": "001-001-00-9",
+  "atp": "",
+  "notes": [
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H220"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04"
+    ],
+    "h_codes": [
+      "H220"
+    ],
+    "suppl_h": []
+  }
+}

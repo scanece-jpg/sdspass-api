@@ -1,0 +1,29 @@
+{
+  "cas": "25059-80-7",
+  "name": "benazolin-ethyl; ethyl 4-chloro-2-oxo-2H- benzothiazole-3-acetate",
+  "name_tr": "benazolin-etil; etil-4-kloro-2- okso-2H-benzotiyazol-3-asetat",
+  "ec_no": "246-591-0",
+  "index_no": "607-311-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [
+      "GHS09"
+    ],
+    "h_codes": [
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

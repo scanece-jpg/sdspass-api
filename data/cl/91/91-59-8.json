@@ -1,0 +1,48 @@
+{
+  "cas": "91-59-8",
+  "name": "2-naphthylamine",
+  "name_tr": "2-naftilamin",
+  "ec_no": "202-080-4",
+  "index_no": "612-022-00-3",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H350",
+        "class": "Carc. 1A",
+        "c_min": 0.01,
+        "c_max": null
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H350",
+      "H302",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

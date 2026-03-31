@@ -1,0 +1,45 @@
+{
+  "cas": "80-05-7",
+  "name": "bisphenol A; 4,4′-isopropylidenediphenol",
+  "name_tr": "bisfenol A; 4,4′-izopropilidendifenol",
+  "ec_no": "201-245-8",
+  "index_no": "604-030-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360F"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS05 GHS07"
+    ],
+    "h_codes": [
+      "H360F",
+      "H335",
+      "H318",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

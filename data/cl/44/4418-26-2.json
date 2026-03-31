@@ -1,0 +1,29 @@
+{
+  "cas": "4418-26-2",
+  "name": "sodium 1-(3,4-dihydro-6- methyl-2,4-dioxo-2H-pyran-3- ylidene)ethonolate; sodium dehydracetate",
+  "name_tr": "sodyum-1-(3,4-dihidro-6-metil- 2,4-diokso-2H-piran-3- ilidin)etanolat; sodyum dehidrasetat",
+  "ec_no": "224-580-1",
+  "index_no": "607-164-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

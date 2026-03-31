@@ -1,0 +1,41 @@
+{
+  "cas": "17193-28-1",
+  "name": "1- aminocyclopentanecarboxamide",
+  "name_tr": "1-aminosiklopentankarboksamid",
+  "ec_no": "422-950-9",
+  "index_no": "616-131-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H372",
+      "H302",
+      "H318"
+    ],
+    "suppl_h": []
+  }
+}

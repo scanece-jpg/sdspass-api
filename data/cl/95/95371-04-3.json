@@ -1,0 +1,31 @@
+{
+  "cas": "95371-04-3",
+  "name": "Hydrocarbons, C13-30, arom.-rich, solvent-extd. naphthenic distillate; Baseoil - unspecified",
+  "name_tr": "Hidrokarbonlar, C13-30, aromatik zengin, çözücü ile özütlenmiş naftenik damıtık; bazyağlar - tanımlanmamış",
+  "ec_no": "305-971-7",
+  "index_no": "649-508-00-X",
+  "atp": "",
+  "notes": [
+    "L"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

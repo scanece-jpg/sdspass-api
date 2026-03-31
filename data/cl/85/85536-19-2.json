@@ -1,0 +1,36 @@
+{
+  "cas": "85536-19-2",
+  "name": "Solvent naphtha (coal), coumarone-styrene contg.; Light Oil Redistillate, intermediate boiling",
+  "name_tr": "Çözücü nafta (kömür), kümaron- stiren içeren; tekrar damıtılmış hafif yağ, orta sıcaklıkta kaynayan",
+  "ec_no": "287-500-4",
+  "index_no": "648-008-00-9",
+  "atp": "",
+  "notes": [
+    "J"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

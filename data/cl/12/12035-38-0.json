@@ -1,0 +1,40 @@
+{
+  "cas": "12035-38-0",
+  "name": "nickel tin trioxide; nickel stannate",
+  "name_tr": "nikel kalay trioksit nikel stannat",
+  "ec_no": "234-824-9",
+  "index_no": "028-044-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1A",
+        "h_code": "H350i"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H350i",
+      "H372",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

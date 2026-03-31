@@ -1,0 +1,35 @@
+{
+  "cas": "57018-52-7",
+  "name": "1-tert-butoxypropan-2-ol",
+  "name_tr": "1-ter-bütoksipropan-2-ol",
+  "ec_no": "406-180-0",
+  "index_no": "603-129-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H226",
+      "H318"
+    ],
+    "suppl_h": []
+  }
+}

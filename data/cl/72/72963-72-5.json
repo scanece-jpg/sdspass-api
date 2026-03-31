@@ -1,0 +1,40 @@
+{
+  "cas": "72963-72-5",
+  "name": "reaction mass of: [2,4-dioxo-(2- propyn-1-yl)imidazolidin-3- yl]methyl(1R)-cis- chrysanthemate; [2,4-dioxo-(2-propyn-1- yl)imidazolidin-3- yl]methyl(1R)-trans- chrysanthemate",
+  "name_tr": "Tepkime kütlesi: [2,4-diokso-(2- propin-1-il)imidazolidin-3- il]metil(1R)-cis-krisantemat; [2,4-diokso-(2-propin-1- il)imidazolidin-3-il]metil(1R)- trans-krisantemat",
+  "ec_no": "428-790-6",
+  "index_no": "613-259-00-5",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "cas": "101795-01-1",
+  "name": "Naphtha (petroleum), sweetened light; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons obtained by subjecting a petroleum naphtha to a sweetening process to convert mercaptans or to remove acidic impurities. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C5 through C8 and boiling in the range of approximately 20°C to 130°C (68°F to 266°F).]",
+  "name_tr": "Nafta (petrol), kıvamı artırılmış hafif; düşük kaynama noktalı nafta – tanımlanmamış; [Bir petrol naftadaki merkaptanların dönüştürülmesi veya asidik safsızlıkların uzaklaştırılması için, bunu kıvamlaştırma prosesine tabi tutarak elde edilen kompleks hidrokarbon bileşimi. Başlıca, karbon sayıları ağırlıklı olarak C5 ila C8 aralığında olan ve yaklaşık 20°C ila 130°C (68°F ila 266°F) aralığında kaynayan hidrokarbonlardan oluşur.]",
+  "ec_no": "309-976-5",
+  "index_no": "649-397-00-8",
+  "atp": "",
+  "notes": [
+    "P"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

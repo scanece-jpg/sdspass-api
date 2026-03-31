@@ -1,0 +1,40 @@
+{
+  "cas": "147374-67-2",
+  "name": "4-(2-cyano-3-phenylamino- acryloyloxymethyl)-cyclohexyl- methyl 2-cyano-3- phenylamino)-acrylate",
+  "name_tr": "4-(2-siyano-3-fenilamino)- akriloiloksi-metil-siklohekzil- metil-2-siyano-3-fenilamino)- akrilat",
+  "ec_no": "413-510-7",
+  "index_no": "608-028-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H373",
+      "H317",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

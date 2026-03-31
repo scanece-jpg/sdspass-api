@@ -1,0 +1,37 @@
+{
+  "cas": "91995-16-3",
+  "name": "Anthracene oil, anthracene paste, carbazole fraction; Anthracene Oil Fraction; [A complex combination of hydrocarbons from the distillation of anthracene obtained by crystallization of anthracene oil from bituminous coal high temperature tar and boiling in the approximate range of 350°C to 360°C (662°F to 680°F). It contains chiefly anthracene, carbazole and phenanthrene.]",
+  "name_tr": "antrasen yağı, antrasen pastası karbazol fraksiyon; antrasen yağı fraksiyonu; [Taş kömürü yüksek sıcaklık ziftinden kristalleştirme ile elde edilen antrasen yağından antrasen damıtılmasından elde edilen kompleks hidrokarbon bileşimi. Yaklaşık 350 oC ile 360 oC (662 oF-680 oF) arasında kaynar. Büyük ölçüde antrasen, karbazol ve fenantren içerir.]",
+  "ec_no": "295-276-4",
+  "index_no": "648-107-00-7",
+  "atp": "",
+  "notes": [
+    "J",
+    "M"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

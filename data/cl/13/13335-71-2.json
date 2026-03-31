@@ -1,0 +1,40 @@
+{
+  "cas": "13335-71-2",
+  "name": "(2,6-xylyloxy) acetic acid",
+  "name_tr": "(2,6-ksililoksi) asetik asit",
+  "ec_no": "430-910-7",
+  "index_no": "607-536-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302",
+      "H318",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

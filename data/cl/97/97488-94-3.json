@@ -1,0 +1,29 @@
+{
+  "cas": "97488-94-3",
+  "name": "Kerosine (petroleum), solvent- refined hydrodesulfurized; Kerosine - unspecified",
+  "name_tr": "Kerosin (petrol), çözücü ile rafine edilmiş hidrojenle kükürtü giderilmiş; Kerosin - tanımlanmamış",
+  "ec_no": "307-033-2",
+  "index_no": "649-430-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "cas": "111-92-2",
+  "name": "di-n-butylamine; [1] di-sec-butylamine [2]",
+  "name_tr": "di-n-bütilamin; [1] di-sek-bütilamin [2]",
+  "ec_no": "203-921-8",
+  "index_no": "612-049-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS02",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H226",
+      "H332",
+      "H312",
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

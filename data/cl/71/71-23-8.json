@@ -1,0 +1,41 @@
+{
+  "cas": "71-23-8",
+  "name": "propan-1-ol; n-propanol",
+  "name_tr": "propan-1-ol; n-propanol",
+  "ec_no": "200-746-9",
+  "index_no": "603-003-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H336"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS05",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H225",
+      "H318",
+      "H336"
+    ],
+    "suppl_h": []
+  }
+}

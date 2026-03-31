@@ -1,0 +1,29 @@
+{
+  "cas": "993-16-8",
+  "name": "trichloromethylstannane",
+  "name_tr": "triklorometilstannan",
+  "ec_no": "213-608-8",
+  "index_no": "050-025-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 2",
+        "h_code": "H361d"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H361d"
+    ],
+    "suppl_h": []
+  }
+}

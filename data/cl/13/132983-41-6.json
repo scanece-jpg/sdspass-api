@@ -1,0 +1,34 @@
+{
+  "cas": "132983-41-6",
+  "name": "reaction mass of isomers of: mono-(2- tetradecyl)naphthalenes; di-(2-tetradecyl)naphthalenes; tri-(2-tetradecyl)naphthalenes",
+  "name_tr": "mono-(2-tetradesil)naftalin; di- (2-tetradesil)naftalin; tri-(2- tetradesil)naftalin izomerlerinin tepkime kütlesi",
+  "ec_no": "410-190-0",
+  "index_no": "601-055-00-9",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319",
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

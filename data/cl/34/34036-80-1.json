@@ -1,0 +1,40 @@
+{
+  "cas": "34036-80-1",
+  "name": "2-butanone-O,O',O''- (phenylsilylidyne)trioxime",
+  "name_tr": "2-bütanon-O,O’,O’’- (fenilsililidin)trioksim",
+  "ec_no": "433-360-6",
+  "index_no": "014-037-00-5",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H373",
+      "H317",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "cas": "92061-94-4",
+  "name": "Residues (coal tar), pitch distn.; Pitch Redistillate; [Residue from the fractional distillation of pitch distillate boiling in the range of approximately 400 °C to 470 °C (752 °F to 846 °F). Composed primarily of polynuclear aromatic hydrocarbons, and heterocyclic compounds.]",
+  "name_tr": "artıklar (kömür zifti), ziftli damıtık; ziftli tekrar damıtık; [400oC ile 470oC (752oF-846oF) arasında kaynayan ziftli damıtığın ayrımsal damıtılmasından kalan artık. Büyük ölçüde çok merkezli aromatik hidrokarbonlarve heterosiklik bileşiklerden oluşur.]",
+  "ec_no": "295-507-9",
+  "index_no": "648-058-00-1",
+  "atp": "",
+  "notes": [
+    "M"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

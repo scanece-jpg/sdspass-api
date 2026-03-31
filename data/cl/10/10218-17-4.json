@@ -1,0 +1,34 @@
+{
+  "cas": "10218-17-4",
+  "name": "1,3-dimethyl-1,3- bis(trimethylsilyl)urea",
+  "name_tr": "1,3-dimetil-1,3- bis(trimetilsilil)üre",
+  "ec_no": "414-180-7",
+  "index_no": "616-100-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302",
+      "H315"
+    ],
+    "suppl_h": []
+  }
+}

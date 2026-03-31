@@ -1,0 +1,46 @@
+{
+  "cas": "134575-17-0",
+  "name": "tert-butyl (1R,5S)-3- azabicyclo[3.1.0]hex-6- ylcarbamate",
+  "name_tr": "ter-bütil (1R, 5S)-3- azabisiklo[3.1.0]hek-6- zilkarbamat",
+  "ec_no": "429-170-8",
+  "index_no": "006-098-00-1",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302",
+      "H373",
+      "H318",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

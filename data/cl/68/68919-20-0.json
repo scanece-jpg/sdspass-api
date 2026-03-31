@@ -1,0 +1,44 @@
+{
+  "cas": "68919-20-0",
+  "name": "Gases (petroleum), fluidized catalytic cracker splitter overheads; Petroleum gas; [A complex combination of hydrocarbons produced by the fractionation of the charge to the C3 -C4 splitter. It consists predominantly of C3 hydrocarbons.]",
+  "name_tr": "Gazlar (petrol), akışkan hale getirilmiş katalitik parçalama ünitesi bölücüsü üst kısımları; Petrol gazı; [ Şarjdan C3 -C4 bölücüsüne kadar olan kısmın ayrımsal damıtılmasından elde edilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla, C3 hidrokarbonlardan oluşur.]",
+  "ec_no": "272-893-7",
+  "index_no": "649-105-00-9",
+  "atp": "",
+  "notes": [
+    "K",
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H220"
+      },
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS04",
+      "GHS02",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

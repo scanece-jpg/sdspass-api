@@ -1,0 +1,45 @@
+{
+  "cas": "54-11-5",
+  "name": "nicotine (ISO); 3-[(2S)-1-methylpyrrolidin-2- yl]pyridine",
+  "name_tr": "nikotin (ISO); 3-[(2S)-1-metilpirrolidin-2- il]piridin",
+  "ec_no": "200-193-3",
+  "index_no": "614-001-00-4",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H310"
+      },
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H300"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H330",
+      "H310",
+      "H300",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

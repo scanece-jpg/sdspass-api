@@ -1,0 +1,40 @@
+{
+  "cas": "508202-43-5",
+  "name": "reaction mass of: pentasodium bis[6-anilino-3,5'- disulfonatonaphthalene-2- azobenzene-1,2'- diolato]cobaltate(III); tetrasodium [6-anilino-3,5'- disulfonatonaphthalene-2- azobenzene-1,2'-diolato][6- anilino-5'-sulfamoyl-3- sulfonatonaphthalene-2- azobenzene-1,2'- diolato]cobaltate(III); trisodium bis[6-anilino-5'- sulfamoyl-3- sulfonatonaphthalene-2- azobenzene-1,2'- diolato]cobaltate(III)",
+  "name_tr": "tepkime kütlesi: pentasodyum bis[6-anilino-3,5'- disülfonatonaftalen-2- azobenzen-1,2’- diolato]kobalt(III); tetrasodyum [6-anilino-3,5'- disülfonatonaftalen-2- azobenzen-1,2’-diolato][6- anilino-5'-sülfamoil-3- sülfonatonaftalen-2-azobenzen- 1,2’-diolato]kobalt(III); trisodyum bis[6-anilino-5’- sülfamoil-3-sülfonatonaftalen-2- azobenzen-1,2’- diolato]kobaltat(III)",
+  "ec_no": "444-290-0",
+  "index_no": "611-177-00-4",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H318",
+      "H317",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

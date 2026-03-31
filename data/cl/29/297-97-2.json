@@ -1,0 +1,34 @@
+{
+  "cas": "297-97-2",
+  "name": "thionazin (ISO); O,O-diethyl O-pyrazin-2-yl phosphorothioate",
+  "name_tr": "tiyonazin (ISO); O,O-dietil-O- pirazin-2-il fosforotiyoat",
+  "ec_no": "206-049-6",
+  "index_no": "015-112-00-5",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 1",
+        "h_code": "H310"
+      },
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H300"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06"
+    ],
+    "h_codes": [
+      "H310",
+      "H300"
+    ],
+    "suppl_h": []
+  }
+}

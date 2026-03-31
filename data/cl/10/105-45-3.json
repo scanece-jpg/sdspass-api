@@ -1,0 +1,29 @@
+{
+  "cas": "105-45-3",
+  "name": "methyl acetoacetate",
+  "name_tr": "metilasetoasetat",
+  "ec_no": "203-299-8",
+  "index_no": "607-137-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319"
+    ],
+    "suppl_h": []
+  }
+}

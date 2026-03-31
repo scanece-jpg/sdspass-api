@@ -1,0 +1,61 @@
+{
+  "cas": "109-99-9",
+  "name": "tetrahydrofuran",
+  "name_tr": "tetrahidrofuran",
+  "ec_no": "203-726-8",
+  "index_no": "603-025-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H335",
+        "class": "STOT SE 3",
+        "c_min": 25.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H319",
+        "class": "Eye Irrit. 2",
+        "c_min": 25.0,
+        "c_max": null
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS07",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H225",
+      "H351",
+      "H319",
+      "H335"
+    ],
+    "suppl_h": [
+      "EUH019"
+    ]
+  }
+}

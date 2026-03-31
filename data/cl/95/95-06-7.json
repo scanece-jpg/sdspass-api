@@ -1,0 +1,46 @@
+{
+  "cas": "95-06-7",
+  "name": "sulfallate (ISO); 2-chloroallyl N,N- dimethyldithiocarbamate",
+  "name_tr": "sülfallat (ISO); 2-kloroallil N,N- dimetilditiyokarbamat",
+  "ec_no": "202-388-9",
+  "index_no": "006-038-00-4",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H350",
+      "H302",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

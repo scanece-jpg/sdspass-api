@@ -1,0 +1,27 @@
+{
+  "cas": "125139-08-4",
+  "name": "Reaction products of: poly(vinyl acetate), partially hydrolyzed, with (E)-2-(4-formylstyryl)-3,4- dimethylthiazoliummethyl sulfate",
+  "name_tr": "tepkime ürünleri: kısmen hidrolize edilmiş poli(vinil asetat) ile , (E)-2-(4-formilstril)- 3,4-dimetiltiazolyummetilsülfat ile",
+  "ec_no": "406-460-2",
+  "index_no": "613-144-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

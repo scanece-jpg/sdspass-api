@@ -1,0 +1,39 @@
+{
+  "cas": "142877-45-0",
+  "name": "(2,3-dimethylbut-2-yl)- trimethoxysilane",
+  "name_tr": "(2,3-dimetilbüt-2-il)- trimetoksisilan",
+  "ec_no": "439-360-2",
+  "index_no": "014-039-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H315",
+      "H318",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

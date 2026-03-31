@@ -1,0 +1,46 @@
+{
+  "cas": "64742-82-1",
+  "name": "Naphtha (petroleum), hydrodesulfurized heavy; Low boiling point hydrogen treated naphtha; [A complex combination of hydrocarbons obtained from a catalytic hydrodesulfurization process. It consists of hydrocarbons having carbon numbers predominantly in the range of C7 through C12 and boiling in the range of approximately 90°C to 230°C (194°F to 446°F).]",
+  "name_tr": "Nafta (petrol), hidrojenle kükürtü giderilmiş ağır; düşük kaynama noktalı hidrojenle muamele edilmiş nafta; [Katalitik kükürt giderme işleminden elde edilen kompleks hidrokarbon karışımı. Karbon sayıları büyük çoğunlukla C7 ila C12 aralığında olan ve yaklaşık 90°C ila 230°C (194°F ila 446°F) aralığında kaynayan hidrokarbonlardan oluşur.]",
+  "ec_no": "265-185-4",
+  "index_no": "649-330-00-2",
+  "atp": "",
+  "notes": [
+    "P"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372(mer"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "kezi"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H372(mer",
+      "kezi"
+    ],
+    "suppl_h": []
+  }
+}

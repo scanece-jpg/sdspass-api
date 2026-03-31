@@ -1,0 +1,45 @@
+{
+  "cas": "107-02-8",
+  "name": "acrolein; prop-2-enal acrylaldehyde",
+  "name_tr": "akrolein; prop-2-enal akrilaldehid",
+  "ec_no": "203-453-4",
+  "index_no": "605-008-00-3",
+  "atp": "",
+  "notes": [
+    "D"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "Acute Tox. 1",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H300"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [
+      "GHS02",
+      "GHS06",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H225",
+      "H330",
+      "H300"
+    ],
+    "suppl_h": [
+      "EUH071"
+    ]
+  }
+}

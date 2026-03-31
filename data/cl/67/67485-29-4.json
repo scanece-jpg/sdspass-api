@@ -1,0 +1,51 @@
+{
+  "cas": "67485-29-4",
+  "name": "5,5-dimethyl-perhydro- pyrimidin-2-one α-(4- trifluoromethylstyryl)-α-(4- trifluoromethyl)cinnamylideneh ydrazone",
+  "name_tr": "5,5-dimetil-perhidro-pirimidin- 2-on-α-(4-triflormetilstiril)-α-(4- triflormetil)sinamilidinhidrazon",
+  "ec_no": "405-090-9",
+  "index_no": "613-181-00-1",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H372",
+      "H302",
+      "H319",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

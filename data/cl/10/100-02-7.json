@@ -1,0 +1,45 @@
+{
+  "cas": "100-02-7",
+  "name": "4-nitrophenol; p-nitrophenol",
+  "name_tr": "4-nitrofenol; p-nitrofenol",
+  "ec_no": "202-811-7",
+  "index_no": "609-015-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H332",
+      "H312",
+      "H302",
+      "H373"
+    ],
+    "suppl_h": []
+  }
+}

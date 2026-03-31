@@ -1,0 +1,71 @@
+{
+  "cas": "3691-35-8",
+  "name": "chlorophacinone (ISO); 2-[(4- chlorophenyl)(phenyl)acetyl]- 1H-indene-1,3(2H)-dione",
+  "name_tr": "klorofasinon (İSO); 2-[(4-klorofenil)(fenil)asetil]- 1H-inden-1,3(2H)-dion",
+  "ec_no": "223-003-0",
+  "index_no": "606-014-00-9",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360D"
+      },
+      {
+        "class": "Acute Tox. 1",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 1",
+        "h_code": "H310"
+      },
+      {
+        "class": "Acute Tox. 1",
+        "h_code": "H300"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372(kan)"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 1,
+      "chronic": 1
+    },
+    "scl_limits": [
+      {
+        "h_code": "H360D",
+        "class": "Repr. 1B",
+        "c_min": 0.003,
+        "c_max": null
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS06",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H360D",
+      "H330",
+      "H310",
+      "H300",
+      "H372(kan)",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

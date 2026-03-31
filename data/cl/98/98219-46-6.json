@@ -1,0 +1,41 @@
+{
+  "cas": "98219-46-6",
+  "name": "Naphtha (petroleum), light steam-cracked, debenzenized, thermally treated; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons obtained by the treatment and distillation of debenzenized light steam- cracked petroleum naphtha. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C7 through C12 and boiling in the range of approximately 95°C to 200°C (203°F to 392°F).]",
+  "name_tr": "Nafta (petrol),hafif buhar ile parçalanmış, benzene giderilmiş, ısıl olarak muamele edilmiş; düşük kaynama noktalı nafta – tanımlanmamış; ;[Benzeni giderilmiş buhar parçalanmış hafif petrol naftasının muamele edilmesi ve damıtılmasından elde edilen kompleks bir hidrokarbon karışımı. Büyük oranda, karbon numaraları ağırlıklı olarak C7 ila C12 aralığında olan ve yaklaşık 95oC ila 200oC (203oF ila 392oF) arasında kaynayan hidrokarbonlardan oluşur.]",
+  "ec_no": "308-713-1",
+  "index_no": "649-392-00-0",
+  "atp": "",
+  "notes": [
+    "P"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

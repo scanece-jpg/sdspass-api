@@ -1,0 +1,64 @@
+{
+  "cas": "75-21-8",
+  "name": "ethylene oxide; oxirane",
+  "name_tr": "etilenoksit; oksiran",
+  "ec_no": "200-849-9",
+  "index_no": "603-023-00-X",
+  "atp": "",
+  "notes": [
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H220"
+      },
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H331"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H319"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H335"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H315"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04",
+      "GHS06",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340",
+      "H331",
+      "H319",
+      "H335",
+      "H315"
+    ],
+    "suppl_h": []
+  }
+}

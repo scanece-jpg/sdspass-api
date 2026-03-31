@@ -1,0 +1,27 @@
+{
+  "cas": "105043-55-8",
+  "name": "3-methyl-N-(5,8,13,14- tetrahydro-5,8,14- trioxonaphth[2,3-c]acridin-6- yl)benzamide",
+  "name_tr": "3-metil-N-(5,8,13,14-tetrahidro- 5,8,14-trioksonaft[2,3-c]akridin- 6-il)benzamid",
+  "ec_no": "442-560-2",
+  "index_no": "616-184-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

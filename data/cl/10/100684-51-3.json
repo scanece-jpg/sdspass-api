@@ -1,0 +1,31 @@
+{
+  "cas": "100684-51-3",
+  "name": "Tar, coal, high-temp., residues; Coal Tar Solids Residue; [Solids formed during the coking of bituminous coal to produce crude bituminous coal high temperature tar. Composed primarily of coke and coal particles, highly aromatized compounds and mineral substances.]",
+  "name_tr": "zift, kömür, yüksek-sıcaklık, artıklar; kömür zifti katı artıkları; [Bitümlü kömürü koklaştırarak bitümlü kömür yüksek sıcaklık zifti üretimi esnasında oluşan katılar. Büyük ölçüde kok ve kömür partiküllerinden, çok aromatik bileşiklerden ve mineral maddelerden oluşur.]",
+  "ec_no": "309-726-5",
+  "index_no": "648-061-00-8",
+  "atp": "",
+  "notes": [
+    "M"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

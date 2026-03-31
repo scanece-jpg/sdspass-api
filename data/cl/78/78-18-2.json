@@ -1,0 +1,51 @@
+{
+  "cas": "78-18-2",
+  "name": "1-hydroperoxycyclohexyl 1- hydroxycyclohexyl peroxide; [1] 1,1'-dioxybiscyclohexan-1-ol; [2] cyclohexylidene hydroperoxide; [3] cyclohexanone, peroxide; [4] [≤ 91 % solution]",
+  "name_tr": "1-hidroperoksisikloheksil 1- hidroksisikloheksil peroksit; [1] 1,1'-dioksibisiklohekzan-1-ol; [2] sikloheksiliden hidroperoksit; [3] siklohekzanon, peroksit [4] [≤ %91çözelti]",
+  "ec_no": "201-091-1",
+  "index_no": "617-010-01-9",
+  "atp": "",
+  "notes": [
+    "C",
+    "T"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Org. Perox. Type C",
+        "h_code": "H242"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H335",
+        "class": "STOT SE 3",
+        "c_min": 5.0,
+        "c_max": null
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS05",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H242",
+      "H302",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

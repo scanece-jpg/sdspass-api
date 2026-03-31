@@ -1,0 +1,29 @@
+{
+  "cas": "130201-51-3",
+  "name": "trisodium(2-(α-(3-(4-chloro-6- (2-(2- (vinylsulfonyl)ethoxy)ethylamin o)-1,3,5-triazin-2-ylamino)-2- oxido-5- sulfonatophenylazo)benzylidene hydrazino)-4- sulfonatobenzoato)copper(II)",
+  "name_tr": "trisodyum-(2-(α-(3-(4-kloro-6- (2-(2- (vinilsülfonil)etoksi)etilamino)- 1,3,5-triazin-2-ilamino)-2- oksido-5- sülfonatofenilazo)benzilidenhidr azino)-4- sülfonatobenzoato)bakır(II)",
+  "ec_no": "407-580-8",
+  "index_no": "029-013-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H318"
+    ],
+    "suppl_h": []
+  }
+}

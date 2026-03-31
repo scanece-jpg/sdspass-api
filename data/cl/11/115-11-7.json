@@ -1,0 +1,33 @@
+{
+  "cas": "115-11-7",
+  "name": "but-1-ene; [1] butene, mixed-1-and-2-isomers; [2] 2-methylpropene; [3] (Z)-but-2-ene; [4] (E)-but-2-ene [5]",
+  "name_tr": "büt-1-en; [1] büten, 1-ve-2-izomer karışımları; [2] 2-metilpropen; [3] (Z)-büt-2-en; [4] (E)-büt-2-en [5]",
+  "ec_no": "203-449-2",
+  "index_no": "601-012-00-4",
+  "atp": "",
+  "notes": [
+    "C",
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H220"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04"
+    ],
+    "h_codes": [
+      "H220"
+    ],
+    "suppl_h": []
+  }
+}

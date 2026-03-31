@@ -1,0 +1,61 @@
+{
+  "cas": "106-94-5",
+  "name": "1-bromopropane; n-propyl bromide",
+  "name_tr": "1-bromopropan; n-propil bromür",
+  "ec_no": "203-445-0",
+  "index_no": "602-019-00-5",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360FD"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H336"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H225",
+      "H360FD",
+      "H373",
+      "H319",
+      "H335",
+      "H315",
+      "H336"
+    ],
+    "suppl_h": []
+  }
+}

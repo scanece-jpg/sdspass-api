@@ -1,0 +1,40 @@
+{
+  "cas": "42413-03-6",
+  "name": "2-chloro-p-toluenesulfochloride",
+  "name_tr": "2-kloro-p-toluensülfoklorür",
+  "ec_no": "412-890-1",
+  "index_no": "016-077-00-9",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H314",
+      "H317",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

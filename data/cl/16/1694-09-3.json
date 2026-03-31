@@ -1,0 +1,29 @@
+{
+  "cas": "1694-09-3",
+  "name": "benzyl violet 4B; α-[4-(4-dimethylamino-α-{}{4- [ethyl(3- sodiosulphonatobenzyl)amino] phenyl}}benzylidene)cyclohexa- 2,5- dienylidene(ethyl)ammonio]tolu ene-3-sulphonate",
+  "name_tr": "benzil mor 4B; α-[4-(4-dimetilamino-α-{4- [etil(3- sodyosülfonatobenzil)amino] fenil}benziliden)siklohekza-2,5- dieniliden(etil)amonyo]toluen-3- sülfonat",
+  "ec_no": "216-901-9",
+  "index_no": "650-010-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H351"
+    ],
+    "suppl_h": []
+  }
+}

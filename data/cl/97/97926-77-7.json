@@ -1,0 +1,31 @@
+{
+  "cas": "97926-77-7",
+  "name": "Paraffin waxes (coal), brown- coal high-temp tar, clay-treated; Coal Tar Extract; [A complex combination of hydrocarbons obtained by the treatment of lignite carbonization tar with bentonite for removal of trace constituents and impurities. It consists predominantly of saturated straight and branched chain hydrocarbons having carbon numbers predominantly greater than C12.]",
+  "name_tr": "Parafin cilaları (kömür), linyit yüksek-sıcakta zift, kil ile işlem görmüş; kömür zifti özütü; [İz içeriklerden ve safsızlıklardan arındırmak için bentonit ile muamele edilen linyit karbonizasyon ziftinden elde edilen kompleks hidrokarbon bileşimi. Büyük ölçüde, karbon sayıları ağırlıklı olarak C12 ‘den büyük olan dallanmış ve düz zincirli doymuş hidrokarbonlardan oluşur.]",
+  "ec_no": "308-297-1",
+  "index_no": "648-053-00-4",
+  "atp": "",
+  "notes": [
+    "M"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "cas": "93763-11-2",
+  "name": "Extracts (petroleum), solvent- dewaxed heavy paraffinic distillate solvent, hydrodesulfurized; Distillate aromatic extract (treated); [A complex combination of hydrocarbons obtained from a solvent dewaxed petroleum stock by treating with hydrogen to convert organic sulfur to hydrogen sulfide which is removed. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C15 through C50 and produces a finished oil with a viscosity of greater than 19cSt at 40 °C.]",
+  "name_tr": "özütler (petrol), solvent-mumu giderilmiş ağır parafinik damıtık çözücü, hidrojenle desülfürize edilmiş; Damıtık aromatik özüt (muamele edilmiş); [Çözücü ile cilası giderilmiş petrol stokundaki organik sülfürü hidrojen sülfüre dönüştürerek uzaklaştırmak için hidrojenle muamele edilmesiyle oluşan kompleks bir hidrokarbon bileşimi. Ağırlıklı olarak, karbon sayıları genelde C15 ile C50 aralığında olan aromatik hidrokarbonlardan oluşur ve 40oC'deki vizkozitesi 19cSt'den büyük olan son yağ üretir.]",
+  "ec_no": "297-829-5",
+  "index_no": "649-544-00-6",
+  "atp": "",
+  "notes": [
+    "L"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

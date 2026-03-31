@@ -1,0 +1,32 @@
+{
+  "cas": "7782-44-7",
+  "name": "oxygen",
+  "name_tr": "oksijen",
+  "ec_no": "231-956-9",
+  "index_no": "008-001-00-8",
+  "atp": "",
+  "notes": [
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Ox. Gas 1",
+        "h_code": "H270"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS03",
+      "GHS04"
+    ],
+    "h_codes": [
+      "H270"
+    ],
+    "suppl_h": []
+  }
+}

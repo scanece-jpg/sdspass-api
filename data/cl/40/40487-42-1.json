@@ -1,0 +1,40 @@
+{
+  "cas": "40487-42-1",
+  "name": "pendimethalin (ISO); N-(1-ethylpropyl)-2,6-dinitro- 3,4-xylidine",
+  "name_tr": "pendimetalin (ISO); N-(1-etilpropil)-2,6-dinitro-3,4- ksilidin",
+  "ec_no": "254-938-2",
+  "index_no": "609-042-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

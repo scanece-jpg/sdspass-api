@@ -1,0 +1,81 @@
+{
+  "cas": "67952-43-6",
+  "name": "nickel dichlorate; [1] nickel dibromate; [2] ethyl hydrogen sulfate, nickel(II) salt [3]",
+  "name_tr": "nikel diklorat; [1] nikel dibromat; [2] etil hidrojen sülfat, nikel(II) tuzu [3]",
+  "ec_no": "267-897-0",
+  "index_no": "028-053-00-5",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1A",
+        "h_code": "H350i"
+      },
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      },
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360D"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
+      },
+      {
+        "class": "Resp. Sens. 1",
+        "h_code": "H334"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 1,
+      "chronic": 1
+    },
+    "scl_limits": [
+      {
+        "h_code": "H372",
+        "class": "STOT RE 1",
+        "c_min": 1.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H317",
+        "class": "C <%1 Cilt Hassas. 1",
+        "c_min": 0.011,
+        "c_max": null
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H350i",
+      "H341",
+      "H360D",
+      "H372",
+      "H334",
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

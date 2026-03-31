@@ -1,0 +1,41 @@
+{
+  "cas": "94-36-0",
+  "name": "dibenzoyl peroxide; benzoyl peroxide",
+  "name_tr": "Dibenzoilperoksit; Benzoil peroksit",
+  "ec_no": "202-327-6",
+  "index_no": "617-008-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Org. Perox. Type B",
+        "h_code": "H241"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS01",
+      "GHS02",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H241",
+      "H319",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

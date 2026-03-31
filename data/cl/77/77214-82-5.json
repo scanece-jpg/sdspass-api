@@ -1,0 +1,29 @@
+{
+  "cas": "77214-82-5",
+  "name": "Iron (III) tris(4- methylbenzenesulfonate)",
+  "name_tr": "demir (III) tris(4- metilbenzensülfonat)",
+  "ec_no": "420-960-8",
+  "index_no": "607-445-00-5",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H318"
+    ],
+    "suppl_h": []
+  }
+}

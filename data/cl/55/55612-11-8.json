@@ -1,0 +1,27 @@
+{
+  "cas": "55612-11-8",
+  "name": "1-(2-deoxy-5-O-trityl-β-D- threopentofuranosyl)thymine",
+  "name_tr": "1-(2-deoksi-5-O-tritil-β-D- treopentofuranosil)timin",
+  "ec_no": "407-120-6",
+  "index_no": "616-072-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

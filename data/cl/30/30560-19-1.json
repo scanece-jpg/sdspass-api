@@ -1,0 +1,29 @@
+{
+  "cas": "30560-19-1",
+  "name": "acephate (ISO); O,S-dimethyl acetylphosphoramidothioate",
+  "name_tr": "acefat (ISO); O S-dimetil asetilfosforamidotiyoat",
+  "ec_no": "250-241-2",
+  "index_no": "015-079-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

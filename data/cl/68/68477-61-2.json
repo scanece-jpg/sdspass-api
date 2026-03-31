@@ -1,0 +1,41 @@
+{
+  "cas": "68477-61-2",
+  "name": "Extracts (petroleum), cold-acid, C4-6; Low boiling point naphtha - unspecified; [A complex combination of organic compounds produced by cold acid unit extraction of saturated and unsaturated aliphatic hydrocarbons usually ranging in carbon numbers from C3 through C6, predominantly pentanes and amylenes. It consists predominantly of saturated and unsaturated hydrocarbons having carbon numbers in the range of C4 through C6, predominantly C5.]",
+  "name_tr": "Özütler (petrol), soğuk-asit, C4-6; düşük kaynama noktalı nafta – tanımlanmamış; [Karbon sayıları genelde C3 ila C6 arasında olan doymuş ve doymamış hidrokarbonların, ağırlıklı olarak pentan ve amilenlerin soğuk asit birim özütlemesi ile üretilen kompleks organik bileşiklerin bileşimi. Ağırlıklı olarak, karbon sayıları C4 ila C6 arasında, ama çoğunlukla C5 olan, doymuş ve doymamış hidrokarbonlardan oluşur.]",
+  "ec_no": "270-741-4",
+  "index_no": "649-362-00-7",
+  "atp": "",
+  "notes": [
+    "P"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

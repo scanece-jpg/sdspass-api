@@ -1,0 +1,60 @@
+{
+  "cas": "7782-50-5",
+  "name": "chlorine",
+  "name_tr": "klor",
+  "ec_no": "231-959-5",
+  "index_no": "017-001-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Ox. Gas 1",
+        "h_code": "H270"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": "H331"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H319"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H335"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H315"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H400"
+      }
+    ],
+    "m_factors": {
+      "acute": 100,
+      "chronic": 100
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS03",
+      "GHS04",
+      "GHS06",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H270",
+      "H331",
+      "H319",
+      "H335",
+      "H315",
+      "H400"
+    ],
+    "suppl_h": []
+  }
+}

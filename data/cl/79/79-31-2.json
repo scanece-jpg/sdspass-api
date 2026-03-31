@@ -1,0 +1,34 @@
+{
+  "cas": "79-31-2",
+  "name": "isobutyric acid",
+  "name_tr": "izobütirik asit",
+  "ec_no": "201-195-7",
+  "index_no": "607-063-00-9",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H312",
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

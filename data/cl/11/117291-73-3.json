@@ -1,0 +1,40 @@
+{
+  "cas": "117291-73-3",
+  "name": "methyl [2-(1,1-dimethylethyl)-6- methoxypyrimidin-4- yl]ethylphosphonothioate",
+  "name_tr": "metil-[2-(1,1-dimetiletil)-6- metoksipirimidin-4- il]etilfosfonotiyoat",
+  "ec_no": "414-080-3",
+  "index_no": "015-173-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "cas": "144736-29-8",
+  "name": "α[2-[[[(2- hydroxyethyl)methylamino]acet yl]amino]propyl]-ω- (nonylphenoxy)poly[oxo(methyl -1,2-ethanediyl)]",
+  "name_tr": "α[2-[[[(2- hidroksietil)metilamino]asetil]a mino]propil]-γ- (nonilfenoksi)poli[okso(metil- 1,2-etandil)]",
+  "ec_no": "413-420-8",
+  "index_no": "603-162-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H314",
+      "H317",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

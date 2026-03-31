@@ -1,0 +1,36 @@
+{
+  "cas": "94114-54-2",
+  "name": "Naphtha (coal), solvent extn., hydrocracked; [Fraction of the distillate obtained by hydrocracking of coal extract or solution produced by the liquid solvent extraction or supercritical gas extraction processes and boiling in the range of approximately 30°C to 180°C (86°F to 356°F). Composed primarily of aromatic, hydrogenated aromatic and naphthenic compounds, their alkyl derivatives and alkanes with carbon numbers predominantly in the range of C4 to C9. Nitrogen, sulfur and oxygen-containing aromatic and hydrogenated aromatic compounds are also present.]",
+  "name_tr": "Nafta (kömür), çözücü ekstraksiyonu, hidrojenle parçalanmış; [Kömür özütünün hidrojenle parçalanması veya sıvı çözücü özütünden elde edilen çözelti veya süperkritik gaz ekstraksyion proseslerinden elde edilen ve yaklaşık 30oC ile 180oC (86oF-356oF) arasında kaynayan damıtık fraksiyonu. Esas olarak aromatik, hidrojenlenmiş aromatik ve naftenik bileşikler, bunların alkil türevleri ve karbon sayıları ağırlıklı olarak C4 ile C9 arasında olan alkanlardan oluşur. Nitrojen, sülfür ve oksijen içeren aromatik ve hidrojenlenmiş aromatik bileşikler de bulunur.]",
+  "ec_no": "302-690-1",
+  "index_no": "648-150-00-1",
+  "atp": "",
+  "notes": [
+    "J"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

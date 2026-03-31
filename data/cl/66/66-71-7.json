@@ -1,0 +1,40 @@
+{
+  "cas": "66-71-7",
+  "name": "1,10-phenanthroline",
+  "name_tr": "1,10-fenantrolin",
+  "ec_no": "200-629-2",
+  "index_no": "613-092-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H301",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

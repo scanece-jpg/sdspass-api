@@ -1,0 +1,41 @@
+{
+  "cas": "67891-80-9",
+  "name": "Distillates (petroleum), light arom.; Low boiling point thermally cracked naphtha; [The complex combination of hydrocarbons from the distillation of the products from the thermal cracking of ethane and propane. This lower boiling fraction consists predominantly of C5-7 aromatic hydrocarbons with some unsaturated aliphatic hydrocarbons having a carbon number predominantly of C5. This stream may contain benzene.]",
+  "name_tr": "Damıtıklar (petrol),hafif aromatik; düşük kaynama noktalı ısıl olarak parçalanmış nafta; [Etan ve propanın ısıl parçalama prosesi ürünlerinin damıtılması ile elde edilen kompleks hidrokarbon karışımı. Bu düşük sıcaklıkta kaynayan fraksiyon, büyük ölçüde, C5-C7 aromatik hidrokarbonlar ile ağırlıklı olarak karbon sayısı C5’ten büyük olan bazı doymamış alifatik hidrokarbonlardan oluşur. Buhar, benzen içerebilir.]",
+  "ec_no": "267-565-5",
+  "index_no": "649-319-00-2",
+  "atp": "",
+  "notes": [
+    "P"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

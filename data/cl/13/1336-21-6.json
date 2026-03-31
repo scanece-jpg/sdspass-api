@@ -1,0 +1,44 @@
+{
+  "cas": "1336-21-6",
+  "name": "ammonia ....%",
+  "name_tr": "amonyak ....%",
+  "ec_no": "215-647-6",
+  "index_no": "007-001-01-2",
+  "atp": "",
+  "notes": [
+    "B"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H335",
+        "class": "STOT SE 3",
+        "c_min": 5.0,
+        "c_max": null
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H314",
+      "H400"
+    ],
+    "suppl_h": []
+  }
+}

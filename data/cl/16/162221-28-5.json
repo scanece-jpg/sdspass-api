@@ -1,0 +1,29 @@
+{
+  "cas": "162221-28-5",
+  "name": "[(4S,5S)-4-benzyl-2-oxo-5- oxazolidinyl]methyl 4- nitrobenzenesulfonate",
+  "name_tr": "[(4S,5S)-4-benzil-2-okso-5- oksazolidinil]metil 4- nitrobenzensülfonat",
+  "ec_no": "416-360-0",
+  "index_no": "607-627-00-4",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

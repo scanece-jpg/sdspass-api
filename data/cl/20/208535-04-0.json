@@ -1,0 +1,29 @@
+{
+  "cas": "208535-04-0",
+  "name": "N-amidino-N-methylglycine-2- oxopropionate",
+  "name_tr": "N-amidino-N-metilglisin-2- oksopropiyonat",
+  "ec_no": "429-120-5",
+  "index_no": "607-595-00-1",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H318"
+    ],
+    "suppl_h": []
+  }
+}

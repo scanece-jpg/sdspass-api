@@ -1,0 +1,49 @@
+{
+  "cas": "111-76-2",
+  "name": "2-butoxyethanol; ethylene glycol monobutyl ether; butyl cellosolve",
+  "name_tr": "2-bütoksietanol; etilen glikol monobütil eter; bütilsellosolve",
+  "ec_no": "203-905-0",
+  "index_no": "603-014-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H332",
+      "H312",
+      "H302",
+      "H319",
+      "H315"
+    ],
+    "suppl_h": []
+  }
+}

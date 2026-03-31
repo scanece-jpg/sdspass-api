@@ -1,0 +1,40 @@
+{
+  "cas": "120298-38-6",
+  "name": "(S,S)-trans-4-(acetylamino)-5,6- dihydro-6-methyl-7,7-dioxo-4H- thieno[2,3-b]thiopyran-2- sulfonamide",
+  "name_tr": "(S,S)-trans-4-(asetilamino)-5,6- dihidro-6-metil-7,7-diokso-4H- tieno[2,3-b]tiyopiran-2- sülfonamid",
+  "ec_no": "415-030-3",
+  "index_no": "616-103-00-4",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

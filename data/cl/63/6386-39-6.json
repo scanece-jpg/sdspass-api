@@ -1,0 +1,35 @@
+{
+  "cas": "6386-39-6",
+  "name": "methyl 3-(3-tert-butyl-4- hydroxy-5- methylphenyl)propionate",
+  "name_tr": "metil-3-(3-ter-bütil-4-hidroksi-5- metilfenil)propiyonat",
+  "ec_no": "403-270-1",
+  "index_no": "607-211-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

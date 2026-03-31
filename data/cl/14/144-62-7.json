@@ -1,0 +1,34 @@
+{
+  "cas": "144-62-7",
+  "name": "oxalic acid",
+  "name_tr": "oksalik asit",
+  "ec_no": "205-634-3",
+  "index_no": "607-006-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H312",
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

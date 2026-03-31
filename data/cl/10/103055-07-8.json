@@ -1,0 +1,40 @@
+{
+  "cas": "103055-07-8",
+  "name": "lufenuron (ISO); N-[2,5-dichloro-4-(1,1,2,3,3,3- hexafluoropropoxy)-phenyl- aminocarbonyl]-2,6- difluorobenzamide",
+  "name_tr": "lufenuron (ISO); N-[2,5-dikloro-4-(1,1,2,3,3,3- hekzaflorpropoksi)-fenil- aminokarbonil]-2,6- diflorobenzamid",
+  "ec_no": "410-690-9",
+  "index_no": "616-050-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

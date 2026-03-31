@@ -1,0 +1,41 @@
+{
+  "cas": "119-93-7",
+  "name": "4,4'-bi-o-toluidine",
+  "name_tr": "4,4'-bi-o-toluidin",
+  "ec_no": "204-358-0",
+  "index_no": "612-041-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H350",
+      "H302",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

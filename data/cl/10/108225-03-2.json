@@ -1,0 +1,41 @@
+{
+  "cas": "108225-03-2",
+  "name": "(6-(4-hydroxy-3-(2- methoxyphenylazo)-2-sulfonato- 7-naphthylamino)-1,3,5-triazin- 2,4-diyl)bis[(amino-1- methylethyl)ammonium] formate",
+  "name_tr": "(6-(4-hidroksi-3-(2- metoksifenilazo)-2-sülfonato-7- naftilamino)-1,3,5-triazin-2,4- dil)bis[(amino-1- metiletil)amonyum]-format",
+  "ec_no": "402-060-7",
+  "index_no": "611-058-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS05",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H350",
+      "H318",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

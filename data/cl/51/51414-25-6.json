@@ -1,0 +1,29 @@
+{
+  "cas": "51414-25-6",
+  "name": "hydroxyisohexyl 3-cyclohexene carboxaldehyde (INCI); reaction mass of 4-(4-hydroxy-4- methylpentyl)cyclohex-3-ene-1- carbaldehyde and 3-(4-hydroxy-",
+  "name_tr": "hidroksiisohekzil 3-siklohekzen karboksialdehit (INCI); 4-(4- hidroksi-4-metilpentil)siklohekz- 3-en-1-karbaldehit ve 3-(4- hidroksi-4-metilpentil)siklohekz-",
+  "ec_no": "250-863-4",
+  "index_no": "605-040-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Sens. 1A",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

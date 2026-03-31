@@ -1,0 +1,29 @@
+{
+  "cas": "7425-14-1",
+  "name": "2-ethylhexyl-2-ethylhexanoate",
+  "name_tr": "2-etilhekzil-2-etilhekzanoat",
+  "ec_no": "231-057-1",
+  "index_no": "607-622-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 2",
+        "h_code": "H361d"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H361d"
+    ],
+    "suppl_h": []
+  }
+}

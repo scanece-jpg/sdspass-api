@@ -1,0 +1,29 @@
+{
+  "cas": "93763-35-0",
+  "name": "Hydrocarbons, C9-16, hydrotreated, dearomatized; Kerosine - unspecified; [A complex combination of hydrocarbons obtained as solvents which have been subjected to hydrotreatment in order to convert aromatics to naphthenes by catalytic hydrogenation.]",
+  "name_tr": "Hidrokarbonlar, C9-16, hidrojenle muamele edilmiş, aromatikliği giderilmiş; Kerosin – tanımlanmamış; [Katalitik hidrojenleme ile aromatikleri naftenlere dönüştürmek için hidrojenle muameleye tabi tutularak çözücü olarak elde edilen kompleks hidrokarbon bileşimi.]",
+  "ec_no": "297-854-1",
+  "index_no": "649-429-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

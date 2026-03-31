@@ -1,0 +1,47 @@
+{
+  "cas": "5064-31-3",
+  "name": "trisodium nitrilotriacetate",
+  "name_tr": "trisodyum nitrilotriasetat",
+  "ec_no": "225-768-6",
+  "index_no": "607-620-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H351",
+        "class": "Carc. 2",
+        "c_min": 5.0,
+        "c_max": null
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H351",
+      "H302",
+      "H319"
+    ],
+    "suppl_h": []
+  }
+}

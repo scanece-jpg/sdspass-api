@@ -1,0 +1,34 @@
+{
+  "cas": "72531-53-4",
+  "name": "2-methylpropyl 2-hydroxy-2- methylbut-3-enoate",
+  "name_tr": "2-metilpropil-2-hidroksi-2- metilbüt-3-enoat",
+  "ec_no": "406-235-9",
+  "index_no": "607-338-00-3",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319",
+      "H315"
+    ],
+    "suppl_h": []
+  }
+}

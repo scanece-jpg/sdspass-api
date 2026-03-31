@@ -1,0 +1,40 @@
+{
+  "cas": "139756-01-7",
+  "name": "1-methyl-4-nitro-3-propyl-1H- pyrazole-5-carboxamide",
+  "name_tr": "1-metil-4-nitro-3-propil-1H- pirazol-5-karboksamid",
+  "ec_no": "423-960-6",
+  "index_no": "616-126-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302",
+      "H373",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

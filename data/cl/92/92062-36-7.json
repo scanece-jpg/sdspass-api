@@ -1,0 +1,36 @@
+{
+  "cas": "92062-36-7",
+  "name": "Aromatic hydrocarbons, C9-12, benzene distn.; Light Oil Redistillate, high boiling",
+  "name_tr": "Aromatik hidrokarbonlar, C9-12, benzen damıtığı; tekrar damıtılmış hafif yağ, yüksek sıcaklıkta kaynayan",
+  "ec_no": "295-551-9",
+  "index_no": "648-013-00-6",
+  "atp": "",
+  "notes": [
+    "J"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

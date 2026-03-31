@@ -1,0 +1,41 @@
+{
+  "cas": "94114-03-1",
+  "name": "Gasoline, pyrolysis, hydrogenated; Low boiling point naphtha- unspecified; [A distillation fraction from the hydrogenation of pyrolysis gasoline boiling in the range of approximately 20°C to 200°C (68°F to 392°F).]",
+  "name_tr": "Benzin, piroliz, hidrojenlenmiş; düşük kaynama noktalı nafta- tanımlanmamış; [Piroliz benzininin hidrojenlenmesinden gelen bir damıtma fraksiyonu. Yaklaşık 20°C ila 200°C (68°F ila 392°F) aralığında kaynar.]",
+  "ec_no": "302-639-3",
+  "index_no": "649-389-00-4",
+  "atp": "",
+  "notes": [
+    "P"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

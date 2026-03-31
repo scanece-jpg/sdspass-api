@@ -1,0 +1,46 @@
+{
+  "cas": "96-29-7",
+  "name": "2-butanone oxime; ethyl methyl ketoxime; ethyl methyl ketone oxime",
+  "name_tr": "2-bütanonoksim; etilmetilketoksim; etil metil keton oksim",
+  "ec_no": "202-496-6",
+  "index_no": "616-014-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS05",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H351",
+      "H312",
+      "H318",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

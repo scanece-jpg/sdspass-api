@@ -1,0 +1,51 @@
+{
+  "cas": "606-35-9",
+  "name": "2,4,6-trinitroanisole",
+  "name_tr": "2,4,6-trinitroanizol",
+  "ec_no": "",
+  "index_no": "609-011-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Expl. 1.1",
+        "h_code": "H201"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS01",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H201",
+      "H332",
+      "H312",
+      "H302",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

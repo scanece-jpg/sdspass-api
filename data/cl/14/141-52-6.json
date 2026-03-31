@@ -1,0 +1,39 @@
+{
+  "cas": "141-52-6",
+  "name": "potassium ethanolate; potassium ethoxide; [1] sodium ethanolate; sodium ethoxide [2]",
+  "name_tr": "potasyum etanolat; potasyum etoksit [1]; sodyum etanolat; sodyum etoksit [2]",
+  "ec_no": "213-029-0",
+  "index_no": "603-041-00-8",
+  "atp": "",
+  "notes": [
+    "T"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Self-heat. 1",
+        "h_code": "H251"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H251",
+      "H314"
+    ],
+    "suppl_h": [
+      "EUH014"
+    ]
+  }
+}

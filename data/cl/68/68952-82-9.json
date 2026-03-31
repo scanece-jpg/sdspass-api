@@ -1,0 +1,44 @@
+{
+  "cas": "68952-82-9",
+  "name": "Tail gas (petroleum), thermal cracked hydrocarbon fractionation stabilizer, petroleum coking; Petroleum gas; [A complex combination of hydrocarbons obtained from the fractionation stabilization of thermal cracked hydrocarbons from petroleum coking process. It consists of hydrocarbons having carbon numbers predominantly in the range of C1 through C6.]",
+  "name_tr": "Artık gaz (petrol), ısıl olarak parçalanmış hidrokarbon ayrımsal damıtma kararlaştırıcısı petrol koklaştırma; Petrol gazı; [Petrol koklaştırma prosesinden ısıl olarak parçalanmış hidrokarbonların fraksiyon dengeleyicisinden elde edilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla C1 ila C6 aralığında karbon sayısına sahip hidrokarbonlardan oluşur.]",
+  "ec_no": "273-176-1",
+  "index_no": "649-110-00-6",
+  "atp": "",
+  "notes": [
+    "K",
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H220"
+      },
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS04",
+      "GHS02",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,47 @@
+{
+  "cas": "214353-17-0",
+  "name": "1-(2-amino-5-chlorophenyl)- 2,2,2-trifluoro-1,1-ethanediol, hydrochloride; [containing ≥ 0.1 % 4- chloroaniline (EC No 203-401- 0)]",
+  "name_tr": "1-(2-amino-5-klorofenil)-2,2,2- trifloro-1,1-etandiol, hidroklorür; [≥ %0,1 4-kloroanilin (EC No 203-401-0) içeren]",
+  "ec_no": "433-580-2",
+  "index_no": "603-221-01-3",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H350",
+      "H302",
+      "H314",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

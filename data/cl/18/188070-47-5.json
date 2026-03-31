@@ -1,0 +1,29 @@
+{
+  "cas": "188070-47-5",
+  "name": "reaction mass of: methyl {[5- acetylamino-4-(2-chloro-4- nitrophenylazo)phenyl]methoxy carbonylmethylamino}acetate; methyl {[5-acetylamino-4-(2- chloro-4- nitrophenylazo)phenyl]ethoxyca rbonylmethylamino}acetate",
+  "name_tr": "tepkime kütlei: metil{[5- asetilamino-4-(2-kloro-4- nitrofenilazo)fenil]metoksikarbo nilmetilamino}asetat; metil{[5-asetilamino-4-(2-kloro- 4- nitrofenilazo)fenil]etoksikarboni lmetilamino}asetat",
+  "ec_no": "424-290-7",
+  "index_no": "607-546-00-4",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

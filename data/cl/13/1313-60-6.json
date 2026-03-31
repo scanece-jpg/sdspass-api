@@ -1,0 +1,35 @@
+{
+  "cas": "1313-60-6",
+  "name": "sodium peroxide",
+  "name_tr": "sodyum peroksit",
+  "ec_no": "215-209-4",
+  "index_no": "011-003-00-1",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Ox. Sol. 1",
+        "h_code": "H271"
+      },
+      {
+        "class": "Skin Corr. 1A",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS03",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H271",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

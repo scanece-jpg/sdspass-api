@@ -1,0 +1,41 @@
+{
+  "cas": "111969-64-3",
+  "name": "2S-isopropyl-5R-methyl-1R- cyclohexyl 2,2-dihydroxyacetate",
+  "name_tr": "2S-izopropil-5R-metil-1R- siklohekzil-2,2-dihidroksiasetat",
+  "ec_no": "416-810-6",
+  "index_no": "607-435-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS05",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H373",
+      "H318",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "cas": "27871-49-4",
+  "name": "methyl lactate; [1] methyl (±)-lactate; [2] methyl (R)-lactate; [3] methyl (S)-(-)-lactate [4]",
+  "name_tr": "metil laktat; [1] metil(±)-laktat; [2] metil(R)-laktat;[3] metil(S)-(-)-laktat [4]",
+  "ec_no": "208-930-0",
+  "index_no": "607-092-00-7",
+  "atp": "",
+  "notes": [
+    "C"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS02",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H226",
+      "H319",
+      "H335"
+    ],
+    "suppl_h": []
+  }
+}

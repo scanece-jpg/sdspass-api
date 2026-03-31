@@ -1,0 +1,31 @@
+{
+  "cas": "90641-07-9",
+  "name": "Extracts (petroleum), heavy naphthenic distillate solvent, hydrotreated; Distillate aromatic extract (treated); [A complex combination of hydrocarbons obtained by treating a heavy naphthenic distillate solvent extract with hydrogen in the presence of a catalyst. It consists predominantly of aromatic hydrocarbons having carbon numbers predominantly in the range of C20 through C50 and produces a finished oil of at least 19cSt at 40 °C (100 SUS at 100 °F).]",
+  "name_tr": "özütler (petrol),hafif naftenik damıtık çözücü, hidrojen ile muamele edilmiş; damıtık aromatik özüt (muamele edilmiş; [Ağır naftenik damıtık çözücü özütünün katalizör varlığında hidrojenle muamele edilmesinden üretilen kompleks bir hidrokarbon bileşimi. Ağırlıklı olarak, karbon sayıları genelde C20 ile C50 aralığında olan aromatik hidrokarbonlardan oluşur ve 40oC’de en az 19cSt (100oF’de 100 SUS) olan son yağ üretir.]",
+  "ec_no": "292-631-5",
+  "index_no": "649-534-00-1",
+  "atp": "",
+  "notes": [
+    "L"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

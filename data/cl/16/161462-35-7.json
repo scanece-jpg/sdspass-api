@@ -1,0 +1,40 @@
+{
+  "cas": "161462-35-7",
+  "name": "1-cyclopropyl-3-(2-methylthio- 4-trifluoromethylphenyl)-1,3- propanedione",
+  "name_tr": "1-siklopropil-3-(2-metiltio-4- triflorometilfenil)-1,3-propan idon",
+  "ec_no": "421-080-7",
+  "index_no": "606-124-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H373",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

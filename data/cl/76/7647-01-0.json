@@ -1,0 +1,39 @@
+{
+  "cas": "7647-01-0",
+  "name": "hydrogen chloride",
+  "name_tr": "Hidrojen klorür",
+  "ec_no": "231-595-7",
+  "index_no": "017-002-00-2",
+  "atp": "",
+  "notes": [
+    "U",
+    "5"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H331"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS04",
+      "GHS06",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H331",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

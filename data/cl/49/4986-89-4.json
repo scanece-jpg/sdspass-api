@@ -1,0 +1,41 @@
+{
+  "cas": "4986-89-4",
+  "name": "pentaerythritol tetraacrylate",
+  "name_tr": "Pentaeritritoltetraakrilat",
+  "ec_no": "225-644-1",
+  "index_no": "607-122-00-9",
+  "atp": "",
+  "notes": [
+    "D"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319",
+      "H315",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

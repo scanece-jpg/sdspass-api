@@ -1,0 +1,25 @@
+{
+  "cas": "12619-90-8",
+  "name": "nickel boride (NiB); [1] dinickel boride; [2] trinickel boride; [3] nickel boride; [4] dinickel silicide; [5] nickel disilicide; [6] dinickel phosphide; [7] nickel boron phosphide [8]",
+  "name_tr": "nikel borit (NiB; [1] dinikel borit; [2] trinikel borit; [3] nikel borit; [4] dinikel silisit; [5] nikel disilisit; [6] dinikel fosfit; [7] nikel boron fosfit; [8]",
+  "ec_no": "234-493-0",
+  "index_no": "028-056-00-1",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [],
+    "suppl_h": [
+      "GHS08",
+      "GHS07",
+      "GHS09",
+      "Thl"
+    ]
+  }
+}

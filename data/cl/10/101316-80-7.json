@@ -1,0 +1,29 @@
+{
+  "cas": "101316-80-7",
+  "name": "Solvent naphtha (petroleum), hydrocracked heavy arom.; Cracked kerosine; [A complex combination of hydrocarbons obtained by the distillation of hydrocracked petroleum distillate. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C9 through C16 and boiling in the range of approximately 235 °C to 290 °C (455 °F to 554 °F).]",
+  "name_tr": "Çözücü nafta (petrol), hidrojenle parçalanmış ağır aromatik; parçalanmış kerosin; [Hidrojenle parçalanmış petrol damıtığının damıtılmasından oluşan kompleks hidrokarbon bileşimi. Ağırlıklı olarak, karbon sayıları C9 ila C16 arasında olan ve yaklaşık 235°C ila 290°C (455°F-554°F) aralığında kaynayan hidrokarbonlardan oluşur.]",
+  "ec_no": "309-881-9",
+  "index_no": "649-417-00-5",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

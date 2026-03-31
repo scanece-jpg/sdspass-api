@@ -1,0 +1,27 @@
+{
+  "cas": "93686-63-6",
+  "name": "1,4-diamino-2-(2-butyltetrazol- 5-yl)-3-cyanoanthraquinone",
+  "name_tr": "1,4-diamino-2-(2-bütiltetrazol-5- il)-3-siyanoantrakinon",
+  "ec_no": "401-470-3",
+  "index_no": "613-141-00-3",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

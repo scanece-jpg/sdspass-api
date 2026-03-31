@@ -1,0 +1,40 @@
+{
+  "cas": "163831-67-2",
+  "name": "1-(2-(ethyl(4-(4-(4-(4-(ethyl(2- pyridinoethyl)amino)-2- methylphenylazo)benzoylamino) -phenylazo)-3- methylphenyl)amino)ethyl)- pyridinium dichloride",
+  "name_tr": "1-(2-(etil(4-(4-(4-(4-(etil(2- piridinoetil)amino)-2- metilfenilazo)benzilamino)- fenilazo)-3- metilfenil)amino)etilpiridinyumd iklorür",
+  "ec_no": "420-950-3",
+  "index_no": "613-226-00-5",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H318",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

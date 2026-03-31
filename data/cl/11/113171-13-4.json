@@ -1,0 +1,27 @@
+{
+  "cas": "113171-13-4",
+  "name": "5-amino-N-(2,6-dichloro-3- methylphenyl)-1H-1,2,4- triazole-3-sulfonamide",
+  "name_tr": "5-amino-N-(2,6-dikloro-3- metilfenil)-1H-1,2,4-triazol-3- sülfonamid",
+  "ec_no": "428-150-6",
+  "index_no": "613-270-00-5",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

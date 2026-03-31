@@ -1,0 +1,34 @@
+{
+  "cas": "38585-74-9",
+  "name": "5-thiazolylmethanol",
+  "name_tr": "5-tiyazolilmetanol",
+  "ec_no": "414-780-9",
+  "index_no": "603-171-00-5",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H318",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

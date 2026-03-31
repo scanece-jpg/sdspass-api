@@ -1,0 +1,48 @@
+{
+  "cas": "163515-14-8",
+  "name": "dimethenamid-P (ISO); 2- chloro-N-(2,4-dimethyl-3- thienyl)-N-[(2S)-1- methoxypropan-2-yl]acetamide",
+  "name_tr": "dimetenamid-P (ISO); 2-kloro- N-(2,4-dimetil-3- tienil)-N- [(2S)-1-metoksipropan-2- il]asetamid",
+  "ec_no": "",
+  "index_no": "616-215-00-3",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 10,
+      "chronic": 10
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

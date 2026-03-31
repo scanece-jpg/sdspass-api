@@ -1,0 +1,36 @@
+{
+  "cas": "68937-63-3",
+  "name": "Extract oils (coal), tar base, collidine fraction; Distillate Bases; [The extract produced by the acidic extraction of bases from crude coal tar aromatic oils, neutralization, and distillation of the bases. Composed primarily of collidines, aniline, toluidines, lutidines, xylidines.]",
+  "name_tr": "özüt yağlar (kömür), zift , kollidin fraksiyonu; damıtık bazlar; [Ham kömür zifti bazlarının asidik özütlenmesinden, nötralizasyonundan ve damıtılmasından elde edilmiş özüt. Ağırlıkla kollidinler, anilin, tolüdinler, lutidinler, ksilidinlerden oluşur.]",
+  "ec_no": "273-077-3",
+  "index_no": "648-032-00-X",
+  "atp": "",
+  "notes": [
+    "J"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

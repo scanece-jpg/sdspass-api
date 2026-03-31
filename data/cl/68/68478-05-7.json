@@ -1,0 +1,44 @@
+{
+  "cas": "68478-05-7",
+  "name": "Gases (petroleum), thermal cracking distn.; Refinery gas; [A complex combination produced by distillation of products from a thermal cracking process. It consists of hydrogen, hydrogen sulfide, carbon monoxide, carbon dioxide and hydrocarbons having carbon numbers predominantly in the range of C1 through C6.]",
+  "name_tr": "Gazlar (petrol), ısıl parçalanma damıtığı; Rafineri gazı; [Bir ısıl parçalanma prosesi ürünlerinin damıtılmasından üretilen kompleks bir bileşim. Hidrojen, hidrojen sülfür, karbon monoksit, karbon dioksit ve büyük çoğunlukla C1 ila C6 aralığında karbon sayısına sahip hidrokarbonlardan oluşur.].",
+  "ec_no": "270-789-6",
+  "index_no": "649-139-00-4",
+  "atp": "",
+  "notes": [
+    "K",
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H220"
+      },
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS04",
+      "GHS02",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

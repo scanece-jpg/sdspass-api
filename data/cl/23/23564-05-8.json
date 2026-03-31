@@ -1,0 +1,51 @@
+{
+  "cas": "23564-05-8",
+  "name": "thiophanate-methyl (ISO); 1,2-di-(3-methoxycarbonyl-2- thioureido)benzene",
+  "name_tr": "tiyofanat-metil (ISO); 1,2-di-(3- metoksikarbonil-2- tiyoüreido)benzen",
+  "ec_no": "245-740-7",
+  "index_no": "006-069-00-3",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H341",
+      "H332",
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

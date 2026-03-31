@@ -1,0 +1,31 @@
+{
+  "cas": "100684-05-7",
+  "name": "Extracts (petroleum), light vacuum gas oil solvent, clay- treated; Distillate aromatic extract (treated); [A complex combination of hydrocarbons obtained by solvent extraction of light vacuum petroleum gas oils treated with bleaching earth for removal of trace polar constituents and impurities. It consists predominantly of aromatic hydrocarbons having carbon numbers predominantly in the range of C13 through C30.]",
+  "name_tr": "Petrol özütleri, hafif vakum gaz yağı çözücüleri, kil ile muamele edilmiş; Aromatik özüt damıtığı (muamele edilmiş) [Eser miktardaki polar içerikten ve safsızlıklardan arındırmak için ağartıcı toprak ile muamele edilmiş hafif vakum petrol gaz yağlarının çözücü özütlemesinden elde edilen kompleks bir hidrokarbon bileşimi. Büyük ölçüde, karbon sayıları genelde C13 ile C30 aralığında olan aromatik hidrokarbonlardan oluşur. ]",
+  "ec_no": "309-675-9",
+  "index_no": "649-548-00-8",
+  "atp": "",
+  "notes": [
+    "L"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

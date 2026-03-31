@@ -1,0 +1,44 @@
+{
+  "cas": "68513-15-5",
+  "name": "Gases (petroleum), full-range straight-run naphtha dehexanizer off; petroleum gas; [A complex combination of hydrocarbons obtained by the fractionation of the full-range straight-run naphtha. It consists of hydrocarbons having carbon numbers predominantly in the range of C2 through C6.]",
+  "name_tr": "Gazlar (petrol), tam aralık normal üretim nafta hekzan giderici çalışmazken; Petrol gazı; [ Normal tam aralıkta nafta üretiminin ayrımsal damıtılmasından oluşan hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla, C2 ila C6 aralığında karbon sayısına sahip hidrokarbonlardan oluşur.]",
+  "ec_no": "271-000-8",
+  "index_no": "649-084-00-6",
+  "atp": "",
+  "notes": [
+    "K",
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H220"
+      },
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS04",
+      "GHS02",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

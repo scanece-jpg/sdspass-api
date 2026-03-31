@@ -283,34 +283,76 @@ async def debug_signal(data: dict = Body(...)):
 
 @app.get("/api/v1/sds/substance/lookup")
 async def substance_lookup(cas: str):
-    """CAS numarasına göre madde bilgisi döndür."""
+    """
+    CAS numarasına göre madde bilgisi döndür.
+    Hiyerarşi:
+      1. data/cl/   — SEA Ek-6 (mutlak)
+      2. data/annex6/ — CLP Annex VI
+      3. substances_custom.json
+      4. ECHA C&L Inventory API (canlı, arşive kaydedilir)
+    """
     from app.services.substance_lookup import lookup_substance, get_oel
     from app.services.reach_db import get_ec_no, get_reg_no
-    
-    result = lookup_substance(cas)
+
     oel = get_oel(cas)
-    
+
+    # Sıra 1-2-3: Lokal dosyalar
+    result = lookup_substance(cas)
+
+    # Sıra 4: ECHA C&L API — lokal bulunamazsa canlı çek
+    if result is None:
+        try:
+            from app.services.echa_service import lookup_echa_api
+            echa = await lookup_echa_api(cas)
+            if echa and echa.get('h_codes'):
+                return {
+                    "found"     : True,
+                    "cas"       : cas,
+                    "name"      : echa.get("name", ""),
+                    "ec_no"     : echa.get("ec_no", "") or get_ec_no(cas),
+                    "reach_no"  : get_reg_no(cas),
+                    "annex_vi"  : False,
+                    "signal"    : echa.get("signal", ""),
+                    "pictograms": echa.get("pictograms", []),
+                    "hazards"   : [
+                        {"h_class": cls, "h_code": code}
+                        for cls, code in zip(
+                            echa.get("hazard_classes", []),
+                            echa.get("h_codes", [])
+                        )
+                    ],
+                    "m_factors" : echa.get("m_factors", {}),
+                    "scl"       : [],
+                    "oel"       : oel,
+                    "source"    : echa.get("source", "ECHA C&L API"),
+                }
+        except Exception:
+            pass
+
     if result:
         return {
-            "found": True,
-            "cas": cas,
-            "name": result.get("name",""),
-            "ec_no": result.get("ec_no","") or get_ec_no(cas),
-            "reach_no": get_reg_no(cas),
-            "annex_vi": result.get("annex_vi", False),
-            "signal": result.get("signal",""),
-            "pictograms": result.get("pictograms",[]),
-            "hazards": result.get("hazards",[]),
-            "m_factors": result.get("m_factors",{}),
-            "scl": result.get("scl", []),   # Annex VI özel kesme değerleri (SCL)
-            "oel": oel,
+            "found"     : True,
+            "cas"       : cas,
+            "name"      : result.get("name", ""),
+            "ec_no"     : result.get("ec_no", "") or get_ec_no(cas),
+            "reach_no"  : get_reg_no(cas),
+            "annex_vi"  : result.get("annex_vi", False),
+            "signal"    : result.get("signal", ""),
+            "pictograms": result.get("pictograms", []),
+            "hazards"   : result.get("hazards", []),
+            "m_factors" : result.get("m_factors", {}),
+            "scl"       : result.get("scl", []),
+            "oel"       : oel,
+            "source"    : result.get("source", ""),
         }
-    # DB'de yoksa REACH DB'ye bak
-    ec = get_ec_no(cas)
+
+    # REACH DB'de EC/REACH no var mı?
+    ec  = get_ec_no(cas)
     reg = get_reg_no(cas)
     if ec or reg:
-        return {"found": True, "cas": cas, "name": "", "ec_no": ec, 
+        return {"found": True, "cas": cas, "name": "", "ec_no": ec,
                 "reach_no": reg, "annex_vi": False, "hazards": [], "oel": oel}
+
     return {"found": False, "cas": cas}
 
 

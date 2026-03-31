@@ -1,0 +1,33 @@
+{
+  "cas": "107-25-5",
+  "name": "methyl vinyl ether",
+  "name_tr": "metil-vinil-eter",
+  "ec_no": "203-475-4",
+  "index_no": "603-021-00-9",
+  "atp": "",
+  "notes": [
+    "D",
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H220"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04"
+    ],
+    "h_codes": [
+      "H220"
+    ],
+    "suppl_h": []
+  }
+}

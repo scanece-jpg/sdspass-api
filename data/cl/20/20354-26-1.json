@@ -1,0 +1,50 @@
+{
+  "cas": "20354-26-1",
+  "name": "2-(3,4-dichlorophenyl)-4- methyl-1,2,4- oxadiazolidinedione; methazole",
+  "name_tr": "2-(3,4-diklorofenil)-4-metil- 1,2,4-oksadiazolidindion; metazol",
+  "ec_no": "243-761-6",
+  "index_no": "606-033-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H312",
+      "H302",
+      "H319",
+      "H315",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

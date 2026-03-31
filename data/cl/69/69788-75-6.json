@@ -1,0 +1,35 @@
+{
+  "cas": "69788-75-6",
+  "name": "4-chlorobutyl veratrate",
+  "name_tr": "4-klorobütil veratrat",
+  "ec_no": "410-950-1",
+  "index_no": "607-342-00-5",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H317",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

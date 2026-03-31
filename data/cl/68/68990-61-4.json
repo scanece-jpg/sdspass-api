@@ -1,0 +1,31 @@
+{
+  "cas": "68990-61-4",
+  "name": "Tar, coal, high-temp., high- solids; Coal Tar Solids Residue; [The condensation product obtained by cooling, to approximately ambient temperature, the gas evolved in the high temperature (greater than 700 °C (1292 °F) destructive distillation of coal. Composed primarily of a complex mixture of condensed ring aromatic hydrocarbons with a high solid content of coal-type materials.]",
+  "name_tr": "zift, kömür, yüksek-sıcaklık, yüksek-katılar; kömür zifti katı artıklar; [Kömürün 700oC’den (1292oF) yüksek sıcaklıkta parçalayıcı damıtılmasından gelen gazın yaklaşık ortam sıcaklığına kadar soğutulmasından elde edilen yoğuşma ürünü. Büyük ölçüde, yoğunlaşmış halka aromatik hidrokarbonlar ile yüksek katı içerikli kömür-tipi materyallerden oluşur.]",
+  "ec_no": "273-615-7",
+  "index_no": "648-062-00-3",
+  "atp": "",
+  "notes": [
+    "M"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

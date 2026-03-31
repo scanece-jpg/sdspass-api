@@ -1,0 +1,37 @@
+{
+  "cas": "92062-29-8",
+  "name": "Tar bases, coal, distn. residues; Distillate Bases; [The distillation residue remaining after the distillation of the neutralized, acid-extracted base-containing tar fractions obtained by the distillation of coal tars. It contains chiefly aniline, collidines, quinoline and quinoline derivatives and toluidines.]",
+  "name_tr": "Zift bazları, kömür, damıtma. artıkları; damıtık bazları; [Kömür ziftinin damıtılmasından elde edilen nötrleşmiş ve aside uzaklaştırılmış baz içeren tar fraksiyonunun damıtılmasından geriye kalan damıtma artığı. Esas olarak anilin, kollidin, kinolin ve kinolin türevleri ve toluidinlerini içerir.]",
+  "ec_no": "295-544-0",
+  "index_no": "648-133-00-9",
+  "atp": "",
+  "notes": [
+    "J",
+    "M"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

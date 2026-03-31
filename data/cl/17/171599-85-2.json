@@ -1,0 +1,35 @@
+{
+  "cas": "171599-85-2",
+  "name": "N,N'-bis{}{6-chloro-4-[6-(4- vinylsulfonylphenylazo)-2,7- disulfonicacid-5-hydroxynapht- 4-ylamino]-1,3,5-triazin-2-yl}}- N-(2-hydroxyethyl)ethane-1,2- diamine, sodium salt",
+  "name_tr": "N,N'-bis{}{6-chloro-4-[6-(4- vinilisülfonilfenilazo)-2,7- disülfonikasit-5-hidroksinaft-4- ilamino]-1,3,5-triazin-2-il}}-N- (2-hidroksietil)etan-1,2-diamin, sodyum tuzu",
+  "ec_no": "419-500-9",
+  "index_no": "611-128-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H318",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

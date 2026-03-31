@@ -1,0 +1,29 @@
+{
+  "cas": "46492-07-3",
+  "name": "disodium 9,10- anthracenedioxide",
+  "name_tr": "Disodyum 9,10-antrasendioksit",
+  "ec_no": "426-030-8",
+  "index_no": "603-193-00-5",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Corr. 1A",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "cas": "78-30-8",
+  "name": "tricresyl phosphate (o-o-o-, o-o- m-, o-o-p-, o-m-m-, o-m-p-, o-p- p-); tritolyl phosphate (o-o-o-, o-o- m-, o-o-p-, o-m-m-, o-m-p-, o-p- p-)",
+  "name_tr": "trikresil fosfat (o-o-o-, o-o-m-, o-o-p-,o-m-m-, o-m-p-, o-p-p-); tritolil fosfat (o-o-o-, o-o-m-, o- o-p-, o-m-m-, o-m-p-, o-p-p-);",
+  "ec_no": "201-103-5",
+  "index_no": "015-015-00-8",
+  "atp": "",
+  "notes": [
+    "C"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "STOT SE 1",
+        "h_code": "H370"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H370",
+        "class": "STOT SE 1",
+        "c_min": 1.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H371",
+        "class": "STOT SE 2",
+        "c_min": 0.2,
+        "c_max": 1.0
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H370",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

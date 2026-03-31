@@ -1,0 +1,37 @@
+{
+  "cas": "84989-09-3",
+  "name": "Distillates (coal tar), naphthalene oils, naphthalene-low; Naphthalene Oil Redistillate; [A complex combination of hydrocarbons obtained by crystallization of naphthalene oil. Composed primarily of naphthalene, alkyl naphthalenes and phenolic compounds.]",
+  "name_tr": "Damıtıklar (kömür zifti), naftalin yağları, naftalin-düşük; naftalin yağı tekrar damıtık; [Naftalin yağının kristalleştirilmesinden elde edilen kompleks hidrokarbon bileşimi. Büyük ölçüde naftalin, alkil naftalinler ile fenolik bileşiklerden oluşur.]",
+  "ec_no": "284-898-1",
+  "index_no": "648-086-00-4",
+  "atp": "",
+  "notes": [
+    "J",
+    "M"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

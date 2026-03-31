@@ -1,0 +1,27 @@
+{
+  "cas": "121487-83-0",
+  "name": "4-((4-(diethylamino)-2- ethoxyphenyl)imino)-1,4- dihydro-1-oxo-N-propyl-2- naphthalenecarboxamide",
+  "name_tr": "4-((4-(dietilamino)-2- etoksifenil)imino)-1,4-dihidro-1- okso-N-propil-2- naftalinkarboksamid",
+  "ec_no": "412-650-6",
+  "index_no": "616-059-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

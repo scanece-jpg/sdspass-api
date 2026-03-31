@@ -1,0 +1,32 @@
+{
+  "cas": "115-10-6",
+  "name": "dimethyl ether",
+  "name_tr": "dimetil eter",
+  "ec_no": "204-065-8",
+  "index_no": "603-019-00-8",
+  "atp": "",
+  "notes": [
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H220"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04"
+    ],
+    "h_codes": [
+      "H220"
+    ],
+    "suppl_h": []
+  }
+}

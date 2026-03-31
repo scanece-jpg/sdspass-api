@@ -1,0 +1,27 @@
+{
+  "cas": "120807-02-5",
+  "name": "cis-1-benzoyl-4-[(4- methylsulfonyl)oxy]-L-proline",
+  "name_tr": "cis-1-benzoil-4-[(4- metilsülfonil)oksi]-L-prolin",
+  "ec_no": "416-040-0",
+  "index_no": "613-213-00-4",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

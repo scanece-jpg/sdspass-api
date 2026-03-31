@@ -1,0 +1,36 @@
+{
+  "cas": "90640-87-2",
+  "name": "Distillates (coal tar), light oils, acid exts.; Light Oil Extract Residues, high boiling; [This oil is a complex reaction mass of aromatic hydrocarbons, primarily indene, naphthalene, coumarone, phenol, and o-, m- and p-cresol and boiling in the range of 140°C to 215°C (284°F to 419°F).]",
+  "name_tr": "Damıtıklar (kömür zifti),hafif yağlar, asit özütleri; hafif yağ özüt artıkları, yüksek sıcaklıkta kaynayan; [Bu yağ aromatik hidrokarbonların kompleks bir karışımı olup, ağırlıkla inden, naftalin, kumaron, fenol, ve o-, m- ve p-kresol’dur ve kaynama sıcaklığı 140 oC ile 215 oC (284 oF - 419 oF) arasındadır.]",
+  "ec_no": "292-609-5",
+  "index_no": "648-022-00-5",
+  "atp": "",
+  "notes": [
+    "J"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

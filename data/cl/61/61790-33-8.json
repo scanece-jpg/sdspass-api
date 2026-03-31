@@ -1,0 +1,60 @@
+{
+  "cas": "61790-33-8",
+  "name": "amines, tallow alkyl",
+  "name_tr": "aminler, tallovalkil",
+  "ec_no": "263-125-1",
+  "index_no": "612-286-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "(mide-"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "bağırsak"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "yolu,karac"
+      }
+    ],
+    "m_factors": {
+      "acute": 10,
+      "chronic": 10
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS07",
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H304",
+      "H373",
+      "(mide-",
+      "bağırsak",
+      "yolu,karac"
+    ],
+    "suppl_h": []
+  }
+}

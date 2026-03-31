@@ -1,0 +1,59 @@
+{
+  "cas": "200509-41-7",
+  "name": "quizalofop-P-tefuryl (ISO); (+/–) tetrahydrofurfuryl (R)-2-[4-(6- chloroquinoxalin-2- yloxy)phenyloxy]propionate",
+  "name_tr": "Kuizalofop-P-tefuril (ISO); (+/-) Tetrahidrofurfuril (R)-2-[4-(6- klorokinoksalin-2- iloksi)feniloksi]propiyonat",
+  "ec_no": "414-200-4",
+  "index_no": "607-373-00-4",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Repr. 2",
+        "h_code": "H361fd"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 1,
+      "chronic": 1
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H351",
+      "H361fd",
+      "H302",
+      "H373",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

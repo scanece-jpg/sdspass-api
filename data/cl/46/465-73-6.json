@@ -1,0 +1,53 @@
+{
+  "cas": "465-73-6",
+  "name": "isodrin; (1α,4α,4aβ,5β,8β,8aβ)- 1,2,3,4,10,10-hexachloro- 1,4,4a,5,8,8a-hexahydro-1,4:5,8- dimethanonaphthalene",
+  "name_tr": "izodrin; (1α,4α,4aβ,5β,8β,8aβ)- 1,2,3,4,10,10-hekzakloro- 1,4,4a,5,8,8a-hekzahidro- 1,4:5,8-dimetanonaftalin",
+  "ec_no": "207-366-2",
+  "index_no": "602-050-00-4",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 1",
+        "h_code": "H310"
+      },
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H300"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 100,
+      "chronic": 100
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H330",
+      "H310",
+      "H300",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "cas": "68513-02-0",
+  "name": "Naphtha (petroleum), full-range coker; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons produced by the distillation of products from a fluid coker. It consists predominantly of unsaturated hydrocarbons having carbon numbers predominantly in the range of C4 through C15 and boiling in the range of approximately 43°C to 250°C (110°F-500°F).]",
+  "name_tr": "Nafta (petrol), tam ölçekli koklaştırıcı; düşük kaynama noktalı nafta – tanımlanmamış; [Sıvı koklaştırıcı ürünlerinin damıtılmasından elde edilen kompleks hidrokarbon bileşimi. Ağırlıklı olarak, karbon sayıları büyük çoğunlukla C4 ila C15 aralığında olan ve yaklaşık 43°C ila 250°C (110°F ila 500°F) aralığında kaynayan doymamış hidrokarbonlardan oluşur.]",
+  "ec_no": "270-991-4",
+  "index_no": "649-366-00-9",
+  "atp": "",
+  "notes": [
+    "P"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

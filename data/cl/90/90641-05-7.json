@@ -1,0 +1,37 @@
+{
+  "cas": "90641-05-7",
+  "name": "Extract residues (coal), naphthalene oil alk., distn. residues; Methylnaphthalene Oil Extract Residue; [The residue from the distillation of alkali-washed naphthalene oil having an approximate distillation range of 220°C to 300°C (428°F to 572°F). Composed primarily of naphthalene, alkylnaphthalenes and aromatic nitrogen bases.]",
+  "name_tr": "özüt artıklar (kömür), naftalin yağı bazik, damıtma artıkları; Metilnaftalin yağı özüt artığı; [Alkali yıkanmış naftalin yağının damıtma artığı. Yaklaşık 220 oC ile 300 oC (428 oF - 572 oF) arasında kaynar. Büyük ölçüde naftalin, alkilnaftalinler ve aromatik nitrojen bazları içerir.]",
+  "ec_no": "292-628-9",
+  "index_no": "648-095-00-3",
+  "atp": "",
+  "notes": [
+    "J",
+    "M"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

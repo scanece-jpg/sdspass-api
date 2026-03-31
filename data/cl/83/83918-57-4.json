@@ -1,0 +1,45 @@
+{
+  "cas": "83918-57-4",
+  "name": "imazalil sulphate (ISO) powder; 1- [2-(allyloxy)ethyl-2-(2,4- dichlorophenyl)]-1H- imidazolium hydrogen sulphate; [1] (±)-1- [2-(allyloxy)ethyl-2-(2,4- dichlorophenyl)]-1H- imidazolium hydrogen sulphate [2]",
+  "name_tr": "imazalilsülfat (ISO) tozu; 1-[2-(alliloksi)etil- 2-(2,4- diklorofenil)]-1H- imidazolyumhidrojensülfat; [1] (±)-1-[2-(alliloksi)etil- 2-(2,4- diklorofenil)]-1H- imidazolyumhidrojensülfat [2]",
+  "ec_no": "261-351-5",
+  "index_no": "613-043-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "cas": "680-31-9",
+  "name": "hexamethylphosphoric triamide; hexamethylphosphoramide",
+  "name_tr": "Hekzametilfosforik triamid; hekzametilfosforamid",
+  "ec_no": "211-653-8",
+  "index_no": "015-106-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H350",
+        "class": "Carc. 1B",
+        "c_min": 0.01,
+        "c_max": null
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

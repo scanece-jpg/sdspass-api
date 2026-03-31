@@ -1,0 +1,29 @@
+{
+  "cas": "2314-97-8",
+  "name": "trifluoroiodomethane; trifluoromethyl iodide",
+  "name_tr": "trifloroiyodometan; triflorometil iyodür",
+  "ec_no": "219-014-5",
+  "index_no": "602-086-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H341"
+    ],
+    "suppl_h": []
+  }
+}

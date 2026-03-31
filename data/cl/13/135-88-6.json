@@ -1,0 +1,51 @@
+{
+  "cas": "135-88-6",
+  "name": "N-2-naphthylaniline; N-phenyl-2-naphthylamine",
+  "name_tr": "N-2-naftilanilin; N-fenil-2- naftilamin",
+  "ec_no": "205-223-9",
+  "index_no": "612-135-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H351",
+      "H319",
+      "H315",
+      "H317",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "cas": "143-22-6",
+  "name": "2-[2-(2- butoxyethoxy)ethoxy]ethanol; TEGBE; triethylene glycol monobutyl ether; butoxytriethylene glycol",
+  "name_tr": "2-[2-(2- bütoksietoksi)etoksi]etanol; TEGBE; trietilenglikolmonobütileter; bütoksitrietilenglikol",
+  "ec_no": "205-592-6",
+  "index_no": "603-183-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H318",
+        "class": "Eye Dam. 1",
+        "c_min": 30.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H319",
+        "class": "Eye Irrit. 2",
+        "c_min": 20.0,
+        "c_max": 30.0
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H318"
+    ],
+    "suppl_h": []
+  }
+}

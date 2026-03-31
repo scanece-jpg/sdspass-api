@@ -1,0 +1,48 @@
+{
+  "cas": "81-15-2",
+  "name": "musk xylene; 5-tert-butyl-2,4,6-trinitro-m- xylene",
+  "name_tr": "ksilen misk; 5-ter-bütil-2,4,6-trinitro-m- ksilen",
+  "ec_no": "201-329-4",
+  "index_no": "609-068-00-1",
+  "atp": "",
+  "notes": [
+    "T"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Expl. 1.1",
+        "h_code": "H201"
+      },
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS01",
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H201",
+      "H351",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

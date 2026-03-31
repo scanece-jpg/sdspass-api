@@ -1,0 +1,48 @@
+{
+  "cas": "621-64-7",
+  "name": "nitrosodipropylamine",
+  "name_tr": "Nitrosodipropilamin",
+  "ec_no": "210-698-0",
+  "index_no": "612-098-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H350",
+        "class": "Carc. 1B",
+        "c_min": 0.001,
+        "c_max": null
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H350",
+      "H302",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

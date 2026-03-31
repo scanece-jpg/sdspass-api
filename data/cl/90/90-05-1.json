@@ -1,0 +1,39 @@
+{
+  "cas": "90-05-1",
+  "name": "guaiacol",
+  "name_tr": "guaiakol",
+  "ec_no": "201-964-7",
+  "index_no": "604-031-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302",
+      "H319",
+      "H315"
+    ],
+    "suppl_h": []
+  }
+}

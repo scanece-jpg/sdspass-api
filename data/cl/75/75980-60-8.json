@@ -1,0 +1,29 @@
+{
+  "cas": "75980-60-8",
+  "name": "diphenyl(2,4,6- trimethylbenzoyl)phosphine oxide",
+  "name_tr": "difenil(2,4,6- trimetilbenzoil)fosfin oksit",
+  "ec_no": "278-355-8",
+  "index_no": "015-203-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 2",
+        "h_code": "H361f"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H361f"
+    ],
+    "suppl_h": []
+  }
+}

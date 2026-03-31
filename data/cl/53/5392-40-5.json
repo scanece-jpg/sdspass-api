@@ -1,0 +1,34 @@
+{
+  "cas": "5392-40-5",
+  "name": "citral",
+  "name_tr": "Sitral",
+  "ec_no": "226-394-6",
+  "index_no": "605-019-00-3",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H315",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

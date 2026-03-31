@@ -1,0 +1,61 @@
+{
+  "cas": "7727-54-0",
+  "name": "diammonium peroxodisulphate; ammonium persulphate",
+  "name_tr": "diamonyum peroksodisülfat; amonyum persülfat",
+  "ec_no": "231-786-5",
+  "index_no": "016-060-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Ox. Sol. 3",
+        "h_code": "H272"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Resp. Sens. 1",
+        "h_code": "H334"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS03",
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H272",
+      "H302",
+      "H319",
+      "H335",
+      "H315",
+      "H334",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

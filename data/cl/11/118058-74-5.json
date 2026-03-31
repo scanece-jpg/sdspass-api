@@ -1,0 +1,29 @@
+{
+  "cas": "118058-74-5",
+  "name": "(2R,3S,4R,5R,7R,9R,10R,11S,12 S,13R)-10-[(4-dimethylamino-3- hydroxy-6- methyltetrahydropyran-2- yl)oxy]-2-ethyl-3,4,12- trihydroxy-9-methoxy- 3,5,7,9,11,13-hexamethyl-6,14- dioxo-1-oxacyclotetradecane",
+  "name_tr": "(2R,3S,4R,5R,7R,9R,10R,11S,12 S,13R)-10-[(4-dimetilamino-3- hidroksi-6-metiltetrahidropiran- 2-yl)oksi]-2-etil-3,4,12- trihidroksi-9-metoksi- 3,5,7,9,11,13-hekzametil-6,14- diokso-1-oksasiklotetradekan",
+  "ec_no": "433-820-6",
+  "index_no": "603-222-00-1",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319"
+    ],
+    "suppl_h": []
+  }
+}

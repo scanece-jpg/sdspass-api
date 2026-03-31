@@ -1,0 +1,46 @@
+{
+  "cas": "78-87-5",
+  "name": "1,2-dichloropropane; propylene dichloride",
+  "name_tr": "1,2-dikloropropan; propilen diklorür",
+  "ec_no": "201-152-2",
+  "index_no": "602-020-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H225",
+      "H350",
+      "H332",
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

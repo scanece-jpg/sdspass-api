@@ -1,0 +1,46 @@
+{
+  "cas": "2380-86-1",
+  "name": "6-hydroxyindole",
+  "name_tr": "6-hidroksiindol",
+  "ec_no": "417-020-4",
+  "index_no": "613-218-00-1",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H318",
+      "H317",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

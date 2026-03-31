@@ -1,0 +1,46 @@
+{
+  "cas": "194602-27-2",
+  "name": "(S)-2,2-diphenyl-2-(3- pyrrolidinyl)acetonitrile hydrobromide",
+  "name_tr": "(S)-2,2-difenil-2-(3- pirrolidinil)asetonitril hidrobromür",
+  "ec_no": "421-810-4",
+  "index_no": "608-042-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H318",
+      "H317",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

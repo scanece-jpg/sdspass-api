@@ -1,0 +1,31 @@
+{
+  "cas": "92062-20-9",
+  "name": "Tar, coal, high-temp., distn. and storage residues; Coal Tar Solids Residue; [Coke- and ash-containing solid residues that separate on distillation and thermal treatment of bituminous coal high temperature tar in distillation installations and storage vessels. Consists predominantly of carbon and contains a small quantity of hetero compounds as well as ash components.]",
+  "name_tr": "zift, kömür, yüksek-sıcaklık, damıtma. ve depolama artıkları; kömür zifti katı artıkları; [Damıtma düzeneklerinde ve depolama kaplarında damıtma ve ısıl işlemle muamele edilince ayrışan bitümlü kömür yüksek sıcaklık ziftinden geriye kalan kok ve kül içeren katı artıklar. Büyük ölçüde karbondan oluşur ve küçük bir miktar hetero bileşikler ve kül bileşikleri içerir.]",
+  "ec_no": "295-535-1",
+  "index_no": "648-059-00-7",
+  "atp": "",
+  "notes": [
+    "M"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

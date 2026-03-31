@@ -1,0 +1,64 @@
+{
+  "cas": "58594-72-2",
+  "name": "imazalil sulphate (ISO), aqueous solution; 1- [2-(allyloxy)ethyl-2-(2,4- dichlorophenyl)]-1H- imidazolium hydrogen sulphate; [1] (±)-1- [2-(allyloxy)ethyl-2-(2,4- dichlorophenyl)]-1H- imidazolium hydrogen sulphate [2]",
+  "name_tr": "imazalil sulfat (ISO), sulu çözelti; 1- [2-(alliloksi)etil-2-(2,4- diklorofenil)]- 1H-imidazolyum hidrojen sulfat; [1] (±)-1- [2-(alliloksi)etil-2-(2,4- diklorofenil)]- 1H-imidazolyum hidrojen sülfat [2]",
+  "ec_no": "261-351-5",
+  "index_no": "613-043-01-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H314",
+        "class": "Skin Corr. 1B",
+        "c_min": 50.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H319",
+        "class": "C < %50 Göz Tah. 2",
+        "c_min": 5.0,
+        "c_max": 15.0
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS05",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H314",
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

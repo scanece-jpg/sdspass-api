@@ -1,0 +1,33 @@
+{
+  "cas": "540-88-5",
+  "name": "sec-butyl acetate; [1] isobutyl acetate; [2] tert-butyl acetate [3]",
+  "name_tr": "sec-bütil asetat [1]; izobütil asetat [2]; ter-bütil asetat [3]",
+  "ec_no": "203-300-1",
+  "index_no": "607-026-00-7",
+  "atp": "",
+  "notes": [
+    "C"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02"
+    ],
+    "h_codes": [
+      "H225"
+    ],
+    "suppl_h": [
+      "EUH066"
+    ]
+  }
+}

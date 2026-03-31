@@ -1,0 +1,45 @@
+{
+  "cas": "2636-26-2",
+  "name": "cyanophos (ISO); O-4-cyanophenyl O,O-dimethyl phosphorothioate",
+  "name_tr": "siyanofos (ISO); O-4-siyanofenil-O,O-dimetil fosforotiyoat",
+  "ec_no": "220-130-3",
+  "index_no": "015-087-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H312",
+      "H302",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

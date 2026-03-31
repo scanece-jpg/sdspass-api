@@ -1,0 +1,40 @@
+{
+  "cas": "67-63-0",
+  "name": "propan-2-ol; isopropyl alcohol; isopropanol",
+  "name_tr": "propan-2-ol; izopropil alkol; izopropanol",
+  "ec_no": "200-661-7",
+  "index_no": "603-117-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H336"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H225",
+      "H319",
+      "H336"
+    ],
+    "suppl_h": []
+  }
+}

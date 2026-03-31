@@ -1,0 +1,49 @@
+{
+  "cas": "119168-77-3",
+  "name": "tebufenpyrad (ISO); N-(4- tertbutylbenzyl)-4-chloro-3- ethyl-1-methyl-1Hpyrazole-5- carboxamide",
+  "name_tr": "tebufenpirad (ISO); N-(4- tertbütilbenzil)-4-kloro-3- etil-1- metil-1Hiprazol-5- karboksamid",
+  "ec_no": "",
+  "index_no": "616-210-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Skin Sens. 1B",
+        "h_code": "(gastro"
+      }
+    ],
+    "m_factors": {
+      "acute": 10,
+      "chronic": 10
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [
+      "GHS06",
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H301",
+      "H332",
+      "H373",
+      "(gastro"
+    ],
+    "suppl_h": []
+  }
+}

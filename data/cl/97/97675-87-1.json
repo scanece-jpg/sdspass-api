@@ -1,0 +1,31 @@
+{
+  "cas": "97675-87-1",
+  "name": "Hydrocarbons, C17-30, hydrotreated solvent-deasphalted atm. distn. residue, distn. lights; Baseoil - unspecified; [A complex combination of hydrocarbons obtained as first runnings from the vacuum distillation of effluents from the treatment of a solvent deasphalted short residue with hydrogen in the presence of a catalyst. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C17 through C30 and boiling in the range of approximately 300 °C to 400 °C (572 °F to 752 °F). It produces a finished oil having a viscosity of 4cSt at approximately 100 °C (212 °F).]",
+  "name_tr": "Hidrokarbonlar, C17-30, hidrojenle muamele edilmiş çözücü ile asfaltı giderilmiş atmosferik damıtma artığı, damıtmada hafif olanlar; bazyağlar – tanımlanmamış [Çözücü ile asfaltı giderilmiş kısa artıkların, katalizör varlığında, hidrojen ile muamele edilmesinden artıkların vakum damıtmasından ilk işletim olarak elde edilen hidrokarbonların kompleks bileşimi. Genelde, ağırlıklı olarak C17 ila C30 aralığında karbon sayısına sahip ve yaklaşık 300°C ila 400°C (572°F ila 752°F) aralığında kaynayan hidrokarbonlardan oluşur. Yaklaşık 100 oC (212 oF)’de 4cSt viskoziteye sahip son yağ üretir.]",
+  "ec_no": "307-661-7",
+  "index_no": "649-515-00-8",
+  "atp": "",
+  "notes": [
+    "L"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

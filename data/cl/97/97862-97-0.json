@@ -1,0 +1,31 @@
+{
+  "cas": "97862-97-0",
+  "name": "Petrolatum (petroleum), carbon- treated; Petrolatum; [A complex combination of hydrocarbons obtained by the treatment of petroleum petrolatum with activated carbon for the removal of trace polar constituents and impurities. It consists predominantly of saturated hydrocarbons having carbon numbers predominantly greater than C20.]",
+  "name_tr": "Petrolatum (petrol), karbon ile muamele edilmiş; Petrolatum; [Petrol petrolatumun, eser miktardaki polar bileşenlerin ve safsızlıkların uzaklaştırılması için aktif karbon ile muamele edilmesiyle elde edilen hidrokarbonların kompleks bir bileşimi. Genelde, ağırlıklı olarak C20’den büyük karbon sayısına sahip doymuş hidrokarbonlardan oluşur.]",
+  "ec_no": "308-149-6",
+  "index_no": "649-258-00-1",
+  "atp": "",
+  "notes": [
+    "N"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

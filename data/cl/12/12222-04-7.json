@@ -1,0 +1,41 @@
+{
+  "cas": "12222-04-7",
+  "name": "di(tetramethylammonium)(29H, 31H-phthalocyanin- 29,N30,N31,N32)disulfonamide disulfonate, cuprate(2-)complex, derivates",
+  "name_tr": "di(tetrametilamonyum)(29H,31 H-ftalosiyanin- N29,N30,N31,N32)disülfonamid disülfonat, bakır(II)oksit kompleksi, türevleri",
+  "ec_no": "416-180-2",
+  "index_no": "650-046-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H373",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "cas": "172277-97-3",
+  "name": "tetrasodium dihydrogen 1,1''- dihydroxy-8,8''-[p- phenylbis(imino-{}{6-[4-(2- aminoethyl)piperazin-1-yl]}}- 1,3,5-triazine-4,2-diyl- imino)]bis(2,2'-azonaphthalene- 1',3,6-trisulfonate)",
+  "name_tr": "tetrasodyum dihidrojen 1,1''- dihidroksi-8,8''-[p- fenilbis(imino-{6-[4-(2- aminoetil)piperazin-1-il]}-1,3,5- triazin-4,2-diil-imino)]bis(2,2'- azonaftalin-1',3,6-trisülfonat)",
+  "ec_no": "420-350-1",
+  "index_no": "607-457-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H318",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

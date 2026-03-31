@@ -1,0 +1,31 @@
+{
+  "cas": "590-01-2",
+  "name": "n-butyl propionate; [1] sec-butyl propionate; [2] tert-butyl propionate; [3] iso-butyl propionate",
+  "name_tr": "n-bütil propionat [1]; sec-bütil propionat [2]; ter-bütil propionat [3]; izo-bütil propionat [4]",
+  "ec_no": "209-669-5",
+  "index_no": "607-029-00-3",
+  "atp": "",
+  "notes": [
+    "C"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS02"
+    ],
+    "h_codes": [
+      "H226"
+    ],
+    "suppl_h": []
+  }
+}

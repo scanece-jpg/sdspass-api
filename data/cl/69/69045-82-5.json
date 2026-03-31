@@ -1,0 +1,40 @@
+{
+  "cas": "69045-82-5",
+  "name": "2-fluoro-5- trifluoromethylpyridine",
+  "name_tr": "2-floro-5-triflorometilpiridin",
+  "ec_no": "400-290-2",
+  "index_no": "613-071-00-3",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS02",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H226",
+      "H317",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

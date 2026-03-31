@@ -1,0 +1,33 @@
+{
+  "cas": "7631-90-5",
+  "name": "sodium hydrogensulphite … %; sodium bisulphite … %",
+  "name_tr": "sodyum hidrojensülfit . . . %; sodyum bisülfit . . . %",
+  "ec_no": "231-548-0",
+  "index_no": "016-064-00-8",
+  "atp": "",
+  "notes": [
+    "B"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302"
+    ],
+    "suppl_h": [
+      "EUH031"
+    ]
+  }
+}

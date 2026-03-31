@@ -1,0 +1,29 @@
+{
+  "cas": "250688-43-8",
+  "name": "disodium 8-amino-5-{4-[2- (sulfonatoethoxy)sulfonyl]pheny lazo}naphthalene-2-sulfonate",
+  "name_tr": "disodyum 8-amino-5-{4-[2- sülfonatoetoksi)sülfonil]fenilazo }naftalen-2-sülfonat",
+  "ec_no": "423-730-5",
+  "index_no": "607-637-00-9",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H318"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "cas": "115-31-1",
+  "name": "1,7,7- trimethylbicyclo(2,2,1)hept-2-yl thiocyanatoacetate; isobornyl thiocyanoacetate",
+  "name_tr": "1,7,7-trimetilbisiklo(2,2,1)hept- 2-il tiyosiyanatoasetat; izobornil tiyosiyanoasetat",
+  "ec_no": "204-081-5",
+  "index_no": "615-015-00-3",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

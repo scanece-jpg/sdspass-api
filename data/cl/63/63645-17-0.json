@@ -1,0 +1,46 @@
+{
+  "cas": "63645-17-0",
+  "name": "cis-1-(3-chloropropyl)-2,6- dimethyl-piperidin hydrochloride",
+  "name_tr": "cis-1-(3-kloropropil)-2,6- dimetilpiperidin hidroklorür",
+  "ec_no": "417-430-3",
+  "index_no": "613-209-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H301",
+      "H373",
+      "H317",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

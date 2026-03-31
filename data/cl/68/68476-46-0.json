@@ -1,0 +1,41 @@
+{
+  "cas": "68476-46-0",
+  "name": "Hydrocarbons, C3-11, catalytic cracker distillates; Low boiling point cat-cracked naphtha; [A complex combination of hydrocarbons produced by the distillations of products from a catalytic cracking process. It consists of hydrocarbons having carbon numbers predominantly in the range of C3 through C11 and boiling in a range approximately up to 204°C (400°F).]",
+  "name_tr": "hidrokarbonlar, C3-11, katalitik parçalama ünitesi damıtıkları; düşük kaynama noktalı katalitik olarak parçalanmış nafta; [Katalitik parçalama prosesi ürünlerinin damıtılması ile üretilen hidrokarbonların kompleks bir bileşimi. Karbon sayıları ağırlıklı olarak C3 ila C11 aralığında olan ve yaklaşık 204oC’ye (400 oF) kadar kaynayan hidrokarbonlardan oluşur.]",
+  "ec_no": "270-686-6",
+  "index_no": "649-291-00-1",
+  "atp": "",
+  "notes": [
+    "P"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

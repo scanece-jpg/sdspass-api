@@ -1,0 +1,36 @@
+{
+  "cas": "5912-86-7",
+  "name": "isoeugenol; [1] (E)-2-methoxy-4-(prop-1-enyl) phenol; [2] (Z)-2-methoxy-4-(prop-1-enyl) phenol [3]",
+  "name_tr": "isoöjenol; [1] (E)-2-metoksi-4-(prop-1-enil) fenol; [2] (Z)-2-metoksi-4-(prop-1-enil) fenol [3]",
+  "ec_no": "202-590-7",
+  "index_no": "604-094-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Sens. 1A",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H317",
+        "class": "Skin Sens. 1A",
+        "c_min": 0.01,
+        "c_max": null
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

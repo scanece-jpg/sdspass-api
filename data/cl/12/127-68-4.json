@@ -1,0 +1,34 @@
+{
+  "cas": "127-68-4",
+  "name": "sodium 3- nitrobenzenesulphonate",
+  "name_tr": "sodyum-3-nitrobenzensülfonat",
+  "ec_no": "204-857-3",
+  "index_no": "609-048-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

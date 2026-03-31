@@ -1,0 +1,34 @@
+{
+  "cas": "161326-34-7",
+  "name": "fenamidone (ISO); (S)-5-methyl-2-methylthio-5- phenyl-3-phenylamino-3,5- dihydroimidazol-4-one",
+  "name_tr": "fenamidon (ISO); (S)-5-metil-2- metiltiyo-5-fenil-3-fenilamino- 3,5-dihidroimidazol-4-on",
+  "ec_no": "",
+  "index_no": "613-206-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS09"
+    ],
+    "h_codes": [
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

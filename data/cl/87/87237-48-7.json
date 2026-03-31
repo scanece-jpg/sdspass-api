@@ -1,0 +1,40 @@
+{
+  "cas": "87237-48-7",
+  "name": "haloxyfop-etotyl (ISO); 2-ethoxyethyl 2-(4-(3-chloro-5- trifluoromethyl-2- pyridyloxy)phenoxy)propionate; haloxyfop-(2-ethoxyethyl)",
+  "name_tr": "haloksifop-etotil (ISO); 2-etoksietil2-(4-(3-kloro-5- triflorometil-2- piridiloksi)fenoksi)propiyonat; haloksifop-(2-etoksietil)",
+  "ec_no": "402-560-5",
+  "index_no": "607-207-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

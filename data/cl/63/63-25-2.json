@@ -1,0 +1,49 @@
+{
+  "cas": "63-25-2",
+  "name": "carbaryl (ISO); 1-naphthyl methylcarbamate",
+  "name_tr": "karbaril (ISO); 1-naftil metilkarbamat",
+  "ec_no": "200-555-0",
+  "index_no": "006-011-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      }
+    ],
+    "m_factors": {
+      "acute": 100,
+      "chronic": 100
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H351",
+      "H332",
+      "H302",
+      "H400"
+    ],
+    "suppl_h": []
+  }
+}

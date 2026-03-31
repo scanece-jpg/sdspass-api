@@ -1,0 +1,32 @@
+{
+  "cas": "540-67-0",
+  "name": "ethyl methyl ether",
+  "name_tr": "etil-metil-eter",
+  "ec_no": "",
+  "index_no": "603-020-00-3",
+  "atp": "",
+  "notes": [
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H220"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04"
+    ],
+    "h_codes": [
+      "H220"
+    ],
+    "suppl_h": []
+  }
+}

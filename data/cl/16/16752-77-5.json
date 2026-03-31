@@ -1,0 +1,43 @@
+{
+  "cas": "16752-77-5",
+  "name": "methomyl (ISO); 1-(methylthio)ethylideneamino N-methylcarbamate",
+  "name_tr": "Metomil (ISO); 1-(metiltiyo)etilidenamino N- metilkarbamat",
+  "ec_no": "240-815-0",
+  "index_no": "006-045-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H300"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 100,
+      "chronic": 100
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H300",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

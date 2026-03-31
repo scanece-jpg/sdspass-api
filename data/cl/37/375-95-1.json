@@ -1,0 +1,61 @@
+{
+  "cas": "375-95-1",
+  "name": "perfluorononan-1-oic acid [1] and its sodium [2] and ammonium [3] salts",
+  "name_tr": "perflorononan-1-oik asit [1] ve onun sodyum [2] ve amonyum [3] tuzları",
+  "ec_no": "206-801-3",
+  "index_no": "607-718-00-9",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360Df"
+      },
+      {
+        "class": "Lact.",
+        "h_code": "H362"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "(karaciğer"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H351",
+      "H360Df",
+      "H362",
+      "H332",
+      "H302",
+      "H372",
+      "(karaciğer"
+    ],
+    "suppl_h": []
+  }
+}

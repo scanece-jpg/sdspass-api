@@ -1,0 +1,37 @@
+{
+  "cas": "70321-67-4",
+  "name": "Tar bases, coal, quinoline derivs. fraction; Distillate Bases",
+  "name_tr": "Zift bazları, kömür, kinolin türevleri fraksiyonu; damıtık bazları",
+  "ec_no": "274-560-1",
+  "index_no": "648-132-00-3",
+  "atp": "",
+  "notes": [
+    "J",
+    "M"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

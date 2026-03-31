@@ -1,0 +1,34 @@
+{
+  "cas": "1000-78-8",
+  "name": "N,N'-(2,2- dimethylpropylidene)hexamethy lenediamine",
+  "name_tr": "N,N'-(2,2- dimetilpropilidin)hekzametilendi amin",
+  "ec_no": "401-660-6",
+  "index_no": "612-092-00-5",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H315",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

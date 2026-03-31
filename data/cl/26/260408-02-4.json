@@ -1,0 +1,27 @@
+{
+  "cas": "260408-02-4",
+  "name": "4,4'-sulfonylbisphenol, polymer with ammonium chloride(NH4Cl), pentachlorophosphorane and phenol",
+  "name_tr": "4,4’-sülfonilbisfenol, amonyum klorürlü (NH4Cl) polimer, pentaklorofosforan ve fenol",
+  "ec_no": "439-270-3",
+  "index_no": "604-083-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

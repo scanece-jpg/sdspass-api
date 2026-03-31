@@ -1,0 +1,31 @@
+{
+  "cas": "90640-85-0",
+  "name": "Creosote oil, acenaphthene fraction, acenaphthene-free; Wash Oil Redistillate; [The oil remaining after removal by a crystallization process of acenaphthene from acenaphthene oil from coal tar. Composed primarily of naphthalene and alkylnaphthalenes.]",
+  "name_tr": "Kreosot yağı, asenaften fraksiyonu, asenaften içermeyen; yıkama yağı tekrar damıtığı; [Kömür ziftindeki asenaften yağından kristalizasyon prosesi sonucu asenafteninin temizlenmesinden sonra kalan yağ. Ağırlıklı olarak naftalin ve alkilnaftalinler den oluşur.]",
+  "ec_no": "292-606-9",
+  "index_no": "648-043-00-X",
+  "atp": "",
+  "notes": [
+    "M"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

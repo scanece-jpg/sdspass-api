@@ -1,0 +1,52 @@
+{
+  "cas": "12185-10-3",
+  "name": "white phosphorus",
+  "name_tr": "beyaz fosfor",
+  "ec_no": "231-768-7",
+  "index_no": "015-001-00-1",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Pyr. Sol. 1",
+        "h_code": "H250"
+      },
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H300"
+      },
+      {
+        "class": "Skin Corr. 1A",
+        "h_code": "H314"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS06",
+      "GHS05",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H250",
+      "H330",
+      "H300",
+      "H314",
+      "H400"
+    ],
+    "suppl_h": []
+  }
+}

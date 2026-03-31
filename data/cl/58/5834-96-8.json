@@ -1,0 +1,34 @@
+{
+  "cas": "5834-96-8",
+  "name": "azothoate (ISO); O-4-(4-chlorophenylazo)phenyl O,O-dimethyl phosphorothioate",
+  "name_tr": "azotoat (ISO); O-4-(4-klorofenilazo)fenil O,O- dimetil fosforotiyoat",
+  "ec_no": "227-419-3",
+  "index_no": "015-082-00-3",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H332",
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

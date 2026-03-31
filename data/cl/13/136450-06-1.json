@@ -1,0 +1,27 @@
+{
+  "cas": "136450-06-1",
+  "name": "N-(3-acetyl-2-hydroxyphenyl)- 4-(4-phenylbutoxy)benzamide",
+  "name_tr": "N-(3-asetil-2-hidroksifenil)-4-(4- fenilbütoksi)benzamid",
+  "ec_no": "416-150-9",
+  "index_no": "616-115-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

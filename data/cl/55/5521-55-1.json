@@ -1,0 +1,29 @@
+{
+  "cas": "5521-55-1",
+  "name": "5-methylpyrazine-2-carboxylic acid",
+  "name_tr": "5-metilpirazin-2-karboksilik asit",
+  "ec_no": "413-260-9",
+  "index_no": "607-394-00-9",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H318"
+    ],
+    "suppl_h": []
+  }
+}

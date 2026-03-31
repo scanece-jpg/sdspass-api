@@ -1,0 +1,42 @@
+{
+  "cas": "542-55-2",
+  "name": "butyl formate; [1] tert-butyl formate; [2] isobutyl formate [3]",
+  "name_tr": "Bütilformat [1]; ter-bütilformat [2]; izobütilformat [3]",
+  "ec_no": "209-772-5",
+  "index_no": "607-017-00-8",
+  "atp": "",
+  "notes": [
+    "C"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H225",
+      "H319",
+      "H335"
+    ],
+    "suppl_h": []
+  }
+}

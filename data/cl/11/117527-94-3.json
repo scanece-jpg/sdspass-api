@@ -1,0 +1,29 @@
+{
+  "cas": "117527-94-3",
+  "name": "reaction mass of: tert-alkyl(C12- C14)ammonium bis[1-[(2- hydroxy-5-nitrophenyl)azo]-2- naphthalenolato(2-)]- chromate(1-); tert-alkyl(C12-C14)ammonium bis[1-[(2-hydroxy-4- nitrophenyl)azo]-2- naphthalenolato(2-)]- chromate(1-); tert-alkyl(C12-C14)ammonium bis[1-[[5-(1,1-dimethylpropyl)- 2-hydroxy-3-nitrophenyl]azo]-2- naphthalenolato(2-)]- chromate(1-); tert-alkyl(C12-C14)ammonium [[1-[(2-hydroxy-5- nitrophenyl)azo]-2- naphthalenolato(2-)]-[1-[(2- hydroxy-5-nitrophenyl)azo]-2- naphthalenolato(2-)]]- chromate(1-); tert-alkyl(C12-C14)ammonium [[1-[[5-(1,1-dimethylpropyl)-2- hydroxy-3-nitrophenyl]azo]-2- naphthalenolato(2-)]-[1-[(2- hydroxy-5-nitrophenyl)azo]-2- naphthalenolato(2-)]]- chromate(1-); tert-alkyl(C12-C14)ammonium ((1-(4(or 5)-nitro-2- oxidophenylazo)-2- naphtholato)(1-(3-nitro-2-oxido- 5-pentylphenylazo)-2- naphtholato))chromate(1-)",
+  "name_tr": "tepkime kütlesi : ter-alkil(C12- C14)amonyum-bis[1-[(2- hidroksi-5-nitrofenil)azo]-2- naftalinolato(2-)]-kromat(1-); ter-alkil(C12-C14)amonyum- bis[1-[(2-hidroksi-4- nitrofenil)azo]-2-naftalinolato(2- )]-kromat(1-); ter-alkil(C12-C14)amonyum- bis[1-[[5-(1,1-dimetilpropil)-2- hidroksi-3-nitrofenill]azo]-2- naftalinolato(2-)]-kromat(1-); ter-alkil(C12-C14)ammonium [[1- [(2-hydroksi-5-nitrofenil)azo]-2- naftalinolato(2-)]-[1-[(2- hydroksi-5-nitrofenil)azo]-2- naftalinolato(2-)]]-kromat(1-); ter-alkil(C12-C14)amonyum [[1- [[5-(1,1-dimethilpropil)-2- hydroksi-3-nitrofenil]azo]-2- naftalinolato(2-)]-[1-[(2- hidroksi-5-nitrofenil)azo]-2 naftalinolato(2-)]]-kromat(1-); ter-alkil(C12-C14)amonyum ((1- (4(veya 5)-nitro-2- oksidofenilazo)-2-naftolato)(1- (3-nitro-2-oksido-5- pentilfenilazo)-2- naftolato))kromat(1-)",
+  "ec_no": "403-720-7",
+  "index_no": "611-044-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [
+      "GHS09"
+    ],
+    "h_codes": [
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

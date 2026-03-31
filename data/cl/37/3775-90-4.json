@@ -1,0 +1,41 @@
+{
+  "cas": "3775-90-4",
+  "name": "2-tert-butylaminoethyl methacrylate",
+  "name_tr": "2-ter-bütilaminoetil metakrilat",
+  "ec_no": "223-228-4",
+  "index_no": "607-128-00-1",
+  "atp": "",
+  "notes": [
+    "D"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319",
+      "H315",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

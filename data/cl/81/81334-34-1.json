@@ -1,0 +1,34 @@
+{
+  "cas": "81334-34-1",
+  "name": "imazapyr (ISO); 2-[4,5-dihydro-4-methyl-4-(1- methylethyl)-5-oxo-1H- imidazol-2-yl]-3-pyridine carboxylate",
+  "name_tr": "imazapir (ISO); 2-[4,5-dihidro- 4-metil-4-(1-metiletil)-5-okso- 1H-imidazol-2-il]-3-piridin karboksilat",
+  "ec_no": "",
+  "index_no": "613-126-00-1",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

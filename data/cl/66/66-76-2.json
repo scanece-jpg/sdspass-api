@@ -1,0 +1,41 @@
+{
+  "cas": "66-76-2",
+  "name": "dicoumarol; 4,4'-dihydroxy-3,3'- methylenebis(2H-chromen-2- one)",
+  "name_tr": "dikumarol; 4,4'-dihidroksi-3,3'- metilenbis(2H-kromen-2-on)",
+  "ec_no": "200-632-9",
+  "index_no": "607-060-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H372",
+      "H302",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

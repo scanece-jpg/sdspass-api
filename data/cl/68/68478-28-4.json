@@ -1,0 +1,44 @@
+{
+  "cas": "68478-28-4",
+  "name": "Tail gas (petroleum), catalytic reformed naphtha stabilizer; Refinery gas; [A complex combination of hydrocarbons obtained from the stabilization of catalytic reformed naphtha. It consists of hydrogen and hydrocarbons having carbon numbers predominantly in the range of C1 through C6.]",
+  "name_tr": "Artık gaz (petrol), katalitik olarak dönüştürülen nafta kararlaştırıcısı; Rafineri gazı; [Katalitik olarak dönüştürülen naftanın kararlı hale getirilmesinden elde edilen hidrokarbonların kompleks bir bileşimi. Hidrojen ve büyük çoğunlukla C1 ila C6 aralığında karbon sayısına sahip hidrokarbonlardan oluşur.]",
+  "ec_no": "270-808-8",
+  "index_no": "649-142-00-0",
+  "atp": "",
+  "notes": [
+    "K",
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H220"
+      },
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS04",
+      "GHS02",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

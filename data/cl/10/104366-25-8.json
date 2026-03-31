@@ -1,0 +1,29 @@
+{
+  "cas": "104366-25-8",
+  "name": "2'-(4-chloro-3-cyano-5-formyl- 2-thienyl)azo-5'- diethylaminoacetanilide",
+  "name_tr": "2'-(4-kloro-3-siyano-5-formil-2- tienil)azo-5’- dietilaminoasetanilid",
+  "ec_no": "405-200-5",
+  "index_no": "611-101-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "cas": "10035-10-6",
+  "name": "hydrogen bromide",
+  "name_tr": "Hidrojen bromür",
+  "ec_no": "233-113-0",
+  "index_no": "035-002-00-0",
+  "atp": "",
+  "notes": [
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H314"
+      },
+      {
+        "class": "Skin Corr. 1A",
+        "h_code": "H335"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS04",
+      "GHS05",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H314",
+      "H335"
+    ],
+    "suppl_h": []
+  }
+}

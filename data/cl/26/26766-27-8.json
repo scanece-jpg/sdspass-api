@@ -1,0 +1,29 @@
+{
+  "cas": "26766-27-8",
+  "name": "triarimol (ISO); 2,4-dichloro-α-(pyrimidin-5-yl) benzhydryl alcohol",
+  "name_tr": "triarimol (ISO); 2,4-dikloro-α-(pirimidin-5-il) benzhidril alkol",
+  "ec_no": "",
+  "index_no": "603-043-00-9",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

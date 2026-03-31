@@ -1,0 +1,41 @@
+{
+  "cas": "101896-28-0",
+  "name": "Hydrocarbons, C8-12, catalytic cracking, chem. neutralized, sweetened; Low boiling point cat-cracked naphtha",
+  "name_tr": "Hidrokarbonlar, C8-12, katalitik parçalama, kimyasal olarak nötrleştirilmiş, kıvamı artırılmış; düşük kaynama noktalı katalitik olarak parçalanmış nafta",
+  "ec_no": "309-987-5",
+  "index_no": "649-298-00-X",
+  "atp": "",
+  "notes": [
+    "P"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

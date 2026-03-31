@@ -1,0 +1,51 @@
+{
+  "cas": "485-31-4",
+  "name": "binapacryl (ISO); 2-sec-butyl-4,6-dinitrophenyl-3- methylcrotonate",
+  "name_tr": "binapakril (ISO); 2-sek-bütil-4,6-dinitrofenil-3- metilkrotonat",
+  "ec_no": "207-612-9",
+  "index_no": "609-024-00-1",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360D"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H360D",
+      "H312",
+      "H302",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "cas": "75-26-3",
+  "name": "2-bromopropane",
+  "name_tr": "2-bromopropan",
+  "ec_no": "200-855-1",
+  "index_no": "602-085-00-5",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "Repr. 1A",
+        "h_code": "H360F"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H225",
+      "H360F",
+      "H373"
+    ],
+    "suppl_h": [
+      "EUH066"
+    ]
+  }
+}

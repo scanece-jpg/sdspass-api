@@ -1,0 +1,44 @@
+{
+  "cas": "68919-08-4",
+  "name": "Gases (petroleum), preflash tower off, crude distn.; Refinery gas; [A complex combination produced from the first tower used in the distillation of crude oil. It consists of nitrogen and saturated aliphatic hydrocarbons having carbon numbers predominantly in the range of C1 through C5.]",
+  "name_tr": "Gazlar (petrol), önflaş kulesi çalışmazken, ham damıtma; Rafineri gazı; [Ham petrolün damıtılmasındanda kullanılan birinci kuleden üretilen kompleks bir bileşim. Azot ve büyük çoğunlukla C1 ila C5 aralığında karbon sayısına sahip doygun alifatik hidrokarbonlardan oluşur.]",
+  "ec_no": "272-881-1",
+  "index_no": "649-162-00-X",
+  "atp": "",
+  "notes": [
+    "K",
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H220"
+      },
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS04",
+      "GHS02",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

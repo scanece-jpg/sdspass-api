@@ -1,0 +1,59 @@
+{
+  "cas": "100-37-8",
+  "name": "2-diethylaminoethanol; N,N-diethylethanolamine",
+  "name_tr": "2-dietilaminoetanol; N,N- dietiletanolamin",
+  "ec_no": "202-845-2",
+  "index_no": "603-048-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H335",
+        "class": "STOT SE 3",
+        "c_min": 5.0,
+        "c_max": null
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS05",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H226",
+      "H332",
+      "H312",
+      "H302",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

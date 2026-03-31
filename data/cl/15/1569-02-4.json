@@ -1,0 +1,35 @@
+{
+  "cas": "1569-02-4",
+  "name": "1-ethoxypropan-2-ol; 2PG1EE; 1-ethoxy-2-propanol; propylene glycol monoethyl ether; [1] 2-ethoxy-1-methylethyl acetate; 2PG1EEA [2]",
+  "name_tr": "1-etoksipropan-2-ol; 2PG1EE; 1-etoksi-2-propanol; propilenglikoletileter; propilenglikolmonoeter [1]; 2-etoksi-1-metiletilasetat; 2PG1EEA [2].",
+  "ec_no": "216-374-5",
+  "index_no": "603-177-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H336"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS02",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H226",
+      "H336"
+    ],
+    "suppl_h": []
+  }
+}

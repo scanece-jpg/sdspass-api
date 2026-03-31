@@ -1,0 +1,40 @@
+{
+  "cas": "2633-67-2",
+  "name": "styrene-4-sulfonyl chloride",
+  "name_tr": "stiren-4-sülfonil klorür",
+  "ec_no": "404-770-2",
+  "index_no": "016-057-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H315",
+      "H318",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

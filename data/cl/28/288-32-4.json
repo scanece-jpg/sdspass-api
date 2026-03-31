@@ -1,0 +1,41 @@
+{
+  "cas": "288-32-4",
+  "name": "imidazole",
+  "name_tr": "imidazol",
+  "ec_no": "206-019-2",
+  "index_no": "613-319-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360D"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1C",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H360D",
+      "H302",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

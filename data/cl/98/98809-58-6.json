@@ -1,0 +1,27 @@
+{
+  "cas": "98809-58-6",
+  "name": "2-benzotriazol-2-yl-4-methyl-6- (2-methylallyl)phenol",
+  "name_tr": "2-benzotriazol-2-il-4-metil-6-(2- metilallil)fenol",
+  "ec_no": "419-750-9",
+  "index_no": "604-077-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

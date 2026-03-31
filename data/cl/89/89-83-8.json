@@ -1,0 +1,41 @@
+{
+  "cas": "89-83-8",
+  "name": "thymol",
+  "name_tr": "timol",
+  "ec_no": "201-944-8",
+  "index_no": "604-032-00-1",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H314",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

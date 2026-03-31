@@ -1,0 +1,37 @@
+{
+  "cas": "121620-46-0",
+  "name": "Distillates (coal tar), benzole fraction, distn. residues; Wash Oil; [A complex combination of hydrocarbons obtained from the distillation of crude benzole (high temperature coal tar). It may be a liquid with the approximate distillation range of 150°C to 300°C (302°F to 572°F) or a semi-solid or solid with a melting point up to 70°C (158°F). It is composed primarily of naphthalene and alkyl naphthalenes.]",
+  "name_tr": "Damıtıklar (kömür zifti), benzol fraksiyonu, damıtma artıkları; yıkama yağı; [Ham benzolün(yüksek sıcaklık kömür zifti) damıtılmasından elde edilen kompleks hidrokarbon bileşimi. Yaklaşık damıtma aralığı 150 oC ile 300 oC (302 oF -572 oF) arasında olan bir sıvı veya yarı-katı veya erime noktası 70oC’yi (158oF) bulan bir katı olabilir. Büyük ölçüde naftalin ve alkil naftalinlerden oluşur.]",
+  "ec_no": "310-165-3",
+  "index_no": "648-097-00-4",
+  "atp": "",
+  "notes": [
+    "J",
+    "M"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

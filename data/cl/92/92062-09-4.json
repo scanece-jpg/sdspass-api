@@ -1,0 +1,31 @@
+{
+  "cas": "92062-09-4",
+  "name": "Slack wax (petroleum), hydrotreated; Slack wax; [A complex combination of hydrocarbons obtained by treating slack wax with hydrogen in the presence of a catalyst. It consists predominantly of saturated straight and branched chain hydrocarbons having carbon numbers predominantly greater than C20.]",
+  "name_tr": "Yağlı mum (petrol), hidrojenle muamele edilmiş; Yağlı mum; [Yağlı mumun katalizör varlığında hidrojen ile muamele edilmesi ile elde edilen hidrokarbonların kompleks bir bileşimi. Genelde, ağırlıklı olarak C20’den büyük karbon sayısına sahip doymuş düz ve dallanmış zincirli hidrokarbonlardan oluşur.]",
+  "ec_no": "295-523-6",
+  "index_no": "649-247-00-1",
+  "atp": "",
+  "notes": [
+    "N"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "cas": "101316-63-6",
+  "name": "Extract residues (coal tar), benzole fraction alk., acid ext.; Light Oil Extract Residues, low boiling; [A complex combination of hydrocarbons obtained by the redistillation of the distillate of high temperature coal tar (tar acid and tar base free). It consists predominantly of unsubstituted and substituted mononuclear aromatic hydrocarbons boiling in the range of 85°C to 195°C (185°F to 383°F).]",
+  "name_tr": "özüt artıklar (kömür zifti), benzol fraksiyon alkalin, asit özütü; hafif yağ özüt artıklar, düşük sıcaklıkta kaynayan; [Yüksek sıcaklık kömür ziftinin damıtığının tekrar damıtılması ile elde edilen hidrokarbonların kompleks bir bileşimi (katran asitsiz ve katran bazsız). Ağırlıklı olarak substitute olmuş ve olmamış yaklaşık 85oC ile 195oC (185oF ila 383oF) arasında kaynayan tek merkezli aromatik hidrokarbonlardan oluşur.]",
+  "ec_no": "309-868-8",
+  "index_no": "648-015-00-7",
+  "atp": "",
+  "notes": [
+    "J"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

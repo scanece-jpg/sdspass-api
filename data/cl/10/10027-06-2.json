@@ -1,0 +1,41 @@
+{
+  "cas": "10027-06-2",
+  "name": "8,9,10-trinorborn-2-yl acrylate",
+  "name_tr": "8,9,10-trinorborn-2-il akrilat",
+  "ec_no": "",
+  "index_no": "607-121-00-3",
+  "atp": "",
+  "notes": [
+    "D"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H312",
+      "H315",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "cas": "65996-79-4",
+  "name": "Solvent naphtha (coal); Light Oil Extract Residues, high boiling; [The distillate from either high temperature coal tar, coke oven light oil, or coal tar oil alkaline extract residue having an approximate distillation range of 130°C to 210°C (266°F to 410°F). Composed primarily of indene and other polycyclic ring systems containing a single aromatic ring. May contain phenolic compounds and aromatic nitrogen bases.]",
+  "name_tr": "Çözücü nafta (kömür);hafif yağ özüt artıklar, yüksek sıcaklıkta kaynayan; [Yüksek sıcaklıkta kömür zifti, kok fırınıhafif yağ,veya kömür ziftiyağı alkalin özütünün damıtığı olup, damıtma yaklaşık 130°C ila 210°C aralığındadır (266 °F - 410°F). Tek aromatik halka içeren inden ve diğer polisiklik sistemlerden oluşmuştur. Fenolik bileşikleri ve aromatik azot bazlarını de içerebilir.]",
+  "ec_no": "266-013-0",
+  "index_no": "648-020-00-4",
+  "atp": "",
+  "notes": [
+    "J"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

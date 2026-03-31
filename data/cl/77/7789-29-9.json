@@ -1,0 +1,48 @@
+{
+  "cas": "7789-29-9",
+  "name": "potassium bifluoride; potassium hydrogen difluoride",
+  "name_tr": "potasyum biflorür; potasyum hidrojen diflorür",
+  "ec_no": "232-156-2",
+  "index_no": "009-008-00-9",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H314",
+        "class": "Skin Corr. 1B",
+        "c_min": 1.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H319",
+        "class": "C < % 1 Göz Tah. 2",
+        "c_min": 0.1,
+        "c_max": 1.0
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H301",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

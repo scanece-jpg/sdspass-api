@@ -1,0 +1,44 @@
+{
+  "cas": "68477-76-9",
+  "name": "Gases (petroleum), catalytic polymd. naphtha stabilizer overhead, C2-4-rich; Petroleum gas; [A complex combination of hydrocarbons obtained from the fractionation stabilization of catalytic polymerized naphtha. It consists of aliphatic hydrocarbons having carbon numbers in the range of C2 through C6, predominantly C2 through C4.]",
+  "name_tr": "Gazlar (petrol), katalitik polimerleşmiş nafta kararlaştırıcısı üst kısımları, C2-4 zengin; petrol gazı; [Katalitik olarak polimerleşmiş naftanın ayrımsal damıtma dengelenmesinden elde edilen hidrokarbonların kompleks bileşimi. C2 ila C6 aralığında, büyük çoğunlukla C2 ila C4, karbon sayısına sahip alifatik hidrokarbonlardan oluşur.]",
+  "ec_no": "270-758-7",
+  "index_no": "649-065-00-2",
+  "atp": "",
+  "notes": [
+    "K",
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H220"
+      },
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS04",
+      "GHS02",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

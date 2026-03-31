@@ -1,0 +1,58 @@
+{
+  "cas": "2634-33-5",
+  "name": "1,2-benzisothiazol-3(2H)-one; 1,2-benzisothiazolin-3-one",
+  "name_tr": "1,2-benzizotiyazol-3(2H)-on; 1,2-benzizotiyazolin-3-on",
+  "ec_no": "220-120-9",
+  "index_no": "613-088-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H317",
+        "class": "Skin Sens. 1",
+        "c_min": 0.05,
+        "c_max": null
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H315",
+      "H318",
+      "H317",
+      "H400"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "cas": "8009-03-8",
+  "name": "Petrolatum; Petrolatum; [A complex combination of hydrocarbons obtained as a semi-solid from dewaxing paraffinic residual oil. It consists predominantly of saturated crystalline and liquid hydrocarbons having carbon numbers predominantly greater than C25.]",
+  "name_tr": "Petrolatum; Petrolatum; [Parafinik artık yağları mum giderilmesinden yarı katı olarak elde edilen hidrokarbonların kompleks bir bileşimi. Genelde, ağırlıklı olarak C25’den büyük karbon sayısına sahip doymuş kristal ve sıvı hidrokarbonlardan oluşur.]",
+  "ec_no": "232-373-2",
+  "index_no": "649-254-00-X",
+  "atp": "",
+  "notes": [
+    "N"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "cas": "91-53-2",
+  "name": "ethoxyquin (ISO); 6-ethoxy-1,2-dihydro-2,2,4- trimethylquinoline",
+  "name_tr": "etoksikuin (ISO); 6-etoksi-1,2-dihidro-2,2,4- trimetilkinolin",
+  "ec_no": "202-075-7",
+  "index_no": "613-014-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

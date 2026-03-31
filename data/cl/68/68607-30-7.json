@@ -1,0 +1,29 @@
+{
+  "cas": "68607-30-7",
+  "name": "Residues (petroleum), topping plant, low-sulfur; Heavy Fuel oil; [A low-sulfur complex combination of hydrocarbons produced as the residual fraction from the topping plant distillation of crude oil. It is the residuum after the straight-run gasoline cut, kerosene cut and gas oil cut have been removed.]",
+  "name_tr": "Artıklar (petrol), üst birim, düşük-sülfür; Ağır fuel oil; [Ham petrolün üst birim damıtılmasından artık fraksiyon olarak üretilen hidrokarbonların düşük sülfür kompleks bileşimi. Uzaklaştırılan oktan oranı düşük benzin kesintisi, kerozen kesintisi ve gaz yağı kesintisinden sonra kalan çökeltidir.]",
+  "ec_no": "271-763-7",
+  "index_no": "649-031-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

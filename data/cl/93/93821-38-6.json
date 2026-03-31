@@ -1,0 +1,36 @@
+{
+  "cas": "93821-38-6",
+  "name": "Extract residues (coal), benzole fraction acid; Light Oil Extract Residues, low boiling; [An acid sludge by-product of the sulfuric acid refining of crude high temperature coal. Composed primarily of sulfuric acid and organic compounds.]",
+  "name_tr": "özüt artıklar (kömür), benzol fraksiyon asit; hafif yağ özüt artıklar, düşük sıcaklıkta kaynayan [Ham yüksek sıcaklık kömürünün sülfürik asitle rafine edilmesi esnasında oluşan asit çamuruna benzer yan ürün. Ağırlıklı olarak sülfirik asit ve organik bileşiklerden oluşur. ]",
+  "ec_no": "298-725-2",
+  "index_no": "648-016-00-2",
+  "atp": "",
+  "notes": [
+    "J"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

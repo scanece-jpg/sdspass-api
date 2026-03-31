@@ -1,0 +1,35 @@
+{
+  "cas": "107-39-1",
+  "name": "2,4,4-trimethylpent-1-ene",
+  "name_tr": "2,4,4-trimetilpent-1-en",
+  "ec_no": "203-486-4",
+  "index_no": "601-031-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H225",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

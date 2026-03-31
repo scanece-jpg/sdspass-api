@@ -1,0 +1,35 @@
+{
+  "cas": "554-12-1",
+  "name": "methyl propionate",
+  "name_tr": "metil propionat",
+  "ec_no": "209-060-4",
+  "index_no": "607-027-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H225",
+      "H332"
+    ],
+    "suppl_h": []
+  }
+}

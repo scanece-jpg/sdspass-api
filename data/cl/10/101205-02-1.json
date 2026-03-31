@@ -1,0 +1,29 @@
+{
+  "cas": "101205-02-1",
+  "name": "cycloxydim (ISO); 2-(N- ethoxybutanimidoyl)-3- hydroxy-5-(tetrahydro- 2H- thiopyran-3-yl) cyclohex-2-en-1- one",
+  "name_tr": "sikloksidim (ISO); 2-(N- etoksibutanimidoil)-3- hidroksi- 5-(tetrahidro- 2H-tiyopiran-3-il) siklohekz-2-en-1-on",
+  "ec_no": "405-230-9",
+  "index_no": "606-147-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 2",
+        "h_code": "H361d"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H361d"
+    ],
+    "suppl_h": []
+  }
+}

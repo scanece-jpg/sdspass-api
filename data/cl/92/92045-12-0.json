@@ -1,0 +1,31 @@
+{
+  "cas": "92045-12-0",
+  "name": "Foots oil (petroleum), hydrotreated; Foots oil",
+  "name_tr": "Petrol Tortu yağı, hidrojenle muamele edilmiş; Tortu yağı",
+  "ec_no": "295-394-6",
+  "index_no": "649-550-00-9",
+  "atp": "",
+  "notes": [
+    "L"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

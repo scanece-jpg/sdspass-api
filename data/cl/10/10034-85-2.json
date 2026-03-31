@@ -1,0 +1,40 @@
+{
+  "cas": "10034-85-2",
+  "name": "hydrogen iodide",
+  "name_tr": "Hidrojen iyodür",
+  "ec_no": "233-109-9",
+  "index_no": "053-002-00-9",
+  "atp": "",
+  "notes": [
+    "U",
+    "5"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H314",
+        "class": "Skin Corr. 1A",
+        "c_min": 10.0,
+        "c_max": null
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS04",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

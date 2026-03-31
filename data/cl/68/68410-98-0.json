@@ -1,0 +1,41 @@
+{
+  "cas": "68410-98-0",
+  "name": "Distillates (petroleum), hydrotreated heavy naphtha, deisohexanizer overheads; Low boiling point hydrogen treated naphtha; [A complex combination of hydrocarbons obtained by distillation of the products from a heavy naphtha hydrotreating process. It consists of hydrocarbons having carbon numbers predominantly in the range of C3 through C6 and boiling in the range of approximately -49°C to 68°C (- 57°F to 155°F).]",
+  "name_tr": "Damıtıklar (petrol), hidrojenle muamele edilmiş ağır nafta, izohekzan giderici üst kısımları; hidrojenle muamele edilmiş düşük kaynama noktalı nafta; [Ağır nafta hidrojenle muamele işlemi ürünlerinin damıtılmasından elde edilen kompleks hidrokarbon karışımı. Karbon sayıları büyük çoğunlukla C3 ila C6 aralığında olan ve yaklaşık -49°C ila 68°C (-57°F ila 155°F) aralığında kaynayan hidrokarbonlardan oluşur.]",
+  "ec_no": "270-094-8",
+  "index_no": "649-333-00-9",
+  "atp": "",
+  "notes": [
+    "P"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

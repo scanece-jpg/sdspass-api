@@ -1,0 +1,29 @@
+{
+  "cas": "101316-61-4",
+  "name": "Distillates (petroleum), thermal- cracked, alkylarom. hydrocarbon-rich; Cracked kerosine; [A complex combination of hydrocarbons obtained by distillation of thermal-cracking heavy tars. It consists predominantly of highly alkylated aromatic hydrocarbons boiling in the range of",
+  "name_tr": "Damıtıklar (petrol), ısıl- parçalanmış, alkilaromatik hidrokarbonca-zengin; parçalanmış Kerosin; [Isıl parçalanmış ağır ziftlerin damıtılmasından oluşan kompleks hidrokarbon bileşimi. Ağırlıklı olarak yaklaşık 100°C ila 250°C (212°F-482°F) aralığında kaynayan yüksek derecede alkillenmiş aromatik",
+  "ec_no": "309-866-7",
+  "index_no": "649-415-00-4",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

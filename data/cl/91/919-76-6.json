@@ -1,0 +1,29 @@
+{
+  "cas": "919-76-6",
+  "name": "amidithion (ISO); 2- methoxyethylcarbamoylmethyl O,O-dimethyl phosphorodithioate",
+  "name_tr": "amiditiyon (ISO); 2-metoksietilkarbamoiletil O,O- dimetil fosforoditiyoat",
+  "ec_no": "",
+  "index_no": "015-080-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

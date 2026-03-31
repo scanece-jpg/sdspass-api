@@ -1,0 +1,51 @@
+{
+  "cas": "10102-44-0",
+  "name": "nitrogen dioxide; [1] dinitrogen tetraoxide [2]",
+  "name_tr": "Azot dioksit [1]; diazot tetraoksit [2]",
+  "ec_no": "233-272-6",
+  "index_no": "007-002-00-0",
+  "atp": "",
+  "notes": [
+    "5"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H270"
+      },
+      {
+        "class": "Ox. Gas 1",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H335",
+        "class": "STOT SE 3",
+        "c_min": 0.5,
+        "c_max": null
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS04",
+      "GHS03",
+      "GHS06",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H270",
+      "H330",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

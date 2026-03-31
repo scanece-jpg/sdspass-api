@@ -1,0 +1,32 @@
+{
+  "cas": "115-07-1",
+  "name": "propene; propylene",
+  "name_tr": "propen; propilen",
+  "ec_no": "204-062-1",
+  "index_no": "601-011-00-9",
+  "atp": "",
+  "notes": [
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H220"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04"
+    ],
+    "h_codes": [
+      "H220"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "cas": "68333-23-3",
+  "name": "Naphtha (petroleum), heavy coker; Kerosine - unspecified; [A complex combination of hydrocarbons from the distillation of products from a fluid coker. It consists predominantly of unsaturated hydrocarbons having carbon numbers predominantly in the range of C6 through C15 and boiling in the range of approximately 157 °C to 288 °C (315 °F to 550 °F).]",
+  "name_tr": "Nafta (petrol), ağır koklaştırıcı; Kerosin – tanımlanmamış; [Sıvı koklaştırıcı ürünlerinin damıtılmasından elde edilen kompleks hidrokarbon bileşimi. Ağırlıklı olarak, karbon sayıları büyük çoğunlukla C6 ila C15 aralığında olan ve yaklaşık 157°C ila 288°C (315°F-550°F) aralığında kaynayan doymamış hidrokarbonlardan oluşur.]",
+  "ec_no": "269-778-9",
+  "index_no": "649-425-00-9",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

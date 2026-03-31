@@ -1,0 +1,60 @@
+{
+  "cas": "108-89-4",
+  "name": "4-methylpyridine; 4-picoline",
+  "name_tr": "4-metilpiridin; 4-pikolin",
+  "ec_no": "203-626-4",
+  "index_no": "613-037-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H311"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS06"
+    ],
+    "h_codes": [
+      "H226",
+      "H311",
+      "H332",
+      "H302",
+      "H319",
+      "H335",
+      "H315"
+    ],
+    "suppl_h": []
+  }
+}

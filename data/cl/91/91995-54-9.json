@@ -1,0 +1,31 @@
+{
+  "cas": "91995-54-9",
+  "name": "Distillates (petroleum), solvent- refined light naphthenic, hydrotreated; Baseoil - unspecified; [A complex combination of hydrocarbons obtained by treating a petroleum fraction with hydrogen in the presence of a catalyst and removing the aromatic hydrocarbons by solvent extraction. It consists predominantly of naphthenic hydrocarbons having carbon numbers predominantly in the range of C15 through C30 and produces a finished oil with a viscosity of between 13-15cSt at 40 °C.]",
+  "name_tr": "Damıtıklar (petrol), çözücü ile rafine edilmiş hafif naftenik, hidrojenle muamele edilmiş; bazyağlar – tanımlanmamış [Petrol fraksiyonunun, katalizör varlığında hidrojenle muamele edilmesi ve çözücü özütlemesi ile aromatik hidrokarbonların uzaklaştırılması ile elde edilen hidrokarbonların kompleks bileşimi. Genelde, ağırlıklı olarak C15 ila C30 aralığında karbon sayısına sahip naftenik hidrokarbonlardan oluşur ve 40 oC’de 13-15 cSt aralığında viskoziteye sahip son yağ üretir.]",
+  "ec_no": "295-316-0",
+  "index_no": "649-496-00-6",
+  "atp": "",
+  "notes": [
+    "L"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,69 @@
+{
+  "cas": "243973-20-8",
+  "name": "pinoxaden (ISO); 8-(2,6-diethyl-4-methylphenyl)- 7-oxo-1,2,4,5-tetrahydro-7H- pyrazolo[1,2- d][1,4,5]oxadiazepin-9-yl 2,2- dimethylpropanoate",
+  "name_tr": "pinoksaden (ISO); 8-(2,6-dietil-4-metilfenil)- 7- okso-1,2,4,5-tetrahidro-7H- pirazolo[1,2- d][1,4,5]oksadiazepin-9-il 2,2- dimetilpropanoat",
+  "ec_no": "",
+  "index_no": "607-726-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 2",
+        "h_code": "H361d"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Skin Sens. 1A",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {
+      "acute": 1,
+      "chronic": 1
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H361d",
+      "H332",
+      "H302",
+      "H319",
+      "H335",
+      "H317",
+      "H400",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

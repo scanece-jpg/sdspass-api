@@ -1,0 +1,46 @@
+{
+  "cas": "83-26-1",
+  "name": "pindone (ISO); 2-pivaloylindan-1,3-dione",
+  "name_tr": "pindon (ISO); 2-pivaloilindan-1,3-dion",
+  "ec_no": "201-462-8",
+  "index_no": "606-016-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H301",
+      "H372",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

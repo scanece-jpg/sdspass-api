@@ -1,0 +1,36 @@
+{
+  "cas": "92062-33-4",
+  "name": "Tar bases, coal, picoline fraction; Distillate Bases; [Pyridine bases boiling in the range of approximately 125°C to 160°C (257°F 320°F) obtained by distillation of neutralized acid extract of the base-containing tar fraction obtained by the distillation of bituminous coal tars. Composed chiefly of lutidines and picolines.]",
+  "name_tr": "Zift esaslı, kömür, pikolin fraksiyonu; damıtık bazları; [Kaynama sıcaklığı aralığı yaklaşık olarak 125°C ile 160°C (257°F- 320°F) arasında olan ve zift fraksiyonu içeren nötrlenmiş asit özütünün damıtılmasından elde edilmiş piridin bazları. Başlıca lutidin ve pikolinlerden oluşur.]",
+  "ec_no": "295-548-2",
+  "index_no": "648-030-00-9",
+  "atp": "",
+  "notes": [
+    "J"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

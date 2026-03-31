@@ -1,0 +1,43 @@
+{
+  "cas": "629-14-1",
+  "name": "1,2-diethoxyethane",
+  "name_tr": "1,2-dietoksietan",
+  "ec_no": "211-076-1",
+  "index_no": "603-208-00-5",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "Repr. 1A",
+        "h_code": "H360Df"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H225",
+      "H360Df",
+      "H319"
+    ],
+    "suppl_h": [
+      "EUH019"
+    ]
+  }
+}

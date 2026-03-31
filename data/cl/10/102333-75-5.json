@@ -1,0 +1,35 @@
+{
+  "cas": "102333-75-5",
+  "name": "2-(para- chlorophenyl)glycineamide",
+  "name_tr": "2-(para-klorofenil)glisinamid",
+  "ec_no": "420-830-0",
+  "index_no": "616-171-00-5",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H318",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "cas": "592-62-1",
+  "name": "methyl-ONN-azoxymethyl acetate; methyl azoxy methyl acetate",
+  "name_tr": "metil-ONN-azoksimetilasetat; metilazoksimetilasetat",
+  "ec_no": "209-765-7",
+  "index_no": "611-004-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360D"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H360D"
+    ],
+    "suppl_h": []
+  }
+}

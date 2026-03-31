@@ -1,0 +1,31 @@
+{
+  "cas": "122070-78-4",
+  "name": "Phenanthrene, distn. residues; Heavy Anthracene Oil Redistillate; [Residue from the distillation of crude phenanthrene boiling in the approximate range of 340 °C to 420 °C (644 °F to 788 °F). It consists predominantly of phenanthrene, anthracene and carbazole.]",
+  "name_tr": "fenantren, damıtma artıkları;ağır antrasen yağı tekrar damıtık; [Ham fenantren’in yaklaşık 340 oC ile 420 oC (644 oF-788 oF) arasında kaynayan damıtma artığı. Büyük ölçüde, fenantren, antrasen ve karbozolden oluşur.]",
+  "ec_no": "310-169-5",
+  "index_no": "648-077-00-5",
+  "atp": "",
+  "notes": [
+    "M"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

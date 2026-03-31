@@ -1,0 +1,38 @@
+{
+  "cas": "463-82-1",
+  "name": "2,2-dimethylpropane; neopentane",
+  "name_tr": "2,2-dimetilpropan; neopentan",
+  "ec_no": "207-343-7",
+  "index_no": "601-005-00-6",
+  "atp": "",
+  "notes": [
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H220",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "cas": "612-82-8",
+  "name": "salts of 4,4'-bi-o-toluidine; salts of 3,3'-dimethylbenzidine; salts of o-tolidine",
+  "name_tr": "4,4'-bi-o-toluidin tuzları; 3,3’-dimetilbenzidin tuzları; o-toluidin tuzları",
+  "ec_no": "210-322-5",
+  "index_no": "612-081-00-5",
+  "atp": "",
+  "notes": [
+    "A"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H350",
+      "H302",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

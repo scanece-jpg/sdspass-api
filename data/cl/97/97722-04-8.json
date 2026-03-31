@@ -1,0 +1,29 @@
+{
+  "cas": "97722-04-8",
+  "name": "hydrocarbons C26-55, arom-rich",
+  "name_tr": "hidrokarbonlar C26-55, aromatiklikçe zengin",
+  "ec_no": "307-753-7",
+  "index_no": "649-006-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

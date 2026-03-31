@@ -1,0 +1,34 @@
+{
+  "cas": "302-27-2",
+  "name": "aconitine",
+  "name_tr": "akonitin",
+  "ec_no": "206-121-7",
+  "index_no": "614-008-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H300"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06"
+    ],
+    "h_codes": [
+      "H330",
+      "H300"
+    ],
+    "suppl_h": []
+  }
+}

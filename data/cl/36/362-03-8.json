@@ -1,0 +1,29 @@
+{
+  "cas": "362-03-8",
+  "name": "3-(phenothiazin-10-yl)propionic acid",
+  "name_tr": "3-(fenotiazin-10-il)propionik asit",
+  "ec_no": "421-260-5",
+  "index_no": "607-463-00-3",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [
+      "GHS09"
+    ],
+    "h_codes": [
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

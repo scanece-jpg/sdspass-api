@@ -1,0 +1,40 @@
+{
+  "cas": "1918-00-9",
+  "name": "dicamba (ISO); 2,5-dichloro-6-methoxybenzoic acid; 3,6-dichloro-2-methoxybenzoic acid",
+  "name_tr": "dikamba (ISO); 2,5-dikloro-6- metoksibenzoik asit; 3,6-dikloro-2- metoksibenzoikasit",
+  "ec_no": "217-635-6",
+  "index_no": "607-043-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302",
+      "H318",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "cas": "507-60-8",
+  "name": "bufa-4,20,22-trienolide, 6- (acetyloxy)-3-(β-D- glucopyranosyloxy)-8,14- dihydroxy-, (3β, 6β)-; red squill; scilliroside",
+  "name_tr": "bufa-4,20,22-trienolid, 6- (asetiloksi)-3-(β-D- glukopiranosiloksi)-8,14- dihidroksi-, (3β, 6β)-; kırmızı squill; sillirosid",
+  "ec_no": "208-077-4",
+  "index_no": "614-027-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H300"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06"
+    ],
+    "h_codes": [
+      "H300"
+    ],
+    "suppl_h": []
+  }
+}

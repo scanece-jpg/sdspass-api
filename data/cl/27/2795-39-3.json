@@ -1,0 +1,61 @@
+{
+  "cas": "2795-39-3",
+  "name": "perfluorooctane sulfonic acid; heptadecafluorooctane-1- sulfonic acid; [1] potassium perfluorooctanesulfonate; potassium heptadecafluorooctane-1- sulfonate; [2] diethanolamine perfluorooctane sulfonate; [3] ammonium perfluorooctane sulfonate; ammonium heptadecafluorooctanesulfonate; [4] lithium perfluorooctane sulfonate; lithium heptadecafluorooctanesulfonate [5]",
+  "name_tr": "perflorooktan sülfonik asit; heptadekaflorooktan-1-sülfonik asit; [1] potasyumperflorooktan sülfonik asit; potasyum heptadekaflorooktan- 1-sülfonat; [2] dietanolamin perflorooktan sülfonat; [3] amonyum perflorooktan sülfonat; amonyum heptadekaflorooktansülfonat; [4] lityum perflorooktan sülfonat; lityum heotaflorooktansülfonat; [5]",
+  "ec_no": "217-179-8",
+  "index_no": "607-624-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360D"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Lact.",
+        "h_code": "H362"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H351",
+      "H360D",
+      "H372",
+      "H332",
+      "H302",
+      "H362",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

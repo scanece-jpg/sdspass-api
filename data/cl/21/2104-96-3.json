@@ -1,0 +1,43 @@
+{
+  "cas": "2104-96-3",
+  "name": "bromophos (ISO); O-4-bromo-2,5-dichlorophenyl O,O-dimethyl phosphorothioate",
+  "name_tr": "bromofos (ISO); O-4-bromo-2,5-diklorofenil- O,O-dimetilfosforotiyoat",
+  "ec_no": "218-277-3",
+  "index_no": "015-108-00-3",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 100,
+      "chronic": 100
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

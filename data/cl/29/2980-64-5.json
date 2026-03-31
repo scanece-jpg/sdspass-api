@@ -1,0 +1,56 @@
+{
+  "cas": "2980-64-5",
+  "name": "ammonium salt of DNOC; ammonium 4,6-dinitro-o-tolyl oxide",
+  "name_tr": "DNOK’nın amonyum tuzu; amonyum 4,6-dinitro-o-tolil oksit",
+  "ec_no": "221-037-0",
+  "index_no": "609-022-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 1",
+        "h_code": "H310"
+      },
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H300"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H330",
+      "H310",
+      "H300",
+      "H373",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "cas": "5117-12-4",
+  "name": "4-(1-oxo-2-propenyl)- morpholine",
+  "name_tr": "4-(1-okso-2-propenil)-morfolin",
+  "ec_no": "418-140-1",
+  "index_no": "613-222-00-3",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS05",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302",
+      "H373",
+      "H318",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

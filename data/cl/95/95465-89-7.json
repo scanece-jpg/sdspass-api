@@ -1,0 +1,44 @@
+{
+  "cas": "95465-89-7",
+  "name": "Hydrocarbons, C4, 1,3- butadiene- and isobutene-free; Petroleum gas",
+  "name_tr": "Hidrokarbonlar, C4, 1,3- bütadien- ve izobüten içermeyen; Petrol gazı",
+  "ec_no": "306-004-1",
+  "index_no": "649-118-00-X",
+  "atp": "",
+  "notes": [
+    "K",
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H220"
+      },
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS04",
+      "GHS02",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

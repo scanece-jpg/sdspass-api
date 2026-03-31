@@ -1,0 +1,27 @@
+{
+  "cas": "83164-33-4",
+  "name": "diflufenican (ISO); N-(2,4-difluorophenyl)-2-[3- (trifluoromethyl)phenoxy]-3- pyridinecarboxamide",
+  "name_tr": "diflufenikan (ISO); N-(2,4- diflorofenil)-2-[3- (triflorometil)fenoksi]-3- piridinkarboksamid",
+  "ec_no": "",
+  "index_no": "616-032-00-9",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "cas": "109125-51-1",
+  "name": "ammonium bis(1-(3,5-dinitro-2- oxidophenylazo)-3-(N- phenylcarbamoyl)-2- naphtholato)chromate(1-)",
+  "name_tr": "amonyum bis(1-(3,5-dinitro-2- oksidofenilazo)-3-(N- fenilkarbamoil)-2- naftolato)kromat(1-)",
+  "ec_no": "400-110-2",
+  "index_no": "024-011-00-5",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Self-react. Type C",
+        "h_code": "H242"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H242",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

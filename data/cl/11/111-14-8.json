@@ -1,0 +1,29 @@
+{
+  "cas": "111-14-8",
+  "name": "heptanoic acid",
+  "name_tr": "heptanoik asit",
+  "ec_no": "203-838-7",
+  "index_no": "607-196-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

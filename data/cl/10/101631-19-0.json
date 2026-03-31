@@ -1,0 +1,29 @@
+{
+  "cas": "101631-19-0",
+  "name": "Kerosine (petroleum), hydrotreated; Kerosine - unspecified; [A complex combination of hydrocarbons obtained from the distillation of petroleum and subsequent hydrotreatment. It consists predominantly of alkanes, cycloalkanes and alkylbenzenes having carbon numbers predominantly in the range of C12 through C16 and boiling in the range of approximately 230 °C to 270 °C (446 °F to 518 °F).]",
+  "name_tr": "Kerosin (petrol), hidrojenle muamele edilmiş; Kerosin – tanımlanmamış; [Petrolün damıtılması ve sonrasında hidrojenle muamale edilmesinden elde edilen kompleks hidrokarbon bileşimi. Ağırlıklı olarak, karbon sayıları büyük çoğunlukla C12 ile C16 aralığında olan ve yaklaşık 230°C ila 270°C (446°F-518°F) aralığında kaynayan alkanlar, sikloalkanlar ve alkilbenzenlerden oluşur.]",
+  "ec_no": "309-944-0",
+  "index_no": "649-434-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

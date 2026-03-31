@@ -1,0 +1,51 @@
+{
+  "cas": "632-92-8",
+  "name": "2,4,6-trinitro-m-xylene",
+  "name_tr": "2,4,6-trinitro-m-ksilen",
+  "ec_no": "211-187-5",
+  "index_no": "609-013-00-1",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Expl. 1.1",
+        "h_code": "H201"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS01",
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H201",
+      "H332",
+      "H312",
+      "H302",
+      "H373"
+    ],
+    "suppl_h": []
+  }
+}

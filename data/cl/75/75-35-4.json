@@ -1,0 +1,43 @@
+{
+  "cas": "75-35-4",
+  "name": "1,1-dichloroethylene; vinylidene chloride",
+  "name_tr": "1,1-dikloroetilen; vinilidin klorür",
+  "ec_no": "200-864-0",
+  "index_no": "602-025-00-8",
+  "atp": "",
+  "notes": [
+    "D"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 1",
+        "h_code": "H224"
+      },
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H224",
+      "H351",
+      "H332"
+    ],
+    "suppl_h": []
+  }
+}

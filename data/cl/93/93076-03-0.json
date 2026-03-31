@@ -1,0 +1,57 @@
+{
+  "cas": "93076-03-0",
+  "name": "3-(2-chloroethyl)-6,7,8,9-tetra- hydro-2-methyl-4H-pyrido[1,2- a]pyrimidin-4-one monohydrochloride",
+  "name_tr": "3-(2-kloroetil)-6,7,8,9-tetra- hidro-2-metil-4H-pirido[1,2- a]pirimidin-4-on monohidroklorür",
+  "ec_no": "424-530-0",
+  "index_no": "613-275-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
+      },
+      {
+        "class": "STOT SE 2",
+        "h_code": "H371"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS05",
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H301",
+      "H371",
+      "H373",
+      "H318",
+      "H317",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

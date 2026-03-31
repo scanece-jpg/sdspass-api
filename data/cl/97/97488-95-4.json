@@ -1,0 +1,31 @@
+{
+  "cas": "97488-95-4",
+  "name": "Lubricating oils (petroleum), C18-27, hydrocracked solvent- dewaxed; Baseoil - unspecified",
+  "name_tr": "Yağlama yağları (petrol), C18-27, hidrojenle parçalanmış çözücü ile cilası alınmış; bazyağlar - tanımlanmamış",
+  "ec_no": "307-034-8",
+  "index_no": "649-514-00-2",
+  "atp": "",
+  "notes": [
+    "L"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "cas": "91995-61-8",
+  "name": "Extract residues (coal), benzole fraction alk., acid ext.; Light Oil Extract Residues, low boiling; [The redistillate from the distillate, freed of tar acids and tar bases, from bituminous coal high temperature tar boiling in the approximate range of 90°C to 160°C (194°F to 320°F). It consists predominantly of benzene, toluene and xylenes.]",
+  "name_tr": "özüt artıklar (kömür), benzol fraksiyon alkalin, asit ekstra.; hafif yağ özüt artıkları, düşük sıcaklıkta kaynayan; [Katran asitleri ve katran bazlarından arındırılmış, ve taş kömürü yüksek sıcaklık ziftinden olan tekrar damıtılan damıtık yaklaşık 90oC ile 160oC (194oF- 320oF) aralığında kaynar. Ağırlıklı olarak benzen, toluen ve ksilenlerden oluşur.]",
+  "ec_no": "295-323-9",
+  "index_no": "648-014-00-1",
+  "atp": "",
+  "notes": [
+    "J"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

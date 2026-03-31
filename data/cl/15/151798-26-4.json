@@ -1,0 +1,34 @@
+{
+  "cas": "151798-26-4",
+  "name": "2-[2-hydroxy-3-(2- chlorophenyl)carbamoyl-1- naphthylazo]-7-[2-hydroxy-3-(3- methylphenyl)carbamoyl-1- naphthylazo]fluoren-9-one",
+  "name_tr": "2-[2-hidroksi-3-(2- klorofenil)karbomoil-1- naftilazo]-7-[2-hidroksi-3-(3- metilfenil)karbomoil-1- naftilazo]floren-9-on",
+  "ec_no": "420-580-2",
+  "index_no": "611-131-00-3",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360D"
+      },
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H360D",
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

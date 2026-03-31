@@ -1,0 +1,29 @@
+{
+  "cas": "86978-24-7",
+  "name": "(Z)-2-(2-t-butoxycarbonylamino- 4-thiazolyl)pent-2-enoic acid",
+  "name_tr": "(z)-2-(2-t-bütoksikarbonilamino- 4-tiyazol)pen-2-tenoik asit",
+  "ec_no": "430-100-3",
+  "index_no": "607-606-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

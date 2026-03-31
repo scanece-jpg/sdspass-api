@@ -1,0 +1,41 @@
+{
+  "cas": "91995-18-5",
+  "name": "Aromatic hydrocarbons, C8, catalytic reforming-derived; Low boiling point cat-reformed naphtha",
+  "name_tr": "Aromatik hidrokarbonlar, C8, katalitik dönüşüm işlemi-türevi; düşük kaynama noktalı katalitik olarak dönüştürülmüş nafta",
+  "ec_no": "295-279-0",
+  "index_no": "649-310-00-3",
+  "atp": "",
+  "notes": [
+    "P"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

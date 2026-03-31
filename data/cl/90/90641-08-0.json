@@ -1,0 +1,31 @@
+{
+  "cas": "90641-08-0",
+  "name": "Extracts (petroleum), heavy paraffinic distillate solvent, hydrotreated; Distillate aromatic extract (treated); [A complex combination of hydrocarbons produced by treating a heavy paraffinic distillate solvent extract with hydrogen in the presence of a catalyst. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C21 through C33 and boiling in the range of approximately 350 °C to 480 °C (662 °F to 896 °F).",
+  "name_tr": "özütler (petrol), ağır parafinik damıtık çözücü, hidrojen ile muamele edilmiş; damıtık aromatik özüt (muamele edilmiş); [Hafif parafinik damıtık çözücü özütünün katalizör varlığında hidrojenle muamele edilmesinden üretilen kompleks bir hidrokarbon bileşimi. Ağırlıklı olarak, karbon sayıları genelde C21 ile C33 aralığında olan ve kaynama noktası 350oC ile 480oC (662oF-896oF) olan hidrokarbonlardan oluşur.]",
+  "ec_no": "292-632-0",
+  "index_no": "649-535-00-7",
+  "atp": "",
+  "notes": [
+    "L"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

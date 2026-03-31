@@ -1,0 +1,35 @@
+{
+  "cas": "112226-61-6",
+  "name": "benzoic acid, N-tert-butyl-N'-(4- chlorobenzoyl)hydrazide",
+  "name_tr": "benzoik asit, N-ter-bütil-N’-(4- klorobenzoil)hidrazid",
+  "ec_no": "431-600-4",
+  "index_no": "616-138-00-5",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H317",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

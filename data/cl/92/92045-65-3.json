@@ -1,0 +1,41 @@
+{
+  "cas": "92045-65-3",
+  "name": "Naphtha (petroleum), light thermal cracked, sweetened; Low boiling point thermally cracked naphtha; [A complex combination of hydrocarbons obtained by subjecting a petroleum distillate from the high temperature thermal cracking of heavy oil fractions to a sweetening process to convert mercaptans. It consists predominantly of aromatics, olefins and saturated hydrocarbons boiling in the range of approximately 20°C to 100°C (68°F to 212°F).]",
+  "name_tr": "Nafta (petrol),hafif ısıl parçalanmış, kıvamı artırılmış; düşük kaynama noktalı ısıl olarak parçalanmış nafta; [Yüksek sıcaklıkta ısıl parçalanmış ağır yağ fraksiyonlarından gelen petrol damıtığındaki merkaptanların dönüştürülmesi için, damıtığı kıvamlaştırma prosesine tabi tutarak elde edilen kompleks hidrokarbon karışımı. Büyük çoğunlukla, yaklaşık 20°C ila 100°C (68°F ila 212°F) aralığında kaynayan aromatikler, olefinler ve doymuş hidrokarbonlardan oluşur.]",
+  "ec_no": "295-447-3",
+  "index_no": "649-326-00-0",
+  "atp": "",
+  "notes": [
+    "P"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

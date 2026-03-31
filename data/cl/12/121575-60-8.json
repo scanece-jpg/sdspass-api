@@ -1,0 +1,31 @@
+{
+  "cas": "121575-60-8",
+  "name": "Pitch, coal tar, high-temp., heat- treated; Pitch; [The heat treated residue from the distillation of high temperature coal tar. A black solid with an approximate softening point from 80 °C to 180 °C (176 °F to 356 °F). Composed primarily of a complex mixture of three or more membered condensed ring aromatic hydrocarbons.]",
+  "name_tr": "ziftli, kömür zifti, yüksek- sıcaklık, ısı ile işlem görmüş; ziftli; [Yüksek sıcaklık kömür ziftinin damıtılmasından kalan ve ısıyla muamele edilen artık.Yaklaşık 80oC ile 180oC arasında (176oF- 356oF) yumuşayan siyah katı. Büyük çoğunlukla üç veya daha çok elemanlı yoğunlaşmış halka aromatik hidrokarbonların kompleks bir karışımından oluşur.]",
+  "ec_no": "310-162-7",
+  "index_no": "648-056-00-0",
+  "atp": "",
+  "notes": [
+    "M"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

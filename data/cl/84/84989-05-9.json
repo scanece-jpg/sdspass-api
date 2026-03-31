@@ -1,0 +1,37 @@
+{
+  "cas": "84989-05-9",
+  "name": "Tar acids, polyalkylphenol fraction; Distillate Phenols; [The fraction of tar acids, recovered by distillation of low- temperature coal tar crude tar acids, having an approximate boiling range of 225°C to 320°C (437°F to 608°F). Composed primarily of polyalkylphenols.]",
+  "name_tr": "zift asitler, polialkilfenol fraksiyonu; damıtık fenolleri; [Düşük sıcaklık kömür zifti ham zift asitlerinin damıtılması ile geri kazanılan ve yaklaşık kaynama aralığı 225oC ile 320oC (437oF- 608oF) olan zift asidi fraksiyonu.Büyük ölçüde polialkilfenollerden oluşur.]",
+  "ec_no": "284-893-4",
+  "index_no": "648-121-00-3",
+  "atp": "",
+  "notes": [
+    "J",
+    "M"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

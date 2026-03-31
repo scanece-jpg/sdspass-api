@@ -1,0 +1,29 @@
+{
+  "cas": "57583-34-3",
+  "name": "2-ethylhexyl 10-ethyl-4-[[2-[(2- ethylhexyl)oxy]-2- oxoethyl]thio]- 4-methyl-7-oxo- 8-oxa-3,5-dithia- 4- stannatetradecanoate",
+  "name_tr": "2-etilhegzil 10-etil-4-[[2-[(2- etilhegzil)oksi]-2-oxoethyl]thio]- 4-metil-7-okzo-8-okza-3,5-ditia- 4-stannatetradekanoat",
+  "ec_no": "260-828-5",
+  "index_no": "050-026-00-1",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 2",
+        "h_code": "H361d"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H361d"
+    ],
+    "suppl_h": []
+  }
+}

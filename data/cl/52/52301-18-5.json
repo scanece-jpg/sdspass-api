@@ -1,0 +1,34 @@
+{
+  "cas": "52301-18-5",
+  "name": "tris(isopropenyloxy)phenyl silane",
+  "name_tr": "Tris(izopropeniloksi)fenilsilan",
+  "ec_no": "411-340-8",
+  "index_no": "014-021-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS09"
+    ],
+    "h_codes": [
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

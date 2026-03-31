@@ -1,0 +1,29 @@
+{
+  "cas": "73250-68-7",
+  "name": "mefenacet (ISO); 2-(benzothiazol-2-yloxy)-N- methyl-N-phenylacetamide",
+  "name_tr": "mefenaset (ISO); 2-(benzotiazol- 2-iloksi)-N-metil-N- fenilasetamid",
+  "ec_no": "277-328-8",
+  "index_no": "612-139-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [
+      "GHS09"
+    ],
+    "h_codes": [
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

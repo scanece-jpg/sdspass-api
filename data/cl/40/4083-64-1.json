@@ -1,0 +1,66 @@
+{
+  "cas": "4083-64-1",
+  "name": "4-isocyanatosulphonyltoluene; tosyl isocyanate",
+  "name_tr": "4-izosiyanatosülfoniltoluen; tosilizosiyanat",
+  "ec_no": "223-810-8",
+  "index_no": "615-012-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Resp. Sens. 1",
+        "h_code": "H334"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H319",
+        "class": "Göz Tah.",
+        "c_min": 5.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H335",
+        "class": "STOT SE 3",
+        "c_min": 5.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H315",
+        "class": "Skin Irrit. 2",
+        "c_min": 5.0,
+        "c_max": null
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319",
+      "H335",
+      "H315",
+      "H334"
+    ],
+    "suppl_h": [
+      "EUH014"
+    ]
+  }
+}

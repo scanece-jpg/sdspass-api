@@ -1,0 +1,31 @@
+{
+  "cas": "64742-62-7",
+  "name": "Residual oils (petroleum), solvent-dewaxed; Baseoil - unspecified; [A complex combination of hydrocarbons obtained by removal of long, branched chain hydrocarbons from a residual oil by solvent crystallization. It consists of hydrocarbons having carbon numbers predominantly greater than C25 and boiling above approximately 400 °C (752 °F).]",
+  "name_tr": "Artık yağlar (petrol), çözücü ile cilası alınmış; bazyağlar – tanımlanmamış [Artık yağdan, çözücü kristalizasyonu ile uzun, dallanmış zincirli hidrokarbonların uzaklaştırılması ile elde edilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla, C25’den daha büyük karbon sayısına sahip ve yaklaşık 400 oC (752 oF) üzerinde kaynayan hidrokarbonlardan oluşur.]",
+  "ec_no": "265-166-0",
+  "index_no": "649-471-00-X",
+  "atp": "",
+  "notes": [
+    "L"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

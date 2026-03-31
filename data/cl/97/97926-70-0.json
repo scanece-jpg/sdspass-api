@@ -1,0 +1,31 @@
+{
+  "cas": "97926-70-0",
+  "name": "Hydrocarbons, C20-58, hydrotreated; Baseoil - unspecified",
+  "name_tr": "Hidrokarbonlar, C20-58, hidrojenle muamele edilmiş; bazyağlar - tanımlanmamış",
+  "ec_no": "308-289-8",
+  "index_no": "649-523-00-1",
+  "atp": "",
+  "notes": [
+    "L"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "cas": "35073-27-9",
+  "name": "isopentyl formate; [1] pentyl formate; [2] 2-methylbutyl formate",
+  "name_tr": "Izopentilformat [1]; pentil format;[2] 2-metilbütilformat [3].",
+  "ec_no": "203-769-2",
+  "index_no": "607-018-00-3",
+  "atp": "",
+  "notes": [
+    "C"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H225",
+      "H319",
+      "H335"
+    ],
+    "suppl_h": []
+  }
+}

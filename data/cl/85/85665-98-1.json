@@ -1,0 +1,29 @@
+{
+  "cas": "85665-98-1",
+  "name": "tetrasodium 4-amino-3,6-bis(5- [4-chloro-6-(2- hydroxyethylamino)-1,3,5- triazin-2-ylamino]-2- sulfonatophenylazo)-5- hydroxynaphthalene-2,7- disulfonate",
+  "name_tr": "tetrasodyum 4-amino-3,6-b,s(5- [4-kloro-6-(2- hidroksietilamino)-1,3,5-triazin- 2-ilamino]-2-sülfonatofenilazo)- 5-hidroksinaftalen-2,7- diisülfonat",
+  "ec_no": "400-690-7",
+  "index_no": "611-068-00-1",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [
+      "GHS09"
+    ],
+    "h_codes": [
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

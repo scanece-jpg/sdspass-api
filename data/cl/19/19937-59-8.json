@@ -1,0 +1,34 @@
+{
+  "cas": "19937-59-8",
+  "name": "metoxuron (ISO); 3-(3-chloro-4-methoxyphenyl)- 1,1-dimethylurea",
+  "name_tr": "metoksuron; 3-(3-kloro-4-metoksifenil)-1,1- dimetilüre",
+  "ec_no": "243-433-2",
+  "index_no": "006-033-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS09"
+    ],
+    "h_codes": [
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

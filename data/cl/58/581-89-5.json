@@ -1,0 +1,35 @@
+{
+  "cas": "581-89-5",
+  "name": "2-nitronaphthalene",
+  "name_tr": "2-nitronaftalin",
+  "ec_no": "209-474-5",
+  "index_no": "609-038-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H350",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

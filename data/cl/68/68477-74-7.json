@@ -1,0 +1,44 @@
+{
+  "cas": "68477-74-7",
+  "name": "Gases (petroleum), catalytic cracker; Petroleum gas; [A complex combination of hydrocarbons produced by the distillation of the products from a catalytic cracking process. It consists predominantly of aliphatic hydrocarbons having carbon numbers predominantly in the range of C1 through C6.]",
+  "name_tr": "Gazlar (petrol), katalitik parçalayıcı; Petrol gazı; [Katalitik parçalama prosesi ürünlerinin damıtılması ile üretilen hidrokarbonların kompleks bileşimi. Büyük çoğunlukla C1 ila C6 aralığında, karbon sayısına sahip alifatik hidrokarbonlardan oluşur.]",
+  "ec_no": "270-756-6",
+  "index_no": "649-063-00-1",
+  "atp": "",
+  "notes": [
+    "K",
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H220"
+      },
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS04",
+      "GHS02",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

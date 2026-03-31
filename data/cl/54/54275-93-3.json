@@ -1,0 +1,29 @@
+{
+  "cas": "54275-93-3",
+  "name": "(1S,3S,5R,6R)-(4- nitrophenylmethyl)-1-dioxo-6- phenylacetamido-penam-3- carboxylate",
+  "name_tr": "(1S,3S,5R,6R)-(4- nitrofenilmetil)-1-diokso-6- fenilasetamido-penam-3- karboksilat",
+  "ec_no": "412-670-5",
+  "index_no": "607-358-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Resp. Sens. 1",
+        "h_code": "H334"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H334"
+    ],
+    "suppl_h": []
+  }
+}

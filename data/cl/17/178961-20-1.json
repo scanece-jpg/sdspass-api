@@ -1,0 +1,40 @@
+{
+  "cas": "178961-20-1",
+  "name": "S-metolachlor; reaction mass of (S)-2-chloro-N- (2-ethyl-6-methyl-phenyl)-N-(2- methoxy-1-methyl-ethyl)- acetamide (80-100 %); [1] (R)-2-chloro-N-(2-ethyl-6- methyl-phenyl)-N-(2-methoxy- 1-methyl-ethyl)-acetamide (0- 20 %) [2]",
+  "name_tr": "S-metolaklor; (S)-2-kloro-N-(2-etil-6- metilfenil)-N-(2-metoksi-1- metiletil)asetamid (80-100%); [1] S-metolaklor;(R)-2-kloro-N-(2- etil-6-metilfenil)-N-(2-metoksi- 1-metiletil)asetamid (0-%20) [2]",
+  "ec_no": "- [1] - [2]",
+  "index_no": "607-432-00-4",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

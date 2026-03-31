@@ -1,0 +1,35 @@
+{
+  "cas": "2065-75-0",
+  "name": "2-bromomalonaldehyde",
+  "name_tr": "2-bromomalonaldehid",
+  "ec_no": "430-470-6",
+  "index_no": "605-036-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302",
+      "H318"
+    ],
+    "suppl_h": []
+  }
+}

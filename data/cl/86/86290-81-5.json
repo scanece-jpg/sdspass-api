@@ -1,0 +1,41 @@
+{
+  "cas": "86290-81-5",
+  "name": "Gasoline; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons consisting primarily of paraffins, cycloparaffins, aromatic and olefinic hydrocarbons having carbon numbers predominantly greater than C3 and boiling in the range of 30°C to 260°C (86°F to 500°F).]",
+  "name_tr": "Benzin; düşük kaynama noktalı nafta – tanımlanmamış; [Ağırlıklı olarak C3’den büyük karbon sayısına sahip ve 30oC ila 260oC (86oF ila 500oF) arasında kaynayan ve esas olarak parafinler, sikloparafinler, aromatik ve olefinik hidrokarbonlardan oluşan kompleks hidrokarbon bileşimi.]",
+  "ec_no": "289-220-8",
+  "index_no": "649-378-00-4",
+  "atp": "",
+  "notes": [
+    "P"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

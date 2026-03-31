@@ -1,0 +1,40 @@
+{
+  "cas": "66441-23-4",
+  "name": "ethyl 2-[4-[(6-chlorobenzoxazol- 2-yl)oxy]phenoxy]propionate; fenoxaprop-ethyl",
+  "name_tr": "etil2-[4-[(6-klorobenzoksazol-2- il)oksi]fenoksi]propionat; fenoksaprop-etil",
+  "ec_no": "266-362-9",
+  "index_no": "604-039-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

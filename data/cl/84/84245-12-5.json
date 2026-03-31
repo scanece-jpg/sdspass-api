@@ -1,0 +1,39 @@
+{
+  "cas": "84245-12-5",
+  "name": "N-[6,9-dihydro-9-[[2-hydroxy-1- (hydroxymethyl)ethoxy]methyl]- 6-oxo-1H-purin-2-yl]acetamide",
+  "name_tr": "N-[6,9-dihidro-9-[[2-hidroksi-1- (hidroksimetil)etoksi]metil]-6- okso-1H-purin-2-il]asetamid",
+  "ec_no": "424-550-1",
+  "index_no": "616-148-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360FD"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H360FD"
+    ],
+    "suppl_h": []
+  }
+}

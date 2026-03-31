@@ -1,0 +1,79 @@
+{
+  "cas": "7803-49-8",
+  "name": "hydroxylamine ...% [≤ 55% in aqueous solution]",
+  "name_tr": "hidroksilamin…% [sulu çözeltide ≤ %55]",
+  "ec_no": "232-259-2",
+  "index_no": "612-122-01-4",
+  "atp": "",
+  "notes": [
+    "B"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Met. Corr. 1",
+        "h_code": "H290"
+      },
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H290",
+      "H351",
+      "H312",
+      "H302",
+      "H373",
+      "H335",
+      "H315",
+      "H318",
+      "H317",
+      "H400"
+    ],
+    "suppl_h": []
+  }
+}

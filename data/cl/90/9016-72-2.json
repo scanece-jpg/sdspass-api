@@ -1,0 +1,46 @@
+{
+  "cas": "9016-72-2",
+  "name": "propineb (ISO); polymeric zinc propylenebis(dithiocarbamate)",
+  "name_tr": "propineb (ISO); polimerik çinko propilenbis(ditiyokarbamat)",
+  "ec_no": "",
+  "index_no": "006-091-00-3",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H332",
+      "H373",
+      "H317",
+      "H400"
+    ],
+    "suppl_h": []
+  }
+}

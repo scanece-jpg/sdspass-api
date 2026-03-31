@@ -1,0 +1,29 @@
+{
+  "cas": "110-17-8",
+  "name": "fumaric acid",
+  "name_tr": "fumarik asit",
+  "ec_no": "203-743-0",
+  "index_no": "607-146-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319"
+    ],
+    "suppl_h": []
+  }
+}

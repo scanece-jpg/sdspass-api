@@ -1,0 +1,42 @@
+{
+  "cas": "14166-21-3",
+  "name": "cyclohexane-1,2-dicarboxylic anhydride; [1] cis-cyclohexane-1,2- dicarboxylic anhydride; [2] trans-cyclohexane-1,2- dicarboxylic anhydride [3]",
+  "name_tr": "siklohekzan-1,2-dikarboksilik anhidrit; [1] cis-siklohekzan-1,2- dikarboksilik anhidrit; [2] trans-siklohekzan-1,2- dikarboksilik anhidrit [3]",
+  "ec_no": "201-604-9",
+  "index_no": "607-102-00-X",
+  "atp": "",
+  "notes": [
+    "C"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Resp. Sens. 1",
+        "h_code": "H334"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H318",
+      "H334",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "cas": "123-19-3",
+  "name": "heptan-4-one; di-n-propyl ketone",
+  "name_tr": "heptan-4-on; dipropilketon",
+  "ec_no": "204-608-9",
+  "index_no": "606-027-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS02",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H226",
+      "H332"
+    ],
+    "suppl_h": []
+  }
+}

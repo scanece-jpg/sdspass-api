@@ -1,0 +1,31 @@
+{
+  "cas": "68188-48-7",
+  "name": "Distillates (coal-petroleum), condensed-ring arom; Distillates; [The distillate from a mixture of coal and tar and aromatic petroleum streams having an approximate distillation range of 220 °C to 450 °C (428 °F to 842 °F). Composed primarily of 3- to 4-membered condensed ring aromatic hydrocarbons.]",
+  "name_tr": "Damıtıklar (kömür-petrol), yoğuşmuş-halkalı aromatikler; damıtıklar; [Kömür, zift ve petrol karışımının yaklaşık 220 oC ile 450 oC (428 oF-842 oF) arasında damıtma aralığı sahip damıtığı. Büyük ölçüde 3-4 elemanlı sıkışık halka aromatik hidrokarbonlardan oluşur.]",
+  "ec_no": "269-159-3",
+  "index_no": "648-072-00-8",
+  "atp": "",
+  "notes": [
+    "M"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

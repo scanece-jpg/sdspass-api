@@ -1,0 +1,45 @@
+{
+  "cas": "10265-92-6",
+  "name": "methamidophos (ISO); O,S-dimethyl phosphoramidothioate",
+  "name_tr": "metamidofos (ISO); O,S-dimetil fosforamidotiyoat",
+  "ec_no": "233-606-0",
+  "index_no": "015-095-00-4",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H300"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H311"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H330",
+      "H300",
+      "H311",
+      "H400"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "cas": "1113-02-6",
+  "name": "omethoate (ISO); O,O-dimethyl S- methylcarbamoylmethyl phosphorothioate",
+  "name_tr": "ometoat (ISO); O,O-dimetil S- metilkarbamoilmetil fosforotiyoat",
+  "ec_no": "214-197-8",
+  "index_no": "015-066-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H301",
+      "H312",
+      "H400"
+    ],
+    "suppl_h": []
+  }
+}

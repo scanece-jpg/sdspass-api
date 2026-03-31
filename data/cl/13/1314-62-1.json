@@ -1,0 +1,61 @@
+{
+  "cas": "1314-62-1",
+  "name": "divanadium pentaoxide; vanadium pentoxide",
+  "name_tr": "divanadyum pentaoksit; vanadyum pentoksit",
+  "ec_no": "215-239-8",
+  "index_no": "023-001-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      },
+      {
+        "class": "Repr. 2",
+        "h_code": "H361d"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H341",
+      "H361d",
+      "H372",
+      "H332",
+      "H302",
+      "H335",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

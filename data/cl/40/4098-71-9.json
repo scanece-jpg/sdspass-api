@@ -1,0 +1,76 @@
+{
+  "cas": "4098-71-9",
+  "name": "3-isocyanatomethyl-3,5,5- trimethylcyclohexyl isocyanate; isophorone di-isocyanate",
+  "name_tr": "3-izosiyanatometil-3,5,5- trimetilsiklohekzilizosiyanat izofronediizosiyanat",
+  "ec_no": "223-861-6",
+  "index_no": "615-008-00-5",
+  "atp": "",
+  "notes": [
+    "2"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H331"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Resp. Sens. 1",
+        "h_code": "H334"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H334",
+        "class": "Resp. Sens. 1",
+        "c_min": 0.5,
+        "c_max": null
+      },
+      {
+        "h_code": "H317",
+        "class": "Cilt Hassas.1",
+        "c_min": 0.5,
+        "c_max": null
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H331",
+      "H319",
+      "H335",
+      "H315",
+      "H334",
+      "H317",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

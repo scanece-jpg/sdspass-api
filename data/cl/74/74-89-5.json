@@ -1,0 +1,55 @@
+{
+  "cas": "74-89-5",
+  "name": "mono-methylamine ... %; [1] di-methylamine ... %; [2] tri-methylamine ... % [3]",
+  "name_tr": "mono-metilamin ...%; [1] di-metilamin ...%; [2] tri-metilamin ...% [3]",
+  "ec_no": "200-820-0",
+  "index_no": "612-001-01-6",
+  "atp": "",
+  "notes": [
+    "B"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 1",
+        "h_code": "H224"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H335",
+        "class": "STOT SE 3",
+        "c_min": 5.0,
+        "c_max": null
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS05",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H224",
+      "H332",
+      "H302",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

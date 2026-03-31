@@ -1,0 +1,29 @@
+{
+  "cas": "7681-38-1",
+  "name": "sodium hydrogensulphate",
+  "name_tr": "Sodyum hidrojensülfat",
+  "ec_no": "231-665-7",
+  "index_no": "016-046-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H318"
+    ],
+    "suppl_h": []
+  }
+}

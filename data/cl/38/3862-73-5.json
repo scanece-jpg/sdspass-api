@@ -1,0 +1,57 @@
+{
+  "cas": "3862-73-5",
+  "name": "2,3,4-trifluoroaniline",
+  "name_tr": "2,3,4-trifloranilin",
+  "ec_no": "407-170-9",
+  "index_no": "612-187-00-1",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS05",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H312",
+      "H302",
+      "H373",
+      "H315",
+      "H318",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

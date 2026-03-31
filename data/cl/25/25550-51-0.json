@@ -1,0 +1,42 @@
+{
+  "cas": "25550-51-0",
+  "name": "hexahydro-4-methylphthalic anhydride; [1] hexahydromethylphthalic anhydride; [2] hexahydro-1-methylphthalic anhydride; [3] hexahydro-3-methylphthalic anhydride [4]",
+  "name_tr": "hekzahidro-4-metilftalik anhidrit; [1] hekzahidrometilftalik anhidrit; [2] hekzahidro-1-metilftalik anhidrit; [3] hekzahidro-3-metilftalik anhidrit [4]",
+  "ec_no": "243-072-0",
+  "index_no": "607-241-00-6",
+  "atp": "",
+  "notes": [
+    "C"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Resp. Sens. 1",
+        "h_code": "H334"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H318",
+      "H334",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

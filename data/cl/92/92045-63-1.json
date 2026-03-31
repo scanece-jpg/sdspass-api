@@ -1,0 +1,41 @@
+{
+  "cas": "92045-63-1",
+  "name": "Hydrocarbons, C4-11, naphtha- cracking, arom.-free; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons obtained from prehydrogenated cracked naphtha after distillative separation of benzene- and toluene-containing hydrocarbon cuts and a higher boiling fraction. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C4 through C11 and boiling in the range of approximately 30°C to 205°C (86°F to 401°F).]",
+  "name_tr": "Hidrokarbonlar, C4-11, nafta- parçalama, aromatiksiz; düşük kaynama noktalı nafta – tanımlanmamış; [Prehidrojene parçalanmış naftadan, benzen- ve toluene- içeren hidrokarbon kesimlerinin ve daha yüksek sıcaklıkta kaynayan bir fraksiyonunun damıtımsal ayrıştırılmasından elde edilen kompleks hidrokarbon karışımı. Büyük çoğunlukla, karbon numaraları ağırlıklı olarak C4 ila C11 aralığında olan ve yaklaşık 30oC ila 205oC(86oF ila 401oF) arasında kaynayan hidrokarbonlardan oluşur.]",
+  "ec_no": "295-445-2",
+  "index_no": "649-386-00-8",
+  "atp": "",
+  "notes": [
+    "P"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

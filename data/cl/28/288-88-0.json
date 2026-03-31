@@ -1,0 +1,40 @@
+{
+  "cas": "288-88-0",
+  "name": "1,2,4-triazole",
+  "name_tr": "1,2,4-triyazol",
+  "ec_no": "206-022-9",
+  "index_no": "613-111-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 2",
+        "h_code": "H361d"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H361d",
+      "H302",
+      "H319"
+    ],
+    "suppl_h": []
+  }
+}

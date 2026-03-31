@@ -1,0 +1,29 @@
+{
+  "cas": "719-96-0",
+  "name": "N- (dichlorofluoromethylthio)phthal imide; N- (fluorodichloromethylthio)phthal imide",
+  "name_tr": "N- (dikloroflorometiltiyo)ftalimid; N- (florodiklorometiltiyo)ftalimid",
+  "ec_no": "211-952-3",
+  "index_no": "616-012-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H315"
+    ],
+    "suppl_h": []
+  }
+}

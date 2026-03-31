@@ -1,0 +1,27 @@
+{
+  "cas": "104541-33-5",
+  "name": "2-[2,4-bis(1,1-dimethyl- ethyl)phenoxy]-N-(2-hydroxy-5- methyl-phenyl)hexanamide",
+  "name_tr": "2-[2,4-bis(1,1-dimetil- etil)fenoksi]-N-(2-hidroksi-5- metil-fenil)-hekzanamid",
+  "ec_no": "411-330-3",
+  "index_no": "616-078-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "cas": "147783-69-5",
+  "name": "bis(1,2,2,6,6-pentamethyl-4- piperidinyl) 2-(4- methoxybenzylidene)malonate",
+  "name_tr": "bis(1,2,2,6,6-pentametil-4- piperidinil)-2-(4- metoksibenzilidin)malonat",
+  "ec_no": "414-840-4",
+  "index_no": "607-396-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS09"
+    ],
+    "h_codes": [
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

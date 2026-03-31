@@ -1,0 +1,58 @@
+{
+  "cas": "7778-54-3",
+  "name": "calcium hypochlorite",
+  "name_tr": "Kalsiyum hipoklorit",
+  "ec_no": "231-908-7",
+  "index_no": "017-012-00-7",
+  "atp": "",
+  "notes": [
+    "T"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Ox. Sol. 2",
+        "h_code": "H272"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H314",
+        "class": "Skin Corr. 1B",
+        "c_min": 5.0,
+        "c_max": null
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS03",
+      "GHS05",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H272",
+      "H302",
+      "H314",
+      "H400"
+    ],
+    "suppl_h": [
+      "EUH031"
+    ]
+  }
+}

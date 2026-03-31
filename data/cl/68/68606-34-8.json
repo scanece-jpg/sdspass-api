@@ -1,0 +1,44 @@
+{
+  "cas": "68606-34-8",
+  "name": "Gases (petroleum), depropanizer bottoms fractionation off; Petroleum gas; [A complex combination of hydrocarbons obtained from the fractionation of depropanizer bottoms. It consists predominantly of butane, isobutane and butadiene.]",
+  "name_tr": "Gazlar (petrol), propan giderici alt kısım ayrımsal damıtması çalışmazken; Petrol gazı; [Propan gidericinin alt kısım fraksiyonundan elde edilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla bütan, izobütan ve bütadienden oluşur.]",
+  "ec_no": "271-742-2",
+  "index_no": "649-096-00-1",
+  "atp": "",
+  "notes": [
+    "K",
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H220"
+      },
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS04",
+      "GHS02",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

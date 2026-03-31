@@ -1,0 +1,27 @@
+{
+  "cas": "69430-40-6",
+  "name": "α-trimethylsilanyl-ω- trimethylsiloxypoly[oxy(methyl- 3-(2-(2- methoxypropoxy)propoxy)propy lsilanediyl]-co- oxy(dimethylsilane))",
+  "name_tr": "α-trimetilsilanil-ω- trimetilsiloksipoli[oksi(metil-3- (2-(2- metoksipropoksi)propoksi)propil silandiil]- ko-oksi(dimetilsilan))",
+  "ec_no": "406-420-4",
+  "index_no": "014-015-00-5",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

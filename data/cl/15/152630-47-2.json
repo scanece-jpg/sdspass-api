@@ -1,0 +1,46 @@
+{
+  "cas": "152630-47-2",
+  "name": "1-(3-cyclopentyloxy-4- methoxyphenyl)-4-oxo- cyclohexanecarbonitrile",
+  "name_tr": "1-(3-siklopentiloksi-4- metoksifenil)-4-okso- siklohekzankarbonitril",
+  "ec_no": "427-450-4",
+  "index_no": "608-048-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H373",
+      "H317",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

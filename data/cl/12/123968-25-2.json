@@ -1,0 +1,27 @@
+{
+  "cas": "123968-25-2",
+  "name": "2-(1-(2-hydroxy-3,5-di-tert- pentyl-phenyl)ethyl)-4,6-di-tert- pentylphenyl acrylate",
+  "name_tr": "2-(1-(2-hidroksi-3,5-di-ter- pentil-fenil)etil)-4,6-di-ter- pentilfenil-akrilat",
+  "ec_no": "413-850-6",
+  "index_no": "607-323-00-1",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

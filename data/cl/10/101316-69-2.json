@@ -1,0 +1,31 @@
+{
+  "cas": "101316-69-2",
+  "name": "Lubricating oils (petroleum), C >25, solvent-extd., deasphalted, dewaxed, hydrogenated; Baseoil - unspecified; [A complex combination of hydrocarbons obtained by solvent extraction and hydrogenation of vacuum distillation residues. It consists predominantly of hydrocarbons having carbon numbers predominantly greater than C25 and produces a finished oil with a viscosity in the order of 32cSt to 37cSt at 100 °C (212 °F).]",
+  "name_tr": "Yağlama yağları (petrol), C >25, çözücü ile özüt., asfaltı alınmış, cilası alınmış, hidrojenlenmiş; bazyağlar - tanımlanmamış; [Vakumlu damıtma kalıntılarının çözücüyle özütlenmesi ve hidrojenlenmesinden elde edilen kompleks hidrokarbon bileşimi. Ağırlıklı olarak, karbon sayıları genelde C25 ‘den büyük olan hidrokarbonlardan oluşur ve viskozitesi 100oC’de (212oF) 32cSt ile 37cSt arasında olan son yağ oluşturur.]",
+  "ec_no": "309-874-0",
+  "index_no": "649-527-00-3",
+  "atp": "",
+  "notes": [
+    "L"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

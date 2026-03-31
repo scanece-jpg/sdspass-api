@@ -1,0 +1,29 @@
+{
+  "cas": "92511-22-3",
+  "name": "disodium N-carboxymethyl-N- (2-(2- hydroxyethoxy)ethyl)glycinate",
+  "name_tr": "disodyum-N-karboksimetil-N- (2-(2-hidroksietoksi)etil)glisinat",
+  "ec_no": "402-360-8",
+  "index_no": "607-192-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H318"
+    ],
+    "suppl_h": []
+  }
+}

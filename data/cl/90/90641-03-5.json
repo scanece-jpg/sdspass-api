@@ -1,0 +1,36 @@
+{
+  "cas": "90641-03-5",
+  "name": "Extract residues (coal), light oil alk., indene naphtha fraction; Light Oil Extract Residues, high boiling; [The distillate from aromatic hydrocarbons, coumarone, naphthalene and indene rich prefractionator bottoms or washed carbolic oils, having an approximate boiling range of 155°C to 180°C (311°F to 356°F). Composed primarily of indene, indan and trimethylbenzenes.]",
+  "name_tr": "özüt artıklar (kömür), hafif yağ alkalin, inden nafta fraksiyon;hafif yağ özüt artıklar, yüksek sıcaklıkta kaynayan; [Aromatik hidrokarbonların, kumarin, naftalin ve inden bakımından zengin ön fraksiyonlayıcı çökeltilerin veya yıkanmış karbolik yağın yaklaşık 155oC ila 180oC aralığında (311oF ila 356 oF) kaynayan damıtığı. Büyük ölçüde inden, indan ve trimetilbenzenlerden oluşur.]",
+  "ec_no": "292-626-8",
+  "index_no": "648-019-00-9",
+  "atp": "",
+  "notes": [
+    "J"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "cas": "999-81-5",
+  "name": "chlormequat chloride (ISO); 2- chloroethyltrimethylammonium chloride",
+  "name_tr": "Kloromekuat klorür (ISO); 2- kloroetiltrimetilamonyumklorür",
+  "ec_no": "213-666-4",
+  "index_no": "007-003-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H312",
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

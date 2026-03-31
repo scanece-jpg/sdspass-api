@@ -1,0 +1,54 @@
+{
+  "cas": "1166-46-7",
+  "name": "(1,3,4,5,6,7-hexahydro-1,3- dioxo-2H-isoindol-2-yl)methyl (1R-trans)-2,2-dimethyl-3-(2- methylprop-1- enyl)cyclopropanecarboxylate",
+  "name_tr": "(1,3,4,5,6,7-hekzahidro-1,3- diokzo-2H-isoindol-2-il)metil (1R-trans)-2,2-dimetil-3-(2- metilprop-1- enil)siklopropankarboksilat",
+  "ec_no": "214-619-0",
+  "index_no": "607-728-00-3",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT SE 2",
+        "h_code": "H371"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "(sinir"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "sistemi)"
+      }
+    ],
+    "m_factors": {
+      "acute": 100,
+      "chronic": 100
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H351",
+      "H302",
+      "H371",
+      "(sinir",
+      "sistemi)"
+    ],
+    "suppl_h": []
+  }
+}

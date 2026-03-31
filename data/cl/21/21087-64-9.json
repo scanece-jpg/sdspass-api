@@ -1,0 +1,43 @@
+{
+  "cas": "21087-64-9",
+  "name": "metribuzin (ISO); 4-amino-6-tert-butyl-3- methylthio-1,2,4-triazin-5(4H)- one; 4-amino-4,5-dihydro-6-(1,1- dimethylethyl)-3-methylthio-",
+  "name_tr": "metribüzin (ISO); 4-amino-6-tert-bütil-3-metiltiyo- 1,2,4-triazin-5(4H)-on ; 4-amino-4,5-dihidro-6-(1,1- dimetiletil)-3-metiltiyo-1,2,4- triazin-5-on",
+  "ec_no": "244-209-7",
+  "index_no": "606-034-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 10,
+      "chronic": 10
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "cas": "75-52-5",
+  "name": "nitromethane",
+  "name_tr": "nitrometan",
+  "ec_no": "200-876-6",
+  "index_no": "609-036-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS02",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H226",
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

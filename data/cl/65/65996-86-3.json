@@ -1,0 +1,37 @@
+{
+  "cas": "65996-86-3",
+  "name": "Extract oils (coal), tar base; Acid Extract; [The extract from coal tar oil alkaline extract residue produced by an acidic wash such as aqueous sulfuric acid after distillation to remove naphthalene. Composed primarily of the acid salts of various aromatic nitrogen bases including pyridine, quinoline, and their alkyl derivatives.]",
+  "name_tr": "Özüt yağları (kömür), zift bazı; asit özütü; [Damıtmadan sonra naftalini uzaklaştırmak için sulu sülfürik asit vb. bir asitli yıkama ile üretilen kömür zifti yağı baz özütü artığının özütü. Esas olarak piridin, kinolin ve bunların alkil türevleri gibi çeşitli aromatik nitrojen bazlarından oluşur.]",
+  "ec_no": "266-020-9",
+  "index_no": "648-140-00-7",
+  "atp": "",
+  "notes": [
+    "J",
+    "M"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

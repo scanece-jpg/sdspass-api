@@ -1,0 +1,29 @@
+{
+  "cas": "90669-75-3",
+  "name": "Residues (petroleum), steam- cracked, distillates; Heavy Fuel oil; [A complex combination of hydrocarbons obtained during the production of refined petroleum tar by the distillation of steam cracked tar. It consists predominantly of aromatic and other hydrocarbons and organic sulfur compounds.]",
+  "name_tr": "Artıklar (petrol), buhar ile parçalanmış, damıtıklar; Ağır fuel oil; [Buharla parçalanmış katranın damıtılması ile, rafine petrol katranının üretilmesi sırasında elde edilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla, aromatik ve diğer hidrokarbonları ve organic sülfür bileşiklerini içerir.]",
+  "ec_no": "292-657-7",
+  "index_no": "649-040-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

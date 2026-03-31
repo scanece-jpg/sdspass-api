@@ -1,0 +1,46 @@
+{
+  "cas": "133636-82-5",
+  "name": "(+)-(1S,2S,3S,5R)-2,6,6- trimethylbicyclo[3.1.1]heptane- 3-spiro-1'-(cyclohex-2'-en-4'- one)",
+  "name_tr": "(+)-(1S,2S,3S,5R)-2,6,6- trimetilbisiklo[3.1.1]heptan-3- spiro-1'-(siklohek-2'-zen-4'-on)",
+  "ec_no": "430-460-1",
+  "index_no": "606-121-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H314",
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

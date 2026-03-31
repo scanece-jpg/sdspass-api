@@ -1,0 +1,44 @@
+{
+  "cas": "68477-75-8",
+  "name": "Gases (petroleum), catalytic cracker, C1-5-rich; Petroleum gas; [A complex combination of hydrocarbons produced by the distillation of products from a catalytic cracking process. It consists of aliphatic hydrocarbons having carbon numbers in the range of C1 through C6, predominantly C1 through C5.]",
+  "name_tr": "Gazlar (petrol), katalitik parçalama ünitesi, C1-5-zengin; Petrol gazı; [Katalitik parçalama prosesi ürünlerinin damıtılması ile üretilen hidrokarbonların kompleks bileşimi. C1 ila C6 aralığında, büyük çoğunlukla C1 ila C5, karbon sayısına sahip alifatik hidrokarbonlardan oluşur.]",
+  "ec_no": "270-757-1",
+  "index_no": "649-064-00-7",
+  "atp": "",
+  "notes": [
+    "K",
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H220"
+      },
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS04",
+      "GHS02",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

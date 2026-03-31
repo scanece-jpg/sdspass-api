@@ -1,0 +1,29 @@
+{
+  "cas": "80-08-0",
+  "name": "dapsone; 4,4'-diamino diphenyl sulfone",
+  "name_tr": "dapson; 4,4'-diaminodifenilsülfon;",
+  "ec_no": "201-248-4",
+  "index_no": "612-084-00-1",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

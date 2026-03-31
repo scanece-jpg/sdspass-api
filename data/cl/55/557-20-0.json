@@ -1,0 +1,53 @@
+{
+  "cas": "557-20-0",
+  "name": "dimethylzinc; [1] diethylzinc [2]",
+  "name_tr": "Dimetilçinko [1] Dietilçinko [2]",
+  "ec_no": "208-884-1",
+  "index_no": "030-004-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Pyr. Liq. 1",
+        "h_code": "H250"
+      },
+      {
+        "class": "Water-react. 1",
+        "h_code": "H260"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS05",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H250",
+      "H260",
+      "H314",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": [
+      "EUH014"
+    ]
+  }
+}

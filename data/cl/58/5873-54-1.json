@@ -1,0 +1,93 @@
+{
+  "cas": "5873-54-1",
+  "name": "4,4'-methylenediphenyl diisocyanate; diphenylmethane-4,4'- diisocyanate; [1] 2,2'-methylenediphenyl diisocyanate; diphenylmethane-2,2'- diisocyanate; [2] o-(p-isocyanatobenzyl)phenyl isocyanate; diphenylmethane-2,4'- diisocyanate; [3] methylenediphenyl diisocyanate [4]",
+  "name_tr": "4,4'metilendifenil-diizosiyanat; difenilmetan-4,4' –diizosiyanat [1] 2,2'-metilendifenil diizosiyanat difenilmetan-2,2'-diizosiyanat; [2] ; o-(p-izosiyanatobenzil)fenil izosiyanat; difenilmetan-2,4'-diizosiyanat; [3] metilendifenil diizosiyanat[4]",
+  "ec_no": "202-966-0",
+  "index_no": "615-005-00-9",
+  "atp": "",
+  "notes": [
+    "C",
+    "2"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Resp. Sens. 1",
+        "h_code": "H334"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H319",
+        "class": "Eye Irrit. 2",
+        "c_min": 5.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H315",
+        "class": "Skin Irrit. 2",
+        "c_min": 5.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H334",
+        "class": "Resp. Sens. 1",
+        "c_min": 0.1,
+        "c_max": null
+      },
+      {
+        "h_code": "H335",
+        "class": "STOT SE 3",
+        "c_min": 5.0,
+        "c_max": null
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H351",
+      "H332",
+      "H373",
+      "H319",
+      "H335",
+      "H315",
+      "H334",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

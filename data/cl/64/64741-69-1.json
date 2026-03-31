@@ -1,0 +1,41 @@
+{
+  "cas": "64741-69-1",
+  "name": "Naphtha (petroleum), light hydrocracked; Low boiling naphtha - unspecified; [A complex combination of hydrocarbons from distillation of the products from a hydrocracking process. It consists predominantly of saturated hydrocarbons having carbon numbers predominantly in the range of C4 through C10, and boiling in the range of approximately -20°C to 180°C (- 4°F to 356°F).]",
+  "name_tr": "Nafta (petrol), hafif hidrojenle parçalanmış; düşük kaynama noktalı nafta – tanımlanmamış; [Hidrojenle parçalama işlemi ürünlerinin damıtılmasından elde edilen kompleks hidrokarbon bileşimi. Ağırlıklı olarak, karbon sayıları büyük çoğunlukla C4 ile C10 aralığında olan ve yaklaşık eksi 20°C ila 180°C (-4°F ila 356°F) aralığında kaynayan doymuş hidrokarbonlardan oluşur.]",
+  "ec_no": "265-071-4",
+  "index_no": "649-348-00-0",
+  "atp": "",
+  "notes": [
+    "P"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

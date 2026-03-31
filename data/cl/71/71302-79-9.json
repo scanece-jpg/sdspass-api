@@ -1,0 +1,29 @@
+{
+  "cas": "71302-79-9",
+  "name": "reaction mass of: 2-ethylhexyl linolenate, linoleate and oleate; 2-ethylhexyl epoxyoleate; 2-ethylhexyl diepoxylinoleate; 2-ethylhexyl triepoxylinolenate",
+  "name_tr": "tepkime kütlesi: 2-etilheksil linolenat, linoleat ve oleat; 2-etilheksil epoksioleat; 2-etilheksil diepoksilinoleat; 2-etilhekzil triepoksilinolenat",
+  "ec_no": "414-890-7",
+  "index_no": "607-489-00-5",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

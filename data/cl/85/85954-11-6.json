@@ -1,0 +1,35 @@
+{
+  "cas": "85954-11-6",
+  "name": "2,2'-((3,3',5,5'-tetramethyl-(1,1'- biphenyl)-4,4'-diyl)- bis(oxymethylene))-bis-oxirane",
+  "name_tr": "2,2'-((3,3',5,5'-tetrametil-(1,1'- bifenil)-4,4'-dil)- bis(oksimetilen))-bis-oksiran",
+  "ec_no": "413-900-7",
+  "index_no": "604-055-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H351",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

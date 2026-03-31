@@ -1,0 +1,27 @@
+{
+  "cas": "158585-86-5",
+  "name": "ethyl 6,8-difluoro-1- (formylmethylamino)-1,4- dihydro-7-(4-methyl)piperazin- 1-yl)-4-oxo-quinoline-3- carboxylate",
+  "name_tr": "etil 6,8-difloro-1- (formilmetilamino)-1,4-dihidro- 7-(4-metil)piperazin-1-il)-4- okso-kinolin-3-karboksilat",
+  "ec_no": "427-490-2",
+  "index_no": "607-544-00-3",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

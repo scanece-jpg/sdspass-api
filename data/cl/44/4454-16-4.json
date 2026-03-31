@@ -1,0 +1,20 @@
+{
+  "cas": "4454-16-4",
+  "name": "nickel(II) trifluoroacetate; [1] nickel(II) propionate; [2] nickel bis(benzenesulfonate); [3] nickel(II) hydrogen citrate; [4] citric acid, ammonium nickel salt; [5] citric acid, nickel salt; [6] nickel bis(2-ethylhexanoate); [7] 2-ethylhexanoic acid, nickel salt; [8] dimethylhexanoic acid nickel salt; [9] nickel(II) isooctanoate; [10] nickel isooctanoate; [11] nickel bis(isononanoate); [12] nickel(II) neononanoate; [13] nickel(II) isodecanoate; [14] nickel(II) neodecanoate; [15] neodecanoic acid, nickel salt; [16] nickel(II) neoundecanoate; [17] bis(d-gluconato-O1,O2)nickel; [18] nickel 3,5-bis(tert-butyl)-4- hydroxybenzoate (1:2); [19] nickel(II) palmitate; [20] (2-ethylhexanoato-O)(isononanoato- O)nickel; [21] (isononanoato-O)(isooctanoato- O)nickel; [22] (isooctanoato-O)(neodecanoato- O)nickel; [23] (2-ethylhexanoato-O)(isodecanoato- O)nickel; [24] (2-ethylhexanoato-O)(neodecanoato- O)nickel; [25] (isodecanoato-O)(isooctanoato- O)nickel; [26] (isodecanoato-O)(isononanoato- O)nickel; [27] (isononanoato-O)(neodecanoato- O)nickel; [28] fatty acids, C6-19-branched, nickel salts; [29] fatty acids, C8-18 and C18-unsaturated, nickel salts; [30] 2,7-naphthalenedisulfonic acid, nickel(II) salt; [31]",
+  "name_tr": "nikel(II) trifloroasetat; [1] nikel(II) propiyonat; [2] nikel bis(benzensülfonat); [3] nikel(II) hidrojen sitrat; [4] sitrik asit, amonyum nikel tuzu; [5] sitrik asit, nikel tuzu; [6] nikel bis(2-etilhekzanoat); [7] 2-etilhekzanoik asit, nikel tuzu; [8] dimetilhekzanoik asit nikel tuzu; [9] nikel(II) izooktanoat; [10] nikel izooktanoat; [11] nikel bis(izononanoat); [12] nikel(II) neononanoat; 13] nikel(II) izodekanoat; [14] nikel(II) neodekanoat; [15] neodekanoik asit, nikel tuzu; [16] nikel(II) neoundekanoat; [17] bis(d-glukonato-O1,O2)nikel; [18] nikel 3,5-bis(ter-bütil)-4- hidroksibenzoat (1:2); [19] nikel(II) palmitat; [20] (2-etilhekzanoato-O)(izononanoato- O)nikel; [21] (izononanoato-O)(izooktanoato- O)nikel; [22] (izooktanoato-O)(neodekanoato- O)nikel; [23] (2-etilhekzanoato-O)(izodekanoato- O)nikel; [24] (2-etilhekzanoato-O)(neodekanoato- O)nikel; [25] (izodekanoato-O)(izooktanoato- O)nikel; [26] (izodekanoato-O)(izononanoato- O)nikel; [27] (izononanoato-O)(neodekanoato- O)nikel; [28] yağ asitleri, C6-19-dallanmış, nikel tuzları; [29] yağ asitleri, C8-18 ve C18-doymamış, nikel tuzları; [30] 2,7-naftalindisülfonik asit, nikel(II) tuz; [31]",
+  "ec_no": "240 235 [1] 222 102 6 [2] 254 642 3 [3] 242 533 3 [4] 242 161 1 [5] 245 119 0 [6] 224 699 9 [7] 231 480 1 [8] 301 323 2 [9] 249 555 2 [10] 248 585 3 [11] 284 349 6 [12] 300 094 6 [13] 287 468 1 [14] 287 469 7 [15] 257 447 1 [16] 300 093 0 [17] 276 205 6 [18] 258 051 1 [19] 237 138 8 [20] 287 470 2 [21] 287 471 8 [22] 284 347 5 [23] 284 351 7 [24] 285 698 7 [25] 285 909 2 [26] 284 348 0 [27] 287 592 6 [28] 294 302 1 [29] 283 972 0 [30] - [31]",
+  "index_no": "028-054-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "cas": "102089-33-8",
+  "name": "4-[3- (diethoxymethylsilylpropoxy)- 2,2,6,6-tetramethyl]piperidine",
+  "name_tr": "4-[3-(dietoksimetilsilil- propoksi)-2,2,6,6-tetrametil- piperidin",
+  "ec_no": "411-400-3",
+  "index_no": "014-025-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS05",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302",
+      "H373",
+      "H315",
+      "H318",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "cas": "31895-22-4",
+  "name": "bis(1,2,3- trithiacyclohexyldimethylammo nium) oxalate; thiocyclam-oxalate",
+  "name_tr": "bis(1,2,3- tritiyasiklohekzildimetilamonyu m)oksalat; tiyosiklam-oksalat",
+  "ec_no": "250-859-2",
+  "index_no": "607-170-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H312",
+      "H302",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

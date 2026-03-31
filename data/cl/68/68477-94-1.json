@@ -1,0 +1,44 @@
+{
+  "cas": "68477-94-1",
+  "name": "Gases (petroleum), gas recovery plant depropanizer overheads; Petroleum gas; [A complex combination of hydrocarbons obtained by fractionation of miscellaneous hydrocarbon streams. It consists predominantly of hydrocarbons having carbon numbers in the range of C1 through C4, predominantly propane.]",
+  "name_tr": "Gazlar (petrol), Gaz geri kazanım birimi propan giderici üstleri; Petrol gazı; [Çeşitli hidrokarbon buharlarının ayrımsal damıtılması ile elde edilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla, C1 ila C4 aralığında karbon sayısına sahip hidrokarbonlardan oluşur, çoğunlukla propan. ]",
+  "ec_no": "270-777-0",
+  "index_no": "649-073-00-6",
+  "atp": "",
+  "notes": [
+    "K",
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H220"
+      },
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS04",
+      "GHS02",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

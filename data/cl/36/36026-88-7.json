@@ -1,0 +1,55 @@
+{
+  "cas": "36026-88-7",
+  "name": "nickel hydrogen phosphate; [1] nickel bis(dihydrogen phosphate); [2] trinickel bis(orthophosphate); [3] dinickel diphosphate; [4] nickel bis(phosphinate); [5] nickel phosphinate; [6] phosphoric acid, calcium nickel salt; [7] diphosphoric acid, nickel(II) salt [8]",
+  "name_tr": "nikel hidrojen fosfat, [1] nikel bis(dihidrojenfosfat); [2] trinikel bis(ortofosfat);[3] dinikel difosfat; [4] nikel bis(fosfinat); [5] nikel fosfinat; [6] fosforik asit, kalsiyum nikel tuzu; [7] difosforik asit nikel (II) tuzu [8]",
+  "ec_no": "238-278-2",
+  "index_no": "028-032-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1A",
+        "h_code": "H350i"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
+      },
+      {
+        "class": "Resp. Sens. 1",
+        "h_code": "H334"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H350i",
+      "H372",
+      "H334",
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

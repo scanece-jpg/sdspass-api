@@ -1,0 +1,29 @@
+{
+  "cas": "68527-18-4",
+  "name": "Gas oils (petroleum), steam- cracked; Cracked gasoil; [A complex combination of hydrocarbons produced by distillation of the products from a steam cracking process. It consists of hydrocarbons having carbon numbers predominantly greater than C9 and boiling in the range of from approximately 205 °C to 400 °C (400 °F to 752 °F).]",
+  "name_tr": "Gazyağları (petrol), buhar ile parçalanmış; parçalanmış gaz yağı; [Buharla parçalama işlemi ürünlerinin damıtılması ile üretilen kompleks hidrokarbon bileşimi. Karbon sayıları çoğunlukla C9’dan büyük olan ve yaklaşık 205°C ila 400°C (400°F-752°F) aralığında kaynayan hidrokarbonlardan oluşur.]",
+  "ec_no": "271-260-2",
+  "index_no": "649-442-00-1",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

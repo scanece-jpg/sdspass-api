@@ -1,0 +1,40 @@
+{
+  "cas": "61807-67-8",
+  "name": "(2- (aminomethyl)phenyl)acetylchlo ride hydrochloride",
+  "name_tr": "(2-(aminometil)fenil)asetilklorür hidroklorür",
+  "ec_no": "417-410-4",
+  "index_no": "017-015-00-3",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1A",
+        "h_code": "H314"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302",
+      "H314",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

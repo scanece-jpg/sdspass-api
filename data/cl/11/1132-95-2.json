@@ -1,0 +1,29 @@
+{
+  "cas": "1132-95-2",
+  "name": "1,1-diisopropoxycyclohexane",
+  "name_tr": "1,1-diizopropoksisiklohekzan",
+  "ec_no": "413-740-8",
+  "index_no": "603-214-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

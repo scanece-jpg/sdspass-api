@@ -1,0 +1,40 @@
+{
+  "cas": "57018-04-9",
+  "name": "tolclofos-methyl (ISO); O-(2,6-dichloro-p-tolyl)-O,O- dimethyl thiophosphate",
+  "name_tr": "tolclofos-metil (ISO); O-(2,6-dikloro-p-tolil)-O,O- dimetil tiyofosfat",
+  "ec_no": "260-515-3",
+  "index_no": "015-113-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

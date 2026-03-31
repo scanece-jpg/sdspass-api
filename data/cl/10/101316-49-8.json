@@ -1,0 +1,31 @@
+{
+  "cas": "101316-49-8",
+  "name": "Distillates (coal tar), pitch; Heavy Anthracene Oil; [The oil obtained from condensation of the vapors from the heat treatment of pitch. Composed primarily of two- to four-ring aromatic compounds boiling in the range of 200 °C to greater than 400 °C (392 °F to greater than 752 °F).]",
+  "name_tr": "Damıtıklar (kömür zifti), ziftli; ağır antrasen yağı; [Ziftin ısı ile muamele edilmesinden oluşan buharların yoğunlaştırılmasından elde edilen yağ. Esasen yaklaşık 200oC ile 400oC ve daha üstü (392oF-752oF ve daha üzeri) sıcaklıkta kaynayan iki-dört halkalı aromatik bileşiklerden oluşur.]",
+  "ec_no": "309-855-7",
+  "index_no": "648-049-00-2",
+  "atp": "",
+  "notes": [
+    "M"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

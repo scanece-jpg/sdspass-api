@@ -1,0 +1,29 @@
+{
+  "cas": "53863-99-3",
+  "name": "bis(1,1-dimethyl-2- propynyloxy)dimethylsilane",
+  "name_tr": "bis(1,1-dimetil-2- propiniloksi)dimetilsilan",
+  "ec_no": "414-960-7",
+  "index_no": "014-020-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H332"
+    ],
+    "suppl_h": []
+  }
+}

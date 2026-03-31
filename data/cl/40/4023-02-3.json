@@ -1,0 +1,51 @@
+{
+  "cas": "4023-02-3",
+  "name": "pyrazole-1-carboxamidine monohydrochloride",
+  "name_tr": "pirazol-1-karboksamidin monohidroklorür",
+  "ec_no": "429-520-1",
+  "index_no": "613-261-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302",
+      "H373",
+      "H318",
+      "H317",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "cas": "97488-73-8",
+  "name": "Distillates (petroleum), hydrocracked solvent-refined light; Baseoil - unspecified; [A complex combination of hydrocarbons obtained by the solvent treatment of a distillate from hydrocracked petroleum distillates. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C18 through C27 and boiling in the range of approximately 370 °C to 450 °C (698 °F to 842 °F.]",
+  "name_tr": "Damıtıklar (petrol), hidrojenle parçalanmış çözücü ile rafine edilmiş hafif ; bazyağlar – tanımlanmamış [Hidrojenle parçalanmış petrol damıtığından damıtığın çözücü muamelesi ile elde edilen hidrokarbonların kompleks bileşimi. Genelde, ağırlıklı olarak C18 ila C27 aralığında karbon sayısına sahip ve yaklaşık 370°C ila 450°C (698°F ila 842°F) aralığında kaynayan hidrokarbonlardan oluşur.]",
+  "ec_no": "307-010-7",
+  "index_no": "649-512-00-1",
+  "atp": "",
+  "notes": [
+    "L"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

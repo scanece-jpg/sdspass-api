@@ -1,0 +1,27 @@
+{
+  "cas": "67299-45-0",
+  "name": "benzyl cis-4-ammonium-4'- toluenesulfonato-1- cyclohexanecarboxylate",
+  "name_tr": "benzil cis-4-amonyum-4'- toluensülfonato-1- siklohekzankarboksilat",
+  "ec_no": "426-070-6",
+  "index_no": "607-529-00-1",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

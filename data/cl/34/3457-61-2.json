@@ -1,0 +1,31 @@
+{
+  "cas": "3457-61-2",
+  "name": "tert-butyl α,α-dimethylbenzyl peroxide",
+  "name_tr": "ter-bütil-α,α- dimetilbenzilperoksit",
+  "ec_no": "222-389-8",
+  "index_no": "617-007-00-5",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H242"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS02",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H242"
+    ],
+    "suppl_h": []
+  }
+}

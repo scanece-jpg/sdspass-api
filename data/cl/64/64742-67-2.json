@@ -1,0 +1,31 @@
+{
+  "cas": "64742-67-2",
+  "name": "Foots oil (petroleum); Foots oil; [A complex combination of hydrocarbons obtained as the oil fraction from a solvent deoiling or a wax sweating process. It consists predominantly of branched chain hydrocarbons having carbon numbers predominantly in the range of C20 through C50.]",
+  "name_tr": "Petrol Tortu yağı; Tortu yağı [Çözücüyle yağsızlaştırma veya mumla terletme işleminden sonra bir yağ fraksiyonu olarak elde edilen kompleks hidrokarbon bileşimi. Büyük ölçüde, karbon sayıları genelde C20 ile C50 aralığında olan dallanmış hidrokarbon zincirlerinden oluşur.]",
+  "ec_no": "265-171-8",
+  "index_no": "649-549-00-3",
+  "atp": "",
+  "notes": [
+    "L"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

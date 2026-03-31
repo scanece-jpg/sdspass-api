@@ -1,0 +1,35 @@
+{
+  "cas": "108-94-1",
+  "name": "cyclohexanone",
+  "name_tr": "siklohekzanon",
+  "ec_no": "203-631-1",
+  "index_no": "606-010-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS02",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H226",
+      "H332"
+    ],
+    "suppl_h": []
+  }
+}

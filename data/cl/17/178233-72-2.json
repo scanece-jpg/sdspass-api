@@ -1,0 +1,51 @@
+{
+  "cas": "178233-72-2",
+  "name": "(4-(1-methylethyl)phenyl)-(4- methylphenyl)iodonium tetrakis(pentafluorophenyl)borat e (1-)",
+  "name_tr": "(4-(1-metiletil)fenil)-(4- metilfenil)iyodonyum tetrakis(pentaflorofenil)borat (1- )",
+  "ec_no": "422-960-3",
+  "index_no": "053-005-00-5",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H312",
+      "H302",
+      "H373",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

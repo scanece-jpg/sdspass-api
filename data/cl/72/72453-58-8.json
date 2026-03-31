@@ -1,0 +1,29 @@
+{
+  "cas": "72453-58-8",
+  "name": "6-anilino-1-benzoyl-4-(4-tert- pentylphenoxy)naphto[1,2,3- de]quinoline-2,7-(3H)-dione",
+  "name_tr": "6-anilino-1-benzil-4-(4-ter- pentilfenoksi)nafto[1,2,3- de]kinolin-2,7-(3H)-dion",
+  "ec_no": "412-480-2",
+  "index_no": "606-050-00-5",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [
+      "GHS09"
+    ],
+    "h_codes": [
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

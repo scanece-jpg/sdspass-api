@@ -1,0 +1,34 @@
+{
+  "cas": "112006-75-4",
+  "name": "2-aminosulfonyl-N,N- dimethylnicotinamide",
+  "name_tr": "2-aminosülfonil-N,N- dimetilnikotinamid",
+  "ec_no": "413-440-7",
+  "index_no": "616-088-00-4",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H317",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

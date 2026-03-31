@@ -1,0 +1,45 @@
+{
+  "cas": "9001-73-4",
+  "name": "papain",
+  "name_tr": "Papain",
+  "ec_no": "232-627-2",
+  "index_no": "647-007-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Resp. Sens. 1",
+        "h_code": "H334"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319",
+      "H335",
+      "H315",
+      "H334"
+    ],
+    "suppl_h": []
+  }
+}

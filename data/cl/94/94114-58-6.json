@@ -1,0 +1,29 @@
+{
+  "cas": "94114-58-6",
+  "name": "Fuels, jet aircraft, coal solvent extn., hydrocracked hydrogenated; [Jet engine fuel produced by hydrogenation of the middle distillate fraction of the products of hydrocracking of coal extract or solution produced by the liquid solvent extraction or supercritical gas extraction processes and boiling in the range of approximately 180 °C to 225 °C (356 °F to 473 °F). Composed primarily of hydrogenated two-ring hydrocarbons and their alkyl derivatives having carbon numbers predominantly in the range of C10 through C12.]",
+  "name_tr": "yakıtlar, jet uçakları, kömür çözücü ekstraksyionu., hidrojenle parçalanmış hidrojenlenmiş; [Kömür özütünün hidrojenle parçalanması ürünlerinin veye sıvı çözücü özütleme ile üretilen çözeltinin veya süperkritik gaz özütleme proseslerinden gelen orta damıtık fraksiyonunun hidrojenlenmesi ile üretilen ve yaklaşık 180oC ile 225 oC (356oF-473oF) arasında kaynayan jet motor yakıtı. Esas olarak hidrojenlenmiş iki halka hidrokarbonlardan ve bunların C10 ile C12 arası karbon sayılı alkil türevlerinden oluşur.]",
+  "ec_no": "302-694-3",
+  "index_no": "648-154-00-3",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H351"
+    ],
+    "suppl_h": []
+  }
+}

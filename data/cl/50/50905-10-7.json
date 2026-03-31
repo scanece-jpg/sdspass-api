@@ -1,0 +1,29 @@
+{
+  "cas": "50905-10-7",
+  "name": "(R,S)-2-butyloctanedioic acid",
+  "name_tr": "(R,S)-2-bütiloktandiyoik asit",
+  "ec_no": "431-210-4",
+  "index_no": "607-560-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H318"
+    ],
+    "suppl_h": []
+  }
+}

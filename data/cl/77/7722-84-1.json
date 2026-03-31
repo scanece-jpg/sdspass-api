@@ -1,0 +1,61 @@
+{
+  "cas": "7722-84-1",
+  "name": "hydrogen peroxide solution ... %",
+  "name_tr": "hidrojenperoksit çözeltisi ... %",
+  "ec_no": "231-765-0",
+  "index_no": "008-003-00-9",
+  "atp": "",
+  "notes": [
+    "B"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Ox. Liq. 1",
+        "h_code": "H271"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1A",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H271",
+        "class": "Ox. Liq. 1",
+        "c_min": 70.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H272",
+        "class": "Ox. Liq. 2",
+        "c_min": 50.0,
+        "c_max": 70.0
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS03",
+      "GHS05",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H271",
+      "H332",
+      "H302",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

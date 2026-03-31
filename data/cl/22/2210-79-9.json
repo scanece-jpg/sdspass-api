@@ -1,0 +1,48 @@
+{
+  "cas": "2210-79-9",
+  "name": "[(p-tolyloxy)methyl]oxirane; [1] [(m-tolyloxy)methyl]oxirane; [2] 2,3-epoxypropyl o-tolyl ether; [3] [(tolyloxy)methyl]oxirane; cresyl glycidyl ether [4]",
+  "name_tr": "[(p-toliloksi)metil]oksiran [1] [(m-toliloksi)metil]oksiran [2]; 2,3-epoksipropil o-tolil eter [3]; [(toliloksi)metil]oksiran; kresil glisidil eter [4]",
+  "ec_no": "218-574-8",
+  "index_no": "603-056-00-X",
+  "atp": "",
+  "notes": [
+    "C"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H341",
+      "H315",
+      "H317",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

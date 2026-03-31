@@ -1,0 +1,29 @@
+{
+  "cas": "193486-83-8",
+  "name": "2-(2-chloroacetoxy)ethyl 3-((4- (2,5-dichloro-4- fluorosulfonylphenylazo)-3- methylphenyl)ethylamino)propio nate",
+  "name_tr": "2-(2-kloroasetoksi)etil 3-((4- (2,5-dikloro-4- florosülfonilfenilazo)-3- metilfenil)etilamino)propiyonat",
+  "ec_no": "427-570-7",
+  "index_no": "611-149-00-1",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [
+      "GHS09"
+    ],
+    "h_codes": [
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

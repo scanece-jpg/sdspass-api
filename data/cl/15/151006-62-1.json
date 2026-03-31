@@ -1,0 +1,27 @@
+{
+  "cas": "151006-62-1",
+  "name": "branched hexatriacontane",
+  "name_tr": "dallanmış hekzatriakontan",
+  "ec_no": "417-070-7",
+  "index_no": "601-064-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

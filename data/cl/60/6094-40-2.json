@@ -1,0 +1,54 @@
+{
+  "cas": "6094-40-2",
+  "name": "piperazine hydrochloride; [1] piperazine dihydrochloride; [2] piperazine phosphate [3]",
+  "name_tr": "piperazin hidroklorür; [1] piperazin dihidroklorür; [2] piperazin fosfat; [3]",
+  "ec_no": "228-042-7",
+  "index_no": "612-241-00-4",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 2",
+        "h_code": "H361fd"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Resp. Sens. 1",
+        "h_code": "H334"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H361fd",
+      "H319",
+      "H315",
+      "H334",
+      "H317",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

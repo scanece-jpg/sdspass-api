@@ -1,0 +1,27 @@
+{
+  "cas": "579-66-8",
+  "name": "2,6-diethylaniline",
+  "name_tr": "2,6-dietilanilin",
+  "ec_no": "209-445-7",
+  "index_no": "612-106-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "cas": "104218-44-2",
+  "name": "1-(3-mesyloxy-5- trityloxymethyl-2-D- threofuryl)thymine",
+  "name_tr": "1-(3-mesiloksi-5-tritiloksi-2-D- treofüril)timin",
+  "ec_no": "406-360-9",
+  "index_no": "613-151-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,71 @@
+{
+  "cas": "110-65-6",
+  "name": "but-2-yne-1,4-diol; 2-butyne-1,4-diol",
+  "name_tr": "büt-2-in-1,4-diol; 2-bütin-1,4-diol",
+  "ec_no": "203-788-6",
+  "index_no": "603-076-00-9",
+  "atp": "",
+  "notes": [
+    "D"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H331"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H314",
+        "class": "Skin Corr. 1B",
+        "c_min": 50.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H319",
+        "class": "C < %50 Göz Tah. 2",
+        "c_min": 25.0,
+        "c_max": 50.0
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS05",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H314",
+      "H331",
+      "H301",
+      "H312",
+      "H373",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "cas": "68391-11-7",
+  "name": "Pyridine, alkyl derivs.; Crude Tar Bases; [The complex combination of polyalkylated pyridines derived from coal tar distillation or as high-boiling distillates approximately above 150°C (302°F) from the reaction of ammonia with acetaldehyde, formaldehyde or paraformaldehyde.]",
+  "name_tr": "piridin, alkil türevleri; ham zift bazları; [Kömür ziftinin damıtılmasından veya amonyak ile asetaldehit, formaldehit, veya paraformaldehit ‘in tepkimesinden 150oC (302oF) ve üzerinde damıtılan yüksek sıcaklıkta kaynayan damıtıklardan türetilmiş polialkillenmiş piridinlerin kompleks bileşimi]",
+  "ec_no": "269-929-9",
+  "index_no": "648-029-00-3",
+  "atp": "",
+  "notes": [
+    "J"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

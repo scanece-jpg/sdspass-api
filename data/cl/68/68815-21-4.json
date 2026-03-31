@@ -1,0 +1,37 @@
+{
+  "cas": "68815-21-4",
+  "name": "Tar acids, cresylic, sodium salts, caustic solns.; Alkaline Extract",
+  "name_tr": "zift asitler, kresilik, sodyum tuzları, kostik çözeltiler; baz özütü",
+  "ec_no": "272-361-4",
+  "index_no": "648-139-00-1",
+  "atp": "",
+  "notes": [
+    "J",
+    "M"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

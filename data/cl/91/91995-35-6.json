@@ -1,0 +1,36 @@
+{
+  "cas": "91995-35-6",
+  "name": "Distillates (coal), coal tar- residual pyrolysis oils, naphthalene oils; Redistillates; [The redistillate obtained from the fractional distillation of bituminous coal high temperature tar and pyrolysis residual oils and boiling in the range of approximately 190°C to 270°C (374°F to 518°F). Composed primarily of substituted dinuclear aromatics.]",
+  "name_tr": "Damıtıklar (kömür), kömür zifti- artığı piroliz yağları, naftalin yağları; Tekrar damıtılmış; [Bitümlü kömürün yüksek sıcaklıktaki zifti ve piroliz artık yağlarının yaklaşık 190 °C ile 270 °C (374°F- 518°F) arasında kaynayan türlerin ayrımsal damıtılmasından elde edilen damıtığı. Başlıca çift merkezli sübstütiye aromatik yapılardan oluşur.]",
+  "ec_no": "295-295-8",
+  "index_no": "648-037-00-7",
+  "atp": "",
+  "notes": [
+    "J"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

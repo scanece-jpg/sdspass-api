@@ -1,0 +1,36 @@
+{
+  "cas": "123-42-2",
+  "name": "4-hydroxy-4-methylpentan-2- one; diacetone alcohol",
+  "name_tr": "4-hidroksi-4-metilpentan-2-on; diaseton alkol",
+  "ec_no": "204-626-7",
+  "index_no": "603-016-00-1",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H319",
+        "class": "Eye Irrit. 2",
+        "c_min": 10.0,
+        "c_max": null
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "cas": "182235-14-9",
+  "name": "4,4'-(1,6- hexamethylenebis(formylimino)) bis(2,2,6,6-tetramethyl-1- oxylpiperidine)",
+  "name_tr": "4,4'-(1,6- hekzametilenbis(formilimino))bi s(2,2,6,6-tetrametil-1- oksilpiperidin)",
+  "ec_no": "427-350-0",
+  "index_no": "613-243-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [
+      "GHS09"
+    ],
+    "h_codes": [
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

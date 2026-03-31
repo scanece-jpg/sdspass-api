@@ -1,0 +1,41 @@
+{
+  "cas": "101316-67-0",
+  "name": "Hydrocarbons, C6-rich, hydrotreated light naphtha distillates, solvent-refined; Low boiling point modified naphtha; [A complex combination of hydrocarbons obtained by distillation of hydrotreated naphtha followed by solvent extraction. It consists predominantly of saturated hydrocarbons and boiling in the range of approximately 65°C to 70°C (149°F to 158°F).]",
+  "name_tr": "hidrokarbonlar, C6-zengin, hidrojenle muamele edilmiş hafif nafta damıtıkları, çözücü ile rafine edilmiş; düşük kaynama noktalı modifiye edilmiş nafta; [Hidrojenle muamele edilmiş naftanın damıtılması ve çözücü ile ekstraksyionunda elde edilen kompleks hidrokarbon karışımı. Ağırlıklı olarak 65oC ila70oC(149oF ila 158oF) arasında kaynayan doymuş hidrokarbonlardan oluşur.]",
+  "ec_no": "309-871-4",
+  "index_no": "649-288-00-5",
+  "atp": "",
+  "notes": [
+    "P"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

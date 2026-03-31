@@ -1,0 +1,76 @@
+{
+  "cas": "5625-90-1",
+  "name": "N,N′-methylenedimorpholine; N,N′-methylenebismorpholine; [formaldehyde released from N,N′-methylenebismorpholine]; [MBM]",
+  "name_tr": "N,N′-metilendimorfolin; N,N′-metilenbismorfolin; [N,N′-metilenbismorfolin’den salınan formaldehid]; [MBM]",
+  "ec_no": "227-062-3",
+  "index_no": "607-721-00-5",
+  "atp": "",
+  "notes": [
+    "8",
+    "9’"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "(mide-"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "bağırsak"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "yolu,"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H350",
+      "H341",
+      "H332",
+      "H312",
+      "H302",
+      "H373",
+      "(mide-",
+      "bağırsak",
+      "yolu,"
+    ],
+    "suppl_h": [
+      "EUH071"
+    ]
+  }
+}

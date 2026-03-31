@@ -1,0 +1,29 @@
+{
+  "cas": "84-75-3",
+  "name": "dihexyl phthalate",
+  "name_tr": "dihekzil fitalat",
+  "ec_no": "201-559-5",
+  "index_no": "607-702-00-1",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360FD"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H360FD"
+    ],
+    "suppl_h": []
+  }
+}

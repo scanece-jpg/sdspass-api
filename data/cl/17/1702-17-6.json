@@ -1,0 +1,29 @@
+{
+  "cas": "1702-17-6",
+  "name": "clopyralid (ISO); 3,6-dichloropyridine-2- carboxylic acid",
+  "name_tr": "klopiralid (ISO); 3,6-dikloropiridin-2-karboksilik asit",
+  "ec_no": "216-935-4",
+  "index_no": "607-231-00-1",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H318"
+    ],
+    "suppl_h": []
+  }
+}

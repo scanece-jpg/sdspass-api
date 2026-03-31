@@ -1,0 +1,29 @@
+{
+  "cas": "76508-02-6",
+  "name": "hexasodium 2,2'-vinylenebis((3- sulfonato-4,1- phenylene)imino(6-(N- cyanoethyl-N-(2- hydroxypropyl)amino)-1,3,5- triazine-4,2- diyl)imino)dibenzene-1,4- disulfonate",
+  "name_tr": "hekzasodyum-2,2'-vinilenbis((3- sülfonato-4,1-fenilen)imino(6- (N-siyanetil-N-(2- hidroksipropil)amino)-1,3,5- triazin-4,2-dil)imino)dibenzen- 1,4-disülfonat",
+  "ec_no": "405-280-1",
+  "index_no": "613-107-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319"
+    ],
+    "suppl_h": []
+  }
+}

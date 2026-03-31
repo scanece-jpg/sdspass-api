@@ -1,0 +1,31 @@
+{
+  "cas": "94114-46-2",
+  "name": "Residues (coal), liq. solvent extn.; [A cohesive powder composed of coal mineral matter and undissolved coal remaining after extraction of coal by a liquid solvent.]",
+  "name_tr": "artıklar (kömür), sıvı çözücü özüt; [Kömürün sıvı bir çözücü ile ekstraksiyonundan sonra kalan ve kömür mineral maddesi ve çözülmemiş kömürden oluşan yapışkan toz.]",
+  "ec_no": "302-681-2",
+  "index_no": "648-142-00-8",
+  "atp": "",
+  "notes": [
+    "M"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

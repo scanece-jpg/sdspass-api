@@ -1,0 +1,40 @@
+{
+  "cas": "79-34-5",
+  "name": "1,1,2,2-tetrachloroethane",
+  "name_tr": "1,1,2,2-tetrakloroetan",
+  "ec_no": "201-197-8",
+  "index_no": "602-015-00-3",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 1",
+        "h_code": "H310"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H330",
+      "H310",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

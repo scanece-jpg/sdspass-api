@@ -1,0 +1,36 @@
+{
+  "cas": "85536-17-0",
+  "name": "Solvent naphtha (coal), light; Light Oil Redistillate, low boiling",
+  "name_tr": "çözücü nafta (kömür),hafif; tekrar damıtılmış hafif yağ, düşük sıcaklıkta kaynayan",
+  "ec_no": "287-498-5",
+  "index_no": "648-006-00-8",
+  "atp": "",
+  "notes": [
+    "J"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

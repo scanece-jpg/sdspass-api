@@ -1,0 +1,34 @@
+{
+  "cas": "947-02-4",
+  "name": "phosfolan (ISO); diethyl 1,3-dithiolan-2- ylidenephosphoramidate",
+  "name_tr": "fosfolan (ISO); dietil-1,3-ditiyolan-2- ilidenfosforamidat",
+  "ec_no": "213-423-2",
+  "index_no": "015-111-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 1",
+        "h_code": "H310"
+      },
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H300"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06"
+    ],
+    "h_codes": [
+      "H310",
+      "H300"
+    ],
+    "suppl_h": []
+  }
+}

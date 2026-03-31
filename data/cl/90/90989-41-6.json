@@ -1,0 +1,36 @@
+{
+  "cas": "90989-41-6",
+  "name": "Aromatic hydrocarbons, C6-10, C8-rich; Light Oil Redistillate, low boiling",
+  "name_tr": "Aromatik hidrokarbonlar, C6-10, C8-zengin; tekrar damıtılmış hafif yağ, düşük sıcaklıkta kaynayan",
+  "ec_no": "292-697-5",
+  "index_no": "648-005-00-2",
+  "atp": "",
+  "notes": [
+    "J"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

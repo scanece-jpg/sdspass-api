@@ -1,0 +1,34 @@
+{
+  "cas": "112704-51-5",
+  "name": "(E)-3-(2-chlorophenyl)-2-(4- fluorophenyl)propenal",
+  "name_tr": "(E)-3-(2-klorofenil)-2-(4- florfenil)propenal",
+  "ec_no": "410-980-5",
+  "index_no": "606-063-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

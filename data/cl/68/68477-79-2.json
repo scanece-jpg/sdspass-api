@@ -1,0 +1,44 @@
+{
+  "cas": "68477-79-2",
+  "name": "Gases (petroleum), catalytic reformer, C1-4-rich; Petroleum gas; [A complex combination of hydrocarbons produced by distillation of products from a catalytic reforming process. It consists of hydrocarbons having carbon numbers in the range of C1 through C6, predominantly C1 through C4.]",
+  "name_tr": "Gazlar (petrol), katalitik dönüştürücü, C1-4-zengin; Petrol gazı; [Katalitik dönüşüm prosesi ürünlerinin damıtılması ile üretilenhidrokarbonların kompleks bir bileşimi. C1 ila C6 aralığında, büyük çoğunlukla C1 ila C4, karbon sayısına sahip hidrokarbonlardan oluşur.]",
+  "ec_no": "270-760-8",
+  "index_no": "649-066-00-8",
+  "atp": "",
+  "notes": [
+    "K",
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H220"
+      },
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS04",
+      "GHS02",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

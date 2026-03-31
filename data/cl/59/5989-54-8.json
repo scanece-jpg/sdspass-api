@@ -1,0 +1,53 @@
+{
+  "cas": "5989-54-8",
+  "name": "dipentene; limonene; [1] (R)-p-mentha-1,8-diene; d-limonene; [2] (S)-p-mentha-1,8-diene; l-limonene; [3] trans-1-methyl-4-(1- methylvinyl)cyclohexene; [4] (±)-1-methyl-4-(1- methylvinyl)cyclohexene [5]",
+  "name_tr": "dipenten; limonene; [1] (R)-p-menta-1,8-dien; d-limonen; [2] (S)-p-menta-1,8-dien; l-limonen; [3] trans-1-metil-4-(1- metilvinil)siklohekzen; [4] (±)-1-metil-4-(1- metilvinil)siklohekzen; [5]",
+  "ec_no": "205-341-0",
+  "index_no": "601-029-00-7",
+  "atp": "",
+  "notes": [
+    "C"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS02",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H226",
+      "H315",
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

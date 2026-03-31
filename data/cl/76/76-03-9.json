@@ -1,0 +1,47 @@
+{
+  "cas": "76-03-9",
+  "name": "TCA (ISO); trichloroacetic acid",
+  "name_tr": "TCA (ISO); trikloroasetik asit",
+  "ec_no": "200-927-2",
+  "index_no": "607-004-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Corr. 1A",
+        "h_code": "H314"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H335",
+        "class": "STOT SE 3",
+        "c_min": 1.0,
+        "c_max": null
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H314",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

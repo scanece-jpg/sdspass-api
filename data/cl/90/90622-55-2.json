@@ -1,0 +1,44 @@
+{
+  "cas": "90622-55-2",
+  "name": "Alkanes, C1-4, C3-rich; Petroleum gas",
+  "name_tr": "Alkanlar, C 1-4, C3-zengin; Petrol gazı",
+  "ec_no": "292-456-4",
+  "index_no": "649-114-00-8",
+  "atp": "",
+  "notes": [
+    "K",
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H220"
+      },
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS04",
+      "GHS02",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

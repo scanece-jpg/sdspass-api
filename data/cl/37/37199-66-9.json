@@ -1,0 +1,37 @@
+{
+  "cas": "37199-66-9",
+  "name": "potassium polysulphides",
+  "name_tr": "Potasyum polisülfürler",
+  "ec_no": "253-390-1",
+  "index_no": "016-007-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H314",
+      "H400"
+    ],
+    "suppl_h": [
+      "EUH031"
+    ]
+  }
+}

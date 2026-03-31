@@ -1,0 +1,50 @@
+{
+  "cas": "7719-09-7",
+  "name": "thionyl dichloride; thionyl chloride",
+  "name_tr": "Tiyoni ldiklorür; tiyonil klorür",
+  "ec_no": "231-748-8",
+  "index_no": "016-015-00-0",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1A",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H335",
+        "class": "STOT SE 3",
+        "c_min": 1.0,
+        "c_max": null
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H332",
+      "H302",
+      "H314"
+    ],
+    "suppl_h": [
+      "EUH014",
+      "EUH029"
+    ]
+  }
+}

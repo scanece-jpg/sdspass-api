@@ -1,0 +1,37 @@
+{
+  "cas": "91079-47-9",
+  "name": "Phenols, C9-11; Distillate Phenols",
+  "name_tr": "fenoller, C9-11; damıtık fenolleri",
+  "ec_no": "293-435-2",
+  "index_no": "648-127-00-6",
+  "atp": "",
+  "notes": [
+    "J",
+    "M"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

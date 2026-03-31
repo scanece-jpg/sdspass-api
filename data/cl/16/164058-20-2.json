@@ -1,0 +1,29 @@
+{
+  "cas": "164058-20-2",
+  "name": "(E)-5[(4- chlorophenyl)methylene]-2,2- dimethylcyclopentanone",
+  "name_tr": "(E)-5[(4-klorofenil)metilen]-2,2- dimetilsiklopentanon",
+  "ec_no": "410-440-9",
+  "index_no": "606-066-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [
+      "GHS09"
+    ],
+    "h_codes": [
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

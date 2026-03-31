@@ -1,0 +1,45 @@
+{
+  "cas": "4824-78-6",
+  "name": "bromophos-ethyl (ISO); O-4-bromo-2,5-dichlorophenyl O,O-diethyl phosphorothioate",
+  "name_tr": "bromofos-etil(ISO); O-4-bromo-2,5-diklorofenil O,O-dietil fosforotiyoat",
+  "ec_no": "225-399-0",
+  "index_no": "015-064-00-5",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H301",
+      "H312",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

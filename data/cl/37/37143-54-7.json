@@ -1,0 +1,46 @@
+{
+  "cas": "37143-54-7",
+  "name": "1-methoxy-2-propylamine",
+  "name_tr": "1-metoksi-2-propilamin",
+  "ec_no": "422-550-4",
+  "index_no": "612-217-00-3",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS05",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H225",
+      "H314",
+      "H302",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

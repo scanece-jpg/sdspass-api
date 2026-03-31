@@ -1,0 +1,39 @@
+{
+  "cas": "149591-38-8",
+  "name": "N,N'-dihexadecyl-N,N'-bis(2- hydroxyethyl)propanediamide",
+  "name_tr": "N,N'-dihekzadesil-N,N'-bis(2- hidroksietil)propandiamid",
+  "ec_no": "422-560-9",
+  "index_no": "616-143-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 2",
+        "h_code": "H361f"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H361f",
+      "H319",
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

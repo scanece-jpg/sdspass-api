@@ -1,0 +1,42 @@
+{
+  "cas": "21369-64-2",
+  "name": "n-hexyllithium",
+  "name_tr": "n-hekzillityum",
+  "ec_no": "404-950-0",
+  "index_no": "003-002-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Water-react. 1",
+        "h_code": "H260"
+      },
+      {
+        "class": "Pyr. Sol. 1",
+        "h_code": "H250"
+      },
+      {
+        "class": "Skin Corr. 1A",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H260",
+      "H250",
+      "H314"
+    ],
+    "suppl_h": [
+      "EUH014"
+    ]
+  }
+}

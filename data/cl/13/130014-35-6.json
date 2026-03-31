@@ -1,0 +1,39 @@
+{
+  "cas": "130014-35-6",
+  "name": "2,3-epoxypropyl-2- ethylcyclohexyl ether; ethylcyclohexylglycidyl ether",
+  "name_tr": "2,3-epoksipropil-2- etilsikloheksil eter; etilsikloheksilglisidil eter",
+  "ec_no": "",
+  "index_no": "603-068-00-5",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319",
+      "H315",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "cas": "140681-55-6",
+  "name": "1-chloromethyl-4-fluoro-1,4- diazoniabicyclo[2.2.2]octane bis(tetrafluoroborate)",
+  "name_tr": "1-klorometil-4-floro-1,4- diazoniabisiklo[2.2.2]oktan bis(tetrafloroborat)",
+  "ec_no": "414-380-4",
+  "index_no": "005-015-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302",
+      "H318",
+      "H317",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

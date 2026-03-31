@@ -1,0 +1,67 @@
+{
+  "cas": "104-12-1",
+  "name": "4-chlorophenylisocyanate",
+  "name_tr": "4-klorofenilizosiyanat",
+  "ec_no": "203-176-9",
+  "index_no": "615-044-00-1",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Resp. Sens. 1",
+        "h_code": "H334"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS05",
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H330",
+      "H302",
+      "H335",
+      "H315",
+      "H318",
+      "H334",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

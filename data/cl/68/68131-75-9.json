@@ -1,0 +1,44 @@
+{
+  "cas": "68131-75-9",
+  "name": "Gases (petroleum), C3-4; Petroleum gas; [A complex combination of hydrocarbons produced by distillation of products from the cracking of crude oil. It consists of hydrocarbons having carbon numbers in the range of C3 through C4, predominantly of propane and propylene, and boiling in the range of approximately -51°C to -1°C (- 60°F to 30°F.)]",
+  "name_tr": "Gazlar (petrol), C3-4; Petrol gazı; [Ham petrolün parçalanmasından elde edilen ürünlerin damıtılmasından üretilen hidrokarbonların kompleks bir bileşimi. C3 ila C4 aralığında karbon sayısına sahip, genelde propan ve propilen ve yaklaşık olarak -51°C ila -1°C (- 60°Fila 30°F.) aralığında kaynayanhidrokarbonlardan oluşur.]",
+  "ec_no": "268-629-5",
+  "index_no": "649-177-00-1",
+  "atp": "",
+  "notes": [
+    "K",
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H220"
+      },
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS04",
+      "GHS02",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

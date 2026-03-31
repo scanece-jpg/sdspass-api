@@ -1,0 +1,29 @@
+{
+  "cas": "590-28-3",
+  "name": "potassium cyanate",
+  "name_tr": "potasyum siyanat",
+  "ec_no": "209-676-3",
+  "index_no": "615-016-00-9",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "cas": "68476-55-1",
+  "name": "Hydrocarbons, C5-rich; Low boiling point naphtha - unspecified",
+  "name_tr": "hidrokarbonlar, C5-zengin; düşük kaynama noktalı nafta - tanımlanmamış",
+  "ec_no": "270-695-5",
+  "index_no": "649-402-00-3",
+  "atp": "",
+  "notes": [
+    "P"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

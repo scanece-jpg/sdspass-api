@@ -1,0 +1,39 @@
+{
+  "cas": "10596-22-2",
+  "name": "Tetraisopropan- 2yl(dichloromethane- diyl)bis(phosphonate)",
+  "name_tr": "Tetraizopropan- 2il(diklorometan- diil)bis(bisfosfonat)",
+  "ec_no": "430-630-5",
+  "index_no": "015-182-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302",
+      "H319",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

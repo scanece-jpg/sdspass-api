@@ -1,0 +1,41 @@
+{
+  "cas": "91995-50-5",
+  "name": "Distillates (petroleum), naphtha steam cracking-derived, hydrotreated light arom.; Low boiling point cat-cracked naphtha.; [A complex combination of hydrocarbons obtained by treating a light distillate from steam-cracked naphtha. It consists predominantly of aromatic hydrocarbons.]",
+  "name_tr": "Damıtıklar (petrol), nafta buhar parçalama-türevi, hidrojenle muamele edilmiş hafif aromatik; düşük kaynama noktalı katalitik olarak parçalanmış nafta; [Buharla parçalanmış naftanın hafif bir damıtığını işleyerek elde edilen kompleks hidrokarbon karışımı. Ağırlıklı olarak aromatik hidrokarbonlardan oluşur.]",
+  "ec_no": "295-311-3",
+  "index_no": "649-293-00-2",
+  "atp": "",
+  "notes": [
+    "P"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

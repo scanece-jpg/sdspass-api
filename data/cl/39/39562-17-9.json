@@ -1,0 +1,40 @@
+{
+  "cas": "39562-17-9",
+  "name": "methyl 2-(3- nitrobenzylidene)acetoacetate",
+  "name_tr": "metil-2-(3- nitrobenzilidin)asetoasetat",
+  "ec_no": "405-270-7",
+  "index_no": "607-224-00-3",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

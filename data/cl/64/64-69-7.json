@@ -1,0 +1,35 @@
+{
+  "cas": "64-69-7",
+  "name": "iodoacetic acid",
+  "name_tr": "iyodoasetikasit",
+  "ec_no": "200-590-1",
+  "index_no": "607-068-00-6",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
+      },
+      {
+        "class": "Skin Corr. 1A",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H301",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

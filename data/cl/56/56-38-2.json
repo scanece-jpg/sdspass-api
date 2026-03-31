@@ -1,0 +1,59 @@
+{
+  "cas": "56-38-2",
+  "name": "parathion (ISO); O,O-diethyl O-4-nitrophenyl phosphorothioate",
+  "name_tr": "paratiyon (ISO); O,O-dietil-O-4-nitrofenil fosforotiyoat",
+  "ec_no": "200-271-7",
+  "index_no": "015-034-00-1",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H300"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H311"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 100,
+      "chronic": 100
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H330",
+      "H300",
+      "H311",
+      "H372",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

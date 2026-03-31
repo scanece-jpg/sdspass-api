@@ -1,0 +1,40 @@
+{
+  "cas": "127-19-5",
+  "name": "N,N-dimethylacetamide",
+  "name_tr": "N,N-dimetilasetamid",
+  "ec_no": "204-826-4",
+  "index_no": "616-011-00-4",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360D"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H360D",
+      "H332",
+      "H312"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,49 @@
+{
+  "cas": "2425-79-8",
+  "name": "1,4-bis(2,3 epoxypropoxy)butane; butanedioldiglycidyl ether",
+  "name_tr": "1,4-bis(2,3 epoksipropoksi)bütan; bütandioldiglisidil eter",
+  "ec_no": "219-371-7",
+  "index_no": "603-072-00-7",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H332",
+      "H312",
+      "H319",
+      "H315",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

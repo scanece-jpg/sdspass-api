@@ -1,0 +1,51 @@
+{
+  "cas": "65753-47-1",
+  "name": "2-chloro-3- trifluoromethylpyridine",
+  "name_tr": "2-kloro-3-triflorometilpiridin",
+  "ec_no": "424-520-6",
+  "index_no": "613-236-00-X",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H311"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS05",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H311",
+      "H301",
+      "H372",
+      "H314",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

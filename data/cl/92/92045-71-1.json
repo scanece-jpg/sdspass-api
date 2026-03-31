@@ -1,0 +1,31 @@
+{
+  "cas": "92045-71-1",
+  "name": "Paraffin waxes (coal), brown- coal-high-temp. tar; Coal Tar Extract; [A complex combination of hydrocarbons obtained from lignite carbonization tar by",
+  "name_tr": "parafin cilaları (kömür), linyit- yüksek-sıcaklık zift; kömür zifti özütü; [Linyit karbonlaştırma ziftinden çözücü ile kristalleştirme (çözücü ile yağsızlaştırma),",
+  "ec_no": "295-454-1",
+  "index_no": "648-065-00-X",
+  "atp": "",
+  "notes": [
+    "M"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "cas": "68478-22-8",
+  "name": "Tail gas (petroleum), catalytic cracked naphtha stabilization absorber; Petroleum gas; [A complex combination of hydrocarbons obtained from the stabilization of catalytic cracked naphtha. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C1 through C6.]",
+  "name_tr": "Artık gaz (petrol), Katalitik olarak parçalanmış nafta stabilizasyon soğurucusu; Petrol gazı; [Katalitik parçalanmış naftanınstabilizasyonundan elde edilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla, C1 ila C6 aralığında karbon sayısına sahip hidrokarbonlardan oluşur.]",
+  "ec_no": "270-803-0",
+  "index_no": "649-077-00-8",
+  "atp": "",
+  "notes": [
+    "K",
+    "U"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H220"
+      },
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS04",
+      "GHS02",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

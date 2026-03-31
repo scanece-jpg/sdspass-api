@@ -1,0 +1,34 @@
+{
+  "cas": "3129-91-7",
+  "name": "dicyclohexylammonium nitrite",
+  "name_tr": "Disiklohekzilamonyum nitrit",
+  "ec_no": "221-515-9",
+  "index_no": "007-009-00-9",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H332",
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

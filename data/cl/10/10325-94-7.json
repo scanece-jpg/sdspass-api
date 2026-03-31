@@ -1,0 +1,75 @@
+{
+  "cas": "10325-94-7",
+  "name": "cadmium nitrate; cadmium dinitrate",
+  "name_tr": "kadmiyum nitrat; kadmiyum dinitrat",
+  "ec_no": "233-710-6",
+  "index_no": "048-014-00-6",
+  "atp": "",
+  "notes": [
+    "A1"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "(böbrek,ke"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "mik)"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H350",
+        "class": "Carc. 1B",
+        "c_min": 0.01,
+        "c_max": null
+      }
+    ]
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H332",
+      "H312",
+      "H302",
+      "H372",
+      "(böbrek,ke",
+      "mik)"
+    ],
+    "suppl_h": []
+  }
+}

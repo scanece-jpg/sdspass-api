@@ -1,0 +1,34 @@
+{
+  "cas": "12122-67-7",
+  "name": "zineb (ISO); zinc ethylenebis(dithiocarbamate) (polymeric)",
+  "name_tr": "zineb (ISO); çinko etilenbis(ditiyokarbamat) (polimerik)",
+  "ec_no": "235-180-1",
+  "index_no": "006-078-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H335",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

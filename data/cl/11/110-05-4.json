@@ -1,0 +1,40 @@
+{
+  "cas": "110-05-4",
+  "name": "di-tert-butyl peroxide",
+  "name_tr": "di-ter-bütilperoksit",
+  "ec_no": "203-733-6",
+  "index_no": "617-001-00-2",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Org. Perox. Type E",
+        "h_code": "H242"
+      },
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H242",
+      "H225",
+      "H341"
+    ],
+    "suppl_h": []
+  }
+}

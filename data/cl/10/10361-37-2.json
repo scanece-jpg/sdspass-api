@@ -1,0 +1,34 @@
+{
+  "cas": "10361-37-2",
+  "name": "barium chloride",
+  "name_tr": "Baryum klorür",
+  "ec_no": "233-788-1",
+  "index_no": "056-004-00-8",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06"
+    ],
+    "h_codes": [
+      "H301",
+      "H332"
+    ],
+    "suppl_h": []
+  }
+}

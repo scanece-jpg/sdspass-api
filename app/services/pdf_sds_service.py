@@ -951,7 +951,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         # CAS No | Madde Adı | Konst. | Sınıflandırma
         # EC No / REACH Kayıt No — CAS hücresinin altına küçük font
 
-        cas_hdr  = 'CAS No\nEC / REACH'
+        cas_hdr  = ('CAS No\nEC / KKDİK No' if lang=='TR' else 'CAS No\nEC / REACH')
         name_hdr = S(lang,'ingredient_label')
         conc_hdr = term(lang,'concentration')
         clf_hdr  = term(lang,'classification')
@@ -1007,8 +1007,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         # REACH eksik not
         if missing_reach:
             story.append(Paragraph(
-                f"* REACH kayıt numarası bulunamayan maddeler için tedarikçiye başvurun: {', '.join(missing_reach)}" if lang=='TR'
-                else f"* REACH registration numbers not found for: {', '.join(missing_reach)}. Obtain from supplier.",
+                f"* KKDİK kayıt numarası bulunamayan maddeler için tedarikçiye başvurun: {', '.join(missing_reach)}" if lang=='TR'
+                else f"* REACH/KKDİK registration numbers not found for: {', '.join(missing_reach)}. Obtain from supplier.",
                 styles['small']
             ))
 
@@ -1497,10 +1497,33 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                     cat_n = int(cat_str.split('.')[-1].strip())
                 except Exception:
                     cat_n = 4
-                # ATE varsayılan (oral Cat.4 = 2000 mg/kg)
+                # Önce CAS dosyasındaki gerçek LD50/ATE değerini dene
                 from app.services.clp_service import ATE_DEFAULTS
-                ate_val = ATE_DEFAULTS.get(route, ATE_DEFAULTS.get('oral', {})).get(f'Acute Tox. {cat_n}', 2000)
-                ate_comp_rows.append([comp_n, f'%{comp_conc}', hc, f'{ate_val} (varsayılan)' if lang=='TR' else f'{ate_val} (default)'])
+                from app.services.substance_lookup import lookup_substance
+                comp_cas = comp_item.get('cas_no', comp_item.get('cas', ''))
+                real_ate = None
+                ate_source_label = 'varsayılan' if lang == 'TR' else 'default'
+                if comp_cas:
+                    try:
+                        _sub = lookup_substance(comp_cas)
+                        if _sub:
+                            _ate_dict = _sub.get('ate', {})
+                            if _ate_dict and _ate_dict.get(route):
+                                real_ate = _ate_dict[route]
+                                ate_source_label = 'ECHA/IUCLID'
+                            # ld50 dict de dene
+                            if real_ate is None:
+                                _ld50 = _sub.get('ld50', {})
+                                if _ld50 and isinstance(_ld50, dict):
+                                    _route_data = _ld50.get(route, {})
+                                    if isinstance(_route_data, dict) and _route_data.get('value'):
+                                        real_ate = _route_data['value']
+                                        ate_source_label = _route_data.get('source', 'ECHA/IUCLID')
+                    except Exception:
+                        pass
+                if real_ate is None:
+                    real_ate = ATE_DEFAULTS.get(route, ATE_DEFAULTS.get('oral', {})).get(f'Acute Tox. {cat_n}', 2000)
+                ate_comp_rows.append([comp_n, f'%{comp_conc}', hc, f'{real_ate} mg/kg ({ate_source_label})'])
         ate_note = (
             'CLP Tüzüğü (EC) No 1272/2008 Ek I Bölüm 3.1 uyarınca karışım için '
             'ATE (Akut Toksisite Tahmini) toplama yöntemi uygulanmıştır. '

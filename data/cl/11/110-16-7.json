@@ -6,51 +6,31 @@
   "index_no": "607-095-00-3",
   "atp": "",
   "notes": [],
+  "ate": {
+    "oral": 708
+  },
+  "ld50": {
+    "oral": {"value": 708, "unit": "mg/kg", "species": "rat", "source": "ECHA C&L / IUCLID"},
+    "dermal": null,
+    "inhalation": null
+  },
   "classification": {
     "hazards": [
-      {
-        "class": "Acute Tox. 4",
-        "h_code": "H302"
-      },
-      {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
-        "class": "STOT SE 3",
-        "h_code": "H335"
-      },
-      {
-        "class": "Skin Irrit. 2",
-        "h_code": "H315"
-      },
-      {
-        "class": "Skin Sens. 1",
-        "h_code": "H317"
-      }
+      {"class": "Acute Tox. 4", "h_code": "H302"},
+      {"class": "Eye Irrit. 2",  "h_code": "H319"},
+      {"class": "STOT SE 3",     "h_code": "H335"},
+      {"class": "Skin Irrit. 2", "h_code": "H315"},
+      {"class": "Skin Sens. 1",  "h_code": "H317"}
     ],
     "m_factors": {},
     "scl_limits": [
-      {
-        "h_code": "H317",
-        "class": "Skin Sens. 1",
-        "c_min": 0.1,
-        "c_max": null
-      }
+      {"h_code": "H317", "class": "Skin Sens. 1", "c_min": 0.1, "c_max": null}
     ]
   },
   "labelling": {
     "signal": "Warning",
-    "pictograms": [
-      "GHS07"
-    ],
-    "h_codes": [
-      "H302",
-      "H319",
-      "H335",
-      "H315",
-      "H317"
-    ],
+    "pictograms": ["GHS07"],
+    "h_codes": ["H302","H319","H335","H315","H317"],
     "suppl_h": []
   }
 }

@@ -385,6 +385,103 @@ def _best_group(groups: list) -> dict | None:
     return merged
 
 
+# ---------------------------------------------------------------------------
+# ECHA C&L Inventory — Doğrudan ECHA API
+# ---------------------------------------------------------------------------
+
+async def _fetch_echa_cl_direct(cas: str, client: httpx.AsyncClient) -> dict | None:
+    """
+    ECHA C&L Inventory API'sinden H-kodu ve sınıflandırma verisi çek.
+
+    Endpoint: api.echa.europa.eu — önce CAS ile madde ara, sonra C&L bildirimlerini al.
+    ECHA C&L'de ~220.000 madde var (Annex VI'da olmayan şirket bildirimleri dahil).
+    """
+    try:
+        # 1. CAS ile madde ara → ECHA substance ID bul
+        r = await client.get(
+            'https://api.echa.europa.eu/api/substances/search',
+            params={'q': cas, 'number_type': 'cas'},
+            timeout=10.0,
+            headers={'Accept': 'application/json'},
+        )
+        if r.status_code != 200:
+            return None
+        results = r.json()
+        substances = results if isinstance(results, list) else results.get('results', [])
+        if not substances:
+            return None
+        substance = substances[0]
+        echa_id  = substance.get('id') or substance.get('substanceId') or substance.get('ecNumber')
+        name     = substance.get('iupacName') or substance.get('name') or cas
+        ec_no    = substance.get('ecNumber', '')
+
+        # 2. C&L bildirimlerini çek
+        cl_r = await client.get(
+            f'https://api.echa.europa.eu/api/substances/{echa_id}/classifications',
+            timeout=10.0,
+            headers={'Accept': 'application/json'},
+        )
+        if cl_r.status_code != 200:
+            return None
+        cl_data = cl_r.json()
+
+        # 3. H-kodları ve sinyali çıkar
+        h_codes        = []
+        hazard_classes = []
+        pictograms     = []
+        signal         = ''
+        notif_count    = 0
+
+        notifications = cl_data if isinstance(cl_data, list) else cl_data.get('notifications', [])
+        notif_count = len(notifications)
+
+        # En kapsamlı bildirimi seç (en çok H-kodu içeren)
+        best_notif = None
+        for notif in notifications:
+            h_list = notif.get('hazardStatements', notif.get('hStatements', []))
+            if len(h_list) > len(best_notif.get('hazardStatements', []) if best_notif else []):
+                best_notif = notif
+
+        if best_notif:
+            for hs in best_notif.get('hazardStatements', best_notif.get('hStatements', [])):
+                code = hs.get('code') or hs.get('hazardStatementCode') or ''
+                if code and code not in h_codes:
+                    h_codes.append(code)
+                    cls = _H_TO_CLASS.get(code.split(' ')[0], '')
+                    if cls and cls not in hazard_classes:
+                        hazard_classes.append(cls)
+            for ps in best_notif.get('pictograms', []):
+                p = ps.get('code') or ps.get('pictogramCode') or ''
+                p_mapped = _PICT_MAP.get(p.lower(), '')
+                if p_mapped and p_mapped not in pictograms:
+                    pictograms.append(p_mapped)
+            signal = best_notif.get('signalWord', best_notif.get('signal', ''))
+
+        if not h_codes:
+            return None
+
+        return {
+            'cas'           : cas,
+            'name'          : name,
+            'ec_no'         : ec_no,
+            'source'        : f'ECHA C&L Inventory ({notif_count} bildirim)',
+            'signal'        : signal,
+            'pictograms'    : pictograms,
+            'h_codes'       : h_codes,
+            'hazard_classes': hazard_classes,
+            'm_factors'     : {},
+            'notif_count'   : notif_count,
+        }
+
+    except Exception as e:
+        print(f'[ECHA C&L direct] {cas}: {e}')
+    return None
+
+
+# ---------------------------------------------------------------------------
+# PubChem — Fiziksel/Kimyasal Özellikler + LD50 (H-kodu için DEĞİL)
+# ---------------------------------------------------------------------------
+
 async def _get_pubchem_cid(cas: str, client: httpx.AsyncClient) -> int | None:
     """CAS → PubChem CID"""
     try:
@@ -400,26 +497,222 @@ async def _get_pubchem_cid(cas: str, client: httpx.AsyncClient) -> int | None:
     return None
 
 
-async def _get_pubchem_props(cid: int, client: httpx.AsyncClient) -> dict:
-    """CID → IUPAC name, molecular weight"""
+async def fetch_pubchem_properties(cas: str) -> dict:
+    """
+    PubChem'den fiziksel/kimyasal özellikler çek.
+    SDS Bölüm 9 (fiziksel/kimyasal özellikler) ve Bölüm 11 (toksikoloji) için.
+
+    Döndürülen alanlar:
+      iupac_name, molecular_formula, molecular_weight,
+      boiling_point, melting_point, flash_point, vapor_pressure,
+      water_solubility, log_kow (XLogP), ld50
+    """
+    cas = cas.strip()
     try:
-        r = await client.get(
-            f'https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/{cid}/property/IUPACName,MolecularWeight,MolecularFormula/JSON',
-            timeout=8.0
-        )
-        if r.status_code == 200:
-            props = r.json().get('PropertyTable', {}).get('Properties', [])
-            return props[0] if props else {}
+        async with httpx.AsyncClient(timeout=12.0, follow_redirects=True) as client:
+            cid = await _get_pubchem_cid(cas, client)
+            if not cid:
+                return {}
+
+            # Temel özellikler
+            props_r = await client.get(
+                f'https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/{cid}/property/'
+                'IUPACName,MolecularFormula,MolecularWeight,XLogP,'
+                'HBondDonorCount,HBondAcceptorCount/JSON',
+                timeout=8.0
+            )
+            props = {}
+            if props_r.status_code == 200:
+                p = props_r.json().get('PropertyTable', {}).get('Properties', [])
+                props = p[0] if p else {}
+
+            # GHS view'dan fiziksel veriler (BP, MP, FP, buhar basıncı, çözünürlük, LD50)
+            view_r = await client.get(
+                f'https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/{cid}/JSON/'
+                '?heading=Physical+and+Chemical+Properties',
+                timeout=12.0
+            )
+            physical = {}
+            if view_r.status_code == 200:
+                physical = _parse_pubchem_physical(view_r.json())
+
+            # LD50 verisi
+            tox_r = await client.get(
+                f'https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/{cid}/JSON/'
+                '?heading=Acute+Effects',
+                timeout=12.0
+            )
+            ld50 = {}
+            if tox_r.status_code == 200:
+                ld50 = _parse_pubchem_ld50(tox_r.json())
+
+            return {
+                'cid'               : cid,
+                'iupac_name'        : props.get('IUPACName', ''),
+                'molecular_formula' : props.get('MolecularFormula', ''),
+                'molecular_weight'  : props.get('MolecularWeight'),
+                'log_kow'           : props.get('XLogP'),
+                'hbond_donors'      : props.get('HBondDonorCount'),
+                'hbond_acceptors'   : props.get('HBondAcceptorCount'),
+                **physical,
+                **ld50,
+                'source'            : 'PubChem',
+            }
+
+    except Exception as e:
+        print(f'[PubChem properties] {cas}: {e}')
+    return {}
+
+
+def _parse_pubchem_physical(data: dict) -> dict:
+    """PubChem pug_view JSON'dan fiziksel özellikleri çıkar."""
+    result = {}
+    FIELD_MAP = {
+        'Boiling Point'       : 'boiling_point',
+        'Melting Point'       : 'melting_point',
+        'Flash Point'         : 'flash_point',
+        'Vapor Pressure'      : 'vapor_pressure',
+        'Water Solubility'    : 'water_solubility',
+        'Density'             : 'density',
+        'Auto-Ignition'       : 'autoignition_temp',
+        'Viscosity'           : 'viscosity',
+        'Refractive Index'    : 'refractive_index',
+        'pH'                  : 'ph',
+        'Decomposition'       : 'decomposition_temp',
+    }
+    try:
+        def walk(obj):
+            if isinstance(obj, dict):
+                name = obj.get('TOCHeading', '') or obj.get('Name', '')
+                key  = FIELD_MAP.get(name)
+                if key:
+                    strings = obj.get('Value', {}).get('StringWithMarkup', [])
+                    if strings:
+                        result[key] = strings[0].get('String', '')
+                for v in obj.values():
+                    walk(v)
+            elif isinstance(obj, list):
+                for item in obj:
+                    walk(item)
+        walk(data)
     except Exception:
         pass
-    return {}
+    return result
+
+
+def _parse_pubchem_ld50(data: dict) -> dict:
+    """PubChem Acute Effects bölümünden LD50 değerlerini çıkar."""
+    ld50_values = []
+    try:
+        def walk(obj):
+            if isinstance(obj, dict):
+                name = obj.get('Name', '') or obj.get('TOCHeading', '')
+                if 'LD50' in name or 'LD 50' in name:
+                    strings = obj.get('Value', {}).get('StringWithMarkup', [])
+                    for s in strings:
+                        text = s.get('String', '')
+                        if text:
+                            ld50_values.append(text)
+                for v in obj.values():
+                    walk(v)
+            elif isinstance(obj, list):
+                for item in obj:
+                    walk(item)
+        walk(data)
+    except Exception:
+        pass
+    return {'ld50': ld50_values[:5]} if ld50_values else {}
+
+
+# ---------------------------------------------------------------------------
+# PubChem GHS fallback — ECHA C&L bulunamazsa H-kodları için
+# ---------------------------------------------------------------------------
+
+async def _fetch_pubchem_ghs_fallback(cas: str, client: httpx.AsyncClient) -> dict | None:
+    """
+    ECHA C&L doğrudan API'si başarısız olursa PubChem GHS Classification'ı dene.
+    PubChem, ECHA C&L bildirimlerini kısmen barındırır — eksik kalabilir.
+    """
+    try:
+        cid = await _get_pubchem_cid(cas, client)
+        if not cid:
+            return None
+
+        r = await client.get(
+            f'https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/{cid}/JSON/'
+            '?heading=GHS+Classification',
+            timeout=12.0
+        )
+        if r.status_code != 200:
+            return None
+
+        data = r.json()
+
+        def find_ghs(obj):
+            if isinstance(obj, dict):
+                if obj.get('TOCHeading') == 'GHS Classification':
+                    return obj
+                for v in obj.values():
+                    res = find_ghs(v)
+                    if res:
+                        return res
+            elif isinstance(obj, list):
+                for item in obj:
+                    res = find_ghs(item)
+                    if res:
+                        return res
+            return None
+
+        ghs_node  = find_ghs(data)
+        if not ghs_node:
+            return None
+        groups = _parse_ghs_groups(ghs_node.get('Information', []))
+        best   = _best_group(groups)
+        if not best or not best['h_codes']:
+            return None
+
+        # Madde ismi için temel PubChem sorgusu
+        props_r = await client.get(
+            f'https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/{cid}/property/'
+            'IUPACName,MolecularFormula/JSON',
+            timeout=8.0
+        )
+        name = cas
+        if props_r.status_code == 200:
+            p = props_r.json().get('PropertyTable', {}).get('Properties', [])
+            name = (p[0].get('IUPACName') if p else '') or cas
+
+        src_note = 'CMR birleştirme aktif' if best.get('_cmr_merged') else ''
+        result = {
+            'cas'           : cas,
+            'name'          : name,
+            'ec_no'         : '',
+            'source'        : f'PubChem/ECHA C&L ({best["notif_count"]} bildirim)',
+            'source_note'   : src_note,
+            'signal'        : best['signal'],
+            'pictograms'    : best['pictograms'],
+            'h_codes'       : best['h_codes'],
+            'hazard_classes': best['hazard_classes'],
+            'm_factors'     : best.get('m_factors', {}),
+            'notif_count'   : best['notif_count'],
+            'notif_summary' : best['summary'],
+        }
+        if best.get('physical_state_conflict'):
+            result['physical_state_conflict'] = best['physical_state_conflict']
+        return result
+
+    except Exception as e:
+        print(f'[PubChem GHS fallback] {cas}: {e}')
+    return None
 
 
 async def lookup_echa_api(cas: str) -> dict | None:
     """
-    PubChem GHS endpoint'inden ECHA C&L bildirim verisi çek.
-    En yüksek bildirim sayılı grubu seç.
-    Oturum önbelleği kontrol edilir (arşiv kontrolü lookup_substance'da yapılır).
+    Sıra 5 — ECHA C&L Inventory doğrudan API (H-kodları için)
+    Sıra 6 — PubChem GHS fallback (ECHA API başarısız olursa)
+
+    PubChem yalnızca H-kodu yedek olarak kullanılır.
+    Fiziksel/kimyasal özellikler için fetch_pubchem_properties() ayrı çağrılır.
     """
     cas = cas.strip()
     cache = _load_cache()
@@ -429,77 +722,21 @@ async def lookup_echa_api(cas: str) -> dict | None:
     try:
         async with httpx.AsyncClient(timeout=12.0, follow_redirects=True) as client:
 
-            # 1. CID bul
-            cid = await _get_pubchem_cid(cas, client)
-            if not cid:
-                return None
+            # Önce ECHA C&L doğrudan API
+            result = await _fetch_echa_cl_direct(cas, client)
 
-            # 2. GHS Classification view
-            r = await client.get(
-                f'https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/{cid}/JSON/?heading=GHS+Classification',
-                timeout=12.0
-            )
-            if r.status_code != 200:
-                return None
+            # ECHA başarısız → PubChem GHS fallback
+            if not result:
+                print(f'[ECHA C&L] {cas}: doğrudan API boş, PubChem fallback deneniyor')
+                result = await _fetch_pubchem_ghs_fallback(cas, client)
 
-            data = r.json()
-
-            # 3. GHS Classification node'unu bul
-            def find_ghs(obj):
-                if isinstance(obj, dict):
-                    if obj.get('TOCHeading') == 'GHS Classification':
-                        return obj
-                    for v in obj.values():
-                        res = find_ghs(v)
-                        if res: return res
-                elif isinstance(obj, list):
-                    for item in obj:
-                        res = find_ghs(item)
-                        if res: return res
-                return None
-
-            ghs_node = find_ghs(data)
-            if not ghs_node:
-                return None
-
-            info_list = ghs_node.get('Information', [])
-            groups    = _parse_ghs_groups(info_list)
-            best      = _best_group(groups)
-
-            if not best:
-                return None
-
-            # 4. Madde ismi
-            props = await _get_pubchem_props(cid, client)
-            name  = props.get('IUPACName', '') or cas
-
-            # Kaynağı belirle
-            src_note = 'CMR birleştirme aktif' if best.get('_cmr_merged') else ''
-            result = {
-                'cas'           : cas,
-                'name'          : name,
-                'ec_no'         : '',
-                'source'        : f'ECHA C&L / PubChem ({best["notif_count"]} bildirim)',
-                'source_note'   : src_note,
-                'signal'        : best['signal'],
-                'pictograms'    : best['pictograms'],
-                'h_codes'       : best['h_codes'],
-                'hazard_classes': best['hazard_classes'],
-                'm_factors'     : best.get('m_factors', {}),
-                'notif_count'   : best['notif_count'],
-                'notif_summary' : best['summary'],
-            }
-            # Fiziksel hal çakışması → kullanıcıya onaylatma gerekebilir
-            if best.get('physical_state_conflict'):
-                result['physical_state_conflict'] = best['physical_state_conflict']
-
-            # Cache'e kaydet
-            cache[cas] = result
-            _save_cache(cache)
+            if result:
+                cache[cas] = result
+                _save_cache(cache)
             return result
 
     except Exception as e:
-        print(f'[PubChem lookup] {cas}: {e}')
+        print(f'[lookup_echa_api] {cas}: {e}')
     return None
 
 

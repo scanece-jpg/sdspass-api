@@ -111,7 +111,7 @@ from app.services.i18n_sds import (
     signal_word as sig_word, get_lang, S
 )
 from app.services.reach_db import get_reg_no, get_ec_no
-from app.services.codes_i18n import get_h, get_euh, get_p, get_ppe, get_sentence, translate_hclass, translate_hclass_list
+from app.services.codes_i18n import get_h, get_euh, get_p, get_ppe, get_sentence, translate_hclass, translate_hclass_list, EUH_STMTS
 from app.services.ghs_pictogram import get_ghs_codes, pictogram_table
 from app.services.transport_adr_service import get_adr_details, auto_detect_un
 from app.services.tr_oel_service import get_oel_table, format_oel_row
@@ -833,10 +833,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                                styles['body_bold']))
         for hc in h_stmts:
             if hc.startswith('EUH'):
-                stmt = EUH_STMTS_TR.get(hc,'') if lang=='TR' else ''
-                if not stmt:
+                stmt = get_euh(lang, hc)
+                if not stmt or stmt == hc:
                     # euh_details'dan bul
-                    stmt = next((d.get('text','') for d in euh.get('euh_details',[]) if d.get('code')==hc), hc)
+                    stmt = next((d.get('text_tr' if lang=='TR' else 'text','') for d in euh.get('euh_details',[]) if d.get('code')==hc), hc)
             else:
                 stmt = get_h_stmt(hc, lang)
             story.append(Paragraph(f'• <b>{hc}:</b> {stmt}', styles['bullet']))

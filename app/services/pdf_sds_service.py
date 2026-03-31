@@ -1419,6 +1419,34 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     else:
         story.append(Paragraph(na, styles['body']))
 
+    # ─── ATE Karışım Notu — KKDİK Ek-2 Bölüm 11 gereği ──────────────────
+    # Bileşenlerden Acute Tox. var ama karışım eşiği aşılmadıysa açıkla
+    ACUTE_TOX_CLASSES = {'Acute Tox. 1','Acute Tox. 2','Acute Tox. 3','Acute Tox. 4',
+                         'Acute Tox. 1*','Acute Tox. 2*','Acute Tox. 3*','Acute Tox. 4*'}
+    ACUTE_H = {'H300','H301','H302','H310','H311','H312','H330','H331','H332'}
+    comp_has_acute = False
+    for comp_item in sds_data.get('components', []):
+        for hz in comp_item.get('hazards', []):
+            if hz.get('h_class','').replace('*','').strip() in ACUTE_TOX_CLASSES:
+                comp_has_acute = True
+                break
+        if comp_has_acute:
+            break
+    mix_has_acute = bool(set(h_codes) & ACUTE_H)
+    if comp_has_acute and not mix_has_acute:
+        ate_note = (
+            'CLP Tüzüğü (EC) No 1272/2008 Ek I Bölüm 3.1 uyarınca karışım için '
+            'ATE (Akut Toksisite Tahmini) toplama yöntemi uygulanmıştır. '
+            'Hesaplama sonucunda karışımın ATE değeri sınıflandırma eşiğini aşmadığından '
+            'akut toksisite sınıflandırması yapılmamıştır.'
+        ) if lang == 'TR' else (
+            'The summation method for ATE (Acute Toxicity Estimate) was applied to this '
+            'mixture in accordance with CLP Regulation (EC) No 1272/2008, Annex I, Section 3.1. '
+            'The calculated mixture ATE did not exceed the classification threshold; '
+            'therefore no acute toxicity classification applies to the mixture.'
+        )
+        story.append(Paragraph(ate_note, styles['body']))
+
     # ─────────────────────────────────────────────────────────────────────────
     # BÖLÜM 12 — Ekoloji
     # ─────────────────────────────────────────────────────────────────────────

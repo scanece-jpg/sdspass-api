@@ -243,7 +243,7 @@
     "packing_groups": {
       "III": {
         "kemler": "90",
-        "tunnel": "—",
+        "tunnel": "(-)",
         "label": "9"
       }
     }
@@ -256,7 +256,7 @@
     "packing_groups": {
       "III": {
         "kemler": "90",
-        "tunnel": "—",
+        "tunnel": "(-)",
         "label": "9",
         "classification_code": "M6"
       }

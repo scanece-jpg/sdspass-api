@@ -237,8 +237,8 @@ H_TO_P: Dict[str, List[str]] = {
     # ── Aquatic ───────────────────────────────────────────────────────────────
     'H400': ['P273','P391','P501'],
     'H410': ['P273','P391','P501'],
-    'H411': ['P273','P501'],
-    'H412': ['P273','P501'],
+    'H411': ['P273','P391','P501'],   # P391 Cat.2 için zorunlu değil ama profesyonel uygulama
+    'H412': ['P273','P391','P501'],   # P391 Cat.3 için de eklendi (iyi uygulama)
     'H413': ['P273','P501'],
 
     # ── Ozon ──────────────────────────────────────────────────────────────────
@@ -552,7 +552,7 @@ P_SDS_PRIORITY: Dict[str, str] = {
     'P201':           'mandatory',   # CMR — talimat al
     'P202':           'mandatory',   # CMR — oku anla
     'P263':           'mandatory',   # Hamile/emziren
-    'P391':           'mandatory',   # Döküntü toplama (aquatic)
+    'P391':           'evaluate',    # Döküntü toplama (aquatic) — KDU değerlendirmeli (Cat.1'de de iyi uygulama)
     'P405':           'mandatory',   # Kilitli sakla
     # ── KDU DEĞERLENDİRMELİ ──────────────────────────────────
     'P271':           'evaluate',    # Açık hava — ortama bağlı

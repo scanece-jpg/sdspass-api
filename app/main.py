@@ -354,6 +354,7 @@ async def substance_lookup(cas: str):
             "found"     : True,
             "cas"       : cas,
             "name"      : result.get("name", ""),
+            "name_tr"   : result.get("name_tr", ""),   # Türkçe SDS Bölüm 3 için
             "ec_no"     : result.get("ec_no", "") or get_ec_no(cas),
             "reach_no"  : get_reg_no(cas),
             "annex_vi"  : result.get("annex_vi", False),

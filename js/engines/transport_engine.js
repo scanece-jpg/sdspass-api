@@ -126,6 +126,26 @@ const TransportEngine = (() => {
       sub_class:'6.1',
       note:'ADR 2023: Yanıcı sıvı (kat.2) + Toksik (kat.3) kombinasyonu',
     },
+    // H224/H225/H226 + Toksik kat.4 (H302/H312/H332) → Sınıf 3 öncelikli
+    // ADR Tablo 2.1.3.10: Sınıf 3 PG II > Sınıf 6.1 PG III (H302 = Kat.4 = zararlı)
+    {
+      must:['H224'], any:['H302','H312','H332'],
+      un:'UN 1993', class:'3', pg:'I',
+      label:'Yanıcı Sıvı, B.N.O.',
+      note:'ADR 2023: Yanıcı sıvı (kat.1) + Akut toksisite kat.4 — Sınıf 3 öncelikli (H302 PG III < H224 PG I)',
+    },
+    {
+      must:['H225'], any:['H302','H312','H332'],
+      un:'UN 1993', class:'3', pg:'II',
+      label:'Yanıcı Sıvı, B.N.O.',
+      note:'ADR 2023: Yanıcı sıvı (kat.2) + Akut toksisite kat.4 — Sınıf 3 öncelikli (H302 PG III < H225 PG II)',
+    },
+    {
+      must:['H226'], any:['H302','H312','H332'],
+      un:'UN 1993', class:'3', pg:'III',
+      label:'Yanıcı Sıvı, B.N.O.',
+      note:'ADR 2023: Yanıcı sıvı (kat.3) + Akut toksisite kat.4 — Sınıf 3 öncelikli',
+    },
     // H226 (kat.3 yanıcı) + herhangi toksik → PG III
     {
       must:['H226'], any:['H300','H310','H330','H301','H311','H331'],
@@ -169,7 +189,14 @@ const TransportEngine = (() => {
     // Sınıf 4.3 — Su ile Tepkiyen
     { hCodes:['H260'], un:'UN 3148', class:'4.3', pg:'I',   label:'Su ile Tepkiyen Sıvı, B.N.O.' },
     { hCodes:['H261'], un:'UN 3148', class:'4.3', pg:'II',  label:'Su ile Tepkiyen Sıvı, B.N.O.' },
+    // Sınıf 3 — Yanıcı Sıvı (H224/H225/H226 zaten sıvı kodları)
+    // ÖNEMLİ: H300-H332'den ÖNCE — COMBO_RULES yakalayamadığı durumlar için
+    // ADR Tablo 2.1.3.10: H225 (Sınıf 3 PG II) > H302 (Sınıf 6.1 PG III)
+    { hCodes:['H224'], un:'UN 1993', class:'3', pg:'I',   label:'Yanıcı Sıvı, B.N.O.' },
+    { hCodes:['H225'], un:'UN 1993', class:'3', pg:'II',  label:'Yanıcı Sıvı, B.N.O.' },
+    { hCodes:['H226'], un:'UN 1993', class:'3', pg:'III', label:'Yanıcı Sıvı, B.N.O.' },
     // Sınıf 6.1 — Akut Toksisite — SIVI: UN2810 / KATI: UN2811
+    // (H22x yoksa çalışır; H22x varsa COMBO_RULES veya yukarıdaki Sınıf 3 kuralı önce eşleşir)
     { hCodes:['H300','H310','H330'],
       un_liquid:'UN 2810', un_solid:'UN 2811', class:'6.1', pg:'I',
       label_liquid:'Zehirli Sıvı, Organik, B.N.O.',
@@ -191,10 +218,6 @@ const TransportEngine = (() => {
       label_liquid:'Korozif Sıvı, B.N.O.',
       label_solid:'Korozif Katı, B.N.O.',
       note:'Asidik inorganik sıvı → UN 3264 | Bazik → UN 3266 | Organik → UN 1760 | Katı → UN 1759 | PG I için uzman onayı' },
-    // Sınıf 3 — Yanıcı Sıvı (H224/H225/H226 zaten sıvı kodları)
-    { hCodes:['H224'], un:'UN 1993', class:'3', pg:'I',   label:'Yanıcı Sıvı, B.N.O.' },
-    { hCodes:['H225'], un:'UN 1993', class:'3', pg:'II',  label:'Yanıcı Sıvı, B.N.O.' },
-    { hCodes:['H226'], un:'UN 1993', class:'3', pg:'III', label:'Yanıcı Sıvı, B.N.O.' },
     // Sınıf 4.1 — Yanıcı Katı (H228 = sadece katı kodudur)
     { hCodes:['H228'], un:'UN 1325', class:'4.1', pg:'II',
       label:'Yanıcı Katı, Organik, B.N.O.',

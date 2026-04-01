@@ -260,20 +260,39 @@ def calculate_aquatic(
                     'h_class': hc,
                 })
 
+    # ── CLP Tablo 4.1.2: Kesim Değeri Ön-Kontrolü ─────────────────────────────
+    # Toplama yöntemi (≥10%) ile kesim değeri yöntemi (≥0.1%/M) farklı eşikler
+    # kullanır. Daha koruyucu olan kesim değeri yöntemi önce kontrol edilir.
+    # Herhangi bir Chronic 1 bileşeni bireysel eşiği aşarsa → doğrudan H410.
+    cutoff_h410 = False
+    cutoff_h400 = False
+    for _cco in comp_list:
+        _cc = float(_cco.get('worst_case_conc', _cco.get('conc', 0)) or 0)
+        _mco = _cco.get('m_factors', {}).get('chronic', 1) if _cco.get('m_factors') else 1
+        _mao = _cco.get('m_factors', {}).get('acute', 1)   if _cco.get('m_factors') else 1
+        for _hz in _cco.get('hazards', []):
+            _hcc = _hz.get('h_class', '').replace('*', '').strip()
+            if _hcc == 'Aquatic Chronic 1' and _cc >= (0.1 / max(_mco, 1)):
+                cutoff_h410 = True
+            if _hcc == 'Aquatic Acute 1' and _cc >= (1.0 / max(_mao, 1)):
+                cutoff_h400 = True
+
     # Sınıflandır
-    if sum_acute_m >= 0.25:
+    if cutoff_h400 or sum_acute_m >= 0.25:
         return AquaticResult(
             h_code='H400', h_class='Aquatic Acute 1', signal='Warning',
             sum_value=sum_acute_m,
-            formula=f"Σ(Ci×M_acute)/100 = {sum_acute_m:.4f} ≥ 0.25"
+            formula=(f"Kesim değeri: C≥1%/M" if cutoff_h400 and sum_acute_m < 0.25
+                     else f"Σ(Ci×M_acute)/100 = {sum_acute_m:.4f} ≥ 0.25")
         ,
         component_details=comp_m_details
     )
-    if sum_chronic_m >= 0.1:
+    if cutoff_h410 or sum_chronic_m >= 0.1:
         return AquaticResult(
             h_code='H410', h_class='Aquatic Chronic 1', signal='Warning',
             sum_value=sum_chronic_m,
-            formula=f"Σ(Ci×M_chr)/100 = {sum_chronic_m:.4f} ≥ 0.1"
+            formula=(f"Kesim değeri: C≥0.1%/M" if cutoff_h410 and sum_chronic_m < 0.1
+                     else f"Σ(Ci×M_chr)/100 = {sum_chronic_m:.4f} ≥ 0.1")
         ,
             component_details=comp_m_details
         )

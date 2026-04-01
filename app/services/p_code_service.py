@@ -408,14 +408,15 @@ P_LABEL_PRIORITY: Dict[str, int] = {
     'P301+P310': 100, 'P301+P330+P331': 95, 'P303+P361+P353': 90,
     'P304+P340': 88,  'P305+P351+P338': 85, 'P308+P313': 82,
     'P308+P311': 80,  'P307+P311': 78,      'P310': 75,
+    'P301+P312': 73,  # H302 yutma müdahalesi — response kodu, öncelik yüksek
     'P342+P311': 72,  'P302+P352': 65,      'P332+P313': 60,
     'P333+P313': 58,  'P337+P313': 55,
 
     # Prevention — kritik önlemler
-    'P210': 50,       # Yanıcı → tutuşma kaynağı
+    'P210': 52,       # Yanıcı → tutuşma kaynağı
+    'P280': 51,       # KKE — H317/H319/H314 için zorunlu, yüksek öncelik
     'P260': 48,       # Solunum koruma
     'P273': 46,       # Çevre
-    'P280': 45,       # KKE
     'P284': 44,       # Solunum cihazı
     'P201': 43,       # CMR — talimat al
     'P263': 42,       # Hamile/emziren

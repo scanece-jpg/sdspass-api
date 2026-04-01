@@ -1687,9 +1687,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             ]
             _mf_rows = [_mf_hdr]
             for _d in _aquatic_comps:
+                _mf_name = (_d.get('name_tr','') if lang=='TR' else '') or _d.get('name','')
                 _mf_rows.append([
                     _d.get('cas',''),
-                    _d.get('name',''),
+                    _mf_name,
                     translate_hclass(_d.get('h_class',''), lang),
                     str(_d.get('m_acute', 1)),
                     str(_d.get('m_chronic', 1)),

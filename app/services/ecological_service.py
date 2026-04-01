@@ -235,6 +235,7 @@ def calculate_aquatic(
                 detail_parts.append(f"{cas} Acute M={m_acute}")
                 comp_m_details.append({
                     'cas': cas, 'name': comp.get('name',''),
+                    'name_tr': comp.get('name_tr',''),
                     'conc': conc,
                     'm_acute': m_acute, 'm_chronic': m_chronic,
                     'h_class': 'Aquatic Acute 1',
@@ -244,6 +245,7 @@ def calculate_aquatic(
                 sum_chronic_plain += conc / 100
                 comp_m_details.append({
                     'cas': cas, 'name': comp.get('name',''),
+                    'name_tr': comp.get('name_tr',''),
                     'conc': conc,
                     'm_acute': m_acute, 'm_chronic': m_chronic,
                     'h_class': hc,
@@ -252,6 +254,7 @@ def calculate_aquatic(
                 sum_chronic_plain += conc / 100
                 comp_m_details.append({
                     'cas': cas, 'name': comp.get('name',''),
+                    'name_tr': comp.get('name_tr',''),
                     'conc': conc,
                     'm_acute': 1, 'm_chronic': 1,
                     'h_class': hc,

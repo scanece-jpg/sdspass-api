@@ -471,7 +471,7 @@ def select_label_p_codes(all_p_codes: List[str], max_codes: int = 6) -> Dict:
     SUPERSEDE_LABEL = {
         'P301+P310':     ['P301+P312', 'P310', 'P311', 'P312'],
         'P303+P361+P353':['P302+P352', 'P361', 'P353'],
-        'P305+P351+P338':['P338', 'P351'],
+        'P305+P351+P338':['P338', 'P351', 'P337+P313'],  # P305 göz müdahalesini kapsıyor
         'P260':          ['P261'],
         'P333+P313':     ['P332+P313'],
         'P308+P311':     ['P308+P313'],

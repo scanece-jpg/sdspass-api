@@ -1186,6 +1186,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
 
     _vp_val = phys.get('vapor_pressure') or               (f"{phys.get('vapor_pressure_num')} hPa" if phys.get('vapor_pressure_num') else na)
 
+    _er_lbl  = 'Buharlaşma Hızı' if lang=='TR' else 'Evaporation Rate'
+    _kow_lbl = 'Dağılım Katsayısı (log Kow)' if lang=='TR' else 'Partition Coeff. (log Kow)'
+
     all_phys_rows = [
         [phys_prop(lang,'appearance'),
          phys.get(f'appearance_{lang}') or phys.get('appearance') or na],
@@ -1195,12 +1198,14 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         [phys_prop(lang,'flash_point'),   _pv('flash_point','°C')],
         [phys_prop(lang,'boiling_point'), _pv('boiling_point','°C')],
         [_mp_lbl,                         _pv('melting_point','°C')],
+        [_er_lbl,                         phys.get('evap_rate') or na],
         [phys_prop(lang,'density'),       _pv('density','g/cm³')],
         [_rd_lbl,                         _pv('rel_density')],
         [phys_prop(lang,'viscosity'),     _pv('viscosity','cSt @40°C')],
         [phys_prop(lang,'solubility'),    phys.get('solubility') or na],
         [phys_prop(lang,'vapor_pressure'),_vp_val],
         [_vd_lbl,                         _pv('vapor_density')],
+        [_kow_lbl,                        _pv('log_kow')],
         [_ai_lbl,                         _pv('auto_ignition','°C')],
         [_ex_lbl,                         _ex_val],
     ]
@@ -1230,7 +1235,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     ]
 
     # Opsiyonel satırları — sadece değer varsa göster
-    _optional = {_mp_lbl, _rd_lbl, _vd_lbl, _ai_lbl, _ex_lbl, _ot_lbl, _dc_lbl}
+    _optional = {_mp_lbl, _rd_lbl, _vd_lbl, _ai_lbl, _ex_lbl, _ot_lbl, _dc_lbl, _er_lbl, _kow_lbl}
     phys_rows = [r for r in all_phys_rows if r[1] != na or r[0] not in _optional]
 
     story.append(data_table(phys_rows, [75*mm, 105*mm], styles, header=False))

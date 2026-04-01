@@ -118,6 +118,14 @@ async def generate_pdf(data: dict = Body(...)):
         if _eco_h and _eco_h not in all_h_codes:
             all_h_codes = list(all_h_codes) + [_eco_h]
 
+        # H420 — Ozon tabakasına zararlı (CLP Annex VI)
+        # ecological_service sds_section_12['H420'] listesine yazar ama h_codes'a eklemez
+        _sds12 = getattr(eco_result, 'sds_section_12', None) or (eco_result.get('sds_section_12', {}) if isinstance(eco_result, dict) else {})
+        if _sds12.get('H420') and 'H420' not in h_codes:
+            h_codes = list(h_codes) + ['H420']
+        if _sds12.get('H420') and 'H420' not in all_h_codes:
+            all_h_codes = list(all_h_codes) + ['H420']
+
         # P kodlarını güncel h_codes ile yeniden hesapla (eko H kodu dahil)
         p_result = assign_p_codes(h_codes, signal, usage=usage)
         p_result['label'] = select_label_p_codes(p_result['p_codes'], 6)
@@ -210,6 +218,7 @@ async def generate_pdf(data: dict = Body(...)):
                 'conc_min':      conc_min,
                 'conc_max':      conc_max,
                 'hazards':       [{'h_class': h.get('h_class', '')} for h in c.get('hazards', [])],
+                'scl':           c.get('scl', []),
                 'ec_no':         c.get('ec_no', ''),
                 'reach_no':      c.get('reach_no', ''),
             }

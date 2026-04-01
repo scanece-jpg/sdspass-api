@@ -53,6 +53,25 @@ ORGAN_ALIASES = {
 
 GENERAL_ORGAN = '__general__'  # Organ belirtilmemiş
 
+# Organ adı Türkçe çevirisi
+ORGAN_TR = {
+    'blood':                    'kan',
+    'nervous system':           'sinir sistemi',
+    'kidneys':                  'böbrekler',
+    'liver':                    'karaciğer',
+    'lungs':                    'akciğerler',
+    'eyes':                     'gözler',
+    'gastro-intestinal tract':  'gastrointestinal sistem',
+    'skin':                     'cilt',
+    'thyroid':                  'tiroid bezi',
+    'bone':                     'kemik iliği',
+    'immune system':            'bağışıklık sistemi',
+    'cardiovascular system':    'kardiyovasküler sistem',
+    'heart':                    'kalp',
+    'teeth':                    'diş',
+    'upper respiratory tract':  'üst solunum yolu',
+}
+
 
 def normalize_organ(raw: str) -> str:
     """Organ adını normalize et — virgülle ayrılmış çoklu organları ayır"""

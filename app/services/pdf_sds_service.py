@@ -342,6 +342,44 @@ H_STMTS_TR = {
 def get_h_stmt(code: str, lang: str) -> str:
     return get_h(lang, code)
 
+
+def _build_stot_organ_map(components: list) -> dict:
+    """
+    Bileşen listesinden STOT RE hedef organ haritası oluştur.
+    Döner: {h_code: organ_name_en}  (yalnızca organ bilinen sonuçlar)
+    """
+    from app.services.stot_re_service import calculate_stot_re, GENERAL_ORGAN
+    stot_comps = [
+        {'cas': c.get('cas_no', ''), 'name': c.get('name', ''),
+         'conc': c.get('concentration', 0), 'hazards': c.get('hazards', [])}
+        for c in components
+    ]
+    stot_res = calculate_stot_re(stot_comps)
+    organ_map = {}
+    for sr in stot_res.get('results', []):
+        h = sr['h_code']
+        organ = sr['organ']
+        if organ == 'Genel (organ belirtilmemiş)':
+            continue
+        if h not in organ_map:
+            organ_map[h] = organ
+    return organ_map
+
+
+def get_stot_stmt(h_code: str, lang: str, organ_en: str) -> str:
+    """H372/H373 için hedef organ adı içeren H ifadesi üret."""
+    from app.services.stot_re_service import ORGAN_TR
+    if lang == 'TR':
+        organ = ORGAN_TR.get(organ_en.lower(), organ_en)
+        if h_code == 'H372':
+            return f'Uzun süreli veya tekrarlanan maruziyetle {organ} hasar verir.'
+        return f'Uzun süreli veya tekrarlanan maruziyetle {organ} hasar verebilir.'
+    else:
+        if h_code == 'H372':
+            return f'Causes damage to {organ_en} through prolonged or repeated exposure.'
+        return f'May cause damage to {organ_en} through prolonged or repeated exposure.'
+
+
 # ─── UN NUMARASI OTOMATİK TESPİTİ (ADR/RID Tablo A) ─────────────────────────
 def _auto_un(h_codes: list, state: str = 'liquid') -> dict | None:
     """H kodlarından en kritik UN numarasını tespit et — ADR 2023 Tablo 2.1.3.10
@@ -631,6 +669,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     euh = sds_data.get('euh', {})
     components = sds_data.get('components', [])
 
+    # STOT RE hedef organ haritası — Bölüm 2.2 ve 11'de kullanılır
+    _stot_organ_map = _build_stot_organ_map(components)
+
     # ── Cross-section validation ──────────────────────────────────────────────
     _validation_issues = validate_sds(
         sds_data   = sds_data,
@@ -854,6 +895,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 if not stmt or stmt == hc:
                     # euh_details'dan bul
                     stmt = next((d.get('text_tr' if lang=='TR' else 'text','') for d in euh.get('euh_details',[]) if d.get('code')==hc), hc)
+            elif hc in ('H372', 'H373') and hc in _stot_organ_map:
+                stmt = get_stot_stmt(hc, lang, _stot_organ_map[hc])
             else:
                 stmt = get_h_stmt(hc, lang)
             story.append(Paragraph(f'• <b>{hc}:</b> {stmt}', styles['bullet']))
@@ -1453,7 +1496,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     for h in h_codes:
         route = exposure_map.get(h)
         if route and route not in added_routes:
-            stmt = get_h_stmt(h, lang)
+            if h in ('H372', 'H373') and h in _stot_organ_map:
+                stmt = get_stot_stmt(h, lang, _stot_organ_map[h])
+            else:
+                stmt = get_h_stmt(h, lang)
             tox_rows.append([h + f' — {route}', stmt])
             added_routes.add(route)
 

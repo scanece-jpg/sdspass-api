@@ -217,7 +217,7 @@ async def generate_pdf(data: dict = Body(...)):
                 'conc_str':      conc_str,
                 'conc_min':      conc_min,
                 'conc_max':      conc_max,
-                'hazards':       [{'h_class': h.get('h_class', '')} for h in c.get('hazards', [])],
+                'hazards':       [{'h_class': h.get('h_class', ''), 'h_code': h.get('h_code', '')} for h in c.get('hazards', [])],
                 'scl':           c.get('scl', []),
                 'ec_no':         c.get('ec_no', ''),
                 'reach_no':      c.get('reach_no', ''),

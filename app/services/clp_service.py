@@ -168,7 +168,20 @@ def classify_mixture_clp(components: list) -> dict:
                     "reason":  f"{comp.get('name',cas)} %{conc:.1f} ≥ kesme %{cutoff}",
                 })
 
-    # İkincil Skin kural
+    # CLP Tablo 3.2.4: Skin Irrit. 2 toplama kuralı
+    # Tek bileşen <%10 olsa da toplam ≥%10 → H315
+    sum_skin_irrit2 = sum(
+        float(comp.get("concentration", comp.get("conc", 0)) or 0)
+        for comp in components
+        for h in comp.get("hazards", [])
+        if h.get("h_class","") == "Skin Irrit. 2"
+    )
+    if "H314" not in seen_h and "H315" not in seen_h and sum_skin_irrit2 >= 10.0:
+        seen_h.add("H315")
+        passed.append({"h_class":"Skin Irrit. 2","h_code":"H315","conc":sum_skin_irrit2,
+                       "reason":f"Toplama: Σ Skin Irrit.2=%{sum_skin_irrit2:.1f} ≥ %10 (CLP Tablo 3.2.4)"})
+
+    # İkincil Skin kural (Skin Corr. 1 bileşenin alt-eşik katkısı)
     if "H314" not in seen_h and "H315" not in seen_h and 1.0 <= sum_corr1 < 10.0:
         seen_h.add("H315")
         passed.append({"h_class":"Skin Irrit. 2","h_code":"H315","conc":sum_corr1,

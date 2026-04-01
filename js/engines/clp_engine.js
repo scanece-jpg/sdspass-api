@@ -246,6 +246,33 @@ const CLPEngine = (() => {
       });
     });
 
+    // CLP Tablo 3.2.4 / 3.3.4: Toplama Kuralı ────────────────────────────────
+    // Tek bileşen GCL altında olsa da birden fazla Skin/Eye Irrit. 2 bileşenin
+    // TOPLAMI ≥ %10 ise karışım H315/H319 olarak sınıflandırılır.
+    // Örnek: Maleik asit %5 + Bakır sülfat %8 = %13 ≥ %10 → H315 ✓
+    if (!raw.includes('H315') && !raw.includes('H314')) {
+      const sumSI2 = comps.reduce((s, c) => {
+        const conc = parseFloat(c.concMax || c.conc) || 0;
+        return (c.hazards || []).some(h => (h.h_code||'').replace(/[*\s]/g,'').substring(0,4) === 'H315')
+          ? s + conc : s;
+      }, 0);
+      if (sumSI2 >= 10.0) {
+        raw.push('H315');
+        cutoffUsed['H315'] = { value: 10.0, source: 'GCL-sum', cas: 'KARIŞIM' };
+      }
+    }
+    if (!raw.includes('H319') && !raw.includes('H318')) {
+      const sumEI2 = comps.reduce((s, c) => {
+        const conc = parseFloat(c.concMax || c.conc) || 0;
+        return (c.hazards || []).some(h => (h.h_code||'').replace(/[*\s]/g,'').substring(0,4) === 'H319')
+          ? s + conc : s;
+      }, 0);
+      if (sumEI2 >= 10.0) {
+        raw.push('H319');
+        cutoffUsed['H319'] = { value: 10.0, source: 'GCL-sum', cas: 'KARIŞIM' };
+      }
+    }
+
     // 2. Deduplikasyon
     const result = [...new Set(raw)];
 

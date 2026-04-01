@@ -599,6 +599,11 @@ function addComp(pf = {}) {
       <div><label>EC No</label><input type="text" class="ec-input" id="ec${id}" placeholder="231-639-5"></div>
       <div><label>REACH No</label><input type="text" class="reach-input" id="reach${id}" placeholder="01-xxx"></div>
       <div><label>M-Faktör (Akut)</label><input type="number" class="mf-input" id="mf${id}" placeholder="1" min="1" value="1"></div>
+    </div>
+    <div class="cw-row3" style="margin-top:4px">
+      <div><label>M-Faktör (Kronik)</label><input type="number" class="mfc-input" id="mfc${id}" placeholder="1" min="1" value="1"></div>
+      <div></div>
+      <div></div>
     </div>`;
   document.getElementById('comps').appendChild(div);
   if (pf.hazards) pf.hazards.forEach(h => addChip(id, h.h_class, h.h_code));
@@ -1167,12 +1172,13 @@ function getComps() {
     const ec    = w.querySelector('.ec-input')?.value?.trim() || '';
     const reach = w.querySelector('.reach-input')?.value?.trim() || '';
     const mf    = parseFloat(w.querySelector('.mf-input')?.value) || 1;
+    const mfc   = parseFloat(w.querySelector('.mfc-input')?.value) || 1;
     // Bileşen ID'sini DOM'dan al (cw{id} → id)
     const cwId  = parseInt((w.id || '').replace('cw','')) || 0;
     // SCL: maddeye özel kesme değerleri — Öncelik 1 (GCL'yi ezer)
     const scl   = _sclMap[cwId] || {};
     const concStr = w.querySelector('.conc-manual')?.value?.trim() || '';
-    return { cas, name, name_tr, conc, concMin, concMax, concStr, hazards, ec, reach, m_factors:{ acute: mf, chronic: mf }, scl };
+    return { cas, name, name_tr, conc, concMin, concMax, concStr, hazards, ec, reach, m_factors:{ acute: mf, chronic: mfc }, scl };
   }).filter(c => c.cas || c.name);
 }
 

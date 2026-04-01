@@ -439,16 +439,29 @@ def _auto_un(h_codes: list, state: str = 'liquid') -> dict | None:
         return {'un_no':'UN1992','shipping_name':'YANICI SIVI, TOKSİK, B.N.O.',
                 'hazard_class':'3','sub_class':'6.1','packing_group':'II','auto':True}
 
-    # ── Sınıf 6.1: Toksik (tekil) ────────────────────────────────────────────
+    # ── Sınıf 6.1: Toksik (tekil) — hal bazlı ───────────────────────────────
+    _is_solid = state in ('solid','powder','paste')
     if h & {'H300','H310','H330'}:
+        if _is_solid:
+            return {'un_no':'UN2811','shipping_name':'ZEHİRLİ KATI, ORGANİK, B.N.O.',
+                    'hazard_class':'6.1','packing_group':'I',
+                    'note':'UN2811 organik için; inorganik → UN3288','auto':True}
         return {'un_no':'UN2810','shipping_name':'ZEHİRLİ SIVI, ORGANİK, B.N.O.',
                 'hazard_class':'6.1','packing_group':'I',
                 'note':'UN2810 organik için; inorganik → UN3287','auto':True}
     if h & {'H301','H311','H331'}:
+        if _is_solid:
+            return {'un_no':'UN2811','shipping_name':'ZEHİRLİ KATI, ORGANİK, B.N.O.',
+                    'hazard_class':'6.1','packing_group':'II',
+                    'note':'UN2811 organik için; inorganik → UN3288','auto':True}
         return {'un_no':'UN2810','shipping_name':'ZEHİRLİ SIVI, ORGANİK, B.N.O.',
                 'hazard_class':'6.1','packing_group':'II',
                 'note':'UN2810 organik için; inorganik → UN3287','auto':True}
     if h & {'H302','H312','H332'}:
+        if _is_solid:
+            return {'un_no':'UN2811','shipping_name':'ZEHİRLİ KATI, ORGANİK, B.N.O.',
+                    'hazard_class':'6.1','packing_group':'III',
+                    'note':'Akut toksisite Kat.4 — ADR kriterini sağlamıyorsa düzenlemeye tabi olmayabilir','auto':True}
         return {'un_no':'UN2810','shipping_name':'ZEHİRLİ SIVI, ORGANİK, B.N.O.',
                 'hazard_class':'6.1','packing_group':'III',
                 'note':'Akut toksisite Kat.4 — ADR kriterini sağlamıyorsa düzenlemeye tabi olmayabilir','auto':True}
@@ -479,10 +492,14 @@ def _auto_un(h_codes: list, state: str = 'liquid') -> dict | None:
             return {'un_no':'UN1760','shipping_name':'KOROZİF SIVI, B.N.O.',
                     'hazard_class':'8','packing_group':'II',
                     'note':'Asidik inorganik→UN3264 | Bazik inorganik→UN3266 | Organik→UN1760','auto':True}
-    # Çevre için tehlikeli (sadece)
+    # Çevre için tehlikeli (sadece) — hal bazlı UN3082 (sıvı) / UN3077 (katı)
     if any(h in h_codes for h in ['H400','H410','H411']):
-        return {'un_no':'UN3082','shipping_name':'ÇEVRE İÇİN TEHLİKELİ MADDE, SIVI, B.N.O.',
-                'hazard_class':'9','packing_group':'III','auto':True}
+        if state in ('solid','powder','paste'):
+            return {'un_no':'UN3077','shipping_name':'ÇEVRE İÇİN TEHLİKELİ MADDE, KATI, B.N.O.',
+                    'hazard_class':'9','packing_group':'III','auto':True}
+        else:
+            return {'un_no':'UN3082','shipping_name':'ÇEVRE İÇİN TEHLİKELİ MADDE, SIVI, B.N.O.',
+                    'hazard_class':'9','packing_group':'III','auto':True}
     return None
 
 
@@ -1519,7 +1536,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                         pass
                 if real_ate is None:
                     real_ate = ATE_DEFAULTS.get(route, ATE_DEFAULTS.get('oral', {})).get(f'Acute Tox. {cat_n}', 2000)
-                ate_comp_rows.append([comp_n, f'%{comp_conc}', hc, f'{real_ate} mg/kg ({ate_source_label})'])
+                ate_unit = 'mg/L/4h' if route == 'inhalation' else 'mg/kg'
+                ate_comp_rows.append([comp_n, f'%{comp_conc}', hc, f'{real_ate} {ate_unit} ({ate_source_label})'])
         ate_note = (
             'CLP Tüzüğü (EC) No 1272/2008 Ek I Bölüm 3.1 uyarınca karışım için '
             'ATE (Akut Toksisite Tahmini) toplama yöntemi uygulanmıştır. '
@@ -1560,11 +1578,41 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                    for p in pbt_list if p.get('is_pbt') or p.get('is_vpvb')]
         pbt_summary = '; '.join(pbt_cas) if pbt_cas else sds12.get('12.5', term(lang,'pbt_not'))
 
+    # 12.4 Toprak hareketliliği — ecological_service'den
+    _soil_detail = sds12.get('12.4_detail', {})
+    _soil_comps  = _soil_detail.get('components', []) if isinstance(_soil_detail, dict) else []
+    if _soil_comps:
+        _known = [c for c in _soil_comps if c.get('log_koc') is not None]
+        if _known:
+            _soil_txt = '; '.join(f"{c['name']}: {c['mobility']}" for c in _known)
+        else:
+            _soil_txt = ('Toprak adsorpsiyon verisi mevcut değil.' if lang=='TR'
+                         else 'No soil adsorption data available.')
+    else:
+        _soil_txt = na
+
+    # log Kow'dan da değerlendirme yapılabilir (phys_props)
+    _lkow = phys.get('log_kow')
+    if _soil_txt == na and _lkow is not None:
+        try:
+            _lk = float(_lkow)
+            if _lk < 1:
+                _soil_txt = ('Yüksek hareketlilik beklenir (log Kow < 1)' if lang=='TR'
+                             else 'High mobility expected (log Kow < 1)')
+            elif _lk < 3:
+                _soil_txt = (f'Orta hareketlilik (log Kow={_lk})' if lang=='TR'
+                             else f'Moderate mobility (log Kow={_lk})')
+            else:
+                _soil_txt = (f'Düşük hareketlilik, toprakta adsorpsiyon beklenir (log Kow={_lk})' if lang=='TR'
+                             else f'Low mobility, soil adsorption expected (log Kow={_lk})')
+        except (ValueError, TypeError):
+            pass
+
     eco_rows = [
         [sub_title(lang,'12.1'), sds12.get('12.1', na)],
         [sub_title(lang,'12.2'), bio.get('assessment') or sds12.get('12.2', na)],
         [sub_title(lang,'12.3'), sds12.get('12.3', na)],
-        [sub_title(lang,'12.4'), na],
+        [sub_title(lang,'12.4'), _soil_txt],
         [sub_title(lang,'12.5'), pbt_summary],
         [sub_title(lang,'12.6'), (lambda v:
             ('Endokrin bozucu özellik tespit edilmemiştir.' if lang=='TR' else 'No endocrine disrupting properties identified.')

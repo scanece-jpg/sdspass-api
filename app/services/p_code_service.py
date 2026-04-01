@@ -409,8 +409,8 @@ P_LABEL_PRIORITY: Dict[str, int] = {
     'P304+P340': 88,  'P305+P351+P338': 85, 'P308+P313': 82,
     'P308+P311': 80,  'P307+P311': 78,      'P310': 75,
     'P301+P312': 73,  # H302 yutma müdahalesi — response kodu, öncelik yüksek
-    'P342+P311': 72,  'P302+P352': 65,      'P332+P313': 60,
-    'P333+P313': 58,  'P337+P313': 55,
+    'P342+P311': 72,  'P302+P352': 65,      'P333+P313': 61,
+    'P332+P313': 57,  'P337+P313': 55,
 
     # Prevention — kritik önlemler
     'P210': 55,       # Yanıcı → tutuşma kaynağı (H224/H225/H226 için kritik)

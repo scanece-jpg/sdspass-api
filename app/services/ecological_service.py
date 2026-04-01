@@ -274,7 +274,8 @@ def calculate_aquatic(
             _hcc = _hz.get('h_class', '').replace('*', '').strip()
             if _hcc == 'Aquatic Chronic 1' and _cc >= (0.1 / max(_mco, 1)):
                 cutoff_h410 = True
-            if _hcc == 'Aquatic Acute 1' and _cc >= (1.0 / max(_mao, 1)):
+            # H400 kesim değeri: CLP Tablo 4.1.1 → 25%/M (toplama formülüyle aynı)
+            if _hcc == 'Aquatic Acute 1' and _cc >= (25.0 / max(_mao, 1)):
                 cutoff_h400 = True
 
     # Sınıflandır
@@ -282,7 +283,7 @@ def calculate_aquatic(
         return AquaticResult(
             h_code='H400', h_class='Aquatic Acute 1', signal='Warning',
             sum_value=sum_acute_m,
-            formula=(f"Kesim değeri: C≥1%/M" if cutoff_h400 and sum_acute_m < 0.25
+            formula=(f"Kesim değeri: C≥25%/M" if cutoff_h400 and sum_acute_m < 0.25
                      else f"Σ(Ci×M_acute)/100 = {sum_acute_m:.4f} ≥ 0.25")
         ,
         component_details=comp_m_details

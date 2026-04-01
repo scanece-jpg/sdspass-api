@@ -887,13 +887,11 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 txt = get_p(lang, m) or P_TEXTS.get(m, m)
                 story.append(Paragraph(f"• <b>{m}:</b> {txt}", styles['bullet']))
 
-    # ─── Zararlılığa Katkıda Bulunan Maddeler — CLP Ek II §2.8 ───────────────────
-    # H317 (cilt duyarlılaştırıcı) ve sucul tehlike (H400/H410/H411/H412) için
-    # bileşen kimliklerinin etikette yer alması zorunludur.
-    SENS_H    = {'H317','H334'}
-    AQUATIC_H = {'H400','H410','H411','H412'}
-    contrib_sens    = []
-    contrib_aquatic = []
+    # ─── Duyarlılaştırıcı Madde Kimliği — CLP Ek II §2.8 (ZORUNLU) ─────────────
+    # §2.8 yalnızca Skin Sens. (H317) ve Resp. Sens. (H334) için zorunludur.
+    # H319, H411 vb. için madde adı etikette ZORUNLU DEĞİL (denetim hatası).
+    SENS_H = {'H317','H334'}
+    contrib_sens = []
     for comp_c in components:
         comp_hcodes = {h.get('h_code','').replace('*','').strip() for h in comp_c.get('hazards',[])}
         if comp_hcodes & SENS_H:
@@ -901,21 +899,14 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             _cn = _cn or comp_c.get('name','') or comp_c.get('cas_no','')
             if _cn:
                 contrib_sens.append(_cn)
-        if comp_hcodes & AQUATIC_H:
-            _cn = comp_c.get('name_tr','') if lang=='TR' else ''
-            _cn = _cn or comp_c.get('name','') or comp_c.get('cas_no','')
-            if _cn:
-                contrib_aquatic.append(_cn)
-    if contrib_sens or contrib_aquatic:
-        lbl_contrib = 'Zararlılığa Katkıda Bulunan Maddeler' if lang=='TR' else 'Substances Contributing to Hazard Classification'
+    if contrib_sens:
+        # EUH208 zaten sensitizer adını içeriyor; burada da açık liste göster
+        lbl_s = 'Duyarlılaştırıcı içerir' if lang=='TR' else 'Contains sensitiser'
         story.append(Spacer(1, 3))
-        story.append(Paragraph(f"<b>{lbl_contrib} (CLP Ek II §2.8):</b>", styles['body_bold']))
-        if contrib_sens:
-            lbl_s = 'Cilt/solunum duyarlılaştırıcı' if lang=='TR' else 'Skin/respiratory sensitiser'
-            story.append(Paragraph(f"• {lbl_s}: {', '.join(set(contrib_sens))}", styles['bullet']))
-        if contrib_aquatic:
-            lbl_a = 'Sucul tehlike' if lang=='TR' else 'Aquatic hazard'
-            story.append(Paragraph(f"• {lbl_a}: {', '.join(set(contrib_aquatic))}", styles['bullet']))
+        story.append(Paragraph(
+            f"<b>{lbl_s} (CLP Ek II §2.8 / SEA Madde 20):</b> {', '.join(set(contrib_sens))}",
+            styles['body']
+        ))
 
     story += sub_block(f"2.3 {sub_title(lang,'2.3')}", styles)
     # PBT/vPvB

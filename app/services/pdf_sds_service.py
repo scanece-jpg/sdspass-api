@@ -1244,7 +1244,15 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     if phys.get('lel') or phys.get('uel'):
         _ex_val = f"%{phys.get('lel','?')} – %{phys.get('uel','?')}"
 
-    _vp_val = phys.get('vapor_pressure') or               (f"{phys.get('vapor_pressure_num')} hPa" if phys.get('vapor_pressure_num') else na)
+    _vp_raw = phys.get('vapor_pressure')
+    if _vp_raw not in (None, ''):
+        # Birim zaten içeriyorsa dokunma, sadece sayısal değere hPa ekle
+        _vp_val = str(_vp_raw) if any(u in str(_vp_raw) for u in ('hPa','kPa','mmHg','bar','Pa')) \
+                  else f"{_vp_raw} hPa"
+    elif phys.get('vapor_pressure_num'):
+        _vp_val = f"{phys.get('vapor_pressure_num')} hPa"
+    else:
+        _vp_val = na
 
     _er_lbl  = 'Buharlaşma Hızı' if lang=='TR' else 'Evaporation Rate'
     _kow_lbl = 'Dağılım Katsayısı (log Kow)' if lang=='TR' else 'Partition Coeff. (log Kow)'

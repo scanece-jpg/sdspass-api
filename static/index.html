@@ -471,11 +471,12 @@ const _sclMap = {};
 const _sclRaw = {};
 
 const CLP_CUTOFFS = {
-  'H300':1.0,'H301':1.0,'H302':5.0,'H310':1.0,'H311':1.0,'H312':5.0,
-  'H330':1.0,'H331':1.0,'H332':5.0,'H314':1.0,'H315':10.0,'H318':1.0,'H319':10.0,
+  // NOT: H300-H332 (Akut Toksisite) ATE formülü ile hesaplanır — GCL geçersiz (SEA Bölüm 3.1.3.6.1)
+  // NOT: H400-H413 (Sucul Tehlike) M-faktörlü toplam yöntemi ile hesaplanır — GCL eşikleri geçersiz
+  'H314':1.0,'H315':10.0,'H318':1.0,'H319':10.0,
   'H317':1.0,'H334':0.1,'H340':0.1,'H341':1.0,'H350':0.1,'H351':1.0,
   'H360':0.1,'H361':1.0,'H362':0.1,'H370':10.0,'H371':10.0,'H372':1.0,'H373':10.0,
-  'H335':20.0,'H336':20.0,'H304':10.0,'H400':0.1,'H410':0.1,'H411':1.0,'H412':10.0,'H413':25.0,
+  'H335':20.0,'H336':20.0,'H304':10.0,
 };
 
 function addComp(pf = {}) {
@@ -1693,6 +1694,16 @@ async function generatePDF() {
       if (r.source) physReasonMap[hc] = r.source;
     });
 
+    // Eco H kodları için gerekçe (M-faktörlü toplam formülü)
+    const ecoReasonMap = {};
+    const _ecoAquatic = eco?.aquatic;
+    if (_ecoAquatic?.h) ecoReasonMap[_ecoAquatic.h] = _ecoAquatic.formula || 'SEA Tablo 4.1.2 (M-faktörlü toplam)';
+
+    // ATE H kodları — SEA Tablo 3.1.2 puan tahmini (mg/kg veya mg/L)
+    const ATE_H_ORAL   = new Set(['H300','H301','H302']);
+    const ATE_H_DERMAL = new Set(['H310','H311','H312']);
+    const ATE_H_INHAL  = new Set(['H330','H331','H332']);
+
     const clpPassed = allH.map(hc => {
       const cu = cutoffUsed[hc];
       let reason = '';
@@ -1720,8 +1731,16 @@ async function generatePDF() {
               catLabel = matched.h_class ? ` (${matched.h_class})` : '';
             }
           }
+          reason = `${cu.source} >= %${displayVal}${catLabel}`;
+        } else if (cu.source === 'ATE') {
+          // ATE formülü — birim mg/kg (oral/dermal) veya mg/L (inhal)
+          const unit = ATE_H_INHAL.has(hc) ? 'mg/L' : 'mg/kg';
+          reason = `ATE karışım = ${displayVal} ${unit} (SEA Tablo 3.1.2)`;
+        } else {
+          reason = `${cu.source} >= %${displayVal}${catLabel}`;
         }
-        reason = `${cu.source} >= %${displayVal}${catLabel}`;
+      } else if (ecoReasonMap[hc]) {
+        reason = ecoReasonMap[hc];
       } else if (CLP_CUTOFFS[hc] !== undefined) {
         reason = `GCL >= %${CLP_CUTOFFS[hc]}`;
       } else if (physReasonMap[hc]) {

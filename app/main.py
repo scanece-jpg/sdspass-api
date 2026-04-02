@@ -108,16 +108,20 @@ async def generate_pdf(data: dict = Body(...)):
         except Exception:
             eco_result = None
 
-        # Backend eko sonucunu h_codes/all_h_codes'a ekle
-        # Frontend JS eco_engine ile Python ecological_service farklı eşik kullanabilir;
-        # Python sonucu daha güvenilir → Bölüm 2.1, etiket, taşımacılık, P kodu için kullan
+        # Backend eko sonucunu h_codes/all_h_codes'a ekle (REPLACE — frontend sonucunu geçersiz kıl)
+        # Frontend JS eco_engine farklı eşik kullanabilir; Python sonucu yetkilidir.
+        # Frontend'den gelen tüm H400/H410/H411/H412/H413 önce temizlenir, sonra Python sonucu eklenir.
+        ECO_H_CODES = {'H400', 'H410', 'H411', 'H412', 'H413'}
         _eco_h = None
         if eco_result and hasattr(eco_result, 'aquatic') and eco_result.aquatic:
             _eco_h = eco_result.aquatic.h_code
-        if _eco_h and _eco_h not in h_codes:
-            h_codes = list(h_codes) + [_eco_h]
-        if _eco_h and _eco_h not in all_h_codes:
-            all_h_codes = list(all_h_codes) + [_eco_h]
+        if _eco_h:
+            h_codes     = [h for h in h_codes     if h not in ECO_H_CODES] + [_eco_h]
+            all_h_codes = [h for h in all_h_codes if h not in ECO_H_CODES] + [_eco_h]
+        elif eco_result is not None:
+            # Eko sonucu yok → frontend'den gelen eko H kodlarını da temizle
+            h_codes     = [h for h in h_codes     if h not in ECO_H_CODES]
+            all_h_codes = [h for h in all_h_codes if h not in ECO_H_CODES]
 
         # H420 — Ozon tabakasına zararlı (CLP Annex VI)
         # ecological_service sds_section_12['H420'] listesine yazar ama h_codes'a eklemez

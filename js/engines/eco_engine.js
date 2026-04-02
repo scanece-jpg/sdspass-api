@@ -30,12 +30,15 @@ const EcoEngine = (() => {
 
   function calculate(comps, ecoTestData = {}) {
     const h_codes = [];
-    // CLP Annex I Tablo 4.1.3 — Python ecological_service.py ile aynı formül
+    // SEA Tablo 4.1.2 — Python ecological_service.py ile aynı formül
     // sumAcuteM    = Σ(Ci × M_acute)   / 100  → H400 ≥ 0.25
-    // sumChronicM  = Σ(Ci × M_chronic) / 100  → H410 ≥ 0.1 | H411 ≥ 0.01
-    //   (Chronic 1 M-faktörlü, Chronic 2 M=1 olarak eklenir)
-    // sumChronicP  = Σ(Ci)             / 100  → H412 ≥ 0.25 | H413 ≥ 0.025
-    let sumAcuteM = 0, sumChronicM = 0, sumChronicP = 0;
+    // sumChronicK1 = Σ(Ci × M_chronic) / 100  (K1: Chronic 1, M-faktörlü)
+    // sumChronicK2 = Σ(Ci)             / 100  (K2: Chronic 2, M=1)
+    // sumChronicK3 = Σ(Ci)             / 100  (K3: Chronic 3+4, M=1)
+    // H410: sumChronicK1 ≥ 0.25
+    // H411: 10×sumChronicK1 + sumChronicK2 ≥ 0.25
+    // H412: 100×sumChronicK1 + 10×sumChronicK2 + sumChronicK3 ≥ 0.25
+    let sumAcuteM = 0, sumChronicK1 = 0, sumChronicK2 = 0, sumChronicK3 = 0;
     const ozone=[], pbt=[];
 
     for (const c of comps) {
@@ -53,17 +56,24 @@ const EcoEngine = (() => {
           sumAcuteM += (conc * mAcute) / 100;
         }
         // H410 (Aquatic Chronic 1) — hem akut hem kronik katkı (M-faktörlü)
+        // Dahil etme kesim değeri: konc >= 0.1% / M
         if (code === 'H410') {
-          sumAcuteM   += (conc * mAcute)   / 100;
-          sumChronicM += (conc * mChronic) / 100;
+          sumAcuteM += (conc * mAcute) / 100;
+          if (conc >= (0.1 / Math.max(mChronic, 1))) {
+            sumChronicK1 += (conc * mChronic) / 100;
+          }
         }
-        // H411 (Aquatic Chronic 2) — kronik katkı (M=1 varsayılan)
+        // H411 (Aquatic Chronic 2) — K2 düz toplam, dahil etme kesimi >= 1%
         if (code === 'H411') {
-          sumChronicM += conc / 100;
+          if (conc >= 1.0) {
+            sumChronicK2 += conc / 100;
+          }
         }
-        // H412 (Aquatic Chronic 3) ve H413 (Chronic 4) — düz toplam
+        // H412 (Aquatic Chronic 3) ve H413 (Chronic 4) — K3 düz toplam, dahil etme kesimi >= 1%
         if (code === 'H412' || code === 'H413') {
-          sumChronicP += conc / 100;
+          if (conc >= 1.0) {
+            sumChronicK3 += conc / 100;
+          }
         }
       }
 
@@ -71,12 +81,13 @@ const EcoEngine = (() => {
       if (PBT_CAS.has(cas)   && conc >= 0.1) pbt.push(  { name: c.name || cas, cas, conc });
     }
 
-    // Kronik sınıflandırma (öncelik sırası)
+    // Kronik sınıflandırma — SEA Tablo 4.1.2 (öncelik sırası)
+    const h411Sum = 10 * sumChronicK1 + sumChronicK2;
+    const h412Sum = 100 * sumChronicK1 + 10 * sumChronicK2 + sumChronicK3;
     let aquatic = null;
-    if      (sumChronicM >= 0.1)  aquatic = { h:'H410', cls:'Aquatic Chronic 1', formula:`Σ(Ci×M)/100=${sumChronicM.toFixed(4)} ≥ 0.1` };
-    else if (sumChronicM >= 0.01) aquatic = { h:'H411', cls:'Aquatic Chronic 2', formula:`Σ(Ci×M)/100=${sumChronicM.toFixed(4)} ≥ 0.01` };
-    else if (sumChronicP >= 0.25) aquatic = { h:'H412', cls:'Aquatic Chronic 3', formula:`Σ(Ci)/100=${sumChronicP.toFixed(4)} ≥ 0.25` };
-    else if (sumChronicP >= 0.025)aquatic = { h:'H413', cls:'Aquatic Chronic 4', formula:`Σ(Ci)/100=${sumChronicP.toFixed(4)} ≥ 0.025` };
+    if      (sumChronicK1 >= 0.25) aquatic = { h:'H410', cls:'Aquatic Chronic 1', formula:`Σ(Ci×M)/100=${sumChronicK1.toFixed(4)} ≥ 0.25` };
+    else if (h411Sum      >= 0.25) aquatic = { h:'H411', cls:'Aquatic Chronic 2', formula:`10×Σ[K1×M]+Σ[K2]=${h411Sum.toFixed(4)} ≥ 0.25` };
+    else if (h412Sum      >= 0.25) aquatic = { h:'H412', cls:'Aquatic Chronic 3', formula:`100×Σ[K1×M]+10×Σ[K2]+Σ[K3]=${h412Sum.toFixed(4)} ≥ 0.25` };
 
     if (aquatic) h_codes.push(aquatic.h);
 

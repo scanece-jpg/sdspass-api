@@ -414,9 +414,10 @@ P_LABEL_PRIORITY: Dict[str, int] = {
 
     # Prevention — kritik önlemler
     'P210': 55,       # Yanıcı → tutuşma kaynağı (H224/H225/H226 için kritik)
+    'P370+P378': 54,  # Yangın müdahale → H225/H226 için zorunlu (CLP Annex IV)
+    'P273': 52,       # Çevre — H411/H410/H400 için CLP Annex IV gereği etikette olmalı
     'P280': 51,       # KKE — H317/H319/H314 için zorunlu
     'P260': 48,       # Solunum koruma
-    'P273': 52,       # Çevre — H411/H410/H400 için CLP Annex IV gereği etikette olmalı
     'P284': 44,       # Solunum cihazı
     'P201': 43,       # CMR — talimat al
     'P263': 42,       # Hamile/emziren

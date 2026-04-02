@@ -9,10 +9,9 @@
 const CLPEngine = (() => {
 
   // ── CLP Annex I Kesme Değerleri ──────────────────────────────────────────────
+  // NOT: H300-H332 (Akut Toksisite) GCL ile değil, SEA Tablo 3.1.2 ATE formülü
+  // ile sınıflandırılır (bkz. ATE_POINT / calculateATE). GCL buradan çıkarıldı.
   const CUTOFFS = {
-    'H300':1.0,'H301':1.0,'H302':5.0,
-    'H310':1.0,'H311':1.0,'H312':5.0,
-    'H330':1.0,'H331':1.0,'H332':5.0,
     'H314':1.0,'H315':10.0,'H318':1.0,'H319':10.0,
     'H317':1.0,'H334':0.1,
     'H340':0.1,'H341':1.0,
@@ -23,6 +22,46 @@ const CLPEngine = (() => {
     'H304':10.0,
     // H400-H413 → EcoEngine'de M-faktörlü toplamlı yöntem (Annex V §4.1.2) — burada yok
   };
+
+  // ── SEA/CLP Tablo 3.1.2 — ATE Nokta Tahminleri ──────────────────────────────
+  // Karışım ATE formülünde (100/ATEmix = Σ Ci/ATEi) kullanılacak bileşen değerleri.
+  // 2000 mg/kg Kat.4 üst SINIRIDIR; formülde kullanılan NOKTA TAHMİNİ 500 mg/kg'dır.
+  const ATE_POINT = {
+    // Oral (Ağız yolu) mg/kg
+    'H300':  0.5,   // Kat. 1 (Kat.2 için h_class "Acute Tox. 2" → 5)
+    'H301':  100,   // Kat. 3
+    'H302':  500,   // Kat. 4
+    // Deri yolu mg/kg
+    'H310':  0.5,   // Kat. 1 (Kat.2 → 50)
+    'H311':  200,   // Kat. 3
+    'H312':  1000,  // Kat. 4
+    // Soluma - buhar mg/L/4h
+    'H330':  0.05,  // Kat. 1 (Kat.2 → 0.5)
+    'H331':  3.0,   // Kat. 3
+    'H332':  11.0,  // Kat. 4
+  };
+  // Kat.2 düzeltmesi: h_class "Acute Tox. 2" olduğunda H300/H310/H330 için
+  const ATE_CAT2 = { 'H300': 5, 'H310': 50, 'H330': 0.5 };
+
+  // Yol → ilgili H kodları
+  const ATE_ROUTES = {
+    oral:   ['H300','H301','H302'],
+    dermal: ['H310','H311','H312'],
+    inhal:  ['H330','H331','H332'],
+  };
+
+  // SEA/CLP Tablo 3.1.1 — ATE_mix → H kodu eşikleri
+  const ATE_CLASSIFY = {
+    oral:   [{max:5,    h:'H300'},{max:50,   h:'H300'},
+             {max:300,  h:'H301'},{max:2000, h:'H302'}],
+    dermal: [{max:50,   h:'H310'},{max:200,  h:'H310'},
+             {max:1000, h:'H311'},{max:2000, h:'H312'}],
+    inhal:  [{max:0.5,  h:'H330'},{max:2.0,  h:'H330'},
+             {max:10,   h:'H331'},{max:20,   h:'H332'}],
+  };
+
+  // ATE formülü ile işlenecek kodlar — flatMap'te GCL atlanır
+  const ATE_HCODES = new Set(['H300','H301','H302','H310','H311','H312','H330','H331','H332']);
 
   // ── CLP Dominance (Üstünlük) Kuralları ──────────────────────────────────────
   // Kaynak: CLP (AT) No 1272/2008, Annex I + Annex V
@@ -202,8 +241,9 @@ const CLPEngine = (() => {
       return (c.hazards || []).flatMap(h => {
         const code = (h.h_code || '').replace(/[*\s]/g,'').substring(0,4);
         if (!code.startsWith('H')) return [];
-        if (FLAM_SKIP.has(code)) return []; // Yanıcılık fiziksel engine'de
-        if (ECO_SKIP.has(code))  return []; // Sucul tehlike EcoEngine'de (M-faktörlü)
+        if (FLAM_SKIP.has(code))  return []; // Yanıcılık fiziksel engine'de
+        if (ECO_SKIP.has(code))   return []; // Sucul tehlike EcoEngine'de (M-faktörlü)
+        if (ATE_HCODES.has(code)) return []; // Akut Toksisite → ATE engine'de (SEA Tablo 3.1.2)
 
         // ── Öncelik 1: SCL — maddeye özel (Annex VI, KKDİK Ek-1) ──────────────
         const scl = c.scl && c.scl[code] !== undefined ? c.scl[code] : null;
@@ -272,6 +312,53 @@ const CLPEngine = (() => {
         cutoffUsed['H319'] = { value: 10.0, source: 'GCL-sum', cas: 'KARIŞIM' };
       }
     }
+
+    // ── SEA/CLP Bölüm 3.1.3.6.1: ATE Formülü ────────────────────────────────────
+    // Her maruziyet yolu (oral/dermal/inhal) için ayrı hesap:
+    //   ATE_mix = 100 / Σ(Ci / ATEi)
+    // Bileşen ATE değeri: Tablo 3.1.2 nokta tahmini (Kat.4 oral = 500 mg/kg).
+    // Sonuç Tablo 3.1.1 eşikleriyle karşılaştırılır.
+    Object.entries(ATE_ROUTES).forEach(([route, codes]) => {
+      const codeSet = new Set(codes);
+      let sumInv = 0;
+      let hasAny = false;
+
+      comps.forEach(c => {
+        const conc = parseFloat(c.concMax || c.conc) || 0;
+        (c.hazards || []).forEach(h => {
+          const code = (h.h_code || '').replace(/[*\s]/g, '').substring(0, 4);
+          if (!codeSet.has(code)) return;
+          let ate = ATE_POINT[code];
+          if (!ate) return;
+          // Kat.2 bileşen düzeltmesi (Tablo 3.1.2)
+          const hclass = (h.h_class || '').trim();
+          if (hclass === 'Acute Tox. 2' && ATE_CAT2[code] !== undefined) {
+            ate = ATE_CAT2[code];
+          }
+          sumInv += conc / ate;
+          hasAny = true;
+        });
+      });
+
+      if (!hasAny || sumInv === 0) return;
+      const ate_mix = 100 / sumInv;
+
+      // Tablo 3.1.1: ATE_mix → H kodu
+      let resultCode = null;
+      for (const { max, h } of ATE_CLASSIFY[route]) {
+        if (ate_mix <= max) { resultCode = h; break; }
+      }
+      if (!resultCode) return; // ate_mix > 2000 → sınıflandırma yok
+
+      if (!raw.includes(resultCode)) {
+        raw.push(resultCode);
+        cutoffUsed[resultCode] = {
+          value: Math.round(ate_mix * 10) / 10,
+          source: 'ATE',
+          cas: 'KARIŞIM',
+        };
+      }
+    });
 
     // 2. Deduplikasyon
     const result = [...new Set(raw)];

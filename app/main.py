@@ -218,7 +218,8 @@ async def generate_pdf(data: dict = Body(...)):
                 'cas_no':        c.get('cas', c.get('cas_no', '')),
                 'name':          name,
                 'name_tr':       name_tr,   # Türkçe SDS için
-                'concentration': conc,
+                'concentration': conc,      # standart alan (servisler bu adı kullanır)
+                'conc':          conc,      # eski servisler için alias (comp.get('conc',...))
                 'conc_str':      conc_str,
                 'conc_min':      conc_min,
                 'conc_max':      conc_max,

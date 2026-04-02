@@ -1257,9 +1257,55 @@ function initPipeline() {
 
   EventBus.on('H_CODES_READY',    r => { _state.clp = r; tryRender(); });
   EventBus.on('STOT_READY',       r => { _state.stot = r; tryRender(); });
-  EventBus.on('ECO_READY',        r => { _state.eco = r; tryRender(); });
+  EventBus.on('ECO_READY',        r => { _state.eco = r; tryRender(); _verifyEcoWithServer(); });
   EventBus.on('EUH_READY',        r => { _state.euh = r; tryRender(); });
   EventBus.on('PHYSICAL_READY',   r => { _state.phys = r; tryRender(); });
+
+  // Sunucu-taraflı sucul tehlike doğrulaması (yetkili sonuç — PDF ile aynı)
+  // ECO_READY'den sonra asenkron çalışır, fark varsa ekranı günceller.
+  async function _verifyEcoWithServer() {
+    try {
+      const comps = getComps();
+      if (!comps.length) return;
+      const payload = {
+        components: comps.map(c => ({
+          cas: c.cas, cas_no: c.cas, name: c.name,
+          conc: c.conc, concentration: c.conc,
+          hazards: c.hazards || [],
+          m_factors: c.m_factors || {},
+        }))
+      };
+      const res = await fetch(API_BASE + '/ecological/assess', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) return;
+      const data = await res.json();
+      if (!data.success) return;
+
+      // Sunucu yanıtını eco_engine.js formatına çevir
+      const aq = data.result?.aquatic;
+      const srvEco = {
+        aquatic:     aq ? { h: aq.h_code, cls: aq.h_class, formula: aq.formula } : null,
+        h_codes:     aq?.h_code ? [aq.h_code] : [],
+        ozone:       _state.eco?.ozone  || [],  // JS motordan gelen ozon verisi korunur
+        pbt:         _state.eco?.pbt    || [],
+        _fromServer: true,
+      };
+
+      // JS ve sunucu sonuçları farklıysa ekranı güncelle
+      const oldH = JSON.stringify((_state.eco?.h_codes || []).slice().sort());
+      const newH = JSON.stringify(srvEco.h_codes.slice().sort());
+      if (oldH !== newH) {
+        console.info('[ECO-Server] JS:', _state.eco?.h_codes, '→ Sunucu:', srvEco.h_codes);
+        _state.eco = srvEco;
+        tryRender();
+      }
+    } catch (e) {
+      console.warn('[ECO-Server] Doğrulama başarısız (JS sonucu kullanılıyor):', e.message);
+    }
+  }
 
   EventBus.on('PIPELINE_START', () => {
     REQUIRED.forEach(k => delete _state[k]);

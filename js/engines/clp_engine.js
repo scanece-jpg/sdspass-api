@@ -331,7 +331,8 @@ const CLPEngine = (() => {
           let ate = ATE_POINT[code];
           if (!ate) return;
           // Kat.2 bileşen düzeltmesi (Tablo 3.1.2)
-          const hclass = (h.h_class || '').trim();
+          // "Acute Tox. 2 *" (inhalasyon) → * temizlenerek "Acute Tox. 2" eşleşmesi sağlanır
+          const hclass = (h.h_class || '').replace(/\*/g, '').trim();
           if (hclass === 'Acute Tox. 2' && ATE_CAT2[code] !== undefined) {
             ate = ATE_CAT2[code];
           }

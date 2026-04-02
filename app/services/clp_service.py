@@ -144,13 +144,16 @@ def classify_mixture_clp(components: list) -> dict:
             cutoff = rule["cutoff"]
             h = rule["h"]
 
-            # SCL override — bileşenin özel konsantrasyon sınırı generic cut-off'tan düşükse kullan
+            # SCL override — SEA Ek-6 / CLP Annex VI maddeye özel sınır GCL'nin YERİNE GEÇİCEKTİR.
+            # Mevzuat: SEA Ek-I §1.2.1.3 / CLP 1272/2008 Art.10(3):
+            # SCL büyük de olsa küçük de olsa GCL'yi tamamen devre dışı bırakır.
             scl_list = comp.get("scl", [])
             for scl_entry in scl_list:
                 if scl_entry.get("h_class") == h_class or scl_entry.get("h_code") == h:
                     c_min = scl_entry.get("c_min")
-                    if c_min is not None and float(c_min) < cutoff:
-                        cutoff = float(c_min)
+                    if c_min is not None:
+                        cutoff = float(c_min)  # SCL her zaman GCL'nin yerini alır
+                        break
 
             if conc < cutoff:
                 warnings.append(

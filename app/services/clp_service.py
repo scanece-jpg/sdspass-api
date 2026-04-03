@@ -287,12 +287,14 @@ CUTOFFS = {
     'Asp. Tox. 1':     {'cutoff': 10.0, 'pictogram': 'GHS08', 'signal': 'Danger'},
 }
 
-# ATE kategori varsayılan değerleri (spesifik ATE yoksa kullanılır)
+# ATE nokta tahminleri — SEA Tablo 3.1.2 / CLP Annex I Table 3.1.2
+# UYARI: Bu değerler kategori SINIR değerleri değil, ATE formülünde kullanılan
+# NOKTA TAHMİNLERİDİR. Örn: Oral Kat.4 üst sınırı 2000 mg/kg, nokta tahmini 500 mg/kg.
 ATE_DEFAULTS = {
-    'oral':             {'Acute Tox. 1': 5,    'Acute Tox. 2': 50,   'Acute Tox. 3': 300,  'Acute Tox. 4': 2000},
-    'dermal':           {'Acute Tox. 1': 50,   'Acute Tox. 2': 200,  'Acute Tox. 3': 1000, 'Acute Tox. 4': 2000},
+    'oral':             {'Acute Tox. 1': 0.5,  'Acute Tox. 2': 5,    'Acute Tox. 3': 100,  'Acute Tox. 4': 500},
+    'dermal':           {'Acute Tox. 1': 0.5,  'Acute Tox. 2': 50,   'Acute Tox. 3': 200,  'Acute Tox. 4': 1000},
     'inhalation_dust':  {'Acute Tox. 1': 0.05, 'Acute Tox. 2': 0.5,  'Acute Tox. 3': 1.0,  'Acute Tox. 4': 5.0},
-    'inhalation_vapour':{'Acute Tox. 1': 0.5,  'Acute Tox. 2': 2.0,  'Acute Tox. 3': 10.0, 'Acute Tox. 4': 20.0},
+    'inhalation_vapour':{'Acute Tox. 1': 0.05, 'Acute Tox. 2': 0.5,  'Acute Tox. 3': 3.0,  'Acute Tox. 4': 11.0},
     'inhalation':       {'Acute Tox. 1': 0.05, 'Acute Tox. 2': 0.5,  'Acute Tox. 3': 1.0,  'Acute Tox. 4': 5.0},
 }
 

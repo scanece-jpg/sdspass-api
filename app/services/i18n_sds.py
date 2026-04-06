@@ -117,7 +117,7 @@ LANG_DATA: Dict[str, Dict] = {
         'label': {
             'signal_word':    'Uyarı Sözcüğü',
             'danger':         'Tehlike',
-            'warning':        'Dikkat',
+            'warning':        'Uyarı',   # KKDİK Ek-3 / SEA Yönetmeliği doğru karşılık
             'none':           'Yok',
             'hazard_stmts':   'Tehlike İfadeleri',
             'precaut_stmts':  'Önlem İfadeleri',

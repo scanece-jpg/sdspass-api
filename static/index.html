@@ -1813,45 +1813,56 @@ async function generatePDF() {
     const ATE_H_DERMAL = new Set(['H310','H311','H312']);
     const ATE_H_INHAL  = new Set(['H330','H331','H332']);
 
+    // Kaynak etiket → Türkçe gerekçe metni dönüştürücü (PDF Bölüm 2.1)
+    const _srcLabel = (src, val, catHclass) => {
+      const hcTR = c => (typeof CLPEngine !== 'undefined' && CLPEngine.translateClass)
+        ? CLPEngine.translateClass(c) : c;  // h_class Türkçe (mevcut ise)
+      switch(src) {
+        case 'GCL':            return `Genel Kons. Sınırı (GKS) ≥ %${val}`;
+        case 'SCL':            return `Maddeye Özgü Kons. Sınırı (MÖKS) ≥ %${val}${catHclass ? ' ('+catHclass+')' : ''}`;
+        case 'GCL-sum-SC1':    return `SEA Tablo 3.2.3: Σ Cilt Aş.1 = %${val} ≥ %5 (toplamlı)`;
+        case 'GCL-sum-ED1':    return `SEA Tablo 3.3.3: Σ Göz Has.1 = %${val} ≥ %3 (toplamlı)`;
+        case 'GCL-sum-weighted': return `SEA Tablo: 10×Σ Kat.1 + Σ Kat.2 = %${val} ≥ %10 (toplamlı)`;
+        case 'GCL-transition': return `H370→H371 geçiş kuralı (GKS %${val})`;
+        case 'ATE':            return `ATE karışım (hesaplanan)`;
+        default:               return `${src} ≥ %${val}`;
+      }
+    };
+
     const clpPassed = allH.map(hc => {
       const cu = cutoffUsed[hc];
       let reason = '';
       if (cu) {
-        // SCL varsa: bileşen konsantrasyonuna göre hangi kategori eşiği aşıldı?
-        // sclRaw'dan doğru eşiği bul (en yüksek c_min değeri aşılan)
         let displayVal = cu.value;
-        let catLabel = '';
+        let catHclass = '';
         if (cu.source === 'SCL' && cu.cas) {
-          // cu.cas ile hangi bileşenin SCL verisi olduğunu bul
+          // Maddeye özgü konsantrasyon sınırı — doğru eşiği bul
           const compIdx = Object.keys(_sclMap).find(id => {
             const cw = document.getElementById('cw' + id);
             return cw && cw.querySelector('.ci')?.value?.trim() === cu.cas;
           });
           if (compIdx) {
             const raw = (_sclRaw[compIdx] || []).filter(s => s.h_code === hc);
-            // Bileşenin konsantrasyonu
             const concVal = parseFloat(document.getElementById('cmax' + compIdx)?.value
                           || document.getElementById('cmin' + compIdx)?.value) || 0;
-            // Konsantrasyonun aştığı en yüksek eşik = doğru kategori
             const matched = raw.filter(s => concVal >= (s.c_min || 0))
                                .sort((a,b) => b.c_min - a.c_min)[0];
             if (matched) {
               displayVal = matched.c_min;
-              catLabel = matched.h_class ? ` (${matched.h_class})` : '';
+              catHclass  = matched.h_class || '';
             }
           }
-          reason = `${cu.source} >= %${displayVal}${catLabel}`;
+          reason = _srcLabel('SCL', displayVal, catHclass);
         } else if (cu.source === 'ATE') {
-          // ATE formülü — birim mg/kg (oral/dermal) veya mg/L (inhal)
           const unit = ATE_H_INHAL.has(hc) ? 'mg/L' : 'mg/kg';
           reason = `ATE karışım = ${displayVal} ${unit} (SEA Tablo 3.1.2)`;
         } else {
-          reason = `${cu.source} >= %${displayVal}${catLabel}`;
+          reason = _srcLabel(cu.source, displayVal, '');
         }
       } else if (ecoReasonMap[hc]) {
         reason = ecoReasonMap[hc];
       } else if (CLP_CUTOFFS[hc] !== undefined) {
-        reason = `GCL >= %${CLP_CUTOFFS[hc]}`;
+        reason = `Genel Kons. Sınırı (GKS) ≥ %${CLP_CUTOFFS[hc]}`;
       } else if (physReasonMap[hc]) {
         reason = physReasonMap[hc];
       }

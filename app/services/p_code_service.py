@@ -231,7 +231,8 @@ H_TO_P: Dict[str, List[str]] = {
     # ── STOT ─────────────────────────────────────────────────────────────────
     'H370': ['P260','P264','P270','P307+P311','P405','P501'],
     'H371': ['P260','P264','P270','P308+P313','P405','P501'],
-    'H372': ['P260','P264','P270','P314','P501'],
+    # H372 Tehlike → P405 (kilitli depolama) eklendi — CLP Annex IV best practice
+    'H372': ['P260','P264','P270','P314','P405','P501'],
     'H373': ['P260','P314','P501'],
 
     # ── Aquatic ───────────────────────────────────────────────────────────────
@@ -265,7 +266,9 @@ H_TO_P: Dict[str, List[str]] = {
     'H261': ['P231+P232','P370+P378','P402+P404','P501'],
 
     # ── Pirofor ──────────────────────────────────────────────────────────────
-    'H250': ['P210','P222','P280','P302+P334','P370+P378','P422'],
+    # H250: P422 geçersiz kod — CLP Annex IV Tablo 6.2'de yoktur, kaldırıldı
+    # Geçerli pirofor kodları: P210, P222, P235+P410, P280, P302+P334, P370+P378
+    'H250': ['P210','P222','P235+P410','P280','P302+P334','P370+P378'],
     'H251': ['P235+P410','P407','P413','P420'],
     'H252': ['P235+P410','P407','P413','P420'],
 
@@ -412,20 +415,20 @@ P_LABEL_PRIORITY: Dict[str, int] = {
     'P342+P311': 72,  'P302+P352': 65,      'P333+P313': 61,
     'P332+P313': 57,  'P337+P313': 55,
 
-    # Prevention — kritik önlemler
-    'P210': 55,       # Yanıcı → tutuşma kaynağı (H224/H225/H226 için kritik)
-    'P370+P378': 54,  # Yangın müdahale → H225/H226 için zorunlu (CLP Annex IV)
-    'P273': 52,       # Çevre — H411/H410/H400 için CLP Annex IV gereği etikette olmalı
-    'P280': 51,       # KKE — H317/H319/H314 için zorunlu
-    'P260': 48,       # Solunum koruma
-    'P284': 44,       # Solunum cihazı
-    'P201': 43,       # CMR — talimat al
-    'P263': 42,       # Hamile/emziren
-    'P271': 40,       # Açık hava
-    'P261': 38,
+    # Prevention + Response — kritik önlemler
+    'P370+P378': 56,  # Yangın müdahale → acil yanıt (response > prevention, CLP Annex IV)
+    'P210': 54,       # Yanıcı → tutuşma kaynağı önleme (H224/H225/H226)
+    'P273': 52,       # Çevre — H411/H410/H400 için ECHA rehber gereği etikette olmalı
+    'P280': 51,       # KKE — H317/H319/H314 için zorunlu (H_BASED_LABEL_FORCED ile zaten giriyor)
+    'P260': 48,       # Solunum koruma (H334/H330/H372 için kritik)
+    'P284': 44,       # Solunum cihazı (H334 Resp.Sens. için)
+    'P201': 43,       # CMR — talimat al (H340/H350/H360 için)
+    'P263': 42,       # Hamile/emziren (H360 için)
+    'P271': 40,       # Açık hava/ventilasyon (H330/H331)
+    'P261': 38,       # Buhar/toz solumaktan kaçın
 
     # Storage
-    'P405': 35,       # Kilitli
+    'P405': 36,       # Kilitli (H_BASED_LABEL_FORCED ile kritik H'lar için zaten giriyor)
     'P403+P235': 33,  # Serin havalandırmalı
     'P403+P233': 32,
     'P410+P412': 30,
@@ -449,22 +452,31 @@ P_LABEL_MANDATORY = ['P101', 'P102']
 # H kodu bazlı etiket zorunlu P kodları — CLP Annex IV zorunluluğu
 # Bu P kodları ilgili H kodu varken her zaman etikete yazılmalı (6 limitinden önce eklenir)
 H_BASED_LABEL_FORCED: Dict[str, List[str]] = {
-    # Cilt aşınması / göz hasarı — KKE ve kilitli depolama zorunlu (CLP Annex IV)
+    # Cilt aşınması — KKE + kilitli depolama zorunlu (CLP Annex IV + Annex III)
     'H314': ['P280', 'P405'],
-    # Ağır göz hasarı — KKE zorunlu (H318 H314 ile çakışırsa P280 zaten var)
+    # Ağır göz hasarı — KKE zorunlu (H318, H314 ile çakışırsa P280 zaten var)
     'H318': ['P280'],
-    # Öldürücü yutma/solunum — kilitli depolama zorunlu
+    # Öldürücü / ağır akut toksisite — kilitli depolama zorunlu (CLP Annex IV)
     'H300': ['P405'],
     'H301': ['P405'],
     'H310': ['P405'],
     'H330': ['P405'],
-    # Kanserojen/mutajen/üreme toksik — KKE ve bilgi alma zorunlu
+    # STOT SE 1 / Tehlike — kilitli depolama (kronik maruziyeti önlemek için)
+    'H370': ['P405'],
+    # Kanserojen / mutajen / üreme toksik — KKE + bilgi alma + kilitli (CLP Annex IV)
     'H340': ['P280', 'P405'],
     'H350': ['P280', 'P405'],
     'H360': ['P280', 'P405'],
-    # Oksitleyici — yanıcılardan uzak tut (H271/H272 için P220 CLP Annex III zorunlu)
-    'H271': ['P220'],
-    'H272': ['P220'],
+    # Oksitleyici sıvı — yanıcılardan uzak tut (CLP Annex III Tablo 3.4.3)
+    # H271 (Ox. Liq. 1): P220 (uzak tut) zorunlu
+    'H271': ['P220', 'P221'],
+    # H272 (Ox. Liq. 2/3): hem P220 hem P221 zorunlu (CLP Annex III)
+    # P221 = yanıcılarla karışımı kesinlikle önle
+    'H272': ['P220', 'P221'],
+    # Sucul çevre tehlikesi — P273 (çevreye bırakma) etikette zorunlu (ECHA Rehber)
+    'H400': ['P273'],
+    'H410': ['P273'],
+    'H411': ['P273'],
 }
 
 def select_label_p_codes(all_p_codes: List[str], max_codes: int = 6,
@@ -586,7 +598,7 @@ P_SDS_PRIORITY: Dict[str, str] = {
     # ── MUTLAKA YAZ (Prevention — kritik) ────────────────────
     'P210':           'mandatory',   # Yanıcı — tutuşma kaynağı
     'P220':           'mandatory',   # Oksitleyici — yanıcılardan uzak tut (CLP Annex III H271/H272)
-    'P221':           'evaluate',    # Oksitleyici — yanıcılarla karışımı önle
+    'P221':           'mandatory',   # Oksitleyici — yanıcılarla karışımı kesinlikle önle (CLP Annex III)
     'P260':           'mandatory',   # Solunum koruma
     'P273':           'mandatory',   # Çevre — salınım
     'P280':           'mandatory',   # KKE

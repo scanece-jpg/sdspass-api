@@ -51,25 +51,31 @@ const EcoEngine = (() => {
 
       for (const h of (c.hazards || [])) {
         const code = (h.h_code || '').replace(/[*\s]/g,'').substring(0,4);
-        // H400 (Aquatic Acute 1) — akut katkı
+
+        // H400 (Aquatic Acute 1) — dahil etme eşiği: ≥ %0.1 / M_akut
         if (code === 'H400') {
-          sumAcuteM += (conc * mAcute) / 100;
+          if (conc >= (0.1 / Math.max(mAcute, 1))) {
+            sumAcuteM += (conc * mAcute) / 100;
+          }
         }
-        // H410 (Aquatic Chronic 1) — hem akut hem kronik katkı (M-faktörlü)
-        // Dahil etme kesim değeri: konc >= 0.1% / M
+
+        // H410 (Aquatic Chronic 1) — hem akut hem kronik hesaba girer
+        // Dahil etme eşiği: ≥ %0.1 / M_kronik
         if (code === 'H410') {
-          sumAcuteM += (conc * mAcute) / 100;
           if (conc >= (0.1 / Math.max(mChronic, 1))) {
+            sumAcuteM    += (conc * mAcute)   / 100;  // kronik 1 → akut katkı da var
             sumChronicK1 += (conc * mChronic) / 100;
           }
         }
-        // H411 (Aquatic Chronic 2) — K2 düz toplam, dahil etme kesimi >= 1%
+
+        // H411 (Aquatic Chronic 2) — dahil etme eşiği: ≥ %1.0 (düz, M-faktörsüz)
         if (code === 'H411') {
           if (conc >= 1.0) {
             sumChronicK2 += conc / 100;
           }
         }
-        // H412 (Aquatic Chronic 3) ve H413 (Chronic 4) — K3 düz toplam, dahil etme kesimi >= 1%
+
+        // H412/H413 (Aquatic Chronic 3/4) — dahil etme eşiği: ≥ %1.0 (düz)
         if (code === 'H412' || code === 'H413') {
           if (conc >= 1.0) {
             sumChronicK3 += conc / 100;
@@ -81,18 +87,24 @@ const EcoEngine = (() => {
       if (PBT_CAS.has(cas)   && conc >= 0.1) pbt.push(  { name: c.name || cas, cas, conc });
     }
 
-    // Kronik sınıflandırma — SEA Tablo 4.1.2 (öncelik sırası)
+    // ── SEA Tablo 4.1.2 — Kronik önce, akut sonra (H410 baskınlık kuralı) ──────
     const h411Sum = 10 * sumChronicK1 + sumChronicK2;
     const h412Sum = 100 * sumChronicK1 + 10 * sumChronicK2 + sumChronicK3;
+    const h413Sum = sumChronicK1 + sumChronicK2 + sumChronicK3; // düz toplam
+
     let aquatic = null;
-    if      (sumChronicK1 >= 0.25) aquatic = { h:'H410', cls:'Aquatic Chronic 1', formula:`Σ(Ci×M)/100=${sumChronicK1.toFixed(4)} ≥ 0.25` };
+    if      (sumChronicK1 >= 0.25) aquatic = { h:'H410', cls:'Aquatic Chronic 1', formula:`Σ(Ci×M_kr)/100=${sumChronicK1.toFixed(4)} ≥ 0.25` };
     else if (h411Sum      >= 0.25) aquatic = { h:'H411', cls:'Aquatic Chronic 2', formula:`10×Σ[K1×M]+Σ[K2]=${h411Sum.toFixed(4)} ≥ 0.25` };
     else if (h412Sum      >= 0.25) aquatic = { h:'H412', cls:'Aquatic Chronic 3', formula:`100×Σ[K1×M]+10×Σ[K2]+Σ[K3]=${h412Sum.toFixed(4)} ≥ 0.25` };
+    else if (h413Sum      >= 0.25) aquatic = { h:'H413', cls:'Aquatic Chronic 4', formula:`Σ(Ci tüm kronik)/100=${h413Sum.toFixed(4)} ≥ 0.25` };
 
     if (aquatic) h_codes.push(aquatic.h);
 
-    // Akut sınıflandırma — H410/H400 kaynaklı
-    if (sumAcuteM >= 0.25 && !h_codes.includes('H400')) h_codes.push('H400');
+    // H400: H410 atanmamışsa ve akut eşik aşılmışsa
+    // Baskınlık kuralı: H410 varsa H400 eklenmez (H410 zaten akut riski kapsar)
+    const hasH410 = h_codes.includes('H410');
+    if (sumAcuteM >= 0.25 && !hasH410 && !h_codes.includes('H400')) h_codes.push('H400');
+
     if (ozone.length) h_codes.push('H420');
 
     return { aquatic, ozone, pbt, h_codes };

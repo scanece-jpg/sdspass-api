@@ -240,22 +240,28 @@ def calculate_aquatic(
 
         for haz in hazards:
             hc = haz.get('h_class', '').replace('*', '').strip()
+
             if hc == 'Aquatic Acute 1':
-                val = (conc * m_acute) / 100
-                sum_acute_m += val
-                detail_parts.append(f"{cas} Acute M={m_acute}")
-                comp_m_details.append({
-                    'cas': cas, 'name': comp.get('name',''),
-                    'name_tr': comp.get('name_tr',''),
-                    'conc': conc,
-                    'm_acute': m_acute, 'm_chronic': m_chronic,
-                    'h_class': 'Aquatic Acute 1',
-                })
+                # Dahil etme eşiği: ≥ %0.1 / M_akut  (SEA Ek-1 §4.1.3.5.5)
+                if conc >= (0.1 / max(m_acute, 1)):
+                    sum_acute_m += (conc * m_acute) / 100
+                    detail_parts.append(f"{cas} Acute M={m_acute}")
+                    comp_m_details.append({
+                        'cas': cas, 'name': comp.get('name',''),
+                        'name_tr': comp.get('name_tr',''),
+                        'conc': conc,
+                        'm_acute': m_acute, 'm_chronic': m_chronic,
+                        'h_class': 'Aquatic Acute 1',
+                    })
+
             elif hc == 'Aquatic Chronic 1':
-                # Dahil etme eşiği (inclusion cut-off): 0.1%/M — altındakiler formüle girmez
+                # Dahil etme eşiği: ≥ %0.1 / M_kronik  (SEA Ek-1 §4.1.3.5.5)
                 if conc >= (0.1 / max(m_chronic, 1)):
+                    # Kronik 1 hem akut hem kronik hesaba girer (H410 = Kronik 1 + Akut 1)
+                    sum_acute_m    += (conc * m_acute)   / 100
                     sum_chronic1_m += (conc * m_chronic) / 100
                     sum_chronic_plain += conc / 100
+                    detail_parts.append(f"{cas} Chronic1 M_akut={m_acute} M_kronik={m_chronic}")
                     comp_m_details.append({
                         'cas': cas, 'name': comp.get('name',''),
                         'name_tr': comp.get('name_tr',''),
@@ -263,9 +269,10 @@ def calculate_aquatic(
                         'm_acute': m_acute, 'm_chronic': m_chronic,
                         'h_class': hc,
                     })
+
             elif hc == 'Aquatic Chronic 2':
-                # Dahil etme eşiği: 1%/M
-                if conc >= (1.0 / max(m_chronic, 1)):
+                # Dahil etme eşiği: ≥ %1.0 (düz — M-faktörsüz)  (SEA Ek-1 §4.1.3.5.5)
+                if conc >= 1.0:
                     sum_chronic2 += conc / 100
                     sum_chronic_plain += conc / 100
                     comp_m_details.append({
@@ -275,71 +282,77 @@ def calculate_aquatic(
                         'm_acute': m_acute, 'm_chronic': m_chronic,
                         'h_class': hc,
                     })
+
             elif hc in ('Aquatic Chronic 3', 'Aquatic Chronic 4'):
-                sum_chronic3   += conc / 100
-                sum_chronic_plain += conc / 100
-                comp_m_details.append({
-                    'cas': cas, 'name': comp.get('name',''),
-                    'name_tr': comp.get('name_tr',''),
-                    'conc': conc,
-                    'm_acute': 1, 'm_chronic': 1,
-                    'h_class': hc,
-                })
+                # Dahil etme eşiği: ≥ %1.0 (düz)  (SEA Ek-1 §4.1.3.5.5)
+                if conc >= 1.0:
+                    sum_chronic3 += conc / 100
+                    sum_chronic_plain += conc / 100
+                    comp_m_details.append({
+                        'cas': cas, 'name': comp.get('name',''),
+                        'name_tr': comp.get('name_tr',''),
+                        'conc': conc,
+                        'm_acute': 1, 'm_chronic': 1,
+                        'h_class': hc,
+                    })
 
     # ── SEA/CLP Tablo 4.1.2: Toplama Formülü Sınıflandırması ─────────────────────
     # Kaynak: CLP Annex I §4.1.3.5.5 — tüm eşikler %25'tir.
-    # 0.1%/M ve 1%/M değerleri yukarıdaki döngüde inclusion cut-off olarak uygulandı;
-    # sınıflandırma tetikleyicisi değillerdir.
+    # Algoritma: Kronik sınıflandırma ÖNCE kontrol edilir.
+    # H410 (Kronik 1) varsa H400 (Akut 1) etiket'ten elenir — Baskınlık kuralı.
+    # H410 yoksa, H400 bağımsız olarak atanır.
 
-    # H400: Σ(Ci × M_acute) ≥ %25
-    if sum_acute_m >= 0.25:
-        return AquaticResult(
-            h_code='H400', h_class='Aquatic Acute 1', signal='Warning',
-            sum_value=sum_acute_m,
-            formula=f"Σ(Ci×M_acute)/100 = {sum_acute_m:.4f} ≥ 0.25 (Tablo 4.1.1)"
-        ,
-            component_details=comp_m_details
-        )
+    # ── Kronik Sınıflandırma (öncelik sırası: H410 > H411 > H412 > H413) ────────
 
-    # H410: Σ(Ci × M_chronic)[Kronik1] ≥ %25
+    # H410: Σ(Ci × M_kronik)[Kronik1] ≥ %25
     if sum_chronic1_m >= 0.25:
         return AquaticResult(
             h_code='H410', h_class='Aquatic Chronic 1', signal='Warning',
             sum_value=sum_chronic1_m,
-            formula=f"Σ(Ci×M_chr)[K1]/100 = {sum_chronic1_m:.4f} ≥ 0.25 (Tablo 4.1.2)"
-        ,
-            component_details=comp_m_details
+            formula=f"Σ(Ci×M_kr)[K1]/100 = {sum_chronic1_m:.4f} ≥ 0.25 (Tablo 4.1.2)",
+            note="H410 atandı → H400 etiket'ten elendi (baskınlık kuralı)",
+            component_details=comp_m_details,
         )
 
-    # H411: 10×Σ(Ci×M)[Kronik1] + Σ(Ci)[Kronik2] ≥ %25
+    # H411: 10×Σ(Ci×M)[K1] + Σ(Ci)[K2] ≥ %25
     h411_sum = 10 * sum_chronic1_m + sum_chronic2
     if h411_sum >= 0.25:
         return AquaticResult(
             h_code='H411', h_class='Aquatic Chronic 2', signal='Warning',
             sum_value=h411_sum,
-            formula=f"10×Σ[K1×M]+Σ[K2] = {h411_sum:.4f} ≥ 0.25 (Tablo 4.1.2)"
-        ,
-            component_details=comp_m_details
+            formula=f"10×Σ[K1×M]+Σ[K2] = {h411_sum:.4f} ≥ 0.25 (Tablo 4.1.2)",
+            component_details=comp_m_details,
         )
+
     # H412: 100×Σ[K1×M] + 10×Σ[K2] + Σ[K3] ≥ %25
     h412_sum = 100 * sum_chronic1_m + 10 * sum_chronic2 + sum_chronic3
     if h412_sum >= 0.25:
         return AquaticResult(
             h_code='H412', h_class='Aquatic Chronic 3', signal='Warning',
             sum_value=h412_sum,
-            formula=f"100×Σ[K1×M]+10×Σ[K2]+Σ[K3] = {h412_sum:.4f} ≥ 0.25 (Tablo 4.1.2)"
-        ,
-            component_details=comp_m_details
+            formula=f"100×Σ[K1×M]+10×Σ[K2]+Σ[K3] = {h412_sum:.4f} ≥ 0.25 (Tablo 4.1.2)",
+            component_details=comp_m_details,
         )
-    # H413: Tablo 4.1.2 — düz konsantrasyon toplamı ≥ %25 (M-faktörsüz Kronik 4)
+
+    # H413: Σ(Ci tüm kronik)/100 ≥ %25 (M-faktörsüz düz toplam)
     if sum_chronic_plain >= 0.25:
         return AquaticResult(
             h_code='H413', h_class='Aquatic Chronic 4', signal='Warning',
             sum_value=sum_chronic_plain,
-            formula=f"Σ(Ci)/100 = {sum_chronic_plain:.4f} ≥ 0.25 (Tablo 4.1.2)"
-        ,
-            component_details=comp_m_details
+            formula=f"Σ(Ci tüm kronik)/100 = {sum_chronic_plain:.4f} ≥ 0.25 (Tablo 4.1.2)",
+            component_details=comp_m_details,
         )
+
+    # ── Akut Sınıflandırma — sadece kronik yoksa (H410 baskınlık kuralı) ────────
+    # H400: Σ(Ci × M_akut) ≥ %25
+    if sum_acute_m >= 0.25:
+        return AquaticResult(
+            h_code='H400', h_class='Aquatic Acute 1', signal='Warning',
+            sum_value=sum_acute_m,
+            formula=f"Σ(Ci×M_akut)/100 = {sum_acute_m:.4f} ≥ 0.25 (Tablo 4.1.1)",
+            component_details=comp_m_details,
+        )
+
     return None
 
 

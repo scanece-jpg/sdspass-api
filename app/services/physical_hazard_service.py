@@ -268,18 +268,31 @@ def calc_asp_tox(
     comps: List[Dict],
     mixture_form: str,
     comp_test_data: Optional[Dict[str, TestData]] = None,
+    mixture_kinematic_viscosity: Optional[float] = None,
 ) -> Optional[PhysHazardResult]:
     """
-    CLP Tablo 3.10 — Aspirasyon Toksisitesi
-    Kriter: Karışımda Asp.Tox.1 bileşen ≥ %10 VEYA
-            Karışım viskozitesi ≤ 20.5 mm²/s @ 40°C
+    CLP Tablo 3.10 — Aspirasyon Toksisitesi (H304)
+
+    Kriter (CLP Annex I §3.10.3.1):
+      1. Asp.Tox.1 bileşenlerinin toplamı ≥ %10
+      VE
+      2. Karışımın kinematik viskozitesi ≤ 20.5 mm²/s @ 40°C
+         (viskozite bilinmiyorsa muhafazakâr: H304 atanır, uyarı verilir)
+
+    Not: Viskozite KARIŞIM seviyesinde kontrol edilir, bileşen seviyesinde değil.
     """
     if mixture_form not in ('liquid', 'paste'):
         return None
 
+    # ── Karışım Viskozitesi Kontrolü (CLP §3.10.4) ───────────────────────────────
+    # KARIŞIMın kinematik viskozitesi > 20.5 mm²/s ise H304 uygulanmaz.
+    # Bileşen viskoziteleri değil, KARIŞIM viskozitesi belirleyicidir.
+    if mixture_kinematic_viscosity is not None:
+        if float(mixture_kinematic_viscosity) > 20.5:
+            return None  # Karışım viskozitesi yüksek → H304 uygulanmaz
+
     triggers = []
     total_asp_pct = 0.0
-    high_viscosity_override = False  # Test verisiyle override
 
     for comp in comps:
         cas = comp.get('cas_no', '').strip()
@@ -287,34 +300,30 @@ def calc_asp_tox(
 
         # Bileşen kendi sınıflandırmasında Asp.Tox.1 var mı?
         hazards = comp.get('hazards', [])
-        has_asp_class = any(
-            h.get('h_class') == 'Asp. Tox. 1' for h in hazards
-        )
+        has_asp_class = any(h.get('h_class') == 'Asp. Tox. 1' for h in hazards)
         in_asp_list = cas in ASP_TOX_1_CAS
 
         if not (has_asp_class or in_asp_list):
             continue
 
-        # Viskozite test verisi varsa kontrol et
-        td = (comp_test_data or {}).get(cas)
-        if td and td.kinematic_viscosity is not None:
-            if td.kinematic_viscosity > 20.5:
-                high_viscosity_override = True
-                continue  # Bu bileşen viskozite nedeniyle H304 uygulanmaz
-
         if conc > 0:
             triggers.append({'cas': cas, 'name': comp.get('name') or cas, 'conc': conc})
             total_asp_pct += conc
 
-    if high_viscosity_override or total_asp_pct < 10:
+    # Toplam Asp.Tox.1 bileşeni < %10 → H304 uygulanmaz
+    if total_asp_pct < 10:
         return None
 
+    # Viskozite girilmemişse uyarı ekle
+    visc_note = ''
+    if mixture_kinematic_viscosity is None:
+        visc_note = (
+            " UYARI: Karışım kinematik viskozitesi girilmedi. "
+            "H304 uygulanabilmesi için viskozite ≤20.5 mm²/s @ 40°C olmalıdır — KDU doğrulamalıdır."
+        )
+
     source = ', '.join(f"{t['name']} (%{t['conc']})" for t in triggers)
-    note = (
-        f"Toplam Asp.Tox.1 bileşeni: %{total_asp_pct:.1f}. "
-        "H304 uygulanabilmesi için karışım viskozitesinin ≤20.5 mm²/s @ 40°C olması gerekir. "
-        "KDU viskoziteyi doğrulamalıdır."
-    )
+    note = f"Toplam Asp.Tox.1 bileşeni: %{total_asp_pct:.1f}.{visc_note}"
 
     return PhysHazardResult(
         h_code='H304', h_class='Asp. Tox. 1', category=1,
@@ -409,6 +418,7 @@ def calculate_physical_hazards(
     mixture_form: str,
     user_fp_override: Optional[float] = None,
     comp_test_data: Optional[Dict[str, TestData]] = None,
+    mixture_kinematic_viscosity: Optional[float] = None,
 ) -> PhysHazardOutput:
     """
     Tüm fiziksel tehlikeleri hesapla.
@@ -419,6 +429,7 @@ def calculate_physical_hazards(
         mixture_form: 'liquid' | 'paste' | 'solid' | 'aerosol'
         user_fp_override: Kullanıcının girdiği ürün FP değeri (opsiyonel)
         comp_test_data: CAS → TestData eşleşmesi (opsiyonel)
+        mixture_kinematic_viscosity: Karışım kinematik viskozitesi mm²/s @ 40°C (opsiyonel)
 
     Returns:
         PhysHazardOutput (primary + extra + warnings)
@@ -431,7 +442,7 @@ def calculate_physical_hazards(
         output.primary.append(flam)
 
     # ── Asp. Tox. 1 (ANA) ────────────────────────────────────────
-    asp = calc_asp_tox(comps, mixture_form, comp_test_data)
+    asp = calc_asp_tox(comps, mixture_form, comp_test_data, mixture_kinematic_viscosity)
     if asp:
         output.primary.append(asp)
         output.warnings.append(asp.note)

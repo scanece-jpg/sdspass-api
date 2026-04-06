@@ -429,7 +429,7 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
 </script>
 <script src="js/event-bus.js?v=20250328"></script>
 <script src="js/state-store.js?v=20250328"></script>
-<script src="js/engines/clp_engine.js?v=20260402"></script>
+<script src="js/engines/clp_engine.js?v=20260406"></script>
 <script src="js/engines/pcode_engine.js?v=20260330b"></script>
 <script src="js/engines/eco_engine.js?v=20260402"></script>
 <script src="js/engines/stot_engine.js?v=20250328"></script>
@@ -728,6 +728,28 @@ async function onCas(id) {
     setTimeout(() => { if(casEl){ casEl.style.borderColor=''; }}, 1800);
 
     if (data.hazards) data.hazards.forEach(h => addChip(id, h.h_class, h.h_code));
+
+    // ── M-Faktör — SEA Ek-6'dan otomatik doldur ─────────────────────────────────
+    // m_factors: { acute: 10, chronic: 100 } — sucul toksik maddeler için
+    const mfData = data.m_factors || {};
+    if (mfData.acute && mfData.acute > 1) {
+      const mfEl = document.getElementById('mf'+id);
+      if (mfEl) {
+        mfEl.value = mfData.acute;
+        mfEl.style.borderColor = 'var(--safe)';
+        mfEl.title = `SEA Ek-6: M-Faktör (Akut) = ${mfData.acute}`;
+        setTimeout(() => { mfEl.style.borderColor = ''; }, 2000);
+      }
+    }
+    if (mfData.chronic && mfData.chronic > 1) {
+      const mfcEl = document.getElementById('mfc'+id);
+      if (mfcEl) {
+        mfcEl.value = mfData.chronic;
+        mfcEl.style.borderColor = 'var(--safe)';
+        mfcEl.title = `SEA Ek-6: M-Faktör (Kronik) = ${mfData.chronic}`;
+        setTimeout(() => { mfcEl.style.borderColor = ''; }, 2000);
+      }
+    }
 
     // ── SCL — maddeye özel kesme değerleri (Annex VI / KKDİK Ek-1) ────────────
     // Backend: scl = [{h_code:"H314", c_min:2.0, c_max:15.0}, ...]
@@ -1234,7 +1256,7 @@ function doCalculate() {
 function initPipeline() {
   EventBus.on('PIPELINE_START', ({ comps, form, userFP, testData }) => {
     // Tüm engine'leri paralel tetikle
-    EventBus.emit('CLP_CALCULATE',      { comps });
+    EventBus.emit('CLP_CALCULATE',      { comps, ph: testData.ph });
     EventBus.emit('STOT_CALCULATE',     { comps });
     EventBus.emit('ECO_CALCULATE',      { comps });
     EventBus.emit('EUH_CALCULATE',      { comps });

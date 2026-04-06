@@ -42,6 +42,8 @@ const CASLookup = (() => {
         signal:        data.signal        || '',
         pictograms:    data.pictograms    || [],
         source:        data.source        || '',
+        m_factors:     data.m_factors     || {},
+        scl:           data.scl           || [],
       });
     } catch(e) {
       console.warn('[CASLookup] API error:', e);

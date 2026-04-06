@@ -463,12 +463,13 @@ async def clp_calculate(body: dict):
     from app.services.ecological_service import calculate_ecological
     import dataclasses
 
-    components = body.get("components", [])
-    lang = body.get("lang", "TR")
+    components  = body.get("components", [])
+    lang        = body.get("lang", "TR")
+    mixture_ph  = body.get("mixture_ph", None)   # Karışım pH değeri (opsiyonel)
 
     try:
-        # 1. Ana CLP (cut-off tablosu)
-        result = classify_mixture_clp(components)
+        # 1. Ana CLP (cut-off tablosu) — pH uç değer varsa doğrudan H314+H318 atanır
+        result = classify_mixture_clp(components, mixture_ph=mixture_ph)
 
         # 2. STOT RE (hedef organ bazlı)
         stot = calculate_stot_re(components)

@@ -96,10 +96,11 @@ DANGER_H = {
 }
 
 
-def classify_mixture_clp(components: list) -> dict:
+def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
     """
     CLP Annex I karışım sınıflandırması.
     Giriş: [{cas_no, name, concentration, hazards:[{h_class, h_code}]}]
+           mixture_ph: ölçülen karışım pH değeri (opsiyonel)
     Çıkış: {h_codes, signal_word, passed:[{h_class,h_code,conc,reason}], warnings}
     """
     passed = []
@@ -126,6 +127,12 @@ def classify_mixture_clp(components: list) -> dict:
         for comp in components
         for h in comp.get("hazards", [])
         if h.get("h_class","") == "Eye Dam. 1"
+    )
+    sum_eye_irrit2 = sum(
+        float(comp.get("concentration", comp.get("conc", 0)) or 0)
+        for comp in components
+        for h in comp.get("hazards", [])
+        if h.get("h_class","") == "Eye Irrit. 2"
     )
 
     # Her bileşen × her tehlike sınıfı
@@ -171,30 +178,82 @@ def classify_mixture_clp(components: list) -> dict:
                     "reason":  f"{comp.get('name',cas)} %{conc:.1f} ≥ kesme %{cutoff}",
                 })
 
-    # CLP Tablo 3.2.4: Skin Irrit. 2 toplama kuralı
-    # Tek bileşen <%10 olsa da toplam ≥%10 → H315
+    # ── pH Uç Değer Kontrolü — SEA/CLP Annex I Tablo 3.2.3 notu ─────────────────
+    # Ölçülen karışım pH ≤ 2 VEYA ≥ 11.5 ise hesaplama yapılmadan doğrudan:
+    #   H314 (Skin Corr. 1) + H318 (Eye Dam. 1) atanır.
+    # Bu değerler bileşen konsantrasyonlarından bağımsız, karışımın pH'ına dayanır.
+    if mixture_ph is not None:
+        try:
+            ph = float(mixture_ph)
+            if ph <= 2.0 or ph >= 11.5:
+                direction = "≤ 2" if ph <= 2.0 else "≥ 11.5"
+                ph_reason = (
+                    f"Karışım pH = {ph:.2f} ({direction}) → "
+                    f"SEA Tablo 3.2.3 notu: pH uç değeri → doğrudan sınıflandırma"
+                )
+                if "H314" not in seen_h:
+                    seen_h.add("H314")
+                    passed.append({
+                        "h_class": "Skin Corr. 1",
+                        "h_code":  "H314",
+                        "conc":    100.0,
+                        "reason":  ph_reason,
+                    })
+                if "H318" not in seen_h:
+                    seen_h.add("H318")
+                    passed.append({
+                        "h_class": "Eye Dam. 1",
+                        "h_code":  "H318",
+                        "conc":    100.0,
+                        "reason":  ph_reason,
+                    })
+        except (TypeError, ValueError):
+            warnings.append(f"pH değeri okunamadı: {mixture_ph!r} — pH kontrolü atlandı")
+
+    # ── Skin Toplamsal Sınıflandırma — CLP Tablo 3.2.3 ──────────────────────────
     sum_skin_irrit2 = sum(
         float(comp.get("concentration", comp.get("conc", 0)) or 0)
         for comp in components
         for h in comp.get("hazards", [])
         if h.get("h_class","") == "Skin Irrit. 2"
     )
-    if "H314" not in seen_h and "H315" not in seen_h and sum_skin_irrit2 >= 10.0:
-        seen_h.add("H315")
-        passed.append({"h_class":"Skin Irrit. 2","h_code":"H315","conc":sum_skin_irrit2,
-                       "reason":f"Toplama: Σ Skin Irrit.2=%{sum_skin_irrit2:.1f} ≥ %10 (CLP Tablo 3.2.4)"})
 
-    # İkincil Skin kural (Skin Corr. 1 bileşenin alt-eşik katkısı)
-    if "H314" not in seen_h and "H315" not in seen_h and 1.0 <= sum_corr1 < 10.0:
-        seen_h.add("H315")
-        passed.append({"h_class":"Skin Irrit. 2","h_code":"H315","conc":sum_corr1,
-                       "reason":f"İkincil: Σ Skin Corr.1=%{sum_corr1:.1f} ∈ [1%,10%) (Tablo 3.2.3)"})
+    # Kural 1: ΣSkin Corr.1 ≥ %5 → H314 (toplamsal — birden fazla bileşen)
+    # Tek bileşen <%1 cutoff altında kalsa bile Σ≥%5 → karışım Skin Corr. 1
+    if "H314" not in seen_h and sum_corr1 >= 5.0:
+        seen_h.add("H314")
+        passed.append({"h_class":"Skin Corr. 1","h_code":"H314","conc":sum_corr1,
+                       "reason":f"Toplama: Σ Skin Corr.1=%{sum_corr1:.1f} ≥ %5 (CLP Tablo 3.2.3 additivity)"})
 
-    # İkincil Eye kural
-    if "H318" not in seen_h and "H319" not in seen_h and 1.0 <= sum_eye_dam1 < 3.0:
-        seen_h.add("H319")
-        passed.append({"h_class":"Eye Irrit. 2","h_code":"H319","conc":sum_eye_dam1,
-                       "reason":f"İkincil: Σ Eye Dam.1=%{sum_eye_dam1:.1f} ∈ [1%,3%) (Tablo 3.3.3)"})
+    # Kural 2: 10×ΣSkin Corr.1 + ΣSkin Irrit.2 ≥ %10 → H315 (H314 yoksa)
+    # Bu ağırlıklı formül hem ΣKat2≥%10 hem de %1≤ΣKat1<%5 geçiş durumunu kapsar
+    if "H314" not in seen_h and "H315" not in seen_h:
+        weighted_skin = 10.0 * sum_corr1 + sum_skin_irrit2
+        if weighted_skin >= 10.0:
+            seen_h.add("H315")
+            passed.append({"h_class":"Skin Irrit. 2","h_code":"H315","conc":weighted_skin,
+                           "reason":(
+                               f"Ağırlıklı: 10×{sum_corr1:.1f}+{sum_skin_irrit2:.1f}"
+                               f"={weighted_skin:.1f} ≥ %10 (CLP Tablo 3.2.3)"
+                           )})
+
+    # ── Göz Toplamsal Sınıflandırma — CLP Tablo 3.3.3 ──────────────────────────
+    # Kural 1: ΣEye Dam.1 ≥ %3 → H318 (toplamsal — birden fazla bileşen)
+    if "H318" not in seen_h and sum_eye_dam1 >= 3.0:
+        seen_h.add("H318")
+        passed.append({"h_class":"Eye Dam. 1","h_code":"H318","conc":sum_eye_dam1,
+                       "reason":f"Toplama: Σ Eye Dam.1=%{sum_eye_dam1:.1f} ≥ %3 (CLP Tablo 3.3.3 additivity)"})
+
+    # Kural 2: 10×ΣEye Dam.1 + ΣEye Irrit.2 ≥ %10 → H319 (H318 yoksa)
+    if "H318" not in seen_h and "H319" not in seen_h:
+        weighted_eye = 10.0 * sum_eye_dam1 + sum_eye_irrit2
+        if weighted_eye >= 10.0:
+            seen_h.add("H319")
+            passed.append({"h_class":"Eye Irrit. 2","h_code":"H319","conc":weighted_eye,
+                           "reason":(
+                               f"Ağırlıklı: 10×{sum_eye_dam1:.1f}+{sum_eye_irrit2:.1f}"
+                               f"={weighted_eye:.1f} ≥ %10 (CLP Tablo 3.3.3)"
+                           )})
 
     h_codes = sorted(seen_h)
     signal  = "Danger" if any(h in DANGER_H for h in h_codes) else ("Warning" if h_codes else "")
@@ -261,7 +320,7 @@ CUTOFFS = {
     'Skin Corr. 1B':   {'cutoff': 1.0,  'pictogram': 'GHS05', 'signal': 'Danger'},
     'Skin Corr. 1C':   {'cutoff': 1.0,  'pictogram': 'GHS05', 'signal': 'Danger'},
     'Skin Irrit. 2':   {'cutoff': 10.0, 'pictogram': 'GHS07', 'signal': 'Warning'},
-    'Eye Dam. 1':      {'cutoff': 3.0,  'pictogram': 'GHS05', 'signal': 'Danger'},
+    'Eye Dam. 1':      {'cutoff': 1.0,  'pictogram': 'GHS05', 'signal': 'Danger'},
     'Eye Irrit. 2':    {'cutoff': 10.0, 'pictogram': 'GHS07', 'signal': 'Warning'},
     'Resp. Sens. 1':   {'cutoff': 1.0,  'pictogram': 'GHS08', 'signal': 'Danger'},
     'Resp. Sens. 1A':  {'cutoff': 1.0,  'pictogram': 'GHS08', 'signal': 'Danger'},
@@ -559,13 +618,11 @@ async def calculate_clp(db: AsyncSession, components: List[Any]) -> Dict:
             else:
                 results_failed.append(entry)
 
-    # ─── ADIM 2b: İKİNCİL CİLT/GÖZ SINIFLANDIRMASI ───────────────────────────
-    # CLP Annex I Tablo 3.2.3 / 3.3.3 — Skin Corr./Eye Dam. bileşen ikincil kural
-    # Skin Corr. 1 içeren madde SCL altında ama Σ %1-10 → Skin Irrit. 2 (H315)
-    # Eye Dam. 1 içeren madde SCL altında ama Σ %1-3   → Eye Irrit. 2 (H319)
-
-    sum_corr1 = 0.0   # Skin Corr. 1 bileşen toplamı
-    sum_eye_dam1 = 0.0  # Eye Dam. 1 bileşen toplamı
+    # ─── ADIM 2b: SKIN/GÖZ TOPLAMSAL SINIFLANDIRMA — CLP Tablo 3.2.3 / 3.3.3 ──────
+    sum_corr1         = 0.0  # Skin Corr. 1/1A/1B/1C bileşen toplamı
+    sum_skin_irrit2_b = 0.0  # Skin Irrit. 2 bileşen toplamı
+    sum_eye_dam1      = 0.0  # Eye Dam. 1 bileşen toplamı
+    sum_eye_irrit2_b  = 0.0  # Eye Irrit. 2 bileşen toplamı
 
     for item in enriched:
         if not item['data']:
@@ -575,38 +632,88 @@ async def calculate_clp(db: AsyncSession, components: List[Any]) -> Dict:
             hc = haz.get('h_class', '').replace('*', '').strip()
             if hc in ('Skin Corr. 1', 'Skin Corr. 1A', 'Skin Corr. 1B', 'Skin Corr. 1C'):
                 sum_corr1 += conc
-            if hc in ('Eye Dam. 1',):
+            if hc == 'Skin Irrit. 2':
+                sum_skin_irrit2_b += conc
+            if hc == 'Eye Dam. 1':
                 sum_eye_dam1 += conc
+            if hc == 'Eye Irrit. 2':
+                sum_eye_irrit2_b += conc
 
-    # Skin Irrit. 2 ikincil kural — H314 zaten geçmemişse uygula
-    if 'H314' not in passed_h_codes and 1.0 <= sum_corr1 < 10.0:
-        passed_h_codes.add('H315')
-        passed_pictograms.add('GHS07')
-        signal_warning = True
+    # Kural 1: ΣSkin Corr.1 ≥ %5 → H314 (toplamsal — Tablo 3.2.3 additivity)
+    if 'H314' not in passed_h_codes and sum_corr1 >= 5.0:
+        passed_h_codes.add('H314')
+        passed_pictograms.add('GHS05')
+        signal_danger = True
         results_passed.append({
-            'cas': 'KARIŞIM', 'name': 'Skin Irrit. 2 (ikincil kural)',
-            'conc': '-', 'h_class': 'Skin Irrit. 2', 'h_code': 'H315',
-            'cutoff_used': 'Tablo 3.2.3 ikincil',
+            'cas': 'KARIŞIM', 'name': 'Skin Corr. 1 (toplamsal kural)',
+            'conc': sum_corr1, 'h_class': 'Skin Corr. 1', 'h_code': 'H314',
+            'cutoff_used': 'Tablo 3.2.3 Σ≥%5',
             'passed': True,
-            'reason': f'Σ Skin Corr.1 = %{sum_corr1:.1f} ∈ [1%, 10%) → H315 (ikincil sınıflandırma)',
+            'reason': f'Toplama: Σ Skin Corr.1 = %{sum_corr1:.1f} ≥ %5 → H314 (CLP Tablo 3.2.3 additivity)',
         })
         warnings.append(
-            f"İkincil kural: Σ Skin Corr.1 = %{sum_corr1:.1f} — H314 eşiği aşılmadı "
-            f"ancak %1-10 aralığında → H315 Skin Irrit. 2 uygulandı (CLP Tablo 3.2.3)"
+            f"Toplamsal kural: Σ Skin Corr.1 = %{sum_corr1:.1f} ≥ %5 → H314 Skin Corr. 1 atandı (CLP Tablo 3.2.3)"
         )
 
-    # Eye Irrit. 2 ikincil kural — H318 zaten geçmemişse uygula
-    if 'H318' not in passed_h_codes and 1.0 <= sum_eye_dam1 < 3.0:
-        passed_h_codes.add('H319')
-        passed_pictograms.add('GHS07')
-        signal_warning = True
+    # Kural 2: 10×ΣSkin Corr.1 + ΣSkin Irrit.2 ≥ %10 → H315 (H314 yoksa — Tablo 3.2.3)
+    if 'H314' not in passed_h_codes and 'H315' not in passed_h_codes:
+        weighted_skin_b = 10.0 * sum_corr1 + sum_skin_irrit2_b
+        if weighted_skin_b >= 10.0:
+            passed_h_codes.add('H315')
+            passed_pictograms.add('GHS07')
+            signal_warning = True
+            results_passed.append({
+                'cas': 'KARIŞIM', 'name': 'Skin Irrit. 2 (ağırlıklı formül)',
+                'conc': weighted_skin_b, 'h_class': 'Skin Irrit. 2', 'h_code': 'H315',
+                'cutoff_used': 'Tablo 3.2.3 10×Kat1+Kat2',
+                'passed': True,
+                'reason': (
+                    f'Ağırlıklı: 10×{sum_corr1:.1f}+{sum_skin_irrit2_b:.1f}'
+                    f'={weighted_skin_b:.1f} ≥ %10 → H315 (CLP Tablo 3.2.3)'
+                ),
+            })
+            warnings.append(
+                f"Ağırlıklı skin formülü: 10×{sum_corr1:.1f}+{sum_skin_irrit2_b:.1f}"
+                f"={weighted_skin_b:.1f} ≥ %10 → H315 Skin Irrit. 2 uygulandı (CLP Tablo 3.2.3)"
+            )
+
+    # Kural 1: ΣEye Dam.1 ≥ %3 → H318 (toplamsal — Tablo 3.3.3 additivity)
+    if 'H318' not in passed_h_codes and sum_eye_dam1 >= 3.0:
+        passed_h_codes.add('H318')
+        passed_pictograms.add('GHS05')
+        signal_danger = True
         results_passed.append({
-            'cas': 'KARIŞIM', 'name': 'Eye Irrit. 2 (ikincil kural)',
-            'conc': '-', 'h_class': 'Eye Irrit. 2', 'h_code': 'H319',
-            'cutoff_used': 'Tablo 3.3.3 ikincil',
+            'cas': 'KARIŞIM', 'name': 'Eye Dam. 1 (toplamsal kural)',
+            'conc': sum_eye_dam1, 'h_class': 'Eye Dam. 1', 'h_code': 'H318',
+            'cutoff_used': 'Tablo 3.3.3 Σ≥%3',
             'passed': True,
-            'reason': f'Σ Eye Dam.1 = %{sum_eye_dam1:.1f} ∈ [1%, 3%) → H319 (ikincil sınıflandırma)',
+            'reason': f'Toplama: Σ Eye Dam.1 = %{sum_eye_dam1:.1f} ≥ %3 → H318 (CLP Tablo 3.3.3 additivity)',
         })
+        warnings.append(
+            f"Toplamsal kural: Σ Eye Dam.1 = %{sum_eye_dam1:.1f} ≥ %3 → H318 Eye Dam. 1 atandı (CLP Tablo 3.3.3)"
+        )
+
+    # Kural 2: 10×ΣEye Dam.1 + ΣEye Irrit.2 ≥ %10 → H319 (H318 yoksa — Tablo 3.3.3)
+    if 'H318' not in passed_h_codes and 'H319' not in passed_h_codes:
+        weighted_eye_b = 10.0 * sum_eye_dam1 + sum_eye_irrit2_b
+        if weighted_eye_b >= 10.0:
+            passed_h_codes.add('H319')
+            passed_pictograms.add('GHS07')
+            signal_warning = True
+            results_passed.append({
+                'cas': 'KARIŞIM', 'name': 'Eye Irrit. 2 (ağırlıklı formül)',
+                'conc': weighted_eye_b, 'h_class': 'Eye Irrit. 2', 'h_code': 'H319',
+                'cutoff_used': 'Tablo 3.3.3 10×Kat1+Kat2',
+                'passed': True,
+                'reason': (
+                    f'Ağırlıklı: 10×{sum_eye_dam1:.1f}+{sum_eye_irrit2_b:.1f}'
+                    f'={weighted_eye_b:.1f} ≥ %10 → H319 (CLP Tablo 3.3.3)'
+                ),
+            })
+            warnings.append(
+                f"Ağırlıklı göz formülü: 10×{sum_eye_dam1:.1f}+{sum_eye_irrit2_b:.1f}"
+                f"={weighted_eye_b:.1f} ≥ %10 → H319 Eye Irrit. 2 uygulandı (CLP Tablo 3.3.3)"
+            )
 
     # ─── ADIM 3: AQUATIC (CLP Annex I Tablo 4.1.3) ──────────────────────
     sum_acute_m = 0.0
@@ -906,6 +1013,7 @@ async def calculate_clp_with_non_additivity(db, components: List[Any]) -> Dict:
     )
     form = getattr(components[0], 'form', 'liquid') if components else 'liquid'
     user_fp = getattr(components[0], 'mixture_flash_point', None) if components else None
+    user_visc = getattr(components[0], 'mixture_kinematic_viscosity', None) if components else None
 
     # LD50 test verisi — ATE'ye aktarım
     # Kullanıcı LD50 girmişse comp_list'e ekle
@@ -915,7 +1023,7 @@ async def calculate_clp_with_non_additivity(db, components: List[Any]) -> Dict:
                 k: v for k, v in comp.ate.model_dump().items() if v is not None
             }
 
-    phys = calculate_physical_hazards(comp_list, form, user_fp)
+    phys = calculate_physical_hazards(comp_list, form, user_fp, mixture_kinematic_viscosity=user_visc)
     for r in phys.primary + phys.extra:
         if r.h_code not in passed_h:
             passed_h.add(r.h_code)
@@ -979,11 +1087,16 @@ def add_physical_hazards(clp_result: dict, request: dict) -> dict:
         })
 
     test_data = build_comp_test_data(request.get('component_test_data') or {})
+    mixture_visc = (
+        request.get('mixture_kinematic_viscosity')
+        or request.get('phys_props', {}).get('viscosity')
+    )
     phys = calculate_physical_hazards(
         comps=comps,
         mixture_form=request.get('form', 'liquid'),
         user_fp_override=request.get('mixture_flash_point'),
         comp_test_data=test_data,
+        mixture_kinematic_viscosity=mixture_visc,
     )
 
     clp_result['physical_hazards'] = {

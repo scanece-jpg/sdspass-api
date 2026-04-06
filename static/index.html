@@ -1728,20 +1728,61 @@ async function generatePDF() {
     // phys_props — theoProps'tan düz objeye çevir (alan isimleri backend ile eşleşmeli)
     const tp = phys?.theoProps || {};
     const flatPhys = {};
-    // Doğrudan eşleşen alanlar
-    const physKeys = ['density','boiling_point','flash_point','lel','uel','ph','viscosity',
-      'solubility','appearance','odor','melting_point','auto_ignition',
-      'vapor_pressure','vapor_density','log_kow'];
-    physKeys.forEach(k => {
-      if (!tp[k]) return;
-      flatPhys[k] = tp[k].value !== undefined ? tp[k].value : tp[k];
+
+    // Yardımcı: { value: X } veya düz değeri al
+    const _val = d => (d && d.value !== undefined && d.value !== null) ? d.value : (d !== null && d !== undefined && typeof d !== 'object' ? d : null);
+
+    // 1. Motor tarafından hesaplanan alanlar (theoProps içinden)
+    const _motorKeys = ['density','boiling_point','flash_point','lel','uel',
+      'vapor_pressure','vapor_density'];
+    _motorKeys.forEach(k => {
+      const v = _val(tp[k]);
+      if (v !== null && v !== undefined) flatPhys[k] = v;
     });
-    // Alan adı dönüşümleri (frontend → backend)
-    if (tp.odor_threshold)  flatPhys.odour_threshold    = tp.odor_threshold.value;
-    if (tp.decomp_temp)     flatPhys.decomposition_temp = tp.decomp_temp.value;
-    if (tp.explosive)       flatPhys.is_explosive       = tp.explosive.value;
-    if (tp.oxidizing)       flatPhys.is_oxidising       = tp.oxidizing.value;
-    if (tp.flam_sg)         flatPhys.is_flammable       = tp.flam_sg.value;
+
+    // 2. Kullanıcı girişinden gelen alanlar (form DOM'dan taze oku — PDF anında güncel olsun)
+    const _g  = id => document.getElementById(id)?.value?.trim() || '';
+    const _n  = id => { const v = parseFloat(document.getElementById(id)?.value); return isNaN(v) ? null : v; };
+
+    // Metin alanları
+    if (_g('tf_appearance')) flatPhys.appearance    = _g('tf_appearance');
+    if (_g('tf_odor'))       flatPhys.odor          = _g('tf_odor');
+    if (_g('tf_evap'))       flatPhys.evap_rate     = _g('tf_evap');
+    if (_g('tf_flam_sg'))    flatPhys.is_flammable  = _g('tf_flam_sg');
+    if (_g('tf_expl'))       flatPhys.is_explosive  = _g('tf_expl');
+    if (_g('tf_oxid'))       flatPhys.is_oxidising  = _g('tf_oxid');
+    if (_g('tf_sol_other'))  flatPhys.sol_other     = _g('tf_sol_other');
+
+    // Sayısal alanlar (DOM'dan gelen kullanıcı değerleri motoru ezer)
+    const _pairs = [
+      ['tf_density','density'], ['tf_bp','boiling_point'], ['tf_ph','ph'],
+      ['tf_visc','viscosity'],  ['tf_sol','solubility'],   ['tf_mp','melting_point'],
+      ['tf_ait','auto_ignition'],['tf_decomp','decomposition_temp'],
+      ['tf_logkow','log_kow'],  ['tf_odor_thresh','odour_threshold'],
+    ];
+    _pairs.forEach(([id, key]) => {
+      const v = _n(id);
+      if (v !== null) flatPhys[key] = v;
+    });
+
+    // 3. theoProps'tan kalan alanlar (kullanıcı girmemişse motor değeri kullan)
+    const _theoExtra = ['ph','viscosity','solubility','melting_point','auto_ignition','log_kow'];
+    _theoExtra.forEach(k => {
+      if (flatPhys[k] !== undefined) return; // kullanıcı girmişse dokunma
+      const v = _val(tp[k]);
+      if (v !== null && v !== undefined) flatPhys[k] = v;
+    });
+
+    // 4. theoProps metin alanları (kullanıcı girmemişse motor değeri)
+    if (!flatPhys.appearance && _val(tp.appearance))  flatPhys.appearance   = _val(tp.appearance);
+    if (!flatPhys.odor       && _val(tp.odor))        flatPhys.odor         = _val(tp.odor);
+    if (!flatPhys.evap_rate  && _val(tp.evap_rate))   flatPhys.evap_rate    = _val(tp.evap_rate);
+    if (!flatPhys.is_flammable && _val(tp.flam_sg))   flatPhys.is_flammable = _val(tp.flam_sg);
+    if (!flatPhys.is_explosive && _val(tp.explosive)) flatPhys.is_explosive = _val(tp.explosive);
+    if (!flatPhys.is_oxidising && _val(tp.oxidizing)) flatPhys.is_oxidising = _val(tp.oxidizing);
+    if (!flatPhys.sol_other    && _val(tp.sol_other)) flatPhys.sol_other    = _val(tp.sol_other);
+    if (!flatPhys.odour_threshold && _val(tp.odor_threshold)) flatPhys.odour_threshold = _val(tp.odor_threshold);
+    if (!flatPhys.decomposition_temp && _val(tp.decomp_temp)) flatPhys.decomposition_temp = _val(tp.decomp_temp);
 
     // clp_passed — her H kodu için h_class + kesme değeri bilgisi
     // h_class'ı bileşen hazards listesinden bul

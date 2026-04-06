@@ -133,7 +133,7 @@ async def generate_pdf(data: dict = Body(...)):
 
         # P kodlarını güncel h_codes ile yeniden hesapla (eko H kodu dahil)
         p_result = assign_p_codes(h_codes, signal, usage=usage)
-        p_result['label'] = select_label_p_codes(p_result['p_codes'], 6)
+        p_result['label'] = select_label_p_codes(p_result['p_codes'], 6, h_codes=h_codes)
         p_result['sds']   = classify_sds_p_codes(p_result['p_codes'])
 
         if eco_result is None:
@@ -582,7 +582,7 @@ async def p_codes_assign(body: dict):
     max_label  = body.get("max_label", 6)
     try:
         result = assign_p_codes(h_codes, signal, usage=usage)
-        result["label"]    = select_label_p_codes(result["p_codes"], max_label, usage)
+        result["label"]    = select_label_p_codes(result["p_codes"], max_label, h_codes=h_codes)
         result["sds"]      = classify_sds_p_codes(result["p_codes"])
         result["p_texts"]  = {p: get_p(lang, p) for p in result["p_codes"]}
         return {"success": True, **result}

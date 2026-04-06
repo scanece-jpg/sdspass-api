@@ -12,7 +12,9 @@ const CLPEngine = (() => {
   // NOT: H300-H332 (Akut Toksisite) GCL ile değil, SEA Tablo 3.1.2 ATE formülü
   // ile sınıflandırılır (bkz. ATE_POINT / calculateATE). GCL buradan çıkarıldı.
   const CUTOFFS = {
-    'H314':1.0,'H315':10.0,'H318':1.0,'H319':10.0,
+    // H314: CLP Tablo 3.2.3 bireysel GCL = %5 (eski 1.0 yanlıştı; toplamsal da %5)
+    // H318: CLP Tablo 3.3.3 bireysel GCL = %3 (eski 1.0 yanlıştı; toplamsal da %3)
+    'H314':5.0,'H315':10.0,'H318':3.0,'H319':10.0,
     'H317':1.0,'H334':0.1,
     'H340':0.1,'H341':1.0,
     'H350':0.1,'H351':1.0,

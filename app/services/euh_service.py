@@ -3,10 +3,11 @@ EUH İfadeleri Servisi
 =====================
 CLP Regulation Ek-2 — Avrupa'ya özgü tehlike ifadeleri
 
-Otomatik Tespit Edilen EUH Kodları (14 kural):
+Otomatik Tespit Edilen EUH Kodları (16 kural):
   EUH014  → Water-reactive bileşen
+  EUH019  → Organik peroksit / H2O2 (patlayıcı peroksit oluşturabilir)
   EUH029  → Karbür/fosfür (asitle gaz)
-  EUH031  → Sülfit/siyanür/hipoklorit (asitle Cl2/SO2)
+  EUH031  → Sülfit/siyanür/hipoklorit/H2SO4 (asitle Cl2/SO2 vb.)
   EUH032  → Fosfür/sülfür (asitle H2S/PH3)
   EUH066  → Kural 1: Solvent CAS listesi | Kural 2: Skin Irrit.2 < cut-off
   EUH201  → Kurşun bileşikleri
@@ -26,14 +27,33 @@ EUH208 SCL/10 Kuralı:
   Nickel: SCL=%0.01 → eşik=%0.001
   SCL yok → generic eşik %1.0
 
-Manuel Kontrol Gereken (12 kod):
-  EUH001, 006, 018, 019, 044, 059, 070, 071,
+Manuel Kontrol Gereken (10 kod):
+  EUH001, 006, 018, 044, 059, 070, 071,
   209, 209A, 401
 """
 from typing import List, Dict, Any
 
 
-# ─── EUH31 / EUH032 — Asitle gaz çıkaran maddeler ──────────────────────────
+# ─── EUH019 — Patlayıcı peroksit oluşturabilir ──────────────────────────────
+# Organik peroksitler + H2O2 (yüksek konsantrasyon) + eter/THF grubu
+# Ürün içeriyorsa "patlayıcı peroksit oluşturabilir" uyarısı zorunludur.
+
+EUH019_CAS = {
+    '7722-84-1',   # hydrogen peroxide (hidrojen peroksit) — tüm konsantrasyonlar
+    '94-36-0',     # benzoyl peroxide
+    '110-05-4',    # di-tert-butyl peroxide
+    '80-43-3',     # dicumyl peroxide
+    '3006-82-4',   # tert-butyl peroxybenzoate
+    '614-45-9',    # tert-butyl perbenzoate
+    '7722-84-1',   # hydrogen peroxide (tekrar — aynı CAS farklı notasyon)
+    '109-99-9',    # tetrahydrofuran (THF) — eter grubu, peroksit biriktirir
+    '60-29-7',     # diethyl ether — eter grubu
+    '557-17-5',    # methyl propyl ether
+    '629-14-1',    # 1,2-diethoxyethane
+    '111-90-0',    # 2-(2-ethoxyethoxy)ethanol (DCBE)
+}
+
+# ─── EUH031 / EUH032 — Asitle gaz çıkaran maddeler ─────────────────────────
 
 EUH031_CAS = {
     # Sülfitler ve bisülfitler
@@ -64,6 +84,11 @@ EUH031_CAS = {
     # Diğer
     '7775-09-9',   # sodium chlorate
     '7758-19-2',   # sodium chlorite
+    # Güçlü asitler — diğer maddelerle temas halinde toksik gaz açığa çıkarabilir
+    # (sülfürik asit: metalllerle SO2/H2S; karbonatlara CO2; sülfit içerenlere SO2)
+    '7664-93-9',   # sulfuric acid (sülfürik asit) — SEA Ek-6 / ECHA SDS uygulaması
+    '7647-01-0',   # hydrochloric acid (hidroklorik asit) — metal reaksiyonu → Cl2/H2
+    '7697-37-2',   # nitric acid (nitrik asit) — metal reaksiyonu → NOx gazları
 }
 
 EUH032_CAS = {
@@ -225,6 +250,21 @@ def check_euh(components: List[Dict]) -> Dict:
         hazards = comp.get('hazards', [])
         hazard_classes = {h.get('h_class', '').replace('*', '').strip() for h in hazards}
         comp_conc = float(comp.get('conc', 0) or 0)
+
+        # ── EUH019 — Patlayıcı peroksit oluşturabilir ───────────────────────
+        # Org. peroksitler ve H2O2 içeren ürünler için zorunlu uyarı
+        # Ayrıca Org. Perox. tehlike sınıfı taşıyan bileşenler
+        EUH019_CLASSES = {'Org. Perox. A', 'Org. Perox. B', 'Org. Perox. C',
+                          'Org. Perox. D', 'Org. Perox. E', 'Org. Perox. F',
+                          'Self-react. A', 'Self-react. B'}
+        if (cas in EUH019_CAS or hazard_classes & EUH019_CLASSES) and 'EUH019' not in detected_codes:
+            detected.append({
+                'code': 'EUH019',
+                'text': 'Patlayıcı peroksitler oluşturabilir.',
+                'source_cas': cas,
+                'source_name': name,
+            })
+            detected_codes.add('EUH019')
 
         # ── EUH031 ──────────────────────────────────────────────────────────
         if cas in EUH031_CAS and 'EUH031' not in detected_codes:
@@ -404,9 +444,9 @@ def check_euh(components: List[Dict]) -> Dict:
         })
         detected_codes.add('EUH208')
 
-    # Manuel kontrol gerekli olanlar
+    # Manuel kontrol gerekli olanlar (EUH019 artık otomatik tespit ediliyor)
     manual_check = [
-        'EUH001', 'EUH006', 'EUH018', 'EUH019',
+        'EUH001', 'EUH006', 'EUH018',
         'EUH044', 'EUH059', 'EUH070', 'EUH071',
         'EUH209', 'EUH209A', 'EUH401'
     ]

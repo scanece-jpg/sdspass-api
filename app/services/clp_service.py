@@ -14,14 +14,18 @@ CLP_CUTOFFS_DICT = {
     "Acute Tox. 2 *": {"h":"H330","cutoff":1.0,"signal":"Danger"},
     "Acute Tox. 3 *": {"h":"H331","cutoff":1.0,"signal":"Danger"},
     "Acute Tox. 4 *": {"h":"H332","cutoff":5.0,"signal":"Warning"},
-    # 3.2 Cilt
-    "Skin Corr. 1":  {"h":"H314","cutoff":1.0, "signal":"Danger"},
-    "Skin Corr. 1A": {"h":"H314","cutoff":1.0, "signal":"Danger"},
-    "Skin Corr. 1B": {"h":"H314","cutoff":1.0, "signal":"Danger"},
-    "Skin Corr. 1C": {"h":"H314","cutoff":1.0, "signal":"Danger"},
+    # 3.2 Cilt — CLP Tablo 3.2.3 bireysel GCL
+    # H314 için tek bileşen eşiği = %5 (toplamsal kural da %5'i kullanır)
+    # %1-5 arası SC1 → 10×[SC1]+[SI2] ≥ %10 formülüyle H315 yakalanır
+    "Skin Corr. 1":  {"h":"H314","cutoff":5.0, "signal":"Danger"},
+    "Skin Corr. 1A": {"h":"H314","cutoff":5.0, "signal":"Danger"},
+    "Skin Corr. 1B": {"h":"H314","cutoff":5.0, "signal":"Danger"},
+    "Skin Corr. 1C": {"h":"H314","cutoff":5.0, "signal":"Danger"},
     "Skin Irrit. 2": {"h":"H315","cutoff":10.0,"signal":"Warning"},
-    # 3.3 Göz
-    "Eye Dam. 1":    {"h":"H318","cutoff":1.0, "signal":"Danger"},
+    # 3.3 Göz — CLP Tablo 3.3.3 bireysel GCL
+    # H318 için tek bileşen eşiği = %3 (toplamsal kural da %3'ü kullanır)
+    # %1-3 arası ED1 → 10×[ED1]+[EI2] ≥ %10 formülüyle H319 yakalanır
+    "Eye Dam. 1":    {"h":"H318","cutoff":3.0, "signal":"Danger"},
     "Eye Irrit. 2":  {"h":"H319","cutoff":10.0,"signal":"Warning"},
     # 3.4 Duyarlılaştırma
     "Skin Sens. 1":  {"h":"H317","cutoff":1.0, "signal":"Warning"},

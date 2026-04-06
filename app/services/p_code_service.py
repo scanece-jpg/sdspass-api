@@ -445,21 +445,58 @@ P_LABEL_PRIORITY: Dict[str, int] = {
 P_LABEL_MANDATORY = ['P101', 'P102']
 
 
-def select_label_p_codes(all_p_codes: List[str], max_codes: int = 6) -> Dict:
+
+# H kodu bazlı etiket zorunlu P kodları — CLP Annex IV zorunluluğu
+# Bu P kodları ilgili H kodu varken her zaman etikete yazılmalı (6 limitinden önce eklenir)
+H_BASED_LABEL_FORCED: Dict[str, List[str]] = {
+    # Cilt aşınması / göz hasarı — KKE ve kilitli depolama zorunlu (CLP Annex IV)
+    'H314': ['P280', 'P405'],
+    # Ağır göz hasarı — KKE zorunlu (H318 H314 ile çakışırsa P280 zaten var)
+    'H318': ['P280'],
+    # Öldürücü yutma/solunum — kilitli depolama zorunlu
+    'H300': ['P405'],
+    'H301': ['P405'],
+    'H310': ['P405'],
+    'H330': ['P405'],
+    # Kanserojen/mutajen/üreme toksik — KKE ve bilgi alma zorunlu
+    'H340': ['P280', 'P405'],
+    'H350': ['P280', 'P405'],
+    'H360': ['P280', 'P405'],
+    # Oksitleyici — yanıcılardan uzak tut (H271/H272 için P220 CLP Annex III zorunlu)
+    'H271': ['P220'],
+    'H272': ['P220'],
+}
+
+def select_label_p_codes(all_p_codes: List[str], max_codes: int = 6,
+                         h_codes: List[str] = None) -> Dict:
     """
     CLP Madde 22 — Etiket için maksimum 6 P kodu seçimi.
     Öncelik ağırlıklarına göre en kritik 6 kodu seç.
 
+    h_codes: H kod listesi — H kodu bazlı zorunlu P kodlarını belirlemeye yarar.
     Returns:
         {
-          'selected': [...],      # Seçilen 6 P kodu
+          'selected': [...],      # Seçilen P kodları (zorunlular + öncelik sırası)
           'all': [...],           # Tüm P kodları (SDS için)
           'excluded': [...],      # Etiket dışında kalan
           'note': str             # Seçim gerekçesi
         }
     """
-    # Zorunlu P kodlarını çıkar
-    candidates = [p for p in all_p_codes if p not in P_LABEL_MANDATORY]
+    h_codes = h_codes or []
+
+    # H kodu bazlı zorunlu P kodlarını belirle (bu kodlar 6 limitine dahil edilmez / önce eklenir)
+    forced_by_h = set()
+    for h in h_codes:
+        for p in H_BASED_LABEL_FORCED.get(h, []):
+            if p in all_p_codes:
+                forced_by_h.add(p)
+
+    # Zorunlu P kodlarını çıkar (P101/P102 + H-bazlı forced)
+    excluded_from_candidates = set(P_LABEL_MANDATORY) | forced_by_h
+    candidates = [p for p in all_p_codes if p not in excluded_from_candidates]
+
+    # Kalan slotlar: max_codes eksi forced_by_h sayısı
+    remaining_slots = max(0, max_codes - len(forced_by_h))
 
     # Önceliğe göre sırala
     sorted_codes = sorted(
@@ -478,13 +515,13 @@ def select_label_p_codes(all_p_codes: List[str], max_codes: int = 6) -> Dict:
         'P308+P311':     ['P308+P313'],
     }
 
-    selected_set = set()
+    selected_set = set(forced_by_h)  # Zorla eklenenlerle başla
     excluded_by_supersede = set()
 
     for code in sorted_codes:
         if code in excluded_by_supersede:
             continue
-        if len(selected_set) < max_codes:
+        if len(selected_set) - len(forced_by_h) < remaining_slots:
             selected_set.add(code)
             # Bu kodu seçince zayıf olanları çıkar
             for weak in SUPERSEDE_LABEL.get(code, []):
@@ -501,11 +538,13 @@ def select_label_p_codes(all_p_codes: List[str], max_codes: int = 6) -> Dict:
     # Mandatory P kodlarını all_codes'tan belirle (usage bilgisi all_codes'a yansımış)
     mandatory_in_codes = [p for p in ['P101','P102','P103'] if p in all_p_codes]
 
+    forced_note = (f" (H kodu zorunlu: {', '.join(sorted(forced_by_h))})" if forced_by_h else "")
     note = (
-        f"CLP Madde 22: Etiket için {len(selected)}/{len(candidates)} P kodu seçildi. "
+        f"CLP Madde 22: Etiket için {len(selected)}/{len(candidates)+len(forced_by_h)} "
+        f"P kodu seçildi{forced_note}. "
         f"Kalan {len(excluded)} kod SDS Bölüm 2'ye yazılmalıdır."
         if excluded else
-        f"Toplam {len(selected)} P kodu — etiket limiti içinde."
+        f"Toplam {len(selected)} P kodu — etiket limiti içinde{forced_note}."
     )
 
     return {
@@ -513,6 +552,7 @@ def select_label_p_codes(all_p_codes: List[str], max_codes: int = 6) -> Dict:
         'all': all_p_codes,
         'excluded': excluded,
         'mandatory': mandatory_in_codes,
+        'forced_by_h': sorted(list(forced_by_h)),
         'note': note,
     }
 

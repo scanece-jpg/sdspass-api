@@ -58,7 +58,7 @@ const PCodeEngine = (() => {
     'H312':['P280','P302+P352','P312','P501'],
     'H314':['P260','P264','P280','P301+P330+P331','P303+P361+P353','P304+P340','P305+P351+P338','P310','P321','P363','P405','P501'],
     'H315':['P264','P280','P302+P352','P321','P332+P313','P362','P501'],
-    'H317':['P261','P272','P280','P302+P352','P333+P313','P321','P363','P501'],
+    'H317':['P261','P272','P280','P302+P352','P333+P313','P363','P501'],
     'H318':['P264','P280','P305+P351+P338','P310','P501'],
     'H319':['P264','P280','P305+P351+P338','P337+P313','P501'],
     'H330':['P260','P271','P284','P304+P340','P310','P403+P233','P405','P501'],
@@ -225,34 +225,76 @@ const PCodeEngine = (() => {
       (cats[cat] || cats.general).push(d);
     }
 
-    // ── Etiket için "Akıllı Seçim" — max 6 (10'a kadar çıkabilir) ──────────────
-    // SEA / KKDİK Ek-2: etiket üzerinde 6 P-kodu önerilir
-    const labelSelected = [];
+    // ── Etiket için "Akıllı Seçim" — max 6 + zorunlular ─────────────────────────
+    // CLP Annex IV / SEA Tablo 4.1.4:
+    //   MANDATORY_LABEL → her zaman etikette, 6 limitine dahil edilmez
+    //   H_FORCED        → H koduna göre zorunlu, 6 limitine dahil edilmez
+    //   Kalan 6 slot    → LABEL_PRIORITY'ye göre en kritik seçilir
 
-    // 1. Öncelik puanına göre sırala
-    const byPriority = [...sorted].sort((a, b) => {
-      const pa = LABEL_PRIORITY[a] || 20;
-      const pb = LABEL_PRIORITY[b] || 20;
-      return pb - pa;
-    });
+    // Zorunlu P kodları — 6 limitinin dışında, her zaman etikete gider
+    const MANDATORY_LABEL = new Set(['P501']); // P101/P102 consumer/prof'ta ekleniyor
 
-    // 2. İlk 6'yı al
+    // H kodu bazlı zorunlu P kodları (CLP Annex IV — kategoriye göre değişmez)
+    const H_FORCED = {
+      'H271': ['P220','P221'], 'H272': ['P220','P221'],
+      'H304': ['P331'],
+      'H314': ['P280','P405'], 'H318': ['P280'],
+      'H315': ['P280'],        'H317': ['P280'],   'H319': ['P280'],
+      'H300': ['P405'],        'H301': ['P405'],
+      'H310': ['P405'],        'H330': ['P405'],
+      'H370': ['P405'],
+      'H334': ['P284'],
+      'H340': ['P280','P405'], 'H350': ['P280','P405'], 'H360': ['P280','P405'],
+      'H341': ['P201'],        'H351': ['P201'],         'H361': ['P201'],
+      'H372': ['P314'],        'H373': ['P314'],
+      'H260': ['P231+P232'],   'H261': ['P231+P232'],
+      'H400': ['P273'],        'H410': ['P273'],
+      'H411': ['P273'],        'H412': ['P273'],         'H413': ['P273'],
+    };
+
+    // 1. Zorunlu (limit dışı) kodları belirle
+    const labelMandatory = [];
+    for (const code of sorted) {
+      if (MANDATORY_LABEL.has(code)) labelMandatory.push(code);
+    }
+
+    // 2. H kodu bazlı forced kodları belirle
+    const forcedSet = new Set();
+    for (const h of hCodes) {
+      const hc = h.replace(/[*\s]/g,'').substring(0,4);
+      for (const p of (H_FORCED[hc] || [])) {
+        if (assigned.has(p)) forcedSet.add(p);
+      }
+    }
+
+    // 3. Yarışmadan çıkarılacaklar (mandatory + forced + P101/P102)
+    const excludeFromRace = new Set([...MANDATORY_LABEL, ...forcedSet, 'P101','P102','P103']);
+
+    // 4. Kalan adaylar — önceliğe göre sırala
+    const candidates = sorted.filter(p => !excludeFromRace.has(p));
+    const byPriority = [...candidates].sort((a, b) =>
+      (LABEL_PRIORITY[b] || 20) - (LABEL_PRIORITY[a] || 20)
+    );
+
+    // 5. Forced + max 6 adaydan oluşan seçim
+    const remaining = Math.max(0, 6 - forcedSet.size);
+    const labelSelected = [...forcedSet];
     for (const code of byPriority) {
-      if (labelSelected.length >= 6) break;
+      if (labelSelected.length - forcedSet.size >= remaining) break;
       labelSelected.push(code);
     }
 
-    // 3. Çift kuralı: seçilmiş bir kodun partneri eksikse ve 10 limiti aşılmıyorsa ekle
+    // 6. Çift kuralı: kritik partnerleri ekle (10 limiti)
     for (const [a, b] of PAIRS) {
       if (labelSelected.includes(a) && !labelSelected.includes(b) && labelSelected.length < 10) {
         labelSelected.push(b);
       }
       if (labelSelected.includes(b) && !labelSelected.includes(a) && labelSelected.length < 10) {
-        labelSelected.unshift(a); // partneri daha öne al
+        labelSelected.unshift(a);
       }
     }
 
-    // 4. Tekrar öncelik sıralaması
+    // 7. Öncelik sırası
     labelSelected.sort((a, b) => (LABEL_PRIORITY[b] || 20) - (LABEL_PRIORITY[a] || 20));
 
     return {
@@ -260,7 +302,8 @@ const PCodeEngine = (() => {
       details,
       by_category: cats,
       total: sorted.length,
-      label_codes: labelSelected,        // etiket için seçilmiş (max 10)
+      label_codes:     labelSelected,   // etiket için seçilmiş (zorunlular + 6 slot)
+      label_mandatory: labelMandatory,  // limit dışı zorunlular (P501 vb.)
     };
   }
 

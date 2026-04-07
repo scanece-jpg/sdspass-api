@@ -2018,7 +2018,8 @@ async function generatePDF() {
       p_codes: {
         p_codes: pcodes?.codes       || [],   // tüm P kodları (SDS Bölüm 7 vb.)
         label: {
-          selected: pcodes?.label_codes || [], // etiket için seçilmiş max 6-10
+          selected:  pcodes?.label_codes     || [], // etiket için seçilmiş max 6-10
+          mandatory: pcodes?.label_mandatory || [], // limit dışı zorunlular (P501 vb.)
         },
       },
       revision:     { date: new Date().toLocaleDateString('tr-TR'), no: '1', version: '1.0', notes: 'İlk yayın' },

@@ -17,6 +17,7 @@ Kaynak: CLP Madde 24(2), REACH Madde 119, KKDİK Madde 15
 """
 
 from typing import List, Dict, Optional, Any
+from app.services.codes_i18n import correct_hclass
 
 
 # ─── BÖLÜM 3: ECHA KONSANTRASYON ARALIĞI ─────────────────────────────────────
@@ -120,11 +121,13 @@ def format_section3_component(
         name = comp.get('name', '') or cas
     conc = float(comp.get('worst_case_conc', comp.get('conc', comp.get('concentration', 0))) or 0)
     hazards = comp.get('hazards', [])
-    # Tekrar eden h_class değerleri gider (aynı sınıf birden fazla hazard girdisinde olabilir)
+    # Tekrar eden h_class değerleri gider; h_code'dan yetkili h_class türet (DB bozukluğuna karşı)
     _seen_cls = set()
     _haz_parts = []
     for h in hazards:
-        cls = h.get('h_class', '').replace('*', '').strip()
+        raw_cls  = h.get('h_class', '').replace('*', '').strip()
+        raw_code = h.get('h_code', '').replace('*', '').strip()
+        cls = correct_hclass(raw_code, raw_cls) or raw_cls  # düzelt; düzeltemezse orijinali kullan
         if cls and cls not in _seen_cls:
             _seen_cls.add(cls)
             _haz_parts.append(cls)

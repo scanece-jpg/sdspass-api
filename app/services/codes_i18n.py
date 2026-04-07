@@ -793,10 +793,146 @@ CLP_CLASS_TR = {
 }
 
 
+# ─── Yetkili H kodu → h_class eşlemesi (SEA Ek-3 / CLP Annex III) ─────────────
+# Veritabanı girdilerinde h_class/h_code uyumsuzluğu olabilir (veri bozukluğu).
+# Bu tablo H kodunu birincil kaynak olarak kullanır; görüntülemede DB h_class'ını düzeltir.
+#
+# NOT: Aynı H kodunu veren birden fazla sınıf varsa (Acute Tox.1/2 → H300,
+# Carc.1A/1B → H350, Repr.1A/1B → H360 vb.) DB'deki h_class korunur
+# çünkü alt-kategori bilgisi önemlidir. Sadece kategori yanlışsa düzeltilir.
+_H_CODE_CATEGORY = {
+    # Patlayıcı
+    'H200':'expl','H201':'expl','H202':'expl','H203':'expl','H204':'expl','H205':'expl',
+    # Alevlenir / Aerosol
+    'H220':'flam','H221':'flam','H222':'flam','H223':'flam',
+    'H224':'flam','H225':'flam','H226':'flam','H227':'flam','H228':'flam','H229':'flam',
+    # Pirofor / Kendi ısınan / Su reaktif
+    'H240':'self','H241':'self','H242':'self',
+    'H250':'pyr','H251':'self','H252':'self',
+    'H260':'water','H261':'water',
+    # Oksitleyici
+    'H270':'ox','H271':'ox','H272':'ox','H273':'ox',
+    # Basınçlı gaz
+    'H280':'gas','H281':'gas',
+    # Metal aşındırıcı
+    'H290':'met',
+    # Akut toksisite (oral/dermal/inhalasyon)
+    'H300':'acute','H301':'acute','H302':'acute','H303':'acute',
+    'H304':'asp',   # Aspirasyon
+    'H310':'acute','H311':'acute','H312':'acute','H313':'acute',
+    # Cilt
+    'H314':'skin','H315':'skin','H316':'skin',
+    # Cilt / Solunum duyarlılaştırma
+    'H317':'sens',
+    # Göz
+    'H318':'eye','H319':'eye','H320':'eye',
+    # İnhalasyon akut
+    'H330':'acute','H331':'acute','H332':'acute','H333':'acute',
+    # Solunum duyarlılaştırma
+    'H334':'resp',
+    # STOT Tek maruziyet
+    'H335':'stot','H336':'stot',
+    # Mutajenez
+    'H340':'muta','H341':'muta',
+    # Kanserojenez
+    'H350':'carc','H351':'carc',
+    # Üreme toksisitesi
+    'H360':'repr','H361':'repr','H362':'repr',
+    # STOT Tek maruziyet (sistemik)
+    'H370':'stot','H371':'stot',
+    # STOT Tekrarlanan maruziyet
+    'H372':'stot','H373':'stot',
+    # Sucul
+    'H400':'aqua','H401':'aqua','H410':'aqua','H411':'aqua','H412':'aqua','H413':'aqua',
+    # Ozon
+    'H420':'ozone',
+}
+
+# h_class metninin hangi kategoriye ait olduğu
+_CLASS_CATEGORY = {
+    'Expl':'expl',
+    'Flam. Gas':'flam','Aerosol':'flam','Flam. Liq':'flam','Flam. Sol':'flam',
+    'Self-react':'self','Self-heat':'self','Pyr. Liq':'pyr','Pyr. Sol':'pyr',
+    'Water-react':'water','Org. Perox':'self',
+    'Ox. Gas':'ox','Ox. Liq':'ox','Ox. Sol':'ox',
+    'Press. Gas':'gas','Met. Corr':'met',
+    'Acute Tox':'acute','Asp. Tox':'asp',
+    'Skin Corr':'skin','Skin Irrit':'skin',
+    'Skin Sens':'sens','Resp. Sens':'resp',
+    'Eye Dam':'eye','Eye Irrit':'eye',
+    'Muta':'muta','Carc':'carc',
+    'Repr':'repr','Lact':'repr',
+    'STOT SE':'stot','STOT RE':'stot',
+    'Aquatic':'aqua','Ozone':'ozone',
+}
+
+# H kodu → canonical h_class (tek sınıflı H kodları için)
+# Birden fazla alt-kategorisi olanlar (H300 Tox.1/2, H350 1A/1B vb.) buraya EKLENMEZ
+# çünkü alt-kategori bilgisi sadece DB'de vardır.
+H_CODE_TO_CANONICAL_CLASS: dict = {
+    'H315': 'Skin Irrit. 2',
+    'H316': 'Skin Irrit. 3',
+    'H317': 'Skin Sens. 1',
+    'H318': 'Eye Dam. 1',
+    'H319': 'Eye Irrit. 2',
+    'H320': 'Eye Irrit. 3',
+    'H334': 'Resp. Sens. 1',
+    'H335': 'STOT SE 3',
+    'H336': 'STOT SE 3',
+    'H341': 'Muta. 2',
+    'H351': 'Carc. 2',
+    'H362': 'Repr. Lact.',
+    'H370': 'STOT SE 1',
+    'H371': 'STOT SE 2',
+    'H400': 'Aquatic Acute 1',
+    'H401': 'Aquatic Acute 2',
+    'H411': 'Aquatic Chronic 2',
+    'H412': 'Aquatic Chronic 3',
+    'H413': 'Aquatic Chronic 4',
+    'H420': 'Ozone 1',
+}
+
+
+def _hclass_category(h_class: str) -> str:
+    """h_class metninin kategori grubunu döndür."""
+    s = h_class.strip()
+    for prefix, cat in _CLASS_CATEGORY.items():
+        if s.startswith(prefix):
+            return cat
+    return '?'
+
+
+def correct_hclass(h_code: str, h_class: str) -> str:
+    """
+    DB'den gelen h_class'ın h_code ile kategorik uyumunu kontrol et.
+    Uyumsuzsa (ör: H317 → 'Aquatic Acute 1') canonical değeri döndür.
+
+    Öncelik kuralı: h_code kesin doğrudur; h_class yanlışsa düzelt.
+    Alt-kategorili kodlarda (Carc.1A/1B, Repr.1A/1B) mevcut h_class korunur.
+    """
+    code4 = h_code.replace('*','').strip()[:4]
+    if not code4.startswith('H'):
+        return h_class
+
+    # Önce canonical single-class map'e bak
+    canonical = H_CODE_TO_CANONICAL_CLASS.get(code4)
+    if canonical:
+        return canonical  # Bu H kodunun tek canonical sınıfı var, her zaman kullan
+
+    # Çok alt-kategorili H kodlar: kategori yanlışsa düzelt, doğruysa koru
+    exp_cat = _H_CODE_CATEGORY.get(code4)
+    got_cat = _hclass_category(h_class)
+    if exp_cat and got_cat != '?' and exp_cat != got_cat:
+        # Kategori tamamen yanlış — h_class'ı boş bırak (çevirici None/'' ile başa çıkır)
+        return ''
+
+    return h_class
+
+
 def translate_hclass(h_class: str, lang: str = 'TR') -> str:
     """
     CLP hazard class kısa ismini dile çevir.
-    TR → Türkçe kısaltma
+    TR → Türkçe kısaltma (SEA Ek-3 Tablo 1.2)
     Diğer → orijinal bırak (uluslararası standart)
     """
     if lang != 'TR':

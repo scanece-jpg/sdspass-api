@@ -460,6 +460,81 @@ const GHS_DATA = {
 
 const DANGER_H = new Set(['H300','H301','H304','H310','H311','H314','H318','H330','H331','H334','H340','H341','H350','H351','H360','H361','H362','H370','H371','H372','H200','H201','H202','H224','H225']);
 
+// ── Yetkili H kodu → h_class düzeltme (SEA Ek-3 / CLP Annex III) ─────────────
+// Veritabanında h_class/h_code uyumsuzluğu olabilir (örn: H317→"Aquatic Acute 1").
+// Bu tablo TEK canonical sınıfı olan H kodları için kullanılır.
+// Birden fazla alt-kategorisi olanlar (H300=Tox.1/2, H350=1A/1B) EKLENMEZ.
+const H_CODE_CANONICAL_CLASS = {
+  'H315':'Skin Irrit. 2',   'H316':'Skin Irrit. 3',
+  'H317':'Skin Sens. 1',    'H318':'Eye Dam. 1',
+  'H319':'Eye Irrit. 2',    'H320':'Eye Irrit. 3',
+  'H334':'Resp. Sens. 1',
+  'H335':'STOT SE 3',       'H336':'STOT SE 3',
+  'H341':'Muta. 2',         'H351':'Carc. 2',
+  'H362':'Repr. Lact.',
+  'H370':'STOT SE 1',       'H371':'STOT SE 2',
+  'H400':'Aquatic Acute 1', 'H401':'Aquatic Acute 2',
+  'H411':'Aquatic Chronic 2','H412':'Aquatic Chronic 3','H413':'Aquatic Chronic 4',
+  'H420':'Ozone 1',
+};
+
+// h_class'ın kategori grubunu döndür
+const _HCLASS_CAT_MAP = [
+  [/^Expl\./,       'expl'], [/^Flam\. Gas/,'flam'],[/^Aerosol/,'flam'],
+  [/^Flam\. Liq/,   'flam'], [/^Flam\. Sol/,'flam'],
+  [/^Self-react/,   'self'], [/^Self-heat/,'self'], [/^Pyr\./,'pyr'],
+  [/^Water-react/,  'water'],[/^Org\. Perox/,'self'],
+  [/^Ox\. (Gas|Liq|Sol)/,'ox'],[/^Press\. Gas/,'gas'],[/^Met\. Corr/,'met'],
+  [/^Acute Tox/,    'acute'],[/^Asp\. Tox/,'asp'],
+  [/^Skin Corr/,    'skin'], [/^Skin Irrit/,'skin'],
+  [/^Skin Sens/,    'sens'], [/^Resp\. Sens/,'resp'],
+  [/^Eye Dam/,      'eye'],  [/^Eye Irrit/,'eye'],
+  [/^Muta\./,       'muta'], [/^Carc\./,'carc'],
+  [/^Repr\./,       'repr'], [/^Lact\./,'repr'],
+  [/^STOT SE/,      'stot'], [/^STOT RE/,'stot'],
+  [/^Aquatic/,      'aqua'], [/^Ozone/,'ozone'],
+];
+const _H_CODE_CAT = {
+  H200:'expl',H201:'expl',H202:'expl',H203:'expl',H204:'expl',H205:'expl',
+  H220:'flam',H221:'flam',H222:'flam',H223:'flam',
+  H224:'flam',H225:'flam',H226:'flam',H227:'flam',H228:'flam',H229:'flam',
+  H240:'self',H241:'self',H242:'self',
+  H250:'pyr',H251:'self',H252:'self',
+  H260:'water',H261:'water',
+  H270:'ox',H271:'ox',H272:'ox',H273:'ox',
+  H280:'gas',H281:'gas',H290:'met',
+  H300:'acute',H301:'acute',H302:'acute',H303:'acute',H304:'asp',
+  H310:'acute',H311:'acute',H312:'acute',H313:'acute',
+  H314:'skin',H315:'skin',H316:'skin',
+  H317:'sens',H318:'eye',H319:'eye',H320:'eye',
+  H330:'acute',H331:'acute',H332:'acute',H333:'acute',
+  H334:'resp',H335:'stot',H336:'stot',
+  H340:'muta',H341:'muta',H350:'carc',H351:'carc',
+  H360:'repr',H361:'repr',H362:'repr',
+  H370:'stot',H371:'stot',H372:'stot',H373:'stot',
+  H400:'aqua',H401:'aqua',H410:'aqua',H411:'aqua',H412:'aqua',H413:'aqua',H420:'ozone',
+};
+function _hclassCat(hclass) {
+  for (const [re, cat] of _HCLASS_CAT_MAP) { if (re.test(hclass)) return cat; }
+  return '?';
+}
+/**
+ * DB'den gelen h_class'ı h_code ile karşılaştır, yanlışsa düzelt.
+ * SEA Ek-3 Tablo 1.2 / CLP Annex III yetkili kaynak.
+ */
+function correctHClass(hcode, hclass) {
+  const c4 = (hcode || '').replace(/[*\s]/g,'').substring(0,4);
+  if (!c4.startsWith('H')) return hclass;
+  // Tek canonical sınıflı H kodları — her zaman canonical değeri kullan
+  const canon = H_CODE_CANONICAL_CLASS[c4];
+  if (canon) return canon;
+  // Çok alt-kategorili: sadece kategori yanlışsa temizle
+  const expCat = _H_CODE_CAT[c4];
+  const gotCat = _hclassCat(hclass);
+  if (expCat && gotCat !== '?' && expCat !== gotCat) return '';
+  return hclass;
+}
+
 // ── Bileşen yönetimi ──────────────────────────────────────────────────────────
 let _compId = 0;
 
@@ -1793,7 +1868,7 @@ async function generatePDF() {
     comps.forEach(c => {
       (c.hazards || []).forEach(hz => {
         const code = (hz.h_code || '').replace(/[*\s]/g,'').substring(0,4);
-        if (code && !hClassMap[code]) hClassMap[code] = hz.h_class || '';
+        if (code && !hClassMap[code]) hClassMap[code] = correctHClass(code, hz.h_class || '');
       });
     });
     const cutoffUsed = clp?.cutoffUsed || {};

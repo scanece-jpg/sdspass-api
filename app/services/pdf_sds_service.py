@@ -111,7 +111,7 @@ from app.services.i18n_sds import (
     signal_word as sig_word, get_lang, S
 )
 from app.services.reach_db import get_reg_no, get_ec_no
-from app.services.codes_i18n import get_h, get_euh, get_p, get_ppe, get_sentence, translate_hclass, translate_hclass_list, EUH_STMTS
+from app.services.codes_i18n import get_h, get_euh, get_p, get_ppe, get_sentence, translate_hclass, translate_hclass_list, EUH_STMTS, correct_hclass
 from app.services.ghs_pictogram import get_ghs_codes, pictogram_table
 from app.services.transport_adr_service import get_adr_details, auto_detect_un
 from app.services.tr_oel_service import get_oel_table, format_oel_row
@@ -835,9 +835,13 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         seen_clf.add(hc)
         reason = entry.get('reason','')
         conc_info = reason or entry.get('cutoff_used','—')
+        # h_code'dan yetkili h_class türet (DB bozukluğuna karşı düzelt)
+        raw_hclass  = entry.get('h_class', '')
+        raw_hcode   = entry.get('h_code', '')
+        fixed_hclass = correct_hclass(raw_hcode, raw_hclass) or raw_hclass
         clf_rows.append([
-            translate_hclass(entry.get('h_class',''), lang),
-            entry.get('h_code',''),
+            translate_hclass(fixed_hclass, lang),
+            raw_hcode,
             conc_info,
         ])
     # passed boş veya eksikse all_h_codes'dan fallback satırlar ekle
@@ -1727,7 +1731,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 _mf_rows.append([
                     _d.get('cas',''),
                     _mf_name,
-                    translate_hclass(_d.get('h_class',''), lang),
+                    translate_hclass(correct_hclass(_d.get('h_code',''), _d.get('h_class','')), lang),
                     str(_d.get('m_acute', 1)),
                     str(_d.get('m_chronic', 1)),
                 ])

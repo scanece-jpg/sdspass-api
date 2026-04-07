@@ -115,6 +115,33 @@ const PhysicalEngine = (() => {
     '64742-48-9':7.7,'8052-41-3':6.5,'107-98-2':13.1,
   };
 
+  // ── KİNEMATİK VİSKOZİTE VERİTABANI (mm²/s = cSt @ 40°C) ───────────────────
+  // Kaynak: NIST WebBook / DDB / Lange's Handbook / VDI Wärmeatlas
+  // Not: CLP Ek-I §3.10 H304 eşiği = 20,5 mm²/s @ 40°C
+  const VISC_DB = {
+    '110-54-3': 0.35, '142-82-5': 0.48, '111-65-9': 0.60, '110-82-7': 0.62,
+    '71-43-2':  0.50, '108-88-3': 0.53, '1330-20-7':0.65, '95-47-6':  0.64,
+    '100-41-4': 0.62, '95-63-6':  0.82, '67-64-1':  0.32, '78-93-3':  0.45,
+    '108-10-1': 0.55, '141-78-6': 0.48, '123-86-4': 0.70, '64-17-5':  0.90,
+    '67-63-0':  0.80, '71-23-8':  1.40, '71-36-3':  2.00, '78-83-1':  1.80,
+    '111-76-2': 2.50, '112-34-5': 5.00, '107-98-2': 1.20, '56-81-5':  150.0,
+    '64742-47-8':1.50,'64742-48-9':0.60,'64742-82-1':2.00,
+    '64742-54-7':95.0,'8052-41-3': 2.00,'7732-18-5': 0.65,
+  };
+
+  // ── SUDA ÇÖZÜNÜRLÜK VERİTABANI (mg/L @ 20°C) ────────────────────────────────
+  // Kaynak: ECHA ChemFate / NIST / OECD 105
+  const SOL_DB = {
+    '110-54-3':    13, '142-82-5':     3, '111-65-9':   0.7, '110-82-7':   66,
+    '108-88-3':   156, '71-43-2':   1780, '1330-20-7':  156, '95-47-6':   175,
+    '100-41-4':   152, '95-63-6':    57,  '67-64-1':  1e6,   '78-93-3':  1e6,
+    '108-10-1': 19000, '141-78-6': 80000, '123-86-4':  7000, '64-17-5':  1e6,
+    '67-63-0':   1e6,  '71-23-8':   1e6,  '71-36-3':  77000, '78-83-1': 85000,
+    '111-76-2':  1e6,  '112-34-5':  1e6,  '107-98-2':  1e6,  '56-81-5':  1e6,
+    '7732-18-5': 1e6,  '64742-47-8':  1,  '64742-48-9':  1,
+    '64742-82-1':  1,  '64742-54-7':0.1,  '8052-41-3':   1,
+  };
+
   // ── BUHAR BASINCI VERİTABANI (hPa, 20°C) ────────────────────────────────────
   // Kaynak: NIST WebBook / Dortmund Veri Bankası (DDB)
   const VP_DB = {
@@ -322,6 +349,80 @@ const PhysicalEngine = (() => {
     // ── Kaynama Noktası ────────────────────────────────────────────────────────
     if (minBP !== null) {
       res.boiling_point = { value: minBP, error: null, ...ERROR_META.boiling_point };
+    }
+
+    // ── Kinematik Viskozite — Kendall-Monroe Log-Lineer Karışım Kuralı ─────────
+    // log(ν_mix) = Σ(φᵢ · log(νᵢ))   φ = hacim kesri = (wᵢ/ρᵢ) / Σ(wⱼ/ρⱼ)
+    // Kaynak: ASTM D341 / Walther denklemine dayalı hacimsel karışım kuralı
+    // H304 eşiği: kinematik viskozite @ 40°C ≤ 20,5 mm²/s (CLP Ek-I §3.10)
+    {
+      const viscPairs = [];
+      let viscVolTot = 0, viscCovW = 0;
+      for (const { cas, w } of rows) {
+        const visc = VISC_DB[cas];
+        const rho  = DENSITY_DB[cas];
+        if (visc != null && rho != null && w > 0) {
+          const vol = w / rho;
+          viscPairs.push({ vol, visc });
+          viscVolTot += vol;
+          viscCovW   += w;
+        }
+      }
+      if (viscPairs.length && viscVolTot > 0) {
+        let logSum = 0;
+        for (const { vol, visc } of viscPairs) {
+          logSum += (vol / viscVolTot) * Math.log(visc);
+        }
+        const viscVal = parseFloat(Math.exp(logSum).toFixed(2));
+        const viscCovPct = Math.round((viscCovW / totalWAll) * 100);
+        const h304ok = viscVal <= 20.5
+          ? `H304 eşiği altında (${viscVal} ≤ 20,5 mm²/s) — kimyasal yapı kontrolü gerekir`
+          : `H304 eşiği üstünde (${viscVal} > 20,5 mm²/s) — H304 bu kriterde hariç`;
+        res.viscosity = {
+          value: viscVal,
+          error: { abs: parseFloat((viscVal * 0.30).toFixed(2)), pct: 30, rate: 0.30 },
+          method: 'log(ν_mix) = Σ(φᵢ·log(νᵢ)) — Kendall-Monroe (ASTM D341)',
+          standard: 'ISO 3219 / ISO 3104 — Kinematik viskozite @ 40°C',
+          note: `${h304ok}. DB kapsama: %${viscCovPct}`,
+        };
+      }
+    }
+
+    // ── Suda Çözünürlük — Ağırlık Kesri Log Ortalaması ──────────────────────────
+    // log(S_mix) = Σ(wᵢ · log(Sᵢ)) / Σwᵢ  (kütlesel ağırlıklı geometrik ortalama)
+    // Kaynak: OECD 105 referans yaklaşımı
+    {
+      let solLogSum = 0, solCovW = 0;
+      const waterRow = rows.find(r => r.cas === '7732-18-5');
+      const waterFrac = waterRow ? waterRow.w : 0;
+      for (const { cas, w } of rows) {
+        const sol = SOL_DB[cas];
+        if (sol != null && w > 0) {
+          solLogSum += w * Math.log10(Math.max(sol, 0.01));
+          solCovW += w;
+        }
+      }
+      if (solCovW > 0) {
+        const solCovPct = Math.round((solCovW / totalWAll) * 100);
+        let solVal, solDesc;
+        if (waterFrac >= 0.5) {
+          solVal = 1e6;
+          solDesc = 'Tam karışır — su bazlı ürün (su > %50)';
+        } else {
+          solVal = parseFloat(Math.pow(10, solLogSum / solCovW).toFixed(1));
+          solDesc = solVal >= 10000  ? `Çözünür (>10 g/L), tahmini ~${solVal} mg/L` :
+                    solVal >= 100    ? `Kısmen çözünür (0,1–10 g/L), tahmini ~${solVal} mg/L` :
+                                       `Pratik olarak çözünmez (<100 mg/L), tahmini ~${solVal} mg/L`;
+        }
+        res.solubility = {
+          value: solVal > 999999 ? null : solVal,
+          text:  solDesc,
+          error: { abs: null, pct: 50, rate: 0.50 },
+          method: 'log(S_mix) = Σ(wᵢ·log(Sᵢ))/Σwᵢ — ağırlıklı geometrik ortalama',
+          standard: 'OECD 105 (referans)',
+          note: `${solDesc}. DB kapsama: %${solCovPct}`,
+        };
+      }
     }
 
     return res;
@@ -586,5 +687,5 @@ const PhysicalEngine = (() => {
     console.log('[PhysicalEngine] init OK — Teorik modül + hata payı + test verisi aktif');
   }
 
-  return { init, calculate, calcTheoProps, DENSITY_DB, MW_DB, VP_DB, LEL_DB, UEL_DB };
+  return { init, calculate, calcTheoProps, DENSITY_DB, MW_DB, VP_DB, LEL_DB, UEL_DB, VISC_DB, SOL_DB };
 })();

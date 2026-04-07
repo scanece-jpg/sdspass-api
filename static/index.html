@@ -72,6 +72,25 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
 .phys-modal-body::-webkit-scrollbar{width:6px}
 .phys-modal-body::-webkit-scrollbar-track{background:var(--bg3)}
 .phys-modal-body::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
+/* Fiziksel veri prompt */
+.physp-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1100;display:none;align-items:center;justify-content:center}
+.physp-overlay.open{display:flex}
+.physp-box{background:var(--bg2);border:1px solid var(--border2);border-radius:10px;width:min(440px,94vw);box-shadow:0 20px 56px rgba(0,0,0,.7);overflow:hidden}
+.physp-head{padding:12px 16px;background:var(--bg3);border-bottom:1px solid var(--border2);font-size:12px;font-weight:600;color:var(--text);display:flex;align-items:center;gap:8px}
+.physp-body{padding:14px 16px}
+.physp-desc{font-size:11px;color:var(--text2);margin:0 0 12px;line-height:1.5}
+.physp-item{display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:var(--bg3);border-radius:6px;margin-bottom:6px;border:1px solid var(--border2)}
+.physp-item-label{font-size:11px;color:var(--text2);font-weight:500}
+.physp-est{font-size:11px;color:#68d391;font-family:var(--mono)}
+.physp-noest{font-size:10px;color:var(--text3);font-style:italic}
+.physp-footer{padding:10px 16px 14px;display:flex;flex-direction:column;gap:7px}
+.physp-btn{width:100%;padding:9px;border-radius:6px;border:none;cursor:pointer;font-size:11px;font-weight:500;transition:.15s}
+.physp-btn-theo{background:#2d6a4f;color:#d8f3dc}
+.physp-btn-theo:hover{background:#40916c}
+.physp-btn-manual{background:var(--bg3);color:var(--text);border:1px solid var(--border2)}
+.physp-btn-manual:hover{background:var(--border2)}
+.physp-btn-skip{background:none;color:var(--text3);border:1px dashed var(--border2);font-size:10px}
+.physp-btn-skip:hover{color:var(--text)}
 .pm-row{display:grid;grid-template-columns:160px 1fr;gap:4px 12px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04);align-items:start}
 .pm-row:last-child{border-bottom:none}
 .pm-label{font-size:10px;color:var(--text3);padding-top:2px}
@@ -307,6 +326,24 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
         <input type="number" id="tf_density" placeholder="ISO 2811 — override için girin" step="0.001">
       </div>
     </div>
+    <div class="row2" style="margin-top:8px">
+      <div>
+        <label>
+          Viskozite (mm²/s @40°C) <span style="color:var(--safe);font-size:8px">● motor</span>
+          <span id="visc_req_badge" style="display:none;color:#f6ad55;font-size:8px;margin-left:4px">⚠ zorunlu</span>
+        </label>
+        <input type="number" id="tf_visc" placeholder="ISO 3219 — override için girin" step="0.1" min="0"
+               oninput="document.getElementById('visc_req_badge').style.display='none'">
+      </div>
+      <div>
+        <label>
+          Su Çözünürlüğü (mg/L) <span style="color:var(--safe);font-size:8px">● motor</span>
+          <span id="sol_req_badge" style="display:none;color:#f6ad55;font-size:8px;margin-left:4px">⚠ zorunlu</span>
+        </label>
+        <input type="number" id="tf_sol" placeholder="OECD 105 — override için girin" min="0"
+               oninput="document.getElementById('sol_req_badge').style.display='none'">
+      </div>
+    </div>
 
     <!-- Daha fazla... toggle -->
     <div id="sec9Extra" style="display:none;margin-top:10px">
@@ -379,18 +416,8 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
       <div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin:12px 0 6px;padding-bottom:4px;border-bottom:1px solid var(--border2)">Çözünürlük ve Diğer</div>
       <div class="row2">
         <div>
-          <label>Su Çözünürlüğü <span style="color:var(--safe);font-size:8px">● motor</span></label>
-          <input type="number" id="tf_sol" placeholder="mg/L — override için girin">
-        </div>
-        <div>
           <label>Dağılım Katsayısı (log Kow)</label>
           <input type="number" id="tf_logkow" placeholder="Ör: 2.5" step="0.01">
-        </div>
-      </div>
-      <div class="row2" style="margin-top:8px">
-        <div>
-          <label>Viskozite (mPa·s) <span style="color:var(--safe);font-size:8px">● motor</span></label>
-          <input type="number" id="tf_visc" placeholder="override için girin">
         </div>
         <div>
           <label>Diğer Çözücülerde Çözünürlük</label>
@@ -1287,6 +1314,20 @@ function getComps() {
 function doCalculate() {
   const comps = getComps();
   if (!comps.length) { showError('En az bir bileşen girin.'); return; }
+  const form = document.getElementById('pform')?.value || 'liquid';
+
+  // Sıvı ürünlerde zorunlu fiziksel veriler eksikse kullanıcıya sor
+  const missing = _checkMissingPhysProps(comps, form);
+  if (missing) {
+    _showPhysPrompt(missing, () => _runCalculationCore());
+    return;
+  }
+  _runCalculationCore();
+}
+
+// ── Hesaplama çekirdeği — doğrudan veya prompt callback olarak çağrılır ───────
+function _runCalculationCore() {
+  const comps  = getComps();
   const form   = document.getElementById('pform')?.value || 'liquid';
   const userFP = parseFloat(document.getElementById('tf_fp')?.value) || null;
 
@@ -1316,16 +1357,16 @@ function doCalculate() {
   const tfLogKow = n('tf_logkow');
   const tfOdorTh = n('tf_odor_thresh');
 
-  if (!isNaN(tfDens)   && tfDens > 0)   testData.density          = tfDens;
-  if (!isNaN(tfBP))                     testData.boiling_point     = tfBP;
-  if (!isNaN(tfPH)     && tfPH >= 0)    testData.ph                = tfPH;
-  if (!isNaN(tfVisc)   && tfVisc > 0)   testData.viscosity         = tfVisc;
-  if (!isNaN(tfSol)    && tfSol >= 0)   testData.solubility        = tfSol;
-  if (!isNaN(tfMP))                     testData.melting_point     = tfMP;
-  if (!isNaN(tfAIT)    && tfAIT > 0)    testData.auto_ignition     = tfAIT;
-  if (!isNaN(tfDecomp) && tfDecomp > 0) testData.decomp_temp       = tfDecomp;
-  if (!isNaN(tfLogKow))                 testData.log_kow           = tfLogKow;
-  if (!isNaN(tfOdorTh) && tfOdorTh > 0) testData.odor_threshold   = tfOdorTh;
+  if (!isNaN(tfDens)   && tfDens > 0)    testData.density          = tfDens;
+  if (!isNaN(tfBP))                      testData.boiling_point     = tfBP;
+  if (!isNaN(tfPH)     && tfPH >= 0)     testData.ph                = tfPH;
+  if (!isNaN(tfVisc)   && tfVisc > 0)    testData.viscosity         = tfVisc;
+  if (!isNaN(tfSol)    && tfSol >= 0)    testData.solubility        = tfSol;
+  if (!isNaN(tfMP))                      testData.melting_point     = tfMP;
+  if (!isNaN(tfAIT)    && tfAIT > 0)     testData.auto_ignition     = tfAIT;
+  if (!isNaN(tfDecomp) && tfDecomp > 0)  testData.decomp_temp       = tfDecomp;
+  if (!isNaN(tfLogKow))                  testData.log_kow           = tfLogKow;
+  if (!isNaN(tfOdorTh) && tfOdorTh > 0)  testData.odor_threshold   = tfOdorTh;
 
   EventBus.emit('PIPELINE_START', { comps, form, userFP, testData });
 }
@@ -1700,6 +1741,22 @@ window.addEventListener('DOMContentLoaded', () => {
 </script>
 
 <!-- ══ FİZİKSEL ÖZELLİKLER MODAL ══════════════════════════════════════════ -->
+<!-- Fiziksel Veri Giriş Seçici Prompt -->
+<div class="physp-overlay" id="physPromptOverlay" onclick="if(event.target===this)_physPromptSkip()">
+  <div class="physp-box">
+    <div class="physp-head">⚗️ Fiziksel Özellikler Eksik</div>
+    <div class="physp-body">
+      <p class="physp-desc" id="physPromptDesc"></p>
+      <div id="physPromptItems"></div>
+    </div>
+    <div class="physp-footer">
+      <button class="physp-btn physp-btn-theo" id="physPromptTheoBtn" onclick="_physPromptTheo()">🔬 Teorik hesap değerlerini kullan</button>
+      <button class="physp-btn physp-btn-manual" onclick="_physPromptManual()">✏️ Kendim gireceğim</button>
+      <button class="physp-btn physp-btn-skip" onclick="_physPromptSkip()">⏭️ Şimdilik geç (PDF'te uyarı çıkar)</button>
+    </div>
+  </div>
+</div>
+
 <div class="phys-modal-overlay" id="physModalOverlay" onclick="if(event.target===this)closePhysModal()">
   <div class="phys-modal">
     <div class="phys-modal-head">
@@ -1760,12 +1817,16 @@ function openPhysModal() {
     ['Buhar basıncı',                     fmtVal(tp?.vapor_pressure, 'hPa @ 20°C')],
     ['Buhar yoğunluğu (hava=1)',          fmtVal(tp?.vapor_density)],
     ['Göreceli (bağıl) yoğunluk',         fmtVal(tp?.density, 'g/cm³')],
-    ['Su içinde çözünürlük',              tp?.solubility     ? fmtVal(tp.solubility, 'mg/L')               : NA],
+    ['Su içinde çözünürlük',              tp?.solubility
+        ? (tp.solubility.text
+            ? `<span class="pm-val">${tp.solubility.text}</span><div class="pm-meta">${tp.solubility.method || ''}</div>`
+            : fmtVal(tp.solubility, 'mg/L'))
+        : NA],
     ['Diğer çözücülerdeki çözünürlük',   tp?.sol_other      ? fmtStr(tp.sol_other)                         : NA],
     ['Dağılım katsayısı (log Kow)',       tp?.log_kow        ? fmtVal(tp.log_kow)                          : NA],
     ['Kendiliğinden tutuşma sıcaklığı',  tp?.auto_ignition  ? fmtVal(tp.auto_ignition, '°C')              : NA],
     ['Bozunma sıcaklığı',                tp?.decomp_temp    ? fmtVal(tp.decomp_temp, '°C')                 : NA],
-    ['Viskozite (dinamik)',               tp?.viscosity      ? fmtVal(tp.viscosity, 'mPa·s')               : NA],
+    ['Viskozite (kinematik @ 40°C)',       tp?.viscosity      ? fmtVal(tp.viscosity, 'mm²/s')              : NA],
     ['Patlayıcılık özellikleri',         tp?.explosive      ? fmtStr(tp.explosive)                         : NA],
     ['Oksitleyici özellikler',           tp?.oxidizing      ? fmtStr(tp.oxidizing)                         : NA],
   ];
@@ -1787,6 +1848,102 @@ function openPhysModal() {
 
 function closePhysModal() {
   document.getElementById('physModalOverlay')?.classList.remove('open');
+}
+
+// ── Fiziksel Veri Prompt ──────────────────────────────────────────────────────
+let _physPromptCb = null;
+let _physPromptEst = {};
+
+function _checkMissingPhysProps(comps, form) {
+  if (!['liquid','paste','aerosol'].includes(form)) return null;
+  const hasVisc = parseFloat(document.getElementById('tf_visc')?.value) > 0;
+  const hasSol  = parseFloat(document.getElementById('tf_sol')?.value)  >= 0 &&
+                  document.getElementById('tf_sol')?.value?.trim() !== '';
+  if (hasVisc && hasSol) return null;
+
+  // Hızlı teorik tahmin (senkron)
+  const theo = (typeof PhysicalEngine !== 'undefined')
+    ? PhysicalEngine.calcTheoProps(comps)
+    : null;
+
+  return { missingVisc: !hasVisc, missingSol: !hasSol,
+           viscEst: theo?.viscosity, solEst: theo?.solubility };
+}
+
+function _showPhysPrompt(missing, onContinue) {
+  _physPromptCb  = onContinue;
+  _physPromptEst = missing;
+
+  const items = [];
+  if (missing.missingVisc) {
+    const v = missing.viscEst;
+    const est = v?.value != null
+      ? `<span class="physp-est">~${v.value} mm²/s ±%30</span>`
+      : `<span class="physp-noest">DB'de veri yok</span>`;
+    items.push(`<div class="physp-item">
+      <span class="physp-item-label">Viskozite (mm²/s @40°C)</span>${est}</div>`);
+  }
+  if (missing.missingSol) {
+    const s = missing.solEst;
+    const desc = s?.text?.split('.')[0] || (s?.value != null ? `~${s.value} mg/L` : null);
+    const est = desc
+      ? `<span class="physp-est">${desc}</span>`
+      : `<span class="physp-noest">DB'de veri yok</span>`;
+    items.push(`<div class="physp-item">
+      <span class="physp-item-label">Su çözünürlüğü</span>${est}</div>`);
+  }
+
+  const hasEst = (missing.missingVisc && missing.viscEst?.value != null) ||
+                 (missing.missingSol  && missing.solEst);
+
+  document.getElementById('physPromptDesc').innerHTML =
+    `Sıvı ürün için <b>zorunlu fiziksel veriler</b> girilmemiş.<br>
+     <span style="font-size:10px;color:var(--text3)">
+       KKDİK Ek-2 Bölüm 9 — bu değerler ölçülmüş olmalıdır.
+       Teorik hesap ±%30 belirsizlik ile tahmini değer verir.</span>`;
+  document.getElementById('physPromptItems').innerHTML = items.join('');
+  document.getElementById('physPromptTheoBtn').style.display = hasEst ? '' : 'none';
+
+  // Zorunlu badge göster
+  if (missing.missingVisc) document.getElementById('visc_req_badge').style.display = 'inline';
+  if (missing.missingSol)  document.getElementById('sol_req_badge').style.display  = 'inline';
+
+  document.getElementById('physPromptOverlay').classList.add('open');
+}
+
+function _physPromptTheo() {
+  const m = _physPromptEst;
+  // Teorik değerleri formlara yaz
+  if (m.missingVisc && m.viscEst?.value != null) {
+    document.getElementById('tf_visc').value = m.viscEst.value;
+    document.getElementById('visc_req_badge').style.display = 'none';
+  }
+  if (m.missingSol && m.solEst?.value != null) {
+    const sv = parseFloat(m.solEst.value);
+    if (!isNaN(sv) && sv > 0) {
+      document.getElementById('tf_sol').value = sv;
+      document.getElementById('sol_req_badge').style.display = 'none';
+    }
+  }
+  document.getElementById('physPromptOverlay').classList.remove('open');
+  if (_physPromptCb) _physPromptCb();
+}
+
+function _physPromptManual() {
+  document.getElementById('physPromptOverlay').classList.remove('open');
+  // tf_visc/tf_sol zaten ana bölümde görünür, scroll et
+  const target = document.getElementById('tf_visc');
+  if (target) {
+    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    setTimeout(() => target.focus(), 300);
+  }
+  // Callback'i iptal et — kullanıcı değer girip tekrar Hesapla'ya basacak
+  _physPromptCb = null;
+}
+
+function _physPromptSkip() {
+  document.getElementById('physPromptOverlay').classList.remove('open');
+  if (_physPromptCb) _physPromptCb();
 }
 
 async function generatePDF() {
@@ -1844,12 +2001,20 @@ async function generatePDF() {
     });
 
     // 3. theoProps'tan kalan alanlar (kullanıcı girmemişse motor değeri kullan)
-    const _theoExtra = ['ph','viscosity','solubility','melting_point','auto_ignition','log_kow'];
+    const _theoExtra = ['ph','viscosity','melting_point','auto_ignition','log_kow'];
     _theoExtra.forEach(k => {
       if (flatPhys[k] !== undefined) return; // kullanıcı girmişse dokunma
       const v = _val(tp[k]);
       if (v !== null && v !== undefined) flatPhys[k] = v;
     });
+    // Çözünürlük özel: sayısal değer yoksa açıklama metnini kullan
+    if (flatPhys.solubility === undefined) {
+      if (tp?.solubility?.value != null) {
+        flatPhys.solubility = tp.solubility.value; // sayısal mg/L
+      } else if (tp?.solubility?.text) {
+        flatPhys.solubility = tp.solubility.text;  // açıklama metni
+      }
+    }
 
     // 4. theoProps metin alanları (kullanıcı girmemişse motor değeri)
     if (!flatPhys.appearance && _val(tp.appearance))  flatPhys.appearance   = _val(tp.appearance);

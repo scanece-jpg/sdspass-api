@@ -842,12 +842,21 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         ])
     # passed boş veya eksikse all_h_codes'dan fallback satırlar ekle
     # all_h_codes: domine edilenler dahil tüm sınıflandırmalar (CLP Ek I § 1.2.2)
+    # H kodu → h_class ters eşlemesi (fallback için)
+    from app.services.clp_service import CLP_CUTOFFS_DICT
+    _h_to_class = {}
+    for cls, rule in CLP_CUTOFFS_DICT.items():
+        h = rule.get('h','')
+        if h and h not in _h_to_class:
+            _h_to_class[h] = cls
+    dom_note = 'Baskın H kodu ile kapsandı (CLP Ek-I §1.2.2)' if lang == 'TR' else 'Covered by dominant hazard class (CLP Annex I §1.2.2)'
     for hc_raw in all_h_codes:
         hc = (hc_raw or '').replace('*','').strip()[:4]
         if not hc or hc in seen_clf:
             continue
         seen_clf.add(hc)
-        clf_rows.append([translate_hclass('', lang), hc_raw, '—'])
+        hclass_fallback = translate_hclass(_h_to_class.get(hc, ''), lang)
+        clf_rows.append([hclass_fallback, hc_raw, dom_note])
 
     if clf_rows:
         reason_lbl = 'Kesme Değeri / Gerekçe' if lang=='TR' else 'Cut-off / Reason'

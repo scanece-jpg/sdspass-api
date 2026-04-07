@@ -529,7 +529,7 @@ const PhysicalEngine = (() => {
 
     // Oksitleyici
     const ox = comps.filter(c => OXIDIZING_CAS.has((c.cas||'').trim()) && (parseFloat(c.concMax||c.conc)||0) >= 1);
-    if (ox.length) extra.push({ type:'oxidizing', h:'H272', label:'Ox. Liq. 3', signal:'Warning', source: ox.map(c => c.cas).join(', ') });
+    if (ox.length) extra.push({ type:'oxidizing', h:'H272', label:'Ox. Liq. 3', signal:'Warning', source: ox.map(c => c.name || c.cas).join(', ') });
 
     // Teorik fiziksel özellikler (Bölüm 9)
     let theoProps = (form === 'liquid' || form === 'paste' || form === 'aerosol')

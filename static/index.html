@@ -436,7 +436,7 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
 <script src="js/engines/euh_engine.js?v=20260331"></script>
 <script src="js/engines/transport_engine.js?v=20260401"></script>
 <script src="js/engines/ppe_engine.js?v=20250328"></script>
-<script src="js/engines/physical_engine.js?v=20260330"></script>
+<script src="js/engines/physical_engine.js?v=20260407"></script>
 
 <script>
 // ══════════════════════════════════════════════════════════════════════════════
@@ -1872,6 +1872,20 @@ async function generatePDF() {
         reason,
         cutoff_used: reason || '—',
       };
+    });
+
+    // Dominated H kodlarını da clpPassed'a ekle (PDF Bölüm 2.1 tam tablo için)
+    // Dominated kodlar allH'dan dışlandı ama all_h_codes'a ekleniyor — h_class gerekli
+    const dominated = clp?.dominated || [];
+    dominated.forEach(hc => {
+      const hc4 = (hc || '').replace(/[*\s]/g,'').substring(0,4);
+      if (!hc4 || clpPassed.some(e => e.h_code === hc4)) return;
+      clpPassed.push({
+        h_code:      hc4,
+        h_class:     hClassMap[hc4] || '',
+        reason:      'Baskın H kodu ile kapsandı (CLP Ek-I §1.2.2)',
+        cutoff_used: 'Baskın H kodu ile kapsandı (CLP Ek-I §1.2.2)',
+      });
     });
 
     const payload = {

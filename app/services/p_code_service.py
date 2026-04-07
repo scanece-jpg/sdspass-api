@@ -474,7 +474,9 @@ P_LABEL_PRIORITY: Dict[str, int] = {
 }
 
 # Bu P kodları zaten zorunlu — etiket 6'ya dahil edilmez (ayrı yazılır)
-P_LABEL_MANDATORY = ['P101', 'P102']
+# P501: CLP Annex IV'te sınıflandırılmış her ürün için listelenir.
+# ECHA kılavuzu: P501 her zaman etikette yer almalı, 6-kod limitine dahil edilmez.
+P_LABEL_MANDATORY = ['P101', 'P102', 'P501']
 
 
 
@@ -523,10 +525,13 @@ H_BASED_LABEL_FORCED: Dict[str, List[str]] = {
     # Su reaktif — P231+P232 (inert gaz) kritik güvenlik önlemi
     'H260': ['P231+P232'],
     'H261': ['P231+P232'],
-    # Sucul çevre tehlikesi — P273 (çevreye bırakma) etikette zorunlu (ECHA Rehber)
+    # Sucul çevre tehlikesi — P273 (çevreye bırakma) etikette zorunlu (SEA Tablo 4.1.4)
+    # H412/H413 de dahil: CLP Annex IV tüm sucul kategoriler P273 gerektirir
     'H400': ['P273'],
     'H410': ['P273'],
     'H411': ['P273'],
+    'H412': ['P273'],   # SEA Tablo 4.1.4: Sucul Kronik 3 → P273 zorunlu
+    'H413': ['P273'],   # SEA Tablo 4.1.4: Sucul Kronik 4 → P273 zorunlu
 }
 
 def select_label_p_codes(all_p_codes: List[str], max_codes: int = 6,
@@ -598,7 +603,8 @@ def select_label_p_codes(all_p_codes: List[str], max_codes: int = 6,
     excluded = [p for p in candidates if p not in selected_set]
 
     # Mandatory P kodlarını all_codes'tan belirle (usage bilgisi all_codes'a yansımış)
-    mandatory_in_codes = [p for p in ['P101','P102','P103'] if p in all_p_codes]
+    # P501: sınıflandırılmış her ürün için zorunlu (ECHA kılavuzu / CLP Annex IV)
+    mandatory_in_codes = [p for p in ['P101', 'P102', 'P103', 'P501'] if p in all_p_codes]
 
     forced_note = (f" (H kodu zorunlu: {', '.join(sorted(forced_by_h))})" if forced_by_h else "")
     note = (

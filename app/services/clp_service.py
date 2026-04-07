@@ -158,9 +158,13 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
             # SCL override — SEA Ek-6 / CLP Annex VI maddeye özel sınır GCL'nin YERİNE GEÇİCEKTİR.
             # Mevzuat: SEA Ek-I §1.2.1.3 / CLP 1272/2008 Art.10(3):
             # SCL büyük de olsa küçük de olsa GCL'yi tamamen devre dışı bırakır.
+            # ÖNEMLİ: SCL h_code suffix içerebilir (H361f, H361fd, H314 *) — 4 karaktere normalize et
             scl_list = comp.get("scl", [])
             for scl_entry in scl_list:
-                if scl_entry.get("h_class") == h_class or scl_entry.get("h_code") == h:
+                scl_hclass = scl_entry.get("h_class", scl_entry.get("hazard", ""))
+                scl_hcode4 = scl_entry.get("h_code", "").replace("*", "").strip()[:4]
+                h4 = h[:4]
+                if scl_hclass == h_class or scl_hcode4 == h4:
                     c_min = scl_entry.get("c_min")
                     if c_min is not None:
                         cutoff = float(c_min)  # SCL her zaman GCL'nin yerini alır
@@ -585,13 +589,16 @@ async def calculate_clp(db: AsyncSession, components: List[Any]) -> Dict:
                     f"Form belirtilmediği için hesaba dahil edildi."
                 )
 
-            # SCL kontrolü
+            # SCL kontrolü — SEA Ek-I §1.2.1.3 / CLP Art.10(3)
+            # SCL h_code suffix içerebilir (H361f, H361fd, H314 *) → 4 karaktere normalize et
+            # h_class ile de eşleştir (h_code yoksa veya farklı suffix varsa)
             cutoff = None
             scl_note = ''
+            hcode4 = hcode[:4] if hcode else ''
             for scl in scl_list:
-                scl_hc = scl.get('hazard', '').replace('*', '').strip()
-                scl_hcode = scl.get('h_code', '').replace('*', '').strip()
-                if scl_hc == hc or scl_hcode == hcode:
+                scl_hclass = scl.get('h_class', scl.get('hazard', '')).replace('*', '').strip()
+                scl_hcode4 = scl.get('h_code', '').replace('*', '').strip()[:4]
+                if scl_hclass == hc or (hcode4 and scl_hcode4 == hcode4):
                     cutoff = scl['c_min']
                     scl_note = f' (SCL≥{cutoff}%)'
                     break

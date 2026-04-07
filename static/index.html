@@ -759,11 +759,14 @@ async function onCas(id) {
       // Ham listeyi sakla (refinement paneli için tüm c_min/c_max değerleri gerekli)
       _sclRaw[id] = sclRaw;
       // Engine için dict: aynı H kodu varsa en küçük c_min (en erken tetik)
+      // ÖNEMLİ: H kodu 4 karaktere normalize et — "H361f", "H361fd", "H314 *" → "H361", "H361", "H314"
+      // CLP engine classify() içinde code = h_code.substring(0,4) ile arama yapıyor.
       const sclDict = {};
       sclRaw.forEach(s => {
         if (s.h_code && s.c_min !== undefined) {
-          if (sclDict[s.h_code] === undefined || s.c_min < sclDict[s.h_code]) {
-            sclDict[s.h_code] = s.c_min;
+          const h4 = s.h_code.replace(/[*\s]/g,'').substring(0,4); // normalize
+          if (h4 && (sclDict[h4] === undefined || s.c_min < sclDict[h4])) {
+            sclDict[h4] = s.c_min;
           }
         }
       });

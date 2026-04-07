@@ -166,6 +166,9 @@ P_COMBOS: Dict[str, str] = {
     'P370+P380':     'Yangın durumunda: Bölgeyi boşaltın.',
     'P370+P380+P375':'Yangın durumunda: Bölgeyi boşaltın. Patlama riski nedeniyle uzaktan müdahale edin.',
     'P371+P380+P375':'Büyük yangın durumunda: Bölgeyi boşaltın. Uzaktan müdahale edin.',
+    'P231+P232':     'İnert gaz altında işleyin. Nemi önleyin.',
+    'P235+P410':     'Serin yerde saklayın. Güneş ışığından koruyun.',
+    'P302+P334':     'CİLDE TEMAS DURUMUNDA: Soğuk suya sokun ya da ıslak pansuman uygulayın.',
     'P402+P404':     'Kapalı bir kapta kuru yerde saklayın.',
     'P403+P233':     'Kabı sıkıca kapalı tutarak iyi havalandırılan bir yerde saklayın.',
     'P403+P235':     'Serin, iyi havalandırılan bir yerde saklayın.',
@@ -179,12 +182,24 @@ P_COMBOS: Dict[str, str] = {
 # Her H kodu için: zorunlu P kodları listesi
 # Formatlar: 'P210' (tek), 'P301+P310' (kombine)
 H_TO_P: Dict[str, List[str]] = {
+    # ── Yanıcı Gaz ───────────────────────────────────────────────────────────
+    # CLP Annex IV Tablo 6.1: H220/H221 → P210, P377, P381, P403
+    'H220': ['P210','P377','P381','P403'],
+    'H221': ['P210','P377','P381','P403'],
+
+    # ── Aerosol ──────────────────────────────────────────────────────────────
+    # CLP Annex IV: H222/H223 → P210, P211, P251, P410+P412
+    'H222': ['P210','P211','P251','P410+P412'],
+    'H223': ['P210','P211','P251','P410+P412'],
+
     # ── Yanıcı Sıvı ──────────────────────────────────────────────────────────
     'H224': ['P210','P233','P241','P242','P243','P280',
              'P303+P361+P353','P370+P378','P403+P235','P501'],
     'H225': ['P210','P233','P241','P242','P243','P280',
              'P303+P361+P353','P370+P378','P403+P235','P501'],
     'H226': ['P210','P233','P280','P370+P378','P403+P235','P501'],
+    # H227: Yanıcı Sıvı Kat.4 (düşük tehlike) — CLP Annex IV
+    'H227': ['P210','P280','P370+P378','P403+P235','P501'],
 
     # ── Aspirasyon Toksisitesi ────────────────────────────────────────────────
     'H304': ['P260','P264','P270','P301+P310','P331','P405','P501'],
@@ -195,7 +210,8 @@ H_TO_P: Dict[str, List[str]] = {
              'P305+P351+P338','P310','P321','P363','P405','P501'],
     'H315': ['P264','P280','P302+P352','P321','P332+P313','P362','P501'],
     'H316': ['P264','P272','P280','P302+P352','P333+P313','P321','P363','P501'],
-    'H317': ['P261','P272','P280','P302+P352','P333+P313','P321','P363','P501'],
+    # H317: P321 kaldırıldı — Cilt duyarlılaştırıcı için maddeye özel antidot yok
+    'H317': ['P261','P272','P280','P302+P352','P333+P313','P363','P501'],
     'H318': ['P264','P280','P305+P351+P338','P310','P501'],
     'H319': ['P264','P280','P305+P351+P338','P337+P313','P501'],
 
@@ -236,11 +252,14 @@ H_TO_P: Dict[str, List[str]] = {
     'H373': ['P260','P314','P501'],
 
     # ── Aquatic ───────────────────────────────────────────────────────────────
+    # CLP Annex IV: P273 H400/H410/H411 için zorunlu; P391 döküntü toplama
     'H400': ['P273','P391','P501'],
     'H410': ['P273','P391','P501'],
-    'H411': ['P273','P391','P501'],   # P391 Cat.2 için zorunlu değil ama profesyonel uygulama
-    'H412': ['P273','P391','P501'],   # P391 Cat.3 için de eklendi (iyi uygulama)
+    'H411': ['P273','P391','P501'],
+    'H412': ['P273','P501'],          # Cat.3: P273 yeterli, P391 zorunlu değil
     'H413': ['P273','P501'],
+    # H273: Çevreye zararlı ama kategorilendirilmemiş — minimal P kodu
+    'H273': ['P501'],
 
     # ── Ozon ──────────────────────────────────────────────────────────────────
     'H420': ['P502'],
@@ -414,10 +433,20 @@ P_LABEL_PRIORITY: Dict[str, int] = {
     'P301+P312': 73,  # H302 yutma müdahalesi — response kodu, öncelik yüksek
     'P342+P311': 72,  'P302+P352': 65,      'P333+P313': 61,
     'P332+P313': 57,  'P337+P313': 55,
+    # Aspirasyon: KUSMayı UYARMAYIN — hayati önem (aspiration tox → kusturma ölümcül)
+    'P331': 87,
+    # STOT RE tıbbi yardım — kronik hasar riski
+    'P314': 60,
 
     # Prevention + Response — kritik önlemler
     'P370+P378': 56,  # Yangın müdahale → acil yanıt (response > prevention, CLP Annex IV)
+    # Su reaktif: inert gaz zorunlu — yangın ve patlama riski
+    'P231+P232': 75,
+    # Gaz yangın önleme: kaçak yangın söndürme ve tutuşma kaynağı uzaklaştırma
+    'P377': 58,
+    'P381': 53,
     'P210': 54,       # Yanıcı → tutuşma kaynağı önleme (H224/H225/H226)
+    'P211': 46,       # Aerosol → açık aleve püskürtme
     'P273': 52,       # Çevre — H411/H410/H400 için ECHA rehber gereği etikette olmalı
     'P280': 51,       # KKE — H317/H319/H314 için zorunlu (H_BASED_LABEL_FORCED ile zaten giriyor)
     'P260': 48,       # Solunum koruma (H334/H330/H372 için kritik)
@@ -479,6 +508,21 @@ H_BASED_LABEL_FORCED: Dict[str, List[str]] = {
     # H272 (Ox. Liq. 2/3): hem P220 hem P221 zorunlu (CLP Annex III)
     # P221 = yanıcılarla karışımı kesinlikle önle
     'H272': ['P220', 'P221'],
+    # Aspirasyon toksisitesi — P331 (KUSMayı UYARMAYIN) HAYATI ÖNEM
+    # Aspiration Tox. 1 için kusturma kesinlikle yasak — CLP Annex IV zorunlu
+    'H304': ['P331'],
+    # Solunum duyarlılaştırıcı — P284 (solunum koruyucu) zorunlu (CLP Annex IV)
+    'H334': ['P284'],
+    # Şüpheli CMR (Kat.2) — P201 (özel talimat al) CLP Annex IV zorunlu
+    'H341': ['P201'],
+    'H351': ['P201'],
+    'H361': ['P201'],
+    # STOT Tekrarlanan Maruziyet — P314 (tıbbi yardım) CLP Annex IV
+    'H372': ['P314'],
+    'H373': ['P314'],
+    # Su reaktif — P231+P232 (inert gaz) kritik güvenlik önlemi
+    'H260': ['P231+P232'],
+    'H261': ['P231+P232'],
     # Sucul çevre tehlikesi — P273 (çevreye bırakma) etikette zorunlu (ECHA Rehber)
     'H400': ['P273'],
     'H410': ['P273'],

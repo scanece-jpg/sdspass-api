@@ -103,11 +103,19 @@ const EcoEngine = (() => {
     // H400: H410 atanmamışsa ve akut eşik aşılmışsa
     // Baskınlık kuralı: H410 varsa H400 eklenmez (H410 zaten akut riski kapsar)
     const hasH410 = h_codes.includes('H410');
-    if (sumAcuteM >= 0.25 && !hasH410 && !h_codes.includes('H400')) h_codes.push('H400');
+    let aquatic_acute = null;
+    if (sumAcuteM >= 0.25 && !hasH410) {
+      if (!h_codes.includes('H400')) h_codes.push('H400');
+      aquatic_acute = {
+        h: 'H400',
+        cls: 'Aquatic Acute 1',
+        formula: `Σ(Ci×M_ak)/100=${sumAcuteM.toFixed(4)} ≥ 0.25 (SEA Tablo 4.1.1)`,
+      };
+    }
 
     if (ozone.length) h_codes.push('H420');
 
-    return { aquatic, ozone, pbt, h_codes };
+    return { aquatic, aquatic_acute, ozone, pbt, h_codes };
   }
 
   function init() {

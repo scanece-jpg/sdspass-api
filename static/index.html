@@ -2048,8 +2048,12 @@ async function generatePDF() {
 
     // Eco H kodları için gerekçe (M-faktörlü toplam formülü)
     const ecoReasonMap = {};
-    const _ecoAquatic = eco?.aquatic;
-    if (_ecoAquatic?.h) ecoReasonMap[_ecoAquatic.h] = _ecoAquatic.formula || 'SEA Tablo 4.1.2 (M-faktörlü toplam)';
+    const _ecoAquatic      = eco?.aquatic;       // kronik: H410/H411/H412/H413
+    const _ecoAquaticAcute = eco?.aquatic_acute; // akut: H400 (H410 yoksa)
+    if (_ecoAquatic?.h)
+      ecoReasonMap[_ecoAquatic.h] = _ecoAquatic.formula || 'SEA Tablo 4.1.2 (M-faktörlü toplam)';
+    if (_ecoAquaticAcute?.h)
+      ecoReasonMap[_ecoAquaticAcute.h] = _ecoAquaticAcute.formula || 'SEA Tablo 4.1.1 (M-faktörlü toplam)';
 
     // ATE H kodları — SEA Tablo 3.1.2 puan tahmini (mg/kg veya mg/L)
     const ATE_H_ORAL   = new Set(['H300','H301','H302']);
@@ -2120,14 +2124,22 @@ async function generatePDF() {
     // Dominated H kodlarını da clpPassed'a ekle (PDF Bölüm 2.1 tam tablo için)
     // Dominated kodlar allH'dan dışlandı ama all_h_codes'a ekleniyor — h_class gerekli
     const dominated = clp?.dominated || [];
+    const _dominance = (typeof CLPEngine !== 'undefined') ? (CLPEngine.DOMINANCE || {}) : {};
     dominated.forEach(hc => {
       const hc4 = (hc || '').replace(/[*\s]/g,'').substring(0,4);
       if (!hc4 || clpPassed.some(e => e.h_code === hc4)) return;
+      // Hangi dominant kodun kapsamında olduğunu bul
+      const dominantCode = Object.keys(_dominance).find(d =>
+        (_dominance[d] || []).includes(hc4) && allH.includes(d)
+      );
+      const domReason = dominantCode
+        ? `${dominantCode} sınıflandırması tarafından kapsandı (CLP Ek-I §1.2.2)`
+        : 'Baskın H kodu ile kapsandı (CLP Ek-I §1.2.2)';
       clpPassed.push({
         h_code:      hc4,
         h_class:     hClassMap[hc4] || '',
-        reason:      'Baskın H kodu ile kapsandı (CLP Ek-I §1.2.2)',
-        cutoff_used: 'Baskın H kodu ile kapsandı (CLP Ek-I §1.2.2)',
+        reason:      domReason,
+        cutoff_used: domReason,
       });
     });
 

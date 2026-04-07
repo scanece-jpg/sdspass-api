@@ -456,6 +456,12 @@ H_BASED_LABEL_FORCED: Dict[str, List[str]] = {
     'H314': ['P280', 'P405'],
     # Ağır göz hasarı — KKE zorunlu (H318, H314 ile çakışırsa P280 zaten var)
     'H318': ['P280'],
+    # Cilt tahrişi / Cilt duyarlılaştırma — KKE zorunlu (CLP Annex IV)
+    # H315 ve H317 için P280 etiket üzerinde açıkça yer almalı
+    'H315': ['P280'],
+    'H317': ['P280'],
+    # Göz tahrişi — P280 zorunlu (H319 için CLP Annex IV)
+    'H319': ['P280'],
     # Öldürücü / ağır akut toksisite — kilitli depolama zorunlu (CLP Annex IV)
     'H300': ['P405'],
     'H301': ['P405'],

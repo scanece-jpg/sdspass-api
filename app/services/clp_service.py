@@ -45,7 +45,7 @@ CLP_CUTOFFS_DICT = {
     # 3.7 Üreme
     "Repr. 1A": {"h":"H360","cutoff":0.1,"signal":"Danger"},
     "Repr. 1B": {"h":"H360","cutoff":0.1,"signal":"Danger"},
-    "Repr. 2":  {"h":"H361","cutoff":1.0,"signal":"Warning"},
+    "Repr. 2":  {"h":"H361","cutoff":3.0,"signal":"Warning"},  # SEA Tablo 3.7.2: GCL=%3
     "Repr. Lact.":{"h":"H362","cutoff":0.1,"signal":"Warning"},
     # 3.8 STOT SE
     "STOT SE 1": {"h":"H370","cutoff":10.0,"signal":"Danger"},

@@ -1232,11 +1232,30 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             'ph': 'pH', 'solubility': 'Çözünürlük',
             'density': 'Yoğunluk', 'flash_point': 'Parlama Noktası'
         }
-        warn_text = 'PCN bildirimi için zorunlu eksik alanlar: ' +                     ', '.join(missing_labels.get(k,k) for k in pcn_missing)
+        warn_text = 'PCN bildirimi için zorunlu eksik alanlar: ' + \
+                    ', '.join(missing_labels.get(k,k) for k in pcn_missing)
         story.append(Paragraph(
             f"<font color='red'>⚠ {warn_text}</font>",
             styles['small']
         ))
+
+    # Sıvı ürün için viskozite ve çözünürlük eksikliği uyarısı
+    # KKDİK Ek-2 Bölüm 9: Sıvı karışımlarda bu parametreler "Bilgi yok" bırakılamaz
+    _form = phys.get('form', '') or phys.get('appearance', '') or ''
+    _is_liquid = any(w in _form.lower() for w in ('sıvı','liquid','likit','çözelti','solution')) \
+                 or (phys.get('flash_point') is not None)  # parlama noktası varsa sıvıdır
+    if lang == 'TR' and _is_liquid:
+        _b9_warn = []
+        if not phys.get('viscosity'):
+            _b9_warn.append('Viskozite')
+        if not phys.get('solubility'):
+            _b9_warn.append('Çözünürlük (suda)')
+        if _b9_warn:
+            story.append(Paragraph(
+                f"<font color='#b35900'>⚠ Sıvı ürün — lütfen gerçek test değerlerini girin: "
+                f"{', '.join(_b9_warn)}. KKDİK Ek-2 Bölüm 9 uyarınca bu değerler ölçülmüş olmalıdır.</font>",
+                styles['small']
+            ))
 
     def _pv(key, unit=''):
         v = phys.get(key)

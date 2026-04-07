@@ -120,11 +120,15 @@ def format_section3_component(
         name = comp.get('name', '') or cas
     conc = float(comp.get('worst_case_conc', comp.get('conc', comp.get('concentration', 0))) or 0)
     hazards = comp.get('hazards', [])
-    haz_str = '; '.join(
-        h.get('h_class', '').replace('*', '').strip()
-        for h in hazards
-        if h.get('h_class')
-    )
+    # Tekrar eden h_class değerleri gider (aynı sınıf birden fazla hazard girdisinde olabilir)
+    _seen_cls = set()
+    _haz_parts = []
+    for h in hazards:
+        cls = h.get('h_class', '').replace('*', '').strip()
+        if cls and cls not in _seen_cls:
+            _seen_cls.add(cls)
+            _haz_parts.append(cls)
+    haz_str = '; '.join(_haz_parts)
 
     # Kullanıcının girdiği orijinal konsantrasyon metni (ör: "25-50")
     conc_str = comp.get('conc_str', '').strip()

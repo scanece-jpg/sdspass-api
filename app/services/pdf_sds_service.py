@@ -1272,10 +1272,22 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 styles['small']
             ))
 
+    # phys_sources: her alan için 'theo' | 'user' | '' (frontend'den gelir)
+    _phys_src = sds_data.get('phys_sources', {})
+
+    _SRC_NOTE_TR = {'theo': ' (teorik tahmin)', 'user': ' (ölçülen değer)'}
+    _SRC_NOTE_EN = {'theo': ' (calculated estimate)', 'user': ' (measured value)'}
+
+    def _src_note(key):
+        src = _phys_src.get(key, '')
+        notes = _SRC_NOTE_TR if lang == 'TR' else _SRC_NOTE_EN
+        return notes.get(src, '')
+
     def _pv(key, unit=''):
         v = phys.get(key)
         if v is None or v == '': return na
-        return f"{v} {unit}".strip() if unit else str(v)
+        val_str = f"{v} {unit}".strip() if unit else str(v)
+        return val_str + _src_note(key)
 
     _mp_lbl  = 'Donma/Erime Noktası' if lang=='TR' else 'Melting/Freezing Point'
     _rd_lbl  = 'Bağıl Yoğunluk (su=1)' if lang=='TR' else 'Relative Density (water=1)'

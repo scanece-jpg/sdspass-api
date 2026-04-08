@@ -99,6 +99,14 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
 .pm-meta{font-size:9px;color:var(--text3);margin-top:2px;font-style:italic;line-height:1.5}
 .pm-badge-meas{font-size:8px;padding:1px 5px;border-radius:8px;background:rgba(104,211,145,.15);color:#68d391;font-weight:600;margin-left:5px;vertical-align:middle}
 .pm-badge-err{font-size:9px;color:#f6ad55;margin-left:5px}
+/* Hibrit fiziksel özellikler — kaynak rozeti */
+.src-badge{font-size:8px;padding:1px 6px;border-radius:8px;font-weight:600;margin-left:5px;vertical-align:middle;display:none}
+.src-badge.theo{background:rgba(99,179,237,.15);color:#63b3ed}
+.src-badge.user{background:rgba(104,211,145,.15);color:#68d391}
+/* Eşik uyarı bandı */
+.thresh-warn{font-size:9px;margin-top:3px;padding:3px 7px;border-radius:5px;display:none;line-height:1.5}
+.thresh-warn.danger{background:rgba(252,129,129,.1);color:#fc8181;border-left:2px solid #fc8181}
+.thresh-warn.info{background:rgba(99,179,237,.08);color:#63b3ed;border-left:2px solid #4299e1}
 
 /* Compact phys summary card */
 .phys-summary{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:6px;margin-bottom:8px}
@@ -322,8 +330,10 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
         <input type="number" id="tf_ph" placeholder="Ör: 7.0 — override için girin" step="0.1" min="0" max="14">
       </div>
       <div>
-        <label>Yoğunluk (g/mL) <span style="color:var(--safe);font-size:8px">● motor</span></label>
-        <input type="number" id="tf_density" placeholder="ISO 2811 — override için girin" step="0.001">
+        <label>Yoğunluk (g/mL) <span style="color:var(--safe);font-size:8px">● motor</span><span id="src_density" class="src-badge"></span></label>
+        <input type="number" id="tf_density" placeholder="ISO 2811 — override için girin" step="0.001"
+               data-source="" oninput="markUserInput(this,'density')">
+        <div id="warn_density" class="thresh-warn"></div>
       </div>
     </div>
     <div class="row2" style="margin-top:8px">
@@ -331,17 +341,21 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
         <label>
           Viskozite (mm²/s @40°C) <span style="color:var(--safe);font-size:8px">● motor</span>
           <span id="visc_req_badge" style="display:none;color:#f6ad55;font-size:8px;margin-left:4px">⚠ zorunlu</span>
+          <span id="src_visc" class="src-badge"></span>
         </label>
         <input type="number" id="tf_visc" placeholder="ISO 3219 — override için girin" step="0.1" min="0"
-               oninput="document.getElementById('visc_req_badge').style.display='none'">
+               data-source="" oninput="markUserInput(this,'visc');document.getElementById('visc_req_badge').style.display='none'">
+        <div id="warn_visc" class="thresh-warn"></div>
       </div>
       <div>
         <label>
           Su Çözünürlüğü (mg/L) <span style="color:var(--safe);font-size:8px">● motor</span>
           <span id="sol_req_badge" style="display:none;color:#f6ad55;font-size:8px;margin-left:4px">⚠ zorunlu</span>
+          <span id="src_sol" class="src-badge"></span>
         </label>
         <input type="number" id="tf_sol" placeholder="OECD 105 — override için girin" min="0"
-               oninput="document.getElementById('sol_req_badge').style.display='none'">
+               data-source="" oninput="markUserInput(this,'sol');document.getElementById('sol_req_badge').style.display='none'">
+        <div id="warn_sol" class="thresh-warn"></div>
       </div>
     </div>
 
@@ -365,14 +379,18 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
           <input type="number" id="tf_mp" placeholder="Ör: -20">
         </div>
         <div>
-          <label>Kaynama Noktası (°C) <span style="color:var(--safe);font-size:8px">● motor</span></label>
-          <input type="number" id="tf_bp" placeholder="IBP — override için girin">
+          <label>Kaynama Noktası (°C) <span style="color:var(--safe);font-size:8px">● motor</span><span id="src_bp" class="src-badge"></span></label>
+          <input type="number" id="tf_bp" placeholder="IBP — override için girin"
+                 data-source="" oninput="markUserInput(this,'bp')">
+          <div id="warn_bp" class="thresh-warn"></div>
         </div>
       </div>
       <div class="row2" style="margin-top:8px">
         <div>
-          <label>Parlama Noktası (°C) <span style="color:var(--safe);font-size:8px">● motor</span></label>
-          <input type="number" id="tf_fp" placeholder="DB'den hesaplanır — override">
+          <label>Parlama Noktası (°C) <span style="color:var(--safe);font-size:8px">● motor</span><span id="src_fp" class="src-badge"></span></label>
+          <input type="number" id="tf_fp" placeholder="DB'den hesaplanır — override"
+                 data-source="" oninput="markUserInput(this,'fp')">
+          <div id="warn_fp" class="thresh-warn"></div>
         </div>
         <div>
           <label>Buharlaşma Hızı</label>
@@ -1324,6 +1342,117 @@ function doCalculate() {
 }
 
 // ── Hesaplama çekirdeği — doğrudan veya prompt callback olarak çağrılır ───────
+// ── HİBRİT FİZİKSEL ÖZELLİKLER — kaynak yönetimi ────────────────────────────
+
+function _updateSrcBadge(key, src) {
+  const b = document.getElementById('src_' + key);
+  if (!b) return;
+  if (src === 'theo') {
+    b.textContent = '≈ Teorik'; b.className = 'src-badge theo'; b.style.display = 'inline';
+  } else if (src === 'user') {
+    b.textContent = '✓ Ölçülen'; b.className = 'src-badge user'; b.style.display = 'inline';
+  } else {
+    b.style.display = 'none';
+  }
+}
+
+function _checkPhysThreshold(key, val) {
+  const w = document.getElementById('warn_' + key);
+  if (!w) return;
+  if (isNaN(val) || val === null) { w.style.display = 'none'; return; }
+
+  if (key === 'visc') {
+    if (val <= 20.5) {
+      w.textContent = `⚠ ${val} mm²/s ≤ 20.5 — H304 Aspirasyon Tehlikesi eşiği aşıldı (CLP §3.10.4)`;
+      w.className = 'thresh-warn danger'; w.style.display = 'block';
+    } else if (val <= 30) {
+      w.textContent = `ℹ ${val} mm²/s — H304 sınırına (20.5) yakın, ölçülen değer girilmesi önerilir`;
+      w.className = 'thresh-warn info'; w.style.display = 'block';
+    } else { w.style.display = 'none'; }
+  }
+  else if (key === 'bp') {
+    if (val <= 35) {
+      w.textContent = `⚠ KN ≤ 35°C → FP < 23°C ise H224 (Son derece alevlenir Kat.1)`;
+      w.className = 'thresh-warn danger'; w.style.display = 'block';
+    } else {
+      w.textContent = `ℹ KN > 35°C → FP < 23°C ise H225 (Kat.2), H224 değil`;
+      w.className = 'thresh-warn info'; w.style.display = 'block';
+    }
+  }
+  else if (key === 'fp') {
+    let msg = '', cls = 'info';
+    if (val < 23)       { msg = `ℹ FP < 23°C → Alevlenir Kat.1/2 (kaynama noktasına bağlı)`; }
+    else if (val <= 60) { msg = `ℹ 23°C ≤ FP ≤ 60°C → H226 Alevlenir Sıvı Kat.3`; }
+    else                { msg = `ℹ FP > 60°C → Alevlenirlik sınıflandırması gerekmez`; }
+    w.textContent = msg; w.className = `thresh-warn ${cls}`; w.style.display = 'block';
+  }
+  else { w.style.display = 'none'; }
+}
+
+function markUserInput(el, key) {
+  el.dataset.source = 'user';
+  _updateSrcBadge(key, 'user');
+  _checkPhysThreshold(key, parseFloat(el.value));
+}
+
+function _autofillPhysFields(tp) {
+  if (!tp) return;
+  const FIELDS = [
+    { id: 'tf_density', key: 'density',  val: tp.density?.value },
+    { id: 'tf_visc',    key: 'visc',     val: tp.viscosity?.value },
+    { id: 'tf_sol',     key: 'sol',      val: tp.solubility?.value },
+    { id: 'tf_bp',      key: 'bp',       val: tp.boiling_point?.value },
+    { id: 'tf_fp',      key: 'fp',       val: tp.flash_point?.value },
+  ];
+  let hasBpOrFp = false;
+  for (const { id, key, val } of FIELDS) {
+    const el = document.getElementById(id);
+    if (!el) continue;
+    if (el.dataset.source === 'user') continue; // kullanıcı girdiyse dokunma
+    if (val != null && !isNaN(val)) {
+      el.value = val;
+      el.dataset.source = 'theo';
+      _updateSrcBadge(key, 'theo');
+      _checkPhysThreshold(key, val);
+      if (key === 'bp' || key === 'fp') hasBpOrFp = true;
+    } else {
+      el.dataset.source = '';
+      _updateSrcBadge(key, '');
+    }
+  }
+  // bp ve fp sec9Extra içinde — teorik değer varsa otomatik aç
+  if (hasBpOrFp) {
+    const extra = document.getElementById('sec9Extra');
+    const btn   = document.getElementById('sec9ExtraBtn');
+    if (extra && extra.style.display === 'none') {
+      extra.style.display = 'block';
+      if (btn) btn.textContent = '▲ Daha az...';
+    }
+  }
+}
+
+function _resetPhysSourceFields() {
+  ['density','visc','sol','bp','fp'].forEach(key => {
+    const el = document.getElementById('tf_' + (key === 'visc' ? 'visc' : key === 'sol' ? 'sol' : key));
+    if (el && el.dataset.source === 'theo') { el.value = ''; el.dataset.source = ''; }
+    _updateSrcBadge(key, '');
+    const w = document.getElementById('warn_' + key);
+    if (w) w.style.display = 'none';
+  });
+}
+
+function _getPhysSources() {
+  const keys = ['density','visc','sol','bp','fp'];
+  const map  = { density:'tf_density', visc:'tf_visc', sol:'tf_sol', bp:'tf_bp', fp:'tf_fp' };
+  const pdfKey = { density:'density', visc:'viscosity', sol:'solubility', bp:'boiling_point', fp:'flash_point' };
+  const out = {};
+  keys.forEach(k => {
+    const el = document.getElementById(map[k]);
+    if (el) out[pdfKey[k]] = el.dataset.source || '';
+  });
+  return out;
+}
+
 function _runCalculationCore() {
   const comps  = getComps();
   const form   = document.getElementById('pform')?.value || 'liquid';
@@ -1567,6 +1696,7 @@ function renderAll(s) {
   // ── Bölüm 9 — Fiziksel Özellikler (kompakt özet + modal) ────────────────
   const tp = phys.theoProps;
   _lastTheoProps = tp || null;   // modal için kaydet
+  _autofillPhysFields(tp);       // teorik değerleri forma yaz (kullanıcı girdiyse dokunma)
 
   if (tp) {
     const coverageColor = tp.coverage >= 80 ? '#68d391' : tp.coverage >= 50 ? '#f6ad55' : '#fc8181';
@@ -2193,6 +2323,7 @@ async function generatePDF() {
       signal_word:  combinedSignal,
       transport:    transport || {},
       phys_props:   flatPhys,
+      phys_sources: _getPhysSources(),  // 'theo' | 'user' | '' — her alan için kaynak
       eco: {
         aquatic:      eco?.aquatic   || null,
         h_codes:      eco?.h_codes   || [],

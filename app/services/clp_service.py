@@ -43,8 +43,8 @@ CLP_CUTOFFS_DICT = {
     "Carc. 1B": {"h":"H350","cutoff":0.1,"signal":"Danger"},
     "Carc. 2":  {"h":"H351","cutoff":1.0,"signal":"Warning"},
     # 3.7 Üreme
-    "Repr. 1A": {"h":"H360","cutoff":0.1,"signal":"Danger"},
-    "Repr. 1B": {"h":"H360","cutoff":0.1,"signal":"Danger"},
+    "Repr. 1A": {"h":"H360","cutoff":0.3,"signal":"Danger"},   # SEA Tablo 3.7.2: GCL=%0,3
+    "Repr. 1B": {"h":"H360","cutoff":0.3,"signal":"Danger"},   # SEA Tablo 3.7.2: GCL=%0,3
     "Repr. 2":  {"h":"H361","cutoff":3.0,"signal":"Warning"},  # SEA Tablo 3.7.2: GCL=%3
     "Repr. Lact.":{"h":"H362","cutoff":0.1,"signal":"Warning"},
     # 3.8 STOT SE

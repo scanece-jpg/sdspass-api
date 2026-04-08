@@ -438,7 +438,15 @@ const PhysicalEngine = (() => {
 
   function calcFlamLiq(comps, userFP) {
     if (userFP !== null && userFP !== undefined && !isNaN(userFP)) {
-      return { result: clsFlamLiq(userFP, null), source:`Kullanıcı girişi (${userFP}°C)`, fp: userFP };
+      // Kullanıcı FP girmiş — BP'yi bileşen DB'sinden hesapla (en düşük KN).
+      // bp=null ile çağırmak H224/H225 ayrımını yanlış yapar: null → H224 olarak yorumlanır.
+      let theoBP = null;
+      for (const c of comps) {
+        const bp = BP_DB[(c.cas || '').trim()];
+        const w  = parseFloat(c.concMax || c.conc) || 0;
+        if (bp != null && w >= 1 && (theoBP === null || bp < theoBP)) theoBP = bp;
+      }
+      return { result: clsFlamLiq(userFP, theoBP), source:`Kullanıcı girişi (${userFP}°C)`, fp: userFP };
     }
 
     // CLP Annex I Tablo 2.6 — Toplamlı eşik yaklaşımı

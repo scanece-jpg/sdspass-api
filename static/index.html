@@ -572,14 +572,9 @@ const _sclMap = {};
 // SCL ham liste (refinement paneli için): { compId: [{h_code,h_class,c_min,c_max?},...] }
 const _sclRaw = {};
 
-const CLP_CUTOFFS = {
-  // NOT: H300-H332 (Akut Toksisite) ATE formülü ile hesaplanır — GCL geçersiz (SEA Bölüm 3.1.3.6.1)
-  // NOT: H400-H413 (Sucul Tehlike) M-faktörlü toplam yöntemi ile hesaplanır — GCL eşikleri geçersiz
-  'H314':1.0,'H315':10.0,'H318':1.0,'H319':10.0,
-  'H317':1.0,'H334':0.1,'H340':0.1,'H341':1.0,'H350':0.1,'H351':1.0,
-  'H360':0.3,'H361':3.0,'H362':0.3,'H370':10.0,'H371':10.0,'H372':1.0,'H373':10.0,
-  'H335':20.0,'H336':20.0,'H304':10.0,
-};
+// CLP_CUTOFFS — tek kaynak CLPEngine.CUTOFFS'tan türetilir (clp_engine.js yüklendikten sonra)
+// Doğrudan bu değişkeni kullanmak yerine CLPEngine.CUTOFFS kullanın.
+const CLP_CUTOFFS = (typeof CLPEngine !== 'undefined') ? CLPEngine.CUTOFFS : {};
 
 function addComp(pf = {}) {
   const id = ++_compId;
@@ -1077,22 +1072,25 @@ function findThresholdsFromSCL(lo, hi, sclRaw) {
 
 function findThresholds(lo, hi, hazards) {
   // H kodu bazlı GCL eşik tablosu — CLP Annex I Tablo 3.x
+  // Tek kaynak: eşik değerleri CLPEngine.CUTOFFS'tan alınır; sabit değerler
+  // bu tabloda olmayan H kodları (Akut Toks, Sucul) için ek satır bilgisidir.
+  const _C = (typeof CLPEngine !== 'undefined') ? (CLPEngine.CUTOFFS || {}) : {};
   const GCL_BY_HCODE = {
-    'H314':[[1,'Skin Corr. 1 başlar'],[5,'Skin Irrit. 2 başlar']],
-    'H318':[[1,'Eye Dam. 1 başlar'],[3,'Eye Irrit. 2 başlar']],
-    'H315':[[10,'Skin Irrit. 2 başlar']],
-    'H319':[[10,'Eye Irrit. 2 başlar']],
-    'H317':[[1,'Deri Duyarlaştırma başlar']],
-    'H334':[[0.1,'Solunum Duyarlaştırma başlar']],
-    'H340':[[0.1,'Mutajenisite Kat.1 başlar'],[1,'Mutajenisite Kat.2 başlar']],
-    'H350':[[0.1,'Kanserojenite Kat.1 başlar'],[1,'Kanserojenite Kat.2 başlar']],
-    'H360':[[0.1,'Üreme Toks. Kat.1 başlar'],[1,'Üreme Toks. Kat.2 başlar']],
-    'H370':[[10,'STOT SE 1 başlar']],
-    'H371':[[10,'STOT SE 2 başlar']],
-    'H335':[[20,'STOT SE 3 başlar']],
-    'H336':[[20,'STOT SE 3 başlar']],
-    'H372':[[1,'STOT RE 1 başlar']],
-    'H373':[[10,'STOT RE 2 başlar']],
+    'H314':[[_C['H314']||5,  'Skin Corr. 1 başlar' ],[10,'Skin Irrit. 2 başlar']],
+    'H318':[[_C['H318']||3,  'Eye Dam. 1 başlar'   ],[10,'Eye Irrit. 2 başlar']],
+    'H315':[[_C['H315']||10, 'Skin Irrit. 2 başlar']],
+    'H319':[[_C['H319']||10, 'Eye Irrit. 2 başlar' ]],
+    'H317':[[_C['H317']||1,  'Deri Duyarlaştırma başlar']],
+    'H334':[[_C['H334']||0.1,'Solunum Duyarlaştırma başlar']],
+    'H340':[[_C['H340']||0.1,'Mutajenisite Kat.1 başlar'],[_C['H341']||1,'Mutajenisite Kat.2 başlar']],
+    'H350':[[_C['H350']||0.1,'Kanserojenite Kat.1 başlar'],[_C['H351']||1,'Kanserojenite Kat.2 başlar']],
+    'H360':[[_C['H360']||0.3,'Üreme Toks. Kat.1 başlar'],[_C['H361']||3,'Üreme Toks. Kat.2 başlar']],
+    'H370':[[_C['H370']||10, 'STOT SE 1 başlar']],
+    'H371':[[_C['H371']||10, 'STOT SE 2 başlar']],
+    'H335':[[_C['H335']||20, 'STOT SE 3 başlar']],
+    'H336':[[_C['H336']||20, 'STOT SE 3 başlar']],
+    'H372':[[_C['H372']||1,  'STOT RE 1 başlar']],
+    'H373':[[_C['H373']||10, 'STOT RE 2 başlar']],
     'H300':[[1,'Akut Toks. Kat.1-2 başlar']],
     'H301':[[1,'Akut Toks. Kat.3 başlar']],
     'H302':[[5,'Akut Toks. Kat.4 başlar']],

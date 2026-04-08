@@ -321,37 +321,34 @@ except ImportError:
     fetch_from_echa = None
 
 # ─── CUT-OFF LİMİTLERİ ───────────────────────────────────────────────────────
+# Tek kaynak: CLP_CUTOFFS_DICT'ten türetilir. Pictogram bilgisi eklenerek genişletilir.
+# İkinci bir dict tutmak yerine CLP_CUTOFFS_DICT'i doğrudan kullanın.
+
+_PICTOGRAM_MAP = {
+    'H314':'GHS05','H315':'GHS07','H318':'GHS05','H319':'GHS07',
+    'H317':'GHS07','H334':'GHS08',
+    'H340':'GHS08','H341':'GHS08',
+    'H350':'GHS08','H351':'GHS08',
+    'H360':'GHS08','H361':'GHS08','H362':'GHS08',
+    'H370':'GHS08','H371':'GHS08','H372':'GHS08','H373':'GHS08',
+    'H335':'GHS07','H336':'GHS07',
+    'H304':'GHS08',
+    'H220':'GHS02','H221':'GHS02','H222':'GHS02','H223':'GHS02',
+    'H224':'GHS02','H225':'GHS02','H226':'GHS02','H228':'GHS02',
+    'H240':'GHS01','H241':'GHS01',
+    'H250':'GHS02','H260':'GHS02','H261':'GHS02',
+    'H270':'GHS03','H271':'GHS03','H272':'GHS03',
+    'H280':'GHS04','H290':'GHS05',
+    'H400':'GHS09','H410':'GHS09','H411':'GHS09','H412':'GHS09','H413':'GHS09',
+}
 
 CUTOFFS = {
-    'Skin Corr. 1':    {'cutoff': 1.0,  'pictogram': 'GHS05', 'signal': 'Danger'},
-    'Skin Corr. 1A':   {'cutoff': 1.0,  'pictogram': 'GHS05', 'signal': 'Danger'},
-    'Skin Corr. 1B':   {'cutoff': 1.0,  'pictogram': 'GHS05', 'signal': 'Danger'},
-    'Skin Corr. 1C':   {'cutoff': 1.0,  'pictogram': 'GHS05', 'signal': 'Danger'},
-    'Skin Irrit. 2':   {'cutoff': 10.0, 'pictogram': 'GHS07', 'signal': 'Warning'},
-    'Eye Dam. 1':      {'cutoff': 1.0,  'pictogram': 'GHS05', 'signal': 'Danger'},
-    'Eye Irrit. 2':    {'cutoff': 10.0, 'pictogram': 'GHS07', 'signal': 'Warning'},
-    'Resp. Sens. 1':   {'cutoff': 1.0,  'pictogram': 'GHS08', 'signal': 'Danger'},
-    'Resp. Sens. 1A':  {'cutoff': 1.0,  'pictogram': 'GHS08', 'signal': 'Danger'},
-    'Resp. Sens. 1B':  {'cutoff': 1.0,  'pictogram': 'GHS08', 'signal': 'Danger'},
-    'Skin Sens. 1':    {'cutoff': 1.0,  'pictogram': 'GHS07', 'signal': 'Warning'},
-    'Skin Sens. 1A':   {'cutoff': 1.0,  'pictogram': 'GHS07', 'signal': 'Warning'},
-    'Skin Sens. 1B':   {'cutoff': 1.0,  'pictogram': 'GHS07', 'signal': 'Warning'},
-    'Muta. 1A':        {'cutoff': 0.1,  'pictogram': 'GHS08', 'signal': 'Danger'},
-    'Muta. 1B':        {'cutoff': 0.1,  'pictogram': 'GHS08', 'signal': 'Danger'},
-    'Muta. 2':         {'cutoff': 1.0,  'pictogram': 'GHS08', 'signal': 'Warning'},
-    'Carc. 1A':        {'cutoff': 0.1,  'pictogram': 'GHS08', 'signal': 'Danger'},
-    'Carc. 1B':        {'cutoff': 0.1,  'pictogram': 'GHS08', 'signal': 'Danger'},
-    'Carc. 2':         {'cutoff': 1.0,  'pictogram': 'GHS08', 'signal': 'Warning'},
-    'Repr. 1A':        {'cutoff': 0.3,  'pictogram': 'GHS08', 'signal': 'Danger'},
-    'Repr. 1B':        {'cutoff': 0.3,  'pictogram': 'GHS08', 'signal': 'Danger'},
-    'Repr. 2':         {'cutoff': 3.0,  'pictogram': 'GHS08', 'signal': 'Warning'},
-    'Lact.':           {'cutoff': 0.3,  'pictogram': 'GHS08', 'signal': 'Warning'},
-    'STOT SE 1':       {'cutoff': 1.0,  'pictogram': 'GHS08', 'signal': 'Danger'},
-    'STOT SE 2':       {'cutoff': 10.0, 'pictogram': 'GHS08', 'signal': 'Warning'},
-    'STOT SE 3':       {'cutoff': 20.0, 'pictogram': 'GHS07', 'signal': 'Warning'},
-    'STOT RE 1':       {'cutoff': 1.0,  'pictogram': 'GHS08', 'signal': 'Danger'},
-    'STOT RE 2':       {'cutoff': 10.0, 'pictogram': 'GHS08', 'signal': 'Warning'},
-    'Asp. Tox. 1':     {'cutoff': 10.0, 'pictogram': 'GHS08', 'signal': 'Danger'},
+    cls: {
+        'cutoff':    rule['cutoff'],
+        'pictogram': _PICTOGRAM_MAP.get(rule['h'], ''),
+        'signal':    rule['signal'],
+    }
+    for cls, rule in CLP_CUTOFFS_DICT.items()
 }
 
 # ATE nokta tahminleri — SEA Tablo 3.1.2 / CLP Annex I Table 3.1.2

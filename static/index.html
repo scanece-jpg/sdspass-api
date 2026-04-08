@@ -1902,7 +1902,17 @@ function _showPhysPrompt(missing, onContinue) {
        KKDİK Ek-2 Bölüm 9 — bu değerler ölçülmüş olmalıdır.
        Teorik hesap ±%30 belirsizlik ile tahmini değer verir.</span>`;
   document.getElementById('physPromptItems').innerHTML = items.join('');
-  document.getElementById('physPromptTheoBtn').style.display = hasEst ? '' : 'none';
+  const _theoBtn = document.getElementById('physPromptTheoBtn');
+  if (hasEst) {
+    _theoBtn.textContent = '🔬 Teorik hesap değerlerini kullan';
+    _theoBtn.style.opacity = '';
+    _theoBtn.title = '';
+  } else {
+    _theoBtn.textContent = '🔬 Teorik hesap (bileşenler DB\'de yok — tahminsiz devam)';
+    _theoBtn.style.opacity = '0.55';
+    _theoBtn.title = 'Bu bileşenler için veri tabanında viskozite/çözünürlük verisi bulunamadı.';
+  }
+  _theoBtn.style.display = '';
 
   // Zorunlu badge göster
   if (missing.missingVisc) document.getElementById('visc_req_badge').style.display = 'inline';

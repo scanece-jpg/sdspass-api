@@ -740,6 +740,12 @@ async def calculate_clp(db: AsyncSession, components: List[Any]) -> Dict:
     sum_chronic_k2 = 0.0   # Kronik Kat.2 — düz (M=1 efektif)
     sum_chronic_k3 = 0.0   # Kronik Kat.3 ve 4 — düz
 
+    _AQUATIC_CLASS_MAP = {
+        'Aquatic Acute 1':   'H400', 'Aquatic Chronic 1': 'H410',
+        'Aquatic Chronic 2': 'H411', 'Aquatic Chronic 3': 'H412',
+        'Aquatic Chronic 4': 'H413',
+    }
+
     for item in enriched:
         if not item['data']:
             continue
@@ -748,31 +754,36 @@ async def calculate_clp(db: AsyncSession, components: List[Any]) -> Dict:
         m_acute   = data.get('m_factors', {}).get('acute',   1)
         m_chronic = data.get('m_factors', {}).get('chronic', 1)
 
+        # Bileşenin tüm sucul tehlike kodlarını bir kez topla (Set).
+        # Spinosad gibi maddeler hazard listesinde hem H400 hem H410 taşıyabilir;
+        # satır bazlı döngü çift sayıma yol açar — bileşen bazlı Set ile önlenir.
+        haz_set = set()
         for haz in data.get('hazards', []):
             hc   = haz.get('h_class',  '').replace('*', '').strip()
             hcod = haz.get('h_code',   '').replace('*', '').strip()[:4]
+            if hcod in ('H400', 'H410', 'H411', 'H412', 'H413'):
+                haz_set.add(hcod)
+            if hc in _AQUATIC_CLASS_MAP:
+                haz_set.add(_AQUATIC_CLASS_MAP[hc])
 
-            # H400 (Akut Kat.1) → dahil etme eşiği ≥ 0.1%/M_akut
-            if hcod == 'H400' or hc == 'Aquatic Acute 1':
-                if conc >= (0.1 / max(m_acute, 1)):
-                    sum_acute_m += (conc * m_acute) / 100
+        # H410 (Kronik Kat.1) → akut+kronik katkı; H400 varsa atla (çift sayım önleme)
+        if 'H410' in haz_set:
+            inc_thr = 0.1 / max(m_chronic, 1)
+            if conc >= inc_thr:
+                sum_acute_m    += (conc * m_acute)   / 100
+                sum_chronic_k1 += (conc * m_chronic) / 100
+        elif 'H400' in haz_set:
+            # H400 (Akut Kat.1) → yalnızca H410 yoksa; dahil etme eşiği ≥ 0.1%/M_akut
+            if conc >= (0.1 / max(m_acute, 1)):
+                sum_acute_m += (conc * m_acute) / 100
 
-            # H410 (Kronik Kat.1) → akut katkı da vardır (H410 akut+kronik kapsar)
-            elif hcod == 'H410' or hc == 'Aquatic Chronic 1':
-                inc_thr = 0.1 / max(m_chronic, 1)
-                if conc >= inc_thr:
-                    sum_acute_m    += (conc * m_acute)   / 100
-                    sum_chronic_k1 += (conc * m_chronic) / 100
+        # H411 (Kronik Kat.2) → eşik ≥ 1.0%
+        if 'H411' in haz_set and conc >= 1.0:
+            sum_chronic_k2 += conc / 100
 
-            # H411 (Kronik Kat.2) → eşik ≥ 1.0%
-            elif hcod == 'H411' or hc == 'Aquatic Chronic 2':
-                if conc >= 1.0:
-                    sum_chronic_k2 += conc / 100
-
-            # H412/H413 (Kronik Kat.3/4) → eşik ≥ 1.0%
-            elif hcod in ('H412', 'H413') or hc in ('Aquatic Chronic 3', 'Aquatic Chronic 4'):
-                if conc >= 1.0:
-                    sum_chronic_k3 += conc / 100
+        # H412/H413 (Kronik Kat.3/4) → eşik ≥ 1.0%
+        if ('H412' in haz_set or 'H413' in haz_set) and conc >= 1.0:
+            sum_chronic_k3 += conc / 100
 
     h411_sum = 10 * sum_chronic_k1 + sum_chronic_k2
     h412_sum = 100 * sum_chronic_k1 + 10 * sum_chronic_k2 + sum_chronic_k3

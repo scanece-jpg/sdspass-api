@@ -49,38 +49,38 @@ const EcoEngine = (() => {
       const mAcute   = (c.m_factors?.acute)   || 1;
       const mChronic = (c.m_factors?.chronic)  || 1;
 
+      // Bileşenin tüm sucul tehlike kodlarını bir kez topla.
+      // Spinosad gibi maddeler hazard listesinde hem H400 hem H410 taşıyabilir;
+      // satır bazlı döngü çift sayıma yol açar — bileşen bazlı Set ile önlenir.
+      const hazSet = new Set();
       for (const h of (c.hazards || [])) {
         const code = (h.h_code || '').replace(/[*\s]/g,'').substring(0,4);
+        if (['H400','H410','H411','H412','H413'].includes(code)) hazSet.add(code);
+      }
 
-        // H400 (Aquatic Acute 1) — dahil etme eşiği: ≥ %0.1 / M_akut
-        if (code === 'H400') {
-          if (conc >= (0.1 / Math.max(mAcute, 1))) {
-            sumAcuteM += (conc * mAcute) / 100;
-          }
+      // H410 (Aquatic Chronic 1) — hem akut hem kronik hesaba girer.
+      // Dahil etme eşiği: ≥ %0.1 / M_kronik
+      // H410 varsa H400 satırını atla: H410 zaten akut katkıyı kapsar (çift sayım önleme)
+      if (hazSet.has('H410')) {
+        if (conc >= (0.1 / Math.max(mChronic, 1))) {
+          sumAcuteM    += (conc * mAcute)   / 100;
+          sumChronicK1 += (conc * mChronic) / 100;
         }
+      } else if (hazSet.has('H400')) {
+        // H400 (Aquatic Acute 1) — sadece H410 yoksa; dahil etme eşiği: ≥ %0.1 / M_akut
+        if (conc >= (0.1 / Math.max(mAcute, 1))) {
+          sumAcuteM += (conc * mAcute) / 100;
+        }
+      }
 
-        // H410 (Aquatic Chronic 1) — hem akut hem kronik hesaba girer
-        // Dahil etme eşiği: ≥ %0.1 / M_kronik
-        if (code === 'H410') {
-          if (conc >= (0.1 / Math.max(mChronic, 1))) {
-            sumAcuteM    += (conc * mAcute)   / 100;  // kronik 1 → akut katkı da var
-            sumChronicK1 += (conc * mChronic) / 100;
-          }
-        }
+      // H411 (Aquatic Chronic 2) — dahil etme eşiği: ≥ %1.0 (düz, M-faktörsüz)
+      if (hazSet.has('H411') && conc >= 1.0) {
+        sumChronicK2 += conc / 100;
+      }
 
-        // H411 (Aquatic Chronic 2) — dahil etme eşiği: ≥ %1.0 (düz, M-faktörsüz)
-        if (code === 'H411') {
-          if (conc >= 1.0) {
-            sumChronicK2 += conc / 100;
-          }
-        }
-
-        // H412/H413 (Aquatic Chronic 3/4) — dahil etme eşiği: ≥ %1.0 (düz)
-        if (code === 'H412' || code === 'H413') {
-          if (conc >= 1.0) {
-            sumChronicK3 += conc / 100;
-          }
-        }
+      // H412/H413 (Aquatic Chronic 3/4) — dahil etme eşiği: ≥ %1.0 (düz)
+      if ((hazSet.has('H412') || hazSet.has('H413')) && conc >= 1.0) {
+        sumChronicK3 += conc / 100;
       }
 
       if (OZONE_CAS.has(cas) && conc >= 0.1) ozone.push({ name: c.name || cas, cas, conc });

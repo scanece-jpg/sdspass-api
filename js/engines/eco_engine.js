@@ -17,9 +17,23 @@ const EcoEngine = (() => {
   const READILY_BIO = new Set(['64-17-5','67-63-0','71-23-8','71-36-3','67-64-1',
     '78-93-3','141-78-6','7732-18-5','57-55-6','56-81-5','77-92-9','64-19-7']);
   const PERSISTENT = new Set(['1330-20-7','108-88-3','110-54-3','71-43-2','100-41-4']);
-  const OZONE_CAS  = new Set(['75-69-4','75-71-8','76-13-1','76-14-2','75-72-9',
-    '75-63-8','74-83-9','74-87-3','56-23-5','67-66-3','79-01-6']);
-  const PBT_CAS    = new Set(['57-74-9','319-84-6','319-85-7','58-89-9','50-29-3','76-44-8']);
+  // OZONE_CAS — EUH059/H420; ecological_service.py ile senkron (14 CAS)
+  const OZONE_CAS  = new Set([
+    '75-69-4','75-71-8','76-13-1','76-14-2','76-15-3',  // CFC-11/12/113/114/115
+    '75-72-9','75-63-8',                                 // CFC-13, halon-1301
+    '74-83-9','74-87-3',                                 // CH3Br, CH3Cl
+    '56-23-5','67-66-3','79-01-6',                       // CCl4, CHCl3, TCE
+    '353-59-3','354-23-4',                               // halon-1211, HCFC-22
+  ]);
+  // PBT_CAS — ECHA SVHC listesi; ecological_service.py ile senkron (16 CAS)
+  const PBT_CAS    = new Set([
+    '57-74-9','319-84-6','319-85-7','58-89-9',           // chlordane, HCH türevleri, lindane
+    '72-54-8','50-29-3','76-44-8',                        // DDD, heptachlor, hexachlorobutadiene
+    '118-74-1','87-68-3',                                 // hexachlorobenzene, hexachlorobutadiene
+    '757-58-4','36355-01-8','67774-32-7',                 // TEPA, PFOS, PFOA türevleri
+    '72629-94-8','1163-19-5',                             // deca-BDE, deca-BDE türevleri
+    '68920-70-7','85535-84-8',                            // SCCP, MCCP
+  ]);
 
   function ec50ToMfactor(ec50) {
     if (ec50 <= 0.01) return 1000;

@@ -1517,7 +1517,13 @@ function _renderPhysWarnPanel() {
   const panel = document.getElementById('physWarnPanel');
   if (!panel) return;
 
-  // Tüm potansiyel zorunlu alanlar — gizli olanlar otomatik filtrelenir
+  // Her formda zorunlu metin alanları (phys-fw dışında, her zaman kontrol edilir)
+  const TEXT_MANDATORY = [
+    { id:'tf_appearance', label:'Görünüm / Renk', reason:'SDS Bölüm 9 — bilgi yok kabul edilmez (KKDİK Ek-2)', always: true },
+    { id:'tf_odor',       label:'Koku',           reason:'SDS Bölüm 9 — bilgi yok kabul edilmez (KKDİK Ek-2)', always: true },
+  ];
+
+  // Tüm potansiyel zorunlu fiziksel alanlar — gizli olanlar otomatik filtrelenir
   const MANDATORY = [
     { id:'tf_fp',   key:'fp',   label:'Parlama Noktası', reason:'H224/H225/H226 ayrımı (CLP §2.6)' },
     { id:'tf_bp',   key:'bp',   label:'Kaynama Noktası', reason:'H224 vs H225 ayrımı (CLP §2.6.2)' },
@@ -1525,14 +1531,17 @@ function _renderPhysWarnPanel() {
     { id:'tf_mp',   key:'mp',   label:'Erime Noktası',   reason:'Katı/Toz ürün — zorunlu (KKDİK Ek-2 §9)' },
   ];
 
-  // Sadece bu form için görünür olan alanları işle
-  const visible = MANDATORY.filter(f => {
-    const el = document.getElementById(f.id);
-    if (!el) return false;
-    const wrap = el.closest('.phys-fw');
-    if (wrap && wrap.style.display === 'none') return false;
-    return true;
-  });
+  // Sadece bu form için görünür olan fiziksel alanları işle
+  const visible = [
+    ...TEXT_MANDATORY,
+    ...MANDATORY.filter(f => {
+      const el = document.getElementById(f.id);
+      if (!el) return false;
+      const wrap = el.closest('.phys-fw');
+      if (wrap && wrap.style.display === 'none') return false;
+      return true;
+    }),
+  ];
 
   if (!visible.length) { panel.style.display = 'none'; return; }
 
@@ -1550,6 +1559,9 @@ function _renderPhysWarnPanel() {
       badgeClass = 'empty'; badgeText = '⚠ Zorunlu · Değer Girilmedi'; allOk = false;
     } else if (src === 'theo') {
       badgeClass = 'theo';  badgeText = '≈ Teorik Tahmin';              allOk = false;
+    } else if (f.always) {
+      // Metin alanı — dolu ise her zaman OK
+      badgeClass = 'ok';    badgeText = '✓ Girildi';
     } else {
       badgeClass = 'ok';    badgeText = '✓ Ölçülen Değer';
     }

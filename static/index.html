@@ -72,25 +72,6 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
 .phys-modal-body::-webkit-scrollbar{width:6px}
 .phys-modal-body::-webkit-scrollbar-track{background:var(--bg3)}
 .phys-modal-body::-webkit-scrollbar-thumb{background:var(--border2);border-radius:3px}
-/* Fiziksel veri prompt */
-.physp-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1100;display:none;align-items:center;justify-content:center}
-.physp-overlay.open{display:flex}
-.physp-box{background:var(--bg2);border:1px solid var(--border2);border-radius:10px;width:min(440px,94vw);box-shadow:0 20px 56px rgba(0,0,0,.7);overflow:hidden}
-.physp-head{padding:12px 16px;background:var(--bg3);border-bottom:1px solid var(--border2);font-size:12px;font-weight:600;color:var(--text);display:flex;align-items:center;gap:8px}
-.physp-body{padding:14px 16px}
-.physp-desc{font-size:11px;color:var(--text2);margin:0 0 12px;line-height:1.5}
-.physp-item{display:flex;align-items:center;justify-content:space-between;padding:7px 10px;background:var(--bg3);border-radius:6px;margin-bottom:6px;border:1px solid var(--border2)}
-.physp-item-label{font-size:11px;color:var(--text2);font-weight:500}
-.physp-est{font-size:11px;color:#68d391;font-family:var(--mono)}
-.physp-noest{font-size:10px;color:var(--text3);font-style:italic}
-.physp-footer{padding:10px 16px 14px;display:flex;flex-direction:column;gap:7px}
-.physp-btn{width:100%;padding:9px;border-radius:6px;border:none;cursor:pointer;font-size:11px;font-weight:500;transition:.15s}
-.physp-btn-theo{background:#2d6a4f;color:#d8f3dc}
-.physp-btn-theo:hover{background:#40916c}
-.physp-btn-manual{background:var(--bg3);color:var(--text);border:1px solid var(--border2)}
-.physp-btn-manual:hover{background:var(--border2)}
-.physp-btn-skip{background:none;color:var(--text3);border:1px dashed var(--border2);font-size:10px}
-.physp-btn-skip:hover{color:var(--text)}
 .pm-row{display:grid;grid-template-columns:160px 1fr;gap:4px 12px;padding:7px 0;border-bottom:1px solid rgba(255,255,255,.04);align-items:start}
 .pm-row:last-child{border-bottom:none}
 .pm-label{font-size:10px;color:var(--text3);padding-top:2px}
@@ -107,6 +88,18 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
 .thresh-warn{font-size:9px;margin-top:3px;padding:3px 7px;border-radius:5px;display:none;line-height:1.5}
 .thresh-warn.danger{background:rgba(252,129,129,.1);color:#fc8181;border-left:2px solid #fc8181}
 .thresh-warn.info{background:rgba(99,179,237,.08);color:#63b3ed;border-left:2px solid #4299e1}
+/* Hesaplama sonrası zorunlu alan uyarı paneli */
+.phys-warn-panel{border-radius:8px;padding:10px 12px;margin-bottom:12px;border:1px solid var(--border2);background:var(--bg3)}
+.phys-warn-panel-title{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;font-weight:700}
+.phys-warn-row{display:flex;align-items:center;justify-content:space-between;padding:5px 0;border-bottom:1px solid var(--border);font-size:11px}
+.phys-warn-row:last-child{border-bottom:none;padding-bottom:0}
+.phys-warn-label{color:var(--text2);flex:1}
+.phys-warn-reason{font-size:9px;color:var(--text3);flex:2;padding:0 8px}
+.pwb{font-size:9px;font-weight:700;padding:2px 8px;border-radius:10px;white-space:nowrap}
+.pwb.empty{background:rgba(255,107,107,.18);color:#ff6b6b;border:1px solid rgba(255,107,107,.35)}
+.pwb.theo{background:rgba(245,166,35,.15);color:#f5a623;border:1px solid rgba(245,166,35,.35)}
+.pwb.ok{background:rgba(0,229,176,.12);color:#00e5b0;border:1px solid rgba(0,229,176,.3)}
+.phys-warn-all-ok{font-size:10px;color:#00e5b0;display:flex;align-items:center;gap:6px}
 
 /* Compact phys summary card */
 .phys-summary{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:6px;margin-bottom:8px}
@@ -114,6 +107,18 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
 .phys-chip-label{font-size:9px;color:var(--text3);margin-bottom:3px}
 .phys-chip-val{font-family:var(--mono);font-size:12px;font-weight:700;color:#e2e8f0}
 .phys-chip-sub{font-size:8px;color:var(--text3);margin-top:2px}
+
+/* Kademeli fiziksel alan yapısı */
+.phys-section-hdr{font-size:9px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;padding:5px 8px;background:rgba(124,106,247,.08);border:1px solid rgba(124,106,247,.2);border-radius:5px;margin-bottom:8px}
+.phys-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.phys-fw{display:flex;flex-direction:column}
+.phys-fh{display:flex;align-items:center;justify-content:space-between;margin-bottom:3px}
+.phys-fh label:first-child{font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em}
+.na-check{display:flex;align-items:center;gap:3px;font-size:9px;color:var(--text3);cursor:pointer;white-space:nowrap;user-select:none;flex-shrink:0}
+.na-check input[type=checkbox]{width:11px;height:11px;cursor:pointer;accent-color:var(--accent);margin:0}
+.motor-badge{color:var(--safe);font-size:8px;font-weight:400}
+.phys-fw input:disabled{opacity:.35;cursor:not-allowed;background:rgba(106,106,136,.08)!important}
+.pwb.na{background:rgba(106,106,136,.12);color:var(--text3);border:1px solid var(--border2)}
 
 /* Refinement panel */
 .crp{margin-top:6px;border-radius:8px;overflow:hidden;border:1px solid var(--border2);display:none}
@@ -210,7 +215,7 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
     <div class="row2">
       <div>
         <label>Form</label>
-        <select id="pform">
+        <select id="pform" onchange="updatePhysFieldsByForm()">
           <option value="liquid">Sıvı</option>
           <option value="solid">Katı</option>
           <option value="gas">Gaz</option>
@@ -313,10 +318,10 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
   <div class="product-card" style="margin-top:10px">
     <label style="font-weight:700;color:var(--text2);margin:0 0 10px;display:block">🧪 Bölüm 9 — Fiziksel ve Kimyasal Özellikler</label>
 
-    <!-- 4 alan her zaman görünür -->
+    <!-- ADIM 1: Her zaman görünür -->
     <div class="row2">
       <div>
-        <label>Fiziksel Form / Renk</label>
+        <label>Görünüm / Renk</label>
         <input type="text" id="tf_appearance" placeholder="Ör: Şeffaf, renksiz sıvı">
       </div>
       <div>
@@ -324,45 +329,90 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
         <input type="text" id="tf_odor" placeholder="Ör: Keskin, karakteristik">
       </div>
     </div>
-    <div class="row2" style="margin-top:8px">
-      <div>
-        <label>pH Değeri <span style="color:var(--safe);font-size:8px">● motor</span></label>
-        <input type="number" id="tf_ph" placeholder="Ör: 7.0 — override için girin" step="0.1" min="0" max="14">
-      </div>
-      <div>
-        <label>Yoğunluk (g/mL) <span style="color:var(--safe);font-size:8px">● motor</span><span id="src_density" class="src-badge"></span></label>
-        <input type="number" id="tf_density" placeholder="ISO 2811 — override için girin" step="0.001"
-               data-source="" oninput="markUserInput(this,'density')">
-        <div id="warn_density" class="thresh-warn"></div>
-      </div>
-    </div>
-    <div class="row2" style="margin-top:8px">
-      <div>
-        <label>
-          Viskozite (mm²/s @40°C) <span style="color:var(--safe);font-size:8px">● motor</span>
-          <span id="visc_req_badge" style="display:none;color:#f6ad55;font-size:8px;margin-left:4px">⚠ zorunlu</span>
-          <span id="src_visc" class="src-badge"></span>
-        </label>
-        <input type="number" id="tf_visc" placeholder="ISO 3219 — override için girin" step="0.1" min="0"
-               data-source="" oninput="markUserInput(this,'visc');document.getElementById('visc_req_badge').style.display='none'">
-        <div id="warn_visc" class="thresh-warn"></div>
-      </div>
-      <div>
-        <label>
-          Su Çözünürlüğü (mg/L) <span style="color:var(--safe);font-size:8px">● motor</span>
-          <span id="sol_req_badge" style="display:none;color:#f6ad55;font-size:8px;margin-left:4px">⚠ zorunlu</span>
-          <span id="src_sol" class="src-badge"></span>
-        </label>
-        <input type="number" id="tf_sol" placeholder="OECD 105 — override için girin" min="0"
-               data-source="" oninput="markUserInput(this,'sol');document.getElementById('sol_req_badge').style.display='none'">
-        <div id="warn_sol" class="thresh-warn"></div>
-      </div>
+
+    <!-- ADIM 2: Forma göre zorunlu alanlar -->
+    <div style="margin-top:12px">
+      <div class="phys-section-hdr" id="phys-section-hdr">Sıvı Ürün — Zorunlu Alanlar</div>
+      <div class="phys-grid">
+
+        <!-- pH: sıvı, pasta, aerosol -->
+        <div class="phys-fw" data-forms="liquid paste aerosol">
+          <div class="phys-fh">
+            <label>pH Değeri <span class="motor-badge">● motor</span></label>
+            <label class="na-check"><input type="checkbox" id="na_ph" onchange="toggleNA(this,'tf_ph','ph')"> N/A</label>
+          </div>
+          <input type="number" id="tf_ph" step="0.1" min="0" max="14" placeholder="Ör: 7.0">
+        </div>
+
+        <!-- Yoğunluk: tüm formlar -->
+        <div class="phys-fw" data-forms="liquid solid gas paste powder aerosol">
+          <div class="phys-fh">
+            <label>Yoğunluk (g/mL) <span class="motor-badge">● motor</span><span id="src_density" class="src-badge"></span></label>
+            <label class="na-check"><input type="checkbox" id="na_density" onchange="toggleNA(this,'tf_density','density')"> N/A</label>
+          </div>
+          <input type="number" id="tf_density" step="0.001" placeholder="ISO 2811"
+                 data-source="" oninput="markUserInput(this,'density')">
+          <div id="warn_density" class="thresh-warn"></div>
+        </div>
+
+        <!-- Viskozite: sıvı, pasta, aerosol -->
+        <div class="phys-fw" data-forms="liquid paste aerosol">
+          <div class="phys-fh">
+            <label>Viskozite (mm²/s @40°C) <span class="motor-badge">● motor</span><span id="src_visc" class="src-badge"></span></label>
+            <label class="na-check"><input type="checkbox" id="na_visc" onchange="toggleNA(this,'tf_visc','visc')"> N/A</label>
+          </div>
+          <input type="number" id="tf_visc" step="0.1" min="0" placeholder="ISO 3219"
+                 data-source="" oninput="markUserInput(this,'visc')">
+          <div id="warn_visc" class="thresh-warn"></div>
+        </div>
+
+        <!-- Çözünürlük: sıvı, katı, pasta, toz, aerosol -->
+        <div class="phys-fw" data-forms="liquid solid paste powder aerosol">
+          <div class="phys-fh">
+            <label>Su Çözünürlüğü (mg/L) <span class="motor-badge">● motor</span><span id="src_sol" class="src-badge"></span></label>
+            <label class="na-check"><input type="checkbox" id="na_sol" onchange="toggleNA(this,'tf_sol','sol')"> N/A</label>
+          </div>
+          <input type="number" id="tf_sol" min="0" placeholder="OECD 105"
+                 data-source="" oninput="markUserInput(this,'sol')">
+          <div id="warn_sol" class="thresh-warn"></div>
+        </div>
+
+        <!-- Parlama Noktası: sıvı, pasta, aerosol -->
+        <div class="phys-fw" data-forms="liquid paste aerosol">
+          <div class="phys-fh">
+            <label>Parlama Noktası (°C) <span class="motor-badge">● motor</span><span id="src_fp" class="src-badge"></span></label>
+            <label class="na-check"><input type="checkbox" id="na_fp" onchange="toggleNA(this,'tf_fp','fp')"> N/A</label>
+          </div>
+          <input type="number" id="tf_fp" placeholder="DB'den hesaplanır"
+                 data-source="" oninput="markUserInput(this,'fp')">
+          <div id="warn_fp" class="thresh-warn"></div>
+        </div>
+
+        <!-- Kaynama Noktası: sıvı, pasta, aerosol -->
+        <div class="phys-fw" data-forms="liquid paste aerosol">
+          <div class="phys-fh">
+            <label>Kaynama Noktası (°C) <span class="motor-badge">● motor</span><span id="src_bp" class="src-badge"></span></label>
+            <label class="na-check"><input type="checkbox" id="na_bp" onchange="toggleNA(this,'tf_bp','bp')"> N/A</label>
+          </div>
+          <input type="number" id="tf_bp" placeholder="IBP — override"
+                 data-source="" oninput="markUserInput(this,'bp')">
+          <div id="warn_bp" class="thresh-warn"></div>
+        </div>
+
+        <!-- Erime/Donma: katı, toz, pasta -->
+        <div class="phys-fw" data-forms="solid powder paste">
+          <div class="phys-fh">
+            <label>Erime / Donma Noktası (°C)</label>
+            <label class="na-check"><input type="checkbox" id="na_mp" onchange="toggleNA(this,'tf_mp','mp')"> N/A</label>
+          </div>
+          <input type="number" id="tf_mp" placeholder="Ör: 50°C">
+        </div>
+
+      </div><!-- /phys-grid -->
     </div>
 
-    <!-- Daha fazla... toggle -->
-    <div id="sec9Extra" style="display:none;margin-top:10px">
-
-      <!-- Görünüm / Koku devamı -->
+    <!-- ADIM 3: İkincil / isteğe bağlı alanlar -->
+    <div id="sec9Extra" style="display:none;margin-top:12px">
       <div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin:0 0 6px;padding-bottom:4px;border-bottom:1px solid var(--border2)">Görünüm</div>
       <div class="row2">
         <div>
@@ -371,44 +421,24 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
         </div>
       </div>
 
-      <!-- Termal Özellikler -->
       <div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin:12px 0 6px;padding-bottom:4px;border-bottom:1px solid var(--border2)">Termal Özellikler</div>
       <div class="row2">
-        <div>
-          <label>Erime / Donma Noktası (°C)</label>
-          <input type="number" id="tf_mp" placeholder="Ör: -20">
-        </div>
-        <div>
-          <label>Kaynama Noktası (°C) <span style="color:var(--safe);font-size:8px">● motor</span><span id="src_bp" class="src-badge"></span></label>
-          <input type="number" id="tf_bp" placeholder="IBP — override için girin"
-                 data-source="" oninput="markUserInput(this,'bp')">
-          <div id="warn_bp" class="thresh-warn"></div>
-        </div>
-      </div>
-      <div class="row2" style="margin-top:8px">
-        <div>
-          <label>Parlama Noktası (°C) <span style="color:var(--safe);font-size:8px">● motor</span><span id="src_fp" class="src-badge"></span></label>
-          <input type="number" id="tf_fp" placeholder="DB'den hesaplanır — override"
-                 data-source="" oninput="markUserInput(this,'fp')">
-          <div id="warn_fp" class="thresh-warn"></div>
-        </div>
         <div>
           <label>Buharlaşma Hızı</label>
           <input type="text" id="tf_evap" placeholder="Ör: &lt;1 (n-BuAc=1), Yavaş">
         </div>
-      </div>
-      <div class="row2" style="margin-top:8px">
         <div>
           <label>Kendiliğinden Tutuşma (°C)</label>
           <input type="number" id="tf_ait" placeholder="Ör: 400">
         </div>
+      </div>
+      <div class="row2" style="margin-top:8px">
         <div>
           <label>Bozunma Sıcaklığı (°C)</label>
           <input type="number" id="tf_decomp" placeholder="Ör: 250">
         </div>
       </div>
 
-      <!-- Alevlenirlik / Patlama -->
       <div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin:12px 0 6px;padding-bottom:4px;border-bottom:1px solid var(--border2)">Alevlenirlik (LEL/UEL motorda hesaplanır)</div>
       <div class="row2">
         <div>
@@ -421,22 +451,18 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
         </div>
       </div>
 
-      <!-- Yoğunluk ve Basınç -->
       <div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin:12px 0 6px;padding-bottom:4px;border-bottom:1px solid var(--border2)">Diğer <span style="font-size:8px;color:var(--safe)">(●●● motor hesaplar)</span></div>
       <div class="row2">
         <div>
           <label>Oksitleyici Özellikler</label>
           <input type="text" id="tf_oxid" placeholder="Ör: Uygulanamaz">
         </div>
-      </div>
-
-      <!-- Çözünürlük ve Diğer -->
-      <div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin:12px 0 6px;padding-bottom:4px;border-bottom:1px solid var(--border2)">Çözünürlük ve Diğer</div>
-      <div class="row2">
         <div>
           <label>Dağılım Katsayısı (log Kow)</label>
           <input type="number" id="tf_logkow" placeholder="Ör: 2.5" step="0.01">
         </div>
+      </div>
+      <div class="row2" style="margin-top:8px">
         <div>
           <label>Diğer Çözücülerde Çözünürlük</label>
           <input type="text" id="tf_sol_other" placeholder="Ör: Etanol'de karışabilir">
@@ -459,6 +485,7 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
 
 <!-- ═══ SAĞ PANEL — Sonuçlar ════════════════════════════════════════════════ -->
 <div class="right">
+  <div id="physWarnPanel" style="display:none"></div>
   <div id="results">
     <div class="empty-state">
       <div class="es-icon">⚗️</div>
@@ -1330,14 +1357,6 @@ function getComps() {
 function doCalculate() {
   const comps = getComps();
   if (!comps.length) { showError('En az bir bileşen girin.'); return; }
-  const form = document.getElementById('pform')?.value || 'liquid';
-
-  // Sıvı ürünlerde zorunlu fiziksel veriler eksikse kullanıcıya sor
-  const missing = _checkMissingPhysProps(comps, form);
-  if (missing) {
-    _showPhysPrompt(missing, () => _runCalculationCore());
-    return;
-  }
   _runCalculationCore();
 }
 
@@ -1395,38 +1414,71 @@ function markUserInput(el, key) {
   _checkPhysThreshold(key, parseFloat(el.value));
 }
 
+// ── Forma göre fiziksel alan görünürlüğü ─────────────────────────────────────
+function updatePhysFieldsByForm() {
+  const form = document.getElementById('pform')?.value || 'liquid';
+
+  document.querySelectorAll('.phys-fw[data-forms]').forEach(wrap => {
+    const visible = wrap.dataset.forms.split(' ').includes(form);
+    wrap.style.display = visible ? '' : 'none';
+    // Gizlenen alanlarda data-auto-hidden işaretle (NA'ya zorlamadan)
+    const inp = wrap.querySelector('input[type=number],input[type=text]');
+    if (inp) inp.dataset.autoHidden = visible ? '' : 'true';
+  });
+
+  const titles = {
+    liquid: 'Sıvı Ürün — Zorunlu Alanlar',
+    solid:  'Katı Ürün — Zorunlu Alanlar',
+    powder: 'Toz Ürün — Zorunlu Alanlar',
+    paste:  'Pasta / Gel — Zorunlu Alanlar',
+    gas:    'Gaz Ürün — Zorunlu Alanlar',
+    aerosol:'Aerosol — Zorunlu Alanlar',
+  };
+  const hdr = document.getElementById('phys-section-hdr');
+  if (hdr) hdr.textContent = titles[form] || 'Zorunlu Alanlar';
+}
+
+// ── Uygulanamaz toggle ────────────────────────────────────────────────────────
+function toggleNA(cb, inputId, key) {
+  const inp = document.getElementById(inputId);
+  if (!inp) return;
+  if (cb.checked) {
+    inp.value = '';
+    inp.disabled = true;
+    inp.dataset.na = 'true';
+    inp.dataset.source = '';
+    _updateSrcBadge(key, '');
+    const w = document.getElementById('warn_' + key);
+    if (w) w.style.display = 'none';
+  } else {
+    inp.disabled = false;
+    inp.dataset.na = '';
+  }
+}
+
 function _autofillPhysFields(tp) {
   if (!tp) return;
   const FIELDS = [
-    { id: 'tf_density', key: 'density',  val: tp.density?.value },
-    { id: 'tf_visc',    key: 'visc',     val: tp.viscosity?.value },
-    { id: 'tf_sol',     key: 'sol',      val: tp.solubility?.value },
-    { id: 'tf_bp',      key: 'bp',       val: tp.boiling_point?.value },
-    { id: 'tf_fp',      key: 'fp',       val: tp.flash_point?.value },
+    { id: 'tf_density', key: 'density', val: tp.density?.value },
+    { id: 'tf_visc',    key: 'visc',    val: tp.viscosity?.value },
+    { id: 'tf_sol',     key: 'sol',     val: tp.solubility?.value },
+    { id: 'tf_bp',      key: 'bp',      val: tp.boiling_point?.value },
+    { id: 'tf_fp',      key: 'fp',      val: tp.flash_point?.value },
   ];
-  let hasBpOrFp = false;
   for (const { id, key, val } of FIELDS) {
     const el = document.getElementById(id);
     if (!el) continue;
     if (el.dataset.source === 'user') continue; // kullanıcı girdiyse dokunma
+    if (el.dataset.na === 'true') continue;      // Uygulanamaz işaretlenmişse dokunma
+    if (el.dataset.autoHidden === 'true') continue; // Bu form için gizliyse dokunma
     if (val != null && !isNaN(val)) {
       el.value = val;
       el.dataset.source = 'theo';
       _updateSrcBadge(key, 'theo');
       _checkPhysThreshold(key, val);
-      if (key === 'bp' || key === 'fp') hasBpOrFp = true;
     } else {
       el.dataset.source = '';
       _updateSrcBadge(key, '');
-    }
-  }
-  // bp ve fp sec9Extra içinde — teorik değer varsa otomatik aç
-  if (hasBpOrFp) {
-    const extra = document.getElementById('sec9Extra');
-    const btn   = document.getElementById('sec9ExtraBtn');
-    if (extra && extra.style.display === 'none') {
-      extra.style.display = 'block';
-      if (btn) btn.textContent = '▲ Daha az...';
     }
   }
 }
@@ -1439,6 +1491,68 @@ function _resetPhysSourceFields() {
     const w = document.getElementById('warn_' + key);
     if (w) w.style.display = 'none';
   });
+}
+
+// ── Hesaplama sonrası zorunlu fiziksel alan uyarı paneli ──────────────────────
+function _renderPhysWarnPanel() {
+  const panel = document.getElementById('physWarnPanel');
+  if (!panel) return;
+
+  // Tüm potansiyel zorunlu alanlar — gizli olanlar otomatik filtrelenir
+  const MANDATORY = [
+    { id:'tf_fp',   key:'fp',   label:'Parlama Noktası', reason:'H224/H225/H226 ayrımı (CLP §2.6)' },
+    { id:'tf_bp',   key:'bp',   label:'Kaynama Noktası', reason:'H224 vs H225 ayrımı (CLP §2.6.2)' },
+    { id:'tf_visc', key:'visc', label:'Viskozite @40°C', reason:'H304 Aspirasyon (CLP §3.10)' },
+    { id:'tf_mp',   key:'mp',   label:'Erime Noktası',   reason:'Katı/Toz ürün — zorunlu (KKDİK Ek-2 §9)' },
+  ];
+
+  // Sadece bu form için görünür olan alanları işle
+  const visible = MANDATORY.filter(f => {
+    const el = document.getElementById(f.id);
+    if (!el) return false;
+    const wrap = el.closest('.phys-fw');
+    if (wrap && wrap.style.display === 'none') return false;
+    return true;
+  });
+
+  if (!visible.length) { panel.style.display = 'none'; return; }
+
+  let allOk = true;
+  const rows = visible.map(f => {
+    const el    = document.getElementById(f.id);
+    const isNA  = el?.dataset?.na === 'true';
+    const src   = el?.dataset?.source || '';
+    const val   = el?.value?.trim();
+
+    let badgeClass, badgeText;
+    if (isNA) {
+      badgeClass = 'na';    badgeText = '— Uygulanamaz';
+    } else if (!val) {
+      badgeClass = 'empty'; badgeText = '⚠ Zorunlu · Değer Girilmedi'; allOk = false;
+    } else if (src === 'theo') {
+      badgeClass = 'theo';  badgeText = '≈ Teorik Tahmin';              allOk = false;
+    } else {
+      badgeClass = 'ok';    badgeText = '✓ Ölçülen Değer';
+    }
+
+    return `<div class="phys-warn-row">
+      <span class="phys-warn-label">${f.label}</span>
+      <span class="phys-warn-reason">${f.reason}</span>
+      <span class="pwb ${badgeClass}">${badgeText}</span>
+    </div>`;
+  });
+
+  if (allOk) {
+    panel.innerHTML = `<div class="phys-warn-panel">
+      <div class="phys-warn-all-ok">✅ Tüm zorunlu fiziksel veriler girilmiş.</div>
+    </div>`;
+  } else {
+    panel.innerHTML = `<div class="phys-warn-panel">
+      <div class="phys-warn-panel-title">🔬 Fiziksel Veri Durumu — KKDİK Ek-2 Bölüm 9</div>
+      ${rows.join('')}
+    </div>`;
+  }
+  panel.style.display = 'block';
 }
 
 function _getPhysSources() {
@@ -1697,6 +1811,7 @@ function renderAll(s) {
   const tp = phys.theoProps;
   _lastTheoProps = tp || null;   // modal için kaydet
   _autofillPhysFields(tp);       // teorik değerleri forma yaz (kullanıcı girdiyse dokunma)
+  _renderPhysWarnPanel();        // zorunlu alan durumunu göster (autofill bittikten sonra)
 
   if (tp) {
     const coverageColor = tp.coverage >= 80 ? '#68d391' : tp.coverage >= 50 ? '#f6ad55' : '#fc8181';
@@ -1864,26 +1979,15 @@ window.addEventListener('DOMContentLoaded', () => {
   // İlk bileşeni ekle
   addComp();
 
+  // Forma göre fiziksel alanları göster/gizle (başlangıç: sıvı)
+  updatePhysFieldsByForm();
+
   console.log('[SDSPass v2] Modüler pipeline hazır — EventBus.debug() ile olayları izle');
 });
 </script>
 
 <!-- ══ FİZİKSEL ÖZELLİKLER MODAL ══════════════════════════════════════════ -->
 <!-- Fiziksel Veri Giriş Seçici Prompt -->
-<div class="physp-overlay" id="physPromptOverlay" onclick="if(event.target===this)_physPromptSkip()">
-  <div class="physp-box">
-    <div class="physp-head">⚗️ Fiziksel Özellikler Eksik</div>
-    <div class="physp-body">
-      <p class="physp-desc" id="physPromptDesc"></p>
-      <div id="physPromptItems"></div>
-    </div>
-    <div class="physp-footer">
-      <button class="physp-btn physp-btn-theo" id="physPromptTheoBtn" onclick="_physPromptTheo()">🔬 Teorik hesap değerlerini kullan</button>
-      <button class="physp-btn physp-btn-manual" onclick="_physPromptManual()">✏️ Kendim gireceğim</button>
-      <button class="physp-btn physp-btn-skip" onclick="_physPromptSkip()">⏭️ Şimdilik geç (PDF'te uyarı çıkar)</button>
-    </div>
-  </div>
-</div>
 
 <div class="phys-modal-overlay" id="physModalOverlay" onclick="if(event.target===this)closePhysModal()">
   <div class="phys-modal">
@@ -1978,111 +2082,7 @@ function closePhysModal() {
   document.getElementById('physModalOverlay')?.classList.remove('open');
 }
 
-// ── Fiziksel Veri Prompt ──────────────────────────────────────────────────────
-let _physPromptCb = null;
-let _physPromptEst = {};
-
-function _checkMissingPhysProps(comps, form) {
-  if (!['liquid','paste','aerosol'].includes(form)) return null;
-  const hasVisc = parseFloat(document.getElementById('tf_visc')?.value) > 0;
-  const hasSol  = parseFloat(document.getElementById('tf_sol')?.value)  >= 0 &&
-                  document.getElementById('tf_sol')?.value?.trim() !== '';
-  if (hasVisc && hasSol) return null;
-
-  // Hızlı teorik tahmin (senkron)
-  const theo = (typeof PhysicalEngine !== 'undefined')
-    ? PhysicalEngine.calcTheoProps(comps)
-    : null;
-
-  return { missingVisc: !hasVisc, missingSol: !hasSol,
-           viscEst: theo?.viscosity, solEst: theo?.solubility };
-}
-
-function _showPhysPrompt(missing, onContinue) {
-  _physPromptCb  = onContinue;
-  _physPromptEst = missing;
-
-  const items = [];
-  if (missing.missingVisc) {
-    const v = missing.viscEst;
-    const est = v?.value != null
-      ? `<span class="physp-est">~${v.value} mm²/s ±%30</span>`
-      : `<span class="physp-noest">DB'de veri yok</span>`;
-    items.push(`<div class="physp-item">
-      <span class="physp-item-label">Viskozite (mm²/s @40°C)</span>${est}</div>`);
-  }
-  if (missing.missingSol) {
-    const s = missing.solEst;
-    const desc = s?.text?.split('.')[0] || (s?.value != null ? `~${s.value} mg/L` : null);
-    const est = desc
-      ? `<span class="physp-est">${desc}</span>`
-      : `<span class="physp-noest">DB'de veri yok</span>`;
-    items.push(`<div class="physp-item">
-      <span class="physp-item-label">Su çözünürlüğü</span>${est}</div>`);
-  }
-
-  const hasEst = (missing.missingVisc && missing.viscEst?.value != null) ||
-                 (missing.missingSol  && missing.solEst);
-
-  document.getElementById('physPromptDesc').innerHTML =
-    `Sıvı ürün için <b>zorunlu fiziksel veriler</b> girilmemiş.<br>
-     <span style="font-size:10px;color:var(--text3)">
-       KKDİK Ek-2 Bölüm 9 — bu değerler ölçülmüş olmalıdır.
-       Teorik hesap ±%30 belirsizlik ile tahmini değer verir.</span>`;
-  document.getElementById('physPromptItems').innerHTML = items.join('');
-  const _theoBtn = document.getElementById('physPromptTheoBtn');
-  if (hasEst) {
-    _theoBtn.textContent = '🔬 Teorik hesap değerlerini kullan';
-    _theoBtn.style.opacity = '';
-    _theoBtn.title = '';
-  } else {
-    _theoBtn.textContent = '🔬 Teorik hesap (bileşenler DB\'de yok — tahminsiz devam)';
-    _theoBtn.style.opacity = '0.55';
-    _theoBtn.title = 'Bu bileşenler için veri tabanında viskozite/çözünürlük verisi bulunamadı.';
-  }
-  _theoBtn.style.display = '';
-
-  // Zorunlu badge göster
-  if (missing.missingVisc) document.getElementById('visc_req_badge').style.display = 'inline';
-  if (missing.missingSol)  document.getElementById('sol_req_badge').style.display  = 'inline';
-
-  document.getElementById('physPromptOverlay').classList.add('open');
-}
-
-function _physPromptTheo() {
-  const m = _physPromptEst;
-  // Teorik değerleri formlara yaz
-  if (m.missingVisc && m.viscEst?.value != null) {
-    document.getElementById('tf_visc').value = m.viscEst.value;
-    document.getElementById('visc_req_badge').style.display = 'none';
-  }
-  if (m.missingSol && m.solEst?.value != null) {
-    const sv = parseFloat(m.solEst.value);
-    if (!isNaN(sv) && sv > 0) {
-      document.getElementById('tf_sol').value = sv;
-      document.getElementById('sol_req_badge').style.display = 'none';
-    }
-  }
-  document.getElementById('physPromptOverlay').classList.remove('open');
-  if (_physPromptCb) _physPromptCb();
-}
-
-function _physPromptManual() {
-  document.getElementById('physPromptOverlay').classList.remove('open');
-  // tf_visc/tf_sol zaten ana bölümde görünür, scroll et
-  const target = document.getElementById('tf_visc');
-  if (target) {
-    target.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    setTimeout(() => target.focus(), 300);
-  }
-  // Callback'i iptal et — kullanıcı değer girip tekrar Hesapla'ya basacak
-  _physPromptCb = null;
-}
-
-function _physPromptSkip() {
-  document.getElementById('physPromptOverlay').classList.remove('open');
-  if (_physPromptCb) _physPromptCb();
-}
+// (physp prompt kaldırıldı — yeni _renderPhysWarnPanel paneli kullanılıyor)
 
 async function generatePDF() {
   if (!_lastCalcState) { alert('Önce Hesapla\'ya basın.'); return; }

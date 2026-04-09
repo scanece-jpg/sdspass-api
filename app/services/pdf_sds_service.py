@@ -1245,49 +1245,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
 
     # Sıvı ürün için viskozite ve çözünürlük eksikliği uyarısı
     # KKDİK Ek-2 Bölüm 9: Sıvı karışımlarda bu parametreler "Bilgi yok" bırakılamaz
-    # Not: Teorik tahmin değerleri varsa (motor hesabı) uyarı teorik değer olduğunu belirtir.
-    _form = phys.get('form', '') or phys.get('appearance', '') or ''
-    _is_liquid = any(w in _form.lower() for w in ('sıvı','liquid','likit','çözelti','solution')) \
-                 or (phys.get('flash_point') is not None)  # parlama noktası varsa sıvıdır
-    if lang == 'TR' and _is_liquid:
-        _b9_warn = []
-        _visc_val = phys.get('viscosity')
-        _sol_val  = phys.get('solubility')
-        # Değer yoksa uyarı ver; değer varsa teorik mi ölçülen mi olduğu theoProps notu ile belli
-        if not _visc_val:
-            _b9_warn.append('Viskozite (ölçülen değer girilmemiş)')
-        elif isinstance(_visc_val, (int, float)):
-            # Değer var — teorik tahmin olabilir, not ekle
-            story.append(Paragraph(
-                f"<font color='#276749'>ℹ Viskozite: {_visc_val} mm²/s @40°C"
-                f" — teorik tahmin veya kullanıcı girişi. KKDİK Ek-2 §9 için ölçülen değer önerilir.</font>",
-                styles['small']
-            ))
-        if not _sol_val:
-            _b9_warn.append('Çözünürlük (ölçülen değer girilmemiş)')
-        if _b9_warn:
-            story.append(Paragraph(
-                f"<font color='#b35900'>⚠ Sıvı ürün — eksik zorunlu veriler: "
-                f"{', '.join(_b9_warn)}. KKDİK Ek-2 Bölüm 9 uyarınca ölçülen değer olmalıdır.</font>",
-                styles['small']
-            ))
-
-    # phys_sources: her alan için 'theo' | 'user' | '' (frontend'den gelir)
-    _phys_src = sds_data.get('phys_sources', {})
-
-    _SRC_NOTE_TR = {'theo': ' (teorik tahmin)', 'user': ' (ölçülen değer)'}
-    _SRC_NOTE_EN = {'theo': ' (calculated estimate)', 'user': ' (measured value)'}
-
-    def _src_note(key):
-        src = _phys_src.get(key, '')
-        notes = _SRC_NOTE_TR if lang == 'TR' else _SRC_NOTE_EN
-        return notes.get(src, '')
-
     def _pv(key, unit=''):
         v = phys.get(key)
         if v is None or v == '': return na
-        val_str = f"{v} {unit}".strip() if unit else str(v)
-        return val_str + _src_note(key)
+        return f"{v} {unit}".strip() if unit else str(v)
 
     _mp_lbl  = 'Donma/Erime Noktası' if lang=='TR' else 'Melting/Freezing Point'
     _rd_lbl  = 'Bağıl Yoğunluk (su=1)' if lang=='TR' else 'Relative Density (water=1)'

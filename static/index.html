@@ -108,6 +108,22 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
 .phys-chip-val{font-family:var(--mono);font-size:12px;font-weight:700;color:#e2e8f0}
 .phys-chip-sub{font-size:8px;color:var(--text3);margin-top:2px}
 
+/* PDF zorunlu alan uyarı modalı */
+.pdf-block-overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:1200;display:none;align-items:center;justify-content:center}
+.pdf-block-overlay.open{display:flex}
+.pdf-block-box{background:var(--bg2);border:1px solid rgba(255,107,107,.4);border-radius:12px;width:min(420px,94vw);box-shadow:0 24px 64px rgba(0,0,0,.7);overflow:hidden}
+.pdf-block-head{padding:12px 16px;background:rgba(255,107,107,.1);border-bottom:1px solid rgba(255,107,107,.25);font-size:13px;font-weight:700;color:var(--danger);display:flex;align-items:center;gap:8px}
+.pdf-block-body{padding:14px 16px}
+.pdf-block-desc{font-size:11px;color:var(--text2);margin:0 0 12px;line-height:1.6}
+.pdf-block-item{display:flex;align-items:flex-start;gap:8px;padding:7px 10px;background:var(--bg3);border-radius:6px;margin-bottom:6px;border-left:3px solid var(--danger)}
+.pdf-block-item-label{font-size:11px;color:var(--text);font-weight:600}
+.pdf-block-item-reason{font-size:10px;color:var(--text3);margin-top:1px}
+.pdf-block-footer{padding:10px 16px 14px;display:flex;gap:8px}
+.pdf-block-btn-fix{flex:1;padding:9px;border-radius:6px;border:none;cursor:pointer;font-size:11px;font-weight:600;background:var(--accent);color:#fff}
+.pdf-block-btn-fix:hover{background:var(--accent2)}
+.pdf-block-btn-skip{padding:9px 14px;border-radius:6px;border:1px dashed var(--border2);background:none;color:var(--text3);cursor:pointer;font-size:10px}
+.pdf-block-btn-skip:hover{color:var(--text)}
+
 /* Kademeli fiziksel alan yapısı */
 .phys-section-hdr{font-size:9px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;padding:5px 8px;background:rgba(124,106,247,.08);border:1px solid rgba(124,106,247,.2);border-radius:5px;margin-bottom:8px}
 .phys-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -1989,6 +2005,24 @@ window.addEventListener('DOMContentLoaded', () => {
 <!-- ══ FİZİKSEL ÖZELLİKLER MODAL ══════════════════════════════════════════ -->
 <!-- Fiziksel Veri Giriş Seçici Prompt -->
 
+<!-- ══ PDF ZORUNLU ALAN ENGEL MODALI ════════════════════════════════════════ -->
+<div class="pdf-block-overlay" id="pdfBlockOverlay">
+  <div class="pdf-block-box">
+    <div class="pdf-block-head">🚫 PDF Oluşturulamıyor</div>
+    <div class="pdf-block-body">
+      <p class="pdf-block-desc">
+        Aşağıdaki alanlar <b>zorunlu</b> olup boş bırakılamaz.<br>
+        <span style="font-size:10px;color:var(--text3)">KKDİK Ek-2 Bölüm 9 — bu veriler "bilgi yok" olarak yazılamaz.</span>
+      </p>
+      <div id="pdfBlockItems"></div>
+    </div>
+    <div class="pdf-block-footer">
+      <button class="pdf-block-btn-fix" onclick="closePdfBlock()">✏️ Geri Dön ve Düzelt</button>
+      <button class="pdf-block-btn-skip" onclick="closePdfBlock(true)">Yine de oluştur</button>
+    </div>
+  </div>
+</div>
+
 <div class="phys-modal-overlay" id="physModalOverlay" onclick="if(event.target===this)closePhysModal()">
   <div class="phys-modal">
     <div class="phys-modal-head">
@@ -2084,8 +2118,65 @@ function closePhysModal() {
 
 // (physp prompt kaldırıldı — yeni _renderPhysWarnPanel paneli kullanılıyor)
 
+// ── PDF öncesi zorunlu alan kontrolü ─────────────────────────────────────────
+let _pdfBlockCallback = null;
+
+function _checkPDFMandatory() {
+  const form = document.getElementById('pform')?.value || 'liquid';
+  const isLiquid = ['liquid','paste','aerosol'].includes(form);
+
+  const missing = [];
+
+  // 1. Fiziksel Hal / Renk — her formda zorunlu
+  if (!document.getElementById('tf_appearance')?.value?.trim()) {
+    missing.push({ label: 'Görünüm / Renk', reason: 'SDS Bölüm 9 — "bilgi yok" kabul edilmez (KKDİK Ek-2)' });
+  }
+
+  // 2. Koku — her formda zorunlu
+  if (!document.getElementById('tf_odor')?.value?.trim()) {
+    missing.push({ label: 'Koku', reason: 'SDS Bölüm 9 — "bilgi yok" kabul edilmez (KKDİK Ek-2)' });
+  }
+
+  // 3. Parlama Noktası — sadece sıvı/pasta/aerosol, N/A işaretlenmemişse
+  if (isLiquid) {
+    const fpEl = document.getElementById('tf_fp');
+    const fpNA = fpEl?.dataset?.na === 'true';
+    if (!fpNA && !fpEl?.value?.trim()) {
+      missing.push({ label: 'Parlama Noktası', reason: 'Alevlenirlik sınıfı (H224/H225/H226) belirlenemez — ölçülen değer gerekli' });
+    }
+  }
+
+  return missing;
+}
+
+function closePdfBlock(force) {
+  document.getElementById('pdfBlockOverlay').classList.remove('open');
+  if (force && _pdfBlockCallback) _pdfBlockCallback();
+  _pdfBlockCallback = null;
+}
+
 async function generatePDF() {
   if (!_lastCalcState) { alert('Önce Hesapla\'ya basın.'); return; }
+
+  // Zorunlu alan kontrolü
+  const missing = _checkPDFMandatory();
+  if (missing.length) {
+    document.getElementById('pdfBlockItems').innerHTML = missing.map(m => `
+      <div class="pdf-block-item">
+        <div>
+          <div class="pdf-block-item-label">${m.label}</div>
+          <div class="pdf-block-item-reason">${m.reason}</div>
+        </div>
+      </div>`).join('');
+    _pdfBlockCallback = _doPdfGenerate;
+    document.getElementById('pdfBlockOverlay').classList.add('open');
+    return;
+  }
+
+  await _doPdfGenerate();
+}
+
+async function _doPdfGenerate() {
 
   const btn = document.querySelector('[onclick="generatePDF()"]');
   if (btn) { btn.textContent = '⏳ Oluşturuluyor...'; btn.disabled = true; }

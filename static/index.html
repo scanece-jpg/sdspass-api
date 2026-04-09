@@ -337,14 +337,17 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
     <!-- ADIM 1: Her zaman görünür -->
     <div class="row2">
       <div>
-        <label>Görünüm / Renk</label>
-        <input type="text" id="tf_appearance" placeholder="Ör: Şeffaf, renksiz sıvı">
+        <label>Görünüm / Renk <span style="color:var(--danger);font-size:10px">*</span></label>
+        <input type="text" id="tf_appearance" placeholder="Ör: Şeffaf, renksiz sıvı"
+               oninput="this.style.borderColor=this.value.trim()?'':'var(--danger)'">
       </div>
       <div>
-        <label>Koku</label>
-        <input type="text" id="tf_odor" placeholder="Ör: Keskin, karakteristik">
+        <label>Koku <span style="color:var(--danger);font-size:10px">*</span></label>
+        <input type="text" id="tf_odor" placeholder="Ör: Keskin, karakteristik"
+               oninput="this.style.borderColor=this.value.trim()?'':'var(--danger)'">
       </div>
     </div>
+    <div style="font-size:9px;color:var(--text3);margin-top:4px"><span style="color:var(--danger)">*</span> PDF için zorunlu alan</div>
 
     <!-- ADIM 2: Forma göre zorunlu alanlar -->
     <div style="margin-top:12px">

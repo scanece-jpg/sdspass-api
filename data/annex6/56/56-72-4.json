@@ -1,0 +1,45 @@
+{
+  "cas": "56-72-4",
+  "name": "coumaphos (ISO); O-3-chloro-4-methylcoumarin-7-yl O,O-diethyl phosphorothioate",
+  "name_tr": "",
+  "ec_no": "200-285-3",
+  "index_no": "015-038-00-3",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 2 *",
+        "h_code": "H300"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H312",
+      "H300",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

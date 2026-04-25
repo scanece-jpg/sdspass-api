@@ -1,0 +1,29 @@
+{
+  "cas": "16872-11-0",
+  "name": "fluoroboric acid ... %",
+  "name_tr": "",
+  "ec_no": "240-898-3",
+  "index_no": "009-010-00-X",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

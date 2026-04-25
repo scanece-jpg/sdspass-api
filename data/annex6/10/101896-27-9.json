@@ -1,0 +1,34 @@
+{
+  "cas": "101896-27-9",
+  "name": "Distillates (coal tar), naphthalene oils, methylnaphthalene fraction; Methylnaphthalene Oil; [A distillate from the fractional distillation of high temperature coal tar. Composed primarily of substituted two ring aromatic hydrocarbons and aromatic nitrogen bases boiling in the range of approximately 225 Â°C to 255 Â°C (437 Â°F to 491 Â°F).]",
+  "name_tr": "",
+  "ec_no": "309-985-4",
+  "index_no": "648-092-00-7",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

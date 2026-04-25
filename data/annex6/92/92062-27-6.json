@@ -1,0 +1,34 @@
+{
+  "cas": "92062-27-6",
+  "name": "Tar bases, coal, aniline fraction; Distillate Bases; [The distillation fraction boiling in the range of approximately 180 Â°C to 200 Â°C (356 Â°F to 392 Â°F) from the crude bases obtained by dephenolating and debasing the carbolated oil from the distillation of coal tar. It contains chiefly aniline, collidines, lutidines and toluidines.]",
+  "name_tr": "",
+  "ec_no": "295-541-4",
+  "index_no": "648-034-00-0",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

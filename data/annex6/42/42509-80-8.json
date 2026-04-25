@@ -1,0 +1,61 @@
+{
+  "cas": "42509-80-8",
+  "name": "isazofos (ISO); O-(5-chloro-1-isopropyl-1,2,4-triazol-3-yl) O,O-diethyl phosphorothioate",
+  "name_tr": "",
+  "ec_no": "255-863-8",
+  "index_no": "015-153-00-9",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 2 *",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 3 *",
+        "h_code": "H311"
+      },
+      {
+        "class": "Acute Tox. 3 *",
+        "h_code": "H301"
+      },
+      {
+        "class": "STOT RE 2 *",
+        "h_code": "H373 **"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H330",
+      "H311",
+      "H301",
+      "H373 **",
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

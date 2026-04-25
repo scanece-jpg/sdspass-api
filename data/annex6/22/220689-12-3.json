@@ -1,0 +1,34 @@
+{
+  "cas": "220689-12-3",
+  "name": "tetrabutyl-phosphonium nonafluoro-butane-1-sulfonate",
+  "name_tr": "",
+  "ec_no": "444-440-5",
+  "index_no": "015-194-00-2",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

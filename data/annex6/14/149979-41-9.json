@@ -1,0 +1,34 @@
+{
+  "cas": "149979-41-9",
+  "name": "tepraloxydim (ISO); (RS)-(EZ)-2-{]1-[}(2E)-3-chloroallyloxyimino{]propyl[}-3-hydroxy-5-perhydropyran-4-ylcyclohex-2-en-1-one",
+  "name_tr": "",
+  "ec_no": "-",
+  "index_no": "606-116-00-3",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Repr. 2",
+        "h_code": "H361fd"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H351",
+      "H361fd"
+    ],
+    "suppl_h": []
+  }
+}

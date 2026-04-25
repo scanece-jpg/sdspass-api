@@ -1,0 +1,29 @@
+{
+  "cas": "147086-81-5",
+  "name": "trans-(4S,6S)-5,6-dihydro-6-methyl-4H-thieno[2,3-b]thiopyran-4-ol, 7,7-dioxide",
+  "name_tr": "",
+  "ec_no": "417-290-3",
+  "index_no": "613-220-00-2",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

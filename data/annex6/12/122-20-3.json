@@ -1,0 +1,29 @@
+{
+  "cas": "122-20-3",
+  "name": "1,1â€™,1â€™-nitrilotripropan-2-ol; triisopropanolamine",
+  "name_tr": "",
+  "ec_no": "204-528-4",
+  "index_no": "603-097-00-3",
+  "atp": "ATP05",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319"
+    ],
+    "suppl_h": []
+  }
+}

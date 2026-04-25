@@ -1,0 +1,39 @@
+{
+  "cas": "102110-55-4",
+  "name": "Residues (petroleum), steam-cracked light, arom.; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons obtained by the distillation of the products of steam cracking or similar processes after taking off the very light products resulting in a residue starting with hydrocarbons having carbon numbers greater than C5. It consists predominantly of aromatic hydrocarbons having carbon numbers greater than C5 and boiling above approximately 40 Â°C (104 Â°F).]",
+  "name_tr": "",
+  "ec_no": "310-057-6",
+  "index_no": "649-400-00-2",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

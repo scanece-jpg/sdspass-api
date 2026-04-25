@@ -1,0 +1,35 @@
+{
+  "cas": "99464-83-2",
+  "name": "chloro-1-ethylcyclohexyl carbonate",
+  "name_tr": "",
+  "ec_no": "444-950-8",
+  "index_no": "607-667-00-2",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H341",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

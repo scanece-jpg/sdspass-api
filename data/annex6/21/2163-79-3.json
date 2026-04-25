@@ -1,0 +1,29 @@
+{
+  "cas": "2163-79-3",
+  "name": "noruron (ISO); 1,1-dimethyl-3-(perhydro-4,7-methanoinden-5-yl)urea",
+  "name_tr": "",
+  "ec_no": "-",
+  "index_no": "006-058-00-3",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "cas": "54942-74-4",
+  "name": "2-(4,4-dimethyl-2,5-dioxooxazolidin-1-yl)-2-chloro-5-(2-(2,4-di-tert-pentylphenoxy)butyramido)-4,4-dimethyl-3-oxovaleranilide",
+  "name_tr": "",
+  "ec_no": "402-260-4",
+  "index_no": "616-024-00-5",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

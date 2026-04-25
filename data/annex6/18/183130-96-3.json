@@ -1,0 +1,34 @@
+{
+  "cas": "183130-96-3",
+  "name": "tetra-ammonium 2-[6-[7-(2-carboxylato-phenylazo)-8-hydroxy-3,6-disulfonato-1-naphthylamino]-4-hydroxy-1,3,5-triazin-2-ylamino]benzoate",
+  "name_tr": "",
+  "ec_no": "418-520-5",
+  "index_no": "611-130-00-8",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

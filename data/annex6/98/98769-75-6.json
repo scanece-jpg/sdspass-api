@@ -1,0 +1,41 @@
+{
+  "cas": "98769-75-6",
+  "name": "reaction mass of: (2R, 3R)-3-(2-ethoxyphenoxy)-2-hydroxy-3-phenylpropylammonium methanesulfonate; (2S, 3S)-3-(2-ethoxyphenoxy)-2-hydroxy-3-phenylpropylammonium methanesulfonate",
+  "name_tr": "",
+  "ec_no": "425-530-3",
+  "index_no": "607-562-00-1",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS07",
+      "GHS05",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H318",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

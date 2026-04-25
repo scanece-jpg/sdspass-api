@@ -1,0 +1,29 @@
+{
+  "cas": "6777-05-5",
+  "name": "1-benzylimidazolidine-2,4-dione",
+  "name_tr": "",
+  "ec_no": "421-340-1",
+  "index_no": "606-125-00-2",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "cas": "119-36-8",
+  "name": "methyl salicylate",
+  "name_tr": "",
+  "ec_no": "204-317-7",
+  "index_no": "607-749-00-8",
+  "atp": "ATP17",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 2",
+        "h_code": "H361d"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Sens. 1B",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H361d",
+      "H302",
+      "H317",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

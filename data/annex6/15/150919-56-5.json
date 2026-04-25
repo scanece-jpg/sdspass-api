@@ -1,0 +1,27 @@
+{
+  "cas": "150919-56-5",
+  "name": "N-(3-(2-(4,4-dimethyl-2,5-dioxo-imidazolin-1-yl)-4,4-dimethyl-3-oxo-pentanoylamino)-4-methoxy-phenyl)-octadecanamide",
+  "name_tr": "",
+  "ec_no": "421-780-2",
+  "index_no": "616-130-00-1",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

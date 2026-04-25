@@ -1,0 +1,45 @@
+{
+  "cas": "141-43-5",
+  "name": "2-aminoethanol; ethanolamine",
+  "name_tr": "",
+  "ec_no": "205-483-3",
+  "index_no": "603-030-00-8",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS07",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H332",
+      "H312",
+      "H302",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

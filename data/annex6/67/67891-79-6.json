@@ -1,0 +1,39 @@
+{
+  "cas": "67891-79-6",
+  "name": "Distillates (petroleum), heavy arom.; Low boiling point thermally cracked naphtha; [The complex combination of hydrocarbons from the distillation of the products from the thermal cracking of ethane and propane. This higher boiling fraction consists predominantly of C5-7 aromatic hydrocarbons with some unsaturated aliphatic hydrocarbons having carbon number predominantly of C5. This stream may contain benzene.]",
+  "name_tr": "",
+  "ec_no": "267-563-4",
+  "index_no": "649-318-00-7",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

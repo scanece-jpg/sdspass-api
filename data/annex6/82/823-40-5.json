@@ -1,0 +1,51 @@
+{
+  "cas": "823-40-5",
+  "name": "2-methyl-m-phenylenediamine; 2,6-toluenediamine",
+  "name_tr": "",
+  "ec_no": "212-513-9",
+  "index_no": "612-111-00-7",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H341",
+      "H312",
+      "H302",
+      "H317",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

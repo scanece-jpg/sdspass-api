@@ -1,0 +1,29 @@
+{
+  "cas": "14657-64-8",
+  "name": "3-(hydroxyphenylphosphinyl)propanoic acid",
+  "name_tr": "",
+  "ec_no": "411-200-6",
+  "index_no": "015-167-00-5",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H318"
+    ],
+    "suppl_h": []
+  }
+}

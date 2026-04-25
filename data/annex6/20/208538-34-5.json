@@ -1,0 +1,40 @@
+{
+  "cas": "208538-34-5",
+  "name": "4-(cyanomethyl)-4-methylmorpholin-4-ium hydrogen sulfate",
+  "name_tr": "",
+  "ec_no": "431-200-1",
+  "index_no": "608-057-00-9",
+  "atp": "ATP01corr",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS07",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H302",
+      "H318",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

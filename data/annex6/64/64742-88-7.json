@@ -1,0 +1,34 @@
+{
+  "cas": "64742-88-7",
+  "name": "solvent naphtha (petroleum), medium aliph.; Straight run kerosine; [A complex combination of hydrocarbons obtained from the distillation of crude oil or natural gasoline. It consists predominantly of saturated hydrocarbons having carbon numbers predominantly in the range of C9 through C12 and boiling in the range of approximately 140 Â°C to 220 Â°C (284 Â°F to 428 Â°F).]",
+  "name_tr": "",
+  "ec_no": "265-191-7",
+  "index_no": "649-405-00-X",
+  "atp": "ATP05",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372 (central nervous system)"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H304",
+      "H372 (central nervous system)"
+    ],
+    "suppl_h": []
+  }
+}

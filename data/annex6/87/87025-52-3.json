@@ -1,0 +1,29 @@
+{
+  "cas": "87025-52-3",
+  "name": "reaction mass of pentyl methylphosphinate and 2-methylbutyl methylphosphinate",
+  "name_tr": "",
+  "ec_no": "402-090-0",
+  "index_no": "015-144-00-X",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

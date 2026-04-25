@@ -708,12 +708,14 @@ async def _fetch_pubchem_ghs_fallback(cas: str, client: httpx.AsyncClient) -> di
 
 async def lookup_echa_api(cas: str) -> dict | None:
     """
-    Sıra 5 — ECHA C&L Inventory doğrudan API (H-kodları için)
-    Sıra 6 — PubChem GHS fallback (ECHA API başarısız olursa)
+    Canlı API hiyerarşisi (lokal önbellekte bulunamazsa çağrılır):
+      1. ECHA C&L Inventory API (api.echa.europa.eu) → data/echa_cl/'a kaydet
+      2. PubChem GHS fallback → data/pubchem_cl/'a kaydet
 
-    PubChem yalnızca H-kodu yedek olarak kullanılır.
-    Fiziksel/kimyasal özellikler için fetch_pubchem_properties() ayrı çağrılır.
+    Sonuç ilgili önbelleğe yazılır; bir sonraki sorgu lokal dosyadan gelir.
     """
+    from app.services.substance_lookup import save_echa_cl_substance, save_pubchem_substance
+
     cas = cas.strip()
     cache = _load_cache()
     if cas in cache:
@@ -722,18 +724,24 @@ async def lookup_echa_api(cas: str) -> dict | None:
     try:
         async with httpx.AsyncClient(timeout=12.0, follow_redirects=True) as client:
 
-            # Önce ECHA C&L doğrudan API
+            # Sıra 1: ECHA C&L API → data/echa_cl/
             result = await _fetch_echa_cl_direct(cas, client)
-
-            # ECHA başarısız → PubChem GHS fallback
-            if not result:
-                print(f'[ECHA C&L] {cas}: doğrudan API boş, PubChem fallback deneniyor')
-                result = await _fetch_pubchem_ghs_fallback(cas, client)
-
             if result:
+                result['_cache_source'] = 'echa_cl'
+                save_echa_cl_substance(cas, result)
                 cache[cas] = result
                 _save_cache(cache)
-            return result
+                return result
+
+            # Sıra 2: PubChem GHS fallback → data/pubchem_cl/
+            print(f'[ECHA C&L] {cas}: doğrudan API boş, PubChem fallback deneniyor')
+            result = await _fetch_pubchem_ghs_fallback(cas, client)
+            if result:
+                result['_cache_source'] = 'pubchem'
+                save_pubchem_substance(cas, result)
+                cache[cas] = result
+                _save_cache(cache)
+                return result
 
     except Exception as e:
         print(f'[lookup_echa_api] {cas}: {e}')

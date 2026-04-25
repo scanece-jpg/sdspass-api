@@ -1,0 +1,42 @@
+{
+  "cas": "156052-68-5",
+  "name": "zoxamide (ISO); (RS)-3,5-dichloro-N-(3-chloro-1-ethyl-1-methyl-2-oxopropyl)-p-toluamide",
+  "name_tr": "",
+  "ec_no": "-",
+  "index_no": "616-141-00-1",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 10
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

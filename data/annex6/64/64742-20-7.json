@@ -1,0 +1,29 @@
+{
+  "cas": "64742-20-7",
+  "name": "Distillates (petroleum), acid-treated heavy paraffinic; Unrefined or mildly refined baseoil; [A complex combination of hydrocarbons obtained as a raffinate from a sulfuric acid process. It consists predominantly of saturated hydrocarbons having carbon numbers predominantly in the range of C20 through C50 and produces a finished oil having a viscosity of a least 100 SUS at 100 Â°F (19cSt at 40 Â°C).]",
+  "name_tr": "",
+  "ec_no": "265-119-4",
+  "index_no": "649-056-00-3",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1A",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

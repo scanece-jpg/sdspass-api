@@ -1,0 +1,27 @@
+{
+  "cas": "120578-03-2",
+  "name": "trans-3-[2-(7-chloro-2-quinolinyl)vinyl]benzaldehyde; 3-[(E)-2-(7-chloro-2-quinolinyl)vinyl]benzaldehyde",
+  "name_tr": "",
+  "ec_no": "421-800-1",
+  "index_no": "605-037-00-1",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

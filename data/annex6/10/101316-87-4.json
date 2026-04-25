@@ -1,0 +1,34 @@
+{
+  "cas": "101316-87-4",
+  "name": "Tar oils, coal, low-temp.; Tar Oil, high boiling; [A distillate from low-temperature coal tar. Composed primarily of hydrocarbons, phenolic compounds and aromatic nitrogen bases boiling in the range of approximately 160 Â°C to 340 Â°C (320 Â°F to 644 Â°F).]",
+  "name_tr": "",
+  "ec_no": "309-889-2",
+  "index_no": "648-109-00-8",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

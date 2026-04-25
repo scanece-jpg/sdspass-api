@@ -1,0 +1,45 @@
+{
+  "cas": "68919-08-4",
+  "name": "Gases (petroleum), preflash tower off, crude distn.; Refinery gas; [A complex combination produced from the first tower used in the distillation of crude oil. It consists of nitrogen and saturated aliphatic hydrocarbons having carbon numbers predominantly in the range of C1 through C5.]",
+  "name_tr": "",
+  "ec_no": "272-881-1",
+  "index_no": "649-162-00-X",
+  "atp": "ATP01corr",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": ""
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

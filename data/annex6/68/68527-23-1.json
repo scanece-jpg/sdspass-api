@@ -1,0 +1,39 @@
+{
+  "cas": "68527-23-1",
+  "name": "Naphtha (petroleum), light steam-cracked arom.; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons produced by distillation of products from a steam-cracking process. It consists predominantly of aromatic hydrocarbons having carbon numbers predominantly in the range of C7 through C9 and boiling in the range of approximately 110 Â°C to 165 Â°C (230 Â°F to 329 Â°F).]",
+  "name_tr": "",
+  "ec_no": "271-264-4",
+  "index_no": "649-370-00-0",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

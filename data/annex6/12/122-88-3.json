@@ -1,0 +1,29 @@
+{
+  "cas": "122-88-3",
+  "name": "4-CPA (ISO); 4-chlorophenoxyacetic acid",
+  "name_tr": "",
+  "ec_no": "204-581-3",
+  "index_no": "607-073-00-3",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

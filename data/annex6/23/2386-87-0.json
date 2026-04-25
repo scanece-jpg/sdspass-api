@@ -1,0 +1,40 @@
+{
+  "cas": "2386-87-0",
+  "name": "7-oxabicyclo[4.1.0]hept-3-ylmethyl 7-oxabicyclo[4.1.0]heptane-3-carboxylate",
+  "name_tr": "",
+  "ec_no": "",
+  "index_no": "",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373 (nasal cavity)"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H341",
+      "H373 (nasal cavity)",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

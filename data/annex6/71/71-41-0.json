@@ -1,0 +1,45 @@
+{
+  "cas": "71-41-0",
+  "name": "1-pentanol [1]\n3-pentanol [2]",
+  "name_tr": "",
+  "ec_no": "200-752-1",
+  "index_no": "603-200-00-1",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H332"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS02",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H226",
+      "H332",
+      "H335",
+      "H315"
+    ],
+    "suppl_h": []
+  }
+}

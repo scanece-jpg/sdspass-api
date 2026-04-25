@@ -1,0 +1,29 @@
+{
+  "cas": "58-74-2",
+  "name": "papaverine",
+  "name_tr": "",
+  "ec_no": "200-397-2",
+  "index_no": "614-018-00-7",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

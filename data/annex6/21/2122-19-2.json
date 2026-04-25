@@ -1,0 +1,40 @@
+{
+  "cas": "2122-19-2",
+  "name": "propylenethiourea",
+  "name_tr": "",
+  "ec_no": "-",
+  "index_no": "613-070-00-8",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 2",
+        "h_code": "H361d ***"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H361d ***",
+      "H302",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

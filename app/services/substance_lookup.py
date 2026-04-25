@@ -22,11 +22,13 @@ kaynak olarak tüketildi.
 import json, os, threading, re
 from typing import Optional, Dict
 
-_BASE        = os.path.join(os.path.dirname(__file__), '..', '..', 'data')
-_CL_DIR      = os.path.join(_BASE, 'cl')       # SEA Ek-6 per-dosya
-_ANNEX6_DIR  = os.path.join(_BASE, 'annex6')   # CLP Annex VI per-dosya
-_CUSTOM_PATH = os.path.join(_BASE, 'substances_custom.json')
-_OEL_PATH    = os.path.join(_BASE, 'tr_oel_limits.json')
+_BASE          = os.path.join(os.path.dirname(__file__), '..', '..', 'data')
+_CL_DIR        = os.path.join(_BASE, 'cl')           # SEA Ek-6 (TR, statik)
+_ANNEX6_DIR    = os.path.join(_BASE, 'annex6')        # CLP Annex VI (EU, statik + ECHA API)
+_ECHA_CL_DIR   = os.path.join(_BASE, 'echa_cl')       # ECHA C&L API önbelleği
+_PUBCHEM_DIR   = os.path.join(_BASE, 'pubchem_cl')    # PubChem önbelleği
+_CUSTOM_PATH   = os.path.join(_BASE, 'substances_custom.json')
+_OEL_PATH      = os.path.join(_BASE, 'tr_oel_limits.json')
 
 _CUSTOM_DB: Optional[Dict] = None
 _OEL_DB:    Optional[Dict] = None
@@ -219,36 +221,49 @@ def _load_oel() -> Dict:
 def lookup_substance(cas: str) -> Optional[Dict]:
     """
     CAS numarasına göre madde bilgisi döndür.
-    Merge mantığı:
-      - TR Ek-6 + Annex VI varsa: TR Ek-6 temel, Annex VI eksik sınıfları ek
-      - Sadece TR Ek-6: TR Ek-6 döndür
-      - Sadece Annex VI: Annex VI döndür
-      - Custom: custom döndür
+
+    Hiyerarşi:
+      1. data/cl/       — TR SEA Ek-6 (yasal zemin, mutlak)
+      2. data/annex6/   — CLP Annex VI statik arşiv (bilimsel rehber)
+         → Merge: TR Ek-6 + Annex VI varsa, TR Ek-6 temel; Annex VI eksik sınıfları ek
+      3. data/echa_cl/  — ECHA C&L API önbelleği (önceki canlı çekimler)
+      4. data/pubchem_cl/ — PubChem önbelleği (önceki canlı çekimler)
+      [5-7: canlı API çekimleri main.py'de yapılır ve buraya kaydedilir]
     """
     cas = cas.strip()
 
-    tr_entry  = _read_cl_file(_CL_DIR,     cas)
-    ax_entry  = _read_cl_file(_ANNEX6_DIR, cas)
+    # ── Sıra 1+2: TR Ek-6 (+ opsiyonel Annex VI merge) ─────────────────────
+    tr_entry = _read_cl_file(_CL_DIR, cas)
+    ax_entry = _read_cl_file(_ANNEX6_DIR, cas)
 
     if tr_entry:
         result = _cl_to_legacy(tr_entry, 1, f'SEA Ek-6 ({tr_entry.get("atp","?")})')
         if ax_entry:
-            # Annex VI'dan eksik tehlike sınıflarını ekle
-            ax_result    = _cl_to_legacy(ax_entry, 2, '')
-            supplements  = _merge_annex_supplements(result['hazards'], ax_result['hazards'])
+            ax_result   = _cl_to_legacy(ax_entry, 2, '')
+            supplements = _merge_annex_supplements(result['hazards'], ax_result['hazards'])
             if supplements:
                 result['hazards'] = result['hazards'] + supplements
-                ax_atp = ax_entry.get('atp', '?')
-                result['source'] = (
+                result['source']  = (
                     f'SEA Ek-6 ({tr_entry.get("atp","?")}) '
                     f'+ Annex VI ek ({len(supplements)} tehlike sınıfı)'
                 )
         return result
 
+    # ── Sıra 2 (tek başına): Annex VI arşiv ─────────────────────────────────
     if ax_entry:
         return _cl_to_legacy(ax_entry, 2, f'CLP Annex VI ({ax_entry.get("atp","?")})')
 
-    # Custom (tedarikçi/kullanıcı)
+    # ── Sıra 3: ECHA C&L API önbelleği ──────────────────────────────────────
+    echa_entry = _read_cl_file(_ECHA_CL_DIR, cas)
+    if echa_entry:
+        return _cl_to_legacy(echa_entry, 3, f'ECHA C&L ({echa_entry.get("atp","?")})')
+
+    # ── Sıra 4: PubChem önbelleği ────────────────────────────────────────────
+    pub_entry = _read_cl_file(_PUBCHEM_DIR, cas)
+    if pub_entry:
+        return _cl_to_legacy(pub_entry, 4, f'PubChem ({pub_entry.get("atp","?")})')
+
+    # ── Sıra 5: Custom (tedarikçi/kullanıcı) ─────────────────────────────────
     custom = _load_custom()
     c = custom.get(cas)
     if c:
@@ -256,7 +271,7 @@ def lookup_substance(cas: str) -> Optional[Dict]:
         e.setdefault('sea_ek6', False)
         e.setdefault('annex_vi', False)
         e.setdefault('source', 'Tedarikçi/Kullanıcı Girişi')
-        e['source_priority'] = 4
+        e['source_priority'] = 5
         return e
 
     return None
@@ -345,40 +360,40 @@ def _build_search_result(cas: str, entry: dict, priority: int, src: str) -> dict
     }
 
 
-def save_annex6_substance(cas: str, echa_result: dict) -> bool:
+def _save_api_result(directory: str, cas: str, api_result: dict, source_label: str) -> bool:
     """
-    ECHA C&L API sonucunu data/annex6/{xx}/{cas}.json formatında kalıcı olarak kaydet.
-    Bir sonraki lookup'ta API'ye gitmeden Annex VI kaynağından okunur.
+    API sonucunu per-dosya formatında belirtilen dizine kaydet.
+    api_result: {name, ec_no, hazard_classes, h_codes, signal, pictograms, m_factors, ...}
     """
-    prefix   = cas[:2]
-    dir_path = os.path.join(_ANNEX6_DIR, prefix)
+    prefix    = cas[:2]
+    dir_path  = os.path.join(directory, prefix)
     os.makedirs(dir_path, exist_ok=True)
     file_path = os.path.join(dir_path, f'{cas}.json')
 
-    hazard_classes = echa_result.get('hazard_classes', [])
-    h_codes        = echa_result.get('h_codes', [])
+    hazard_classes = api_result.get('hazard_classes', [])
+    h_codes        = api_result.get('h_codes', [])
 
     entry = {
         'cas'      : cas,
-        'name'     : echa_result.get('name', ''),
+        'name'     : api_result.get('name', ''),
         'name_tr'  : '',
-        'ec_no'    : echa_result.get('ec_no', ''),
+        'ec_no'    : api_result.get('ec_no', ''),
         'index_no' : '',
-        'atp'      : echa_result.get('atp', 'ECHA C&L'),
+        'atp'      : source_label,
         'notes'    : [],
         'classification': {
             'hazards': [
                 {'class': cls, 'h_code': code}
                 for cls, code in zip(hazard_classes, h_codes)
             ],
-            'm_factors' : echa_result.get('m_factors', {}),
+            'm_factors' : api_result.get('m_factors', {}),
             'scl_limits': [],
         },
         'labelling': {
-            'signal'   : echa_result.get('signal', ''),
-            'pictograms': echa_result.get('pictograms', []),
-            'h_codes'  : h_codes,
-            'suppl_h'  : [],
+            'signal'    : api_result.get('signal', ''),
+            'pictograms': api_result.get('pictograms', []),
+            'h_codes'   : h_codes,
+            'suppl_h'   : [],
         },
     }
     try:
@@ -387,6 +402,16 @@ def save_annex6_substance(cas: str, echa_result: dict) -> bool:
         return True
     except Exception:
         return False
+
+
+def save_echa_cl_substance(cas: str, echa_result: dict) -> bool:
+    """ECHA C&L API sonucunu data/echa_cl/'a kaydet (sıra 3 önbelleği)."""
+    return _save_api_result(_ECHA_CL_DIR, cas, echa_result, 'ECHA C&L API')
+
+
+def save_pubchem_substance(cas: str, pubchem_result: dict) -> bool:
+    """PubChem sonucunu data/pubchem_cl/'a kaydet (sıra 4 önbelleği)."""
+    return _save_api_result(_PUBCHEM_DIR, cas, pubchem_result, 'PubChem')
 
 
 def save_custom_substance(cas: str, entry: Dict) -> bool:
@@ -427,9 +452,9 @@ def get_oel(cas: str) -> Optional[Dict]:
 
 
 def get_substance_count() -> int:
-    """data/cl/ + data/annex6/ + custom toplam madde sayısı."""
+    """Tüm kaynaklardaki toplam madde sayısı."""
     count = 0
-    for d in [_CL_DIR, _ANNEX6_DIR]:
+    for d in [_CL_DIR, _ANNEX6_DIR, _ECHA_CL_DIR, _PUBCHEM_DIR]:
         if os.path.isdir(d):
             for sub in os.listdir(d):
                 sub_path = os.path.join(d, sub)

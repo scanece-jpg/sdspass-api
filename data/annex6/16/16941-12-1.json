@@ -1,0 +1,46 @@
+{
+  "cas": "16941-12-1",
+  "name": "hexachloroplatinic acid",
+  "name_tr": "",
+  "ec_no": "241-010-7",
+  "index_no": "078-009-00-4",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 3 *",
+        "h_code": "H301"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Resp. Sens. 1",
+        "h_code": "H334"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS05",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H301",
+      "H314",
+      "H334",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

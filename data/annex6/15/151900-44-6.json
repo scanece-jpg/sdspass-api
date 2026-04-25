@@ -1,0 +1,27 @@
+{
+  "cas": "151900-44-6",
+  "name": "1,6-bis((dibenzylthiocarbamoyl)disulfanyl)hexane",
+  "name_tr": "",
+  "ec_no": "429-280-6",
+  "index_no": "607-471-00-7",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

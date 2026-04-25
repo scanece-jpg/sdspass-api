@@ -1,0 +1,51 @@
+{
+  "cas": "13775-54-7",
+  "name": "nickel(II) silicate [1]\ndinickel orthosilicate [2]\nnickel silicate (3:4) [3]\nsilicic acid, nickel salt [4]\ntrihydrogen hydroxybis[orthosilicato(4-)]trinickelate(3-) [5]",
+  "name_tr": "",
+  "ec_no": "237-411-1",
+  "index_no": "028-036-00-2",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1A",
+        "h_code": "H350i"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372 **"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H350i",
+      "H372 **",
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "cas": "131-18-0",
+  "name": "1,2-benzenedicarboxylic acid, dipentylester, branched and linear [1]\nn-pentyl-isopentylphthalate [2]\ndi-n-pentyl phthalate [3]\ndiisopentylphthalate [4]",
+  "name_tr": "",
+  "ec_no": "205-017-9",
+  "index_no": "607-426-00-1",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360FD"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H360FD",
+      "H400"
+    ],
+    "suppl_h": []
+  }
+}

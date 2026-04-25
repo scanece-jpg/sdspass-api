@@ -1,0 +1,50 @@
+{
+  "cas": "106-63-8",
+  "name": "isobutyl acrylate",
+  "name_tr": "",
+  "ec_no": "203-417-8",
+  "index_no": "607-115-00-0",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H312"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS02",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H226",
+      "H332",
+      "H312",
+      "H315",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

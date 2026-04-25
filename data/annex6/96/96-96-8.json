@@ -1,0 +1,50 @@
+{
+  "cas": "96-96-8",
+  "name": "2-nitro-p-anisidine; 4-methoxy-2-nitroaniline",
+  "name_tr": "",
+  "ec_no": "202-547-2",
+  "index_no": "612-038-00-0",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 2 *",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 1",
+        "h_code": "H310"
+      },
+      {
+        "class": "Acute Tox. 2 *",
+        "h_code": "H300"
+      },
+      {
+        "class": "STOT RE 2 *",
+        "h_code": "H373 **"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H330",
+      "H310",
+      "H300",
+      "H373 **",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

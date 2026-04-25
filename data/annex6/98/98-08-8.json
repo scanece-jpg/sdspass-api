@@ -1,0 +1,35 @@
+{
+  "cas": "98-08-8",
+  "name": "Î±, Î±,Î±-trifluorotoluene; benzotrifluoride",
+  "name_tr": "",
+  "ec_no": "202-635-0",
+  "index_no": "602-056-00-7",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H225",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

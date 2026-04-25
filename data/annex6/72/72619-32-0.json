@@ -1,0 +1,40 @@
+{
+  "cas": "72619-32-0",
+  "name": "methyl (R)-2-(4-(3-chloro-5-trifluoromethyl-2-pyridyloxy)phenoxy)propionate",
+  "name_tr": "",
+  "ec_no": "406-250-0",
+  "index_no": "607-335-00-7",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

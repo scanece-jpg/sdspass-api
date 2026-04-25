@@ -1,0 +1,39 @@
+{
+  "cas": "5786-97-0",
+  "name": "brucine sulphate [1]\nbrucine nitrate [2]\nstrychnidin-10-one, 2,3-dimethoxy-, mono[(R)-1-methylheptyl 1,2-benzenedicarboxylate] [3]\nstrychnidin-10-one, 2,3-dimethoxy-, compd. with (S)mono(1-methylheptyl)-1,2-benzenedicarboxylate (1:1) [4]",
+  "name_tr": "",
+  "ec_no": "227-317-9",
+  "index_no": "614-007-00-7",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 2 *",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 2 *",
+        "h_code": "H300"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06"
+    ],
+    "h_codes": [
+      "H330",
+      "H300",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

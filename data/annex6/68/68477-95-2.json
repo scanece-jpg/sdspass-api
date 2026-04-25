@@ -1,0 +1,45 @@
+{
+  "cas": "68477-95-2",
+  "name": "Gases (petroleum), Girbotol unit feed; Petroleum gas; [A complex combination of hydrocarbons that is used as the feed into the Girbatol unit to remove hydrogen sulfide. It consists of aliphatic hydrocarbons having carbon numbers predominantly in the range of C2 through C4.]",
+  "name_tr": "",
+  "ec_no": "270-778-6",
+  "index_no": "649-074-00-1",
+  "atp": "ATP01corr",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": ""
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

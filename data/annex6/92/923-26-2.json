@@ -1,0 +1,34 @@
+{
+  "cas": "923-26-2",
+  "name": "2-hydroxypropyl methacrylate [1]\n3-hydroxypropyl methacrylate [2]",
+  "name_tr": "",
+  "ec_no": "213-090-3",
+  "index_no": "607-125-00-5",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

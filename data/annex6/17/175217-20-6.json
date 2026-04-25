@@ -1,0 +1,35 @@
+{
+  "cas": "175217-20-6",
+  "name": "silthiofam (ISO); N-allyl-4,5-dimethyl-2-(trimethylsilyl)thiophene-3-carboxamide",
+  "name_tr": "",
+  "ec_no": "-",
+  "index_no": "616-233-00-1",
+  "atp": "ATP15",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H373",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

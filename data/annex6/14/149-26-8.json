@@ -1,0 +1,40 @@
+{
+  "cas": "149-26-8",
+  "name": "disul (ISO); 2-(2,4-dichlorophenoxy)ethyl hydrogensulphate; 2,4-DES",
+  "name_tr": "",
+  "ec_no": "205-259-5",
+  "index_no": "016-025-00-5",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS07",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H302",
+      "H315",
+      "H318"
+    ],
+    "suppl_h": []
+  }
+}

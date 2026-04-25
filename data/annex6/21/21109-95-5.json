@@ -1,0 +1,40 @@
+{
+  "cas": "21109-95-5",
+  "name": "barium sulphide",
+  "name_tr": "",
+  "ec_no": "244-214-4",
+  "index_no": "016-002-00-X",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H332",
+      "H302",
+      "H400"
+    ],
+    "suppl_h": []
+  }
+}

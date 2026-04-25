@@ -1,0 +1,45 @@
+{
+  "cas": "7216-95-7",
+  "name": "pentapotassium 2,2',2\",2\"',2\"\"-(ethane-1,2-diylnitrilo)pentaacetate",
+  "name_tr": "",
+  "ec_no": "404-290-3",
+  "index_no": "607-734-00-6",
+  "atp": "ATP18",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360D"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373 (inhalation)"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H360D",
+      "H332",
+      "H373 (inhalation)",
+      "H319"
+    ],
+    "suppl_h": []
+  }
+}

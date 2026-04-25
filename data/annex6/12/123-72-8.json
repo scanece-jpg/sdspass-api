@@ -1,0 +1,29 @@
+{
+  "cas": "123-72-8",
+  "name": "butyraldehyde",
+  "name_tr": "",
+  "ec_no": "204-646-6",
+  "index_no": "605-006-00-2",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02"
+    ],
+    "h_codes": [
+      "H225"
+    ],
+    "suppl_h": []
+  }
+}

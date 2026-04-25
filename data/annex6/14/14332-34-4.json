@@ -1,0 +1,55 @@
+{
+  "cas": "14332-34-4",
+  "name": "nickel hydrogen phosphate [1]\nnickel bis(dihydrogen phosphate) [2]\ntrinickel bis(orthophosphate) [3]\ndinickel diphosphate [4]\nnickel bis(phosphinate) [5]\nnickel phosphinate [6]\nphosphoric acid, calcium nickel salt [7]\ndiphosphoric acid, nickel(II) salt [8]",
+  "name_tr": "",
+  "ec_no": "238-278-2",
+  "index_no": "028-032-00-0",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1A",
+        "h_code": "H350i"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372 **"
+      },
+      {
+        "class": "Resp. Sens. 1",
+        "h_code": "H334"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H350i",
+      "H372 **",
+      "H334",
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

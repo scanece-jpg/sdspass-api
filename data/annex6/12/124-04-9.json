@@ -1,0 +1,29 @@
+{
+  "cas": "124-04-9",
+  "name": "adipic acid",
+  "name_tr": "",
+  "ec_no": "204-673-3",
+  "index_no": "607-144-00-9",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319"
+    ],
+    "suppl_h": []
+  }
+}

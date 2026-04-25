@@ -1,0 +1,34 @@
+{
+  "cas": "94114-29-1",
+  "name": "Tar acids, brown-coal, C2-alkylphenol fraction; Distillate Phenols; [The distillate from the acidification of alkaline washed lignite tar distillate boiling in the range of approximately 200 Â°C to 230 Â°C (392 Â°F to 446 Â°F). Composed primarily of m- and p-ethylphenol as well as cresols and xylenols.]",
+  "name_tr": "",
+  "ec_no": "302-662-9",
+  "index_no": "648-129-00-7",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "cas": "74-85-1",
+  "name": "ethylene",
+  "name_tr": "",
+  "ec_no": "200-815-3",
+  "index_no": "601-010-00-3",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": "H336"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": ""
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H220",
+      "H336"
+    ],
+    "suppl_h": []
+  }
+}

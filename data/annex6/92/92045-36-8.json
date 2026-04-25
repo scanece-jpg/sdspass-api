@@ -1,0 +1,29 @@
+{
+  "cas": "92045-36-8",
+  "name": "Kerosine (petroleum), solvent-refined sweetened; Kerosine â€” unspecified; [A complex combination of hydrocarbons obtained from a petroleum stock by solvent refining and sweetening and boiling in the range of approximately 150 Â°C to 260 Â°C (302 Â°F to 500 Â°F).]",
+  "name_tr": "",
+  "ec_no": "295-416-4",
+  "index_no": "649-428-00-5",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

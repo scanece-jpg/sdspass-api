@@ -1,0 +1,51 @@
+{
+  "cas": "140-41-0",
+  "name": "3-(4-chlorophenyl)-1,1-dimethyluronium trichloroacetate; monuron-TCA",
+  "name_tr": "",
+  "ec_no": "-",
+  "index_no": "006-043-00-1",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H351",
+      "H315",
+      "H319",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

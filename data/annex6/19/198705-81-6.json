@@ -1,0 +1,27 @@
+{
+  "cas": "198705-81-6",
+  "name": "propyl((4-(5-oxo-3-propylisoxazolidin-4-ylidenmethin)phenyl)propoxycarbonylmethyleneamino)acetate",
+  "name_tr": "",
+  "ec_no": "431-000-2",
+  "index_no": "607-539-00-6",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

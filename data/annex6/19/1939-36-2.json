@@ -1,0 +1,35 @@
+{
+  "cas": "1939-36-2",
+  "name": "trimethylenediaminetetraacetic acid",
+  "name_tr": "",
+  "ec_no": "400-400-9",
+  "index_no": "607-189-00-4",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS07",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H302",
+      "H318"
+    ],
+    "suppl_h": []
+  }
+}

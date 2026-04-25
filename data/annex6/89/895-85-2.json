@@ -1,0 +1,41 @@
+{
+  "cas": "895-85-2",
+  "name": "bis(4-methylbenzoyl)peroxide",
+  "name_tr": "",
+  "ec_no": "407-950-9",
+  "index_no": "617-015-00-9",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Org. Perox. B ****",
+        "h_code": "H241"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS01",
+      "GHS02",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H241",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "cas": "7276-58-6",
+  "name": "tris(1-dodecyl-3-methyl-2-phenylbenzimidazolium)hexacyanoferrate",
+  "name_tr": "",
+  "ec_no": "-",
+  "index_no": "615-014-00-8",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

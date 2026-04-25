@@ -1,0 +1,36 @@
+{
+  "cas": "113614-08-7",
+  "name": "beflubutamid (ISO); (RS)-N-benzyl-2-(Î±, Î±, Î±, 4-tetrafluoro-m-tolyoxy)butyramide",
+  "name_tr": "",
+  "ec_no": "-",
+  "index_no": "616-165-00-2",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 100
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS09"
+    ],
+    "h_codes": [
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

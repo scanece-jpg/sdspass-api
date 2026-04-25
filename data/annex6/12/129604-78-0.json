@@ -1,0 +1,29 @@
+{
+  "cas": "129604-78-0",
+  "name": "N-(5-chloro-3-((4-(diethylamino)-2-methylphenyl)imino-4-methyl-6-oxo-1,4-cyclohexadien-1-yl)benzamide",
+  "name_tr": "",
+  "ec_no": "413-200-1",
+  "index_no": "616-082-00-1",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

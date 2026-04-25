@@ -1,0 +1,45 @@
+{
+  "cas": "68308-00-9",
+  "name": "Tail gas (petroleum), catalytic reformed naphtha fractionation stabilizer, hydrogen sulfide-free; Petroleum gas; [A complex combination of hydrocarbons obtained from fractionation stabilization of catalytic reformed naphtha and from which hydrogen sulfide has been removed by amine treatment. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C1 through C4.]",
+  "name_tr": "",
+  "ec_no": "269-619-3",
+  "index_no": "649-180-00-8",
+  "atp": "ATP01corr",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": ""
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

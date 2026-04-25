@@ -1,0 +1,45 @@
+{
+  "cas": "68476-26-6",
+  "name": "Fuel gases; Petroleum gas; [A combination of light gases. It consists predominantly of hydrogen and/or low molecular weight hydrocarbons.]",
+  "name_tr": "",
+  "ec_no": "270-667-2",
+  "index_no": "649-197-00-0",
+  "atp": "ATP01corr",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": ""
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

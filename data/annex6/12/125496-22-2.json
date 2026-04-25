@@ -1,0 +1,39 @@
+{
+  "cas": "125496-22-2",
+  "name": "18-methylnonadecyl 2,2-dimethylpropanoate",
+  "name_tr": "",
+  "ec_no": "424-370-1",
+  "index_no": "607-547-00-X",
+  "atp": "ATP01corr",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H315",
+      "H317",
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

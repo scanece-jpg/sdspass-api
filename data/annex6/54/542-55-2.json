@@ -1,0 +1,40 @@
+{
+  "cas": "542-55-2",
+  "name": "butyl formate [1]\ntert-butyl formate [2]\nisobutyl formate [3]",
+  "name_tr": "",
+  "ec_no": "208-818-1",
+  "index_no": "607-017-00-8",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H225",
+      "H335",
+      "H319"
+    ],
+    "suppl_h": []
+  }
+}

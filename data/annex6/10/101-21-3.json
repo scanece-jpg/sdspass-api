@@ -1,0 +1,40 @@
+{
+  "cas": "101-21-3",
+  "name": "chlorpropham (ISO); isopropyl 3-chlorocarbanilate",
+  "name_tr": "",
+  "ec_no": "202-925-7",
+  "index_no": "006-096-00-0",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "STOT RE 2 *",
+        "h_code": "H373 **"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H351",
+      "H373 **",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

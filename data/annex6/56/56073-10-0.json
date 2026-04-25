@@ -1,0 +1,64 @@
+{
+  "cas": "56073-10-0",
+  "name": "brodifacoum (ISO); 4-hydroxy-3-(3-(4â€²-bromo-4-biphenylyl)-1,2,3,4-tetrahydro-1-naphthyl)coumarin",
+  "name_tr": "",
+  "ec_no": "259-980-5",
+  "index_no": "607-172-00-1",
+  "atp": "ATP09",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1A",
+        "h_code": "H360D"
+      },
+      {
+        "class": "Acute Tox. 1",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 1",
+        "h_code": "H310"
+      },
+      {
+        "class": "Acute Tox. 1",
+        "h_code": "H300"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372 (blood)"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 10,
+      "chronic": 10
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS06",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H360D",
+      "H330",
+      "H310",
+      "H300",
+      "H372 (blood)",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

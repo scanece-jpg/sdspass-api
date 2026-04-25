@@ -1,0 +1,56 @@
+{
+  "cas": "818-08-6",
+  "name": "dibutyltin oxide",
+  "name_tr": "",
+  "ec_no": "212-449-1",
+  "index_no": "050-035-00-0",
+  "atp": "ATP21",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      },
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360FD"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372 (immune system)"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS06",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H341",
+      "H360FD",
+      "H301",
+      "H372 (immune system)",
+      "H315",
+      "H318"
+    ],
+    "suppl_h": []
+  }
+}

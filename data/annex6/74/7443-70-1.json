@@ -1,0 +1,29 @@
+{
+  "cas": "7443-70-1",
+  "name": "2-methylcyclohexanol, mixed isomers [1]\ncis-2-methylcyclohexanol [2]\ntrans-2-methylcyclohexanol [3]",
+  "name_tr": "",
+  "ec_no": "231-187-9",
+  "index_no": "603-010-00-9",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H332"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H332"
+    ],
+    "suppl_h": []
+  }
+}

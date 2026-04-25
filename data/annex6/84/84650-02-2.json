@@ -1,0 +1,29 @@
+{
+  "cas": "84650-02-2",
+  "name": "Distillates (coal tar), benzole fraction; Light Oil; [A complex combination of hydrocarbons obtained by the distillation of coal tar. It consists of hydrocarbons having carbon numbers primarily in the range of C4 tÂ°C10 and distilling in the approximate range of 80 Â°C to 160 Â°C (175 Â°F to 320 Â°F).]",
+  "name_tr": "",
+  "ec_no": "283-482-7",
+  "index_no": "648-001-00-0",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

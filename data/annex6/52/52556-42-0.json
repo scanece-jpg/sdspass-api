@@ -1,0 +1,35 @@
+{
+  "cas": "52556-42-0",
+  "name": "Sodium 3-(allyloxy)-2-hydroxypropanesulphonate",
+  "name_tr": "",
+  "ec_no": "",
+  "index_no": "",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360F"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H360F",
+      "H318"
+    ],
+    "suppl_h": []
+  }
+}

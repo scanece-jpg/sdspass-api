@@ -1,0 +1,60 @@
+{
+  "cas": "5216-25-1",
+  "name": "Î±, Î±,Î±,4-tetrachlorotoluene; p-chlorobenzotrichloride",
+  "name_tr": "",
+  "ec_no": "226-009-1",
+  "index_no": "602-093-00-9",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Repr. 2",
+        "h_code": "H361f ***"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372 **"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H350",
+      "H361f ***",
+      "H312",
+      "H302",
+      "H335",
+      "H372 **",
+      "H315"
+    ],
+    "suppl_h": []
+  }
+}

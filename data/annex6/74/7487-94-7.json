@@ -1,0 +1,62 @@
+{
+  "cas": "7487-94-7",
+  "name": "mercury dichloride; mercuric chloride",
+  "name_tr": "",
+  "ec_no": "231-299-8",
+  "index_no": "080-010-00-X",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      },
+      {
+        "class": "Repr. 2",
+        "h_code": "H361f ***"
+      },
+      {
+        "class": "Acute Tox. 2 *",
+        "h_code": "H300"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372 **"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS06",
+      "GHS05",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H341",
+      "H361f ***",
+      "H300",
+      "H372 **",
+      "H314",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

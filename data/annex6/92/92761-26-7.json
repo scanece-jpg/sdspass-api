@@ -1,0 +1,29 @@
+{
+  "cas": "92761-26-7",
+  "name": "(E-E )-3,3'-(1,4-phenylenedimethylidene)bis(2-oxobornane-10-sulfonic acid)",
+  "name_tr": "",
+  "ec_no": "410-960-6",
+  "index_no": "607-297-00-1",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H318"
+    ],
+    "suppl_h": []
+  }
+}

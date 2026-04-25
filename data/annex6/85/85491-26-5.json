@@ -1,0 +1,29 @@
+{
+  "cas": "85491-26-5",
+  "name": "(chloromethyl)bis(4-fluorophenyl)methylsilane",
+  "name_tr": "",
+  "ec_no": "401-200-4",
+  "index_no": "014-008-00-7",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [
+      "GHS09"
+    ],
+    "h_codes": [
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

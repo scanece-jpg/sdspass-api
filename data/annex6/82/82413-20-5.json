@@ -1,0 +1,51 @@
+{
+  "cas": "82413-20-5",
+  "name": "(E)-3-[1-[4-[2-(dimethylamino)ethoxy]phenyl]-2-phenylbut-1-enyl]phenol",
+  "name_tr": "",
+  "ec_no": "428-010-4",
+  "index_no": "604-073-00-5",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360F ***"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H351",
+      "H360F ***",
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

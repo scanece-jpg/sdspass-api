@@ -1,0 +1,34 @@
+{
+  "cas": "70693-57-1",
+  "name": "N-[3-[(2-acetyloxy)ethyl](phenyl-methyl)amino]-4-methoxyphenylacetamide",
+  "name_tr": "",
+  "ec_no": "411-590-8",
+  "index_no": "616-062-00-2",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H314",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

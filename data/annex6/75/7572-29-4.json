@@ -1,0 +1,40 @@
+{
+  "cas": "7572-29-4",
+  "name": "dichloroacetylene",
+  "name_tr": "",
+  "ec_no": "-",
+  "index_no": "602-069-00-8",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Unst. Expl.",
+        "h_code": "H200"
+      },
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "STOT RE 2 *",
+        "h_code": "H373 **"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS01",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H200",
+      "H351",
+      "H373 **"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "cas": "13048-33-4",
+  "name": "hexamethylene diacrylate; hexane-1,6-diol diacrylate",
+  "name_tr": "",
+  "ec_no": "235-921-9",
+  "index_no": "607-109-00-8",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H315",
+      "H319",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

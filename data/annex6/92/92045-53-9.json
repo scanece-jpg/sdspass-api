@@ -1,0 +1,39 @@
+{
+  "cas": "92045-53-9",
+  "name": "Naphtha (petroleum), hydrodesulfurized light, dearomatized; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons obtained by distillation of hydrodesulfurized and dearomatized light petroleum fractions. It consists predominantly of C7 paraffins and cycloparaffins boiling in a range of approximately 90 Â°C to 100 Â°C (194 Â°F to 212 Â°F).]",
+  "name_tr": "",
+  "ec_no": "295-434-2",
+  "index_no": "649-383-00-1",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

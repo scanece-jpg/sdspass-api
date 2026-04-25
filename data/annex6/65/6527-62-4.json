@@ -1,0 +1,27 @@
+{
+  "cas": "6527-62-4",
+  "name": "disodium 5-((4-((4-chloro-3-sulfonatophenyl)azo)-1-naphthyl)azo)-8-(phenylamino)-1-naphthalenesulfonate",
+  "name_tr": "",
+  "ec_no": "413-600-6",
+  "index_no": "611-108-00-8",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

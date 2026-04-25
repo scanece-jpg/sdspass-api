@@ -1,0 +1,29 @@
+{
+  "cas": "24634-61-5",
+  "name": "potassium (E,E)-hexa-2,4-dienoate",
+  "name_tr": "",
+  "ec_no": "246-376-1",
+  "index_no": "019-003-00-3",
+  "atp": "ATP07",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319"
+    ],
+    "suppl_h": []
+  }
+}

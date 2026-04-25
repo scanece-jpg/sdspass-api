@@ -1,0 +1,45 @@
+{
+  "cas": "68476-85-7",
+  "name": "Petroleum gases, liquefied; Petroleum gas; [A complex combination of hydrocarbons produced by the distillation of crude oil. It consists of hydrocarbons having carbon numbers predominantly in the range of C3 through C7 and boiling in the range of approximately â€“ 40 Â°C to 80 Â°C (â€“ 40 Â°F to 176 Â°F).]",
+  "name_tr": "",
+  "ec_no": "270-704-2",
+  "index_no": "649-202-00-6",
+  "atp": "ATP01corr",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": ""
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

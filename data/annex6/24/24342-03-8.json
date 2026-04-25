@@ -1,0 +1,29 @@
+{
+  "cas": "24342-03-8",
+  "name": "isobutyl but-3-enoate",
+  "name_tr": "",
+  "ec_no": "401-170-2",
+  "index_no": "604-033-00-7",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS02"
+    ],
+    "h_codes": [
+      "H226"
+    ],
+    "suppl_h": []
+  }
+}

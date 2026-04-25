@@ -1,0 +1,29 @@
+{
+  "cas": "72623-87-1",
+  "name": "Lubricating oils (petroleum), C20-50, hydrotreated neutral oil-based; Baseoil â€” unspecified; [A complex combination of hydrocarbons obtained by treating light vacuum gas oil, heavy vacuum gas oil and solvent deasphalted residual oil with hydrogen in the presence of a catalyst in a two stage process with dewaxing being carried out between the two stages. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C20 through C50 and produces a finished oil with a viscosity of approximately 32cSt at 40 Â°C. It contains a relatively large proportion of saturated hydrocarbons.]",
+  "name_tr": "",
+  "ec_no": "276-738-4",
+  "index_no": "649-483-00-5",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

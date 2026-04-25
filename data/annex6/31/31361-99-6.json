@@ -1,0 +1,34 @@
+{
+  "cas": "31361-99-6",
+  "name": "sodium 2-anilino-5-(2-nitro-4-(N-phenylsulfamoyl))anilinobenzenesulfonate",
+  "name_tr": "",
+  "ec_no": "412-320-1",
+  "index_no": "016-080-00-5",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H318",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

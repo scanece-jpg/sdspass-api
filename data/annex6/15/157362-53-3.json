@@ -1,0 +1,40 @@
+{
+  "cas": "157362-53-3",
+  "name": "2-(4-(4-(butyl-(1-methylhexyl)amino)phenyl)-3-cyano-5-oxo-1,5-dihydropyrrol-2-ylidene)propandinitrile",
+  "name_tr": "",
+  "ec_no": "429-180-2",
+  "index_no": "608-049-00-5",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

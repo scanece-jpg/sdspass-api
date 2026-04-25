@@ -1,0 +1,57 @@
+{
+  "cas": "79-10-7",
+  "name": "acrylic acid; prop-2-enoic acid",
+  "name_tr": "",
+  "ec_no": "201-177-9",
+  "index_no": "607-061-00-8",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1A",
+        "h_code": "H314"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS07",
+      "GHS05",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H226",
+      "H332",
+      "H312",
+      "H302",
+      "H314",
+      "H400"
+    ],
+    "suppl_h": []
+  }
+}

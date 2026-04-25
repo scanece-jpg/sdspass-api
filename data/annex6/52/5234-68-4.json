@@ -1,0 +1,49 @@
+{
+  "cas": "5234-68-4",
+  "name": "carboxin (ISO); 2-methyl-N-phenyl-5,6-dihydro-1,4-oxathiine-3-carboxamide; 5,6-dihydro-2-methyl-1,4-oxathiine-3-carboxanilide",
+  "name_tr": "",
+  "ec_no": "226-031-1",
+  "index_no": "616-226-00-3",
+  "atp": "ATP14",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373 (kidneys)"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 1,
+      "chronic": 1
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H373 (kidneys)",
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "cas": "71297-11-5",
+  "name": "4-(bis(4-(diethylamino)phenyl)methyl)benzene-1,2-dimethanesulfonic acid",
+  "name_tr": "",
+  "ec_no": "407-280-7",
+  "index_no": "016-088-00-9",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

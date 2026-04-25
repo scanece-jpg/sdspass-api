@@ -1,0 +1,29 @@
+{
+  "cas": "18085-02-4",
+  "name": "1,2-diacetoxybut-3-ene",
+  "name_tr": "",
+  "ec_no": "421-720-5",
+  "index_no": "601-068-00-X",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "cas": "2536-05-2",
+  "name": "4,4'-methylenediphenyl diisocyanate; diphenylmethane-4,4'-diisocyanate [1]\n2,2'-methylenediphenyl diisocyanate; diphenylmethane-2,2'-diisocyanate [2]\no-(p-isocyanatobenzyl)phenyl isocyanate; diphenylmethane-2,4'-diisocyanate [3]\nmethylenediphenyl diisocyanate [4]",
+  "name_tr": "",
+  "ec_no": "219-799-4",
+  "index_no": "615-005-00-9",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H332"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "STOT RE 2 *",
+        "h_code": "H373 **"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Resp. Sens. 1",
+        "h_code": "H334"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H351",
+      "H332",
+      "H335",
+      "H373 **",
+      "H315",
+      "H319",
+      "H334",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

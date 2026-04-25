@@ -1,0 +1,45 @@
+{
+  "cas": "92045-16-4",
+  "name": "Gases (petroleum), gas oil hydrodesulfurization effluent; Refinery gas; [A complex combination obtained by separation of the liquid phase from the effluent from the hydrogenation reaction. It consists predominantly of hydrogen, hydrogen sulfide and aliphatic hydrocarbons having carbon numbers predominantly in the range of C1 through C3.]",
+  "name_tr": "",
+  "ec_no": "295-398-8",
+  "index_no": "649-170-00-3",
+  "atp": "ATP01corr",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": ""
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

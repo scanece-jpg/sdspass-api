@@ -1,0 +1,29 @@
+{
+  "cas": "93924-33-5",
+  "name": "Gas oils, paraffinic; Gasoil â€” unspecified; [A distillate obtained from the redistillation of a complex combination of hydrocarbons obtained by the distillation of the effluents from a severe catalytic hydrotreatment of paraffins. It boils in the range of approximately 190 Â°C to 330 Â°C (374 Â°F to 594 Â°F).]",
+  "name_tr": "",
+  "ec_no": "300-227-8",
+  "index_no": "649-233-00-5",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

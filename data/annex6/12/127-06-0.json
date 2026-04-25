@@ -1,0 +1,56 @@
+{
+  "cas": "127-06-0",
+  "name": "acetone oxime",
+  "name_tr": "",
+  "ec_no": "",
+  "index_no": "",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H336"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373 (blood system)"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H350",
+      "H312",
+      "H336",
+      "H373 (blood system)",
+      "H318",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "cas": "68478-27-3",
+  "name": "Tail gas (petroleum), catalytic reformed naphtha separator; Refinery gas; [A complex combination of hydrocarbons obtained from the catalytic reforming of straight run naphtha. It consists of hydrogen and hydrocarbons having carbon numbers predominantly in the range of C1 through C6.]",
+  "name_tr": "",
+  "ec_no": "270-807-2",
+  "index_no": "649-141-00-5",
+  "atp": "ATP01corr",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": ""
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

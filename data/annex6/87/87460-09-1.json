@@ -1,0 +1,29 @@
+{
+  "cas": "87460-09-1",
+  "name": "benzyl [hydroxy-(4-phenylbutyl)phosphinyl] acetate",
+  "name_tr": "",
+  "ec_no": "416-050-5",
+  "index_no": "607-442-00-9",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H318"
+    ],
+    "suppl_h": []
+  }
+}

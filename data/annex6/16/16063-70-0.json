@@ -1,0 +1,27 @@
+{
+  "cas": "16063-70-0",
+  "name": "2,3,5-trichloropyridine",
+  "name_tr": "",
+  "ec_no": "407-270-2",
+  "index_no": "613-153-00-9",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "cas": "91125-43-8",
+  "name": "sodium 2-(nonanoyloxy)benzenesulfonate",
+  "name_tr": "",
+  "ec_no": "434-360-9",
+  "index_no": "607-651-00-5",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H318",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

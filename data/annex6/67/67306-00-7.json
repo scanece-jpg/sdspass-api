@@ -1,0 +1,85 @@
+{
+  "cas": "67306-00-7",
+  "name": "fenpropidin (ISO); (R,S)-1-[3-(4-tert-butylphenyl)-2-methylpropyl]piperidine",
+  "name_tr": "",
+  "ec_no": "",
+  "index_no": "",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 2",
+        "h_code": "H361d"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H336"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373 (nervous system, eyes, lungs)"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 1000,
+      "chronic": 10000
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS05",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H361d",
+      "H332",
+      "H302",
+      "H335",
+      "H336",
+      "H373 (nervous system, eyes, lungs)",
+      "H315",
+      "H318",
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

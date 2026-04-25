@@ -1,0 +1,34 @@
+{
+  "cas": "1522-92-5",
+  "name": "2,2-dimethylpropan-1-ol, tribromo derivative [1]\n3-bromo-2,2-bis(bromomethyl)propan-1-ol [2]",
+  "name_tr": "",
+  "ec_no": "-",
+  "index_no": "603-243-00-6",
+  "atp": "ATP18",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H341"
+    ],
+    "suppl_h": []
+  }
+}

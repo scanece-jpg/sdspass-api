@@ -1,0 +1,40 @@
+{
+  "cas": "98-73-7",
+  "name": "4-tert-butylbenzoic acid",
+  "name_tr": "",
+  "ec_no": "202-696-3",
+  "index_no": "607-698-00-1",
+  "atp": "ATP03",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360F"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H360F",
+      "H302",
+      "H372"
+    ],
+    "suppl_h": []
+  }
+}

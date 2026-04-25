@@ -1,0 +1,39 @@
+{
+  "cas": "924-42-5",
+  "name": "N-(hydroxymethyl)acrylamide; methylolacrylamide; [NMA]",
+  "name_tr": "",
+  "ec_no": "213-103-2",
+  "index_no": "616-230-00-5",
+  "atp": "ATP15",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372 (peripheral nervous system)"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H372 (peripheral nervous system)"
+    ],
+    "suppl_h": []
+  }
+}

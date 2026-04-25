@@ -1,0 +1,53 @@
+{
+  "cas": "14816-18-3",
+  "name": "phoxim (ISO); Î±-(diethoxyphosphinothioylimino) phenylacetonitrile",
+  "name_tr": "",
+  "ec_no": "238-887-3",
+  "index_no": "015-100-00-X",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 2",
+        "h_code": "H361f ***"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 1000
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H361f ***",
+      "H302",
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

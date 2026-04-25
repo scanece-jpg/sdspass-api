@@ -1,0 +1,52 @@
+{
+  "cas": "149057-64-7",
+  "name": "bis(N-(7-hydroxy-8-methyl-5-phenylphenazin-3-ylidene)dimethylammonium) sulfate",
+  "name_tr": "",
+  "ec_no": "406-770-8",
+  "index_no": "612-186-00-6",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "STOT RE 2 *",
+        "h_code": "H373 **"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS05",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H373 **",
+      "H318",
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "cas": "54574-82-2",
+  "name": "4-(N,N-dibutylamino)-2-hydroxy-2'-carboxybenzophenone",
+  "name_tr": "",
+  "ec_no": "410-410-5",
+  "index_no": "606-052-00-6",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

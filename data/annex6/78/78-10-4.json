@@ -1,0 +1,45 @@
+{
+  "cas": "78-10-4",
+  "name": "tetraethyl silicate; ethyl silicate",
+  "name_tr": "",
+  "ec_no": "201-083-8",
+  "index_no": "014-005-00-0",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H332"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS02",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H226",
+      "H332",
+      "H335",
+      "H319"
+    ],
+    "suppl_h": []
+  }
+}

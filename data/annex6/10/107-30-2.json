@@ -1,0 +1,51 @@
+{
+  "cas": "107-30-2",
+  "name": "chlormethyl methyl ether; chlorodimethyl ether",
+  "name_tr": "",
+  "ec_no": "203-480-1",
+  "index_no": "603-075-00-3",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H225",
+      "H350",
+      "H332",
+      "H312",
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

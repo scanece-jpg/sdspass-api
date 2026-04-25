@@ -1,0 +1,29 @@
+{
+  "cas": "21873-52-9",
+  "name": "5,7-dichloro-4-hydroxyquinoline",
+  "name_tr": "",
+  "ec_no": "427-420-0",
+  "index_no": "613-244-00-3",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [
+      "GHS09"
+    ],
+    "h_codes": [
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

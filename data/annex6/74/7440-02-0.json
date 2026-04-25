@@ -1,0 +1,45 @@
+{
+  "cas": "7440-02-0",
+  "name": "nickel powder; [particle diameter < 1 mm]",
+  "name_tr": "",
+  "ec_no": "231-111-4",
+  "index_no": "028-002-01-4",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372 **"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H351",
+      "H372 **",
+      "H317",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

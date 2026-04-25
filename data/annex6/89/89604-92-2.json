@@ -1,0 +1,27 @@
+{
+  "cas": "89604-92-2",
+  "name": "2-mercaptobenzothiazolyl-(Z)-(2-aminothiazol-4-yl)-2-(tert-butoxycarbonyl) isopropoxyiminoacetate",
+  "name_tr": "",
+  "ec_no": "419-040-9",
+  "index_no": "607-450-00-2",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "cas": "3547-33-9",
+  "name": "2-(octylthio)ethanol; 2-hydroxyethyl octyl sulphide",
+  "name_tr": "",
+  "ec_no": "222-598-4",
+  "index_no": "603-088-00-4",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H318"
+    ],
+    "suppl_h": []
+  }
+}

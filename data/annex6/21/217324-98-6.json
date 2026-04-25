@@ -1,0 +1,27 @@
+{
+  "cas": "217324-98-6",
+  "name": "(3-(4-(2-(butyl-(4-methylphenylsulfonyl)amino)phenylthio)-5-oxo-1-(2,4,6-trichlorophenyl)-4,5-dihydro-1H-pyrazole-3-ylamino)-4-chlorophenyl)tetradecanamide; N-[3-({]4-[}(2-{]butyl[}(4-methylphenyl)sulfonyl{]amino[}phenyl)thio{]-5-oxo-1-(2,4,6-trichlorophenyl)-4,5-dihydro-1H-pyrazol-3-yl[}amino)-4-chlorophenyl]tetradecanamide",
+  "name_tr": "",
+  "ec_no": "432-970-1",
+  "index_no": "616-177-00-8",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

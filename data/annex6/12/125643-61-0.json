@@ -1,0 +1,27 @@
+{
+  "cas": "125643-61-0",
+  "name": "reaction mass of isomers of: C7-9-alkyl 3-(3,5-di-tert-butyl-4-hydroxyphenyl)propionate",
+  "name_tr": "",
+  "ec_no": "406-040-9",
+  "index_no": "607-530-00-7",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

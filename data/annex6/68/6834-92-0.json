@@ -1,0 +1,35 @@
+{
+  "cas": "6834-92-0",
+  "name": "disodium metasilicate",
+  "name_tr": "",
+  "ec_no": "229-912-9",
+  "index_no": "014-010-00-8",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS07",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H335",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

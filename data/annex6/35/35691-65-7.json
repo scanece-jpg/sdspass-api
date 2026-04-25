@@ -1,0 +1,57 @@
+{
+  "cas": "35691-65-7",
+  "name": "2-bromo-2-(bromomethyl)pentanedinitrile; [DBDCB]",
+  "name_tr": "",
+  "ec_no": "252-681-0",
+  "index_no": "",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373 (thyroid, central nervous system)"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Skin Sens. 1A",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS08",
+      "GHS05",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H330",
+      "H302",
+      "H373 (thyroid, central nervous system)",
+      "H318",
+      "H317",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "cas": "32536-52-0",
+  "name": "diphenylether; octabromo derivate",
+  "name_tr": "",
+  "ec_no": "251-087-9",
+  "index_no": "602-094-00-4",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360Df"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H360Df"
+    ],
+    "suppl_h": []
+  }
+}

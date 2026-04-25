@@ -1,0 +1,29 @@
+{
+  "cas": "101316-72-7",
+  "name": "Lubricating oils (petroleum), C24-50, solvent-extd., dewaxed, hydrogenated; Baseoil â€” unspecified; [A complex combination of hydrocarbons obtained by solvent extraction and hydrogenation of atmospheric distillation residues. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C24 through C50 and produces a finished oil with a viscosity in the order of 16cSt to 75cSt at 40 Â°C (104 Â°F).]",
+  "name_tr": "",
+  "ec_no": "309-877-7",
+  "index_no": "649-530-00-X",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "cas": "64485-90-1",
+  "name": "(Z)-2-methoxymino-2-[2-(tritylamino)thiazol-4-yl]acetic acid",
+  "name_tr": "",
+  "ec_no": "431-520-1",
+  "index_no": "607-525-00-X",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Sol. 1 ****",
+        "h_code": "H228"
+      },
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H228",
+      "H351",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

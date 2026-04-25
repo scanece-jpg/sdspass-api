@@ -1,0 +1,45 @@
+{
+  "cas": "13457-18-6",
+  "name": "pyrazophos (ISO); O,O-diethyl O-(6-ethoxycarbonyl-5-methylpyrazolo[2,3-a]pyrimidin-2-yl) phosphorothioate",
+  "name_tr": "",
+  "ec_no": "236-656-1",
+  "index_no": "015-137-00-1",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H332",
+      "H302",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "cas": "91648-39-4",
+  "name": "dioctyltin dilaurate [1]\nstannane, dioctyl-, bis(coco acyloxy) derivs. [2]",
+  "name_tr": "",
+  "ec_no": "293-901-5",
+  "index_no": "050-031-00-9",
+  "atp": "ATP15",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360D"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372 (immune system)"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H360D",
+      "H372 (immune system)"
+    ],
+    "suppl_h": []
+  }
+}

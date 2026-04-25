@@ -1,0 +1,29 @@
+{
+  "cas": "101631-15-6",
+  "name": "Distillates (petroleum), steam-cracked heavy tar light; Cracked kerosine; [A complex combination of hydrocarbons obtained by distillation of steam cracking heavy tars. It consists predominantly of highly alkylated aromatic hydrocarbons boiling in the range of approximately 100 Â°C to 250 Â°C (212 Â°F to 482 Â°F).]",
+  "name_tr": "",
+  "ec_no": "309-940-9",
+  "index_no": "649-418-00-0",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

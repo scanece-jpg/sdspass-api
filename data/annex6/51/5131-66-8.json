@@ -1,0 +1,34 @@
+{
+  "cas": "5131-66-8",
+  "name": "3-butoxypropan-2-ol; propylene glycol monobutyl ether",
+  "name_tr": "",
+  "ec_no": "225-878-4",
+  "index_no": "603-052-00-8",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H315",
+      "H319"
+    ],
+    "suppl_h": []
+  }
+}

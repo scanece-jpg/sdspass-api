@@ -1,0 +1,39 @@
+{
+  "cas": "68410-71-9",
+  "name": "Raffinates (petroleum), catalytic reformer ethylene glycol-water countercurrent exts.; Low boiling point modified naphtha; [A complex combination of hydrocarbons obtained as the raffinate from the UDEX extraction process on the catalytic reformer stream. It consists of saturated hydrocarbons having carbon numbers predominantly in the range of C6 through C9.]",
+  "name_tr": "",
+  "ec_no": "270-088-5",
+  "index_no": "649-280-00-1",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

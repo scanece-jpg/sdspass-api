@@ -1,0 +1,57 @@
+{
+  "cas": "98-83-9",
+  "name": "2-phenylpropene; Î±-methylstyrene",
+  "name_tr": "",
+  "ec_no": "",
+  "index_no": "",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      },
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Skin Sens. 1B",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS02",
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H226",
+      "H351",
+      "H335",
+      "H319",
+      "H317",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

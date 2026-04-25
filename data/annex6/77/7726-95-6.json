@@ -1,0 +1,41 @@
+{
+  "cas": "7726-95-6",
+  "name": "bromine",
+  "name_tr": "",
+  "ec_no": "231-778-1",
+  "index_no": "035-001-00-5",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 2 *",
+        "h_code": "H330"
+      },
+      {
+        "class": "Skin Corr. 1A",
+        "h_code": "H314"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS05",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H330",
+      "H314",
+      "H400"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "cas": "91995-16-3",
+  "name": "Anthracene oil, anthracene paste, carbazole fraction; Anthracene Oil Fraction; [A complex combination of hydrocarbons from the distillation of anthracene obtained by crystallization of anthracene oil from bituminous coal high temperature tar and boiling in the approximate range of 350 Â°C to 360 Â°C (662 Â°F to 680 Â°F). It contains chiefly anthracene, carbazole and phenanthrene.]",
+  "name_tr": "",
+  "ec_no": "295-276-4",
+  "index_no": "648-107-00-7",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

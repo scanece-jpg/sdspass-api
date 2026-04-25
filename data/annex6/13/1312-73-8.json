@@ -1,0 +1,35 @@
+{
+  "cas": "1312-73-8",
+  "name": "dipotassium sulphide; potassium sulphide",
+  "name_tr": "",
+  "ec_no": "215-197-0",
+  "index_no": "016-006-00-1",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H314",
+      "H400"
+    ],
+    "suppl_h": []
+  }
+}

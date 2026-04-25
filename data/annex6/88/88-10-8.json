@@ -1,0 +1,55 @@
+{
+  "cas": "88-10-8",
+  "name": "diethylcarbamoyl chloride",
+  "name_tr": "",
+  "ec_no": "201-798-5",
+  "index_no": "607-229-00-0",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H351",
+      "H332",
+      "H302",
+      "H335",
+      "H315",
+      "H319"
+    ],
+    "suppl_h": []
+  }
+}

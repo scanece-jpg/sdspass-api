@@ -1,0 +1,41 @@
+{
+  "cas": "155601-30-2",
+  "name": "1-(2-hydroxyethyl)-1H-pyrazol-4,5-diyldiammoniumsulfate",
+  "name_tr": "",
+  "ec_no": "429-300-3",
+  "index_no": "613-249-00-0",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H318",
+      "H317",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

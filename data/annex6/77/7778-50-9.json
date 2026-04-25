@@ -1,0 +1,93 @@
+{
+  "cas": "7778-50-9",
+  "name": "potassium dichromate",
+  "name_tr": "",
+  "ec_no": "231-906-6",
+  "index_no": "024-002-00-6",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Ox. Sol. 2",
+        "h_code": "H272"
+      },
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360FD"
+      },
+      {
+        "class": "Acute Tox. 2 *",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 3 *",
+        "h_code": "H301"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372 **"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Resp. Sens. 1",
+        "h_code": "H334"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS03",
+      "GHS08",
+      "GHS06",
+      "GHS05",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H272",
+      "H350",
+      "H340",
+      "H360FD",
+      "H330",
+      "H312",
+      "H301",
+      "H372 **",
+      "H314",
+      "H334",
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "cas": "1310-73-2",
+  "name": "sodium hydroxide; caustic soda",
+  "name_tr": "",
+  "ec_no": "215-185-5",
+  "index_no": "011-002-00-6",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Corr. 1A",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

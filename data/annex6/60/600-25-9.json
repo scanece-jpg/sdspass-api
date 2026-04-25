@@ -1,0 +1,34 @@
+{
+  "cas": "600-25-9",
+  "name": "1-chloro-1-nitropropane",
+  "name_tr": "",
+  "ec_no": "209-990-0",
+  "index_no": "610-007-00-6",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H332",
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

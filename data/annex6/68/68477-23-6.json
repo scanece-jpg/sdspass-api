@@ -1,0 +1,34 @@
+{
+  "cas": "68477-23-6",
+  "name": "Tar acids, residues, distillates, first-cut; Distillate Phenols; [The residue from the distillation in the range of 235 Â°C to 355 Â°C (481 Â°F to 697 Â°F) of light carbolic oil.]",
+  "name_tr": "",
+  "ec_no": "270-713-1",
+  "index_no": "648-125-00-5",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

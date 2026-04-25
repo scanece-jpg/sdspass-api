@@ -1,0 +1,40 @@
+{
+  "cas": "95-55-6",
+  "name": "2-aminophenol",
+  "name_tr": "",
+  "ec_no": "202-431-1",
+  "index_no": "612-033-00-3",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H341",
+      "H332",
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

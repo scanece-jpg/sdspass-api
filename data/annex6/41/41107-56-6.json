@@ -1,0 +1,29 @@
+{
+  "cas": "41107-56-6",
+  "name": "5-(2,4-dioxo-1,2,3,4-tetrahydropyrimidine)-3-fluoro-2-hydroxymethyltetrahydrofuran",
+  "name_tr": "",
+  "ec_no": "415-360-8",
+  "index_no": "616-089-00-X",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H341"
+    ],
+    "suppl_h": []
+  }
+}

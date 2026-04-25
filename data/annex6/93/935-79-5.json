@@ -1,0 +1,45 @@
+{
+  "cas": "935-79-5",
+  "name": "1,2,3,6-tetrahydrophthalic anhydride [1]\ncis-1,2,3,6-tetrahydrophthalic anhydride [2]\n3,4,5,6-tetrahydrophthalic anhydride [3]\ntetrahydrophthalic anhydride [4]",
+  "name_tr": "",
+  "ec_no": "213-308-7",
+  "index_no": "607-099-00-5",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Resp. Sens. 1",
+        "h_code": "H334"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H318",
+      "H334",
+      "H317",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

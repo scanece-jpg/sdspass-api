@@ -1,0 +1,29 @@
+{
+  "cas": "11113-50-1",
+  "name": "boric acid [1]\nboric acid [2]",
+  "name_tr": "",
+  "ec_no": "234-343-4",
+  "index_no": "005-007-00-2",
+  "atp": "ATP20",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360FD"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H360FD"
+    ],
+    "suppl_h": []
+  }
+}

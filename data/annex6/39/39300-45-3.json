@@ -1,0 +1,68 @@
+{
+  "cas": "39300-45-3",
+  "name": "dinocap (ISO); (RS)-2,6-dinitro-4-octylphenyl crotonates and (RS)-2,4-dinitro-6-octylphenyl crotonates in which â€˜octylâ€™ is a reaction mass of 1-methylheptyl, 1-ethylhexyl and 1-propylpentyl groups",
+  "name_tr": "",
+  "ec_no": "254-408-0",
+  "index_no": "609-023-00-6",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360D ***"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 2 *",
+        "h_code": "H373 **"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 100
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H360D ***",
+      "H332",
+      "H302",
+      "H373 **",
+      "H315",
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "cas": "68477-33-8",
+  "name": "gases (petroleum), C3-4, isobutane-rich; Petroleum gas; [A complex combination of hydrocarbons from the distillation of saturated and unsaturated hydrocarbons usually ranging in carbon numbers from C3 through C6, predominantly butane and isobutane. It consists of saturated and unsaturated hydrocarbons having carbon numbers in the range of C3 through C4, predominantly isobutane.]",
+  "name_tr": "",
+  "ec_no": "270-724-1",
+  "index_no": "649-204-00-7",
+  "atp": "ATP01corr",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": ""
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

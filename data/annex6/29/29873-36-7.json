@@ -1,0 +1,49 @@
+{
+  "cas": "29873-36-7",
+  "name": "morfamquat dichloride [1]\nmorfamquat sulfate [2]",
+  "name_tr": "",
+  "ec_no": "-",
+  "index_no": "613-091-00-2",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302",
+      "H335",
+      "H315",
+      "H319",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

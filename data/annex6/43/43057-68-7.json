@@ -1,0 +1,46 @@
+{
+  "cas": "43057-68-7",
+  "name": "2-ethyl-2,3-dihydro-2-methyl-1H-perimidine",
+  "name_tr": "",
+  "ec_no": "424-380-6",
+  "index_no": "613-279-00-4",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 2 *",
+        "h_code": "H373 **"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H373 **",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

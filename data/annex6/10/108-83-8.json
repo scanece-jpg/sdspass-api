@@ -1,0 +1,35 @@
+{
+  "cas": "108-83-8",
+  "name": "2,6-dimethylheptan-4-one; di-isobutyl ketone",
+  "name_tr": "",
+  "ec_no": "203-620-1",
+  "index_no": "606-005-00-X",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS02",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H226",
+      "H335"
+    ],
+    "suppl_h": []
+  }
+}

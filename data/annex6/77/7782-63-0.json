@@ -1,0 +1,39 @@
+{
+  "cas": "7782-63-0",
+  "name": "iron (II) sulfate (1:1) heptahydrate; sulfuric acid, iron(II) salt (1:1), heptahydrate; ferrous sulfate heptahydrate",
+  "name_tr": "",
+  "ec_no": "231-753-5",
+  "index_no": "026-003-01-4",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302",
+      "H315",
+      "H319"
+    ],
+    "suppl_h": []
+  }
+}

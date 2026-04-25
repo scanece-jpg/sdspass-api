@@ -1,0 +1,40 @@
+{
+  "cas": "42152-47-6",
+  "name": "7-methylocta-1,6-diene",
+  "name_tr": "",
+  "ec_no": "404-210-7",
+  "index_no": "601-046-00-X",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS02",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H226",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

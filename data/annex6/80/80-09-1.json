@@ -1,0 +1,29 @@
+{
+  "cas": "80-09-1",
+  "name": "4,4'-sulphonyldiphenol; bisphenol S",
+  "name_tr": "",
+  "ec_no": "201-250-5",
+  "index_no": "604-098-00-1",
+  "atp": "ATP18",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360FD"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H360FD"
+    ],
+    "suppl_h": []
+  }
+}

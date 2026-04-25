@@ -1,0 +1,29 @@
+{
+  "cas": "75-09-2",
+  "name": "dichloromethane; methylene chloride",
+  "name_tr": "",
+  "ec_no": "200-838-9",
+  "index_no": "602-004-00-3",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H351"
+    ],
+    "suppl_h": []
+  }
+}

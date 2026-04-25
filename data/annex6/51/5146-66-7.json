@@ -1,0 +1,29 @@
+{
+  "cas": "5146-66-7",
+  "name": "3,7-dimethylocta-2,6-dienenitrile",
+  "name_tr": "",
+  "ec_no": "225-918-0",
+  "index_no": "608-067-00-3",
+  "atp": "ATP09",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

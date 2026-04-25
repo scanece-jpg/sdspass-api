@@ -1,0 +1,61 @@
+{
+  "cas": "77-73-6",
+  "name": "3a,4,7,7a-tetrahydro-4,7-methanoindene",
+  "name_tr": "",
+  "ec_no": "201-052-9",
+  "index_no": "601-044-00-9",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H225",
+      "H332",
+      "H302",
+      "H335",
+      "H315",
+      "H319",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

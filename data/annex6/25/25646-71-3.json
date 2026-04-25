@@ -1,0 +1,45 @@
+{
+  "cas": "25646-71-3",
+  "name": "N-(2-(4-amino-N-ethyl-m-toluidino)ethyl)methanesulphonamide sesquisulphate; 4-(N-ethyl-N-2-methanesulphonylaminoethyl)-2-methylphenylenediamine sesquisulphate monohydrate",
+  "name_tr": "",
+  "ec_no": "247-161-5",
+  "index_no": "612-134-00-2",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

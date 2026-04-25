@@ -1,0 +1,46 @@
+{
+  "cas": "94247-67-3",
+  "name": "chrysoidine C10-14-alkyl derivatives; benzenesulfonic acid, mono-C10-14-alkyl derivatives, compounds with 4-(phenylazo)-1,3-benzenediamine [1]\nchrysoidine compound with dibutylnaphthalene sulfonic acid; dibutylnaphthalenesulfonic acid, compound with 4-(phenylazo)benzene-1,3-diamine (1:1) [2]",
+  "name_tr": "",
+  "ec_no": "304-236-8",
+  "index_no": "611-153-00-3",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H341",
+      "H302",
+      "H315",
+      "H318"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,68 @@
+{
+  "cas": "243973-20-8",
+  "name": "pinoxaden (ISO); 8-(2,6-diethyl-4-methylphenyl)-7-oxo-1,2,4,5-tetrahydro-7H-pyrazolo[1,2-d][1,4,5]oxadiazepin-9-yl 2,2-dimethylpropanoate",
+  "name_tr": "",
+  "ec_no": "-",
+  "index_no": "607-726-00-2",
+  "atp": "ATP13",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 2",
+        "h_code": "H361d"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Skin Sens. 1A",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {
+      "acute": 1
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H361d",
+      "H332",
+      "H302",
+      "H335",
+      "H319",
+      "H317",
+      "H400",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

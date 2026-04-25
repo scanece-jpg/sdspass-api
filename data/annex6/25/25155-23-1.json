@@ -1,0 +1,29 @@
+{
+  "cas": "25155-23-1",
+  "name": "trixylyl phosphate",
+  "name_tr": "",
+  "ec_no": "246-677-8",
+  "index_no": "015-201-00-9",
+  "atp": "ATP03",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360F"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H360F"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "cas": "80-62-6",
+  "name": "methyl methacrylate; methyl 2-methylprop-2-enoate; methyl 2-methylpropenoate",
+  "name_tr": "",
+  "ec_no": "201-297-1",
+  "index_no": "607-035-00-6",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H225",
+      "H335",
+      "H315",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

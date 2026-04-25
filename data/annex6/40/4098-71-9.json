@@ -1,0 +1,57 @@
+{
+  "cas": "4098-71-9",
+  "name": "3-isocyanatomethyl-3,5,5-trimethylcyclohexyl isocyanate; isophorone di-isocyanate",
+  "name_tr": "",
+  "ec_no": "",
+  "index_no": "",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 1",
+        "h_code": "H330"
+      },
+      {
+        "class": "Skin Corr. 1",
+        "h_code": "H314"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Resp. Sens. 1",
+        "h_code": "H334"
+      },
+      {
+        "class": "Skin Sens. 1A",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS05",
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H330",
+      "H314",
+      "H318",
+      "H334",
+      "H317",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

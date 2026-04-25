@@ -1,0 +1,34 @@
+{
+  "cas": "57280-22-5",
+  "name": "4,4-dimethyl-3,5,8-trioxabicyclo[5.1.0]octane",
+  "name_tr": "",
+  "ec_no": "421-750-9",
+  "index_no": "603-173-00-6",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

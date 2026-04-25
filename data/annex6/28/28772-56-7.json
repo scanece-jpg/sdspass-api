@@ -1,0 +1,64 @@
+{
+  "cas": "28772-56-7",
+  "name": "bromadiolone (ISO); 3-[3-(4â€²-bromobiphenyl-4-yl)-3-hydroxy-1-phenylpropyl]-4-hydroxy-2H-chromen-2-one",
+  "name_tr": "",
+  "ec_no": "249-205-9",
+  "index_no": "607-716-00-8",
+  "atp": "ATP09",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360D"
+      },
+      {
+        "class": "Acute Tox. 1",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 1",
+        "h_code": "H310"
+      },
+      {
+        "class": "Acute Tox. 1",
+        "h_code": "H300"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372 (blood)"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 1,
+      "chronic": 1
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS06",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H360D",
+      "H330",
+      "H310",
+      "H300",
+      "H372 (blood)",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

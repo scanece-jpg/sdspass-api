@@ -1,0 +1,27 @@
+{
+  "cas": "73754-27-5",
+  "name": "4-[3-(3,5-di-tert-butyl-4-hydroxyphenyl)propionyloxy]-1-[2-[3-(3,5-di-tert-butyl-4-hydrophenyl)propionyloxy]ethyl]-2,2,6,6-tetramethylpiperidine",
+  "name_tr": "",
+  "ec_no": "416-770-1",
+  "index_no": "613-217-00-6",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

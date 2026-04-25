@@ -1,0 +1,39 @@
+{
+  "cas": "54322-20-2",
+  "name": "sodium 4-chloro-1-hydroxybutane-1-sulfonate",
+  "name_tr": "",
+  "ec_no": "406-190-5",
+  "index_no": "607-280-00-9",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302",
+      "H319",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

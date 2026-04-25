@@ -1,0 +1,45 @@
+{
+  "cas": "644-64-4",
+  "name": "1-dimethylcarbamoyl-5-methylpyrazol-3-yl dimethylcarbamate; dimetilan (ISO)",
+  "name_tr": "",
+  "ec_no": "211-420-0",
+  "index_no": "613-047-00-2",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 3 *",
+        "h_code": "H301"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H312",
+      "H301",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

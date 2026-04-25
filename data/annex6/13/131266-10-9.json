@@ -1,0 +1,27 @@
+{
+  "cas": "131266-10-9",
+  "name": "2-acetoxymethyl-4-benzyloxybut-1-yl acetate",
+  "name_tr": "",
+  "ec_no": "407-140-5",
+  "index_no": "607-282-00-X",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

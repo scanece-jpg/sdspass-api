@@ -1,0 +1,39 @@
+{
+  "cas": "7720-78-7",
+  "name": "iron (II) sulfate",
+  "name_tr": "",
+  "ec_no": "231-753-5",
+  "index_no": "026-003-00-7",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302",
+      "H315",
+      "H319"
+    ],
+    "suppl_h": []
+  }
+}

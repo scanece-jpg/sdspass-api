@@ -1,0 +1,49 @@
+{
+  "cas": "2867-47-2",
+  "name": "2-dimethylaminoethyl methacrylate",
+  "name_tr": "",
+  "ec_no": "220-688-8",
+  "index_no": "607-132-00-3",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H312",
+      "H302",
+      "H315",
+      "H319",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

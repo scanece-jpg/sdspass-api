@@ -1,0 +1,51 @@
+{
+  "cas": "70-25-7",
+  "name": "1-methyl-3-nitro-1-nitrosoguanidine",
+  "name_tr": "",
+  "ec_no": "200-730-1",
+  "index_no": "612-083-00-6",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H332"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H350",
+      "H332",
+      "H315",
+      "H319",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

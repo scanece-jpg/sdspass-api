@@ -1,0 +1,29 @@
+{
+  "cas": "72869-86-4",
+  "name": "7,7,9(or 7,9,9)-trimethylâ€“4,13-dioxoâ€“3,14-dioxaâ€“5,12-diazahexadecaneâ€“1,16-diyl bismethacrylate",
+  "name_tr": "",
+  "ec_no": "276-957-5",
+  "index_no": "607-767-00-6",
+  "atp": "ATP21",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Sens. 1B",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

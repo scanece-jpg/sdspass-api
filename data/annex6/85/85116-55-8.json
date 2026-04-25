@@ -1,0 +1,29 @@
+{
+  "cas": "85116-55-8",
+  "name": "Kerosine (petroleum), hydrodesulfurized thermal cracked; Cracked kerosine; [A complex combination of hydrocarbons obtained by fractionation from hydrodesulfurized thermal cracker distillate. It consists predominantly of hydrocarbons predominantly in the range of C8 tÂ°C16 and boiling in the range of approximately 120 Â°C to 283 Â°C (284 Â°F to 541 Â°F).]",
+  "name_tr": "",
+  "ec_no": "285-507-7",
+  "index_no": "649-412-00-8",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

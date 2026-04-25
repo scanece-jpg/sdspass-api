@@ -1,0 +1,54 @@
+{
+  "cas": "881685-58-1",
+  "name": "Reaction mass of 3-(difluoromethyl)-1-methyl-N-[(1RS,4SR,9RS)-1,2,3,4-tetrahydro-9-isopropyl-1,4-methanonaphthalen-5-yl]pyrazole-4-carboxamide and 3-(difluoromethyl)-1-methyl-N-[(1RS,4SR,9SR)-1,2,3,4-tetrahydro-9-isopropyl-1,4-methanonaphthalen-5-yl]pyrazole-4-carboxamide [â‰¥ 78 % syn isomers â‰¤ 15 % anti isomers relative content]; isopyrazam",
+  "name_tr": "",
+  "ec_no": "-",
+  "index_no": "616-240-00-X",
+  "atp": "ATP18",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360D"
+      },
+      {
+        "class": "Skin Sens. 1B",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 10,
+      "chronic": 10
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H351",
+      "H360D",
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

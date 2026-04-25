@@ -1,0 +1,43 @@
+{
+  "cas": "494793-67-8",
+  "name": "5-fluoro-1,3-dimethyl-N-[2-(4-methylpentan-2-yl)phenyl]-1H-pyrazole-4-carboxamide; 2'-[(RS)-1,3-dimethylbutyl]-5-fluoro-1,3-dimethylpyrazole-4-carboxanilide; penflufen",
+  "name_tr": "",
+  "ec_no": "-",
+  "index_no": "616-231-00-0",
+  "atp": "ATP15",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 1,
+      "chronic": 1
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H351",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

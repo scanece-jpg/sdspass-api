@@ -1,0 +1,29 @@
+{
+  "cas": "122384-77-4",
+  "name": "Extract residues (coal), creosote oil acid; Wash Oil Extract Residue; [A complex combination of hydrocarbons from the base-freed fraction from the distillation of coal tar, boiling in the range of approximately 250 Â°C to 280 Â°C (482 Â°F to 536 Â°F). It consists predominantly of biphenyl and isomeric diphenylnaphthalenes.]",
+  "name_tr": "",
+  "ec_no": "310-189-4",
+  "index_no": "648-102-00-X",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

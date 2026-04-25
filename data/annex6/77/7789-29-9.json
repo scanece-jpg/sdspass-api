@@ -1,0 +1,35 @@
+{
+  "cas": "7789-29-9",
+  "name": "potassium bifluoride; potassium hydrogen difluoride",
+  "name_tr": "",
+  "ec_no": "232-156-2",
+  "index_no": "009-008-00-9",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 3 *",
+        "h_code": "H301"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H301",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

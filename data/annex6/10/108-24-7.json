@@ -1,0 +1,46 @@
+{
+  "cas": "108-24-7",
+  "name": "acetic anhydride",
+  "name_tr": "",
+  "ec_no": "203-564-8",
+  "index_no": "607-008-00-9",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS07",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H226",
+      "H332",
+      "H302",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "cas": "7783-06-4",
+  "name": "hydrogen sulphide, hydrogen sulfide",
+  "name_tr": "",
+  "ec_no": "231-977-3",
+  "index_no": "016-001-00-4",
+  "atp": "ATP21",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1A",
+        "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": ""
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04",
+      "GHS06",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H220",
+      "H330",
+      "H400"
+    ],
+    "suppl_h": []
+  }
+}

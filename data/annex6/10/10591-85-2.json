@@ -1,0 +1,27 @@
+{
+  "cas": "10591-85-2",
+  "name": "tetrakis(phenylmethyl)thioperoxydi(carbothioamide)",
+  "name_tr": "",
+  "ec_no": "404-310-0",
+  "index_no": "016-073-00-7",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

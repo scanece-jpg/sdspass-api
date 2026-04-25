@@ -1,0 +1,27 @@
+{
+  "cas": "7093-55-2",
+  "name": "pregn-5-ene-3,20-dione bis(ethylene ketal)",
+  "name_tr": "",
+  "ec_no": "407-450-0",
+  "index_no": "606-064-00-1",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

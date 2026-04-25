@@ -1,0 +1,66 @@
+{
+  "cas": "108173-90-6",
+  "name": "guazatine (ISO)",
+  "name_tr": "",
+  "ec_no": "-",
+  "index_no": "612-087-00-8",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 2 *",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS05",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H330",
+      "H312",
+      "H302",
+      "H335",
+      "H315",
+      "H318",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "cas": "302-97-6",
+  "name": "3-oxoandrost-4-ene-17-Î²-carboxylic acid",
+  "name_tr": "",
+  "ec_no": "414-990-0",
+  "index_no": "607-518-00-1",
+  "atp": "ATP01corr",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 2",
+        "h_code": "H361f"
+      },
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H361f",
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

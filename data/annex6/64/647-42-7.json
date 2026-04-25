@@ -1,0 +1,37 @@
+{
+  "cas": "647-42-7",
+  "name": "3,3,4,4,5,5,6,6,7,7,8,8,8-tridecafluorooctan-1-ol",
+  "name_tr": "",
+  "ec_no": "211-477-1",
+  "index_no": "603-246-00-2",
+  "atp": "ATP21",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373 (teeth, bones)"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 1
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H373 (teeth, bones)",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

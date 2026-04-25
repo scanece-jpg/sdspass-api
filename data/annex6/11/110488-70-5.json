@@ -1,0 +1,35 @@
+{
+  "cas": "110488-70-5",
+  "name": "dimethomorph (ISO); (E,Z)-4-(3-(4-chlorophenyl)-3-(3,4-dimethoxyphenyl)acryloyl)morpholine",
+  "name_tr": "",
+  "ec_no": "404-200-2",
+  "index_no": "613-102-00-0",
+  "atp": "ATP17",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360F"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H360F",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

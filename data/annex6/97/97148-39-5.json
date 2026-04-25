@@ -1,0 +1,29 @@
+{
+  "cas": "97148-39-5",
+  "name": "ammonium (Z)-Î±-methoxyimino-2-furylacetate",
+  "name_tr": "",
+  "ec_no": "405-990-1",
+  "index_no": "607-378-00-1",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Sol. 2",
+        "h_code": "H228"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS02"
+    ],
+    "h_codes": [
+      "H228"
+    ],
+    "suppl_h": []
+  }
+}

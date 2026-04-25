@@ -1,0 +1,29 @@
+{
+  "cas": "7550-45-0",
+  "name": "titanium tetrachloride",
+  "name_tr": "",
+  "ec_no": "231-441-9",
+  "index_no": "022-001-00-5",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

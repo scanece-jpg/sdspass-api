@@ -1,0 +1,29 @@
+{
+  "cas": "119-47-1",
+  "name": "6,6'-di-tert-butyl-2,2'-methylenedi-p-cresol; [DBMC]",
+  "name_tr": "",
+  "ec_no": "204-327-1",
+  "index_no": "604-095-00-5",
+  "atp": "ATP17",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360F"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H360F"
+    ],
+    "suppl_h": []
+  }
+}

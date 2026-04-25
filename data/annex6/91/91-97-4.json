@@ -1,0 +1,39 @@
+{
+  "cas": "91-97-4",
+  "name": "3,3'-dimethylbiphenylâ€“4,4'-diyl diisocyanate",
+  "name_tr": "",
+  "ec_no": "202-112-7",
+  "index_no": "615-051-00-X",
+  "atp": "ATP21",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Resp. Sens. 1",
+        "h_code": "H334"
+      },
+      {
+        "class": "Skin Sens. 1A",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H351",
+      "H334",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

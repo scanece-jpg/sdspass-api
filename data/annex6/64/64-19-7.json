@@ -1,0 +1,35 @@
+{
+  "cas": "64-19-7",
+  "name": "acetic acid ... %",
+  "name_tr": "",
+  "ec_no": "200-580-7",
+  "index_no": "607-002-00-6",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      },
+      {
+        "class": "Skin Corr. 1A",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H226",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

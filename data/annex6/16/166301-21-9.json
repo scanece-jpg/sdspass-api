@@ -1,0 +1,34 @@
+{
+  "cas": "166301-21-9",
+  "name": "reaction mass of: cis-2-isobutyl-5-methyl 1,3-dioxane; trans-2-isobutyl-5-methyl 1,3-dioxane",
+  "name_tr": "",
+  "ec_no": "426-130-1",
+  "index_no": "603-110-00-2",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H315",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "cas": "-",
+  "name": "reaction mass of: 1-methyl-3-hydroxypropyl 3,5-[1,1-dimethylethyl]-4-hydroxydihydro-cinnamate and/or 3-hydroxybutyl 3,5-[1,1-dimethylethyl]-4-hydroxydihydrocinnamate; 1,3-butanediol bis[3-(3'-(1,1-dimethylethyl)4'-hydroxy-phenyl)propionate] isomers; 1,3-butanediol bis[3-(3',5'-(1,1-dimethylethyl)-4'-hydroxyphenyl)propionate] isomers",
+  "name_tr": "",
+  "ec_no": "423-600-8",
+  "index_no": "650-050-00-8",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "cas": "68919-02-8",
+  "name": "Gases (petroleum), fluidized catalytic cracker fractionation off; Refinery gas; [A complex combination produced by the fractionation of the overhead product of the fluidized catalytic cracking process. It consists of hydrogen, hydrogen sulfide, nitrogen, and hydrocarbons having carbon numbers predominantly in the range of C1 through C5.]",
+  "name_tr": "",
+  "ec_no": "272-874-3",
+  "index_no": "649-158-00-8",
+  "atp": "ATP01corr",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": ""
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

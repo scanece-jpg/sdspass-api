@@ -1,0 +1,34 @@
+{
+  "cas": "64137-52-6",
+  "name": "2-[3-(methylamino)propyl]-1H-benzimidazole",
+  "name_tr": "",
+  "ec_no": "425-760-4",
+  "index_no": "613-239-00-6",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H318",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

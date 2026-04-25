@@ -1,0 +1,45 @@
+{
+  "cas": "51338-27-3",
+  "name": "methyl 2-(4-(2,4-dichlorophenoxy)phenoxy)propionate; methyl (RS)-2-[4-(2,4-dichlorophenoxy)phenoxy]propionate; diclofop-methyl (ISO)",
+  "name_tr": "",
+  "ec_no": "257-141-8",
+  "index_no": "607-165-00-3",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

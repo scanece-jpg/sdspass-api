@@ -1,0 +1,34 @@
+{
+  "cas": "71-55-6",
+  "name": "1,1,1-trichloroethane; methyl chloroform",
+  "name_tr": "",
+  "ec_no": "200-756-3",
+  "index_no": "602-013-00-2",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H332"
+      },
+      {
+        "class": "Ozone 1",
+        "h_code": "H420"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H332",
+      "H420"
+    ],
+    "suppl_h": []
+  }
+}

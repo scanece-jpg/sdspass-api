@@ -1,0 +1,35 @@
+{
+  "cas": "68157-60-8",
+  "name": "forchlorfenuron (ISO); 1-(2-chloro-4-pyridyl)-3-phenylurea",
+  "name_tr": "",
+  "ec_no": "-",
+  "index_no": "613-254-00-8",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H351",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "cas": "7775-14-6",
+  "name": "sodium dithionite; sodium hydrosulphite",
+  "name_tr": "",
+  "ec_no": "231-890-0",
+  "index_no": "016-028-00-1",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Self-heat. 1",
+        "h_code": "H251"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H251",
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

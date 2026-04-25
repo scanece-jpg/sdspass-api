@@ -1,0 +1,40 @@
+{
+  "cas": "90886-53-6",
+  "name": "methyl 3-amino-2,2,3-trimethylbutyrate",
+  "name_tr": "",
+  "ec_no": "431-720-7",
+  "index_no": "607-611-00-7",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS07",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H302",
+      "H314",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

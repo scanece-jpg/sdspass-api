@@ -1,0 +1,43 @@
+{
+  "cas": "137641-05-5",
+  "name": "picolinafen (ISO); N-(4-fluorophenyl)-6-[3-(trifluoromethyl)phenoxy]pyridine-2-carboxamide; 4â€²-fluoro-6-[(Î±,Î±,Î±-trifluoro-m-tolyl)oxy]picolinanilide",
+  "name_tr": "",
+  "ec_no": "-",
+  "index_no": "616-242-00-0",
+  "atp": "ATP21",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373 (blood system, thyroid)"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 1000,
+      "chronic": 1000
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H373 (blood system, thyroid)",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

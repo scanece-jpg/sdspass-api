@@ -1,0 +1,37 @@
+{
+  "cas": "556-67-2",
+  "name": "octamethylcyclotetrasiloxane; [D4]",
+  "name_tr": "",
+  "ec_no": "209-136-7",
+  "index_no": "014-018-00-1",
+  "atp": "ATP15",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 2",
+        "h_code": "H361f ***"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 10
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H361f ***",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

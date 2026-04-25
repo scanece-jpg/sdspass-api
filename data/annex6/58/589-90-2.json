@@ -1,0 +1,52 @@
+{
+  "cas": "589-90-2",
+  "name": "1,4-dimethylcyclohexane",
+  "name_tr": "",
+  "ec_no": "209-663-2",
+  "index_no": "601-019-00-2",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H336"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H225",
+      "H304",
+      "H336",
+      "H315",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

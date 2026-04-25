@@ -1,0 +1,34 @@
+{
+  "cas": "92061-92-2",
+  "name": "Residues (coal tar), anthracene oil distn.; Anthracene Oil Fraction; [The residue from the fraction distillation of crude anthracene boiling in the approximate range of 340 Â°C to 400 Â°C (644 Â°F to 752 Â°F). It consists predominantly of tri- and polynuclear aromatic and heterocyclic hydrocarbons.]",
+  "name_tr": "",
+  "ec_no": "295-505-8",
+  "index_no": "648-105-00-6",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

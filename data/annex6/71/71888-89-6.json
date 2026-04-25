@@ -1,0 +1,29 @@
+{
+  "cas": "71888-89-6",
+  "name": "1,2-benzenedicarboxylic acid; di-C6-8-branched alkylesters, C7-rich",
+  "name_tr": "",
+  "ec_no": "276-158-1",
+  "index_no": "607-483-00-2",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360D ***"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H360D ***"
+    ],
+    "suppl_h": []
+  }
+}

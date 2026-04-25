@@ -1,0 +1,27 @@
+{
+  "cas": "171090-93-0",
+  "name": "reaction mass of: esters of C14-C15 branched alcohols with 3,5-di-t-butyl-4-hydroxyphenyl propionic acid; C15 branched and linear alkyl 3,5-bis(1,1-dimethylethyl)-4-hydroxybenzenepropanoate; C13 branched and linear alkyl 3,5-bis(1,1-dimethylethyl)-4-hydroxybenzenepropanoate",
+  "name_tr": "",
+  "ec_no": "413-750-2",
+  "index_no": "607-384-00-4",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "cas": "77402-03-0",
+  "name": "methyl acrylamidomethoxyacetate (containing â‰¥ 0,1 % acrylamid)",
+  "name_tr": "",
+  "ec_no": "401-890-7",
+  "index_no": "607-190-00-X",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H302",
+      "H319"
+    ],
+    "suppl_h": []
+  }
+}

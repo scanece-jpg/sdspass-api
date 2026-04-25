@@ -1,0 +1,35 @@
+{
+  "cas": "556-56-9",
+  "name": "3-iodpropene; allyl iodide",
+  "name_tr": "",
+  "ec_no": "209-130-4",
+  "index_no": "602-054-00-6",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H225",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

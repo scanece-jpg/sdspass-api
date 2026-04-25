@@ -1,0 +1,45 @@
+{
+  "cas": "92045-80-2",
+  "name": "Petroleum gases, liquefied, sweetened, C4 fraction; Petroleum gas; [A complex combination of hydrocarbons obtained by subjecting a liquified petroleum gas mix to a sweetening process to oxidize mercaptans or to remove acidic impurities. It consists predominantly of C4 saturated and unsaturated hydrocarbons.]",
+  "name_tr": "",
+  "ec_no": "295-463-0",
+  "index_no": "649-117-00-4",
+  "atp": "ATP01corr",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": ""
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

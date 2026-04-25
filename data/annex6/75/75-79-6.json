@@ -1,0 +1,45 @@
+{
+  "cas": "75-79-6",
+  "name": "trichloro(methyl)silane; methyltrichlorosilane",
+  "name_tr": "",
+  "ec_no": "200-902-6",
+  "index_no": "014-004-00-5",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H225",
+      "H335",
+      "H315",
+      "H319"
+    ],
+    "suppl_h": []
+  }
+}

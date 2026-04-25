@@ -1,0 +1,29 @@
+{
+  "cas": "12179-04-3",
+  "name": "tetraboron disodium heptaoxide, hydrate [1]\ndisodium tetraborate, anhydrous [2]\northoboric acid, sodium salt [3]\ndisodium tetraborate decahydrate [4]\ndisodium tetraborate pentahydrate [5]",
+  "name_tr": "",
+  "ec_no": "215-540-4",
+  "index_no": "005-011-00-4",
+  "atp": "ATP20",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360FD"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H360FD"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "cas": "97862-77-6",
+  "name": "Foots oil (petroleum), silicic acid-treated; Foots oil; [A complex combination of hydrocarbons obtained by the treatment of Foots oil with silicic acid for removal of trace constituents and impurities. It consists predominantly of straight chain hydrocarbons having carbon numbers predominantly greater than C12.]",
+  "name_tr": "",
+  "ec_no": "308-127-6",
+  "index_no": "649-315-00-0",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

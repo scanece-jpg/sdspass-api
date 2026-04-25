@@ -1,0 +1,29 @@
+{
+  "cas": "68512-61-8",
+  "name": "Residues (petroleum), heavy coker and light vacuum; Heavy Fuel oil; [A complex combination of hydrocarbons produced as the residual fraction from the distillation of heavy coker gas oil and light vacuum gas oil. It consists predominantly of hydrocarbons having carbon numbers predominantly greater than C13 and boiling above approximately 230 Â°C (446 Â°F).]",
+  "name_tr": "",
+  "ec_no": "270-983-0",
+  "index_no": "649-027-00-5",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

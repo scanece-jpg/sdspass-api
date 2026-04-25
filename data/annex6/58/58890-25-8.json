@@ -1,0 +1,27 @@
+{
+  "cas": "58890-25-8",
+  "name": "3,3â€²-dicyclohexyl-1,1â€²-methylenebis(4,1-phenylene)diurea",
+  "name_tr": "",
+  "ec_no": "406-370-3",
+  "index_no": "616-094-00-7",
+  "atp": "ATP10",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

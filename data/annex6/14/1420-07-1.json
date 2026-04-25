@@ -1,0 +1,51 @@
+{
+  "cas": "1420-07-1",
+  "name": "dinoterb (ISO); 2-tert-butyl-4,6-dinitrophenol",
+  "name_tr": "",
+  "ec_no": "215-813-8",
+  "index_no": "609-030-00-4",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360D ***"
+      },
+      {
+        "class": "Acute Tox. 3 *",
+        "h_code": "H311"
+      },
+      {
+        "class": "Acute Tox. 2 *",
+        "h_code": "H300"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS06",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H360D ***",
+      "H311",
+      "H300",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

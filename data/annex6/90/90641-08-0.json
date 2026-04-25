@@ -1,0 +1,29 @@
+{
+  "cas": "90641-08-0",
+  "name": "Extracts (petroleum), heavy paraffinic distillate solvent, hydrotreated; Distillate aromatic extract (treated); [A complex combination of hydrocarbons produced by treating a heavy paraffinic distillate solvent extract with hydrogen in the presence of a catalyst. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C21 through C33 and boiling in the range of approximately 350 Â°C to 480 Â°C (662 Â°F to 896 Â°F).",
+  "name_tr": "",
+  "ec_no": "292-632-0",
+  "index_no": "649-535-00-7",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

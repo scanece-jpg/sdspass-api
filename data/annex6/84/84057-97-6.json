@@ -1,0 +1,29 @@
+{
+  "cas": "84057-97-6",
+  "name": "sodium 1-amino-4-[2-methyl-5-(4-methylphenylsulfonylamino)phenylamino]anthraquinone-2-sulfonate",
+  "name_tr": "",
+  "ec_no": "400-100-8",
+  "index_no": "016-065-00-3",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [
+      "GHS09"
+    ],
+    "h_codes": [
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

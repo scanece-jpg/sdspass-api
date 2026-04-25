@@ -1,0 +1,34 @@
+{
+  "cas": "97-95-0",
+  "name": "2-ethylbutan-1-ol",
+  "name_tr": "",
+  "ec_no": "202-621-4",
+  "index_no": "603-051-00-2",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H312",
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

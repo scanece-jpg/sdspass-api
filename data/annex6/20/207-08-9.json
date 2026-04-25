@@ -1,0 +1,40 @@
+{
+  "cas": "207-08-9",
+  "name": "benzo[k]fluoranthene",
+  "name_tr": "",
+  "ec_no": "205-916-6",
+  "index_no": "601-036-00-5",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H350",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

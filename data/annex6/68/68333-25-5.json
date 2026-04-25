@@ -1,0 +1,29 @@
+{
+  "cas": "68333-25-5",
+  "name": "Distillates (petroleum), hydrodesulfurized light catalytic cracked; Cracked gasoil; [A complex combination of hydrocarbons obtained by treating light catalytic cracked distillates with hydrogen to convert organic sulfur to hydrogen sulfide which is removed. It consists of hydrocarbons having carbon numbers predominantly in the range of C9 through C25 and boiling in the range of approximately 150 Â°C to 400 Â°C (302 Â°F to 752 Â°F). It contains a relatively large proportion of bicyclic aromatic hydrocarbons.]",
+  "name_tr": "",
+  "ec_no": "269-781-5",
+  "index_no": "649-439-00-5",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

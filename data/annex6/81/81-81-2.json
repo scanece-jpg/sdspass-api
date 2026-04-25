@@ -1,0 +1,56 @@
+{
+  "cas": "81-81-2",
+  "name": "warfarin (ISO); 4-hydroxy-3-(3-oxo-1-phenylbutyl)-2H-chromen-2-one [1]\n(S)-4-hydroxy-3-(3-oxo-1-phenylbutyl)-2-benzopyrone [2]\n(R)-4-hydroxy-3-(3-oxo-1-phenylbutyl)-2-benzopyrone [3]",
+  "name_tr": "",
+  "ec_no": "201-377-6",
+  "index_no": "607-056-00-0",
+  "atp": "ATP09",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1A",
+        "h_code": "H360D"
+      },
+      {
+        "class": "Acute Tox. 1",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 1",
+        "h_code": "H310"
+      },
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H300"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372 (blood)"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS06",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H360D",
+      "H330",
+      "H310",
+      "H300",
+      "H372 (blood)",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

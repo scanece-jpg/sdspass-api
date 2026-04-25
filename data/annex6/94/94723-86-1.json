@@ -1,0 +1,45 @@
+{
+  "cas": "94723-86-1",
+  "name": "2-butyryl-3-hydroxy-5-thiocyclohexan-3-yl-cyclohex-2-en-1-one",
+  "name_tr": "",
+  "ec_no": "425-150-8",
+  "index_no": "606-100-00-6",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360F ***"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H360F ***",
+      "H302",
+      "H317",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

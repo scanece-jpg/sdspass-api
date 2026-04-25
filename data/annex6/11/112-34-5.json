@@ -1,0 +1,29 @@
+{
+  "cas": "112-34-5",
+  "name": "2-(2-butoxyethoxy)ethanol; diethylene glycol monobutyl ether",
+  "name_tr": "",
+  "ec_no": "203-961-6",
+  "index_no": "603-096-00-8",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319"
+    ],
+    "suppl_h": []
+  }
+}

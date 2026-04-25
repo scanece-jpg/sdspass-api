@@ -1,0 +1,39 @@
+{
+  "cas": "116340-05-7",
+  "name": "tetrakis(tetramethylammonium) 6-amino-4-hydroxy-3-(7-sulfonato-4-(4-sulfonatophenylazo)-1-naphthylazo)naphthalene-2,7-disulfonate",
+  "name_tr": "",
+  "ec_no": "405-170-3",
+  "index_no": "611-020-00-X",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 3 *",
+        "h_code": "H301"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06"
+    ],
+    "h_codes": [
+      "H301",
+      "H317",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

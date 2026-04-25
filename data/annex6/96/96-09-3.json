@@ -1,0 +1,40 @@
+{
+  "cas": "96-09-3",
+  "name": "styrene oxide; (epoxyethyl)benzene; phenyloxirane",
+  "name_tr": "",
+  "ec_no": "202-476-7",
+  "index_no": "603-084-00-2",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H312"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H350",
+      "H312",
+      "H319"
+    ],
+    "suppl_h": []
+  }
+}

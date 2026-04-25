@@ -1,0 +1,45 @@
+{
+  "cas": "2703-37-9",
+  "name": "S-[2-(ethylsulphinyl)ethyl] O,O-dimethyl phosphorodithioate",
+  "name_tr": "",
+  "ec_no": "-",
+  "index_no": "015-065-00-0",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 2 *",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 1",
+        "h_code": "H310"
+      },
+      {
+        "class": "Acute Tox. 2 *",
+        "h_code": "H300"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H330",
+      "H310",
+      "H300",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "cas": "51601-57-1",
+  "name": "4-(4-tolyloxy)biphenyl",
+  "name_tr": "",
+  "ec_no": "405-730-7",
+  "index_no": "604-047-00-3",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "STOT RE 2 *",
+        "h_code": "H373 **"
+      },
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H373 **",
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

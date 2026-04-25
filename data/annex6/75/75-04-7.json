@@ -1,0 +1,45 @@
+{
+  "cas": "75-04-7",
+  "name": "ethylamine",
+  "name_tr": "",
+  "ec_no": "200-834-7",
+  "index_no": "612-002-00-4",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": "H335"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H319"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": ""
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H220",
+      "H335",
+      "H319"
+    ],
+    "suppl_h": []
+  }
+}

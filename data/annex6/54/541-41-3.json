@@ -1,0 +1,46 @@
+{
+  "cas": "541-41-3",
+  "name": "ethyl chloroformate",
+  "name_tr": "",
+  "ec_no": "208-778-5",
+  "index_no": "607-020-00-4",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "Acute Tox. 2 *",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS06",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H225",
+      "H330",
+      "H302",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

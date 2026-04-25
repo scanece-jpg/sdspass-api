@@ -1,0 +1,53 @@
+{
+  "cas": "79538-32-2",
+  "name": "tefluthrin (ISO); 2,3,5,6-tetrafluoro-4-methylbenzyl (1RS,3RS)-3-[(Z)-2-chloro-3,3,3-trifluoroprop-1-enyl]-2,2-dimethylcyclopropanecarboxylate",
+  "name_tr": "",
+  "ec_no": "-",
+  "index_no": "607-723-00-6",
+  "atp": "ATP10",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 1",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H310"
+      },
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H300"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 10000,
+      "chronic": 10000
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H330",
+      "H310",
+      "H300",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

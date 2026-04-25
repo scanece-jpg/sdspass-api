@@ -1,0 +1,45 @@
+{
+  "cas": "315-18-4",
+  "name": "mexacarbate (ISO); 3,5-dimethyl-4-dimethylaminophenyl N-methylcarbamate",
+  "name_tr": "",
+  "ec_no": "206-249-3",
+  "index_no": "006-054-00-1",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 2 *",
+        "h_code": "H300"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H312",
+      "H300",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

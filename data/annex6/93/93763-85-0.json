@@ -1,0 +1,29 @@
+{
+  "cas": "93763-85-0",
+  "name": "Residues (petroleum), steam-cracked heat-soaked naphtha; Cracked gasoil; [A complex combination of hydrocarbons obtained as residue from the distillation of steam cracked heat soaked naphtha and boiling in the range of approximately 150 Â°C to 350 Â°C (302 Â°F to 662 Â°F).]",
+  "name_tr": "",
+  "ec_no": "297-905-8",
+  "index_no": "649-448-00-4",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

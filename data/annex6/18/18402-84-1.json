@@ -1,0 +1,46 @@
+{
+  "cas": "18402-84-1",
+  "name": "(3E)-dec-3-en-2-one",
+  "name_tr": "",
+  "ec_no": "",
+  "index_no": "",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS07",
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H332",
+      "H304",
+      "H315",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "cas": "68477-92-9",
+  "name": "Gases (petroleum), dry sour, gas-concn.-unit-off; Refinery gas; [The complex combination of dry gases from a gas concentration unit. It consists of hydrogen, hydrogen sulfide and hydrocarbons having carbon numbers predominantly in the range of C1 through C3.]",
+  "name_tr": "",
+  "ec_no": "270-774-4",
+  "index_no": "649-129-00-X",
+  "atp": "ATP01corr",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": ""
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "cas": "189-55-9",
+  "name": "benzo[rst]pentaphene",
+  "name_tr": "",
+  "ec_no": "205-877-5",
+  "index_no": "601-090-00-X",
+  "atp": "ATP14",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H341"
+    ],
+    "suppl_h": []
+  }
+}

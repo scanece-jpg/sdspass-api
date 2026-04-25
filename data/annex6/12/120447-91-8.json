@@ -1,0 +1,35 @@
+{
+  "cas": "120447-91-8",
+  "name": "potassium 2-amino-2-methylpropionate octahydrate",
+  "name_tr": "",
+  "ec_no": "405-560-3",
+  "index_no": "607-227-00-X",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1A",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS07",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H302",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

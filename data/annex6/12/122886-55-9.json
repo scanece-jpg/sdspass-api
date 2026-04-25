@@ -1,0 +1,27 @@
+{
+  "cas": "122886-55-9",
+  "name": "N,N''-(methylenedi-4,1-phenylene)bis[N'-octylurea]",
+  "name_tr": "",
+  "ec_no": "451-060-3",
+  "index_no": "616-204-00-3",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

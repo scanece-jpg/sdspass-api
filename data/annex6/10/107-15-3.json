@@ -1,0 +1,57 @@
+{
+  "cas": "107-15-3",
+  "name": "ethylenediamine; 1,2-diaminoethane",
+  "name_tr": "",
+  "ec_no": "203-468-6",
+  "index_no": "612-006-00-6",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Resp. Sens. 1",
+        "h_code": "H334"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS07",
+      "GHS05",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H226",
+      "H312",
+      "H302",
+      "H314",
+      "H334",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

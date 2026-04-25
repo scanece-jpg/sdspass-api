@@ -1,0 +1,29 @@
+{
+  "cas": "513-77-9",
+  "name": "barium carbonate",
+  "name_tr": "",
+  "ec_no": "208-167-3",
+  "index_no": "056-003-00-2",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

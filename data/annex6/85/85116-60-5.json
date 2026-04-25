@@ -1,0 +1,39 @@
+{
+  "cas": "85116-60-5",
+  "name": "Naphtha (petroleum), hydrodesulfurized thermal cracked light; Low boiling point hydrogen treated naphtha; [A complex combination of hydrocarbons obtained by fractionation of hydrodesulfurized thermal cracker distillate. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C5 tÂ°C11 and boiling in the range of approximately 23 Â°C to 195 Â°C (73 Â°F to 383 Â°F).]",
+  "name_tr": "",
+  "ec_no": "285-511-9",
+  "index_no": "649-335-00-X",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "cas": "43136-14-7",
+  "name": "3,3'-dioctadecyl-1,1'-methylenebis(4,1-phenylene)diurea",
+  "name_tr": "",
+  "ec_no": "406-690-3",
+  "index_no": "616-095-00-2",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

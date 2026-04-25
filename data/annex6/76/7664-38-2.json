@@ -1,0 +1,29 @@
+{
+  "cas": "7664-38-2",
+  "name": "phosphoric acid ... %, orthophosphoric acid ... %",
+  "name_tr": "",
+  "ec_no": "231-633-2",
+  "index_no": "015-011-00-6",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "cas": "15879-93-3",
+  "name": "chloralose (INN); (R)-1,2-O-(2,2,2-trichloroethylidene)-Î±-D-glucofuranose; glucochloralose; anhydroglucochloral",
+  "name_tr": "",
+  "ec_no": "240-016-7",
+  "index_no": "605-013-00-0",
+  "atp": "ATP09",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H336"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 10,
+      "chronic": 10
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H332",
+      "H301",
+      "H336",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

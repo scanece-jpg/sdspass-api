@@ -1,0 +1,39 @@
+{
+  "cas": "68475-70-7",
+  "name": "Aromatic hydrocarbons, C6-8, naphtha-raffinate pyrolyzate-derived; Low boiling point thermally cracked naphtha; [A complex combination of hydrocarbons obtained by the fractionation pyrolysis at 816 Â°C (1 500  Â°F) of naphtha and raffinate. It consists predominantly of aromatic hydrocarbons having carbon numbers predominantly in the range of C6 through C8, including benzene.]",
+  "name_tr": "",
+  "ec_no": "270-658-3",
+  "index_no": "649-321-00-3",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

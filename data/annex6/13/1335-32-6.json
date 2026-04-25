@@ -1,0 +1,50 @@
+{
+  "cas": "1335-32-6",
+  "name": "lead acetate, basic",
+  "name_tr": "",
+  "ec_no": "215-630-3",
+  "index_no": "082-007-00-9",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Repr. 1A",
+        "h_code": "H360Df"
+      },
+      {
+        "class": "STOT RE 2 *",
+        "h_code": "H373 **"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H351",
+      "H360Df",
+      "H373 **",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

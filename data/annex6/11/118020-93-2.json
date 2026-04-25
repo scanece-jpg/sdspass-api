@@ -1,0 +1,27 @@
+{
+  "cas": "118020-93-2",
+  "name": "2-(1-butyl-3,5-dioxo-2-phenyl-(1,2,4)-triazolidin-4-yl)-4,4-dimethyl-3-oxo-N-(2-methoxy-5-(2-(dodecyl-1-sulfonyl))propionylamino)-phenyl)-pentanamide",
+  "name_tr": "",
+  "ec_no": "418-060-5",
+  "index_no": "616-119-00-1",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

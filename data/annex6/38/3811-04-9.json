@@ -1,0 +1,35 @@
+{
+  "cas": "3811-04-9",
+  "name": "potassium chlorate",
+  "name_tr": "",
+  "ec_no": "223-289-7",
+  "index_no": "017-004-00-3",
+  "atp": "ATP21",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Ox. Sol. 1",
+        "h_code": "H271"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS03",
+      "GHS06"
+    ],
+    "h_codes": [
+      "H271",
+      "H301"
+    ],
+    "suppl_h": []
+  }
+}

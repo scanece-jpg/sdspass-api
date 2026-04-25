@@ -1,0 +1,39 @@
+{
+  "cas": "132885-85-9",
+  "name": "4-[N-ethyl-N-(2-hydroxyethyl)amino]-1-(2-hydroxyethyl)amino-2-nitrobenzene, monohydrochloride",
+  "name_tr": "",
+  "ec_no": "407-020-2",
+  "index_no": "612-153-00-6",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302",
+      "H317",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

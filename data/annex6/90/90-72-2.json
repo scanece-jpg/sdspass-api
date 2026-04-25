@@ -1,0 +1,39 @@
+{
+  "cas": "90-72-2",
+  "name": "2,4,6-tris(dimethylaminomethyl)phenol",
+  "name_tr": "",
+  "ec_no": "202-013-9",
+  "index_no": "603-069-00-0",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302",
+      "H315",
+      "H319"
+    ],
+    "suppl_h": []
+  }
+}

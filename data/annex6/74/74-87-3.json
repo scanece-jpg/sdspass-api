@@ -1,0 +1,45 @@
+{
+  "cas": "74-87-3",
+  "name": "chloromethane; methyl chloride",
+  "name_tr": "",
+  "ec_no": "200-817-4",
+  "index_no": "602-001-00-7",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": "H351"
+      },
+      {
+        "class": "Carc. 2",
+        "h_code": "H373 **"
+      },
+      {
+        "class": "STOT RE 2 *",
+        "h_code": ""
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H351",
+      "H373 **"
+    ],
+    "suppl_h": []
+  }
+}

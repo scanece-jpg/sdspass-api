@@ -1,0 +1,29 @@
+{
+  "cas": "1117-37-9",
+  "name": "ethyl trans-3-dimethylaminoacrylate",
+  "name_tr": "",
+  "ec_no": "402-650-4",
+  "index_no": "607-185-00-2",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

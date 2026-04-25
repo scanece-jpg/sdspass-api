@@ -1,0 +1,29 @@
+{
+  "cas": "1576-35-8",
+  "name": "toluene-4-sulphonohydrazide",
+  "name_tr": "",
+  "ec_no": "216-407-3",
+  "index_no": "607-759-00-2",
+  "atp": "ATP18",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Self-react. D",
+        "h_code": "H242"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02"
+    ],
+    "h_codes": [
+      "H242"
+    ],
+    "suppl_h": []
+  }
+}

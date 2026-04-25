@@ -1,0 +1,49 @@
+{
+  "cas": "76-06-2",
+  "name": "trichloronitromethane; chloropicrin",
+  "name_tr": "",
+  "ec_no": "200-930-9",
+  "index_no": "610-001-00-3",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 2 *",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06"
+    ],
+    "h_codes": [
+      "H330",
+      "H302",
+      "H335",
+      "H315",
+      "H319"
+    ],
+    "suppl_h": []
+  }
+}

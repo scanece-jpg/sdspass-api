@@ -1,0 +1,29 @@
+{
+  "cas": "105-68-0",
+  "name": "isopentyl propionate [1]\npentyl propionate [2]\n2-methylbutyl propionate [3]",
+  "name_tr": "",
+  "ec_no": "203-322-1",
+  "index_no": "607-131-00-8",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS02"
+    ],
+    "h_codes": [
+      "H226"
+    ],
+    "suppl_h": []
+  }
+}

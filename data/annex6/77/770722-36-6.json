@@ -1,0 +1,29 @@
+{
+  "cas": "770722-36-6",
+  "name": "dichloro-(3-(3-chloro-4-fluorophenyl)propyl)methylsilane",
+  "name_tr": "",
+  "ec_no": "407-180-3",
+  "index_no": "014-026-00-5",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Corr. 1A",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

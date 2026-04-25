@@ -1,0 +1,45 @@
+{
+  "cas": "111-40-0",
+  "name": "2,2'-iminodiethylamine; diethylenetriamine",
+  "name_tr": "",
+  "ec_no": "203-865-4",
+  "index_no": "612-058-00-X",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS07",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H312",
+      "H302",
+      "H314",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

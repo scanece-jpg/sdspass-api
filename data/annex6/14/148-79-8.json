@@ -1,0 +1,37 @@
+{
+  "cas": "148-79-8",
+  "name": "thiabendazole (ISO); 2-(thiazol-4-yl)benzimidazole",
+  "name_tr": "",
+  "ec_no": "205-725-8",
+  "index_no": "613-054-00-0",
+  "atp": "ATP14",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 1,
+      "chronic": 1
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS09"
+    ],
+    "h_codes": [
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

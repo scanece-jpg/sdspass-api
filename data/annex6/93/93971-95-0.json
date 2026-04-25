@@ -1,0 +1,27 @@
+{
+  "cas": "93971-95-0",
+  "name": "phthalocyanine-N-[3-(diethylamino)propyl]sulfonamide copper complex",
+  "name_tr": "",
+  "ec_no": "413-650-9",
+  "index_no": "029-009-00-8",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

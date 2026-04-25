@@ -1,0 +1,34 @@
+{
+  "cas": "151006-58-5",
+  "name": "reaction mass of: branched icosane; branched docosane; branched tetracosane",
+  "name_tr": "",
+  "ec_no": "417-050-8",
+  "index_no": "601-070-00-0",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H332"
+      },
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H332",
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

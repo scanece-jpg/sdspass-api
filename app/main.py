@@ -334,23 +334,23 @@ async def substance_lookup(cas: str):
     # Sıra 1-2-3: Lokal dosyalar
     result = lookup_substance(cas)
 
-    # Sıra 4: ECHA C&L API — lokal bulunamazsa canlı çek, data/annex6/'a kaydet
+    # Sıra 5-6: ECHA C&L API → data/echa_cl/ | PubChem → data/pubchem_cl/
+    # (kaydetme echa_service.lookup_echa_api içinde yapılır)
     if result is None:
         try:
             from app.services.echa_service import lookup_echa_api
-            from app.services.substance_lookup import save_annex6_substance
             echa = await lookup_echa_api(cas)
             if echa and echa.get('h_codes'):
-                # Kalıcı olarak kaydet — bir sonraki lookup API'ye gitmez
-                save_annex6_substance(cas, echa)
+                cache_src  = echa.get('_cache_source', 'echa_cl')
+                is_pubchem = cache_src == 'pubchem'
                 return {
                     "found"     : True,
                     "cas"       : cas,
                     "name"      : echa.get("name", ""),
                     "ec_no"     : echa.get("ec_no", "") or get_ec_no(cas),
                     "reach_no"  : get_reg_no(cas),
-                    "annex_vi"  : True,
                     "sea_ek6"   : False,
+                    "annex_vi"  : False,
                     "signal"    : echa.get("signal", ""),
                     "pictograms": echa.get("pictograms", []),
                     "hazards"   : [
@@ -363,7 +363,7 @@ async def substance_lookup(cas: str):
                     "m_factors" : echa.get("m_factors", {}),
                     "scl"       : [],
                     "oel"       : oel,
-                    "source"    : echa.get("source", "ECHA C&L API"),
+                    "source"    : echa.get("source", "PubChem" if is_pubchem else "ECHA C&L API"),
                 }
         except Exception:
             pass

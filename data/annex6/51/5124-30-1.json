@@ -1,0 +1,55 @@
+{
+  "cas": "5124-30-1",
+  "name": "4,4'-methylenedi(cyclohexyl isocyanate); dicyclohexylmethane-4,4'-di-isocyanate",
+  "name_tr": "",
+  "ec_no": "225-863-2",
+  "index_no": "615-009-00-0",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 3 *",
+        "h_code": "H331"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Resp. Sens. 1",
+        "h_code": "H334"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H331",
+      "H335",
+      "H315",
+      "H319",
+      "H334",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "cas": "192268-65-8",
+  "name": "reaction mass of: triphenylthiophosphate and tertiary butylated phenyl derivatives",
+  "name_tr": "",
+  "ec_no": "421-820-9",
+  "index_no": "607-501-00-9",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

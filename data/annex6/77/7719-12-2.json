@@ -1,0 +1,46 @@
+{
+  "cas": "7719-12-2",
+  "name": "phosphorus trichloride",
+  "name_tr": "",
+  "ec_no": "231-749-3",
+  "index_no": "015-007-00-4",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 2 *",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 2 *",
+        "h_code": "H300"
+      },
+      {
+        "class": "STOT RE 2 *",
+        "h_code": "H373 **"
+      },
+      {
+        "class": "Skin Corr. 1A",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS08",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H330",
+      "H300",
+      "H373 **",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

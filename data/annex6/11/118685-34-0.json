@@ -1,0 +1,46 @@
+{
+  "cas": "118685-34-0",
+  "name": "sodium 5-n-butylbenzotriazole",
+  "name_tr": "",
+  "ec_no": "404-450-2",
+  "index_no": "613-103-00-6",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS07",
+      "GHS05",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H314",
+      "H317",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "cas": "91995-17-4",
+  "name": "Anthracene oil, anthracene paste, distn. lights; Anthracene Oil Fraction; [A complex combination of hydrocarbons from the distillation of anthracene obtained by crystallization of anthracene oil from bituminous high temperature tar and boiling in the range of approximately 290 Â°C to 340 Â°C (554 Â°F to 644 Â°F). It contains chiefly trinuclear aromatics and their dihydro derivatives.]",
+  "name_tr": "",
+  "ec_no": "295-278-5",
+  "index_no": "648-108-00-2",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

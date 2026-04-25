@@ -1,0 +1,27 @@
+{
+  "cas": "123590-00-1",
+  "name": "N-(2-(1-allyl-4,5-dicyanoimidazol-2-ylazo)-5-(dipropylamino)phenyl)-acetamide",
+  "name_tr": "",
+  "ec_no": "417-530-7",
+  "index_no": "616-128-00-0",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

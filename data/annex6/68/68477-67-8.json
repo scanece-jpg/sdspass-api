@@ -1,0 +1,45 @@
+{
+  "cas": "68477-67-8",
+  "name": "Gases (petroleum), benzene unit recycle, hydrogen-rich; Refinery gas; [A complex combination of hydrocarbons obtained by recycling the gases of the benzene unit. It consists primarily of hydrogen with various small amounts of carbon monoxide and hydrocarbons having carbon numbers in the range of C1 through C6.]",
+  "name_tr": "",
+  "ec_no": "270-748-2",
+  "index_no": "649-122-00-1",
+  "atp": "ATP01corr",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": ""
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

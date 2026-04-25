@@ -1,0 +1,35 @@
+{
+  "cas": "7601-90-3",
+  "name": "perchloric acid ... %",
+  "name_tr": "",
+  "ec_no": "231-512-4",
+  "index_no": "017-006-00-4",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Ox. Liq. 1",
+        "h_code": "H271"
+      },
+      {
+        "class": "Skin Corr. 1A",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS03",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H271",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

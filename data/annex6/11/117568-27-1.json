@@ -1,0 +1,27 @@
+{
+  "cas": "117568-27-1",
+  "name": "2-nitro-4,5-bis(benzyloxy)phenylacetonitrile",
+  "name_tr": "",
+  "ec_no": "410-970-0",
+  "index_no": "608-025-00-4",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

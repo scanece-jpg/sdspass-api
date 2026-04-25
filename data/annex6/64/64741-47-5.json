@@ -1,0 +1,39 @@
+{
+  "cas": "64741-47-5",
+  "name": "Natural gas condensates (petroleum); Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons separated as a liquid from natural gas in a surface separator by retrograde condensation. It consists mainly of hydrocarbons having carbon numbers predominantly in the range of C2 tÂ°C20. It is a liquid at atmospheric temperature and pressure.]",
+  "name_tr": "",
+  "ec_no": "265-047-3",
+  "index_no": "649-346-00-X",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

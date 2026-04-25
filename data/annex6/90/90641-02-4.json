@@ -1,0 +1,34 @@
+{
+  "cas": "90641-02-4",
+  "name": "Extract residues (coal), light oil alk., distn. overheads; Light Oil Extract Residues, low boiling; [The first fraction from the distillation of aromatic hydrocarbons, coumarone, naphthalene and indene rich prefractionator bottoms or washed carbolic oil boiling substantially below 145 Â°C (293 Â°F). Composed primarily of C7 and C8 aliphatic and aromatic hydrocarbons.]",
+  "name_tr": "",
+  "ec_no": "292-625-2",
+  "index_no": "648-017-00-8",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

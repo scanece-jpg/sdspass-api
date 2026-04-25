@@ -1,0 +1,29 @@
+{
+  "cas": "168113-78-8",
+  "name": "5-[[4-chloro-6-[[2-[[4-fluoro-6-[[5-hydroxy-6-[(4-methoxy-2-sulfophenyl)azo]-7-sulfo-2-naphthalenyl]amino]-1,3,5-triazin-2-yl]amino]-1-methylethyl]amino]-1,3,5-triazin-2-yl]amino]-3-[[4-(ethenylsulfonyl)phenyl]azo]-4-hydroxy-naphtalene-2,7-disulfonic acid, sodium salt",
+  "name_tr": "",
+  "ec_no": "418-380-5",
+  "index_no": "613-196-00-3",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
+    "h_codes": [
+      "H318"
+    ],
+    "suppl_h": []
+  }
+}

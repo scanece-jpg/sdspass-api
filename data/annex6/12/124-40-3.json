@@ -1,0 +1,46 @@
+{
+  "cas": "124-40-3",
+  "name": "mono-methylamine ... % [1]\ndi-methylamine ... % [2]\ntri-methylamine ... % [3]",
+  "name_tr": "",
+  "ec_no": "204-697-4",
+  "index_no": "612-001-01-6",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 1",
+        "h_code": "H224"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS07",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H224",
+      "H332",
+      "H302",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

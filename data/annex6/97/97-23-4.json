@@ -1,0 +1,45 @@
+{
+  "cas": "97-23-4",
+  "name": "dichlorophen (ISO)",
+  "name_tr": "",
+  "ec_no": "202-567-1",
+  "index_no": "604-019-00-0",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H319",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

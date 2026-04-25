@@ -1,0 +1,34 @@
+{
+  "cas": "73665-18-6",
+  "name": "Extract residues (coal), tar oil alk., naphthalene distn. residues; Naphthalene Oil Extract Residue; [The residue obtained from chemical oil extracted after the removal of naphthalene by distillation composed primarily of two to four membered condensed ring aromatic hydrocarbons and aromatic nitrogen bases.]",
+  "name_tr": "",
+  "ec_no": "277-567-8",
+  "index_no": "648-137-00-0",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

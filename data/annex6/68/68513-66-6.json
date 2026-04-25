@@ -1,0 +1,45 @@
+{
+  "cas": "68513-66-6",
+  "name": "Residues (petroleum), alkylation splitter, C4-rich; Petroleum gas; [A complex residuum from the distillation of streams various refinery operations. It consists of hydrocarbons having carbon numbers in the range of C4 through C5, predominantly butane and boiling in the range of approximately â€“ 11.7 Â°C to 27.8 Â°C (11 Â°F to 82 Â°F).]",
+  "name_tr": "",
+  "ec_no": "271-010-2",
+  "index_no": "649-087-00-2",
+  "atp": "ATP01corr",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": ""
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

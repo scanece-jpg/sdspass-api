@@ -1,0 +1,45 @@
+{
+  "cas": "171887-03-9",
+  "name": "N-(2-amino-4,6-dichloropyrimidin-5-yl)formamide",
+  "name_tr": "",
+  "ec_no": "425-650-6",
+  "index_no": "616-151-00-6",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS07",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H302",
+      "H318",
+      "H317",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

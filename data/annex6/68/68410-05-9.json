@@ -1,0 +1,39 @@
+{
+  "cas": "68410-05-9",
+  "name": "Distillates (petroleum), straight-run light; Low boiling point naphtha; [A complex combination of hydrocarbons produced by the distillation of crude oil. It consists of hydrocarbons having carbon numbers predominantly in the range of C2 through C7 and boiling in the range of approximately â€“88  Â°C to 99 Â°C (â€“ 127  Â°F to 210 Â°F).]",
+  "name_tr": "",
+  "ec_no": "270-077-5",
+  "index_no": "649-268-00-6",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

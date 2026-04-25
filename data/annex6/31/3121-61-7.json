@@ -1,0 +1,67 @@
+{
+  "cas": "3121-61-7",
+  "name": "2-methoxyethyl acrylate",
+  "name_tr": "",
+  "ec_no": "221-499-3",
+  "index_no": "607-744-00-0",
+  "atp": "ATP15",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      },
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      },
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360FD"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H331"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1C",
+        "h_code": "H314"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS08",
+      "GHS06",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H226",
+      "H341",
+      "H360FD",
+      "H331",
+      "H302",
+      "H314",
+      "H318",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

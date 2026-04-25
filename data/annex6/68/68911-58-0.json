@@ -1,0 +1,45 @@
+{
+  "cas": "68911-58-0",
+  "name": "Gases (petroleum), hydrotreated sour kerosine depentanizer stabilizer off; Refinery gas; [The complex combination obtained from the depentanizer stabilization of hydrotreated kerosine. It consists primarily of hydrogen, methane, ethane, and propane with various small amounts of nitrogen, hydrogen sulfide, carbon monoxide and hydrocarbons having carbon numbers predominantly in the range of C4 through C5.]",
+  "name_tr": "",
+  "ec_no": "272-775-5",
+  "index_no": "649-155-00-1",
+  "atp": "ATP01corr",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": ""
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

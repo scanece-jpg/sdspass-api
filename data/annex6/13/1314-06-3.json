@@ -1,0 +1,45 @@
+{
+  "cas": "1314-06-3",
+  "name": "dinickel trioxide",
+  "name_tr": "",
+  "ec_no": "215-217-8",
+  "index_no": "028-005-00-3",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1A",
+        "h_code": "H350i"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372 **"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H350i",
+      "H372 **",
+      "H317",
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

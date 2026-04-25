@@ -1,0 +1,51 @@
+{
+  "cas": "22288-41-1",
+  "name": "1,1,3,3-tetramethylbutylperoxypivalate",
+  "name_tr": "",
+  "ec_no": "424-980-8",
+  "index_no": "607-555-00-3",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "Org. Perox. D",
+        "h_code": "H242"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H225",
+      "H242",
+      "H315",
+      "H317",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

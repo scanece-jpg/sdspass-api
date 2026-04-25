@@ -1,0 +1,40 @@
+{
+  "cas": "60-29-7",
+  "name": "diethyl ether; ether",
+  "name_tr": "",
+  "ec_no": "200-467-2",
+  "index_no": "603-022-00-4",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 1",
+        "h_code": "H224"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H336"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H224",
+      "H302",
+      "H336"
+    ],
+    "suppl_h": []
+  }
+}

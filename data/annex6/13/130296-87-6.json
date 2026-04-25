@@ -1,0 +1,40 @@
+{
+  "cas": "130296-87-6",
+  "name": "reaction mass of: hydroxyaluminium bis[2-hydroxy-3,5-di-tert-butylbenzoate]; 3,5-di-tert-butyl-salicylic acid",
+  "name_tr": "",
+  "ec_no": "406-890-0",
+  "index_no": "607-266-00-2",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

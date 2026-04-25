@@ -1,0 +1,39 @@
+{
+  "cas": "68603-01-0",
+  "name": "Distillates (petroleum), thermal cracked naphtha and gas oil, C5-dimer-contg.; Low boiling point thermally cracked naphtha; [A complex combination of hydrocarbons produced by the extractive distillation of thermal cracked naphtha and/or gas oil. It consists predominantly of hydrocarbons having a carbon number of C5 with some dimerized C5 olefins and boiling in the range of approximately 33 Â°C to 184 Â°C (91 Â°F to 363 Â°F).]",
+  "name_tr": "",
+  "ec_no": "271-632-4",
+  "index_no": "649-323-00-4",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

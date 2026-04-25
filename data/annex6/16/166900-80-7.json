@@ -1,0 +1,59 @@
+{
+  "cas": "166900-80-7",
+  "name": "cymoxanil (ISO); 2-cyano-N-[(ethylamino)carbonyl]-2-(methoxyimino)acetamide [1]\n(2E)-2-cyano-N-[(ethylamino)carbonyl]-2-(methoxyimino)acetamide [2]",
+  "name_tr": "",
+  "ec_no": "-",
+  "index_no": "616-035-00-5",
+  "atp": "ATP21",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 2",
+        "h_code": "H361fd"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373 (blood system, thymus, eyes)"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 1,
+      "chronic": 1
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H361fd",
+      "H302",
+      "H373 (blood system, thymus, eyes)",
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

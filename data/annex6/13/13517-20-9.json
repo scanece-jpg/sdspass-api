@@ -1,0 +1,46 @@
+{
+  "cas": "13517-20-9",
+  "name": "perboric acid (H3BO2(O2)), monosodium salt trihydrate [1]\nperboric acid, sodium salt, tetrahydrate [2]\nperboric acid (HBO(O2)), sodium salt, tetrahydrate [3]\nsodium peroxoborate, hexahydrate [4]",
+  "name_tr": "",
+  "ec_no": "",
+  "index_no": "",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360FD"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H360FD",
+      "H332",
+      "H335",
+      "H318"
+    ],
+    "suppl_h": []
+  }
+}

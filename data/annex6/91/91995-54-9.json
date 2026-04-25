@@ -1,0 +1,29 @@
+{
+  "cas": "91995-54-9",
+  "name": "Distillates (petroleum), solvent-refined light naphthenic, hydrotreated; Baseoil â€” unspecified; [A complex combination of hydrocarbons obtained by treating a petroleum fraction with hydrogen in the presence of a catalyst and removing the aromatic hydrocarbons by solvent extraction. It consists predominantly of naphthenic hydrocarbons having carbon numbers predominantly in the range of C15 through C30 and produces a finished oil with a viscosity of between 13-15cSt at 40 Â°C.]",
+  "name_tr": "",
+  "ec_no": "295-316-0",
+  "index_no": "649-496-00-6",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "cas": "140-93-2",
+  "name": "proxan-sodium (ISO); sodium O-isopropyldithiocarbonate",
+  "name_tr": "",
+  "ec_no": "205-443-5",
+  "index_no": "006-024-00-8",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H315",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

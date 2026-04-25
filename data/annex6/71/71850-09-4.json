@@ -1,0 +1,29 @@
+{
+  "cas": "71850-09-4",
+  "name": "diisohexyl phthalate",
+  "name_tr": "",
+  "ec_no": "276-090-2",
+  "index_no": "607-737-00-2",
+  "atp": "ATP14",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360FD"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H360FD"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "cas": "136213-71-3",
+  "name": "trisodium 5-amino-3-[5-(2-bromoacryloylamino)-2-sulfonatophenylazo]-4-hydroxy-6-(4-vinylsulfonylphenylazo)naphthalene-2,7-disulfonate",
+  "name_tr": "",
+  "ec_no": "411-770-6",
+  "index_no": "611-042-00-X",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

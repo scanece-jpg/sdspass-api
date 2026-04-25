@@ -1,0 +1,53 @@
+{
+  "cas": "571-58-4",
+  "name": "1,4-dimethylnaphthalene",
+  "name_tr": "",
+  "ec_no": "209-335-9",
+  "index_no": "601-093-00-6",
+  "atp": "ATP17",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {
+      "acute": 1
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS07",
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H302",
+      "H304",
+      "H319",
+      "H400",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

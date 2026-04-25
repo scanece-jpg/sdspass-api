@@ -1,0 +1,35 @@
+{
+  "cas": "7681-57-4",
+  "name": "sodium metabisulphite",
+  "name_tr": "",
+  "ec_no": "231-673-0",
+  "index_no": "016-063-00-2",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS07",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H302",
+      "H318"
+    ],
+    "suppl_h": []
+  }
+}

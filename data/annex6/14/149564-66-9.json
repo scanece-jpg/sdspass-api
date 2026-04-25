@@ -1,0 +1,40 @@
+{
+  "cas": "149564-66-9",
+  "name": "lithium sodium (4-((5-chloro-2-hydroxyphenyl)azo)-2,4-dihydro-5-methyl-3H-pyrazol-3-onato(2-))(3-((4,5-dihydro-3-methyl-1-(4-methylphenyl)-5-oxo-1H-pyrazol-4-yl)azo)-4-hydroxy-5-nitrobenzenesulfonato(3-)) chromate(2-)",
+  "name_tr": "",
+  "ec_no": "414-250-7",
+  "index_no": "611-114-00-0",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS07",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H302",
+      "H318",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

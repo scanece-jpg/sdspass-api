@@ -1,0 +1,29 @@
+{
+  "cas": "1478-61-1",
+  "name": "4,4'-[2,2,2-trifluoro-1-(trifluoromethyl)ethylidene]diphenol; bisphenol AF",
+  "name_tr": "",
+  "ec_no": "216-036-7",
+  "index_no": "604-099-00-7",
+  "atp": "ATP21",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360F"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H360F"
+    ],
+    "suppl_h": []
+  }
+}

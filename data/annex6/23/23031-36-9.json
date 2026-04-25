@@ -1,0 +1,45 @@
+{
+  "cas": "23031-36-9",
+  "name": "prallethrin (ISO); ETOC; 2-methyl-4-oxo-3-(prop-2-ynyl)cyclopent-2-en-1-yl 2,2-dimethyl-3-(2-methylprop-1-enyl)cyclopropanecarboxylate",
+  "name_tr": "",
+  "ec_no": "245-387-9",
+  "index_no": "607-431-00-9",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 3 *",
+        "h_code": "H331"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H331",
+      "H302",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

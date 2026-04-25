@@ -1,0 +1,27 @@
+{
+  "cas": "107786-36-7",
+  "name": "3-(2-methoxy-4-methoxycarboxybenzyl)-5-nitroindole",
+  "name_tr": "",
+  "ec_no": "428-910-7",
+  "index_no": "613-247-00-X",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

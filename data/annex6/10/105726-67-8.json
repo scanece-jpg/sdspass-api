@@ -1,0 +1,29 @@
+{
+  "cas": "105726-67-8",
+  "name": "methylneodecanamide",
+  "name_tr": "",
+  "ec_no": "414-460-9",
+  "index_no": "616-122-00-8",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

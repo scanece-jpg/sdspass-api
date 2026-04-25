@@ -1,0 +1,45 @@
+{
+  "cas": "79-00-5",
+  "name": "1,1,2-trichloroethane",
+  "name_tr": "",
+  "ec_no": "201-166-9",
+  "index_no": "602-014-00-8",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H351",
+      "H332",
+      "H312",
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

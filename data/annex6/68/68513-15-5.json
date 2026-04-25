@@ -1,0 +1,45 @@
+{
+  "cas": "68513-15-5",
+  "name": "Gases (petroleum), full-range straight-run naphtha dehexanizer off; petroleum gas; [A complex combination of hydrocarbons obtained by the fractionation of the full-range straight-run naphtha. It consists of hydrocarbons having carbon numbers predominantly in the range of C2 through C6.]",
+  "name_tr": "",
+  "ec_no": "271-000-8",
+  "index_no": "649-084-00-6",
+  "atp": "ATP01corr",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": ""
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

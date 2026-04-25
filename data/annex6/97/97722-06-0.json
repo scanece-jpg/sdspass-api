@@ -1,0 +1,29 @@
+{
+  "cas": "97722-06-0",
+  "name": "Hydrocarbons, C17-40, hydrotreated solvent-deasphalted distn. residue, vacuum distn. lights; Baseoil â€” unspecified; [A complex combination of hydrocarbons obtained as first runnings from the vacuum distillation of effluents from the catalytic hydrotreatment of a solvent deasphalted short residue having a viscosity of 8cSt at approximately 100 Â°C (212 Â°F). It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C17 through C40 and boiling in the range of approximately 300 Â°C to 500 Â°C (592 Â°F to 932 Â°F).]",
+  "name_tr": "",
+  "ec_no": "307-755-8",
+  "index_no": "649-516-00-3",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

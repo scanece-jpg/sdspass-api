@@ -1,0 +1,43 @@
+{
+  "cas": "179101-81-6",
+  "name": "pyridalyl (ISO); 2,6-dichloro-4-(3,3-dichloroallyloxy)phenyl 3-[5-(trifluoromethyl)-2-pyridyloxy]propyl ether",
+  "name_tr": "",
+  "ec_no": "-",
+  "index_no": "613-343-00-1",
+  "atp": "ATP18",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 1000,
+      "chronic": 100
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

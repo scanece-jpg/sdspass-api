@@ -1,0 +1,27 @@
+{
+  "cas": "99141-89-6",
+  "name": "2-(2,4-bis(1,1-dimethylethyl)phenoxy)-N-(3,5-dichloro-4-ethyl-2-hydroxyphenyl)-hexanamide",
+  "name_tr": "",
+  "ec_no": "408-150-2",
+  "index_no": "616-049-00-1",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

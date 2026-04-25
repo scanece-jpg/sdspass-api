@@ -1,0 +1,29 @@
+{
+  "cas": "8002-05-9",
+  "name": "Petroleum; Crude oil; [A complex combination of hydrocarbons, It consists predominantly of aliphatic, alicyclic and aromatic hydrocarbons. It may also contain small amounts of nitrogen, oxygen and sulfur compounds. This category encompasses light, medium, and heavy petroleums, as well as the oils extended from tar sands. Hydrocarbonaceous materials requiring major chemical changes for their recovery or conversion to petroleum refinery feedstocks such as crude shale oils; upgraded shale oils and liquid coal fuels are not included in this definition.]",
+  "name_tr": "",
+  "ec_no": "232-298-5",
+  "index_no": "649-049-00-5",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

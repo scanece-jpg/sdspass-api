@@ -1,0 +1,35 @@
+{
+  "cas": "1341-49-7",
+  "name": "ammonium bifluoride; ammonium hydrogen difluoride",
+  "name_tr": "",
+  "ec_no": "215-676-4",
+  "index_no": "009-009-00-4",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 3 *",
+        "h_code": "H301"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H301",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

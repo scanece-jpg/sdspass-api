@@ -1,0 +1,35 @@
+{
+  "cas": "17865-32-6",
+  "name": "cyclohexyldimethoxymethylsilane",
+  "name_tr": "",
+  "ec_no": "402-140-1",
+  "index_no": "014-011-00-3",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H315",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

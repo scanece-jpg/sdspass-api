@@ -1,0 +1,71 @@
+{
+  "cas": "5625-90-1",
+  "name": "N,Nâ€²-methylenedimorpholine; N,Nâ€²-methylenebismorpholine; [formaldehyde released from N,Nâ€²-methylenebismorpholine]; [MBM]",
+  "name_tr": "",
+  "ec_no": "227-062-3",
+  "index_no": "607-721-00-5",
+  "atp": "ATP10",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373 (gastrointestinal tract, respiratory tract)"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H350",
+      "H341",
+      "H332",
+      "H312",
+      "H302",
+      "H373 (gastrointestinal tract, respiratory tract)",
+      "H314",
+      "H318",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

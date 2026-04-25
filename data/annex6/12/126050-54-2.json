@@ -1,0 +1,27 @@
+{
+  "cas": "126050-54-2",
+  "name": "2,2'-methylenebis(4,6-di-tert-butyl-phenyl)-2-ethylhexyl phosphite",
+  "name_tr": "",
+  "ec_no": "418-310-3",
+  "index_no": "607-496-00-3",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "cas": "62-56-6",
+  "name": "thiourea; thiocarbamide",
+  "name_tr": "",
+  "ec_no": "200-543-5",
+  "index_no": "612-082-00-0",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Repr. 2",
+        "h_code": "H361d ***"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H351",
+      "H361d ***",
+      "H302",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

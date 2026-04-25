@@ -1,0 +1,29 @@
+{
+  "cas": "97926-76-6",
+  "name": "Paraffin waxes (coal), brown-coal high-temp. tar, carbon-treated; Coal Tar Extract; [A complet combination of hydrocarbons obtained by the treatment of lignite carbonization tar with activated carbon for removal of trace constituents and impurities. It consists predominantly of saturated straight and branched chain hydrocarbons having carbon numbers predominantly greater than C12.]",
+  "name_tr": "",
+  "ec_no": "308-296-6",
+  "index_no": "648-052-00-9",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

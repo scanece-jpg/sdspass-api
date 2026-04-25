@@ -1,0 +1,34 @@
+{
+  "cas": "112941-26-1",
+  "name": "methyl-2-[(aminosulfonyl)methyl]benzoate",
+  "name_tr": "",
+  "ec_no": "419-010-5",
+  "index_no": "607-438-00-7",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302",
+      "H319"
+    ],
+    "suppl_h": []
+  }
+}

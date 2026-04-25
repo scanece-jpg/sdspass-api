@@ -1,0 +1,47 @@
+{
+  "cas": "140-66-9",
+  "name": "4-(1,1,3,3-tetramethylbutyl)phenol; 4-tert-octylphenol",
+  "name_tr": "",
+  "ec_no": "205-426-2",
+  "index_no": "604-075-00-6",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 10
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H315",
+      "H318",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "cas": "106461-41-0",
+  "name": "2,4-dihydro-4-(4-(4-(4-hydroxyphenyl)-1-piperazinyl)phenyl)-2-(1-methylpropyl)-3H-1,2,4-triazol-3-one",
+  "name_tr": "",
+  "ec_no": "434-820-9",
+  "index_no": "613-291-00-X",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "STOT RE 2 *",
+        "h_code": "H373 **"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H373 **",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

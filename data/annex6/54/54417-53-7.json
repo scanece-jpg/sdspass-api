@@ -1,0 +1,34 @@
+{
+  "cas": "54417-53-7",
+  "name": "(R)-1,2,3,4-tetrahydro-6,7-dimethoxy-1-veratrylisoquinoline hydrochloride",
+  "name_tr": "",
+  "ec_no": "415-110-8",
+  "index_no": "017-019-00-5",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "cas": "75-44-5",
+  "name": "phosgene; carbonyl chloride",
+  "name_tr": "",
+  "ec_no": "200-870-3",
+  "index_no": "006-002-00-8",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 2 *",
+        "h_code": "H314"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": ""
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS04",
+      "GHS06",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H330",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

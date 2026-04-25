@@ -1,0 +1,35 @@
+{
+  "cas": "156324-82-2",
+  "name": "2-isopropyl-5-methylcyclohexyloxycarbonyloxy-2-hydroxypropane",
+  "name_tr": "",
+  "ec_no": "417-420-9",
+  "index_no": "607-271-00-X",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H319",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

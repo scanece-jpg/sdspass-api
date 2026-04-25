@@ -1,0 +1,35 @@
+{
+  "cas": "865-33-8",
+  "name": "sodium methanolate; sodium methoxide [1]\npotassium methanolate; potassium methoxide [2]\nlithium methanolate; lithium methoxide [3]",
+  "name_tr": "",
+  "ec_no": "212-736-1",
+  "index_no": "603-040-00-2",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Self-heat. 1",
+        "h_code": "H251"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H251",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

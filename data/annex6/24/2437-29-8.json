@@ -1,0 +1,52 @@
+{
+  "cas": "2437-29-8",
+  "name": "malachite green hydrochloride [1]\nmalachite green oxalate [2]",
+  "name_tr": "",
+  "ec_no": "219-441-7",
+  "index_no": "602-096-00-5",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 2",
+        "h_code": "H361d ***"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS05",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H361d ***",
+      "H302",
+      "H318",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

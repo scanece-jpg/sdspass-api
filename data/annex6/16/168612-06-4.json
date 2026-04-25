@@ -1,0 +1,34 @@
+{
+  "cas": "168612-06-4",
+  "name": "N,N-dibutyl-(2,5-dihydro-5-thioxo-1H-tetrazol-1-yl)acetamide",
+  "name_tr": "",
+  "ec_no": "418-290-6",
+  "index_no": "616-167-00-3",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

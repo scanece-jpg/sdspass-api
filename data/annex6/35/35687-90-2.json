@@ -1,0 +1,29 @@
+{
+  "cas": "35687-90-2",
+  "name": "tripropylammonium dihydrogenphosphate",
+  "name_tr": "",
+  "ec_no": "433-700-3",
+  "index_no": "612-257-00-1",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

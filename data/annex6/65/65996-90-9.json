@@ -1,0 +1,29 @@
+{
+  "cas": "65996-90-9",
+  "name": "Tar, coal, low-temp.; Coal oil; [The condensation product obtained by cooling, to approximately ambient temperature, the gas evolved in low temperature (less than 700 Â°C (1292 Â°F)) destructive distillation of coal. A black viscous liquid denser than water. Composed primarily of condensed ring aromatic hydrocarbons, phenolic compounds, aromatic nitrogen bases, and their alkyl derivatives.]",
+  "name_tr": "",
+  "ec_no": "266-025-6",
+  "index_no": "648-083-00-8",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1A",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

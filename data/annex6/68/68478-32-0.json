@@ -1,0 +1,45 @@
+{
+  "cas": "68478-32-0",
+  "name": "Tail gas (petroleum), saturate gas plant mixed stream, C4-rich; Petroleum gas; [A complex combination of hydrocarbons obtained from the fractionation stabilization of straight-run naphtha, distillation tail gas and catalytic reformed naphtha stabilizer tail gas. It consists of hydrocarbons having carbon numbers in the range of C3 through C6, predominantly butane and isobutane.]",
+  "name_tr": "",
+  "ec_no": "270-813-5",
+  "index_no": "649-080-00-4",
+  "atp": "ATP01corr",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": ""
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

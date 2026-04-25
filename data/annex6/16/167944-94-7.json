@@ -1,0 +1,27 @@
+{
+  "cas": "167944-94-7",
+  "name": "(S)-1-[2-tert-butoxycarbonyl-3-(2-methoxyethoxy)propyl]-1-cyclopentanecarboxylic acid, cyclohexylamine salt",
+  "name_tr": "",
+  "ec_no": "425-510-4",
+  "index_no": "607-532-00-8",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

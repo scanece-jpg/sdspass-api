@@ -1,0 +1,40 @@
+{
+  "cas": "105-57-7",
+  "name": "1,1-diethoxyethane; acetal",
+  "name_tr": "",
+  "ec_no": "203-310-6",
+  "index_no": "605-015-00-1",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H225",
+      "H315",
+      "H319"
+    ],
+    "suppl_h": []
+  }
+}

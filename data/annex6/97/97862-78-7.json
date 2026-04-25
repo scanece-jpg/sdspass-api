@@ -1,0 +1,29 @@
+{
+  "cas": "97862-78-7",
+  "name": "Gas oils, hydrotreated; Gasoil â€” unspecified; [A complex combination of hydrocarbons obtained from the redistillation of the effluents from the treatment of paraffins with hydrogen in the presence of a catalyst. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C17 through C27 and boiling in the range of approximately 330 Â°C to 340 Â°C (626 Â°F to 644 Â°F).]",
+  "name_tr": "",
+  "ec_no": "308-128-1",
+  "index_no": "649-238-00-2",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

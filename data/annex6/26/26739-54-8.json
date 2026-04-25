@@ -1,0 +1,29 @@
+{
+  "cas": "26739-54-8",
+  "name": "guanidinium benzoate",
+  "name_tr": "",
+  "ec_no": "429-820-0",
+  "index_no": "607-604-00-9",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

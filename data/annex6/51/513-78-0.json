@@ -1,0 +1,66 @@
+{
+  "cas": "513-78-0",
+  "name": "cadmium carbonate",
+  "name_tr": "",
+  "ec_no": "208-168-9",
+  "index_no": "048-012-00-5",
+  "atp": "ATP10",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372 (kidney, bone)"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H332",
+      "H312",
+      "H302",
+      "H372 (kidney, bone)",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

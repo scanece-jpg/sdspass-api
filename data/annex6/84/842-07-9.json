@@ -1,0 +1,45 @@
+{
+  "cas": "842-07-9",
+  "name": "C.I. Solvent Yellow 14; 1-phenylazo-2-naphthol",
+  "name_tr": "",
+  "ec_no": "212-668-2",
+  "index_no": "611-056-00-6",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H351",
+      "H341",
+      "H317",
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,41 @@
+{
+  "cas": "93924-31-3",
+  "name": "Foots oil (petroleum), acid-treated; Foots oil; [A complex combination of hydrocarbons obtained by treatment of Foot's oil with sulfuric acid. It consists predominantly of branched-chain hydrocarbons with carbon numbers predominantly in the range of C20 through C50.]",
+  "name_tr": "",
+  "ec_no": "300-225-7",
+  "index_no": "649-175-00-0",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

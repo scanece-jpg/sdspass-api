@@ -1,0 +1,29 @@
+{
+  "cas": "143-24-8",
+  "name": "bis(2-(2-methoxyethoxy)ethyl)ether; tetraglyme",
+  "name_tr": "",
+  "ec_no": "205-594-7",
+  "index_no": "603-238-00-9",
+  "atp": "ATP15",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360FD"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H360FD"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "cas": "177406-68-7",
+  "name": "benthiavalicarb-isopropyl (ISO); isopropyl [(S)-1-{[(R)-1-(6-fluoro-1,3-benzothiazol-2-yl)ethyl]carbamoyl}-2-methylpropyl]carbamate",
+  "name_tr": "",
+  "ec_no": "",
+  "index_no": "",
+  "atp": "",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Repr. 2",
+        "h_code": "H361fd"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H350",
+      "H361fd",
+      "H317",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "cas": "167684-63-1",
+  "name": "3-[3-(2-dodecyloxy-5-methylphenylcarbamoyl)-4-hydroxy-1-naphthylthio]propionic acid",
+  "name_tr": "",
+  "ec_no": "421-490-6",
+  "index_no": "607-441-00-3",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

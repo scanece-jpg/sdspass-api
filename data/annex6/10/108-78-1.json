@@ -1,0 +1,34 @@
+{
+  "cas": "108-78-1",
+  "name": "1,3,5-triazine-2,4,6-triamine; melamine",
+  "name_tr": "",
+  "ec_no": "203-615-4",
+  "index_no": "613-345-00-2",
+  "atp": "ATP18",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373 (urinary tract)"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H351",
+      "H373 (urinary tract)"
+    ],
+    "suppl_h": []
+  }
+}

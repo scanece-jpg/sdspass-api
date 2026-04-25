@@ -1,0 +1,35 @@
+{
+  "cas": "9080-17-5",
+  "name": "ammonium polysulphides",
+  "name_tr": "",
+  "ec_no": "232-989-1",
+  "index_no": "016-008-00-2",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H314",
+      "H400"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "cas": "14177-51-6",
+  "name": "dialuminium nickel tetraoxide [1]\nnickel titanium trioxide [2]\nnickel titanium oxide [3]\nnickel divanadium hexaoxide [4]\ncobalt dimolybdenum nickel octaoxide [5]\nnickel zirkonium trioxide [6]\nmolybdenum nickel tetraoxide [7]\nnickel tungsten tetraoxide [8]\nolivine, nickel green [9]\nlithium nickel dioxide [10]\nmolybdenum nickel oxide [11]",
+  "name_tr": "",
+  "ec_no": "238-032-4",
+  "index_no": "028-057-00-7",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1A",
+        "h_code": "H350i"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372 **"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H350i",
+      "H372 **",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "cas": "68784-14-5",
+  "name": "constitutional isomers of penta-O-allyl-Î²-D-fructofuranosyl-Î±-D-glucopyranoside; constitutional isomers of hexa-O-allyl-Î²-D-fructofuranosyl-Î±-D-glucopyranoside; constitutional isomers of hepta-O-allyl-Î²-D-fructofuransoyl-Î±-D-glucopyranoside",
+  "name_tr": "",
+  "ec_no": "419-640-0",
+  "index_no": "614-029-00-7",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

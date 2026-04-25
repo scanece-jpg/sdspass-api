@@ -1,0 +1,27 @@
+{
+  "cas": "105076-77-5",
+  "name": "N-(5-(bis(2-methoxyethyl)amino)-2-((5-nitro-2,1-benzisothiazol-3-yl)azo)phenylacetamide",
+  "name_tr": "",
+  "ec_no": "402-430-8",
+  "index_no": "611-034-00-6",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

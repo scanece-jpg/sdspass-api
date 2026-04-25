@@ -1,0 +1,34 @@
+{
+  "cas": "91995-66-3",
+  "name": "Extract oils (coal), coal tar-residual pyrolysis oils, naphthalene oil, redistillate; Redistillates; [The redistillate from the fractional distillation of dephenolated and debased methylnaphthalene oil obtained from bituminous coal high temperature tar and pyrolysis residual oils boiling in the approximate range of 220 Â°C to 230 Â°C (428 Â°F to 446 Â°F). It consists predominantly of unsubstituted and substituted dinuclear aromatic hydrocarbons.]",
+  "name_tr": "",
+  "ec_no": "295-329-1",
+  "index_no": "648-038-00-2",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

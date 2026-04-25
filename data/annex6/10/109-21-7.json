@@ -1,0 +1,29 @@
+{
+  "cas": "109-21-7",
+  "name": "butyl butyrate",
+  "name_tr": "",
+  "ec_no": "203-656-8",
+  "index_no": "607-031-00-4",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS02"
+    ],
+    "h_codes": [
+      "H226"
+    ],
+    "suppl_h": []
+  }
+}

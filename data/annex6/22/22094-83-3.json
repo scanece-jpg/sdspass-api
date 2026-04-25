@@ -1,0 +1,40 @@
+{
+  "cas": "22094-83-3",
+  "name": "5-endo-hexyl-bicyclo[2.2.1]hept-2-ene",
+  "name_tr": "",
+  "ec_no": "435-000-3",
+  "index_no": "601-083-00-1",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H304",
+      "H315",
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

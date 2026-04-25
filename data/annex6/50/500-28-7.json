@@ -1,0 +1,52 @@
+{
+  "cas": "500-28-7",
+  "name": "chlorthion; O-(3-chloro-4-nitrophenyl) O,O-dimethyl phosphorothioate",
+  "name_tr": "",
+  "ec_no": "207-902-5",
+  "index_no": "015-042-00-5",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 100
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H332",
+      "H312",
+      "H302",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

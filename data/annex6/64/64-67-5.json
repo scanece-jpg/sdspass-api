@@ -1,0 +1,56 @@
+{
+  "cas": "64-67-5",
+  "name": "diethyl sulphate",
+  "name_tr": "",
+  "ec_no": "200-589-6",
+  "index_no": "016-027-00-6",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H332",
+      "H312",
+      "H302",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "cas": "94114-40-6",
+  "name": "Tar oils, brown-coal; Light Oil; [The distillate from lignite tar boiling in the range of approximately 80 Â°C to 250 Â°C (176 Â°F to 482 Â°F). Composed primarily of aliphatic and aromatic hydrocarbons and monobasic phenols.]",
+  "name_tr": "",
+  "ec_no": "302-674-4",
+  "index_no": "648-002-00-6",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

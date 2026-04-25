@@ -1,0 +1,39 @@
+{
+  "cas": "59-89-2",
+  "name": "4-nitrosomorpholine",
+  "name_tr": "",
+  "ec_no": "-",
+  "index_no": "613-346-00-8",
+  "atp": "ATP21",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372 (liver)"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H341",
+      "H372 (liver)"
+    ],
+    "suppl_h": []
+  }
+}

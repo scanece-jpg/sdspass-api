@@ -1,0 +1,45 @@
+{
+  "cas": "97-86-9",
+  "name": "isobutyl methacrylate",
+  "name_tr": "",
+  "ec_no": "202-613-0",
+  "index_no": "607-113-00-X",
+  "atp": "ATP13",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Skin Sens. 1B",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS02",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H226",
+      "H335",
+      "H315",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

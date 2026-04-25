@@ -1,0 +1,29 @@
+{
+  "cas": "90640-95-2",
+  "name": "Hydrocarbons, C20-50, solvent dewaxed heavy paraffinic, hydrotreated; Baseoil â€” unspecified; [A complex combination of hydrocarbons produced by treating dewaxed heavy paraffinic distillate with hydrogen in the presence of a catalyst. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C20 through C50.]",
+  "name_tr": "",
+  "ec_no": "292-617-9",
+  "index_no": "649-488-00-2",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

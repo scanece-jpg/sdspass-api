@@ -1,0 +1,34 @@
+{
+  "cas": "1314-13-2",
+  "name": "zinc oxide",
+  "name_tr": "",
+  "ec_no": "215-222-5",
+  "index_no": "030-013-00-7",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS09"
+    ],
+    "h_codes": [
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "cas": "101316-63-6",
+  "name": "Extract residues (coal tar), benzole fraction alk., acid ext.; Light Oil Extract Residues, low boiling; [A complex combination of hydrocarbons obtained by the redistillation of the distillate of high temperature coal tar (tar acid and tar base free). It consists predominantly of unsubstituted and substituted mononuclear aromatic hydrocarbons boiling in the range of 85 Â°C to 195 Â°C (185 Â°F to 383 Â°F).]",
+  "name_tr": "",
+  "ec_no": "309-868-8",
+  "index_no": "648-015-00-7",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "cas": "119-61-9",
+  "name": "benzophenone",
+  "name_tr": "",
+  "ec_no": "204-337-6",
+  "index_no": "606-153-00-5",
+  "atp": "ATP18",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "cas": "7440-38-2",
+  "name": "arsenic",
+  "name_tr": "",
+  "ec_no": "231-148-6",
+  "index_no": "033-001-00-X",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 3 *",
+        "h_code": "H331"
+      },
+      {
+        "class": "Acute Tox. 3 *",
+        "h_code": "H301"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H331",
+      "H301",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

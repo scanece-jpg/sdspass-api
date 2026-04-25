@@ -1,0 +1,27 @@
+{
+  "cas": "297730-93-9",
+  "name": "3-ethoxy-1,1,1,2,3,4,4,5,5,6,6,6-dodecafluoro-2-(trifluoromethyl)-hexane",
+  "name_tr": "",
+  "ec_no": "435-790-1",
+  "index_no": "603-224-00-2",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 4",
+        "h_code": "H413"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [],
+    "h_codes": [
+      "H413"
+    ],
+    "suppl_h": []
+  }
+}

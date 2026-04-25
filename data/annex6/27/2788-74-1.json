@@ -1,0 +1,39 @@
+{
+  "cas": "2788-74-1",
+  "name": "4-ethylamino-3-nitrobenzoic acid",
+  "name_tr": "",
+  "ec_no": "412-090-2",
+  "index_no": "607-388-00-6",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H302",
+      "H317",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

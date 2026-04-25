@@ -1,0 +1,35 @@
+{
+  "cas": "136213-75-7",
+  "name": "sodium 4-(4-chloro-6-(N-ethylanilino)-1,3,5-triazin-2-ylamino)-2-(1-(2-chlorophenyl)-5-hydroxy-3-methyl-1H-pyrazol-4-ylazo)benzenesulfonate",
+  "name_tr": "",
+  "ec_no": "407-800-2",
+  "index_no": "611-105-00-1",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H317",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

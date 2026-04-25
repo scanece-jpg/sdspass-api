@@ -1,0 +1,44 @@
+{
+  "cas": "13108-52-6",
+  "name": "methyl-2,3,5,6-tetrachloro-4-pyridylsulphone; 2,3,5,6-tetrachloro-4-(methylsulphonyl)pyridine",
+  "name_tr": "",
+  "ec_no": "236-035-5",
+  "index_no": "613-032-00-0",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H312",
+      "H302",
+      "H319",
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

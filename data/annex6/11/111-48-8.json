@@ -1,0 +1,29 @@
+{
+  "cas": "111-48-8",
+  "name": "2,2'-thiodiethanol; thiodiglycol",
+  "name_tr": "",
+  "ec_no": "203-874-3",
+  "index_no": "603-081-00-6",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319"
+    ],
+    "suppl_h": []
+  }
+}

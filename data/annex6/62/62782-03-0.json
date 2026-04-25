@@ -1,0 +1,34 @@
+{
+  "cas": "62782-03-0",
+  "name": "bis(2,2,6,6-tetramethyl-4-piperidyl) succinate",
+  "name_tr": "",
+  "ec_no": "402-940-0",
+  "index_no": "607-187-00-3",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H319",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

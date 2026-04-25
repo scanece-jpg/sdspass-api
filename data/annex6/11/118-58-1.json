@@ -1,0 +1,29 @@
+{
+  "cas": "118-58-1",
+  "name": "benzyl salicylate",
+  "name_tr": "",
+  "ec_no": "204-262-9",
+  "index_no": "607-754-00-5",
+  "atp": "ATP17",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Sens. 1B",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

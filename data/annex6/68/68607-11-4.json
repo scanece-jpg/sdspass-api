@@ -1,0 +1,45 @@
+{
+  "cas": "68607-11-4",
+  "name": "Petroleum products, refinery gases; Refinery gas; [A complex combination which consists primarily of hydrogen with various small amounts of methane, ethane, and propane.]",
+  "name_tr": "",
+  "ec_no": "271-750-6",
+  "index_no": "649-151-00-X",
+  "atp": "ATP01corr",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": ""
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

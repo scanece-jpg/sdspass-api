@@ -1,0 +1,39 @@
+{
+  "cas": "2810-74-4",
+  "name": "N,N'-dimethylbenzidine",
+  "name_tr": "",
+  "ec_no": "-",
+  "index_no": "612-043-00-8",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H332",
+      "H312",
+      "H302"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "cas": "90641-01-3",
+  "name": "Extract residues (coal), light oil alk., acid ext.; Carbolic Oil Extract Residue; [The oil resulting from the acid washing of alkali-washed carbolic oil to remove the minor amounts of basic compounds (tar bases). Composed primarily of indene, indan and alkylbenzenes.]",
+  "name_tr": "",
+  "ec_no": "292-624-7",
+  "index_no": "648-026-00-7",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

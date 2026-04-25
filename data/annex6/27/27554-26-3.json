@@ -1,0 +1,29 @@
+{
+  "cas": "27554-26-3",
+  "name": "diisooctyl phthalate",
+  "name_tr": "",
+  "ec_no": "248-523-5",
+  "index_no": "607-740-00-9",
+  "atp": "ATP15",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360FD"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H360FD"
+    ],
+    "suppl_h": []
+  }
+}

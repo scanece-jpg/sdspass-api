@@ -1,0 +1,39 @@
+{
+  "cas": "101316-56-7",
+  "name": "Distillates (petroleum), C7-9, C8-rich, hydrodesulfurized dearomatized; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons obtained by the distillation of petroleum light fraction, hydrodesulfurized and dearomatized. It consists predominantly of hydrocarbons having carbon numbers in the range of C7 through C9, predominantly C8 paraffins and cycloparaffins, boiling in the range of approximately 120 Â°C to 130 Â°C (248 Â°F to 266 Â°F).]",
+  "name_tr": "",
+  "ec_no": "309-862-5",
+  "index_no": "649-394-00-1",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

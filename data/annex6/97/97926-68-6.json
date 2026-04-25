@@ -1,0 +1,29 @@
+{
+  "cas": "97926-68-6",
+  "name": "Hydrocarbons, C27-45, dearomatized; Baseoil â€” unspecified",
+  "name_tr": "",
+  "ec_no": "308-287-7",
+  "index_no": "649-522-00-6",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350"
+    ],
+    "suppl_h": []
+  }
+}

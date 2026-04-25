@@ -1,0 +1,70 @@
+{
+  "cas": "32289-58-0",
+  "name": "polyhexamethylene biguanide hydrochloride; PHMB [1]\npolyhexamethylene biguanide hydrochloride; PHMB [2]",
+  "name_tr": "",
+  "ec_no": "-",
+  "index_no": "616-207-00-X",
+  "atp": "ATP09",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372 (inhalation) (respiratory tract)"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Skin Sens. 1B",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 10,
+      "chronic": 10
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS06",
+      "GHS05",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H351",
+      "H330",
+      "H302",
+      "H372 (inhalation) (respiratory tract)",
+      "H318",
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

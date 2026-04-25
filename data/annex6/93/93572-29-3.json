@@ -1,0 +1,39 @@
+{
+  "cas": "93572-29-3",
+  "name": "Gasoline, C5-11, high-octane stabilised reformed; Low boiling point cat-reformed naphtha; [A complex high octane combination of hydrocarbons obtained by the catalytic dehydrogenation of a predominantly naphthenic naphtha. It consists predominantly of aromatics and non-aromatics having carbon numbers predominantly in the range of C5 through C11 and boiling in the range of approximately 45 Â°C to 185 Â°C (113 Â°F to 365 Â°F).]",
+  "name_tr": "",
+  "ec_no": "297-458-9",
+  "index_no": "649-312-00-4",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

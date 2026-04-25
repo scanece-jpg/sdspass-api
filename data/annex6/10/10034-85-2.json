@@ -1,0 +1,34 @@
+{
+  "cas": "10034-85-2",
+  "name": "hydrogen iodide",
+  "name_tr": "",
+  "ec_no": "233-109-9",
+  "index_no": "053-002-00-9",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H314"
+      },
+      {
+        "class": "Skin Corr. 1A",
+        "h_code": ""
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS04",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

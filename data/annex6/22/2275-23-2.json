@@ -1,0 +1,40 @@
+{
+  "cas": "2275-23-2",
+  "name": "vamidothion (ISO); O,O-dimethyl S-2-(1-methylcarbamoylethylthio) ethyl phosphorothioate",
+  "name_tr": "",
+  "ec_no": "218-894-8",
+  "index_no": "015-059-00-8",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 3 *",
+        "h_code": "H301"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H312",
+      "H301",
+      "H400"
+    ],
+    "suppl_h": []
+  }
+}

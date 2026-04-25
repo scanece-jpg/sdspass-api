@@ -1,0 +1,45 @@
+{
+  "cas": "110-74-7",
+  "name": "propyl formate [1]\nisopropyl formate [2]",
+  "name_tr": "",
+  "ec_no": "203-798-0",
+  "index_no": "607-016-00-2",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H336"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H225",
+      "H335",
+      "H336",
+      "H319"
+    ],
+    "suppl_h": []
+  }
+}

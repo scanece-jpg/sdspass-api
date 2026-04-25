@@ -1,0 +1,34 @@
+{
+  "cas": "90640-89-4",
+  "name": "Distillates (coal tar), naphthalene oils, alk. exts.; Alkaline Extract; [The aqueous extract from naphthalene oil produced by an alkaline wash such as aqueous sodium hydroxide. Composed primarily of the alkali salts of various phenolic compounds.]",
+  "name_tr": "",
+  "ec_no": "292-611-6",
+  "index_no": "648-114-00-5",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

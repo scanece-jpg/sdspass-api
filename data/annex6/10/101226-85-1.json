@@ -1,0 +1,29 @@
+{
+  "cas": "101226-85-1",
+  "name": "trans-methyl-2-ethyl-but-2-enoate",
+  "name_tr": "",
+  "ec_no": "443-150-6",
+  "index_no": "607-665-00-1",
+  "atp": "ATP01",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS02"
+    ],
+    "h_codes": [
+      "H226"
+    ],
+    "suppl_h": []
+  }
+}

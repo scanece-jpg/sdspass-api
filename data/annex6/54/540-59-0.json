@@ -1,0 +1,40 @@
+{
+  "cas": "540-59-0",
+  "name": "1,2-dichloroethylene [1]\ncis-dichloroethylene [2]\ntrans-dichloroethylene [3]",
+  "name_tr": "",
+  "ec_no": "208-750-2",
+  "index_no": "602-026-00-3",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Liq. 2",
+        "h_code": "H225"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H332"
+      },
+      {
+        "class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H225",
+      "H332",
+      "H412"
+    ],
+    "suppl_h": []
+  }
+}

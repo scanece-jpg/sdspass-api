@@ -1,0 +1,29 @@
+{
+  "cas": "90640-98-5",
+  "name": "Aromtic hydrocarbons, Câ‰¥10, steam-cracking, hydrotreated; Cracked kerosine; [A complex combination of hydrocarbons produced by the distillation of the products from a steam cracking process treated with hydrogen in the presence of a catalyst. It consists predominantly of aromatic hydrocarbons having carbon numbers predominantly greater than C10 and boiling in the range of approximately 150 Â°C to 320 Â°C (302 Â°F to 608 Â°F).]",
+  "name_tr": "",
+  "ec_no": "292-621-0",
+  "index_no": "649-413-00-3",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

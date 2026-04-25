@@ -1,0 +1,46 @@
+{
+  "cas": "7446-09-5",
+  "name": "sulphur dioxide; sulfur dioxide",
+  "name_tr": "",
+  "ec_no": "231-195-2",
+  "index_no": "016-011-00-9",
+  "atp": "ATP21",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Press. Gas",
+        "h_code": "H331"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H370 (inhalation) (respiratory system)"
+      },
+      {
+        "class": "STOT SE 1",
+        "h_code": "H314"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": ""
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS04",
+      "GHS06",
+      "GHS08",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H331",
+      "H370 (inhalation) (respiratory system)",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

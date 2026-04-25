@@ -1,0 +1,45 @@
+{
+  "cas": "68477-72-5",
+  "name": "Gases (petroleum), catalytic-cracked naphtha debutanizer bottoms, C3-5-rich; Petroleum gas; [A complex combination of hydrocarbons obtained from the stabilization of catalytic cracked naphtha. It consists of aliphatic hydrocarbons having carbon numbers predominantly in the range of C3 through C5.]",
+  "name_tr": "",
+  "ec_no": "270-754-5",
+  "index_no": "649-209-00-4",
+  "atp": "ATP01corr",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Flam. Gas 1",
+        "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": "H350"
+      },
+      {
+        "class": "Carc. 1A",
+        "h_code": "H340"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": ""
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS02",
+      "GHS04",
+      "GHS08"
+    ],
+    "h_codes": [
+      "H220",
+      "H350",
+      "H340"
+    ],
+    "suppl_h": []
+  }
+}

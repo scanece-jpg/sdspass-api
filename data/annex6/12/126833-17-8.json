@@ -1,0 +1,29 @@
+{
+  "cas": "126833-17-8",
+  "name": "fenhexamid (ISO); N-(2,3-dichlor-4-hydroxyphenyl)-1-methylcyclohexancarboxamid",
+  "name_tr": "",
+  "ec_no": "422-530-5",
+  "index_no": "616-111-00-8",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "",
+    "pictograms": [
+      "GHS09"
+    ],
+    "h_codes": [
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,46 @@
+{
+  "cas": "2186-25-6",
+  "name": "[(p-tolyloxy)methyl]oxirane; cresyl glycidyl ether [4] [1]\n[(m-tolyloxy)methyl]oxirane [2]\n2,3-epoxypropyl o-tolyl ether [3]\n[(tolyloxy)methyl]oxirane [4]",
+  "name_tr": "",
+  "ec_no": "218-575-3",
+  "index_no": "603-056-00-X",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H341",
+      "H315",
+      "H317",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

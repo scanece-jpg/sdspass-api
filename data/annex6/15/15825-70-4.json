@@ -1,0 +1,29 @@
+{
+  "cas": "15825-70-4",
+  "name": "mannitol hexanitrate; nitromannite; [>40 % phlegmatiser]",
+  "name_tr": "",
+  "ec_no": "239-924-6",
+  "index_no": "603-036-01-8",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Expl. 1.1",
+        "h_code": "H201"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS01"
+    ],
+    "h_codes": [
+      "H201"
+    ],
+    "suppl_h": []
+  }
+}

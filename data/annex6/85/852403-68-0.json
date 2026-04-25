@@ -1,0 +1,39 @@
+{
+  "cas": "852403-68-0",
+  "name": "metaflumizone (ISO); (EZ)-2-[2-(4-cyanophenyl)-1-(Î±,Î±,Î± -trifluoro-m-tolyl)ethylidene]-[4-(trifluoromethoxy)phenyl]carbanilohydrazide [E-isomer â‰¥ 90 %, Z-isomer â‰¤ 10 % relative content] [1]\n(E)-2-[2-(4-cyanophenyl)-1-(Î±,Î±,Î± -trifluoro-m-tolyl)ethylidene]-[4-(trifluoromethoxy)phenyl]carbanilohydrazide [2]",
+  "name_tr": "",
+  "ec_no": "-",
+  "index_no": "616-227-00-9",
+  "atp": "ATP14",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 2",
+        "h_code": "H361fd"
+      },
+      {
+        "class": "Lact.",
+        "h_code": "H362"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H361fd",
+      "H362",
+      "H373"
+    ],
+    "suppl_h": []
+  }
+}

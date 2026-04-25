@@ -1,0 +1,51 @@
+{
+  "cas": "13067-93-1",
+  "name": "cyanofenphos (ISO); O-4-cyanophenyl O-ethyl phenylphosphonothioate",
+  "name_tr": "",
+  "ec_no": "-",
+  "index_no": "015-110-00-4",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H312"
+      },
+      {
+        "class": "Acute Tox. 3 *",
+        "h_code": "H301"
+      },
+      {
+        "class": "STOT SE 1",
+        "h_code": "H370 **"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H312",
+      "H301",
+      "H370 **",
+      "H319",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

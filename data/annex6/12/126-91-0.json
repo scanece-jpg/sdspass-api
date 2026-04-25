@@ -1,0 +1,29 @@
+{
+  "cas": "126-91-0",
+  "name": "linalool; 3,7-dimethyl-1,6-octadien-3-ol; dl-linalool [1]\ncoriandrol; (S)-3,7-dimethyl-1,6-octadien-3-ol; d-linalool [2]\nlicareol; (R)-3,7-dimethyl-1,6-octadien-3-ol; l-linalool [3]",
+  "name_tr": "",
+  "ec_no": "204-811-2",
+  "index_no": "603-235-00-2",
+  "atp": "ATP10",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Sens. 1B",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

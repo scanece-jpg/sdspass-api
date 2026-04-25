@@ -1,0 +1,40 @@
+{
+  "cas": "156145-66-3",
+  "name": "O,O'-(ethenylmethylsilylene)di[(4-methylpentan-2-one)oxime]",
+  "name_tr": "",
+  "ec_no": "421-870-1",
+  "index_no": "014-029-00-1",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 2",
+        "h_code": "H361f ***"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 2 *",
+        "h_code": "H373 **"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08",
+      "GHS07"
+    ],
+    "h_codes": [
+      "H361f ***",
+      "H302",
+      "H373 **"
+    ],
+    "suppl_h": []
+  }
+}

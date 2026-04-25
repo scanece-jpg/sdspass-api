@@ -1,0 +1,45 @@
+{
+  "cas": "20816-12-0",
+  "name": "osmium tetraoxide; osmic acid",
+  "name_tr": "",
+  "ec_no": "244-058-7",
+  "index_no": "076-001-00-5",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 2 *",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 1",
+        "h_code": "H310"
+      },
+      {
+        "class": "Acute Tox. 2 *",
+        "h_code": "H300"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS06",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H330",
+      "H310",
+      "H300",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

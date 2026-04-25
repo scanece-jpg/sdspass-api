@@ -1,0 +1,47 @@
+{
+  "cas": "68049-83-2",
+  "name": "azafenidin (ISO); 2-(2,4-dichloro-5-prop-2-ynyloxyphenyl)-5,6,7,8-tetrahydro-1,2,4-triazolo[4,3-a]pyridin-3(2H)-one",
+  "name_tr": "",
+  "ec_no": "-",
+  "index_no": "611-140-00-2",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360Df"
+      },
+      {
+        "class": "STOT RE 2 *",
+        "h_code": "H373 **"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 1000
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H360Df",
+      "H373 **",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

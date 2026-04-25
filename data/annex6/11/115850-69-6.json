@@ -1,0 +1,48 @@
+{
+  "cas": "115850-69-6",
+  "name": "ipconazole (ISO); (1RS,2SR,5RS;1RS,2SR,5SR)-2-(4-chlorobenzyl)-5-isopropyl-1-(1H-1,2,4-triazol-1-ylmethyl)cyclopentanol [1]\nipconazole (ISO); (1RS,2SR,5RS;1RS,2SR,5SR)-2-(4-chlorobenzyl)-5-isopropyl-1-(1H-1,2,4-triazol-1-ylmethyl)cyclopentanol [2]\nipconazole (ISO); (1RS,2SR,5RS;1RS,2SR,5SR)-2-(4-chlorobenzyl)-5-isopropyl-1-(1H-1,2,4-triazol-1-ylmethyl)cyclopentanol [3]",
+  "name_tr": "",
+  "ec_no": "-",
+  "index_no": "603-237-00-3",
+  "atp": "ATP15",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360D"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373 (eyes, skin, liver)"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "m_factors": {
+      "acute": 100
+    },
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H360D",
+      "H302",
+      "H373 (eyes, skin, liver)",
+      "H410"
+    ],
+    "suppl_h": []
+  }
+}

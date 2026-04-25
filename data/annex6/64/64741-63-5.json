@@ -1,0 +1,39 @@
+{
+  "cas": "64741-63-5",
+  "name": "Naphtha (petroleum), light catalytic reformed; Low boiling point cat-reformed naphtha; [A complex combination of hydrocarbons produced from the distillation of products from a catalytic reforming process. It consists of hydrocarbons having carbon numbers predominantly in the range of C5 through C11 and boiling in the range of approximately 35 Â°C to 190 Â°C (95 Â°F to 374 Â°F). It contains a relatively large proportion of aromatic and branched chain hydrocarbons. This stream may contain 10 vol. % or more benzene.]",
+  "name_tr": "",
+  "ec_no": "265-065-1",
+  "index_no": "649-299-00-5",
+  "atp": "ATP02",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H350",
+      "H340",
+      "H304"
+    ],
+    "suppl_h": []
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "cas": "174393-75-0",
+  "name": "potassium 4-(11-methacrylamidoundecanamido)benzenesulfonate",
+  "name_tr": "",
+  "ec_no": "406-500-9",
+  "index_no": "616-068-00-5",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Warning",
+    "pictograms": [
+      "GHS07"
+    ],
+    "h_codes": [
+      "H317"
+    ],
+    "suppl_h": []
+  }
+}

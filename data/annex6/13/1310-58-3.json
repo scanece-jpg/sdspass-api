@@ -1,0 +1,35 @@
+{
+  "cas": "1310-58-3",
+  "name": "potassium hydroxide; caustic potash",
+  "name_tr": "",
+  "ec_no": "215-181-3",
+  "index_no": "019-002-00-8",
+  "atp": "CLP00",
+  "notes": [],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1A",
+        "h_code": "H314"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS07",
+      "GHS05"
+    ],
+    "h_codes": [
+      "H302",
+      "H314"
+    ],
+    "suppl_h": []
+  }
+}

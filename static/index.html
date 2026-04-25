@@ -2445,6 +2445,7 @@ async function _doPdfGenerate() {
         },
       },
       revision:     { date: new Date().toLocaleDateString('tr-TR'), no: '1', version: '1.0', notes: 'İlk yayın' },
+      ate_mix_details: clp?.ateMixDetails || {},  // ATEmix hesap detayları — PDF Bölüm 11
     };
 
     const res = await fetch(API_BASE + '/sds/pdf', {

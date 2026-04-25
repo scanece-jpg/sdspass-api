@@ -350,34 +350,72 @@ const CLPEngine = (() => {
     }
 
     // ── SEA/CLP Bölüm 3.1.3.6.1: ATE Formülü ────────────────────────────────────
+    // Uygulama kriterleri:
+    //   1. Konsantrasyon ≥%1 olan bileşenler dahil edilir (CLP Ek I §3.1.3.6.2.1)
+    //      %1'den az olsa da yüksek toksisitesi biliniyorsa (Kat.1/2) dahil et
+    //   2. Bileşenin ATE değeri bilinmiyorsa → Tablo 3.1.2 nokta tahmini kullan
+    //   3. ATE'si bilinmeyenlerin toplamı >%10 ise formül revize edilir
+    const ateMixDetails = {};  // route → { ateMix, resultCode, components[] } — PDF için
+
     Object.entries(ATE_ROUTES).forEach(([route, codes]) => {
       const codeSet = new Set(codes);
       let sumInv = 0;
+      let knownConc = 0;   // ATE değeri bilinen bileşenlerin toplam konsantrasyonu
       let hasAny = false;
+      const ateComps = [];
 
       comps.forEach(c => {
         const conc = parseFloat(c.concMax || c.conc) || 0;
+        let compHasATE = false;
+
         (c.hazards || []).forEach(h => {
           const code = (h.h_code || '').replace(/[*\s]/g, '').substring(0, 4);
           if (!codeSet.has(code)) return;
+
+          // Konsantrasyon filtresi: ≥%1 zorunlu; Kat.1/2 için <%1 de dahil
+          const hclass = (h.h_class || '').replace(/\*/g, '').trim();
+          const isCat12 = hclass === 'Acute Tox. 1' || hclass === 'Acute Tox. 2';
+          if (conc < 1.0 && !isCat12) return;
+
           let ate = ATE_POINT[code];
           if (!ate) return;
-          const hclass = (h.h_class || '').replace(/\*/g, '').trim();
           if (hclass === 'Acute Tox. 2' && ATE_CAT2[code] !== undefined) {
             ate = ATE_CAT2[code];
           }
           sumInv += conc / ate;
           hasAny = true;
+          compHasATE = true;
+          ateComps.push({ name: c.name || c.cas, conc, code, ate });
         });
+
+        if (compHasATE) knownConc += conc;
       });
 
       if (!hasAny || sumInv === 0) return;
-      const ate_mix = 100 / sumInv;
+
+      // Bilinmeyen >%10 kontrolü — revize formül
+      const unknownPct = Math.max(0, 100 - knownConc);
+      let ate_mix;
+      if (unknownPct > 10) {
+        // CLP Ek I §3.1.3.6.2.2 — bilinmeyen yüksekse payda düşürülür
+        ate_mix = (100 - unknownPct) / sumInv;
+      } else {
+        ate_mix = 100 / sumInv;
+      }
 
       let resultCode = null;
       for (const { max, h } of ATE_CLASSIFY[route]) {
         if (ate_mix <= max) { resultCode = h; break; }
       }
+
+      // ATEmix detaylarını kaydet (PDF Bölüm 11 için)
+      ateMixDetails[route] = {
+        ateMix: Math.round(ate_mix * 10) / 10,
+        resultCode,
+        unknownPct: Math.round(unknownPct * 10) / 10,
+        components: ateComps,
+      };
+
       if (!resultCode) return;
 
       if (!raw.includes(resultCode)) {
@@ -412,7 +450,7 @@ const CLPEngine = (() => {
     // Piktogramlar
     const pictograms = getGhsCodes(result);
 
-    return { hCodes: result, signal, pictograms, dominated, cutoffUsed, getGhsCodes };
+    return { hCodes: result, signal, pictograms, dominated, cutoffUsed, ateMixDetails, getGhsCodes };
   }
 
   function init() {
@@ -425,5 +463,5 @@ const CLPEngine = (() => {
     console.log('[CLPEngine] init OK');
   }
 
-  return { init, classify, getGhsCodes, CUTOFFS, DOMINANCE, DANGER_H, WARNING_H };
+  return { init, classify, getGhsCodes, CUTOFFS, DOMINANCE, DANGER_H, WARNING_H, ATE_POINT, ATE_CAT2, ATE_CLASSIFY };
 })();

@@ -1532,98 +1532,98 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     else:
         story.append(Paragraph(na, styles['body']))
 
-    # ─── ATE Karışım Notu — KKDİK Ek-2 Bölüm 11 gereği ──────────────────
-    # Bileşenlerden Acute Tox. var ama karışım eşiği aşılmadıysa açıkla
+    # ─── ATE Karışım Hesabı — KKDİK Ek-2 Bölüm 11 gereği ────────────────────
+    # CLP Ek I §3.1.3 — 1/ATEmix = Σ(Ci/ATEi) / 100
+    # Hem sınıflandırılan hem sınıflandırılmayan durumlar raporlanır
     ACUTE_TOX_CLASSES = {'Acute Tox. 1','Acute Tox. 2','Acute Tox. 3','Acute Tox. 4',
                          'Acute Tox. 1*','Acute Tox. 2*','Acute Tox. 3*','Acute Tox. 4*'}
     ACUTE_H = {'H300','H301','H302','H310','H311','H312','H330','H331','H332'}
-    comp_has_acute = False
-    for comp_item in sds_data.get('components', []):
-        for hz in comp_item.get('hazards', []):
-            if hz.get('h_class','').replace('*','').strip() in ACUTE_TOX_CLASSES:
-                comp_has_acute = True
-                break
-        if comp_has_acute:
-            break
-    mix_has_acute = bool(set(h_codes) & ACUTE_H)
-    if comp_has_acute and not mix_has_acute:
-        # CLP Ek I Tablo 3.1.2 — Akut Toksisite Kat.4 varsayılan ATE değerleri
-        ATE_CAT4_DEFAULTS = {'oral': 2000, 'dermal': 2000, 'inhalation_vapour': 20.0, 'inhalation_dust': 5.0}
-        ACUTE_TOX_HCODE_ROUTE = {
-            'H302':'oral','H301':'oral','H300':'oral',
-            'H312':'dermal','H311':'dermal','H310':'dermal',
-            'H332':'inhalation','H331':'inhalation','H330':'inhalation',
-        }
-        # Bileşen bazlı ATE tablosu
-        ate_comp_rows = [[
-            ('Madde' if lang=='TR' else 'Substance'),
-            ('Konsantrasyon' if lang=='TR' else 'Concentration'),
-            ('H Kodu' if lang=='TR' else 'H Code'),
-            ('ATE (mg/kg veya mg/L)' if lang=='TR' else 'ATE (mg/kg or mg/L)'),
+
+    comp_has_acute = any(
+        hz.get('h_class','').replace('*','').strip() in ACUTE_TOX_CLASSES
+        for comp_item in sds_data.get('components', [])
+        for hz in comp_item.get('hazards', [])
+    )
+
+    # Frontend'den gelen ATEmix detayları (JS engine hesabı)
+    ate_mix_details = sds_data.get('ate_mix_details', {})
+
+    _ROUTE_LABEL_TR = {'oral': 'Oral (Ağız)', 'dermal': 'Dermal (Deri)', 'inhal': 'İnhalasyon (Solunum)'}
+    _ROUTE_LABEL_EN = {'oral': 'Oral', 'dermal': 'Dermal', 'inhal': 'Inhalation'}
+    _ROUTE_UNIT     = {'oral': 'mg/kg', 'dermal': 'mg/kg', 'inhal': 'mg/L/4h'}
+
+    if comp_has_acute and ate_mix_details:
+        story.append(Spacer(1, 4))
+        # Başlık
+        ate_header = ('ATE Karışım Hesabı — CLP Ek I §3.1.3' if lang == 'TR'
+                      else 'ATEmix Calculation — CLP Annex I §3.1.3')
+        story.append(Paragraph(ate_header, styles['sub']))
+        story.append(Spacer(1, 3))
+
+        # Her yol için sonuç satırı
+        result_rows = [[
+            ('Maruziyet Yolu' if lang == 'TR' else 'Route'),
+            ('ATEmix Değeri'  if lang == 'TR' else 'ATEmix Value'),
+            ('Sonuç H Kodu'   if lang == 'TR' else 'Result H Code'),
         ]]
-        for comp_item in sds_data.get('components', []):
-            comp_acute_hz = [
-                hz for hz in comp_item.get('hazards', [])
-                if hz.get('h_class','').replace('*','').strip() in ACUTE_TOX_CLASSES
-            ]
-            if not comp_acute_hz:
-                continue
-            comp_n = comp_item.get('name_tr','') if lang=='TR' else ''
-            comp_n = comp_n or comp_item.get('name','') or comp_item.get('cas_no','')
-            comp_conc = comp_item.get('concentration', comp_item.get('conc', 0))
-            for hz in comp_acute_hz:
-                hc = hz.get('h_code','').replace('*','').strip()
-                route = ACUTE_TOX_HCODE_ROUTE.get(hc, 'oral')
-                cat_str = hz.get('h_class','').replace('*','').strip()
-                # Kategori numarasını çıkar (Acute Tox. 4 → 4)
-                try:
-                    cat_n = int(cat_str.split('.')[-1].strip())
-                except Exception:
-                    cat_n = 4
-                # Önce CAS dosyasındaki gerçek LD50/ATE değerini dene
-                from app.services.clp_service import ATE_DEFAULTS
-                from app.services.substance_lookup import lookup_substance
-                comp_cas = comp_item.get('cas_no', comp_item.get('cas', ''))
-                real_ate = None
-                ate_source_label = 'varsayılan' if lang == 'TR' else 'default'
-                if comp_cas:
-                    try:
-                        _sub = lookup_substance(comp_cas)
-                        if _sub:
-                            _ate_dict = _sub.get('ate', {})
-                            if _ate_dict and _ate_dict.get(route):
-                                real_ate = _ate_dict[route]
-                                ate_source_label = 'ECHA/IUCLID'
-                            # ld50 dict de dene
-                            if real_ate is None:
-                                _ld50 = _sub.get('ld50', {})
-                                if _ld50 and isinstance(_ld50, dict):
-                                    _route_data = _ld50.get(route, {})
-                                    if isinstance(_route_data, dict) and _route_data.get('value'):
-                                        real_ate = _route_data['value']
-                                        ate_source_label = _route_data.get('source', 'ECHA/IUCLID')
-                    except Exception:
-                        pass
-                if real_ate is None:
-                    real_ate = ATE_DEFAULTS.get(route, ATE_DEFAULTS.get('oral', {})).get(f'Acute Tox. {cat_n}', 2000)
-                ate_unit = 'mg/L/4h' if route == 'inhalation' else 'mg/kg'
-                ate_comp_rows.append([comp_n, f'%{comp_conc}', hc, f'{real_ate} {ate_unit} ({ate_source_label})'])
-        ate_note = (
-            'CLP Tüzüğü (EC) No 1272/2008 Ek I Bölüm 3.1 uyarınca karışım için '
-            'ATE (Akut Toksisite Tahmini) toplama yöntemi uygulanmıştır. '
-            'Aşağıdaki bileşen ATE değerleri kullanılmıştır; hesaplama sonucunda '
-            'karışımın ATE değeri sınıflandırma eşiğini aşmadığından '
-            'akut toksisite sınıflandırması yapılmamıştır.'
-        ) if lang == 'TR' else (
-            'The summation method for ATE (Acute Toxicity Estimate) was applied to this '
-            'mixture in accordance with CLP Regulation (EC) No 1272/2008, Annex I, Section 3.1. '
-            'Component ATE values used are shown below; the calculated mixture ATE did not '
-            'exceed the classification threshold, therefore no acute toxicity classification applies.'
-        )
-        story.append(Paragraph(ate_note, styles['body']))
-        if len(ate_comp_rows) > 1:
+        for route, detail in ate_mix_details.items():
+            ate_val   = detail.get('ateMix')
+            res_code  = detail.get('resultCode') or ('—' if lang == 'TR' else '—')
+            unk_pct   = detail.get('unknownPct', 0)
+            r_lbl = (_ROUTE_LABEL_TR if lang == 'TR' else _ROUTE_LABEL_EN).get(route, route)
+            unit  = _ROUTE_UNIT.get(route, 'mg/kg')
+            unk_note = (f' (bilinmeyen %{unk_pct} — revize formül)' if unk_pct > 10 else '')
+            result_rows.append([
+                r_lbl,
+                f'{ate_val} {unit}{unk_note}' if ate_val is not None else '—',
+                res_code,
+            ])
+
+        if len(result_rows) > 1:
+            story.append(data_table(result_rows, [55*mm, 70*mm, 55*mm], styles))
             story.append(Spacer(1, 3))
-            story.append(data_table(ate_comp_rows, [55*mm, 25*mm, 20*mm, 80*mm], styles))
+
+        # Bileşen detay tablosu
+        comp_rows = [[
+            ('Madde'         if lang == 'TR' else 'Substance'),
+            ('Konst. (%)'    if lang == 'TR' else 'Conc. (%)'),
+            ('H Kodu'        if lang == 'TR' else 'H Code'),
+            ('ATE (nokta tahmini)' if lang == 'TR' else 'ATE (point estimate)'),
+        ]]
+        for route, detail in ate_mix_details.items():
+            unit = _ROUTE_UNIT.get(route, 'mg/kg')
+            for c in detail.get('components', []):
+                comp_rows.append([
+                    str(c.get('name', c.get('cas', '—'))),
+                    f"{c.get('conc', '—')}",
+                    str(c.get('code', '—')),
+                    f"{c.get('ate', '—')} {unit}",
+                ])
+        if len(comp_rows) > 1:
+            story.append(data_table(comp_rows, [60*mm, 20*mm, 20*mm, 80*mm], styles))
+
+        # Açıklama notu
+        mix_has_acute = bool(set(h_codes) & ACUTE_H)
+        if mix_has_acute:
+            ate_note = (
+                'Yukarıdaki ATEmix değerleri hesaplanmış olup karışım akut toksisite '
+                'sınıflandırması (H300/H301/H302/H310/H311/H312/H330/H331/H332) '
+                'bu hesaba dayanmaktadır. Kullanılan nokta tahminleri SEA/CLP Ek I Tablo 3.1.2\'den alınmıştır.'
+            ) if lang == 'TR' else (
+                'The ATEmix values above have been calculated and the mixture acute toxicity '
+                'classification is based on this calculation. Point estimates are from '
+                'CLP Annex I Table 3.1.2.'
+            )
+        else:
+            ate_note = (
+                'ATEmix hesabı yapılmış, ancak hesaplanan değer sınıflandırma eşiğini '
+                'aşmadığından akut toksisite sınıflandırması atanmamıştır.'
+            ) if lang == 'TR' else (
+                'ATEmix was calculated but did not exceed the classification threshold; '
+                'no acute toxicity classification assigned.'
+            )
+        story.append(Spacer(1, 3))
+        story.append(Paragraph(ate_note, styles['small']))
 
     # ─────────────────────────────────────────────────────────────────────────
     # BÖLÜM 12 — Ekoloji

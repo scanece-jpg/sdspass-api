@@ -230,9 +230,28 @@ const CLPEngine = (() => {
       cutoffUsed['H318'] = { value: phRaw, source: `pH=${phRaw} (${direction}) → SEA Tablo 3.2.3`, cas: 'KARIŞIM' };
     }
 
+    // SCL nesne formatından c_min'i oku (tek H kodu için)
+    function _getSCL(cScl, code) {
+      if (!cScl) return null;
+      if (Array.isArray(cScl) && cScl.length > 0) {
+        const mins = cScl
+          .filter(s => (s.h_code || '').replace(/[*\s]/g,'').substring(0,4) === code && s.c_min != null)
+          .map(s => s.c_min);
+        return mins.length > 0 ? Math.min(...mins) : null;
+      }
+      if (typeof cScl === 'object') return cScl[code] !== undefined ? cScl[code] : null;
+      return null;
+    }
+
     const raw = comps.flatMap(c => {
       const conc = parseFloat(c.concMax || c.conc) || 0;
-      return (c.hazards || []).flatMap(h => {
+
+      // Hazard listesindeki H kodlarını bir Set'e al — SCL-only kodları belirlemek için
+      const hazardCodes = new Set(
+        (c.hazards || []).map(h => (h.h_code || '').replace(/[*\s]/g,'').substring(0,4))
+      );
+
+      const fromHazards = (c.hazards || []).flatMap(h => {
         const code = (h.h_code || '').replace(/[*\s]/g,'').substring(0,4);
         if (!code.startsWith('H')) return [];
         if (FLAM_SKIP.has(code))  return [];
@@ -242,7 +261,7 @@ const CLPEngine = (() => {
         // pH doğrudan H314/H318 atadıysa tek bileşen GCL kontrolü atlanır
         if (phExtreme && (code === 'H314' || code === 'H318')) return [];
 
-        const scl = c.scl && c.scl[code] !== undefined ? c.scl[code] : null;
+        const scl = _getSCL(c.scl, code);
         const gcl = CUTOFFS[code];
         const cutoff = scl !== null ? scl : gcl;
         const source = scl !== null ? 'SCL' : 'GCL';
@@ -272,6 +291,26 @@ const CLPEngine = (() => {
         }
         return [];
       });
+
+      // SCL-only kodlar: hazard listesinde olmayan ama maddeye özgü SCL eşiği tanımlı
+      // Örn. formaldehit: H314 tehlike listesinde var, SCL'de H315/H319 da ≥5% olarak ekleniyor
+      const fromSCLOnly = [];
+      const sclObj = (!Array.isArray(c.scl) && c.scl && typeof c.scl === 'object') ? c.scl : null;
+      if (sclObj) {
+        Object.entries(sclObj).forEach(([code, sclVal]) => {
+          if (!code.startsWith('H') || hazardCodes.has(code)) return;
+          if (FLAM_SKIP.has(code) || ECO_SKIP.has(code) || ATE_HCODES.has(code)) return;
+          if (typeof sclVal !== 'number') return;
+          if (conc >= sclVal) {
+            fromSCLOnly.push(code);
+            if (!cutoffUsed[code] || sclVal < cutoffUsed[code].value) {
+              cutoffUsed[code] = { value: sclVal, source: 'SCL', cas: c.cas || '' };
+            }
+          }
+        });
+      }
+
+      return [...fromHazards, ...fromSCLOnly];
     });
 
     // pH'tan gelen doğrudan kodları ekle

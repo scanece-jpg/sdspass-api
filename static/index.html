@@ -108,6 +108,20 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
 .phys-chip-val{font-family:var(--mono);font-size:12px;font-weight:700;color:#e2e8f0}
 .phys-chip-sub{font-size:8px;color:var(--text3);margin-top:2px}
 
+/* Bölüm 2.2 — Etiket Unsurları */
+.label22-box{background:var(--bg2);border:1px solid var(--border2);border-radius:8px;padding:12px;margin-bottom:8px}
+.label22-section{margin-bottom:10px}
+.label22-section-title{font-size:9px;font-weight:700;color:var(--accent);text-transform:uppercase;letter-spacing:.08em;margin-bottom:5px}
+.label22-pics{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:4px}
+.label22-pic{width:44px;height:44px;display:flex;align-items:center;justify-content:center;border:2px solid #c00;border-radius:4px;background:#fff;font-size:22px}
+.label22-signal-danger{display:inline-block;padding:3px 14px;border:2px solid var(--danger);border-radius:5px;color:var(--danger);font-weight:800;font-size:13px;letter-spacing:.05em}
+.label22-signal-warning{display:inline-block;padding:3px 14px;border:2px solid var(--warning);border-radius:5px;color:var(--warning);font-weight:800;font-size:13px;letter-spacing:.05em}
+.label22-stmt{font-size:11px;line-height:1.5;padding:2px 0;color:var(--text)}
+.label22-code{font-family:var(--mono);font-size:10px;color:var(--accent);margin-right:4px;font-weight:700}
+.label22-p-label{background:rgba(100,181,246,.12);border:1px solid rgba(100,181,246,.25);border-radius:4px;padding:3px 7px;margin-bottom:3px;display:block}
+.label22-p-other{color:var(--text3);padding:2px 0;display:block}
+.label22-divider{border:none;border-top:1px solid var(--border2);margin:8px 0}
+
 /* PDF zorunlu alan uyarı modalı */
 .pdf-block-overlay{position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:1200;display:none;align-items:center;justify-content:center}
 .pdf-block-overlay.open{display:flex}
@@ -522,6 +536,7 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
 <script src="js/state-store.js?v=20250328"></script>
 <script src="js/engines/clp_engine.js?v=20260407"></script>
 <script src="js/engines/pcode_engine.js?v=20260330b"></script>
+<script src="js/engines/hp_texts.js?v=20260425"></script>
 <script src="js/engines/eco_engine.js?v=20260402"></script>
 <script src="js/engines/stot_engine.js?v=20250328"></script>
 <script src="js/engines/euh_engine.js?v=20260331"></script>
@@ -1512,6 +1527,112 @@ function _resetPhysSourceFields() {
   });
 }
 
+// ── Bölüm 2.2 — Etiket Unsurları Render ──────────────────────────────────────
+function _renderLabel22({ allH, combinedSignal, combinedPics, pcodes, euh }) {
+  // HP_TEXTS: hp_texts.js'den yüklü; yoksa boş fallback
+  const HT  = (typeof HP_TEXTS !== 'undefined') ? HP_TEXTS.H   : {};
+  const PT  = (typeof HP_TEXTS !== 'undefined') ? HP_TEXTS.P   : {};
+  const EUHT= (typeof HP_TEXTS !== 'undefined') ? HP_TEXTS.EUH : {};
+  const PFB = (typeof HP_TEXTS !== 'undefined') ? HP_TEXTS.P_FALLBACK : {};
+
+  function hText(code) { return HT[code] || code; }
+  function pText(code) {
+    // Kombine kodlar (P301+P310) — her parçanın metnini birleştir
+    const parts = code.split('+');
+    const texts = parts.map(p => PT[p] || PFB[p] || p).filter(Boolean);
+    return texts.join(' / ');
+  }
+  function euhText(code) { return EUHT[code] || code; }
+
+  // GHS sembol haritası
+  const GHS_SYM = {
+    GHS01:'💥',GHS02:'🔥',GHS03:'⭕',GHS04:'🔴',
+    GHS05:'⚗️',GHS06:'☠️',GHS07:'❗',GHS08:'⚕️',GHS09:'🌿'
+  };
+
+  let out = `<div class="label22-box">`;
+
+  // ── Piktogramlar ───────────────────────────────────────────────────────────
+  if (combinedPics && combinedPics.length) {
+    out += `<div class="label22-section">
+      <div class="label22-section-title">GHS Piktogramları</div>
+      <div class="label22-pics">`;
+    combinedPics.forEach(g => {
+      out += `<div class="label22-pic" title="${g}">${GHS_SYM[g] || g}</div>`;
+    });
+    out += `</div></div>`;
+  }
+
+  // ── Uyarı Kelimesi ─────────────────────────────────────────────────────────
+  if (combinedSignal && combinedSignal !== 'None') {
+    const isDanger = combinedSignal === 'Danger';
+    const label = isDanger ? 'TEHLİKE' : 'DİKKAT';
+    out += `<div class="label22-section">
+      <div class="label22-section-title">Uyarı Kelimesi</div>
+      <span class="${isDanger ? 'label22-signal-danger' : 'label22-signal-warning'}">${label}</span>
+    </div>`;
+  }
+
+  // ── Zararlılık İfadeleri (H) ───────────────────────────────────────────────
+  const hList = (allH || []).filter(c => c.startsWith('H'));
+  if (hList.length) {
+    out += `<div class="label22-section">
+      <div class="label22-section-title">Zararlılık İfadeleri</div>`;
+    hList.forEach(code => {
+      out += `<div class="label22-stmt"><span class="label22-code">${code}</span>${hText(code)}</div>`;
+    });
+    out += `</div>`;
+  }
+
+  // ── EUH İfadeleri ─────────────────────────────────────────────────────────
+  const euhDetails = euh?.euh_details || [];
+  const euhCodes   = (allH || []).filter(c => c.startsWith('EUH'));
+  if (euhDetails.length || euhCodes.length) {
+    out += `<div class="label22-section">
+      <div class="label22-section-title">Ek Etiket Unsurları (EUH)</div>`;
+    euhDetails.forEach(d => {
+      const text = d.text_tr || d.text || euhText(d.code);
+      out += `<div class="label22-stmt"><span class="label22-code">${d.code}</span>${text}</div>`;
+    });
+    euhCodes.forEach(code => {
+      if (!euhDetails.some(d => d.code === code))
+        out += `<div class="label22-stmt"><span class="label22-code">${code}</span>${euhText(code)}</div>`;
+    });
+    out += `</div>`;
+  }
+
+  // ── Önlem İfadeleri — Etiket (P) ──────────────────────────────────────────
+  const labelCodes     = pcodes?.label_codes     || [];
+  const labelMandatory = pcodes?.label_mandatory || [];
+  const otherCodes     = (pcodes?.codes || []).filter(
+    c => !labelCodes.includes(c) && !labelMandatory.includes(c)
+  );
+
+  if (labelCodes.length || labelMandatory.length) {
+    out += `<div class="label22-section">
+      <div class="label22-section-title">Önlem İfadeleri — Etiket (${labelCodes.length + labelMandatory.length} adet)</div>`;
+    [...labelCodes, ...labelMandatory].forEach(code => {
+      out += `<div class="label22-p-label"><span class="label22-code">${code}</span>${pText(code)}</div>`;
+    });
+    out += `</div>`;
+  }
+
+  // ── Diğer P kodları (SDS bölümleri için, etikette yer almaz) ──────────────
+  if (otherCodes.length) {
+    out += `<hr class="label22-divider">
+    <div class="label22-section">
+      <div class="label22-section-title" style="color:var(--text3)">Diğer Önlem İfadeleri (etikette yer almaz)</div>
+      <div style="display:flex;flex-wrap:wrap;gap:4px">`;
+    otherCodes.forEach(code => {
+      out += `<span style="background:rgba(106,106,136,.12);border:1px solid var(--border2);color:var(--text3);border-radius:4px;padding:2px 6px;font-family:var(--mono);font-size:10px" title="${pText(code)}">${code}</span>`;
+    });
+    out += `</div></div>`;
+  }
+
+  out += `</div>`;
+  return out;
+}
+
 // ── Hesaplama sonrası zorunlu fiziksel alan uyarı paneli ──────────────────────
 function _renderPhysWarnPanel() {
   const panel = document.getElementById('physWarnPanel');
@@ -1928,15 +2049,9 @@ function renderAll(s) {
     </div>`;
   }
 
-  // ── P Kodları ─────────────────────────────────────────────────────────────
-  if ((pcodes.codes||[]).length) {
-    h += `<div class="r-title">🛡 Bölüm 2.2 — P Kodları (${pcodes.total} adet)</div>`;
-    h += `<div style="display:flex;flex-wrap:wrap;gap:4px;margin-bottom:8px">`;
-    (pcodes.codes||[]).forEach(code => {
-      h += `<span style="background:rgba(100,181,246,.1);border:1px solid rgba(100,181,246,.2);color:var(--info);border-radius:4px;padding:2px 7px;font-family:var(--mono);font-size:10px">${code}</span>`;
-    });
-    h += `</div>`;
-  }
+  // ── Bölüm 2.2 — Etiket Unsurları ────────────────────────────────────────
+  h += `<div class="r-title">🏷 Bölüm 2.2 — Etiket Unsurları</div>`;
+  h += _renderLabel22({ allH, combinedSignal, combinedPics, pcodes, euh });
 
   // ── Taşımacılık ──────────────────────────────────────────────────────────
   h += `<div class="r-title">🚛 Bölüm 14 — Taşımacılık</div>`;

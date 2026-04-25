@@ -334,19 +334,23 @@ async def substance_lookup(cas: str):
     # Sıra 1-2-3: Lokal dosyalar
     result = lookup_substance(cas)
 
-    # Sıra 4: ECHA C&L API — lokal bulunamazsa canlı çek
+    # Sıra 4: ECHA C&L API — lokal bulunamazsa canlı çek, data/annex6/'a kaydet
     if result is None:
         try:
             from app.services.echa_service import lookup_echa_api
+            from app.services.substance_lookup import save_annex6_substance
             echa = await lookup_echa_api(cas)
             if echa and echa.get('h_codes'):
+                # Kalıcı olarak kaydet — bir sonraki lookup API'ye gitmez
+                save_annex6_substance(cas, echa)
                 return {
                     "found"     : True,
                     "cas"       : cas,
                     "name"      : echa.get("name", ""),
                     "ec_no"     : echa.get("ec_no", "") or get_ec_no(cas),
                     "reach_no"  : get_reg_no(cas),
-                    "annex_vi"  : False,
+                    "annex_vi"  : True,
+                    "sea_ek6"   : False,
                     "signal"    : echa.get("signal", ""),
                     "pictograms": echa.get("pictograms", []),
                     "hazards"   : [
@@ -372,10 +376,11 @@ async def substance_lookup(cas: str):
             "name_tr"   : result.get("name_tr", ""),   # Türkçe SDS Bölüm 3 için
             "ec_no"     : result.get("ec_no", "") or get_ec_no(cas),
             "reach_no"  : get_reg_no(cas),
+            "sea_ek6"   : result.get("sea_ek6", False),
             "annex_vi"  : result.get("annex_vi", False),
             "signal"    : result.get("signal", ""),
             "pictograms": result.get("pictograms", []),
-            "hazards"   : result.get("hazards", []),
+            "hazards"   : result.get("hazards", []),   # _annex_supplement:True olanlar ek tehlikeler
             "m_factors" : result.get("m_factors", {}),
             "scl"       : result.get("scl", []),
             "oel"       : oel,

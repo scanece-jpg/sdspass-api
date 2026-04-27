@@ -667,6 +667,24 @@ async def sds_validate(body: dict):
 
 # ── ÇIKTI: Veri Endpoint'leri ─────────────────────────────────────────────────
 
+@app.get("/api/v1/svhc/{cas}")
+async def svhc_check_single(cas: str):
+    """Tek CAS numarası için SVHC aday listesi kontrolü."""
+    from app.services.svhc_service import check_svhc_single
+    result = check_svhc_single(cas)
+    if result:
+        return {"found": True, **result}
+    return {"found": False, "cas": cas}
+
+
+@app.post("/api/v1/svhc/check")
+async def svhc_check_mixture(body: dict):
+    """Karışım bileşenleri için SVHC kontrolü. Input: {components: [...]}"""
+    from app.services.svhc_service import check_svhc_mixture
+    components = body.get("components", [])
+    return check_svhc_mixture(components)
+
+
 @app.get("/api/v1/oel/{cas}")
 async def oel_lookup(cas: str, lang: str = "TR"):
     """

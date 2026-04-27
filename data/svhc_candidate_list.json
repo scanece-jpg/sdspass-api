@@ -1,0 +1,1288 @@
+{
+  "version": "ECHA SVHC Candidate List - ATP 2024/01",
+  "date": "2024-12-12",
+  "source": "ECHA Candidate List of substances of very high concern (Article 59(10) REACH)",
+  "note": "KKDİK Ek-14 kapsamında Türkiye'de de aynı liste uygulanmaktadır.",
+  "substances": [
+    {
+      "cas": "117-81-7",
+      "ec": "204-211-0",
+      "name": "Bis(2-ethylhexyl) phthalate (DEHP)",
+      "name_tr": "Bis(2-etilheksil) ftalat (DEHP)",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "84-74-2",
+      "ec": "201-557-4",
+      "name": "Dibutyl phthalate (DBP)",
+      "name_tr": "Dibütil ftalat (DBP)",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "85-68-7",
+      "ec": "201-622-7",
+      "name": "Benzyl butyl phthalate (BBP)",
+      "name_tr": "Benzil bütil ftalat (BBP)",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "84-69-5",
+      "ec": "201-553-2",
+      "name": "Diisobutyl phthalate (DIBP)",
+      "name_tr": "Diizobütil ftalat (DIBP)",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "131-18-0",
+      "ec": "205-018-8",
+      "name": "Dipentyl phthalate (DPP)",
+      "name_tr": "Dipentil ftalat (DPP)",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "605-50-5",
+      "ec": "210-088-4",
+      "name": "Diisopentyl phthalate",
+      "name_tr": "Diizopentil ftalat",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "776297-69-9",
+      "ec": "-",
+      "name": "1,2-bis(2-methoxyethoxy)ethane (TEGDME)",
+      "name_tr": "TEGDME",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "27955-94-8",
+      "ec": "-",
+      "name": "Dipentyl phthalate, branched and linear",
+      "name_tr": "Dallı ve doğrusal dipentil ftalat",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "10043-35-3",
+      "ec": "233-139-2",
+      "name": "Boric acid",
+      "name_tr": "Borik asit",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "1303-86-2",
+      "ec": "215-125-8",
+      "name": "Diboron trioxide",
+      "name_tr": "Dibor trioksit",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "1303-96-4",
+      "ec": "215-540-4",
+      "name": "Disodium tetraborate, anhydrous",
+      "name_tr": "Susuz disodyum tetraborat",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "12179-04-3",
+      "ec": "215-540-4",
+      "name": "Disodium tetraborate decahydrate",
+      "name_tr": "Disodyum tetraborat dekahidrat",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "1330-43-4",
+      "ec": "215-540-4",
+      "name": "Disodium tetraborate",
+      "name_tr": "Disodyum tetraborat",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "1333-82-0",
+      "ec": "215-607-8",
+      "name": "Chromium trioxide",
+      "name_tr": "Krom trioksit",
+      "concern": "Carc. 1A, Muta. 1B",
+      "concern_tr": "Kanserojen Kat. 1A, Mutajen Kat. 1B"
+    },
+    {
+      "cas": "7738-94-5",
+      "ec": "231-801-5",
+      "name": "Chromic acid",
+      "name_tr": "Kromik asit",
+      "concern": "Carc. 1A, Muta. 1B",
+      "concern_tr": "Kanserojen Kat. 1A, Mutajen Kat. 1B"
+    },
+    {
+      "cas": "13530-68-2",
+      "ec": "236-881-5",
+      "name": "Dichromic acid",
+      "name_tr": "Dikromik asit",
+      "concern": "Carc. 1A, Muta. 1B",
+      "concern_tr": "Kanserojen Kat. 1A, Mutajen Kat. 1B"
+    },
+    {
+      "cas": "18540-29-9",
+      "ec": "-",
+      "name": "Chromium(VI)",
+      "name_tr": "Krom(VI)",
+      "concern": "Carc. 1A",
+      "concern_tr": "Kanserojen Kat. 1A"
+    },
+    {
+      "cas": "7646-79-9",
+      "ec": "231-589-4",
+      "name": "Cobalt dichloride",
+      "name_tr": "Kobalt diklorür",
+      "concern": "Carc. 1B, Repr. 1B",
+      "concern_tr": "Kanserojen Kat. 1B, Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "10124-43-3",
+      "ec": "233-334-2",
+      "name": "Cobalt(II) sulphate",
+      "name_tr": "Kobalt(II) sülfat",
+      "concern": "Carc. 1B, Repr. 1B",
+      "concern_tr": "Kanserojen Kat. 1B, Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "10026-24-1",
+      "ec": "233-334-2",
+      "name": "Cobalt(II) sulphate heptahydrate",
+      "name_tr": "Kobalt(II) sülfat heptahidrat",
+      "concern": "Carc. 1B, Repr. 1B",
+      "concern_tr": "Kanserojen Kat. 1B, Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "7791-13-1",
+      "ec": "232-088-7",
+      "name": "Cobalt(II) chloride",
+      "name_tr": "Kobalt(II) klorür",
+      "concern": "Carc. 1B, Repr. 1B",
+      "concern_tr": "Kanserojen Kat. 1B, Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "513-79-1",
+      "ec": "208-169-4",
+      "name": "Cobalt(II) carbonate",
+      "name_tr": "Kobalt(II) karbonat",
+      "concern": "Carc. 1B, Repr. 1B",
+      "concern_tr": "Kanserojen Kat. 1B, Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "71-48-7",
+      "ec": "200-748-7",
+      "name": "Cobalt(II) diacetate",
+      "name_tr": "Kobalt(II) diasetat",
+      "concern": "Carc. 1B, Repr. 1B",
+      "concern_tr": "Kanserojen Kat. 1B, Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "7440-43-9",
+      "ec": "231-152-8",
+      "name": "Cadmium",
+      "name_tr": "Kadmiyum",
+      "concern": "Carc. 1B, Muta. 2, Repr. 2",
+      "concern_tr": "Kanserojen Kat. 1B, Mutajen Kat. 2, Üreme toksik Kat. 2"
+    },
+    {
+      "cas": "1306-19-0",
+      "ec": "215-146-2",
+      "name": "Cadmium oxide",
+      "name_tr": "Kadmiyum oksit",
+      "concern": "Carc. 1B, Muta. 2",
+      "concern_tr": "Kanserojen Kat. 1B, Mutajen Kat. 2"
+    },
+    {
+      "cas": "10108-64-2",
+      "ec": "233-296-7",
+      "name": "Cadmium chloride",
+      "name_tr": "Kadmiyum klorür",
+      "concern": "Carc. 1B, Muta. 2, Repr. 2",
+      "concern_tr": "Kanserojen Kat. 1B, Mutajen Kat. 2, Üreme toksik Kat. 2"
+    },
+    {
+      "cas": "7440-38-2",
+      "ec": "231-148-6",
+      "name": "Arsenic",
+      "name_tr": "Arsenik",
+      "concern": "Carc. 1A",
+      "concern_tr": "Kanserojen Kat. 1A"
+    },
+    {
+      "cas": "1327-53-3",
+      "ec": "215-481-4",
+      "name": "Arsenic trioxide",
+      "name_tr": "Arsenik trioksit",
+      "concern": "Carc. 1A",
+      "concern_tr": "Kanserojen Kat. 1A"
+    },
+    {
+      "cas": "1303-28-2",
+      "ec": "215-116-9",
+      "name": "Arsenic pentaoxide",
+      "name_tr": "Arsenik pentaoksit",
+      "concern": "Carc. 1A",
+      "concern_tr": "Kanserojen Kat. 1A"
+    },
+    {
+      "cas": "7439-92-1",
+      "ec": "231-100-4",
+      "name": "Lead",
+      "name_tr": "Kurşun",
+      "concern": "Repr. 1A, PBT",
+      "concern_tr": "Üreme toksik Kat. 1A (PBT)"
+    },
+    {
+      "cas": "1309-60-0",
+      "ec": "215-174-5",
+      "name": "Lead dioxide",
+      "name_tr": "Kurşun dioksit",
+      "concern": "Repr. 1A",
+      "concern_tr": "Üreme toksik Kat. 1A"
+    },
+    {
+      "cas": "1314-41-6",
+      "ec": "215-179-3",
+      "name": "Lead tetroxide",
+      "name_tr": "Kurşun tetraoksit",
+      "concern": "Repr. 1A",
+      "concern_tr": "Üreme toksik Kat. 1A"
+    },
+    {
+      "cas": "1317-36-8",
+      "ec": "215-267-0",
+      "name": "Lead monoxide",
+      "name_tr": "Kurşun monoksit",
+      "concern": "Repr. 1A",
+      "concern_tr": "Üreme toksik Kat. 1A"
+    },
+    {
+      "cas": "7446-14-2",
+      "ec": "231-198-9",
+      "name": "Lead(II) sulphate",
+      "name_tr": "Kurşun(II) sülfat",
+      "concern": "Repr. 1A",
+      "concern_tr": "Üreme toksik Kat. 1A"
+    },
+    {
+      "cas": "13814-96-5",
+      "ec": "237-560-2",
+      "name": "Lead bis(tetrafluoroborate)",
+      "name_tr": "Kurşun bis(tetrafluoroborat)",
+      "concern": "Repr. 1A",
+      "concern_tr": "Üreme toksik Kat. 1A"
+    },
+    {
+      "cas": "79-06-1",
+      "ec": "201-173-7",
+      "name": "Acrylamide",
+      "name_tr": "Akrilamid",
+      "concern": "Carc. 1B, Muta. 1B, Repr. 1B",
+      "concern_tr": "Kanserojen Kat. 1B, Mutajen Kat. 1B, Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "50-00-0",
+      "ec": "200-001-8",
+      "name": "Formaldehyde",
+      "name_tr": "Formaldehit",
+      "concern": "Carc. 1B, Muta. 2",
+      "concern_tr": "Kanserojen Kat. 1B, Mutajen Kat. 2"
+    },
+    {
+      "cas": "96-45-7",
+      "ec": "202-506-9",
+      "name": "Ethylene thiourea",
+      "name_tr": "Etilen tiyoüre",
+      "concern": "Carc. 1B, Muta. 2, Repr. 1B",
+      "concern_tr": "Kanserojen Kat. 1B, Mutajen Kat. 2, Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "106-94-5",
+      "ec": "203-445-0",
+      "name": "1-bromopropane",
+      "name_tr": "1-brompropan",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "1120-71-4",
+      "ec": "214-317-9",
+      "name": "1,3-propanesultone",
+      "name_tr": "1,3-propansülton",
+      "concern": "Carc. 1A",
+      "concern_tr": "Kanserojen Kat. 1A"
+    },
+    {
+      "cas": "120-12-7",
+      "ec": "204-371-1",
+      "name": "Anthracene",
+      "name_tr": "Antrasen",
+      "concern": "PBT",
+      "concern_tr": "PBT (Kalıcı, Biyobirikimli, Toksik)"
+    },
+    {
+      "cas": "92-67-1",
+      "ec": "202-177-1",
+      "name": "4-aminobiphenyl",
+      "name_tr": "4-aminobifenil",
+      "concern": "Carc. 1A",
+      "concern_tr": "Kanserojen Kat. 1A"
+    },
+    {
+      "cas": "92-87-5",
+      "ec": "202-199-1",
+      "name": "Benzidine",
+      "name_tr": "Benzidin",
+      "concern": "Carc. 1A",
+      "concern_tr": "Kanserojen Kat. 1A"
+    },
+    {
+      "cas": "91-94-1",
+      "ec": "202-109-0",
+      "name": "3,3'-dichlorobenzidine",
+      "name_tr": "3,3'-diklorbenzidine",
+      "concern": "Carc. 1B",
+      "concern_tr": "Kanserojen Kat. 1B"
+    },
+    {
+      "cas": "119-90-4",
+      "ec": "204-355-4",
+      "name": "3,3'-dimethoxybenzidine",
+      "name_tr": "3,3'-dimetoksibenzidine",
+      "concern": "Carc. 1B",
+      "concern_tr": "Kanserojen Kat. 1B"
+    },
+    {
+      "cas": "119-93-7",
+      "ec": "204-358-0",
+      "name": "3,3'-dimethylbenzidine",
+      "name_tr": "3,3'-dimetilbenzidine",
+      "concern": "Carc. 1B",
+      "concern_tr": "Kanserojen Kat. 1B"
+    },
+    {
+      "cas": "101-14-4",
+      "ec": "202-918-9",
+      "name": "4,4'-methylenedi-o-chloroaniline (MOCA)",
+      "name_tr": "4,4'-metilendi-o-kloroanilin (MOCA)",
+      "concern": "Carc. 1B",
+      "concern_tr": "Kanserojen Kat. 1B"
+    },
+    {
+      "cas": "838-88-0",
+      "ec": "212-658-8",
+      "name": "4,4'-methylenedi-o-toluidine",
+      "name_tr": "4,4'-metilendi-o-toluidin",
+      "concern": "Carc. 1B",
+      "concern_tr": "Kanserojen Kat. 1B"
+    },
+    {
+      "cas": "91-59-8",
+      "ec": "202-080-4",
+      "name": "2-naphthylamine",
+      "name_tr": "2-naftilamin",
+      "concern": "Carc. 1A",
+      "concern_tr": "Kanserojen Kat. 1A"
+    },
+    {
+      "cas": "90-04-0",
+      "ec": "201-963-1",
+      "name": "2-methoxyaniline",
+      "name_tr": "2-metoksianilin",
+      "concern": "Carc. 1B",
+      "concern_tr": "Kanserojen Kat. 1B"
+    },
+    {
+      "cas": "615-05-4",
+      "ec": "210-406-1",
+      "name": "2,4-diaminoanisole",
+      "name_tr": "2,4-diaminoanisol",
+      "concern": "Carc. 2",
+      "concern_tr": "Kanserojen Kat. 2 (eşdeğer düzey)"
+    },
+    {
+      "cas": "101-80-4",
+      "ec": "202-977-0",
+      "name": "4,4'-oxydianiline",
+      "name_tr": "4,4'-oksidianillin",
+      "concern": "Carc. 1B, Muta. 2",
+      "concern_tr": "Kanserojen Kat. 1B, Mutajen Kat. 2"
+    },
+    {
+      "cas": "101-77-9",
+      "ec": "202-974-4",
+      "name": "4,4'-methylenedianiline (MDA)",
+      "name_tr": "4,4'-metilendianillin (MDA)",
+      "concern": "Carc. 1B",
+      "concern_tr": "Kanserojen Kat. 1B"
+    },
+    {
+      "cas": "91-20-3",
+      "ec": "202-049-5",
+      "name": "Naphthalene",
+      "name_tr": "Naftalin",
+      "concern": "Carc. 2, Muta. 2",
+      "concern_tr": "Kanserojen Kat. 2, Mutajen Kat. 2"
+    },
+    {
+      "cas": "95-80-7",
+      "ec": "202-453-1",
+      "name": "2,4-toluenediamine",
+      "name_tr": "2,4-tolüendiamin",
+      "concern": "Carc. 1B",
+      "concern_tr": "Kanserojen Kat. 1B"
+    },
+    {
+      "cas": "106-89-8",
+      "ec": "203-439-8",
+      "name": "Epichlorohydrin",
+      "name_tr": "Epiklorhidrin",
+      "concern": "Carc. 1B, Muta. 2",
+      "concern_tr": "Kanserojen Kat. 1B, Mutajen Kat. 2"
+    },
+    {
+      "cas": "100-44-7",
+      "ec": "202-853-6",
+      "name": "Benzyl chloride",
+      "name_tr": "Benzil klorür",
+      "concern": "Carc. 1B, Muta. 2",
+      "concern_tr": "Kanserojen Kat. 1B, Mutajen Kat. 2"
+    },
+    {
+      "cas": "111-44-4",
+      "ec": "203-870-1",
+      "name": "2,2'-dichlorodiethyl ether",
+      "name_tr": "2,2'-diklorodietil eter",
+      "concern": "Carc. 1B",
+      "concern_tr": "Kanserojen Kat. 1B"
+    },
+    {
+      "cas": "542-88-1",
+      "ec": "208-832-8",
+      "name": "Bis(chloromethyl) ether",
+      "name_tr": "Bis(klorometil) eter",
+      "concern": "Carc. 1A",
+      "concern_tr": "Kanserojen Kat. 1A"
+    },
+    {
+      "cas": "107-30-2",
+      "ec": "203-480-1",
+      "name": "Chloromethyl methyl ether",
+      "name_tr": "Klorometil metil eter",
+      "concern": "Carc. 1A",
+      "concern_tr": "Kanserojen Kat. 1A"
+    },
+    {
+      "cas": "3194-55-6",
+      "ec": "221-695-9",
+      "name": "Hexabromocyclododecane (HBCDD)",
+      "name_tr": "Heksabromosiklododekан (HBCDD)",
+      "concern": "PBT, vPvB",
+      "concern_tr": "PBT, çok kalıcı çok biyobirikimli"
+    },
+    {
+      "cas": "134237-50-6",
+      "ec": "-",
+      "name": "alpha-HBCDD",
+      "name_tr": "alfa-HBCDD",
+      "concern": "PBT, vPvB",
+      "concern_tr": "PBT, çok kalıcı çok biyobirikimli"
+    },
+    {
+      "cas": "134237-51-7",
+      "ec": "-",
+      "name": "beta-HBCDD",
+      "name_tr": "beta-HBCDD",
+      "concern": "PBT, vPvB",
+      "concern_tr": "PBT, çok kalıcı çok biyobirikimli"
+    },
+    {
+      "cas": "134237-52-8",
+      "ec": "-",
+      "name": "gamma-HBCDD",
+      "name_tr": "gamma-HBCDD",
+      "concern": "PBT, vPvB",
+      "concern_tr": "PBT, çok kalıcı çok biyobirikimli"
+    },
+    {
+      "cas": "1763-23-1",
+      "ec": "217-179-8",
+      "name": "Perfluorooctane sulfonic acid (PFOS)",
+      "name_tr": "Perfloroktansülfonik asit (PFOS)",
+      "concern": "PBT, vPvB",
+      "concern_tr": "PBT, çok kalıcı çok biyobirikimli"
+    },
+    {
+      "cas": "45298-90-6",
+      "ec": "-",
+      "name": "Potassium perfluorooctane sulfonate",
+      "name_tr": "Potasyum perfloroktansülfonat",
+      "concern": "PBT, vPvB",
+      "concern_tr": "PBT, çok kalıcı çok biyobirikimli"
+    },
+    {
+      "cas": "307-35-7",
+      "ec": "206-200-6",
+      "name": "Perfluorooctane sulfonyl fluoride",
+      "name_tr": "Perfloroktansülfonil florür",
+      "concern": "PBT, vPvB",
+      "concern_tr": "PBT, çok kalıcı çok biyobirikimli"
+    },
+    {
+      "cas": "335-67-1",
+      "ec": "206-397-9",
+      "name": "Perfluorooctanoic acid (PFOA)",
+      "name_tr": "Perfloroktanoik asit (PFOA)",
+      "concern": "vPvB",
+      "concern_tr": "çok kalıcı çok biyobirikimli"
+    },
+    {
+      "cas": "72629-94-8",
+      "ec": "-",
+      "name": "Ammonium pentadecafluorooctanoate (APFO)",
+      "name_tr": "Amonyum pentadesafluorooktanoat (APFO)",
+      "concern": "vPvB, Repr.",
+      "concern_tr": "çok kalıcı çok biyobirikimli"
+    },
+    {
+      "cas": "67-66-3",
+      "ec": "200-663-8",
+      "name": "Chloroform (trichloromethane)",
+      "name_tr": "Kloroform (triklorometan)",
+      "concern": "Carc. 2, Repr. 2",
+      "concern_tr": "Kanserojen Kat. 2, Üreme toksik Kat. 2"
+    },
+    {
+      "cas": "71-55-6",
+      "ec": "200-756-3",
+      "name": "1,1,1-trichloroethane",
+      "name_tr": "1,1,1-trikloroetan",
+      "concern": "EqC - ozone",
+      "concern_tr": "Ozon tabakasına zarar veren (eşdeğer düzey)"
+    },
+    {
+      "cas": "75-09-2",
+      "ec": "200-838-9",
+      "name": "Dichloromethane",
+      "name_tr": "Diklorometan",
+      "concern": "Carc. 2",
+      "concern_tr": "Kanserojen Kat. 2 (eşdeğer düzey)"
+    },
+    {
+      "cas": "79-01-6",
+      "ec": "201-167-4",
+      "name": "Trichloroethylene",
+      "name_tr": "Trikloretilen",
+      "concern": "Carc. 1A, Muta. 2",
+      "concern_tr": "Kanserojen Kat. 1A"
+    },
+    {
+      "cas": "127-18-4",
+      "ec": "204-825-9",
+      "name": "Tetrachloroethylene (PERC)",
+      "name_tr": "Tetrakloretilen (PERC)",
+      "concern": "Carc. 1B",
+      "concern_tr": "Kanserojen Kat. 1B"
+    },
+    {
+      "cas": "75-01-4",
+      "ec": "200-831-0",
+      "name": "Vinyl chloride",
+      "name_tr": "Vinil klorür",
+      "concern": "Carc. 1A",
+      "concern_tr": "Kanserojen Kat. 1A"
+    },
+    {
+      "cas": "156-60-5",
+      "ec": "205-859-7",
+      "name": "1,2-dichloroethylene (trans)",
+      "name_tr": "1,2-dikloretilen (trans)",
+      "concern": "EqC",
+      "concern_tr": "Eşdeğer düzey endişe"
+    },
+    {
+      "cas": "107-06-2",
+      "ec": "203-458-1",
+      "name": "1,2-dichloroethane",
+      "name_tr": "1,2-dikloroetan",
+      "concern": "Carc. 1B, Muta. 2",
+      "concern_tr": "Kanserojen Kat. 1B, Mutajen Kat. 2"
+    },
+    {
+      "cas": "540-59-0",
+      "ec": "208-750-2",
+      "name": "1,2-dichloroethylene",
+      "name_tr": "1,2-dikloretilen",
+      "concern": "EqC",
+      "concern_tr": "Eşdeğer düzey endişe"
+    },
+    {
+      "cas": "120-82-1",
+      "ec": "204-428-0",
+      "name": "1,2,4-trichlorobenzene",
+      "name_tr": "1,2,4-triklorobenzen",
+      "concern": "EqC - PBT",
+      "concern_tr": "PBT (eşdeğer düzey)"
+    },
+    {
+      "cas": "87-61-6",
+      "ec": "201-757-1",
+      "name": "1,2,3-trichlorobenzene",
+      "name_tr": "1,2,3-triklorobenzen",
+      "concern": "PBT",
+      "concern_tr": "PBT (Kalıcı, Biyobirikimli, Toksik)"
+    },
+    {
+      "cas": "319-84-6",
+      "ec": "206-270-8",
+      "name": "alpha-hexachlorocyclohexane",
+      "name_tr": "alfa-heksaklorosikloheksan",
+      "concern": "PBT, vPvB",
+      "concern_tr": "PBT, çok kalıcı çok biyobirikimli"
+    },
+    {
+      "cas": "58-89-9",
+      "ec": "200-401-2",
+      "name": "Lindane (gamma-HCH)",
+      "name_tr": "Lindan (gama-HCH)",
+      "concern": "PBT, vPvB",
+      "concern_tr": "PBT, çok kalıcı çok biyobirikimli"
+    },
+    {
+      "cas": "309-00-2",
+      "ec": "206-215-8",
+      "name": "Aldrin",
+      "name_tr": "Aldrin",
+      "concern": "PBT, vPvB",
+      "concern_tr": "PBT, çok kalıcı çok biyobirikimli"
+    },
+    {
+      "cas": "60-57-1",
+      "ec": "200-484-5",
+      "name": "Dieldrin",
+      "name_tr": "Dieldrin",
+      "concern": "PBT, vPvB",
+      "concern_tr": "PBT, çok kalıcı çok biyobirikimli"
+    },
+    {
+      "cas": "72-20-8",
+      "ec": "200-775-7",
+      "name": "Endrin",
+      "name_tr": "Endrin",
+      "concern": "PBT, vPvB",
+      "concern_tr": "PBT, çok kalıcı çok biyobirikimli"
+    },
+    {
+      "cas": "57-74-9",
+      "ec": "200-349-0",
+      "name": "Chlordane",
+      "name_tr": "Klordan",
+      "concern": "PBT, vPvB",
+      "concern_tr": "PBT, çok kalıcı çok biyobirikimli"
+    },
+    {
+      "cas": "76-44-8",
+      "ec": "200-962-3",
+      "name": "Heptachlor",
+      "name_tr": "Heptaklor",
+      "concern": "PBT, vPvB",
+      "concern_tr": "PBT, çok kalıcı çok biyobirikimli"
+    },
+    {
+      "cas": "115-29-7",
+      "ec": "204-079-4",
+      "name": "Endosulfan",
+      "name_tr": "Endosülfan",
+      "concern": "PBT, vPvB",
+      "concern_tr": "PBT, çok kalıcı çok biyobirikimli"
+    },
+    {
+      "cas": "143-50-0",
+      "ec": "205-601-3",
+      "name": "Kepone (chlordecone)",
+      "name_tr": "Klordekon",
+      "concern": "PBT, vPvB",
+      "concern_tr": "PBT, çok kalıcı çok biyobirikimli"
+    },
+    {
+      "cas": "118-74-1",
+      "ec": "204-273-9",
+      "name": "Hexachlorobenzene",
+      "name_tr": "Heksaklorobenzen",
+      "concern": "PBT, vPvB",
+      "concern_tr": "PBT, çok kalıcı çok biyobirikimli"
+    },
+    {
+      "cas": "608-73-1",
+      "ec": "210-168-9",
+      "name": "Hexachlorocyclohexane",
+      "name_tr": "Heksaklorosikloheksan",
+      "concern": "PBT, vPvB",
+      "concern_tr": "PBT, çok kalıcı çok biyobirikimli"
+    },
+    {
+      "cas": "7012-37-5",
+      "ec": "230-042-7",
+      "name": "Polychlorinated biphenyls (PCB-28)",
+      "name_tr": "Poliklorlu bifeniller (PCB-28)",
+      "concern": "PBT, vPvB",
+      "concern_tr": "PBT, çok kalıcı çok biyobirikimli"
+    },
+    {
+      "cas": "13674-87-8",
+      "ec": "237-158-7",
+      "name": "Tris(1,3-dichloropropyl) phosphate (TDCPP)",
+      "name_tr": "Tris(1,3-dikloropropil) fosfat (TDCPP)",
+      "concern": "Carc. 1B",
+      "concern_tr": "Kanserojen Kat. 1B"
+    },
+    {
+      "cas": "115-96-8",
+      "ec": "204-118-5",
+      "name": "Tris(2-chloroethyl) phosphate (TCEP)",
+      "name_tr": "Tris(2-kloroetiil) fosfat (TCEP)",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "78-30-8",
+      "ec": "201-103-5",
+      "name": "Tri-o-cresyl phosphate (TOCP)",
+      "name_tr": "Tri-o-kresil fosfat (TOCP)",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "13121-70-5",
+      "ec": "236-049-1",
+      "name": "Cyhexatin",
+      "name_tr": "Siheksatin",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "76-87-9",
+      "ec": "200-990-6",
+      "name": "Fentin hydroxide (triphenyltin hydroxide)",
+      "name_tr": "Fentin hidroksit",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "56-35-9",
+      "ec": "200-268-0",
+      "name": "Bis(tributyltin) oxide (TBTO)",
+      "name_tr": "Bis(tribütiltin) oksit (TBTO)",
+      "concern": "PBT, vPvB",
+      "concern_tr": "PBT, çok kalıcı çok biyobirikimli"
+    },
+    {
+      "cas": "1002-53-5",
+      "ec": "213-730-3",
+      "name": "Dibutyltin hydrogen borate",
+      "name_tr": "Dibütiltin hidrojen borat",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "77-58-7",
+      "ec": "201-039-8",
+      "name": "Dibutyltin dilaurate (DBTDL)",
+      "name_tr": "Dibütiltin dilaurat (DBTDL)",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "78-04-6",
+      "ec": "201-083-0",
+      "name": "Dibutyltin diacetate",
+      "name_tr": "Dibütiltin diasetat",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "2781-10-4",
+      "ec": "220-552-7",
+      "name": "Dibutyltin bis(ethylhexanoate)",
+      "name_tr": "Dibütiltin bis(etilheksanoat)",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "4253-34-3",
+      "ec": "224-221-4",
+      "name": "Dibutyltin diisooctyl maleate",
+      "name_tr": "Dibütiltin diizoktil maleat",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "16091-18-2",
+      "ec": "240-253-6",
+      "name": "Dibutyltin maleate",
+      "name_tr": "Dibütiltin maleat",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "813-19-4",
+      "ec": "212-388-1",
+      "name": "Dioctyltin dilaurate",
+      "name_tr": "Dioktiltin dilaurat",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "3648-18-8",
+      "ec": "222-883-3",
+      "name": "Dioctyltin dilaurate",
+      "name_tr": "Dioktiltin dilaurat",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "2767-47-7",
+      "ec": "220-491-9",
+      "name": "Tributyltin fluoride",
+      "name_tr": "Tribütiltin florür",
+      "concern": "PBT",
+      "concern_tr": "PBT (Kalıcı, Biyobirikimli, Toksik)"
+    },
+    {
+      "cas": "4785-50-6",
+      "ec": "225-342-0",
+      "name": "Tributyltin benzoate",
+      "name_tr": "Tribütiltin benzoat",
+      "concern": "PBT",
+      "concern_tr": "PBT (Kalıcı, Biyobirikimli, Toksik)"
+    },
+    {
+      "cas": "97-77-8",
+      "ec": "202-607-8",
+      "name": "Disulfiram (tetraethylthiuram disulphide)",
+      "name_tr": "Disülfiram",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "137-26-8",
+      "ec": "205-286-2",
+      "name": "Thiram (tetramethylthiuram disulphide)",
+      "name_tr": "Tiram",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "149-30-4",
+      "ec": "205-736-8",
+      "name": "2-mercaptobenzothiazole (MBT)",
+      "name_tr": "2-merkaptobenzotiazol (MBT)",
+      "concern": "EqC",
+      "concern_tr": "Eşdeğer düzey endişe"
+    },
+    {
+      "cas": "136-30-1",
+      "ec": "205-232-8",
+      "name": "Sodium diethyldithiocarbamate",
+      "name_tr": "Sodyum dietilditiyokarbamat",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "87-90-1",
+      "ec": "201-782-8",
+      "name": "Trichloroisocyanuric acid",
+      "name_tr": "Trikloroisosiyanürik asit",
+      "concern": "EqC",
+      "concern_tr": "Eşdeğer düzey endişe"
+    },
+    {
+      "cas": "872-50-4",
+      "ec": "212-828-1",
+      "name": "N-methylpyrrolidone (NMP)",
+      "name_tr": "N-metilpirolidon (NMP)",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "1634-04-4",
+      "ec": "216-653-1",
+      "name": "Methyl tert-butyl ether (MTBE)",
+      "name_tr": "Metil tert-bütil eter (MTBE)",
+      "concern": "Carc. 2 (eqC)",
+      "concern_tr": "Eşdeğer düzey endişe"
+    },
+    {
+      "cas": "1222-05-5",
+      "ec": "214-946-9",
+      "name": "Galaxolide (HHCB)",
+      "name_tr": "Galaxolide (HHCB)",
+      "concern": "vPvB",
+      "concern_tr": "çok kalıcı çok biyobirikimli"
+    },
+    {
+      "cas": "81-14-1",
+      "ec": "201-328-9",
+      "name": "Musk ketone",
+      "name_tr": "Misk keton",
+      "concern": "vPvB",
+      "concern_tr": "çok kalıcı çok biyobirikimli"
+    },
+    {
+      "cas": "15646-96-5",
+      "ec": "239-762-7",
+      "name": "Tonalide (AHTN)",
+      "name_tr": "Tonalide (AHTN)",
+      "concern": "vPvB",
+      "concern_tr": "çok kalıcı çok biyobirikimli"
+    },
+    {
+      "cas": "1228284-64-7",
+      "ec": "-",
+      "name": "DCHP (dicyclohexyl phthalate)",
+      "name_tr": "Disiклoheksil ftalat (DCHP)",
+      "concern": "Repr. 1B, ED",
+      "concern_tr": "Üreme toksik Kat. 1B, Endokrin bozucu"
+    },
+    {
+      "cas": "84852-15-3",
+      "ec": "284-325-5",
+      "name": "4-nonylphenol (branched)",
+      "name_tr": "4-nonilfenil (dallı)",
+      "concern": "EqC - ED",
+      "concern_tr": "Endokrin bozucu (eşdeğer düzey)"
+    },
+    {
+      "cas": "25154-52-3",
+      "ec": "246-672-0",
+      "name": "Nonylphenol",
+      "name_tr": "Nonilfenil",
+      "concern": "EqC - ED",
+      "concern_tr": "Endokrin bozucu (eşdeğer düzey)"
+    },
+    {
+      "cas": "140-66-9",
+      "ec": "205-426-2",
+      "name": "4-tert-octylphenol",
+      "name_tr": "4-tert-oktilfenol",
+      "concern": "EqC - ED",
+      "concern_tr": "Endokrin bozucu (eşdeğer düzey)"
+    },
+    {
+      "cas": "80-05-7",
+      "ec": "201-245-8",
+      "name": "Bisphenol A (BPA)",
+      "name_tr": "Bisfenol A (BPA)",
+      "concern": "Repr. 1B, ED",
+      "concern_tr": "Üreme toksik Kat. 1B, Endokrin bozucu"
+    },
+    {
+      "cas": "2162-74-5",
+      "ec": "218-462-7",
+      "name": "Bis(2,6-diisopropylphenyl)carbodiimide",
+      "name_tr": "Bis(2,6-diizopropilfenol)karbodiimid",
+      "concern": "EqC",
+      "concern_tr": "Eşdeğer düzey endişe"
+    },
+    {
+      "cas": "131-56-6",
+      "ec": "205-031-9",
+      "name": "2,4-dihydroxybenzophenone",
+      "name_tr": "2,4-dihidroksibenzofenon",
+      "concern": "ED",
+      "concern_tr": "Endokrin bozucu"
+    },
+    {
+      "cas": "131-55-5",
+      "ec": "205-029-8",
+      "name": "2,2',4,4'-tetrahydroxybenzophenone",
+      "name_tr": "2,2',4,4'-tetrahidroksibenzofenon",
+      "concern": "ED",
+      "concern_tr": "Endokrin bozucu"
+    },
+    {
+      "cas": "611-99-4",
+      "ec": "210-252-4",
+      "name": "4,4'-dihydroxybenzophenone",
+      "name_tr": "4,4'-dihidroksibenzofenon",
+      "concern": "ED",
+      "concern_tr": "Endokrin bozucu"
+    },
+    {
+      "cas": "56-55-3",
+      "ec": "200-281-1",
+      "name": "Benz[a]anthracene",
+      "name_tr": "Benz[a]antrasen",
+      "concern": "Carc. 1B, PBT",
+      "concern_tr": "Kanserojen Kat. 1B, PBT"
+    },
+    {
+      "cas": "50-32-8",
+      "ec": "200-028-5",
+      "name": "Benzo[a]pyrene",
+      "name_tr": "Benzo[a]piren",
+      "concern": "Carc. 1B, Muta. 1B, Repr. 1B, PBT",
+      "concern_tr": "Kanserojen Kat. 1B, PBT"
+    },
+    {
+      "cas": "205-99-2",
+      "ec": "205-911-9",
+      "name": "Benzo[b]fluoranthene",
+      "name_tr": "Benzo[b]floranten",
+      "concern": "Carc. 1B, PBT",
+      "concern_tr": "Kanserojen Kat. 1B, PBT"
+    },
+    {
+      "cas": "207-08-9",
+      "ec": "205-916-6",
+      "name": "Benzo[k]fluoranthene",
+      "name_tr": "Benzo[k]floranten",
+      "concern": "Carc. 1B, PBT",
+      "concern_tr": "Kanserojen Kat. 1B, PBT"
+    },
+    {
+      "cas": "193-39-5",
+      "ec": "205-893-2",
+      "name": "Indeno[1,2,3-cd]pyrene",
+      "name_tr": "İndeno[1,2,3-cd]piren",
+      "concern": "Carc. 1B, PBT",
+      "concern_tr": "Kanserojen Kat. 1B, PBT"
+    },
+    {
+      "cas": "218-01-9",
+      "ec": "205-923-4",
+      "name": "Chrysene",
+      "name_tr": "Krisen",
+      "concern": "Carc. 1B",
+      "concern_tr": "Kanserojen Kat. 1B"
+    },
+    {
+      "cas": "189-55-9",
+      "ec": "205-878-0",
+      "name": "Dibenzo[a,h]anthracene",
+      "name_tr": "Dibenzo[a,h]antrasen",
+      "concern": "Carc. 1B, PBT",
+      "concern_tr": "Kanserojen Kat. 1B, PBT"
+    },
+    {
+      "cas": "191-24-2",
+      "ec": "205-883-8",
+      "name": "Benzo[ghi]perylene",
+      "name_tr": "Benzo[ghi]perilen",
+      "concern": "PBT, vPvB",
+      "concern_tr": "PBT, çok kalıcı çok biyobirikimli"
+    },
+    {
+      "cas": "4342-03-4",
+      "ec": "224-359-3",
+      "name": "Dacarbazine",
+      "name_tr": "Dakarbazin",
+      "concern": "Carc. 1B",
+      "concern_tr": "Kanserojen Kat. 1B"
+    },
+    {
+      "cas": "7789-00-6",
+      "ec": "232-140-7",
+      "name": "Potassium chromate",
+      "name_tr": "Potasyum kromat",
+      "concern": "Carc. 1A, Muta. 1B",
+      "concern_tr": "Kanserojen Kat. 1A, Mutajen Kat. 1B"
+    },
+    {
+      "cas": "7778-50-9",
+      "ec": "231-906-6",
+      "name": "Potassium dichromate",
+      "name_tr": "Potasyum dikromat",
+      "concern": "Carc. 1A, Muta. 1B, Repr. 1B",
+      "concern_tr": "Kanserojen Kat. 1A, Mutajen Kat. 1B, Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "7789-12-0",
+      "ec": "234-190-3",
+      "name": "Sodium dichromate dihydrate",
+      "name_tr": "Sodyum dikromat dihidrat",
+      "concern": "Carc. 1A, Muta. 1B, Repr. 1B",
+      "concern_tr": "Kanserojen Kat. 1A, Mutajen Kat. 1B, Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "10588-01-9",
+      "ec": "234-190-3",
+      "name": "Sodium dichromate",
+      "name_tr": "Sodyum dikromat",
+      "concern": "Carc. 1A, Muta. 1B, Repr. 1B",
+      "concern_tr": "Kanserojen Kat. 1A, Mutajen Kat. 1B, Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "7789-09-5",
+      "ec": "232-143-3",
+      "name": "Ammonium dichromate",
+      "name_tr": "Amonyum dikromat",
+      "concern": "Carc. 1A, Muta. 1B",
+      "concern_tr": "Kanserojen Kat. 1A, Mutajen Kat. 1B"
+    },
+    {
+      "cas": "15663-27-1",
+      "ec": "239-733-8",
+      "name": "Cisplatin",
+      "name_tr": "Sisplatin",
+      "concern": "Carc. 1B, Muta. 1B, Repr. 1B",
+      "concern_tr": "Kanserojen Kat. 1B, Mutajen Kat. 1B, Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "1330-78-5",
+      "ec": "215-548-8",
+      "name": "Tris(methylphenyl) phosphate (TCP)",
+      "name_tr": "Tris(metilfenol) fosfat (TCP)",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "108-31-6",
+      "ec": "203-570-7",
+      "name": "Maleic anhydride",
+      "name_tr": "Maleik anhidrit",
+      "concern": "Resp. Sens. 1",
+      "concern_tr": "Solunum duyarlılaştırıcı Kat. 1"
+    },
+    {
+      "cas": "62-74-8",
+      "ec": "200-548-0",
+      "name": "Sodium fluoroacetate",
+      "name_tr": "Sodyum fluoroasetat",
+      "concern": "EqC",
+      "concern_tr": "Eşdeğer düzey endişe"
+    },
+    {
+      "cas": "872-85-5",
+      "ec": "212-842-8",
+      "name": "3-pyridinol",
+      "name_tr": "3-piridanol",
+      "concern": "EqC",
+      "concern_tr": "Eşdeğer düzey endişe"
+    },
+    {
+      "cas": "7446-27-7",
+      "ec": "231-205-5",
+      "name": "Lead hydrogen arsenate",
+      "name_tr": "Kurşun hidrojen arsenik",
+      "concern": "Carc. 1A, Repr. 1A",
+      "concern_tr": "Kanserojen Kat. 1A, Üreme toksik Kat. 1A"
+    },
+    {
+      "cas": "12002-03-8",
+      "ec": "234-514-2",
+      "name": "Lead arsenate",
+      "name_tr": "Kurşun arsenik",
+      "concern": "Carc. 1A, Repr. 1A",
+      "concern_tr": "Kanserojen Kat. 1A, Üreme toksik Kat. 1A"
+    },
+    {
+      "cas": "7784-40-9",
+      "ec": "232-064-2",
+      "name": "Lead hydrogen arsenate",
+      "name_tr": "Kurşun hidrojen arsenat",
+      "concern": "Carc. 1A, Repr. 1A",
+      "concern_tr": "Kanserojen Kat. 1A, Üreme toksik Kat. 1A"
+    },
+    {
+      "cas": "2570-26-5",
+      "ec": "219-864-1",
+      "name": "Pentadecyl ammonium bromide",
+      "name_tr": "Pentadesilamonyum bromür",
+      "concern": "EqC",
+      "concern_tr": "Eşdeğer düzey endişe"
+    },
+    {
+      "cas": "26523-78-4",
+      "ec": "247-782-7",
+      "name": "4-nonylphenol (linear)",
+      "name_tr": "4-nonilfenil (doğrusal)",
+      "concern": "EqC - ED",
+      "concern_tr": "Endokrin bozucu (eşdeğer düzey)"
+    },
+    {
+      "cas": "3825-26-1",
+      "ec": "223-320-4",
+      "name": "Ammonium pentadecafluorooctanoate (APFO)",
+      "name_tr": "Amonyum perfloroktanoat (APFO)",
+      "concern": "vPvB, Repr. 1B",
+      "concern_tr": "çok kalıcı çok biyobirikimli, Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "2244-21-5",
+      "ec": "218-828-0",
+      "name": "Potassium dichloroisocyanurate",
+      "name_tr": "Potasyum dikloroisosiyanürat",
+      "concern": "EqC",
+      "concern_tr": "Eşdeğer düzey endişe"
+    },
+    {
+      "cas": "68412-54-4",
+      "ec": "-",
+      "name": "Diisononyl phthalate (DINP)",
+      "name_tr": "Diizononil ftalat (DINP)",
+      "concern": "Repr. 1B (eqC)",
+      "concern_tr": "Üreme toksik (eşdeğer düzey)"
+    },
+    {
+      "cas": "28553-12-0",
+      "ec": "249-079-5",
+      "name": "DINP (CAS 28553-12-0)",
+      "name_tr": "Diizononil ftalat (DINP)",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "68515-48-0",
+      "ec": "271-090-9",
+      "name": "DIDP (diisodecyl phthalate)",
+      "name_tr": "Diizodezil ftalat (DIDP)",
+      "concern": "Repr. 1B (eqC)",
+      "concern_tr": "Üreme toksik (eşdeğer düzey)"
+    },
+    {
+      "cas": "26761-40-0",
+      "ec": "248-027-6",
+      "name": "DIDP (CAS 26761-40-0)",
+      "name_tr": "Diizodezil ftalat (DIDP)",
+      "concern": "Repr. 1B",
+      "concern_tr": "Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "630-08-0",
+      "ec": "211-128-3",
+      "name": "Carbon monoxide",
+      "name_tr": "Karbon monoksit",
+      "concern": "Repr. 1A",
+      "concern_tr": "Üreme toksik Kat. 1A"
+    },
+    {
+      "cas": "10035-10-6",
+      "ec": "233-113-0",
+      "name": "Hydrogen bromide",
+      "name_tr": "Hidrojen bromür",
+      "concern": "EqC",
+      "concern_tr": "Eşdeğer düzey endişe"
+    },
+    {
+      "cas": "14808-60-7",
+      "ec": "238-878-4",
+      "name": "Quartz (silica, crystalline)",
+      "name_tr": "Kuvars (kristalize silika)",
+      "concern": "Carc. 1A (inhalation)",
+      "concern_tr": "Kanserojen Kat. 1A (soluma)"
+    }
+  ]
+}

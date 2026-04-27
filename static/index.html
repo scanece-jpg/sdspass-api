@@ -2082,6 +2082,10 @@ function renderAll(s) {
     });
   }
 
+  // ── Bölüm 15 — SVHC (async, placeholder) ────────────────────────────────
+  h += `<div class="r-title">⚖️ Bölüm 15 — Mevzuat / SVHC</div>
+  <div id="svhc-panel"><div class="ecard info" style="font-size:11px;color:var(--text3)">SVHC kontrolü yapılıyor…</div></div>`;
+
   // PDF butonu — sonuçların üstüne ekle
   const pdfBar = `<div style="display:flex;justify-content:flex-end;margin-bottom:10px">
     <button onclick="generatePDF()"
@@ -2092,6 +2096,9 @@ function renderAll(s) {
   </div>`;
   el.innerHTML = pdfBar + h;
 
+  // SVHC async kontrolü — panel render'dan sonra
+  _checkSVHC(getComps());
+
   // Son hesaplama durumunu sakla
   _lastCalcState = {
     allH, combinedSignal, transport, pcodes, ppe,
@@ -2101,6 +2108,57 @@ function renderAll(s) {
     eco: s.eco,
     comps: getComps(),
   };
+}
+
+async function _checkSVHC(comps) {
+  const panel = document.getElementById('svhc-panel');
+  if (!panel) return;
+  const payload = comps.map(c => ({ cas: c.cas, name: c.name, concentration: c.conc }));
+  try {
+    const res = await fetch('/api/v1/svhc/check', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ components: payload }),
+    });
+    if (!res.ok) throw new Error('HTTP ' + res.status);
+    const d = await res.json();
+    const above = d.above_threshold || [];
+    const all   = d.found || [];
+
+    if (above.length === 0) {
+      panel.innerHTML = `<div class="ecard info" style="font-size:11px">
+        <span style="color:var(--safe)">✓</span>
+        Bu karışım ECHA SVHC Aday Listesi'nde yer alan madde içermemektedir (≥ %0,1 eşiği).
+        <div style="color:var(--text3);font-size:10px;margin-top:3px">
+          KKDİK Madde 35 / REACH Madde 33 — Bildirim yükümlülüğü yok.
+        </div>
+      </div>`;
+      return;
+    }
+
+    let h = `<div class="ecard danger" style="font-size:11px;border-color:#f56565">
+      <div style="font-weight:700;color:#fc8181;margin-bottom:8px">
+        ⚠ SVHC Aday Listesi Maddesi Tespit Edildi — KKDİK Madde 35 / REACH Madde 33
+      </div>
+      <div style="color:var(--text3);font-size:10px;margin-bottom:8px">
+        Alıcılara bildirme yükümlülüğü doğmaktadır (≥ %0,1 konsantrasyon).
+      </div>`;
+    above.forEach(s => {
+      h += `<div style="background:rgba(245,101,101,.08);border:1px solid rgba(245,101,101,.2);border-radius:6px;padding:7px 10px;margin-bottom:6px">
+        <div style="display:flex;justify-content:space-between;align-items:center">
+          <span style="font-weight:700;color:var(--text)">${s.name_tr || s.name_svhc}</span>
+          <span style="font-family:var(--mono);font-size:10px;color:#fc8181">%${s.concentration.toFixed(1)}</span>
+        </div>
+        <div style="font-size:10px;color:var(--text3);margin-top:3px">CAS ${s.cas} · ${s.concern_tr}</div>
+      </div>`;
+    });
+    h += `</div>`;
+    panel.innerHTML = h;
+  } catch (e) {
+    panel.innerHTML = `<div class="ecard info" style="font-size:10px;color:var(--text3)">
+      SVHC kontrolü için API bağlantısı gerekli. (${e.message})
+    </div>`;
+  }
 }
 
 function showError(msg) {

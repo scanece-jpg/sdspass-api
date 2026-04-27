@@ -1830,6 +1830,24 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     for line in (regulatory_text or '').split('\n'):
         story.append(Paragraph(line, styles['body']))
 
+    # ── SVHC Kontrolü — REACH Madde 33 / KKDİK Madde 35 ────────────────────
+    try:
+        from app.services.svhc_service import check_svhc_mixture, svhc_section15_text
+        svhc_result = check_svhc_mixture(components)
+        svhc_lines = svhc_section15_text(svhc_result, lang=lang)
+        story.append(Spacer(1, 4))
+        for line in svhc_lines:
+            if line.startswith('⚠') or line.startswith('  •'):
+                st = styles.get('body_bold', styles['body']) if line.startswith('⚠') else styles['body']
+                color = '#cc0000' if line.startswith('⚠') else '#333333'
+                story.append(Paragraph(
+                    f'<font color="{color}">{line}</font>', st
+                ))
+            else:
+                story.append(Paragraph(line, styles['small']))
+    except Exception:
+        pass
+
     story += sub_block(f"15.2 {sub_title(lang,'15.2') if '15.2' in L.get('sub',{}) else 'Kimyasal güvenlik değerlendirmesi'}", styles)
 
     # CSA zorunluluğu kontrolü — KKDİK Madde 14: yıllık ≥1 ton üretim/ithalat +

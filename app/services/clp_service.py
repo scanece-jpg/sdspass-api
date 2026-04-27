@@ -101,6 +101,38 @@ DANGER_H = {
     'H334','H340','H350','H360','H370','H372',
 }
 
+# CLP Annex I üstünlük (dominance) kuralları — alt kategori H kodlarını sil
+DOMINANCE: dict = {
+    'H314': ['H318', 'H315', 'H319'],
+    'H318': ['H319'],
+    'H300': ['H301', 'H302'], 'H301': ['H302'],
+    'H310': ['H311', 'H312'], 'H311': ['H312'],
+    'H330': ['H331', 'H332'], 'H331': ['H332'],
+    'H370': ['H371', 'H335', 'H336'], 'H371': ['H335', 'H336'],
+    'H372': ['H373'],
+    'H340': ['H341'], 'H350': ['H351'], 'H360': ['H361'],
+    'H410': ['H400', 'H411', 'H412', 'H413'],
+    'H411': ['H412', 'H413'],
+    'H412': ['H413'],
+    'H224': ['H225', 'H226'], 'H225': ['H226'],
+    'H271': ['H272'],
+    'H260': ['H261'],
+    'H240': ['H241', 'H242'], 'H241': ['H242'],
+    'H251': ['H252'],
+}
+
+
+def _get_scl_cutoff(comp: dict, h_class: str, h_code4: str) -> float | None:
+    """Bileşenin SCL listesinden ilgili H kodu/sınıfı için c_min döndürür; yoksa None."""
+    for scl in comp.get("scl", []):
+        sc = scl.get("h_class", scl.get("hazard", "")).replace("*", "").strip()
+        sh = scl.get("h_code", "").replace("*", "").strip()[:4]
+        if sc == h_class or (h_code4 and sh == h_code4):
+            c_min = scl.get("c_min")
+            if c_min is not None:
+                return float(c_min)
+    return None
+
 
 def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
     """
@@ -121,19 +153,32 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
         hazards = comp.get("hazards", [])
         stot_comps.append({"cas": cas, "name": comp.get("name",""), "conc": conc, "hazards": hazards})
 
-    # İkincil Skin/Eye kuralı (CLP Tablo 3.2.3/3.3.3)
-    sum_corr1 = sum(
-        float(comp.get("concentration", comp.get("conc", 0)) or 0)
-        for comp in components
-        for h in comp.get("hazards", [])
-        if h.get("h_class","") in ("Skin Corr. 1","Skin Corr. 1A","Skin Corr. 1B","Skin Corr. 1C")
-    )
-    sum_eye_dam1 = sum(
-        float(comp.get("concentration", comp.get("conc", 0)) or 0)
-        for comp in components
-        for h in comp.get("hazards", [])
-        if h.get("h_class","") == "Eye Dam. 1"
-    )
+    # İkincil Skin/Eye kuralı — SCL dikkate alarak toplam (CLP Tablo 3.2.3/3.3.3)
+    # SCL tanımlı bileşenler sadece SCL eşiğini aşarsa toplamına katkı yapar
+    sum_corr1 = 0.0
+    for comp in components:
+        conc = float(comp.get("concentration", comp.get("conc", 0)) or 0)
+        for h in comp.get("hazards", []):
+            if h.get("h_class","") not in ("Skin Corr. 1","Skin Corr. 1A","Skin Corr. 1B","Skin Corr. 1C"):
+                continue
+            scl = _get_scl_cutoff(comp, h.get("h_class",""), "H314")
+            effective = scl if scl is not None else 0.0
+            if conc >= effective:
+                sum_corr1 += conc
+                break  # bileşen başına bir kez say
+
+    sum_eye_dam1 = 0.0
+    for comp in components:
+        conc = float(comp.get("concentration", comp.get("conc", 0)) or 0)
+        for h in comp.get("hazards", []):
+            if h.get("h_class","") != "Eye Dam. 1":
+                continue
+            scl = _get_scl_cutoff(comp, "Eye Dam. 1", "H318")
+            effective = scl if scl is not None else 0.0
+            if conc >= effective:
+                sum_eye_dam1 += conc
+                break
+
     sum_eye_irrit2 = sum(
         float(comp.get("concentration", comp.get("conc", 0)) or 0)
         for comp in components
@@ -264,6 +309,14 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
                                f"Ağırlıklı: 10×{sum_eye_dam1:.1f}+{sum_eye_irrit2:.1f}"
                                f"={weighted_eye:.1f} ≥ %10 (CLP Tablo 3.3.3)"
                            )})
+
+    # ── Dominance: üst kategori varsa alt kategorileri çıkar (CLP Annex I) ────────
+    for dominant, subordinates in DOMINANCE.items():
+        if dominant in seen_h:
+            for sub in subordinates:
+                if sub in seen_h:
+                    seen_h.discard(sub)
+                    passed = [p for p in passed if p.get("h_code") != sub]
 
     h_codes = sorted(seen_h)
     signal  = "Danger" if any(h in DANGER_H for h in h_codes) else ("Warning" if h_codes else "")

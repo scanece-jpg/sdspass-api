@@ -1674,6 +1674,18 @@ function _renderLabel22({ allH, combinedSignal, combinedPics, pcodes, euh }) {
   return out;
 }
 
+// Inline panel input → gerçek form alanına yaz
+function _physPanelSync(fieldId, key, val) {
+  const el = document.getElementById(fieldId);
+  if (!el) return;
+  el.value = val;
+  if (key) {
+    el.dataset.source = 'user';
+    _updateSrcBadge(key, 'user');
+    _checkPhysThreshold(key, parseFloat(val));
+  }
+}
+
 // ── Hesaplama sonrası zorunlu fiziksel alan uyarı paneli ──────────────────────
 function _renderPhysWarnPanel() {
   const panel = document.getElementById('physWarnPanel');
@@ -1715,11 +1727,20 @@ function _renderPhysWarnPanel() {
     const src   = el?.dataset?.source || '';
     const val   = el?.value?.trim();
 
-    let badgeClass, badgeText;
+    let badgeClass, badgeText, inlineInput = '';
     if (isNA) {
       badgeClass = 'na';    badgeText = '— Uygulanamaz';
     } else if (!val) {
-      badgeClass = 'empty'; badgeText = '⚠ Zorunlu · Değer Girilmedi'; hasEmpty = true;
+      badgeClass = 'empty'; badgeText = ''; hasEmpty = true;
+      const isText = !!f.always;
+      const syncKey = f.key || '';
+      inlineInput = `<input
+        type="${isText ? 'text' : 'number'}"
+        placeholder="${f.label}${isText ? '' : ' (sayı)'}"
+        style="flex:1;min-width:80px;max-width:160px;padding:4px 6px;border-radius:5px;border:1px solid var(--accent);font-size:11px;font-family:var(--mono);background:var(--bg2);color:var(--text1)"
+        oninput="_physPanelSync('${f.id}','${syncKey}',this.value)"
+        value="">
+      <span class="pwb empty">⚠ Zorunlu</span>`;
     } else if (src === 'theo') {
       badgeClass = 'theo';  badgeText = '≈ Teorik Tahmin';              hasTheo = true;
     } else if (f.always) {
@@ -1731,7 +1752,7 @@ function _renderPhysWarnPanel() {
     return `<div class="phys-warn-row">
       <span class="phys-warn-label">${f.label}</span>
       <span class="phys-warn-reason">${f.reason}</span>
-      <span class="pwb ${badgeClass}">${badgeText}</span>
+      ${inlineInput || `<span class="pwb ${badgeClass}">${badgeText}</span>`}
     </div>`;
   });
 

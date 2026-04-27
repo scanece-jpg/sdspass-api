@@ -52,6 +52,8 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
 .hchip{display:inline-flex;align-items:center;gap:4px;background:rgba(124,106,247,.15);border:1px solid rgba(124,106,247,.3);color:var(--accent);border-radius:4px;padding:2px 7px;font-size:10px;font-family:var(--mono);cursor:default}
 .hchip.danger{background:rgba(255,107,107,.12);border-color:rgba(255,107,107,.3);color:var(--danger)}
 .hchip.warn{background:rgba(245,166,35,.12);border-color:rgba(245,166,35,.3);color:var(--warn)}
+.hchip.annex{border-style:dashed;opacity:.85}
+.hchip.annex::after{content:'ᴬᵛᴵ';font-size:7px;opacity:.6;margin-left:1px}
 .hchip-del{background:none;border:none;color:inherit;cursor:pointer;font-size:11px;padding:0;line-height:1;opacity:.6}
 .hchip-del:hover{opacity:1}
 .add-chip-btn{background:none;border:1px dashed var(--border2);color:var(--text3);border-radius:4px;padding:2px 8px;font-size:10px;cursor:pointer}
@@ -236,6 +238,8 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
       <div class="hdr-sub">KKDİK / CLP Karışım Sınıflandırma</div>
     </div>
     <span class="version-badge">v2.0 Modüler</span>
+    <span id="atp-badge" title="CLP Annex VI veri seti yükleniyor..."
+          style="font-size:9px;background:rgba(72,187,120,.15);color:#48bb78;padding:2px 7px;border-radius:10px;font-family:var(--mono);cursor:default;display:none"></span>
   </div>
 
   <!-- Ürün Bilgileri -->
@@ -260,6 +264,35 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
           <option value="professional">Profesyonel</option>
           <option value="consumer">Tüketici</option>
         </select>
+      </div>
+    </div>
+  </div>
+
+  <!-- SDS Revizyon Bilgileri -->
+  <div class="product-card" style="margin-top:10px" id="revision-card">
+    <label style="font-weight:700;color:var(--text2);margin:0 0 8px;display:block">📝 SDS Revizyon</label>
+    <div class="row2">
+      <div>
+        <label>Versiyon</label>
+        <input type="text" id="revVersion" placeholder="1.0" value="1.0"
+               style="font-family:var(--mono)" oninput="_saveRevision()">
+      </div>
+      <div>
+        <label>Revizyon No</label>
+        <input type="number" id="revNo" placeholder="1" value="1" min="1"
+               style="font-family:var(--mono)" oninput="_saveRevision()">
+      </div>
+    </div>
+    <div class="row2" style="margin-top:8px">
+      <div>
+        <label>Revizyon Tarihi</label>
+        <input type="text" id="revDate" placeholder="GG.AA.YYYY"
+               style="font-family:var(--mono)" oninput="_saveRevision()">
+      </div>
+      <div>
+        <label>Değişiklik Notu</label>
+        <input type="text" id="revNotes" placeholder="Örn: İlk yayın"
+               oninput="_saveRevision()">
       </div>
     </div>
   </div>
@@ -783,7 +816,7 @@ function addComp(pf = {}) {
       <div></div>
     </div>`;
   document.getElementById('comps').appendChild(div);
-  if (pf.hazards) pf.hazards.forEach(h => addChip(id, h.h_class, h.h_code));
+  if (pf.hazards) pf.hazards.forEach(h => addChip(id, h.h_class, h.h_code, h._annex_supplement));
   return id;
 }
 
@@ -816,16 +849,20 @@ function completeToHundred() {
   updateConcTotal();
 }
 
-function addChip(id, hclass, hcode) {
+function addChip(id, hclass, hcode, annexSupplement) {
   const chips = document.getElementById('chips'+id);
   if (!chips) return;
   const code = (hcode||'').replace(/[*\s]/g,'').substring(0,4);
   if ([...chips.querySelectorAll('.hchip')].some(c => c.dataset.code === code)) return;
   const cls = DANGER_H.has(code) ? 'danger' : 'warn';
+  const annexCls = annexSupplement ? ' annex' : '';
   const span = document.createElement('span');
-  span.className = `hchip ${cls}`;
-  span.dataset.hc = hclass; span.dataset.code = hcode;
-  span.innerHTML = `${hcode||hclass} <button class="hchip-del" onclick="this.parentNode.remove()">×</button>`;
+  span.className = `hchip ${cls}${annexCls}`;
+  span.dataset.hc = hclass;
+  span.dataset.code = hcode;
+  if (annexSupplement) span.dataset.annex = '1';
+  const tooltip = annexSupplement ? ' title="Annex VI takviye — TR Ek-6\'da bu sınıf yok"' : '';
+  span.innerHTML = `<span${tooltip}>${hcode||hclass}</span> <button class="hchip-del" onclick="this.parentNode.remove()">×</button>`;
   chips.appendChild(span);
 }
 
@@ -903,7 +940,7 @@ async function onCas(id) {
     if (casEl) { casEl.style.borderColor = 'var(--safe)'; casEl.title = data.name || ''; }
     setTimeout(() => { if(casEl){ casEl.style.borderColor=''; }}, 1800);
 
-    if (data.hazards) data.hazards.forEach(h => addChip(id, h.h_class, h.h_code));
+    if (data.hazards) data.hazards.forEach(h => addChip(id, h.h_class, h.h_code, h._annex_supplement));
 
     // ── M-Faktör — SEA Ek-6'dan otomatik doldur ─────────────────────────────────
     // m_factors: { acute: 10, chronic: 100 } — sucul toksik maddeler için
@@ -1015,7 +1052,7 @@ function onManualConc(id) {
     } else {
       // GCL — chip'lerden H kodlarını al ve genel eşikleri kontrol et
       const chips = [...document.querySelectorAll(`#chips${id} .hchip`)];
-      const hazards = chips.map(c => ({ h_class: c.dataset.hc, h_code: c.dataset.code }));
+      const hazards = chips.map(c => ({ h_class: c.dataset.hc, h_code: c.dataset.code, ...(c.dataset.annex ? { _annex_supplement: true } : {}) }));
       const gclThresholds = findThresholds(parsed.lo, parsed.hi, hazards);
       if (gclThresholds.length) {
         showRefinement(id, parsed.lo, parsed.hi, gclThresholds);
@@ -1079,7 +1116,7 @@ async function onConcChange(id) {
   }
 
   // Fallback: CAS yoksa veya API başarısız olursa
-  const hazards = chips.map(c => ({ h_class: c.dataset.hc, h_code: c.dataset.code }));
+  const hazards = chips.map(c => ({ h_class: c.dataset.hc, h_code: c.dataset.code, ...(c.dataset.annex ? { _annex_supplement: true } : {}) }));
 
   // Önce SCL ham listesine bak (CAS lookup'tan geldiyse)
   const rawScl = _sclRaw[id] || [];
@@ -1373,7 +1410,11 @@ function getComps() {
       }
     }
     const conc = concMax != null && concMax > 0 ? concMax : concMin;
-    const hazards = [...w.querySelectorAll('.hchip')].map(c => ({ h_class: c.dataset.hc, h_code: c.dataset.code }));
+    const hazards = [...w.querySelectorAll('.hchip')].map(c => ({
+      h_class: c.dataset.hc,
+      h_code: c.dataset.code,
+      ...(c.dataset.annex ? { _annex_supplement: true } : {})
+    }));
     const ec    = w.querySelector('.ec-input')?.value?.trim() || '';
     const reach = w.querySelector('.reach-input')?.value?.trim() || '';
     const mf    = parseFloat(w.querySelector('.mf-input')?.value) || 1;
@@ -1702,6 +1743,15 @@ function _renderPhysWarnPanel() {
     panel.innerHTML = `<div class="phys-warn-panel">
       <div class="phys-warn-panel-title">🔬 Fiziksel Veri Durumu — KKDİK Ek-2 Bölüm 9</div>
       ${rows.join('')}
+      <div style="margin-top:10px;padding-top:8px;border-top:1px solid var(--border2)">
+        <div style="font-size:10px;color:var(--text3);margin-bottom:6px">
+          Yukarıdaki alanları doldurun, ardından tekrar hesaplayın.
+        </div>
+        <button onclick="doCalculate()"
+          style="width:100%;padding:7px;border-radius:6px;border:none;background:var(--accent);color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:var(--mono)">
+          ⚡ Değerlerle Yeniden Hesapla
+        </button>
+      </div>
     </div>`;
   }
   panel.style.display = 'block';
@@ -1852,6 +1902,15 @@ function renderAll(s) {
   if (!el) return;
   const { clp, stot, eco, euh, phys } = s;
 
+  // Annex VI takviye H kodları — CLP hesabına giren ama TR Ek-6'da olmayan
+  const annexH = new Set(
+    getComps().flatMap(c =>
+      (c.hazards || [])
+        .filter(h => h._annex_supplement)
+        .map(h => (h.h_code || '').replace(/[*\s]/g,'').substring(0,4))
+    )
+  );
+
   // Tüm H kodlarını birleştir (tüm motorlardan)
   const allHRaw = [...new Set([
     ...(clp.hCodes || []),
@@ -1908,7 +1967,7 @@ function renderAll(s) {
 
     h += `<div class="result-banner">
       <div class="${sigClass}" style="margin-bottom:8px">${sigLabel}</div>
-      <div class="hcode-pills">${allH.map(c => `<span class="hpill ${pillClass(c)}">${c}</span>`).join('')}</div>
+      <div class="hcode-pills">${allH.map(c => `<span class="hpill ${pillClass(c)}" style="${annexH.has(c) ? 'border-style:dashed;opacity:.85' : ''}" title="${annexH.has(c) ? 'Annex VI takviye' : ''}">${c}</span>`).join('')}</div>
       <div class="pictogram-row">${combinedPics.map(g => `<div class="ghs-icon"><div class="sym">${GHS_DATA[g]?.sym||'?'}</div><div class="lbl">${g}</div></div>`).join('')}</div>
       ${combinedSignal === 'None' ? `<div style="font-size:10px;color:var(--text3);margin-top:6px">ℹ H412/H413 gibi kodlar etiket üzerinde piktogram ve uyarı kelimesi gerektirmez.</div>` : ''}
     </div>`;
@@ -1939,9 +1998,17 @@ function renderAll(s) {
             : `GCL ≥ %${cutoffVal}`}`
         : '';
 
-      h += `<div class="ecard ${cls}" style="animation-delay:${i*.03}s">
-        <div class="ecard-head"><span class="ecard-code">${code}</span>${tag}</div>
-        <div class="ecard-source">KKDİK Ek-2 / CLP (AT) 1272/2008${cutoffNote}</div>
+      const isAnnex = annexH.has(code);
+      const annexBadge = isAnnex
+        ? `<span class="sbadge" style="background:rgba(100,181,246,.12);color:#64b5f6;border:1px dashed #64b5f6" title="TR Ek-6'da bu tehlike sınıfı yok — CLP Annex VI\'den eklendi">Annex VI ek</span>`
+        : '';
+      const sourceNote = isAnnex
+        ? `CLP Annex VI takviye${cutoffNote}`
+        : `KKDİK Ek-2 / CLP (AT) 1272/2008${cutoffNote}`;
+
+      h += `<div class="ecard ${cls}" style="animation-delay:${i*.03}s${isAnnex ? ';border-style:dashed;opacity:.9' : ''}">
+        <div class="ecard-head"><span class="ecard-code">${code}</span>${tag}${annexBadge}</div>
+        <div class="ecard-source">${sourceNote}</div>
       </div>`;
     });
   }
@@ -2185,6 +2252,8 @@ window.addEventListener('DOMContentLoaded', () => {
 
   // Forma göre fiziksel alanları göster/gizle (başlangıç: sıvı)
   updatePhysFieldsByForm();
+  _loadRevision();
+  _loadATPMeta();
 
   console.log('[SDSPass v2] Modüler pipeline hazır — EventBus.debug() ile olayları izle');
 });
@@ -2341,6 +2410,63 @@ function closePdfBlock(force) {
   document.getElementById('pdfBlockOverlay').classList.remove('open');
   if (force && _pdfBlockCallback) _pdfBlockCallback();
   _pdfBlockCallback = null;
+}
+
+// ── Annex VI ATP meta ────────────────────────────────────────────────────────
+async function _loadATPMeta() {
+  try {
+    const res = await fetch(API_BASE + '/annex6/meta');
+    if (!res.ok) return;
+    const m = await res.json();
+    const badge = document.getElementById('atp-badge');
+    if (!badge) return;
+    badge.textContent = `Annex VI ${m.latest_atp}`;
+    badge.title = `CLP Annex VI veri seti — ${m.latest_atp} (${m.latest_atp_regulation}, ${m.latest_atp_date})\n`
+                + `Toplam: ${m.substances_total} madde · Son güncelleme: ${m.last_updated}`;
+    badge.style.display = '';
+  } catch { /* sunucu yoksa badge gizli kalır */ }
+}
+
+// ── Revizyon yardımcıları ────────────────────────────────────────────────────
+const _REV_KEY = 'sdspass_revision';
+
+function _loadRevision() {
+  const today = new Date().toLocaleDateString('tr-TR');
+  const saved = (() => { try { return JSON.parse(localStorage.getItem(_REV_KEY)); } catch { return null; } })();
+  document.getElementById('revVersion').value = saved?.version ?? '1.0';
+  document.getElementById('revNo').value      = saved?.no      ?? '1';
+  document.getElementById('revDate').value    = saved?.date    ?? today;
+  document.getElementById('revNotes').value   = saved?.notes   ?? 'İlk yayın';
+}
+
+function _saveRevision() {
+  localStorage.setItem(_REV_KEY, JSON.stringify(_getRevision()));
+}
+
+function _getRevision() {
+  const today = new Date().toLocaleDateString('tr-TR');
+  return {
+    version: document.getElementById('revVersion')?.value?.trim() || '1.0',
+    no:      document.getElementById('revNo')?.value?.trim()      || '1',
+    date:    document.getElementById('revDate')?.value?.trim()    || today,
+    notes:   document.getElementById('revNotes')?.value?.trim()   || '',
+  };
+}
+
+function _bumpVersion() {
+  const verEl = document.getElementById('revVersion');
+  const noEl  = document.getElementById('revNo');
+  if (!verEl || !noEl) return;
+  // Minor versiyon artır: 1.0→1.1, 1.9→2.0
+  const parts = verEl.value.split('.');
+  let major = parseInt(parts[0]) || 1;
+  let minor = parseInt(parts[1] ?? '0');
+  minor += 1;
+  if (minor >= 10) { major += 1; minor = 0; }
+  verEl.value = `${major}.${minor}`;
+  noEl.value  = String(parseInt(noEl.value || '1') + 1);
+  document.getElementById('revDate').value = new Date().toLocaleDateString('tr-TR');
+  _saveRevision();
 }
 
 async function generatePDF() {
@@ -2617,7 +2743,7 @@ async function _doPdfGenerate() {
           mandatory: pcodes?.label_mandatory || [], // limit dışı zorunlular (P501 vb.)
         },
       },
-      revision:     { date: new Date().toLocaleDateString('tr-TR'), no: '1', version: '1.0', notes: 'İlk yayın' },
+      revision: _getRevision(),
       ate_mix_details: clp?.ateMixDetails || {},  // ATEmix hesap detayları — PDF Bölüm 11
     };
 
@@ -2639,6 +2765,7 @@ async function _doPdfGenerate() {
     a.download = `${productName.replace(/\s+/g,'_')}_SDS.pdf`;
     a.click();
     URL.revokeObjectURL(url);
+    _bumpVersion();
 
   } catch (e) {
     alert('PDF oluşturma hatası: ' + e.message);

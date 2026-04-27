@@ -937,7 +937,12 @@ def translate_hclass(h_class: str, lang: str = 'TR') -> str:
     """
     if lang != 'TR':
         return h_class
-    return CLP_CLASS_TR.get(h_class.strip(), h_class)
+    key = h_class.strip()
+    suffix = '†' if key.endswith('†') else ''
+    if suffix:
+        key = key[:-1].strip()
+    translated = CLP_CLASS_TR.get(key, key)
+    return translated + suffix
 
 
 def translate_hclass_list(classes: str, lang: str = 'TR') -> str:

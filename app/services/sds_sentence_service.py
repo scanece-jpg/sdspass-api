@@ -124,14 +124,21 @@ def format_section3_component(
     # Tekrar eden h_class değerleri gider; h_code'dan yetkili h_class türet (DB bozukluğuna karşı)
     _seen_cls = set()
     _haz_parts = []
+    _has_annex_supplement = False
     for h in hazards:
         raw_cls  = h.get('h_class', '').replace('*', '').strip()
         raw_code = h.get('h_code', '').replace('*', '').strip()
         cls = correct_hclass(raw_code, raw_cls) or raw_cls  # düzelt; düzeltemezse orijinali kullan
         if cls and cls not in _seen_cls:
             _seen_cls.add(cls)
-            _haz_parts.append(cls)
+            if h.get('_annex_supplement'):
+                _haz_parts.append(f'{cls}†')
+                _has_annex_supplement = True
+            else:
+                _haz_parts.append(cls)
     haz_str = '; '.join(_haz_parts)
+    if _has_annex_supplement:
+        haz_str += '  († CLP Ek VI tamamlayıcı sınıflandırma)'
 
     # Kullanıcının girdiği orijinal konsantrasyon metni (ör: "25-50")
     conc_str = comp.get('conc_str', '').strip()

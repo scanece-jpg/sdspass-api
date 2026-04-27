@@ -685,6 +685,18 @@ async def svhc_check_mixture(body: dict):
     return check_svhc_mixture(components)
 
 
+@app.get("/api/v1/annex6/meta")
+async def annex6_meta():
+    """CLP Annex VI veri seti meta bilgisi — ATP kapsama, madde sayısı, güncelleme tarihi."""
+    import json as _json
+    meta_path = os.path.join(os.path.dirname(__file__), '..', 'data', 'annex6_meta.json')
+    try:
+        with open(meta_path, encoding='utf-8') as f:
+            return _json.load(f)
+    except FileNotFoundError:
+        return {"error": "meta dosyası bulunamadı"}
+
+
 @app.get("/api/v1/oel/{cas}")
 async def oel_lookup(cas: str, lang: str = "TR"):
     """

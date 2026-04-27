@@ -1,0 +1,34 @@
+{
+  "dataset": "CLP Annex VI (Regulation (EC) No 1272/2008, Table 3.1)",
+  "latest_atp": "ATP21",
+  "latest_atp_regulation": "Regulation (EU) 2023/707",
+  "latest_atp_date": "2023-04-19",
+  "substances_total": 4155,
+  "tr_ek6_total": 3920,
+  "last_updated": "2025-04-27",
+  "atp_coverage": {
+    "CLP00": 2097,
+    "ATP01": 661,
+    "ATP01corr": 192,
+    "ATP02": 668,
+    "ATP03": 18,
+    "ATP04": 1,
+    "ATP05": 32,
+    "ATP06": 17,
+    "ATP07": 31,
+    "ATP09": 42,
+    "ATP10": 38,
+    "ATP13": 34,
+    "ATP14": 26,
+    "ATP15": 58,
+    "ATP17": 61,
+    "ATP18": 55,
+    "ATP20": 8,
+    "ATP21": 50
+  },
+  "notes": [
+    "66 madde ATP bilgisi girilmemiş (CLP00 öncesi veya kayıt dışı).",
+    "TR SEA Ek-6 (data/cl) maddelerinin büyük çoğunluğunda ATP alanı boş; KKDİK Ek-6 numaralı tabloya dayanır.",
+    "ATP22 (Regulation (EU) 2024/...) henüz eklenmemiştir — madde sayısı küçüktür, ilerleyen güncellemede eklenecektir."
+  ]
+}

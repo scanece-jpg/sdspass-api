@@ -1432,7 +1432,91 @@ function getComps() {
 function doCalculate() {
   const comps = getComps();
   if (!comps.length) { showError('En az bir bileşen girin.'); return; }
+  const missing = _getMissingPhysFields();
+  if (missing.length) {
+    _showPhysPrompt(missing, () => _runCalculationCore());
+    return;
+  }
   _runCalculationCore();
+}
+
+// Zorunlu fiziksel alanlardan boş olanları döndür
+function _getMissingPhysFields() {
+  const TEXT_MANDATORY = [
+    { id:'tf_appearance', label:'Görünüm / Renk', key:'', isText:true },
+    { id:'tf_odor',       label:'Koku',           key:'', isText:true },
+  ];
+  const MANDATORY = [
+    { id:'tf_fp',   key:'fp',   label:'Parlama Noktası (°C)'  },
+    { id:'tf_bp',   key:'bp',   label:'Kaynama Noktası (°C)'  },
+    { id:'tf_visc', key:'visc', label:'Viskozite @40°C (mm²/s)' },
+    { id:'tf_mp',   key:'mp',   label:'Erime Noktası (°C)'    },
+  ];
+  const all = [
+    ...TEXT_MANDATORY,
+    ...MANDATORY.filter(f => {
+      const el = document.getElementById(f.id);
+      if (!el) return false;
+      const wrap = el.closest('.phys-fw');
+      if (wrap && wrap.style.display === 'none') return false;
+      return true;
+    }),
+  ];
+  return all.filter(f => {
+    const el = document.getElementById(f.id);
+    if (!el) return false;
+    if (el.dataset.na === 'true') return false;
+    if (el.dataset.source === 'user' || el.dataset.source === 'theo') return false;
+    return !el.value?.trim();
+  });
+}
+
+// Hesapla öncesi eksik fiziksel değerleri soran modal
+function _showPhysPrompt(fields, onConfirm) {
+  document.getElementById('_physPromptOverlay')?.remove();
+  const rows = fields.map(f => `
+    <div style="margin-bottom:10px">
+      <label style="display:block;font-size:11px;font-weight:700;color:var(--text2);margin-bottom:3px">${f.label}</label>
+      <input id="_pp_${f.id}" type="${f.isText ? 'text' : 'number'}"
+        placeholder="${f.isText ? 'Açıklayıcı metin girin' : 'Sayısal değer girin'}"
+        style="width:100%;padding:6px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg2);color:var(--text1);font-size:12px;font-family:var(--mono);box-sizing:border-box"
+        onkeydown="if(event.key==='Enter')document.getElementById('_ppBtn').click()">
+    </div>`).join('');
+
+  const ov = document.createElement('div');
+  ov.id = '_physPromptOverlay';
+  ov.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9000;display:flex;align-items:center;justify-content:center';
+  ov.innerHTML = `
+    <div style="background:var(--bg1);border:1px solid var(--border2);border-radius:12px;padding:24px;width:340px;max-width:95vw;box-shadow:0 8px 32px rgba(0,0,0,.4)">
+      <div style="font-size:13px;font-weight:700;color:var(--text1);margin-bottom:4px">🔬 Fiziksel Değerler Eksik</div>
+      <div style="font-size:11px;color:var(--text3);margin-bottom:16px">Aşağıdaki alanları doldurun, ardından Hesapla'ya basın.</div>
+      ${rows}
+      <div style="display:flex;gap:8px;margin-top:4px">
+        <button onclick="document.getElementById('_physPromptOverlay').remove()"
+          style="flex:1;padding:8px;border-radius:7px;border:1px solid var(--border2);background:var(--bg2);color:var(--text2);font-size:11px;cursor:pointer">
+          İptal
+        </button>
+        <button id="_ppBtn"
+          style="flex:2;padding:8px;border-radius:7px;border:none;background:var(--accent);color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:var(--mono)"
+          onclick="
+            ${fields.map(f => `
+              (function(){
+                var v=document.getElementById('_pp_${f.id}')?.value?.trim();
+                if(v){
+                  var el=document.getElementById('${f.id}');
+                  if(el){ el.value=v; ${f.key ? `el.dataset.source='user';_updateSrcBadge('${f.key}','user');_checkPhysThreshold('${f.key}',parseFloat(v));` : ''} }
+                }
+              })();`).join('')}
+            document.getElementById('_physPromptOverlay').remove();
+            _ppOnConfirm_();
+          ">
+          ⚡ Hesapla
+        </button>
+      </div>
+    </div>`;
+  document.body.appendChild(ov);
+  window._ppOnConfirm_ = onConfirm;
+  setTimeout(() => document.getElementById('_pp_' + fields[0].id)?.focus(), 50);
 }
 
 // ── Hesaplama çekirdeği — doğrudan veya prompt callback olarak çağrılır ───────

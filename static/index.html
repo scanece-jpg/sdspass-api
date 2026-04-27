@@ -1727,26 +1727,29 @@ function _renderPhysWarnPanel() {
     const src   = el?.dataset?.source || '';
     const val   = el?.value?.trim();
 
+    const isText  = !!f.always;
+    const syncKey = f.key || '';
+
     let badgeClass, badgeText, inlineInput = '';
     if (isNA) {
-      badgeClass = 'na';    badgeText = '— Uygulanamaz';
-    } else if (!val) {
-      badgeClass = 'empty'; badgeText = ''; hasEmpty = true;
-      const isText = !!f.always;
-      const syncKey = f.key || '';
+      badgeClass = 'na'; badgeText = '— Uygulanamaz';
+    } else if (!val || src === 'theo') {
+      // Boş VEYA teorik tahmin — her ikisinde de kullanıcı değer girebilmeli
+      if (!val) { hasEmpty = true; } else { hasTheo = true; }
+      const placeholder = !val
+        ? `${f.label}${isText ? '' : ' girin'}`
+        : `${val} (teorik — değiştirmek için yazın)`;
       inlineInput = `<input
         type="${isText ? 'text' : 'number'}"
-        placeholder="${f.label}${isText ? '' : ' (sayı)'}"
-        style="flex:1;min-width:80px;max-width:160px;padding:4px 6px;border-radius:5px;border:1px solid var(--accent);font-size:11px;font-family:var(--mono);background:var(--bg2);color:var(--text1)"
-        oninput="_physPanelSync('${f.id}','${syncKey}',this.value)"
-        value="">
-      <span class="pwb empty">⚠ Zorunlu</span>`;
-    } else if (src === 'theo') {
-      badgeClass = 'theo';  badgeText = '≈ Teorik Tahmin';              hasTheo = true;
+        placeholder="${placeholder}"
+        value="${val || ''}"
+        style="flex:1;min-width:90px;max-width:170px;padding:4px 6px;border-radius:5px;border:1px solid ${!val ? 'var(--accent)' : 'var(--border2)'};font-size:11px;font-family:var(--mono);background:var(--bg2);color:var(--text1)"
+        oninput="_physPanelSync('${f.id}','${syncKey}',this.value)">
+      <span class="pwb ${!val ? 'empty' : 'theo'}">${!val ? '⚠ Zorunlu' : '≈ Teorik'}</span>`;
     } else if (f.always) {
-      badgeClass = 'ok';    badgeText = '✓ Girildi';
+      badgeClass = 'ok'; badgeText = '✓ Girildi';
     } else {
-      badgeClass = 'ok';    badgeText = '✓ Ölçülen Değer';
+      badgeClass = 'ok'; badgeText = '✓ Ölçülen';
     }
 
     return `<div class="phys-warn-row">

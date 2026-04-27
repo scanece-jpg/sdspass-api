@@ -1728,10 +1728,15 @@ function _renderPhysWarnPanel() {
       badgeClass = 'ok';    badgeText = '✓ Ölçülen Değer';
     }
 
+    const inlineInput = (badgeClass === 'empty' && f.key)
+      ? `<input type="number" placeholder="gir"
+           style="width:72px;padding:3px 6px;border-radius:4px;border:1px solid var(--accent);background:var(--bg);color:var(--text);font-family:var(--mono);font-size:11px;margin-left:6px"
+           oninput="(function(v){var el=document.getElementById('${f.id}');if(el){el.value=v;markUserInput(el,'${f.key}')}})(this.value)">`
+      : '';
     return `<div class="phys-warn-row">
       <span class="phys-warn-label">${f.label}</span>
       <span class="phys-warn-reason">${f.reason}</span>
-      <span class="pwb ${badgeClass}">${badgeText}</span>
+      <span class="pwb ${badgeClass}" style="display:flex;align-items:center">${badgeText}${inlineInput}</span>
     </div>`;
   });
 

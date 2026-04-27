@@ -1707,7 +1707,8 @@ function _renderPhysWarnPanel() {
 
   if (!visible.length) { panel.style.display = 'none'; return; }
 
-  let allOk = true;
+  let hasEmpty = false;
+  let hasTheo  = false;
   const rows = visible.map(f => {
     const el    = document.getElementById(f.id);
     const isNA  = el?.dataset?.na === 'true';
@@ -1718,11 +1719,10 @@ function _renderPhysWarnPanel() {
     if (isNA) {
       badgeClass = 'na';    badgeText = '— Uygulanamaz';
     } else if (!val) {
-      badgeClass = 'empty'; badgeText = '⚠ Zorunlu · Değer Girilmedi'; allOk = false;
+      badgeClass = 'empty'; badgeText = '⚠ Zorunlu · Değer Girilmedi'; hasEmpty = true;
     } else if (src === 'theo') {
-      badgeClass = 'theo';  badgeText = '≈ Teorik Tahmin';              allOk = false;
+      badgeClass = 'theo';  badgeText = '≈ Teorik Tahmin';              hasTheo = true;
     } else if (f.always) {
-      // Metin alanı — dolu ise her zaman OK
       badgeClass = 'ok';    badgeText = '✓ Girildi';
     } else {
       badgeClass = 'ok';    badgeText = '✓ Ölçülen Değer';
@@ -1735,17 +1735,40 @@ function _renderPhysWarnPanel() {
     </div>`;
   });
 
-  if (allOk) {
+  if (!hasEmpty && !hasTheo) {
+    // Tüm değerler kullanıcı tarafından girilmiş — yeniden hesapla butonu göster
     panel.innerHTML = `<div class="phys-warn-panel">
       <div class="phys-warn-all-ok">✅ Tüm zorunlu fiziksel veriler girilmiş.</div>
+      <div style="margin-top:8px">
+        <button onclick="doCalculate()"
+          style="width:100%;padding:7px;border-radius:6px;border:none;background:var(--accent);color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:var(--mono)">
+          ⚡ Girilen Değerlerle Yeniden Hesapla
+        </button>
+      </div>
     </div>`;
-  } else {
+  } else if (hasEmpty) {
+    // Eksik zorunlu alanlar var — doldurması gerekiyor
     panel.innerHTML = `<div class="phys-warn-panel">
       <div class="phys-warn-panel-title">🔬 Fiziksel Veri Durumu — KKDİK Ek-2 Bölüm 9</div>
       ${rows.join('')}
       <div style="margin-top:10px;padding-top:8px;border-top:1px solid var(--border2)">
         <div style="font-size:10px;color:var(--text3);margin-bottom:6px">
-          Yukarıdaki alanları doldurun, ardından tekrar hesaplayın.
+          Eksik alanları doldurun, ardından tekrar hesaplayın.
+        </div>
+        <button onclick="doCalculate()"
+          style="width:100%;padding:7px;border-radius:6px;border:none;background:var(--accent);color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:var(--mono)">
+          ⚡ Değerlerle Yeniden Hesapla
+        </button>
+      </div>
+    </div>`;
+  } else {
+    // Sadece teorik tahminler var — bilgi amaçlı göster + yeniden hesapla butonu
+    panel.innerHTML = `<div class="phys-warn-panel">
+      <div class="phys-warn-panel-title">🔬 Fiziksel Veri Durumu — KKDİK Ek-2 Bölüm 9</div>
+      ${rows.join('')}
+      <div style="margin-top:10px;padding-top:8px;border-top:1px solid var(--border2)">
+        <div style="font-size:10px;color:var(--text3);margin-bottom:6px">
+          Teorik tahminler hesaba katılmıştır. Ölçülen değerleri girdiyseniz yeniden hesaplayın.
         </div>
         <button onclick="doCalculate()"
           style="width:100%;padding:7px;border-radius:6px;border:none;background:var(--accent);color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:var(--mono)">

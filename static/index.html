@@ -386,12 +386,12 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
       <div>
         <label>Görünüm / Renk <span style="color:var(--danger);font-size:10px">*</span></label>
         <input type="text" id="tf_appearance" placeholder="Ör: Şeffaf, renksiz sıvı"
-               oninput="this.style.borderColor=this.value.trim()?'':'var(--danger)'">
+               oninput="this.style.borderColor=this.value.trim()?'':'var(--danger)';_scheduleRecalc()">
       </div>
       <div>
         <label>Koku <span style="color:var(--danger);font-size:10px">*</span></label>
         <input type="text" id="tf_odor" placeholder="Ör: Keskin, karakteristik"
-               oninput="this.style.borderColor=this.value.trim()?'':'var(--danger)'">
+               oninput="this.style.borderColor=this.value.trim()?'':'var(--danger)';_scheduleRecalc()">
       </div>
     </div>
     <div style="font-size:9px;color:var(--text3);margin-top:4px"><span style="color:var(--danger)">*</span> PDF için zorunlu alan</div>
@@ -1483,10 +1483,18 @@ function _checkPhysThreshold(key, val) {
   else { w.style.display = 'none'; }
 }
 
+let _recalcTimer = null;
+function _scheduleRecalc() {
+  if (!_lastCalcState) return; // henüz hesaplanmadıysa tetikleme
+  clearTimeout(_recalcTimer);
+  _recalcTimer = setTimeout(() => doCalculate(), 700);
+}
+
 function markUserInput(el, key) {
   el.dataset.source = 'user';
   _updateSrcBadge(key, 'user');
   _checkPhysThreshold(key, parseFloat(el.value));
+  _scheduleRecalc();
 }
 
 // ── Forma göre fiziksel alan görünürlüğü ─────────────────────────────────────

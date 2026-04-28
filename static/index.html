@@ -1702,27 +1702,50 @@ function _renderPhysWarnPanel() {
 
   if (!visible.length) { panel.style.display = 'none'; return; }
 
-  const missing = visible.filter(f => {
+  const missing = [];
+  const theo    = [];
+  const ok      = [];
+
+  visible.forEach(f => {
     const el = document.getElementById(f.id);
-    if (!el || el.dataset.na === 'true') return false;
-    return !el.value?.trim();
+    if (!el || el.dataset.na === 'true') return;
+    const val = el.value?.trim();
+    const src = el.dataset.source || '';
+    if (!val)            missing.push(f);
+    else if (src==='theo') theo.push({ ...f, val });
+    else                   ok.push(f);
   });
 
-  if (!missing.length) { panel.style.display = 'none'; return; }
+  if (!missing.length && !theo.length) { panel.style.display = 'none'; return; }
 
-  const rows = missing.map(f =>
+  const missingRows = missing.map(f =>
     `<div class="phys-warn-row">
       <span class="phys-warn-label">⚠ ${f.label}</span>
       <span class="phys-warn-reason">${f.reason}</span>
+      <span class="pwb empty">Eksik</span>
     </div>`
   ).join('');
 
+  const theoRows = theo.map(f =>
+    `<div class="phys-warn-row">
+      <span class="phys-warn-label">${f.label}</span>
+      <span class="phys-warn-reason">${f.reason}</span>
+      <span class="pwb theo">≈ ${f.val} — Teorik</span>
+    </div>`
+  ).join('');
+
+  const note = missing.length
+    ? 'Eksik alanları sol panelden doldurun, ardından tekrar hesaplayın.'
+    : 'Teorik değerler kullanıldı. Ölçülen değer varsa sol panelden girin.';
+
   panel.innerHTML = `<div class="phys-warn-panel">
-    <div class="phys-warn-panel-title">⚠ Eksik Zorunlu Fiziksel Veriler</div>
-    ${rows}
-    <div style="font-size:10px;color:var(--text3);margin-top:8px">
-      Sol panelden bu alanları doldurup tekrar <b>Hesapla</b>'ya basın.
-    </div>
+    <div class="phys-warn-panel-title">🔬 Fiziksel Veri Durumu</div>
+    ${missingRows}${theoRows}
+    <div style="font-size:10px;color:var(--text3);margin-top:8px;margin-bottom:8px">${note}</div>
+    <button onclick="doCalculate()"
+      style="width:100%;padding:7px;border-radius:6px;border:none;background:var(--accent);color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:var(--mono)">
+      ⚡ Yeniden Hesapla
+    </button>
   </div>`;
   panel.style.display = 'block';
 }

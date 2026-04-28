@@ -1674,6 +1674,32 @@ function _renderLabel22({ allH, combinedSignal, combinedPics, pcodes, euh }) {
   return out;
 }
 
+// Teorik değerleri temizle — kullanıcı kendi değerini girecek
+function _physManualMode() {
+  ['tf_fp','tf_bp','tf_visc','tf_density','tf_sol'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.dataset.source === 'theo') {
+      el.value = '';
+      el.dataset.source = '';
+      const key = id.replace('tf_','').replace('density','density');
+      _updateSrcBadge(key === 'tf_density' ? 'density' : key.replace('tf_',''), '');
+    }
+  });
+  // Paneli gizle
+  const panel = document.getElementById('physWarnPanel');
+  if (panel) panel.style.display = 'none';
+  // Sol panelde fiziksel alanlara scroll et ve ilk boş alanı vurgula
+  const firstEmpty = ['tf_appearance','tf_odor','tf_fp','tf_bp','tf_visc','tf_mp']
+    .map(id => document.getElementById(id))
+    .find(el => el && !el.value?.trim() && el.dataset.na !== 'true');
+  if (firstEmpty) {
+    firstEmpty.scrollIntoView({ behavior:'smooth', block:'center' });
+    firstEmpty.focus();
+    firstEmpty.style.outline = '2px solid var(--accent)';
+    setTimeout(() => { firstEmpty.style.outline = ''; }, 1500);
+  }
+}
+
 // ── Hesaplama sonrası zorunlu fiziksel alan uyarı paneli ──────────────────────
 function _renderPhysWarnPanel() {
   const panel = document.getElementById('physWarnPanel');
@@ -1734,18 +1760,20 @@ function _renderPhysWarnPanel() {
     </div>`
   ).join('');
 
-  const note = missing.length
-    ? 'Eksik alanları sol panelden doldurun, ardından tekrar hesaplayın.'
-    : 'Teorik değerler kullanıldı. Ölçülen değer varsa sol panelden girin.';
-
   panel.innerHTML = `<div class="phys-warn-panel">
     <div class="phys-warn-panel-title">🔬 Fiziksel Veri Durumu</div>
     ${missingRows}${theoRows}
-    <div style="font-size:10px;color:var(--text3);margin-top:8px;margin-bottom:8px">${note}</div>
-    <button onclick="doCalculate()"
-      style="width:100%;padding:7px;border-radius:6px;border:none;background:var(--accent);color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:var(--mono)">
-      ⚡ Yeniden Hesapla
-    </button>
+    ${missing.length ? `<div style="font-size:10px;color:var(--text3);margin-top:8px;margin-bottom:8px">Eksik alanları sol panelden doldurun.</div>` : ''}
+    <div style="display:flex;gap:6px;margin-top:10px">
+      <button onclick="doCalculate()"
+        style="flex:1;padding:7px;border-radius:6px;border:none;background:var(--accent);color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:var(--mono)">
+        ⚡ Teorik Hesapla
+      </button>
+      <button onclick="_physManualMode()"
+        style="flex:1;padding:7px;border-radius:6px;border:1px solid var(--border2);background:var(--bg2);color:var(--text2);font-size:11px;font-weight:600;cursor:pointer;font-family:var(--mono)">
+        ✏️ Veri Gireceğim
+      </button>
+    </div>
   </div>`;
   panel.style.display = 'block';
 }

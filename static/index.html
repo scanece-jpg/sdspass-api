@@ -1432,13 +1432,6 @@ function getComps() {
 function doCalculate() {
   const comps = getComps();
   if (!comps.length) { showError('En az bir bileşen girin.'); return; }
-
-  // Tüm "Yeniden Hesapla" butonlarına yükleniyor göster
-  document.querySelectorAll('#physWarnPanel button').forEach(b => {
-    b.textContent = '⏳ Hesaplanıyor...';
-    b.disabled = true;
-  });
-
   _runCalculationCore();
 }
 
@@ -1681,117 +1674,56 @@ function _renderLabel22({ allH, combinedSignal, combinedPics, pcodes, euh }) {
   return out;
 }
 
-// Inline panel input → gerçek form alanına yaz
-function _physPanelSync(fieldId, key, val) {
-  const el = document.getElementById(fieldId);
-  if (!el) return;
-  el.value = val;
-  if (key) {
-    el.dataset.source = 'user';
-    _updateSrcBadge(key, 'user');
-    _checkPhysThreshold(key, parseFloat(val));
-  }
-}
-
 // ── Hesaplama sonrası zorunlu fiziksel alan uyarı paneli ──────────────────────
 function _renderPhysWarnPanel() {
   const panel = document.getElementById('physWarnPanel');
   if (!panel) return;
 
-  // Her formda zorunlu metin alanları (phys-fw dışında, her zaman kontrol edilir)
   const TEXT_MANDATORY = [
-    { id:'tf_appearance', label:'Görünüm / Renk', reason:'SDS Bölüm 9 — bilgi yok kabul edilmez (KKDİK Ek-2)', always: true },
-    { id:'tf_odor',       label:'Koku',           reason:'SDS Bölüm 9 — bilgi yok kabul edilmez (KKDİK Ek-2)', always: true },
+    { id:'tf_appearance', label:'Görünüm / Renk', reason:'SDS Bölüm 9 zorunlu (KKDİK Ek-2)', always:true },
+    { id:'tf_odor',       label:'Koku',           reason:'SDS Bölüm 9 zorunlu (KKDİK Ek-2)', always:true },
   ];
-
-  // Tüm potansiyel zorunlu fiziksel alanlar — gizli olanlar otomatik filtrelenir
   const MANDATORY = [
-    { id:'tf_fp',   key:'fp',   label:'Parlama Noktası', reason:'H224/H225/H226 ayrımı (CLP §2.6)' },
-    { id:'tf_bp',   key:'bp',   label:'Kaynama Noktası', reason:'H224 vs H225 ayrımı (CLP §2.6.2)' },
-    { id:'tf_visc', key:'visc', label:'Viskozite @40°C', reason:'H304 Aspirasyon (CLP §3.10)' },
-    { id:'tf_mp',   key:'mp',   label:'Erime Noktası',   reason:'Katı/Toz ürün — zorunlu (KKDİK Ek-2 §9)' },
+    { id:'tf_fp',   label:'Parlama Noktası', reason:'H224/H225/H226 sınıflandırması (CLP §2.6)' },
+    { id:'tf_bp',   label:'Kaynama Noktası', reason:'H224/H225 ayrımı (CLP §2.6.2)' },
+    { id:'tf_visc', label:'Viskozite @40°C', reason:'H304 Aspirasyon sınırı (CLP §3.10)' },
+    { id:'tf_mp',   label:'Erime Noktası',   reason:'Katı/Toz form zorunlu (KKDİK Ek-2 §9)' },
   ];
 
-  // Sadece bu form için görünür olan fiziksel alanları işle
   const visible = [
     ...TEXT_MANDATORY,
     ...MANDATORY.filter(f => {
       const el = document.getElementById(f.id);
       if (!el) return false;
       const wrap = el.closest('.phys-fw');
-      if (wrap && wrap.style.display === 'none') return false;
-      return true;
+      return !(wrap && wrap.style.display === 'none');
     }),
   ];
 
   if (!visible.length) { panel.style.display = 'none'; return; }
 
-  let hasEmpty = false;
-  let hasTheo  = false;
-  const rows = visible.map(f => {
-    const el    = document.getElementById(f.id);
-    const isNA  = el?.dataset?.na === 'true';
-    const src   = el?.dataset?.source || '';
-    const val   = el?.value?.trim();
-
-    const isText  = !!f.always;
-    const syncKey = f.key || '';
-
-    let badgeClass, badgeText, inlineInput = '';
-    if (isNA) {
-      badgeClass = 'na'; badgeText = '— Uygulanamaz';
-    } else if (!val || src === 'theo') {
-      // Boş VEYA teorik tahmin — her ikisinde de kullanıcı değer girebilmeli
-      if (!val) { hasEmpty = true; } else { hasTheo = true; }
-      const placeholder = !val
-        ? `${f.label}${isText ? '' : ' girin'}`
-        : `${val} (teorik — değiştirmek için yazın)`;
-      inlineInput = `<input
-        type="${isText ? 'text' : 'number'}"
-        placeholder="${placeholder}"
-        value="${val || ''}"
-        style="flex:1;min-width:90px;max-width:170px;padding:4px 6px;border-radius:5px;border:1px solid ${!val ? 'var(--accent)' : 'var(--border2)'};font-size:11px;font-family:var(--mono);background:var(--bg2);color:var(--text1)"
-        oninput="_physPanelSync('${f.id}','${syncKey}',this.value)">
-      <span class="pwb ${!val ? 'empty' : 'theo'}">${!val ? '⚠ Zorunlu' : '≈ Teorik'}</span>`;
-    } else if (f.always) {
-      badgeClass = 'ok'; badgeText = '✓ Girildi';
-    } else {
-      badgeClass = 'ok'; badgeText = '✓ Ölçülen';
-    }
-
-    return `<div class="phys-warn-row">
-      <span class="phys-warn-label">${f.label}</span>
-      <span class="phys-warn-reason">${f.reason}</span>
-      ${inlineInput || `<span class="pwb ${badgeClass}">${badgeText}</span>`}
-    </div>`;
+  const missing = visible.filter(f => {
+    const el = document.getElementById(f.id);
+    if (!el || el.dataset.na === 'true') return false;
+    return !el.value?.trim();
   });
 
-  const _tsLine = `<div id="_physWarnTs" style="font-size:10px;color:var(--text3);margin-top:6px;text-align:center"></div>`;
-  const _calcBtn = `<button onclick="doCalculate()"
-    style="width:100%;padding:8px;border-radius:6px;border:none;background:var(--accent);color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:var(--mono)">
-    ⚡ Değerlerle Yeniden Hesapla
-  </button>`;
+  if (!missing.length) { panel.style.display = 'none'; return; }
 
-  if (!hasEmpty && !hasTheo) {
-    panel.innerHTML = `<div class="phys-warn-panel">
-      <div class="phys-warn-all-ok">✅ Tüm zorunlu fiziksel veriler girilmiş.</div>
-      <div style="margin-top:8px">${_calcBtn}</div>
-      ${_tsLine}
-    </div>`;
-  } else {
-    const note = hasEmpty
-      ? 'Eksik alanları doldurup <b>Yeniden Hesapla</b>\'ya basın.'
-      : 'Teorik değerler kullanıldı. Ölçülen değer varsa değiştirin, sonra <b>Yeniden Hesapla</b>\'ya basın.';
-    panel.innerHTML = `<div class="phys-warn-panel">
-      <div class="phys-warn-panel-title">🔬 Fiziksel Veri Durumu — KKDİK Ek-2 Bölüm 9</div>
-      ${rows.join('')}
-      <div style="margin-top:10px;padding-top:8px;border-top:1px solid var(--border2)">
-        <div style="font-size:10px;color:var(--text3);margin-bottom:6px">${note}</div>
-        ${_calcBtn}
-        ${_tsLine}
-      </div>
-    </div>`;
-  }
+  const rows = missing.map(f =>
+    `<div class="phys-warn-row">
+      <span class="phys-warn-label">⚠ ${f.label}</span>
+      <span class="phys-warn-reason">${f.reason}</span>
+    </div>`
+  ).join('');
+
+  panel.innerHTML = `<div class="phys-warn-panel">
+    <div class="phys-warn-panel-title">⚠ Eksik Zorunlu Fiziksel Veriler</div>
+    ${rows}
+    <div style="font-size:10px;color:var(--text3);margin-top:8px">
+      Sol panelden bu alanları doldurup tekrar <b>Hesapla</b>'ya basın.
+    </div>
+  </div>`;
   panel.style.display = 'block';
 }
 
@@ -2069,17 +2001,6 @@ function renderAll(s) {
   _lastTheoProps = tp || null;   // modal için kaydet
   _autofillPhysFields(tp);       // teorik değerleri forma yaz (kullanıcı girdiyse dokunma)
   _renderPhysWarnPanel();        // zorunlu alan durumunu göster (autofill bittikten sonra)
-
-  // Hesaplama tamamlandı — results bölümünü kısa süre vurgula
-  const _resEl = document.getElementById('results');
-  if (_resEl) {
-    _resEl.style.transition = 'outline 0s';
-    _resEl.style.outline = '2px solid var(--accent)';
-    setTimeout(() => { _resEl.style.outline = ''; _resEl.style.transition = ''; }, 600);
-  }
-  // physWarnPanel'e son güncelleme saatini yaz
-  const _tsEl = document.getElementById('_physWarnTs');
-  if (_tsEl) _tsEl.textContent = `Son hesaplama: ${new Date().toLocaleTimeString('tr-TR')}`;
 
   if (tp) {
     const coverageColor = tp.coverage >= 80 ? '#68d391' : tp.coverage >= 50 ? '#f6ad55' : '#fc8181';

@@ -1432,6 +1432,13 @@ function getComps() {
 function doCalculate() {
   const comps = getComps();
   if (!comps.length) { showError('En az bir bileşen girin.'); return; }
+
+  // Tüm "Yeniden Hesapla" butonlarına yükleniyor göster
+  document.querySelectorAll('#physWarnPanel button').forEach(b => {
+    b.textContent = '⏳ Hesaplanıyor...';
+    b.disabled = true;
+  });
+
   _runCalculationCore();
 }
 
@@ -1759,45 +1766,29 @@ function _renderPhysWarnPanel() {
     </div>`;
   });
 
+  const _tsLine = `<div id="_physWarnTs" style="font-size:10px;color:var(--text3);margin-top:6px;text-align:center"></div>`;
+  const _calcBtn = `<button onclick="doCalculate()"
+    style="width:100%;padding:8px;border-radius:6px;border:none;background:var(--accent);color:#fff;font-size:12px;font-weight:700;cursor:pointer;font-family:var(--mono)">
+    ⚡ Değerlerle Yeniden Hesapla
+  </button>`;
+
   if (!hasEmpty && !hasTheo) {
-    // Tüm değerler kullanıcı tarafından girilmiş — yeniden hesapla butonu göster
     panel.innerHTML = `<div class="phys-warn-panel">
       <div class="phys-warn-all-ok">✅ Tüm zorunlu fiziksel veriler girilmiş.</div>
-      <div style="margin-top:8px">
-        <button onclick="doCalculate()"
-          style="width:100%;padding:7px;border-radius:6px;border:none;background:var(--accent);color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:var(--mono)">
-          ⚡ Girilen Değerlerle Yeniden Hesapla
-        </button>
-      </div>
-    </div>`;
-  } else if (hasEmpty) {
-    // Eksik zorunlu alanlar var — doldurması gerekiyor
-    panel.innerHTML = `<div class="phys-warn-panel">
-      <div class="phys-warn-panel-title">🔬 Fiziksel Veri Durumu — KKDİK Ek-2 Bölüm 9</div>
-      ${rows.join('')}
-      <div style="margin-top:10px;padding-top:8px;border-top:1px solid var(--border2)">
-        <div style="font-size:10px;color:var(--text3);margin-bottom:6px">
-          Eksik alanları doldurun, ardından tekrar hesaplayın.
-        </div>
-        <button onclick="doCalculate()"
-          style="width:100%;padding:7px;border-radius:6px;border:none;background:var(--accent);color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:var(--mono)">
-          ⚡ Değerlerle Yeniden Hesapla
-        </button>
-      </div>
+      <div style="margin-top:8px">${_calcBtn}</div>
+      ${_tsLine}
     </div>`;
   } else {
-    // Sadece teorik tahminler var — bilgi amaçlı göster + yeniden hesapla butonu
+    const note = hasEmpty
+      ? 'Eksik alanları doldurup <b>Yeniden Hesapla</b>\'ya basın.'
+      : 'Teorik değerler kullanıldı. Ölçülen değer varsa değiştirin, sonra <b>Yeniden Hesapla</b>\'ya basın.';
     panel.innerHTML = `<div class="phys-warn-panel">
       <div class="phys-warn-panel-title">🔬 Fiziksel Veri Durumu — KKDİK Ek-2 Bölüm 9</div>
       ${rows.join('')}
       <div style="margin-top:10px;padding-top:8px;border-top:1px solid var(--border2)">
-        <div style="font-size:10px;color:var(--text3);margin-bottom:6px">
-          Teorik tahminler hesaba katılmıştır. Ölçülen değerleri girdiyseniz yeniden hesaplayın.
-        </div>
-        <button onclick="doCalculate()"
-          style="width:100%;padding:7px;border-radius:6px;border:none;background:var(--accent);color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:var(--mono)">
-          ⚡ Değerlerle Yeniden Hesapla
-        </button>
+        <div style="font-size:10px;color:var(--text3);margin-bottom:6px">${note}</div>
+        ${_calcBtn}
+        ${_tsLine}
       </div>
     </div>`;
   }
@@ -2078,6 +2069,17 @@ function renderAll(s) {
   _lastTheoProps = tp || null;   // modal için kaydet
   _autofillPhysFields(tp);       // teorik değerleri forma yaz (kullanıcı girdiyse dokunma)
   _renderPhysWarnPanel();        // zorunlu alan durumunu göster (autofill bittikten sonra)
+
+  // Hesaplama tamamlandı — results bölümünü kısa süre vurgula
+  const _resEl = document.getElementById('results');
+  if (_resEl) {
+    _resEl.style.transition = 'outline 0s';
+    _resEl.style.outline = '2px solid var(--accent)';
+    setTimeout(() => { _resEl.style.outline = ''; _resEl.style.transition = ''; }, 600);
+  }
+  // physWarnPanel'e son güncelleme saatini yaz
+  const _tsEl = document.getElementById('_physWarnTs');
+  if (_tsEl) _tsEl.textContent = `Son hesaplama: ${new Date().toLocaleTimeString('tr-TR')}`;
 
   if (tp) {
     const coverageColor = tp.coverage >= 80 ? '#68d391' : tp.coverage >= 50 ? '#f6ad55' : '#fc8181';

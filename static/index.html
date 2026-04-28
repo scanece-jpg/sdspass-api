@@ -1920,6 +1920,9 @@ function renderAll(s) {
 
   let h = '';
 
+  // Piktogramlar — if bloğu dışında tanımla (blok-scope ReferenceError önlenir)
+  const combinedPics = CLPEngine.getGhsCodes ? CLPEngine.getGhsCodes(allH) : (clp.pictograms || []);
+
   // ── Banner ────────────────────────────────────────────────────────────────
   if (allH.length > 0) {
     const sigClass = combinedSignal === 'Danger'  ? 'signal-danger'
@@ -1927,9 +1930,6 @@ function renderAll(s) {
     const sigLabel = combinedSignal === 'Danger'  ? '🔴 DANGER'
                    : combinedSignal === 'Warning' ? '🟡 WARNING'
                    : '⚪ Uyarı kelimesi yok (CLP Annex III)';
-
-    // Piktogramlar — tüm H kodlarından (dominance uygulanmış) yeniden hesapla
-    const combinedPics = CLPEngine.getGhsCodes ? CLPEngine.getGhsCodes(allH) : (clp.pictograms || []);
 
     // Pill rengi
     const pillClass = c => (_dH && _dH.has(c)) ? 'hp-danger'

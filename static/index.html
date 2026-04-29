@@ -1761,14 +1761,16 @@ function _renderPhysWarnPanel() {
     </div>`
   ).join('');
 
+  const hasTheoNums = theo.length > 0; // sayısal teorik değer var mı
   panel.innerHTML = `<div class="phys-warn-panel">
     <div class="phys-warn-panel-title">🔬 Fiziksel Veri Durumu</div>
     ${missingRows}${theoRows}
-    ${missing.length ? `<div style="font-size:10px;color:var(--text3);margin-top:8px;margin-bottom:8px">Eksik alanları sol panelden doldurun.</div>` : ''}
-    <div style="display:flex;gap:6px;margin-top:10px">
-      <button onclick="doCalculate()"
+    ${missing.length ? `<div style="font-size:10px;color:var(--text3);margin-top:6px;margin-bottom:6px">⚠ Eksik alanlar PDF'te boş kalacak — sol panelden doldurabilirsiniz.</div>` : ''}
+    ${hasTheoNums ? `<div style="font-size:10px;color:var(--text3);margin-bottom:6px">ℹ Teorik değerler hesaplamaya dahil edildi.</div>` : ''}
+    <div style="display:flex;gap:6px;margin-top:8px">
+      <button onclick="_doPdfGenerate()"
         style="flex:1;padding:7px;border-radius:6px;border:none;background:var(--accent);color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:var(--mono)">
-        ⚡ Teorik Hesapla
+        ⚡ Teorik Değerlerle PDF Oluştur
       </button>
       <button onclick="_physManualMode()"
         style="flex:1;padding:7px;border-radius:6px;border:1px solid var(--border2);background:var(--bg2);color:var(--text2);font-size:11px;font-weight:600;cursor:pointer;font-family:var(--mono)">
@@ -2513,6 +2515,7 @@ async function generatePDF() {
 }
 
 async function _doPdfGenerate() {
+  if (!_lastCalcState) { showError('Önce Hesapla\'ya basın.'); return; }
 
   const btn = document.querySelector('[onclick="generatePDF()"]');
   if (btn) { btn.textContent = '⏳ Oluşturuluyor...'; btn.disabled = true; }

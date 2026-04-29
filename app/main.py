@@ -316,6 +316,21 @@ async def debug_signal(data: dict = Body(...)):
 
 # ─── SUBSTANCE LOOKUP ─────────────────────────────────────────────────────────
 
+@app.get("/api/v1/sds/substance/phys")
+async def substance_phys_lookup(cas: str):
+    """
+    CAS numarasına göre fiziksel özellik verisi döndür.
+    Önce yerel önbellekten bakar (data/phys_cache/),
+    bulamazsa PubChem Experimental Properties API'sından çeker.
+    """
+    try:
+        from app.services.pubchem_phys_service import fetch_phys
+        props = await fetch_phys(cas.strip())
+        return {"cas": cas, "found": bool(props), "props": props}
+    except Exception as e:
+        return {"cas": cas, "found": False, "props": {}, "error": str(e)}
+
+
 @app.get("/api/v1/sds/substance/lookup")
 async def substance_lookup(cas: str):
     """

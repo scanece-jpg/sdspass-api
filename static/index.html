@@ -1004,7 +1004,27 @@ async function onCas(id) {
       setTimeout(() => onManualConc(id), 50);
     }
     EventBus.emit('SUBSTANCE_FOUND', { id, cas, ...data });
+
+    // ── Fiziksel özellik çekimi (PubChem) — arka planda, engellemiyor ─────────
+    _fetchPhysProps(cas).catch(() => {});
   } catch(e) { console.warn('[CAS lookup]', e); }
+}
+
+// Fiziksel özellikleri API'dan çek ve PhysicalEngine DB'sine yükle
+async function _fetchPhysProps(cas) {
+  try {
+    const r = await fetch(`${API_BASE}/sds/substance/phys?cas=${encodeURIComponent(cas)}`);
+    if (!r.ok) return;
+    const d = await r.json();
+    if (!d.found || !d.props || !Object.keys(d.props).length) return;
+    // PhysicalEngine çalışma zamanı DB'sine ekle
+    if (typeof PhysicalEngine !== 'undefined') {
+      PhysicalEngine.updateDB(cas, d.props);
+      console.log(`[Frontend] Fiziksel veri PubChem'den yüklendi: ${cas}`, d.props);
+    }
+  } catch(e) {
+    console.warn('[_fetchPhysProps]', e);
+  }
 }
 
 // ── Manuel konsantrasyon girişi ───────────────────────────────────────────────

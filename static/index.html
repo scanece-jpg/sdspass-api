@@ -1675,6 +1675,16 @@ function _renderLabel22({ allH, combinedSignal, combinedPics, pcodes, euh }) {
 }
 
 // Teorik değerleri temizle — kullanıcı kendi değerini girecek
+async function _theoModeAndPdf() {
+  const comps = getComps();
+  if (!comps.length) { showError('En az bir bileşen girin.'); return; }
+  // Önce hesaplamayı tazele (pipeline senkron çalışır — EventBus)
+  _runCalculationCore();
+  // Pipeline senkron ise _lastCalcState artık güncel; PDF üret
+  if (!_lastCalcState) { showError('Hesaplama tamamlanamadı, lütfen tekrar deneyin.'); return; }
+  await _doPdfGenerate();
+}
+
 function _physManualMode() {
   ['tf_fp','tf_bp','tf_visc','tf_density','tf_sol'].forEach(id => {
     const el = document.getElementById(id);
@@ -1768,7 +1778,7 @@ function _renderPhysWarnPanel() {
     ${missing.length ? `<div style="font-size:10px;color:var(--text3);margin-top:6px;margin-bottom:6px">⚠ Eksik alanlar PDF'te boş kalacak — sol panelden doldurabilirsiniz.</div>` : ''}
     ${hasTheoNums ? `<div style="font-size:10px;color:var(--text3);margin-bottom:6px">ℹ Teorik değerler hesaplamaya dahil edildi.</div>` : ''}
     <div style="display:flex;gap:6px;margin-top:8px">
-      <button onclick="_doPdfGenerate()"
+      <button onclick="_theoModeAndPdf()"
         style="flex:1;padding:7px;border-radius:6px;border:none;background:var(--accent);color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:var(--mono)">
         ⚡ Teorik Değerlerle PDF Oluştur
       </button>

@@ -1753,34 +1753,65 @@ function _renderPhysWarnPanel() {
     else                   ok.push(f);
   });
 
-  if (!missing.length && !theo.length) { panel.style.display = 'none'; return; }
+  // theoProps: motor tarafından hesaplanan teorik değerler (varsa)
+  const tp = _lastCalcState?.phys?.theoProps || {};
+  // Teorik olarak hesaplanabilen alan anahtarları (motor çıktısı)
+  const THEO_KEY = { tf_fp:'flash_point', tf_bp:'boiling_point', tf_visc:'viscosity',
+                     tf_density:'density', tf_mp:'melting_point', tf_ph:'ph' };
 
-  const missingRows = missing.map(f =>
-    `<div class="phys-warn-row">
-      <span class="phys-warn-label">⚠ ${f.label}</span>
-      <span class="phys-warn-reason">${f.reason}</span>
-      <span class="pwb empty">Eksik</span>
-    </div>`
-  ).join('');
+  // missing'i iki gruba ayır: motor hesaplayamadı (noData) vs kullanıcı girmedi ama data var olmayabilir
+  const noData  = []; // motor da null, kullanıcı da girmemiş → manuel şart
+  const needFill= []; // text alanı (görünüm/koku) → sadece manuel girilebilir
+
+  missing.forEach(f => {
+    if (f.always) { needFill.push(f); return; } // TEXT_MANDATORY
+    const theoKey = THEO_KEY[f.id];
+    const theoVal = theoKey ? tp[theoKey] : null;
+    const vNum = theoVal?.value ?? (typeof theoVal === 'number' ? theoVal : null);
+    if (vNum !== null && vNum !== undefined) {
+      // Motor bir değer hesaplamış ama DOM'a yazılmamış (olmamalı ama güvence)
+      needFill.push(f);
+    } else {
+      noData.push(f); // motor hesaplayamadı
+    }
+  });
+
+  if (!missing.length && !theo.length) { panel.style.display = 'none'; return; }
 
   const theoRows = theo.map(f =>
     `<div class="phys-warn-row">
-      <span class="phys-warn-label">${f.label}</span>
+      <span class="phys-warn-label">✓ ${f.label}</span>
       <span class="phys-warn-reason">${f.reason}</span>
-      <span class="pwb theo">≈ ${f.val} — Teorik</span>
+      <span class="pwb theo">≈ ${f.val} — PDF'e aktarılacak</span>
     </div>`
   ).join('');
 
-  const hasTheoNums = theo.length > 0; // sayısal teorik değer var mı
+  const needFillRows = needFill.map(f =>
+    `<div class="phys-warn-row">
+      <span class="phys-warn-label">✏ ${f.label}</span>
+      <span class="phys-warn-reason">${f.reason}</span>
+      <span class="pwb empty">El ile girin</span>
+    </div>`
+  ).join('');
+
+  const noDataRows = noData.map(f =>
+    `<div class="phys-warn-row">
+      <span class="phys-warn-label" style="color:var(--text3)">— ${f.label}</span>
+      <span class="phys-warn-reason">${f.reason}</span>
+      <span class="pwb" style="background:#333;color:var(--text3)">Veri yok</span>
+    </div>`
+  ).join('');
+
+  const hasTheoNums = theo.length > 0;
   panel.innerHTML = `<div class="phys-warn-panel">
     <div class="phys-warn-panel-title">🔬 Fiziksel Veri Durumu</div>
-    ${missingRows}${theoRows}
-    ${missing.length ? `<div style="font-size:10px;color:var(--text3);margin-top:6px;margin-bottom:6px">⚠ Eksik alanlar PDF'te boş kalacak — sol panelden doldurabilirsiniz.</div>` : ''}
-    ${hasTheoNums ? `<div style="font-size:10px;color:var(--text3);margin-bottom:6px">ℹ Teorik değerler hesaplamaya dahil edildi.</div>` : ''}
+    ${theoRows}${needFillRows}${noDataRows}
+    ${needFill.length ? `<div style="font-size:10px;color:#e8a838;margin-top:6px;margin-bottom:4px">✏ Sarı alanları sol panelden doldurun — PDF'te boş kalacak.</div>` : ''}
+    ${noData.length ? `<div style="font-size:10px;color:var(--text3);margin-bottom:4px">ℹ Gri "Veri yok" alanları bu karışım için teorik hesaplanamıyor.</div>` : ''}
     <div style="display:flex;gap:6px;margin-top:8px">
       <button onclick="_theoModeAndPdf()"
         style="flex:1;padding:7px;border-radius:6px;border:none;background:var(--accent);color:#fff;font-size:11px;font-weight:700;cursor:pointer;font-family:var(--mono)">
-        ⚡ Teorik Değerlerle PDF Oluştur
+        ⚡ Mevcut Verilerle PDF Oluştur
       </button>
       <button onclick="_physManualMode()"
         style="flex:1;padding:7px;border-radius:6px;border:1px solid var(--border2);background:var(--bg2);color:var(--text2);font-size:11px;font-weight:600;cursor:pointer;font-family:var(--mono)">

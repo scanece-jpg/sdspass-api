@@ -100,6 +100,29 @@ def _first_string(section) -> str | None:
 
 
 # ── Ana çekme fonksiyonu ──────────────────────────────────────────────────────
+# ── İnorganik/iyonik maddeler — BP verileri PubChem'den güvenilmez ─────────────
+# Bu maddeler için boiling_point PubChem çıktısından çıkarılır.
+# (PubChem zaman zaman çözelti/ayrışma sıcaklığını BP olarak listeler)
+_INORGANIC_NO_BP = {
+    '1310-73-2',  # NaOH
+    '1310-58-3',  # KOH
+    '7681-52-9',  # NaOCl
+    '7722-84-1',  # H₂O₂
+    '7664-93-9',  # H₂SO₄
+    '7664-38-2',  # H₃PO₄
+    '7697-37-2',  # HNO₃
+    '7647-01-0',  # HCl
+    '497-19-8',   # Na₂CO₃
+    '10043-52-4', # CaCl₂
+    '7647-14-5',  # NaCl
+    '1336-21-6',  # NH₃ çözeltisi
+    '1305-62-0',  # Ca(OH)₂
+    '1305-78-8',  # CaO
+    '1313-59-3',  # Na₂O
+    '7779-90-0',  # Zn₃(PO₄)₂
+}
+
+
 async def fetch_phys(cas: str) -> dict:
     """
     CAS numarası için fiziksel özellikleri döndür.
@@ -153,13 +176,14 @@ async def fetch_phys(cas: str) -> dict:
             if r3.status_code == 200:
                 sections = r3.json().get('Record', {}).get('Section', [])
 
-                # Kaynama Noktası
-                for sec in _find_section(sections, 'Boiling Point'):
-                    s = _first_string(sec)
-                    if s:
-                        v = _num(s)
-                        if v is not None:
-                            props['boiling_point'] = _to_celsius(v, s)
+                # Kaynama Noktası — inorganik/iyonik maddeler için atla
+                if cas.strip() not in _INORGANIC_NO_BP:
+                    for sec in _find_section(sections, 'Boiling Point'):
+                        s = _first_string(sec)
+                        if s:
+                            v = _num(s)
+                            if v is not None:
+                                props['boiling_point'] = _to_celsius(v, s)
                         break
 
                 # Parlama Noktası

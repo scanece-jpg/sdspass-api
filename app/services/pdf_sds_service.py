@@ -1247,29 +1247,32 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
 
     # Sıvı ürün için viskozite ve çözünürlük eksikliği uyarısı
     # KKDİK Ek-2 Bölüm 9: Sıvı karışımlarda bu parametreler "Bilgi yok" bırakılamaz
+    def _method_note(key):
+        """Hesap yöntemi/kaynağı notu — KKDİK Ek-2 §9 REACH Annex II zorunluluğu"""
+        pm = phys_methods.get(key, {})
+        if not pm:
+            return ''
+        std = _re.sub(r'<[^>]+>', '', pm.get('standard') or '').strip()
+        if std and ' / ' in std:
+            std = std.split(' / ')[0].strip()
+        err = pm.get('error_pct')
+        if pm.get('measured'):
+            parts = ['ölçülen']
+            if std and std not in ('', '—'):
+                parts.append(std)
+        else:
+            parts = ['hesaplanmış']
+            if std and std not in ('', '—'):
+                parts.append(std)
+            if err:
+                parts.append(f'±%{err}')
+        return f'<br/><font size="6" color="#888888">{" – ".join(parts)}</font>'
+
     def _pv(key, unit=''):
         v = phys.get(key)
         if v is None or v == '': return na
         val_str = f"{v} {unit}".strip() if unit else str(v)
-        # KKDİK Ek-2 §9: hesaplanmış değerler için yöntem notu (REACH Annex II zorunlu)
-        pm = phys_methods.get(key, {})
-        if pm:
-            std = _re.sub(r'<[^>]+>', '', pm.get('standard') or '').strip()
-            if std and ' / ' in std:
-                std = std.split(' / ')[0].strip()   # ilk standardı al (kısa tut)
-            err = pm.get('error_pct')
-            if pm.get('measured'):
-                note_parts = ['ölçülen']
-                if std and std not in ('', '—'):
-                    note_parts.append(std)
-            else:
-                note_parts = ['hesaplanmış']
-                if std and std not in ('', '—'):
-                    note_parts.append(std)
-                if err:
-                    note_parts.append(f'±%{err}')
-            note = ' – '.join(note_parts)
-            val_str += f'<br/><font size="6" color="#888888">{note}</font>'
+        val_str += _method_note(key)
         return val_str
 
     _mp_lbl  = 'Donma/Erime Noktası' if lang=='TR' else 'Melting/Freezing Point'
@@ -1281,12 +1284,14 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _ex_val = na
     if phys.get('lel') or phys.get('uel'):
         _ex_val = f"%{phys.get('lel','?')} – %{phys.get('uel','?')}"
+        _ex_val += _method_note('lel')   # LEL yöntemi (UEL aynı kaynaktan)
 
     _vp_raw = phys.get('vapor_pressure')
     if _vp_raw not in (None, ''):
         # Birim zaten içeriyorsa dokunma, sadece sayısal değere hPa ekle
         _vp_val = str(_vp_raw) if any(u in str(_vp_raw) for u in ('hPa','kPa','mmHg','bar','Pa')) \
                   else f"{_vp_raw} hPa"
+        _vp_val += _method_note('vapor_pressure')
     elif phys.get('vapor_pressure_num'):
         _vp_val = f"{phys.get('vapor_pressure_num')} hPa"
     else:
@@ -1308,7 +1313,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         [phys_prop(lang,'density'),       _pv('density','g/cm³')],
         [_rd_lbl,                         _pv('rel_density')],
         [phys_prop(lang,'viscosity'),     _pv('viscosity','cSt @40°C')],
-        [phys_prop(lang,'solubility'),    phys.get('solubility') or na],
+        [phys_prop(lang,'solubility'),    _pv('solubility')],
         [phys_prop(lang,'vapor_pressure'),_vp_val],
         [_vd_lbl,                         _pv('vapor_density')],
         [_kow_lbl,                        _pv('log_kow')],

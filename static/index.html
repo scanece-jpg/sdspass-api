@@ -31,6 +31,7 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
 .product-card input,.product-card select{width:100%;background:var(--bg2);border:1px solid var(--border2);color:var(--text);border-radius:6px;padding:7px 10px;font-size:12px;font-family:var(--mono)}
 .product-card input:focus,.product-card select:focus{outline:2px solid var(--accent);border-color:transparent}
 .row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:10px}
+.row3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:10px}
 
 /* Component rows */
 .comps-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
@@ -382,10 +383,15 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
     <label style="font-weight:700;color:var(--text2);margin:0 0 10px;display:block">🧪 Bölüm 9 — Fiziksel ve Kimyasal Özellikler</label>
 
     <!-- ADIM 1: Her zaman görünür -->
-    <div class="row2">
+    <div class="row3">
       <div>
-        <label>Görünüm / Renk <span style="color:var(--danger);font-size:10px">*</span></label>
-        <input type="text" id="tf_appearance" placeholder="Ör: Şeffaf, renksiz sıvı"
+        <label>Görünüm (Fiziksel hal) <span style="color:var(--danger);font-size:10px">*</span></label>
+        <input type="text" id="tf_appearance" placeholder="Ör: Sıvı, toz, katı"
+               oninput="this.style.borderColor=this.value.trim()?'':'var(--danger)'">
+      </div>
+      <div>
+        <label>Renk <span style="color:var(--danger);font-size:10px">*</span></label>
+        <input type="text" id="tf_color" placeholder="Ör: Renksiz, sarı, beyaz"
                oninput="this.style.borderColor=this.value.trim()?'':'var(--danger)'">
       </div>
       <div>
@@ -1736,8 +1742,9 @@ function _renderPhysWarnPanel() {
   if (!panel) return;
 
   const TEXT_MANDATORY = [
-    { id:'tf_appearance', label:'Görünüm / Renk', reason:'SDS Bölüm 9 zorunlu (KKDİK Ek-2)', always:true },
-    { id:'tf_odor',       label:'Koku',           reason:'SDS Bölüm 9 zorunlu (KKDİK Ek-2)', always:true },
+    { id:'tf_appearance', label:'Görünüm (Fiziksel hal)', reason:'SDS Bölüm 9 zorunlu (KKDİK Ek-2)', always:true },
+    { id:'tf_color',      label:'Renk',                  reason:'SDS Bölüm 9 zorunlu (KKDİK Ek-2)', always:true },
+    { id:'tf_odor',       label:'Koku',                  reason:'SDS Bölüm 9 zorunlu (KKDİK Ek-2)', always:true },
   ];
   const MANDATORY = [
     { id:'tf_fp',   label:'Parlama Noktası', reason:'H224/H225/H226 sınıflandırması (CLP §2.6)' },
@@ -2469,12 +2476,17 @@ function _checkPDFMandatory() {
 
   const missing = [];
 
-  // 1. Fiziksel Hal / Renk — her formda zorunlu
+  // 1. Fiziksel hal — her formda zorunlu
   if (!document.getElementById('tf_appearance')?.value?.trim()) {
-    missing.push({ label: 'Görünüm / Renk', reason: 'SDS Bölüm 9 — "bilgi yok" kabul edilmez (KKDİK Ek-2)' });
+    missing.push({ label: 'Görünüm (Fiziksel hal)', reason: 'SDS Bölüm 9 — "bilgi yok" kabul edilmez (KKDİK Ek-2)' });
   }
 
-  // 2. Koku — her formda zorunlu
+  // 2. Renk — her formda zorunlu
+  if (!document.getElementById('tf_color')?.value?.trim()) {
+    missing.push({ label: 'Renk', reason: 'SDS Bölüm 9 — "bilgi yok" kabul edilmez (KKDİK Ek-2)' });
+  }
+
+  // 3. Koku — her formda zorunlu
   if (!document.getElementById('tf_odor')?.value?.trim()) {
     missing.push({ label: 'Koku', reason: 'SDS Bölüm 9 — "bilgi yok" kabul edilmez (KKDİK Ek-2)' });
   }
@@ -2610,6 +2622,7 @@ async function _doPdfGenerate() {
 
     // Metin alanları
     if (_g('tf_appearance')) flatPhys.appearance    = _g('tf_appearance');
+    if (_g('tf_color'))      flatPhys.color         = _g('tf_color');
     if (_g('tf_odor'))       flatPhys.odor          = _g('tf_odor');
     if (_g('tf_evap'))       flatPhys.evap_rate     = _g('tf_evap');
     if (_g('tf_flam_sg'))    flatPhys.is_flammable  = _g('tf_flam_sg');

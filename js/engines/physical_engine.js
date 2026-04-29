@@ -133,6 +133,22 @@ const PhysicalEngine = (() => {
     '75-04-7':  17,
     // Polar çözücüler
     '872-50-4': 202, '68-12-2':  153, '67-68-5':  189,
+    // İnorganik/iyonik maddeler — null = KN hesabına dahil edilmez
+    // (gerçek KN çok yüksek veya ayrışma var — karışım IBP'yi etkilemez)
+    '1310-73-2': null,  // NaOH (KN: 1388°C — PubChem yanlış veri döndürür)
+    '1310-58-3': null,  // KOH  (KN: 1327°C)
+    '7681-52-9': null,  // NaOCl (ayrışır)
+    '7722-84-1': null,  // H₂O₂ (ayrışır ~150°C)
+    '7664-93-9': null,  // H₂SO₄ (KN: 337°C — BP_DB'de null = sınıflandırmaya dahil etme)
+    '7664-38-2': null,  // H₃PO₄
+    '7697-37-2': null,  // HNO₃
+    '7647-01-0': null,  // HCl (gaz)
+    '497-19-8':  null,  // Na₂CO₃
+    '10043-52-4':null,  // CaCl₂
+    '7647-14-5': null,  // NaCl
+    '1336-21-6': null,  // NH₃ çözeltisi
+    '1305-62-0': null,  // Ca(OH)₂
+    '1305-78-8': null,  // CaO
   };
 
   // ── MOLEKÜLEr AĞIRLIK VERİTABANI (g/mol) ─────────────────────────────────────
@@ -816,7 +832,11 @@ const PhysicalEngine = (() => {
     if (!cas || !props) return;
     const c = cas.trim();
     if (props.density       != null && isFinite(props.density))       DENSITY_DB[c] = props.density;
-    if (props.boiling_point != null && isFinite(props.boiling_point)) BP_DB[c]      = props.boiling_point;
+    // BP: hardcoded DB değeri PubChem'den önce gelir — mevcut değerin (null dahil) üzerine yazılmaz
+    // Sebep: inorganik/iyonik maddeler için PubChem yanlış/yanıltıcı BP verebilir (ör. NaOH → 130°C)
+    if (props.boiling_point != null && isFinite(props.boiling_point) && !(c in BP_DB)) {
+      BP_DB[c] = props.boiling_point;
+    }
     if (props.flash_point   !== undefined) FP_DB[c] = props.flash_point; // null geçerli (yanmaz)
     if (props.vapor_pressure!= null && isFinite(props.vapor_pressure))VP_DB[c]      = props.vapor_pressure;
     if (props.viscosity     != null && isFinite(props.viscosity))     VISC_DB[c]    = props.viscosity;

@@ -28,6 +28,7 @@ from reportlab.platypus import (
 )
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
+import re as _re
 from io import BytesIO
 from datetime import datetime
 from typing import Dict, List, Optional
@@ -681,6 +682,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     )
     disclosure = sds_data.get('disclosure_map', {})
     phys = sds_data.get('phys_props', {})
+    phys_methods = sds_data.get('phys_methods', {})
     rev = sds_data.get('revision', {})
     p_data = sds_data.get('p_codes', {})
     eco = sds_data.get('eco', {})
@@ -1248,7 +1250,27 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     def _pv(key, unit=''):
         v = phys.get(key)
         if v is None or v == '': return na
-        return f"{v} {unit}".strip() if unit else str(v)
+        val_str = f"{v} {unit}".strip() if unit else str(v)
+        # KKDİK Ek-2 §9: hesaplanmış değerler için yöntem notu (REACH Annex II zorunlu)
+        pm = phys_methods.get(key, {})
+        if pm:
+            std = _re.sub(r'<[^>]+>', '', pm.get('standard') or '').strip()
+            if std and ' / ' in std:
+                std = std.split(' / ')[0].strip()   # ilk standardı al (kısa tut)
+            err = pm.get('error_pct')
+            if pm.get('measured'):
+                note_parts = ['ölçülen']
+                if std and std not in ('', '—'):
+                    note_parts.append(std)
+            else:
+                note_parts = ['hesaplanmış']
+                if std and std not in ('', '—'):
+                    note_parts.append(std)
+                if err:
+                    note_parts.append(f'±%{err}')
+            note = ' – '.join(note_parts)
+            val_str += f'<br/><font size="6" color="#888888">{note}</font>'
+        return val_str
 
     _mp_lbl  = 'Donma/Erime Noktası' if lang=='TR' else 'Melting/Freezing Point'
     _rd_lbl  = 'Bağıl Yoğunluk (su=1)' if lang=='TR' else 'Relative Density (water=1)'

@@ -2656,6 +2656,22 @@ async function _doPdfGenerate() {
     if (!flatPhys.odour_threshold && _val(tp.odor_threshold)) flatPhys.odour_threshold = _val(tp.odor_threshold);
     if (!flatPhys.decomposition_temp && _val(tp.decomp_temp)) flatPhys.decomposition_temp = _val(tp.decomp_temp);
 
+    // phys_methods — KKDİK Ek-2 §9 zorunluluğu: hesaplanmış değerler için yöntem/standart
+    // Her özellik için { measured, method, standard, error_pct } meta bilgisi PDF'e aktarılır
+    const physMethods = {};
+    const _methodKeys = ['density','boiling_point','flash_point','lel','uel',
+                         'vapor_pressure','vapor_density','viscosity','solubility'];
+    _methodKeys.forEach(k => {
+      const tprop = tp[k];
+      if (!tprop || typeof tprop !== 'object') return;
+      physMethods[k] = {
+        measured:  tprop.measured  || false,
+        method:    tprop.method    || '',
+        standard:  tprop.standard  || '',
+        error_pct: tprop.error?.pct ?? null,
+      };
+    });
+
     // clp_passed — her H kodu için h_class + kesme değeri bilgisi
     // h_class'ı bileşen hazards listesinden bul
     const hClassMap = {};
@@ -2815,6 +2831,7 @@ async function _doPdfGenerate() {
       transport:    transport || {},
       phys_props:   flatPhys,
       phys_sources: _getPhysSources(),  // 'theo' | 'user' | '' — her alan için kaynak
+      phys_methods: physMethods,        // KKDİK Ek-2 §9: her alan için yöntem/standart meta
       eco: {
         aquatic:      eco?.aquatic   || null,
         h_codes:      eco?.h_codes   || [],

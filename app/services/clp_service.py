@@ -410,11 +410,22 @@ CUTOFFS = {
 # UYARI: Bu değerler kategori SINIR değerleri değil, ATE formülünde kullanılan
 # NOKTA TAHMİNLERİDİR. Örn: Oral Kat.4 üst sınırı 2000 mg/kg, nokta tahmini 500 mg/kg.
 ATE_DEFAULTS = {
-    'oral':             {'Acute Tox. 1': 0.5,  'Acute Tox. 2': 5,    'Acute Tox. 3': 100,  'Acute Tox. 4': 500},
-    'dermal':           {'Acute Tox. 1': 0.5,  'Acute Tox. 2': 50,   'Acute Tox. 3': 200,  'Acute Tox. 4': 1000},
-    'inhalation_dust':  {'Acute Tox. 1': 0.05, 'Acute Tox. 2': 0.5,  'Acute Tox. 3': 1.0,  'Acute Tox. 4': 5.0},
-    'inhalation_vapour':{'Acute Tox. 1': 0.05, 'Acute Tox. 2': 0.5,  'Acute Tox. 3': 3.0,  'Acute Tox. 4': 11.0},
-    'inhalation':       {'Acute Tox. 1': 0.05, 'Acute Tox. 2': 0.5,  'Acute Tox. 3': 1.0,  'Acute Tox. 4': 5.0},
+    'oral':             {'Acute Tox. 1': 0.5,   'Acute Tox. 2': 5,    'Acute Tox. 3': 100,  'Acute Tox. 4': 500},
+    'dermal':           {'Acute Tox. 1': 5,     'Acute Tox. 2': 50,   'Acute Tox. 3': 300,  'Acute Tox. 4': 1100},
+    'inhalation_dust':  {'Acute Tox. 1': 0.005, 'Acute Tox. 2': 0.05, 'Acute Tox. 3': 0.5,  'Acute Tox. 4': 1.5},
+    'inhalation_vapour':{'Acute Tox. 1': 0.05,  'Acute Tox. 2': 0.5,  'Acute Tox. 3': 3.0,  'Acute Tox. 4': 11.0},
+    'inhalation':       {'Acute Tox. 1': 0.05,  'Acute Tox. 2': 0.5,  'Acute Tox. 3': 3.0,  'Acute Tox. 4': 11.0},
+}
+
+# ATE sınıflandırma eşikleri — CLP Annex I Tablo 3.1.1 (kategori üst sınırları)
+# ATE_DEFAULTS ile KARIŞTIRILMAMALI: ATE_DEFAULTS formül için nokta tahmini,
+# ATE_THRESHOLDS ise hesaplanan karışım ATE'sini kategoriye çevirmek için kullanılır.
+ATE_THRESHOLDS = {
+    'oral':             {1: 5,     2: 50,    3: 300,   4: 2000},
+    'dermal':           {1: 50,    2: 200,   3: 1000,  4: 2000},
+    'inhalation_dust':  {1: 0.05,  2: 0.5,   3: 1.0,   4: 5.0},
+    'inhalation_vapour':{1: 0.5,   2: 2.0,   3: 10.0,  4: 20.0},
+    'inhalation':       {1: 0.5,   2: 2.0,   3: 10.0,  4: 20.0},
 }
 
 ATE_HCODES = {
@@ -555,11 +566,13 @@ async def calculate_clp(db: AsyncSession, components: List[Any]) -> Dict:
         if total <= 0:
             continue
         mix_ate = 100 / total
-        limits = ATE_DEFAULTS.get(route, {})
+        # Sınıflandırma için CLP Tablo 3.1.1 kategori üst sınırlarını kullan
+        # (ATE_DEFAULTS nokta tahminleri FORMÜL için, SINIFLANDIRMA için değil)
+        thresholds = ATE_THRESHOLDS.get(route, {})
         cat_num = None
         for n in [1, 2, 3, 4]:
             # <= kullanıyoruz: tam eşit değerler de geçiyor
-            if mix_ate <= limits.get(f'Acute Tox. {n}', float('inf')):
+            if mix_ate <= thresholds.get(n, float('inf')):
                 cat_num = n
                 break
         if cat_num:
@@ -570,7 +583,7 @@ async def calculate_clp(db: AsyncSession, components: List[Any]) -> Dict:
                 'cas': 'KARIŞIM', 'name': f'ATE ({route})',
                 'conc': '-', 'h_class': f'Acute Tox. {cat_num}', 'h_code': hcode,
                 'cutoff_used': f'ATE={mix_ate:.1f}',
-                'passed': True, 'reason': f'Karışım ATE={mix_ate:.1f} ≤ {limits.get(f"Acute Tox. {cat_num}")}',
+                'passed': True, 'reason': f'Karışım ATE={mix_ate:.1f} ≤ {thresholds.get(cat_num)} (Tablo 3.1.1 Kat{cat_num})',
             })
             passed_h_codes.add(hcode)
             passed_pictograms.add(pic)

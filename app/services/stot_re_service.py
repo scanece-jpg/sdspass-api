@@ -178,12 +178,12 @@ def calculate_stot_re(comp_list: List[Dict]) -> Dict:
             sources = sources + general.get('sources', [])
 
         # CLP Tablo 3.9.4 cut-off'lar
-        # STOT RE 1: Cat1 bileşen ≥ 1%
-        # STOT RE 2: Cat1 bileşen ≥ 1% (daha hassas) veya Cat2 ≥ 10%
-        if cat1_sum >= 1.0:
+        # STOT RE 1 (H372): Cat1 bileşen toplamı ≥ %10
+        # STOT RE 2 (H373): Cat1 toplamı %1-10 VEYA Cat2 bileşen toplamı ≥ %10
+        if cat1_sum >= 10.0:
             h = 'H372'
             h_class = 'STOT RE 1'
-            reason = (f"{organ_label}: STOT RE 1 bileşen toplamı %{cat1_sum:.2f} ≥ %1.0"
+            reason = (f"{organ_label}: STOT RE 1 bileşen toplamı %{cat1_sum:.2f} ≥ %10.0"
                      + (f" (genel dahil)" if organ != GENERAL_ORGAN and gen_cat1 > 0 else ""))
             passed_h_codes.add(h)
             results.append({
@@ -191,11 +191,16 @@ def calculate_stot_re(comp_list: List[Dict]) -> Dict:
                 'cat1_sum': cat1_sum, 'cat2_sum': cat2_sum,
                 'reason': reason, 'sources': sources
             })
-        elif cat2_sum >= 10.0:
+        elif cat1_sum >= 1.0 or cat2_sum >= 10.0:
             h = 'H373'
             h_class = 'STOT RE 2'
-            reason = (f"{organ_label}: STOT RE 2 bileşen toplamı %{cat2_sum:.2f} ≥ %10.0"
-                     + (f" (genel dahil)" if organ != GENERAL_ORGAN and gen_cat2 > 0 else ""))
+            if cat1_sum >= 1.0:
+                reason = (f"{organ_label}: STOT RE 1 bileşen toplamı %{cat1_sum:.2f} — "
+                         f"1% ≤ toplam < 10% → karışım STOT RE 2"
+                         + (f" (genel dahil)" if organ != GENERAL_ORGAN and gen_cat1 > 0 else ""))
+            else:
+                reason = (f"{organ_label}: STOT RE 2 bileşen toplamı %{cat2_sum:.2f} ≥ %10.0"
+                         + (f" (genel dahil)" if organ != GENERAL_ORGAN and gen_cat2 > 0 else ""))
             passed_h_codes.add(h)
             results.append({
                 'organ': organ_label, 'h_code': h, 'h_class': h_class,
@@ -227,40 +232,48 @@ def calculate_stot_re(comp_list: List[Dict]) -> Dict:
         cat2_only = organ_sums[organ]['cat2']
         organ_label = organ.title()
 
-        if cat1_only >= 1.0:
+        if cat1_only >= 10.0:
             analytic_h_codes.add('H372')
             analytic_results.append({
                 'organ': organ_label, 'h_code': 'H372', 'h_class': 'STOT RE 1',
                 'cat1_sum': cat1_only, 'cat2_sum': cat2_only,
-                'reason': f"{organ_label}: Sadece eşleşen Cat1=%{cat1_only:.2f} ≥ %1.0",
-                'general_excluded': gen_cat1  # Ne kadar genel grup dışarıda bırakıldı
+                'reason': f"{organ_label}: Sadece eşleşen Cat1=%{cat1_only:.2f} ≥ %10.0",
+                'general_excluded': gen_cat1
             })
-        elif cat2_only >= 10.0:
+        elif cat1_only >= 1.0 or cat2_only >= 10.0:
             analytic_h_codes.add('H373')
+            if cat1_only >= 1.0:
+                reason = f"{organ_label}: Sadece eşleşen Cat1=%{cat1_only:.2f} — 1% ≤ toplam < 10% → STOT RE 2"
+            else:
+                reason = f"{organ_label}: Sadece eşleşen Cat2=%{cat2_only:.2f} ≥ %10.0"
             analytic_results.append({
                 'organ': organ_label, 'h_code': 'H373', 'h_class': 'STOT RE 2',
                 'cat1_sum': cat1_only, 'cat2_sum': cat2_only,
-                'reason': f"{organ_label}: Sadece eşleşen Cat2=%{cat2_only:.2f} ≥ %10.0",
+                'reason': reason,
                 'general_excluded': gen_cat2
             })
 
     # Genel grup kendi başına değerlendir
-    if gen_cat1 >= 1.0:
+    if gen_cat1 >= 10.0:
         analytic_h_codes.add('H372')
         analytic_results.append({
             'organ': 'Genel (organ belirtilmemiş)',
             'h_code': 'H372', 'h_class': 'STOT RE 1',
             'cat1_sum': gen_cat1, 'cat2_sum': gen_cat2,
-            'reason': f"Genel: Cat1=%{gen_cat1:.2f} ≥ %1.0 (organ bilinmiyor)",
+            'reason': f"Genel: Cat1=%{gen_cat1:.2f} ≥ %10.0 (organ bilinmiyor)",
             'general_excluded': 0
         })
-    elif gen_cat2 >= 10.0:
+    elif gen_cat1 >= 1.0 or gen_cat2 >= 10.0:
         analytic_h_codes.add('H373')
+        if gen_cat1 >= 1.0:
+            gen_reason = f"Genel: Cat1=%{gen_cat1:.2f} — 1% ≤ toplam < 10% → STOT RE 2 (organ bilinmiyor)"
+        else:
+            gen_reason = f"Genel: Cat2=%{gen_cat2:.2f} ≥ %10.0 (organ bilinmiyor)"
         analytic_results.append({
             'organ': 'Genel (organ belirtilmemiş)',
             'h_code': 'H373', 'h_class': 'STOT RE 2',
             'cat1_sum': gen_cat1, 'cat2_sum': gen_cat2,
-            'reason': f"Genel: Cat2=%{gen_cat2:.2f} ≥ %10.0 (organ bilinmiyor)",
+            'reason': gen_reason,
             'general_excluded': 0
         })
 

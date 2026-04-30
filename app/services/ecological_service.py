@@ -439,7 +439,7 @@ def assess_pbt(
             t_result = "Evet (CMR)"
 
         is_pbt = (p_result.startswith("Evet") and
-                  b_result.startswith("Evet") or b_result.startswith("Olası") and
+                  (b_result.startswith("Evet") or b_result.startswith("Olası")) and
                   t_result.startswith("Evet"))
         is_vpvb = cas in VPVB_CAS
 

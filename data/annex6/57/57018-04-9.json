@@ -1,6 +1,6 @@
 {
   "cas": "57018-04-9",
-  "name": "tolclofos-methyl (ISO); O-(2,6-dichloro-p-tolyl) O,O-dimethyl thiophosphate",
+  "name": "tolclofos-methyl (ISO);\nO-(2,6-dichloro-p-tolyl)-O,O-dimethyl thiophosphate",
   "name_tr": "",
   "ec_no": "260-515-3",
   "index_no": "015-113-00-0",
@@ -21,10 +21,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1,
-      "chronic": 1
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

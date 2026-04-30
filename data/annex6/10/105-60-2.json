@@ -1,6 +1,6 @@
 {
   "cas": "105-60-2",
-  "name": "Îµ-caprolactam",
+  "name": "ε-caprolactam",
   "name_tr": "",
   "ec_no": "203-313-2",
   "index_no": "613-069-00-2",
@@ -9,11 +9,11 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {

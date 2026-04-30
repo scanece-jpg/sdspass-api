@@ -22,7 +22,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 (immune system)"
+        "h_code": "H372(immune_system)"
       },
       {
         "class": "Skin Irrit. 2",
@@ -39,15 +39,15 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS08",
       "GHS06",
+      "GHS08",
       "GHS05"
     ],
     "h_codes": [
       "H341",
       "H360FD",
       "H301",
-      "H372 (immune system)",
+      "H372(immune_system)",
       "H315",
       "H318"
     ],

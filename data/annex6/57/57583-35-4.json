@@ -4,7 +4,7 @@
   "name_tr": "",
   "ec_no": "260-829-0",
   "index_no": "050-028-00-2",
-  "atp": "ATP06",
+  "atp": "ATP6",
   "notes": [],
   "classification": {
     "hazards": [
@@ -18,7 +18,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 (nervous system, immune system)"
+        "h_code": "H372(nervous_system,_immune_system)"
       },
       {
         "class": "Skin Sens. 1A",
@@ -37,7 +37,7 @@
     "h_codes": [
       "H361d",
       "H302",
-      "H372 (nervous system, immune system)",
+      "H372(nervous_system,_immune_system)",
       "H317"
     ],
     "suppl_h": []

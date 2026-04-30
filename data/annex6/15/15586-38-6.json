@@ -4,7 +4,7 @@
   "name_tr": "",
   "ec_no": "239-646-5",
   "index_no": "028-047-00-2",
-  "atp": "ATP02",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -18,11 +18,11 @@
       },
       {
         "class": "Repr. 1B",
-        "h_code": "H360D ***"
+        "h_code": "H360D"
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 **"
+        "h_code": "H372"
       },
       {
         "class": "Resp. Sens. 1",
@@ -41,10 +41,27 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1
-    },
-    "scl_limits": []
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H372",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H373",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H317",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
@@ -55,8 +72,8 @@
     "h_codes": [
       "H350i",
       "H341",
-      "H360D ***",
-      "H372 **",
+      "H360D",
+      "H372",
       "H334",
       "H317",
       "H400",

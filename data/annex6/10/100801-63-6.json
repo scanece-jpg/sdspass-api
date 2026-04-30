@@ -1,11 +1,13 @@
 {
   "cas": "100801-63-6",
-  "name": "Hydrocarbon oils, arom., mixed with polyethylene and polypropylene, pyrolyzed, light oil fraction; Heat Treatment Products; [The oil obtained from the heat treatment of a polyethylene/polypropylene reaction mass with coal tar pitch or aromatic oils. It consists predominantly of benzene and its homologs boiling in a range of approximately 70 Â°C to 120 Â°C (158 Â°F to 248 Â°F).]",
+  "name": "Hydrocarbon oils, arom., mixed with polyethylene and polypropylene, pyrolyzed, light oil fraction; Heat Treatment Products; [The oil obtained from the heat treatment of a polyethylene/polypropylene reaction mass with coal tar pitch or aromatic oils.  It consists predominantly of benzene and its homologs boiling in a range of approximately 70°C to 120°C (158°F to 248°F).]",
   "name_tr": "",
   "ec_no": "309-745-9",
   "index_no": "648-134-00-4",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "J M"
+  ],
   "classification": {
     "hazards": [
       {

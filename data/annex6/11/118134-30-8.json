@@ -2,7 +2,7 @@
   "cas": "118134-30-8",
   "name": "spiroxamine (ISO); 8-tert-butyl-1,4-dioxaspiro[4.5]decan-2-ylmethyl(ethyl)(propyl)amine",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "612-150-00-X",
   "atp": "ATP10",
   "notes": [],
@@ -26,7 +26,7 @@
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373 (eye)"
+        "h_code": "H373(eye)"
       },
       {
         "class": "Skin Irrit. 2",
@@ -45,10 +45,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 100,
-      "chronic": 100
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -63,7 +60,7 @@
       "H332",
       "H312",
       "H302",
-      "H373 (eye)",
+      "H373(eye)",
       "H315",
       "H317",
       "H400",

@@ -1,10 +1,10 @@
 {
   "cas": "375-95-1",
-  "name": "perfluorononan-1-oic acid [1]\nperfluorononan-1-oic acid, sodium salts [2]\nperfluorononan-1-oic acid, ammonium salts [3]",
+  "name": "perfluorononan-1-oic acid [1]\nperfluorononan-1-oic acid sodium salt [2]\nperfluorononan-1-oic acid ammonium salt [3]",
   "name_tr": "",
-  "ec_no": "206-801-3",
+  "ec_no": "206-801-3 [1]",
   "index_no": "607-718-00-9",
-  "atp": "ATP09",
+  "atp": "ATP9",
   "notes": [],
   "classification": {
     "hazards": [
@@ -30,7 +30,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 (liver, thymus, spleen)"
+        "h_code": "H372(liver,_thymus,_spleen)"
       },
       {
         "class": "Eye Dam. 1",
@@ -53,7 +53,7 @@
       "H362",
       "H332",
       "H302",
-      "H372 (liver, thymus, spleen)",
+      "H372(liver,_thymus,_spleen)",
       "H318"
     ],
     "suppl_h": []

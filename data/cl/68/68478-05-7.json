@@ -4,23 +4,28 @@
   "name_tr": "Gazlar (petrol), ısıl parçalanma damıtığı; Rafineri gazı; [Bir ısıl parçalanma prosesi ürünlerinin damıtılmasından üretilen kompleks bir bileşim. Hidrojen, hidrojen sülfür, karbon monoksit, karbon dioksit ve büyük çoğunlukla C1 ila C6 aralığında karbon sayısına sahip hidrokarbonlardan oluşur.].",
   "ec_no": "270-789-6",
   "index_no": "649-139-00-4",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

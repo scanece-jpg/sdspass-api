@@ -1,6 +1,6 @@
 {
   "cas": "989-38-8",
-  "name": "9-[2-(ethoxycarbonyl)phenyl]â€“3,6-bis(ethylamino)â€“2,7-dimethylxanthylium chloride; Basic Red 1",
+  "name": "9-[2-(ethoxycarbonyl)phenyl]–3,6-bis(ethylamino)–2,7-dimethylxanthylium chloride; Basic Red 1",
   "name_tr": "",
   "ec_no": "213-584-9",
   "index_no": "613-348-00-9",
@@ -29,10 +29,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 1
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

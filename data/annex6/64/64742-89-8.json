@@ -1,11 +1,13 @@
 {
   "cas": "64742-89-8",
-  "name": "Solvent naphtha (petroleum), light aliph.; Low boiling point naphtha; [A complex combination of hydrocarbons obtained from the distillation of crude oil or natural gasoline. It consists predominantly of saturated hydrocarbons having carbon numbers predominantly in the range of C5 through C10 and boiling in the range of approximately 35 Â°C to 160 Â°C (95 Â°F to 320 Â°F).]",
+  "name": "Solvent naphtha (petroleum), light aliph.; Low boiling point naphtha; [A complex combination of hydrocarbons obtained from the distillation of crude oil or natural gasoline.  It consists predominantly of saturated hydrocarbons having carbon numbers predominantly in the range of C5 through C10 and boiling in the range of approximately 35°C to 160°C (95°F to 320°F).]",
   "name_tr": "",
   "ec_no": "265-192-2",
   "index_no": "649-267-00-0",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

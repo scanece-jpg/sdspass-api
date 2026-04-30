@@ -2,9 +2,9 @@
   "cas": "121158-58-5",
   "name": "phenol, dodecyl-, branched [1]\nphenol, 2-dodecyl-, branched [2]\nphenol, 3-dodecyl-, branched [3]\nphenol, 4-dodecyl-, branched [4]\nphenol, (tetrapropenyl) derivatives [5]",
   "name_tr": "",
-  "ec_no": "310-154-3",
+  "ec_no": "310-154-3 [1]",
   "index_no": "604-092-00-9",
-  "atp": "ATP09",
+  "atp": "ATP9",
   "notes": [],
   "classification": {
     "hazards": [
@@ -29,10 +29,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

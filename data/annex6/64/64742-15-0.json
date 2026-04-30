@@ -1,11 +1,13 @@
 {
   "cas": "64742-15-0",
-  "name": "Naphtha (petroleum), acid-treated; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons obtained as a raffinate from a sulfuric acid treating process. It consists of hydrocarbons having carbon numbers predominantly in the range of C7 through C12 and boiling in the range of approximately 90 Â°C to 230 Â°C (194 Â°F to 446 Â°F).]",
+  "name": "Naphtha (petroleum), acid-treated; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons obtained as a raffinate from a sulfuric acid treating process.  It consists of hydrocarbons having carbon numbers predominantly in the range of C7 through C12 and boiling in the range of approximately 90°C to 230°C (194°F to 446°F).]",
   "name_tr": "",
   "ec_no": "265-115-2",
   "index_no": "649-351-00-7",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

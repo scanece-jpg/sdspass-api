@@ -4,7 +4,7 @@
   "name_tr": "",
   "ec_no": "421-960-0",
   "index_no": "607-375-00-5",
-  "atp": "ATP09",
+  "atp": "ATP9",
   "notes": [],
   "classification": {
     "hazards": [
@@ -26,7 +26,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 (blood)"
+        "h_code": "H372(blood)"
       },
       {
         "class": "Aquatic Acute 1",
@@ -37,11 +37,27 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 10
-    },
-    "scl_limits": []
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H360",
+        "class": "",
+        "c_min": 3.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H372",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H373",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
@@ -55,7 +71,7 @@
       "H330",
       "H310",
       "H300",
-      "H372 (blood)",
+      "H372(blood)",
       "H400",
       "H410"
     ],

@@ -1,11 +1,13 @@
 {
   "cas": "101316-49-8",
-  "name": "Distillates (coal tar), pitch; Heavy Anthracene Oil; [The oil obtained from condensation of the vapors from the heat treatment of pitch. Composed primarily of two- to four-ring aromatic compounds boiling in the range of 200 Â°C to greater than 400 Â°C (392 Â°F to greater than 752 Â°F).]",
+  "name": "Distillates (coal tar), pitch; Heavy Anthracene Oil; [The oil obtained from condensation of the vapors from the heat treatment of pitch. Composed primarily of two- to four-ring aromatic compounds boiling in the range of 200 °C to greater than 400 °C (392 °F to greater than 752 °F).]",
   "name_tr": "",
   "ec_no": "309-855-7",
   "index_no": "648-049-00-2",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "M"
+  ],
   "classification": {
     "hazards": [
       {

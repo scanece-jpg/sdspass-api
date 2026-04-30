@@ -1,15 +1,17 @@
 {
   "cas": "71566-50-2",
-  "name": "reaction mass of: 1-methyl-1-(3-(1-methylethyl)phenyl)ethyl-1-methyl-1-phenylethylperoxide, 63 % by weight; 1-methyl-1-(4-(1-methylethyl)phenyl)ethyl-1-methyl-1-phenylethylperoxide, 31 % by weight",
+  "name": "reaction mass of: 1-methyl-1-(3-(1-methylethyl)phenyl)ethyl-1-methyl-1-phenylethylperoxide, 63 % by weight; 1-methyl-1-(4-(1-methylethyl)phenyl)ethyl-1-methyl-1-phenylethylperoxide, 31 % by weight",
   "name_tr": "",
   "ec_no": "410-840-3",
   "index_no": "617-018-00-5",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "T"
+  ],
   "classification": {
     "hazards": [
       {
-        "class": "Org. Perox. C ****",
+        "class": "Org. Perox. C",
         "h_code": "H242"
       },
       {

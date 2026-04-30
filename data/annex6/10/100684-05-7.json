@@ -4,8 +4,10 @@
   "name_tr": "",
   "ec_no": "309-675-9",
   "index_no": "649-548-00-8",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "L"
+  ],
   "classification": {
     "hazards": [
       {

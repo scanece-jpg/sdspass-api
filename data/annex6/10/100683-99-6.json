@@ -1,11 +1,13 @@
 {
   "cas": "100683-99-6",
-  "name": "Distillates (petroleum), intermediate paraffinic, clay-treated; Gasoil â€” unspecified; [A complex combination of hydrocarbons obtained by the treatment of petroleum with bleaching earth for the removal of trace polar constituents and impurities. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C16 through C36.]",
+  "name": "Distillates (petroleum), intermediate paraffinic, clay-treated; Gasoil - unspecified; [A complex combination of hydrocarbons obtained by the treatment of petroleum with bleaching earth for the removal of trace polar constituents and impurities. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C16 through C36.]",
   "name_tr": "",
   "ec_no": "309-669-6",
   "index_no": "649-241-00-9",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "N"
+  ],
   "classification": {
     "hazards": [
       {

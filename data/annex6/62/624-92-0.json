@@ -26,7 +26,7 @@
       },
       {
         "class": "STOT SE 1",
-        "h_code": "H370 (inhalation) (upper respiratory tract)"
+        "h_code": "H370(upper_respiratory_tract)"
       },
       {
         "class": "Eye Irrit. 2",
@@ -45,10 +45,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -64,7 +61,7 @@
       "H331",
       "H301",
       "H336",
-      "H370 (inhalation) (upper respiratory tract)",
+      "H370(upper_respiratory_tract)",
       "H319",
       "H317",
       "H400",

@@ -22,7 +22,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 (nervous system)"
+        "h_code": "H372(nervous_system)"
       },
       {
         "class": "Eye Irrit. 2",
@@ -42,7 +42,7 @@
       "H360FD",
       "H362",
       "H336",
-      "H372 (nervous system)",
+      "H372(nervous_system)",
       "H319"
     ],
     "suppl_h": []

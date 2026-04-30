@@ -10,7 +10,7 @@
     "hazards": [
       {
         "class": "Repr. 1B",
-        "h_code": "H360F ***"
+        "h_code": "H360F"
       },
       {
         "class": "Eye Irrit. 2",
@@ -32,11 +32,10 @@
     "signal": "Danger",
     "pictograms": [
       "GHS08",
-      "GHS07",
       "GHS09"
     ],
     "h_codes": [
-      "H360F ***",
+      "H360F",
       "H319",
       "H400",
       "H410"

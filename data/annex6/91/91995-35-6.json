@@ -1,11 +1,13 @@
 {
   "cas": "91995-35-6",
-  "name": "Distillates (coal), coal tar-residual pyrolysis oils, naphthalene oils; Redistillates; [The redistillate obtained from the fractional distillation of bituminous coal high temperature tar and pyrolysis residual oils and boiling in the range of approximately 190 Â°C to 270 Â°C (374 Â°F to 518 Â°F). Composed primarily of substituted dinuclear aromatics.]",
+  "name": "Distillates (coal), coal tar-residual pyrolysis oils, naphthalene oils; Redistillates; [The redistillate obtained from the fractional distillation of bituminous coal high temperature tar and pyrolysis residual oils and boiling in the range of approximately 190°C to 270°C (374°F to 518°F). Composed primarily of substituted dinuclear aromatics.]",
   "name_tr": "",
   "ec_no": "295-295-8",
   "index_no": "648-037-00-7",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "J"
+  ],
   "classification": {
     "hazards": [
       {

@@ -1,8 +1,8 @@
 {
   "cas": "114311-32-9",
-  "name": "imazamox (ISO); (RS)-2-(4-isopropyl-4-methyl-5-oxo-2-imidazolin-2-yl)-5-methoxymethylnicotinic acid",
+  "name": "imazamox (ISO);\n(RS)-2-(4-isopropyl-4-methyl-5-oxo-2-imidazolin-2-yl)-5-methoxymethylnicotinic acid",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "613-208-00-7",
   "atp": "ATP17",
   "notes": [],
@@ -21,10 +21,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

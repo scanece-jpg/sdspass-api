@@ -4,23 +4,28 @@
   "name_tr": "Gazlar (petrol), katalitik- parçalanmış gaz yağı propan gidericisi altlar, C4-zengin asit içermeyen; Petrol gazı; [Katalitik olarak parçalanmış gaz yağı hidrokarbon akışının ayrımsal damıtılmasıve hidrojen sülfürün ve diğer asidik bileşenlerin uzaklaştırılması için muamele edilmesi ile elde edilen hidrokarbonların kompleks bir bileşimi. C3 ila C5 aralığında, büyük çoğunlukla C4, karbon sayısına sahip hidrokarbonlardan oluşur.]",
   "ec_no": "270-752-4",
   "index_no": "649-208-00-9",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

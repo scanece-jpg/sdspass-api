@@ -1,11 +1,13 @@
 {
   "cas": "68603-00-9",
-  "name": "Distillates (petroleum), thermal cracked naphtha and gas oil; Low boiling point thermally cracked naphtha; [A complex combination of hydrocarbons produced by distillation of thermally cracked naphtha and/or gas oil. It consists predominantly of olefinic hydrocarbons having a carbon number of C5 and boiling in the range of approximately 33 Â°C to 60 Â°C (91 Â°F to 140 Â°F).]",
+  "name": "Distillates (petroleum), thermal cracked naphtha and gas oil; Low boiling point thermally cracked naphtha; [A complex combination of hydrocarbons produced by distillation of thermally cracked naphtha and/or gas oil.  It consists predominantly of olefinic hydrocarbons having a carbon number of C5 and boiling in the range of approximately 33°C to 60°C (91°F to 140°F).]",
   "name_tr": "",
   "ec_no": "271-631-9",
   "index_no": "649-322-00-9",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

@@ -1,6 +1,6 @@
 {
   "cas": "25068-38-6",
-  "name": "reaction product: bisphenol-A-(epichlorhydrin); epoxy resin (number average molecular weight â‰¤ 700)",
+  "name": "reaction product: bisphenol-A-(epichlorhydrin); epoxy resin (number average molecular weight ≤ 700)",
   "name_tr": "",
   "ec_no": "500-033-5",
   "index_no": "603-074-00-8",
@@ -26,7 +26,20 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H319",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H315",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Warning",

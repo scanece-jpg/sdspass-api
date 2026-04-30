@@ -7,37 +7,58 @@
   "atp": "ATP14",
   "notes": [
     "U",
-    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
+    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi.",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1B",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
+        "h_code": "H340"
+      },
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360Fd"
+      },
+      {
+        "class": "Acute Tox. 3",
         "h_code": "H331"
       },
       {
-        "class": "Skin Corr. 1",
-        "h_code": "H318"
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
       },
       {
-        "class": "Eye Irrit. 2",
+        "class": "STOT SE 3",
         "h_code": "H335"
       },
       {
+        "class": "STOT SE 3",
+        "h_code": "H336"
+      },
+      {
         "class": "STOT RE 1",
+        "h_code": "H372(nervous_system)"
+      },
+      {
+        "class": "Skin Corr. 1",
         "h_code": "H314"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
       }
     ],
     "m_factors": {},
@@ -47,7 +68,7 @@
     "signal": "Danger",
     "pictograms": [
       "GHS02",
-      "GHS04",
+      "GHS05",
       "GHS06",
       "GHS08"
     ],
@@ -55,10 +76,14 @@
       "H220",
       "H350",
       "H340",
+      "H360Fd",
       "H331",
-      "H318",
+      "H301",
       "H335",
-      "H314"
+      "H336",
+      "H372(nervous_system)",
+      "H314",
+      "H318"
     ],
     "suppl_h": []
   }

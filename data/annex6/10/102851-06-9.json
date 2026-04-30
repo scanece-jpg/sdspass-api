@@ -2,14 +2,14 @@
   "cas": "102851-06-9",
   "name": "tau-fluvalinate (ISO); cyano-(3-phenoxyphenyl)methyl N-[2-chloro-4-(trifluoromethyl)phenyl]-D-valinate",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "607-238-00-X",
   "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {

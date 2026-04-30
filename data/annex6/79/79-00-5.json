@@ -13,15 +13,15 @@
         "h_code": "H351"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H312"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       }
     ],
@@ -40,6 +40,8 @@
       "H312",
       "H302"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH066"
+    ]
   }
 }

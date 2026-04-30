@@ -1,11 +1,13 @@
 {
   "cas": "92062-29-8",
-  "name": "Tar bases, coal, distn. residues; Distillate Bases; [The distillation residue remaining after the distillation of the neutralized, acid-extracted base-containing tar fractions obtained by the distillation of coal tars. It contains chiefly aniline, collidines, quinoline and quinoline derivatives and toluidines.]",
+  "name": "Tar bases, coal, distn. residues; Distillate Bases; [The distillation residue remaining after the distillation of the neutralized, acid-extracted base-containing tar fractions obtained by the distillation of coal tars.  It contains chiefly aniline, collidines, quinoline and quinoline derivatives and toluidines.]",
   "name_tr": "",
   "ec_no": "295-544-0",
   "index_no": "648-133-00-9",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "J M"
+  ],
   "classification": {
     "hazards": [
       {

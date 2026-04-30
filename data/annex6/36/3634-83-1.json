@@ -1,6 +1,6 @@
 {
   "cas": "3634-83-1",
-  "name": "1,3-bis(isocyanatomethyl)benzene; [m-XDI]",
+  "name": "Bis(isocyanatomethyl)benzene; [m-XDI]",
   "name_tr": "",
   "ec_no": "222-852-4",
   "index_no": "615-047-00-8",
@@ -18,7 +18,14 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H317",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",

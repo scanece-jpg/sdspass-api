@@ -1,11 +1,13 @@
 {
   "cas": "90640-87-2",
-  "name": "Distillates (coal tar), light oils, acid exts.; Light Oil Extract Residues, high boiling; [This oil is a complex reaction mass of aromatic hydrocarbons, primarily indene, naphthalene, coumarone, phenol, and o-, m- and p-cresol and boiling in the range of 140 Â°C to 215 Â°C (284 Â°F to 419 Â°F).]",
+  "name": "Distillates (coal tar), light oils, acid exts.; Light Oil Extract Residues, high boiling; [This oil is a complex reaction mass of aromatic hydrocarbons, primarily indene, naphthalene, coumarone, phenol, and o-, m- and p-cresol and boiling in the range of 140°C to 215°C (284°F to 419°F).]",
   "name_tr": "",
   "ec_no": "292-609-5",
   "index_no": "648-022-00-5",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "J"
+  ],
   "classification": {
     "hazards": [
       {

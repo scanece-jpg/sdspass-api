@@ -4,13 +4,13 @@
   "name_tr": "",
   "ec_no": "403-640-2",
   "index_no": "603-197-00-7",
-  "atp": "ATP07",
+  "atp": "ATP7",
   "notes": [],
   "classification": {
     "hazards": [
       {
         "class": "Repr. 2",
-        "h_code": "H361d ***"
+        "h_code": "H361d"
       },
       {
         "class": "Acute Tox. 4",
@@ -25,10 +25,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -39,7 +36,7 @@
       "GHS09"
     ],
     "h_codes": [
-      "H361d ***",
+      "H361d",
       "H302",
       "H400",
       "H410"

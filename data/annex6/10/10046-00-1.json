@@ -2,10 +2,12 @@
   "cas": "10046-00-1",
   "name": "hydroxylammonium hydrogensulfate; hydroxylamine sulfate(1:1) [1]\nhydroxylamine phosphate [2]\nhydroxylamine dihydrogenphosphate [3]\nhydroxylamine 4-methylbenzenesulfonate [4]",
   "name_tr": "",
-  "ec_no": "233-154-4",
+  "ec_no": "233-154-4 [1]\n244-077-0 [2]\n242-818-2 [3]\n258-872-5 [4]",
   "index_no": "612-237-00-2",
-  "atp": "ATP01corr",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "T"
+  ],
   "classification": {
     "hazards": [
       {
@@ -17,16 +19,16 @@
         "h_code": "H351"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H312"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Skin Irrit. 2",
@@ -61,7 +63,7 @@
       "H351",
       "H312",
       "H302",
-      "H373 **",
+      "H373",
       "H315",
       "H319",
       "H317",

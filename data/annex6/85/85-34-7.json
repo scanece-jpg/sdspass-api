@@ -1,6 +1,6 @@
 {
   "cas": "85-34-7",
-  "name": "chlorfenac(ISO); 2,3,6-trichlorophenylacetic acid",
+  "name": "chlorfenac (ISO); 2,3,6-trichlorophenylacetic acid",
   "name_tr": "",
   "ec_no": "201-599-3",
   "index_no": "607-074-00-9",
@@ -9,7 +9,7 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {

@@ -1,11 +1,13 @@
 {
   "cas": "68477-89-4",
-  "name": "Distillates (petroleum), depentanizer overheads; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons obtained from a catalytic cracked gas stream. It consists of aliphatic hydrocarbons having carbon numbers predominantly in the range of C4 through C6.]",
+  "name": "Distillates (petroleum), depentanizer overheads; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons obtained from a catalytic cracked gas stream.  It consists of aliphatic hydrocarbons having carbon numbers predominantly in the range of C4 through C6.]",
   "name_tr": "",
   "ec_no": "270-771-8",
   "index_no": "649-363-00-2",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

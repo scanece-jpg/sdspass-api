@@ -2,14 +2,14 @@
   "cas": "696-33-3",
   "name": "iodoxybenzene",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "053-003-00-4",
-  "atp": "ATP01corr",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Expl. ****",
+        "class": "Expl.",
         "h_code": "****"
       }
     ],

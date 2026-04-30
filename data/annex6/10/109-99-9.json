@@ -4,7 +4,7 @@
   "name_tr": "",
   "ec_no": "203-726-8",
   "index_no": "603-025-00-0",
-  "atp": "ATP03",
+  "atp": "ATP3",
   "notes": [],
   "classification": {
     "hazards": [
@@ -26,14 +26,27 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H335",
+        "class": "",
+        "c_min": 25.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H319",
+        "class": "",
+        "c_min": 25.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
     "pictograms": [
       "GHS02",
-      "GHS08",
-      "GHS07"
+      "GHS07",
+      "GHS08"
     ],
     "h_codes": [
       "H225",
@@ -41,6 +54,8 @@
       "H335",
       "H319"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH019"
+    ]
   }
 }

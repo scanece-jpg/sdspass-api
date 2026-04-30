@@ -1,6 +1,6 @@
 {
   "cas": "13684-56-5",
-  "name": "desmedipham (ISO); ethyl 3-phenylcarbamoyloxyphenylcarbamate",
+  "name": "desmedipham (ISO);\nethyl 3-phenylcarbamoyloxyphenylcarbamate",
   "name_tr": "",
   "ec_no": "237-198-5",
   "index_no": "616-113-00-9",
@@ -21,10 +21,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

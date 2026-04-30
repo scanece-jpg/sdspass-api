@@ -1,6 +1,6 @@
 {
   "cas": "64359-81-5",
-  "name": "4,5-dichloro-2-octyl-2H-isothiazol-3-one; [DCOIT]",
+  "name": "4,5-dichloro-2-octyl- 2H-isothiazol-3-one; [DCOIT]",
   "name_tr": "",
   "ec_no": "264-843-8",
   "index_no": "613-335-00-8",
@@ -37,11 +37,27 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 100,
-      "chronic": 100
-    },
-    "scl_limits": []
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H315",
+        "class": "",
+        "c_min": 25.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H319",
+        "class": "",
+        "c_min": 25.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H317",
+        "class": "",
+        "c_min": 15.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
@@ -59,6 +75,8 @@
       "H400",
       "H410"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH071"
+    ]
   }
 }

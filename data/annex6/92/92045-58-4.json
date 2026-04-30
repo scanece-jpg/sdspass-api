@@ -1,11 +1,13 @@
 {
   "cas": "92045-58-4",
-  "name": "Naphtha (petroleum), isomerization, C6-fraction; Low boiling point modified naphtha; [A complex combination of hydrocarbons obtained by distillation of a gasoline which has been catalytically isomerized. It consists predominantly of hexane isomers boiling in the range of approximately 60 Â°C to 66 Â°C (140 Â°F to 151 Â°F).]",
+  "name": "Naphtha (petroleum), isomerization, C6-fraction; Low boiling point modified naphtha; [A complex combination of hydrocarbons obtained by distillation of a gasoline which has been catalytically isomerized.  It consists predominantly of hexane isomers boiling in the range of approximately 60°C to 66°C (140°F to 151°F).]",
   "name_tr": "",
   "ec_no": "295-440-5",
   "index_no": "649-286-00-4",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

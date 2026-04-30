@@ -1,10 +1,10 @@
 {
   "cas": "1582-09-8",
-  "name": "trifluralin (ISO) (containing < 0,5 ppm NPDA); Î±, Î±, Î±-trifluoro-2,6-dinitro-N,N-dipropyl-p-toluidine (containing < 0,5 ppm NPDA); 2,6-dinitro-N,N-dipropyl-4-trifluoromethylaniline (containing < 0,5 ppm NPDA); N,N-dipropyl-2,6-dinitro-4-trifluoromethylaniline (containing < 0,5 ppm NPDA)",
+  "name": "trifluralin (ISO) (containing < 0.5 ppm NPDA); α,α,α-trifluoro-2,6-dinitro-N,N-dipropyl-p-toluidine (containing < 0.5 ppm NPDA); 2,6-dinitro-N,N-dipropyl-4-trifluoromethylaniline (containing < 0.5 ppm NPDA); N,N-dipropyl-2,6-dinitro-4-trifluoromethylaniline (containing < 0.5 ppm NPDA)",
   "name_tr": "",
   "ec_no": "216-428-8",
   "index_no": "609-046-00-1",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -25,9 +25,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

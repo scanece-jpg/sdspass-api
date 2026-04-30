@@ -4,23 +4,28 @@
   "name_tr": "Artık gaz (petrol), parçalanmış damıtık hidrojen muamele edicisi sıyırıcısı; Petrol gazı; [Katalizör varlığında hidrojenle ısıl olarak parçalanmış damıtıkların muamelesinden elde edilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla C1 ila C6aralığında karbon sayısına sahip doymuş hidrokarbonları ağırlıklı olarak içerir.]",
   "ec_no": "269-620-9",
   "index_no": "649-181-00-3",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

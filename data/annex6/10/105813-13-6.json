@@ -1,15 +1,15 @@
 {
   "cas": "105813-13-6",
-  "name": "(-)(3S, 4R)-4-(4-fluorophenyl)-3-(3,4-methylenedioxy-phenoxymethyl)-N-benzylpiperidine hydrochloride",
+  "name": "(-)(3S,4R)-4-(4-fluorophenyl)-3-(3,4-methylenedioxy-phenoxymethyl)-N-benzylpiperidine hydrochloride",
   "name_tr": "",
   "ec_no": "432-360-3",
   "index_no": "613-310-00-1",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {

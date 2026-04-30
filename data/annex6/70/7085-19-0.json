@@ -1,15 +1,15 @@
 {
   "cas": "7085-19-0",
-  "name": "mecoprop (ISO); (RS)-2-(4-chloro-o-tolyloxy)propionic acid; [1]; 2-(4-chloro-2-methylphenoxy)propionic acid [2] [1]\n2-(4-chloro-o-tolyloxy) propionic acid [2]",
+  "name": "mecoprop (ISO); 2-(4-chloro-o-tolyloxy) propionic acid; (RS)-2-(4-chloro-o-tolyloxy)propionic acid [1]\n2-(4-chloro-2-methylphenoxy)propionic acid  [2]",
   "name_tr": "",
-  "ec_no": "202-264-4",
+  "ec_no": "230-386-8 [1]\n202-264-4 [2]",
   "index_no": "607-049-00-2",
   "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
@@ -29,16 +29,14 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 100
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS07",
       "GHS05",
+      "GHS07",
       "GHS09"
     ],
     "h_codes": [

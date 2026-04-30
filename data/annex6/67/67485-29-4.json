@@ -1,6 +1,6 @@
 {
   "cas": "67485-29-4",
-  "name": "5,5-dimethyl-perhydro-pyrimidin-2-one Î±-(4-trifluoromethylstyryl)-Î±-(4-trifluoromethyl)cinnamylidenehydrazone",
+  "name": "5,5-dimethyl-perhydro-pyrimidin-2-one α-(4-trifluoromethylstyryl)-α-(4-trifluoromethyl)cinnamylidenehydrazone",
   "name_tr": "",
   "ec_no": "405-090-9",
   "index_no": "613-181-00-1",
@@ -9,12 +9,12 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 **"
+        "h_code": "H372"
       },
       {
         "class": "Eye Irrit. 2",
@@ -35,13 +35,13 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS07",
       "GHS08",
+      "GHS07",
       "GHS09"
     ],
     "h_codes": [
       "H302",
-      "H372 **",
+      "H372",
       "H319",
       "H400",
       "H410"

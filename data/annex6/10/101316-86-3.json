@@ -1,11 +1,13 @@
 {
   "cas": "101316-86-3",
-  "name": "Tar acids, brown-coal, crude; Crude Phenols; [An acidified alkaline extract of brown coal tar distillate. Composed primarily of phenol and phenol homologs.]",
+  "name": "Tar acids, brown-coal, crude; Crude Phenols; [An acidified alkaline extract of brown coal tar distillate.  Composed primarily of phenol and phenol homologs.]",
   "name_tr": "",
   "ec_no": "309-888-7",
   "index_no": "648-117-00-1",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "J M"
+  ],
   "classification": {
     "hazards": [
       {

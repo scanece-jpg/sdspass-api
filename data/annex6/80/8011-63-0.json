@@ -1,8 +1,8 @@
 {
   "cas": "8011-63-0",
-  "name": "bordeaux mixture; reaction products of copper sulphate with calcium dihydroxide",
+  "name": "bordeaux mixture;\nreaction products of copper sulphate with calcium dihydroxide",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "029-022-00-9",
   "atp": "ATP17",
   "notes": [],
@@ -25,10 +25,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 1
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

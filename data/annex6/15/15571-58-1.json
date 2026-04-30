@@ -14,7 +14,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 (immune system)"
+        "h_code": "H372(immune_system)"
       },
       {
         "class": "Aquatic Acute 1",
@@ -36,7 +36,7 @@
     ],
     "h_codes": [
       "H360D",
-      "H372 (immune system)",
+      "H372(immune_system)",
       "H400",
       "H410"
     ],

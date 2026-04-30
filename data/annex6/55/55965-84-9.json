@@ -2,10 +2,12 @@
   "cas": "55965-84-9",
   "name": "reaction mass of 5-chloro-2-methyl-2H-isothiazol-3-one and 2-methyl-2H-isothiazol-3-one (3:1)",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "613-167-00-5",
   "atp": "ATP13",
-  "notes": [],
+  "notes": [
+    "B"
+  ],
   "classification": {
     "hazards": [
       {
@@ -41,11 +43,21 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 100,
-      "chronic": 100
-    },
-    "scl_limits": []
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H315",
+        "class": "",
+        "c_min": 6.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H319",
+        "class": "",
+        "c_min": 6.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
@@ -64,6 +76,8 @@
       "H400",
       "H410"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH071"
+    ]
   }
 }

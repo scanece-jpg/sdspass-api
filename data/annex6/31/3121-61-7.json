@@ -48,9 +48,9 @@
     "signal": "Danger",
     "pictograms": [
       "GHS02",
-      "GHS08",
+      "GHS05",
       "GHS06",
-      "GHS05"
+      "GHS08"
     ],
     "h_codes": [
       "H226",
@@ -62,6 +62,8 @@
       "H318",
       "H317"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH071"
+    ]
   }
 }

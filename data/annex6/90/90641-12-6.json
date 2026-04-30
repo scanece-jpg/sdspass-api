@@ -1,11 +1,13 @@
 {
   "cas": "90641-12-6",
-  "name": "Naphtha (coal), distn. residues; Light Oil Redistillate, high boiling; [The residue remaining from the distillation of recovered naphtha. Composed primarily of naphthalene and condensation products of indene and styrene.]",
+  "name": "Naphtha (coal), distn. residues; Light Oil Redistillate, high boiling; [The residue remaining from the distillation of recovered naphtha.  Composed primarily of naphthalene and condensation products of indene and styrene.]",
   "name_tr": "",
   "ec_no": "292-636-2",
   "index_no": "648-009-00-4",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "J"
+  ],
   "classification": {
     "hazards": [
       {

@@ -2,9 +2,9 @@
   "cas": "163515-14-8",
   "name": "dimethenamid-P (ISO); 2-chloro-N-(2,4-dimethyl-3-thienyl)-N-[(2S)-1-methoxypropan-2-yl]acetamide",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "616-215-00-3",
-  "atp": "ATP07",
+  "atp": "ATP7",
   "notes": [],
   "classification": {
     "hazards": [
@@ -25,10 +25,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

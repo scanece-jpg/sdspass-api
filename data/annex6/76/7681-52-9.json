@@ -1,11 +1,13 @@
 {
   "cas": "7681-52-9",
-  "name": "sodium hypochlorite, solution â€¦ % Cl active",
+  "name": "sodium hypochlorite, solution ... % Cl active",
   "name_tr": "",
   "ec_no": "231-668-3",
   "index_no": "017-011-00-1",
   "atp": "ATP13",
-  "notes": [],
+  "notes": [
+    "B"
+  ],
   "classification": {
     "hazards": [
       {
@@ -25,11 +27,15 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 1
-    },
-    "scl_limits": []
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H031",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
@@ -43,6 +49,8 @@
       "H400",
       "H410"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH031"
+    ]
   }
 }

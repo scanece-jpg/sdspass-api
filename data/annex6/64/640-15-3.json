@@ -9,12 +9,12 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
-        "h_code": "H312"
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
       },
       {
-        "class": "Acute Tox. 3 *",
-        "h_code": "H301"
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
       }
     ],
     "m_factors": {},
@@ -26,8 +26,8 @@
       "GHS06"
     ],
     "h_codes": [
-      "H312",
-      "H301"
+      "H301",
+      "H312"
     ],
     "suppl_h": []
   }

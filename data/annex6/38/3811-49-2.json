@@ -9,16 +9,16 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H311"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H301"
       },
       {
         "class": "STOT SE 1",
-        "h_code": "H370 **"
+        "h_code": "H370"
       },
       {
         "class": "Aquatic Chronic 2",
@@ -38,7 +38,7 @@
     "h_codes": [
       "H311",
       "H301",
-      "H370 **",
+      "H370",
       "H411"
     ],
     "suppl_h": []

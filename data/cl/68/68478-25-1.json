@@ -4,23 +4,28 @@
   "name_tr": "Artık gaz (petrol), katalitik parçalayıcı yeniden ayrımsal damıtma soğurucu ünitesi; Rafineri gazı; [Bir katalitik parçalama prosesi ürünlerinin yeniden fraksiyonlamasından elde edilen hidrokarbonların kompleks bir bileşimi. Hidrojen ve büyük çoğunlukla C1 ila C3 aralığında karbon sayısına sahip hidrokarbonlardan oluşur.]",
   "ec_no": "270-805-1",
   "index_no": "649-140-00-X",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

@@ -1,11 +1,13 @@
 {
   "cas": "68478-16-0",
-  "name": "Residual oils (petroleum), deisobutanizer tower; Low boiling point naphtha - unspecified; [A complex residuum from the atmospheric distillation of the butane-butylene stream. It consists of aliphatic hydrocarbons having carbon numbers predominantly in the range of C4 through C6.]",
+  "name": "Residual oils (petroleum), deisobutanizer tower; Low boiling point naphtha - unspecified; [A complex residuum from the atmospheric distillation of the butane-butylene stream.  It consists of aliphatic hydrocarbons having carbon numbers predominantly in the range of C4 through C6.]",
   "name_tr": "",
   "ec_no": "270-795-9",
   "index_no": "649-365-00-3",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

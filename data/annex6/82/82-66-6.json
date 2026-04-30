@@ -9,12 +9,12 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 2 *",
+        "class": "Acute Tox. 2",
         "h_code": "H300"
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 **"
+        "h_code": "H372"
       }
     ],
     "m_factors": {},
@@ -28,7 +28,7 @@
     ],
     "h_codes": [
       "H300",
-      "H372 **"
+      "H372"
     ],
     "suppl_h": []
   }

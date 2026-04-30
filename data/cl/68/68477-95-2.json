@@ -4,23 +4,28 @@
   "name_tr": "Gazlar (petrol), Girbatol besleme birimi; petrol gazı; [Hidrojen sülfür uzaklaştırılması için Girbatol birimin içine beslendiği gibi kullanılan hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla, C2 ila C4 aralığında karbon sayısına sahip alifatik hidrokarbonlardan oluşur.]",
   "ec_no": "270-778-6",
   "index_no": "649-074-00-1",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

@@ -1,11 +1,13 @@
 {
   "cas": "68187-57-5",
-  "name": "Pitch, coal tar-petroleum; Pitch Residues; [The residue from the distillation of a mixture of coal tar and aromatic petroleum streams. A solid with a softening point from 40 Â°C to 180 Â°C (140 Â°F to 356 Â°F). Composed primarily of a complex combination of three or more membered condensed ring aromatic hydrocarbons.]",
+  "name": "Pitch, coal tar-petroleum; Pitch Residues; [The residue from the distillation of a mixture of coal tar and aromatic petroleum streams. A solid with a softening point from 40 °C to 180 °C (140 °F to 356 °F). Composed primarily of a complex combination of three or more membered condensed ring aromatic hydrocarbons.]",
   "name_tr": "",
   "ec_no": "269-109-0",
   "index_no": "648-076-00-X",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "M"
+  ],
   "classification": {
     "hazards": [
       {

@@ -1,6 +1,6 @@
 {
   "cas": "71550-12-4",
-  "name": "polymer of allylamine hydrochloride",
+  "name": "Polymer of allylamine hydrochloride",
   "name_tr": "",
   "ec_no": "415-050-2",
   "index_no": "612-191-00-3",
@@ -9,7 +9,7 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {

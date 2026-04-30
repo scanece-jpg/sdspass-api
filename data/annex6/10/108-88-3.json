@@ -14,7 +14,7 @@
       },
       {
         "class": "Repr. 2",
-        "h_code": "H361d ***"
+        "h_code": "H361d"
       },
       {
         "class": "Asp. Tox. 1",
@@ -25,8 +25,8 @@
         "h_code": "H336"
       },
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Skin Irrit. 2",
@@ -45,10 +45,10 @@
     ],
     "h_codes": [
       "H225",
-      "H361d ***",
+      "H361d",
       "H304",
       "H336",
-      "H373 **",
+      "H373",
       "H315"
     ],
     "suppl_h": []

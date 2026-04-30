@@ -4,13 +4,13 @@
   "name_tr": "",
   "ec_no": "448-700-9",
   "index_no": "607-670-00-9",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Eye Dam. 1",
@@ -29,21 +29,19 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS08",
       "GHS05",
+      "GHS08",
       "GHS07",
       "GHS09"
     ],
     "h_codes": [
-      "H373 **",
+      "H373",
       "H318",
       "H317",
       "H400",

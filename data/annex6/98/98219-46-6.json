@@ -1,11 +1,13 @@
 {
   "cas": "98219-46-6",
-  "name": "Naphtha (petroleum), light steam-cracked, debenzenized, thermally treated; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons obtained by the treatment and distillation of debenzenized light steam-cracked petroleum naphtha. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C7 through C12 and boiling in the range of approximately 95 Â°C to 200 Â°C (203 Â°F to 392 Â°F).]",
+  "name": "Naphtha (petroleum), light steam-cracked, debenzenized, thermally treated; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons obtained by the treatment and distillation of debenzenized light steam-cracked petroleum naphtha.  It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C7 through C12 and boiling in the range of approximately 95°C to 200°C (203°F to 392°F).]",
   "name_tr": "",
   "ec_no": "308-713-1",
   "index_no": "649-392-00-0",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

@@ -4,16 +4,16 @@
   "name_tr": "",
   "ec_no": "200-143-0",
   "index_no": "603-085-00-8",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H312"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
@@ -33,16 +33,14 @@
         "h_code": "H400"
       }
     ],
-    "m_factors": {
-      "acute": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS07",
       "GHS05",
+      "GHS07",
       "GHS09"
     ],
     "h_codes": [

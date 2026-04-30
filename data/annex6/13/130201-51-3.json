@@ -1,10 +1,10 @@
 {
   "cas": "130201-51-3",
-  "name": "trisodium(2-(Î±-(3-(4-chloro-6-(2-(2-(vinylsulfonyl)ethoxy)ethylamino)-1,3,5-triazin-2-ylamino)-2-oxido-5-sulfonatophenylazo)benzylidenehydrazino)-4-sulfonatobenzoato)copper(II)",
+  "name": "trisodium(2-(α-(3-(4-chloro-6-(2-(2-(vinylsulfonyl)ethoxy)ethylamino)-1,3,5-triazin-2-ylamino)-2-oxido-5-sulfonatophenylazo)benzylidenehydrazino)-4-sulfonatobenzoato)copper(II)",
   "name_tr": "",
   "ec_no": "407-580-8",
   "index_no": "029-013-00-X",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

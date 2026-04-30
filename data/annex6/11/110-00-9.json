@@ -21,16 +21,16 @@
         "h_code": "H341"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Skin Irrit. 2",
@@ -57,10 +57,12 @@
       "H341",
       "H332",
       "H302",
-      "H373 **",
+      "H373",
       "H315",
       "H412"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH019"
+    ]
   }
 }

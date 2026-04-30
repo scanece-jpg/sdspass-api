@@ -4,23 +4,28 @@
   "name_tr": "Gazlar (petrol), akışkan hale getirilmiş katalitik parçalama ünitesi bölücüsü üst kısımları; Petrol gazı; [ Şarjdan C3 -C4 bölücüsüne kadar olan kısmın ayrımsal damıtılmasından elde edilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla, C3 hidrokarbonlardan oluşur.]",
   "ec_no": "272-893-7",
   "index_no": "649-105-00-9",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

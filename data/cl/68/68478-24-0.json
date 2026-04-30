@@ -4,23 +4,28 @@
   "name_tr": "Artık gaz (petrol), katalitik parçalayıcı, katalitik dönüştürücü ve fraksiyonlayıcı ile birleştirilmiş hidrojen ile kükürt giderme; Petrol gazı; [Asidik safsızlıkları uzaklaştırmak için katalitik parçalama, katalitik dönüştürme ve hidrojenle kükürt giderme proseslerinden elde edilen ürünlerin ayrımsal damıtılmasından elde edilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla, C1 ila C5 aralığında karbon sayısına sahip hidrokarbonlardan oluşur.]",
   "ec_no": "270-804-6",
   "index_no": "649-078-00-3",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

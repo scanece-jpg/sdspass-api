@@ -1,8 +1,8 @@
 {
   "cas": "1101132-67-5",
-  "name": "(RS)-1-{1-ethyl-4-[4-mesyl-3-(2-methoxyethoxy)-o-toluoyl]pyrazol-5-yloxy}ethyl methyl carbonate; tolpyralate",
+  "name": "(RS)-1-{1-ethyl-4-[4-mesyl-3-(2-methoxyethoxy)-o-toluoyl]pyrazol-5-yloxy}ethyl methyl carbonate;\ntolpyralate",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "607-755-00-0",
   "atp": "ATP17",
   "notes": [],
@@ -18,7 +18,7 @@
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373 (eye)"
+        "h_code": "H373(eye)"
       },
       {
         "class": "Aquatic Acute 1",
@@ -29,10 +29,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 100
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -44,7 +41,7 @@
     "h_codes": [
       "H351",
       "H361fd",
-      "H373 (eye)",
+      "H373(eye)",
       "H400",
       "H410"
     ],

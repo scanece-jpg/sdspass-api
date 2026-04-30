@@ -5,7 +5,9 @@
   "ec_no": "201-800-4",
   "index_no": "613-168-00-0",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "D"
+  ],
   "classification": {
     "hazards": [
       {
@@ -13,15 +15,15 @@
         "h_code": "H351"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H312"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
@@ -29,8 +31,8 @@
         "h_code": "H335"
       },
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Eye Dam. 1",
@@ -43,9 +45,9 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS08",
-      "GHS07",
-      "GHS05"
+      "GHS06",
+      "GHS05",
+      "GHS09"
     ],
     "h_codes": [
       "H351",
@@ -53,7 +55,7 @@
       "H312",
       "H302",
       "H335",
-      "H373 **",
+      "H373",
       "H318"
     ],
     "suppl_h": []

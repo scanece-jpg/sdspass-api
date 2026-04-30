@@ -1,11 +1,13 @@
 {
   "cas": "122070-79-5",
-  "name": "Extract oils (coal), coal tar-residual pyrolysis oils, naphthalene oils; Redistillates; [A neutral oil obtained by debasing and dephenolating the oil obtained from the distillation of high temperature tar and pyrolysis residual oils which has a boiliing range of 225 Â°C to 255 Â°C (437 Â°F to 491 Â°F). Composed primarily of substituted dinuclear aromatic hydrocarbons.]",
+  "name": "Extract oils (coal), coal tar-residual pyrolysis oils, naphthalene oils; Redistillates; [A neutral oil obtained by debasing and dephenolating the oil obtained from the distillation of high temperature tar and pyrolysis residual oils which has a boiliing range of 225°C to 255°C (437°F to 491°F). Composed primarily of substituted dinuclear aromatic hydrocarbons.]",
   "name_tr": "",
   "ec_no": "310-170-0",
   "index_no": "648-039-00-8",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "J"
+  ],
   "classification": {
     "hazards": [
       {

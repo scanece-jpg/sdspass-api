@@ -4,23 +4,28 @@
   "name_tr": "Artık gaz (petrol), normal üretim damıtık hidrojenle kükürt giderici, hidrojen sülfür içermeyen ; Petrol gazı; [Normal üretim damıtıkların, hidrojen sülfürün amin muamelesi ile giderildiği, katalitik olarak hidrojen ile muamele edilerek kükürt giderilmesinden elde edilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla C1 ila C4 aralığında karbon sayısına sahip hidrokarbonları ağırlıklı olarak içerir.]",
   "ec_no": "269-630-3",
   "index_no": "649-182-00-9",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

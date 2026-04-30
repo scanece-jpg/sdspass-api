@@ -1,11 +1,13 @@
 {
   "cas": "97675-87-1",
-  "name": "Hydrocarbons, C17-30, hydrotreated solvent-deasphalted atm. distn. residue, distn. lights; Baseoil â€” unspecified; [A complex combination of hydrocarbons obtained as first runnings from the vacuum distillation of effluents from the treatment of a solvent deasphalted short residue with hydrogen in the presence of a catalyst. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C17 through C30 and boiling in the range of approximately 300 Â°C to 400 Â°C (572 Â°F to 752 Â°F). It produces a finished oil having a viscosity of 4cSt at approximately 100 Â°C (212 Â°F).]",
+  "name": "Hydrocarbons, C17-30, hydrotreated solvent-deasphalted atm. distn. residue, distn. lights; Baseoil - unspecified; [A complex combination of hydrocarbons obtained as first runnings from the vacuum distillation of effluents from the treatment of a solvent deasphalted short residue with hydrogen in the presence of a catalyst. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C17 through C30 and boiling in the range of approximately 300 °C to 400 °C (572 °F to 752 °F). It produces a finished oil having a viscosity of 4cSt at approximately 100 °C (212 °F).]",
   "name_tr": "",
   "ec_no": "307-661-7",
   "index_no": "649-515-00-8",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "L"
+  ],
   "classification": {
     "hazards": [
       {

@@ -4,21 +4,21 @@
   "name_tr": "",
   "ec_no": "204-079-4",
   "index_no": "602-052-00-5",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 2 *",
+        "class": "Acute Tox. 2",
         "h_code": "H330"
       },
       {
-        "class": "Acute Tox. 4 *",
-        "h_code": "H312"
+        "class": "Acute Tox. 2",
+        "h_code": "H300"
       },
       {
-        "class": "Acute Tox. 2 *",
-        "h_code": "H300"
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
       },
       {
         "class": "Aquatic Acute 1",
@@ -40,8 +40,8 @@
     ],
     "h_codes": [
       "H330",
-      "H312",
       "H300",
+      "H312",
       "H400",
       "H410"
     ],

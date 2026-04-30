@@ -1,11 +1,13 @@
 {
   "cas": "101794-91-6",
-  "name": "Distillates (coal tar), naphthalene oils, indole-methylnaphthalene fraction; Methylnaphthalene Oil; [A distillate from the fractional distillation of high temperature coal tar. Composed primarily of indole and methylnaphthalene boiling in the range of approximately 235 Â°C to 255 Â°C (455 Â°F to 491 Â°F).]",
+  "name": "Distillates (coal tar), naphthalene oils, indole-methylnaphthalene fraction; Methylnaphthalene Oil; [A distillate from the fractional distillation of high temperature coal tar.  Composed primarily of indole and methylnaphthalene boiling in the range of approximately 235°C to 255°C (455°F to 491°F).]",
   "name_tr": "",
   "ec_no": "309-972-3",
   "index_no": "648-093-00-2",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "J M"
+  ],
   "classification": {
     "hazards": [
       {

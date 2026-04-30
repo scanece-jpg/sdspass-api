@@ -1,11 +1,13 @@
 {
   "cas": "68477-50-9",
-  "name": "Distillates (petroleum), polymd. steam-cracked petroleum distillates, C5-12 fraction; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons obtained from the distillation of polymerized steam-cracked petroleum distillate. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C5 through C12.]",
+  "name": "Distillates (petroleum), polymd. steam-cracked petroleum distillates, C5-12 fraction; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons obtained from the distillation of polymerized steam-cracked petroleum distillate.  It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C5 through C12.]",
   "name_tr": "",
   "ec_no": "270-735-1",
   "index_no": "649-359-00-0",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

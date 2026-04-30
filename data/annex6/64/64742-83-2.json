@@ -1,11 +1,13 @@
 {
   "cas": "64742-83-2",
-  "name": "Naphtha (petroleum), light steam-cracked; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons obtained by the distillation of the products from a steam cracking process. It consists predominantly of unsaturated hydrocarbons having carbon numbers predominantly in the range of C4 through C11 and boiling in the range of approximately minus 20 Â°C to 190 Â°C (â€“4  Â°F to 374 Â°F). This stream is likely to contain 10 vol. % or more benzene.]",
+  "name": "Naphtha (petroleum), light steam-cracked; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons obtained by the distillation of the products from a steam cracking process.  It consists predominantly of unsaturated hydrocarbons having carbon numbers predominantly in the range of C4 through C11 and boiling in the range of approximately minus 20°C to 190°C (-4°F to 374°F).  This stream is likely to contain 10 vol. % or more benzene.]",
   "name_tr": "",
   "ec_no": "265-187-5",
   "index_no": "649-355-00-9",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

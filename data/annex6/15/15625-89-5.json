@@ -1,11 +1,13 @@
 {
   "cas": "15625-89-5",
-  "name": "2-ethyl-2-[[(1-oxoallyl)oxy]methyl]-1,3-propanediyl diacrylate; 2,2-bis(acryloyloxymethyl)butyl acrylate; trimethylolpropane triacrylate",
+  "name": "2-ethyl-2-[[(1-oxoallyl)oxy] methyl]-1,3-propanediyl diacrylate; 2,2-bis(acryloyloxymethyl)butyl acrylate; trimethylolpropane triacrylate",
   "name_tr": "",
   "ec_no": "239-701-3",
   "index_no": "607-111-00-9",
   "atp": "ATP18",
-  "notes": [],
+  "notes": [
+    "D"
+  ],
   "classification": {
     "hazards": [
       {
@@ -33,10 +35,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1,
-      "chronic": 1
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

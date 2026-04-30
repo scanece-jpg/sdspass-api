@@ -1,11 +1,13 @@
 {
   "cas": "7697-37-2",
-  "name": "nitric acid â€¦% [C â‰¤ 70 %]",
+  "name": "nitric acid …% [C ≤ 70 %]",
   "name_tr": "",
   "ec_no": "231-714-2",
   "index_no": "007-030-00-3",
   "atp": "ATP15",
-  "notes": [],
+  "notes": [
+    "B"
+  ],
   "classification": {
     "hazards": [
       {
@@ -22,7 +24,26 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H272",
+        "class": "",
+        "c_min": 65.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H314",
+        "class": "",
+        "c_min": 20.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H314",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
@@ -36,6 +57,8 @@
       "H331",
       "H314"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH071"
+    ]
   }
 }

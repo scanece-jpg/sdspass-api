@@ -1,11 +1,13 @@
 {
   "cas": "93924-61-9",
-  "name": "Hydrocarbons, C20-50, residual oil hydrogenation vacuum distillate; Baseoil â€” unspecified",
+  "name": "Hydrocarbons, C20-50, residual oil hydrogenation vacuum distillate; Baseoil - unspecified",
   "name_tr": "",
   "ec_no": "300-257-1",
   "index_no": "649-503-00-2",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "L"
+  ],
   "classification": {
     "hazards": [
       {

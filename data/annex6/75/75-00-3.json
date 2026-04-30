@@ -5,7 +5,9 @@
   "ec_no": "200-830-5",
   "index_no": "602-009-00-0",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "U"
+  ],
   "classification": {
     "hazards": [
       {
@@ -14,15 +16,15 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": "H351"
+        "h_code": ""
       },
       {
         "class": "Carc. 2",
-        "h_code": "H412"
+        "h_code": "H351"
       },
       {
         "class": "Aquatic Chronic 3",
-        "h_code": ""
+        "h_code": "H412"
       }
     ],
     "m_factors": {},

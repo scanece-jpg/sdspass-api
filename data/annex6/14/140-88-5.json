@@ -5,7 +5,9 @@
   "ec_no": "205-438-8",
   "index_no": "607-032-00-X",
   "atp": "ATP21",
-  "notes": [],
+  "notes": [
+    "D"
+  ],
   "classification": {
     "hazards": [
       {
@@ -42,7 +44,26 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H335",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H315",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H319",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",

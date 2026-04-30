@@ -1,11 +1,13 @@
 {
   "cas": "923-26-2",
-  "name": "2-hydroxypropyl methacrylate [1]\n3-hydroxypropyl methacrylate [2]",
+  "name": "2-hydroxypropyl methacrylate [1]\n3-hydroxypropyl methacrylate  [2]",
   "name_tr": "",
-  "ec_no": "213-090-3",
+  "ec_no": "213-090-3 [1]\n220-426-2 [2]",
   "index_no": "607-125-00-5",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "C D"
+  ],
   "classification": {
     "hazards": [
       {

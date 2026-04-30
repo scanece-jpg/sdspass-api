@@ -4,17 +4,17 @@
   "name_tr": "",
   "ec_no": "415-500-8",
   "index_no": "613-198-00-4",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Aquatic Chronic 3",
@@ -27,12 +27,12 @@
   "labelling": {
     "signal": "Warning",
     "pictograms": [
-      "GHS07",
-      "GHS08"
+      "GHS08",
+      "GHS07"
     ],
     "h_codes": [
       "H302",
-      "H373 **",
+      "H373",
       "H412"
     ],
     "suppl_h": []

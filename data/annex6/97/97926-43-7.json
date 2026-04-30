@@ -1,11 +1,13 @@
 {
   "cas": "97926-43-7",
-  "name": "Extracts (petroleum) heavy naphtha solvent, clay-treated; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons obtained by the treatment of heavy naphthic solvent petroleum extract with bleaching earth. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C6 through C10 and boiling in the range of approximately 80 Â°C to 180 Â°C (175 Â°F to 356 Â°F).]",
+  "name": "Extracts (petroleum) heavy naphtha solvent, clay-treated; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons obtained by the treatment of heavy naphthic solvent petroleum extract with bleaching earth.  It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C6 through C10 and boiling in the range of approximately 80°C to 180°C (175°F to 356°F).]",
   "name_tr": "",
   "ec_no": "308-261-5",
   "index_no": "649-391-00-5",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

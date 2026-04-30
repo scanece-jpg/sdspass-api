@@ -1,11 +1,13 @@
 {
   "cas": "7664-38-2",
-  "name": "phosphoric acid ... %, orthophosphoric acid ... %",
+  "name": "phosphoric acid ... %, orthophosphoric acid ... %",
   "name_tr": "",
   "ec_no": "231-633-2",
   "index_no": "015-011-00-6",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "B"
+  ],
   "classification": {
     "hazards": [
       {
@@ -14,7 +16,26 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H314",
+        "class": "",
+        "c_min": 25.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H315",
+        "class": "",
+        "c_min": 10.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H319",
+        "class": "",
+        "c_min": 10.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",

@@ -1,6 +1,6 @@
 {
   "cas": "10605-21-7",
-  "name": "carbendazim (ISO); methyl benzimidazol-2-ylcarbamate",
+  "name": "carbendazim (ISO);\nmethyl benzimidazol-2-ylcarbamate",
   "name_tr": "",
   "ec_no": "234-232-0",
   "index_no": "613-048-00-8",
@@ -29,17 +29,14 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS08",
       "GHS07",
+      "GHS08",
       "GHS09"
     ],
     "h_codes": [

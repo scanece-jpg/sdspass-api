@@ -1,11 +1,13 @@
 {
   "cas": "100683-97-4",
-  "name": "Distillates (petroleum), carbon-treated light paraffinic; Gasoil â€” unspecified; [A complex combination of hydrocarbons obtained by the treatment of a petroleum oil fraction with activated charcoal for the removal of traces of polar constituents and impurities. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C12 through C28.]",
+  "name": "Distillates (petroleum), carbon-treated light paraffinic; Gasoil - unspecified; [A complex combination of hydrocarbons obtained by the treatment of a petroleum oil fraction with activated charcoal for the removal of traces of polar constituents and impurities. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C12 through C28.]",
   "name_tr": "",
   "ec_no": "309-667-5",
   "index_no": "649-239-00-8",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "N"
+  ],
   "classification": {
     "hazards": [
       {

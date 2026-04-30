@@ -1,11 +1,13 @@
 {
   "cas": "100801-66-9",
-  "name": "Hydrocarbon oils, arom., mixed with polystyrene, pyrolyzed, light oil fraction; Heat Treatment Products; [The oil obtained from the heat treatment of polystyrene with coal tar pitch or aromatic oils. It consists predominantly of benzene and its homologs boiling in a range of approximately 70 Â°C to 210 Â°C (158 Â°F to 410 Â°F).]",
+  "name": "Hydrocarbon oils, arom., mixed with polystyrene, pyrolyzed, light oil fraction; Heat Treatment Products; [The oil obtained from the heat treatment of polystyrene with coal tar pitch or aromatic oils.  It consists predominantly of benzene and its homologs boiling in a range of approximately 70°C to 210°C (158°F to 410°F).]",
   "name_tr": "",
   "ec_no": "309-749-0",
   "index_no": "648-136-00-5",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "J M"
+  ],
   "classification": {
     "hazards": [
       {

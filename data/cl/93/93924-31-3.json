@@ -4,10 +4,11 @@
   "name_tr": "Son kalıntı yağı (petrol), asitle- işlem görmüş; Son kalıntı yağı; [Son kalıntı yağının sülfürik asit ile muamele edilmesinden elde edilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla C20 ila C50 aralığında karbon sayısına sahip dallanmış- zincirli hidrokarbonlardan oluşur.]",
   "ec_no": "300-225-7",
   "index_no": "649-175-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
@@ -17,11 +18,11 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": "H350"
+        "h_code": ""
       },
       {
         "class": "Carc. 1B",
-        "h_code": "H340"
+        "h_code": "H350"
       }
     ],
     "m_factors": {},
@@ -36,8 +37,7 @@
     ],
     "h_codes": [
       "H220",
-      "H350",
-      "H340"
+      "H350"
     ],
     "suppl_h": []
   }

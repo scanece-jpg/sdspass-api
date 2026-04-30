@@ -18,7 +18,7 @@
       },
       {
         "class": "STOT SE 1",
-        "h_code": "H370 (nervous system)"
+        "h_code": "H370(nervous_system)"
       },
       {
         "class": "Aquatic Acute 1",
@@ -29,14 +29,11 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1000,
-      "chronic": 1000
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
-    "signal": "Danger",
+    "signal": "Warning",
     "pictograms": [
       "GHS08",
       "GHS07",
@@ -45,10 +42,12 @@
     "h_codes": [
       "H351",
       "H302",
-      "H370 (nervous system)",
+      "H370(nervous_system)",
       "H400",
       "H410"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH066"
+    ]
   }
 }

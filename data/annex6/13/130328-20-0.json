@@ -1,8 +1,8 @@
 {
   "cas": "130328-20-0",
-  "name": "silver zinc zeolite (Zeolite, LTA framework type, surface-modified with silver and zinc ions); [This entry covers LTA (Linde Type A) framework type zeolite which has been surface-modified with both silver and zinc ions at contents Ag+ 0,5 %-6 %, Zn2 + 5 %-16 %, and potentially with phosphorus, NH4+, Mg2+ and/or Ca2+ each at level < 3 %]",
+  "name": "silver zinc zeolite (Zeolite, LTA framework type, surface-modified with silver and zinc ions)\n[This entry covers LTA (Linde Type A) framework type zeolite which has been surface-modified with both silver and zinc ions at contents Ag+ 0,5 %-6 %, Zn2 + 5 %-16 %, and potentially with phosphorus, NH4+, Mg2+ and/or Ca2+ each at level < 3 %]",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "047-003-00-3",
   "atp": "ATP10",
   "notes": [],
@@ -29,10 +29,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 100,
-      "chronic": 100
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

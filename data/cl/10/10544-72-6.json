@@ -4,23 +4,28 @@
   "name_tr": "Azot dioksit [1]; diazot tetraoksit [2]",
   "ec_no": "233-272-6",
   "index_no": "007-002-00-0",
-  "atp": "",
+  "atp": "ATP01",
   "notes": [
-    "5"
+    "5",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Ox. Gas 1",
         "h_code": "H270"
       },
       {
-        "class": "Ox. Gas 1",
+        "class": "Press. Gas",
         "h_code": "H330"
       },
       {
-        "class": "Acute Tox. 2",
+        "class": "Acute Tox. 2 *",
         "h_code": "H314"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": ""
       }
     ],
     "m_factors": {},
@@ -36,8 +41,8 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS04",
       "GHS03",
+      "GHS04",
       "GHS06",
       "GHS05"
     ],

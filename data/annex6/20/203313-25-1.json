@@ -2,9 +2,9 @@
   "cas": "203313-25-1",
   "name": "spirotetramat (ISO); (5s,8s)-3-(2,5-dimethylphenyl)-8-methoxy-2-oxo-1-azaspiro[4,5]dec-3-en-4-yl ethyl carbonate",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "607-711-00-0",
-  "atp": "ATP07",
+  "atp": "ATP7",
   "notes": [],
   "classification": {
     "hazards": [
@@ -33,10 +33,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1,
-      "chronic": 1
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

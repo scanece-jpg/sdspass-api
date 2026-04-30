@@ -2,7 +2,7 @@
   "cas": "540-73-8",
   "name": "1,2-dimethylhydrazine",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "007-013-00-0",
   "atp": "CLP00",
   "notes": [],
@@ -13,15 +13,15 @@
         "h_code": "H350"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H331"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H311"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H301"
       },
       {
@@ -30,13 +30,20 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H350",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS08",
       "GHS06",
+      "GHS08",
       "GHS09"
     ],
     "h_codes": [

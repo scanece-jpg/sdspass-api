@@ -1,6 +1,6 @@
 {
   "cas": "2439-10-3",
-  "name": "dodine(ISO); dodecylguanidinium acetate",
+  "name": "dodine (ISO); dodecylguanidinium acetate",
   "name_tr": "",
   "ec_no": "219-459-5",
   "index_no": "607-076-00-X",
@@ -9,7 +9,7 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {

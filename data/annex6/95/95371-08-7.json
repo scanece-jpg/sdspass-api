@@ -1,11 +1,13 @@
 {
   "cas": "95371-08-7",
-  "name": "Hydrocarbons, C37-65, hydrotreated deasphalted vacuum distn. residues; Baseoil â€” unspecified",
+  "name": "Hydrocarbons, C37-65, hydrotreated deasphalted vacuum distn. residues; Baseoil - unspecified",
   "name_tr": "",
   "ec_no": "305-975-9",
   "index_no": "649-511-00-6",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "L"
+  ],
   "classification": {
     "hazards": [
       {

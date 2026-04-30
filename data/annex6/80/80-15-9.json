@@ -1,6 +1,6 @@
 {
   "cas": "80-15-9",
-  "name": "Î±, Î±-dimethylbenzyl hydroperoxide; cumene hydroperoxide",
+  "name": "α,α-dimethylbenzyl hydroperoxide; cumene hydroperoxide",
   "name_tr": "",
   "ec_no": "201-254-7",
   "index_no": "617-002-00-8",
@@ -13,20 +13,20 @@
         "h_code": "H242"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H331"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H312"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Skin Corr. 1B",
@@ -38,7 +38,38 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H314",
+        "class": "",
+        "c_min": 10.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H315",
+        "class": "",
+        "c_min": 3.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H318",
+        "class": "",
+        "c_min": 3.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H319",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H335",
+        "class": "",
+        "c_min": 10.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
@@ -54,7 +85,7 @@
       "H331",
       "H312",
       "H302",
-      "H373 **",
+      "H373",
       "H314",
       "H411"
     ],

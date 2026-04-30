@@ -1,11 +1,13 @@
 {
   "cas": "78-11-5",
-  "name": "pentaerythritol tetranitrate; pentaerythrite tetranitrate; P.E.T.N.; [>20 % phlegmatiser]",
+  "name": "pentaerythritol tetranitrate; pentaerythrite tetranitrate; P.E.T.N.; [>20 % phlegmatiser]",
   "name_tr": "",
   "ec_no": "201-084-3",
   "index_no": "603-035-01-2",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "T"
+  ],
   "classification": {
     "hazards": [
       {

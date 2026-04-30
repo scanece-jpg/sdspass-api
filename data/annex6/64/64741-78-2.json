@@ -1,11 +1,13 @@
 {
   "cas": "64741-78-2",
-  "name": "Naphtha (petroleum), heavy hydrocracked; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons from distillation of the products from a hydrocracking process. It consists predominantly of saturated hydrocarbons having carbon numbers predominantly in the range of C6 through C12, and boiling in the range of approximately 65 Â°C to 230 Â°C (148 Â°F to 446 Â°F).]",
+  "name": "Naphtha (petroleum), heavy hydrocracked; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons from distillation of the products from a hydrocracking process.  It consists predominantly of saturated hydrocarbons having carbon numbers predominantly in the range of C6 through C12, and boiling in the range of approximately 65°C to 230°C (148°F to 446°F).]",
   "name_tr": "",
   "ec_no": "265-079-8",
   "index_no": "649-349-00-6",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

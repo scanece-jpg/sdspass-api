@@ -5,7 +5,9 @@
   "ec_no": "201-177-9",
   "index_no": "607-061-00-8",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "D"
+  ],
   "classification": {
     "hazards": [
       {
@@ -13,15 +15,15 @@
         "h_code": "H226"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H312"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
@@ -34,14 +36,21 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H335",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
     "pictograms": [
       "GHS02",
-      "GHS07",
       "GHS05",
+      "GHS07",
       "GHS09"
     ],
     "h_codes": [

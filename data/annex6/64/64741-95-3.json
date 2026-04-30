@@ -1,11 +1,13 @@
 {
   "cas": "64741-95-3",
-  "name": "Residual oils (petroleum), solvent deasphalted; Baseoil â€” unspecified; [A complex combination of hydrocarbons obtained as the solvent soluble fraction from C3-C4 solvent deasphalting of a residuum. It consists of hydrocarbons having carbon numbers predominantly higher than C25 and boiling above approximately 400 Â°C (752 Â°F).]",
+  "name": "Residual oils (petroleum), solvent deasphalted; Baseoil - unspecified; [A complex combination of hydrocarbons obtained as the solvent soluble fraction from C3-C4 solvent deasphalting of a residuum. It consists of hydrocarbons having carbon numbers predominantly higher than C25 and boiling above approximately 400 °C (752 °F).]",
   "name_tr": "",
   "ec_no": "265-096-0",
   "index_no": "649-456-00-8",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "L"
+  ],
   "classification": {
     "hazards": [
       {

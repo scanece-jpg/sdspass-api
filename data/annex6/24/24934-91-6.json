@@ -4,7 +4,7 @@
   "name_tr": "",
   "ec_no": "246-538-1",
   "index_no": "015-114-00-6",
-  "atp": "ATP01corr",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,7 +13,7 @@
         "h_code": "H310"
       },
       {
-        "class": "Acute Tox. 2 *",
+        "class": "Acute Tox. 2",
         "h_code": "H300"
       },
       {
@@ -25,9 +25,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

@@ -1,11 +1,13 @@
 {
   "cas": "917-58-8",
-  "name": "potassium ethanolate; potassium ethoxide [1]\nsodium ethanolate; sodium ethoxide [2]",
+  "name": "potassium ethanolate; potassium ethoxide [1]\nsodium ethanolate; sodium ethoxide  [2]",
   "name_tr": "",
-  "ec_no": "213-029-0",
+  "ec_no": "213-029-0 [1]\n205-487-5 [2]",
   "index_no": "603-041-00-8",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "T"
+  ],
   "classification": {
     "hazards": [
       {
@@ -30,6 +32,8 @@
       "H251",
       "H314"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH014"
+    ]
   }
 }

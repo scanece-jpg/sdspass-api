@@ -4,20 +4,26 @@
   "name_tr": "flor",
   "ec_no": "231-954-8",
   "index_no": "009-001-00-0",
-  "atp": "",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
+  ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Ox. Gas 1",
         "h_code": "H270"
       },
       {
-        "class": "Ox. Gas 1",
-        "h_code": "H330"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Acute Tox. 2",
+        "h_code": "H330"
+      },
+      {
+        "class": "Skin Corr. 1A",
         "h_code": "H314"
       }
     ],

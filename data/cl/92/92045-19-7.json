@@ -4,23 +4,28 @@
   "name_tr": "Gazlar (petrol), nafta buhar parçalama yüksek-basınç artıkları; Rafineri gazı; [Alt ürünlerin hazırlanması sırasında elde edilen artık gazlar kadar nafta buhar parçalama prosesi ürünlerinden yoğunlaşmayan kısımların bir karışımı olarak elde edilen kompleks bir bileşim. Büyük çoğunlukla hidrojen ve genelde C1 ila C5 aralığında karbon sayısına sahip, ayrıca doğal gaz da karıştırılabilen parafinik ve olefinik hidrokarbonlardanoluşur .]",
   "ec_no": "295-401-2",
   "index_no": "649-173-00-X",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

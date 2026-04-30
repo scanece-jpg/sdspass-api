@@ -1,11 +1,13 @@
 {
   "cas": "90641-04-6",
-  "name": "Extract residues (coal), naphthalene oil alk., distn. overheads; Naphthalene Oil Extract Residue; [The distillate from alkali-washed naphthalene oil having an approximate distillation range of 180 Â°C to 220 Â°C (356 Â°F to 428 Â°F). Composed primarily of naphthalene, alkylbenzenes, indene and indan.]",
+  "name": "Extract residues (coal), naphthalene oil alk., distn. overheads; Naphthalene Oil Extract Residue; [The distillate from alkali-washed naphthalene oil having an approximate distillation range of 180°C to 220°C (356°F to 428°F).  Composed primarily of naphthalene, alkylbenzenes, indene and indan.]",
   "name_tr": "",
   "ec_no": "292-627-3",
   "index_no": "648-091-00-1",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "J M"
+  ],
   "classification": {
     "hazards": [
       {

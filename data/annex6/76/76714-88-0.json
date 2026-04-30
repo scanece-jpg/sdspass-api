@@ -1,15 +1,15 @@
 {
   "cas": "76714-88-0",
-  "name": "diniconazole (ISO); (E)-Î²-[(2,4-dichlorophenyl)methylene]-Î±-(1,1-dimethylethyl)-1Hâ€”1,2,4-triazol-1-ethanol; (E)-(RS)-1-(2,4-dichlorophenyl)-4,4-dimethyl-2-(1Hâ€”1,2,4-triazol-1-yl)pent-1-en-3-ol",
+  "name": "diniconazole (ISO); (E)-β-[(2,4-dichlorophenyl)methylene]-α-(1,1-dimethylethyl)-1H-1,2,4-triazol-1-ethanol; (E)-(RS)-1-(2,4-dichlorophenyl)-4,4-dimethyl-2-(1H-1,2,4-triazol-1-yl)pent-1-en-3-ol",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "613-117-00-2",
   "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {

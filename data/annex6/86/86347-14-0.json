@@ -1,8 +1,8 @@
 {
   "cas": "86347-14-0",
-  "name": "(RS)-4-[1-(2,3-dimethylphenyl)ethyl]-1H-imidazole; medetomidine",
+  "name": "(RS)-4-[1-(2,3-dimethylphenyl)ethyl]-1H-imidazole;\nmedetomidine",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "613-321-00-1",
   "atp": "ATP10",
   "notes": [],
@@ -22,7 +22,7 @@
       },
       {
         "class": "STOT SE 1",
-        "h_code": "H370 (eyes)"
+        "h_code": "H370(eye)"
       },
       {
         "class": "STOT RE 1",
@@ -37,10 +37,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1,
-      "chronic": 100
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -54,7 +51,7 @@
       "H330",
       "H300",
       "H336",
-      "H370 (eyes)",
+      "H370(eye)",
       "H372",
       "H400",
       "H410"

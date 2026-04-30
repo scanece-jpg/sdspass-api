@@ -1,11 +1,13 @@
 {
   "cas": "68476-50-6",
-  "name": "Hydrocarbons, Câ‰¥5, C5-6-rich; Low boiling point naphtha - unspecified",
+  "name": "Hydrocarbons, C≥5, C5-6-rich; Low boiling point naphtha - unspecified",
   "name_tr": "",
   "ec_no": "270-690-8",
   "index_no": "649-401-00-8",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

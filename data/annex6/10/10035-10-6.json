@@ -5,7 +5,9 @@
   "ec_no": "233-113-0",
   "index_no": "035-002-00-0",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "U"
+  ],
   "classification": {
     "hazards": [
       {
@@ -28,8 +30,8 @@
     "signal": "Danger",
     "pictograms": [
       "GHS04",
-      "GHS07",
-      "GHS05"
+      "GHS05",
+      "GHS07"
     ],
     "h_codes": [
       "H335",

@@ -1,10 +1,10 @@
 {
   "cas": "5470-11-1",
-  "name": "hydroxylammonium chloride; hydroxylamine hydrochloride [1]\nbis(hydroxylammonium) sulfate; hydroxylamine sulfate (2:1) [2]",
+  "name": "hydroxylammonium chloride; hydroxylamine hydrochloride [1]\nbis(hydroxylammonium) sulfate; hydroxylamine sulfate (2:1)  [2]",
   "name_tr": "",
-  "ec_no": "226-798-2",
+  "ec_no": "226-798-2 [1]\n233-118-8 [2]",
   "index_no": "612-123-00-2",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -17,16 +17,16 @@
         "h_code": "H351"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H312"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Skin Irrit. 2",
@@ -61,7 +61,7 @@
       "H351",
       "H312",
       "H302",
-      "H373 **",
+      "H373",
       "H315",
       "H319",
       "H317",

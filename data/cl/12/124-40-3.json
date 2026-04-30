@@ -8,29 +8,26 @@
   "notes": [
     "U",
     "5",
-    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
+    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi.",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H220"
+        "class": "Flam. Liq. 1",
+        "h_code": "H224"
       },
       {
-        "class": "Press. Gas",
+        "class": "Acute Tox. 4 *",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4",
-        "h_code": "H335"
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
       },
       {
         "class": "Skin Corr. 1B",
         "h_code": "H314"
-      },
-      {
-        "class": "Skin Irrit. 2",
-        "h_code": "H318"
       }
     ],
     "m_factors": {},
@@ -59,16 +56,14 @@
     "signal": "Danger",
     "pictograms": [
       "GHS02",
-      "GHS04",
-      "GHS05",
-      "GHS07"
+      "GHS07",
+      "GHS05"
     ],
     "h_codes": [
-      "H220",
+      "H224",
       "H332",
-      "H335",
-      "H314",
-      "H318"
+      "H302",
+      "H314"
     ],
     "suppl_h": []
   }

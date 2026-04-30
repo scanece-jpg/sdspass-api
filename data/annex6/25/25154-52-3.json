@@ -1,8 +1,8 @@
 {
   "cas": "25154-52-3",
-  "name": "nonylphenol [1]\n4-nonylphenol, branched [2]",
+  "name": "nonylphenol [1]\n4-nonylphenol, branched  [2]",
   "name_tr": "",
-  "ec_no": "246-672-0",
+  "ec_no": "246-672-0 [1]\n284-325-5 [2]",
   "index_no": "601-053-00-8",
   "atp": "CLP00",
   "notes": [],
@@ -13,7 +13,7 @@
         "h_code": "H361fd"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
@@ -36,8 +36,8 @@
     "signal": "Danger",
     "pictograms": [
       "GHS08",
-      "GHS07",
       "GHS05",
+      "GHS07",
       "GHS09"
     ],
     "h_codes": [

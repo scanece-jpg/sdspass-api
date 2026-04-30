@@ -4,7 +4,7 @@
   "name_tr": "",
   "ec_no": "425-380-9",
   "index_no": "005-013-00-5",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,20 +13,20 @@
         "h_code": "H250"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H312"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Skin Corr. 1B",
@@ -48,16 +48,16 @@
     "signal": "Danger",
     "pictograms": [
       "GHS02",
-      "GHS07",
+      "GHS05",
       "GHS08",
-      "GHS05"
+      "GHS07"
     ],
     "h_codes": [
       "H250",
       "H332",
       "H312",
       "H302",
-      "H373 **",
+      "H373",
       "H314",
       "H317",
       "H413"

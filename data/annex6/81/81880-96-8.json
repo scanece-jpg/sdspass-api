@@ -13,12 +13,12 @@
         "h_code": "H341"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H301"
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 **"
+        "h_code": "H372"
       },
       {
         "class": "Skin Sens. 1",
@@ -39,14 +39,14 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS08",
       "GHS06",
+      "GHS08",
       "GHS09"
     ],
     "h_codes": [
       "H341",
       "H301",
-      "H372 **",
+      "H372",
       "H317",
       "H400",
       "H410"

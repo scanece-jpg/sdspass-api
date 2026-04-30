@@ -2,7 +2,7 @@
   "cas": "606-35-9",
   "name": "2,4,6-trinitroanisole",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "609-011-00-0",
   "atp": "CLP00",
   "notes": [],
@@ -13,15 +13,15 @@
         "h_code": "H201"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H312"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
@@ -33,7 +33,7 @@
     "scl_limits": []
   },
   "labelling": {
-    "signal": "Danger",
+    "signal": "Warning",
     "pictograms": [
       "GHS01",
       "GHS07",

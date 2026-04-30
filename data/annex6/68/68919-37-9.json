@@ -1,11 +1,13 @@
 {
   "cas": "68919-37-9",
-  "name": "Naphtha (petroleum), full-range reformed; Low boiling point cat-reformed naphtha; [A complex combination of hydrocarbons produced by the distillation of the products from a catalytic reforming process. It consists of hydrocarbons having carbon numbers predominantly in the range of C5 through C12 and boiling in the range of approximately 35 Â°C to 230 Â°C (95 Â°F to 446 Â°F).]",
+  "name": "Naphtha (petroleum), full-range reformed; Low boiling point cat-reformed naphtha; [A complex combination of hydrocarbons produced by the distillation of the products from a catalytic reforming process.  It consists of hydrocarbons having carbon numbers predominantly in the range of C5 through C12 and boiling in the range of approximately 35°C to 230°C (95°F to 446°F).]",
   "name_tr": "",
   "ec_no": "272-895-8",
   "index_no": "649-307-00-7",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

@@ -1,10 +1,10 @@
 {
   "cas": "71751-41-2",
-  "name": "abamectin (combination of avermectin B1a and avermectin B1b) (ISO) [1]\navermectin B1a (purity â‰¥80 %) [2]",
+  "name": "abamectin (combination of avermectin B1a and avermectin B1b) (ISO) [1]\navermectin B1a (purity ≥80 %) [2]",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "_ [1]\n265-610-3 [2]",
   "index_no": "606-143-00-0",
-  "atp": "ATP03",
+  "atp": "ATP3",
   "notes": [],
   "classification": {
     "hazards": [
@@ -22,7 +22,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 (nervous system)"
+        "h_code": "H372(nervous_system)"
       },
       {
         "class": "Aquatic Acute 1",
@@ -33,23 +33,34 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10000
-    },
-    "scl_limits": []
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H372",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H373",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS08",
       "GHS06",
+      "GHS08",
       "GHS09"
     ],
     "h_codes": [
       "H361d",
       "H330",
       "H300",
-      "H372 (nervous system)",
+      "H372(nervous_system)",
       "H400",
       "H410"
     ],

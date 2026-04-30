@@ -4,7 +4,7 @@
   "name_tr": "",
   "ec_no": "-",
   "index_no": "028-050-00-9",
-  "atp": "ATP02",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -18,7 +18,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 **"
+        "h_code": "H372"
       },
       {
         "class": "Skin Sens. 1",
@@ -46,7 +46,7 @@
     "h_codes": [
       "H350i",
       "H360Df",
-      "H372 **",
+      "H372",
       "H317",
       "H400",
       "H410"

@@ -1,8 +1,8 @@
 {
   "cas": "208465-21-8",
-  "name": "mesosulfuron-methyl (ISO); methyl 2-[(4,6-dimethoxypyrimidin-2-ylcarbamoyl)sulfamoyl]-Î±-(methanesulfonamido)-p-toluate",
+  "name": "mesosulfuron-methyl (ISO);\nmethyl 2-[(4,6-dimethoxypyrimidin-2-ylcarbamoyl)sulfamoyl]-α-(methanesulfonamido)-p-toluate;",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "607-729-00-9",
   "atp": "ATP13",
   "notes": [],
@@ -17,10 +17,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 100,
-      "chronic": 100
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

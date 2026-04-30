@@ -1,10 +1,10 @@
 {
   "cas": "81-81-2",
-  "name": "warfarin (ISO); 4-hydroxy-3-(3-oxo-1-phenylbutyl)-2H-chromen-2-one [1]\n(S)-4-hydroxy-3-(3-oxo-1-phenylbutyl)-2-benzopyrone [2]\n(R)-4-hydroxy-3-(3-oxo-1-phenylbutyl)-2-benzopyrone [3]",
+  "name": "warfarin (ISO); 4-hydroxy-3-(3-oxo-1-phenylbutyl)-2H-chromen-2-one [1]\n(S)-4-hydroxy-3-(3-oxo-1-phenylbutyl)-2-benzopyrone [2]\n(R)-4-hydroxy-3-(3-oxo-1-phenylbutyl)-2-benzopyrone  [3]",
   "name_tr": "",
-  "ec_no": "201-377-6",
+  "ec_no": "201-377-6 [1]\n226-907-3 [2]\n226-908-9 [3]",
   "index_no": "607-056-00-0",
-  "atp": "ATP09",
+  "atp": "ATP9",
   "notes": [],
   "classification": {
     "hazards": [
@@ -26,7 +26,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 (blood)"
+        "h_code": "H372(blood)"
       },
       {
         "class": "Aquatic Chronic 2",
@@ -34,7 +34,26 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H360",
+        "class": "",
+        "c_min": 3.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H372",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H373",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
@@ -48,7 +67,7 @@
       "H330",
       "H310",
       "H300",
-      "H372 (blood)",
+      "H372(blood)",
       "H411"
     ],
     "suppl_h": []

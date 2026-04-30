@@ -9,16 +9,16 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H312"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 **"
+        "h_code": "H372"
       },
       {
         "class": "Skin Sens. 1",
@@ -35,17 +35,19 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS07",
       "GHS08",
+      "GHS07",
       "GHS09"
     ],
     "h_codes": [
       "H312",
       "H302",
-      "H372 **",
+      "H372",
       "H317",
       "H411"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH070"
+    ]
   }
 }

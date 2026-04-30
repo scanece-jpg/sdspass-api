@@ -1,6 +1,6 @@
 {
   "cas": "108-10-1",
-  "name": "4-methylpentan-2-one; isobutyl methyl ketone",
+  "name": "4-methylpentan-2-one;\nisobutyl methyl ketone",
   "name_tr": "",
   "ec_no": "203-550-1",
   "index_no": "606-004-00-4",
@@ -36,8 +36,8 @@
     "signal": "Danger",
     "pictograms": [
       "GHS02",
-      "GHS08",
-      "GHS07"
+      "GHS07",
+      "GHS08"
     ],
     "h_codes": [
       "H225",
@@ -46,6 +46,8 @@
       "H336",
       "H319"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH066"
+    ]
   }
 }

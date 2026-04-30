@@ -2,7 +2,7 @@
   "cas": "1255734-28-1",
   "name": "N-(5-chloro-2-isopropylbenzyl)-N-cyclopropyl-3-(difluoromethyl)-5-fluoro-1-methyl-1H-pyrazole-4-carboxamide; isoflucypram",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "616-239-00-4",
   "atp": "ATP18",
   "notes": [],
@@ -29,10 +29,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 1
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

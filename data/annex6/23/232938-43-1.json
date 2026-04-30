@@ -1,10 +1,10 @@
 {
   "cas": "232938-43-1",
-  "name": "N-(p-toluenesulfonyl)-N'-(3-(p-toluenesulfonyloxy)phenyl)urea; 3-({][}(4-methylphenyl)sulfonyl{]carbamoyl[}amino)phenyl 4-methylbenzenesulfonate",
+  "name": "N-(p-toluenesulfonyl)-N'-(3-(p-toluenesulfonyloxy)phenyl)urea; 3-({[(4-methylphenyl)sulfonyl]carbamoyl}amino)phenyl 4-methylbenzenesulfonate",
   "name_tr": "",
   "ec_no": "432-520-2",
   "index_no": "006-099-00-7",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

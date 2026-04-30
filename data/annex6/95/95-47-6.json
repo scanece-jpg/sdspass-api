@@ -1,11 +1,13 @@
 {
   "cas": "95-47-6",
-  "name": "o-xylene [1]\np-xylene [2]\nm-xylene [3]\nxylene [4]",
+  "name": "o-xylene [1]\np-xylene [2]\nm-xylene [3]\nxylene  [4]",
   "name_tr": "",
-  "ec_no": "202-422-2",
+  "ec_no": "202-422-2 [1]\n203-396-5 [2]\n203-576-3 [3]\n215-535-7 [4]",
   "index_no": "601-022-00-9",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "C"
+  ],
   "classification": {
     "hazards": [
       {
@@ -13,11 +15,11 @@
         "h_code": "H226"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H312"
       },
       {

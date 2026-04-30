@@ -2,7 +2,7 @@
   "cas": "688046-61-9",
   "name": "(5-chloro-2-methoxy-4-methyl-3-pyridyl)(4,5,6-trimethoxy-o-tolyl)methanone; pyriofenone",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "606-152-00-X",
   "atp": "ATP17",
   "notes": [],
@@ -17,9 +17,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

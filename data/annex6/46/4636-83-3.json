@@ -1,15 +1,15 @@
 {
   "cas": "4636-83-3",
-  "name": "morfamquat dichloride [1]\nmorfamquat sulfate [2]",
+  "name": "morfamquat dichloride [1]\nmorfamquat sulfate  [2]",
   "name_tr": "",
-  "ec_no": "225-062-8",
+  "ec_no": "225-062-8 [1]",
   "index_no": "613-091-00-2",
   "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {

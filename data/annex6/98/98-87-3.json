@@ -1,6 +1,6 @@
 {
   "cas": "98-87-3",
-  "name": "Î±, Î±-dichlorotoluene; benzylidene chloride; benzal chloride",
+  "name": "α,α-dichlorotoluene; benzylidene chloride; benzal chloride",
   "name_tr": "",
   "ec_no": "202-709-2",
   "index_no": "602-058-00-8",
@@ -13,11 +13,11 @@
         "h_code": "H351"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H331"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
@@ -39,8 +39,8 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS08",
       "GHS06",
+      "GHS08",
       "GHS05"
     ],
     "h_codes": [

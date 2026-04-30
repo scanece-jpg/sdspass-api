@@ -1,6 +1,6 @@
 {
   "cas": "26225-79-6",
-  "name": "ethofumesate (ISO); (RS)-2-ethoxy-2,3-dihydro-3,3-dimethylbenzofuran-5-yl methanesulfonate",
+  "name": "ethofumesate (ISO); (RS)-2-ethoxy-2,3-di­hydro-3,3-dimethyl­benzofuran-5-yl methanesulfonate",
   "name_tr": "",
   "ec_no": "247-525-3",
   "index_no": "607-314-00-2",
@@ -17,10 +17,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1,
-      "chronic": 1
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

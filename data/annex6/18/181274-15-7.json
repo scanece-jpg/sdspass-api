@@ -2,7 +2,7 @@
   "cas": "181274-15-7",
   "name": "propoxycarbazone-sodium",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "011-007-00-3",
   "atp": "CLP00",
   "notes": [],
@@ -17,9 +17,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

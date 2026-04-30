@@ -1,11 +1,13 @@
 {
   "cas": "92045-42-6",
-  "name": "Lubricating oils (petroleum), C17-35, solvent-extd., dewaxed, hydrotreated; Baseoil â€” unspecified",
+  "name": "Lubricating oils (petroleum), C17-35, solvent-extd., dewaxed, hydrotreated; Baseoil - unspecified",
   "name_tr": "",
   "ec_no": "295-423-2",
   "index_no": "649-497-00-1",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "L"
+  ],
   "classification": {
     "hazards": [
       {

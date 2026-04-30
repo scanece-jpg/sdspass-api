@@ -2,10 +2,12 @@
   "cas": "20487-40-5",
   "name": "tert-butyl propionate",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "607-697-00-6",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "C"
+  ],
   "classification": {
     "hazards": [
       {

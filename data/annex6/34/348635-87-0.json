@@ -1,8 +1,8 @@
 {
   "cas": "348635-87-0",
-  "name": "amisulbrom (ISO); 3-(3-bromo-6-fluoro-2-methylindol-1-ylsulfonyl)-N,N-dimethyl-1H-1,2,4-triazole-1-sulfonamide",
+  "name": "amisulbrom (ISO);\n3-(3-bromo-6-fluoro-2-methylindol-1-ylsulfonyl)-N,N-dimethyl-1H-1,2,4-triazole-1-sulfonamide",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "616-224-00-2",
   "atp": "ATP13",
   "notes": [],
@@ -25,10 +25,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

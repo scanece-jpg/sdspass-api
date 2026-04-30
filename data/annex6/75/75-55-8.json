@@ -17,15 +17,15 @@
         "h_code": "H350"
       },
       {
-        "class": "Acute Tox. 2 *",
-        "h_code": "H330"
-      },
-      {
         "class": "Acute Tox. 1",
         "h_code": "H310"
       },
       {
-        "class": "Acute Tox. 2 *",
+        "class": "Acute Tox. 2",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 2",
         "h_code": "H300"
       },
       {
@@ -38,22 +38,29 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H350",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
     "pictograms": [
       "GHS02",
-      "GHS08",
       "GHS06",
+      "GHS08",
       "GHS05",
       "GHS09"
     ],
     "h_codes": [
       "H225",
       "H350",
-      "H330",
       "H310",
+      "H330",
       "H300",
       "H318",
       "H411"

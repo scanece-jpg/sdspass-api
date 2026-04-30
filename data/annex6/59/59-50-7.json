@@ -1,6 +1,6 @@
 {
   "cas": "59-50-7",
-  "name": "chlorocresol; 4-chloro-m-cresol; 4-chloro-3-methylphenol",
+  "name": "chlorocresol;\n4-chloro-m-cresol;\n4-chloro-3-methylphenol",
   "name_tr": "",
   "ec_no": "200-431-6",
   "index_no": "604-014-00-3",
@@ -37,9 +37,7 @@
         "h_code": "H412"
       }
     ],
-    "m_factors": {
-      "acute": 1
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

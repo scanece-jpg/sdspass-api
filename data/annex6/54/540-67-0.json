@@ -2,10 +2,12 @@
   "cas": "540-67-0",
   "name": "ethyl methyl ether",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "603-020-00-3",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "U"
+  ],
   "classification": {
     "hazards": [
       {

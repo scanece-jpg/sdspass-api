@@ -1,11 +1,13 @@
 {
   "cas": "68783-66-4",
-  "name": "Naphtha (petroleum), light, sweetened; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons obtained by subjecting a petroleum distillate to a sweetening process to convert mercaptans or to remove acidic impurities. It consists predominantly of saturated and unsaturated hydrocarbons having carbon numbers predominantly in the range of C3 through C6 and boiling in the range of approximately â€“20  Â°C to 100 Â°C (â€“4  Â°F to 212 Â°F).]",
+  "name": "Naphtha (petroleum), light, sweetened; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons obtained by subjecting a petroleum distillate to a sweetening process to convert mercaptans or to remove acidic impurities.  It consists predominantly of saturated and unsaturated hydrocarbons having carbon numbers predominantly in the range of C3 through C6 and boiling in the range of approximately -20°C to 100°C (-4°F to 212°F).]",
   "name_tr": "",
   "ec_no": "272-206-0",
   "index_no": "649-374-00-2",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

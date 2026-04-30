@@ -2,9 +2,9 @@
   "cas": "139528-85-1",
   "name": "metosulam (ISO); N-(2,6-dichloro-3-methylphenyl)-5,7-dimethoxy[1,2,4]triazolo[1,5-a]pyrimidine-2-sulfonamide",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "616-214-00-8",
-  "atp": "ATP07",
+  "atp": "ATP7",
   "notes": [],
   "classification": {
     "hazards": [
@@ -14,7 +14,7 @@
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373 (eyes, kidneys)"
+        "h_code": "H373(eyes,_kidneys)"
       },
       {
         "class": "Aquatic Acute 1",
@@ -25,10 +25,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1000,
-      "chronic": 100
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -39,7 +36,7 @@
     ],
     "h_codes": [
       "H351",
-      "H373 (eyes, kidneys)",
+      "H373(eyes,_kidneys)",
       "H400",
       "H410"
     ],

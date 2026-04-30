@@ -2,14 +2,14 @@
   "cas": "2655-14-3",
   "name": "XMC; 3,5-xylyl methylcarbamate",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "006-067-00-2",
   "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       }
     ],

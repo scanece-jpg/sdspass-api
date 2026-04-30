@@ -4,7 +4,7 @@
   "name_tr": "",
   "ec_no": "250-778-2",
   "index_no": "607-712-00-6",
-  "atp": "ATP07",
+  "atp": "ATP7",
   "notes": [],
   "classification": {
     "hazards": [
@@ -14,7 +14,7 @@
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373 (liver)"
+        "h_code": "H373(liver)"
       },
       {
         "class": "Skin Corr. 1C",
@@ -29,9 +29,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -44,11 +42,13 @@
     ],
     "h_codes": [
       "H361d",
-      "H373 (liver)",
+      "H373(liver)",
       "H314",
       "H317",
       "H410"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH071"
+    ]
   }
 }

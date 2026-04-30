@@ -2,9 +2,9 @@
   "cas": "99105-77-8",
   "name": "sulcotrione (ISO); 2-[2-chloro-4-(methylsulfonyl)benzoyl]cyclohexane-1,3-dione",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "606-145-00-1",
-  "atp": "ATP05",
+  "atp": "ATP5",
   "notes": [],
   "classification": {
     "hazards": [
@@ -14,7 +14,7 @@
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373 (kidneys)"
+        "h_code": "H373(kidneys)"
       },
       {
         "class": "Skin Sens. 1A",
@@ -29,10 +29,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -44,7 +41,7 @@
     ],
     "h_codes": [
       "H361d",
-      "H373 (kidneys)",
+      "H373(kidneys)",
       "H317",
       "H400",
       "H410"

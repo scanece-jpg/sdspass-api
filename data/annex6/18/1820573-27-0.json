@@ -1,8 +1,8 @@
 {
   "cas": "1820573-27-0",
-  "name": "beta-cyfluthrin (ISO); reaction mass of rel-(R)-cyano(4-fluoro-3-phenoxyphenyl)methyl (1S,3S)-3-(2,2-dichloroethenyl)-2,2-dimethylcyclopropane-1-carboxylate and rel-(R)-cyano(4-fluoro-3-phenoxyphenyl)methyl (1S,3R)-3-(2,2-dichloroethenyl)-2,2-dimethylcyclopropane-1-carboxylate",
+  "name": "beta-cyfluthrin (ISO);\nreaction mass of rel-(R)-cyano(4-fluoro-3-phenoxyphenyl)methyl(1S,3S)-3-(2,2-dichloroethenyl)-2,2-dimethylcyclopropane-1-carboxylate and rel-(R)-cyano(4-fluoro-3-phenoxyphenyl)methyl(1S,3R)-3-(2,2-dichloroethenyl)-2,2-dimethylcyclopropane-1-carboxylate",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "607-254-00-7",
   "atp": "ATP18",
   "notes": [],
@@ -22,7 +22,7 @@
       },
       {
         "class": "STOT SE 1",
-        "h_code": "H370 (nervous system)"
+        "h_code": "H370(nervous_system)"
       },
       {
         "class": "Aquatic Acute 1",
@@ -33,10 +33,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1000000,
-      "chronic": 1000000
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -50,7 +47,7 @@
       "H362",
       "H330",
       "H300",
-      "H370 (nervous system)",
+      "H370(nervous_system)",
       "H400",
       "H410"
     ],

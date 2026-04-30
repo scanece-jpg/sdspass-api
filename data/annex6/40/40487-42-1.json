@@ -1,6 +1,6 @@
 {
   "cas": "40487-42-1",
-  "name": "pendimethalin (ISO); N-(1-ethylpropyl)-2,6-dinitro-3,4-xylidene",
+  "name": "pendimethalin (ISO); N-(1-ethylpropyl)-2,6-dinitro-3,4-xylidine",
   "name_tr": "",
   "ec_no": "254-938-2",
   "index_no": "609-042-00-X",
@@ -21,10 +21,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 100,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

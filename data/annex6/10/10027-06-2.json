@@ -2,14 +2,16 @@
   "cas": "10027-06-2",
   "name": "8,9,10-trinorborn-2-yl acrylate",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "607-121-00-3",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "D"
+  ],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H312"
       },
       {

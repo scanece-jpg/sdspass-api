@@ -1,10 +1,10 @@
 {
   "cas": "68477-39-4",
-  "name": "Distillates (petroleum), cracked stripped steam-cracked petroleum distillates, C8-10 fraction; Cracked kerosine; [A complex combination of hydrocarbons obtained by distilling cracked stripped steam-cracked distillates. It consists of hydro-carbons having carbon numbers in the range of C8 through C10 and boiling in the range of approximately 129 Â°C to 194 Â°C (264 Â°F to 382 Â°F).]",
+  "name": "Distillates (petroleum), cracked stripped steam-cracked petroleum distillates, C8-10 fraction; Cracked kerosine; [A complex combination of hydrocarbons obtained by distilling cracked stripped steam-cracked distillates. It consists of hydro-carbons having carbon numbers in the range of C8 through C10 and boiling in the range of approximately 129 °C to 194 °C (264 °F to 382 °F).]",
   "name_tr": "",
   "ec_no": "270-728-3",
   "index_no": "649-409-00-1",
-  "atp": "ATP02",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

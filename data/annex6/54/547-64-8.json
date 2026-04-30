@@ -1,11 +1,13 @@
 {
   "cas": "547-64-8",
-  "name": "methyl lactate [1]\nmethyl (Â±)-lactate [2]\nmethyl (R)-lactate [3]\nmethyl (S)-(-)-lactate [4]",
+  "name": "methyl lactate [1]\nmethyl (±)-lactate [2]\nmethyl (R)-lactate [3]\nmethyl (S)-(-)-lactate  [4]",
   "name_tr": "",
-  "ec_no": "208-930-0",
+  "ec_no": "208-930-0 [1]\n218-449-8 [2]\n241-420-6 [3]\n248-704-9 [4]",
   "index_no": "607-092-00-7",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "C"
+  ],
   "classification": {
     "hazards": [
       {

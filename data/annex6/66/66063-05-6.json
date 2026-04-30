@@ -4,7 +4,7 @@
   "name_tr": "",
   "ec_no": "266-096-3",
   "index_no": "616-220-00-0",
-  "atp": "ATP09",
+  "atp": "ATP9",
   "notes": [],
   "classification": {
     "hazards": [
@@ -17,10 +17,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1,
-      "chronic": 1
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

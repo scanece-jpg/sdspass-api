@@ -1,6 +1,6 @@
 {
   "cas": "121-29-9",
-  "name": "2-methyl-4-oxo-3-(penta-2,4-dienyl)cyclopent-2-enyl[1R-[1Î±[S*(Z)](3Î²)]]-3-(3-methoxy-2-methyl-3-oxoprop-1-enyl)-2,2-dimethylcyclopropanecarboxylate; pyrethrin II",
+  "name": "2-methyl-4-oxo-3-(penta-2,4-dienyl)cyclopent-2-enyl[1R-[1α[S*(Z)](3β)]]-3-(3-methoxy-2-methyl-3-oxoprop-1-enyl)-2,2-dimethylcyclopropanecarboxylate; pyrethrin II",
   "name_tr": "",
   "ec_no": "204-462-6",
   "index_no": "613-024-00-7",
@@ -9,15 +9,15 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H312"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {

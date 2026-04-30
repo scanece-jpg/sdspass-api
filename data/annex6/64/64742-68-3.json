@@ -1,11 +1,13 @@
 {
   "cas": "64742-68-3",
-  "name": "Naphthenic oils (petroleum), catalytic dewaxed heavy; Baseoil â€” unspecified; [A complex combination of hydrocarbons obtained from a catalytic dewaxing process. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C20 through C50 and produces a finished oil with a viscosity of at least 100 SUS at 100 Â°F (19cSt at 40 Â°C). It contains relatively few normal paraffins.]",
+  "name": "Naphthenic oils (petroleum), catalytic dewaxed heavy; Baseoil - unspecified; [A complex combination of hydrocarbons obtained from a catalytic dewaxing process. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C20 through C50 and produces a finished oil with a viscosity of at least 100 SUS at 100 °F (19cSt at 40 °C). It contains relatively few normal paraffins.]",
   "name_tr": "",
   "ec_no": "265-172-3",
   "index_no": "649-475-00-1",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "L"
+  ],
   "classification": {
     "hazards": [
       {

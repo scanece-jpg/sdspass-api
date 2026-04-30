@@ -4,23 +4,28 @@
   "name_tr": "Gazlar (petrol), katalitik olarak parçalanmış nafta propan giderici üstleri, C3-zengin asit içermeyen; Petrol gazı; [Katalitik olarak parçalanmış hidrokarbonların ayrımsal damıtılması sonucu elde edilen ve asidik safsızlıkları ayrıştırmak için işlem gören hidrokarbonların kompleks bir bileşimi. C2 ila C4 aralığında, büyük çoğunlukla C3, karbon sayısına sahip hidrokarbonlardan oluşur.]",
   "ec_no": "270-755-0",
   "index_no": "649-062-00-6",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

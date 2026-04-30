@@ -1,11 +1,13 @@
 {
   "cas": "16872-11-0",
-  "name": "fluoroboric acid ... %",
+  "name": "fluoroboric acid ... %",
   "name_tr": "",
   "ec_no": "240-898-3",
   "index_no": "009-010-00-X",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "B"
+  ],
   "classification": {
     "hazards": [
       {
@@ -14,7 +16,26 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H314",
+        "class": "",
+        "c_min": 25.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H315",
+        "class": "",
+        "c_min": 10.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H319",
+        "class": "",
+        "c_min": 10.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",

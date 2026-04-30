@@ -4,23 +4,28 @@
   "name_tr": "Gazlar (petrol), benzen ünitesi hidrojen ile muamele edici pentan giderici üstleri; Rafineri gazı; [Benzen ünitesi beslemesi ile hidrojenin katalizör varlığında muamele edilmesi sonucu üretilen, akabinde pentanı giderilen kompleks bir bileşim.Öncelikli olarak hidrojen, etan ve propan ile değişen düşük miktarlarda karbon monoksit, karbon dioksit ve büyük çoğunlukla C1 ila C6 aralığında karbon sayısına sahip hidrokarbonlardan oluşur. Eser miktarda benzen içerebilir.]",
   "ec_no": "271-623-5",
   "index_no": "649-149-00-9",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

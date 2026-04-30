@@ -4,7 +4,7 @@
   "name_tr": "",
   "ec_no": "403-320-2",
   "index_no": "607-213-00-3",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,7 +13,7 @@
         "h_code": "H226"
       },
       {
-        "class": "Org. Perox. D ****",
+        "class": "Org. Perox. D",
         "h_code": "H242"
       },
       {

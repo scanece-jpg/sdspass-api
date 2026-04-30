@@ -4,16 +4,21 @@
   "name_tr": "Hidrojen iyodür",
   "ec_no": "233-109-9",
   "index_no": "053-002-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "U",
-    "5"
+    "5",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
         "class": "Press. Gas",
         "h_code": "H314"
+      },
+      {
+        "class": "Skin Corr. 1A",
+        "h_code": ""
       }
     ],
     "m_factors": {},

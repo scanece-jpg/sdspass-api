@@ -2,22 +2,22 @@
   "cas": "7076-53-1",
   "name": "2,2-dichlorovinyl 2-ethylsulphinylethyl methyl phosphate",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "015-077-00-6",
   "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H331"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H311"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H301"
       }
     ],

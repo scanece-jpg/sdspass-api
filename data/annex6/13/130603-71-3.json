@@ -1,10 +1,10 @@
 {
   "cas": "130603-71-3",
-  "name": "3-(6-O-(6-desoxy-Î±-l-mannopyranosyl-O-(Î±-d-glucopyranosyl)-(Î²-d-glucopyranosyl)oxy)-2-(3,4-dihydroxyphenyl)-5,7-dihydroxy-4H-1-benzopyran-4-one",
+  "name": "3-(6-O-(6-desoxy-α-.sc.l.sc.-mannopyranosyl-O-(α-.sc.d.sc.-glucopyranosyl)-(β-.sc.d.sc.-glucopyranosyl)oxy)-2-(3,4-dihydroxyphenyl)-5,7-dihydroxy-4H-1-benzopyran-4-one",
   "name_tr": "",
   "ec_no": "424-170-4",
   "index_no": "606-096-00-6",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

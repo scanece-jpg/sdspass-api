@@ -1,11 +1,13 @@
 {
   "cas": "68477-31-6",
-  "name": "Distillates (petroleum), catalytic reformer fractionator residue, low-boiling; Gasoil â€” unspecified; [The complex combination of hydrocarbons from the distillation of catalytic reformer fractionator residue. It boils approximately below 288 Â°C (550 Â°F).]",
+  "name": "Distillates (petroleum), catalytic reformer fractionator residue, low-boiling; Gasoil - unspecified; [The complex combination of hydrocarbons from the distillation of catalytic reformer fractionator residue. It boils approximately below 288 °C (550 °F).]",
   "name_tr": "",
   "ec_no": "270-722-0",
   "index_no": "649-230-00-9",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "N"
+  ],
   "classification": {
     "hazards": [
       {

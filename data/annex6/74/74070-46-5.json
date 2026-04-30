@@ -4,7 +4,7 @@
   "name_tr": "",
   "ec_no": "277-704-1",
   "index_no": "612-120-00-6",
-  "atp": "ATP05",
+  "atp": "ATP5",
   "notes": [],
   "classification": {
     "hazards": [
@@ -25,10 +25,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 100,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

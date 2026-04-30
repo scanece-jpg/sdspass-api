@@ -18,7 +18,7 @@
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373 (inhalation)"
+        "h_code": "H373(Inhalation)"
       },
       {
         "class": "Eye Irrit. 2",
@@ -26,18 +26,25 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H360",
+        "class": "",
+        "c_min": 3.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS08",
-      "GHS07"
+      "GHS07",
+      "GHS08"
     ],
     "h_codes": [
       "H360D",
       "H332",
-      "H373 (inhalation)",
+      "H373(Inhalation)",
       "H319"
     ],
     "suppl_h": []

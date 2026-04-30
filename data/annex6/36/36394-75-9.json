@@ -1,15 +1,15 @@
 {
   "cas": "36394-75-9",
-  "name": "(S)-(â€“)-2-acetoxypropionylchloride; (1S)-2-chloro-1-methyl-2-oxoethyl acetate",
+  "name": "(S)-(-)-2-acetoxypropionylchloride; (1S)-2-chloro-1-methyl-2-oxoethyl acetate",
   "name_tr": "",
   "ec_no": "420-610-4",
   "index_no": "607-634-00-2",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
@@ -27,8 +27,8 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS07",
-      "GHS05"
+      "GHS05",
+      "GHS07"
     ],
     "h_codes": [
       "H302",

@@ -9,7 +9,7 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
@@ -33,10 +33,10 @@
     "scl_limits": []
   },
   "labelling": {
-    "signal": "Danger",
+    "signal": "Warning",
     "pictograms": [
-      "GHS07",
       "GHS05",
+      "GHS07",
       "GHS09"
     ],
     "h_codes": [

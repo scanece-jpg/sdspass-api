@@ -18,7 +18,14 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H031",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
@@ -30,6 +37,8 @@
       "H314",
       "H400"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH031"
+    ]
   }
 }

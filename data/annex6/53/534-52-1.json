@@ -13,15 +13,15 @@
         "h_code": "H341"
       },
       {
-        "class": "Acute Tox. 2 *",
-        "h_code": "H330"
-      },
-      {
         "class": "Acute Tox. 1",
         "h_code": "H310"
       },
       {
-        "class": "Acute Tox. 2 *",
+        "class": "Acute Tox. 2",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 2",
         "h_code": "H300"
       },
       {
@@ -51,15 +51,16 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS08",
       "GHS06",
+      "GHS08",
       "GHS05",
+      "GHS07",
       "GHS09"
     ],
     "h_codes": [
       "H341",
-      "H330",
       "H310",
+      "H330",
       "H300",
       "H315",
       "H318",
@@ -67,6 +68,8 @@
       "H400",
       "H410"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH044"
+    ]
   }
 }

@@ -1,10 +1,10 @@
 {
   "cas": "90640-86-1",
-  "name": "Distillates (coal tar), heavy oils; Heavy Anthracene Oil; [Distillate from the fractional distillation of coal tar of bituminous coal, with boiling range of 240 Â°C to 400 Â°C (464 Â°F to 752 Â°F). Composed primarily of tri- and polynuclear hydrocarbons and heterocyclic compounds.]",
+  "name": "Distillates (coal tar), heavy oils; Heavy Anthracene Oil; [Distillate from the fractional distillation of coal tar of bituminous coal, with boiling range of 240 °C to 400 °C (464 °F to 752 °F). Composed primarily of tri- and polynuclear hydrocarbons and heterocyclic compounds.]",
   "name_tr": "",
   "ec_no": "292-607-4",
   "index_no": "648-044-00-5",
-  "atp": "ATP02",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

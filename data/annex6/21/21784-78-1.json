@@ -1,10 +1,10 @@
 {
   "cas": "21784-78-1",
-  "name": "nickel(II) silicate [1]\ndinickel orthosilicate [2]\nnickel silicate (3:4) [3]\nsilicic acid, nickel salt [4]\ntrihydrogen hydroxybis[orthosilicato(4-)]trinickelate(3-) [5]",
+  "name": "nickel(II) silicate [1]\ndinickel orthosilicate [2]\nnickel silicate (3:4) [3]\nsilicic acid, nickel salt [4]\ntrihydrogen hydroxybis[orthosilicato(4-)]trinickelate(3-)  [5]",
   "name_tr": "",
-  "ec_no": "244-578-4",
+  "ec_no": "244-578-4 [1]\n237-411-1 [2]\n250-788-7 [3]\n253-461-7 [4]\n235-688-3 [5]",
   "index_no": "028-036-00-2",
-  "atp": "ATP02",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -14,7 +14,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 **"
+        "h_code": "H372"
       },
       {
         "class": "Skin Sens. 1",
@@ -41,7 +41,7 @@
     ],
     "h_codes": [
       "H350i",
-      "H372 **",
+      "H372",
       "H317",
       "H400",
       "H410"

@@ -4,23 +4,28 @@
   "name_tr": "Gazlar (petrol), gaz yağı dietanolamin yıkayıcısı çalışmazken; Rafineri gazı; [Gaz yağları ile dietanolaminin kükürt giderilmesinden elde edilen kompleks bir bileşim. Büyük çoğunlukla hidrojen sülfür, hidrojen ve C1 ila C5 aralığında karbon sayısına sahip alifatik hidrokarbonlar dan oluşur.]",
   "ec_no": "295-397-2",
   "index_no": "649-169-00-8",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

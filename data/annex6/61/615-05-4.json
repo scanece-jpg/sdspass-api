@@ -1,8 +1,8 @@
 {
   "cas": "615-05-4",
-  "name": "2,4-diaminoanisole; 4-methoxy-m-phenylenediamine [1]\n2,4-diaminoanisole sulphate [2]",
+  "name": "2,4-diaminoanisole; 4-methoxy-m-phenylenediamine [1]\n2,4-diaminoanisole sulphate  [2]",
   "name_tr": "",
-  "ec_no": "210-406-1",
+  "ec_no": "210-406-1 [1]\n254-323-9 [2]",
   "index_no": "612-200-00-0",
   "atp": "CLP00",
   "notes": [],
@@ -17,7 +17,7 @@
         "h_code": "H341"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {

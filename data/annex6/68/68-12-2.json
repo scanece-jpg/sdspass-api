@@ -10,14 +10,14 @@
     "hazards": [
       {
         "class": "Repr. 1B",
-        "h_code": "H360D ***"
+        "h_code": "H360D"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H312"
       },
       {
@@ -35,7 +35,7 @@
       "GHS07"
     ],
     "h_codes": [
-      "H360D ***",
+      "H360D",
       "H332",
       "H312",
       "H319"

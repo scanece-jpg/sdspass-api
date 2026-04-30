@@ -1,10 +1,10 @@
 {
   "cas": "7757-95-1",
-  "name": "nickel(II) sulfite [1]\nnickel tellurium trioxide [2]\nnickel tellurium tetraoxide [3]\nmolybdenum nickel hydroxide oxide phosphate [4]",
+  "name": "nickel(II) sulfite [1]\nnickel tellurium trioxide [2]\nnickel tellurium tetraoxide [3]\nmolybdenum nickel hydroxide oxide phosphate  [4]",
   "name_tr": "",
-  "ec_no": "231-827-7",
+  "ec_no": "231-827-7 [1]\n239-967-0 [2]\n239-974-9 [3]\n268-585-7 [4]",
   "index_no": "028-055-00-6",
-  "atp": "ATP02",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -14,7 +14,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 **"
+        "h_code": "H372"
       },
       {
         "class": "Resp. Sens. 1",
@@ -44,7 +44,7 @@
     ],
     "h_codes": [
       "H350i",
-      "H372 **",
+      "H372",
       "H334",
       "H317",
       "H400",

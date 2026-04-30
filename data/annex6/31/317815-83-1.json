@@ -1,8 +1,8 @@
 {
   "cas": "317815-83-1",
-  "name": "thiencarbazone-methyl (ISO); methyl 4-[(4,5-dihydro-3-methoxy-4-methyl-5-oxo-1H-1,2,4-triazol-1-yl)carbonylsulfamoyl]-5- methylthiophene-3-carboxylate",
+  "name": "thiencarbazone-methyl (ISO); methyl   4-[(4,5-dihydro-3-methoxy-4- methyl-5-oxo-1H-1,2,4-triazol-1-yl)carbonylsulfamoyl]-5- methylthiophene-3- carboxylate",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "607-742-00-X",
   "atp": "ATP15",
   "notes": [],
@@ -17,10 +17,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1000,
-      "chronic": 1000
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

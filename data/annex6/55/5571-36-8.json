@@ -4,17 +4,17 @@
   "name_tr": "",
   "ec_no": "427-230-8",
   "index_no": "606-131-00-5",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
       {
         "class": "Repr. 1B",
-        "h_code": "H360F ***"
+        "h_code": "H360F"
       },
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Aquatic Chronic 2",
@@ -31,8 +31,8 @@
       "GHS09"
     ],
     "h_codes": [
-      "H360F ***",
-      "H373 **",
+      "H360F",
+      "H373",
       "H411"
     ],
     "suppl_h": []

@@ -5,19 +5,21 @@
   "ec_no": "203-440-3",
   "index_no": "607-117-00-1",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "D"
+  ],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H331"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H311"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H301"
       },
       {
@@ -30,7 +32,14 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H317",
+        "class": "",
+        "c_min": 2.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",

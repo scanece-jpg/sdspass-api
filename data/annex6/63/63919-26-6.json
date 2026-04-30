@@ -2,14 +2,14 @@
   "cas": "63919-26-6",
   "name": "dinocton; reaction mass of isomers: methyl 2-octyl-4,6-dinitrophenyl carbonate, methyl 4-octyl-2,6-dinitrophenyl carbonate",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "609-027-00-8",
   "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {

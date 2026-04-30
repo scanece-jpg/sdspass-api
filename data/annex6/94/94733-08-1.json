@@ -1,11 +1,13 @@
 {
   "cas": "94733-08-1",
-  "name": "Distillates (petroleum), solvent-refined hydrotreated heavy; hydrogenated; Baseoil â€” unspecified",
+  "name": "Distillates (petroleum), solvent-refined hydrotreated heavy, hydrogenated; Baseoil - unspecified",
   "name_tr": "",
   "ec_no": "305-588-5",
   "index_no": "649-504-00-8",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "L"
+  ],
   "classification": {
     "hazards": [
       {

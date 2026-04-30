@@ -5,7 +5,9 @@
   "ec_no": "232-260-8",
   "index_no": "015-181-00-1",
   "atp": "ATP15",
-  "notes": [],
+  "notes": [
+    "U"
+  ],
   "classification": {
     "hazards": [
       {
@@ -14,19 +16,19 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": "H330"
+        "h_code": ""
       },
       {
         "class": "Acute Tox. 1",
-        "h_code": "H314"
+        "h_code": "H330"
       },
       {
         "class": "Skin Corr. 1B",
-        "h_code": "H400"
+        "h_code": "H314"
       },
       {
         "class": "Aquatic Acute 1",
-        "h_code": ""
+        "h_code": "H400"
       }
     ],
     "m_factors": {},

@@ -1,11 +1,13 @@
 {
   "cas": "107-83-5",
-  "name": "hexane (containing < 5 % n-hexane (203-777-6)); 2-methylpentane [1]\n3-methylpentane [2]\n2,2-dimethylbutane [3]\n2,3-dimethylbutane [4]",
+  "name": "hexane (containing < 5 % n-hexane (203-777-6)); 2-methylpentane [1]\n3-methylpentane [2]\n2,2-dimethylbutane [3]\n2,3-dimethylbutane  [4]",
   "name_tr": "",
-  "ec_no": "203-523-4",
+  "ec_no": "203-523-4 [1]\n202-481-4 [2]\n200-906-8 [3]\n201-193-6 [4]",
   "index_no": "601-007-00-7",
-  "atp": "ATP01",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "C"
+  ],
   "classification": {
     "hazards": [
       {

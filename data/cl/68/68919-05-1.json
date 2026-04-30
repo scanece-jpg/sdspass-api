@@ -4,23 +4,28 @@
   "name_tr": "Gazlar (petrol), oktan oranı düşük hafif benzin ayrımsal damıtma kararlaştırıcısı çalışmazken; Petrol gazı; [Oktan oranı düşük hafif benzin fraksiyonlanmasında elde edilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla C1 ila C5 aralığında karbon sayısına sahip doymuş alifatik hidrokarbonlardan oluşur.]",
   "ec_no": "272-878-5",
   "index_no": "649-102-00-2",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

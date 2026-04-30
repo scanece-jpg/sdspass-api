@@ -1,11 +1,13 @@
 {
   "cas": "74-89-5",
-  "name": "mono-methylamine ... % [1]\ndi-methylamine ... % [2]\ntri-methylamine ... % [3]",
+  "name": "mono-methylamine ... % [1]\ndi-methylamine ... % [2]\ntri-methylamine ... %  [3]",
   "name_tr": "",
-  "ec_no": "200-820-0",
+  "ec_no": "200-820-0 [1]\n204-697-4 [2]\n200-875-0 [3]",
   "index_no": "612-001-01-6",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "B"
+  ],
   "classification": {
     "hazards": [
       {
@@ -13,11 +15,11 @@
         "h_code": "H224"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
@@ -26,14 +28,21 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H335",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
     "pictograms": [
       "GHS02",
-      "GHS07",
-      "GHS05"
+      "GHS05",
+      "GHS07"
     ],
     "h_codes": [
       "H224",

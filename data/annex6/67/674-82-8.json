@@ -5,7 +5,9 @@
   "ec_no": "211-617-1",
   "index_no": "606-017-00-5",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "D"
+  ],
   "classification": {
     "hazards": [
       {
@@ -13,7 +15,7 @@
         "h_code": "H226"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       }
     ],

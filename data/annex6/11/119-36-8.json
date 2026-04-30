@@ -31,8 +31,8 @@
   "labelling": {
     "signal": "Warning",
     "pictograms": [
-      "GHS08",
-      "GHS07"
+      "GHS07",
+      "GHS08"
     ],
     "h_codes": [
       "H361d",

@@ -1,11 +1,13 @@
 {
   "cas": "110-74-7",
-  "name": "propyl formate [1]\nisopropyl formate [2]",
+  "name": "propyl formate [1]\nisopropyl formate  [2]",
   "name_tr": "",
-  "ec_no": "203-798-0",
+  "ec_no": "203-798-0 [1]\n210-901-2 [2]",
   "index_no": "607-016-00-2",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "C"
+  ],
   "classification": {
     "hazards": [
       {

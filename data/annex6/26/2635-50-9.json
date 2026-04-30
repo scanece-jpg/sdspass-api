@@ -2,22 +2,22 @@
   "cas": "2635-50-9",
   "name": "S-[2-(isopropylsulphinyl)ethyl] O,O-dimethyl phosphorothioate",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "015-075-00-5",
   "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H331"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H311"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H301"
       }
     ],

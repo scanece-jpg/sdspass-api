@@ -1,11 +1,13 @@
 {
   "cas": "8032-32-4",
-  "name": "Ligroine; Low boiling point naphtha; [A complex combination of hydrocarbons obtained by the fractional distillation of petroleum. This fraction boils in a range of approximately 20 Â°C to 135 Â°C (58 Â°F to 275 Â°F).]",
+  "name": "Ligroine; Low boiling point naphtha; [A complex combination of hydrocarbons obtained by the fractional distillation of petroleum.  This fraction boils in a range of approximately 20°C to 135°C (58°F to 275°F).]",
   "name_tr": "",
   "ec_no": "232-453-7",
   "index_no": "649-263-00-9",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

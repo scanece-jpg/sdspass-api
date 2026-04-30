@@ -1,11 +1,13 @@
 {
   "cas": "61789-28-4",
-  "name": "Creosote oil; [A complex combination of hydrocarbons obtained by the distillation of coal tar. It consists primarily of aromatic hydrocarbons and may contain appreciable quantities of tar acids and tar bases. It distills at the approximate range of 200 Â°C to 325 Â°C (392 Â°F to 617 Â°F).]",
+  "name": "Creosote oil; [A complex combination of hydrocarbons obtained by the distillation of coal tar. It consists primarily of aromatic hydrocarbons and may contain appreciable quantities of tar acids and tar bases. It distills at the approximate range of 200°C to 325°C (392°F to 617°F).]",
   "name_tr": "",
   "ec_no": "263-047-8",
   "index_no": "648-099-00-5",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "M"
+  ],
   "classification": {
     "hazards": [
       {

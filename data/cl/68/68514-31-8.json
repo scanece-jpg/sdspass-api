@@ -4,23 +4,28 @@
   "name_tr": "Hidrokarbonlar, C1-4; Petrol gazı; [Isıl parçalama ve soğurma işlemleri ve ham petrolün damıtılması ile elde edilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla, C1 ila C4 aralığında karbon sayısına sahip ve yaklaşık eksi 164 oC ila eksi 0,5 oC (-263 oF ila 31 oF) aralığında kaynayan, hidrokarbonlardan oluşur.]",
   "ec_no": "271-032-2",
   "index_no": "649-088-00-8",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

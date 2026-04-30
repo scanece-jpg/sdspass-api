@@ -9,16 +9,16 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H331"
       },
       {
-        "class": "Acute Tox. 4 *",
-        "h_code": "H312"
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
       },
       {
-        "class": "Acute Tox. 3 *",
-        "h_code": "H301"
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
       },
       {
         "class": "Skin Sens. 1",
@@ -44,8 +44,8 @@
     ],
     "h_codes": [
       "H331",
-      "H312",
       "H301",
+      "H312",
       "H317",
       "H400",
       "H410"

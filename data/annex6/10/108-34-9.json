@@ -2,22 +2,22 @@
   "cas": "108-34-9",
   "name": "pyrazoxon; diethyl 3-methylpyrazol-5-yl phosphate",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "015-023-00-1",
   "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 2 *",
-        "h_code": "H330"
-      },
-      {
         "class": "Acute Tox. 1",
         "h_code": "H310"
       },
       {
-        "class": "Acute Tox. 2 *",
+        "class": "Acute Tox. 2",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 2",
         "h_code": "H300"
       }
     ],
@@ -30,8 +30,8 @@
       "GHS06"
     ],
     "h_codes": [
-      "H330",
       "H310",
+      "H330",
       "H300"
     ],
     "suppl_h": []

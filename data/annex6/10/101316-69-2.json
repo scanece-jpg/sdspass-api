@@ -1,11 +1,13 @@
 {
   "cas": "101316-69-2",
-  "name": "Lubricating oils (petroleum), C>25, solvent-extd., deasphalted, dewaxed, hydrogenated; Baseoil â€” unspecified; [A complex combination of hydrocarbons obtained by solvent extraction and hydrogenation of vacuum distillation residues. It consists predominantly of hydrocarbons having carbon numbers predominantly greater than C25 and produces a finished oil with a viscosity in the order of 32cSt to 37cSt at 100 Â°C (212 Â°F).]",
+  "name": "Lubricating oils (petroleum), C >25, solvent-extd., deasphalted, dewaxed, hydrogenated; Baseoil - unspecified; [A complex combination of hydrocarbons obtained by solvent extraction and hydrogenation of vacuum distillation residues. It consists predominantly of hydrocarbons having carbon numbers predominantly greater than C25 and produces a finished oil with a viscosity in the order of 32cSt to 37cSt at 100 °C (212 °F).]",
   "name_tr": "",
   "ec_no": "309-874-0",
   "index_no": "649-527-00-3",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "L"
+  ],
   "classification": {
     "hazards": [
       {

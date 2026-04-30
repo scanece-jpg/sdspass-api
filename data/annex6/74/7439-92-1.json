@@ -1,6 +1,6 @@
 {
   "cas": "7439-92-1",
-  "name": "lead massive:; [particle diameter â‰¥ 1 mm]",
+  "name": "lead massive:  [particle diameter ≥ 1 mm]",
   "name_tr": "",
   "ec_no": "231-100-4",
   "index_no": "082-014-00-7",
@@ -21,9 +21,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

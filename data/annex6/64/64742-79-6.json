@@ -1,11 +1,13 @@
 {
   "cas": "64742-79-6",
-  "name": "Gas oils (petroleum), hydrodesulfurized; Gasoil â€” unspecified; [A complex combination of hydrocarbons obtained from a petroleum stock by treating with hydrogen to convert organic sulfur to hydrogen sulfide which is removed. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C13 through C25 and boiling in the range of approximately 230 Â°C to 400 Â°C (446 Â°F to 752 Â°F).]",
+  "name": "Gas oils (petroleum), hydrodesulfurized; Gasoil - unspecified; [A complex combination of hydrocarbons obtained from a petroleum stock by treating with hydrogen to convert organic sulfur to hydrogen sulfide which is removed. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C13 through C25 and boiling in the range of approximately 230 °C to 400 °C (446 °F to 752 °F).]",
   "name_tr": "",
   "ec_no": "265-182-8",
   "index_no": "649-222-00-5",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "N"
+  ],
   "classification": {
     "hazards": [
       {

@@ -14,11 +14,11 @@
       },
       {
         "class": "Repr. 1A",
-        "h_code": "H360F ***"
+        "h_code": "H360F"
       },
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       }
     ],
     "m_factors": {},
@@ -32,9 +32,11 @@
     ],
     "h_codes": [
       "H225",
-      "H360F ***",
-      "H373 **"
+      "H360F",
+      "H373"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH066"
+    ]
   }
 }

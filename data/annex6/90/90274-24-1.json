@@ -1,6 +1,6 @@
 {
   "cas": "90274-24-1",
-  "name": "(Â±)-4-[2-[[3-(4-hydroxyphenyl)-1-methylpropyl]amino]-1-hydroxyethyl]phenol hydrochloride",
+  "name": "(±)-4-[2-[[3-(4-hydroxyphenyl)-1-methylpropyl]amino]-1-hydroxyethyl]phenol hydrochloride",
   "name_tr": "",
   "ec_no": "415-170-5",
   "index_no": "604-068-00-8",
@@ -9,11 +9,11 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {

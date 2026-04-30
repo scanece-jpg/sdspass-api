@@ -1,6 +1,6 @@
 {
   "cas": "119-38-0",
-  "name": "1-isopropyl-3-methylpyrazol-5-yl dimethylcarbamate; isolan",
+  "name": "1-isopropyl-3-methylpyrazol-5-yl dimethylcarbamate; Isolan",
   "name_tr": "",
   "ec_no": "204-318-2",
   "index_no": "006-009-00-6",
@@ -13,7 +13,7 @@
         "h_code": "H310"
       },
       {
-        "class": "Acute Tox. 2 *",
+        "class": "Acute Tox. 2",
         "h_code": "H300"
       }
     ],

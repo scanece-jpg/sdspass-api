@@ -37,11 +37,15 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1,
-      "chronic": 1
-    },
-    "scl_limits": []
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H317",
+        "class": "",
+        "c_min": 0.036,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",

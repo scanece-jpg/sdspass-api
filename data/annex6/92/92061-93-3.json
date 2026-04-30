@@ -1,11 +1,13 @@
 {
   "cas": "92061-93-3",
-  "name": "Residues (coal tar), creosote oil distn.; Wash Oil Redistillate; [The residue from the fractional distillation of wash oil boiling in the approximate range of 270 Â°C to 330 Â°C (518 Â°F to 626 Â°F). It consists predominantly of dinuclear aromatic and heterocyclic hydrocarbons.]",
+  "name": "Residues (coal tar), creosote oil distn.; Wash Oil Redistillate; [The residue from the fractional distillation of wash oil boiling in the approximate range of 270°C to 330°C (518°F to 626°F). It consists predominantly of dinuclear aromatic and heterocyclic hydrocarbons.]",
   "name_tr": "",
   "ec_no": "295-506-3",
   "index_no": "648-080-00-1",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "M"
+  ],
   "classification": {
     "hazards": [
       {

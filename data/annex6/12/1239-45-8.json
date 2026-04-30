@@ -4,7 +4,7 @@
   "name_tr": "",
   "ec_no": "214-984-6",
   "index_no": "612-278-00-6",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,11 +13,11 @@
         "h_code": "H341"
       },
       {
-        "class": "Acute Tox. 2 *",
+        "class": "Acute Tox. 2",
         "h_code": "H330"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       }
     ],
@@ -27,8 +27,8 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS08",
-      "GHS06"
+      "GHS06",
+      "GHS08"
     ],
     "h_codes": [
       "H341",

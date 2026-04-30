@@ -1,8 +1,8 @@
 {
   "cas": "79277-27-3",
-  "name": "thifensulfuron-methyl (ISO); methyl 3-(4-methoxy-6-methyl-1,3,5-triazin-2-ylcarbamoylsulfamoyl)thiophene-2-carboxylate",
+  "name": "thifensulfuron-methyl (ISO);\nmethyl 3-(4-methoxy-6-methyl-1,3,5-triazin-2-ylcarbamoylsulfamoyl)thiophene-2-carboxylate",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "016-096-00-2",
   "atp": "ATP13",
   "notes": [],
@@ -17,10 +17,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 100,
-      "chronic": 100
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

@@ -4,9 +4,10 @@
   "name_tr": "fosfin",
   "ec_no": "232-260-8",
   "index_no": "015-181-00-1",
-  "atp": "",
+  "atp": "ATP15",
   "notes": [
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
@@ -16,14 +17,18 @@
       },
       {
         "class": "Press. Gas",
+        "h_code": ""
+      },
+      {
+        "class": "Acute Tox. 1",
         "h_code": "H330"
       },
       {
-        "class": "Acute Tox. 2",
+        "class": "Skin Corr. 1B",
         "h_code": "H314"
       },
       {
-        "class": "Skin Corr. 1B",
+        "class": "Aquatic Acute 1",
         "h_code": "H400"
       }
     ],

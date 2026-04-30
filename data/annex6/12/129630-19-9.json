@@ -1,10 +1,10 @@
 {
   "cas": "129630-19-9",
-  "name": "pyraflufen-ethyl (ISO); 2-chloro-5-(4-chloro-5-difluoromethoxy-1-methylpyrazol-3-yl)-4-fluorophenoxyacetic acid ethyl ester [1]\npyraflufen (ISO); 2-chloro-5-(4-chloro-5-difluoromethoxy-1-methylpyrazol-3-yl)-4-fluorophenoxyacetic acid [2]",
+  "name": "pyraflufen-ethyl (ISO); 2-chloro-5-(4-chloro-5-difluoromethoxy-1-methylpyrazol-3-yl)-4-fluorophenoxyacetic acid ethyl ester [1]\npyraflufen (ISO); 2-chloro-5-(4-chloro-5-difluoromethoxy-1-methylpyrazol-3-yl)-4-fluorophenoxyacetic acid  [2]",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "613-203-00-X",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -17,9 +17,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1000
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

@@ -1,11 +1,13 @@
 {
   "cas": "138-86-3",
-  "name": "dipentene; limonene [1]\n(S)-p-mentha-1,8-diene; l-limonene [2]\ntrans-1-methyl-4-(1-methylvinyl)cyclohexene [3]\n(Â±)-1-methyl-4-(1-methylvinyl)cyclohexene [4]",
+  "name": "dipentene; limonene [1]\n(S)-p-mentha-1,8-diene; l-limonene [2]\ntrans-1-methyl-4-(1-methylvinyl)cyclohexene [3]\n(±)-1-methyl-4-(1-methylvinyl)cyclohexene  [4]",
   "name_tr": "",
-  "ec_no": "205-341-0",
+  "ec_no": "205-341-0 [1]\n227-815-6 [2]\n229-977-3 [3]\n231-732-0 [4]",
   "index_no": "601-029-00-7",
   "atp": "ATP17",
-  "notes": [],
+  "notes": [
+    "C"
+  ],
   "classification": {
     "hazards": [
       {

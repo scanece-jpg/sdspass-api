@@ -1,8 +1,8 @@
 {
   "cas": "66603-10-9",
-  "name": "potassium (oxido-NNO-azoxy)cyclohexane; cyclohexylhydroxydiazene 1-oxide, potassium salt; [K-HDO]",
+  "name": "potassium (oxido-N­NO-azoxy)cyclohexane; cyclohexylhydroxydia­zene 1-oxide, potassium salt; [K-HDO]",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "611-181-00-6",
   "atp": "ATP15",
   "notes": [],
@@ -18,7 +18,7 @@
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373 (liver)"
+        "h_code": "H373(liver)"
       },
       {
         "class": "Skin Irrit. 2",
@@ -48,7 +48,7 @@
     "h_codes": [
       "H228",
       "H301",
-      "H373 (liver)",
+      "H373(liver)",
       "H315",
       "H318",
       "H411"

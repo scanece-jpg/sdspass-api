@@ -4,7 +4,7 @@
   "name_tr": "",
   "ec_no": "266-583-0",
   "index_no": "616-205-00-9",
-  "atp": "ATP03",
+  "atp": "ATP3",
   "notes": [],
   "classification": {
     "hazards": [
@@ -25,17 +25,14 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 100,
-      "chronic": 100
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
     "signal": "Warning",
     "pictograms": [
-      "GHS08",
       "GHS07",
+      "GHS08",
       "GHS09"
     ],
     "h_codes": [

@@ -1,6 +1,6 @@
 {
   "cas": "5989-27-5",
-  "name": "(R)-p-mentha-1,8-diene; d-limonene",
+  "name": "(R)-p-mentha-1,8-diene;d-limonene",
   "name_tr": "",
   "ec_no": "227-813-5",
   "index_no": "601-096-00-2",
@@ -33,17 +33,15 @@
         "h_code": "H412"
       }
     ],
-    "m_factors": {
-      "acute": 1
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
     "signal": "Danger",
     "pictograms": [
       "GHS02",
-      "GHS08",
       "GHS07",
+      "GHS08",
       "GHS09"
     ],
     "h_codes": [

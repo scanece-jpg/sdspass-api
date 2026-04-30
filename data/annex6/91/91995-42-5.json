@@ -1,11 +1,13 @@
 {
   "cas": "91995-42-5",
-  "name": "Distillates (coal tar), heavy oils, pyrene fraction; Heavy Anthracene Oil Redistillate; [The redistillate obtained from the fractional distillation of pitch distillate boiling in the range of approximately 350 Â°C to 400 Â°C (662 Â°F to 752 Â°F). Consists predominantly of tri- and polynuclear aromatics and heterocyclic hydrocarbons.]",
+  "name": "Distillates (coal tar), heavy oils, pyrene fraction; Heavy Anthracene Oil Redistillate; [The redistillate obtained from the fractional distillation of pitch distillate boiling in the range of approximately 350 °C to 400 °C (662 °F to 752 °F). Consists predominantly of tri- and polynuclear aromatics and heterocyclic hydrocarbons.]",
   "name_tr": "",
   "ec_no": "295-304-5",
   "index_no": "648-050-00-8",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "M"
+  ],
   "classification": {
     "hazards": [
       {

@@ -4,23 +4,28 @@
   "name_tr": "Artık gaz (petrol), Doymuş gaz sistemi karışmış buhar, C4- zengin; Petrol gazı; [Normal üretim nafta, damıtma artık gazı ve katalitik dönüştürülmüş nafta kararlaştırıcısı artık gazın ayrımsal damıtma stabilizasyonundan elde edilen hidrokarbonların kompleks bir bileşimi. C3 ila C6 aralığında karbon sayısına sahip hidrokarbonlardan oluşur, büyük çoğunlukla butan ve izobutan.]",
   "ec_no": "270-813-5",
   "index_no": "649-080-00-4",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

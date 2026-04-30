@@ -4,16 +4,16 @@
   "name_tr": "",
   "ec_no": "230-625-6",
   "index_no": "613-280-00-X",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
       {
         "class": "Repr. 2",
-        "h_code": "H361f ***"
+        "h_code": "H361f"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
@@ -27,12 +27,12 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
+      "GHS05",
       "GHS08",
-      "GHS07",
-      "GHS05"
+      "GHS07"
     ],
     "h_codes": [
-      "H361f ***",
+      "H361f",
       "H302",
       "H318"
     ],

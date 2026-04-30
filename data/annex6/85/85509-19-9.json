@@ -2,7 +2,7 @@
   "cas": "85509-19-9",
   "name": "flusilazole (ISO); bis(4-fluorophenyl)(methyl)(1H-1,2,4-triazol-1-ylmethyl)silane",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "014-017-00-6",
   "atp": "CLP00",
   "notes": [],
@@ -14,10 +14,10 @@
       },
       {
         "class": "Repr. 1B",
-        "h_code": "H360D ***"
+        "h_code": "H360D"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
@@ -37,7 +37,7 @@
     ],
     "h_codes": [
       "H351",
-      "H360D ***",
+      "H360D",
       "H302",
       "H411"
     ],

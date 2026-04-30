@@ -1,6 +1,6 @@
 {
   "cas": "1861-40-1",
-  "name": "benfluralin (ISO); N-butyl-N-ethyl-Î±,Î±,Î±-trifluoro-2,6-dinitro-p-toluidine",
+  "name": "benfluralin (ISO); N-butyl-N-ethyl-α,α,α-trifluoro-2,6-dinitro-p-toluidine",
   "name_tr": "",
   "ec_no": "217-465-2",
   "index_no": "612-295-00-9",
@@ -37,10 +37,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

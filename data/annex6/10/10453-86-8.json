@@ -1,15 +1,15 @@
 {
   "cas": "10453-86-8",
-  "name": "resmethrin (ISO); 5-benzyl-3-furylmethyl (Â±)-cis-trans-chrysanthemate",
+  "name": "resmethrin (ISO); 5-benzyl-3-furylmethyl (±)-cis-trans-chrysanthemate",
   "name_tr": "",
   "ec_no": "233-940-7",
   "index_no": "613-060-00-3",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
@@ -21,9 +21,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1000
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

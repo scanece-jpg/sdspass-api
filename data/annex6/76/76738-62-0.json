@@ -1,8 +1,8 @@
 {
   "cas": "76738-62-0",
-  "name": "paclobutrazol (ISO); (2RS,3RS)-1-(4-chlorophenyl)-4,4-dimethyl-2-(1H-1,2,4-triazol-1-yl)pentan-3-ol",
+  "name": "paclobutrazol (ISO); (2RS,3RS)-1-(4-chloro­phenyl)-4,4-dimethyl- 2-(1H-1,2,4-triazol-1-yl)pentan-3-ol",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "603-239-00-4",
   "atp": "ATP15",
   "notes": [],
@@ -33,10 +33,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

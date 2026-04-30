@@ -1,8 +1,8 @@
 {
   "cas": "173662-97-0",
-  "name": "(RS)-2-methoxy-N-methyl-2-[Î±-(2,5-xylyloxy)-o-tolyl]acetamide; mandestrobin",
+  "name": "(RS)-2-methoxy-N-methyl-2-[α-(2,5-xylyloxy)-o-tolyl]acetamide; mandestrobin",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "616-225-00-8",
   "atp": "ATP14",
   "notes": [],
@@ -17,10 +17,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

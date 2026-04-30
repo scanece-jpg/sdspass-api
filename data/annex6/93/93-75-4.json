@@ -1,6 +1,6 @@
 {
   "cas": "93-75-4",
-  "name": "thioquinox(ISO); 2-thio-1,3-dithiolo(4,5,b)quinoxaline",
+  "name": "thioquinox (ISO); 2-thio-1,3-dithiolo(4,5,b)quinoxaline",
   "name_tr": "",
   "ec_no": "202-272-8",
   "index_no": "613-019-00-X",
@@ -9,7 +9,7 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       }
     ],

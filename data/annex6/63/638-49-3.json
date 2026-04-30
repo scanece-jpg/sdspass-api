@@ -5,7 +5,9 @@
   "ec_no": "211-340-6",
   "index_no": "607-696-00-0",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "C"
+  ],
   "classification": {
     "hazards": [
       {
@@ -25,7 +27,7 @@
     "scl_limits": []
   },
   "labelling": {
-    "signal": "Warning",
+    "signal": "Danger",
     "pictograms": [
       "GHS02",
       "GHS07"

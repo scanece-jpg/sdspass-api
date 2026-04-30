@@ -2,10 +2,12 @@
   "cas": "111-65-9",
   "name": "octane; n-octane [1]\n2,2,4-trimethylpentane [2]\n2,3,3-trimethylpentane [3]\n3,3-dimethylhexane [4]\n2,2,3-trimethylpentane [5]\n2,3,4-trimethylpentane [6]\n3,4-dimethylhexane [7]\n2,3-dimethylhexane [8]\n2,4-dimethylhexane [9]\n4-methylheptane [10]\n3-methylheptane [11]\n2,2-dimethylhexane [12]\n2,5-dimethylhexane [13]\n2-methylheptane [14]\n2,2,3,3-tetramethylbutane [15]\n3-ethyl-2-methylpentane [16]\n3-ethylhexane [17]\n3-ethyl-3-methylpentane [18]\nisooctane [19]",
   "name_tr": "",
-  "ec_no": "203-892-1",
+  "ec_no": "203-892-1 [1]\n208-759-1 [2]\n209-207-2 [3]\n209-243-9 [4]\n209-266-4 [5]\n209-292-6 [6]\n209-504-7 [7]\n209-547-1 [8]\n209-649-6 [9]\n209-650-1 [10]\n209-660-6 [11]\n209-689-4 [12]\n209-745-8 [13]\n209-747-9 [14]\n209-855-6 [15]\n210-187-2 [16]\n210-621-0 [17]\n213-923-0 [18]\n247-861-0 [19]",
   "index_no": "601-009-00-8",
-  "atp": "ATP01",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "C"
+  ],
   "classification": {
     "hazards": [
       {

@@ -1,10 +1,10 @@
 {
   "cas": "68333-23-3",
-  "name": "Naphtha (petroleum), heavy coker; Kerosine â€” unspecified; [A complex combination of hydrocarbons from the distillation of products from a fluid coker. It consists predominantly of unsaturated hydrocarbons having carbon numbers predominantly in the range of C6 through C15 and boiling in the range of approximately 157 Â°C to 288 Â°C (315 Â°F to 550 Â°F).]",
+  "name": "Naphtha (petroleum), heavy coker; Kerosine - unspecified; [A complex combination of hydrocarbons from the distillation of products from a fluid coker. It consists predominantly of unsaturated hydrocarbons having carbon numbers predominantly in the range of C6 through C15 and boiling in the range of approximately 157 °C to 288 °C (315 °F to 550 °F).]",
   "name_tr": "",
   "ec_no": "269-778-9",
   "index_no": "649-425-00-9",
-  "atp": "ATP02",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

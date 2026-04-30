@@ -1,17 +1,13 @@
 {
   "cas": "52315-07-8",
-  "name": "cypermethrin (ISO);\nα-cyano-3-phenoxybenzyl 3-(2,2-dichlorovi-nyl)-2,2-dimethylcyclopro-panecarboxylate; cypermethrin cis/trans +/- 40/60",
+  "name": "cypermethrin cis/trans +/- 80/20; (RS)-α-cyano-3-phenoxybenzyl (1RS; 3RS; 1RS, 3SR)-3-(2,2-dichlorovinyl)-2,2-dimethylcyclopropanecarboxylate",
   "name_tr": "",
   "ec_no": "257-842-9",
-  "index_no": "607-421-00-4",
-  "atp": "ATP17",
+  "index_no": "607-433-00-X",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
-      {
-        "class": "Acute Tox. 4",
-        "h_code": "H332"
-      },
       {
         "class": "Acute Tox. 4",
         "h_code": "H302"
@@ -21,8 +17,12 @@
         "h_code": "H335"
       },
       {
-        "class": "STOT RE 2",
-        "h_code": "H373(nervous_system)"
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
       },
       {
         "class": "Aquatic Acute 1",
@@ -40,14 +40,13 @@
     "signal": "Warning",
     "pictograms": [
       "GHS07",
-      "GHS08",
       "GHS09"
     ],
     "h_codes": [
-      "H332",
       "H302",
       "H335",
-      "H373(nervous_system)",
+      "H315",
+      "H317",
       "H400",
       "H410"
     ],

@@ -18,7 +18,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 (inhalation) (respiratory tract)"
+        "h_code": "H372(respiratory_tract,_inhalation)"
       },
       {
         "class": "Skin Irrit. 2",
@@ -41,10 +41,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1,
-      "chronic": 1
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -58,7 +55,7 @@
     "h_codes": [
       "H330",
       "H301",
-      "H372 (inhalation) (respiratory tract)",
+      "H372(respiratory_tract,_inhalation)",
       "H315",
       "H318",
       "H317",

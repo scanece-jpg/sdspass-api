@@ -1,6 +1,6 @@
 {
   "cas": "137390-08-0",
-  "name": "[(dimethylsilylene)bis((1,2,3,3a,7a-Î·)-1H-inden-1-ylidene)dimethyl]hafnium",
+  "name": "[(dimethylsilylene)bis((1,2,3,3a,7a-η)-1H-inden-1-ylidene)dimethyl]hafnium",
   "name_tr": "",
   "ec_no": "422-060-0",
   "index_no": "014-030-00-7",
@@ -9,7 +9,7 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 2 *",
+        "class": "Acute Tox. 2",
         "h_code": "H300"
       }
     ],

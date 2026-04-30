@@ -1,11 +1,13 @@
 {
   "cas": "68477-34-9",
-  "name": "Distillates (petroleum), C3-5, 2-methyl-2-butene-rich; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons from the distillation of hydrocarbons usually ranging in carbon numbers from C3 through C5, predominantly isopentane and 3-methyl-1-butene. It consists of saturated and unsaturated hydrocarbons having carbon numbers in the range of C3 through C5, predominantly 2-methyl-2-butene.]",
+  "name": "Distillates (petroleum), C3-5, 2-methyl-2-butene-rich; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons from the distillation of hydrocarbons usually ranging in carbon numbers from C3 through C5, predominantly isopentane and 3-methyl-1-butene.  It consists of saturated and unsaturated hydrocarbons having carbon numbers in the range of C3 through C5, predominantly 2-methyl-2-butene.]",
   "name_tr": "",
   "ec_no": "270-725-7",
   "index_no": "649-358-00-5",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

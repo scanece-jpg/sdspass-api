@@ -1,11 +1,13 @@
 {
   "cas": "107-22-2",
-  "name": "glyoxal...%; ethandial...%",
+  "name": "glyoxal … %; ethandial … %",
   "name_tr": "",
   "ec_no": "203-474-9",
   "index_no": "605-016-00-7",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "B"
+  ],
   "classification": {
     "hazards": [
       {
@@ -13,7 +15,7 @@
         "h_code": "H341"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
@@ -35,8 +37,8 @@
   "labelling": {
     "signal": "Warning",
     "pictograms": [
-      "GHS08",
-      "GHS07"
+      "GHS07",
+      "GHS08"
     ],
     "h_codes": [
       "H341",

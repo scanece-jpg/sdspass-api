@@ -1,11 +1,13 @@
 {
   "cas": "64741-54-4",
-  "name": "Naphtha (petroleum), heavy catalytic cracked; Low boiling point cat-cracked naphtha; [A complex combination of hydrocarbons produced by a distillation of products from a catalytic cracking process. It consists of hydrocarbons having carbon numbers predominantly in the range of C6 through C12 and boiling in the range of approximately 65 Â°C to 230 Â°C (148 Â°F to 446 Â°F). It contains a relatively large proportion of unsaturated hydrocarbons.]",
+  "name": "Naphtha (petroleum), heavy catalytic cracked; Low boiling point cat-cracked naphtha; [A complex combination of hydrocarbons produced by a distillation of products from a catalytic cracking process.  It consists of hydrocarbons having carbon numbers predominantly in the range of C6 through C12 and boiling in the range of approximately 65°C to 230°C (148°F to 446°F).  It contains a relatively large proportion of unsaturated hydrocarbons.]",
   "name_tr": "",
   "ec_no": "265-055-7",
   "index_no": "649-289-00-0",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

@@ -2,14 +2,14 @@
   "cas": "24151-93-7",
   "name": "piperophos (ISO); S-2-methylpiperidinocarbonylmethyl-O,O-dipropyl phosphorodithioate",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "015-133-00-X",
   "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
@@ -21,9 +21,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

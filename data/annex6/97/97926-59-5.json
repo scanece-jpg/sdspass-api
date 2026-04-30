@@ -1,10 +1,10 @@
 {
   "cas": "97926-59-5",
-  "name": "Gas oils (petroleum), light vacuum, thermal-cracked hydrodesulfurized; Cracked gasoil; [A complex combination of hydrocarbons obtained by catalytic dehydrosulfurization of thermal-cracked light vacuum petroleum. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C14 through C20 and boiling in the range of approximately 270 Â°C to 370 Â°C (518 Â°F to 698 Â°F).]",
+  "name": "Gas oils (petroleum), light vacuum, thermal-cracked hydrodesulfurized; Cracked gasoil; [A complex combination of hydrocarbons obtained by catalytic dehydrosulfurization of thermal-cracked light vacuum petroleum. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C14 through C20 and boiling in the range of approximately 270 °C to 370 °C (518 °F to 698 °F).]",
   "name_tr": "",
   "ec_no": "308-278-8",
   "index_no": "649-450-00-5",
-  "atp": "ATP02",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

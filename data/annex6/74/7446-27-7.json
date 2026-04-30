@@ -5,7 +5,9 @@
   "ec_no": "231-205-5",
   "index_no": "082-006-00-3",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "1"
+  ],
   "classification": {
     "hazards": [
       {
@@ -13,8 +15,8 @@
         "h_code": "H360Df"
       },
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Aquatic Acute 1",
@@ -36,7 +38,7 @@
     ],
     "h_codes": [
       "H360Df",
-      "H373 **",
+      "H373",
       "H400",
       "H410"
     ],

@@ -1,11 +1,13 @@
 {
   "cas": "84988-93-2",
-  "name": "Phenols, ammonia liquor ext.; Alkaline Extract; [The combination of phenols extracted, using isobutyl acetate, from the ammonia liquor condensed from the gas evolved in low-temperature (less than 700 Â°C (1 292  Â°F)) destructive distillation of coal. It consists predominantly of a reaction mass of monohydric and dihydric phenols.]",
+  "name": "Phenols, ammonia liquor ext.; Alkaline Extract; [The combination of phenols extracted, using isobutyl acetate, from the ammonia liquor condensed from the gas evolved in low-temperature (less than 700°C (1292°F)) destructive distillation of coal.  It consists predominantly of a reaction mass of monohydric and dihydric phenols.]",
   "name_tr": "",
   "ec_no": "284-881-9",
   "index_no": "648-111-00-9",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "J M"
+  ],
   "classification": {
     "hazards": [
       {

@@ -5,7 +5,9 @@
   "ec_no": "200-817-4",
   "index_no": "602-001-00-7",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "U"
+  ],
   "classification": {
     "hazards": [
       {
@@ -14,15 +16,15 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": "H351"
+        "h_code": ""
       },
       {
         "class": "Carc. 2",
-        "h_code": "H373 **"
+        "h_code": "H351"
       },
       {
-        "class": "STOT RE 2 *",
-        "h_code": ""
+        "class": "STOT RE 2",
+        "h_code": "H373"
       }
     ],
     "m_factors": {},
@@ -38,7 +40,7 @@
     "h_codes": [
       "H220",
       "H351",
-      "H373 **"
+      "H373"
     ],
     "suppl_h": []
   }

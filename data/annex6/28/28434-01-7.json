@@ -4,7 +4,7 @@
   "name_tr": "",
   "ec_no": "249-014-0",
   "index_no": "613-120-00-9",
-  "atp": "ATP01corr",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -17,9 +17,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1000
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

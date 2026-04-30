@@ -5,7 +5,9 @@
   "ec_no": "202-486-1",
   "index_no": "602-062-00-X",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "D"
+  ],
   "classification": {
     "hazards": [
       {
@@ -14,18 +16,18 @@
       },
       {
         "class": "Repr. 1B",
-        "h_code": "H360F ***"
+        "h_code": "H360F"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H312"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       }
     ],
@@ -40,7 +42,7 @@
     ],
     "h_codes": [
       "H350",
-      "H360F ***",
+      "H360F",
       "H332",
       "H312",
       "H302"

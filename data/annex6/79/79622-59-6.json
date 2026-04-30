@@ -2,9 +2,9 @@
   "cas": "79622-59-6",
   "name": "fluazinam (ISO); 3-chloro-N-[3-chloro-2,6-dinitro-4-(trifluoromethyl)phenyl]-5-(trifluoromethyl)pyridin-2-amine",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "612-287-00-5",
-  "atp": "ATP06",
+  "atp": "ATP6",
   "notes": [],
   "classification": {
     "hazards": [
@@ -33,10 +33,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

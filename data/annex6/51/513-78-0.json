@@ -5,7 +5,9 @@
   "ec_no": "208-168-9",
   "index_no": "048-012-00-5",
   "atp": "ATP10",
-  "notes": [],
+  "notes": [
+    "1 A"
+  ],
   "classification": {
     "hazards": [
       {
@@ -17,20 +19,20 @@
         "h_code": "H340"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H312"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 (kidney, bone)"
+        "h_code": "H372(kidney,_bone)"
       },
       {
         "class": "Aquatic Acute 1",
@@ -57,7 +59,7 @@
       "H332",
       "H312",
       "H302",
-      "H372 (kidney, bone)",
+      "H372(kidney,_bone)",
       "H400",
       "H410"
     ],

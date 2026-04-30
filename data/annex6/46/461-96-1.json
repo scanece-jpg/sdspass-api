@@ -13,12 +13,12 @@
         "h_code": "H226"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Skin Irrit. 2",
@@ -44,14 +44,14 @@
     "signal": "Warning",
     "pictograms": [
       "GHS02",
-      "GHS07",
       "GHS08",
+      "GHS07",
       "GHS09"
     ],
     "h_codes": [
       "H226",
       "H302",
-      "H373 **",
+      "H373",
       "H315",
       "H317",
       "H400",

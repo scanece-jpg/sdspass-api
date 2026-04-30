@@ -1,11 +1,13 @@
 {
   "cas": "84650-04-4",
-  "name": "Distillates (coal tar), naphthalene oils; Naphthalene Oil; [A complex combination of hydrocarbons obtained by the distillation of coal tar. It consists primarily of aromatic and other hydrocarbons, phenolic compounds and aromatic nitrogen compounds and distills in the approximate range of 200 Â°C to 250 Â°C (392 Â°F to 482 Â°F).]",
+  "name": "Distillates (coal tar), naphthalene oils; Naphthalene Oil; [A complex combination of hydrocarbons obtained by the distillation of coal tar.  It consists primarily of aromatic and other hydrocarbons, phenolic compounds and aromatic nitrogen compounds and distills in the approximate range of 200°C to 250°C (392°F to 482°F).]",
   "name_tr": "",
   "ec_no": "283-484-8",
   "index_no": "648-085-00-9",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "J M"
+  ],
   "classification": {
     "hazards": [
       {

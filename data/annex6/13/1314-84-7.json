@@ -4,8 +4,10 @@
   "name_tr": "",
   "ec_no": "215-244-5",
   "index_no": "015-006-00-9",
-  "atp": "ATP01",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "T"
+  ],
   "classification": {
     "hazards": [
       {
@@ -13,7 +15,7 @@
         "h_code": "H260"
       },
       {
-        "class": "Acute Tox. 2 *",
+        "class": "Acute Tox. 2",
         "h_code": "H300"
       },
       {
@@ -25,9 +27,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 100
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -43,6 +43,9 @@
       "H400",
       "H410"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH029",
+      "EUH032"
+    ]
   }
 }

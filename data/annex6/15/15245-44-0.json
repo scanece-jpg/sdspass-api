@@ -1,11 +1,13 @@
 {
   "cas": "15245-44-0",
-  "name": "lead 2,4,6-trinitro-m-phenylene dioxide; lead 2,4,6-trinitroresorcinoxide; lead styphnate (â‰¥ 20 % phlegmatiser)",
+  "name": "lead 2,4,6-trinitro-m-phenylene dioxide; lead 2,4,6-trinitroresorcinoxide; lead styphnate (≥ 20 % phlegmatiser)",
   "name_tr": "",
   "ec_no": "239-290-0",
   "index_no": "609-019-01-1",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "1"
+  ],
   "classification": {
     "hazards": [
       {
@@ -17,16 +19,16 @@
         "h_code": "H360Df"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Aquatic Acute 1",
@@ -53,7 +55,7 @@
       "H360Df",
       "H332",
       "H302",
-      "H373 **",
+      "H373",
       "H400",
       "H410"
     ],

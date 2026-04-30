@@ -1,6 +1,6 @@
 {
   "cas": "121-21-1",
-  "name": "2-methyl-4-oxo-3-(penta-2,4-dienyl)cyclopent-2-enyl [1R-[1Î±[S*(Z)],3Î²]]-chrysanthemate; pyrethrin I",
+  "name": "2-methyl-4-oxo-3-(penta-2,4-dienyl)cyclopent-2-enyl [1R-[1α[S*(Z)],3β]]-chrysanthemate; pyrethrin I",
   "name_tr": "",
   "ec_no": "204-455-8",
   "index_no": "613-023-00-1",
@@ -9,15 +9,15 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H312"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {

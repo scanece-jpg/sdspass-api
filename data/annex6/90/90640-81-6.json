@@ -1,11 +1,13 @@
 {
   "cas": "90640-81-6",
-  "name": "Anthracene oil, anthracene paste; Anthracene Oil Fraction; [The anthracene-rich solid obtained by the crystallization and centrifuging of anthracene oil. It is composed primarily of anthracene, carbazole and phenanthrene.]",
+  "name": "Anthracene oil, anthracene paste; Anthracene Oil Fraction; [The anthracene-rich solid obtained by the crystallization and centrifuging of anthracene oil.  It is composed primarily of anthracene, carbazole and phenanthrene.]",
   "name_tr": "",
   "ec_no": "292-603-2",
   "index_no": "648-103-00-5",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "J M"
+  ],
   "classification": {
     "hazards": [
       {

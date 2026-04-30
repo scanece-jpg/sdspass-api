@@ -1,11 +1,13 @@
 {
   "cas": "68410-97-9",
-  "name": "Distillates (petroleum), light distillate hydrotreating process, low-boiling; Low boiling point hydrogen treated naphtha; [A complex combination of hydrocarbons obtained by the distillation of products from the light distillate hydrotreating process. It consists of hydrocarbons having carbon numbers predominantly in the range of C6 through C9 and boiling in the range of approximately 3 Â°C to 194 Â°C (37 Â°F to 382 Â°F).]",
+  "name": "Distillates (petroleum), light distillate hydrotreating process, low-boiling; Low boiling point hydrogen treated naphtha; [A complex combination of hydrocarbons obtained by the distillation of products from the light distillate hydrotreating process.  It consists of hydrocarbons having carbon numbers predominantly in the range of C6 through C9 and boiling in the range of approximately 3°C to 194°C (37°F to 382°F).]",
   "name_tr": "",
   "ec_no": "270-093-2",
   "index_no": "649-332-00-3",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

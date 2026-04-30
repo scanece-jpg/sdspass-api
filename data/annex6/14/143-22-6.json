@@ -14,7 +14,20 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H318",
+        "class": "",
+        "c_min": 30.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H319",
+        "class": "",
+        "c_min": 20.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",

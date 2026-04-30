@@ -1,8 +1,8 @@
 {
   "cas": "100-63-0",
-  "name": "phenylhydrazine [1]\nphenylhydrazinium chloride [2]\nphenylhydrazine hydrochloride [3]\nphenylhydrazinium sulphate (2:1) [4]",
+  "name": "phenylhydrazine [1]\nphenylhydrazinium chloride [2]\nphenylhydrazine hydrochloride [3]\nphenylhydrazinium sulphate (2:1)  [4]",
   "name_tr": "",
-  "ec_no": "202-873-5",
+  "ec_no": "202-873-5 [1]\n200-444-7 [2]\n248-259-0 [3]\n257-622-2 [4]",
   "index_no": "612-023-00-9",
   "atp": "CLP00",
   "notes": [],
@@ -17,20 +17,20 @@
         "h_code": "H341"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H331"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H311"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H301"
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 **"
+        "h_code": "H372"
       },
       {
         "class": "Skin Irrit. 2",
@@ -55,8 +55,8 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS08",
       "GHS06",
+      "GHS08",
       "GHS09"
     ],
     "h_codes": [
@@ -65,7 +65,7 @@
       "H331",
       "H311",
       "H301",
-      "H372 **",
+      "H372",
       "H315",
       "H319",
       "H317",

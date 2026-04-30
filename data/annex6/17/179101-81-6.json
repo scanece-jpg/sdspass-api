@@ -2,7 +2,7 @@
   "cas": "179101-81-6",
   "name": "pyridalyl (ISO); 2,6-dichloro-4-(3,3-dichloroallyloxy)phenyl 3-[5-(trifluoromethyl)-2-pyridyloxy]propyl ether",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "613-343-00-1",
   "atp": "ATP18",
   "notes": [],
@@ -21,10 +21,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1000,
-      "chronic": 100
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

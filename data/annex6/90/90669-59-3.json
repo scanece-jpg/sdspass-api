@@ -1,11 +1,13 @@
 {
   "cas": "90669-59-3",
-  "name": "Pitch, coal tar, low-temp., oxidized; Pitch Residue, oxidised; [The product obtained by air-blowing, at elevated temperature, low-temperature coal tar pitch. It has a softening-point within the approximate range of 70 Â°C to 180 Â°C (158 Â°F to 356 Â°F). Composed primarily of a complex mixture of hydrocarbons.]",
+  "name": "Pitch, coal tar, low-temp., oxidized; Pitch Residue, oxidised; [The product obtained by air-blowing, at elevated temperature, low-temperature coal tar pitch. It has a softening-point within the approximate range of 70 °C to 180 °C (158 °F to 356 °F). Composed primarily of a complex mixture of hydrocarbons.]",
   "name_tr": "",
   "ec_no": "292-654-0",
   "index_no": "648-070-00-7",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "M"
+  ],
   "classification": {
     "hazards": [
       {

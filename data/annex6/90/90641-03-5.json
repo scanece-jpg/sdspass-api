@@ -1,11 +1,13 @@
 {
   "cas": "90641-03-5",
-  "name": "Extract residues (coal), light oil alk., indene naphtha fraction; Light Oil Extract Residues, high boiling; [The distillate from aromatic hydrocarbons, coumarone, naphthalene and indene rich prefractionator bottoms or washed carbolic oils, having an approximate boiling range of 155 Â°C to 180 Â°C (311 Â°F to 356 Â°F). Composed primarily of indene, indan and trimethylbenzenes.]",
+  "name": "Extract residues (coal), light oil alk., indene naphtha fraction; Light Oil Extract Residues, high boiling; [The distillate from aromatic hydrocarbons, coumarone, naphthalene and indene rich prefractionator bottoms or washed carbolic oils, having an approximate boiling range of 155°C to 180°C (311°F to 356°F).  Composed primarily of indene, indan and trimethylbenzenes.]",
   "name_tr": "",
   "ec_no": "292-626-8",
   "index_no": "648-019-00-9",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "J"
+  ],
   "classification": {
     "hazards": [
       {

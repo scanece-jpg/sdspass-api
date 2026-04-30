@@ -2,14 +2,14 @@
   "cas": "136-25-4",
   "name": "erbon (ISO); 2-(2,4,5-trichlorophenoxy)ethyl 2,2-dichloropropionate",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "607-077-00-5",
   "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {

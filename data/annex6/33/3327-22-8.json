@@ -1,11 +1,13 @@
 {
   "cas": "3327-22-8",
-  "name": "(3-chloro-2-hydroxypropyl) trimethylammonium chloride â€¦%",
+  "name": "(3-chloro-2-hydroxypropyl) trimethylammonium chloride ...%",
   "name_tr": "",
   "ec_no": "222-048-3",
   "index_no": "612-238-00-8",
-  "atp": "ATP01",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "B"
+  ],
   "classification": {
     "hazards": [
       {

@@ -1,11 +1,13 @@
 {
   "cas": "97722-09-3",
-  "name": "Hydrocarbons, C13-27, solvent-extd. light naphthenic; Baseoil â€” unspecified; [A complex combination of hydrocarbons obtained by extraction of the aromatics from a light naphthenic distillate having a viscosity of 9.5cSt at 40 Â°C (104 Â°F). It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C13 through C27 and boiling in the range of approximately 240 Â°C to 400 Â°C (464 Â°F to 752 Â°F).]",
+  "name": "Hydrocarbons, C13-27, solvent-extd. light naphthenic; Baseoil - unspecified; [A complex combination of hydrocarbons obtained by extraction of the aromatics from a light naphthenic distillate having a viscosity of 9.5cSt at 40 °C (104 °F). It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C13 through C27 and boiling in the range of approximately 240 °C to 400 °C (464 °F to 752 °F.]",
   "name_tr": "",
   "ec_no": "307-758-4",
   "index_no": "649-517-00-9",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "L"
+  ],
   "classification": {
     "hazards": [
       {

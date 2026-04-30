@@ -2,7 +2,7 @@
   "cas": "3254-63-5",
   "name": "dimethyl 4-(methylthio)phenyl phosphate",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "015-119-00-3",
   "atp": "CLP00",
   "notes": [],
@@ -13,7 +13,7 @@
         "h_code": "H310"
       },
       {
-        "class": "Acute Tox. 2 *",
+        "class": "Acute Tox. 2",
         "h_code": "H300"
       }
     ],

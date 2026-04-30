@@ -1,6 +1,6 @@
 {
   "cas": "312600-89-8",
-  "name": "bis(N-hydroxy-N-nitrosocyclohexylaminato-O,O)copper; bis(N-cyclohexyl-diazenium-dioxy)-copper; [Cu-HDO] [1]\nbis(N-hydroxy-N-nitrosocyclohexylaminato-O,O)copper; bis(N-cyclohexyl-diazenium-dioxy)-copper; [Cu-HDO] [2]",
+  "name": "bis(N-hydroxy-N-ni­trosocyclohexylamina­to-O,O’)copper; bis(N-cyclohexyl-diazenium-dioxy)-copper; [Cu-HDO]",
   "name_tr": "",
   "ec_no": "239-703-4",
   "index_no": "029-025-00-5",
@@ -18,7 +18,7 @@
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373 (liver)"
+        "h_code": "H373(liver)"
       },
       {
         "class": "Eye Dam. 1",
@@ -33,10 +33,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1,
-      "chronic": 1
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -51,7 +48,7 @@
     "h_codes": [
       "H228",
       "H302",
-      "H373 (liver)",
+      "H373(liver)",
       "H318",
       "H400",
       "H410"

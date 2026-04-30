@@ -9,20 +9,20 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H331"
       },
       {
-        "class": "Acute Tox. 4 *",
-        "h_code": "H312"
-      },
-      {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H301"
       },
       {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
         "class": "STOT RE 1",
-        "h_code": "H372 **"
+        "h_code": "H372"
       },
       {
         "class": "Skin Irrit. 2",
@@ -49,9 +49,9 @@
     ],
     "h_codes": [
       "H331",
-      "H312",
       "H301",
-      "H372 **",
+      "H312",
+      "H372",
       "H315",
       "H400",
       "H410"

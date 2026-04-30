@@ -1,6 +1,6 @@
 {
   "cas": "89-32-7",
-  "name": "benzene-1,2:4,5-tetracarboxylic dianhydride; pyromellitic dianhydride",
+  "name": "benzene-1,2:4,5-tetracarboxylic dianhydride; benzene-1,2:4,5-tetracarboxylic dianhydride; pyromellitic dianhydride",
   "name_tr": "",
   "ec_no": "201-898-9",
   "index_no": "607-098-00-X",
@@ -27,8 +27,8 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS05",
-      "GHS08"
+      "GHS08",
+      "GHS05"
     ],
     "h_codes": [
       "H318",

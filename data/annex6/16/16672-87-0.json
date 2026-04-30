@@ -4,17 +4,17 @@
   "name_tr": "",
   "ec_no": "240-718-3",
   "index_no": "015-154-00-4",
-  "atp": "ATP06",
+  "atp": "ATP6",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4",
-        "h_code": "H332"
-      },
-      {
         "class": "Acute Tox. 3",
         "h_code": "H311"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
       },
       {
         "class": "Acute Tox. 4",
@@ -40,12 +40,14 @@
       "GHS09"
     ],
     "h_codes": [
-      "H332",
       "H311",
+      "H332",
       "H302",
       "H314",
       "H411"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH071"
+    ]
   }
 }

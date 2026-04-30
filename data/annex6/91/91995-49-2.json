@@ -1,11 +1,13 @@
 {
   "cas": "91995-49-2",
-  "name": "Distillates (coal tar), naphthalene oil crystn. mother liquor; Naphthalene Oil Redistillate; [A complex combination of organic compounds obtained as a filtrate from the crystallization of the naphthalene fraction from coal tar and boiling in the range of approximately 200 Â°C to 230 Â°C (392 Â°F to 446 Â°F). Contains chiefly naphthalene, thionaphthene and alkylnaphthalenes.]",
+  "name": "Distillates (coal tar), naphthalene oil crystn. mother liquor; Naphthalene Oil Redistillate; [A complex combination of organic compounds obtained as a filtrate from the crystallization of the naphthalene fraction from coal tar and boiling in the range of approximately 200°C to 230°C (392°F to 446°F).  Contains chiefly naphthalene, thionaphthene and alkylnaphthalenes.]",
   "name_tr": "",
   "ec_no": "295-310-8",
   "index_no": "648-087-00-X",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "J M"
+  ],
   "classification": {
     "hazards": [
       {

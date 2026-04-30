@@ -1,8 +1,8 @@
 {
   "cas": "907204-31-3",
-  "name": "3-(difluoromethyl)-1-methyl-N-(3',4',5'-trifluorobiphenyl-2-yl)pyrazole-4-carboxamide; fluxapyroxad",
+  "name": "3-(difluoromethyl)-1-methyl-N-(3',4',5'-tri­fluorobiphenyl-2-yl) pyrazole-4-carboxamide; fluxapyroxad",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "616-228-00-4",
   "atp": "ATP15",
   "notes": [],
@@ -21,10 +21,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1,
-      "chronic": 1
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

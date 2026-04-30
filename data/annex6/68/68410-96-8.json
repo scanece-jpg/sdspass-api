@@ -1,11 +1,13 @@
 {
   "cas": "68410-96-8",
-  "name": "Distillates (petroleum), hydrotreated middle, intermediate boiling; Low boiling point hydrogen treated naphtha; [A complex combination of hydrocarbons obtained by the distillation of products from a middle distillate hydrotreating process. It consists of hydrocarbons having carbon numbers predominantly in the range of C5 through C10 and boiling in the range of approximately 127 Â°C to 188 Â°C (262 Â°F to 370 Â°F).]",
+  "name": "Distillates (petroleum), hydrotreated middle, intermediate boiling; Low boiling point hydrogen treated naphtha; [A complex combination of hydrocarbons obtained by the distillation of products from a middle distillate hydrotreating process.  It consists of hydrocarbons having carbon numbers predominantly in the range of C5 through C10 and boiling in the range of approximately 127°C to 188°C (262°F to 370°F).]",
   "name_tr": "",
   "ec_no": "270-092-7",
   "index_no": "649-331-00-8",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

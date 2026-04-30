@@ -1,11 +1,13 @@
 {
   "cas": "64741-70-4",
-  "name": "Naphtha (petroleum), isomerization; Low boiling point modified naphtha; [A complex combination of hydrocarbons obtained from catalytic isomerization of straight chain paraffinic C4 through C6 hydrocarbons. It consists predominantly of saturated hydrocarbons such as isobutane, isopentane, 2,2-dimethylbutane, 2-methylpentane, and 3-methylpentane.]",
+  "name": "Naphtha (petroleum), isomerization; Low boiling point modified naphtha; [A complex combination of hydrocarbons obtained from catalytic isomerization of straight chain paraffinic C4 through C6 hydrocarbons.  It consists predominantly of saturated hydrocarbons such as isobutane, isopentane, 2,2-dimethylbutane, 2-methylpentane, and 3-methylpentane.]",
   "name_tr": "",
   "ec_no": "265-073-5",
   "index_no": "649-277-00-5",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

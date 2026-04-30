@@ -1,6 +1,6 @@
 {
   "cas": "15662-33-6",
-  "name": "6-(1Î±,5aÎ²,8aÎ²,9-pentahydroxy-7Î²-isopropyl-2Î²,5Î²,8Î²-trimethylperhydro-8bÎ±,9-epoxy-5,8-ethanocyclopenta[1,2-b]indenyl) pyrrole-2-carboxylate; ryania",
+  "name": "6-(1α,5aβ,8aβ,9-pentahydroxy-7β-isopropyl-2β,5β,8β-trimethylperhydro-8bα,9-epoxy-5,8-ethanocyclopenta[1,2-b]indenyl) pyrrole-2-carboxylate; ryania",
   "name_tr": "",
   "ec_no": "239-732-2",
   "index_no": "613-061-00-9",
@@ -9,11 +9,11 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H312"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {

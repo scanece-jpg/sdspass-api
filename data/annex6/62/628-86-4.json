@@ -1,6 +1,6 @@
 {
   "cas": "628-86-4",
-  "name": "mercury difulminate; mercuric fulminate; fulminate of mercury [â‰¥ 20 % phlegmatiser]",
+  "name": "mercury difulminate; mercuric fulminate; fulminate of mercury [≥ 20 % phlegmatiser]",
   "name_tr": "",
   "ec_no": "211-057-8",
   "index_no": "080-005-01-X",
@@ -13,20 +13,20 @@
         "h_code": "H201"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H331"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H311"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H301"
       },
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Aquatic Acute 1",
@@ -53,7 +53,7 @@
       "H331",
       "H311",
       "H301",
-      "H373 **",
+      "H373",
       "H400",
       "H410"
     ],

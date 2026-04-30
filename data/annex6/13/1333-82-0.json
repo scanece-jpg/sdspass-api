@@ -22,23 +22,23 @@
       },
       {
         "class": "Repr. 2",
-        "h_code": "H361f ***"
+        "h_code": "H361f"
       },
       {
-        "class": "Acute Tox. 2 *",
+        "class": "Acute Tox. 2",
         "h_code": "H330"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H311"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H301"
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 **"
+        "h_code": "H372"
       },
       {
         "class": "Skin Corr. 1A",
@@ -62,14 +62,21 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H335",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
     "pictograms": [
       "GHS03",
-      "GHS08",
       "GHS06",
+      "GHS08",
       "GHS05",
       "GHS09"
     ],
@@ -77,11 +84,11 @@
       "H271",
       "H350",
       "H340",
-      "H361f ***",
+      "H361f",
       "H330",
       "H311",
       "H301",
-      "H372 **",
+      "H372",
       "H314",
       "H334",
       "H317",

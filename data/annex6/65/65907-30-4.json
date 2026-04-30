@@ -4,21 +4,21 @@
   "name_tr": "",
   "ec_no": "265-974-3",
   "index_no": "006-087-00-1",
-  "atp": "ATP01corr",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 2 *",
+        "class": "Acute Tox. 2",
         "h_code": "H330"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H301"
       },
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Skin Irrit. 2",
@@ -41,9 +41,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 100
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -56,7 +54,7 @@
     "h_codes": [
       "H330",
       "H301",
-      "H373 **",
+      "H373",
       "H315",
       "H319",
       "H317",

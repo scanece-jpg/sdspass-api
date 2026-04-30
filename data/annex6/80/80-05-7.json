@@ -1,6 +1,6 @@
 {
   "cas": "80-05-7",
-  "name": "4,4'-isopropylidenediphenol; bisphenol A",
+  "name": "4,4'-isopropylidenediphenol;\nbisphenol A",
   "name_tr": "",
   "ec_no": "201-245-8",
   "index_no": "604-030-00-0",
@@ -33,10 +33,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

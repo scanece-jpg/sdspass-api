@@ -4,23 +4,28 @@
   "name_tr": "Hidrokarbonlar, C4, buharlı parçalayıcı damıtığı; Petrol gazı; [ Buharlı bir parçalama işlemi ürünlerinin damıtılması ile üretilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla, C4 , genelde 1-büten ve 2-büten,karbon sayısına sahip, ayrıca bütan ve izobüten içeren ve yaklaşık eksi 12oC ila -5oC (10.4oF ila 41oF) aralığında kaynayan, hidrokarbonlardan oluşur.]",
   "ec_no": "295-405-4",
   "index_no": "649-116-00-9",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

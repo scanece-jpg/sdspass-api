@@ -1,11 +1,13 @@
 {
   "cas": "64741-83-9",
-  "name": "Naphtha (petroleum), heavy thermal cracked; Low boiling point thermally cracked naphtha; [A complex combination of hydrocarbons from distillation of the products from a thermal cracking process. It consists predominantly of unsaturated hydrocarbons having carbon numbers predominantly in the range of C6 through C12 and boiling in the range of approximately 65 Â°C to 220 Â°C (148 Â°F to 428 Â°F).]",
+  "name": "Naphtha (petroleum), heavy thermal cracked; Low boiling point thermally cracked naphtha; [A complex combination of hydrocarbons from distillation of the products from a thermal cracking process.  It consists predominantly of unsaturated hydrocarbons having carbon numbers predominantly in the range of C6 through C12 and boiling in the range of approximately 65°C to 220°C (148°F to 428°F).]",
   "name_tr": "",
   "ec_no": "265-085-0",
   "index_no": "649-317-00-1",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

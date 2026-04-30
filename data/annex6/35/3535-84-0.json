@@ -4,25 +4,25 @@
   "name_tr": "",
   "ec_no": "222-571-7",
   "index_no": "615-031-00-0",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 2 *",
+        "class": "Acute Tox. 2",
         "h_code": "H330"
       },
       {
-        "class": "Acute Tox. 4 *",
-        "h_code": "H312"
-      },
-      {
-        "class": "Acute Tox. 2 *",
+        "class": "Acute Tox. 2",
         "h_code": "H300"
       },
       {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
+      },
+      {
         "class": "STOT RE 2",
-        "h_code": "H373 **"
+        "h_code": "H373"
       },
       {
         "class": "Aquatic Chronic 2",
@@ -41,9 +41,9 @@
     ],
     "h_codes": [
       "H330",
-      "H312",
       "H300",
-      "H373 **",
+      "H312",
+      "H373",
       "H411"
     ],
     "suppl_h": []

@@ -1,6 +1,6 @@
 {
   "cas": "41198-08-7",
-  "name": "O-(4-bromo-2-chlorophenyl) O-ethyl S-propyl phosphorothioate; profenofos (ISO)",
+  "name": "profenofos (ISO); O-(4-bromo-2-chlorophenyl) O-ethyl S-propyl phosphorothioate",
   "name_tr": "",
   "ec_no": "255-255-2",
   "index_no": "015-135-00-0",
@@ -9,15 +9,15 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H312"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
@@ -29,9 +29,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1000
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

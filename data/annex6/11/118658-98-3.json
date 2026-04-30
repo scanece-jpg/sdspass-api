@@ -9,8 +9,8 @@
   "classification": {
     "hazards": [
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Skin Sens. 1",
@@ -27,11 +27,10 @@
   "labelling": {
     "signal": "Warning",
     "pictograms": [
-      "GHS08",
-      "GHS07"
+      "GHS08"
     ],
     "h_codes": [
-      "H373 **",
+      "H373",
       "H317",
       "H412"
     ],

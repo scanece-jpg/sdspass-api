@@ -1,6 +1,6 @@
 {
   "cas": "200509-41-7",
-  "name": "quizalofop-P-tefuryl (ISO); (+/â€“) tetrahydrofurfuryl (R)-2-[4-(6-chloroquinoxalin-2-yloxy)phenyloxy]propionate",
+  "name": "quizalofop-P-tefuryl (ISO); (+/-)  tetrahydrofurfuryl (R)-2-[4-(6-chloroquinoxalin-2-yloxy)phenyloxy]propionate",
   "name_tr": "",
   "ec_no": "414-200-4",
   "index_no": "607-373-00-4",
@@ -33,10 +33,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1,
-      "chronic": 1
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

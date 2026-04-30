@@ -4,12 +4,12 @@
   "name_tr": "",
   "ec_no": "442-960-7",
   "index_no": "015-193-00-7",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H301"
       },
       {
@@ -31,8 +31,8 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS06",
       "GHS05",
+      "GHS06",
       "GHS09"
     ],
     "h_codes": [

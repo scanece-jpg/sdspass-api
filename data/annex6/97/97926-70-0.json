@@ -1,11 +1,13 @@
 {
   "cas": "97926-70-0",
-  "name": "Hydrocarbons, C20-58, hydrotreated; Baseoil â€” unspecified",
+  "name": "Hydrocarbons, C20-58, hydrotreated; Baseoil - unspecified",
   "name_tr": "",
   "ec_no": "308-289-8",
   "index_no": "649-523-00-1",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "L"
+  ],
   "classification": {
     "hazards": [
       {

@@ -1,8 +1,8 @@
 {
   "cas": "104-55-2",
-  "name": "cinnamaldehyde; 3-phenylprop-2-enal; cinnamic aldehyde; cinnamal [1]\n(2E)-3-phenylprop-2-enal [2]",
+  "name": "cinnamaldehyde; 3-phenylprop-2-enal;  cinnamic aldehyde; cinnamal;[1]\n(2E)-3-phenylprop-2-enal[2]",
   "name_tr": "",
-  "ec_no": "203-213-9",
+  "ec_no": "203-213-9[1]\n-[2]",
   "index_no": "606-155-00-6",
   "atp": "ATP21",
   "notes": [],
@@ -14,7 +14,14 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H317",
+        "class": "",
+        "c_min": 0.01,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Warning",

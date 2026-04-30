@@ -1,24 +1,24 @@
 {
   "cas": "615-50-9",
-  "name": "2-methyl-p-phenylenediamine sulphate [1]\n2-methyl-p-phenylenediamine sulphate [2]",
+  "name": "2-methyl-p-phenylenediamine sulphate  [1]\n2-methyl-p-phenylenediamine sulphate  [2]",
   "name_tr": "",
-  "ec_no": "210-431-8",
+  "ec_no": "210-431-8 [1]\n228-871-4 [2]",
   "index_no": "612-030-00-7",
   "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
+      },
+      {
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H312"
-      },
-      {
-        "class": "Acute Tox. 3 *",
-        "h_code": "H301"
       },
       {
         "class": "Skin Sens. 1",
@@ -39,9 +39,9 @@
       "GHS09"
     ],
     "h_codes": [
+      "H301",
       "H332",
       "H312",
-      "H301",
       "H317",
       "H411"
     ],

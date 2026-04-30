@@ -4,23 +4,28 @@
   "name_tr": "Gazlar (petrol), zift sıyırıcı çalışmazken; Rafineri gazı; [İndirgenmiş ham petrolün ayrımsal damıtılmasından elde edilen kompleks bir bileşim. Hidrojen ve büyük çoğunlukla C1 ila C4 aralığında karbon sayısına sahip olan hidrokarbonlardan oluşur.]",
   "ec_no": "272-884-8",
   "index_no": "649-163-00-5",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

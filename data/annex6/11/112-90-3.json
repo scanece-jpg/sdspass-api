@@ -4,7 +4,7 @@
   "name_tr": "",
   "ec_no": "204-015-5",
   "index_no": "612-283-00-3",
-  "atp": "ATP05",
+  "atp": "ATP5",
   "notes": [],
   "classification": {
     "hazards": [
@@ -22,7 +22,7 @@
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373 (gastro-intestinal tract, liver, immune system)"
+        "h_code": "H373(gastro-intestinal_tract,_liver,_immune_system)"
       },
       {
         "class": "Skin Corr. 1B",
@@ -37,25 +37,22 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
     "signal": "Danger",
     "pictograms": [
+      "GHS05",
       "GHS07",
       "GHS08",
-      "GHS05",
       "GHS09"
     ],
     "h_codes": [
       "H302",
       "H304",
       "H335",
-      "H373 (gastro-intestinal tract, liver, immune system)",
+      "H373(gastro-intestinal_tract,_liver,_immune_system)",
       "H314",
       "H400",
       "H410"

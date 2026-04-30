@@ -5,7 +5,9 @@
   "ec_no": "200-815-3",
   "index_no": "601-010-00-3",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "U"
+  ],
   "classification": {
     "hazards": [
       {
@@ -14,11 +16,11 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": "H336"
+        "h_code": ""
       },
       {
         "class": "STOT SE 3",
-        "h_code": ""
+        "h_code": "H336"
       }
     ],
     "m_factors": {},

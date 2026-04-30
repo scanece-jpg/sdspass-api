@@ -1,8 +1,8 @@
 {
   "cas": "12035-72-2",
-  "name": "trinickel disulfide; nickel subsulfide [1]\nheazlewoodite [2]",
+  "name": "trinickel disulphide;\nnickel subsulfide [1]\nheazlewoodite  [2]",
   "name_tr": "",
-  "ec_no": "234-829-6",
+  "ec_no": "234-829-6 [1]",
   "index_no": "028-007-00-4",
   "atp": "ATP17",
   "notes": [],
@@ -22,7 +22,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 **"
+        "h_code": "H372"
       },
       {
         "class": "Skin Sens. 1",
@@ -51,7 +51,7 @@
       "H350i",
       "H341",
       "H331",
-      "H372 **",
+      "H372",
       "H317",
       "H400",
       "H410"

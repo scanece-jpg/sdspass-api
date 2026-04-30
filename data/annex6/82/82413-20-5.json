@@ -4,7 +4,7 @@
   "name_tr": "",
   "ec_no": "428-010-4",
   "index_no": "604-073-00-5",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -14,7 +14,7 @@
       },
       {
         "class": "Repr. 1B",
-        "h_code": "H360F ***"
+        "h_code": "H360F"
       },
       {
         "class": "Skin Sens. 1",
@@ -41,7 +41,7 @@
     ],
     "h_codes": [
       "H351",
-      "H360F ***",
+      "H360F",
       "H317",
       "H400",
       "H410"

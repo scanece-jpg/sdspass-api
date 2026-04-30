@@ -9,16 +9,16 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 2 *",
+        "class": "Acute Tox. 2",
         "h_code": "H330"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Skin Corr. 1B",
@@ -38,9 +38,12 @@
     "h_codes": [
       "H330",
       "H302",
-      "H373 **",
+      "H373",
       "H314"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH014",
+      "EUH029"
+    ]
   }
 }

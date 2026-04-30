@@ -2,18 +2,18 @@
   "cas": "953-17-3",
   "name": "S-(chlorophenylthiomethyl) O,O-dimethylphosphorodithioate; methylcarbophenothione",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "015-132-00-4",
   "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H311"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H301"
       },
       {
@@ -25,9 +25,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1000
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

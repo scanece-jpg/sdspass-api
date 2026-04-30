@@ -1,6 +1,6 @@
 {
   "cas": "991-42-4",
-  "name": "norbormide (ISO); 5-(Î±-hydroxy-Î±-2-pyridylbenzyl)-7-(Î±-2-pyridylbenzylidene)bicyclo [2.2.1] hept-5-ene-2,3-dicarboximide",
+  "name": "norbormide (ISO); 5-(α-hydroxy-α-2-pyridylbenzyl)-7-(α-2-pyridylbenzylidene)bicyclo [2.2.1] hept-5-ene-2,3-dicarboximide",
   "name_tr": "",
   "ec_no": "213-589-6",
   "index_no": "650-004-00-7",
@@ -9,7 +9,7 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       }
     ],

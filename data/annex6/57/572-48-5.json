@@ -1,15 +1,15 @@
 {
   "cas": "572-48-5",
-  "name": "coumithoate (ISO); O,O-diethyl O-7,8,9,10-tetrahydro-6-oxo-benzo(c)chromen-3-yl phosphorothioate",
+  "name": "coumithoate (ISO); O,O-diethyl O-,8,9,10-tetrahydro-6-oxo-benzo(c)chromen-3-yl phosphorothioate",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "015-086-00-5",
   "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H301"
       }
     ],

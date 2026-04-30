@@ -5,7 +5,9 @@
   "ec_no": "215-242-4",
   "index_no": "015-104-00-1",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "T"
+  ],
   "classification": {
     "hazards": [
       {
@@ -17,11 +19,11 @@
         "h_code": "H260"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
@@ -46,6 +48,8 @@
       "H302",
       "H400"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH029"
+    ]
   }
 }

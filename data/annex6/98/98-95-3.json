@@ -4,7 +4,7 @@
   "name_tr": "",
   "ec_no": "202-716-0",
   "index_no": "609-003-00-7",
-  "atp": "ATP05",
+  "atp": "ATP5",
   "notes": [],
   "classification": {
     "hazards": [
@@ -30,7 +30,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 (blood)"
+        "h_code": "H372(blood)"
       },
       {
         "class": "Aquatic Chronic 3",
@@ -43,8 +43,8 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS08",
-      "GHS06"
+      "GHS06",
+      "GHS08"
     ],
     "h_codes": [
       "H351",
@@ -52,7 +52,7 @@
       "H331",
       "H311",
       "H301",
-      "H372 (blood)",
+      "H372(blood)",
       "H412"
     ],
     "suppl_h": []

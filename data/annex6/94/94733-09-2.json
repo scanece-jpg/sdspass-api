@@ -1,11 +1,13 @@
 {
   "cas": "94733-09-2",
-  "name": "Distillates (petroleum), solvent-refined hydrocracked light; Baseoil â€” unspecified; [A complex combination of hydrocarbons obtained by solvent dearomatization of the residue of hydrocracked petroleum. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C18 through C27 and boiling in the range of approximately 370 Â°C to 450 Â°C (698 Â°F to 842 Â°F).]",
+  "name": "Distillates (petroleum), solvent-refined hydrocracked light; Baseoil - unspecified; [A complex combination of hydrocarbons obtained by solvent dearomatization of the residue of hydrocracked petroleum. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C18 through C27 and boiling in the range of approximately 370 °C to 450 °C (698 °F to 842 °F).]",
   "name_tr": "",
   "ec_no": "305-589-0",
   "index_no": "649-505-00-3",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "L"
+  ],
   "classification": {
     "hazards": [
       {

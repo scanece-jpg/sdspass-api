@@ -1,11 +1,13 @@
 {
   "cas": "64742-22-9",
-  "name": "Naphtha (petroleum), chemically neutralized heavy; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons produced by a treating process to remove acidic materials. It consists of hydrocarbons having carbon numbers predominantly in the range of C6 through C12 and boiling in the range of approximately 65 Â°C to 230 Â°C (149 Â°F to 446 Â°F).]",
+  "name": "Naphtha (petroleum), chemically neutralized heavy; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons produced by a treating process to remove acidic materials.  It consists of hydrocarbons having carbon numbers predominantly in the range of C6 through C12 and boiling in the range of approximately 65°C to 230°C (149°F to 446°F).]",
   "name_tr": "",
   "ec_no": "265-122-0",
   "index_no": "649-352-00-2",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

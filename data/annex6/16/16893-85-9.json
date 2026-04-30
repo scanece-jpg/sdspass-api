@@ -1,23 +1,25 @@
 {
   "cas": "16893-85-9",
-  "name": "alkali fluorosilicates(Na) [1]\nalkali fluorosilicates(K) [2]\nalkali fluorosilicates(NH4) [3]",
+  "name": "alkali fluorosilicates(Na) [1]\nalkali fluorosilicates(K) [2]\nalkali fluorosilicates(NH4)  [3]",
   "name_tr": "",
-  "ec_no": "240-934-8",
+  "ec_no": "240-934-8 [1]\n240-896-2 [2]\n240-968-3 [3]",
   "index_no": "009-012-00-0",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "A"
+  ],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H331"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H311"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H301"
       }
     ],

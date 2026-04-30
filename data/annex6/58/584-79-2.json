@@ -1,19 +1,21 @@
 {
   "cas": "584-79-2",
-  "name": "allethrin; S-bioallethrin; esbiothrin; (RS)-3-allyl-2-methyl-4-oxocyclopent-2-enyl (1R,3R)-2,2-dimethyl-3-(2-methylprop-1-enyl)cyclopropanecarboxylate; [1]; (S)-3-allyl-2-methyl-4-oxocyclopent-2-enyl (1R,3R)-2,2-dimethyl-3-(2-methylprop-1-enyl)cyclopropanecarboxylate; [2]; (RS)-3-allyl-2-methyl-4-oxocyclopent-2-enyl (1R,3R)-2,2-dimethyl-3-(2-methylprop-1-enyl)cyclopropanecarboxylate [3] [1]\n(RS)-3-allyl-2-methyl-4-oxocyclopent-2-enyl (1RS,3RS;1RS,3SR)-2,2-dimethyl-3-(2-methylprop-1-enyl)cyclopropanecarboxylate [2]\nbioallethrin [3]",
+  "name": "allethrin; (RS)-3-allyl-2-methyl-4-oxocyclopent-2-enyl (1RS,3RS;1RS,3SR)-2,2-dimethyl-3-(2-methylprop-1-enyl)cyclopropanecarboxylate; bioallethrin; (RS)-3-allyl-2-methyl-4-oxocyclopent-2-enyl (1R,3R)-2,2-dimethyl-3-(2-methylprop-1-enyl)cyclopropanecarboxylate [1]\nS-bioallethrin; (S)-3-allyl-2-methyl-4-oxocyclopent-2-enyl (1R,3R)-2,2-dimethyl-3-(2-methylprop-1-enyl)cyclopropanecarboxylate [2]\nesbiothrin; (RS)-3-allyl-2-methyl-4-oxocyclopent-2-enyl (1R,3R)-2,2-dimethyl-3-(2-methylprop-1-enyl)cyclopropanecarboxylate  [3]",
   "name_tr": "",
-  "ec_no": "209-542-4",
+  "ec_no": "209-542-4 [1]\n249-013-5 [2]\n249-013-5 [3]",
   "index_no": "006-025-00-3",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "C"
+  ],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {

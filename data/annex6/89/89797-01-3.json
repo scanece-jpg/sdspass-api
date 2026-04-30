@@ -5,7 +5,9 @@
   "ec_no": "404-670-9",
   "index_no": "029-007-00-7",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "G"
+  ],
   "classification": {
     "hazards": [
       {

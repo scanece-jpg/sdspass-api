@@ -1,11 +1,13 @@
 {
   "cas": "92045-43-7",
-  "name": "Lubricating oils (petroleum), hydrocracked nonarom. solvent-deparaffined; Baseoil â€” unspecified",
+  "name": "Lubricating oils (petroleum), hydrocracked nonarom. solvent-deparaffined; Baseoil - unspecified",
   "name_tr": "",
   "ec_no": "295-424-8",
   "index_no": "649-498-00-7",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "L"
+  ],
   "classification": {
     "hazards": [
       {

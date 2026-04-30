@@ -1,11 +1,13 @@
 {
   "cas": "64742-56-9",
-  "name": "Distillates (petroleum), solvent-dewaxed light paraffinic; Baseoil â€” unspecified; [A complex comination of hydrocarbons obtained by removal of normal paraffins from a petroleum fraction by solvent crystallization. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C15 through C30 and produces a finished oil with a viscosity of less than 100 SUS at 100 Â°F (19cSt at 40 Â°C).]",
+  "name": "Distillates (petroleum), solvent-dewaxed light paraffinic; Baseoil - unspecified; [A complex comination of hydrocarbons obtained by removal of normal paraffins from a petroleum fraction by solvent crystallization. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C15 through C30 and produces a finished oil with a viscosity of less than 100 SUS at 100 °F (19cSt at 40 °C).]",
   "name_tr": "",
   "ec_no": "265-159-2",
   "index_no": "649-469-00-9",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "L"
+  ],
   "classification": {
     "hazards": [
       {

@@ -5,7 +5,9 @@
   "ec_no": "202-615-1",
   "index_no": "607-033-00-5",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "D"
+  ],
   "classification": {
     "hazards": [
       {

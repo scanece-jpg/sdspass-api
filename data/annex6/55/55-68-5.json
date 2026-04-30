@@ -1,20 +1,20 @@
 {
   "cas": "55-68-5",
-  "name": "phenylmercury nitrate [1]\nphenylmercury hydroxide [2]\nbasic phenylmercury nitrate [3]",
+  "name": "phenylmercury nitrate [1]\nphenylmercury hydroxide [2]\nbasic phenylmercury nitrate  [3]",
   "name_tr": "",
-  "ec_no": "200-242-9",
+  "ec_no": "200-242-9 [1]\n202-866-7 [2]",
   "index_no": "080-008-00-9",
   "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H301"
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 **"
+        "h_code": "H372"
       },
       {
         "class": "Skin Corr. 1B",
@@ -42,7 +42,7 @@
     ],
     "h_codes": [
       "H301",
-      "H372 **",
+      "H372",
       "H314",
       "H400",
       "H410"

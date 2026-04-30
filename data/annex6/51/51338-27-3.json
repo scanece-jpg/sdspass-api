@@ -1,6 +1,6 @@
 {
   "cas": "51338-27-3",
-  "name": "methyl 2-(4-(2,4-dichlorophenoxy)phenoxy)propionate; methyl (RS)-2-[4-(2,4-dichlorophenoxy)phenoxy]propionate; diclofop-methyl (ISO)",
+  "name": "diclofop-methyl (ISO); methyl 2-(4-(2,4-dichlorophenoxy)phenoxy)propionate; methyl (RS)-2-[4-(2,4-dichlorophenoxy)phenoxy]propionate",
   "name_tr": "",
   "ec_no": "257-141-8",
   "index_no": "607-165-00-3",
@@ -9,7 +9,7 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {

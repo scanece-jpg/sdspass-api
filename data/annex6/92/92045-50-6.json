@@ -1,11 +1,13 @@
 {
   "cas": "92045-50-6",
-  "name": "Naphtha (petroleum), heavy catalytic cracked, sweetened; Low boiling point cat-cracked naphtha; [A complex combination of hydrocarbons obtained by subjecting a catalytic cracked petroleum distillate to a sweetening process to convert mercaptans or to remove acidic impurities. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C6 through C12 and boiling in the range of approximately 60 Â°C to 200 Â°C (140 Â°F to 392 Â°F).]",
+  "name": "Naphtha (petroleum), heavy catalytic cracked, sweetened; Low boiling point cat-cracked naphtha; [A complex combination of hydrocarbons obtained by subjecting a catalytic cracked petroleum distillate to a sweetening process to convert mercaptans or to remove acidic impurities.  It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C6 through C12 and boiling in the range of approximately 60°C to 200°C (140°F to 392°F).]",
   "name_tr": "",
   "ec_no": "295-431-6",
   "index_no": "649-294-00-8",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

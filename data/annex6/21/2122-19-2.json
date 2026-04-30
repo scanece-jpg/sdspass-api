@@ -2,7 +2,7 @@
   "cas": "2122-19-2",
   "name": "propylenethiourea",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "613-070-00-8",
   "atp": "CLP00",
   "notes": [],
@@ -10,10 +10,10 @@
     "hazards": [
       {
         "class": "Repr. 2",
-        "h_code": "H361d ***"
+        "h_code": "H361d"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
@@ -31,7 +31,7 @@
       "GHS07"
     ],
     "h_codes": [
-      "H361d ***",
+      "H361d",
       "H302",
       "H412"
     ],

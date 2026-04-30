@@ -1,8 +1,8 @@
 {
   "cas": "66230-04-4",
-  "name": "esfenvalerate (ISO); (S)-Î±-cyano-3-phenoxybenzyl-(S)-2-(4-chlorophenyl)-3-methylbutyrate",
+  "name": "esfenvalerate (ISO);\n(S)-α-cyano- 3-phenoxybenzyl-(S)- 2-(4-chlorophenyl)- 3-methylbutyrate",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "608-058-00-4",
   "atp": "ATP17",
   "notes": [],
@@ -18,7 +18,7 @@
       },
       {
         "class": "STOT SE 1",
-        "h_code": "H370 (nervous system)"
+        "h_code": "H370(nervous_system)"
       },
       {
         "class": "STOT RE 2",
@@ -37,10 +37,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10000,
-      "chronic": 10000
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -53,7 +50,7 @@
     "h_codes": [
       "H331",
       "H301",
-      "H370 (nervous system)",
+      "H370(nervous_system)",
       "H373",
       "H317",
       "H400",

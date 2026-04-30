@@ -2,14 +2,14 @@
   "cas": "8069-76-9",
   "name": "reaction mass of: 4,6-dinitro-2-(3-octyl)phenyl methyl carbonate and 4,6-dinitro-2-(4-octyl)phenyl methyl carbonate; dinocton-6",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "609-045-00-6",
   "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {

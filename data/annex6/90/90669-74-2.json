@@ -1,11 +1,13 @@
 {
   "cas": "90669-74-2",
-  "name": "Residual oils (petroleum), hydrotreated solvent dewaxed; Baseoil â€” unspecified",
+  "name": "Residual oils (petroleum), hydrotreated solvent dewaxed; Baseoil - unspecified",
   "name_tr": "",
   "ec_no": "292-656-1",
   "index_no": "649-491-00-9",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "L"
+  ],
   "classification": {
     "hazards": [
       {

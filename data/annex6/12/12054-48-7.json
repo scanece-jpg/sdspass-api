@@ -1,10 +1,10 @@
 {
   "cas": "12054-48-7",
-  "name": "nickel dihydroxide [1]\nnickel hydroxide [2]",
+  "name": "nickel dihydroxide [1]\nnickel hydroxide  [2]",
   "name_tr": "",
-  "ec_no": "235-008-5",
+  "ec_no": "235-008-5 [1]\n234-348-1 [2]",
   "index_no": "028-008-00-X",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -18,19 +18,19 @@
       },
       {
         "class": "Repr. 1B",
-        "h_code": "H360D ***"
+        "h_code": "H360D"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 **"
+        "h_code": "H372"
       },
       {
         "class": "Skin Irrit. 2",
@@ -66,10 +66,10 @@
     "h_codes": [
       "H350i",
       "H341",
-      "H360D ***",
+      "H360D",
       "H332",
       "H302",
-      "H372 **",
+      "H372",
       "H315",
       "H334",
       "H317",

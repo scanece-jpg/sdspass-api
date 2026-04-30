@@ -1,11 +1,13 @@
 {
   "cas": "7790-98-9",
-  "name": "ammonium perchlorate",
+  "name": "ammonium perchlorate; [containing ≥ 80 % of 0-30 µm particles]",
   "name_tr": "",
   "ec_no": "232-235-1",
   "index_no": "017-009-00-0",
-  "atp": "ATP01",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "T"
+  ],
   "classification": {
     "hazards": [
       {
@@ -23,8 +25,7 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS01",
-      "GHS03"
+      "GHS01"
     ],
     "h_codes": [
       "H201",

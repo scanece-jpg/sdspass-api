@@ -1,17 +1,15 @@
 {
   "cas": "96-91-3",
-  "name": "2-amino-4,6-dinitrophenol; picramic acid",
+  "name": "2-amino-4,6-dinitrophenol; picramic acid; [≥ 20 % water]",
   "name_tr": "",
   "ec_no": "202-544-6",
-  "index_no": "612-034-00-9",
-  "atp": "ATP1",
-  "notes": [],
+  "index_no": "612-034-01-6",
+  "atp": "CLP00",
+  "notes": [
+    "G"
+  ],
   "classification": {
     "hazards": [
-      {
-        "class": "Expl. 1.1",
-        "h_code": "H201"
-      },
       {
         "class": "Acute Tox. 4",
         "h_code": "H332"
@@ -33,13 +31,11 @@
     "scl_limits": []
   },
   "labelling": {
-    "signal": "Danger",
+    "signal": "Warning",
     "pictograms": [
-      "GHS01",
       "GHS07"
     ],
     "h_codes": [
-      "H201",
       "H332",
       "H312",
       "H302",

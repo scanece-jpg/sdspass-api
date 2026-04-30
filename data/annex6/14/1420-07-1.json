@@ -10,15 +10,15 @@
     "hazards": [
       {
         "class": "Repr. 1B",
-        "h_code": "H360D ***"
+        "h_code": "H360D"
       },
       {
-        "class": "Acute Tox. 3 *",
-        "h_code": "H311"
-      },
-      {
-        "class": "Acute Tox. 2 *",
+        "class": "Acute Tox. 2",
         "h_code": "H300"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H311"
       },
       {
         "class": "Aquatic Acute 1",
@@ -35,17 +35,19 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS08",
       "GHS06",
+      "GHS08",
       "GHS09"
     ],
     "h_codes": [
-      "H360D ***",
-      "H311",
+      "H360D",
       "H300",
+      "H311",
       "H400",
       "H410"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH044"
+    ]
   }
 }

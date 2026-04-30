@@ -1,11 +1,13 @@
 {
   "cas": "68555-24-8",
-  "name": "Tar acids, cresylic, residues; Distillate Phenols; [The residue from crude coal tar acids after removal of phenol, cresols, xylenols and any higher boiling phenols. A black solid with a melting point approximately 80 Â°C (176 Â°F). Composed primarily of polyalkylphenols, resin gums, and inorganic salts.]",
+  "name": "Tar acids, cresylic, residues; Distillate Phenols; [The residue from crude coal tar acids after removal of phenol, cresols, xylenols and any higher boiling phenols.  A black solid with a melting point approximately 80°C (176°F). Composed primarily of polyalkylphenols, resin gums, and inorganic salts.]",
   "name_tr": "",
   "ec_no": "271-418-0",
   "index_no": "648-126-00-0",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "J M"
+  ],
   "classification": {
     "hazards": [
       {

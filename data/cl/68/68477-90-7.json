@@ -4,23 +4,28 @@
   "name_tr": "Gazlar (petrol), Propan giderici kuru, propen-zengin; Petrol gazı; [Katalitik parçalanma prosesi gaz ve benzin fraksiyonlarından ürünlerin damıtılması ile üretilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla biraz etan ve propanlı propilen içermektedir.]",
   "ec_no": "270-772-3",
   "index_no": "649-071-00-5",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

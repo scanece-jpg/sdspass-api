@@ -5,7 +5,9 @@
   "ec_no": "203-457-6",
   "index_no": "602-029-00-X",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "D"
+  ],
   "classification": {
     "hazards": [
       {
@@ -21,15 +23,15 @@
         "h_code": "H341"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H312"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
@@ -37,8 +39,8 @@
         "h_code": "H335"
       },
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Skin Irrit. 2",
@@ -72,7 +74,7 @@
       "H312",
       "H302",
       "H335",
-      "H373 **",
+      "H373",
       "H315",
       "H319",
       "H400"

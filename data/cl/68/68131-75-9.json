@@ -4,23 +4,28 @@
   "name_tr": "Gazlar (petrol), C3-4; Petrol gazı; [Ham petrolün parçalanmasından elde edilen ürünlerin damıtılmasından üretilen hidrokarbonların kompleks bir bileşimi. C3 ila C4 aralığında karbon sayısına sahip, genelde propan ve propilen ve yaklaşık olarak -51°C ila -1°C (- 60°Fila 30°F.) aralığında kaynayanhidrokarbonlardan oluşur.]",
   "ec_no": "268-629-5",
   "index_no": "649-177-00-1",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

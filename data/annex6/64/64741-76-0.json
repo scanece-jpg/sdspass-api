@@ -1,11 +1,13 @@
 {
   "cas": "64741-76-0",
-  "name": "Distillates (petroleum), heavy hydrocracked; Baseoil â€” unspecified; [A complex combination of hydrocarbons from the distillation of the products from a hydrocracking process. It consists predominantly of saturated hydrocarbons having carbon numbers in the range of C15-C39 and boiling in the range of approximately 260 Â°C to 600 Â°C (500 Â°F to 1112 Â°F).]",
+  "name": "Distillates (petroleum), heavy hydrocracked; Baseoil - unspecified; [A complex combination of hydrocarbons from the distillation of the products from a hydrocracking process. It consists predominantly of saturated hydrocarbons having carbon numbers in the range of C15-C39 and boiling in the range of approximately 260 °C to 600 °C (500 °F to 1112 °F).]",
   "name_tr": "",
   "ec_no": "265-077-7",
   "index_no": "649-453-00-1",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "L"
+  ],
   "classification": {
     "hazards": [
       {

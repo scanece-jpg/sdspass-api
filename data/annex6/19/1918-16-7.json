@@ -1,6 +1,6 @@
 {
   "cas": "1918-16-7",
-  "name": "propachlor (ISO); 2-chloro-N-isopropylacetanilide; Î±-chloro-N-isopropylacetanilide",
+  "name": "propachlor (ISO); 2-chloro-N-isopropylacetanilide; α-chloro-N-isopropylacetanilide",
   "name_tr": "",
   "ec_no": "217-638-2",
   "index_no": "616-008-00-8",
@@ -9,7 +9,7 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {

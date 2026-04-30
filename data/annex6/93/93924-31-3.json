@@ -4,8 +4,10 @@
   "name_tr": "",
   "ec_no": "300-225-7",
   "index_no": "649-175-00-0",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "H K U"
+  ],
   "classification": {
     "hazards": [
       {
@@ -14,11 +16,11 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": "H350"
+        "h_code": ""
       },
       {
         "class": "Carc. 1B",
-        "h_code": "H340"
+        "h_code": "H350"
       }
     ],
     "m_factors": {},
@@ -33,8 +35,7 @@
     ],
     "h_codes": [
       "H220",
-      "H350",
-      "H340"
+      "H350"
     ],
     "suppl_h": []
   }

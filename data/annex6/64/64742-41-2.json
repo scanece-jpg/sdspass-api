@@ -1,11 +1,13 @@
 {
   "cas": "64742-41-2",
-  "name": "Residual oils (petroleum), clay-treated; Baseoil â€” unspecified; [A complex combination of hydrocarbons obtained by treatment of a residual oil with a natural or modified clay in either a contacting or percolation process to remove the trace amounts of polar compounds and impurities present. It consists of hydro-carbons having carbon numbers predominantly higher than C25 and boiling above approximately 400 Â°C (752 Â°F).]",
+  "name": "Residual oils (petroleum), clay-treated; Baseoil - unspecified; [A complex combination of hydrocarbons obtained by treatment of a residual oil with a natural or modified clay in either a contacting or percolation process to remove the trace amounts of polar compounds and impurities present. It consists of hydro-carbons having carbon numbers predominantly higher than C25 and boiling above approximately 400 °C (752 °F).]",
   "name_tr": "",
   "ec_no": "265-143-5",
   "index_no": "649-462-00-0",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "L"
+  ],
   "classification": {
     "hazards": [
       {

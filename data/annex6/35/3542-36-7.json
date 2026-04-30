@@ -18,7 +18,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 **"
+        "h_code": "H372"
       },
       {
         "class": "Aquatic Chronic 3",
@@ -26,7 +26,14 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H360",
+        "class": "",
+        "c_min": 3.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
@@ -37,7 +44,7 @@
     "h_codes": [
       "H360D",
       "H330",
-      "H372 **",
+      "H372",
       "H412"
     ],
     "suppl_h": []

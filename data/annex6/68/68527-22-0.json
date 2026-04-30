@@ -1,11 +1,13 @@
 {
   "cas": "68527-22-0",
-  "name": "Naphtha (petroleum), clay-treated light straight-run; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons resulting from treatment of light straight-run naphtha with a natural or modified clay, usually in a percolation process to remove the trace amounts of polar compounds and impurities present. It consists of hydrocarbons having carbon numbers predominantly in the range of C7 through C10 and boiling in the range of approximately 93 Â°C to 180 Â°C (200 Â°F to 356 Â°F).]",
+  "name": "Naphtha (petroleum), clay-treated light straight-run; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons resulting from treatment of light straight-run naphtha with a natural or modified clay, usually in a percolation process to remove the trace amounts of polar compounds and impurities present.  It consists of hydrocarbons having carbon numbers predominantly in the range of C7 through C10 and boiling in the range of approximately 93°C to 180°C (200°F to 356°F).]",
   "name_tr": "",
   "ec_no": "271-263-9",
   "index_no": "649-369-00-5",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

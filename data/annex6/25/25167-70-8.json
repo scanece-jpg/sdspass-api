@@ -4,8 +4,10 @@
   "name_tr": "",
   "ec_no": "246-690-9",
   "index_no": "601-087-00-3",
-  "atp": "ATP05",
-  "notes": [],
+  "atp": "ATP5",
+  "notes": [
+    "D"
+  ],
   "classification": {
     "hazards": [
       {
@@ -28,8 +30,8 @@
     "signal": "Danger",
     "pictograms": [
       "GHS02",
-      "GHS08",
-      "GHS07"
+      "GHS07",
+      "GHS08"
     ],
     "h_codes": [
       "H225",

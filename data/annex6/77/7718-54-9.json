@@ -4,7 +4,7 @@
   "name_tr": "",
   "ec_no": "231-743-0",
   "index_no": "028-011-00-6",
-  "atp": "ATP01corr",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -18,19 +18,19 @@
       },
       {
         "class": "Repr. 1B",
-        "h_code": "H360D ***"
+        "h_code": "H360D"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H331"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H301"
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 **"
+        "h_code": "H372"
       },
       {
         "class": "Skin Irrit. 2",
@@ -53,25 +53,48 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1
-    },
-    "scl_limits": []
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H372",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H373",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H315",
+        "class": "",
+        "c_min": 20.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H317",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS08",
       "GHS06",
+      "GHS08",
       "GHS09"
     ],
     "h_codes": [
       "H350i",
       "H341",
-      "H360D ***",
+      "H360D",
       "H331",
       "H301",
-      "H372 **",
+      "H372",
       "H315",
       "H334",
       "H317",

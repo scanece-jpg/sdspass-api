@@ -2,7 +2,7 @@
   "cas": "123312-89-0",
   "name": "pymetrozine (ISO); (E)-4,5-dihydro-6-methyl-4-(3-pyridylmethyleneamino)-1,2,4-triazin-3(2H)-one",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "613-202-00-4",
   "atp": "ATP15",
   "notes": [],
@@ -21,9 +21,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

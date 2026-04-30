@@ -4,23 +4,28 @@
   "name_tr": "Gazlar (petrol), platform oluşturucu ürünler ayırıcısı çalışmazken; Rafineri gazı; [Naftenlerin aromatiklere kimyasal dönüşümünden elde edilen kompleks bir bileşim. Hidrojen ve büyük çoğunlukla C2 ila C4 aralığında karbon sayısına sahipdoymuş alifatik hidrokarbonlardan oluşur..]",
   "ec_no": "272-343-6",
   "index_no": "649-154-00-6",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

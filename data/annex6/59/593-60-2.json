@@ -5,7 +5,9 @@
   "ec_no": "209-800-6",
   "index_no": "602-024-00-2",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "U"
+  ],
   "classification": {
     "hazards": [
       {
@@ -14,11 +16,11 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": "H350"
+        "h_code": ""
       },
       {
         "class": "Carc. 1B",
-        "h_code": ""
+        "h_code": "H350"
       }
     ],
     "m_factors": {},
@@ -28,7 +30,6 @@
     "signal": "Danger",
     "pictograms": [
       "GHS02",
-      "GHS04",
       "GHS08"
     ],
     "h_codes": [

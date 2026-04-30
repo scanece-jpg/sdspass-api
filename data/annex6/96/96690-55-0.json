@@ -1,11 +1,13 @@
 {
   "cas": "96690-55-0",
-  "name": "Tar acids, distn. residues; Distillate Phenols; [A residue from the distillation of crude phenol from coal. It consists predominantly of phenols having carbon numbers in the range of C8 through C10 with a softening point of 60 Â°C to 80 Â°C (140 Â°F to 176 Â°F).]",
+  "name": "Tar acids, distn. residues; Distillate Phenols; [A residue from the distillation of crude phenol from coal.  It consists predominantly of phenols having carbon numbers in the range of C8 through C10 with a softening point of 60°C to 80°C (140°F to 176°F).]",
   "name_tr": "",
   "ec_no": "306-251-5",
   "index_no": "648-119-00-2",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "J M"
+  ],
   "classification": {
     "hazards": [
       {

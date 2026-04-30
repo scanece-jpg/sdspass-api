@@ -1,8 +1,8 @@
 {
   "cas": "97780-06-8",
-  "name": "ethametsulfuron-methyl (ISO); methyl 2-({[4-ethoxy-6-(methylamino)-1,3,5-triazin-2-yl]carbamoyl}sulfamoyl)benzoate",
+  "name": "ethametsulfuron-methyl (ISO);\nmethyl 2-({[4-ethoxy-6-(methylamino)-1,3,5-triazin-2-yl]carbamoyl}sulfamoyl)benzoate",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "607-751-00-9",
   "atp": "ATP17",
   "notes": [],
@@ -21,10 +21,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1000,
-      "chronic": 100
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

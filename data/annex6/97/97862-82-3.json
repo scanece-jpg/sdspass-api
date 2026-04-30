@@ -1,11 +1,13 @@
 {
   "cas": "97862-82-3",
-  "name": "Hydrocarbons, C17-30, hydrotreated distillates, distn. lights; Baseoil â€” unspecified",
+  "name": "Hydrocarbons, C17-30, hydrotreated distillates, distn. lights; Baseoil - unspecified",
   "name_tr": "",
   "ec_no": "308-132-3",
   "index_no": "649-520-00-5",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "L"
+  ],
   "classification": {
     "hazards": [
       {

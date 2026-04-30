@@ -1,16 +1,16 @@
 {
   "cas": "199327-61-2",
-  "name": "7-methoxy-6-(3-morpholin-4-yl-propoxy)-3H-quinazolin-4-one; [containing â‰¥ 0,5 % formamide (EC No 200-842-0)]",
+  "name": "7-methoxy-6-(3-morpholin-4-yl-propoxy)-3H-quinazolin-4-one; [containing ≥ 0.5 % formamide (EC No 200-842-0) ]",
   "name_tr": "",
   "ec_no": "429-400-7",
   "index_no": "612-253-01-7",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
       {
         "class": "Repr. 1B",
-        "h_code": "H360D ***"
+        "h_code": "H360D"
       },
       {
         "class": "Aquatic Chronic 3",
@@ -26,7 +26,7 @@
       "GHS08"
     ],
     "h_codes": [
-      "H360D ***",
+      "H360D",
       "H412"
     ],
     "suppl_h": []

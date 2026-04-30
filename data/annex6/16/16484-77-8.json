@@ -1,6 +1,6 @@
 {
   "cas": "16484-77-8",
-  "name": "mecoprop-P; (R)-2-(4-chloro-2-methylphenoxy)propionic acid [1]\nmecoprop-P and its salts; (R)-2-(4-chloro-2-methylphenoxy)propionic acid and its salts [2]",
+  "name": "mecoprop-P [1] and its salts;; (R)-2-(4-chloro-2-methylphenoxy)propionic acid and its salts",
   "name_tr": "",
   "ec_no": "240-539-0",
   "index_no": "607-434-00-5",
@@ -25,10 +25,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

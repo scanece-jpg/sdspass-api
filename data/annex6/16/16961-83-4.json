@@ -1,11 +1,13 @@
 {
   "cas": "16961-83-4",
-  "name": "fluorosilicic acid ... %",
+  "name": "fluorosilicic acid ... %",
   "name_tr": "",
   "ec_no": "241-034-8",
   "index_no": "009-011-00-5",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "B"
+  ],
   "classification": {
     "hazards": [
       {

@@ -9,12 +9,12 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 2 *",
+        "class": "Acute Tox. 2",
         "h_code": "H330"
       },
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Skin Corr. 1B",
@@ -50,7 +50,7 @@
     ],
     "h_codes": [
       "H330",
-      "H373 **",
+      "H373",
       "H314",
       "H334",
       "H317",

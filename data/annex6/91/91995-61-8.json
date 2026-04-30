@@ -1,11 +1,13 @@
 {
   "cas": "91995-61-8",
-  "name": "Extract residues (coal), benzole fraction alk., acid ext.; Light Oil Extract Residues, low boiling; [The redistillate from the distillate, freed of tar acids and tar bases, from bituminous coal high temperature tar boiling in the approximate range of 90 Â°C to 160 Â°C (194 Â°F to 320 Â°F). It consists predominantly of benzene, toluene and xylenes.]",
+  "name": "Extract residues (coal), benzole fraction alk., acid ext.; Light Oil Extract Residues, low boiling; [The redistillate from the distillate, freed of tar acids and tar bases, from bituminous coal high temperature tar boiling in the approximate range of 90°C to 160°C (194°F to 320°F).  It consists predominantly of benzene, toluene and xylenes.]",
   "name_tr": "",
   "ec_no": "295-323-9",
   "index_no": "648-014-00-1",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "J"
+  ],
   "classification": {
     "hazards": [
       {

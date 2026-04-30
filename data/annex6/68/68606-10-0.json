@@ -1,11 +1,13 @@
 {
   "cas": "68606-10-0",
-  "name": "Gasoline, pyrolysis, debutanizer bottoms; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons obtained from the fractionation of depropanizer bottoms. It consists of hydrocarbons having carbon numbers predominantly greater than C5.]",
+  "name": "Gasoline, pyrolysis, debutanizer bottoms; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons obtained from the fractionation of depropanizer bottoms.  It consists of hydrocarbons having carbon numbers predominantly greater than C5.]",
   "name_tr": "",
   "ec_no": "271-726-5",
   "index_no": "649-373-00-7",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

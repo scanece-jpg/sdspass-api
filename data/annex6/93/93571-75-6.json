@@ -1,11 +1,13 @@
 {
   "cas": "93571-75-6",
-  "name": "Aromatic hydrocarbons, C7-12, C8-rich; Low boiling point cat-reformed naphtha; [A complex combination of hydrocarbons obtained by separation from the platformate-containing fraction. It consists predominantly of aromatic hydrocarbons having carbon numbers predominantly in the range of C7 through C12 (primarily C8) and can contain nonaromatic hydrocarbons, both boiling in the range of approximately 130 Â°C to 200 Â°C (266 Â°F to 392 Â°F).]",
+  "name": "Aromatic hydrocarbons, C7-12, C8-rich; Low boiling point cat-reformed naphtha; [A complex combination of hydrocarbons obtained by separation from the platformate-containing fraction.  It consists predominantly of aromatic hydrocarbons having carbon numbers predominantly in the range of C7 through C12 (primarily C8) and can contain nonaromatic hydrocarbons, both boiling in the range of approximately 130°C to 200°C (266°F to 392°F).]",
   "name_tr": "",
   "ec_no": "297-401-8",
   "index_no": "649-311-00-9",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

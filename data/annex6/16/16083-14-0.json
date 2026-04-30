@@ -1,10 +1,10 @@
 {
   "cas": "16083-14-0",
-  "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(d-gluconato-O 1,O 2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
+  "name": "nickel(II) trifluoroacetate [1]\nnickel(II) propionate [2]\nnickel bis(benzenesulfonate) [3]\nnickel(II) hydrogen citrate [4]\ncitric acid, ammonium nickel salt [5]\ncitric acid, nickel salt [6]\nnickel bis(2-ethylhexanoate) [7]\n2-ethylhexanoic acid, nickel salt [8]\ndimethylhexanoic acid nickel salt [9]\nnickel(II) isooctanoate [10]\nnickel isooctanoate [11]\nnickel bis(isononanoate) [12]\nnickel(II) neononanoate [13]\nnickel(II) isodecanoate [14]\nnickel(II) neodecanoate [15]\nneodecanoic acid, nickel salt [16]\nnickel(II) neoundecanoate [17]\nbis(.sc.d.sc.-gluconato-O1,O2)nickel [18]\nnickel 3,5-bis(tert-butyl)-4-hydroxybenzoate (1:2) [19]\nnickel(II) palmitate [20]\n(2-ethylhexanoato-O)(isononanoato-O)nickel [21]\n(isononanoato-O)(isooctanoato-O)nickel [22]\n(isooctanoato-O)(neodecanoato-O)nickel [23]\n(2-ethylhexanoato-O)(isodecanoato-O)nickel [24]\n(2-ethylhexanoato-O)(neodecanoato-O)nickel [25]\n(isodecanoato-O)(isooctanoato-O)nickel [26]\n(isodecanoato-O)(isononanoato-O)nickel [27]\n(isononanoato-O)(neodecanoato-O)nickel [28]\nfatty acids, C6-19-branched, nickel salts [29]\nfatty acids, C8-18 and C18-unsaturated, nickel salts [30]\n2,7-naphthalenedisulfonic acid, nickel(II) salt [31]",
   "name_tr": "",
-  "ec_no": "240-235-8",
+  "ec_no": "240-235-8 [1]\n222-102-6 [2]\n254-642-3 [3]\n242-533-3 [4]\n242-161-1 [5]\n245-119-0 [6]\n224-699-9 [7]\n231-480-1 [8]\n301-323-2 [9]\n249-555-2 [10]\n248-585-3 [11]\n284-349-6 [12]\n300-094-6 [13]\n287-468-1 [14]\n287-469-7 [15]\n257-447-1 [16]\n300-093-0 [17]\n276-205-6 [18]\n258-051-1 [19]\n237-138-8 [20]\n287-470-2 [21]\n287-471-8 [22]\n284-347-5 [23]\n284-351-7 [24]\n285-698-7 [25]\n285-909-2 [26]\n284-348-0 [27]\n287-592-6 [28]\n294-302-1 [29]\n283-972-0 [30]",
   "index_no": "028-054-00-0",
-  "atp": "ATP02",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -18,11 +18,11 @@
       },
       {
         "class": "Repr. 1B",
-        "h_code": "H360D ***"
+        "h_code": "H360D"
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 **"
+        "h_code": "H372"
       },
       {
         "class": "Resp. Sens. 1",
@@ -41,10 +41,27 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1
-    },
-    "scl_limits": []
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H372",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H373",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H317",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
@@ -55,8 +72,8 @@
     "h_codes": [
       "H350i",
       "H341",
-      "H360D ***",
-      "H372 **",
+      "H360D",
+      "H372",
       "H334",
       "H317",
       "H400",

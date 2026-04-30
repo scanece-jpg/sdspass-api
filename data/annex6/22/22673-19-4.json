@@ -1,6 +1,6 @@
 {
   "cas": "22673-19-4",
-  "name": "dibutylbis(pentane-2,4-dionato-O,O)tin",
+  "name": "dibutylbis(pentane-2,4-dionato-O,O')tin",
   "name_tr": "",
   "ec_no": "245-152-0",
   "index_no": "650-056-00-0",
@@ -14,7 +14,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 (immune system)"
+        "h_code": "H372(immune_system)"
       }
     ],
     "m_factors": {},
@@ -27,7 +27,7 @@
     ],
     "h_codes": [
       "H360FD",
-      "H372 (immune system)"
+      "H372(immune_system)"
     ],
     "suppl_h": []
   }

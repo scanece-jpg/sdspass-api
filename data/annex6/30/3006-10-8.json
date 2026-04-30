@@ -1,6 +1,6 @@
 {
   "cas": "3006-10-8",
-  "name": "mecetronium etilsulfate; N-ethyl-N,N-dimethylhexadecan-1-aminium ethyl sulfate; mecetronium ethyl sulphate; [MES]",
+  "name": "mecetronium etilsul­fate; N-ethyl-N,N-dimethyl­hexadecan-1-aminium ethyl sulfate; mecetronium ethyl sulphate; [MES]",
   "name_tr": "",
   "ec_no": "221-106-5",
   "index_no": "612-294-00-3",
@@ -25,10 +25,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 100,
-      "chronic": 1000
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -43,6 +40,8 @@
       "H400",
       "H410"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH071"
+    ]
   }
 }

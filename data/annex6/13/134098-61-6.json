@@ -2,9 +2,9 @@
   "cas": "134098-61-6",
   "name": "fenpyroximate (ISO); tert-butyl 4-[({(E)-[(1,3-dimethyl-5-phenoxy-1H-pyrazol-4-yl)methylene]amino}oxy)methyl]benzoate",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "607-713-00-1",
-  "atp": "ATP07",
+  "atp": "ATP7",
   "notes": [],
   "classification": {
     "hazards": [
@@ -29,10 +29,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 100,
-      "chronic": 1000
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

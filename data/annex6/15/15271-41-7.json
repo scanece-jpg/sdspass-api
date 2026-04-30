@@ -2,19 +2,19 @@
   "cas": "15271-41-7",
   "name": "3-chloro-6-cyano-bicyclo(2,2,1)heptan-2-one-O-(N-methylcarbamoyl)oxime; triamid",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "006-065-00-1",
   "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 3 *",
-        "h_code": "H311"
+        "class": "Acute Tox. 2",
+        "h_code": "H300"
       },
       {
-        "class": "Acute Tox. 2 *",
-        "h_code": "H300"
+        "class": "Acute Tox. 3",
+        "h_code": "H311"
       },
       {
         "class": "Aquatic Chronic 2",
@@ -31,8 +31,8 @@
       "GHS09"
     ],
     "h_codes": [
-      "H311",
       "H300",
+      "H311",
       "H411"
     ],
     "suppl_h": []

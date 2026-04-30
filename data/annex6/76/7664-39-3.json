@@ -1,23 +1,25 @@
 {
   "cas": "7664-39-3",
-  "name": "hydrofluoric acid â€¦ %",
+  "name": "hydrofluoric acid ... %",
   "name_tr": "",
   "ec_no": "231-634-8",
   "index_no": "009-003-00-1",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "B"
+  ],
   "classification": {
     "hazards": [
-      {
-        "class": "Acute Tox. 2 *",
-        "h_code": "H330"
-      },
       {
         "class": "Acute Tox. 1",
         "h_code": "H310"
       },
       {
-        "class": "Acute Tox. 2 *",
+        "class": "Acute Tox. 2",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 2",
         "h_code": "H300"
       },
       {
@@ -26,7 +28,26 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H314",
+        "class": "",
+        "c_min": 7.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H314",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H319",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
@@ -35,8 +56,8 @@
       "GHS05"
     ],
     "h_codes": [
-      "H330",
       "H310",
+      "H330",
       "H300",
       "H314"
     ],

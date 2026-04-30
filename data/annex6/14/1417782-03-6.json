@@ -1,8 +1,8 @@
 {
   "cas": "1417782-03-6",
-  "name": "(2RS)-2-[4-(4-chlorophenoxy)-2-(trifluoromethyl)phenyl]-1-(1H-1,2,4-triazol-1-yl)propan-2-ol; mefentrifluconazole",
+  "name": "(2RS)-2-[4-(4-chloro­phenoxy)-2-(trifluoromethyl)phenyl]-1-(1H- 1,2,4-triazol-1-yl)propan-2-ol; mefentrifluconazole",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "613-331-00-6",
   "atp": "ATP15",
   "notes": [],
@@ -21,10 +21,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1,
-      "chronic": 1
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

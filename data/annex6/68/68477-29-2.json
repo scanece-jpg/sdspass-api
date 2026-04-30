@@ -1,11 +1,13 @@
 {
   "cas": "68477-29-2",
-  "name": "Distillates (petroleum), catalytic reformer fractionator residue, high-boiling; Gasoil â€” unspecified; [A complex combination of hydrocarbons from the distillation of catalytic reformer fracftionator residue. It boils in the range of approximately 343 Â°C to 399 Â°C (650 Â°F to 750 Â°F).]",
+  "name": "Distillates (petroleum), catalytic reformer fractionator residue, high-boiling; Gasoil - unspecified; [A complex combination of hydrocarbons from the distillation of catalytic reformer fracftionator residue. It boils in the range of approximately 343 °C to 399 °C (650 °F to 750 °F).]",
   "name_tr": "",
   "ec_no": "270-719-4",
   "index_no": "649-228-00-8",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "N"
+  ],
   "classification": {
     "hazards": [
       {

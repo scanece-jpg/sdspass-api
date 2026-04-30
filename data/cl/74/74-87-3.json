@@ -4,9 +4,10 @@
   "name_tr": "klorometan; metil klorür",
   "ec_no": "200-817-4",
   "index_no": "602-001-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
@@ -16,10 +17,14 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": "H351"
+        "h_code": ""
       },
       {
         "class": "Carc. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "STOT RE 2",
         "h_code": "H373"
       }
     ],

@@ -1,10 +1,10 @@
 {
   "cas": "731-27-1",
-  "name": "tolylfluanid (ISO); dichloro-N-[(dimethylamino)sulphonyl]fluoro-N-(p-tolyl)methanesulphenamide; [containing < 0,1 % (w/w) of particles with an aerodynamic diameter of below 50 Î¼m]",
+  "name": "tolylfluanid (ISO); dichloro-N-[(dimethylamino)sulphonyl]fluoro-N-(p-tolyl)methanesulphenamide; [containing < 0.1% (w/w) of particles with an aerodynamic diameter of below 50 μm]",
   "name_tr": "",
   "ec_no": "211-986-9",
   "index_no": "613-116-01-4",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -29,9 +29,7 @@
         "h_code": "H400"
       }
     ],
-    "m_factors": {
-      "acute": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

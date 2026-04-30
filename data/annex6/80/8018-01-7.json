@@ -1,8 +1,8 @@
 {
   "cas": "8018-01-7",
-  "name": "mancozeb (ISO); manganese ethylenebis(dithiocarbamate) (polymeric) complex with zinc salt",
+  "name": "mancozeb (ISO);\nmanganese ethylenebis(dithiocarbamate) (polymeric) complex with zinc salt",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "006-076-00-1",
   "atp": "ATP17",
   "notes": [],
@@ -18,7 +18,7 @@
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373 (thyroid, nervous system)"
+        "h_code": "H373(thyroid,_nervous_system)"
       },
       {
         "class": "Skin Sens. 1",
@@ -33,10 +33,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -49,7 +46,7 @@
     "h_codes": [
       "H351",
       "H360D",
-      "H373 (thyroid, nervous system)",
+      "H373(thyroid,_nervous_system)",
       "H317",
       "H400",
       "H410"

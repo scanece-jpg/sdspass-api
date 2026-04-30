@@ -1,11 +1,13 @@
 {
   "cas": "101896-26-8",
-  "name": "Distillates (coal tar), benzole fraction, BTX-rich; Light Oil Redistillate, low boiling; [A residue from the distillation of crude benzole to remove benzole fronts. Composed primarily of benzene, toluene and xylenes boiling in the range of approximately 75 Â°C to 200 Â°C (167 Â°F to 392 Â°F).]",
+  "name": "Distillates (coal tar), benzole fraction, BTX-rich; Light Oil Redistillate, low boiling; [A residue from the distillation of crude benzole to remove benzole fronts.  Composed primarily of benzene, toluene and xylenes boiling in the range of approximately 75°C to 200°C (167°F to 392°F).]",
   "name_tr": "",
   "ec_no": "309-984-9",
   "index_no": "648-004-00-7",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "J"
+  ],
   "classification": {
     "hazards": [
       {

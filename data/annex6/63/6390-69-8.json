@@ -17,8 +17,10 @@
     "scl_limits": []
   },
   "labelling": {
-    "signal": "",
-    "pictograms": [],
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05"
+    ],
     "h_codes": [
       "H413"
     ],

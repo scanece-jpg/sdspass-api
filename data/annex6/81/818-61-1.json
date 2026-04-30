@@ -5,11 +5,13 @@
   "ec_no": "212-454-9",
   "index_no": "607-072-00-8",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "D"
+  ],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H311"
       },
       {
@@ -26,7 +28,14 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H317",
+        "class": "",
+        "c_min": 2.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",

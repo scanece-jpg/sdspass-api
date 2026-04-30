@@ -4,7 +4,7 @@
   "name_tr": "",
   "ec_no": "255-391-2",
   "index_no": "612-288-00-0",
-  "atp": "ATP09",
+  "atp": "ATP9",
   "notes": [],
   "classification": {
     "hazards": [
@@ -21,9 +21,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

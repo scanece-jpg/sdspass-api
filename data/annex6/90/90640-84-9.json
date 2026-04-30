@@ -1,11 +1,13 @@
 {
   "cas": "90640-84-9",
-  "name": "Creosote oil, acenaphthene fraction; Wash Oil; [A complex combination of hydrocarbons produced by the distillation of coal tar and boiling in the range of approximately 240 Â°C to 280 Â°C (464 Â°F to 536 Â°F). Composed primarily of acenaphthene, naphthalene and alkyl naphthalene.]",
+  "name": "Creosote oil, acenaphthene fraction; Wash Oil; [A complex combination of hydrocarbons produced by the distillation of coal tar and boiling in the range of approximately 240°C to 280°C (464°F to 536°F). Composed primarily of acenaphthene, naphthalene and alkyl naphthalene.]",
   "name_tr": "",
   "ec_no": "292-605-3",
   "index_no": "648-098-00-X",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "M"
+  ],
   "classification": {
     "hazards": [
       {

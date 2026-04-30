@@ -1,11 +1,13 @@
 {
   "cas": "75-21-8",
-  "name": "ethylene oxide; oxirane",
+  "name": "ethylene oxide;\noxirane",
   "name_tr": "",
   "ec_no": "200-849-9",
   "index_no": "603-023-00-X",
   "atp": "ATP14",
-  "notes": [],
+  "notes": [
+    "U"
+  ],
   "classification": {
     "hazards": [
       {
@@ -14,18 +16,22 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": "H350"
+        "h_code": ""
       },
       {
         "class": "Carc. 1B",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": "H360Fd"
+        "h_code": "H340"
       },
       {
         "class": "Repr. 1B",
+        "h_code": "H360Fd"
+      },
+      {
+        "class": "Acute Tox. 3",
         "h_code": "H331"
       },
       {
@@ -33,7 +39,7 @@
         "h_code": "H301"
       },
       {
-        "class": "Acute Tox. 3",
+        "class": "STOT SE 3",
         "h_code": "H335"
       },
       {
@@ -41,20 +47,16 @@
         "h_code": "H336"
       },
       {
-        "class": "STOT SE 3",
-        "h_code": "H372 (nervous system)"
-      },
-      {
         "class": "STOT RE 1",
-        "h_code": "H314"
+        "h_code": "H372(nervous_system)"
       },
       {
         "class": "Skin Corr. 1",
-        "h_code": "H318"
+        "h_code": "H314"
       },
       {
         "class": "Eye Dam. 1",
-        "h_code": ""
+        "h_code": "H318"
       }
     ],
     "m_factors": {},
@@ -64,10 +66,9 @@
     "signal": "Danger",
     "pictograms": [
       "GHS02",
-      "GHS04",
-      "GHS08",
+      "GHS05",
       "GHS06",
-      "GHS05"
+      "GHS08"
     ],
     "h_codes": [
       "H220",
@@ -78,7 +79,7 @@
       "H301",
       "H335",
       "H336",
-      "H372 (nervous system)",
+      "H372(nervous_system)",
       "H314",
       "H318"
     ],

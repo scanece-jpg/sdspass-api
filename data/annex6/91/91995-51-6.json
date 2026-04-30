@@ -1,11 +1,13 @@
 {
   "cas": "91995-51-6",
-  "name": "Distillates (coal tar), pitch, heavy oils; Heavy Anthracene Oil; [The distillate from the distillation of the pitch obtained from bituminous high temperature tar. Composed primarily of tri- and polynuclear aromatic hydrocarbons and boiling in the range of approximately 300 Â°C to 470 Â°C (572 Â°F to 878 Â°F). The product may also contain heteroatoms.]",
+  "name": "Distillates (coal tar), pitch, heavy oils; Heavy Anthracene Oil; [The distillate from the distillation of the pitch obtained from bituminous high temperature tar. Composed primarily of tri- and polynuclear aromatic hydrocarbons and boiling in the range of approximately 300 °C to 470 °C (572 °F to 878 °F). The product may also contain heteroatoms.]",
   "name_tr": "",
   "ec_no": "295-312-9",
   "index_no": "648-048-00-7",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "M"
+  ],
   "classification": {
     "hazards": [
       {

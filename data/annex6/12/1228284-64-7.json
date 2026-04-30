@@ -2,7 +2,7 @@
   "cas": "1228284-64-7",
   "name": "N-methoxy-N-[1-methyl-2-(2,4,6-trichlorophenyl)-ethyl]-3-(difluoromethyl)-1-methylpyrazole-4-carboxamide; pydiflumetofen",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "616-234-00-7",
   "atp": "ATP17",
   "notes": [],
@@ -25,10 +25,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1,
-      "chronic": 1
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

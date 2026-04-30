@@ -10,23 +10,23 @@
     "hazards": [
       {
         "class": "Repr. 2",
-        "h_code": "H361f ***"
+        "h_code": "H361f"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H312"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Eye Irrit. 2",
@@ -56,11 +56,11 @@
       "GHS09"
     ],
     "h_codes": [
-      "H361f ***",
+      "H361f",
       "H332",
       "H312",
       "H302",
-      "H373 **",
+      "H373",
       "H319",
       "H317",
       "H400",

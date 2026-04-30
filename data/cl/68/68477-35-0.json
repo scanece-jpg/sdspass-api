@@ -4,23 +4,28 @@
   "name_tr": "Damıtıklar (petrol), C3-6, piperilen-zengin; Petrol gazı; [Genellikle karbon sayıları C3 ila C6 aralığında olan doymuş ve doymamış alifatik hidrokarbonların damıtılmasından elde edilen hidrokarbonların kompleks bir bileşimi. C3 ila C6 aralığında karbon sayısına sahip, büyük çoğunlukla piperilen, doymuş ve doymamış hidrokarbonlardan oluşur.]",
   "ec_no": "270-726-2",
   "index_no": "649-205-00-2",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

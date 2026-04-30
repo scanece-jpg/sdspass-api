@@ -1,6 +1,6 @@
 {
   "cas": "61213-25-0",
-  "name": "flurochloridone (ISO); 3-chloro-4-(chloromethyl)-1-[3-(trifluoromethyl)phenyl]pyrrolidin-2-one",
+  "name": "flurochloridone (ISO); 3-chloro-4-(chloro­methyl)-1-[3-(trifluor­omethyl)phenyl]pyrrolidin-2-one",
   "name_tr": "",
   "ec_no": "262-661-3",
   "index_no": "613-334-00-2",
@@ -29,10 +29,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 100,
-      "chronic": 100
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

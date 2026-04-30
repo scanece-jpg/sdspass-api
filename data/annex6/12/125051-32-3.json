@@ -1,11 +1,13 @@
 {
   "cas": "125051-32-3",
-  "name": "bis(Î·5-cyclopentadienyl)-bis(2,6-difluoro-3-[pyrrol-1-yl]-phenyl)titanium",
+  "name": "bis(η5-cyclopentadienyl)-bis(2,6-difluoro-3-[pyrrol-1-yl]-phenyl)titanium",
   "name_tr": "",
   "ec_no": "412-000-1",
   "index_no": "022-003-00-6",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "T"
+  ],
   "classification": {
     "hazards": [
       {
@@ -14,11 +16,11 @@
       },
       {
         "class": "Repr. 2",
-        "h_code": "H361f ***"
+        "h_code": "H361f"
       },
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Aquatic Chronic 2",
@@ -37,8 +39,8 @@
     ],
     "h_codes": [
       "H228",
-      "H361f ***",
-      "H373 **",
+      "H361f",
+      "H373",
       "H411"
     ],
     "suppl_h": []

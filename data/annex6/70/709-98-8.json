@@ -1,15 +1,15 @@
 {
   "cas": "709-98-8",
-  "name": "propanil (ISO); 3', 4'-dichloropropionanilide",
+  "name": "propanil (ISO); 3',4'-dichloropropionanilide",
   "name_tr": "",
   "ec_no": "211-914-6",
   "index_no": "616-009-00-3",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
@@ -17,9 +17,7 @@
         "h_code": "H400"
       }
     ],
-    "m_factors": {
-      "acute": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

@@ -4,9 +4,10 @@
   "name_tr": "amonyak, susuz",
   "ec_no": "231-635-3",
   "index_no": "007-001-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
@@ -16,14 +17,18 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": "H331"
+        "h_code": ""
       },
       {
         "class": "Acute Tox. 3",
-        "h_code": "H314"
+        "h_code": "H331"
       },
       {
         "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Aquatic Acute 1",
         "h_code": "H400"
       }
     ],

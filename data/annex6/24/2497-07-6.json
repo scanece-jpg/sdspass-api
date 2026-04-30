@@ -1,6 +1,6 @@
 {
   "cas": "2497-07-6",
-  "name": "oxydisulfoton (ISO); O,O-diethyl S-2-ethylsulphinylethyl phosphorodithioate",
+  "name": "oxydisulfoton (ISO); O, O-diethyl S-2-ethylsulphinylethyl phosphorodithioate",
   "name_tr": "",
   "ec_no": "219-679-1",
   "index_no": "015-096-00-X",
@@ -9,12 +9,12 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 3 *",
-        "h_code": "H311"
+        "class": "Acute Tox. 2",
+        "h_code": "H300"
       },
       {
-        "class": "Acute Tox. 2 *",
-        "h_code": "H300"
+        "class": "Acute Tox. 3",
+        "h_code": "H311"
       },
       {
         "class": "Aquatic Acute 1",
@@ -25,9 +25,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -37,8 +35,8 @@
       "GHS09"
     ],
     "h_codes": [
-      "H311",
       "H300",
+      "H311",
       "H400",
       "H410"
     ],

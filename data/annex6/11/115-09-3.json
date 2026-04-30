@@ -5,7 +5,9 @@
   "ec_no": "204-064-2",
   "index_no": "080-012-00-0",
   "atp": "ATP14",
-  "notes": [],
+  "notes": [
+    "1"
+  ],
   "classification": {
     "hazards": [
       {
@@ -34,7 +36,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 (nervous system, kidneys)"
+        "h_code": "H372(nervous_system,_kidneys)"
       },
       {
         "class": "Aquatic Acute 1",
@@ -51,8 +53,8 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS08",
       "GHS06",
+      "GHS08",
       "GHS09"
     ],
     "h_codes": [
@@ -62,7 +64,7 @@
       "H330",
       "H310",
       "H300",
-      "H372 (nervous system, kidneys)",
+      "H372(nervous_system,_kidneys)",
       "H400",
       "H410"
     ],

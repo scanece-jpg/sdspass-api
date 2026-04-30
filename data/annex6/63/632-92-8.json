@@ -13,38 +13,38 @@
         "h_code": "H201"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H312"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       }
     ],
     "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
-    "signal": "Danger",
+    "signal": "Warning",
     "pictograms": [
       "GHS01",
-      "GHS07",
-      "GHS08"
+      "GHS08",
+      "GHS07"
     ],
     "h_codes": [
       "H201",
       "H332",
       "H312",
       "H302",
-      "H373 **"
+      "H373"
     ],
     "suppl_h": []
   }

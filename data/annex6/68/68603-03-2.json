@@ -1,11 +1,13 @@
 {
   "cas": "68603-03-2",
-  "name": "Distillates (petroleum), thermal cracked naphtha and gas oil, extractive; Low boiling point thermally cracked naphtha; [A complex combination of hydrocarbons produced by the extractive distillation of thermal cracked naphtha and/or gas oil. It consists of paraffinic and olefinic hydrocarbons, predominantly isoamylenes such as 2-methyl-1-butene and 2-methyl-2-butene and boiling in the range of approximately 31 Â°C to 40 Â°C (88 Â°F to 104 Â°F).]",
+  "name": "Distillates (petroleum), thermal cracked naphtha and gas oil, extractive; Low boiling point thermally cracked naphtha; [A complex combination of hydrocarbons produced by the extractive distillation of thermal cracked naphtha and/or gas oil.  It consists of paraffinic and olefinic hydrocarbons, predominantly isoamylenes such as 2-methyl-1-butene and 2-methyl-2-butene and boiling in the range of approximately 31°C to 40°C (88°F to 104°F).]",
   "name_tr": "",
   "ec_no": "271-634-5",
   "index_no": "649-324-00-X",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

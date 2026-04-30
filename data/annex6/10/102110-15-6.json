@@ -1,11 +1,13 @@
 {
   "cas": "102110-15-6",
-  "name": "Hydrocarbons, C5-rich, dicyclopentadiene-contg.; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons obtained by distillation of the products from a steam-cracking process. It consists predominantly of hydrocarbons having carbon numbers of C5 and dicyclopentadiene and boiling in the range of approximately 30 Â°C to 170 Â°C (86 Â°F to 338 Â°F).]",
+  "name": "Hydrocarbons, C5-rich, dicyclopentadiene-contg.; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons obtained by distillation of the products from a steam-cracking process.  It consists predominantly of hydrocarbons having carbon numbers of C5 and dicyclopentadiene and boiling in the range of approximately 30°C to 170°C (86°F to 338°F).]",
   "name_tr": "",
   "ec_no": "310-013-6",
   "index_no": "649-399-00-9",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

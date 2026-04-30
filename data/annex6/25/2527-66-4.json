@@ -1,20 +1,20 @@
 {
   "cas": "2527-66-4",
-  "name": "2-methyl-1,2-benzothiazol-3(2H)-one; [MBIT]",
+  "name": "2-methyl-1,2-ben­zothiazol-3(2H)-one; [MBIT]",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "613-336-00-3",
   "atp": "ATP15",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4",
-        "h_code": "H312"
-      },
-      {
         "class": "Acute Tox. 3",
         "h_code": "H301"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
       },
       {
         "class": "Skin Corr. 1C",
@@ -37,10 +37,15 @@
         "h_code": "H411"
       }
     ],
-    "m_factors": {
-      "acute": 1
-    },
-    "scl_limits": []
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H317",
+        "class": "",
+        "c_min": 15.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
@@ -50,14 +55,16 @@
       "GHS09"
     ],
     "h_codes": [
-      "H312",
       "H301",
+      "H312",
       "H314",
       "H318",
       "H317",
       "H400",
       "H411"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH071"
+    ]
   }
 }

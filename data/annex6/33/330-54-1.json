@@ -1,6 +1,6 @@
 {
   "cas": "330-54-1",
-  "name": "diuron (ISO); 3-(3,4-dichlorophenyl)â€“1,1-dimethylurea",
+  "name": "diuron (ISO); 3-(3,4-dichlorophenyl)-1,1-dimethylurea",
   "name_tr": "",
   "ec_no": "206-354-4",
   "index_no": "006-015-00-9",
@@ -14,7 +14,7 @@
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373 (blood system)"
+        "h_code": "H373(blood_system)"
       },
       {
         "class": "Aquatic Acute 1",
@@ -25,10 +25,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 100,
-      "chronic": 100
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -39,7 +36,7 @@
     ],
     "h_codes": [
       "H350",
-      "H373 (blood system)",
+      "H373(blood_system)",
       "H400",
       "H410"
     ],

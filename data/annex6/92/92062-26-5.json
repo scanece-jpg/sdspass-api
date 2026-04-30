@@ -1,11 +1,13 @@
 {
   "cas": "92062-26-5",
-  "name": "Tar acids, cresylic; Distillate Phenols; [A complex combination of organic compounds obtained from brown coal and boiling in the range of approximately 200 Â°C to 230 Â°C (392 Â°F to 446 Â°F). It contains chiefly phenols and pyridine bases.]",
+  "name": "Tar acids, cresylic; Distillate Phenols; [A complex combination of organic compounds obtained from brown coal and boiling in the range of approximately 200°C to 230°C (392°F to 446°F).  It contains chiefly phenols and pyridine bases.]",
   "name_tr": "",
   "ec_no": "295-540-9",
   "index_no": "648-128-00-1",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "J M"
+  ],
   "classification": {
     "hazards": [
       {

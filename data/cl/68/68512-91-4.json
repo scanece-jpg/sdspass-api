@@ -4,23 +4,28 @@
   "name_tr": "Hidrokarbonlar, C3-4-zengin, Petrol damıtığı; Petrol gazı; [Ham petrolün damıtılması ve yoğunlaşması ile üretilen hidrokarbonların kompleks bir bileşimi. C3 ila C5 aralığında, büyük çoğunlukla C3 ila C4 karbon sayısına sahip hidrokarbonlardan oluşur]",
   "ec_no": "270-990-9",
   "index_no": "649-083-00-0",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

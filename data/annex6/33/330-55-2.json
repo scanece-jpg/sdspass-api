@@ -17,12 +17,12 @@
         "h_code": "H360Df"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Aquatic Acute 1",
@@ -47,7 +47,7 @@
       "H351",
       "H360Df",
       "H302",
-      "H373 **",
+      "H373",
       "H400",
       "H410"
     ],

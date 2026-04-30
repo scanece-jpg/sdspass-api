@@ -1,6 +1,6 @@
 {
   "cas": "6164-98-3",
-  "name": "chlordimeform (ISO); N 2-(4-chloro-o-tolyl)-N 1,N 1-dimethylformamidine",
+  "name": "chlordimeform (ISO); N2-(4-chloro-o-tolyl)-N1,N1-dimethylformamidine",
   "name_tr": "",
   "ec_no": "228-200-5",
   "index_no": "650-007-00-3",
@@ -13,11 +13,11 @@
         "h_code": "H351"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H312"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {

@@ -4,7 +4,7 @@
   "name_tr": "",
   "ec_no": "203-867-5",
   "index_no": "603-194-00-0",
-  "atp": "ATP01corr",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -22,13 +22,20 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H335",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS08",
       "GHS05",
+      "GHS08",
       "GHS07"
     ],
     "h_codes": [

@@ -4,7 +4,7 @@
   "name_tr": "",
   "ec_no": "252-615-0",
   "index_no": "613-042-00-5",
-  "atp": "ATP07",
+  "atp": "ATP7",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,12 +13,12 @@
         "h_code": "H351"
       },
       {
-        "class": "Acute Tox. 4",
-        "h_code": "H332"
-      },
-      {
         "class": "Acute Tox. 3",
         "h_code": "H301"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
       },
       {
         "class": "Eye Dam. 1",
@@ -29,9 +29,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -44,8 +42,8 @@
     ],
     "h_codes": [
       "H351",
-      "H332",
       "H301",
+      "H332",
       "H318",
       "H410"
     ],

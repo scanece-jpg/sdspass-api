@@ -1,11 +1,13 @@
 {
   "cas": "97488-95-4",
-  "name": "Lubricating oils (petroleum), C18-27, hydrocracked solvent-dewaxed; Baseoil â€” unspecified",
+  "name": "Lubricating oils (petroleum), C18-27, hydrocracked solvent-dewaxed; Baseoil - unspecified",
   "name_tr": "",
   "ec_no": "307-034-8",
   "index_no": "649-514-00-2",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "L"
+  ],
   "classification": {
     "hazards": [
       {

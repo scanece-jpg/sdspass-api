@@ -25,9 +25,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 100
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

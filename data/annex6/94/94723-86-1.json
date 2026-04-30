@@ -4,16 +4,16 @@
   "name_tr": "",
   "ec_no": "425-150-8",
   "index_no": "606-100-00-6",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
       {
         "class": "Repr. 1B",
-        "h_code": "H360F ***"
+        "h_code": "H360F"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
@@ -35,7 +35,7 @@
       "GHS07"
     ],
     "h_codes": [
-      "H360F ***",
+      "H360F",
       "H302",
       "H317",
       "H412"

@@ -1,10 +1,10 @@
 {
   "cas": "93763-35-0",
-  "name": "Hydrocarbons, C9-16, hydrotreated, dearomatized; Kerosine â€” unspecified; [A complex combination of hydrocarbons obtained as solvents which have been subjected to hydrotreatment in order to convert aromatics to naphthenes by catalytic hydrogenation.]",
+  "name": "Hydrocarbons, C9-16, hydrotreated, dearomatized; Kerosine - unspecified; [A complex combination of hydrocarbons obtained as solvents which have been subjected to hydrotreatment in order to convert aromatics to naphthenes by catalytic hydrogenation.]",
   "name_tr": "",
   "ec_no": "297-854-1",
   "index_no": "649-429-00-0",
-  "atp": "ATP02",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

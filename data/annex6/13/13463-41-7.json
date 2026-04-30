@@ -1,6 +1,6 @@
 {
   "cas": "13463-41-7",
-  "name": "pyrithione zinc; (T-4)-bis[1-(hydroxy-.kappa.O)pyridine-2(1H)-thionato-.kappa.S]zinc",
+  "name": "pyrithione zinc; (T-4)- bis[1-(hydroxy-.kappa.O)pyridine-2(1H)- thionato-.kappa.S]zinc",
   "name_tr": "",
   "ec_no": "236-671-3",
   "index_no": "613-333-00-7",
@@ -37,10 +37,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1000,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

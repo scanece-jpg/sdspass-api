@@ -2,7 +2,7 @@
   "cas": "155569-91-8",
   "name": "emamectin benzoate (ISO); (4\"R)-4\"-deoxy-4\"-(methylamino) avermectin B1 benzoate",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "614-030-00-2",
   "atp": "ATP17",
   "notes": [],
@@ -22,11 +22,11 @@
       },
       {
         "class": "STOT SE 1",
-        "h_code": "H370 (nervous system)"
+        "h_code": "H370(nervous_system)"
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 (nervous system)"
+        "h_code": "H372(nervous_system)"
       },
       {
         "class": "Eye Dam. 1",
@@ -41,26 +41,36 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10000,
-      "chronic": 10000
-    },
-    "scl_limits": []
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H372",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H373",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
     "pictograms": [
       "GHS06",
-      "GHS08",
       "GHS05",
+      "GHS08",
       "GHS09"
     ],
     "h_codes": [
       "H331",
       "H311",
       "H301",
-      "H370 (nervous system)",
-      "H372 (nervous system)",
+      "H370(nervous_system)",
+      "H372(nervous_system)",
       "H318",
       "H400",
       "H410"

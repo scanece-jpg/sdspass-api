@@ -4,23 +4,28 @@
   "name_tr": "Yakıt gazları, damıtıkların ham petrolü; Petrol gazı; [Ham petrolün damıtılması ve naftanın katalitik olarak dönüştürülmesi ile üretilen hafif gazların kompleks bir bileşimi. Büyük çoğunlukla hidrojen ve ağırlıklı olarak C1 ila C4 aralığında karbon sayısına sahip ve yaklaşık -217°C ila -12°C (- 423°F ila 10°F) aralığında kaynayan hidrokarbonlardan oluşur.]",
   "ec_no": "270-670-9",
   "index_no": "649-198-00-6",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

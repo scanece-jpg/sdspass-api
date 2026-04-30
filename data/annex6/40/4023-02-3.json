@@ -4,17 +4,17 @@
   "name_tr": "",
   "ec_no": "429-520-1",
   "index_no": "613-261-00-6",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Eye Dam. 1",
@@ -35,13 +35,13 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS07",
+      "GHS05",
       "GHS08",
-      "GHS05"
+      "GHS07"
     ],
     "h_codes": [
       "H302",
-      "H373 **",
+      "H373",
       "H318",
       "H317",
       "H412"

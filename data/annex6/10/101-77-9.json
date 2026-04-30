@@ -18,11 +18,11 @@
       },
       {
         "class": "STOT SE 1",
-        "h_code": "H370 **"
+        "h_code": "H370"
       },
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Skin Sens. 1",
@@ -46,8 +46,8 @@
     "h_codes": [
       "H350",
       "H341",
-      "H370 **",
-      "H373 **",
+      "H370",
+      "H373",
       "H317",
       "H411"
     ],

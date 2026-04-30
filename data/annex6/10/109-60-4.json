@@ -1,11 +1,13 @@
 {
   "cas": "109-60-4",
-  "name": "propyl acetate [1]\nisopropyl acetate [2]",
+  "name": "propyl acetate [1]\nisopropyl acetate  [2]",
   "name_tr": "",
-  "ec_no": "203-686-1",
+  "ec_no": "203-686-1 [1]\n203-561-1 [2]",
   "index_no": "607-024-00-6",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "C"
+  ],
   "classification": {
     "hazards": [
       {
@@ -35,6 +37,8 @@
       "H336",
       "H319"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH066"
+    ]
   }
 }

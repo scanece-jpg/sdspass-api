@@ -4,23 +4,28 @@
   "name_tr": "Gazlar (petrol), Normal çalışmada kararlaştırıcı çalışmazken; Petrol gazı; [Ham petrolün damıtılmasında kullanılan birinci kuleden gelen sıvının ayrımsal damıtılmasından elde edilen hidrokarbonların kompleks bir bileşimi.. Büyük çoğunlukla C1 ila C4 aralığında karbon sayısına sahip doymuş alifatik hidrokarbonlardan oluşur.]",
   "ec_no": "272-883-2",
   "index_no": "649-106-00-4",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

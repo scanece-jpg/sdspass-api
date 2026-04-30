@@ -23,8 +23,7 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS08",
-      "GHS07"
+      "GHS08"
     ],
     "h_codes": [
       "H350",

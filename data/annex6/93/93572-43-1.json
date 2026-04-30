@@ -1,11 +1,13 @@
 {
   "cas": "93572-43-1",
-  "name": "Lubricating oils (petroleum), base oils, paraffinic; Baseoil â€” unspecified; [A complex combination of hydrocarbons obtained by refining of crude oil. It consists predominantly of aromatics, naphthenics and paraffinics and produces a finished oil with a viscosity of 120 SUS at 100 Â°F (23cSt at 40 Â°C).]",
+  "name": "Lubricating oils (petroleum), base oils, paraffinic; Baseoil - unspecified; [A complex combination of hydrocarbons obtained by refining of crude oil. It consists predominantly of aromatics, naphthenics and paraffinics and produces a finished oil with a viscosity of 120 SUS at 100 °F (23cSt at 40 °C).]",
   "name_tr": "",
   "ec_no": "297-474-6",
   "index_no": "649-501-00-1",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "L"
+  ],
   "classification": {
     "hazards": [
       {

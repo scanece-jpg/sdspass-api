@@ -4,7 +4,7 @@
   "name_tr": "",
   "ec_no": "210-866-3",
   "index_no": "615-001-00-7",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -14,18 +14,18 @@
       },
       {
         "class": "Repr. 2",
-        "h_code": "H361d ***"
+        "h_code": "H361d"
       },
       {
-        "class": "Acute Tox. 2 *",
+        "class": "Acute Tox. 2",
         "h_code": "H330"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H311"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H301"
       },
       {
@@ -56,13 +56,13 @@
     "signal": "Danger",
     "pictograms": [
       "GHS02",
-      "GHS08",
       "GHS06",
-      "GHS05"
+      "GHS05",
+      "GHS08"
     ],
     "h_codes": [
       "H225",
-      "H361d ***",
+      "H361d",
       "H330",
       "H311",
       "H301",

@@ -2,22 +2,22 @@
   "cas": "2532-43-6",
   "name": "3-methylpyrazol-5-yl-dimethylcarbamate; monometilan",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "006-040-00-5",
   "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H331"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H311"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H301"
       }
     ],

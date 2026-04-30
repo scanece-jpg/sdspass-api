@@ -1,11 +1,13 @@
 {
   "cas": "91770-57-9",
-  "name": "Residual oils (petroleum), catalytic dewaxed; Baseoil â€” unspecified",
+  "name": "Residual oils (petroleum), catalytic dewaxed; Baseoil - unspecified",
   "name_tr": "",
   "ec_no": "294-843-3",
   "index_no": "649-492-00-4",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "L"
+  ],
   "classification": {
     "hazards": [
       {

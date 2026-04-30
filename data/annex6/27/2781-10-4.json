@@ -1,6 +1,6 @@
 {
   "cas": "2781-10-4",
-  "name": "dibutyltin bis(2-ethylhexanoate)",
+  "name": "dibutyltin bis\n(2-ethylhexanoate)",
   "name_tr": "",
   "ec_no": "220-481-2",
   "index_no": "050-032-00-4",
@@ -18,7 +18,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 (immune system)"
+        "h_code": "H372(immune_system)"
       }
     ],
     "m_factors": {},
@@ -32,7 +32,7 @@
     "h_codes": [
       "H341",
       "H360FD",
-      "H372 (immune system)"
+      "H372(immune_system)"
     ],
     "suppl_h": []
   }

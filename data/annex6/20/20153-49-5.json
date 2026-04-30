@@ -1,23 +1,25 @@
 {
   "cas": "20153-49-5",
-  "name": "fluorotripentylstannane [1]\nhexapentyldistannoxane [2]",
+  "name": "fluorotripentylstannane [1]\nhexapentyldistannoxane  [2]",
   "name_tr": "",
-  "ec_no": "243-546-7",
+  "ec_no": "243-546-7 [1]\n247-143-7 [2]",
   "index_no": "050-009-00-9",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "1"
+  ],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H312"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {

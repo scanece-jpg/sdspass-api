@@ -1,11 +1,13 @@
 {
   "cas": "102110-14-5",
-  "name": "Hydrocarbons, C3-6, C5-rich, steam-cracked naphtha; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons obtained by distillation of steam-cracked naphtha. It consists predominantly of hydrocarbons having carbon numbers in the range of C3 through C6, predominantly C5.]",
+  "name": "Hydrocarbons, C3-6, C5-rich, steam-cracked naphtha; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons obtained by distillation of steam-cracked naphtha.  It consists predominantly of hydrocarbons having carbon numbers in the range of C3 through C6, predominantly C5.]",
   "name_tr": "",
   "ec_no": "310-012-0",
   "index_no": "649-398-00-3",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

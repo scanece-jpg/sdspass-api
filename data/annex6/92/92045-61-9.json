@@ -1,11 +1,13 @@
 {
   "cas": "92045-61-9",
-  "name": "Hydrocarbons, C4-12, naphtha-cracking, hydrotreated; Low boiling point hydrogen treated naphtha; [A complex combination of hydrocarbons obtained by distillation from the product of a naphtha steam cracking process and subsequent catalytic selective hydrogenation of gum formers. It consists of hydrocarbons having carbon numbers predominantly in the range of C4 through C12 and boiling in the range of approximately 30 Â°C to 230 Â°C (86 Â°F to 446 Â°F).]",
+  "name": "Hydrocarbons, C4-12, naphtha-cracking, hydrotreated; Low boiling point hydrogen treated naphtha; [A complex combination of hydrocarbons obtained by distillation from the product of a naphtha steam cracking process and subsequent catalytic selective hydrogenation of gum formers.  It consists of hydrocarbons having carbon numbers predominantly in the range of C4 through C12 and boiling in the range of approximately 30°C to 230°C (86°F to 446°F).]",
   "name_tr": "",
   "ec_no": "295-443-1",
   "index_no": "649-340-00-7",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

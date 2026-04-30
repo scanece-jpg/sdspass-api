@@ -4,11 +4,12 @@
   "name_tr": "bütan (≥% 0.1 bütadien (203- 450-8) içeren); [1] izobütan (≥% 0.1 bütadien (203-450-8) içeren) [2]",
   "ec_no": "203-448-7",
   "index_no": "601-004-01-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "C",
     "S",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
@@ -18,10 +19,14 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": "H350"
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

@@ -4,8 +4,10 @@
   "name_tr": "",
   "ec_no": "215-693-7",
   "index_no": "082-009-00-X",
-  "atp": "ATP01",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "1"
+  ],
   "classification": {
     "hazards": [
       {
@@ -18,7 +20,7 @@
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373 **"
+        "h_code": "H373"
       },
       {
         "class": "Aquatic Acute 1",
@@ -41,7 +43,7 @@
     "h_codes": [
       "H350",
       "H360Df",
-      "H373 **",
+      "H373",
       "H400",
       "H410"
     ],

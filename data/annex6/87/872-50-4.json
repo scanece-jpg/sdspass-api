@@ -4,13 +4,13 @@
   "name_tr": "",
   "ec_no": "212-828-1",
   "index_no": "606-021-00-7",
-  "atp": "ATP09",
+  "atp": "ATP9",
   "notes": [],
   "classification": {
     "hazards": [
       {
         "class": "Repr. 1B",
-        "h_code": "H360D ***"
+        "h_code": "H360D"
       },
       {
         "class": "STOT SE 3",
@@ -26,7 +26,14 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H335",
+        "class": "",
+        "c_min": 10.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
@@ -35,7 +42,7 @@
       "GHS07"
     ],
     "h_codes": [
-      "H360D ***",
+      "H360D",
       "H335",
       "H315",
       "H319"

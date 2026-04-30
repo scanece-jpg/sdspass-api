@@ -1,10 +1,10 @@
 {
   "cas": "2593-15-9",
-  "name": "etridiazole (ISO); 5-ethoxy-3-trichloromethyl- 1,2,4-thiadiazole",
+  "name": "etridiazole (ISO); 5-ethoxy-3-trichloromethyl-1,2,4-thiadiazole",
   "name_tr": "",
   "ec_no": "219-991-8",
   "index_no": "613-133-00-X",
-  "atp": "ATP07",
+  "atp": "ATP7",
   "notes": [],
   "classification": {
     "hazards": [
@@ -29,10 +29,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1,
-      "chronic": 1
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

@@ -13,7 +13,7 @@
         "h_code": "H272"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
@@ -44,8 +44,8 @@
     "signal": "Danger",
     "pictograms": [
       "GHS03",
-      "GHS07",
-      "GHS08"
+      "GHS08",
+      "GHS07"
     ],
     "h_codes": [
       "H272",

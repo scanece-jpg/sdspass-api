@@ -2,7 +2,7 @@
   "cas": "78587-05-0",
   "name": "hexythiazox (ISO); trans-5-(4-chlorophenyl)-N-cyclohexyl-4-methyl-2-oxo-3-thiazolidine-carboxamide",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "613-125-00-6",
   "atp": "ATP15",
   "notes": [],
@@ -17,10 +17,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1,
-      "chronic": 1
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

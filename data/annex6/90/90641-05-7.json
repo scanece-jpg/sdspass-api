@@ -1,11 +1,13 @@
 {
   "cas": "90641-05-7",
-  "name": "Extract residues (coal), naphthalene oil alk., distn. residues; Methylnaphthalene Oil Extract Residue; [The residue from the distillation of alkali-washed naphthalene oil having an approximate distillation range of 220 Â°C to 300 Â°C (428 Â°F to 572 Â°F). Composed primarily of naphthalene, alkylnaphthalenes and aromatic nitrogen bases.]",
+  "name": "Extract residues (coal), naphthalene oil alk., distn. residues; Methylnaphthalene Oil Extract Residue; [The residue from the distillation of alkali-washed naphthalene oil having an approximate distillation range of 220°C to 300°C (428°F to 572°F).  Composed primarily of naphthalene, alkylnaphthalenes and aromatic nitrogen bases.]",
   "name_tr": "",
   "ec_no": "292-628-9",
   "index_no": "648-095-00-3",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "J M"
+  ],
   "classification": {
     "hazards": [
       {

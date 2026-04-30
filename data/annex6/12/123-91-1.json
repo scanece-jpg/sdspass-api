@@ -5,7 +5,9 @@
   "ec_no": "204-661-8",
   "index_no": "603-024-00-5",
   "atp": "ATP17",
-  "notes": [],
+  "notes": [
+    "D"
+  ],
   "classification": {
     "hazards": [
       {
@@ -41,6 +43,9 @@
       "H335",
       "H319"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH019",
+      "EUH066"
+    ]
   }
 }

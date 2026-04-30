@@ -1,6 +1,6 @@
 {
   "cas": "1468-37-7",
-  "name": "dimexano(ISO); bis(methoxythiocarbonyl) disulphide",
+  "name": "dimexano (ISO); bis(methoxythiocarbonyl) disulphide",
   "name_tr": "",
   "ec_no": "215-993-8",
   "index_no": "016-024-00-X",
@@ -9,7 +9,7 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {

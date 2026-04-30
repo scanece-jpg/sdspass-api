@@ -1,11 +1,13 @@
 {
   "cas": "298-12-4",
-  "name": "glyoxylic acid â€¦%",
+  "name": "glyoxylic acid ...%",
   "name_tr": "",
   "ec_no": "206-058-5",
   "index_no": "607-745-00-6",
   "atp": "ATP15",
-  "notes": [],
+  "notes": [
+    "B"
+  ],
   "classification": {
     "hazards": [
       {

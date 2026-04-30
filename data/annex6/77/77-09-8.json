@@ -4,7 +4,7 @@
   "name_tr": "",
   "ec_no": "201-004-7",
   "index_no": "604-076-00-1",
-  "atp": "ATP01corr",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -18,11 +18,18 @@
       },
       {
         "class": "Repr. 2",
-        "h_code": "H361f ***"
+        "h_code": "H361f"
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H350",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
@@ -32,7 +39,7 @@
     "h_codes": [
       "H350",
       "H341",
-      "H361f ***"
+      "H361f"
     ],
     "suppl_h": []
   }

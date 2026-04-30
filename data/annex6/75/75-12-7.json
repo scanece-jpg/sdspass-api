@@ -10,7 +10,7 @@
     "hazards": [
       {
         "class": "Repr. 1B",
-        "h_code": "H360D ***"
+        "h_code": "H360D"
       }
     ],
     "m_factors": {},
@@ -22,7 +22,7 @@
       "GHS08"
     ],
     "h_codes": [
-      "H360D ***"
+      "H360D"
     ],
     "suppl_h": []
   }

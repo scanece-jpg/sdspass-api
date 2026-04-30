@@ -4,12 +4,12 @@
   "name_tr": "",
   "ec_no": "431-520-1",
   "index_no": "607-525-00-X",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Flam. Sol. 1 ****",
+        "class": "Flam. Sol. 1",
         "h_code": "H228"
       },
       {

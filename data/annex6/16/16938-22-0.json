@@ -1,15 +1,17 @@
 {
   "cas": "16938-22-0",
-  "name": "2,2,4-trimethylhexamethylene-1,6-di-isocyanate [1]\n2,4,4-trimethylhexamethylene-1,6-di-isocyanate [2]",
+  "name": "2,2,4-trimethylhexamethylene-1,6-di-isocyanate [1]\n2,4,4-trimethylhexamethylene-1,6-di-isocyanate  [2]",
   "name_tr": "",
-  "ec_no": "241-001-8",
+  "ec_no": "241-001-8 [1]\n239-714-4 [2]",
   "index_no": "615-010-00-6",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "2 C"
+  ],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H331"
       },
       {
@@ -30,7 +32,20 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H334",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H317",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",

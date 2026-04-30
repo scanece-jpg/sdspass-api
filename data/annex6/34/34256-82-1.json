@@ -4,7 +4,7 @@
   "name_tr": "",
   "ec_no": "251-899-3",
   "index_no": "616-037-00-6",
-  "atp": "ATP09",
+  "atp": "ATP9",
   "notes": [],
   "classification": {
     "hazards": [
@@ -26,7 +26,7 @@
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373 (kidney)"
+        "h_code": "H373(kidney)"
       },
       {
         "class": "Skin Irrit. 2",
@@ -45,10 +45,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1000,
-      "chronic": 100
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -63,7 +60,7 @@
       "H361f",
       "H332",
       "H335",
-      "H373 (kidney)",
+      "H373(kidney)",
       "H315",
       "H317",
       "H400",

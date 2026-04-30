@@ -1,11 +1,13 @@
 {
   "cas": "97926-71-1",
-  "name": "Hydrocarbons, C27-42, naphthenic; Baseoil â€” unspecified",
+  "name": "Hydrocarbons, C27-42, naphthenic; Baseoil - unspecified",
   "name_tr": "",
   "ec_no": "308-290-3",
   "index_no": "649-524-00-7",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "L"
+  ],
   "classification": {
     "hazards": [
       {

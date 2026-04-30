@@ -4,23 +4,28 @@
   "name_tr": "Artık gaz (petrol), gaz geri kazanım birimi; Petrol gazı; [Çeşitli hidrokarbon buharlarından oluşan ürünlerin damıtılmasından elde edilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla C1 ila C5 aralığında karbon sayısına sahip hidrokarbonları ağırlıklı olarak içerir.]",
   "ec_no": "269-624-0",
   "index_no": "649-184-00-X",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

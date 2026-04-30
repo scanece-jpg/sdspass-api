@@ -4,7 +4,7 @@
   "name_tr": "",
   "ec_no": "202-849-4",
   "index_no": "601-023-00-4",
-  "atp": "ATP06",
+  "atp": "ATP6",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,7 +13,7 @@
         "h_code": "H225"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
@@ -22,7 +22,7 @@
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373 (hearing organs)"
+        "h_code": "H373(hearing_organs)"
       }
     ],
     "m_factors": {},
@@ -39,7 +39,7 @@
       "H225",
       "H332",
       "H304",
-      "H373 (hearing organs)"
+      "H373(hearing_organs)"
     ],
     "suppl_h": []
   }

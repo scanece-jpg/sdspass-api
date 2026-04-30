@@ -4,9 +4,10 @@
   "name_tr": "2,2-dimetilpropan; neopentan",
   "ec_no": "207-343-7",
   "index_no": "601-005-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
@@ -16,6 +17,10 @@
       },
       {
         "class": "Press. Gas",
+        "h_code": ""
+      },
+      {
+        "class": "Aquatic Chronic 2",
         "h_code": "H411"
       }
     ],

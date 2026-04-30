@@ -1,6 +1,6 @@
 {
   "cas": "1317-39-1",
-  "name": "dicopper oxide; copper (I) oxide",
+  "name": "dicopper oxide;\ncopper (I) oxide",
   "name_tr": "",
   "ec_no": "215-270-7",
   "index_no": "029-002-00-X",
@@ -29,10 +29,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 100,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

@@ -4,23 +4,28 @@
   "name_tr": "Gazlar (petrol), sünger soğurucu çalışmazken, akışkan katalitik parçalayıcı ve gaz yağı kükürt giderici üstleri ayrımsal damıtması; Rafineri gazı; [Akışkan katalitik parçalama ünitesi ve gaz yağı kükürt giderme ünitesi fraksiyonizasyonundan elde edilenkompleks bir kombinasyon. Hidrojen ve başlıca C1 den C4 e kadar olan aralıkta karbon sayısına sahip olan hidrokarbonları içermektedir.]",
   "ec_no": "273-269-7",
   "index_no": "649-167-00-7",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

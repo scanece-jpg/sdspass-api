@@ -2,7 +2,7 @@
   "cas": "13451-08-6",
   "name": "sulphur tetrachloride",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "016-014-00-5",
   "atp": "CLP00",
   "notes": [],
@@ -18,7 +18,14 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H335",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
@@ -30,6 +37,8 @@
       "H314",
       "H400"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH014"
+    ]
   }
 }

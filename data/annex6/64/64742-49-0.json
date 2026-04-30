@@ -1,11 +1,13 @@
 {
   "cas": "64742-49-0",
-  "name": "Naphtha (petroleum), hydrotreated light; Low boiling point hydrogen treated naphtha; [A complex combination of hydrocarbons obtained by treating a petroleum fraction with hydrogen in the presence of a catalyst. It consists of hydrocarbons having carbon numbers predominantly in the range of C4 through C11 and boiling in the range of approximately minus 20 Â°C to 190 Â°C (â€“4  Â°F to 374 Â°F).]",
+  "name": "Naphtha (petroleum), hydrotreated light; Low boiling point hydrogen treated naphtha; [A complex combination of hydrocarbons obtained by treating a petroleum fraction with hydrogen in the presence of a catalyst.  It consists of hydrocarbons having carbon numbers predominantly in the range of C4 through C11 and boiling in the range of approximately minus 20°C to 190°C (-4°F to 374°F).]",
   "name_tr": "",
   "ec_no": "265-151-9",
   "index_no": "649-328-00-1",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

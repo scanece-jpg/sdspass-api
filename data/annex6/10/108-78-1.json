@@ -1,6 +1,6 @@
 {
   "cas": "108-78-1",
-  "name": "1,3,5-triazine-2,4,6-triamine; melamine",
+  "name": "1,3,5-triazine-2,4,6-triamine; \nmelamine",
   "name_tr": "",
   "ec_no": "203-615-4",
   "index_no": "613-345-00-2",
@@ -14,7 +14,7 @@
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373 (urinary tract)"
+        "h_code": "H373(urinary_tract)"
       }
     ],
     "m_factors": {},
@@ -27,7 +27,7 @@
     ],
     "h_codes": [
       "H351",
-      "H373 (urinary tract)"
+      "H373(urinary_tract)"
     ],
     "suppl_h": []
   }

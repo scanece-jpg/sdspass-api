@@ -1,6 +1,6 @@
 {
   "cas": "122-15-6",
-  "name": "5,5-dimethyl-3-oxocyclohex-1-enyl dimethylcarbamate 5,5-dimethyldihydroresorcinol dimethylcarbamate; dimetan",
+  "name": "5,5-dimethyl-3-oxocyclohex-1-enyl dimethylcarbamate 5,5-dimethyldihydroresorcinol dimethylcarbamate; Dimetan",
   "name_tr": "",
   "ec_no": "204-525-8",
   "index_no": "006-010-00-1",
@@ -9,7 +9,7 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H301"
       }
     ],

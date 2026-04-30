@@ -1,11 +1,13 @@
 {
   "cas": "68512-78-7",
-  "name": "Solvent naphtha (petroleum), light arom., hydrotreated; Low boiling point hydrogen treated naphtha; [A complex combination of hydrocarbons obtained by treating a petroleum fraction with hydrogen in the presence of a catalyst. It consists predominantly of aromatic hydrocarbons having carbon numbers predominantly in the range of C8 through C10 and boiling in the range of approximately 135 Â°C to 210 Â°C (275 Â°F to 410 Â°F).]",
+  "name": "Solvent naphtha (petroleum), light arom., hydrotreated; Low boiling point hydrogen treated naphtha; [A complex combination of hydrocarbons obtained by treating a petroleum fraction with hydrogen in the presence of a catalyst.  It consists predominantly of aromatic hydrocarbons having carbon numbers predominantly in the range of C8 through C10 and boiling in the range of approximately 135°C to 210°C (275°F to 410°F).]",
   "name_tr": "",
   "ec_no": "270-988-8",
   "index_no": "649-334-00-4",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

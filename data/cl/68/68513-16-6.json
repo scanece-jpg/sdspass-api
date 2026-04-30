@@ -4,23 +4,28 @@
   "name_tr": "Gazlar (petrol), hidrojen ile parçalama sonucu propan giderici çalışmazken, hidrokarbon-zengin; Petrol gazı; [Hidrojen ile parçalanma prosesinden oluşan ürünlerin damıtılması ile üretilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla, C1 ila C4 aralığında karbon sayısına sahip hidrokarbonlardan oluşur. Ayrıca, düşük miktarda hidrojen ve hidrojen sülfür içerebilir.]",
   "ec_no": "271-001-3",
   "index_no": "649-085-00-1",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

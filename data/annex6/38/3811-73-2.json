@@ -1,8 +1,8 @@
 {
   "cas": "3811-73-2",
-  "name": "Pyridine-2-thiol 1-oxide, sodium salt [1]\npyrithione sodium; sodium pyrithione [2]",
+  "name": "Pyridine-2-thiol 1-oxide, sodium salt; pyrithione sodium; sodium pyrithione",
   "name_tr": "",
-  "ec_no": "223-296-5",
+  "ec_no": "223-296-5\n240-062-8",
   "index_no": "613-344-00-7",
   "atp": "ATP18",
   "notes": [],
@@ -22,7 +22,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 (nervous system)"
+        "h_code": "H372(nervous_system)"
       },
       {
         "class": "Skin Irrit. 2",
@@ -45,9 +45,7 @@
         "h_code": "H411"
       }
     ],
-    "m_factors": {
-      "acute": 100
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -61,13 +59,15 @@
       "H331",
       "H311",
       "H302",
-      "H372 (nervous system)",
+      "H372(nervous_system)",
       "H315",
       "H319",
       "H317",
       "H400",
       "H411"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH070"
+    ]
   }
 }

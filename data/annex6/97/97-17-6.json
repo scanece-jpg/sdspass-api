@@ -1,6 +1,6 @@
 {
   "cas": "97-17-6",
-  "name": "dichlofenthion (ISO); Oâ€”2,4-dichlorophenyl O,O-diethyl phosphorothioate",
+  "name": "dichlofenthion (ISO); O-,4-dichlorophenyl O,O-diethyl phosphorothioate",
   "name_tr": "",
   "ec_no": "202-564-5",
   "index_no": "015-068-00-7",
@@ -9,7 +9,7 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {

@@ -1,8 +1,8 @@
 {
   "cas": "400882-07-7",
-  "name": "cyflumetofen (ISO); 2-methoxyethyl (RS)-2-(4-tert-butylphenyl)-2-cyano-3-oxo-3-(Î±,Î±,Î±-trifluoro-o-tolyl)propionate",
+  "name": "cyflumetofen (ISO);\n2-methoxyethyl (RS)-2-(4- tert-butylphenyl)-2-cyano-3-oxo-3-(α,α,α-trifluoro-o-tolyl)propionate",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "607-733-00-0",
   "atp": "ATP14",
   "notes": [],
@@ -23,8 +23,8 @@
   "labelling": {
     "signal": "Warning",
     "pictograms": [
-      "GHS08",
-      "GHS07"
+      "GHS07",
+      "GHS08"
     ],
     "h_codes": [
       "H351",

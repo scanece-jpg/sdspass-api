@@ -1,6 +1,6 @@
 {
   "cas": "548-62-9",
-  "name": "C.I. Basic Violet 3 with â‰¥ 0,1  % of Michler's ketone (EC no. 202-027-5)",
+  "name": "C.I. Basic Violet 3 with ≥ 0.1 % of Michler's ketone (EC no. 202-027-5)",
   "name_tr": "",
   "ec_no": "208-953-6",
   "index_no": "612-205-00-8",
@@ -13,7 +13,7 @@
         "h_code": "H350"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
@@ -36,8 +36,8 @@
     "signal": "Danger",
     "pictograms": [
       "GHS08",
-      "GHS07",
       "GHS05",
+      "GHS07",
       "GHS09"
     ],
     "h_codes": [

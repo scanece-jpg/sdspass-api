@@ -1,11 +1,13 @@
 {
   "cas": "42405-40-3",
-  "name": "bis(3,5-di-tert-butylsalicylato-O 1,O 2)zinc",
+  "name": "bis(3,5-di-tert-butylsalicylato-O1,O2)zinc",
   "name_tr": "",
   "ec_no": "403-360-0",
   "index_no": "030-007-00-4",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "T"
+  ],
   "classification": {
     "hazards": [
       {
@@ -13,7 +15,7 @@
         "h_code": "H228"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {

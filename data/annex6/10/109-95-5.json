@@ -5,7 +5,9 @@
   "ec_no": "203-722-6",
   "index_no": "007-006-00-2",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "U"
+  ],
   "classification": {
     "hazards": [
       {
@@ -14,19 +16,19 @@
       },
       {
         "class": "Press. Gas",
+        "h_code": ""
+      },
+      {
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H312"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
-      },
-      {
-        "class": "Acute Tox. 4 *",
-        "h_code": ""
       }
     ],
     "m_factors": {},

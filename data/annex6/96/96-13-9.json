@@ -14,18 +14,18 @@
       },
       {
         "class": "Repr. 2",
-        "h_code": "H361f ***"
+        "h_code": "H361f"
       },
       {
-        "class": "Acute Tox. 4 *",
-        "h_code": "H332"
-      },
-      {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H311"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
@@ -44,9 +44,9 @@
     ],
     "h_codes": [
       "H350",
-      "H361f ***",
-      "H332",
+      "H361f",
       "H311",
+      "H332",
       "H302",
       "H412"
     ],

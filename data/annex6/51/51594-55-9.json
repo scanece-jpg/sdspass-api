@@ -17,15 +17,15 @@
         "h_code": "H350"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H331"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H311"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H301"
       },
       {
@@ -44,8 +44,8 @@
     "signal": "Danger",
     "pictograms": [
       "GHS02",
-      "GHS08",
       "GHS06",
+      "GHS08",
       "GHS05"
     ],
     "h_codes": [

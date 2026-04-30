@@ -1,8 +1,8 @@
 {
   "cas": "100784-20-1",
-  "name": "halosulfuron-methyl (ISO); methyl 3-chloro-5-{[(4,6-dimethoxypyrimidin-2-yl)carbamoyl]sulfamoyl}-1-methyl-1H-pyrazole-4-carboxylate",
+  "name": "halosulfuron-methyl (ISO);\nmethyl 3-chloro-5-{[(4,6-dimethoxypyrimidin-2-yl)carbamoyl]sulfamoyl}-1-methyl-1H-pyrazole-4-carboxylate",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "613-329-00-5",
   "atp": "ATP14",
   "notes": [],
@@ -21,10 +21,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1000,
-      "chronic": 1000
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

@@ -5,7 +5,9 @@
   "ec_no": "203-450-8",
   "index_no": "601-013-00-X",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "D U"
+  ],
   "classification": {
     "hazards": [
       {
@@ -14,15 +16,15 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": "H350"
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "m_factors": {},

@@ -1,6 +1,6 @@
 {
   "cas": "138261-41-3",
-  "name": "imidacloprid (ISO); (E)-1-(6-chloro-3-pyridylmethyl)-N-nitroimidazolidin-2-ylideneamine; (2E)-1-[(6-chloropyridin-3-yl) methyl]-N-nitroimidazolidin-2-imine",
+  "name": "imidacloprid (ISO);\n(E)-1-(6-chloro- 3-pyridylmethyl)-N-nitroimidazolidin-2-ylideneamine;(2E)-1-[(6-chloropyridin- 3-yl) methyl]-N-nitroimidazolidin-2-imine",
   "name_tr": "",
   "ec_no": "428-040-8",
   "index_no": "612-252-00-4",
@@ -21,10 +21,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 100,
-      "chronic": 1000
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

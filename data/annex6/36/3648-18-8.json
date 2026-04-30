@@ -1,8 +1,8 @@
 {
   "cas": "3648-18-8",
-  "name": "dioctyltin dilaurate [1]\nstannane, dioctyl-, bis(coco acyloxy) derivs. [2]",
+  "name": "dioctyltin dilaurate [1]\nstannane, dioctyl-, bis (coco acyloxy)  derivs. [2]",
   "name_tr": "",
-  "ec_no": "222-883-3",
+  "ec_no": "222-883-3 [1]\n293-901-5 [2]",
   "index_no": "050-031-00-9",
   "atp": "ATP15",
   "notes": [],
@@ -14,7 +14,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 (immune system)"
+        "h_code": "H372(immune_system)"
       }
     ],
     "m_factors": {},
@@ -27,7 +27,7 @@
     ],
     "h_codes": [
       "H360D",
-      "H372 (immune system)"
+      "H372(immune_system)"
     ],
     "suppl_h": []
   }

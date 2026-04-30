@@ -5,7 +5,9 @@
   "ec_no": "202-617-2",
   "index_no": "607-114-00-5",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "D"
+  ],
   "classification": {
     "hazards": [
       {
@@ -18,7 +20,14 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H335",
+        "class": "",
+        "c_min": 10.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Warning",

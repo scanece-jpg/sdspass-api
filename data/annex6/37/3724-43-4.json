@@ -4,16 +4,16 @@
   "name_tr": "",
   "ec_no": "425-970-6",
   "index_no": "612-250-00-3",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
       {
         "class": "Repr. 1B",
-        "h_code": "H360D ***"
+        "h_code": "H360D"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
@@ -27,15 +27,17 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
+      "GHS05",
       "GHS08",
-      "GHS07",
-      "GHS05"
+      "GHS07"
     ],
     "h_codes": [
-      "H360D ***",
+      "H360D",
       "H302",
       "H314"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH014"
+    ]
   }
 }

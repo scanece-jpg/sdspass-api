@@ -1,6 +1,6 @@
 {
   "cas": "135410-20-7",
-  "name": "acetamiprid (ISO); (1E)-N-[(6-chloropyridin-3-yl)methyl]-N-cyano-N-methylethanimidamide; (E)-N1-[(6-chloro-3-pyridyl)methyl]-N2-cyano-N1-methylacetamidine [1]\nacetamiprid (ISO); (1E)-N-[(6-chloropyridin-3-yl)methyl]-N-cyano-N-methylethanimidamide; (E)-N1-[(6-chloro-3-pyridyl)methyl]-N2-cyano-N1-methylacetamidine [2]",
+  "name": "acetamiprid (ISO); (1E)-N-[(6-chloropyridin-3-yl) methyl]-N’-cyano-N-methylethanimidamide; (E)-N1-[(6-chloro-3-pyridyl)methyl]-N2-cyano-N1-methylacetamidine",
   "name_tr": "",
   "ec_no": "-",
   "index_no": "608-032-00-2",
@@ -25,10 +25,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

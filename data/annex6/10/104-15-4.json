@@ -1,6 +1,6 @@
 {
   "cas": "104-15-4",
-  "name": "p-toluenesulphonic acid (containing a maximum of 5 % H2SO4)",
+  "name": "p-toluenesulphonic acid (containing a maximum of 5 % H2SO4)",
   "name_tr": "",
   "ec_no": "203-180-0",
   "index_no": "016-030-00-2",
@@ -22,7 +22,14 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H335",
+        "class": "",
+        "c_min": 20.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Warning",

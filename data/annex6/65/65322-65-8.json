@@ -17,7 +17,7 @@
         "h_code": "H341"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
@@ -40,8 +40,8 @@
     "signal": "Danger",
     "pictograms": [
       "GHS08",
-      "GHS07",
-      "GHS05"
+      "GHS05",
+      "GHS07"
     ],
     "h_codes": [
       "H351",

@@ -1,8 +1,8 @@
 {
   "cas": "141517-21-7",
-  "name": "trifloxystrobin (ISO); methyl (E)-methoxyimino-{(E)-Î±-[1-(Î±,Î±,Î±-trifluoro-m-tolyl)ethylideneaminooxy]-o-tolyl}acetate",
+  "name": "trifloxystrobin (ISO);\nmethyl (E)-methoxyimino- {(E)-α-[1-(α,α,α-trifluoro-m- tolyl) ethylideneaminooxy]-o- tolyl}acetate",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "607-424-00-0",
   "atp": "ATP17",
   "notes": [],
@@ -25,10 +25,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 100,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

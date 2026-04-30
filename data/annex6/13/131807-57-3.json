@@ -2,15 +2,15 @@
   "cas": "131807-57-3",
   "name": "famoxadone (ISO); 3-anilino-5-methyl-5-(4-phenoxyphenyl)-1,3-oxazolidine-2,4-dione",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "612-206-00-3",
   "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Aquatic Acute 1",
@@ -31,7 +31,7 @@
       "GHS09"
     ],
     "h_codes": [
-      "H373 **",
+      "H373",
       "H400",
       "H410"
     ],

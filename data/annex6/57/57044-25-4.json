@@ -1,6 +1,6 @@
 {
   "cas": "57044-25-4",
-  "name": "Râ€”2,3-epoxy-1-propanol",
+  "name": "R-2,3-epoxy-1-propanol",
   "name_tr": "",
   "ec_no": "404-660-4",
   "index_no": "603-143-00-2",
@@ -9,7 +9,7 @@
   "classification": {
     "hazards": [
       {
-        "class": "Self-react. C ****",
+        "class": "Self-react. C",
         "h_code": "H242"
       },
       {
@@ -22,18 +22,18 @@
       },
       {
         "class": "Repr. 1B",
-        "h_code": "H360F ***"
+        "h_code": "H360F"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H331"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H312"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
@@ -48,15 +48,15 @@
     "signal": "Danger",
     "pictograms": [
       "GHS02",
-      "GHS08",
       "GHS06",
+      "GHS08",
       "GHS05"
     ],
     "h_codes": [
       "H242",
       "H350",
       "H341",
-      "H360F ***",
+      "H360F",
       "H331",
       "H312",
       "H302",

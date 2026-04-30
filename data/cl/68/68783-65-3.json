@@ -4,23 +4,28 @@
   "name_tr": "Gazlar (petrol), C2-4, Kıvamı artırılmış; Petrol gazı; [Merkaptanların dönüşümü veya asidik safsızlıkların uzaklaştırılması için petrol damıtığının kıvamlandırma prosesine maruz bırakılması ile elde edilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla, C2 ila C4 aralığında karbon sayısına sahip ve yaklaşık -51 oC ila -34 oC (-60 oF ila -30 oF) aralığında kaynayan, doymuş veya doymamış hidrokarbonlardan oluşur.]",
   "ec_no": "272-205-5",
   "index_no": "649-099-00-8",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

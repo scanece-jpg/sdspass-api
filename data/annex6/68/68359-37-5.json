@@ -1,6 +1,6 @@
 {
   "cas": "68359-37-5",
-  "name": "cyfluthrin (ISO); Î±-cyano-4-fluoro-3-phenoxybenzyl-3-(2,2-dichlorovinyl)-2,2-dimethylcyclopropanecarboxylate",
+  "name": "cyfluthrin (ISO); α-cyano-4-fluoro-3-phenoxybenzyl-3-(2,2-dichlorovinyl)-2,2-dimethylcyclopropanecarboxylate",
   "name_tr": "",
   "ec_no": "269-855-7",
   "index_no": "607-253-00-1",
@@ -22,7 +22,7 @@
       },
       {
         "class": "STOT SE 1",
-        "h_code": "H370 (nervous system)"
+        "h_code": "H370(nervous_system)"
       },
       {
         "class": "Aquatic Acute 1",
@@ -33,10 +33,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1000000,
-      "chronic": 1000000
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -50,7 +47,7 @@
       "H362",
       "H330",
       "H300",
-      "H370 (nervous system)",
+      "H370(nervous_system)",
       "H400",
       "H410"
     ],

@@ -1,10 +1,10 @@
 {
   "cas": "93821-66-0",
-  "name": "Residual oils (petroleum); Heavy Fuel oil; [A complex combination of hydrocarbons, sulfur compounds and metal-containing organic compounds obtained as the residue from refinery fractionation cracking processes. It produces a finished oil with a viscosity above 2cSt. at 100 Â°C.]",
+  "name": "Residual oils (petroleum); Heavy Fuel oil; [A complex combination of hydrocarbons, sulfur compounds and metal-containing organic compounds obtained as the residue from refinery fractionation cracking processes. It produces a finished oil with a viscosity above 2cSt. at 100 °C.]",
   "name_tr": "",
   "ec_no": "298-754-0",
   "index_no": "649-045-00-3",
-  "atp": "ATP02",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

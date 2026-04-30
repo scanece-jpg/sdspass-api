@@ -5,7 +5,9 @@
   "ec_no": "232-140-5",
   "index_no": "024-006-00-8",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "3"
+  ],
   "classification": {
     "hazards": [
       {
@@ -42,7 +44,14 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H317",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",

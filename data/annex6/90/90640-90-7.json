@@ -1,11 +1,13 @@
 {
   "cas": "90640-90-7",
-  "name": "Distillates (coal tar), naphthalene oils, naphthalene-free, alk. exts.; Naphthalene Oil Extract Residue; [The oil remaining after the removal of phenolic compounds (tar acids) from drained naphthalene oil by an alkali wash. Composed primarily of naphthalene and alkyl naphthalenes.]",
+  "name": "Distillates (coal tar), naphthalene oils, naphthalene-free, alk. exts.; Naphthalene Oil Extract Residue; [The oil remaining after the removal of phenolic compounds (tar acids) from drained naphthalene oil by an alkali wash.  Composed primarily of naphthalene and alkyl naphthalenes.]",
   "name_tr": "",
   "ec_no": "292-612-1",
   "index_no": "648-090-00-6",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "J M"
+  ],
   "classification": {
     "hazards": [
       {

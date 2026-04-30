@@ -1,11 +1,13 @@
 {
   "cas": "1336-21-6",
-  "name": "ammonia â€¦.%",
+  "name": "ammonia ....%",
   "name_tr": "",
   "ec_no": "215-647-6",
   "index_no": "007-001-01-2",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "B"
+  ],
   "classification": {
     "hazards": [
       {
@@ -18,7 +20,14 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H335",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",

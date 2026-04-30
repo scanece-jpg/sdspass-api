@@ -2,9 +2,9 @@
   "cas": "66246-88-6",
   "name": "penconazole (ISO); 1-[2-(2,4-dichlorophenyl)pentyl]-1H-1,2,4-triazole",
   "name_tr": "",
-  "ec_no": "266-275-6",
+  "ec_no": "",
   "index_no": "613-317-00-X",
-  "atp": "ATP06",
+  "atp": "ATP6",
   "notes": [],
   "classification": {
     "hazards": [
@@ -25,10 +25,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1,
-      "chronic": 1
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

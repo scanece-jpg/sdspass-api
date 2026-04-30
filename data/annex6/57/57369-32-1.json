@@ -2,14 +2,14 @@
   "cas": "57369-32-1",
   "name": "pyroquilon (ISO); 1,2,5,6-tetrahydropyrrolo[3,2,1-ij]quinolin-4-one",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "613-131-00-9",
   "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {

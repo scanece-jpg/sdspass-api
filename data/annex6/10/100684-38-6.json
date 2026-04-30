@@ -1,11 +1,13 @@
 {
   "cas": "100684-38-6",
-  "name": "Residual oils (petroleum), clay-treated solvent-dewaxed; Baseoil â€” unspecified; [A complex combination of hydrocarbons obtained by treatment of solvent-dewaxed petroleum residual oils with bleaching earth for the removal of trace polar constituents and impurities.]",
+  "name": "Residual oils (petroleum), clay-treated solvent-dewaxed; Baseoil - unspecified; [A complex combination of hydrocarbons obtained by treatment of solvent-dewaxed petroleum residual oils with bleaching earth for the removal of trace polar constituents and impurities.]",
   "name_tr": "",
   "ec_no": "309-711-3",
   "index_no": "649-526-00-8",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "L"
+  ],
   "classification": {
     "hazards": [
       {

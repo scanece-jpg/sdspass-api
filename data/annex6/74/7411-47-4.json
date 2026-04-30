@@ -2,14 +2,14 @@
   "cas": "7411-47-4",
   "name": "morfamquat (ISO); 1,1'-bis(3,5-dimethylmorpholinocarbonylmethyl)-4,4'-bipyridilium ion",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "613-018-00-4",
   "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {

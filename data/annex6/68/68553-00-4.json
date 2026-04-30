@@ -1,10 +1,10 @@
 {
   "cas": "68553-00-4",
-  "name": "Fuel oil, No 6; Heavy Fuel oil; [A distillate oil having a minimum viscosity of 900 SUS at 37.7 Â°C (100 Â°F) to a maximum of 9000 SUS at 37.7 Â°C (100 Â°F).]",
+  "name": "Fuel oil, No 6; Heavy Fuel oil; [A distillate oil having a minimum viscosity of 900 SUS at 37.7 °C (100 °F) to a maximum of 9000 SUS at 37.7 °C (100 °F).]",
   "name_tr": "",
   "ec_no": "271-384-7",
   "index_no": "649-030-00-1",
-  "atp": "ATP02",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

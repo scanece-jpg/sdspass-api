@@ -4,10 +4,11 @@
   "name_tr": "kükürt dioksit",
   "ec_no": "231-195-2",
   "index_no": "016-011-00-9",
-  "atp": "",
+  "atp": "ATP21",
   "notes": [
     "U",
-    "5"
+    "5",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
@@ -17,7 +18,15 @@
       },
       {
         "class": "Acute Tox. 3",
+        "h_code": "H370(respiratory_system,_inhalation)"
+      },
+      {
+        "class": "STOT SE 1",
         "h_code": "H314"
+      },
+      {
+        "class": "Skin. Corr. 1B",
+        "h_code": ""
       }
     ],
     "m_factors": {},
@@ -28,10 +37,12 @@
     "pictograms": [
       "GHS04",
       "GHS06",
+      "GHS08",
       "GHS05"
     ],
     "h_codes": [
       "H331",
+      "H370(respiratory_system,_inhalation)",
       "H314"
     ],
     "suppl_h": []

@@ -4,23 +4,28 @@
   "name_tr": "Gazlar (petrol), C2-dönüşü akışı; Rafineri gazı; [Öncelikle az miktarda azot , karbonmonoksit, metan, etan ve etilen ile hidrojen içeren gaz buharından oluşan hidrojen özütlenmesi ile elde edilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla düşük miktarlarda hidrojen, azot ve karbon monoksitli metan, etan ve etilen gibi hidrokarbonlardan oluşur .]",
   "ec_no": "270-766-0",
   "index_no": "649-128-00-4",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

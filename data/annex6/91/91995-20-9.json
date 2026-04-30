@@ -1,11 +1,13 @@
 {
   "cas": "91995-20-9",
-  "name": "Aromatic hydrocarbons, C8-9, hydrocarbon resin polymn. by-product; Light Oil Redistillate, high boiling; [A complex combination of hydrocarbons obtained from the evaporation of solvent under vacuum from polymerized hydrocarbon resin. It consists predominantly of aromatic hydrocarbons having carbon numbers predominantly in the range of C8 through C9 and boiling in the range of approximately 120 Â°C to 215 Â°C (248 Â°F to 419 Â°F).]",
+  "name": "Aromatic hydrocarbons, C8-9, hydrocarbon resin polymn. by-product; Light Oil Redistillate, high boiling; [A complex combination of hydrocarbons obtained from the evaporation of solvent under vacuum from polymerized hydrocarbon resin.  It consists predominantly of aromatic hydrocarbons having carbon numbers predominantly in the range of C8 through C9 and boiling in the range of approximately 120°C to 215°C (248°F to 419°F).]",
   "name_tr": "",
   "ec_no": "295-281-1",
   "index_no": "648-012-00-0",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "J"
+  ],
   "classification": {
     "hazards": [
       {

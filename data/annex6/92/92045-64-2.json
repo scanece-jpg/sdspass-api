@@ -1,11 +1,13 @@
 {
   "cas": "92045-64-2",
-  "name": "Hydrocarbons, C6-7, naphtha-cracking, solvent-refined; Low boiling point modified naphtha; [A complex combination of hydrocarbons obtained by the sorption of benzene from a catalytically fully hydrogenated benzene-rich hydrocarbon cut that was distillatively obtained from prehydrogenated cracked naphtha. It consists predominantly of paraffinic and naphthenic hydrocarbons having carbon numbers predominantly in the range of C6 through C7 and boiling in the range of approximately 70 Â°C to 100 Â°C (158 Â°F to 212 Â°F).]",
+  "name": "Hydrocarbons, C6-7, naphtha-cracking, solvent-refined; Low boiling point modified naphtha; [A complex combination of hydrocarbons obtained by the sorption of benzene from a catalytically fully hydrogenated benzene-rich hydrocarbon cut that was distillatively obtained from prehydrogenated cracked naphtha.  It consists predominantly of paraffinic and naphthenic hydrocarbons having carbon numbers predominantly in the range of C6 through C7 and boiling in the range of approximately 70°C to 100°C (158°F to 212°F).]",
   "name_tr": "",
   "ec_no": "295-446-8",
   "index_no": "649-287-00-X",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

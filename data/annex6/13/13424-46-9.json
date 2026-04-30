@@ -1,11 +1,13 @@
 {
   "cas": "13424-46-9",
-  "name": "lead diazide; lead azide [â‰¥ 20 % phlegmatiser]",
+  "name": "lead diazide; lead azide [≥ 20 % phlegmatiser]",
   "name_tr": "",
   "ec_no": "236-542-1",
   "index_no": "082-003-01-4",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "1"
+  ],
   "classification": {
     "hazards": [
       {
@@ -17,16 +19,16 @@
         "h_code": "H360Df"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Aquatic Acute 1",
@@ -53,7 +55,7 @@
       "H360Df",
       "H332",
       "H302",
-      "H373 **",
+      "H373",
       "H400",
       "H410"
     ],

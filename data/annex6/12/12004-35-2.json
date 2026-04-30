@@ -2,9 +2,9 @@
   "cas": "12004-35-2",
   "name": "dialuminium nickel tetraoxide [1]\nnickel titanium trioxide [2]\nnickel titanium oxide [3]\nnickel divanadium hexaoxide [4]\ncobalt dimolybdenum nickel octaoxide [5]\nnickel zirkonium trioxide [6]\nmolybdenum nickel tetraoxide [7]\nnickel tungsten tetraoxide [8]\nolivine, nickel green [9]\nlithium nickel dioxide [10]\nmolybdenum nickel oxide [11]",
   "name_tr": "",
-  "ec_no": "234-454-8",
+  "ec_no": "234-454-8 [1]\n234-825-4 [2]\n235-752-0 [3]\n257-970-5 [4]\n268-169-5 [5]\n274-755-1 [6]\n238-034-5 [7]\n238-032-4 [8]\n271-112-7 [9]",
   "index_no": "028-057-00-7",
-  "atp": "ATP02",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -14,7 +14,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 **"
+        "h_code": "H372"
       },
       {
         "class": "Skin Sens. 1",
@@ -32,7 +32,7 @@
     ],
     "h_codes": [
       "H350i",
-      "H372 **",
+      "H372",
       "H317"
     ],
     "suppl_h": []

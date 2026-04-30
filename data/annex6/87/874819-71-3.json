@@ -14,7 +14,7 @@
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373 (kidneys)"
+        "h_code": "H373(kidney)"
       }
     ],
     "m_factors": {},
@@ -27,7 +27,7 @@
     ],
     "h_codes": [
       "H360Fd",
-      "H373 (kidneys)"
+      "H373(kidney)"
     ],
     "suppl_h": []
   }

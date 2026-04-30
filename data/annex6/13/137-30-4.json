@@ -1,6 +1,6 @@
 {
   "cas": "137-30-4",
-  "name": "ziram (ISO); zinc bis dimethyldithiocarbamate",
+  "name": "ziram (ISO); zinc bis dimethyldithiocarbamate",
   "name_tr": "",
   "ec_no": "205-288-3",
   "index_no": "006-012-00-2",
@@ -9,11 +9,11 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 2 *",
+        "class": "Acute Tox. 2",
         "h_code": "H330"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
@@ -21,8 +21,8 @@
         "h_code": "H335"
       },
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Eye Dam. 1",
@@ -41,9 +41,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 100
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -58,7 +56,7 @@
       "H330",
       "H302",
       "H335",
-      "H373 **",
+      "H373",
       "H318",
       "H317",
       "H400",

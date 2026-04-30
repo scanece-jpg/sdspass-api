@@ -1,11 +1,13 @@
 {
   "cas": "121620-48-2",
-  "name": "Extract residues (coal), naphthalene oil, alk., naphthalene-low; Naphthalene Oil Extract Residue; [A complex combination of hydrocarbons remaining after the removal of naphthalene from alkali-washed naphthalene oil by a crystallization process. It is composed primarily of naphthalene and alkyl naphthalenes.]",
+  "name": "Extract residues (coal), naphthalene oil, alk., naphthalene-low; Naphthalene Oil Extract Residue; [A complex combination of hydrocarbons remaining after the removal of naphthalene from alkali-washed naphthalene oil by a crystallization process.  It is composed primarily of naphthalene and alkyl naphthalenes.]",
   "name_tr": "",
   "ec_no": "310-167-4",
   "index_no": "648-089-00-0",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "J M"
+  ],
   "classification": {
     "hazards": [
       {

@@ -24,6 +24,8 @@
     "h_codes": [
       "H225"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH019"
+    ]
   }
 }

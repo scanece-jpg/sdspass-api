@@ -5,7 +5,9 @@
   "ec_no": "203-812-5",
   "index_no": "605-002-00-0",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "T"
+  ],
   "classification": {
     "hazards": [
       {
@@ -14,7 +16,7 @@
       },
       {
         "class": "Repr. 2",
-        "h_code": "H361d ***"
+        "h_code": "H361d"
       },
       {
         "class": "STOT SE 3",
@@ -33,7 +35,7 @@
     ],
     "h_codes": [
       "H228",
-      "H361d ***",
+      "H361d",
       "H335"
     ],
     "suppl_h": []

@@ -9,7 +9,7 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H301"
       },
       {
@@ -36,6 +36,8 @@
       "H314",
       "H400"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH031"
+    ]
   }
 }

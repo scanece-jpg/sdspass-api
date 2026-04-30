@@ -4,21 +4,21 @@
   "name_tr": "",
   "ec_no": "425-930-8",
   "index_no": "613-268-00-4",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Skin Corr. 1B",
@@ -35,15 +35,15 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS07",
-      "GHS08",
       "GHS05",
+      "GHS08",
+      "GHS07",
       "GHS09"
     ],
     "h_codes": [
       "H332",
       "H302",
-      "H373 **",
+      "H373",
       "H314",
       "H411"
     ],

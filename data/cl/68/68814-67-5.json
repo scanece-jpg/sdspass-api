@@ -4,23 +4,28 @@
   "name_tr": "Gazlar (petrol), rafineri; Rafineri gazı; [Çeşitli petrol rafine işlemlerinden elde edilen kompleks bir bileşim. Hidrojen ve büyük çoğunlukla C1 ila C3 aralığında karbon sayısına sahip hidrokarbonlardan oluşur.]",
   "ec_no": "272-338-9",
   "index_no": "649-153-00-0",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

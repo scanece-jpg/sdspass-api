@@ -1,11 +1,13 @@
 {
   "cas": "68527-21-9",
-  "name": "Naphtha (petroleum), clay-treated full-range straight-run; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons resulting from treatment of full-range straight-run naphtha with natural or modified clay, usually in a percolation process to remove the trace amounts of polar compounds and impurities present. It consists of hydrocarbons having carbon numbers predominantly in the range of C4 through C11 and boiling in the range of approximately â€“20  Â°C to 220 Â°C (â€“4  Â°F to 429 Â°F).]",
+  "name": "Naphtha (petroleum), clay-treated full-range straight-run; Low boiling point naphtha - unspecified; [A complex combination of hydrocarbons resulting from treatment of full-range straight-run naphtha with natural or modified clay, usually in a percolation process to remove the trace amounts of polar compounds and impurities present.  It consists of hydrocarbons having carbon numbers predominantly in the range of C4 through C11 and boiling in the range of approximately -20°C to 220°C (-4°F to 429°F).]",
   "name_tr": "",
   "ec_no": "271-262-3",
   "index_no": "649-368-00-X",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

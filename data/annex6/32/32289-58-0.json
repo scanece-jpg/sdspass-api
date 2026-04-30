@@ -1,10 +1,10 @@
 {
   "cas": "32289-58-0",
-  "name": "polyhexamethylene biguanide hydrochloride; PHMB [1]\npolyhexamethylene biguanide hydrochloride; PHMB [2]",
+  "name": "polyhexamethylene biguanide hydrochloride; PHMB [1]\nPHMB [2]",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "616-207-00-X",
-  "atp": "ATP09",
+  "atp": "ATP9",
   "notes": [],
   "classification": {
     "hazards": [
@@ -22,7 +22,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 (inhalation) (respiratory tract)"
+        "h_code": "H372(respiratory_tract)"
       },
       {
         "class": "Eye Dam. 1",
@@ -41,10 +41,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -59,7 +56,7 @@
       "H351",
       "H330",
       "H302",
-      "H372 (inhalation) (respiratory tract)",
+      "H372(respiratory_tract)",
       "H318",
       "H317",
       "H400",

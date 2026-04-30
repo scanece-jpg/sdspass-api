@@ -1,11 +1,13 @@
 {
   "cas": "68478-15-9",
-  "name": "Residues (petroleum), C6-8 catalytic reformer; Low boiling point cat-reformed naphtha; [A complex residuum from the catalytic reforming of C6-8 feed. It consists of hydrocarbons having carbon numbers predominantly in the range of C2 through C6.]",
+  "name": "Residues (petroleum), C6-8 catalytic reformer; Low boiling point cat-reformed naphtha; [A complex residuum from the catalytic reforming of C6-8 feed.  It consists of hydrocarbons having carbon numbers predominantly in the range of C2 through C6.]",
   "name_tr": "",
   "ec_no": "270-794-3",
   "index_no": "649-303-00-5",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

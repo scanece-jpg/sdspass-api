@@ -1,11 +1,13 @@
 {
   "cas": "94114-03-1",
-  "name": "Gasoline, pyrolysis, hydrogenated; Low boiling point naphtha-unspecified; [A distillation fraction from the hydrogenation of pyrolysis gasoline boiling in the range of approximately 20 Â°C to 200 Â°C (68 Â°F to 392 Â°F).]",
+  "name": "Gasoline, pyrolysis, hydrogenated; Low boiling point naphtha-unspecified; [A distillation fraction from the hydrogenation of pyrolysis gasoline boiling in the range of approximately 20°C to 200°C (68°F to 392°F).]",
   "name_tr": "",
   "ec_no": "302-639-3",
   "index_no": "649-389-00-4",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

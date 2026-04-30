@@ -1,11 +1,13 @@
 {
   "cas": "94114-13-3",
-  "name": "Pitch, coal tar, high-temp., secondary; Pitch Redistillate; [The residue obtained during the distillation of high boiling fractions from bituminous coal high temperature tar and/or pitch coke oil, with a softening point of 140 Â°C to 170 Â°C (284 Â°F to 392 Â°F) according to DIN 52025. Composed primarily of tri- and polynuclear aromatic compounds which also contain heteroatoms.]",
+  "name": "Pitch, coal tar, high-temp., secondary; Pitch Redistillate; [The residue obtained during the distillation of high boiling fractions from bituminous coal high temperature tar and/or pitch coke oil, with a softening point of 140 °C to 170 °C (284 °F to 392 °F) according to DIN 52025. Composed primarily of tri- and polynuclear aromatic compounds which also contain heteroatoms.]",
   "name_tr": "",
   "ec_no": "302-650-3",
   "index_no": "648-057-00-6",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "M"
+  ],
   "classification": {
     "hazards": [
       {

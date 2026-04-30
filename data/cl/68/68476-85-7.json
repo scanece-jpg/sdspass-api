@@ -4,24 +4,29 @@
   "name_tr": "Petrol gazları, sıvılaştırılmış; Petrol gazı; [Ham petrolün damıtılması ile üretilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla C3 ila C7 aralığında karbon sayısına sahip ve yaklaşık -40°C ila 80°C (-40°F ila 176°F) aralığında kaynayan hidrokarbonlardan oluşur.]",
   "ec_no": "270-704-2",
   "index_no": "649-202-00-6",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
     "S",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

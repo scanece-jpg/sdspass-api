@@ -2,9 +2,9 @@
   "cas": "374726-62-2",
   "name": "mandipropamid (ISO); 2-(4-chlorophenyl)-N-{2-[3-methoxy-4-(prop-2-yn-1-yloxy)phenyl]ethyl}-2-(prop-2-yn-1-yloxy)acetamide",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "616-213-00-2",
-  "atp": "ATP07",
+  "atp": "ATP7",
   "notes": [],
   "classification": {
     "hazards": [
@@ -17,10 +17,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1,
-      "chronic": 1
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

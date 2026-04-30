@@ -1,11 +1,13 @@
 {
   "cas": "68783-12-0",
-  "name": "Naphtha (petroleum), unsweetened; Low boiling point naphtha; [A complex combination of hydrocarbons produced from the distillation of naphtha streams from various refinery processes. It consists of hydrocarbons having carbon numbers predominantly in the range of C5 through C12 and boiling in the range of approximately 0 Â°C to 230 Â°C (25 Â°F to 446 Â°F).]",
+  "name": "Naphtha (petroleum), unsweetened; Low boiling point naphtha; [A complex combination of hydrocarbons produced from the distillation of naphtha streams from various refinery processes.  It consists of hydrocarbons having carbon numbers predominantly in the range of C5 through C12 and boiling in the range of approximately 0°C to 230°C (25°F to 446°F).]",
   "name_tr": "",
   "ec_no": "272-186-3",
   "index_no": "649-271-00-2",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

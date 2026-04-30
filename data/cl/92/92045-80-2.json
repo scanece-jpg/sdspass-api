@@ -4,24 +4,29 @@
   "name_tr": "Petrol gazları, sıvılaştırılmış, kıvamlandırılmış C4 fraksiyonu; Petrol gazı; [Merkaptanların oksitlenmesi veya asidik safsızlıkların uzaklaştırılması için sıvılaştırılmış petrol gaz karışımının kıvamlandırma prosesine maruz bırakılması ile elde edilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla C4 karbon sayısına sahip doymuş ve doymamış hidrokarbonlardan oluşur.]",
   "ec_no": "295-463-0",
   "index_no": "649-117-00-4",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
     "S",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

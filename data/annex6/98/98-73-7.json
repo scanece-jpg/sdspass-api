@@ -4,7 +4,7 @@
   "name_tr": "",
   "ec_no": "202-696-3",
   "index_no": "607-698-00-1",
-  "atp": "ATP03",
+  "atp": "ATP3",
   "notes": [],
   "classification": {
     "hazards": [
@@ -27,8 +27,8 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS08",
-      "GHS07"
+      "GHS07",
+      "GHS08"
     ],
     "h_codes": [
       "H360F",

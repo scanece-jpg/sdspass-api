@@ -9,8 +9,8 @@
   "classification": {
     "hazards": [
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Skin Irrit. 2",
@@ -36,7 +36,7 @@
       "GHS09"
     ],
     "h_codes": [
-      "H373 **",
+      "H373",
       "H315",
       "H400",
       "H410"

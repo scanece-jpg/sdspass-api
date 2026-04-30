@@ -2,14 +2,14 @@
   "cas": "81591-81-3",
   "name": "glyphosate-trimesium; glyphosate-trimethylsulfonium",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "607-316-00-3",
   "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {

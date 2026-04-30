@@ -1,6 +1,6 @@
 {
   "cas": "1085-98-9",
-  "name": "dichlofluanid (ISO); N-[(dichlorofluoromethyl)thio]-Nâ€²,Nâ€²-dimethyl-N-phenylsulfamide",
+  "name": "dichlofluanid (ISO); N-[(dichlorofluoromethyl)thio]-N′,N′-dimethyl-N-phenylsulfamide",
   "name_tr": "",
   "ec_no": "214-118-7",
   "index_no": "616-006-00-7",
@@ -25,9 +25,7 @@
         "h_code": "H400"
       }
     ],
-    "m_factors": {
-      "acute": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

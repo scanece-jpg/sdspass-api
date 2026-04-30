@@ -4,8 +4,10 @@
   "name_tr": "",
   "ec_no": "272-880-6",
   "index_no": "649-161-00-4",
-  "atp": "ATP01corr",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "K U"
+  ],
   "classification": {
     "hazards": [
       {
@@ -14,15 +16,15 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": "H350"
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "m_factors": {},
@@ -31,8 +33,8 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS02",
       "GHS04",
+      "GHS02",
       "GHS08"
     ],
     "h_codes": [

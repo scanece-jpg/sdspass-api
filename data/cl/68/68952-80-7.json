@@ -4,23 +4,28 @@
   "name_tr": "Artık gaz (petrol), normal üretim nafta hidrojen muamelesi ile kükürt giderici; Rafineri gazı; [Normal üretim naftanın hidrojen ile muamelesi sonucu kükürtünün giderilmesinden elde edilen kompleks bir bileşim. Hidrojen ve büyük çoğunlukla C1 ila C5 aralığında karbon sayısına sahiphidrokarbonlardan oluşur.]",
   "ec_no": "273-174-0",
   "index_no": "649-166-00-1",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

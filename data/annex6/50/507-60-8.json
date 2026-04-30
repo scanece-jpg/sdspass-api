@@ -1,6 +1,6 @@
 {
   "cas": "507-60-8",
-  "name": "bufa-4,20,22-trienolide, 6-(acetyloxy)-3-(Î²-D-glucopyranosyloxy)-8,14-dihydroxy-, (3Î², 6Î²)-; red squill; scilliroside",
+  "name": "bufa-4,20,22-trienolide, 6-(acetyloxy)-3-(β-D-glucopyranosyloxy)-8,14-dihydroxy-, (3β, 6β)-; red squill; scilliroside",
   "name_tr": "",
   "ec_no": "208-077-4",
   "index_no": "614-027-00-6",
@@ -9,7 +9,7 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 2 *",
+        "class": "Acute Tox. 2",
         "h_code": "H300"
       }
     ],

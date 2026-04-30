@@ -1,8 +1,8 @@
 {
   "cas": "138182-18-0",
-  "name": "triticonazole (ISO); (RS)-(E)-5-(4-chlorobenzylidene)-2,2-dimethyl-1-(1H-1,2,4-triazol-1-methyl)cyclopentanol",
+  "name": "triticonazole (ISO);\n(RS)-(E)-5-(4-chlorobenzylidene)-2,2-dimethyl-1-(1H-1,2,4-triazol-1-methyl)cyclopentanol",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "613-282-00-0",
   "atp": "ATP17",
   "notes": [],
@@ -25,10 +25,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1,
-      "chronic": 1
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

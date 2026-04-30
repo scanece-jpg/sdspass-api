@@ -1,11 +1,13 @@
 {
   "cas": "84989-05-9",
-  "name": "Tar acids, polyalkylphenol fraction; Distillate Phenols; [The fraction of tar acids, recovered by distillation of low-temperature coal tar crude tar acids, having an approximate boiling range of 225 Â°C to 320 Â°C (437 Â°F to 608 Â°F). Composed primarily of polyalkylphenols.]",
+  "name": "Tar acids, polyalkylphenol fraction; Distillate Phenols; [The fraction of tar acids, recovered by distillation of low-temperature coal tar crude tar acids, having an approximate boiling range of 225°C to 320°C (437°F to 608°F).  Composed primarily of polyalkylphenols.]",
   "name_tr": "",
   "ec_no": "284-893-4",
   "index_no": "648-121-00-3",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "J M"
+  ],
   "classification": {
     "hazards": [
       {

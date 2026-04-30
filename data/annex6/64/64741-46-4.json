@@ -1,11 +1,13 @@
 {
   "cas": "64741-46-4",
-  "name": "Naphtha (petroleum), light straight-run; Low boiling point naphtha; [A complex combination of hydrocarbons produced by distillation of crude oil. It consists predominantly of aliphatic hydrocarbons having carbon numbers predominantly in the range of C4 through C10 and boiling in the range of approximately â€“20  Â°C to 180 Â°C (â€“4  Â°F to 356 Â°F).]",
+  "name": "Naphtha (petroleum), light straight-run; Low boiling point naphtha; [A complex combination of hydrocarbons produced by distillation of crude oil.  It consists predominantly of aliphatic hydrocarbons having carbon numbers predominantly in the range of C4 through C10 and boiling in the range of approximately -20°C to 180°C (-4°F to 356°F).]",
   "name_tr": "",
   "ec_no": "265-046-8",
   "index_no": "649-266-00-5",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "P"
+  ],
   "classification": {
     "hazards": [
       {

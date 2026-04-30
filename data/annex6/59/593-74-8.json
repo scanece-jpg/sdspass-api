@@ -1,28 +1,30 @@
 {
   "cas": "593-74-8",
-  "name": "dimethylmercury [1]\ndiethylmercury [2]",
+  "name": "dimethylmercury [1]\ndiethylmercury  [2]",
   "name_tr": "",
-  "ec_no": "209-805-3",
+  "ec_no": "209-805-3 [1]\n211-000-7 [2]",
   "index_no": "080-007-00-3",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "1"
+  ],
   "classification": {
     "hazards": [
-      {
-        "class": "Acute Tox. 2 *",
-        "h_code": "H330"
-      },
       {
         "class": "Acute Tox. 1",
         "h_code": "H310"
       },
       {
-        "class": "Acute Tox. 2 *",
+        "class": "Acute Tox. 2",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 2",
         "h_code": "H300"
       },
       {
-        "class": "STOT RE 2 *",
-        "h_code": "H373 **"
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Aquatic Acute 1",
@@ -34,7 +36,14 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H373",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
@@ -44,10 +53,10 @@
       "GHS09"
     ],
     "h_codes": [
-      "H330",
       "H310",
+      "H330",
       "H300",
-      "H373 **",
+      "H373",
       "H400",
       "H410"
     ],

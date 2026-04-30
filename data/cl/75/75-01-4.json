@@ -4,19 +4,24 @@
   "name_tr": "vinil klorür; kloroetilen",
   "ec_no": "200-831-0",
   "index_no": "602-023-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "D",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
+        "class": "Press. Gas",
+        "h_code": ""
+      },
+      {
+        "class": "Carc. 1A",
         "h_code": "H350"
       }
     ],

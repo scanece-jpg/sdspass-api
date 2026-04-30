@@ -2,14 +2,14 @@
   "cas": "51337-71-4",
   "name": "isobutyl 2-(4-(4-chlorophenoxy)phenoxy)propionate; clofop-isobutyl (ISO)",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "607-160-00-6",
   "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       }
     ],

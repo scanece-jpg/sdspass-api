@@ -4,23 +4,28 @@
   "name_tr": "Gazlar (petrol), platform oluşturucu kararlaştırıcısı çalışmazken,hafif sonlar ayrımsal damıtılması; Rafineri gazı; [Platform oluşturucu ünitesi platinyum reaktörleri hafif sonlarının ayrımsal damıtılması ile elde edilen kompleks bir bileşim. Hidrojen, metan, etan ve propandan oluşur. ]",
   "ec_no": "272-880-6",
   "index_no": "649-161-00-4",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

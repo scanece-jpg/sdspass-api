@@ -1,11 +1,13 @@
 {
   "cas": "93763-38-3",
-  "name": "Hydrocarbons, hydrocracked paraffinic distn. residues, solvent-dewaxed; Baseoil â€” unspecified",
+  "name": "Hydrocarbons, hydrocracked paraffinic distn. residues, solvent-dewaxed; Baseoil - unspecified",
   "name_tr": "",
   "ec_no": "297-857-8",
   "index_no": "649-502-00-7",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "L"
+  ],
   "classification": {
     "hazards": [
       {

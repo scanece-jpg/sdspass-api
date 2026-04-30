@@ -1,11 +1,13 @@
 {
   "cas": "65996-82-9",
-  "name": "Tar oils, coal; Carbolic Oil; [The distillate from high temperature coal tar having an approximate distillation range of 130 Â°C to 250 Â°C (266 Â°F to 410 Â°F). Composed primarily of naphthalene, alkylnaphthalenes, phenolic compounds, and aromatic nitrogen bases.]",
+  "name": "Tar oils, coal; Carbolic Oil; [The distillate from high temperature coal tar having an approximate distillation range of 130°C to 250°C (266°F to 410°F). Composed primarily of naphthalene, alkylnaphthalenes, phenolic compounds, and aromatic nitrogen bases.]",
   "name_tr": "",
   "ec_no": "266-016-7",
   "index_no": "648-024-00-6",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "J"
+  ],
   "classification": {
     "hazards": [
       {

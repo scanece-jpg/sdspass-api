@@ -1,11 +1,13 @@
 {
   "cas": "101794-74-5",
-  "name": "Aromatic hydrocarbons, C20-28, polycyclic, mixed coal-tar pitch-polyethylene-polypropylene pyrolysis-derived; Pyrolysis Products; [A complex combination hydrocarbons obtained from mixed coal tar pitch-polyethylene-polypropylene pyrolysis. Composed primarily of polycyclic aromatic hydrocarbons having carbon numbers predominantly in the range of C20 through C28 and having a softening point of 100 Â°C to 220 Â°C (212 Â°F to 428 Â°F) according to DIN 52025.]",
+  "name": "Aromatic hydrocarbons, C20-28, polycyclic, mixed coal-tar pitch-polyethylene-polypropylene pyrolysis-derived; Pyrolysis Products; [A complex combination hydrocarbons obtained from mixed coal tar pitch-polyethylene-polypropylene pyrolysis. Composed primarily of polycyclic aromatic hydrocarbons having carbon numbers predominantly in the range of C20 through C28 and having a softening point of 100 °C to 220 °C (212 °F to 428 °F) according to DIN 52025.]",
   "name_tr": "",
   "ec_no": "309-956-6",
   "index_no": "648-073-00-3",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "M"
+  ],
   "classification": {
     "hazards": [
       {

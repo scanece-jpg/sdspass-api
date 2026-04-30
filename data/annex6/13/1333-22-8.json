@@ -2,7 +2,7 @@
   "cas": "1333-22-8",
   "name": "tetracopper hexahydroxide sulphate [1]\ntetracopper hexahydroxide sulphate hydrate [2]",
   "name_tr": "",
-  "ec_no": "215-582-3",
+  "ec_no": "215-582-3 [1]\n215-582-3 [2]",
   "index_no": "029-018-00-7",
   "atp": "ATP17",
   "notes": [],
@@ -21,10 +21,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

@@ -5,12 +5,14 @@
   "ec_no": "201-103-5",
   "index_no": "015-015-00-8",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "C"
+  ],
   "classification": {
     "hazards": [
       {
         "class": "STOT SE 1",
-        "h_code": "H370 **"
+        "h_code": "H370"
       },
       {
         "class": "Aquatic Chronic 2",
@@ -18,7 +20,20 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H370",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H371",
+        "class": "",
+        "c_min": 2.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
@@ -27,7 +42,7 @@
       "GHS09"
     ],
     "h_codes": [
-      "H370 **",
+      "H370",
       "H411"
     ],
     "suppl_h": []

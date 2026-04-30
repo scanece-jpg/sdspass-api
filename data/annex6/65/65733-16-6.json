@@ -1,8 +1,8 @@
 {
   "cas": "65733-16-6",
-  "name": "isopropyl (2E,4E,7S)-11-methoxy-3,7,11-trimethyldodeca-2,4-dienoate; S-methoprene",
+  "name": "isopropyl (2E,4E,7S)-11-methoxy-3,7,11-trimethyldodeca-2,4-dienoate;\nS-methoprene",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "607-725-00-7",
   "atp": "ATP13",
   "notes": [],
@@ -17,10 +17,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1,
-      "chronic": 1
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

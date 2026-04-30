@@ -1,11 +1,13 @@
 {
   "cas": "91995-39-0",
-  "name": "Distillates (petroleum), dewaxed heavy paraffinic, hydrotreated; Baseoil â€” unspecified; [A complex combination of hydrocarbons obtained from an intensive treatment of dewaxed distillate by hydrogenation in the presence of a catalyst. It consists predominantly of saturated hydrocarbons having carbon numbers predominantly in the range of C25 through C39 and produces a finished oil with a viscosity of approximately 44 cSt at 50 Â°C.]",
+  "name": "Distillates (petroleum), dewaxed heavy paraffinic, hydrotreated; Baseoil - unspecified; [A complex combination of hydrocarbons obtained from an intensive treatment of dewaxed distillate by hydrogenation in the presence of a catalyst. It consists predominantly of saturated hydrocarbons having carbon numbers predominantly in the range of C25 through C39 and produces a finished oil with a viscosity of approximately 44 cSt at 50 °C.]",
   "name_tr": "",
   "ec_no": "295-300-3",
   "index_no": "649-493-00-X",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "L"
+  ],
   "classification": {
     "hazards": [
       {

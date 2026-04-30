@@ -2,7 +2,7 @@
   "cas": "81777-89-1",
   "name": "clomazone (ISO); 2-(2-chlorobenzyl)-4,4-dimethyl-1,2-oxazolidin-3-one",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "613-340-00-5",
   "atp": "ATP17",
   "notes": [],
@@ -25,10 +25,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1,
-      "chronic": 1
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

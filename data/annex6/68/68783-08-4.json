@@ -1,10 +1,10 @@
 {
   "cas": "68783-08-4",
-  "name": "Gas oils (petroleum), heavy atmospheric; Heavy Fuel oil; [A complex combination of hydrocarbons obtained by the distillation of crude oil. It consists of hydrocarbons having carbon numbers predominantly in the range of C7 through C35 and boiling in the range of approximately 121 Â°C to 510 Â°C (250 Â°F to 950 Â°F).]",
+  "name": "Gas oils (petroleum), heavy atmospheric; Heavy Fuel oil; [A complex combination of hydrocarbons obtained by the distillation of crude oil. It consists of hydrocarbons having carbon numbers predominantly in the range of C7 through C35 and boiling in the range of approximately 121 °C to 510 °C (250 °F to 950 °F).]",
   "name_tr": "",
   "ec_no": "272-184-2",
   "index_no": "649-032-00-2",
-  "atp": "ATP02",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

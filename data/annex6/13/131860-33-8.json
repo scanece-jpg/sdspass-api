@@ -1,8 +1,8 @@
 {
   "cas": "131860-33-8",
-  "name": "azoxystrobin (ISO); methyl (E)-2-{2-[6-(2-cyanophenoxy)pyrimidin-4-yloxy]phenyl}-3-methoxyacrylate",
+  "name": "azoxystrobin (ISO); methyl (E)-2-{2-[6-(2-cyanophenoxy)pyrimi­din-4-yloxy]phenyl}-3-methoxyacrylate",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "607-256-00-8",
   "atp": "ATP15",
   "notes": [],
@@ -21,10 +21,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

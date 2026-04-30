@@ -10,19 +10,19 @@
     "hazards": [
       {
         "class": "Repr. 2",
-        "h_code": "H361f ***"
+        "h_code": "H361f"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 **"
+        "h_code": "H372"
       },
       {
         "class": "Skin Sens. 1",
@@ -48,14 +48,16 @@
       "GHS09"
     ],
     "h_codes": [
-      "H361f ***",
+      "H361f",
       "H332",
       "H302",
-      "H372 **",
+      "H372",
       "H317",
       "H400",
       "H410"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH070"
+    ]
   }
 }

@@ -5,7 +5,9 @@
   "ec_no": "233-109-9",
   "index_no": "053-002-00-9",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "5 U"
+  ],
   "classification": {
     "hazards": [
       {
@@ -18,7 +20,38 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H314",
+        "class": "",
+        "c_min": 10.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H314",
+        "class": "",
+        "c_min": 2.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H315",
+        "class": "",
+        "c_min": 2.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H319",
+        "class": "",
+        "c_min": 2.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H335",
+        "class": "",
+        "c_min": 2.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",

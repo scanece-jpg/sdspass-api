@@ -4,12 +4,14 @@
   "name_tr": "",
   "ec_no": "200-756-3",
   "index_no": "602-013-00-2",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP2",
+  "notes": [
+    "F"
+  ],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {

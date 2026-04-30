@@ -4,23 +4,28 @@
   "name_tr": "Gazlar (petrol), hidrojen ile muamele edici karışım yağı geri dönüşü, hidrojen-azot-zengin; Rafineri gazı; [Hidrojen ile muamele edilmiş ve geri dönüştürülmüş karışım yağından elde edilen kompleks bir bileşim. Öncelikli olarak farklı düşük miktarlarda karbon monoksit, karbon dioksit ve büyük çoğunlukla C1 ila C5 aralığında karbon sayısına sahip hidrokarbonlar ile hidrojen ve azottan oluşur ]",
   "ec_no": "270-781-2",
   "index_no": "649-133-00-1",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "K",
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Flam. Gas 1",
         "h_code": "H220"
       },
       {
-        "class": "Flam. Gas 1",
-        "h_code": "H350"
+        "class": "Press. Gas",
+        "h_code": ""
       },
       {
         "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
         "h_code": "H340"
       }
     ],

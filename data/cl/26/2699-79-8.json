@@ -4,9 +4,10 @@
   "name_tr": "Sülfüril diflorür",
   "ec_no": "220-281-5",
   "index_no": "009-015-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
@@ -21,6 +22,10 @@
       {
         "class": "STOT RE 2",
         "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": ""
       }
     ],
     "m_factors": {},

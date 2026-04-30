@@ -2,7 +2,7 @@
   "cas": "173159-57-4",
   "name": "foramsulfuron (ISO); 2-{[(4,6-dimethoxypyrimidin-2-yl)carbamoyl]sulfamoyl}-4-formamido-N,N-dimethylbenzamide; 1-(4,6-dimethoxypyrimidin-2-yl)-3-(2-dimethylcarbamoyl-5-formamidophenylsulfonyl)urea",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "616-241-00-5",
   "atp": "ATP21",
   "notes": [],
@@ -21,10 +21,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1000,
-      "chronic": 100
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

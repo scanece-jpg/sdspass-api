@@ -22,7 +22,7 @@
       },
       {
         "class": "STOT SE 2",
-        "h_code": "H371 (inhalation, oral) (nervous system)"
+        "h_code": "H371(nervous_system;_oral,_inhalation)"
       },
       {
         "class": "Aquatic Acute 1",
@@ -30,13 +30,10 @@
       },
       {
         "class": "Aquatic Chronic 1",
-        "h_code": "H410"
+        "h_code": ""
       }
     ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -50,9 +47,8 @@
       "H351",
       "H332",
       "H302",
-      "H371 (inhalation, oral) (nervous system)",
-      "H400",
-      "H410"
+      "H371(nervous_system;_oral,_inhalation)",
+      "H400"
     ],
     "suppl_h": []
   }

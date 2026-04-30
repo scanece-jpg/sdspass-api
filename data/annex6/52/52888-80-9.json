@@ -1,6 +1,6 @@
 {
   "cas": "52888-80-9",
-  "name": "prosulfocarb (ISO); S-benzyl N,N-dipropylthiocarbamate",
+  "name": "prosulfocarb(ISO); S-benzyl N,N-dipropylthiocarbamate",
   "name_tr": "",
   "ec_no": "401-730-6",
   "index_no": "006-072-00-X",
@@ -9,7 +9,7 @@
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {

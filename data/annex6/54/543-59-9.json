@@ -1,11 +1,13 @@
 {
   "cas": "543-59-9",
-  "name": "1-chloropentane [1]\n2-chloropentane [2]\n3-chloropentane [3]",
+  "name": "1-chloropentane [1]\n2-chloropentane [2]\n3-chloropentane  [3]",
   "name_tr": "",
-  "ec_no": "208-846-4",
+  "ec_no": "208-846-4 [1]\n210-885-7 [2]\n210-467-4 [3]",
   "index_no": "602-022-00-1",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "C"
+  ],
   "classification": {
     "hazards": [
       {
@@ -13,15 +15,15 @@
         "h_code": "H225"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H312"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       }
     ],

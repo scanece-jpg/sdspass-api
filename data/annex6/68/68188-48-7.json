@@ -1,11 +1,13 @@
 {
   "cas": "68188-48-7",
-  "name": "Distillates (coal-petroleum), condensed-ring arom; Distillates; [The distillate from a mixture of coal and tar and aromatic petroleum streams having an approximate distillation range of 220 Â°C to 450 Â°C (428 Â°F to 842 Â°F). Composed primarily of 3- to 4-membered condensed ring aromatic hydrocarbons.]",
+  "name": "Distillates (coal-petroleum), condensed-ring arom; Distillates; [The distillate from a mixture of coal and tar and aromatic petroleum streams having an approximate distillation range of 220 °C to 450 °C (428 °F to 842 °F). Composed primarily of 3- to 4-membered condensed ring aromatic hydrocarbons.]",
   "name_tr": "",
   "ec_no": "269-159-3",
   "index_no": "648-072-00-8",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "M"
+  ],
   "classification": {
     "hazards": [
       {

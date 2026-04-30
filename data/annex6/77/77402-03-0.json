@@ -1,6 +1,6 @@
 {
   "cas": "77402-03-0",
-  "name": "methyl acrylamidomethoxyacetate (containing â‰¥ 0,1 % acrylamid)",
+  "name": "methyl acrylamidomethoxyacetate (containing ≥ 0,1 % acrylamid)",
   "name_tr": "",
   "ec_no": "401-890-7",
   "index_no": "607-190-00-X",
@@ -17,7 +17,7 @@
         "h_code": "H340"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {

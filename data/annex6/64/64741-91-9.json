@@ -1,11 +1,13 @@
 {
   "cas": "64741-91-9",
-  "name": "Distillates (petroleum), solvent-refined middle; Gasoil â€” unspecified; [A complex combination of hydrocarbons obtained as the raffinate from a solvent extraction process. It consists predominantly of aliphatic hydrocarbons having carbon numbers predominantly in the range of C9 through C20 and boiling in the range of approximately 150 Â°C to 345 Â°C (302 Â°F to 653 Â°F).]",
+  "name": "Distillates (petroleum), solvent-refined middle; Gasoil - unspecified; [A complex combination of hydrocarbons obtained as the raffinate from a solvent extraction process. It consists predominantly of aliphatic hydrocarbons having carbon numbers predominantly in the range of C9 through C20 and boiling in the range of approximately 150 °C to 345 °C (302 °F to 653 °F).]",
   "name_tr": "",
   "ec_no": "265-093-4",
   "index_no": "649-214-00-1",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "N"
+  ],
   "classification": {
     "hazards": [
       {

@@ -2,22 +2,22 @@
   "cas": "299-45-6",
   "name": "potasan; O,O-diethyl O-(4-methylcoumarin-7-yl) phosphorothioate",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "015-076-00-0",
   "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 2 *",
-        "h_code": "H330"
-      },
-      {
         "class": "Acute Tox. 1",
         "h_code": "H310"
       },
       {
-        "class": "Acute Tox. 2 *",
+        "class": "Acute Tox. 2",
+        "h_code": "H330"
+      },
+      {
+        "class": "Acute Tox. 2",
         "h_code": "H300"
       },
       {
@@ -29,9 +29,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1000
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -41,8 +39,8 @@
       "GHS09"
     ],
     "h_codes": [
-      "H330",
       "H310",
+      "H330",
       "H300",
       "H400",
       "H410"

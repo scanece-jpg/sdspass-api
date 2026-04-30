@@ -1,6 +1,6 @@
 {
   "cas": "91-97-4",
-  "name": "3,3'-dimethylbiphenylâ€“4,4'-diyl diisocyanate",
+  "name": "3,3'-dimethylbiphenyl–4,4'-diyl diisocyanate",
   "name_tr": "",
   "ec_no": "202-112-7",
   "index_no": "615-051-00-X",
@@ -22,7 +22,14 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H317",
+        "class": "",
+        "c_min": 0.001,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",

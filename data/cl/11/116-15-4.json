@@ -4,9 +4,10 @@
   "name_tr": "hekzafloropropen; hekzafloropropilen",
   "ec_no": "204-127-4",
   "index_no": "602-061-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
@@ -17,6 +18,10 @@
       {
         "class": "Acute Tox. 4",
         "h_code": "H335"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": ""
       }
     ],
     "m_factors": {},

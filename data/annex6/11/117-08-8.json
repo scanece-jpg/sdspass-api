@@ -35,8 +35,8 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS05",
       "GHS08",
+      "GHS05",
       "GHS09"
     ],
     "h_codes": [

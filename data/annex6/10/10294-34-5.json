@@ -5,7 +5,9 @@
   "ec_no": "233-658-4",
   "index_no": "005-002-00-5",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "U"
+  ],
   "classification": {
     "hazards": [
       {
@@ -13,11 +15,11 @@
         "h_code": "H330"
       },
       {
-        "class": "Acute Tox. 2 *",
+        "class": "Acute Tox. 2",
         "h_code": "H300"
       },
       {
-        "class": "Acute Tox. 2 *",
+        "class": "Acute Tox. 2",
         "h_code": "H314"
       },
       {
@@ -40,6 +42,8 @@
       "H300",
       "H314"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH014"
+    ]
   }
 }

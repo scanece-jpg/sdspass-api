@@ -4,9 +4,10 @@
   "name_tr": "etil nitrit",
   "ec_no": "203-722-6",
   "index_no": "007-006-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
-    "U"
+    "U",
+    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
   ],
   "classification": {
     "hazards": [
@@ -16,6 +17,10 @@
       },
       {
         "class": "Press. Gas",
+        "h_code": ""
+      },
+      {
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {

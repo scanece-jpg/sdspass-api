@@ -1,11 +1,13 @@
 {
   "cas": "101316-45-4",
-  "name": "Absorption oils, bicyclo arom. and heterocyclic hydrocarbon fraction; Wash Oil Redistillate; [A complex combination of hydrocarbons obtained as a redistillate from the distillation of wash oil. It consists predominantly of 2-ringed aromatic and heterocyclic hydrocarbons boiling in the range of approximately 260 Â°C to 290 Â°C (500 Â°F to 554 Â°F).]",
+  "name": "Absorption oils, bicyclo arom. and heterocyclic hydrocarbon fraction; Wash Oil Redistillate; [A complex combination of hydrocarbons obtained as a redistillate from the distillation of wash oil. It consists predominantly of 2-ringed aromatic and heterocyclic hydrocarbons boiling in the range of approximately 260 °C to 290 °C (500 °F to 554 °F).]",
   "name_tr": "",
   "ec_no": "309-851-5",
   "index_no": "648-041-00-9",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "CLP00",
+  "notes": [
+    "M"
+  ],
   "classification": {
     "hazards": [
       {

@@ -4,13 +4,13 @@
   "name_tr": "",
   "ec_no": "200-618-2",
   "index_no": "607-705-00-8",
-  "atp": "ATP06",
+  "atp": "ATP6",
   "notes": [],
   "classification": {
     "hazards": [
       {
         "class": "STOT RE 1",
-        "h_code": "H372 (inhalation) (lungs)"
+        "h_code": "H372(lungs)"
       },
       {
         "class": "Skin Irrit. 2",
@@ -31,7 +31,7 @@
       "GHS05"
     ],
     "h_codes": [
-      "H372 (inhalation) (lungs)",
+      "H372(lungs)",
       "H315",
       "H318"
     ],

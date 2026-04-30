@@ -4,12 +4,12 @@
   "name_tr": "",
   "ec_no": "430-630-5",
   "index_no": "015-182-00-7",
-  "atp": "ATP01corr",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {

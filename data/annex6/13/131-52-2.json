@@ -1,8 +1,8 @@
 {
   "cas": "131-52-2",
-  "name": "sodium pentachlorophenolate [1]\npotassium pentachlorophenolate [2]",
+  "name": "sodium pentachlorophenolate [1]\npotassium pentachlorophenolate  [2]",
   "name_tr": "",
-  "ec_no": "205-025-2",
+  "ec_no": "205-025-2 [1]\n231-911-3 [2]",
   "index_no": "604-003-00-3",
   "atp": "CLP00",
   "notes": [],
@@ -13,15 +13,15 @@
         "h_code": "H351"
       },
       {
-        "class": "Acute Tox. 2 *",
+        "class": "Acute Tox. 2",
         "h_code": "H330"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H311"
       },
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H301"
       },
       {
@@ -51,8 +51,8 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS08",
       "GHS06",
+      "GHS08",
       "GHS09"
     ],
     "h_codes": [

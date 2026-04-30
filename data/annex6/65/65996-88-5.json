@@ -1,11 +1,13 @@
 {
   "cas": "65996-88-5",
-  "name": "Benzol forerunnings (coal); Light Oil Redistillate, low boiling; [The distillate from coke oven light oil having an approximate distillation range below 100 Â°C (212 Â°F). Composed primarily of C4 tÂ°C6 aliphatic hydrocarbons.]",
+  "name": "Benzol forerunnings (coal); Light Oil Redistillate, low boiling; [The distillate from coke oven light oil having an approximate distillation range below 100°C (212°F).  Composed primarily of C4 to C6 aliphatic hydrocarbons.]",
   "name_tr": "",
   "ec_no": "266-023-5",
   "index_no": "648-003-00-1",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "J"
+  ],
   "classification": {
     "hazards": [
       {

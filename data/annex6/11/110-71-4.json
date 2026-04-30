@@ -17,7 +17,7 @@
         "h_code": "H360FD"
       },
       {
-        "class": "Acute Tox. 4 *",
+        "class": "Acute Tox. 4",
         "h_code": "H332"
       }
     ],
@@ -36,6 +36,8 @@
       "H360FD",
       "H332"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH019"
+    ]
   }
 }

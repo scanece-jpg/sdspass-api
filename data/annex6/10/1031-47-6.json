@@ -2,7 +2,7 @@
   "cas": "1031-47-6",
   "name": "triamiphos (ISO); 5-amino-3-phenyl-1,2,4-triazol-1-yl-N,N,N',N'-tetramethylphosphonic diamide",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "015-024-00-7",
   "atp": "CLP00",
   "notes": [],
@@ -13,7 +13,7 @@
         "h_code": "H310"
       },
       {
-        "class": "Acute Tox. 2 *",
+        "class": "Acute Tox. 2",
         "h_code": "H300"
       }
     ],

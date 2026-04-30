@@ -4,7 +4,7 @@
   "name_tr": "",
   "ec_no": "244-959-5",
   "index_no": "015-200-00-3",
-  "atp": "ATP03",
+  "atp": "ATP3",
   "notes": [],
   "classification": {
     "hazards": [
@@ -18,11 +18,24 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 (lungs)"
+        "h_code": "H372(lungs)"
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H350",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H373",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
@@ -32,7 +45,7 @@
     "h_codes": [
       "H350",
       "H361f",
-      "H372 (lungs)"
+      "H372(lungs)"
     ],
     "suppl_h": []
   }

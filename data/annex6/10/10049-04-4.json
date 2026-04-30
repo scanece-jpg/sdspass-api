@@ -1,15 +1,17 @@
 {
   "cas": "10049-04-4",
-  "name": "chlorine dioxide â€¦ %",
+  "name": "chlorine dioxide … %",
   "name_tr": "",
   "ec_no": "233-162-8",
   "index_no": "017-026-01-0",
-  "atp": "ATP01corr",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "B"
+  ],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 3 *",
+        "class": "Acute Tox. 3",
         "h_code": "H301"
       },
       {
@@ -21,10 +23,39 @@
         "h_code": "H400"
       }
     ],
-    "m_factors": {
-      "acute": 10
-    },
-    "scl_limits": []
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H335",
+        "class": "",
+        "c_min": 3.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H314",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H315",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H318",
+        "class": "",
+        "c_min": 3.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H319",
+        "class": "",
+        "c_min": 3.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",

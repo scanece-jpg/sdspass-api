@@ -1,10 +1,10 @@
 {
   "cas": "188070-47-5",
-  "name": "reaction mass of: methyl {][}5-acetylamino-4-(2-chloro-4-nitrophenylazo)phenyl{]methoxycarbonylmethylamino[}acetate; methyl {][}5-acetylamino-4-(2-chloro-4-nitrophenylazo)phenyl{]ethoxycarbonylmethylamino[}acetate",
+  "name": "reaction mass of: methyl {[5-acetylamino-4-(2-chloro-4-nitrophenylazo)phenyl]methoxycarbonylmethylamino}acetate; methyl {[5-acetylamino-4-(2-chloro-4-nitrophenylazo)phenyl]ethoxycarbonylmethylamino}acetate",
   "name_tr": "",
   "ec_no": "424-290-7",
   "index_no": "607-546-00-4",
-  "atp": "ATP01",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

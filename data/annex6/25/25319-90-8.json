@@ -1,6 +1,6 @@
 {
   "cas": "25319-90-8",
-  "name": "MCPA-thioethyl (ISO); S-ethyl (4-chloro-2-methylphenoxy)ethanethioate; S-ethyl 4-chloro-o-tolyloxythioacetate",
+  "name": "MCPA-thioethyl (ISO); S-ethyl   (4-chloro-2- methylphenoxy)etha­nethioate; S-ethyl 4- chloro-o-tolylox­ythioacetate",
   "name_tr": "",
   "ec_no": "246-831-4",
   "index_no": "607-738-00-8",
@@ -14,7 +14,7 @@
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373 (liver)"
+        "h_code": "H373(liver)"
       },
       {
         "class": "Aquatic Acute 1",
@@ -25,10 +25,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -40,7 +37,7 @@
     ],
     "h_codes": [
       "H302",
-      "H373 (liver)",
+      "H373(liver)",
       "H400",
       "H410"
     ],

@@ -14,7 +14,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 **"
+        "h_code": "H372"
       },
       {
         "class": "Aquatic Acute 1",
@@ -36,7 +36,7 @@
     ],
     "h_codes": [
       "H350",
-      "H372 **",
+      "H372",
       "H400",
       "H410"
     ],

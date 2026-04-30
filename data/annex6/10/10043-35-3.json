@@ -2,10 +2,12 @@
   "cas": "10043-35-3",
   "name": "boric acid [1]\nboric acid [2]",
   "name_tr": "",
-  "ec_no": "233-139-2",
+  "ec_no": "233-139-2 [1]\n234-343-4 [2]",
   "index_no": "005-007-00-2",
   "atp": "ATP20",
-  "notes": [],
+  "notes": [
+    "11"
+  ],
   "classification": {
     "hazards": [
       {

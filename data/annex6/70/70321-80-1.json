@@ -1,11 +1,13 @@
 {
   "cas": "70321-80-1",
-  "name": "Creosote oil, low-boiling distillate; Wash Oil; [The low-boiling distillation fraction obtained from the high temperature carbonization of bituminous coal, which is further refined to remove excess crystalline salts. It consists primarily of creosote oil with some of the normal polynuclear aromatic salts, which are components of coal tar distillate, removed. It is crystal free at approximately 38 Â°C (100 Â°F).]",
+  "name": "Creosote oil, low-boiling distillate; Wash Oil; [The low-boiling distillation fraction obtained from the high temperature carbonization of bituminous coal, which is further refined to remove excess crystalline salts. It consists primarily of creosote oil with some of the normal polynuclear aromatic salts, which are components of coal tar distillate, removed. It is crystal free at approximately 38°C (100°F).]",
   "name_tr": "",
   "ec_no": "274-566-4",
   "index_no": "648-138-00-6",
-  "atp": "ATP02",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "M"
+  ],
   "classification": {
     "hazards": [
       {

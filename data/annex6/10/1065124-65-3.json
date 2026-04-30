@@ -1,8 +1,8 @@
 {
   "cas": "1065124-65-3",
-  "name": "2,3,5,6-tetrafluoro-4-(methoxymethyl)benzyl (Z)-(1R,3R)-3-(2-cyanoprop-1-enyl)-2,2-dimethylcyclopropanecarboxylate; epsilon-momfluorothrin",
+  "name": "2,3,5,6-tetrafluoro-4-(methoxymethyl)benzyl (Z)-(1R,3R)-3-(2-cyanoprop-1-enyl)-2,2-dimethylcyclopropanecarboxylate;\nepsilon-momfluorothrin",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "607-722-00-0",
   "atp": "ATP10",
   "notes": [],
@@ -14,7 +14,7 @@
       },
       {
         "class": "STOT SE 2",
-        "h_code": "H371 (nervous system)"
+        "h_code": "H371(nervous_system)"
       },
       {
         "class": "Aquatic Acute 1",
@@ -25,10 +25,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 100,
-      "chronic": 100
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -40,7 +37,7 @@
     ],
     "h_codes": [
       "H302",
-      "H371 (nervous system)",
+      "H371(nervous_system)",
       "H400",
       "H410"
     ],

@@ -1,6 +1,6 @@
 {
   "cas": "149961-52-4",
-  "name": "dimoxystrobin (ISO); (2E)-2-{2-[(2,5-dimethylphenoxy)methyl]phenyl}-2-(methoxyimino)-N-methylacetamide; (E)-2-(methoxyimino)-N-methyl-2-[Î±-(2,5-xylyloxy)-o-tolyl]acetamide",
+  "name": "dimoxystrobin (ISO); (2E)-2-{2-[(2,5-dimethylphenoxy)methyl]phenyl}-2-(methoxyimino)-N-methylacetamide; (E)-2-(methoxyimino)-N-methyl-2-[α-(2,5-xylyloxy)-o-tolyl]acetamide",
   "name_tr": "",
   "ec_no": "-",
   "index_no": "616-164-00-7",
@@ -29,10 +29,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 100,
-      "chronic": 100
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

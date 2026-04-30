@@ -1,6 +1,6 @@
 {
   "cas": "5598-13-0",
-  "name": "chlorpyrifos-methyl (ISO); O,O-dimethyl O-3,5,6-trichloro-2-pyridyl phosphorothioate",
+  "name": "chlorpyrifos-methyl (ISO),; O, O-dimethyl O-3,5,6-trichloro-2-pyridyl phosphorothioate",
   "name_tr": "",
   "ec_no": "227-011-5",
   "index_no": "015-186-00-9",
@@ -21,9 +21,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10000
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

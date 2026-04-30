@@ -1,10 +1,10 @@
 {
   "cas": "98219-64-8",
-  "name": "Residues, steam cracked, thermally treated; Heavy Fuel oil; [A complex combination of hydrocarbons obtained by the treatment and distillation of raw steam-cracked naphtha. It consists predominantly of unsaturated hydrocarbons boiling in the range above approximately 180 Â°C (356 Â°F).]",
+  "name": "Residues, steam cracked, thermally treated; Heavy Fuel oil; [A complex combination of hydrocarbons obtained by the treatment and distillation of raw steam-cracked naphtha. It consists predominantly of unsaturated hydrocarbons boiling in the range above approximately 180 °C (356 °F).]",
   "name_tr": "",
   "ec_no": "308-733-0",
   "index_no": "649-046-00-9",
-  "atp": "ATP02",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

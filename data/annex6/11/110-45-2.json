@@ -1,11 +1,13 @@
 {
   "cas": "110-45-2",
-  "name": "isopentyl formate [1]\n2-methylbutyl formate [2]",
+  "name": "isopentyl formate [1]\npentyl formate [2]",
   "name_tr": "",
-  "ec_no": "203-769-2",
+  "ec_no": "203-769-2 [1]\n252-343-2 [2]",
   "index_no": "607-018-00-3",
   "atp": "CLP00",
-  "notes": [],
+  "notes": [
+    "C"
+  ],
   "classification": {
     "hazards": [
       {

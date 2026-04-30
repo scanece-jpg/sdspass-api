@@ -10,7 +10,7 @@
     "hazards": [
       {
         "class": "Repr. 2",
-        "h_code": "H361f ***"
+        "h_code": "H361f"
       },
       {
         "class": "Skin Sens. 1",
@@ -27,7 +27,7 @@
       "GHS07"
     ],
     "h_codes": [
-      "H361f ***",
+      "H361f",
       "H317"
     ],
     "suppl_h": []

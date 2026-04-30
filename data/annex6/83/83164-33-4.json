@@ -1,8 +1,8 @@
 {
   "cas": "83164-33-4",
-  "name": "diflufenican (ISO); N-(2,4-difluorophenyl)-2-[3-(trifluoromethyl)phenoxy]-3-pyridinecarboxamide; 2â€²,4â€²-difluoro-2-(Î±,Î±,Î±-trifluoro-m-tolyloxy) nicotinanilide",
+  "name": "diflufenican (ISO);\nN-(2,4-difluorophenyl)-2-[3-(trifluoromethyl)phenoxy]-3-pyridinecarboxamide;\n2′,4′-difluoro-2-(α,α,α- trifluoro-m-tolyloxy) nicotinanilide; N-(2,4-difluorophenyl)-2-[3-(trifluoromethyl)phenoxy]-3-pyridinecarboxamide",
   "name_tr": "",
-  "ec_no": "-",
+  "ec_no": "",
   "index_no": "616-032-00-9",
   "atp": "ATP17",
   "notes": [],
@@ -17,10 +17,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10000,
-      "chronic": 1000
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

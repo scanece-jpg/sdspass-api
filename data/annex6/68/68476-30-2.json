@@ -1,10 +1,10 @@
 {
   "cas": "68476-30-2",
-  "name": "Fuel oil, No 2; Gasoil â€” unspecified; [A distillate oil having a minimum viscosity of 32,6 SUS at 37,7  Â°C (100 Â°F) to a maximum of 37,9 SUS at 37,7  Â°C (100 Â°F).]",
+  "name": "Fuel oil, No 2; Gasoil - unspecified; [A distillate oil having a minimum viscosity of 32,6 SUS at 37,7 °C (100 °F) to a maximum of 37,9 SUS at 37,7 °C (100 °F).]",
   "name_tr": "",
   "ec_no": "270-671-4",
   "index_no": "649-225-00-1",
-  "atp": "ATP02",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

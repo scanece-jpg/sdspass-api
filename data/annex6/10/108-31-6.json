@@ -14,7 +14,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 (inhalation) (respiratory system)"
+        "h_code": "H372(respiratory_system,_inhalation)"
       },
       {
         "class": "Skin Corr. 1B",
@@ -34,7 +34,14 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H317",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
@@ -45,12 +52,14 @@
     ],
     "h_codes": [
       "H302",
-      "H372 (inhalation) (respiratory system)",
+      "H372(respiratory_system,_inhalation)",
       "H314",
       "H318",
       "H334",
       "H317"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH071"
+    ]
   }
 }

@@ -1,20 +1,20 @@
 {
-  "cas": "6259-76-3",
-  "name": "hexyl salicylate",
+  "cas": "7440-22-4",
+  "name": "silver massive: [particle diameter ≥ 1 mm]",
   "name_tr": "",
-  "ec_no": "228-408-6",
-  "index_no": "607-772-00-3",
+  "ec_no": "231-131-3",
+  "index_no": "047-004-00-9",
   "atp": "ATP22",
   "notes": [],
   "classification": {
     "hazards": [
       {
         "class": "Repr. 2",
-        "h_code": "H361d"
+        "h_code": "H361f"
       },
       {
-        "class": "Skin Sens. 1",
-        "h_code": "H317"
+        "class": "STOT RE 2",
+        "h_code": "H373(nervous_system)"
       }
     ],
     "m_factors": {},
@@ -23,12 +23,11 @@
   "labelling": {
     "signal": "Warning",
     "pictograms": [
-      "GHS08",
-      "GHS07"
+      "GHS08"
     ],
     "h_codes": [
-      "H361d",
-      "H317"
+      "H361f",
+      "H373(nervous_system)"
     ],
     "suppl_h": []
   }

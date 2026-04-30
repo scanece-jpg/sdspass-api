@@ -1,20 +1,29 @@
 {
   "cas": "13463-67-7",
-  "name": "titanium dioxide (TiO2)",
+  "name": "titanium dioxide; [in powder form containing 1 % or more of particles with aerodynamic diameter ≤ 10 μm]",
   "name_tr": "",
-  "ec_no": "",
-  "index_no": "",
-  "atp": "",
+  "ec_no": "236-675-5",
+  "index_no": "022-006-00-2",
+  "atp": "ATP14",
   "notes": [],
   "classification": {
-    "hazards": [],
+    "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351(Inhalation)"
+      }
+    ],
     "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
-    "signal": "",
-    "pictograms": [],
-    "h_codes": [],
+    "signal": "Warning",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H351(Inhalation)"
+    ],
     "suppl_h": []
   }
 }

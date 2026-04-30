@@ -2,9 +2,9 @@
   "cas": "26761-45-5",
   "name": "2,3-epoxypropyl neodecanoate",
   "name_tr": "",
-  "ec_no": "",
-  "index_no": "",
-  "atp": "",
+  "ec_no": "247-979-2",
+  "index_no": "607-770-00-2",
+  "atp": "ATP22",
   "notes": [],
   "classification": {
     "hazards": [
@@ -18,7 +18,14 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H317",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Warning",

@@ -1,0 +1,43 @@
+{
+  "cas": "553-00-4",
+  "name": "salts of 2-naphthylamine [1]\nsalts of 2-naphthylamine [2]",
+  "name_tr": "",
+  "ec_no": "209-030-0 [1]\n210-313-6 [2]",
+  "index_no": "612-071-00-0",
+  "atp": "CLP00",
+  "notes": [
+    "A"
+  ],
+  "classification": {
+    "hazards": [
+      {
+        "class": "Carc. 1A",
+        "h_code": "H350"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
+      }
+    ],
+    "m_factors": {},
+    "scl_limits": []
+  },
+  "labelling": {
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08",
+      "GHS07",
+      "GHS09"
+    ],
+    "h_codes": [
+      "H350",
+      "H302",
+      "H411"
+    ],
+    "suppl_h": []
+  }
+}

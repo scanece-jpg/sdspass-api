@@ -2,10 +2,12 @@
   "cas": "7632-04-4",
   "name": "sodium peroxometaborate",
   "name_tr": "",
-  "ec_no": "",
-  "index_no": "",
-  "atp": "",
-  "notes": [],
+  "ec_no": "231-556-4",
+  "index_no": "005-024-00-5",
+  "atp": "ATP22",
+  "notes": [
+    "11"
+  ],
   "classification": {
     "hazards": [
       {
@@ -34,7 +36,20 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H318",
+        "class": "",
+        "c_min": 22.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H319",
+        "class": "",
+        "c_min": 14.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",

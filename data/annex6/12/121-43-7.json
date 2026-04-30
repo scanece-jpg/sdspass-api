@@ -1,20 +1,26 @@
 {
-  "cas": "3006-82-4",
-  "name": "tert-butyl 2-ethylperoxyhexanoate",
+  "cas": "121-43-7",
+  "name": "trimethyl borate",
   "name_tr": "",
-  "ec_no": "221-110-7",
-  "index_no": "617-024-00-8",
+  "ec_no": "204-468-9",
+  "index_no": "005-005-00-1",
   "atp": "ATP22",
-  "notes": [],
+  "notes": [
+    "11"
+  ],
   "classification": {
     "hazards": [
+      {
+        "class": "Flam. Liq. 3",
+        "h_code": "H226"
+      },
       {
         "class": "Repr. 1B",
         "h_code": "H360FD"
       },
       {
-        "class": "Skin Sens. 1",
-        "h_code": "H317"
+        "class": "Acute Tox. 4",
+        "h_code": "H312"
       }
     ],
     "m_factors": {},
@@ -23,12 +29,14 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
+      "GHS02",
       "GHS08",
       "GHS07"
     ],
     "h_codes": [
+      "H226",
       "H360FD",
-      "H317"
+      "H312"
     ],
     "suppl_h": []
   }

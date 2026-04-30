@@ -1,11 +1,13 @@
 {
   "cas": "79-21-0",
-  "name": "peracetic acid â€¦ %",
+  "name": "peracetic acid . . . %",
   "name_tr": "",
-  "ec_no": "",
-  "index_no": "",
-  "atp": "",
-  "notes": [],
+  "ec_no": "201-186-8",
+  "index_no": "607-094-00-8",
+  "atp": "ATP22",
+  "notes": [
+    "B D T"
+  ],
   "classification": {
     "hazards": [
       {
@@ -37,11 +39,15 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 100
-    },
-    "scl_limits": []
+    "m_factors": {},
+    "scl_limits": [
+      {
+        "h_code": "H335",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
@@ -60,6 +66,8 @@
       "H400",
       "H410"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH071"
+    ]
   }
 }

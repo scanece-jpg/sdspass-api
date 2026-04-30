@@ -2,9 +2,9 @@
   "cas": "1918-00-9",
   "name": "dicamba (ISO); 2,5-dichloro-6-methoxybenzoic acid; 3,6-dichloro-2-methoxybenzoic acid",
   "name_tr": "",
-  "ec_no": "",
-  "index_no": "",
-  "atp": "",
+  "ec_no": "217-635-6",
+  "index_no": "607-043-00-X",
+  "atp": "ATP22",
   "notes": [],
   "classification": {
     "hazards": [
@@ -37,9 +37,7 @@
         "h_code": "H411"
       }
     ],
-    "m_factors": {
-      "acute": 1
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

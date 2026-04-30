@@ -2,9 +2,9 @@
   "cas": "68516-81-4",
   "name": "2-[ethyl[3-methyl-4-[(5-nitrothiazol-2-yl)azo]phenyl]amino]ethanol",
   "name_tr": "",
-  "ec_no": "",
-  "index_no": "",
-  "atp": "",
+  "ec_no": "271-183-4",
+  "index_no": "611-182-00-1",
+  "atp": "ATP22",
   "notes": [],
   "classification": {
     "hazards": [
@@ -14,7 +14,14 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H317",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Warning",

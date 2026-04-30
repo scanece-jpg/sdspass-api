@@ -2,9 +2,9 @@
   "cas": "127-06-0",
   "name": "acetone oxime",
   "name_tr": "",
-  "ec_no": "",
-  "index_no": "",
-  "atp": "",
+  "ec_no": "204-820-1",
+  "index_no": "606-156-00-1",
+  "atp": "ATP22",
   "notes": [],
   "classification": {
     "hazards": [
@@ -22,7 +22,7 @@
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373 (blood system)"
+        "h_code": "H373(blood_system)"
       },
       {
         "class": "Eye Dam. 1",
@@ -47,7 +47,7 @@
       "H350",
       "H312",
       "H336",
-      "H373 (blood system)",
+      "H373(blood_system)",
       "H318",
       "H317"
     ],

@@ -1,10 +1,10 @@
 {
   "cas": "1205-17-0",
-  "name": "Î±-methyl-1,3-benzodioxole-5-propionaldehyde [1]\n(S)-Î±-methyl-1,3-benzodioxole-5-propionaldehyde; (2S)-3-(1,3-benzodioxol-5-yl)-2-methylpropanal [2]\n(R)-Î±-methyl-1,3-benzodioxole-5-propionaldehyde; (2R)-3-(1,3-benzodioxol-5-yl)-2-methylpropanal [3]",
+  "name": "α-methyl-1,3-benzodioxole-5-propionaldehyde [1]\n(S)-α-methyl-1,3-benzodioxole-5-propionaldehyde; (2S)-3-(1,3-benzodioxol-5-yl)-2-methylpropanal [2]\n(R)-α-methyl-1,3-benzodioxole-5-propionaldehyde; (2R)-3-(1,3-benzodioxol-5-yl)-2-methylpropanal [3]",
   "name_tr": "",
-  "ec_no": "",
-  "index_no": "",
-  "atp": "",
+  "ec_no": "214-881-6 [1]\n- [2]\n- [3]",
+  "index_no": "605-042-00-9",
+  "atp": "ATP22",
   "notes": [],
   "classification": {
     "hazards": [

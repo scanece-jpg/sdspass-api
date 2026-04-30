@@ -2,9 +2,9 @@
   "cas": "121-79-9",
   "name": "propyl 3,4,5-trihydroxybenzoate",
   "name_tr": "",
-  "ec_no": "",
-  "index_no": "",
-  "atp": "",
+  "ec_no": "204-498-2",
+  "index_no": "607-198-00-3",
+  "atp": "ATP22",
   "notes": [],
   "classification": {
     "hazards": [
@@ -25,10 +25,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 1,
-      "chronic": 1
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

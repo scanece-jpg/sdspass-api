@@ -3,8 +3,8 @@
   "name": "n-hexane",
   "name_tr": "",
   "ec_no": "203-777-6",
-  "index_no": "",
-  "atp": "",
+  "index_no": "601-037-00-0",
+  "atp": "ATP22",
   "notes": [],
   "classification": {
     "hazards": [
@@ -14,7 +14,7 @@
       },
       {
         "class": "Repr. 2",
-        "h_code": "H361f ***"
+        "h_code": "H361f"
       },
       {
         "class": "Asp. Tox. 1",
@@ -26,7 +26,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 (nervous system)"
+        "h_code": "H372(nervous_system)"
       },
       {
         "class": "Skin Irrit. 2",
@@ -50,10 +50,10 @@
     ],
     "h_codes": [
       "H225",
-      "H361f ***",
+      "H361f",
       "H304",
       "H336",
-      "H372 (nervous system)",
+      "H372(nervous_system)",
       "H315",
       "H411"
     ],

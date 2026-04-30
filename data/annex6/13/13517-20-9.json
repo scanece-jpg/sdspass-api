@@ -1,11 +1,13 @@
 {
   "cas": "13517-20-9",
-  "name": "perboric acid (H3BO2(O2)), monosodium salt trihydrate [1]\nperboric acid, sodium salt, tetrahydrate [2]\nperboric acid (HBO(O2)), sodium salt, tetrahydrate [3]\nsodium peroxoborate, hexahydrate [4]",
+  "name": "perboric acid (H 3 BO 2(O2 )),\nmonosodium salt trihydrate [1]\nperboric acid, sodium salt, tetrahydrate [2]\nperboric acid (HBO(O 2 )), sodium salt, tetrahydrate [3]\nsodium peroxoborate, hexahydrate [4]",
   "name_tr": "",
-  "ec_no": "",
-  "index_no": "",
-  "atp": "",
-  "notes": [],
+  "ec_no": "239-172-9 [1]\n234-390-0 [2]\n- [3]\n- [4]",
+  "index_no": "005-023-00-X",
+  "atp": "ATP22",
+  "notes": [
+    "11"
+  ],
   "classification": {
     "hazards": [
       {
@@ -26,14 +28,27 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H318",
+        "class": "",
+        "c_min": 36.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H319",
+        "class": "",
+        "c_min": 22.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
     "pictograms": [
       "GHS08",
-      "GHS07",
-      "GHS05"
+      "GHS05",
+      "GHS07"
     ],
     "h_codes": [
       "H360FD",

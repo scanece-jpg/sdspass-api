@@ -2,9 +2,9 @@
   "cas": "18402-84-1",
   "name": "(3E)-dec-3-en-2-one",
   "name_tr": "",
-  "ec_no": "",
-  "index_no": "",
-  "atp": "",
+  "ec_no": "-",
+  "index_no": "606-157-00-7",
+  "atp": "ATP22",
   "notes": [],
   "classification": {
     "hazards": [
@@ -41,6 +41,8 @@
       "H315",
       "H411"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH071"
+    ]
   }
 }

@@ -1,21 +1,13 @@
 {
-  "cas": "106700-29-2",
-  "name": "pethoxamide (ISO); 2-chloro-N-(2-ethoxyethyl)-N-(2-methyl-1-phenylprop-1-enyl)acetamide",
+  "cas": "7440-50-8",
+  "name": "copper [specific surface area > 0,67 mm2/mg]",
   "name_tr": "",
-  "ec_no": "-",
-  "index_no": "616-145-00-3",
-  "atp": "ATP1",
+  "ec_no": "231-159-6",
+  "index_no": "029-026-00-0",
+  "atp": "ATP22",
   "notes": [],
   "classification": {
     "hazards": [
-      {
-        "class": "Acute Tox. 4",
-        "h_code": "H302"
-      },
-      {
-        "class": "Skin Sens. 1",
-        "h_code": "H317"
-      },
       {
         "class": "Aquatic Acute 1",
         "h_code": "H400"
@@ -31,12 +23,9 @@
   "labelling": {
     "signal": "Warning",
     "pictograms": [
-      "GHS07",
       "GHS09"
     ],
     "h_codes": [
-      "H302",
-      "H317",
       "H400",
       "H410"
     ],

@@ -1,16 +1,16 @@
 {
-  "cas": "7704-34-9",
-  "name": "sulfur",
+  "cas": "29385-43-1",
+  "name": "methyl-1H-benzotriazole",
   "name_tr": "",
-  "ec_no": "231-722-6",
-  "index_no": "016-094-00-1",
+  "ec_no": "249-596-6",
+  "index_no": "613-351-00-5",
   "atp": "ATP22",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Skin Irrit. 2",
-        "h_code": "H315"
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
       }
     ],
     "m_factors": {},
@@ -19,10 +19,10 @@
   "labelling": {
     "signal": "Warning",
     "pictograms": [
-      "GHS07"
+      "GHS09"
     ],
     "h_codes": [
-      "H315"
+      "H411"
     ],
     "suppl_h": []
   }

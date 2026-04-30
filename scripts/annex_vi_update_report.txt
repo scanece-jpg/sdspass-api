@@ -1,0 +1,151 @@
+ECHA CLP Annex VI Güncelleme Raporu 
+============================================================
+Excel        : C:\Users\user\Desktop\annex_vi_clp_table_atp22_en.xlsx
+Toplam madde : 3840
+Yeni eklenen : 17
+Güncellenen  : 37
+Atlanan      : 3786
+cl/ uyarısı  : 65
+
+
+Yeni Eklenenler (17):
+  + 1314-85-8 (tetraphosphorus trisulphide; phosphorus )
+  + 75-08-1 (ethanethiol; ethyl mercaptan)
+  + 7440-50-8 (copper [specific surface area > 0,67 mm2)
+  + 7440-22-4 (silver massive: [particle diameter ≥ 1 m)
+  + 75-35-4 (1,1-dichloroethylene; vinylidene chlorid)
+  + 127087-87-0 (nonylphenol, branched and linear, ethoxy)
+  + 119344-86-4 (2-(dimethylamino)-
+2-[(4-methylphenyl)
+m)
+  + 89-61-2 (1,4-dichloro-2-nitrobenzene)
+  + 531-85-1 (salts of benzidine [ [1]
+salts of benzid)
+  + 553-00-4 (salts of 2-naphthylamine [1]
+salts of 2-)
+  + 612-82-8 (salts of 4,4'-bi-o-toluidine; salts of 3)
+  + 95-14-7 (1H-benzotriazole)
+  + 29385-43-1 (methyl-1H-benzotriazole)
+  + 189278-12-4 (proquinazid (ISO); 6-iodo-2-propoxy-3-pr)
+  + 110-26-9 (N,N'-methylenediacrylamide)
+  + 12001-28-4 (asbestos [1]
+asbestos [2]
+asbestos [3]
+a)
+  + 8050-09-7 (rosin; colophony [1]
+rosin; colophony [2)
+
+Güncellenenler (37):
+  ↑ 11138-47-9 —  → ATP22
+  ↑ 13517-20-9 —  → ATP22
+  ↑ 7632-04-4 —  → ATP22
+  ↑ 7704-34-9 —  → ATP22
+  ↑ 13463-67-7 —  → ATP14
+  ↑ 110-54-3 —  → ATP22
+  ↑ 90-43-7 —  → ATP22
+  ↑ 50-00-0 —  → ATP22
+  ↑ 1205-17-0 —  → ATP22
+  ↑ 68039-49-6 —  → ATP22
+  ↑ 127-06-0 —  → ATP22
+  ↑ 18402-84-1 —  → ATP22
+  ↑ 64-18-6 —  → ATP22
+  ↑ 1918-00-9 —  → ATP22
+  ↑ 79-21-0 —  → ATP22
+  ↑ 121-79-9 —  → ATP22
+  ↑ 1702-17-6 —  → ATP1
+  ↑ 1071-83-6 —  → ATP22
+  ↑ 52315-07-8 — CLP00 → ATP17
+  ↑ 87392-12-9 —  → ATP22
+  ↑ 26761-45-5 —  → ATP22
+  ↑ 177406-68-7 —  → ATP22
+  ↑ 6259-76-3 —  → ATP22
+  ↑ 2386-87-0 —  → ATP22
+  ↑ 17095-24-8 —  → ATP22
+  ↑ 52556-42-0 —  → ATP22
+  ↑ 68516-81-4 —  → ATP22
+  ↑ 96-91-3 — CLP00 → ATP1
+  ↑ 67306-00-7 —  → ATP22
+  ↑ 133-06-2 —  → ATP1
+  ↑ 133-07-3 —  → ATP1
+  ↑ 175013-18-0 —  → ATP22
+  ↑ 106700-29-2 —  → ATP1
+  ↑ 55406-53-6 —  → ATP6
+  ↑ 94-36-0 —  → ATP22
+  ↑ 78-18-2 — CLP00 → ATP1
+  ↑ 3006-82-4 —  → ATP22
+
+cl/ ile Çelişenler — Manuel Güncelleme Gerekli (65):
+  ⚠  330-54-1 (diuron (ISO); 3-(3,4-dichlorophenyl): cl/=H351 ← Annex VI=H350 daha sıkı — cl/ güncellenmeli
+  ⚠  10025-78-2 (trichlorosilane): cl/=H332 ← Annex VI=H331 daha sıkı — cl/ güncellenmeli
+  ⚠  556-67-2 (octamethylcyclotetrasiloxane; [D4]): cl/=H413 ← Annex VI=H410 daha sıkı — cl/ güncellenmeli
+  ⚠  75980-60-8 (diphenyl(2,4,6-trimethylbenzoyl)pho): cl/=H361 ← Annex VI=H360 daha sıkı — cl/ güncellenmeli
+  ⚠  75-08-1 (ethanethiol; ethyl mercaptan): cl/=H332 ← Annex VI=H331 daha sıkı — cl/ güncellenmeli
+  ⚠  3811-04-9 (potassium chlorate): cl/=H302 ← Annex VI=H301 daha sıkı — cl/ güncellenmeli
+  ⚠  7775-09-9 (sodium chlorate): cl/=H302 ← Annex VI=H301 daha sıkı — cl/ güncellenmeli
+  ⚠  1314-62-1 (divanadium pentaoxide; vanadium pen): cl/=H302 ← Annex VI=H301 daha sıkı — cl/ güncellenmeli
+  ⚠  1314-62-1 (divanadium pentaoxide; vanadium pen): cl/=H332 ← Annex VI=H330 daha sıkı — cl/ güncellenmeli
+  ⚠  3542-36-7 (dichlorodioctylstannane): cl/=H331 ← Annex VI=H330 daha sıkı — cl/ güncellenmeli
+  ⚠  7439-92-1 (lead powder;  [particle diameter < ): cl/=H362 ← Annex VI=H360 daha sıkı — cl/ güncellenmeli
+  ⚠  7439-92-1 (lead massive:  [particle diameter ≥): cl/=H362 ← Annex VI=H360 daha sıkı — cl/ güncellenmeli
+  ⚠  110-54-3 (n-hexane): cl/=H373 ← Annex VI=H372 daha sıkı — cl/ güncellenmeli
+  ⚠  2385-85-5 (dodecachloropentacyclo[5.2.1.02,6.0): cl/=H362 ← Annex VI=H361 daha sıkı — cl/ güncellenmeli
+  ⚠  25637-99-4 (Hexabromocyclododecane [1]
+1,2,5,6,): cl/=H362 ← Annex VI=H361 daha sıkı — cl/ güncellenmeli
+  ⚠  111-76-2 (2-butoxyethanol; ethylene glycol mo): cl/=H332 ← Annex VI=H331 daha sıkı — cl/ güncellenmeli
+  ⚠  75-21-8 (ethylene oxide;
+oxirane): cl/=H315 ← Annex VI=H314 daha sıkı — cl/ güncellenmeli
+  ⚠  75-21-8 (ethylene oxide;
+oxirane): cl/=H319 ← Annex VI=H318 daha sıkı — cl/ güncellenmeli
+  ⚠  123-91-1 (1,4-dioxane): cl/=H351 ← Annex VI=H350 daha sıkı — cl/ güncellenmeli
+  ⚠  101-90-6 (m-bis(2,3-epoxypropoxy)benzene; res): cl/=H351 ← Annex VI=H350 daha sıkı — cl/ güncellenmeli
+  ⚠  101-90-6 (m-bis(2,3-epoxypropoxy)benzene; res): cl/=H312 ← Annex VI=H311 daha sıkı — cl/ güncellenmeli
+  ⚠  106-87-6 (7-oxa-3-oxiranylbicyclo [4.1.0]hept): cl/=H351 ← Annex VI=H350 daha sıkı — cl/ güncellenmeli
+  ⚠  122-99-6 (2-phenoxyethanol): cl/=H319 ← Annex VI=H318 daha sıkı — cl/ güncellenmeli
+  ⚠  60168-88-9 (fenarimol (ISO); 2,4'-dichloro-α-(p): cl/=H362 ← Annex VI=H361 daha sıkı — cl/ güncellenmeli
+  ⚠  111-77-3 (2-(2-methoxyethoxy)ethanol; diethyl): cl/=H361 ← Annex VI=H360 daha sıkı — cl/ güncellenmeli
+  ⚠  90-43-7 (biphenyl-2-ol; 2-phenylphenol; 2-hy): cl/=H315 ← Annex VI=H314 daha sıkı — cl/ güncellenmeli
+  ⚠  90-43-7 (biphenyl-2-ol; 2-phenylphenol; 2-hy): cl/=H319 ← Annex VI=H318 daha sıkı — cl/ güncellenmeli
+  ⚠  108-62-3 (metaldehyde (ISO); 2,4,6,8-tetramet): cl/=H302 ← Annex VI=H301 daha sıkı — cl/ güncellenmeli
+  ⚠  140-88-5 (ethyl acrylate): cl/=H332 ← Annex VI=H331 daha sıkı — cl/ güncellenmeli
+  ⚠  96-33-3 (methyl acrylate;  methyl propenoate): cl/=H332 ← Annex VI=H331 daha sıkı — cl/ güncellenmeli
+  ⚠  1918-00-9 (dicamba (ISO); 2,5-dichloro-6-metho): cl/=H412 ← Annex VI=H411 daha sıkı — cl/ güncellenmeli
+  ⚠  79-21-0 (peracetic acid . . . %): cl/=H332 ← Annex VI=H330 daha sıkı — cl/ güncellenmeli
+  ⚠  79-21-0 (peracetic acid . . . %): cl/=H312 ← Annex VI=H310 daha sıkı — cl/ güncellenmeli
+  ⚠  79-21-0 (peracetic acid . . . %): cl/=H302 ← Annex VI=H301 daha sıkı — cl/ güncellenmeli
+  ⚠  96-05-9 (allyl methacrylate;  2-methyl-2-pro): cl/=H331 ← Annex VI=H330 daha sıkı — cl/ güncellenmeli
+  ⚠  96-05-9 (allyl methacrylate;  2-methyl-2-pro): cl/=H312 ← Annex VI=H311 daha sıkı — cl/ güncellenmeli
+  ⚠  26225-79-6 (ethofumesate (ISO); (RS)-2-ethoxy-2): cl/=H411 ← Annex VI=H410 daha sıkı — cl/ güncellenmeli
+  ⚠  16484-77-8 (mecoprop-P [1] and its salts;; (R)-): cl/=H411 ← Annex VI=H410 daha sıkı — cl/ güncellenmeli
+  ⚠  1763-23-1 (perfluorooctane sulfonic acid; hept): cl/=H362 ← Annex VI=H360 daha sıkı — cl/ güncellenmeli
+  ⚠  3825-26-1 (ammoniumpentadeca- fluorooctanoate): cl/=H362 ← Annex VI=H360 daha sıkı — cl/ güncellenmeli
+  ⚠  335-67-1 (perfluorooctanoic acid): cl/=H362 ← Annex VI=H360 daha sıkı — cl/ güncellenmeli
+  ⚠  375-95-1 (perfluorononan-1-oic acid [1]
+perfl): cl/=H362 ← Annex VI=H360 daha sıkı — cl/ güncellenmeli
+  ⚠  335-76-2 (nonadecafluorodecanoic acid [1]
+amm): cl/=H362 ← Annex VI=H360 daha sıkı — cl/ güncellenmeli
+  ⚠  135410-20-7 (acetamiprid (ISO); (1E)-N-[(6-chlor): cl/=H302 ← Annex VI=H301 daha sıkı — cl/ güncellenmeli
+  ⚠  135410-20-7 (acetamiprid (ISO); (1E)-N-[(6-chlor): cl/=H412 ← Annex VI=H410 daha sıkı — cl/ güncellenmeli
+  ⚠  51-28-5 (2,4-dinitrophenol): cl/=H301 ← Annex VI=H300 daha sıkı — cl/ güncellenmeli
+  ⚠  51-28-5 (2,4-dinitrophenol): cl/=H373 ← Annex VI=H372 daha sıkı — cl/ güncellenmeli
+  ⚠  121-44-8 (triethylamine): cl/=H332 ← Annex VI=H331 daha sıkı — cl/ güncellenmeli
+  ⚠  121-44-8 (triethylamine): cl/=H312 ← Annex VI=H311 daha sıkı — cl/ güncellenmeli
+  ⚠  121-44-8 (triethylamine): cl/=H302 ← Annex VI=H301 daha sıkı — cl/ güncellenmeli
+  ⚠  111-92-2 (di-n-butylamine): cl/=H332 ← Annex VI=H330 daha sıkı — cl/ güncellenmeli
+  ⚠  111-92-2 (di-n-butylamine): cl/=H312 ← Annex VI=H311 daha sıkı — cl/ güncellenmeli
+  ⚠  111-92-2 (di-n-butylamine): cl/=H302 ← Annex VI=H301 daha sıkı — cl/ güncellenmeli
+  ⚠  113674-95-6 (4-(2-chloro-4-trifluoromethyl)pheno): cl/=H373 ← Annex VI=H372 daha sıkı — cl/ güncellenmeli
+  ⚠  138261-41-3 (imidacloprid (ISO);
+(E)-1-(6-chloro): cl/=H302 ← Annex VI=H301 daha sıkı — cl/ güncellenmeli
+  ⚠  288-88-0 (1,2,4-triazole): cl/=H361 ← Annex VI=H360 daha sıkı — cl/ güncellenmeli
+  ⚠  26530-20-1 (octhilinone (ISO); 2-octyl-2H-isoth): cl/=H331 ← Annex VI=H330 daha sıkı — cl/ güncellenmeli
+  ⚠  26530-20-1 (octhilinone (ISO); 2-octyl-2H-isoth): cl/=H302 ← Annex VI=H301 daha sıkı — cl/ güncellenmeli
+  ⚠  10004-44-1 (hymexazol (ISO); 3-hydroxy-5-methyl): cl/=H412 ← Annex VI=H411 daha sıkı — cl/ güncellenmeli
+  ⚠  24307-26-4 (mepiquat chloride (ISO); 1,1-dimeth): cl/=H302 ← Annex VI=H301 daha sıkı — cl/ güncellenmeli
+  ⚠  123312-89-0 (pymetrozine (ISO); (E)-4,5-dihydro-): cl/=H412 ← Annex VI=H410 daha sıkı — cl/ güncellenmeli
+  ⚠  55219-65-3 (triadimenol (ISO);
+(1RS,2RS;1RS,2SR): cl/=H362 ← Annex VI=H360 daha sıkı — cl/ güncellenmeli
+  ⚠  3173-72-6 (1,5-naphthylene diisocyanate
+[conta): cl/=H332 ← Annex VI=H330 daha sıkı — cl/ güncellenmeli
+  ⚠  96-29-7 (butanone oxime; ethyl methyl ketoxi): cl/=H351 ← Annex VI=H350 daha sıkı — cl/ güncellenmeli
+  ⚠  83164-33-4 (diflufenican (ISO);
+N-(2,4-difluoro): cl/=H412 ← Annex VI=H410 daha sıkı — cl/ güncellenmeli

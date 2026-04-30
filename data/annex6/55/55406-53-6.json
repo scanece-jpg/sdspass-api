@@ -2,15 +2,15 @@
   "cas": "55406-53-6",
   "name": "3-iodo-2-propynyl butylcarbamate; 3-iodoprop-2-yn-1-yl butylcarbamate",
   "name_tr": "",
-  "ec_no": "",
-  "index_no": "",
-  "atp": "",
+  "ec_no": "259-627-5",
+  "index_no": "616-212-00-7",
+  "atp": "ATP6",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 2",
-        "h_code": "H330"
+        "class": "Acute Tox. 3",
+        "h_code": "H331"
       },
       {
         "class": "Acute Tox. 4",
@@ -18,7 +18,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 (larynx)"
+        "h_code": "H372(larynx)"
       },
       {
         "class": "Eye Dam. 1",
@@ -37,10 +37,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -52,9 +49,9 @@
       "GHS09"
     ],
     "h_codes": [
-      "H330",
+      "H331",
       "H302",
-      "H372 (larynx)",
+      "H372(larynx)",
       "H318",
       "H317",
       "H400",

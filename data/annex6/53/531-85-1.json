@@ -1,20 +1,22 @@
 {
-  "cas": "106700-29-2",
-  "name": "pethoxamide (ISO); 2-chloro-N-(2-ethoxyethyl)-N-(2-methyl-1-phenylprop-1-enyl)acetamide",
+  "cas": "531-85-1",
+  "name": "salts of benzidine [ [1]\nsalts of benzidine [ [2]\nsalts of benzidine [ [3]\nsalts of benzidine [ [4]",
   "name_tr": "",
-  "ec_no": "-",
-  "index_no": "616-145-00-3",
-  "atp": "ATP1",
-  "notes": [],
+  "ec_no": "208-519-6 [1]\n208-520-1 [2]\n244-236-4 [3]\n252-984-8 [4]",
+  "index_no": "612-070-00-5",
+  "atp": "CLP00",
+  "notes": [
+    "A"
+  ],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4",
-        "h_code": "H302"
+        "class": "Carc. 1A",
+        "h_code": "H350"
       },
       {
-        "class": "Skin Sens. 1",
-        "h_code": "H317"
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
       },
       {
         "class": "Aquatic Acute 1",
@@ -29,14 +31,15 @@
     "scl_limits": []
   },
   "labelling": {
-    "signal": "Warning",
+    "signal": "Danger",
     "pictograms": [
+      "GHS08",
       "GHS07",
       "GHS09"
     ],
     "h_codes": [
+      "H350",
       "H302",
-      "H317",
       "H400",
       "H410"
     ],

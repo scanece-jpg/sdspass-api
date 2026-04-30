@@ -2,9 +2,9 @@
   "cas": "94-36-0",
   "name": "dibenzoyl peroxide; benzoyl peroxide",
   "name_tr": "",
-  "ec_no": "",
-  "index_no": "",
-  "atp": "",
+  "ec_no": "202-327-6",
+  "index_no": "617-008-00-0",
+  "atp": "ATP22",
   "notes": [],
   "classification": {
     "hazards": [
@@ -29,10 +29,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {

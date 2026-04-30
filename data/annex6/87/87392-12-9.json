@@ -1,10 +1,10 @@
 {
   "cas": "87392-12-9",
-  "name": "S-metolachlor (ISO); 2-chloro-N-(2-ethyl-6-methylphenyl)-N-[(2S)-1-methoxypropan-2-yl]acetamide; (R a S a)-2-chloro-N-(6-ethyl-o-tolyl)-N-[(1S)-2-methoxy-1-methylethyl]acetamide; [contains 80-100 % 2-chloro-N-(2-ethyl-6-methylphenyl)-N-[(2S)-1-methoxypropan-2-yl]acetamide and 0-20 % 2-chloro-N-(2-ethyl-6-methylphenyl)-N-[(2R)-1-methoxypropan-2-yl]acetamide]",
+  "name": "S-metolachlor (ISO); 2-chloro-N-(2-ethyl-6-methylphenyl)-N-[(2S)-1-methoxypropan-2-yl]acetamide; (R a S a)-2-chloro-N-(6-ethyl-o-tolyl)-N-[(1S)-2-methoxy-1-methylethyl]acetamide\n[contains 80-100 % 2-chloro-N-(2-ethyl-6-methylphenyl)-N-[(2S)-1-methoxypropan-2-yl]acetamide and 0-20 % 2-chloro-N-(2-ethyl-6-methylphenyl)-N-[(2R)-1-methoxypropan-2-yl]acetamide]",
   "name_tr": "",
-  "ec_no": "",
-  "index_no": "",
-  "atp": "",
+  "ec_no": "-",
+  "index_no": "607-432-00-4",
+  "atp": "ATP22",
   "notes": [],
   "classification": {
     "hazards": [
@@ -25,10 +25,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -44,6 +41,8 @@
       "H400",
       "H410"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH066"
+    ]
   }
 }

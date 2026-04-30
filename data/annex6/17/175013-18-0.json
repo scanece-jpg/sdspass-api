@@ -1,10 +1,10 @@
 {
   "cas": "175013-18-0",
-  "name": "pyraclostrobin (ISO); methyl N-(2-{[1-(4-chlorophenyl)-1H-pyrazol-3-yl]oxymethyl}phenyl) N-methoxy carbamate",
+  "name": "pyraclostrobin (ISO); methyl N-{2-[1-(4-chlorophenyl)-1H-pyrazol-3-yloxymethyl]phenyl}(N-methoxy)carbamate",
   "name_tr": "",
-  "ec_no": "",
-  "index_no": "",
-  "atp": "",
+  "ec_no": "-",
+  "index_no": "613-272-00-6",
+  "atp": "ATP22",
   "notes": [],
   "classification": {
     "hazards": [
@@ -26,7 +26,7 @@
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373 (liver, gastrointestinal tract, nasal cavity)"
+        "h_code": "H373(liver,_gastrointestinal_tract,_nasal_cavity)"
       },
       {
         "class": "Skin Irrit. 2",
@@ -41,10 +41,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 100,
-      "chronic": 100
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
@@ -59,7 +56,7 @@
       "H331",
       "H302",
       "H335",
-      "H373 (liver, gastrointestinal tract, nasal cavity)",
+      "H373(liver,_gastrointestinal_tract,_nasal_cavity)",
       "H315",
       "H400",
       "H410"

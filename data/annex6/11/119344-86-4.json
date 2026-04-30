@@ -1,20 +1,16 @@
 {
-  "cas": "106700-29-2",
-  "name": "pethoxamide (ISO); 2-chloro-N-(2-ethoxyethyl)-N-(2-methyl-1-phenylprop-1-enyl)acetamide",
+  "cas": "119344-86-4",
+  "name": "2-(dimethylamino)-\n2-[(4-methylphenyl)\nmethyl]-1-[4-(morpholin-\n4-yl)phenyl]butan-1-one",
   "name_tr": "",
-  "ec_no": "-",
-  "index_no": "616-145-00-3",
-  "atp": "ATP1",
+  "ec_no": "438-340-0",
+  "index_no": "606-158-00-2",
+  "atp": "ATP22",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4",
-        "h_code": "H302"
-      },
-      {
-        "class": "Skin Sens. 1",
-        "h_code": "H317"
+        "class": "Repr. 1B",
+        "h_code": "H360Df"
       },
       {
         "class": "Aquatic Acute 1",
@@ -29,14 +25,13 @@
     "scl_limits": []
   },
   "labelling": {
-    "signal": "Warning",
+    "signal": "Danger",
     "pictograms": [
-      "GHS07",
+      "GHS08",
       "GHS09"
     ],
     "h_codes": [
-      "H302",
-      "H317",
+      "H360Df",
       "H400",
       "H410"
     ],

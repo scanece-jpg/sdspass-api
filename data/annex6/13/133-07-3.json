@@ -2,9 +2,9 @@
   "cas": "133-07-3",
   "name": "folpet (ISO); N-(trichloromethylthio)phthalimide",
   "name_tr": "",
-  "ec_no": "",
-  "index_no": "",
-  "atp": "",
+  "ec_no": "205-088-6",
+  "index_no": "613-045-00-1",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,52 +13,38 @@
         "h_code": "H351"
       },
       {
-        "class": "Acute Tox. 2",
-        "h_code": "H330"
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
       },
       {
-        "class": "STOT RE 1",
-        "h_code": "H372 (respiratory tract)"
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
-        "class": "Eye Dam. 1",
-        "h_code": "H318"
-      },
-      {
-        "class": "Skin Sens. 1A",
+        "class": "Skin Sens. 1",
         "h_code": "H317"
       },
       {
         "class": "Aquatic Acute 1",
         "h_code": "H400"
-      },
-      {
-        "class": "Aquatic Chronic 1",
-        "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 10
-    },
+    "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
-    "signal": "Danger",
+    "signal": "Warning",
     "pictograms": [
       "GHS08",
-      "GHS06",
-      "GHS05",
+      "GHS07",
       "GHS09"
     ],
     "h_codes": [
       "H351",
-      "H330",
-      "H372 (respiratory tract)",
-      "H318",
+      "H332",
+      "H319",
       "H317",
-      "H400",
-      "H410"
+      "H400"
     ],
     "suppl_h": []
   }

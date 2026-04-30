@@ -1,11 +1,13 @@
 {
   "cas": "50-00-0",
-  "name": "formaldehyde â€¦ %",
+  "name": "formaldehyde …%",
   "name_tr": "",
-  "ec_no": "",
-  "index_no": "",
-  "atp": "",
-  "notes": [],
+  "ec_no": "200-001-8",
+  "index_no": "605-001-00-5",
+  "atp": "ATP22",
+  "notes": [
+    "B D F"
+  ],
   "classification": {
     "hazards": [
       {
@@ -34,7 +36,32 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H335",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H314",
+        "class": "",
+        "c_min": 25.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H315",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H319",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
@@ -51,6 +78,8 @@
       "H314",
       "H317"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH071"
+    ]
   }
 }

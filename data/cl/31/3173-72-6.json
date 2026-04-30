@@ -4,13 +4,15 @@
   "name_tr": "1,5-naftilendiizosiyanat",
   "ec_no": "221-641-4",
   "index_no": "615-007-00-X",
-  "atp": "",
-  "notes": [],
+  "atp": "ATP18",
+  "notes": [
+    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
+  ],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4",
-        "h_code": "H332"
+        "class": "Acute Tox. 2",
+        "h_code": "H330"
       },
       {
         "class": "Eye Irrit. 2",
@@ -43,7 +45,7 @@
       "GHS07"
     ],
     "h_codes": [
-      "H332",
+      "H330",
       "H319",
       "H335",
       "H315",

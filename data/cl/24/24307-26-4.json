@@ -4,13 +4,15 @@
   "name_tr": "1,1-dimetilpiperidinyum klorür; mepikuat klorür",
   "ec_no": "246-147-6",
   "index_no": "613-127-00-7",
-  "atp": "",
-  "notes": [],
+  "atp": "ATP21",
+  "notes": [
+    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
+  ],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4",
-        "h_code": "H302"
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
       },
       {
         "class": "Aquatic Chronic 3",
@@ -26,7 +28,7 @@
       "GHS07"
     ],
     "h_codes": [
-      "H302",
+      "H301",
       "H412"
     ],
     "suppl_h": []

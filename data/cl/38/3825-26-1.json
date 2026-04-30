@@ -4,8 +4,10 @@
   "name_tr": "amonyum pentadekaflorooktanoat",
   "ec_no": "223-320-4",
   "index_no": "607-703-00-7",
-  "atp": "",
-  "notes": [],
+  "atp": "ATP05",
+  "notes": [
+    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
+  ],
   "classification": {
     "hazards": [
       {
@@ -17,8 +19,8 @@
         "h_code": "H360D"
       },
       {
-        "class": "Lact.",
-        "h_code": "H362"
+        "class": "Repr. 1B",
+        "h_code": "H360D"
       },
       {
         "class": "Acute Tox. 4",
@@ -50,7 +52,7 @@
     "h_codes": [
       "H351",
       "H360D",
-      "H362",
+      "H360D",
       "H332",
       "H302",
       "H372",

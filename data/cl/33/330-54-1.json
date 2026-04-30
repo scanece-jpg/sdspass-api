@@ -4,13 +4,15 @@
   "name_tr": "diüron (ISO); 3-(3,4- diklorofenil)-1,1-dimetilüre",
   "ec_no": "206-354-4",
   "index_no": "006-015-00-9",
-  "atp": "",
-  "notes": [],
+  "atp": "ATP21",
+  "notes": [
+    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
+  ],
   "classification": {
     "hazards": [
       {
-        "class": "Carc. 2",
-        "h_code": "H351"
+        "class": "Carc. 1B",
+        "h_code": "H350"
       },
       {
         "class": "Acute Tox. 4",
@@ -43,7 +45,7 @@
       "GHS09"
     ],
     "h_codes": [
-      "H351",
+      "H350",
       "H302",
       "H373",
       "H400",

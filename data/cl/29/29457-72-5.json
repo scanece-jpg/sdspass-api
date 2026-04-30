@@ -4,8 +4,10 @@
   "name_tr": "perflorooktan sülfonik asit; heptadekaflorooktan-1-sülfonik asit; [1] potasyumperflorooktan sülfonik asit; potasyum heptadekaflorooktan- 1-sülfonat; [2] dietanolamin perflorooktan sülfonat; [3] amonyum perflorooktan sülfonat; amonyum heptadekaflorooktansülfonat; [4] lityum perflorooktan sülfonat; lityum heotaflorooktansülfonat; [5]",
   "ec_no": "217-179-8",
   "index_no": "607-624-00-8",
-  "atp": "",
-  "notes": [],
+  "atp": "ATP01",
+  "notes": [
+    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
+  ],
   "classification": {
     "hazards": [
       {
@@ -29,8 +31,8 @@
         "h_code": "H302"
       },
       {
-        "class": "Lact.",
-        "h_code": "H362"
+        "class": "Repr. 1B",
+        "h_code": "H360D ***"
       },
       {
         "class": "Aquatic Chronic 2",
@@ -53,7 +55,7 @@
       "H372",
       "H332",
       "H302",
-      "H362",
+      "H360D ***",
       "H411"
     ],
     "suppl_h": []

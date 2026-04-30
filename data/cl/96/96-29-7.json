@@ -4,13 +4,15 @@
   "name_tr": "2-bütanonoksim; etilmetilketoksim; etil metil keton oksim",
   "ec_no": "202-496-6",
   "index_no": "616-014-00-0",
-  "atp": "",
-  "notes": [],
+  "atp": "ATP15",
+  "notes": [
+    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
+  ],
   "classification": {
     "hazards": [
       {
-        "class": "Carc. 2",
-        "h_code": "H351"
+        "class": "Carc. 1B",
+        "h_code": "H350"
       },
       {
         "class": "Acute Tox. 4",
@@ -36,7 +38,7 @@
       "GHS07"
     ],
     "h_codes": [
-      "H351",
+      "H350",
       "H312",
       "H318",
       "H317"

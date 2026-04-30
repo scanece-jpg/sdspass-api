@@ -4,10 +4,11 @@
   "name_tr": "mono-metilamin; [1] di-metilamin; [2] tri-metilamin [3]",
   "ec_no": "200-820-0",
   "index_no": "612-001-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "U",
-    "5"
+    "5",
+    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
   ],
   "classification": {
     "hazards": [
@@ -24,8 +25,8 @@
         "h_code": "H335"
       },
       {
-        "class": "STOT SE 3",
-        "h_code": "H315"
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
       },
       {
         "class": "Skin Irrit. 2",
@@ -66,7 +67,7 @@
       "H220",
       "H332",
       "H335",
-      "H315",
+      "H314",
       "H318"
     ],
     "suppl_h": []

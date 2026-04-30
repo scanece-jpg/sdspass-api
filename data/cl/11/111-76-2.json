@@ -4,13 +4,15 @@
   "name_tr": "2-bütoksietanol; etilen glikol monobütil eter; bütilsellosolve",
   "ec_no": "203-905-0",
   "index_no": "603-014-00-0",
-  "atp": "",
-  "notes": [],
+  "atp": "ATP18",
+  "notes": [
+    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
+  ],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4",
-        "h_code": "H332"
+        "class": "Acute Tox. 3",
+        "h_code": "H331"
       },
       {
         "class": "Acute Tox. 4",
@@ -38,7 +40,7 @@
       "GHS07"
     ],
     "h_codes": [
-      "H332",
+      "H331",
       "H312",
       "H302",
       "H319",

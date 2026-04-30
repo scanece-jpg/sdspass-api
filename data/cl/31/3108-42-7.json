@@ -4,8 +4,10 @@
   "name_tr": "nonadekaflorodekanoik asit; [1] amounyum nonadeka florodekanoat; [2] sodyum nonadeka florodekanoat; [3]",
   "ec_no": "206-400-3",
   "index_no": "607-720-00-X",
-  "atp": "",
-  "notes": [],
+  "atp": "ATP10",
+  "notes": [
+    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
+  ],
   "classification": {
     "hazards": [
       {
@@ -17,8 +19,8 @@
         "h_code": "H360Df"
       },
       {
-        "class": "Lact.",
-        "h_code": "H362"
+        "class": "Repr. 1B",
+        "h_code": "H360Df"
       }
     ],
     "m_factors": {},
@@ -32,7 +34,7 @@
     "h_codes": [
       "H351",
       "H360Df",
-      "H362"
+      "H360Df"
     ],
     "suppl_h": []
   }

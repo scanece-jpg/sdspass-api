@@ -4,21 +4,23 @@
   "name_tr": "2-fenilfenol (ISO); bifenil-2-ol; 2-hidroksibifenil",
   "ec_no": "201-993-5",
   "index_no": "604-020-00-6",
-  "atp": "",
-  "notes": [],
+  "atp": "ATP22",
+  "notes": [
+    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
+  ],
   "classification": {
     "hazards": [
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
       },
       {
         "class": "STOT SE 3",
         "h_code": "H335"
       },
       {
-        "class": "Skin Irrit. 2",
-        "h_code": "H315"
+        "class": "Skin Corr. 1",
+        "h_code": "H314"
       },
       {
         "class": "Aquatic Acute 1",
@@ -35,9 +37,9 @@
       "GHS09"
     ],
     "h_codes": [
-      "H319",
+      "H318",
       "H335",
-      "H315",
+      "H314",
       "H400"
     ],
     "suppl_h": []

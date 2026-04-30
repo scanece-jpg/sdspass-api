@@ -4,8 +4,10 @@
   "name_tr": "triadimenol (ISO); (1RS,2RS;1RS,2SR)-1-(4- klorofenoksi)-3,3-dimetil-1-(1H- 1,2,4-triazol-1-il)bütan-2-ol; α-tert-bütil-β-(4-klorofenoksi)- 1H-1,2,4-triazol-1-etanol",
   "ec_no": "259-537-6",
   "index_no": "613-322-00-7",
-  "atp": "",
-  "notes": [],
+  "atp": "ATP10",
+  "notes": [
+    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
+  ],
   "classification": {
     "hazards": [
       {
@@ -13,8 +15,8 @@
         "h_code": "H360"
       },
       {
-        "class": "Lact.",
-        "h_code": "H362"
+        "class": "Repr. 1B",
+        "h_code": "H360"
       },
       {
         "class": "Acute Tox. 4",
@@ -37,7 +39,7 @@
     ],
     "h_codes": [
       "H360",
-      "H362",
+      "H360",
       "H302",
       "H411"
     ],

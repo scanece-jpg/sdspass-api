@@ -4,8 +4,10 @@
   "name_tr": "divanadyum pentaoksit; vanadyum pentoksit",
   "ec_no": "215-239-8",
   "index_no": "023-001-00-8",
-  "atp": "",
-  "notes": [],
+  "atp": "ATP18",
+  "notes": [
+    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
+  ],
   "classification": {
     "hazards": [
       {
@@ -21,12 +23,12 @@
         "h_code": "H372"
       },
       {
-        "class": "Acute Tox. 4",
-        "h_code": "H332"
+        "class": "Acute Tox. 2",
+        "h_code": "H330"
       },
       {
-        "class": "Acute Tox. 4",
-        "h_code": "H302"
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
       },
       {
         "class": "STOT SE 3",
@@ -51,8 +53,8 @@
       "H341",
       "H361d",
       "H372",
-      "H332",
-      "H302",
+      "H330",
+      "H301",
       "H335",
       "H411"
     ],

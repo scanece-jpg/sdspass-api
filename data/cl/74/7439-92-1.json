@@ -4,8 +4,10 @@
   "name_tr": "kurşun masif; [partikül çapı≥1mm]",
   "ec_no": "231-100-4",
   "index_no": "082-014-00-7",
-  "atp": "",
-  "notes": [],
+  "atp": "ATP21",
+  "notes": [
+    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
+  ],
   "classification": {
     "hazards": [
       {
@@ -13,8 +15,8 @@
         "h_code": "H360FD"
       },
       {
-        "class": "Lact.",
-        "h_code": "H362"
+        "class": "Repr. 1A",
+        "h_code": "H360FD"
       }
     ],
     "m_factors": {},
@@ -27,7 +29,7 @@
     ],
     "h_codes": [
       "H360FD",
-      "H362"
+      "H360FD"
     ],
     "suppl_h": []
   }

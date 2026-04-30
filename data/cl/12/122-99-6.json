@@ -4,8 +4,10 @@
   "name_tr": "2-fenoksietanol",
   "ec_no": "204-589-7",
   "index_no": "603-098-00-9",
-  "atp": "",
-  "notes": [],
+  "atp": "ATP17",
+  "notes": [
+    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
+  ],
   "classification": {
     "hazards": [
       {
@@ -13,8 +15,8 @@
         "h_code": "H302"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
       }
     ],
     "m_factors": {},
@@ -27,7 +29,7 @@
     ],
     "h_codes": [
       "H302",
-      "H319"
+      "H318"
     ],
     "suppl_h": []
   }

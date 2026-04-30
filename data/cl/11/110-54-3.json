@@ -4,8 +4,10 @@
   "name_tr": "n-hekzan",
   "ec_no": "203-777-6",
   "index_no": "601-037-00-0",
-  "atp": "",
-  "notes": [],
+  "atp": "ATP22",
+  "notes": [
+    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
+  ],
   "classification": {
     "hazards": [
       {
@@ -21,8 +23,8 @@
         "h_code": "H304"
       },
       {
-        "class": "STOT RE 2",
-        "h_code": "H373"
+        "class": "STOT RE 1",
+        "h_code": "H372(nervous_system)"
       },
       {
         "class": "Skin Irrit. 2",
@@ -59,7 +61,7 @@
       "H225",
       "H361f",
       "H304",
-      "H373",
+      "H372(nervous_system)",
       "H315",
       "H336",
       "H411"

@@ -4,13 +4,15 @@
   "name_tr": "1,2,4-triyazol",
   "ec_no": "206-022-9",
   "index_no": "613-111-00-X",
-  "atp": "",
-  "notes": [],
+  "atp": "ATP17",
+  "notes": [
+    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
+  ],
   "classification": {
     "hazards": [
       {
-        "class": "Repr. 2",
-        "h_code": "H361d"
+        "class": "Repr. 1B",
+        "h_code": "H360FD"
       },
       {
         "class": "Acute Tox. 4",
@@ -31,7 +33,7 @@
       "GHS07"
     ],
     "h_codes": [
-      "H361d",
+      "H360FD",
       "H302",
       "H319"
     ],

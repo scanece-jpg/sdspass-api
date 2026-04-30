@@ -4,8 +4,10 @@
   "name_tr": "dikamba (ISO); 2,5-dikloro-6- metoksibenzoik asit; 3,6-dikloro-2- metoksibenzoikasit",
   "ec_no": "217-635-6",
   "index_no": "607-043-00-X",
-  "atp": "",
-  "notes": [],
+  "atp": "ATP22",
+  "notes": [
+    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
+  ],
   "classification": {
     "hazards": [
       {
@@ -17,8 +19,8 @@
         "h_code": "H318"
       },
       {
-        "class": "Aquatic Chronic 3",
-        "h_code": "H412"
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
       }
     ],
     "m_factors": {},
@@ -33,7 +35,7 @@
     "h_codes": [
       "H302",
       "H318",
-      "H412"
+      "H411"
     ],
     "suppl_h": []
   }

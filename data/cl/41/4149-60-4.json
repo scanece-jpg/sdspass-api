@@ -4,8 +4,10 @@
   "name_tr": "perflorononan-1-oik asit [1] ve onun sodyum [2] ve amonyum [3] tuzları",
   "ec_no": "206-801-3",
   "index_no": "607-718-00-9",
-  "atp": "",
-  "notes": [],
+  "atp": "ATP09",
+  "notes": [
+    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
+  ],
   "classification": {
     "hazards": [
       {
@@ -17,8 +19,8 @@
         "h_code": "H360Df"
       },
       {
-        "class": "Lact.",
-        "h_code": "H362"
+        "class": "Repr. 1B",
+        "h_code": "H360Df"
       },
       {
         "class": "Acute Tox. 4",
@@ -50,7 +52,7 @@
     "h_codes": [
       "H351",
       "H360Df",
-      "H362",
+      "H360Df",
       "H332",
       "H302",
       "H372",

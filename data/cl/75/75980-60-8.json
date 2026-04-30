@@ -4,13 +4,15 @@
   "name_tr": "difenil(2,4,6- trimetilbenzoil)fosfin oksit",
   "ec_no": "278-355-8",
   "index_no": "015-203-00-X",
-  "atp": "",
-  "notes": [],
+  "atp": "ATP21",
+  "notes": [
+    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
+  ],
   "classification": {
     "hazards": [
       {
-        "class": "Repr. 2",
-        "h_code": "H361f"
+        "class": "Repr. 1B",
+        "h_code": "H360Fd"
       }
     ],
     "m_factors": {},
@@ -22,7 +24,7 @@
       "GHS08"
     ],
     "h_codes": [
-      "H361f"
+      "H360Fd"
     ],
     "suppl_h": []
   }

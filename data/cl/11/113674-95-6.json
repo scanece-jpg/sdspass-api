@@ -4,8 +4,10 @@
   "name_tr": "4-(2-kloro-4- triflorometil)fenoksi-2- floroanilin hidroklorür",
   "ec_no": "402-190-4",
   "index_no": "612-094-00-6",
-  "atp": "",
-  "notes": [],
+  "atp": "ATP01",
+  "notes": [
+    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
+  ],
   "classification": {
     "hazards": [
       {
@@ -17,8 +19,8 @@
         "h_code": "H302"
       },
       {
-        "class": "STOT RE 2",
-        "h_code": "H373"
+        "class": "STOT RE 1",
+        "h_code": "H372 **"
       },
       {
         "class": "Eye Dam. 1",
@@ -51,7 +53,7 @@
     "h_codes": [
       "H372",
       "H302",
-      "H373",
+      "H372 **",
       "H318",
       "H317",
       "H400",

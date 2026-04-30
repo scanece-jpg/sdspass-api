@@ -4,8 +4,10 @@
   "name_tr": "etantiyol; etil merkaptan",
   "ec_no": "200-837-3",
   "index_no": "016-022-00-9",
-  "atp": "",
-  "notes": [],
+  "atp": "ATP22",
+  "notes": [
+    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
+  ],
   "classification": {
     "hazards": [
       {
@@ -13,8 +15,8 @@
         "h_code": "H225"
       },
       {
-        "class": "Acute Tox. 4",
-        "h_code": "H332"
+        "class": "Acute Tox. 3",
+        "h_code": "H331"
       },
       {
         "class": "Aquatic Acute 1",
@@ -37,7 +39,7 @@
     ],
     "h_codes": [
       "H225",
-      "H332",
+      "H331",
       "H400",
       "H410"
     ],

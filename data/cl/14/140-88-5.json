@@ -4,9 +4,10 @@
   "name_tr": "etil akrilat",
   "ec_no": "205-438-8",
   "index_no": "607-032-00-X",
-  "atp": "",
+  "atp": "ATP21",
   "notes": [
-    "D"
+    "D",
+    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
   ],
   "classification": {
     "hazards": [
@@ -15,8 +16,8 @@
         "h_code": "H225"
       },
       {
-        "class": "Acute Tox. 4",
-        "h_code": "H332"
+        "class": "Acute Tox. 3",
+        "h_code": "H331"
       },
       {
         "class": "Acute Tox. 4",
@@ -73,7 +74,7 @@
     ],
     "h_codes": [
       "H225",
-      "H332",
+      "H331",
       "H312",
       "H302",
       "H319",

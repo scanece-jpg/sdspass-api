@@ -4,13 +4,15 @@
   "name_tr": "imidakloprid (ISO); 1-(6-klorpiridin-3-ilmetil)-N- nitroimidazolidin-2-ilidenamin",
   "ec_no": "428-040-8",
   "index_no": "612-252-00-4",
-  "atp": "",
-  "notes": [],
+  "atp": "ATP17",
+  "notes": [
+    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
+  ],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4",
-        "h_code": "H302"
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
       },
       {
         "class": "Aquatic Acute 1",
@@ -31,7 +33,7 @@
       "GHS09"
     ],
     "h_codes": [
-      "H302",
+      "H301",
       "H400",
       "H410"
     ],

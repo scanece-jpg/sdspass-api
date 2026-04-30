@@ -4,10 +4,11 @@
   "name_tr": "perasetik asit ….%",
   "ec_no": "201-186-8",
   "index_no": "607-094-00-8",
-  "atp": "",
+  "atp": "ATP22",
   "notes": [
     "B",
-    "D"
+    "D",
+    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
   ],
   "classification": {
     "hazards": [
@@ -20,16 +21,16 @@
         "h_code": "H242"
       },
       {
-        "class": "Acute Tox. 4",
-        "h_code": "H332"
+        "class": "Acute Tox. 2",
+        "h_code": "H330"
       },
       {
-        "class": "Acute Tox. 4",
-        "h_code": "H312"
+        "class": "Acute Tox. 2",
+        "h_code": "H310"
       },
       {
-        "class": "Acute Tox. 4",
-        "h_code": "H302"
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
       },
       {
         "class": "Skin Corr. 1A",
@@ -61,9 +62,9 @@
     "h_codes": [
       "H226",
       "H242",
-      "H332",
-      "H312",
-      "H302",
+      "H330",
+      "H310",
+      "H301",
       "H314",
       "H400"
     ],

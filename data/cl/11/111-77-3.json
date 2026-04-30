@@ -4,13 +4,15 @@
   "name_tr": "2-(2-metoksietoksi)etanol; dietilen glikolmonometileter",
   "ec_no": "203-906-6",
   "index_no": "603-107-00-6",
-  "atp": "",
-  "notes": [],
+  "atp": "ATP18",
+  "notes": [
+    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
+  ],
   "classification": {
     "hazards": [
       {
-        "class": "Repr. 2",
-        "h_code": "H361d"
+        "class": "Repr. 1B",
+        "h_code": "H360D"
       }
     ],
     "m_factors": {},
@@ -22,7 +24,7 @@
       "GHS08"
     ],
     "h_codes": [
-      "H361d"
+      "H360D"
     ],
     "suppl_h": []
   }

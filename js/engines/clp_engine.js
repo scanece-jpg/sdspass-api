@@ -35,9 +35,9 @@ const CLPEngine = (() => {
     'H301':  100,   // Kat. 3
     'H302':  500,   // Kat. 4
     // Deri yolu mg/kg
-    'H310':  0.5,   // Kat. 1 (Kat.2 → 50)
-    'H311':  200,   // Kat. 3
-    'H312':  1000,  // Kat. 4
+    'H310':  5,     // Kat. 1 (Kat.2 → 50) — CLP Tablo 3.1.2: Cat.1=5 mg/kg
+    'H311':  300,   // Kat. 3 — CLP Tablo 3.1.2: Cat.3=300 mg/kg
+    'H312':  1100,  // Kat. 4 — CLP Tablo 3.1.2: Cat.4=1100 mg/kg
     // Soluma - buhar mg/L/4h
     'H330':  0.05,  // Kat. 1 (Kat.2 → 0.5)
     'H331':  3.0,   // Kat. 3
@@ -293,8 +293,10 @@ const CLPEngine = (() => {
       });
 
       // SCL-only kodlar: hazard listesinde olmayan ama maddeye özgü SCL eşiği tanımlı
-      // Örn. formaldehit: H314 tehlike listesinde var, SCL'de H315/H319 da ≥5% olarak ekleniyor
+      // Örn. nikel sülfat: H372 tehlike listesinde, ama H373 sadece SCL ile (%0.1-%1 arası) tetiklenir
       const fromSCLOnly = [];
+
+      // Nesne formatı { 'H373': 0.1, ... }
       const sclObj = (!Array.isArray(c.scl) && c.scl && typeof c.scl === 'object') ? c.scl : null;
       if (sclObj) {
         Object.entries(sclObj).forEach(([code, sclVal]) => {
@@ -304,6 +306,23 @@ const CLPEngine = (() => {
           if (conc >= sclVal) {
             fromSCLOnly.push(code);
             if (!cutoffUsed[code] || sclVal < cutoffUsed[code].value) {
+              cutoffUsed[code] = { value: sclVal, source: 'SCL', cas: c.cas || '' };
+            }
+          }
+        });
+      }
+
+      // Dizi formatı [{h_code:'H373', c_min:0.1, c_max:1.0}, ...]  — API'den gelen format
+      if (Array.isArray(c.scl)) {
+        c.scl.forEach(s => {
+          const code = (s.h_code || '').replace(/[*\s]/g, '').substring(0, 4);
+          if (!code.startsWith('H') || hazardCodes.has(code)) return;
+          if (FLAM_SKIP.has(code) || ECO_SKIP.has(code) || ATE_HCODES.has(code)) return;
+          const sclVal = typeof s.c_min === 'number' ? s.c_min : null;
+          if (sclVal === null) return;
+          if (conc >= sclVal) {
+            fromSCLOnly.push(code);
+            if (!cutoffUsed[code] || sclVal < (cutoffUsed[code].value || Infinity)) {
               cutoffUsed[code] = { value: sclVal, source: 'SCL', cas: c.cas || '' };
             }
           }

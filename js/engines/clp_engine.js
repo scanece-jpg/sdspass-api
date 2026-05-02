@@ -451,15 +451,14 @@ const CLPEngine = (() => {
 
       if (!hasAny || sumInv === 0) return;
 
-      // Bilinmeyen >%10 kontrolü — revize formül
-      const unknownPct = Math.max(0, 100 - knownConc);
-      let ate_mix;
-      if (unknownPct > 10) {
-        // CLP Ek I §3.1.3.6.2.2 — bilinmeyen yüksekse payda düşürülür
-        ate_mix = (100 - unknownPct) / sumInv;
-      } else {
-        ate_mix = 100 / sumInv;
-      }
+      // CLP Ek I §3.1.3.6.2 — Standart formül: ATEmix = 100 / Σ(Ci/ATEi)
+      // Sınıflandırılmamış bileşenler (su, dolgu vb.) Ci/ATEi → 0 katkısı yapar,
+      // formülden dışlanır; dilüsyon etkisi korunur.
+      // NOT: Eski "revize formül" (knownConc/sumInv) dilüsyon etkisini siliyordu
+      // ve %8 allilamin gibi durumlarda ATEmix = 100 → H301/kuru kafa piktogramı
+      // çıkarıyordu. Doğru sonuç: ATEmix = 100/0.08 = 1250 → H302/GHS07.
+      const unknownPct = Math.max(0, 100 - knownConc);  // PDF tablosu için bilgi amaçlı
+      const ate_mix = 100 / sumInv;
 
       let resultCode = null;
       for (const { max, h } of ATE_CLASSIFY[route]) {

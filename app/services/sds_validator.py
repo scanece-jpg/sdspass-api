@@ -109,10 +109,18 @@ def validate_sds(
              "CMR maddesi (kanserojen/mutajen/üreme toksik) — B8'de solunum koruması ve özel KKE gerekebilir.")
 
     # V012: H334 (Solunum duyarlılaştırıcı) → B8'de solunum koruyucu zorunlu
+    # Sadece B8.2'de yeterli koruma YOKSA uyar (false positive'i önle)
     if "H334" in h_codes:
-        warn("V012","B8",
-             "H334 (Solunum duyarlılaştırıcı) — B8.2'de SCBA veya tam yüz maskesi belirtilmeli.",
-             "KKDİK Kanserojen/Mutajen Yönetmeliği")
+        try:
+            from app.services.sds_sentence_service import generate_section as _gen8
+            _resp = _gen8(8, h_codes).get('ppe', {}).get('resp', '').lower()
+            _adequate = any(kw in _resp for kw in ['scba', 'tam yüz', 'full face', 'yarım yüz', 'half face'])
+        except Exception:
+            _adequate = False
+        if not _adequate:
+            warn("V012","B8",
+                 "H334 (Solunum duyarlılaştırıcı) — B8.2'de SCBA veya tam yüz maskesi belirtilmeli.",
+                 "KKDİK Kanserojen/Mutajen Yönetmeliği")
 
     # V013: Etiket P kodu sayısı kontrolü
     p_codes = sds_data.get("p_codes",{})
@@ -132,12 +140,11 @@ def validate_sds(
               f"Bu H kodları için sinyal kelimesi 'Danger' olmalıdır (mevcut: '{signal}').",
               "CLP Annex III")
 
-    # V015: Revizyonsuz GBF uyarısı
+    # V015: GBF Hazırlayıcı sertifika numarası eksik — info seviyesinde (PDF'de gösterilmez)
     author = sds_data.get("author",{})
     if not author.get("cert_no"):
-        warn("V015","B16",
-             "GBF Hazırlayıcı sertifika numarası girilmemiş. KKDİK kapsamında zorunludur.",
-             "KKDİK EK-2 B16")
+        info("V015","B16",
+             "GBF Hazırlayıcı sertifika numarası girilmemiş. KKDİK kapsamında zorunludur. (V015)")
 
     return issues
 

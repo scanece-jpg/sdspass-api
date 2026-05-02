@@ -1723,7 +1723,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
               eco_sections.get('aquatic') if isinstance(eco_sections,dict) else None)
     if _eco_aq:
         _mf_details = getattr(_eco_aq,'component_details',None) or []
-        _aquatic_comps = [d for d in _mf_details if d.get('h_class')]
+        # M-faktörler yalnızca Aquatic Acute 1 ve Aquatic Chronic 1 için tanımlıdır
+        # (CLP Tablo 4.1.3). Chronic 2+ bileşenler M-faktörsüz hesaplandığından tabloya dahil edilmez.
+        _M_FACTOR_CLASSES = {'Aquatic Acute 1', 'Aquatic Chronic 1'}
+        _aquatic_comps = [d for d in _mf_details if d.get('h_class') in _M_FACTOR_CLASSES]
         if _aquatic_comps:
             _mf_lbl = 'M Faktörleri — CLP Tablo 4.1.3 (Toplamsal Yöntem)' if lang=='TR' \
                       else 'M Factors — CLP Table 4.1.3 (Summation Method)'

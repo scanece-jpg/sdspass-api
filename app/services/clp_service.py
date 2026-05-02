@@ -456,6 +456,15 @@ NOTE1_CAS = {
 }
 
 
+# H kodu → maruziyet rotası eşleştirmesi (CLP Annex I Bölüm 3.1)
+# H300/H301/H302 = oral, H310/H311/H312 = dermal, H330/H331/H332 = inhalasyon
+_H_CODE_TO_ROUTE: dict = {
+    'H300': 'oral',   'H301': 'oral',   'H302': 'oral',
+    'H310': 'dermal', 'H311': 'dermal', 'H312': 'dermal',
+    'H330': 'inhalation', 'H331': 'inhalation', 'H332': 'inhalation',
+}
+
+
 def _get_ate_value(ate_data: dict, route: str, h_class: str) -> Optional[float]:
     """
     ATE değerini önce spesifik veriden, sonra kategori varsayılanından al.
@@ -557,7 +566,27 @@ async def calculate_clp(db: AsyncSession, components: List[Any]) -> Dict:
             hc = haz.get('h_class', '').replace('*', '').strip()
             if not hc.startswith('Acute Tox.'):
                 continue
-            for route in ate_routes:
+
+            # Rotayı H kodundan belirle — oral/dermal/inhalasyon ayrı hesaplanır.
+            # Eski kod tüm rotaları deniyordu: oral bileşen dermal/inhalasyon
+            # toplamına da ekleniyordu → çapraz kirlilik → yanlış H kodu.
+            h_code_raw = haz.get('h_code', '').split('(')[0].split()[0].strip()
+            base_route = _H_CODE_TO_ROUTE.get(h_code_raw)
+            if not base_route:
+                # H kodu yoksa veya tanınmıyorsa tüm rotalara dağıt (eski güvenli yol)
+                routes_to_process = ate_routes
+            elif base_route == 'inhalation':
+                # İnhalasyon: spesifik alt-rota varsa onu kullan, yoksa vapour/dust ikisi
+                if combined_ate.get('inhalation_vapour'):
+                    routes_to_process = ['inhalation_vapour', 'inhalation']
+                elif combined_ate.get('inhalation_dust'):
+                    routes_to_process = ['inhalation_dust', 'inhalation']
+                else:
+                    routes_to_process = ['inhalation_vapour', 'inhalation_dust', 'inhalation']
+            else:
+                routes_to_process = [base_route]
+
+            for route in routes_to_process:
                 ate_val = _get_ate_value(combined_ate, route, hc)
                 if ate_val and ate_val > 0:
                     ate_sum[route] += conc_frac / ate_val

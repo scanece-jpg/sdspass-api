@@ -622,6 +622,10 @@ H_TO_PPE: Dict[str, Dict] = {
         'gloves': 'Nitril eldiven',
         'eyes':   'Güvenlik gözlüğü',
     },
+    'H334': {   # Solunum duyarlılaştırıcı — SCBA veya tam yüz maskesi zorunlu
+        'resp':   'Solunum duyarlılaştırıcı — SCBA veya tam yüz maskesi (ABEK filtre)',
+        'gloves': 'Kimyasala dayanıklı eldiven',
+    },
     # ── Cilt Korozif / Aşındırıcı ────────────────────────────────────────────
     'H314': {   # Kat.1A/1B/2 — cilt yanığı/göz hasarı
         'resp':   'Buhar/aerosol oluşursa: ABEK filtreli maske veya ortama uygun solunum koruyucu',
@@ -971,7 +975,7 @@ def generate_section(
 
     # Önce en tehlikeli H kodlarını işle
     priority_order = [
-        'H330','H331','H310','H311','H300','H301','H314','H318',
+        'H330','H331','H334','H310','H311','H300','H301','H314','H318',
         'H271','H272','H304','H340','H350','H360','H370','H371',
         'H372','H373','H400','H410','H225','H226','H317','H319',
         'H315','H302','H312','H332','H411','H412',

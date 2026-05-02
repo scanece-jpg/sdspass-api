@@ -102,7 +102,8 @@ async def generate_pdf(data: dict = Body(...)):
         eco_comps = [{'cas': c.get('cas',''), 'name': c.get('name',''),
                       'name_tr': c.get('name_tr',''),
                       'conc': float(c.get('conc', c.get('concentration',0)) or 0),
-                      'hazards': c.get('hazards',[])} for c in components]
+                      'hazards': c.get('hazards',[]),
+                      'm_factors': c.get('m_factors', {})} for c in components]
         try:
             eco_result = calculate_ecological(eco_comps)
         except Exception:

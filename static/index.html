@@ -2834,6 +2834,7 @@ async function _doPdfGenerate() {
         reach_no: c.reach || '',
         hazards:  c.hazards || [],
         scl:      c.scl || {},
+        m_factors: c.m_factors || {},  // M-faktörler — sucul eko hesabı için zorunlu (H410/H411)
       })),
       h_codes:      allH,
       all_h_codes:  [...new Set([...allH, ...(clp?.dominated || [])])], // SDS 2.1 tam sınıflandırma

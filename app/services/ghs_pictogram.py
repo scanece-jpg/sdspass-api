@@ -76,20 +76,36 @@ def get_ghs_codes(h_codes: list) -> list:
         if any(h in h_set for h in h_codes):
             pics.add(ghs)
 
-    # ── SEA Madde 28 — Piktogram Öncelik İlkeleri ────────────────────────────
+    # ── SEA Madde 28 / CLP Ek-I §1.2.1.2 — Piktogram Öncelik İlkeleri ─────────
+    h_set = set(h_codes)
+
     # (a) GHS01 varsa GHS02 ve GHS03 isteğe bağlı
     if 'GHS01' in pics:
         pics.discard('GHS02')
         pics.discard('GHS03')
-    # (b) GHS06 varsa GHS07 kaldırılır
+
+    # (b) GHS06 (kurukafa) varsa GHS07 tamamen kaldırılır
     if 'GHS06' in pics:
         pics.discard('GHS07')
-    # (c) GHS05 varsa deri/göz tahrişi için GHS07 kaldırılır
+
+    # (c) GHS05 (aşındırıcı) varsa GHS07 YALNIZCA cilt/göz tahrişi (H315/H319)
+    #     nedeniyle eklenmişse kaldırılır. Akut Toks.4 (H302/H312/H332),
+    #     Cilt Duyar.1 (H317) veya STOT SE 3 (H335/H336) varsa GHS07 KALIR.
+    #     Kaynak: CLP Ek-I §1.2.1.2 kural (b)
     if 'GHS05' in pics and 'GHS06' not in pics:
-        pics.discard('GHS07')
-    # (ç) GHS08 solunum hassasiyeti (H334) için geçerliyse GHS07 kaldırılır
-    if 'GHS08' in pics and any(h.startswith('H334') for h in h_codes):
-        pics.discard('GHS07')
+        _ghs07_non_irrit = {'H302', 'H312', 'H332', 'H317', 'H335', 'H336'}
+        if not h_set & _ghs07_non_irrit:
+            pics.discard('GHS07')
+
+    # (ç) GHS08 + H334 (solunum duyar.) varsa GHS07 cilt duyar./tahriş için
+    #     kaldırılır; ancak Akut Toks.4 (H302/H312/H332) veya STOT SE (H335/H336)
+    #     varsa GHS07 KALIR.
+    #     Kaynak: CLP Ek-I §1.2.1.2 kural (c)
+    if 'GHS08' in pics and bool(h_set & {'H334'}):
+        _ghs07_acute = {'H302', 'H312', 'H332', 'H335', 'H336'}
+        if not h_set & _ghs07_acute:
+            pics.discard('GHS07')
+
     # (d) GHS02 veya GHS06 varsa GHS04 isteğe bağlı
     if 'GHS02' in pics or 'GHS06' in pics:
         pics.discard('GHS04')

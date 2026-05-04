@@ -95,6 +95,16 @@ def get_echa_range(concentration: float) -> str:
     return f'%{concentration:.1f}'
 
 
+# Akut toksisite maruziyet yolları — CLP Tablo 3.1.1 (oral / dermal / inhal)
+_ACUTE_TOX_ROUTE: Dict[str, str] = {}
+for _c in ('H300', 'H301', 'H302', 'H303'):
+    _ACUTE_TOX_ROUTE[_c] = '(oral)'
+for _c in ('H310', 'H311', 'H312', 'H313'):
+    _ACUTE_TOX_ROUTE[_c] = '(dermal)'
+for _c in ('H330', 'H331', 'H332', 'H333'):
+    _ACUTE_TOX_ROUTE[_c] = '(inhal.)'
+
+
 def format_section3_component(
     comp: Dict,
     disclosure_level: str = 'show',  # 'show' | 'range' | 'hide'
@@ -122,20 +132,25 @@ def format_section3_component(
     conc = float(comp.get('worst_case_conc', comp.get('conc', comp.get('concentration', 0))) or 0)
     hazards = comp.get('hazards', [])
     # Tekrar eden h_class değerleri gider; h_code'dan yetkili h_class türet (DB bozukluğuna karşı)
+    # Akut toksisite kodları (H300-H333) için maruziyet yolu (oral/dermal/inhal.) de eklenir.
     _seen_cls = set()
     _haz_parts = []
     _has_annex_supplement = False
     for h in hazards:
         raw_cls  = h.get('h_class', '').replace('*', '').strip()
         raw_code = h.get('h_code', '').replace('*', '').strip()
+        code4    = raw_code[:4] if len(raw_code) >= 4 else raw_code
         cls = correct_hclass(raw_code, raw_cls) or raw_cls  # düzelt; düzeltemezse orijinali kullan
-        if cls and cls not in _seen_cls:
-            _seen_cls.add(cls)
+        # Akut toksisite için yol son eki ekle — CLP SDS Kılavuzu Rev.4 §3.2
+        route = _ACUTE_TOX_ROUTE.get(code4, '')
+        cls_key = f'{cls} {route}'.strip() if route else cls  # dedup anahtarı
+        if cls_key and cls_key not in _seen_cls:
+            _seen_cls.add(cls_key)
             if h.get('_annex_supplement'):
-                _haz_parts.append(f'{cls}†')
+                _haz_parts.append(f'{cls_key}†')
                 _has_annex_supplement = True
             else:
-                _haz_parts.append(cls)
+                _haz_parts.append(cls_key)
     haz_str = '; '.join(_haz_parts)
     if _has_annex_supplement:
         haz_str += '  († CLP Ek VI tamamlayıcı sınıflandırma)'

@@ -934,6 +934,9 @@ def translate_hclass(h_class: str, lang: str = 'TR') -> str:
     CLP hazard class kısa ismini dile çevir.
     TR → Türkçe kısaltma (SEA Ek-3 Tablo 1.2)
     Diğer → orijinal bırak (uluslararası standart)
+
+    Akut toksisite maruziyet yolu son eklerini de çevirir:
+      "(oral)" → "(ağız)"  |  "(dermal)" → "(deri)"  |  "(inhal.)" → "(solunum)"
     """
     if lang != 'TR':
         return h_class
@@ -941,8 +944,18 @@ def translate_hclass(h_class: str, lang: str = 'TR') -> str:
     suffix = '†' if key.endswith('†') else ''
     if suffix:
         key = key[:-1].strip()
+
+    # Akut toksisite yol son eki — "(oral)", "(dermal)", "(inhal.)"
+    _ROUTE_TR = {'(oral)': '(ağız)', '(dermal)': '(deri)', '(inhal.)': '(solunum)'}
+    route_part = ''
+    for en_route, tr_route in _ROUTE_TR.items():
+        if key.endswith(' ' + en_route):
+            route_part = ' ' + tr_route
+            key = key[: -len(en_route) - 1].strip()
+            break
+
     translated = CLP_CLASS_TR.get(key, key)
-    return translated + suffix
+    return translated + route_part + suffix
 
 
 def translate_hclass_list(classes: str, lang: str = 'TR') -> str:

@@ -1283,6 +1283,54 @@
       "name_tr": "Kuvars (kristalize silika)",
       "concern": "Carc. 1A (inhalation)",
       "concern_tr": "Kanserojen Kat. 1A (soluma)"
+    },
+    {
+      "cas": "7786-81-4",
+      "ec": "232-104-9",
+      "name": "Nickel sulphate",
+      "name_tr": "Nikel sülfat",
+      "concern": "Carc. 1A, Muta. 2, Repr. 1B",
+      "concern_tr": "Kanserojen Kat. 1A, Mutajen Kat. 2, Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "7440-02-0",
+      "ec": "231-111-4",
+      "name": "Nickel",
+      "name_tr": "Nikel",
+      "concern": "Carc. 1A, Resp. Sens. 1",
+      "concern_tr": "Kanserojen Kat. 1A, Solunum duyarlılaştırıcı Kat. 1"
+    },
+    {
+      "cas": "3333-67-3",
+      "ec": "222-068-2",
+      "name": "Nickel carbonate",
+      "name_tr": "Nikel karbonat",
+      "concern": "Carc. 1A, Muta. 2, Repr. 1B",
+      "concern_tr": "Kanserojen Kat. 1A, Mutajen Kat. 2, Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "7718-54-9",
+      "ec": "231-743-0",
+      "name": "Nickel chloride",
+      "name_tr": "Nikel klorür",
+      "concern": "Carc. 1A, Muta. 2, Repr. 1B",
+      "concern_tr": "Kanserojen Kat. 1A, Mutajen Kat. 2, Üreme toksik Kat. 1B"
+    },
+    {
+      "cas": "1313-99-1",
+      "ec": "215-215-7",
+      "name": "Nickel oxide",
+      "name_tr": "Nikel oksit",
+      "concern": "Carc. 1A, Resp. Sens. 1",
+      "concern_tr": "Kanserojen Kat. 1A, Solunum duyarlılaştırıcı Kat. 1"
+    },
+    {
+      "cas": "12054-48-7",
+      "ec": "235-008-5",
+      "name": "Nickel hydroxide",
+      "name_tr": "Nikel hidroksit",
+      "concern": "Carc. 1A, Muta. 2, Repr. 1B",
+      "concern_tr": "Kanserojen Kat. 1A, Mutajen Kat. 2, Üreme toksik Kat. 1B"
     }
   ]
 }

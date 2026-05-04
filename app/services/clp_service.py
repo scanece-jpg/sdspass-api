@@ -218,10 +218,26 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
                         break
 
             if conc < cutoff:
-                warnings.append(
-                    f"{comp.get('name',cas)} ({h_class} %{conc:.1f}) → "
-                    f"cut-off %{cutoff} altı → dahil edilmedi"
-                )
+                # ── STOT SE 1→2 geçiş kuralı — CLP Tablo 3.8.3 ──────────────────
+                # STOT SE 1 bileşen eşiğin (SCL veya GCL=10%) altında ama ≥%1 ise
+                # karışım STOT SE 2 (H371) olarak sınıflandırılır.
+                # Bu kural SCL olup olmadığından bağımsız uygulanır.
+                if h == 'H370' and conc >= 1.0 and 'H371' not in seen_h:
+                    seen_h.add('H371')
+                    passed.append({
+                        "h_class": "STOT SE 2",
+                        "h_code":  "H371",
+                        "conc":    conc,
+                        "reason":  (
+                            f"{comp.get('name',cas)} %{conc:.1f} — STOT SE 1 bileşen "
+                            f"1% ≤ C < {cutoff}% → CLP Tablo 3.8.3 geçiş: STOT SE 2"
+                        ),
+                    })
+                else:
+                    warnings.append(
+                        f"{comp.get('name',cas)} ({h_class} %{conc:.1f}) → "
+                        f"cut-off %{cutoff} altı → dahil edilmedi"
+                    )
                 continue
 
             if h not in seen_h:

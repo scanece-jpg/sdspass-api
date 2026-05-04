@@ -286,15 +286,20 @@ const CLPEngine = (() => {
 
         if (cutoff === undefined) return [code];
 
-        // STOT SE 1→2 geçiş kuralı
-        if (code === 'H370' && scl === null) {
-          if (conc >= 10.0) {
-            cutoffUsed['H370'] = { value: 10.0, source: 'GCL', cas: c.cas || '' };
+        // STOT SE 1→2 geçiş kuralı — CLP Tablo 3.8.3
+        // SCL varsa: C ≥ SCL → H370; 1% ≤ C < SCL → H371
+        // SCL yoksa: C ≥ 10% → H370; 1% ≤ C < 10% → H371
+        if (code === 'H370') {
+          const sclThreshold = scl !== null ? scl : 10.0;
+          const sclSource    = scl !== null ? 'SCL' : 'GCL';
+          if (conc >= sclThreshold) {
+            cutoffUsed['H370'] = { value: sclThreshold, source: sclSource, cas: c.cas || '' };
             return ['H370'];
           }
           if (conc >= 1.0) {
+            // CLP Tablo 3.8.3: STOT SE 1 bileşen 1% ≤ C < eşik → karışım STOT SE 2 (H371)
             if (!cutoffUsed['H371'] || 1.0 < (cutoffUsed['H371'].value || Infinity)) {
-              cutoffUsed['H371'] = { value: 1.0, source: 'GCL-transition', cas: c.cas || '' };
+              cutoffUsed['H371'] = { value: 1.0, source: sclSource + '-transition', cas: c.cas || '' };
             }
             return ['H371'];
           }

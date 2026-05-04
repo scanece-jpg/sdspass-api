@@ -202,11 +202,29 @@ const CLPEngine = (() => {
       if (ghs) pics.add(ghs);
     });
 
-    // SEA Madde 28 Piktogram Önceliği
+    // SEA Madde 28 / CLP Ek-I §1.2.1.2 Piktogram Önceliği
     if (pics.has('GHS01')) { pics.delete('GHS02'); pics.delete('GHS03'); }
+
+    // Kural (a): GHS06 (kurukafa) varsa GHS07 tamamen kaldırılır
     if (pics.has('GHS06')) pics.delete('GHS07');
-    if (pics.has('GHS05') && !pics.has('GHS06')) pics.delete('GHS07');
-    if (pics.has('GHS08') && hcodes.some(h => h.startsWith('H334'))) pics.delete('GHS07');
+
+    // Kural (b): GHS05 (aşındırıcı) varsa GHS07 yalnızca Cilt/Göz Tahrişi (H315/H319)
+    //            nedeniyle eklenmişse kaldırılır. Akut Toks.4 (H302/H312/H332),
+    //            Cilt Duyar.1 (H317) veya STOT SE 3 (H335/H336) varsa GHS07 KALIR.
+    if (pics.has('GHS05') && !pics.has('GHS06')) {
+      const _ghs07NonIrrit = ['H302','H312','H332','H317','H335','H336'];
+      const _hasNonIrritSrc = hcodes.some(h => _ghs07NonIrrit.includes(h.replace(/[^H0-9]/g,'').substring(0,4)));
+      if (!_hasNonIrritSrc) pics.delete('GHS07');
+    }
+
+    // Kural (c): GHS08 + H334 (Solunum Duyar.) varsa GHS07 Cilt Duyar./Tahriş için
+    //            kaldırılır; ancak Akut Toks.4 (H302/H312/H332) veya STOT SE (H335/H336)
+    //            varsa GHS07 KALIR.
+    if (pics.has('GHS08') && hcodes.some(h => h.replace(/[^H0-9]/g,'').substring(0,4) === 'H334')) {
+      const _ghs07AcuteTox = ['H302','H312','H332','H335','H336'];
+      const _hasAcuteToxSrc = hcodes.some(h => _ghs07AcuteTox.includes(h.replace(/[^H0-9]/g,'').substring(0,4)));
+      if (!_hasAcuteToxSrc) pics.delete('GHS07');
+    }
     if (pics.has('GHS02') || pics.has('GHS06')) pics.delete('GHS04');
 
     return GHS_ORDER.filter(g => pics.has(g));

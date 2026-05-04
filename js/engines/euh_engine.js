@@ -150,6 +150,20 @@ const EUHEngine = (() => {
     const details = [];
     const warnings = [];
 
+    // ── EUH209 / EUH209A ön-kontrol ──────────────────────────────────────────
+    // CLP Ek II §2.9: EUH209 yalnızca karışım H224/H225 ALMIYORSA geçerlidir.
+    // Karışımda ≥%1 H224/H225 bileşen varsa → karışım zaten H225 sınıfına girer
+    // → EUH209 UYGULANMAZ (zaten yanıcı sınıfında).
+    // Benzer şekilde EUH209A: ≥%10 H226 bileşen varsa → karışım H226 alır → EUH209A yok.
+    const _flamH12 = h => { const c = (h.h_code||'').replace(/[*\s]/g,'').substring(0,4); return c==='H224'||c==='H225'; };
+    const _flamH3  = h => (h.h_code||'').replace(/[*\s]/g,'').substring(0,4) === 'H226';
+    const mixAlreadyFlam12 = comps.some(c =>
+      (parseFloat(c.concMax||c.conc)||0) >= 1.0 && (c.hazards||[]).some(_flamH12)
+    );
+    const mixAlreadyFlam3  = comps.some(c =>
+      (parseFloat(c.concMax||c.conc)||0) >= 10.0 && (c.hazards||[]).some(_flamH3)
+    );
+
     for (const c of comps) {
       const cas = (c.cas || '').trim();
       const conc = parseFloat(c.concMax || c.conc) || 0;
@@ -178,16 +192,18 @@ const EUHEngine = (() => {
         }
       }
 
-      // EUH209 / EUH209A — CLP Ek II §2.8
-      // Karışım sınıflandırma eşiğinin ALTINDA kalan yanıcı bileşenler için
-      // H224/H225 (Flam. Liq. 1/2): eşik %1 → %0.1–1 arası bileşen → EUH209
-      // H226   (Flam. Liq. 3):      eşik %10 → %1–10 arası bileşen → EUH209A
+      // EUH209 / EUH209A — CLP Ek II §2.9 / §2.10
+      // Koşul: bileşen eşik altında FAKAT karışım H224/H225 sınıfına GİRMİYORSA
+      // (mixAlreadyFlam12/3 ön-kontrolünde bu durum tespit edilir)
       const flamCodes = (c.hazards || []).map(h => (h.h_code||'').replace(/[*\s]/g,'').substring(0,4));
-      if (!codes.has('EUH209') && (flamCodes.includes('H224') || flamCodes.includes('H225')) && conc >= 0.1 && conc < 1.0) {
+      if (!codes.has('EUH209') && !mixAlreadyFlam12 &&
+          (flamCodes.includes('H224') || flamCodes.includes('H225')) &&
+          conc >= 0.1 && conc < 1.0) {
         codes.add('EUH209');
         details.push({ code:'EUH209', text: EUH_TEXTS['EUH209'], source: `${name} — H224/H225, %${conc} (eşik altı yanıcı bileşen)`, type:'auto' });
       }
-      if (!codes.has('EUH209A') && flamCodes.includes('H226') && conc >= 1.0 && conc < 10.0) {
+      if (!codes.has('EUH209A') && !mixAlreadyFlam3 &&
+          flamCodes.includes('H226') && conc >= 1.0 && conc < 10.0) {
         codes.add('EUH209A');
         details.push({ code:'EUH209A', text: EUH_TEXTS['EUH209A'], source: `${name} — H226, %${conc} (eşik altı yanıcı bileşen)`, type:'auto' });
       }
@@ -230,11 +246,11 @@ const EUHEngine = (() => {
       }
     }
 
-    // EUH210 — tehlikeli sınıflandırma varsa SDS zorunlu
-    if (comps.some(c => (c.hazards || []).length > 0)) {
-      codes.add('EUH210');
-      details.push({ code:'EUH210', text: EUH_TEXTS['EUH210'], source:'Tehlikeli madde içeren karışım', type:'advisory' });
-    }
+    // EUH210 — CLP Ek II §2.10: YALNIZCA tehlikeli sınıflandırılmamış karışımlar için
+    // REACH Madde 31(1): Tehlikeli sınıflandırılmış karışımlarda SDS otomatik verilmeli
+    // → tehlikeli karışımlarda EUH210 UYGULANMAZ (sanayi/mesleki kullanım için yanıltıcıdır)
+    // Bu sistem tehlikeli kimyasallar içindir; EUH210 otomatik olarak EKLENMEMELİDİR.
+    // (Tamamen tehlikesiz karışımlara EUH210 eklenebilir — ancak bu sistem kapsamı dışı)
 
     return {
       codes: [...codes],

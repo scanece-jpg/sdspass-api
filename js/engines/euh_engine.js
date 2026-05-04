@@ -164,6 +164,8 @@ const EUHEngine = (() => {
       (parseFloat(c.concMax||c.conc)||0) >= 10.0 && (c.hazards||[]).some(_flamH3)
     );
 
+    const sensitizerNames = [];  // EUH208: tüm sensitizer adları toplanır
+
     for (const c of comps) {
       const cas = (c.cas || '').trim();
       const conc = parseFloat(c.concMax || c.conc) || 0;
@@ -225,25 +227,31 @@ const EUHEngine = (() => {
       }
 
       // EUH208 — duyarlılaştırıcı içerik
-      // CLP Ek II: Resp. Sens. 1 (H334) → %0.01 eşik; Skin Sens. 1 (H317) → %0.1 eşik
+      // CLP Ek II §2.8: Resp. Sens. 1 (H334) → %0.1 eşik; Skin Sens. 1 (H317) → %0.1 eşik
+      // Tüm sensitizerlar toplanır; EUH208 tek bir maddede sonradan oluşturulur.
       const hasRespSens  = (c.hazards || []).some(h =>
         (h.h_code||'').replace(/[*\s]/g,'').substring(0,4) === 'H334'
       );
       const hasSkinSens  = (c.hazards || []).some(h =>
         (h.h_code||'').replace(/[*\s]/g,'').substring(0,4) === 'H317'
       );
-      const sensitizerThreshold = hasRespSens ? 0.01 : 0.1;
+      const sensitizerThreshold = 0.1;  // CLP GCL: Resp.Sens. ve Skin Sens. her ikisi için %0.1
       if ((hasRespSens || hasSkinSens) && conc >= sensitizerThreshold) {
-        if (!codes.has('EUH208')) {
-          codes.add('EUH208');
-          details.push({
-            code:'EUH208',
-            text: EUH_TEXTS['EUH208'].replace('...', name),
-            source: `${name} — ${hasRespSens?'H334 Resp.Sens.':'H317 Skin Sens.'}, %${conc} ≥ %${sensitizerThreshold} eşik`,
-            type:'auto',
-          });
-        }
+        // sensitizerNames dizisine ekle (birden fazla sensitizer desteklenir)
+        if (!sensitizerNames.includes(name)) sensitizerNames.push(name);
       }
+    }
+
+    // EUH208 — tüm sensitizerlar toplandıktan sonra tek ifade oluştur
+    if (sensitizerNames.length > 0) {
+      codes.add('EUH208');
+      const allNames = sensitizerNames.join('; ');
+      details.push({
+        code: 'EUH208',
+        text: EUH_TEXTS['EUH208'].replace('...', allNames),
+        source: `${allNames} — H317/H334, ≥%0.1 eşik`,
+        type: 'auto',
+      });
     }
 
     // EUH210 — CLP Ek II §2.10: YALNIZCA tehlikeli sınıflandırılmamış karışımlar için

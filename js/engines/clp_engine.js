@@ -448,10 +448,11 @@ const CLPEngine = (() => {
           const code = (h.h_code || '').replace(/[*\s]/g, '').substring(0, 4);
           if (!codeSet.has(code)) return;
 
-          // Konsantrasyon filtresi: ≥%1 zorunlu; Kat.1/2 için <%1 de dahil
+          // CLP Ek I §3.1.3.6.2.1: ATE'si bilinen (sınıflandırılmış, Kat.1-4) bileşenler
+          // konsantrasyondan bağımsız olarak her zaman dahil edilir.
+          // Yalnızca ATE'si bilinmeyen (sınıflandırılmamış) <%1 bileşenler hariç tutulabilir;
+          // ancak bu döngüde yalnızca akut toks. H kodları (bilinen ATE) işlenir → filtre kaldırıldı.
           const hclass = (h.h_class || '').replace(/\*/g, '').trim();
-          const isCat12 = hclass === 'Acute Tox. 1' || hclass === 'Acute Tox. 2';
-          if (conc < 1.0 && !isCat12) return;
 
           let ate = ATE_POINT[code];
           if (!ate) return;

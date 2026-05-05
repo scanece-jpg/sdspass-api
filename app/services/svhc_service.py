@@ -134,7 +134,7 @@ def svhc_section15_text(svhc_result: dict, lang: str = 'TR') -> list[str]:
         lines.append('The following SVHC candidate list substances are present at ≥ 0.1 %:')
 
     for s in above:
-        conc_str = f"%{s['concentration']:.1f}" if s['concentration'] else '—'
+        conc_str = f"%{s['concentration']:.2g}" if s['concentration'] else '—'
         if lang == 'TR':
             lines.append(
                 f"  • {s['name_tr'] or s['name_svhc']} (CAS {s['cas']}) — "

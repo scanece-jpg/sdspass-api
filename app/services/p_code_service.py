@@ -169,6 +169,7 @@ P_COMBOS: Dict[str, str] = {
     'P231+P232':     'İnert gaz altında işleyin. Nemi önleyin.',
     'P235+P410':     'Serin yerde saklayın. Güneş ışığından koruyun.',
     'P302+P334':     'CİLDE TEMAS DURUMUNDA: Soğuk suya sokun ya da ıslak pansuman uygulayın.',
+    'P335+P334':     'Ciltteki gevşek partikülleri fırçalayın. Soğuk suya batırın/nemli bandaj uygulayın.',
     'P402+P404':     'Kapalı bir kapta kuru yerde saklayın.',
     'P403+P233':     'Kabı sıkıca kapalı tutarak iyi havalandırılan bir yerde saklayın.',
     'P403+P235':     'Serin, iyi havalandırılan bir yerde saklayın.',
@@ -285,9 +286,10 @@ H_TO_P: Dict[str, List[str]] = {
     'H261': ['P231+P232','P370+P378','P402+P404','P501'],
 
     # ── Pirofor ──────────────────────────────────────────────────────────────
-    # H250: P422 geçersiz kod — CLP Annex IV Tablo 6.2'de yoktur, kaldırıldı
-    # Geçerli pirofor kodları: P210, P222, P235+P410, P280, P302+P334, P370+P378
-    'H250': ['P210','P222','P235+P410','P280','P302+P334','P370+P378'],
+    # H250: Pirofor — CLP Annex IV Tablo 6.2
+    # P335+P334: ciltteki gevşek partikülleri fırçala, SONRA soğuk su — pirofor için kritik sıra
+    # P302+P334 (genel cilt temas) ile karıştırılmamalı; P335 önce fırçalama adımını ekler
+    'H250': ['P210','P222','P235+P410','P280','P335+P334','P370+P378'],
     'H251': ['P235+P410','P407','P413','P420'],
     'H252': ['P235+P410','P407','P413','P420'],
 
@@ -431,7 +433,7 @@ P_LABEL_PRIORITY: Dict[str, int] = {
     'P304+P340': 88,  'P305+P351+P338': 85, 'P308+P313': 82,
     'P308+P311': 80,  'P307+P311': 78,      'P310': 75,
     'P301+P312': 73,  # H302 yutma müdahalesi — response kodu, öncelik yüksek
-    'P342+P311': 72,  'P302+P352': 65,      'P333+P313': 61,
+    'P342+P311': 72,  'P335+P334': 67,      'P302+P352': 65,      'P333+P313': 61,
     'P332+P313': 57,  'P337+P313': 55,
     # Aspirasyon: KUSMayı UYARMAYIN — hayati önem (aspiration tox → kusturma ölümcül)
     'P331': 87,
@@ -637,6 +639,7 @@ P_SDS_PRIORITY: Dict[str, str] = {
     'P301+P330+P331': 'mandatory',
     'P301+P312':      'mandatory',
     'P303+P361+P353': 'mandatory',
+    'P335+P334':      'mandatory',   # Pirofor (H250) — partikülleri fırçala, soğut
     'P304+P340':      'mandatory',
     'P304+P341':      'mandatory',
     'P305+P351+P338': 'mandatory',

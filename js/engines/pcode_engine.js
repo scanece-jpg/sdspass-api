@@ -28,7 +28,8 @@ const PCodeEngine = (() => {
     'H241':['P210','P220','P234','P280','P283','P370+P378','P401','P405','P501'],
     'H242':['P210','P220','P234','P280','P370+P378','P401','P405','P501'],
     // ── Pirofor / Kendiliğinden Isınan ──────────────────────────────────────
-    'H250':['P222','P231+P232','P233','P280','P302+P334','P370+P378','P422'],
+    // H250: Pirofor — P335+P334 kritik (önce fırçala, sonra soğut); P422 geçersiz kaldırıldı
+    'H250':['P210','P222','P235+P410','P280','P335+P334','P370+P378'],
     'H251':['P235','P280','P407','P413','P420','P501'],
     'H252':['P235','P280','P407','P413','P420','P501'],
     // ── Su ile Reaksiyon Veren ───────────────────────────────────────────────
@@ -142,6 +143,7 @@ const PCodeEngine = (() => {
     // ── Cilt / Göz müdahale ───────────────────────────────────────────────────
     'P303+P361+P353': 80,          // Cilde/saça temas → hemen çıkar, duş al
     'P305+P351+P338': 78,          // Göze temas → su ile yıka
+    'P335+P334': 77,               // Pirofor (H250) — partikülleri fırçala, soğut
     'P302+P350': 75,               // Cilt temas → sabunla yıka (H310)
     'P302+P352': 72,               // Cilt temas → su ile yıka
     'P337+P313': 68,               // Göz tahrişi devam → doktor

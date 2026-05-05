@@ -226,19 +226,33 @@ const EUHEngine = (() => {
         }
       }
 
-      // EUH208 — duyarlılaştırıcı içerik
-      // CLP Ek II §2.8: Resp. Sens. 1 (H334) → %0.1 eşik; Skin Sens. 1 (H317) → %0.1 eşik
-      // Tüm sensitizerlar toplanır; EUH208 tek bir maddede sonradan oluşturulur.
-      const hasRespSens  = (c.hazards || []).some(h =>
+      // EUH208 — CLP Ek II §2.8 Para 2: "sınıflandırmaya yol açanın EK OLARAK" kuralı
+      // Skin Sens. sınıflandırmasına neden olan madde (konc ≥ Skin Sens GCL/SCL) EUH208'e girmez;
+      // zaten H317 tehlike ifadesiyle etikette yer alır.
+      // EUH208: yalnızca H317 için eşik altı kalan (ama ≥%0.1) ek sensitizerlar listelenir.
+      const hasRespSens = (c.hazards || []).some(h =>
         (h.h_code||'').replace(/[*\s]/g,'').substring(0,4) === 'H334'
       );
-      const hasSkinSens  = (c.hazards || []).some(h =>
+      const hasSkinSens = (c.hazards || []).some(h =>
         (h.h_code||'').replace(/[*\s]/g,'').substring(0,4) === 'H317'
       );
-      const sensitizerThreshold = 0.1;  // CLP GCL: Resp.Sens. ve Skin Sens. her ikisi için %0.1
-      if ((hasRespSens || hasSkinSens) && conc >= sensitizerThreshold) {
-        // sensitizerNames dizisine ekle (birden fazla sensitizer desteklenir)
-        if (!sensitizerNames.includes(name)) sensitizerNames.push(name);
+
+      if (hasRespSens || hasSkinSens) {
+        // Skin Sens. sınıflandırma eşiği: SCL varsa kullan, yoksa GCL=%1
+        let skinClassThreshold = 1.0;
+        if (hasSkinSens) {
+          for (const s of (c.scl || [])) {
+            const sh = (s.h_code || '').replace(/[*\s]/g,'').substring(0,4);
+            if (sh === 'H317' && s.c_min != null) { skinClassThreshold = s.c_min; break; }
+          }
+        }
+        // Madde H317 sınıflandırmasına neden oluyor mu?
+        const causesSkinClass = hasSkinSens && conc >= skinClassThreshold;
+
+        // EUH208'e dahil: sınıflandırmaya neden olmayan sensitizerlar (≥%0.1)
+        if (!causesSkinClass && conc >= 0.1) {
+          if (!sensitizerNames.includes(name)) sensitizerNames.push(name);
+        }
       }
     }
 

@@ -411,32 +411,39 @@ def check_euh(components: List[Dict]) -> Dict:
             })
             detected_codes.add('EUH207')
 
-        # ── EUH208 — Skin/Resp. Sens. + SCL/10 kuralı ───────────────────────────
-        # CLP Ek II §2.8: Deri veya solunum duyarlılaştırıcı bileşenler → EUH208
-        # Skin Sens.: SCL varsa SCL/10, yoksa default %1
-        # Resp. Sens.: CLP GCL = %0.1 (H334/Resp. Sens. 1)
+        # ── EUH208 — CLP Ek II §2.8 Para 2: "sınıflandırmaya yol açanın EK OLARAK" kuralı
+        # Skin Sens. sınıflandırmasına neden olan madde (konc ≥ Skin Sens GCL/SCL) EUH208'e girmez;
+        # zaten H317 tehlike ifadesiyle etikette yer alır.
+        # EUH208: yalnızca H317 için eşik altı kalan (ama ≥%0.1) ek sensitizerlar listelenir.
         skin_sens_classes = {'Skin Sens. 1', 'Skin Sens. 1A', 'Skin Sens. 1B'}
         resp_sens_classes = {'Resp. Sens. 1', 'Resp. Sens. 1A', 'Resp. Sens. 1B'}
         is_skin_sens = bool(hazard_classes & skin_sens_classes)
         is_resp_sens = bool(hazard_classes & resp_sens_classes)
+
         if is_skin_sens or is_resp_sens:
-            if is_skin_sens and cas in SKIN_SENS_SCL_EUH208_THRESHOLD:
-                # Maddeye özgü SCL/10 eşiği
-                euh208_threshold = SKIN_SENS_SCL_EUH208_THRESHOLD[cas]
-            elif is_resp_sens:
-                # Resp. Sens. GCL = %0.1
-                euh208_threshold = 0.1
-            else:
-                # Skin Sens. genel GCL = %1
-                euh208_threshold = 1.0
-            if comp_conc >= euh208_threshold:
+            # Skin Sens. sınıflandırma eşiği: SCL varsa kullan, yoksa GCL=%1
+            skin_class_threshold = 1.0
+            if is_skin_sens:
+                # SKIN_SENS_SCL_EUH208_THRESHOLD zaten SCL/10 içeriyor;
+                # burада sınıflandırma eşiği (SCL tam değeri) lazım → Annex VI SCL listesine bak
+                for scl_entry in comp.get('scl', []):
+                    scl_h = (scl_entry.get('h_code', '') or '').replace('*', '').strip()[:4]
+                    if scl_h == 'H317' and scl_entry.get('c_min') is not None:
+                        skin_class_threshold = float(scl_entry['c_min'])
+                        break
+
+            # Madde H317 sınıflandırmasına neden oluyor mu?
+            causes_skin_class = is_skin_sens and comp_conc >= skin_class_threshold
+
+            # EUH208'e dahil: sınıflandırmaya neden olmayan sensitizerlar (≥%0.1)
+            if not causes_skin_class and comp_conc >= 0.1:
                 skin_sens_substances.append({
                     'name': name or cas,
                     'name_tr': name_tr or name or cas,
                     'cas': cas,
                     'conc': comp_conc,
-                    'threshold': euh208_threshold,
-                    'has_scl': cas in SKIN_SENS_SCL_EUH208_THRESHOLD or is_resp_sens,
+                    'threshold': 0.1,
+                    'has_scl': False,
                 })
 
     # EUH208: Deri sensitizeri varsa + SCL/10 eşiği kontrolü

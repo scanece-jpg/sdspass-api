@@ -167,17 +167,22 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
                 sum_corr1 += conc
                 break  # bileşen başına bir kez say
 
+    # CLP §3.3.1.4: Skin Corr. 1 (H314) maddeler Eye Dam. 1 anlamına gelir.
+    # Bileşen listesinde yalnızca H314 olsa bile göz toplamına dahil edilmeli.
+    _EYE_DAM1_CLASSES = {"Eye Dam. 1", "Skin Corr. 1", "Skin Corr. 1A", "Skin Corr. 1B", "Skin Corr. 1C"}
     sum_eye_dam1 = 0.0
     for comp in components:
         conc = float(comp.get("concentration", comp.get("conc", 0)) or 0)
         for h in comp.get("hazards", []):
-            if h.get("h_class","") != "Eye Dam. 1":
+            if h.get("h_class","") not in _EYE_DAM1_CLASSES:
                 continue
-            scl = _get_scl_cutoff(comp, "Eye Dam. 1", "H318")
+            # SCL: Eye Dam. 1 için H318, Skin Corr. için H314 SCL'sini kontrol et
+            h_code_ref = "H318" if h.get("h_class","") == "Eye Dam. 1" else "H314"
+            scl = _get_scl_cutoff(comp, h.get("h_class",""), h_code_ref)
             effective = scl if scl is not None else 0.0
             if conc >= effective:
                 sum_eye_dam1 += conc
-                break
+                break  # bileşen başına bir kez say
 
     sum_eye_irrit2 = sum(
         float(comp.get("concentration", comp.get("conc", 0)) or 0)

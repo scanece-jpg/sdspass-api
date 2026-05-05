@@ -398,12 +398,21 @@ const CLPEngine = (() => {
     // ── CLP Tablo 3.3.3: Göz Toplama Kuralı ─────────────────────────────────────
     // Kural 1: ΣEye Dam. 1 ≥ %3 → H318
     // Kural 2: 10×ΣEye Dam. 1 + ΣEye Irrit. 2 ≥ %10 → H319 (H318 yoksa)
+    //
+    // ÖNEMLİ: Skin Corr. 1 (H314) bileşenler CLP §3.3.1.4 gereği Eye Dam. 1 anlamına
+    // gelir. Bileşen listesinde yalnızca H314 yazıyor olsa bile göz toplamına dahil
+    // edilmeli. Yalnızca H318 arayanlar bu bileşenleri kaçırır.
+    function _hasEyeDam1(comp) {
+      return (comp.hazards || []).some(h => {
+        const code = (h.h_code||'').replace(/[*\s]/g,'').substring(0,4);
+        return code === 'H318' || code === 'H314'; // H314 → Eye Dam. 1 implicit (§3.3.1.4)
+      });
+    }
+
     if (!raw.includes('H318') && !phExtreme) {
       const sumED1 = comps.reduce((s, c) => {
         const conc = parseFloat(c.concMax || c.conc) || 0;
-        const hasED1 = (c.hazards || []).some(h =>
-          (h.h_code||'').replace(/[*\s]/g,'').substring(0,4) === 'H318');
-        return hasED1 ? s + conc : s;
+        return _hasEyeDam1(c) ? s + conc : s;
       }, 0);
       if (sumED1 >= 3.0) {
         raw.push('H318');
@@ -414,9 +423,7 @@ const CLPEngine = (() => {
     if (!raw.includes('H318') && !raw.includes('H319')) {
       const sumED1 = comps.reduce((s, c) => {
         const conc = parseFloat(c.concMax || c.conc) || 0;
-        const hasED1 = (c.hazards || []).some(h =>
-          (h.h_code||'').replace(/[*\s]/g,'').substring(0,4) === 'H318');
-        return hasED1 ? s + conc : s;
+        return _hasEyeDam1(c) ? s + conc : s;
       }, 0);
       const sumEI2 = comps.reduce((s, c) => {
         const conc = parseFloat(c.concMax || c.conc) || 0;

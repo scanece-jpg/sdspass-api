@@ -426,11 +426,20 @@ def check_euh(components: List[Dict]) -> Dict:
             if is_skin_sens:
                 # SKIN_SENS_SCL_EUH208_THRESHOLD zaten SCL/10 içeriyor;
                 # burада sınıflandırma eşiği (SCL tam değeri) lazım → Annex VI SCL listesine bak
-                for scl_entry in comp.get('scl', []):
-                    scl_h = (scl_entry.get('h_code', '') or '').replace('*', '').strip()[:4]
-                    if scl_h == 'H317' and scl_entry.get('c_min') is not None:
-                        skin_class_threshold = float(scl_entry['c_min'])
-                        break
+                # scl iki formatta gelebilir:
+                #   list: [{h_code:'H317', c_min:0.5}, ...]  (API / backend)
+                #   dict: {'H317': 0.5, 'H314': 2.0}         (frontend _sclMap)
+                scl_data = comp.get('scl', [])
+                if isinstance(scl_data, list):
+                    for scl_entry in scl_data:
+                        if not isinstance(scl_entry, dict):
+                            continue
+                        scl_h = (scl_entry.get('h_code', '') or '').replace('*', '').strip()[:4]
+                        if scl_h == 'H317' and scl_entry.get('c_min') is not None:
+                            skin_class_threshold = float(scl_entry['c_min'])
+                            break
+                elif isinstance(scl_data, dict) and scl_data.get('H317') is not None:
+                    skin_class_threshold = float(scl_data['H317'])
 
             # Madde H317 sınıflandırmasına neden oluyor mu?
             causes_skin_class = is_skin_sens and comp_conc >= skin_class_threshold

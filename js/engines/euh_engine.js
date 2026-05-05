@@ -241,9 +241,16 @@ const EUHEngine = (() => {
         // Skin Sens. sınıflandırma eşiği: SCL varsa kullan, yoksa GCL=%1
         let skinClassThreshold = 1.0;
         if (hasSkinSens) {
-          for (const s of (c.scl || [])) {
-            const sh = (s.h_code || '').replace(/[*\s]/g,'').substring(0,4);
-            if (sh === 'H317' && s.c_min != null) { skinClassThreshold = s.c_min; break; }
+          // scl iki formatta gelebilir:
+          //   Object (getComps): { H317: 0.5, H314: 2.0 }  ← _sclMap
+          //   Array  (API):      [{h_code:'H317', c_min:0.5}, ...]  ← _sclRaw
+          if (Array.isArray(c.scl)) {
+            for (const s of c.scl) {
+              const sh = (s.h_code || '').replace(/[*\s]/g,'').substring(0,4);
+              if (sh === 'H317' && s.c_min != null) { skinClassThreshold = s.c_min; break; }
+            }
+          } else if (c.scl && typeof c.scl === 'object' && c.scl['H317'] != null) {
+            skinClassThreshold = c.scl['H317'];
           }
         }
         // Madde H317 sınıflandırmasına neden oluyor mu?

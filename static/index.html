@@ -2729,6 +2729,8 @@ async function _doPdfGenerate() {
         case 'GCL-sum-ED1':    return `SEA Tablo 3.3.3: Σ Göz Has.1 = %${val} ≥ %3 (toplamlı)`;
         case 'GCL-sum-weighted': return `SEA Tablo: 10×Σ Kat.1 + Σ Kat.2 = %${val} ≥ %10 (toplamlı)`;
         case 'GCL-transition': return `H370→H371 geçiş kuralı (GKS %${val})`;
+        case 'SCL-transition': return `H370→H371 geçiş kuralı (MÖKS %${val})`;
+        case 'SCL-H371':       return `H371 Maddeye Özgü Kons. Sınırı (MÖKS) ≥ %${val}`;
         case 'ATE':            return `ATE karışım (hesaplanan)`;
         default:               return `${src} ≥ %${val}`;
       }

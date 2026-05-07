@@ -421,11 +421,12 @@ def check_euh(components: List[Dict]) -> Dict:
         is_resp_sens = bool(hazard_classes & resp_sens_classes)
 
         if is_skin_sens or is_resp_sens:
-            # Skin Sens. sınıflandırma eşiği: SCL varsa kullan, yoksa GCL=%1
-            skin_class_threshold = 1.0
+            # Skin Sens. sınıflandırma eşiği: SCL varsa kullan, yoksa kategori bazlı GCL
+            # CLP Ek I Tablo 3.4.3: Skin Sens. 1A → GCL=%0.1 | Skin Sens. 1B / 1 → GCL=%1.0
+            is_skin_sens_1a = 'Skin Sens. 1A' in hazard_classes
+            skin_class_threshold = 0.1 if is_skin_sens_1a else 1.0
             if is_skin_sens:
-                # SKIN_SENS_SCL_EUH208_THRESHOLD zaten SCL/10 içeriyor;
-                # burада sınıflandırma eşiği (SCL tam değeri) lazım → Annex VI SCL listesine bak
+                # SCL varsa GCL'yi geçersiz kılar
                 # scl iki formatta gelebilir:
                 #   list: [{h_code:'H317', c_min:0.5}, ...]  (API / backend)
                 #   dict: {'H317': 0.5, 'H314': 2.0}         (frontend _sclMap)

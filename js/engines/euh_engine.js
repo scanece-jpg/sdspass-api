@@ -239,8 +239,14 @@ const EUHEngine = (() => {
       );
 
       if (hasRespSens || hasSkinSens) {
-        // Skin Sens. sınıflandırma eşiği: SCL varsa kullan, yoksa GCL=%1
-        let skinClassThreshold = 1.0;
+        // Skin Sens. sınıflandırma eşiği: SCL varsa kullan, yoksa kategori bazlı GCL
+        // CLP Ek I Tablo 3.4.3: Skin Sens. 1A → GCL=%0.1 | Skin Sens. 1B / 1 → GCL=%1.0
+        const skinSensHazard = (c.hazards || []).find(h =>
+          (h.h_code||'').replace(/[*\s]/g,'').substring(0,4) === 'H317'
+        );
+        const skinSensClass = (skinSensHazard && (skinSensHazard.h_class || skinSensHazard.class || '')) || '';
+        // 1A ise GCL=0.1, diğer tüm durumlar (1B, 1, belirtilmemiş) → GCL=1.0
+        let skinClassThreshold = /1A/i.test(skinSensClass) ? 0.1 : 1.0;
         if (hasSkinSens) {
           // scl iki formatta gelebilir:
           //   Object (getComps): { H317: 0.5, H314: 2.0 }  ← _sclMap

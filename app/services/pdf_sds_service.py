@@ -542,6 +542,86 @@ def _auto_un(h_codes: list, state: str = 'liquid') -> dict | None:
     return None
 
 
+# ─── ADR 3.1.2.8: B.N.O. GİRİŞLERİ İÇİN TEKNİK İSİM SEÇİCİ ────────────────
+# Her UN numarası için tehlike grupları — sıralama önemli (önce birincil tehlike)
+_NOS_HAZARD_GROUPS: dict[str, list] = {
+    # Yanıcı + Korozif
+    'UN2924': [{'H224','H225','H226'}, {'H314'}],
+    # Zehirli + Korozif
+    'UN2927': [{'H300','H310','H330'}, {'H301','H311','H331'}],
+    # Yanıcı + Toksik
+    'UN1992': [{'H224','H225','H226'}, {'H300','H301','H310','H311','H330','H331'}],
+    # Korozif + Oksitleyici
+    'UN3093': [{'H314'}, {'H271','H272'}],
+    # Oksitleyici sıvı
+    'UN2912': [{'H271'}],
+    'UN3139': [{'H272'}],
+    # Pirofor / Kendiliğinden Isınan
+    'UN2845': [{'H250'}],
+    'UN3088': [{'H251'}],
+    'UN3190': [{'H252'}],
+    # Su ile tepkiyen
+    'UN3148': [{'H260','H261'}],
+    # Oksitleyici gaz
+    'UN3156': [{'H270'}],
+    # Yanıcı gaz
+    'UN1954': [{'H220','H221'}],
+    # Yanıcı sıvı (tekil)
+    'UN1993': [{'H224','H225','H226'}],
+    # Korozif sıvı (tekil)
+    'UN1760': [{'H314'}],
+    # Zehirli sıvı (tekil)
+    'UN2810': [{'H300','H301','H310','H311','H330','H331'}],
+    # Çevre için tehlikeli
+    'UN3082': [{'H400','H410','H411'}],
+    'UN3077': [{'H400','H410','H411'}],
+}
+
+
+def _nos_technical_names(un_no: str, components: list, lang: str = 'TR') -> str:
+    """ADR 3.1.2.8 — B.N.O. sevkiyat adına eklenecek teknik isimler.
+
+    Her tehlike grubundan en yüksek konsantrasyonlu bileşeni seçer.
+    Sonuç: en fazla 2 bileşen adı, virgülle ayrılmış.
+    """
+    groups = _NOS_HAZARD_GROUPS.get(un_no, [])
+    if not groups or not components:
+        return ''
+
+    selected: list[str] = []
+    seen: set[str] = set()
+
+    for group_hcodes in groups:
+        candidates: list[tuple[float, str]] = []
+        for c in components:
+            comp_hcodes = {
+                h.get('h_code', '').replace('*', '').strip()
+                for h in c.get('hazards', [])
+            }
+            if not (comp_hcodes & group_hcodes):
+                continue
+            # Türkçe ise name_tr, değilse name, yoksa CAS
+            name = (c.get('name_tr', '') if lang == 'TR' else '') or \
+                   c.get('name', '') or c.get('cas_no', '')
+            name = name.strip()
+            if not name or name in seen:
+                continue
+            conc = float(c.get('concentration', 0) or 0)
+            candidates.append((conc, name))
+
+        if candidates:
+            # Konsantrasyon azalan sırada — en baskın katkı sağlayan önce
+            candidates.sort(key=lambda x: x[0], reverse=True)
+            best = candidates[0][1]
+            selected.append(best)
+            seen.add(best)
+
+        if len(selected) >= 2:
+            break
+
+    return ', '.join(selected)
+
+
 def section_block(title: str, styles: dict) -> list:
     """Koyu arka planlı bölüm başlık bloğu"""
     tbl = Table(
@@ -1778,6 +1858,11 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     t_src = transport if transport.get('un_no') else (auto_t or {})
     un_no = t_src.get('un_no', '—')
     ship_name = t_src.get('shipping_name', na)
+    # ADR 3.1.2.8 — B.N.O. girişlerinde teknik isim zorunlu
+    if 'B.N.O.' in ship_name and components:
+        tech = _nos_technical_names(un_no, components, lang)
+        if tech:
+            ship_name = f"{ship_name} ({tech})"
     haz_class  = t_src.get('hazard_class', '—')
     sub_class  = t_src.get('sub_class', '') or ''
     # Yan tehlike varsa "8 (5.1)" formatında göster — ADR/KKDİK Ek-2 standardı

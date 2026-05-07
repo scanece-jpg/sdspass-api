@@ -4,16 +4,12 @@
   "name_tr": "büt-2-in-1,4-diol; 2-bütin-1,4-diol",
   "ec_no": "203-788-6",
   "index_no": "603-076-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "D"
   ],
   "classification": {
     "hazards": [
-      {
-        "class": "Skin Corr. 1B",
-        "h_code": "H314"
-      },
       {
         "class": "Acute Tox. 3",
         "h_code": "H331"
@@ -31,6 +27,10 @@
         "h_code": "H373"
       },
       {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
+      },
+      {
         "class": "Skin Sens. 1",
         "h_code": "H317"
       }
@@ -39,13 +39,19 @@
     "scl_limits": [
       {
         "h_code": "H314",
-        "class": "Skin Corr. 1B",
+        "class": "",
         "c_min": 50.0,
         "c_max": null
       },
       {
+        "h_code": "H315",
+        "class": "",
+        "c_min": 25.0,
+        "c_max": 50.0
+      },
+      {
         "h_code": "H319",
-        "class": "C < %50 Göz Tah. 2",
+        "class": "",
         "c_min": 25.0,
         "c_max": 50.0
       }
@@ -59,11 +65,11 @@
       "GHS08"
     ],
     "h_codes": [
-      "H314",
       "H331",
       "H301",
       "H312",
       "H373",
+      "H314",
       "H317"
     ],
     "suppl_h": []

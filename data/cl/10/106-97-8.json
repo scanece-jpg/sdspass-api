@@ -1,15 +1,12 @@
 {
   "cas": "106-97-8",
-  "name": "butane (containing ≥ 0,1 % butadiene (203-450-8)); [1] isobutane (containing ≥ 0,1 % butadiene (203-450-8)) [2]",
+  "name": "butane (containing ≥ 0,1 % butadiene (203-450-8)) [1]\nisobutane (containing ≥ 0,1 % butadiene (203-450-8))  [2]",
   "name_tr": "bütan (≥% 0.1 bütadien (203- 450-8) içeren); [1] izobütan (≥% 0.1 bütadien (203-450-8) içeren) [2]",
-  "ec_no": "203-448-7",
+  "ec_no": "203-448-7 [1]\n200-857-2 [2]",
   "index_no": "601-004-01-8",
   "atp": "CLP00",
   "notes": [
-    "C",
-    "S",
-    "U",
-    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
+    "C S U"
   ],
   "classification": {
     "hazards": [

@@ -1,13 +1,12 @@
 {
   "cas": "96690-55-0",
-  "name": "Tar acids, distn. residues; Distillate Phenols; [A residue from the distillation of crude phenol from coal. It consists predominantly of phenols having carbon numbers in the range of C8 through C10 with a softening point of 60°C to 80°C (140°F to 176°F).]",
+  "name": "Tar acids, distn. residues; Distillate Phenols; [A residue from the distillation of crude phenol from coal.  It consists predominantly of phenols having carbon numbers in the range of C8 through C10 with a softening point of 60°C to 80°C (140°F to 176°F).]",
   "name_tr": "zift asitler, damıtma artıkları; damıtık fenolleri; [Kömürden ham fenol damıtılmasından kalan artık. Büyük ölçüde, karbon sayıları C8 ile C10 arasında değişen ve yumuşama noktası 60oC ile 80oC (140oF-176oF) arasında olan fenollerden oluşur.]",
   "ec_no": "306-251-5",
   "index_no": "648-119-00-2",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
-    "J",
-    "M"
+    "J M"
   ],
   "classification": {
     "hazards": [

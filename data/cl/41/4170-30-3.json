@@ -1,10 +1,10 @@
 {
   "cas": "4170-30-3",
-  "name": "crotonaldehyde; 2-butenal; [1] (E)-2-butenal; (E)-crotonaldehyde [2]",
+  "name": "crotonaldehyde; 2-butenal [1]\n(E)-2-butenal; (E)-crotonaldehyde  [2]",
   "name_tr": "krotonaldehid; 2-bütenal [1]; (E)-2-bütenal; (E)-krotonaldehid [2];",
-  "ec_no": "224-030-0",
+  "ec_no": "224-030-0 [1]\n204-647-1 [2]",
   "index_no": "605-009-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -29,12 +29,12 @@
         "h_code": "H301"
       },
       {
-        "class": "STOT RE 2",
-        "h_code": "H373"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H335"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Skin Irrit. 2",
@@ -67,8 +67,8 @@
       "H330",
       "H311",
       "H301",
-      "H373",
       "H335",
+      "H373",
       "H315",
       "H318",
       "H400"

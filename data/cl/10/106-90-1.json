@@ -4,7 +4,7 @@
   "name_tr": "2,3-epoksipropilakrilat; glisidil akrilat",
   "ec_no": "203-440-3",
   "index_no": "607-117-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "D"
   ],
@@ -35,7 +35,7 @@
     "scl_limits": [
       {
         "h_code": "H317",
-        "class": "Skin Sens. 1",
+        "class": "",
         "c_min": 0.2,
         "c_max": null
       }

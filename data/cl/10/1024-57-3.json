@@ -1,10 +1,10 @@
 {
   "cas": "1024-57-3",
-  "name": "heptachlor epoxide; 2,3-epoxy-1,4,5,6,7,8,8- heptachloro-3a,4,7,7a- tetrahydro-4,7-methanoindane",
+  "name": "heptachlor epoxide; 2,3-epoxy-1,4,5,6,7,8,8-heptachloro-3a,4,7,7a-tetrahydro-4,7-methanoindane",
   "name_tr": "heptaklor epoksit; 2,3-epoksi-1,4,5,6,7,8,8- heptakloro-3a,4,7,7a-tetrahidro- 4,7-metanoindan",
   "ec_no": "213-831-0",
   "index_no": "602-063-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

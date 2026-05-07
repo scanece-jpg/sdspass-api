@@ -4,7 +4,7 @@
   "name_tr": "diklorometan; metilen klorür",
   "ec_no": "200-838-9",
   "index_no": "602-004-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -14,32 +14,7 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": [
-      {
-        "h_code": "H351",
-        "class": "Carc. 2",
-        "c_min": 1.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H315",
-        "class": "Skin Irrit. 2",
-        "c_min": 10.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H319",
-        "class": "Eye Irrit. 2",
-        "c_min": 10.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H336",
-        "class": "STOT SE 3",
-        "c_min": 20.0,
-        "c_max": null
-      }
-    ]
+    "scl_limits": []
   },
   "labelling": {
     "signal": "Warning",

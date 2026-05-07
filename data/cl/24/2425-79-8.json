@@ -4,7 +4,7 @@
   "name_tr": "1,4-bis(2,3 epoksipropoksi)bütan; bütandioldiglisidil eter",
   "ec_no": "219-371-7",
   "index_no": "603-072-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -17,12 +17,12 @@
         "h_code": "H312"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Skin Sens. 1",
@@ -40,8 +40,8 @@
     "h_codes": [
       "H332",
       "H312",
-      "H319",
       "H315",
+      "H319",
       "H317"
     ],
     "suppl_h": []

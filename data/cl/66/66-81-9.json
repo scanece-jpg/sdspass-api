@@ -1,10 +1,10 @@
 {
   "cas": "66-81-9",
-  "name": "cycloheximide (ISO); 4-{{(2R)-2-[(1S,3S,5S)-3,5- dimethyl-2-oxocyclohexyl]-2- hydroxyethyl}}piperidine-2,6- dione",
+  "name": "cycloheximide (ISO); 4-{}{(2R)-2-[(1S,3S,5S)-3,5-dimethyl-2-oxocyclohexyl]-2-hydroxyethyl}}piperidine-2,6-dione",
   "name_tr": "siklohekzimid (ISO); 4-{(2R)-2-[(1S,3S,5S)-3,5- dimetil-2-oksosiklohekzil]-2- hidroksietil}piperidin-2,6-dion",
   "ec_no": "200-636-0",
   "index_no": "613-140-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

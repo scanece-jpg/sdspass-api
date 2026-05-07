@@ -1,10 +1,10 @@
 {
   "cas": "76855-69-1",
-  "name": "(2R,3R)-3-((R)-1-(tert- butyldimethylsiloxy)ethyl)-4- oxoazetidin-2-yl acetate",
+  "name": "(2R,3R)-3-((R)-1-(tert-butyldimethylsiloxy)ethyl)-4-oxoazetidin-2-yl acetate",
   "name_tr": "(2R,3R)-3-((R)-1-(ter- bütildimetilsiloksi)etil)-4- oksoazetidin-2-il asetat",
   "ec_no": "408-050-9",
   "index_no": "613-186-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "133-07-3",
-  "name": "folpet (ISO); N- (trichloromethylthio)phthalimide",
+  "name": "folpet (ISO); N-(trichloromethylthio)phthalimide",
   "name_tr": "folpet (ISO); N-(triklorometiltiyo)ftalimid",
   "ec_no": "205-088-6",
   "index_no": "613-045-00-1",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -30,29 +30,9 @@
       }
     ],
     "m_factors": {
-      "acute": 10,
-      "chronic": 10
+      "acute": 10
     },
-    "scl_limits": [
-      {
-        "h_code": "H372",
-        "class": "STOT RE 1",
-        "c_min": 5.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H373",
-        "class": "STOT RE 2",
-        "c_min": 0.5,
-        "c_max": null
-      },
-      {
-        "h_code": "H317",
-        "class": "Skin Sens. 1A",
-        "c_min": 0.001,
-        "c_max": null
-      }
-    ]
+    "scl_limits": []
   },
   "labelling": {
     "signal": "Warning",
@@ -69,8 +49,5 @@
       "H400"
     ],
     "suppl_h": []
-  },
-  "ate": {
-    "inhalation_dust": 0.3
   }
 }

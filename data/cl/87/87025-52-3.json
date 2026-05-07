@@ -1,10 +1,10 @@
 {
   "cas": "87025-52-3",
-  "name": "reaction mass of pentyl methylphosphinate and 2- methylbutyl methylphosphinate",
+  "name": "reaction mass of pentyl methylphosphinate and 2-methylbutyl methylphosphinate",
   "name_tr": "pentilmetilfosfinat ve 2- metilbütilmetilfosfinat’ın tepkime kütlesi",
   "ec_no": "402-090-0",
   "index_no": "015-144-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

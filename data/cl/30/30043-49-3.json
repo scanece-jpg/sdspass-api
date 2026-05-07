@@ -1,10 +1,10 @@
 {
   "cas": "30043-49-3",
-  "name": "ethidimuron (ISO); 1-(5-ethylsulphonyl-1,3,4- thiadiazol-2-yl)-1,3- dimethylurea",
+  "name": "ethidimuron (ISO); 1-(5-ethylsulphonyl-1,3,4-thiadiazol-2-yl)-1,3-dimethylurea",
   "name_tr": "etidimuron (ISO); 1-(5- etilsülfonil-1,3,4-tiadiazol-2-il)- 1,3-dimetilüre",
   "ec_no": "250-010-6",
   "index_no": "616-030-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

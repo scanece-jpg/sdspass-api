@@ -1,10 +1,10 @@
 {
   "cas": "105024-66-6",
-  "name": "(4-ethoxyphenyl)(3-(4-fluoro-3- phenoxyphenyl)propyl)dimethyl silane",
+  "name": "(4-ethoxyphenyl)(3-(4-fluoro-3-phenoxyphenyl)propyl)dimethylsilane",
   "name_tr": "(4-etoksifenil)(3-(4-floro-3- fenoksifenil)propil)dimetilsilan",
   "ec_no": "405-020-7",
   "index_no": "014-036-00-X",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

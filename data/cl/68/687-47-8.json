@@ -1,13 +1,11 @@
 {
   "cas": "687-47-8",
-  "name": "ethyl lactate; ethyl DL-lactate; [1] ethyl (S)-2-hydroxypropionate; ethyl L-lactate; ethyl-(S)-lactate [2]",
+  "name": "ethyl lactate; ethyl DL-lactate [1]\nethyl (S)-2-hydroxypropionate; ethyl L-lactate; ethyl-(S)-lactate [2]",
   "name_tr": "Etil laktat;etil DL-laktat; [1] Etil(S)-2-hidroksipropiyonat ; etil L-laktat ; etil-(S)-laktat [2]",
-  "ec_no": "202-598-0",
+  "ec_no": "211-694-1",
   "index_no": "607-129-00-7",
-  "atp": "",
-  "notes": [
-    "C"
-  ],
+  "atp": "CLP00",
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -30,8 +28,8 @@
     "signal": "Danger",
     "pictograms": [
       "GHS02",
-      "GHS05",
-      "GHS07"
+      "GHS07",
+      "GHS05"
     ],
     "h_codes": [
       "H226",

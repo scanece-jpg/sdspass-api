@@ -1,10 +1,10 @@
 {
   "cas": "7700-17-6",
-  "name": "crotoxyphos (ISO); 1-phenylethyl 3- (dimethoxyphosphinyloxy) isocrotonate",
+  "name": "crotoxyphos (ISO); 1-phenylethyl 3-(dimethoxyphosphinyloxy) isocrotonate",
   "name_tr": "krotoksifos (ISO); 1-feniletil-3- (dimetoksifosfiniloksi) izokrotonat",
   "ec_no": "231-720-5",
   "index_no": "015-109-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

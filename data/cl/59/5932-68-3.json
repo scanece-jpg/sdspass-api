@@ -1,10 +1,10 @@
 {
   "cas": "5932-68-3",
-  "name": "isoeugenol; [1] (E)-2-methoxy-4-(prop-1-enyl) phenol; [2] (Z)-2-methoxy-4-(prop-1-enyl) phenol [3]",
+  "name": "isoeugenol [1]\n(E)-2-methoxy-4-(prop-1-enyl)phenol [2]\n(Z)-2-methoxy-4-(prop-1-enyl)phenol [3]",
   "name_tr": "isoöjenol; [1] (E)-2-metoksi-4-(prop-1-enil) fenol; [2] (Z)-2-metoksi-4-(prop-1-enil) fenol [3]",
-  "ec_no": "202-590-7",
+  "ec_no": "227-678-2",
   "index_no": "604-094-00-X",
-  "atp": "",
+  "atp": "ATP13",
   "notes": [],
   "classification": {
     "hazards": [

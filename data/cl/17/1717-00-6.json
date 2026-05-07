@@ -4,7 +4,7 @@
   "name_tr": "1,1-dikloro-1-floroetan",
   "ec_no": "404-080-1",
   "index_no": "602-084-00-X",
-  "atp": "",
+  "atp": "ATP2",
   "notes": [],
   "classification": {
     "hazards": [
@@ -21,7 +21,7 @@
     "scl_limits": []
   },
   "labelling": {
-    "signal": "",
+    "signal": "Warning",
     "pictograms": [
       "GHS07"
     ],

@@ -4,7 +4,7 @@
   "name_tr": "4-ter-bütilbenzoik asit",
   "ec_no": "202-696-3",
   "index_no": "607-698-00-1",
-  "atp": "",
+  "atp": "ATP3",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,12 +13,12 @@
         "h_code": "H360F"
       },
       {
-        "class": "STOT RE 1",
-        "h_code": "H372"
-      },
-      {
         "class": "Acute Tox. 4",
         "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
       }
     ],
     "m_factors": {},
@@ -32,8 +32,8 @@
     ],
     "h_codes": [
       "H360F",
-      "H372",
-      "H302"
+      "H302",
+      "H372"
     ],
     "suppl_h": []
   }

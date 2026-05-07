@@ -4,7 +4,7 @@
   "name_tr": "bromoform tribromometan",
   "ec_no": "200-854-6",
   "index_no": "602-007-00-X",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -17,12 +17,12 @@
         "h_code": "H302"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Aquatic Chronic 2",
@@ -41,8 +41,8 @@
     "h_codes": [
       "H331",
       "H302",
-      "H319",
       "H315",
+      "H319",
       "H411"
     ],
     "suppl_h": []

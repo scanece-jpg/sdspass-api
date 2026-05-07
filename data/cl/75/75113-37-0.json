@@ -4,21 +4,17 @@
   "name_tr": "dibütilkalay hidrojen borat",
   "ec_no": "401-040-5",
   "index_no": "005-006-00-7",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
-      {
-        "class": "Repr. 1B",
-        "h_code": "H360FD"
-      },
       {
         "class": "Muta. 2",
         "h_code": "H341"
       },
       {
-        "class": "STOT RE 1",
-        "h_code": "H372"
+        "class": "Repr. 1B",
+        "h_code": "H360FD"
       },
       {
         "class": "Acute Tox. 4",
@@ -27,6 +23,10 @@
       {
         "class": "Acute Tox. 4",
         "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
       },
       {
         "class": "Eye Dam. 1",
@@ -57,11 +57,11 @@
       "GHS09"
     ],
     "h_codes": [
-      "H360FD",
       "H341",
-      "H372",
+      "H360FD",
       "H312",
       "H302",
+      "H372",
       "H318",
       "H317",
       "H400",

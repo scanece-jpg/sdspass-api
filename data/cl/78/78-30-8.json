@@ -1,10 +1,10 @@
 {
   "cas": "78-30-8",
-  "name": "tricresyl phosphate (o-o-o-, o-o- m-, o-o-p-, o-m-m-, o-m-p-, o-p- p-); tritolyl phosphate (o-o-o-, o-o- m-, o-o-p-, o-m-m-, o-m-p-, o-p- p-)",
+  "name": "tricresyl phosphate (o-o-o-, o-o-m-, o-o-p-, o-m-m-, o-m-p-, o-p-p-); tritolyl phosphate (o-o-o-, o-o-m-, o-o-p-, o-m-m-, o-m-p-, o-p-p-)",
   "name_tr": "trikresil fosfat (o-o-o-, o-o-m-, o-o-p-,o-m-m-, o-m-p-, o-p-p-); tritolil fosfat (o-o-o-, o-o-m-, o- o-p-, o-m-m-, o-m-p-, o-p-p-);",
   "ec_no": "201-103-5",
   "index_no": "015-015-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "C"
   ],
@@ -23,13 +23,13 @@
     "scl_limits": [
       {
         "h_code": "H370",
-        "class": "STOT SE 1",
+        "class": "",
         "c_min": 1.0,
         "c_max": null
       },
       {
         "h_code": "H371",
-        "class": "STOT SE 2",
+        "class": "",
         "c_min": 0.2,
         "c_max": 1.0
       }

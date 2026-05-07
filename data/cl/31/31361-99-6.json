@@ -1,10 +1,10 @@
 {
   "cas": "31361-99-6",
-  "name": "sodium 2-anilino-5-(2-nitro-4- (N- phenylsulfamoyl))anilinobenzen esulfonate",
+  "name": "sodium 2-anilino-5-(2-nitro-4-(N-phenylsulfamoyl))anilinobenzenesulfonate",
   "name_tr": "sodyum-2-anilino-5-(2-nitro-4- (N- fenilsülfamoil))anilinobenzensül fonat",
   "ec_no": "412-320-1",
   "index_no": "016-080-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

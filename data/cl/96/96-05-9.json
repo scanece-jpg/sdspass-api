@@ -1,13 +1,11 @@
 {
   "cas": "96-05-9",
-  "name": "allyl methacrylate; 2-methyl-2-propenoic acid 2- propenyl ester",
+  "name": "allyl methacrylate;  2-methyl-2-propenoic acid 2-propenyl ester",
   "name_tr": "allil metakrilat; 2-metil-2-propenoik asit 2- propenil ester",
   "ec_no": "202-473-0",
   "index_no": "607-246-00-3",
   "atp": "ATP21",
-  "notes": [
-    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
-  ],
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -51,8 +49,8 @@
     "suppl_h": []
   },
   "ate": {
-    "inhalation_vapour": 1.5,
-    "dermal": 300.0,
-    "oral": 400.0
+    "inhalation_mgl": 1.5,
+    "oral": 400.0,
+    "dermal": 300.0
   }
 }

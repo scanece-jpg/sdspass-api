@@ -4,7 +4,7 @@
   "name_tr": "siyanamid; karbamonitril",
   "ec_no": "206-992-3",
   "index_no": "615-013-00-2",
-  "atp": "",
+  "atp": "ATP10",
   "notes": [],
   "classification": {
     "hazards": [
@@ -26,19 +26,23 @@
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373"
+        "h_code": "H373(thyroid)"
       },
       {
-        "class": "Skin Sens. 1",
+        "class": "Skin Corr. 1",
         "h_code": "H314"
       },
       {
         "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Skin Sens. 1",
         "h_code": "H317"
       },
       {
         "class": "Aquatic Chronic 3",
-        "h_code": "H318"
+        "h_code": "H412"
       }
     ],
     "m_factors": {},
@@ -56,10 +60,11 @@
       "H361fd",
       "H311",
       "H301",
-      "H373",
+      "H373(thyroid)",
       "H314",
+      "H318",
       "H317",
-      "H318"
+      "H412"
     ],
     "suppl_h": []
   }

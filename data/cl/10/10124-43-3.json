@@ -4,9 +4,9 @@
   "name_tr": "Kobalt sülfat",
   "ec_no": "233-334-2",
   "index_no": "027-005-00-0",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
-    "1.0"
+    "1"
   ],
   "classification": {
     "hazards": [
@@ -50,7 +50,7 @@
     "scl_limits": [
       {
         "h_code": "H350i",
-        "class": "Carc. 1B",
+        "class": "",
         "c_min": 0.01,
         "c_max": null
       }

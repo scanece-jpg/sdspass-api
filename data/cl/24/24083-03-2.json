@@ -1,10 +1,10 @@
 {
   "cas": "24083-03-2",
-  "name": "1-(2-Butoxypropoxy)propan-2- ol",
+  "name": "1-(2-Butoxypropoxy)propan-2-ol",
   "name_tr": "1-(2-bütoksipropoksi)-propan-2- ol",
   "ec_no": "246-011-6",
   "index_no": "603-050-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

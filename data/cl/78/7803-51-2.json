@@ -6,8 +6,7 @@
   "index_no": "015-181-00-1",
   "atp": "ATP15",
   "notes": [
-    "U",
-    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
+    "U"
   ],
   "classification": {
     "hazards": [
@@ -51,5 +50,8 @@
       "H400"
     ],
     "suppl_h": []
+  },
+  "ate": {
+    "inhalation_ppm": 10.0
   }
 }

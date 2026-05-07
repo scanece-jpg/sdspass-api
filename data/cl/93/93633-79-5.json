@@ -1,10 +1,10 @@
 {
   "cas": "93633-79-5",
-  "name": "3-(N-methyl-N-(4-methylamino- 3-nitrophenyl)amino)propane- 1,2-diol hydrochloride",
+  "name": "3-(N-methyl-N-(4-methylamino-3-nitrophenyl)amino)propane-1,2-diol hydrochloride",
   "name_tr": "3-(N-metil-N-(4-metilamino-3- nitrofenil)amino)propan-1,2- diolhidroklorür",
   "ec_no": "403-440-5",
   "index_no": "603-099-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

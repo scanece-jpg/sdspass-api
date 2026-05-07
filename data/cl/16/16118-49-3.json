@@ -1,10 +1,10 @@
 {
   "cas": "16118-49-3",
-  "name": "carbetamide (ISO); (R)-1-(ethylcarbamoyl)ethyl carbanilate; (2R)-1- (ethylamino)-1-oxopropan-2-yl phenylcarbamate",
+  "name": "carbetamide (ISO);\n(R)-1-(ethylcarbamoyl)ethyl carbanilate;\n(2R)-1-(ethylamino)-1-oxopropan-2-yl phenylcarbamate",
   "name_tr": "karbetamid (ISO); (R)-1-(etilkarbamoil)etil karbanilat; (2R)-1-(etilamino)-1- oksopropan-2-il fenilkarbamat",
   "ec_no": "240-286-6",
   "index_no": "616-223-00-7",
-  "atp": "",
+  "atp": "ATP10",
   "notes": [],
   "classification": {
     "hazards": [

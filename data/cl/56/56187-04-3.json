@@ -1,10 +1,10 @@
 {
   "cas": "56187-04-3",
-  "name": "4-methyl-N,N-bis(2-(((4- methylphenyl)sulfonyl)amino)et hyl)benzenesulfonamide",
+  "name": "4-methyl-N,N-bis(2-(((4-methylphenyl)sulfonyl)amino)ethyl)benzenesulfonamide",
   "name_tr": "4-metil-N,N-bis(2-(((4- metilfenil)sülfonil)amino)etil)- benzensülfonamid",
   "ec_no": "413-300-5",
   "index_no": "016-078-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

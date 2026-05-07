@@ -1,13 +1,21 @@
 {
   "cas": "104206-82-8",
-  "name": "mesotrione (ISO); 2-[4-(methylsulfonyl)-2- nitrobenzoyl]-1,3- cyclohexanedione",
+  "name": "mesotrione (ISO); 2-[4-(methylsulfonyl)-2-nitrobenzoyl]-1,3-cyclohexanedione",
   "name_tr": "mesotriyon(ISO); 2-[4-(metilsülfonil)-2- nitrobenzoil]-1,3- siklohekzandion",
   "ec_no": "",
   "index_no": "609-064-00-X",
-  "atp": "",
+  "atp": "ATP15",
   "notes": [],
   "classification": {
     "hazards": [
+      {
+        "class": "Repr. 2",
+        "h_code": "H361d"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373(eyes,_nervous_system)"
+      },
       {
         "class": "Aquatic Acute 1",
         "h_code": "H400"
@@ -26,9 +34,12 @@
   "labelling": {
     "signal": "Warning",
     "pictograms": [
+      "GHS08",
       "GHS09"
     ],
     "h_codes": [
+      "H361d",
+      "H373(eyes,_nervous_system)",
       "H400",
       "H410"
     ],

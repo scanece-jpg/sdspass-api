@@ -1,10 +1,10 @@
 {
   "cas": "133-06-2",
-  "name": "captan (ISO); 1,2,3,6-tetrahydro-N- (trichloromethylthio)phthalimide",
+  "name": "captan (ISO); 1,2,3,6-tetrahydro-N-(trichloromethylthio)phthalimide",
   "name_tr": "kaptan (ISO) ;1,2,3,6-tetrahidro- N-(triklorometiltiyo)ftalimid",
   "ec_no": "205-087-0",
   "index_no": "613-044-00-6",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -30,17 +30,9 @@
       }
     ],
     "m_factors": {
-      "acute": 10,
-      "chronic": 10
+      "acute": 10
     },
-    "scl_limits": [
-      {
-        "h_code": "H317",
-        "class": "Skin Sens. 1A",
-        "c_min": 0.001,
-        "c_max": null
-      }
-    ]
+    "scl_limits": []
   },
   "labelling": {
     "signal": "Danger",
@@ -58,8 +50,5 @@
       "H400"
     ],
     "suppl_h": []
-  },
-  "ate": {
-    "inhalation_dust": 0.22
   }
 }

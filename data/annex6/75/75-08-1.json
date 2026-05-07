@@ -49,7 +49,7 @@
     "suppl_h": []
   },
   "ate": {
-    "inhalation_vapour": 7.1,
+    "inhalation_mgl": 7.1,
     "oral": 680.0
   }
 }

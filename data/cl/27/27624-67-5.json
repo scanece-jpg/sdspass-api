@@ -1,10 +1,10 @@
 {
   "cas": "27624-67-5",
-  "name": "2,4-diamino-5-[4-[(2-sulfoxyl ethyl)sulfonyl]phenylazo]benzen esulfonic acid",
+  "name": "2,4-diamino-5-[4-[(2-sulfoxyl ethyl)sulfonyl]phenylazo]benzenesulfonic acid",
   "name_tr": "2,4-diamino-5-[4-[(2- sülfoksiletil)sülfonil]fenilazo]be nzensülfonik asit",
   "ec_no": "424-870-1",
   "index_no": "607-554-00-8",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

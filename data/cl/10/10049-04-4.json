@@ -1,10 +1,10 @@
 {
   "cas": "10049-04-4",
-  "name": "chlorine dioxide ... %",
+  "name": "chlorine dioxide … %",
   "name_tr": "Klor dioksit . . . %",
   "ec_no": "233-162-8",
   "index_no": "017-026-01-0",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "B"
   ],
@@ -28,10 +28,34 @@
     },
     "scl_limits": [
       {
+        "h_code": "H335",
+        "class": "",
+        "c_min": 3.0,
+        "c_max": null
+      },
+      {
         "h_code": "H314",
-        "class": "Skin Corr. 1B",
+        "class": "",
         "c_min": 5.0,
         "c_max": null
+      },
+      {
+        "h_code": "H315",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": 5.0
+      },
+      {
+        "h_code": "H318",
+        "class": "",
+        "c_min": 3.0,
+        "c_max": 5.0
+      },
+      {
+        "h_code": "H319",
+        "class": "",
+        "c_min": 0.3,
+        "c_max": 3.0
       }
     ]
   },

@@ -46,7 +46,7 @@
       {
         "h_code": "H351",
         "class": "",
-        "c_min": 1.0,
+        "c_min": 0.1,
         "c_max": null
       }
     ]

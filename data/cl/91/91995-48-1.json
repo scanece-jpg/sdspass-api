@@ -1,13 +1,12 @@
 {
   "cas": "91995-48-1",
-  "name": "Distillates (coal tar), naphthalene oils, acid exts.; Methylnaphthalene Oil Extract Residue; [A complex combination of hydrocarbons obtained by debasing the methylnaphthalene fraction obtained by the distillation of coal tar and boiling in the range of approximately 230°C to 255°C (446°F to 491°F). Contains chiefly 1(2)-methylnaphthalene, naphthalene, dimethylnaphthalene and biphenyl.]",
+  "name": "Distillates (coal tar), naphthalene oils, acid exts.; Methylnaphthalene Oil Extract Residue; [A complex combination of hydrocarbons obtained by debasing the methylnaphthalene fraction obtained by the distillation of coal tar and boiling in the range of approximately 230°C to 255°C (446°F to 491°F).  Contains chiefly 1(2)-methylnaphthalene, naphthalene, dimethylnaphthalene and biphenyl.]",
   "name_tr": "Damıtıklar (kömür zifti), naftalin yağları, asit özütleri.; Metilnaftalin yağı özüt artığı; [Kömür ziftinin damıtılmasından elde edilen metilnaftalin fraksiyonunun bazik özelliklerinin giderilmesiyle elde edilen ve yaklaşık 230oC ila 255oC (446oF ila 491oF) aralığında kaynayan hidrokarbonların kompleks bileşimi. Başlıca 1(2)- metilnaftalin, naftalin, dimetilnaftalin ve bifemilden oluşur.]",
   "ec_no": "295-309-2",
   "index_no": "648-094-00-8",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
-    "J",
-    "M"
+    "J M"
   ],
   "classification": {
     "hazards": [

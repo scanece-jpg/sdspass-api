@@ -1,10 +1,10 @@
 {
   "cas": "147703-65-9",
-  "name": "sodium 3-(2-acetamido-4-(4-(2- hydroxybutoxy)phenylazo)phen ylazo)benzenesulfonate",
+  "name": "sodium 3-(2-acetamido-4-(4-(2-hydroxybutoxy)phenylazo)phenylazo)benzenesulfonate",
   "name_tr": "sodyum 3-(2-asetamido-4-(4-(2- hidroksibütoksi)fenilazo)fenilaz o)benzensülfonat",
   "ec_no": "410-150-2",
   "index_no": "611-080-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

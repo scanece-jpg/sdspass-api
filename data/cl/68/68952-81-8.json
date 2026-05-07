@@ -1,14 +1,12 @@
 {
   "cas": "68952-81-8",
-  "name": "Tail gas (petroleum), thermal- cracked distillate, gas oil and naphtha absorber; petroleum gas; [A complex combination of hydrocarbons obtained from the separation of thermal-cracked distillates, naphtha and gas oil. It consists pedrominantly of hydrocarbons having carbon numbers predominantly in the range of C1 through C6.]",
+  "name": "Tail gas (petroleum), thermal-cracked distillate, gas oil and naphtha absorber; petroleum gas; [A complex combination of hydrocarbons obtained from the separation of thermal-cracked distillates, naphtha and gas oil. It consists pedrominantly of hydrocarbons having carbon numbers predominantly in the range of C1 through C6.]",
   "name_tr": "Artık gaz (petrol), ısıl olarak parçalanmış damıtık, gaz yağı ve nafta soğurucu; Petrol gazı; [Isıl olarak parçalanmış damıtıklar, nafta ve gaz yağının ayrılmasından elde edilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla C1 ila C6 aralığında karbon sayısına sahip hidrokarbonlardan oluşur.]",
   "ec_no": "273-175-6",
   "index_no": "649-109-00-0",
   "atp": "ATP1",
   "notes": [
-    "K",
-    "U",
-    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
+    "K U"
   ],
   "classification": {
     "hazards": [

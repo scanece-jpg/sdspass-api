@@ -1,10 +1,10 @@
 {
   "cas": "41198-08-7",
-  "name": "profenofos (ISO); O-(4-bromo-2-chlorophenyl) O- ethyl S-propyl phosphorothioate",
+  "name": "profenofos (ISO); O-(4-bromo-2-chlorophenyl) O-ethyl S-propyl phosphorothioate",
   "name_tr": "profenofos (ISO); O-(4-bromo-2-klorofenil)-O-etil- S-propil fosforotiyoat",
   "ec_no": "255-255-2",
   "index_no": "015-135-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

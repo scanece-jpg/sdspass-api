@@ -1,13 +1,12 @@
 {
   "cas": "90641-04-6",
-  "name": "Extract residues (coal), naphthalene oil alk., distn. overheads; Naphthalene Oil Extract Residue; [The distillate from alkali- washed naphthalene oil having an approximate distillation range of 180°C to 220°C (356°F to 428°F). Composed primarily of naphthalene, alkylbenzenes, indene and indan.]",
+  "name": "Extract residues (coal), naphthalene oil alk., distn. overheads; Naphthalene Oil Extract Residue; [The distillate from alkali-washed naphthalene oil having an approximate distillation range of 180°C to 220°C (356°F to 428°F).  Composed primarily of naphthalene, alkylbenzenes, indene and indan.]",
   "name_tr": "özüt artıkları (kömür), naftalin yağı bazik, damıtma üst kısımları; naftalin yağı özüt artığı; [Alkali yıkanmış naftalin yağının yaklaşık 180 oC ile 220 oC (356 oF - 428 oF) arasında kaynayan damıtığı. Büyük ölçüde naftalin, alkilbenzenler, inden ve indandan oluşur.]",
   "ec_no": "292-627-3",
   "index_no": "648-091-00-1",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
-    "J",
-    "M"
+    "J M"
   ],
   "classification": {
     "hazards": [

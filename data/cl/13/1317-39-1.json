@@ -1,10 +1,10 @@
 {
   "cas": "1317-39-1",
-  "name": "dicopper oxide; copper (I) oxide",
+  "name": "dicopper oxide;\ncopper (I) oxide",
   "name_tr": "Dibakır oksit; bakır (I) oksit",
   "ec_no": "215-270-7",
   "index_no": "029-002-00-X",
-  "atp": "",
+  "atp": "ATP17",
   "notes": [],
   "classification": {
     "hazards": [
@@ -52,7 +52,7 @@
     "suppl_h": []
   },
   "ate": {
-    "inhalation_dust": 3.34,
+    "inhalation_mgl": 3.34,
     "oral": 500.0
   }
 }

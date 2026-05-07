@@ -1,10 +1,10 @@
 {
   "cas": "74-89-5",
-  "name": "mono-methylamine ... %; [1] di-methylamine ... %; [2] tri-methylamine ... % [3]",
+  "name": "mono-methylamine ... % [1]\ndi-methylamine ... % [2]\ntri-methylamine ... %  [3]",
   "name_tr": "mono-metilamin ...%; [1] di-metilamin ...%; [2] tri-metilamin ...% [3]",
-  "ec_no": "200-820-0",
+  "ec_no": "200-820-0 [1]\n204-697-4 [2]\n200-875-0 [3]",
   "index_no": "612-001-01-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "B"
   ],
@@ -31,7 +31,7 @@
     "scl_limits": [
       {
         "h_code": "H335",
-        "class": "STOT SE 3",
+        "class": "",
         "c_min": 5.0,
         "c_max": null
       }

@@ -1,10 +1,10 @@
 {
   "cas": "112941-26-1",
-  "name": "methyl-2- [(aminosulfonyl)methyl]benzoat e",
+  "name": "methyl-2-[(aminosulfonyl)methyl]benzoate",
   "name_tr": "metil-2- [(aminosülfonil)metilbenzoat",
   "ec_no": "419-010-5",
   "index_no": "607-438-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

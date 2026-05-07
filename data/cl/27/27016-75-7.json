@@ -1,10 +1,10 @@
 {
   "cas": "27016-75-7",
-  "name": "nickel diarsenide; [1] nickel arsenide [2]",
+  "name": "nickel diarsenide [1]\nnickel arsenide [2]",
   "name_tr": "nikel diarsenid; [1] nikel arsenid [2]",
-  "ec_no": "235-103-1",
+  "ec_no": "248-169-1",
   "index_no": "028-051-00-4",
-  "atp": "",
+  "atp": "ATP02",
   "notes": [],
   "classification": {
     "hazards": [
@@ -14,7 +14,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372"
+        "h_code": "H372 **"
       },
       {
         "class": "Skin Sens. 1",
@@ -41,7 +41,7 @@
     ],
     "h_codes": [
       "H350i",
-      "H372",
+      "H372 **",
       "H317",
       "H400",
       "H410"

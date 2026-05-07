@@ -1,10 +1,10 @@
 {
   "cas": "120-80-9",
-  "name": "1,2-dihydroxybenzene; pyrocatechol",
+  "name": "1,2-dihydroxybenzene;\npyrocatechol",
   "name_tr": "1,2-dihidroksibenzen; pirokatekol",
   "ec_no": "204-427-5",
   "index_no": "604-016-00-4",
-  "atp": "",
+  "atp": "ATP13",
   "notes": [],
   "classification": {
     "hazards": [
@@ -53,7 +53,7 @@
     "suppl_h": []
   },
   "ate": {
-    "oral": 300.0,
-    "dermal": 600.0
+    "dermal": 600.0,
+    "oral": 300.0
   }
 }

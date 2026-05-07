@@ -1,10 +1,10 @@
 {
   "cas": "88671-89-0",
-  "name": "myclobutanil (ISO); 2-(4-chlorophenyl)-2-(1H-1,2,4- triazol-1-ylmethyl)hexanenitrile",
+  "name": "myclobutanil (ISO); 2-(4-chlorophenyl)-2-(1H-1,2,4-triazol-1-ylmethyl)hexanenitrile",
   "name_tr": "miklobütanil (ISO); 2-(4- klorofenil)-2-(1H-1,2,4-triyazol- 1-ilmetil)hekzannitril",
   "ec_no": "",
   "index_no": "613-134-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

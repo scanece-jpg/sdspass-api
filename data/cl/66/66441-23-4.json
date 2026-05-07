@@ -1,10 +1,10 @@
 {
   "cas": "66441-23-4",
-  "name": "ethyl 2-[4-[(6-chlorobenzoxazol- 2-yl)oxy]phenoxy]propionate; fenoxaprop-ethyl",
+  "name": "ethyl 2-[4-[(6-chlorobenzoxazol-2-yl)oxy]phenoxy]propionate; fenoxaprop-ethyl",
   "name_tr": "etil2-[4-[(6-klorobenzoksazol-2- il)oksi]fenoksi]propionat; fenoksaprop-etil",
   "ec_no": "266-362-9",
   "index_no": "604-039-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

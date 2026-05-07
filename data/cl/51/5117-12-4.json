@@ -1,10 +1,10 @@
 {
   "cas": "5117-12-4",
-  "name": "4-(1-oxo-2-propenyl)- morpholine",
+  "name": "4-(1-oxo-2-propenyl)-morpholine",
   "name_tr": "4-(1-okso-2-propenil)-morfolin",
   "ec_no": "418-140-1",
   "index_no": "613-222-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

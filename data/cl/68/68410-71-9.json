@@ -1,10 +1,10 @@
 {
   "cas": "68410-71-9",
-  "name": "Raffinates (petroleum), catalytic reformer ethylene glycol-water countercurrent exts.; Low boiling point modified naphtha; [A complex combination of hydrocarbons obtained as the raffinate from the UDEX extraction process on the catalytic reformer stream. It consists of saturated hydrocarbons having carbon numbers predominantly in the range of C6 through C9.]",
+  "name": "Raffinates (petroleum), catalytic reformer ethylene glycol-water countercurrent exts.; Low boiling point modified naphtha; [A complex combination of hydrocarbons obtained as the raffinate from the UDEX extraction process on the catalytic reformer stream.  It consists of saturated hydrocarbons having carbon numbers predominantly in the range of C6 through C9.]",
   "name_tr": "Rafinasyon ürünleri (petrol), katalitik dönüştürücü etilen glikol-su ters akış özütleri; düşük kaynama noktalı modifiye edilmiş nafta; [Katalitik dönüştürücü akımında UDEX özütleme prosesinden bir rafinat olarak elde edilen kompleks hidrokarbon karışımı. Karbon numaraları ağırlıklı olarak C6 ila C9 aralığından olan doymuş hidrokarbonlardan oluşur.]",
   "ec_no": "270-088-5",
   "index_no": "649-280-00-1",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "P"
   ],

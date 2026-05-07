@@ -1,10 +1,10 @@
 {
   "cas": "23950-58-5",
-  "name": "propyzamide (ISO); 3,5-dichloro-N-(1,1- dimethylprop-2-ynyl)benzamide",
+  "name": "propyzamide (ISO); 3,5-dichloro-N-(1,1-dimethylprop-2-ynyl)benzamide",
   "name_tr": "propizamind (ISO); 3,5-dikloro-N-(1,1-dimetilprop- 2-inil)benzamid",
   "ec_no": "245-951-4",
   "index_no": "616-055-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

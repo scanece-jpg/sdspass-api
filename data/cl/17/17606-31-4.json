@@ -1,10 +1,10 @@
 {
   "cas": "17606-31-4",
-  "name": "bensultap (ISO); 1,3-bis(phenylsulfonylthio)-2- (N,N-dimethylamino)propane",
+  "name": "bensultap (ISO); 1,3-bis(phenylsulfonylthio)-2-(N,N-dimethylamino)propane",
   "name_tr": "bensultap (ISO); 1,3-bis(fenilsülfoniltiyo)-2- (N,N-dimetilamino)propan",
   "ec_no": "",
   "index_no": "016-062-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

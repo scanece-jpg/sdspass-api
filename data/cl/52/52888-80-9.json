@@ -1,10 +1,10 @@
 {
   "cas": "52888-80-9",
-  "name": "prosulfocarb(ISO); S-benzyl N,N- dipropylthiocarbamate",
+  "name": "prosulfocarb(ISO); S-benzyl N,N-dipropylthiocarbamate",
   "name_tr": "prosülfokarb (ISO); S-benzil- N,N-dipropiltiyokarbamat",
   "ec_no": "401-730-6",
   "index_no": "006-072-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

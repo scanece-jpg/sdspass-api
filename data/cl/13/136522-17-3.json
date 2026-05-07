@@ -1,10 +1,10 @@
 {
   "cas": "136522-17-3",
-  "name": "(3S,4aS,8aS)-2-[(2R,3S)-3- amino-2-hydroxy-4- phenylbutyl]-N-tert- butyldecahydroisoquinoline-3- carboxamide",
+  "name": "(3S,4aS,8aS)-2-[(2R,3S)-3-amino-2-hydroxy-4-phenylbutyl]-N-tert-butyldecahydroisoquinoline-3-carboxamide",
   "name_tr": "(3S,4aS,8aS)-2-[(2R,3S)-3- amino-2-hidroksi-4-fenilbütil]- N-ter-bütildekahidro-izokinolin- 3-karboksamid",
   "ec_no": "430-230-0",
   "index_no": "616-135-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

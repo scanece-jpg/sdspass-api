@@ -6,8 +6,7 @@
   "index_no": "007-001-00-5",
   "atp": "CLP00",
   "notes": [
-    "U",
-    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
+    "U"
   ],
   "classification": {
     "hazards": [
@@ -33,38 +32,7 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": [
-      {
-        "h_code": "H314",
-        "class": "Skin Corr. 1A",
-        "c_min": 1.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H318",
-        "class": "Eye Dam. 1",
-        "c_min": 1.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H331",
-        "class": "Acute Tox. 3 (Inhal.)",
-        "c_min": 1.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H335",
-        "class": "STOT SE 3",
-        "c_min": 0.5,
-        "c_max": null
-      },
-      {
-        "h_code": "H400",
-        "class": "Aquatic Acute 1",
-        "c_min": 0.1,
-        "c_max": null
-      }
-    ]
+    "scl_limits": []
   },
   "labelling": {
     "signal": "Danger",

@@ -4,7 +4,7 @@
   "name_tr": "bütan-1-ol; n-bütanol",
   "ec_no": "200-751-6",
   "index_no": "603-004-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -21,45 +21,20 @@
         "h_code": "H335"
       },
       {
+        "class": "STOT SE 3",
+        "h_code": "H336"
+      },
+      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
       },
       {
         "class": "Eye Dam. 1",
         "h_code": "H318"
-      },
-      {
-        "class": "STOT SE 3",
-        "h_code": "H336"
       }
     ],
     "m_factors": {},
-    "scl_limits": [
-      {
-        "h_code": "H302",
-        "class": "Acute Tox. 4 (Oral)",
-        "c_min": 5.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H318",
-        "class": "Eye Dam. 1",
-        "c_min": 1.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H315",
-        "class": "Skin Irrit. 2",
-        "c_min": 10.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H336",
-        "class": "STOT SE 3",
-        "c_min": 20.0,
-        "c_max": null
-      }
-    ]
+    "scl_limits": []
   },
   "labelling": {
     "signal": "Danger",
@@ -72,9 +47,9 @@
       "H226",
       "H302",
       "H335",
+      "H336",
       "H315",
-      "H318",
-      "H336"
+      "H318"
     ],
     "suppl_h": []
   }

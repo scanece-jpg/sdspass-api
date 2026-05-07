@@ -4,7 +4,7 @@
   "name_tr": "2,4,6-triklorofenol",
   "ec_no": "201-795-9",
   "index_no": "604-018-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -17,12 +17,12 @@
         "h_code": "H302"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Aquatic Acute 1",
@@ -46,8 +46,8 @@
     "h_codes": [
       "H351",
       "H302",
-      "H319",
       "H315",
+      "H319",
       "H400",
       "H410"
     ],

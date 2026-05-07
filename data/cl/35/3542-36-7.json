@@ -1,15 +1,17 @@
 {
   "cas": "3542-36-7",
-  "name": "dichlorodioctyl stannane",
+  "name": "dichlorodioctylstannane",
   "name_tr": "dikorodioktil stannan",
   "ec_no": "222-583-2",
   "index_no": "050-021-00-4",
   "atp": "ATP15",
-  "notes": [
-    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
-  ],
+  "notes": [],
   "classification": {
     "hazards": [
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360D"
+      },
       {
         "class": "Acute Tox. 2",
         "h_code": "H330"
@@ -27,7 +29,7 @@
     "scl_limits": [
       {
         "h_code": "H360D",
-        "class": "Repr. 1B",
+        "class": "",
         "c_min": 0.03,
         "c_max": null
       }
@@ -36,10 +38,11 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS06",
-      "GHS08"
+      "GHS08",
+      "GHS06"
     ],
     "h_codes": [
+      "H360D",
       "H330",
       "H372",
       "H412"
@@ -47,6 +50,6 @@
     "suppl_h": []
   },
   "ate": {
-    "inhalation_dust": 0.098
+    "inhalation_mgl": 0.098
   }
 }

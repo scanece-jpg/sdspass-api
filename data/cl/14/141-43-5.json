@@ -4,7 +4,7 @@
   "name_tr": "2-amino-etanol; etanolamin",
   "ec_no": "205-483-3",
   "index_no": "603-030-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -29,7 +29,7 @@
     "scl_limits": [
       {
         "h_code": "H335",
-        "class": "STOT SE 3",
+        "class": "",
         "c_min": 5.0,
         "c_max": null
       }

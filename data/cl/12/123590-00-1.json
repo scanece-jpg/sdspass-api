@@ -1,10 +1,10 @@
 {
   "cas": "123590-00-1",
-  "name": "N-(2-(1-allyl-4,5- dicyanoimidazol-2-ylazo)-5- (dipropylamino)phenyl)- acetamide",
+  "name": "N-(2-(1-allyl-4,5-dicyanoimidazol-2-ylazo)-5-(dipropylamino)phenyl)-acetamide",
   "name_tr": "N-(2-(1-allil-4,5- disiyanoimidazol-2-ilazo)-5- (dipropilamino)fenil)-asetamid",
   "ec_no": "417-530-7",
   "index_no": "616-128-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

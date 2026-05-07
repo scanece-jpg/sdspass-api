@@ -1,13 +1,11 @@
 {
   "cas": "13952-84-6",
-  "name": "(S)-sec-butylamine; (S)-2-aminobutane; [1] (R)-sec-butylamine; (R)-2-aminobutane; [2] sec-butylamine; 2-aminobutane [3]",
+  "name": "(S)-sec-butylamine; (S)-2-aminobutane [1]\n(R)-sec-butylamine; (R)-2-aminobutane [2]\nsec-butylamine; 2-aminobutane [3]",
   "name_tr": "(S)-sek-bütilamin; (S)-2-aminobütan; [1] (R)-2-aminobütan; [2] (R)-sek-bütilamin; sek-bütilamin; 2-aminobütan [3]",
-  "ec_no": "208-164-7",
+  "ec_no": "237-732-7",
   "index_no": "612-052-00-7",
-  "atp": "",
-  "notes": [
-    "C"
-  ],
+  "atp": "CLP00",
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -15,11 +13,11 @@
         "h_code": "H225"
       },
       {
-        "class": "Acute Tox. 4",
+        "class": "Acute Tox. 4 *",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4",
+        "class": "Acute Tox. 4 *",
         "h_code": "H302"
       },
       {
@@ -38,8 +36,8 @@
     "signal": "Danger",
     "pictograms": [
       "GHS02",
-      "GHS05",
       "GHS07",
+      "GHS05",
       "GHS09"
     ],
     "h_codes": [

@@ -1,17 +1,13 @@
 {
   "cas": "2855-13-2",
-  "name": "3-aminomethyl-3,5,5- trimethylcyclohexylamine",
+  "name": "3-aminomethyl-3,5,5-trimethylcyclohexylamine",
   "name_tr": "3-aminometil-3,5,5- trimetilsiklohekzilamin",
   "ec_no": "220-666-8",
   "index_no": "612-067-00-9",
-  "atp": "",
+  "atp": "ATP17",
   "notes": [],
   "classification": {
     "hazards": [
-      {
-        "class": "Acute Tox. 4",
-        "h_code": "H312"
-      },
       {
         "class": "Acute Tox. 4",
         "h_code": "H302"
@@ -21,19 +17,19 @@
         "h_code": "H314"
       },
       {
-        "class": "Skin Sens. 1",
-        "h_code": "H317"
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
       },
       {
-        "class": "Aquatic Chronic 3",
-        "h_code": "H412"
+        "class": "Skin Sens. 1A",
+        "h_code": "H317"
       }
     ],
     "m_factors": {},
     "scl_limits": [
       {
         "h_code": "H317",
-        "class": "Skin Sens. 1A",
+        "class": "",
         "c_min": 0.001,
         "c_max": null
       }
@@ -46,11 +42,10 @@
       "GHS07"
     ],
     "h_codes": [
-      "H312",
       "H302",
       "H314",
-      "H317",
-      "H412"
+      "H318",
+      "H317"
     ],
     "suppl_h": []
   },

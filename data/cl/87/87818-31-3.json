@@ -1,10 +1,10 @@
 {
   "cas": "87818-31-3",
-  "name": "cinmethylin (ISO); exo-(±)-1-methyl-2-(2- methylbenzyloxy)-4-isopropyl- 7-oxabicyclo(2.2.1)heptane",
+  "name": "cinmethylin (ISO); exo-(±)-1-methyl-2-(2-methylbenzyloxy)-4-isopropyl-7-oxabicyclo(2.2.1)heptane",
   "name_tr": "sinmetilin (ISO); ekzo-(+/-)-1-metil-2-(2- metilbenziloksi)-4-izopropil-7- oksabisiklo(2.2.1)heptan",
   "ec_no": "402-410-9",
   "index_no": "603-093-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

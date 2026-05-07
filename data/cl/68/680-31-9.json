@@ -4,7 +4,7 @@
   "name_tr": "Hekzametilfosforik triamid; hekzametilfosforamid",
   "ec_no": "211-653-8",
   "index_no": "015-106-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -21,7 +21,7 @@
     "scl_limits": [
       {
         "h_code": "H350",
-        "class": "Carc. 1B",
+        "class": "",
         "c_min": 0.01,
         "c_max": null
       }

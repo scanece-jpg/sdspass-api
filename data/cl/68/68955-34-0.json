@@ -1,14 +1,12 @@
 {
   "cas": "68955-34-0",
-  "name": "Gases (petroleum), straight-run naphtha catalytic reformer stabilizer overhead; Petroleum gas; [A complex combination of hydrocarbons obtained by the catalytic reforming of straight- run naphtha and the fractionation of the total effluent. It consists of saturated aliphatic hydrocarbons having carbon numbers predominantly in the range of C2 through C4.]",
+  "name": "Gases (petroleum), straight-run naphtha catalytic reformer stabilizer overhead; Petroleum gas; [A complex combination of hydrocarbons obtained by the catalytic reforming of straight-run naphtha and the fractionation of the total effluent. It consists of saturated aliphatic hydrocarbons having carbon numbers predominantly in the range of C2 through C4.]",
   "name_tr": "Gazlar (petrol), Normal üretim nafta katalitik dönüştürücü kararlaştırıcısı üstleri; Petrol gazı; [[Toplam atık ayrımsal damıtması ve normal çalışmada elde edilen naftanın katalitik olarak dönüşümü ile elde edilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla C2 ila C4 aralığında karbon sayısına sahip doymuş alifatik hidrokarbonlardan oluşur.]",
   "ec_no": "273-270-2",
   "index_no": "649-112-00-7",
   "atp": "ATP1",
   "notes": [
-    "K",
-    "U",
-    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
+    "K U"
   ],
   "classification": {
     "hazards": [

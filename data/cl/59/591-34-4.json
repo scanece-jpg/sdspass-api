@@ -1,13 +1,11 @@
 {
   "cas": "591-34-4",
-  "name": "n-butyl propionate; [1] sec-butyl propionate; [2] tert-butyl propionate; [3] iso-butyl propionate",
+  "name": "n-butyl propionate [1]\nsec-butyl propionate [2]\niso-butyl propionate [3]",
   "name_tr": "n-bütil propionat [1]; sec-bütil propionat [2]; ter-bütil propionat [3]; izo-bütil propionat [4]",
-  "ec_no": "209-669-5",
+  "ec_no": "-",
   "index_no": "607-029-00-3",
-  "atp": "",
-  "notes": [
-    "C"
-  ],
+  "atp": "CLP00",
+  "notes": [],
   "classification": {
     "hazards": [
       {

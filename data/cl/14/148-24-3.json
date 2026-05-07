@@ -1,10 +1,10 @@
 {
   "cas": "148-24-3",
-  "name": "quinolin-8-ol; 8-hydroxyquinoline",
+  "name": "quinolin-8-ol;\n8-hydroxyquinoline",
   "name_tr": "kinolin-8-ol; 8-hidroksikinolin",
   "ec_no": "205-711-1",
   "index_no": "613-324-00-8",
-  "atp": "",
+  "atp": "ATP10",
   "notes": [],
   "classification": {
     "hazards": [

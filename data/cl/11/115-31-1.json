@@ -1,10 +1,10 @@
 {
   "cas": "115-31-1",
-  "name": "1,7,7- trimethylbicyclo(2,2,1)hept-2-yl thiocyanatoacetate; isobornyl thiocyanoacetate",
+  "name": "1,7,7-trimethylbicyclo(2,2,1)hept-2-yl thiocyanatoacetate; isobornyl thiocyanoacetate",
   "name_tr": "1,7,7-trimetilbisiklo(2,2,1)hept- 2-il tiyosiyanatoasetat; izobornil tiyosiyanoasetat",
   "ec_no": "204-081-5",
   "index_no": "615-015-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

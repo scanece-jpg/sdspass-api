@@ -1,10 +1,10 @@
 {
   "cas": "125224-62-6",
-  "name": "(1S)-2-methyl-2,5- diazobicyclo[2.2.1]heptane dihydrobromide",
+  "name": "(1S)-2-methyl-2,5-diazobicyclo[2.2.1]heptane dihydrobromide",
   "name_tr": "(1S)-2-metil-2,5- diazobisiklo[2.2.1]heptandihidro bromür",
   "ec_no": "411-000-9",
   "index_no": "613-160-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

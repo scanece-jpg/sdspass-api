@@ -74,13 +74,13 @@
       {
         "h_code": "H334",
         "class": "",
-        "c_min": 2.0,
+        "c_min": 0.2,
         "c_max": null
       },
       {
         "h_code": "H317",
         "class": "",
-        "c_min": 2.0,
+        "c_min": 0.2,
         "c_max": null
       }
     ]

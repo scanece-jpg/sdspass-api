@@ -1,10 +1,10 @@
 {
   "cas": "155522-12-6",
-  "name": "methyl 2-[4-(2-chloro-4- nitrophenylazo)-3-(1- oxopropyl)amino]phenylaminop ropionate",
+  "name": "methyl 2-[4-(2-chloro-4-nitrophenylazo)-3-(1-oxopropyl)amino]phenylaminopropionate",
   "name_tr": "metil-2-[4-(2-kloro-4- nitrofenilazo)-3-(1- oksopropil)amino]fenilaminopro pionat",
   "ec_no": "416-240-8",
   "index_no": "607-446-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

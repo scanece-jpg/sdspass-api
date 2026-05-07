@@ -1,10 +1,10 @@
 {
   "cas": "5470-11-1",
-  "name": "hydroxylammonium chloride; hydroxylamine hydrochloride; [1] bis(hydroxylammonium) sulfate; hydroxylamine sulfate (2:1) [2]",
+  "name": "hydroxylammonium chloride; hydroxylamine hydrochloride [1]\nbis(hydroxylammonium) sulfate; hydroxylamine sulfate (2:1)  [2]",
   "name_tr": "hidroksilamonyum klorür; hidroksilamin hidroklorür; [1] bis(hidroksilamonyum) sülfat; hidroksilamin sülfat (2:1) [2]",
-  "ec_no": "226-798-2",
+  "ec_no": "226-798-2 [1]\n233-118-8 [2]",
   "index_no": "612-123-00-2",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -29,12 +29,12 @@
         "h_code": "H373"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Skin Sens. 1",
@@ -62,8 +62,8 @@
       "H312",
       "H302",
       "H373",
-      "H319",
       "H315",
+      "H319",
       "H317",
       "H400"
     ],

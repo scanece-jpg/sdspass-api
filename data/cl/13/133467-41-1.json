@@ -1,10 +1,10 @@
 {
   "cas": "133467-41-1",
-  "name": "4-[4-(2- ethylhexyloxy)phenyl](1,4- thiazinane-1,1-dioxide)",
+  "name": "4-[4-(2-ethylhexyloxy)phenyl](1,4-thiazinane-1,1-dioxide)",
   "name_tr": "4-[4-(2-etilhekziloksi)fenil](1,4- tiyazinan-1,1-dioksit)",
   "ec_no": "418-320-8",
   "index_no": "613-212-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

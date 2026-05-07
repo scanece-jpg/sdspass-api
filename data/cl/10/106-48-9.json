@@ -1,25 +1,23 @@
 {
   "cas": "106-48-9",
-  "name": "2-chlorophenol; [1] 4-chlorophenol; [2] 3-chlorophenol; [3] chlorophenol [4]",
+  "name": "2-chlorophenol [1]\n4-chlorophenol [2]\n3-chlorophenol [3]\nchlorophenol [4]",
   "name_tr": "2-klorofenol [1]; 4-klorofenol [2]; 3-klorofenol [3]; klorofenol [4].",
-  "ec_no": "202-433-2",
+  "ec_no": "203-402-6",
   "index_no": "604-008-00-0",
-  "atp": "",
-  "notes": [
-    "C"
-  ],
+  "atp": "CLP00",
+  "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4",
+        "class": "Acute Tox. 4 *",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4",
+        "class": "Acute Tox. 4 *",
         "h_code": "H312"
       },
       {
-        "class": "Acute Tox. 4",
+        "class": "Acute Tox. 4 *",
         "h_code": "H302"
       },
       {

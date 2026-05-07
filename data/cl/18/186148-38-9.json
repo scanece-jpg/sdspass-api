@@ -1,10 +1,10 @@
 {
   "cas": "186148-38-9",
-  "name": "reaction mass of: triisopropanolamine salt of 1- amino-4-(3- propionamidoanilino)anthraquin one-2-sulfonic acid; triisopropanolamine salt of 1- amino-4-[3,4-dimethyl-5-(2- hydroxyethylaminosulfonyl)anili no]anthraquinone-2-sulfonic acid",
+  "name": "reaction mass of: triisopropanolamine salt of 1-amino-4-(3-propionamidoanilino)anthraquinone-2-sulfonic acid; triisopropanolamine salt of 1-amino-4-[3,4-dimethyl-5-(2-hydroxyethylaminosulfonyl)anilino]anthraquinone-2-sulfonic acid",
   "name_tr": "tepkime kütlesi: 1-amino-4-(3- propiyonamidoanilino)antrakuin -on-2-sülfonik asit’in triizopropanolamin tuzu; 1-amino-4-[3,4-dimetil-5-(2- hidroksietilamionsülfonil)anilino ]antrakuinon-2-sülfonik asit’in triizopropanolamin tuzu",
   "ec_no": "430-410-9",
   "index_no": "612-232-00-5",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

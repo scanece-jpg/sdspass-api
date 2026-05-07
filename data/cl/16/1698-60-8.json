@@ -1,10 +1,10 @@
 {
   "cas": "1698-60-8",
-  "name": "chloridazon (ISO); 5-amino-4-chloro-2- phenylpyridazine-3-(2H)-one; pyrazon",
+  "name": "chloridazon (ISO); 5-amino-4-chloro-2-phenylpyridazine-3-(2H)-one; pyrazon",
   "name_tr": "kloridazon (ISO); 5-amino-4-kloro-2- fenilpiridazin-3-(2H)-on; pirazon",
   "ec_no": "216-920-2",
   "index_no": "606-035-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

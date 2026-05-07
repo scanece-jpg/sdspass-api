@@ -4,12 +4,12 @@
   "name_tr": "dikloroasetilen",
   "ec_no": "",
   "index_no": "602-069-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Kar.Pat.(Kararsız",
+        "class": "Unst. Expl.",
         "h_code": "H200"
       },
       {

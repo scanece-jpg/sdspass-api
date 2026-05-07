@@ -1,10 +1,10 @@
 {
   "cas": "71297-11-5",
-  "name": "4-(bis(4- (diethylamino)phenyl)methyl)be nzene-1,2-dimethanesulfonic acid",
+  "name": "4-(bis(4-(diethylamino)phenyl)methyl)benzene-1,2-dimethanesulfonic acid",
   "name_tr": "4-(bis(4- (dietilamino)fenil)metil)benzen- 1,2-dimetansülfonik asit",
   "ec_no": "407-280-7",
   "index_no": "016-088-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

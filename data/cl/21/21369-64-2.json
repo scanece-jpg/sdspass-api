@@ -4,17 +4,17 @@
   "name_tr": "n-hekzillityum",
   "ec_no": "404-950-0",
   "index_no": "003-002-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Water-react. 1",
-        "h_code": "H260"
-      },
-      {
         "class": "Pyr. Sol. 1",
         "h_code": "H250"
+      },
+      {
+        "class": "Water-react. 1",
+        "h_code": "H260"
       },
       {
         "class": "Skin Corr. 1A",
@@ -31,8 +31,8 @@
       "GHS05"
     ],
     "h_codes": [
-      "H260",
       "H250",
+      "H260",
       "H314"
     ],
     "suppl_h": [

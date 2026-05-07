@@ -1,10 +1,10 @@
 {
   "cas": "6903-18-0",
-  "name": "3-(2'- phenoxyethoxy)propylamine",
+  "name": "3-(2'-phenoxyethoxy)propylamine",
   "name_tr": "3-(2'-fenoksietoksi)propilamin",
   "ec_no": "427-870-8",
   "index_no": "612-226-00-2",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

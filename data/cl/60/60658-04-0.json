@@ -1,10 +1,10 @@
 {
   "cas": "60658-04-0",
-  "name": "ethyl 2-(3- benzoylphenyl)propanoate",
+  "name": "ethyl 2-(3-benzoylphenyl)propanoate",
   "name_tr": "etil 2-(3-benzoilfenil)propanoat",
   "ec_no": "414-920-9",
   "index_no": "607-534-00-9",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

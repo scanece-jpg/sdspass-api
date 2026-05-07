@@ -1,10 +1,10 @@
 {
   "cas": "17557-23-2",
-  "name": "1,3-bis(2,3-epoxypropoxy)-2,2- dimethylpropane",
+  "name": "1,3-bis(2,3-epoxypropoxy)-2,2-dimethylpropane",
   "name_tr": "1,3-bis(2,3-epoksipropoksi)-2,2- dimetilpropan",
   "ec_no": "241-536-7",
   "index_no": "603-094-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

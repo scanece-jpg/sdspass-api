@@ -1,10 +1,10 @@
 {
   "cas": "52460-86-3",
-  "name": "ethyl-2-chloro-2,2- diphenylacetate",
+  "name": "ethyl-2-chloro-2,2-diphenylacetate",
   "name_tr": "etil-2-kloro-2,2-difenilasetat",
   "ec_no": "406-580-5",
   "index_no": "607-265-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

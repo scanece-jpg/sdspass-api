@@ -4,7 +4,7 @@
   "name_tr": "2-hidroksietil akrilat",
   "ec_no": "212-454-9",
   "index_no": "607-072-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "D"
   ],
@@ -31,7 +31,7 @@
     "scl_limits": [
       {
         "h_code": "H317",
-        "class": "Skin Sens. 1",
+        "class": "",
         "c_min": 0.2,
         "c_max": null
       }

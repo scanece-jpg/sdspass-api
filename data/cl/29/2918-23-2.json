@@ -1,13 +1,12 @@
 {
   "cas": "2918-23-2",
-  "name": "2-hydroxy-1- methylethylacrylate; [1] 2-hydroxypropylacrylate; [2] acrylic acid, monoester with propane-1,2-diol [3]",
+  "name": "2-hydroxy-1-methylethylacrylate [1]\n2-hydroxypropylacrylate [2]\nacrylic acid, monoester with propane-1,2-diol  [3]",
   "name_tr": "2-hidroksi-1-metiletilakrilat; [1] 2-hidroksipropilakrilat; [2] akrilik asit, propan-1,2-diol’lü monoester [3]",
-  "ec_no": "220-852-9",
+  "ec_no": "220-852-9 [1]\n213-663-8 [2]\n247-118-0 [3]",
   "index_no": "607-108-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
-    "C",
-    "D"
+    "C D"
   ],
   "classification": {
     "hazards": [
@@ -36,7 +35,7 @@
     "scl_limits": [
       {
         "h_code": "H317",
-        "class": "Skin Sens. 1",
+        "class": "",
         "c_min": 0.2,
         "c_max": null
       }

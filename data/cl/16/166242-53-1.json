@@ -1,10 +1,10 @@
 {
   "cas": "166242-53-1",
-  "name": "UVCB condensation product of: tetrakis- hydroxymethylphosphonium chloride, urea and distilled hydrogenated C16-18 tallow alkylamine",
+  "name": "UVCB condensation product of: tetrakis-hydroxymethylphosphonium chloride, urea and distilled hydrogenated C16-18 tallow alkylamine",
   "name_tr": "tetrakis- hidroksimetilfosfonyumklorür, üre ve damıtılıp hidrojenlenmiş C16-18-katılaşmış- alkilamin’in UVCB yoğunlaşma ürünü",
   "ec_no": "422-720-8",
   "index_no": "015-179-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

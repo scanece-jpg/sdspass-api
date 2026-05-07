@@ -1,10 +1,10 @@
 {
   "cas": "89604-92-2",
-  "name": "2-mercaptobenzothiazolyl-(Z)- (2-aminothiazol-4-yl)-2-(tert- butoxycarbonyl) isopropoxyiminoacetate",
+  "name": "2-mercaptobenzothiazolyl-(Z)-(2-aminothiazol-4-yl)-2-(tert-butoxycarbonyl) isopropoxyiminoacetate",
   "name_tr": "2-merkaptobenzotiyazolil-(Z)- (2-aminotiyazol-4-il)-2-(ter- bütoksikarbonil) izopropoksiiminoasetat",
   "ec_no": "419-040-9",
   "index_no": "607-450-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

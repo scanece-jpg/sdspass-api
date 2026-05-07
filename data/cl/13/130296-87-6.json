@@ -1,10 +1,10 @@
 {
   "cas": "130296-87-6",
-  "name": "reaction mass of: hydroxyaluminium bis[2- hydroxy-3,5-di-tert- butylbenzoate]; 3,5-di-tert-butyl-salicylic acid",
+  "name": "reaction mass of: hydroxyaluminium bis[2-hydroxy-3,5-di-tert-butylbenzoate]; 3,5-di-tert-butyl-salicylic acid",
   "name_tr": "tepkime kütlesi: hidroksialüminyum-bis[2- hidroksi-3,5-di-ter-bütilbenzoat]; 3,5-di-ter-bütil-salisillikasit",
   "ec_no": "406-890-0",
   "index_no": "607-266-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

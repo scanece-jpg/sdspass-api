@@ -1,10 +1,10 @@
 {
   "cas": "2597-03-7",
-  "name": "phenthoate (ISO); ethyl 2- (dimethoxyphosphinothioylthio) -2-phenylacetate",
+  "name": "phenthoate (ISO); ethyl 2-(dimethoxyphosphinothioylthio)-2-phenylacetate",
   "name_tr": "fentoat (ISO); etil-2- (dimetoksifosfinotiyoiltiyo)-2- fenilasetat",
   "ec_no": "219-997-0",
   "index_no": "015-097-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

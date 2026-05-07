@@ -4,7 +4,7 @@
   "name_tr": "1-metoksi-2-propilamin",
   "ec_no": "422-550-4",
   "index_no": "612-217-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,12 +13,12 @@
         "h_code": "H225"
       },
       {
-        "class": "Skin Corr. 1B",
-        "h_code": "H314"
-      },
-      {
         "class": "Acute Tox. 4",
         "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
       },
       {
         "class": "Aquatic Chronic 3",
@@ -37,8 +37,8 @@
     ],
     "h_codes": [
       "H225",
-      "H314",
       "H302",
+      "H314",
       "H412"
     ],
     "suppl_h": []

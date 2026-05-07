@@ -1,10 +1,10 @@
 {
   "cas": "60568-05-0",
-  "name": "furmecyclox (ISO); N-cyclohexyl-N-methoxy-2,5- dimethyl-3-furamide",
+  "name": "furmecyclox (ISO); N-cyclohexyl-N-methoxy-2,5-dimethyl-3-furamide",
   "name_tr": "furmesikloks (ISO); N- siklohekzil-N-metoksi-2,5- dimetil-3-furamid",
   "ec_no": "262-302-0",
   "index_no": "006-070-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

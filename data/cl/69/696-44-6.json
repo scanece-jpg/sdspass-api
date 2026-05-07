@@ -1,30 +1,28 @@
 {
   "cas": "696-44-6",
-  "name": "N-methyl-o-toluidine; [1] N-methyl-m-toluidine; [2] N-methyl-p-toluidine [3]",
+  "name": "N-methyl-o-toluidine [1]\nN-methyl-m-toluidine [2]\nN-methyl-p-toluidine [3]",
   "name_tr": "N-metil-o-toluidin; [1] N-metil-m-toluidin; [2] N-metil-p-toluidin [3]",
-  "ec_no": "210-260-9",
+  "ec_no": "211-795-0",
   "index_no": "612-055-00-3",
-  "atp": "",
-  "notes": [
-    "C"
-  ],
+  "atp": "CLP00",
+  "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 3",
+        "class": "Acute Tox. 3 *",
         "h_code": "H331"
       },
       {
-        "class": "Acute Tox. 3",
+        "class": "Acute Tox. 3 *",
         "h_code": "H311"
       },
       {
-        "class": "Acute Tox. 3",
+        "class": "Acute Tox. 3 *",
         "h_code": "H301"
       },
       {
-        "class": "STOT RE 2",
-        "h_code": "H373"
+        "class": "STOT RE 2 *",
+        "h_code": "H373 **"
       },
       {
         "class": "Aquatic Chronic 3",
@@ -44,7 +42,7 @@
       "H331",
       "H311",
       "H301",
-      "H373",
+      "H373 **",
       "H412"
     ],
     "suppl_h": []

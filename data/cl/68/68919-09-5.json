@@ -1,14 +1,12 @@
 {
   "cas": "68919-09-5",
-  "name": "Gases (petroleum), straight-run naphtha catalytic reforming off; Petroleum gas; [A complex combination of hydrocarbons obtained by the catalytic reforming of straight- run naphtha and fractionation of the total effluent. It consists of methane, ethane, and propane.]",
+  "name": "Gases (petroleum), straight-run naphtha catalytic reforming off; Petroleum gas; [A complex combination of hydrocarbons obtained by the catalytic reforming of straight-run naphtha and fractionation of the total effluent. It consists of methane, ethane, and propane.]",
   "name_tr": "Gazlar (petrol), normal üretim nafta katalitik dönüştürücü çalışmazken; Petrol gazı; [ Normal üretim naftanın katalitik dönüşümü ve tüm atığın ayrımsal damıtılmasından elde edilen hidrokarbonların kompleks bir bileşimi. Metan, etan ve propandan oluşur.]",
   "ec_no": "272-882-7",
   "index_no": "649-104-00-3",
   "atp": "ATP1",
   "notes": [
-    "K",
-    "U",
-    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
+    "K U"
   ],
   "classification": {
     "hazards": [

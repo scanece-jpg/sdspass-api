@@ -1,10 +1,10 @@
 {
   "cas": "95-65-8",
-  "name": "3,4-xylenol; [1] 2,5-xylenol; [2] 2,4-xylenol; [3] 2,3-xylenol; [4] 2,6-xylenol; [5] xylenol; [6] 2,4(or 2,5)-xylenol [7]",
+  "name": "3,4-xylenol [1]\n2,5-xylenol [2]\n2,4-xylenol [3]\n2,3-xylenol [4]\n2,6-xylenol [5]\nxylenol [6]\n2,4(or 2,5)-xylenol  [7]",
   "name_tr": "3,4-ksilenol [1]; 2,5-ksilenol [2]; 2,4-ksilenol [3]; 2,3-ksilenol [4]; 2,6-ksilenol [5]; Ksilenol [6]; 2,4(veya 2,5)-ksilenol [7]",
-  "ec_no": "202-439-5",
+  "ec_no": "202-439-5 [1]\n202-461-5 [2]\n203-321-6 [3]\n208-395-3 [4]\n209-400-1 [5]\n215-089-3 [6]\n276-245-4 [7]",
   "index_no": "604-006-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "C"
   ],

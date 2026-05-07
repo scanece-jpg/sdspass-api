@@ -1,10 +1,10 @@
 {
   "cas": "192463-88-0",
-  "name": "4,4'-methylenebis[N-(4- chlorophenyl)-3- hydroxynaphthalene-2- carboxamide]",
+  "name": "4,4'-methylenebis[N-(4-chlorophenyl)-3-hydroxynaphthalene-2-carboxamide]",
   "name_tr": "4,4'-metilenbis[N-(4-klorofenil)- 3-hidroksinaftalin-2- karboksamid]",
   "ec_no": "430-350-3",
   "index_no": "616-163-00-1",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

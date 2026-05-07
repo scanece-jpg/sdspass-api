@@ -4,17 +4,17 @@
   "name_tr": "2-(morfolinotiyo)benzotiyazol",
   "ec_no": "203-052-4",
   "index_no": "613-113-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Skin Sens. 1",
@@ -35,8 +35,8 @@
       "GHS09"
     ],
     "h_codes": [
-      "H319",
       "H315",
+      "H319",
       "H317",
       "H411"
     ],

@@ -4,13 +4,13 @@
   "name_tr": "Kadmiyum siyanür",
   "ec_no": "208-829-1",
   "index_no": "048-004-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 2",
-        "h_code": "H330"
+        "class": "Carc. 2",
+        "h_code": "H351"
       },
       {
         "class": "Acute Tox. 1",
@@ -18,11 +18,11 @@
       },
       {
         "class": "Acute Tox. 2",
-        "h_code": "H300"
+        "h_code": "H330"
       },
       {
-        "class": "Carc. 2",
-        "h_code": "H351"
+        "class": "Acute Tox. 2",
+        "h_code": "H300"
       },
       {
         "class": "STOT RE 2",
@@ -41,8 +41,14 @@
     "scl_limits": [
       {
         "h_code": "H373",
-        "class": "STOT RE 2",
+        "class": "",
         "c_min": 0.1,
+        "c_max": null
+      },
+      {
+        "h_code": "H032",
+        "class": "",
+        "c_min": 1.0,
         "c_max": null
       }
     ]
@@ -55,10 +61,10 @@
       "GHS09"
     ],
     "h_codes": [
-      "H330",
-      "H310",
-      "H300",
       "H351",
+      "H310",
+      "H330",
+      "H300",
       "H373",
       "H400",
       "H410"

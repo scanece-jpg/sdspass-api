@@ -1,10 +1,10 @@
 {
   "cas": "103577-66-8",
-  "name": "2-hydroxymethyl-3-methyl-4- (2,2,2-trifluoroethoxy)pyridine",
+  "name": "2-hydroxymethyl-3-methyl-4-(2,2,2-trifluoroethoxy)pyridine",
   "name_tr": "2-hidroksimetil-3-metil-4-(2,2,2- trifloroetoksi)piridin",
   "ec_no": "428-200-7",
   "index_no": "613-246-00-4",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

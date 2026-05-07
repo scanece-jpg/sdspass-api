@@ -39,7 +39,7 @@
         "h_code": "H272",
         "class": "",
         "c_min": 50.0,
-        "c_max": null
+        "c_max": 70.0
       },
       {
         "h_code": "H314",
@@ -51,25 +51,25 @@
         "h_code": "H314",
         "class": "",
         "c_min": 50.0,
-        "c_max": null
+        "c_max": 70.0
       },
       {
         "h_code": "H315",
         "class": "",
         "c_min": 35.0,
-        "c_max": null
+        "c_max": 50.0
       },
       {
         "h_code": "H318",
         "class": "",
         "c_min": 8.0,
-        "c_max": null
+        "c_max": 50.0
       },
       {
         "h_code": "H319",
         "class": "",
         "c_min": 5.0,
-        "c_max": null
+        "c_max": 8.0
       },
       {
         "h_code": "H335",

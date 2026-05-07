@@ -1,10 +1,10 @@
 {
   "cas": "64742-13-8",
-  "name": "Distillates (petroleum), acid- treated middle; Gasoil - unspecified; [A complex combination of hydrocarbons obtained as a raffinate from a sulfuric acid treating process. It consists of hydrocarbons having carbon numbers predominantly in the range of C11 through C20 and boiling in the range of approximately 205 °C to 345 °C (401 °F to 653 °F).]",
+  "name": "Distillates (petroleum), acid-treated middle; Gasoil - unspecified; [A complex combination of hydrocarbons obtained as a raffinate from a sulfuric acid treating process. It consists of hydrocarbons having carbon numbers predominantly in the range of C11 through C20 and boiling in the range of approximately 205 °C to 345 °C (401 °F to 653 °F).]",
   "name_tr": "Damıtıklar (petrol), asit-işlem görmüş orta; Gaz yağı – tanımlanmamış; [Sülfürik asitle muamele etme prosesinden rafinat olarak elde edilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla C11 ila C20 aralığında karbon sayısına sahip ve yaklaşık 205°C ila 345°C (401°F ila 653°F) aralığında kaynayan hidrokarbonlardan oluşur.]",
   "ec_no": "265-113-1",
   "index_no": "649-216-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "N"
   ],

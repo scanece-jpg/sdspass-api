@@ -1,10 +1,10 @@
 {
   "cas": "299-84-3",
-  "name": "fenchlorphos (ISO); O,O-dimethyl O-2,4,5- trichlorophenyl phosphorothioate",
+  "name": "fenchlorphos (ISO); O,O-dimethyl O-2,4,5-trichlorophenyl phosphorothioate",
   "name_tr": "fenklorofos (ISO); O,O-dimetil O-2,4,5- triklorofenil fosforotiyoat",
   "ec_no": "206-082-6",
   "index_no": "015-052-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

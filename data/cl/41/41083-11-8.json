@@ -1,10 +1,10 @@
 {
   "cas": "41083-11-8",
-  "name": "azocyclotin (ISO); 1-(tricyclohexylstannyl)-1H- 1,2,4-triazole",
+  "name": "azocyclotin (ISO); 1-(tricyclohexylstannyl)-1H-1,2,4-triazole",
   "name_tr": "azosiklokalay (ISO); 1-(trisiklohekzilstannil)-1H- 1,2,4-triyazol",
   "ec_no": "255-209-1",
   "index_no": "050-019-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

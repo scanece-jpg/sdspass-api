@@ -4,7 +4,7 @@
   "name_tr": "hekzan-2-on; metilbütilketon; bütilmetilketon; metil-n-bütilketon",
   "ec_no": "209-731-1",
   "index_no": "606-030-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -17,12 +17,12 @@
         "h_code": "H361f"
       },
       {
-        "class": "STOT RE 1",
-        "h_code": "H372"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H336"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
       }
     ],
     "m_factors": {},
@@ -38,8 +38,8 @@
     "h_codes": [
       "H226",
       "H361f",
-      "H372",
-      "H336"
+      "H336",
+      "H372"
     ],
     "suppl_h": []
   }

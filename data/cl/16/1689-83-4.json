@@ -1,10 +1,10 @@
 {
   "cas": "1689-83-4",
-  "name": "ioxynil (ISO); 4-hydroxy-3,5- diiodobenzonitrile",
+  "name": "ioxynil (ISO); 4-hydroxy-3,5-diiodobenzonitrile",
   "name_tr": "iyoksinil (ISO) ve tuzları; 4-hidroksi-3,5- diiyodobenzonitril",
   "ec_no": "216-881-1",
   "index_no": "608-007-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

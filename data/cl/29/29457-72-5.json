@@ -1,13 +1,11 @@
 {
   "cas": "29457-72-5",
-  "name": "perfluorooctane sulfonic acid; heptadecafluorooctane-1- sulfonic acid; [1] potassium perfluorooctanesulfonate; potassium heptadecafluorooctane-1- sulfonate; [2] diethanolamine perfluorooctane sulfonate; [3] ammonium perfluorooctane sulfonate; ammonium heptadecafluorooctanesulfonate; [4] lithium perfluorooctane sulfonate; lithium heptadecafluorooctanesulfonate [5]",
+  "name": "perfluorooctane sulfonic acid; heptadecafluorooctane-1-sulfonic acid [1]\npotassium perfluorooctanesulfonate; potassium heptadecafluorooctane-1-sulfonate [2]\ndiethanolamine perfluorooctane sulfonate [3]\nammonium perfluorooctanesulfonate; ammonium heptadecafluorooctanesulfonate [4]\nlithium perfluorooctane sulfonate; lithium heptadecafluorooctanesulfonate [5]",
   "name_tr": "perflorooktan sülfonik asit; heptadekaflorooktan-1-sülfonik asit; [1] potasyumperflorooktan sülfonik asit; potasyum heptadekaflorooktan- 1-sülfonat; [2] dietanolamin perflorooktan sülfonat; [3] amonyum perflorooktan sülfonat; amonyum heptadekaflorooktansülfonat; [4] lityum perflorooktan sülfonat; lityum heotaflorooktansülfonat; [5]",
-  "ec_no": "217-179-8",
+  "ec_no": "249-644-6",
   "index_no": "607-624-00-8",
   "atp": "ATP01",
-  "notes": [
-    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
-  ],
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -16,23 +14,23 @@
       },
       {
         "class": "Repr. 1B",
-        "h_code": "H360D"
+        "h_code": "H360D ***"
       },
       {
-        "class": "STOT RE 1",
-        "h_code": "H372"
+        "class": "Lact.",
+        "h_code": "H362"
       },
       {
-        "class": "Acute Tox. 4",
+        "class": "Acute Tox. 4 *",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4",
+        "class": "Acute Tox. 4 *",
         "h_code": "H302"
       },
       {
-        "class": "Repr. 1B",
-        "h_code": "H360D ***"
+        "class": "STOT RE 1",
+        "h_code": "H372 **"
       },
       {
         "class": "Aquatic Chronic 2",
@@ -51,11 +49,11 @@
     ],
     "h_codes": [
       "H351",
-      "H360D",
-      "H372",
+      "H360D ***",
+      "H362",
       "H332",
       "H302",
-      "H360D ***",
+      "H372 **",
       "H411"
     ],
     "suppl_h": []

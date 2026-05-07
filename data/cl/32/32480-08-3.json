@@ -1,10 +1,10 @@
 {
   "cas": "32480-08-3",
-  "name": "reaction mass of: 3,7,11- trimethyl-cis-6,10-dodecadienal; 3,7,11-trimethyl-trans-6,10- dodecadienal",
+  "name": "reaction mass of: 3,7,11-trimethyl-cis-6,10-dodecadienal; 3,7,11-trimethyl-trans-6,10-dodecadienal",
   "name_tr": "tepkime kütlesi: 3,7,11-trimetil- cis-6,10-dodekadienal; 3,7,11-trimetil-trans-6,10- dodekadienal",
   "ec_no": "425-910-9",
   "index_no": "605-033-00-X",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

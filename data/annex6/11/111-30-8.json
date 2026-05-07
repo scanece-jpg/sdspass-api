@@ -41,13 +41,16 @@
         "h_code": "H411"
       }
     ],
-    "m_factors": {},
+    "m_factors": {
+      "acute": 1,
+      "chronic": 1
+    },
     "scl_limits": [
       {
         "h_code": "H335",
         "class": "",
-        "c_min": 5.0,
-        "c_max": null
+        "c_min": 0.5,
+        "c_max": 5.0
       }
     ]
   },

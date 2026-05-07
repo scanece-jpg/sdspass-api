@@ -1,10 +1,10 @@
 {
   "cas": "12069-69-1",
-  "name": "copper(II)carbonate— copper(II)hydroxide (1:1)",
+  "name": "copper(II) carbonate--copper(II) hydroxide (1:1)",
   "name_tr": "bakur(II)karbonat--bakır (II)hidroksit (1:1)",
   "ec_no": "235-113-6",
   "index_no": "029-020-00-8",
-  "atp": "",
+  "atp": "ATP17",
   "notes": [],
   "classification": {
     "hazards": [
@@ -51,7 +51,7 @@
     "suppl_h": []
   },
   "ate": {
-    "inhalation_dust": 1.2,
+    "inhalation_mgl": 1.2,
     "oral": 500.0
   }
 }

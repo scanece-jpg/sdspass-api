@@ -1,10 +1,10 @@
 {
   "cas": "154212-60-9",
-  "name": "2-isopropyl-4-(N- methyl)aminomethylthiazole",
+  "name": "2-isopropyl-4-(N-methyl)aminomethylthiazole",
   "name_tr": "2-izopropil-4-(N- metil)aminometiltiyazol",
   "ec_no": "414-800-6",
   "index_no": "612-192-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

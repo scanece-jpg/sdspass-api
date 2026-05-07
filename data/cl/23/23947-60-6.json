@@ -1,10 +1,10 @@
 {
   "cas": "23947-60-6",
-  "name": "ethirimol (ISO); 5-butyl-2-ethylamino-6- methylpyrimidin-4-ol",
+  "name": "ethirimol (ISO); 5-butyl-2-ethylamino-6-methylpyrimidin-4-ol",
   "name_tr": "etirimol (ISO); 5-bütil-2-etilamino-6- metilpirimidin-4-ol",
   "ec_no": "245-949-3",
   "index_no": "603-086-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

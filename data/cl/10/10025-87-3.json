@@ -4,7 +4,7 @@
   "name_tr": "Fosforil triklorür",
   "ec_no": "233-046-7",
   "index_no": "015-009-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,12 +13,12 @@
         "h_code": "H330"
       },
       {
-        "class": "STOT RE 1",
-        "h_code": "H372"
-      },
-      {
         "class": "Acute Tox. 4",
         "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
       },
       {
         "class": "Skin Corr. 1A",
@@ -37,8 +37,8 @@
     ],
     "h_codes": [
       "H330",
-      "H372",
       "H302",
+      "H372",
       "H314"
     ],
     "suppl_h": [

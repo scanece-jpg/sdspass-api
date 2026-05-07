@@ -1,10 +1,10 @@
 {
   "cas": "3847-58-3",
-  "name": "3-chloro-2,4- difluoronitrobenzene",
+  "name": "3-chloro-2,4-difluoronitrobenzene",
   "name_tr": "3-kloro-2,4-difloronitrobenzen",
   "ec_no": "411-980-8",
   "index_no": "609-057-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

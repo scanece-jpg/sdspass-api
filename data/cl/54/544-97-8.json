@@ -1,10 +1,10 @@
 {
   "cas": "544-97-8",
-  "name": "dimethylzinc; [1] diethylzinc [2]",
+  "name": "dimethylzinc [1]\ndiethylzinc  [2]",
   "name_tr": "Dimetilçinko [1] Dietilçinko [2]",
-  "ec_no": "208-884-1",
+  "ec_no": "208-884-1 [1]\n209-161-3 [2]",
   "index_no": "030-004-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

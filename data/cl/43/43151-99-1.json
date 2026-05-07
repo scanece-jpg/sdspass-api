@@ -1,10 +1,10 @@
 {
   "cas": "43151-99-1",
-  "name": "4,4'-diamino-2- methylazobenzene",
+  "name": "4,4'-diamino-2-methylazobenzene",
   "name_tr": "4,4'-diamino-2-metilazobenzen",
   "ec_no": "407-590-2",
   "index_no": "611-046-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

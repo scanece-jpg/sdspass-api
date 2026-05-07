@@ -1,16 +1,20 @@
 {
   "cas": "29232-93-7",
-  "name": "pirimiphos-methyl (ISO); O-(2-diethylamino-6- methylpyrimidin-4-yl) O,O- dimethyl phosphorothioate",
+  "name": "pirimiphos-methyl (ISO); O-[2-(diethylamino)-6-methylpyrimidin-4-yl] O,O-dimethyl phosphorothioate",
   "name_tr": "pirimifos-metil (ISO); O-(2-dietilamino-6- metilpirimidin-4-il)-O,O- dimetilfosforotiyoat",
   "ec_no": "249-528-5",
   "index_no": "015-134-00-5",
-  "atp": "",
+  "atp": "ATP15",
   "notes": [],
   "classification": {
     "hazards": [
       {
         "class": "Acute Tox. 4",
         "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372(nervous_system)"
       },
       {
         "class": "Aquatic Acute 1",
@@ -28,13 +32,15 @@
     "scl_limits": []
   },
   "labelling": {
-    "signal": "Warning",
+    "signal": "Danger",
     "pictograms": [
       "GHS07",
+      "GHS08",
       "GHS09"
     ],
     "h_codes": [
       "H302",
+      "H372(nervous_system)",
       "H400",
       "H410"
     ],

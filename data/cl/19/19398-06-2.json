@@ -4,7 +4,7 @@
   "name_tr": "2-etilfenilhidrazin hidroklorür",
   "ec_no": "421-460-2",
   "index_no": "612-245-00-6",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,12 +13,12 @@
         "h_code": "H351"
       },
       {
-        "class": "STOT RE 1",
-        "h_code": "H372"
-      },
-      {
         "class": "Acute Tox. 4",
         "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
       },
       {
         "class": "Eye Dam. 1",
@@ -53,8 +53,8 @@
     ],
     "h_codes": [
       "H351",
-      "H372",
       "H302",
+      "H372",
       "H318",
       "H317",
       "H400",

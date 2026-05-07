@@ -1,10 +1,10 @@
 {
   "cas": "31218-83-4",
-  "name": "trans-isopropyl-3- [[(ethylamino)methoxyfosfinothi oyl]oxy]crotonate; isopropyl 3- [[(ethylamino)methoxyphosphin othioyl]oxy]isocrotonate; propetamphos (ISO)",
+  "name": "trans-isopropyl-3-[[(ethylamino)methoxyfosfinothioyl]oxy]crotonate; isopropyl 3-[[(ethylamino)methoxyphosphinothioyl]oxy]isocrotonate; propetamphos (ISO)",
   "name_tr": "trans-izopropil-3- [[(etilamino)metoksifosfinotiyoil ]oksi]krotonat; izopropil 3- [[(etilamino)metoksifosfinotiyoil ]oksi]izocrotonat; propetamfos (ISO)",
   "ec_no": "250-517-2",
   "index_no": "015-136-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

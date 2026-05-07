@@ -1,10 +1,10 @@
 {
   "cas": "333-41-5",
-  "name": "diazinon (ISO); O,O-diethyl O-2-isopropyl-6- methylpyrimidin-4-yl phosphorothioate",
+  "name": "diazinon (ISO); O,O-diethyl O-2-isopropyl-6-methylpyrimidin-4-yl phosphorothioate",
   "name_tr": "diazinon (ISO); O,O-dietil-O-2-izopropil-6- metilpirimidin-4-il fosforotiyoat",
   "ec_no": "206-373-8",
   "index_no": "015-040-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

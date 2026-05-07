@@ -1,10 +1,10 @@
 {
   "cas": "16695-22-0",
-  "name": "N,N-bis(2-(p- toluenesulfonyloxy)ethyl)-p- toluenesulfonamide",
+  "name": "N,N-bis(2-(p-toluenesulfonyloxy)ethyl)-p-toluenesulfonamide",
   "name_tr": "N,N-bis(2-(p- toluensülfoniloksi)etil)-p- toluensülfonamid",
   "ec_no": "412-920-3",
   "index_no": "016-079-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

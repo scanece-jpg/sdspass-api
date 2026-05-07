@@ -1,10 +1,10 @@
 {
   "cas": "143683-23-2",
-  "name": "tetrasodium 1,2-bis(4-fluoro-6- [5-(1-amino-2- sulfonatoanthrachinon-4- ylamino)-2,4,6-trimethyl-3- sulfonatophenylamino]-1,3,5- triazin-2-ylamino)ethane",
+  "name": "tetrasodium 1,2-bis(4-fluoro-6-[5-(1-amino-2-sulfonatoanthrachinon-4-ylamino)-2,4,6-trimethyl-3-sulfonatophenylamino]-1,3,5-triazin-2-ylamino)ethane",
   "name_tr": "tetrasodyum-1,2-bi(4-floro-6-[5- (1-amino-2-sülfonatoantrakinin- 4-ilamino)-2,4,6-trimetil-3- sülfonatofenilamino]-1,3,5- triazin-2-ilamino)etan",
   "ec_no": "411-240-4",
   "index_no": "613-148-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

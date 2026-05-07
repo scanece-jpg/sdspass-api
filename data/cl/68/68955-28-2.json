@@ -1,14 +1,12 @@
 {
   "cas": "68955-28-2",
-  "name": "Gases (petroleum, light steam- cracked, butadiene conc.; Petroleum gas; [A complex combination of hydrocarbons produced by the distillation of products from a thermal cracking process. It consists of hydrocarbons having a carbon number predominantly of C4.]",
+  "name": "Gases (petroleum, light steam-cracked, butadiene conc.; Petroleum gas; [A complex combination of hydrocarbons produced by the distillation of products from a thermal cracking process. It consists of hydrocarbons having a carbon number predominantly of C4.]",
   "name_tr": "Gazlar (petrol,hafif buhar ile parçalanmış, bütadien konsantresi; Petrol gazı; [Isıl bir parçalanma prosesi ürünlerinin damıtılması ile üretilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla C4 karbon sayısına sahip hidrokarbonlardan oluşur.]",
   "ec_no": "273-265-5",
   "index_no": "649-111-00-1",
   "atp": "ATP1",
   "notes": [
-    "K",
-    "U",
-    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
+    "K U"
   ],
   "classification": {
     "hazards": [

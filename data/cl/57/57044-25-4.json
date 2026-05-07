@@ -4,12 +4,12 @@
   "name_tr": "R-2,3-epoksi-1-propanol",
   "ec_no": "404-660-4",
   "index_no": "603-143-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Self-react. Type C",
+        "class": "Self-react. C",
         "h_code": "H242"
       },
       {

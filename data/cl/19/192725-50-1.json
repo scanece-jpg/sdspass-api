@@ -1,10 +1,10 @@
 {
   "cas": "192725-50-1",
-  "name": "(S)-3-methyl-2-(2- oxotetrahydropyrimidine-1- yl)butyric acid",
+  "name": "(S)-3-methyl-2-(2-oxotetrahydropyrimidine-1-yl)butyric acid",
   "name_tr": "(S)-3-metil-2-(2- oksotetrahidroprimidin-1- il)bütirik asit",
   "ec_no": "430-900-2",
   "index_no": "607-528-00-6",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

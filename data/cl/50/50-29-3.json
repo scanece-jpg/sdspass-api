@@ -1,10 +1,10 @@
 {
   "cas": "50-29-3",
-  "name": "DDT (ISO); clofenotane (INN); dicophane; 1,1,1-trichloro-2,2-bis(4- chlorophenyl)ethane; dichlorodiphenyltrichloroethane",
+  "name": "DDT (ISO); clofenotane (INN); dicophane; 1,1,1-trichloro-2,2-bis(4-chlorophenyl)ethane; dichlorodiphenyltrichloroethane",
   "name_tr": "DDT (ISO); klofenotan (INN); dikofan; 1,1,1-trikloro-2,2- bis(4-klorofenil)etan; diklorodifeniltrikloroetan",
   "ec_no": "200-024-3",
   "index_no": "602-045-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

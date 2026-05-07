@@ -1,10 +1,10 @@
 {
   "cas": "65405-96-1",
-  "name": "nickel carbonate; basic nickel carbonate; carbonic acid, nickel (2+) salt; [1] carbonic acid, nickel salt; [2] [µ-[carbonato(2-)-O:O’]] dihydroxy trinickel; [3] [carbonato(2-)] tetrahydroxytrinickel [4]",
+  "name": "nickel carbonate; basic nickel carbonate; carbonic acid, nickel (2+) salt [1]\ncarbonic acid, nickel salt [2]\n[Âµ-[carbonato(2-)-O:O']] dihydroxy trinickel [3]\n[carbonato(2-)] tetrahydroxytrinickel [4]",
   "name_tr": "nikel karbonat; basit nikel karbonat; karbonik asit, nikel (2+) tuzu; [1] karbonik asit, nikel tuzu; [2] [µ-[karbonato(2-)-O:O’]] dihidroksi trinikel; [3] [karbonato(2-)] tetrahidroksitrinikel [4]",
-  "ec_no": "222-068-2",
+  "ec_no": "265-748-4",
   "index_no": "028-010-00-0",
-  "atp": "",
+  "atp": "ATP01",
   "notes": [],
   "classification": {
     "hazards": [
@@ -18,19 +18,19 @@
       },
       {
         "class": "Repr. 1B",
-        "h_code": "H360D"
+        "h_code": "H360D ***"
       },
       {
-        "class": "STOT RE 1",
-        "h_code": "H372"
-      },
-      {
-        "class": "Acute Tox. 4",
+        "class": "Acute Tox. 4 *",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4",
+        "class": "Acute Tox. 4 *",
         "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372 **"
       },
       {
         "class": "Skin Irrit. 2",
@@ -66,10 +66,10 @@
     "h_codes": [
       "H350i",
       "H341",
-      "H360D",
-      "H372",
+      "H360D ***",
       "H332",
       "H302",
+      "H372 **",
       "H315",
       "H334",
       "H317",

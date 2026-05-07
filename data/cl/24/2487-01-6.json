@@ -1,10 +1,10 @@
 {
   "cas": "2487-01-6",
-  "name": "medinoterb acetate (ISO); 6-tert-butyl-3-methyl-2,4- dinitrophenyl acetate",
+  "name": "medinoterb acetate (ISO); 6-tert-butyl-3-methyl-2,4-dinitrophenyl acetate",
   "name_tr": "medinoterbasetat (ISO); 6-ter-bütil-3-metil-2,4- dinitrofenilasetat",
   "ec_no": "219-634-6",
   "index_no": "607-166-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

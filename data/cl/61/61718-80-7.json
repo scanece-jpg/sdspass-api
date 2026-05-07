@@ -1,10 +1,10 @@
 {
   "cas": "61718-80-7",
-  "name": "5-methoxy-4'- (trifluoromethyl)valerophenone",
+  "name": "5-methoxy-4'-(trifluoromethyl)valerophenone",
   "name_tr": "5-metoksi-4'- (triflorometil)valerofenon",
   "ec_no": "425-000-1",
   "index_no": "606-099-00-2",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "153352-59-1",
-  "name": "potassium bis(N- carboxymethyl)-N-methyl- glycinato-(2-)N,O,O,N)-ferrate- (1-) monohydrate",
+  "name": "potassium bis(N-carboxymethyl)-N-methyl-glycinato-(2-)N,O,O,N)-ferrate-(1-) monohydrate",
   "name_tr": "potasyum-bis(N-karboksimetil)- N-metil-glisinato-(2-)N,O,O,N)- ferrat-(1-) monohidrat",
   "ec_no": "411-640-9",
   "index_no": "607-367-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

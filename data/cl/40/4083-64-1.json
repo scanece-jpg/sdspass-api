@@ -4,14 +4,10 @@
   "name_tr": "4-izosiyanatosülfoniltoluen; tosilizosiyanat",
   "ec_no": "223-810-8",
   "index_no": "615-012-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
-      {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
       {
         "class": "STOT SE 3",
         "h_code": "H335"
@@ -19,6 +15,10 @@
       {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Resp. Sens. 1",
@@ -29,19 +29,19 @@
     "scl_limits": [
       {
         "h_code": "H319",
-        "class": "Göz Tah.",
+        "class": "",
         "c_min": 5.0,
         "c_max": null
       },
       {
         "h_code": "H335",
-        "class": "STOT SE 3",
+        "class": "",
         "c_min": 5.0,
         "c_max": null
       },
       {
         "h_code": "H315",
-        "class": "Skin Irrit. 2",
+        "class": "",
         "c_min": 5.0,
         "c_max": null
       }
@@ -54,9 +54,9 @@
       "GHS07"
     ],
     "h_codes": [
-      "H319",
       "H335",
       "H315",
+      "H319",
       "H334"
     ],
     "suppl_h": [

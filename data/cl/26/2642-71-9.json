@@ -1,10 +1,10 @@
 {
   "cas": "2642-71-9",
-  "name": "azinphos-ethyl (ISO); O,O-diethyl 4-oxobenzotriazin- 3-ylmethyl phosphorodithioate",
+  "name": "azinphos-ethyl (ISO); O,O-diethyl 4-oxobenzotriazin-3-ylmethyl phosphorodithioate",
   "name_tr": "azinfos-etil (ISO); O,O-dietil-4-oksobenzotriazin-3- ilmetil fosforoditiyoat",
   "ec_no": "220-147-6",
   "index_no": "015-056-00-1",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

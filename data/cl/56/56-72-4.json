@@ -1,10 +1,10 @@
 {
   "cas": "56-72-4",
-  "name": "coumaphos (ISO); O-3-chloro-4-methylcoumarin- 7-yl O,O-diethyl phosphorothioate",
+  "name": "coumaphos (ISO); O-3-chloro-4-methylcoumarin-7-yl O,O-diethyl phosphorothioate",
   "name_tr": "kumafos (ISO); O-3-kloro-4-metilkumarin-7-il- O,O-dietil fosforotiyoat",
   "ec_no": "200-285-3",
   "index_no": "015-038-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "25550-58-7",
-  "name": "dinitrophenol (reaction mass of isomers); [1] 2,4(or 2,6)-dinitrophenol [2]",
+  "name": "dinitrophenol (reaction mass of isomers) [1]\n2,4(or 2,6)-dinitrophenol  [2]",
   "name_tr": "dinitrofenol(izomerlerin tepkime kütlesi); [1] 2,4(ya da 2,6)-dinitrofenol [2]",
-  "ec_no": "247-096-2",
+  "ec_no": "247-096-2 [1]\n275-732-9 [2]",
   "index_no": "609-016-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

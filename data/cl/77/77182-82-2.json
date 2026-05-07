@@ -1,10 +1,10 @@
 {
   "cas": "77182-82-2",
-  "name": "glufosinate ammonium (ISO); ammonium 2-amino-4- (hydroxymethylphosphinyl)buty rate",
+  "name": "glufosinate ammonium (ISO); ammonium 2-amino-4-(hydroxymethylphosphinyl)butyrate",
   "name_tr": "glufosinat amonyum (ISO); amonyum 2-amino-4- (hidroksimetilfosfinil)bütirat",
   "ec_no": "278-636-5",
   "index_no": "015-155-00-X",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

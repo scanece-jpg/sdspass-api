@@ -1,10 +1,10 @@
 {
   "cas": "76932-17-7",
-  "name": "(S)-α- (acetylthio)benzenepropanoic acid",
+  "name": "(S)-α-(acetylthio)benzenepropanoic acid",
   "name_tr": "(S)-α- (asetiltiyo)benzenpropanoik asit",
   "ec_no": "430-300-0",
   "index_no": "607-517-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -4,7 +4,7 @@
   "name_tr": "dimetil eter",
   "ec_no": "204-065-8",
   "index_no": "603-019-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "U"
   ],
@@ -13,6 +13,10 @@
       {
         "class": "Flam. Gas 1",
         "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": ""
       }
     ],
     "m_factors": {},

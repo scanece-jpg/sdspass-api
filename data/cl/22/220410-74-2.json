@@ -1,10 +1,10 @@
 {
   "cas": "220410-74-2",
-  "name": "1,4-dihydroxy-2,2,6,6- tetramethyl piperidinium-2- hydroxy-1,2,3- propanetricarboxylate",
+  "name": "1,4-dihydroxy-2,2,6,6-tetramethyl piperidinium-2-hydroxy-1,2,3-propanetricarboxylate",
   "name_tr": "1,4-dihidroksi-2,2,6,6-tetrametil piperidinyum-2-hidroksi-1,2,3- propantrikarboksilat",
   "ec_no": "429-370-5",
   "index_no": "607-601-00-2",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

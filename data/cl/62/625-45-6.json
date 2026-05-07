@@ -4,7 +4,7 @@
   "name_tr": "metoksiasetikasit",
   "ec_no": "210-894-6",
   "index_no": "607-312-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -25,7 +25,7 @@
     "scl_limits": [
       {
         "h_code": "H335",
-        "class": "STOT SE 3",
+        "class": "",
         "c_min": 5.0,
         "c_max": null
       }

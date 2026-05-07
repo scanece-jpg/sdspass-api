@@ -1,10 +1,10 @@
 {
   "cas": "124-41-4",
-  "name": "sodium methanolate; sodium methoxide; [1] potassium methanolate; potassium methoxide; [2] lithium methanolate; lithium methoxide [3]",
+  "name": "sodium methanolate; sodium methoxide [1]\npotassium methanolate; potassium methoxide [2]\nlithium methanolate; lithium methoxide  [3]",
   "name_tr": "sodyum metanolat; sodyum metoksit [1]; potasyum metanolat; potasyum metoksit [2]; lityum metanolat; lityum metoksit [3]",
-  "ec_no": "204-699-5",
+  "ec_no": "204-699-5 [1]\n212-736-1 [2]\n212-737-7 [3]",
   "index_no": "603-040-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "T"
   ],

@@ -1,10 +1,10 @@
 {
   "cas": "82027-60-9",
-  "name": "hexasodium [4,4''-azoxybis(2,2'- disulfonatostilbene-4,4'- diylazo)]-bis[5'- sulfonatobenzene-2,2'- diolato- O(2),O(2),N(1)]-copper(II)",
+  "name": "hexasodium [4,4''-azoxybis(2,2'-disulfonatostilbene-4,4'-diylazo)]-bis[5'-sulfonatobenzene-2,2'- diolato-O(2),O(2),N(1)]-copper(II)",
   "name_tr": "hekzasodyum-[4,4''- azoksibis(2,2'- disülfonatostilben-4,4'-diilazo)]- bis[5'-sülfonatobenzen-2,2'- diolato- O(2),O(2),N(1)]- bakır(II)",
   "ec_no": "400-020-3",
   "index_no": "611-033-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "82657-04-3",
-  "name": "bifenthrin (ISO); (2- methylbiphenyl-3-yl)methyl rel- (1R,3R)-3-[(1Z)-2-chloro- 3,3,3- trifluoroprop-1-en-1-yl]- 2,2- dimethylcyclopropanecarboxylat e",
+  "name": "bifenthrin (ISO); (2-methylbiphenyl-3-yl)methyl rel-(1R,3R)-3-[(1Z)-2-chloro-3,3,3-trifluoroprop-1-en-1-yl]-2,2-dimethylcyclopropanecarboxylate",
   "name_tr": "bifentrin (ISO); (2-metilbifenil- 3-il)metil rel-(1R,3R)-3-[(1Z)-2- kloro- 3,3,3-trifloroprop-1-en-1- il]- 2,2- dimetilsiklopropankarboksilat",
   "ec_no": "",
   "index_no": "607-699-00-7",
-  "atp": "",
+  "atp": "ATP5",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,33 +13,33 @@
         "h_code": "H351"
       },
       {
-        "class": "Acute Tox. 3",
-        "h_code": "H331"
-      },
-      {
         "class": "Acute Tox. 2",
         "h_code": "H300"
       },
       {
+        "class": "Acute Tox. 3",
+        "h_code": "H331"
+      },
+      {
         "class": "STOT RE 1",
-        "h_code": "H372(sinir"
+        "h_code": "H372(nervous_system)"
       },
       {
         "class": "Skin Sens. 1B",
-        "h_code": "sistemi)"
-      },
-      {
-        "class": "Aquatic Acute 1",
         "h_code": "H317"
       },
       {
-        "class": "Aquatic Chronic 1",
+        "class": "Aquatic Acute 1",
         "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
       }
     ],
     "m_factors": {
       "acute": 10000,
-      "chronic": 100000
+      "chronic": 10000
     },
     "scl_limits": []
   },
@@ -52,12 +52,12 @@
     ],
     "h_codes": [
       "H351",
-      "H331",
       "H300",
-      "H372(sinir",
-      "sistemi)",
+      "H331",
+      "H372(nervous_system)",
       "H317",
-      "H400"
+      "H400",
+      "H410"
     ],
     "suppl_h": []
   }

@@ -4,7 +4,7 @@
   "name_tr": "etilenimin; aziridin",
   "ec_no": "205-793-9",
   "index_no": "613-001-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "D"
   ],
@@ -23,12 +23,12 @@
         "h_code": "H340"
       },
       {
-        "class": "Acute Tox. 2",
-        "h_code": "H330"
-      },
-      {
         "class": "Acute Tox. 1",
         "h_code": "H310"
+      },
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H330"
       },
       {
         "class": "Acute Tox. 2",
@@ -59,8 +59,8 @@
       "H225",
       "H350",
       "H340",
-      "H330",
       "H310",
+      "H330",
       "H300",
       "H314",
       "H411"

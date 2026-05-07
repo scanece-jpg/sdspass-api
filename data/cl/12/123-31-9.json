@@ -4,7 +4,7 @@
   "name_tr": "1,4-dihidroksibenzen; hidrokinon; kinol",
   "ec_no": "204-617-8",
   "index_no": "604-005-00-4",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -34,8 +34,7 @@
       }
     ],
     "m_factors": {
-      "acute": 10,
-      "chronic": 10
+      "acute": 10
     },
     "scl_limits": []
   },

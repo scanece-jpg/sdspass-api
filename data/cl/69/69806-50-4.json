@@ -1,10 +1,10 @@
 {
   "cas": "69806-50-4",
-  "name": "fluazifop-butyl (ISO); butyl (RS)-2-[4-(5- trifluoromethyl-2- pyridyloxy)phenoxy]propionate",
+  "name": "fluazifop-butyl (ISO); butyl (RS)-2-[4-(5-trifluoromethyl-2-pyridyloxy)phenoxy]propionate",
   "name_tr": "fluazifop-bütil (ISO); butil (RS)-2-[4-(5-triflorometil)- 2-piridiloksi)fenoksi]propiyonat",
   "ec_no": "274-125-6",
   "index_no": "607-304-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

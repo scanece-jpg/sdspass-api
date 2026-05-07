@@ -1,10 +1,10 @@
 {
   "cas": "179986-09-5",
-  "name": "coconut oil, reaction products with glycerol esters of 3,5- bis(1,1-dimethylethyl)-4- hydroxybenzenepropanoic acid",
+  "name": "coconut oil, reaction products with glycerol esters of 3,5-bis(1,1-dimethylethyl)-4-hydroxybenzenepropanoic acid",
   "name_tr": "hindistancevizi yağı, 3,5-bis(1,1- dimetiletil)-4- hidroksibenzenpropanoik asit’in esterleri ile tepkime ürünleri",
   "ec_no": "425-400-6",
   "index_no": "607-559-00-5",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

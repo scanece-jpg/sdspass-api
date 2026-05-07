@@ -1,10 +1,10 @@
 {
   "cas": "12091-08-6",
-  "name": "potassium mu-fluoro- bis(triethylaluminium)",
+  "name": "potassium mu-fluoro-bis(triethylaluminium)",
   "name_tr": "potasyum-mu-flor- bis(trietilalüminyum)",
   "ec_no": "400-040-2",
   "index_no": "009-017-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "T"
   ],
@@ -16,15 +16,15 @@
       },
       {
         "class": "Water-react. 1",
-        "h_code": "H270"
-      },
-      {
-        "class": "Skin Corr. 1A",
-        "h_code": "H314"
+        "h_code": "H260"
       },
       {
         "class": "Acute Tox. 4",
         "h_code": "H332"
+      },
+      {
+        "class": "Skin Corr. 1A",
+        "h_code": "H314"
       }
     ],
     "m_factors": {},
@@ -39,9 +39,9 @@
     ],
     "h_codes": [
       "H228",
-      "H270",
-      "H314",
-      "H332"
+      "H260",
+      "H332",
+      "H314"
     ],
     "suppl_h": [
       "EUH014"

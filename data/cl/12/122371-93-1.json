@@ -1,10 +1,10 @@
 {
   "cas": "122371-93-1",
-  "name": "2'-(4-chloro-3-cyano-5-formyl- 2-thienylazo)-5'-diethylamino-2- methoxyacetanilide",
+  "name": "2'-(4-chloro-3-cyano-5-formyl-2-thienylazo)-5'-diethylamino-2-methoxyacetanilide",
   "name_tr": "2'-(4-kloro-3-siyano-5-formil-2- tienilazo)-5'-dietilamino-2- metoksiasetanilid",
   "ec_no": "405-190-2",
   "index_no": "616-045-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "202420-04-0",
-  "name": "reaction mass of: 4-chloro-7- methylbenzotriazole sodium salt; 4-chloro-5-methylbenzotriazole sodium salt; 5-chloro-4-methylbenzotriazole sodium salt",
+  "name": "reaction mass of: 4-chloro-7-methylbenzotriazole sodium salt; 4-chloro-5-methylbenzotriazole sodium salt; 5-chloro-4-methylbenzotriazole sodium salt",
   "name_tr": "Tepkime kütlesi: 4-kloro-7- metilbenzotriazol sodyum tuzu; 4-kloro-5-metilbenzotriazol sodyum tuzu; 5-kloro-4-metilbenzotriazol sodyum tuzu",
   "ec_no": "427-730-6",
   "index_no": "613-258-00-X",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

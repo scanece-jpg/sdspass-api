@@ -1,10 +1,10 @@
 {
   "cas": "90035-08-8",
-  "name": "flocoumafen (ISO); reaction mass of: cis-4-hydroxy- 3-(1,2,3,4-tetrahydro-3-(4-(4- trifluoromethylbenzyloxy)pheny l)-1-naphthyl)coumarin and trans-4-hydroxy-3-(1,2,3,4- tetrahydro-3-(4-(4- trifluoromethylbenzyloxy)pheny",
+  "name": "flocoumafen (ISO); reaction mass of: cis-4-hydroxy-3-(1,2,3,4-tetrahydro-3-(4-(4-trifluoromethylbenzyloxy)phenyl)-1-naphthyl)coumarin and trans-4-hydroxy-3-(1,2,3,4-tetrahydro-3-(4-(4-trifluoromethylbenzyloxy)phenyl)-1-naphthyl)coumarin",
   "name_tr": "flokomafen (ISO); tepkime kütlesi: cis-4-hidroksi- 3-(1,2,3,4-tetrahidro-3-(4-(4- triflorometilbenziloksi)fenil)-1- naftil)kumarin ve trans-4- hidroksi-3-(1,2,3,4-tetrahidro-3- (4-(4- triflorometilbenziloksi)fenil)-1-",
   "ec_no": "421-960-0",
   "index_no": "607-375-00-5",
-  "atp": "",
+  "atp": "ATP9",
   "notes": [],
   "classification": {
     "hazards": [
@@ -26,7 +26,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372(kan)"
+        "h_code": "H372(blood)"
       },
       {
         "class": "Aquatic Acute 1",
@@ -44,9 +44,21 @@
     "scl_limits": [
       {
         "h_code": "H360D",
-        "class": "Repr. 1B",
+        "class": "",
         "c_min": 0.003,
         "c_max": null
+      },
+      {
+        "h_code": "H372",
+        "class": "",
+        "c_min": 0.05,
+        "c_max": null
+      },
+      {
+        "h_code": "H373",
+        "class": "",
+        "c_min": 0.005,
+        "c_max": 0.05
       }
     ]
   },
@@ -62,7 +74,7 @@
       "H330",
       "H310",
       "H300",
-      "H372(kan)",
+      "H372(blood)",
       "H400",
       "H410"
     ],

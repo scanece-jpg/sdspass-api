@@ -1,10 +1,10 @@
 {
   "cas": "786-19-6",
-  "name": "carbophenothion (ISO); 4-chlorophenylthiomethyl O,O- diethyl phosphorodithioate",
+  "name": "carbophenothion (ISO); 4-chlorophenylthiomethyl O,O-diethyl phosphorodithioate",
   "name_tr": "karbofenotiyon (ISO); 4-klorofeniltiyometil-O,O-dietil fosforoditiyoat",
   "ec_no": "212-324-1",
   "index_no": "015-044-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,13 +1,11 @@
 {
   "cas": "556-67-2",
-  "name": "octamethylcyclotetrasiloxane",
+  "name": "octamethylcyclotetrasiloxane; [D4]",
   "name_tr": "oktametilsiklotetrasiloksan",
   "ec_no": "209-136-7",
   "index_no": "014-018-00-1",
   "atp": "ATP15",
-  "notes": [
-    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
-  ],
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -20,14 +18,15 @@
       }
     ],
     "m_factors": {
-      "acute": 10
+      "chronic": 10
     },
     "scl_limits": []
   },
   "labelling": {
     "signal": "Warning",
     "pictograms": [
-      "GHS08"
+      "GHS08",
+      "GHS09"
     ],
     "h_codes": [
       "H361f",

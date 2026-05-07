@@ -1,10 +1,10 @@
 {
   "cas": "34123-59-6",
-  "name": "isoproturon (ISO); 3-(4-isopropylphenyl)-1,1- dimethylurea",
+  "name": "isoproturon (ISO);\n3-(4-isopropylphenyl)-1,1-dimethylurea",
   "name_tr": "İzoproturon (ISO); 3-(4-izopropilfenil)-1,1- dimetilüre",
   "ec_no": "251-835-4",
   "index_no": "006-044-00-7",
-  "atp": "",
+  "atp": "ATP13",
   "notes": [],
   "classification": {
     "hazards": [
@@ -14,7 +14,7 @@
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373(kan)"
+        "h_code": "H373(blood)"
       },
       {
         "class": "Aquatic Acute 1",
@@ -39,7 +39,7 @@
     ],
     "h_codes": [
       "H351",
-      "H373(kan)",
+      "H373(blood)",
       "H400",
       "H410"
     ],

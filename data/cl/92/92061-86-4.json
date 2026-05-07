@@ -1,10 +1,10 @@
 {
   "cas": "92061-86-4",
-  "name": "Residual oils (petroleum), hydrocracked acid-treated solvent-dewaxed; Baseoil - unspecified;",
+  "name": "Residual oils (petroleum), hydrocracked acid-treated solvent-dewaxed; Baseoil - unspecified; [A complex combination of hydrocarbons produced by solvent removal of paraffins from the residue of the distillation of acid-treated, hydrocracked heavy paraffins and boiling approximately above 380 °C (716 °F).]",
   "name_tr": "Artık yağlar (petrol), hidrojenle parçalanmış asit ile muamele edilmiş ve çözücü ile cilası alınmış; bazyağlar –",
   "ec_no": "295-499-7",
   "index_no": "649-499-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "L"
   ],

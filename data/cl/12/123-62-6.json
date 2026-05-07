@@ -4,7 +4,7 @@
   "name_tr": "propionik anhidrid",
   "ec_no": "204-638-2",
   "index_no": "607-010-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -17,21 +17,21 @@
     "scl_limits": [
       {
         "h_code": "H314",
-        "class": "Skin Corr. 1B",
+        "class": "",
         "c_min": 25.0,
         "c_max": null
       },
       {
         "h_code": "H315",
-        "class": "Skin Irrit. 2",
+        "class": "",
         "c_min": 10.0,
-        "c_max": null
+        "c_max": 25.0
       },
       {
         "h_code": "H319",
-        "class": "Eye Irrit. 2",
+        "class": "",
         "c_min": 10.0,
-        "c_max": null
+        "c_max": 25.0
       }
     ]
   },

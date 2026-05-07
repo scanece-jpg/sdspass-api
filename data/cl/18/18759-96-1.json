@@ -1,10 +1,10 @@
 {
   "cas": "18759-96-1",
-  "name": "3- methylaminomethylphenylamine",
+  "name": "3-methylaminomethylphenylamine",
   "name_tr": "3-metilaminometilfenilamin",
   "ec_no": "414-570-7",
   "index_no": "612-193-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

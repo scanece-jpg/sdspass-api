@@ -1,10 +1,10 @@
 {
   "cas": "1668-86-6",
-  "name": "(4aR,8aR)-4a,5,9,10,11,12- hexahydro-3-methoxy-11- methyl-6H-benzofuro[3a,3,2- ef][2]benzazepin-6-one",
+  "name": "(4aR*,8aR*)-4a,5,9,10,11,12-hexahydro-3-methoxy-11-methyl-6H-benzofuro[3a,3,2-ef][2]benzazepin-6-one",
   "name_tr": "(4aR,8aR)-4a,5,9,10,11,12- hekzahidro-3-metoksi-11-metil- 6H-benzofuro[3a,3,2- ef][2]benzazepin-6-on",
   "ec_no": "428-690-2",
   "index_no": "606-112-00-1",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

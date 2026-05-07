@@ -4,7 +4,7 @@
   "name_tr": "Hidroksilamonyum nitrat",
   "ec_no": "236-691-2",
   "index_no": "007-028-00-2",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -29,12 +29,12 @@
         "h_code": "H373"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Skin Sens. 1",
@@ -62,8 +62,8 @@
       "H311",
       "H302",
       "H373",
-      "H319",
       "H315",
+      "H319",
       "H317",
       "H400"
     ],

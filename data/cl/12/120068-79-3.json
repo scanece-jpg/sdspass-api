@@ -1,10 +1,10 @@
 {
   "cas": "120068-79-3",
-  "name": "5-amino-1-(2,6-dichloro-4- (trifluoromethyl)phenyl)-1H- pyrazole-3-carbonitrile",
+  "name": "5-amino-1-(2,6-dichloro-4-(trifluoromethyl)phenyl)-1H-pyrazole-3-carbonitrile",
   "name_tr": "5-amino-1-(2,6-dikloro-4- (triflorometil)fenil)-1H-pirazol- 3-karbonitril",
   "ec_no": "421-240-6",
   "index_no": "608-059-00-X",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

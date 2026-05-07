@@ -4,7 +4,7 @@
   "name_tr": "oksijen",
   "ec_no": "231-956-9",
   "index_no": "008-001-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "U"
   ],
@@ -13,6 +13,10 @@
       {
         "class": "Ox. Gas 1",
         "h_code": "H270"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": ""
       }
     ],
     "m_factors": {},

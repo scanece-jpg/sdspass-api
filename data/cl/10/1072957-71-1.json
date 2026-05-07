@@ -1,10 +1,10 @@
 {
   "cas": "1072957-71-1",
-  "name": "benzovindiflupyr (ISO); N-[9- (dichloromethylene)-1,2,3,4- tetrahydro-1,4- methanonaphthalen-5-yl]-3- (difluoromethyl)-1-methyl-1H- pyrazole-4-carboxamide",
+  "name": "benzovindiflupyr (ISO); N-[9-(dichloromethylene)-1,2,3,4-tetrahydro-1,4-methanonaphthalen-5-yl]-3-(difluoromethyl)-1-methyl-1H-pyrazole-4-carboxamide",
   "name_tr": "benzovindiflupyr (ISO); N-[9- (diklorometilen)-1,2,3,4- tetrahidro-1,4-metanonaftalen-5- il]-3-(diflorometil)-1-metil-1H- pirazole-4-karboksamid",
-  "ec_no": "_",
+  "ec_no": "",
   "index_no": "616-218-00-X",
-  "atp": "",
+  "atp": "ATP9",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "1918-18-9",
-  "name": "methyl 3,4- dichlorophenylcarbanilate; SWEP.",
+  "name": "methyl 3,4-dichlorophenylcarbanilate; SWEP.",
   "name_tr": "metil-3,4-diklorofenilkarbanilat; SWEP",
   "ec_no": "",
   "index_no": "006-062-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

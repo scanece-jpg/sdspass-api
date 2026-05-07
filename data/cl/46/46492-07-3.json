@@ -1,10 +1,10 @@
 {
   "cas": "46492-07-3",
-  "name": "disodium 9,10- anthracenedioxide",
+  "name": "disodium 9,10-anthracenedioxide",
   "name_tr": "Disodyum 9,10-antrasendioksit",
   "ec_no": "426-030-8",
   "index_no": "603-193-00-5",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

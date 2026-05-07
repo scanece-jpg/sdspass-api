@@ -1,10 +1,10 @@
 {
   "cas": "106359-93-7",
-  "name": "2-(4-(3-(4-chlorophenyl)-4,5- dihydropyrazolyl)phenylsulphon yl)ethyldimethylammonium hydrogen phosphonate",
+  "name": "2-(4-(3-(4-chlorophenyl)-4,5-dihydropyrazolyl)phenylsulphonyl)ethyldimethylammonium hydrogen phosphonate",
   "name_tr": "2-(4-(3-(4-klorofenil)-4,5- dihidropirazolil)fenilsülfonil)etil dimetilamonyum hidrojen fosfonat",
   "ec_no": "402-490-5",
   "index_no": "613-084-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

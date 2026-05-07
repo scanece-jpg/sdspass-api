@@ -1,10 +1,10 @@
 {
   "cas": "106359-94-8",
-  "name": "2'-(2-cyano-4,6- dinitrophenylazo)-5'-(N,N- dipropylamino)propionanilide",
+  "name": "2'-(2-cyano-4,6-dinitrophenylazo)-5'-(N,N-dipropylamino)propionanilide",
   "name_tr": "2'-(2-siyano-4,6-dinitrofenilazo)- 5'-(N,N- dipropilamino)propionanilid",
   "ec_no": "403-010-7",
   "index_no": "611-010-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -56,8 +56,8 @@
     ]
   },
   "ate": {
-    "dermal": 300.0,
-    "inhalation_vapour": 1.2,
-    "oral": 220.0
+    "inhalation_mgl": 1.2,
+    "oral": 220.0,
+    "dermal": 300.0
   }
 }

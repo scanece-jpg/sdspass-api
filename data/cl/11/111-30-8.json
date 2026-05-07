@@ -4,7 +4,7 @@
   "name_tr": "glutaral; glutaraldehid; 1,5-pentandial",
   "ec_no": "203-856-5",
   "index_no": "605-022-00-X",
-  "atp": "",
+  "atp": "ATP9",
   "notes": [],
   "classification": {
     "hazards": [
@@ -48,7 +48,7 @@
     "scl_limits": [
       {
         "h_code": "H335",
-        "class": "STOT SE 3",
+        "class": "",
         "c_min": 0.5,
         "c_max": 5.0
       }

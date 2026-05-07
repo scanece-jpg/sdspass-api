@@ -25,19 +25,19 @@
         "h_code": "H314",
         "class": "",
         "c_min": 2.0,
-        "c_max": null
+        "c_max": 5.0
       },
       {
         "h_code": "H315",
         "class": "",
-        "c_min": 5.0,
-        "c_max": null
+        "c_min": 0.5,
+        "c_max": 2.0
       },
       {
         "h_code": "H319",
         "class": "",
-        "c_min": 5.0,
-        "c_max": null
+        "c_min": 0.5,
+        "c_max": 2.0
       }
     ]
   },

@@ -1,10 +1,10 @@
 {
   "cas": "543-59-9",
-  "name": "1-chloropentane; [1] 2-chloropentane; [2] 3-chloropentane [3]",
+  "name": "1-chloropentane [1]\n2-chloropentane [2]\n3-chloropentane  [3]",
   "name_tr": "1-kloropentan [1]; 2-kloropentan [2]; 3-kloropentan [3];",
-  "ec_no": "208-846-4",
+  "ec_no": "208-846-4 [1]\n210-885-7 [2]\n210-467-4 [3]",
   "index_no": "602-022-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "C"
   ],

@@ -1,10 +1,10 @@
 {
   "cas": "14255-88-0",
-  "name": "fenazaflor (ISO); phenyl 5,6-dichloro-2- trifluoromethylbenzimidazole-1- carboxylate",
+  "name": "fenazaflor (ISO); phenyl 5,6-dichloro-2-trifluoromethylbenzimidazole-1-carboxylate",
   "name_tr": "fenazaflor (ISO); fenil 5,6- dikloro-2- triflorometilbenzimidazol-1- karboksilat",
   "ec_no": "238-134-9",
   "index_no": "613-015-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

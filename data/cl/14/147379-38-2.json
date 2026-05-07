@@ -1,10 +1,10 @@
 {
   "cas": "147379-38-2",
-  "name": "ethyl (2-acetylamino-5-fluoro-4- isothiocyanatophenoxy)acetate",
+  "name": "ethyl (2-acetylamino-5-fluoro-4-isothiocyanatophenoxy)acetate",
   "name_tr": "etil(2-asetilamino-5-floro-4- izotiyosiyanatofenoksi)asetat",
   "ec_no": "414-210-9",
   "index_no": "607-488-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

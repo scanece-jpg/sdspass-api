@@ -32,7 +32,7 @@
       {
         "h_code": "H335",
         "class": "",
-        "c_min": 5.0,
+        "c_min": 0.5,
         "c_max": null
       }
     ]

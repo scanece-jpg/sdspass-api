@@ -1,13 +1,11 @@
 {
   "cas": "584-84-9",
-  "name": "2-methyl-m-phenylene diisocyanate; toluene-2,4-di-isocyanate; [1] 4-methyl-m-phenylene diisocyanate; toluene-2,6-di-isocyanate; [2] m-tolylidene diisocyanate; toluene-diisocyanate [3]",
+  "name": "2-methyl-m-phenylene diisocyanate; toluene-2,4-di-isocyanate [1]\n4-methyl-m-phenylene diisocyanate; toluene-2,6-di-isocyanate [2]\nm-tolylidene diisocyanate; toluene-diisocyanate [3]",
   "name_tr": "2-metil-m-fenilen diizosiyanat ;toluen-2,4-di-izosiyanat; [1] 4- metil-m-fenilen diizosiyanat; toluen-2,6-di-izosiyanat; [2] m-tolidindiizosiyanat; toluen-diizosiyanat [3]",
-  "ec_no": "202-039-0",
+  "ec_no": "209-544-5",
   "index_no": "615-006-00-4",
-  "atp": "",
-  "notes": [
-    "C"
-  ],
+  "atp": "CLP00",
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -15,12 +13,8 @@
         "h_code": "H351"
       },
       {
-        "class": "Acute Tox. 2",
+        "class": "Acute Tox. 2 *",
         "h_code": "H330"
-      },
-      {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
       },
       {
         "class": "STOT SE 3",
@@ -29,6 +23,10 @@
       {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Resp. Sens. 1",
@@ -56,15 +54,15 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS06",
-      "GHS08"
+      "GHS08",
+      "GHS06"
     ],
     "h_codes": [
       "H351",
       "H330",
-      "H319",
       "H335",
       "H315",
+      "H319",
       "H334",
       "H317",
       "H412"

@@ -1,10 +1,10 @@
 {
   "cas": "171887-03-9",
-  "name": "N-(2-amino-4,6- dichloropyrimidin-5- yl)formamide",
+  "name": "N-(2-amino-4,6-dichloropyrimidin-5-yl)formamide",
   "name_tr": "N-(2-amino-4,6- dikloropirimidin-5-il)formamid",
   "ec_no": "425-650-6",
   "index_no": "616-151-00-6",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

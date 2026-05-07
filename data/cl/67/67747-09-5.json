@@ -1,10 +1,10 @@
 {
   "cas": "67747-09-5",
-  "name": "prochloraz (ISO); N-propyl-N-[2-(2,4,6- trichlorophenoxy)ethyl]-1H- imidazole-1-carboxamide",
+  "name": "prochloraz (ISO); N-propyl-N-[2-(2,4,6-trichlorophenoxy)ethyl]-1H-imidazole-1-carboxamide",
   "name_tr": "prokloraz (ISO); N-propil-N-[2- (2,4,6-triklorofenoksi)etil]-1H- imidazol-1-karboksamid",
   "ec_no": "266-994-5",
   "index_no": "613-128-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

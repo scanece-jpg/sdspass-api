@@ -71,7 +71,7 @@
     "suppl_h": []
   },
   "ate": {
-    "inhalation_dust": 0.05,
+    "inhalation_mgl": 0.05,
     "dermal": 50.0,
     "oral": 5.0
   }

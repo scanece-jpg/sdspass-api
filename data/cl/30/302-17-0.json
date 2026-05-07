@@ -4,7 +4,7 @@
   "name_tr": "kloral hidrat; 2,2,2-trikloroetan-1,1-diol",
   "ec_no": "206-117-5",
   "index_no": "605-014-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,12 +13,12 @@
         "h_code": "H301"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       }
     ],
     "m_factors": {},
@@ -31,8 +31,8 @@
     ],
     "h_codes": [
       "H301",
-      "H319",
-      "H315"
+      "H315",
+      "H319"
     ],
     "suppl_h": []
   }

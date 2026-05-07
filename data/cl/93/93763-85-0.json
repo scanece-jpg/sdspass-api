@@ -1,10 +1,10 @@
 {
   "cas": "93763-85-0",
-  "name": "Residues (petroleum), steam-",
+  "name": "Residues (petroleum), steam-cracked heat-soaked naphtha; Cracked gasoil; [A complex combination of hydrocarbons obtained as residue from the distillation of steam cracked heat soaked naphtha and boiling in the range of approximately 150 °C to 350 °C (302 °F to 662 °F).]",
   "name_tr": "Artıklar (petrol), buhar ile",
   "ec_no": "297-905-8",
   "index_no": "649-448-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -17,7 +17,7 @@
     "scl_limits": []
   },
   "labelling": {
-    "signal": "",
+    "signal": "Danger",
     "pictograms": [
       "GHS08"
     ],

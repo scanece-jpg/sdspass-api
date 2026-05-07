@@ -4,9 +4,9 @@
   "name_tr": "kadmiyum nitrat; kadmiyum dinitrat",
   "ec_no": "233-710-6",
   "index_no": "048-014-00-6",
-  "atp": "",
+  "atp": "ATP10",
   "notes": [
-    "A1"
+    "1 A"
   ],
   "classification": {
     "hazards": [
@@ -32,22 +32,22 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372"
+        "h_code": "H372(kidney,_bone)"
       },
       {
         "class": "Aquatic Acute 1",
-        "h_code": "(böbrek,ke"
+        "h_code": "H400"
       },
       {
         "class": "Aquatic Chronic 1",
-        "h_code": "mik)"
+        "h_code": "H410"
       }
     ],
     "m_factors": {},
     "scl_limits": [
       {
         "h_code": "H350",
-        "class": "Carc. 1B",
+        "class": "",
         "c_min": 0.01,
         "c_max": null
       }
@@ -66,9 +66,9 @@
       "H332",
       "H312",
       "H302",
-      "H372",
-      "(böbrek,ke",
-      "mik)"
+      "H372(kidney,_bone)",
+      "H400",
+      "H410"
     ],
     "suppl_h": []
   }

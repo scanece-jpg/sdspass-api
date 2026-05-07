@@ -1,10 +1,10 @@
 {
   "cas": "155522-09-1",
-  "name": "1,2-bis[4-fluoro-6-{}{4-sulfo-5- (2-(4-sulfonaphtalene-3-ylazo)- 1-hydroxy-3,6-disulfo-8- aminonaphthalene-7- ylazo)phenylamino}}-1,3,5- triazin-2ylamino]ethane; x- sodium, y-potassium salts x = 7,755 y = 0,245",
+  "name": "1,2-bis[4-fluoro-6-{}{4-sulfo-5-(2-(4-sulfonaphtalene-3-ylazo)-1-hydroxy-3,6-disulfo-8-aminonaphthalene-7-ylazo)phenylamino}}-1,3,5-triazin-2ylamino]ethane; x-sodium, y-potassium salts x = 7,755 y = 0,245",
   "name_tr": "1,2-bis[4-flor-6-{4-sülfo-5-(2- (4-sülfonaftalin-3-ilazo)-1- hidroksi-3,6-disülfo-8- aminonaftalin-7- ilazo)fenilamino}-1,3,5-triazin- 2-ilamino]etan; x-sodyum, y- potasyum tuzları x = 7,755 y = 0,245",
   "ec_no": "417-610-1",
   "index_no": "601-060-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

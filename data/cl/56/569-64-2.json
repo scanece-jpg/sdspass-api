@@ -1,10 +1,10 @@
 {
   "cas": "569-64-2",
-  "name": "malachite green hydrochloride; [1] malachite green oxalate [2]",
+  "name": "malachite green hydrochloride [1]\nmalachite green oxalate  [2]",
   "name_tr": "malaşit yeşili hidroklorür [1]; malaşit yeşili oksalat [2]",
-  "ec_no": "209-322-8",
+  "ec_no": "209-322-8 [1]\n219-441-7 [2]",
   "index_no": "602-096-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

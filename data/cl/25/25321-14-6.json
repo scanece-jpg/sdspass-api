@@ -1,10 +1,10 @@
 {
   "cas": "25321-14-6",
-  "name": "2,4-dinitrotoluene; [1] dinitrotoluene [2]",
+  "name": "2,4-dinitrotoluene [1]\ndinitrotoluene [2]",
   "name_tr": "2,4-dinitrotoluen; [1] dinitrotoluen [2]",
-  "ec_no": "204-450-0",
+  "ec_no": "246-836-1",
   "index_no": "609-007-00-9",
-  "atp": "",
+  "atp": "ATP01",
   "notes": [],
   "classification": {
     "hazards": [
@@ -18,23 +18,23 @@
       },
       {
         "class": "Repr. 2",
-        "h_code": "H361f"
+        "h_code": "H361f ***"
       },
       {
-        "class": "Acute Tox. 3",
+        "class": "Acute Tox. 3 *",
         "h_code": "H331"
       },
       {
-        "class": "Acute Tox. 3",
+        "class": "Acute Tox. 3 *",
         "h_code": "H311"
       },
       {
-        "class": "Acute Tox. 3",
+        "class": "Acute Tox. 3 *",
         "h_code": "H301"
       },
       {
-        "class": "STOT RE 2",
-        "h_code": "H373"
+        "class": "STOT RE 2 *",
+        "h_code": "H373 **"
       },
       {
         "class": "Aquatic Acute 1",
@@ -51,18 +51,18 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS06",
       "GHS08",
+      "GHS06",
       "GHS09"
     ],
     "h_codes": [
       "H350",
       "H341",
-      "H361f",
+      "H361f ***",
       "H331",
       "H311",
       "H301",
-      "H373",
+      "H373 **",
       "H400",
       "H410"
     ],

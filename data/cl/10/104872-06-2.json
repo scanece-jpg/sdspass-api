@@ -1,10 +1,10 @@
 {
   "cas": "104872-06-2",
-  "name": "(3S,4S)-3-hexyl-4-[(R)-2- hydroxytridecyl]-2-oxetanone",
+  "name": "(3S,4S)-3-hexyl-4-[(R)-2-hydroxytridecyl]-2-oxetanone",
   "name_tr": "(3S,4S)-3-hekzil-4-[(R)-2- hidroksitridesil]-2-oksetanon",
   "ec_no": "418-650-2",
   "index_no": "606-077-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

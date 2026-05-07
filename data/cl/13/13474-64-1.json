@@ -1,10 +1,10 @@
 {
   "cas": "13474-64-1",
-  "name": "4,4'-methylenebis(N,N'- dimethylcyclohexanamine",
+  "name": "4,4'-methylenebis(N,N'-dimethylcyclohexanamine",
   "name_tr": "4,4'-metilenbis(N,N'-dimetil- siklohekzanamin)",
   "ec_no": "412-840-9",
   "index_no": "612-172-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

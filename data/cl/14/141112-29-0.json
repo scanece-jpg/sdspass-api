@@ -1,10 +1,10 @@
 {
   "cas": "141112-29-0",
-  "name": "isoxaflutole (ISO); 5-cyclopropyl-1,2-oxazol-4-yl α, α,α-trifluoro-2-mesyl-p-tolyl ketone",
+  "name": "isoxaflutole (ISO); 5-cyclopropyl-1,2-oxazol-4-yl α,α,α-trifluoro-2-mesyl-p-tolyl ketone",
   "name_tr": "izoksaflutole (ISO); 5-siklopropil-1,2-oksazol-4-il α,α,α-trifloro-2-mesil-p-tolil keton",
   "ec_no": "",
   "index_no": "606-054-00-7",
-  "atp": "",
+  "atp": "ATP7",
   "notes": [],
   "classification": {
     "hazards": [
@@ -23,7 +23,7 @@
     ],
     "m_factors": {
       "acute": 10,
-      "chronic": 100
+      "chronic": 10
     },
     "scl_limits": []
   },

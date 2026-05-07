@@ -4,7 +4,7 @@
   "name_tr": "siyanofenfos (ISO); O-4-siyanofenil O-etil fenilfosfonotiyoat",
   "ec_no": "",
   "index_no": "015-110-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,12 +13,12 @@
         "h_code": "H301"
       },
       {
-        "class": "STOT SE 1",
-        "h_code": "H370"
-      },
-      {
         "class": "Acute Tox. 4",
         "h_code": "H312"
+      },
+      {
+        "class": "STOT SE 1",
+        "h_code": "H370"
       },
       {
         "class": "Eye Irrit. 2",
@@ -41,8 +41,8 @@
     ],
     "h_codes": [
       "H301",
-      "H370",
       "H312",
+      "H370",
       "H319",
       "H411"
     ],

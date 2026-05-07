@@ -25,7 +25,10 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {},
+    "m_factors": {
+      "acute": 1,
+      "chronic": 1
+    },
     "scl_limits": []
   },
   "labelling": {
@@ -43,6 +46,6 @@
     "suppl_h": []
   },
   "ate": {
-    "oral": 1700.0
+    "oral": 1.0
   }
 }

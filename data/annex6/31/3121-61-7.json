@@ -67,7 +67,7 @@
     ]
   },
   "ate": {
-    "inhalation_vapour": 2.7,
+    "inhalation_mgl": 2.7,
     "oral": 404.0
   }
 }

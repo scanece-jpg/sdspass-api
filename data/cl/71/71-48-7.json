@@ -4,9 +4,9 @@
   "name_tr": "kobalt di (asetat)",
   "ec_no": "200-755-8",
   "index_no": "027-006-00-6",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
-    "1.0"
+    "1"
   ],
   "classification": {
     "hazards": [
@@ -46,7 +46,7 @@
     "scl_limits": [
       {
         "h_code": "H350i",
-        "class": "Carc. 1B",
+        "class": "",
         "c_min": 0.01,
         "c_max": null
       }

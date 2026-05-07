@@ -1,10 +1,10 @@
 {
   "cas": "93957-49-4",
-  "name": "N-isopropyl-3-(4-fluorophenyl)- 1H-indole",
+  "name": "N-isopropyl-3-(4-fluorophenyl)-1H-indole",
   "name_tr": "N-izopropil-3-(4-florfenil)-1H- indol",
   "ec_no": "418-790-4",
   "index_no": "613-223-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "22259-30-9",
-  "name": "formetanate (ISO); 3-[(EZ)- dimethylaminomethyleneamino] phenyl methylcarbamate",
+  "name": "formetanate (ISO); 3-[(EZ)-dimethylaminomethyleneamino]phenyl methylcarbamate",
   "name_tr": "formetanat (ISO); 3-[(EZ)- dimetilaminometilenamino]fenil metilkarbamat",
   "ec_no": "244-879-0",
   "index_no": "006-031-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

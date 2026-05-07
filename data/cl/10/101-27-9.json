@@ -1,10 +1,10 @@
 {
   "cas": "101-27-9",
-  "name": "barban (ISO); 4-chlorbut-2-ynyl N-(3- chlorophenyl)carbamate",
+  "name": "barban (ISO); 4-chlorbut-2-ynyl N-(3-chlorophenyl)carbamate",
   "name_tr": "barban (ISO); (4-klorbüt-2-inil N-3- klorofenilkarbamat",
   "ec_no": "202-930-4",
   "index_no": "006-020-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

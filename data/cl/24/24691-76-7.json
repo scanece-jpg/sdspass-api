@@ -1,10 +1,10 @@
 {
   "cas": "24691-76-7",
-  "name": "pyracarbolid (ISO); 3,4-dihydro-6-methyl-2H-pyran- 5-carboxanilide",
+  "name": "pyracarbolid (ISO); 3,4-dihydro-6-methyl-2H-pyran-5-carboxanilide",
   "name_tr": "pirakarbolid (ISO); 3,4-dihidro- 6-metil-2H-piran-5- karboksanilid",
   "ec_no": "246-419-4",
   "index_no": "616-034-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

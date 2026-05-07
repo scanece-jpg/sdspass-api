@@ -1,10 +1,10 @@
 {
   "cas": "198705-81-6",
-  "name": "propyl((4-(5-oxo-3- propylisoxazolidin-4- ylidenmethin)phenyl)propoxycar bonylmethyleneamino)acetate",
+  "name": "propyl((4-(5-oxo-3-propylisoxazolidin-4-ylidenmethin)phenyl)propoxycarbonylmethyleneamino)acetate",
   "name_tr": "propil((4-(5-okso-3- propilizoksaolidin-4- ilidenmetin)fenil)propoksikarbo nilmetilamino)asetat",
   "ec_no": "431-000-2",
   "index_no": "607-539-00-6",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

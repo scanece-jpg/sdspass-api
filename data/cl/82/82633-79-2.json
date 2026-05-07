@@ -1,10 +1,10 @@
 {
   "cas": "82633-79-2",
-  "name": "2,3,5,6-tetrahydro-2-methyl-2H- cyclopenta[d]-1,2-thiazol-3-one",
+  "name": "2,3,5,6-tetrahydro-2-methyl-2H-cyclopenta[d]-1,2-thiazol-3-one",
   "name_tr": "2,3,5,6-tetrahidro-2-metil-2H- siklopenta[d]-1,2-tiyazol-3-on",
   "ec_no": "407-630-9",
   "index_no": "613-185-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

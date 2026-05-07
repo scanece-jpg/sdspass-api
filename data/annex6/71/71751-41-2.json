@@ -34,7 +34,8 @@
       }
     ],
     "m_factors": {
-      "acute": 10000
+      "acute": 10000,
+      "chronic": 10000
     },
     "scl_limits": [
       {
@@ -46,8 +47,8 @@
       {
         "h_code": "H373",
         "class": "",
-        "c_min": 5.0,
-        "c_max": null
+        "c_min": 0.5,
+        "c_max": 5.0
       }
     ]
   },

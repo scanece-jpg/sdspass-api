@@ -1,10 +1,10 @@
 {
   "cas": "95-06-7",
-  "name": "sulfallate (ISO); 2-chloroallyl N,N- dimethyldithiocarbamate",
+  "name": "sulfallate (ISO); 2-chloroallyl N,N-dimethyldithiocarbamate",
   "name_tr": "sülfallat (ISO); 2-kloroallil N,N- dimetilditiyokarbamat",
   "ec_no": "202-388-9",
   "index_no": "006-038-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

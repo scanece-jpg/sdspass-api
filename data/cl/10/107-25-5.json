@@ -4,16 +4,19 @@
   "name_tr": "metil-vinil-eter",
   "ec_no": "203-475-4",
   "index_no": "603-021-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
-    "D",
-    "U"
+    "D U"
   ],
   "classification": {
     "hazards": [
       {
         "class": "Flam. Gas 1",
         "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": ""
       }
     ],
     "m_factors": {},

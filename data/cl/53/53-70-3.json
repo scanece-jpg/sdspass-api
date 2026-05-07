@@ -4,7 +4,7 @@
   "name_tr": "dibenz[a,h]antrasen",
   "ec_no": "200-181-8",
   "index_no": "601-041-00-2",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -28,7 +28,7 @@
     "scl_limits": [
       {
         "h_code": "H350",
-        "class": "Carc. 1B",
+        "class": "",
         "c_min": 0.01,
         "c_max": null
       }

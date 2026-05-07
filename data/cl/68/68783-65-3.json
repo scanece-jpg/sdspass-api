@@ -1,14 +1,12 @@
 {
   "cas": "68783-65-3",
-  "name": "Gases (petroleum), C2-4, sweetened; Petroleum gas; [A complex combination of hydrocarbons obtained by subjecting a petroleum distillate to a sweetening process to convert mercaptans or to remove acidic impurities. It consists predominantly of saturated and unsaturated hydrocarbons having carbon numbers predominantly in the range of C2 through C4 and boiling in the range of approximately -51°C to -34°C (- 60°F to -30°F).]",
+  "name": "Gases (petroleum), C2-4, sweetened; Petroleum gas; [A complex combination of hydrocarbons obtained by subjecting a petroleum distillate to a sweetening process to convert mercaptans or to remove acidic impurities. It consists predominantly of saturated and unsaturated hydrocarbons having carbon numbers predominantly in the range of C2 through C4 and boiling in the range of approximately – 51 °C to – 34 °C (– 60 °F to – 30 °F).]",
   "name_tr": "Gazlar (petrol), C2-4, Kıvamı artırılmış; Petrol gazı; [Merkaptanların dönüşümü veya asidik safsızlıkların uzaklaştırılması için petrol damıtığının kıvamlandırma prosesine maruz bırakılması ile elde edilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla, C2 ila C4 aralığında karbon sayısına sahip ve yaklaşık -51 oC ila -34 oC (-60 oF ila -30 oF) aralığında kaynayan, doymuş veya doymamış hidrokarbonlardan oluşur.]",
   "ec_no": "272-205-5",
   "index_no": "649-099-00-8",
   "atp": "ATP1",
   "notes": [
-    "K",
-    "U",
-    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
+    "K U"
   ],
   "classification": {
     "hazards": [

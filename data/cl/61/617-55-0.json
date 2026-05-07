@@ -1,10 +1,10 @@
 {
   "cas": "617-55-0",
-  "name": "dimethyl (2S)-2- hydroxysuccinate",
+  "name": "dimethyl (2S)-2-hydroxysuccinate",
   "name_tr": "dimetil (2S)-2-hidroksisüksinat",
   "ec_no": "432-310-0",
   "index_no": "607-643-00-1",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "23031-36-9",
-  "name": "prallethrin (ISO); ETOC; 2-methyl-4-oxo-3-(prop-2- ynyl)cyclopent-2-en-1-yl 2,2- dimethyl-3-(2-methylprop-1- enyl)cyclopropanecarboxylate",
+  "name": "prallethrin (ISO); ETOC; 2-methyl-4-oxo-3-(prop-2-ynyl)cyclopent-2-en-1-yl 2,2-dimethyl-3-(2-methylprop-1-enyl)cyclopropanecarboxylate",
   "name_tr": "pralletrin (ISO); ETOC; 2-metil-4-okso-3-(prop-2- inil)siklopent-2-en-1-il 2,2- dimetil-3-(2-metilprop-1- enil)siklopropankarboksilat",
   "ec_no": "245-387-9",
   "index_no": "607-431-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

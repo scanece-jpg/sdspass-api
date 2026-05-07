@@ -1,10 +1,10 @@
 {
   "cas": "208535-04-0",
-  "name": "N-amidino-N-methylglycine-2- oxopropionate",
+  "name": "N-amidino-N-methylglycine-2-oxopropionate",
   "name_tr": "N-amidino-N-metilglisin-2- oksopropiyonat",
   "ec_no": "429-120-5",
   "index_no": "607-595-00-1",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

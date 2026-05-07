@@ -1,10 +1,10 @@
 {
   "cas": "84245-12-5",
-  "name": "N-[6,9-dihydro-9-[[2-hydroxy-1- (hydroxymethyl)ethoxy]methyl]- 6-oxo-1H-purin-2-yl]acetamide",
+  "name": "N-[6,9-dihydro-9-[[2-hydroxy-1-(hydroxymethyl)ethoxy]methyl]-6-oxo-1H-purin-2-yl]acetamide",
   "name_tr": "N-[6,9-dihidro-9-[[2-hidroksi-1- (hidroksimetil)etoksi]metil]-6- okso-1H-purin-2-il]asetamid",
   "ec_no": "424-550-1",
   "index_no": "616-148-00-X",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

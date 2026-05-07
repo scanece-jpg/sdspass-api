@@ -1,10 +1,10 @@
 {
   "cas": "65996-92-1",
-  "name": "Distillates (coal tar); Heavy Anthracene Oil; [The distillate from coal tar having an approximate distillation range of 100 °C to 450 °C (212 °F to 842 °F). Composed primarily of two to four membered condensed ring aromatic hydrocarbons, phenolic compounds, and aromatic nitrogen bases.]",
+  "name": "Distillates (coal tar); Heavy Anthracene Oil; [The distillate from coal tar having an approximate distillation range of 100 °C to 450 °C (212 °F to 842 °F). Composed primarily of two to four membered condensed ring aromatic hydrocarbons, phenolic compounds, and aromatic nitrogen bases.]",
   "name_tr": "Damıtıklar (kömür zifti); ağır antrasen yağı [Kömür ziftinin yaklaşık 100oC ile 450oC (212oF-842oF) arasında kaynayan damıtığı. Başlıca 2 - 4 elemanlı yoğun halka aromatik hidrokarbonlar, fenolik hidrokarbonlar ve aromatik nitrojen bazlarından oluşur.]",
   "ec_no": "266-027-7",
   "index_no": "648-047-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "M"
   ],

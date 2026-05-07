@@ -1,10 +1,10 @@
 {
   "cas": "43222-48-6",
-  "name": "1,2-dimethyl-3,5- diphenylpyrazolium methylsulphate; difenzoquat methyl sulfate",
+  "name": "1,2-dimethyl-3,5-diphenylpyrazolium methylsulphate; difenzoquat methyl sulfate",
   "name_tr": "1,2-dimetil-3,5- difenilpirazolyum metilsülfat; difenzokuat metilsülfat",
   "ec_no": "256-152-5",
   "index_no": "613-056-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

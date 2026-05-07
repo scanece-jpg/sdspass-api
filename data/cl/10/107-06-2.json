@@ -4,7 +4,7 @@
   "name_tr": "1,2-dikloroetan; etilen diklorür",
   "ec_no": "203-458-1",
   "index_no": "602-012-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -21,16 +21,16 @@
         "h_code": "H302"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H335"
       },
       {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       }
     ],
     "m_factors": {},
@@ -47,9 +47,9 @@
       "H225",
       "H350",
       "H302",
-      "H319",
       "H335",
-      "H315"
+      "H315",
+      "H319"
     ],
     "suppl_h": []
   }

@@ -1,10 +1,10 @@
 {
   "cas": "102851-06-9",
-  "name": "tau-fluvalinate (ISO); cyano-(3-phenoxyphenyl)methyl N-[2-chloro-4- (trifluoromethyl)phenyl]-D- valinate",
+  "name": "tau-fluvalinate (ISO); cyano-(3-phenoxyphenyl)methyl N-[2-chloro-4-(trifluoromethyl)phenyl]-D-valinate",
   "name_tr": "tau-fluvalinat (ISO); siyano-(3-fenoksifenil)metilN- [2-kloro-4-(triflorometil)fenil]- D-valinat",
   "ec_no": "",
   "index_no": "607-238-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

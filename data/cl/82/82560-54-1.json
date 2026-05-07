@@ -1,10 +1,10 @@
 {
   "cas": "82560-54-1",
-  "name": "benfuracarb (ISO); ethyl N-[2,3-dihydro-2,2- dimethylbenzofuran-7- yloxycarbonyl(methyl)aminothio ]-N-isopropyl- β-alaninate",
+  "name": "benfuracarb (ISO); ethyl N-[2,3-dihydro-2,2-dimethylbenzofuran-7-yloxycarbonyl(methyl)aminothio]-N-isopropyl- β-alaninate",
   "name_tr": "benfürakarb (ISO); etil N-[2,3- dihidro-2,2-dimetilbenzofuran- 7- iloksikarbonil(metil)aminotiyo]- N-izopropil- β-alaninat",
-  "ec_no": "",
+  "ec_no": "-",
   "index_no": "006-088-00-7",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "8065-36-9",
-  "name": "bufencarb (ISO); reaction mass of 3-(1- methylbutyl)phenyl N- methylcarbamate and 3-(1- ethylpropyl)phenyl N- methylcarbamate",
+  "name": "bufencarb (ISO); reaction mass of 3-(1-methylbutyl)phenyl N-methylcarbamate and 3-(1-ethylpropyl)phenyl N-methylcarbamate",
   "name_tr": "bufenkarb (ISO); 3-(1-metilbütil) fenil N- metilkarbamat ve 3-(1- etilpropil)fenil N-metilkarbamat ın tepkime kütlesi",
   "ec_no": "",
   "index_no": "006-047-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

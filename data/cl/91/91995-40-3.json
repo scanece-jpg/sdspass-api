@@ -1,10 +1,10 @@
 {
   "cas": "91995-40-3",
-  "name": "Distillates (petroleum), dewaxed light paraffinic, hydrotreated; Baseoil - unspecified; [A complex combination of hydrocarbons obtained from an intensive treatment of dewaxed distillate by hydrogenation in the presence of a catalyst. It consists predominantly of saturated hydrocarbons having carbon numbers predominantly in the range of C21 through C29 and produces a finished oil with a viscosity of approximately 13 cSt at 50 °C.]",
+  "name": "Distillates (petroleum), dewaxed light paraffinic, hydrotreated; Baseoil - unspecified; [A complex combination of hydrocarbons obtained from an intensive treatment of dewaxed distillate by hydrogenation in the presence of a catalyst. It consists predominantly of saturated hydrocarbons having carbon numbers predominantly in the range of C21 through C29 and produces a finished oil with a viscosity of approximately 13 cSt at 50 °C.]",
   "name_tr": "Damıtıklar (petrol), cilası alınmış hafif parafinik, hidrojenle muamele edilmiş; yağlar – tanımlanmamış [Cilası alınmış damıtığın katalizör varlığında hidrojenerasyon ile yoğun olarak muamele edilmesinden elde edilen hidrokarbonların kompleks bileşimi. Genelde, ağırlıklı olarak C21 ila C29 aralığında karbon sayısına sahip doymuş hidrokarbonlardan oluşur ve 50 oC’de yaklaşık 13 cSt viskoziteye sahip son yağ üretir.]",
   "ec_no": "295-301-9",
   "index_no": "649-494-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "L"
   ],

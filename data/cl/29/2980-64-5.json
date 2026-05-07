@@ -4,17 +4,17 @@
   "name_tr": "DNOK’nın amonyum tuzu; amonyum 4,6-dinitro-o-tolil oksit",
   "ec_no": "221-037-0",
   "index_no": "609-022-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 2",
-        "h_code": "H330"
-      },
-      {
         "class": "Acute Tox. 1",
         "h_code": "H310"
+      },
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H330"
       },
       {
         "class": "Acute Tox. 2",
@@ -44,8 +44,8 @@
       "GHS09"
     ],
     "h_codes": [
-      "H330",
       "H310",
+      "H330",
       "H300",
       "H373",
       "H400",

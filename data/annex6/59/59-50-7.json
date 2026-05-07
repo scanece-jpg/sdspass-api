@@ -37,7 +37,10 @@
         "h_code": "H412"
       }
     ],
-    "m_factors": {},
+    "m_factors": {
+      "acute": 1,
+      "chronic": 1
+    },
     "scl_limits": []
   },
   "labelling": {

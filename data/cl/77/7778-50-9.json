@@ -4,9 +4,9 @@
   "name_tr": "Potasyum dikromat",
   "ec_no": "231-906-6",
   "index_no": "024-002-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
-    "3.0"
+    "3"
   ],
   "classification": {
     "hazards": [
@@ -35,12 +35,12 @@
         "h_code": "H301"
       },
       {
-        "class": "STOT RE 1",
-        "h_code": "H372"
-      },
-      {
         "class": "Acute Tox. 4",
         "h_code": "H312"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
       },
       {
         "class": "Skin Corr. 1B",
@@ -67,7 +67,7 @@
     "scl_limits": [
       {
         "h_code": "H335",
-        "class": "STOT SE 3",
+        "class": "",
         "c_min": 5.0,
         "c_max": null
       }
@@ -89,8 +89,8 @@
       "H360FD",
       "H330",
       "H301",
-      "H372",
       "H312",
+      "H372",
       "H314",
       "H334",
       "H317",

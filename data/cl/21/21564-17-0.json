@@ -4,7 +4,7 @@
   "name_tr": "(benzotiazol-2-iltiyo)metil tiyosiyanat; TCMTB",
   "ec_no": "244-445-0",
   "index_no": "613-119-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -17,12 +17,12 @@
         "h_code": "H302"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Skin Sens. 1",
@@ -49,8 +49,8 @@
     "h_codes": [
       "H330",
       "H302",
-      "H319",
       "H315",
+      "H319",
       "H317",
       "H400",
       "H410"

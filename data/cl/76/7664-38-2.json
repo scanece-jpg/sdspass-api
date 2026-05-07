@@ -1,10 +1,10 @@
 {
   "cas": "7664-38-2",
-  "name": "phosphoric acid ... %, orthophosphoric acid ... %",
+  "name": "phosphoric acid ... %, orthophosphoric acid ... %",
   "name_tr": "fosforik asit ... %, ortofosforik asit ... %",
   "ec_no": "231-633-2",
   "index_no": "015-011-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "B"
   ],
@@ -19,13 +19,19 @@
     "scl_limits": [
       {
         "h_code": "H314",
-        "class": "Skin Corr. 1B",
+        "class": "",
         "c_min": 25.0,
         "c_max": null
       },
       {
+        "h_code": "H315",
+        "class": "",
+        "c_min": 10.0,
+        "c_max": 25.0
+      },
+      {
         "h_code": "H319",
-        "class": "C < %25 Göz Tah. 2",
+        "class": "",
         "c_min": 10.0,
         "c_max": 25.0
       }

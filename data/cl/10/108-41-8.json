@@ -1,17 +1,15 @@
 {
   "cas": "108-41-8",
-  "name": "2-chlorotoluene; [1] 3-chlorotoluene; [2] 4-chlorotoluene; [3] chlorotoluene [4]",
+  "name": "2-chlorotoluene [1]\n3-chlorotoluene [2]\n4-chlorotoluene [3]\nchlorotoluene [4]",
   "name_tr": "2-klorotoluen [1] 3-klorotoluen [2]; 4-klorotoluen[3]; klorotoluen [4];",
-  "ec_no": "202-424-3",
+  "ec_no": "203-580-5",
   "index_no": "602-040-00-X",
-  "atp": "",
-  "notes": [
-    "C"
-  ],
+  "atp": "CLP00",
+  "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4",
+        "class": "Acute Tox. 4 *",
         "h_code": "H332"
       },
       {

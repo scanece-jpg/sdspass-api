@@ -1,10 +1,10 @@
 {
   "cas": "189278-12-4",
-  "name": "proquinazid (ISO); 6-iodo-2- propoxy-3-propylquinazolin- 4(3H)-one",
+  "name": "proquinazid (ISO); 6-iodo-2-propoxy-3-propylquinazolin-4(3H)-one",
   "name_tr": "prokuinazid (ISO); 6-iyodo-2- propoksi-3-propilkuinazolin- 4(3H)-on",
   "ec_no": "",
   "index_no": "616-211-00-1",
-  "atp": "",
+  "atp": "ATP5",
   "notes": [],
   "classification": {
     "hazards": [
@@ -23,7 +23,7 @@
     ],
     "m_factors": {
       "acute": 1,
-      "chronic": 10
+      "chronic": 1
     },
     "scl_limits": []
   },

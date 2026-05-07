@@ -1,10 +1,10 @@
 {
   "cas": "2164-08-1",
-  "name": "lenacil (ISO); 3-cyclohexyl-6,7- dihydro-1H- cyclopenta[d]pyrimidine- 2,4(3H,5H)-dione",
+  "name": "lenacil (ISO); 3-cyclohexyl-6,7-dihydro-1H-cyclopenta[d]pyrimidine-2,4(3H,5H)-dione",
   "name_tr": "lenasil (ISO); 3-siklohekzil-6,7- dihidro-1H- siklopenta[d]primidin- 2,4(3H,5H)-dion",
   "ec_no": "218-499-0",
   "index_no": "613-320-00-6",
-  "atp": "",
+  "atp": "ATP7",
   "notes": [],
   "classification": {
     "hazards": [

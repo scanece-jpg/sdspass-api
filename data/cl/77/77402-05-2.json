@@ -1,10 +1,10 @@
 {
   "cas": "77402-05-2",
-  "name": "methyl acrylamidoglycolate (containing ≥ 0,1 % acrylamide)",
+  "name": "methyl acrylamidoglycolate (containing ≥ 0,1 % acrylamide)",
   "name_tr": "metilakrilamidoglikolat (% 0,1den fazla akrilamid içeren)",
   "ec_no": "403-230-3",
   "index_no": "607-210-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

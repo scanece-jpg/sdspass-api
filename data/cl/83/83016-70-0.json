@@ -1,10 +1,10 @@
 {
   "cas": "83016-70-0",
-  "name": "2-[(2-[2- (dimethylamino)ethoxy]ethyl)m ethylamino]ethanol",
+  "name": "2-[(2-[2-(dimethylamino)ethoxy]ethyl)methylamino]ethanol",
   "name_tr": "2-[(2-[2- (dimetilamino)etoksi]etil)metila mino]etanol",
   "ec_no": "406-080-7",
   "index_no": "603-146-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

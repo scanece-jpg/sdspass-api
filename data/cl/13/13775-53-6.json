@@ -1,20 +1,20 @@
 {
   "cas": "13775-53-6",
-  "name": "trisodium hexafluoroaluminate [1] trisodium hexafluoroaluminate (cryolite) [2]",
+  "name": "trisodium hexafluoroaluminate [1]\ntrisodium hexafluoroaluminate (cryolite) [2]",
   "name_tr": "Trisodyumhekzafloroalüminat [1] trisodyum hekzafloroalüminat (kriyolit) [2]",
-  "ec_no": "237-410-6",
+  "ec_no": "237-410-6 [1]\n239-148-8 [2]",
   "index_no": "009-016-00-2",
-  "atp": "",
+  "atp": "ATP3",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "STOT RE 1",
-        "h_code": "H372"
-      },
-      {
         "class": "Acute Tox. 4",
         "h_code": "H332"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
       },
       {
         "class": "Aquatic Chronic 2",
@@ -32,8 +32,8 @@
       "GHS09"
     ],
     "h_codes": [
-      "H372",
       "H332",
+      "H372",
       "H411"
     ],
     "suppl_h": []

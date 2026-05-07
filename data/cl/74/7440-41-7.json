@@ -4,7 +4,7 @@
   "name_tr": "Berilyum",
   "ec_no": "231-150-7",
   "index_no": "004-001-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -21,20 +21,20 @@
         "h_code": "H301"
       },
       {
-        "class": "STOT RE 1",
-        "h_code": "H372"
-      },
-      {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H335"
       },
       {
+        "class": "STOT RE 1",
+        "h_code": "H372"
+      },
+      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Skin Sens. 1",
@@ -54,10 +54,10 @@
       "H350i",
       "H330",
       "H301",
-      "H372",
-      "H319",
       "H335",
+      "H372",
       "H315",
+      "H319",
       "H317"
     ],
     "suppl_h": []

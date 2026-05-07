@@ -4,10 +4,9 @@
   "name_tr": "Amonyum dikromat",
   "ec_no": "232-143-1",
   "index_no": "024-003-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
-    "G",
-    "3"
+    "3 G"
   ],
   "classification": {
     "hazards": [
@@ -36,12 +35,12 @@
         "h_code": "H301"
       },
       {
-        "class": "STOT RE 1",
-        "h_code": "H372"
-      },
-      {
         "class": "Acute Tox. 4",
         "h_code": "H312"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
       },
       {
         "class": "Skin Corr. 1B",
@@ -68,19 +67,19 @@
     "scl_limits": [
       {
         "h_code": "H335",
-        "class": "STOT SE 3",
+        "class": "",
         "c_min": 5.0,
         "c_max": null
       },
       {
         "h_code": "H334",
-        "class": "Solnm. Hassas.",
+        "class": "",
         "c_min": 0.2,
         "c_max": null
       },
       {
         "h_code": "H317",
-        "class": "Cilt Hassas.",
+        "class": "",
         "c_min": 0.2,
         "c_max": null
       }
@@ -102,8 +101,8 @@
       "H360FD",
       "H330",
       "H301",
-      "H372",
       "H312",
+      "H372",
       "H314",
       "H334",
       "H317",

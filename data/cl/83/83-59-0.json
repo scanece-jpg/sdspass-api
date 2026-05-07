@@ -1,10 +1,10 @@
 {
   "cas": "83-59-0",
-  "name": "dipropyl 6,7-methylenedioxy- 1,2,3,4-tetrahydro-3- methylnaphthalene-1,2- dicarboxylate; propylisome",
+  "name": "dipropyl 6,7-methylenedioxy-1,2,3,4-tetrahydro-3-methylnaphthalene-1,2-dicarboxylate; propylisome",
   "name_tr": "dipropil 6,7-metilendioksi- 1,2,3,4-tetrahidro-3- metilnaftalen-1,2-dikarboksilat; propilizom",
   "ec_no": "",
   "index_no": "607-168-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

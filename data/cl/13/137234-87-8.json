@@ -1,10 +1,10 @@
 {
   "cas": "137234-87-8",
-  "name": "6-ethyl-5-fluoro-4(3H)- pyrimidone",
+  "name": "6-ethyl-5-fluoro-4(3H)-pyrimidone",
   "name_tr": "6-etil-5-flor-4(3H)-pirimidon",
   "ec_no": "422-460-5",
   "index_no": "606-087-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

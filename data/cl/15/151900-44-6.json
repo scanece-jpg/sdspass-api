@@ -1,10 +1,10 @@
 {
   "cas": "151900-44-6",
-  "name": "1,6- bis((dibenzylthiocarbamoyl)disu lfanyl)hexane",
+  "name": "1,6-bis((dibenzylthiocarbamoyl)disulfanyl)hexane",
   "name_tr": "1,6- bis((dibenziltiyokarbomoil)disül fanil)hekzan",
   "ec_no": "429-280-6",
   "index_no": "607-471-00-7",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

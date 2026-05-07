@@ -1,10 +1,10 @@
 {
   "cas": "78-32-0",
-  "name": "tricresyl phosphate (m-m-m-, m- m-p-, m-p-p-, p-p-p-); tritolyl phosphate (m-m-m-, m- m-p-, m-p-p-, p-p-p-)",
+  "name": "tricresyl phosphate (m-m-m-, m-m-p-, m-p-p-, p-p-p-); tritolyl phosphate (m-m-m-, m-m-p-, m-p-p-, p-p-p-)",
   "name_tr": "trikresil fosfat (m-m-m-, m-m-p- , m-p-p-,p-p-p-); tritolil fosfat (m-m-m-, m-m-p-, m-p-p-,p-p-p-);",
   "ec_no": "201-105-6",
   "index_no": "015-016-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "C"
   ],

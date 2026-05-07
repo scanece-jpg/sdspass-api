@@ -1,10 +1,10 @@
 {
   "cas": "485-31-4",
-  "name": "binapacryl (ISO); 2-sec-butyl-4,6-dinitrophenyl-3- methylcrotonate",
+  "name": "binapacryl (ISO); 2-sec-butyl-4,6-dinitrophenyl-3-methylcrotonate",
   "name_tr": "binapakril (ISO); 2-sek-bütil-4,6-dinitrofenil-3- metilkrotonat",
   "ec_no": "207-612-9",
   "index_no": "609-024-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

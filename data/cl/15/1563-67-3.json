@@ -1,10 +1,10 @@
 {
   "cas": "1563-67-3",
-  "name": "decarbofuran (ISO); 2,3-dihydro-2- methylbenzofuran-7-yl methylcarbamate",
+  "name": "decarbofuran (ISO); 2,3-dihydro-2-methylbenzofuran-7-yl methylcarbamate",
   "name_tr": "Dekarbofuran (ISO); 2,3-dihidro-2-metilbenzofuran- 7-il metil karbamat",
   "ec_no": "",
   "index_no": "006-022-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

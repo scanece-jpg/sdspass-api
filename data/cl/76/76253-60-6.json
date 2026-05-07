@@ -1,10 +1,10 @@
 {
   "cas": "76253-60-6",
-  "name": "dichloro [(dichlorophenyl)methyl]methyl benzene, reaction mass of isomers; (dichlorophenyl)(dichlorotolyl) methane, reaction mass of isomers (IUPAC)",
+  "name": "dichloro [(dichlorophenyl)methyl]methylbenzene, reaction mass of isomers; (dichlorophenyl)(dichlorotolyl)methane, reaction mass of isomers (IUPAC)",
   "name_tr": "dikloro [(diklorofenil)metil]metilbenzen, izomerlerinin tepkime kütlesi; (diklorofenil)(diklorotolil)metan, izomerlerinin tepkime kütlesi(IUPAC)",
   "ec_no": "278-404-3",
   "index_no": "602-072-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

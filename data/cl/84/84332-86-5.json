@@ -1,10 +1,10 @@
 {
   "cas": "84332-86-5",
-  "name": "chlozolinate (ISO); ethyl (RS)-3-(3,5- dichlorophenyl)-5-methyl-2,4- dioxo-oxazolidine-5-carboxylate",
+  "name": "chlozolinate (ISO); ethyl (RS)-3-(3,5-dichlorophenyl)-5-methyl-2,4-dioxo-oxazolidine-5-carboxylate",
   "name_tr": "klozolinat (ISO); etil-(RS)-3-(3,5-diklorofenil)-5- metil-2,4-diokso-oksazolidin-5- karboksilat",
   "ec_no": "282-714-4",
   "index_no": "607-306-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

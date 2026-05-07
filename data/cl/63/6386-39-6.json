@@ -1,10 +1,10 @@
 {
   "cas": "6386-39-6",
-  "name": "methyl 3-(3-tert-butyl-4- hydroxy-5- methylphenyl)propionate",
+  "name": "methyl 3-(3-tert-butyl-4-hydroxy-5-methylphenyl)propionate",
   "name_tr": "metil-3-(3-ter-bütil-4-hidroksi-5- metilfenil)propiyonat",
   "ec_no": "403-270-1",
   "index_no": "607-211-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

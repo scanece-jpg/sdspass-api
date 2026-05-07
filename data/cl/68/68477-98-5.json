@@ -1,14 +1,12 @@
 {
   "cas": "68477-98-5",
-  "name": "Gases (petroleum), hydrotreater blend oil recycle, hydrogen- nitrogen-rich; Refinery gas; [A complex combination obtained from recycled hydrotreated blend oil. It consists primarily of hydrogen and nitrogen with various small amounts of carbon monoxide, carbon dioxide and hydrocarbons having carbon numbers predominantly in the range of C1 through C5.]",
+  "name": "Gases (petroleum), hydrotreater blend oil recycle, hydrogen-nitrogen-rich; Refinery gas; [A complex combination obtained from recycled hydrotreated blend oil. It consists primarily of hydrogen and nitrogen with various small amounts of carbon monoxide, carbon dioxide and hydrocarbons having carbon numbers predominantly in the range of C1 through C5.]",
   "name_tr": "Gazlar (petrol), hidrojen ile muamele edici karışım yağı geri dönüşü, hidrojen-azot-zengin; Rafineri gazı; [Hidrojen ile muamele edilmiş ve geri dönüştürülmüş karışım yağından elde edilen kompleks bir bileşim. Öncelikli olarak farklı düşük miktarlarda karbon monoksit, karbon dioksit ve büyük çoğunlukla C1 ila C5 aralığında karbon sayısına sahip hidrokarbonlar ile hidrojen ve azottan oluşur ]",
   "ec_no": "270-781-2",
   "index_no": "649-133-00-1",
   "atp": "ATP1",
   "notes": [
-    "K",
-    "U",
-    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
+    "K U"
   ],
   "classification": {
     "hazards": [

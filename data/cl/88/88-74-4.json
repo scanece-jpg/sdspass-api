@@ -1,10 +1,10 @@
 {
   "cas": "88-74-4",
-  "name": "o-nitroaniline; [1] m-nitroaniline; [2] p-nitroaniline [3]",
+  "name": "o-nitroaniline [1]\nm-nitroaniline [2]\np-nitroaniline  [3]",
   "name_tr": "o-nitroanilin; [1] m-nitroanilin; [2] p-nitroanilin [3]",
-  "ec_no": "201-855-4",
+  "ec_no": "201-855-4 [1]\n202-729-1 [2]\n202-810-1 [3]",
   "index_no": "612-012-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "C"
   ],

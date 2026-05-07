@@ -1,13 +1,11 @@
 {
   "cas": "826-62-0",
-  "name": "8,9,10-trinorborn-5-ene-2,3- dicarboxylic anhydride; [1] 1,2,3,6-tetrahydro-3,6- methanophthalic anhydride; [2] (1α,2α,3β,6β)-1,2,3,6- tetrahydro-3,6-methanophthalic anhydride [3]",
+  "name": "8,9,10-trinorborn-5-ene-2,3-dicarboxylic anhydride [1]\n1,2,3,6-tetrahydro-3,6-methanophthalic anhydride [2]\n(1Î±,2Î±,3Î²,6Î²)-1,2,3,6-tetrahydro-3,6-methanophthalic anhydride [3]",
   "name_tr": "8,9,10-trinorborn-5-en-2,3- dikarboksilik anhidrit; [1] 1,2,3,6-tetrahidro-3,6- metanoftalik anhidrit; [2] (1α,2α,3β,6β)-1,2,3,6-tetrahidro- 3,6-metanoftalik anhidrit [3]",
-  "ec_no": "204-957-7",
+  "ec_no": "212-557-9",
   "index_no": "607-105-00-6",
-  "atp": "",
-  "notes": [
-    "C"
-  ],
+  "atp": "CLP00",
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -29,8 +27,8 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS08",
-      "GHS05"
+      "GHS05",
+      "GHS08"
     ],
     "h_codes": [
       "H318",

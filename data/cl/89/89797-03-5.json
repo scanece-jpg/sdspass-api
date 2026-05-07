@@ -1,10 +1,10 @@
 {
   "cas": "89797-03-5",
-  "name": "hexasodium 1,1'-[(1-amino-8- hydroxy-3,6-disulfonate-2,7- naphthalenediyl)bis(azo(4- sulfonate-1,3-phenyl)imino[6- [(4-chloro-3- sulfonatophenyl)amino]-1,3,5- triazin-2,4-diyl]]]bis[3- carboxypyridinium] dihydroxide",
+  "name": "hexasodium 1,1'-[(1-amino-8-hydroxy-3,6-disulfonate-2,7-naphthalenediyl)bis(azo(4-sulfonate-1,3-phenyl)imino[6-[(4-chloro-3-sulfonatophenyl)amino]-1,3,5-triazin-2,4-diyl]]]bis[3-carboxypyridinium] dihydroxide",
   "name_tr": "hekzasodyum 1,1'-[(1-amino-8- hidroksi-3,6-disülfonat-2,7- naftalendiil)bis(azo(4-sülfonat- 1,3-fenil)imino[6-[(4-kloro-3- sülfonatofenil)amino]-1,3,5- triazin-2,4-diil]]]bis[3- karboksipiridinyum] dihidroksit",
   "ec_no": "412-240-7",
   "index_no": "611-095-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

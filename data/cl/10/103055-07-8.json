@@ -1,10 +1,10 @@
 {
   "cas": "103055-07-8",
-  "name": "lufenuron (ISO); N-[2,5-dichloro-4-(1,1,2,3,3,3- hexafluoropropoxy)-phenyl- aminocarbonyl]-2,6- difluorobenzamide",
+  "name": "lufenuron (ISO); N-[2,5-dichloro-4-(1,1,2,3,3,3-hexafluoropropoxy)-phenyl-aminocarbonyl]-2,6-difluorobenzamide",
   "name_tr": "lufenuron (ISO); N-[2,5-dikloro-4-(1,1,2,3,3,3- hekzaflorpropoksi)-fenil- aminokarbonil]-2,6- diflorobenzamid",
   "ec_no": "410-690-9",
   "index_no": "616-050-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

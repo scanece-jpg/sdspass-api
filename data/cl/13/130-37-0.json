@@ -1,20 +1,20 @@
 {
   "cas": "130-37-0",
-  "name": "menadione sodium bisulfite; 2-naphthalenesulfonic acid,1,2,3,4-tetrahydro-2- methyl-1,4-dioxo-, sodium salt",
+  "name": "menadione sodium bisulfite; 2-naphthalenesulfonic acid,1,2,3,4-tetrahydro-2-methyl-1,4-dioxo-, sodium salt",
   "name_tr": "menadiyon sodyum bisülfit; 2-naftalensülfonik asit, 1,2,3,4- tetrahidro-2-metil-1,4-diokso- ,sodyum tuzu",
   "ec_no": "204-987-0",
   "index_no": "607-618-00-5",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Aquatic Acute 1",
@@ -35,8 +35,8 @@
       "GHS09"
     ],
     "h_codes": [
-      "H319",
       "H315",
+      "H319",
       "H400",
       "H410"
     ],

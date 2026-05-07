@@ -1,10 +1,10 @@
 {
   "cas": "2475-45-8",
-  "name": "1,4,5,8- tetraaminoanthraquinone; C.I. Disperse Blue 1",
+  "name": "1,4,5,8-tetraaminoanthraquinone; C.I. Disperse Blue 1",
   "name_tr": "1,4,5,8-tetraaminoantrakinon; C.I. Dispers Mavi 11",
   "ec_no": "219-603-7",
   "index_no": "611-032-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

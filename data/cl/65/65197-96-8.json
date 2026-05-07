@@ -1,10 +1,10 @@
 {
   "cas": "65197-96-8",
-  "name": "D,L-(N,N-diethyl-2-hydroxy-2- phenylacetamide)",
+  "name": "D,L-(N,N-diethyl-2-hydroxy-2-phenylacetamide)",
   "name_tr": "D,L-(N,N-dietil-2-hidroksi-2- fenilasetamid)",
   "ec_no": "408-120-9",
   "index_no": "616-075-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

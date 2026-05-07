@@ -1,10 +1,10 @@
 {
   "cas": "122-34-9",
-  "name": "simazine (ISO); 6-chloro-N,N'-diethyl-1,3,5- triazine-2,4-diamine",
+  "name": "simazine (ISO); 6-chloro-N,N'-diethyl-1,3,5-triazine-2,4-diamine",
   "name_tr": "simazin (ISO); 6-kloro-N,N'- dietil-1,3,5-triazin-2,4-diamin",
   "ec_no": "204-535-2",
   "index_no": "612-088-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

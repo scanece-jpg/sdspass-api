@@ -1,10 +1,10 @@
 {
   "cas": "71888-89-6",
-  "name": "1,2-benzenedicarboxylic acid; di-C6-8-branched alkylesters, C7- rich",
+  "name": "1,2-benzenedicarboxylic acid; di-C6-8-branched alkylesters, C7-rich",
   "name_tr": "1,2-benzendikarboksilik asit; di-C6-8-dallanmış alkil esterler, C7-zengin",
   "ec_no": "276-158-1",
   "index_no": "607-483-00-2",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

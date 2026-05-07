@@ -1,10 +1,10 @@
 {
   "cas": "73250-68-7",
-  "name": "mefenacet (ISO); 2-(benzothiazol-2-yloxy)-N- methyl-N-phenylacetamide",
+  "name": "mefenacet (ISO); 2-(benzothiazol-2-yloxy)-N-methyl-N-phenylacetamide",
   "name_tr": "mefenaset (ISO); 2-(benzotiazol- 2-iloksi)-N-metil-N- fenilasetamid",
   "ec_no": "277-328-8",
   "index_no": "612-139-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

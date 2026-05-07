@@ -4,7 +4,7 @@
   "name_tr": "metanol",
   "ec_no": "200-659-6",
   "index_no": "603-001-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -33,13 +33,13 @@
     "scl_limits": [
       {
         "h_code": "H370",
-        "class": "STOT SE 1",
+        "class": "",
         "c_min": 10.0,
         "c_max": null
       },
       {
         "h_code": "H371",
-        "class": "STOT SE 2",
+        "class": "",
         "c_min": 3.0,
         "c_max": 10.0
       }

@@ -1,10 +1,10 @@
 {
   "cas": "86-50-0",
-  "name": "azinphos-methyl (ISO); O,O-dimethyl-4- oxobenzotriazin-3-ylmethyl phosphorodithioate",
+  "name": "azinphos-methyl (ISO); O,O-dimethyl-4-oxobenzotriazin-3-ylmethyl phosphorodithioate",
   "name_tr": "azinfos-metil(ISO); O,O-dimetil- 4-oksobenzotriazin-3-ilmetil fosforoditiyoat",
   "ec_no": "201-676-1",
   "index_no": "015-039-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

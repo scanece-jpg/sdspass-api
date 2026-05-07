@@ -4,7 +4,7 @@
   "name_tr": "maleik anhidrit",
   "ec_no": "203-571-6",
   "index_no": "607-096-00-9",
-  "atp": "",
+  "atp": "ATP13",
   "notes": [],
   "classification": {
     "hazards": [
@@ -14,26 +14,30 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372(solu"
+        "h_code": "H372(respiratory_system,_inhalation)"
       },
       {
         "class": "Skin Corr. 1B",
-        "h_code": "num"
+        "h_code": "H314"
       },
       {
         "class": "Eye Dam. 1",
-        "h_code": "sistemi)"
+        "h_code": "H318"
+      },
+      {
+        "class": "Resp. Sens. 1",
+        "h_code": "H334"
       },
       {
         "class": "Skin Sens. 1A",
-        "h_code": "H314"
+        "h_code": "H317"
       }
     ],
     "m_factors": {},
     "scl_limits": [
       {
         "h_code": "H317",
-        "class": "Cilt Hassas.1A",
+        "class": "",
         "c_min": 0.001,
         "c_max": null
       }
@@ -48,10 +52,11 @@
     ],
     "h_codes": [
       "H302",
-      "H372(solu",
-      "num",
-      "sistemi)",
-      "H314"
+      "H372(respiratory_system,_inhalation)",
+      "H314",
+      "H318",
+      "H334",
+      "H317"
     ],
     "suppl_h": [
       "EUH071"

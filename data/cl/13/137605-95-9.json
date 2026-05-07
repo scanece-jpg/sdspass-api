@@ -1,10 +1,10 @@
 {
   "cas": "137605-95-9",
-  "name": "2-butyl-2-ethyl-1,5- diaminopentane",
+  "name": "2-butyl-2-ethyl-1,5-diaminopentane",
   "name_tr": "2-bütil-2-etil-1,5-diaminopentan",
   "ec_no": "412-700-7",
   "index_no": "612-164-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

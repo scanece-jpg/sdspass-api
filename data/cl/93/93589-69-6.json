@@ -1,10 +1,10 @@
 {
   "cas": "93589-69-6",
-  "name": "4-4'- methylenebis(oxyethylenethio)di phenol",
+  "name": "4-4'-methylenebis(oxyethylenethio)diphenol",
   "name_tr": "4-4'- metilenbis(oksietilentiyo)difenol",
   "ec_no": "407-480-4",
   "index_no": "604-049-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

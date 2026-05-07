@@ -1,13 +1,17 @@
 {
   "cas": "79-94-7",
-  "name": "tetrabromobisphenol-A; 2,2',6,6'-tetrabromo-4,4'- isopropylidenediphenol",
+  "name": "2,2',6,6'-tetrabromo–4,4'-isopropylidenediphenol; tetrabromobisphenol-A",
   "name_tr": "tetra bromobisfenol-A; 2,2',6,6'-tetrabromo-4,4'- izopropilidendifenol",
   "ec_no": "201-236-9",
   "index_no": "604-074-00-0",
-  "atp": "",
+  "atp": "ATP21",
   "notes": [],
   "classification": {
     "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
       {
         "class": "Aquatic Acute 1",
         "h_code": "H400"
@@ -21,11 +25,13 @@
     "scl_limits": []
   },
   "labelling": {
-    "signal": "Warning",
+    "signal": "Danger",
     "pictograms": [
+      "GHS08",
       "GHS09"
     ],
     "h_codes": [
+      "H350",
       "H400",
       "H410"
     ],

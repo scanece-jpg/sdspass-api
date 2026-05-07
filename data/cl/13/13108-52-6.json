@@ -1,10 +1,10 @@
 {
   "cas": "13108-52-6",
-  "name": "methyl-2,3,5,6-tetrachloro-4- pyridylsulphone; 2,3,5,6-tetrachloro-4- (methylsulphonyl)pyridine",
+  "name": "methyl-2,3,5,6-tetrachloro-4-pyridylsulphone; 2,3,5,6-tetrachloro-4-(methylsulphonyl)pyridine",
   "name_tr": "metil-2,3,5,6-tetrakloro-4- piridilsülfon; 2,3,5,6-tetrakloro- 4-(metilsülfonil)piridin",
   "ec_no": "236-035-5",
   "index_no": "613-032-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

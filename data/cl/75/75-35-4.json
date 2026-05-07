@@ -4,7 +4,7 @@
   "name_tr": "1,1-dikloroetilen; vinilidin klorür",
   "ec_no": "200-864-0",
   "index_no": "602-025-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "D"
   ],
@@ -39,9 +39,5 @@
       "H332"
     ],
     "suppl_h": []
-  },
-  "ate": {
-    "inhalation_vapour": 0.5,
-    "oral": 300.0
   }
 }

@@ -1,10 +1,10 @@
 {
   "cas": "133855-98-8",
-  "name": "epoxiconazole (ISO); (2RS,3SR)-3-(2-chlorophenyl)- 2-(4-fluorophenyl)-[(1H-1,2,4- triazol-1-yl)methyl]oxirane",
+  "name": "epoxiconazole (ISO); (2RS,3SR)-3-(2-chlorophenyl)-2-(4-fluorophenyl)-[( 1H-1,2,4-triazol-1-yl)methyl]oxirane",
   "name_tr": "epoksikonazol (ISO); (2RS,3SR)-3-(2-klorofenil)-2- (4-florofenil)-[(1H-1,2,4- triyazol-1-il)metil]oksiran",
   "ec_no": "406-850-2",
   "index_no": "613-175-00-9",
-  "atp": "",
+  "atp": "ATP5",
   "notes": [],
   "classification": {
     "hazards": [
@@ -25,7 +25,7 @@
     "scl_limits": []
   },
   "labelling": {
-    "signal": "Warning",
+    "signal": "Danger",
     "pictograms": [
       "GHS08",
       "GHS09"

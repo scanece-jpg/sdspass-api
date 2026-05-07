@@ -1,10 +1,10 @@
 {
   "cas": "569-61-9",
-  "name": "4,4'-(4-iminocyclohexa-2,5- dienylidenemethylene)dianiline hydrochloride; C.I. Basic Red 9",
+  "name": "4,4'-(4-iminocyclohexa-2,5-dienylidenemethylene)dianiline hydrochloride; C.I. Basic Red 9",
   "name_tr": "4,4'-(4-iminosiklohekza-2,5- dienilidinmetilen)dianilin hidroklorür; C.I. Bazik Kırmızı 9",
   "ec_no": "209-321-2",
   "index_no": "611-031-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -4,12 +4,12 @@
   "name_tr": "dilauroilperoksit",
   "ec_no": "203-326-3",
   "index_no": "617-003-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Org. Perox. Type D",
+        "class": "Org. Perox. D",
         "h_code": "H242"
       }
     ],

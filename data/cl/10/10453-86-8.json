@@ -1,10 +1,10 @@
 {
   "cas": "10453-86-8",
-  "name": "resmethrin (ISO); 5-benzyl-3-furylmethyl (±)-cis- trans-chrysanthemate",
+  "name": "resmethrin (ISO); 5-benzyl-3-furylmethyl (±)-cis-trans-chrysanthemate",
   "name_tr": "resmetrin (ISO); 5-benzil-3-furilmetil-(±)-cis- trans-krisantemat",
   "ec_no": "233-940-7",
   "index_no": "613-060-00-3",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

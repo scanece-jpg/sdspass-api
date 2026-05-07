@@ -4,7 +4,7 @@
   "name_tr": "fenol; karbolik asit; monohidroksibenzen; fenilalkol",
   "ec_no": "203-632-7",
   "index_no": "604-001-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -37,13 +37,19 @@
     "scl_limits": [
       {
         "h_code": "H314",
-        "class": "Skin Corr. 1B",
+        "class": "",
         "c_min": 3.0,
         "c_max": null
       },
       {
+        "h_code": "H315",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": 3.0
+      },
+      {
         "h_code": "H319",
-        "class": "C < 3 % Göz Tah. 2",
+        "class": "",
         "c_min": 1.0,
         "c_max": 3.0
       }

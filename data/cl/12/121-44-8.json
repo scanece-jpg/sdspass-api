@@ -5,9 +5,7 @@
   "ec_no": "204-469-4",
   "index_no": "612-004-00-5",
   "atp": "ATP21",
-  "notes": [
-    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
-  ],
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -29,13 +27,17 @@
       {
         "class": "Skin Corr. 1A",
         "h_code": "H314"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
       }
     ],
     "m_factors": {},
     "scl_limits": [
       {
         "h_code": "H335",
-        "class": "STOT SE 3",
+        "class": "",
         "c_min": 1.0,
         "c_max": null
       }
@@ -45,21 +47,22 @@
     "signal": "Danger",
     "pictograms": [
       "GHS02",
-      "GHS05",
-      "GHS07"
+      "GHS06",
+      "GHS05"
     ],
     "h_codes": [
       "H225",
       "H331",
       "H311",
       "H301",
-      "H314"
+      "H314",
+      "H318"
     ],
     "suppl_h": []
   },
   "ate": {
-    "inhalation_vapour": 7.2,
-    "dermal": 300.0,
-    "oral": 100.0
+    "inhalation_mgl": 7.2,
+    "oral": 100.0,
+    "dermal": 300.0
   }
 }

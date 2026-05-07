@@ -1,10 +1,10 @@
 {
   "cas": "148348-13-4",
-  "name": "isobutylidene-(2-(2-isopropyl- 4,4-dimethyloxazolidine-3-yl)- 1,1-dimethylethyl)amine",
+  "name": "isobutylidene-(2-(2-isopropyl-4,4-dimethyloxazolidine-3-yl)-1,1-dimethylethyl)amine",
   "name_tr": "izobütiliden-(2-(2-izopropil-4,4- dimetiloksazolidin-3-il)-1,1- dimetiletil)amin",
   "ec_no": "419-850-2",
   "index_no": "612-213-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

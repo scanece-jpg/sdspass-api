@@ -4,12 +4,12 @@
   "name_tr": "α,α-dimetilbenzilhidroperoksit; kümenhidroperoksit",
   "ec_no": "201-254-7",
   "index_no": "617-002-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Org. Perox. Type E",
+        "class": "Org. Perox. E",
         "h_code": "H242"
       },
       {
@@ -41,7 +41,31 @@
     "scl_limits": [
       {
         "h_code": "H314",
-        "class": "Skin Corr. 1B",
+        "class": "",
+        "c_min": 10.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H315",
+        "class": "",
+        "c_min": 3.0,
+        "c_max": 10.0
+      },
+      {
+        "h_code": "H318",
+        "class": "",
+        "c_min": 3.0,
+        "c_max": 10.0
+      },
+      {
+        "h_code": "H319",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": 3.0
+      },
+      {
+        "h_code": "H335",
+        "class": "",
         "c_min": 10.0,
         "c_max": null
       }

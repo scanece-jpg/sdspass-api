@@ -1,10 +1,10 @@
 {
   "cas": "61597-96-4",
-  "name": "2-methylpropyl (R)-2- hydroxypropanoate",
+  "name": "2-methylpropyl (R)-2-hydroxypropanoate",
   "name_tr": "2-metilpropil-(R)-2- hidroksipropanoat",
   "ec_no": "407-770-0",
   "index_no": "607-268-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

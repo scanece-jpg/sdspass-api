@@ -1,10 +1,10 @@
 {
   "cas": "75-99-0",
-  "name": "dalapon; 2,2-dichloropropionic acid; [1] dalapon-sodium; sodium 2,2-dichloropropionate [2]",
+  "name": "dalapon; 2,2-dichloropropionic acid [1]\ndalapon-sodium; sodium 2,2-dichloropropionate  [2]",
   "name_tr": "dalapon; 2,2-dikloropropiyonik asit; [1] dalapon-sodyum; sodyum 2,2-dikloropropiyonat [2]",
-  "ec_no": "200-923-0",
+  "ec_no": "200-923-0 [1]\n204-828-5 [2]",
   "index_no": "607-162-00-7",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

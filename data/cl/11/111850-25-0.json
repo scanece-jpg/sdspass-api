@@ -1,10 +1,10 @@
 {
   "cas": "111850-25-0",
-  "name": "4,4',4''-(1-methylpropan-1-yl-3- ylidene)tris(2-cyclohexyl-5- methylphenol)",
+  "name": "4,4',4''-(1-methylpropan-1-yl-3-ylidene)tris(2-cyclohexyl-5-methylphenol)",
   "name_tr": "4,4',4''-(1-metilpropan-1-il-3- ilidin)tris(2-siklohekzil-5- metilfenol)",
   "ec_no": "407-460-5",
   "index_no": "604-065-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

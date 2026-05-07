@@ -1,10 +1,10 @@
 {
   "cas": "4234-79-1",
-  "name": "kelevan (ISO); ethyl 5-(perchloro-5- hydroxypentacyclo[5,3,0,02,6,03 ,9,04,8]decan-5-yl)-4- oxopentanoate; ethyl 5-(1,2,3,5,6,7,8,9,10,10- decachloro-4- hydroxypentacyclo(5,2,1,02,6,03 ,9,05,8)dec-4-yl)-4-oxovalerate",
+  "name": "kelevan (ISO); ethyl 5-(perchloro-5-hydroxypentacyclo[5,3,0,02,6,03,9,04,8]decan-5-yl)-4-oxopentanoate; ethyl 5-(1,2,3,5,6,7,8,9,10,10-decachloro-4-hydroxypentacyclo(5,2,1,02,6,03,9,05,8)dec-4-yl)-4-oxovalerate",
   "name_tr": "kelevan (ISO); etil5-(perkloro-5- hidroksipentasiklo[5,3,0,02,6,03, 9,04,8]dekan-5-il)-4- oksopentanoat; etil5- (1,2,3,5,6,7,8,9,10,10-dekakloro- 4- hidroksipentasiklo(5,2,1,02,6,03, 9,05,8)dek-4-il)-4-oksovalerat",
   "ec_no": "",
   "index_no": "607-079-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

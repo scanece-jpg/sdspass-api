@@ -27,7 +27,7 @@
     ],
     "m_factors": {
       "acute": 10,
-      "chronic": 1
+      "chronic": 10
     },
     "scl_limits": []
   },
@@ -47,6 +47,6 @@
     "suppl_h": []
   },
   "ate": {
-    "inhalation_dust": 1.97
+    "inhalation_mgl": 1.97
   }
 }

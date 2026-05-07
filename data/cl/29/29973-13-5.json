@@ -1,10 +1,10 @@
 {
   "cas": "29973-13-5",
-  "name": "ethiofencarb (ISO); 2-(ethylthiomethyl)phenyl N- methylcarbamate",
+  "name": "ethiofencarb (ISO); 2-(ethylthiomethyl)phenyl N-methylcarbamate",
   "name_tr": "etiyofenkarb (ISO); 2-(etiltiyometil)fenil N- metilkarbamat",
   "ec_no": "249-981-9",
   "index_no": "006-048-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

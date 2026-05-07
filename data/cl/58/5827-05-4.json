@@ -1,10 +1,10 @@
 {
   "cas": "5827-05-4",
-  "name": "IPSP; S-ethylsulphinylmethyl O,O- diisopropylphosphorodithioate",
+  "name": "IPSP; S-ethylsulphinylmethyl O,O-diisopropylphosphorodithioate",
   "name_tr": "IPSP; S-etilsülfinilmetil-O,O- diizopropilfosforoditiyoat",
   "ec_no": "",
   "index_no": "015-128-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

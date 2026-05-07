@@ -1,10 +1,10 @@
 {
   "cas": "99610-72-7",
-  "name": "2-(2-hydroxy-3,5- dinitroanilino)ethanol",
+  "name": "2-(2-hydroxy-3,5-dinitroanilino)ethanol",
   "name_tr": "2-(2-hidroksi-3,5- dinitroanilino)etanol",
   "ec_no": "412-520-9",
   "index_no": "604-056-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,16 +1,11 @@
 {
   "cas": "75-50-3",
-  "name": "mono-methylamine; [1] di-methylamine; [2] tri-methylamine [3]",
+  "name": "mono-methylamine ... % [1]\ndi-methylamine ... % [2]\ntri-methylamine ... % [3]",
   "name_tr": "mono-metilamin; [1] di-metilamin; [2] tri-metilamin [3]",
-  "ec_no": "200-820-0",
-  "index_no": "612-001-00-9",
+  "ec_no": "200-875-0",
+  "index_no": "612-001-01-6",
   "atp": "CLP00",
-  "notes": [
-    "U",
-    "5",
-    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi.",
-    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
-  ],
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -33,20 +28,8 @@
     "m_factors": {},
     "scl_limits": [
       {
-        "h_code": "H315",
-        "class": "Skin Irrit. 2",
-        "c_min": 5.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H318",
-        "class": "Eye Dam. 1",
-        "c_min": 5.0,
-        "c_max": null
-      },
-      {
         "h_code": "H335",
-        "class": "C < 5 % BHOT Tek Mrz. 3",
+        "class": "STOT SE 3",
         "c_min": 5.0,
         "c_max": null
       }

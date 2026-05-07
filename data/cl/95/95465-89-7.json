@@ -1,14 +1,12 @@
 {
   "cas": "95465-89-7",
-  "name": "Hydrocarbons, C4, 1,3- butadiene- and isobutene-free; Petroleum gas",
+  "name": "Hydrocarbons, C4, 1,3-butadiene- and isobutene-free; Petroleum gas",
   "name_tr": "Hidrokarbonlar, C4, 1,3- bütadien- ve izobüten içermeyen; Petrol gazı",
   "ec_no": "306-004-1",
   "index_no": "649-118-00-X",
   "atp": "ATP1",
   "notes": [
-    "K",
-    "U",
-    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
+    "K U"
   ],
   "classification": {
     "hazards": [

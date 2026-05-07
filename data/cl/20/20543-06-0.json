@@ -1,10 +1,10 @@
 {
   "cas": "20543-06-0",
-  "name": "nickel oxalate; [1] oxalic acid, nickel salt [2]",
+  "name": "nickel oxalate [1]\noxalic acid, nickel salt [2]",
   "name_tr": "nikel oksalat; [1] oksalik asit, nikel tuzu [2]",
-  "ec_no": "208-933-7",
+  "ec_no": "243-867-2",
   "index_no": "028-039-00-9",
-  "atp": "",
+  "atp": "ATP02",
   "notes": [],
   "classification": {
     "hazards": [
@@ -14,7 +14,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372"
+        "h_code": "H372 **"
       },
       {
         "class": "Skin Sens. 1",
@@ -41,7 +41,7 @@
     ],
     "h_codes": [
       "H350i",
-      "H372",
+      "H372 **",
       "H317",
       "H400",
       "H410"

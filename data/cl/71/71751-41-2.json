@@ -1,10 +1,10 @@
 {
   "cas": "71751-41-2",
-  "name": "abamectin (combination of avermectin B1a and avermectin B1b) (ISO) [1] avermectin B1a (purity ≥80 %); [2]",
+  "name": "abamectin (combination of avermectin B1a and avermectin B1b) (ISO) [1]\navermectin B1a (purity ≥80 %) [2]",
   "name_tr": "abamektin (avermektin B1a ve avermektin B1b bileşimi) (ISO) [1] avermektin B1a (saflık ≥%80); [2]",
-  "ec_no": "265-610-3",
+  "ec_no": "_ [1]\n265-610-3 [2]",
   "index_no": "606-143-00-0",
-  "atp": "",
+  "atp": "ATP3",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,40 +13,40 @@
         "h_code": "H361d"
       },
       {
-        "class": "Acute Tox. 2",
-        "h_code": "H300"
-      },
-      {
         "class": "Acute Tox. 1",
         "h_code": "H330"
       },
       {
+        "class": "Acute Tox. 2",
+        "h_code": "H300"
+      },
+      {
         "class": "STOT RE 1",
-        "h_code": "H372(sinir"
+        "h_code": "H372(nervous_system)"
       },
       {
         "class": "Aquatic Acute 1",
-        "h_code": "sistemi)"
+        "h_code": "H400"
       },
       {
         "class": "Aquatic Chronic 1",
-        "h_code": "H400"
+        "h_code": "H410"
       }
     ],
     "m_factors": {
-      "acute": 10,
-      "chronic": 10
+      "acute": 10000,
+      "chronic": 10000
     },
     "scl_limits": [
       {
         "h_code": "H372",
-        "class": "STOT RE 1",
+        "class": "",
         "c_min": 5.0,
         "c_max": null
       },
       {
         "h_code": "H373",
-        "class": "STOT RE 2",
+        "class": "",
         "c_min": 0.5,
         "c_max": 5.0
       }
@@ -61,11 +61,11 @@
     ],
     "h_codes": [
       "H361d",
-      "H300",
       "H330",
-      "H372(sinir",
-      "sistemi)",
-      "H400"
+      "H300",
+      "H372(nervous_system)",
+      "H400",
+      "H410"
     ],
     "suppl_h": []
   }

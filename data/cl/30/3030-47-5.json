@@ -1,10 +1,10 @@
 {
   "cas": "3030-47-5",
-  "name": "bis(2- dimethylaminoethyl)(methyl)am ine",
+  "name": "bis(2-dimethylaminoethyl)(methyl)amine",
   "name_tr": "bis(2- dimetilaminoetil)(metil)amin",
   "ec_no": "221-201-1",
   "index_no": "612-109-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

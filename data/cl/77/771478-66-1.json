@@ -1,10 +1,10 @@
 {
   "cas": "771478-66-1",
-  "name": "1,6-bis(3,3-bis((1- methylpentylidenimino)propyl)u reido)hexane",
+  "name": "1,6-bis(3,3-bis((1-methylpentylidenimino)propyl)ureido)hexane",
   "name_tr": "1,6-bis(3,3-bis((1- metilpentilidinimino)propil)üred o)hekzan",
   "ec_no": "420-190-2",
   "index_no": "007-027-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

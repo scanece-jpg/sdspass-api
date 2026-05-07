@@ -1,10 +1,10 @@
 {
   "cas": "152828-25-6",
-  "name": "2-(4-aminophenyl)-6-tert-butyl- 1H-pyrazolo[1,5- b][1,2,4]triazole",
+  "name": "2-(4-aminophenyl)-6-tert-butyl-1H-pyrazolo[1,5-b][1,2,4]triazole",
   "name_tr": "2-(4-aminofenil)-6-ter-bütil-1H- pirazolo[1,5-b][1,2,4]triazol",
   "ec_no": "415-910-7",
   "index_no": "611-138-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

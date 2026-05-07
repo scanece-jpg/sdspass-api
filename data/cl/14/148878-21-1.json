@@ -1,10 +1,10 @@
 {
   "cas": "148878-21-1",
-  "name": "octasodium 2-(6-(4-chloro-6-(3- (N-methyl-N-(4-chloro-6-(3,5- disulfonato-2-naphthylazo)-1- hydroxy-6-naphthylamino)- 1,3,5-triazin-2- yl)aminomethyl)phenylamino)- 1,3,5-triazin-2-ylamino)-3,5- disulfonato-1-hydroxy-2- naphthylazo)naphthalene-1,5- disulfonate",
+  "name": "octasodium 2-(6-(4-chloro-6-(3-(N-methyl-N-(4-chloro-6-(3,5-disulfonato-2-naphthylazo)-1-hydroxy-6-naphthylamino)-1,3,5-triazin-2-yl)aminomethyl)phenylamino)-1,3,5-triazin-2-ylamino)-3,5-disulfonato-1-hydroxy-2-naphthylazo)naphthalene-1,5-disulfonate",
   "name_tr": "oktasodyum 2-(6-(4-kloro-6-(3- (N-metil-N-(4-kloro-6-(3,5- disülfonato-2-naftilazo)-1- hidroksi-6-naftilamino)-1,3,5- triazin-2- il)aminometil)fenilamino)-1,3,5- triazin-2-ilamino)-3,5- disülfonato-1-hidroksi-2- naftilazo)naftalin-1,5-disülfonat",
   "ec_no": "412-960-1",
   "index_no": "611-059-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

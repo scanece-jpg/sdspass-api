@@ -4,7 +4,7 @@
   "name_tr": "2,3-dibromopropan-1-ol; 2,3- dibromo-1-propanol",
   "ec_no": "202-480-9",
   "index_no": "602-088-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -40,7 +40,7 @@
     "signal": "Danger",
     "pictograms": [
       "GHS08",
-      "GHS07"
+      "GHS06"
     ],
     "h_codes": [
       "H350",

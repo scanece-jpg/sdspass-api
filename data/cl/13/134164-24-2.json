@@ -4,17 +4,17 @@
   "name_tr": "dibenzilfenilsülfonyum hekzafloroantimonat",
   "ec_no": "417-760-8",
   "index_no": "650-047-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "STOT RE 1",
-        "h_code": "H372"
-      },
-      {
         "class": "Acute Tox. 4",
         "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
       },
       {
         "class": "Eye Dam. 1",
@@ -41,8 +41,8 @@
       "GHS09"
     ],
     "h_codes": [
-      "H372",
       "H302",
+      "H372",
       "H318",
       "H317",
       "H411"

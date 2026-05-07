@@ -1,10 +1,10 @@
 {
   "cas": "97862-78-7",
-  "name": "Gas oils, hydrotreated; Gasoil - unspecified; [A complex combination of hydrocarbons obtained from the redistillation of the effluents from the treatment of paraffins with hydrogen in the presence of a catalyst. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C17 through C27 and boiling in the range of approximately 330 °C to 340 °C (626 °F to 644 °F).]",
+  "name": "Gas oils, hydrotreated; Gasoil - unspecified; [A complex combination of hydrocarbons obtained from the redistillation of the effluents from the treatment of paraffins with hydrogen in the presence of a catalyst. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C17 through C27 and boiling in the range of approximately 330 °C to 340 °C (626 °F to 644 °F).]",
   "name_tr": "Gaz yağları, hidrojenle muamele edilmiş; Gaz yağı – tanımlanmamış; [Parafinlerin, katalizör varlığında, hidrojen ile muamele edilmesinden artıkların tekrardan damıtılmasından elde edilen hidrokarbonların kompleks bir bileşimi. Genelde, ağırlıklı olarak C17 ila C27 aralığında karbon sayısına sahip ve yaklaşık 330°C ila 340°C (626°F ila 644°F) aralığında kaynayan hidrokarbonlardan oluşur.]",
   "ec_no": "308-128-1",
   "index_no": "649-238-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "N"
   ],

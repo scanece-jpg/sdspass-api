@@ -1,14 +1,12 @@
 {
   "cas": "68513-17-7",
-  "name": "Gases (petroleum), light straight- run naphtha stabilizer off; Petroleum gas; [A complex combination of hydrocarbons obtained by the stabilization of light straight-run naphtha. It consists of saturated aliphatic hydrocarbons having carbon numbers predominantly in the range of C2 through C6.]",
+  "name": "Gases (petroleum), light straight-run naphtha stabilizer off; Petroleum gas; [A complex combination of hydrocarbons obtained by the stabilization of light straight-run naphtha. It consists of saturated aliphatic hydrocarbons having carbon numbers predominantly in the range of C2 through C6.]",
   "name_tr": "Gazlar(petrol),normal çalışma sırasında elde edilen hafif nafta kararlaştırıcısı çalışmazken; Petrol gazı; [Normal çalışma sırasında elde edilen hafif naftanındengelenmesi ile elde edilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla, C2 ila C6 aralığında karbon sayısına sahip doymuş alifatik hidrokarbonlardan oluşur.]",
   "ec_no": "271-002-9",
   "index_no": "649-086-00-7",
   "atp": "ATP1",
   "notes": [
-    "K",
-    "U",
-    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
+    "K U"
   ],
   "classification": {
     "hazards": [

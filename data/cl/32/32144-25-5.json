@@ -1,17 +1,17 @@
 {
   "cas": "32144-25-5",
-  "name": "reaction mass of: 2,2'-bis(tert- pentylperoxy)-p- diisopropylbenzene; 2,2'-bis(tert-pentylperoxy)-m- diisopropylbenzene",
+  "name": "reaction mass of: 2,2'-bis(tert-pentylperoxy)-p-diisopropylbenzene; 2,2'-bis(tert-pentylperoxy)-m-diisopropylbenzene",
   "name_tr": "tepkime kütlesi: 2,2'-bis(ter- pentilperoksi)-p- diizopropilbenzen; 2,2'-bis(ter- pentilperoksi)-m- diizopropilbenzen",
   "ec_no": "412-140-3",
   "index_no": "617-017-00-X",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "T"
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Org. Perox. Type D",
+        "class": "Org. Perox. D",
         "h_code": "H242"
       },
       {

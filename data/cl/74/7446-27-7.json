@@ -4,9 +4,9 @@
   "name_tr": "Trikurşun bis(ortofosfat)",
   "ec_no": "231-205-5",
   "index_no": "082-006-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
-    "1.0"
+    "1"
   ],
   "classification": {
     "hazards": [

@@ -4,17 +4,17 @@
   "name_tr": "2-kloroetanol; etilen klorohidrin",
   "ec_no": "203-459-7",
   "index_no": "603-028-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 2",
-        "h_code": "H330"
-      },
-      {
         "class": "Acute Tox. 1",
         "h_code": "H310"
+      },
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H330"
       },
       {
         "class": "Acute Tox. 2",
@@ -30,8 +30,8 @@
       "GHS06"
     ],
     "h_codes": [
-      "H330",
       "H310",
+      "H330",
       "H300"
     ],
     "suppl_h": []

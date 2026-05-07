@@ -4,7 +4,7 @@
   "name_tr": "aminler, tallovalkil",
   "ec_no": "263-125-1",
   "index_no": "612-286-00-X",
-  "atp": "",
+  "atp": "ATP5",
   "notes": [],
   "classification": {
     "hazards": [
@@ -18,19 +18,19 @@
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373"
+        "h_code": "H373(gastro-intestinal_tract,_liver,_immune_system)"
       },
       {
         "class": "Skin Corr. 1B",
-        "h_code": "(mide-"
+        "h_code": "H314"
       },
       {
         "class": "Aquatic Acute 1",
-        "h_code": "bağırsak"
+        "h_code": "H400"
       },
       {
         "class": "Aquatic Chronic 1",
-        "h_code": "yolu,karac"
+        "h_code": "H410"
       }
     ],
     "m_factors": {
@@ -50,10 +50,10 @@
     "h_codes": [
       "H302",
       "H304",
-      "H373",
-      "(mide-",
-      "bağırsak",
-      "yolu,karac"
+      "H373(gastro-intestinal_tract,_liver,_immune_system)",
+      "H314",
+      "H400",
+      "H410"
     ],
     "suppl_h": []
   }

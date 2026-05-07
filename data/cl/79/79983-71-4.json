@@ -1,10 +1,10 @@
 {
   "cas": "79983-71-4",
-  "name": "hexaconazole (ISO); (RS)-2-(2,4-dichlorophenyl)-1- (1H-1,2,4-triazol-1-yl)hexan-2- ol",
+  "name": "hexaconazole (ISO); (RS)-2-(2,4-dichlorophenyl)-1-(1H-1,2,4-triazol-1-yl)hexan-2-ol",
   "name_tr": "hekzakonazol (ISO); (RS)-2- (2,4-diklorofenil)-1-(1H-1,2,4- triyazol-1-il)hekzan-2-ol",
   "ec_no": "413-050-7",
   "index_no": "613-171-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

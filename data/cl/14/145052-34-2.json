@@ -1,10 +1,10 @@
 {
   "cas": "145052-34-2",
-  "name": "bis(2,6-dimethoxybenzoyl)- 2,4,4- trimethylpentylphosphinoxide",
+  "name": "bis(2,6-dimethoxybenzoyl)-2,4,4-trimethylpentylphosphinoxide",
   "name_tr": "bis(2,6-dimetoksibenzoil)-2,4,4- trimetilpentilfosfinoksit",
   "ec_no": "412-010-6",
   "index_no": "015-163-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

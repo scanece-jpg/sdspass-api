@@ -1,10 +1,10 @@
 {
   "cas": "107934-68-9",
-  "name": "4,4'-(9H-fluoren-9- ylidene)bis(2-chloroaniline)",
+  "name": "4,4'-(9H-fluoren-9-ylidene)bis(2-chloroaniline)",
   "name_tr": "4,4'-(9H-floren-9-ilidin)bis(2- kloroanilin)",
   "ec_no": "407-560-9",
   "index_no": "612-188-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

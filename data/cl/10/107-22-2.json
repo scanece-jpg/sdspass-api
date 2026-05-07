@@ -4,7 +4,7 @@
   "name_tr": "glioksal...%; etandial...%",
   "ec_no": "203-474-9",
   "index_no": "605-016-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "B"
   ],
@@ -19,12 +19,12 @@
         "h_code": "H332"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Skin Sens. 1",
@@ -43,8 +43,8 @@
     "h_codes": [
       "H341",
       "H332",
-      "H319",
       "H315",
+      "H319",
       "H317"
     ],
     "suppl_h": []

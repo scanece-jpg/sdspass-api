@@ -1,10 +1,10 @@
 {
   "cas": "14691-89-5",
-  "name": "N-(2,2,6,6-tetramethyl-1- oxylpiperidin-4-yl)acetamide; (4-acetamido-2,2,6,6- tetramethyl-1- piperidinyl)oxidanyl",
+  "name": "N-(2,2,6,6-tetramethyl-1-oxylpiperidin-4-yl)acetamide; (4-acetamido-2,2,6,6-tetramethyl-1-piperidinyl)oxidanyl",
   "name_tr": "N-(2,2,6,6-tetrametil-1- oksilpiperidin-4-il)asetamid; (4-asetamido-2,2,6,6-tetrametil- 1-piperidinil)oksidanil",
   "ec_no": "423-840-3",
   "index_no": "616-172-00-0",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

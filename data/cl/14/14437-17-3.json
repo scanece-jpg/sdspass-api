@@ -1,10 +1,10 @@
 {
   "cas": "14437-17-3",
-  "name": "chlorfenprop-methyl; methyl 2-chloro-3-(4- chlorophenyl)propionate",
+  "name": "chlorfenprop-methyl; methyl 2-chloro-3-(4-chlorophenyl)propionate",
   "name_tr": "klorfenprop-metil; metil2-kloro- 3-(4-klorofenil)propiyonat",
   "ec_no": "238-413-5",
   "index_no": "607-075-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

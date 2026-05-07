@@ -1,10 +1,10 @@
 {
   "cas": "83623-61-4",
-  "name": "((4- phenylbutyl)hydroxyphosphoryl) acetic acid",
+  "name": "((4-phenylbutyl)hydroxyphosphoryl)acetic acid",
   "name_tr": "((4- fenilbütil)hidroksifosforil)asetik asit",
   "ec_no": "412-170-7",
   "index_no": "015-177-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

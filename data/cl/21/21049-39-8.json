@@ -1,13 +1,11 @@
 {
   "cas": "21049-39-8",
-  "name": "perfluorononan-1-oic acid [1] and its sodium [2] and ammonium [3] salts",
+  "name": "perfluorononan-1-oic acid [1]\nperfluorononan-1-oic acid, sodium salts [2]\nperfluorononan-1-oic acid, ammonium salts [3]",
   "name_tr": "perflorononan-1-oik asit [1] ve onun sodyum [2] ve amonyum [3] tuzları",
-  "ec_no": "206-801-3",
+  "ec_no": "-",
   "index_no": "607-718-00-9",
   "atp": "ATP09",
-  "notes": [
-    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
-  ],
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -19,8 +17,8 @@
         "h_code": "H360Df"
       },
       {
-        "class": "Repr. 1B",
-        "h_code": "H360Df"
+        "class": "Lact.",
+        "h_code": "H362"
       },
       {
         "class": "Acute Tox. 4",
@@ -32,11 +30,11 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372"
+        "h_code": "H372 (liver, thymus, spleen)"
       },
       {
         "class": "Eye Dam. 1",
-        "h_code": "(karaciğer"
+        "h_code": "H318"
       }
     ],
     "m_factors": {},
@@ -52,11 +50,11 @@
     "h_codes": [
       "H351",
       "H360Df",
-      "H360Df",
+      "H362",
       "H332",
       "H302",
-      "H372",
-      "(karaciğer"
+      "H372 (liver, thymus, spleen)",
+      "H318"
     ],
     "suppl_h": []
   }

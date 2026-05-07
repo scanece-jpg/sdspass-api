@@ -48,7 +48,7 @@
       {
         "h_code": "H350",
         "class": "",
-        "c_min": 1.0,
+        "c_min": 0.01,
         "c_max": null
       }
     ]

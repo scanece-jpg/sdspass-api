@@ -1,10 +1,10 @@
 {
   "cas": "16071-86-6",
-  "name": "disodium {5-[(4'-((2,6-hydroxy- 3-((2-hydroxy-5- sulphophenyl)azo)phenyl)azo)(1 ,1'-biphenyl)-4- yl)azo]salicylato(4-)}cuprate(2- ); C.I Direct Brown 95",
+  "name": "disodium {}{5-[(4'-((2,6-hydroxy-3-((2-hydroxy-5-sulphophenyl)azo)phenyl)azo)(1,1'-biphenyl)-4-yl)azo]salicylato(4-)}}cuprate(2-); CI Direct Brown 95",
   "name_tr": "disodyum {5-[(4'-((2,6-hidroksi- 3-((2-hidroksi-5- sülfofenil)azo)fenil)azo)(1,1'- bifenil)-4-il)azo]salisilato(4- )}kuprat(2-); C.I Direk Kahverengi 95",
   "ec_no": "240-221-1",
   "index_no": "611-005-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

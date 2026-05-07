@@ -4,12 +4,12 @@
   "name_tr": "1,2,3,4-tetrahidro-1- naftilhidroperoksit",
   "ec_no": "212-230-0",
   "index_no": "617-004-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Org. Perox. Type D",
+        "class": "Org. Perox. D",
         "h_code": "H242"
       },
       {
@@ -33,7 +33,7 @@
     "scl_limits": [
       {
         "h_code": "H335",
-        "class": "STOT SE 3",
+        "class": "",
         "c_min": 5.0,
         "c_max": null
       }

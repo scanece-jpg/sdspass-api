@@ -1,10 +1,10 @@
 {
   "cas": "1000-78-8",
-  "name": "N,N'-(2,2- dimethylpropylidene)hexamethy lenediamine",
+  "name": "N,N'-(2,2-dimethylpropylidene)hexamethylenediamine",
   "name_tr": "N,N'-(2,2- dimetilpropilidin)hekzametilendi amin",
   "ec_no": "401-660-6",
   "index_no": "612-092-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

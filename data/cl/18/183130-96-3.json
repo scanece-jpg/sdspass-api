@@ -1,10 +1,10 @@
 {
   "cas": "183130-96-3",
-  "name": "tetra-ammonium 2-[6-[7-(2- carboxylato-phenylazo)-8- hydroxy-3,6-disulfonato-1- naphthylamino]-4-hydroxy- 1,3,5-triazin-2-ylamino]benzoate",
+  "name": "tetra-ammonium 2-[6-[7-(2-carboxylato-phenylazo)-8-hydroxy-3,6-disulfonato-1-naphthylamino]-4-hydroxy-1,3,5-triazin-2-ylamino]benzoate",
   "name_tr": "tetra-amonyum 2-[6-[7-(2- karboksilato-fenilazo)-8- hidroksi-3,6-disülfonato-1- naftilamino]-4-hidroksi-1,3,5- triazin-2-ilamino]benzoat",
   "ec_no": "418-520-5",
   "index_no": "611-130-00-8",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

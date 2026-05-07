@@ -1,10 +1,10 @@
 {
   "cas": "72619-32-0",
-  "name": "methyl (R)-2-(4-(3-chloro-5- trifluoromethyl-2- pyridyloxy)phenoxy)propionate",
+  "name": "methyl (R)-2-(4-(3-chloro-5-trifluoromethyl-2-pyridyloxy)phenoxy)propionate",
   "name_tr": "metil-(R)-2-(4-(3-kloro-5- triflormetil-2- piridiloksi)fenoksi)propiyonat",
   "ec_no": "406-250-0",
   "index_no": "607-335-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

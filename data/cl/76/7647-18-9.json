@@ -4,7 +4,7 @@
   "name_tr": "Antimon pentaklorür",
   "ec_no": "231-601-8",
   "index_no": "051-002-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -21,7 +21,7 @@
     "scl_limits": [
       {
         "h_code": "H335",
-        "class": "STOT SE 3",
+        "class": "",
         "c_min": 5.0,
         "c_max": null
       }

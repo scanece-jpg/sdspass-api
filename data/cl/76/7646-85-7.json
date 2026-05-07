@@ -4,7 +4,7 @@
   "name_tr": "Çinko klorür",
   "ec_no": "231-592-0",
   "index_no": "030-003-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -29,7 +29,7 @@
     "scl_limits": [
       {
         "h_code": "H335",
-        "class": "STOT SE 3",
+        "class": "",
         "c_min": 5.0,
         "c_max": null
       }

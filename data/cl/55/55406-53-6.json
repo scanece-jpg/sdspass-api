@@ -1,10 +1,10 @@
 {
   "cas": "55406-53-6",
-  "name": "3-iodo-2-propynyl butylcarbamate; 3-iodoprop-2- yn-1-yl butylcarbamate",
+  "name": "3-iodo-2-propynyl butylcarbamate; 3-iodoprop-2-yn-1-yl butylcarbamate",
   "name_tr": "3-iyodo-2-propinil butilkarbamat; 3-iyodoprop-2- in-1-il bütilkarbamat",
   "ec_no": "259-627-5",
   "index_no": "616-212-00-7",
-  "atp": "",
+  "atp": "ATP6",
   "notes": [],
   "classification": {
     "hazards": [
@@ -18,24 +18,28 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372"
+        "h_code": "H372(larynx)"
       },
       {
-        "class": "Skin Sens. 1",
+        "class": "Eye Dam. 1",
         "h_code": "H318"
       },
       {
-        "class": "Aquatic Acute 1",
+        "class": "Skin Sens. 1",
         "h_code": "H317"
       },
       {
-        "class": "Aquatic Chronic 1",
+        "class": "Aquatic Acute 1",
         "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
       }
     ],
     "m_factors": {
       "acute": 10,
-      "chronic": 1
+      "chronic": 10
     },
     "scl_limits": []
   },
@@ -50,14 +54,12 @@
     "h_codes": [
       "H331",
       "H302",
-      "H372",
+      "H372(larynx)",
       "H318",
       "H317",
-      "H400"
+      "H400",
+      "H410"
     ],
     "suppl_h": []
-  },
-  "ate": {
-    "inhalation_dust": 0.17
   }
 }

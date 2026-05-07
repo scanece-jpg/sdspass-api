@@ -1,10 +1,10 @@
 {
   "cas": "302-97-6",
-  "name": "3-oxoandrost-4-ene-17-β- carboxylic acid",
+  "name": "3-oxoandrost-4-ene-17-ß-carboxylic acid",
   "name_tr": "3-oksoandrost-4-en-17- β- karboksilik asit",
   "ec_no": "414-990-0",
   "index_no": "607-518-00-1",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -21,7 +21,7 @@
     "scl_limits": []
   },
   "labelling": {
-    "signal": "Danger",
+    "signal": "Warning",
     "pictograms": [
       "GHS08"
     ],

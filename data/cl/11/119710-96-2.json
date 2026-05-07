@@ -1,10 +1,10 @@
 {
   "cas": "119710-96-2",
-  "name": "trisodium N,N- bis(carboxymethyl)-3-amino-2- hydroxypropionate",
+  "name": "trisodium N,N-bis(carboxymethyl)-3-amino-2-hydroxypropionate",
   "name_tr": "trisodyum-N,N- bis(karboksimetil)-3-amino-2- hidroksipropiyonat",
   "ec_no": "414-130-4",
   "index_no": "607-389-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

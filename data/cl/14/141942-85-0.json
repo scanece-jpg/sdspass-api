@@ -1,10 +1,10 @@
 {
   "cas": "141942-85-0",
-  "name": "ethyl (3R)-4-cyano-3- hydroxybutanoate",
+  "name": "ethyl (3R)-4-cyano-3-hydroxybutanoate",
   "name_tr": "etil (3R)-4-siyano-3- hidroksibütanoat",
   "ec_no": "430-220-6",
   "index_no": "607-609-00-6",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "93107-30-3",
-  "name": "1-cyclopropyl-6,7-difluoro-1,4- dihydro-4-oxoquinoline-3- carboxylic acid",
+  "name": "1-cyclopropyl-6,7-difluoro-1,4-dihydro-4-oxoquinoline-3-carboxylic acid",
   "name_tr": "1-siklopropil-6,7-difloro-1,4- dihidro-4-oksokinolin-3- karboksilik asit",
   "ec_no": "413-760-7",
   "index_no": "607-303-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

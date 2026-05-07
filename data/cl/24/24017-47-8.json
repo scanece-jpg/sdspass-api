@@ -1,10 +1,10 @@
 {
   "cas": "24017-47-8",
-  "name": "triazophos (ISO); O,O-diethyl-O-1-phenyl-1H- 1,2,4-triazol-3-yl phosphorothioate",
+  "name": "triazophos (ISO); O,O-diethyl-O-1-phenyl-1H-1,2,4-triazol-3-yl phosphorothioate",
   "name_tr": "triazofos (ISO); O,O-dietil-O-1-fenil-1H,2,4- triazol-3-il fosforotiyoat",
   "ec_no": "245-986-5",
   "index_no": "015-140-00-8",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

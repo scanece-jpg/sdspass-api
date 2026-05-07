@@ -1,10 +1,10 @@
 {
   "cas": "5734-64-5",
-  "name": "2-amino-4-chloro-6- methoxypyrimidine",
+  "name": "2-amino-4-chloro-6-methoxypyrimidine",
   "name_tr": "2-amino-4-kloro-6- metoksipirimidin",
   "ec_no": "410-050-9",
   "index_no": "613-154-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

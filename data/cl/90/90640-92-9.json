@@ -1,10 +1,10 @@
 {
   "cas": "90640-92-9",
-  "name": "Distillates (petroleum), complex dewaxed light paraffinic; Baseoil - unspecified; [A complex combination of hydrocarbons obtained by dewaxing light paraffinic distillate. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C12 through C30 and produces a finished oil with a viscosity of less than 100 SUS at 100 °F (19cSt at 40 °C). It contains relatively few normal paraffins.]",
+  "name": "Distillates (petroleum), complex dewaxed light paraffinic; Baseoil - unspecified; [A complex combination of hydrocarbons obtained by dewaxing light paraffinic distillate. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C12 through C30 and produces a finished oil with a viscosity of less than 100 SUS at 100 °F (19cSt at 40 °C). It contains relatively few normal paraffins.]",
   "name_tr": "Damıtıklar (petrol), kompleks cilası alınmış hafif parafinik; bazyağlar – tanımlanmamış [Hafif parafinik damıtıkların cilasının alınması ile elde edilen hidrokarbonların kompleks bileşimi. Genelde, ağırlıklı olarak C12 ila C30 aralığında karbon sayısına sahip hidrokarbonlardan oluşur ve 100 oF’da 100 SUS’dan daha az (40 oC’de 19 cSt) viskoziteye sahip son yağ üretir. Bağıl olarak az miktarda normal parafin içerir]",
   "ec_no": "292-614-2",
   "index_no": "649-486-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "L"
   ],

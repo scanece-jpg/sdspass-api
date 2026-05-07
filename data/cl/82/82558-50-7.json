@@ -1,10 +1,10 @@
 {
   "cas": "82558-50-7",
-  "name": "isoxaben (ISO); N-[3-(1-ethyl-1-methylpropyl)- 1,2-oxazol-5-yl]-2,6- dimethoxybenzamide",
+  "name": "isoxaben (ISO); N-[3-(1-ethyl-1-methylpropyl)-1,2-oxazol-5-yl]-2,6-dimethoxybenzamide",
   "name_tr": "isoksaben (ISO); N-(3-(1-etil-1-metilpropil)-1,2- oksazol-5-il)-2,6- dimetoksibenzamid",
   "ec_no": "407-190-8",
   "index_no": "616-043-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

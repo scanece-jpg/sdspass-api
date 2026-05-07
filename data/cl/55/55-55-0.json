@@ -1,10 +1,10 @@
 {
   "cas": "55-55-0",
-  "name": "bis(4-hydroxy-N- methylanilinium) sulphate",
+  "name": "bis(4-hydroxy-N-methylanilinium) sulphate",
   "name_tr": "bis(4-hidroksi-N- metilanilinyum)sülfat",
   "ec_no": "200-237-1",
   "index_no": "650-031-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

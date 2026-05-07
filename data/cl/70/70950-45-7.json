@@ -1,10 +1,10 @@
 {
   "cas": "70950-45-7",
-  "name": "dodecyl 3-(2-(3-benzyl-4- ethoxy-2,5-dioxoimidazolidin-1- yl)-3-(4- methoxybenzoyl)acetamido)-4- chlorobenzoate",
+  "name": "dodecyl 3-(2-(3-benzyl-4-ethoxy-2,5-dioxoimidazolidin-1-yl)-3-(4-methoxybenzoyl)acetamido)-4-chlorobenzoate",
   "name_tr": "dodesil-3-(2-(3-benzil-4-etoksi- 2,5-dioksoimidazolidin-1-il)-3- (4-metoksibenzoil)asetamido)-4- klorobenzoat",
   "ec_no": "403-990-6",
   "index_no": "607-258-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

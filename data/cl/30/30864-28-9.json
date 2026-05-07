@@ -1,10 +1,10 @@
 {
   "cas": "30864-28-9",
-  "name": "methyl 3- [(dimethoxyphosphinothioyl)oxy ]methacrylate; [1] methacrifos (ISO); methyl (E)-3- [(dimethoxyphosphinothioyl)oxy ]methacrylate [2]",
+  "name": "methyl 3-[(dimethoxyphosphinothioyl)oxy]methacrylate [1]\nmethacrifos (ISO); methyl (E)-3-[(dimethoxyphosphinothioyl)oxy]methacrylate  [2]",
   "name_tr": "metil3- [(dimetoksifosfinotiyoil)oksi]me takrilt; [1] metakrifos (ISO) metil (E)-3- [(dimetoksifosfinotiyoil)oksi]me takrilat [2]",
-  "ec_no": "250-366-9",
+  "ec_no": "250-366-2 [1]\n250-366-2 [2]",
   "index_no": "015-156-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "116-01-8",
-  "name": "ethoate-methyl (ISO); ethylcarbamoylmethyl O,O- dimethyl phosphorodithioate",
+  "name": "ethoate-methyl (ISO); ethylcarbamoylmethyl O,O-dimethyl phosphorodithioate",
   "name_tr": "Etoat-metil (ISO); etilkarbamoilmetil O,O- dimetilfosforoditiyoat",
   "ec_no": "204-121-1",
   "index_no": "015-089-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

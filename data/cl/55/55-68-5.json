@@ -1,10 +1,10 @@
 {
   "cas": "55-68-5",
-  "name": "phenylmercury nitrate; [1] phenylmercury hydroxide; [2] basic phenylmercury nitrate [3]",
+  "name": "phenylmercury nitrate [1]\nphenylmercury hydroxide [2]\nbasic phenylmercury nitrate  [3]",
   "name_tr": "Fenilciva nitrat [1] Fenilciva hidroksit [2] Bazik fenilciva nitrat [3]",
-  "ec_no": "200-242-9",
+  "ec_no": "200-242-9 [1]\n202-866-7 [2]",
   "index_no": "080-008-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

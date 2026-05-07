@@ -4,7 +4,7 @@
   "name_tr": "kobalt karbonat",
   "ec_no": "208-169-4",
   "index_no": "027-010-00-8",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "1"
   ],
@@ -46,7 +46,7 @@
     "scl_limits": [
       {
         "h_code": "H350i",
-        "class": "Carc. 1B",
+        "class": "",
         "c_min": 0.01,
         "c_max": null
       }

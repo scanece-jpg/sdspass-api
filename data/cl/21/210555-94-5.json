@@ -1,10 +1,10 @@
 {
   "cas": "210555-94-5",
-  "name": "phenol, dodecly-,branched; [1] phenol, 2-dodecly-,branched; [2] phenol,3- dodecly-,branched; [3] phenol, 4-dodecly-,branched; [4] phenol,(tetrapropenly)derivative s [5]",
+  "name": "phenol, dodecyl-, branched [1]\nphenol, 2-dodecyl-, branched [2]\nphenol, 3-dodecyl-, branched [3]\nphenol, 4-dodecyl-, branched [4]\nphenol, (tetrapropenyl) derivatives [5]",
   "name_tr": "fenol, dodesil-,dallanmış; [1] fenol, 2-dodesil-,dallanmış; [2] fenol,3- dodesil-,dallanmış; [3] fenol, 4-dodesil-,dallanmış; [4] fenol, (tetrapropenil) türevleri[5]",
-  "ec_no": "310-154-3",
+  "ec_no": "-",
   "index_no": "604-092-00-9",
-  "atp": "",
+  "atp": "ATP09",
   "notes": [],
   "classification": {
     "hazards": [

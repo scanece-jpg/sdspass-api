@@ -1,10 +1,10 @@
 {
   "cas": "125804-20-8",
-  "name": "2-methyl-3- (trimethoxysilyl)propyl-2- propenoate hydrolysis product with silica",
+  "name": "2-methyl-3-(trimethoxysilyl)propyl-2-propenoate hydrolysis product with silica",
   "name_tr": "2-metil-3-(trimetoksisilil)propil- 2-propenoat’ın silika ile hidroliz ürünü",
   "ec_no": "419-030-4",
   "index_no": "014-033-00-3",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,12 +13,12 @@
         "h_code": "H225"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H336"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       }
     ],
     "m_factors": {},
@@ -32,8 +32,8 @@
     ],
     "h_codes": [
       "H225",
-      "H319",
-      "H336"
+      "H336",
+      "H319"
     ],
     "suppl_h": []
   }

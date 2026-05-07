@@ -1,10 +1,10 @@
 {
   "cas": "39562-16-8",
-  "name": "ethyl 2-(3- nitrobenzylidene)acetoacetate",
+  "name": "ethyl 2-(3-nitrobenzylidene)acetoacetate",
   "name_tr": "etil-2-(3- nitrobenzilidin)asetoasetat",
   "ec_no": "404-490-0",
   "index_no": "607-260-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -4,7 +4,7 @@
   "name_tr": "etil format",
   "ec_no": "203-721-0",
   "index_no": "607-015-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -21,12 +21,12 @@
         "h_code": "H302"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H335"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       }
     ],
     "m_factors": {},
@@ -42,8 +42,8 @@
       "H225",
       "H332",
       "H302",
-      "H319",
-      "H335"
+      "H335",
+      "H319"
     ],
     "suppl_h": []
   }

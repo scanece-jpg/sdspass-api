@@ -4,7 +4,7 @@
   "name_tr": "3-kloropropen; allil klorür",
   "ec_no": "203-457-6",
   "index_no": "602-029-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "D"
   ],
@@ -35,20 +35,20 @@
         "h_code": "H302"
       },
       {
-        "class": "STOT RE 2",
-        "h_code": "H373"
-      },
-      {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H335"
       },
       {
+        "class": "STOT RE 2",
+        "h_code": "H373"
+      },
+      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Aquatic Acute 1",
@@ -73,10 +73,10 @@
       "H332",
       "H312",
       "H302",
-      "H373",
-      "H319",
       "H335",
+      "H373",
       "H315",
+      "H319",
       "H400"
     ],
     "suppl_h": []

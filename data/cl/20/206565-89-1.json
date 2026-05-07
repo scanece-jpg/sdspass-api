@@ -1,10 +1,10 @@
 {
   "cas": "206565-89-1",
-  "name": "fatty acids, C18-unsatd., dimers, reaction products with 1- piperazineethanamine and tall oil",
+  "name": "fatty acids, C18-unsatd.,  dimers, reaction products with 1-piperazineethanamine and tall oil",
   "name_tr": "yağ asitleri, C18-doymamış, dimerler, 1-piperazinetanamin ve katı yağ ile tepkime ürünleri",
   "ec_no": "447-880-6",
   "index_no": "612-275-00-X",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

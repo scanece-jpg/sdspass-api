@@ -1,10 +1,10 @@
 {
   "cas": "62782-03-0",
-  "name": "bis(2,2,6,6-tetramethyl-4- piperidyl) succinate",
+  "name": "bis(2,2,6,6-tetramethyl-4-piperidyl) succinate",
   "name_tr": "bis(2,2,6,6-tetrametil-4- piperidil)süksinat",
   "ec_no": "402-940-0",
   "index_no": "607-187-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

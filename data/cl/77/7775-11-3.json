@@ -4,7 +4,7 @@
   "name_tr": "Sodyum kromat",
   "ec_no": "231-889-5",
   "index_no": "024-018-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "3"
   ],
@@ -31,12 +31,12 @@
         "h_code": "H301"
       },
       {
-        "class": "STOT RE 1",
-        "h_code": "H372"
-      },
-      {
         "class": "Acute Tox. 4",
         "h_code": "H312"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
       },
       {
         "class": "Skin Corr. 1B",
@@ -63,13 +63,13 @@
     "scl_limits": [
       {
         "h_code": "H334",
-        "class": "Solnm. Hassas.",
+        "class": "",
         "c_min": 0.2,
         "c_max": null
       },
       {
         "h_code": "H317",
-        "class": "Cilt Hassas.",
+        "class": "",
         "c_min": 0.2,
         "c_max": null
       }
@@ -89,8 +89,8 @@
       "H360FD",
       "H330",
       "H301",
-      "H372",
       "H312",
+      "H372",
       "H314",
       "H334",
       "H317",

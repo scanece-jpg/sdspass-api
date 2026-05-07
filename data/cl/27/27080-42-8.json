@@ -1,10 +1,10 @@
 {
   "cas": "27080-42-8",
-  "name": "[2-[(4- nitrophenyl)amino]ethyl]urea",
+  "name": "[2-[(4-nitrophenyl)amino]ethyl]urea",
   "name_tr": "[2-[(4-nitrofenil)amino]etil]üre",
   "ec_no": "410-700-1",
   "index_no": "616-083-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

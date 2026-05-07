@@ -4,7 +4,7 @@
   "name_tr": "ter-bütilakrilat",
   "ec_no": "216-768-7",
   "index_no": "607-245-00-8",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "D"
   ],
@@ -47,7 +47,7 @@
     "scl_limits": []
   },
   "labelling": {
-    "signal": "Warning",
+    "signal": "Danger",
     "pictograms": [
       "GHS02",
       "GHS07",

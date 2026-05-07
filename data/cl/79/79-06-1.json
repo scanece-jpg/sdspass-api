@@ -4,7 +4,7 @@
   "name_tr": "akrilamid; prop-2-enamid",
   "ec_no": "201-173-7",
   "index_no": "616-003-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "D"
   ],
@@ -27,10 +27,6 @@
         "h_code": "H301"
       },
       {
-        "class": "STOT RE 1",
-        "h_code": "H372"
-      },
-      {
         "class": "Acute Tox. 4",
         "h_code": "H332"
       },
@@ -39,12 +35,16 @@
         "h_code": "H312"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
+        "class": "STOT RE 1",
+        "h_code": "H372"
       },
       {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Skin Sens. 1",
@@ -65,11 +65,11 @@
       "H340",
       "H361f",
       "H301",
-      "H372",
       "H332",
       "H312",
-      "H319",
+      "H372",
       "H315",
+      "H319",
       "H317"
     ],
     "suppl_h": []

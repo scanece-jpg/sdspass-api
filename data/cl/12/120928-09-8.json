@@ -1,10 +1,10 @@
 {
   "cas": "120928-09-8",
-  "name": "fenazaquin (ISO); 4-[2-[4-(1,1- dimethylethyl)phenyl]- ethoxy]quinazoline",
+  "name": "fenazaquin (ISO); 4-[2-[4-(1,1-dimethylethyl)phenyl]-ethoxy]quinazoline",
   "name_tr": "fenazakuin (ISO); 4-[2-[4-(1,1-dimetiletil)fenil]- etoksi]kinazolin",
   "ec_no": "410-580-0",
   "index_no": "613-159-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

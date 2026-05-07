@@ -5,9 +5,7 @@
   "ec_no": "223-289-7",
   "index_no": "017-004-00-3",
   "atp": "ATP21",
-  "notes": [
-    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
-  ],
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -15,16 +13,8 @@
         "h_code": "H271"
       },
       {
-        "class": "Acute Tox. 4",
-        "h_code": "H332"
-      },
-      {
         "class": "Acute Tox. 3",
         "h_code": "H301"
-      },
-      {
-        "class": "Aquatic Chronic 2",
-        "h_code": "H411"
       }
     ],
     "m_factors": {},
@@ -34,14 +24,11 @@
     "signal": "Danger",
     "pictograms": [
       "GHS03",
-      "GHS07",
-      "GHS09"
+      "GHS06"
     ],
     "h_codes": [
       "H271",
-      "H332",
-      "H301",
-      "H411"
+      "H301"
     ],
     "suppl_h": []
   },

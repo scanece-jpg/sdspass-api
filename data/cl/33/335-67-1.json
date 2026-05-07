@@ -4,10 +4,8 @@
   "name_tr": "perflorooktanoik asit",
   "ec_no": "206-397-9",
   "index_no": "607-704-00-2",
-  "atp": "ATP05",
-  "notes": [
-    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
-  ],
+  "atp": "ATP5",
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -19,8 +17,8 @@
         "h_code": "H360D"
       },
       {
-        "class": "Repr. 1B",
-        "h_code": "H360D"
+        "class": "Lact.",
+        "h_code": "H362"
       },
       {
         "class": "Acute Tox. 4",
@@ -32,11 +30,11 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372"
+        "h_code": "H372(liver)"
       },
       {
         "class": "Eye Dam. 1",
-        "h_code": "karaciğer)"
+        "h_code": "H318"
       }
     ],
     "m_factors": {},
@@ -52,11 +50,11 @@
     "h_codes": [
       "H351",
       "H360D",
-      "H360D",
+      "H362",
       "H332",
       "H302",
-      "H372",
-      "karaciğer)"
+      "H372(liver)",
+      "H318"
     ],
     "suppl_h": []
   }

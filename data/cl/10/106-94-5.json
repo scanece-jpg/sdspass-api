@@ -4,7 +4,7 @@
   "name_tr": "1-bromopropan; n-propil bromür",
   "ec_no": "203-445-0",
   "index_no": "602-019-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -17,24 +17,24 @@
         "h_code": "H360FD"
       },
       {
-        "class": "STOT RE 2",
-        "h_code": "H373"
-      },
-      {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
+        "class": "STOT SE 3",
+        "h_code": "H335"
       },
       {
         "class": "STOT SE 3",
-        "h_code": "H335"
+        "h_code": "H336"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
       },
       {
-        "class": "STOT SE 3",
-        "h_code": "H336"
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       }
     ],
     "m_factors": {},
@@ -50,11 +50,11 @@
     "h_codes": [
       "H225",
       "H360FD",
-      "H373",
-      "H319",
       "H335",
+      "H336",
+      "H373",
       "H315",
-      "H336"
+      "H319"
     ],
     "suppl_h": []
   }

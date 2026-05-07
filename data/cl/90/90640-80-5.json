@@ -1,10 +1,10 @@
 {
   "cas": "90640-80-5",
-  "name": "Anthracene oil; Anthracene oil; [A complex combination of polycyclic aromatic hydrocarbons obtained from coal tar having an approximate distillation range of 300 °C ot 400 °C (572 °F to 752 °F). Composed primarily of phenanthrene, anthracene and carbazole.]",
+  "name": "Anthracene oil; [A complex combination of polycyclic aromatic hydrocarbons obtained from coal tar having an approximate distillation range of 300 °C to 400 °C (572 °F to 752 °F). Composed primarily of phenanthrene, anthracene and carbazole.]",
   "name_tr": "antrasen yağı; antrasen yağı; [Kömür ziftinin yaklaşık 300 oC ile 400 oC (572 oF-752 oF) damıtılmasından elde edilen kompleks polisiklik aromatik hidrokabon bileşimi. Büyük ölçüde, fenantren, antrasen ve karbozolden oluşur.]",
   "ec_no": "292-602-7",
   "index_no": "648-079-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "M"
   ],

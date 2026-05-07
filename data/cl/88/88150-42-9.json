@@ -1,10 +1,10 @@
 {
   "cas": "88150-42-9",
-  "name": "3-ethyl 5-methyl 2-(2- aminoethoxymethyl)-4-(2- chlorophenyl)-1,4-dihydro-6- methyl-3,5- pyridinedicarboxylate",
+  "name": "3-ethyl 5-methyl 2-(2-aminoethoxymethyl)-4-(2-chlorophenyl)-1,4-dihydro-6-methyl-3,5-pyridinedicarboxylate",
   "name_tr": "3-etil 5-metil 2-(2- aminoetoksimetil)-4-(2- klorofenil)-1,4-dihidro-6-metil- 3,5-pridendikarboksilat",
   "ec_no": "425-820-1",
   "index_no": "607-565-00-8",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

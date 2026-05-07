@@ -4,7 +4,7 @@
   "name_tr": "tiram; tetrametiltiüram disülfür",
   "ec_no": "205-286-2",
   "index_no": "006-005-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -21,12 +21,12 @@
         "h_code": "H373"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Skin Sens. 1",
@@ -58,8 +58,8 @@
       "H332",
       "H302",
       "H373",
-      "H319",
       "H315",
+      "H319",
       "H317",
       "H400",
       "H410"

@@ -1,10 +1,10 @@
 {
   "cas": "138937-28-7",
-  "name": "5,6-dihydroxy-2,3-dihydro-1H- indolium bromide",
+  "name": "5,6-dihydroxy-2,3-dihydro-1H-indolium bromide",
   "name_tr": "5,6-dihidroksi-2,3-dihidro-1H- indolyum bromür",
   "ec_no": "421-170-6",
   "index_no": "613-304-00-9",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

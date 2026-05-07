@@ -1,10 +1,10 @@
 {
   "cas": "23560-59-0",
-  "name": "heptenophos (ISO); 7-chlorobicyclo(3.2.0)hepta-2,6- dien-6-yl dimethyl phosphate",
+  "name": "heptenophos (ISO); 7-chlorobicyclo(3.2.0)hepta-2,6-dien-6-yl dimethyl phosphate",
   "name_tr": "heptenofos (ISO); 7-klorobisiklo(3.2.0)hepta-2,6- dien-6-il dimetil fosfat",
   "ec_no": "245-737-0",
   "index_no": "015-126-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

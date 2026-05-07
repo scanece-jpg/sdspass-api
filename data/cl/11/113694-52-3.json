@@ -1,20 +1,20 @@
 {
   "cas": "113694-52-3",
-  "name": "benzyl-2- hydroxydodecyldimethylammon ium benzoate",
+  "name": "benzyl-2-hydroxydodecyldimethylammonium benzoate",
   "name_tr": "benzil-2- hidroksidodesildimetilamonyum benzoat",
   "ec_no": "402-610-6",
   "index_no": "612-095-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Skin Corr. 1B",
-        "h_code": "H314"
-      },
-      {
         "class": "Acute Tox. 4",
         "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
       },
       {
         "class": "Aquatic Acute 1",
@@ -36,8 +36,8 @@
       "GHS09"
     ],
     "h_codes": [
-      "H314",
       "H302",
+      "H314",
       "H400",
       "H410"
     ],

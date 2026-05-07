@@ -4,7 +4,7 @@
   "name_tr": "N-2-naftilanilin; N-fenil-2- naftilamin",
   "ec_no": "205-223-9",
   "index_no": "612-135-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,12 +13,12 @@
         "h_code": "H351"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Skin Sens. 1",
@@ -41,8 +41,8 @@
     ],
     "h_codes": [
       "H351",
-      "H319",
       "H315",
+      "H319",
       "H317",
       "H411"
     ],

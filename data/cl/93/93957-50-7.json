@@ -1,10 +1,10 @@
 {
   "cas": "93957-50-7",
-  "name": "3-[3-(4-fluorophenyl)-1-(1- methylethyl)-1H-indol-2-yl]-(E)- 2-propenal",
+  "name": "3-[3-(4-fluorophenyl)-1-(1-methylethyl)-1H-indol-2-yl]-(E)-2-propenal",
   "name_tr": "3-[3-(4-florofenil)-1-(1- metiletil)-1H-indol-2-il]-(E)-2- propenal",
   "ec_no": "425-370-4",
   "index_no": "605-032-00-4",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

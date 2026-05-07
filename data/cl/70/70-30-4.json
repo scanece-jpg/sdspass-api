@@ -1,10 +1,10 @@
 {
   "cas": "70-30-4",
-  "name": "2,2'-methylenebis-(3,4,6- trichlorophenol); hexachlorophene",
+  "name": "2,2'-methylenebis-(3,4,6-trichlorophenol); hexachlorophene",
   "name_tr": "2,2'-metilen-bis-(3,4,6- triklorofenol); hekzaklorofen",
   "ec_no": "200-733-8",
   "index_no": "604-015-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

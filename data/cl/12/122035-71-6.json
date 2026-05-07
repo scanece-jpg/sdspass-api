@@ -1,10 +1,10 @@
 {
   "cas": "122035-71-6",
-  "name": "oxo-((2,2,6,6- tetramethylpiperidin-4- yl)amino)carbonylacetohydrazid e",
+  "name": "oxo-((2,2,6,6-tetramethylpiperidin-4-yl)amino)carbonylacetohydrazide",
   "name_tr": "okso-((2,2,6,6- tetrametilpiperidin-4- il)amino)karbonilasetohidrazid",
   "ec_no": "413-230-5",
   "index_no": "007-026-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,13 +1,12 @@
 {
   "cas": "90640-88-3",
-  "name": "Distillates (coal tar), light oils, alk. exts.; Alkaline Extract; [The aqueous extract from carbolic oil produced by an alkaline wash such as aqueous sodium hydroxide. Composed primarily of the alkali salts of various phenolic compounds.]",
+  "name": "Distillates (coal tar), light oils, alk. exts.; Alkaline Extract; [The aqueous extract from carbolic oil produced by an alkaline wash such as aqueous sodium hydroxide.  Composed primarily of the alkali salts of various phenolic compounds.]",
   "name_tr": "Damıtıklar (kömür zifti),hafif yağlar, alkalin özütleri.; Alkalin özütü; [Sulu sodyum hidroksit gibi bir alkalin yıkama ile üretilen karbolik yağın sulu özütü. Esas olarak, çeşitli fenolik bileşiklerin alkali tuzlarından oluşur.]",
   "ec_no": "292-610-0",
   "index_no": "648-112-00-4",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
-    "J",
-    "M"
+    "J M"
   ],
   "classification": {
     "hazards": [

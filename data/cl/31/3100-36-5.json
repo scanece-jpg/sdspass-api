@@ -1,10 +1,10 @@
 {
   "cas": "3100-36-5",
-  "name": "reaction mass of cis- and trans- cyclohexadec-8-en-1-one",
+  "name": "reaction mass of cis- and trans-cyclohexadec-8-en-1-one",
   "name_tr": "cis- ve trans-siklohekzadek-8- en-1-on’un tepkime kütlesi",
   "ec_no": "401-700-2",
   "index_no": "606-046-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

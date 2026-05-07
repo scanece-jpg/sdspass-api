@@ -1,13 +1,11 @@
 {
   "cas": "26266-63-7",
-  "name": "1,2,3,6-tetrahydrophthalic anhydride; [1] cis-1,2,3,6-tetrahydrophthalic anhydride; [2] 3,4,5,6-tetrahydrophthalic anhydride; [3] tetrahydrophthalic anhydride [4]",
+  "name": "1,2,3,6-tetrahydrophthalic anhydride [1]\ncis-1,2,3,6-tetrahydrophthalic anhydride [2]\n3,4,5,6-tetrahydrophthalic anhydride [3]\ntetrahydrophthalic anhydride [4]",
   "name_tr": "1,2,3,6-tetrahidroftalik anhidrit; [1] cis-1,2,3,6-tetrahidroftalik anhidrit; [2] 3,4,5,6-tetrahidroftalik anhidrit; [3] tetrahidroftalik anhidrit [4]",
-  "ec_no": "201-605-4",
+  "ec_no": "247-570-9",
   "index_no": "607-099-00-5",
-  "atp": "",
-  "notes": [
-    "C"
-  ],
+  "atp": "CLP00",
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -33,8 +31,8 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS08",
-      "GHS05"
+      "GHS05",
+      "GHS08"
     ],
     "h_codes": [
       "H318",

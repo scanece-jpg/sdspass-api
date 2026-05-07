@@ -1,10 +1,10 @@
 {
   "cas": "15545-48-9",
-  "name": "chlorotoluron (ISO); 3-(3-chloro-p-tolyl)-1,1- dimethylurea",
+  "name": "chlorotoluron (ISO); 3-(3-chloro-p-tolyl)-1,1-dimethylurea",
   "name_tr": "klorotoluron (ISO); 3-(3-kloro-p-tolil)-1,1-dimetilüre",
   "ec_no": "239-592-2",
   "index_no": "616-105-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

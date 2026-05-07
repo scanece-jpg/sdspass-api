@@ -1,10 +1,10 @@
 {
   "cas": "100-63-0",
-  "name": "phenylhydrazine; [1] phenylhydrazinium chloride; [2] phenylhydrazine hydrochloride; [3] phenylhydrazinium sulphate (2:1) [4]",
+  "name": "phenylhydrazine [1]\nphenylhydrazinium chloride [2]\nphenylhydrazine hydrochloride [3]\nphenylhydrazinium sulphate (2:1)  [4]",
   "name_tr": "fenilhidrazin; [1] fenilhidrazinyumklorür; [2] fenilhidrazin hidroklorür; [3] fenilhidrazinyumsülfat (2:1) [4]",
-  "ec_no": "202-873-5",
+  "ec_no": "202-873-5 [1]\n200-444-7 [2]\n248-259-0 [3]\n257-622-2 [4]",
   "index_no": "612-023-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -33,12 +33,12 @@
         "h_code": "H372"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Skin Sens. 1",
@@ -66,8 +66,8 @@
       "H311",
       "H301",
       "H372",
-      "H319",
       "H315",
+      "H319",
       "H317",
       "H400"
     ],

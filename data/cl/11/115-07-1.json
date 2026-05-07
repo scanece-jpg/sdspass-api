@@ -4,7 +4,7 @@
   "name_tr": "propen; propilen",
   "ec_no": "204-062-1",
   "index_no": "601-011-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "U"
   ],
@@ -13,6 +13,10 @@
       {
         "class": "Flam. Gas 1",
         "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": ""
       }
     ],
     "m_factors": {},

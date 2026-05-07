@@ -1,10 +1,10 @@
 {
   "cas": "532-82-1",
-  "name": "chrysoidine monohydrochloride; 4-phenylazophenylene-1,3- diamine monohydrochloride; [1] chrysoidine monoacetate; 4-(phenylazo)benzene-1,3- diamine monoacetate; [2] chrysoidine acetate; 4-(phenylazo)benzene-1,3- diamine acetate; [3] chrysoidine-p- dodecylbenzenesulfonate; dodecylbenzenesulfonic acid, compound with 4- (phenylazo)benzene-1,3-diamine (1:1); [4] chrysoidine dihydrochloride; 4-(phenylazo)benzene-1,3- diamine dihydrochloride; [5] chrysoidine sulfate; bis[4-(phenylazo)benzene-1,3- diamine] sulfate [6]",
+  "name": "chrysoidine monohydrochloride; 4-phenylazophenylene-1,3-diamine monohydrochloride [1]\nchrysoidine monoacetate; 4-(phenylazo)benzene-1,3-diamine monoacetate [2]\nchrysoidine acetate; 4-(phenylazo)benzene-1,3-diamine acetate [3]\nchrysoidine-p-dodecylbenzenesulfonate; dodecylbenzenesulfonic acid, compound with 4-(phenylazo)benzene-1,3-diamine (1:1) [4]\nchrysoidine dihydrochloride; 4-(phenylazo)benzene-1,3-diamine dihydrochloride [5]\nchrysoidine sulfate; bis[4-(phenylazo)benzene-1,3-diamine] sulfate  [6]",
   "name_tr": "krisoidin monohidroklorür; 4-fenilazofenilen-1,3-diamin monohidroklorür; [1] 4-(fenilazo)benzen-1,3-diamin monoasetat; [2] krisoidin astat; 4-(fenilazo)benzen-1,3-diamin asetat; [3] krisoidin-o- dodesilbenzensülfonat; dodesilbenzensülfonik asit, 4-(fenilazo)benzen-1,3-diamin ile bileşik (1:1) [4] krisoidin dihidroklorür; 4-(fenilazo)benzen-1,3-diamin dihidroklorür; [5] krisoidin sülfat; bis[4-(fenilazo)benzen-1,3- diamin]sülfat [6]",
-  "ec_no": "208-545-8",
+  "ec_no": "208-545-8 [1]\n278-290-5 [2]\n279-116-0 [3]\n264-409-8 [4]\n281-549-5 [5]\n282-432-1 [6]",
   "index_no": "611-152-00-8",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "104040-78-0",
-  "name": "flazasulfuron (ISO); 1-(4,6-dimethoxypyrimidin-2- yl)-3-(3-trifluoromethyl-2- pyridylsulfonyl)urea",
+  "name": "flazasulfuron (ISO); 1-(4,6-dimethoxypyrimidin-2-yl)-3-(3-trifluoromethyl-2-pyridylsulfonyl)urea",
   "name_tr": "flazasülfuron; 1-(4,6- dimetoksipirimidin-2-il)-3-(3- triflorometil-2-piridilsülfonil)üre",
   "ec_no": "",
   "index_no": "016-085-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

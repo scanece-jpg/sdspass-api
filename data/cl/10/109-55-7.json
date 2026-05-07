@@ -1,10 +1,10 @@
 {
   "cas": "109-55-7",
-  "name": "3-aminopropyldimethylamine; N,N-dimethyl-1,3- diaminopropane",
+  "name": "3-aminopropyldimethylamine; N,N-dimethyl-1,3-diaminopropane",
   "name_tr": "3-aminopropildimetilamin; N,N- dimetil-1,3-diaminopropan",
   "ec_no": "203-680-9",
   "index_no": "612-061-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

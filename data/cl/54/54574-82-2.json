@@ -1,10 +1,10 @@
 {
   "cas": "54574-82-2",
-  "name": "4-(N,N-dibutylamino)-2- hydroxy-2'- carboxybenzophenone",
+  "name": "4-(N,N-dibutylamino)-2-hydroxy-2'-carboxybenzophenone",
   "name_tr": "4-(N,N-dibütilamino)-2- hidroksi-2'-karboksibenzofenon",
   "ec_no": "410-410-5",
   "index_no": "606-052-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

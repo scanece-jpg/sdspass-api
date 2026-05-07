@@ -4,7 +4,7 @@
   "name_tr": "etil metakrilat",
   "ec_no": "202-597-5",
   "index_no": "607-071-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "D"
   ],
@@ -15,16 +15,16 @@
         "h_code": "H225"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H335"
       },
       {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Skin Sens. 1",
@@ -42,9 +42,9 @@
     ],
     "h_codes": [
       "H225",
-      "H319",
       "H335",
       "H315",
+      "H319",
       "H317"
     ],
     "suppl_h": []

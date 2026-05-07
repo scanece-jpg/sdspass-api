@@ -1,10 +1,10 @@
 {
   "cas": "156126-48-6",
-  "name": "tetrabutylammonium 2-amino-6- iodopurinate",
+  "name": "tetrabutylammonium 2-amino-6-iodopurinate",
   "name_tr": "tetrabütilamonyum 2-amino-6- iyodopurinat",
   "ec_no": "424-710-9",
   "index_no": "607-551-00-1",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "2032-65-7",
-  "name": "mercaptodimethur (ISO); methiocarb (ISO); 3,5-dimethyl-4- methylthiophenyl N- methylcarbamate",
+  "name": "mercaptodimethur (ISO); methiocarb (ISO); 3,5-dimethyl-4-methylthiophenyl N-methylcarbamate",
   "name_tr": "merkaptodimetür (ISO); metiyokarb; 3,5-dimetil-4- metiltiyofenil N-metilkarbamat",
   "ec_no": "217-991-2",
   "index_no": "006-023-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

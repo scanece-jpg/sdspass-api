@@ -1,10 +1,10 @@
 {
   "cas": "4104-14-7",
-  "name": "phosacetim (ISO); O,O-bis(4-chlorophenyl) N- acetimidoylphosphoramidothioat e",
+  "name": "phosacetim (ISO); O,O-bis(4-chlorophenyl) N-acetimidoylphosphoramidothioate",
   "name_tr": "fosasetim (ISO); O,O-bis(4-klorofenil)-N- asetimidoifosforamidotiyoat",
   "ec_no": "223-874-7",
   "index_no": "015-092-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

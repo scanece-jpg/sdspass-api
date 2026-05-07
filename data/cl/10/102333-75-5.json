@@ -1,10 +1,10 @@
 {
   "cas": "102333-75-5",
-  "name": "2-(para- chlorophenyl)glycineamide",
+  "name": "2-(para-chlorophenyl)glycineamide",
   "name_tr": "2-(para-klorofenil)glisinamid",
   "ec_no": "420-830-0",
   "index_no": "616-171-00-5",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

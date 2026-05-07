@@ -1,21 +1,19 @@
 {
   "cas": "68310-42-9",
-  "name": "brucine sulphate; [1] brucine nitrate; [2] Strychnidin-10-one, 2,3- dimethoxy-, mono[(R)-1- methylheptyl 1,2- benzenedicarboxylate]; [3] Strychnidin-10-one, 2,3- dimethoxy-, compd. with (S)mono(1-methylheptyl)-1,2- benzenedicarboxylate (1:1) [4]",
+  "name": "brucine sulphate [1]\nbrucine nitrate [2]\nstrychnidin-10-one, 2,3-dimethoxy-, mono[(R)-1-methylheptyl 1,2-benzenedicarboxylate] [3]\nstrychnidin-10-one, 2,3-dimethoxy-, compd. with (S)mono(1-methylheptyl)-1,2-benzenedicarboxylate (1:1) [4]",
   "name_tr": "brusin sülfat; [1] brusin nitrat; [2] striknidin-10-on, 2,3-dimetoksi-, mono[(R)-1-metilheptil-1-2- benzendikarboksilat]; [3] striknidin-10-on,2,3-dimetoksi- bileşiği ile (S)mono(1- metilheptil)-1,2- benzendikarboksilat(1:1) [4]",
-  "ec_no": "225-432-9",
+  "ec_no": "269-710-8",
   "index_no": "614-007-00-7",
-  "atp": "",
-  "notes": [
-    "A"
-  ],
+  "atp": "CLP00",
+  "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 2",
+        "class": "Acute Tox. 2 *",
         "h_code": "H330"
       },
       {
-        "class": "Acute Tox. 2",
+        "class": "Acute Tox. 2 *",
         "h_code": "H300"
       },
       {

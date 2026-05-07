@@ -1,10 +1,10 @@
 {
   "cas": "136465-99-1",
-  "name": "1-((2-quinolinyl-carbonyl)oxy)- 2,5-pyrrolidinedione",
+  "name": "1-((2-quinolinyl-carbonyl)oxy)-2,5-pyrrolidinedione",
   "name_tr": "1-((2-kinolinilkarbonil)oksi)- 2,5-pirrolidindion",
   "ec_no": "418-630-3",
   "index_no": "606-076-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

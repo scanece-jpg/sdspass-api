@@ -1,10 +1,10 @@
 {
   "cas": "116889-78-2",
-  "name": "tetrasodium 4-amino-5-hydroxy- 6-(4-(2-(2- (sulfonatooxy)ethylsulfonyl)ethy lcarbamoyl)phenylazo)-3-(4-(2- (sulfonatooxy)ethylsulfonyl)phe nylazo)naphthalene-2,7- disulfonate",
+  "name": "tetrasodium 4-amino-5-hydroxy-6-(4-(2-(2-(sulfonatooxy)ethylsulfonyl)ethylcarbamoyl)phenylazo)-3-(4-(2-(sulfonatooxy)ethylsulfonyl)phenylazo)naphthalene-2,7-disulfonate",
   "name_tr": "tetrasodyum-4-amino-5- hidroksi-6-(4-(2-(2- (sülfonatoksi)etilsülfonil)etilkarb amoil)fenilazo)-3-(4-(2- (sülfonatoksi)etilsülfonil)fenilaz o)naftalin-2,7-disülfonat",
   "ec_no": "404-320-5",
   "index_no": "611-015-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -4,14 +4,14 @@
   "name_tr": "6-(ftalimido)peroksihekzanoik asit",
   "ec_no": "410-850-8",
   "index_no": "617-019-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "T"
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Org. Perox. Type D",
+        "class": "Org. Perox. D",
         "h_code": "H242"
       },
       {

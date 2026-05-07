@@ -1,10 +1,10 @@
 {
   "cas": "123333-53-9",
-  "name": "1-hydroxybenzotriazole, anhydrous; [1] 1-hydroxybenzotriazole, monohydrated [2]",
+  "name": "1-hydroxybenzotriazole, anhydrous [1]\n1-hydroxybenzotriazole, monohydrated [2]",
   "name_tr": "1-hidroksibenzotriazol, susuz; [1] 1-hidroksibenzotriazol, monohidratlanmış [2]",
   "ec_no": "219-989-7",
   "index_no": "613-285-00-7",
-  "atp": "",
+  "atp": "ATP01",
   "notes": [],
   "classification": {
     "hazards": [

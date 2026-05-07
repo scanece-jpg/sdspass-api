@@ -1,10 +1,10 @@
 {
   "cas": "68783-04-0",
-  "name": "Extracts (petroleum), solvent- refined heavy paraffinic distillate solvent; Distillate aromatic extract (treated); [A complex combination of hydrocarbons obtained as the extract from the re-extraction of solvent-refined heavy paraffinic distillate. It consists of saturated and aromatic hydrocarbons having carbon numbers predominantly in the range of C20 through C50.]",
+  "name": "Extracts (petroleum), solvent-refined heavy paraffinic distillate solvent; Distillate aromatic extract (treated); [A complex combination of hydrocarbons obtained as the extract from the re-extraction of solvent-refined heavy paraffinic distillate. It consists of saturated and aromatic hydrocarbons having carbon numbers predominantly in the range of C20 through C50.]",
   "name_tr": "özütler (petrol), rafine edilmiş ağır parafinik damıtık çözücü; damıtık aromatik özüt (muamele edilmiş); [Çözücü ile rafine edilmiş ağır parafinik damıtığın tekrar özütlenmesinden özüt olarak elde edilen kompleks bir hidrokarbon bileşimi. Karbon sayıları ağırlıklı olarak C20 ile C50 arasında olan doymuş ve aromatik hidrokarbonları içerir.]",
   "ec_no": "272-180-0",
   "index_no": "649-532-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "L"
   ],

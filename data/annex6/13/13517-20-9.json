@@ -39,7 +39,7 @@
         "h_code": "H319",
         "class": "",
         "c_min": 22.0,
-        "c_max": null
+        "c_max": 36.0
       }
     ]
   },
@@ -59,6 +59,6 @@
     "suppl_h": []
   },
   "ate": {
-    "inhalation_dust": 1.2
+    "inhalation_mgl": 1.2
   }
 }

@@ -1,10 +1,10 @@
 {
   "cas": "61551-69-7",
-  "name": "2,2'-azobis[N-(2-hydroxyethyl)- 2-methylpropionamide]",
+  "name": "2,2'-azobis[N-(2-hydroxyethyl)-2-methylpropionamide]",
   "name_tr": "2,2'-azobis[N-(2-hidroksietil)-2- metilpropionamid]",
   "ec_no": "429-090-3",
   "index_no": "616-160-00-5",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

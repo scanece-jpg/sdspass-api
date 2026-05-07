@@ -1,16 +1,16 @@
 {
   "cas": "39807-15-3",
-  "name": "oxadiargyl (ISO); 3-[2,4-dichloro-5-(2- propynyloxy)phenyl]-5-(1,1- dimethylethyl)-1,3,4-oxadiazol- 2(3H)-one;",
+  "name": "oxadiargyl (ISO); 3-[2,4-dichloro-5-(2-propynyloxy)phenyl]-5-(1,1-dimethylethyl)-1,3,4-oxadiazol-2(3H)-one",
   "name_tr": "oksadiargil (ISO); 3-[2,4- dikloro-5-(2-propiniloksi)fenil]- 5-(1,1-dimetiletil)-1,3,4- oksadiazol-2(3H)-on;",
   "ec_no": "254-637-6",
   "index_no": "613-204-00-5",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
       {
         "class": "Repr. 2",
-        "h_code": "H360Fd"
+        "h_code": "H361d"
       },
       {
         "class": "STOT RE 2",
@@ -32,13 +32,13 @@
     "scl_limits": []
   },
   "labelling": {
-    "signal": "Danger",
+    "signal": "Warning",
     "pictograms": [
       "GHS08",
       "GHS09"
     ],
     "h_codes": [
-      "H360Fd",
+      "H361d",
       "H373",
       "H400",
       "H410"

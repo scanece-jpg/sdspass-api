@@ -1,10 +1,10 @@
 {
   "cas": "2595-54-2",
-  "name": "mecarbam (ISO); N-ethoxycarbonyl-N- methylcarbamoylmethyl O,O- diethyl phosphorodithioate",
+  "name": "mecarbam (ISO); N-ethoxycarbonyl-N-methylcarbamoylmethyl O,O-diethyl phosphorodithioate",
   "name_tr": "mekarbam (ISO); N-etoksikarbonil-N- metilkarbamoilmetil O,O- dietilfosforoditiyoat",
   "ec_no": "219-993-9",
   "index_no": "015-045-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

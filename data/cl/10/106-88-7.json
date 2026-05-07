@@ -4,7 +4,7 @@
   "name_tr": "1,2-epoksibütan",
   "ec_no": "203-438-2",
   "index_no": "603-102-00-9",
-  "atp": "",
+  "atp": "ATP7",
   "notes": [],
   "classification": {
     "hazards": [
@@ -18,7 +18,7 @@
       },
       {
         "class": "Acute Tox. 4",
-        "h_code": "H302"
+        "h_code": "H332"
       },
       {
         "class": "Acute Tox. 4",
@@ -26,7 +26,7 @@
       },
       {
         "class": "Acute Tox. 4",
-        "h_code": "H332"
+        "h_code": "H302"
       },
       {
         "class": "STOT SE 3",
@@ -54,9 +54,9 @@
     "h_codes": [
       "H225",
       "H351",
-      "H302",
-      "H312",
       "H332",
+      "H312",
+      "H302",
       "H335",
       "H315",
       "H319"

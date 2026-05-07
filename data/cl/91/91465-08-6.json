@@ -1,10 +1,10 @@
 {
   "cas": "91465-08-6",
-  "name": "lambda-cyhalothrin (ISO); reaction mass of (S)-α-cyano-3- phenoxybenzyl(Z)-(1R)-cis-3-(2- chloro-3,3,3-trifluoropropenyl)- 2,2- dimethylcyclopropanecarboxylat e and (R)-α-cyano-3- phenoxybenzyl (Z)-(1S)-cis-3- (2-chloro-3,3,3- trifluoropropenyl)-2,2- dimethylcyclopropanecarboxylat e (1:1)",
+  "name": "lambda-cyhalothrin (ISO); reaction mass of (S)-α-cyano-3-phenoxybenzyl(Z)-(1R)-cis-3-(2-chloro-3,3,3-trifluoropropenyl)-2,2-dimethylcyclopropanecarboxylate and (R)-α-cyano-3-phenoxybenzyl (Z)-(1S)-cis-3-(2-chloro-3,3,3-trifluoropropenyl)-2,2-dimethylcyclopropanecarboxylate (1:1)",
   "name_tr": "lambda-sihalotrin (ISO); (S)-α- siyano-3-fenoksibenzil(Z)-(1R)- cis-3-(2-kloro-3,3,3- trifloropropenil)-2,2- dimetilsiklopropankarboksilat ve (R)-α-siyano-3-fenoksibenzil (Z)-(1S)-cis-3-(2-kloro-3,3,3- trifloropropenil)-2,2- dimetilsiklopropan karboksilat’ın tepkime kütlesi (1:1)",
   "ec_no": "415-130-7",
   "index_no": "607-252-00-6",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

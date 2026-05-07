@@ -4,7 +4,7 @@
   "name_tr": "stiren",
   "ec_no": "202-851-5",
   "index_no": "601-026-00-0",
-  "atp": "",
+  "atp": "ATP6",
   "notes": [
     "D"
   ],
@@ -24,53 +24,22 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372(duy"
-      },
-      {
-        "class": "Eye Irrit. 2",
-        "h_code": "ma"
+        "h_code": "H372(hearing_organs)"
       },
       {
         "class": "Skin Irrit. 2",
-        "h_code": "organları)"
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       }
     ],
     "m_factors": {},
-    "scl_limits": [
-      {
-        "h_code": "H361",
-        "class": "Repr. 2",
-        "c_min": 3.3,
-        "c_max": null
-      },
-      {
-        "h_code": "H373",
-        "class": "STOT RE 2",
-        "c_min": 10.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H315",
-        "class": "Skin Irrit. 2",
-        "c_min": 10.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H319",
-        "class": "Eye Irrit. 2",
-        "c_min": 10.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H335",
-        "class": "STOT SE 3",
-        "c_min": 20.0,
-        "c_max": null
-      }
-    ]
+    "scl_limits": []
   },
   "labelling": {
-    "signal": "Warning",
+    "signal": "Danger",
     "pictograms": [
       "GHS02",
       "GHS08",
@@ -80,9 +49,9 @@
       "H226",
       "H361d",
       "H332",
-      "H372(duy",
-      "ma",
-      "organları)"
+      "H372(hearing_organs)",
+      "H315",
+      "H319"
     ],
     "suppl_h": []
   }

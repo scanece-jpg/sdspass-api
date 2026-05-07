@@ -1,10 +1,10 @@
 {
   "cas": "6864-37-5",
-  "name": "2,2'-dimethyl-4,4'- methylenebis(cyclohexylamine)",
+  "name": "2,2'-dimethyl-4,4'-methylenebis(cyclohexylamine)",
   "name_tr": "2,2'-dimetil-4,4'- metilenbis(siklohekzilamin)",
   "ec_no": "229-962-1",
   "index_no": "612-110-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

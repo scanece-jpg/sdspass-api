@@ -1,10 +1,10 @@
 {
   "cas": "90884-29-0",
-  "name": "4,4'- oxybis(ethylenethio)diphenol",
+  "name": "4,4'-oxybis(ethylenethio)diphenol",
   "name_tr": "4,4'-oksibis(etilentiyo)difenol",
   "ec_no": "404-590-4",
   "index_no": "604-036-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

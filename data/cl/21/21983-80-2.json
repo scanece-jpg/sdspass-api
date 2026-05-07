@@ -1,10 +1,10 @@
 {
   "cas": "21983-80-2",
-  "name": "4'-fluoro-2,2- dimethoxyacetophenone",
+  "name": "4'-fluoro-2,2-dimethoxyacetophenone",
   "name_tr": "4'-flor-2,2-dimetoksiasetofenon",
   "ec_no": "407-500-1",
   "index_no": "606-058-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

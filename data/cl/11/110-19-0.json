@@ -1,13 +1,11 @@
 {
   "cas": "110-19-0",
-  "name": "sec-butyl acetate; [1] isobutyl acetate; [2] tert-butyl acetate [3]",
+  "name": "sec-butyl acetate [1]\nisobutyl acetate [2]\ntert-butyl acetate [3]",
   "name_tr": "sec-bütil asetat [1]; izobütil asetat [2]; ter-bütil asetat [3]",
-  "ec_no": "203-300-1",
+  "ec_no": "203-745-1",
   "index_no": "607-026-00-7",
-  "atp": "",
-  "notes": [
-    "C"
-  ],
+  "atp": "CLP00",
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -26,8 +24,6 @@
     "h_codes": [
       "H225"
     ],
-    "suppl_h": [
-      "EUH066"
-    ]
+    "suppl_h": []
   }
 }

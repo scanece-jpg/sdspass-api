@@ -1,10 +1,10 @@
 {
   "cas": "89114-90-9",
-  "name": "4-(2,2-diphenylethenyl)-N,N-di- phenylbenzenamine",
+  "name": "4-(2,2-diphenylethenyl)-N,N-di-phenylbenzenamine",
   "name_tr": "4-(2,2-difeniletenil)-N,N- difenilbenzenamin",
   "ec_no": "421-390-2",
   "index_no": "612-214-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

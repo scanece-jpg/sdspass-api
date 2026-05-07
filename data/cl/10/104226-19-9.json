@@ -1,10 +1,10 @@
 {
   "cas": "104226-19-9",
-  "name": "3-((4-(bis(2- hydroxyethyl)amino)-2- nitrophenyl)amino)-1-propanol",
+  "name": "3-((4-(bis(2-hydroxyethyl)amino)-2-nitrophenyl)amino)-1-propanol",
   "name_tr": "3-((4-(bis(2-hidroksietil)amino)- 2-nitrofenil)amino)-1-propanol",
   "ec_no": "410-910-3",
   "index_no": "603-136-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

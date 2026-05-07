@@ -1,10 +1,10 @@
 {
   "cas": "10357-99-0",
-  "name": "N,N-dimethyl-2-(3-(4- chlorophenyl)-4,5- dihydropyrazol-1- ylphenylsulphonyl)ethylamine",
+  "name": "N,N-dimethyl-2-(3-(4-chlorophenyl)-4,5-dihydropyrazol-1-ylphenylsulphonyl)ethylamine",
   "name_tr": "N,N-dimetil-2-(3-(4-klorofenil)- 4,5-dihidropirazol-1- ilfenilsülfonil)etilamin",
   "ec_no": "401-410-6",
   "index_no": "613-073-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

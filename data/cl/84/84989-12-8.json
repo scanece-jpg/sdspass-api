@@ -1,13 +1,12 @@
 {
   "cas": "84989-12-8",
-  "name": "Extract oils (coal), acidic, tar- base free; Methylnaphthalene Oil Extract Residue; [The extract oil boiling in the range of approximately 220°C to 265°C (428°F to 509°F) from coal tar alkaline extract residue produced by an acidic wash such as aqueous sulfuric acid after distillation to remove tar bases. Composed primarily of alkylnaphthalenes.]",
+  "name": "Extract oils (coal), acidic, tar-base free; Methylnaphthalene Oil Extract Residue; [The extract oil boiling in the range of approximately 220°C to 265°C (428°F to 509°F) from coal tar alkaline extract residue produced by an acidic wash such as aqueous sulfuric acid after distillation to remove tar bases.  Composed primarily of alkylnaphthalenes.]",
   "name_tr": "Özüt yağları (kömür), asidik, zift-bazı içermeyen; Metilnaftalin yağı özüt artığı; [Zift bazlarını uzaklaştırmak için yapılan damıtmadan sonra sulu sülfürik asit ile asidik yıkama sonucu üretilen ve yaklaşık 220 oC ile 265 oC (428 oF-509 oF) arasında kaynayan kömür zifti alkalin özütü kalıntısı özüt yağı. Büyük ölçüde alkilnaftalinlerden oluşur.]",
   "ec_no": "284-901-6",
   "index_no": "648-096-00-9",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
-    "J",
-    "M"
+    "J M"
   ],
   "classification": {
     "hazards": [

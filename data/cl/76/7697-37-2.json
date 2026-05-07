@@ -1,18 +1,22 @@
 {
   "cas": "7697-37-2",
-  "name": "nitric acid ... %",
+  "name": "nitric acid …% [C ≤ 70 %]",
   "name_tr": "nitrik asit ... %",
   "ec_no": "231-714-2",
-  "index_no": "007-004-00-1",
-  "atp": "",
+  "index_no": "007-030-00-3",
+  "atp": "ATP15",
   "notes": [
     "B"
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Ox. Liq. 2",
+        "class": "Ox. Liq. 3",
         "h_code": "H272"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H331"
       },
       {
         "class": "Skin Corr. 1A",
@@ -22,22 +26,22 @@
     "m_factors": {},
     "scl_limits": [
       {
+        "h_code": "H272",
+        "class": "",
+        "c_min": 65.0,
+        "c_max": null
+      },
+      {
         "h_code": "H314",
-        "class": "Skin Corr. 1A",
+        "class": "",
         "c_min": 20.0,
         "c_max": null
       },
       {
-        "h_code": "H272",
-        "class": "C < %20 Oksit. Sıvı 2",
-        "c_min": 99.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H272",
-        "class": "Ox. Liq. 3",
-        "c_min": 65.0,
-        "c_max": null
+        "h_code": "H314",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": 20.0
       }
     ]
   },
@@ -45,15 +49,19 @@
     "signal": "Danger",
     "pictograms": [
       "GHS03",
+      "GHS06",
       "GHS05"
     ],
     "h_codes": [
       "H272",
+      "H331",
       "H314"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH071"
+    ]
   },
   "ate": {
-    "inhalation_vapour": 2.65
+    "inhalation_mgl": 2.65
   }
 }

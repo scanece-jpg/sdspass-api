@@ -1,17 +1,13 @@
 {
   "cas": "104-15-4",
-  "name": "p-toluenesulphonic acid (containing a maximum of 5 % H2SO4)",
+  "name": "p-toluenesulphonic acid (containing a maximum of 5 % H2SO4)",
   "name_tr": "p-toluensülfonik asit, (maksimum % 5 H2SO4 içeren)",
   "ec_no": "203-180-0",
   "index_no": "016-030-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
-      {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
       {
         "class": "STOT SE 3",
         "h_code": "H335"
@@ -19,13 +15,17 @@
       {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       }
     ],
     "m_factors": {},
     "scl_limits": [
       {
         "h_code": "H335",
-        "class": "STOT SE 3",
+        "class": "",
         "c_min": 20.0,
         "c_max": null
       }
@@ -37,9 +37,9 @@
       "GHS07"
     ],
     "h_codes": [
-      "H319",
       "H335",
-      "H315"
+      "H315",
+      "H319"
     ],
     "suppl_h": []
   }

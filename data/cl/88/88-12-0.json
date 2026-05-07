@@ -4,7 +4,7 @@
   "name_tr": "1-vinil-2-pirrolidon",
   "ec_no": "201-800-4",
   "index_no": "613-168-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "D"
   ],
@@ -27,12 +27,12 @@
         "h_code": "H302"
       },
       {
-        "class": "STOT RE 2",
-        "h_code": "H373"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H335"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Eye Dam. 1",
@@ -54,8 +54,8 @@
       "H332",
       "H312",
       "H302",
-      "H373",
       "H335",
+      "H373",
       "H318"
     ],
     "suppl_h": []

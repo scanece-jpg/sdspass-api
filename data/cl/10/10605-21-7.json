@@ -1,10 +1,10 @@
 {
   "cas": "10605-21-7",
-  "name": "carbendazim (ISO); methyl benzimidazol-2- ylcarbamate",
+  "name": "carbendazim (ISO);\nmethyl benzimidazol-2-ylcarbamate",
   "name_tr": "karbendazim (ISO); metilbenzimidazol-2-ilkarbamat",
   "ec_no": "234-232-0",
   "index_no": "613-048-00-8",
-  "atp": "",
+  "atp": "ATP17",
   "notes": [],
   "classification": {
     "hazards": [
@@ -15,6 +15,10 @@
       {
         "class": "Repr. 1B",
         "h_code": "H360FD"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
       },
       {
         "class": "Aquatic Acute 1",
@@ -34,12 +38,14 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
+      "GHS07",
       "GHS08",
       "GHS09"
     ],
     "h_codes": [
       "H340",
       "H360FD",
+      "H317",
       "H400",
       "H410"
     ],

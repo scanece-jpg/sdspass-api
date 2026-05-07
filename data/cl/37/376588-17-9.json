@@ -1,10 +1,10 @@
 {
   "cas": "376588-17-9",
-  "name": "methyl (9-acetoxy-3,8,10- triethyl-7,8,10-trimethyl-1,5- dioxa-9-aza-spiro[5.5]undec-3- yl)octadecanoate",
+  "name": "methyl (9-acetoxy-3,8,10-triethyl-7,8,10-trimethyl-1,5-dioxa-9-aza-spiro[5.5]undec-3-yl)octadecanoate",
   "name_tr": "metil (9-asetoksi-3,8,10-trietil- 7,8,10-trimetil-1,5-dioksa-9-aza- spiro[5.5]undek-3- il)oktadekanoat",
   "ec_no": "445-990-9",
   "index_no": "607-669-00-3",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

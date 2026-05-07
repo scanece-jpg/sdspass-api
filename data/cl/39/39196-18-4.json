@@ -1,10 +1,10 @@
 {
   "cas": "39196-18-4",
-  "name": "thiofanox (ISO); 3,3-dimethyl-1- (methylthio)butanone-O-(N- methylcarbamoyl)oxime",
+  "name": "thiofanox (ISO); 3,3-dimethyl-1-(methylthio)butanone-O-(N-methylcarbamoyl)oxime",
   "name_tr": "tiyofanoks (ISO); 3,3-dimetil-1- (metiltiyo)bütanon-O-(N- metilkarbamoil)oksim;",
   "ec_no": "254-346-4",
   "index_no": "006-064-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

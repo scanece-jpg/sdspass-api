@@ -1,26 +1,24 @@
 {
   "cas": "2407-94-5",
-  "name": "1-hydroperoxycyclohexyl 1- hydroxycyclohexyl peroxide; [1] 1,1'-dioxybiscyclohexan-1-ol; [2] cyclohexylidene hydroperoxide; [3] cyclohexanone, peroxide [4]",
+  "name": "1-hydroperoxycyclohexyl 1-hydroxycyclohexyl peroxide; [â‰¤ 91 % solution] [1]\n1,1'-dioxybiscyclohexan-1-ol [2]\ncyclohexylidene hydroperoxide [3]\ncyclohexanone, peroxide [4]",
   "name_tr": "1-hidroperoksisikloheksil 1- hidroksisikloheksil peroksit; [1] 1,1'-dioksibisiklohekzan-1-ol; [2] sikloheksiliden hidroperoksit; [3] siklohekzanon, peroksit [4]",
-  "ec_no": "201-091-1",
-  "index_no": "617-010-00-1",
-  "atp": "",
-  "notes": [
-    "C"
-  ],
+  "ec_no": "219-306-2",
+  "index_no": "617-010-01-9",
+  "atp": "CLP00",
+  "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Org. Perox. Type A",
-        "h_code": "H240"
+        "class": "Org. Perox. C",
+        "h_code": "H242"
+      },
+      {
+        "class": "Acute Tox. 4 *",
+        "h_code": "H302"
       },
       {
         "class": "Skin Corr. 1B",
         "h_code": "H314"
-      },
-      {
-        "class": "Acute Tox. 4",
-        "h_code": "H302"
       }
     ],
     "m_factors": {},
@@ -36,14 +34,14 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS01",
-      "GHS05",
-      "GHS07"
+      "GHS02",
+      "GHS07",
+      "GHS05"
     ],
     "h_codes": [
-      "H240",
-      "H314",
-      "H302"
+      "H242",
+      "H302",
+      "H314"
     ],
     "suppl_h": []
   }

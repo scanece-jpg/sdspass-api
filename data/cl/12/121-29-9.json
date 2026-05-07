@@ -1,10 +1,10 @@
 {
   "cas": "121-29-9",
-  "name": "2-methyl-4-oxo-3-(penta-2,4- dienyl)cyclopent-2-enyl[1R- [1α[S(Z)](3β)]]-3-(3-methoxy-2- methyl-3-oxoprop-1-enyl)-2,2- dimethylcyclopropanecarboxylat e; pyrethrin II",
+  "name": "2-methyl-4-oxo-3-(penta-2,4-dienyl)cyclopent-2-enyl[1R-[1α[S*(Z)](3β)]]-3-(3-methoxy-2-methyl-3-oxoprop-1-enyl)-2,2-dimethylcyclopropanecarboxylate; pyrethrin II",
   "name_tr": "2-metil-4-okso-3-(penta-2,4- dienil)siklopent-2-enil-[1R- [1α[S(Z)](3β)]]-3-(3-metoksi-2- metil-3-oksoprop-1-enil)-2,2- dimetilsiklopropankarboksilat; piretrin II",
   "ec_no": "204-462-6",
   "index_no": "613-024-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

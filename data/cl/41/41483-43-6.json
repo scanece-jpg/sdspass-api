@@ -1,10 +1,10 @@
 {
   "cas": "41483-43-6",
-  "name": "bupirimate (ISO); 5-butyl-2-ethylamino-6- methylpyrimidin-4-yl dinethylsulphamate",
+  "name": "bupirimate (ISO); 5-butyl-2-ethylamino-6-methylpyrimidin-4-yl dimethylsulphamate",
   "name_tr": "bupirimat (ISO); 5-bütil-2-etilamino-6- metilpirimidin-4-il dimetilsülfamat",
   "ec_no": "255-391-2",
   "index_no": "612-288-00-0",
-  "atp": "",
+  "atp": "ATP9",
   "notes": [],
   "classification": {
     "hazards": [
@@ -22,7 +22,6 @@
       }
     ],
     "m_factors": {
-      "acute": 1,
       "chronic": 1
     },
     "scl_limits": []

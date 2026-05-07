@@ -1,10 +1,10 @@
 {
   "cas": "86479-06-3",
-  "name": "hexaflumuron (ISO); 1-(3,5-dichloro-4-(1,1,2,2- tetrafluoroethoxy)phenyl)-3- (2,6-difluorobenzoyl)urea",
+  "name": "hexaflumuron (ISO);\n1-(3,5-dichloro-4-(1,1,2,2-tetrafluoroethoxy)phenyl)-3-(2,6-difluorobenzoyl)urea",
   "name_tr": "hekzaflumuron (ISO); 1-(3,5-dikloro-4-(1,1,2,2- tetrafloroetoksi)fenil)-3-(2,6- diflorobenzoil)üre",
   "ec_no": "401-400-1",
   "index_no": "616-221-00-6",
-  "atp": "",
+  "atp": "ATP10",
   "notes": [],
   "classification": {
     "hazards": [
@@ -19,7 +19,7 @@
     ],
     "m_factors": {
       "acute": 1000,
-      "chronic": 10000
+      "chronic": 1000
     },
     "scl_limits": []
   },

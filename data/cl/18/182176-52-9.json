@@ -1,10 +1,10 @@
 {
   "cas": "182176-52-9",
-  "name": "reaction mass of: 3,3,4,4,5,5,6,6,7,7,8,8,8- tridecafluoro-1-octanesulfonic acid; ammonium 3,3,4,4,5,5,6,6,7,7,8,8,8- tridecafluoro-1-octanesulfonate",
+  "name": "reaction mass of: 3,3,4,4,5,5,6,6,7,7,8,8,8-tridecafluoro-1-octanesulfonic acid; ammonium 3,3,4,4,5,5,6,6,7,7,8,8,8-tridecafluoro-1-octanesulfonate",
   "name_tr": "tepkime kütlesi: 3,3,4,4,5,5,6,6,7,7,8,8,8- tridekafloro-1-oktansülfonik asit; amonyum 3,3,4,4,5,5,6,6,7,7,8,8,8- tridekafloro-1-oktansülfonat",
   "ec_no": "432-190-1",
   "index_no": "607-612-00-2",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

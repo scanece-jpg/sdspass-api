@@ -41,7 +41,10 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {},
+    "m_factors": {
+      "acute": 1,
+      "chronic": 1
+    },
     "scl_limits": []
   },
   "labelling": {
@@ -65,7 +68,7 @@
     "suppl_h": []
   },
   "ate": {
-    "inhalation_dust": 0.24,
+    "inhalation_mgl": 0.24,
     "oral": 118.0
   }
 }

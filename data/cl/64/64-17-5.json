@@ -4,7 +4,7 @@
   "name_tr": "etanol; etil alkol",
   "ec_no": "200-578-6",
   "index_no": "603-002-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -14,14 +14,7 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": [
-      {
-        "h_code": "H336",
-        "class": "STOT SE 3",
-        "c_min": 50.0,
-        "c_max": null
-      }
-    ]
+    "scl_limits": []
   },
   "labelling": {
     "signal": "Danger",

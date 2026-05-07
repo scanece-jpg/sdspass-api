@@ -1,23 +1,17 @@
 {
   "cas": "79-21-0",
-  "name": "peracetic acid . . . %",
+  "name": "peracetic acid . . . %",
   "name_tr": "perasetik asit ….%",
   "ec_no": "201-186-8",
   "index_no": "607-094-00-8",
   "atp": "ATP22",
   "notes": [
-    "B",
-    "D",
-    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
+    "B D T"
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Flam. Liq. 3",
-        "h_code": "H226"
-      },
-      {
-        "class": "Org. Perox. Type D",
+        "class": "Org. Perox. D",
         "h_code": "H242"
       },
       {
@@ -39,16 +33,20 @@
       {
         "class": "Aquatic Acute 1",
         "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
       }
     ],
     "m_factors": {
       "acute": 10,
-      "chronic": 100
+      "chronic": 10
     },
     "scl_limits": [
       {
         "h_code": "H335",
-        "class": "STOT SE 3",
+        "class": "",
         "c_min": 1.0,
         "c_max": null
       }
@@ -58,23 +56,25 @@
     "signal": "Danger",
     "pictograms": [
       "GHS02",
+      "GHS06",
       "GHS05",
-      "GHS07",
       "GHS09"
     ],
     "h_codes": [
-      "H226",
       "H242",
       "H330",
       "H310",
       "H301",
       "H314",
-      "H400"
+      "H400",
+      "H410"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH071"
+    ]
   },
   "ate": {
-    "inhalation_dust": 0.2,
+    "inhalation_mgl": 0.2,
     "dermal": 60.0,
     "oral": 80.0
   }

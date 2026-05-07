@@ -1,10 +1,10 @@
 {
   "cas": "105488-33-3",
-  "name": "3-(3-(4-(2,4-bis(1,1- dimethylpropyl)phenoxy)butyla minocarbonyl-4-hydroxy-1- naphthalenyl)thio)propanoic acid",
+  "name": "3-(3-(4-(2,4-bis(1,1-dimethylpropyl)phenoxy)butylaminocarbonyl-4-hydroxy-1-naphthalenyl)thio)propanoic acid",
   "name_tr": "3-(3-(4-(2,4-bis(1,1- dimetilpropil)fenoksi)bütilamino karbonil-4-hidroksi-1- naftalinil)tiyo)propanoik asit",
   "ec_no": "410-370-9",
   "index_no": "607-289-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

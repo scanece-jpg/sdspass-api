@@ -4,7 +4,7 @@
   "name_tr": "oktadesilamin",
   "ec_no": "204-695-3",
   "index_no": "612-282-00-8",
-  "atp": "",
+  "atp": "ATP5",
   "notes": [],
   "classification": {
     "hazards": [
@@ -14,23 +14,23 @@
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373"
+        "h_code": "H373(gastro-intestinal_tract,_liver,_immune_system)"
       },
       {
         "class": "Skin Irrit. 2",
-        "h_code": "(mide-"
+        "h_code": "H315"
       },
       {
         "class": "Eye Dam. 1",
-        "h_code": "bağırsak"
+        "h_code": "H318"
       },
       {
         "class": "Aquatic Acute 1",
-        "h_code": "yolu,karac"
+        "h_code": "H400"
       },
       {
         "class": "Aquatic Chronic 1",
-        "h_code": "iğer,bağışı"
+        "h_code": "H410"
       }
     ],
     "m_factors": {
@@ -48,11 +48,11 @@
     ],
     "h_codes": [
       "H304",
-      "H373",
-      "(mide-",
-      "bağırsak",
-      "yolu,karac",
-      "iğer,bağışı"
+      "H373(gastro-intestinal_tract,_liver,_immune_system)",
+      "H315",
+      "H318",
+      "H400",
+      "H410"
     ],
     "suppl_h": []
   }

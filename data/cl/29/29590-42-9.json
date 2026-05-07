@@ -4,14 +4,10 @@
   "name_tr": "izooktilakrilat",
   "ec_no": "249-707-8",
   "index_no": "607-244-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
-      {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
       {
         "class": "STOT SE 3",
         "h_code": "H335"
@@ -19,6 +15,10 @@
       {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Aquatic Acute 1",
@@ -33,7 +33,7 @@
     "scl_limits": [
       {
         "h_code": "H335",
-        "class": "STOT SE 3",
+        "class": "",
         "c_min": 10.0,
         "c_max": null
       }
@@ -46,9 +46,9 @@
       "GHS09"
     ],
     "h_codes": [
-      "H319",
       "H335",
       "H315",
+      "H319",
       "H400",
       "H410"
     ],

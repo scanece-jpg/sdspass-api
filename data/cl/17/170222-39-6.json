@@ -1,10 +1,10 @@
 {
   "cas": "170222-39-6",
-  "name": "2-phthalimidoethyl N-[4-(2- cyano-4-nitrophenylazo)phenyl]- N-methyl-β-alaninate",
+  "name": "2-phthalimidoethyl N-[4-(2-cyano-4-nitrophenylazo)phenyl]-N-methyl-β-alaninate",
   "name_tr": "2-ftalimidoetil N-[4-(2-siyano-4- nitrofenilazo)fenil]-N-metil-β- alaninat",
   "ec_no": "426-400-9",
   "index_no": "613-257-00-4",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

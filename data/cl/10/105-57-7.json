@@ -4,7 +4,7 @@
   "name_tr": "1,1-dietoksietan; asetal",
   "ec_no": "203-310-6",
   "index_no": "605-015-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,12 +13,12 @@
         "h_code": "H225"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       }
     ],
     "m_factors": {},
@@ -32,8 +32,8 @@
     ],
     "h_codes": [
       "H225",
-      "H319",
-      "H315"
+      "H315",
+      "H319"
     ],
     "suppl_h": []
   }

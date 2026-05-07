@@ -1,10 +1,10 @@
 {
   "cas": "105-83-9",
-  "name": "N,N-bis(3- aminopropyl)methylamine",
+  "name": "N,N-bis(3-aminopropyl)methylamine",
   "name_tr": "N,N-bis(3- aminopropil)metilamin",
   "ec_no": "203-336-8",
   "index_no": "612-102-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

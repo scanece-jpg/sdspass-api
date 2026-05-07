@@ -1,10 +1,10 @@
 {
   "cas": "2540-82-1",
-  "name": "formothion (ISO); N-formyl-N- methylcarbamoylmethyl O,O- dimethyl phosphorodithioate",
+  "name": "formothion (ISO); N-formyl-N-methylcarbamoylmethyl O,O-dimethyl phosphorodithioate",
   "name_tr": "formotiyon (ISO); N-formil-N- metilkarbamoilmetil-O,O- dimetil fosforoditiyoat",
   "ec_no": "219-818-6",
   "index_no": "015-057-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

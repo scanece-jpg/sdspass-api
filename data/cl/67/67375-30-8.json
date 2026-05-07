@@ -1,10 +1,10 @@
 {
   "cas": "67375-30-8",
-  "name": "α-cypermethrin (ISO); racemate comprising (R)-α- cyano-3-phenoxybenzyl (1S,3S)- 3-(2,2-dichlorovinyl)-2,2- dimethylcyclopropanecarboxylat e; (S)-α-cyano-3-phenoxybenzyl (1R,3R)-3-(2,2-dichlorovinyl)- 2,2- dimethylcyclopropanecarboxylat e",
+  "name": "α-cypermethrin (ISO); racemate comprising (R)-α-cyano-3-phenoxybenzyl (1S,3S)-3-(2,2-dichlorovinyl)-2,2-dimethylcyclopropanecarboxylate; (S)-α-cyano-3-phenoxybenzyl (1R,3R)-3-(2,2-dichlorovinyl)-2,2-dimethylcyclopropanecarboxylate",
   "name_tr": "α-sipermetrine (ISO); (R)-α-siyano-3-fenoksibenzil (1S, 3S)-3-(2,2-diklorovinil)- 2,2- dimetilsiklopropankarboksilat içeren rasemik karışımı; (S)-α-siyano-3-fenoksibenzil (1R, 3R)-3-(2,2-diklorovinil)- 2,2- dimetilsiklopropankarboksilat",
   "ec_no": "257-842-9",
   "index_no": "607-422-00-X",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,12 +13,12 @@
         "h_code": "H301"
       },
       {
-        "class": "STOT RE 2",
-        "h_code": "H373"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H335"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Aquatic Acute 1",
@@ -44,8 +44,8 @@
     ],
     "h_codes": [
       "H301",
-      "H373",
       "H335",
+      "H373",
       "H400",
       "H410"
     ],

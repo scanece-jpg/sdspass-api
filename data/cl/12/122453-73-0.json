@@ -1,10 +1,10 @@
 {
   "cas": "122453-73-0",
-  "name": "chlorfenapyr (ISO); 4-bromo-2-(4-chlorophenyl)-1- ethoxymethyl-5- trifluoromethylpyrrole-3- carbonitrile",
+  "name": "chlorfenapyr (ISO); 4-bromo-2-(4-chlorophenyl)-1-ethoxymethyl-5-trifluoromethylpyrrole-3-carbonitrile",
   "name_tr": "klorfenapir(ISO); 4-bromo-2-(4-klorofenil)-1- etoksimetil-5-triflormetilpirrol- 3-karbonitril",
-  "ec_no": "",
+  "ec_no": "-",
   "index_no": "608-034-00-3",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

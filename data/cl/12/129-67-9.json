@@ -1,10 +1,10 @@
 {
   "cas": "129-67-9",
-  "name": "endothal-sodium (ISO); disodium 7- oxabicyclo(2,2,1)heptane-2,3- dicarboxylate",
+  "name": "endothal-sodium (ISO); disodium 7-oxabicyclo(2,2,1)heptane-2,3-dicarboxylate",
   "name_tr": "endotalsodyum (ISO); disodyum-7- oksabisiklo(2,2,1)heptan-2,3- dikarboksilat",
   "ec_no": "204-959-8",
   "index_no": "607-055-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -17,16 +17,16 @@
         "h_code": "H312"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H335"
       },
       {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       }
     ],
     "m_factors": {},
@@ -40,9 +40,9 @@
     "h_codes": [
       "H301",
       "H312",
-      "H319",
       "H335",
-      "H315"
+      "H315",
+      "H319"
     ],
     "suppl_h": []
   }

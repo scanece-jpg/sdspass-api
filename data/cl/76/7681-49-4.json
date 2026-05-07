@@ -4,7 +4,7 @@
   "name_tr": "Sodyum florür",
   "ec_no": "231-667-8",
   "index_no": "009-004-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,12 +13,12 @@
         "h_code": "H301"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       }
     ],
     "m_factors": {},
@@ -31,8 +31,8 @@
     ],
     "h_codes": [
       "H301",
-      "H319",
-      "H315"
+      "H315",
+      "H319"
     ],
     "suppl_h": [
       "EUH032"

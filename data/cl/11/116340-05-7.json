@@ -1,10 +1,10 @@
 {
   "cas": "116340-05-7",
-  "name": "tetrakis(tetramethylammonium) 6-amino-4-hydroxy-3-(7- sulfonato-4-(4- sulfonatophenylazo)-1- naphthylazo)naphthalene-2,7- disulfonate",
+  "name": "tetrakis(tetramethylammonium) 6-amino-4-hydroxy-3-(7-sulfonato-4-(4-sulfonatophenylazo)-1-naphthylazo)naphthalene-2,7-disulfonate",
   "name_tr": "tetrakis(tetrametilamonyum)-6- amino-4-hidroksi-3-(7- sülfonato-4-(4- sülfonatofenilazo)-1- naftilazo)naftalin-2,7-disülfonat",
   "ec_no": "405-170-3",
   "index_no": "611-020-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

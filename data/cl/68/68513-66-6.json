@@ -1,14 +1,12 @@
 {
   "cas": "68513-66-6",
-  "name": "Residues (petroleum), alkylation splitter, C4-rich; Petroleum gas; [A complex residuum from the distillation of streams various refinery operations. It consists of hydrocarbons having carbon numbers in the range of C4 through C5, predominantly butane and boiling in the range of approximately -11.7°C to 27.8°C (11°F to 82°F).]",
+  "name": "Residues (petroleum), alkylation splitter, C4-rich; Petroleum gas; [A complex residuum from the distillation of streams various refinery operations. It consists of hydrocarbons having carbon numbers in the range of C4 through C5, predominantly butane and boiling in the range of approximately – 11.7 °C to 27.8 °C (11 °F to 82 °F).]",
   "name_tr": "Artıklar (petrol), Alkilleme bölücü, C4-zengin; Petrol gazı; [Değişik rafineri işlemlerinden oluşan buharların damıtılmasından kompleks bir çökelti. Büyük çoğunlukla, C4 ila C5 aralığında karbon sayısına sahip, büyük çoğunlukla butan, ve yaklaşık -11,7 oC ila 27,8 oC (11 oF ila 82 oF) aralığında kaynayan, hidrokarbonlardan oluşur.]",
   "ec_no": "271-010-2",
   "index_no": "649-087-00-2",
   "atp": "ATP1",
   "notes": [
-    "K",
-    "U",
-    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
+    "K U"
   ],
   "classification": {
     "hazards": [

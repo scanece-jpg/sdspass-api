@@ -1,10 +1,10 @@
 {
   "cas": "28772-56-7",
-  "name": "bromadiolone (ISO); 3-[3-(4’-bromobiphenyl-4-yl)-3- hydroxy-1-phenylpropyl]-4- hydroxy-2H-chromen-2-one",
+  "name": "bromadiolone (ISO); 3-[3-(4′-bromobiphenyl-4-yl)-3-hydroxy-1-phenylpropyl]-4-hydroxy-2H-chromen-2-one",
   "name_tr": "bromadiolon (ISO); 3-[3-(4’-bromobifenil-4-il)-3- hidroksi-1-fenilpropil]-4- hidroksi-2H-kromen-2-on",
   "ec_no": "249-205-9",
   "index_no": "607-716-00-8",
-  "atp": "",
+  "atp": "ATP9",
   "notes": [],
   "classification": {
     "hazards": [
@@ -26,7 +26,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372(kan)"
+        "h_code": "H372(blood)"
       },
       {
         "class": "Aquatic Acute 1",
@@ -44,9 +44,21 @@
     "scl_limits": [
       {
         "h_code": "H360D",
-        "class": "Repr. 1B",
+        "class": "",
         "c_min": 0.003,
         "c_max": null
+      },
+      {
+        "h_code": "H372",
+        "class": "",
+        "c_min": 0.005,
+        "c_max": null
+      },
+      {
+        "h_code": "H373",
+        "class": "",
+        "c_min": 0.0005,
+        "c_max": 0.005
       }
     ]
   },
@@ -62,7 +74,7 @@
       "H330",
       "H310",
       "H300",
-      "H372(kan)",
+      "H372(blood)",
       "H400",
       "H410"
     ],

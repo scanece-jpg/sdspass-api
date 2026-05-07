@@ -1,10 +1,10 @@
 {
   "cas": "80693-00-1",
-  "name": "3,9-bis(2,6-di-tert-butyl-4- methylphenoxy)-2,4,8,10- tetraoxa-3,9- diphosphaspiro[5.5]undecane",
+  "name": "3,9-bis(2,6-di-tert-butyl-4-methylphenoxy)-2,4,8,10-tetraoxa-3,9-diphosphaspiro[5.5]undecane",
   "name_tr": "3,9-bis(2,6-di-ter-bütil-4- metilfenoksi)-2,4,8,10-tetraoksa- 3,9-difosfaspiro[5.5]undekan",
   "ec_no": "410-290-4",
   "index_no": "015-166-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

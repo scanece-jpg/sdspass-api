@@ -1,10 +1,10 @@
 {
   "cas": "91-94-1",
-  "name": "3,3'-dichlorobenzidine; 3,3'-dichlorobiphenyl-4,4'- ylenediamine",
+  "name": "3,3'-dichlorobenzidine; 3,3'-dichlorobiphenyl-4,4'-ylenediamine",
   "name_tr": "3,3'-diklorobenzidin; 3,3'-diklorobifenil-4,4'- ilendiamin",
   "ec_no": "202-109-0",
   "index_no": "612-068-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

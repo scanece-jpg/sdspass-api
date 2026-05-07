@@ -1,10 +1,10 @@
 {
   "cas": "37893-02-0",
-  "name": "flubenzimine (ISO); N-[3-phenyl-4,5- bis[(trifluoromethyl)imino]thiaz olidin-2-ylidene]aniline",
+  "name": "flubenzimine (ISO); N-[3-phenyl-4,5-bis[(trifluoromethyl)imino]thiazolidin-2-ylidene]aniline",
   "name_tr": "flubenzimin (ISO); N-[3-fenil- 4,5- bis[(triflorometil)imino]tiazolidi n-2-ilidin]anilin",
   "ec_no": "253-703-1",
   "index_no": "613-118-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

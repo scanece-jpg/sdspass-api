@@ -4,7 +4,7 @@
   "name_tr": "Kadmiyum klorür",
   "ec_no": "233-296-7",
   "index_no": "048-008-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -45,19 +45,19 @@
     "scl_limits": [
       {
         "h_code": "H350",
-        "class": "Carc. 1B",
+        "class": "",
         "c_min": 0.01,
         "c_max": null
       },
       {
         "h_code": "H372",
-        "class": "oral BHOT Tekrar.Mrz. 1",
+        "class": "",
         "c_min": 7.0,
         "c_max": null
       },
       {
         "h_code": "H373",
-        "class": "STOT RE 2",
+        "class": "",
         "c_min": 0.1,
         "c_max": 7.0
       }

@@ -1,10 +1,10 @@
 {
   "cas": "36669-85-9",
-  "name": "calcium P,P'-(1- hydroxyethylene)bis(hydrogen phosphonate)dihydrate",
+  "name": "calcium P,P'-(1-hydroxyethylene)bis(hydrogen phosphonate)dihydrate",
   "name_tr": "Kalsiyum P,P'-(1- hidroksietilen)bis(hidrojen fosfonat)dihidrat",
   "ec_no": "400-480-5",
   "index_no": "015-164-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -4,7 +4,7 @@
   "name_tr": "tetrasodyum etilen daimin tetraasetat",
   "ec_no": "200-573-9",
   "index_no": "607-428-00-2",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -18,26 +18,7 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": [
-      {
-        "h_code": "H302",
-        "class": "Acute Tox. 4 (Oral)",
-        "c_min": 5.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H318",
-        "class": "Eye Dam. 1",
-        "c_min": 1.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H319",
-        "class": "Eye Irrit. 2",
-        "c_min": 0.5,
-        "c_max": 1.0
-      }
-    ]
+    "scl_limits": []
   },
   "labelling": {
     "signal": "Danger",

@@ -1,10 +1,10 @@
 {
   "cas": "112-49-2",
-  "name": "1,2-bis(2- methoxyethoxy)ethane; TEGDME; triethylene glycol dimethyl ether; triglyme",
+  "name": "1,2-bis(2-methoxyethoxy)ethane; TEGDME; triethylene glycol dimethyl ether; triglyme",
   "name_tr": "1,2-bis(2-metoksietoksi)etan; TEGDME; trietilenglikoldimetileter; triglim",
   "ec_no": "203-977-3",
   "index_no": "603-176-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

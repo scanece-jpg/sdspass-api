@@ -1,10 +1,10 @@
 {
   "cas": "23135-22-0",
-  "name": "oxamyl (ISO); N',N'- dimethylcarbamoyl(methylthio) methylenamine N- methylcarbamate",
+  "name": "oxamyl (ISO); N',N'-dimethylcarbamoyl(methylthio)methylenamine N-methylcarbamate",
   "name_tr": "oksamil (ISO); N',N'- dimetilkarbamoil(metiltiyo)metil enamin N-metilkarbamat;",
   "ec_no": "245-445-3",
   "index_no": "006-059-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

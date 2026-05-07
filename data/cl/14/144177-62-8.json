@@ -1,10 +1,10 @@
 {
   "cas": "144177-62-8",
-  "name": "(R,S)-2-amino-3,3- dimethylbutane amide",
+  "name": "(R,S)-2-amino-3,3-dimethylbutane amide",
   "name_tr": "(R,S)-2-amino-3,3-dimetilbütan amid",
   "ec_no": "447-860-7",
   "index_no": "612-279-00-1",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -17,12 +17,12 @@
         "h_code": "H373"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Skin Sens. 1",
@@ -41,8 +41,8 @@
     "h_codes": [
       "H361f",
       "H373",
-      "H319",
       "H315",
+      "H319",
       "H317"
     ],
     "suppl_h": []

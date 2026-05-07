@@ -1,13 +1,11 @@
 {
   "cas": "101-90-6",
-  "name": "resorcinol diglycidyl ether; 1,3-bis(2,3- epoxypropoxy)benzene",
+  "name": "m-bis(2,3-epoxypropoxy)benzene; resorcinol diglycidyl ether",
   "name_tr": "resorsinol diglisidil eter; 1,3- bis(2,3-epoksipropoksi)benzen",
   "ec_no": "202-987-5",
   "index_no": "603-065-00-9",
   "atp": "ATP15",
-  "notes": [
-    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
-  ],
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -27,12 +25,12 @@
         "h_code": "H302"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Skin Sens. 1",
@@ -47,18 +45,18 @@
     "scl_limits": []
   },
   "labelling": {
-    "signal": "Warning",
+    "signal": "Danger",
     "pictograms": [
       "GHS08",
-      "GHS07"
+      "GHS06"
     ],
     "h_codes": [
       "H350",
       "H341",
       "H311",
       "H302",
-      "H319",
       "H315",
+      "H319",
       "H317",
       "H412"
     ],

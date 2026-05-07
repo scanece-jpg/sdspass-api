@@ -4,7 +4,7 @@
   "name_tr": "simklosen; trikloroizosiyanürik asit; trikloro-1,3,5-triazintrion",
   "ec_no": "201-782-8",
   "index_no": "613-031-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -17,12 +17,12 @@
         "h_code": "H302"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H335"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Aquatic Acute 1",
@@ -46,8 +46,8 @@
     "h_codes": [
       "H272",
       "H302",
-      "H319",
       "H335",
+      "H319",
       "H400",
       "H410"
     ],

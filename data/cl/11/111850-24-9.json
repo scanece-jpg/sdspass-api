@@ -1,10 +1,10 @@
 {
   "cas": "111850-24-9",
-  "name": "4-(4-nitrophenylazo)-2,6-di-sec- butyl-phenol",
+  "name": "4-(4-nitrophenylazo)-2,6-di-sec-butyl-phenol",
   "name_tr": "4-(4-nitrofenilazo)-2,6-di-sek- bütil-fenol",
   "ec_no": "410-610-2",
   "index_no": "611-065-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,12 +13,12 @@
         "h_code": "H373"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Skin Sens. 1",
@@ -45,8 +45,8 @@
     ],
     "h_codes": [
       "H373",
-      "H319",
       "H315",
+      "H319",
       "H317",
       "H400",
       "H410"

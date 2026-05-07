@@ -1,13 +1,17 @@
 {
   "cas": "55512-33-9",
-  "name": "pyridate (ISO); O-(6-chloro-3-phenylpyridazin- 4-yl) S-octyl thiocarbonate",
+  "name": "pyridate (ISO); O-(6-chloro-3-phenylpyridazin-4-yl) S-octyl thiocarbonate",
   "name_tr": "piridat (ISO); O-(6-kloro-3-fenilpiridazin-4-il) S-oktiltiyokarbonat",
   "ec_no": "259-686-7",
   "index_no": "607-232-00-7",
-  "atp": "",
+  "atp": "ATP14",
   "notes": [],
   "classification": {
     "hazards": [
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
       {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
@@ -27,7 +31,7 @@
     ],
     "m_factors": {
       "acute": 1,
-      "chronic": 10
+      "chronic": 1
     },
     "scl_limits": []
   },
@@ -38,6 +42,7 @@
       "GHS09"
     ],
     "h_codes": [
+      "H302",
       "H315",
       "H317",
       "H400",

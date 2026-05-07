@@ -28,7 +28,7 @@
       {
         "h_code": "H373",
         "class": "",
-        "c_min": 5.0,
+        "c_min": 0.005,
         "c_max": null
       }
     ]

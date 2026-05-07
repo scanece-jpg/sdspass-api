@@ -1,10 +1,10 @@
 {
   "cas": "136426-54-5",
-  "name": "fluquinconazole (ISO); 3-(2,4-dichlorophenyl)-6-fluoro- 2-(1H-1,2,4-triazol-1- yl)quinazolin-4-(3H)-one",
+  "name": "fluquinconazole (ISO); 3-(2,4-dichlorophenyl)-6-fluoro-2-(1H-1,2,4-triazol-1-yl)quinazolin-4-(3H)-one",
   "name_tr": "flukinkonazol (ISO); 3-(2,4- diklorofenil)-6-floro-2-(1H- 1,2,4-triyazol-1-il)kinazolin-4- (3H)-on",
   "ec_no": "411-960-9",
   "index_no": "613-173-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -17,12 +17,12 @@
         "h_code": "H301"
       },
       {
-        "class": "STOT RE 1",
-        "h_code": "H372"
-      },
-      {
         "class": "Acute Tox. 4",
         "h_code": "H312"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
       },
       {
         "class": "Skin Irrit. 2",
@@ -50,8 +50,8 @@
     "h_codes": [
       "H331",
       "H301",
-      "H372",
       "H312",
+      "H372",
       "H315",
       "H400",
       "H410"

@@ -1,10 +1,10 @@
 {
   "cas": "42509-80-8",
-  "name": "isazofos (ISO); O-(5-chloro-1-isopropyl-1,2,4- triazol-3-yl) O,O-diethyl phosphorothioate",
+  "name": "isazofos (ISO); O-(5-chloro-1-isopropyl-1,2,4-triazol-3-yl) O,O-diethyl phosphorothioate",
   "name_tr": "isazofos (ISO); O-(5-kloro-1- izopropil-1,2,4-triazol-3-il)-O,O- dietil fosforotiyoat",
   "ec_no": "255-863-8",
   "index_no": "015-153-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

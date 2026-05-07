@@ -4,7 +4,7 @@
   "name_tr": "α-klorotoluen; benzil klorür",
   "ec_no": "202-853-6",
   "index_no": "602-037-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -21,12 +21,12 @@
         "h_code": "H302"
       },
       {
-        "class": "STOT RE 2",
-        "h_code": "H373"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H335"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Skin Irrit. 2",
@@ -51,8 +51,8 @@
       "H350",
       "H331",
       "H302",
-      "H373",
       "H335",
+      "H373",
       "H315",
       "H318"
     ],

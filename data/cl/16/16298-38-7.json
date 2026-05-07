@@ -1,10 +1,10 @@
 {
   "cas": "16298-38-7",
-  "name": "4,4'-methylenebis(2-isopropyl-6- methylaniline)",
+  "name": "4,4'-methylenebis(2-isopropyl-6-methylaniline)",
   "name_tr": "4,4'-metilenbis(2-izopropil-6- metilanilin)",
   "ec_no": "415-150-6",
   "index_no": "612-190-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

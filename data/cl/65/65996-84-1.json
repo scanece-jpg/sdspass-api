@@ -4,10 +4,9 @@
   "name_tr": "Zift bazları, kömür, ham; ham zift bazları [Serbest baz elde etmek için, kömür zifti baz yağı özütünün sulu sulu sodyum hidroksit vb. bir bazik çözelti ile nötrleştirilmesinden elde edilen tepkime ürünü. Büyük ölçüde akridin, fenantridin, piridin, kinolin ve bunların türevlerinden oluşur.]",
   "ec_no": "266-018-8",
   "index_no": "648-141-00-2",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
-    "J",
-    "M"
+    "J M"
   ],
   "classification": {
     "hazards": [

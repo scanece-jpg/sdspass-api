@@ -4,7 +4,7 @@
   "name_tr": "Nitrosodipropilamin",
   "ec_no": "210-698-0",
   "index_no": "612-098-00-8",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -25,7 +25,7 @@
     "scl_limits": [
       {
         "h_code": "H350",
-        "class": "Carc. 1B",
+        "class": "",
         "c_min": 0.001,
         "c_max": null
       }

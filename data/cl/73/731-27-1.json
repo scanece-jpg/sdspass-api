@@ -1,17 +1,13 @@
 {
   "cas": "731-27-1",
-  "name": "tolylfluanid (ISO); dichloro-N- [(dimethylamino)sulphonyl]fluor o-N-(p- tolyl)methanesulphenamide; [containing < 0.1% (w/w) of particles with an aerodynamic diameter of below 50 μm]",
+  "name": "tolylfluanid (ISO); dichloro-N-[(dimethylamino)sulphonyl]fluoro-N-(p-tolyl)methanesulphenamide; [containing < 0.1% (w/w) of particles with an aerodynamic diameter of below 50 μm]",
   "name_tr": "tolilfluanid (ISO); dikloro-N- [(dimetilamino)sülfonil]floro-N- (p-tolil)metansülfenamid; [(a/a) < % 0,1 aerodinamik çapı 50 μm’den düşük olan partiküller içeren]",
   "ec_no": "211-986-9",
   "index_no": "613-116-01-4",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
-      {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
       {
         "class": "STOT SE 3",
         "h_code": "H335"
@@ -19,6 +15,10 @@
       {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Skin Sens. 1",
@@ -30,8 +30,7 @@
       }
     ],
     "m_factors": {
-      "acute": 10,
-      "chronic": 10
+      "acute": 10
     },
     "scl_limits": []
   },
@@ -42,9 +41,9 @@
       "GHS09"
     ],
     "h_codes": [
-      "H319",
       "H335",
       "H315",
+      "H319",
       "H317",
       "H400"
     ],

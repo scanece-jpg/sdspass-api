@@ -1,10 +1,10 @@
 {
   "cas": "124495-18-7",
-  "name": "quinoxyfen (ISO); 5,7-dichloro-4-(4- fluorophenoxy)quinoline",
+  "name": "quinoxyfen (ISO); 5,7-dichloro-4-(4-fluorophenoxy)quinoline",
   "name_tr": "kinoksifen (ISO); 5,7-dikloro-4-(4- florofenoksi)kinolin",
   "ec_no": "",
   "index_no": "613-138-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

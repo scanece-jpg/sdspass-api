@@ -1,10 +1,10 @@
 {
   "cas": "98769-75-6",
-  "name": "reaction mass of: (2R,3R)-3-(2- ethoxyphenoxy)-2-hydroxy-3- phenylpropylammonium methanesulfonate; (2S,3S)-3-(2-ethoxyphenoxy)-2- hydroxy-3- phenylpropylammonium methanesulfonate",
+  "name": "reaction mass of: (2R,3R)-3-(2-ethoxyphenoxy)-2-hydroxy-3-phenylpropylammonium methanesulfonate; (2S,3S)-3-(2-ethoxyphenoxy)-2-hydroxy-3-phenylpropylammonium methanesulfonate",
   "name_tr": "tepkime kütlesi: (2R,3R)-3-(2- etoksifenoksi)-2-hidroksi-3- fenilpropilamonyumetansülfonat ; (2S,3S)-3-(2-etoksifenoksi)-2- hidroksi-3- fenilpropilamonyummetansülfon at",
   "ec_no": "425-530-3",
   "index_no": "607-562-00-1",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

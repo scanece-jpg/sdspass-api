@@ -1,10 +1,10 @@
 {
   "cas": "79617-97-3",
-  "name": "(1S-cis)-4-(3,4-dichlorophenyl)- 1,2,3,4-tetrahydro-N-methyl-1- naphthalenamine 2-hydroxy-2- phenylacetate",
+  "name": "(1S-cis)-4-(3,4-dichlorophenyl)-1,2,3,4-tetrahydro-N-methyl-1-naphthalenamine 2-hydroxy-2-phenylacetate",
   "name_tr": "(1S-cis)-4-(3,4-diklorofenil)- 1,2,3,4-tetrahidro-N-metil-1- naftalenamin 2-hidroksi-2- fenilasetat",
   "ec_no": "420-560-3",
   "index_no": "612-243-00-5",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

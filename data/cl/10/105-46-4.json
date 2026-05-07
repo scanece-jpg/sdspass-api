@@ -1,10 +1,10 @@
 {
   "cas": "105-46-4",
-  "name": "sec-butyl acetate; [1] isobutyl acetate; [2] tert-butyl acetate [3]",
+  "name": "sec-butyl acetate [1]\nisobutyl acetate [2]\ntert-butyl acetate  [3]",
   "name_tr": "sec-bütil asetat [1]; izobütil asetat [2]; ter-bütil asetat [3]",
-  "ec_no": "203-300-1",
+  "ec_no": "203-300-1 [1]\n203-745-1 [2]\n208-760-7 [3]",
   "index_no": "607-026-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "C"
   ],

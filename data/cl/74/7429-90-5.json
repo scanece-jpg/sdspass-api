@@ -4,19 +4,19 @@
   "name_tr": "aluminyum tozu (kararlı hale getirilmiş)",
   "ec_no": "231-072-3",
   "index_no": "013-002-00-1",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "T"
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Water-react. 2",
-        "h_code": "H261"
-      },
-      {
         "class": "Flam. Sol. 1",
         "h_code": "H228"
+      },
+      {
+        "class": "Water-react. 2",
+        "h_code": "H261"
       }
     ],
     "m_factors": {},
@@ -28,8 +28,8 @@
       "GHS02"
     ],
     "h_codes": [
-      "H261",
-      "H228"
+      "H228",
+      "H261"
     ],
     "suppl_h": []
   }

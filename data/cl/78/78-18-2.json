@@ -1,18 +1,17 @@
 {
   "cas": "78-18-2",
-  "name": "1-hydroperoxycyclohexyl 1- hydroxycyclohexyl peroxide; [1] 1,1'-dioxybiscyclohexan-1-ol; [2] cyclohexylidene hydroperoxide; [3] cyclohexanone, peroxide; [4] [≤ 91 % solution]",
+  "name": "1-hydroperoxycyclohexyl 1-hydroxycyclohexyl peroxide;\n[≤ 91 % solution] [1]\n1,1'-dioxybiscyclohexan-1-ol;\n[≤ 91 % solution] [2]\ncyclohexylidene hydroperoxide;\n[≤ 91 % solution] [3]\ncyclohexanone, peroxide;\n[≤ 91 % solution] [4]",
   "name_tr": "1-hidroperoksisikloheksil 1- hidroksisikloheksil peroksit; [1] 1,1'-dioksibisiklohekzan-1-ol; [2] sikloheksiliden hidroperoksit; [3] siklohekzanon, peroksit [4] [≤ %91çözelti]",
-  "ec_no": "201-091-1",
+  "ec_no": "201-091-1 [1]\n219-306-2 [2]\n220-279-4 [3]\n235-527-7 [4]",
   "index_no": "617-010-01-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
-    "C",
-    "T"
+    "C T"
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Org. Perox. Type C",
+        "class": "Org. Perox. C",
         "h_code": "H242"
       },
       {
@@ -28,7 +27,7 @@
     "scl_limits": [
       {
         "h_code": "H335",
-        "class": "STOT SE 3",
+        "class": "",
         "c_min": 5.0,
         "c_max": null
       }

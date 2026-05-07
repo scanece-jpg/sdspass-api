@@ -1,10 +1,10 @@
 {
   "cas": "40722-80-3",
-  "name": "(2-chloroethyl)(3- hydroxypropyl)ammonium chloride",
+  "name": "(2-chloroethyl)(3-hydroxypropyl)ammonium chloride",
   "name_tr": "(2-kloroetil)(3- hidroksipropil)amonyum klorür",
   "ec_no": "429-740-6",
   "index_no": "612-246-00-1",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

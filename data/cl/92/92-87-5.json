@@ -4,7 +4,7 @@
   "name_tr": "benzidin; 1,1'-bifenil-4-4’diamin; 4,4'- diaminobifenil-4-4’-ilendiamin",
   "ec_no": "202-199-1",
   "index_no": "612-042-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -29,7 +29,7 @@
     "scl_limits": [
       {
         "h_code": "H350",
-        "class": "Carc. 1A",
+        "class": "",
         "c_min": 0.01,
         "c_max": null
       }

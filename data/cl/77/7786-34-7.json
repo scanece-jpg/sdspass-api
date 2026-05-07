@@ -1,10 +1,10 @@
 {
   "cas": "7786-34-7",
-  "name": "mevinphos (ISO); 2-methoxycarbonyl-1- methylvinyl dimethyl phosphate",
+  "name": "mevinphos (ISO); 2-methoxycarbonyl-1-methylvinyl dimethyl phosphate",
   "name_tr": "mevinfos (ISO); 2-metoksikarbonil-1-metilvinil dimetil fosfat",
   "ec_no": "232-095-1",
   "index_no": "015-020-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

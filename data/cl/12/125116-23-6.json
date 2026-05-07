@@ -1,10 +1,10 @@
 {
   "cas": "125116-23-6",
-  "name": "metconazole (ISO); (1RS,5RS;1RS,5SR)-5-(4- chlorobenzyl)-2,2-dimethyl-1- (1H-1,2,4-triazol-1- ylmethyl)cyclopentanol",
+  "name": "metconazole (ISO); (1RS,5RS;1RS,5SR)-5-(4-chlorobenzyl)-2,2-dimethyl-1-(1H-1,2,4-triazol-1-ylmethyl)cyclopentanol",
   "name_tr": "metkonazole (ISO); (1RS,5RS;1RS,5SR)-5-(4- klorobenzil)-2,2-dimetil-1-(1H- 1,2,4-triazol-1- ilmethyl)siklopentanol",
-  "ec_no": "",
+  "ec_no": "-",
   "index_no": "613-284-00-1",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,13 +1,12 @@
 {
   "cas": "84989-07-1",
-  "name": "Tar acids, 3,5-xylenol fraction; Distillate Phenols; [The fraction of tar acids, rich in 3,5-dimethylphenol, recovered by distillation of low- temperature coal tar acids.]",
+  "name": "Tar acids, 3,5-xylenol fraction; Distillate Phenols; [The fraction of tar acids, rich in 3,5-dimethylphenol, recovered by distillation of low-temperature coal tar acids.]",
   "name_tr": "zift asitler, 3,5-ksilenol fraksiyonu; damıtık fenoller; [Düşük sıcaklık kömür zifti asitlerinin damıtılması ile geri kazanılan ve 3,5- dimetilfenol bakımından zengin zift fraksiyonu.]",
   "ec_no": "284-896-0",
   "index_no": "648-124-00-X",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
-    "J",
-    "M"
+    "J M"
   ],
   "classification": {
     "hazards": [

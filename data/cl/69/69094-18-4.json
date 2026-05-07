@@ -4,7 +4,7 @@
   "name_tr": "2,2-dibromo-2-nitroetanol",
   "ec_no": "412-380-9",
   "index_no": "609-056-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "T"
   ],
@@ -47,7 +47,7 @@
     "scl_limits": [
       {
         "h_code": "H335",
-        "class": "STOT SE 3",
+        "class": "",
         "c_min": 1.0,
         "c_max": null
       }

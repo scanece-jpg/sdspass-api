@@ -4,7 +4,7 @@
   "name_tr": "siklopropan",
   "ec_no": "200-847-8",
   "index_no": "601-016-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "U"
   ],
@@ -13,6 +13,10 @@
       {
         "class": "Flam. Gas 1",
         "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": ""
       }
     ],
     "m_factors": {},

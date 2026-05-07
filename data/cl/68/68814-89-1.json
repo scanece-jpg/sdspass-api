@@ -1,10 +1,10 @@
 {
   "cas": "68814-89-1",
-  "name": "Extracts (petroleum), heavy paraffinic distillates, solvent- deasphalted; Distillate aromatic extract (treated); [A complex combination of hydrocarbons obtained as the extract from a solvent extraction of heavy paraffinic distillate.]",
+  "name": "Extracts (petroleum), heavy paraffinic distillates, solvent-deasphalted; Distillate aromatic extract (treated); [A complex combination of hydrocarbons obtained as the extract from a solvent extraction of heavy paraffinic distillate.]",
   "name_tr": "özütler (petrol), ağır parafinik damıtık, çözücü ile asfaltı uzaklaştırılmış; damıtık aromatik özüt (muamele edilmiş); [Ağır parafinik damıtığın çözücü özütlemesinden özüt olarak elde edilen kompleks bir hidrokarbon bileşimi.]",
   "ec_no": "272-342-0",
   "index_no": "649-533-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "L"
   ],

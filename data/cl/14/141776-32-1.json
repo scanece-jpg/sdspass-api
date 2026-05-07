@@ -1,10 +1,10 @@
 {
   "cas": "141776-32-1",
-  "name": "sulfosulfuron (ISO); 1-(4,6-dimethoxypyrimidin-2- yl)-3-(2- ethylsulfonylimidazo[1,2- a]pyridin-3-yl)sulfonylurea",
+  "name": "sulfosulfuron (ISO); 1-(4,6-dimethoxypyrimidin-2-yl)-3-(2-ethylsulfonylimidazo[1,2-a]pyridin-3-yl)sulfonylurea",
   "name_tr": "sülfosülfüron (ISO); 1-(4,6-dimetoksipirimidin-2-il)- 3-(2-etilsülfonilimidazo[1,2- a]piridin-3-il)sülfonilüre",
   "ec_no": "",
   "index_no": "616-109-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

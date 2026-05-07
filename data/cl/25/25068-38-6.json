@@ -1,20 +1,20 @@
 {
   "cas": "25068-38-6",
-  "name": "reaction product: bisphenol-A- (epichlorhydrin); epoxy resin (number average molecular weight ≤ 700)",
+  "name": "reaction product: bisphenol-A-(epichlorhydrin); epoxy resin (number average molecular weight ≤ 700)",
   "name_tr": "tepkime ürünü: bisfenol-A- (epiklorohidrin); epoksi reçinesi (sayıca ortalama molekül ağırlığı ≤ 700)",
   "ec_no": "500-033-5",
   "index_no": "603-074-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Skin Sens. 1",
@@ -29,13 +29,13 @@
     "scl_limits": [
       {
         "h_code": "H319",
-        "class": "Eye Irrit. 2",
+        "class": "",
         "c_min": 5.0,
         "c_max": null
       },
       {
         "h_code": "H315",
-        "class": "Skin Irrit. 2",
+        "class": "",
         "c_min": 5.0,
         "c_max": null
       }
@@ -48,8 +48,8 @@
       "GHS09"
     ],
     "h_codes": [
-      "H319",
       "H315",
+      "H319",
       "H317",
       "H411"
     ],

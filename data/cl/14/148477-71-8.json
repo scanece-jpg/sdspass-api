@@ -1,10 +1,10 @@
 {
   "cas": "148477-71-8",
-  "name": "spirodiclofen (ISO); 3-(2,4-dichlorophenyl)-2-oxo- 1- oxaspiro[4.5]dec-3-en-4-yl 2,2- dimethylbutyrate",
+  "name": "spirodiclofen (ISO);\n3-(2,4-dichlorophenyl)-2-oxo-1-oxaspiro[4.5]dec-3-en-4-yl 2,2-dimethylbutyrate",
   "name_tr": "spirodiklofen (ISO); 3-(2,4-diklorofenil)-2-okso- 1- oksaspiro[4.5]dek-3-en-4-il 2,2- dimetilbütirat",
   "ec_no": "",
   "index_no": "607-730-00-4",
-  "atp": "",
+  "atp": "ATP13",
   "notes": [],
   "classification": {
     "hazards": [
@@ -30,7 +30,6 @@
       }
     ],
     "m_factors": {
-      "acute": 10,
       "chronic": 10
     },
     "scl_limits": []

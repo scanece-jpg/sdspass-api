@@ -1,10 +1,10 @@
 {
   "cas": "137-30-4",
-  "name": "ziram (ISO); zinc bis dimethyldithiocarbamate",
+  "name": "ziram (ISO); zinc bis dimethyldithiocarbamate",
   "name_tr": "ziram (ISO); bis(dimetilditiyokarbamat) çinko",
   "ec_no": "205-288-3",
   "index_no": "006-012-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -17,12 +17,12 @@
         "h_code": "H302"
       },
       {
-        "class": "STOT RE 2",
-        "h_code": "H373"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H335"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Eye Dam. 1",
@@ -58,8 +58,8 @@
     "h_codes": [
       "H330",
       "H302",
-      "H373",
       "H335",
+      "H373",
       "H318",
       "H317",
       "H400",

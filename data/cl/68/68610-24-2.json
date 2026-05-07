@@ -4,7 +4,7 @@
   "name_tr": "nikel baryum titanyum primrose priderit; C.I. Pigment Sarı 157; C.I.77900",
   "ec_no": "271-853-6",
   "index_no": "028-052-00-X",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -28,8 +28,7 @@
     "signal": "Danger",
     "pictograms": [
       "GHS08",
-      "GHS07",
-      "GHS09"
+      "GHS07"
     ],
     "h_codes": [
       "H350i",

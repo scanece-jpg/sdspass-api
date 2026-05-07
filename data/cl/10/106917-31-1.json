@@ -1,10 +1,10 @@
 {
   "cas": "106917-31-1",
-  "name": "1-acetyl-4-(3-dodecyl-2,5-dioxo- 1-pyrrolidinyl)-2,2,6,6- tetramethylpiperidine",
+  "name": "1-acetyl-4-(3-dodecyl-2,5-dioxo-1-pyrrolidinyl)-2,2,6,6-tetramethylpiperidine",
   "name_tr": "1-asetil-4-(3-dodesil-2,5-diokso- 1-pirrolidinil)-2,2,6,6- tetrametilpiperidin",
   "ec_no": "411-930-5",
   "index_no": "613-229-00-1",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

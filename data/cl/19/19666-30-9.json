@@ -1,10 +1,10 @@
 {
   "cas": "19666-30-9",
-  "name": "oxadiazon (ISO); 3-[2,4-dichloro-5-(1- methylethoxy)phenyl]-5-(1,1- dimethylethyl)-1,3,4-oxadiazol- 2(3H)-one",
+  "name": "oxadiazon (ISO); 3-[2,4-dichloro-5-(1-methylethoxy)phenyl]-5-(1,1-dimethylethyl)-1,3,4-oxadiazol-2(3H)-one",
   "name_tr": "oksadiazon (ISO); 3-[2,4-dikloro-5-(1- metiletoksi)fenil]-5-(1,1- dimetiletil)-1,3,4-oksadiazol- 2(3H)-on",
   "ec_no": "243-215-7",
   "index_no": "606-045-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

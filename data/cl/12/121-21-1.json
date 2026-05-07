@@ -1,10 +1,10 @@
 {
   "cas": "121-21-1",
-  "name": "2-methyl-4-oxo-3-(penta-2,4- dienyl)cyclopent-2-enyl [1R- [1α[S(Z)],3β]]-chrysanthemate; pyrethrin I",
+  "name": "2-methyl-4-oxo-3-(penta-2,4-dienyl)cyclopent-2-enyl [1R-[1α[S*(Z)],3β]]-chrysanthemate; pyrethrin I",
   "name_tr": "2-metil-4-okso-3-(penta-2,4- denil)siklopent-2-enil [1R- [1α[S(Z)],3β]]-krisantemat; piretrin I",
   "ec_no": "204-455-8",
   "index_no": "613-023-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

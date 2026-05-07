@@ -1,13 +1,11 @@
 {
   "cas": "762-75-4",
-  "name": "butyl formate; [1] tert-butyl formate; [2] isobutyl formate [3]",
+  "name": "butyl formate [1]\ntert-butyl formate [2]\nisobutyl formate [3]",
   "name_tr": "Bütilformat [1]; ter-bütilformat [2]; izobütilformat [3]",
-  "ec_no": "209-772-5",
+  "ec_no": "212-105-0",
   "index_no": "607-017-00-8",
-  "atp": "",
-  "notes": [
-    "C"
-  ],
+  "atp": "CLP00",
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -15,12 +13,12 @@
         "h_code": "H225"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H335"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       }
     ],
     "m_factors": {},
@@ -34,8 +32,8 @@
     ],
     "h_codes": [
       "H225",
-      "H319",
-      "H335"
+      "H335",
+      "H319"
     ],
     "suppl_h": []
   }

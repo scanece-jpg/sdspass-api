@@ -1,10 +1,10 @@
 {
   "cas": "92683-20-0",
-  "name": "dodecyl 3-(2-(3-benzyl-4- ethoxy-2,5-dioxoimidazolidin-1- yl)-4,4-dimethyl-3- oxovaleramido)-4- chlorobenzoate",
+  "name": "dodecyl 3-(2-(3-benzyl-4-ethoxy-2,5-dioxoimidazolidin-1-yl)-4,4-dimethyl-3-oxovaleramido)-4-chlorobenzoate",
   "name_tr": "dodesil-3-(2-(3-benzil-4-etoksi- 2,5-dioksoimidazolidin-1-il)-4,4- dimetil-3-oksovaleramido)-4- klorobenzoat",
   "ec_no": "407-300-4",
   "index_no": "616-067-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

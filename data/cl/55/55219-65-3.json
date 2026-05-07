@@ -1,13 +1,11 @@
 {
   "cas": "55219-65-3",
-  "name": "triadimenol (ISO); (1RS,2RS;1RS,2SR)-1-(4- chlorophenoxy)-3,3-dimethyl-1- (1H-1,2,4-triazol-1-yl)butan-2- ol; α-tert-butyl-β-(4- chlorophenoxy)-1H-1,2,4- triazole-1-ethanol",
+  "name": "triadimenol (ISO);\n(1RS,2RS;1RS,2SR)-1-(4-chlorophenoxy)-3,3-dimethyl-1-(1H-1,2,4-triazol-1-yl)butan-2-ol;\nα-tert-butyl-β-(4-chlorophenoxy)-1H-1,2,4-triazole-1-ethanol",
   "name_tr": "triadimenol (ISO); (1RS,2RS;1RS,2SR)-1-(4- klorofenoksi)-3,3-dimetil-1-(1H- 1,2,4-triazol-1-il)bütan-2-ol; α-tert-bütil-β-(4-klorofenoksi)- 1H-1,2,4-triazol-1-etanol",
   "ec_no": "259-537-6",
   "index_no": "613-322-00-7",
   "atp": "ATP10",
-  "notes": [
-    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
-  ],
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -15,8 +13,8 @@
         "h_code": "H360"
       },
       {
-        "class": "Repr. 1B",
-        "h_code": "H360"
+        "class": "Lact.",
+        "h_code": "H362"
       },
       {
         "class": "Acute Tox. 4",
@@ -39,7 +37,7 @@
     ],
     "h_codes": [
       "H360",
-      "H360",
+      "H362",
       "H302",
       "H411"
     ],

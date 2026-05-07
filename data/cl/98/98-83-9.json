@@ -4,7 +4,7 @@
   "name_tr": "2-fenilpropen; α-metilstiren",
   "ec_no": "202-705-0",
   "index_no": "601-027-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,12 +13,12 @@
         "h_code": "H226"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H335"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Aquatic Chronic 2",
@@ -29,7 +29,7 @@
     "scl_limits": [
       {
         "h_code": "H335",
-        "class": "STOT SE 3",
+        "class": "",
         "c_min": 25.0,
         "c_max": null
       }
@@ -44,8 +44,8 @@
     ],
     "h_codes": [
       "H226",
-      "H319",
       "H335",
+      "H319",
       "H411"
     ],
     "suppl_h": []

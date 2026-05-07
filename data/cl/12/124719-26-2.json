@@ -1,10 +1,10 @@
 {
   "cas": "124719-26-2",
-  "name": "4-(3,4-dichlorophenylazo)-2,6- di-sec-butyl-phenol",
+  "name": "4-(3,4-dichlorophenylazo)-2,6-di-sec-butyl-phenol",
   "name_tr": "4-(3,4-diklorofenilazo)-2,6-di- sek-bütil-fenol",
   "ec_no": "410-600-8",
   "index_no": "611-064-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

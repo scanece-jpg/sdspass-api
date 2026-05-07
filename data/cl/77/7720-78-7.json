@@ -4,7 +4,7 @@
   "name_tr": "demir (II) sülfat",
   "ec_no": "231-753-5",
   "index_no": "026-003-00-7",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,12 +13,12 @@
         "h_code": "H302"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       }
     ],
     "m_factors": {},
@@ -31,8 +31,8 @@
     ],
     "h_codes": [
       "H302",
-      "H319",
-      "H315"
+      "H315",
+      "H319"
     ],
     "suppl_h": []
   }

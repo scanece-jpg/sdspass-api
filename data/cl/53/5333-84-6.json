@@ -1,13 +1,11 @@
 {
   "cas": "5333-84-6",
-  "name": "cis-1,2,3,6-tetrahydro-4- methylphthalic anhydride; [1] 1,2,3,6-tetrahydro-4- methylphthalic anhydride; [2] 1,2,3,6-tetrahydro-3- methylphthalic anhydride; [3] tetrahydromethylphthalic anhydride; [4] 1,2,3,6-tetrahydromethylphthalic anhydride; [5] tetrahydro-4-methylphthalic anhydride; [6] 2,3,5,6-tetrahydro-2- methylphthalic anhydride [7]",
+  "name": "cis-1,2,3,6-tetrahydro-4-methylphthalic anhydride [1]\n1,2,3,6-tetrahydro-4-methylphthalic anhydride [2]\n1,2,3,6-tetrahydro-3-methylphthalic anhydride [3]\ntetrahydromethylphthalic anhydride [4]\n1,2,3,6-tetrahydromethylphthalic anhydride [5]\ntetrahydro-4-methylphthalic anhydride [6]\n2,3,5,6-tetrahydro-2-methylphthalic anhydride [7]",
   "name_tr": "cis-1,2,3,6-tetrahidro-4- metilftalik anhidrit; [1] 1,2,3,6-tetrahidro-4-metilftalik anhidrit; [2] 1,2,3,6-tetrahidro-3-metilftalik anhidrit; [3] tetrahidrometilftalik anhidrit; [4] 1,2,3,6-tetrahidrometilftalik anhidrit; [5] tetrahidro-4-metilftalik anhidrit; [6] 2,3,5,6-tetrahidro-2-metilftalik anhidrit [7]",
-  "ec_no": "216-906-6",
+  "ec_no": "226-247-6",
   "index_no": "607-240-00-0",
-  "atp": "",
-  "notes": [
-    "C"
-  ],
+  "atp": "CLP00",
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -29,8 +27,8 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS08",
-      "GHS05"
+      "GHS05",
+      "GHS08"
     ],
     "h_codes": [
       "H318",

@@ -4,17 +4,17 @@
   "name_tr": "dibakır klorür trihidroksit",
   "ec_no": "215-572-9",
   "index_no": "029-017-00-1",
-  "atp": "",
+  "atp": "ATP17",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4",
-        "h_code": "H332"
-      },
-      {
         "class": "Acute Tox. 3",
         "h_code": "H301"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
       },
       {
         "class": "Aquatic Acute 1",
@@ -38,15 +38,15 @@
       "GHS09"
     ],
     "h_codes": [
-      "H332",
       "H301",
+      "H332",
       "H400",
       "H410"
     ],
     "suppl_h": []
   },
   "ate": {
-    "inhalation_dust": 2.83,
-    "oral": 299.0
+    "oral": 299.0,
+    "inhalation_mgl": 2.83
   }
 }

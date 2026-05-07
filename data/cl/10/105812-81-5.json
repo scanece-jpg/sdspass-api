@@ -1,10 +1,10 @@
 {
   "cas": "105812-81-5",
-  "name": "(-)-trans-4-(4'-fluorophenyl)-3- hydroxymethyl-N- methylpiperidine",
+  "name": "(-)-trans-4-(4'-fluorophenyl)-3-hydroxymethyl-N-methylpiperidine",
   "name_tr": "(-)-trans-4-(4'-florofenil)-3- hidroksimetil-N-metilpiperidin",
   "ec_no": "406-030-4",
   "index_no": "603-147-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

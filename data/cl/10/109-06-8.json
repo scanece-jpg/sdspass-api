@@ -4,7 +4,7 @@
   "name_tr": "2-metilpiridin; 2-pikolin",
   "ec_no": "203-643-7",
   "index_no": "613-036-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -25,12 +25,12 @@
         "h_code": "H302"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H335"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       }
     ],
     "m_factors": {},
@@ -47,8 +47,8 @@
       "H332",
       "H312",
       "H302",
-      "H319",
-      "H335"
+      "H335",
+      "H319"
     ],
     "suppl_h": []
   }

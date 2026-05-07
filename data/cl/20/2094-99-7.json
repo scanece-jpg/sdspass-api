@@ -1,10 +1,10 @@
 {
   "cas": "2094-99-7",
-  "name": "2-(3-(prop-1-en-2- yl)phenyl)prop-2-yl isocyanate",
+  "name": "2-(3-(prop-1-en-2-yl)phenyl)prop-2-yl isocyanate",
   "name_tr": "2-(3-(prop-1-en-2-il)fenil)prop- 2-il izosiyanat",
   "ec_no": "402-440-2",
   "index_no": "006-074-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,12 +13,12 @@
         "h_code": "H330"
       },
       {
-        "class": "Skin Corr. 1B",
-        "h_code": "H314"
-      },
-      {
         "class": "STOT RE 2",
         "h_code": "H373"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
       },
       {
         "class": "Resp. Sens. 1",
@@ -50,8 +50,8 @@
     ],
     "h_codes": [
       "H330",
-      "H314",
       "H373",
+      "H314",
       "H334",
       "H317",
       "H400",

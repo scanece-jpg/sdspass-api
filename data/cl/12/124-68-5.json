@@ -4,17 +4,17 @@
   "name_tr": "2-amino-2-metilpropanol",
   "ec_no": "204-709-8",
   "index_no": "603-070-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Aquatic Chronic 3",
@@ -30,8 +30,8 @@
       "GHS07"
     ],
     "h_codes": [
-      "H319",
       "H315",
+      "H319",
       "H412"
     ],
     "suppl_h": []

@@ -1,10 +1,10 @@
 {
   "cas": "67564-91-4",
-  "name": "fenpropimorph (ISO); cis-4-[3-(p-tert-butylphenyl)-2- methylpropyl]-2,6- dimethylmorpholine",
+  "name": "fenpropimorph (ISO); cis-4-[3-(p-tert-butylphenyl)-2-methylpropyl]-2,6-dimethylmorpholine",
   "name_tr": "fenpropimorf (ISO); cis-4-[3-(p- tert-bütilfenil)-2-metilpropil]- 2,6-dimetilmorfolin",
   "ec_no": "266-719-9",
   "index_no": "613-124-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

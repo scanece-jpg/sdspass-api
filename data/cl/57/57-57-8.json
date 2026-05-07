@@ -4,7 +4,7 @@
   "name_tr": "3-propanolid; 1,3-propiolakton",
   "ec_no": "200-340-1",
   "index_no": "606-031-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -17,12 +17,12 @@
         "h_code": "H330"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       }
     ],
     "m_factors": {},
@@ -37,8 +37,8 @@
     "h_codes": [
       "H350",
       "H330",
-      "H319",
-      "H315"
+      "H315",
+      "H319"
     ],
     "suppl_h": []
   }

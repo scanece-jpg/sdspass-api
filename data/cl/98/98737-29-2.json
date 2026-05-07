@@ -1,10 +1,10 @@
 {
   "cas": "98737-29-2",
-  "name": "tert-butyl (1S)-N-[1-((2S)-2- oxiranyl)-2- phenylethyl]carbamate",
+  "name": "tert-butyl (1S)-N-[1-((2S)-2-oxiranyl)-2-phenylethyl]carbamate",
   "name_tr": "ter-bütil (1S)-N-[1-((2S)-2- oksiranil)-2-feniletil]karbamat",
   "ec_no": "425-420-5",
   "index_no": "006-092-00-9",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

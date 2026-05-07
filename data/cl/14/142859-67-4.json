@@ -1,10 +1,10 @@
 {
   "cas": "142859-67-4",
-  "name": "N-(2-(6-ethyl-7-(4- methylphenoxy)-1H- pyrazolo[1,5-b][1,2,4]triazol-2- yl)propyl)-2- octadecyloxybenzamide",
+  "name": "N-(2-(6-ethyl-7-(4-methylphenoxy)-1H-pyrazolo[1,5-b][1,2,4]triazol-2-yl)propyl)-2-octadecyloxybenzamide",
   "name_tr": "N-(2-(6-etil-7-(4-metilfenoksi)- 1H-pirazol[1,5-b][1,2,4]triyazol- 2-il)propil)-2- oktadesiloksibenzamid",
   "ec_no": "407-070-5",
   "index_no": "616-042-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

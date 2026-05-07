@@ -1,10 +1,10 @@
 {
   "cas": "7085-19-0",
-  "name": "mecoprop (ISO); 2-(4-chloro-o-tolyloxy) propionic acid; (RS)-2-(4-chloro-o- tolyloxy)propionic acid; [1] 2-(4-chloro-2- methylphenoxy)propionic acid [2]",
+  "name": "mecoprop (ISO); 2-(4-chloro-o-tolyloxy) propionic acid; (RS)-2-(4-chloro-o-tolyloxy)propionic acid [1]\n2-(4-chloro-2-methylphenoxy)propionic acid  [2]",
   "name_tr": "Mekoprop(ISO); 2-(4-kloro-o-toliloksi)propiyonik asit; (RS)-2-(4-kloro-o- toliloksi)propiyonik asit; [1] 2-(4-kloro-2- metilfenoksi)propiyonik asit[2]",
-  "ec_no": "230-386-8",
+  "ec_no": "230-386-8 [1]\n202-264-4 [2]",
   "index_no": "607-049-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

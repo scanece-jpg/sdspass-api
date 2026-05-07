@@ -38,38 +38,7 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": [
-      {
-        "h_code": "H361f",
-        "class": "Repr. 2 (fertilite)",
-        "c_min": 5.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H373",
-        "class": "STOT RE 2 (sinir)",
-        "c_min": 5.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H315",
-        "class": "Skin Irrit. 2",
-        "c_min": 10.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H336",
-        "class": "STOT SE 3",
-        "c_min": 20.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H304",
-        "class": "Asp. Tox. 1",
-        "c_min": 10.0,
-        "c_max": null
-      }
-    ]
+    "scl_limits": []
   },
   "labelling": {
     "signal": "Danger",

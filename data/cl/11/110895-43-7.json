@@ -1,10 +1,10 @@
 {
   "cas": "110895-43-7",
-  "name": "1-(N,N-dimethylcarbamoyl)-3- tert-butyl-5- carbethoxymethylthio-1H-1,2,4- triazole",
+  "name": "1-(N,N-dimethylcarbamoyl)-3-tert-butyl-5-carbethoxymethylthio-1H-1,2,4-triazole",
   "name_tr": "1-(N,N-dimetilkarbamoil)-3-ter- bütil-5-karbetoksimetiltiyo-1H- 1,2,4-triyazol",
   "ec_no": "411-650-3",
   "index_no": "607-368-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

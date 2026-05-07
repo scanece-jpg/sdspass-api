@@ -1,10 +1,10 @@
 {
   "cas": "2631-40-5",
-  "name": "isoprocarb (ISO); 2-isopropylphenyl N- methylcarbamate",
+  "name": "isoprocarb (ISO); 2-isopropylphenyl N-methylcarbamate",
   "name_tr": "izoprokarb (ISO); 2- izopropilfenil N-metilkarbamat",
   "ec_no": "220-114-6",
   "index_no": "006-053-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

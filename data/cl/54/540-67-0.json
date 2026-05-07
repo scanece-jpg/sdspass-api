@@ -4,7 +4,7 @@
   "name_tr": "etil-metil-eter",
   "ec_no": "",
   "index_no": "603-020-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "U"
   ],
@@ -13,6 +13,10 @@
       {
         "class": "Flam. Gas 1",
         "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": ""
       }
     ],
     "m_factors": {},

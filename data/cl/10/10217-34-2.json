@@ -1,10 +1,10 @@
 {
   "cas": "10217-34-2",
-  "name": "2-(3,4- epoxycyclohexyl)ethyltriethoxy silane",
+  "name": "2-(3,4-epoxycyclohexyl)ethyltriethoxy silane",
   "name_tr": "2-(3,4-epoksisiklohekzil) etiltrietoksi silan",
   "ec_no": "425-050-4",
   "index_no": "014-035-00-4",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

@@ -4,7 +4,7 @@
   "name_tr": "4-metilpiridin; 4-pikolin",
   "ec_no": "203-626-4",
   "index_no": "613-037-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -25,16 +25,16 @@
         "h_code": "H302"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H335"
       },
       {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       }
     ],
     "m_factors": {},
@@ -51,9 +51,9 @@
       "H311",
       "H332",
       "H302",
-      "H319",
       "H335",
-      "H315"
+      "H315",
+      "H319"
     ],
     "suppl_h": []
   }

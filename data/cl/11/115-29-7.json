@@ -1,10 +1,10 @@
 {
   "cas": "115-29-7",
-  "name": "endosulfan (ISO); 1,2,3,4,7,7-hexachloro-8,9,10- trinorborn-2-en-5,6- ylenedimethylene sulfite; 1,4,5,6,7,7-hexachloro-8,9,10- trinorborn-5-en-2,3- ylenedimethylene sulfite",
+  "name": "endosulfan (ISO); 1,2,3,4,7,7-hexachloro-8,9,10-trinorborn-2-en-5,6-ylenedimethylene sulfite; 1,4,5,6,7,7-hexachloro-8,9,10-trinorborn-5-en-2,3-ylenedimethylene sulfite",
   "name_tr": "endosülfan (ISO); 1,2,3,4,7,7-hekzakloro-8,9,10- trinorborn-2-en-5,6- ilendimetilsülfit; 1,4,5,6,7,7-hekzakloro-8,9,10- trinorborn-5-en-2,3- ilendimetilsülfit",
   "ec_no": "204-079-4",
   "index_no": "602-052-00-5",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

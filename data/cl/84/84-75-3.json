@@ -4,7 +4,7 @@
   "name_tr": "dihekzil fitalat",
   "ec_no": "201-559-5",
   "index_no": "607-702-00-1",
-  "atp": "",
+  "atp": "ATP5",
   "notes": [],
   "classification": {
     "hazards": [
@@ -17,7 +17,7 @@
     "scl_limits": []
   },
   "labelling": {
-    "signal": "",
+    "signal": "Danger",
     "pictograms": [
       "GHS08"
     ],

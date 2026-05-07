@@ -1,10 +1,10 @@
 {
   "cas": "57646-30-7",
-  "name": "furalaxyl (ISO); methyl N-(2,6-dimethylphenyl)- N-(2-furylcarbonyl)-Dl-alaninate",
+  "name": "furalaxyl (ISO); methyl N-(2,6-dimethylphenyl)-N-(2-furylcarbonyl)-Dl-alaninate",
   "name_tr": "füralaksil (ISO); metil-N-(2,6- dimetilfenil)-N-(2-fürilkarbonil)- DL-alaninat",
   "ec_no": "260-875-1",
   "index_no": "612-138-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

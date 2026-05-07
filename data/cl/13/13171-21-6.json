@@ -1,10 +1,10 @@
 {
   "cas": "13171-21-6",
-  "name": "phosphamidon (ISO); 2-chloro-2-diethylcarbamoyl-1- methylvinyl dimethyl phosphate",
+  "name": "phosphamidon (ISO); 2-chloro-2-diethylcarbamoyl-1-methylvinyl dimethyl phosphate",
   "name_tr": "fosfamidon (ISO); 2-kloro-2- dietilkarbamoil-1-metilvinil dimetil fosfat",
   "ec_no": "236-116-5",
   "index_no": "015-022-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -4,17 +4,17 @@
   "name_tr": "Trifenil fosfit",
   "ec_no": "202-908-4",
   "index_no": "015-105-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Aquatic Acute 1",
@@ -29,13 +29,13 @@
     "scl_limits": [
       {
         "h_code": "H315",
-        "class": "Skin Irrit. 2",
+        "class": "",
         "c_min": 5.0,
         "c_max": null
       },
       {
         "h_code": "H319",
-        "class": "Eye Irrit. 2",
+        "class": "",
         "c_min": 5.0,
         "c_max": null
       }
@@ -48,8 +48,8 @@
       "GHS09"
     ],
     "h_codes": [
-      "H319",
       "H315",
+      "H319",
       "H400",
       "H410"
     ],

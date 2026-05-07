@@ -1,19 +1,19 @@
 {
   "cas": "2437-29-8",
-  "name": "malachite green hydrochloride; [1] malachite green oxalate [2]",
+  "name": "malachite green hydrochloride [1]\nmalachite green oxalate [2]",
   "name_tr": "malaşit yeşili hidroklorür [1]; malaşit yeşili oksalat [2]",
-  "ec_no": "209-322-8",
+  "ec_no": "219-441-7",
   "index_no": "602-096-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
         "class": "Repr. 2",
-        "h_code": "H361d"
+        "h_code": "H361d ***"
       },
       {
-        "class": "Acute Tox. 4",
+        "class": "Acute Tox. 4 *",
         "h_code": "H302"
       },
       {
@@ -36,12 +36,12 @@
     "signal": "Danger",
     "pictograms": [
       "GHS08",
-      "GHS05",
       "GHS07",
+      "GHS05",
       "GHS09"
     ],
     "h_codes": [
-      "H361d",
+      "H361d ***",
       "H302",
       "H318",
       "H400",

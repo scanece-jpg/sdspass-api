@@ -1,10 +1,10 @@
 {
   "cas": "75490-39-0",
-  "name": "2,2,4-trimethyl-4-phenyl-butane- nitrile",
+  "name": "2,2,4-trimethyl-4-phenyl-butane-nitrile",
   "name_tr": "2,2,4-trimetil-4-fenilbütannitril",
   "ec_no": "422-580-8",
   "index_no": "608-038-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

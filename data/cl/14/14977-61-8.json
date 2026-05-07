@@ -4,10 +4,9 @@
   "name_tr": "kromil diklorür; kromik oksiklorür",
   "ec_no": "239-056-8",
   "index_no": "024-005-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
-    "T",
-    "3"
+    "3 T"
   ],
   "classification": {
     "hazards": [
@@ -44,13 +43,37 @@
     "scl_limits": [
       {
         "h_code": "H314",
-        "class": "Skin Corr. 1A",
+        "class": "",
         "c_min": 10.0,
         "c_max": null
       },
       {
+        "h_code": "H314",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": 10.0
+      },
+      {
+        "h_code": "H315",
+        "class": "",
+        "c_min": 0.5,
+        "c_max": 5.0
+      },
+      {
+        "h_code": "H319",
+        "class": "",
+        "c_min": 0.5,
+        "c_max": 5.0
+      },
+      {
+        "h_code": "H335",
+        "class": "",
+        "c_min": 0.5,
+        "c_max": 5.0
+      },
+      {
         "h_code": "H317",
-        "class": "C < 5 % Cilt Hassas. 1",
+        "class": "",
         "c_min": 0.5,
         "c_max": null
       }

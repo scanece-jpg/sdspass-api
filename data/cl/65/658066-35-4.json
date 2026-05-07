@@ -1,10 +1,10 @@
 {
   "cas": "658066-35-4",
-  "name": "fluopyram (ISO); N-{2-[3- chloro-5- (trifluoromethyl)pyridin-2- yl]ethyl}-2- (trifluoromethyl)benzamide",
+  "name": "fluopyram (ISO); N-{2-[3-chloro-5-(trifluoromethyl)pyridin-2-yl]ethyl}-2-(trifluoromethyl)benzamide",
   "name_tr": "fluopyram (ISO); N-{2-[3-kloro- 5-(triflorometil)piridin-2-il]etil}- 2-(triflorometil)benzamit",
-  "ec_no": "_",
+  "ec_no": "",
   "index_no": "616-219-00-5",
-  "atp": "",
+  "atp": "ATP9",
   "notes": [],
   "classification": {
     "hazards": [

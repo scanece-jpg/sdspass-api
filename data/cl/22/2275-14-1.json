@@ -1,10 +1,10 @@
 {
   "cas": "2275-14-1",
-  "name": "phenkapton (ISO); S-(2,5- dichlorophenylthiomethyl) O,O- diethyl phosphorodithioate",
+  "name": "phenkapton (ISO); S-(2,5-dichlorophenylthiomethyl) O,O-diethyl phosphorodithioate",
   "name_tr": "fenkapton (ISO); S-(2,5- diklorofeniltiyometil) O,O- dietilfosforoditiyoat",
   "ec_no": "218-892-7",
   "index_no": "015-037-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

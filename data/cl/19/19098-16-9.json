@@ -1,13 +1,11 @@
 {
   "cas": "19098-16-9",
-  "name": "hydroxylammonium hydrogensulfate; hydroxylamine sulfate(1:1); [1] hydroxylamine phosphate; [2] hydroxylamine dihydrogenphosphate; [3] hydroxylamine 4- methylbenzenesulfonate [4]",
+  "name": "hydroxylammonium hydrogensulfate; hydroxylamine sulfate(1:1) [1]\nhydroxylamine phosphate [2]\nhydroxylamine dihydrogenphosphate [3]\nhydroxylamine 4-methylbenzenesulfonate [4]",
   "name_tr": "hidroksilamonyum hidrojen sülfat; hidroksilamin sülfat (1:1) [1] hidroksilamin fosfat: [2] hidroksilamin dihidrojenfosfat: [3] hidroksilamin-4- metilbenzensülfonat [4]",
-  "ec_no": "233-154-4",
+  "ec_no": "242-818-2",
   "index_no": "612-237-00-2",
-  "atp": "",
-  "notes": [
-    "T"
-  ],
+  "atp": "ATP01corr",
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -19,24 +17,24 @@
         "h_code": "H351"
       },
       {
-        "class": "Acute Tox. 4",
+        "class": "Acute Tox. 4 *",
         "h_code": "H312"
       },
       {
-        "class": "Acute Tox. 4",
+        "class": "Acute Tox. 4 *",
         "h_code": "H302"
       },
       {
-        "class": "STOT RE 2",
-        "h_code": "H373"
-      },
-      {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
+        "class": "STOT RE 2 *",
+        "h_code": "H373 **"
       },
       {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Skin Sens. 1",
@@ -63,9 +61,9 @@
       "H351",
       "H312",
       "H302",
-      "H373",
-      "H319",
+      "H373 **",
       "H315",
+      "H319",
       "H317",
       "H400"
     ],

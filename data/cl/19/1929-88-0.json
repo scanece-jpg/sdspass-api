@@ -1,10 +1,10 @@
 {
   "cas": "1929-88-0",
-  "name": "benzthiazuron (ISO); 1-benzothiazol-2-yl-3- methylurea",
+  "name": "benzthiazuron (ISO); 1-benzothiazol-2-yl-3-methylurea",
   "name_tr": "benztiyazuron (ISO); 1-benzotiyazol-2-il-3-metilüre",
   "ec_no": "217-685-9",
   "index_no": "006-036-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

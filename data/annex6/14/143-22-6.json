@@ -25,7 +25,7 @@
         "h_code": "H319",
         "class": "",
         "c_min": 20.0,
-        "c_max": null
+        "c_max": 30.0
       }
     ]
   },

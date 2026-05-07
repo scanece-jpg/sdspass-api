@@ -1,10 +1,10 @@
 {
   "cas": "4719-04-4",
-  "name": "2,2',2\"-(hexahydro-1,3,5- triazine-1,3,5-triyl)triethanol; 1,3,5-tris(2- hydroxyethyl)hexahydro-1,3,5- triazine",
+  "name": "2,2',2\"-(hexahydro-1,3,5-triazine-1,3,5-triyl)triethanol; 1,3,5-tris(2-hydroxyethyl)hexahydro-1,3,5-triazine",
   "name_tr": "2,2',2\"-(hekzahidro-1,3,5-triazin- 1,3,5-triyl)trietanol; 1,3,5-tris(2- hidroksietil)hekzahidro-1,3,5- triazin",
   "ec_no": "225-208-0",
   "index_no": "613-114-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -21,7 +21,7 @@
     "scl_limits": [
       {
         "h_code": "H317",
-        "class": "Skin Sens. 1",
+        "class": "",
         "c_min": 0.1,
         "c_max": null
       }

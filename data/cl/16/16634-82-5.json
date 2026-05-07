@@ -1,10 +1,10 @@
 {
   "cas": "16634-82-5",
-  "name": "2-chloro-N-(4- methylphenyl)acetamide",
+  "name": "2-chloro-N-(4-methylphenyl)acetamide",
   "name_tr": "2-kloro-N-(4-metilfenil)asetamid",
   "ec_no": "435-170-9",
   "index_no": "616-179-00-9",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

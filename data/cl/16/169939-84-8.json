@@ -1,10 +1,10 @@
 {
   "cas": "169939-84-8",
-  "name": "salt of: (1S-cis)-1-amino-2,3- dihydro-1H-inden-2-ol and [R- [RR]]-2,3-dihydroxybutanedioic acid",
+  "name": "salt of: (1S-cis)-1-amino-2,3-dihydro-1H-inden-2-ol and [R-[R*R*]]-2,3-dihydroxybutanedioic acid",
   "name_tr": "tuz: (1S-cis)-1-amino-2,3- dihidro-1H-inden-2-ol ve [R- [RR]]-2,3-dihidroksibütandioik asit",
   "ec_no": "425-210-3",
   "index_no": "607-557-00-4",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

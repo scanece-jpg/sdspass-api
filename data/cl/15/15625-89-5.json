@@ -1,40 +1,60 @@
 {
   "cas": "15625-89-5",
-  "name": "2,2-bis(acryloyloxymethyl)butyl acrylate; trimethylolpropane triacrylate",
+  "name": "2-ethyl-2-[[(1-oxoallyl)oxy] methyl]-1,3-propanediyl diacrylate; 2,2-bis(acryloyloxymethyl)butyl acrylate; trimethylolpropane triacrylate",
   "name_tr": "2,2-bis(akriloiloksimetil)bütil akrilat; trimetilolpropantriakrilat",
   "ec_no": "239-701-3",
   "index_no": "607-111-00-9",
-  "atp": "",
+  "atp": "ATP18",
   "notes": [
     "D"
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
+        "class": "Carc. 2",
+        "h_code": "H351"
       },
       {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
       },
       {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
         "class": "Skin Sens. 1",
         "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
       }
     ],
-    "m_factors": {},
+    "m_factors": {
+      "acute": 1,
+      "chronic": 1
+    },
     "scl_limits": []
   },
   "labelling": {
     "signal": "Warning",
     "pictograms": [
-      "GHS07"
+      "GHS08",
+      "GHS07",
+      "GHS09"
     ],
     "h_codes": [
-      "H319",
+      "H351",
       "H315",
-      "H317"
+      "H319",
+      "H317",
+      "H400",
+      "H410"
     ],
     "suppl_h": []
   }

@@ -1,10 +1,10 @@
 {
   "cas": "91995-14-1",
-  "name": "Anthracene oil, acid ext.; Anthracene Oil Extract Residue; [A complex combination of hydrocarbons from the base- freed fraction obtained from the distillation of coal tar and boiling in the range of approximately 325 °C to 365 °C (617 °F to 689 °F). It contains predominantly anthracene and phenanthrene and their alkyl derivatives.]",
+  "name": "Anthracene oil, acid ext.; Anthracene Oil Extract Residue; [A complex combination of hydrocarbons from the base-freed fraction obtained from the distillation of coal tar and boiling in the range of approximately 325 °C to 365 °C (617 °F to 689 °F). It contains predominantly anthracene and phenanthrene and their alkyl derivatives.]",
   "name_tr": "Antrasen yağı, asit özütü; Antrasen yağı özütü artığı; [Kömür ziftinin damıtılarak bazdan arındırılmış fraksiyonu olarak elde edilen, yaklaşık 220oC ile 450oC (428oF-842oF) arasında kaynayan kompleks bir hidrokarbon bileşimi. Büyük çoğunlukla antrasen ve fenantren ile bunların alkil türevlerini içerir.]",
   "ec_no": "295-274-3",
   "index_no": "648-046-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "M"
   ],

@@ -1,10 +1,10 @@
 {
   "cas": "68603-08-7",
-  "name": "Naphtha (petroleum), arom.- contg.; Low boiling point naphtha - unspecified",
+  "name": "Naphtha (petroleum), arom.-contg.; Low boiling point naphtha - unspecified",
   "name_tr": "Nafta (petrol), aromatiklik- içeren; düşük kaynama noktalı nafta - tanımlanmamış",
   "ec_no": "271-635-0",
   "index_no": "649-372-00-1",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "P"
   ],

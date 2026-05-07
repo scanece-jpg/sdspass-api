@@ -4,21 +4,21 @@
   "name_tr": "galyum arsenik",
   "ec_no": "215-114-8",
   "index_no": "031-001-00-4",
-  "atp": "",
+  "atp": "ATP7",
   "notes": [],
   "classification": {
     "hazards": [
-      {
-        "class": "Repr. 1B",
-        "h_code": "H360F"
-      },
       {
         "class": "Carc. 1B",
         "h_code": "H350"
       },
       {
+        "class": "Repr. 1B",
+        "h_code": "H360F"
+      },
+      {
         "class": "STOT RE 1",
-        "h_code": "H372"
+        "h_code": "H372(respiratory_and_haematopoietic_systems)"
       }
     ],
     "m_factors": {},
@@ -30,9 +30,9 @@
       "GHS08"
     ],
     "h_codes": [
-      "H360F",
       "H350",
-      "H372"
+      "H360F",
+      "H372(respiratory_and_haematopoietic_systems)"
     ],
     "suppl_h": []
   }

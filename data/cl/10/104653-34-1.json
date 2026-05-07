@@ -1,10 +1,10 @@
 {
   "cas": "104653-34-1",
-  "name": "difethialone (ISO); 3-[3-(4’-bromobiphenyl-4-yl)- 1,2,3,4-tetrahydronaphthalen-1- yl]-4-hydroxy-2H-1- benzothiopyran-2-one",
+  "name": "difethialone (ISO);\n3-[3-(4′-bromobiphenyl-4-yl)-1,2,3,4-tetrahydronaphthalen-1-yl]-4-hydroxy-2H-1-benzothiopyran-2-one",
   "name_tr": "difethialone (ISO); 3-[3-(4’-bromobifenil-4-il)- 1,2,3,4-tetrahidronaftalen-1-il]- 4-hidroksi-2H-1-benzotiopiran- 2-on",
-  "ec_no": "_",
+  "ec_no": "",
   "index_no": "607-717-00-3",
-  "atp": "",
+  "atp": "ATP9",
   "notes": [],
   "classification": {
     "hazards": [
@@ -26,7 +26,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372(kan)"
+        "h_code": "H372(blood)"
       },
       {
         "class": "Aquatic Acute 1",
@@ -44,9 +44,21 @@
     "scl_limits": [
       {
         "h_code": "H360D",
-        "class": "Repr. 1B",
+        "class": "",
         "c_min": 0.003,
         "c_max": null
+      },
+      {
+        "h_code": "H372",
+        "class": "",
+        "c_min": 0.02,
+        "c_max": null
+      },
+      {
+        "h_code": "H373",
+        "class": "",
+        "c_min": 0.002,
+        "c_max": 0.02
       }
     ]
   },
@@ -62,10 +74,12 @@
       "H330",
       "H310",
       "H300",
-      "H372(kan)",
+      "H372(blood)",
       "H400",
       "H410"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH070"
+    ]
   }
 }

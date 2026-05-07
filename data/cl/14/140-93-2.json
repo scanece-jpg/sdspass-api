@@ -1,10 +1,10 @@
 {
   "cas": "140-93-2",
-  "name": "proxan-sodium (ISO); sodium O- isopropyldithiocarbonate",
+  "name": "proxan-sodium (ISO); sodium O-isopropyldithiocarbonate",
   "name_tr": "proksan-sodyum (ISO); sodyum O- izopropilditiyokarbonat",
   "ec_no": "205-443-5",
   "index_no": "006-024-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

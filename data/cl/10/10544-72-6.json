@@ -1,14 +1,11 @@
 {
   "cas": "10544-72-6",
-  "name": "nitrogen dioxide; [1] dinitrogen tetraoxide [2]",
+  "name": "nitrogen dioxide [1]\ndinitrogen tetraoxide [2]",
   "name_tr": "Azot dioksit [1]; diazot tetraoksit [2]",
-  "ec_no": "233-272-6",
+  "ec_no": "234-126-4",
   "index_no": "007-002-00-0",
   "atp": "ATP01",
-  "notes": [
-    "5",
-    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
-  ],
+  "notes": [],
   "classification": {
     "hazards": [
       {

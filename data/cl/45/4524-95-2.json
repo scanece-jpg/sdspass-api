@@ -1,10 +1,10 @@
 {
   "cas": "4524-95-2",
-  "name": "2-methyl-2- azabicyclo[2.2.1]heptane",
+  "name": "2-methyl-2-azabicyclo[2.2.1]heptane",
   "name_tr": "2-metil-2- azabisiklo[2.2.1]heptan",
   "ec_no": "404-810-9",
   "index_no": "613-176-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

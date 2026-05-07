@@ -1,13 +1,17 @@
 {
   "cas": "13684-56-5",
-  "name": "desmedipham (ISO); ethyl 3- phenylcarbamoyloxyphenylcarb amate",
+  "name": "desmedipham (ISO);\nethyl 3-phenylcarbamoyloxyphenylcarbamate",
   "name_tr": "desmedifam (ISO); etil-3- fenilkarbamiloksifenilkarbamat",
   "ec_no": "237-198-5",
   "index_no": "616-113-00-9",
-  "atp": "",
+  "atp": "ATP17",
   "notes": [],
   "classification": {
     "hazards": [
+      {
+        "class": "Repr. 2",
+        "h_code": "H361d"
+      },
       {
         "class": "Aquatic Acute 1",
         "h_code": "H400"
@@ -26,9 +30,11 @@
   "labelling": {
     "signal": "Warning",
     "pictograms": [
+      "GHS08",
       "GHS09"
     ],
     "h_codes": [
+      "H361d",
       "H400",
       "H410"
     ],

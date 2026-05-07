@@ -1,10 +1,10 @@
 {
   "cas": "156738-27-1",
-  "name": "sodium 4-[4-(4- hydroxyphenylazo)phenylamino ]-3-nitrobenzenesulfonate",
+  "name": "sodium 4-[4-(4-hydroxyphenylazo)phenylamino]-3-nitrobenzenesulfonate",
   "name_tr": "sodyum-4-[4-(4- hidroksifenilazo)fenilamino]-3- nitrobenzensülfonat",
   "ec_no": "416-370-5",
   "index_no": "607-447-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

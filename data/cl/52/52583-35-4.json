@@ -1,10 +1,10 @@
 {
   "cas": "52583-35-4",
-  "name": "N-(5-(bis(2- methoxyethyl)amino)-2-((2- cyano-4,6-dinitrophenyl)- azo)phenyl)acetamide",
+  "name": "N-(5-(bis(2-methoxyethyl)amino)-2-((2-cyano-4,6-dinitrophenyl)-azo)phenyl)acetamide",
   "name_tr": "N-(5-(bis(2-metoksietil)amino)- 2-((2-siyano-4,6-dinitrofenil)- azo)fenil)asetamid",
   "ec_no": "434-500-9",
   "index_no": "616-178-00-3",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

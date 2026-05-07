@@ -4,7 +4,7 @@
   "name_tr": "amonyum biflorür; amonyum hidrojen diflorür",
   "ec_no": "215-676-4",
   "index_no": "009-009-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -21,13 +21,19 @@
     "scl_limits": [
       {
         "h_code": "H314",
-        "class": "Skin Corr. 1B",
+        "class": "",
         "c_min": 1.0,
         "c_max": null
       },
       {
+        "h_code": "H315",
+        "class": "",
+        "c_min": 0.1,
+        "c_max": 1.0
+      },
+      {
         "h_code": "H319",
-        "class": "C < % 1 Göz Tah. 2",
+        "class": "",
         "c_min": 0.1,
         "c_max": 1.0
       }

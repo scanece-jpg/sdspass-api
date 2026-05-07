@@ -1,10 +1,10 @@
 {
   "cas": "35554-44-0",
-  "name": "imazalil (ISO); 1-[2-(allyloxy)-2-(2,4- dichlorophenyl)ethyl]-1H- imidazole",
+  "name": "imazalil (ISO); 1-[2-(allyloxy)-2-(2,4-dichlorophenyl)ethyl]-1H-imidazole",
   "name_tr": "Imazalil (ISO); 1-[2-(alliloksi)-2-(2,4- diklorofenil)etil-1H-imidazol",
   "ec_no": "252-615-0",
   "index_no": "613-042-00-5",
-  "atp": "",
+  "atp": "ATP7",
   "notes": [],
   "classification": {
     "hazards": [
@@ -30,7 +30,6 @@
       }
     ],
     "m_factors": {
-      "acute": 10,
       "chronic": 10
     },
     "scl_limits": []

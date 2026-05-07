@@ -1,10 +1,10 @@
 {
   "cas": "18854-01-8",
-  "name": "isoxathion (ISO); O,O-diethyl O-5- phenylisoxazol-3- ylphosphorothioate",
+  "name": "isoxathion (ISO); O,O-diethyl O-5-phenylisoxazol-3-ylphosphorothioate",
   "name_tr": "izoksatiyon (ISO); O,O-dietil-O-5-fenilizoksazol-3- ilfosforotiyoat",
   "ec_no": "242-624-8",
   "index_no": "015-131-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

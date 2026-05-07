@@ -18,7 +18,8 @@
       }
     ],
     "m_factors": {
-      "acute": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "scl_limits": []
   },

@@ -1,10 +1,10 @@
 {
   "cas": "142623-48-1",
-  "name": "3-(4-chloro-2-fluoro-5- methylphenyl)-1-methyl-5- (trifluoromethyl)-1H-pyrazole",
+  "name": "3-(4-chloro-2-fluoro-5-methylphenyl)-1-methyl-5-(trifluoromethyl)-1H-pyrazole",
   "name_tr": "3-(4-kloro-2-floro-5-metilfenil)- 1-metil-5-(triflorometil)-1H- pirazol",
   "ec_no": "432-020-4",
   "index_no": "613-289-00-9",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

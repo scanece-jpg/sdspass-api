@@ -16,20 +16,7 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": [
-      {
-        "h_code": "H304",
-        "class": "Asp. Tox. 1",
-        "c_min": 10.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H315",
-        "class": "Skin Irrit. 2",
-        "c_min": 10.0,
-        "c_max": null
-      }
-    ]
+    "scl_limits": []
   },
   "labelling": {
     "signal": "Danger",

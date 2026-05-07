@@ -1,10 +1,10 @@
 {
   "cas": "87460-09-1",
-  "name": "benzyl [hydroxy-(4- phenylbutyl)phosphinyl] acetate",
+  "name": "benzyl [hydroxy-(4-phenylbutyl)phosphinyl] acetate",
   "name_tr": "benzil-[hidroksi-(4- fenilbütil)fosfinil]asetat",
   "ec_no": "416-050-5",
   "index_no": "607-442-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

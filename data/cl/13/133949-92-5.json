@@ -1,10 +1,10 @@
 {
   "cas": "133949-92-5",
-  "name": "6-tert-butyl-3-(3- dodecylsulfonyl)propyl-7H- 1,2,4- triazolo[3.4b][1,3,4]thiadiazine",
+  "name": "6-tert-butyl-3-(3-dodecylsulfonyl)propyl-7H-1,2,4-triazolo[3.4b][1,3,4]thiadiazine",
   "name_tr": "6-tert-butil-3-(3- dodesilsülfonil)propil-7H-1,2,4- triazolo[3.4b][1,3,4]tiyadiazin",
   "ec_no": "424-950-4",
   "index_no": "613-237-00-5",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

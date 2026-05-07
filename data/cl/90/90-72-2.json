@@ -1,10 +1,10 @@
 {
   "cas": "90-72-2",
-  "name": "2,4,6- tris(dimethylaminomethyl)pheno l",
+  "name": "2,4,6-tris(dimethylaminomethyl)phenol",
   "name_tr": "2,4,6- tris(dimetilaminometil)fenol",
   "ec_no": "202-013-9",
   "index_no": "603-069-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,12 +13,12 @@
         "h_code": "H302"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       }
     ],
     "m_factors": {},
@@ -31,8 +31,8 @@
     ],
     "h_codes": [
       "H302",
-      "H319",
-      "H315"
+      "H315",
+      "H319"
     ],
     "suppl_h": []
   }

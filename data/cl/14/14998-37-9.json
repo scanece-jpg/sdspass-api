@@ -1,13 +1,11 @@
 {
   "cas": "14998-37-9",
-  "name": "nickel di(acetate); [1] nickel acetate [2]",
+  "name": "nickel di(acetate) [1]\nnickel acetate [2]",
   "name_tr": "nikel di(asetat);[1] nikel asetat [2]",
-  "ec_no": "206-761-7",
+  "ec_no": "239-086-1",
   "index_no": "028-022-00-6",
-  "atp": "",
-  "notes": [
-    "E"
-  ],
+  "atp": "ATP01corr",
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -20,19 +18,19 @@
       },
       {
         "class": "Repr. 1B",
-        "h_code": "H360D"
+        "h_code": "H360D ***"
       },
       {
-        "class": "STOT RE 1",
-        "h_code": "H372"
-      },
-      {
-        "class": "Acute Tox. 4",
+        "class": "Acute Tox. 4 *",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4",
+        "class": "Acute Tox. 4 *",
         "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372 **"
       },
       {
         "class": "Resp. Sens. 1",
@@ -52,8 +50,7 @@
       }
     ],
     "m_factors": {
-      "acute": 1,
-      "chronic": 1
+      "acute": 1
     },
     "scl_limits": [
       {
@@ -63,8 +60,14 @@
         "c_max": null
       },
       {
+        "h_code": "H373",
+        "class": "STOT RE 2",
+        "c_min": 0.1,
+        "c_max": null
+      },
+      {
         "h_code": "H317",
-        "class": "C <%1 Cilt Hassas. 1",
+        "class": "Skin Sens. 1",
         "c_min": 0.01,
         "c_max": null
       }
@@ -80,10 +83,10 @@
     "h_codes": [
       "H350i",
       "H341",
-      "H360D",
-      "H372",
+      "H360D ***",
       "H332",
       "H302",
+      "H372 **",
       "H334",
       "H317",
       "H400",

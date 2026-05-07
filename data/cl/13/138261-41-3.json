@@ -1,13 +1,11 @@
 {
   "cas": "138261-41-3",
-  "name": "imidacloprid (ISO); 1-(6-chloropyridin-3-ylmethyl)- N-nitroimidazolidin-2- ylidenamine",
+  "name": "imidacloprid (ISO);\n(E)-1-(6-chloro- 3-pyridylmethyl)-N-nitroimidazolidin-2-ylideneamine;(2E)-1-[(6-chloropyridin- 3-yl) methyl]-N-nitroimidazolidin-2-imine",
   "name_tr": "imidakloprid (ISO); 1-(6-klorpiridin-3-ilmetil)-N- nitroimidazolidin-2-ilidenamin",
   "ec_no": "428-040-8",
   "index_no": "612-252-00-4",
   "atp": "ATP17",
-  "notes": [
-    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
-  ],
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -25,14 +23,14 @@
     ],
     "m_factors": {
       "acute": 100,
-      "chronic": 1000
+      "chronic": 100
     },
     "scl_limits": []
   },
   "labelling": {
-    "signal": "Warning",
+    "signal": "Danger",
     "pictograms": [
-      "GHS07",
+      "GHS06",
       "GHS09"
     ],
     "h_codes": [

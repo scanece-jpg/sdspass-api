@@ -1,10 +1,10 @@
 {
   "cas": "79200-56-9",
-  "name": "(1R,4S)-2-azabicyclo[2.2.1]hept- 5-en-3-one",
+  "name": "(1R,4S)-2-azabicyclo[2.2.1]hept-5-en-3-one",
   "name_tr": "(1R,4S)-2-azabisiklo[2.2.1]hep- 5-ten-3-on",
   "ec_no": "418-530-1",
   "index_no": "606-085-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

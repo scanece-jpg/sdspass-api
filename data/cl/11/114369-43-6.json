@@ -1,10 +1,10 @@
 {
   "cas": "114369-43-6",
-  "name": "fenbuconazole (ISO); 4-(4-chlorophenyl)-2-phenyl-2- [(1H-1,2,4-triazol-1- yl)methyl]butanenitrile",
+  "name": "fenbuconazole (ISO); 4-(4-chlorophenyl)-2-phenyl-2-[(1H-1,2,4-triazol-1-yl)methyl]butanenitrile",
   "name_tr": "fenbukonazol (ISO); 4-(4-klorofenil)-2-fenil-2-[(1H- 1,2,4-triazol-1- il)metil]bütannitril",
   "ec_no": "406-140-2",
   "index_no": "608-023-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

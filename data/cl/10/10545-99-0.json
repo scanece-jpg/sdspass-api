@@ -4,17 +4,17 @@
   "name_tr": "kükürt diklorür",
   "ec_no": "234-129-0",
   "index_no": "016-013-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Skin Corr. 1B",
-        "h_code": "H314"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H335"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
       },
       {
         "class": "Aquatic Acute 1",
@@ -25,7 +25,7 @@
     "scl_limits": [
       {
         "h_code": "H335",
-        "class": "STOT SE 3",
+        "class": "",
         "c_min": 5.0,
         "c_max": null
       }
@@ -39,8 +39,8 @@
       "GHS09"
     ],
     "h_codes": [
-      "H314",
       "H335",
+      "H314",
       "H400"
     ],
     "suppl_h": [

@@ -1,22 +1,16 @@
 {
   "cas": "14898-79-4",
-  "name": "butan-2-ol; [1] (S)-butan-2-ol; [2] (R)-butan-2-ol; [3] (±)-butan-2-ol [4]",
+  "name": "butan-2-ol [1]\n(S)-butan-2-ol [2]\n(R)-butan-2-ol [3]\n(Â±)-butan-2-ol [4]",
   "name_tr": "bütan-2-ol [1]; (S)-bütan-2-ol [2]; (R)-bütan-2-ol [3]; (±)-bütan-2-ol [4]",
-  "ec_no": "201-158-5",
+  "ec_no": "238-967-8",
   "index_no": "603-127-00-5",
-  "atp": "",
-  "notes": [
-    "C"
-  ],
+  "atp": "ATP01",
+  "notes": [],
   "classification": {
     "hazards": [
       {
         "class": "Flam. Liq. 3",
         "h_code": "H226"
-      },
-      {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
       },
       {
         "class": "STOT SE 3",
@@ -25,6 +19,10 @@
       {
         "class": "STOT SE 3",
         "h_code": "H336"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       }
     ],
     "m_factors": {},
@@ -38,9 +36,9 @@
     ],
     "h_codes": [
       "H226",
-      "H319",
       "H335",
-      "H336"
+      "H336",
+      "H319"
     ],
     "suppl_h": []
   }

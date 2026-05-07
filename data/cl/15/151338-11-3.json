@@ -1,10 +1,10 @@
 {
   "cas": "151338-11-3",
-  "name": "3-cyano-N-(1,1- dimethylethyl)androsta-3,5- diene-17-β-carboxamide",
+  "name": "3-cyano-N-(1,1-dimethylethyl)androsta-3,5-diene-17-β-carboxamide",
   "name_tr": "3-siyano-N-(1,1- dimetiletil)androsta-3,5-dien-17- β-karboksamid",
   "ec_no": "415-730-9",
   "index_no": "616-125-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

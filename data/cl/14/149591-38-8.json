@@ -1,10 +1,10 @@
 {
   "cas": "149591-38-8",
-  "name": "N,N'-dihexadecyl-N,N'-bis(2- hydroxyethyl)propanediamide",
+  "name": "N,N'-dihexadecyl-N,N'-bis(2-hydroxyethyl)propanediamide",
   "name_tr": "N,N'-dihekzadesil-N,N'-bis(2- hidroksietil)propandiamid",
   "ec_no": "422-560-9",
   "index_no": "616-143-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

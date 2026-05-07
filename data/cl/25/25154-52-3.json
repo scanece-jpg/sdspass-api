@@ -1,10 +1,10 @@
 {
   "cas": "25154-52-3",
-  "name": "nonylphenol; [1] 4-nonylphenol, branched [2]",
+  "name": "nonylphenol [1]\n4-nonylphenol, branched  [2]",
   "name_tr": "Nonilfenol; [1] 4-nonilfenol, dallanmış [2]",
-  "ec_no": "246-672-0",
+  "ec_no": "246-672-0 [1]\n284-325-5 [2]",
   "index_no": "601-053-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

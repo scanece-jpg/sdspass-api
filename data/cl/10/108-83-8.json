@@ -4,7 +4,7 @@
   "name_tr": "2,6-dimetilheptan-4-on; di-izobütilketon",
   "ec_no": "203-620-1",
   "index_no": "606-005-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -21,7 +21,7 @@
     "scl_limits": [
       {
         "h_code": "H335",
-        "class": "STOT SE 3",
+        "class": "",
         "c_min": 10.0,
         "c_max": null
       }

@@ -1,10 +1,10 @@
 {
   "cas": "204254-96-6",
-  "name": "ethyl (1S,5R,6S)-5-(1- ethylpropoxy)-7- oxabicyclo[4.1.0]hept-3-ene-3- carboxylate",
+  "name": "ethyl (1S,5R,6S)-5-(1-ethylpropoxy)-7-oxabicyclo[4.1.0]hept-3-ene-3-carboxylate",
   "name_tr": "etil (1S,5R,6S)-5-(1- etilpropoksi)-7- oksabisiklo[4.1.0]hep-3-ten-3- karboksilat",
   "ec_no": "429-020-1",
   "index_no": "607-594-00-6",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

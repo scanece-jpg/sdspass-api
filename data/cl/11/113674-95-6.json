@@ -1,26 +1,24 @@
 {
   "cas": "113674-95-6",
-  "name": "4-(2-chloro-4- trifluoromethyl)phenoxy-2- fluoroaniline hydrochloride",
+  "name": "4-(2-chloro-4-trifluoromethyl)phenoxy-2-fluoroaniline hydrochloride",
   "name_tr": "4-(2-kloro-4- triflorometil)fenoksi-2- floroanilin hidroklorür",
   "ec_no": "402-190-4",
   "index_no": "612-094-00-6",
-  "atp": "ATP01",
-  "notes": [
-    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
-  ],
+  "atp": "ATP1",
+  "notes": [],
   "classification": {
     "hazards": [
-      {
-        "class": "STOT RE 1",
-        "h_code": "H372"
-      },
       {
         "class": "Acute Tox. 4",
         "h_code": "H302"
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372 **"
+        "h_code": "H372"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Eye Dam. 1",
@@ -51,9 +49,9 @@
       "GHS09"
     ],
     "h_codes": [
-      "H372",
       "H302",
-      "H372 **",
+      "H372",
+      "H373",
       "H318",
       "H317",
       "H400",

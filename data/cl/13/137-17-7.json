@@ -1,10 +1,10 @@
 {
   "cas": "137-17-7",
-  "name": "2,4,5-trimethylaniline; [1] 2,4,5-trimethylaniline hydrochloride [2]",
+  "name": "2,4,5-trimethylaniline [1]\n2,4,5-trimethylaniline hydrochloride  [2]",
   "name_tr": "2,4,5-trimetilanilin; [1] 2,4,5-trimetilanilin hidroklorür [2]",
-  "ec_no": "205-282-0",
+  "ec_no": "205-282-0 [1]",
   "index_no": "612-197-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

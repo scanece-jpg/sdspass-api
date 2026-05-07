@@ -1,10 +1,10 @@
 {
   "cas": "41959-35-7",
-  "name": "1,2,3,4-tetrahydro-6-nitro- quinoxaline",
+  "name": "1,2,3,4-tetrahydro-6-nitro-quinoxaline",
   "name_tr": "1,2,3,4-tetrahidro-6-nitro- kinoksalin",
   "ec_no": "414-270-6",
   "index_no": "607-390-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

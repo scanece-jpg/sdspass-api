@@ -1,10 +1,10 @@
 {
   "cas": "1910-42-5",
-  "name": "paraquat dichloride; 1,1-dimethyl-4,4'-bipyridinium dichloride; [1] paraquat dimethylsulfate; 1,1-dimethyl-4,4'-bipyridinium dimethyl sulphate [2]",
+  "name": "paraquat dichloride; 1,1-dimethyl-4,4'-bipyridinium dichloride [1]\nparaquat dimethylsulfate; 1,1-dimethyl-4,4'-bipyridinium dimethyl sulphate  [2]",
   "name_tr": "parakuat diklorür; 1,1-dimetil- 4,4'-bipiridinyum diklorür; [1] parakuat dimetilsülfat; 1,1-dimetil-4,4’-bipiridinyum dimetilsülfat [2]",
-  "ec_no": "217-615-7",
+  "ec_no": "217-615-7 [1]\n218-196-3 [2]",
   "index_no": "613-090-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -21,20 +21,20 @@
         "h_code": "H301"
       },
       {
-        "class": "STOT RE 1",
-        "h_code": "H372"
-      },
-      {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H335"
       },
       {
+        "class": "STOT RE 1",
+        "h_code": "H372"
+      },
+      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Aquatic Acute 1",
@@ -59,10 +59,10 @@
       "H330",
       "H311",
       "H301",
-      "H372",
-      "H319",
       "H335",
+      "H372",
       "H315",
+      "H319",
       "H400",
       "H410"
     ],

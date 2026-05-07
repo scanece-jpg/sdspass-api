@@ -1,10 +1,10 @@
 {
   "cas": "57837-19-1",
-  "name": "metalaxyl (ISO); methyl-N-(2,6-dimethylphenyl)- N-(methoxyacetyl)-DL-alaninate",
+  "name": "metalaxyl (ISO); methyl-N-(2,6-dimethylphenyl)-N-(methoxyacetyl)-DL-alaninate",
   "name_tr": "metalaksil (ISO); metil-N-(2,6-dimetilfenil)-N- (metoksiasetil)-DL-alaninat",
   "ec_no": "260-979-7",
   "index_no": "607-425-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,24 +1,32 @@
 {
   "cas": "57960-19-7",
-  "name": "acequinocyl (ISO); 3-dodecyl- 1,4-dioxo-1,4- dihydronaphthalen-2-yl acetate",
+  "name": "acequinocyl (ISO); 3-dodecyl-1,4-dioxo-1,4-dihydronaphthalen-2-yl acetate",
   "name_tr": "asekinosil (ISO); 3-dodesil-1,4- diokso-1,4- dihidronaftalen-2-il asetat",
-  "ec_no": "",
+  "ec_no": "—",
   "index_no": "606-144-00-6",
-  "atp": "",
+  "atp": "ATP3",
   "notes": [],
   "classification": {
     "hazards": [
+      {
+        "class": "STOT SE 1",
+        "h_code": "H370(lung)"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373(blood_system)"
+      },
       {
         "class": "Skin Sens. 1",
         "h_code": "H317"
       },
       {
-        "class": "STOT SE 1",
-        "h_code": "H370"
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
       },
       {
         "class": "Aquatic Chronic 1",
-        "h_code": "H373"
+        "h_code": "H410"
       }
     ],
     "m_factors": {
@@ -35,9 +43,11 @@
       "GHS09"
     ],
     "h_codes": [
+      "H370(lung)",
+      "H373(blood_system)",
       "H317",
-      "H370",
-      "H373"
+      "H400",
+      "H410"
     ],
     "suppl_h": []
   }

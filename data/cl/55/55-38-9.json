@@ -1,10 +1,10 @@
 {
   "cas": "55-38-9",
-  "name": "fenthion (ISO); O,O-dimethyl-O-(4- methylthion-m-tolyl) phosphorothioate",
+  "name": "fenthion (ISO); O,O-dimethyl-O-(4-methylthion-m-tolyl) phosphorothioate",
   "name_tr": "fentiyon (ISO); O,O-dimetil-O- (4-metiltiyon-m-tolil) fosforotiyoat",
   "ec_no": "200-231-9",
   "index_no": "015-048-00-8",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

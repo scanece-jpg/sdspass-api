@@ -4,7 +4,7 @@
   "name_tr": "2-kloroasetamid",
   "ec_no": "201-174-2",
   "index_no": "616-036-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -25,7 +25,7 @@
     "scl_limits": [
       {
         "h_code": "H317",
-        "class": "Skin Sens. 1",
+        "class": "",
         "c_min": 0.1,
         "c_max": null
       }

@@ -1,10 +1,10 @@
 {
   "cas": "91853-67-7",
-  "name": "4,8,12-trimethyltrideca-3,7,11- trienoic acid, mixed isomers",
+  "name": "4,8,12-trimethyltrideca-3,7,11-trienoic acid, mixed isomers",
   "name_tr": "4,8,12-trimetiltrideka-3,7,11- trienoik asit,izomerleri karışımı",
   "ec_no": "403-000-2",
   "index_no": "607-208-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

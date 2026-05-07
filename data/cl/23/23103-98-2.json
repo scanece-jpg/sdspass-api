@@ -1,10 +1,10 @@
 {
   "cas": "23103-98-2",
-  "name": "pirimicarb (ISO); 2-dimethylamino-5,6-dimethyl- pyrimidin-4-yl - dimethylcarbamate",
+  "name": "pirimicarb (ISO); 2-(dimethylamino)-5,6-dimethylpyrimidin-4-yl dimethylcarbamate",
   "name_tr": "pirimikarb (ISO); 2-dimetilamino-5,6-dimetil- pirimidin-4-il -dimetilkarbamat",
   "ec_no": "245-430-1",
   "index_no": "006-035-00-8",
-  "atp": "",
+  "atp": "ATP9",
   "notes": [],
   "classification": {
     "hazards": [
@@ -35,7 +35,7 @@
     ],
     "m_factors": {
       "acute": 10,
-      "chronic": 100
+      "chronic": 10
     },
     "scl_limits": []
   },

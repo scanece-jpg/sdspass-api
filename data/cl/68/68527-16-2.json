@@ -1,14 +1,12 @@
 {
   "cas": "68527-16-2",
-  "name": "Hydrocarbons, C1-3; Petroleum gas; [A complex combination of hydrocarbons having carbon numbers predominantly in the range of C1 through C3 and boiling in the range of approximately minus 164°C to minus 42°C (-263°F to -44°F).]",
+  "name": "Hydrocarbons, C1-3; Petroleum gas; [A complex combination of hydrocarbons having carbon numbers predominantly in the range of C1 through C3 and boiling in the range of approximately minus 164 °C to minus 42 °C (– 263 °F to – 44 °F).]",
   "name_tr": "Hidrokarbonlar, C 1-3; Petrol gazı; Büyük çoğunlukla, C1 ila C3 aralığında karbon sayısına sahip ve yaklaşık eksi 164 oC ila eksi 42 oC (-263 oF ila 44 oF) aralığında kaynayan, hidrokarbonların kompleks bir bileşimi.]",
   "ec_no": "271-259-7",
   "index_no": "649-090-00-9",
   "atp": "ATP1",
   "notes": [
-    "K",
-    "U",
-    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
+    "K U"
   ],
   "classification": {
     "hazards": [

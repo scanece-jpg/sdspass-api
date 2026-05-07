@@ -1,10 +1,10 @@
 {
   "cas": "41107-56-6",
-  "name": "5-(2,4-dioxo-1,2,3,4- tetrahydropyrimidine)-3-fluoro- 2-hydroxymethyltetrahydrofuran",
+  "name": "5-(2,4-dioxo-1,2,3,4-tetrahydropyrimidine)-3-fluoro-2-hydroxymethyltetrahydrofuran",
   "name_tr": "5-(2,4-diokso-1,2,3,4- tetrahidropirimidin)-3- flor-2- hidroksimetiltetrahidrofuran",
   "ec_no": "415-360-8",
   "index_no": "616-089-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

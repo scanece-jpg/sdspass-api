@@ -1,13 +1,17 @@
 {
   "cas": "23564-05-8",
-  "name": "thiophanate-methyl (ISO); 1,2-di-(3-methoxycarbonyl-2- thioureido)benzene",
+  "name": "thiophanate-methyl (ISO);\ndimethyl (1,2-phenylenedicarbamo-thioyl)biscarbamate; dimethyl 4,4′-(o-phenylene) bis(3-thioallophanate)",
   "name_tr": "tiyofanat-metil (ISO); 1,2-di-(3- metoksikarbonil-2- tiyoüreido)benzen",
   "ec_no": "245-740-7",
   "index_no": "006-069-00-3",
-  "atp": "",
+  "atp": "ATP17",
   "notes": [],
   "classification": {
     "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
       {
         "class": "Muta. 2",
         "h_code": "H341"
@@ -43,6 +47,7 @@
       "GHS09"
     ],
     "h_codes": [
+      "H351",
       "H341",
       "H332",
       "H317",
@@ -52,6 +57,6 @@
     "suppl_h": []
   },
   "ate": {
-    "inhalation_dust": 1.7
+    "inhalation_mgl": 1.7
   }
 }

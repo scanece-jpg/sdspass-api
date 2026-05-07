@@ -1,13 +1,12 @@
 {
   "cas": "90641-00-2",
-  "name": "Extract oils (coal), naphthalene oils; Acid Extract; [The aqueous extract produced by an acidic wash of alkali- washed naphthalene oil. Composed primarily of acid salts of various aromatic nitrogen bases including pyridine, quinoline and their alkyl derivatives.]",
+  "name": "Extract oils (coal), naphthalene oils; Acid Extract; [The aqueous extract produced by an acidic wash of alkali-washed naphthalene oil.  Composed primarily of acid salts of various aromatic nitrogen bases including pyridine, quinoline and their alkyl derivatives.]",
   "name_tr": "özüt yağları (kömür), naftalin yağları; asit özütü; [Alkali yıkanmış naftalin yağının asitle yıkanmasından üretilen sulu özüt. Büyük ölçüde, pridin, kinolin ve bunların alkil türevleri gibi çeşitli nitrojen bazlarının asit tuzlarından oluşur.]",
   "ec_no": "292-623-1",
   "index_no": "648-130-00-2",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
-    "J",
-    "M"
+    "J M"
   ],
   "classification": {
     "hazards": [

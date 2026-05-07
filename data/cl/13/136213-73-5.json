@@ -1,10 +1,10 @@
 {
   "cas": "136213-73-5",
-  "name": "2-((4-(ethyl-(2- hydroxyethyl)amino)-2- methylphenyl)azo)-6-methoxy- 3-methyl-benzothiazolium methylsulfate",
+  "name": "2-((4-(ethyl-(2-hydroxyethyl)amino)-2-methylphenyl)azo)-6-methoxy-3-methyl-benzothiazolium methylsulfate",
   "name_tr": "2-((4-(etil-(2- hidroksietil)amino)-2- metilfenil)azo)-6-metoksi-3- metil-benzotiazolyum metilsülfat",
   "ec_no": "411-100-2",
   "index_no": "611-089-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

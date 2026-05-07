@@ -4,7 +4,7 @@
   "name_tr": "siklohekzil akrilat",
   "ec_no": "221-319-3",
   "index_no": "607-116-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "D"
   ],
@@ -27,7 +27,7 @@
     "scl_limits": [
       {
         "h_code": "H335",
-        "class": "STOT SE 3",
+        "class": "",
         "c_min": 10.0,
         "c_max": null
       }

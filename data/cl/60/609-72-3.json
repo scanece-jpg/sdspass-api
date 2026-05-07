@@ -1,30 +1,28 @@
 {
   "cas": "609-72-3",
-  "name": "N,N-dimethyl-p-toluidine; [1] N,N-dimethyl-m-toluidine; [2] N,N-dimethyl-o-toluidine [3]",
+  "name": "N,N-dimethyl-m-toluidine [1]\nN,N-dimethyl-o-toluidine [2]",
   "name_tr": "N,N-dimetil-p-toluidin; [1] N,N-dimetil-m-toluidin; [2] N,N-dimetil-o-toluidin [3]",
-  "ec_no": "202-805-4",
+  "ec_no": "210-199-8",
   "index_no": "612-056-00-9",
-  "atp": "",
-  "notes": [
-    "C"
-  ],
+  "atp": "ATP21",
+  "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 3",
+        "class": "Acute Tox. 3 *",
         "h_code": "H331"
       },
       {
-        "class": "Acute Tox. 3",
+        "class": "Acute Tox. 3 *",
         "h_code": "H311"
       },
       {
-        "class": "Acute Tox. 3",
+        "class": "Acute Tox. 3 *",
         "h_code": "H301"
       },
       {
-        "class": "STOT RE 2",
-        "h_code": "H373"
+        "class": "STOT RE 2 *",
+        "h_code": "H373 **"
       },
       {
         "class": "Aquatic Chronic 3",
@@ -44,7 +42,7 @@
       "H331",
       "H311",
       "H301",
-      "H373",
+      "H373 **",
       "H412"
     ],
     "suppl_h": []

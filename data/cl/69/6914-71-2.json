@@ -1,10 +1,10 @@
 {
   "cas": "6914-71-2",
-  "name": "dimethylcyclopropane-1,1- dicarboxylate",
+  "name": "dimethylcyclopropane-1,1-dicarboxylate",
   "name_tr": "dimetilsiklopropan-1,1- dikarboksilat",
   "ec_no": "414-240-2",
   "index_no": "607-391-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

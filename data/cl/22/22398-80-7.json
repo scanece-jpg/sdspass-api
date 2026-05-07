@@ -4,7 +4,7 @@
   "name_tr": "indiyum fosfit",
   "ec_no": "244-959-5",
   "index_no": "015-200-00-3",
-  "atp": "",
+  "atp": "ATP3",
   "notes": [],
   "classification": {
     "hazards": [
@@ -18,26 +18,20 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372"
+        "h_code": "H372(lungs)"
       }
     ],
     "m_factors": {},
     "scl_limits": [
       {
-        "h_code": "H372",
-        "class": "BHOT Tekrar Mrz. 1",
-        "c_min": 0.1,
-        "c_max": null
-      },
-      {
         "h_code": "H350",
-        "class": "Carc. 1B",
+        "class": "",
         "c_min": 0.01,
         "c_max": null
       },
       {
         "h_code": "H373",
-        "class": "STOT RE 2",
+        "class": "",
         "c_min": 0.01,
         "c_max": 0.1
       }
@@ -51,7 +45,7 @@
     "h_codes": [
       "H350",
       "H361f",
-      "H372"
+      "H372(lungs)"
     ],
     "suppl_h": []
   }

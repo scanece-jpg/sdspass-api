@@ -4,14 +4,10 @@
   "name_tr": "1,4,7,10-tetraazasiklododekan",
   "ec_no": "425-450-9",
   "index_no": "612-225-00-7",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
-      {
-        "class": "Skin Corr. 1B",
-        "h_code": "H314"
-      },
       {
         "class": "Acute Tox. 4",
         "h_code": "H312"
@@ -19,6 +15,10 @@
       {
         "class": "Acute Tox. 4",
         "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
       },
       {
         "class": "Aquatic Acute 1",
@@ -40,9 +40,9 @@
       "GHS09"
     ],
     "h_codes": [
-      "H314",
       "H312",
       "H302",
+      "H314",
       "H400",
       "H410"
     ],

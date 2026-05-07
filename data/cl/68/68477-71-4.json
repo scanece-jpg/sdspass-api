@@ -1,14 +1,12 @@
 {
   "cas": "68477-71-4",
-  "name": "Gases (petroleum), catalytic- cracked gas oil depropanizer bottoms, C4-rich acid-free; Petroleum gas; [A complex combination of hydrocarbons obtained from fractionation of catalytic cracked gas oil hydrocarbon stream and treated to remove hydrogen sulfide and other acidic components. It consists of hydrocarbons having carbon numbers in the range of C3 through C5, predominantly C4.]",
+  "name": "Gases (petroleum), catalytic-cracked gas oil depropanizer bottoms, C4-rich acid-free; Petroleum gas; [A complex combination of hydrocarbons obtained from fractionation of catalytic cracked gas oil hydrocarbon stream and treated to remove hydrogen sulfide and other acidic components. It consists of hydrocarbons having carbon numbers in the range of C3 through C5, predominantly C4.]",
   "name_tr": "Gazlar (petrol), katalitik- parçalanmış gaz yağı propan gidericisi altlar, C4-zengin asit içermeyen; Petrol gazı; [Katalitik olarak parçalanmış gaz yağı hidrokarbon akışının ayrımsal damıtılmasıve hidrojen sülfürün ve diğer asidik bileşenlerin uzaklaştırılması için muamele edilmesi ile elde edilen hidrokarbonların kompleks bir bileşimi. C3 ila C5 aralığında, büyük çoğunlukla C4, karbon sayısına sahip hidrokarbonlardan oluşur.]",
   "ec_no": "270-752-4",
   "index_no": "649-208-00-9",
   "atp": "ATP1",
   "notes": [
-    "K",
-    "U",
-    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
+    "K U"
   ],
   "classification": {
     "hazards": [

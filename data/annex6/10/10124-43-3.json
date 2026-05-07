@@ -44,13 +44,14 @@
       }
     ],
     "m_factors": {
-      "acute": 10
+      "acute": 10,
+      "chronic": 10
     },
     "scl_limits": [
       {
-        "h_code": "H350",
+        "h_code": "H350i",
         "class": "",
-        "c_min": 1.0,
+        "c_min": 0.01,
         "c_max": null
       }
     ]

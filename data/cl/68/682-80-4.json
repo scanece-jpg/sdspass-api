@@ -1,10 +1,10 @@
 {
   "cas": "682-80-4",
-  "name": "demephion-O (ISO); O,O-dimethyl O-2- methylthioethyl phosphorothioate",
+  "name": "demephion-O (ISO); O,O-dimethyl O-2-methylthioethyl phosphorothioate",
   "name_tr": "demefion-S (ISO); O,O-dimetil O-2-metiltiyoetil fosforotiyoat",
   "ec_no": "211-666-9",
   "index_no": "015-116-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -4,7 +4,7 @@
   "name_tr": "Dimetilnitrosoamin; N-nitrosodimetilamin",
   "ec_no": "200-549-8",
   "index_no": "612-077-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -33,7 +33,7 @@
     "scl_limits": [
       {
         "h_code": "H350",
-        "class": "Carc. 1B",
+        "class": "",
         "c_min": 0.001,
         "c_max": null
       }

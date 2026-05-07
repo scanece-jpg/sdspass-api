@@ -1,20 +1,20 @@
 {
   "cas": "152828-23-4",
-  "name": "N-[3-(1,1-dimethylethyl)-1H- pyrazol-5-yl]-N'-hydroxy-4- nitrobenzenecarboximidamide",
+  "name": "N-[3-(1,1-dimethylethyl)-1H-pyrazol-5-yl]-N'-hydroxy-4-nitrobenzenecarboximidamide",
   "name_tr": "N-[3-(1,1-dimetiletil)-1H- pirazol-5-il]-N’-hidroksi-4- nitrobenzenkarboksimidamid",
   "ec_no": "423-530-8",
   "index_no": "612-247-00-7",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "STOT RE 1",
-        "h_code": "H372"
-      },
-      {
         "class": "Acute Tox. 4",
         "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
       },
       {
         "class": "Aquatic Chronic 3",
@@ -31,8 +31,8 @@
       "GHS07"
     ],
     "h_codes": [
-      "H372",
       "H302",
+      "H372",
       "H412"
     ],
     "suppl_h": []

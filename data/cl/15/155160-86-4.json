@@ -1,10 +1,10 @@
 {
   "cas": "155160-86-4",
-  "name": "sodium 3,5- bis(tetradecyloxycarbonyl)benze nesulfinate",
+  "name": "sodium 3,5-bis(tetradecyloxycarbonyl)benzenesulfinate",
   "name_tr": "sodyum-3,5- bis(tetradesiloksikarbonil)benze nsülfinat",
   "ec_no": "407-720-8",
   "index_no": "016-068-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

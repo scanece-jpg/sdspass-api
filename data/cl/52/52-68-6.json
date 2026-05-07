@@ -1,10 +1,10 @@
 {
   "cas": "52-68-6",
-  "name": "trichlorfon (ISO); dimethyl 2,2,2-trichloro-1- hydroxyethylphosphonate",
+  "name": "trichlorfon (ISO); dimethyl 2,2,2-trichloro-1-hydroxyethylphosphonate",
   "name_tr": "triklorofon (ISO); dimetil-2,2,2-trikloro-1- hidroksietilfosfonat",
   "ec_no": "200-149-3",
   "index_no": "015-021-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

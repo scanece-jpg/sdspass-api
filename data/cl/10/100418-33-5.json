@@ -1,10 +1,10 @@
 {
   "cas": "100418-33-5",
-  "name": "2-((4-methyl-2- nitrophenyl)amino)ethanol",
+  "name": "2-((4-methyl-2-nitrophenyl)amino)ethanol",
   "name_tr": "2-((4-metil-2- nitrofenil)amino)etanol",
   "ec_no": "408-090-7",
   "index_no": "603-126-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

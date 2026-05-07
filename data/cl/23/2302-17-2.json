@@ -1,10 +1,10 @@
 {
   "cas": "2302-17-2",
-  "name": "sodium methyl [(4- aminophenyl)sulphonyl]carbama te; sodium methyl (EZ)- sulfanilylcarbonimidate; asulam- sodium",
+  "name": "sodium methyl [(4-aminophenyl)sulphonyl]carbamate; sodium methyl (EZ)-sulfanilylcarbonimidate; asulam-sodium",
   "name_tr": "sodyum metil [(4- aminofenil)sülfonil]karbamat; sodyum metil (EZ)sülfanilkarbonimidat; asulamsodyum",
   "ec_no": "218-953-8",
   "index_no": "607-731-00-X",
-  "atp": "",
+  "atp": "ATP13",
   "notes": [],
   "classification": {
     "hazards": [

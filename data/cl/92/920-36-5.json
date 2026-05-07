@@ -4,25 +4,25 @@
   "name_tr": "(2-metilpropil)lityum; izobütillityum",
   "ec_no": "440-620-2",
   "index_no": "003-003-00-5",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
-      {
-        "class": "Water-react. 1",
-        "h_code": "H260"
-      },
       {
         "class": "Pyr. Liq. 1",
         "h_code": "H250"
       },
       {
-        "class": "Skin Corr. 1A",
-        "h_code": "H314"
+        "class": "Water-react. 1",
+        "h_code": "H260"
       },
       {
         "class": "STOT SE 3",
         "h_code": "H336"
+      },
+      {
+        "class": "Skin Corr. 1A",
+        "h_code": "H314"
       },
       {
         "class": "Aquatic Acute 1",
@@ -45,10 +45,10 @@
       "GHS09"
     ],
     "h_codes": [
-      "H260",
       "H250",
-      "H314",
+      "H260",
       "H336",
+      "H314",
       "H400",
       "H410"
     ],

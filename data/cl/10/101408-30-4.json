@@ -1,10 +1,10 @@
 {
   "cas": "101408-30-4",
-  "name": "reaction mass of compounds from (dodecakis(p- tolylthio)phthalocyaninato)copp er(II) to (hexadecakis(p- tolylthio)phthalocyaninato)copp er(II)",
+  "name": "reaction mass of compounds from (dodecakis(p-tolylthio)phthalocyaninato)copper(II) to (hexadecakis(p-tolylthio)phthalocyaninato)copper(II)",
   "name_tr": "(dodesakis(p- toliltiyo)ftalosiyaninato)bakır(II) den (hekzadekakis(p- toliltiyo)ftalosiyaninato)bakır(II) ye kadar olan bileşiklerin tepkime kütlesi",
   "ec_no": "407-700-9",
   "index_no": "029-010-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

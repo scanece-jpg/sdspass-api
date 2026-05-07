@@ -1,10 +1,10 @@
 {
   "cas": "89544-48-9",
-  "name": "2-(2,4-dichlorophenyl)-2-(2- propenyl)oxirane",
+  "name": "2-(2,4-dichlorophenyl)-2-(2-propenyl)oxirane",
   "name_tr": "2-(2,4-diklorofenil)-2-(2- propenil)oksiran",
   "ec_no": "411-210-0",
   "index_no": "603-156-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

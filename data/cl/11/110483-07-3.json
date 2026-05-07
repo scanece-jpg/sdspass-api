@@ -1,10 +1,10 @@
 {
   "cas": "110483-07-3",
-  "name": "N-(3-hexadecyloxy-2- hydroxyprop-1-yl)-N-(2- hydroxyethyl)palmitamide",
+  "name": "N-(3-hexadecyloxy-2-hydroxyprop-1-yl)-N-(2-hydroxyethyl)palmitamide",
   "name_tr": "N-(3-hekzadesiloksi-2- hidroksiprop-1-il)-N-(2- hidroksietil)palmitamid",
   "ec_no": "408-110-4",
   "index_no": "616-096-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "120116-88-3",
-  "name": "cyazofamid (ISO); 4-chloro-2-cyano-N,N-dimethyl- 5-p-tolylimidazole-1- sulfonamide",
+  "name": "cyazofamid (ISO); 4-chloro-2-cyano-N,N-dimethyl-5-p-tolylimidazole-1-sulfonamide",
   "name_tr": "siyazofamid (ISO); 4-kloro-2-siyano-N,N-dimetil-5- p-tolilimidazol-1-sulfonamid",
-  "ec_no": "",
+  "ec_no": "-",
   "index_no": "616-166-00-8",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "134575-17-0",
-  "name": "tert-butyl (1R,5S)-3- azabicyclo[3.1.0]hex-6- ylcarbamate",
+  "name": "tert-butyl (1R,5S)-3-azabicyclo[3.1.0]hex-6-ylcarbamate",
   "name_tr": "ter-bütil (1R, 5S)-3- azabisiklo[3.1.0]hek-6- zilkarbamat",
   "ec_no": "429-170-8",
   "index_no": "006-098-00-1",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

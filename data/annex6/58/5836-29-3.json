@@ -34,13 +34,13 @@
       }
     ],
     "m_factors": {
-      "acute": 10
+      "chronic": 10
     },
     "scl_limits": [
       {
-        "h_code": "H360",
+        "h_code": "H360D",
         "class": "",
-        "c_min": 3.0,
+        "c_min": 0.003,
         "c_max": null
       },
       {
@@ -52,8 +52,8 @@
       {
         "h_code": "H373",
         "class": "",
-        "c_min": 1.0,
-        "c_max": null
+        "c_min": 0.1,
+        "c_max": 1.0
       }
     ]
   },

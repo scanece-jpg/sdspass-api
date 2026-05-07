@@ -1,10 +1,10 @@
 {
   "cas": "26399-36-0",
-  "name": "profluralin (ISO); N-(cyclopropylmethyl)-α,α,α- trifluoro-2,6-dinitro-N-propyl-p- toluidine",
+  "name": "profluralin (ISO); N-(cyclopropylmethyl)-α,α,α-trifluoro-2,6-dinitro-N-propyl-p-toluidine",
   "name_tr": "Profluralin (ISO); N-(siklopropilmetil)-α,α,α- trifloro-2,6-dinitro-N-propil-p- toluidin",
   "ec_no": "247-656-6",
   "index_no": "613-059-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

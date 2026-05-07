@@ -46,7 +46,8 @@
       }
     ],
     "m_factors": {
-      "acute": 100
+      "acute": 100,
+      "chronic": 100
     },
     "scl_limits": []
   },
@@ -71,10 +72,5 @@
     "suppl_h": [
       "EUH070"
     ]
-  },
-  "ate": {
-    "inhalation_dust": 0.5,
-    "dermal": 790.0,
-    "oral": 500.0
   }
 }

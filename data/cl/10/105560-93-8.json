@@ -1,10 +1,10 @@
 {
   "cas": "105560-93-8",
-  "name": "methyl 2R,3S-(-)-3-(4- methoxyphenyl)oxiranecarboxyl ate",
+  "name": "methyl 2R,3S-(-)-3-(4-methoxyphenyl)oxiranecarboxylate",
   "name_tr": "metil-2R,3S-(-)-3-(4- metoksifenil)oksirankarboksilat",
   "ec_no": "404-130-2",
   "index_no": "607-259-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

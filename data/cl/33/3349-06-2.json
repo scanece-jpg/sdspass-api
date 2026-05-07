@@ -1,10 +1,10 @@
 {
   "cas": "3349-06-2",
-  "name": "nickel diformate; [1] formic acid, nickel salt; [2] formic acid, copper nickel salt [3]",
+  "name": "nickel diformate [1]\nformic acid, nickel salt [2]\nformic acid, copper nickel salt  [3]",
   "name_tr": "nikel diformat; [1] formik asit, nikel tuzu; [2] formik asit, bakır nikel tuzu [3]",
-  "ec_no": "222-101-0",
+  "ec_no": "222-101-0 [1]\n239-946-6 [2]\n268-755-0 [3]",
   "index_no": "028-021-00-0",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -48,13 +48,19 @@
     "scl_limits": [
       {
         "h_code": "H372",
-        "class": "STOT RE 1",
+        "class": "",
         "c_min": 1.0,
         "c_max": null
       },
       {
+        "h_code": "H373",
+        "class": "",
+        "c_min": 0.1,
+        "c_max": 1.0
+      },
+      {
         "h_code": "H317",
-        "class": "C <%1 Cilt Hassas. 1",
+        "class": "",
         "c_min": 0.01,
         "c_max": null
       }

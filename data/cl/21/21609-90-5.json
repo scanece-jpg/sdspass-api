@@ -4,7 +4,7 @@
   "name_tr": "leptofos (ISO); O-4-bromo-2,5-diklorofenil O- metil fenilfosforotiyoat",
   "ec_no": "244-472-8",
   "index_no": "015-093-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,12 +13,12 @@
         "h_code": "H301"
       },
       {
-        "class": "STOT SE 1",
-        "h_code": "H370"
-      },
-      {
         "class": "Acute Tox. 4",
         "h_code": "H312"
+      },
+      {
+        "class": "STOT SE 1",
+        "h_code": "H370"
       },
       {
         "class": "Aquatic Acute 1",
@@ -41,8 +41,8 @@
     ],
     "h_codes": [
       "H301",
-      "H370",
       "H312",
+      "H370",
       "H400",
       "H410"
     ],

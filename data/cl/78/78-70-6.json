@@ -1,10 +1,10 @@
 {
   "cas": "78-70-6",
-  "name": "linalool; 3,7-dimethyl-1,6- octadien-3-ol; dl-linalool; [1] coriandrol; (S)-3,7-dimethyl-1,6- octadien-3-ol; d-linalool; [2] licareol; (R)-3,7-dimethyl-1,6- octadien-3-ol; l-linalool [3]",
+  "name": "linalool; 3,7-dimethyl-1,6-octadien-3-ol; dl-linalool [1]\ncoriandrol; (S)-3,7-dimethyl-1,6-octadien-3-ol; d-linalool [2]\nlicareol; (R)-3,7-dimethyl-1,6-octadien-3-ol; l-linalool [3]",
   "name_tr": "linalool; 3,7-dimetil-1,6- oktadien-3-ol; dl-linalool; [1] koriandrol; (S)-3,7-dimetil-1,6- oktadien-3-ol; d-linalool; [2] lisareol; (R)-3,7-dimetil-1,6- oktadien-3-ol; l-linalool [3]",
-  "ec_no": "201-134-4",
+  "ec_no": "201-134-4 [1]\n204-810-7 [2]\n204-811-2 [3]",
   "index_no": "603-235-00-2",
-  "atp": "",
+  "atp": "ATP10",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "112704-51-5",
-  "name": "(E)-3-(2-chlorophenyl)-2-(4- fluorophenyl)propenal",
+  "name": "(E)-3-(2-chlorophenyl)-2-(4-fluorophenyl)propenal",
   "name_tr": "(E)-3-(2-klorofenil)-2-(4- florfenil)propenal",
   "ec_no": "410-980-5",
   "index_no": "606-063-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

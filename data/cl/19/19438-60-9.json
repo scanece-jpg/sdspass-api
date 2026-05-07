@@ -1,10 +1,10 @@
 {
   "cas": "19438-60-9",
-  "name": "hexahydro-4-methylphthalic anhydride; [1] hexahydromethylphthalic anhydride; [2] hexahydro-1-methylphthalic anhydride; [3] hexahydro-3-methylphthalic anhydride [4]",
+  "name": "hexahydro-4-methylphthalic anhydride [1]\nhexahydromethylphthalic anhydride [2]\nhexahydro-1-methylphthalic anhydride [3]\nhexahydro-3-methylphthalic anhydride  [4]",
   "name_tr": "hekzahidro-4-metilftalik anhidrit; [1] hekzahidrometilftalik anhidrit; [2] hekzahidro-1-metilftalik anhidrit; [3] hekzahidro-3-metilftalik anhidrit [4]",
-  "ec_no": "243-072-0",
+  "ec_no": "243-072-0 [1]\n247-094-1 [2]\n256-356-4 [3]\n260-566-1 [4]",
   "index_no": "607-241-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "C"
   ],

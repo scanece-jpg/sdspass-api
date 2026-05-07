@@ -1,10 +1,10 @@
 {
   "cas": "79881-89-3",
-  "name": "3'-(3-acetyl-4-hydroxyphenyl)- 1,1-diethylurea",
+  "name": "3'-(3-acetyl-4-hydroxyphenyl)-1,1-diethylurea",
   "name_tr": "3'-(3-asetil-4-hidroksifenil)-1,1- dietilüre",
   "ec_no": "411-970-3",
   "index_no": "616-065-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

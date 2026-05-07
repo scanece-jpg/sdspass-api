@@ -1,10 +1,10 @@
 {
   "cas": "368450-39-9",
-  "name": "N-[2-(2-butyl-4,6-dicyano-1,3- dioxo-2,3-dihydro-1H-isoindol- 5-ylazo)-5-diethylamino- phenyl]acetamide",
+  "name": "N-[2-(2-butyl-4,6-dicyano-1,3-dioxo-2,3-dihydro-1H-isoindol-5-ylazo)-5-diethylamino-phenyl]acetamide",
   "name_tr": "N-[2-(2-butil-4,6-disiyano-1,3- diokso-2,3-dihidro-1H-isoindol- 5-ilazo)-5-dietilamino- fenil]asetamid",
   "ec_no": "449-940-7",
   "index_no": "616-193-00-5",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

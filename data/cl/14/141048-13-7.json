@@ -1,10 +1,10 @@
 {
   "cas": "141048-13-7",
-  "name": "tetrasodium [7-(2,5-dihydroxy- KO2-7-sulfonato-6-[4-(2,5,6- trichloro-pyrimidin-4- ylamino)phenylazo]-(N1,N7-N)- 1-naphthylazo)-8-hydroxy-KO8- naphthalene-1,3,5-trisulfonato(6- )]cuprate(II)",
+  "name": "tetrasodium [7-(2,5-dihydroxy-KO2-7-sulfonato-6-[4-(2,5,6-trichloro-pyrimidin-4-ylamino)phenylazo]-(N1,N7-N)-1-naphthylazo)-8-hydroxy-KO8-naphthalene-1,3,5-trisulfonato(6-)]cuprate(II)",
   "name_tr": "tetrasodyum [7-(2,5-dihidroksi- KO2-7-sülfonato-6-[4-(2,5,6- trikloro-primidin-4- ilamino)fenilazo]-(N1,N7-N)-1- naftilazo)-8-hidroksi-KO8- naftalen-1,3,5-trisülfonato(6- )]kuprat(II)",
   "ec_no": "411-470-5",
   "index_no": "611-081-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

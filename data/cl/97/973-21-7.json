@@ -1,10 +1,10 @@
 {
   "cas": "973-21-7",
-  "name": "dinobuton (ISO); 2-(1-methylpropyl)-4,6- dinitrophenyl isopropyl carbonate",
+  "name": "dinobuton (ISO); 2-(1-methylpropyl)-4,6-dinitrophenyl isopropyl carbonate",
   "name_tr": "dinobüton (ISO); 2-(1-metilpropil)-4,6-dinitrofenil izopropil karbonat",
   "ec_no": "213-546-1",
   "index_no": "006-028-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

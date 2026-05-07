@@ -1,10 +1,10 @@
 {
   "cas": "138164-12-2",
-  "name": "butroxydim (ISO); 5-(3-butyryl-2,4,6- trimethylphenyl)-2-[1- (ethoxyimino)propyl]-3- hydroxycyclohex-2-en-1-one",
+  "name": "butroxydim (ISO); 5-(3-butyryl-2,4,6-trimethylphenyl)-2-[1-(ethoxyimino)propyl]-3-hydroxycyclohex-2-en-1-one",
   "name_tr": "bütroksidim (ISO); 5-(3-bütiril- 2,4,6-trimetilfenil)-2-[1- (etoksiimino)propil]-3- hidroksisikloheks-2-en-1-on",
   "ec_no": "414-790-3",
   "index_no": "606-070-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

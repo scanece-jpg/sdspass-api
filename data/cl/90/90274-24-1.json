@@ -1,10 +1,10 @@
 {
   "cas": "90274-24-1",
-  "name": "(±)-4-[2-[[3-(4-hydroxyphenyl)- 1-methylpropyl]amino]-1- hydroxyethyl]phenol hydrochloride",
+  "name": "(±)-4-[2-[[3-(4-hydroxyphenyl)-1-methylpropyl]amino]-1-hydroxyethyl]phenol hydrochloride",
   "name_tr": "(±)-4-[2-[[3-(4-hidroksifenil)-1- metilpropil]amino]-1- hidroksietil]fenol hidroklorür",
   "ec_no": "415-170-5",
   "index_no": "604-068-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

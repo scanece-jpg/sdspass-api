@@ -5,14 +5,16 @@
   "ec_no": "204-589-7",
   "index_no": "603-098-00-9",
   "atp": "ATP17",
-  "notes": [
-    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
-  ],
+  "notes": [],
   "classification": {
     "hazards": [
       {
         "class": "Acute Tox. 4",
         "h_code": "H302"
+      },
+      {
+        "class": "STOT SE 3",
+        "h_code": "H335"
       },
       {
         "class": "Eye Dam. 1",
@@ -23,12 +25,14 @@
     "scl_limits": []
   },
   "labelling": {
-    "signal": "Warning",
+    "signal": "Danger",
     "pictograms": [
+      "GHS05",
       "GHS07"
     ],
     "h_codes": [
       "H302",
+      "H335",
       "H318"
     ],
     "suppl_h": []

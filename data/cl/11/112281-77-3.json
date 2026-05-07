@@ -1,10 +1,10 @@
 {
   "cas": "112281-77-3",
-  "name": "tetraconazole (ISO); (±) 2-(2,4-dichlorophenyl)-3- (1H-1,2,4-triazol-1-yl)propyl- 1,1,2,2-tetrafluoroethylether",
+  "name": "tetraconazole (ISO); (±) 2-(2,4-dichlorophenyl)-3-(1H-1,2,4-triazol-1-yl)propyl-1,1,2,2-tetrafluoroethylether",
   "name_tr": "tetraconazole (ISO); (±) 2-(2,4-diklorofenil)-3-(1H- 1,2,4-triyazol-1-il)propil-1,1,2,2- tetrafloretileter",
   "ec_no": "407-760-6",
   "index_no": "613-174-00-3",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

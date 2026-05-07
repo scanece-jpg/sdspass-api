@@ -4,7 +4,7 @@
   "name_tr": "2,3-epoksipropilmetakrilat; glisidil metakrilat",
   "ec_no": "203-441-9",
   "index_no": "607-123-00-4",
-  "atp": "",
+  "atp": "ATP10",
   "notes": [
     "D"
   ],
@@ -36,15 +36,19 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372"
-      },
-      {
-        "class": "Eye Dam. 1",
-        "h_code": "(soluk"
+        "h_code": "H372(respiratory_tract)"
       },
       {
         "class": "Skin Corr. 1C",
-        "h_code": "yolu)"
+        "h_code": "H314"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
       }
     ],
     "m_factors": {},
@@ -64,9 +68,10 @@
       "H311",
       "H302",
       "H335",
-      "H372",
-      "(soluk",
-      "yolu)"
+      "H372(respiratory_tract)",
+      "H314",
+      "H318",
+      "H317"
     ],
     "suppl_h": []
   }

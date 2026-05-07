@@ -1,10 +1,10 @@
 {
   "cas": "75736-33-3",
-  "name": "diclobutrazole (ISO); (R, R)-(±)-β-[(2,4- dichlorophenyl)methyl]-α-(1,1- dimethylethyl)-1H-1,2,4- triazole-1-ethanol; (2RS, 3RS)-1-(2,4- dichlorophenyl)-4,4-dimethyl-2- (1H-1,2,4-triazol-1yl)pentan-3- ol",
+  "name": "diclobutrazole (ISO); (R*, R*)-(±)-β-[(2,4-dichlorophenyl)methyl]-α-(1,1-dimethylethyl)-1H-1,2,4-triazole-1-ethanol; (2RS, 3RS)-1-(2,4-dichlorophenyl)-4,4-dimethyl-2-(1H-1,2,4-triazol-1yl)pentan-3-ol",
   "name_tr": "diklobütrazol (ISO); (R, R)-(±)- β-[(2,4-diklorofenil)metil]- α - (1,1-dimetiletil)-1H-1,2,4- triyazol-1-etanol; (2RS, 3RS)-1- (2,4-diklorofenil)-4,4-dimetil-2- (1H-1,2,4-triyazol-1il)pentan-3- ol",
   "ec_no": "",
   "index_no": "613-122-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

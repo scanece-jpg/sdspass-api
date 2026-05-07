@@ -4,7 +4,7 @@
   "name_tr": "1,3-di(prop-2,2- diil)benzenbis(neodekanoilperok sit)",
   "ec_no": "420-060-5",
   "index_no": "617-020-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,7 +13,7 @@
         "h_code": "H226"
       },
       {
-        "class": "Org. Perox. Type D",
+        "class": "Org. Perox. D",
         "h_code": "H242"
       },
       {

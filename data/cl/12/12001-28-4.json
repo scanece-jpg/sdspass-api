@@ -1,10 +1,10 @@
 {
   "cas": "12001-28-4",
-  "name": "asbestos",
+  "name": "asbestos [1]\nasbestos [2]\nasbestos [3]\nasbestos [4]\nasbestos [5]\nasbestos [6]\nasbestos [7]",
   "name_tr": "asbest",
-  "ec_no": "- - - - - - -",
+  "ec_no": "",
   "index_no": "650-013-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "2997-92-4",
-  "name": "2,2'-azobis[2- methylpropionamidine] dihydrochloride",
+  "name": "2,2'-azobis[2-methylpropionamidine] dihydrochloride",
   "name_tr": "2,2'-azobis[2- metilpropionamidin]dihidroklorü r",
   "ec_no": "221-070-0",
   "index_no": "611-053-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

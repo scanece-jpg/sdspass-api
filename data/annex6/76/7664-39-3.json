@@ -39,13 +39,13 @@
         "h_code": "H314",
         "class": "",
         "c_min": 1.0,
-        "c_max": null
+        "c_max": 7.0
       },
       {
         "h_code": "H319",
         "class": "",
-        "c_min": 1.0,
-        "c_max": null
+        "c_min": 0.1,
+        "c_max": 1.0
       }
     ]
   },

@@ -1,10 +1,10 @@
 {
   "cas": "125630-94-6",
-  "name": "ethyl N-(5-chloro-3-(4- (diethylamino)-2- methylphenylimino)-4-methyl-6- oxo-1,4- cyclohexadienyl)carbamate",
+  "name": "ethyl N-(5-chloro-3-(4-(diethylamino)-2-methylphenylimino)-4-methyl-6-oxo-1,4-cyclohexadienyl)carbamate",
   "name_tr": "etil-N-(5-kloro-3-(4- (dietilamino)-2-metilfenilimino)- 4-metil-6-okso-1,4- siklohekzadenil)karbamat",
   "ec_no": "414-820-5",
   "index_no": "607-398-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "186450-73-7",
-  "name": "N-benzyl-N-ethyl-(4-(5-nitro- benzo[c]isothiazol-3- ylazo)phenyl)amine",
+  "name": "N-benzyl-N-ethyl-(4-(5-nitro-benzo[c]isothiazol-3-ylazo)phenyl)amine",
   "name_tr": "N-benzil-N-etil-(4-(5-nitro- benzo[c]izotiazol-3- ilazo)fenil)amin",
   "ec_no": "425-300-2",
   "index_no": "612-223-00-6",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

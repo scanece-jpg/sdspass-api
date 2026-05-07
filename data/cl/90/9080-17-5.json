@@ -4,7 +4,7 @@
   "name_tr": "Amonyum polisülfürler",
   "ec_no": "232-989-1",
   "index_no": "016-008-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -18,7 +18,14 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H031",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",

@@ -1,10 +1,10 @@
 {
   "cas": "126833-17-8",
-  "name": "fenhexamid (ISO); N-(2,3-dichlor-4- hydroxyphenyl)-1- methylcyclohexancarboxamid",
+  "name": "fenhexamid (ISO); N-(2,3-dichlor-4-hydroxyphenyl)-1-methylcyclohexancarboxamid",
   "name_tr": "fenhekzamid (ISO); N-(2,3- diklor-4-hidroksifenil)-1- metilsiklohekzankarboksamid",
   "ec_no": "422-530-5",
   "index_no": "616-111-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

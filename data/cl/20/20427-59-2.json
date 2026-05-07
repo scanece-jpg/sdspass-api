@@ -1,10 +1,10 @@
 {
   "cas": "20427-59-2",
-  "name": "copper dihydroxide; copper(II)hydroxide",
+  "name": "copper dihydroxide; copper(II) hydroxide",
   "name_tr": "bakır dihidroksit; bakır(II)hidroksit",
   "ec_no": "243-815-9",
   "index_no": "029-021-00-3",
-  "atp": "",
+  "atp": "ATP17",
   "notes": [],
   "classification": {
     "hazards": [
@@ -52,7 +52,7 @@
     "suppl_h": []
   },
   "ate": {
-    "inhalation_dust": 0.47,
+    "inhalation_mgl": 0.47,
     "oral": 500.0
   }
 }

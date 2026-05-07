@@ -1,14 +1,12 @@
 {
   "cas": "93924-32-4",
-  "name": "Foots oil (petroleum), clay- treated; Foots oil; [A complex combination of hydrocarbons obtained by treatment of Foot's oil with natural or modified clay in either a contacting or percolation process to remove the trace amounts of polar compounds and impurities present. It consists predominantly of branched chain hydrocarbons with carbon numbers predominantly in the range of C20 through C50.]",
+  "name": "Foots oil (petroleum), clay-treated; Foots oil; [A complex combination of hydrocarbons obtained by treatment of Foot's oil with natural or modified clay in either a contacting or percolation process to remove the trace amounts of polar compounds and impurities present. It consists predominantly of branched chain hydrocarbons with carbon numbers predominantly in the range of C20 through C50.]",
   "name_tr": "Son kalıntı yağı (petrol), kil-ile işlem görmüş; Son kalıntı yağı; [Son kalıntı yağının, mevcut eser miktardaki polar bileşiklerin ve safsızlıkların uzaklaştırılması için, doğal veya modifiye kil ile kontak veya perkolasyon prosesi vasıtasıyla muamele edilmesi ile elde edilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla, C20 ila C50 aralığında karbon sayısına sahip genelde dallanmış-zincirli hidrokarbonlardan oluşur.]",
   "ec_no": "300-226-2",
   "index_no": "649-176-00-6",
   "atp": "CLP00",
   "notes": [
-    "K",
-    "U",
-    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
+    "H K U"
   ],
   "classification": {
     "hazards": [

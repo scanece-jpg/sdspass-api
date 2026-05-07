@@ -1,10 +1,10 @@
 {
   "cas": "16893-85-9",
-  "name": "alkali fluorosilicates(Na); [1] alkali fluorosilicates(K); [2] alkali fluorosilicates(NH4) [3]",
+  "name": "alkali fluorosilicates(Na) [1]\nalkali fluorosilicates(K) [2]\nalkali fluorosilicates(NH4)  [3]",
   "name_tr": "alkali (bazik) hekzaflorosilikat(Na); [1] alkali (bazik) hekzaflorosilikat(K) [2]; alkalihekzaflorosilikat(NH4) [3]",
-  "ec_no": "240-934-8",
+  "ec_no": "240-934-8 [1]\n240-896-2 [2]\n240-968-3 [3]",
   "index_no": "009-012-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "A"
   ],

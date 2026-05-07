@@ -4,7 +4,7 @@
   "name_tr": "tetrahidro-2-furilmetanol; tetrahidrofurfuril alkol",
   "ec_no": "202-625-6",
   "index_no": "603-061-00-7",
-  "atp": "",
+  "atp": "ATP6",
   "notes": [],
   "classification": {
     "hazards": [
@@ -21,7 +21,7 @@
     "scl_limits": []
   },
   "labelling": {
-    "signal": "",
+    "signal": "Danger",
     "pictograms": [
       "GHS08",
       "GHS07"

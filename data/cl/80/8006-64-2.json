@@ -4,7 +4,7 @@
   "name_tr": "terebentin, yağ",
   "ec_no": "232-350-7",
   "index_no": "650-002-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -29,12 +29,12 @@
         "h_code": "H304"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Skin Sens. 1",
@@ -62,8 +62,8 @@
       "H312",
       "H302",
       "H304",
-      "H319",
       "H315",
+      "H319",
       "H317",
       "H411"
     ],

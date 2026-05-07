@@ -1,18 +1,24 @@
 {
   "cas": "135410-20-7",
-  "name": "acetamiprid (ISO); (E)-N1-[(6-chloro-3- pyridyl)methyl]-N2-cyano-N1- methylacetamidine",
+  "name": "acetamiprid (ISO); (1E)-N-[(6-chloropyridin-3-yl) methyl]-N’-cyano-N-methylethanimidamide; (E)-N1-[(6-chloro-3-pyridyl)methyl]-N2-cyano-N1-methylacetamidine",
   "name_tr": "asetamiprid (ISO); (E)-N1-[(6-kloro-3-pridil)metil]- N2-siyano-N1-metilasetamid",
-  "ec_no": "",
+  "ec_no": "-",
   "index_no": "608-032-00-2",
   "atp": "ATP18",
-  "notes": [
-    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
-  ],
+  "notes": [],
   "classification": {
     "hazards": [
       {
+        "class": "Repr. 2",
+        "h_code": "H361d"
+      },
+      {
         "class": "Acute Tox. 3",
         "h_code": "H301"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
       },
       {
         "class": "Aquatic Chronic 1",
@@ -26,17 +32,18 @@
     "scl_limits": []
   },
   "labelling": {
-    "signal": "Warning",
+    "signal": "Danger",
     "pictograms": [
-      "GHS07"
+      "GHS08",
+      "GHS06",
+      "GHS09"
     ],
     "h_codes": [
+      "H361d",
       "H301",
+      "H400",
       "H410"
     ],
     "suppl_h": []
-  },
-  "ate": {
-    "oral": 140.0
   }
 }

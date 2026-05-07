@@ -4,7 +4,7 @@
   "name_tr": "Asetik anhidrid",
   "ec_no": "203-564-8",
   "index_no": "607-008-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -29,8 +29,32 @@
     "scl_limits": [
       {
         "h_code": "H314",
-        "class": "Skin Corr. 1B",
+        "class": "",
         "c_min": 25.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H315",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": 25.0
+      },
+      {
+        "h_code": "H318",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": 25.0
+      },
+      {
+        "h_code": "H319",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": 5.0
+      },
+      {
+        "h_code": "H335",
+        "class": "",
+        "c_min": 5.0,
         "c_max": null
       }
     ]

@@ -1,10 +1,10 @@
 {
   "cas": "92761-26-7",
-  "name": "(E-E)-3,3'-(1,4- phenylenedimethylidene)bis(2- oxobornane-10-sulfonic acid)",
+  "name": "(E-E)-3,3'-(1,4-phenylenedimethylidene)bis(2-oxobornane-10-sulfonic acid)",
   "name_tr": "(E-E )-3,3'-(1,4- fenilendimetilidin)bis(2- oksobornan-10-sülfonik asit)",
   "ec_no": "410-960-6",
   "index_no": "607-297-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

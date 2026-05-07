@@ -1,10 +1,10 @@
 {
   "cas": "141880-36-6",
-  "name": "reaction mass of: sodium/potassium 7-[[[3-[[4-((2- hydroxy- naphthyl)azo)phenyl]azo]phenyl ]sulfonyl]amino]-naphthalene- 1,3-disulfonate",
+  "name": "reaction mass of: sodium/potassium 7-[[[3-[[4-((2-hydroxy-naphthyl)azo)phenyl]azo]phenyl]sulfonyl]amino]-naphthalene-1,3-disulfonate",
   "name_tr": "tepkime kütlesi: sodyum/potasyum-7-[[[3-[[4- ((2-hidroksi-naftil)azo)- fenil]azo]fenil]sülfonil]amino]na ftalin-1,3-disülfonat",
   "ec_no": "410-070-8",
   "index_no": "607-286-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

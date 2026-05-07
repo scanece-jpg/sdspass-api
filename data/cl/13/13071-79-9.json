@@ -1,10 +1,10 @@
 {
   "cas": "13071-79-9",
-  "name": "terbufos (ISO); S-tert-butylthiomethyl O,O- diethylphosphorodithioate",
+  "name": "terbufos (ISO); S-tert-butylthiomethyl O,O-diethylphosphorodithioate",
   "name_tr": "terbufos (ISO); S-ter- bütiltiyometil-O,O- dietilfosforoditiyoat",
   "ec_no": "235-963-8",
   "index_no": "015-139-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

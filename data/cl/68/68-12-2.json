@@ -4,7 +4,7 @@
   "name_tr": "N,N-dimetilformamid; dimetilformamid",
   "ec_no": "200-679-5",
   "index_no": "616-001-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -26,32 +26,7 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": [
-      {
-        "h_code": "H360D",
-        "class": "Repr. 1B (gelisim)",
-        "c_min": 0.3,
-        "c_max": null
-      },
-      {
-        "h_code": "H312",
-        "class": "Acute Tox. 4 (Derm.)",
-        "c_min": 5.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H332",
-        "class": "Acute Tox. 4 (Inhal.)",
-        "c_min": 5.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H319",
-        "class": "Eye Irrit. 2",
-        "c_min": 10.0,
-        "c_max": null
-      }
-    ]
+    "scl_limits": []
   },
   "labelling": {
     "signal": "Danger",

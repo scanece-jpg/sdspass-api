@@ -1,10 +1,10 @@
 {
   "cas": "202197-26-0",
-  "name": "3-chloro-4-(3- fluorobenzyloxy)aniline",
+  "name": "3-chloro-4-(3-fluorobenzyloxy)aniline",
   "name_tr": "3-kloro-4-(3- florobenziloksi)anilin",
   "ec_no": "445-590-4",
   "index_no": "612-266-00-0",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

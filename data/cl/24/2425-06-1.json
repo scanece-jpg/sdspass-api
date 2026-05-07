@@ -1,10 +1,10 @@
 {
   "cas": "2425-06-1",
-  "name": "captafol (ISO); 1,2,3,6-tetrahydro-N-(1,1,2,2- tetrachloroethylthio)phthalimide",
+  "name": "captafol (ISO); 1,2,3,6-tetrahydro-N-(1,1,2,2-tetrachloroethylthio)phthalimide",
   "name_tr": "captafol (ISO); 1,2,3,6- tetrahidro-N-(1,1,2,2- tetrakloroetiltiyo)ftalimid",
   "ec_no": "219-363-3",
   "index_no": "613-046-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

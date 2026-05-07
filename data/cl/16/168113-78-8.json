@@ -1,10 +1,10 @@
 {
   "cas": "168113-78-8",
-  "name": "5-[[4-chloro-6-[[2-[[4-fluoro-6- [[5-hydroxy-6-[(4-methoxy-2- sulfophenyl)azo]-7-sulfo-2- naphthalenyl]amino]-1,3,5- triazin-2-yl]amino]-1- methylethyl]amino]-1,3,5- triazin-2-yl]amino]-3-[[4- (ethenylsulfonyl)phenyl]azo]-4- hydroxy-naphtalene-2,7- disulfonic acid, sodium salt",
+  "name": "5-[[4-chloro-6-[[2-[[4-fluoro-6-[[5-hydroxy-6-[(4-methoxy-2-sulfophenyl)azo]-7-sulfo-2-naphthalenyl]amino]-1,3,5-triazin-2-yl]amino]-1-methylethyl]amino]-1,3,5-triazin-2-yl]amino]-3-[[4-(ethenylsulfonyl)phenyl]azo]-4-hydroxy-naphtalene-2,7-disulfonic acid, sodium salt",
   "name_tr": "5-[[4-kloro-6-[[2-[[4-flor-6-[[5- hidroksi-6-[(4-metoksi-2- sülfofenil)azo]-7-sülfo-2- naftalinil]amino]-1,3,5-triazin-2- il]amino]-1-metiletilamino]- 1,3,5-triazin-2-il]amino]-3-[[4- (etenilsülfonil)fenil]azo]-4- hidroksinaftalin-2,7-disülfonik asit, sodyum tuzu",
   "ec_no": "418-380-5",
   "index_no": "613-196-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "2631-37-0",
-  "name": "promecarb (ISO); 3-isopropyl-5-methylphenyl N- methylcarbamate",
+  "name": "promecarb (ISO); 3-isopropyl-5-methylphenyl N-methylcarbamate",
   "name_tr": "promekarb (ISO); 3-izopropil-5-metilfenil N- metilkarbamat",
   "ec_no": "220-113-0",
   "index_no": "006-037-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

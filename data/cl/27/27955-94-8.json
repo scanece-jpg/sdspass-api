@@ -1,10 +1,10 @@
 {
   "cas": "27955-94-8",
-  "name": "4,4',4''-(ethan-1,1,1- triyl)triphenol",
+  "name": "4,4',4''-(ethan-1,1,1-triyl)triphenol",
   "name_tr": "4,4',4''-(etan-1,1,1-triil)trifenol",
   "ec_no": "405-800-7",
   "index_no": "604-048-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "7681-52-9",
-  "name": "sodium hypochlorite, solution ... % Cl active",
+  "name": "sodium hypochlorite, solution ... % Cl active",
   "name_tr": "Sodyum hipoklorit, aktif Cl % ….. çözeltisi",
   "ec_no": "231-668-3",
   "index_no": "017-011-00-1",
-  "atp": "",
+  "atp": "ATP13",
   "notes": [
     "B"
   ],
@@ -29,37 +29,13 @@
     ],
     "m_factors": {
       "acute": 10,
-      "chronic": 1
+      "chronic": 10
     },
     "scl_limits": [
       {
-        "h_code": "H314",
-        "class": "Skin Corr. 1B",
+        "h_code": "H031",
+        "class": "",
         "c_min": 5.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H315",
-        "class": "Skin Irrit. 2",
-        "c_min": 1.0,
-        "c_max": 5.0
-      },
-      {
-        "h_code": "H318",
-        "class": "Eye Dam. 1",
-        "c_min": 0.5,
-        "c_max": null
-      },
-      {
-        "h_code": "H319",
-        "class": "Eye Irrit. 2",
-        "c_min": 0.1,
-        "c_max": 0.5
-      },
-      {
-        "h_code": "H335",
-        "class": "STOT SE 3",
-        "c_min": 0.5,
         "c_max": null
       }
     ]

@@ -1,10 +1,10 @@
 {
   "cas": "147741-93-3",
-  "name": "N-acetyl-N-[5-cyano-3-(2- dibutylamino-4-phenylthyazol- 5-yl-methylene)-4-methyl-2,6- dioxo-1,2,3,6-tetrahydropyridin- 1-yl]benzamide",
+  "name": "N-acetyl-N-[5-cyano-3-(2-dibutylamino-4-phenylthyazol-5-yl-methylene)-4-methyl-2,6-dioxo-1,2,3,6-tetrahydropyridin-1-yl]benzamide",
   "name_tr": "N-asetil-N-[5-siyano-3-(2- dibütilamino-4-feniltiyazol-5-il- metilen)-4-metil-2,6-diokso- 1,2,3,6-tetrahidropiridin-1- il]benzamid",
   "ec_no": "412-340-0",
   "index_no": "608-030-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

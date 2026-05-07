@@ -4,7 +4,7 @@
   "name_tr": "n-bütil akrilat",
   "ec_no": "205-480-7",
   "index_no": "607-062-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "D"
   ],
@@ -15,16 +15,16 @@
         "h_code": "H226"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H335"
       },
       {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Skin Sens. 1",
@@ -42,9 +42,9 @@
     ],
     "h_codes": [
       "H226",
-      "H319",
       "H335",
       "H315",
+      "H319",
       "H317"
     ],
     "suppl_h": []

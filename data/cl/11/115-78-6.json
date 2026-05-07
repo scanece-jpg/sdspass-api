@@ -4,7 +4,7 @@
   "name_tr": "klorfonyumklorür (ISO); tribütil (2,4-diklorobenzil) fosfonyum klorür",
   "ec_no": "204-105-4",
   "index_no": "015-085-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -17,12 +17,12 @@
         "h_code": "H312"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       }
     ],
     "m_factors": {},
@@ -36,8 +36,8 @@
     "h_codes": [
       "H301",
       "H312",
-      "H319",
-      "H315"
+      "H315",
+      "H319"
     ],
     "suppl_h": []
   }

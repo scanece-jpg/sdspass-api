@@ -1,10 +1,10 @@
 {
   "cas": "10046-00-1",
-  "name": "hydroxylammonium hydrogensulfate; hydroxylamine sulfate(1:1); [1] hydroxylamine phosphate; [2] hydroxylamine dihydrogenphosphate; [3] hydroxylamine 4- methylbenzenesulfonate [4]",
+  "name": "hydroxylammonium hydrogensulfate; hydroxylamine sulfate(1:1) [1]\nhydroxylamine phosphate [2]\nhydroxylamine dihydrogenphosphate [3]\nhydroxylamine 4-methylbenzenesulfonate [4]",
   "name_tr": "hidroksilamonyum hidrojen sülfat; hidroksilamin sülfat (1:1) [1] hidroksilamin fosfat: [2] hidroksilamin dihidrojenfosfat: [3] hidroksilamin-4- metilbenzensülfonat [4]",
-  "ec_no": "233-154-4",
+  "ec_no": "233-154-4 [1]\n244-077-0 [2]\n242-818-2 [3]\n258-872-5 [4]",
   "index_no": "612-237-00-2",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "T"
   ],
@@ -31,12 +31,12 @@
         "h_code": "H373"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Skin Sens. 1",
@@ -64,8 +64,8 @@
       "H312",
       "H302",
       "H373",
-      "H319",
       "H315",
+      "H319",
       "H317",
       "H400"
     ],

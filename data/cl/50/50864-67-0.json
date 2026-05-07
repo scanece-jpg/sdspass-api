@@ -4,14 +4,10 @@
   "name_tr": "Baryum polisülfürler",
   "ec_no": "256-814-3",
   "index_no": "016-003-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
-      {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
       {
         "class": "STOT SE 3",
         "h_code": "H335"
@@ -19,6 +15,10 @@
       {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Aquatic Acute 1",
@@ -35,9 +35,9 @@
       "GHS09"
     ],
     "h_codes": [
-      "H319",
       "H335",
       "H315",
+      "H319",
       "H400"
     ],
     "suppl_h": [

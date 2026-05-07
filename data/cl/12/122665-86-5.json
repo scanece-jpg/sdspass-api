@@ -1,10 +1,10 @@
 {
   "cas": "122665-86-5",
-  "name": "ethyl (3-cyanomethyl-3,4- dihydro-4-oxophthalazin-1- yl)acetate",
+  "name": "ethyl (3-cyanomethyl-3,4-dihydro-4-oxophthalazin-1-yl)acetate",
   "name_tr": "etil (3-siyanometil-3,4-dihidro- 4-oksofitalazin-1-il)asetat",
   "ec_no": "429-680-0",
   "index_no": "607-602-00-8",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "63449-41-2",
-  "name": "quaternary ammonium compounds, benzyl-C8-18- alkyldimethyl, chlorides",
+  "name": "quaternary ammonium compounds, benzyl-C8-18-alkyldimethyl, chlorides",
   "name_tr": "kuaterner amonyum bileşikleri, benzil-C8-18-alkildimetil, klorürleri",
   "ec_no": "264-151-6",
   "index_no": "612-140-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

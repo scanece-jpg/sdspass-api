@@ -1,20 +1,20 @@
 {
   "cas": "67567-23-1",
-  "name": "ethyl 3,3-bis(tert- pentylperoxy)butyrate",
+  "name": "ethyl 3,3-bis(tert-pentylperoxy)butyrate",
   "name_tr": "etil-3,3-bis(ter- pentilperoksi)bütirat",
   "ec_no": "403-320-2",
   "index_no": "607-213-00-3",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Org. Perox. Type D",
-        "h_code": "H242"
-      },
-      {
         "class": "Flam. Liq. 3",
         "h_code": "H226"
+      },
+      {
+        "class": "Org. Perox. D",
+        "h_code": "H242"
       },
       {
         "class": "Aquatic Chronic 2",
@@ -31,8 +31,8 @@
       "GHS09"
     ],
     "h_codes": [
-      "H242",
       "H226",
+      "H242",
       "H411"
     ],
     "suppl_h": []

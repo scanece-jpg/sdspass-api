@@ -4,12 +4,12 @@
   "name_tr": "O,O-ter-bütil-O- dokosilmonoperoksioksalat",
   "ec_no": "404-300-6",
   "index_no": "617-013-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Org. Perox. Type C",
+        "class": "Org. Perox. C",
         "h_code": "H242"
       },
       {

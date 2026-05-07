@@ -4,7 +4,7 @@
   "name_tr": "1,3-dikloro-4-florbenzen",
   "ec_no": "406-160-1",
   "index_no": "602-091-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -19,6 +19,10 @@
       {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
       }
     ],
     "m_factors": {},
@@ -33,7 +37,8 @@
     "h_codes": [
       "H302",
       "H373",
-      "H315"
+      "H315",
+      "H411"
     ],
     "suppl_h": []
   }

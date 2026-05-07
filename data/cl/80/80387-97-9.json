@@ -1,10 +1,10 @@
 {
   "cas": "80387-97-9",
-  "name": "2-ethylhexyl[[[3,5-bis(1,1- dimethylethyl)-4- hydroxyphenyl]methyl]thio]acet ate",
+  "name": "2-ethylhexyl[[[3,5-bis(1,1-dimethylethyl)-4-hydroxyphenyl]methyl]thio]acetate",
   "name_tr": "2-etilhekzil-[[[3,5-bis(1,1- dimetiletil)-4- hidroksifenil]metiltiyo]asetat",
   "ec_no": "279-452-8",
   "index_no": "607-203-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

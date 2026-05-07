@@ -4,7 +4,7 @@
   "name_tr": "furfuril alkol",
   "ec_no": "202-626-1",
   "index_no": "603-018-00-2",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -25,16 +25,16 @@
         "h_code": "H302"
       },
       {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
         "class": "STOT RE 2",
         "h_code": "H373"
       },
       {
         "class": "Eye Irrit. 2",
         "h_code": "H319"
-      },
-      {
-        "class": "STOT SE 3",
-        "h_code": "H335"
       }
     ],
     "m_factors": {},
@@ -51,9 +51,9 @@
       "H331",
       "H312",
       "H302",
+      "H335",
       "H373",
-      "H319",
-      "H335"
+      "H319"
     ],
     "suppl_h": []
   }

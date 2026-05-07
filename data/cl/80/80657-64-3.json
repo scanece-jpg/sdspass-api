@@ -1,10 +1,10 @@
 {
   "cas": "80657-64-3",
-  "name": "reaction mass of: ethyl exo- tricyclo[5.2.1.02,6]decane-endo- 2-carboxylate; ethyl endo- tricyclo[5.2.1.02,6]decane-exo- 2-carboxylate",
+  "name": "reaction mass of: ethyl exo-tricyclo[5.2.1.02,6]decane-endo-2-carboxylate; ethyl endo-tricyclo[5.2.1.02,6]decane-exo-2-carboxylate",
   "name_tr": "tepkime kütlesi: etil-ekzo- trisiklo[5.2.102,6]dekan-endo-2- karboksilat ; etil-endo-trisiklo[5.2.1. 02,6]dekan-egzo-2-karboksilat",
   "ec_no": "407-520-0",
   "index_no": "607-353-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

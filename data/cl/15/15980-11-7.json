@@ -4,14 +4,10 @@
   "name_tr": "3-azidosülfonilbenzoik asit",
   "ec_no": "405-310-3",
   "index_no": "607-225-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
-      {
-        "class": "Self-react. Type C",
-        "h_code": "H241"
-      },
       {
         "class": "STOT RE 2",
         "h_code": "H373"
@@ -23,6 +19,10 @@
       {
         "class": "Skin Sens. 1",
         "h_code": "H317"
+      },
+      {
+        "class": "Self-React. C",
+        "h_code": "H241"
       }
     ],
     "m_factors": {},
@@ -37,10 +37,10 @@
       "GHS07"
     ],
     "h_codes": [
-      "H241",
       "H373",
       "H318",
-      "H317"
+      "H317",
+      "H241"
     ],
     "suppl_h": []
   }

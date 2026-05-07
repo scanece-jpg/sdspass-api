@@ -1,10 +1,10 @@
 {
   "cas": "129205-19-2",
-  "name": "2,4-dihydroxy-N-(2- methoxyphenyl)benzamide",
+  "name": "2,4-dihydroxy-N-(2-methoxyphenyl)benzamide",
   "name_tr": "2,4-dihidroksi-N-(2- metoksifenil)benzamid",
   "ec_no": "419-090-1",
   "index_no": "616-121-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "741-58-2",
-  "name": "bensulide (ISO); O,O-diisopropyl 2- phenylsulphonylaminoethyl phosphorodithioate",
+  "name": "bensulide (ISO); O,O-diisopropyl 2-phenylsulphonylaminoethyl phosphorodithioate",
   "name_tr": "bensülid (ISO); O,O-diizopropil 2- fenilsülfonilaminoetil fosforoditiyoat",
   "ec_no": "212-010-4",
   "index_no": "015-083-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -4,7 +4,7 @@
   "name_tr": "fenolfitaleyn",
   "ec_no": "201-004-7",
   "index_no": "604-076-00-1",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -25,7 +25,7 @@
     "scl_limits": [
       {
         "h_code": "H350",
-        "class": "Carc. 1B",
+        "class": "",
         "c_min": 1.0,
         "c_max": null
       }

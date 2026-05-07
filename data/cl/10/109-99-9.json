@@ -4,7 +4,7 @@
   "name_tr": "tetrahidrofuran",
   "ec_no": "203-726-8",
   "index_no": "603-025-00-0",
-  "atp": "",
+  "atp": "ATP3",
   "notes": [],
   "classification": {
     "hazards": [
@@ -17,25 +17,25 @@
         "h_code": "H351"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H335"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       }
     ],
     "m_factors": {},
     "scl_limits": [
       {
         "h_code": "H335",
-        "class": "STOT SE 3",
+        "class": "",
         "c_min": 25.0,
         "c_max": null
       },
       {
         "h_code": "H319",
-        "class": "Eye Irrit. 2",
+        "class": "",
         "c_min": 25.0,
         "c_max": null
       }
@@ -51,8 +51,8 @@
     "h_codes": [
       "H225",
       "H351",
-      "H319",
-      "H335"
+      "H335",
+      "H319"
     ],
     "suppl_h": [
       "EUH019"

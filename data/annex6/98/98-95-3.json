@@ -38,44 +38,7 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": [
-      {
-        "h_code": "H351",
-        "class": "Carc. 2",
-        "c_min": 0.1,
-        "c_max": null
-      },
-      {
-        "h_code": "H361",
-        "class": "Repr. 2",
-        "c_min": 0.3,
-        "c_max": null
-      },
-      {
-        "h_code": "H331",
-        "class": "Acute Tox. 3 (Inhal.)",
-        "c_min": 1.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H311",
-        "class": "Acute Tox. 3 (Derm.)",
-        "c_min": 1.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H301",
-        "class": "Acute Tox. 3 (Oral)",
-        "c_min": 5.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H372",
-        "class": "STOT RE 1 (kan)",
-        "c_min": 1.0,
-        "c_max": null
-      }
-    ]
+    "scl_limits": []
   },
   "labelling": {
     "signal": "Danger",

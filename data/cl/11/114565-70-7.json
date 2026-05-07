@@ -1,10 +1,10 @@
 {
   "cas": "114565-70-7",
-  "name": "3-amino-4-hydroxy-N-(3- isopropoxypropyl)benzenesulfon amide hydrochloride",
+  "name": "3-amino-4-hydroxy-N-(3-isopropoxypropyl)benzenesulfonamide hydrochloride",
   "name_tr": "3-amino-4-hidroksi-N-(3- isopropoksipropil)benzensülfona mid hidroklorür",
   "ec_no": "427-780-9",
   "index_no": "616-157-00-9",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -19,6 +19,10 @@
       {
         "class": "Aquatic Acute 1",
         "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
       }
     ],
     "m_factors": {},
@@ -34,7 +38,8 @@
     "h_codes": [
       "H302",
       "H318",
-      "H400"
+      "H400",
+      "H410"
     ],
     "suppl_h": []
   }

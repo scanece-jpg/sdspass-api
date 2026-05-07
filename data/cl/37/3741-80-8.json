@@ -1,10 +1,10 @@
 {
   "cas": "3741-80-8",
-  "name": "N-(1,1-dimethylethyl)bis(2- benzothiazolesulfen)amide",
+  "name": "N-(1,1-dimethylethyl)bis(2-benzothiazolesulfen)amide",
   "name_tr": "N-(1,1-dimetiletil)bis(2- benzotiyazolsülfen)amid",
   "ec_no": "407-430-1",
   "index_no": "613-180-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,15 +1,15 @@
 {
   "cas": "68860-54-8",
-  "name": "1,1-dimethylpropyl 3,5,5- trimethylperoxyhexanoate",
+  "name": "1,1-dimethylpropyl 3,5,5-trimethylperoxyhexanoate",
   "name_tr": "1,1-dimetilpropil 3,5,5- trimetilperoksihekzanoat",
   "ec_no": "431-610-9",
   "index_no": "607-599-00-3",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Org. Perox. Type D",
+        "class": "Org. Perox. D",
         "h_code": "H242"
       },
       {

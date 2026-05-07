@@ -1,10 +1,10 @@
 {
   "cas": "112006-75-4",
-  "name": "2-aminosulfonyl-N,N- dimethylnicotinamide",
+  "name": "2-aminosulfonyl-N,N-dimethylnicotinamide",
   "name_tr": "2-aminosülfonil-N,N- dimetilnikotinamid",
   "ec_no": "413-440-7",
   "index_no": "616-088-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

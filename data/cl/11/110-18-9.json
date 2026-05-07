@@ -1,10 +1,10 @@
 {
   "cas": "110-18-9",
-  "name": "N,N,N',N'- tetramethylethylenediamine",
+  "name": "N,N,N',N'-tetramethylethylenediamine",
   "name_tr": "N,N,N',N'-tetrametiletilendiamin",
   "ec_no": "203-744-6",
   "index_no": "612-103-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "13127-18-9",
-  "name": "erythromycin A9-oxime (E); (3R,4S,5S,6R,7R,9R,11R,12R,13 S,14R)-4-((2,6-didesoxy-3-C- methyl-3-O-methyl-α-L-ribo- hexopiranosyl)oxy)-14-ethyl- 7,12,13-trihydroxy- 3,5,7,9,11,13-hexamethyl-6- ((3,4,6-tridesoxy-3- dimethylamino-β-d- xylohexapiranosyl)oxy)oxacyclo tetradecan-2-ona-10-oxime (E)",
+  "name": "erythromycin A9-oxime (E); (3R,4S,5S,6R,7R,9R,11R,12R,13S,14R)-4-((2,6-didesoxy-3-C-methyl-3-O-methyl-α-L-ribo-hexopiranosyl)oxy)-14-ethyl-7,12,13-trihydroxy-3,5,7,9,11,13-hexamethyl-6-((3,4,6-tridesoxy-3-dimethylamino-β-.sc.d.sc.-xylohexapiranosyl)oxy)oxacyclotetradecan-2-ona-10-oxime (E)",
   "name_tr": "eritromisin A9-oksim (E); (3R,4S,5S,6R,7R,9R,11R,12R,13 S,14R)-4-((2,6-didesoksi-3-C- metil-3-O-metil-α-L-ribo- hekzopiranosil)oksi)-14-etil- 7,12,13-trihidroksi- 3,5,7,9,11,13-hekzametil-6- ((3,4,6-tridesoksi-3- dimetilamino-β-d- ksililohekzapiranosil)oksi)oksasi klotetradekan-2-ona-10-oksim (E)",
   "ec_no": "437-070-0",
   "index_no": "603-225-00-8",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

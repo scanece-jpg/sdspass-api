@@ -1,10 +1,10 @@
 {
   "cas": "341026-59-3",
-  "name": "trisodium 5-{[4-chloro-6-(1- naphthylamino)-1,3,5-triazin-2- yl]amino}-4-hydroxy-3-[(E)-(4- methoxy-2- sulfonatophenyl)diazenyl]-2,7- naphthalenedisulfonate",
+  "name": "trisodium 5-{[4-chloro-6-(1-naphthylamino)-1,3,5-triazin-2-yl]amino}-4-hydroxy-3-[(E)-(4-methoxy-2-sulfonatophenyl)diazenyl]-2,7-naphthalenedisulfonate",
   "name_tr": "trisodyum 5-{[4-kloro-6-(1- naftilamino)1,3,5triazin-2- il]amino}-4-hidroksi-3-[(E)-(4- metoksi-2- sülfonatofenil)diazeil]-2,7- naftalen disülfonat",
   "ec_no": "440-480-2",
   "index_no": "607-633-00-7",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

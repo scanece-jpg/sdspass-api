@@ -1,10 +1,10 @@
 {
   "cas": "25311-71-1",
-  "name": "isofenphos (ISO); O-ethyl O-2- isopropoxycarbonylphenyl- isopropylphosphoramidothioate",
+  "name": "isofenphos (ISO); O-ethyl O-2-isopropoxycarbonylphenyl-isopropylphosphoramidothioate",
   "name_tr": "izofenfos (ISO); O-etilO-2- izopropoksikarbonilfenil- izopropilfosforamidotiyoat",
   "ec_no": "246-814-1",
   "index_no": "015-129-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

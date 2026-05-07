@@ -1,15 +1,12 @@
 {
   "cas": "68476-86-8",
-  "name": "Petroleum gases, liquefied, sweetened; Petroleum gas; [A complex combination of hydrocarbons obtained by subjecting liquefied petroleum gas mix to a sweetening process to convert mercaptans or to remove acidic impurities. It consists of hydrocarbons having carbon numbers predominantly in the range of C3 through C7 and boiling in the range of approximately -40 °C to 80 °C (- 40 °F to 176 °F).]",
+  "name": "Petroleum gases, liquefied, sweetened; Petroleum gas; [A complex combination of hydrocarbons obtained by subjecting liquefied petroleum gas mix to a sweetening process to convert mercaptans or to remove acidic impurities. It consists of hydrocarbons having carbon numbers predominantly in the range of C3 through C7 and boiling in the range of approximately – 40 °C to 80 °C (– 40 °F to 176 °F).]",
   "name_tr": "Petrol gazları, sıvılaştırılmış, kıvamlandırılmış; Petrol gazı; [Sıvılaştırılmış petrol gaz karışımındaki merkaptanların dönüştürülmesi veya asidik safsızlıkların uzaklaştırılması için karışımı kıvamlaştırma prosesine tabi tutarak elde edilen kompleks hidrokarbon karışımı. Büyük çoğunlukla C3 ila C7 aralığında karbon sayısına sahip ve yaklaşık -40°C ila 80°C (- 40°F ila 176°F) aralığında kaynayan hidrokarbonlardan oluşur.]",
   "ec_no": "270-705-8",
   "index_no": "649-203-00-1",
   "atp": "ATP1",
   "notes": [
-    "K",
-    "S",
-    "U",
-    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
+    "K S U"
   ],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "8011-63-0",
-  "name": "Bordeaux mixture; reaction products of copper sulphate with calcium dihydroxide",
+  "name": "bordeaux mixture;\nreaction products of copper sulphate with calcium dihydroxide",
   "name_tr": "bordo karışımı; bakır sülfat ile kalsiyum dihidroksitin tepkime ürünleri",
-  "ec_no": "_",
+  "ec_no": "",
   "index_no": "029-022-00-9",
-  "atp": "",
+  "atp": "ATP17",
   "notes": [],
   "classification": {
     "hazards": [
@@ -47,6 +47,6 @@
     "suppl_h": []
   },
   "ate": {
-    "inhalation_dust": 1.97
+    "inhalation_mgl": 1.97
   }
 }

@@ -1,10 +1,10 @@
 {
   "cas": "158570-99-1",
-  "name": "mixed linear and branched C14- 15 alcohols ethoxylated, reaction product with epichlorohydrin",
+  "name": "mixed linear and branched C14-15 alcohols ethoxylated, reaction product with epichlorohydrin",
   "name_tr": "karışık lineer ve dallanmış etoksilenmiş C14-15 alkollerin epiklorohidrin ile tepkime ürünü",
   "ec_no": "420-480-9",
   "index_no": "650-044-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

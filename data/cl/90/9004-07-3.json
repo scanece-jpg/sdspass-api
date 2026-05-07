@@ -4,14 +4,10 @@
   "name_tr": "kimotripsin",
   "ec_no": "232-671-2",
   "index_no": "647-011-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
-      {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
       {
         "class": "STOT SE 3",
         "h_code": "H335"
@@ -19,6 +15,10 @@
       {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Resp. Sens. 1",
@@ -35,9 +35,9 @@
       "GHS07"
     ],
     "h_codes": [
-      "H319",
       "H335",
       "H315",
+      "H319",
       "H334"
     ],
     "suppl_h": []

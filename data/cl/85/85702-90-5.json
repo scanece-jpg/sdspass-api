@@ -1,10 +1,10 @@
 {
   "cas": "85702-90-5",
-  "name": "S-(3-trimethoxysilyl)propyl 19- isocyanato-11-(6- isocyanatohexyl)-10,12-dioxo- 2,9,11,13- tetraazanonadecanethioate",
+  "name": "S-(3-trimethoxysilyl)propyl 19-isocyanato-11-(6-isocyanatohexyl)-10,12-dioxo-2,9,11,13-tetraazanonadecanethioate",
   "name_tr": "S-(3-trimetoksisilil)propil-19- izosiyanato-11-(6- izosiyanatohekzil)-10,12-diokso- 2,9,11,13- tetraazanonadekantiyoat",
   "ec_no": "402-290-8",
   "index_no": "607-184-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

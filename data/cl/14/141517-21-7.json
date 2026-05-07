@@ -1,13 +1,17 @@
 {
   "cas": "141517-21-7",
-  "name": "trifloxystrobin (ISO); (E,E)-α-methoxyimino-{}{2- [[[[1-[3- (trifluoromethyl)phenyl]ethylide ne]amino]oxy]methyl]benzeneac etic acid methyl ester",
+  "name": "trifloxystrobin (ISO);\nmethyl (E)-methoxyimino- {(E)-α-[1-(α,α,α-trifluoro-m- tolyl) ethylideneaminooxy]-o- tolyl}acetate",
   "name_tr": "trifloksistrobin (ISO); (E,E)-α- metoksiimino-{2-[[[[1-[3- (triflorometil)fenil]etilidin]amin o]oksi]metil]benzenasetikasit metilester",
   "ec_no": "",
   "index_no": "607-424-00-0",
-  "atp": "",
+  "atp": "ATP17",
   "notes": [],
   "classification": {
     "hazards": [
+      {
+        "class": "Lact.",
+        "h_code": "H362"
+      },
       {
         "class": "Skin Sens. 1",
         "h_code": "H317"
@@ -23,7 +27,7 @@
     ],
     "m_factors": {
       "acute": 100,
-      "chronic": 10
+      "chronic": 100
     },
     "scl_limits": []
   },
@@ -34,6 +38,7 @@
       "GHS09"
     ],
     "h_codes": [
+      "H362",
       "H317",
       "H400",
       "H410"

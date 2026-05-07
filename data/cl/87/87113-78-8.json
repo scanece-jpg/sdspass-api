@@ -1,10 +1,10 @@
 {
   "cas": "87113-78-8",
-  "name": "3,5-bis((3,5-di-tert-butyl-4- hydroxy)benzyl)-2,4,6- trimethylphenol",
+  "name": "3,5-bis((3,5-di-tert-butyl-4-hydroxy)benzyl)-2,4,6-trimethylphenol",
   "name_tr": "3,5-bis((3,5-di-tert-bütil-4- hidroksi)benzil)-2,4,6- trimetilfenol",
   "ec_no": "401-110-5",
   "index_no": "604-051-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -4,14 +4,10 @@
   "name_tr": "hekzilakrilat",
   "ec_no": "219-698-5",
   "index_no": "607-233-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
-      {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
       {
         "class": "STOT SE 3",
         "h_code": "H335"
@@ -19,6 +15,10 @@
       {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Skin Sens. 1",
@@ -39,9 +39,9 @@
       "GHS09"
     ],
     "h_codes": [
-      "H319",
       "H335",
       "H315",
+      "H319",
       "H317",
       "H411"
     ],

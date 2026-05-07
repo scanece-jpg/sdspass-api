@@ -4,7 +4,7 @@
   "name_tr": "dibütilkalay diklorür; (DBTC)",
   "ec_no": "211-670-0",
   "index_no": "050-022-00-X",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -52,13 +52,25 @@
     "scl_limits": [
       {
         "h_code": "H314",
-        "class": "Skin Corr. 1B",
+        "class": "",
         "c_min": 5.0,
         "c_max": null
       },
       {
+        "h_code": "H315",
+        "class": "",
+        "c_min": 0.01,
+        "c_max": 5.0
+      },
+      {
+        "h_code": "H318",
+        "class": "",
+        "c_min": 3.0,
+        "c_max": 5.0
+      },
+      {
         "h_code": "H319",
-        "class": "C < %5 Göz Tah. 2",
+        "class": "",
         "c_min": 0.01,
         "c_max": 3.0
       }

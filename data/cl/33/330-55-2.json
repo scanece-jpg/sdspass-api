@@ -1,20 +1,20 @@
 {
   "cas": "330-55-2",
-  "name": "linuron (ISO); 3-(3,4-dichlorophenyl)-1- methoxy-1-methylurea",
+  "name": "linuron (ISO); 3-(3,4-dichlorophenyl)-1-methoxy-1-methylurea",
   "name_tr": "linuron (ISO); 3-(3,4-diklorofenil)-1-metoksi- 1-metilüre",
   "ec_no": "206-356-5",
   "index_no": "006-021-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Repr. 1B",
-        "h_code": "H360Df"
-      },
-      {
         "class": "Carc. 2",
         "h_code": "H351"
+      },
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360Df"
       },
       {
         "class": "Acute Tox. 4",
@@ -44,8 +44,8 @@
       "GHS09"
     ],
     "h_codes": [
-      "H360Df",
       "H351",
+      "H360Df",
       "H302",
       "H373",
       "H400",

@@ -1,10 +1,10 @@
 {
   "cas": "140921-24-0",
-  "name": "1,6-hexanediyl-bis(2-(2-(1- ethylpentyl)-3- oxazolidinyl)ethyl)carbamate",
+  "name": "1,6-hexanediyl-bis(2-(2-(1-ethylpentyl)-3-oxazolidinyl)ethyl)carbamate",
   "name_tr": "1,6-hekzandil-bis(2-(2-(1- etilpentil)-3- oksazolidinil)etil)karbamat",
   "ec_no": "411-700-4",
   "index_no": "616-079-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

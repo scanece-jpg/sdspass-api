@@ -1,13 +1,17 @@
 {
   "cas": "87392-12-9",
-  "name": "S-metolachlor; reaction mass of (S)-2-chloro-N- (2-ethyl-6-methyl-phenyl)-N-(2- methoxy-1-methyl-ethyl)- acetamide (80-100 %); [1] (R)-2-chloro-N-(2-ethyl-6- methyl-phenyl)-N-(2-methoxy- 1-methyl-ethyl)-acetamide (0- 20 %) [2]",
+  "name": "S-metolachlor (ISO); 2-chloro-N-(2-ethyl-6-methylphenyl)-N-[(2S)-1-methoxypropan-2-yl]acetamide; (R a S a)-2-chloro-N-(6-ethyl-o-tolyl)-N-[(1S)-2-methoxy-1-methylethyl]acetamide\n[contains 80-100 % 2-chloro-N-(2-ethyl-6-methylphenyl)-N-[(2S)-1-methoxypropan-2-yl]acetamide and 0-20 % 2-chloro-N-(2-ethyl-6-methylphenyl)-N-[(2R)-1-methoxypropan-2-yl]acetamide]",
   "name_tr": "S-metolaklor; (S)-2-kloro-N-(2-etil-6- metilfenil)-N-(2-metoksi-1- metiletil)asetamid (80-100%); [1] S-metolaklor;(R)-2-kloro-N-(2- etil-6-metilfenil)-N-(2-metoksi- 1-metiletil)asetamid (0-%20) [2]",
-  "ec_no": "- [1] - [2]",
+  "ec_no": "-",
   "index_no": "607-432-00-4",
-  "atp": "",
+  "atp": "ATP22",
   "notes": [],
   "classification": {
     "hazards": [
+      {
+        "class": "Carc. 2",
+        "h_code": "H351"
+      },
       {
         "class": "Skin Sens. 1",
         "h_code": "H317"
@@ -30,14 +34,18 @@
   "labelling": {
     "signal": "Warning",
     "pictograms": [
+      "GHS08",
       "GHS07",
       "GHS09"
     ],
     "h_codes": [
+      "H351",
       "H317",
       "H400",
       "H410"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH066"
+    ]
   }
 }

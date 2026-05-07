@@ -1,10 +1,10 @@
 {
   "cas": "1571-75-1",
-  "name": "1,1-bis(4-hydroxyphenyl)-1- phenylethane",
+  "name": "1,1-bis(4-hydroxyphenyl)-1-phenylethane",
   "name_tr": "1,1-bis(4-hidroksifenil)-1- feniletan",
   "ec_no": "433-130-5",
   "index_no": "604-081-00-9",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

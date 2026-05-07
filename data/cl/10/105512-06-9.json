@@ -2,9 +2,9 @@
   "cas": "105512-06-9",
   "name": "clodinafop-propargyl (ISO)",
   "name_tr": "klodinafop-propargil (ISO)",
-  "ec_no": "",
+  "ec_no": "-",
   "index_no": "607-625-00-3",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -36,7 +36,7 @@
     "scl_limits": [
       {
         "h_code": "H317",
-        "class": "Skin Sens. 1",
+        "class": "",
         "c_min": 0.001,
         "c_max": null
       }

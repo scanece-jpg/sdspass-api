@@ -53,7 +53,7 @@
     "suppl_h": []
   },
   "ate": {
-    "oral": 300.0,
-    "dermal": 600.0
+    "dermal": 600.0,
+    "oral": 300.0
   }
 }

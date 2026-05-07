@@ -1,10 +1,10 @@
 {
   "cas": "74070-46-5",
-  "name": "aclonifen (ISO); 2-chloro-6-nitro-3- phenoxyaniline",
+  "name": "aclonifen (ISO); 2-chloro-6-nitro-3-phenoxyaniline",
   "name_tr": "aklonifen (ISO); 2-kloro-6-nitro- 3-fenoksianilin",
   "ec_no": "277-704-1",
   "index_no": "612-120-00-6",
-  "atp": "",
+  "atp": "ATP5",
   "notes": [],
   "classification": {
     "hazards": [
@@ -27,7 +27,7 @@
     ],
     "m_factors": {
       "acute": 100,
-      "chronic": 10
+      "chronic": 100
     },
     "scl_limits": []
   },
@@ -44,9 +44,6 @@
       "H400",
       "H410"
     ],
-    "suppl_h": [
-      "M=100",
-      "M=10"
-    ]
+    "suppl_h": []
   }
 }

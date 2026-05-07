@@ -4,7 +4,7 @@
   "name_tr": "toluen",
   "ec_no": "203-625-9",
   "index_no": "601-021-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -21,51 +21,20 @@
         "h_code": "H304"
       },
       {
+        "class": "STOT SE 3",
+        "h_code": "H336"
+      },
+      {
         "class": "STOT RE 2",
         "h_code": "H373"
       },
       {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
-      },
-      {
-        "class": "STOT SE 3",
-        "h_code": "H336"
       }
     ],
     "m_factors": {},
-    "scl_limits": [
-      {
-        "h_code": "H361d",
-        "class": "Repr. 2 (gelisim)",
-        "c_min": 3.3,
-        "c_max": null
-      },
-      {
-        "h_code": "H373",
-        "class": "STOT RE 2",
-        "c_min": 10.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H315",
-        "class": "Skin Irrit. 2",
-        "c_min": 10.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H336",
-        "class": "STOT SE 3",
-        "c_min": 20.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H304",
-        "class": "Asp. Tox. 1",
-        "c_min": 10.0,
-        "c_max": null
-      }
-    ]
+    "scl_limits": []
   },
   "labelling": {
     "signal": "Danger",
@@ -78,9 +47,9 @@
       "H225",
       "H361d",
       "H304",
+      "H336",
       "H373",
-      "H315",
-      "H336"
+      "H315"
     ],
     "suppl_h": []
   }

@@ -1,10 +1,10 @@
 {
   "cas": "39515-41-8",
-  "name": "fenpropathrin (ISO); α-cyano-3-phenoxybenzyl 2,2,3,3- tetramethylcyclopropanecarboxy late",
+  "name": "fenpropathrin (ISO); α-cyano-3-phenoxybenzyl 2,2,3,3-tetramethylcyclopropanecarboxylate",
   "name_tr": "fenpropatrin (ISO); α-siyano-3- fenoksibenzil 2,2,3,3- tetrametilsiklopropankarboksilat;",
   "ec_no": "254-485-0",
   "index_no": "607-239-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

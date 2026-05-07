@@ -5,10 +5,7 @@
   "ec_no": "233-042-5",
   "index_no": "014-001-00-9",
   "atp": "ATP18",
-  "notes": [
-    "T",
-    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
-  ],
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -16,8 +13,8 @@
         "h_code": "H224"
       },
       {
-        "class": "Pyr. Liq. 1",
-        "h_code": "H250"
+        "class": "Water-react. 1",
+        "h_code": "H260"
       },
       {
         "class": "Acute Tox. 3",
@@ -30,39 +27,34 @@
       {
         "class": "Skin Corr. 1A",
         "h_code": "H314"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
       }
     ],
     "m_factors": {},
-    "scl_limits": [
-      {
-        "h_code": "H335",
-        "class": "STOT SE 3",
-        "c_min": 1.0,
-        "c_max": null
-      }
-    ]
+    "scl_limits": []
   },
   "labelling": {
     "signal": "Danger",
     "pictograms": [
       "GHS02",
-      "GHS05",
-      "GHS07"
+      "GHS06",
+      "GHS05"
     ],
     "h_codes": [
       "H224",
-      "H250",
+      "H260",
       "H331",
       "H302",
-      "H314"
+      "H314",
+      "H318"
     ],
     "suppl_h": [
       "EUH014",
-      "EUH029"
+      "EUH029",
+      "EUH071"
     ]
-  },
-  "ate": {
-    "inhalation_vapour": 7.6,
-    "oral": 1000.0
   }
 }

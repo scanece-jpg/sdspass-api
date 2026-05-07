@@ -1,10 +1,10 @@
 {
   "cas": "122630-55-1",
-  "name": "dimethyl 3,3'-(N-(4-(4-bromo- 2,6-dicyanophenylazo)-3- hydroxyphenyl)imino)dipropion ate",
+  "name": "dimethyl 3,3'-(N-(4-(4-bromo-2,6-dicyanophenylazo)-3-hydroxyphenyl)imino)dipropionate",
   "name_tr": "dimetil 3,3'-(N-(4-(4-bromo-2,6- disiyanofenilazo)-3- hidroksifenil)imino)dipropionat",
   "ec_no": "407-310-9",
   "index_no": "611-073-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

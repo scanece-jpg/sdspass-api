@@ -1,13 +1,11 @@
 {
   "cas": "26530-20-1",
-  "name": "octhilinone (ISO); 2-octyl-2H-isothiazol-3-one",
+  "name": "octhilinone (ISO); 2-octyl-2H-isothiazol-3-one; [OIT]",
   "name_tr": "oktilinon (ISO); 2-oktil-2H- izotiyazol-3-on",
   "ec_no": "247-761-7",
   "index_no": "613-112-00-5",
   "atp": "ATP15",
-  "notes": [
-    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
-  ],
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -23,11 +21,15 @@
         "h_code": "H301"
       },
       {
-        "class": "Skin Corr. 1B",
+        "class": "Skin Corr. 1",
         "h_code": "H314"
       },
       {
-        "class": "Skin Sens. 1",
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Skin Sens. 1A",
         "h_code": "H317"
       },
       {
@@ -43,14 +45,7 @@
       "acute": 100,
       "chronic": 100
     },
-    "scl_limits": [
-      {
-        "h_code": "H317",
-        "class": "Skin Sens. 1",
-        "c_min": 0.05,
-        "c_max": null
-      }
-    ]
+    "scl_limits": []
   },
   "labelling": {
     "signal": "Danger",
@@ -64,14 +59,17 @@
       "H311",
       "H301",
       "H314",
+      "H318",
       "H317",
       "H400",
       "H410"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH071"
+    ]
   },
   "ate": {
-    "inhalation_dust": 0.27,
+    "inhalation_mgl": 0.27,
     "dermal": 311.0,
     "oral": 125.0
   }

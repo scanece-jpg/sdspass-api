@@ -1,14 +1,12 @@
 {
   "cas": "75-21-8",
-  "name": "ethylene oxide; oxirane",
+  "name": "ethylene oxide;\noxirane",
   "name_tr": "etilenoksit; oksiran",
   "ec_no": "200-849-9",
   "index_no": "603-023-00-X",
   "atp": "ATP14",
   "notes": [
-    "U",
-    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi.",
-    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
+    "U"
   ],
   "classification": {
     "hazards": [
@@ -88,6 +86,7 @@
     "suppl_h": []
   },
   "ate": {
+    "inhalation_ppm": 700.0,
     "oral": 100.0
   }
 }

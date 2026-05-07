@@ -1,10 +1,10 @@
 {
   "cas": "31895-22-4",
-  "name": "bis(1,2,3- trithiacyclohexyldimethylammo nium) oxalate; thiocyclam-oxalate",
+  "name": "bis(1,2,3-trithiacyclohexyldimethylammonium) oxalate; thiocyclam-oxalate",
   "name_tr": "bis(1,2,3- tritiyasiklohekzildimetilamonyu m)oksalat; tiyosiklam-oksalat",
   "ec_no": "250-859-2",
   "index_no": "607-170-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

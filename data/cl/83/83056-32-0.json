@@ -1,10 +1,10 @@
 {
   "cas": "83056-32-0",
-  "name": "2- (isocyanatosulfonylmethyl)benz oic acid methyl ester; (alt.):methyl 2- (isocyanatosulfonylmethyl)benz oate",
+  "name": "2-(isocyanatosulfonylmethyl)benzoic acid methyl ester; (alt.):methyl 2-(isocyanatosulfonylmethyl)benzoate",
   "name_tr": "2- (izosiyanatosülfonilmetil)benzoi k asit metilester;(alt.):metil2- (izosiyanatosülfonilmetil)benzoa t",
   "ec_no": "410-900-9",
   "index_no": "615-023-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

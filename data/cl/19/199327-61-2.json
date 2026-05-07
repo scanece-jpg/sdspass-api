@@ -1,10 +1,10 @@
 {
   "cas": "199327-61-2",
-  "name": "7-methoxy-6-(3-morpholin-4-yl- propoxy)-3H-quinazolin-4-one; [containing ≥ 0.5 % formamide (EC No 200-842-0) ]",
+  "name": "7-methoxy-6-(3-morpholin-4-yl-propoxy)-3H-quinazolin-4-one; [containing ≥ 0.5 % formamide (EC No 200-842-0) ]",
   "name_tr": "7-metoksi-6-(3-morfolin-4-il- propoksi)-3H-kinazolin-4-on; [≥ % 0,5 formamid (EC No 200- 842-0) içeren]",
   "ec_no": "429-400-7",
   "index_no": "612-253-01-7",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

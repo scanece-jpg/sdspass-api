@@ -1,20 +1,20 @@
 {
   "cas": "15768-07-7",
-  "name": "methyl 2-benzylidene-3- oxobutyrate",
+  "name": "methyl 2-benzylidene-3-oxobutyrate",
   "name_tr": "metil-2-benzilidin-3-oksobütirat",
   "ec_no": "420-940-9",
   "index_no": "601-059-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Aquatic Chronic 2",
@@ -31,8 +31,8 @@
       "GHS09"
     ],
     "h_codes": [
-      "H319",
       "H315",
+      "H319",
       "H411"
     ],
     "suppl_h": []

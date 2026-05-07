@@ -4,7 +4,7 @@
   "name_tr": "kinolin",
   "ec_no": "202-051-6",
   "index_no": "613-281-00-5",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -25,12 +25,12 @@
         "h_code": "H302"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Aquatic Chronic 2",
@@ -52,8 +52,8 @@
       "H341",
       "H312",
       "H302",
-      "H319",
       "H315",
+      "H319",
       "H411"
     ],
     "suppl_h": []

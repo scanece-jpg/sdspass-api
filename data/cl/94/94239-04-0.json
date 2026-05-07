@@ -1,10 +1,10 @@
 {
   "cas": "94239-04-0",
-  "name": "2-fluoro-6- trifluoromethylpyridine",
+  "name": "2-fluoro-6-trifluoromethylpyridine",
   "name_tr": "2-floro-6-triflorometilpiridin",
   "ec_no": "428-100-3",
   "index_no": "613-245-00-9",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

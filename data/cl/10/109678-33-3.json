@@ -1,10 +1,10 @@
 {
   "cas": "109678-33-3",
-  "name": "2,2,6,6-tetrakis(bromomethyl)-4- oxaheptane-1,7-diol",
+  "name": "2,2,6,6-tetrakis(bromomethyl)-4-oxaheptane-1,7-diol",
   "name_tr": "2,2,6,6-tetrakis(bromometil)-4- oksaheptan-1,7-diol",
   "ec_no": "408-020-5",
   "index_no": "602-082-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

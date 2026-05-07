@@ -1,10 +1,10 @@
 {
   "cas": "474510-57-1",
-  "name": "2-hydroxy-1-(4-(4-(2-hydroxy- 2- methylpropionyl)benzyl)phenyl) -2-methylpropan-1-one",
+  "name": "2-hydroxy-1-(4-(4-(2-hydroxy-2-methylpropionyl)benzyl)phenyl)-2-methylpropan-1-one",
   "name_tr": "2-hidroksi-1-(4-(4-(2-hidroksi-2- metilpropiyonil)benzil)fenil)-2- metilpropan-1-on",
   "ec_no": "444-860-9",
   "index_no": "606-140-00-4",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

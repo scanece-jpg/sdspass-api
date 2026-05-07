@@ -1,10 +1,10 @@
 {
   "cas": "116412-83-0",
-  "name": "4-chloro-3',4'- dimethoxybenzophenone",
+  "name": "4-chloro-3',4'-dimethoxybenzophenone",
   "name_tr": "4-kloro-3',4'- dimetoksibenzofenon",
   "ec_no": "404-610-1",
   "index_no": "606-056-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

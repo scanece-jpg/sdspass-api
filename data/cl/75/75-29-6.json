@@ -1,13 +1,11 @@
 {
   "cas": "75-29-6",
-  "name": "1-chloropropane; [1] 2-chloropropane [2]",
+  "name": "1-chloropropane [1]\n2-chloropropane [2]",
   "name_tr": "1-kloropropan [1]; 2-kloropropan [2]",
-  "ec_no": "208-749-7",
+  "ec_no": "200-858-8",
   "index_no": "602-018-00-X",
-  "atp": "",
-  "notes": [
-    "C"
-  ],
+  "atp": "CLP00",
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -15,15 +13,15 @@
         "h_code": "H225"
       },
       {
-        "class": "Acute Tox. 4",
+        "class": "Acute Tox. 4 *",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4",
+        "class": "Acute Tox. 4 *",
         "h_code": "H312"
       },
       {
-        "class": "Acute Tox. 4",
+        "class": "Acute Tox. 4 *",
         "h_code": "H302"
       }
     ],

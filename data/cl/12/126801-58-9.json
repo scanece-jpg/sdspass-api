@@ -1,10 +1,10 @@
 {
   "cas": "126801-58-9",
-  "name": "ethoxysulfuron (ISO); 1-(4,6-dimethoxypyrimidin-2- yl)-3-(2- ethoxyphenoxysulfonyl)urea",
+  "name": "ethoxysulfuron (ISO); 1-(4,6-dimethoxypyrimidin-2-yl)-3-(2-ethoxyphenoxysulfonyl)urea",
   "name_tr": "etoksisülfüron; 1-(4,6-dimetoksipirimidin-2-il)- 3-(2-etoksifenoksisülfonil)üre",
   "ec_no": "",
   "index_no": "016-082-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

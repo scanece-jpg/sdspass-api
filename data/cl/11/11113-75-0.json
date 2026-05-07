@@ -1,10 +1,10 @@
 {
   "cas": "11113-75-0",
-  "name": "nickel (II) sulfide; [1] nickel sulfide; [2] millerite [3]",
+  "name": "nickel (II) sulfide [1]\nnickel sulfide [2]\nmillerite [3]",
   "name_tr": "Nikel (II) sülfür; [1] Nikel sülfür; [2] Millerit [3]",
-  "ec_no": "240-841-2",
+  "ec_no": "234-349-7",
   "index_no": "028-006-00-9",
-  "atp": "",
+  "atp": "ATP01",
   "notes": [],
   "classification": {
     "hazards": [
@@ -18,7 +18,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372"
+        "h_code": "H372 **"
       },
       {
         "class": "Skin Sens. 1",
@@ -46,7 +46,7 @@
     "h_codes": [
       "H350i",
       "H341",
-      "H372",
+      "H372 **",
       "H317",
       "H400",
       "H410"

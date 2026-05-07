@@ -1,10 +1,10 @@
 {
   "cas": "25383-07-7",
-  "name": "(R)-α-phenylethylammonium (- )-(1R, 2S)-(1,2- epoxypropyl)phosphonate monohydrate",
+  "name": "(R)-α-phenylethylammonium (-)-(1R, 2S)-(1,2-epoxypropyl)phosphonate monohydrate",
   "name_tr": "(R)-α-feniletilamonyum-(-)-(1R, 2S)-(1,2- epoksipropil)fosfonatmonohidrat",
   "ec_no": "418-570-8",
   "index_no": "015-178-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

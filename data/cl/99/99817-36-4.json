@@ -1,10 +1,10 @@
 {
   "cas": "99817-36-4",
-  "name": "2,4-dichloro-3-ethyl-6- nitrophenol",
+  "name": "2,4-dichloro-3-ethyl-6-nitrophenol",
   "name_tr": "2,4-dikloro-3-etil-6-nitrofenol",
   "ec_no": "420-740-1",
   "index_no": "603-185-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

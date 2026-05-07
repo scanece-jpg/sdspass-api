@@ -1,10 +1,10 @@
 {
   "cas": "188907-52-0",
-  "name": "4-amino-3-[[4-[[2- (sulfooxy)ethyl]sulfonyl]phenyl] azo]-1-naphthalene sulfonic acid",
+  "name": "4-amino-3-[[4-[[2-(sulfooxy)ethyl]sulfonyl]phenyl]azo]-1-naphthalene sulfonic acid",
   "name_tr": "4-amino-3-[[4-[[2- (sülfooksi)etil]sülfonil]fenil]azo] -1-naftalen sülfonik asit",
   "ec_no": "427-680-5",
   "index_no": "607-583-00-6",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "130755-46-3",
-  "name": "4,4'-dithiobis(5-amino-1-(2,6- dichloro-4- (trifluoromethyl)phenyl)-1H-",
+  "name": "4,4'-dithiobis(5-amino-1-(2,6-dichloro-4-(trifluoromethyl)phenyl)-1H-pyrazole-3-carbonitrile)",
   "name_tr": "4,4'-ditiyobis(5-amino-1-(2,6- dikloro-4-(triflorometil)fenil)- 1H-pirazol-3-karbonitril)",
   "ec_no": "423-490-1",
   "index_no": "608-040-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

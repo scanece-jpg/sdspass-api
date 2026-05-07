@@ -1,10 +1,10 @@
 {
   "cas": "79026-02-1",
-  "name": "3-(2-{}{4-[2-(4- cyanophenyl)vinyl]phenyl}}viny l)benzonitrile",
+  "name": "3-(2-{}{4-[2-(4-cyanophenyl)vinyl]phenyl}}vinyl)benzonitrile",
   "name_tr": "3-(2-{4-[2-(4- siyanofenil)vinil]fenil}vinil) benzonitril",
   "ec_no": "419-060-8",
   "index_no": "608-036-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

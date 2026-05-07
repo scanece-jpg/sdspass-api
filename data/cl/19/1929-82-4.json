@@ -1,10 +1,10 @@
 {
   "cas": "1929-82-4",
-  "name": "nitrapyrin (ISO); 2-chloro-6- trichloromethylpyridine",
+  "name": "nitrapyrin (ISO); 2-chloro-6-trichloromethylpyridine",
   "name_tr": "Nitrapirin (ISO); 2-kloro-6-triklorometilpiridin",
   "ec_no": "217-682-2",
   "index_no": "006-057-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

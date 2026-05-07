@@ -1,10 +1,10 @@
 {
   "cas": "500-28-7",
-  "name": "chlorthion; O-(3-chloro-4-nitrophenyl) O,O- dimethyl phosphorothioate",
+  "name": "chlorthion; O-(3-chloro-4-nitrophenyl) O,O-dimethyl phosphorothioate",
   "name_tr": "klortiyon; O-(3-kloro-4-nitrofenil)-O,O- dimetil-dimetil fosforotiyoat",
   "ec_no": "207-902-5",
   "index_no": "015-042-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

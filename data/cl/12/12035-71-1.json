@@ -1,10 +1,10 @@
 {
   "cas": "12035-71-1",
-  "name": "trinickel disulfide; nickel subsulfide; [1] heazlewoodite [2]",
+  "name": "trinickel disulfide; nickel subsulfide [1]\nheazlewoodite [2]",
   "name_tr": "trinikel disülfür; nikel subsülfür; [1] heyzılvudit [2]",
-  "ec_no": "234-829-6",
+  "ec_no": "-",
   "index_no": "028-007-00-4",
-  "atp": "",
+  "atp": "ATP17",
   "notes": [],
   "classification": {
     "hazards": [
@@ -17,8 +17,12 @@
         "h_code": "H341"
       },
       {
+        "class": "Acute Tox. 3",
+        "h_code": "H331"
+      },
+      {
         "class": "STOT RE 1",
-        "h_code": "H372"
+        "h_code": "H372 **"
       },
       {
         "class": "Skin Sens. 1",
@@ -40,13 +44,14 @@
     "signal": "Danger",
     "pictograms": [
       "GHS08",
-      "GHS07",
+      "GHS06",
       "GHS09"
     ],
     "h_codes": [
       "H350i",
       "H341",
-      "H372",
+      "H331",
+      "H372 **",
       "H317",
       "H400",
       "H410"

@@ -1,10 +1,10 @@
 {
   "cas": "99788-75-7",
-  "name": "1,4-bis(2,3- dihydroxypropylamino)anthraqu inone",
+  "name": "1,4-bis(2,3-dihydroxypropylamino)anthraquinone",
   "name_tr": "1,4-bis(2,3- dihidroksipropilamino)antrakino n",
   "ec_no": "421-470-7",
   "index_no": "606-126-00-8",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

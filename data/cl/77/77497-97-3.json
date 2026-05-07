@@ -1,10 +1,10 @@
 {
   "cas": "77497-97-3",
-  "name": "(S)-3-benzyloxycarbonyl- 1,2,3,4-tetrahydro- isoquinolinium 4- methylbenzenesulfonate",
+  "name": "(S)-3-benzyloxycarbonyl-1,2,3,4-tetrahydro-isoquinolinium 4-methylbenzenesulfonate",
   "name_tr": "(S)-3-benziloksikarbonil-1,2,3,4- tetrahidro-izokinolinyum-4- metilbenzensülfonat",
   "ec_no": "406-960-0",
   "index_no": "613-145-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

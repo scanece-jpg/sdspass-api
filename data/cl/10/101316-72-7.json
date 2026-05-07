@@ -1,10 +1,10 @@
 {
   "cas": "101316-72-7",
-  "name": "Lubricating oils (petroleum), C24-50, solvent-extd., dewaxed, hydrogenated; Baseoil - unspecified; [A complex combination of hydrocarbons obtained by solvent extraction and hydrogenation of atmospheric distillation residues. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C24 through C50 and produces a finished oil with a viscosity in the order of 16cSt to 75cSt at 40 °C (104 °F).]",
+  "name": "Lubricating oils (petroleum), C24-50, solvent-extd., dewaxed, hydrogenated; Baseoil - unspecified; [A complex combination of hydrocarbons obtained by solvent extraction and hydrogenation of atmospheric distillation residues. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C24 through C50 and produces a finished oil with a viscosity in the order of 16cSt to 75cSt at 40 °C (104 °F).]",
   "name_tr": "Yağlama yağları (petrol), C24-50, çözücü ile ekstrakte edilmiş, cilası alınmış, hidrojenlenmiş; taşıyıcı yağ – tanımlanmamış;[ Atmosferik damıtma kalıntılarının çözücüyle özütlenmesi ve hidrojenlenmesinden elde edilen kompleks hidrokarbon bileşimi. Ağırlıklı olarak, karbon sayıları genelde C24 ile C50 aralığında olan hidrokarbonlardan oluşur ve viskozitesi 40oC’de (104oF) 16cSt ile 75cSt arasında olan son yağ oluşturur.]",
   "ec_no": "309-877-7",
   "index_no": "649-530-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "L"
   ],

@@ -1,10 +1,10 @@
 {
   "cas": "214353-17-0",
-  "name": "1-(2-amino-5-chlorophenyl)- 2,2,2-trifluoro-1,1-ethanediol, hydrochloride; [containing ≥ 0.1 % 4- chloroaniline (EC No 203-401- 0)]",
+  "name": "1-(2-amino-5-chlorophenyl)-2,2,2-trifluoro-1,1-ethanediol, hydrochloride; [containing ≥ 0.1 % 4-chloroaniline (EC No 203-401-0)]",
   "name_tr": "1-(2-amino-5-klorofenil)-2,2,2- trifloro-1,1-etandiol, hidroklorür; [≥ %0,1 4-kloroanilin (EC No 203-401-0) içeren]",
   "ec_no": "433-580-2",
   "index_no": "603-221-01-3",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

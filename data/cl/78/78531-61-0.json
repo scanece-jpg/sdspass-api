@@ -1,10 +1,10 @@
 {
   "cas": "78531-61-0",
-  "name": "4-(trans-4- propylcyclohexyl)acetophenone",
+  "name": "4-(trans-4-propylcyclohexyl)acetophenone",
   "name_tr": "4-(trans-4- propilsiklohekzil)asetofenon",
   "ec_no": "406-700-6",
   "index_no": "606-049-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -4,28 +4,28 @@
   "name_tr": "8-p-mentilhidroperoksit; p- mentan hidroperoksit",
   "ec_no": "201-281-4",
   "index_no": "617-012-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Org. Perox. Type D",
+        "class": "Org. Perox. D",
         "h_code": "H242"
-      },
-      {
-        "class": "Skin Corr. 1B",
-        "h_code": "H314"
       },
       {
         "class": "Acute Tox. 4",
         "h_code": "H332"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
       }
     ],
     "m_factors": {},
     "scl_limits": [
       {
         "h_code": "H335",
-        "class": "STOT SE 3",
+        "class": "",
         "c_min": 5.0,
         "c_max": null
       }
@@ -40,8 +40,8 @@
     ],
     "h_codes": [
       "H242",
-      "H314",
-      "H332"
+      "H332",
+      "H314"
     ],
     "suppl_h": []
   }

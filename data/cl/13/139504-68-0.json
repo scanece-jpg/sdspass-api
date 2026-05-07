@@ -1,10 +1,10 @@
 {
   "cas": "139504-68-0",
-  "name": "1-[(2-tert-butyl)cyclohexyloxy]- 2-butanol",
+  "name": "1-[(2-tert-butyl)cyclohexyloxy]-2-butanol",
   "name_tr": "1-[(2-tert-bütil)siklohekziloksi]- 2-bütanol",
   "ec_no": "412-300-2",
   "index_no": "603-154-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

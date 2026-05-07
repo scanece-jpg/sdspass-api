@@ -1,29 +1,35 @@
 {
   "cas": "26225-79-6",
-  "name": "ethofumesate (ISO); (±)-2-ethoxy-2,3-dihydro-3,3- dimethylbenzofuran-5-yl methanesulfonate",
+  "name": "ethofumesate (ISO); (RS)-2-ethoxy-2,3-di­hydro-3,3-dimethyl­benzofuran-5-yl methanesulfonate",
   "name_tr": "etofumesat (ISO); (±)-2-etoksi- 2,3-dihidro-3,3- dimetilbenzofuran-5-il metansülfonat",
   "ec_no": "247-525-3",
   "index_no": "607-314-00-2",
   "atp": "ATP15",
-  "notes": [
-    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
-  ],
+  "notes": [],
   "classification": {
     "hazards": [
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
       {
         "class": "Aquatic Chronic 1",
         "h_code": "H410"
       }
     ],
-    "m_factors": {},
+    "m_factors": {
+      "acute": 1,
+      "chronic": 1
+    },
     "scl_limits": []
   },
   "labelling": {
-    "signal": "",
+    "signal": "Warning",
     "pictograms": [
       "GHS09"
     ],
     "h_codes": [
+      "H400",
       "H410"
     ],
     "suppl_h": []

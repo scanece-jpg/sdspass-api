@@ -1,14 +1,12 @@
 {
   "cas": "68952-80-7",
-  "name": "Tail gas (petroleum), straight- run naphtha hydrodesulfurizer; Refinery gas; [A complex combination obtained from the hydrodesulfurization of straight- run naphtha. It consists of hydrogen and hydrocarbons having carbon numbers predominantly in the range of C1 through C5.]",
+  "name": "Tail gas (petroleum), straight-run naphtha hydrodesulfurizer; Refinery gas; [A complex combination obtained from the hydrodesulfurization of straight-run naphtha. It consists of hydrogen and hydrocarbons having carbon numbers predominantly in the range of C1 through C5.]",
   "name_tr": "Artık gaz (petrol), normal üretim nafta hidrojen muamelesi ile kükürt giderici; Rafineri gazı; [Normal üretim naftanın hidrojen ile muamelesi sonucu kükürtünün giderilmesinden elde edilen kompleks bir bileşim. Hidrojen ve büyük çoğunlukla C1 ila C5 aralığında karbon sayısına sahiphidrokarbonlardan oluşur.]",
   "ec_no": "273-174-0",
   "index_no": "649-166-00-1",
   "atp": "ATP1",
   "notes": [
-    "K",
-    "U",
-    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
+    "K U"
   ],
   "classification": {
     "hazards": [

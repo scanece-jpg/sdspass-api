@@ -1,10 +1,10 @@
 {
   "cas": "83055-99-6",
-  "name": "methyl α-((4,6- dimethoxypyrimidin-2- yl)ureidosulphonyl)-o-toluate",
+  "name": "methyl α-((4,6-dimethoxypyrimidin-2-yl)ureidosulphonyl)-o-toluate",
   "name_tr": "metil α -((4,6- dimetoksipirimidin-2- il)üreidosülfonil)-o-toluat",
   "ec_no": "401-340-6",
   "index_no": "607-178-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

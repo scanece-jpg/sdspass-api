@@ -1,10 +1,10 @@
 {
   "cas": "88558-41-2",
-  "name": "2-(3-iodoprop-2-yn-1- yloxy)ethyl phenylcarbamate",
+  "name": "2-(3-iodoprop-2-yn-1-yloxy)ethyl phenylcarbamate",
   "name_tr": "2-(3-iyodprop-2-in-1- iloksi)etilfenilkarbamat",
   "ec_no": "408-010-0",
   "index_no": "006-090-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

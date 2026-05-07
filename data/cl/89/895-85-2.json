@@ -4,12 +4,12 @@
   "name_tr": "bis(4-metilbenzil)peroksit",
   "ec_no": "407-950-9",
   "index_no": "617-015-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Org. Perox. Type B",
+        "class": "Org. Perox. B",
         "h_code": "H241"
       },
       {

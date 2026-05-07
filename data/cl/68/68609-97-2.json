@@ -1,10 +1,10 @@
 {
   "cas": "68609-97-2",
-  "name": "oxirane, mono[(C12-14- alkyloxy)methyl] derivs.",
+  "name": "oxirane, mono[(C12-14-alkyloxy)methyl] derivs.",
   "name_tr": "oksiran, mono[(C12-14- alkiloksi)metil] türevleri",
   "ec_no": "271-846-8",
   "index_no": "603-103-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

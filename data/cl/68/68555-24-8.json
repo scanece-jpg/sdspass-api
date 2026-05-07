@@ -1,13 +1,12 @@
 {
   "cas": "68555-24-8",
-  "name": "Tar acids, cresylic, residues; Distillate Phenols; [The residue from crude coal tar acids after removal of phenol, cresols, xylenols and any higher boiling phenols. A black solid with a melting point approximately 80°C (176°F). Composed primarily of polyalkylphenols, resin gums, and inorganic salts.]",
+  "name": "Tar acids, cresylic, residues; Distillate Phenols; [The residue from crude coal tar acids after removal of phenol, cresols, xylenols and any higher boiling phenols.  A black solid with a melting point approximately 80°C (176°F). Composed primarily of polyalkylphenols, resin gums, and inorganic salts.]",
   "name_tr": "zift asitler, kresilik, artıklar; damıtık fenolleri; [Ham kömür zifti asitlerinden fenol, kreosol, ksilenol ve daha yüksek sıcaklıklarda kaynayan diğer tüm fenollerin uzaklaştırılmasından sonra kalan artık. Erime noktası yaklaşık 80oC (176oC) olan siyah bir katı. Büyük ölçüde polialkilfenoller, reçine sakızları ve inorganic tuzlardan oluşur.]",
   "ec_no": "271-418-0",
   "index_no": "648-126-00-0",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
-    "J",
-    "M"
+    "J M"
   ],
   "classification": {
     "hazards": [

@@ -4,17 +4,21 @@
   "name_tr": "benzoik asit",
   "ec_no": "200-618-2",
   "index_no": "607-705-00-8",
-  "atp": "",
+  "atp": "ATP6",
   "notes": [],
   "classification": {
     "hazards": [
       {
         "class": "STOT RE 1",
-        "h_code": "H372(akci"
+        "h_code": "H372(lungs)"
       },
       {
         "class": "Skin Irrit. 2",
-        "h_code": "ğerler)"
+        "h_code": "H315"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
       }
     ],
     "m_factors": {},
@@ -27,8 +31,9 @@
       "GHS05"
     ],
     "h_codes": [
-      "H372(akci",
-      "ğerler)"
+      "H372(lungs)",
+      "H315",
+      "H318"
     ],
     "suppl_h": []
   }

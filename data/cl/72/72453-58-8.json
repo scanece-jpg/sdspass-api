@@ -1,10 +1,10 @@
 {
   "cas": "72453-58-8",
-  "name": "6-anilino-1-benzoyl-4-(4-tert- pentylphenoxy)naphto[1,2,3- de]quinoline-2,7-(3H)-dione",
+  "name": "6-anilino-1-benzoyl-4-(4-tert-pentylphenoxy)naphto[1,2,3-de]quinoline-2,7-(3H)-dione",
   "name_tr": "6-anilino-1-benzil-4-(4-ter- pentilfenoksi)nafto[1,2,3- de]kinolin-2,7-(3H)-dion",
   "ec_no": "412-480-2",
   "index_no": "606-050-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

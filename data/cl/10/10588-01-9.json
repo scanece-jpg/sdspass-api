@@ -4,8 +4,10 @@
   "name_tr": "sodyumdikromat",
   "ec_no": "234-190-3",
   "index_no": "024-004-00-7",
-  "atp": "",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "3"
+  ],
   "classification": {
     "hazards": [
       {
@@ -64,21 +66,21 @@
     "m_factors": {},
     "scl_limits": [
       {
+        "h_code": "H335",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": null
+      },
+      {
         "h_code": "H334",
-        "class": "Resp. Sens. 1",
+        "class": "",
         "c_min": 0.2,
         "c_max": null
       },
       {
         "h_code": "H317",
-        "class": "Skin Sens. 1",
+        "class": "",
         "c_min": 0.2,
-        "c_max": null
-      },
-      {
-        "h_code": "H335",
-        "class": "STOT SE 3",
-        "c_min": 5.0,
         "c_max": null
       }
     ]

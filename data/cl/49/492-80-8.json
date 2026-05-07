@@ -1,10 +1,10 @@
 {
   "cas": "492-80-8",
-  "name": "4,4'-carbonimidoylbis[N,N- dimethylaniline]",
+  "name": "4,4'-carbonimidoylbis[N,N-dimethylaniline]",
   "name_tr": "4,4'-karbonimidoilbis[N,N- dimetilanilin]",
   "ec_no": "207-762-5",
   "index_no": "612-096-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

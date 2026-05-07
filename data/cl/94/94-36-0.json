@@ -4,12 +4,12 @@
   "name_tr": "Dibenzoilperoksit; Benzoil peroksit",
   "ec_no": "202-327-6",
   "index_no": "617-008-00-0",
-  "atp": "",
+  "atp": "ATP22",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Org. Perox. Type B",
+        "class": "Org. Perox. B",
         "h_code": "H241"
       },
       {
@@ -19,6 +19,14 @@
       {
         "class": "Skin Sens. 1",
         "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
       }
     ],
     "m_factors": {
@@ -32,12 +40,15 @@
     "pictograms": [
       "GHS01",
       "GHS02",
-      "GHS07"
+      "GHS07",
+      "GHS09"
     ],
     "h_codes": [
       "H241",
       "H319",
-      "H317"
+      "H317",
+      "H400",
+      "H410"
     ],
     "suppl_h": []
   }

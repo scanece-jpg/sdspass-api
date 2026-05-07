@@ -1,10 +1,10 @@
 {
   "cas": "6164-98-3",
-  "name": "chlordimeform (ISO); N2-(4-chloro-o-tolyl)-N1,N1- dimethylformamidine",
+  "name": "chlordimeform (ISO); N2-(4-chloro-o-tolyl)-N1,N1-dimethylformamidine",
   "name_tr": "klorodimeform (ISO); N2-(4-kloro-o-tolil)-N1,N1- dimetilformamidin",
   "ec_no": "228-200-5",
   "index_no": "650-007-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

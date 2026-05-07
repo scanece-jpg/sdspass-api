@@ -1,10 +1,10 @@
 {
   "cas": "6485-40-1",
-  "name": "carvone (ISO); 2-methyl-5-(prop-1-en-2- yl)cyclohex-2-en-1-one; [1] d-carvone; (5S)-2-methyl-5- (prop-1-en-2-yl)cyclohex-2-en- 1-one; [2] l-carvone; (5R)-2-methyl-5- (prop-1-en-2-yl)cyclohex-2-en-",
+  "name": "carvone (ISO); 2-methyl-5-(prop-1-en-2-yl)cyclohex-2-en-1-one [1]\nd-carvone; (5S)-2-methyl-5-(prop-1-en-2-yl)cyclohex-2-en-1-one [2]\nl-carvone; (5R)-2-methyl-5-(prop-1-en-2-yl)cyclohex-2-en-1-one [3]",
   "name_tr": "karvon (ISO); 2-metil-5-(prop-1-en-2- il)siklohekz-2-en-1-on; [1] d-karvon; (5S)-2-metil-5- (prop- 1-en-2-il)siklohekz-2-en- 1-on; [2] l-karvon; (5R)-2-metil-5- (prop- 1-en-2-il)siklohekz-2-en- 1-on",
-  "ec_no": "202-759-5",
+  "ec_no": "229-352-5",
   "index_no": "606-148-00-8",
-  "atp": "",
+  "atp": "ATP07",
   "notes": [],
   "classification": {
     "hazards": [

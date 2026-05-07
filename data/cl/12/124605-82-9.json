@@ -1,10 +1,10 @@
 {
   "cas": "124605-82-9",
-  "name": "tetra-sodium/lithium 4,4'-bis-(8- amino-3,6-disulfonato-1- naphthol-2-ylazo)-3- methylazobenzene",
+  "name": "tetra-sodium/lithium 4,4'-bis-(8-amino-3,6-disulfonato-1-naphthol-2-ylazo)-3-methylazobenzene",
   "name_tr": "tetra-sodyum/lityum 4,4'-bis-(8- amino-3,6-disülfonato-1-naftol- 2-ilazo)-3-metilazobenzen",
   "ec_no": "408-210-8",
   "index_no": "611-110-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

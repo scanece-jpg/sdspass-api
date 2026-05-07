@@ -1,10 +1,10 @@
 {
   "cas": "119168-77-3",
-  "name": "tebufenpyrad (ISO); N-(4- tertbutylbenzyl)-4-chloro-3- ethyl-1-methyl-1Hpyrazole-5- carboxamide",
+  "name": "tebufenpyrad (ISO); N-(4-tertbutylbenzyl)-4-chloro-3-ethyl-1-methyl-1Hpyrazole-5- carboxamide",
   "name_tr": "tebufenpirad (ISO); N-(4- tertbütilbenzil)-4-kloro-3- etil-1- metil-1Hiprazol-5- karboksamid",
   "ec_no": "",
   "index_no": "616-210-00-6",
-  "atp": "",
+  "atp": "ATP5",
   "notes": [],
   "classification": {
     "hazards": [
@@ -18,11 +18,19 @@
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373"
+        "h_code": "H373(gastro-intestinal_tract)"
       },
       {
         "class": "Skin Sens. 1B",
-        "h_code": "(gastro"
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
       }
     ],
     "m_factors": {
@@ -32,7 +40,7 @@
     "scl_limits": []
   },
   "labelling": {
-    "signal": "",
+    "signal": "Danger",
     "pictograms": [
       "GHS06",
       "GHS08",
@@ -41,8 +49,10 @@
     "h_codes": [
       "H301",
       "H332",
-      "H373",
-      "(gastro"
+      "H373(gastro-intestinal_tract)",
+      "H317",
+      "H400",
+      "H410"
     ],
     "suppl_h": []
   }

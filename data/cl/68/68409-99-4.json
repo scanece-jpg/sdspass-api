@@ -1,14 +1,12 @@
 {
   "cas": "68409-99-4",
-  "name": "Gases (petroleum), catalytic cracked overheads; Petroleum gas; [A complex combination of hydrocarbons produced by the distillation of products from the catalytic cracking process. It consists of hydrocarbons having carbon numbers predominantly in the range of C3 through C5 and boiling in the range of approximately -48°C to 32°C (- 54°F to 90°F).]",
+  "name": "Gases (petroleum), catalytic cracked overheads; Petroleum gas; [A complex combination of hydrocarbons produced by the distillation of products from the catalytic cracking process. It consists of hydrocarbons having carbon numbers predominantly in the range of C3 through C5 and boiling in the range of approximately – 48 °C to 32 °C (– 54 °F to 90 °F).]",
   "name_tr": "Gazlar (petrol), katalitik olarak parçalanmış üstler; Petrol gazı; [Katalitik olarak parçalanma prosesi ürünlerinin damıtılması ile üretilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla C3 ila C5 aralığında karbon sayısına sahip ve yaklaşık olarak -48°C ila 32°C (- 54°F ila 90°F) aralığında kaynayan hidrokarbonlardan oluşur.]",
   "ec_no": "270-071-2",
   "index_no": "649-191-00-8",
   "atp": "ATP1",
   "notes": [
-    "K",
-    "U",
-    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
+    "K U"
   ],
   "classification": {
     "hazards": [

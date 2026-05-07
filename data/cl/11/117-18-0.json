@@ -1,10 +1,10 @@
 {
   "cas": "117-18-0",
-  "name": "tecnazene (ISO); 1,2,4,5-tetrachloro-3- nitrobenzene",
+  "name": "tecnazene (ISO); 1,2,4,5-tetrachloro-3-nitrobenzene",
   "name_tr": "teknazen (ISO); 1,2,4,5-tetrakloro-3-nitrobenzen",
   "ec_no": "204-178-2",
   "index_no": "609-044-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

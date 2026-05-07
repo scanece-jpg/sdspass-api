@@ -1,10 +1,10 @@
 {
   "cas": "28434-01-7",
-  "name": "bioresmethrin (ISO); (5-benzyl-3-furyl)methyl (1R)- 2,2-dimethyl-3-(2-methylprop-1- en-1-yl)cyclopropanecarboxylate",
+  "name": "bioresmethrin (ISO); (5-benzyl-3-furyl)methyl (1R)-2,2-dimethyl-3-(2-methylprop-1-en-1-yl)cyclopropanecarboxylate",
   "name_tr": "biyoresmetrin; (5-benzil-3- furil)metil (1R)-2,2-dimetil-3-(2- metilprop-1-en-1- il)siklopropankarboksilat",
   "ec_no": "249-014-0",
   "index_no": "613-120-00-9",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

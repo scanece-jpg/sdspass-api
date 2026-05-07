@@ -1,10 +1,10 @@
 {
   "cas": "83-79-4",
-  "name": "(2R,6aS,12aS)-1,2,6,6a,12,12a- hexahydro-2-isopropenyl-8,9- dimethoxychromeno[3,4- b]furo[2,3-h]chromen-6-one; rotenone",
+  "name": "(2R,6aS,12aS)-1,2,6,6a,12,12a-hexahydro-2-isopropenyl-8,9-dimethoxychromeno[3,4-b]furo[2,3-h]chromen-6-one, rotenone",
   "name_tr": "(2R,6aS,12aS)-1,2,6,6a,12,12a- hekzahidro-2-izopropenil-8,9- dimetoksikromeno[3,4- b]furo[2,3-h]kromen-6-on; rotenon",
   "ec_no": "201-501-9",
   "index_no": "650-005-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,16 +13,16 @@
         "h_code": "H301"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H335"
       },
       {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Aquatic Acute 1",
@@ -44,9 +44,9 @@
     ],
     "h_codes": [
       "H301",
-      "H319",
       "H335",
       "H315",
+      "H319",
       "H400",
       "H410"
     ],

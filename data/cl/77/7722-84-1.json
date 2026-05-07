@@ -1,10 +1,10 @@
 {
   "cas": "7722-84-1",
-  "name": "hydrogen peroxide solution ... %",
+  "name": "hydrogen peroxide solution ...%",
   "name_tr": "hidrojenperoksit çözeltisi ... %",
   "ec_no": "231-765-0",
   "index_no": "008-003-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "B"
   ],
@@ -31,15 +31,51 @@
     "scl_limits": [
       {
         "h_code": "H271",
-        "class": "Ox. Liq. 1",
+        "class": "",
         "c_min": 70.0,
         "c_max": null
       },
       {
         "h_code": "H272",
-        "class": "Ox. Liq. 2",
+        "class": "",
         "c_min": 50.0,
         "c_max": 70.0
+      },
+      {
+        "h_code": "H314",
+        "class": "",
+        "c_min": 70.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H314",
+        "class": "",
+        "c_min": 50.0,
+        "c_max": 70.0
+      },
+      {
+        "h_code": "H315",
+        "class": "",
+        "c_min": 35.0,
+        "c_max": 50.0
+      },
+      {
+        "h_code": "H318",
+        "class": "",
+        "c_min": 8.0,
+        "c_max": 50.0
+      },
+      {
+        "h_code": "H319",
+        "class": "",
+        "c_min": 5.0,
+        "c_max": 8.0
+      },
+      {
+        "h_code": "H335",
+        "class": "",
+        "c_min": 35.0,
+        "c_max": null
       }
     ]
   },

@@ -1,10 +1,10 @@
 {
   "cas": "52894-02-7",
-  "name": "bis(2- ethylhexyl)octylphosphonate",
+  "name": "bis(2-ethylhexyl)octylphosphonate",
   "name_tr": "bis(2-etilhekzil)oktilfosfonat",
   "ec_no": "417-170-0",
   "index_no": "607-494-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

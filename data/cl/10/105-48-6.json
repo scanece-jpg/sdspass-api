@@ -4,7 +4,7 @@
   "name_tr": "izopropilkloroasetat",
   "ec_no": "203-301-7",
   "index_no": "607-206-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -17,16 +17,16 @@
         "h_code": "H301"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H335"
       },
       {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       }
     ],
     "m_factors": {},
@@ -41,9 +41,9 @@
     "h_codes": [
       "H226",
       "H301",
-      "H319",
       "H335",
-      "H315"
+      "H315",
+      "H319"
     ],
     "suppl_h": []
   }

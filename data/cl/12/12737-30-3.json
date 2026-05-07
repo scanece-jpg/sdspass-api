@@ -1,10 +1,10 @@
 {
   "cas": "12737-30-3",
-  "name": "cobalt nickel gray periclase; C.I. Pigment Black 25; C.I. 77332; [1] cobalt nickel dioxide; [2] cobalt nickel oxide [3]",
+  "name": "cobalt nickel gray periclase; C.I. Pigment Black 25; C.I. 77332 [1]\ncobalt nickel dioxide [2]\ncobalt nickel oxide [3]",
   "name_tr": "kobalt nikel grisi periklas; C.I. Pigment Siyah 25; C.I. 77332; [1] kobalt nikel dioksit; [2] kobalt nikel oksit [3]",
-  "ec_no": "269-051-6",
+  "ec_no": "-",
   "index_no": "028-043-00-0",
-  "atp": "",
+  "atp": "ATP02",
   "notes": [],
   "classification": {
     "hazards": [
@@ -14,7 +14,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372"
+        "h_code": "H372 **"
       },
       {
         "class": "Skin Sens. 1",
@@ -32,7 +32,7 @@
     ],
     "h_codes": [
       "H350i",
-      "H372",
+      "H372 **",
       "H317"
     ],
     "suppl_h": []

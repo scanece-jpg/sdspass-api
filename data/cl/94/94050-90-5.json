@@ -1,10 +1,10 @@
 {
   "cas": "94050-90-5",
-  "name": "(R)-2-(4- hydroxyphenoxy)propanoic acid",
+  "name": "(R)-2-(4-hydroxyphenoxy)propanoic acid",
   "name_tr": "(R)-2-(4- hidroksifenoksi)propanoik asit",
   "ec_no": "407-960-3",
   "index_no": "607-269-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

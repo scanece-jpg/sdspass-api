@@ -1,10 +1,10 @@
 {
   "cas": "79815-20-6",
-  "name": "(S)-2,3-dihydro-1H-indole-2- carboxylic acid",
+  "name": "(S)-2,3-dihydro-1H-indole-2-carboxylic acid",
   "name_tr": "(S)-2,3-dihidro-1H-indol-2- karboksilik asit",
   "ec_no": "410-860-2",
   "index_no": "607-330-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

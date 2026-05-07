@@ -1,10 +1,10 @@
 {
   "cas": "130728-76-6",
-  "name": "N,N,N',N'-tetraglycidyl-4,4'- diamino-3,3'- diethyldiphenylmethane",
+  "name": "N,N,N',N'-tetraglycidyl-4,4'-diamino-3,3'-diethyldiphenylmethane",
   "name_tr": "N,N,N',N'-tetraglisidil-4,4'- diamino-3,3'-dietildifenilmetan",
   "ec_no": "410-060-3",
   "index_no": "612-171-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

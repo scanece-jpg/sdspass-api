@@ -1,10 +1,10 @@
 {
   "cas": "41620-33-1",
-  "name": "2-[[2-(acetyloxy)-3-(1,1- dimethyl-ethyl)-5- methylphenyl]methyl]-6-(1,1- dimethylethyl)-4-methylphenol",
+  "name": "2-[[2-(acetyloxy)-3-(1,1-dimethyl-ethyl)-5-methylphenyl]methyl]-6-(1,1-dimethylethyl)-4-methylphenol",
   "name_tr": "2-[[2-(asetiloksi)-3-(1,1-dimetil- etil)-5-metilfenil]metil-6-(1,1- dimetiletil)-4-metilfenol",
   "ec_no": "412-210-3",
   "index_no": "607-370-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

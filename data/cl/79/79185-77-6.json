@@ -1,10 +1,10 @@
 {
   "cas": "79185-77-6",
-  "name": "7a-ethyl-3,5-bis(1-methylethyl)- 2,3,4,5-tetrahydrooxazolo[3,4- c]-2,3,4,5-tetrahydrooxazole",
+  "name": "7a-ethyl-3,5-bis(1-methylethyl)-2,3,4,5-tetrahydrooxazolo[3,4-c]-2,3,4,5-tetrahydrooxazole",
   "name_tr": "7a-etil-3,5-bis(1-metiletil)- 2,3,4,5-tetrahidroksazolo[3,4-c]- 2,3,4,5-tetrahidroksazol",
   "ec_no": "417-140-7",
   "index_no": "613-219-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

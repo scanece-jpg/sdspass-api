@@ -1,10 +1,10 @@
 {
   "cas": "25646-71-3",
-  "name": "N-(2-(4-amino-N-ethyl-m- toluidino)ethyl)methanesulphona mide sesquisulphate; 4-(N-ethyl-N-2- methanesulphonylaminoethyl)- 2-methylphenylenediamine sesquisulphate monohydrate",
+  "name": "N-(2-(4-amino-N-ethyl-m-toluidino)ethyl)methanesulphonamide sesquisulphate; 4-(N-ethyl-N-2-methanesulphonylaminoethyl)-2-methylphenylenediamine sesquisulphate monohydrate",
   "name_tr": "N-(2-(4-amino-N-etil-m- toluidino)etil)metansülfonamids eskisülfat; 4-(N-etil-N-2- metansülfonilaminoetil)-2- metilfenilendiamin seskisülfat monohidrat",
   "ec_no": "247-161-5",
   "index_no": "612-134-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

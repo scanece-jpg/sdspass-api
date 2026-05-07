@@ -1,10 +1,10 @@
 {
   "cas": "137590-32-0",
-  "name": "[R-(R,S)]-[[2-methyl-1-(1- oxopropoxy)propoxy]-(4- phenylbutyl)phosphinyl] acetic acid, (-)-cinchonidine (1:1) salt",
+  "name": "[R-(R*,S*)]-[[2-methyl-1-(1-oxopropoxy)propoxy]-(4-phenylbutyl)phosphinyl] acetic acid, (-)-cinchonidine (1:1) salt",
   "name_tr": "[R-(R,S)]-[[2-metil-1-(1- oksopropoksi)propoksi]-(4- fenilbütil)fosfinil] asetik asit, (-)- sinkonidin(1:1) tuz",
   "ec_no": "415-820-8",
   "index_no": "015-180-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

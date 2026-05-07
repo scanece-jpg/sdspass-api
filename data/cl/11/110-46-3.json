@@ -1,10 +1,10 @@
 {
   "cas": "110-46-3",
-  "name": "pentyl nitrite; [1] ‘amyl nitrite’, mixed isomers [2]",
+  "name": "pentyl nitrite [1]\nâ€˜amyl nitriteâ€™, mixed isomers [2]",
   "name_tr": "Pentil nitrit [1]; \"amil nitrit\", karışık izomerler [2]",
-  "ec_no": "207-332-7",
+  "ec_no": "203-770-8",
   "index_no": "007-020-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,11 +13,11 @@
         "h_code": "H225"
       },
       {
-        "class": "Acute Tox. 4",
+        "class": "Acute Tox. 4 *",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4",
+        "class": "Acute Tox. 4 *",
         "h_code": "H302"
       }
     ],

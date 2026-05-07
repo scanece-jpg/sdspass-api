@@ -1,10 +1,10 @@
 {
   "cas": "77227-99-7",
-  "name": "3-chloro-4,5,α, α,α- pentafluorotoluene",
+  "name": "3-chloro-4,5,α, α,α-pentafluorotoluene",
   "name_tr": "3-kloro-4,5,alfa,alfa,alfa- pentaflortoluen",
   "ec_no": "401-930-3",
   "index_no": "602-070-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

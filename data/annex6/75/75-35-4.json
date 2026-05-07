@@ -39,9 +39,5 @@
       "H332"
     ],
     "suppl_h": []
-  },
-  "ate": {
-    "inhalation_vapour": 0.5,
-    "oral": 300.0
   }
 }

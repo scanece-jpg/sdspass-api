@@ -1,10 +1,10 @@
 {
   "cas": "113614-08-7",
-  "name": "beflubutamid (ISO); (RS)-N-benzyl-2-(α,α,α,4- tetrafluoro-m- tolyoxy)butyramide",
+  "name": "beflubutamid (ISO); (RS)-N-benzyl-2-(α,α,α,4-tetrafluoro-m-tolyoxy)butyramide",
   "name_tr": "beflubutamid (ISO); (RS)-N-benzil-2-(α,α,α,4- tetrafloro-m-tolioksi)butiramid",
-  "ec_no": "",
+  "ec_no": "-",
   "index_no": "616-165-00-2",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

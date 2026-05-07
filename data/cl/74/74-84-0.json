@@ -4,7 +4,7 @@
   "name_tr": "etan",
   "ec_no": "200-814-8",
   "index_no": "601-002-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "U"
   ],
@@ -13,6 +13,10 @@
       {
         "class": "Flam. Gas 1",
         "h_code": "H220"
+      },
+      {
+        "class": "Press. Gas",
+        "h_code": ""
       }
     ],
     "m_factors": {},

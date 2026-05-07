@@ -4,7 +4,7 @@
   "name_tr": "Diciva diklorür; Civa (I) klorür; kalomel",
   "ec_no": "233-307-5",
   "index_no": "080-003-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,16 +13,16 @@
         "h_code": "H302"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H335"
       },
       {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Aquatic Acute 1",
@@ -44,9 +44,9 @@
     ],
     "h_codes": [
       "H302",
-      "H319",
       "H335",
       "H315",
+      "H319",
       "H400",
       "H410"
     ],

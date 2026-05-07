@@ -4,7 +4,7 @@
   "name_tr": "morfolin-4-karbonilklorür",
   "ec_no": "239-213-0",
   "index_no": "613-041-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,12 +13,12 @@
         "h_code": "H351"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       }
     ],
     "m_factors": {},
@@ -31,8 +31,8 @@
     ],
     "h_codes": [
       "H351",
-      "H319",
-      "H315"
+      "H315",
+      "H319"
     ],
     "suppl_h": [
       "EUH014"

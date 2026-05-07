@@ -16,7 +16,7 @@
     "m_factors": {},
     "scl_limits": [
       {
-        "h_code": "H360",
+        "h_code": "H360D",
         "class": "",
         "c_min": 3.0,
         "c_max": null

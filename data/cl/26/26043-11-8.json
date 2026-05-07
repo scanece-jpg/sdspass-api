@@ -4,7 +4,7 @@
   "name_tr": "nikel hekzaflorosilikat",
   "ec_no": "247-430-7",
   "index_no": "028-030-00-X",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -48,13 +48,19 @@
     "scl_limits": [
       {
         "h_code": "H372",
-        "class": "STOT RE 1",
+        "class": "",
         "c_min": 1.0,
         "c_max": null
       },
       {
+        "h_code": "H373",
+        "class": "",
+        "c_min": 0.1,
+        "c_max": 1.0
+      },
+      {
         "h_code": "H317",
-        "class": "C <%1 Cilt Hassas. 1",
+        "class": "",
         "c_min": 0.01,
         "c_max": null
       }

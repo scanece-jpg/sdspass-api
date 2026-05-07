@@ -1,10 +1,10 @@
 {
   "cas": "163879-69-4",
-  "name": "reaction mass of: 5-[(4-[(7- amino-1-hydroxy-3-sulfo-2- naphthyl)azo]-2,5- diethoxyphenyl)azo]-2-[(3- phosphonophenyl)azo]benzoic acid; 5-[(4-[(7-amino-1-hydroxy-3- sulfo-2-naphthyl)azo]-2,5- diethoxyphenyl)azo]-3-[(3- phosphonophenyl)azo]benzoic acid",
+  "name": "reaction mass of: 5-[(4-[(7-amino-1-hydroxy-3-sulfo-2-naphthyl)azo]-2,5-diethoxyphenyl)azo]-2-[(3-phosphonophenyl)azo]benzoic acid; 5-[(4-[(7-amino-1-hydroxy-3-sulfo-2-naphthyl)azo]-2,5-diethoxyphenyl)azo]-3-[(3-phosphonophenyl)azo]benzoic acid",
   "name_tr": "tepkime kütlesi: 5-[(4-[(7- amino-1-hidroksi-3-sülfo-2- maftil)azo]-2,5- dietoksifenil)azo]-2-[(3- fosfonofenil)azo]benzoik asit; 5-[(4-[(7-amino-1-hidroksi-3- sülfo-2-maftil)azo]-2,5- dietoksifenil)azo]-3-[(3- fosfonofenil)azo]benzoik asit",
   "ec_no": "418-230-9",
   "index_no": "611-129-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

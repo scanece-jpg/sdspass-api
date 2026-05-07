@@ -4,7 +4,7 @@
   "name_tr": "karbon disülfür",
   "ec_no": "200-843-6",
   "index_no": "006-003-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -21,31 +21,31 @@
         "h_code": "H372"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       }
     ],
     "m_factors": {},
     "scl_limits": [
       {
-        "h_code": "H361fd",
-        "class": "Repr. 2",
+        "h_code": "H361f",
+        "class": "",
         "c_min": 1.0,
         "c_max": null
       },
       {
         "h_code": "H372",
-        "class": "STOT RE 1",
+        "class": "",
         "c_min": 1.0,
         "c_max": null
       },
       {
         "h_code": "H373",
-        "class": "STOT RE 2",
+        "class": "",
         "c_min": 0.2,
         "c_max": 1.0
       }
@@ -62,8 +62,8 @@
       "H225",
       "H361fd",
       "H372",
-      "H319",
-      "H315"
+      "H315",
+      "H319"
     ],
     "suppl_h": []
   }

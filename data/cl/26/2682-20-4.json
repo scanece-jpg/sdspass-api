@@ -4,7 +4,7 @@
   "name_tr": "2-metilisotiyazol-3(2H)-on",
   "ec_no": "220-239-6",
   "index_no": "613-326-00-9",
-  "atp": "",
+  "atp": "ATP13",
   "notes": [],
   "classification": {
     "hazards": [
@@ -43,12 +43,12 @@
     ],
     "m_factors": {
       "acute": 10,
-      "chronic": 1
+      "chronic": 10
     },
     "scl_limits": [
       {
         "h_code": "H317",
-        "class": "Skin Sens. 1A",
+        "class": "",
         "c_min": 0.0015,
         "c_max": null
       }

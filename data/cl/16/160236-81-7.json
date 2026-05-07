@@ -1,10 +1,10 @@
 {
   "cas": "160236-81-7",
-  "name": "bis[tributyl 4- (methylbenzyl)ammonium] 1,5- naphthalenedisulfonate",
+  "name": "bis[tributyl 4-(methylbenzyl)ammonium] 1,5-naphthalenedisulfonate",
   "name_tr": "bis[tribütil(4- metilbenzil)amonyum]-1,5- naftalindisülfonat",
   "ec_no": "415-210-1",
   "index_no": "612-195-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

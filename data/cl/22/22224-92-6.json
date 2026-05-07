@@ -4,13 +4,13 @@
   "name_tr": "fenamifos (ISO); etil-4-metiltiyo-m-tolil izopropil fosforamidat",
   "ec_no": "244-848-1",
   "index_no": "015-123-00-5",
-  "atp": "",
+  "atp": "ATP5",
   "notes": [],
   "classification": {
     "hazards": [
       {
         "class": "Acute Tox. 2",
-        "h_code": "H300"
+        "h_code": "H330"
       },
       {
         "class": "Acute Tox. 2",
@@ -18,7 +18,7 @@
       },
       {
         "class": "Acute Tox. 2",
-        "h_code": "H330"
+        "h_code": "H300"
       },
       {
         "class": "Eye Irrit. 2",
@@ -46,9 +46,9 @@
       "GHS09"
     ],
     "h_codes": [
-      "H300",
-      "H310",
       "H330",
+      "H310",
+      "H300",
       "H319",
       "H400",
       "H410"

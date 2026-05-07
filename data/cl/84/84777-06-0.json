@@ -1,10 +1,10 @@
 {
   "cas": "84777-06-0",
-  "name": "1,2-benzenedicarboxylic acid, dipentylester, branched and linear; [1] n-pentyl-isopentylphthalate; [2] di-n-pentyl phthalate; [3] diisopentylphthalate [4]",
+  "name": "1,2-benzenedicarboxylic acid, dipentylester, branched and linear [1]\nn-pentyl-isopentylphthalate [2]\ndi-n-pentyl phthalate [3]\ndiisopentylphthalate  [4]",
   "name_tr": "1,2-benzendikarboksilik asit, dipentilester, dallanmış ve lineer; [1] n-pentil-izopentilftalat; [2] di-n-pentilftalat; [3] diizopentilftalat [4]",
-  "ec_no": "284-032-2",
+  "ec_no": "284-032-2 [1]\n205-017-9 [3]\n210-088-4 [4]",
   "index_no": "607-426-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -4,7 +4,7 @@
   "name_tr": "sodyum karbonat",
   "ec_no": "207-838-8",
   "index_no": "011-005-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -14,20 +14,7 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": [
-      {
-        "h_code": "H319",
-        "class": "Eye Irrit. 2",
-        "c_min": 5.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H335",
-        "class": "STOT SE 3",
-        "c_min": 10.0,
-        "c_max": null
-      }
-    ]
+    "scl_limits": []
   },
   "labelling": {
     "signal": "Warning",

@@ -4,7 +4,7 @@
   "name_tr": "akrilik asit; prop-2-enoik asit",
   "ec_no": "201-177-9",
   "index_no": "607-061-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "D"
   ],
@@ -39,7 +39,7 @@
     "scl_limits": [
       {
         "h_code": "H335",
-        "class": "STOT SE 3",
+        "class": "",
         "c_min": 1.0,
         "c_max": null
       }

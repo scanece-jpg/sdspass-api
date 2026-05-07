@@ -4,7 +4,7 @@
   "name_tr": "2-kloro-5-klorometiltiyazol",
   "ec_no": "429-830-5",
   "index_no": "613-266-00-3",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,12 +13,12 @@
         "h_code": "H311"
       },
       {
-        "class": "Skin Corr. 1B",
-        "h_code": "H314"
-      },
-      {
         "class": "Acute Tox. 4",
         "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
       },
       {
         "class": "Skin Sens. 1",
@@ -41,8 +41,8 @@
     ],
     "h_codes": [
       "H311",
-      "H314",
       "H302",
+      "H314",
       "H317",
       "H411"
     ],

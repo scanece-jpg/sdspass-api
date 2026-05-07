@@ -5,11 +5,13 @@
   "ec_no": "233-000-6",
   "index_no": "613-115-00-1",
   "atp": "ATP15",
-  "notes": [
-    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
-  ],
+  "notes": [],
   "classification": {
     "hazards": [
+      {
+        "class": "Repr. 2",
+        "h_code": "H361d"
+      },
       {
         "class": "Acute Tox. 4",
         "h_code": "H302"
@@ -17,6 +19,10 @@
       {
         "class": "Eye Dam. 1",
         "h_code": "H318"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
       },
       {
         "class": "Aquatic Chronic 2",
@@ -29,12 +35,16 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
+      "GHS08",
+      "GHS07",
       "GHS05",
-      "GHS07"
+      "GHS09"
     ],
     "h_codes": [
+      "H361d",
       "H302",
       "H318",
+      "H317",
       "H411"
     ],
     "suppl_h": []

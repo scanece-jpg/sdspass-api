@@ -1,20 +1,20 @@
 {
   "cas": "91788-83-9",
-  "name": "tetrakis(1,2,2,6,6-pentamethyl-4- piperidyl)-1,2,3,4- butanetetracarboxylate",
+  "name": "tetrakis(1,2,2,6,6-pentamethyl-4-piperidyl)-1,2,3,4-butanetetracarboxylate",
   "name_tr": "tetrakis(1,2,2,6,6-pentametil-4- piperidil)-1,2,3,4- bütantetrakarboksilat",
   "ec_no": "428-070-1",
   "index_no": "607-589-00-9",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "STOT RE 1",
-        "h_code": "H372"
-      },
-      {
         "class": "Acute Tox. 4",
         "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
       },
       {
         "class": "Aquatic Acute 1",
@@ -36,8 +36,8 @@
       "GHS09"
     ],
     "h_codes": [
-      "H372",
       "H302",
+      "H372",
       "H400",
       "H410"
     ],

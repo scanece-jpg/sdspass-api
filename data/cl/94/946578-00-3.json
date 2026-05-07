@@ -1,10 +1,10 @@
 {
   "cas": "946578-00-3",
-  "name": "sulfoxaflor (ISO); [methyl(oxo){1-[6- (trifluoromethyl)-3- pyridyl]ethyl}-λ6- sulfanylidene]cyanamide",
+  "name": "sulfoxaflor (ISO); [methyl(oxo){1-[6-(trifluoromethyl)-3-pyridyl]ethyl}-λ6-sulfanylidene]cyanamide",
   "name_tr": "sulfoksaflor (ISO); [metil(okso){1-[6- (triflorometil)-3-piridil]etil}-λ6- sulfaniliden]siyanamid",
   "ec_no": "",
   "index_no": "616-217-00-4",
-  "atp": "",
+  "atp": "ATP7",
   "notes": [],
   "classification": {
     "hazards": [

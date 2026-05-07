@@ -1,10 +1,10 @@
 {
   "cas": "97101-46-7",
-  "name": "methyl 3-(acetylthio)-2-methyl- propanoate",
+  "name": "methyl 3-(acetylthio)-2-methyl-propanoate",
   "name_tr": "metil-3-(asetiltiyo)-2-metil- propanoat",
   "ec_no": "411-040-7",
   "index_no": "607-299-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

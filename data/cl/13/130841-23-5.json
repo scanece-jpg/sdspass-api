@@ -1,10 +1,10 @@
 {
   "cas": "130841-23-5",
-  "name": "1,4-dichloro-2-(1,1,2,3,3,3- hexafluoropropoxy)-5- nitrobenzene",
+  "name": "1,4-dichloro-2-(1,1,2,3,3,3-hexafluoropropoxy)-5-nitrobenzene",
   "name_tr": "1,4-dikloro-2-(1,1,2,3,3,3- hekzaflorpropoksi)-5- nitrobenzen",
   "ec_no": "415-580-4",
   "index_no": "609-070-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

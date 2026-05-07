@@ -1,10 +1,10 @@
 {
   "cas": "54-11-5",
-  "name": "nicotine (ISO); 3-[(2S)-1-methylpyrrolidin-2- yl]pyridine",
+  "name": "nicotine (ISO);\n3-[(2S)-1-methylpyrrolidin-2-yl]pyridine",
   "name_tr": "nikotin (ISO); 3-[(2S)-1-metilpirrolidin-2- il]piridin",
   "ec_no": "200-193-3",
   "index_no": "614-001-00-4",
-  "atp": "",
+  "atp": "ATP13",
   "notes": [],
   "classification": {
     "hazards": [
@@ -43,7 +43,7 @@
     "suppl_h": []
   },
   "ate": {
-    "inhalation_dust": 0.19,
+    "inhalation_mgl": 0.19,
     "dermal": 70.0,
     "oral": 5.0
   }

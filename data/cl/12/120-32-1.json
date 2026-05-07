@@ -1,10 +1,10 @@
 {
   "cas": "120-32-1",
-  "name": "clorofene; chlorophene; 2-benzyl-4-chlorophenol",
+  "name": "clorofene;\nchlorophene;\n2-benzyl-4-chlorophenol",
   "name_tr": "klorofen; klorofin; 2-benzil-4-klorofenol",
   "ec_no": "204-385-8",
   "index_no": "604-093-00-4",
-  "atp": "",
+  "atp": "ATP10",
   "notes": [],
   "classification": {
     "hazards": [
@@ -21,29 +21,33 @@
         "h_code": "H332"
       },
       {
-        "class": "Skin Irrit. 2",
-        "h_code": "H315"
+        "class": "STOT RE 2",
+        "h_code": "H373(kidney)"
       },
       {
-        "class": "Skin Sens. 1",
-        "h_code": "H317"
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
       },
       {
         "class": "Eye Dam. 1",
         "h_code": "H318"
       },
       {
-        "class": "STOT RE 2",
-        "h_code": "H373"
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
       },
       {
         "class": "Aquatic Chronic 1",
-        "h_code": "H400"
+        "h_code": "H410"
       }
     ],
     "m_factors": {
       "acute": 1,
-      "chronic": 100
+      "chronic": 1
     },
     "scl_limits": []
   },
@@ -59,11 +63,12 @@
       "H351",
       "H361f",
       "H332",
+      "H373(kidney)",
       "H315",
-      "H317",
       "H318",
-      "H373",
-      "H400"
+      "H317",
+      "H400",
+      "H410"
     ],
     "suppl_h": []
   }

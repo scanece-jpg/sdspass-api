@@ -1,10 +1,10 @@
 {
   "cas": "67952-43-6",
-  "name": "nickel dichlorate; [1] nickel dibromate; [2] ethyl hydrogen sulfate, nickel(II) salt [3]",
+  "name": "nickel dichlorate [1]\nnickel dibromate [2]\nethyl hydrogen sulfate, nickel(II) salt  [3]",
   "name_tr": "nikel diklorat; [1] nikel dibromat; [2] etil hidrojen sülfat, nikel(II) tuzu [3]",
-  "ec_no": "267-897-0",
+  "ec_no": "267-897-0 [1]\n238-596-1 [2]\n275-897-7 [3]",
   "index_no": "028-053-00-5",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -48,14 +48,20 @@
     "scl_limits": [
       {
         "h_code": "H372",
-        "class": "STOT RE 1",
+        "class": "",
         "c_min": 1.0,
         "c_max": null
       },
       {
+        "h_code": "H373",
+        "class": "",
+        "c_min": 0.1,
+        "c_max": 1.0
+      },
+      {
         "h_code": "H317",
-        "class": "C <%1 Cilt Hassas. 1",
-        "c_min": 0.011,
+        "class": "",
+        "c_min": 0.01,
         "c_max": null
       }
     ]

@@ -1,10 +1,10 @@
 {
   "cas": "113036-91-2",
-  "name": "hydroxo(2- (benzenesulfonamido)benzoato) zinc(II)",
+  "name": "hydroxo(2-(benzenesulfonamido)benzoato)zinc(II)",
   "name_tr": "hidrokso(2- (benzensülfonamido)benzoato)çi nko(II)",
   "ec_no": "403-750-0",
   "index_no": "030-008-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

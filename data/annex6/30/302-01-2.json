@@ -57,13 +57,13 @@
         "h_code": "H315",
         "class": "",
         "c_min": 3.0,
-        "c_max": null
+        "c_max": 10.0
       },
       {
         "h_code": "H319",
         "class": "",
         "c_min": 3.0,
-        "c_max": null
+        "c_max": 10.0
       }
     ]
   },

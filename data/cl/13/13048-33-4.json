@@ -4,19 +4,19 @@
   "name_tr": "hekzametilen diakrilat; hekzan-1,6-diol diakrilat",
   "ec_no": "235-921-9",
   "index_no": "607-109-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "D"
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Skin Sens. 1",
@@ -32,8 +32,8 @@
       "GHS07"
     ],
     "h_codes": [
-      "H319",
       "H315",
+      "H319",
       "H317"
     ],
     "suppl_h": []

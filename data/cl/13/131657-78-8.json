@@ -1,10 +1,10 @@
 {
   "cas": "131657-78-8",
-  "name": "2-chloro-6-(ethylamino)-4- nitrophenol",
+  "name": "2-chloro-6-(ethylamino)-4-nitrophenol",
   "name_tr": "2-kloro-6-(etilamino)-4- nitrofenol",
   "ec_no": "411-440-1",
   "index_no": "609-059-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

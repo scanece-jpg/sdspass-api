@@ -41,7 +41,7 @@
         "h_code": "H314",
         "class": "",
         "c_min": 5.0,
-        "c_max": null
+        "c_max": 20.0
       }
     ]
   },
@@ -62,6 +62,6 @@
     ]
   },
   "ate": {
-    "inhalation_vapour": 2.65
+    "inhalation_mgl": 2.65
   }
 }

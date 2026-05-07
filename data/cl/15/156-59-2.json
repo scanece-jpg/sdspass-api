@@ -1,13 +1,11 @@
 {
   "cas": "156-59-2",
-  "name": "1,2-dichloroethylene; [1] cis-dichloroethylene; [2] trans-dichloroethylene [3]",
+  "name": "1,2-dichloroethylene [1]\ncis-dichloroethylene [2]\ntrans-dichloroethylene [3]",
   "name_tr": "1,2-dikloroetilen [1]; cis-dikloroetilen [2] trans-dikloroetilen [3];",
-  "ec_no": "208-750-2",
+  "ec_no": "205-859-7",
   "index_no": "602-026-00-3",
-  "atp": "",
-  "notes": [
-    "C"
-  ],
+  "atp": "CLP00",
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -15,7 +13,7 @@
         "h_code": "H225"
       },
       {
-        "class": "Acute Tox. 4",
+        "class": "Acute Tox. 4 *",
         "h_code": "H332"
       },
       {

@@ -1,13 +1,11 @@
 {
   "cas": "2385-85-5",
-  "name": "dodecachloropentacyclo[5.2.1.02, 6.03,9.05,8]decane; mirex",
+  "name": "dodecachloropentacyclo[5.2.1.02,6.03,9.05,8]decane; mirex",
   "name_tr": "dodekakloropentasiklo[5.2.1. 02,6.03,9.05,8]dekan; mireks",
   "ec_no": "219-196-6",
   "index_no": "602-077-00-1",
   "atp": "CLP00",
-  "notes": [
-    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
-  ],
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -19,8 +17,8 @@
         "h_code": "H361fd"
       },
       {
-        "class": "Repr. 2",
-        "h_code": "H361fd"
+        "class": "Lact.",
+        "h_code": "H362"
       },
       {
         "class": "Acute Tox. 4",
@@ -52,7 +50,7 @@
     "h_codes": [
       "H351",
       "H361fd",
-      "H361fd",
+      "H362",
       "H312",
       "H302",
       "H400",

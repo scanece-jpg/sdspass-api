@@ -1,10 +1,10 @@
 {
   "cas": "520-45-6",
-  "name": "3-acetyl-6-methyl-2H-pyran- 2,4(3H)-dione; dehydracetic acid",
+  "name": "3-acetyl-6-methyl-2H-pyran-2,4(3H)-dione; dehydracetic acid",
   "name_tr": "3-asetil-6-metil-2H-piran- 2,4(3H)-dion; dehidrasetikasit",
   "ec_no": "208-293-9",
   "index_no": "607-163-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

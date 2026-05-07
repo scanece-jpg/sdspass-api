@@ -4,7 +4,7 @@
   "name_tr": "1-vinilimidazol",
   "ec_no": "214-012-0",
   "index_no": "613-328-00-X",
-  "atp": "",
+  "atp": "ATP13",
   "notes": [],
   "classification": {
     "hazards": [
@@ -17,7 +17,7 @@
     "scl_limits": [
       {
         "h_code": "H360D",
-        "class": "Ürm.Sis.Tok.1B",
+        "class": "",
         "c_min": 0.03,
         "c_max": null
       }

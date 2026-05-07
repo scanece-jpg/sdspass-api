@@ -1,10 +1,10 @@
 {
   "cas": "23505-41-1",
-  "name": "pirimiphos-ethyl (ISO); O,O-diethyl O-2-diethylamino- 6-methylpyrimidin-4-yl phosphorothioate",
+  "name": "pirimiphos-ethyl (ISO); O,O-diethyl O-2-diethylamino-6-methylpyrimidin-4-yl phosphorothioate",
   "name_tr": "pirimifos-etil (ISO); O,O-dietil-O-2-dietilamino-6- metilpirimidin-4-il fosforotiyoat",
   "ec_no": "245-704-0",
   "index_no": "015-099-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

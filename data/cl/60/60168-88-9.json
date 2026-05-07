@@ -1,13 +1,11 @@
 {
   "cas": "60168-88-9",
-  "name": "fenarimol (ISO); 2,4'-dichloro-α-(pyrimidin-5- yl)benzhydryl alcohol",
+  "name": "fenarimol (ISO); 2,4'-dichloro-α-(pyrimidin-5-yl)benzhydryl alcohol",
   "name_tr": "fenarimol (ISO); 2,4'-dikloro-α-(pirimidin-5- il)benzhidrilalkol",
   "ec_no": "262-095-7",
   "index_no": "603-104-00-X",
   "atp": "CLP00",
-  "notes": [
-    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
-  ],
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -15,8 +13,8 @@
         "h_code": "H361fd"
       },
       {
-        "class": "Repr. 2",
-        "h_code": "H361fd"
+        "class": "Lact.",
+        "h_code": "H362"
       },
       {
         "class": "Aquatic Chronic 2",
@@ -34,7 +32,7 @@
     ],
     "h_codes": [
       "H361fd",
-      "H361fd",
+      "H362",
       "H411"
     ],
     "suppl_h": []

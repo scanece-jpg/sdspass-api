@@ -1,10 +1,10 @@
 {
   "cas": "82560-06-3",
-  "name": "3-(3-methylpent-3-yl)isoxazol-5- ylamine",
+  "name": "3-(3-methylpent-3-yl)isoxazol-5-ylamine",
   "name_tr": "3-(3-metilpent-3-il)izoksazol-5- ilamin",
   "ec_no": "401-460-9",
   "index_no": "613-074-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

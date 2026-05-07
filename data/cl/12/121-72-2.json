@@ -1,10 +1,10 @@
 {
   "cas": "121-72-2",
-  "name": "N,N-dimethyl-p-toluidine; [1] N,N-dimethyl-m-toluidine; [2] N,N-dimethyl-o-toluidine [3]",
+  "name": "N,N-dimethyl-m-toluidine;[1]\nN,N-dimethyl-o-toluidine[2]",
   "name_tr": "N,N-dimetil-p-toluidin; [1] N,N-dimetil-m-toluidin; [2] N,N-dimetil-o-toluidin [3]",
-  "ec_no": "202-805-4",
+  "ec_no": "204-495-6[1]\n210-199-8[2]",
   "index_no": "612-056-00-9",
-  "atp": "",
+  "atp": "ATP21",
   "notes": [
     "C"
   ],

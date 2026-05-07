@@ -1,10 +1,10 @@
 {
   "cas": "297730-93-9",
-  "name": "3-ethoxy-1,1,1,2,3,4,4,5,5,6,6,6- dodecafluoro-2- (trifluoromethyl)-hexane",
+  "name": "3-ethoxy-1,1,1,2,3,4,4,5,5,6,6,6-dodecafluoro-2-(trifluoromethyl)-hexane",
   "name_tr": "3-etoksi-1,1,1,2,3,4,4,5,5,6,6,6- dodekafloro-2-(triflorometil)- hekzan",
   "ec_no": "435-790-1",
   "index_no": "603-224-00-2",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

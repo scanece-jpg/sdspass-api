@@ -4,7 +4,7 @@
   "name_tr": "Dipropilamin",
   "ec_no": "205-565-9",
   "index_no": "612-048-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -33,7 +33,7 @@
     "scl_limits": [
       {
         "h_code": "H335",
-        "class": "STOT SE 3",
+        "class": "",
         "c_min": 1.0,
         "c_max": null
       }

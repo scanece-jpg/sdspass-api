@@ -4,7 +4,7 @@
   "name_tr": "2-fenilhekzannitril",
   "ec_no": "423-460-8",
   "index_no": "608-039-00-0",
-  "atp": "",
+  "atp": "ATP14",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,12 +13,8 @@
         "h_code": "H302"
       },
       {
-        "class": "Aquatic Acute 1",
-        "h_code": "H400"
-      },
-      {
-        "class": "Aquatic Chronic 1",
-        "h_code": "H410"
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
       }
     ],
     "m_factors": {},
@@ -32,8 +28,7 @@
     ],
     "h_codes": [
       "H302",
-      "H400",
-      "H410"
+      "H411"
     ],
     "suppl_h": []
   },

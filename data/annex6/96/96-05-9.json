@@ -49,8 +49,8 @@
     "suppl_h": []
   },
   "ate": {
-    "inhalation_vapour": 1.5,
-    "dermal": 300.0,
-    "oral": 400.0
+    "inhalation_mgl": 1.5,
+    "oral": 400.0,
+    "dermal": 300.0
   }
 }

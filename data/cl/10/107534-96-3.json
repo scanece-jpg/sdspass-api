@@ -1,10 +1,10 @@
 {
   "cas": "107534-96-3",
-  "name": "tebuconazole (ISO); 1-(4-chlorophenyl)-4,4- dimethyl-3-(1,2,4-triazol-1- ylmethyl)pentan-3-ol",
+  "name": "tebuconazole (ISO); 1-(4-chlorophenyl)-4,4-dimethyl-3-(1,2,4-triazol-1-ylmethyl)pentan-3-ol",
   "name_tr": "tebukanazol (ISO); 1-(4-klorofenil)-4,4-dimetil-3- (1,2,4-triyazol-1-ilmetil)pentan- 3-ol",
   "ec_no": "403-640-2",
   "index_no": "603-197-00-7",
-  "atp": "",
+  "atp": "ATP7",
   "notes": [],
   "classification": {
     "hazards": [
@@ -27,7 +27,7 @@
     ],
     "m_factors": {
       "acute": 1,
-      "chronic": 10
+      "chronic": 1
     },
     "scl_limits": []
   },

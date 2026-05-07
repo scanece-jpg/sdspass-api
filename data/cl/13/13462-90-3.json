@@ -1,10 +1,10 @@
 {
   "cas": "13462-90-3",
-  "name": "nickel difluoride; [1] nickel dibromide; [2] nickel diiodide; [3] nickel potassium fluoride [4]",
+  "name": "nickel difluoride [1]\nnickel dibromide [2]\nnickel diiodide [3]\nnickel potassium fluoride [4]",
   "name_tr": "nikel diflorür;[1] nikel dibromür; [2] nikel diiyodür; [3] nikel potasyum florür[4]",
-  "ec_no": "233-071-3",
+  "ec_no": "236-666-6",
   "index_no": "028-029-00-4",
-  "atp": "",
+  "atp": "ATP02",
   "notes": [],
   "classification": {
     "hazards": [
@@ -18,11 +18,11 @@
       },
       {
         "class": "Repr. 1B",
-        "h_code": "H360D"
+        "h_code": "H360D ***"
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372"
+        "h_code": "H372 **"
       },
       {
         "class": "Resp. Sens. 1",
@@ -42,8 +42,7 @@
       }
     ],
     "m_factors": {
-      "acute": 1,
-      "chronic": 1
+      "acute": 1
     },
     "scl_limits": [
       {
@@ -53,8 +52,14 @@
         "c_max": null
       },
       {
+        "h_code": "H373",
+        "class": "STOT RE 2",
+        "c_min": 0.1,
+        "c_max": null
+      },
+      {
         "h_code": "H317",
-        "class": "C <%1 Cilt Hassas. 1",
+        "class": "Skin Sens. 1",
         "c_min": 0.01,
         "c_max": null
       }
@@ -69,8 +74,8 @@
     "h_codes": [
       "H350i",
       "H341",
-      "H360D",
-      "H372",
+      "H360D ***",
+      "H372 **",
       "H334",
       "H317",
       "H400",

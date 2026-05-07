@@ -1,10 +1,10 @@
 {
   "cas": "66710-66-5",
-  "name": "N,N'- ethylenebis(vinylsulfonylacetam ide)",
+  "name": "N,N'-ethylenebis(vinylsulfonylacetamide)",
   "name_tr": "N,N'- etilenbis(vinilsülfonilasetamid)",
   "ec_no": "404-790-1",
   "index_no": "616-029-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

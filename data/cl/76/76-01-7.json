@@ -4,7 +4,7 @@
   "name_tr": "pentakloroetan",
   "ec_no": "200-925-1",
   "index_no": "602-017-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -25,13 +25,13 @@
     "scl_limits": [
       {
         "h_code": "H372",
-        "class": "STOT RE 1",
+        "class": "",
         "c_min": 1.0,
         "c_max": null
       },
       {
         "h_code": "H373",
-        "class": "STOT RE 2",
+        "class": "",
         "c_min": 0.2,
         "c_max": 1.0
       }

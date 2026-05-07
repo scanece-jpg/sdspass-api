@@ -1,10 +1,10 @@
 {
   "cas": "2840-00-8",
-  "name": "3,5-dichloro-2,6- difluoropyrdine-4-amine",
+  "name": "3,5-dichloro-2,6-difluoropyrdine-4-amine",
   "name_tr": "3,5-dikloro-2,6-difloropiridin-4- amin",
   "ec_no": "220-630-1",
   "index_no": "612-168-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

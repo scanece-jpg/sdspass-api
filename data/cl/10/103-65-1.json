@@ -1,13 +1,11 @@
 {
   "cas": "103-65-1",
-  "name": "cumene; [1] propylbenzene [2]",
+  "name": "Propylbenzene",
   "name_tr": "Kumen; [1] Propilbenzen [2]",
-  "ec_no": "202-704-5",
-  "index_no": "601-024-00-X",
-  "atp": "",
-  "notes": [
-    "C"
-  ],
+  "ec_no": "203-132-9",
+  "index_no": "601-097-00-8",
+  "atp": "ATP18",
+  "notes": [],
   "classification": {
     "hazards": [
       {

@@ -1,10 +1,10 @@
 {
   "cas": "163269-30-5",
-  "name": "3-(benzo[b]thien-2-yl)-5,6- dihydro-1,4,2-oxathiazine-4- oxide",
+  "name": "3-(benzo[b]thien-2-yl)-5,6-dihydro-1,4,2-oxathiazine-4-oxide",
   "name_tr": "3-(benzo[b]tiyen-2-il-5,6- dihidro-1,4,2-oksatiyazin-4-oksit",
   "ec_no": "431-030-6",
   "index_no": "613-232-00-8",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

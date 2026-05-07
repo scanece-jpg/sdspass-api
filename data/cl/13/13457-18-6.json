@@ -1,10 +1,10 @@
 {
   "cas": "13457-18-6",
-  "name": "pyrazophos (ISO); O,O-diethyl O-(6- ethoxycarbonyl-5- methylpyrazolo[2,3-a]pyrimidin- 2-yl) phosphorothioate",
+  "name": "pyrazophos (ISO); O,O-diethyl O-(6-ethoxycarbonyl-5-methylpyrazolo[2,3-a]pyrimidin-2-yl) phosphorothioate",
   "name_tr": "pirazofos (ISO); O,O-dietil O-(6-etoksikarbonil- 5-metilpirazolo[2,3-a]pirimidin- 2-il) fosforotiyoat",
   "ec_no": "236-656-1",
   "index_no": "015-137-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

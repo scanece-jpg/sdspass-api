@@ -1,10 +1,10 @@
 {
   "cas": "2439-99-8",
-  "name": "glyphosine (ISO); N,N- bis(phosphonomethyl)glycine",
+  "name": "glyphosine (ISO); N,N-bis(phosphonomethyl)glycine",
   "name_tr": "glifosin(ISO); N,N-bis(fosfonometil)glisin",
   "ec_no": "219-468-4",
   "index_no": "015-125-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

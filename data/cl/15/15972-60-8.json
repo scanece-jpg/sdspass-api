@@ -1,10 +1,10 @@
 {
   "cas": "15972-60-8",
-  "name": "alachlor (ISO); 2-chloro-2',6'-diethyl-N- (methoxymethyl)acetanilide",
+  "name": "alachlor (ISO); 2-chloro-2',6'-diethyl-N-(methoxymethyl)acetanilide",
   "name_tr": "alaklor (ISO); 2-kloro-2',6'- dietil-N-(metoksimetil)asetanilid",
   "ec_no": "240-110-8",
   "index_no": "616-015-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

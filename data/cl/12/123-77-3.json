@@ -4,8 +4,10 @@
   "name_tr": "C,C'-azodi(formamid)",
   "ec_no": "204-650-8",
   "index_no": "611-028-00-3",
-  "atp": "",
-  "notes": [],
+  "atp": "ATP1",
+  "notes": [
+    "G"
+  ],
   "classification": {
     "hazards": [
       {

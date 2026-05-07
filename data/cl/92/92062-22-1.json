@@ -1,13 +1,12 @@
 {
   "cas": "92062-22-1",
-  "name": "Tar acids, brown-coal gasification; Crude Phenols; [A complex combination of organic compounds obtained from brown coal gasification. Composed primarily of C6-10 hydroxy aromatic phenols and their homologs.]",
+  "name": "Tar acids, brown-coal gasification; Crude Phenols; [A complex combination of organic compounds obtained from brown coal gasification.  Composed primarily of C6-10 hydroxy aromatic phenols and their homologs.]",
   "name_tr": "zift asitler, linyit kömürü gazlaştırması; ham fenoller; [Linyit kömürünün gazlaştırılmasından elde edilen kompleks organik bileşikler bileşimi. Esas olarak C6-10 hidroksi aromatik fenolleri ve bunların benzerlerinden oluşur.]",
   "ec_no": "295-536-7",
   "index_no": "648-118-00-7",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
-    "J",
-    "M"
+    "J M"
   ],
   "classification": {
     "hazards": [

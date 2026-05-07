@@ -1,10 +1,10 @@
 {
   "cas": "36614-38-7",
-  "name": "isothioate (ISO); S-2-isopropylthioethyl O,O- dimethyl phosphorodithioate",
+  "name": "isothioate (ISO); S-2-isopropylthioethyl O,O-dimethyl phosphorodithioate",
   "name_tr": "izotiyoat (ISO); S-2- izopropiltiyoetil-O,O-dimetil fosforoditiyoat",
   "ec_no": "",
   "index_no": "015-130-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,12 +1,12 @@
 {
   "cas": "15245-44-0",
-  "name": "lead 2,4,6-trinitro-m-phenylene dioxide; lead 2,4,6-trinitroresorcinoxide; lead styphnate (≥ 20 % phlegmatiser)",
+  "name": "lead 2,4,6-trinitro-m-phenylene dioxide; lead 2,4,6-trinitroresorcinoxide; lead styphnate (≥ 20 % phlegmatiser)",
   "name_tr": "kurşun 2,4,6-trinitro-m-fenilen dioksit; kurşun 2,4,6- trinitroresorsinoksit; kurşun stifnat (≥ %20 flegmatizer)",
   "ec_no": "239-290-0",
   "index_no": "609-019-01-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
-    "1.0"
+    "1"
   ],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "770722-46-8",
-  "name": "chloro(3-(3-chloro-4- fluorophenyl)propyl)dimethylsil ane",
+  "name": "chloro(3-(3-chloro-4-fluorophenyl)propyl)dimethylsilane",
   "name_tr": "kloro(3-(3-kloro-4- florofenil)propil)dimetilsilan",
   "ec_no": "410-270-5",
   "index_no": "014-027-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

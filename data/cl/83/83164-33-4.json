@@ -1,15 +1,17 @@
 {
   "cas": "83164-33-4",
-  "name": "diflufenican (ISO); N-(2,4-difluorophenyl)-2-[3- (trifluoromethyl)phenoxy]-3- pyridinecarboxamide",
+  "name": "diflufenican (ISO);\nN-(2,4-difluorophenyl)-2-[3-(trifluoromethyl)phenoxy]-3-pyridinecarboxamide;\n2′,4′-difluoro-2-(α,α,α- trifluoro-m-tolyloxy) nicotinanilide; N-(2,4-difluorophenyl)-2-[3-(trifluoromethyl)phenoxy]-3-pyridinecarboxamide",
   "name_tr": "diflufenikan (ISO); N-(2,4- diflorofenil)-2-[3- (triflorometil)fenoksi]-3- piridinkarboksamid",
   "ec_no": "",
   "index_no": "616-032-00-9",
   "atp": "ATP17",
-  "notes": [
-    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
-  ],
+  "notes": [],
   "classification": {
     "hazards": [
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
       {
         "class": "Aquatic Chronic 1",
         "h_code": "H410"
@@ -17,14 +19,17 @@
     ],
     "m_factors": {
       "acute": 10000,
-      "chronic": 1000
+      "chronic": 10000
     },
     "scl_limits": []
   },
   "labelling": {
-    "signal": "",
-    "pictograms": [],
+    "signal": "Warning",
+    "pictograms": [
+      "GHS09"
+    ],
     "h_codes": [
+      "H400",
       "H410"
     ],
     "suppl_h": []

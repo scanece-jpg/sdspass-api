@@ -1,10 +1,10 @@
 {
   "cas": "19622-19-6",
-  "name": "S-ethyl N- (dimethylaminopropyl)thiocarba matehydrochloride; prothiocarb hydrochloride",
+  "name": "S-ethyl N-(dimethylaminopropyl)thiocarbamatehydrochloride; prothiocarb hydrochloride",
   "name_tr": "S-etil-N- (dimetilaminopropil)tiyokarbam athidroklorür; protiyokarb hidroklorür",
   "ec_no": "243-193-9",
   "index_no": "006-061-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -4,7 +4,7 @@
   "name_tr": "diklorvos (ISO); 2,2-diklorovinil dimetil fosfat",
   "ec_no": "200-547-7",
   "index_no": "015-019-00-X",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -30,8 +30,7 @@
       }
     ],
     "m_factors": {
-      "acute": 1000,
-      "chronic": 1000
+      "acute": 1000
     },
     "scl_limits": []
   },

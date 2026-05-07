@@ -1,10 +1,10 @@
 {
   "cas": "130066-57-8",
-  "name": "bis[4-(ethenyloxy)butyl] 1,3- benzenedicarboxylate",
+  "name": "bis[4-(ethenyloxy)butyl] 1,3-benzenedicarboxylate",
   "name_tr": "bis[4-(eteniloksi)bütil]-1,3- benzendikarboksilat",
   "ec_no": "413-930-0",
   "index_no": "607-320-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

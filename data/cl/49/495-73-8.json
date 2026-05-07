@@ -1,10 +1,10 @@
 {
   "cas": "495-73-8",
-  "name": "benquinox (ISO); p-benzoquinone 1- benzoylhydrazone 4-oxime",
+  "name": "benquinox (ISO); p-benzoquinone 1-benzoylhydrazone 4-oxime",
   "name_tr": "benkiinoks (ISO); p-benzokinon-1- benzoilhidrazon-4-oksim",
   "ec_no": "207-807-9",
   "index_no": "650-006-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

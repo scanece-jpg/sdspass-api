@@ -1,10 +1,10 @@
 {
   "cas": "615-50-9",
-  "name": "2-methyl-p-phenylenediamine sulphate [1]",
+  "name": "2-methyl-p-phenylenediamine sulphate  [1]\n2-methyl-p-phenylenediamine sulphate  [2]",
   "name_tr": "2-metil-p-fenilendiaminsülfat",
-  "ec_no": "210-431-8",
+  "ec_no": "210-431-8 [1]\n228-871-4 [2]",
   "index_no": "612-030-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

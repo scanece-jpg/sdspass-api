@@ -1,14 +1,12 @@
 {
   "cas": "68477-83-8",
-  "name": "Gases (petroleum), C3-5 olefinic- paraffinic alkylation feed; Petroleum gas; [A complex combination of olefinic and paraffinic hydrocarbons having carbon numbers in the range of C3 through C5 which are used as alkylation feed. Ambient temperatures normally exceed the critical temperature of these combinations.]",
+  "name": "Gases (petroleum), C3-5 olefinic-paraffinic alkylation feed; Petroleum gas; [A complex combination of olefinic and paraffinic hydrocarbons having carbon numbers in the range of C3 through C5 which are used as alkylation feed. Ambient temperatures normally exceed the critical temperature of these combinations.]",
   "name_tr": "Gazlar (petrol), C 3-5 olefinik- parafinik alkilasyon besleme; Petrol gazı; [Alkilasyon beslemesi olarak kullanılan, C3 ila C5 aralığında karbon sayısına sahip olefinik ve parafinik türlerin kompleks bir bileşimi. Normal ortam sıcaklığı bu bileşimlerin kritik sıcaklığını geçmektedir.]",
   "ec_no": "270-765-5",
   "index_no": "649-067-00-3",
   "atp": "ATP1",
   "notes": [
-    "K",
-    "U",
-    "Press.Gas kayma hatası düzeltildi: hazardlar Annex VI ATP22 verisinden yeniden oluşturuldu."
+    "K U"
   ],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "719-96-0",
-  "name": "N- (dichlorofluoromethylthio)phthal imide; N- (fluorodichloromethylthio)phthal imide",
+  "name": "N-(dichlorofluoromethylthio)phthalimide; N-(fluorodichloromethylthio)phthalimide",
   "name_tr": "N- (dikloroflorometiltiyo)ftalimid; N- (florodiklorometiltiyo)ftalimid",
   "ec_no": "211-952-3",
   "index_no": "616-012-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

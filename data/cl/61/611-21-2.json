@@ -1,10 +1,10 @@
 {
   "cas": "611-21-2",
-  "name": "N-methyl-o-toluidine; [1] N-methyl-m-toluidine; [2] N-methyl-p-toluidine [3]",
+  "name": "N-methyl-o-toluidine [1]\nN-methyl-m-toluidine [2]\nN-methyl-p-toluidine  [3]",
   "name_tr": "N-metil-o-toluidin; [1] N-metil-m-toluidin; [2] N-metil-p-toluidin [3]",
-  "ec_no": "210-260-9",
+  "ec_no": "210-260-9 [1]\n211-795-0 [2]\n210-769-6 [3]",
   "index_no": "612-055-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "C"
   ],

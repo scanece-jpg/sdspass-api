@@ -1,10 +1,10 @@
 {
   "cas": "123599-82-6",
-  "name": "[[2-methyl-1-(1- oxopropoxy)propoxy](4- phenylbutyl)phosphinyl] acetic acid",
+  "name": "[[2-methyl-1-(1-oxopropoxy)propoxy](4-phenylbutyl)phosphinyl] acetic acid",
   "name_tr": "[[2-metil-2-(2- oksopoksi)propoksi](4- fenilbütil)fosfonil]asetik asit",
   "ec_no": "419-270-1",
   "index_no": "607-629-00-5",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

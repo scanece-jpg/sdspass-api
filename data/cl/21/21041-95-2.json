@@ -1,12 +1,12 @@
 {
   "cas": "21041-95-2",
-  "name": "cadmium hydroxide; cadmium dihydroxide",
+  "name": "cadmium hydroxide; \ncadmium dihydroxide",
   "name_tr": "kadmiyum hidroksit; kadmiyum dihidroksit",
   "ec_no": "244-168-5",
   "index_no": "048-013-00-0",
-  "atp": "",
+  "atp": "ATP10",
   "notes": [
-    "A1"
+    "1 A"
   ],
   "classification": {
     "hazards": [
@@ -32,15 +32,15 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372"
+        "h_code": "H372(kidney,_bone)"
       },
       {
         "class": "Aquatic Acute 1",
-        "h_code": "(böbrek,ke"
+        "h_code": "H400"
       },
       {
         "class": "Aquatic Chronic 1",
-        "h_code": "mik)"
+        "h_code": "H410"
       }
     ],
     "m_factors": {},
@@ -59,9 +59,9 @@
       "H332",
       "H312",
       "H302",
-      "H372",
-      "(böbrek,ke",
-      "mik)"
+      "H372(kidney,_bone)",
+      "H400",
+      "H410"
     ],
     "suppl_h": []
   }

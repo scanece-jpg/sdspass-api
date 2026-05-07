@@ -1,20 +1,20 @@
 {
   "cas": "55426-95-4",
-  "name": "diethyl(ethyldimethylsilanolato) aluminium",
+  "name": "diethyl(ethyldimethylsilanolato)aluminium",
   "name_tr": "dietil(etildimetilsilanolato)alümi nyum",
   "ec_no": "401-160-8",
   "index_no": "013-005-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Water-react. 1",
-        "h_code": "H260"
-      },
-      {
         "class": "Pyr. Liq. 1",
         "h_code": "H250"
+      },
+      {
+        "class": "Water-react. 1",
+        "h_code": "H260"
       },
       {
         "class": "Skin Corr. 1A",
@@ -31,8 +31,8 @@
       "GHS05"
     ],
     "h_codes": [
-      "H260",
       "H250",
+      "H260",
       "H314"
     ],
     "suppl_h": [

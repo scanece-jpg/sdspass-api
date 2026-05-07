@@ -1,10 +1,10 @@
 {
   "cas": "106917-30-0",
-  "name": "3-dodecyl-(1-(1,2,2,6,6- pentamethyl-4-piperidin)-yl)- 2,5-pyrrolidindione",
+  "name": "3-dodecyl-(1-(1,2,2,6,6-pentamethyl-4-piperidin)-yl)-2,5-pyrrolidindione",
   "name_tr": "3-dodesil-(1-(1,2,2,6,6- pentametil-4-piperidin)il)-2,5- pirrolidindion",
   "ec_no": "411-920-0",
   "index_no": "616-063-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

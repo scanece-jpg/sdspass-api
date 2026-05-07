@@ -1,10 +1,10 @@
 {
   "cas": "74-31-7",
-  "name": "N,N'-diphenyl-p- phenylenediamine;",
+  "name": "N,N'-diphenyl-p-phenylenediamine; N,N'-diphenyl-1,4-benzenediamine",
   "name_tr": "N,N'-difenil-p-fenilendiamin ; N,N'-difenil-1,4-benzendiamin",
   "ec_no": "200-806-4",
   "index_no": "612-132-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

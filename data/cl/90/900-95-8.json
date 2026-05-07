@@ -4,7 +4,7 @@
   "name_tr": "Fentin asetat (ISO); trifenilkalay asetat",
   "ec_no": "212-984-0",
   "index_no": "050-003-00-6",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -29,12 +29,12 @@
         "h_code": "H301"
       },
       {
-        "class": "STOT RE 1",
-        "h_code": "H372"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H335"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
       },
       {
         "class": "Skin Irrit. 2",
@@ -73,8 +73,8 @@
       "H330",
       "H311",
       "H301",
-      "H372",
       "H335",
+      "H372",
       "H315",
       "H318",
       "H400",

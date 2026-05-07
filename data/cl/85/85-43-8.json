@@ -1,10 +1,10 @@
 {
   "cas": "85-43-8",
-  "name": "1,2,3,6-tetrahydrophthalic anhydride; [1] cis-1,2,3,6-tetrahydrophthalic anhydride; [2] 3,4,5,6-tetrahydrophthalic anhydride; [3] tetrahydrophthalic anhydride [4]",
+  "name": "1,2,3,6-tetrahydrophthalic anhydride [1]\ncis-1,2,3,6-tetrahydrophthalic anhydride [2]\n3,4,5,6-tetrahydrophthalic anhydride [3]\ntetrahydrophthalic anhydride  [4]",
   "name_tr": "1,2,3,6-tetrahidroftalik anhidrit; [1] cis-1,2,3,6-tetrahidroftalik anhidrit; [2] 3,4,5,6-tetrahidroftalik anhidrit; [3] tetrahidroftalik anhidrit [4]",
-  "ec_no": "201-605-4",
+  "ec_no": "201-605-4 [1]\n213-308-7 [2]\n219-374-3 [3]\n247-570-9 [4]",
   "index_no": "607-099-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "C"
   ],

@@ -98,13 +98,22 @@ def _lines(text: str) -> list[str]:
 
 
 def _parse_hazards(class_col: str, hcode_col: str) -> list[dict]:
-    """Sütun 4 ve 5'i eşleştirerek hazard listesi oluştur."""
-    classes = _lines(class_col)
-    hcodes  = _lines(hcode_col)
-    result  = []
-    for i, cls in enumerate(classes):
-        hcode = hcodes[i] if i < len(hcodes) else ''
-        # H kodu temizle: 'H372 **' → 'H372', 'H372 (thyroid)' → 'H372(thyroid)'
+    """
+    Sütun 4 (sınıflar) ve 5 (H kodları) eşleştir.
+    ÖNEMLI: H kodu sütununda 'Press. Gas' gibi kodların karşısı BOŞ bırakılır
+    (H220\n\nH350 gibi çift satır sonu). _lines() boşları atladığı için
+    burada tek \n ile bölerek boş satırları KORUYORUZ — kayma önlenir.
+    """
+    classes = _lines(class_col)   # boş sınıf satırlarını atla
+    # H-kodlarını tek \n ile böl: boş satırlar (Press. Gas vs.) korunur
+    norm   = hcode_col.replace('\r\n', '\n').replace('\r', '\n')
+    hcodes = [s.strip() for s in norm.split('\n')]
+
+    result = []
+    h_idx  = 0
+    for cls in classes:
+        hcode = hcodes[h_idx] if h_idx < len(hcodes) else ''
+        h_idx += 1
         hcode = _clean_hcode(hcode)
         cls   = re.sub(r'\s*\*+\s*$', '', cls).strip()
         if cls:
@@ -135,28 +144,115 @@ def _parse_labelling(pict_col: str) -> tuple[list[str], str]:
     return pictos, signal
 
 
-def _parse_m_factors(scl_col: str) -> dict:
-    """M=X (acute) / M=X (chronic) değerlerini çek."""
+def _parse_m_factors(scl_col: str, hazards: list | None = None) -> dict:
+    """
+    M-faktör parse — iki format desteklenir:
+      Format 1: M = 10 (acute)  /  M = 10 (chronic)   [eski/bazı ATP]
+      Format 2: M=1             [ATP22 formatı — specifier yok]
+
+    Format 2'de hangi tip olduğu hazard listesinden çıkarılır:
+      H400/401/402 varsa → acute; H410/411/412/413 varsa → chronic
+    """
     m = {}
+    # Format 1: M=X (acute|chronic)
     for match in re.finditer(r'M\s*=\s*(\d+)\s*\(?\s*(acute|chronic)', scl_col, re.IGNORECASE):
         m[match.group(2).lower()] = int(match.group(1))
+    if m:
+        return m
+
+    # Format 2: M=X tek başına (ATP22: "M=1")
+    solo = re.search(r'\bM\s*=\s*(\d+)\b', scl_col, re.IGNORECASE)
+    if solo:
+        mval = int(solo.group(1))
+        h_set = {re.sub(r'[^A-Z0-9]', '', h.get('h_code', '').upper())[:4]
+                 for h in (hazards or [])}
+        has_acute   = bool(h_set & {'H400', 'H401', 'H402'})
+        has_chronic = bool(h_set & {'H410', 'H411', 'H412', 'H413'})
+        if has_acute:   m['acute']   = mval
+        if has_chronic: m['chronic'] = mval
+        if not m:       m['acute']   = mval  # fallback
     return m
 
 
+def _eu_float(text: str) -> float | None:
+    """
+    AB ondalık formatını Python float'a çevir.
+    Örnekler: '0,01' → 0.01 | ',5' → 0.5 | '0.01' → 0.01 | '3' → 3.0
+    """
+    t = text.strip().replace('\xa0', '').replace(' ', '')
+    # virgülü noktaya çevir
+    t = t.replace(',', '.')
+    # baştaki nokta varsa 0 ekle: '.5' → '0.5'
+    if t.startswith('.'):
+        t = '0' + t
+    try:
+        return float(t)
+    except ValueError:
+        return None
+
+
 def _parse_scl(scl_col: str) -> list[dict]:
-    """Basit SCL parse: C >= X% H314 → {h_code, c_min}"""
+    """
+    SCL parse — AB ondalık formatı (virgüllü) dahil.
+    Desteklenen formatlar (ATP22 gerçek örnekler):
+      Skin Sens. 1; H317: C ≥ 0,01 %
+      STOT SE 3; H335: ,5 % ≤ C < 5 %
+      Skin Corr. 1B; H314: C ≥ 25 %
+      Eye Irrit. 2; H319: 5 % ≤ C < 25 %
+    ATE satırları (H-kodu yok) otomatik atlanır.
+    """
     result = []
+    # AB ondalık: baştaki virgül/nokta dahil, isteğe bağlı rakam + ayraç + rakamlar
+    PCT = r'(\d*[,.]?\d+)\s*(?:\xa0)?\s*%'
     for line in _lines(scl_col):
-        h_match = re.search(r'(H\d{3})', line)
-        c_match = re.search(r'(\d+(?:\.\d+)?)\s*%', line)
-        if h_match and c_match:
-            result.append({
-                'h_code': h_match.group(1),
-                'class' : '',
-                'c_min' : float(c_match.group(1)),
-                'c_max' : None,
-            })
+        h_match = re.search(r'(H\d{3,4}[A-Za-z]?)', line)
+        c_match = re.search(PCT, line)
+        if not h_match or not c_match:
+            continue
+        c_min = _eu_float(c_match.group(1))
+        if c_min is None:
+            continue
+        # c_max: ikinci % değeri varsa al (örn. "0,5 % ≤ C < 5 %")
+        all_pct = re.findall(PCT, line)
+        c_max = _eu_float(all_pct[1]) if len(all_pct) >= 2 else None
+        result.append({
+            'h_code': h_match.group(1),
+            'class' : '',
+            'c_min' : c_min,
+            'c_max' : c_max,
+        })
     return result
+
+
+def _parse_ate(scl_col: str) -> dict:
+    """
+    ATE değerlerini SCL sütunundan çıkar.
+    Örnekler:
+      oral: ATE = 500 mg/kg bw       → {'oral': 500.0}
+      inhalation: ATE = 100 ppmV     → {'inhalation_ppm': 100.0}
+      dermal: ATE = 1100 mg/kg bw    → {'dermal': 1100.0}
+    """
+    ate = {}
+    for line in _lines(scl_col):
+        low = line.lower()
+        val_m = re.search(r'ATE\s*=\s*(\d+(?:[.,]\d+)?)', line, re.IGNORECASE)
+        if not val_m:
+            continue
+        val = _eu_float(val_m.group(1))
+        if val is None:
+            continue
+        if 'oral' in low:
+            ate['oral'] = val
+        elif 'inhal' in low:
+            if 'ppm' in low:
+                ate['inhalation_ppm'] = val
+            elif 'mg/l' in low:
+                ate['inhalation_mgl'] = val
+            else:
+                ate['inhalation'] = val
+        elif 'derm' in low:
+            ate['dermal'] = val
+    return ate
 
 
 def _atp_rank(atp: str) -> int:
@@ -199,7 +295,7 @@ def _cl_path(cas: str) -> Path:
 
 # ── Ana işlem ─────────────────────────────────────────────────────────────────
 
-def process(xlsx_path: str, dry_run: bool = False):
+def process(xlsx_path: str, dry_run: bool = False, force: bool = False):
     print(f"\n{'[DRY-RUN] ' if dry_run else ''}Excel açılıyor: {xlsx_path}")
     wb = openpyxl.load_workbook(xlsx_path, read_only=True, data_only=True)
     ws = wb.active
@@ -235,8 +331,9 @@ def process(xlsx_path: str, dry_run: bool = False):
 
         hazards        = _parse_hazards(haz_class, haz_code)
         pictograms, sg = _parse_labelling(pict_raw)
-        m_factors      = _parse_m_factors(scl_raw)
+        m_factors      = _parse_m_factors(scl_raw, hazards)  # hazards iletildi
         scl_limits     = _parse_scl(scl_raw)
+        ate_vals       = _parse_ate(scl_raw)
         suppl_h        = [s for s in _lines(suppl_raw) if re.match(r'EUH\d+', s)]
         notes          = [n for n in _lines(notes_raw) if n]
 
@@ -260,6 +357,8 @@ def process(xlsx_path: str, dry_run: bool = False):
                 'suppl_h'   : suppl_h,
             },
         }
+        if ate_vals:
+            new_entry['ate'] = ate_vals
 
         # ── annex6/ güncelleme kararı ─────────────────────────────────────
         existing = _read_json(_annex6_path(cas))
@@ -270,7 +369,7 @@ def process(xlsx_path: str, dry_run: bool = False):
         else:
             old_rank = _atp_rank(existing.get('atp', 'CLP00'))
             new_rank = _atp_rank(atp_label)
-            if new_rank > old_rank:
+            if force or new_rank > old_rank:
                 if not dry_run:
                     _write_json(_annex6_path(cas), new_entry)
                 updated.append(f'{cas} — {existing.get("atp","?")} → {atp_label}')
@@ -345,10 +444,12 @@ if __name__ == '__main__':
     parser.add_argument('excel', help='ECHA Annex VI Excel dosyası (.xlsx)')
     parser.add_argument('--dry-run', action='store_true',
                         help='Dosya yazmadan sadece rapor göster')
+    parser.add_argument('--force', action='store_true',
+                        help='ATP eşit olsa bile tüm dosyaları yeniden yaz (parser düzeltmesi için)')
     args = parser.parse_args()
 
     if not Path(args.excel).exists():
         print(f'HATA: Dosya bulunamadı: {args.excel}')
         sys.exit(1)
 
-    process(args.excel, dry_run=args.dry_run)
+    process(args.excel, dry_run=args.dry_run, force=args.force)

@@ -1,10 +1,10 @@
 {
   "cas": "132584-17-9",
-  "name": "ethyl 2-(4- phenoxyphenyl)lactate",
+  "name": "ethyl 2-(4-phenoxyphenyl)lactate",
   "name_tr": "etil 2-(4-fenoksifenil)laktat",
   "ec_no": "429-220-9",
   "index_no": "607-596-00-7",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

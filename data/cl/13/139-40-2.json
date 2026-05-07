@@ -1,10 +1,10 @@
 {
   "cas": "139-40-2",
-  "name": "propazine (ISO); 2-chloro-4,6- bis(isopropylamino)-1,3,5- triazine",
+  "name": "propazine (ISO); 2-chloro-4,6-bis(isopropylamino)-1,3,5-triazine",
   "name_tr": "Propazin (ISO);2-kloro-4,6- bis(izopropilamino)-1,3,5-triazin",
   "ec_no": "205-359-9",
   "index_no": "613-067-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "91995-77-6",
-  "name": "Extracts (petroleum), light paraffinic distillate solvent, hydrodesulfurized; Distillate aromatic extract (treated); [A complex combination of hydrocarbons obtained by solvent extraction of a light paraffin distillate and treated with hydrogen to convert the organic sulfur to hydrogen sulfide which is eliminated. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C15 through C40 and produces a finished oil with a viscosity of greater than 10cSt at 40 °C.]",
+  "name": "Extracts (petroleum), light paraffinic distillate solvent, hydrodesulfurized; Distillate aromatic extract (treated); [A complex combination of hydrocarbons obtained by solvent extraction of a light paraffin distillate and treated with hydrogen to convert the organic sulfur to hydrogen sulfide which is eliminated. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C15 through C40 and produces a finished oil with a viscosity of greater than 10cSt at 40 °C.]",
   "name_tr": "özütler (petrol),hafif parafinik damıtık çözücü, hidrojenle kükürtü giderilmiş; damıtık aromatik özüt (muamele edilmiş); [Hafif parafin damıtığının çözücü özütlemesi ve organik sülfürü hidrojensülfüre dönüştürerek uzaklaşmasını sağlamak için hidrojenle muamele edilmesinden elde edilen kompleks bir hidrokarbon bileşimi. Ağırlıklı olarak, karbon sayıları genelde C15 ile C40 aralığında olan aromatik hidrokarbonlardan oluşur ve 40oC'deki viskozitesi 10cSt'den daha büyük olan son yağ üretir.]",
   "ec_no": "295-340-1",
   "index_no": "649-540-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "L"
   ],

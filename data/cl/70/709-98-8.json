@@ -4,7 +4,7 @@
   "name_tr": "propanil (ISO); 3',4'-dikloropropionanilid",
   "ec_no": "211-914-6",
   "index_no": "616-009-00-3",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -18,8 +18,7 @@
       }
     ],
     "m_factors": {
-      "acute": 10,
-      "chronic": 10
+      "acute": 10
     },
     "scl_limits": []
   },

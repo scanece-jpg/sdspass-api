@@ -1,13 +1,17 @@
 {
   "cas": "58-89-9",
-  "name": "lindane (ISO); γ-HCH or γ-BHC; γ-1,2,3,4,5,6- hexachlorocyclohexane",
+  "name": "lindane (ISO); γ-HCH or γ-BHC; γ-1,2,3,4,5,6-hexachlorocyclohexane",
   "name_tr": "linden (ISO); γ-HCH veya γ-BHC; γ-1,2,3,4,5,6- hekzaklorosiklohekzan",
   "ec_no": "200-401-2",
   "index_no": "602-043-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
+      {
+        "class": "Lact.",
+        "h_code": "H362"
+      },
       {
         "class": "Acute Tox. 3",
         "h_code": "H301"
@@ -23,10 +27,6 @@
       {
         "class": "STOT RE 2",
         "h_code": "H373"
-      },
-      {
-        "class": "Lact.",
-        "h_code": "H362"
       },
       {
         "class": "Aquatic Acute 1",
@@ -51,11 +51,11 @@
       "GHS09"
     ],
     "h_codes": [
+      "H362",
       "H301",
       "H332",
       "H312",
       "H373",
-      "H362",
       "H400",
       "H410"
     ],

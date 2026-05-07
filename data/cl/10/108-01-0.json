@@ -4,7 +4,7 @@
   "name_tr": "2-dimetilaminoetanol; N,N- dimetiletanolamin",
   "ec_no": "203-542-8",
   "index_no": "603-047-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -33,7 +33,7 @@
     "scl_limits": [
       {
         "h_code": "H335",
-        "class": "STOT SE 3",
+        "class": "",
         "c_min": 5.0,
         "c_max": null
       }

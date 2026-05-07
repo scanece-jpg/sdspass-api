@@ -1,10 +1,10 @@
 {
   "cas": "43136-14-7",
-  "name": "3,3'-dioctadecyl-1,1'- methylenebis(4,1- phenylene)diurea",
+  "name": "3,3'-dioctadecyl-1,1'-methylenebis(4,1-phenylene)diurea",
   "name_tr": "3,3'-dioktadesil-1,1'- metilenbis(4,1-fenilen)diüre",
   "ec_no": "406-690-3",
   "index_no": "616-095-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

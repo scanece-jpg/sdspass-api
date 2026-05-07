@@ -1,10 +1,10 @@
 {
   "cas": "68132-19-4",
-  "name": "C8-18 alkylbis(2- hydroxyethyl)ammonium bis(2- ethylhexyl)phosphate",
+  "name": "C8-18alkylbis(2-hydroxyethyl)ammonium bis(2-ethylhexyl)phosphate",
   "name_tr": "C8-18 alkil bis(2- hidroksietil)amonyumbis(2- etilhekzil)fosfat",
   "ec_no": "404-690-8",
   "index_no": "612-116-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "535-89-7",
-  "name": "crimidine (ISO); 2-chloro-6-methylpyrimidin-4- yldimethylamine",
+  "name": "crimidine (ISO); 2-chloro-6-methylpyrimidin-4-yldimethylamine",
   "name_tr": "krimidin (ISO); 2-kloro-6-metilpirimidin-4- ildimetilamin",
   "ec_no": "208-622-6",
   "index_no": "613-004-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

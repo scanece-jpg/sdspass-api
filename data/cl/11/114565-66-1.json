@@ -1,10 +1,10 @@
 {
   "cas": "114565-66-1",
-  "name": "4-[4-(1,3-dihydroxyprop-2- yl)phenylamino]-1,8-dihydroxy- 5-nitroanthraquinone",
+  "name": "4-[4-(1,3-dihydroxyprop-2-yl)phenylamino]-1,8-dihydroxy-5-nitroanthraquinone",
   "name_tr": "4-[4-(1,3-dihidroksiprop-2- il)fenilamino]-1,8-dihidroksi-5- nitroantrakinon",
   "ec_no": "406-057-1",
   "index_no": "603-121-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

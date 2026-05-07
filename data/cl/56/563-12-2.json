@@ -1,10 +1,10 @@
 {
   "cas": "563-12-2",
-  "name": "ethion (ISO); O,O,O',O'-tetraethyl S,S'- methylenedi (phosphorodithioate); diethion",
+  "name": "ethion (ISO); O,O,O',O'-tetraethyl S,S'-methylenedi (phosphorodithioate); diethion",
   "name_tr": "etiyon (ISO); O,O,O',O'-tetraetil S,S'-metilendi (fosforoditiyoat); dietiyon",
   "ec_no": "209-242-3",
   "index_no": "015-047-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

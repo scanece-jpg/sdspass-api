@@ -1,10 +1,10 @@
 {
   "cas": "121-14-2",
-  "name": "2,4-dinitrotoluene; [1] dinitrotoluene [2]",
+  "name": "2,4-dinitrotoluene [1]\ndinitrotoluene  [2]",
   "name_tr": "2,4-dinitrotoluen; [1] dinitrotoluen [2]",
-  "ec_no": "204-450-0",
+  "ec_no": "204-450-0 [1]\n246-836-1 [2]",
   "index_no": "609-007-00-9",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

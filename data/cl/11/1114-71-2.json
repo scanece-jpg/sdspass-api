@@ -1,10 +1,10 @@
 {
   "cas": "1114-71-2",
-  "name": "pebulate (ISO); N-butyl-N-ethyl-S- propylthiocarbamate",
+  "name": "pebulate (ISO); N-butyl-N-ethyl-S-propylthiocarbamate",
   "name_tr": "pebulat (ISO); N-bütil-N-etil-S- propiltiyokarbamat",
   "ec_no": "214-215-4",
   "index_no": "006-034-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

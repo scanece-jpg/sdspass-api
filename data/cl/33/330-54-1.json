@@ -1,13 +1,11 @@
 {
   "cas": "330-54-1",
-  "name": "diuron (ISO); 3-(3,4-dichlorophenyl)-1,1- dimethylurea",
+  "name": "diuron (ISO); 3-(3,4-dichlorophenyl)-1,1-dimethylurea",
   "name_tr": "diüron (ISO); 3-(3,4- diklorofenil)-1,1-dimetilüre",
   "ec_no": "206-354-4",
   "index_no": "006-015-00-9",
   "atp": "ATP21",
-  "notes": [
-    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
-  ],
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -15,12 +13,8 @@
         "h_code": "H350"
       },
       {
-        "class": "Acute Tox. 4",
-        "h_code": "H302"
-      },
-      {
         "class": "STOT RE 2",
-        "h_code": "H373"
+        "h_code": "H373(blood_system)"
       },
       {
         "class": "Aquatic Acute 1",
@@ -32,22 +26,20 @@
       }
     ],
     "m_factors": {
-      "acute": 10,
-      "chronic": 10
+      "acute": 100,
+      "chronic": 100
     },
     "scl_limits": []
   },
   "labelling": {
-    "signal": "Warning",
+    "signal": "Danger",
     "pictograms": [
       "GHS08",
-      "GHS07",
       "GHS09"
     ],
     "h_codes": [
       "H350",
-      "H302",
-      "H373",
+      "H373(blood_system)",
       "H400",
       "H410"
     ],

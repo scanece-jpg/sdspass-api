@@ -1,10 +1,10 @@
 {
   "cas": "779343-34-9",
-  "name": "mono[2- (dimethylamino)ethyl]monohydr ogen-2-(hexadec-2- enyl)butanedioate and/or",
+  "name": "mono[2-(dimethylamino)ethyl]monohydrogen-2-(hexadec-2-enyl)butanedioate and/or mono[2-(dimethylamino)ethyl]monohydrogen-3-(hexadec-2-enyl)butanedioate",
   "name_tr": "mono[2- (dimetilamino)etil]monohidrojen -2-(hekzadek-2-enil)bütandioat ve/veya mono[2-",
   "ec_no": "415-880-5",
   "index_no": "607-410-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -23,6 +23,10 @@
       {
         "class": "Aquatic Acute 1",
         "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
       }
     ],
     "m_factors": {},
@@ -39,7 +43,8 @@
       "H315",
       "H318",
       "H317",
-      "H400"
+      "H400",
+      "H410"
     ],
     "suppl_h": []
   }

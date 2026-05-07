@@ -1,13 +1,12 @@
 {
   "cas": "94114-29-1",
-  "name": "Tar acids, brown-coal, C2- alkylphenol fraction; Distillate Phenols; [The distillate from the acidification of alkaline washed lignite tar distillate boiling in the range of approximately 200°C to 230°C (392°F to 446°F). Composed primarily of m- and p-ethylphenol as well as cresols and xylenols.]",
+  "name": "Tar acids, brown-coal, C2-alkylphenol fraction; Distillate Phenols; [The distillate from the acidification of alkaline washed lignite tar distillate boiling in the range of approximately 200°C to 230°C (392°F to 446°F).  Composed primarily of m- and p-ethylphenol as well as cresols and xylenols.]",
   "name_tr": "zift asitleri, linyit kömürü, C2- alkilfenol fraksiyonu; damıtık fenolleri; [Alkalinle yıkanmış linyit ziftinin asitlenmesi ile elde edilen ve yaklaşık 200oC ile 230oC (392oF-446oF) arasında kaynayan damıtık. Büyük ölçüde m- ve p- etilfenol, kreosoller ve ksilenollerden oluşur.]",
   "ec_no": "302-662-9",
   "index_no": "648-129-00-7",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
-    "J",
-    "M"
+    "J M"
   ],
   "classification": {
     "hazards": [

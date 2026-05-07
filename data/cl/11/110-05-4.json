@@ -4,17 +4,17 @@
   "name_tr": "di-ter-bütilperoksit",
   "ec_no": "203-733-6",
   "index_no": "617-001-00-2",
-  "atp": "",
+  "atp": "ATP3",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Org. Perox. Type E",
-        "h_code": "H242"
-      },
-      {
         "class": "Flam. Liq. 2",
         "h_code": "H225"
+      },
+      {
+        "class": "Org. Perox. E",
+        "h_code": "H242"
       },
       {
         "class": "Muta. 2",
@@ -31,8 +31,8 @@
       "GHS08"
     ],
     "h_codes": [
-      "H242",
       "H225",
+      "H242",
       "H341"
     ],
     "suppl_h": []

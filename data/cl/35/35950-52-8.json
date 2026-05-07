@@ -1,10 +1,10 @@
 {
   "cas": "35950-52-8",
-  "name": "2-bromo-1-(2-furyl)-2- nitroethylene",
+  "name": "2-bromo-1-(2-furyl)-2-nitroethylene",
   "name_tr": "2-bromo-1-(2-füril)-2-nitroetilen",
   "ec_no": "406-110-9",
   "index_no": "610-010-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

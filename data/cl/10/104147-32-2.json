@@ -1,10 +1,10 @@
 {
   "cas": "104147-32-2",
-  "name": "3,5-dichloro-4-(1,1,2,2- tetrafluoroethoxy)aniline",
+  "name": "3,5-dichloro-4-(1,1,2,2-tetrafluoroethoxy)aniline",
   "name_tr": "3,5-dikloro-4-(1,1,2,2- tetrafloretoksi)anilin",
   "ec_no": "401-790-3",
   "index_no": "612-093-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

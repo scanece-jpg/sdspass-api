@@ -1,10 +1,10 @@
 {
   "cas": "117-52-2",
-  "name": "coumafuryl (ISO); fumarin; (RS)-3-(1-(2-furyl)-3- oxobutyl)4-hydroxycoumarin; 4-hydroxy-3-[3-oxo-1-(2-furyl) butyl]coumarin",
+  "name": "coumafuryl (ISO); fumarin; (RS)-3-(1-(2-furyl)-3-oxobutyl)4-hydroxycoumarin; 4-hydroxy-3-[3-oxo-1-(2-furyl) butyl]coumarin",
   "name_tr": "kumafuril (ISO); fumarin; (RS)- 3-(1-(2-furil)-3-oksobütil)4- hidroksikumarin; 4-hidroksi-3- [3-okso-1-(2-füril)bütil]kumarin",
   "ec_no": "204-195-5",
   "index_no": "607-058-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "547-67-1",
-  "name": "nickel oxalate; [1] oxalic acid, nickel salt [2]",
+  "name": "nickel oxalate [1]\noxalic acid, nickel salt  [2]",
   "name_tr": "nikel oksalat; [1] oksalik asit, nikel tuzu [2]",
-  "ec_no": "208-933-7",
+  "ec_no": "208-933-7 [1]\n243-867-2 [2]",
   "index_no": "028-039-00-9",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

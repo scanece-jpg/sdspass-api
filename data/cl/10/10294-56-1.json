@@ -1,15 +1,15 @@
 {
   "cas": "10294-56-1",
-  "name": "phosphonic acid; [1] phosphorous acid [2]",
+  "name": "phosphonic acid [1]\nphosphorous acid [2]",
   "name_tr": "fosfonik asit [1]; fosfor asidi [2]",
-  "ec_no": "237-066-7",
+  "ec_no": "233-663-1",
   "index_no": "015-157-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4",
+        "class": "Acute Tox. 4 *",
         "h_code": "H302"
       },
       {
@@ -23,8 +23,8 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS05",
-      "GHS07"
+      "GHS07",
+      "GHS05"
     ],
     "h_codes": [
       "H302",

@@ -1,10 +1,10 @@
 {
   "cas": "18230-61-0",
-  "name": "bis(1-methylethyl)- dimethoxysilane",
+  "name": "bis(1-methylethyl)-dimethoxysilane",
   "name_tr": "Bis(1-metiletil)-dimetoksisilan",
   "ec_no": "421-540-7",
   "index_no": "014-031-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

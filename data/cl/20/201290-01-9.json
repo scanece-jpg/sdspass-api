@@ -1,10 +1,10 @@
 {
   "cas": "201290-01-9",
-  "name": "N,N- bis(trimethylsilyl)aminopropylm ethyldiethoxysilane",
+  "name": "N,N-bis(trimethylsilyl)aminopropylmethyldiethoxysilane",
   "name_tr": "N,N- bis(trimetilsilil)aminopropilmetil dietoksisilan",
   "ec_no": "445-890-5",
   "index_no": "014-041-00-7",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

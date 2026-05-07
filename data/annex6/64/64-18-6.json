@@ -53,7 +53,7 @@
         "h_code": "H315",
         "class": "",
         "c_min": 2.0,
-        "c_max": null
+        "c_max": 10.0
       },
       {
         "h_code": "H318",
@@ -65,7 +65,7 @@
         "h_code": "H319",
         "class": "",
         "c_min": 2.0,
-        "c_max": null
+        "c_max": 10.0
       }
     ]
   },
@@ -89,7 +89,7 @@
     ]
   },
   "ate": {
-    "inhalation_vapour": 7.4,
+    "inhalation_mgl": 7.4,
     "oral": 500.0
   }
 }

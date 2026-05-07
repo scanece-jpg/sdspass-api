@@ -1,10 +1,10 @@
 {
   "cas": "193562-37-7",
-  "name": "lithium sodium 4,4',4''- (nitrilotris(ethane-2,1- diylimino(6-chloro-1,3,5- triazine-4,2-diyl)imino))tris(5- hydroxy-6-(1-sulfonaphthalene- 2-ylazo)-2,7- naphthalene)disulfonate",
+  "name": "lithium sodium 4,4',4''-(nitrilotris(ethane-2,1-diylimino(6-chloro-1,3,5-triazine-4,2-diyl)imino))tris(5-hydroxy-6-(1-sulfonaphthalene-2-ylazo)-2,7-naphthalene)disulfonate",
   "name_tr": "lityum sodyum 4,4’4”- (nitrilotris(etan-2,1-diilimino(6- kloro-1,3,5-triazin-4,2- diil)imino))tris(5-hidroksi-6-(1- sülfonaftalen-2-ilazo)-2,7- naftalen)disülfonat",
   "ec_no": "429-730-1",
   "index_no": "607-603-00-3",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,13 +1,11 @@
 {
   "cas": "57110-29-9",
-  "name": "hexahydro-4-methylphthalic anhydride; [1] hexahydromethylphthalic anhydride; [2] hexahydro-1-methylphthalic anhydride; [3] hexahydro-3-methylphthalic anhydride [4]",
+  "name": "hexahydro-4-methylphthalic anhydride [1]\nhexahydromethylphthalic anhydride [2]\nhexahydro-1-methylphthalic anhydride [3]\nhexahydro-3-methylphthalic anhydride [4]",
   "name_tr": "hekzahidro-4-metilftalik anhidrit; [1] hekzahidrometilftalik anhidrit; [2] hekzahidro-1-metilftalik anhidrit; [3] hekzahidro-3-metilftalik anhidrit [4]",
-  "ec_no": "243-072-0",
+  "ec_no": "260-566-1",
   "index_no": "607-241-00-6",
-  "atp": "",
-  "notes": [
-    "C"
-  ],
+  "atp": "CLP00",
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -29,8 +27,8 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS08",
-      "GHS05"
+      "GHS05",
+      "GHS08"
     ],
     "h_codes": [
       "H318",

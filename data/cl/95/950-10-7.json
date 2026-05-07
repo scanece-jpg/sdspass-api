@@ -1,10 +1,10 @@
 {
   "cas": "950-10-7",
-  "name": "mephosfolan (ISO); diethyl 4-methyl-1,3-dithiolan-2- ylidenephosphoramidate",
+  "name": "mephosfolan (ISO); diethyl 4-methyl-1,3-dithiolan-2-ylidenephosphoramidate",
   "name_tr": "mefosfolan (ISO); dietil-4-metil-1,3-ditiyolan-2- ilidenfosforamidat",
   "ec_no": "213-447-3",
   "index_no": "015-094-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

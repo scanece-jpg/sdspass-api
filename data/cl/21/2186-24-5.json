@@ -1,10 +1,10 @@
 {
   "cas": "2186-24-5",
-  "name": "[(p-tolyloxy)methyl]oxirane; [1] [(m-tolyloxy)methyl]oxirane; [2] 2,3-epoxypropyl o-tolyl ether; [3] [(tolyloxy)methyl]oxirane; cresyl glycidyl ether [4]",
+  "name": "[(p-tolyloxy)methyl]oxirane [1]\n[(m-tolyloxy)methyl]oxirane [2]\n2,3-epoxypropyl o-tolyl ether [3]\n[(tolyloxy)methyl]oxirane; cresyl glycidyl ether  [4]",
   "name_tr": "[(p-toliloksi)metil]oksiran [1] [(m-toliloksi)metil]oksiran [2]; 2,3-epoksipropil o-tolil eter [3]; [(toliloksi)metil]oksiran; kresil glisidil eter [4]",
-  "ec_no": "218-574-8",
+  "ec_no": "218-574-8 [1]\n218-575-3 [2]\n218-645-3 [3]\n247-711-4 [4]",
   "index_no": "603-056-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "C"
   ],

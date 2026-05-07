@@ -1,10 +1,10 @@
 {
   "cas": "67739-11-1",
-  "name": "reaction mass of: 2-methyl-1-(6- methylbicyclo[2.2.1]hept-5-en- 2-yl)pent-1-en-3-ol; 2-methyl-1-(1- methylbicyclo[2.2.1]hept-5-en- 2-yl)-pent-1-en-3-ol; 2-methyl-1-(5- methylbicyclo[2.2.1]hept-5-en- 2-yl)pent-1-en-3-ol",
+  "name": "reaction mass of: 2-methyl-1-(6-methylbicyclo[2.2.1]hept-5-en-2-yl)pent-1-en-3-ol; 2-methyl-1-(1-methylbicyclo[2.2.1]hept-5-en-2-yl)-pent-1-en-3-ol; 2-methyl-1-(5-methylbicyclo[2.2.1]hept-5-en-2-yl)pent-1-en-3-ol",
   "name_tr": "tepkime kütlesi: 2-metil-1-(6- metilbisiklo[2.2.1]hept-5-en-2- il)pent-1-en-3-ol; 2-metil-1-(1- metilbisiklo[2.2.1]hept-5-en-2- il)-pent-1-en-3-ol; 2-metil-1-(5- metilbisiklo[2.2.1]hept-5-en-2- il)pent-1-en-3-ol karışımı",
   "ec_no": "415-990-3",
   "index_no": "603-170-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "141-66-2",
-  "name": "dicrotophos (ISO); (Z)-2-dimethylcarbamoyl-1- methylvinyl dimethyl phosphate",
+  "name": "dicrotophos (ISO); (Z)-2-dimethylcarbamoyl-1-methylvinyl dimethyl phosphate",
   "name_tr": "Dikrotofos (ISO); (Z)-2-dimetilkarbamoil-1- metilvinil dimetil fosfat",
   "ec_no": "205-494-3",
   "index_no": "015-073-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

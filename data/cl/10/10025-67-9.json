@@ -4,7 +4,7 @@
   "name_tr": "dikükürt diklorür; kükürt monoklorür",
   "ec_no": "233-036-2",
   "index_no": "016-012-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -29,7 +29,7 @@
     "scl_limits": [
       {
         "h_code": "H335",
-        "class": "STOT SE 3",
+        "class": "",
         "c_min": 1.0,
         "c_max": null
       }

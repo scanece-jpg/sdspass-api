@@ -1,10 +1,10 @@
 {
   "cas": "113171-13-4",
-  "name": "5-amino-N-(2,6-dichloro-3- methylphenyl)-1H-1,2,4- triazole-3-sulfonamide",
+  "name": "5-amino-N-(2,6-dichloro-3-methylphenyl)-1H-1,2,4-triazole-3-sulfonamide",
   "name_tr": "5-amino-N-(2,6-dikloro-3- metilfenil)-1H-1,2,4-triazol-3- sülfonamid",
   "ec_no": "428-150-6",
   "index_no": "613-270-00-5",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

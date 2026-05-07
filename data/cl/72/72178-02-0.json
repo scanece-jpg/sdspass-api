@@ -1,10 +1,10 @@
 {
   "cas": "72178-02-0",
-  "name": "fomesafen (ISO); 5-[2-chloro-4- (trifluoromethyl)phenoxy]-N- (methylsulphonyl)-2- nitrobenzamide",
+  "name": "fomesafen (ISO); 5-[2-chloro-4-(trifluoromethyl)phenoxy]-N-(methylsulphonyl)-2-nitrobenzamide",
   "name_tr": "fomesafen (ISO); 5-[2-kloro-4- (triflorometil)fenoksi]-N- (metilsülfonil)-2-nitrobenzamid;",
   "ec_no": "276-439-9",
   "index_no": "604-040-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

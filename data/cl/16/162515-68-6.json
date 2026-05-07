@@ -1,17 +1,13 @@
 {
   "cas": "162515-68-6",
-  "name": "1- (mercaptomethyl)cyclopropylace tic acid",
+  "name": "1-(mercaptomethyl)cyclopropylacetic acid",
   "name_tr": "1- (merkaptometil)siklopropilasetik asit",
   "ec_no": "420-240-3",
   "index_no": "607-540-00-1",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
-      {
-        "class": "Skin Corr. 1B",
-        "h_code": "H314"
-      },
       {
         "class": "Acute Tox. 4",
         "h_code": "H312"
@@ -19,6 +15,10 @@
       {
         "class": "Acute Tox. 4",
         "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
       },
       {
         "class": "Skin Sens. 1",
@@ -40,9 +40,9 @@
       "GHS09"
     ],
     "h_codes": [
-      "H314",
       "H312",
       "H302",
+      "H314",
       "H317",
       "H411"
     ],

@@ -1,10 +1,10 @@
 {
   "cas": "136210-30-5",
-  "name": "tetraethyl N,N'- (methylenedicyclohexane-4,1- diyl)bis-dl-aspartate",
+  "name": "tetraethyl N,N'-(methylenedicyclohexane-4,1-diyl)bis-.sc.dl.sc.-aspartate",
   "name_tr": "Tetraetil N,N’- (metilendisiklohekzan-4,1- diil)bis-dl-aspartat",
   "ec_no": "429-270-1",
   "index_no": "607-521-00-8",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

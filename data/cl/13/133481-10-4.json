@@ -1,10 +1,10 @@
 {
   "cas": "133481-10-4",
-  "name": "ethyl 2-(1- cyanocyclohexyl)acetate",
+  "name": "ethyl 2-(1-cyanocyclohexyl)acetate",
   "name_tr": "etil-2-(1-siyanosiklohekzil)asetat",
   "ec_no": "415-970-4",
   "index_no": "607-412-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

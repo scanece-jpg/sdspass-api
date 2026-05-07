@@ -1,10 +1,10 @@
 {
   "cas": "1563-66-2",
-  "name": "carbofuran (ISO); 2,3-dihydro-2,2- dimethylbenzofuran-7-yl N- methylcarbamate",
+  "name": "carbofuran (ISO); 2,3-dihydro-2,2-dimethylbenzofuran-7-yl N-methylcarbamate",
   "name_tr": "karbofüran(ISO); 2,3-dihidro-2,2- dimetilbenzofuran-7-il N- metilkarbamat",
   "ec_no": "216-353-0",
   "index_no": "006-026-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

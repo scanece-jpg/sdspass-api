@@ -1,10 +1,10 @@
 {
   "cas": "114-26-1",
-  "name": "propoxur (ISO); 2-isopropyloxyphenyl N- methylcarbamate; 2-isopropoxyphenyl methylcarbamate",
+  "name": "propoxur (ISO); 2-isopropyloxyphenyl N-methylcarbamate; 2-isopropoxyphenyl methylcarbamate",
   "name_tr": "propoxur (ISO); 2-izopropoksifenil N- metilkarbamat; 2- izopropoksifenil metilkarbamat",
   "ec_no": "204-043-8",
   "index_no": "006-016-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

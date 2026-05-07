@@ -1,10 +1,10 @@
 {
   "cas": "149850-30-6",
-  "name": "methyl N-[3-acetylamino)-4-(2- cyano-4-nitrophenylazo)phenyl]- N-[(1-methoxy)acetyl]glycinate",
+  "name": "methyl N-[3-acetylamino)-4-(2-cyano-4-nitrophenylazo)phenyl]-N-[(1-methoxy)acetyl]glycinate",
   "name_tr": "metil N-[3-asetilamino)-4-(2- siyano-4-nitrofenilazo)fenil]-N- [(1-metoksi)setil]glisinat",
   "ec_no": "413-040-2",
   "index_no": "611-096-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

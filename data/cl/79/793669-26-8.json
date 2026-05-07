@@ -1,10 +1,10 @@
 {
   "cas": "793669-26-8",
-  "name": "(±)-(R,S)-6-fluoro-3,4-dihydro- 2-oxiranyl-2H-1-benzopyran",
+  "name": "(±)-(R*,S*)-6-fluoro-3,4-dihydro-2-oxiranyl-2H-1-benzopyran",
   "name_tr": "(±)-(R,S)-6-flor-3,4-dihidro-2- oksiranil-2H-1-benzopiran",
   "ec_no": "419-630-6",
   "index_no": "613-228-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

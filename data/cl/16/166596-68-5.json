@@ -1,10 +1,10 @@
 {
   "cas": "166596-68-5",
-  "name": "(3'-carboxymethyl-5-(2-(3-ethyl- 3H-benzothiazol-2-ylidene)-1- methyl-ethylidene)-4,4'-dioxo- 2'-thioxo- (2,5')bithiazolidinyliden-3-yl)-",
+  "name": "(3'-carboxymethyl-5-(2-(3-ethyl-3H-benzothiazol-2-ylidene)-1-methyl-ethylidene)-4,4'-dioxo-2'-thioxo-(2,5')bithiazolidinyliden-3-yl)-acetic acid",
   "name_tr": "(3'-karboksimetil-5-(2-(3-etil- 3H-benzotiyazol-2-ilidin)-1- metiletilidin)-4,4'-diokso-2'- tiyokso-(2,5')bitiyazolidinilidin- 3-il)-asetikasit",
   "ec_no": "422-240-9",
   "index_no": "607-419-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

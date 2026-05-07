@@ -4,7 +4,7 @@
   "name_tr": "propan-1-ol; n-propanol",
   "ec_no": "200-746-9",
   "index_no": "603-003-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,35 +13,16 @@
         "h_code": "H225"
       },
       {
-        "class": "Eye Dam. 1",
-        "h_code": "H318"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H336"
+      },
+      {
+        "class": "Eye Dam. 1",
+        "h_code": "H318"
       }
     ],
     "m_factors": {},
-    "scl_limits": [
-      {
-        "h_code": "H302",
-        "class": "Acute Tox. 4 (Oral)",
-        "c_min": 5.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H319",
-        "class": "Eye Irrit. 2",
-        "c_min": 10.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H336",
-        "class": "STOT SE 3",
-        "c_min": 20.0,
-        "c_max": null
-      }
-    ]
+    "scl_limits": []
   },
   "labelling": {
     "signal": "Danger",
@@ -52,8 +33,8 @@
     ],
     "h_codes": [
       "H225",
-      "H318",
-      "H336"
+      "H336",
+      "H318"
     ],
     "suppl_h": []
   }

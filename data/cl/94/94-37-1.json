@@ -4,14 +4,10 @@
   "name_tr": "bis(piperidinotiyokarbonil)disülf ür",
   "ec_no": "202-328-1",
   "index_no": "613-109-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
-      {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
       {
         "class": "STOT SE 3",
         "h_code": "H335"
@@ -19,6 +15,10 @@
       {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Skin Sens. 1",
@@ -34,9 +34,9 @@
       "GHS07"
     ],
     "h_codes": [
-      "H319",
       "H335",
       "H315",
+      "H319",
       "H317"
     ],
     "suppl_h": []

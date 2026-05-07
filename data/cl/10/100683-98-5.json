@@ -1,10 +1,10 @@
 {
   "cas": "100683-98-5",
-  "name": "Distillates (petroleum), intermediate paraffinic, carbon- treated; Gasoil - unspecified; [A complex combination of hydrocarbons obtained by the treatment of petroleum with activated charcoal for the removal of trace polar constituents and impurities. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C16 through C36.]",
+  "name": "Distillates (petroleum), intermediate paraffinic, carbon-treated; Gasoil - unspecified; [A complex combination of hydrocarbons obtained by the treatment of petroleum with activated charcoal for the removal of trace polar constituents and impurities. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C16 through C36.]",
   "name_tr": "Damıtıklar (petrol), orta parafinik, karbon-muamele edilmiş; Gaz yağı – tanımlanmamış; [Petrolün, eser miktardaki polar bileşenlerin ve safsızlıkların uzaklaştırılması için, aktif kömür ile muamele edilmesi ile elde edilen hidrokarbonların kompleks bir bileşimi. Genelde, ağırlıklı olarak C16 ila C36 aralığında karbon sayısına sahip hidrokarbonlardan oluşur.]",
   "ec_no": "309-668-0",
   "index_no": "649-240-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "N"
   ],

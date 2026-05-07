@@ -5,9 +5,7 @@
   "ec_no": "206-022-9",
   "index_no": "613-111-00-X",
   "atp": "ATP17",
-  "notes": [
-    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
-  ],
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -27,7 +25,7 @@
     "scl_limits": []
   },
   "labelling": {
-    "signal": "Warning",
+    "signal": "Danger",
     "pictograms": [
       "GHS08",
       "GHS07"

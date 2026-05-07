@@ -1,10 +1,10 @@
 {
   "cas": "13770-89-3",
-  "name": "nickel bis(sulfamidate); nickel sulfamate",
+  "name": "nickel bis(sulfamidate);\nnickel sulfamate",
   "name_tr": "Nikel bis(sülfamidat); nikel sülfamat",
   "ec_no": "237-396-1",
   "index_no": "028-018-00-4",
-  "atp": "",
+  "atp": "ATP14",
   "notes": [],
   "classification": {
     "hazards": [
@@ -19,6 +19,10 @@
       {
         "class": "Repr. 1B",
         "h_code": "H360D"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H302"
       },
       {
         "class": "STOT RE 1",
@@ -48,13 +52,19 @@
     "scl_limits": [
       {
         "h_code": "H372",
-        "class": "STOT RE 1",
+        "class": "",
         "c_min": 1.0,
         "c_max": null
       },
       {
+        "h_code": "H373",
+        "class": "",
+        "c_min": 0.1,
+        "c_max": 1.0
+      },
+      {
         "h_code": "H317",
-        "class": "C <%1 Cilt Hassas. 1",
+        "class": "",
         "c_min": 0.01,
         "c_max": null
       }
@@ -63,6 +73,7 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
+      "GHS07",
       "GHS08",
       "GHS09"
     ],
@@ -70,6 +81,7 @@
       "H350i",
       "H341",
       "H360D",
+      "H302",
       "H372",
       "H334",
       "H317",
@@ -79,6 +91,6 @@
     "suppl_h": []
   },
   "ate": {
-    "oral": 1098.0
+    "oral": 853.0
   }
 }

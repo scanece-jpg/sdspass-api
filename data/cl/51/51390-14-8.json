@@ -1,10 +1,10 @@
 {
   "cas": "51390-14-8",
-  "name": "2-(1-methylpropyl)-4-tert- butylphenol",
+  "name": "2-(1-methylpropyl)-4-tert-butylphenol",
   "name_tr": "2-(1-metilpropil)-4-tert- bütilfenol",
   "ec_no": "421-740-4",
   "index_no": "604-069-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

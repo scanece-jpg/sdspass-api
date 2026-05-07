@@ -1,10 +1,10 @@
 {
   "cas": "66-56-8",
-  "name": "2,3-dinitrophenol; [1] 2,5-dinitrophenol; [2] 2,6-dinitrophenol; [3] 3,4-dinitrophenol; [4] salts of dinitrophenol [5]",
+  "name": "2,3-dinitrophenol [1]\n2,5-dinitrophenol [2]\n2,6-dinitrophenol [3]\n3,4-dinitrophenol [4]\nsalts of dinitrophenol  [5]",
   "name_tr": "2,3-dinitrofenol; [1] 2,5-dinitrofenol; [2] 2,6-dinitrofenol; [3] 3,4-dinitrofenol; [4] dinitrofenol tuzları[5]",
-  "ec_no": "200-628-7",
+  "ec_no": "200-628-7 [1]\n206-348-1 [2]\n209-357-9 [3]\n209-415-3 [4]",
   "index_no": "609-054-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

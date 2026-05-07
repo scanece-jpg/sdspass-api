@@ -1,10 +1,10 @@
 {
   "cas": "52315-07-8",
-  "name": "cypermethrin cis/trans +/- 80/20; (RS)-α-cyano-3-phenoxybenzyl (1RS; 3RS; 1RS, 3SR)-3-(2,2- dichlorovinyl)-2,2- dimethylcyclopropanecarboxylat e",
+  "name": "cypermethrin cis/trans +/- 80/20; (RS)-α-cyano-3-phenoxybenzyl (1RS; 3RS; 1RS, 3SR)-3-(2,2-dichlorovinyl)-2,2-dimethylcyclopropanecarboxylate",
   "name_tr": "sipermetrin cis/trans +/- 80/20; (RS)- α -siyano-3-fenoksibenzil (1RS; 3RS; 1RS, 3SR)-3-(2,2- diklorovinil)-2,2- dimetilsiklopropankarboksilat",
   "ec_no": "257-842-9",
   "index_no": "607-433-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

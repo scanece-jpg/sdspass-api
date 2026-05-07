@@ -1,10 +1,10 @@
 {
   "cas": "124719-24-0",
-  "name": "sodium ((N-(3- trimethylammoniopropyl)sulfam oyl)methylsulfonatophthalocyani nato)copper(II)",
+  "name": "sodium ((N-(3-trimethylammoniopropyl)sulfamoyl)methylsulfonatophthalocyaninato)copper(II)",
   "name_tr": "sodyum ((N-(3- trimetilamoniopropil)sülfamoil) metilsülfonato ftalosiyaninato)bakır(II)",
   "ec_no": "407-340-2",
   "index_no": "029-012-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

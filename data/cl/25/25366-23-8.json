@@ -1,10 +1,10 @@
 {
   "cas": "25366-23-8",
-  "name": "thiazafluron (ISO); 1,3-dimethyl-1-(5- trifluoromethyl-1,3,4-thiadiazol- 2-yl)urea",
+  "name": "thiazafluron (ISO); 1,3-dimethyl-1-(5-trifluoromethyl-1,3,4-thiadiazol-2-yl)urea",
   "name_tr": "tiyazfluron (ISO); 1,3-dimetil-1-(5-triflorometil- 1,3,4-tiyadiazol-2-il)üre",
   "ec_no": "246-901-4",
   "index_no": "616-021-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

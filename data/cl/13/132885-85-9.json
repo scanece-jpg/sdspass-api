@@ -1,10 +1,10 @@
 {
   "cas": "132885-85-9",
-  "name": "4-[N-ethyl-N-(2- hydroxyethyl)amino]-1-(2- hydroxyethyl)amino-2- nitrobenzene, monohydrochloride",
+  "name": "4-[N-ethyl-N-(2-hydroxyethyl)amino]-1-(2-hydroxyethyl)amino-2-nitrobenzene, monohydrochloride",
   "name_tr": "4-[N-etil-N-(2- hidroksietil)amino]-1-(2- hidroksietil)amino-2- nitrobenzenmonohidroklorür",
   "ec_no": "407-020-2",
   "index_no": "612-153-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

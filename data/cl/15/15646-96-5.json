@@ -1,23 +1,16 @@
 {
   "cas": "15646-96-5",
-  "name": "2,2,4-trimethylhexamethylene- 1,6-di-isocyanate; [1] 2,4,4-trimethylhexamethylene- 1,6-di-isocyanate [2]",
+  "name": "2,2,4-trimethylhexamethylene-1,6-di-isocyanate [1]\n2,4,4-trimethylhexamethylene-1,6-di-isocyanate [2]",
   "name_tr": "2,2,4-trimetilhekzametilen-1,6- di-izosiyanat; [1] 2,4,4-trimetilhekzametilen-1,6- di-izosiyanat [2]",
-  "ec_no": "241-001-8",
+  "ec_no": "239-714-4",
   "index_no": "615-010-00-6",
-  "atp": "",
-  "notes": [
-    "C",
-    "2"
-  ],
+  "atp": "CLP00",
+  "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 3",
+        "class": "Acute Tox. 3 *",
         "h_code": "H331"
-      },
-      {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
       },
       {
         "class": "STOT SE 3",
@@ -26,6 +19,10 @@
       {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Resp. Sens. 1",
@@ -56,9 +53,9 @@
     ],
     "h_codes": [
       "H331",
-      "H319",
       "H335",
       "H315",
+      "H319",
       "H334"
     ],
     "suppl_h": []

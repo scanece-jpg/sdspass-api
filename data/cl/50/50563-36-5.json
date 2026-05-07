@@ -1,10 +1,10 @@
 {
   "cas": "50563-36-5",
-  "name": "dimethachlor (ISO); 2-chloro-N-(2,6- dimethylphenyl)-N-(2- methoxyethyl)acetamide",
+  "name": "dimethachlor (ISO); 2-chloro-N-(2,6-dimethylphenyl)-N-(2-methoxyethyl)acetamide",
   "name_tr": "dimetaklor (ISO); 2-kloro-N- (2,6-dimetilfenil)-N-(2- metoksietil)asetamid",
   "ec_no": "256-625-6",
   "index_no": "616-031-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

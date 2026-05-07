@@ -4,7 +4,7 @@
   "name_tr": "metakrilonitril; 2-metil-2-propen nitril",
   "ec_no": "204-817-5",
   "index_no": "608-010-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "D"
   ],
@@ -35,7 +35,7 @@
     "scl_limits": [
       {
         "h_code": "H317",
-        "class": "Skin Sens. 1",
+        "class": "",
         "c_min": 0.2,
         "c_max": null
       }

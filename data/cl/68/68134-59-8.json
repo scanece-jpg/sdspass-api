@@ -1,10 +1,10 @@
 {
   "cas": "68134-59-8",
-  "name": "nickel diformate; [1] formic acid, nickel salt; [2] formic acid, copper nickel salt [3]",
+  "name": "nickel diformate [1]\nformic acid, nickel salt [2]\nformic acid, copper nickel salt [3]",
   "name_tr": "nikel diformat; [1] formik asit, nikel tuzu; [2] formik asit, bakır nikel tuzu [3]",
-  "ec_no": "222-101-0",
+  "ec_no": "268-755-0",
   "index_no": "028-021-00-0",
-  "atp": "",
+  "atp": "ATP02",
   "notes": [],
   "classification": {
     "hazards": [
@@ -18,11 +18,11 @@
       },
       {
         "class": "Repr. 1B",
-        "h_code": "H360D"
+        "h_code": "H360D ***"
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372"
+        "h_code": "H372 **"
       },
       {
         "class": "Resp. Sens. 1",
@@ -42,8 +42,7 @@
       }
     ],
     "m_factors": {
-      "acute": 1,
-      "chronic": 1
+      "acute": 1
     },
     "scl_limits": [
       {
@@ -53,8 +52,14 @@
         "c_max": null
       },
       {
+        "h_code": "H373",
+        "class": "STOT RE 2",
+        "c_min": 0.1,
+        "c_max": null
+      },
+      {
         "h_code": "H317",
-        "class": "C <%1 Cilt Hassas. 1",
+        "class": "Skin Sens. 1",
         "c_min": 0.01,
         "c_max": null
       }
@@ -69,8 +74,8 @@
     "h_codes": [
       "H350i",
       "H341",
-      "H360D",
-      "H372",
+      "H360D ***",
+      "H372 **",
       "H334",
       "H317",
       "H400",

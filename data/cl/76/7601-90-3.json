@@ -1,10 +1,10 @@
 {
   "cas": "7601-90-3",
-  "name": "perchloric acid ... %",
+  "name": "perchloric acid ... %",
   "name_tr": "Perklorik asit ... %",
   "ec_no": "231-512-4",
   "index_no": "017-006-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "B"
   ],
@@ -23,13 +23,37 @@
     "scl_limits": [
       {
         "h_code": "H314",
-        "class": "Skin Corr. 1A",
+        "class": "",
         "c_min": 50.0,
         "c_max": null
       },
       {
+        "h_code": "H314",
+        "class": "",
+        "c_min": 10.0,
+        "c_max": 50.0
+      },
+      {
+        "h_code": "H315",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": 10.0
+      },
+      {
+        "h_code": "H319",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": 10.0
+      },
+      {
         "h_code": "H271",
-        "class": "C < 10 % Oksit. Sıvı 1",
+        "class": "",
+        "c_min": 50.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H272",
+        "class": "",
         "c_min": 50.0,
         "c_max": null
       }

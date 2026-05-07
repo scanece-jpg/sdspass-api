@@ -1,17 +1,17 @@
 {
   "cas": "93672-52-7",
-  "name": "2,5-dibutoxy-4-(morpholin-4- yl)benzenediazonium 4- methylbenzenesulfonate",
+  "name": "2,5-dibutoxy-4-(morpholin-4-yl)benzenediazonium 4-methylbenzenesulfonate",
   "name_tr": "2,5-dibütoksi-4-(morfolin-4- il)benzendiazonyum 4- metilbenzensülfonat",
   "ec_no": "413-290-2",
   "index_no": "611-090-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "T"
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Self-react. Type C",
+        "class": "Self-react. C",
         "h_code": "H242"
       },
       {

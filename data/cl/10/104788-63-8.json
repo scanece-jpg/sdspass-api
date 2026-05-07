@@ -1,15 +1,15 @@
 {
   "cas": "104788-63-8",
-  "name": "6-(nonylamino)-6-oxo- peroxyhexanoic acid",
+  "name": "6-(nonylamino)-6-oxo-peroxyhexanoic acid",
   "name_tr": "6-(nonilamino)-6-okso- peroksihekzanoik asit",
   "ec_no": "406-680-9",
   "index_no": "617-014-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Org. Perox. Type C",
+        "class": "Org. Perox. C",
         "h_code": "H242"
       },
       {

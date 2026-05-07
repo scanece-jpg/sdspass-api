@@ -1,10 +1,10 @@
 {
   "cas": "95-69-2",
-  "name": "4-chloro-o-toluidine; [1] 4-chloro-o-toluidine hydrochloride [2]",
+  "name": "4-chloro-o-toluidine [1]\n4-chloro-o-toluidine hydrochloride  [2]",
   "name_tr": "4-kloro-o-toluidin; [1] 4-kloro-o-toluidin hidroklorür [2]",
-  "ec_no": "202-441-6",
+  "ec_no": "202-441-6 [1]\n221-627-8 [2]",
   "index_no": "612-196-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

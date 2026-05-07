@@ -43,22 +43,22 @@
     },
     "scl_limits": [
       {
-        "h_code": "H360",
+        "h_code": "H360D",
         "class": "",
-        "c_min": 3.0,
+        "c_min": 0.003,
         "c_max": null
       },
       {
         "h_code": "H372",
         "class": "",
-        "c_min": 2.0,
+        "c_min": 0.02,
         "c_max": null
       },
       {
         "h_code": "H373",
         "class": "",
-        "c_min": 2.0,
-        "c_max": null
+        "c_min": 0.002,
+        "c_max": 0.02
       }
     ]
   },

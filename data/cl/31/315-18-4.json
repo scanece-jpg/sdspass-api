@@ -1,10 +1,10 @@
 {
   "cas": "315-18-4",
-  "name": "mexacarbate (ISO); 3,5-dimethyl-4- dimethylaminophenyl N- methylcarbamate",
+  "name": "mexacarbate (ISO); 3,5-dimethyl-4-dimethylaminophenyl N-methylcarbamate",
   "name_tr": "meksakarbat (ISO); 3,5-dimetil-4-dimetilaminofenil N-metilkarbamat",
   "ec_no": "206-249-3",
   "index_no": "006-054-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

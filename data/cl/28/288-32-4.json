@@ -4,7 +4,7 @@
   "name_tr": "imidazol",
   "ec_no": "206-019-2",
   "index_no": "613-319-00-0",
-  "atp": "",
+  "atp": "ATP7",
   "notes": [],
   "classification": {
     "hazards": [
@@ -25,7 +25,7 @@
     "scl_limits": []
   },
   "labelling": {
-    "signal": "",
+    "signal": "Danger",
     "pictograms": [
       "GHS08",
       "GHS07",

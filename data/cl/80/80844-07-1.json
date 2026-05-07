@@ -1,10 +1,10 @@
 {
   "cas": "80844-07-1",
-  "name": "etofenprox (ISO); 2-(4- ethoxyphenyl)-2-methylpropyl 3-phenoxybenzyl ether",
+  "name": "etofenprox (ISO); 2-(4-ethoxyphenyl)-2-methylpropyl 3-phenoxybenzyl ether",
   "name_tr": "etofenproks (ISO); 2-(4- ethoksifenil)-2-methilpropil 3- fenoksibenzil eter",
   "ec_no": "407-980-2",
   "index_no": "604-091-00-3",
-  "atp": "",
+  "atp": "ATP6",
   "notes": [],
   "classification": {
     "hazards": [
@@ -23,7 +23,7 @@
     ],
     "m_factors": {
       "acute": 100,
-      "chronic": 1
+      "chronic": 100
     },
     "scl_limits": []
   },

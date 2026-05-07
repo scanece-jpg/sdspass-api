@@ -1,10 +1,10 @@
 {
   "cas": "473798-59-3",
-  "name": "fenpyrazamine (ISO); S-allyl 5-amino-2,3-dihydro-2- isopropyl-3-oxo-4-(o- tolyl)pyrazole-1-carbothioate; S-allyl 5-amino-2-isopropyl-4- (2-methylphenyl)-3-oxo-2,3- dihydropyrazole-1-carbothioate",
+  "name": "fenpyrazamine (ISO); S-allyl 5-amino-2,3-dihydro-2-isopropyl-3-oxo-4-(o-tolyl)pyrazole-1-carbothioate; S-allyl 5-amino-2-isopropyl-4-(2-methylphenyl)-3-oxo-2,3-dihydropyrazole-1-carbothioate",
   "name_tr": "fenpirazamin (ISO); S-allil 5-amino-2,3-dihidro-2- isopropil-3-okzo-4-(o- tolil)pirazol-1-karbohtiyoat; S-allil 5-amino-2-isopropil-4-(2- metilfenil)-3-okzo-2,3- dihidropirazol-1-karbotiyoat",
   "ec_no": "",
   "index_no": "613-318-00-5",
-  "atp": "",
+  "atp": "ATP10",
   "notes": [],
   "classification": {
     "hazards": [
@@ -19,7 +19,7 @@
     ],
     "m_factors": {
       "acute": 10,
-      "chronic": 1
+      "chronic": 10
     },
     "scl_limits": []
   },

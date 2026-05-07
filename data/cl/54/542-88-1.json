@@ -4,7 +4,7 @@
   "name_tr": "bis (klorometil) eter; oksibis(klorometan)",
   "ec_no": "208-832-8",
   "index_no": "603-046-00-5",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -33,7 +33,7 @@
     "scl_limits": [
       {
         "h_code": "H350",
-        "class": "Carc. 1A",
+        "class": "",
         "c_min": 0.001,
         "c_max": null
       }

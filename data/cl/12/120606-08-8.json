@@ -1,10 +1,10 @@
 {
   "cas": "120606-08-8",
-  "name": "benzyl-N-(2-(2- methoxyphenoxy)ethyl)amine hydrochloride",
+  "name": "benzyl-N-(2-(2-methoxyphenoxy)ethyl)amine hydrochloride",
   "name_tr": "benzil-N-(2-(2- metoksifenoksi)etil)amin hidroklorür",
   "ec_no": "428-290-8",
   "index_no": "612-227-00-8",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

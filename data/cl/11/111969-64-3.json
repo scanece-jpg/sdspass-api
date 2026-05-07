@@ -1,10 +1,10 @@
 {
   "cas": "111969-64-3",
-  "name": "2S-isopropyl-5R-methyl-1R- cyclohexyl 2,2-dihydroxyacetate",
+  "name": "2S-isopropyl-5R-methyl-1R-cyclohexyl 2,2-dihydroxyacetate",
   "name_tr": "2S-izopropil-5R-metil-1R- siklohekzil-2,2-dihidroksiasetat",
   "ec_no": "416-810-6",
   "index_no": "607-435-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

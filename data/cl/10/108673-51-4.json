@@ -1,10 +1,10 @@
 {
   "cas": "108673-51-4",
-  "name": "N-(4-(3-(4-cyanophenyl)ureido)- 3-hydroxyphenyl)-2-(2,4-di-tert- pentylphenoxy)octanamide",
+  "name": "N-(4-(3-(4-cyanophenyl)ureido)-3-hydroxyphenyl)-2-(2,4-di-tert-pentylphenoxy)octanamide",
   "name_tr": "N-(4-(3-(4-siyanfenil)üreido)-3- hidroksifenil)-2-(2,4-di-tert- pentilfenoksi)oktanamid",
   "ec_no": "403-790-9",
   "index_no": "616-028-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

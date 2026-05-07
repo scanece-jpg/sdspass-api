@@ -1,10 +1,10 @@
 {
   "cas": "82413-20-5",
-  "name": "(E)-3-[1-[4-[2- (dimethylamino)ethoxy]phenyl]- 2-phenylbut-1-enyl]phenol",
+  "name": "(E)-3-[1-[4-[2-(dimethylamino)ethoxy]phenyl]-2-phenylbut-1-enyl]phenol",
   "name_tr": "(E)-3-[1-[4-[2- (dimetilamino)etoksi]fenil]-2- fenilbüt-1-enil]fenol",
   "ec_no": "428-010-4",
   "index_no": "604-073-00-5",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

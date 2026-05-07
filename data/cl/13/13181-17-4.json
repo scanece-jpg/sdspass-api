@@ -1,10 +1,10 @@
 {
   "cas": "13181-17-4",
-  "name": "bromofenoxim (ISO); 3,5-dibromo-4- hydroxybenzaldehyde-O-(2,4- dinitrophenyl)-oxime",
+  "name": "bromofenoxim (ISO); 3,5-dibromo-4-hydroxybenzaldehyde-O-(2,4-dinitrophenyl)-oxime",
   "name_tr": "bromofenoksim (ISO); 3,5-dibromo-4- hidroksibenzaldehid-O-(2,4- dinitrofenil)-oksim",
   "ec_no": "236-129-6",
   "index_no": "609-032-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

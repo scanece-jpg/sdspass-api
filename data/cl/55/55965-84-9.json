@@ -1,10 +1,10 @@
 {
   "cas": "55965-84-9",
-  "name": "reaction mass of: 5-chloro-2- methyl-2H-isothiazol-3-one and 2-methyl-2H-isothiazol-3- one (3:1)",
+  "name": "reaction mass of 5-chloro-2-methyl-2H-isothiazol-3-one and 2-methyl-2H-isothiazol-3-one (3:1)",
   "name_tr": "tepkime kütlesi: 5-kloro-2-metil- 2H-izotiyazol-3-on ve 2-metil- 2H-izotiyazol-3-on (3:1)",
   "ec_no": "",
   "index_no": "613-167-00-5",
-  "atp": "",
+  "atp": "ATP13",
   "notes": [
     "B"
   ],
@@ -49,22 +49,16 @@
     },
     "scl_limits": [
       {
-        "h_code": "H314",
-        "class": "Skin Corr. 1C",
-        "c_min": 0.6,
-        "c_max": null
+        "h_code": "H315",
+        "class": "",
+        "c_min": 0.06,
+        "c_max": 0.6
       },
       {
-        "h_code": "H318",
-        "class": "C < %0,6 Göz Hsr. 1",
-        "c_min": 0.6,
-        "c_max": null
-      },
-      {
-        "h_code": "H317",
-        "class": "C <% 0,6 Cilt Hassas. 1A",
-        "c_min": 0.0015,
-        "c_max": null
+        "h_code": "H319",
+        "class": "",
+        "c_min": 0.06,
+        "c_max": 0.6
       }
     ]
   },
@@ -85,6 +79,8 @@
       "H400",
       "H410"
     ],
-    "suppl_h": []
+    "suppl_h": [
+      "EUH071"
+    ]
   }
 }

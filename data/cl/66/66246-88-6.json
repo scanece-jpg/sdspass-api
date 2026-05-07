@@ -1,10 +1,10 @@
 {
   "cas": "66246-88-6",
-  "name": "penconazole (ISO); 1- [2-(2,4- dichlorophenyl) pentyl]-1H- 1,2,4-triazole",
+  "name": "penconazole (ISO); 1-[2-(2,4-dichlorophenyl)pentyl]-1H-1,2,4-triazole",
   "name_tr": "penkonazol (ISO); 1- [2-(2,4- diklorofenil) pentil]-1H-1,2,4- triazol",
-  "ec_no": "266-275-6",
+  "ec_no": "",
   "index_no": "613-317-00-X",
-  "atp": "",
+  "atp": "ATP6",
   "notes": [],
   "classification": {
     "hazards": [

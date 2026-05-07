@@ -1,10 +1,10 @@
 {
   "cas": "129050-62-0",
-  "name": "trisodium N,N- bis(carboxymethyl)-β-alanine",
+  "name": "trisodium N,N-bis(carboxymethyl)-β-alanine",
   "name_tr": "trisodyum-N,N- bis(karboksimetil)-β-alanin",
   "ec_no": "414-070-9",
   "index_no": "607-476-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

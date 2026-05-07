@@ -1,10 +1,10 @@
 {
   "cas": "117291-73-3",
-  "name": "methyl [2-(1,1-dimethylethyl)-6- methoxypyrimidin-4- yl]ethylphosphonothioate",
+  "name": "methyl [2-(1,1-dimethylethyl)-6-methoxypyrimidin-4-yl]ethylphosphonothioate",
   "name_tr": "metil-[2-(1,1-dimetiletil)-6- metoksipirimidin-4- il]etilfosfonotiyoat",
   "ec_no": "414-080-3",
   "index_no": "015-173-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

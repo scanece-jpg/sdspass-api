@@ -1,20 +1,20 @@
 {
   "cas": "62924-70-3",
-  "name": "flumetralin (ISO); N-(2-chloro-6-fluorobenzyl)-N- ethyl-α,α,α-trifluoro-2,6-dinitro- p-toluidine",
+  "name": "flumetralin (ISO); N-(2-chloro-6-fluorobenzyl)-N-ethyl-α,α,α-trifluoro-2,6-dinitro-p-toluidine",
   "name_tr": "flumetralin(ISO); N-(2-kloro-6-florobenzil)-N-etil α, α, α -trifloro-2,6-dinitro-p- toluidin",
   "ec_no": "",
   "index_no": "612-144-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Skin Sens. 1",
@@ -39,8 +39,8 @@
       "GHS09"
     ],
     "h_codes": [
-      "H319",
       "H315",
+      "H319",
       "H317",
       "H400",
       "H410"

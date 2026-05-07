@@ -1,10 +1,10 @@
 {
   "cas": "56552-15-9",
-  "name": "4,4'-(oxy-(bismethylene))-bis- 1,3-dioxolane",
+  "name": "4,4'-(oxy-(bismethylene))-bis-1,3-dioxolane",
   "name_tr": "4,4'-(oksi-(bimetilen))-bis-1,3- dioksolan",
   "ec_no": "423-230-7",
   "index_no": "613-233-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

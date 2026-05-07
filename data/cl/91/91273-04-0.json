@@ -1,10 +1,10 @@
 {
   "cas": "91273-04-0",
-  "name": "N,N-bis(2-ethylhexyl)-((1,2,4- triazol-1-yl)methyl)amine",
+  "name": "N,N-bis(2-ethylhexyl)-((1,2,4-triazol-1-yl)methyl)amine",
   "name_tr": "N,N-bis(2-etilhekzil)-((1,2,4- triyazol-1-il)metil)amin",
   "ec_no": "401-280-0",
   "index_no": "613-072-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

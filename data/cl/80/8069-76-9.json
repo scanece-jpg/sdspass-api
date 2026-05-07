@@ -1,10 +1,10 @@
 {
   "cas": "8069-76-9",
-  "name": "reaction mass of: 4,6-dinitro-2- (3-octyl)phenyl methyl carbonate and 4,6-dinitro-2-(4- octyl)phenyl methyl carbonate; dinocton-6",
+  "name": "reaction mass of: 4,6-dinitro-2-(3-octyl)phenyl methyl carbonate and 4,6-dinitro-2-(4-octyl)phenyl methyl carbonate; dinocton-6",
   "name_tr": "tepkime kütlesi: 4,6-dinitro-2-(3- oktil)fenilmetilkarbonat; 4,6- dinitro-2-(4-oktil)fenilmetil- karbonat; dinokton-6",
   "ec_no": "",
   "index_no": "609-045-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

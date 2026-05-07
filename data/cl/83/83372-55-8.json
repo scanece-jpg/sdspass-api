@@ -1,10 +1,10 @@
 {
   "cas": "83372-55-8",
-  "name": "N,N'-1,4-phenylenebis(2-((2- methoxy-4-nitrophenyl)azo)-3- oxobutanamide",
+  "name": "N,N'-1,4-phenylenebis(2-((2-methoxy-4-nitrophenyl)azo)-3-oxobutanamide",
   "name_tr": "N,N'-1,4-fenilenbis(2-((2- metoksi-4-nitrofenil)azo)-3- oksobütanamid",
   "ec_no": "411-840-6",
   "index_no": "616-097-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -43,13 +43,13 @@
     ],
     "m_factors": {
       "acute": 10,
-      "chronic": 1
+      "chronic": 10
     },
     "scl_limits": [
       {
         "h_code": "H317",
         "class": "",
-        "c_min": 15.0,
+        "c_min": 0.0015,
         "c_max": null
       }
     ]

@@ -1,10 +1,10 @@
 {
   "cas": "143-50-0",
-  "name": "chlordecone (ISO); perchloropentacyclo[5,3,0,02,6,03, 9,04,8]decan-5-one; decachloropentacyclo[5,2,1,02,6, 03,9,05,8]decan-4-one",
+  "name": "chlordecone (ISO); perchloropentacyclo[5,3,0,02,6,03,9,04,8]decan-5-one; decachloropentacyclo[5,2,1,02,6,03,9,05,8]decan-4-one",
   "name_tr": "klordeson (ISO); perkloropentasiklo[5,3,0,02,6,03,9, 04,8]dekan-5-on; dekakloropentasiklo[5,2,1,02,6,03, 9,05,8]dekan-4-on",
   "ec_no": "205-601-3",
   "index_no": "606-019-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

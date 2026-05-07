@@ -1,10 +1,10 @@
 {
   "cas": "12222-04-7",
-  "name": "di(tetramethylammonium)(29H, 31H-phthalocyanin- 29,N30,N31,N32)disulfonamide disulfonate, cuprate(2-)complex, derivates",
+  "name": "di(tetramethylammonium)(29H,31H-phthalocyanin-N29,N30,N31,N32)disulfonamide disulfonate, cuprate(2-)complex, derivates",
   "name_tr": "di(tetrametilamonyum)(29H,31 H-ftalosiyanin- N29,N30,N31,N32)disülfonamid disülfonat, bakır(II)oksit kompleksi, türevleri",
   "ec_no": "416-180-2",
   "index_no": "650-046-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

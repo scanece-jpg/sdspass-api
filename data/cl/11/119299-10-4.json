@@ -1,10 +1,10 @@
 {
   "cas": "119299-10-4",
-  "name": "sodium (R)-2-(2,4- dichlorophenoxy)propionate",
+  "name": "sodium (R)-2-(2,4-dichlorophenoxy)propionate",
   "name_tr": "sodyum-(R)-2-(2,4- diklorofenoksi)propiyonat",
   "ec_no": "413-340-3",
   "index_no": "607-347-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

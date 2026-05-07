@@ -50,5 +50,8 @@
       "H400"
     ],
     "suppl_h": []
+  },
+  "ate": {
+    "inhalation_ppm": 10.0
   }
 }

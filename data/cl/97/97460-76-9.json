@@ -1,10 +1,10 @@
 {
   "cas": "97460-76-9",
-  "name": "2-(4-(N-butyl-N- phenethylamino)phenyl)ethylene -1,1,2-tricarbonitrile",
+  "name": "2-(4-(N-butyl-N-phenethylamino)phenyl)ethylene-1,1,2-tricarbonitrile",
   "name_tr": "2-(4-(N-bütil-N- fentilamino)fenil)etilen-1,1,2- trikarbonitril",
   "ec_no": "407-650-8",
   "index_no": "608-024-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

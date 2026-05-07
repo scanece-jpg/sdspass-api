@@ -1,16 +1,26 @@
 {
   "cas": "7632-04-4",
-  "name": "sodium perborate; [1] sodium sodium peroxometaborate; [2] sodium peroxoborate; [containing < 0.1 % (w/w) of particles with an aerodynamic diameter of below 50 μm]",
+  "name": "sodium peroxometaborate",
   "name_tr": "sodyum perborat; [1] peroksometaborat; [2] sodyum peroksoborat; [(a/a) < % 0,1 aerodinamik çapı 50 μm’den düşük olan partikül içeren]",
-  "ec_no": "239-172-9",
-  "index_no": "005-017-00-7",
-  "atp": "",
-  "notes": [],
+  "ec_no": "231-556-4",
+  "index_no": "005-024-00-5",
+  "atp": "ATP22",
+  "notes": [
+    "11"
+  ],
   "classification": {
     "hazards": [
       {
         "class": "Ox. Sol. 2",
         "h_code": "H272"
+      },
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360FD"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H331"
       },
       {
         "class": "Acute Tox. 4",
@@ -29,13 +39,13 @@
     "scl_limits": [
       {
         "h_code": "H318",
-        "class": "Eye Dam. 1",
+        "class": "",
         "c_min": 22.0,
         "c_max": null
       },
       {
         "h_code": "H319",
-        "class": "Eye Irrit. 2",
+        "class": "",
         "c_min": 14.0,
         "c_max": 22.0
       }
@@ -45,11 +55,14 @@
     "signal": "Danger",
     "pictograms": [
       "GHS03",
-      "GHS05",
-      "GHS07"
+      "GHS08",
+      "GHS06",
+      "GHS05"
     ],
     "h_codes": [
       "H272",
+      "H360FD",
+      "H331",
       "H302",
       "H335",
       "H318"
@@ -57,7 +70,7 @@
     "suppl_h": []
   },
   "ate": {
-    "inhalation_dust": 0.62,
+    "inhalation_mgl": 0.62,
     "oral": 730.0
   }
 }

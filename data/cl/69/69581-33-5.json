@@ -1,10 +1,10 @@
 {
   "cas": "69581-33-5",
-  "name": "cyprofuram (ISO); N-(3-chlorophenyl)-N- (tetrahydro-2-oxo-3- furyl)cyclopropanecarboxamide",
+  "name": "cyprofuram (ISO); N-(3-chlorophenyl)-N-(tetrahydro-2-oxo-3-furyl)cyclopropanecarboxamide",
   "name_tr": "siprofuram (ISO); N-(3- klorofenil)-N-(tetrahidro-2-okso- 3-füril)siklopropankarboksamid",
   "ec_no": "274-050-9",
   "index_no": "616-033-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

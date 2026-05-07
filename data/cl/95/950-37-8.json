@@ -1,10 +1,10 @@
 {
   "cas": "950-37-8",
-  "name": "methidathion (ISO); 2,3-dihydro-5-methoxy-2-oxo- 1,3,4-thiadiazol-3-ylmethyl- O,O- dimethylphosphorodithioate",
+  "name": "methidathion (ISO); 2,3-dihydro-5-methoxy-2-oxo-1,3,4-thiadiazol-3-ylmethyl-O,O-dimethylphosphorodithioate",
   "name_tr": "metidatiyon (ISO); 2,3-dihidro-5-metoksi-2-okso- 1,3,4-tiyadiazol-3-ilmetil-O,O- dimetil fosforoditiyoat",
   "ec_no": "213-449-4",
   "index_no": "015-069-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

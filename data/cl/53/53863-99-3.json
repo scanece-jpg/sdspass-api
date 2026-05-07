@@ -1,10 +1,10 @@
 {
   "cas": "53863-99-3",
-  "name": "bis(1,1-dimethyl-2- propynyloxy)dimethylsilane",
+  "name": "bis(1,1-dimethyl-2-propynyloxy)dimethylsilane",
   "name_tr": "bis(1,1-dimetil-2- propiniloksi)dimetilsilan",
   "ec_no": "414-960-7",
   "index_no": "014-020-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "193486-83-8",
-  "name": "2-(2-chloroacetoxy)ethyl 3-((4- (2,5-dichloro-4- fluorosulfonylphenylazo)-3- methylphenyl)ethylamino)propio nate",
+  "name": "2-(2-chloroacetoxy)ethyl 3-((4-(2,5-dichloro-4-fluorosulfonylphenylazo)-3-methylphenyl)ethylamino)propionate",
   "name_tr": "2-(2-kloroasetoksi)etil 3-((4- (2,5-dikloro-4- florosülfonilfenilazo)-3- metilfenil)etilamino)propiyonat",
   "ec_no": "427-570-7",
   "index_no": "611-149-00-1",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

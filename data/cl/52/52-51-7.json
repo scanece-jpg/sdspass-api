@@ -4,7 +4,7 @@
   "name_tr": "bronopol (INN); 2-bromo-2-nitropropan-1,3-diol",
   "ec_no": "200-143-0",
   "index_no": "603-085-00-8",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -34,8 +34,7 @@
       }
     ],
     "m_factors": {
-      "acute": 10,
-      "chronic": 10
+      "acute": 10
     },
     "scl_limits": []
   },

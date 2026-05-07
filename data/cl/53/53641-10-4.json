@@ -1,10 +1,10 @@
 {
   "cas": "53641-10-4",
-  "name": "N,N'-(2-chloro-1,4- phenylene)bis(3- oxobutaneamide)",
+  "name": "N,N'-(2-chloro-1,4-phenylene)bis(3-oxobutaneamide)",
   "name_tr": "N,N'-(2-kloro-1,4-fenilin)bis(3- oksobutanamid)",
   "ec_no": "443-010-4",
   "index_no": "616-186-00-7",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

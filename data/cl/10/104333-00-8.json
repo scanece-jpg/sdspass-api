@@ -1,10 +1,10 @@
 {
   "cas": "104333-00-8",
-  "name": "3-((2-nitro-4- (trifluoromethyl)phenyl)amino)p ropane-1,2-diol",
+  "name": "3-((2-nitro-4-(trifluoromethyl)phenyl)amino)propane-1,2-diol",
   "name_tr": "3-((2-nitro-4- (triflorometil)fenil)amino)propa n-1,2-diol",
   "ec_no": "410-010-0",
   "index_no": "603-153-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

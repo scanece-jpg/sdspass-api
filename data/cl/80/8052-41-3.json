@@ -1,10 +1,10 @@
 {
   "cas": "8052-41-3",
-  "name": "Stoddard solvent; Low boiling point naphtha - unspecified; [A colorless, refined petroleum distillate that is free from rancid or objectionable odors and that boils in a range of approximately 148.8°C to 204.4°C. (300°F to 400°F).]",
+  "name": "stoddard solvent; Low boiling point naphtha - unspecified; [A colourless, refined petroleum distillate that is free from rancid or objectionable odours and that boils in a range of approximately 148,8 °C to 204,4 °C (300 °F to 400 °F).]",
   "name_tr": "Stoddard çözücüsü; düşük kaynama noktalı nafta – tanımlanmamış; [Ekşimiş veya hoş olmayan kokulardan arınmış ve yaklaşık 148.8°C ila 204.4°C (300oF ila 400oF) arasında kaynayan renksiz rafine petrol damıtığı.]",
   "ec_no": "232-489-3",
   "index_no": "649-345-00-4",
-  "atp": "",
+  "atp": "ATP5",
   "notes": [
     "P"
   ],
@@ -19,12 +19,12 @@
         "h_code": "H340"
       },
       {
-        "class": "STOT RE 1",
-        "h_code": "H372(mer"
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
       },
       {
-        "class": "Asp. Tox. 1",
-        "h_code": "kezi"
+        "class": "STOT RE 1",
+        "h_code": "H372(central_nervous_system)"
       }
     ],
     "m_factors": {},
@@ -38,8 +38,8 @@
     "h_codes": [
       "H350",
       "H340",
-      "H372(mer",
-      "kezi"
+      "H304",
+      "H372(central_nervous_system)"
     ],
     "suppl_h": []
   }

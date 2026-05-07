@@ -4,7 +4,7 @@
   "name_tr": "metil asetat",
   "ec_no": "201-185-2",
   "index_no": "607-021-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,12 +13,12 @@
         "h_code": "H225"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H336"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       }
     ],
     "m_factors": {},
@@ -32,8 +32,8 @@
     ],
     "h_codes": [
       "H225",
-      "H319",
-      "H336"
+      "H336",
+      "H319"
     ],
     "suppl_h": [
       "EUH066"

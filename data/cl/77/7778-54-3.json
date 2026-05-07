@@ -4,7 +4,7 @@
   "name_tr": "Kalsiyum hipoklorit",
   "ec_no": "231-908-7",
   "index_no": "017-012-00-7",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "T"
   ],
@@ -33,9 +33,27 @@
     "scl_limits": [
       {
         "h_code": "H314",
-        "class": "Skin Corr. 1B",
+        "class": "",
         "c_min": 5.0,
         "c_max": null
+      },
+      {
+        "h_code": "H315",
+        "class": "",
+        "c_min": 1.0,
+        "c_max": 5.0
+      },
+      {
+        "h_code": "H318",
+        "class": "",
+        "c_min": 3.0,
+        "c_max": 5.0
+      },
+      {
+        "h_code": "H319",
+        "class": "",
+        "c_min": 0.5,
+        "c_max": 3.0
       }
     ]
   },

@@ -1,10 +1,10 @@
 {
   "cas": "142653-61-0",
-  "name": "3-(cis-3- hexenyloxy)propanenitril",
+  "name": "3-(cis-3-hexenyloxy)propanenitril",
   "name_tr": "3-(cis-3- hekseniloksi)propannitril",
   "ec_no": "415-220-6",
   "index_no": "608-043-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "92952-81-3",
-  "name": "4-[(3-hydroxypropyl)amino]-3- nitrophenol",
+  "name": "4-[(3-hydroxypropyl)amino]-3-nitrophenol",
   "name_tr": "4-[(3-hidroksipropil)amino]-3- nitrofenol",
   "ec_no": "406-305-9",
   "index_no": "609-060-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

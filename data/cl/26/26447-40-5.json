@@ -1,14 +1,11 @@
 {
   "cas": "26447-40-5",
-  "name": "4,4'-methylenediphenyl diisocyanate; diphenylmethane-4,4'- diisocyanate; [1] 2,2'-methylenediphenyl diisocyanate; diphenylmethane-2,2'- diisocyanate; [2] o-(p-isocyanatobenzyl)phenyl isocyanate; diphenylmethane-2,4'- diisocyanate; [3] methylenediphenyl diisocyanate [4]",
+  "name": "4,4'-methylenediphenyl diisocyanate; diphenylmethane-4,4'-diisocyanate [1]\n2,2'-methylenediphenyl diisocyanate; diphenylmethane-2,2'-diisocyanate [2]\no-(p-isocyanatobenzyl)phenyl isocyanate; diphenylmethane-2,4'-diisocyanate [3]\nmethylenediphenyl diisocyanate [4]",
   "name_tr": "4,4'metilendifenil-diizosiyanat; difenilmetan-4,4' –diizosiyanat [1] 2,2'-metilendifenil diizosiyanat difenilmetan-2,2'-diizosiyanat; [2] ; o-(p-izosiyanatobenzil)fenil izosiyanat; difenilmetan-2,4'-diizosiyanat; [3] metilendifenil diizosiyanat[4]",
-  "ec_no": "202-966-0",
+  "ec_no": "247-714-0",
   "index_no": "615-005-00-9",
-  "atp": "",
-  "notes": [
-    "C",
-    "2"
-  ],
+  "atp": "ATP01",
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -16,24 +13,24 @@
         "h_code": "H351"
       },
       {
-        "class": "Acute Tox. 4",
+        "class": "Acute Tox. 4 *",
         "h_code": "H332"
-      },
-      {
-        "class": "STOT RE 2",
-        "h_code": "H373"
-      },
-      {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
       },
       {
         "class": "STOT SE 3",
         "h_code": "H335"
       },
       {
+        "class": "STOT RE 2 *",
+        "h_code": "H373 **"
+      },
+      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Resp. Sens. 1",
@@ -81,10 +78,10 @@
     "h_codes": [
       "H351",
       "H332",
-      "H373",
-      "H319",
       "H335",
+      "H373 **",
       "H315",
+      "H319",
       "H334",
       "H317"
     ],

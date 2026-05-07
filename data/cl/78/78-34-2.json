@@ -1,10 +1,10 @@
 {
   "cas": "78-34-2",
-  "name": "dioxathion (ISO); 1,4-dioxan-2,3-diyl-O,O,O',O'- tetraethyl di(phosphorodithioate)",
+  "name": "dioxathion (ISO); 1,4-dioxan-2,3-diyl-O,O,O',O'-tetraethyl di(phosphorodithioate)",
   "name_tr": "dioksatiyon (ISO); 1,4-dioksan-2,3-dil-O,O,O',O'- tetraetil di(fosforoditiyoat)",
   "ec_no": "201-107-7",
   "index_no": "015-063-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

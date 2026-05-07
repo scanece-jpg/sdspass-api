@@ -1,10 +1,10 @@
 {
   "cas": "70445-33-9",
-  "name": "3-(2-ethylhexyloxy)propane-1,2- diol",
+  "name": "3-(2-ethylhexyloxy)propane-1,2-diol",
   "name_tr": "3-(2-etilhekziloksi)propan-1,2- diol",
   "ec_no": "408-080-2",
   "index_no": "603-168-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

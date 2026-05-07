@@ -1,10 +1,10 @@
 {
   "cas": "69184-17-4",
-  "name": "methyl O-(4-amino-3,5- dichloro-6-fluoropyridin-2- yloxy)acetate",
+  "name": "methyl O-(4-amino-3,5-dichloro-6-fluoropyridin-2-yloxy)acetate",
   "name_tr": "metil-O-(4-amino-3,5-dikloro-6- florpiridin-2-iloksi)asetat",
   "ec_no": "407-550-4",
   "index_no": "607-351-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

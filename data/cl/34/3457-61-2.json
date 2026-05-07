@@ -4,13 +4,21 @@
   "name_tr": "ter-bütil-α,α- dimetilbenzilperoksit",
   "ec_no": "222-389-8",
   "index_no": "617-007-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Aquatic Chronic 2",
+        "class": "Org. Perox. E",
         "h_code": "H242"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Aquatic Chronic 2",
+        "h_code": "H411"
       }
     ],
     "m_factors": {},
@@ -24,7 +32,9 @@
       "GHS09"
     ],
     "h_codes": [
-      "H242"
+      "H242",
+      "H315",
+      "H411"
     ],
     "suppl_h": []
   }

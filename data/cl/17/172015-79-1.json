@@ -1,20 +1,20 @@
 {
   "cas": "172015-79-1",
-  "name": "(1S-cis)-4-(2-amino-6-chloro- 9H-purin-9-yl)-2-cyclopentene- 1-methanol hydrochloride",
+  "name": "(1S-cis)-4-(2-amino-6-chloro-9H-purin-9-yl)-2-cyclopentene-1-methanol hydrochloride",
   "name_tr": "(1S-cis)-4-(2-amino-6-kloro-9H- purin-9-il)-2-skilopenten-1- metanol hidroklorür",
   "ec_no": "426-200-1",
   "index_no": "603-205-00-9",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "STOT RE 1",
-        "h_code": "H372"
-      },
-      {
         "class": "Acute Tox. 4",
         "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
       },
       {
         "class": "Eye Dam. 1",
@@ -40,8 +40,8 @@
       "GHS07"
     ],
     "h_codes": [
-      "H372",
       "H302",
+      "H372",
       "H318",
       "H317",
       "H412"

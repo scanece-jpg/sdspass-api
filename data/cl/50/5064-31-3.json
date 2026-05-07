@@ -4,7 +4,7 @@
   "name_tr": "trisodyum nitrilotriasetat",
   "ec_no": "225-768-6",
   "index_no": "607-620-00-6",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -25,7 +25,7 @@
     "scl_limits": [
       {
         "h_code": "H351",
-        "class": "Carc. 2",
+        "class": "",
         "c_min": 5.0,
         "c_max": null
       }

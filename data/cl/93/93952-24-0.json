@@ -1,10 +1,10 @@
 {
   "cas": "93952-24-0",
-  "name": "trisodium bis(2-(5-chloro-4- nitro-2-oxidophenylazo)-5- sulphonato-1- naphtholato)chromate(1-)",
+  "name": "trisodium bis(2-(5-chloro-4-nitro-2-oxidophenylazo)-5-sulphonato-1-naphtholato)chromate(1-)",
   "name_tr": "Trisodyum bis(2-(5-kloro-4- nitro-2-oksidofenilazo)-5- sülfonato-1-naftolato)kromat(1-)",
   "ec_no": "402-870-0",
   "index_no": "024-014-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

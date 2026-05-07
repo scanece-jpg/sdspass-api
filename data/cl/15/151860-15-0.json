@@ -1,10 +1,10 @@
 {
   "cas": "151860-15-0",
-  "name": "3-benzyl-exo-6-nitro-2,4-dioxo- 3-aza-cis-bicyclo[3.1.0]hexane",
+  "name": "3-benzyl-exo-6-nitro-2,4-dioxo-3-aza-cis-bicyclo[3.1.0]hexane",
   "name_tr": "3-benzil-ekzo-6-nitro-2,4- diokso-3-aza-cis- bisiklo[3.1.0]hekzan",
   "ec_no": "426-750-2",
   "index_no": "613-192-00-1",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "116912-62-0",
-  "name": "tetrasodium [5-((4-amino-6- chloro-1,3,5-triazin-2-yl)amino)- 2-((2-hydroxy-3,5- disulfonatophenylazo)-2- sulfonatobenzylidenehydrazino) benzoate]copper(II)",
+  "name": "tetrasodium [5-((4-amino-6-chloro-1,3,5-triazin-2-yl)amino)-2-((2-hydroxy-3,5-disulfonatophenylazo)-2- sulfonatobenzylidenehydrazino)benzoate]copper(II)",
   "name_tr": "tetrasodyum-[5-((4-amino-6- kloro-1,3,5-triazin-2-il)amino)- 2-((2-hidroksi-3,5- disülfonatofenilazo)-2- sülfonatobenzilidenhidrazino)be nzoat]bakır(II)",
   "ec_no": "404-070-7",
   "index_no": "016-066-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

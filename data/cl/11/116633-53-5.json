@@ -1,10 +1,10 @@
 {
   "cas": "116633-53-5",
-  "name": "bis(N,N',N''-trimethyl-1,4,7- triazacyclononane)-trioxo- dimanganese (IV) di(hexafluorophosphate) monohydrate",
+  "name": "bis(N,N',N''-trimethyl-1,4,7-triazacyclononane)-trioxo-dimanganese (IV) di(hexafluorophosphate) monohydrate",
   "name_tr": "bis(N,N',N''-trimetil-1,4,7- triazasiklononan)-triokso- dimangan (IV) di(hekzaflorofosfat) monohidrat",
   "ec_no": "411-760-1",
   "index_no": "025-004-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

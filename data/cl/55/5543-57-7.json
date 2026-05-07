@@ -1,10 +1,10 @@
 {
   "cas": "5543-57-7",
-  "name": "warfarin (ISO); 4-hydroxy-3-(3-oxo-1- phenylbutyl)-2H-chromen-2- one; [1] (S)-4-hydroxy-3-(3-oxo-1- phenylbutyl)-2-benzopyrone [2] (R)-4-hydroxy-3-(3-oxo-1- phenylbutyl)-2-benzopyrone [3]",
+  "name": "warfarin (ISO); 4-hydroxy-3-(3-oxo-1-phenylbutyl)-2H-chromen-2-one [1]\n(S)-4-hydroxy-3-(3-oxo-1-phenylbutyl)-2-benzopyrone [2]\n(R)-4-hydroxy-3-(3-oxo-1-phenylbutyl)-2-benzopyrone [3]",
   "name_tr": "varfarin (ISO); 4-hidroksi-3-(3-okso-1- fenilbütil)-2H-kromen-2-on;[1] (S)-4-hidroksi-3-(3-okso-1- fenilbütil)-2-benzopiron; [2] (R)-4-hidroksi-3-(3-okso-1- fenilbütil)-2-benzopiron [3]",
-  "ec_no": "201-377-6",
+  "ec_no": "226-907-3",
   "index_no": "607-056-00-0",
-  "atp": "",
+  "atp": "ATP09",
   "notes": [],
   "classification": {
     "hazards": [
@@ -26,7 +26,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372(kan)"
+        "h_code": "H372 (blood)"
       },
       {
         "class": "Aquatic Chronic 2",
@@ -39,6 +39,18 @@
         "h_code": "H360D",
         "class": "Repr. 1A",
         "c_min": 0.003,
+        "c_max": null
+      },
+      {
+        "h_code": "H372",
+        "class": "STOT RE 1",
+        "c_min": 0.5,
+        "c_max": null
+      },
+      {
+        "h_code": "H373",
+        "class": "STOT RE 2",
+        "c_min": 0.05,
         "c_max": null
       }
     ]
@@ -55,7 +67,7 @@
       "H330",
       "H310",
       "H300",
-      "H372(kan)",
+      "H372 (blood)",
       "H411"
     ],
     "suppl_h": []

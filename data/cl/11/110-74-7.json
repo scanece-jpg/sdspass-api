@@ -1,10 +1,10 @@
 {
   "cas": "110-74-7",
-  "name": "propyl formate; [1] isopropyl formate [2]",
+  "name": "propyl formate [1]\nisopropyl formate  [2]",
   "name_tr": "propil format [1]; izopropil format [2]",
-  "ec_no": "203-798-0",
+  "ec_no": "203-798-0 [1]\n210-901-2 [2]",
   "index_no": "607-016-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "C"
   ],
@@ -15,16 +15,16 @@
         "h_code": "H225"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H335"
       },
       {
         "class": "STOT SE 3",
         "h_code": "H336"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       }
     ],
     "m_factors": {},
@@ -38,9 +38,9 @@
     ],
     "h_codes": [
       "H225",
-      "H319",
       "H335",
-      "H336"
+      "H336",
+      "H319"
     ],
     "suppl_h": []
   }

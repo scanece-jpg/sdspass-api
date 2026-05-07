@@ -46,7 +46,7 @@
     "suppl_h": []
   },
   "ate": {
-    "inhalation_dust": 2.83,
-    "oral": 299.0
+    "oral": 299.0,
+    "inhalation_mgl": 2.83
   }
 }

@@ -1,10 +1,10 @@
 {
   "cas": "103112-35-2",
-  "name": "ethyl 1-(2,4-dichlorophenyl)-5- (trichloromethyl)-1H-1,2,4- triazole-3-carboxylate",
+  "name": "ethyl 1-(2,4-dichlorophenyl)-5-(trichloromethyl)-1H-1,2,4-triazole-3-carboxylate",
   "name_tr": "etil 1-(2,4-diklorofenil)-5- (triklorometil)-1H-1,2,4-triazol- 3-karboksilat",
   "ec_no": "401-290-5",
   "index_no": "607-626-00-9",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "39300-45-3",
-  "name": "dinocap (ISO); (RS)-2,6-dinitro-4-octylphenyl crotonates and (RS)-2,4-dinitro- 6-octylphenyl crotonates in which “octyl” is a reaction mass of 1-methylheptyl, 1-ethylhexyl and 1-propylpentyl groups",
+  "name": "dinocap (ISO); (RS)-2,6-dinitro-4-octylphenyl crotonates and (RS)-2,4-dinitro-6-octylphenyl crotonates in which “octyl” is a reaction mass of 1-methylheptyl, 1-ethylhexyl and 1-propylpentyl groups",
   "name_tr": "dinokep (ISO); (RS)-2,6-dinitro-4-oktilfenil krotonatlar ve (RS)-2,4-dinitro- 6-oktilfenil krotonatlar. Buradaki ‘oktil’ler, 1- metilheptil, 1-etilheksil ve1- propilpentil gruplarının tepkime kütlesidir.",
   "ec_no": "254-408-0",
   "index_no": "609-023-00-6",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

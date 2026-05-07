@@ -4,7 +4,7 @@
   "name_tr": "2-kloro-1,3,5-trinitrobenzen",
   "ec_no": "201-864-3",
   "index_no": "610-004-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,12 +13,12 @@
         "h_code": "H201"
       },
       {
-        "class": "Acute Tox. 2",
-        "h_code": "H330"
-      },
-      {
         "class": "Acute Tox. 1",
         "h_code": "H310"
+      },
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H330"
       },
       {
         "class": "Acute Tox. 2",
@@ -45,8 +45,8 @@
     ],
     "h_codes": [
       "H201",
-      "H330",
       "H310",
+      "H330",
       "H300",
       "H400",
       "H410"

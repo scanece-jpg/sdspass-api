@@ -1,10 +1,10 @@
 {
   "cas": "67-97-0",
-  "name": "colecalciferol; cholecalciferol; Vitamin D3",
+  "name": "colecalciferol;\ncholecalciferol;\nVitamin D3",
   "name_tr": "kolekalsiferol; Vitamin D3",
   "ec_no": "200-673-2",
   "index_no": "603-180-00-4",
-  "atp": "",
+  "atp": "ATP13",
   "notes": [],
   "classification": {
     "hazards": [
@@ -29,13 +29,13 @@
     "scl_limits": [
       {
         "h_code": "H372",
-        "class": "Solunum: ATE=0,05 mg/L (tozlar veya sisler) Cilt: ATE=50 mg/kg va Oral: ATE=35 mg/kg va BHOT Tekrar.Mrz. 1",
+        "class": "",
         "c_min": 3.0,
         "c_max": null
       },
       {
         "h_code": "H373",
-        "class": "STOT RE 2",
+        "class": "",
         "c_min": 0.3,
         "c_max": 3.0
       }
@@ -56,7 +56,7 @@
     "suppl_h": []
   },
   "ate": {
-    "inhalation_dust": 0.05,
+    "inhalation_mgl": 0.05,
     "dermal": 50.0,
     "oral": 35.0
   }

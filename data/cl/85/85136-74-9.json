@@ -1,10 +1,10 @@
 {
   "cas": "85136-74-9",
-  "name": "6-hydroxy-1-(3- isopropoxypropyl)-4-methyl-2- oxo-5-[4- (phenylazo)phenylazo]-1,2- dihydro-3-pyridinecarbonitrile",
+  "name": "6-hydroxy-1-(3-isopropoxypropyl)-4-methyl-2-oxo-5-[4-(phenylazo)phenylazo]-1,2-dihydro-3-pyridinecarbonitrile",
   "name_tr": "6-hidroksi-1-(3- izopropoksipropil)-4-metil-2- okso-5-[4-(fenilazo)fenilazo]- 1,2-dihidro-3-piridinkarbonitril",
   "ec_no": "400-340-3",
   "index_no": "611-057-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

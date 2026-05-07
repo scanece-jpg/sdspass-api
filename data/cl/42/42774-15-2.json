@@ -1,10 +1,10 @@
 {
   "cas": "42774-15-2",
-  "name": "N,N'-bis(2,2,6,6-tetramethyl-4- piperidyl)isophthalamide",
+  "name": "N,N'-bis(2,2,6,6-tetramethyl-4-piperidyl)isophthalamide",
   "name_tr": "N,N'-bis(2,2,6,6-tetrametil-4- piperidil)izoftalamid",
   "ec_no": "419-710-0",
   "index_no": "616-129-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

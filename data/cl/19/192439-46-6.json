@@ -1,10 +1,10 @@
 {
   "cas": "192439-46-6",
-  "name": "tetrahydro-3-methyl-5-((2- phenylthio)thiazol-5-ylmethyl)- [4H]-1,3,5-oxadiazinan-4- ylidene-N-nitroamine",
+  "name": "tetrahydro-3-methyl-5-((2-phenylthio)thiazol-5-ylmethyl)-[4H]-1,3,5-oxadiazinan-4-ylidene-N-nitroamine",
   "name_tr": "tetrahidro-3-metil-5-((2- feniltiyo)tiazol-5-ilmetil)-[4H]- 1,3,5-oksadiazinan-4-ilidin-N- nitroamin",
   "ec_no": "427-600-9",
   "index_no": "613-273-00-1",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

@@ -4,13 +4,17 @@
   "name_tr": "magnezyum fosfür; trimagnezyum difosfür",
   "ec_no": "235-023-7",
   "index_no": "015-005-00-3",
-  "atp": "",
+  "atp": "ATP5",
   "notes": [],
   "classification": {
     "hazards": [
       {
         "class": "Water-react. 1",
         "h_code": "H260"
+      },
+      {
+        "class": "Acute Tox. 1",
+        "h_code": "H330"
       },
       {
         "class": "Acute Tox. 2",
@@ -21,17 +25,12 @@
         "h_code": "H311"
       },
       {
-        "class": "Acute Tox. 1",
-        "h_code": "H330"
-      },
-      {
         "class": "Aquatic Acute 1",
         "h_code": "H400"
       }
     ],
     "m_factors": {
-      "acute": 100,
-      "chronic": 100
+      "acute": 100
     },
     "scl_limits": []
   },
@@ -44,9 +43,9 @@
     ],
     "h_codes": [
       "H260",
+      "H330",
       "H300",
       "H311",
-      "H330",
       "H400"
     ],
     "suppl_h": [

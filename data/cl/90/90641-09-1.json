@@ -1,10 +1,10 @@
 {
   "cas": "90641-09-1",
-  "name": "Extracts (petroleum), light paraffinic distillate solvent, hydrotreated; Distillate aromatic extract (treated); [A complex combination of hydrocarbons produced by treating a light paraffinic distillate solvent extract with hydrogen in the presence of a catalyst. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C17 through C26 and boiling in the range of approximately 280 °C to 400 °C (536 °F to 752 °F).]",
+  "name": "Extracts (petroleum), light paraffinic distillate solvent, hydrotreated; Distillate aromatic extract (treated); [A complex combination of hydrocarbons produced by treating a light paraffinic distillate solvent extract with hydrogen in the presence of a catalyst. It consists predominantly of hydrocarbons having carbon numbers predominantly in the range of C17 through C26 and boiling in the range of approximately 280 °C to 400 °C (536 °F to 752 °F).]",
   "name_tr": "özütler (petrol), hafif parafinik damıtık çözücü, hidrojen ile muamele edilmiş; damıtık aromatik özüt (muamele edilmiş); [Orta parafinik üst çözelti damıtığının katalizör varlığında hidrojenle muamele edilmesinden üretilen kompleks bir hidrokarbon bileşimi. Ağırlıklı olarak, karbon sayıları genelde C17 ile C26 aralığında olan ve kaynama noktası 280oC ile 400oC (536oF-752oF) olan hidrokarbonlardan oluşur.]",
   "ec_no": "292-633-6",
   "index_no": "649-536-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "L"
   ],

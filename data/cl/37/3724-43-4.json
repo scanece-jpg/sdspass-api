@@ -1,10 +1,10 @@
 {
   "cas": "3724-43-4",
-  "name": "chloro-N,N- dimethylformiminium chloride",
+  "name": "chloro-N,N-dimethylformiminium chloride",
   "name_tr": "kloro-N,N-dimetilformiminyum klorür",
   "ec_no": "425-970-6",
   "index_no": "612-250-00-3",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

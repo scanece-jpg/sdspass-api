@@ -4,19 +4,19 @@
   "name_tr": "zirkonyum tozu (piroforik)",
   "ec_no": "231-176-9",
   "index_no": "040-001-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "T"
   ],
   "classification": {
     "hazards": [
       {
-        "class": "Water-react. 1",
-        "h_code": "H260"
-      },
-      {
         "class": "Pyr. Sol. 1",
         "h_code": "H250"
+      },
+      {
+        "class": "Water-react. 1",
+        "h_code": "H260"
       }
     ],
     "m_factors": {},
@@ -28,8 +28,8 @@
       "GHS02"
     ],
     "h_codes": [
-      "H260",
-      "H250"
+      "H250",
+      "H260"
     ],
     "suppl_h": []
   }

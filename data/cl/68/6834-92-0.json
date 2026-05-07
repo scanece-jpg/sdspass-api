@@ -4,17 +4,17 @@
   "name_tr": "disodyum metasilikat",
   "ec_no": "229-912-9",
   "index_no": "014-010-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Skin Corr. 1B",
-        "h_code": "H314"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H335"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
       }
     ],
     "m_factors": {},
@@ -27,8 +27,8 @@
       "GHS07"
     ],
     "h_codes": [
-      "H314",
-      "H335"
+      "H335",
+      "H314"
     ],
     "suppl_h": []
   }

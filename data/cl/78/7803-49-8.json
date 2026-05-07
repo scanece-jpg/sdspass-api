@@ -4,7 +4,7 @@
   "name_tr": "hidroksilamin…% [sulu çözeltide ≤ %55]",
   "ec_no": "232-259-2",
   "index_no": "612-122-01-4",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
     "B"
   ],
@@ -27,12 +27,12 @@
         "h_code": "H302"
       },
       {
-        "class": "STOT RE 2",
-        "h_code": "H373"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H335"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Skin Irrit. 2",
@@ -67,8 +67,8 @@
       "H351",
       "H312",
       "H302",
-      "H373",
       "H335",
+      "H373",
       "H315",
       "H318",
       "H317",

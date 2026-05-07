@@ -1,25 +1,51 @@
 {
   "cas": "12007-01-1",
-  "name": "nickel boride (NiB); [1] dinickel boride; [2] trinickel boride; [3] nickel boride; [4] dinickel silicide; [5] nickel disilicide; [6] dinickel phosphide; [7] nickel boron phosphide [8]",
+  "name": "nickel boride (NiB) [1]\ndinickel boride [2]\ntrinickel boride [3]\nnickel boride [4]\ndinickel silicide [5]\nnickel disilicide [6]\ndinickel phosphide [7]\nnickel boron phosphide [8]",
   "name_tr": "nikel borit (NiB; [1] dinikel borit; [2] trinikel borit; [3] nikel borit; [4] dinikel silisit; [5] nikel disilisit; [6] dinikel fosfit; [7] nikel boron fosfit; [8]",
-  "ec_no": "234-493-0",
+  "ec_no": "234-494-6",
   "index_no": "028-056-00-1",
-  "atp": "",
+  "atp": "ATP02",
   "notes": [],
   "classification": {
-    "hazards": [],
+    "hazards": [
+      {
+        "class": "Carc. 1A",
+        "h_code": "H350i"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372 **"
+      },
+      {
+        "class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
     "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
-    "signal": "",
-    "pictograms": [],
-    "h_codes": [],
-    "suppl_h": [
+    "signal": "Danger",
+    "pictograms": [
       "GHS08",
       "GHS07",
-      "GHS09",
-      "Thl"
-    ]
+      "GHS09"
+    ],
+    "h_codes": [
+      "H350i",
+      "H372 **",
+      "H317",
+      "H400",
+      "H410"
+    ],
+    "suppl_h": []
   }
 }

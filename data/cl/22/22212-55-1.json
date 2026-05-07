@@ -1,10 +1,10 @@
 {
   "cas": "22212-55-1",
-  "name": "ethyl N-benzoyl-N-(3,4- dichlorophenyl)-DL-alaninate; benzoylprop-ethyl (ISO)",
+  "name": "ethyl N-benzoyl-N-(3,4-dichlorophenyl)-DL-alaninate; benzoylprop-ethyl (ISO)",
   "name_tr": "etil-N-benzoil-N-(3,4- diklorofenil)-DL-alaninat; benzoilprop-etil (ISO)",
   "ec_no": "244-845-5",
   "index_no": "607-154-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

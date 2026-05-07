@@ -1,13 +1,11 @@
 {
   "cas": "111-43-3",
-  "name": "diisopropyl ether; [1] dipropyl ether [2]",
+  "name": "diisopropyl ether [1]\ndipropyl ether [2]",
   "name_tr": "diizopropil eter [1] dipropil eter [2];",
-  "ec_no": "203-560-6",
+  "ec_no": "203-869-6",
   "index_no": "603-045-00-X",
-  "atp": "",
-  "notes": [
-    "C"
-  ],
+  "atp": "CLP00",
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -32,9 +30,6 @@
       "H225",
       "H336"
     ],
-    "suppl_h": [
-      "EUH019",
-      "EUH066"
-    ]
+    "suppl_h": []
   }
 }

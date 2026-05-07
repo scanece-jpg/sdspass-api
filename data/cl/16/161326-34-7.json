@@ -1,10 +1,10 @@
 {
   "cas": "161326-34-7",
-  "name": "fenamidone (ISO); (S)-5-methyl-2-methylthio-5- phenyl-3-phenylamino-3,5- dihydroimidazol-4-one",
+  "name": "fenamidone (ISO); (S)-5-methyl-2-methylthio-5-phenyl-3-phenylamino-3,5-dihydroimidazol-4-one",
   "name_tr": "fenamidon (ISO); (S)-5-metil-2- metiltiyo-5-fenil-3-fenilamino- 3,5-dihidroimidazol-4-on",
   "ec_no": "",
   "index_no": "613-206-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

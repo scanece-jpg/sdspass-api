@@ -1,10 +1,10 @@
 {
   "cas": "109-66-0",
-  "name": "pentane; isopentane; 2-methylbutane",
+  "name": "pentane",
   "name_tr": "Pentan",
   "ec_no": "203-692-4",
   "index_no": "601-006-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "C"
   ],

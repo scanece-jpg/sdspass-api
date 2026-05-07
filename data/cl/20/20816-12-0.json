@@ -4,17 +4,17 @@
   "name_tr": "osmiyum tetraoksit; osmik asit",
   "ec_no": "244-058-7",
   "index_no": "076-001-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 2",
-        "h_code": "H330"
-      },
-      {
         "class": "Acute Tox. 1",
         "h_code": "H310"
+      },
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H330"
       },
       {
         "class": "Acute Tox. 2",
@@ -35,8 +35,8 @@
       "GHS05"
     ],
     "h_codes": [
-      "H330",
       "H310",
+      "H330",
       "H300",
       "H314"
     ],

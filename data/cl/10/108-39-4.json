@@ -1,10 +1,10 @@
 {
   "cas": "108-39-4",
-  "name": "m-cresol; [1] o-cresol; [2] p-cresol; [3] mix-cresol [4]",
+  "name": "m-cresol [1]\no-cresol [2]\np-cresol [3]\nmix-cresol  [4]",
   "name_tr": "m-kresol [1]; o-kresol [2]; p-kresol [3] kresol karışımı[4]",
-  "ec_no": "203-577-9",
+  "ec_no": "203-577-9 [1]\n202-423-8 [2]\n203-398-6 [3]\n215-293-2 [4]",
   "index_no": "604-004-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "C"
   ],

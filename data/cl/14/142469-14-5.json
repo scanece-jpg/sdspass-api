@@ -1,10 +1,10 @@
 {
   "cas": "142469-14-5",
-  "name": "tritosulfuron (ISO) (containing ≤ 0,02% AMTT); 1-[4-methoxy-6- (trifluoromethyl)-1,3,5-triazin-2- yl]-3-[2- (trifluoromethyl)benzenesulfony l]urea (containing ≤ 0,02% AMTT)",
+  "name": "tritosulfuron (ISO) (containing ≤ 0,02% AMTT); 1-[4-methoxy-6-(trifluoromethyl)-1,3,5-triazin-2-yl]-3-[2-(trifluoromethyl)benzenesulfonyl]urea (containing ≤ 0,02% AMTT)",
   "name_tr": "tritosülfuron (ISO) (≤ %0,02 AMTT içeren); 1-[4-metoksi-6-(triflorometil)- 1,3,5-triazin-2-il]-3-[2- (triflorometil)benzensülfonil]üre (≤ %0,02 AMTT içeren)",
-  "ec_no": "",
+  "ec_no": "-",
   "index_no": "613-271-00-0",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "618-26-8",
-  "name": "bis(N-methyl-N- phenylhydrazine)sulfate",
+  "name": "bis(N-methyl-N-phenylhydrazine)sulfate",
   "name_tr": "bis(N-metil-N- fenilhidrazin)sülfat",
   "ec_no": "423-170-1",
   "index_no": "612-169-00-3",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,12 +13,12 @@
         "h_code": "H225"
       },
       {
-        "class": "STOT RE 1",
-        "h_code": "H372"
-      },
-      {
         "class": "Acute Tox. 4",
         "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
       },
       {
         "class": "Eye Dam. 1",
@@ -51,8 +51,8 @@
     ],
     "h_codes": [
       "H225",
-      "H372",
       "H302",
+      "H372",
       "H318",
       "H317",
       "H400",

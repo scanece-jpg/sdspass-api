@@ -4,7 +4,7 @@
   "name_tr": "nikel bis(4-siklohekzilbütirat)",
   "ec_no": "223-463-2",
   "index_no": "028-025-00-2",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -48,13 +48,19 @@
     "scl_limits": [
       {
         "h_code": "H372",
-        "class": "STOT RE 1",
+        "class": "",
         "c_min": 1.0,
         "c_max": null
       },
       {
+        "h_code": "H373",
+        "class": "",
+        "c_min": 0.1,
+        "c_max": 1.0
+      },
+      {
         "h_code": "H317",
-        "class": "C <%1 Cilt Hassas. 1",
+        "class": "",
         "c_min": 0.01,
         "c_max": null
       }

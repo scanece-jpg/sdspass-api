@@ -1,10 +1,10 @@
 {
   "cas": "51338-27-3",
-  "name": "diclofop-methyl (ISO); methyl 2-(4-(2,4- dichlorophenoxy)phenoxy)propi onate; methyl (RS)-2-[4-(2,4- dichlorophenoxy)phenoxy]propi onate",
+  "name": "diclofop-methyl (ISO); methyl 2-(4-(2,4-dichlorophenoxy)phenoxy)propionate; methyl (RS)-2-[4-(2,4-dichlorophenoxy)phenoxy]propionate",
   "name_tr": "diklofop-metil(ISO) metil2-(4-(2,4- diklorofenoksi)fenoksi)propiyon at; metil(RS)-2-[4-(2,4- diklorofenoksi)fenoksi]propiyon at",
   "ec_no": "257-141-8",
   "index_no": "607-165-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

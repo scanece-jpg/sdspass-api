@@ -1,10 +1,10 @@
 {
   "cas": "94361-06-5",
-  "name": "cyproconazole (ISO); (2RS,3RS;2RS,3SR)-2-(4- chlorophenyl)-3-cyclopropyl-1- (1H-1,2,4-triazol-1-yl)butan-2-ol",
+  "name": "cyproconazole (ISO); (2RS,3RS;2RS,3SR)-2-(4-chlorophenyl)-3-cyclopropyl-1-(1H-1,2,4-triazol-1-yl)butan-2-ol",
   "name_tr": "siprokonazol (ISO); (2RS,3RS;2RS,3SR)-2-(4- klorofenil)-3-siklopropil-1-(1H- 1,2,4-triyazol-1-il)bütan-2-ol",
   "ec_no": "",
   "index_no": "650-032-00-X",
-  "atp": "",
+  "atp": "ATP10",
   "notes": [],
   "classification": {
     "hazards": [
@@ -18,20 +18,20 @@
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373(kara"
+        "h_code": "H373(liver)"
       },
       {
         "class": "Aquatic Acute 1",
-        "h_code": "ciğer)"
+        "h_code": "H400"
       },
       {
         "class": "Aquatic Chronic 1",
-        "h_code": "H400"
+        "h_code": "H410"
       }
     ],
     "m_factors": {
       "acute": 10,
-      "chronic": 1
+      "chronic": 10
     },
     "scl_limits": []
   },
@@ -45,9 +45,9 @@
     "h_codes": [
       "H360D",
       "H301",
-      "H373(kara",
-      "ciğer)",
-      "H400"
+      "H373(liver)",
+      "H400",
+      "H410"
     ],
     "suppl_h": []
   }

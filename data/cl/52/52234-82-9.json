@@ -1,10 +1,10 @@
 {
   "cas": "52234-82-9",
-  "name": "trimethylopropane tri(3- aziridinylpropanoate); (TAZ)",
+  "name": "trimethylopropane tri(3-aziridinylpropanoate); (TAZ)",
   "name_tr": "trimetilopropan tri(3- aziridinilpropanoat); (TAZ)",
   "ec_no": "257-765-0",
   "index_no": "613-316-00-4",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

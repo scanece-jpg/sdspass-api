@@ -1,10 +1,10 @@
 {
   "cas": "95737-68-1",
-  "name": "2-(1-methyl-2-(4- phenoxyphenoxy)ethoxy)pyridin e",
+  "name": "2-(1-methyl-2-(4-phenoxyphenoxy)ethoxy)pyridine",
   "name_tr": "2-(1-metil-2-(4- fenoksifenoksi)etoksi)piridin",
   "ec_no": "429-800-1",
   "index_no": "613-303-00-3",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

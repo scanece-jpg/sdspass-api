@@ -4,10 +4,22 @@
   "name_tr": "Kobalt",
   "ec_no": "231-158-0",
   "index_no": "027-001-00-9",
-  "atp": "",
+  "atp": "ATP14",
   "notes": [],
   "classification": {
     "hazards": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
+      },
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      },
+      {
+        "class": "Repr. 1B",
+        "h_code": "H360F"
+      },
       {
         "class": "Resp. Sens. 1",
         "h_code": "H334"
@@ -30,6 +42,9 @@
       "GHS08"
     ],
     "h_codes": [
+      "H350",
+      "H341",
+      "H360F",
       "H334",
       "H317",
       "H413"

@@ -37,12 +37,15 @@
         "h_code": "H411"
       }
     ],
-    "m_factors": {},
+    "m_factors": {
+      "acute": 1,
+      "chronic": 1
+    },
     "scl_limits": [
       {
         "h_code": "H317",
         "class": "",
-        "c_min": 15.0,
+        "c_min": 0.0015,
         "c_max": null
       }
     ]
@@ -68,7 +71,7 @@
     ]
   },
   "ate": {
-    "dermal": 1100.0,
-    "oral": 175.0
+    "oral": 175.0,
+    "dermal": 1100.0
   }
 }

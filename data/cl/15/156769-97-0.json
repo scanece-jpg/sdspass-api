@@ -1,10 +1,10 @@
 {
   "cas": "156769-97-0",
-  "name": "sodium and potassium 4-(3- aminopropylamino)-2,6-bis[3- (4-methoxy-2-sulfophenylazo)- 4-hydroxy-2-sulfo-7- naphthylamino]-1,3,5-triazine",
+  "name": "sodium and potassium 4-(3-aminopropylamino)-2,6-bis[3-(4-methoxy-2-sulfophenylazo)-4-hydroxy-2-sulfo-7-naphthylamino]-1,3,5-triazine",
   "name_tr": "sodyum ve potasyum-4-(3- aminopropilamino)-2,6-bis[3-(4- metoksi-2-sülfofenilazo)-4- hidroksi-2-sülfo-7-naftilamino]- 1,3,5-triazin",
   "ec_no": "416-280-6",
   "index_no": "609-067-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

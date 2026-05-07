@@ -1,10 +1,10 @@
 {
   "cas": "5826-76-6",
-  "name": "phosnichlor (ISO); O-4-chloro-3-nitrophenyl O,O- dimethyl phosphorothioate",
+  "name": "phosnichlor (ISO); O-4-chloro-3-nitrophenyl O,O-dimethyl phosphorothioate",
   "name_tr": "fosniklor (ISO); O-4-kloro-3- nitrofenil O,O-dimetil fosforotiyoat",
   "ec_no": "",
   "index_no": "015-043-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

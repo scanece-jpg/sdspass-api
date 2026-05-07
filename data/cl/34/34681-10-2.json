@@ -1,10 +1,10 @@
 {
   "cas": "34681-10-2",
-  "name": "butocarboxim (ISO); 3-(methylthio)-2-butanone O- [(methylamino)carbonyl]oxime",
+  "name": "butocarboxim (ISO); 3-(methylthio)-2-butanone O-[(methylamino)carbonyl]oxime",
   "name_tr": "bütokarboksim (ISO); 3- (metiltiyo)-2-bütanon O- [(metilamino)karbonil]oksim",
   "ec_no": "252-139-3",
   "index_no": "006-083-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

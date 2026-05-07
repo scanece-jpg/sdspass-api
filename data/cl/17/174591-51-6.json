@@ -1,10 +1,10 @@
 {
   "cas": "174591-51-6",
-  "name": "reaction mass of: tetradecanoic acid (42.5-47.5 %); poly(1-7)lactate esters of tetradecanoic acid (52.5-57.5 %)",
+  "name": "reaction mass of: tetradecanoic acid (42.5-47.5 %); poly(1-7)lactate esters of tetradecanoic acid (52.5-57.5 %)",
   "name_tr": "tepkime kütlesi: tetradekanoik asit (%42.5-47.5); tetradekanoik asit’in poli(1- 7)laktat esterleri (%52.5-57.5)",
   "ec_no": "412-580-6",
   "index_no": "607-386-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -5,9 +5,7 @@
   "ec_no": "203-777-6",
   "index_no": "601-037-00-0",
   "atp": "ATP22",
-  "notes": [
-    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
-  ],
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -23,6 +21,10 @@
         "h_code": "H304"
       },
       {
+        "class": "STOT SE 3",
+        "h_code": "H336"
+      },
+      {
         "class": "STOT RE 1",
         "h_code": "H372(nervous_system)"
       },
@@ -31,23 +33,12 @@
         "h_code": "H315"
       },
       {
-        "class": "STOT SE 3",
-        "h_code": "H336"
-      },
-      {
         "class": "Aquatic Chronic 2",
         "h_code": "H411"
       }
     ],
     "m_factors": {},
-    "scl_limits": [
-      {
-        "h_code": "H373",
-        "class": "STOT RE 2",
-        "c_min": 5.0,
-        "c_max": null
-      }
-    ]
+    "scl_limits": []
   },
   "labelling": {
     "signal": "Danger",
@@ -61,9 +52,9 @@
       "H225",
       "H361f",
       "H304",
+      "H336",
       "H372(nervous_system)",
       "H315",
-      "H336",
       "H411"
     ],
     "suppl_h": []

@@ -1,10 +1,10 @@
 {
   "cas": "106700-29-2",
-  "name": "pethoxamide (ISO); 2-chloro-N-(2-ethoxyethyl)-N- (2-methyl-1-phenylprop-1- enyl)acetamide",
+  "name": "pethoxamide (ISO); 2-chloro-N-(2-ethoxyethyl)-N-(2-methyl-1-phenylprop-1-enyl)acetamide",
   "name_tr": "petoksamid (ISO); 2-kloro-N-(2-etoksietil)-N-(2- metil-1-fenilprop-1- enil)asetamid",
-  "ec_no": "",
+  "ec_no": "-",
   "index_no": "616-145-00-3",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -44,8 +44,5 @@
       "H410"
     ],
     "suppl_h": []
-  },
-  "ate": {
-    "oral": 980.0
   }
 }

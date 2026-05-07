@@ -1,10 +1,10 @@
 {
   "cas": "63919-26-6",
-  "name": "dinocton; reaction mass of isomers: methyl 2-octyl-4,6-dinitrophenyl carbonate, methyl 4-octyl-2,6- dinitrophenyl carbonate",
+  "name": "dinocton; reaction mass of isomers: methyl 2-octyl-4,6-dinitrophenyl carbonate, methyl 4-octyl-2,6-dinitrophenyl carbonate",
   "name_tr": "dinokton; izomerlerin tepkime kütlesi: metil 2-oktil-4,6-dinitrofenil karbonat, metil4-oktil-2,6- dinitrofenil karbonat",
   "ec_no": "",
   "index_no": "609-027-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

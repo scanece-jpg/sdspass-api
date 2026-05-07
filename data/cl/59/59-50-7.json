@@ -1,10 +1,10 @@
 {
   "cas": "59-50-7",
-  "name": "chlorocresol; 4-chloro-m-cresol; 4-chloro-3-methylphenol",
+  "name": "chlorocresol;\n4-chloro-m-cresol;\n4-chloro-3-methylphenol",
   "name_tr": "klorokresol; 4-kloro-m-kresol; 4-kloro-3-metilfenol",
   "ec_no": "200-431-6",
   "index_no": "604-014-00-3",
-  "atp": "",
+  "atp": "ATP13",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,16 +13,16 @@
         "h_code": "H302"
       },
       {
+        "class": "STOT SE 3",
+        "h_code": "H335"
+      },
+      {
         "class": "Skin Corr. 1C",
         "h_code": "H314"
       },
       {
         "class": "Eye Dam. 1",
         "h_code": "H318"
-      },
-      {
-        "class": "STOT SE 3",
-        "h_code": "H335"
       },
       {
         "class": "Skin Sens. 1B",
@@ -52,9 +52,9 @@
     ],
     "h_codes": [
       "H302",
+      "H335",
       "H314",
       "H318",
-      "H335",
       "H317",
       "H400",
       "H412"

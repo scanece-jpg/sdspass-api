@@ -1,10 +1,10 @@
 {
   "cas": "65181-78-4",
-  "name": "N,N'-diphenyl-N,N'-bis(3- methylphenyl)-(1,1'-diphenyl)- 4,4'-diamine",
+  "name": "N,N'-diphenyl-N,N'-bis(3-methylphenyl)-(1,1'-diphenyl)-4,4'-diamine",
   "name_tr": "N,N'-difenil-N,N'-bis(3- metilfenil)-(1,1'-difenil)-4,4'- diamin",
   "ec_no": "413-810-8",
   "index_no": "612-165-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

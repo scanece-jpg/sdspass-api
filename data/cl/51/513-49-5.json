@@ -1,10 +1,10 @@
 {
   "cas": "513-49-5",
-  "name": "(S)-sec-butylamine; (S)-2-aminobutane; [1] (R)-sec-butylamine; (R)-2-aminobutane; [2] sec-butylamine; 2-aminobutane [3]",
+  "name": "(S)-sec-butylamine; (S)-2-aminobutane [1]\n(R)-sec-butylamine; (R)-2-aminobutane [2]\nsec-butylamine; 2-aminobutane  [3]",
   "name_tr": "(S)-sek-bütilamin; (S)-2-aminobütan; [1] (R)-2-aminobütan; [2] (R)-sek-bütilamin; sek-bütilamin; 2-aminobütan [3]",
-  "ec_no": "208-164-7",
+  "ec_no": "208-164-7 [1]\n236-232-6 [2]\n237-732-7 [3]",
   "index_no": "612-052-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "C"
   ],

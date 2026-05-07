@@ -1,10 +1,10 @@
 {
   "cas": "63562-33-4",
-  "name": "2-(10-oxo-10H-9-oxa-10- phosphaphenanthren-10- ylmethyl)succinic acid",
+  "name": "2-(10-oxo-10H-9-oxa-10-phosphaphenanthren-10-ylmethyl)succinic acid",
   "name_tr": "2-(10-okso-10H-9-oksa-10- fosfafenantren-10- ilmetil)süksinik asit",
   "ec_no": "426-480-5",
   "index_no": "607-614-00-3",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

@@ -4,7 +4,7 @@
   "name_tr": "metakrilik asit; 2-metilpropenoik asit",
   "ec_no": "201-204-4",
   "index_no": "607-088-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "D"
   ],
@@ -27,7 +27,7 @@
     "scl_limits": [
       {
         "h_code": "H335",
-        "class": "STOT SE 3",
+        "class": "",
         "c_min": 1.0,
         "c_max": null
       }

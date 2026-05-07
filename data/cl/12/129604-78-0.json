@@ -1,10 +1,10 @@
 {
   "cas": "129604-78-0",
-  "name": "N-(5-chloro-3-((4- (diethylamino)-2- methylphenyl)imino-4-methyl-6- oxo-1,4-cyclohexadien-1- yl)benzamide",
+  "name": "N-(5-chloro-3-((4-(diethylamino)-2-methylphenyl)imino-4-methyl-6-oxo-1,4-cyclohexadien-1-yl)benzamide",
   "name_tr": "N-(5-kloro-3-((4-(dietilamino)- 2-metilfenil)imino-4-metil-6- okso-1,4-siklohekzadien-1- il)benzamid",
   "ec_no": "413-200-1",
   "index_no": "616-082-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

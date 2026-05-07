@@ -1,10 +1,10 @@
 {
   "cas": "1836-75-5",
-  "name": "nitrofen (ISO); 2,4-dichlorophenyl 4- nitrophenyl ether",
+  "name": "nitrofen (ISO); 2,4-dichlorophenyl 4-nitrophenyl ether",
   "name_tr": "nitrofen (ISO); 2,4-diklorofenil-4-nitrofenileter",
   "ec_no": "217-406-0",
   "index_no": "609-040-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

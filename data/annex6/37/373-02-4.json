@@ -49,7 +49,10 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {},
+    "m_factors": {
+      "acute": 1,
+      "chronic": 1
+    },
     "scl_limits": [
       {
         "h_code": "H372",
@@ -60,13 +63,13 @@
       {
         "h_code": "H373",
         "class": "",
-        "c_min": 1.0,
-        "c_max": null
+        "c_min": 0.1,
+        "c_max": 1.0
       },
       {
         "h_code": "H317",
         "class": "",
-        "c_min": 1.0,
+        "c_min": 0.01,
         "c_max": null
       }
     ]

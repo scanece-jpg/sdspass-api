@@ -1,10 +1,10 @@
 {
   "cas": "104558-95-4",
-  "name": "reaction mass of: thiobis(4,1- phenylene)-S,S,S',S'- tetraphenyldisulfonium bishexafluorophosphate; diphenyl(4- phenylthiophenyl)sulfonium hexafluorophosphate; propylene carbonate",
+  "name": "reaction mass of: thiobis(4,1-phenylene)-S,S,S',S'-tetraphenyldisulfonium bishexafluorophosphate; diphenyl(4-phenylthiophenyl)sulfonium hexafluorophosphate; propylene carbonate",
   "name_tr": "tepkime kütlesi: tiyobis(4,1- fenilen)-S,S,S',S'- tetrafenildisülfonyumbishekzaflo rofosfat; difenil-(4- feniltiyofenil)sülfonyumhekzaflo rofosfat; propilen karbonat",
   "ec_no": "403-490-8",
   "index_no": "016-087-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

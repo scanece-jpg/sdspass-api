@@ -1,10 +1,10 @@
 {
   "cas": "118134-30-8",
-  "name": "spiroxamine (ISO); 8-tert-butyl-1,4- dioxaspiro[4.5]decan-2- ylmethyl(ethyl)(propyl)amine",
+  "name": "spiroxamine (ISO); 8-tert-butyl-1,4-dioxaspiro[4.5]decan-2-ylmethyl(ethyl)(propyl)amine",
   "name_tr": "spiroksamin (ISO); 8-ter-butil-1,4- dioksaspiro[4.5]dekan-2- ilmetil(etil)(propil)amin",
   "ec_no": "",
   "index_no": "612-150-00-X",
-  "atp": "",
+  "atp": "ATP10",
   "notes": [],
   "classification": {
     "hazards": [
@@ -26,19 +26,23 @@
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373"
+        "h_code": "H373(eye)"
       },
       {
-        "class": "Skin Sens. 1",
+        "class": "Skin Irrit. 2",
         "h_code": "H315"
       },
       {
-        "class": "Aquatic Acute 1",
+        "class": "Skin Sens. 1",
         "h_code": "H317"
       },
       {
-        "class": "Aquatic Chronic 1",
+        "class": "Aquatic Acute 1",
         "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
       }
     ],
     "m_factors": {
@@ -59,10 +63,11 @@
       "H332",
       "H312",
       "H302",
-      "H373",
+      "H373(eye)",
       "H315",
       "H317",
-      "H400"
+      "H400",
+      "H410"
     ],
     "suppl_h": []
   }

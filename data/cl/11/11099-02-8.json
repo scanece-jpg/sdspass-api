@@ -1,10 +1,10 @@
 {
   "cas": "11099-02-8",
-  "name": "nickel monoxide; [1] nickel oxide; [2] bunsenite [3]",
+  "name": "nickel monoxide [1]\nnickel oxide [2]\nbunsenite [3]",
   "name_tr": "Nikel monoksit; [1] nikel oksit; [2] bunsenit [3]",
-  "ec_no": "215-215-7",
+  "ec_no": "234-323-5",
   "index_no": "028-003-00-2",
-  "atp": "",
+  "atp": "ATP01",
   "notes": [],
   "classification": {
     "hazards": [
@@ -14,7 +14,7 @@
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372"
+        "h_code": "H372 **"
       },
       {
         "class": "Skin Sens. 1",
@@ -36,7 +36,7 @@
     ],
     "h_codes": [
       "H350i",
-      "H372",
+      "H372 **",
       "H317",
       "H413"
     ],

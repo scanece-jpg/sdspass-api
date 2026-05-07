@@ -1,10 +1,10 @@
 {
   "cas": "2212-67-1",
-  "name": "molinate (ISO); S-ethyl 1- perhydroazepinecarbothioate; S-ethyl perhydroazepine-1- carbothioate",
+  "name": "molinate (ISO); S-ethyl 1-perhydroazepinecarbothioate; S-ethyl perhydroazepine-1-carbothioate",
   "name_tr": "molinat (ISO); S-etil1- perhidroazepinekarbotiyoat; S- etilperhidroazepin-1-karbotiyoat",
   "ec_no": "218-661-0",
   "index_no": "613-051-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

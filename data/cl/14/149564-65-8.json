@@ -1,10 +1,10 @@
 {
   "cas": "149564-65-8",
-  "name": "trilithium bis(4-((4- (diethylamino)-2- hydroxyphenyl)azo)-3-hydroxy- 1-naphthalenesulfonato(3- ))chromate(3-)",
+  "name": "trilithium bis(4-((4-(diethylamino)-2-hydroxyphenyl)azo)-3-hydroxy-1-naphthalenesulfonato(3-))chromate(3-)",
   "name_tr": "trilityum bis(4-((4-(dietilamino)- 2-hidroksifenil)azo)-3-hidroksi- 1-naftalenesülfonato(3-))kromat (3-)",
   "ec_no": "414-290-5",
   "index_no": "611-115-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

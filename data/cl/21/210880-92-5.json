@@ -1,16 +1,24 @@
 {
   "cas": "210880-92-5",
-  "name": "clothianidin (ISO); 3-[(2-chloro-1,3-thiazol-5- yl)methyl]-2-methyl-1- nitroguanidine",
+  "name": "clothianidin (ISO); (E)-1-(2-chloro–1,3-thiazol-5-ylmethyl)-3-methyl-2-nitroguanidine",
   "name_tr": "klotianidin (ISO); 3-[(2-kloro-1,3-tiyazol-5- il)metil]-2-metil-1-nitroguanidin",
-  "ec_no": "",
+  "ec_no": "433-460-1",
   "index_no": "613-307-00-5",
-  "atp": "",
+  "atp": "ATP21",
   "notes": [],
   "classification": {
     "hazards": [
       {
+        "class": "Repr. 2",
+        "h_code": "H361f"
+      },
+      {
         "class": "Acute Tox. 4",
         "h_code": "H302"
+      },
+      {
+        "class": "STOT SE 1",
+        "h_code": "H370(nervous_system)"
       },
       {
         "class": "Aquatic Acute 1",
@@ -28,13 +36,16 @@
     "scl_limits": []
   },
   "labelling": {
-    "signal": "Warning",
+    "signal": "Danger",
     "pictograms": [
+      "GHS08",
       "GHS07",
       "GHS09"
     ],
     "h_codes": [
+      "H361f",
       "H302",
+      "H370(nervous_system)",
       "H400",
       "H410"
     ],

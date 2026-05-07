@@ -4,10 +4,9 @@
   "name_tr": "antrasen yağı, antrasen pastası, damıtma sonucu açığa çıkan hafif türler; antrasen yağı fraksiyonu; [Taş kömürü hafif sıcaklık ziftinden kristalleştirme ile elde edilen antrasen yağından antrasen damıtılmasından elde edilen kompleks hidrokarbon bileşimi. Yaklaşık 290 oC ile 340 oC (554 oF-644 oF) arasında kaynar. Büyük ölçüde üçmekrezli aromatikler ve bunların dihidro türevlerini içerir.]",
   "ec_no": "295-278-5",
   "index_no": "648-108-00-2",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
-    "J",
-    "M"
+    "J M"
   ],
   "classification": {
     "hazards": [

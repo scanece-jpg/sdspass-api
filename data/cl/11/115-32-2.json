@@ -1,10 +1,10 @@
 {
   "cas": "115-32-2",
-  "name": "dicofol (ISO); 2,2,2-trichloro-1,1-bis(4- chlorophenyl)ethanol",
+  "name": "dicofol (ISO); 2,2,2-trichloro-1,1-bis(4-chlorophenyl)ethanol",
   "name_tr": "dikofol (İSO); 2,2,2-trikloro-1,1-bis(4- klorofenil)etanol",
   "ec_no": "204-082-0",
   "index_no": "603-044-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

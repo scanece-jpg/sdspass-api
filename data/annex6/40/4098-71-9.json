@@ -44,13 +44,13 @@
       {
         "h_code": "H334",
         "class": "",
-        "c_min": 5.0,
+        "c_min": 0.5,
         "c_max": null
       },
       {
         "h_code": "H317",
         "class": "",
-        "c_min": 5.0,
+        "c_min": 0.5,
         "c_max": null
       }
     ]
@@ -72,8 +72,5 @@
       "H411"
     ],
     "suppl_h": []
-  },
-  "ate": {
-    "inhalation_dust": 0.03
   }
 }

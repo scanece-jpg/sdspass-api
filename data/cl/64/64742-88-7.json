@@ -1,20 +1,20 @@
 {
   "cas": "64742-88-7",
-  "name": "Solvent naphtha (petroleum), medium aliph.; Straight run kerosine; [A complex combination of hydrocarbons obtained from the distillation of crude oil or natural gasoline. It consists predominantly of saturated hydrocarbons having carbon numbers predominantly in the range of C9 through C12 and boiling in the range of approximately 140 °C to 220 °C (284 °F to 428 °F).]",
+  "name": "solvent naphtha (petroleum), medium aliph.; Straight run kerosine; [A complex combination of hydrocarbons obtained from the distillation of crude oil or natural gasoline. It consists predominantly of saturated hydrocarbons having carbon numbers predominantly in the range of C9 through C12 and boiling in the range of approximately 140 °C to 220 °C (284 °F to 428 °F).]",
   "name_tr": "Çözücü nafta (petrol), orta alifatik; normal üretim kerosin; [Ham petrolün veya doğal gazolinin damıtılması ile üretilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla, C9 ila C12 aralığında karbon sayısına sahip ve yaklaşık 140°C ila 220°C (-284°F-428°F) aralığında kaynayan doymuş hidrokarbonlardan oluşur.]",
   "ec_no": "265-191-7",
   "index_no": "649-405-00-X",
-  "atp": "",
+  "atp": "ATP5",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "STOT RE 1",
-        "h_code": "H372(mer"
+        "class": "Asp. Tox. 1",
+        "h_code": "H304"
       },
       {
-        "class": "Asp. Tox. 1",
-        "h_code": "kezi"
+        "class": "STOT RE 1",
+        "h_code": "H372(central_nervous_system)"
       }
     ],
     "m_factors": {},
@@ -26,8 +26,8 @@
       "GHS08"
     ],
     "h_codes": [
-      "H372(mer",
-      "kezi"
+      "H304",
+      "H372(central_nervous_system)"
     ],
     "suppl_h": []
   }

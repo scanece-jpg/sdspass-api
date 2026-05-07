@@ -1,10 +1,10 @@
 {
   "cas": "38260-54-7",
-  "name": "etrimfos (ISO); O-6-ethoxy-2-ethylpyrimidin-4- yl O,O- dimethylphosphorothioate",
+  "name": "etrimfos (ISO); O-6-ethoxy-2-ethylpyrimidin-4-yl O,O-dimethylphosphorothioate",
   "name_tr": "Etrimfos (ISO); O-6-etoksi-2- etilpirimidin-4-il-O,O- dimetilfosforotiyoat",
   "ec_no": "253-855-9",
   "index_no": "015-122-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "89415-87-2",
-  "name": "1,3-dichloro-5-ethyl-5- methylimidazolidine-2,4-dione",
+  "name": "1,3-dichloro-5-ethyl-5-methylimidazolidine-2,4-dione",
   "name_tr": "1,3-dikloro-5-etil-5- metilimidazolidin-2,4-dion",
   "ec_no": "401-570-7",
   "index_no": "613-075-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -17,12 +17,12 @@
         "h_code": "H331"
       },
       {
-        "class": "Skin Corr. 1B",
-        "h_code": "H314"
-      },
-      {
         "class": "Acute Tox. 4",
         "h_code": "H302"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
       },
       {
         "class": "Skin Sens. 1",
@@ -47,8 +47,8 @@
     "h_codes": [
       "H271",
       "H331",
-      "H314",
       "H302",
+      "H314",
       "H317",
       "H400"
     ],

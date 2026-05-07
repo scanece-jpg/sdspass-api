@@ -1,10 +1,10 @@
 {
   "cas": "92045-29-9",
-  "name": "Gas oils (petroleum), thermal- cracked, hydrodesulfurized; Cracked gasoil",
+  "name": "Gas oils (petroleum), thermal-cracked, hydrodesulfurized; Cracked gasoil",
   "name_tr": "Gazyağları (petrol), ısıl- parçalanmış, hidrojenle kükürtü giderilmiş; parçalanmış gaz yağı",
   "ec_no": "295-411-7",
   "index_no": "649-444-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "24602-86-6",
-  "name": "tridemorph (ISO); 2,6-dimethyl-4- tridecylmorpholine",
+  "name": "tridemorph (ISO); 2,6-dimethyl-4-tridecylmorpholine",
   "name_tr": "tridemorf (ISO); 2,6-dimetil-4-tridesilmorfolin",
   "ec_no": "246-347-3",
   "index_no": "613-020-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

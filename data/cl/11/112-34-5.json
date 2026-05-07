@@ -4,7 +4,7 @@
   "name_tr": "2-(2-bütoksietoksi)etanol; dietilen glikol monobütil eter",
   "ec_no": "203-961-6",
   "index_no": "603-096-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -14,20 +14,7 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": [
-      {
-        "h_code": "H302",
-        "class": "Acute Tox. 4 (Oral)",
-        "c_min": 5.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H319",
-        "class": "Eye Irrit. 2",
-        "c_min": 10.0,
-        "c_max": null
-      }
-    ]
+    "scl_limits": []
   },
   "labelling": {
     "signal": "Warning",

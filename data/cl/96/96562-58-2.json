@@ -1,10 +1,10 @@
 {
   "cas": "96562-58-2",
-  "name": "methyl (R)-2-(4- hydroxyphenoxy)propionate",
+  "name": "methyl (R)-2-(4-hydroxyphenoxy)propionate",
   "name_tr": "metil-(R)-2-(4-hidroksifenoksi)- propiyonat",
   "ec_no": "411-950-4",
   "index_no": "607-361-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

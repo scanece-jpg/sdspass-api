@@ -1,10 +1,10 @@
 {
   "cas": "85509-19-9",
-  "name": "flusilazole (ISO); bis(4-fluorophenyl)(methyl)(1H- 1,2,4-triazol-1-ylmethyl)silane",
+  "name": "flusilazole (ISO); bis(4-fluorophenyl)(methyl)(1H-1,2,4-triazol-1-ylmethyl)silane",
   "name_tr": "flusilazol (ISO); bis(4-florofenil)(metil)(1H- 1,2,4-triazol-1-ilmetil)silan",
   "ec_no": "",
   "index_no": "014-017-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -4,7 +4,7 @@
   "name_tr": "Balçık ve çamur, bakır elektrolitik rafine, bakırdan arındırılmış, nikel sülfat",
   "ec_no": "295-859-3",
   "index_no": "028-014-00-2",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -21,16 +21,16 @@
         "h_code": "H360D"
       },
       {
-        "class": "STOT RE 1",
-        "h_code": "H372"
-      },
-      {
         "class": "Acute Tox. 4",
         "h_code": "H332"
       },
       {
         "class": "Acute Tox. 4",
         "h_code": "H302"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
       },
       {
         "class": "Skin Irrit. 2",
@@ -60,13 +60,19 @@
     "scl_limits": [
       {
         "h_code": "H372",
-        "class": "STOT RE 1",
+        "class": "",
         "c_min": 1.0,
         "c_max": null
       },
       {
+        "h_code": "H373",
+        "class": "",
+        "c_min": 0.1,
+        "c_max": 1.0
+      },
+      {
         "h_code": "H317",
-        "class": "C <%1 Cilt Hassas. 1",
+        "class": "",
         "c_min": 0.01,
         "c_max": null
       }
@@ -83,9 +89,9 @@
       "H350i",
       "H341",
       "H360D",
-      "H372",
       "H332",
       "H302",
+      "H372",
       "H315",
       "H334",
       "H317",

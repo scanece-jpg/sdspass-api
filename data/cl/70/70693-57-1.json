@@ -1,10 +1,10 @@
 {
   "cas": "70693-57-1",
-  "name": "N-[3-[(2- acetyloxy)ethyl](phenyl- methyl)amino]-4- methoxyphenylacetamide",
+  "name": "N-[3-[(2-acetyloxy)ethyl](phenyl-methyl)amino]-4-methoxyphenylacetamide",
   "name_tr": "N-[3-[(2-asetiloksi)etil(fenil- metil)amino]-4-metoksifenil- asetamid",
   "ec_no": "411-590-8",
   "index_no": "616-062-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

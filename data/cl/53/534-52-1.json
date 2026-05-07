@@ -4,7 +4,7 @@
   "name_tr": "DNOK (ISO); 4,6-dinitro-o-kresol",
   "ec_no": "208-601-1",
   "index_no": "609-020-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,12 +13,12 @@
         "h_code": "H341"
       },
       {
-        "class": "Acute Tox. 2",
-        "h_code": "H330"
-      },
-      {
         "class": "Acute Tox. 1",
         "h_code": "H310"
+      },
+      {
+        "class": "Acute Tox. 2",
+        "h_code": "H330"
       },
       {
         "class": "Acute Tox. 2",
@@ -59,8 +59,8 @@
     ],
     "h_codes": [
       "H341",
-      "H330",
       "H310",
+      "H330",
       "H300",
       "H315",
       "H318",

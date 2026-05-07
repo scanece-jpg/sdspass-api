@@ -4,7 +4,7 @@
   "name_tr": "allil alkol",
   "ec_no": "203-470-7",
   "index_no": "603-015-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -25,16 +25,16 @@
         "h_code": "H301"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H335"
       },
       {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Aquatic Acute 1",
@@ -56,9 +56,9 @@
       "H331",
       "H311",
       "H301",
-      "H319",
       "H335",
       "H315",
+      "H319",
       "H400"
     ],
     "suppl_h": []

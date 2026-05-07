@@ -1,20 +1,20 @@
 {
   "cas": "85665-97-0",
-  "name": "tetrasodium 5-benzamido-3-(5- (4-fluoro-6-(1-sulphonato-2- naphthylamino)-1,3,5-triazin-2- ylamino)-2- sulphonatophenylazo)-4- hydroxynaphthalene-2,7- disulphonate",
+  "name": "tetrasodium 5-benzamido-3-(5-(4-fluoro-6-(1-sulphonato-2-naphthylamino)-1,3,5-triazin-2-ylamino)-2-sulphonatophenylazo)-4-hydroxynaphthalene-2,7- disulphonate",
   "name_tr": "Tetrasodyum 5-benzamido-3-(5- (4-floro-6-(1-sülfonato-2- naftilamino)-1,3,5-triazin-2- ilamino)-2-sülfonatofenilazo)-4- hidroksinaftalin-2,7- disülfonat",
   "ec_no": "400-790-0",
   "index_no": "016-042-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Skin Sens. 1",
@@ -30,8 +30,8 @@
       "GHS07"
     ],
     "h_codes": [
-      "H319",
       "H315",
+      "H319",
       "H317"
     ],
     "suppl_h": []

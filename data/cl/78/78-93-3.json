@@ -4,7 +4,7 @@
   "name_tr": "bütanon; etil metil keton",
   "ec_no": "201-159-0",
   "index_no": "606-002-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,29 +13,16 @@
         "h_code": "H225"
       },
       {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H336"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       }
     ],
     "m_factors": {},
-    "scl_limits": [
-      {
-        "h_code": "H319",
-        "class": "Eye Irrit. 2",
-        "c_min": 10.0,
-        "c_max": null
-      },
-      {
-        "h_code": "H336",
-        "class": "STOT SE 3",
-        "c_min": 20.0,
-        "c_max": null
-      }
-    ]
+    "scl_limits": []
   },
   "labelling": {
     "signal": "Danger",
@@ -45,8 +32,8 @@
     ],
     "h_codes": [
       "H225",
-      "H319",
-      "H336"
+      "H336",
+      "H319"
     ],
     "suppl_h": [
       "EUH066"

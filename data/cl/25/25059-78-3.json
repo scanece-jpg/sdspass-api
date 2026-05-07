@@ -1,10 +1,10 @@
 {
   "cas": "25059-78-3",
-  "name": "sodium 3,6-dichloro-o-anisate; [1] 3,6-dichloro-o-anisic acid, compound with 2,2'- iminodiethanol (1:1); [2] 3,6-dichloro-o-anisic acid, compound with 2-aminoethanol (1:1) [3]",
+  "name": "sodium 3,6-dichloro-o-anisate [1]\n3,6-dichloro-o-anisic acid, compound with 2,2'-iminodiethanol (1:1) [2]\n3,6-dichloro-o-anisic acid, compound with 2-aminoethanol (1:1) [3]",
   "name_tr": "sodyum 3,6-dikloro-o-anisat; [1] 3,6-dikloro-o-anisik asit, ile 2,2'- iminodietanol bileşimi (1:1);[2] 3,6-dikloro-o-anisik asit, ile 2- aminoetanol bileşimi(1:1) [3]",
-  "ec_no": "217-846-3",
+  "ec_no": "246-590-5",
   "index_no": "607-243-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

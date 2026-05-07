@@ -1,10 +1,10 @@
 {
   "cas": "2310-17-0",
-  "name": "phosalone (ISO); S-(6-chloro-2-oxobenzoxazolin- 3-ylmethyl) O,O-diethyl phosphorodithioate",
+  "name": "phosalone (ISO); S-(6-chloro-2-oxobenzoxazolin-3-ylmethyl) O,O-diethyl phosphorodithioate",
   "name_tr": "fosalon (ISO); S-(6-kloro-2-okso- benzoksazolin-3-ilmetil) O,O- dimetil fosforoditiyoat",
   "ec_no": "218-996-2",
   "index_no": "015-067-00-1",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

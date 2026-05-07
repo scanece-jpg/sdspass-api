@@ -1,10 +1,10 @@
 {
   "cas": "167944-94-7",
-  "name": "(S)-1-[2-tert-butoxycarbonyl-3- (2-methoxyethoxy)propyl]-1- cyclopentanecarboxylic acid, cyclohexylamine salt",
+  "name": "(S)-1-[2-tert-butoxycarbonyl-3-(2-methoxyethoxy)propyl]-1-cyclopentanecarboxylic acid, cyclohexylamine salt",
   "name_tr": "(S)-1-[2-ter-bütoksikarbonil-3- (2-metoksietoksi)propil]-1- siklopentankarboksilik asit, siklohekzilamin tuzu",
   "ec_no": "425-510-4",
   "index_no": "607-532-00-8",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

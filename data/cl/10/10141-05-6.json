@@ -4,9 +4,9 @@
   "name_tr": "kobalt dinitrat",
   "ec_no": "233-402-1",
   "index_no": "027-009-00-2",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [
-    "1.0"
+    "1"
   ],
   "classification": {
     "hazards": [
@@ -46,7 +46,7 @@
     "scl_limits": [
       {
         "h_code": "H350i",
-        "class": "Carc. 1B",
+        "class": "",
         "c_min": 0.01,
         "c_max": null
       }

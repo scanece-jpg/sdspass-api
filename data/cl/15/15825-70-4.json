@@ -1,10 +1,10 @@
 {
   "cas": "15825-70-4",
-  "name": "mannitol hexanitrate; nitromannite; [>40 % phlegmatiser]",
+  "name": "mannitol hexanitrate; nitromannite; [>40 % phlegmatiser]",
   "name_tr": "mannitol hekzanitrat; nitromannit [>%40 % flegmatizer]",
   "ec_no": "239-924-6",
   "index_no": "603-036-01-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "76-44-8",
-  "name": "heptachlor (ISO); 1,4,5,6,7,8,8-heptachloro- 3a,4,7,7a-tetrahydro-4,7- methanoindene",
+  "name": "heptachlor (ISO); 1,4,5,6,7,8,8-heptachloro-3a,4,7,7a-tetrahydro-4,7-methanoindene",
   "name_tr": "heptaklor (ISO); 1,4,5,6,7,8,8-heptakloro- 3a,4,7,7a-tetrahidro-4,7- metanoinden",
   "ec_no": "200-962-3",
   "index_no": "602-046-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

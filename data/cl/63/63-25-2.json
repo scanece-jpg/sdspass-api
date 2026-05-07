@@ -4,7 +4,7 @@
   "name_tr": "karbaril (ISO); 1-naftil metilkarbamat",
   "ec_no": "200-555-0",
   "index_no": "006-011-00-7",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -26,8 +26,7 @@
       }
     ],
     "m_factors": {
-      "acute": 100,
-      "chronic": 100
+      "acute": 100
     },
     "scl_limits": []
   },

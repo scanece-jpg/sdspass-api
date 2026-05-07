@@ -1,10 +1,10 @@
 {
   "cas": "144651-06-9",
-  "name": "oxasulfuron (ISO); oxetan-3-yl 2-[(4,6- dimethylpyrimidin-2-yl)- carbamoylsulfamoyl]benzoate",
+  "name": "oxasulfuron (ISO); oxetan-3-yl 2-[(4,6-dimethylpyrimidin-2-yl)-carbamoylsulfamoyl]benzoate",
   "name_tr": "oksasülfüron (ISO); oksetan-3-il-2-[(4,6- dimetilpirimidin-2-il]- karbamoilsülfamoil]benzoat",
   "ec_no": "",
   "index_no": "616-112-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

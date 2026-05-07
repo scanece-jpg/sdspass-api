@@ -1,26 +1,23 @@
 {
   "cas": "7067-44-9",
-  "name": "tetracyclohexylstannane; [1] chlorotricyclohexylstannane; [2] butyltricyclohexylstannane [3]",
+  "name": "tetracyclohexylstannane [1]\nchlorotricyclohexylstannane [2]\nbutyltricyclohexylstannane [3]",
   "name_tr": "Tetrasiklohekzilstannan [1]; Klorotrisiklohekzilstannan [2]; Butiltrisiklohekzilstannan [3]",
-  "ec_no": "215-910-5",
+  "ec_no": "230-358-5",
   "index_no": "050-012-00-5",
-  "atp": "",
-  "notes": [
-    "A",
-    "1"
-  ],
+  "atp": "CLP00",
+  "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4",
+        "class": "Acute Tox. 4 *",
         "h_code": "H332"
       },
       {
-        "class": "Acute Tox. 4",
+        "class": "Acute Tox. 4 *",
         "h_code": "H312"
       },
       {
-        "class": "Acute Tox. 4",
+        "class": "Acute Tox. 4 *",
         "h_code": "H302"
       },
       {

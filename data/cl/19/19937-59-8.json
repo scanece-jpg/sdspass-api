@@ -1,10 +1,10 @@
 {
   "cas": "19937-59-8",
-  "name": "metoxuron (ISO); 3-(3-chloro-4-methoxyphenyl)- 1,1-dimethylurea",
+  "name": "metoxuron (ISO); 3-(3-chloro-4-methoxyphenyl)-1,1-dimethylurea",
   "name_tr": "metoksuron; 3-(3-kloro-4-metoksifenil)-1,1- dimetilüre",
   "ec_no": "243-433-2",
   "index_no": "006-033-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

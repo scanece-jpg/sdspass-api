@@ -1,10 +1,10 @@
 {
   "cas": "157661-93-3",
-  "name": "2-methyl-4-(1,1-dimethylethyl)- 6-(1-methyl-pentadecyl)-phenol",
+  "name": "2-methyl-4-(1,1-dimethylethyl)-6-(1-methyl-pentadecyl)-phenol",
   "name_tr": "2-metil-4-(1,1-dimetiletil)-6-(1- metil-pentadesil)-fenol",
   "ec_no": "410-760-9",
   "index_no": "604-053-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

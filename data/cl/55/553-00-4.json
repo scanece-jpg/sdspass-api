@@ -1,10 +1,10 @@
 {
   "cas": "553-00-4",
-  "name": "salts of 2-naphthylamine",
+  "name": "salts of 2-naphthylamine [1]\nsalts of 2-naphthylamine [2]",
   "name_tr": "2-naftilamin tuzları",
-  "ec_no": "209-030-0",
+  "ec_no": "209-030-0 [1]\n210-313-6 [2]",
   "index_no": "612-071-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "A"
   ],

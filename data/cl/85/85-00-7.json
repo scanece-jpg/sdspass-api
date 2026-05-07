@@ -1,10 +1,10 @@
 {
   "cas": "85-00-7",
-  "name": "diquat dibromide; [1] diquat dichloride; [2] 6,7-dihydrodipyrido[1,2-α:2',1'- c]pyrazinediylium dihydroxide [3]",
+  "name": "diquat dibromide [1]\ndiquat dichloride [2]\n6,7-dihydrodipyrido[1,2-α:2',1'-c]pyrazinediylium dihydroxide  [3]",
   "name_tr": "diquat dibromür; [1] diquat diklorür; [2] 6,7-dihidrodipirido[1,2-α:2',1'- c]pirazindiilyum dihidroksit [3]",
-  "ec_no": "201-579-4",
+  "ec_no": "201-579-4 [1]\n223-714-6 [2]\n301-467-6 [3]",
   "index_no": "613-089-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -13,24 +13,24 @@
         "h_code": "H330"
       },
       {
-        "class": "STOT RE 1",
-        "h_code": "H372"
-      },
-      {
         "class": "Acute Tox. 4",
         "h_code": "H302"
-      },
-      {
-        "class": "Eye Irrit. 2",
-        "h_code": "H319"
       },
       {
         "class": "STOT SE 3",
         "h_code": "H335"
       },
       {
+        "class": "STOT RE 1",
+        "h_code": "H372"
+      },
+      {
         "class": "Skin Irrit. 2",
         "h_code": "H315"
+      },
+      {
+        "class": "Eye Irrit. 2",
+        "h_code": "H319"
       },
       {
         "class": "Skin Sens. 1",
@@ -57,11 +57,11 @@
     ],
     "h_codes": [
       "H330",
-      "H372",
       "H302",
-      "H319",
       "H335",
+      "H372",
       "H315",
+      "H319",
       "H317",
       "H400",
       "H410"

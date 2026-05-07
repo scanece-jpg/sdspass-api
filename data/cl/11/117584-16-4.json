@@ -1,10 +1,10 @@
 {
   "cas": "117584-16-4",
-  "name": "3-(2,6-dichloro-4- nitrophenylazo)-1-methyl-2- phenylindole",
+  "name": "3-(2,6-dichloro-4-nitrophenylazo)-1-methyl-2-phenylindole",
   "name_tr": "3-(2,6-dikloro-4-nitrofenilazo)- 1-metil-2-fenilindol",
   "ec_no": "406-280-4",
   "index_no": "611-076-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

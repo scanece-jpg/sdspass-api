@@ -1,10 +1,10 @@
 {
   "cas": "168612-06-4",
-  "name": "N,N-dibutyl-(2,5-dihydro-5- thioxo-1H-tetrazol-1- yl)acetamide",
+  "name": "N,N-dibutyl-(2,5-dihydro-5-thioxo-1H-tetrazol-1-yl)acetamide",
   "name_tr": "N,N-dibutil-(2,5-dihidro-5- tiokso-1H-tetrazol-1-il)asetamid",
   "ec_no": "418-290-6",
   "index_no": "616-167-00-3",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

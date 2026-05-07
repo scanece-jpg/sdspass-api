@@ -1,10 +1,10 @@
 {
   "cas": "2051-79-8",
-  "name": "N5,N5-diethyltoluene-2,5- diamine monohydrochloride; 4-diethylamino-2-methylaniline monohydrochloride",
+  "name": "N5,N5-diethyltoluene-2,5-diamine monohydrochloride; 4-diethylamino-2-methylaniline monohydrochloride",
   "name_tr": "N5,N5-dietiltoluen-2,5-diamin monohidroklorür; 4-dietilamino- 2-metilanilin monohidroklorür",
   "ec_no": "218-130-3",
   "index_no": "612-143-00-1",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "1333-22-8",
-  "name": "tetracopper hexahydroxide sulphate; [1] tetracopper hexahydroxide sulphate hydrate [2]",
+  "name": "tetracopper hexahydroxide sulphate [1]\ntetracopper hexahydroxide sulphate hydrate [2]",
   "name_tr": "tetrabakır hekzahidroksit sülfat; [1] tetrabakır hekzahidroksit sülfat hidrat [2]",
-  "ec_no": "215-582-3",
+  "ec_no": "215-582-3 [1]\n215-582-3 [2]",
   "index_no": "029-018-00-7",
-  "atp": "",
+  "atp": "ATP17",
   "notes": [],
   "classification": {
     "hazards": [

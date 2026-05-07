@@ -1,10 +1,10 @@
 {
   "cas": "612-82-8",
-  "name": "salts of 4,4'-bi-o-toluidine; salts of 3,3'-dimethylbenzidine; salts of o-tolidine",
+  "name": "salts of 4,4'-bi-o-toluidine; salts of 3,3'-dimethylbenzidine; salts of o-tolidine [1]\nsalts of 4,4'-bi-o-toluidine; salts of 3,3'-dimethylbenzidine; salts of o-tolidine [2]\nsalts of 4,4'-bi-o-toluidine; salts of 3,3'-dimethylbenzidine; salts of o-tolidine [3]",
   "name_tr": "4,4'-bi-o-toluidin tuzları; 3,3’-dimetilbenzidin tuzları; o-toluidin tuzları",
-  "ec_no": "210-322-5",
+  "ec_no": "210-322-5 [1]\n265-294-7 [2]\n277-985-0 [3]",
   "index_no": "612-081-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "A"
   ],

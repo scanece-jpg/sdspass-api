@@ -1,10 +1,10 @@
 {
   "cas": "957-51-7",
-  "name": "diphenamid (ISO); N,N-dimethyl-2,2- diphenylacetamide",
+  "name": "diphenamid (ISO); N,N-dimethyl-2,2-diphenylacetamide",
   "name_tr": "difenamid (ISO); N,N-dimetil-2,2-difenilasetamid",
   "ec_no": "213-482-4",
   "index_no": "616-007-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

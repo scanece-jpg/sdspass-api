@@ -4,7 +4,7 @@
   "name_tr": "4-tert-butilfenol",
   "ec_no": "202-679-0",
   "index_no": "604-090-00-8",
-  "atp": "",
+  "atp": "ATP13",
   "notes": [],
   "classification": {
     "hazards": [
@@ -26,7 +26,6 @@
       }
     ],
     "m_factors": {
-      "acute": 1,
       "chronic": 1
     },
     "scl_limits": []

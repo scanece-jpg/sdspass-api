@@ -4,7 +4,7 @@
   "name_tr": "metilsiklohekzan",
   "ec_no": "203-624-3",
   "index_no": "601-018-00-7",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
@@ -17,12 +17,12 @@
         "h_code": "H304"
       },
       {
-        "class": "Skin Irrit. 2",
-        "h_code": "H315"
-      },
-      {
         "class": "STOT SE 3",
         "h_code": "H336"
+      },
+      {
+        "class": "Skin Irrit. 2",
+        "h_code": "H315"
       },
       {
         "class": "Aquatic Chronic 2",
@@ -43,8 +43,8 @@
     "h_codes": [
       "H225",
       "H304",
-      "H315",
       "H336",
+      "H315",
       "H411"
     ],
     "suppl_h": []

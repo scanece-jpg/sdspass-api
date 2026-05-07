@@ -4,7 +4,7 @@
   "name_tr": "nikel diklorür",
   "ec_no": "231-743-0",
   "index_no": "028-011-00-6",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
@@ -60,19 +60,25 @@
     "scl_limits": [
       {
         "h_code": "H372",
-        "class": "BHOT Tekrar.Mrz.. 1",
+        "class": "",
         "c_min": 1.0,
         "c_max": null
       },
       {
+        "h_code": "H373",
+        "class": "",
+        "c_min": 0.1,
+        "c_max": 1.0
+      },
+      {
         "h_code": "H315",
-        "class": "C <%1 Cilt Tah. 2",
+        "class": "",
         "c_min": 20.0,
         "c_max": null
       },
       {
         "h_code": "H317",
-        "class": "Skin Sens. 1",
+        "class": "",
         "c_min": 0.01,
         "c_max": null
       }

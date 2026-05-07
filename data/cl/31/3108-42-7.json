@@ -1,13 +1,11 @@
 {
   "cas": "3108-42-7",
-  "name": "nonadecafluorodecanoic acid; [1] ammonium nonadecafluorodecanoate; [2] sodium nonadecafluorodecanoate [3]",
+  "name": "nonadecafluorodecanoic acid [1]\nammonium nonadecafluorodecanoate [2]\nsodium nonadecafluorodecanoate [3]",
   "name_tr": "nonadekaflorodekanoik asit; [1] amounyum nonadeka florodekanoat; [2] sodyum nonadeka florodekanoat; [3]",
-  "ec_no": "206-400-3",
+  "ec_no": "221-470-5",
   "index_no": "607-720-00-X",
   "atp": "ATP10",
-  "notes": [
-    "ATP22 düzeltmesi: Annex VI verisi ışığında daha sıkı sınıflandırmaya güncellendi."
-  ],
+  "notes": [],
   "classification": {
     "hazards": [
       {
@@ -19,8 +17,8 @@
         "h_code": "H360Df"
       },
       {
-        "class": "Repr. 1B",
-        "h_code": "H360Df"
+        "class": "Lact.",
+        "h_code": "H362"
       }
     ],
     "m_factors": {},
@@ -34,7 +32,7 @@
     "h_codes": [
       "H351",
       "H360Df",
-      "H360Df"
+      "H362"
     ],
     "suppl_h": []
   }

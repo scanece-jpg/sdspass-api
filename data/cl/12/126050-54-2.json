@@ -1,10 +1,10 @@
 {
   "cas": "126050-54-2",
-  "name": "2,2'-methylenebis(4,6-di-tert- butyl-phenyl)-2-ethylhexyl phosphite",
+  "name": "2,2'-methylenebis(4,6-di-tert-butyl-phenyl)-2-ethylhexyl phosphite",
   "name_tr": "2,2'-metilenbis(4,6-di-ter- bütilfenil)-2-etilhekzilfosfit",
   "ec_no": "418-310-3",
   "index_no": "607-496-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

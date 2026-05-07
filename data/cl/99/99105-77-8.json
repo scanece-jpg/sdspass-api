@@ -1,10 +1,10 @@
 {
   "cas": "99105-77-8",
-  "name": "sulcotrione (ISO); 2-[2-chloro-4- (methylsulfonyl)benzoyl]cycloh exane-1,3- dione",
+  "name": "sulcotrione (ISO); 2-[2-chloro-4-(methylsulfonyl)benzoyl]cyclohexane-1,3-dione",
   "name_tr": "sulcotrione (ISO); 2-[2-chloro-4- (methylsulfonyl)benzoyl]cycloh exane-1,3- dione",
   "ec_no": "",
   "index_no": "606-145-00-1",
-  "atp": "",
+  "atp": "ATP5",
   "notes": [],
   "classification": {
     "hazards": [
@@ -14,24 +14,24 @@
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373(böbr"
+        "h_code": "H373(kidneys)"
       },
       {
         "class": "Skin Sens. 1A",
-        "h_code": "ek)"
-      },
-      {
-        "class": "Aquatic Acute 1",
         "h_code": "H317"
       },
       {
-        "class": "Aquatic Chronic 1",
+        "class": "Aquatic Acute 1",
         "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
       }
     ],
     "m_factors": {
       "acute": 1,
-      "chronic": 10
+      "chronic": 1
     },
     "scl_limits": []
   },
@@ -44,10 +44,10 @@
     ],
     "h_codes": [
       "H361d",
-      "H373(böbr",
-      "ek)",
+      "H373(kidneys)",
       "H317",
-      "H400"
+      "H400",
+      "H410"
     ],
     "suppl_h": []
   }

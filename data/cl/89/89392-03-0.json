@@ -1,10 +1,10 @@
 {
   "cas": "89392-03-0",
-  "name": "phenyl N-(4,6- dimethoxypyrimidin-2- yl)carbamate",
+  "name": "phenyl N-(4,6-dimethoxypyrimidin-2-yl)carbamate",
   "name_tr": "fenil-N-(4,6-dimetoksipirimidin- 2-il)karbamat",
   "ec_no": "406-600-2",
   "index_no": "613-152-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "66230-04-4",
-  "name": "esfenvalerate (ISO); (S)-α-cyano-3-phenoxy-benzyl- (S)-2-(4-chlorophenyl)-3- methylbutyrate",
+  "name": "esfenvalerate (ISO);\n(S)-α-cyano- 3-phenoxybenzyl-(S)- 2-(4-chlorophenyl)- 3-methylbutyrate",
   "name_tr": "esfenvalerat (ISO); (S)-α-siyano-3-fenoksi-benzil- (S)-2-(4-klorofenil)-3- metilbütirat",
   "ec_no": "",
   "index_no": "608-058-00-4",
-  "atp": "",
+  "atp": "ATP17",
   "notes": [],
   "classification": {
     "hazards": [
@@ -15,6 +15,14 @@
       {
         "class": "Acute Tox. 3",
         "h_code": "H301"
+      },
+      {
+        "class": "STOT SE 1",
+        "h_code": "H370(nervous_system)"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
       },
       {
         "class": "Skin Sens. 1",
@@ -39,11 +47,14 @@
     "signal": "Danger",
     "pictograms": [
       "GHS06",
+      "GHS08",
       "GHS09"
     ],
     "h_codes": [
       "H331",
       "H301",
+      "H370(nervous_system)",
+      "H373",
       "H317",
       "H400",
       "H410"
@@ -51,7 +62,7 @@
     "suppl_h": []
   },
   "ate": {
-    "oral": 88.5,
-    "inhalation_dust": 0.53
+    "inhalation_mgl": 0.53,
+    "oral": 88.5
   }
 }

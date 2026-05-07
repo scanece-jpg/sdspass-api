@@ -1,10 +1,10 @@
 {
   "cas": "171850-30-9",
-  "name": "5,7-dichloro-4- hydroxyquinoline-3-carboxylic acid",
+  "name": "5,7-dichloro-4-hydroxyquinoline-3-carboxylic acid",
   "name_tr": "5,7-dikloro-4-hidroksikinolin-3- karboksilik asit",
   "ec_no": "431-250-2",
   "index_no": "607-563-00-7",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "2778-04-3",
-  "name": "endothion (ISO); S-5-methoxy-4-oxopyran-2- ylmethyl dimethyl phosphorothioate",
+  "name": "endothion (ISO); S-5-methoxy-4-oxopyran-2-ylmethyl dimethyl phosphorothioate",
   "name_tr": "endotiyon (ISO); S-5-metoksi-4- oksopiran-2-ilmetildimetil fosforotiyoat",
   "ec_no": "220-472-3",
   "index_no": "015-049-00-3",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -1,10 +1,10 @@
 {
   "cas": "146177-84-6",
-  "name": "sodium 2-(4-(4-fluoro-6-(2- sulfo-ethylamino)-[1,3,5]triazin- 2-ylamino)-2-ureido-phenylazo)- 5-(4-sulfophenylazo)benzene-1- sulfonate",
+  "name": "sodium 2-(4-(4-fluoro-6-(2-sulfo-ethylamino)-[1,3,5]triazin-2-ylamino)-2-ureido-phenylazo)-5-(4-sulfophenylazo)benzene-1-sulfonate",
   "name_tr": "sodyum 2-(4-(4-floro-6-(2-sülfo- etilamino)-[1,3,5]triazin-2- ilamino)-2-üreido-fenilazo)-5- (4-sülfofenilazo)benzen-1- sülfonat",
   "ec_no": "410-770-3",
   "index_no": "611-093-00-8",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

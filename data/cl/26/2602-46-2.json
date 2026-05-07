@@ -1,10 +1,10 @@
 {
   "cas": "2602-46-2",
-  "name": "tetrasodium 3,3'-[[1,1'- biphenyl]-4,4'- diylbis(azo)]bis[5-amino-4- hydroxynaphthalene-2,7- disulphonate]; C.I. Direct Blue 6",
+  "name": "tetrasodium 3,3'-[[1,1'-biphenyl]-4,4'-diylbis(azo)]bis[5-amino-4-hydroxynaphthalene-2,7-disulphonate]; C.I. Direct Blue 6",
   "name_tr": "tetrasodyum 3,3'-[[1,1'-bifenil]- 4,4'-diilbis(azo)]bis[5-amino-4- hidroksinaftalin-2,7-disülfonat]; C.I. Direk Mavi6",
   "ec_no": "220-012-1",
   "index_no": "611-026-00-2",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

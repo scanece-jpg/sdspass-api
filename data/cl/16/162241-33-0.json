@@ -1,10 +1,10 @@
 {
   "cas": "162241-33-0",
-  "name": "1-hydroxy-4-fluoro-1,4- diazoniabicyclo[2.2.2]octane bis(tetrafluoroborate)",
+  "name": "1-hydroxy-4-fluoro-1,4-diazoniabicyclo[2.2.2]octane bis(tetrafluoroborate)",
   "name_tr": "1-hidroksi-4-floro-1,4- diazoniyabisiklo[2.2.2]oktan bis(tetrafloroborat)",
   "ec_no": "418-330-2",
   "index_no": "603-215-00-3",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

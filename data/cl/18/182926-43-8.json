@@ -1,10 +1,10 @@
 {
   "cas": "182926-43-8",
-  "name": "trisodium 2,4-diamino-3,5-bis- [4-(2- sulfonatoethoxy)sulfonyl)phenyl azo]benzenesulfonate",
+  "name": "trisodium 2,4-diamino-3,5-bis-[4-(2-sulfonatoethoxy)sulfonyl)phenylazo]benzenesulfonate",
   "name_tr": "trisodyum 2,4-diamino-3,5-bis- [4-(2- sülfonatoetoksi)sülfonil)fenilazo ]benzensülfonat",
   "ec_no": "423-970-0",
   "index_no": "607-512-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

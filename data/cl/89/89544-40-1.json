@@ -1,10 +1,10 @@
 {
   "cas": "89544-40-1",
-  "name": "2-(2,4-dichlorophenyl)-1-(1H- 1,2,4-triazol-1-yl)pent-4-en-2-ol",
+  "name": "2-(2,4-dichlorophenyl)-1-(1H-1,2,4-triazol-1-yl)pent-4-en-2-ol",
   "name_tr": "2-(2,4-diklorofenil)-1-(1H-1,2,4- triyazol-1-il)pent-4-en-2-ol",
   "ec_no": "407-850-5",
   "index_no": "603-125-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

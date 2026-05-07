@@ -1,10 +1,10 @@
 {
   "cas": "34640-92-1",
-  "name": "2,2-diethoxy-N,N- dimethylacetamide",
+  "name": "2,2-diethoxy-N,N-dimethylacetamide",
   "name_tr": "2,2-dietoksi-N,N- dimetilasetamid",
   "ec_no": "449-950-1",
   "index_no": "616-194-00-0",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

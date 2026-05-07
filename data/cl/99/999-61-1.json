@@ -1,26 +1,23 @@
 {
   "cas": "999-61-1",
-  "name": "2-hydroxy-1- methylethylacrylate; [1] 2-hydroxypropylacrylate; [2] acrylic acid, monoester with propane-1,2-diol [3]",
+  "name": "2-hydroxy-1-methylethylacrylate [1]\n2-hydroxypropylacrylate [2]\nacrylic acid, monoester with propane-1,2-diol [3]",
   "name_tr": "2-hidroksi-1-metiletilakrilat; [1] 2-hidroksipropilakrilat; [2] akrilik asit, propan-1,2-diol’lü monoester [3]",
-  "ec_no": "220-852-9",
+  "ec_no": "213-663-8",
   "index_no": "607-108-00-2",
-  "atp": "",
-  "notes": [
-    "C",
-    "D"
-  ],
+  "atp": "CLP00",
+  "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 3",
+        "class": "Acute Tox. 3 *",
         "h_code": "H331"
       },
       {
-        "class": "Acute Tox. 3",
+        "class": "Acute Tox. 3 *",
         "h_code": "H311"
       },
       {
-        "class": "Acute Tox. 3",
+        "class": "Acute Tox. 3 *",
         "h_code": "H301"
       },
       {

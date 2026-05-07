@@ -1,10 +1,10 @@
 {
   "cas": "32750-89-3",
-  "name": "methyl 3- [[(dibutylamino)thioxomethyl]th io]propanoate",
+  "name": "methyl 3-[[(dibutylamino)thioxomethyl]thio]propanoate",
   "name_tr": "metil-3- [[(dibütilamino)tiyoksometiltiyo ]propanoat",
   "ec_no": "414-400-1",
   "index_no": "607-400-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

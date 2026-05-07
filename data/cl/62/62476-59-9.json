@@ -1,15 +1,15 @@
 {
   "cas": "62476-59-9",
-  "name": "acifluorfen (ISO); 5-[2-chloro-4- (trifluoromethyl)phenoxy]-2- nitrobenzoic acid; [1] sodium 5-[2-chloro-4- (trifluoromethyl) phenoxy]-2- nitrobenzoate; acifluorfen-sodium [2]",
+  "name": "acifluorfen (ISO); 5-[2-chloro-4-(trifluoromethyl)phenoxy]-2-nitrobenzoic acid [1]\nsodium 5-[2-chloro-4-(trifluoromethyl) phenoxy]-2-nitrobenzoate; acifluorfen-sodium [2]",
   "name_tr": "asiflorfen (ISO); 5-[2-kloro-4- (triflormetil)fenoksi]-2- nitrobenzoikasit;[1] sodyum-5-[2-kloro-4- (triflormetil)fenoksi]-2- nitrobenzoat; asifluorfen- sodyum [2]",
-  "ec_no": "256-634-5",
+  "ec_no": "263-560-7",
   "index_no": "604-041-00-0",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4",
+        "class": "Acute Tox. 4 *",
         "h_code": "H302"
       },
       {
@@ -35,8 +35,8 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS05",
       "GHS07",
+      "GHS05",
       "GHS09"
     ],
     "h_codes": [

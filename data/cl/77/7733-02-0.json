@@ -1,15 +1,15 @@
 {
   "cas": "7733-02-0",
-  "name": "zinc sulphate (hydrous) (mono-, hexa- and hepta hydrate); [1] zinc sulphate (anhydrous) [2]",
+  "name": "zinc sulphate (hydrous) (mono-, hexa- and hepta hydrate) [1]\nzinc sulphate (anhydrous) [2]",
   "name_tr": "çinko sülfat (sulu) (mono-, hekza- ve hepta hidrat) [1]; çinko sülfat (susuz) [2]",
   "ec_no": "231-793-3",
   "index_no": "030-006-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [
       {
-        "class": "Acute Tox. 4",
+        "class": "Acute Tox. 4 *",
         "h_code": "H302"
       },
       {
@@ -31,8 +31,8 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS05",
       "GHS07",
+      "GHS05",
       "GHS09"
     ],
     "h_codes": [

@@ -1,10 +1,10 @@
 {
   "cas": "2497-07-6",
-  "name": "oxydisulfoton (ISO); O, O-diethyl S-2- ethylsulphinylethyl phosphorodithioate",
+  "name": "oxydisulfoton (ISO); O, O-diethyl S-2-ethylsulphinylethyl phosphorodithioate",
   "name_tr": "Oksidisülfoton (ISO); O,O-dietil S-[2-(etilsülfinil)etil] fosforoditiyoat",
   "ec_no": "219-679-1",
   "index_no": "015-096-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

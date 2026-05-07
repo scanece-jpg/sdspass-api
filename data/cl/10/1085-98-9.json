@@ -1,10 +1,10 @@
 {
   "cas": "1085-98-9",
-  "name": "dichlofluanid (ISO); N-[(dichlorofluoromethyl)thio]- N',N'-dimethyl-N- phenylsulfamide",
+  "name": "dichlofluanid (ISO); N-[(dichlorofluoromethyl)thio]-N′,N′-dimethyl-N-phenylsulfamide",
   "name_tr": "diklofluanid (ISO); N-[(dikloroflorometil)tiyo]- N',N'-dimetil-N-fenilsülfamid",
   "ec_no": "214-118-7",
   "index_no": "616-006-00-7",
-  "atp": "",
+  "atp": "ATP10",
   "notes": [],
   "classification": {
     "hazards": [
@@ -26,8 +26,7 @@
       }
     ],
     "m_factors": {
-      "acute": 10,
-      "chronic": 10
+      "acute": 10
     },
     "scl_limits": []
   },

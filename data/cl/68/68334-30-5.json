@@ -1,10 +1,10 @@
 {
   "cas": "68334-30-5",
-  "name": "Fuels, diesel; Gasoil - unspecified; [A complex combination of hydrocarbons produced by the distillation of crude oil. It consists of hydrocarbons having carbon numbers predominantly in the range of C9 through C20 and boiling in the range of approximately 163 °C to 357 °C (325 °F to 675 °F).]",
+  "name": "Fuels, diesel; Gasoil - unspecified; [A complex combination of hydrocarbons produced by the distillation of crude oil. It consists of hydrocarbons having carbon numbers predominantly in the range of C9 through C20 and boiling in the range of approximately 163 °C to 357 °C (325 °F to 675 °F).]",
   "name_tr": "Dizel yakıtları; Gaz yağı - tanımlanmamış; [Ham petrolün damıtılmasından elde edilen hidrokarbonların kompleks bir bileşimi. Büyük çoğunlukla C9 ila C20 aralığında karbon sayısına sahip ve yaklaşık 163°C ila 357°C (325°F ila 675°F) aralığında kaynayan hidrokarbonlardan oluşur.]",
   "ec_no": "269-822-7",
   "index_no": "649-224-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [
     "N"
   ],

@@ -1,10 +1,10 @@
 {
   "cas": "67669-19-6",
-  "name": "2,4-dichloro-5- hydroxyacetanilide",
+  "name": "2,4-dichloro-5-hydroxyacetanilide",
   "name_tr": "2,4-dikloro-5-hidroksiasetanilid",
   "ec_no": "429-110-0",
   "index_no": "616-161-00-0",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [

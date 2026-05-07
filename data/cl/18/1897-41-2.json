@@ -1,10 +1,10 @@
 {
   "cas": "1897-41-2",
-  "name": "1,4-Dicyano-2,3,5,6-tetra- chloro-benzene",
+  "name": "1,4-Dicyano-2,3,5,6-tetra-chloro-benzene",
   "name_tr": "1,4-disiyano-2,3,5,6-tetra-kloro- benzen",
   "ec_no": "401-550-8",
   "index_no": "608-016-00-5",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

@@ -4,14 +4,10 @@
   "name_tr": "5-etoksi-5H-furan-2-on",
   "ec_no": "428-330-4",
   "index_no": "606-110-00-0",
-  "atp": "",
+  "atp": "ATP1",
   "notes": [],
   "classification": {
     "hazards": [
-      {
-        "class": "Skin Corr. 1B",
-        "h_code": "H314"
-      },
       {
         "class": "Acute Tox. 4",
         "h_code": "H312"
@@ -23,6 +19,10 @@
       {
         "class": "STOT RE 2",
         "h_code": "H373"
+      },
+      {
+        "class": "Skin Corr. 1B",
+        "h_code": "H314"
       },
       {
         "class": "Skin Sens. 1",
@@ -40,10 +40,10 @@
       "GHS07"
     ],
     "h_codes": [
-      "H314",
       "H312",
       "H302",
       "H373",
+      "H314",
       "H317"
     ],
     "suppl_h": []

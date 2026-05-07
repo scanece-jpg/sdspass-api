@@ -1,10 +1,10 @@
 {
   "cas": "953-17-3",
-  "name": "S-(chlorophenylthiomethyl) O,O- dimethylphosphorodithioate; methylcarbophenothione",
+  "name": "S-(chlorophenylthiomethyl) O,O-dimethylphosphorodithioate; methylcarbophenothione",
   "name_tr": "S-(klorofeniltiyometil)-O,O- dimetilfosforoditiyoat; metilcarbofenotiyon",
   "ec_no": "",
   "index_no": "015-132-00-4",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

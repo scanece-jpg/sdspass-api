@@ -1,10 +1,10 @@
 {
   "cas": "26259-45-0",
-  "name": "secbumeton (ISO); 2-sec-butylamino-4-ethylamino- 6-methoxy-1,3,5-triazine",
+  "name": "secbumeton (ISO); 2-sec-butylamino-4-ethylamino-6-methoxy-1,3,5-triazine",
   "name_tr": "sekbumeton (ISO); 2-sek-bütilamino-4-etilamino-6- metoksi-1,3,5-triazin",
   "ec_no": "247-554-1",
   "index_no": "613-063-00-X",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

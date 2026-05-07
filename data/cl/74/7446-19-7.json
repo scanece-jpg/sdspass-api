@@ -1,10 +1,10 @@
 {
   "cas": "7446-19-7",
-  "name": "zinc sulphate (hydrous) (mono-, hexa- and hepta hydrate); [1] zinc sulphate (anhydrous) [2]",
+  "name": "zinc sulphate (hydrous) (mono-, hexa- and hepta hydrate) [1]\nzinc sulphate (anhydrous)  [2]",
   "name_tr": "çinko sülfat (sulu) (mono-, hekza- ve hepta hidrat) [1]; çinko sülfat (susuz) [2]",
-  "ec_no": "231-793-3",
+  "ec_no": "231-793-3 [1]\n231-793-3 [2]",
   "index_no": "030-006-00-9",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

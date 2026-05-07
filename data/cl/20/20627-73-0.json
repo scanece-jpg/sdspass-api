@@ -1,10 +1,10 @@
 {
   "cas": "20627-73-0",
-  "name": "1-dimethoxymethyl-2-nitro- benzene",
+  "name": "1-dimethoxymethyl-2-nitro-benzene",
   "name_tr": "1-dimetoksimetil-2-nitrobenzen",
   "ec_no": "423-830-9",
   "index_no": "601-071-00-6",
-  "atp": "",
+  "atp": "CLP00",
   "notes": [],
   "classification": {
     "hazards": [

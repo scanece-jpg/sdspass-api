@@ -24242,10 +24242,7 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 10
-    },
+    "m_factors": {},
     "index_no": "029-004-00-0",
     "atp": "CLP00"
   },

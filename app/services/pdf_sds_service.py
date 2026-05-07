@@ -603,9 +603,15 @@ def _nos_technical_names(un_no: str, components: list, lang: str = 'TR') -> str:
             if not (comp_hcodes & group_hcodes):
                 continue
             # Türkçe ise name_tr, değilse name, yoksa CAS
-            name = (c.get('name_tr', '') if lang == 'TR' else '') or \
-                   c.get('name', '') or c.get('cas_no', '')
-            name = name.strip()
+            raw = (c.get('name_tr', '') if lang == 'TR' else '') or \
+                  c.get('name', '') or c.get('cas_no', '')
+            # ADR teknik isim: sadece birincil ad — çoklu izomer/eşanlamlı
+            # listelerinden ("heptan; n-heptan [1]\n2,4-dimetilpentan [2]…")
+            # yalnızca ilk ismi al; satır ve noktalı virgül ayıraçlarını
+            # temizle; "[1]" gibi numara eklerini kaldır.
+            primary = raw.split('\n')[0].split(';')[0]
+            primary = _re.sub(r'\s*\[\d+\]', '', primary).strip()
+            name = primary
             if not name or name in seen:
                 continue
             conc = float(c.get('concentration', 0) or 0)

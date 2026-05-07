@@ -224,20 +224,30 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
 
             if conc < cutoff:
                 # ── STOT SE 1→2 geçiş kuralı — CLP Tablo 3.8.3 ──────────────────
-                # STOT SE 1 bileşen eşiğin (SCL veya GCL=10%) altında ama ≥%1 ise
+                # STOT SE 1 bileşen H370 eşiğinin altında ama H371 eşiğinin üstündeyse
                 # karışım STOT SE 2 (H371) olarak sınıflandırılır.
-                # Bu kural SCL olup olmadığından bağımsız uygulanır.
-                if h == 'H370' and conc >= 1.0 and 'H371' not in seen_h:
-                    seen_h.add('H371')
-                    passed.append({
-                        "h_class": "STOT SE 2",
-                        "h_code":  "H371",
-                        "conc":    conc,
-                        "reason":  (
-                            f"{comp.get('name',cas)} %{conc:.1f} — STOT SE 1 bileşen "
-                            f"1% ≤ C < {cutoff}% → CLP Tablo 3.8.3 geçiş: STOT SE 2"
-                        ),
-                    })
+                # H371 SCL varsa (ör. metanol %3) generic %1'in YERİNE geçer.
+                if h == 'H370' and 'H371' not in seen_h:
+                    # H371 SCL kontrolü
+                    h371_cutoff = 1.0  # generic alt sınır
+                    for scl_e in scl_list:
+                        sc4 = scl_e.get("h_code", "").replace("*", "").strip()[:4]
+                        if sc4 == "H371":
+                            cm = scl_e.get("c_min")
+                            if cm is not None:
+                                h371_cutoff = float(cm)
+                            break
+                    if conc >= h371_cutoff:
+                        seen_h.add('H371')
+                        passed.append({
+                            "h_class": "STOT SE 2",
+                            "h_code":  "H371",
+                            "conc":    conc,
+                            "reason":  (
+                                f"{comp.get('name',cas)} %{conc:.1f} — STOT SE 1 bileşen "
+                                f"%{h371_cutoff} ≤ C < {cutoff}% → CLP Tablo 3.8.3 geçiş: STOT SE 2"
+                            ),
+                        })
                 else:
                     warnings.append(
                         f"{comp.get('name',cas)} ({h_class} %{conc:.1f}) → "

@@ -287,19 +287,24 @@ const CLPEngine = (() => {
         if (cutoff === undefined) return [code];
 
         // STOT SE 1→2 geçiş kuralı — CLP Tablo 3.8.3
-        // SCL varsa: C ≥ SCL → H370; 1% ≤ C < SCL → H371
-        // SCL yoksa: C ≥ 10% → H370; 1% ≤ C < 10% → H371
+        // H370 SCL varsa: C ≥ SCL(H370) → H370; SCL(H371) ≤ C < SCL(H370) → H371
+        // H370 SCL yoksa: C ≥ 10% → H370; 1% ≤ C < 10% → H371
+        // H371 SCL (özel alt sınır, örn. metanol %3): generic %1 yerine geçer
         if (code === 'H370') {
-          const sclThreshold = scl !== null ? scl : 10.0;
-          const sclSource    = scl !== null ? 'SCL' : 'GCL';
+          const sclThreshold  = scl !== null ? scl : 10.0;
+          const sclSource     = scl !== null ? 'SCL' : 'GCL';
           if (conc >= sclThreshold) {
             cutoffUsed['H370'] = { value: sclThreshold, source: sclSource, cas: c.cas || '' };
             return ['H370'];
           }
-          if (conc >= 1.0) {
-            // CLP Tablo 3.8.3: STOT SE 1 bileşen 1% ≤ C < eşik → karışım STOT SE 2 (H371)
-            if (!cutoffUsed['H371'] || 1.0 < (cutoffUsed['H371'].value || Infinity)) {
-              cutoffUsed['H371'] = { value: 1.0, source: sclSource + '-transition', cas: c.cas || '' };
+          // H371 için SCL varsa kullan (ör. metanol H371 SCL=%3), yoksa generic %1
+          const h371Scl       = _getSCL(c.scl, 'H371');
+          const h371Threshold = h371Scl !== null ? h371Scl : 1.0;
+          const h371Source    = h371Scl !== null ? 'SCL-H371' : sclSource + '-transition';
+          if (conc >= h371Threshold) {
+            // CLP Tablo 3.8.3: STOT SE 1 bileşen h371Threshold ≤ C < H370 eşiği → STOT SE 2 (H371)
+            if (!cutoffUsed['H371'] || h371Threshold < (cutoffUsed['H371'].value || Infinity)) {
+              cutoffUsed['H371'] = { value: h371Threshold, source: h371Source, cas: c.cas || '' };
             }
             return ['H371'];
           }

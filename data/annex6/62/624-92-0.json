@@ -71,5 +71,9 @@
       "H410"
     ],
     "suppl_h": []
+  },
+  "ate": {
+    "inhalation_vapour": 5.0,
+    "oral": 190.0
   }
 }

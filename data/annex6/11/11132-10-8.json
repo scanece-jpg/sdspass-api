@@ -44,7 +44,26 @@
     "m_factors": {
       "acute": 1
     },
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H372",
+        "class": "STOT RE 1",
+        "c_min": 1.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H373",
+        "class": "STOT RE 2",
+        "c_min": 0.1,
+        "c_max": null
+      },
+      {
+        "h_code": "H317",
+        "class": "Skin Sens. 1",
+        "c_min": 0.01,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",

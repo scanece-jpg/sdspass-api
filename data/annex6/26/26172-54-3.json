@@ -45,7 +45,14 @@
       "acute": 10,
       "chronic": 1
     },
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H317",
+        "class": "Skin Sens. 1A",
+        "c_min": 0.0015,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
@@ -65,5 +72,10 @@
       "H410"
     ],
     "suppl_h": []
+  },
+  "ate": {
+    "inhalation_dust": 0.15,
+    "dermal": 320.0,
+    "oral": 180.0
   }
 }

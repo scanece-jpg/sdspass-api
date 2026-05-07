@@ -44,5 +44,8 @@
     "suppl_h": [
       "EUH071"
     ]
+  },
+  "ate": {
+    "inhalation_dust": 1.5
   }
 }

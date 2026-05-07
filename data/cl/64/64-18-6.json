@@ -40,5 +40,9 @@
       "H314"
     ],
     "suppl_h": []
+  },
+  "ate": {
+    "inhalation_vapour": 7.4,
+    "oral": 500.0
   }
 }

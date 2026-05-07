@@ -26,7 +26,20 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H318",
+        "class": "Eye Dam. 1",
+        "c_min": 36.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H319",
+        "class": "Eye Irrit. 2",
+        "c_min": 22.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
@@ -42,5 +55,8 @@
       "H318"
     ],
     "suppl_h": []
+  },
+  "ate": {
+    "inhalation_dust": 1.2
   }
 }

@@ -56,5 +56,9 @@
       "EUH029",
       "EUH071"
     ]
+  },
+  "ate": {
+    "inhalation_vapour": 7.6,
+    "oral": 1000.0
   }
 }

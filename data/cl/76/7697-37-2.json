@@ -52,5 +52,8 @@
       "H314"
     ],
     "suppl_h": []
+  },
+  "ate": {
+    "inhalation_vapour": 2.65
   }
 }

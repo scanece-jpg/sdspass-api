@@ -14,7 +14,14 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H317",
+        "class": "Skin Sens. 1A",
+        "c_min": 0.01,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Warning",

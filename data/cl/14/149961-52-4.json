@@ -50,5 +50,8 @@
       "H410"
     ],
     "suppl_h": []
+  },
+  "ate": {
+    "inhalation_dust": 1.3
   }
 }

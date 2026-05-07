@@ -24,7 +24,14 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H360D",
+        "class": "Repr. 1B",
+        "c_min": 0.03,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
@@ -38,5 +45,8 @@
       "H412"
     ],
     "suppl_h": []
+  },
+  "ate": {
+    "inhalation_dust": 0.098
   }
 }

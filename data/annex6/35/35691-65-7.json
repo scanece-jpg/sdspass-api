@@ -34,7 +34,14 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H317",
+        "class": "Skin Sens. 1A",
+        "c_min": 0.001,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",
@@ -53,5 +60,9 @@
       "H411"
     ],
     "suppl_h": []
+  },
+  "ate": {
+    "inhalation_dust": 0.27,
+    "oral": 500.0
   }
 }

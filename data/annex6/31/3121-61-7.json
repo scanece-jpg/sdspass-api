@@ -65,5 +65,9 @@
     "suppl_h": [
       "EUH071"
     ]
+  },
+  "ate": {
+    "inhalation_vapour": 2.7,
+    "oral": 404.0
   }
 }

@@ -48,5 +48,8 @@
       "H319"
     ],
     "suppl_h": []
+  },
+  "ate": {
+    "inhalation_dust": 1.5
   }
 }

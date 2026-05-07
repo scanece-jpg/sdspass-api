@@ -41,5 +41,10 @@
       "H411"
     ],
     "suppl_h": []
+  },
+  "ate": {
+    "inhalation_dust": 0.19,
+    "dermal": 70.0,
+    "oral": 5.0
   }
 }

@@ -18,7 +18,20 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H335",
+        "class": "STOT SE 3",
+        "c_min": 20.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H319",
+        "class": "Eye Irrit. 2",
+        "c_min": 10.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Warning",

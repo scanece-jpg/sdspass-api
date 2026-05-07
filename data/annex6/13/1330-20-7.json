@@ -26,7 +26,32 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H373",
+        "class": "STOT RE 2",
+        "c_min": 10.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H315",
+        "class": "Skin Irrit. 2",
+        "c_min": 10.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H335",
+        "class": "STOT SE 3 (DART)",
+        "c_min": 20.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H304",
+        "class": "Asp. Tox. 1",
+        "c_min": 10.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Warning",

@@ -71,5 +71,10 @@
     "suppl_h": [
       "EUH070"
     ]
+  },
+  "ate": {
+    "inhalation_dust": 0.5,
+    "dermal": 790.0,
+    "oral": 500.0
   }
 }

@@ -42,7 +42,14 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H334",
+        "class": "Resp. Sens. 1",
+        "c_min": 0.1,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",

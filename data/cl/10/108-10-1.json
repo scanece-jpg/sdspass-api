@@ -43,5 +43,8 @@
     "suppl_h": [
       "EUH066"
     ]
+  },
+  "ate": {
+    "inhalation_vapour": 11.0
   }
 }

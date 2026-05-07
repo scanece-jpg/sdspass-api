@@ -54,5 +54,10 @@
       "H372"
     ],
     "suppl_h": []
+  },
+  "ate": {
+    "inhalation_dust": 0.05,
+    "dermal": 50.0,
+    "oral": 35.0
   }
 }

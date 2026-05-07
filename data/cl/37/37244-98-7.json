@@ -45,5 +45,8 @@
       "H318"
     ],
     "suppl_h": []
+  },
+  "ate": {
+    "inhalation_dust": 1.2
   }
 }

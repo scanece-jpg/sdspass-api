@@ -72,5 +72,10 @@
       "H400"
     ],
     "suppl_h": []
+  },
+  "ate": {
+    "inhalation_dust": 0.2,
+    "dermal": 60.0,
+    "oral": 80.0
   }
 }

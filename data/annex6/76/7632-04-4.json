@@ -68,5 +68,9 @@
       "H318"
     ],
     "suppl_h": []
+  },
+  "ate": {
+    "inhalation_dust": 0.62,
+    "oral": 730.0
   }
 }

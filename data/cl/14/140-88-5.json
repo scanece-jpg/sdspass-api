@@ -83,5 +83,10 @@
       "H317"
     ],
     "suppl_h": []
+  },
+  "ate": {
+    "inhalation_vapour": 9.0,
+    "dermal": 1800.0,
+    "oral": 1120.0
   }
 }

@@ -18,7 +18,26 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H302",
+        "class": "Acute Tox. 4 (Oral)",
+        "c_min": 5.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H318",
+        "class": "Eye Dam. 1",
+        "c_min": 1.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H319",
+        "class": "Eye Irrit. 2",
+        "c_min": 0.5,
+        "c_max": 1.0
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",

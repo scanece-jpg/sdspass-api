@@ -33,7 +33,14 @@
       "acute": 10,
       "chronic": 10
     },
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H360D",
+        "class": "Repr. 1B",
+        "c_min": 3.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",

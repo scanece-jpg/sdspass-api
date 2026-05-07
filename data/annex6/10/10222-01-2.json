@@ -63,5 +63,9 @@
       "H410"
     ],
     "suppl_h": []
+  },
+  "ate": {
+    "inhalation_dust": 0.24,
+    "oral": 118.0
   }
 }

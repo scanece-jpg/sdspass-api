@@ -43,5 +43,8 @@
       "H411"
     ],
     "suppl_h": []
+  },
+  "ate": {
+    "inhalation_vapour": 3.0
   }
 }

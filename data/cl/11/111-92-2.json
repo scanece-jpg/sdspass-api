@@ -43,5 +43,10 @@
       "H301"
     ],
     "suppl_h": []
+  },
+  "ate": {
+    "dermal": 300.0,
+    "inhalation_vapour": 1.2,
+    "oral": 220.0
   }
 }

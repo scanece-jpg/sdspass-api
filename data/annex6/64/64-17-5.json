@@ -14,7 +14,14 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H336",
+        "class": "STOT SE 3",
+        "c_min": 50.0,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",

@@ -27,7 +27,14 @@
       "acute": 100,
       "chronic": 1
     },
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H314",
+        "class": "Skin Corr. 1B",
+        "c_min": 0.1,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "",

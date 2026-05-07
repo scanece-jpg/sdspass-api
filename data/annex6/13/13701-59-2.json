@@ -36,5 +36,9 @@
       "H301"
     ],
     "suppl_h": []
+  },
+  "ate": {
+    "inhalation_dust": 1.5,
+    "oral": 100.0
   }
 }

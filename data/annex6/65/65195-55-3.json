@@ -36,7 +36,20 @@
     "m_factors": {
       "acute": 10000
     },
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H372",
+        "class": "STOT RE 1",
+        "c_min": 5.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H373",
+        "class": "STOT RE 2",
+        "c_min": 0.5,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",

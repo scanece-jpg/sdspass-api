@@ -35,5 +35,9 @@
       "H412"
     ],
     "suppl_h": []
+  },
+  "ate": {
+    "inhalation_dust": 2.8,
+    "oral": 270.0
   }
 }

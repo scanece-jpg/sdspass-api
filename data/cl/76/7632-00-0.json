@@ -22,7 +22,20 @@
       }
     ],
     "m_factors": {},
-    "scl_limits": []
+    "scl_limits": [
+      {
+        "h_code": "H302",
+        "class": "Acute Tox. 4 (Oral)",
+        "c_min": 5.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H400",
+        "class": "Aquatic Acute 1",
+        "c_min": 0.1,
+        "c_max": null
+      }
+    ]
   },
   "labelling": {
     "signal": "Danger",

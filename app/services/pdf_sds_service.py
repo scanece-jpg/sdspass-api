@@ -584,7 +584,9 @@ def _nos_technical_names(un_no: str, components: list, lang: str = 'TR') -> str:
     Her tehlike grubundan en yüksek konsantrasyonlu bileşeni seçer.
     Sonuç: en fazla 2 bileşen adı, virgülle ayrılmış.
     """
-    groups = _NOS_HAZARD_GROUPS.get(un_no, [])
+    # "UN 2924" → "UN2924" normalizasyonu
+    un_key = un_no.replace(' ', '')
+    groups = _NOS_HAZARD_GROUPS.get(un_key, [])
     if not groups or not components:
         return ''
 

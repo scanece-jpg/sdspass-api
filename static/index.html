@@ -2719,15 +2719,24 @@ async function _doPdfGenerate() {
     const ATE_H_INHAL  = new Set(['H330','H331','H332']);
 
     // Kaynak etiket → Türkçe gerekçe metni dönüştürücü (PDF Bölüm 2.1)
-    const _srcLabel = (src, val, catHclass) => {
+    // hcode: hangi H koduna ait olduğunu bilmek gereken durumlar için (GCL-sum-weighted)
+    const _srcLabel = (src, val, catHclass, hcode = '') => {
       const hcTR = c => (typeof CLPEngine !== 'undefined' && CLPEngine.translateClass)
         ? CLPEngine.translateClass(c) : c;  // h_class Türkçe (mevcut ise)
+      // pH kaynağı: "pH=X.X (≤ 2) → SEA Tablo 3.2.3" — kaynak string zaten açıklayıcı
+      if (src.startsWith('pH=')) return src;
       switch(src) {
         case 'GCL':            return `Genel Kons. Sınırı (GKS) ≥ %${val}`;
         case 'SCL':            return `Maddeye Özgü Kons. Sınırı (MÖKS) ≥ %${val}${catHclass ? ' ('+catHclass+')' : ''}`;
-        case 'GCL-sum-SC1':    return `SEA Tablo 3.2.3: Σ Cilt Aş.1 = %${val} ≥ %5 (toplamlı)`;
-        case 'GCL-sum-ED1':    return `SEA Tablo 3.3.3: Σ Göz Has.1 = %${val} ≥ %3 (toplamlı)`;
-        case 'GCL-sum-weighted': return `SEA Tablo: 10×Σ Kat.1 + Σ Kat.2 = %${val} ≥ %10 (toplamlı)`;
+        case 'GCL-sum-SC1':    return `SEA Tablo 3.2.3: Σ Cilt Aş.1 toplamlı kural (eşik ≥ %5)`;
+        case 'GCL-sum-ED1':    return `SEA Tablo 3.3.3: Σ Göz Has.1 toplamlı kural (eşik ≥ %3)`;
+        case 'GCL-sum-weighted': {
+          // H315: Cilt Tablo 3.2.3 | H319: Göz Tablo 3.3.3
+          const tbl = hcode === 'H315' ? '3.2.3' : '3.3.3';
+          const obj = hcode === 'H315' ? 'Cilt Aş.' : 'Göz Has.';
+          const irr = hcode === 'H315' ? 'Cilt Tah.' : 'Göz Tah.';
+          return `SEA Tablo ${tbl}: 10×Σ ${obj}1 + Σ ${irr}2 ≥ %10 (toplamlı)`;
+        }
         case 'GCL-transition': return `H370→H371 geçiş kuralı (GKS %${val})`;
         case 'SCL-transition': return `H370→H371 geçiş kuralı (MÖKS %${val})`;
         case 'SCL-H371':       return `H371 Maddeye Özgü Kons. Sınırı (MÖKS) ≥ %${val}`;
@@ -2764,7 +2773,7 @@ async function _doPdfGenerate() {
           const unit = ATE_H_INHAL.has(hc) ? 'mg/L' : 'mg/kg';
           reason = `ATE karışım = ${displayVal} ${unit} (SEA Tablo 3.1.2)`;
         } else {
-          reason = _srcLabel(cu.source, displayVal, '');
+          reason = _srcLabel(cu.source, displayVal, '', hc);
         }
       } else if (ecoReasonMap[hc]) {
         reason = ecoReasonMap[hc];

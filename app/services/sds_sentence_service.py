@@ -253,13 +253,17 @@ H_SENTENCES: Dict[str, Dict[int, str]] = {
         4: 'Ciltle temastan sonra bol su ve sabunla yıkayın. Tahriş devam ederse tıbbi yardım alın.',
         5: 'Su spreyi kullanın. Kuru kimyasal veya CO₂ de uygulanabilir.',
         6: 'Kirlenmiş alanı havalandırın. KKE kullanın. Absorban malzeme ile toplayın.',
-        7: 'Serin, kuru yerde saklayın. Gıda maddelerinden uzak tutun.',
+        7: 'Cilt temasından kaçının; koruyucu eldiven ve giysi kullanın. '
+           'Kullanım sonrası maruz kalan bölgeleri bol su ve sabunla yıkayın.',
+        72: 'Serin, kuru yerde saklayın. Gıda maddelerinden uzak tutun.',
         8: 'Nitril veya lateks eldiven kullanın.',
     },
     'H317': {
         4: 'Deri duyarlılaştırıcı. Temas halinde bol su ve sabunla yıkayın. Kızarıklık veya döküntü olursa tıbbi yardım alın.',
         6: 'Cilt temasından kaçının. Uygun KKE giyin. Absorban malzeme ile toplayın.',
-        7: 'Serin, kuru yerde orijinal ambalajında saklayın.',
+        7: 'Deri duyarlılaştırıcı — cilt temasından kesinlikle kaçının; uygun eldiven zorunludur. '
+           'Daha önce bu maddeye duyarlılaşmış kişiler çalışmamalıdır.',
+        72: 'Serin, kuru yerde orijinal ambalajında saklayın.',
         8: 'Kimyasala dayanıklı eldiven kullanın. Daha önce duyarlılaşmış kişiler bu ürünle çalışmamalıdır.',
     },
     'H318': {
@@ -299,7 +303,9 @@ H_SENTENCES: Dict[str, Dict[int, str]] = {
     },
     'H331': {
         4: 'Solunursa temiz havaya çıkarın. Belirtiler devam ederse tıbbi yardım alın.',
-        7: 'İyi havalandırılan yerde saklayın.',
+        7: 'Yalnızca iyi havalandırılan alanlarda veya kapalı sistemde kullanın. '
+           'Buhar/sis oluşumundan kaçının; OEL aşılma riskinde solunum koruyucu takın.',
+        72: 'İyi havalandırılan, serin yerde sıkıca kapalı kapta saklayın.',
         8: 'Organik gaz filtreli solunum maskesi veya SCBA.',
     },
 
@@ -314,7 +320,9 @@ H_SENTENCES: Dict[str, Dict[int, str]] = {
     },
     'H372': {
         4: 'Uzun süreli veya tekrarlanan maruziyet halinde organ hasarına neden olur. Periyodik sağlık kontrolü yapılmalıdır.',
-        7: 'Yetkisiz kişilerin erişimini önleyin. Kilitli yerde saklayın.',
+        7: 'Maruziyet sınırını (OEL/DNEL) aşmamak için uygun KKE ve havalandırma sağlayın. '
+           'Periyodik biyolojik izleme programına dahil olun; çalışırken yemeyin/içmeyin.',
+        72: 'Yetkisiz kişilerin erişimini önleyin. Kilitli yerde saklayın.',
         8: 'Maruziyet sınırı aşılma riski varsa solunum koruyucu kullanın.',
     },
     'H373': {
@@ -345,11 +353,15 @@ H_SENTENCES: Dict[str, Dict[int, str]] = {
     # ── AQUATIC / ÇEVRE ────────────────────────────────────────────────────
     'H400': {
         6: 'Su ortamına karışmasını kesinlikle önleyin. Döküntüyü hemen absorban malzeme ile toplayın. Çevre müdahale ekibini haberdar edin.',
-        7: 'Su kaynaklarından, kanalizasyondan ve zemin suyundan uzak depolayın.',
+        7: 'Taşıma ve dolum sırasında ikincil güvenlik kabı (driptrays) kullanın. '
+           'Su ortamına dökülmesini önleyin; huni/pompa kullanırken taşmaya dikkat edin.',
+        72: 'Su kaynaklarından, kanalizasyondan ve zemin suyundan uzak, sızdırmaz kapta saklayın.',
     },
     'H410': {
         6: 'Döküntünün kanalizasyon, dere veya göle ulaşmasını önleyin. Yetkili makamları (ÇSGB/Çevre Bakanlığı) bilgilendirin.',
-        7: 'Sızdırmaz kaplarda saklayın.',
+        7: 'Taşıma ve dolum sırasında ikincil güvenlik kabı kullanın. '
+           'Su ortamına dökülmesini kesinlikle önleyin.',
+        72: 'Sızdırmaz kapta, su kaynaklarından uzakta saklayın.',
     },
     'H411': {
         4: 'Su ile temasa geçmesini önleyin. Deri veya gözle temas halinde suyla yıkayın. '
@@ -358,8 +370,10 @@ H_SENTENCES: Dict[str, Dict[int, str]] = {
            'Su kaynaklarına, kanalizasyona karışmasını engelleyin.',
         6: 'ÇEVRESEL TEHLİKE: Döküntünün su kaynaklarına ve kanalizasyona ulaşmasını kesinlikle önleyin. '
            'Gerekirse yerel çevre müdahale ekibini haberdar edin.',
-        7: 'Çevre açısından tehlikeli ürün. Kanalizasyona veya açık suya dökmeyin. '
-           'Sıkıca kapalı, çevreyle uyumlu kapta saklayın.',
+        7: 'Döküntüyü önlemek için ikincil güvenlik kabı kullanın. '
+           'Su, kanalizasyon veya drenaj hatlarına yakın alanda kullanmaktan kaçının.',
+        72: 'Çevre açısından tehlikeli ürün. Kanalizasyona veya açık suya dökmeyin. '
+            'Sıkıca kapalı, çevreyle uyumlu kapta saklayın.',
     },
     'H412': {
         6: 'Döküntünün su kanallarına ulaşmasını önleyin.',
@@ -370,221 +384,274 @@ H_SENTENCES: Dict[str, Dict[int, str]] = {
         4: 'Yangın veya patlama riski. Derhal acil servisleri arayın. Bölgeyi tahliye edin.',
         5: 'Su kullanmayın. CO₂ veya kum kullanın. Yangın söndürücüleri yakıt ile temastan koruyun.',
         6: 'Bölgeyi tahliye edin. Tüm tutuşma kaynaklarını ortadan kaldırın. Uzmanlaşmış ekip olmadan müdahale etmeyin.',
-        7: 'Yanıcı ve organik maddelerden uzakta, serin ve kuru yerde ayrı saklayın.',
+        7: 'Yanıcı, organik ve indirgen maddelerle kesinlikle temas ettirmeyin. '
+           'Uygun KKE (aleve dayanıklı giysi, yüz siperi) giyin. Kontaminasyonu önleyin.',
+        72: 'Yanıcı ve organik maddelerden uzakta, serin ve kuru yerde ayrı saklayın.',
     },
     'H272': {
         5: 'Yangını besleyebilir. Isı ve tutuşma kaynaklarından uzak tutun.',
         6: 'Yanıcı maddelerle temasını önleyin.',
-        7: 'Yanıcı maddelerden ayrı saklayın.',
+        7: 'Yanıcı maddelerle temasından kaçının; oksitleyici — yangını şiddetlendirebilir. '
+           'Kontaminasyonu önlemek için temiz ekipman kullanın.',
+        72: 'Yanıcı maddelerden ayrı, serin ve kuru yerde saklayın.',
     },
 
     'H228': {
         4: 'Temas eden giysileri çıkarın. Yanık bölgeyi soğuk suyla yıkayın.',
         5: 'Kuru kimyasal toz veya kum kullanın. Su yayılmayı artırabilir.',
         6: 'Tutuşturma kaynaklarını kaldırın. Tozu süpürmeden ıslak bezle toplayın.',
-        7: 'Serin, kuru yerde ısı ve kıvılcımdan uzakta saklayın.',
+        7: 'Toz oluşumundan kaçının; antistatik ekipman kullanın. '
+           'Tutuşma ve kıvılcım kaynaklarından uzak ortamda çalışın.',
+        72: 'Serin, kuru yerde ısı ve kıvılcımdan uzakta saklayın.',
         8: 'Antistatik giysi, eldiven ve göz koruyucu kullanın.',
     },
     'H229': {
         4: 'Gözle temas halinde bol suyla yıkayın. Tahriş devam ederse doktora gidin.',
         5: 'Aerosol kaplara ısı uygulamayın. CO₂ veya kuru kimyasal kullanın.',
         6: 'Tutuşturma kaynaklarını kaldırın. İyi havalandırma sağlayın.',
-        7: '50°C üzerinde ısıya maruz bırakmayın. Güneş ışığından koruyun.',
+        7: 'Basınçlı kap — delmeyin ve ısı kaynağına tutmayın. '
+           'Açık alev ve kıvılcımdan uzak tutun.',
+        72: '50°C üzerinde ısıya maruz bırakmayın. Güneş ışığından koruyun.',
         8: 'Göz koruyucu ve eldiven kullanın.',
     },
     'H240': {
         4: 'Isı veya darbeden kaynaklanan yaralanmalar için doktora başvurun.',
         5: 'PATLAMA RİSKİ. Uzaktan müdahale edin. Su spreyi.',
         6: 'PATLAMA RİSKİ. Bölgeden uzaklaşın. Uzman ekip çağırın.',
-        7: 'Serin yerde saklayın. Isı, darbe ve sürtünmeden kesinlikle koruyun.',
+        7: 'Darbe, sürtünme ve ısıdan kesinlikle koruyun. '
+           'Yalnızca uygun ekipmanla ve eğitimli personel tarafından kullanılmalıdır.',
+        72: 'Serin yerde saklayın. Isı, darbe ve sürtünmeden kesinlikle koruyun.',
         8: 'Tam koruyucu ekipman, yüz siperi ve alev geciktirici giysi.',
     },
     'H241': {
         4: 'Yanık veya patlama yaralanması için acil tıbbi yardım alın.',
         5: 'Yangın veya patlama riski. Su spreyi veya CO₂ kullanın.',
         6: 'Tutuşturma kaynaklarını uzaklaştırın. İhtiyatla yaklaşın.',
-        7: 'Serin yerde, ısı kaynaklarından uzakta saklayın.',
+        7: 'Isı kaynaklarından ve tutuşma noktalarından uzak tutun. '
+           'Kontrollü koşullarda, eğitimli personelle kullanın.',
+        72: 'Serin yerde, ısı kaynaklarından uzakta saklayın.',
         8: 'Alev geciktirici giysi ve yüz koruyucu kullanın.',
     },
     'H250': {
         4: 'Yanıklar için soğuk su uygulayın. Acil tıbbi yardım alın.',
         5: 'Havadan izole edin. Kuru kum veya inert gaz kullanın.',
         6: 'Hava ile temasından kesinlikle kaçının. Uzman ekip çağırın.',
-        7: 'İnert atmosfer altında hava geçirmez kapta saklayın.',
+        7: 'İnert gaz atmosferinde çalışın; hava ile temasını kesinlikle önleyin. '
+           'Kuru ekipman kullanın.',
+        72: 'İnert atmosfer altında hava geçirmez kapta saklayın.',
         8: 'Tam yüz siperi, alev geciktirici giysi ve kuru eldiven.',
     },
     'H251': {
         4: 'Isıya bağlı yanık veya yangın sonrası tıbbi yardım alın.',
         5: 'Büyük miktarlarda yangın riski. CO₂ veya kuru toz kullanın.',
         6: 'Küçük miktarlarda toplayın. Isı kaynaklarından uzak tutun.',
-        7: 'Serin yerde, 35°C altında saklayın.',
+        7: 'Büyük miktarlarda kendiliğinden ısınabilir; yığın halinde depolamamak koşuluyla kullanın.',
+        72: 'Serin yerde, 35°C altında saklayın.',
     },
     'H252': {
         4: 'Ciltle temas halinde bol soğuk suyla yıkayın. Doktora gidin.',
         5: 'Büyük miktarlarda yangın riski. Su veya CO₂ kullanın.',
         6: 'Serin tutun. Sıcak yüzeylerden uzaklaştırın.',
-        7: 'Küçük miktarlarda saklayın. İyi havalandırılmış, serin yer.',
+        7: 'Küçük miktarlarda kullanın; büyük yığınlardan kaçının. İyi havalandırın.',
+        72: 'Küçük miktarlarda, serin ve iyi havalandırılmış yerde saklayın.',
         8: 'Isıya dayanıklı eldiven, yüz siperi.',
     },
     'H260': {
         4: 'SU KULLANMAYIN. Kuru kum veya D tipi yangın söndürücü. Acil tıbbi yardım.',
         5: 'SU KULLANMAYIN — patlama tehlikesi. Kuru kum veya D tipi söndürücü.',
         6: 'Su ile temasından kesinlikle kaçının. Kuru absorban kullanın.',
-        7: 'Tamamen kuru yerde, nem ve yağmurdan korunarak saklayın.',
+        7: 'Su, nem ve yağmurdan kesinlikle uzak tutun. Kuru ekipman kullanın; '
+           'ıslak zemin veya nemli ortamda çalışmayın.',
+        72: 'Tamamen kuru yerde, nem ve yağmurdan korunarak inert atmosferde saklayın.',
         8: 'Su geçirmez eldiven, yüz siperi, alev geciktirici giysi.',
     },
     'H261': {
         4: 'Nemli cilt veya gözle temas halinde kuru bezle silin. Doktora gidin.',
         5: 'SU KULLANMAYIN. Kuru kimyasal veya kum kullanın.',
         6: 'Su ile temasından kaçının. Kuru absorban ile toplayın.',
-        7: 'Kuru yerde nem ve su kaynaklarından uzakta saklayın.',
+        7: 'Nem ve su kaynaklarından uzak ortamda kullanın. Kuru ekipman kullanın.',
+        72: 'Kuru yerde nem ve su kaynaklarından uzakta saklayın.',
         8: 'Su geçirmez eldiven ve yüz koruyucu.',
     },
     'H280': {
         4: 'Donma yaralanması için ilık su uygulayın (en fazla 40°C). Ovmayın.',
         5: 'Isınan konteyner patlayabilir. Suyla soğutun. Alevden uzaklaştırın.',
         6: 'Sızdıran konteyneri dışarı çıkarın. İyi havalandırma sağlayın.',
-        7: '50°C altında, havalandırılmış depoda saklayın. Dik pozisyonda bağlayın.',
+        7: 'Tüp/kabı darbeden koruyun; uygun basınç regülatörü kullanın. '
+           'Aşırı ısı kaynaklarından uzak tutun.',
+        72: '50°C altında, havalandırılmış depoda dik pozisyonda saklayın.',
         8: 'Kişisel koruyucu ekipman ve uygun basınç regülatörü kullanın.',
     },
     'H281': {
         4: 'KRİYOJENİK YANMA: Etkilenen bölgeyi ilık suyla yıkayın. Hemen doktora gidin.',
         5: 'Soğutulmuş gaz — uzaklaşın. Isıyla birlikte patlama riski.',
         6: 'Sızdırma halinde bölgeyi tahliye edin. Uzman ekip çağırın.',
-        7: 'Onaylı kriyojenik kapta saklayın. Isı kaynaklarından uzak tutun.',
+        7: 'Kriyojenik sıcaklıklarda çalışın; cilt ve göz temasını önleyin. '
+           'Onaylı kriyojenik ekipman kullanın.',
+        72: 'Onaylı kriyojenik kapta, ısı kaynaklarından uzakta saklayın.',
         8: 'Kriyojenik eldiven, yüz siperi ve tam koruyucu giysi.',
     },
     'H290': {
         4: 'Metalik temas bölgesini bol suyla yıkayın. Tahriş devam ederse doktora gidin.',
         5: 'Standart yangın söndürücü kullanın. Metal ekipmanlara dikkat.',
         6: 'Metal zemin ve ekipmanlardan uzak tutun. Absorban ile toplayın.',
-        7: 'Metal olmayan veya kaplanmış kaplar kullanın.',
+        7: 'Metal kap, alet ve ekipmanlarla temas ettirmeyin; '
+           'plastik veya cam kaplarda ve korozyona dayanıklı ekipmanla kullanın.',
+        72: 'Metal olmayan veya kaplanmış, korozyona dayanıklı kapta saklayın.',
         8: 'Korozyona dayanıklı eldiven ve ekipman kullanın.',
     },
     'H303': {
         4: 'YUTULMA: Ağzı çalkalayın. Kusturmayın. İyi hissetmiyorsanız doktora gidin.',
         5: 'Uygun söndürücü kullanın.',
         6: 'KKE ile toplayın. Yiyeceklerden uzak tutun.',
-        7: 'Gıdadan ayrı, kilitli yerde saklayın.',
+        7: 'Çalışırken yemeyin, içmeyin ve sigara içmeyin. '
+           'Kullanım sonrası elleri yıkayın.',
+        72: 'Gıdadan ayrı, kilitli yerde saklayın.',
         8: 'Eldiven ve göz koruyucu kullanın.',
     },
     'H305': {
         4: 'YUTULMA ve SOLUNUM YOLU: Kusturmayın. Derhal doktora gidin.',
         5: 'Uygun söndürücü kullanın.',
         6: 'Solvent gazlarının birikmesini önleyin. İyi havalandırma.',
-        7: 'Serin, kuru yerde gıdadan ayrı saklayın.',
+        7: 'Aspirasyon riski — yutmaktan kesinlikle kaçının. '
+           'Solvent buharlarını solumaktan kaçının; iyi havalandırma sağlayın.',
+        72: 'Serin, kuru yerde gıdadan ayrı, orijinal kabında saklayın.',
         8: 'Eldiven, göz koruyucu ve solunum maskesi.',
     },
     'H312': {
         4: 'CİLT: Kirlenmiş giysileri çıkarın. Bol su ve sabunla yıkayın. Doktora gidin.',
         5: 'Uygun söndürücü kullanın.',
         6: 'Cilt temasından kaçının. Uygun KKE giyin.',
-        7: 'Serin, kuru yerde gıdadan ayrı saklayın.',
+        7: 'Cilt temasından kaçının; koruyucu eldiven ve giysi kullanın. '
+           'Çalışırken yemeyin ve içmeyin.',
+        72: 'Serin, kuru yerde gıdadan ayrı saklayın.',
         8: 'Kimyasala dayanıklı eldiven ve koruyucu giysi.',
     },
     'H313': {
         4: 'CİLT: Bol su ile yıkayın. İyi hissetmiyorsanız doktora gidin.',
         5: 'Standart söndürücü kullanın.',
         6: 'KKE ile toplayın.',
-        7: 'Normal koşullarda saklayın.',
+        7: 'Gereksiz cilt temasından kaçının; kullanım sonrası elleri yıkayın.',
         8: 'Koruyucu eldiven kullanın.',
     },
     'H316': {
         4: 'Cildi bol suyla yıkayın. Tahriş devam ederse doktora gidin.',
         5: 'Standart söndürücü kullanın.',
         6: 'KKE ile toplayın.',
-        7: 'Normal koşullarda saklayın.',
+        7: 'Uzun süreli cilt temasından kaçının; koruyucu eldiven kullanın.',
         8: 'Koruyucu eldiven kullanın.',
     },
     'H320': {
         4: 'GÖZ: Birkaç dakika suyla yıkayın. Tahriş devam ederse göz doktoruna gidin.',
         5: 'Standart söndürücü kullanın.',
         6: 'KKE ile toplayın.',
-        7: 'Normal koşullarda saklayın.',
+        7: 'Göz temasından kaçının; kullanım sırasında göz koruyucu takın.',
         8: 'Göz koruyucu kullanın.',
     },
     'H332': {
         4: 'SOLUNUM: Kişiyi temiz havaya çıkarın. Semptom devam ederse doktora gidin.',
         5: 'Yangın gazlarından solunum koruması kullanın.',
         6: 'İyi havalandırma sağlayın. Buhar/sis oluşmasını önleyin.',
-        7: 'İyi havalandırılmış yerde saklayın. Kabı kapalı tutun.',
+        7: 'İyi havalandırılan alanlarda kullanın; buhar birikiminden kaçının. '
+           'OEL aşılma riskinde solunum koruyucu kullanın.',
+        72: 'İyi havalandırılmış yerde, kabı kapalı tutarak saklayın.',
         8: 'Yarım yüz maskesi (A tipi filtre) veya tüm yüz maskesi.',
     },
     'H333': {
         4: 'SOLUNUM: Temiz havaya çıkarın. İyi hissetmiyorsanız doktora gidin.',
         5: 'Standart söndürücü kullanın.',
         6: 'Havalandırma sağlayın.',
-        7: 'İyi havalandırılmış yerde kapalı kapta saklayın.',
+        7: 'İyi havalandırılan alanlarda kullanın; buhar solumaktan kaçının.',
+        72: 'İyi havalandırılmış yerde kapalı kapta saklayın.',
         8: 'Uygun solunum maskesi kullanın.',
     },
     'H334': {
         4: 'SOLUNUM: Temiz havaya çıkarın. Astım semptomu varsa bronkodilatör verin. Acil tıbbi yardım.',
         5: 'Solunum koruyucu kullanın. CO₂ veya kuru kimyasal.',
         6: 'Buhar/aerosol — solunum koruması olmadan girilmeyin.',
-        7: 'İyi havalandırılmış yerde, kapalı kapta saklayın.',
+        7: 'Solunum duyarlılaştırıcı — bir kez duyarlılaşan kişiler çok düşük '
+           'konsantrasyonlarda bile etkilenebilir. SCBA veya tam yüz maskesi zorunlu. '
+           'Astım hastaları bu maddeyle çalışmamalıdır.',
+        72: 'İyi havalandırılmış yerde, sıkıca kapalı kapta saklayın.',
         8: 'Solunum duyarlılaştırıcı — SCBA veya tam yüz maskesi (ABEK filtre).',
     },
     'H335': {
         4: 'SOLUNUM: Temiz havaya çıkarın. Tahriş devam ederse doktora gidin.',
         5: 'Yangın gazlarından kaçının. Uygun solunum koruması.',
         6: 'İyi havalandırma sağlayın. Buhar birikimini önleyin.',
-        7: 'İyi havalandırılmış yerde, sıkıca kapalı kapta saklayın.',
+        7: 'Yalnızca iyi havalandırılan alanlarda kullanın. '
+           'Buhar/sis oluşumundan kaçının; solunum tahriş edicidir.',
+        72: 'İyi havalandırılmış yerde, sıkıca kapalı kapta saklayın.',
         8: 'Organik buhar filtreli (A tipi) yarım yüz maskesi.',
     },
     'H336': {
         4: 'SOLUNUM/NARKOTİK: Temiz havaya çıkarın. Bilinç kaybı varsa kurtarma pozisyonu. Doktora gidin.',
         5: 'Buhar-hava karışımı patlayıcı olabilir. CO₂ veya kuru kimyasal.',
         6: 'Havalandırın. Kapalı alanda birikim tehlikeli. Narkotik etki riski.',
-        7: 'Serin, iyi havalandırılmış yerde saklayın. Çalışma alanında içmeyin.',
+        7: 'Yalnızca iyi havalandırılan alanlarda kullanın; narkotik etki riski. '
+           'Çalışma alanında yemeyin, içmeyin, sigara içmeyin.',
+        72: 'Serin, iyi havalandırılmış yerde, sıkıca kapalı kapta saklayın.',
         8: 'Organik buhar filtreli solunum maskesi. Yeterli havalandırma şart.',
     },
     'H341': {
         4: 'Maruziyet kayıt altına alınmalıdır. Doktora başvurun.',
         5: 'Yangın gazları mutajenik olabilir. Solunum koruması zorunlu.',
         6: 'Deri ve solunum temasından kaçının. Tam KKE.',
-        7: 'Kilitli yerde, yetkisiz erişime kapalı olarak saklayın.',
+        7: 'Şüpheli mutajen — maruziyeti minimize edin (ALARA ilkesi). '
+           'Kullanmadan önce özel talimatları edinin; tam KKE zorunlu.',
+        72: 'Kilitli yerde, yetkisiz erişime kapalı olarak saklayın.',
         8: 'Nitril eldiven (min 0.5mm), ABEK filtreli tam yüz maskesi.',
     },
     'H351': {
         4: 'KANSEROJENİK ŞÜPHELİ: Her türlü maruziyet minimize edilmeli. Doktora başvurun.',
         5: 'Yangın gazları toksik olabilir. Solunum koruması kullanın.',
         6: 'Deri ve solunum temasından kaçının. Tam KKE kullanın.',
-        7: 'Kilitli yerde yetkili kişiler dışında erişimi kısıtlayın.',
+        7: 'Şüpheli kanserojen — maruziyeti mümkün olan en düşük düzeyde tutun (ALARA). '
+           'Kullanmadan önce özel talimatları edinin; tam KKE zorunlu.',
+        72: 'Kilitli yerde yetkili kişiler dışında erişimi kısıtlayın.',
         8: 'Nitril eldiven, ABEK filtreli tam yüz maskesi, koruyucu giysi.',
     },
     'H361': {
         4: 'Maruziyet kayıt altına alınmalı. Üreme sağlığı uzmanına başvurun.',
         5: 'Uygun söndürücü kullanın. Solunum koruması.',
         6: 'Tam KKE kullanın. Deri ve solunum temasından kaçının.',
-        7: 'Kilitli yerde saklayın. Hamile ve emziren kadınların erişimini kısıtlayın.',
+        7: 'Şüpheli üreme toksini — hamile ve emziren kadınlar çalışmamalıdır. '
+           'Kullanmadan önce özel talimatları edinin; maruziyeti minimize edin.',
+        72: 'Kilitli yerde saklayın. Hamile ve emziren kadınların erişimini kısıtlayın.',
         8: 'Nitril eldiven, göz koruyucu, ABEK filtreli maske.',
     },
     'H362': {
         4: 'Emziren anneler maruziyetten derhal uzaklaşmalı. Pediatriste başvurun.',
         5: 'Uygun söndürücü kullanın.',
         6: 'KKE ile toplayın.',
-        7: 'Emziren kadınların erişimini kısıtlayın.',
+        7: 'Emziren anneler bu maddeyle çalışmamalıdır; '
+           'maruziyetin süt yoluyla bebeğe geçme riski vardır.',
+        72: 'Emziren kadınların erişimini kısıtlayan, kilitli yerde saklayın.',
         8: 'Koruyucu eldiven ve giysi.',
     },
     'H401': {
         4: 'Su ile temasa geçmesini önleyin. Doktora gidin.',
         5: 'Yangın suyu çevreye yayılmasın.',
         6: 'Kanalizasyona girmesini önleyin. Absorban ile toplayın.',
-        7: 'Su kaynaklarından uzak, kapalı kapta saklayın.',
+        7: 'Su ortamına dökülmesini önleyin; taşıma sırasında ikincil güvenlik kabı kullanın.',
+        72: 'Su kaynaklarından uzak, sıkıca kapalı kapta saklayın.',
         8: 'Çevreye yayılmayı önleyen KKE kullanın.',
     },
     'H413': {
         4: 'Çevresel temas halinde yerel makamları haberdar edin.',
         5: 'Yangın suyu çevreye yayılmasın. Su kaynaklarını koruyun.',
         6: 'Kanalizasyona girmesini önleyin. Absorban ile toplayın.',
-        7: 'Çevre tehlikeli — sıkıca kapalı kapta, su kaynaklarından uzak saklayın.',
+        7: 'Su ortamına dökülmesini önleyin; taşıma sırasında ikincil güvenlik kabı kullanın.',
+        72: 'Çevre tehlikeli — sıkıca kapalı kapta, su kaynaklarından uzakta saklayın.',
         8: 'Çevreye yayılmayı önleyen KKE kullanın.',
     },
     'H420': {
         4: 'Ozon bozucu madde — yoğun maruziyet halinde doktora gidin.',
         5: 'CO₂ veya kuru kimyasal kullanın.',
         6: 'Açık alanlarda kullanın. Buharlanmayı önleyin.',
-        7: 'Sızdırmaz kapta, serin yerde saklayın. Sıcaktan koruyun.',
+        7: 'Ozon tabakasına zarar verir — atmosfere salınımı kesinlikle önleyin; '
+           'sızdırmaz ekipman ve boru bağlantıları kullanın.',
+        72: 'Sızdırmaz kapta, serin yerde, UV ışığından korunarak saklayın.',
         8: 'Uygun solunum maskesi ve göz koruyucu.',
     },
 
@@ -592,7 +659,8 @@ H_SENTENCES: Dict[str, Dict[int, str]] = {
         4: 'Isı kaynaklı yangın yaralanması için soğuk su uygulayın. Doktora gidin.',
         5: 'Uygun söndürücü kullanın. Isınan konteynerler patlayabilir.',
         6: 'Isı kaynaklarından uzaklaştırın. KKE ile toplayın.',
-        7: 'Serin yerde, ısı ve tutuşturma kaynaklarından uzakta saklayın.',
+        7: 'Isı ve tutuşma kaynaklarından uzak ortamda kullanın; ısınmayı önleyecek şekilde havalandırın.',
+        72: 'Serin yerde, ısı ve tutuşturma kaynaklarından uzakta, oksitleyicilerden ayrı saklayın.',
         8: 'Koruyucu eldiven ve yüz siperi kullanın.',
     },
     'H270': {
@@ -602,35 +670,7 @@ H_SENTENCES: Dict[str, Dict[int, str]] = {
         7: 'Yanıcı maddelerden uzakta, kilitli, havalandırılmış depoda saklayın.',
         8: 'Alev geciktirici giysi, SCBA ve yüz siperi zorunlu.',
     },
-    # ── EKSİK H KODLARI — CLP Annex I/III/IV Referanslı ──────────────────
-    'H228': {4:"Ciltle temas: suyla yıkayın.",5:"Yanıcı katı. Kuru kimyasal toz kullanın. Su kullanmayın.",6:"Tutuşma kaynaklarını kaldırın. Kuru malzeme ile toplayın.",7:"Serin, kuru, ısıdan uzak yerde saklayın.",8:"Antistatik eldiven kullanın.",},
-    'H229': {4:"Göze sıkılırsa bol suyla yıkayın.",5:"Basınçlı aerosol. CO2 veya kuru kimyasal kullanın.",6:"Alevden uzak tutun. İyi havalandırın.",7:"50 derece Celsius uzerinde tutmayın.",8:"Gözlük ve eldiven kullanın.",},
-    'H240': {4:"Isı etkisinde patlama. Yaralı varsa doktor.",5:"PATLAMA RİSKİ. Uzaklaşın. Uzaktan soğutun.",6:"Isıtmayın. Darbeden koruyun. Uzman ekip çağırın.",7:"Serin yerde saklayın. Darbe ve sürtünmeden koruyun.",8:"Patlama korumalı ekipman kullanın.",},
-    'H241': {4:"Isı etkisiyle yangın veya patlama. Tıbbi yardım.",5:"Yangın veya patlama riski. Uzaklaşın.",6:"Isıtmayın. Kıvılcımdan koruyun.",7:"Serin, iyi havalandırılmış yerde saklayın.",8:"Isıya dayanıklı eldiven kullanın.",},
-    'H250': {4:"Yanık: Derhal acile gidin.",5:"Kuru kum kullanın. Su KULLANMAYIN.",6:"İnert gaz altında çalışın. Havaya maruz bırakmayın.",7:"İnert atmosferde, hava geçirmez kapta saklayın.",8:"Tam KKE. İnert gaz ortamı zorunlu.",},
-    'H252': {4:"Yanık olursa soğuk su, tıbbi yardım.",5:"Büyük miktarda kendiliğinden ısınabilir. Kuru kum.",6:"Büyük miktarlardan kaçının. Yığın depolama tehlikeli.",7:"Küçük paketlerde, serin yerde saklayın.",8:"Isıya dayanıklı eldiven kullanın.",},
-    'H260': {4:"SU İLE TEMAS ETTİRMEYİN. Yanık: kuru bezle örtün, acil.",5:"Suyla alevlenir gaz çıkar. KESİNLİKLE SU KULLANMAYIN.",6:"Su kaynaklarından uzak tutun. Kuru absorban kullanın.",7:"Su ve nemden uzak tutun. İnert atmosferde saklayın.",8:"Su geçirmez eldiven. Yüz siperi. İnert gaz.",},
-    'H261': {4:"Suyla temasta oluşan gazı solumayın. Bol suyla yıkayın.",5:"Suyla alevlenir gaz çıkabilir. Kuru kimyasal kullanın.",6:"Su kaynaklarından uzak tutun. İyi havalandırın.",7:"Kuru, serin yerde saklayın. Nemden koruyun.",8:"Su geçirmez eldiven kullanın.",},
-    'H280': {4:"Donma yaralanması: Ilık suyla yavaş çözün. Acil.",5:"Basınçlı gaz. Kabı serin tutun. CO2 kullanın.",6:"Kıvılcım ve ısıdan uzak tutun. İyi havalandırın.",7:"50 derece altında saklayın. Güneşten koruyun.",8:"Isıya dayanıklı eldiven ve gözlük kullanın.",},
-    'H281': {4:"Kriyojenik yanık: Ilık su ile yavaş çözün. Ovmayın. Acil.",5:"Soğutulmuş gaz. Uzman ekip çağırın.",6:"Kriyojenik tehlike. Özel KKE olmadan müdahale etmeyin.",7:"Kriyojenik kaplarda saklayın.",8:"Kriyojenik eldiven, yüz siperi, tam koruyucu giysi.",},
-    'H290': {4:"Cilt veya göz temasında bol suyla yıkayın.",5:"Metallere aşındırıcı. CO2 veya kuru kimyasal kullanın.",6:"Metal ekipman ve yüzeylere dökmemeye dikkat edin.",7:"Metallerden uzakta, plastik veya cam kapta saklayın.",8:"Asit dayanıklı eldiven kullanın.",},
-    'H303': {4:"Yutulduysa ağzı çalkalayın. Büyük miktarda tıbbi yardım.",5:"Uygun söndürücü kullanın.",6:"Standart KKE ile toplayın.",7:"Gıda ve içeceklerden uzakta saklayın.",8:"Eldiven kullanın.",},
-    'H305': {4:"YUTULURSA: KESİNLİKLE KUSTURMAYINIZ. Hemen acile gidin.",5:"Uygun söndürücü kullanın.",6:"Absorban malzeme ile toplayın.",7:"Orijinal kabında, serin yerde saklayın.",8:"Eldiven ve gözlük kullanın.",},
-    'H312': {4:"Ciltle temas: Giysileri çıkarın. 15 dakika bol suyla yıkayın.",5:"Uygun söndürücü kullanın. Duman solumayın.",6:"Cilt temasından kaçının. Nitril eldiven kullanın.",7:"Serin, kuru yerde saklayın.",8:"Kimyasala dayanıklı eldiven kullanın.",},
-    'H313': {4:"Cilt ile temasta suyla yıkayın.",5:"Uygun söndürücü kullanın.",6:"Cilt temasından kaçının.",7:"Serin yerde saklayın.",8:"Eldiven kullanın.",},
-    'H316': {4:"Ciltle temas: suyla yıkayın. Tahriş sürerse doktor.",5:"Su spreyi veya uygun söndürücü kullanın.",6:"Absorban malzeme ile toplayın.",7:"Serin yerde saklayın.",8:"Eldiven ve gözlük kullanın.",},
-    'H320': {4:"Gözle temas: 10 dakika suyla yıkayın. Tahriş devam ederse göz doktoru.",5:"Uygun söndürücü kullanın.",6:"Gözlük takın. Absorban malzeme ile toplayın.",7:"Serin yerde saklayın.",8:"Güvenlik gözlüğü kullanın.",},
-    'H332': {4:"SOLUNURSA: Temiz havaya çıkarın. Semptom varsa doktora gidin.",5:"Duman solumayın. Solunum koruması kullanın.",6:"İyi havalandırın. Solunum koruması kullanın.",7:"Serin, iyi havalandırılmış yerde saklayın.",8:"Organik buhar filtreli yarım yüz maskesi kullanın.",},
-    'H333': {4:"Solunursa temiz havaya çıkarın. Semptom varsa doktor.",5:"Uygun söndürücü kullanın.",6:"İyi havalandırın.",7:"Serin yerde saklayın.",8:"Solunum koruması kullanın.",},
-    'H334': {4:"SOLUNURSA: Derhal temiz havaya çıkarın. Astım semptomu: acil servis.",5:"SCBA ile söndürün. Dumanı solumayın.",6:"Yalnızca SCBA ile müdahale edin. Bölgeyi tahliye edin.",7:"Sıkıca kapalı, serin, iyi havalandırılmış yerde saklayın.",8:"Solunum duyarlılaştırıcı. SCBA veya tam yüz maskesi zorunlu.",},
-    'H335': {4:"SOLUNURSA: Temiz havaya çıkarın. Öksürük varsa doktor.",5:"İyi havalandırın. Solunum koruması kullanın.",6:"İyi havalandırın. Buhar solumayın.",7:"Sıkıca kapalı, iyi havalandırılmış yerde saklayın.",8:"Solunum yolu tahrişi. Organik buhar filtreli maske kullanın.",},
-    'H336': {4:"SOLUNURSA: Temiz havaya çıkarın. Uyuşukluk varsa doktora gidin.",5:"Yanıcı olabilir. Narkotik buhar solumayın. Uygun söndürücü.",6:"İyi havalandırın. Bölgede uyuşukluk riski: çabuk müdahale.",7:"Serin, iyi havalandırılmış yerde saklayın.",8:"Narkotik etki. Organik buhar filtreli maske. Kapalı alanda dikkat.",},
-    'H341': {4:"Maruziyet sonrası semptom olmasa da doktora danışın.",5:"Dumanı solumayın. Uygun KKE kullanın.",6:"Gereksiz maruziyetten kaçının. KKE kullanın.",7:"Güvenli, kilitli yerde saklayın.",8:"Şüpheli mutajen. Nitril eldiven, gözlük, solunum koruması.",},
-    'H351': {4:"Tıbbi yardım alın. Kronik maruziyeti bildirin.",5:"Dumanı solumayın. Tam KKE kullanın.",6:"Gereksiz maruziyetten kaçının.",7:"Güvenli, kilitli yerde saklayın.",8:"Şüpheli kanserojen. Nitril eldiven, gözlük, solunum koruması.",},
-    'H361': {4:"Hamile veya emziren: Derhal tıbbi yardım alın.",5:"Dumanı solumayın. Uygun KKE kullanın.",6:"Hamile çalışanlar bu madde ile çalışmamalıdır.",7:"Güvenli, kilitli yerde saklayın.",8:"Şüpheli üreme toksini. Hamile kişiler maruz kalmamalı.",},
-    'H362': {4:"Emziren anneler: Hemen tıbbi yardım alın.",5:"Uygun söndürücü kullanın.",6:"Emziren çalışanlar bu madde ile çalışmamalıdır.",7:"Güvenli yerde saklayın.",8:"Emziren kişiler maruz kalmamalı. Tam KKE.",},
-    'H413': {4:"Suya dökülmesini önleyin. Semptom varsa doktora gidin.",5:"Yangın söndürme suyunun çevreye yayılmasını önleyin.",6:"Su kaynaklarına karışmasını önleyin.",7:"Su kaynaklarından uzakta saklayın.",8:"Çevre açısından zararlı. Eldiven kullanın.",},
-    'H420': {4:"Solunursa temiz havaya çıkarın. Semptom varsa doktora gidin.",5:"Ozona zararlı. CO2 veya kuru kimyasal kullanın.",6:"İyi havalandırın. Ozon oluşumuna dikkat edin.",7:"UV ışığından koruyun. Serin yerde saklayın.",8:"Solunum koruması kullanın.",},
+    # Not: Tüm H kodları yukarıda detaylı olarak tanımlanmıştır.
 
 }
 

@@ -203,13 +203,21 @@ H_SENTENCES: Dict[str, Dict[int, str]] = {
         4: 'Buhar solunursa kişiyi derhal temiz havaya çıkarın. Solunumu yoksa suni solunum uygulayın.',
         5: 'Son derece yanıcı sıvı ve buhar. Kuru kimyasal toz, CO₂ veya alkolle uyumlu köpük kullanın. Su spreyi ile söndürülebilir ancak su jeti kullanmayın.',
         6: 'Tüm tutuşma kaynaklarını derhal ortadan kaldırın. Dökülmüş maddenin kanalizasyon veya su kaynaklarına ulaşmasını önleyin. Kuru kum veya inert absorban malzemeyle toplayın.',
-        7: 'Serin, kuru ve iyi havalandırılan yerde saklayın. Isı ve tutuşma kaynaklarından uzak tutun. Kabı sıkıca kapalı tutun.',
+        7: 'Ekipman ve alıcı kabı topraklayın/bağlayın (P240). Kıvılcım çıkarmayan aletler kullanın (P242). '
+           'Statik elektrik oluşumunu kesinlikle önleyin (P243). Yalnızca iyi havalandırılan alanlarda kullanın. '
+           'Buhar ve sis solumaktan kaçının; sprey oluşturmayın. Isı, kıvılcım ve açık alevden uzak tutun.',
+        72: 'Serin (≤20°C), kuru ve iyi havalandırılan yerde orijinal kabında saklayın. '
+            'Isı, kıvılcım ve açık alevden uzakta, güçlü oksitleyicilerden ayrı depolayın. Kabı sıkıca kapalı tutun.',
     },
     'H225': {
         4: 'Buhar solunursa kişiyi temiz havaya çıkarın. Ciltle temas halinde bol su ile yıkayın.',
         5: 'Yanıcı sıvı ve buhar. Kuru kimyasal, CO₂ veya köpükle söndürün. Büyük yangınlarda su sisi kullanılabilir.',
         6: 'Tutuşma kaynaklarını ortadan kaldırın. Döküntüyü absorban malzeme ile toplayın. Buhar birikimini önlemek için havalandırın.',
-        7: 'Serin, iyi havalandırılan yerde, ateş ve kıvılcımdan uzakta saklayın.',
+        7: 'Ekipman ve alıcı kabı topraklayın/bağlayın (P240). Kıvılcım çıkarmayan aletler kullanın (P242). '
+           'Statik elektrik oluşumunu önleyin (P243). İyi havalandırılan alanlarda kullanın. '
+           'Tutuşma kaynaklarından (kıvılcım, alev, sıcak yüzey) uzak tutun; sigara içmeyin.',
+        72: 'Serin (≤25°C), iyi havalandırılan yerde, orijinal kabında saklayın. '
+            'Isı, kıvılcım ve açık alevden uzakta, güçlü oksitleyicilerden ayrı depolayın. Kabı sıkıca kapalı tutun.',
     },
     'H226': {
         4: 'SOLUNMA: Kişiyi temiz havaya çıkarın. Nefes almakta güçlük çekiyorsa oksijen verin. '
@@ -221,9 +229,11 @@ H_SENTENCES: Dict[str, Dict[int, str]] = {
         6: 'Tüm tutuşturma kaynaklarını ortadan kaldırın. Yeterli havalandırma sağlayın. '
            'Kuru absorban malzeme (kum, vermikülit) ile toplayın. '
            'Döküntünün kanalizasyon ve su kaynaklarına ulaşmasını önleyin.',
-        7: 'Serin (≤25°C), iyi havalandırılmış yerde, orijinal kabında saklayın. '
-           'Isı, kıvılcım ve açık alevden uzak tutun. Güçlü oksitleyicilerden ayrı saklayın. '
-           'Statik elektriklenmeye karşı topraklama yapın.',
+        7: 'Kullanım sırasında statik elektriğe karşı topraklama yapın (P240). '
+           'Kıvılcım çıkarmayan aletler kullanın (P242). Statik elektrik oluşumunu önleyin (P243). '
+           'İyi havalandırın; buhar ve sis oluşumundan kaçının. Tutuşma kaynaklarından uzak tutun.',
+        72: 'Serin (≤25°C), iyi havalandırılmış yerde, orijinal kabında saklayın. '
+            'Isı, kıvılcım ve açık alevden uzak tutun. Güçlü oksitleyicilerden ayrı saklayın.',
     },
 
     # ── CİLT / GÖZ ────────────────────────────────────────────────────────
@@ -231,7 +241,12 @@ H_SENTENCES: Dict[str, Dict[int, str]] = {
         4: 'CİLDE TEMAS: Kirlenmiş giysileri hemen çıkarın. Cilt ve gözleri en az 15-20 dakika bol su ile yıkayın. Derhal tıbbi yardım alın.',
         5: 'Korozif madde. Yangın söndürücü olarak CO₂, kuru kimyasal veya su sisi kullanın. Su jeti kullanmayın.',
         6: 'KKE giymeden yaklaşmayın. Asit/baz nötralizasyonu yapmayın. Döküntüyü kuru absorban malzeme ile toplayın.',
-        7: 'Korozif metallere, asite/baza duyarlı malzemelere zarar verir. Ayrı, iyi havalandırılan yerde saklayın.',
+        7: 'Kullanmadan önce tam KKE (eldiven, gözlük, yüz siperi) giyin. '
+           'Göz yıkama istasyonunun erişilebilir ve çalışır durumda olduğunu kontrol edin. '
+           'Nötralizasyon maddesi (kireç veya sodyum karbonat) yakında hazır bulundurun. '
+           'Buhar/aerosol oluşumundan kaçının; yetersiz havalandırmada solunum koruyucu kullanın.',
+        72: 'Korozif metallere ve aside/baza duyarlı malzemelere zarar verir. '
+            'Ayrı, iyi havalandırılan, serin yerde sızdırmaz kapta saklayın.',
         8: 'Yüz siperi, kimyasala dayanıklı eldiven (nitril veya neopren ≥0.5mm), koruyucu giysi ve çizme. Göz yıkama istasyonu bulundurulmalıdır.',
     },
     'H315': {

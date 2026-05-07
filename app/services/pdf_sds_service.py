@@ -1161,10 +1161,15 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     story += bullet_list(sec7['bullets'], styles) or [na_text(lang, styles)]
 
     story += sub_block(f"7.2 {sub_title(lang,'7.2')}", styles)
-    story.append(Paragraph(
-        get_sentence(lang,'storage_default') or S(lang,'storage_default'),
-        styles['body']
-    ))
+    # H kodu bazlı depolama metinleri (slot 72) — H224/H225/H226/H314 için özel
+    sec72 = generate_section(72, h_codes)
+    if sec72['bullets']:
+        story += bullet_list(sec72['bullets'], styles)
+    else:
+        story.append(Paragraph(
+            get_sentence(lang,'storage_default') or S(lang,'storage_default'),
+            styles['body']
+        ))
 
     story += sub_block(f"7.3 {sub_title(lang,'7.3')}", styles)
     specific_use = sds_data.get('specific_use', '')

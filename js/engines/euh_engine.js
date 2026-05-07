@@ -204,7 +204,8 @@ const EUHEngine = (() => {
         codes.add('EUH209');
         details.push({ code:'EUH209', text: EUH_TEXTS['EUH209'], source: `${name} — H224/H225, %${conc} (eşik altı yanıcı bileşen)`, type:'auto' });
       }
-      if (!codes.has('EUH209A') && !mixAlreadyFlam3 &&
+      // EUH209A: yalnızca karışım H224/H225/H226 ALMIYORSA geçerlidir (CLP Ek II §2.10)
+      if (!codes.has('EUH209A') && !mixAlreadyFlam12 && !mixAlreadyFlam3 &&
           flamCodes.includes('H226') && conc >= 1.0 && conc < 10.0) {
         codes.add('EUH209A');
         details.push({ code:'EUH209A', text: EUH_TEXTS['EUH209A'], source: `${name} — H226, %${conc} (eşik altı yanıcı bileşen)`, type:'auto' });

@@ -485,8 +485,14 @@ P_LABEL_MANDATORY = ['P101', 'P102', 'P501']
 # H kodu bazlı etiket zorunlu P kodları — CLP Annex IV zorunluluğu
 # Bu P kodları ilgili H kodu varken her zaman etikete yazılmalı (6 limitinden önce eklenir)
 H_BASED_LABEL_FORCED: Dict[str, List[str]] = {
-    # Cilt aşınması — KKE + kilitli depolama zorunlu (CLP Annex IV + Annex III)
-    'H314': ['P280', 'P405'],
+    # Alevlenir sıvı — tutuşma kaynağından uzak tutma ZORUNLU (CLP Annex IV)
+    # P210 en kritik önleme kodudur; 6-limit yarışına bırakılmamalı
+    'H224': ['P210'],
+    'H225': ['P210'],
+    'H226': ['P210'],
+    # Cilt aşınması — KKE + acil durulama + göz yıkama + solunum koruması ZORUNLU
+    # CLP Annex IV: P303+P361+P353, P305+P351+P338 ve P260 aşındırıcı etiketinde zorunlu
+    'H314': ['P280', 'P405', 'P303+P361+P353', 'P305+P351+P338', 'P260'],
     # Ağır göz hasarı — KKE zorunlu (H318, H314 ile çakışırsa P280 zaten var)
     'H318': ['P280'],
     # Cilt tahrişi / Cilt duyarlılaştırma — KKE zorunlu (CLP Annex IV)

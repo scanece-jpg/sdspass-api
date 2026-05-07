@@ -238,10 +238,17 @@ def calculate_aquatic(
             if td.noec_chronic:
                 m_chronic = max(m_chronic, _ec50_to_m_factor(td.noec_chronic))
 
+        # H410 (Aquatic Chronic 1) varsa H400 (Aquatic Acute 1) atla:
+        # H410 zaten hem akut hem kronik katkıyı kapsar (çift sayım ve çift tablo satırı önleme)
+        haz_classes = {h.get('h_class', '').replace('*', '').strip() for h in hazards}
+        has_h410 = 'Aquatic Chronic 1' in haz_classes
+
         for haz in hazards:
             hc = haz.get('h_class', '').replace('*', '').strip()
 
             if hc == 'Aquatic Acute 1':
+                if has_h410:
+                    continue  # H410 varsa H400 işleme — H410 bloğu akut+kronik ikisini de karşılar
                 # Dahil etme eşiği: ≥ %0.1 / M_akut  (SEA Ek-1 §4.1.3.5.5)
                 if conc >= (0.1 / max(m_acute, 1)):
                     sum_acute_m += (conc * m_acute) / 100

@@ -25,7 +25,10 @@
         "h_code": "H317"
       }
     ],
-    "m_factors": {},
+    "m_factors": {
+      "acute": 1,
+      "chronic": 10
+    },
     "scl_limits": []
   },
   "labelling": {

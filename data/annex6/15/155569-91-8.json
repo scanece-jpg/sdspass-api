@@ -41,7 +41,10 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {},
+    "m_factors": {
+      "acute": 10000,
+      "chronic": 10000
+    },
     "scl_limits": [
       {
         "h_code": "H372",

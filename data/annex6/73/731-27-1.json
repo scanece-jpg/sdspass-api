@@ -29,7 +29,9 @@
         "h_code": "H400"
       }
     ],
-    "m_factors": {},
+    "m_factors": {
+      "acute": 10
+    },
     "scl_limits": []
   },
   "labelling": {

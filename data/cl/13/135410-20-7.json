@@ -19,7 +19,10 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {},
+    "m_factors": {
+      "acute": 10,
+      "chronic": 10
+    },
     "scl_limits": []
   },
   "labelling": {

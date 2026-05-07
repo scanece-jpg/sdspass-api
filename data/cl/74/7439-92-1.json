@@ -19,7 +19,9 @@
         "h_code": "H360FD"
       }
     ],
-    "m_factors": {},
+    "m_factors": {
+      "acute": 10
+    },
     "scl_limits": []
   },
   "labelling": {

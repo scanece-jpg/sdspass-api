@@ -33,7 +33,10 @@
         "h_code": "H410"
       }
     ],
-    "m_factors": {},
+    "m_factors": {
+      "acute": 1000,
+      "chronic": 10000
+    },
     "scl_limits": []
   },
   "labelling": {

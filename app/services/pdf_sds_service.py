@@ -1775,7 +1775,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     if _soil_comps:
         _known = [c for c in _soil_comps if c.get('log_koc') is not None]
         if _known:
-            _soil_txt = '; '.join(f"{c['name']}: {c['mobility']}" for c in _known)
+            _soil_txt = '; '.join(
+                f"{(c.get('name_tr') or c['name']) if lang == 'TR' else c['name']}: {c['mobility']}"
+                for c in _known
+            )
         else:
             _soil_txt = ('Toprak adsorpsiyon verisi mevcut değil.' if lang=='TR'
                          else 'No soil adsorption data available.')

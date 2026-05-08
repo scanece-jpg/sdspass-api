@@ -594,7 +594,8 @@ def assess_soil_mobility(
         conc = float(comp.get('worst_case_conc', comp.get('conc', 0)) or 0)
         if conc < 0.1:
             continue
-        name = comp.get('name') or cas
+        name    = comp.get('name') or cas
+        name_tr = comp.get('name_tr') or name   # TR SDS için Türkçe ad
         td = (eco_test_data or {}).get(cas)
 
         log_koc = LOG_KOC_DB.get(cas)
@@ -608,8 +609,8 @@ def assess_soil_mobility(
                 log_koc = estimate_log_koc(kow)
 
         if log_koc is None:
-            results.append({'cas': cas, 'name': name, 'conc': conc,
-                           'log_koc': None, 'mobility': 'Bilinmiyor'})
+            results.append({'cas': cas, 'name': name, 'name_tr': name_tr,
+                            'conc': conc, 'log_koc': None, 'mobility': 'Bilinmiyor'})
             continue
 
         if log_koc < 2.0:
@@ -621,9 +622,9 @@ def assess_soil_mobility(
 
         # Toprak toksisitesi
         soil_ec50 = SOIL_EC50_DB.get(cas)
-        results.append({'cas': cas, 'name': name, 'conc': conc,
-                       'log_koc': log_koc, 'mobility': mobility,
-                       'soil_ec50': soil_ec50})
+        results.append({'cas': cas, 'name': name, 'name_tr': name_tr,
+                        'conc': conc, 'log_koc': log_koc, 'mobility': mobility,
+                        'soil_ec50': soil_ec50})
 
     return {'components': results}
 

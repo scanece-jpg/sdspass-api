@@ -1364,7 +1364,12 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     def _pv(key, unit=''):
         v = phys.get(key)
         if v is None or v == '': return na
-        val_str = f"{v} {unit}".strip() if unit else str(v)
+        v_str = str(v)
+        # Birim zaten değerin içindeyse tekrar ekleme
+        if unit and unit not in v_str:
+            val_str = f"{v_str} {unit}"
+        else:
+            val_str = v_str
         val_str += _method_note(key)
         return val_str
 

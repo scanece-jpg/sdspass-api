@@ -1,7 +1,7 @@
 {
   "cas": "50-00-0",
-  "name": "formaldehyde …%",
-  "name_tr": "formaldehid ...%",
+  "name": "formaldehyde",
+  "name_tr": "formaldehit",
   "ec_no": "200-001-8",
   "index_no": "605-001-00-5",
   "atp": "ATP22",
@@ -41,6 +41,12 @@
         "h_code": "H335",
         "class": "",
         "c_min": 5.0,
+        "c_max": null
+      },
+      {
+        "h_code": "H317",
+        "class": "Skin Sens. 1A",
+        "c_min": 0.1,
         "c_max": null
       },
       {

@@ -761,6 +761,26 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     # STOT RE hedef organ haritası — Bölüm 2.2 ve 11'de kullanılır
     _stot_organ_map = _build_stot_organ_map(components)
 
+    # ── H314 Nötralizasyon Override — kullanıcı "kaldır" seçtiyse ────────────
+    _h314_removed = bool(sds_data.get('h314_neutralization_removed', False))
+    _H314_COVERED = {'H314', 'H318', 'H315', 'H319'}  # H314 kaldırılınca bunlar da düşer
+    if _h314_removed:
+        orig_h_codes = list(clp.get('h_codes', []))
+        clp = dict(clp)
+        clp['h_codes'] = [h for h in orig_h_codes if h not in _H314_COVERED]
+        # Piktogramlar ve sinyal kelimesini yeniden hesapla (korozif ikonu düşer)
+        _corr_pics = {'GHS05'}
+        clp['pictograms'] = [p for p in clp.get('pictograms', []) if p not in _corr_pics]
+        # Signal word: H314 kaldırıldıysa "Tehlike" → "Uyarı" gerekebilir
+        # (diğer Tehlike H kodları varsa Tehlike kalır — basit kontrol)
+        _danger_h = {'H200','H201','H202','H203','H204','H205',
+                     'H220','H222','H224','H225','H240','H241',
+                     'H250','H260','H270','H271','H272',
+                     'H300','H301','H310','H311','H330','H331',
+                     'H334','H340','H350','H360','H370','H372','H225'}
+        if not any(h in _danger_h for h in clp['h_codes']):
+            clp['signal_word'] = 'Warning'
+
     # ── Cross-section validation ──────────────────────────────────────────────
     _validation_issues = validate_sds(
         sds_data   = sds_data,
@@ -969,6 +989,23 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             ))
     else:
         story.append(Paragraph(term(lang,'not_classified'), styles['body']))
+
+    # H314 nötralizasyon notu — kullanıcı kaldırmayı seçtiyse
+    if _h314_removed:
+        ph_val = sds_data.get('phys_props', {}).get('ph', '—')
+        _note = (
+            f'<font color="#cc6600"><b>⚠ Not:</b></font> H314 (Cilt Aş. 1A) sınıflandırması '
+            f'kullanıcı kararıyla kaldırılmıştır. Gerekçe: Karışımın ölçülen pH\'ı ({ph_val}) '
+            f'nötralizasyon gerçekleştiğini göstermektedir. '
+            f'KKDİK Ek-1 §3.2.3.3 — tepkimeye girmemiş serbest bileşen konsantrasyonları esas alınmıştır.'
+        ) if lang == 'TR' else (
+            f'<font color="#cc6600"><b>⚠ Note:</b></font> H314 classification removed by user decision. '
+            f'Rationale: measured pH ({ph_val}) indicates acid-base neutralisation has occurred. '
+            f'KKDİK Annex I §3.2.3.3 — based on unreacted free component concentrations.'
+        )
+        story.append(Spacer(1, 4))
+        story.append(Paragraph(_note, styles['small']))
+
     story.append(Spacer(1, 3))
 
     story += sub_block(f"2.2 {sub_title(lang,'2.2')}", styles)

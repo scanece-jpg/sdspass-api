@@ -142,7 +142,8 @@ const PhysicalEngine = (() => {
     '7664-93-9': null,  // H₂SO₄ (KN: 337°C — BP_DB'de null = sınıflandırmaya dahil etme)
     '7664-38-2': null,  // H₃PO₄
     '7697-37-2': null,  // HNO₃
-    '7647-01-0': null,  // HCl (gaz)
+    '7647-01-0': null,  // HCl (gaz — sulu çözelti olarak kullanılır, gaz KN=-85°C dahil edilmez)
+    '50-00-0':   null,  // Formaldehit (gaz KN=-19°C — formalin çözeltisi olarak kullanılır, dahil edilmez)
     '497-19-8':  null,  // Na₂CO₃
     '10043-52-4':null,  // CaCl₂
     '7647-14-5': null,  // NaCl

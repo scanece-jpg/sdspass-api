@@ -1744,7 +1744,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         # Başlık
         ate_header = ('ATE Karışım Hesabı — CLP Ek I §3.1.3' if lang == 'TR'
                       else 'ATEmix Calculation — CLP Annex I §3.1.3')
-        story.append(Paragraph(ate_header, styles['sub']))
+        story.append(Paragraph(ate_header, styles['sub_title']))
         story.append(Spacer(1, 3))
 
         # Her yol için sonuç satırı

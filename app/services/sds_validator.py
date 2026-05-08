@@ -174,12 +174,20 @@ def validate_sds(
                  "KKDİK Kanserojen/Mutajen Yönetmeliği")
 
     # V013: Etiket P kodu sayısı kontrolü
+    # label yapısı: {'selected':[...], 'all':[...], ...} veya düz liste
     p_codes = sds_data.get("p_codes",{})
     label_p = p_codes.get("label",{})
-    label_count = len(label_p) if isinstance(label_p, (list,dict)) else 0
+    if isinstance(label_p, dict):
+        # select_label_p_codes sonucu — 'selected' listesini say (P501 hariç)
+        _sel = label_p.get("selected", label_p.get("selected_codes", []))
+        label_count = len([p for p in _sel if p not in ('P501','P101','P102')])
+    elif isinstance(label_p, list):
+        label_count = len([p for p in label_p if p not in ('P501','P101','P102')])
+    else:
+        label_count = 0
     if label_count > 6:
         warn("V013","B2",
-             f"Etikette {label_count} P kodu var. CLP kuralı max 6 P koduna izin verir.",
+             f"Etikette {label_count} P kodu var (P501 hariç). CLP kuralı max 6 P koduna izin verir.",
              "CLP Article 22(4)")
 
     # V014: Signal word tutarlılığı

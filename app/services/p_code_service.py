@@ -491,8 +491,9 @@ H_BASED_LABEL_FORCED: Dict[str, List[str]] = {
     'H225': ['P210'],
     'H226': ['P210'],
     # Cilt aşınması — KKE + acil durulama + göz yıkama + solunum koruması ZORUNLU
-    # CLP Annex IV: P303+P361+P353, P305+P351+P338 ve P260 aşındırıcı etiketinde zorunlu
-    'H314': ['P280', 'P405', 'P303+P361+P353', 'P305+P351+P338', 'P260'],
+    # CLP Annex IV Tablo 6.3: P301+P330+P331 (yutulursa — kusturma YASAK) H314 için zorunlu
+    # P405 (kilitli sakla) önem sırasında daha düşük → priority yarışına bırakılır
+    'H314': ['P280', 'P301+P330+P331', 'P303+P361+P353', 'P305+P351+P338', 'P260'],
     # Ağır göz hasarı — KKE zorunlu (H318, H314 ile çakışırsa P280 zaten var)
     'H318': ['P280'],
     # Cilt tahrişi / Cilt duyarlılaştırma — KKE zorunlu (CLP Annex IV)

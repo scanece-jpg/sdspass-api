@@ -1674,6 +1674,67 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     # Frontend'den gelen ATEmix detayları (JS engine hesabı)
     ate_mix_details = sds_data.get('ate_mix_details', {})
 
+    # Backend fallback: frontend boş gönderirse backend hesapla
+    # CLP Ek I §3.1.3 — ATEmix = 100 / Σ(Ci/ATEi)
+    if not ate_mix_details and comp_has_acute:
+        _ATE_POINT = {
+            'H300': 0.5, 'H301': 100.0, 'H302': 500.0,
+            'H310': 5.0, 'H311': 300.0, 'H312': 1100.0,
+            'H330': 0.05,'H331': 3.0,   'H332': 11.0,
+        }
+        _ATE_CAT2  = {'H300': 5.0, 'H310': 50.0, 'H330': 0.5}
+        _ATE_ROUTES = {
+            'oral':   {'H300','H301','H302'},
+            'dermal': {'H310','H311','H312'},
+            'inhal':  {'H330','H331','H332'},
+        }
+        _ATE_CLASSIFY = {
+            'oral':   [(5,'H300'),(50,'H300'),(300,'H301'),(2000,'H302')],
+            'dermal': [(50,'H310'),(200,'H310'),(1000,'H311'),(2000,'H312')],
+            'inhal':  [(0.5,'H330'),(2.0,'H330'),(10,'H331'),(20,'H332')],
+        }
+        for route, code_set in _ATE_ROUTES.items():
+            sum_inv = 0.0
+            ate_comps_r = []
+            for comp_item in sds_data.get('components', []):
+                conc = float(comp_item.get('concentration') or
+                             comp_item.get('conc') or 0)
+                if conc <= 0:
+                    continue
+                for hz in comp_item.get('hazards', []):
+                    code = (hz.get('h_code') or '').replace('*','').strip()[:4]
+                    if code not in code_set:
+                        continue
+                    hclass = (hz.get('h_class') or '').replace('*','').strip()
+                    ate = _ATE_POINT.get(code)
+                    if ate is None:
+                        continue
+                    if hclass == 'Acute Tox. 2' and code in _ATE_CAT2:
+                        ate = _ATE_CAT2[code]
+                    sum_inv += conc / ate
+                    ate_comps_r.append({
+                        'name': comp_item.get('name',''),
+                        'conc': conc,
+                        'code': code,
+                        'ate':  ate,
+                    })
+                    break  # her bileşenden yol başına tek katkı
+            if sum_inv <= 0:
+                continue
+            ate_mix_val = round(100.0 / sum_inv, 1)
+            result_code = None
+            for threshold, h in _ATE_CLASSIFY[route]:
+                if ate_mix_val <= threshold:
+                    result_code = h
+                    break
+            known_conc = sum(c['conc'] for c in ate_comps_r)
+            ate_mix_details[route] = {
+                'ateMix':      ate_mix_val,
+                'resultCode':  result_code,
+                'unknownPct':  round(max(0.0, 100.0 - known_conc), 1),
+                'components':  ate_comps_r,
+            }
+
     _ROUTE_LABEL_TR = {'oral': 'Oral (Ağız)', 'dermal': 'Dermal (Deri)', 'inhal': 'İnhalasyon (Solunum)'}
     _ROUTE_LABEL_EN = {'oral': 'Oral', 'dermal': 'Dermal', 'inhal': 'Inhalation'}
     _ROUTE_UNIT     = {'oral': 'mg/kg', 'dermal': 'mg/kg', 'inhal': 'mg/L/4h'}

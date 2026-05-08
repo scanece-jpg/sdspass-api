@@ -1406,7 +1406,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         [phys_prop(lang,'density'),       _pv('density','g/cm³')],
         [_rd_lbl,                         _pv('rel_density')],
         [phys_prop(lang,'viscosity'),     _pv('viscosity','cSt @40°C')],
-        [phys_prop(lang,'solubility'),    _pv('solubility')],
+        [phys_prop(lang,'solubility'),    _pv('solubility', 'mg/L')],
         [phys_prop(lang,'vapor_pressure'),_vp_val],
         [_vd_lbl,                         _pv('vapor_density')],
         [_kow_lbl,                        _pv('log_kow')],

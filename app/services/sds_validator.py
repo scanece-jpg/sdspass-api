@@ -70,16 +70,67 @@ def validate_sds(
                  f"Viskozite {vis} mm²/s. H304 genellikle <20 mm²/s maddeler için geçerlidir.",
                  "CLP Annex I 3.10.3")
 
+    # ── Asit-Baz nötralizasyon tespiti (V006 için) ──────────────────────────
+    # Bilinen korozif bazlar (CAS)
+    _CORROSIVE_BASES = {
+        '1310-73-2',  # NaOH
+        '1310-58-3',  # KOH
+        '1305-62-0',  # Ca(OH)2
+        '1336-21-6',  # NH3 çözeltisi
+        '7664-41-7',  # NH3 gaz
+        '497-19-8',   # Na2CO3
+        '584-08-7',   # K2CO3
+        '7681-52-9',  # NaOCl
+        '10124-56-8', # Na hexametafosfat
+        '1313-82-2',  # Na2S
+        '16721-80-5', # NaHS
+    }
+    # Bilinen korozif asitler (CAS)
+    _CORROSIVE_ACIDS = {
+        '7647-01-0',  # HCl
+        '7664-93-9',  # H2SO4
+        '7697-37-2',  # HNO3
+        '7664-38-2',  # H3PO4
+        '7783-06-4',  # H2S
+        '79-10-7',    # Akrilik asit
+        '64-18-6',    # Formik asit
+        '79-11-8',    # Kloroasetik asit
+        '107-92-6',   # Bütirik asit
+        '79-09-4',    # Propiyonik asit
+        '50-21-5',    # Laktik asit
+        '77-92-9',    # Sitrik asit
+    }
+    _comp_cas_list = [str(c.get('cas_no') or c.get('cas','')).strip()
+                      for c in (components or [])]
+    _has_corr_base = any(cas in _CORROSIVE_BASES for cas in _comp_cas_list)
+    _has_corr_acid = any(cas in _CORROSIVE_ACIDS for cas in _comp_cas_list)
+    _neutralization_likely = _has_corr_base and _has_corr_acid
+
     # V005: H314 (Aşındırıcı) → pH zorunlu
     if "H314" in h_codes or "H290" in h_codes:
         if ph is None:
             warn("V005","B9",
                  "H314 (Aşındırıcı) veya H290 kodunuz var. pH değeri girilmesi önerilir.",
                  "KKDİK EK-2 B9 gereklilikleri")
-        elif ph is not None and 4 <= ph <= 10:
-            warn("V006","B2+B9",
-                 f"pH {ph} — aşındırıcı özellik için pH<2 veya pH>11.5 beklenir. Sınıflandırmayı kontrol edin.",
-                 "CLP Annex I 3.2.1")
+        elif ph is not None and 2.0 < ph < 11.5:
+            if _neutralization_likely:
+                # Asit + baz bir arada → nötralizasyon → H314 geçersiz olabilir
+                _base_names = [c.get('name_tr') or c.get('name','')
+                               for c in (components or [])
+                               if str(c.get('cas_no') or c.get('cas','')).strip() in _CORROSIVE_BASES]
+                _acid_names = [c.get('name_tr') or c.get('name','')
+                               for c in (components or [])
+                               if str(c.get('cas_no') or c.get('cas','')).strip() in _CORROSIVE_ACIDS]
+                warn("V006","B2+B9",
+                     f"pH {ph} ile H314 çelişiyor — Karışımda asit ({', '.join(_acid_names)}) "
+                     f"ve baz ({', '.join(_base_names)}) birlikte mevcut. "
+                     f"KKDİK Ek-1 §3.2.3.3: nötralizasyon gerçekleşmişse H314 geçersiz olabilir. "
+                     f"Karışımı test ettirin veya serbest bileşen konsantrasyonlarını gözden geçirin.",
+                     "KKDİK Ek-1 §3.2.3.3.3 / CLP Annex I §3.2.3.3")
+            else:
+                warn("V006","B2+B9",
+                     f"pH {ph} — aşındırıcı özellik için pH<2 veya pH>11.5 beklenir. Sınıflandırmayı kontrol edin.",
+                     "CLP Annex I 3.2.1")
 
     # V007: H400/H410 → Sucul bilgi zorunlu (B12)
     if any(h in h_codes for h in ["H400","H410","H411"]):

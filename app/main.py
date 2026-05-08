@@ -280,7 +280,9 @@ async def generate_pdf(data: dict = Body(...)):
             'disclosure_map': disc_map,
             'phys_props':   phys_in,
             'eco':          eco_result,
-            'transport':    _map_transport(data.get('transport', {})),
+            # H314 kaldırıldıysa transport sıfırla — PDF servisi filtrelenmiş
+            # h_codes ile _auto_un motorunu çalıştırsın (UN 2924→UN 1993 vb.)
+            'transport':    {} if _h314_removed_flag else _map_transport(data.get('transport', {})),
             'revision': {
                 'date':    rev_date,
                 'no':      revision_in.get('no', '1'),

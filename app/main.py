@@ -132,7 +132,21 @@ async def generate_pdf(data: dict = Body(...)):
         if _sds12.get('H420') and 'H420' not in all_h_codes:
             all_h_codes = list(all_h_codes) + ['H420']
 
-        # P kodlarını güncel h_codes ile yeniden hesapla (eko H kodu dahil)
+        # H314 nötralizasyon kararı — P kodu hesabından ÖNCE h_codes filtrelenir
+        _H314_COVERED = {'H314', 'H318', 'H315', 'H319'}
+        _h314_removed_flag = bool(data.get('h314_neutralization_removed', False))
+        if _h314_removed_flag:
+            h_codes     = [h for h in h_codes     if h not in _H314_COVERED]
+            all_h_codes = [h for h in all_h_codes if h not in _H314_COVERED]
+            # Signal word yeniden hesapla (H314 kalkınca Danger→Warning olabilir)
+            _danger_h_set = {'H200','H201','H202','H203','H204','H205',
+                             'H220','H222','H224','H225','H240','H241',
+                             'H250','H260','H270','H271','H272',
+                             'H300','H301','H310','H311','H330','H331',
+                             'H334','H340','H350','H360','H370','H372'}
+            signal = 'Danger' if any(h in _danger_h_set for h in h_codes) else 'Warning'
+
+        # P kodlarını güncel h_codes ile yeniden hesapla (eko H kodu + H314 filtresi dahil)
         p_result = assign_p_codes(h_codes, signal, usage=usage)
         p_result['label'] = select_label_p_codes(p_result['p_codes'], 6, h_codes=h_codes)
         p_result['sds']   = classify_sds_p_codes(p_result['p_codes'])

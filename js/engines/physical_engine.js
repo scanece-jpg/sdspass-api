@@ -108,6 +108,10 @@ const PhysicalEngine = (() => {
     '7647-14-5':null,// NaCl — yanmaz
     '50-21-5':  74,  // laktik asit (>60)
     '77-92-9':  null,// sitrik asit — yanmaz (katı)
+    // ── Gazlar (sulu çözelti olarak kullanılır — gaz FP değerleri dahil edilmez) ──
+    '50-00-0':  null,// formaldehit gaz (FP≈-53°C) — formalin çözeltisi olarak kullanılır
+    '1336-21-6':null,// amonyak çözeltisi — yanmaz (gaz FP yok)
+    '7783-06-4':null,// H₂S — yanmaz çözelti
   };
 
   // ── KAYNAMA NOKTASI VERİTABANI (°C) ─────────────────────────────────────────
@@ -838,7 +842,9 @@ const PhysicalEngine = (() => {
     if (props.boiling_point != null && isFinite(props.boiling_point) && !(c in BP_DB)) {
       BP_DB[c] = props.boiling_point;
     }
-    if (props.flash_point   !== undefined) FP_DB[c] = props.flash_point; // null geçerli (yanmaz)
+    // FP: hardcoded DB değeri PubChem'den önce gelir — mevcut değerin (null dahil) üzerine yazılmaz
+    // Sebep: gaz fazı FP değerleri (formaldehit -53°C, HCl vb.) çözelti kullanımında yanıltıcıdır
+    if (props.flash_point !== undefined && !(c in FP_DB)) FP_DB[c] = props.flash_point;
     if (props.vapor_pressure!= null && isFinite(props.vapor_pressure))VP_DB[c]      = props.vapor_pressure;
     if (props.viscosity     != null && isFinite(props.viscosity))     VISC_DB[c]    = props.viscosity;
     if (props.solubility    != null && isFinite(props.solubility))    SOL_DB[c]     = props.solubility;

@@ -1722,6 +1722,19 @@ async function _theoModeAndPdf() {
   _runCalculationCore();
   // Pipeline senkron ise _lastCalcState artık güncel; PDF üret
   if (!_lastCalcState) { showError('Hesaplama tamamlanamadı, lütfen tekrar deneyin.'); return; }
+
+  // H314 nötralizasyon kontrolü
+  const neutr = _detectNeutralization();
+  if (neutr) {
+    document.getElementById('h314AcidName').textContent = neutr.acidName;
+    document.getElementById('h314BaseName').textContent = neutr.baseName;
+    document.getElementById('h314PhVal').textContent  = neutr.ph;
+    document.getElementById('h314PhVal2').textContent = neutr.ph;
+    _h314NeutrCallback = (keepH314) => _doPdfGenerate({ h314KeepOverride: keepH314 });
+    document.getElementById('h314NeutrOverlay').classList.add('open');
+    return;
+  }
+
   await _doPdfGenerate();
 }
 

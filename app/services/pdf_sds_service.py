@@ -765,19 +765,24 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _h314_removed = bool(sds_data.get('h314_neutralization_removed', False))
     _H314_COVERED = {'H314', 'H318', 'H315', 'H319'}  # H314 kaldırılınca bunlar da düşer
     if _h314_removed:
-        orig_h_codes = list(clp.get('h_codes', []))
         clp = dict(clp)
-        clp['h_codes'] = [h for h in orig_h_codes if h not in _H314_COVERED]
-        # Piktogramlar ve sinyal kelimesini yeniden hesapla (korozif ikonu düşer)
-        _corr_pics = {'GHS05'}
-        clp['pictograms'] = [p for p in clp.get('pictograms', []) if p not in _corr_pics]
-        # Signal word: H314 kaldırıldıysa "Tehlike" → "Uyarı" gerekebilir
-        # (diğer Tehlike H kodları varsa Tehlike kalır — basit kontrol)
+        # h_codes (etiket) — H314 ve kapsanan kodları kaldır
+        clp['h_codes'] = [h for h in clp.get('h_codes', [])
+                          if h not in _H314_COVERED]
+        # all_h_codes (Bölüm 2.1 sınıflandırma tablosu) — aynı filtreyi uygula
+        clp['all_h_codes'] = [h for h in (clp.get('all_h_codes') or clp.get('h_codes', []))
+                              if h not in _H314_COVERED]
+        # clp_passed (gerekçe tablosu) — H314 satırını kaldır
+        clp['clp_passed'] = [r for r in clp.get('clp_passed', [])
+                             if r.get('h_code','').replace('*','').strip()[:4] not in _H314_COVERED]
+        # Piktogramlar — korozif ikonu kaldır
+        clp['pictograms'] = [p for p in clp.get('pictograms', []) if p != 'GHS05']
+        # Signal word: başka Tehlike H kodu yoksa Uyarı'ya düşür
         _danger_h = {'H200','H201','H202','H203','H204','H205',
                      'H220','H222','H224','H225','H240','H241',
                      'H250','H260','H270','H271','H272',
                      'H300','H301','H310','H311','H330','H331',
-                     'H334','H340','H350','H360','H370','H372','H225'}
+                     'H334','H340','H350','H360','H370','H372'}
         if not any(h in _danger_h for h in clp['h_codes']):
             clp['signal_word'] = 'Warning'
 

@@ -238,7 +238,10 @@ H_SENTENCES: Dict[str, Dict[int, str]] = {
 
     # ── CİLT / GÖZ ────────────────────────────────────────────────────────
     'H314': {
-        4: 'CİLDE TEMAS: Kirlenmiş giysileri hemen çıkarın. Cilt ve gözleri en az 15-20 dakika bol su ile yıkayın. Derhal tıbbi yardım alın.',
+        4: [
+            'CİLDE TEMAS: Kirlenmiş giysileri hemen çıkarın. Cildi en az 15-20 dakika bol suyla yıkayın. Derhal tıbbi yardım alın.',
+            'GÖZLE TEMAS: Kontak lens varsa hemen çıkarın. Gözü açık tutarak en az 15-20 dakika bol akan suyla yıkayın. Derhal tıbbi yardım alın.',
+        ],
         5: 'Korozif madde. Yangın söndürücü olarak CO₂, kuru kimyasal veya su sisi kullanın. Su jeti kullanmayın.',
         6: 'KKE giymeden yaklaşmayın. Asit/baz nötralizasyonu yapmayın. Döküntüyü kuru absorban malzeme ile toplayın.',
         7: 'Kullanmadan önce tam KKE (eldiven, gözlük, yüz siperi) giyin. '
@@ -288,7 +291,10 @@ H_SENTENCES: Dict[str, Dict[int, str]] = {
         4: 'YUTULURSA: Ağzı çalkalayın. Kusturmayın. Tıbbi yardım alın.',
     },
     'H310': {
-        4: 'CİLDE TEMAS: Acil servis arayın. Kirlenmiş giysileri çıkarın. Cilt ve gözleri bol su ile yıkayın.',
+        4: [
+            'CİLDE TEMAS: Acil servis arayın. Kirlenmiş giysileri çıkarın. Cildi bol su ile yıkayın.',
+            'GÖZLE TEMAS: Kontak lens varsa çıkarın. En az 15 dakika bol suyla yıkayın. Derhal tıbbi yardım alın.',
+        ],
         8: 'Tam beden kimyasal koruyucu giysi, eldiven ve yüz koruyucu.',
     },
     'H311': {
@@ -984,9 +990,14 @@ def generate_section(
     for h in ordered + rest:
         entry = H_SENTENCES.get(h, {})
         sentence = entry.get(section_num)
-        if sentence and sentence not in seen:
-            sentences.append({'h_code': h, 'text': sentence})
-            seen.add(sentence)
+        if not sentence:
+            continue
+        # Liste değeri: birden fazla bullet (ör. H314 cilt + göz ayrımı)
+        items = sentence if isinstance(sentence, list) else [sentence]
+        for item in items:
+            if item and item not in seen:
+                sentences.append({'h_code': h, 'text': item})
+                seen.add(item)
 
     # Bölüm 5 için yangın söndürücü ekle
     extinguisher = None

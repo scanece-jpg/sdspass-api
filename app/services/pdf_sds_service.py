@@ -1557,9 +1557,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             'Klorür bileşikleri (HCl, Cl\u2082)' if lang=='TR'
             else 'Chloride compounds (HCl, Cl\u2082)'
         )
-    if is_base or any(h in h_codes for h in ['H314']) and any(
-            comp.get('cas_no', comp.get('cas','')) in {'1336-21-6','7664-41-7'}
-            for comp in components):
+    # NH\u2083 yaln\u0131zca bile\u015fende amonyak veya amonyak \u00e7\u00f6zeltisi varsa olu\u015fur
+    # (CAS 1336-21-6 = amonyak \u00e7\u00f6zeltisi, 7664-41-7 = susuz amonyak)
+    if any(comp.get('cas_no', comp.get('cas','')) in {'1336-21-6','7664-41-7'}
+           for comp in components):
         decomp_parts.append('NH\u2083' if lang=='TR' else 'NH\u2083 (ammonia)')
     if 'H400' in h_codes or 'H411' in h_codes:
         decomp_parts.append(
@@ -1672,7 +1673,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _ROUTE_LABEL_EN = {'oral': 'Oral', 'dermal': 'Dermal', 'inhal': 'Inhalation'}
     _ROUTE_UNIT     = {'oral': 'mg/kg', 'dermal': 'mg/kg', 'inhal': 'mg/L/4h'}
 
-    if comp_has_acute and ate_mix_details:
+    if ate_mix_details:
         story.append(Spacer(1, 4))
         # Başlık
         ate_header = ('ATE Karışım Hesabı — CLP Ek I §3.1.3' if lang == 'TR'

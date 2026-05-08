@@ -345,7 +345,7 @@ P_STMTS = {
         'P302+P350':'CİLDE TEMAS DURUMUNDA: Bol su ve sabunla dikkatlice yıkayın.',
         'P302+P352':'CİLDE TEMAS DURUMUNDA: Bol sabun ve su ile yıkayın.',
         'P303+P361+P353':'CİLDE (veya SAÇA) TEMAS DURUMUNDA: Kirlenmiş giysileri hemen çıkarın. Cilt suyla durulanır/duş alınır.',
-        'P304+P340':'SOLUNMASI HALİNDE: Kişiyi temiz havaya çıkarın. Nefes almakta güçlük çekiyorsa solunum kolaşlaştırıcı pozisyona getirin.',
+        'P304+P340':'SOLUNMASI HALİNDE: Kişiyi temiz havaya çıkarın. Nefes almakta güçlük çekiyorsa solunum kolaylaştırıcı pozisyona getirin.',
         'P304+P341':'SOLUNMASI HALİNDE: Solunumu güçleştiriyorsa, kişiyi temiz havaya çıkarın ve nefes almayı kolaylaştıracak pozisyona getirin.',
         'P305+P351+P338':'GÖZ İLE TEMAS HALİNDE: Birkaç dakika suyla dikkatlice durulayın. Varsa ve çıkarması kolaysa kontak lensleri çıkartın. Durulamaya devam edin.',
         'P306+P360':'GİYSİ İLE TEMAS HALİNDE: Giysileri çıkarmadan önce etkilenen alanı suyla iyice durulayın.',

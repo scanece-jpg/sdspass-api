@@ -772,9 +772,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         # all_h_codes (Bölüm 2.1 sınıflandırma tablosu) — aynı filtreyi uygula
         clp['all_h_codes'] = [h for h in (clp.get('all_h_codes') or clp.get('h_codes', []))
                               if h not in _H314_COVERED]
-        # clp_passed (gerekçe tablosu) — H314 satırını kaldır
-        clp['clp_passed'] = [r for r in clp.get('clp_passed', [])
-                             if r.get('h_code','').replace('*','').strip()[:4] not in _H314_COVERED]
+        # passed (gerekçe tablosu) — H314 satırını kaldır  [key: 'passed', not 'clp_passed']
+        clp['passed'] = [r for r in clp.get('passed', [])
+                         if r.get('h_code','').replace('*','').strip()[:4] not in _H314_COVERED]
         # Piktogramlar — korozif ikonu kaldır
         clp['pictograms'] = [p for p in clp.get('pictograms', []) if p != 'GHS05']
         # Signal word: başka Tehlike H kodu yoksa Uyarı'ya düşür

@@ -273,6 +273,8 @@ async def generate_pdf(data: dict = Body(...)):
                 'version': revision_in.get('version', '1.0'),
                 'notes':   revision_in.get('notes', 'İlk yayın'),
             },
+            'ate_mix_details': data.get('ate_mix_details', {}),
+            'h314_neutralization_removed': bool(data.get('h314_neutralization_removed', False)),
         }
 
         pdf_bytes = generate_sds_pdf(sds_data, lang=lang)

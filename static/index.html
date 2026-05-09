@@ -6,13 +6,13 @@
 <title>SDSPass v2 — Modüler Hesaplama</title>
 <style>
 :root{
-  --bg:#080B14;--bg2:#0d1120;--bg3:#131929;
-  --accent:#6366f1;--accent2:#4f46e5;--accent-cyan:#38bdf8;
-  --text:#e2e8f0;--text2:#94a3b8;--text3:#475569;
-  --border:#1a2035;--border2:#243050;
+  --bg:#080c0f;--bg2:#0c1117;--bg3:#111820;
+  --accent:#14b8a6;--accent2:#0d9488;--accent-cyan:#67e8f9;
+  --text:#e2e8f0;--text2:#94a3b8;--text3:#4b6070;
+  --border:#162030;--border2:#1e3040;
   --danger:#f87171;--warn:#fb923c;--safe:#34d399;--info:#60a5fa;
   --mono:'JetBrains Mono',monospace;
-  --grad:linear-gradient(135deg,var(--accent),var(--accent-cyan));
+  --grad:linear-gradient(135deg,#14b8a6,#0891b2);
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min-height:100vh}
@@ -41,13 +41,13 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
 .ai-head{padding:16px;border-bottom:1px solid var(--border);
          display:flex;align-items:center;gap:10px}
 .ai-orb{width:34px;height:34px;border-radius:50%;flex-shrink:0;position:relative;
-        background:radial-gradient(circle at 35% 35%,#818cf8,#4f46e5);
-        box-shadow:0 0 16px rgba(99,102,241,.4)}
+        background:radial-gradient(circle at 35% 35%,#2dd4bf,#0d9488);
+        box-shadow:0 0 16px rgba(20,184,166,.4)}
 .ai-orb::before{content:'';position:absolute;inset:-5px;border-radius:50%;
-                border:1px solid rgba(99,102,241,.2);
+                border:1px solid rgba(20,184,166,.2);
                 animation:orbRing 2.5s ease-in-out infinite}
 .ai-orb::after{content:'';position:absolute;inset:-10px;border-radius:50%;
-               border:1px solid rgba(56,189,248,.1);
+               border:1px solid rgba(103,232,249,.1);
                animation:orbRing 2.5s ease-in-out infinite .5s}
 @keyframes orbRing{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.8;transform:scale(1.05)}}
 .ai-head-name{font-size:12px;font-weight:700;color:var(--text);letter-spacing:-.01em}
@@ -415,6 +415,36 @@ select.dir-inp{cursor:pointer;-webkit-appearance:none;
                       color:var(--text2);cursor:pointer}
 .dir-radio-opts input[type=radio]{accent-color:var(--accent);width:12px;height:12px}
 
+/* ── Step Cards ─────────────────────────────────────────────────────────── */
+.step-cards{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:16px}
+.step-card{background:var(--bg3);border:1px solid var(--border);border-radius:10px;
+           padding:12px 10px;cursor:pointer;
+           transition:transform .2s ease,border-color .2s,box-shadow .2s,background .2s;
+           position:relative;overflow:hidden;user-select:none}
+.step-card::before{content:'';position:absolute;inset:0;
+                   background:linear-gradient(135deg,rgba(20,184,166,.08),transparent);
+                   opacity:0;transition:opacity .2s}
+.step-card:hover{transform:scale(1.045) translateY(-2px);
+                 border-color:rgba(20,184,166,.5);
+                 box-shadow:0 8px 24px rgba(20,184,166,.15)}
+.step-card:hover::before{opacity:1}
+.step-card.active{border-color:var(--accent);background:rgba(20,184,166,.07);
+                  box-shadow:0 4px 20px rgba(20,184,166,.18);transform:translateY(-1px)}
+.step-card.active::before{opacity:1}
+.step-card.done{border-color:rgba(52,211,153,.3);background:rgba(52,211,153,.04)}
+.sc-num{font-size:9px;font-family:var(--mono);font-weight:700;color:var(--text3);
+        margin-bottom:6px;letter-spacing:.06em}
+.step-card.active .sc-num{color:var(--accent)}
+.step-card.done .sc-num{color:var(--safe)}
+.sc-title{font-size:11px;font-weight:700;color:var(--text2);line-height:1.3;margin-bottom:4px}
+.step-card.active .sc-title{color:var(--text)}
+.sc-badge{display:inline-flex;align-items:center;gap:4px;font-size:8px;font-family:var(--mono);
+          font-weight:600;padding:2px 6px;border-radius:10px;margin-top:2px}
+.sc-badge.active{background:rgba(20,184,166,.15);color:var(--accent)}
+.sc-badge.done{background:rgba(52,211,153,.12);color:var(--safe)}
+.sc-badge.wait{background:rgba(255,255,255,.05);color:var(--text3)}
+.sc-badge-dot{width:4px;height:4px;border-radius:50%;background:currentColor;flex-shrink:0}
+
 /* ── Wizard Step-by-Step Form ───────────────────────────────────────────── */
 .wz-bar{display:flex;align-items:flex-start;gap:0;margin-bottom:20px;
         padding:14px 10px 12px;background:transparent;
@@ -501,34 +531,27 @@ select.dir-inp{cursor:pointer;-webkit-appearance:none;
           style="font-size:9px;background:rgba(52,211,153,.1);color:var(--safe);padding:2px 8px;border-radius:10px;font-family:var(--mono);cursor:default;display:none;border:1px solid rgba(52,211,153,.2)"></span>
   </div>
 
-  <!-- ── Wizard Progress Bar ───────────────────────────────────────────── -->
-  <div class="wz-bar" id="wzBar">
-    <div class="wz-step-item active" id="wz-item-1" onclick="wizardGo(1)">
-      <div class="wz-dot-wrap">
-        <div class="wz-num"><span class="wz-num-inner">1</span></div>
-        <div class="wz-step-lbl">Ürün & Firma</div>
-      </div>
+  <!-- ── Step Cards ────────────────────────────────────────────────────── -->
+  <div class="step-cards" id="stepCards">
+    <div class="step-card active" id="sc-1" onclick="wizardGo(1)">
+      <div class="sc-num">01</div>
+      <div class="sc-title">Ürün & Firma</div>
+      <span class="sc-badge active"><span class="sc-badge-dot"></span>Aktif</span>
     </div>
-    <div class="wz-connector" id="wz-con-1"></div>
-    <div class="wz-step-item" id="wz-item-2" onclick="wizardGo(2)">
-      <div class="wz-dot-wrap">
-        <div class="wz-num"><span class="wz-num-inner">2</span></div>
-        <div class="wz-step-lbl">Bileşenler</div>
-      </div>
+    <div class="step-card" id="sc-2" onclick="wizardGo(2)">
+      <div class="sc-num">02</div>
+      <div class="sc-title">Bileşenler</div>
+      <span class="sc-badge wait"><span class="sc-badge-dot"></span>Bekliyor</span>
     </div>
-    <div class="wz-connector" id="wz-con-2"></div>
-    <div class="wz-step-item" id="wz-item-3" onclick="wizardGo(3)">
-      <div class="wz-dot-wrap">
-        <div class="wz-num"><span class="wz-num-inner">3</span></div>
-        <div class="wz-step-lbl">Fiziksel</div>
-      </div>
+    <div class="step-card" id="sc-3" onclick="wizardGo(3)">
+      <div class="sc-num">03</div>
+      <div class="sc-title">Fiziksel</div>
+      <span class="sc-badge wait"><span class="sc-badge-dot"></span>Bekliyor</span>
     </div>
-    <div class="wz-connector" id="wz-con-3"></div>
-    <div class="wz-step-item" id="wz-item-4" onclick="wizardGo(4)">
-      <div class="wz-dot-wrap">
-        <div class="wz-num"><span class="wz-num-inner">4</span></div>
-        <div class="wz-step-lbl">Hesapla</div>
-      </div>
+    <div class="step-card" id="sc-4" onclick="wizardGo(4)">
+      <div class="sc-num">04</div>
+      <div class="sc-title">Hesapla</div>
+      <span class="sc-badge wait"><span class="sc-badge-dot"></span>Bekliyor</span>
     </div>
   </div>
 
@@ -3558,17 +3581,20 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closePhysMod
   };
 
   function _updateBar(){
+    const LABELS = ['','Ürün & Firma','Bileşenler','Fiziksel','Hesapla'];
     for(let i = 1; i <= WZ_TOTAL; i++){
-      const item = $i('wz-item-' + i);
-      if(!item) continue;
-      item.classList.remove('active','done');
-      if(i === _wzStep) item.classList.add('active');
-      else if(i < _wzStep) item.classList.add('done');
-
-      // connector after this item
-      const con = $i('wz-con-' + i);
-      if(con){
-        con.classList.toggle('done', i < _wzStep);
+      const card = $i('sc-' + i);
+      if(!card) continue;
+      card.classList.remove('active','done');
+      const badge = card.querySelector('.sc-badge');
+      if(i === _wzStep){
+        card.classList.add('active');
+        if(badge){ badge.className='sc-badge active'; badge.innerHTML='<span class="sc-badge-dot"></span>Aktif'; }
+      } else if(i < _wzStep){
+        card.classList.add('done');
+        if(badge){ badge.className='sc-badge done'; badge.innerHTML='<span class="sc-badge-dot"></span>Tamamlandi'; }
+      } else {
+        if(badge){ badge.className='sc-badge wait'; badge.innerHTML='<span class="sc-badge-dot"></span>Bekliyor'; }
       }
     }
   }

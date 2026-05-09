@@ -343,6 +343,69 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
 .ecard,.result-banner{animation:fadeUp .2s ease both}
+
+/* ── Wizard Step-by-Step Form ───────────────────────────────────────────── */
+.wz-bar{display:flex;align-items:center;gap:0;margin-bottom:18px;padding:12px 14px;
+        background:var(--bg3);border:1px solid var(--border);border-radius:10px;
+        position:relative}
+.wz-step-item{display:flex;align-items:center;gap:0;flex:1;cursor:pointer}
+.wz-step-item:last-child{flex:none}
+.wz-dot-wrap{display:flex;flex-direction:column;align-items:center;gap:4px;
+             position:relative;z-index:1;cursor:pointer}
+.wz-num{width:26px;height:26px;border-radius:50%;border:2px solid var(--border2);
+        background:var(--bg2);display:flex;align-items:center;justify-content:center;
+        font-size:10px;font-weight:700;color:var(--text3);transition:all .25s;
+        font-family:var(--mono)}
+.wz-step-item.active .wz-num{border-color:var(--accent);background:var(--accent);
+                              color:#fff;box-shadow:0 0 10px rgba(99,102,241,.35)}
+.wz-step-item.done .wz-num{border-color:var(--safe);background:rgba(52,211,153,.12);
+                            color:var(--safe)}
+.wz-step-item.done .wz-num::after{content:'✓'}
+.wz-step-item.done .wz-num-inner{display:none}
+.wz-step-lbl{font-size:9px;color:var(--text3);white-space:nowrap;transition:color .2s;
+             text-align:center;letter-spacing:.03em}
+.wz-step-item.active .wz-step-lbl{color:var(--accent);font-weight:600}
+.wz-step-item.done .wz-step-lbl{color:var(--safe)}
+.wz-connector{flex:1;height:1px;background:var(--border2);margin:0 4px;margin-bottom:16px;
+              transition:background .25s}
+.wz-step-item.done + .wz-connector,.wz-connector.done{background:var(--safe);opacity:.4}
+
+@keyframes wzSlide{from{opacity:0;transform:translateX(18px)}to{opacity:1;transform:none}}
+@keyframes wzSlideBack{from{opacity:0;transform:translateX(-18px)}to{opacity:1;transform:none}}
+.wz-slide{animation:wzSlide .22s ease both}
+.wz-slide.back{animation:wzSlideBack .22s ease both}
+
+.wz-nav{display:flex;align-items:center;gap:8px;margin-top:14px;padding-top:12px;
+        border-top:1px solid var(--border)}
+.wz-prev{background:none;border:1px solid var(--border2);color:var(--text3);
+         border-radius:8px;padding:9px 16px;font-size:11px;cursor:pointer;
+         transition:all .15s;font-weight:600}
+.wz-prev:hover{border-color:var(--accent);color:var(--accent)}
+.wz-next{flex:1;background:var(--grad);border:none;color:#fff;border-radius:8px;
+         padding:9px 16px;font-size:11px;cursor:pointer;font-weight:700;
+         letter-spacing:.02em;transition:opacity .15s;
+         box-shadow:0 2px 10px rgba(99,102,241,.25)}
+.wz-next:hover{opacity:.88}
+.wz-step-count{font-size:10px;color:var(--text3);font-family:var(--mono);
+               white-space:nowrap}
+
+.wz-section-title{font-size:10px;font-weight:700;color:var(--text2);
+                  text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px;
+                  display:flex;align-items:center;gap:8px}
+.wz-section-title::before{content:'';flex:none;display:block;width:3px;height:14px;
+                           background:var(--grad);border-radius:2px}
+
+/* Adım 4 — özet kart */
+.wz-summary-card{background:var(--bg3);border:1px solid var(--border2);border-radius:10px;
+                 padding:14px;margin-bottom:12px}
+.wz-sum-row{display:flex;align-items:center;justify-content:space-between;
+            padding:5px 0;border-bottom:1px solid var(--border);font-size:11px}
+.wz-sum-row:last-child{border-bottom:none}
+.wz-sum-label{color:var(--text3)}
+.wz-sum-val{color:var(--text);font-family:var(--mono);font-weight:600}
+.wz-sum-val.ok{color:var(--safe)}
+.wz-sum-val.warn{color:var(--warn)}
+.wz-sum-val.empty{color:var(--text3);font-style:italic;font-weight:400}
 </style>
 </head>
 <body>
@@ -357,143 +420,200 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
           style="font-size:9px;background:rgba(52,211,153,.1);color:var(--safe);padding:2px 8px;border-radius:10px;font-family:var(--mono);cursor:default;display:none;border:1px solid rgba(52,211,153,.2)"></span>
   </div>
 
-  <!-- Ürün Bilgileri -->
-  <div class="product-card">
-    <label>Ürün Adı</label>
-    <input type="text" id="productName" placeholder="Ürün / Formülasyon adı">
-    <div class="row2">
-      <div>
-        <label>Form</label>
-        <select id="pform" onchange="updatePhysFieldsByForm()">
-          <option value="liquid">Sıvı</option>
-          <option value="solid">Katı</option>
-          <option value="gas">Gaz</option>
-          <option value="paste">Pasta / Gel</option>
-          <option value="powder">Toz</option>
-        </select>
+  <!-- ── Wizard Progress Bar ───────────────────────────────────────────── -->
+  <div class="wz-bar" id="wzBar">
+    <div class="wz-step-item active" id="wz-item-1" onclick="wizardGo(1)">
+      <div class="wz-dot-wrap">
+        <div class="wz-num"><span class="wz-num-inner">1</span></div>
+        <div class="wz-step-lbl">Ürün & Firma</div>
       </div>
-      <div>
-        <label>Kullanım Tipi</label>
-        <select id="pusage">
-          <option value="industrial">Endüstriyel</option>
-          <option value="professional">Profesyonel</option>
-          <option value="consumer">Tüketici</option>
-        </select>
+    </div>
+    <div class="wz-connector" id="wz-con-1"></div>
+    <div class="wz-step-item" id="wz-item-2" onclick="wizardGo(2)">
+      <div class="wz-dot-wrap">
+        <div class="wz-num"><span class="wz-num-inner">2</span></div>
+        <div class="wz-step-lbl">Bileşenler</div>
+      </div>
+    </div>
+    <div class="wz-connector" id="wz-con-2"></div>
+    <div class="wz-step-item" id="wz-item-3" onclick="wizardGo(3)">
+      <div class="wz-dot-wrap">
+        <div class="wz-num"><span class="wz-num-inner">3</span></div>
+        <div class="wz-step-lbl">Fiziksel</div>
+      </div>
+    </div>
+    <div class="wz-connector" id="wz-con-3"></div>
+    <div class="wz-step-item" id="wz-item-4" onclick="wizardGo(4)">
+      <div class="wz-dot-wrap">
+        <div class="wz-num"><span class="wz-num-inner">4</span></div>
+        <div class="wz-step-lbl">Hesapla</div>
       </div>
     </div>
   </div>
 
-  <!-- SDS Revizyon Bilgileri -->
-  <div class="product-card" style="margin-top:10px" id="revision-card">
-    <label style="font-weight:700;color:var(--text2);margin:0 0 8px;display:block">📝 SDS Revizyon</label>
-    <div class="row2">
-      <div>
-        <label>Versiyon</label>
-        <input type="text" id="revVersion" placeholder="1.0" value="1.0"
-               style="font-family:var(--mono)" oninput="_saveRevision()">
-      </div>
-      <div>
-        <label>Revizyon No</label>
-        <input type="number" id="revNo" placeholder="1" value="1" min="1"
-               style="font-family:var(--mono)" oninput="_saveRevision()">
-      </div>
-    </div>
-    <div class="row2" style="margin-top:8px">
-      <div>
-        <label>Revizyon Tarihi</label>
-        <input type="text" id="revDate" placeholder="GG.AA.YYYY"
-               style="font-family:var(--mono)" oninput="_saveRevision()">
-      </div>
-      <div>
-        <label>Değişiklik Notu</label>
-        <input type="text" id="revNotes" placeholder="Örn: İlk yayın"
-               oninput="_saveRevision()">
-      </div>
-    </div>
-  </div>
+  <!-- ── ADIM 1: Ürün & Firma ──────────────────────────────────────────── -->
+  <div id="wz-slide-1" class="wz-slide">
+    <div class="wz-section-title">Ürün Bilgileri</div>
 
-  <!-- Firma Bilgileri — Bölüm 1.3 -->
-  <div class="product-card" style="margin-top:10px">
-    <label style="font-weight:700;color:var(--text2);margin:0 0 8px;display:block">🏢 Bölüm 1.3 — Tedarikçi Bilgileri</label>
-    <div class="row2">
-      <div>
-        <label>Firma Adı</label>
-        <input type="text" id="suppName" placeholder="Örn: ABC Kimya A.Ş.">
-      </div>
-      <div>
-        <label>Sorumlu Kişi / Ünvan</label>
-        <input type="text" id="suppContact" placeholder="Örn: Güvenlik Uzmanı">
-      </div>
-    </div>
-    <div style="margin-top:8px">
-      <label>Adres</label>
-      <input type="text" id="suppAddress" placeholder="Cadde, İlçe, İl, Posta Kodu">
-    </div>
-    <div class="row2" style="margin-top:8px">
-      <div>
-        <label>Telefon</label>
-        <input type="text" id="suppPhone" placeholder="+90 xxx xxx xx xx">
-      </div>
-      <div>
-        <label>E-posta</label>
-        <input type="email" id="suppEmail" placeholder="info@firma.com">
-      </div>
-    </div>
-  </div>
-
-  <!-- Acil Telefon — Bölüm 1.4 -->
-  <div class="product-card" style="margin-top:10px">
-    <label style="font-weight:700;color:var(--text2);margin:0 0 8px;display:block">📞 Bölüm 1.4 — Acil Telefon</label>
-    <!-- Sabit — Silinemez -->
-    <div style="background:rgba(99,179,237,.08);border:1px solid rgba(99,179,237,.2);border-radius:8px;padding:8px 12px;margin-bottom:8px;display:flex;align-items:center;gap:10px">
-      <span style="font-size:18px">🏥</span>
-      <div>
-        <div style="font-weight:700;font-family:var(--mono);font-size:13px;color:#63b3ed">114 — UZEM</div>
-        <div style="font-size:10px;color:var(--text3)">Ulusal Zehir Danışma Merkezi · 7/24 · T.C. Sağlık Bakanlığı</div>
-      </div>
-      <span style="margin-left:auto;font-size:9px;background:rgba(99,179,237,.15);color:#63b3ed;padding:2px 7px;border-radius:4px">Zorunlu</span>
-    </div>
-    <!-- Kullanıcı girişi -->
-    <div class="row2">
-      <div>
-        <label>Tedarikçi Acil Hattı</label>
-        <div style="display:flex;align-items:center;gap:4px">
-          <span style="font-size:11px;color:var(--text3);white-space:nowrap;font-family:var(--mono)">+90</span>
-          <input type="text" id="supplierEmergencyTel" placeholder="___ ___ __ __"
-                 style="flex:1;padding:5px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-family:var(--mono);font-size:12px">
+    <!-- Ürün Bilgileri -->
+    <div class="product-card">
+      <label>Ürün Adı</label>
+      <input type="text" id="productName" placeholder="Ürün / Formülasyon adı">
+      <div class="row2">
+        <div>
+          <label>Form</label>
+          <select id="pform" onchange="updatePhysFieldsByForm()">
+            <option value="liquid">Sıvı</option>
+            <option value="solid">Katı</option>
+            <option value="gas">Gaz</option>
+            <option value="paste">Pasta / Gel</option>
+            <option value="powder">Toz</option>
+          </select>
         </div>
-      </div>
-      <div>
-        <label>Hizmet Saati</label>
-        <div style="display:flex;flex-direction:column;gap:5px;margin-top:4px">
-          <label style="display:flex;align-items:center;gap:6px;font-weight:400;color:var(--text2);cursor:pointer">
-            <input type="radio" name="telHours" value="24_7" checked id="tel24_7"> 7 Gün / 24 Saat
-          </label>
-          <label style="display:flex;align-items:center;gap:6px;font-weight:400;color:var(--text2);cursor:pointer">
-            <input type="radio" name="telHours" value="business" id="telBusiness"> Sadece Mesai Saatleri
-          </label>
+        <div>
+          <label>Kullanım Tipi</label>
+          <select id="pusage">
+            <option value="industrial">Endüstriyel</option>
+            <option value="professional">Profesyonel</option>
+            <option value="consumer">Tüketici</option>
+          </select>
         </div>
       </div>
     </div>
+
+    <!-- SDS Revizyon Bilgileri -->
+    <div class="product-card" style="margin-top:10px" id="revision-card">
+      <label style="font-weight:700;color:var(--text2);margin:0 0 8px;display:block">📝 SDS Revizyon</label>
+      <div class="row2">
+        <div>
+          <label>Versiyon</label>
+          <input type="text" id="revVersion" placeholder="1.0" value="1.0"
+                 style="font-family:var(--mono)" oninput="_saveRevision()">
+        </div>
+        <div>
+          <label>Revizyon No</label>
+          <input type="number" id="revNo" placeholder="1" value="1" min="1"
+                 style="font-family:var(--mono)" oninput="_saveRevision()">
+        </div>
+      </div>
+      <div class="row2" style="margin-top:8px">
+        <div>
+          <label>Revizyon Tarihi</label>
+          <input type="text" id="revDate" placeholder="GG.AA.YYYY"
+                 style="font-family:var(--mono)" oninput="_saveRevision()">
+        </div>
+        <div>
+          <label>Değişiklik Notu</label>
+          <input type="text" id="revNotes" placeholder="Örn: İlk yayın"
+                 oninput="_saveRevision()">
+        </div>
+      </div>
+    </div>
+
+    <!-- Firma Bilgileri — Bölüm 1.3 -->
+    <div class="wz-section-title" style="margin-top:16px">Tedarikçi Bilgileri</div>
+    <div class="product-card">
+      <label style="font-weight:700;color:var(--text2);margin:0 0 8px;display:block">🏢 Bölüm 1.3 — Tedarikçi</label>
+      <div class="row2">
+        <div>
+          <label>Firma Adı</label>
+          <input type="text" id="suppName" placeholder="Örn: ABC Kimya A.Ş.">
+        </div>
+        <div>
+          <label>Sorumlu Kişi / Ünvan</label>
+          <input type="text" id="suppContact" placeholder="Örn: Güvenlik Uzmanı">
+        </div>
+      </div>
+      <div style="margin-top:8px">
+        <label>Adres</label>
+        <input type="text" id="suppAddress" placeholder="Cadde, İlçe, İl, Posta Kodu">
+      </div>
+      <div class="row2" style="margin-top:8px">
+        <div>
+          <label>Telefon</label>
+          <input type="text" id="suppPhone" placeholder="+90 xxx xxx xx xx">
+        </div>
+        <div>
+          <label>E-posta</label>
+          <input type="email" id="suppEmail" placeholder="info@firma.com">
+        </div>
+      </div>
+    </div>
+
+    <!-- Acil Telefon — Bölüm 1.4 -->
+    <div class="product-card" style="margin-top:10px">
+      <label style="font-weight:700;color:var(--text2);margin:0 0 8px;display:block">📞 Bölüm 1.4 — Acil Telefon</label>
+      <div style="background:rgba(99,179,237,.08);border:1px solid rgba(99,179,237,.2);border-radius:8px;padding:8px 12px;margin-bottom:8px;display:flex;align-items:center;gap:10px">
+        <span style="font-size:18px">🏥</span>
+        <div>
+          <div style="font-weight:700;font-family:var(--mono);font-size:13px;color:#63b3ed">114 — UZEM</div>
+          <div style="font-size:10px;color:var(--text3)">Ulusal Zehir Danışma Merkezi · 7/24 · T.C. Sağlık Bakanlığı</div>
+        </div>
+        <span style="margin-left:auto;font-size:9px;background:rgba(99,179,237,.15);color:#63b3ed;padding:2px 7px;border-radius:4px">Zorunlu</span>
+      </div>
+      <div class="row2">
+        <div>
+          <label>Tedarikçi Acil Hattı</label>
+          <div style="display:flex;align-items:center;gap:4px">
+            <span style="font-size:11px;color:var(--text3);white-space:nowrap;font-family:var(--mono)">+90</span>
+            <input type="text" id="supplierEmergencyTel" placeholder="___ ___ __ __"
+                   style="flex:1;padding:5px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-family:var(--mono);font-size:12px">
+          </div>
+        </div>
+        <div>
+          <label>Hizmet Saati</label>
+          <div style="display:flex;flex-direction:column;gap:5px;margin-top:4px">
+            <label style="display:flex;align-items:center;gap:6px;font-weight:400;color:var(--text2);cursor:pointer">
+              <input type="radio" name="telHours" value="24_7" checked id="tel24_7"> 7 Gün / 24 Saat
+            </label>
+            <label style="display:flex;align-items:center;gap:6px;font-weight:400;color:var(--text2);cursor:pointer">
+              <input type="radio" name="telHours" value="business" id="telBusiness"> Sadece Mesai Saatleri
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Nav -->
+    <div class="wz-nav">
+      <span class="wz-step-count">1 / 4</span>
+      <button class="wz-next" onclick="wizardGo(2)">Bileşenler →</button>
+    </div>
   </div>
 
-  <!-- Bileşenler -->
-  <div class="comps-header">
-    <span class="comps-title">🧪 Bileşenler</span>
-    <span id="concTotal" style="font-size:10px;font-family:var(--mono);color:var(--text3)">Toplam: —</span>
+  <!-- ── ADIM 2: Bileşenler ─────────────────────────────────────────────── -->
+  <div id="wz-slide-2" class="wz-slide" style="display:none">
+    <div class="wz-section-title">Bileşenler</div>
+
+    <!-- Bileşenler -->
+    <div class="comps-header">
+      <span class="comps-title">🧪 Bileşenler</span>
+      <span id="concTotal" style="font-size:10px;font-family:var(--mono);color:var(--text3)">Toplam: —</span>
+    </div>
+    <div id="comps"></div>
+    <div style="display:flex;gap:8px;margin-top:6px">
+      <button class="btn-add" onclick="addComp()" style="flex:1">+ Madde Ekle</button>
+      <button onclick="completeToHundred()"
+              style="flex:1;background:none;border:1px dashed var(--accent);color:var(--accent);border-radius:6px;padding:6px 10px;font-size:11px;cursor:pointer;font-weight:600"
+              title="Eksik konsantrasyonu Su (7732-18-5) olarak tamamlar">
+        ⚖ %100'e Tamamla
+      </button>
+    </div>
+
+    <!-- Nav -->
+    <div class="wz-nav">
+      <button class="wz-prev" onclick="wizardGo(1)">← Geri</button>
+      <span class="wz-step-count">2 / 4</span>
+      <button class="wz-next" onclick="wizardGo(3)">Fiziksel Özellikler →</button>
+    </div>
   </div>
-  <div id="comps"></div>
-  <div style="display:flex;gap:8px;margin-top:6px">
-    <button class="btn-add" onclick="addComp()" style="flex:1">+ Madde Ekle</button>
-    <button onclick="completeToHundred()"
-            style="flex:1;background:none;border:1px dashed var(--accent);color:var(--accent);border-radius:6px;padding:6px 10px;font-size:11px;cursor:pointer;font-weight:600"
-            title="Eksik konsantrasyonu Su (7732-18-5) olarak tamamlar">
-      ⚖ %100'e Tamamla
-    </button>
-  </div>
+
+  <!-- ── ADIM 3: Fiziksel Özellikler ──────────────────────────────────── -->
+  <div id="wz-slide-3" class="wz-slide" style="display:none">
+    <div class="wz-section-title">Fiziksel &amp; Kimyasal Özellikler</div>
 
   <!-- Bölüm 9 — Fiziksel ve Kimyasal Özellikler -->
-  <div class="product-card" style="margin-top:10px">
+  <div class="product-card" style="margin-top:0">
     <label style="font-weight:700;color:var(--text2);margin:0 0 10px;display:block">🧪 Bölüm 9 — Fiziksel ve Kimyasal Özellikler</label>
 
     <!-- ADIM 1: Her zaman görünür -->
@@ -662,10 +782,57 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
     </button>
   </div>
 
-  <!-- Hesapla -->
-  <div class="calc-bar">
-    <button class="bcalc" onclick="doCalculate()">⚡ Hesapla</button>
-  </div>
+    <!-- Nav Adım 3 -->
+    <div class="wz-nav">
+      <button class="wz-prev" onclick="wizardGo(2)">← Geri</button>
+      <span class="wz-step-count">3 / 4</span>
+      <button class="wz-next" onclick="wizardGo(4)">Özete Git →</button>
+    </div>
+  </div><!-- /wz-slide-3 -->
+
+  <!-- ── ADIM 4: Hesapla ────────────────────────────────────────────────── -->
+  <div id="wz-slide-4" class="wz-slide" style="display:none">
+    <div class="wz-section-title">Özet &amp; Hesapla</div>
+
+    <!-- Özet Kart -->
+    <div class="wz-summary-card">
+      <div class="wz-sum-row">
+        <span class="wz-sum-label">Ürün Adı</span>
+        <span class="wz-sum-val" id="wz-sum-product">—</span>
+      </div>
+      <div class="wz-sum-row">
+        <span class="wz-sum-label">Form</span>
+        <span class="wz-sum-val" id="wz-sum-form">—</span>
+      </div>
+      <div class="wz-sum-row">
+        <span class="wz-sum-label">Firma</span>
+        <span class="wz-sum-val" id="wz-sum-firm">—</span>
+      </div>
+      <div class="wz-sum-row">
+        <span class="wz-sum-label">Bileşen Sayısı</span>
+        <span class="wz-sum-val" id="wz-sum-comps">—</span>
+      </div>
+      <div class="wz-sum-row">
+        <span class="wz-sum-label">Toplam Konsantrasyon</span>
+        <span class="wz-sum-val" id="wz-sum-conc">—</span>
+      </div>
+      <div class="wz-sum-row">
+        <span class="wz-sum-label">Görünüm</span>
+        <span class="wz-sum-val" id="wz-sum-appear">—</span>
+      </div>
+    </div>
+
+    <!-- Hesapla -->
+    <div class="calc-bar" style="margin-bottom:0">
+      <button class="bcalc" onclick="doCalculate()">⚡ Hesapla &amp; Sınıflandır</button>
+    </div>
+
+    <!-- Nav Adım 4 -->
+    <div class="wz-nav">
+      <button class="wz-prev" onclick="wizardGo(3)">← Geri</button>
+      <span class="wz-step-count">4 / 4</span>
+    </div>
+  </div><!-- /wz-slide-4 -->
 
 </div>
 
@@ -3278,6 +3445,100 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closePhysMod
     const v=($('aiInput')||{}).value?.trim();
     if(v) aiAsk(v);
   };
+})();
+</script>
+
+<!-- ══ WIZARD JS ═════════════════════════════════════════════════════════════ -->
+<script>
+(function(){
+  let _wzStep = 1;
+  const WZ_TOTAL = 4;
+  let _wzDir = 1; // 1=forward, -1=back
+
+  const FORM_LABELS = {liquid:'Sıvı',solid:'Katı',gas:'Gaz',paste:'Pasta/Gel',powder:'Toz'};
+
+  function $i(id){ return document.getElementById(id); }
+
+  window.wizardGo = function(n){
+    n = Math.max(1, Math.min(WZ_TOTAL, n));
+    if(n === _wzStep) return;
+    _wzDir = n > _wzStep ? 1 : -1;
+
+    // Hide current
+    const cur = $i('wz-slide-' + _wzStep);
+    if(cur) cur.style.display = 'none';
+
+    _wzStep = n;
+
+    // Show next
+    const next = $i('wz-slide-' + _wzStep);
+    if(next){
+      next.style.display = '';
+      next.classList.remove('wz-slide','back');
+      void next.offsetWidth; // reflow
+      next.classList.add('wz-slide');
+      if(_wzDir < 0) next.classList.add('back');
+    }
+
+    _updateBar();
+
+    // If going to step 4 — refresh summary
+    if(_wzStep === 4) _refreshSummary();
+
+    // Scroll left panel to top
+    const left = document.querySelector('.left');
+    if(left) left.scrollTop = 0;
+  };
+
+  function _updateBar(){
+    for(let i = 1; i <= WZ_TOTAL; i++){
+      const item = $i('wz-item-' + i);
+      if(!item) continue;
+      item.classList.remove('active','done');
+      if(i === _wzStep) item.classList.add('active');
+      else if(i < _wzStep) item.classList.add('done');
+
+      // connector after this item
+      const con = $i('wz-con-' + i);
+      if(con){
+        con.classList.toggle('done', i < _wzStep);
+      }
+    }
+  }
+
+  function _refreshSummary(){
+    const pn = ($i('productName')||{}).value || '';
+    const fm = ($i('pform')||{}).value || 'liquid';
+    const firm = ($i('suppName')||{}).value || '';
+    const appear = ($i('tf_appearance')||{}).value || '';
+
+    // Count components
+    const compRows = document.querySelectorAll('#comps .cw');
+    const numComps = compRows.length;
+
+    // Total concentration
+    const concEl = $i('concTotal');
+    const concText = concEl ? concEl.textContent.replace('Toplam: ','') : '—';
+
+    function setSum(id, val, cls){
+      const el = $i(id);
+      if(!el) return;
+      el.textContent = val || '—';
+      el.className = 'wz-sum-val' + (cls ? ' '+cls : '');
+    }
+
+    setSum('wz-sum-product', pn || null, pn ? '' : 'empty');
+    setSum('wz-sum-form', FORM_LABELS[fm] || fm, '');
+    setSum('wz-sum-firm', firm || null, firm ? '' : 'empty');
+    setSum('wz-sum-comps', numComps > 0 ? numComps + ' bileşen' : null,
+           numComps > 0 ? 'ok' : 'warn');
+    setSum('wz-sum-conc', concText !== '—' ? concText : null,
+           concText === '%100.0' ? 'ok' : (numComps > 0 ? 'warn' : 'empty'));
+    setSum('wz-sum-appear', appear || null, appear ? '' : 'empty');
+  }
+
+  // Init
+  _updateBar();
 })();
 </script>
 </body>

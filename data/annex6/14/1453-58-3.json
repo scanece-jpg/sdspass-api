@@ -27,6 +27,10 @@
       {
         "class": "Eye Dam. 1",
         "h_code": "H318"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
       }
     ],
     "m_factors": {},
@@ -35,16 +39,17 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS08",
+      "GHS05",
       "GHS07",
-      "GHS05"
+      "GHS08"
     ],
     "h_codes": [
-      "H360D",
       "H302",
-      "H373(lung)",
       "H314",
-      "H318"
+      "H318",
+      "H360D",
+      "H373",
+      "H373(lung)"
     ],
     "suppl_h": []
   },

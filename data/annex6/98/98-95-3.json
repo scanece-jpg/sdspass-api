@@ -35,6 +35,10 @@
       {
         "class": "Aquatic Chronic 3",
         "h_code": "H412"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
       }
     ],
     "m_factors": {},
@@ -47,11 +51,12 @@
       "GHS08"
     ],
     "h_codes": [
+      "H301",
+      "H311",
+      "H331",
       "H351",
       "H360F",
-      "H331",
-      "H311",
-      "H301",
+      "H372",
       "H372(blood)",
       "H412"
     ],

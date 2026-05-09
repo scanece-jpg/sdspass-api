@@ -31,6 +31,10 @@
       {
         "class": "Skin Corr. 1B",
         "h_code": "H314"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
       }
     ],
     "m_factors": {},
@@ -39,17 +43,18 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS08",
+      "GHS05",
       "GHS06",
-      "GHS05"
+      "GHS08"
     ],
     "h_codes": [
-      "H361d",
-      "H330",
-      "H311",
       "H301",
-      "H372(nervous_system,_immune_system)",
-      "H314"
+      "H311",
+      "H314",
+      "H330",
+      "H361d",
+      "H372",
+      "H372(nervous_system,_immune_system)"
     ],
     "suppl_h": [
       "EUH071"

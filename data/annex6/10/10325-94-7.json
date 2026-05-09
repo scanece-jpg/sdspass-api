@@ -41,6 +41,10 @@
       {
         "class": "Aquatic Chronic 1",
         "h_code": "H410"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
       }
     ],
     "m_factors": {},
@@ -56,16 +60,17 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS08",
       "GHS07",
+      "GHS08",
       "GHS09"
     ],
     "h_codes": [
-      "H350",
-      "H340",
-      "H332",
-      "H312",
       "H302",
+      "H312",
+      "H332",
+      "H340",
+      "H350",
+      "H372",
       "H372(kidney,_bone)",
       "H400",
       "H410"

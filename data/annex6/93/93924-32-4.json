@@ -21,6 +21,10 @@
       {
         "class": "Carc. 1B",
         "h_code": "H350"
+      },
+      {
+        "class": "Muta. 1B",
+        "h_code": "H340"
       }
     ],
     "m_factors": {},
@@ -35,6 +39,7 @@
     ],
     "h_codes": [
       "H220",
+      "H340",
       "H350"
     ],
     "suppl_h": []

@@ -19,6 +19,10 @@
       {
         "class": "STOT RE 1",
         "h_code": "H372(respiratory_and_haematopoietic_systems)"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
       }
     ],
     "m_factors": {},
@@ -32,6 +36,7 @@
     "h_codes": [
       "H350",
       "H360F",
+      "H372",
       "H372(respiratory_and_haematopoietic_systems)"
     ],
     "suppl_h": []

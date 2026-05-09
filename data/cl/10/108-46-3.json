@@ -31,6 +31,10 @@
       {
         "class": "Aquatic Acute 1",
         "h_code": "H400"
+      },
+      {
+        "class": "STOT SE 1",
+        "h_code": "H370"
       }
     ],
     "m_factors": {
@@ -41,16 +45,17 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS08",
       "GHS07",
+      "GHS08",
       "GHS09"
     ],
     "h_codes": [
       "H302",
-      "H370(nervous_system)",
       "H315",
-      "H319",
       "H317",
+      "H319",
+      "H370",
+      "H370(nervous_system)",
       "H400"
     ],
     "suppl_h": []

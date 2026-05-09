@@ -31,6 +31,14 @@
       {
         "class": "Aquatic Chronic 1",
         "h_code": ""
+      },
+      {
+        "class": "STOT SE 2",
+        "h_code": "H371"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
       }
     ],
     "m_factors": {
@@ -41,16 +49,18 @@
   "labelling": {
     "signal": "Warning",
     "pictograms": [
-      "GHS08",
       "GHS07",
+      "GHS08",
       "GHS09"
     ],
     "h_codes": [
-      "H351",
-      "H332",
       "H302",
+      "H332",
+      "H351",
+      "H371",
       "H371(nervous_system;_oral,_inhalation)",
-      "H400"
+      "H400",
+      "H410"
     ],
     "suppl_h": []
   },

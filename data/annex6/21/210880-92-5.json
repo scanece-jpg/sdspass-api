@@ -27,6 +27,10 @@
       {
         "class": "Aquatic Chronic 1",
         "h_code": "H410"
+      },
+      {
+        "class": "STOT SE 1",
+        "h_code": "H370"
       }
     ],
     "m_factors": {
@@ -38,13 +42,14 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS08",
       "GHS07",
+      "GHS08",
       "GHS09"
     ],
     "h_codes": [
-      "H361f",
       "H302",
+      "H361f",
+      "H370",
       "H370(nervous_system)",
       "H400",
       "H410"

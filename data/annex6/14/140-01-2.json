@@ -19,6 +19,10 @@
       {
         "class": "STOT RE 2",
         "h_code": "H373(Inhalation)"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
       }
     ],
     "m_factors": {},
@@ -38,8 +42,9 @@
       "GHS08"
     ],
     "h_codes": [
-      "H360D",
       "H332",
+      "H360D",
+      "H373",
       "H373(Inhalation)"
     ],
     "suppl_h": []

@@ -27,6 +27,10 @@
       {
         "class": "Aquatic Chronic 1",
         "h_code": "H410"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
       }
     ],
     "m_factors": {
@@ -36,16 +40,17 @@
     "scl_limits": []
   },
   "labelling": {
-    "signal": "Warning",
+    "signal": "Danger",
     "pictograms": [
-      "GHS08",
       "GHS07",
+      "GHS08",
       "GHS09"
     ],
     "h_codes": [
-      "H361d",
-      "H373(eyes,_kidneys,_liver)",
       "H317",
+      "H361d",
+      "H373",
+      "H373(eyes,_kidneys,_liver)",
       "H400",
       "H410"
     ],

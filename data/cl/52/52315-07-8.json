@@ -31,6 +31,14 @@
       {
         "class": "Aquatic Chronic 1",
         "h_code": "H410"
+      },
+      {
+        "class": "Acute Tox. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
       }
     ],
     "m_factors": {},
@@ -40,13 +48,16 @@
     "signal": "Warning",
     "pictograms": [
       "GHS07",
+      "GHS08",
       "GHS09"
     ],
     "h_codes": [
       "H302",
-      "H335",
       "H315",
       "H317",
+      "H332",
+      "H335",
+      "H373",
       "H400",
       "H410"
     ],

@@ -15,6 +15,10 @@
       {
         "class": "STOT RE 1",
         "h_code": "H372(liver)"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
       }
     ],
     "m_factors": {},
@@ -27,6 +31,7 @@
     ],
     "h_codes": [
       "H360D",
+      "H372",
       "H372(liver)"
     ],
     "suppl_h": []

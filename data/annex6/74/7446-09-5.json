@@ -25,6 +25,10 @@
       {
         "class": "Skin. Corr. 1B",
         "h_code": ""
+      },
+      {
+        "class": "STOT SE 1",
+        "h_code": "H370"
       }
     ],
     "m_factors": {},
@@ -34,14 +38,15 @@
     "signal": "Danger",
     "pictograms": [
       "GHS04",
+      "GHS05",
       "GHS06",
-      "GHS08",
-      "GHS05"
+      "GHS08"
     ],
     "h_codes": [
+      "H314",
       "H331",
-      "H370(respiratory_system,_inhalation)",
-      "H314"
+      "H370",
+      "H370(respiratory_system,_inhalation)"
     ],
     "suppl_h": []
   },

@@ -19,6 +19,10 @@
       {
         "class": "STOT RE 1",
         "h_code": "H372(peripheral_nervous_system)"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
       }
     ],
     "m_factors": {},
@@ -30,8 +34,9 @@
       "GHS08"
     ],
     "h_codes": [
-      "H350",
       "H340",
+      "H350",
+      "H372",
       "H372(peripheral_nervous_system)"
     ],
     "suppl_h": []

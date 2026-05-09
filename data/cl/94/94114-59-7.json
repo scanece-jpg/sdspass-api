@@ -11,17 +11,22 @@
       {
         "class": "Carc. 2",
         "h_code": "H351"
+      },
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350"
       }
     ],
     "m_factors": {},
     "scl_limits": []
   },
   "labelling": {
-    "signal": "Warning",
+    "signal": "Danger",
     "pictograms": [
       "GHS08"
     ],
     "h_codes": [
+      "H350",
       "H351"
     ],
     "suppl_h": []

@@ -23,6 +23,10 @@
       {
         "class": "STOT RE 2",
         "h_code": "H373(hearing_organs)"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
       }
     ],
     "m_factors": {},
@@ -37,8 +41,9 @@
     ],
     "h_codes": [
       "H225",
-      "H332",
       "H304",
+      "H332",
+      "H373",
       "H373(hearing_organs)"
     ],
     "suppl_h": []

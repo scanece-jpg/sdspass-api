@@ -31,6 +31,10 @@
       {
         "class": "Skin Sens. 1",
         "h_code": "H317"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
       }
     ],
     "m_factors": {},
@@ -39,17 +43,18 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS08",
+      "GHS05",
       "GHS07",
-      "GHS05"
+      "GHS08"
     ],
     "h_codes": [
-      "H350",
       "H312",
-      "H336",
-      "H373(blood_system)",
+      "H317",
       "H318",
-      "H317"
+      "H336",
+      "H350",
+      "H373",
+      "H373(blood_system)"
     ],
     "suppl_h": []
   },

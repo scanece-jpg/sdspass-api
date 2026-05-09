@@ -21,7 +21,7 @@
     "scl_limits": []
   },
   "labelling": {
-    "signal": "Danger",
+    "signal": "Warning",
     "pictograms": [
       "GHS08",
       "GHS07"

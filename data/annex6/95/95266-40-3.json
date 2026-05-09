@@ -19,6 +19,10 @@
       {
         "class": "Aquatic Chronic 1",
         "h_code": "H410"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
       }
     ],
     "m_factors": {
@@ -29,13 +33,14 @@
   "labelling": {
     "signal": "Warning",
     "pictograms": [
-      "GHS08",
       "GHS07",
+      "GHS08",
       "GHS09"
     ],
     "h_codes": [
-      "H373(gastrointestinal_tract)",
       "H317",
+      "H373",
+      "H373(gastrointestinal_tract)",
       "H410"
     ],
     "suppl_h": []

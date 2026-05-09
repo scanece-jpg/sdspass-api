@@ -21,6 +21,14 @@
       {
         "class": "Aquatic Acute 1",
         "h_code": "H400"
+      },
+      {
+        "class": "Ox. Gas 1",
+        "h_code": "H270"
+      },
+      {
+        "class": "Acute Tox. 1",
+        "h_code": "H330"
       }
     ],
     "m_factors": {
@@ -62,13 +70,16 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS06",
+      "GHS03",
       "GHS05",
+      "GHS06",
       "GHS09"
     ],
     "h_codes": [
+      "H270",
       "H301",
       "H314",
+      "H330",
       "H400"
     ],
     "suppl_h": []

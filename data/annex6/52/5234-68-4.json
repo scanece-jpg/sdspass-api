@@ -23,6 +23,10 @@
       {
         "class": "Aquatic Chronic 1",
         "h_code": "H410"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
       }
     ],
     "m_factors": {
@@ -39,8 +43,9 @@
       "GHS09"
     ],
     "h_codes": [
-      "H373(Kidneys)",
       "H317",
+      "H373",
+      "H373(Kidneys)",
       "H400",
       "H410"
     ],

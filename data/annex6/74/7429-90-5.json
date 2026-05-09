@@ -17,6 +17,10 @@
       {
         "class": "Water-react. 2",
         "h_code": "H261"
+      },
+      {
+        "class": "Pyr. Liq. 1",
+        "h_code": "H250"
       }
     ],
     "m_factors": {},
@@ -29,6 +33,7 @@
     ],
     "h_codes": [
       "H228",
+      "H250",
       "H261"
     ],
     "suppl_h": []

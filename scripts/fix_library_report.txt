@@ -1,0 +1,593 @@
+======================================================================
+SDSPass — Kütüphane Düzeltme Raporu  [GERÇEK — Değişiklikler kaydedildi]
+======================================================================
+
+── data/cl ─────────────────────────────────────────────
+   B3 signal düzeltme : 4
+   B2 H kodu ekleme   : 99
+
+  [B3 — Signal Word Düzeltmeleri]
+    183196-57-8          potassium 1-methyl-3-morpholinocarbonyl-
+         Danger → Warning
+    731-27-1             tolylfluanid (ISO); dichloro-N-[(dimethy
+         Warning → Danger
+    7440-66-6            zinc powder - zinc dust (stabilised)
+         Warning → Danger
+    96-91-3              2-amino-4,6-dinitrophenol; picramic acid
+         Warning → Danger
+
+  [B2 — Eksik H Kodu Eklemeleri]
+    100-41-4             ethylbenzene
+         H eklendi : ['H373']
+    100-42-5             styrene
+         H eklendi : ['H372']
+    10049-04-4           chlorine dioxide … %
+         H eklendi : ['H270', 'H330']
+         Picto eklendi: ['GHS03']
+    10325-94-7           cadmium nitrate; cadmium dinitrate
+         H eklendi : ['H372']
+    104206-82-8          mesotrione (ISO); 2-[4-(methylsulfonyl
+         H eklendi : ['H373']
+          ← signal Danger yapıldı
+    104653-34-1          difethialone (ISO);
+3-[3-(4′-bromobiph
+         H eklendi : ['H372']
+    106-91-2             2,3-epoxypropyl methacrylate; glycidyl
+         H eklendi : ['H372']
+    1065124-65-3         2,3,5,6-tetrafluoro-4-(methoxymethyl)b
+         H eklendi : ['H371']
+    108-31-6             maleic anhydride
+         H eklendi : ['H372']
+    108-46-3             resorcinol; 1,3-benzenediol
+         H eklendi : ['H370']
+    110-54-3             n-hexane
+         H eklendi : ['H372']
+    111-30-8             glutaral; glutaraldehyde; 1,5-pentaned
+         H eklendi : ['H410']
+    112-90-3             (Z)-octadec-9-enylamine
+         H eklendi : ['H373']
+    1166-46-7            (1,3,4,5,6,7-hexahydro-1,3-di­oxo-2H-i
+         H eklendi : ['H371']
+    118134-30-8          spiroxamine (ISO); 8-tert-butyl-1,4-di
+         H eklendi : ['H373']
+          ← signal Danger yapıldı
+    118712-89-3          transfluthrin (ISO); 2,3,5,6-tetrafluo
+         H eklendi : ['H370']
+          ← signal Danger yapıldı
+    119168-77-3          tebufenpyrad (ISO); N-(4-tertbutylbenz
+         H eklendi : ['H373']
+    120-32-1             clorofene;
+chlorophene;
+2-benzyl-4-chl
+         H eklendi : ['H373']
+    124-30-1             octadecylamine
+         H eklendi : ['H373']
+    1303-00-0            gallium arsenide
+         H eklendi : ['H372']
+    1314-62-1            divanadium pentaoxide; vanadium pentox
+         H eklendi : ['H372']
+    13424-46-9           lead diazide; lead azide [≥ 20 % phleg
+         H eklendi : ['H200']
+    139528-85-1          metosulam (ISO); N-(2,6-dichloro-3-met
+         H eklendi : ['H373']
+    15245-44-0           lead 2,4,6-trinitro-m-phenylene dioxid
+         H eklendi : ['H200']
+    15571-58-1           2-ethylhexyl 10-ethyl-4,4-dioctyl-7-ox
+         H eklendi : ['H372']
+    15825-70-4           mannitol hexanitrate; nitromannite; [>
+         H eklendi : ['H200']
+    1593-77-7            dodemorph (ISO); 4-cyclododecyl-2,6-di
+         H eklendi : ['H373']
+    1918-00-9            dicamba (ISO); 2,5-dichloro-6-methoxyb
+         H eklendi : ['H410']
+    21041-95-2           cadmium hydroxide; 
+cadmium dihydroxid
+         H eklendi : ['H372']
+    21087-64-9           metribuzin (ISO); 4-amino-6-tert-butyl
+         H eklendi : ['H373']
+    210880-92-5          clothianidin (ISO); (E)-1-(2-chloro–1,
+         H eklendi : ['H370']
+    22398-80-7           indium phosphide
+         H eklendi : ['H372']
+    240494-71-7          2,3,5,6-tetrafluoro-4-(methoxymethyl)b
+         H eklendi : ['H370']
+    243973-20-8          pinoxaden (ISO);
+8-(2,6-diethyl-4-meth
+         H eklendi : ['H410']
+          ← signal Danger yapıldı
+    28772-56-7           bromadiolone (ISO); 3-[3-(4′-bromobiph
+         H eklendi : ['H372']
+    29232-93-7           pirimiphos-methyl (ISO); O-[2-(diethyl
+         H eklendi : ['H372']
+    31717-87-0           dodemorph acetate; 4-cyclododecyl-2,6-
+         H eklendi : ['H373']
+    330-54-1             diuron (ISO); 3-(3,4-dichlorophenyl)-1
+         H eklendi : ['H373']
+    335-67-1             perfluorooctanoic acid
+         H eklendi : ['H372']
+    335104-84-2          tembotrione (ISO); 2-{2-chloro-4-(meth
+         H eklendi : ['H373']
+          ← signal Danger yapıldı
+    34123-59-6           isoproturon (ISO);
+3-(4-isopropylpheny
+         H eklendi : ['H373']
+    34256-82-1           acetochlor (ISO); 2-chloro-N-(ethoxyme
+         H eklendi : ['H373']
+          ← signal Danger yapıldı
+    3691-35-8            chlorophacinone (ISO); 2-[(4-chlorophe
+         H eklendi : ['H372']
+    3825-26-1            ammoniumpentadeca- fluorooctanoate
+         H eklendi : ['H372']
+    3878-19-1            fuberidazole (ISO); 2-(2-furyl)-1H-ben
+         H eklendi : ['H373']
+    420-04-2             cyanamide; carbamonitril
+         H eklendi : ['H373']
+    513-78-0             cadmium carbonate
+         H eklendi : ['H372']
+    52315-07-8           cypermethrin cis/trans +/- 80/20; (RS)
+         H eklendi : ['H332', 'H373']
+         Picto eklendi: ['GHS08']
+    548-62-9             C.I. Basic Violet 3 with ≥ 0.1 % of Mi
+         H eklendi : ['H351']
+    55-63-0              glycerol trinitrate; nitroglycerine; [
+         H eklendi : ['H200']
+    55406-53-6           3-iodo-2-propynyl butylcarbamate; 3-io
+         H eklendi : ['H372']
+    56073-07-5           difenacoum (ISO); 3-(3-biphenyl-4-yl-1
+         H eklendi : ['H372']
+    56073-10-0           brodifacoum (ISO); 4-hydroxy-3-(3-(4'-
+         H eklendi : ['H372']
+    5625-90-1            N,N′-methylenedimorpholine;
+N,N′-methy
+         H eklendi : ['H373']
+    57583-35-4           2-ethylhexyl 10-ethyl-4,4-dimethyl-7-o
+         H eklendi : ['H372']
+    57960-19-7           acequinocyl (ISO); 3-dodecyl-1,4-dioxo
+         H eklendi : ['H370', 'H373']
+    5836-29-3            coumatetralyl (ISO); 4-hydroxy-3-(1,2,
+         H eklendi : ['H372']
+    59-50-7              chlorocresol;
+4-chloro-m-cresol;
+4-chl
+         H eklendi : ['H410']
+    5989-27-5            (R)-p-mentha-1,8-diene;d-limonene
+         H eklendi : ['H410']
+    61788-45-2           amines, hydrogenated tallow alkyl
+         H eklendi : ['H373']
+    61790-33-8           amines, tallow alkyl
+         H eklendi : ['H373']
+    628-86-4             mercury difulminate; mercuric fulminat
+         H eklendi : ['H200']
+    64742-82-1           naphtha (petroleum), hydrodesulphurize
+         H eklendi : ['H372']
+    64742-88-7           solvent naphtha (petroleum), medium al
+         H eklendi : ['H372']
+    65-85-0              benzoic acid
+         H eklendi : ['H372']
+    66230-04-4           esfenvalerate (ISO);
+(S)-α-cyano- 3-ph
+         H eklendi : ['H370']
+    68359-37-5           cyfluthrin (ISO); α-cyano-4-fluoro-3-p
+         H eklendi : ['H370']
+    68694-11-1           triflumizole (ISO); (1E)-N-[4-chloro-2
+         H eklendi : ['H373']
+    693-21-0             oxydiethylene dinitrate; diethylene gl
+         H eklendi : ['H200']
+    71283-80-2           fenoxaprop-P-ethyl (ISO); ethyl (2R)-2
+         H eklendi : ['H373']
+    72963-72-5           imiprothrin (ISO); reaction mass of: [
+         H eklendi : ['H371', 'H410']
+    731-27-1             tolylfluanid (ISO); dichloro-N-[(dimet
+         H eklendi : ['H330', 'H372']
+         Picto eklendi: ['GHS06', 'GHS08']
+    732-11-6             phosmet (ISO);
+S-[(1,3-dioxo-1,3-dihyd
+         H eklendi : ['H370']
+    74-90-8              hydrogen cyanide ...%; hydrocyanic aci
+         H eklendi : ['H224']
+         Picto eklendi: ['GHS02']
+    7429-90-5            aluminium powder (stabilised)
+         H eklendi : ['H250']
+    7440-66-6            zinc powder - zinc dust (stabilised)
+         H eklendi : ['H250', 'H260']
+         Picto eklendi: ['GHS02']
+    7446-09-5            sulphur dioxide; sulfur dioxide
+         H eklendi : ['H370']
+    75-21-8              ethylene oxide;
+oxirane
+         H eklendi : ['H372']
+    753-73-1             dimethyltin dichloride
+         H eklendi : ['H372']
+    7696-12-0            tetramethrin (ISO);
+(1,3-dioxo-1,3,4,5
+         H eklendi : ['H371']
+    7697-37-2            nitric acid …% [C ≤ 70 %]
+         H eklendi : ['H330']
+    77-58-7              dibutyltin dilaurate; dibutyl[bis(dode
+         H eklendi : ['H372']
+    78-11-5              pentaerythritol tetranitrate; pentaery
+         H eklendi : ['H200']
+    7803-49-8            hydroxylamine ...% [≤ 55% in aqueous s
+         H eklendi : ['H200']
+         Picto eklendi: ['GHS01']
+    8018-01-7            mancozeb (ISO);
+manganese ethylenebis(
+         H eklendi : ['H373']
+    8052-41-3            stoddard solvent; Low boiling point na
+         H eklendi : ['H372']
+    82657-04-3           bifenthrin (ISO); (2-methylbiphenyl-3-
+         H eklendi : ['H372']
+    86347-14-0           (RS)-4-[1-(2,3-dimethylphenyl)ethyl]-1
+         H eklendi : ['H370']
+    90035-08-8           flocoumafen (ISO); reaction mass of: c
+         H eklendi : ['H372']
+    93924-31-3           Foots oil (petroleum), acid-treated; F
+         H eklendi : ['H340']
+    93924-32-4           Foots oil (petroleum), clay-treated; F
+         H eklendi : ['H340']
+    94114-58-6           Fuels, jet aircraft, coal solvent extn
+         H eklendi : ['H350']
+          ← signal Danger yapıldı
+    94114-59-7           Fuels, diesel, coal solvent extn., hyd
+         H eklendi : ['H350']
+          ← signal Danger yapıldı
+    94361-06-5           cyproconazole (ISO); (2RS,3RS;2RS,3SR)
+         H eklendi : ['H373']
+    96-29-7              butanone oxime; ethyl methyl ketoxime;
+         H eklendi : ['H370', 'H373']
+    96-91-3              2-amino-4,6-dinitrophenol; picramic ac
+         H eklendi : ['H201']
+         Picto eklendi: ['GHS01']
+    98-95-3              nitrobenzene
+         H eklendi : ['H372']
+    99-97-8              N,N-dimethyl-p-toluidine
+         H eklendi : ['H373']
+    99105-77-8           sulcotrione (ISO); 2-[2-chloro-4-(meth
+         H eklendi : ['H373']
+          ← signal Danger yapıldı
+
+── data/annex6 ─────────────────────────────────────────────
+   B3 signal düzeltme : 4
+   B2 H kodu ekleme   : 145
+
+  [B3 — Signal Word Düzeltmeleri]
+    183196-57-8          potassium 1-methyl-3-morpholinocarbonyl-
+         Danger → Warning
+    731-27-1             tolylfluanid (ISO); dichloro-N-[(dimethy
+         Warning → Danger
+    7440-66-6            zinc powder - zinc dust (stabilised)
+         Warning → Danger
+    96-91-3              2-amino-4,6-dinitrophenol; picramic acid
+         Warning → Danger
+
+  [B2 — Eksik H Kodu Eklemeleri]
+    100-41-4             ethylbenzene
+         H eklendi : ['H373']
+    100-42-5             styrene
+         H eklendi : ['H372']
+    10049-04-4           chlorine dioxide … %
+         H eklendi : ['H270', 'H330']
+         Picto eklendi: ['GHS03']
+    10222-01-2           2,2-dibromo-2-cyanoacetamide; [DBNPA]
+         H eklendi : ['H372']
+    10325-94-7           cadmium nitrate; cadmium dinitrate
+         H eklendi : ['H372']
+    104206-82-8          mesotrione (ISO); 2-[4-(methylsulfonyl
+         H eklendi : ['H373']
+          ← signal Danger yapıldı
+    104653-34-1          difethialone (ISO);
+3-[3-(4′-bromobiph
+         H eklendi : ['H372']
+    106-91-2             2,3-epoxypropyl methacrylate; glycidyl
+         H eklendi : ['H372']
+    1065124-65-3         2,3,5,6-tetrafluoro-4-(methoxymethyl)b
+         H eklendi : ['H371']
+    1067-33-0            dibutyltin di(acetate)
+         H eklendi : ['H372']
+    108-31-6             maleic anhydride
+         H eklendi : ['H372']
+    108-46-3             resorcinol; 1,3-benzenediol
+         H eklendi : ['H370']
+    108-78-1             1,3,5-triazine-2,4,6-triamine; 
+melami
+         H eklendi : ['H373']
+    110-54-3             n-hexane
+         H eklendi : ['H372']
+    1101132-67-5         (RS)-1-{1-ethyl-4-[4-mesyl-3-(2-methox
+         H eklendi : ['H373']
+          ← signal Danger yapıldı
+    111-30-8             glutaral; glutaraldehyde; 1,5-pentaned
+         H eklendi : ['H410']
+    112-90-3             (Z)-octadec-9-enylamine
+         H eklendi : ['H373']
+    115-09-3             methylmercuric chloride
+         H eklendi : ['H372']
+    1166-46-7            (1,3,4,5,6,7-hexahydro-1,3-di­oxo-2H-i
+         H eklendi : ['H371']
+    118134-30-8          spiroxamine (ISO); 8-tert-butyl-1,4-di
+         H eklendi : ['H373']
+          ← signal Danger yapıldı
+    118712-89-3          transfluthrin (ISO); 2,3,5,6-tetrafluo
+         H eklendi : ['H370']
+          ← signal Danger yapıldı
+    119168-77-3          tebufenpyrad (ISO); N-(4-tertbutylbenz
+         H eklendi : ['H373']
+    120-32-1             clorofene;
+chlorophene;
+2-benzyl-4-chl
+         H eklendi : ['H373']
+    12124-97-9           ammonium bromide
+         H eklendi : ['H372']
+    124-30-1             octadecylamine
+         H eklendi : ['H373']
+    125225-28-7          ipconazole (ISO); (1RS,2SR,5RS;1RS,2S­
+         H eklendi : ['H373']
+    127-06-0             acetone oxime
+         H eklendi : ['H373']
+    1303-00-0            gallium arsenide
+         H eklendi : ['H372']
+    1314-62-1            divanadium pentaoxide; vanadium pentox
+         H eklendi : ['H372']
+    13424-46-9           lead diazide; lead azide [≥ 20 % phleg
+         H eklendi : ['H200']
+    13463-67-7           titanium dioxide; [in powder form cont
+         H eklendi : ['H351']
+    137641-05-5          picolinafen (ISO); N-(4-fluorophenyl)-
+         H eklendi : ['H373']
+    139528-85-1          metosulam (ISO); N-(2,6-dichloro-3-met
+         H eklendi : ['H373']
+    140-01-2             pentasodium (carboxylatomethyl)iminobi
+         H eklendi : ['H373']
+    1453-58-3            3-methylpyrazole
+         H eklendi : ['H373']
+    15245-44-0           lead 2,4,6-trinitro-m-phenylene dioxid
+         H eklendi : ['H200']
+    155569-91-8          emamectin benzoate (ISO); (4"R)-4"-deo
+         H eklendi : ['H370', 'H372']
+    15571-58-1           2-ethylhexyl 10-ethyl-4,4-dioctyl-7-ox
+         H eklendi : ['H372']
+    15825-70-4           mannitol hexanitrate; nitromannite; [>
+         H eklendi : ['H200']
+    15922-78-8           Pyridine-2-thiol 1-oxide, sodium salt 
+         H eklendi : ['H372', 'H410']
+    1593-77-7            dodemorph (ISO); 4-cyclododecyl-2,6-di
+         H eklendi : ['H373']
+    175013-18-0          pyraclostrobin (ISO); methyl N-{2-[1-(
+         H eklendi : ['H373']
+    1820573-27-0         beta-cyfluthrin (ISO);
+reaction mass o
+         H eklendi : ['H370']
+    1918-00-9            dicamba (ISO); 2,5-dichloro-6-methoxyb
+         H eklendi : ['H410']
+    21041-95-2           cadmium hydroxide; 
+cadmium dihydroxid
+         H eklendi : ['H372']
+    21087-64-9           metribuzin (ISO); 4-amino-6-tert-butyl
+         H eklendi : ['H373']
+    210880-92-5          clothianidin (ISO); (E)-1-(2-chloro–1,
+         H eklendi : ['H370']
+    22398-80-7           indium phosphide
+         H eklendi : ['H372']
+    22673-19-4           dibutylbis(pentane-2,4-dionato-O,O')ti
+         H eklendi : ['H372']
+    2386-87-0            7-oxabicyclo[4.1.0]hept-3-ylmethyl 7-o
+         H eklendi : ['H373']
+    240494-71-7          2,3,5,6-tetrafluoro-4-(methoxymethyl)b
+         H eklendi : ['H370']
+    243973-20-8          pinoxaden (ISO);
+8-(2,6-diethyl-4-meth
+         H eklendi : ['H410']
+          ← signal Danger yapıldı
+    2527-66-4            2-methyl-1,2-ben­zothiazol-3(2H)-one; 
+         H eklendi : ['H410']
+    25319-90-8           MCPA-thioethyl (ISO); S-ethyl   (4-chl
+         H eklendi : ['H373']
+    2781-10-4            dibutyltin bis
+(2-ethylhexanoate)
+         H eklendi : ['H372']
+    2797-51-5            quinoclamine (ISO); 2-amino-3-chloro-1
+         H eklendi : ['H373']
+          ← signal Danger yapıldı
+    28772-56-7           bromadiolone (ISO); 3-[3-(4′-bromobiph
+         H eklendi : ['H372']
+    29232-93-7           pirimiphos-methyl (ISO); O-[2-(diethyl
+         H eklendi : ['H372']
+    312600-89-8          bis(N-hydroxy-N-ni­trosocyclohexylamin
+         H eklendi : ['H373']
+    31717-87-0           dodemorph acetate; 4-cyclododecyl-2,6-
+         H eklendi : ['H373']
+    330-54-1             diuron (ISO); 3-(3,4-dichlorophenyl)-1
+         H eklendi : ['H373']
+    335-67-1             perfluorooctanoic acid
+         H eklendi : ['H372']
+    335104-84-2          tembotrione (ISO); 2-{2-chloro-4-(meth
+         H eklendi : ['H373']
+          ← signal Danger yapıldı
+    34123-59-6           isoproturon (ISO);
+3-(4-isopropylpheny
+         H eklendi : ['H373']
+    34256-82-1           acetochlor (ISO); 2-chloro-N-(ethoxyme
+         H eklendi : ['H373']
+          ← signal Danger yapıldı
+    35575-96-3           azamethiphos (ISO); S-[(6-chloro-2-oxo
+         H eklendi : ['H370']
+    3691-35-8            chlorophacinone (ISO); 2-[(4-chlorophe
+         H eklendi : ['H372']
+    375-85-9             Perfluoroheptanoic acid; tridecafluoro
+         H eklendi : ['H372']
+    3811-73-2            Pyridine-2-thiol 1-oxide, sodium salt;
+         H eklendi : ['H372', 'H410']
+    3825-26-1            ammoniumpentadeca- fluorooctanoate
+         H eklendi : ['H372']
+    3878-19-1            fuberidazole (ISO); 2-(2-furyl)-1H-ben
+         H eklendi : ['H373']
+    420-04-2             cyanamide; carbamonitril
+         H eklendi : ['H373']
+    513-78-0             cadmium carbonate
+         H eklendi : ['H372']
+    52315-07-8           cypermethrin cis/trans +/- 80/20; (RS)
+         H eklendi : ['H332', 'H373']
+         Picto eklendi: ['GHS08']
+    5234-68-4            carboxin (ISO);
+2-methyl-N-phenyl-5,6-
+         H eklendi : ['H373']
+    548-62-9             C.I. Basic Violet 3 with ≥ 0.1 % of Mi
+         H eklendi : ['H351']
+    55-63-0              glycerol trinitrate; nitroglycerine; [
+         H eklendi : ['H200']
+    55406-53-6           3-iodo-2-propynyl butylcarbamate; 3-io
+         H eklendi : ['H372']
+    56073-07-5           difenacoum (ISO); 3-(3-biphenyl-4-yl-1
+         H eklendi : ['H372']
+    56073-10-0           brodifacoum (ISO); 4-hydroxy-3-(3-(4'-
+         H eklendi : ['H372']
+    5625-90-1            N,N′-methylenedimorpholine;
+N,N′-methy
+         H eklendi : ['H373']
+    571-58-4             1,4-dimethylnaphthalene
+         H eklendi : ['H410']
+    57583-35-4           2-ethylhexyl 10-ethyl-4,4-dimethyl-7-o
+         H eklendi : ['H372']
+    57960-19-7           acequinocyl (ISO); 3-dodecyl-1,4-dioxo
+         H eklendi : ['H370', 'H373']
+    5836-29-3            coumatetralyl (ISO); 4-hydroxy-3-(1,2,
+         H eklendi : ['H372']
+    59-50-7              chlorocresol;
+4-chloro-m-cresol;
+4-chl
+         H eklendi : ['H410']
+    59-89-2              4-nitrosomorpholine
+         H eklendi : ['H372']
+    5989-27-5            (R)-p-mentha-1,8-diene;d-limonene
+         H eklendi : ['H410']
+    61788-45-2           amines, hydrogenated tallow alkyl
+         H eklendi : ['H373']
+    61790-33-8           amines, tallow alkyl
+         H eklendi : ['H373']
+    624-92-0             dimethyl disulphide
+         H eklendi : ['H370']
+    628-86-4             mercury difulminate; mercuric fulminat
+         H eklendi : ['H200']
+    647-42-7             3,3,4,4,5,5,6,6,7,7,8,8,8-tridecafluor
+         H eklendi : ['H373']
+    64742-82-1           naphtha (petroleum), hydrodesulphurize
+         H eklendi : ['H372']
+    64742-88-7           solvent naphtha (petroleum), medium al
+         H eklendi : ['H372']
+    65-85-0              benzoic acid
+         H eklendi : ['H372']
+    66230-04-4           esfenvalerate (ISO);
+(S)-α-cyano- 3-ph
+         H eklendi : ['H370']
+    66603-10-9           potassium (oxido-N­NO-azoxy)cyclohexan
+         H eklendi : ['H373']
+    67-43-6              N-carboxymethyliminobis(ethylenenitril
+         H eklendi : ['H373']
+    67306-00-7           fenpropidin (ISO); (R,S)-1-[3-(4-tert-
+         H eklendi : ['H373']
+    68359-37-5           cyfluthrin (ISO); α-cyano-4-fluoro-3-p
+         H eklendi : ['H370']
+    68694-11-1           triflumizole (ISO); (1E)-N-[4-chloro-2
+         H eklendi : ['H373']
+    68909-20-6           silanamine,
+1,1,1-trimethyl-N-(trimeth
+         H eklendi : ['H373']
+    693-21-0             oxydiethylene dinitrate; diethylene gl
+         H eklendi : ['H200']
+    71283-80-2           fenoxaprop-P-ethyl (ISO); ethyl (2R)-2
+         H eklendi : ['H373']
+    7216-95-7            pentapotassium 2,2’,2’’,2’’’,2’’’’-(et
+         H eklendi : ['H373']
+    72963-72-5           imiprothrin (ISO); reaction mass of: [
+         H eklendi : ['H371', 'H410']
+    731-27-1             tolylfluanid (ISO); dichloro-N-[(dimet
+         H eklendi : ['H330', 'H372']
+         Picto eklendi: ['GHS06', 'GHS08']
+    732-11-6             phosmet (ISO);
+S-[(1,3-dioxo-1,3-dihyd
+         H eklendi : ['H370']
+    732-26-3             2,4,6-tri-tert-butylphenol
+         H eklendi : ['H373']
+    74-90-8              hydrogen cyanide ...%; hydrocyanic aci
+         H eklendi : ['H224']
+         Picto eklendi: ['GHS02']
+    7429-90-5            aluminium powder (stabilised)
+         H eklendi : ['H250']
+    7440-22-4            silver nano: [particle diameter > 1 nm
+         H eklendi : ['H373']
+          ← signal Danger yapıldı
+    7440-66-6            zinc powder - zinc dust (stabilised)
+         H eklendi : ['H250', 'H260']
+         Picto eklendi: ['GHS02']
+    7446-09-5            sulphur dioxide; sulfur dioxide
+         H eklendi : ['H370']
+    75-21-8              ethylene oxide;
+oxirane
+         H eklendi : ['H372']
+    753-73-1             dimethyltin dichloride
+         H eklendi : ['H372']
+    7696-12-0            tetramethrin (ISO);
+(1,3-dioxo-1,3,4,5
+         H eklendi : ['H371']
+    7697-37-2            nitric acid …% [C ≤ 70 %]
+         H eklendi : ['H330']
+    77-58-7              dibutyltin dilaurate; dibutyl[bis(dode
+         H eklendi : ['H372']
+    78-04-6              dibutyltin maleate
+         H eklendi : ['H372']
+    78-11-5              pentaerythritol tetranitrate; pentaery
+         H eklendi : ['H200']
+    7803-49-8            hydroxylamine ...% [≤ 55% in aqueous s
+         H eklendi : ['H200']
+         Picto eklendi: ['GHS01']
+    8018-01-7            mancozeb (ISO);
+manganese ethylenebis(
+         H eklendi : ['H373']
+    8052-41-3            stoddard solvent; Low boiling point na
+         H eklendi : ['H372']
+    818-08-6             dibutyltin oxide
+         H eklendi : ['H372']
+    82657-04-3           bifenthrin (ISO); (2-methylbiphenyl-3-
+         H eklendi : ['H372']
+    84696-25-3           Margosa, ext. [from the kernels of Aza
+         H eklendi : ['H412']
+          ← signal Danger yapıldı
+    86347-14-0           (RS)-4-[1-(2,3-dimethylphenyl)ethyl]-1
+         H eklendi : ['H370']
+    874819-71-3          N-(2-nitrophenyl)phosphoric triamide
+         H eklendi : ['H373']
+    874967-67-6          N-{2-[[1,1'-bi(cyclopropyl)]-2-yl]phen
+         H eklendi : ['H410']
+    90035-08-8           flocoumafen (ISO); reaction mass of: c
+         H eklendi : ['H372']
+    924-42-5             N-(hydroxymethyl)acrylamide; methylola
+         H eklendi : ['H372']
+    93924-31-3           Foots oil (petroleum), acid-treated; F
+         H eklendi : ['H340']
+    93924-32-4           Foots oil (petroleum), clay-treated; F
+         H eklendi : ['H340']
+    94114-58-6           Fuels, jet aircraft, coal solvent extn
+         H eklendi : ['H350']
+          ← signal Danger yapıldı
+    94114-59-7           Fuels, diesel, coal solvent extn., hyd
+         H eklendi : ['H350']
+          ← signal Danger yapıldı
+    94361-06-5           cyproconazole (ISO); (2RS,3RS;2RS,3SR)
+         H eklendi : ['H373']
+    951659-40-8          4-{[(6-chloropyridin-3-yl)methyl](2,2-
+         H eklendi : ['H373']
+    95266-40-3           trinexapac-ethyl (ISO);
+ethyl 4-[cyclo
+         H eklendi : ['H373']
+    96-29-7              butanone oxime; ethyl methyl ketoxime;
+         H eklendi : ['H370', 'H373']
+    96-91-3              2-amino-4,6-dinitrophenol; picramic ac
+         H eklendi : ['H201']
+         Picto eklendi: ['GHS01']
+    98-95-3              nitrobenzene
+         H eklendi : ['H372']
+    99-97-8              N,N-dimethyl-p-toluidine
+         H eklendi : ['H373']
+    99105-77-8           sulcotrione (ISO); 2-[2-chloro-4-(meth
+         H eklendi : ['H373']
+          ← signal Danger yapıldı

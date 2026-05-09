@@ -43,6 +43,10 @@
       {
         "class": "Aquatic Chronic 2",
         "h_code": "H411"
+      },
+      {
+        "class": "STOT RE 1",
+        "h_code": "H372"
       }
     ],
     "m_factors": {},
@@ -56,13 +60,14 @@
       "GHS09"
     ],
     "h_codes": [
+      "H301",
+      "H330",
+      "H335",
       "H341",
       "H350",
       "H361fd",
       "H362",
-      "H301",
-      "H330",
-      "H335",
+      "H372",
       "H372(respiratory_tract,_inhalation)",
       "H411"
     ],

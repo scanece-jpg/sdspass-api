@@ -39,6 +39,10 @@
       {
         "class": "Aquatic Chronic 2",
         "h_code": "H411"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
       }
     ],
     "m_factors": {
@@ -57,19 +61,20 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS06",
       "GHS05",
+      "GHS06",
       "GHS08",
       "GHS09"
     ],
     "h_codes": [
-      "H330",
       "H301",
-      "H335",
       "H314",
-      "H334",
       "H317",
+      "H330",
+      "H334",
+      "H335",
       "H400",
+      "H410",
       "H411"
     ],
     "suppl_h": [

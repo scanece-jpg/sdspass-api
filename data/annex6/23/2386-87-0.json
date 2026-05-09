@@ -19,6 +19,10 @@
       {
         "class": "Skin Sens. 1",
         "h_code": "H317"
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373"
       }
     ],
     "m_factors": {},
@@ -27,13 +31,14 @@
   "labelling": {
     "signal": "Warning",
     "pictograms": [
-      "GHS08",
-      "GHS07"
+      "GHS07",
+      "GHS08"
     ],
     "h_codes": [
+      "H317",
       "H341",
-      "H373(nasal_cavity)",
-      "H317"
+      "H373",
+      "H373(nasal_cavity)"
     ],
     "suppl_h": []
   }

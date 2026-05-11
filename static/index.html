@@ -20,7 +20,8 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
 body::before{display:none}
 body::after{display:none}
 .app{display:grid;grid-template-columns:1fr 380px;gap:0;min-height:100vh;position:relative;z-index:1}
-.left{padding:20px;overflow-y:auto;border-right:1px solid var(--border)}
+.left{padding:20px;overflow-y:auto;border-right:1px solid var(--border);
+      background:radial-gradient(ellipse 80% 60% at 40% 20%,rgba(226,232,240,.025) 0%,transparent 70%)}
 .right-col{display:flex;flex-direction:column;border-left:1px solid var(--border);background:var(--bg2);overflow:hidden}
 .right{padding:16px;overflow-y:auto;flex:1;border-bottom:1px solid var(--border)}
 .ai-panel{flex:0 0 auto;height:340px}
@@ -421,10 +422,17 @@ select.dir-inp{cursor:pointer;-webkit-appearance:none;
 .dir-radio-opts input[type=radio]{accent-color:var(--accent);width:12px;height:12px}
 
 /* ── v0-style Cards ─────────────────────────────────────────────────────── */
-.v0-card{background:var(--bg2);border:1px solid var(--border);border-radius:8px;
-         padding:10px 12px;margin-bottom:8px;position:relative;overflow:hidden}
+.v0-card{background:var(--bg2);border:1px solid rgba(226,232,240,.08);border-radius:8px;
+         padding:10px 12px;margin-bottom:8px;position:relative;overflow:hidden;
+         box-shadow:
+           0 2px 8px rgba(0,0,0,.4),
+           0 8px 32px rgba(0,0,0,.3),
+           0 0 40px rgba(226,232,240,.03),
+           inset 0 1px 0 rgba(226,232,240,.06),
+           inset 0 -1px 0 rgba(0,0,0,.2)}
 .v0-card::before{content:'';position:absolute;inset-x:0;top:0;height:2px;
-                 background:linear-gradient(90deg,rgba(226,232,240,.6),rgba(203,213,225,.4))}
+                 background:linear-gradient(90deg,transparent,rgba(226,232,240,.5),rgba(226,232,240,.7),rgba(226,232,240,.5),transparent);
+                 filter:blur(0.5px)}
 .v0-card.danger-top::before{background:linear-gradient(90deg,rgba(248,113,113,.5),rgba(251,146,60,.4))}
 .v0-card.cyan-top::before{background:linear-gradient(90deg,rgba(203,213,225,.5),rgba(226,232,240,.3))}
 .v0-sec-title{display:flex;align-items:center;gap:6px;margin-bottom:8px;

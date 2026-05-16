@@ -264,6 +264,9 @@ const CLPEngine = (() => {
     // Hesaplama yapılmaz; buffer kapasitesi dikkate alınmaz (muhafazakâr yaklaşım)
     const phRaw = parseFloat(mixturePH);
     const phExtreme = !isNaN(phRaw) && (phRaw <= 2.0 || phRaw >= 11.5);
+    // pH girildi ve aşırı değil (2 < pH < 11.5) → karışım ölçülmüş pH'a göre korozif değil
+    // GCL/toplama kuralından gelen H314/H318 bastırılır (nötralizasyon/tamponlama)
+    const phNormal = !isNaN(phRaw) && phRaw > 2.0 && phRaw < 11.5;
     const phDirect = new Set();
     if (phExtreme) {
       const direction = phRaw <= 2.0 ? '≤ 2' : '≥ 11.5';
@@ -301,8 +304,9 @@ const CLPEngine = (() => {
         if (ECO_SKIP.has(code))   return [];
         if (ATE_HCODES.has(code)) return [];
 
-        // pH doğrudan H314/H318 atadıysa tek bileşen GCL kontrolü atlanır
-        if (phExtreme && (code === 'H314' || code === 'H318')) return [];
+        // pH doğrudan H314/H318 atadıysa (aşırı) veya normal pH ölçüldüyse (nötralizasyon)
+        // GCL bileşen kontrolü atlanır
+        if ((phExtreme || phNormal) && (code === 'H314' || code === 'H318')) return [];
 
         const scl = _getSCL(c.scl, code);
         const gcl = CUTOFFS[code];
@@ -417,7 +421,8 @@ const CLPEngine = (() => {
     // ── CLP Tablo 3.2.3: Cilt Toplama Kuralı ────────────────────────────────────
     // Kural 1: ΣSkin Corr. 1 ≥ %5 → H314
     // Kural 2: 10×ΣSkin Corr. 1 + ΣSkin Irrit. 2 ≥ %10 → H315 (H314 yoksa)
-    if (!raw.includes('H314') && !phExtreme) {
+    // Normal pH girilmişse H314/H318 GCL toplama kuralları da atlanır
+    if (!raw.includes('H314') && !phExtreme && !phNormal) {
       const sumSC1 = comps.reduce((s, c) => {
         const conc = parseFloat(c.concMax || c.conc) || 0;
         const hasSC1 = (c.hazards || []).some(h => {
@@ -465,7 +470,7 @@ const CLPEngine = (() => {
       });
     }
 
-    if (!raw.includes('H318') && !phExtreme) {
+    if (!raw.includes('H318') && !phExtreme && !phNormal) {
       const sumED1 = comps.reduce((s, c) => {
         const conc = parseFloat(c.concMax || c.conc) || 0;
         return _hasEyeDam1(c) ? s + conc : s;

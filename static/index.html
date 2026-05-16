@@ -1071,7 +1071,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
 </script>
 <script src="js/event-bus.js?v=20250328"></script>
 <script src="js/state-store.js?v=20250328"></script>
-<script src="js/engines/clp_engine.js?v=20260507a"></script>
+<script src="js/engines/clp_engine.js?v=20260516a"></script>
 <script src="js/engines/pcode_engine.js?v=20260505b"></script>
 <script src="js/engines/hp_texts.js?v=20260425"></script>
 <script src="js/engines/eco_engine.js?v=20260402"></script>
@@ -3453,7 +3453,12 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
       },
       revision: _getRevision(),
       ate_mix_details: clp?.ateMixDetails || {},  // ATEmix hesap detayları — PDF Bölüm 11
-      h314_neutralization_removed: !h314KeepOverride,  // kullanıcı H314'ü kaldırdıysa true
+      // Normal pH ölçüldüyse (2 < pH < 11.5) motor H314'ü zaten baskıladı → PDF'e bildir
+      h314_neutralization_removed: (() => {
+        const _phv = parseFloat(document.getElementById('tf_ph')?.value);
+        const _phNorm = !isNaN(_phv) && _phv > 2.0 && _phv < 11.5;
+        return _phNorm || !h314KeepOverride;
+      })(),
     };
 
     const res = await fetch(API_BASE + '/sds/pdf', {

@@ -10,11 +10,16 @@
     "hazards": [
       {
         "class": "Repr. 2",
-        "h_code": "H361f"
+        "h_code": "H361f",
+        "note_flag": "***",
+        "note": "Üreme toksisitesi yalnızca belirtilen alt kategori için geçerli (F=fertilite veya D=gelişim)",
+        "repro_sub": "F"
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373"
+        "h_code": "H373",
+        "note_flag": "**",
+        "note": "Hedef organ ve/veya maruziyet yolu SDS Bölüm 11'de belirtilmeli"
       },
       {
         "class": "Aquatic Chronic 2",

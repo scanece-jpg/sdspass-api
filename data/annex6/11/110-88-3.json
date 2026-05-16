@@ -16,7 +16,10 @@
       },
       {
         "class": "Repr. 2",
-        "h_code": "H361d"
+        "h_code": "H361d",
+        "note_flag": "***",
+        "note": "Üreme toksisitesi yalnızca belirtilen alt kategori için geçerli (F=fertilite veya D=gelişim)",
+        "repro_sub": "D"
       },
       {
         "class": "STOT SE 3",

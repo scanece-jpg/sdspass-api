@@ -12,7 +12,9 @@
     "hazards": [
       {
         "class": "STOT SE 1",
-        "h_code": "H370"
+        "h_code": "H370",
+        "note_flag": "**",
+        "note": "Hedef organ ve/veya maruziyet yolu SDS Bölüm 11'de belirtilmeli"
       },
       {
         "class": "Aquatic Chronic 2",

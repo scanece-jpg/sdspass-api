@@ -16,14 +16,14 @@ const PPEEngine = (() => {
       { hCodes:['H332','H335','H336'], ppe:'Yarım yüz maskesi veya FFP2 toz maskesi (EN 149)', level:2 },
       { hCodes:['H334'],         ppe:'Tam yüz maskesi — P3 filtreli (EN 136)', level:1 },
       { hCodes:['H370','H371'],  ppe:'Tam yüz SCBA veya ABEK gaz maskesi (EN 136)', level:1 },
-      { hCodes:['H340','H350','H360'], ppe:'Tam yüz maskesi — P3 kombine filtre (EN 136)', level:1 },
+      { hCodes:['H340','H350','H360','H360D','H360F','H360FD'], ppe:'Tam yüz maskesi — P3 kombine filtre (EN 136)', level:1 },
     ],
     // El koruma
     hands: [
       { hCodes:['H314'],         ppe:'Nitril eldiven ≥0,4 mm kalınlık (EN ISO 374-1 Tip B)', level:1 },
       { hCodes:['H300','H310'],  ppe:'Nitril veya Bütil kauçuk eldiven ≥0,5 mm (EN ISO 374-1 Tip A)', level:1 },
       { hCodes:['H315','H317'],  ppe:'Nitril eldiven ≥0,1 mm (EN ISO 374-1 Tip B)', level:2 },
-      { hCodes:['H340','H350','H360'], ppe:'Nitril eldiven ≥0,4 mm — tek kullanımlık değil (EN ISO 374-1)', level:1 },
+      { hCodes:['H340','H350','H360','H360D','H360F','H360FD'], ppe:'Nitril eldiven ≥0,4 mm — tek kullanımlık değil (EN ISO 374-1)', level:1 },
       { hCodes:['H318','H319'],  ppe:'Koruyucu eldiven (EN ISO 374-1)', level:2 },
     ],
     // Göz/Yüz koruma
@@ -37,14 +37,19 @@ const PPEEngine = (() => {
     // Vücut/giysi koruma
     body: [
       { hCodes:['H314','H300','H310','H330'], ppe:'Kimyasal koruyucu giysi — Tip 3 veya 4 (EN 14605)', level:1 },
-      { hCodes:['H340','H350','H360'],        ppe:'Kimyasal koruyucu giysi — Tip 4 minimum (EN 14605)', level:1 },
+      { hCodes:['H340','H350','H360','H360D','H360F','H360FD'],        ppe:'Kimyasal koruyucu giysi — Tip 4 minimum (EN 14605)', level:1 },
       { hCodes:['H315','H317','H331','H332'], ppe:'Kimyasal koruyucu iş elbisesi (EN 13034 Tip 6)', level:2 },
       { hCodes:['H224','H225','H226'],        ppe:'Antistatik giysi + antistatik ayakkabı (EN 1149-5)', level:1 },
     ],
   };
 
   function select(hCodes) {
-    const hSet = new Set(hCodes.map(h => h.replace(/[*\s]/g,'').substring(0,4)));
+    // Normalize H codes: preserve H360D/F/FD and H361D/F/FD sub-codes
+    const hSet = new Set(hCodes.map(h => {
+      const s = (h || '').replace(/[*\s]/g,'').toUpperCase();
+      if (/^H36[01]/.test(s) && s.length > 4) return s.substring(0,6); // keep sub-code
+      return s.substring(0,4);
+    }));
     const result = { respiratory:[], hands:[], eyes:[], body:[], general:[] };
 
     for (const [category, ruleList] of Object.entries(RULES)) {
@@ -69,7 +74,8 @@ const PPEEngine = (() => {
     if (hSet.has('H314') || hSet.has('H300') || hSet.has('H310')) {
       result.general.push('Kontaminasyon durumunda hemen bol su ile yıkayın');
     }
-    if (hSet.has('H340') || hSet.has('H350') || hSet.has('H360')) {
+    if (hSet.has('H340') || hSet.has('H350') ||
+        hSet.has('H360') || hSet.has('H360D') || hSet.has('H360F') || hSet.has('H360FD')) {
       result.general.push('Kanserojen/mutajen/reprodüktif toksin — kapalı sistem kullanın');
     }
 

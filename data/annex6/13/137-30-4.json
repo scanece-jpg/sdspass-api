@@ -10,11 +10,15 @@
     "hazards": [
       {
         "class": "Acute Tox. 2",
-        "h_code": "H330"
+        "h_code": "H330",
+        "note_flag": "*",
+        "note": "Sınıflandırma koşula bağlı (belirli form veya konsantrasyon)"
       },
       {
         "class": "Acute Tox. 4",
-        "h_code": "H302"
+        "h_code": "H302",
+        "note_flag": "*",
+        "note": "Sınıflandırma koşula bağlı (belirli form veya konsantrasyon)"
       },
       {
         "class": "STOT SE 3",
@@ -22,7 +26,9 @@
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373"
+        "h_code": "H373",
+        "note_flag": "**",
+        "note": "Hedef organ ve/veya maruziyet yolu SDS Bölüm 11'de belirtilmeli"
       },
       {
         "class": "Eye Dam. 1",

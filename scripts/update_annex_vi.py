@@ -103,7 +103,21 @@ def _parse_hazards(class_col: str, hcode_col: str) -> list[dict]:
     ÖNEMLI: H kodu sütununda 'Press. Gas' gibi kodların karşısı BOŞ bırakılır
     (H220\n\nH350 gibi çift satır sonu). _lines() boşları atladığı için
     burada tek \n ile bölerek boş satırları KORUYORUZ — kayma önlenir.
+
+    Yıldız notasyonları (CLP Annex VI Tablo 3.1):
+      *    → Sınıflandırma koşula bağlı (belirli form veya konsantrasyon)
+      **   → Hedef organ ve/veya maruziyet yolu SDS'de belirtilmeli
+      ***  → Üreme toks. yalnızca belirtilen alt kategori için geçerli (F veya D)
+      **** → Manuel değerlendirme gerekli — patlayıcı alt sınıfı henüz belirsiz
     """
+    # Yıldız → açıklama metni
+    NOTE_TEXTS = {
+        '*':    'Sınıflandırma koşula bağlı (belirli form veya konsantrasyon)',
+        '**':   'Hedef organ ve/veya maruziyet yolu SDS Bölüm 11\'de belirtilmeli',
+        '***':  'Üreme toksisitesi yalnızca belirtilen alt kategori için geçerli (F=fertilite veya D=gelişim)',
+        '****': 'Patlayıcı alt sınıfı belirsiz — test verisiyle manuel değerlendirme gerekli',
+    }
+
     classes = _lines(class_col)   # boş sınıf satırlarını atla
     # H-kodlarını tek \n ile böl: boş satırlar (Press. Gas vs.) korunur
     norm   = hcode_col.replace('\r\n', '\n').replace('\r', '\n')
@@ -112,17 +126,40 @@ def _parse_hazards(class_col: str, hcode_col: str) -> list[dict]:
     result = []
     h_idx  = 0
     for cls in classes:
-        hcode = hcodes[h_idx] if h_idx < len(hcodes) else ''
+        raw_hcode = hcodes[h_idx] if h_idx < len(hcodes) else ''
         h_idx += 1
-        hcode = _clean_hcode(hcode)
+
+        # Yıldız sayısını tespit et (H kodu satırından)
+        star_match = re.search(r'(\*+)\s*$', raw_hcode.strip())
+        note_flag  = star_match.group(1) if star_match else None
+
+        # Sınıf sütununda da yıldız olabilir — oradan da kontrol et
+        if not note_flag:
+            cls_star = re.search(r'(\*+)\s*$', cls.strip())
+            if cls_star:
+                note_flag = cls_star.group(1)
+
+        hcode = _clean_hcode(raw_hcode)
         cls   = re.sub(r'\s*\*+\s*$', '', cls).strip()
+
         if cls:
-            result.append({'class': cls, 'h_code': hcode})
+            entry = {'class': cls, 'h_code': hcode if hcode else None}
+            if note_flag and note_flag in NOTE_TEXTS:
+                entry['note_flag'] = note_flag
+                entry['note']      = NOTE_TEXTS[note_flag]
+                # *** için üreme alt kategorisini tespit et (F/D)
+                if note_flag == '***' and hcode:
+                    sub = re.search(r'(F|D|fd|FD)', hcode, re.IGNORECASE)
+                    if sub:
+                        entry['repro_sub'] = sub.group(1).upper()
+            result.append(entry)
     return result
 
 
 def _clean_hcode(code: str) -> str:
     code = code.strip()
+    # Yıldızları temizle
+    code = re.sub(r'\s*\*+\s*$', '', code).strip()
     organ = re.search(r'\(([^)]+)\)', code)
     if organ:
         base = re.sub(r'\s*\([^)]+\)', '', code).strip().split()
@@ -168,7 +205,7 @@ def _parse_m_factors(scl_col: str, hazards: list | None = None) -> dict:
     solo = re.search(r'\bM\s*=\s*(\d+)\b', scl_col, re.IGNORECASE)
     if solo:
         mval = int(solo.group(1))
-        h_set = {re.sub(r'[^A-Z0-9]', '', h.get('h_code', '').upper())[:4]
+        h_set = {re.sub(r'[^A-Z0-9]', '', (h.get('h_code') or '').upper())[:4]
                  for h in (hazards or [])}
         has_acute   = bool(h_set & {'H400', 'H401', 'H402'})
         has_chronic = bool(h_set & {'H410', 'H411', 'H412', 'H413'})
@@ -269,8 +306,10 @@ def _atp_rank(atp: str) -> int:
     return max((int(n) for n in nums), default=0)
 
 
-def _h4(code: str) -> str:
-    return re.sub(r'[^A-Z0-9]', '', code.upper())[:4]
+def _h4(code) -> str:
+    if not code:
+        return ''
+    return re.sub(r'[^A-Z0-9]', '', str(code).upper())[:4]
 
 
 def _is_stricter(new_code: str, old_code: str) -> bool:

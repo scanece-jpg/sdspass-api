@@ -14,7 +14,10 @@
       },
       {
         "class": "Repr. 1B",
-        "h_code": "H360F"
+        "h_code": "H360F",
+        "note_flag": "***",
+        "note": "Üreme toksisitesi yalnızca belirtilen alt kategori için geçerli (F=fertilite veya D=gelişim)",
+        "repro_sub": "F"
       },
       {
         "class": "Skin Sens. 1",

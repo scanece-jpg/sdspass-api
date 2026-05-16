@@ -10,7 +10,9 @@
     "hazards": [
       {
         "class": "STOT RE 2",
-        "h_code": "H373"
+        "h_code": "H373",
+        "note_flag": "**",
+        "note": "Hedef organ ve/veya maruziyet yolu SDS Bölüm 11'de belirtilmeli"
       },
       {
         "class": "Skin Sens. 1",

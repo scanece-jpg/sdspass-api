@@ -10,7 +10,9 @@
     "hazards": [
       {
         "class": "Acute Tox. 3",
-        "h_code": "H301"
+        "h_code": "H301",
+        "note_flag": "*",
+        "note": "Sınıflandırma koşula bağlı (belirli form veya konsantrasyon)"
       }
     ],
     "m_factors": {},

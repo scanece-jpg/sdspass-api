@@ -10,11 +10,16 @@
     "hazards": [
       {
         "class": "Repr. 1B",
-        "h_code": "H360F"
+        "h_code": "H360F",
+        "note_flag": "***",
+        "note": "Üreme toksisitesi yalnızca belirtilen alt kategori için geçerli (F=fertilite veya D=gelişim)",
+        "repro_sub": "F"
       },
       {
         "class": "Acute Tox. 4",
-        "h_code": "H302"
+        "h_code": "H302",
+        "note_flag": "*",
+        "note": "Sınıflandırma koşula bağlı (belirli form veya konsantrasyon)"
       },
       {
         "class": "Skin Sens. 1",

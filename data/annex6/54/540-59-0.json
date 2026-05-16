@@ -16,7 +16,9 @@
       },
       {
         "class": "Acute Tox. 4",
-        "h_code": "H332"
+        "h_code": "H332",
+        "note_flag": "*",
+        "note": "Sınıflandırma koşula bağlı (belirli form veya konsantrasyon)"
       },
       {
         "class": "Aquatic Chronic 3",

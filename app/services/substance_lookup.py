@@ -149,11 +149,18 @@ def _cl_to_legacy(entry: dict, priority: int, source_label: str) -> dict:
     cl = entry.get('classification', {})
     lb = entry.get('labelling', {})
 
-    # classification.hazards → [{h_class, h_code}] formatına çevir
-    hazards = [
-        {'h_class': h.get('class', ''), 'h_code': h.get('h_code', '')}
-        for h in cl.get('hazards', [])
-    ]
+    # classification.hazards → [{h_class, h_code, note_flag?, note?, repro_sub?}] formatına çevir
+    def _build_hazard(h: dict) -> dict:
+        d = {'h_class': h.get('class', ''), 'h_code': h.get('h_code', '')}
+        if h.get('note_flag'):
+            d['note_flag'] = h['note_flag']
+        if h.get('note'):
+            d['note'] = h['note']
+        if h.get('repro_sub'):
+            d['repro_sub'] = h['repro_sub']
+        return d
+
+    hazards = [_build_hazard(h) for h in cl.get('hazards', [])]
 
     return {
         'cas'            : entry.get('cas', ''),
@@ -163,6 +170,7 @@ def _cl_to_legacy(entry: dict, priority: int, source_label: str) -> dict:
         'index_no'       : entry.get('index_no', ''),
         'atp'            : entry.get('atp', ''),
         'notes'          : entry.get('notes', []),
+        'ate'            : entry.get('ate', {}),
         'signal'         : lb.get('signal', ''),
         'pictograms'     : lb.get('pictograms', []),
         'hazards'        : hazards,
@@ -240,6 +248,23 @@ def lookup_substance(cas: str) -> Optional[Dict]:
         result = _cl_to_legacy(tr_entry, 1, f'SEA Ek-6 ({tr_entry.get("atp","?")})')
         if ax_entry:
             ax_result   = _cl_to_legacy(ax_entry, 2, '')
+
+            # ── Annex VI not bayraklarını (note_flag/note/repro_sub) TR tehlikelerine aktar ──
+            # TR Ek-6 verisinde bu alanlar bulunmaz; Annex VI eşleşen H kodlarından türetilir.
+            ax_note_map: dict = {}
+            for _ah in ax_result.get('hazards', []):
+                _ahc4 = (_ah.get('h_code') or '').replace('*','').strip()[:4]
+                if _ahc4 and _ah.get('note_flag') and _ahc4 not in ax_note_map:
+                    ax_note_map[_ahc4] = {k: v for k, v in _ah.items()
+                                          if k in ('note_flag','note','repro_sub') and v}
+            if ax_note_map:
+                enriched = []
+                for _th in result['hazards']:
+                    _thc4 = (_th.get('h_code') or '').replace('*','').strip()[:4]
+                    extra = ax_note_map.get(_thc4)
+                    enriched.append({**_th, **extra} if extra else _th)
+                result['hazards'] = enriched
+
             supplements = _merge_annex_supplements(result['hazards'], ax_result['hazards'])
             if supplements:
                 result['hazards'] = result['hazards'] + supplements

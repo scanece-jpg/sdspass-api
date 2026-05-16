@@ -10,11 +10,15 @@
     "hazards": [
       {
         "class": "Acute Tox. 2",
-        "h_code": "H300"
+        "h_code": "H300",
+        "note_flag": "*",
+        "note": "Sınıflandırma koşula bağlı (belirli form veya konsantrasyon)"
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372"
+        "h_code": "H372",
+        "note_flag": "**",
+        "note": "Hedef organ ve/veya maruziyet yolu SDS Bölüm 11'de belirtilmeli"
       }
     ],
     "m_factors": {},

@@ -10,7 +10,9 @@
     "hazards": [
       {
         "class": "Org. Perox. B",
-        "h_code": "H241"
+        "h_code": "H241",
+        "note_flag": "****",
+        "note": "Patlayıcı alt sınıfı belirsiz — test verisiyle manuel değerlendirme gerekli"
       },
       {
         "class": "Aquatic Acute 1",

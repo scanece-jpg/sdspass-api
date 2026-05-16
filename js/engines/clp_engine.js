@@ -6,6 +6,20 @@
  * Events: dinler  → CLP_CALCULATE { comps, ph }
  *         emit eder → H_CODES_READY { hCodes, signal, pictograms, dominated }
  */
+// ── H360/H361 alt-kod normalizer ─────────────────────────────────────────────
+function _normH(raw) {
+  const s = (raw || '').replace(/[*\s]/g,'').toUpperCase();
+  if (/^H36[01]/.test(s)) {
+    // Extract D/F sub-letters, normalize to canonical form
+    const tail = s.substring(4).replace(/[^DF]/g,'');
+    const hasD = tail.includes('D');
+    const hasF = tail.includes('F');
+    const sub  = (hasD && hasF) ? 'FD' : (hasD ? 'D' : (hasF ? 'F' : ''));
+    return 'H36' + s[3] + sub;  // e.g. H360D, H360F, H360FD, H360 (if no sub)
+  }
+  return s.substring(0,4);
+}
+
 const CLPEngine = (() => {
 
   // ── CLP Annex I Kesme Değerleri ──────────────────────────────────────────────
@@ -20,6 +34,8 @@ const CLPEngine = (() => {
     'H350':0.1,'H351':1.0,
     // H360/H362: SEA Tablo 3.7.2 GCL = %0.3; H361: %3
     'H360':0.3,'H361':3.0,'H362':0.3,
+    'H360D':0.3,'H360F':0.3,'H360FD':0.3,
+    'H361D':3.0,'H361F':3.0,'H361FD':3.0,
     'H370':10.0,'H371':10.0,'H372':1.0,'H373':10.0,
     'H335':20.0,'H336':20.0,
     'H304':10.0,
@@ -85,7 +101,14 @@ const CLPEngine = (() => {
     'H372': ['H373'],
 
     // CMR — §3.5 / §3.6 / §3.7
-    'H340': ['H341'], 'H350': ['H351'], 'H360': ['H361'],
+    'H340': ['H341'], 'H350': ['H351'],
+    'H360':   ['H361','H361D','H361F','H361FD'],
+    'H360D':  ['H361','H361D'],
+    'H360F':  ['H361','H361F'],
+    'H360FD': ['H360','H360D','H360F','H361','H361D','H361F','H361FD'],
+    'H361D':  [],
+    'H361F':  [],
+    'H361FD': ['H361','H361D','H361F'],
 
     // Sucul — CLP Annex V §1.3
     // H410 (Chronic 1) → H400 etiket üzerinde gösterilmez + alt kronikler
@@ -145,6 +168,8 @@ const CLPEngine = (() => {
     'H340':'GHS08','H341':'GHS08',
     'H350':'GHS08','H351':'GHS08',
     'H360':'GHS08','H361':'GHS08','H362':'GHS08',
+    'H360D':'GHS08','H360F':'GHS08','H360FD':'GHS08',
+    'H361D':'GHS08','H361F':'GHS08','H361FD':'GHS08',
     'H370':'GHS08','H371':'GHS08','H372':'GHS08','H373':'GHS08',
     // Sucul tehlike — SADECE Acute 1, Chronic 1 ve 2 piktogram alır
     'H400':'GHS09','H410':'GHS09','H411':'GHS09',
@@ -168,7 +193,7 @@ const CLPEngine = (() => {
     'H314','H318',
     'H330','H331',
     'H334',
-    'H340','H350','H360',
+    'H340','H350','H360','H360D','H360F','H360FD',
     'H370','H372',
   ]);
 
@@ -180,7 +205,7 @@ const CLPEngine = (() => {
     'H302','H303','H312','H313','H332','H333',
     'H315','H316','H317','H319','H320',
     'H335','H336',
-    'H341','H351','H361','H362',
+    'H341','H351','H361','H361D','H361F','H361FD','H362',
     'H371','H373',
     'H400','H410','H411',
     'H420',
@@ -197,7 +222,7 @@ const CLPEngine = (() => {
   function getGhsCodes(hcodes) {
     const pics = new Set();
     hcodes.forEach(h => {
-      const base = h.replace(/[^H0-9]/g,'').substring(0,4);
+      const base = _normH(h);
       const ghs = H_TO_GHS[base] || H_TO_GHS[h];
       if (ghs) pics.add(ghs);
     });
@@ -213,16 +238,16 @@ const CLPEngine = (() => {
     //            Cilt Duyar.1 (H317) veya STOT SE 3 (H335/H336) varsa GHS07 KALIR.
     if (pics.has('GHS05') && !pics.has('GHS06')) {
       const _ghs07NonIrrit = ['H302','H312','H332','H317','H335','H336'];
-      const _hasNonIrritSrc = hcodes.some(h => _ghs07NonIrrit.includes(h.replace(/[^H0-9]/g,'').substring(0,4)));
+      const _hasNonIrritSrc = hcodes.some(h => _ghs07NonIrrit.includes(_normH(h)));
       if (!_hasNonIrritSrc) pics.delete('GHS07');
     }
 
     // Kural (c): GHS08 + H334 (Solunum Duyar.) varsa GHS07 Cilt Duyar./Tahriş için
     //            kaldırılır; ancak Akut Toks.4 (H302/H312/H332) veya STOT SE (H335/H336)
     //            varsa GHS07 KALIR.
-    if (pics.has('GHS08') && hcodes.some(h => h.replace(/[^H0-9]/g,'').substring(0,4) === 'H334')) {
+    if (pics.has('GHS08') && hcodes.some(h => _normH(h) === 'H334')) {
       const _ghs07AcuteTox = ['H302','H312','H332','H335','H336'];
-      const _hasAcuteToxSrc = hcodes.some(h => _ghs07AcuteTox.includes(h.replace(/[^H0-9]/g,'').substring(0,4)));
+      const _hasAcuteToxSrc = hcodes.some(h => _ghs07AcuteTox.includes(_normH(h)));
       if (!_hasAcuteToxSrc) pics.delete('GHS07');
     }
     if (pics.has('GHS02') || pics.has('GHS06')) pics.delete('GHS04');
@@ -253,7 +278,7 @@ const CLPEngine = (() => {
       if (!cScl) return null;
       if (Array.isArray(cScl) && cScl.length > 0) {
         const mins = cScl
-          .filter(s => (s.h_code || '').replace(/[*\s]/g,'').substring(0,4) === code && s.c_min != null)
+          .filter(s => _normH(s.h_code) === code && s.c_min != null)
           .map(s => s.c_min);
         return mins.length > 0 ? Math.min(...mins) : null;
       }
@@ -266,11 +291,11 @@ const CLPEngine = (() => {
 
       // Hazard listesindeki H kodlarını bir Set'e al — SCL-only kodları belirlemek için
       const hazardCodes = new Set(
-        (c.hazards || []).map(h => (h.h_code || '').replace(/[*\s]/g,'').substring(0,4))
+        (c.hazards || []).map(h => _normH(h.h_code))
       );
 
       const fromHazards = (c.hazards || []).flatMap(h => {
-        const code = (h.h_code || '').replace(/[*\s]/g,'').substring(0,4);
+        const code = _normH(h.h_code);
         if (!code.startsWith('H')) return [];
         if (FLAM_SKIP.has(code))  return [];
         if (ECO_SKIP.has(code))   return [];
@@ -343,7 +368,7 @@ const CLPEngine = (() => {
       // Dizi formatı [{h_code:'H373', c_min:0.1, c_max:1.0}, ...]  — API'den gelen format
       if (Array.isArray(c.scl)) {
         c.scl.forEach(s => {
-          const code = (s.h_code || '').replace(/[*\s]/g, '').substring(0, 4);
+          const code = _normH(s.h_code);
           if (!code.startsWith('H') || hazardCodes.has(code)) return;
           if (FLAM_SKIP.has(code) || ECO_SKIP.has(code) || ATE_HCODES.has(code)) return;
           const sclVal = typeof s.c_min === 'number' ? s.c_min : null;
@@ -362,6 +387,32 @@ const CLPEngine = (() => {
 
     // pH'tan gelen doğrudan kodları ekle
     phDirect.forEach(code => { if (!raw.includes(code)) raw.push(code); });
+
+    // ── H360/H361 sub-kategori birleştirme ──────────────────────────────────────
+    // H360D + H360F → H360FD; generic H360 → H360FD (her ikisini de kapsar)
+    for (const [generic, subD, subF, combined] of [
+      ['H360','H360D','H360F','H360FD'],
+      ['H361','H361D','H361F','H361FD'],
+    ]) {
+      const hasGen  = raw.includes(generic);
+      const hasD    = raw.includes(subD);
+      const hasF    = raw.includes(subF);
+      const hasFD   = raw.includes(combined);
+      if (!hasGen && !hasD && !hasF && !hasFD) continue;
+
+      // Remove all sub-codes and generic
+      [generic, subD, subF, combined].forEach(c => {
+        const i = raw.indexOf(c);
+        if (i > -1) raw.splice(i, 1);
+      });
+
+      // Determine what to add back
+      const effectiveD = hasGen || hasD || hasFD;
+      const effectiveF = hasGen || hasF || hasFD;
+      if (effectiveD && effectiveF) raw.push(combined);
+      else if (effectiveD)          raw.push(subD);
+      else if (effectiveF)          raw.push(subF);
+    }
 
     // ── CLP Tablo 3.2.3: Cilt Toplama Kuralı ────────────────────────────────────
     // Kural 1: ΣSkin Corr. 1 ≥ %5 → H314

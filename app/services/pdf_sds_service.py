@@ -757,6 +757,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     clp = sds_data.get('clp', {})
     euh = sds_data.get('euh', {})
     components = sds_data.get('components', [])
+    # CLP Ek-VI ** notları için kullanıcı girişleri: {'H372': 'Böbrekler; solunum yolu', ...}
+    _clp_note_overrides: dict = sds_data.get('clp_note_overrides', {}) or {}
 
     # STOT RE hedef organ haritası — Bölüm 2.2 ve 11'de kullanılır
     _stot_organ_map = _build_stot_organ_map(components)
@@ -935,16 +937,32 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         'H240','H241','H250','H251','H260','H270','H271',
         'H300','H301','H304','H310','H311',
         'H314','H318','H330','H331',
-        'H334','H340','H350','H360','H370','H372',
+        'H334','H340','H350','H360','H360D','H360F','H360FD','H370','H372',
     }
     _hc_set = {h.split()[0] for h in h_codes}
     signal = 'Danger' if (_hc_set & _DANGER_H) else 'Warning'
     sig_color = C_DANGER if signal=='Danger' else (C_WARNING if signal=='Warning' else black)
 
+    # ── Bileşen bazlı not bayrak haritası (note_flag / note) ─────────────────
+    # Bileşenlerin tehlike verilerinden H kodu → (not_flag, not_metni) haritası oluştur.
+    # Bu harita; `passed` listesinde açık not olmasa bile fallback satırları için kullanılır.
+    _comp_note_map: dict = {}   # {h_code_4: {'flag': str, 'note': str}}
+    for _cc in (sds_data.get('components') or []):
+        for _hh in (_cc.get('hazards') or []):
+            _hc4 = (_hh.get('h_code') or '').replace('*','').strip()[:4]
+            _nf  = _hh.get('note_flag')
+            _nt  = _hh.get('note')
+            if _hc4 and _nf and _hc4 not in _comp_note_map:
+                _comp_note_map[_hc4] = {'flag': _nf, 'note': _nt or ''}
+
     clf_rows = []
-    seen_clf = set()
+    seen_clf  = set()
+    clf_notes = {}   # {h_code_4: {'flag': str, 'note': str}} — tabloda gösterilecek notlar
+
     for entry in clp.get('passed', []):
-        hc = (entry.get('h_code','') or '').replace('*','').strip()[:4]
+        _hc_full = (entry.get('h_code','') or '').replace('*','').strip()
+        # Preserve H360D/F/FD and H361D/F/FD sub-codes; truncate others to 4 chars
+        hc = _hc_full if (_hc_full[4:].replace('D','').replace('F','') == '') else _hc_full[:4]
         if hc in seen_clf:
             continue
         seen_clf.add(hc)
@@ -959,6 +977,12 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             raw_hcode,
             conc_info,
         ])
+        # not bayrak bilgisini topla (passed listesinden veya bileşen haritasından)
+        nf = entry.get('note_flag') or (_comp_note_map.get(hc) or {}).get('flag')
+        nt = entry.get('note')      or (_comp_note_map.get(hc) or {}).get('note') or ''
+        if nf and hc not in clf_notes:
+            clf_notes[hc] = {'flag': nf, 'note': nt, 'h_code': raw_hcode}
+
     # passed boş veya eksikse all_h_codes'dan fallback satırlar ekle
     # all_h_codes: domine edilenler dahil tüm sınıflandırmalar (CLP Ek I § 1.2.2)
     # H kodu → h_class ters eşlemesi (fallback için)
@@ -968,14 +992,25 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         h = rule.get('h','')
         if h and h not in _h_to_class:
             _h_to_class[h] = cls
+    # H360 sub-code overrides (CLP_CUTOFFS_DICT anahtarları 4 karakter olduğundan)
+    _h_to_class.update({
+        'H360D':  'Repr. 1A/1B', 'H360F':  'Repr. 1A/1B', 'H360FD': 'Repr. 1A/1B',
+        'H361D':  'Repr. 2',     'H361F':  'Repr. 2',     'H361FD': 'Repr. 2',
+    })
     dom_note = 'Baskın H kodu ile kapsandı (CLP Ek-I §1.2.2)' if lang == 'TR' else 'Covered by dominant hazard class (CLP Annex I §1.2.2)'
     for hc_raw in all_h_codes:
-        hc = (hc_raw or '').replace('*','').strip()[:4]
+        hc = (hc_raw or '').replace('*','').strip()
+        # Preserve sub-codes (H360D/F/FD, H361D/F/FD); truncate others to 4 chars
+        if hc and not hc[4:].replace('D','').replace('F','') == '':
+            hc = hc[:4]
         if not hc or hc in seen_clf:
             continue
         seen_clf.add(hc)
         hclass_fallback = translate_hclass(_h_to_class.get(hc, ''), lang)
         clf_rows.append([hclass_fallback, hc_raw, dom_note])
+        # fallback satır için de not bayrak kontrolü
+        if hc in _comp_note_map and hc not in clf_notes:
+            clf_notes[hc] = {**_comp_note_map[hc], 'h_code': hc_raw}
 
     if clf_rows:
         reason_lbl = 'Kesme Değeri / Gerekçe' if lang=='TR' else 'Cut-off / Reason'
@@ -984,6 +1019,57 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             [[term(lang,'classification'), h_code_lbl, reason_lbl]] + clf_rows,
             [90*mm, 30*mm, 60*mm], styles
         ))
+        # ── CLP Ek-VI not bayrakları (*, **, ***, ****) ──────────────────────
+        # Belirlenen not bayraklarını tablodan sonra göster.
+        # ** (hedef organ) ve *** (üreme alt kategorisi) yasal açıdan önemlidir.
+        if clf_notes:
+            story.append(Spacer(1, 4))
+            _NOTE_FLAG_LABELS = {
+                '*':    ('*',    'Sınıflandırma koşula bağlı (belirli form veya konsantrasyon)',
+                                 'Classification is conditional (specific form or concentration)'),
+                '**':   ('**',   'Hedef organ ve/veya maruziyet yolunun SDS Bölüm 11\'de belirtilmesi zorunludur (CLP Ek-VI dipnotu).',
+                                 'Target organ and/or route of exposure must be specified in SDS Section 11 (CLP Annex VI footnote).'),
+                '***':  ('***',  'Bu sınıflandırma yalnızca belirtilen üreme toksisitesi alt kategorisi için geçerlidir (F=Fertilite, D=Gelişim).',
+                                 'Classification applies only to the specified reproductive toxicity sub-category (F=Fertility, D=Development).'),
+                '****': ('****', 'Patlayıcı alt sınıfı belirsiz — test verisiyle manuel değerlendirme gereklidir.',
+                                 'Explosive sub-class undetermined — manual assessment with test data required.'),
+            }
+            shown_flags = set()
+            for _hc4, _nd in sorted(clf_notes.items()):
+                _fl = _nd.get('flag','')
+                _hcode_disp = _nd.get('h_code', _hc4)
+                # ** — kullanıcı hedef organ girişi varsa onu göster, yoksa genel uyarı
+                if _fl == '**':
+                    _override = _clp_note_overrides.get(_hc4, '').strip()
+                    if _override:
+                        _txt = (
+                            f'Hedef organ / Maruziyet yolu: <b>{_override}</b> (CLP Ek-VI **)'
+                            if lang == 'TR' else
+                            f'Target organ / Route of exposure: <b>{_override}</b> (CLP Annex VI **)'
+                        )
+                    else:
+                        _txt = (
+                            'Hedef organ ve/veya maruziyet yolunun SDS Bölüm 11\'de belirtilmesi '
+                            'zorunludur (CLP Ek-VI dipnotu).'
+                            if lang == 'TR' else
+                            'Target organ and/or route of exposure must be specified in SDS '
+                            'Section 11 (CLP Annex VI footnote).'
+                        )
+                    story.append(Paragraph(
+                        f'<font color="#555555"><i>** {_hcode_disp}: {_txt}</i></font>',
+                        styles['small']
+                    ))
+                    continue
+                if _fl in shown_flags:
+                    continue
+                shown_flags.add(_fl)
+                _stars, _txt_tr, _txt_en = _NOTE_FLAG_LABELS.get(_fl, (_fl, _nd.get('note',''), _nd.get('note','')))
+                _txt = _txt_tr if lang == 'TR' else _txt_en
+                story.append(Paragraph(
+                    f'<font color="#555555"><i>{_stars} {_hcode_disp}: {_txt}</i></font>',
+                    styles['small']
+                ))
+
         if lang == 'TR':
             story.append(Spacer(1, 4))
             story.append(Paragraph(
@@ -1661,6 +1747,12 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             'H341':'Genetik hasar (şüpheli)',
             'H350':'Kanserojen (kategori 1)','H351':'Kanserojen (kategori 2)',
             'H360':'Üreme toksisitesi (kategori 1)','H361':'Üreme toksisitesi (kategori 2)',
+            'H360D':'Üreme toksisitesi — gelişimsel (kategori 1)',
+            'H360F':'Üreme toksisitesi — fertilite (kategori 1)',
+            'H360FD':'Üreme toksisitesi — gelişimsel + fertilite (kategori 1)',
+            'H361D':'Üreme toksisitesi — gelişimsel (kategori 2)',
+            'H361F':'Üreme toksisitesi — fertilite (kategori 2)',
+            'H361FD':'Üreme toksisitesi — gelişimsel + fertilite (kategori 2)',
             'H362':'Emzirilen çocuklara zarar',
             'H370':'STOT-TE (tek maruziyet)','H371':'STOT-TE (tek maruziyet)',
             'H372':'STOT-TM (tekrarlanan maruziyet)','H373':'STOT-TM (tekrarlanan maruziyet)',
@@ -1679,6 +1771,12 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             'H340':'Germ cell mutagenicity (cat.1)','H341':'Germ cell mutagenicity (cat.2)',
             'H350':'Carcinogenicity (cat.1)','H351':'Carcinogenicity (cat.2)',
             'H360':'Reproductive toxicity (cat.1)','H361':'Reproductive toxicity (cat.2)',
+            'H360D':'Reproductive toxicity — developmental (cat.1)',
+            'H360F':'Reproductive toxicity — fertility (cat.1)',
+            'H360FD':'Reproductive toxicity — developmental + fertility (cat.1)',
+            'H361D':'Reproductive toxicity — developmental (cat.2)',
+            'H361F':'Reproductive toxicity — fertility (cat.2)',
+            'H361FD':'Reproductive toxicity — developmental + fertility (cat.2)',
             'H362':'Effects on/via lactation',
             'H370':'STOT-SE (single exposure)','H371':'STOT-SE (single exposure)',
             'H372':'STOT-RE (repeated exposure)','H373':'STOT-RE (repeated exposure)',
@@ -1697,6 +1795,61 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
 
     if len(tox_rows) > 1:
         story.append(data_table(tox_rows, [75*mm, 105*mm], styles))
+        # ── CLP Ek-VI ** notları: hedef organ/maruziyet yolu belirtme zorunluluğu ──
+        # Bileşenlerden ** bayraklı STOT veya diğer H kodlarını topla
+        _sec11_notes_shown = set()
+        for _cc11 in (sds_data.get('components') or []):
+            for _hh11 in (_cc11.get('hazards') or []):
+                _nf11 = _hh11.get('note_flag','')
+                _hc11 = (_hh11.get('h_code') or '').replace('*','').strip()[:4]
+                if not _nf11 or _hc11 in _sec11_notes_shown:
+                    continue
+                # Yalnızca sınıflandırma sonucunda kullanılan H kodlarını göster
+                if _hc11 not in h_codes:
+                    continue
+                _sec11_notes_shown.add(_hc11)
+                if _nf11 == '**':
+                    _override11 = _clp_note_overrides.get(_hc11, '').strip()
+                    if _override11:
+                        _note_txt_tr = (
+                            f'<font color="#555555"><i>** {_hc11} — Hedef organ / Maruziyet yolu: '
+                            f'<b>{_override11}</b></i></font>'
+                        )
+                        _note_txt_en = (
+                            f'<font color="#555555"><i>** {_hc11} — Target organ / Route of exposure: '
+                            f'<b>{_override11}</b></i></font>'
+                        )
+                    else:
+                        _note_txt_tr = (
+                            f'<font color="#555555"><i>** {_hc11}: CLP Ek-VI dipnotuna göre hedef organ '
+                            f've/veya maruziyet yolunun bu bölümde belirtilmesi gerekmektedir.</i></font>'
+                        )
+                        _note_txt_en = (
+                            f'<font color="#555555"><i>** {_hc11}: Per CLP Annex VI footnote, the '
+                            f'target organ and/or route of exposure must be specified in this section.</i></font>'
+                        )
+                    story.append(Spacer(1, 3))
+                    story.append(Paragraph(
+                        _note_txt_tr if lang == 'TR' else _note_txt_en,
+                        styles['small']
+                    ))
+                elif _nf11 == '***' and _hh11.get('repro_sub'):
+                    _sub = _hh11['repro_sub']
+                    _sub_txt_tr = 'fertilite (F)' if _sub == 'F' else 'gelişim (D)'
+                    _sub_txt_en = 'fertility (F)' if _sub == 'F' else 'development (D)'
+                    _rtxt_tr = (
+                        f'<font color="#555555"><i>*** {_hc11}: Bu sınıflandırma yalnızca '
+                        f'{_sub_txt_tr} üreme toksisitesi alt kategorisi için geçerlidir.</i></font>'
+                    )
+                    _rtxt_en = (
+                        f'<font color="#555555"><i>*** {_hc11}: Classification applies only to '
+                        f'the {_sub_txt_en} reproductive toxicity sub-category.</i></font>'
+                    )
+                    story.append(Spacer(1, 3))
+                    story.append(Paragraph(
+                        _rtxt_tr if lang == 'TR' else _rtxt_en,
+                        styles['small']
+                    ))
     else:
         story.append(Paragraph(na, styles['body']))
 

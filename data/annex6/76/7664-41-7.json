@@ -16,11 +16,13 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": ""
+        "h_code": null
       },
       {
         "class": "Acute Tox. 3",
-        "h_code": "H331"
+        "h_code": "H331",
+        "note_flag": "*",
+        "note": "Sınıflandırma koşula bağlı (belirli form veya konsantrasyon)"
       },
       {
         "class": "Skin Corr. 1B",

@@ -14,19 +14,27 @@
       },
       {
         "class": "Acute Tox. 3",
-        "h_code": "H331"
+        "h_code": "H331",
+        "note_flag": "*",
+        "note": "Sınıflandırma koşula bağlı (belirli form veya konsantrasyon)"
       },
       {
         "class": "Acute Tox. 3",
-        "h_code": "H311"
+        "h_code": "H311",
+        "note_flag": "*",
+        "note": "Sınıflandırma koşula bağlı (belirli form veya konsantrasyon)"
       },
       {
         "class": "Acute Tox. 3",
-        "h_code": "H301"
+        "h_code": "H301",
+        "note_flag": "*",
+        "note": "Sınıflandırma koşula bağlı (belirli form veya konsantrasyon)"
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372"
+        "h_code": "H372",
+        "note_flag": "**",
+        "note": "Hedef organ ve/veya maruziyet yolu SDS Bölüm 11'de belirtilmeli"
       },
       {
         "class": "Eye Irrit. 2",

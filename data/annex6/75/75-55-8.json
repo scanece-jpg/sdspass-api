@@ -22,11 +22,15 @@
       },
       {
         "class": "Acute Tox. 2",
-        "h_code": "H330"
+        "h_code": "H330",
+        "note_flag": "*",
+        "note": "Sınıflandırma koşula bağlı (belirli form veya konsantrasyon)"
       },
       {
         "class": "Acute Tox. 2",
-        "h_code": "H300"
+        "h_code": "H300",
+        "note_flag": "*",
+        "note": "Sınıflandırma koşula bağlı (belirli form veya konsantrasyon)"
       },
       {
         "class": "Eye Dam. 1",

@@ -20,11 +20,15 @@
       },
       {
         "class": "Acute Tox. 4",
-        "h_code": "H302"
+        "h_code": "H302",
+        "note_flag": "*",
+        "note": "Sınıflandırma koşula bağlı (belirli form veya konsantrasyon)"
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373"
+        "h_code": "H373",
+        "note_flag": "**",
+        "note": "Hedef organ ve/veya maruziyet yolu SDS Bölüm 11'de belirtilmeli"
       },
       {
         "class": "Skin Corr. 1A",

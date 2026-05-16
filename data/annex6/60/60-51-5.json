@@ -10,11 +10,15 @@
     "hazards": [
       {
         "class": "Acute Tox. 4",
-        "h_code": "H312"
+        "h_code": "H312",
+        "note_flag": "*",
+        "note": "Sınıflandırma koşula bağlı (belirli form veya konsantrasyon)"
       },
       {
         "class": "Acute Tox. 4",
-        "h_code": "H302"
+        "h_code": "H302",
+        "note_flag": "*",
+        "note": "Sınıflandırma koşula bağlı (belirli form veya konsantrasyon)"
       }
     ],
     "m_factors": {},

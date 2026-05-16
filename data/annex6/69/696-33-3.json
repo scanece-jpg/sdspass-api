@@ -10,7 +10,9 @@
     "hazards": [
       {
         "class": "Expl.",
-        "h_code": "****"
+        "h_code": null,
+        "note_flag": "****",
+        "note": "Patlayıcı alt sınıfı belirsiz — test verisiyle manuel değerlendirme gerekli"
       }
     ],
     "m_factors": {},
@@ -19,9 +21,7 @@
   "labelling": {
     "signal": "",
     "pictograms": [],
-    "h_codes": [
-      "****"
-    ],
+    "h_codes": [],
     "suppl_h": []
   }
 }

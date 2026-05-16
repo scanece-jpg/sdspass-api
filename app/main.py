@@ -238,7 +238,16 @@ async def generate_pdf(data: dict = Body(...)):
                 'conc_str':      conc_str,
                 'conc_min':      conc_min,
                 'conc_max':      conc_max,
-                'hazards':       [{'h_class': h.get('h_class', ''), 'h_code': h.get('h_code', '')} for h in c.get('hazards', [])],
+                'hazards':       [
+                    {k: v for k, v in {
+                        'h_class':   h.get('h_class', ''),
+                        'h_code':    h.get('h_code', ''),
+                        'note_flag': h.get('note_flag'),
+                        'note':      h.get('note'),
+                        'repro_sub': h.get('repro_sub'),
+                    }.items() if v is not None and v != ''}
+                    for h in c.get('hazards', [])
+                ],
                 'scl':           c.get('scl', []),
                 'ec_no':         c.get('ec_no', ''),
                 'reach_no':      c.get('reach_no', ''),
@@ -269,8 +278,15 @@ async def generate_pdf(data: dict = Body(...)):
                 'all_h_codes': all_h_codes,  # SDS Bölüm 2.1 için (tam sınıflandırma)
                 'signal_word': signal,
                 'passed': [
-                    {'h_class': h.get('h_class',''), 'h_code': h.get('h_code',''),
-                     'reason': _safe(h.get('reason','')), 'cutoff_used': _safe(h.get('cutoff_used',''))}
+                    {k: v for k, v in {
+                        'h_class':    h.get('h_class',''),
+                        'h_code':     h.get('h_code',''),
+                        'reason':     _safe(h.get('reason','')),
+                        'cutoff_used':_safe(h.get('cutoff_used','')),
+                        'note_flag':  h.get('note_flag'),
+                        'note':       h.get('note'),
+                        'repro_sub':  h.get('repro_sub'),
+                    }.items() if v is not None and v != ''}
                     for h in data.get('clp_passed', [])
                 ],
             },
@@ -291,6 +307,7 @@ async def generate_pdf(data: dict = Body(...)):
             },
             'ate_mix_details': data.get('ate_mix_details', {}),
             'h314_neutralization_removed': bool(data.get('h314_neutralization_removed', False)),
+            'clp_note_overrides': data.get('clp_note_overrides', {}),
         }
 
         pdf_bytes = generate_sds_pdf(sds_data, lang=lang)

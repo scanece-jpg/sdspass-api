@@ -10,7 +10,9 @@
     "hazards": [
       {
         "class": "Flam. Sol. 1",
-        "h_code": "H228"
+        "h_code": "H228",
+        "note_flag": "****",
+        "note": "Patlayıcı alt sınıfı belirsiz — test verisiyle manuel değerlendirme gerekli"
       },
       {
         "class": "Skin Corr. 1B",

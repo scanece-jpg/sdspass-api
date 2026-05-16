@@ -14,11 +14,16 @@
       },
       {
         "class": "Repr. 1B",
-        "h_code": "H360D"
+        "h_code": "H360D",
+        "note_flag": "***",
+        "note": "Üreme toksisitesi yalnızca belirtilen alt kategori için geçerli (F=fertilite veya D=gelişim)",
+        "repro_sub": "D"
       },
       {
         "class": "Acute Tox. 2",
-        "h_code": "H300"
+        "h_code": "H300",
+        "note_flag": "*",
+        "note": "Sınıflandırma koşula bağlı (belirli form veya konsantrasyon)"
       },
       {
         "class": "Aquatic Chronic 2",

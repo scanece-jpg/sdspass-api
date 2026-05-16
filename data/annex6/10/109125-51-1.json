@@ -10,7 +10,9 @@
     "hazards": [
       {
         "class": "Self-react. C",
-        "h_code": "H242"
+        "h_code": "H242",
+        "note_flag": "****",
+        "note": "Patlayıcı alt sınıfı belirsiz — test verisiyle manuel değerlendirme gerekli"
       },
       {
         "class": "Aquatic Acute 1",

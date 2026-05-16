@@ -20,11 +20,15 @@
       },
       {
         "class": "Acute Tox. 3",
-        "h_code": "H301"
+        "h_code": "H301",
+        "note_flag": "*",
+        "note": "Sınıflandırma koşula bağlı (belirli form veya konsantrasyon)"
       },
       {
         "class": "Acute Tox. 3",
-        "h_code": "H335"
+        "h_code": "H335",
+        "note_flag": "*",
+        "note": "Sınıflandırma koşula bağlı (belirli form veya konsantrasyon)"
       },
       {
         "class": "STOT SE 3",
@@ -32,7 +36,9 @@
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H315"
+        "h_code": "H315",
+        "note_flag": "*",
+        "note": "Sınıflandırma koşula bağlı (belirli form veya konsantrasyon)"
       },
       {
         "class": "Skin Irrit. 2",
@@ -48,7 +54,7 @@
       },
       {
         "class": "Ozone 1",
-        "h_code": ""
+        "h_code": null
       }
     ],
     "m_factors": {},

@@ -2144,6 +2144,70 @@ function renderAll(s) {
   h += `<div class="r-title">⚖️ Bölüm 15 — Mevzuat / SVHC</div>
   <div id="svhc-panel"><div class="ecard info" style="font-size:11px;color:var(--text3)">SVHC kontrolü yapılıyor…</div></div>`;
 
+  // ── CLP Ek-VI Not Bayrakları — İsteğe bağlı kullanıcı girişi ──────────
+  // ** işaretli H kodları → hedef organ/yol belirtme zorunluluğu (CLP Annex VI footnote)
+  // *** işaretli H kodları → üreme alt kategorisi (F/D), otomatik algılanır
+  {
+    const _flaggedH = [];
+    const _seenFH   = new Set();
+    const _reproInfo = [];
+    const _seenRI    = new Set();
+    getComps().forEach(c => {
+      (c.hazards || []).forEach(hz => {
+        const hc4 = (hz.h_code || '').replace(/[*\s]/g,'').substring(0,4);
+        if (!hc4 || !allH.includes(hc4)) return;
+        if (hz.note_flag === '**' && !_seenFH.has(hc4)) {
+          _seenFH.add(hc4);
+          _flaggedH.push({ h_code: hc4 });
+        }
+        if (hz.note_flag === '***' && hz.repro_sub && !_seenRI.has(hc4)) {
+          _seenRI.add(hc4);
+          _reproInfo.push({ h_code: hc4, sub: hz.repro_sub });
+        }
+      });
+    });
+
+    if (_flaggedH.length || _reproInfo.length) {
+      h += `<div class="r-title">📌 CLP Ek-VI Notları</div>
+      <div class="ecard info" id="clp-note-panel" style="padding:12px 14px">`;
+
+      if (_flaggedH.length) {
+        h += `<div style="font-size:10.5px;color:var(--text2);margin-bottom:10px">
+          <b>**</b> işaretli H kodları: Hedef organ ve/veya maruziyet yolunun SDS Bölüm 11'de
+          belirtilmesi gerekmektedir. Boş bırakırsanız genel uyarı notu çıkar.
+        </div>`;
+        _flaggedH.forEach(nh => {
+          h += `<div style="margin-bottom:8px">
+            <label style="font-size:10px;font-weight:700;color:var(--text3);display:block;margin-bottom:3px">
+              ** ${nh.h_code} — Hedef Organ / Maruziyet Yolu
+            </label>
+            <input id="clp_organ_${nh.h_code}" type="text"
+              placeholder="Boş bırakabilirsiniz  ·  Örn: Böbrekler; solunum yolu"
+              style="width:100%;padding:5px 8px;border-radius:4px;border:1px solid var(--border2);
+                     background:var(--bg1);color:var(--text1);font-size:11px;
+                     font-family:var(--mono);box-sizing:border-box"/>
+          </div>`;
+        });
+      }
+
+      if (_reproInfo.length) {
+        h += `<div style="font-size:10.5px;color:var(--text2);margin-top:${_flaggedH.length?8:0}px">
+          <b>***</b> işaretli H kodları — otomatik algılandı:</div>`;
+        _reproInfo.forEach(ri => {
+          const subLabel = ri.sub === 'F'
+            ? '🔵 F — Fertilite (üreme kapasitesi)'
+            : '🟢 D — Developmental (gelişim / fetal toksisite)';
+          h += `<div style="margin-top:4px;padding:5px 8px;border-radius:4px;
+                            background:var(--bg2);font-size:10.5px;color:var(--text1)">
+            *** ${ri.h_code}: ${subLabel}
+          </div>`;
+        });
+      }
+
+      h += `</div>`;
+    }
+  }
+
   // PDF butonu — sonuçların üstüne ekle
   const pdfBar = `<div style="display:flex;justify-content:flex-end;margin-bottom:10px">
     <button onclick="generatePDF()"
@@ -2736,6 +2800,15 @@ async function _doPdfGenerate() {
       },
       revision: _getRevision(),
       ate_mix_details: clp?.ateMixDetails || {},  // ATEmix hesap detayları — PDF Bölüm 11
+      // CLP Ek-VI ** not bayrakları — kullanıcının girdiği hedef organ/yol bilgisi
+      clp_note_overrides: (() => {
+        const ov = {};
+        document.querySelectorAll('[id^="clp_organ_"]').forEach(inp => {
+          const val = (inp.value || '').trim();
+          if (val) ov[inp.id.replace('clp_organ_', '')] = val;
+        });
+        return ov;
+      })(),
     };
 
     const res = await fetch(API_BASE + '/sds/pdf', {

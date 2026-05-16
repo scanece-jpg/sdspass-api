@@ -10,19 +10,28 @@
     "hazards": [
       {
         "class": "Repr. 2",
-        "h_code": "H361f"
+        "h_code": "H361f",
+        "note_flag": "***",
+        "note": "Üreme toksisitesi yalnızca belirtilen alt kategori için geçerli (F=fertilite veya D=gelişim)",
+        "repro_sub": "F"
       },
       {
         "class": "Acute Tox. 4",
-        "h_code": "H332"
+        "h_code": "H332",
+        "note_flag": "*",
+        "note": "Sınıflandırma koşula bağlı (belirli form veya konsantrasyon)"
       },
       {
         "class": "Acute Tox. 4",
-        "h_code": "H302"
+        "h_code": "H302",
+        "note_flag": "*",
+        "note": "Sınıflandırma koşula bağlı (belirli form veya konsantrasyon)"
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372"
+        "h_code": "H372",
+        "note_flag": "**",
+        "note": "Hedef organ ve/veya maruziyet yolu SDS Bölüm 11'de belirtilmeli"
       },
       {
         "class": "Skin Sens. 1",

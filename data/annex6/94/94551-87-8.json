@@ -18,11 +18,16 @@
       },
       {
         "class": "Repr. 1A",
-        "h_code": "H360D"
+        "h_code": "H360D",
+        "note_flag": "***",
+        "note": "Üreme toksisitesi yalnızca belirtilen alt kategori için geçerli (F=fertilite veya D=gelişim)",
+        "repro_sub": "D"
       },
       {
         "class": "STOT RE 1",
-        "h_code": "H372"
+        "h_code": "H372",
+        "note_flag": "**",
+        "note": "Hedef organ ve/veya maruziyet yolu SDS Bölüm 11'de belirtilmeli"
       },
       {
         "class": "Resp. Sens. 1",

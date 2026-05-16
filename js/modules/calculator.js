@@ -111,9 +111,16 @@ const CalculatorModule = (() => {
           if (FLAM_SKIP.has(code)) return [];
           const cutoff = CLP_CUTOFFS[code];
           if (cutoff === undefined || conc >= cutoff) {
-            return [{ h_class: h.h_class || '', h_code: h.h_code || '',
-              reason: cutoff !== undefined ? `%${conc} ≥ %${cutoff} kesme değeri` : 'Bileşen sınıflandırması',
-              cutoff_used: cutoff !== undefined ? `%${cutoff}` : '—' }];
+            const entry = {
+              h_class:    h.h_class    || '',
+              h_code:     h.h_code     || '',
+              reason:     cutoff !== undefined ? `%${conc} ≥ %${cutoff} kesme değeri` : 'Bileşen sınıflandırması',
+              cutoff_used:cutoff !== undefined ? `%${cutoff}` : '—',
+            };
+            if (h.note_flag) entry.note_flag = h.note_flag;
+            if (h.note)      entry.note      = h.note;
+            if (h.repro_sub) entry.repro_sub = h.repro_sub;
+            return [entry];
           }
           return [];
         });

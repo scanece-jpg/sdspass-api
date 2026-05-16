@@ -16,7 +16,7 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": ""
+        "h_code": null
       },
       {
         "class": "Carc. 2",
@@ -24,7 +24,9 @@
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373"
+        "h_code": "H373",
+        "note_flag": "**",
+        "note": "Hedef organ ve/veya maruziyet yolu SDS Bölüm 11'de belirtilmeli"
       }
     ],
     "m_factors": {},

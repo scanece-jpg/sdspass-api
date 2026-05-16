@@ -31,15 +31,10 @@
       {
         "class": "Aquatic Chronic 1",
         "h_code": "H410"
-      },
-      {
-        "class": "STOT RE 2",
-        "h_code": "H373"
       }
     ],
     "m_factors": {
-      "acute": 1,
-      "chronic": 1
+      "acute": 1
     },
     "scl_limits": []
   },
@@ -51,11 +46,10 @@
       "GHS09"
     ],
     "h_codes": [
-      "H302",
-      "H317",
       "H351",
-      "H373",
+      "H302",
       "H373(heart)",
+      "H317",
       "H400",
       "H410"
     ],

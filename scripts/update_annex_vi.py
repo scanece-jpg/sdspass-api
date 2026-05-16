@@ -378,6 +378,9 @@ def process(xlsx_path: str, dry_run: bool = False, force: bool = False):
             old_rank = _atp_rank(existing.get('atp', 'CLP00'))
             new_rank = _atp_rank(atp_label)
             if force or new_rank > old_rank:
+                # name_tr ve özel alanları koru — Excel'de bu alanlar yok
+                if existing.get('name_tr'):
+                    new_entry['name_tr'] = existing['name_tr']
                 if not dry_run:
                     _write_json(_annex6_path(cas), new_entry)
                 updated.append(f'{cas} — {existing.get("atp","?")} → {atp_label}')

@@ -11,10 +11,6 @@
       {
         "class": "Expl. 1.1",
         "h_code": "H201"
-      },
-      {
-        "class": "Expl.",
-        "h_code": "H200"
       }
     ],
     "m_factors": {},
@@ -26,7 +22,6 @@
       "GHS01"
     ],
     "h_codes": [
-      "H200",
       "H201"
     ],
     "suppl_h": []

@@ -39,33 +39,27 @@
       {
         "class": "Aquatic Chronic 1",
         "h_code": "H410"
-      },
-      {
-        "class": "STOT RE 2",
-        "h_code": "H373"
       }
     ],
     "m_factors": {
-      "acute": 100,
-      "chronic": 100
+      "acute": 100
     },
     "scl_limits": []
   },
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS06",
       "GHS08",
+      "GHS06",
       "GHS09"
     ],
     "h_codes": [
-      "H302",
-      "H315",
-      "H331",
-      "H335",
       "H361d",
-      "H373",
+      "H331",
+      "H302",
+      "H335",
       "H373(liver,_gastrointestinal_tract,_nasal_cavity)",
+      "H315",
       "H400",
       "H410"
     ],

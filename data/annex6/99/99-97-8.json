@@ -27,10 +27,6 @@
       {
         "class": "Aquatic Chronic 3",
         "h_code": "H412"
-      },
-      {
-        "class": "STOT RE 2",
-        "h_code": "H373"
       }
     ],
     "m_factors": {},
@@ -43,10 +39,9 @@
       "GHS08"
     ],
     "h_codes": [
+      "H350",
       "H301",
       "H332",
-      "H350",
-      "H373",
       "H373(blood_system,_respiratory_tract)",
       "H412"
     ],

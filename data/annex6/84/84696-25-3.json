@@ -19,10 +19,6 @@
       {
         "class": "Aquatic Chronic 1",
         "h_code": "H410"
-      },
-      {
-        "class": "Aquatic Chronic 3",
-        "h_code": "H412"
       }
     ],
     "m_factors": {
@@ -31,17 +27,16 @@
     "scl_limits": []
   },
   "labelling": {
-    "signal": "Danger",
+    "signal": "Warning",
     "pictograms": [
-      "GHS07",
       "GHS08",
+      "GHS07",
       "GHS09"
     ],
     "h_codes": [
-      "H317",
       "H361d",
-      "H410",
-      "H412"
+      "H317",
+      "H410"
     ],
     "suppl_h": []
   }

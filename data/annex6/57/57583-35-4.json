@@ -23,10 +23,6 @@
       {
         "class": "Skin Sens. 1A",
         "h_code": "H317"
-      },
-      {
-        "class": "STOT RE 1",
-        "h_code": "H372"
       }
     ],
     "m_factors": {},
@@ -35,15 +31,14 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS07",
-      "GHS08"
+      "GHS08",
+      "GHS07"
     ],
     "h_codes": [
-      "H302",
-      "H317",
       "H361d",
-      "H372",
-      "H372(nervous_system,_immune_system)"
+      "H302",
+      "H372(nervous_system,_immune_system)",
+      "H317"
     ],
     "suppl_h": []
   }

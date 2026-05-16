@@ -27,14 +27,6 @@
       {
         "class": "Aquatic Acute 1",
         "h_code": "H400"
-      },
-      {
-        "class": "Acute Tox. 1",
-        "h_code": "H330"
-      },
-      {
-        "class": "STOT RE 1",
-        "h_code": "H372"
       }
     ],
     "m_factors": {
@@ -43,20 +35,16 @@
     "scl_limits": []
   },
   "labelling": {
-    "signal": "Danger",
+    "signal": "Warning",
     "pictograms": [
-      "GHS06",
       "GHS07",
-      "GHS08",
       "GHS09"
     ],
     "h_codes": [
-      "H315",
-      "H317",
-      "H319",
-      "H330",
       "H335",
-      "H372",
+      "H315",
+      "H319",
+      "H317",
       "H400"
     ],
     "suppl_h": []

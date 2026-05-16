@@ -31,15 +31,10 @@
       {
         "class": "Aquatic Chronic 3",
         "h_code": "H412"
-      },
-      {
-        "class": "Aquatic Chronic 1",
-        "h_code": "H410"
       }
     ],
     "m_factors": {
-      "acute": 1,
-      "chronic": 1
+      "acute": 1
     },
     "scl_limits": []
   },
@@ -57,7 +52,6 @@
       "H315",
       "H317",
       "H400",
-      "H410",
       "H412"
     ],
     "suppl_h": []

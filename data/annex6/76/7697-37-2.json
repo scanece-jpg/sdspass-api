@@ -21,10 +21,6 @@
       {
         "class": "Skin Corr. 1A",
         "h_code": "H314"
-      },
-      {
-        "class": "Acute Tox. 1",
-        "h_code": "H330"
       }
     ],
     "m_factors": {},
@@ -53,14 +49,13 @@
     "signal": "Danger",
     "pictograms": [
       "GHS03",
-      "GHS05",
-      "GHS06"
+      "GHS06",
+      "GHS05"
     ],
     "h_codes": [
       "H272",
-      "H314",
-      "H330",
-      "H331"
+      "H331",
+      "H314"
     ],
     "suppl_h": [
       "EUH071"

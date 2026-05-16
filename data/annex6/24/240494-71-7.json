@@ -31,15 +31,10 @@
       {
         "class": "Aquatic Chronic 1",
         "h_code": "H410"
-      },
-      {
-        "class": "STOT SE 1",
-        "h_code": "H370"
       }
     ],
     "m_factors": {
-      "acute": 100,
-      "chronic": 100
+      "acute": 100
     },
     "scl_limits": []
   },
@@ -53,7 +48,6 @@
     "h_codes": [
       "H301",
       "H332",
-      "H370",
       "H370(nervous_system)",
       "H373",
       "H400",

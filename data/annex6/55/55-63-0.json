@@ -31,10 +31,6 @@
       {
         "class": "Aquatic Chronic 2",
         "h_code": "H411"
-      },
-      {
-        "class": "Expl.",
-        "h_code": "H200"
       }
     ],
     "m_factors": {},
@@ -49,11 +45,10 @@
       "GHS09"
     ],
     "h_codes": [
-      "H200",
       "H201",
-      "H300",
       "H310",
       "H330",
+      "H300",
       "H373",
       "H411"
     ],

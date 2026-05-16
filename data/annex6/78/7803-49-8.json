@@ -49,10 +49,6 @@
       {
         "class": "Aquatic Acute 1",
         "h_code": "H400"
-      },
-      {
-        "class": "Expl.",
-        "h_code": "H200"
       }
     ],
     "m_factors": {},
@@ -61,23 +57,21 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS01",
       "GHS05",
-      "GHS07",
       "GHS08",
+      "GHS07",
       "GHS09"
     ],
     "h_codes": [
-      "H200",
       "H290",
-      "H302",
-      "H312",
-      "H315",
-      "H317",
-      "H318",
-      "H335",
       "H351",
+      "H312",
+      "H302",
+      "H335",
       "H373",
+      "H315",
+      "H318",
+      "H317",
       "H400"
     ],
     "suppl_h": []

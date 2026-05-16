@@ -39,19 +39,10 @@
       {
         "class": "Aquatic Chronic 1",
         "h_code": "H410"
-      },
-      {
-        "class": "STOT SE 1",
-        "h_code": "H370"
-      },
-      {
-        "class": "STOT RE 1",
-        "h_code": "H372"
       }
     ],
     "m_factors": {
-      "acute": 10000,
-      "chronic": 10000
+      "acute": 10000
     },
     "scl_limits": [
       {
@@ -71,20 +62,18 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS05",
       "GHS06",
+      "GHS05",
       "GHS08",
       "GHS09"
     ],
     "h_codes": [
-      "H301",
-      "H311",
-      "H318",
       "H331",
-      "H370",
+      "H311",
+      "H301",
       "H370(nervous_system)",
-      "H372",
       "H372(nervous_system)",
+      "H318",
       "H400",
       "H410"
     ],

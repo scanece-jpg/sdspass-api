@@ -33,10 +33,6 @@
       {
         "class": "Eye Irrit. 2",
         "h_code": "H319"
-      },
-      {
-        "class": "STOT RE 1",
-        "h_code": "H372"
       }
     ],
     "m_factors": {},
@@ -46,17 +42,16 @@
     "signal": "Danger",
     "pictograms": [
       "GHS02",
-      "GHS07",
-      "GHS08"
+      "GHS08",
+      "GHS07"
     ],
     "h_codes": [
       "H226",
-      "H315",
-      "H319",
-      "H332",
       "H361d",
-      "H372",
-      "H372(hearing_organs)"
+      "H332",
+      "H372(hearing_organs)",
+      "H315",
+      "H319"
     ],
     "suppl_h": []
   }

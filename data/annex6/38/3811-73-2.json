@@ -43,19 +43,10 @@
       {
         "class": "Aquatic Chronic 2",
         "h_code": "H411"
-      },
-      {
-        "class": "STOT RE 1",
-        "h_code": "H372"
-      },
-      {
-        "class": "Aquatic Chronic 1",
-        "h_code": "H410"
       }
     ],
     "m_factors": {
-      "acute": 100,
-      "chronic": 100
+      "acute": 100
     },
     "scl_limits": []
   },
@@ -67,16 +58,14 @@
       "GHS09"
     ],
     "h_codes": [
-      "H302",
-      "H311",
-      "H315",
-      "H317",
-      "H319",
       "H331",
-      "H372",
+      "H311",
+      "H302",
       "H372(nervous_system)",
+      "H315",
+      "H319",
+      "H317",
       "H400",
-      "H410",
       "H411"
     ],
     "suppl_h": [

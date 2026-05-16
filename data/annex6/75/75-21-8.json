@@ -57,10 +57,6 @@
       {
         "class": "Eye Dam. 1",
         "h_code": "H318"
-      },
-      {
-        "class": "STOT RE 1",
-        "h_code": "H372"
       }
     ],
     "m_factors": {},
@@ -76,17 +72,16 @@
     ],
     "h_codes": [
       "H220",
-      "H301",
-      "H314",
-      "H318",
+      "H350",
+      "H340",
+      "H360Fd",
       "H331",
+      "H301",
       "H335",
       "H336",
-      "H340",
-      "H350",
-      "H360Fd",
-      "H372",
-      "H372(nervous_system)"
+      "H372(nervous_system)",
+      "H314",
+      "H318"
     ],
     "suppl_h": []
   },

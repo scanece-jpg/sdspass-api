@@ -19,10 +19,6 @@
       {
         "class": "STOT RE 1",
         "h_code": "H372(immune_system)"
-      },
-      {
-        "class": "STOT RE 1",
-        "h_code": "H372"
       }
     ],
     "m_factors": {},
@@ -36,7 +32,6 @@
     "h_codes": [
       "H341",
       "H360FD",
-      "H372",
       "H372(immune_system)"
     ],
     "suppl_h": []

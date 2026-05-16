@@ -11,10 +11,6 @@
       {
         "class": "Carc. 2",
         "h_code": "H351(Inhalation)"
-      },
-      {
-        "class": "Carc. 2",
-        "h_code": "H351"
       }
     ],
     "m_factors": {},
@@ -26,7 +22,6 @@
       "GHS08"
     ],
     "h_codes": [
-      "H351",
       "H351(Inhalation)"
     ],
     "suppl_h": []

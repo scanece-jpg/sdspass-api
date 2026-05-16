@@ -43,10 +43,6 @@
       {
         "class": "Aquatic Chronic 3",
         "h_code": "H412"
-      },
-      {
-        "class": "STOT RE 2",
-        "h_code": "H373"
       }
     ],
     "m_factors": {},
@@ -55,20 +51,19 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS05",
+      "GHS08",
       "GHS06",
-      "GHS08"
+      "GHS05"
     ],
     "h_codes": [
-      "H301",
-      "H311",
-      "H314",
-      "H317",
-      "H318",
       "H351",
       "H361fd",
-      "H373",
+      "H311",
+      "H301",
       "H373(thyroid)",
+      "H314",
+      "H318",
+      "H317",
       "H412"
     ],
     "suppl_h": []

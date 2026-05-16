@@ -49,10 +49,6 @@
       {
         "class": "Skin Sens. 1",
         "h_code": "H317"
-      },
-      {
-        "class": "STOT RE 1",
-        "h_code": "H372"
       }
     ],
     "m_factors": {},
@@ -61,22 +57,21 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS05",
+      "GHS08",
       "GHS06",
-      "GHS08"
+      "GHS05"
     ],
     "h_codes": [
-      "H302",
-      "H311",
-      "H314",
-      "H317",
-      "H318",
-      "H335",
-      "H341",
       "H350",
+      "H341",
       "H360F",
-      "H372",
-      "H372(respiratory_tract)"
+      "H311",
+      "H302",
+      "H335",
+      "H372(respiratory_tract)",
+      "H314",
+      "H318",
+      "H317"
     ],
     "suppl_h": []
   }

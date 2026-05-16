@@ -26,8 +26,7 @@
       }
     ],
     "m_factors": {
-      "acute": 1000000,
-      "chronic": 1000000
+      "acute": 1000000
     },
     "scl_limits": []
   },

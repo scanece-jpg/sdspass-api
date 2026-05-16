@@ -35,10 +35,6 @@
       {
         "class": "Aquatic Chronic 2",
         "h_code": "H411"
-      },
-      {
-        "class": "STOT RE 1",
-        "h_code": "H372"
       }
     ],
     "m_factors": {},
@@ -48,18 +44,17 @@
     "signal": "Danger",
     "pictograms": [
       "GHS02",
-      "GHS07",
       "GHS08",
+      "GHS07",
       "GHS09"
     ],
     "h_codes": [
       "H225",
-      "H304",
-      "H315",
-      "H336",
       "H361f",
-      "H372",
+      "H304",
+      "H336",
       "H372(nervous_system)",
+      "H315",
       "H411"
     ],
     "suppl_h": []

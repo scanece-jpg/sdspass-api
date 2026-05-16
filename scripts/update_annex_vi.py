@@ -150,17 +150,21 @@ def _parse_m_factors(scl_col: str, hazards: list | None = None) -> dict:
       Format 1: M = 10 (acute)  /  M = 10 (chronic)   [eski/bazı ATP]
       Format 2: M=1             [ATP22 formatı — specifier yok]
 
-    Format 2'de hangi tip olduğu hazard listesinden çıkarılır:
-      H400/401/402 varsa → acute; H410/411/412/413 varsa → chronic
+    Format 2 — DÜZELTME (SEA Ek-6 / CLP Part 4 §4.1):
+      Specifier olmayan tek M değeri SADECE Akut M-faktörüdür.
+      Kronik M-faktörü kaynak veri açıkça belirtmiyorsa varsayılan = 1.
+      Örnek: CuSO4·5H2O → kaynak "M=10" → acute=10, chronic=1 (default).
+      Hem acute hem chronic'e aynı değeri atamak YANLIŞ sınıflandırmaya yol açar.
     """
     m = {}
-    # Format 1: M=X (acute|chronic)
+    # Format 1: M=X (acute|chronic) — açıkça etiketlenmiş, her ikisi ayrı ayrı olabilir
     for match in re.finditer(r'M\s*=\s*(\d+)\s*\(?\s*(acute|chronic)', scl_col, re.IGNORECASE):
         m[match.group(2).lower()] = int(match.group(1))
     if m:
         return m
 
-    # Format 2: M=X tek başına (ATP22: "M=1")
+    # Format 2: M=X tek başına → SADECE acute M-faktörü
+    # Kronik M-faktörü ayrıca belirtilmemişse CLP varsayılanı 1'dir (H410 için).
     solo = re.search(r'\bM\s*=\s*(\d+)\b', scl_col, re.IGNORECASE)
     if solo:
         mval = int(solo.group(1))
@@ -168,9 +172,13 @@ def _parse_m_factors(scl_col: str, hazards: list | None = None) -> dict:
                  for h in (hazards or [])}
         has_acute   = bool(h_set & {'H400', 'H401', 'H402'})
         has_chronic = bool(h_set & {'H410', 'H411', 'H412', 'H413'})
-        if has_acute:   m['acute']   = mval
-        if has_chronic: m['chronic'] = mval
-        if not m:       m['acute']   = mval  # fallback
+        if has_acute:
+            m['acute'] = mval
+        elif has_chronic:
+            # Yalnızca kronik varsa (H400 yok): M değeri kronik M-faktörüdür
+            m['chronic'] = mval
+        else:
+            m['acute'] = mval  # fallback
     return m
 
 

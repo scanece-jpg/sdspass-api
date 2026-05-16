@@ -25083,11 +25083,11 @@
       }
     ],
     "suppl_hazards": [],
-    "scl_m_ate": "M=10",
+    "scl_m_ate": "M(akut)=10; M(kronik)=1",
     "scl": [],
     "m_factors": {
       "acute": 10,
-      "chronic": 10
+      "chronic": 1
     },
     "index_no": "029-023-00-4",
     "source": "SEA Ek-6",

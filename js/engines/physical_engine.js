@@ -583,14 +583,18 @@ const PhysicalEngine = (() => {
   function calcFlamLiq(comps, userFP) {
     if (userFP !== null && userFP !== undefined && !isNaN(userFP)) {
       // Kullanıcı FP girmiş — BP'yi bileşen DB'sinden hesapla (en düşük KN).
-      // bp=null ile çağırmak H224/H225 ayrımını yanlış yapar: null → H224 olarak yorumlanır.
+      // Kaynama noktası bilinmiyorsa H224 (Cat.1) değil H225 (Cat.2) kabul edilir:
+      // BP≤35°C çok nadir (dietil eter, pentanlar); bilinmeyenler için muhafazakâr seçim H225.
       let theoBP = null;
       for (const c of comps) {
         const bp = BP_DB[(c.cas || '').trim()];
         const w  = parseFloat(c.concMax || c.conc) || 0;
         if (bp != null && w >= 1 && (theoBP === null || bp < theoBP)) theoBP = bp;
       }
-      return { result: clsFlamLiq(userFP, theoBP), source:`Kullanıcı girişi (${userFP}°C)`, fp: userFP };
+      // BP bilinmiyorsa (null): clsFlamLiq'de null → H224 olur; ancak BP bilinmeden
+      // H224 varsaymak yanlıştır. BP yoksa 100 ile çağır → FP<23 & BP>35 → H225
+      const effectiveBP = theoBP !== null ? theoBP : (userFP < 23 ? 100 : null);
+      return { result: clsFlamLiq(userFP, effectiveBP), source:`Kullanıcı girişi (${userFP}°C)`, fp: userFP };
     }
 
     // CLP Annex I Tablo 2.6 — Toplamlı eşik yaklaşımı
@@ -599,17 +603,41 @@ const PhysicalEngine = (() => {
     const catTriggers = { 1: [], 2: [], 3: [] };
     const catFP = { 1: null, 2: null, 3: null };
 
+    // FP_DB'de olmayan bileşenler için beyan edilen H22x'e göre temsili FP (CLP Ek-I §2.6)
+    // Örnek: bileşen H225 beyan etmiş ama CAS FP_DB'de yok → FP≈15°C, BP≈80°C kabul edilir
+    const DECLARED_FALLBACK = {
+      'H224': { fp: -20, bp: 25  },   // Kat.1: FP<23 & BP≤35
+      'H225': { fp:  15, bp: 80  },   // Kat.2: FP<23 & BP>35
+      'H226': { fp:  40, bp: 120 },   // Kat.3: 23≤FP≤60
+    };
+
     for (const c of comps) {
       const cas  = (c.cas || '').trim();
       const conc = parseFloat(c.concMax || c.conc) || 0;
-      const fp   = FP_DB[cas];
+      let fp   = FP_DB[cas];
+      let bp;
+      let estimated = false;
+
+      if ((fp === undefined || fp === null) && conc > 0) {
+        // FP_DB'de yok — bileşen hazard beyanından H22x kodu ara
+        const declH = (c.hazards || [])
+          .map(h => (h.h_code || '').replace(/[*\s]/g,'').substring(0,4))
+          .find(h => DECLARED_FALLBACK[h]);
+        if (declH) {
+          fp        = DECLARED_FALLBACK[declH].fp;
+          bp        = DECLARED_FALLBACK[declH].bp;
+          estimated = true;
+        }
+      }
+
       if (fp === undefined || fp === null || fp >= 60) continue;
-      const bp  = BP_DB[cas] !== undefined ? BP_DB[cas] : null;
+      if (!estimated) bp = BP_DB[cas] !== undefined ? BP_DB[cas] : null;
+
       const cls = clsFlamLiq(fp, bp);
       if (!cls) continue;
       catSum[cls.cat]     = (catSum[cls.cat] || 0) + conc;
       catFP[cls.cat]      = catFP[cls.cat] === null ? fp : Math.min(catFP[cls.cat], fp);
-      catTriggers[cls.cat].push({ cas, name: c.name, conc, fp });
+      catTriggers[cls.cat].push({ cas, name: c.name, conc, fp, estimated });
     }
 
     // CLP Annex I Tablo 2.6 kademeli eşik:
@@ -624,17 +652,19 @@ const PhysicalEngine = (() => {
     const minFPAll = [catFP[1], catFP[2], catFP[3]].filter(v => v !== null);
     const lowestFP = minFPAll.length ? Math.min(...minFPAll) : null;
 
+    const _trigSrc = t => `${t.name||t.cas} (%${t.conc}, FP=${t.fp}°C${t.estimated ? ' tahmini' : ''})`;
+
     if (sum1 >= 1) {
-      const src = catTriggers[1].map(t => `${t.name||t.cas} (%${t.conc}, FP=${t.fp}°C)`).join(' + ');
+      const src = catTriggers[1].map(_trigSrc).join(' + ');
       return { result: { h:'H224', cat:1, label:'Flam. Liq. 1', signal:'Danger' }, source: src, fp: catFP[1] };
     }
     if (sum12 >= 1) {
       const triggers = [...catTriggers[1], ...catTriggers[2]];
-      const src = triggers.map(t => `${t.name||t.cas} (%${t.conc}, FP=${t.fp}°C)`).join(' + ');
+      const src = triggers.map(_trigSrc).join(' + ');
       return { result: { h:'H225', cat:2, label:'Flam. Liq. 2', signal:'Danger' }, source: src, fp: Math.min(...[catFP[1],catFP[2]].filter(v=>v!==null)) };
     }
     if (sum123 >= 10) {
-      const src = allTriggers.map(t => `${t.name||t.cas} (%${t.conc}, FP=${t.fp}°C)`).join(' + ');
+      const src = allTriggers.map(_trigSrc).join(' + ');
       return { result: { h:'H226', cat:3, label:'Flam. Liq. 3', signal:'Warning' }, source: src, fp: lowestFP };
     }
     return { result: null, source: null, fp: null };

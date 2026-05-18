@@ -62,15 +62,16 @@ const TransportEngine = (() => {
     'H241':{'class':'5.2','pg':null},
     'H242':{'class':'5.2','pg':null},
     // Sınıf 6.1 — Akut Toksisite (en tehlikeli maruz kalma yolunun PG'si)
-    'H300':{'class':'6.1','pg':'I'},  // Oral Kat.1
+    // ÖNEMLİ: H302/H312/H332 (CLP Kat.4) H_TO_ADR'ye dahil EDİLMEZ.
+    // Sebep: CLP Kat.4 oral aralığı 300–2000 mg/kg; ADR 6.1 PG III eşiği ≤300 mg/kg.
+    // ATE > 300 mg/kg olan maddeler ADR Sınıf 6.1 kriterini karşılamaz (ADR 2.6.2.2).
+    // Bu H kodları varlığında classify() içinde ayrı bir uyarı notu üretilir.
+    'H300':{'class':'6.1','pg':'I'},  // Oral/Dermal/İnhalasyon Kat.1   (LD50 ≤ 5 mg/kg)
     'H310':{'class':'6.1','pg':'I'},  // Dermal Kat.1
     'H330':{'class':'6.1','pg':'I'},  // İnhalasyon Kat.1
-    'H301':{'class':'6.1','pg':'II'}, // Oral Kat.2-3
+    'H301':{'class':'6.1','pg':'II'}, // Oral Kat.2-3  (LD50 5–300 mg/kg  → ADR PG II)
     'H311':{'class':'6.1','pg':'II'}, // Dermal Kat.2-3
     'H331':{'class':'6.1','pg':'II'}, // İnhalasyon Kat.2-3
-    'H302':{'class':'6.1','pg':'III'},// Oral Kat.4
-    'H312':{'class':'6.1','pg':'III'},// Dermal Kat.4
-    'H332':{'class':'6.1','pg':'III'},// İnhalasyon Kat.4
     // Sınıf 8 — Korozif (H314 = Skin Corr. 1A → ADR varsayılan PG II)
     // Not: kuvvetli asit/baz konsantrasyonuna göre PG I olabilir — uzman onayı gerekir
     'H314':{'class':'8','pg':'II'},
@@ -323,8 +324,9 @@ const TransportEngine = (() => {
     // ── Adım 4: UN ve etiket ──────────────────────────────────────────────────
     const unEntry = _getUNEntry(primary.class, primary.pg, subClass, isSolid);
 
-    // ── Adım 5: H22x çelişki kontrolü (güvenlik ağı) ──────────────────────────
-    // Fiziksel motor H22x kodlarını CLP motoruna iletmediğinden kalıcı uyarı
+    // ── Adım 5: Uyarılar ───────────────────────────────────────────────────────
+
+    // (a) H22x çelişki kontrolü — Sınıf 3 beklenen ama başka sınıf çıktıysa
     const flamPresent = ['H224','H225','H226'].filter(h => hSet.has(h));
     let conflictWarning = null;
     if (flamPresent.length && primary.class !== '3' && primary.class !== '2.1') {
@@ -333,6 +335,21 @@ const TransportEngine = (() => {
         message: `Alevlenirlik tehlikesi (${flamPresent.join('/')}) tespit edildi ancak ` +
                  `birincil taşımacılık sınıfı Sınıf ${primary.class}. ` +
                  `Parlama noktası ≤ 60°C ise ADR 2023 kapsamında Sınıf 3 değerlendirilmelidir.`,
+      };
+    }
+
+    // (b) H302/H312/H332 bilgi notu — CLP Kat.4 ADR eşiğini karşılamayabilir
+    // ADR 2.6.2.2: Sınıf 6.1 PG III için oral LD50 ≤ 300 mg/kg gerekir.
+    // CLP Kat.4 (H302) 300–2000 mg/kg aralığını kapsar → ADR kriterleri
+    // doğrulanmadan otomatik Sınıf 6.1 ataması yapılmaz.
+    const kat4Present = ['H302','H312','H332'].filter(h => hSet.has(h));
+    let adrCaution = null;
+    if (kat4Present.length) {
+      adrCaution = {
+        level:   'INFO',
+        message: `${kat4Present.join('/')} (CLP Akut Toksisite Kat.4) mevcut. ` +
+                 `ADR Sınıf 6.1 PG III için LD50 ≤ 300 mg/kg gerekir (ADR 2.6.2.2). ` +
+                 `Karışımın ATE değeri bu eşiği aşıyorsa ADR Sınıf 6.1 uygulanmaz — taşımacılık uzmanına danışın.`,
       };
     }
 
@@ -350,6 +367,7 @@ const TransportEngine = (() => {
       note:         unEntry.note || null,
       env_mark:     envMark,
       conflict_warning: conflictWarning,
+      adr_caution:  adrCaution,
     };
 
     return {
@@ -358,6 +376,7 @@ const TransportEngine = (() => {
       sea:  { ...entry, regulation:'IMDG Kod 2022'  },
       air:  { ...entry, regulation:'IATA-DGR 2024'  },
       conflict_warning: conflictWarning,
+      adr_caution: adrCaution,
     };
   }
 

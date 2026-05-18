@@ -296,9 +296,9 @@ async def generate_pdf(data: dict = Body(...)):
             'disclosure_map': disc_map,
             'phys_props':   phys_in,
             'eco':          eco_result,
-            # H314 kaldırıldıysa transport sıfırla — PDF servisi filtrelenmiş
-            # h_codes ile _auto_un motorunu çalıştırsın (UN 2924→UN 1993 vb.)
-            'transport':    {} if _h314_removed_flag else _map_transport(data.get('transport', {})),
+            # Frontend TransportEngine sonucunu her zaman kullan.
+            # JS motoru (transport_engine.js) tek kaynak — H314/pH durumu orada zaten işlendi.
+            'transport':    _map_transport(data.get('transport', {})),
             'revision': {
                 'date':    rev_date,
                 'no':      revision_in.get('no', '1'),
@@ -779,37 +779,14 @@ async def adr_lookup(un_no: str, packing_group: str = "II", lang: str = "TR"):
 async def adr_auto_detect(body: dict):
     """
     H kodlarından UN numarası otomatik tespit.
-    Input: {h_codes:[...], flash_point:27, lang:"TR"}
-    Output: {un_no, shipping_name, hazard_class, packing_group, kemler, tunnel_code}
+    NOT: Bu endpoint artık kullanılmıyor. Transport sınıflandırması
+    transport_engine.js (frontend) tarafından yapılır ve PDF'e doğrudan aktarılır.
+    Geriye dönük uyumluluk için endpoint varlığını koruyor, boş yanıt döner.
     """
-    h_codes     = body.get("h_codes", [])
-    flash_point = body.get("flash_point")
-    lang        = body.get("lang", "TR")
-
-    # pdf_sds_service'deki _auto_un kullan
-    import sys
-    sys.path.insert(0, ".")
-    from app.services.pdf_sds_service import _auto_un
-    from app.services.transport_adr_service import get_adr_details
-
-    result = _auto_un(h_codes)
-    if result:
-        un = result.get("un_no", "")
-        pg = result.get("packing_group", "II")
-        adr_det = get_adr_details(un, pg) if un and un != "UN0000" else {}
-        return {
-            "found": True,
-            "auto": True,
-            **result,
-            "kemler":      adr_det.get("kemler", "—"),
-            "tunnel_code": adr_det.get("tunnel_code", "—"),
-            "classification_code": adr_det.get("classification_code", "—"),
-            "note": ("Otomatik tespit — sevkiyat öncesi uzman onayı alın." if lang=="TR"
-                     else "Auto-detected — verify with transport expert before shipment."),
-        }
-    return {"found": False, "h_codes": h_codes,
-            "message": "Bu H kodları için ADR sınıflandırması tespit edilemedi." if lang=="TR"
-                       else "No ADR classification detected for these H codes."}
+    lang = body.get("lang", "TR")
+    return {"found": False,
+            "message": ("Transport sınıflandırması frontend engine tarafından yapılır." if lang=="TR"
+                        else "Transport classification is handled by the frontend engine.")}
 
 
 @app.get("/api/v1/codes/h/{code}")

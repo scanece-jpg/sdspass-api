@@ -16,7 +16,7 @@ const ComponentManager = (() => {
     console.log('[ComponentManager] init OK');
   }
 
-  function _onSubstanceFound({ cas, compId, name, hazard_classes, ec_no, reach_no, signal, source }) {
+  function _onSubstanceFound({ cas, compId, name, hazard_classes, ec_no, reach_no, signal, source, annex_vi }) {
     // Madde adını doldur
     const ni = document.getElementById(`ni${compId}`);
     if (ni && !ni.value && name) ni.value = name;
@@ -39,12 +39,13 @@ const ComponentManager = (() => {
       reachInput.value = reach_no;
     }
 
-    // Bayrak rengi
+    // Bayrak rengi + Annex VI bayrağı (ATE revize formülü için DOM'da sakla)
     const card = document.getElementById('cc' + compId);
     if (card) {
       card.classList.remove('fe', 'fn', 'fs');
       if (source === 'Annex VI') card.classList.add('fn');
       else if (source === 'Custom DB' || source === 'ECHA C&L') card.classList.add('fs');
+      card.dataset.annexVi = annex_vi ? '1' : '0';
     }
   }
 

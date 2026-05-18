@@ -503,8 +503,32 @@ const CLPEngine = (() => {
     //   1. Konsantrasyon ≥%1 olan bileşenler dahil edilir (CLP Ek I §3.1.3.6.2.1)
     //      %1'den az olsa da yüksek toksisitesi biliniyorsa (Kat.1/2) dahil et
     //   2. Bileşenin ATE değeri bilinmiyorsa → Tablo 3.1.2 nokta tahmini kullan
-    //   3. ATE'si bilinmeyenlerin toplamı >%10 ise formül revize edilir
+    //   3. ATE'si bilinmeyenlerin toplamı >%10 ise revize formül ZORUNLU (§3.1.3.6.2.3)
+    //
+    // "Bilinmiyor" tanımı (kaynak güvenilirliğine göre):
+    //   • annex_vi: true  → Annex VI resmi değerlendirme, akut toksik değil → ATE = 5000
+    //   • annex_vi: false + Acute Tox. yok → gerçek bilinmiyor → unknownConc sayacına ekle
+    //
+    // NOT: Eski "revize formül" hatası (knownConc/sumInv) düzeltildi.
+    // O versiyon suyu "bilinmiyor" sayıyordu → ATEmix küçük çıkıyordu (aşırı sıkı).
+    // Doğru uygulama: annex_vi bileşenler ATE=5000 ile dahil edilir, gerçekten bilinmeyenler
+    // unknownConc'a eklenir; unknownConc >%10 ise (100−unknownConc)/sumInv uygulanır.
     const ateMixDetails = {};  // route → { ateMix, resultCode, components[] } — PDF için
+
+    // ── Ön işlem: gerçek bilinmeyenleri say (route bağımsız) ─────────────────────
+    const ATE_ACUTE_CODES = new Set(['H300','H301','H302','H310','H311','H312','H330','H331','H332']);
+    let ateUnknownConc = 0;
+    comps.forEach(c => {
+      const conc = parseFloat(c.concMax || c.conc) || 0;
+      if (conc <= 0) return;
+      const compAnnexVi = c.annex_vi === true || c.annex_vi === '1';
+      const hasAcuteTox = (c.hazards || []).some(h =>
+        ATE_ACUTE_CODES.has((h.h_code || '').replace(/[*\s]/g,'').substring(0,4))
+      );
+      if (!hasAcuteTox && !compAnnexVi) {
+        ateUnknownConc += conc;
+      }
+    });
 
     Object.entries(ATE_ROUTES).forEach(([route, codes]) => {
       const codeSet = new Set(codes);
@@ -515,6 +539,7 @@ const CLPEngine = (() => {
 
       comps.forEach(c => {
         const conc = parseFloat(c.concMax || c.conc) || 0;
+        const compAnnexVi = c.annex_vi === true || c.annex_vi === '1';
         let compHasATE = false;
 
         (c.hazards || []).forEach(h => {
@@ -523,8 +548,6 @@ const CLPEngine = (() => {
 
           // CLP Ek I §3.1.3.6.2.1: ATE'si bilinen (sınıflandırılmış, Kat.1-4) bileşenler
           // konsantrasyondan bağımsız olarak her zaman dahil edilir.
-          // Yalnızca ATE'si bilinmeyen (sınıflandırılmamış) <%1 bileşenler hariç tutulabilir;
-          // ancak bu döngüde yalnızca akut toks. H kodları (bilinen ATE) işlenir → filtre kaldırıldı.
           const hclass = (h.h_class || '').replace(/\*/g, '').trim();
 
           let ate = ATE_POINT[code];
@@ -538,19 +561,27 @@ const CLPEngine = (() => {
           ateComps.push({ name: c.name || c.cas, conc, code, ate });
         });
 
-        if (compHasATE) knownConc += conc;
+        if (compHasATE) {
+          knownConc += conc;
+        } else if (compAnnexVi && conc > 0) {
+          // Annex VI resmi değerlendirmesi: akut toksik değil → ATE = 5000 (muhafazakâr)
+          sumInv += conc / 5000;
+          knownConc += conc;
+          hasAny = true;
+          ateComps.push({ name: c.name || c.cas, conc, code: '—', ate: 5000, annexVi: true });
+        }
+        // else: gerçek bilinmiyor → ateUnknownConc'a yukarıda eklendi
       });
 
       if (!hasAny || sumInv === 0) return;
 
-      // CLP Ek I §3.1.3.6.2 — Standart formül: ATEmix = 100 / Σ(Ci/ATEi)
-      // Sınıflandırılmamış bileşenler (su, dolgu vb.) Ci/ATEi → 0 katkısı yapar,
-      // formülden dışlanır; dilüsyon etkisi korunur.
-      // NOT: Eski "revize formül" (knownConc/sumInv) dilüsyon etkisini siliyordu
-      // ve %8 allilamin gibi durumlarda ATEmix = 100 → H301/kuru kafa piktogramı
-      // çıkarıyordu. Doğru sonuç: ATEmix = 100/0.08 = 1250 → H302/GHS07.
-      const unknownPct = Math.max(0, 100 - knownConc);  // PDF tablosu için bilgi amaçlı
-      const ate_mix = 100 / sumInv;
+      // CLP §3.1.3.6.2.3 — Revize formül: bilinmeyen > %10 ise ZORUNLU
+      //   Standart: ATEmix = 100 / Σ(Ci/ATEi)
+      //   Revize  : ATEmix = (100 − Σunknown) / Σ(Ci/ATEi)
+      const unknownPct = Math.round(ateUnknownConc * 10) / 10;  // PDF için
+      const ate_mix = ateUnknownConc > 10
+        ? (100 - ateUnknownConc) / sumInv
+        : 100 / sumInv;
 
       let resultCode = null;
       for (const { max, h } of ATE_CLASSIFY[route]) {
@@ -561,7 +592,8 @@ const CLPEngine = (() => {
       ateMixDetails[route] = {
         ateMix: Math.round(ate_mix * 10) / 10,
         resultCode,
-        unknownPct: Math.round(unknownPct * 10) / 10,
+        unknownPct,
+        revisedFormula: ateUnknownConc > 10,  // PDF'de gösterim için
         components: ateComps,
       };
 

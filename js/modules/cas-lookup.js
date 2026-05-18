@@ -44,6 +44,7 @@ const CASLookup = (() => {
         source:        data.source        || '',
         m_factors:     data.m_factors     || {},
         scl:           data.scl           || [],
+        annex_vi:      data.annex_vi      || false,  // CLP 3.1.3.6.2.3 revize formül için
       });
     } catch(e) {
       console.warn('[CASLookup] API error:', e);

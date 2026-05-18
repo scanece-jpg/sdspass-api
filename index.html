@@ -1424,7 +1424,10 @@ function getComps() {
     // SCL: maddeye özel kesme değerleri — Öncelik 1 (GCL'yi ezer)
     const scl   = _sclMap[cwId] || {};
     const concStr = w.querySelector('.conc-manual')?.value?.trim() || '';
-    return { cas, name, name_tr, conc, concMin, concMax, concStr, hazards, ec, reach, m_factors:{ acute: mf, chronic: mfc }, scl };
+    // Annex VI bayrağı — component-manager tarafından CAS sorgusunda kaydedilir
+    // CLP 3.1.3.6.2.3 revize formül hesabı için clp_engine.js okur
+    const annexVi = w.querySelector('.cc')?.dataset?.annexVi === '1';
+    return { cas, name, name_tr, conc, concMin, concMax, concStr, hazards, ec, reach, m_factors:{ acute: mf, chronic: mfc }, scl, annex_vi: annexVi };
   }).filter(c => c.cas || c.name);
 }
 

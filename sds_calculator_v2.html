@@ -1167,7 +1167,9 @@ function getComps() {
     // SCL: maddeye özel kesme değerleri — Öncelik 1 (GCL'yi ezer)
     const scl   = _sclMap[cwId] || {};
     const concStr = w.querySelector('.conc-manual')?.value?.trim() || '';
-    return { cas, name, conc, concMin, concMax, concStr, hazards, ec, reach, m_factors:{ acute: mf, chronic: mf }, scl };
+    // Annex VI bayrağı — component-manager tarafından CAS sorgusunda kaydedilir
+    const annexVi = w.querySelector('.cc')?.dataset?.annexVi === '1';
+    return { cas, name, conc, concMin, concMax, concStr, hazards, ec, reach, m_factors:{ acute: mf, chronic: mf }, scl, annex_vi: annexVi };
   }).filter(c => c.cas || c.name);
 }
 

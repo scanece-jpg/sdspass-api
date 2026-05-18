@@ -251,6 +251,8 @@ async def generate_pdf(data: dict = Body(...)):
                 'scl':           c.get('scl', []),
                 'ec_no':         c.get('ec_no', ''),
                 'reach_no':      c.get('reach_no', ''),
+                'annex_vi':      c.get('annex_vi', False),
+                'source_priority': c.get('source_priority', 4),
             }
         mapped_comps = [_map_comp(c) for c in components]
 
@@ -399,10 +401,11 @@ async def substance_lookup(cas: str):
                     "cas"       : cas,
                     "name"      : echa.get("name", ""),
                     "ec_no"     : echa.get("ec_no", "") or get_ec_no(cas),
-                    "reach_no"  : get_reg_no(cas),
-                    "sea_ek6"   : False,
-                    "annex_vi"  : False,
-                    "signal"    : echa.get("signal", ""),
+                    "reach_no"       : get_reg_no(cas),
+                    "sea_ek6"        : False,
+                    "annex_vi"       : False,
+                    "source_priority": 5,   # ECHA C&L API / PubChem — güvenilirlik düşük
+                    "signal"         : echa.get("signal", ""),
                     "pictograms": echa.get("pictograms", []),
                     "hazards"   : [
                         {"h_class": cls, "h_code": code}

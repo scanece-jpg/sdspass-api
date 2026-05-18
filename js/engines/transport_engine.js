@@ -76,11 +76,12 @@ const TransportEngine = (() => {
     // Not: kuvvetli asit/baz konsantrasyonuna göre PG I olabilir — uzman onayı gerekir
     'H314':{'class':'8','pg':'II'},
     // Sınıf 9 — Aspirasyon ve Çevre Tehlikesi
+    // ADR 2.2.9.1.10: Çevre tehlikesi → Suk. Akut 1 (H400), Kron. 1 (H410), Kron. 2 (H411)
+    // H412 (Kronik 3) ve H413 (Kronik 4) ADR Sınıf 9 kriterini KARŞILAMAZ — dahil edilmez
     'H304':{'class':'9','pg':'III'},
     'H400':{'class':'9','pg':'III'},
     'H410':{'class':'9','pg':'III'},
     'H411':{'class':'9','pg':'III'},
-    'H412':{'class':'9','pg':'III'},
   };
 
   // ── ADR Tablo 2.1.3.10: Çoklu Tehlike Öncelik Matrisi ─────────────────────
@@ -280,8 +281,9 @@ const TransportEngine = (() => {
     ])].filter(h => h.startsWith('H'));
     const hSet = new Set(allH);
 
-    // Çevre tehlike işareti
-    const envMark = hSet.has('H400') || hSet.has('H410') || hSet.has('H411') || hSet.has('H412');
+    // Çevre tehlike işareti — ADR 2.2.9.1.10: sadece Suk. Akut 1 (H400), Kron. 1 (H410), Kron. 2 (H411)
+    // H412 (Kronik 3) ve H413 (Kronik 4) ADR Sınıf 9 kriterini karşılamaz
+    const envMark = hSet.has('H400') || hSet.has('H410') || hSet.has('H411');
 
     // ── Adım 1: Aktif ADR tehlikelerini çıkar ─────────────────────────────────
     // Aynı sınıf için en tehlikeli PG'yi (en küçük sayı) sakla

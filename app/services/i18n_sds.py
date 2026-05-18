@@ -1682,6 +1682,193 @@ _SENTENCES: dict = {
         'LT':'Laikykite originalioje talpykloje vėsioje, sausoje vietoje.',
         'US_EN':'Store in original container in a cool, dry, well-ventilated area.',
     },
+
+    # ── BÖLÜM 13 — Bertaraf (KKDİK Ek-2 §13.1 zorunlu unsurlar) ────────────────
+    'contaminated_packaging': {
+        'TR': (
+            'KONTAMİNE AMBALAJ: Ambalajları mümkün olduğunca tamamen boşaltın. '
+            'Artık ürün içeren ambalajlar tehlikeli atık olarak değerlendirilmeli ve '
+            'Atık Yönetimi Yönetmeliği (29314 sayılı RG) çerçevesinde lisanslı bertaraf '
+            'kuruluşuna teslim edilmelidir. Temizlenmiş ve ürün kalıntısı içermediği '
+            'doğrulanmış ambalajlar yerel geri dönüşüm programlarına dahil edilebilir.'
+        ),
+        'EN': (
+            'CONTAMINATED PACKAGING: Empty containers as completely as possible. '
+            'Containers with residual product must be treated as hazardous waste and '
+            'disposed of via a licensed waste management company. '
+            'Thoroughly cleaned containers may be sent for recycling where permitted by local regulations.'
+        ),
+        'DE': (
+            'KONTAMINIERTE VERPACKUNGEN: Behälter so vollständig wie möglich entleeren. '
+            'Behälter mit Produktrückständen als gefährlichen Abfall behandeln und einem '
+            'zugelassenen Entsorgungsunternehmen übergeben. '
+            'Gereinigte Behälter können dem lokalen Recyclingprogramm zugeführt werden.'
+        ),
+        'PL': (
+            'ZANIECZYSZCZONE OPAKOWANIA: Opróżnić pojemniki jak najbardziej całkowicie. '
+            'Pojemniki z resztkami produktu traktować jako odpad niebezpieczny i przekazać '
+            'licencjonowanej firmie zajmującej się unieszkodliwianiem odpadów. '
+            'Oczyszczone opakowania można przekazać do recyklingu zgodnie z lokalnymi przepisami.'
+        ),
+        'RO': (
+            'AMBALAJE CONTAMINATE: Goliți recipientele cât mai complet posibil. '
+            'Recipientele cu resturi de produs trebuie tratate ca deșeuri periculoase și '
+            'predate unei companii autorizate de gestionare a deșeurilor. '
+            'Recipientele bine curățate pot fi trimise la reciclare conform reglementărilor locale.'
+        ),
+        'BG': (
+            'ЗАМЪРСЕНИ ОПАКОВКИ: Изпразнете контейнерите напълно. '
+            'Контейнерите с остатъци от продукт трябва да се третират като опасни отпадъци. '
+            'Предайте на лицензирана компания за управление на отпадъци.'
+        ),
+        'HU': (
+            'SZENNYEZETT CSOMAGOLÁS: A tartályokat a lehető legjobban ürítse ki. '
+            'A termékmaradványt tartalmazó csomagolást veszélyes hulladékként kell kezelni, '
+            'és engedéllyel rendelkező hulladékkezelő vállalatnak kell átadni. '
+            'Az alaposan megtisztított csomagolás helyi előírások szerint újrahasznosítható.'
+        ),
+        'CZ': (
+            'KONTAMINOVANÉ OBALY: Nádoby co nejúplněji vyprázdněte. '
+            'Nádoby se zbytky produktu musí být považovány za nebezpečný odpad '
+            'a předány oprávněné společnosti pro nakládání s odpady. '
+            'Důkladně vyčištěné obaly lze podle místních předpisů recyklovat.'
+        ),
+        'SK': (
+            'KONTAMINOVANÉ OBALY: Nádoby čo najúplnejšie vyprázdnite. '
+            'Nádoby so zvyškami produktu sa musia považovať za nebezpečný odpad '
+            'a odovzdať oprávnenej spoločnosti na nakladanie s odpadmi. '
+            'Dôkladne vyčistené obaly možno recyklovať podľa miestnych predpisov.'
+        ),
+        'HR': (
+            'KONTAMINIRANI AMBALAŽNI MATERIJAL: Posude ispraznite što je moguće potpunije. '
+            'Posude s ostacima proizvoda treba tretirati kao opasan otpad '
+            'i predati ovlaštenoj tvrtki za upravljanje otpadom. '
+            'Temeljito očišćeni kontejneri mogu se reciklirati u skladu s lokalnim propisima.'
+        ),
+        'LT': (
+            'UŽTERŠTA PAKUOTĖ: Ištuštinkite konteinerius kiek įmanoma labiau. '
+            'Konteineriai su produkto liekanomis turi būti traktuojami kaip pavojingos atliekos '
+            'ir perduoti licencijuotai atliekų tvarkymo įmonei.'
+        ),
+        'US_EN': (
+            'CONTAMINATED PACKAGING: Empty containers as completely as possible. '
+            'Containers with residual product must be treated as hazardous waste under '
+            'applicable federal, state, and local regulations. '
+            'Contact a licensed waste management company for disposal.'
+        ),
+    },
+    'drain_prohibition': {
+        'TR': (
+            'Ürünü kanalizasyona, zemin suyuna, yüzey suyuna veya toprağa boşaltmayın. '
+            'Su ortamı için zararlıdır — sucul organizmalar üzerinde uzun süreli olumsuz etkiler '
+            'oluşturabilir (KKDİK Ek-2 §13 / SEA Yönetmeliği).'
+        ),
+        'EN': (
+            'Do not dispose of into drains, groundwater, surface water, or soil. '
+            'Harmful to aquatic environment — may cause long-term adverse effects on aquatic organisms '
+            '(EU CLP 2020/878 Annex II §13 / CLP Regulation).'
+        ),
+        'DE': (
+            'Nicht in Kanalisation, Grundwasser, Oberflächenwasser oder Boden einleiten. '
+            'Schädlich für die Wasserumwelt — kann langfristige schädliche Wirkungen auf Wasserorganismen haben.'
+        ),
+        'PL': (
+            'Nie usuwać do kanalizacji, wód gruntowych, wód powierzchniowych ani gleby. '
+            'Szkodliwy dla środowiska wodnego — może powodować długotrwałe niekorzystne skutki w środowisku wodnym.'
+        ),
+        'RO': (
+            'Nu eliminați în canalizare, ape subterane, ape de suprafață sau sol. '
+            'Nociv pentru mediul acvatic cu efecte de lungă durată asupra organismelor acvatice.'
+        ),
+        'BG': (
+            'Да не се изхвърля в канализацията, подземните води, повърхностните води или почвата. '
+            'Вредно за водната среда с дълготрайни последствия.'
+        ),
+        'HU': (
+            'Ne engedje csatornába, talajvízbe, felszíni vizekbe vagy talajba. '
+            'Káros a vízi környezetre — hosszan tartó káros hatásokat okozhat a vízi szervezetekre.'
+        ),
+        'CZ': (
+            'Nevypouštět do kanalizace, podzemních vod, povrchových vod ani půdy. '
+            'Škodlivé pro vodní prostředí s dlouhodobými účinky na vodní organismy.'
+        ),
+        'SK': (
+            'Nevypúšťajte do kanalizácie, podzemných vôd, povrchových vôd ani pôdy. '
+            'Škodlivé pre vodné prostredie s dlhodobými účinkami na vodné organizmy.'
+        ),
+        'HR': (
+            'Ne odlagati u kanalizaciju, podzemne vode, površinske vode ni tlo. '
+            'Štetno za vodeni okoliš s dugotrajnim učincima na vodene organizme.'
+        ),
+        'LT': (
+            'Neišpilti į kanalizaciją, požeminius vandenis, paviršinius vandenis ar dirvą. '
+            'Kenksminga vandens aplinkai su ilgalaikiu poveikiu vandens organizmams.'
+        ),
+        'US_EN': (
+            'Do not discharge to drains, groundwater, waterways, or soil. '
+            'Harmful to aquatic organisms with long-lasting effects.'
+        ),
+    },
+    'disposal_method_general': {
+        'TR': (
+            'Lisanslı tehlikeli atık bertaraf tesisinde bertaraf edin. '
+            'Tercih edilen yöntem: lisanslı tesiste kontrollü yakma (insinorasyon). '
+            'Atık kodunu belirlemek için Atık Yönetimi Yönetmeliği Ek-4 listesine (AVY Atık Kataloğu) başvurun.'
+        ),
+        'EN': (
+            'Dispose of at a licensed hazardous waste treatment facility. '
+            'Preferred method: controlled incineration at a licensed facility. '
+            'Refer to the European Waste Catalogue (EWC/LoW) for appropriate waste classification code.'
+        ),
+        'DE': (
+            'In einer zugelassenen Sonderabfallbehandlungsanlage entsorgen. '
+            'Bevorzugte Methode: kontrollierte Verbrennung in einer zugelassenen Anlage. '
+            'Abfallcode gemäß Europäischem Abfallverzeichnis (AVV) bestimmen.'
+        ),
+        'PL': (
+            'Unieszkodliwić w licencjonowanym zakładzie przetwarzania odpadów niebezpiecznych. '
+            'Preferowana metoda: kontrolowane spalanie w licencjonowanym zakładzie. '
+            'Kod odpadu zgodnie z Europejskim Wykazem Odpadów (EWC).'
+        ),
+        'RO': (
+            'Eliminați la o instalație autorizată de tratare a deșeurilor periculoase. '
+            'Metoda preferată: incinerare controlată la o instalație autorizată. '
+            'Consultați Catalogul European al Deșeurilor (CED) pentru codul de deșeuri aplicabil.'
+        ),
+        'BG': (
+            'Унищожете в лицензирано съоръжение за третиране на опасни отпадъци. '
+            'Предпочитан метод: контролирано изгаряне в лицензирано съоръжение.'
+        ),
+        'HU': (
+            'Engedéllyel rendelkező veszélyes hulladékkezelő létesítményben ártalmatlanítsa. '
+            'Ajánlott módszer: ellenőrzött égetés engedélyezett létesítményben. '
+            'Az alkalmazandó hulladékkódhoz lásd az Európai Hulladékkatalógust (EWC).'
+        ),
+        'CZ': (
+            'Zlikvidujte v oprávněném zařízení pro zpracování nebezpečných odpadů. '
+            'Upřednostňovaná metoda: řízené spalování v oprávněném zařízení. '
+            'Kód odpadu určte podle Evropského katalogu odpadů (EWC).'
+        ),
+        'SK': (
+            'Zlikvidujte v oprávnenom zariadení na spracovanie nebezpečných odpadov. '
+            'Uprednostňovaná metóda: riadené spaľovanie v oprávnenom zariadení. '
+            'Kód odpadu určte podľa Európskeho katalógu odpadov (EWC).'
+        ),
+        'HR': (
+            'Zbrinite u ovlaštenoj instalaciji za obradu opasnog otpada. '
+            'Preporučena metoda: kontrolirano spaljivanje u ovlaštenoj instalaciji. '
+            'Kod otpada odredite prema Europskom katalogu otpada (EWC).'
+        ),
+        'LT': (
+            'Utilizuokite licencijuotame pavojingų atliekų tvarkymo objekte. '
+            'Pageidaujamas metodas: kontroliuojamas deginimas licencijuotame objekte.'
+        ),
+        'US_EN': (
+            'Dispose of at a licensed hazardous waste facility. '
+            'Preferred method: incineration at a permitted facility. '
+            'Classify waste per applicable federal and state regulations (40 CFR 261).'
+        ),
+    },
 }
 
 

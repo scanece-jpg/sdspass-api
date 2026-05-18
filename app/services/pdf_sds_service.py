@@ -116,7 +116,7 @@ from app.services.codes_i18n import get_h, get_euh, get_p, get_ppe, get_sentence
 from app.services.ghs_pictogram import get_ghs_codes, pictogram_table
 from app.services.transport_adr_service import get_adr_details
 from app.services.tr_oel_service import get_oel_table, format_oel_row
-from app.services.tr_mevzuat_service import get_section15_text, get_disposal_regulation
+from app.services.tr_mevzuat_service import get_section15_text, get_disposal_regulation, get_disposal_content
 from app.services.gbf_author_service import format_author_block, validate_certificate
 from app.services.sds_sentence_service import (
     generate_section3, generate_section, get_echa_range, generate_section_42
@@ -1970,12 +1970,23 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             story.append(Spacer(1, 3))
 
     # ─────────────────────────────────────────────────────────────────────────
-    # BÖLÜM 13 — Bertaraf
+    # BÖLÜM 13 — Bertaraf (KKDİK Ek-2 §13.1)
     # ─────────────────────────────────────────────────────────────────────────
     story += section_block(section_title(lang, 13), styles)
     story += sub_block(f"13.1 {sub_title(lang,'13.1')}", styles)
-    disposal_txt = get_disposal_regulation(lang) if lang=='TR' else term(lang,'disposal_reg')
-    story.append(Paragraph(disposal_txt, styles['body']))
+
+    _disp = get_disposal_content(h_codes, lang)
+
+    # 13.1a — Ürün bertaraf yöntemleri (dinamik bullet listesi)
+    story += bullet_list(_disp['product_bullets'], styles)
+
+    # 13.1b — Kanalizasyon yasağı (sucul tehlike H kodları varsa)
+    if _disp.get('drain_note'):
+        story.append(Paragraph(_disp['drain_note'], styles['body']))
+
+    # 13.1c — Kontamine ambalaj yönetimi (her zaman — KKDİK Ek-2 §13.1 zorunlu)
+    story.append(Spacer(1, 3))
+    story.append(Paragraph(_disp['packaging_text'], styles['body']))
 
     # ─────────────────────────────────────────────────────────────────────────
     # BÖLÜM 14 — Taşımacılık

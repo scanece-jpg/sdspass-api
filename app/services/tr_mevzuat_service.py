@@ -122,7 +122,7 @@ def get_section15_text(
 
 
 def get_disposal_regulation(lang: str = 'TR') -> str:
-    """Bölüm 13 için atık yönetimi mevzuat metni."""
+    """Bölüm 13 için atık yönetimi mevzuat metni (geriye dönük uyumluluk)."""
     reg = TR_REGULATIONS['atik']
     if lang == 'TR':
         return (
@@ -137,7 +137,87 @@ def get_disposal_regulation(lang: str = 'TR') -> str:
     )
 
 
+def get_disposal_content(h_codes: list = None, lang: str = 'TR') -> dict:
+    """
+    KKDİK Ek-2 §13.1 gerekliliklerine uygun dinamik bertaraf içeriği üret.
+
+    Returns:
+        {
+            'product_bullets': List[str],  — ürün bertaraf maddeleri (bullet listesi)
+            'packaging_text':  str,        — kontamine ambalaj metni (her zaman)
+            'drain_note':      str | None, — kanalizasyon yasağı (sucul tehlike varsa)
+        }
+    """
+    from app.services.i18n_sds import S
+
+    h_codes = h_codes or []
+    reg     = TR_REGULATIONS['atik']
+
+    # ── 1. Mevzuat referansı (her zaman) ─────────────────────────────────────
+    if lang == 'TR':
+        ref_bullet = (
+            f"{reg['full']} ({reg['rg_date']} tarihli ve {reg['rg_no']} sayılı RG) "
+            f"ve yerel atık yönetimi düzenlemelerine uygun olarak bertaraf edin."
+        )
+    else:
+        ref_bullet = (
+            f"Dispose of in accordance with Turkish Hazardous Waste Regulations "
+            f"(Official Gazette {reg['rg_no']}, {reg['rg_date']}) and local regulations."
+        )
+
+    # ── 2. Bertaraf yöntemi (her zaman) ──────────────────────────────────────
+    method_bullet = S(lang, 'disposal_method_general')
+
+    # ── 3. Sucul tehlike → kanalizasyon yasağı ───────────────────────────────
+    _aquatic_h = {'H400', 'H410', 'H411', 'H412', 'H413', 'H420'}
+    drain_note = None
+    if any(h in h_codes for h in _aquatic_h):
+        drain_note = S(lang, 'drain_prohibition')
+
+    # ── 4. Yanıcı sıvılar → yakma yöntemi vurgusu ───────────────────────────
+    _flam_h = {'H224', 'H225', 'H226', 'H227'}
+    if lang == 'TR' and any(h in h_codes for h in _flam_h):
+        method_bullet = (
+            'Yanıcı sıvı — lisanslı tehlikeli atık tesisinde kontrollü yakma yöntemiyle '
+            'bertaraf edin. Açık alev veya kıvılcım kaynağına yakın bertaraf etmeyin. '
+            'Atık kodu için Atık Yönetimi Yönetmeliği Ek-4 listesine başvurun.'
+        )
+    elif any(h in h_codes for h in _flam_h) and lang != 'TR':
+        method_bullet = (
+            'Flammable liquid — dispose of by controlled incineration at a licensed '
+            'hazardous waste facility. Keep away from ignition sources during disposal. '
+            'Refer to applicable waste catalogue for waste classification code.'
+        )
+
+    # ── 5. CMR maddeler → ek uyarı ───────────────────────────────────────────
+    _cmr_h = {'H340', 'H341', 'H350', 'H351', 'H360', 'H361', 'H362'}
+    product_bullets = [ref_bullet, method_bullet]
+    if any(h in h_codes for h in _cmr_h):
+        if lang == 'TR':
+            product_bullets.append(
+                'CMR maddesi (kanserojen/mutajen/üreme toksik) — bertaraf işlemi yalnızca '
+                'eğitimli personel tarafından ve uygun KKE kullanılarak gerçekleştirilmelidir.'
+            )
+        else:
+            product_bullets.append(
+                'CMR substance (carcinogenic/mutagenic/reprotoxic) — disposal operations '
+                'must be carried out by trained personnel using appropriate PPE.'
+            )
+
+    # ── 6. Kontamine ambalaj (her zaman — KKDİK Ek-2 §13.1 zorunlu) ────────
+    packaging_text = S(lang, 'contaminated_packaging')
+
+    return {
+        'product_bullets': product_bullets,
+        'packaging_text':  packaging_text,
+        'drain_note':      drain_note,
+    }
+
+
 if __name__ == '__main__':
     print(get_section15_text(['H225', 'H315', 'H350'], has_biocide=False))
     print()
     print(get_disposal_regulation('TR'))
+    print()
+    import json
+    print(json.dumps(get_disposal_content(['H226', 'H410', 'H350'], 'TR'), ensure_ascii=False, indent=2))

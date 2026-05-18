@@ -11,12 +11,13 @@ Kapsam:
   EUH059                   → Ozon tabakasına zararlı
 
 Aquatic Hesap Kuralları (SEA/CLP Annex I Tablo 4.1.2 — Karışımlar):
-  Tüm toplama eşikleri %25'tir. 0.1%/M ve 1%/M dahil etme (inclusion) cut-off'larıdır.
-  H400: Σ(Ci × M_acute)                              ≥ %25
-  H410: Σ(Ci × M_chr)[Kronik1]                       ≥ %25
-  H411: 10×Σ(Ci×M)[K1] + Σ(Ci)[K2]                  ≥ %25
-  H412: 100×Σ(Ci×M)[K1] + 10×Σ(Ci)[K2] + Σ(Ci)[K3] ≥ %25
-  H413: Σ(Ci)[tüm kronik]                             ≥ %25
+  CLP eşiği %0.25; K değerleri /100 kesir olarak saklandığından eşik 0.0025 kullanılır.
+  0.1%/M ve 1%/M değerleri dahil etme (inclusion) cut-off'larıdır — sınıflandırma eşiği değil.
+  H400: Σ(Ci × M_acute)/100                              ≥ 0.0025 (= %0.25)
+  H410: Σ(Ci × M_chr)[Kronik1]/100                       ≥ 0.0025 (= %0.25)
+  H411: (10×Σ(Ci×M)[K1] + Σ(Ci)[K2])/100                ≥ 0.0025
+  H412: (100×Σ(Ci×M)[K1] + 10×Σ(Ci)[K2] + Σ(Ci)[K3])/100 ≥ 0.0025
+  H413: Σ(Ci)[tüm kronik]/100                             ≥ 0.0025
 
 Veri Kaynağı:
   Önce Annex VI M-faktörü, yoksa varsayılan M=1
@@ -304,59 +305,60 @@ def calculate_aquatic(
                     })
 
     # ── SEA/CLP Tablo 4.1.2: Toplama Formülü Sınıflandırması ─────────────────────
-    # Kaynak: CLP Annex I §4.1.3.5.5 — tüm eşikler %25'tir.
+    # Kaynak: CLP Annex I §4.1.3.5.5 — CLP eşiği %0.25; K değerleri /100 kesir
+    # olarak saklandığından karşılaştırma 0.0025 (= 0.25/100) ile yapılır.
     # Algoritma: Kronik sınıflandırma ÖNCE kontrol edilir.
     # H410 (Kronik 1) varsa H400 (Akut 1) etiket'ten elenir — Baskınlık kuralı.
     # H410 yoksa, H400 bağımsız olarak atanır.
 
     # ── Kronik Sınıflandırma (öncelik sırası: H410 > H411 > H412 > H413) ────────
 
-    # H410: Σ(Ci × M_kronik)[Kronik1] ≥ %25
-    if sum_chronic1_m >= 0.25:
+    # H410: Σ(Ci × M_kronik)[Kronik1] ≥ %0.25 → K1/100 ≥ 0.0025
+    if sum_chronic1_m >= 0.0025:
         return AquaticResult(
             h_code='H410', h_class='Aquatic Chronic 1', signal='Warning',
             sum_value=sum_chronic1_m,
-            formula=f"Σ(Ci×M_kr)[K1]/100 = {sum_chronic1_m:.4f} ≥ 0.25 (Tablo 4.1.2)",
+            formula=f"Σ(Ci×M_kr)[K1]/100 = {sum_chronic1_m:.4f} ≥ 0.0025 [=%{sum_chronic1_m*100:.2f}≥%0.25] (Tablo 4.1.2)",
             note="H410 atandı → H400 etiket'ten elendi (baskınlık kuralı)",
             component_details=comp_m_details,
         )
 
-    # H411: 10×Σ(Ci×M)[K1] + Σ(Ci)[K2] ≥ %25
+    # H411: 10×Σ(Ci×M)[K1] + Σ(Ci)[K2] ≥ %0.25 → toplam/100 ≥ 0.0025
     h411_sum = 10 * sum_chronic1_m + sum_chronic2
-    if h411_sum >= 0.25:
+    if h411_sum >= 0.0025:
         return AquaticResult(
             h_code='H411', h_class='Aquatic Chronic 2', signal='Warning',
             sum_value=h411_sum,
-            formula=f"10×Σ[K1×M]+Σ[K2] = {h411_sum:.4f} ≥ 0.25 (Tablo 4.1.2)",
+            formula=f"10×Σ[K1×M]+Σ[K2] = {h411_sum:.4f} ≥ 0.0025 (Tablo 4.1.2)",
             component_details=comp_m_details,
         )
 
-    # H412: 100×Σ[K1×M] + 10×Σ[K2] + Σ[K3] ≥ %25
+    # H412: 100×Σ[K1×M] + 10×Σ[K2] + Σ[K3] ≥ %0.25 → toplam ≥ 0.0025
     h412_sum = 100 * sum_chronic1_m + 10 * sum_chronic2 + sum_chronic3
-    if h412_sum >= 0.25:
+    if h412_sum >= 0.0025:
         return AquaticResult(
             h_code='H412', h_class='Aquatic Chronic 3', signal='Warning',
             sum_value=h412_sum,
-            formula=f"100×Σ[K1×M]+10×Σ[K2]+Σ[K3] = {h412_sum:.4f} ≥ 0.25 (Tablo 4.1.2)",
+            formula=f"100×Σ[K1×M]+10×Σ[K2]+Σ[K3] = {h412_sum:.4f} ≥ 0.0025 (Tablo 4.1.2)",
             component_details=comp_m_details,
         )
 
-    # H413: Σ(Ci tüm kronik)/100 ≥ %25 (M-faktörsüz düz toplam)
-    if sum_chronic_plain >= 0.25:
+    # H413: Σ(Ci tüm kronik)/100 ≥ %0.25 → ≥ 0.0025
+    if sum_chronic_plain >= 0.0025:
         return AquaticResult(
             h_code='H413', h_class='Aquatic Chronic 4', signal='Warning',
             sum_value=sum_chronic_plain,
-            formula=f"Σ(Ci tüm kronik)/100 = {sum_chronic_plain:.4f} ≥ 0.25 (Tablo 4.1.2)",
+            formula=f"Σ(Ci tüm kronik)/100 = {sum_chronic_plain:.4f} ≥ 0.0025 (Tablo 4.1.2)",
             component_details=comp_m_details,
         )
 
     # ── Akut Sınıflandırma — sadece kronik yoksa (H410 baskınlık kuralı) ────────
-    # H400: Σ(Ci × M_akut) ≥ %25
-    if sum_acute_m >= 0.25:
+    # H400: Σ(Ci × M_akut)/100 ≥ 0.0025 (= %0.25)
+    if sum_acute_m >= 0.0025:
         return AquaticResult(
             h_code='H400', h_class='Aquatic Acute 1', signal='Warning',
             sum_value=sum_acute_m,
-            formula=f"Σ(Ci×M_akut)/100 = {sum_acute_m:.4f} ≥ 0.25 (Tablo 4.1.1)",
+            formula=f"Σ(Ci×M_akut)/100 = {sum_acute_m:.4f} ≥ 0.0025 [=%{sum_acute_m*100:.2f}≥%0.25] (Tablo 4.1.1)",
             component_details=comp_m_details,
         )
 

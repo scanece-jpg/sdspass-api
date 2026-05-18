@@ -856,10 +856,11 @@ async def calculate_clp(db: AsyncSession, components: List[Any]) -> Dict:
     # K1 = Σ(Ci × M_kronik)/100  için Kronik Kat.1 (H410 bileşenleri) — M-faktörlü
     # K2 = Σ(Ci)/100             için Kronik Kat.2 (H411 bileşenleri) — düz
     # K3 = Σ(Ci)/100             için Kronik Kat.3/4 (H412/H413 bileşenleri) — düz
-    # H410: K1 ≥ 0.25
-    # H411: 10×K1 + K2 ≥ 0.25
-    # H412: 100×K1 + 10×K2 + K3 ≥ 0.25
-    # H413: K1+K2+K3 ≥ 0.25 (düz toplam)
+    # CLP eşiği %0.25; K değerleri /100 kesir → eşik 0.0025 kullanılır
+    # H410: K1 ≥ 0.0025  (= %0.25)
+    # H411: 10×K1 + K2 ≥ 0.0025
+    # H412: 100×K1 + 10×K2 + K3 ≥ 0.0025
+    # H413: K1+K2+K3 ≥ 0.0025 (düz toplam)
     sum_acute_m    = 0.0
     sum_chronic_k1 = 0.0   # Kronik Kat.1 — M-faktörlü
     sum_chronic_k2 = 0.0   # Kronik Kat.2 — düz (M=1 efektif)
@@ -967,9 +968,9 @@ async def calculate_clp(db: AsyncSession, components: List[Any]) -> Dict:
         results_passed.append({
             'cas': 'KARIŞIM', 'name': 'Aquatic Acute 1',
             'conc': '-', 'h_class': 'Aquatic Acute 1', 'h_code': 'H400',
-            'cutoff_used': 'Σ(Ci×M_ak)/100≥0.25 (SEA Tablo 4.1.1)',
+            'cutoff_used': 'Σ(Ci×M_ak)/100≥0.0025 [=%0.25] (SEA Tablo 4.1.1)',
             'passed': True,
-            'reason': f'Σ(Ci×M_ak)/100={sum_acute_m:.4f}≥0.25',
+            'reason': f'Σ(Ci×M_ak)/100={sum_acute_m:.4f}≥0.0025 [=%{sum_acute_m*100:.2f}≥%0.25]',
         })
 
     signal_word = 'Danger' if signal_danger else ('Warning' if signal_warning else 'None')

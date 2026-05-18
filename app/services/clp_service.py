@@ -916,7 +916,9 @@ async def calculate_clp(db: AsyncSession, components: List[Any]) -> Dict:
 
     # Aquatic Acute 1 — H410 yoksa bağımsız H400 kontrolü
     has_h410_chronic = False
-    if sum_chronic_k1 >= 0.25:
+    # CLP Ek-I Tablo 4.1.0 — eşik %0.25; K değerleri /100 kesir olarak saklandığından
+    # karşılaştırma 0.0025 (= 0.25/100) ile yapılır. Eski kod 0.25 kullanıyordu → 100× hata.
+    if sum_chronic_k1 >= 0.0025:
         has_h410_chronic = True
         passed_h_codes.add('H410')
         passed_pictograms.add('GHS09')
@@ -924,41 +926,41 @@ async def calculate_clp(db: AsyncSession, components: List[Any]) -> Dict:
         results_passed.append({
             'cas': 'KARIŞIM', 'name': 'Aquatic Chronic 1',
             'conc': '-', 'h_class': 'Aquatic Chronic 1', 'h_code': 'H410',
-            'cutoff_used': 'Σ(Ci×M_kr)/100≥0.25 (SEA Tablo 4.1.2)',
+            'cutoff_used': 'Σ(Ci×M_kr)≥%0.25 → K1=Σ/100≥0.0025 (SEA Tablo 4.1.2)',
             'passed': True,
-            'reason': f'K1=Σ(Ci×M_kr)/100={sum_chronic_k1:.4f}≥0.25',
+            'reason': f'K1=Σ(Ci×M_kr)/100={sum_chronic_k1:.4f}≥0.0025 [=%{sum_chronic_k1*100:.2f}≥%0.25]',
         })
-    elif h411_sum >= 0.25:
+    elif h411_sum >= 0.0025:
         passed_h_codes.add('H411')
         passed_pictograms.add('GHS09')
         results_passed.append({
             'cas': 'KARIŞIM', 'name': 'Aquatic Chronic 2',
             'conc': '-', 'h_class': 'Aquatic Chronic 2', 'h_code': 'H411',
-            'cutoff_used': '10×K1+K2≥0.25 (SEA Tablo 4.1.2)',
+            'cutoff_used': '10×Σ(Ci×M)+Σ(Ci_K2)≥%0.25 → toplam/100≥0.0025 (SEA Tablo 4.1.2)',
             'passed': True,
-            'reason': f'10×K1+K2=10×{sum_chronic_k1:.4f}+{sum_chronic_k2:.4f}={h411_sum:.4f}≥0.25',
+            'reason': f'10×K1+K2=10×{sum_chronic_k1:.4f}+{sum_chronic_k2:.4f}={h411_sum:.4f}≥0.0025',
         })
-    elif h412_sum >= 0.25:
+    elif h412_sum >= 0.0025:
         passed_h_codes.add('H412')
         results_passed.append({
             'cas': 'KARIŞIM', 'name': 'Aquatic Chronic 3',
             'conc': '-', 'h_class': 'Aquatic Chronic 3', 'h_code': 'H412',
-            'cutoff_used': '100×K1+10×K2+K3≥0.25 (SEA Tablo 4.1.2)',
+            'cutoff_used': '100×K1+10×K2+K3≥0.0025 (SEA Tablo 4.1.2)',
             'passed': True,
-            'reason': f'100×{sum_chronic_k1:.4f}+10×{sum_chronic_k2:.4f}+{sum_chronic_k3:.4f}={h412_sum:.4f}≥0.25',
+            'reason': f'100×{sum_chronic_k1:.4f}+10×{sum_chronic_k2:.4f}+{sum_chronic_k3:.4f}={h412_sum:.4f}≥0.0025',
         })
-    elif h413_sum >= 0.25:
+    elif h413_sum >= 0.0025:
         passed_h_codes.add('H413')
         results_passed.append({
             'cas': 'KARIŞIM', 'name': 'Aquatic Chronic 4',
             'conc': '-', 'h_class': 'Aquatic Chronic 4', 'h_code': 'H413',
-            'cutoff_used': 'Σ(Ci tüm kronik)/100≥0.25 (SEA Tablo 4.1.2)',
+            'cutoff_used': 'Σ(Ci tüm kronik)/100≥0.0025 (SEA Tablo 4.1.2)',
             'passed': True,
-            'reason': f'K1+K2+K3={h413_sum:.4f}≥0.25',
+            'reason': f'K1+K2+K3={h413_sum:.4f}≥0.0025',
         })
 
     # H400: H410 yoksa ve akut eşik aşılmışsa (SEA Tablo 4.1.1)
-    if sum_acute_m >= 0.25 and not has_h410_chronic:
+    if sum_acute_m >= 0.0025 and not has_h410_chronic:
         passed_h_codes.add('H400')
         passed_pictograms.add('GHS09')
         signal_warning = True

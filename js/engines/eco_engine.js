@@ -44,14 +44,15 @@ const EcoEngine = (() => {
 
   function calculate(comps, ecoTestData = {}) {
     const h_codes = [];
-    // SEA Tablo 4.1.2 — Python ecological_service.py ile aynı formül
-    // sumAcuteM    = Σ(Ci × M_acute)   / 100  → H400 ≥ 0.25
+    // SEA Tablo 4.1.2 — Python clp_service.py ile aynı formül
+    // K değerleri /100 (kesir) olarak saklanır; CLP eşiği %0.25 → kesir karşılığı 0.0025
+    // sumAcuteM    = Σ(Ci × M_acute)   / 100  → H400: ≥ 0.0025 (= %0.25)
     // sumChronicK1 = Σ(Ci × M_chronic) / 100  (K1: Chronic 1, M-faktörlü)
     // sumChronicK2 = Σ(Ci)             / 100  (K2: Chronic 2, M=1)
     // sumChronicK3 = Σ(Ci)             / 100  (K3: Chronic 3+4, M=1)
-    // H410: sumChronicK1 ≥ 0.25
-    // H411: 10×sumChronicK1 + sumChronicK2 ≥ 0.25
-    // H412: 100×sumChronicK1 + 10×sumChronicK2 + sumChronicK3 ≥ 0.25
+    // H410: sumChronicK1 ≥ 0.0025 (= %0.25)
+    // H411: 10×sumChronicK1 + sumChronicK2 ≥ 0.0025
+    // H412: 100×sumChronicK1 + 10×sumChronicK2 + sumChronicK3 ≥ 0.0025
     let sumAcuteM = 0, sumChronicK1 = 0, sumChronicK2 = 0, sumChronicK3 = 0;
     const ozone=[], pbt=[];
 
@@ -106,11 +107,13 @@ const EcoEngine = (() => {
     const h412Sum = 100 * sumChronicK1 + 10 * sumChronicK2 + sumChronicK3;
     const h413Sum = sumChronicK1 + sumChronicK2 + sumChronicK3; // düz toplam
 
+    // CLP Ek-I Tablo 4.1.0/4.1.1 — eşik %0.25; K değerleri /100 kesir olarak saklandığından
+    // karşılaştırma 0.0025 (= 0.25/100) ile yapılır. Eski kod 0.25 kullanıyordu → 100× hata.
     let aquatic = null;
-    if      (sumChronicK1 >= 0.25) aquatic = { h:'H410', cls:'Aquatic Chronic 1', formula:`Σ(Ci×M_kr)/100=${sumChronicK1.toFixed(4)} ≥ 0.25` };
-    else if (h411Sum      >= 0.25) aquatic = { h:'H411', cls:'Aquatic Chronic 2', formula:`10×Σ[K1×M]+Σ[K2]=${h411Sum.toFixed(4)} ≥ 0.25` };
-    else if (h412Sum      >= 0.25) aquatic = { h:'H412', cls:'Aquatic Chronic 3', formula:`100×Σ[K1×M]+10×Σ[K2]+Σ[K3]=${h412Sum.toFixed(4)} ≥ 0.25` };
-    else if (h413Sum      >= 0.25) aquatic = { h:'H413', cls:'Aquatic Chronic 4', formula:`Σ(Ci tüm kronik)/100=${h413Sum.toFixed(4)} ≥ 0.25` };
+    if      (sumChronicK1 >= 0.0025) aquatic = { h:'H410', cls:'Aquatic Chronic 1', formula:`Σ(Ci×M_kr)/100=${sumChronicK1.toFixed(4)} ≥ 0.0025 [=%${(sumChronicK1*100).toFixed(2)}≥%0.25]` };
+    else if (h411Sum      >= 0.0025) aquatic = { h:'H411', cls:'Aquatic Chronic 2', formula:`10×K1+K2=${h411Sum.toFixed(4)} ≥ 0.0025` };
+    else if (h412Sum      >= 0.0025) aquatic = { h:'H412', cls:'Aquatic Chronic 3', formula:`100×K1+10×K2+K3=${h412Sum.toFixed(4)} ≥ 0.0025` };
+    else if (h413Sum      >= 0.0025) aquatic = { h:'H413', cls:'Aquatic Chronic 4', formula:`Σ(Ci tüm kronik)/100=${h413Sum.toFixed(4)} ≥ 0.0025` };
 
     if (aquatic) h_codes.push(aquatic.h);
 
@@ -118,12 +121,12 @@ const EcoEngine = (() => {
     // Baskınlık kuralı: H410 varsa H400 eklenmez (H410 zaten akut riski kapsar)
     const hasH410 = h_codes.includes('H410');
     let aquatic_acute = null;
-    if (sumAcuteM >= 0.25 && !hasH410) {
+    if (sumAcuteM >= 0.0025 && !hasH410) {
       if (!h_codes.includes('H400')) h_codes.push('H400');
       aquatic_acute = {
         h: 'H400',
         cls: 'Aquatic Acute 1',
-        formula: `Σ(Ci×M_ak)/100=${sumAcuteM.toFixed(4)} ≥ 0.25 (SEA Tablo 4.1.1)`,
+        formula: `Σ(Ci×M_ak)/100=${sumAcuteM.toFixed(4)} ≥ 0.0025 [=%${(sumAcuteM*100).toFixed(2)}≥%0.25] (SEA Tablo 4.1.1)`,
       };
     }
 

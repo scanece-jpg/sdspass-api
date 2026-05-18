@@ -119,7 +119,7 @@ from app.services.tr_oel_service import get_oel_table, format_oel_row
 from app.services.tr_mevzuat_service import get_section15_text, get_disposal_regulation
 from app.services.gbf_author_service import format_author_block, validate_certificate
 from app.services.sds_sentence_service import (
-    generate_section3, generate_section, get_echa_range
+    generate_section3, generate_section, get_echa_range, generate_section_42
 )
 
 
@@ -1167,9 +1167,11 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     story.append(Spacer(1, 3))
 
     story += sub_block(f"4.2 {sub_title(lang,'4.2')}", styles)
-    story.append(Paragraph(
-        S(lang,'symptoms_general'), styles['body']
-    ))
+    _sym_bullets = generate_section_42(h_codes)
+    if _sym_bullets:
+        story += bullet_list(_sym_bullets, styles)
+    else:
+        story.append(Paragraph(S(lang, 'symptoms_general'), styles['body']))
 
     story += sub_block(f"4.3 {sub_title(lang,'4.3')}", styles)
     story.append(Paragraph(

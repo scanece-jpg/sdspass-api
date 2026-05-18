@@ -1066,3 +1066,209 @@ def generate_all_sections(
         'section7':  generate_section(7, h_codes, mixture_form),
         'section8':  generate_section(8, h_codes, mixture_form),
     }
+
+
+# ─── BÖLÜM 4.2 — Semptomlar ve Etkiler (EU CLP 2020/878 §4.2) ───────────────
+# Format: H_KODU → semptom metni (Türkçe)
+# Amaç: Madde/karışıma özgü belirti/etkileri tanımla (ilk yardım DEĞİL).
+
+SYMPTOM_SENTENCES_42: Dict[str, str] = {
+
+    # ── AKUT TOKSİSİTE — ORAL ────────────────────────────────────────────
+    'H300': (
+        'YUTULMA (Akut Oral — Kat. 1/2): Yutulması halinde ciddi zehirlenme belirtileri; bulantı, '
+        'kusma, karın krampları, bilinç bozukluğu, organ hasarı veya ölüm riski.'
+    ),
+    'H301': (
+        'YUTULMA (Akut Oral — Kat. 3): Yutulması halinde zehirlenme; bulantı, kusma, karın ağrısı, '
+        'baş dönmesi ve sistemik etki riski.'
+    ),
+    'H302': (
+        'YUTULMA (Akut Oral — Kat. 4): Yutulması halinde hafif-orta bulantı, kusma ve karın ağrısı.'
+    ),
+
+    # ── AKUT TOKSİSİTE — DERİ ────────────────────────────────────────────
+    'H310': (
+        'DERİ EMILIMI (Akut Dermal — Kat. 1/2): Cilt yoluyla hızlı sistemik emilim; halsizlik, '
+        'titreme, solunum güçlüğü, bilinç kaybı ve ölüm riski.'
+    ),
+    'H311': (
+        'DERİ EMILIMI (Akut Dermal — Kat. 3): Cilt yoluyla emilimde baş ağrısı, baş dönmesi, '
+        'bulantı ve sistemik etki.'
+    ),
+    'H312': (
+        'DERİ EMILIMI (Akut Dermal — Kat. 4): Cilt yoluyla emilimde hafif sistemik belirtiler; '
+        'baş ağrısı, halsizlik.'
+    ),
+
+    # ── AKUT TOKSİSİTE — SOLUNUM ─────────────────────────────────────────
+    'H330': (
+        'SOLUNUM (Akut İnhalasyon — Kat. 1/2): Buhar/gaz solunması halinde solunum yolu ve akciğer '
+        'hasarı; ciddi öksürük, akciğer ödemi, siyanoz (morarma), bilinç kaybı ve ölüm riski. '
+        'Semptomlar maruziyetten saatler sonra ortaya çıkabilir.'
+    ),
+    'H331': (
+        'SOLUNUM (Akut İnhalasyon — Kat. 3): Buhar solunması halinde solunum yolu tahrişi; '
+        'öksürük, nefes darlığı, göğüs ağrısı ve solunum güçlüğü.'
+    ),
+    'H332': (
+        'SOLUNUM (Akut İnhalasyon — Kat. 4): Buhar solunmasında hafif boğaz/solunum yolu tahrişi; '
+        'öksürük, burun akıntısı.'
+    ),
+
+    # ── ASPİRASYON TOKSİSİTESİ ────────────────────────────────────────────
+    'H304': (
+        'ASPİRASYON: Yutulup soluk borusuna kaçarsa kimyasal pnömoni (akciğer yangısı) riski; '
+        'öksürük, nefes darlığı, göğüs ağrısı, ateş. Semptomlar 24–48 saat gecikebilir.'
+    ),
+
+    # ── CİLT / GÖZ TAHRİŞİ / KOROZYON ───────────────────────────────────
+    'H314': (
+        'CİLT VE GÖZ KOROZYONU (Kat. 1): Cilt ve mukozada anlık kimyasal yanık; şiddetli ağrı, '
+        'kızarıklık, kabarcık, doku nekrozu. Gözlerde kalıcı hasar riski. '
+        'Yutulması halinde ağız, boğaz ve mide yanığı.'
+    ),
+    'H315': (
+        'CİLT TAHRİŞİ (Kat. 2): Temas bölgesinde kızarıklık, kaşıntı, yanma hissi ve hafif şişme. '
+        'Uzun süreli temaslarda deri soyulması.'
+    ),
+    'H316': (
+        'HAFİF CİLT TAHRİŞİ: Temas bölgesinde geçici kızarıklık ve hafif rahatsızlık hissi.'
+    ),
+    'H317': (
+        'CİLT DUYARLILASTIRMASI (Kat. 1): İlk temaslarda belirgin belirti olmayabilir. '
+        'Tekrarlayan temaslarda alerjik kontakt dermatit gelişir: kaşıntı, kızarıklık, kabarcık ve egzama. '
+        'Bir kez duyarlılaşan kişilerde çok düşük konsantrasyon dahi semptom tetikleyebilir.'
+    ),
+    'H318': (
+        'CİDDİ GÖZ HASARI (Kat. 1): Temas halinde şiddetli göz ağrısı, fotofobi (ışığa duyarlılık), '
+        'ağlama, görme bulanıklığı; tedavi edilmezse kalıcı görme kaybı.'
+    ),
+    'H319': (
+        'GÖZ TAHRİŞİ (Kat. 2): Temas halinde yanma hissi, kızarıklık, gözyaşı artışı. '
+        'Genellikle geçici; 24–72 saat içinde düzelir.'
+    ),
+    'H320': (
+        'HAFİF GÖZ TAHRİŞİ: Geçici kızarıklık ve rahatsızlık hissi.'
+    ),
+
+    # ── SOLUNUM DUYARLILASTIRMA ───────────────────────────────────────────
+    'H334': (
+        'SOLUNUM DUYARLILASTIRMASI (Kat. 1): Tekrarlayan maruziyette mesleki astım gelişimi; '
+        'hırıltılı nefes, nefes darlığı, göğüste sıkışma, öksürük. '
+        'Duyarlılaşma sonrası çok düşük konsantrasyonlar ciddi astım krizi tetikleyebilir. '
+        'Uzun dönemde kalıcı solunum yolu hasarı riski.'
+    ),
+
+    # ── STOT — TEK MARUZIYET ─────────────────────────────────────────────
+    'H335': (
+        'SOLUNUM YOLU TAHRİŞİ: Buhar/sis solunmasında boğaz ve burun tahrişi, '
+        'öksürük, nefes darlığı.'
+    ),
+    'H336': (
+        'UYUŞTURUCU ETKİ: Yüksek konsantrasyonda buhar solunması baş dönmesi, '
+        'baş ağrısı, uyuşukluk, koordinasyon bozukluğu ve bilinç değişikliğine yol açar.'
+    ),
+    'H370': (
+        'SPESIFIK ORGAN TOKSISITESI — Tek Maruziyet (Kat. 1): Maruziyetten kısa süre sonra '
+        'hedef organa özgü belirtiler; fonksiyon bozukluğu. Acil tıbbi değerlendirme gerektirir.'
+    ),
+    'H371': (
+        'SPESIFIK ORGAN TOKSISITESI — Tek Maruziyet (Kat. 2): Maruziyette olası organ '
+        'fonksiyon bozukluğu; organ tipine bağlı belirtiler.'
+    ),
+
+    # ── STOT — TEKRARLAYAN MARUZIYET ─────────────────────────────────────
+    'H372': (
+        'KRONİK ORGAN HASARI (Kat. 1): Uzun süreli veya tekrarlayan maruziyet hedef organda '
+        'kalıcı hasar; organ yetmezliğine ilerleyebilir. '
+        'Periyodik sağlık takibi zorunludur.'
+    ),
+    'H373': (
+        'KRONİK ORGAN HASARI (Kat. 2): Uzun süreli maruziyette olası organ hasarı; '
+        'belirsiz yorgunluk, fonksiyon gerileme riski.'
+    ),
+
+    # ── YANICILIK ─────────────────────────────────────────────────────────
+    'H224': (
+        'YANICILIK/BUHAR SOLUNUM: Yüksek buhar yoğunluğunda baş dönmesi, baş ağrısı, bulantı, '
+        'koordinasyon bozukluğu, bilinç değişikliği. Deri ve göz tahrişi.'
+    ),
+    'H225': (
+        'YANICILIK/BUHAR SOLUNUM: Buhar solunması; baş ağrısı, baş dönmesi, uyuşukluk. '
+        'Cilt ve göz tahrişi.'
+    ),
+    'H226': (
+        'YANICILIK/BUHAR SOLUNUM: Yoğun buhar solunması; baş ağrısı, baş dönmesi, bulantı. '
+        'Deriye ve göze temas halinde tahriş.'
+    ),
+
+    # ── KARSİNOJENİTE / MUTAJENİTE / ÜREMEYİ ETKİLEME ────────────────────
+    'H340': (
+        'GENETİK HASAR (Mutajenite — Kat. 1): Akut belirti yoktur. '
+        'Uzun dönemde kalıtsal genetik hasar ve kanser riski.'
+    ),
+    'H341': (
+        'GENETİK HASAR (Mutajenite — Kat. 2): Genetik hasar şüphesi; uzun dönem risk.'
+    ),
+    'H350': (
+        'KARSİNOJENİTE (Kat. 1): Akut belirti yoktur. Uzun dönemde malign tümör gelişim riski. '
+        'Maruziyet ALARA (mümkün olan en düşük düzey) ilkesiyle sınırlandırılmalıdır.'
+    ),
+    'H351': (
+        'KARSİNOJENİTE (Kat. 2): Muhtemel kanserojen; uzun dönemde tümör riski şüphesi.'
+    ),
+    'H360': (
+        'ÜREMEYİ ETKİLEME (Kat. 1): Erkek/kadın fertilitesine ve fetüse zarar verir. '
+        'Hamile ve emziren kadınlar ile üreme çağındaki bireyler için ciddi risk.'
+    ),
+    'H361': (
+        'ÜREMEYİ ETKİLEME (Kat. 2): Fertilite ve fetüs üzerine muhtemel olumsuz etki.'
+    ),
+    'H362': (
+        'ÜREMEYİ ETKİLEME — Emzirme (Kat. Ek): Anne sütüne geçerek emzirilen bebekte '
+        'olumsuz etki riski.'
+    ),
+}
+
+
+def generate_section_42(h_codes: List[str]) -> List[str]:
+    """
+    Bölüm 4.2 — Semptomlar ve etkiler (EU CLP 2020/878 §4.2).
+    H kodlarına göre madde/karışıma özgü belirti listesi döndürür.
+
+    Returns:
+        Bullet nokta olarak girilecek semptom cümlelerinin listesi.
+        Hiçbir H kodu eşleşmezse boş liste döner (fallback PDF'de uygulanır).
+    """
+    bullets: List[str] = []
+    seen: set = set()
+
+    # Öncelik sırası: en kritik etkilerden başla
+    priority = [
+        'H330', 'H331', 'H332',   # solunum toksisitesi (ölümcül → tahriş)
+        'H310', 'H311', 'H312',   # deri absorbsiyon toksisitesi
+        'H300', 'H301', 'H302',   # oral toksisite
+        'H304',                   # aspirasyon
+        'H314', 'H318',           # ciddi korozyon / göz hasarı
+        'H334',                   # solunum duyarlılaştırma
+        'H317',                   # cilt duyarlılaştırma
+        'H370', 'H371',           # STOT tek
+        'H372', 'H373',           # STOT tekrarlayan
+        'H340', 'H350', 'H360',   # CMR kat. 1
+        'H341', 'H351', 'H361', 'H362',  # CMR kat. 2
+        'H315', 'H316', 'H319', 'H320',  # tahriş
+        'H335', 'H336',           # STOT-SE solunum/narkotik
+        'H224', 'H225', 'H226',  # yanıcılık / buhar solunumu
+    ]
+
+    ordered = [h for h in priority if h in h_codes]
+    rest    = [h for h in h_codes if h not in ordered]
+
+    for h in ordered + rest:
+        text = SYMPTOM_SENTENCES_42.get(h)
+        if text and text not in seen:
+            bullets.append(text)
+            seen.add(text)
+
+    return bullets

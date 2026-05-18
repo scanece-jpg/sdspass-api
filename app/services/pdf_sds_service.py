@@ -836,6 +836,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     # all_h_codes: domine edilenler dahil tüm sınıflandırmalar (CLP Ek I § 1.2.2)
     # H kodu → h_class ters eşlemesi (fallback için)
     from app.services.clp_service import CLP_CUTOFFS_DICT
+    from app.services.codes_i18n import H_CODE_TO_CANONICAL_CLASS
     _h_to_class = {}
     for cls, rule in CLP_CUTOFFS_DICT.items():
         h = rule.get('h','')
@@ -846,6 +847,12 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         'H360D':  'Repr. 1A/1B', 'H360F':  'Repr. 1A/1B', 'H360FD': 'Repr. 1A/1B',
         'H361D':  'Repr. 2',     'H361F':  'Repr. 2',     'H361FD': 'Repr. 2',
     })
+    # Fiziksel / eko H kodları — CLP_CUTOFFS_DICT'te yok, canonical dict'ten ekle
+    # (H224/H225/H226/H304/H410 vb. — passed loop H_CODE_TO_CANONICAL_CLASS üzerinden
+    #  zaten çözüyor; burası all_h_codes fallback loop için güvenlik ağı)
+    for _hc, _cls in H_CODE_TO_CANONICAL_CLASS.items():
+        if _hc not in _h_to_class:
+            _h_to_class[_hc] = _cls
     dom_note = 'Baskın H kodu ile kapsandı (CLP Ek-I §1.2.2)' if lang == 'TR' else 'Covered by dominant hazard class (CLP Annex I §1.2.2)'
     for hc_raw in all_h_codes:
         hc = (hc_raw or '').replace('*','').strip()

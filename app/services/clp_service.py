@@ -96,7 +96,9 @@ DANGER_H = {
     'H220','H222','H224','H225',
     'H228','H232',                   # H232: pirofor gaz → Danger (CLP Annex III)
     'H240','H241','H250','H251',     # H251: kendiliğinden ısınan Kat.1 → Danger
-    'H260','H270','H271','H272',
+    'H260','H270','H271',
+    # H272 — Ox. Liq. 2 (Danger) veya Ox. Liq. 3 (Warning) için aynı kod kullanılır.
+    # Kategori bilinmeden Danger/Warning ayrımı yapılamaz → JS motoru ile tutarlı: Warning.
     'H300','H301','H304','H310','H311','H314','H318','H330','H331',
     'H334','H340','H350','H360','H370','H372',
 }

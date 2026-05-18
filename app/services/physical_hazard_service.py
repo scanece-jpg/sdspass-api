@@ -12,8 +12,8 @@ Kapsam (Ek — toggle):
   Flam. Sol. 2  (H228)        → CLP Tablo 2.7
 
 Veri Kaynakları:
-  FP_DB   → Dahili parlama noktası veritabanı (33 madde)
-  BP_DB   → Kaynama noktası veritabanı
+  FP_DB   → Dahili parlama noktası veritabanı (~80 madde)
+  BP_DB   → Kaynama noktası veritabanı (~55 madde, JS physical_engine.js ile senkron)
   ASP_TOX_1_CAS → Asp.Tox.1 hidrokarbon listesi
 
 Öncelik:
@@ -33,69 +33,193 @@ from dataclasses import dataclass, field
 # Parlama noktaları (°C) — sık kullanılan maddeler
 # None = yanmaz / uygulanamaz
 FLASH_POINT_DB: Dict[str, Optional[float]] = {
-    # Alifatik hidrokarbonlar
-    '110-54-3': -22,   # n-hexane
-    '110-82-7': -18,   # cyclohexane
-    '142-82-5': -4,    # n-heptane
-    '111-65-9': 13,    # n-octane
-    # Aromatikler
-    '71-43-2':  -11,   # benzene
-    '108-88-3': 4,     # toluene
-    '1330-20-7': 27,   # xylene (karışım)
-    '95-47-6':  17,    # o-xylene
-    '106-42-3': 25,    # p-xylene
-    '100-41-4': 21,    # ethylbenzene
-    '95-63-6':  44,    # 1,2,4-trimethylbenzene
-    # Ketonlar / Esterler
-    '67-64-1':  -18,   # acetone
-    '78-93-3':  -9,    # MEK (butanone)
-    '108-10-1': 14,    # MIBK
-    '78-59-1':  84,    # isophorone (>60 → kat yok)
-    '141-78-6': -4,    # ethyl acetate
-    '123-86-4': 22,    # n-butyl acetate
-    # Alkoller
-    '64-17-5':  13,    # ethanol
-    '67-63-0':  12,    # IPA
-    '71-23-8':  23,    # n-propanol
-    '71-36-3':  29,    # n-butanol
-    '78-83-1':  28,    # isobutanol
-    '100-51-6': 93,    # benzyl alcohol (>60)
-    # Glikoleterleri
-    '111-76-2': 62,    # 2-butoxyethanol (Kat3 sınırı!)
-    '112-34-5': 78,    # diethylene glycol monobutyl ether (>60)
-    '107-98-2': 32,    # propylene glycol methyl ether
-    # Petrol / Nafta
-    '64742-47-8': 21,  # naphtha hydrotreated heavy
-    '64742-48-9': -20, # naphtha hydrotreated light
-    '64742-82-1': 61,  # white spirit / stoddard
-    '64742-54-7': 220, # base oil heavy paraffinic (>60 → kat yok)
-    '8052-41-3':  38,  # stoddard solvent
-    # Yanmaz / Uygulanamaz
-    '7732-18-5': None,  # water
-    '7664-93-9': None,  # H2SO4
-    '1310-73-2': None,  # NaOH
-    '7681-52-9': None,  # NaOCl
-    '13463-67-7': None, # TiO2 (katı)
-    '67-66-3':   None,  # chloroform (yanmaz halojenli)
-    '79-01-6':   None,  # trichloroethylene
+    # ── Alifatik / Sikloalifatik Hidrokarbonlar ───────────────────────────────
+    '110-54-3': -22,   # n-hexane        H225
+    '110-82-7': -18,   # cyclohexane     H225
+    '142-82-5': -4,    # n-heptane       H225
+    '111-65-9': 13,    # n-octane        H226
+    '108-87-2': -4,    # methylcyclohexane H225
+    # ── Aromatikler ───────────────────────────────────────────────────────────
+    '71-43-2':  -11,   # benzene         H225
+    '108-88-3': 4,     # toluene         H225
+    '1330-20-7': 27,   # xylene (mix)    H226
+    '95-47-6':  17,    # o-xylene        H226
+    '106-42-3': 25,    # p-xylene        H226
+    '100-41-4': 21,    # ethylbenzene    H226
+    '95-63-6':  44,    # 1,2,4-TMB       H226
+    # ── Ketonlar / Esterler ───────────────────────────────────────────────────
+    '67-64-1':  -18,   # acetone         H225
+    '78-93-3':  -9,    # MEK             H225
+    '108-10-1': 14,    # MIBK            H226
+    '108-94-1': 43,    # cyclohexanone   H226
+    '78-59-1':  84,    # isophorone      >60 → sınıf yok
+    '141-78-6': -4,    # ethyl acetate   H225
+    '123-86-4': 22,    # n-butyl acetate H226
+    # ── Alkoller ──────────────────────────────────────────────────────────────
+    '67-56-1':  11,    # methanol        H225
+    '64-17-5':  13,    # ethanol         H226
+    '67-63-0':  12,    # IPA             H226
+    '71-23-8':  23,    # n-propanol      H226
+    '71-36-3':  29,    # n-butanol       H226
+    '78-83-1':  28,    # isobutanol      H226
+    '78-92-2':  27,    # 2-butanol       H226
+    '75-65-0':  11,    # tert-butanol    H226
+    '123-51-3': 43,    # isoamyl alcohol H226
+    '100-51-6': 93,    # benzyl alcohol  >60 → sınıf yok
+    # ── Glikoller ─────────────────────────────────────────────────────────────
+    '57-55-6':  99,    # propylene glycol      >60 → sınıf yok
+    '107-21-1': 111,   # ethylene glycol       >60 → sınıf yok
+    '111-46-6': 124,   # diethylene glycol     >60 → sınıf yok
+    '25265-71-8': 138, # dipropylene glycol    >60 → sınıf yok
+    '56-81-5':  160,   # glycerol              >60 → sınıf yok
+    # ── Glikol Eterleri ───────────────────────────────────────────────────────
+    '111-76-2': 62,    # 2-butoxyethanol        Kat3 sınırında (H226)
+    '112-34-5': 78,    # DGBE                  >60 → sınıf yok
+    '107-98-2': 32,    # PGME                  H226
+    '34590-94-8': 47,  # DPGME                 H226
+    '110-80-5': 43,    # 2-ethoxyethanol       H226
+    '111-15-9': 56,    # 2-ethoxyethyl acetate H226
+    '109-86-4': 39,    # 2-methoxyethanol      H226
+    # ── Asitler ───────────────────────────────────────────────────────────────
+    '64-19-7':  40,    # glacial acetic acid   H226
+    '64-18-6':  50,    # formic acid           H226
+    '79-09-4':  52,    # propionic acid        H226
+    '107-92-6': 72,    # butyric acid          >60 → sınıf yok
+    '50-21-5':  74,    # lactic acid           >60 → sınıf yok
+    '7664-93-9': None, # H2SO4                 yanmaz
+    '7664-38-2': None, # H3PO4                 yanmaz
+    '7697-37-2': None, # HNO3                  yanmaz
+    '7647-01-0': None, # HCl                   yanmaz
+    '79-11-8':  None,  # chloroacetic acid     yanmaz (katı)
+    '77-92-9':  None,  # citric acid           yanmaz (katı)
+    # ── Aminler ───────────────────────────────────────────────────────────────
+    '141-43-5': 85,    # MEA (ethanolamine)    >60 → sınıf yok
+    '111-42-2': 169,   # DEA                   >60 → sınıf yok
+    '102-71-6': 179,   # TEA                   >60 → sınıf yok
+    '109-89-7': -26,   # diethylamine          H224
+    '75-04-7':  -17,   # ethylamine            H224
+    '124-40-3': None,  # dimethylamine (gaz)   yanmaz çözelti
+    '7664-41-7': None, # ammonium hydroxide    yanmaz çözelti
+    '1336-21-6': None, # ammonia solution      yanmaz
+    # ── Polar Çözücüler ───────────────────────────────────────────────────────
+    '872-50-4': 91,    # NMP                   >60 → sınıf yok
+    '68-12-2':  58,    # DMF                   H226
+    '67-68-5':  95,    # DMSO                  >60 → sınıf yok
+    # ── Petrol / Nafta ────────────────────────────────────────────────────────
+    '64742-47-8': 21,  # naphtha HT heavy      H226
+    '64742-48-9': -20, # naphtha HT light      H225
+    '64742-82-1': 61,  # white spirit          Kat3 sınırında
+    '64742-54-7': 220, # base oil paraffinic   >60 → sınıf yok
+    '8052-41-3':  38,  # stoddard solvent      H226
+    # ── Yanmaz / İnorganik ────────────────────────────────────────────────────
+    '7732-18-5': None, # water
+    '1310-73-2': None, # NaOH
+    '1310-58-3': None, # KOH
+    '7681-52-9': None, # NaOCl
+    '7722-84-1': None, # H2O2 (oksitleyici)
+    '13463-67-7': None,# TiO2 (katı)
+    '67-66-3':   None, # chloroform
+    '79-01-6':   None, # trichloroethylene
+    '75-09-2':   None, # DCM
+    '497-19-8':  None, # Na2CO3
+    '10043-52-4': None,# CaCl2
+    '7647-14-5': None, # NaCl
+    # ── Diğer ─────────────────────────────────────────────────────────────────
+    '50-00-0':   None, # formaldehyde (gaz — formalin çözeltisi olarak kullanılır)
+    '7783-06-4': None, # H2S (yanmaz çözelti)
 }
 
 # İlk kaynama noktaları (°C) — Kat1 tespiti için (BP ≤ 35°C)
-BOILING_POINT_DB: Dict[str, float] = {
-    '110-54-3': 69,    # n-hexane (BP>35 → Kat2 değil Kat1 olmaz)
+# Kaynak: NIST WebBook / Ullmann's Encyclopedia
+# None = sınıflandırmaya dahil edilmez (inorganik/iyonik maddeler, yüksek KN)
+# JS physical_engine.js BP_DB ile senkron
+BOILING_POINT_DB: Dict[str, Optional[float]] = {
+    # ── Alifatik/Aromatik Solventler ─────────────────────────────────────────
+    '110-54-3': 69,    # n-hexane
     '110-82-7': 81,    # cyclohexane
-    '67-64-1':  56,    # acetone
+    '142-82-5': 100,   # n-heptane
+    '111-65-9': 126,   # n-octane
+    '108-87-2': 101,   # methylcyclohexane
     '71-43-2':  80,    # benzene
+    '108-88-3': 111,   # toluene
+    '1330-20-7': 138,  # xylene (mix)
+    '95-47-6':  144,   # o-xylene
+    '106-42-3': 138,   # p-xylene
+    '100-41-4': 136,   # ethylbenzene
+    # ── Ketonlar / Esterler ───────────────────────────────────────────────────
+    '67-64-1':  56,    # acetone
     '78-93-3':  80,    # MEK
-    '67-63-0':  82,    # IPA
+    '108-10-1': 117,   # MIBK
+    '108-94-1': 155,   # cyclohexanone
+    '141-78-6': 77,    # ethyl acetate
+    '123-86-4': 126,   # n-butyl acetate
+    # ── Alkoller ──────────────────────────────────────────────────────────────
+    '67-56-1':  65,    # methanol
     '64-17-5':  78,    # ethanol
+    '67-63-0':  82,    # IPA
     '71-23-8':  97,    # n-propanol
-    '64742-48-9': 60,  # light naphtha (BP≈60 → Kat1 sınırı)
-    # Gerçek Kat1 maddeler (BP ≤ 35°C):
-    # Dietil eter: BP=34.6°C, FP=-45°C → H224
-    '60-29-7':  35,    # diethyl ether
-    '75-09-2':  40,    # DCM (yanmaz ama referans)
+    '71-36-3':  118,   # n-butanol
+    '78-83-1':  108,   # isobutanol
+    '78-92-2':  99,    # 2-butanol
+    '75-65-0':  82,    # tert-butanol
+    '123-51-3': 131,   # isoamyl alcohol
+    '56-81-5':  290,   # glycerol
+    # ── Glikol Eterleri ───────────────────────────────────────────────────────
+    '111-76-2': 171,   # 2-butoxyethanol
+    '107-98-2': 120,   # PGME
+    '34590-94-8': 190, # DPGME
+    '110-80-5': 136,   # 2-ethoxyethanol
+    '111-15-9': 156,   # 2-ethoxyethyl acetate
+    '109-86-4': 124,   # 2-methoxyethanol
+    # ── Glikoller ─────────────────────────────────────────────────────────────
+    '57-55-6':  188,   # propylene glycol
+    '107-21-1': 197,   # ethylene glycol
+    '111-46-6': 244,   # diethylene glycol
+    '25265-71-8': 232, # dipropylene glycol
+    '112-34-5': 230,   # DGBE
+    # ── Asitler ───────────────────────────────────────────────────────────────
+    '64-19-7':  118,   # glacial acetic acid
+    '64-18-6':  101,   # formic acid
+    '79-09-4':  141,   # propionic acid
+    '50-21-5':  122,   # lactic acid
+    # ── Aminler ───────────────────────────────────────────────────────────────
+    '141-43-5': 171,   # MEA
+    '111-42-2': 268,   # DEA
+    '102-71-6': 335,   # TEA
+    '109-89-7': 55,    # diethylamine
+    '75-04-7':  17,    # ethylamine
+    # ── Polar Çözücüler ───────────────────────────────────────────────────────
+    '872-50-4': 202,   # NMP
+    '68-12-2':  153,   # DMF
+    '67-68-5':  189,   # DMSO
+    # ── Halojenli Çözücüler ───────────────────────────────────────────────────
+    '75-09-2':  40,    # DCM
+    '67-66-3':  61,    # chloroform
+    # ── Petrol / Nafta ────────────────────────────────────────────────────────
+    '64742-48-9': 60,  # naphtha HT light (Kat1 sınırı)
+    '64742-47-8': 175, # naphtha HT heavy
+    '8052-41-3': 195,  # stoddard solvent
+    # ── Su ────────────────────────────────────────────────────────────────────
+    '7732-18-5': 100,  # water
+    # ── Gerçek Kat1 maddeler (BP ≤ 35°C) ──────────────────────────────────────
+    '60-29-7':  35,    # diethyl ether (H224)
     '74-98-6':  -42,   # propane (gaz)
+    # ── İnorganik / Yüksek KN — null = hesaba dahil edilmez ──────────────────
+    '1310-73-2': None, # NaOH (KN: 1388°C)
+    '1310-58-3': None, # KOH  (KN: 1327°C)
+    '7681-52-9': None, # NaOCl (ayrışır)
+    '7722-84-1': None, # H2O2 (ayrışır ~150°C)
+    '7664-93-9': None, # H2SO4
+    '7664-38-2': None, # H3PO4
+    '7697-37-2': None, # HNO3
+    '7647-01-0': None, # HCl (gaz)
+    '50-00-0':   None, # formaldehyde (gaz)
+    '497-19-8':  None, # Na2CO3
+    '10043-52-4': None,# CaCl2
+    '7647-14-5': None, # NaCl
+    '1336-21-6': None, # ammonia solution
+    '1305-62-0': None, # Ca(OH)2
+    '1305-78-8': None, # CaO
 }
 
 # Asp. Tox. 1 CAS listesi — hidrokarbon bazlı, düşük viskoziteli

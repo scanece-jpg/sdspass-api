@@ -41,7 +41,8 @@ ORGAN_ALIASES = {
     'renal': 'kidneys',
     'hepatic': 'liver',
     'lung': 'lungs',
-    'respiratory tract': 'lungs',
+    'respiratory tract': 'respiratory tract',   # ayrı organ — akciğerlerle birleştirilmez
+    'respiratory system': 'respiratory system', # CLP H372/H373 ayrı hedef organ
     'eye': 'eyes',
     'gi tract': 'gastro-intestinal tract',
     'gastrointestinal tract': 'gastro-intestinal tract',
@@ -60,6 +61,8 @@ ORGAN_TR = {
     'kidneys':                  'böbrekler',
     'liver':                    'karaciğer',
     'lungs':                    'akciğerler',
+    'respiratory tract':        'solunum yolu',
+    'respiratory system':       'solunum sistemi',
     'eyes':                     'gözler',
     'gastro-intestinal tract':  'gastrointestinal sistem',
     'skin':                     'cilt',

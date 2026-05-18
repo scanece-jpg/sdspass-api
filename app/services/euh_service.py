@@ -125,6 +125,10 @@ EUH066_CAS = {
     '64-18-6',     # formic acid (dilute)
     '107-98-2',    # PGME (1-methoxy-2-propanol)
     '34590-94-8',  # DPGME
+    '108-87-2',    # methylcyclohexane
+    '8052-41-3',   # stoddard solvent
+    '64742-82-1',  # naphtha, light aromatic
+    '64742-89-8',  # naphtha, light aliphatic
 }
 
 # ─── EUH201 — Kurşun ─────────────────────────────────────────────────────────

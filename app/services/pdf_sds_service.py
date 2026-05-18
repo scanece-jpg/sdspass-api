@@ -1995,8 +1995,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     pack_grp = t_src.get('packing_group', '—')
     # Çevre tehlikesi — H kodlarına göre otomatik tespit
     env_h_codes = {
-        'H400','H401','H410','H411','H412','H413',  # Sucul
-        'H420',                                       # Ozon
+        'H400','H401','H410','H411',  # Sucul — ADR 2.2.9.1.10: sadece Akut 1, Kron. 1, Kron. 2
+        'H420',                       # Ozon
+        # H412 (Kron. 3) ve H413 (Kron. 4) ADR 2.2.9.1.10 kapsamı dışı — kaldırıldı
     }
     is_env_hazard = any(h in h_codes for h in env_h_codes)
 

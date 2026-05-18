@@ -882,6 +882,22 @@ _CLASS_CATEGORY = {
 # Birden fazla alt-kategorisi olanlar (H300 Tox.1/2, H350 1A/1B vb.) buraya EKLENMEZ
 # çünkü alt-kategori bilgisi sadece DB'de vardır.
 H_CODE_TO_CANONICAL_CLASS: dict = {
+    # ── Fiziksel tehlikeler — physical_hazard_service.py / PhysicalEngine ────────
+    # Bu kodların h_class'ı component hazards listesinde yoksa (fiziksel motor sonucu)
+    # boş kalır; buradaki canonical değer PDF sınıflandırma tablosunu düzeltir.
+    'H220': 'Flam. Gas 1A',
+    'H221': 'Flam. Gas 2',
+    'H222': 'Aerosol 1',
+    'H223': 'Aerosol 3',
+    'H224': 'Flam. Liq. 1',
+    'H225': 'Flam. Liq. 2',
+    'H226': 'Flam. Liq. 3',   # ← fiziksel motor / kullanıcı FP girişi için kritik
+    'H232': 'Flam. Gas 1A',   # Pirofor gaz
+    'H271': 'Ox. Liq. 1',
+    'H304': 'Asp. Tox. 1',    # aspirasyon toksisitesi — karışım seviyesi
+    # ── Çevresel tehlikeler — eco_engine.js / ecological_service.py ─────────────
+    'H410': 'Aquatic Chronic 1',  # ← eksikti; H411/H412/H413 listede vardı
+    # ── Sağlık tehlikeleri — tek kategorili (canonical) H kodları ────────────────
     'H315': 'Skin Irrit. 2',
     'H316': 'Skin Irrit. 3',
     'H317': 'Skin Sens. 1',

@@ -205,6 +205,17 @@ def validate_sds(
         info("V015","B16",
              "GBF Hazırlayıcı sertifika numarası girilmemiş. KKDİK kapsamında zorunludur. (V015)")
 
+    # V016: Çözünürlük > Yoğunluk → fiziksel imkânsız
+    # Max çözünürlük (mg/L) = yoğunluk (g/mL) × 1.000.000 (= %100 saf maddenin yoğunluğu)
+    sol_num = _f(phys_props.get("solubility"))
+    if sol_num is not None and density is not None and sol_num > (density * 1e6):
+        warn("V016","B9",
+             f"Çözünürlük {sol_num:,.0f} mg/L, yoğunluktan "
+             f"({density * 1e6:,.0f} mg/L = {density} g/mL) büyük — fiziksel olarak imkânsız. "
+             f"Muhtemelen birim dönüşüm hatası (g/mL ↔ mg/L karışıklığı) veya yanlış veri. "
+             f"Değeri kontrol edin.",
+             "Fizik: max çözünürlük ≤ yoğunluk × 1.000.000 mg/L")
+
     return issues
 
 

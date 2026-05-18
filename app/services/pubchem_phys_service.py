@@ -253,6 +253,26 @@ async def fetch_phys(cas: str) -> dict:
         print(f"[PubChemPhys] CAS {cas} hatası: {e}")
         return {}
 
+    # ── Son işlem: Çözünürlük × Yoğunluk çapraz kontrolü ────────────────────────
+    # Fiziksel kural: max çözünürlük (mg/L) = yoğunluk (g/mL) × 1.000.000
+    # Yani 1 litre %100 saf madde = yoğunluk × 1L = yoğunluk_mg_L
+    # Bu sınırı aşan çözünürlük birim hatasından kaynaklanıyordur (g/mL → mg/L karışıklığı).
+    if 'solubility' in props and 'density' in props:
+        density_mg_l = props['density'] * 1e6   # g/mL → mg/L
+        sol_val      = props['solubility']
+        MISCIBLE_PLACEHOLDER = 1e6              # "miscible" için atanan sabit değer
+        if sol_val != MISCIBLE_PLACEHOLDER and sol_val > density_mg_l:
+            original_sol = sol_val
+            # Gerçekçi düzeltme: yoğunluk değerine kırp + metin uyarısı ekle
+            props['solubility'] = round(density_mg_l, 1)
+            existing_text = props.get('solubility_text', '')
+            props['solubility_text'] = (
+                f"{existing_text} "
+                f"[Ham değer {original_sol:,.0f} mg/L → yoğunluktan "
+                f"({density_mg_l:,.0f} mg/L) büyük, birim hatası olası; "
+                f"yoğunluk üst sınırına göre düzeltildi]"
+            ).strip()
+
     # Önbelleğe kaydet (boş sonuç kaydedilmez)
     if props:
         try:

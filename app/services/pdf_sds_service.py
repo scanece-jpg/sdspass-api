@@ -114,7 +114,7 @@ from app.services.i18n_sds import (
 from app.services.reach_db import get_reg_no, get_ec_no
 from app.services.codes_i18n import get_h, get_euh, get_p, get_ppe, get_sentence, translate_hclass, translate_hclass_list, EUH_STMTS, correct_hclass
 from app.services.ghs_pictogram import get_ghs_codes, pictogram_table
-from app.services.transport_adr_service import get_adr_details, auto_detect_un
+from app.services.transport_adr_service import get_adr_details
 from app.services.tr_oel_service import get_oel_table, format_oel_row
 from app.services.tr_mevzuat_service import get_section15_text, get_disposal_regulation
 from app.services.gbf_author_service import format_author_block, validate_certificate

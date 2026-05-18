@@ -579,21 +579,50 @@ async def calculate_clp(db: AsyncSession, components: List[Any]) -> Dict:
         })
 
     # ─── ADIM 1: ATE TOPLAMA ────────────────────────────────────────────
+    # CLP Annex I 3.1.3.6.2.3 — Revize formül:
+    #   Bilinmeyen bileşenler ≤ %10 → ATEmix = 100 / Σ(Ci/ATEi)
+    #   Bilinmeyen bileşenler > %10 → ATEmix = (100 − ΣC_unknown) / Σ(Ci/ATEi)  [ZORUNLU]
+    #
+    # "Bilinmiyor" tanımı (kaynak güvenilirliğine göre):
+    #   • Veri yok / DB'de bulunamadı           → bilinmiyor
+    #   • Kaynak priority ≥ 4 (C&L/tedarikçi) ve Acute Tox. yok → bilinmiyor
+    #   • Kaynak priority ≤ 2 (Annex VI) ve Acute Tox. yok      → resmi değerlendirme: ATE = 5000
     ate_routes = list(ATE_DEFAULTS.keys())
     ate_sum = {r: 0.0 for r in ate_routes}
+    unknown_conc = 0.0   # Akut toksisitesi bilinmeyen bileşenlerin toplam %'si
+    ate_annex_vi_5000 = []   # Annex VI kaynaklı ATE=5000 bileşenler (uyarı için)
 
     for item in enriched:
-        if not item['data']:
-            continue
-        data = item['data']
         conc_frac = item['conc'] / 100
+        data = item['data']
+
+        # ── Veri yok → tamamen bilinmiyor ─────────────────────────────────
+        if not data or data.get('source') == 'not_found':
+            unknown_conc += item['conc']
+            continue
+
+        # ── Bileşenin Acute Tox. sınıflandırması var mı? ──────────────────
+        has_acute_tox = any(
+            haz.get('h_class', '').replace('*', '').strip().startswith('Acute Tox.')
+            for haz in data.get('hazards', [])
+        )
+
+        if not has_acute_tox:
+            source_priority = data.get('source_priority', 4)
+            if source_priority <= 2:
+                # Annex VI resmi değerlendirmesi: akut toksik değil → ATE = 5000 (tüm rotalar)
+                for route in ate_routes:
+                    ate_sum[route] += conc_frac / 5000.0
+                ate_annex_vi_5000.append(item['name'] or item['cas'])
+            else:
+                # C&L / tedarikçi verisi: yetersiz bilgi → bilinmiyor
+                unknown_conc += item['conc']
+            continue
+
+        # ── Acute Tox. var → normal ATE hesabı ────────────────────────────
         # Kullanıcı spesifik ATE her zaman öncelikli (test verisi)
-        # Önce Annex VI/C&L, üstüne kullanıcı verisi override
         base_ate = data.get('ate', {}) or {}
         combined_ate = {**base_ate, **item['user_ate']}
-        # Kullanıcı veri girdiyse log
-        if item['user_ate']:
-            pass  # API response'a detay eklenebilir
 
         for haz in data.get('hazards', []):
             hc = haz.get('h_class', '').replace('*', '').strip()
@@ -601,15 +630,13 @@ async def calculate_clp(db: AsyncSession, components: List[Any]) -> Dict:
                 continue
 
             # Rotayı H kodundan belirle — oral/dermal/inhalasyon ayrı hesaplanır.
-            # Eski kod tüm rotaları deniyordu: oral bileşen dermal/inhalasyon
-            # toplamına da ekleniyordu → çapraz kirlilik → yanlış H kodu.
             h_code_raw = haz.get('h_code', '').split('(')[0].split()[0].strip()
             base_route = _H_CODE_TO_ROUTE.get(h_code_raw)
             if not base_route:
-                # H kodu yoksa veya tanınmıyorsa tüm rotalara dağıt (eski güvenli yol)
+                # H kodu tanınmıyorsa tüm rotalara dağıt
                 routes_to_process = ate_routes
             elif base_route == 'inhalation':
-                # İnhalasyon: spesifik alt-rota varsa onu kullan, yoksa vapour/dust ikisi
+                # İnhalasyon: spesifik alt-rota varsa onu kullan
                 if combined_ate.get('inhalation_vapour'):
                     routes_to_process = ['inhalation_vapour', 'inhalation']
                 elif combined_ate.get('inhalation_dust'):
@@ -624,10 +651,28 @@ async def calculate_clp(db: AsyncSession, components: List[Any]) -> Dict:
                 if ate_val and ate_val > 0:
                     ate_sum[route] += conc_frac / ate_val
 
+    # ── Bilinmeyen bileşen uyarıları ──────────────────────────────────────
+    if unknown_conc > 0:
+        warnings.append(
+            f"ATEmix: Karışımın %{unknown_conc:.1f}'i için akut toksisite verisi "
+            f"güvenilir kaynakta bulunamamıştır "
+            f"({'Revize formül uygulandı — CLP 3.1.3.6.2.3' if unknown_conc > 10 else 'Standart formül kullanıldı'})."
+        )
+    if ate_annex_vi_5000:
+        warnings.append(
+            f"ATEmix: {len(ate_annex_vi_5000)} bileşen ({', '.join(ate_annex_vi_5000[:3])}"
+            f"{'...' if len(ate_annex_vi_5000) > 3 else ''}) Annex VI'da akut toksik "
+            f"sınıflandırılmamış → ATE=5000 alındı (muhafazakâr)."
+        )
+
     for route, total in ate_sum.items():
         if total <= 0:
             continue
-        mix_ate = 100 / total
+        # CLP 3.1.3.6.2.3: Bilinmeyen bileşenler > %10 → revize formül ZORUNLU
+        if unknown_conc > 10.0:
+            mix_ate = (100.0 - unknown_conc) / total
+        else:
+            mix_ate = 100.0 / total
         # Sınıflandırma için CLP Tablo 3.1.1 kategori üst sınırlarını kullan
         # (ATE_DEFAULTS nokta tahminleri FORMÜL için, SINIFLANDIRMA için değil)
         thresholds = ATE_THRESHOLDS.get(route, {})
@@ -645,7 +690,12 @@ async def calculate_clp(db: AsyncSession, components: List[Any]) -> Dict:
                 'cas': 'KARIŞIM', 'name': f'ATE ({route})',
                 'conc': '-', 'h_class': f'Acute Tox. {cat_num}', 'h_code': hcode,
                 'cutoff_used': f'ATE={mix_ate:.1f}',
-                'passed': True, 'reason': f'Karışım ATE={mix_ate:.1f} ≤ {thresholds.get(cat_num)} (Tablo 3.1.1 Kat{cat_num})',
+                'passed': True,
+                'reason': (
+                    f'Karışım ATE={mix_ate:.1f} ≤ {thresholds.get(cat_num)} (Tablo 3.1.1 Kat{cat_num})'
+                    + (f' [Revize formül: %{unknown_conc:.1f} bilinmiyor — CLP 3.1.3.6.2.3]'
+                       if unknown_conc > 10.0 else '')
+                ),
             })
             passed_h_codes.add(hcode)
             passed_pictograms.add(pic)

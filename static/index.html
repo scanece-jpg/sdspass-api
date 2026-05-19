@@ -3262,12 +3262,13 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
       const v = _val(tp[k]);
       if (v !== null && v !== undefined) flatPhys[k] = v;
     });
-    // Çözünürlük özel: sayısal değer yoksa açıklama metnini kullan
+    // Çözünürlük özel: açıklama metni varsa öncelikli kullan (sınıf + değer birlikte)
+    // Örn: "Çözünür (>10 g/L), tahmini ~928676.6 mg/L" — DIPL önceki sürümlerle tutarlı
     if (flatPhys.solubility === undefined) {
-      if (tp?.solubility?.value != null) {
-        flatPhys.solubility = tp.solubility.value; // sayısal mg/L
-      } else if (tp?.solubility?.text) {
-        flatPhys.solubility = tp.solubility.text;  // açıklama metni
+      if (tp?.solubility?.text) {
+        flatPhys.solubility = tp.solubility.text;  // açıklama metni (sınıf + değer)
+      } else if (tp?.solubility?.value != null) {
+        flatPhys.solubility = tp.solubility.value; // sadece sayısal mg/L
       }
     }
 

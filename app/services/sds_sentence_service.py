@@ -123,12 +123,16 @@ def format_section3_component(
           'note': str,          # Gizleme notu
         }
     """
+    import re as _re
     cas = comp.get('cas_no', comp.get('cas', '')).strip()
     # Türkçe SDS → name_tr öncelikli, yoksa name
     if lang == 'TR':
         name = comp.get('name_tr', '') or comp.get('name', '') or cas
     else:
         name = comp.get('name', '') or cas
+    # CLP Ek-VI notasyonu temizliği: "sülfürik asit ... %" → "sülfürik asit"
+    # (Bazı maddelerde konsantrasyon-bağımlı sınıflandırma için "... %" eklenir)
+    name = _re.sub(r'\s*[ \s]*\.\.\.[ \s]*%\s*$', '', name).strip()
     conc = float(comp.get('worst_case_conc', comp.get('conc', comp.get('concentration', 0))) or 0)
     hazards = comp.get('hazards', [])
     # Tekrar eden h_class değerleri gider; h_code'dan yetkili h_class türet (DB bozukluğuna karşı)

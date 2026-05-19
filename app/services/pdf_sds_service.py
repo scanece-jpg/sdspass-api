@@ -756,6 +756,20 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     usage_desc = product.get('usage_desc',
         S(lang,'usage_default'))
     story.append(Paragraph(usage_desc or S(lang,'usage_default'), styles['body']))
+
+    # Kullanım tipi etiketi — REACH Annex II §1.2 / KKDİK Ek-2
+    _usage_val = product.get('usage', 'industrial')
+    _usage_labels = {
+        'industrial':   ('Endüstriyel kullanım',    'Industrial use'),
+        'professional': ('Profesyonel kullanım',    'Professional use'),
+        'consumer':     ('Tüketici kullanımı',      'Consumer use'),
+    }
+    _usage_lbl_tr, _usage_lbl_en = _usage_labels.get(_usage_val, ('Endüstriyel kullanım', 'Industrial use'))
+    _usage_lbl = _usage_lbl_tr if lang == 'TR' else _usage_lbl_en
+    story.append(Paragraph(
+        f"<b>{'Kullanım kategorisi' if lang=='TR' else 'Use category'}:</b> {_usage_lbl}",
+        styles['body']
+    ))
     story.append(Spacer(1, 3))
 
     story += sub_block(f"1.3 {sub_title(lang,'1.3')}", styles)
@@ -2188,6 +2202,23 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
 
     for line in (regulatory_text or '').split('\n'):
         story.append(Paragraph(line, styles['body']))
+
+    # ── Kullanım tipine göre ek mevzuat notu ─────────────────────────────────
+    if _usage_val == 'consumer' and lang == 'TR':
+        story.append(Spacer(1, 4))
+        story.append(Paragraph(
+            '• Bu ürün tüketici kullanımına yönelik olup 7223 sayılı Ürün Güvenliği ve '
+            'Teknik Düzenlemeler Kanunu kapsamında değerlendirilir. '
+            'Ürün güvenliği gereklilikleri bakımından Ticaret Bakanlığı denetimine tabidir.',
+            styles['body']
+        ))
+    elif _usage_val == 'consumer' and not is_us:
+        story.append(Spacer(1, 4))
+        story.append(Paragraph(
+            '• This product is intended for consumer use and may be subject to applicable '
+            'consumer product safety legislation in the country of sale.',
+            styles['body']
+        ))
 
     # ── SVHC Kontrolü — REACH Madde 33 / KKDİK Madde 35 ────────────────────
     try:

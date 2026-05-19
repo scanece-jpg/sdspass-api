@@ -1475,11 +1475,18 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
 
     # Opsiyonel satırları — sadece değer varsa göster
     # Katı/toz formlar için erime noktası zorunlu (KKDİK Ek-2 §9)
+    # Gaz formda parlama noktası ve kaynama noktası uygulanamaz — her zaman gizle
     _prod_form = product.get('form', '')
     _is_solid_form = _prod_form in ('solid', 'powder')
+    _is_gas_form   = _prod_form == 'gas'
+    _fp_lbl = phys_prop(lang, 'flash_point')
+    _bp_lbl = phys_prop(lang, 'boiling_point')
     _optional = {_rd_lbl, _vd_lbl, _ai_lbl, _ex_lbl, _ot_lbl, _dc_lbl, _er_lbl, _kow_lbl}
     if not _is_solid_form:
         _optional.add(_mp_lbl)
+    if _is_gas_form:
+        _optional.add(_fp_lbl)
+        _optional.add(_bp_lbl)
     phys_rows = [r for r in all_phys_rows if r[1] != na or r[0] not in _optional]
 
     story.append(data_table(phys_rows, [75*mm, 105*mm], styles, header=False))

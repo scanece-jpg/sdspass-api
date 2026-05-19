@@ -854,8 +854,8 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
           <div id="warn_fp" class="thresh-warn"></div>
         </div>
 
-        <!-- Kaynama Noktası: sıvı, pasta, aerosol -->
-        <div class="phys-fw" data-forms="liquid paste aerosol">
+        <!-- Kaynama Noktası: sıvı, pasta, aerosol, gaz -->
+        <div class="phys-fw" data-forms="liquid paste aerosol gas">
           <div class="phys-fh">
             <label>Kaynama Noktası (°C) <span class="motor-badge">● motor</span><span id="src_bp" class="src-badge"></span></label>
             <label class="na-check"><input type="checkbox" id="na_bp" onchange="toggleNA(this,'tf_bp','bp')"> N/A</label>
@@ -3111,6 +3111,14 @@ function _checkPDFMandatory() {
     const mpEl = document.getElementById('tf_mp');
     if (!mpEl?.value?.trim()) {
       missing.push({ label: 'Erime/Donma Noktası', reason: 'Katı/toz formlar için zorunlu — KKDİK Ek-2 §9.1' });
+    }
+  }
+
+  // 5. Yoğunluk — gaz formlar için zorunlu (buhar yoğunluğu / bağıl yoğunluk)
+  if (form === 'gas') {
+    const densEl = document.getElementById('tf_density');
+    if (!densEl?.value?.trim()) {
+      missing.push({ label: 'Yoğunluk / Buhar Yoğunluğu', reason: 'Gaz formlar için zorunlu — KKDİK Ek-2 §9.1' });
     }
   }
 

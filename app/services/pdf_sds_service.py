@@ -127,8 +127,8 @@ from app.services.sds_sentence_service import (
 
 C_SECTION_BG    = HexColor('#000000')   # Bölüm başlık arkaplan (siyah)
 C_SECTION_TEXT  = HexColor('#ffffff')   # Bölüm başlık yazı (beyaz)
-C_SUB_BG        = HexColor('#e8ecf0')   # Alt başlık arkaplan
-C_SUB_TEXT      = HexColor('#1a1f2e')   # Alt başlık yazı
+C_SUB_BG        = HexColor('#000000')   # Alt başlık arkaplan (siyah — bölüm başlıklarıyla uyumlu)
+C_SUB_TEXT      = HexColor('#ffffff')   # Alt başlık yazı (beyaz)
 C_DANGER        = HexColor('#cc0000')
 C_WARNING       = HexColor('#ff8c00')
 C_BORDER        = HexColor('#cccccc')
@@ -496,7 +496,7 @@ def section_block(title: str, styles: dict) -> list:
 
 
 def sub_block(title: str, styles: dict) -> list:
-    """Açık gri alt başlık bloğu"""
+    """Siyah zemin üzerine beyaz yazı alt başlık bloğu (bölüm başlıklarıyla uyumlu)"""
     tbl = Table(
         [[Paragraph(title, styles['sub_title'])]],
         colWidths=[PAGE_W],
@@ -506,7 +506,6 @@ def sub_block(title: str, styles: dict) -> list:
         ('TOPPADDING', (0,0), (-1,-1), 3),
         ('BOTTOMPADDING', (0,0), (-1,-1), 3),
         ('LEFTPADDING', (0,0), (-1,-1), 6),
-        ('LINEBELOW', (0,0), (-1,-1), 0.5, C_BORDER),
     ]))
     return [tbl, Spacer(1, 2)]
 
@@ -1176,10 +1175,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 _clf_para,
             ])
 
-        # Toplam 175mm: CAS(35) + Ad(56) + Konst.(25) + Sınıf(59)
-        # Not: 18mm çok dar, "Konsantrasyon" başlığı bölünüyordu → 25mm'ye çıkarıldı
+        # Toplam 175mm: CAS(35) + Ad(51) + Konst.(30) + Sınıf(59)
+        # Not: 18mm çok dar, 25mm de "Konsantrasyo n" bölünüyordu → 30mm'ye çıkarıldı
         story.append(data_table(tbl_data,
-            [35*mm, 56*mm, 25*mm, 59*mm], styles))
+            [35*mm, 51*mm, 30*mm, 59*mm], styles))
         # REACH eksik not
         if missing_reach:
             story.append(Paragraph(

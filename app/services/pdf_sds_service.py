@@ -940,21 +940,6 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     else:
         story.append(Paragraph(term(lang,'not_classified'), styles['body']))
 
-    # H314 nötralizasyon notu — kullanıcı kaldırmayı seçtiyse
-    if _h314_removed:
-        ph_val = sds_data.get('phys_props', {}).get('ph', '—')
-        _note = (
-            f'<font color="#cc6600"><b>⚠ Not:</b></font> H314 (Cilt Aş. 1A) sınıflandırması '
-            f'kullanıcı kararıyla kaldırılmıştır. Gerekçe: Karışımın ölçülen pH\'ı ({ph_val}) '
-            f'nötralizasyon gerçekleştiğini göstermektedir. '
-            f'KKDİK Ek-1 §3.2.3.3 — tepkimeye girmemiş serbest bileşen konsantrasyonları esas alınmıştır.'
-        ) if lang == 'TR' else (
-            f'<font color="#cc6600"><b>⚠ Note:</b></font> H314 classification removed by user decision. '
-            f'Rationale: measured pH ({ph_val}) indicates acid-base neutralisation has occurred. '
-            f'KKDİK Annex I §3.2.3.3 — based on unreacted free component concentrations.'
-        )
-        story.append(Spacer(1, 4))
-        story.append(Paragraph(_note, styles['small']))
 
     story.append(Spacer(1, 3))
 

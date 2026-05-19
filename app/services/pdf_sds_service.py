@@ -1034,6 +1034,50 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 txt = get_p(lang, m) or P_TEXTS.get(m, m)
                 story.append(Paragraph(f"• <b>{m}:</b> {txt}", styles['bullet']))
 
+    # ─── SEA §3.1.3.6.2.2 — Zorunlu ibare: bilinmeyen akut toksisite ≥%1 ─────────
+    # Trigger: herhangi bir bilinmeyen bileşen bireysel olarak ≥%1 konsantrasyonda
+    # statementNeeded bayrağı JS motorundan gelir; yoksa unknownPct≥1'den türet
+    _stmt_needed = False
+    _unk_pct_for_stmt = 0.0
+    if ate_mix_details:
+        for _rd in ate_mix_details.values():
+            if _rd.get('statementNeeded', False):
+                _stmt_needed = True
+            _upct = float(_rd.get('unknownPct', 0) or 0)
+            if _upct > _unk_pct_for_stmt:
+                _unk_pct_for_stmt = _upct
+        # Fallback: statementNeeded bayrağı yoksa unknownPct≥1 kontrolü yap
+        if not _stmt_needed and _unk_pct_for_stmt >= 1.0:
+            _stmt_needed = True
+    # Bileşen listesinden doğrudan da türet (her iki motor için güvence)
+    if not _stmt_needed:
+        for _cmp in components:
+            _cmp_conc = float(_cmp.get('concentration') or _cmp.get('conc') or 0)
+            if _cmp_conc < 1.0:
+                continue
+            _cmp_annex = _cmp.get('annex_vi', False)
+            _cmp_ate_unk = _cmp.get('ate_unknown', False)
+            _cmp_ate_dict = _cmp.get('ate_dict') or {}
+            _has_acute = any(
+                (h.get('h_code','') or '').replace('*','').strip()[:4]
+                in {'H300','H301','H302','H310','H311','H312','H330','H331','H332'}
+                for h in _cmp.get('hazards', [])
+            )
+            _has_user_ate = bool(_cmp_ate_dict.get('oral') or _cmp_ate_dict.get('dermal') or _cmp_ate_dict.get('inhal'))
+            if _cmp_ate_unk or (not _has_acute and not _cmp_annex and not _has_user_ate):
+                _stmt_needed = True
+                _unk_pct_for_stmt += _cmp_conc
+    if _stmt_needed:
+        _unk_x = round(_unk_pct_for_stmt, 1) if _unk_pct_for_stmt > 0 else '?'
+        if lang == 'TR':
+            _stmt_text = (f"Karışımın %{_unk_x}'i bilinmeyen akut toksisiteye sahip "
+                          f"bileşenlerden oluşmaktadır.")
+        else:
+            _stmt_text = (f"{_unk_x}% of the mixture consists of ingredient(s) of "
+                          f"unknown acute toxicity.")
+        story.append(Spacer(1, 4))
+        story.append(Paragraph(f"<b>{_stmt_text}</b>", styles['body']))
+
     # ─── Duyarlılaştırıcı Madde Kimliği — CLP Ek II §2.8 (ZORUNLU) ─────────────
     # §2.8 yalnızca Skin Sens. (H317) ve Resp. Sens. (H334) için zorunludur.
     # H319, H411 vb. için madde adı etikette ZORUNLU DEĞİL (denetim hatası).
@@ -1728,7 +1772,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     ate_mix_details = sds_data.get('ate_mix_details', {})
 
     # Backend fallback: frontend boş gönderirse backend hesapla
-    # CLP Ek I §3.1.3 — ATEmix = 100 / Σ(Ci/ATEi)
+    # CLP Ek I §3.1.3 — SEA §3.1.3.6.2.2/3 — revize formül + zorunlu ibare desteği
     if not ate_mix_details and comp_has_acute:
         _ATE_POINT = {
             'H300': 0.5, 'H301': 100.0, 'H302': 500.0,
@@ -1746,6 +1790,25 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             'dermal': [(50,'H310'),(200,'H310'),(1000,'H311'),(2000,'H312')],
             'inhal':  [(0.5,'H330'),(2.0,'H330'),(10,'H331'),(20,'H332')],
         }
+        # ── Ön: bilinmeyen konsantrasyonları say ──
+        _fb_unknown_conc = 0.0
+        _fb_stmt_needed  = False
+        _ACUTE_CODES_ALL = {'H300','H301','H302','H310','H311','H312','H330','H331','H332'}
+        for _ci in sds_data.get('components', []):
+            _cc = float(_ci.get('concentration') or _ci.get('conc') or 0)
+            if _cc <= 0: continue
+            _ci_annex    = _ci.get('annex_vi', False)
+            _ci_ate_unk  = _ci.get('ate_unknown', False)
+            _ci_ate_dict = _ci.get('ate_dict') or {}
+            _ci_has_acute = any(
+                (h.get('h_code','') or '').replace('*','').strip()[:4] in _ACUTE_CODES_ALL
+                for h in _ci.get('hazards', [])
+            )
+            _ci_has_user_ate = bool(_ci_ate_dict.get('oral') or _ci_ate_dict.get('dermal') or _ci_ate_dict.get('inhal'))
+            if _ci_ate_unk or (not _ci_has_acute and not _ci_annex and not _ci_has_user_ate):
+                _fb_unknown_conc += _cc
+                if _cc >= 1.0:
+                    _fb_stmt_needed = True
         for route, code_set in _ATE_ROUTES.items():
             sum_inv = 0.0
             ate_comps_r = []
@@ -1754,38 +1817,56 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                              comp_item.get('conc') or 0)
                 if conc <= 0:
                     continue
-                for hz in comp_item.get('hazards', []):
-                    code = (hz.get('h_code') or '').replace('*','').strip()[:4]
-                    if code not in code_set:
-                        continue
-                    hclass = (hz.get('h_class') or '').replace('*','').strip()
-                    ate = _ATE_POINT.get(code)
-                    if ate is None:
-                        continue
-                    if hclass == 'Acute Tox. 2' and code in _ATE_CAT2:
-                        ate = _ATE_CAT2[code]
-                    sum_inv += conc / ate
-                    ate_comps_r.append({
-                        'name': comp_item.get('name',''),
-                        'conc': conc,
-                        'code': code,
-                        'ate':  ate,
-                    })
-                    break  # her bileşenden yol başına tek katkı
+                _ate_unk  = comp_item.get('ate_unknown', False)
+                _ate_dict = comp_item.get('ate_dict') or {}
+                _annex_vi = comp_item.get('annex_vi', False)
+                found_chip = False
+                if not _ate_unk:
+                    for hz in comp_item.get('hazards', []):
+                        code = (hz.get('h_code') or '').replace('*','').strip()[:4]
+                        if code not in code_set:
+                            continue
+                        hclass = (hz.get('h_class') or '').replace('*','').strip()
+                        ate = _ATE_POINT.get(code)
+                        if ate is None:
+                            continue
+                        if hclass == 'Acute Tox. 2' and code in _ATE_CAT2:
+                            ate = _ATE_CAT2[code]
+                        sum_inv += conc / ate
+                        ate_comps_r.append({'name': comp_item.get('name',''), 'conc': conc, 'code': code, 'ate': ate})
+                        found_chip = True
+                        break  # her bileşenden yol başına tek katkı
+                if not found_chip and not _ate_unk:
+                    # Kullanıcı ATE değeri
+                    _user_ate_val = _ate_dict.get(route)
+                    if _user_ate_val and float(_user_ate_val) > 0:
+                        _uav = float(_user_ate_val)
+                        sum_inv += conc / _uav
+                        ate_comps_r.append({'name': comp_item.get('name',''), 'conc': conc, 'code': 'user', 'ate': _uav, 'userProvided': True})
+                        found_chip = True
+                    elif _annex_vi:
+                        sum_inv += conc / 5000.0
+                        ate_comps_r.append({'name': comp_item.get('name',''), 'conc': conc, 'code': '—', 'ate': 5000, 'annexVi': True})
+                        found_chip = True
             if sum_inv <= 0:
                 continue
-            ate_mix_val = round(100.0 / sum_inv, 1)
+            # SEA §3.1.3.6.2.3 revize formül
+            if _fb_unknown_conc > 10.0:
+                ate_mix_val = round((100.0 - _fb_unknown_conc) / sum_inv, 1)
+            else:
+                ate_mix_val = round(100.0 / sum_inv, 1)
             result_code = None
             for threshold, h in _ATE_CLASSIFY[route]:
                 if ate_mix_val <= threshold:
                     result_code = h
                     break
-            known_conc = sum(c['conc'] for c in ate_comps_r)
             ate_mix_details[route] = {
-                'ateMix':      ate_mix_val,
-                'resultCode':  result_code,
-                'unknownPct':  round(max(0.0, 100.0 - known_conc), 1),
-                'components':  ate_comps_r,
+                'ateMix':         ate_mix_val,
+                'resultCode':     result_code,
+                'unknownPct':     round(_fb_unknown_conc, 1),
+                'revisedFormula': _fb_unknown_conc > 10.0,
+                'statementNeeded': _fb_stmt_needed,
+                'components':     ate_comps_r,
             }
 
     _ROUTE_LABEL_TR = {'oral': 'Oral (Ağız)', 'dermal': 'Dermal (Deri)', 'inhal': 'İnhalasyon (Solunum)'}

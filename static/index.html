@@ -1318,13 +1318,35 @@ function addComp(pf = {}) {
       <div><label>M-Faktör (Kronik)</label><input type="number" class="mfc-input" id="mfc${id}" placeholder="1" min="1" value="1"></div>
       <div></div>
       <div></div>
-    </div>`;
+    </div>
+    <details style="margin-top:6px">
+      <summary style="font-size:11px;color:var(--text3);cursor:pointer;user-select:none;list-style:none;display:flex;align-items:center;gap:4px">▸ ATE Değerleri / Bilinmiyor Beyanı (SEA §3.1.3.6.2.2)</summary>
+      <div style="margin-top:6px;padding:8px;background:var(--bg2);border-radius:6px;border:1px solid var(--border2)">
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:12px;margin-bottom:6px">
+          <input type="checkbox" id="ate_unk${id}" onchange="toggleAteFields(${id})">
+          <span>Akut toksisite <b>bilinmiyor</b> — kullanışlı bilgi yok</span>
+        </label>
+        <div id="ate_fields${id}">
+          <div class="cw-row3">
+            <div><label style="font-size:11px">LD50 Oral (mg/kg)</label><input type="number" class="ate-oral-input" id="ate_oral${id}" placeholder="—" min="0" step="any" style="width:100%;padding:5px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:12px;box-sizing:border-box"></div>
+            <div><label style="font-size:11px">LD50 Dermal (mg/kg)</label><input type="number" class="ate-dermal-input" id="ate_dermal${id}" placeholder="—" min="0" step="any" style="width:100%;padding:5px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:12px;box-sizing:border-box"></div>
+            <div><label style="font-size:11px">LC50 İnhalasyon (mg/L/4h)</label><input type="number" class="ate-inhal-input" id="ate_inhal${id}" placeholder="—" min="0" step="any" style="width:100%;padding:5px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:12px;box-sizing:border-box"></div>
+          </div>
+        </div>
+      </div>
+    </details>`;
   document.getElementById('comps').appendChild(div);
   if (pf.hazards) pf.hazards.forEach(h => addChip(id, h.h_class, h.h_code, h._annex_supplement));
   return id;
 }
 
 function delComp(id) { document.getElementById('cw'+id)?.remove(); updateConcTotal(); }
+
+function toggleAteFields(id) {
+  const unk    = document.getElementById('ate_unk' + id);
+  const fields = document.getElementById('ate_fields' + id);
+  if (fields) fields.style.display = (unk && unk.checked) ? 'none' : '';
+}
 
 function updateConcTotal() {
   const comps = getComps();
@@ -1951,7 +1973,15 @@ function getComps() {
     // Annex VI bayrağı — component-manager tarafından CAS sorgusunda kaydedilir
     // CLP 3.1.3.6.2.3 revize formül hesabı için clp_engine.js okur
     const annexVi = w.querySelector('.cc')?.dataset?.annexVi === '1';
-    return { cas, name, name_tr, conc, concMin, concMax, concStr, hazards, ec, reach, m_factors:{ acute: mf, chronic: mfc }, scl, annex_vi: annexVi };
+    // ATE kullanıcı beyanı — SEA §3.1.3.6.2.2
+    const ate_unknown = document.getElementById('ate_unk' + cwId)?.checked || false;
+    const ate_oral_v   = parseFloat(document.getElementById('ate_oral'   + cwId)?.value) || null;
+    const ate_dermal_v = parseFloat(document.getElementById('ate_dermal' + cwId)?.value) || null;
+    const ate_inhal_v  = parseFloat(document.getElementById('ate_inhal'  + cwId)?.value) || null;
+    const ate = (!ate_unknown && (ate_oral_v || ate_dermal_v || ate_inhal_v))
+      ? { oral: ate_oral_v, dermal: ate_dermal_v, inhal: ate_inhal_v }
+      : null;
+    return { cas, name, name_tr, conc, concMin, concMax, concStr, hazards, ec, reach, m_factors:{ acute: mf, chronic: mfc }, scl, annex_vi: annexVi, ate_unknown, ate };
   }).filter(c => c.cas || c.name);
 }
 

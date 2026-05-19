@@ -253,6 +253,9 @@ async def generate_pdf(data: dict = Body(...)):
                 'reach_no':      c.get('reach_no', ''),
                 'annex_vi':      c.get('annex_vi', False),
                 'source_priority': c.get('source_priority', 4),
+                # ATE kullanıcı beyanı — SEA §3.1.3.6.2.2
+                'ate_unknown':   bool(c.get('ate_unknown', False)),
+                'ate_dict':      c.get('ate') or {},
             }
         mapped_comps = [_map_comp(c) for c in components]
 

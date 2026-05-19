@@ -558,8 +558,9 @@ async def calculate_clp(db: AsyncSession, components: List[Any]) -> Dict:
         # Worst case konsantrasyon (CLP kuralı)
         conc = comp.worst_case_concentration
 
-        # Spesifik ATE verisi
-        user_ate = comp.ate_dict if hasattr(comp, 'ate_dict') else {}
+        # Spesifik ATE verisi (ate_dict: kullanıcı girişi; ate_unknown: bilinmiyor beyanı)
+        user_ate    = comp.ate_dict if hasattr(comp, 'ate_dict') else {}
+        ate_unknown = getattr(comp, 'ate_unknown', False) or False
 
         # Madde formu (NOTE 1 için)
         form = getattr(comp, 'form', None)
@@ -568,14 +569,15 @@ async def calculate_clp(db: AsyncSession, components: List[Any]) -> Dict:
         data = await get_clp_data(db, cas)
 
         enriched.append({
-            'cas': cas,
-            'conc': conc,
-            'data': data,
-            'name': getattr(comp, 'name', None) or (data.get('chemical_name') if data else cas),
-            'user_ate': user_ate,
-            'form': form,
-            'conc_min': getattr(comp, 'concentration_min', None),
-            'conc_max': getattr(comp, 'concentration_max', None),
+            'cas':         cas,
+            'conc':        conc,
+            'data':        data,
+            'name':        getattr(comp, 'name', None) or (data.get('chemical_name') if data else cas),
+            'user_ate':    user_ate,
+            'ate_unknown': ate_unknown,
+            'form':        form,
+            'conc_min':    getattr(comp, 'concentration_min', None),
+            'conc_max':    getattr(comp, 'concentration_max', None),
         })
 
     # ─── ADIM 1: ATE TOPLAMA ────────────────────────────────────────────
@@ -595,6 +597,11 @@ async def calculate_clp(db: AsyncSession, components: List[Any]) -> Dict:
     for item in enriched:
         conc_frac = item['conc'] / 100
         data = item['data']
+
+        # ── Kullanıcı beyanı: "bilinmiyor" → hiç hesaplamaya alma ────────────
+        if item.get('ate_unknown', False):
+            unknown_conc += item['conc']
+            continue
 
         # ── Veri yok → tamamen bilinmiyor ─────────────────────────────────
         if not data or data.get('source') == 'not_found':

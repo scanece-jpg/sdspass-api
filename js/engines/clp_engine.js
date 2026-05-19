@@ -518,6 +518,7 @@ const CLPEngine = (() => {
     // ── Ön işlem: gerçek bilinmeyenleri say (route bağımsız) ─────────────────────
     const ATE_ACUTE_CODES = new Set(['H300','H301','H302','H310','H311','H312','H330','H331','H332']);
     let ateUnknownConc = 0;
+    let ateStatementNeeded = false;  // SEA §3.1.3.6.2.2: herhangi bir bilinmeyen ≥%1 → zorunlu ibare
     comps.forEach(c => {
       const conc = parseFloat(c.concMax || c.conc) || 0;
       if (conc <= 0) return;
@@ -525,8 +526,13 @@ const CLPEngine = (() => {
       const hasAcuteTox = (c.hazards || []).some(h =>
         ATE_ACUTE_CODES.has((h.h_code || '').replace(/[*\s]/g,'').substring(0,4))
       );
-      if (!hasAcuteTox && !compAnnexVi) {
+      // Kullanıcı beyanı: "bilinmiyor" ya da chip yok + annex_vi değil + kullanıcı ATE de yok
+      const hasUserAte = c.ate && (c.ate.oral || c.ate.dermal || c.ate.inhal);
+      const isUnknown = c.ate_unknown === true ||
+                        (!hasAcuteTox && !compAnnexVi && !hasUserAte);
+      if (isUnknown) {
         ateUnknownConc += conc;
+        if (conc >= 1) ateStatementNeeded = true;  // §3.1.3.6.2.2 eşiği: bireysel ≥%1
       }
     });
 
@@ -563,6 +569,23 @@ const CLPEngine = (() => {
 
         if (compHasATE) {
           knownConc += conc;
+        } else if (!c.ate_unknown && c.ate) {
+          // Kullanıcı tarafından girilen ATE değeri (chip yoksa veya override)
+          const userAteVal = route === 'oral'   ? c.ate.oral
+                           : route === 'dermal' ? c.ate.dermal
+                           :                      c.ate.inhal;
+          if (userAteVal && userAteVal > 0) {
+            sumInv += conc / userAteVal;
+            knownConc += conc;
+            hasAny = true;
+            compHasATE = true;
+            ateComps.push({ name: c.name || c.cas, conc, code: 'user', ate: userAteVal, userProvided: true });
+          } else if (compAnnexVi) {
+            sumInv += conc / 5000;
+            knownConc += conc;
+            hasAny = true;
+            ateComps.push({ name: c.name || c.cas, conc, code: '—', ate: 5000, annexVi: true });
+          }
         } else if (compAnnexVi && conc > 0) {
           // Annex VI resmi değerlendirmesi: akut toksik değil → ATE = 5000 (muhafazakâr)
           sumInv += conc / 5000;
@@ -588,12 +611,13 @@ const CLPEngine = (() => {
         if (ate_mix <= max) { resultCode = h; break; }
       }
 
-      // ATEmix detaylarını kaydet (PDF Bölüm 11 için)
+      // ATEmix detaylarını kaydet (PDF Bölüm 11 ve 2.2 için)
       ateMixDetails[route] = {
         ateMix: Math.round(ate_mix * 10) / 10,
         resultCode,
         unknownPct,
         revisedFormula: ateUnknownConc > 10,  // PDF'de gösterim için
+        statementNeeded: ateStatementNeeded,  // SEA §3.1.3.6.2.2 zorunlu ibare bayrağı
         components: ateComps,
       };
 

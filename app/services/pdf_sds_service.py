@@ -1183,9 +1183,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 _clf_para,
             ])
 
-        # Toplam 175mm: CAS(35) + Ad(60) + Konst.(18) + Sınıf(62)
+        # Toplam 175mm: CAS(35) + Ad(56) + Konst.(25) + Sınıf(59)
+        # Not: 18mm çok dar, "Konsantrasyon" başlığı bölünüyordu → 25mm'ye çıkarıldı
         story.append(data_table(tbl_data,
-            [35*mm, 60*mm, 18*mm, 62*mm], styles))
+            [35*mm, 56*mm, 25*mm, 59*mm], styles))
         # REACH eksik not
         if missing_reach:
             story.append(Paragraph(

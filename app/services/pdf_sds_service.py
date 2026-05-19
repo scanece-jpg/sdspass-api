@@ -1833,7 +1833,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                         if hclass == 'Acute Tox. 2' and code in _ATE_CAT2:
                             ate = _ATE_CAT2[code]
                         sum_inv += conc / ate
-                        ate_comps_r.append({'name': comp_item.get('name',''), 'conc': conc, 'code': code, 'ate': ate})
+                        _cname = (comp_item.get('name_tr','') if lang=='TR' else '') or comp_item.get('name','') or comp_item.get('cas_no','')
+                        ate_comps_r.append({'name': _cname, 'conc': conc, 'code': code, 'ate': ate})
                         found_chip = True
                         break  # her bileşenden yol başına tek katkı
                 if not found_chip and not _ate_unk:
@@ -1842,11 +1843,13 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                     if _user_ate_val and float(_user_ate_val) > 0:
                         _uav = float(_user_ate_val)
                         sum_inv += conc / _uav
-                        ate_comps_r.append({'name': comp_item.get('name',''), 'conc': conc, 'code': 'user', 'ate': _uav, 'userProvided': True})
+                        _cname_u = (comp_item.get('name_tr','') if lang=='TR' else '') or comp_item.get('name','') or comp_item.get('cas_no','')
+                        ate_comps_r.append({'name': _cname_u, 'conc': conc, 'code': 'user', 'ate': _uav, 'userProvided': True})
                         found_chip = True
                     elif _annex_vi:
                         sum_inv += conc / 5000.0
-                        ate_comps_r.append({'name': comp_item.get('name',''), 'conc': conc, 'code': '—', 'ate': 5000, 'annexVi': True})
+                        _cname_a = (comp_item.get('name_tr','') if lang=='TR' else '') or comp_item.get('name','') or comp_item.get('cas_no','')
+                        ate_comps_r.append({'name': _cname_a, 'conc': conc, 'code': '—', 'ate': 5000, 'annexVi': True})
                         found_chip = True
             if sum_inv <= 0:
                 continue
@@ -1915,7 +1918,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             unit = _ROUTE_UNIT.get(route, 'mg/kg')
             for c in detail.get('components', []):
                 comp_rows.append([
-                    str(c.get('name', c.get('cas', '—'))),
+                    str((c.get('name_tr','') if lang=='TR' else '') or c.get('name', c.get('cas', '—'))),
                     f"{c.get('conc', '—')}",
                     str(c.get('code', '—')),
                     f"{c.get('ate', '—')} {unit}",

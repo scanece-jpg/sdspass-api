@@ -564,7 +564,7 @@ const CLPEngine = (() => {
           sumInv += conc / ate;
           hasAny = true;
           compHasATE = true;
-          ateComps.push({ name: c.name || c.cas, conc, code, ate });
+          ateComps.push({ name: c.name_tr || c.name || c.cas, conc, code, ate });
         });
 
         if (compHasATE) {
@@ -579,19 +579,19 @@ const CLPEngine = (() => {
             knownConc += conc;
             hasAny = true;
             compHasATE = true;
-            ateComps.push({ name: c.name || c.cas, conc, code: 'user', ate: userAteVal, userProvided: true });
+            ateComps.push({ name: c.name_tr || c.name || c.cas, conc, code: 'user', ate: userAteVal, userProvided: true });
           } else if (compAnnexVi) {
             sumInv += conc / 5000;
             knownConc += conc;
             hasAny = true;
-            ateComps.push({ name: c.name || c.cas, conc, code: '—', ate: 5000, annexVi: true });
+            ateComps.push({ name: c.name_tr || c.name || c.cas, conc, code: '—', ate: 5000, annexVi: true });
           }
         } else if (compAnnexVi && conc > 0) {
           // Annex VI resmi değerlendirmesi: akut toksik değil → ATE = 5000 (muhafazakâr)
           sumInv += conc / 5000;
           knownConc += conc;
           hasAny = true;
-          ateComps.push({ name: c.name || c.cas, conc, code: '—', ate: 5000, annexVi: true });
+          ateComps.push({ name: c.name_tr || c.name || c.cas, conc, code: '—', ate: 5000, annexVi: true });
         }
         // else: gerçek bilinmiyor → ateUnknownConc'a yukarıda eklendi
       });

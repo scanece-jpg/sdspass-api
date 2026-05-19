@@ -256,6 +256,8 @@ async def generate_pdf(data: dict = Body(...)):
                 # ATE kullanıcı beyanı — SEA §3.1.3.6.2.2
                 'ate_unknown':   bool(c.get('ate_unknown', False)),
                 'ate_dict':      c.get('ate') or {},
+                # Bileşen tipi: 'normal' | 'polymer' | 'uvcb' | 'fragrance'
+                'comp_type':     c.get('comp_type', 'normal'),
             }
         mapped_comps = [_map_comp(c) for c in components]
 

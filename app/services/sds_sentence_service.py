@@ -133,6 +133,15 @@ def format_section3_component(
     # CLP Ek-VI notasyonu temizliği: "sülfürik asit ... %" → "sülfürik asit"
     # (Bazı maddelerde konsantrasyon-bağımlı sınıflandırma için "... %" eklenir)
     name = _re.sub(r'\s*[ \s]*\.\.\.[ \s]*%\s*$', '', name).strip()
+    # Bileşen tipi notasyonu (Polimer / UVCB / Esans) — B3.2 adı sütununa eklenir
+    comp_type = comp.get('comp_type', 'normal')
+    _TYPE_LABELS = {
+        'polymer':   '(Polimer)',
+        'uvcb':      '(UVCB)',
+        'fragrance': '(Tedar. Kar.)',
+    }
+    if comp_type in _TYPE_LABELS:
+        name = f"{name} {_TYPE_LABELS[comp_type]}"
     conc = float(comp.get('worst_case_conc', comp.get('conc', comp.get('concentration', 0))) or 0)
     hazards = comp.get('hazards', [])
     # Tekrar eden h_class değerleri gider; h_code'dan yetkili h_class türet (DB bozukluğuna karşı)
@@ -957,6 +966,9 @@ def generate_section3(
     for comp in components:
         cas = comp.get('cas_no', comp.get('cas', '')).strip()
         level = disclosure_map.get(cas, 'show')
+        # Esans/gizli karışım → disclosure_map'te 'show' bırakılmışsa min. 'range'e zorla
+        if comp.get('comp_type') == 'fragrance' and level == 'show':
+            level = 'range'
         row = format_section3_component(comp, level, lang=lang)
         rows.append(row)
     return rows

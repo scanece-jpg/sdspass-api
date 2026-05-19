@@ -3311,12 +3311,14 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
     });
     // Çözünürlük özel: açıklama metni varsa öncelikli kullan (sınıf + değer birlikte)
     // Örn: "Çözünür (>10 g/L), tahmini ~928676.6 mg/L" — DIPL önceki sürümlerle tutarlı
-    if (flatPhys.solubility === undefined) {
-      if (tp?.solubility?.text) {
-        flatPhys.solubility = tp.solubility.text;  // açıklama metni (sınıf + değer)
-      } else if (tp?.solubility?.value != null) {
-        flatPhys.solubility = tp.solubility.value; // sadece sayısal mg/L
-      }
+    // _pairs döngüsü tf_sol sayısal değerini zaten yazmış olabilir;
+    // kullanıcı manuel girmediyse motor text'i daha bilgilendirici — onu tercih et.
+    const _solEl = document.getElementById('tf_sol');
+    const _solUserOverride = _solEl?.dataset?.source === 'user';
+    if (!_solUserOverride && tp?.solubility?.text) {
+      flatPhys.solubility = tp.solubility.text;  // açıklama metni (sınıf + değer)
+    } else if (flatPhys.solubility === undefined && tp?.solubility?.value != null) {
+      flatPhys.solubility = tp.solubility.value; // sadece sayısal mg/L
     }
 
     // 4. theoProps metin alanları (kullanıcı girmemişse motor değeri)

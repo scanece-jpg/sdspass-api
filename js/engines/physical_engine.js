@@ -791,8 +791,10 @@ const PhysicalEngine = (() => {
     const primary = [], extra = [], warnings = [];
 
     // Yanıcı Sıvı — sadece liquid, paste, aerosol formları için (CLP §2.6)
+    // fl dışarıda tanımlanıyor — theoProps bloğunda fl.fp'ye erişim için
+    let fl = { result: null, source: null, fp: null };
     if (form === 'liquid' || form === 'paste' || form === 'aerosol') {
-      const fl = calcFlamLiq(comps, userFP);
+      fl = calcFlamLiq(comps, userFP);
       if (fl.result) primary.push({ type:'flam_liq', ...fl.result, source: fl.source, fp: fl.fp });
     }
 

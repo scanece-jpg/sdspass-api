@@ -650,6 +650,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     rev = sds_data.get('revision', {})
     p_data = sds_data.get('p_codes', {})
     eco = sds_data.get('eco', {})
+    # ATE karışım detayları — Bölüm 2.2 zorunlu ibare + Bölüm 11 tablosu için erken yükle
+    # Backend fallback Bölüm 11'de ek hesap yapabilir; buradaki değer §2.2 için yeterli
+    ate_mix_details = sds_data.get('ate_mix_details') or {}
 
     # US_EN — OSHA HazCom format uyarlaması
     is_us = lang == 'US_EN'

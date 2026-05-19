@@ -790,20 +790,26 @@ const PhysicalEngine = (() => {
   function calculate(comps, form = 'liquid', userFP = null, testData = {}) {
     const primary = [], extra = [], warnings = [];
 
-    // Yanıcı Sıvı
-    const fl = calcFlamLiq(comps, userFP);
-    if (fl.result) primary.push({ type:'flam_liq', ...fl.result, source: fl.source, fp: fl.fp });
+    // Yanıcı Sıvı — sadece liquid, paste, aerosol formları için (CLP §2.6)
+    if (form === 'liquid' || form === 'paste' || form === 'aerosol') {
+      const fl = calcFlamLiq(comps, userFP);
+      if (fl.result) primary.push({ type:'flam_liq', ...fl.result, source: fl.source, fp: fl.fp });
+    }
 
-    // Aspirasyon Toksisitesi — viskozite kontrolü dahil (CLP §3.10.4)
-    const asp = calcAspTox(comps, testData);
-    if (asp.result) primary.push({ type:'asp_tox', ...asp.result, source: asp.source, total: asp.total });
-    if (asp.viscosityExcluded) warnings.push('H304: ' + asp.source);
+    // Aspirasyon Toksisitesi — sadece liquid ve paste için (CLP §3.10)
+    if (form === 'liquid' || form === 'paste') {
+      const asp = calcAspTox(comps, testData);
+      if (asp.result) primary.push({ type:'asp_tox', ...asp.result, source: asp.source, total: asp.total });
+      if (asp.viscosityExcluded) warnings.push('H304: ' + asp.source);
+    }
 
-    // Pirofor Gaz — H232 (CLP Ek I §2.2.3)
-    const fg = calcFlamGas(comps);
-    if (fg.result_h232) {
-      primary.push({ type:'flam_gas', ...fg.result_h220, source: fg.source });
-      primary.push({ type:'flam_gas_pyro', ...fg.result_h232, source: fg.source });
+    // Pirofor Gaz — H232 (CLP Ek I §2.2.3) — sadece gaz formunda
+    if (form === 'gas') {
+      const fg = calcFlamGas(comps);
+      if (fg.result_h232) {
+        primary.push({ type:'flam_gas', ...fg.result_h220, source: fg.source });
+        primary.push({ type:'flam_gas_pyro', ...fg.result_h232, source: fg.source });
+      }
     }
 
     // Yanıcı Katı — sadece solid veya powder formlar için
@@ -812,9 +818,11 @@ const PhysicalEngine = (() => {
       if (fs.length) extra.push({ type:'flam_sol', h:'H228', label:'Flam. Sol. 2', signal:'Warning', source: fs.map(c => c.name||c.cas).join(', ') });
     }
 
-    // Oksitleyici
-    const ox = comps.filter(c => OXIDIZING_CAS.has((c.cas||'').trim()) && (parseFloat(c.concMax||c.conc)||0) >= 1);
-    if (ox.length) extra.push({ type:'oxidizing', h:'H272', label:'Ox. Liq. 3', signal:'Warning', source: ox.map(c => c.name || c.cas).join(', ') });
+    // Oksitleyici — sadece sıvı/pasta formları için (katı oksitleyiciler Python motorunda)
+    if (form === 'liquid' || form === 'paste') {
+      const ox = comps.filter(c => OXIDIZING_CAS.has((c.cas||'').trim()) && (parseFloat(c.concMax||c.conc)||0) >= 1);
+      if (ox.length) extra.push({ type:'oxidizing', h:'H272', label:'Ox. Liq. 3', signal:'Warning', source: ox.map(c => c.name || c.cas).join(', ') });
+    }
 
     // Teorik fiziksel özellikler (Bölüm 9)
     let theoProps = (form === 'liquid' || form === 'paste' || form === 'aerosol')

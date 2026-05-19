@@ -125,8 +125,8 @@ from app.services.sds_sentence_service import (
 
 # ─── RENKLER ─────────────────────────────────────────────────────────────────
 
-C_SECTION_BG    = HexColor('#1a1f2e')   # Bölüm başlık arkaplan
-C_SECTION_TEXT  = HexColor('#ffffff')   # Bölüm başlık yazı
+C_SECTION_BG    = HexColor('#000000')   # Bölüm başlık arkaplan (siyah)
+C_SECTION_TEXT  = HexColor('#ffffff')   # Bölüm başlık yazı (beyaz)
 C_SUB_BG        = HexColor('#e8ecf0')   # Alt başlık arkaplan
 C_SUB_TEXT      = HexColor('#1a1f2e')   # Alt başlık yazı
 C_DANGER        = HexColor('#cc0000')
@@ -1126,6 +1126,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         conc_hdr = term(lang,'concentration')
         clf_hdr  = term(lang,'classification')
 
+        # Başlık hücrelerini Paragraph olarak sarıyoruz — header style data_table içinde uygulanacak
         tbl_data = [[ cas_hdr, name_hdr, conc_hdr, clf_hdr ]]
 
         # B3.2 — M faktör haritası (aquatic olan tüm bileşenler)
@@ -1164,10 +1165,14 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             # Her sınıflandırma kendi satırında — uzun metinde kelime kırılmasını önle
             _clf_str = translate_hclass_list(r.get('hazards',''), lang) or term(lang,'not_classified')
             _clf_para = Paragraph(_clf_str.replace('; ', '<br/>'), styles['body'])
+            # Ad ve konsantrasyon Paragraph'a sarılır — kelime kırılmasını ve
+            # PDF text extraction artifaktlarını önler
+            _name_para = Paragraph(r['name'] or '', styles['body'])
+            _conc_para = Paragraph(r['concentration'] or '', styles['body'])
             tbl_data.append([
                 cas_cell,
-                r['name'],
-                r['concentration'],
+                _name_para,
+                _conc_para,
                 _clf_para,
             ])
 

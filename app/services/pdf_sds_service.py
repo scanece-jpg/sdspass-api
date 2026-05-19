@@ -193,6 +193,13 @@ def build_styles(lang: str = 'TR') -> dict:
             leading=12,
             textColor=black,
         ),
+        'tbl_header': ParagraphStyle(
+            'TblHeader',
+            fontName='DejaVuSans-Bold',
+            fontSize=8,
+            leading=11,
+            textColor=HexColor('#ffffff'),  # Tablo başlık satırı — beyaz yazı
+        ),
         'small': ParagraphStyle(
             'Small',
             fontName='DejaVuSans',
@@ -525,7 +532,7 @@ def data_table(rows: list, col_widths: list, styles: dict,
         new_row = []
         for j, cell in enumerate(row):
             if isinstance(cell, str):
-                s = styles['body_bold'] if (header and i == 0) else styles['body']
+                s = styles['tbl_header'] if (header and i == 0) else styles['body']
                 new_row.append(Paragraph(cell, s))
             else:
                 new_row.append(cell)

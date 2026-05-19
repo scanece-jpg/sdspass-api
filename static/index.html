@@ -3104,6 +3104,15 @@ function _checkPDFMandatory() {
     }
   }
 
+  // 4. Erime/Donma Noktası — katı ve toz formlar için zorunlu
+  const isSolid = ['solid', 'powder'].includes(form);
+  if (isSolid) {
+    const mpEl = document.getElementById('tf_mp');
+    if (!mpEl?.value?.trim()) {
+      missing.push({ label: 'Erime/Donma Noktası', reason: 'Katı/toz formlar için zorunlu — KKDİK Ek-2 §9.1' });
+    }
+  }
+
   return missing;
 }
 

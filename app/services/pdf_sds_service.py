@@ -1474,7 +1474,12 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     ]
 
     # Opsiyonel satırları — sadece değer varsa göster
-    _optional = {_mp_lbl, _rd_lbl, _vd_lbl, _ai_lbl, _ex_lbl, _ot_lbl, _dc_lbl, _er_lbl, _kow_lbl}
+    # Katı/toz formlar için erime noktası zorunlu (KKDİK Ek-2 §9)
+    _prod_form = product.get('form', '')
+    _is_solid_form = _prod_form in ('solid', 'powder')
+    _optional = {_rd_lbl, _vd_lbl, _ai_lbl, _ex_lbl, _ot_lbl, _dc_lbl, _er_lbl, _kow_lbl}
+    if not _is_solid_form:
+        _optional.add(_mp_lbl)
     phys_rows = [r for r in all_phys_rows if r[1] != na or r[0] not in _optional]
 
     story.append(data_table(phys_rows, [75*mm, 105*mm], styles, header=False))

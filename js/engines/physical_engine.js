@@ -806,9 +806,11 @@ const PhysicalEngine = (() => {
       primary.push({ type:'flam_gas_pyro', ...fg.result_h232, source: fg.source });
     }
 
-    // Yanıcı Katı
-    const fs = comps.filter(c => FLAM_SOL_CAS.has((c.cas||'').trim()) && (parseFloat(c.concMax||c.conc)||0) >= 1);
-    if (fs.length) extra.push({ type:'flam_sol', h:'H228', label:'Flam. Sol. 2', signal:'Warning', source: fs.map(c => c.name||c.cas).join(', ') });
+    // Yanıcı Katı — sadece solid veya powder formlar için
+    if (form === 'solid' || form === 'powder') {
+      const fs = comps.filter(c => FLAM_SOL_CAS.has((c.cas||'').trim()) && (parseFloat(c.concMax||c.conc)||0) >= 1);
+      if (fs.length) extra.push({ type:'flam_sol', h:'H228', label:'Flam. Sol. 2', signal:'Warning', source: fs.map(c => c.name||c.cas).join(', ') });
+    }
 
     // Oksitleyici
     const ox = comps.filter(c => OXIDIZING_CAS.has((c.cas||'').trim()) && (parseFloat(c.concMax||c.conc)||0) >= 1);

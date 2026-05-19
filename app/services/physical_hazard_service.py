@@ -515,7 +515,7 @@ def calc_flam_sol(comps: List[Dict], mixture_form: str) -> Optional[PhysHazardRe
     CLP Tablo 2.7 — Yanıcı Katı
     Bileşende Flam. Sol. 1/2 sınıflandırması varsa uygula
     """
-    if mixture_form != 'solid':
+    if mixture_form not in ('solid', 'powder'):
         return None
 
     triggers = []

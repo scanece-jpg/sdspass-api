@@ -289,6 +289,26 @@ const CLPEngine = (() => {
       return null;
     }
 
+    // Konsantrasyona göre uygun SCL entry'sini bul — h_class override için
+    // Örn: NaOH %3 → c_min=2, c_max=5 entry'si → "Skin Corr. 1B"
+    //      NaOH %6 → c_min=5, c_max=null entry'si → "Skin Corr. 1A"
+    function _getSCLEntry(sclRaw, code, conc) {
+      if (!Array.isArray(sclRaw) || !sclRaw.length) return null;
+      // Uygun entry: h_code eşleşiyor, c_min <= conc, c_max > conc (veya c_max null)
+      // Birden fazla uygunsa en yüksek c_min'i seç (en spesifik aralık)
+      const matches = sclRaw
+        .filter(s => {
+          const h4 = (s.h_code || '').replace(/[*\s]/g,'').substring(0,4);
+          if (h4 !== code) return false;
+          if (s.c_min == null) return false;
+          if (conc < s.c_min) return false;
+          if (s.c_max != null && conc >= s.c_max) return false;
+          return true;
+        })
+        .sort((a, b) => b.c_min - a.c_min); // en yüksek c_min önce
+      return matches.length > 0 ? matches[0] : null;
+    }
+
     const raw = comps.flatMap(c => {
       const conc = parseFloat(c.concMax || c.conc) || 0;
 
@@ -304,9 +324,11 @@ const CLPEngine = (() => {
         if (ECO_SKIP.has(code))   return [];
         if (ATE_HCODES.has(code)) return [];
 
-        // pH doğrudan H314/H318 atadıysa (aşırı) veya normal pH ölçüldüyse (nötralizasyon)
-        // GCL bileşen kontrolü atlanır
-        if ((phExtreme || phNormal) && (code === 'H314' || code === 'H318')) return [];
+        // pH aşırıysa (≤2 veya ≥11.5) H314/H318 zaten phDirect'ten eklendi — çift sayımı önle
+        // ÖNEMLI: phNormal (2<pH<11.5) bireysel GCL/SCL kontrolünü BLOKE ETMEZ.
+        // Bileşen kendi eşiğini aşıyorsa H314 verilmek ZORUNDA (CLP Ek-I §3.2.2).
+        // Normal pH sadece toplamsal (additive) kuralları etkileyebilir.
+        if (phExtreme && (code === 'H314' || code === 'H318')) return [];
 
         const scl = _getSCL(c.scl, code);
         const gcl = CUTOFFS[code];
@@ -341,8 +363,13 @@ const CLPEngine = (() => {
         }
 
         if (conc >= cutoff) {
+          // Konsantrasyona göre uygun SCL entry'sini bul — h_class override (1A/1B ayrımı)
+          const sclEntry = (scl !== null && Array.isArray(c.sclRaw))
+            ? _getSCLEntry(c.sclRaw, code, conc)
+            : null;
+          const hClassOverride = sclEntry?.h_class || null;
           if (!cutoffUsed[code] || cutoff < cutoffUsed[code].value) {
-            cutoffUsed[code] = { value: cutoff, source, cas: c.cas || '' };
+            cutoffUsed[code] = { value: cutoff, source, cas: c.cas || '', hClassOverride };
           }
           return [code];
         }
@@ -354,17 +381,31 @@ const CLPEngine = (() => {
       const fromSCLOnly = [];
 
       // Nesne formatı { 'H373': 0.1, ... }
+      // NOT: sclObj sadece c_min saklar; c_max için sclRaw (ham liste) kullanılır.
+      // Örn. NaOH H315 c_min=0.5, c_max=2.0 → %8'de tetiklenmemeli.
       const sclObj = (!Array.isArray(c.scl) && c.scl && typeof c.scl === 'object') ? c.scl : null;
       if (sclObj) {
         Object.entries(sclObj).forEach(([code, sclVal]) => {
           if (!code.startsWith('H') || hazardCodes.has(code)) return;
           if (FLAM_SKIP.has(code) || ECO_SKIP.has(code) || ATE_HCODES.has(code)) return;
           if (typeof sclVal !== 'number') return;
-          if (conc >= sclVal) {
-            fromSCLOnly.push(code);
-            if (!cutoffUsed[code] || sclVal < cutoffUsed[code].value) {
-              cutoffUsed[code] = { value: sclVal, source: 'SCL', cas: c.cas || '' };
-            }
+          if (conc < sclVal) return;
+          // c_max kontrolü: sclRaw'dan bu kod için geçerli entry'yi bul
+          if (Array.isArray(c.sclRaw) && c.sclRaw.length) {
+            const h4 = code.substring(0,4);
+            // Bu konsantrasyonda geçerli bir SCL entry var mı?
+            const validEntry = c.sclRaw.find(s => {
+              const sh = (s.h_code||'').replace(/[*\s]/g,'').substring(0,4);
+              if (sh !== h4) return false;
+              if (s.c_min == null || conc < s.c_min) return false;
+              if (s.c_max != null && conc >= s.c_max) return false; // c_max aşıldı → bu aralık değil
+              return true;
+            });
+            if (!validEntry) return; // Bu konsantrasyonda geçerli aralık yok
+          }
+          fromSCLOnly.push(code);
+          if (!cutoffUsed[code] || sclVal < cutoffUsed[code].value) {
+            cutoffUsed[code] = { value: sclVal, source: 'SCL', cas: c.cas || '' };
           }
         });
       }
@@ -377,11 +418,12 @@ const CLPEngine = (() => {
           if (FLAM_SKIP.has(code) || ECO_SKIP.has(code) || ATE_HCODES.has(code)) return;
           const sclVal = typeof s.c_min === 'number' ? s.c_min : null;
           if (sclVal === null) return;
-          if (conc >= sclVal) {
-            fromSCLOnly.push(code);
-            if (!cutoffUsed[code] || sclVal < (cutoffUsed[code].value || Infinity)) {
-              cutoffUsed[code] = { value: sclVal, source: 'SCL', cas: c.cas || '' };
-            }
+          if (conc < sclVal) return;
+          // c_max kontrolü — aralık dışındaysa bu entry geçersiz
+          if (s.c_max != null && conc >= s.c_max) return;
+          fromSCLOnly.push(code);
+          if (!cutoffUsed[code] || sclVal < (cutoffUsed[code].value || Infinity)) {
+            cutoffUsed[code] = { value: sclVal, source: 'SCL', cas: c.cas || '' };
           }
         });
       }
@@ -391,6 +433,14 @@ const CLPEngine = (() => {
 
     // pH'tan gelen doğrudan kodları ekle
     phDirect.forEach(code => { if (!raw.includes(code)) raw.push(code); });
+
+    // ── CLP §3.3.1.4: H314 bireysel geçtiyse H318 de zorunlu ────────────────────
+    // Skin Corr. 1 bileşen Eye Dam. 1 anlamına gelir.
+    // Toplamsal kuraldan değil, bireysel GCL/SCL'den gelen H314 için de uygulanır.
+    // phNormal durumunda toplamsal H318 bloke olduğundan bu kural kritik önem taşır.
+    if (raw.includes('H314') && !raw.includes('H318') && !phExtreme) {
+      raw.push('H318');
+    }
 
     // ── H360/H361 sub-kategori birleştirme ──────────────────────────────────────
     // H360D + H360F → H360FD; generic H360 → H360FD (her ikisini de kapsar)
@@ -421,7 +471,9 @@ const CLPEngine = (() => {
     // ── CLP Tablo 3.2.3: Cilt Toplama Kuralı ────────────────────────────────────
     // Kural 1: ΣSkin Corr. 1 ≥ %5 → H314
     // Kural 2: 10×ΣSkin Corr. 1 + ΣSkin Irrit. 2 ≥ %10 → H315 (H314 yoksa)
-    // Normal pH girilmişse H314/H318 GCL toplama kuralları da atlanır
+    // Normal pH (2<pH<11.5) toplama kuralını atlar: birden fazla bileşenin kümülatif
+    // etkisi nötralize edilmiş olabilir. Ancak bireysel GCL/SCL kontrolü hâlâ geçerlidir
+    // (yukarıda fromHazards içinde phNormal artık bireysel kontrolü bloke etmiyor).
     if (!raw.includes('H314') && !phExtreme && !phNormal) {
       const sumSC1 = comps.reduce((s, c) => {
         const conc = parseFloat(c.concMax || c.conc) || 0;
@@ -665,7 +717,7 @@ const CLPEngine = (() => {
         EventBus.emit('H_CODES_READY', result);
       });
     }
-    console.log('[CLPEngine] init OK');
+    console.log('[CLPEngine] init OK — v20260520-scl-cmax-fix');
   }
 
   return { init, classify, getGhsCodes, CUTOFFS, DOMINANCE, DANGER_H, WARNING_H, ATE_POINT, ATE_CAT2, ATE_CLASSIFY };

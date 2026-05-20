@@ -1072,7 +1072,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
 </script>
 <script src="js/event-bus.js?v=20250328"></script>
 <script src="js/state-store.js?v=20250328"></script>
-<script src="js/engines/clp_engine.js?v=20260516a"></script>
+<script src="js/engines/clp_engine.js?v=20260520b"></script>
 <script src="js/engines/pcode_engine.js?v=20260505b"></script>
 <script src="js/engines/hp_texts.js?v=20260425"></script>
 <script src="js/engines/eco_engine.js?v=20260518d"></script>
@@ -2011,7 +2011,8 @@ function getComps() {
       ? { oral: ate_oral_v, dermal: ate_dermal_v, inhal: ate_inhal_v }
       : null;
     const comp_type = document.getElementById('comp_type' + cwId)?.value || 'normal';
-    return { cas, name, name_tr, conc, concMin, concMax, concStr, hazards, ec, reach, m_factors:{ acute: mf, chronic: mfc }, scl, annex_vi: annexVi, ate_unknown, ate, comp_type };
+    const sclRaw = _sclRaw[cwId] || [];  // SCL ham liste — engine'de 1A/1B ayrımı için
+    return { cas, name, name_tr, conc, concMin, concMax, concStr, hazards, ec, reach, m_factors:{ acute: mf, chronic: mfc }, scl, sclRaw, annex_vi: annexVi, ate_unknown, ate, comp_type };
   }).filter(c => c.cas || c.name);
 }
 
@@ -3357,6 +3358,25 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
         if (code && !hClassMap[code]) hClassMap[code] = correctHClass(code, hz.h_class || '');
       });
     });
+    // SCL override — konsantrasyona göre doğru kategori (örn. NaOH %3 → 1B, %6 → 1A)
+    // Bileşen hazard chip'i her zaman saf madde kategorisini gösterir (1A),
+    // ama SCL'de aralığa özgü kategori varsa (1B) onu kullan.
+    comps.forEach(c => {
+      const conc = parseFloat(c.concMax || c.conc) || 0;
+      const sclRaw = _sclRaw[parseInt((document.querySelectorAll('[id^="cw"]') &&
+        [...document.querySelectorAll('[id^="cw"]')].find(el =>
+          el.querySelector('.ci')?.value?.trim() === (c.cas||'').trim())?.id.replace('cw',''))] || 0) || [];
+      // Daha basit: c.sclRaw zaten getComps()'dan geliyor
+      (c.sclRaw || []).forEach(s => {
+        const h4 = (s.h_code || '').replace(/[*\s]/g,'').substring(0,4);
+        if (!h4 || !s.h_class) return;
+        if (s.c_min == null) return;
+        if (conc < s.c_min) return;
+        if (s.c_max != null && conc >= s.c_max) return;
+        // Bu entry uygun ve h_class bilgisi var → override
+        hClassMap[h4] = correctHClass(h4, s.h_class);
+      });
+    });
     const cutoffUsed = clp?.cutoffUsed || {};
 
     // Fiziksel H kodları için gerekçe (parlama noktası / aspirasyon kaynağı)
@@ -3536,12 +3556,10 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
       },
       revision: _getRevision(),
       ate_mix_details: clp?.ateMixDetails || {},  // ATEmix hesap detayları — PDF Bölüm 11
-      // Normal pH ölçüldüyse (2 < pH < 11.5) motor H314'ü zaten baskıladı → PDF'e bildir
-      h314_neutralization_removed: (() => {
-        const _phv = parseFloat(document.getElementById('tf_ph')?.value);
-        const _phNorm = !isNaN(_phv) && _phv > 2.0 && _phv < 11.5;
-        return _phNorm || !h314KeepOverride;
-      })(),
+      // H314 yalnızca kullanıcı nötralizasyon diyalogunda "Kaldır" seçerse siliniyor.
+      // Normal pH girişi (2<pH<11.5) artık otomatik silme yapmıyor —
+      // bireysel bileşen GCL/SCL aşımı varsa H314 zorunludur (CLP Ek-I §3.2.2).
+      h314_neutralization_removed: !h314KeepOverride,
     };
 
     const res = await fetch(API_BASE + '/sds/pdf', {

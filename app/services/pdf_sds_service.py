@@ -52,7 +52,7 @@ def _register_fonts():
     2. Linux sistem klasörü (/usr/share/fonts/truetype/dejavu/)
     3. Debian/Ubuntu alternatif yollar
     """
-    # Olası font dizinleri — önce yerel, sonra sistem
+    # Olası font dizinleri — önce yerel, sonra sistem (Linux ve Windows)
     _THIS_DIR = os.path.dirname(os.path.abspath(__file__))
     _APP_ROOT  = os.path.dirname(os.path.dirname(_THIS_DIR))  # proje kökü
     candidates = [
@@ -87,10 +87,35 @@ def _register_fonts():
                 except Exception as e:
                     print(f'[Font] {name} kayıt hatası ({path}): {e}')
 
+    # Windows fallback: DejaVuSans bulunamadıysa Arial ile ikame et
+    # Arial Türkçe karakterleri destekler (Ç, Ş, Ğ, İ, Ö, Ü vb.)
     if registered == 0:
-        print('[Font] UYARI: DejaVu fontları bulunamadı — Helvetica kullanılacak (Unicode desteği sınırlı)')
+        print('[Font] UYARI: DejaVu fontları bulunamadı — Windows Arial ile ikame deneniyor')
+        _WIN_FONTS = os.environ.get('WINDIR', 'C:\\Windows') + '\\Fonts'
+        _fallback_map = {
+            'DejaVuSans':          ('arial.ttf',   'arialbd.ttf'),   # normal → bold de kullanılır
+            'DejaVuSans-Bold':     ('arialbd.ttf', 'arialbd.ttf'),
+            'DejaVuSans-Oblique':  ('ariali.ttf',  'arialbd.ttf'),
+            'DejaVuSansMono':      ('cour.ttf',    'courbd.ttf'),     # Courier Mono
+            'DejaVuSansMono-Bold': ('courbd.ttf',  'courbd.ttf'),
+        }
+        for name, (fname, _) in _fallback_map.items():
+            if name in pdfmetrics.getRegisteredFontNames():
+                registered += 1
+                continue
+            path = os.path.join(_WIN_FONTS, fname)
+            if os.path.exists(path):
+                try:
+                    pdfmetrics.registerFont(TTFont(name, path))
+                    registered += 1
+                    print(f'[Font] {name} → {fname} (Windows Arial ikamesi)')
+                except Exception as e:
+                    print(f'[Font] Windows Arial kayıt hatası ({fname}): {e}')
+
+    if registered == 0:
+        print('[Font] UYARI: Hiçbir unicode font bulunamadı — Helvetica kullanılacak (Unicode desteği sınırlı)')
     else:
-        print(f'[Font] {registered}/{len(font_files)} DejaVu fontu kayıt edildi')
+        print(f'[Font] {registered}/{len(font_files)} font kayıt edildi')
 
     # Font ailesi tanımla (bold/italic otomatik seçim için)
     from reportlab.pdfbase.pdfmetrics import registerFontFamily
@@ -671,11 +696,16 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     header_text = product_name
     footer_text = f"Rev.{rev_no} | {rev_date}"
 
+    # Font güvenlik kontrolü — DejaVuSans yoksa Helvetica fallback
+    _registered = pdfmetrics.getRegisteredFontNames()
+    _F_BOLD   = 'DejaVuSans-Bold'  if 'DejaVuSans-Bold'  in _registered else 'Helvetica-Bold'
+    _F_NORMAL = 'DejaVuSans'        if 'DejaVuSans'        in _registered else 'Helvetica'
+
     def _draw_page(canvas, doc_obj):
         canvas.saveState()
         w, h = A4
         # Header
-        canvas.setFont('DejaVuSans-Bold', 7)
+        canvas.setFont(_F_BOLD, 7)
         canvas.setFillColor(HexColor('#64748b'))
         canvas.drawString(15*mm, h - 12*mm, header_text)
         canvas.drawRightString(w - 15*mm, h - 12*mm, f"SDS | {footer_text}")
@@ -684,7 +714,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         canvas.line(15*mm, h - 14*mm, w - 15*mm, h - 14*mm)
         # Footer
         canvas.line(15*mm, 14*mm, w - 15*mm, 14*mm)
-        canvas.setFont('DejaVuSans', 6.5)
+        canvas.setFont(_F_NORMAL, 6.5)
         footer_lbl = 'Bu GBF KKDİK Ek-2 formatına uygundur.' if lang=='TR' else 'This SDS complies with CLP/REACH format.'
         canvas.drawString(15*mm, 10*mm, footer_lbl)
         canvas.drawRightString(w - 15*mm, 10*mm, f"Sayfa {canvas.getPageNumber()}" if lang=='TR' else f"Page {canvas.getPageNumber()}")

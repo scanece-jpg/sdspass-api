@@ -32,6 +32,22 @@ app.add_middleware(
     allow_headers=["Content-Type", "Authorization"],
 )
 
+# ─── Cache engelleme — tüm JS/HTML yanıtları tarayıcı tarafından cache'lenmez ──
+from starlette.middleware.base import BaseHTTPMiddleware
+from starlette.requests import Request as StarletteRequest
+
+class NoCacheMiddleware(BaseHTTPMiddleware):
+    async def dispatch(self, request: StarletteRequest, call_next):
+        response = await call_next(request)
+        path = request.url.path
+        if path == "/" or path.endswith(".js") or path.endswith(".html"):
+            response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+            response.headers["Pragma"]  = "no-cache"
+            response.headers["Expires"] = "0"
+        return response
+
+app.add_middleware(NoCacheMiddleware)
+
 
 @app.get("/health")
 async def health():
@@ -40,9 +56,17 @@ async def health():
 
 @app.get("/")
 async def serve_frontend():
-    """SDS Hesaplama arayüzü"""
+    """SDS Hesaplama arayüzü — cache'lenmez, her zaman taze yüklenir"""
     html_path = os.path.join(os.path.dirname(__file__), '..', 'static', 'index.html')
-    return FileResponse(html_path, media_type="text/html")
+    return FileResponse(
+        html_path,
+        media_type="text/html",
+        headers={
+            "Cache-Control": "no-cache, no-store, must-revalidate",
+            "Pragma": "no-cache",
+            "Expires": "0",
+        }
+    )
 
 
 # ─── STATIC DOSYALAR (js/ klasörü) ────────────────────────────────────────────

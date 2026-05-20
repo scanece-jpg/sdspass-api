@@ -124,9 +124,22 @@ DOMINANCE: dict = {
 }
 
 
+def _normalize_scl_list(scl_raw) -> list:
+    """
+    SCL verisini her zaman liste formatına normalize et.
+    Frontend dict gönderebilir: {"H314": 2.0, "H315": 0.5}
+    Backend liste bekler:        [{"h_code":"H314","c_min":2.0}, ...]
+    """
+    if isinstance(scl_raw, list):
+        return scl_raw
+    if isinstance(scl_raw, dict):
+        return [{"h_code": k, "c_min": v} for k, v in scl_raw.items() if v is not None]
+    return []
+
+
 def _get_scl_cutoff(comp: dict, h_class: str, h_code4: str) -> float | None:
     """Bileşenin SCL listesinden ilgili H kodu/sınıfı için c_min döndürür; yoksa None."""
-    for scl in comp.get("scl", []):
+    for scl in _normalize_scl_list(comp.get("scl", [])):
         sc = scl.get("h_class", scl.get("hazard", "")).replace("*", "").strip()
         sh = scl.get("h_code", "").replace("*", "").strip()[:4]
         if sc == h_class or (h_code4 and sh == h_code4):
@@ -134,6 +147,32 @@ def _get_scl_cutoff(comp: dict, h_class: str, h_code4: str) -> float | None:
             if c_min is not None:
                 return float(c_min)
     return None
+
+
+def _get_scl_entry_for_conc(scl_list: list, h_code4: str, conc: float) -> dict | None:
+    """
+    Konsantrasyona göre uygun SCL entry'sini bul — h_class override için.
+    Örn: NaOH %3 → c_min=2, c_max=5 entry → "Skin Corr. 1B"
+         NaOH %6 → c_min=5, c_max=null entry → "Skin Corr. 1A"
+    """
+    matches = []
+    for s in scl_list:
+        sh = (s.get("h_code", "") or "").replace("*", "").strip()[:4]
+        if sh != h_code4:
+            continue
+        c_min = s.get("c_min")
+        c_max = s.get("c_max")
+        if c_min is None:
+            continue
+        if conc < float(c_min):
+            continue
+        if c_max is not None and conc >= float(c_max):
+            continue
+        matches.append(s)
+    if not matches:
+        return None
+    # En yüksek c_min olan entry en spesifik aralık
+    return max(matches, key=lambda s: float(s.get("c_min", 0)))
 
 
 def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
@@ -213,7 +252,8 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
             # Mevzuat: SEA Ek-I §1.2.1.3 / CLP 1272/2008 Art.10(3):
             # SCL büyük de olsa küçük de olsa GCL'yi tamamen devre dışı bırakır.
             # ÖNEMLİ: SCL h_code suffix içerebilir (H361f, H361fd, H314 *) — 4 karaktere normalize et
-            scl_list = comp.get("scl", [])
+            # NOT: Frontend dict {"H314":2.0} veya liste gönderebilir — normalize et
+            scl_list = _normalize_scl_list(comp.get("scl", []))
             for scl_entry in scl_list:
                 scl_hclass = scl_entry.get("h_class", scl_entry.get("hazard", ""))
                 scl_hcode4 = scl_entry.get("h_code", "").replace("*", "").strip()[:4]
@@ -259,8 +299,12 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
 
             if h not in seen_h:
                 seen_h.add(h)
+                # Konsantrasyona göre uygun SCL entry'sinden h_class override (1A/1B ayrımı)
+                # Örn: NaOH %3 → SCL entry class="Skin Corr. 1B" → h_class override
+                scl_entry_conc = _get_scl_entry_for_conc(scl_list, h[:4], conc)
+                effective_hclass = (scl_entry_conc or {}).get("h_class") or h_class
                 passed.append({
-                    "h_class": h_class,
+                    "h_class": effective_hclass,
                     "h_code":  h,
                     "conc":    conc,
                     "reason":  f"{comp.get('name',cas)} %{conc:.1f} ≥ kesme %{cutoff}",

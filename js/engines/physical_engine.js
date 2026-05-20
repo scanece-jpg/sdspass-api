@@ -276,6 +276,24 @@ const PhysicalEngine = (() => {
     '64-19-7':   1e6,  '64-18-6':  1e6,   '79-09-4':  1e6,  '50-21-5':  1e6,
     '141-43-5':  1e6,  '111-42-2': 1e6,   '102-71-6': 1e6,
     '872-50-4':  1e6,  '68-12-2':  1e6,   '67-68-5':  1e6,
+    // Gazlar — @20°C, 101.3 kPa (NIST / Sander 2015 Henry sabitleri)
+    '7664-41-7':  1e6,  // Amonyak (NH₃)       — tam karışır ~900 g/L
+    '124-38-9':  1450,  // Karbondioksit (CO₂)  — 1450 mg/L
+    '630-08-0':    28,  // Karbon monoksit (CO) — 28 mg/L
+    '7783-06-4':  3900, // Hidrojen sülfür (H₂S)— 3900 mg/L
+    '74-98-6':     65,  // Propan               — 65 mg/L
+    '106-97-8':   61,   // n-Bütan              — 61 mg/L
+    '75-28-5':    49,   // İzobütan             — 49 mg/L
+    '74-82-8':    22,   // Metan (CH₄)          — 22 mg/L
+    '74-84-0':    60,   // Etan                 — 60 mg/L
+    '115-07-1':   200,  // Propilen             — 200 mg/L
+    '75-01-4':    2260, // Vinil klorür         — 2260 mg/L
+    '7647-01-0':  1e6,  // Hidrojen klorür (HCl)— tam karışır (suda HCl asit)
+    '7664-93-9':  1e6,  // Sülfürik asit (H₂SO₄)— tam karışır
+    '1333-74-0':   16,  // Hidrojen (H₂)        — 16 mg/L
+    '7782-44-7':    40, // Oksijen (O₂)         — 40 mg/L
+    '7727-37-9':    19, // Azot (N₂)            — 19 mg/L
+    '7440-37-1':    61, // Argon (Ar)           — 61 mg/L
   };
 
   // ── BUHAR BASINCI VERİTABANI (hPa, 20°C) ────────────────────────────────────

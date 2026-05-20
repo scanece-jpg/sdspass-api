@@ -376,13 +376,11 @@ const CLPEngine = (() => {
         return [];
       });
 
-      // SCL-only kodlar: hazard listesinde olmayan ama maddeye özgü SCL eşiği tanımlı
-      // Örn. nikel sülfat: H372 tehlike listesinde, ama H373 sadece SCL ile (%0.1-%1 arası) tetiklenir
+      // SCL-only kodlar: hazard listesinde olmayan ama maddeye ozgü SCL esigi tanimli
+      // Örn. nikel sülfat: H372 tehlike listesinde, ama H373 sadece SCL ile tetiklenir
       const fromSCLOnly = [];
 
-      // Nesne formatı { 'H373': 0.1, ... }
-      // NOT: sclObj sadece c_min saklar; c_max için sclRaw (ham liste) kullanılır.
-      // Örn. NaOH H315 c_min=0.5, c_max=2.0 → %8'de tetiklenmemeli.
+      // Nesne formati { 'H373': 0.1, ... }
       const sclObj = (!Array.isArray(c.scl) && c.scl && typeof c.scl === 'object') ? c.scl : null;
       if (sclObj) {
         Object.entries(sclObj).forEach(([code, sclVal]) => {
@@ -390,19 +388,6 @@ const CLPEngine = (() => {
           if (FLAM_SKIP.has(code) || ECO_SKIP.has(code) || ATE_HCODES.has(code)) return;
           if (typeof sclVal !== 'number') return;
           if (conc < sclVal) return;
-          // c_max kontrolü: sclRaw'dan bu kod için geçerli entry'yi bul
-          if (Array.isArray(c.sclRaw) && c.sclRaw.length) {
-            const h4 = code.substring(0,4);
-            // Bu konsantrasyonda geçerli bir SCL entry var mı?
-            const validEntry = c.sclRaw.find(s => {
-              const sh = (s.h_code||'').replace(/[*\s]/g,'').substring(0,4);
-              if (sh !== h4) return false;
-              if (s.c_min == null || conc < s.c_min) return false;
-              if (s.c_max != null && conc >= s.c_max) return false; // c_max aşıldı → bu aralık değil
-              return true;
-            });
-            if (!validEntry) return; // Bu konsantrasyonda geçerli aralık yok
-          }
           fromSCLOnly.push(code);
           if (!cutoffUsed[code] || sclVal < cutoffUsed[code].value) {
             cutoffUsed[code] = { value: sclVal, source: 'SCL', cas: c.cas || '' };
@@ -410,17 +395,14 @@ const CLPEngine = (() => {
         });
       }
 
-      // Dizi formatı [{h_code:'H373', c_min:0.1, c_max:1.0}, ...]  — API'den gelen format
+      // Dizi formati [{h_code:'H373', c_min:0.1, c_max:1.0}, ...]
       if (Array.isArray(c.scl)) {
         c.scl.forEach(s => {
           const code = _normH(s.h_code);
           if (!code.startsWith('H') || hazardCodes.has(code)) return;
           if (FLAM_SKIP.has(code) || ECO_SKIP.has(code) || ATE_HCODES.has(code)) return;
           const sclVal = typeof s.c_min === 'number' ? s.c_min : null;
-          if (sclVal === null) return;
-          if (conc < sclVal) return;
-          // c_max kontrolü — aralık dışındaysa bu entry geçersiz
-          if (s.c_max != null && conc >= s.c_max) return;
+          if (sclVal === null || conc < sclVal) return;
           fromSCLOnly.push(code);
           if (!cutoffUsed[code] || sclVal < (cutoffUsed[code].value || Infinity)) {
             cutoffUsed[code] = { value: sclVal, source: 'SCL', cas: c.cas || '' };
@@ -717,7 +699,7 @@ const CLPEngine = (() => {
         EventBus.emit('H_CODES_READY', result);
       });
     }
-    console.log('[CLPEngine] init OK — v20260520-scl-cmax-fix');
+    console.log('[CLPEngine] init OK — v20260520c');
   }
 
   return { init, classify, getGhsCodes, CUTOFFS, DOMINANCE, DANGER_H, WARNING_H, ATE_POINT, ATE_CAT2, ATE_CLASSIFY };

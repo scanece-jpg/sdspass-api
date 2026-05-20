@@ -1072,7 +1072,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
 </script>
 <script src="js/event-bus.js?v=20250328"></script>
 <script src="js/state-store.js?v=20250328"></script>
-<script src="js/engines/clp_engine.js?v=20260520b"></script>
+<script src="js/engines/clp_engine.js?v=20260520c"></script>
 <script src="js/engines/pcode_engine.js?v=20260505b"></script>
 <script src="js/engines/hp_texts.js?v=20260425"></script>
 <script src="js/engines/eco_engine.js?v=20260518d"></script>
@@ -2018,17 +2018,9 @@ function getComps() {
 
 // ── Ana hesaplama tetikleyici ─────────────────────────────────────────────────
 function doCalculate() {
-  // DEBUG: Hesapla düğmesi çalışıyor mu?
-  try {
-    const comps = getComps();
-    if (!comps.length) { showError('En az bir bileşen girin.'); return; }
-    console.log('[doCalculate] comps:', comps.length, 'CLPEngine:', typeof CLPEngine);
-    _runCalculationCore();
-  } catch(e) {
-    // Görünür hata göster
-    showError('Hesaplama hatası: ' + e.message + ' — ' + (e.stack||'').split('\n')[1]);
-    console.error('[doCalculate] HATA:', e);
-  }
+  const comps = getComps();
+  if (!comps.length) { showError('En az bir bileşen girin.'); return; }
+  _runCalculationCore();
 }
 
 // ── Hesaplama çekirdeği — doğrudan veya prompt callback olarak çağrılır ───────
@@ -2511,22 +2503,8 @@ function initPipeline() {
   const REQUIRED = ['clp','stot','eco','euh','phys'];
 
   function tryRender() {
-    const ready = REQUIRED.filter(k => _state[k]);
-    const missing = REQUIRED.filter(k => !_state[k]);
-    console.log('[Pipeline] Hazır:', ready, '| Bekliyor:', missing);
-    if (missing.length === 0) renderAll(_state);
+    if (REQUIRED.every(k => _state[k])) renderAll(_state);
   }
-
-  // DEBUG: 3 saniye sonra hâlâ tamamlanmamış engine'leri göster
-  EventBus.on('PIPELINE_START', () => {
-    setTimeout(() => {
-      const missing = REQUIRED.filter(k => !_state[k]);
-      if (missing.length > 0) {
-        showError('Pipeline tamamlanamadı! Eksik sonuçlar: ' + missing.join(', ') + '. Konsola bakın.');
-        console.error('[Pipeline] TIMEOUT — eksik engine sonuçları:', missing);
-      }
-    }, 3000);
-  });
 
   EventBus.on('H_CODES_READY',    r => { _state.clp = r; tryRender(); });
   EventBus.on('STOT_READY',       r => { _state.stot = r; tryRender(); });

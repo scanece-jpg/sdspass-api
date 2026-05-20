@@ -1072,7 +1072,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
 </script>
 <script src="js/event-bus.js?v=20250328"></script>
 <script src="js/state-store.js?v=20250328"></script>
-<script src="js/engines/clp_engine.js?v=20260520c"></script>
+<script src="js/engines/clp_engine.js?v=20260520d"></script>
 <script src="js/engines/pcode_engine.js?v=20260505b"></script>
 <script src="js/engines/hp_texts.js?v=20260425"></script>
 <script src="js/engines/eco_engine.js?v=20260518d"></script>
@@ -3363,10 +3363,7 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
     // ama SCL'de aralığa özgü kategori varsa (1B) onu kullan.
     comps.forEach(c => {
       const conc = parseFloat(c.concMax || c.conc) || 0;
-      const sclRaw = _sclRaw[parseInt((document.querySelectorAll('[id^="cw"]') &&
-        [...document.querySelectorAll('[id^="cw"]')].find(el =>
-          el.querySelector('.ci')?.value?.trim() === (c.cas||'').trim())?.id.replace('cw',''))] || 0) || [];
-      // Daha basit: c.sclRaw zaten getComps()'dan geliyor
+      // c.sclRaw getComps()'dan geliyor — doğrudan kullan
       (c.sclRaw || []).forEach(s => {
         const h4 = (s.h_code || '').replace(/[*\s]/g,'').substring(0,4);
         if (!h4 || !s.h_class) return;

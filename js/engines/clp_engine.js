@@ -699,7 +699,7 @@ const CLPEngine = (() => {
         EventBus.emit('H_CODES_READY', result);
       });
     }
-    console.log('[CLPEngine] init OK — v20260520c');
+    console.log('[CLPEngine] init OK — v20260520d');
   }
 
   return { init, classify, getGhsCodes, CUTOFFS, DOMINANCE, DANGER_H, WARNING_H, ATE_POINT, ATE_CAT2, ATE_CLASSIFY };

@@ -2018,9 +2018,17 @@ function getComps() {
 
 // ── Ana hesaplama tetikleyici ─────────────────────────────────────────────────
 function doCalculate() {
-  const comps = getComps();
-  if (!comps.length) { showError('En az bir bileşen girin.'); return; }
-  _runCalculationCore();
+  // DEBUG: Hesapla düğmesi çalışıyor mu?
+  try {
+    const comps = getComps();
+    if (!comps.length) { showError('En az bir bileşen girin.'); return; }
+    console.log('[doCalculate] comps:', comps.length, 'CLPEngine:', typeof CLPEngine);
+    _runCalculationCore();
+  } catch(e) {
+    // Görünür hata göster
+    showError('Hesaplama hatası: ' + e.message + ' — ' + (e.stack||'').split('\n')[1]);
+    console.error('[doCalculate] HATA:', e);
+  }
 }
 
 // ── Hesaplama çekirdeği — doğrudan veya prompt callback olarak çağrılır ───────
@@ -2503,8 +2511,22 @@ function initPipeline() {
   const REQUIRED = ['clp','stot','eco','euh','phys'];
 
   function tryRender() {
-    if (REQUIRED.every(k => _state[k])) renderAll(_state);
+    const ready = REQUIRED.filter(k => _state[k]);
+    const missing = REQUIRED.filter(k => !_state[k]);
+    console.log('[Pipeline] Hazır:', ready, '| Bekliyor:', missing);
+    if (missing.length === 0) renderAll(_state);
   }
+
+  // DEBUG: 3 saniye sonra hâlâ tamamlanmamış engine'leri göster
+  EventBus.on('PIPELINE_START', () => {
+    setTimeout(() => {
+      const missing = REQUIRED.filter(k => !_state[k]);
+      if (missing.length > 0) {
+        showError('Pipeline tamamlanamadı! Eksik sonuçlar: ' + missing.join(', ') + '. Konsola bakın.');
+        console.error('[Pipeline] TIMEOUT — eksik engine sonuçları:', missing);
+      }
+    }, 3000);
+  });
 
   EventBus.on('H_CODES_READY',    r => { _state.clp = r; tryRender(); });
   EventBus.on('STOT_READY',       r => { _state.stot = r; tryRender(); });

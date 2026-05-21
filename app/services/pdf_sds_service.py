@@ -1444,7 +1444,17 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             val_str = f"{v_str} {unit}"
         else:
             val_str = v_str
-        val_str += _method_note(key)
+        # Log Kow için ECHA Kılavuz v4 §9.1(n) zorunluluğu:
+        # "It shall be indicated whether the reported value is based on testing or on calculation"
+        if key == 'log_kow' and not phys_methods.get('log_kow'):
+            _kow_src = (
+                '<br/><font size="6" color="#888888">hesaplanmış (yöntem belirtilmedi)</font>'
+                if lang == 'TR' else
+                '<br/><font size="6" color="#888888">calculated (method not specified)</font>'
+            )
+            val_str += _kow_src
+        else:
+            val_str += _method_note(key)
         return val_str
 
     _mp_lbl  = 'Donma/Erime Noktası' if lang=='TR' else 'Melting/Freezing Point'
@@ -1519,7 +1529,6 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
 
     # Opsiyonel satırları — sadece değer varsa göster
     # Katı/toz formlar için erime noktası zorunlu (KKDİK Ek-2 §9)
-    # Gaz formda parlama noktası ve kaynama noktası uygulanamaz — her zaman gizle
     _prod_form = product.get('form', '')
     _is_solid_form = _prod_form in ('solid', 'powder')
     _is_gas_form   = _prod_form == 'gas'
@@ -1528,9 +1537,20 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _optional = {_rd_lbl, _vd_lbl, _ai_lbl, _ex_lbl, _ot_lbl, _dc_lbl, _er_lbl, _kow_lbl}
     if not _is_solid_form:
         _optional.add(_mp_lbl)
+
+    # ECHA Kılavuz v4 §9.1(h)(e): Gaz formda parlama/kaynama noktası "uygulanamaz" olarak
+    # açıkça belirtilmeli — gizlemek yerine "Uygulanamaz (gaz)" göster.
+    # "Where any statement is made to indicate that a particular property does not apply this
+    #  should be based on a clear lack of relevance, the reason for which should be stated."
+    _na_gas = (
+        term(lang, 'not_applicable') +
+        (' (gaz form)' if lang == 'TR' else ' (gas form)')
+    )
     if _is_gas_form:
-        _optional.add(_fp_lbl)
-        _optional.add(_bp_lbl)
+        for row in all_phys_rows:
+            if row[0] in (_fp_lbl, _bp_lbl) and row[1] == na:
+                row[1] = _na_gas
+
     phys_rows = [r for r in all_phys_rows if r[1] != na or r[0] not in _optional]
 
     story.append(data_table(phys_rows, [75*mm, 105*mm], styles, header=False))

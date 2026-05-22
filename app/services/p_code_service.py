@@ -452,6 +452,8 @@ P_LABEL_PRIORITY: Dict[str, int] = {
     'P273': 52,       # Çevre — H411/H410/H400 için ECHA rehber gereği etikette olmalı
     'P280': 51,       # KKE — H317/H319/H314 için zorunlu (H_BASED_LABEL_FORCED ile zaten giriyor)
     'P260': 48,       # Solunum koruma (H334/H330/H372 için kritik)
+    'P220': 47,       # Oksitleyici — yanıcı maddelerden uzak tut (H271/H272)
+    'P221': 45,       # Oksitleyici — yanıcılarla karışımı önle (H271/H272)
     'P284': 44,       # Solunum cihazı (H334 Resp.Sens. için)
     'P201': 43,       # CMR — talimat al (H340/H350/H360 için)
     'P263': 42,       # Hamile/emziren (H360 için)
@@ -490,10 +492,10 @@ H_BASED_LABEL_FORCED: Dict[str, List[str]] = {
     'H224': ['P210'],
     'H225': ['P210'],
     'H226': ['P210'],
-    # Cilt aşınması — KKE + acil durulama + göz yıkama + solunum koruması ZORUNLU
-    # CLP Annex IV Tablo 6.3: P301+P330+P331 (yutulursa — kusturma YASAK) H314 için zorunlu
-    # P405 (kilitli sakla) önem sırasında daha düşük → priority yarışına bırakılır
-    'H314': ['P280', 'P301+P330+P331', 'P303+P361+P353', 'P305+P351+P338', 'P260'],
+    # Cilt aşınması — 4 kritik müdahale + KKE kodu zorunlu (CLP Annex IV Tablo 6.3)
+    # P260 (solunum koruma) önem sırasında daha düşük → öncelik yarışına bırakıldı
+    # Bu sayede H272/H410 gibi ek tehlikeler için etiket kontenjanı açık kalır
+    'H314': ['P280', 'P301+P330+P331', 'P303+P361+P353', 'P305+P351+P338'],
     # Ağır göz hasarı — KKE zorunlu (H318, H314 ile çakışırsa P280 zaten var)
     'H318': ['P280'],
     # Cilt tahrişi / Cilt duyarlılaştırma — KKE zorunlu (CLP Annex IV)
@@ -560,14 +562,25 @@ def select_label_p_codes(all_p_codes: List[str], max_codes: int = 6,
     """
     h_codes = h_codes or []
 
-    # H kodu bazlı zorunlu P kodlarını belirle (bu kodlar 6 limitine dahil edilmez / önce eklenir)
+    # H kodu bazlı zorunlu P kodlarını belirle
     forced_by_h = set()
     for h in h_codes:
         for p in H_BASED_LABEL_FORCED.get(h, []):
             if p in all_p_codes:
                 forced_by_h.add(p)
 
-    # Zorunlu P kodlarını çıkar (P101/P102 + H-bazlı forced)
+    # Birden fazla tehlike sınıfı forced_by_h'ı max_codes'u aşabilir.
+    # CLP Madde 28(3): "gerekmedikçe 6'yı geçme" — limit aşılıyorsa öncelik sırasına göre kırp.
+    # P501 (bertaraf) limitin dışında tutulur — her zaman "+1 Bertaraf Kodu" olarak eklenir.
+    limit_exceeded = len(forced_by_h) > max_codes
+    if limit_exceeded:
+        forced_by_h = set(sorted(
+            forced_by_h,
+            key=lambda p: P_LABEL_PRIORITY.get(p, 5),
+            reverse=True
+        )[:max_codes])
+
+    # P_LABEL_MANDATORY (P101/P102/P501) + forced_by_h → aday listesinden çıkar
     excluded_from_candidates = set(P_LABEL_MANDATORY) | forced_by_h
     candidates = [p for p in all_p_codes if p not in excluded_from_candidates]
 
@@ -616,18 +629,20 @@ def select_label_p_codes(all_p_codes: List[str], max_codes: int = 6,
     mandatory_in_codes = [p for p in ['P101', 'P102', 'P103', 'P501'] if p in all_p_codes]
 
     forced_note = (f" (H kodu zorunlu: {', '.join(sorted(forced_by_h))})" if forced_by_h else "")
+    exceeded_note = (" Birden fazla tehlike sınıfı nedeniyle öncelikli kodlar seçildi." if limit_exceeded else "")
     note = (
-        f"CLP Madde 22: Etiket için {len(selected)}/{len(candidates)+len(forced_by_h)} "
-        f"P kodu seçildi{forced_note}. "
+        f"CLP Madde 28(3): Etiket için {len(selected)}/{len(candidates)+len(forced_by_h)} "
+        f"P kodu seçildi{forced_note}.{exceeded_note} "
         f"Kalan {len(excluded)} kod SDS Bölüm 2'ye yazılmalıdır."
         if excluded else
         f"Toplam {len(selected)} P kodu — etiket limiti içinde{forced_note}."
     )
 
     return {
-        'selected': selected,
-        'all': all_p_codes,
-        'excluded': excluded,
+        'selected':       selected,
+        'all':            all_p_codes,
+        'excluded':       excluded,
+        'limit_exceeded': limit_exceeded,
         'mandatory': mandatory_in_codes,
         'forced_by_h': sorted(list(forced_by_h)),
         'note': note,

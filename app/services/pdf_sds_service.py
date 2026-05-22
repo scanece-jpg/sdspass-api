@@ -1090,11 +1090,24 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         for code in label_codes_sorted:
             txt = get_p(lang, code) or P_COMBOS.get(code) or P_TEXTS.get(code, code)
             story.append(Paragraph(f"• <b>{code}:</b> {txt}", styles['bullet']))
+        # P501 — bertaraf kodu, 6 limitinin dışında "+1 Bertaraf Kodu" olarak her zaman basılır
         mandatory = label_p.get('mandatory', [])
         if mandatory:
             for m in mandatory:
                 txt = get_p(lang, m) or P_TEXTS.get(m, m)
                 story.append(Paragraph(f"• <b>{m}:</b> {txt}", styles['bullet']))
+
+        # Limit aşım notu — birden fazla tehlike sınıfı olan ürünlerde öncelikli seçim yapıldı
+        if label_p.get('limit_exceeded'):
+            _exc_note = (
+                'Birden fazla tehlike sınıfı bulunduğundan öncelikli P kodları seçilmiştir. '
+                'Tam liste SDS Bölüm 2\'de yer almaktadır (CLP Madde 28(3)).'
+                if lang == 'TR' else
+                'Due to multiple hazard classes, priority P-codes have been selected. '
+                'Full list is provided in SDS Section 2 (CLP Article 28(3)).'
+            )
+            story.append(Spacer(1, 2))
+            story.append(Paragraph(f"<i>{_exc_note}</i>", styles['small']))
 
     # ─── SEA §3.1.3.6.2.2 — Zorunlu ibare: bilinmeyen akut toksisite ≥%1 ─────────
     # Trigger: herhangi bir bilinmeyen bileşen bireysel olarak ≥%1 konsantrasyonda

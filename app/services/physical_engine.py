@@ -487,7 +487,7 @@ def _calc_asp_tox(comps: List[Dict], test_data: Dict = None) -> Dict:
 
     if kin_visc is not None and kin_visc > 20.5:
         return {'result': None,
-                'source': f'Kinematik viskozite {kin_visc} mm²/s > 20,5 mm²/s — CLP §3.10.4 gereği H304 uygulanmaz',
+                'source': f'Kinematik viskozite {kin_visc} mm²/s > 20,5 mm²/s — H304 uygulanmaz',
                 'total': 0, 'viscosity_excluded': True}
 
     total, triggers = 0.0, []
@@ -568,14 +568,14 @@ def calculate(comps: List[Dict], form: str = 'liquid',
         if asp['result']:
             primary.append({'type': 'asp_tox', **asp['result'],
                             'source': asp['source'], 'total': asp['total'],
-                            'cutoff_used': '≥ %10 aspirasyon toksik bileşen (CLP Ek-I §3.10.4)'})
+                            'cutoff_used': '≥ %10 aspirasyon toksik bileşen'})
         if asp.get('viscosity_excluded'):
             warnings.append('H304: ' + asp['source'])
 
     if form == 'gas':
         fg = _calc_flam_gas(comps)
         if fg['result_h232']:
-            _pyro_cutoff = '≥ %1 pirofor gaz bileşen (CLP Ek-I §2.2.3)'
+            _pyro_cutoff = '≥ %1 pirofor gaz bileşen'
             primary.append({'type': 'flam_gas',      **fg['result_h220'], 'source': fg['source'], 'cutoff_used': _pyro_cutoff})
             primary.append({'type': 'flam_gas_pyro', **fg['result_h232'], 'source': fg['source'], 'cutoff_used': _pyro_cutoff})
 

@@ -930,7 +930,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     for _hc, _cls in H_CODE_TO_CANONICAL_CLASS.items():
         if _hc not in _h_to_class:
             _h_to_class[_hc] = _cls
-    dom_note = 'Baskın H kodu ile kapsandı (CLP Ek-I §1.2.2)' if lang == 'TR' else 'Covered by dominant hazard class (CLP Annex I §1.2.2)'
+    dom_note = 'Baskın tehlike sınıfı kapsamında' if lang == 'TR' else 'Covered by dominant hazard class'
     for hc_raw in all_h_codes:
         hc = (hc_raw or '').replace('*','').strip()
         # Preserve sub-codes (H360D/F/FD, H361D/F/FD); truncate others to 4 chars

@@ -554,22 +554,30 @@ def calculate(comps: List[Dict], form: str = 'liquid',
     if form in ('liquid', 'paste', 'aerosol'):
         fl = _calc_flam_liq(comps, user_fp)
         if fl['result']:
+            _flam_cutoff = {
+                'H224': '≥ %1 Cat.1 yanıcı sıvı bileşen (CLP Ek-I Tablo 2.6)',
+                'H225': '≥ %1 Cat.1+2 yanıcı sıvı bileşen (CLP Ek-I Tablo 2.6)',
+                'H226': '≥ %10 yanıcı sıvı bileşen (CLP Ek-I Tablo 2.6)',
+            }.get(fl['result']['h'], 'Yanıcı sıvı — CLP Ek-I Tablo 2.6')
             primary.append({'type': 'flam_liq', **fl['result'],
-                            'source': fl['source'], 'fp': fl['fp']})
+                            'source': fl['source'], 'fp': fl['fp'],
+                            'cutoff_used': _flam_cutoff})
 
     if form in ('liquid', 'paste'):
         asp = _calc_asp_tox(comps, test_data)
         if asp['result']:
             primary.append({'type': 'asp_tox', **asp['result'],
-                            'source': asp['source'], 'total': asp['total']})
+                            'source': asp['source'], 'total': asp['total'],
+                            'cutoff_used': '≥ %10 aspirasyon toksik bileşen (CLP Ek-I §3.10.4)'})
         if asp.get('viscosity_excluded'):
             warnings.append('H304: ' + asp['source'])
 
     if form == 'gas':
         fg = _calc_flam_gas(comps)
         if fg['result_h232']:
-            primary.append({'type': 'flam_gas',      **fg['result_h220'], 'source': fg['source']})
-            primary.append({'type': 'flam_gas_pyro', **fg['result_h232'], 'source': fg['source']})
+            _pyro_cutoff = '≥ %1 pirofor gaz bileşen (CLP Ek-I §2.2.3)'
+            primary.append({'type': 'flam_gas',      **fg['result_h220'], 'source': fg['source'], 'cutoff_used': _pyro_cutoff})
+            primary.append({'type': 'flam_gas_pyro', **fg['result_h232'], 'source': fg['source'], 'cutoff_used': _pyro_cutoff})
 
     if form in ('solid', 'powder'):
         fs = [c for c in comps

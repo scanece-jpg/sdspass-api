@@ -857,6 +857,22 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             if _hc4 and _nf and _hc4 not in _comp_note_map:
                 _comp_note_map[_hc4] = {'flag': _nf, 'note': _nt or ''}
 
+    # H kodu → görüntüleme rotası (oral/dermal/inhalasyon)
+    # h_class'ta rota saklanmaz; PDF render sırasında H kodundan türetilir
+    _ROUTE_SUFFIX_TR = {
+        'H300': ' (ağız)',    'H301': ' (ağız)',    'H302': ' (ağız)',    'H303': ' (ağız)',
+        'H310': ' (deri)',    'H311': ' (deri)',    'H312': ' (deri)',    'H313': ' (deri)',
+        'H330': ' (solunum)', 'H331': ' (solunum)', 'H332': ' (solunum)', 'H333': ' (solunum)',
+        'H335': ' (solunum yolu tahrişi)', 'H336': ' (uyuşukluk/baş dönmesi)',
+    }
+    _ROUTE_SUFFIX_EN = {
+        'H300': ' (oral)',       'H301': ' (oral)',       'H302': ' (oral)',       'H303': ' (oral)',
+        'H310': ' (dermal)',     'H311': ' (dermal)',     'H312': ' (dermal)',     'H313': ' (dermal)',
+        'H330': ' (inhalation)', 'H331': ' (inhalation)', 'H332': ' (inhalation)', 'H333': ' (inhalation)',
+        'H335': ' (respiratory irritation)', 'H336': ' (narcosis)',
+    }
+    _route_sfx = _ROUTE_SUFFIX_TR if lang == 'TR' else _ROUTE_SUFFIX_EN
+
     clf_rows = []
     seen_clf  = set()
     clf_notes = {}   # {h_code_4: {'flag': str, 'note': str}} — tabloda gösterilecek notlar
@@ -874,8 +890,16 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         raw_hclass  = entry.get('h_class', '')
         raw_hcode   = entry.get('h_code', '')
         fixed_hclass = correct_hclass(raw_hcode, raw_hclass) or raw_hclass
+        # Hâlâ boşsa: H300/H310/H330 gibi ATE Cat.1/2 belirsiz kodlar için
+        # h_code bazlı son çare eşleme (pratikte nadir)
+        if not fixed_hclass:
+            _ACUTE_CODE_FALLBACK = {
+                'H300': 'Acute Tox. 1',  'H310': 'Acute Tox. 1',  'H330': 'Acute Tox. 1',
+                'H303': 'Acute Tox. 5',  'H313': 'Acute Tox. 5',  'H333': 'Acute Tox. 5',
+            }
+            fixed_hclass = _ACUTE_CODE_FALLBACK.get(raw_hcode[:4], '')
         clf_rows.append([
-            translate_hclass(fixed_hclass, lang),
+            translate_hclass(fixed_hclass, lang) + _route_sfx.get(raw_hcode[:4], ''),
             raw_hcode,
             conc_info,
         ])
@@ -915,7 +939,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         if not hc or hc in seen_clf:
             continue
         seen_clf.add(hc)
-        hclass_fallback = translate_hclass(_h_to_class.get(hc, ''), lang)
+        hclass_fallback = translate_hclass(_h_to_class.get(hc, ''), lang) + _route_sfx.get(hc, '')
         clf_rows.append([hclass_fallback, hc_raw, dom_note])
         # fallback satır için de not bayrak kontrolü
         if hc in _comp_note_map and hc not in clf_notes:

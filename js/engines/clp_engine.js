@@ -262,18 +262,31 @@ const CLPEngine = (() => {
     // ── pH Kontrolü — SEA Tablo 3.2.3 Notu ─────────────────────────────────────
     // pH ≤ 2 veya pH ≥ 11.5 → Skin Corr. 1 (H314) + Eye Dam. 1 (H318) doğrudan ata
     // Hesaplama yapılmaz; buffer kapasitesi dikkate alınmaz (muhafazakâr yaklaşım)
-    const phRaw = parseFloat(mixturePH);
-    const phExtreme = !isNaN(phRaw) && (phRaw <= 2.0 || phRaw >= 11.5);
-    // pH girildi ve aşırı değil (2 < pH < 11.5) → karışım ölçülmüş pH'a göre korozif değil
+    // Aralık desteği: "11-13" → phLow=11, phHigh=13 | "7.0" → phLow=phHigh=7.0
+    // phExtreme → alt ≤ 2 VEYA üst ≥ 11.5  (H314/H318 atanır)
+    // phNormal  → TÜM aralık 2-11.5 arasında  (toplamsal H314 bastırılır)
+    const _phStr = String(mixturePH != null ? mixturePH : '').trim();
+    let phLow = NaN, phHigh = NaN;
+    if (_phStr.includes('-') && !_phStr.startsWith('-')) {
+      const _p = _phStr.split('-');
+      phLow  = parseFloat(_p[0]);
+      phHigh = parseFloat(_p[1]);
+    } else {
+      phLow = phHigh = parseFloat(_phStr);
+    }
+    const phRaw = phLow;  // geriye dönük uyumluluk (logging/display için alt sınır)
+    const phExtreme = !isNaN(phLow) && !isNaN(phHigh) && (phLow <= 2.0 || phHigh >= 11.5);
+    // pH girildi ve tüm aralık 2-11.5 içinde → karışım korozif değil
     // GCL/toplama kuralından gelen H314/H318 bastırılır (nötralizasyon/tamponlama)
-    const phNormal = !isNaN(phRaw) && phRaw > 2.0 && phRaw < 11.5;
+    const phNormal  = !isNaN(phLow) && !isNaN(phHigh) && phLow > 2.0 && phHigh < 11.5;
     const phDirect = new Set();
     if (phExtreme) {
-      const direction = phRaw <= 2.0 ? '≤ 2' : '≥ 11.5';
+      const direction = phLow <= 2.0 ? '≤ 2' : '≥ 11.5';
+      const phDisp = (phLow !== phHigh) ? `${phLow}–${phHigh}` : `${phLow}`;
       phDirect.add('H314');
       phDirect.add('H318');
-      cutoffUsed['H314'] = { value: phRaw, source: `pH=${phRaw} (${direction}) → SEA Tablo 3.2.3`, cas: 'KARIŞIM' };
-      cutoffUsed['H318'] = { value: phRaw, source: `pH=${phRaw} (${direction}) → SEA Tablo 3.2.3`, cas: 'KARIŞIM' };
+      cutoffUsed['H314'] = { value: phDisp, source: `pH=${phDisp} (${direction}) → SEA Tablo 3.2.3`, cas: 'KARIŞIM' };
+      cutoffUsed['H318'] = { value: phDisp, source: `pH=${phDisp} (${direction}) → SEA Tablo 3.2.3`, cas: 'KARIŞIM' };
     }
 
     // SCL nesne formatından c_min'i oku (tek H kodu için)

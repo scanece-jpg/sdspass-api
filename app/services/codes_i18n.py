@@ -895,6 +895,7 @@ CLP_CLASS_TR = {
     'Repr. 1B':       'Üreme Toks. 1B',
     'Repr. 2':        'Üreme Toks. 2',
     'Lact.':          'Emzirme Toks.',
+    'Repr. Lact.':    'Emzirme Toks.',   # DB bazen "Repr. Lact." bazen sadece "Lact." döndürür
     'STOT SE 1':      'BHOT Tek Mar. 1',
     'STOT SE 2':      'BHOT Tek Mar. 2',
     'STOT SE 3':      'BHOT Tek Mar. 3',
@@ -1015,6 +1016,15 @@ H_CODE_TO_CANONICAL_CLASS: dict = {
     'H305': 'Asp. Tox. 2',    # aspirasyon toksisitesi Kat.2
     # ── Çevresel tehlikeler — eco_engine.js / ecological_service.py ─────────────
     'H410': 'Aquatic Chronic 1',  # ← eksikti; H411/H412/H413 listede vardı
+    # ── Akut toksisite — Cat.3/4 tek kategorilidir (H300/H310/H330 belirsiz: 1 veya 2) ──
+    # DB h_class bazen "(oral)"/"(dermal)"/"(inhal.)" yol son eki içerebilir;
+    # canonical map her zaman saf sınıf adını döndürür → çift son ek sorununu önler.
+    'H301': 'Acute Tox. 3',   # oral kat.3 — TEK canonical
+    'H302': 'Acute Tox. 4',   # oral kat.4 — TEK canonical
+    'H311': 'Acute Tox. 3',   # dermal kat.3 — TEK canonical
+    'H312': 'Acute Tox. 4',   # dermal kat.4 — TEK canonical
+    'H331': 'Acute Tox. 3',   # inhalasyon kat.3 — TEK canonical
+    'H332': 'Acute Tox. 4',   # inhalasyon kat.4 — TEK canonical
     # ── Sağlık tehlikeleri — tek kategorili (canonical) H kodları ────────────────
     'H315': 'Skin Irrit. 2',
     'H316': 'Skin Irrit. 3',
@@ -1090,6 +1100,9 @@ def translate_hclass(h_class: str, lang: str = 'TR') -> str:
     suffix = '†' if key.endswith('†') else ''
     if suffix:
         key = key[:-1].strip()
+    # CLP Ek-VI yıldız notasyonu — "Acute Tox. 4 *" → "Acute Tox. 4" (yıldız çeviri anahtarı değil)
+    if key.endswith(' *'):
+        key = key[:-2].strip()
 
     # Akut toksisite yol son eki — "(oral)", "(dermal)", "(inhal.)"
     _ROUTE_TR = {'(oral)': '(ağız)', '(dermal)': '(deri)', '(inhal.)': '(solunum)'}

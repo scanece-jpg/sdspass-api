@@ -36,13 +36,34 @@ def validate_sds(
         issues.append({"level":"info","code":code,"section":section,"msg":msg,"rule":""})
 
     def _f(v):
-        try: return float(v)
+        if v is None: return None
+        s = str(v).strip()
+        # Aralık değerleri için alt sınırı döndür (genel sayısal alanlar için yeterli)
+        if '-' in s and not s.startswith('-'):
+            s = s.split('-')[0].strip()
+        try: return float(s)
         except: return None
+
+    def _ph_range(v):
+        """pH için (alt, üst) tuple döndür. Aralık yoksa her ikisi de aynı değer."""
+        if v is None: return None, None
+        s = str(v).strip()
+        if not s: return None, None
+        if '-' in s and not s.startswith('-'):
+            parts = s.split('-', 1)
+            try:
+                return float(parts[0].strip()), float(parts[1].strip())
+            except: pass
+        try:
+            val = float(s)
+            return val, val
+        except: return None, None
 
     fp      = _f(phys_props.get("flash_point"))
     bp      = _f(phys_props.get("boiling_point"))
     vis     = _f(phys_props.get("viscosity"))
-    ph      = _f(phys_props.get("ph"))
+    ph_low, ph_high = _ph_range(phys_props.get("ph"))
+    ph = ph_low   # geriye dönük uyumluluk (ph is None kontrolü için)
     sol     = phys_props.get("solubility","")
     density = _f(phys_props.get("density"))
 
@@ -112,7 +133,7 @@ def validate_sds(
             warn("V005","B9",
                  "H314 (Aşındırıcı) veya H290 kodunuz var. pH değeri girilmesi önerilir.",
                  "KKDİK EK-2 B9 gereklilikleri")
-        elif ph is not None and 2.0 < ph < 11.5:
+        elif ph_low is not None and ph_high is not None and ph_low > 2.0 and ph_high < 11.5:
             if _neutralization_likely:
                 # Asit + baz bir arada → nötralizasyon → H314 geçersiz olabilir
                 _base_names = [c.get('name_tr') or c.get('name','')
@@ -121,15 +142,17 @@ def validate_sds(
                 _acid_names = [c.get('name_tr') or c.get('name','')
                                for c in (components or [])
                                if str(c.get('cas_no') or c.get('cas','')).strip() in _CORROSIVE_ACIDS]
+                _ph_disp = f"{ph_low}–{ph_high}" if ph_low != ph_high else str(ph_low)
                 warn("V006","B2+B9",
-                     f"pH {ph} ile H314 çelişiyor — Karışımda asit ({', '.join(_acid_names)}) "
+                     f"pH {_ph_disp} ile H314 çelişiyor — Karışımda asit ({', '.join(_acid_names)}) "
                      f"ve baz ({', '.join(_base_names)}) birlikte mevcut. "
                      f"KKDİK Ek-1 §3.2.3.3: nötralizasyon gerçekleşmişse H314 geçersiz olabilir. "
                      f"Karışımı test ettirin veya serbest bileşen konsantrasyonlarını gözden geçirin.",
                      "KKDİK Ek-1 §3.2.3.3.3 / CLP Annex I §3.2.3.3")
             else:
+                _ph_disp = f"{ph_low}–{ph_high}" if ph_low != ph_high else str(ph_low)
                 warn("V006","B2+B9",
-                     f"pH {ph} — aşındırıcı özellik için pH<2 veya pH>11.5 beklenir. Sınıflandırmayı kontrol edin.",
+                     f"pH {_ph_disp} — aşındırıcı özellik için pH<2 veya pH>11.5 beklenir. Sınıflandırmayı kontrol edin.",
                      "CLP Annex I 3.2.1")
 
     # V007: H400/H410 → Sucul bilgi zorunlu (B12)

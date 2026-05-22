@@ -807,7 +807,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
             <label>pH Değeri <span class="motor-badge">● motor</span></label>
             <label class="na-check"><input type="checkbox" id="na_ph" onchange="toggleNA(this,'tf_ph','ph')"> N/A</label>
           </div>
-          <input type="number" id="tf_ph" step="0.1" min="0" max="14" placeholder="Ör: 7.0">
+          <input type="text" id="tf_ph" placeholder="Ör: 7.0 veya 2-4">
         </div>
 
         <!-- Yoğunluk: tüm formlar -->
@@ -3201,8 +3201,19 @@ function _detectNeutralization() {
   if (!_lastCalcState) return null;
   const { allH } = _lastCalcState;
   if (!allH.includes('H314')) return null;
-  const ph = parseFloat(document.getElementById('tf_ph')?.value);
-  if (isNaN(ph) || ph <= 2.0 || ph >= 11.5) return null;
+  const phRaw = document.getElementById('tf_ph')?.value?.trim() || '';
+  // Aralık desteği: "11-13" → alt=11, üst=13
+  let phLow, phHigh;
+  if (phRaw.includes('-') && !phRaw.startsWith('-')) {
+    const parts = phRaw.split('-');
+    phLow  = parseFloat(parts[0]);
+    phHigh = parseFloat(parts[1]);
+  } else {
+    phLow = phHigh = parseFloat(phRaw);
+  }
+  // Nötralizasyon kontrolü: pH aralığın TAMAMININ 2–11.5 arasında olması gerekir
+  if (isNaN(phLow) || phLow <= 2.0 || phHigh >= 11.5) return null;
+  const ph = (phLow + phHigh) / 2;  // orta nokta gösterim için
   const comps = getComps();
   const baseComp = comps.find(c => _NEUTR_BASES.has((c.cas||'').trim()));
   const acidComp = comps.find(c => _NEUTR_ACIDS.has((c.cas||'').trim()));
@@ -3293,7 +3304,7 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
 
     // Sayısal alanlar (DOM'dan gelen kullanıcı değerleri motoru ezer)
     const _pairs = [
-      ['tf_density','density'], ['tf_bp','boiling_point'], ['tf_ph','ph'],
+      ['tf_density','density'], ['tf_bp','boiling_point'],
       ['tf_visc','viscosity'],  ['tf_sol','solubility'],   ['tf_mp','melting_point'],
       ['tf_ait','auto_ignition'],['tf_decomp','decomposition_temp'],
       ['tf_logkow','log_kow'],  ['tf_odor_thresh','odour_threshold'],
@@ -3302,6 +3313,9 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
       const v = _n(id);
       if (v !== null) flatPhys[key] = v;
     });
+    // pH: metin olarak oku (aralık değeri "2-4" gibi girişlere izin verir)
+    const phVal = _g('tf_ph');
+    if (phVal) flatPhys.ph = phVal;
 
     // 3. theoProps'tan kalan alanlar (kullanıcı girmemişse motor değeri kullan)
     const _theoExtra = ['ph','viscosity','melting_point','auto_ignition','log_kow'];

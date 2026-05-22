@@ -748,6 +748,191 @@ async def sds_validate(body: dict):
     }
 
 
+# ── ANA HESAP ENDPOİNT'İ — tek motor, tek kaynak ────────────────────────────
+@app.post("/api/v1/sds/calculate")
+async def sds_calculate(body: dict = Body(...)):
+    """
+    Tüm motorları Python'da çalıştır, birleşik sonuç döndür.
+    JS frontend bu endpoint'i çağırır; JS engine'ler çalışmaz.
+
+    Input:
+        components   : [{cas, name, conc, concMax, hazards, m_factors, scl, ...}]
+        form         : 'liquid' | 'solid' | 'gas' | 'paste' | 'aerosol'
+        user_fp      : parlama noktası (kullanıcı girişi, opsiyonel)
+        mixture_ph   : pH (string, ör: "7.0" veya "2-4", opsiyonel)
+        test_data    : {density, boiling_point, viscosity, ...}
+        usage        : 'industrial' | 'consumer' | 'professional'
+        lang         : 'TR' | 'EN'
+
+    Output:
+        h_codes, all_h_codes, signal, clp_passed, euh, p_codes,
+        physical, stot, eco, theo_props, warnings
+    """
+    import dataclasses
+    from app.services.clp_service       import classify_mixture_clp, DANGER_H as _DANGER_H
+    from app.services.physical_engine   import calculate as phys_calculate
+    from app.services.stot_engine       import calculate as stot_calculate
+    from app.services.euh_engine        import calculate as euh_calculate
+    from app.services.eco_engine        import calculate as eco_calculate
+    from app.services.p_code_service    import assign_p_codes, select_label_p_codes, classify_sds_p_codes
+    from app.services.ghs_pictogram     import get_ghs_codes
+    from app.services.codes_i18n        import correct_hclass, translate_hclass
+
+    comps       = body.get('components', [])
+    form        = body.get('form', 'liquid')
+    user_fp_raw = body.get('user_fp') or body.get('flash_point')
+    mixture_ph  = body.get('mixture_ph')
+    test_data   = body.get('test_data') or {}
+    usage       = body.get('usage', 'industrial')
+    lang        = body.get('lang', 'TR')
+
+    user_fp = None
+    if user_fp_raw is not None:
+        try: user_fp = float(user_fp_raw)
+        except: pass
+
+    try:
+        # ── 1. Fiziksel tehlikeler + teorik özellikler ────────────────────────
+        phys_result = phys_calculate(comps, form=form, user_fp=user_fp, test_data=test_data)
+
+        # ── 2. CLP karışım hesabı (cut-off tablosu + ATE) ────────────────────
+        clp_result = classify_mixture_clp(comps, mixture_ph=mixture_ph)
+
+        # ── 3. STOT RE ────────────────────────────────────────────────────────
+        stot_result = stot_calculate(comps)
+
+        # ── 4. EUH kodları ────────────────────────────────────────────────────
+        euh_result = euh_calculate(comps)
+
+        # ── 5. Ekoloji ────────────────────────────────────────────────────────
+        eco_result = eco_calculate(comps)
+
+        # ── H kodlarını birleştir ─────────────────────────────────────────────
+        all_h = set(clp_result.get('h_codes', []))
+
+        # Fiziksel tehlikeler
+        for r in phys_result.get('results', []):
+            h = r.get('h') or r.get('h_code')
+            if h: all_h.add(h)
+
+        # STOT RE
+        for h in stot_result.get('h_codes', []):
+            all_h.add(h)
+
+        # Ekoloji
+        for h in eco_result.get('h_codes', []):
+            all_h.add(h)
+
+        all_h_list = sorted(all_h)
+
+        # ── Sinyal kelimesi ───────────────────────────────────────────────────
+        signal = 'Danger' if (all_h & _DANGER_H) else ('Warning' if all_h else '')
+
+        # ── clp_passed listesi (PDF Bölüm 2.1 için) ──────────────────────────
+        clp_passed = []
+        seen = set()
+
+        # CLP cut-off sonuçları
+        for p in clp_result.get('passed', []):
+            hc = (p.get('h_code') or '').replace('*','').strip()[:4]
+            if hc and hc not in seen:
+                seen.add(hc)
+                fixed = correct_hclass(hc, p.get('h_class',''))
+                clp_passed.append({
+                    'h_code':     hc,
+                    'h_class':    fixed or p.get('h_class',''),
+                    'reason':     p.get('reason',''),
+                    'cutoff_used':p.get('cutoff_used',''),
+                })
+
+        # Fiziksel tehlikeler
+        for r in phys_result.get('results', []):
+            hc = (r.get('h') or r.get('h_code') or '').replace('*','').strip()[:4]
+            if hc and hc not in seen:
+                seen.add(hc)
+                clp_passed.append({
+                    'h_code':     hc,
+                    'h_class':    r.get('h_class',''),
+                    'reason':     r.get('source','Fiziksel tehlike motoru'),
+                    'cutoff_used':'—',
+                })
+
+        # STOT RE
+        for r in stot_result.get('results', []):
+            hc = (r.get('h') or '').replace('*','').strip()[:4]
+            if hc and hc not in seen:
+                seen.add(hc)
+                clp_passed.append({
+                    'h_code':     hc,
+                    'h_class':    r.get('h_class',''),
+                    'reason':     r.get('reason','STOT RE toplamsal'),
+                    'cutoff_used':'—',
+                })
+
+        # Ekoloji
+        if eco_result.get('aquatic'):
+            aq = eco_result['aquatic']
+            hc = aq.get('h','')
+            if hc and hc not in seen:
+                seen.add(hc)
+                clp_passed.append({
+                    'h_code':     hc,
+                    'h_class':    aq.get('h_class',''),
+                    'reason':     aq.get('formula','Sucul ekoloji'),
+                    'cutoff_used':'—',
+                })
+        if eco_result.get('aquatic_acute'):
+            aq = eco_result['aquatic_acute']
+            hc = aq.get('h','')
+            if hc and hc not in seen:
+                seen.add(hc)
+                clp_passed.append({
+                    'h_code':     hc,
+                    'h_class':    aq.get('h_class',''),
+                    'reason':     aq.get('formula','Sucul akut'),
+                    'cutoff_used':'—',
+                })
+
+        # ── P kodları ─────────────────────────────────────────────────────────
+        p_result = assign_p_codes(all_h_list, signal, usage=usage)
+        p_result['label'] = select_label_p_codes(p_result['p_codes'], 6, h_codes=all_h_list)
+        p_result['sds']   = classify_sds_p_codes(p_result['p_codes'])
+
+        # ── Teorik özellikler ─────────────────────────────────────────────────
+        theo_props = phys_result.get('theo_props', {})
+
+        return {
+            'success':    True,
+            'h_codes':    all_h_list,
+            'all_h_codes':all_h_list,
+            'signal':     signal,
+            'clp_passed': clp_passed,
+            'euh':        euh_result,
+            'euh_codes':  euh_result.get('euh_codes', []),
+            'euh_details':euh_result.get('euh_details', []),
+            'p_codes':    p_result,
+            'physical':   {
+                'results':  phys_result.get('results', []),
+                'primary':  phys_result.get('primary', []),
+                'extra':    phys_result.get('extra', []),
+                'warnings': phys_result.get('warnings', []),
+            },
+            'stot':       stot_result,
+            'eco':        eco_result,
+            'theo_props': theo_props,
+            'warnings':   (phys_result.get('warnings', []) +
+                           stot_result.get('warnings', []) +
+                           clp_result.get('warnings', [])),
+            'pictograms': get_ghs_codes(all_h_list),
+            'ate_details':clp_result.get('ate_mix_details', {}),
+        }
+
+    except Exception as e:
+        import traceback
+        raise HTTPException(status_code=500,
+                            detail=str(e) + '\n' + traceback.format_exc())
+
+
 # ── ÇIKTI: Veri Endpoint'leri ─────────────────────────────────────────────────
 
 @app.get("/api/v1/svhc/{cas}")

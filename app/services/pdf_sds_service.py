@@ -885,7 +885,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             continue
         seen_clf.add(hc)
         reason = entry.get('reason','')
-        conc_info = reason or entry.get('cutoff_used','—')
+        conc_info = reason or entry.get('cutoff_used','') or '—'
         # h_code'dan yetkili h_class türet (DB bozukluğuna karşı düzelt)
         raw_hclass  = entry.get('h_class', '')
         raw_hcode   = entry.get('h_code', '')

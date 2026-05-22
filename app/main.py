@@ -850,11 +850,13 @@ async def sds_calculate(body: dict = Body(...)):
             hc = (r.get('h') or r.get('h_code') or '').replace('*','').strip()[:4]
             if hc and hc not in seen:
                 seen.add(hc)
+                _reason = r.get('source') or r.get('reason') or 'Fiziksel tehlike motoru'
+                _cutoff = r.get('cutoff_used') or '—'
                 clp_passed.append({
                     'h_code':     hc,
                     'h_class':    r.get('h_class',''),
-                    'reason':     r.get('source','Fiziksel tehlike motoru'),
-                    'cutoff_used':'—',
+                    'reason':     _reason,
+                    'cutoff_used':_cutoff,
                 })
 
         # STOT RE

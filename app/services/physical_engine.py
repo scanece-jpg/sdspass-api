@@ -576,16 +576,20 @@ def calculate(comps: List[Dict], form: str = 'liquid',
               if (c.get('cas') or c.get('cas_no') or '').strip() in FLAM_SOL_CAS
               and float(c.get('concMax') or c.get('conc') or 0) >= 1]
         if fs:
+            _fs_src = ', '.join(f"{c.get('name') or c.get('cas','')} (%{float(c.get('concMax') or c.get('conc') or 0):.0f})" for c in fs)
             extra.append({'type': 'flam_sol', 'h': 'H228', 'h_class': 'Flam. Sol. 2',
-                          'signal': 'Warning', 'source': ', '.join(c.get('name') or c.get('cas','') for c in fs)})
+                          'signal': 'Warning', 'source': _fs_src,
+                          'cutoff_used': '≥ %1 yanıcı katı bileşen (CLP Ek-I Tablo 2.7)'})
 
     if form in ('liquid', 'paste'):
         ox = [c for c in comps
               if (c.get('cas') or c.get('cas_no') or '').strip() in OXIDIZING_CAS
               and float(c.get('concMax') or c.get('conc') or 0) >= 1]
         if ox:
+            _ox_src = ', '.join(f"{c.get('name') or c.get('cas','')} (%{float(c.get('concMax') or c.get('conc') or 0):.0f})" for c in ox)
             extra.append({'type': 'oxidizing', 'h': 'H272', 'h_class': 'Ox. Liq. 3',
-                          'signal': 'Warning', 'source': ', '.join(c.get('name') or c.get('cas','') for c in ox)})
+                          'signal': 'Warning', 'source': _ox_src,
+                          'cutoff_used': '≥ %1 oksitleyici bileşen (CLP Ek-I Tablo 2.13)'})
 
     # Teorik fiziksel özellikler
     theo_props = calc_theo_props(comps) if form in ('liquid', 'paste', 'aerosol') else {}

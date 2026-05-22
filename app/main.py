@@ -769,14 +769,15 @@ async def sds_calculate(body: dict = Body(...)):
         physical, stot, eco, theo_props, warnings
     """
     import dataclasses
-    from app.services.clp_service       import classify_mixture_clp, DANGER_H as _DANGER_H
-    from app.services.physical_engine   import calculate as phys_calculate
-    from app.services.stot_engine       import calculate as stot_calculate
-    from app.services.euh_engine        import calculate as euh_calculate
-    from app.services.eco_engine        import calculate as eco_calculate
-    from app.services.p_code_service    import assign_p_codes, select_label_p_codes, classify_sds_p_codes
-    from app.services.ghs_pictogram     import get_ghs_codes
-    from app.services.codes_i18n        import correct_hclass, translate_hclass
+    from app.services.clp_service         import classify_mixture_clp, DANGER_H as _DANGER_H
+    from app.services.physical_engine     import calculate as phys_calculate
+    from app.services.stot_engine         import calculate as stot_calculate
+    from app.services.euh_engine          import calculate as euh_calculate
+    from app.services.eco_engine          import calculate as eco_calculate
+    from app.services.transport_engine    import classify as transport_classify
+    from app.services.p_code_service      import assign_p_codes, select_label_p_codes, classify_sds_p_codes
+    from app.services.ghs_pictogram       import get_ghs_codes
+    from app.services.codes_i18n          import correct_hclass, translate_hclass
 
     comps       = body.get('components', [])
     form        = body.get('form', 'liquid')
@@ -806,6 +807,18 @@ async def sds_calculate(body: dict = Body(...)):
 
         # ── 5. Ekoloji ────────────────────────────────────────────────────────
         eco_result = eco_calculate(comps)
+
+        # ── 6. Taşımacılık — ADR 2023 / IMDG / IATA ──────────────────────────
+        # Fiziksel motordaki H22x/H228 kodlarını CLP'ye ilave et
+        _phys_h_transport = [
+            (r.get('h') or r.get('h_code') or '')
+            for r in phys_result.get('results', [])
+        ]
+        transport_result = transport_classify(
+            h_codes=list(clp_result.get('h_codes', [])),
+            form=form,
+            phys_h_codes=_phys_h_transport,
+        )
 
         # ── H kodlarını birleştir ─────────────────────────────────────────────
         all_h = set(clp_result.get('h_codes', []))
@@ -921,6 +934,7 @@ async def sds_calculate(body: dict = Body(...)):
             },
             'stot':       stot_result,
             'eco':        eco_result,
+            'transport':  transport_result,
             'theo_props': theo_props,
             'warnings':   (phys_result.get('warnings', []) +
                            stot_result.get('warnings', []) +
@@ -997,15 +1011,21 @@ async def adr_lookup(un_no: str, packing_group: str = "II", lang: str = "TR"):
 @app.post("/api/v1/adr/auto-detect")
 async def adr_auto_detect(body: dict):
     """
-    H kodlarından UN numarası otomatik tespit.
-    NOT: Bu endpoint artık kullanılmıyor. Transport sınıflandırması
-    transport_engine.js (frontend) tarafından yapılır ve PDF'e doğrudan aktarılır.
-    Geriye dönük uyumluluk için endpoint varlığını koruyor, boş yanıt döner.
+    H kodlarından UN numarası + ADR/IMDG/IATA sınıflandırması.
+    ADR 2023 Tablo 2.1.3.10 çoklu tehlike öncelik matrisi uygulanır.
+
+    Input:
+        h_codes       : ['H226', 'H302', ...]
+        phys_h_codes  : ['H224', 'H228', ...] (opsiyonel, fiziksel motordan)
+        form          : 'liquid' | 'solid' | 'gas' | 'aerosol'
+        lang          : 'TR' | 'EN'
     """
-    lang = body.get("lang", "TR")
-    return {"found": False,
-            "message": ("Transport sınıflandırması frontend engine tarafından yapılır." if lang=="TR"
-                        else "Transport classification is handled by the frontend engine.")}
+    from app.services.transport_engine import classify as transport_classify
+    h_codes      = body.get('h_codes', [])
+    phys_h_codes = body.get('phys_h_codes', [])
+    form         = body.get('form', 'liquid')
+    result = transport_classify(h_codes=h_codes, form=form, phys_h_codes=phys_h_codes)
+    return {'found': not result.get('not_regulated', True), **result}
 
 
 @app.get("/api/v1/codes/h/{code}")

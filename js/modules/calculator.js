@@ -100,6 +100,7 @@ const CalculatorModule = (() => {
         eco:        data.eco         || {},
         clpPassed:  data.clp_passed  || [],
         phys:       data.physical    || {},
+        transport:  data.transport   || null,
         theoPhys,
         phAssess,
         chipHCodes: [],

@@ -170,6 +170,97 @@ async def generate_pdf(data: dict = Body(...)):
                              'H334','H340','H350','H360','H370','H372'}
             signal = 'Danger' if any(h in _danger_h_set for h in h_codes) else 'Warning'
 
+        # ── Python motorlarıyla clp_passed ve transport'u yeniden hesapla ─────
+        # Frontend'den gelen değerler YERINE Python sonuçları kullanılır.
+        # ISO 27001: tüm sınıflandırma hesapları sunucu tarafında yapılır.
+        try:
+            from app.services.clp_service       import classify_mixture_clp as _clp_calc
+            from app.services.physical_engine   import calculate as _phys_calc
+            from app.services.stot_engine       import calculate as _stot_calc
+            from app.services.eco_engine        import calculate as _eco_calc2
+            from app.services.transport_engine  import classify as _transport_calc
+            from app.services.codes_i18n        import correct_hclass as _correct_hclass
+
+            _form_val = product.get('form', 'liquid')
+            _user_fp  = None
+            _fp_raw   = phys_in.get('flash_point') or phys_in.get('user_fp')
+            if _fp_raw is not None:
+                try: _user_fp = float(_fp_raw)
+                except: pass
+
+            _clp_res  = _clp_calc(components, mixture_ph=None)
+            _phys_res = _phys_calc(components, form=_form_val, user_fp=_user_fp)
+            _stot_res = _stot_calc(components)
+            _eco_res2 = _eco_calc2(components)
+
+            _cp   = []
+            _seen = set()
+
+            for p in _clp_res.get('passed', []):
+                hc = (p.get('h_code') or '').replace('*','').strip()[:4]
+                if hc and hc not in _seen:
+                    _seen.add(hc)
+                    _fixed = _correct_hclass(hc, p.get('h_class',''))
+                    _cp.append({
+                        'h_code':      hc,
+                        'h_class':     _fixed or p.get('h_class',''),
+                        'reason':      p.get('reason',''),
+                        'cutoff_used': p.get('cutoff_used',''),
+                    })
+
+            for r in _phys_res.get('results', []):
+                hc = (r.get('h') or r.get('h_code') or '').replace('*','').strip()[:4]
+                if hc and hc not in _seen:
+                    _seen.add(hc)
+                    _cp.append({
+                        'h_code':      hc,
+                        'h_class':     r.get('h_class',''),
+                        'reason':      r.get('source') or 'Fiziksel tehlike motoru',
+                        'cutoff_used': r.get('cutoff_used') or '—',
+                    })
+
+            for r in _stot_res.get('results', []):
+                hc = (r.get('h') or '').replace('*','').strip()[:4]
+                if hc and hc not in _seen:
+                    _seen.add(hc)
+                    _cp.append({
+                        'h_code':      hc,
+                        'h_class':     r.get('h_class',''),
+                        'reason':      r.get('reason','STOT RE toplamsal'),
+                        'cutoff_used': '—',
+                    })
+
+            for _aq_key in ('aquatic', 'aquatic_acute'):
+                _aq = _eco_res2.get(_aq_key)
+                if _aq:
+                    hc = _aq.get('h','')
+                    if hc and hc not in _seen:
+                        _seen.add(hc)
+                        _cp.append({
+                            'h_code':      hc,
+                            'h_class':     _aq.get('h_class',''),
+                            'reason':      _aq.get('formula','Sucul ekoloji'),
+                            'cutoff_used': '—',
+                        })
+
+            py_clp_passed = _cp
+
+            # Transport — fiziksel H kodlarını da ilet
+            _phys_h_tr = [(r.get('h') or r.get('h_code') or '')
+                          for r in _phys_res.get('results', [])]
+            py_transport = _transport_calc(
+                h_codes=list(_clp_res.get('h_codes', [])),
+                form=_form_val,
+                phys_h_codes=_phys_h_tr,
+            )
+
+        except Exception as _eng_err:
+            import traceback as _tb
+            print(f'[PDF] Python motor hatası, frontend verisi kullanılıyor: {_eng_err}\n'
+                  + _tb.format_exc())
+            py_clp_passed = data.get('clp_passed', [])
+            py_transport  = data.get('transport', {})
+
         # P kodlarını güncel h_codes ile yeniden hesapla (eko H kodu + H314 filtresi dahil)
         p_result = assign_p_codes(h_codes, signal, usage=usage)
         p_result['label'] = select_label_p_codes(p_result['p_codes'], 6, h_codes=h_codes)
@@ -318,7 +409,7 @@ async def generate_pdf(data: dict = Body(...)):
                         'note':       h.get('note'),
                         'repro_sub':  h.get('repro_sub'),
                     }.items() if v is not None and v != ''}
-                    for h in data.get('clp_passed', [])
+                    for h in py_clp_passed
                 ],
             },
             'euh':          euh_result,
@@ -327,9 +418,8 @@ async def generate_pdf(data: dict = Body(...)):
             'disclosure_map': disc_map,
             'phys_props':   phys_in,
             'eco':          eco_result,
-            # Frontend TransportEngine sonucunu her zaman kullan.
-            # JS motoru (transport_engine.js) tek kaynak — H314/pH durumu orada zaten işlendi.
-            'transport':    _map_transport(data.get('transport', {})),
+            # Python transport_engine sonucunu kullan (ISO 27001 uyumu).
+            'transport':    _map_transport(py_transport),
             'revision': {
                 'date':    rev_date,
                 'no':      revision_in.get('no', '1'),

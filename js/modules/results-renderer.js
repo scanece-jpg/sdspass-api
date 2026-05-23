@@ -25,18 +25,25 @@ const ResultsRenderer = (() => {
 
   function render(result) {
     const { hCodes, signal, stot, euh, pRes, eco, phys, phAssess, theoPhys,
-            chipHCodes, comps, showExtra } = result;
+            chipHCodes, comps, showExtra, transport, ppe, pictograms } = result;
+
+    // theoPhys'ı phys nesnesine göm (renderAll phys.theoProps olarak bekler)
+    const physWithTheo = Object.assign({}, phys || {}, { theoProps: theoPhys || null });
 
     // renderResults global fonksiyonunu çağır (mevcut implementasyon)
     renderResults(
       euh,
-      phys,
+      physWithTheo,
       stot,
       eco,
       pRes,
       comps,
       showExtra || false,
-      [...new Set(chipHCodes || [])]
+      [...new Set(chipHCodes || [])],
+      transport   || null,
+      ppe         || {},
+      signal      || 'None',
+      pictograms  || []
     );
   }
 

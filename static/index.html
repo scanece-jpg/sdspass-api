@@ -1073,15 +1073,14 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
 <script src="js/event-bus.js?v=20250328"></script>
 <script src="js/state-store.js?v=20250328"></script>
 <script src="js/engines/hp_texts.js?v=20260425"></script>
-<!-- Motor arsivi: inline JS bagimliliklar icin backup konumundan yukleniyor -->
-<script src="js/engines/backup/clp_engine.js?v=20260520d"></script>
-<script src="js/engines/backup/pcode_engine.js?v=20260505b"></script>
-<script src="js/engines/backup/eco_engine.js?v=20260518d"></script>
-<script src="js/engines/backup/stot_engine.js?v=20250328"></script>
-<script src="js/engines/backup/euh_engine.js?v=20260507c"></script>
-<script src="js/engines/backup/transport_engine.js?v=20260518c"></script>
-<script src="js/engines/backup/ppe_engine.js?v=20250328"></script>
-<script src="js/engines/backup/physical_engine.js?v=20260407"></script>
+<!-- Modüller — Python API akışı (ISO 27001) -->
+<script src="js/modules/cas-lookup.js?v=20260523"></script>
+<script src="js/modules/component-manager.js?v=20260523"></script>
+<script src="js/modules/conc-selector.js?v=20260523"></script>
+<script src="js/modules/calculator.js?v=20260523"></script>
+<script src="js/modules/results-renderer.js?v=20260523"></script>
+<script src="js/modules/pdf-exporter.js?v=20260523"></script>
+<script src="js/app.js?v=20260523"></script>
 
 <script>
 // ══════════════════════════════════════════════════════════════════════════════
@@ -1190,9 +1189,117 @@ const _sclMap = {};
 // SCL ham liste (refinement paneli için): { compId: [{h_code,h_class,c_min,c_max?},...] }
 const _sclRaw = {};
 
-// CLP_CUTOFFS — tek kaynak CLPEngine.CUTOFFS'tan türetilir (clp_engine.js yüklendikten sonra)
-// Doğrudan bu değişkeni kullanmak yerine CLPEngine.CUTOFFS kullanın.
-const CLP_CUTOFFS = (typeof CLPEngine !== 'undefined') ? CLPEngine.CUTOFFS : {};
+// ── CLP Statik Sabitler (Python API kullanılır — motorlar kaldırıldı) ────────────
+// Kaynak: CLP (AT) 1272/2008 Annex I / KKDİK Ek-2
+const CLP_CUTOFFS = {
+  'H314':5.0,'H315':10.0,'H318':3.0,'H319':10.0,
+  'H317':1.0,'H334':0.1,
+  'H340':0.1,'H341':1.0,
+  'H350':0.1,'H351':1.0,
+  'H360':0.3,'H361':3.0,'H362':0.3,
+  'H360D':0.3,'H360F':0.3,'H360FD':0.3,
+  'H361D':3.0,'H361F':3.0,'H361FD':3.0,
+  'H370':10.0,'H371':10.0,'H372':1.0,'H373':10.0,
+  'H335':20.0,'H336':20.0,
+  'H304':10.0,
+};
+
+const DOMINANCE = {
+  'H314':['H318','H315','H319'], 'H318':['H319'],
+  'H300':['H301','H302'], 'H301':['H302'],
+  'H310':['H311','H312'], 'H311':['H312'],
+  'H330':['H331','H332'], 'H331':['H332'],
+  'H370':['H371','H335','H336'], 'H371':['H335','H336'],
+  'H372':['H373'],
+  'H340':['H341'], 'H350':['H351'],
+  'H360':['H361','H361D','H361F','H361FD'],
+  'H360D':['H361','H361D'], 'H360F':['H361','H361F'],
+  'H360FD':['H360','H360D','H360F','H361','H361D','H361F','H361FD'],
+  'H361D':[], 'H361F':[], 'H361FD':['H361','H361D','H361F'],
+  'H410':['H400','H411','H412','H413'],
+  'H411':['H412','H413'], 'H412':['H413'],
+  'H224':['H225','H226'], 'H225':['H226'],
+  'H271':['H272'], 'H260':['H261'],
+  'H251':['H252'], 'H240':['H241','H242'], 'H241':['H242'],
+};
+
+const DANGER_H = new Set([
+  'H200','H201','H202','H203','H204','H205',
+  'H220','H222','H224','H225','H228','H232',
+  'H240','H241','H250','H251','H260','H270','H271',
+  'H300','H301','H304',
+  'H310','H311','H314','H318',
+  'H330','H331','H334',
+  'H340','H350','H360','H360D','H360F','H360FD',
+  'H370','H372',
+]);
+
+const WARNING_H = new Set([
+  'H221','H223','H226','H227','H229',
+  'H242','H252','H261','H272','H273','H280','H281','H290',
+  'H302','H303','H312','H313','H332','H333',
+  'H315','H316','H317','H319','H320',
+  'H335','H336',
+  'H341','H351','H361','H361D','H361F','H361FD','H362',
+  'H371','H373',
+  'H400','H410','H411','H420',
+]);
+
+// H kodu → GHS piktogram (CLP Annex V / KKDİK Ek-5)
+const _H_TO_GHS = {
+  'H200':'GHS01','H201':'GHS01','H202':'GHS01','H203':'GHS01','H204':'GHS01','H205':'GHS01',
+  'H220':'GHS02','H221':'GHS02','H222':'GHS02','H223':'GHS02',
+  'H224':'GHS02','H225':'GHS02','H226':'GHS02','H228':'GHS02','H229':'GHS02','H232':'GHS02',
+  'H240':'GHS01','H241':'GHS01','H242':'GHS02',
+  'H250':'GHS02','H251':'GHS02','H252':'GHS02','H260':'GHS02','H261':'GHS02',
+  'H270':'GHS03','H271':'GHS03','H272':'GHS03',
+  'H280':'GHS04','H281':'GHS04',
+  'H290':'GHS05','H314':'GHS05','H318':'GHS05',
+  'H300':'GHS06','H301':'GHS06','H310':'GHS06','H311':'GHS06','H330':'GHS06','H331':'GHS06',
+  'H302':'GHS07','H312':'GHS07','H332':'GHS07',
+  'H315':'GHS07','H317':'GHS07','H319':'GHS07','H335':'GHS07','H336':'GHS07','H420':'GHS07',
+  'H304':'GHS08','H334':'GHS08',
+  'H340':'GHS08','H341':'GHS08','H350':'GHS08','H351':'GHS08',
+  'H360':'GHS08','H361':'GHS08','H362':'GHS08',
+  'H360D':'GHS08','H360F':'GHS08','H360FD':'GHS08',
+  'H361D':'GHS08','H361F':'GHS08','H361FD':'GHS08',
+  'H370':'GHS08','H371':'GHS08','H372':'GHS08','H373':'GHS08',
+  'H400':'GHS09','H410':'GHS09','H411':'GHS09',
+};
+const _GHS_ORDER = ['GHS01','GHS02','GHS03','GHS04','GHS05','GHS06','GHS07','GHS08','GHS09'];
+
+function _normH(raw) {
+  const s = (raw || '').replace(/[*\s]/g,'').toUpperCase();
+  if (/^H36[01]/.test(s)) {
+    const tail = s.substring(4).replace(/[^DF]/g,'');
+    const sub  = (tail.includes('D') && tail.includes('F')) ? 'FD'
+               : tail.includes('D') ? 'D' : tail.includes('F') ? 'F' : '';
+    return 'H36' + s[3] + sub;
+  }
+  return s.substring(0,4);
+}
+
+function getGhsCodes(hCodes) {
+  const pics = new Set();
+  hCodes.forEach(h => {
+    const base = _normH(h);
+    const ghs = _H_TO_GHS[base] || _H_TO_GHS[h];
+    if (ghs) pics.add(ghs);
+  });
+  // CLP §1.2.1.2 Piktogram Önceliği
+  if (pics.has('GHS01')) { pics.delete('GHS02'); pics.delete('GHS03'); }
+  if (pics.has('GHS06')) pics.delete('GHS07');
+  if (pics.has('GHS05') && !pics.has('GHS06')) {
+    const _ghs07Keep = ['H302','H312','H332','H317','H335','H336'];
+    if (!hCodes.some(h => _ghs07Keep.includes(_normH(h)))) pics.delete('GHS07');
+  }
+  if (pics.has('GHS08') && hCodes.some(h => _normH(h) === 'H334')) {
+    const _akut = ['H302','H312','H332','H335','H336'];
+    if (!hCodes.some(h => _akut.includes(_normH(h)))) pics.delete('GHS07');
+  }
+  if (pics.has('GHS02') || pics.has('GHS06')) pics.delete('GHS04');
+  return _GHS_ORDER.filter(g => pics.has(g));
+}
 
 function addComp(pf = {}) {
   const id = ++_compId;
@@ -1566,18 +1673,16 @@ async function onCas(id) {
   } catch(e) { console.warn('[CAS lookup]', e); }
 }
 
-// Fiziksel özellikleri API'dan çek ve PhysicalEngine DB'sine yükle
+// Fiziksel özellikleri API'dan çek (Python API hesaplamasında kullanılır)
 async function _fetchPhysProps(cas) {
+  // Artık PhysicalEngine kullanılmıyor — Python API madde lookup'ı sırasında
+  // fiziksel verileri zaten DB'den çeker. Bu fonksiyon geriye dönük uyumluluk için korunuyor.
   try {
     const r = await fetch(`${API_BASE}/sds/substance/phys?cas=${encodeURIComponent(cas)}`);
     if (!r.ok) return;
     const d = await r.json();
     if (!d.found || !d.props || !Object.keys(d.props).length) return;
-    // PhysicalEngine çalışma zamanı DB'sine ekle
-    if (typeof PhysicalEngine !== 'undefined') {
-      PhysicalEngine.updateDB(cas, d.props);
-      console.log(`[Frontend] Fiziksel veri PubChem'den yüklendi: ${cas}`, d.props);
-    }
+    console.log(`[Frontend] Fiziksel veri önbelleğe alındı: ${cas}`, Object.keys(d.props));
   } catch(e) {
     console.warn('[_fetchPhysProps]', e);
   }
@@ -1766,7 +1871,7 @@ function findThresholds(lo, hi, hazards) {
   // H kodu bazlı GCL eşik tablosu — CLP Annex I Tablo 3.x
   // Tek kaynak: eşik değerleri CLPEngine.CUTOFFS'tan alınır; sabit değerler
   // bu tabloda olmayan H kodları (Akut Toks, Sucul) için ek satır bilgisidir.
-  const _C = (typeof CLPEngine !== 'undefined') ? (CLPEngine.CUTOFFS || {}) : {};
+  const _C = CLP_CUTOFFS;
   const GCL_BY_HCODE = {
     'H314':[[_C['H314']||5,  'Skin Corr. 1 başlar' ],[10,'Skin Irrit. 2 başlar']],
     'H318':[[_C['H318']||3,  'Eye Dam. 1 başlar'   ],[10,'Eye Irrit. 2 başlar']],
@@ -2479,10 +2584,11 @@ function _runCalculationCore() {
   if (!isNaN(tfLogKow))                  testData.log_kow           = tfLogKow;
   if (!isNaN(tfOdorTh) && tfOdorTh > 0)  testData.odor_threshold   = tfOdorTh;
 
-  EventBus.emit('PIPELINE_START', { comps, form, userFP, testData });
+  // Python API üzerinden hesapla — calculator.js CALC_REQUESTED'ı dinler
+  EventBus.emit('CALC_REQUESTED', {});
 }
 
-// ── Pipeline orkestratörü ─────────────────────────────────────────────────────
+// ── Pipeline orkestratörü (artık kullanılmıyor — Python API akışı aktif) ────────
 function initPipeline() {
   EventBus.on('PIPELINE_START', ({ comps, form, userFP, testData }) => {
     // Tüm engine'leri paralel tetikle
@@ -2587,39 +2693,33 @@ function renderAll(s) {
     ...(phys.results||[]).map(r => r.h || r.h_code),
   ])].filter(Boolean).map(c => c.replace(/[*\s]/g,'').substring(0,4));
 
-  // Motorlar arası dominance — CLPEngine DOMINANCE tablosunu uygula
-  // Örn: EcoEngine H410+H400 üretirse → H400 süpürülür
-  //      STOTEngine H372 + CLPEngine H373 → H373 süpürülür
+  // Motorlar arası dominance — CLP Annex I dominance tablosu
   const allH = [...allHRaw];
-  if (typeof CLPEngine !== 'undefined' && CLPEngine.DOMINANCE) {
-    Object.entries(CLPEngine.DOMINANCE).forEach(([dominant, subs]) => {
-      if (allH.includes(dominant)) {
-        subs.forEach(sub => {
-          const i = allH.indexOf(sub);
-          if (i > -1) allH.splice(i, 1);
-        });
-      }
-    });
-  }
+  Object.entries(DOMINANCE).forEach(([dominant, subs]) => {
+    if (allH.includes(dominant)) {
+      subs.forEach(sub => {
+        const i = allH.indexOf(sub);
+        if (i > -1) allH.splice(i, 1);
+      });
+    }
+  });
 
-  // Sinyal kelimesi — birleşik H kodlarından yeniden hesapla
-  const _dH = CLPEngine.DANGER_H;
-  const _wH = CLPEngine.WARNING_H;
-  const combinedSignal = allH.some(c => _dH && _dH.has(c)) ? 'Danger'
-    : allH.some(c => _wH && _wH.has(c)) ? 'Warning' : 'None';
+  // Sinyal kelimesi — birleşik H kodlarından (API sinyali varsa öncelikli)
+  const _dH = DANGER_H;
+  const _wH = WARNING_H;
+  const combinedSignal = s.signal && s.signal !== 'None' ? s.signal
+    : allH.some(c => _dH.has(c)) ? 'Danger'
+    : allH.some(c => _wH.has(c)) ? 'Warning' : 'None';
 
-  // ── P Kodu / Taşımacılık / KKD — TÜM H kodlarıyla hesapla ──────────────
-  // (H_CODES_READY sadece CLP kodlarını içerir; fiziksel H225, H304 vb. eksik kalırdı)
-  const usage = document.getElementById('pusage')?.value || 'industrial';
-  const pcodes   = PCodeEngine.calculate({ hCodes: allH, signal: combinedSignal, usage });
-  const form = document.getElementById('pform')?.value || 'liquid';
-  const transport = TransportEngine.classify(allH, form);
-  const ppe       = PPEEngine.select(allH);
+  // ── P Kodu / Taşımacılık / KKD — API'den gelir ──────────────────────────
+  const pcodes    = s.pRes      || {};
+  const transport = s.transport || null;
+  const ppe       = s.ppe       || {};
 
   let h = '';
 
   // Piktogramlar — if bloğu dışında tanımla (blok-scope ReferenceError önlenir)
-  const combinedPics = CLPEngine.getGhsCodes ? CLPEngine.getGhsCodes(allH) : (clp.pictograms || []);
+  const combinedPics = (s.pictograms && s.pictograms.length) ? s.pictograms : getGhsCodes(allH);
 
   // ── Banner ────────────────────────────────────────────────────────────────
   if (allH.length > 0) {
@@ -2646,18 +2746,16 @@ function renderAll(s) {
   if (healthH.length) {
     h += `<div class="r-title">🧪 Bölüm 2.1 — Sağlık Tehlikeleri</div>`;
     healthH.forEach((code,i) => {
-      const _dH = CLPEngine.DANGER_H || DANGER_H;
-      const _wH = CLPEngine.WARNING_H;
-      const cls = _dH.has(code) ? 'danger' : 'warning';
+      const cls = DANGER_H.has(code) ? 'danger' : 'warning';
       const tag = _dH.has(code)
         ? '<span class="sbadge danger">DANGER</span>'
         : (_wH && _wH.has(code)
             ? '<span class="sbadge warning">WARNING</span>'
             : '<span class="sbadge" style="background:rgba(100,181,246,.1);color:var(--info)">H-beyanı</span>');
 
-      // cutoffUsed: CLPEngine'den gelen gerçek eşik (SCL varsa SCL, yoksa GCL)
+      // cutoffUsed: API'den gelen gerçek eşik (SCL varsa SCL, yoksa GCL tablosundan)
       const cu = clp.cutoffUsed && clp.cutoffUsed[code];
-      const cutoffVal  = cu ? cu.value : CLPEngine.CUTOFFS[code];
+      const cutoffVal  = cu ? cu.value : CLP_CUTOFFS[code];
       const cutoffSrc  = cu ? cu.source : 'GCL';
       const isSCL      = cutoffSrc === 'SCL';
       const cutoffNote = cutoffVal !== undefined
@@ -2790,8 +2888,10 @@ function renderAll(s) {
 
   // ── Taşımacılık ──────────────────────────────────────────────────────────
   h += `<div class="r-title">🚛 Bölüm 14 — Taşımacılık</div>`;
-  if (transport.not_regulated) {
-    h += `<div class="ecard info"><div class="ecard-head"><span class="ecard-code">Tehlikeli değil</span></div><div class="ecard-source">${transport.note}</div></div>`;
+  if (!transport) {
+    h += `<div class="ecard info"><div class="ecard-source">Taşımacılık verisi hesaplanıyor…</div></div>`;
+  } else if (transport.not_regulated) {
+    h += `<div class="ecard info"><div class="ecard-head"><span class="ecard-code">Tehlikeli değil</span></div><div class="ecard-source">${transport.note||''}</div></div>`;
   } else {
     h += `<div class="transport-grid">
       <div class="transport-card"><div class="t-mode">🚚 Kara (ADR)</div><div class="t-un">${transport.road?.un||'—'}</div><div class="t-class">Sınıf ${transport.road?.class||'—'} · PG ${transport.road?.pg||'—'}</div></div>
@@ -2802,7 +2902,7 @@ function renderAll(s) {
   }
 
   // ── KKD / Bölüm 8 ────────────────────────────────────────────────────────
-  const hasPPE = Object.values(ppe).some(arr => arr.length > 0);
+  const hasPPE = Object.values(ppe || {}).some(v => Array.isArray(v) && v.length > 0);
   if (hasPPE) {
     h += `<div class="r-title">🧤 Bölüm 8 — Kişisel Koruyucu Donanım</div>`;
     const cats = [
@@ -2896,24 +2996,44 @@ async function _checkSVHC(comps) {
   }
 }
 
+// ── renderResults — ResultsRenderer (CALC_COMPLETE) tarafından çağrılır ──────────
+// Parametreler: euh, phys, stot, eco, pRes, comps, showExtra,
+//               allH (tüm H kodları), transport, ppe, signal, pictograms
+function renderResults(euh, phys, stot, eco, pRes, comps, showExtra,
+                       allH, transport, ppe, signal, pictograms) {
+  // API verisini renderAll'ın beklediği formata dönüştür
+  const clp = {
+    hCodes:     allH || [],    // tüm H kodları (renderAll iç filtresiyle health H'lar ayrılır)
+    cutoffUsed: {},            // API akışında SCL bilgisi ayrı gelmez — CLP_CUTOFFS kullanılır
+    signal:     signal || 'None',
+  };
+
+  // Not: phys.theoProps results-renderer.js tarafından zaten eklendi
+
+  const s = {
+    clp,
+    stot:       stot        || {},
+    eco:        eco         || {},
+    euh:        euh         || {},
+    phys:       phys        || { results: [] },
+    pRes:       pRes        || {},
+    transport:  transport   || null,
+    ppe:        ppe         || {},
+    pictograms: pictograms  || [],
+    signal:     signal      || 'None',
+  };
+
+  renderAll(s);
+}
+
 function showError(msg) {
   document.getElementById('results').innerHTML = `<div class="warn-box">⚠ ${msg}</div>`;
 }
 
 // ── Başlatma ──────────────────────────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', () => {
-  // Engine'leri başlat
-  CLPEngine.init();
-  PCodeEngine.init();
-  EcoEngine.init();
-  STOTEngine.init();
-  EUHEngine.init();
-  TransportEngine.init();
-  PPEEngine.init();
-  PhysicalEngine.init();
-
-  // Pipeline orkestratörünü başlat
-  initPipeline();
+  // JS motorları kaldırıldı — hesaplar Python API'ye devredildi (ISO 27001)
+  // CalculatorModule.init() ve ResultsRenderer.init() app.js tarafından çağrılır
 
   // İlk bileşeni ekle
   addComp();
@@ -3416,8 +3536,7 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
     // Kaynak etiket → Türkçe gerekçe metni dönüştürücü (PDF Bölüm 2.1)
     // hcode: hangi H koduna ait olduğunu bilmek gereken durumlar için (GCL-sum-weighted)
     const _srcLabel = (src, val, catHclass, hcode = '') => {
-      const hcTR = c => (typeof CLPEngine !== 'undefined' && CLPEngine.translateClass)
-        ? CLPEngine.translateClass(c) : c;  // h_class Türkçe (mevcut ise)
+      const hcTR = c => c;  // h_class — Türkçe çeviri Python API'den geliyor
       // pH kaynağı: "pH=X.X (≤ 2) → SEA Tablo 3.2.3" — kaynak string zaten açıklayıcı
       if (src.startsWith('pH=')) return src;
       switch(src) {
@@ -3488,7 +3607,7 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
     // Dominated H kodlarını da clpPassed'a ekle (PDF Bölüm 2.1 tam tablo için)
     // Dominated kodlar allH'dan dışlandı ama all_h_codes'a ekleniyor — h_class gerekli
     const dominated = clp?.dominated || [];
-    const _dominance = (typeof CLPEngine !== 'undefined') ? (CLPEngine.DOMINANCE || {}) : {};
+    const _dominance = DOMINANCE;
     dominated.forEach(hc => {
       const hc4 = (hc || '').replace(/[*\s]/g,'').substring(0,4);
       if (!hc4 || clpPassed.some(e => e.h_code === hc4)) return;

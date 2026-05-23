@@ -101,9 +101,10 @@ const CalculatorModule = (() => {
         clpPassed:  data.clp_passed  || [],
         phys:       data.physical    || {},
         transport:  data.transport   || null,
+        ppe:        data.ppe         || {},
         theoPhys,
         phAssess,
-        chipHCodes: [],
+        chipHCodes: data.h_codes    || [],   // tüm H kodları (renderResults allH olarak kullanır)
         comps,
         showExtra:  showExtra || false,
         ateDetails: data.ate_details || {},

@@ -254,6 +254,25 @@ LANG_DATA: Dict[str, Dict] = {
             '14.3': 'Transport hazard class(es)',
             '14.4': 'Packing group',
             '14.5': 'Environmental hazards',
+            '14.6': 'Special precautions for user',
+            '14.7': 'Maritime transport in bulk (MARPOL/IBC Code)',
+            '15.1': 'Safety, health and environmental regulations specific to the substance or mixture',
+            '15.2': 'Chemical safety assessment',
+            '16.1': 'Revisions',
+            '16.2': 'Abbreviations and acronyms',
+            '16.3': 'Key references',
+            '3.1': 'Substances',
+            '9.1': 'Information on basic physical and chemical properties',
+            '9.2': 'Other information',
+            '10.1': 'Reactivity',
+            '10.2': 'Chemical stability',
+            '10.3': 'Possibility of hazardous reactions',
+            '10.4': 'Conditions to avoid',
+            '10.5': 'Incompatible materials',
+            '10.6': 'Hazardous decomposition products',
+            '11.1': 'Information on toxicological effects',
+            '12.7': 'Other adverse effects',
+            '13.1': 'Waste treatment methods',
         },
 
         'label': {
@@ -303,6 +322,7 @@ LANG_DATA: Dict[str, Dict] = {
             'ppe_resp':       'Respiratory Protection',
             'ppe_body':       'Body Protection',
             'disposal_reg':   'Dispose in accordance with local/national regulations.',
+            'all_sections':   'See all sections',
         },
 
         'phys_props': {

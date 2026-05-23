@@ -170,15 +170,17 @@ async def generate_pdf(data: dict = Body(...)):
                              'H334','H340','H350','H360','H370','H372'}
             signal = 'Danger' if any(h in _danger_h_set for h in h_codes) else 'Warning'
 
-        # ── Python motorlarıyla clp_passed ve transport'u yeniden hesapla ─────
+        # ── Python motorlarıyla clp_passed, transport ve ppe'yi yeniden hesapla ──
         # Frontend'den gelen değerler YERINE Python sonuçları kullanılır.
         # ISO 27001: tüm sınıflandırma hesapları sunucu tarafında yapılır.
+        py_ppe = data.get('ppe', {})   # fallback değeri (hata durumu için)
         try:
             from app.services.clp_service       import classify_mixture_clp as _clp_calc
             from app.services.physical_engine   import calculate as _phys_calc
             from app.services.stot_engine       import calculate as _stot_calc
             from app.services.eco_engine        import calculate as _eco_calc2
             from app.services.transport_engine  import classify as _transport_calc
+            from app.services.ppe_engine        import select as _ppe_calc
             from app.services.codes_i18n        import correct_hclass as _correct_hclass
 
             _form_val = product.get('form', 'liquid')
@@ -254,12 +256,22 @@ async def generate_pdf(data: dict = Body(...)):
                 phys_h_codes=_phys_h_tr,
             )
 
+            # PPE — tüm H kodlarıyla (CLP + fiziksel + STOT + eko)
+            _all_h_pdf = (
+                list(_clp_res.get('h_codes', []))
+                + [r.get('h') or r.get('h_code') or '' for r in _phys_res.get('results', [])]
+                + _stot_res.get('h_codes', [])
+                + _eco_res2.get('h_codes', [])
+            )
+            py_ppe = _ppe_calc([h for h in _all_h_pdf if h], lang=lang)
+
         except Exception as _eng_err:
             import traceback as _tb
             print(f'[PDF] Python motor hatası, frontend verisi kullanılıyor: {_eng_err}\n'
                   + _tb.format_exc())
             py_clp_passed = data.get('clp_passed', [])
             py_transport  = data.get('transport', {})
+            py_ppe        = data.get('ppe', {})
 
         # P kodlarını güncel h_codes ile yeniden hesapla (eko H kodu + H314 filtresi dahil)
         p_result = assign_p_codes(h_codes, signal, usage=usage)
@@ -429,6 +441,8 @@ async def generate_pdf(data: dict = Body(...)):
             'ate_mix_details': data.get('ate_mix_details', {}),
             'h314_neutralization_removed': bool(data.get('h314_neutralization_removed', False)),
             'clp_note_overrides': data.get('clp_note_overrides', {}),
+            # Python PPE motoru sonucu (ISO 27001 uyumu — sunucu tarafı)
+            'ppe': py_ppe,
         }
 
         pdf_bytes = generate_sds_pdf(sds_data, lang=lang)
@@ -865,6 +879,7 @@ async def sds_calculate(body: dict = Body(...)):
     from app.services.euh_engine          import calculate as euh_calculate
     from app.services.eco_engine          import calculate as eco_calculate
     from app.services.transport_engine    import classify as transport_classify
+    from app.services.ppe_engine          import select as ppe_select
     from app.services.p_code_service      import assign_p_codes, select_label_p_codes, classify_sds_p_codes
     from app.services.ghs_pictogram       import get_ghs_codes
     from app.services.codes_i18n          import correct_hclass, translate_hclass
@@ -909,6 +924,18 @@ async def sds_calculate(body: dict = Body(...)):
             form=form,
             phys_h_codes=_phys_h_transport,
         )
+
+        # ── KKD (Bölüm 8) ────────────────────────────────────────────────────
+        # all_h_list henüz hesaplanmamış, transport sonrasında yapılıyor;
+        # şimdi mevcut h kodlarıyla PPE seç — ekoloji H'ları sonra eklenir.
+        # PPE fonksiyonu küçük set farkına toleranslı, eksik H=false negative.
+        _ppe_h_now = (
+            list(clp_result.get('h_codes', []))
+            + [r.get('h') or r.get('h_code') or '' for r in phys_result.get('results', [])]
+            + stot_result.get('h_codes', [])
+            + eco_result.get('h_codes', [])
+        )
+        ppe_result = ppe_select([h for h in _ppe_h_now if h], lang=lang)
 
         # ── H kodlarını birleştir ─────────────────────────────────────────────
         all_h = set(clp_result.get('h_codes', []))
@@ -1025,6 +1052,7 @@ async def sds_calculate(body: dict = Body(...)):
             'stot':       stot_result,
             'eco':        eco_result,
             'transport':  transport_result,
+            'ppe':        ppe_result,
             'theo_props': theo_props,
             'warnings':   (phys_result.get('warnings', []) +
                            stot_result.get('warnings', []) +

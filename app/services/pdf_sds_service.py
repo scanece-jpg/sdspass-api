@@ -1409,20 +1409,66 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         story.append(Paragraph(S(lang,'oel_reference'), styles['body']))
 
     story += sub_block(f"8.2 {sub_title(lang,'8.2')}", styles)
-    sec8 = generate_section(8, h_codes)
-    ppe = sec8.get('ppe', {})
-    ppe_map = {
-        'gloves': term(lang,'ppe_gloves'),
-        'eyes':   term(lang,'ppe_eyes'),
-        'resp':   term(lang,'ppe_resp'),
-        'body':   term(lang,'ppe_body'),
-    }
-    ppe_rows = []
-    for key, label in ppe_map.items():
-        val = ppe.get(key, term(lang,'not_applicable'))
-        ppe_rows.append([label, val])
 
-    story.append(data_table(ppe_rows, [50*mm, 130*mm], styles, header=False))
+    # Python PPE motoru çıktısı (sds_data['ppe']) tercih edilir;
+    # yoksa generate_section fallback kullanılır.
+    _ppe_engine_data = sds_data.get('ppe') or {}
+
+    def _ppe_items_text(items: list) -> str:
+        """[{ppe, level}] listesini okunabilir metne çevir."""
+        mandatory   = [i['ppe'] for i in items if i.get('level') == 1]
+        recommended = [i['ppe'] for i in items if i.get('level') == 2]
+        parts = mandatory
+        if recommended:
+            rec_label = 'Tavsiye' if lang == 'TR' else 'Recommended'
+            parts += [f"({rec_label}: {p})" for p in recommended]
+        return '; '.join(parts) if parts else term(lang, 'not_applicable')
+
+    if _ppe_engine_data:
+        # Yeni PPE motoru verisi mevcut — detaylı tablo
+        _na = term(lang, 'not_applicable')
+        ppe_rows = [
+            [
+                term(lang, 'ppe_resp'),
+                _ppe_items_text(_ppe_engine_data.get('respiratory', [])) or _na,
+            ],
+            [
+                term(lang, 'ppe_gloves'),
+                _ppe_items_text(_ppe_engine_data.get('hands', [])) or _na,
+            ],
+            [
+                term(lang, 'ppe_eyes'),
+                _ppe_items_text(_ppe_engine_data.get('eyes', [])) or _na,
+            ],
+            [
+                term(lang, 'ppe_body'),
+                _ppe_items_text(_ppe_engine_data.get('body', [])) or _na,
+            ],
+        ]
+        story.append(data_table(ppe_rows, [50*mm, 130*mm], styles, header=False))
+
+        # Genel hijyen önlemleri
+        _gen = _ppe_engine_data.get('general', [])
+        if _gen:
+            _gen_label = 'Genel Hijyen Önlemleri:' if lang == 'TR' else 'General Hygiene Measures:'
+            story.append(Paragraph(f"<b>{_gen_label}</b>", styles['body']))
+            for g in _gen:
+                story.append(Paragraph(f"• {g}", styles['bullet']))
+    else:
+        # Fallback — eski generate_section yöntemi
+        sec8 = generate_section(8, h_codes)
+        ppe_old = sec8.get('ppe', {})
+        ppe_map = {
+            'gloves': term(lang, 'ppe_gloves'),
+            'eyes':   term(lang, 'ppe_eyes'),
+            'resp':   term(lang, 'ppe_resp'),
+            'body':   term(lang, 'ppe_body'),
+        }
+        ppe_rows = []
+        for key, label in ppe_map.items():
+            val = ppe_old.get(key, term(lang, 'not_applicable'))
+            ppe_rows.append([label, val])
+        story.append(data_table(ppe_rows, [50*mm, 130*mm], styles, header=False))
 
     story.append(PageBreak())
 

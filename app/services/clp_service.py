@@ -240,6 +240,12 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
             h_class = (haz.get("h_class") or "").replace("*","").strip()
             h_code  = (haz.get("h_code")  or "").replace("*","").replace(" ","")[:4]
 
+            # Acute Tox. — karışım için ATE yöntemi (CLP Annex I 3.1.3.6) birincil yöntemdir.
+            # Cutoff/konvansiyonel yöntem (Tablo 3.1.3) Acute Tox. için kullanılmaz;
+            # ATE hesabı aşağıdaki calculate_clp() async fonksiyonunda yapılır.
+            if h_class.startswith('Acute Tox.'):
+                continue
+
             rule = CLP_CUTOFFS_DICT.get(h_class)
             if not rule:
                 # h_code'dan fallback
@@ -264,6 +270,11 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
                         cutoff = float(c_min)  # SCL her zaman GCL'nin yerini alır
                         break
 
+            # Fiziksel tehlikeler (cutoff=0.0) — fiziksel tehlike motoru tarafından da
+            # hesaplanır; burada sadece B2.1 tablosu için ek kayıt tutulur.
+            # Konsantrasyon eşiği 0.0 → görsel olarak anlamlı bir minimum (%1) kullan.
+            _orig_cutoff = rule["cutoff"]   # SCL öncesi orijinal kesme değeri
+
             if conc < cutoff:
                 # ── STOT SE 1→2 geçiş kuralı — CLP Tablo 3.8.3 ──────────────────
                 # STOT SE 1 bileşen H370 eşiğinin altında ama H371 eşiğinin üstündeyse
@@ -286,13 +297,13 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
                             "h_code":  "H371",
                             "conc":    conc,
                             "reason":  (
-                                f"{comp.get('name',cas)} %{conc:.1f} — STOT SE 1 bileşen "
+                                f"{cas} %{conc:.1f} — STOT SE 1 bileşen "
                                 f"%{h371_cutoff} ≤ C < {cutoff}% → CLP Tablo 3.8.3 geçiş: STOT SE 2"
                             ),
                         })
                 else:
                     warnings.append(
-                        f"{comp.get('name',cas)} ({h_class} %{conc:.1f}) → "
+                        f"{cas} ({h_class} %{conc:.1f}) → "
                         f"cut-off %{cutoff} altı → dahil edilmedi"
                     )
                 continue
@@ -303,11 +314,16 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
                 # Örn: NaOH %3 → SCL entry class="Skin Corr. 1B" → h_class override
                 scl_entry_conc = _get_scl_entry_for_conc(scl_list, h[:4], conc)
                 effective_hclass = (scl_entry_conc or {}).get("h_class") or h_class
+                # Kesme değeri gösterimi: 0.0 → "bileşen varlığı" (fiziksel tehlike)
+                if _orig_cutoff == 0.0:
+                    _cutoff_str = f'%{conc:.1f} (fiziksel tehlike, bileşen varlığı)'
+                else:
+                    _cutoff_str = f'%{conc:.1f} ≥ kesme %{cutoff}'
                 passed.append({
                     "h_class": effective_hclass,
                     "h_code":  h,
                     "conc":    conc,
-                    "reason":  f"{comp.get('name',cas)} %{conc:.1f} ≥ kesme %{cutoff}",
+                    "reason":  f"{cas} {_cutoff_str}",
                 })
 
     # ── pH Uç Değer Kontrolü — SEA/CLP Annex I Tablo 3.2.3 notu ─────────────────

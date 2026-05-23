@@ -482,8 +482,10 @@ def _calc_asp_tox(comps: List[Dict], test_data: Dict = None) -> Dict:
     if test_data:
         v = test_data.get('viscosity')
         if v is not None:
-            try: kin_visc = float(v)
-            except: pass
+            try:
+                kin_visc = float(v)
+            except (ValueError, TypeError):
+                pass
 
     if kin_visc is not None and kin_visc > 20.5:
         return {'result': None,
@@ -601,8 +603,6 @@ def calculate(comps: List[Dict], form: str = 'liquid',
 
     # Teorik fiziksel özellikler
     theo_props = calc_theo_props(comps) if form in ('liquid', 'paste', 'aerosol') else {}
-    if not theo_props:
-        theo_props = {}
 
     # Test verisi varsa üzerine yaz
     if test_data:

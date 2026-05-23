@@ -2293,15 +2293,54 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     tunnel     = adr_det.get('tunnel_code', '—')
     cl_code    = adr_det.get('classification_code', '—')
 
+    # ── Mod bazlı sınıf bilgisi (road/sea/air ayrı) ──────────────────────────
+    _road = t_src.get('road') or {}
+    _sea  = t_src.get('sea')  or {}
+    _air  = t_src.get('air')  or {}
+    # Her mod için tehlike sınıfı — yoksa ana sınıf kullan
+    _cls_road = _road.get('class') or haz_class
+    _cls_sea  = _sea.get('class')  or haz_class
+    _cls_air  = _air.get('class')  or haz_class
+    # Sınıf etiket (sayı + yan tehlike)
+    def _cls_str(cls_val, sub):
+        if not cls_val or cls_val == '—': return '—'
+        lbl = CLASS_LABELS.get(str(cls_val), str(cls_val))
+        return f"Sınıf {cls_val} — {lbl}" if lang == 'TR' else f"Class {cls_val} — {CLASS_LABELS.get(str(cls_val), str(cls_val))}"
+    _road_lbl = f"Sınıf {_cls_road}" + (f" ({sub_class})" if sub_class and _cls_road != '—' else '') if lang == 'TR' else f"Class {_cls_road}" + (f" ({sub_class})" if sub_class and _cls_road != '—' else '')
+    _sea_lbl  = f"Sınıf {_cls_sea}"  if _cls_sea  != '—' else '—'
+    _air_lbl  = f"Sınıf {_cls_air}"  if _cls_air  != '—' else '—'
+    if _cls_road == '—': _road_lbl = na
+    if _cls_sea  == '—': _sea_lbl  = na
+    if _cls_air  == '—': _air_lbl  = na
+
+    # Marine Pollutant (IMDG) — çevre H kodları varsa
+    _marine_lbl = 'Evet — Deniz Kirletici (Marine Pollutant)' if lang == 'TR' else 'Yes — Marine Pollutant'
+    _marine_no  = term(lang, 'not_applicable')
+    _imdg_env   = _marine_lbl if is_env_hazard else _marine_no
+
+    # 14.6 — Kullanıcı için özel önlemler (standart metin)
+    _sec14_6 = 'Bkz. Bölüm 6 (Kaza önleme), 7 (Elleçleme/depolama) ve 8 (KKD).' if lang == 'TR' \
+               else 'See Section 6 (accidental release), 7 (handling/storage) and 8 (PPE).'
+
     transport_rows = [
-        [sub_title(lang,'14.1') + ' (UN No)',          un_no + auto_note],
-        [sub_title(lang,'14.2'),                        ship_name],
-        [sub_title(lang,'14.3') + ' (ADR/IMDG/IATA)',  haz_class],
-        [sub_title(lang,'14.4'),                        pack_grp],
-        [sub_title(lang,'14.5'),                        env_haz],
-        ['Sınıflandırma Kodu (ADR)' if lang=='TR' else 'Classification Code (ADR)', cl_code],
-        ['Kemler Kodu / Tehlike No'  if lang=='TR' else 'Hazard ID No (Kemler)',     kemler],
-        ['Tünel Kısıtlama Kodu'      if lang=='TR' else 'Tunnel Restriction Code',   tunnel],
+        [sub_title(lang,'14.1') + ' (UN No)',   un_no + auto_note],
+        [sub_title(lang,'14.2'),                 ship_name],
+        # 14.3 — Her mod için ayrı satır
+        [('14.3 ' + sub_title(lang,'14.3') + '\n  ↳ Karayolu / Demiryolu (ADR/RID)'
+          if lang == 'TR' else
+          '14.3 ' + sub_title(lang,'14.3') + '\n  ↳ Road / Rail (ADR/RID)'),
+         _road_lbl],
+        ['  ↳ Denizyolu (IMDG)' if lang == 'TR' else '  ↳ Sea (IMDG)',  _sea_lbl],
+        ['  ↳ Havayolu (IATA)'  if lang == 'TR' else '  ↳ Air (IATA)',  _air_lbl],
+        [sub_title(lang,'14.4'),                 pack_grp],
+        [sub_title(lang,'14.5'),                 env_haz],
+        ['  ↳ Deniz Kirletici (IMDG)' if lang == 'TR' else '  ↳ Marine Pollutant (IMDG)', _imdg_env],
+        [('14.6 Kullanıcı için özel önlemler' if lang == 'TR'
+          else '14.6 Special precautions for user'),  _sec14_6],
+        # ADR'ye özgü teknik bilgiler
+        ['— Sınıflandırma Kodu (ADR)' if lang == 'TR' else '— Classification Code (ADR)', cl_code],
+        ['— Kemler Kodu / Tehlike No'  if lang == 'TR' else '— Hazard ID No (Kemler)',     kemler],
+        ['— Tünel Kısıtlama Kodu'      if lang == 'TR' else '— Tunnel Restriction Code',   tunnel],
     ]
     story.append(data_table(transport_rows, [75*mm, 105*mm], styles, header=False))
     if auto_t:
@@ -2483,7 +2522,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         f"CLP — Classification, Labelling and Packaging | "
         f"GHS — Globally Harmonised System | "
         f"{abbrev_tr}"
-        f"SDS — Safety Data Sheet | PPE — Personal Protective Equipment",
+        f"SDS — Safety Data Sheet | "
+        + ("KKE — Kişisel Koruyucu Ekipman | KKD — Kişisel Koruyucu Donanım" if lang == 'TR'
+           else "PPE — Personal Protective Equipment"),
         styles['small']
     ))
 

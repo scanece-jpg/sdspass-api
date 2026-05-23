@@ -35,6 +35,7 @@ RULES: Dict[str, List[Dict[str, Any]]] = {
 
     # ── Solunum Yolu Koruma ────────────────────────────────────────────────
     'respiratory': [
+        # Seviye 1 — Zorunlu (ölümcül/toksik inhalasyon tehlikesi)
         {
             'h_codes': ['H330', 'H331'],
             'ppe': {
@@ -67,11 +68,31 @@ RULES: Dict[str, List[Dict[str, Any]]] = {
             },
             'level': 1,
         },
+        # Seviye 2 — Tavsiye edilen (tahriş edici/aşındırıcı buhar/aerosol)
         {
             'h_codes': ['H332', 'H335', 'H336'],
             'ppe': {
                 'TR': 'Yarım yüz maskesi veya FFP2 toz maskesi (EN 149)',
                 'EN': 'Half-face mask or FFP2 dust mask (EN 149)',
+            },
+            'level': 2,
+        },
+        {
+            # H314 aşındırıcı: aerosol/buhar oluşursa solunum yolları da etkilenir
+            # CLP Ek I / KKDİK Ek-2 §8.2: buhar/aerosoldan korunma zorunlu
+            'h_codes': ['H314'],
+            'ppe': {
+                'TR': 'İyi havalandırma sağlayın; aerosol/buhar oluşursa yarım yüz maskesi — A1B1E1P2 filtreli (EN 14387)',
+                'EN': 'Ensure adequate ventilation; if mists/vapors form, use half-face mask with A1B1E1P2 filter (EN 14387)',
+            },
+            'level': 2,
+        },
+        {
+            # H271/H272 oksitleyici: oksitleyici buhar/aerosol solunum tehlikesi
+            'h_codes': ['H271', 'H272'],
+            'ppe': {
+                'TR': 'İyi havalandırma sağlayın; oksitleyici buhara maruz kalınırsa P2 filtreli yarım yüz maskesi (EN 149)',
+                'EN': 'Ensure adequate ventilation; if oxidising vapors/mists form, use half-face mask with P2 filter (EN 149)',
             },
             'level': 2,
         },
@@ -278,6 +299,13 @@ def select(h_codes: List[str], lang: str = 'TR') -> Dict[str, Any]:
                     added_texts.add(ppe_text)
 
     # Varsayılan KKD — eşleşme yoksa minimum öneri
+    if not result['respiratory']:
+        result['respiratory'].append({
+            'ppe': ('İyi havalandırma sağlayın'
+                    if lang == 'TR'
+                    else 'Ensure good ventilation'),
+            'level': 2,
+        })
     if not result['hands']:
         result['hands'].append({
             'ppe': ('Nitril veya lateks eldiven (EN ISO 374-1)'

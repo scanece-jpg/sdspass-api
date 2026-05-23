@@ -212,6 +212,8 @@ body::after{display:none}
 .psrc-badge{font-size:8px;padding:2px 6px;border-radius:8px;font-weight:700;text-align:center;white-space:nowrap}
 .psrc-badge-motor{background:rgba(99,179,237,.15);color:#63b3ed}
 .psrc-badge-empty{background:rgba(255,255,255,.06);color:var(--text3)}
+.psrc-badge-req{background:rgba(252,129,129,.15);color:#fc8181}
+.psrc-motor-note{font-size:9px;color:var(--text3);background:rgba(99,179,237,.07);border:1px solid rgba(99,179,237,.2);border-radius:6px;padding:5px 9px;margin-bottom:8px;line-height:1.5}
 .psrc-empty-note{font-size:10px;color:var(--text3);text-align:center;padding:20px 0;font-style:italic}
 .psrc-foot{padding:10px 16px 14px;border-top:1px solid var(--border2);display:flex;gap:8px;justify-content:flex-end;background:var(--bg3)}
 .psrc-btn-ok{padding:8px 20px;border-radius:7px;border:none;cursor:pointer;font-size:12px;font-weight:700;background:var(--accent);color:#fff}
@@ -3442,85 +3444,113 @@ function _h314Choose(keepH314) {
 // ── Fiziksel özellik eksik-alan modalı ───────────────────────────────────────
 let _physSrcCallback = null;
 
-// Tüm Section 9 alanları — {formId, label, type, unit, theoKey, naId}
+// Tüm Section 9 alanları — mandatory:true = kullanıcı mutlaka girmeli (motor hesaplayamaz)
 const _PSRC_FIELDS = [
-  { formId:'tf_appearance', label:'Görünüm / Hal',        type:'text',   unit:'',     theoKey:null,             naId:null        },
-  { formId:'tf_color',      label:'Renk',                 type:'text',   unit:'',     theoKey:null,             naId:null        },
-  { formId:'tf_odor',       label:'Koku',                 type:'text',   unit:'',     theoKey:null,             naId:null        },
-  { formId:'tf_ph',         label:'pH',                   type:'text',   unit:'',     theoKey:null,             naId:'na_ph'     },
-  { formId:'tf_fp',         label:'Parlama Noktası',       type:'number', unit:'°C',   theoKey:'flash_point',    naId:'na_fp'     },
-  { formId:'tf_bp',         label:'Kaynama Noktası',       type:'number', unit:'°C',   theoKey:'boiling_point',  naId:'na_bp'     },
-  { formId:'tf_density',    label:'Yoğunluk',             type:'number', unit:'g/mL', theoKey:'density',        naId:'na_density'},
-  { formId:'tf_visc',       label:'Viskozite @40°C',      type:'number', unit:'cSt',  theoKey:'viscosity',      naId:'na_visc'   },
-  { formId:'tf_sol',        label:'Çözünürlük',           type:'number', unit:'mg/L', theoKey:'solubility',     naId:'na_sol'    },
-  { formId:'tf_mp',         label:'Erime Noktası',         type:'number', unit:'°C',   theoKey:null,             naId:'na_mp'     },
-  { formId:'tf_evap',       label:'Buharlaşma Hızı',      type:'text',   unit:'',     theoKey:null,             naId:null        },
-  { formId:'tf_ait',        label:'Ototutuşma Sıcaklığı', type:'number', unit:'°C',   theoKey:null,             naId:null        },
-  { formId:'tf_logkow',     label:'Log Kow',              type:'number', unit:'',     theoKey:null,             naId:null        },
-  { formId:'tf_decomp',     label:'Ayrışma Sıcaklığı',    type:'number', unit:'°C',   theoKey:null,             naId:null        },
-  { formId:'tf_odor_thresh',label:'Koku Eşiği',           type:'number', unit:'',     theoKey:'odor_threshold', naId:null        },
+  { formId:'tf_appearance', label:'Görünüm / Hal',        type:'text',   unit:'',     theoKey:null,             naId:null,         mandatory:true  },
+  { formId:'tf_color',      label:'Renk',                 type:'text',   unit:'',     theoKey:null,             naId:null,         mandatory:true  },
+  { formId:'tf_odor',       label:'Koku',                 type:'text',   unit:'',     theoKey:null,             naId:null,         mandatory:true  },
+  { formId:'tf_ph',         label:'pH',                   type:'text',   unit:'',     theoKey:null,             naId:'na_ph',      mandatory:false },
+  { formId:'tf_fp',         label:'Parlama Noktası',       type:'number', unit:'°C',   theoKey:'flash_point',    naId:'na_fp',      mandatory:false },
+  { formId:'tf_bp',         label:'Kaynama Noktası',       type:'number', unit:'°C',   theoKey:'boiling_point',  naId:'na_bp',      mandatory:false },
+  { formId:'tf_density',    label:'Yoğunluk',             type:'number', unit:'g/mL', theoKey:'density',        naId:'na_density', mandatory:false },
+  { formId:'tf_visc',       label:'Viskozite @40°C',      type:'number', unit:'cSt',  theoKey:'viscosity',      naId:'na_visc',    mandatory:false },
+  { formId:'tf_sol',        label:'Çözünürlük',           type:'number', unit:'mg/L', theoKey:'solubility',     naId:'na_sol',     mandatory:false },
+  { formId:'tf_mp',         label:'Erime Noktası',         type:'number', unit:'°C',   theoKey:null,             naId:'na_mp',      mandatory:false },
+  { formId:'tf_evap',       label:'Buharlaşma Hızı',      type:'text',   unit:'',     theoKey:null,             naId:null,         mandatory:false },
+  { formId:'tf_ait',        label:'Ototutuşma Sıcaklığı', type:'number', unit:'°C',   theoKey:null,             naId:null,         mandatory:false },
+  { formId:'tf_logkow',     label:'Log Kow',              type:'number', unit:'',     theoKey:null,             naId:null,         mandatory:false },
+  { formId:'tf_decomp',     label:'Ayrışma Sıcaklığı',    type:'number', unit:'°C',   theoKey:null,             naId:null,         mandatory:false },
+  { formId:'tf_odor_thresh',label:'Koku Eşiği',           type:'number', unit:'',     theoKey:'odor_threshold', naId:null,         mandatory:false },
 ];
 
 function _showPhysSrcModal(callback) {
   const tp = _lastCalcState?.phys?.theoProps || {};
 
   // Hangi alanlar henüz kullanıcı tarafından GİRİLMEMİŞ?
-  // (N/A seçilmiş veya data-source==='user' ise atla)
   const toShow = _PSRC_FIELDS.filter(f => {
     const el = document.getElementById(f.formId);
-    if (!el || el.dataset.autoHidden === 'true') return false;   // gizli alan
-    if (f.naId && document.getElementById(f.naId)?.checked) return false; // N/A seçili
-    if (el.dataset.source === 'user' && el.value?.trim()) return false;   // kullanıcı zaten girdi
-    return true; // boş ya da sadece motor doldurmuş
+    if (!el || el.dataset.autoHidden === 'true') return false;
+    if (f.naId && document.getElementById(f.naId)?.checked) return false;
+    if (el.dataset.source === 'user' && el.value?.trim()) return false; // kullanıcı zaten girdi
+    return true;
   });
 
-  if (toShow.length === 0) { callback(); return; } // hepsi dolu → direkt devam
-
-  // İki grup: motor değeri olanlar ve tamamen boş olanlar
-  const withMotor = toShow.filter(f => f.theoKey && tp[f.theoKey]?.value != null);
-  const noMotor   = toShow.filter(f => !(f.theoKey && tp[f.theoKey]?.value != null));
-
-  const subtitle = withMotor.length
-    ? `${noMotor.length} alan boş, ${withMotor.length} alan için motor hesabı mevcut.`
-    : `${noMotor.length} alan henüz doldurulmamış.`;
-  document.getElementById('physSrcSubtitle').textContent = subtitle;
+  if (toShow.length === 0) { callback(); return; }
 
   const makeRow = (f) => {
     const el       = document.getElementById(f.formId);
-    const motorVal = f.theoKey ? tp[f.theoKey]?.value : null;
+    const motorVal = f.theoKey ? (tp[f.theoKey]?.value ?? null) : null;
     const measured = f.theoKey ? (tp[f.theoKey]?.measured ?? false) : false;
-    const curVal   = el?.value?.trim() || '';               // mevcut form değeri (motor dolgu)
-    const fillVal  = curVal || (motorVal != null ? motorVal : '');
-    const isMotor  = !curVal && motorVal != null;
+    // Motor dolu mu? — source=theo VEYA theoKey'den değer var
+    const isMotor  = (el?.dataset?.source === 'theo') || (motorVal !== null && motorVal !== undefined);
+    // Kutuda gösterilecek değer: mevcut form değeri (motor dolgusu olabilir) ya da tp'den al
+    const curVal   = el?.value ?? '';
+    const fillVal  = (curVal !== '' && curVal !== null) ? curVal
+                     : (motorVal !== null && motorVal !== undefined ? motorVal : '');
 
-    const inputCls = isMotor ? 'psrc-row-input motor' : 'psrc-row-input';
-    const badge    = isMotor
-      ? `<span class="psrc-badge psrc-badge-motor">${measured ? 'Ölçülen' : '● Motor'}</span>`
-      : `<span class="psrc-badge psrc-badge-empty">Boş</span>`;
-    const unitSpan = f.unit ? `<span class="psrc-row-unit">${f.unit}</span>` : '';
-    const stepAttr = f.type === 'number' ? 'step="any"' : '';
+    // Rozet
+    let badgeCls, badgeTxt;
+    if (isMotor) {
+      badgeCls = 'psrc-badge-motor';
+      badgeTxt = measured ? '✓ Ölçülen' : '✓ Motor';
+    } else if (f.mandatory) {
+      badgeCls = 'psrc-badge-req';
+      badgeTxt = '⚠ Zorunlu';
+    } else {
+      badgeCls = 'psrc-badge-empty';
+      badgeTxt = 'Boş';
+    }
+
+    const inputCls  = isMotor ? 'psrc-row-input motor' : 'psrc-row-input';
+    const unitSpan  = f.unit ? `<span class="psrc-row-unit">${f.unit}</span>` : '';
+    const stepAttr  = f.type === 'number' ? 'step="any"' : '';
+    const labelStar = f.mandatory ? ' <span style="color:#fc8181;font-size:9px">*</span>' : '';
+    // Placeholder: metin alanlarında em dash, sayısal alanlarda boş (unit span gösterir)
+    const ph        = f.type === 'text' ? '—' : '';
 
     return `<div class="psrc-row">
-      <div class="psrc-row-label">${f.label}</div>
+      <div class="psrc-row-label">${f.label}${labelStar}</div>
       <div class="psrc-row-wrap">
         <input class="${inputCls}" type="${f.type}" ${stepAttr}
-               data-psrc-field="${f.formId}" value="${fillVal}"
-               placeholder="${f.unit || '—'}">
+               data-psrc-field="${f.formId}"
+               value="${fillVal}" placeholder="${ph}"
+               title="Değeri değiştirmek için bu alana tıklayın">
         ${unitSpan}
       </div>
-      ${badge}
+      <div class="psrc-badge ${badgeCls}">${badgeTxt}</div>
     </div>`;
   };
 
+  // Grupla: motor olanlar / zorunlu boşlar / diğer boşlar
+  const motorRows = toShow.filter(f => {
+    const el = document.getElementById(f.formId);
+    const mv = f.theoKey ? (tp[f.theoKey]?.value ?? null) : null;
+    return (el?.dataset?.source === 'theo') || (mv !== null && mv !== undefined);
+  });
+  const emptyRows = toShow.filter(f => !motorRows.includes(f));
+  const mandEmptyRows = emptyRows.filter(f => f.mandatory);
+  const optEmptyRows  = emptyRows.filter(f => !f.mandatory);
+
   let html = '';
-  if (withMotor.length) {
-    html += `<div class="psrc-section-title">⚡ Motor hesabı mevcut — onaylayın veya kendiniz girin</div>`;
-    html += withMotor.map(makeRow).join('');
+  if (motorRows.length) {
+    html += `<div class="psrc-section-title">⚡ Motor hesabı var — onaylayın veya düzenleyin</div>
+             <div class="psrc-motor-note">Motor değerleri bileşen veritabanından hesaplanmıştır. Değiştirmek için kutuya tıklayın.</div>`;
+    html += motorRows.map(makeRow).join('');
   }
-  if (noMotor.length) {
-    html += `<div class="psrc-section-title">✏️ Boş alanlar — doldurun veya atlayın</div>`;
-    html += noMotor.map(makeRow).join('');
+  if (mandEmptyRows.length) {
+    html += `<div class="psrc-section-title">⚠ Zorunlu alanlar — mutlaka girin</div>`;
+    html += mandEmptyRows.map(makeRow).join('');
   }
+  if (optEmptyRows.length) {
+    html += `<div class="psrc-section-title">✏️ Diğer boş alanlar — isteğe bağlı</div>`;
+    html += optEmptyRows.map(makeRow).join('');
+  }
+
+  const totalEmpty = emptyRows.length;
+  const subtitle = motorRows.length
+    ? `${motorRows.length} alanda motor hesabı mevcut${totalEmpty ? `, ${totalEmpty} alan boş` : ''}.`
+    : `${totalEmpty} alan henüz doldurulmamış.`;
+  document.getElementById('physSrcSubtitle').textContent = subtitle;
 
   document.getElementById('physSrcBody').innerHTML = html;
   _physSrcCallback = callback;
@@ -3528,12 +3558,13 @@ function _showPhysSrcModal(callback) {
 }
 
 function _physSrcConfirm() {
-  // Modal inputlarındaki değerleri ana form alanlarına yaz
   document.querySelectorAll('#physSrcBody input[data-psrc-field]').forEach(inp => {
     const target = document.getElementById(inp.dataset.psrcField);
     if (!target) return;
-    const v = inp.value?.trim();
-    if (v) { target.value = v; if (!target.dataset.source) target.dataset.source = 'user'; }
+    const v = inp.value;  // boş string bile yazılabilir (kullanıcı silmişse)
+    target.value = v;
+    // Motor kalmışsa 'theo', kullanıcı bir şey yazdıysa 'user' olarak işaretle
+    if (v.trim()) target.dataset.source = target.dataset.source === 'theo' ? 'theo' : 'user';
   });
   document.getElementById('physSrcOverlay').classList.remove('open');
   if (_physSrcCallback) { _physSrcCallback(); _physSrcCallback = null; }

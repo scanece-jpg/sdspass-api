@@ -78,9 +78,9 @@ const CalculatorModule = (() => {
       const data = await resp.json();
       if (!data.success) throw new Error(data.detail || 'Hesaplama başarısız');
 
-      // Teorik fiziksel alanları forma doldur
+      // Teorik fiziksel alanları forma doldur (renderResults çağrısından önce hemen uygula)
       const theoPhys = data.theo_props || {};
-      if (typeof _fillPhysFormFields === 'function') _fillPhysFormFields(theoPhys);
+      if (typeof _autofillPhysFields === 'function') _autofillPhysFields(theoPhys);
 
       // pH değerlendirmesi (client-side yeterli — form alanı okuma)
       const phAssess = (typeof assessPH === 'function') ? assessPH(comps) : {};

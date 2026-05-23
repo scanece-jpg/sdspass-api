@@ -603,6 +603,8 @@ def calculate(comps: List[Dict], form: str = 'liquid',
 
     # Teorik fiziksel özellikler
     theo_props = calc_theo_props(comps) if form in ('liquid', 'paste', 'aerosol') else {}
+    if theo_props is None:
+        theo_props = {}   # calc_theo_props bileşen yoksa None döner — sonraki adımlar için {}
 
     # Test verisi varsa üzerine yaz
     if test_data:

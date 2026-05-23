@@ -1589,6 +1589,19 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             ph_str = str(raw)
         return _normalize_ph(ph_str) + _method_note('ph')
 
+    def _text(key):
+        """Birimsiz metin alanı — hem string hem dict formatını destekler.
+        Bulunamadığında None döner (or-zinciri için)."""
+        v = phys.get(key)
+        if v is None or v == '':
+            return None
+        if isinstance(v, dict):
+            if v.get('nd') or v.get('na'):
+                return v.get('display') or None
+            return v.get('display') or None
+        s = str(v).strip()
+        return s if s else None
+
     _mp_lbl  = 'Donma/Erime Noktası' if lang=='TR' else 'Melting/Freezing Point'
     _rd_lbl  = 'Bağıl Yoğunluk (su=1)' if lang=='TR' else 'Relative Density (water=1)'
     _vd_lbl  = 'Buhar Yoğunluğu (hava=1)' if lang=='TR' else 'Vapor Density (air=1)'
@@ -1596,15 +1609,23 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _ex_lbl  = 'Patlama Sınırları (LEL/UEL)' if lang=='TR' else 'Explosive Limits (LEL/UEL)'
 
     _ex_val = na
-    if phys.get('lel') or phys.get('uel'):
-        _ex_val = f"%{phys.get('lel','?')} – %{phys.get('uel','?')}"
+    _lel_raw = phys.get('lel')
+    _uel_raw = phys.get('uel')
+    if _lel_raw or _uel_raw:
+        _lel_str = (_lel_raw.get('display') if isinstance(_lel_raw, dict)
+                    else str(_lel_raw) if _lel_raw else '?')
+        _uel_str = (_uel_raw.get('display') if isinstance(_uel_raw, dict)
+                    else str(_uel_raw) if _uel_raw else '?')
+        _ex_val = f"%{_lel_str} – %{_uel_str}"
         _ex_val += _method_note('lel')   # LEL yöntemi (UEL aynı kaynaktan)
 
     _vp_raw = phys.get('vapor_pressure')
-    if _vp_raw not in (None, ''):
+    _vp_display = (_vp_raw.get('display') if isinstance(_vp_raw, dict)
+                   else (str(_vp_raw) if _vp_raw not in (None, '') else None))
+    if _vp_display:
         # Birim zaten içeriyorsa dokunma, sadece sayısal değere hPa ekle
-        _vp_val = str(_vp_raw) if any(u in str(_vp_raw) for u in ('hPa','kPa','mmHg','bar','Pa')) \
-                  else f"{_vp_raw} hPa"
+        _vp_val = (_vp_display if any(u in _vp_display for u in ('hPa','kPa','mmHg','bar','Pa'))
+                   else f"{_vp_display} hPa")
         _vp_val += _method_note('vapor_pressure')
     elif phys.get('vapor_pressure_num'):
         _vp_val = f"{phys.get('vapor_pressure_num')} hPa"
@@ -1616,14 +1637,14 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
 
     all_phys_rows = [
         [phys_prop(lang,'appearance'),
-         phys.get(f'appearance_{lang}') or phys.get('appearance') or na],
-        [phys_prop(lang,'color'),         phys.get('color') or na],
-        [phys_prop(lang,'odor'),          phys.get('odor') or na],
+         _text(f'appearance_{lang}') or _text('appearance') or na],
+        [phys_prop(lang,'color'),         _text('color') or na],
+        [phys_prop(lang,'odor'),          _text('odor')  or na],
         [phys_prop(lang,'ph'),            _pv_ph()],
         [phys_prop(lang,'flash_point'),   _pv('flash_point','°C')],
         [phys_prop(lang,'boiling_point'), _pv('boiling_point','°C')],
         [_mp_lbl,                         _pv('melting_point','°C')],
-        [_er_lbl,                         phys.get('evap_rate') or na],
+        [_er_lbl,                         _text('evap_rate') or na],
         [phys_prop(lang,'density'),       _pv('density','g/cm³')],
         [_rd_lbl,                         _pv('rel_density')],
         [phys_prop(lang,'viscosity'),     _pv('viscosity','cSt @40°C')],
@@ -1636,7 +1657,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     ]
     # Koku eşiği
     _ot_lbl = 'Koku Eşiği' if lang=='TR' else 'Odour Threshold'
-    _ot_val = phys.get('odour_threshold') or na
+    _ot_val = _pv('odour_threshold')
 
     # Ayrışma sıcaklığı
     _dc_lbl = 'Ayrışma Sıcaklığı' if lang=='TR' else 'Decomposition Temp.'

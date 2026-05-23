@@ -2087,7 +2087,14 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             story.append(data_table(comp_rows, [60*mm, 20*mm, 20*mm, 80*mm], styles))
 
         # Açıklama notu
-        mix_has_acute = bool(set(h_codes) & ACUTE_H)
+        # h_codes (etiket) yerine ate_mix_details resultCode'larına bak:
+        # h_codes dominance nedeniyle H312/H332 içermeyebilir (H310/H330 baskın),
+        # ama ATE hesabı gerçekten bir sınıflandırma ürettiyse doğru notu göster.
+        # CLP Annex I §3.1.1: ATE ≤ eşik (dahil) → sınıflandırma tetiklenir.
+        mix_has_acute = any(
+            detail.get('resultCode')
+            for detail in ate_mix_details.values()
+        ) or bool(set(h_codes) & ACUTE_H)
         if mix_has_acute:
             ate_note = (
                 'Yukarıdaki ATEmix değerleri hesaplanmış olup karışım akut toksisite '

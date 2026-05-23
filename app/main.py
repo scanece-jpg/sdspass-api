@@ -182,16 +182,27 @@ async def generate_pdf(data: dict = Body(...)):
             from app.services.transport_engine  import classify as _transport_calc
             from app.services.ppe_engine        import select as _ppe_calc
             from app.services.codes_i18n        import correct_hclass as _correct_hclass
+            from app.services.phys_props_parser import (
+                parse_all_phys_props as _parse_phys,
+                get_calc             as _phys_calc_val,
+                get_pcn_band         as _get_pcn_band,
+            )
+
+            # Fiziksel özellikleri parse et → display/calc/pcn/range_notes
+            _parsed_phys = _parse_phys(phys_in)
 
             _form_val = product.get('form', 'liquid')
-            _user_fp  = None
-            _fp_raw   = phys_in.get('flash_point') or phys_in.get('user_fp')
-            if _fp_raw is not None:
-                try: _user_fp = float(_fp_raw)
-                except: pass
+            # Flash point — aralık girilmişse worst-case (min) alınır
+            _user_fp = _phys_calc_val(_parsed_phys, 'flash_point')
+            if _user_fp is None:
+                # Eski format fallback
+                _fp_raw = phys_in.get('user_fp')
+                if _fp_raw is not None:
+                    try: _user_fp = float(_fp_raw)
+                    except: pass
 
-            # pH değerini fiziksel özelliklerden al — B2.1 pH kuralı için (CLP Tablo 3.2.3)
-            # mixture_ph=None bırakılırsa pH ≤2/≥11.5 → H314 direkt atama kuralı devre dışı kalır
+            # pH — clp_service kendi parse'ını yapıyor (aralık desteği mevcut)
+            # ham string geçirilir; clp_service _parse_ph_range ile lo/hi ayırır
             _ph_raw = phys_in.get('ph') or None
             _clp_res  = _clp_calc(components, mixture_ph=_ph_raw)
             _phys_res = _phys_calc(components, form=_form_val, user_fp=_user_fp)
@@ -368,6 +379,12 @@ async def generate_pdf(data: dict = Body(...)):
                 'conc_str':      conc_str,
                 'conc_min':      conc_min,
                 'conc_max':      conc_max,
+                # PCN bandı (CLP Ek VIII) — worst-case = max değer
+                'conc_pcn_band': _get_pcn_band(
+                    conc_min=float(conc_min) if conc_min is not None else None,
+                    conc_max=float(conc_max) if conc_max is not None else None,
+                    conc_exact=conc if conc and not (conc_min or conc_max) else None,
+                ),
                 'hazards':       [
                     {k: v for k, v in {
                         'h_class':   h.get('h_class', ''),
@@ -431,7 +448,7 @@ async def generate_pdf(data: dict = Body(...)):
             'p_codes':      p_result,
             'components':   mapped_comps,
             'disclosure_map': disc_map,
-            'phys_props':   phys_in,
+            'phys_props':   _parsed_phys,
             'eco':          eco_result,
             # Python transport_engine sonucunu kullan (ISO 27001 uyumu).
             'transport':    _map_transport(py_transport),

@@ -1015,6 +1015,30 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     else:
         story.append(Paragraph(term(lang,'not_classified'), styles['body']))
 
+    # ── Fiziksel özellik aralık notları (PCN hazırlık) ────────────────────────
+    # Sınıflandırmayı etkileyen bir özellik aralık olarak girildiyse
+    # hangi ucun kullanıldığını şeffaf biçimde belirt.
+    try:
+        from app.services.phys_props_parser import get_range_notes as _get_range_notes
+        _rng_notes = _get_range_notes(phys, lang)
+        if _rng_notes:
+            story.append(Spacer(1, 4))
+            _rng_title = (
+                'Sınıflandırmada kullanılan fiziksel özellik değerleri:'
+                if lang == 'TR' else
+                'Physical property values used for classification:'
+            )
+            story.append(Paragraph(
+                f'<font color="#555555"><i>{_rng_title}</i></font>',
+                styles['small']
+            ))
+            for _rn in _rng_notes:
+                story.append(Paragraph(
+                    f'<font color="#555555"><i>• {_rn}</i></font>',
+                    styles['small']
+                ))
+    except Exception:
+        pass
 
     story.append(Spacer(1, 3))
 
@@ -1522,7 +1546,16 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     def _pv(key, unit=''):
         v = phys.get(key)
         if v is None or v == '': return na
-        v_str = str(v)
+        # Yeni yapılandırılmış format (phys_props_parser çıktısı)
+        if isinstance(v, dict):
+            if v.get('nd') or v.get('na'):
+                return v.get('display') or na
+            raw_display = v.get('display')
+            if not raw_display:
+                return na
+            v_str = raw_display
+        else:
+            v_str = str(v)
         # Birim zaten değerin içindeyse tekrar ekleme
         if unit and unit not in v_str:
             val_str = f"{v_str} {unit}"
@@ -1540,6 +1573,21 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         else:
             val_str += _method_note(key)
         return val_str
+
+    def _pv_ph():
+        """pH display — yeni dict formatını ve eski string formatını destekler."""
+        raw = phys.get('ph')
+        if raw is None or raw == '':
+            return na
+        if isinstance(raw, dict):
+            if raw.get('nd') or raw.get('na'):
+                return raw.get('display') or na
+            ph_str = raw.get('display') or ''
+            if not ph_str:
+                return na
+        else:
+            ph_str = str(raw)
+        return _normalize_ph(ph_str) + _method_note('ph')
 
     _mp_lbl  = 'Donma/Erime Noktası' if lang=='TR' else 'Melting/Freezing Point'
     _rd_lbl  = 'Bağıl Yoğunluk (su=1)' if lang=='TR' else 'Relative Density (water=1)'
@@ -1571,7 +1619,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
          phys.get(f'appearance_{lang}') or phys.get('appearance') or na],
         [phys_prop(lang,'color'),         phys.get('color') or na],
         [phys_prop(lang,'odor'),          phys.get('odor') or na],
-        [phys_prop(lang,'ph'),            (_normalize_ph(phys.get('ph')) + _method_note('ph')) if phys.get('ph') not in (None,'') else na],
+        [phys_prop(lang,'ph'),            _pv_ph()],
         [phys_prop(lang,'flash_point'),   _pv('flash_point','°C')],
         [phys_prop(lang,'boiling_point'), _pv('boiling_point','°C')],
         [_mp_lbl,                         _pv('melting_point','°C')],

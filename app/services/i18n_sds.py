@@ -652,6 +652,10 @@ LANG_DATA: Dict[str, Dict] = {
             'pbt_not':        'Amestecul nu îndeplinește criteriile PBT sau vPvB.',
             'no_info':        'Nu există date disponibile.',
             'disposal_reg':   'A se elimina conform reglementărilor locale/naționale.',
+            'ppe_gloves':     'Protecția mâinilor',
+            'ppe_eyes':       'Protecția ochilor',
+            'ppe_resp':       'Protecția căilor respiratorii',
+            'ppe_body':       'Protecția corpului',
         },
 
         'sub': {
@@ -768,6 +772,10 @@ LANG_DATA: Dict[str, Dict] = {
             'pbt_not':        'Сместа не отговаря на критериите за PBT или vPvB.',
             'no_info':        'Няма налична информация.',
             'disposal_reg':   'Изхвърляйте съгласно местните/националните разпоредби.',
+            'ppe_gloves':     'Защита на ръцете',
+            'ppe_eyes':       'Защита на очите',
+            'ppe_resp':       'Защита на дихателните пътища',
+            'ppe_body':       'Защита на тялото',
         },
 
         'sub': {
@@ -866,6 +874,10 @@ LANG_DATA: Dict[str, Dict] = {
             'pbt_not':        'A keverék nem felel meg a PBT vagy vPvB kritériumoknak.',
             'no_info':        'Nem áll rendelkezésre adat.',
             'disposal_reg':   'A helyi/nemzeti előírásoknak megfelelően ártalmatlanítsa.',
+            'ppe_gloves':     'Kézvédelem',
+            'ppe_eyes':       'Szemvédelem',
+            'ppe_resp':       'Légzésvédelem',
+            'ppe_body':       'Testvédelem',
         },
 
         'sub': {
@@ -1454,7 +1466,7 @@ _SENTENCES: dict = {
         'PL':'Używać odpowiednich środków ochrony indywidualnej (ŚOI). Zapewnić odpowiednią ochronę dróg oddechowych.',
         'RO':'Utilizați echipamentul individual de protecție (EIP) adecvat. Asigurați protecție respiratorie adecvată.',
         'BG':'Използвайте подходящи лични предпазни средства (ЛПС). Осигурете подходяща защита на дихателните пътища.',
-        'HU':'Megfelelő egyéni védőeszközöket (PPE) használjon. Biztosítson megfelelő légzésvédelmet.',
+        'HU':'Megfelelő egyéni védőeszközöket (EVE) használjon. Biztosítson megfelelő légzésvédelmet.',
         'CZ':'Používejte vhodné osobní ochranné prostředky (OOPP). Zajistěte odpovídající ochranu dýchacích cest.',
         'SK':'Používajte vhodné osobné ochranné pomôcky (OOP). Zabezpečte primeranú ochranu dýchacích ciest.',
         'HR':'Koristite odgovarajuću osobnu zaštitnu opremu (OZO). Osigurajte odgovarajuću zaštitu dišnih putova.',

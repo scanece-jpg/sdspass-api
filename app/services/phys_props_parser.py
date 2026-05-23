@@ -221,15 +221,23 @@ def parse_phys_value(raw, prop: str = '') -> dict:
     return {**_empty(), 'display': s}
 
 
+# Sadece bu alanlar parse edilir — metin alanları (appearance, color, odor…) dokunulmaz
+_NUMERIC_PROPS: frozenset[str] = frozenset(WORST_CASE_RULE) | frozenset({
+    'rel_density', 'decomposition_temp', 'odour_threshold',
+    'vapor_density', 'lel', 'uel', 'vapor_pressure_num',
+    'melting_point', 'solubility', 'log_kow', 'partition_coeff',
+})
+
+
 def parse_all_phys_props(phys_in: dict) -> dict:
     """
     Tüm phys_in dict'ini parse eder.
-    String/sayı değerler yapılandırılmış dict'e dönüşür.
-    Diğer tipler (bool, list, dict) dokunulmadan aktarılır.
+    Sadece sayısal/aralık alanlar (_NUMERIC_PROPS) yapılandırılmış dict'e dönüşür.
+    Metin alanları (appearance, color, odor, vb.) olduğu gibi aktarılır.
     """
     parsed: dict = {}
     for key, val in phys_in.items():
-        if isinstance(val, (str, int, float)) and not isinstance(val, bool):
+        if key in _NUMERIC_PROPS and isinstance(val, (str, int, float)) and not isinstance(val, bool):
             parsed[key] = parse_phys_value(val, prop=key)
         else:
             parsed[key] = val

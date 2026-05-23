@@ -400,8 +400,15 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
             if triggers_low or triggers_high:
                 direction = "≤ 2" if triggers_low else "≥ 11.5"
                 _ph_display = normalize_ph_display(mixture_ph)
+                # Aralık girilmişse hangi ucun kullanıldığını göster
+                _ph_used = ph_low if triggers_low else ph_high
+                _ph_used_str = f'{_ph_used:g}'
+                if str(_ph_used_str) != str(_ph_display).replace(' ', ''):
+                    _ph_basis = f'{_ph_display} → esas alınan: pH {_ph_used_str}'
+                else:
+                    _ph_basis = _ph_display
                 ph_reason = (
-                    f"Karışım pH = {_ph_display} ({direction}) → "
+                    f"Karışım pH = {_ph_basis} ({direction}) → "
                     f"SEA Tablo 3.2.3 notu: pH uç değeri → doğrudan sınıflandırma"
                 )
                 if "H314" not in seen_h:

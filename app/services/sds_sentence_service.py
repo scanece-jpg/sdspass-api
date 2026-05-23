@@ -159,11 +159,13 @@ def format_section3_component(
         cls_key = f'{cls} {route}'.strip() if route else cls  # dedup anahtarı
         if cls_key and cls_key not in _seen_cls:
             _seen_cls.add(cls_key)
+            # H-kodunu sınıf adının yanına ekle — KKDİK Ek-2 B3.2 / CLP Annex II §3.2
+            h_code_sfx = f' {raw_code}' if raw_code else ''
             if h.get('_annex_supplement'):
-                _haz_parts.append(f'{cls_key}†')
+                _haz_parts.append(f'{cls_key}{h_code_sfx}†')
                 _has_annex_supplement = True
             else:
-                _haz_parts.append(cls_key)
+                _haz_parts.append(f'{cls_key}{h_code_sfx}')
     haz_str = '; '.join(_haz_parts)
     if _has_annex_supplement:
         haz_str += '  († CLP Ek VI tamamlayıcı sınıflandırma)'

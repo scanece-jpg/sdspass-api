@@ -1120,9 +1120,22 @@ def translate_hclass(h_class: str, lang: str = 'TR') -> str:
 def translate_hclass_list(classes: str, lang: str = 'TR') -> str:
     """
     Noktalı virgülle ayrılmış sınıf listesini çevir.
-    Örn: "Flam. Liq. 3; Skin Irrit. 2" → "Alev. Sıv. 3; Cilt Tahriş. 2"
+    Örn: "Flam. Liq. 3 H226; Skin Irrit. 2 H315" → "Alev. Sıv. 3 H226; Cilt Tahriş. 2 H315"
+    H-kodu ve † eki varsa ayrıştırılır, yalnızca sınıf adı çevrilir, H-kodu korunur.
     """
+    import re as _re
     if lang != 'TR' or not classes:
         return classes
     parts = [c.strip() for c in classes.split(';')]
-    return '; '.join(translate_hclass(p, lang) for p in parts)
+    result = []
+    for p in parts:
+        # "Flam. Liq. 3 H226†" → cls="Flam. Liq. 3", h_code="H226", suffix="†"
+        m = _re.match(r'^(.*?)\s+([A-Z]{1,3}\d{3}\w*)(†?)$', p.strip())
+        if m:
+            cls_part = m.group(1).strip()
+            h_code   = m.group(2)
+            suffix   = m.group(3)
+            result.append(f'{translate_hclass(cls_part, lang)} {h_code}{suffix}')
+        else:
+            result.append(translate_hclass(p, lang))
+    return '; '.join(result)

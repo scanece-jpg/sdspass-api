@@ -1,6 +1,65 @@
 
 # ─── SDSPASS CLP Hesaplayıcı (dict tabanlı, ORM bağımsız) ───────────────────
 # CLP Annex I (KKDİK Ek-2) cut-off ve sınıflandırma kuralları
+import re as _re
+
+
+def _parse_ph_range(ph_raw):
+    """
+    pH aralığını parse eder. Her türlü ayracı kabul eder:
+      "2-4"   "2/4"   "2 4"   "2–4"   "2 to 4"   "2.5"
+    Çıkış: (low, high) float tuple.
+    Raises ValueError ayırt edilemezse.
+    """
+    if ph_raw is None:
+        raise ValueError("pH None")
+    s = str(ph_raw).strip()
+    if not s:
+        raise ValueError("pH boş")
+
+    # "to" kelimesiyle (Ör: "2 to 4")
+    m = _re.split(r'\s+to\s+', s, maxsplit=1, flags=_re.IGNORECASE)
+    if len(m) == 2:
+        return float(m[0].strip()), float(m[1].strip())
+
+    # "/" ile
+    if '/' in s:
+        parts = s.split('/', 1)
+        return float(parts[0].strip()), float(parts[1].strip())
+
+    # em-dash veya en-dash (–, —)
+    for dash in ('–', '—'):
+        if dash in s:
+            parts = s.split(dash, 1)
+            return float(parts[0].strip()), float(parts[1].strip())
+
+    # "-" ile (ama başta negatif işaret değilse)
+    if '-' in s and not s.startswith('-'):
+        parts = s.split('-', 1)
+        return float(parts[0].strip()), float(parts[1].strip())
+
+    # Boşlukla iki sayı (Ör: "2 4")
+    parts = s.split()
+    if len(parts) == 2:
+        return float(parts[0]), float(parts[1])
+
+    # Tek sayı
+    val = float(s)
+    return val, val
+
+
+def normalize_ph_display(ph_raw) -> str:
+    """
+    pH değerini standart gösterim formatına çevirir.
+    Çıkış örnekleri: "7.0"  →  "7"  |  "2-4"  →  "2 - 4"
+    """
+    try:
+        low, high = _parse_ph_range(ph_raw)
+        if low == high:
+            return f"{low:g}"
+        return f"{low:g} - {high:g}"
+    except (ValueError, TypeError):
+        return str(ph_raw) if ph_raw else ''
 
 # Annex I Tablo — h_class → {h_code, cutoff_pct, signal, category}
 CLP_CUTOFFS_DICT = {
@@ -332,22 +391,15 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
     # Bu değerler bileşen konsantrasyonlarından bağımsız, karışımın pH'ına dayanır.
     if mixture_ph is not None:
         try:
-            # Aralık desteği: "2-4" → alt=2, üst=4 | "11-13" → alt=11, üst=13
-            # pH ≤ 2 kontrolü → alt sınır; pH ≥ 11.5 kontrolü → üst sınır
-            _ph_s = str(mixture_ph).strip()
-            if '-' in _ph_s and not _ph_s.startswith('-'):
-                _parts = _ph_s.split('-', 1)
-                ph_low  = float(_parts[0].strip())
-                ph_high = float(_parts[1].strip())
-            else:
-                ph_low = ph_high = float(_ph_s)
+            # _parse_ph_range: her türlü ayracı kabul eder (-, /, –, boşluk, "to")
+            ph_low, ph_high = _parse_ph_range(mixture_ph)
             # Uç değer tetikleyici: alt ≤ 2 VEYA üst ≥ 11.5
             triggers_low  = ph_low  <= 2.0
             triggers_high = ph_high >= 11.5
             ph = ph_low if triggers_low else ph_high   # gerekçe metninde gösterilecek değer
             if triggers_low or triggers_high:
                 direction = "≤ 2" if triggers_low else "≥ 11.5"
-                _ph_display = f"{ph_low}–{ph_high}" if ph_low != ph_high else f"{ph_low:.2f}"
+                _ph_display = normalize_ph_display(mixture_ph)
                 ph_reason = (
                     f"Karışım pH = {_ph_display} ({direction}) → "
                     f"SEA Tablo 3.2.3 notu: pH uç değeri → doğrudan sınıflandırma"

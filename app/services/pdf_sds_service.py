@@ -137,6 +137,7 @@ from app.services.i18n_sds import (
     signal_word as sig_word, get_lang, S
 )
 from app.services.reach_db import get_reg_no, get_ec_no
+from app.services.clp_service import normalize_ph_display as _normalize_ph
 from app.services.codes_i18n import get_h, get_euh, get_p, get_ppe, get_sentence, translate_hclass, translate_hclass_list, EUH_STMTS, correct_hclass
 from app.services.ghs_pictogram import get_ghs_codes, pictogram_table
 from app.services.transport_adr_service import get_adr_details
@@ -1570,7 +1571,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
          phys.get(f'appearance_{lang}') or phys.get('appearance') or na],
         [phys_prop(lang,'color'),         phys.get('color') or na],
         [phys_prop(lang,'odor'),          phys.get('odor') or na],
-        [phys_prop(lang,'ph'),            _pv('ph')],
+        [phys_prop(lang,'ph'),            (_normalize_ph(phys.get('ph')) + _method_note('ph')) if phys.get('ph') not in (None,'') else na],
         [phys_prop(lang,'flash_point'),   _pv('flash_point','°C')],
         [phys_prop(lang,'boiling_point'), _pv('boiling_point','°C')],
         [_mp_lbl,                         _pv('melting_point','°C')],

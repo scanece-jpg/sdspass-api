@@ -807,7 +807,8 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
             <label>pH Değeri <span class="motor-badge">● motor</span></label>
             <label class="na-check"><input type="checkbox" id="na_ph" onchange="toggleNA(this,'tf_ph','ph')"> N/A</label>
           </div>
-          <input type="text" id="tf_ph" placeholder="Ör: 7.0 veya 2-4">
+          <input type="text" id="tf_ph" placeholder="Ör: 7.0 veya 2-4 (aralık)"
+                 onblur="normalizePh(this)">
         </div>
 
         <!-- Yoğunluk: tüm formlar -->
@@ -3194,6 +3195,59 @@ function closePhysModal() {
 
 // (physp prompt kaldırıldı — yeni _renderPhysWarnPanel paneli kullanılıyor)
 
+// ── pH Aralık Normalize ──────────────────────────────────────────────────────
+/**
+ * Kullanıcı her türlü ayraç girebilir: "2-4" "2/4" "2 4" "2–4" "2 to 4"
+ * Blur anında standart formata dönüştürür: "2 - 4" veya "7" (tek değer)
+ */
+function _parsePhRange(raw) {
+  if (!raw) return null;
+  const s = raw.trim();
+  if (!s) return null;
+  // "to" kelimesiyle
+  let m = s.match(/^(-?\d+(?:[.,]\d+)?)\s+to\s+(-?\d+(?:[.,]\d+)?)$/i);
+  if (m) return [parseFloat(m[1].replace(',','.')), parseFloat(m[2].replace(',','.'))];
+  // "/" ile
+  if (s.includes('/')) {
+    const p = s.split('/');
+    const a = parseFloat(p[0].replace(',','.')), b = parseFloat(p[1].replace(',','.'));
+    if (!isNaN(a) && !isNaN(b)) return [a, b];
+  }
+  // em-dash veya en-dash
+  for (const dash of ['–','—']) {
+    if (s.includes(dash)) {
+      const p = s.split(dash, 2);
+      const a = parseFloat(p[0].replace(',','.')), b = parseFloat(p[1].replace(',','.'));
+      if (!isNaN(a) && !isNaN(b)) return [a, b];
+    }
+  }
+  // "-" ile (ama baştaki negatif değil)
+  if (s.includes('-') && !s.startsWith('-')) {
+    const p = s.split('-', 2);
+    const a = parseFloat(p[0].replace(',','.')), b = parseFloat(p[1].replace(',','.'));
+    if (!isNaN(a) && !isNaN(b)) return [a, b];
+  }
+  // boşlukla iki sayı
+  const parts = s.split(/\s+/);
+  if (parts.length === 2) {
+    const a = parseFloat(parts[0].replace(',','.')), b = parseFloat(parts[1].replace(',','.'));
+    if (!isNaN(a) && !isNaN(b)) return [a, b];
+  }
+  // tek sayı
+  const v = parseFloat(s.replace(',','.'));
+  if (!isNaN(v)) return [v, v];
+  return null;
+}
+
+function normalizePh(el) {
+  const raw = el.value.trim();
+  if (!raw) return;
+  const parsed = _parsePhRange(raw);
+  if (!parsed) return; // tanınamadıysa dokunma
+  const [lo, hi] = parsed;
+  el.value = (lo === hi) ? `${+lo.toFixed(2).replace(/\.?0+$/,'')}` : `${+lo.toFixed(2).replace(/\.?0+$/,'')} - ${+hi.toFixed(2).replace(/\.?0+$/,'')}`;
+}
+
 // ── PDF öncesi zorunlu alan kontrolü ─────────────────────────────────────────
 let _pdfBlockCallback = null;
 
@@ -3236,11 +3290,21 @@ function _checkPDFMandatory() {
     }
   }
 
-  // 5. Yoğunluk — gaz formlar için zorunlu (buhar yoğunluğu / bağıl yoğunluk)
-  if (form === 'gas') {
-    const densEl = document.getElementById('tf_density');
-    if (!densEl?.value?.trim()) {
+  // 5. Yoğunluk — gaz formlar için zorunlu, sıvı/pasta/aerosol için uyarı
+  const densEl = document.getElementById('tf_density');
+  if (!densEl?.value?.trim()) {
+    if (form === 'gas') {
       missing.push({ label: 'Yoğunluk / Buhar Yoğunluğu', reason: 'Gaz formlar için zorunlu — KKDİK Ek-2 §9.1' });
+    } else if (isLiquid) {
+      missing.push({ label: 'Yoğunluk (g/mL)', reason: 'Sıvı ürünlerde "Bilgi yok" kabul edilmez — KKDİK Ek-2 §9.1 / PCN zorunlu' });
+    }
+  }
+
+  // 6. Çözünürlük — sıvı/pasta/aerosol için uyarı
+  if (isLiquid) {
+    const solEl = document.getElementById('tf_sol');
+    if (!solEl?.value?.trim()) {
+      missing.push({ label: 'Çözünürlük (mg/L)', reason: 'Sıvı ürünlerde "Bilgi yok" kabul edilmez — KKDİK Ek-2 §9.1 / PCN zorunlu' });
     }
   }
 
@@ -3323,15 +3387,10 @@ function _detectNeutralization() {
   const { allH } = _lastCalcState;
   if (!allH.includes('H314')) return null;
   const phRaw = document.getElementById('tf_ph')?.value?.trim() || '';
-  // Aralık desteği: "11-13" → alt=11, üst=13
-  let phLow, phHigh;
-  if (phRaw.includes('-') && !phRaw.startsWith('-')) {
-    const parts = phRaw.split('-');
-    phLow  = parseFloat(parts[0]);
-    phHigh = parseFloat(parts[1]);
-  } else {
-    phLow = phHigh = parseFloat(phRaw);
-  }
+  // Her türlü ayracı kabul eden parser
+  const _phParsed = _parsePhRange(phRaw);
+  if (!_phParsed) return null;
+  let [phLow, phHigh] = _phParsed;
   // Nötralizasyon kontrolü: pH aralığın TAMAMININ 2–11.5 arasında olması gerekir
   if (isNaN(phLow) || phLow <= 2.0 || phHigh >= 11.5) return null;
   const ph = (phLow + phHigh) / 2;  // orta nokta gösterim için

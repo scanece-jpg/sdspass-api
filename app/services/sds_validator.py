@@ -11,6 +11,7 @@ Kullanım:
 """
 
 from typing import List, Dict, Any
+from app.services.clp_service import _parse_ph_range, normalize_ph_display
 
 
 def validate_sds(
@@ -47,17 +48,10 @@ def validate_sds(
     def _ph_range(v):
         """pH için (alt, üst) tuple döndür. Aralık yoksa her ikisi de aynı değer."""
         if v is None: return None, None
-        s = str(v).strip()
-        if not s: return None, None
-        if '-' in s and not s.startswith('-'):
-            parts = s.split('-', 1)
-            try:
-                return float(parts[0].strip()), float(parts[1].strip())
-            except: pass
         try:
-            val = float(s)
-            return val, val
-        except: return None, None
+            return _parse_ph_range(v)
+        except (ValueError, TypeError):
+            return None, None
 
     fp      = _f(phys_props.get("flash_point"))
     bp      = _f(phys_props.get("boiling_point"))

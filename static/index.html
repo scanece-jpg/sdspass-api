@@ -191,6 +191,34 @@ body::after{display:none}
 .pm-meta{font-size:9px;color:var(--text3);margin-top:2px;font-style:italic;line-height:1.5}
 .pm-badge-meas{font-size:8px;padding:1px 5px;border-radius:8px;background:rgba(104,211,145,.15);color:#68d391;font-weight:600;margin-left:5px;vertical-align:middle}
 .pm-badge-err{font-size:9px;color:#f6ad55;margin-left:5px}
+
+/* ── Eksik Fiziksel Özellikler Modalı ────────────────────────────────── */
+.psrc-overlay{position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:1200;display:none;align-items:center;justify-content:center}
+.psrc-overlay.open{display:flex}
+.psrc-modal{background:var(--bg2);border:1px solid var(--border2);border-radius:14px;width:min(560px,96vw);max-height:88vh;display:flex;flex-direction:column;overflow:hidden;box-shadow:0 24px 72px rgba(0,0,0,.65)}
+.psrc-head{padding:14px 18px 10px;border-bottom:1px solid var(--border2);background:var(--bg3)}
+.psrc-head h3{margin:0;font-size:13px;font-family:var(--mono);color:var(--text)}
+.psrc-head p{margin:4px 0 0;font-size:10px;color:var(--text3)}
+.psrc-body{overflow-y:auto;padding:12px 16px;flex:1}
+.psrc-section-title{font-size:9px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.6px;margin:10px 0 6px;padding-bottom:4px;border-bottom:1px solid rgba(255,255,255,.06)}
+.psrc-section-title:first-child{margin-top:0}
+.psrc-row{display:grid;grid-template-columns:130px 1fr 58px;gap:6px;align-items:center;margin-bottom:6px}
+.psrc-row-label{font-size:10px;color:var(--text3)}
+.psrc-row-wrap{display:flex;align-items:center;gap:4px}
+.psrc-row-input{flex:1;padding:5px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:11px;font-family:var(--mono)}
+.psrc-row-input:focus{outline:none;border-color:var(--accent)}
+.psrc-row-input.motor{border-color:rgba(99,179,237,.4);background:rgba(99,179,237,.06)}
+.psrc-row-unit{font-size:9px;color:var(--text3);white-space:nowrap}
+.psrc-badge{font-size:8px;padding:2px 6px;border-radius:8px;font-weight:700;text-align:center;white-space:nowrap}
+.psrc-badge-motor{background:rgba(99,179,237,.15);color:#63b3ed}
+.psrc-badge-empty{background:rgba(255,255,255,.06);color:var(--text3)}
+.psrc-empty-note{font-size:10px;color:var(--text3);text-align:center;padding:20px 0;font-style:italic}
+.psrc-foot{padding:10px 16px 14px;border-top:1px solid var(--border2);display:flex;gap:8px;justify-content:flex-end;background:var(--bg3)}
+.psrc-btn-ok{padding:8px 20px;border-radius:7px;border:none;cursor:pointer;font-size:12px;font-weight:700;background:var(--accent);color:#fff}
+.psrc-btn-ok:hover{background:var(--accent2)}
+.psrc-btn-cancel{padding:8px 14px;border-radius:7px;border:1px dashed var(--border2);background:none;color:var(--text3);cursor:pointer;font-size:11px}
+.psrc-btn-cancel:hover{color:var(--text)}
+
 /* Hibrit fiziksel özellikler — kaynak rozeti */
 .src-badge{font-size:8px;padding:1px 6px;border-radius:8px;font-weight:600;margin-left:5px;vertical-align:middle;display:none}
 .src-badge.theo{background:rgba(99,179,237,.15);color:#63b3ed}
@@ -3059,6 +3087,21 @@ window.addEventListener('DOMContentLoaded', () => {
   </div>
 </div>
 
+<!-- ══ EKSİK FİZİKSEL ÖZELLİKLER MODALI ═════════════════════════════════════ -->
+<div class="psrc-overlay" id="physSrcOverlay">
+  <div class="psrc-modal">
+    <div class="psrc-head">
+      <h3>📋 Fiziksel &amp; Kimyasal Özellikler</h3>
+      <p id="physSrcSubtitle">Girilmemiş alanlar — doldurun veya boş bırakın (N/A olarak yazılır).</p>
+    </div>
+    <div class="psrc-body" id="physSrcBody"></div>
+    <div class="psrc-foot">
+      <button class="psrc-btn-cancel" onclick="_physSrcClose()">İptal</button>
+      <button class="psrc-btn-ok" id="physSrcOkBtn" onclick="_physSrcConfirm()">SDS Oluştur →</button>
+    </div>
+  </div>
+</div>
+
 <!-- ══ H314 NÖTRALİZASYON UYARI MODALI ══════════════════════════════════════ -->
 <div class="h314-overlay" id="h314NeutrOverlay">
   <div class="h314-box">
@@ -3396,9 +3439,119 @@ function _h314Choose(keepH314) {
   if (_h314NeutrCallback) { _h314NeutrCallback(keepH314); _h314NeutrCallback = null; }
 }
 
+// ── Fiziksel özellik eksik-alan modalı ───────────────────────────────────────
+let _physSrcCallback = null;
+
+// Tüm Section 9 alanları — {formId, label, type, unit, theoKey, naId}
+const _PSRC_FIELDS = [
+  { formId:'tf_appearance', label:'Görünüm / Hal',        type:'text',   unit:'',     theoKey:null,             naId:null        },
+  { formId:'tf_color',      label:'Renk',                 type:'text',   unit:'',     theoKey:null,             naId:null        },
+  { formId:'tf_odor',       label:'Koku',                 type:'text',   unit:'',     theoKey:null,             naId:null        },
+  { formId:'tf_ph',         label:'pH',                   type:'text',   unit:'',     theoKey:null,             naId:'na_ph'     },
+  { formId:'tf_fp',         label:'Parlama Noktası',       type:'number', unit:'°C',   theoKey:'flash_point',    naId:'na_fp'     },
+  { formId:'tf_bp',         label:'Kaynama Noktası',       type:'number', unit:'°C',   theoKey:'boiling_point',  naId:'na_bp'     },
+  { formId:'tf_density',    label:'Yoğunluk',             type:'number', unit:'g/mL', theoKey:'density',        naId:'na_density'},
+  { formId:'tf_visc',       label:'Viskozite @40°C',      type:'number', unit:'cSt',  theoKey:'viscosity',      naId:'na_visc'   },
+  { formId:'tf_sol',        label:'Çözünürlük',           type:'number', unit:'mg/L', theoKey:'solubility',     naId:'na_sol'    },
+  { formId:'tf_mp',         label:'Erime Noktası',         type:'number', unit:'°C',   theoKey:null,             naId:'na_mp'     },
+  { formId:'tf_evap',       label:'Buharlaşma Hızı',      type:'text',   unit:'',     theoKey:null,             naId:null        },
+  { formId:'tf_ait',        label:'Ototutuşma Sıcaklığı', type:'number', unit:'°C',   theoKey:null,             naId:null        },
+  { formId:'tf_logkow',     label:'Log Kow',              type:'number', unit:'',     theoKey:null,             naId:null        },
+  { formId:'tf_decomp',     label:'Ayrışma Sıcaklığı',    type:'number', unit:'°C',   theoKey:null,             naId:null        },
+  { formId:'tf_odor_thresh',label:'Koku Eşiği',           type:'number', unit:'',     theoKey:'odor_threshold', naId:null        },
+];
+
+function _showPhysSrcModal(callback) {
+  const tp = _lastCalcState?.phys?.theoProps || {};
+
+  // Hangi alanlar henüz kullanıcı tarafından GİRİLMEMİŞ?
+  // (N/A seçilmiş veya data-source==='user' ise atla)
+  const toShow = _PSRC_FIELDS.filter(f => {
+    const el = document.getElementById(f.formId);
+    if (!el || el.dataset.autoHidden === 'true') return false;   // gizli alan
+    if (f.naId && document.getElementById(f.naId)?.checked) return false; // N/A seçili
+    if (el.dataset.source === 'user' && el.value?.trim()) return false;   // kullanıcı zaten girdi
+    return true; // boş ya da sadece motor doldurmuş
+  });
+
+  if (toShow.length === 0) { callback(); return; } // hepsi dolu → direkt devam
+
+  // İki grup: motor değeri olanlar ve tamamen boş olanlar
+  const withMotor = toShow.filter(f => f.theoKey && tp[f.theoKey]?.value != null);
+  const noMotor   = toShow.filter(f => !(f.theoKey && tp[f.theoKey]?.value != null));
+
+  const subtitle = withMotor.length
+    ? `${noMotor.length} alan boş, ${withMotor.length} alan için motor hesabı mevcut.`
+    : `${noMotor.length} alan henüz doldurulmamış.`;
+  document.getElementById('physSrcSubtitle').textContent = subtitle;
+
+  const makeRow = (f) => {
+    const el       = document.getElementById(f.formId);
+    const motorVal = f.theoKey ? tp[f.theoKey]?.value : null;
+    const measured = f.theoKey ? (tp[f.theoKey]?.measured ?? false) : false;
+    const curVal   = el?.value?.trim() || '';               // mevcut form değeri (motor dolgu)
+    const fillVal  = curVal || (motorVal != null ? motorVal : '');
+    const isMotor  = !curVal && motorVal != null;
+
+    const inputCls = isMotor ? 'psrc-row-input motor' : 'psrc-row-input';
+    const badge    = isMotor
+      ? `<span class="psrc-badge psrc-badge-motor">${measured ? 'Ölçülen' : '● Motor'}</span>`
+      : `<span class="psrc-badge psrc-badge-empty">Boş</span>`;
+    const unitSpan = f.unit ? `<span class="psrc-row-unit">${f.unit}</span>` : '';
+    const stepAttr = f.type === 'number' ? 'step="any"' : '';
+
+    return `<div class="psrc-row">
+      <div class="psrc-row-label">${f.label}</div>
+      <div class="psrc-row-wrap">
+        <input class="${inputCls}" type="${f.type}" ${stepAttr}
+               data-psrc-field="${f.formId}" value="${fillVal}"
+               placeholder="${f.unit || '—'}">
+        ${unitSpan}
+      </div>
+      ${badge}
+    </div>`;
+  };
+
+  let html = '';
+  if (withMotor.length) {
+    html += `<div class="psrc-section-title">⚡ Motor hesabı mevcut — onaylayın veya kendiniz girin</div>`;
+    html += withMotor.map(makeRow).join('');
+  }
+  if (noMotor.length) {
+    html += `<div class="psrc-section-title">✏️ Boş alanlar — doldurun veya atlayın</div>`;
+    html += noMotor.map(makeRow).join('');
+  }
+
+  document.getElementById('physSrcBody').innerHTML = html;
+  _physSrcCallback = callback;
+  document.getElementById('physSrcOverlay').classList.add('open');
+}
+
+function _physSrcConfirm() {
+  // Modal inputlarındaki değerleri ana form alanlarına yaz
+  document.querySelectorAll('#physSrcBody input[data-psrc-field]').forEach(inp => {
+    const target = document.getElementById(inp.dataset.psrcField);
+    if (!target) return;
+    const v = inp.value?.trim();
+    if (v) { target.value = v; if (!target.dataset.source) target.dataset.source = 'user'; }
+  });
+  document.getElementById('physSrcOverlay').classList.remove('open');
+  if (_physSrcCallback) { _physSrcCallback(); _physSrcCallback = null; }
+}
+
+function _physSrcClose() {
+  document.getElementById('physSrcOverlay').classList.remove('open');
+  _physSrcCallback = null;
+}
+
+// ── PDF Üretim Akışı ─────────────────────────────────────────────────────────
 async function generatePDF() {
   if (!_lastCalcState) { alert('Önce Hesapla\'ya basın.'); return; }
+  // Önce eksik alan modalını göster; callback'te PDF akışını sürdür
+  _showPhysSrcModal(_afterPhysSrc);
+}
 
+async function _afterPhysSrc() {
   // Zorunlu alan kontrolü
   const missing = _checkPDFMandatory();
   if (missing.length) {

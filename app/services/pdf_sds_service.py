@@ -2273,9 +2273,11 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     is_env_hazard = any(h in h_codes for h in env_h_codes)
 
     
-    if transport.get('env_hazard'):
-        env_haz = transport['env_hazard']
-    elif is_env_hazard:
+    _t_env = transport.get('env_hazard')
+    # env_hazard bool True olarak gelebilir (main.py: env_mark) — Türkçeleştir
+    if _t_env and not isinstance(_t_env, bool):
+        env_haz = _t_env   # zaten string ise direkt kullan
+    elif _t_env or is_env_hazard:
         if lang == 'TR':
             # H410/H411 → Marine Pollutant (IMDG)
             mp_codes = {'H400','H410','H411'}

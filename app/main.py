@@ -190,7 +190,10 @@ async def generate_pdf(data: dict = Body(...)):
                 try: _user_fp = float(_fp_raw)
                 except: pass
 
-            _clp_res  = _clp_calc(components, mixture_ph=None)
+            # pH değerini fiziksel özelliklerden al — B2.1 pH kuralı için (CLP Tablo 3.2.3)
+            # mixture_ph=None bırakılırsa pH ≤2/≥11.5 → H314 direkt atama kuralı devre dışı kalır
+            _ph_raw = phys_in.get('ph') or None
+            _clp_res  = _clp_calc(components, mixture_ph=_ph_raw)
             _phys_res = _phys_calc(components, form=_form_val, user_fp=_user_fp)
             _stot_res = _stot_calc(components)
             _eco_res2 = _eco_calc2(components)

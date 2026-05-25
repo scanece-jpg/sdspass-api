@@ -3309,9 +3309,10 @@ function _checkPDFMandatory() {
     missing.push({ label: 'Koku', reason: 'SDS Bölüm 9 — "bilgi yok" kabul edilmez (KKDİK Ek-2)' });
   }
 
-  // 4. pH Değeri — N/A işaretlenmemişse her formda zorunlu
+  // 4. pH Değeri — sadece sıvı/pasta/aerosol formlarında zorunlu (gaz/katı/toz'da pH ölçülmez)
+  const phLiquidForm = ['liquid', 'paste', 'aerosol'].includes(form);
   const phNA = document.getElementById('na_ph')?.checked;
-  if (!phNA && !document.getElementById('tf_ph')?.value?.trim()) {
+  if (phLiquidForm && !phNA && !document.getElementById('tf_ph')?.value?.trim()) {
     missing.push({ label: 'pH Değeri', reason: 'SDS Bölüm 9 — ölçülemeyen/uygulanamayan durumlarda N/A işaretleyin (KKDİK Ek-2)' });
   }
 

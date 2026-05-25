@@ -2960,6 +2960,7 @@ function renderAll(s) {
     allH, combinedSignal, transport, pcodes, ppe,
     euh: s.euh,
     phys: s.phys,
+    theoPhys: s.phys?.theoProps || null,   // motor hesabı — modal için doğrudan erişim
     clp: s.clp,
     eco: s.eco,
     comps: getComps(),
@@ -3084,7 +3085,7 @@ window.addEventListener('DOMContentLoaded', () => {
     </div>
     <div class="pdf-block-footer">
       <button class="pdf-block-btn-fix" onclick="closePdfBlock()">✏️ Geri Dön ve Düzelt</button>
-      <button class="pdf-block-btn-skip" onclick="closePdfBlock(true)">Yine de oluştur</button>
+      <button class="pdf-block-btn-skip" id="pdfBlockSkipBtn" onclick="closePdfBlock(true)">Yine de oluştur</button>
     </div>
   </div>
 </div>
@@ -3097,6 +3098,7 @@ window.addEventListener('DOMContentLoaded', () => {
       <p id="physSrcSubtitle">Girilmemiş alanlar — doldurun veya boş bırakın (N/A olarak yazılır).</p>
     </div>
     <div class="psrc-body" id="physSrcBody"></div>
+    <div id="physSrcErrMsg" style="display:none;color:var(--danger);font-size:11px;padding:6px 16px 2px;font-weight:600;"></div>
     <div class="psrc-foot">
       <button class="psrc-btn-cancel" onclick="_physSrcClose()">İptal</button>
       <button class="psrc-btn-ok" id="physSrcOkBtn" onclick="_physSrcConfirm()">SDS Oluştur →</button>
@@ -3464,7 +3466,7 @@ const _PSRC_FIELDS = [
 ];
 
 function _showPhysSrcModal(callback) {
-  const tp = _lastCalcState?.phys?.theoProps || {};
+  const tp = _lastCalcState?.theoPhys || _lastCalcState?.phys?.theoProps || {};
 
   // Hangi alanlar henüz kullanıcı tarafından GİRİLMEMİŞ?
   const toShow = _PSRC_FIELDS.filter(f => {
@@ -3558,6 +3560,30 @@ function _showPhysSrcModal(callback) {
 }
 
 function _physSrcConfirm() {
+  // ── Zorunlu alan kontrolü ─────────────────────────────────────────────────
+  const mandFields = _PSRC_FIELDS.filter(f => f.mandatory);
+  let hasError = false;
+  mandFields.forEach(f => {
+    const inp = document.querySelector(`#physSrcBody input[data-psrc-field="${f.formId}"]`);
+    if (!inp) return; // Modal'da gösterilmiyorsa (kullanıcı zaten doldurmuş) atla
+    if (!inp.value.trim()) {
+      inp.style.borderColor = 'var(--danger)';
+      inp.style.boxShadow   = '0 0 0 2px rgba(252,129,129,.35)';
+      hasError = true;
+    } else {
+      inp.style.borderColor = '';
+      inp.style.boxShadow   = '';
+    }
+  });
+
+  const errEl = document.getElementById('physSrcErrMsg');
+  if (hasError) {
+    if (errEl) { errEl.textContent = '⚠ Görünüm, Renk ve Koku alanları zorunludur — lütfen doldurun.'; errEl.style.display = ''; }
+    return; // Kapatma — kullanıcı doldurmalı
+  }
+  if (errEl) errEl.style.display = 'none';
+
+  // ── Form alanlarına aktar ─────────────────────────────────────────────────
   document.querySelectorAll('#physSrcBody input[data-psrc-field]').forEach(inp => {
     const target = document.getElementById(inp.dataset.psrcField);
     if (!target) return;
@@ -3586,6 +3612,11 @@ async function _afterPhysSrc() {
   // Zorunlu alan kontrolü
   const missing = _checkPDFMandatory();
   if (missing.length) {
+    // Görünüm / Renk / Koku eksikse → kesinlikle engelle (bypass yok)
+    // Diğer alanlar (Parlama Noktası, Yoğunluk vb.) → uyarı ama "Yine de oluştur" görünür
+    const HARD_LABELS = ['Görünüm (Fiziksel hal)', 'Renk', 'Koku'];
+    const hasHard = missing.some(m => HARD_LABELS.includes(m.label));
+
     document.getElementById('pdfBlockItems').innerHTML = missing.map(m => `
       <div class="pdf-block-item">
         <div>
@@ -3593,7 +3624,10 @@ async function _afterPhysSrc() {
           <div class="pdf-block-item-reason">${m.reason}</div>
         </div>
       </div>`).join('');
-    _pdfBlockCallback = _doPdfGenerate;
+
+    const skipBtn = document.getElementById('pdfBlockSkipBtn');
+    if (skipBtn) skipBtn.style.display = hasHard ? 'none' : '';
+    _pdfBlockCallback = hasHard ? null : _doPdfGenerate;
     document.getElementById('pdfBlockOverlay').classList.add('open');
     return;
   }

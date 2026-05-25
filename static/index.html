@@ -3309,7 +3309,13 @@ function _checkPDFMandatory() {
     missing.push({ label: 'Koku', reason: 'SDS Bölüm 9 — "bilgi yok" kabul edilmez (KKDİK Ek-2)' });
   }
 
-  // 3. Parlama Noktası — sadece sıvı/pasta/aerosol, N/A işaretlenmemişse
+  // 4. pH Değeri — N/A işaretlenmemişse her formda zorunlu
+  const phNA = document.getElementById('na_ph')?.checked;
+  if (!phNA && !document.getElementById('tf_ph')?.value?.trim()) {
+    missing.push({ label: 'pH Değeri', reason: 'SDS Bölüm 9 — ölçülemeyen/uygulanamayan durumlarda N/A işaretleyin (KKDİK Ek-2)' });
+  }
+
+  // 5. Parlama Noktası — sadece sıvı/pasta/aerosol, N/A işaretlenmemişse
   if (isLiquid) {
     const fpEl = document.getElementById('tf_fp');
     const fpNA = fpEl?.dataset?.na === 'true';
@@ -3451,7 +3457,7 @@ const _PSRC_FIELDS = [
   { formId:'tf_appearance', label:'Görünüm / Hal',        type:'text',   unit:'',     theoKey:null,             naId:null,         mandatory:true  },
   { formId:'tf_color',      label:'Renk',                 type:'text',   unit:'',     theoKey:null,             naId:null,         mandatory:true  },
   { formId:'tf_odor',       label:'Koku',                 type:'text',   unit:'',     theoKey:null,             naId:null,         mandatory:true  },
-  { formId:'tf_ph',         label:'pH',                   type:'text',   unit:'',     theoKey:null,             naId:'na_ph',      mandatory:false },
+  { formId:'tf_ph',         label:'pH',                   type:'text',   unit:'',     theoKey:null,             naId:'na_ph',      mandatory:true  },
   { formId:'tf_fp',         label:'Parlama Noktası',       type:'number', unit:'°C',   theoKey:'flash_point',    naId:'na_fp',      mandatory:false },
   { formId:'tf_bp',         label:'Kaynama Noktası',       type:'number', unit:'°C',   theoKey:'boiling_point',  naId:'na_bp',      mandatory:false },
   { formId:'tf_density',    label:'Yoğunluk',             type:'number', unit:'g/mL', theoKey:'density',        naId:'na_density', mandatory:false },
@@ -3614,7 +3620,7 @@ async function _afterPhysSrc() {
   if (missing.length) {
     // Görünüm / Renk / Koku eksikse → kesinlikle engelle (bypass yok)
     // Diğer alanlar (Parlama Noktası, Yoğunluk vb.) → uyarı ama "Yine de oluştur" görünür
-    const HARD_LABELS = ['Görünüm (Fiziksel hal)', 'Renk', 'Koku'];
+    const HARD_LABELS = ['Görünüm (Fiziksel hal)', 'Renk', 'Koku', 'pH Değeri'];
     const hasHard = missing.some(m => HARD_LABELS.includes(m.label));
 
     document.getElementById('pdfBlockItems').innerHTML = missing.map(m => `

@@ -3337,21 +3337,34 @@ function _checkPDFMandatory() {
     }
   }
 
-  // 5. Yoğunluk — gaz formlar için zorunlu, sıvı/pasta/aerosol için uyarı
+  // 5. Yoğunluk — gaz hariç tüm formlar zorunlu (EU 2020/878 §9.1: "Only apply to liquids and solids")
   const densEl = document.getElementById('tf_density');
-  if (!densEl?.value?.trim()) {
-    if (form === 'gas') {
-      missing.push({ label: 'Yoğunluk / Buhar Yoğunluğu', reason: 'Gaz formlar için zorunlu — KKDİK Ek-2 §9.1' });
-    } else if (isLiquid) {
-      missing.push({ label: 'Yoğunluk (g/mL)', reason: 'Sıvı ürünlerde "Bilgi yok" kabul edilmez — KKDİK Ek-2 §9.1 / PCN zorunlu' });
-    }
+  const densNA = densEl?.dataset?.na === 'true';
+  if (form !== 'gas' && !densNA && !densEl?.value?.trim()) {
+    const densLabel = form === 'gas' ? 'Yoğunluk / Buhar Yoğunluğu' : 'Yoğunluk (g/mL)';
+    missing.push({ label: densLabel, reason: 'Gaz hariç tüm formlar için zorunlu — EU 2020/878 §9.1 / PCN zorunlu' });
   }
 
-  // 6. Çözünürlük — sıvı/pasta/aerosol için uyarı
+  // 6. Çözünürlük — gaz hariç tüm formlar zorunlu (EU 2020/878 §9.1: "Does not apply to gases")
+  const solEl = document.getElementById('tf_sol');
+  const solNA = solEl?.dataset?.na === 'true';
+  if (form !== 'gas' && !solNA && !solEl?.value?.trim()) {
+    missing.push({ label: 'Çözünürlük (mg/L)', reason: 'Gaz hariç tüm formlar için zorunlu — EU 2020/878 §9.1' });
+  }
+
+  // 7. Kaynama Noktası — gaz hariç tüm formlar zorunlu (EU 2020/878 §9.1: "Does not apply to gases")
+  const bpEl = document.getElementById('tf_bp');
+  const bpNA = bpEl?.dataset?.na === 'true';
+  if (form !== 'gas' && !bpNA && !bpEl?.value?.trim()) {
+    missing.push({ label: 'Kaynama Noktası', reason: 'Gaz hariç tüm formlar için zorunlu — EU 2020/878 §9.1 / H224-H225 sınıflandırması' });
+  }
+
+  // 8. Viskozite — sadece sıvı/pasta/aerosol zorunlu (EU 2020/878 §9.1: "Only applies to liquids")
   if (isLiquid) {
-    const solEl = document.getElementById('tf_sol');
-    if (!solEl?.value?.trim()) {
-      missing.push({ label: 'Çözünürlük (mg/L)', reason: 'Sıvı ürünlerde "Bilgi yok" kabul edilmez — KKDİK Ek-2 §9.1 / PCN zorunlu' });
+    const viscEl = document.getElementById('tf_visc');
+    const viscNA = viscEl?.dataset?.na === 'true';
+    if (!viscNA && !viscEl?.value?.trim()) {
+      missing.push({ label: 'Viskozite @40°C', reason: 'Sıvı formlar için zorunlu — EU 2020/878 §9.1 / H304 aspirasyon sınırı' });
     }
   }
 

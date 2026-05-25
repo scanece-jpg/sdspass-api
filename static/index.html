@@ -3309,11 +3309,14 @@ function _checkPDFMandatory() {
     missing.push({ label: 'Koku', reason: 'SDS Bölüm 9 — "bilgi yok" kabul edilmez (KKDİK Ek-2)' });
   }
 
-  // 4. pH Değeri — sadece sıvı/pasta/aerosol formlarında zorunlu (gaz/katı/toz'da pH ölçülmez)
-  const phLiquidForm = ['liquid', 'paste', 'aerosol'].includes(form);
+  // 4. pH Değeri — gaz formu hariç tüm formlarda zorunlu (EU 2020/878 §9.1(k): "Does not apply to gases")
+  // Katı/toz için sulu çözelti pH'ı ölçülür; sıvı/pasta/aerosol için doğrudan ölçülür.
   const phNA = document.getElementById('na_ph')?.checked;
-  if (phLiquidForm && !phNA && !document.getElementById('tf_ph')?.value?.trim()) {
-    missing.push({ label: 'pH Değeri', reason: 'SDS Bölüm 9 — ölçülemeyen/uygulanamayan durumlarda N/A işaretleyin (KKDİK Ek-2)' });
+  if (form !== 'gas' && !phNA && !document.getElementById('tf_ph')?.value?.trim()) {
+    const phReason = ['solid','powder'].includes(form)
+      ? 'SDS Bölüm 9 — katı/toz için sulu çözelti pH\'ı belirtin (EU 2020/878 §9.1(k))'
+      : 'SDS Bölüm 9 — ölçülemeyen/uygulanamayan durumlarda N/A işaretleyin (KKDİK Ek-2)';
+    missing.push({ label: 'pH Değeri', reason: phReason });
   }
 
   // 5. Parlama Noktası — sadece sıvı/pasta/aerosol, N/A işaretlenmemişse

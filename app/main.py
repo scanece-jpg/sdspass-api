@@ -136,20 +136,21 @@ async def generate_pdf(data: dict = Body(...)):
         except Exception:
             eco_result = None
 
-        # Backend eko sonucunu h_codes/all_h_codes'a ekle (REPLACE — frontend sonucunu geçersiz kıl)
-        # Frontend JS eco_engine farklı eşik kullanabilir; Python sonucu yetkilidir.
-        # Frontend'den gelen tüm H400/H410/H411/H412/H413 önce temizlenir, sonra Python sonucu eklenir.
+        # Backend eko sonucunu h_codes/all_h_codes'a ekle
+        # Politika: backend KESİN bir sonuç bulursa → frontend eco kodlarını DEĞİŞTİR.
+        #           backend hiçbir şey bulamazsa → frontend eco kodlarına DOKUNMA.
+        # Gerekçe: ecological_service M-faktör eksikliğinde H400 bulamayabilir;
+        #          bu durumda frontend'in doğru hesabı silinmemeliydi.
+        # Standalone eco_engine bloğu (aşağıda, try/except sonrası) ek güvence sağlar.
         ECO_H_CODES = {'H400', 'H410', 'H411', 'H412', 'H413'}
         _eco_h = None
         if eco_result and hasattr(eco_result, 'aquatic') and eco_result.aquatic:
             _eco_h = eco_result.aquatic.h_code
         if _eco_h:
+            # Backend kesin sonuç → frontend eco kodlarını değiştir
             h_codes     = [h for h in h_codes     if h not in ECO_H_CODES] + [_eco_h]
             all_h_codes = [h for h in all_h_codes if h not in ECO_H_CODES] + [_eco_h]
-        elif eco_result is not None:
-            # Eko sonucu yok → frontend'den gelen eko H kodlarını da temizle
-            h_codes     = [h for h in h_codes     if h not in ECO_H_CODES]
-            all_h_codes = [h for h in all_h_codes if h not in ECO_H_CODES]
+        # elif kaldırıldı: backend bulamazsa frontend eco H kodları KORUNUR
 
         # H420 — Ozon tabakasına zararlı (CLP Annex VI)
         # ecological_service sds_section_12['H420'] listesine yazar ama h_codes'a eklemez

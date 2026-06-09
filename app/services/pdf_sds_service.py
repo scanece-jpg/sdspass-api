@@ -379,9 +379,11 @@ def get_h_stmt(code: str, lang: str) -> str:
 
 def _build_stot_organ_map(components: list) -> dict:
     """
-    Bileşen listesinden STOT RE hedef organ haritası oluştur.
+    Bileşen listesinden STOT hedef organ haritası oluştur.
+    H372/H373 (STOT RE) ve H370/H371 (STOT SE) her ikisini kapsar.
     Döner: {h_code: organ_name_en}  (yalnızca organ bilinen sonuçlar)
     """
+    import re as _re
     from app.services.stot_re_service import calculate_stot_re, GENERAL_ORGAN
     stot_comps = [
         {'cas': c.get('cas_no', ''), 'name': c.get('name', ''),
@@ -397,19 +399,40 @@ def _build_stot_organ_map(components: list) -> dict:
             continue
         if h not in organ_map:
             organ_map[h] = organ
+
+    # H370/H371 (STOT SE) — bileşen tehlike kodu içindeki parentez bilgisinden organ çıkar
+    # Örnek: 'H370 (nervous system)' → organ_map['H370'] = 'nervous system'
+    for comp in components:
+        for haz in (comp.get('hazards') or []):
+            raw = (haz.get('h_code') or '').strip()
+            h_base = raw.replace('*', '').strip()[:4]
+            if h_base in ('H370', 'H371') and h_base not in organ_map:
+                m = _re.search(r'\(([^)]+)\)', raw)
+                if m:
+                    organs = [p.strip().lower() for p in m.group(1).split(',') if p.strip()]
+                    if organs:
+                        organ_map[h_base] = ', '.join(organs)
     return organ_map
 
 
 def get_stot_stmt(h_code: str, lang: str, organ_en: str) -> str:
-    """H372/H373 için hedef organ adı içeren H ifadesi üret."""
+    """H370/H371/H372/H373 için hedef organ adı içeren H ifadesi üret."""
     from app.services.stot_re_service import ORGAN_TR
     if lang == 'TR':
         organ = ORGAN_TR.get(organ_en.lower(), organ_en)
-        if h_code == 'H372':
+        if h_code == 'H370':
+            return f'Tek maruziyetle {organ} hasar verir.'
+        elif h_code == 'H371':
+            return f'Tek maruziyetle {organ} hasar verebilir.'
+        elif h_code == 'H372':
             return f'Uzun süreli veya tekrarlanan maruziyetle {organ} hasar verir.'
         return f'Uzun süreli veya tekrarlanan maruziyetle {organ} hasar verebilir.'
     else:
-        if h_code == 'H372':
+        if h_code == 'H370':
+            return f'Causes damage to {organ_en} following single exposure.'
+        elif h_code == 'H371':
+            return f'May cause damage to {organ_en} following single exposure.'
+        elif h_code == 'H372':
             return f'Causes damage to {organ_en} through prolonged or repeated exposure.'
         return f'May cause damage to {organ_en} through prolonged or repeated exposure.'
 
@@ -1069,7 +1092,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 if not stmt or stmt == hc:
                     # euh_details'dan bul
                     stmt = next((d.get('text_tr' if lang=='TR' else 'text','') for d in euh.get('euh_details',[]) if d.get('code')==hc), hc)
-            elif hc in ('H372', 'H373') and hc in _stot_organ_map:
+            elif hc in ('H370', 'H371', 'H372', 'H373') and hc in _stot_organ_map:
                 stmt = get_stot_stmt(hc, lang, _stot_organ_map[hc])
             else:
                 stmt = get_h_stmt(hc, lang)
@@ -1920,7 +1943,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     for h in h_codes:
         route = exposure_map.get(h)
         if route and route not in added_routes:
-            if h in ('H372', 'H373') and h in _stot_organ_map:
+            if h in ('H370', 'H371', 'H372', 'H373') and h in _stot_organ_map:
                 stmt = get_stot_stmt(h, lang, _stot_organ_map[h])
             else:
                 stmt = get_h_stmt(h, lang)

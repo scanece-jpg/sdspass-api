@@ -343,6 +343,22 @@ def classify(h_codes: List[str], form: str = 'liquid',
             ),
         }
 
+    # (c) H370/H371 bilgi notu — STOT SE doğrudan ADR Sınıf 6.1'e eşlenmez
+    stot_se_present = [h for h in ['H370', 'H371'] if h in h_set]
+    if stot_se_present and adr_caution is None:
+        acute_tox_present = bool(h_set & {'H300', 'H301', 'H310', 'H311', 'H330', 'H331'})
+        if not acute_tox_present:
+            adr_caution = {
+                'level': 'INFO',
+                'message': (
+                    f"{'/'.join(stot_se_present)} (STOT Tek Maruziyet) mevcut ancak "
+                    f"akut toksisite kodu (H300/H301/H310/H311/H330/H331) bulunmuyor. "
+                    f"ADR 2023: STOT SE kodları doğrudan ADR Sınıf 6.1'e eşlenmez. "
+                    f"LD50/LC50 verisi mevcutsa ADR 2.6.2.2 kapsamında Sınıf 6.1 "
+                    f"uygulanabilirliği taşımacılık uzmanı tarafından değerlendirilmelidir."
+                ),
+            }
+
     # Yan tehlike etiketi
     all_sub_labels = ', '.join(f"Sınıf {s['class']}" for s in subs)
     sub_label = f' (Yan Tehlike: {all_sub_labels})' if all_sub_labels else ''

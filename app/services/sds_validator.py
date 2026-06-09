@@ -253,6 +253,27 @@ def validate_sds(
              f"Değeri kontrol edin.",
              "Fizik: max çözünürlük ≤ yoğunluk × 1.000.000 mg/L")
 
+    # V017: STOT kodları mevcut ancak hedef organ bilgisi girilmemiş
+    # CLP Ek-VI dipnotu (**): hedef organ / maruziyet yolu Bölüm 11'de zorunlu.
+    import re as _re
+    stot_codes_present = [h for h in h_codes if h in ('H370', 'H371', 'H372', 'H373')]
+    if stot_codes_present:
+        components = sds_data.get('components', [])
+        has_organ_info = any(
+            _re.search(r'\(([^)]+)\)', (haz.get('h_code') or ''))
+            for c in (components or [])
+            for haz in (c.get('hazards') or [])
+            if (haz.get('h_code') or '').replace('*', '').strip()[:4]
+            in ('H370', 'H371', 'H372', 'H373')
+        )
+        if not has_organ_info:
+            warn("V017", "B11",
+                 f"STOT kodu/ları mevcut ({', '.join(stot_codes_present)}). "
+                 f"CLP Ek-VI dipnotu (**): hedef organ Bölüm 11'de zorunlu olarak belirtilmelidir. "
+                 f"Bileşen tehlike kodu formatında organ bilgisi ekleyin; "
+                 f"örn. 'H372 (nervous system)' veya 'H370 (liver)'.",
+                 "CLP Ek-VI (**) dipnotu — hedef organ zorunlu")
+
     return issues
 
 

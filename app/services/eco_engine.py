@@ -150,10 +150,23 @@ def calculate(comps: List[Dict], eco_test_data: Dict = None) -> Dict:
     if ozone:
         h_codes.append('H420')
 
+    # ── Hızla biyolojik parçalanabilir bileşenler listesi ───────────────────────
+    # Kronik sınıflandırma yoksa ya da H412/H413 eşiğinde ise bu bilgi
+    # Bölüm 12'de dipnot olarak gösterilebilir (B2.1 denetim bulgusu).
+    bio_comps = [
+        {'name': c.get('name') or (c.get('cas') or c.get('cas_no') or ''),
+         'cas':  (c.get('cas') or c.get('cas_no') or ''),
+         'conc': float(c.get('concMax') or c.get('conc') or 0)}
+        for c in comps
+        if (c.get('cas') or c.get('cas_no') or '') in READILY_BIO
+        and float(c.get('concMax') or c.get('conc') or 0) >= 1.0
+    ]
+
     return {
         'aquatic':       aquatic,
         'aquatic_acute': aquatic_acute,
         'ozone':         ozone,
         'pbt':           pbt,
         'h_codes':       h_codes,
+        'bio_notes':     bio_comps,   # hızla biyodegradable bileşenler (OECD 301)
     }

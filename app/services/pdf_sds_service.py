@@ -2462,16 +2462,18 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         ['— Sınıflandırma Kodu (ADR)' if lang == 'TR' else '— Classification Code (ADR)', cl_code],
         ['— Kemler Kodu / Tehlike No'  if lang == 'TR' else '— Hazard ID No (Kemler)',     kemler],
         ['— Tünel Kısıtlama Kodu'      if lang == 'TR' else '— Tunnel Restriction Code',   tunnel],
-        # ADR 5.2.1.8 — ÇTM (Çevresel Tehlikeli Madde) ambalaj işareti
-        *([(['— ADR Çevresel İşaret (ÇTM)'
-             if lang == 'TR' else '— ADR Environmental Mark',
-             ('Zorunlu — ADR 5.2.1.8: ambalaj ve taşıma belgelerinde '
-              'Çevresel Tehlikeli Madde (balık+ağaç) işareti gereklidir.'
-              if lang == 'TR' else
-              'Required — ADR 5.2.1.8: Environmental Hazard mark (fish+tree) '
-              'must appear on packages and transport documents.')]]
-            if is_env_hazard else [])),
     ]
+    # ADR 5.2.1.8 — ÇTM satırını koşullu ekle (is_env_hazard varsa)
+    if is_env_hazard:
+        _ctm_label = '— ADR Çevresel İşaret (ÇTM)' if lang == 'TR' else '— ADR Environmental Mark'
+        _ctm_value = (
+            'Zorunlu — ADR 5.2.1.8: ambalaj ve taşıma belgelerinde '
+            'Çevresel Tehlikeli Madde (balık+ağaç) işareti gereklidir.'
+            if lang == 'TR' else
+            'Required — ADR 5.2.1.8: Environmental Hazard mark (fish+tree) '
+            'must appear on packages and transport documents.'
+        )
+        transport_rows.append([_ctm_label, _ctm_value])
     story.append(data_table(transport_rows, [75*mm, 105*mm], styles, header=False))
     if auto_t:
         story.append(Paragraph(

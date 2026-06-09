@@ -38,6 +38,10 @@ def validate_sds(
 
     def _f(v):
         if v is None: return None
+        # _parsed_phys dict formatı: {'display':..., 'calc':..., 'value':...}
+        if isinstance(v, dict):
+            v = v.get('calc') if v.get('calc') is not None else v.get('value')
+            if v is None: return None
         s = str(v).strip()
         # Aralık değerleri için alt sınırı döndür (genel sayısal alanlar için yeterli)
         if '-' in s and not s.startswith('-'):
@@ -48,6 +52,10 @@ def validate_sds(
     def _ph_range(v):
         """pH için (alt, üst) tuple döndür. Aralık yoksa her ikisi de aynı değer."""
         if v is None: return None, None
+        # _parsed_phys dict formatı: {'display':..., 'calc':...}
+        if isinstance(v, dict):
+            v = v.get('display') or v.get('calc')
+            if v is None: return None, None
         try:
             return _parse_ph_range(v)
         except (ValueError, TypeError):

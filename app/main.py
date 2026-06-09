@@ -259,6 +259,33 @@ async def generate_pdf(data: dict = Body(...)):
                             'cutoff_used': '—',
                         })
 
+            # ── CLP Baskınlık kuralı — Bölüm 2.1 tablosuna uygula ───────────────
+            # Fiziksel motor sonuçları CLP dominance'dan sonra eklendi;
+            # py_clp_passed kombinasyonuna da uygula.
+            # Örnek: H225 varsa H226 Bölüm 2.1'den kaldırılır.
+            _DOMINANCE_MAP = {
+                'H225': ['H226'], 'H224': ['H225', 'H226'],
+                'H271': ['H272'], 'H270': ['H271', 'H272'],
+                'H314': ['H315', 'H319'],
+                'H318': ['H319'],
+                'H300': ['H301', 'H302'], 'H310': ['H311', 'H312'],
+                'H330': ['H331', 'H332'],
+                'H340': ['H341'], 'H350': ['H351'],
+                'H360': ['H361'], 'H370': ['H371'],
+                'H372': ['H373'],
+                'H400': ['H401', 'H402'],
+                'H410': ['H411', 'H412', 'H413'],
+                'H411': ['H412', 'H413'],
+                'H412': ['H413'],
+            }
+            _present = {e['h_code'] for e in _cp}
+            _dominated = set()
+            for _dom, _subs in _DOMINANCE_MAP.items():
+                if _dom in _present:
+                    _dominated.update(_subs)
+            if _dominated:
+                _cp = [e for e in _cp if e['h_code'] not in _dominated]
+
             py_clp_passed = _cp
 
             # Transport — fiziksel H kodlarını da ilet
@@ -407,6 +434,26 @@ async def generate_pdf(data: dict = Body(...)):
                 'comp_type':     c.get('comp_type', 'normal'),
             }
         mapped_comps = [_map_comp(c) for c in components]
+
+        # ── Bileşen tehlike kodlarını doğrula (Bölüm 3 kalite kontrolü) ──────────
+        # SEA Ek-6'da bulunan maddeler için frontend'den gelen hatalı/fazla tehlike
+        # kodlarını yetkili DB verisiyle değiştir.
+        # Gerekçe: Kullanıcı manuel ekleme, tarayıcı önbelleği veya CAS sorgulama
+        # hatası nedeniyle yanlış H kodları ekleyebilir.
+        # Yalnızca sea_ek6=True maddeler için geçerlidir; bilinmeyen maddeler
+        # (custom / ECHA-only) için frontend verisi korunur.
+        try:
+            from app.services.substance_lookup import lookup_substance as _lu_check
+            for _mc in mapped_comps:
+                _cas = _mc.get('cas_no', '').strip()
+                if not _cas:
+                    continue
+                _sub = _lu_check(_cas)
+                if _sub and _sub.get('sea_ek6', False):
+                    # SEA Ek-6 yetkili veri — frontend'den gelen kodları geçersiz kıl
+                    _mc['hazards'] = _sub.get('hazards', [])
+        except Exception:
+            pass  # Hata durumunda frontend verisi korunur
 
         # Revizyon tarihi
         import datetime

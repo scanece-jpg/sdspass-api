@@ -340,6 +340,33 @@ async def generate_pdf(data: dict = Body(...)):
             py_transport  = data.get('transport', {})
             py_ppe        = data.get('ppe', {})
 
+        # ── Eco H kodu garantisi — try/except'ten bağımsız çalışır ────────────────────
+        # Ana try bloğu başarısız olursa (motor hatası → frontend fallback) içindeki
+        # eco sync hiç çalışmaz. Bu blok eco_engine'i doğrudan çağırarak h_codes'u güvence
+        # altına alır. Koşul: h_codes'ta hâlâ eco kodu yoksa çalışır → çift hesap olmaz.
+        if not any(h in ECO_H_CODES for h in h_codes):
+            try:
+                from app.services.eco_engine import calculate as _eco_h_eng
+                _eco_h_res = _eco_h_eng(components)
+                _eco_h_out = next(
+                    (_eco_h_res[_k].get('h') for _k in ('aquatic', 'aquatic_acute')
+                     if isinstance(_eco_h_res.get(_k), dict) and _eco_h_res[_k].get('h')),
+                    next((h for h in _eco_h_res.get('h_codes', []) if h in ECO_H_CODES), None)
+                )
+                if _eco_h_out:
+                    h_codes     = [h for h in h_codes     if h not in ECO_H_CODES] + [_eco_h_out]
+                    all_h_codes = [h for h in all_h_codes if h not in ECO_H_CODES] + [_eco_h_out]
+                    # Bölüm 12 senkronizasyonu
+                    try:
+                        _s12 = (eco_result.sds_section_12
+                                if hasattr(eco_result, 'sds_section_12') else {})
+                        if isinstance(_s12, dict) and _s12.get('12.1', '') in ('Sınıflandırma yok', '', None):
+                            _s12['12.1'] = _eco_h_out
+                    except Exception:
+                        pass
+            except Exception:
+                pass  # Eco engine başarısız → mevcut h_codes korunur
+
         # P kodlarını güncel h_codes ile yeniden hesapla (eko H kodu + H314 filtresi dahil)
         p_result = assign_p_codes(h_codes, signal, usage=usage)
         p_result['label'] = select_label_p_codes(p_result['p_codes'], 6, h_codes=h_codes)

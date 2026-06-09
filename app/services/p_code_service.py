@@ -541,9 +541,11 @@ H_BASED_LABEL_FORCED: Dict[str, List[str]] = {
     'H261': ['P231+P232'],
     # Sucul çevre tehlikesi — P273 (çevreye bırakma) etikette zorunlu (SEA Tablo 4.1.4)
     # H412/H413 de dahil: CLP Annex IV tüm sucul kategoriler P273 gerektirir
-    'H400': ['P273'],
-    'H410': ['P273'],
-    'H411': ['P273'],
+    # P273: çevreye bırakma önlemi — tüm sucul kategoriler zorunlu
+    # P391: döküntü toplama — H400/H410/H411 için CLP Ek-IV ek önlem
+    'H400': ['P273', 'P391'],
+    'H410': ['P273', 'P391'],
+    'H411': ['P273', 'P391'],
     'H412': ['P273'],   # SEA Tablo 4.1.4: Sucul Kronik 3 → P273 zorunlu
     'H413': ['P273'],   # SEA Tablo 4.1.4: Sucul Kronik 4 → P273 zorunlu
 }

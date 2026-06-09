@@ -228,6 +228,14 @@ async def generate_pdf(data: dict = Body(...)):
                         'cutoff_used': p.get('cutoff_used',''),
                     })
 
+            # CLP Ek-I §2.6.4.2: Karışımın ölçülen parlama noktası verisi
+            # bileşen cut-off yönteminin önüne geçer. Kullanıcı FP girdiyse
+            # clp_service'in Flam.Liq. H kodlarını sil — physical_engine kazanır.
+            _FLAM_LIQ_H = {'H224', 'H225', 'H226'}
+            if _user_fp is not None:
+                _cp   = [e for e in _cp if e['h_code'] not in _FLAM_LIQ_H]
+                _seen -= _FLAM_LIQ_H
+
             for r in _phys_res.get('results', []):
                 hc = (r.get('h') or r.get('h_code') or '').replace('*','').strip()[:4]
                 if hc and hc not in _seen:

@@ -368,6 +368,21 @@ async def generate_pdf(data: dict = Body(...)):
             except Exception:
                 pass  # Eco engine başarısız → mevcut h_codes korunur
 
+        # ── Bölüm 12.1 garantisi — h_codes'tan bağımsız çalışır ──────────────────────
+        # Yukarıdaki standalone blok yalnızca h_codes'ta eco kodu YOK iken çalışır.
+        # Frontend H400 sağlamışsa o blok atlanır → eco_result.sds_section_12['12.1']
+        # hâlâ 'Sınıflandırma yok' kalabilir. Bu blok h_codes'taki eco kodunu
+        # her koşulda sds_section_12'ye yansıtır.
+        _eco_h_for_s12 = next((h for h in h_codes if h in ECO_H_CODES), None)
+        if _eco_h_for_s12:
+            try:
+                _s12 = (eco_result.sds_section_12
+                        if hasattr(eco_result, 'sds_section_12') else None)
+                if isinstance(_s12, dict) and _s12.get('12.1', '') in ('Sınıflandırma yok', '', None):
+                    _s12['12.1'] = _eco_h_for_s12
+            except Exception:
+                pass
+
         # P kodlarını güncel h_codes ile yeniden hesapla (eko H kodu + H314 filtresi dahil)
         p_result = assign_p_codes(h_codes, signal, usage=usage)
         p_result['label'] = select_label_p_codes(p_result['p_codes'], 6, h_codes=h_codes)

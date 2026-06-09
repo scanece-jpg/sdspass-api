@@ -212,7 +212,10 @@ def validate_sds(
         label_count = 0
     if label_count > 6:
         warn("V013","B2",
-             f"Etikette {label_count} P kodu var (P501 hariç). CLP kuralı max 6 P koduna izin verir.",
+             f"Etikette {label_count} adet P kodu seçildi (P501/P101/P102 hariç). "
+             f"CLP Madde 22(4): tehlikenin niteliği gerektiriyorsa 6 limit aşılabilir — "
+             f"H kodu bazlı zorunlu P kodları bu sistemde kesilmez. "
+             f"Etiket tasarımında yer kısıtlıysa manuel gözden geçirebilirsiniz.",
              "CLP Article 22(4)")
 
     # V014: Signal word tutarlılığı

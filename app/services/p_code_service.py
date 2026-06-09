@@ -487,67 +487,68 @@ P_LABEL_MANDATORY = ['P101', 'P102', 'P501']
 # H kodu bazlı etiket zorunlu P kodları — CLP Annex IV zorunluluğu
 # Bu P kodları ilgili H kodu varken her zaman etikete yazılmalı (6 limitinden önce eklenir)
 H_BASED_LABEL_FORCED: Dict[str, List[str]] = {
-    # Alevlenir sıvı — tutuşma kaynağından uzak tutma ZORUNLU (CLP Annex IV)
-    # P210 en kritik önleme kodudur; 6-limit yarışına bırakılmamalı
-    'H224': ['P210'],
-    'H225': ['P210'],
-    'H226': ['P210'],
-    # Cilt aşınması — 4 kritik müdahale + KKE kodu zorunlu (CLP Annex IV Tablo 6.3)
-    # P260 (solunum koruma) önem sırasında daha düşük → öncelik yarışına bırakıldı
-    # Bu sayede H272/H410 gibi ek tehlikeler için etiket kontenjanı açık kalır
-    # P310 (zehir danışma hattı) CLP Ek-IV: H314 Cilt Aşın. 1A için zorunlu.
-    # H225/H400 ile birleşince forced toplam 7'yi aşabilir — CLP Madde 22(4)
-    # gereği 6 limiti aşıldığında tüm forced kodlar korunur (trim kaldırıldı).
+    # ── Alevlenir Sıvı — P210 + P233 zorunlu (CLP Ek-IV Tablo 6.2) ──────────
+    'H224': ['P210', 'P233'],
+    'H225': ['P210', 'P233'],
+    'H226': ['P210', 'P233'],
+    # ── Alevlenir Gaz — P210 zorunlu (CLP Ek-IV) ─────────────────────────────
+    'H220': ['P210'],
+    'H221': ['P210'],
+    # ── Alevlenir Katı — P210 zorunlu (CLP Ek-IV) ────────────────────────────
+    'H228': ['P210'],
+    # ── Cilt Aşınması — 4 kritik müdahale + KKE (CLP Ek-IV Tablo 6.3) ───────
+    # H225/H400 ile birleşince forced 6'yı aşabilir — CLP Madde 22(4) gereği
+    # tüm forced kodlar korunur, trim uygulanmaz.
     'H314': ['P280', 'P301+P330+P331', 'P303+P361+P353', 'P305+P351+P338', 'P310'],
-    # Ağır göz hasarı — KKE zorunlu (H318, H314 ile çakışırsa P280 zaten var)
+    # ── Göz / Cilt Hasarı ─────────────────────────────────────────────────────
     'H318': ['P280'],
-    # Cilt tahrişi / Cilt duyarlılaştırma — KKE zorunlu (CLP Annex IV)
-    # H315 ve H317 için P280 etiket üzerinde açıkça yer almalı
     'H315': ['P280'],
     'H317': ['P280'],
-    # Göz tahrişi — P280 zorunlu (H319 için CLP Annex IV)
     'H319': ['P280'],
-    # Öldürücü / ağır akut toksisite — kilitli depolama zorunlu (CLP Annex IV)
+    # ── Akut Toksisite ────────────────────────────────────────────────────────
     'H300': ['P405'],
     'H301': ['P405'],
-    'H310': ['P405'],
-    'H330': ['P405'],
-    # STOT SE 1 / Tehlike — kilitli depolama (kronik maruziyeti önlemek için)
+    'H310': ['P280', 'P405'],
+    'H311': ['P280'],
+    # Akut inhalasyon — solunum koruma + havalandırma zorunlu (CLP Ek-IV)
+    'H330': ['P260', 'P271', 'P405'],
+    'H331': ['P261', 'P271'],
+    # ── STOT ──────────────────────────────────────────────────────────────────
     'H370': ['P405'],
-    # Kanserojen / mutajen / üreme toksik — KKE + bilgi alma + kilitli (CLP Annex IV)
-    'H340': ['P280', 'P405'],
-    'H350': ['P280', 'P405'],
-    'H360': ['P280', 'P405'],
-    # Oksitleyici sıvı — yanıcılardan uzak tut (CLP Annex III Tablo 3.4.3)
-    # H271 (Ox. Liq. 1): P220 (uzak tut) zorunlu
-    'H271': ['P220', 'P221'],
-    # H272 (Ox. Liq. 2/3): hem P220 hem P221 zorunlu (CLP Annex III)
-    # P221 = yanıcılarla karışımı kesinlikle önle
-    'H272': ['P220', 'P221'],
-    # Aspirasyon toksisitesi — P331 (KUSMayı UYARMAYIN) HAYATI ÖNEM
-    # Aspiration Tox. 1 için kusturma kesinlikle yasak — CLP Annex IV zorunlu
-    'H304': ['P331'],
-    # Solunum duyarlılaştırıcı — P284 (solunum koruyucu) zorunlu (CLP Annex IV)
-    'H334': ['P284'],
-    # Şüpheli CMR (Kat.2) — P201 (özel talimat al) CLP Annex IV zorunlu
-    'H341': ['P201'],
-    'H351': ['P201'],
-    'H361': ['P201'],
-    # STOT Tekrarlanan Maruziyet — P314 (tıbbi yardım) CLP Annex IV
+    'H371': ['P308+P313'],
     'H372': ['P314'],
     'H373': ['P314'],
-    # Su reaktif — P231+P232 (inert gaz) kritik güvenlik önlemi
+    # ── CMR Kat.1 — özel talimat + KKE + kilitli + hamile uyarısı ───────────
+    'H340':  ['P201', 'P202', 'P280', 'P405'],
+    'H350':  ['P201', 'P202', 'P280', 'P405'],
+    'H350i': ['P201', 'P202', 'P280', 'P405'],
+    'H360':  ['P201', 'P202', 'P263', 'P280', 'P405'],
+    'H360D': ['P201', 'P202', 'P263', 'P280', 'P405'],
+    'H360F': ['P201', 'P202', 'P263', 'P280', 'P405'],
+    # ── CMR Kat.2 (Şüpheli) — P201 + P202 zorunlu (CLP Ek-IV) ──────────────
+    'H341':  ['P201', 'P202'],
+    'H351':  ['P201', 'P202'],
+    'H361':  ['P201', 'P202', 'P263'],
+    'H361d': ['P201', 'P202', 'P263'],
+    # ── Oksitleyici ───────────────────────────────────────────────────────────
+    'H271': ['P220', 'P221'],
+    'H272': ['P220', 'P221'],
+    # ── Aspirasyon — KUSMayı UYARMAYIN hayati önem ───────────────────────────
+    'H304': ['P331'],
+    # ── Solunum Duyarlılaştırıcı — P260 + P271 + P284 zorunlu ───────────────
+    'H334': ['P260', 'P271', 'P284'],
+    # ── Su Reaktif ────────────────────────────────────────────────────────────
     'H260': ['P231+P232'],
     'H261': ['P231+P232'],
-    # Sucul çevre tehlikesi — P273 (çevreye bırakma) etikette zorunlu (SEA Tablo 4.1.4)
-    # H412/H413 de dahil: CLP Annex IV tüm sucul kategoriler P273 gerektirir
-    # P273: çevreye bırakma önlemi — tüm sucul kategoriler zorunlu
-    # P391: döküntü toplama — H400/H410/H411 için CLP Ek-IV ek önlem
+    # ── Sucul Çevre — P273 tüm kategoriler, P391 akut/kronik 1-2 ─────────────
     'H400': ['P273', 'P391'],
+    'H401': ['P273'],
     'H410': ['P273', 'P391'],
     'H411': ['P273', 'P391'],
-    'H412': ['P273'],   # SEA Tablo 4.1.4: Sucul Kronik 3 → P273 zorunlu
-    'H413': ['P273'],   # SEA Tablo 4.1.4: Sucul Kronik 4 → P273 zorunlu
+    'H412': ['P273'],
+    'H413': ['P273'],
+    # ── Ozon Tabakası ─────────────────────────────────────────────────────────
+    'H420': ['P502'],
 }
 
 def select_label_p_codes(all_p_codes: List[str], max_codes: int = 6,

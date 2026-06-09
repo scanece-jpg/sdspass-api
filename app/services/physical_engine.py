@@ -360,6 +360,17 @@ def calc_theo_props(comps: List[Dict]) -> Optional[Dict]:
         if sol is not None and r['w'] > 0:
             sol_log_sum += r['w'] * math.log10(max(sol, 0.01))
             sol_cov_w   += r['w']
+    if sol_cov_w == 0:
+        # Hiçbir bileşenin CAS numarası SOL_DB'de yok — teorik hesap yapılamıyor.
+        # KKDİK Ek-2 §9.1: bilgi yoksa "Belirlenmemiştir" açıkça yazılmalıdır (boş bırakılamaz).
+        res['solubility'] = {
+            'value':   None,
+            'display': 'Belirlenmemiştir',
+            'text':    'Belirlenmemiştir — bileşen çözünürlük verisi hesaplama veritabanında yok',
+            'error':   None,
+            'method':  '—',
+            'standard': 'KKDİK Ek-2 §9.1 / REACH Annex II §9',
+        }
     if sol_cov_w > 0:
         sol_cov = round((sol_cov_w / total_w_all) * 100) if total_w_all > 0 else 0
         if water_frac >= 0.5:

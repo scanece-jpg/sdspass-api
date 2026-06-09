@@ -235,6 +235,19 @@ async def generate_pdf(data: dict = Body(...)):
             if _user_fp is not None:
                 _cp   = [e for e in _cp if e['h_code'] not in _FLAM_LIQ_H]
                 _seen -= _FLAM_LIQ_H
+                # h_codes / all_h_codes'u da güncelle:
+                # physical_engine'in ölçüm bazlı H kodu frontend'in bileşen bazlısını
+                # geçersiz kılar → B2.2 etiket (h_codes) ve B2.1 fallback döngüsü
+                # (all_h_codes) tutarlı olur; "Baskın tehlike sınıfı kapsamında"
+                # gerekçesiyle yanlış H kodu eklenmez.
+                _phys_flam_h = next(
+                    (r.get('h') for r in _phys_res.get('results', [])
+                     if r.get('type') == 'flam_liq'),
+                    None
+                )
+                if _phys_flam_h:
+                    h_codes     = [h for h in h_codes     if h not in _FLAM_LIQ_H] + [_phys_flam_h]
+                    all_h_codes = [h for h in all_h_codes if h not in _FLAM_LIQ_H] + [_phys_flam_h]
 
             for r in _phys_res.get('results', []):
                 hc = (r.get('h') or r.get('h_code') or '').replace('*','').strip()[:4]

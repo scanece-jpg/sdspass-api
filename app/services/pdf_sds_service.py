@@ -2255,15 +2255,42 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     story.append(data_table(eco_rows, [65*mm, 115*mm], styles, header=False))
 
     # M Faktör tablosu — CLP Annex I Tablo 4.1.3
+    # Zorunluluk: Bileşende H400 (Aquatic Acute 1) veya H410 (Aquatic Chronic 1) varsa
+    # tablo KESİNLİKLE gösterilmeli — karışım sınıflandırmasından bağımsız.
+    # CLP §4.1.3.5.5: M-faktörü bilinmiyorsa M=1 varsayılır ve bu durum tabloda belirtilir.
     _eco_aq = eco_sections.aquatic if hasattr(eco_sections,'aquatic') else (
               eco_sections.get('aquatic') if isinstance(eco_sections,dict) else None)
-    if _eco_aq:
-        _mf_details = getattr(_eco_aq,'component_details',None) or []
-        # M-faktörler yalnızca Aquatic Acute 1 ve Aquatic Chronic 1 için tanımlıdır
-        # (CLP Tablo 4.1.3). Chronic 2+ bileşenler M-faktörsüz hesaplandığından tabloya dahil edilmez.
-        _M_FACTOR_CLASSES = {'Aquatic Acute 1', 'Aquatic Chronic 1'}
-        _aquatic_comps = [d for d in _mf_details if d.get('h_class') in _M_FACTOR_CLASSES]
-        if _aquatic_comps:
+    _mf_details = (getattr(_eco_aq,'component_details',None) or []) if _eco_aq else []
+
+    # Fallback: eco_result.aquatic yoksa veya component_details boşsa
+    # bileşen listesinden H400/H410 sınıflı maddeleri topla (M=1 varsayılan)
+    if not _mf_details:
+        _M_FACTOR_H_CODES   = {'H400', 'H401', 'H410', 'H411'}
+        _M_FACTOR_CLASSES   = {'Aquatic Acute 1', 'Aquatic Chronic 1'}
+        for _comp in sds_data.get('components', []):
+            _comp_hazards   = _comp.get('hazards', [])
+            _comp_h_codes   = {(h.get('h_code') or '').strip() for h in _comp_hazards}
+            _comp_h_classes = {(h.get('h_class') or '').strip() for h in _comp_hazards}
+            _has_aa1 = bool(_comp_h_codes & {'H400','H401'} or _comp_h_classes & {'Aquatic Acute 1'})
+            _has_ac1 = bool(_comp_h_codes & {'H410','H411'} or _comp_h_classes & {'Aquatic Chronic 1'})
+            if _has_aa1 or _has_ac1:
+                _mf_raw = _comp.get('m_factors') or {}
+                _m_a    = _mf_raw.get('acute',   1) if _mf_raw else 1
+                _m_c    = _mf_raw.get('chronic',  1) if _mf_raw else 1
+                _mf_details.append({
+                    'cas':      _comp.get('cas_no', _comp.get('cas', '')),
+                    'name':     _comp.get('name', ''),
+                    'name_tr':  _comp.get('name_tr', _comp.get('name', '')),
+                    'm_acute':   _m_a,
+                    'm_chronic': _m_c,
+                    'h_class':  'Aquatic Acute 1' if _has_aa1 else 'Aquatic Chronic 1',
+                    'h_code':   'H400' if _has_aa1 else 'H410',
+                    '_m_default': not bool(_mf_raw),  # True → M=1 varsayıldı
+                })
+
+    _M_FACTOR_CLASSES = {'Aquatic Acute 1', 'Aquatic Chronic 1'}
+    _aquatic_comps = [d for d in _mf_details if d.get('h_class') in _M_FACTOR_CLASSES]
+    if _aquatic_comps:
             _mf_lbl = 'M Faktörleri — CLP Tablo 4.1.3 (Toplamsal Yöntem)' if lang=='TR' \
                       else 'M Factors — CLP Table 4.1.3 (Summation Method)'
             story.append(Spacer(1, 4))
@@ -2276,17 +2303,33 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 'M (Kronik)' if lang=='TR' else 'M (Chronic)',
             ]
             _mf_rows = [_mf_hdr]
+            _any_m_default = False
             for _d in _aquatic_comps:
                 _mf_name = (_d.get('name_tr','') if lang=='TR' else '') or _d.get('name','')
+                _m_a_val = _d.get('m_acute',   1)
+                _m_c_val = _d.get('m_chronic',  1)
+                # M=1 varsayıldıysa değerin yanına * işareti ekle
+                _m_a_str = f"{_m_a_val}*" if _d.get('_m_default') else str(_m_a_val)
+                _m_c_str = f"{_m_c_val}*" if _d.get('_m_default') else str(_m_c_val)
+                if _d.get('_m_default'):
+                    _any_m_default = True
                 _mf_rows.append([
                     _d.get('cas',''),
                     _mf_name,
                     translate_hclass(correct_hclass(_d.get('h_code',''), _d.get('h_class','')), lang),
-                    str(_d.get('m_acute', 1)),
-                    str(_d.get('m_chronic', 1)),
+                    _m_a_str,
+                    _m_c_str,
                 ])
             story.append(data_table(_mf_rows,
                 [24*mm, 52*mm, 42*mm, 22*mm, 22*mm], styles))
+            # M=1 varsayılan bileşen varsa dipnot ekle
+            if _any_m_default:
+                _mf_note = ('* M-faktörü belirlenmemiş; CLP Ek-I §4.1.3.5.5 uyarınca M=1 varsayıldı. '
+                            'Tedarikçiden EC50/LC50 verisi alınarak doğrulanmalıdır.'
+                            if lang == 'TR' else
+                            '* M-factor not determined; M=1 assumed per CLP Annex I §4.1.3.5.5. '
+                            'Verify with EC50/LC50 data from supplier.')
+                story.append(Paragraph(_mf_note, styles['small']))
             story.append(Spacer(1, 3))
 
     # ─────────────────────────────────────────────────────────────────────────
@@ -2419,6 +2462,15 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         ['— Sınıflandırma Kodu (ADR)' if lang == 'TR' else '— Classification Code (ADR)', cl_code],
         ['— Kemler Kodu / Tehlike No'  if lang == 'TR' else '— Hazard ID No (Kemler)',     kemler],
         ['— Tünel Kısıtlama Kodu'      if lang == 'TR' else '— Tunnel Restriction Code',   tunnel],
+        # ADR 5.2.1.8 — ÇTM (Çevresel Tehlikeli Madde) ambalaj işareti
+        *([(['— ADR Çevresel İşaret (ÇTM)'
+             if lang == 'TR' else '— ADR Environmental Mark',
+             ('Zorunlu — ADR 5.2.1.8: ambalaj ve taşıma belgelerinde '
+              'Çevresel Tehlikeli Madde (balık+ağaç) işareti gereklidir.'
+              if lang == 'TR' else
+              'Required — ADR 5.2.1.8: Environmental Hazard mark (fish+tree) '
+              'must appear on packages and transport documents.')]]
+            if is_env_hazard else [])),
     ]
     story.append(data_table(transport_rows, [75*mm, 105*mm], styles, header=False))
     if auto_t:

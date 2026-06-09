@@ -368,9 +368,17 @@ def calc_theo_props(comps: List[Dict]) -> Optional[Dict]:
         else:
             sol_raw  = 10 ** (sol_log_sum / sol_cov_w)
             sol_val  = round(sol_raw, 1)
-            sol_desc = (f'Çözünür (>10 g/L), tahmini ~{sol_val} mg/L' if sol_val >= 10000 else
-                        f'Kısmen çözünür (0,1–10 g/L), tahmini ~{sol_val} mg/L' if sol_val >= 100 else
-                        f'Pratik olarak çözünmez (<100 mg/L), tahmini ~{sol_val} mg/L')
+            # Fiziksel üst sınır: 1 litre çözücü en fazla yoğunluk×1.000.000 mg madde çözebilir.
+            # Bu sınırı aşan tahmini değer gerçekte "tam karışır" anlamına gelir.
+            _density_val = res.get('density', {}).get('value') if isinstance(res.get('density'), dict) else res.get('density')
+            _density_limit = float(_density_val) * 1e6 if _density_val else None
+            if _density_limit and sol_val >= _density_limit * 0.9:
+                sol_val  = None
+                sol_desc = 'Karışır (yüksek çözünürlük — tam karışır, tahmini)'
+            else:
+                sol_desc = (f'Çözünür (>10 g/L), tahmini ~{sol_val} mg/L' if sol_val >= 10000 else
+                            f'Kısmen çözünür (0,1–10 g/L), tahmini ~{sol_val} mg/L' if sol_val >= 100 else
+                            f'Pratik olarak çözünmez (<100 mg/L), tahmini ~{sol_val} mg/L')
         res['solubility'] = {
             'value': sol_val,
             'text':  sol_desc,

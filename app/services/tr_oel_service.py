@@ -39,12 +39,14 @@ def get_oel_table(components: list) -> list:
     rows = []
     for comp in components:
         cas = comp.get('cas_no', comp.get('cas', ''))
+        if not cas:
+            continue
         oel = get_oel(cas)
         if oel:
             rows.append({
                 'cas':        cas,
                 'name':       comp.get('name', ''),
-                'name_tr':    oel.get('name_tr', comp.get('name','')),
+                'name_tr':    oel.get('name_tr', comp.get('name', '')),
                 'tw_ppm':     oel.get('tw_ppm'),
                 'tw_mgm3':    oel.get('tw_mgm3'),
                 'stel_ppm':   oel.get('stel_ppm'),
@@ -53,6 +55,22 @@ def get_oel_table(components: list) -> list:
                 'carcinogen': oel.get('carcinogen', False),
                 'regulation': oel.get('regulation', 'EK-1'),
                 'notes':      oel.get('notes', ''),
+            })
+        else:
+            # OEL veritabanında kayıt yok — KKDİK Ek-2 B8.1 zorunluluğu:
+            # limit bilinmiyorsa bu durum SDS'te açıkça belirtilmelidir.
+            rows.append({
+                'cas':        cas,
+                'name':       comp.get('name', ''),
+                'name_tr':    comp.get('name_tr', comp.get('name', '')),
+                'tw_ppm':     None,
+                'tw_mgm3':    None,
+                'stel_ppm':   None,
+                'stel_mgm3':  None,
+                'skin':       False,
+                'carcinogen': False,
+                'regulation': '—',
+                'notes':      'OEL belirlenmemiş — Türkiye ÇSGB Ek-1/Ek-2 kapsamında kayıtlı değil',
             })
     return rows
 

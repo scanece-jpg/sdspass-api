@@ -363,8 +363,9 @@ def calc_theo_props(comps: List[Dict]) -> Optional[Dict]:
     if sol_cov_w > 0:
         sol_cov = round((sol_cov_w / total_w_all) * 100) if total_w_all > 0 else 0
         if water_frac >= 0.5:
-            sol_val  = None
-            sol_desc = 'Tam karışır — su bazlı ürün (su > %50)'
+            sol_val     = None
+            sol_desc    = 'Tam karışır — su bazlı ürün (su > %50)'
+            sol_display = 'Karışır (su bazlı ürün, su > %50)'
         else:
             sol_raw  = 10 ** (sol_log_sum / sol_cov_w)
             sol_val  = round(sol_raw, 1)
@@ -373,15 +374,18 @@ def calc_theo_props(comps: List[Dict]) -> Optional[Dict]:
             _density_val = res.get('density', {}).get('value') if isinstance(res.get('density'), dict) else res.get('density')
             _density_limit = float(_density_val) * 1e6 if _density_val else None
             if _density_limit and sol_val >= _density_limit * 0.9:
-                sol_val  = None
-                sol_desc = 'Karışır (yüksek çözünürlük — tam karışır, tahmini)'
+                sol_val     = None
+                sol_desc    = 'Karışır (yüksek çözünürlük — tam karışır, tahmini)'
+                sol_display = 'Karışır (tahmini — yoğunluk bazlı fiziksel üst sınır aşıldı)'
             else:
-                sol_desc = (f'Çözünür (>10 g/L), tahmini ~{sol_val} mg/L' if sol_val >= 10000 else
-                            f'Kısmen çözünür (0,1–10 g/L), tahmini ~{sol_val} mg/L' if sol_val >= 100 else
-                            f'Pratik olarak çözünmez (<100 mg/L), tahmini ~{sol_val} mg/L')
+                sol_desc    = (f'Çözünür (>10 g/L), tahmini ~{sol_val} mg/L' if sol_val >= 10000 else
+                               f'Kısmen çözünür (0,1–10 g/L), tahmini ~{sol_val} mg/L' if sol_val >= 100 else
+                               f'Pratik olarak çözünmez (<100 mg/L), tahmini ~{sol_val} mg/L')
+                sol_display = sol_desc
         res['solubility'] = {
-            'value': sol_val,
-            'text':  sol_desc,
+            'value':   sol_val,
+            'display': sol_display,
+            'text':    sol_desc,
             'error': {'abs': None, 'pct': 50, 'rate': 0.50},
             'method': 'log(S_mix) = Σ(wᵢ·log(Sᵢ))/Σwᵢ — ağırlıklı geometrik ortalama',
             'standard': 'OECD 105 (referans)',

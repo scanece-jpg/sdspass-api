@@ -1560,6 +1560,21 @@ function _autofillPhysFields(tp) {
       _updateSrcBadge(key, '');
     }
   }
+  // Çözünürlük özel: sayısal değer yok ama açıklama metni varsa (Karışır, Belirlenmemiştir)
+  // tf_sol sayısal alan olduğu için metin yazılamaz — warn_sol div'inde göster.
+  const _solEl   = document.getElementById('tf_sol');
+  const _warnSol = document.getElementById('warn_sol');
+  if (_solEl && _warnSol && _solEl.dataset.source !== 'user') {
+    const _solText = tp?.solubility?.text || tp?.solubility?.display;
+    const _solVal  = tp?.solubility?.value;
+    if (_solVal == null && _solText) {
+      _solEl.dataset.source = 'theo';
+      _updateSrcBadge('sol', 'theo');
+      _warnSol.textContent  = '● Motor: ' + _solText;
+      _warnSol.className    = 'thresh-warn info';
+      _warnSol.style.display = '';
+    }
+  }
 }
 
 function _resetPhysSourceFields() {

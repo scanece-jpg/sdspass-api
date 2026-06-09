@@ -1557,8 +1557,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             v_str = raw_display
         else:
             v_str = str(v)
-        # Birim zaten değerin içindeyse tekrar ekleme
-        if unit and unit not in v_str:
+        # Birim zaten değerin içindeyse tekrar ekleme.
+        # calc=None olan dict'ler metin açıklamasıdır (Karışır, Belirlenmemiştir vb.) — birim ekleme.
+        _is_text_only = isinstance(v, dict) and v.get('calc') is None
+        if unit and unit not in v_str and not _is_text_only:
             val_str = f"{v_str} {unit}"
         else:
             val_str = v_str

@@ -136,29 +136,12 @@ async def generate_pdf(data: dict = Body(...)):
         except Exception:
             eco_result = None
 
-        # Backend eko sonucunu h_codes/all_h_codes'a ekle
-        # Politika: backend KESİN bir sonuç bulursa → frontend eco kodlarını DEĞİŞTİR.
-        #           backend hiçbir şey bulamazsa → frontend eco kodlarına DOKUNMA.
-        # Gerekçe: ecological_service M-faktör eksikliğinde H400 bulamayabilir;
-        #          bu durumda frontend'in doğru hesabı silinmemeliydi.
-        # Standalone eco_engine bloğu (aşağıda, try/except sonrası) ek güvence sağlar.
-        ECO_H_CODES = {'H400', 'H410', 'H411', 'H412', 'H413'}
-        _eco_h = None
-        if eco_result and hasattr(eco_result, 'aquatic') and eco_result.aquatic:
-            _eco_h = eco_result.aquatic.h_code
-        if _eco_h:
-            # Backend kesin sonuç → frontend eco kodlarını değiştir
-            h_codes     = [h for h in h_codes     if h not in ECO_H_CODES] + [_eco_h]
-            all_h_codes = [h for h in all_h_codes if h not in ECO_H_CODES] + [_eco_h]
-        # elif kaldırıldı: backend bulamazsa frontend eco H kodları KORUNUR
-
-        # H420 — Ozon tabakasına zararlı (CLP Annex VI)
-        # ecological_service sds_section_12['H420'] listesine yazar ama h_codes'a eklemez
-        _sds12 = getattr(eco_result, 'sds_section_12', None) or (eco_result.get('sds_section_12', {}) if isinstance(eco_result, dict) else {})
-        if _sds12.get('H420') and 'H420' not in h_codes:
-            h_codes = list(h_codes) + ['H420']
-        if _sds12.get('H420') and 'H420' not in all_h_codes:
-            all_h_codes = list(all_h_codes) + ['H420']
+        # Sabitler ve yetkili motor çıktıları — reconciliation bloğunda uygulanır
+        ECO_H_CODES  = {'H400', 'H410', 'H411', 'H412', 'H413'}
+        _FLAM_LIQ_H  = {'H224', 'H225', 'H226'}
+        _auth_flam_h = None   # physical_engine: ölçülen FP → flam_liq H kodu
+        _auth_eco_h  = None   # eco_engine: sucul eko H kodu
+        # NOT: h_codes/all_h_codes güncellemeleri TEK reconciliation bloğunda yapılır
 
         # H314 nötralizasyon kararı — P kodu hesabından ÖNCE h_codes filtrelenir
         _H314_COVERED = {'H314', 'H318', 'H315', 'H319'}
@@ -228,26 +211,16 @@ async def generate_pdf(data: dict = Body(...)):
                         'cutoff_used': p.get('cutoff_used',''),
                     })
 
-            # CLP Ek-I §2.6.4.2: Karışımın ölçülen parlama noktası verisi
-            # bileşen cut-off yönteminin önüne geçer. Kullanıcı FP girdiyse
-            # clp_service'in Flam.Liq. H kodlarını sil — physical_engine kazanır.
-            _FLAM_LIQ_H = {'H224', 'H225', 'H226'}
+            # CLP Ek-I §2.6.4.2: ölçülen FP varsa physical_engine kazanır
+            # py_clp_passed temizle; h_codes/all_h_codes reconciliation bloğunda güncellenir
             if _user_fp is not None:
                 _cp   = [e for e in _cp if e['h_code'] not in _FLAM_LIQ_H]
                 _seen -= _FLAM_LIQ_H
-                # h_codes / all_h_codes'u da güncelle:
-                # physical_engine'in ölçüm bazlı H kodu frontend'in bileşen bazlısını
-                # geçersiz kılar → B2.2 etiket (h_codes) ve B2.1 fallback döngüsü
-                # (all_h_codes) tutarlı olur; "Baskın tehlike sınıfı kapsamında"
-                # gerekçesiyle yanlış H kodu eklenmez.
-                _phys_flam_h = next(
+                _auth_flam_h = next(
                     (r.get('h') for r in _phys_res.get('results', [])
                      if r.get('type') == 'flam_liq'),
                     None
                 )
-                if _phys_flam_h:
-                    h_codes     = [h for h in h_codes     if h not in _FLAM_LIQ_H] + [_phys_flam_h]
-                    all_h_codes = [h for h in all_h_codes if h not in _FLAM_LIQ_H] + [_phys_flam_h]
 
             for r in _phys_res.get('results', []):
                 hc = (r.get('h') or r.get('h_code') or '').replace('*','').strip()[:4]
@@ -313,28 +286,12 @@ async def generate_pdf(data: dict = Body(...)):
 
             py_clp_passed = _cp
 
-            # ── Eco H kodunu eco_engine ile senkronize et ─────────────────────────────
-            # eco_engine (h_code bazlı) py_clp_passed ile aynı motor — yetkili kaynak.
-            # calculate_ecological (h_class bazlı) farklı sonuç verebilir:
-            #   - h_class eksik/hatalıysa H400 bulamaz → h_codes boş kalır
-            #   - concMax desteği zayıf olduğunda eşik aşılamayabilir
-            # Bu blok eco_engine sonucunu h_codes, all_h_codes ve Bölüm 12'ye yansıtır.
-            _eco_h_final = next(
+            # Eco H kodunu reconciliation için sakla (h_codes güncelleme reconciliation'da)
+            _auth_eco_h = next(
                 (_eco_res2[_k].get('h') for _k in ('aquatic', 'aquatic_acute')
                  if isinstance(_eco_res2.get(_k), dict) and _eco_res2[_k].get('h')),
                 None
             )
-            if _eco_h_final:
-                h_codes     = [h for h in h_codes     if h not in ECO_H_CODES] + [_eco_h_final]
-                all_h_codes = [h for h in all_h_codes if h not in ECO_H_CODES] + [_eco_h_final]
-                # Bölüm 12 — eco_result.sds_section_12 boşsa güncelle
-                try:
-                    _s12 = (eco_result.sds_section_12
-                            if hasattr(eco_result, 'sds_section_12') else {})
-                    if isinstance(_s12, dict) and _s12.get('12.1', '') in ('Sınıflandırma yok', '', None):
-                        _s12['12.1'] = _eco_h_final
-                except Exception:
-                    pass
 
             # Transport — fiziksel H kodlarını da ilet
             _phys_h_tr = [(r.get('h') or r.get('h_code') or '')
@@ -362,55 +319,71 @@ async def generate_pdf(data: dict = Body(...)):
             py_transport  = data.get('transport', {})
             py_ppe        = data.get('ppe', {})
 
-        # ── Eco H kodu garantisi — try/except'ten bağımsız çalışır ────────────────────
-        # Ana try bloğu başarısız olursa (motor hatası → frontend fallback) içindeki
-        # eco sync hiç çalışmaz. Bu blok eco_engine'i doğrudan çağırarak h_codes'u güvence
-        # altına alır. Koşul: h_codes'ta hâlâ eco kodu yoksa çalışır → çift hesap olmaz.
-        if not any(h in ECO_H_CODES for h in h_codes):
-            try:
-                from app.services.eco_engine import calculate as _eco_h_eng
-                _eco_h_res = _eco_h_eng(components)
-                _eco_h_out = next(
-                    (_eco_h_res[_k].get('h') for _k in ('aquatic', 'aquatic_acute')
-                     if isinstance(_eco_h_res.get(_k), dict) and _eco_h_res[_k].get('h')),
-                    next((h for h in _eco_h_res.get('h_codes', []) if h in ECO_H_CODES), None)
-                )
-                if _eco_h_out:
-                    h_codes     = [h for h in h_codes     if h not in ECO_H_CODES] + [_eco_h_out]
-                    all_h_codes = [h for h in all_h_codes if h not in ECO_H_CODES] + [_eco_h_out]
-                    # Bölüm 12 senkronizasyonu
-                    try:
-                        _s12 = (eco_result.sds_section_12
-                                if hasattr(eco_result, 'sds_section_12') else {})
-                        if isinstance(_s12, dict) and _s12.get('12.1', '') in ('Sınıflandırma yok', '', None):
-                            _s12['12.1'] = _eco_h_out
-                    except Exception:
-                        pass
-            except Exception:
-                pass  # Eco engine başarısız → mevcut h_codes korunur
+        # ════════════════════════════════════════════════════════════════════════════
+        # TEK UZLAŞTIRMA BLOĞU — backend motorlarının kesin sonuçları atomik olarak
+        # h_codes, all_h_codes, py_clp_passed ve sds_section_12'ye yansıtılır.
+        # Dağınık senkronizasyon kodunun TEK merkezi — buraya bakın, başka yerde yok.
+        #
+        # Politika:
+        #   • Backend KESİN sonuç bulursa  → frontend verisini ez
+        #   • Backend hiçbir şey bulamazsa → frontend verisine dokunma
+        # ════════════════════════════════════════════════════════════════════════════
 
-        # ── Bölüm 12.1 garantisi — h_codes'tan bağımsız çalışır ──────────────────────
-        # Yukarıdaki standalone blok yalnızca h_codes'ta eco kodu YOK iken çalışır.
-        # Frontend H400 sağlamışsa o blok atlanır → eco_result.sds_section_12['12.1']
-        # hâlâ 'Sınıflandırma yok' kalabilir. Bu blok h_codes'taki eco kodunu
-        # her koşulda sds_section_12'ye yansıtır.
-        _eco_h_for_s12 = next((h for h in h_codes if h in ECO_H_CODES), None)
-        if _eco_h_for_s12:
+        # ── 1. Yanıcı Sıvı — ölçülen FP varsa physical_engine kazanır ────────────
+        # CLP Ek-I §2.6.4.2 — py_clp_passed try bloğunda zaten temizlendi
+        if _auth_flam_h is not None:
+            h_codes     = [h for h in h_codes     if h not in _FLAM_LIQ_H] + [_auth_flam_h]
+            all_h_codes = [h for h in all_h_codes if h not in _FLAM_LIQ_H] + [_auth_flam_h]
+
+        # ── 2. Sucul Eko — eco_engine > ecological_service > frontend ─────────────
+        # Öncelik zinciri: eco_engine (try'dan) → ecological_service → frontend korunur
+        _final_eco_h = _auth_eco_h
+        if _final_eco_h is None:
             try:
-                _s12 = (eco_result.sds_section_12
-                        if hasattr(eco_result, 'sds_section_12') else None)
+                if eco_result and hasattr(eco_result, 'aquatic') and eco_result.aquatic:
+                    _final_eco_h = eco_result.aquatic.h_code
+            except Exception:
+                pass
+        # _final_eco_h hâlâ None ise → frontend eco koduna dokunma
+        if _final_eco_h:
+            h_codes     = [h for h in h_codes     if h not in ECO_H_CODES] + [_final_eco_h]
+            all_h_codes = [h for h in all_h_codes if h not in ECO_H_CODES] + [_final_eco_h]
+            # py_clp_passed'da eko yoksa ekle (try başarısız olmuşsa fallback)
+            if not any(e.get('h_code', '') in ECO_H_CODES for e in py_clp_passed):
+                py_clp_passed = list(py_clp_passed) + [{
+                    'h_code':      _final_eco_h,
+                    'h_class':     '',
+                    'reason':      'Sucul ekoloji (eco_engine / ecological_service)',
+                    'cutoff_used': '—',
+                }]
+            # sds_section_12['12.1'] — 'Sınıflandırma yok' ise güncelle
+            try:
+                _s12 = (getattr(eco_result, 'sds_section_12', None) or
+                        (eco_result.get('sds_section_12', {}) if isinstance(eco_result, dict) else {}))
                 if isinstance(_s12, dict) and _s12.get('12.1', '') in ('Sınıflandırma yok', '', None):
-                    _s12['12.1'] = _eco_h_for_s12
+                    _s12['12.1'] = _final_eco_h
             except Exception:
                 pass
 
-        # P kodlarını güncel h_codes ile yeniden hesapla (eko H kodu + H314 filtresi dahil)
+        # ── 3. H420 — Ozon tabakasına zararlı ────────────────────────────────────
+        _sds12_ref = (getattr(eco_result, 'sds_section_12', None) or
+                      (eco_result.get('sds_section_12', {}) if isinstance(eco_result, dict) else {}))
+        if _sds12_ref.get('H420'):
+            if 'H420' not in h_codes:     h_codes     = list(h_codes)     + ['H420']
+            if 'H420' not in all_h_codes: all_h_codes = list(all_h_codes) + ['H420']
+
+        # ── 4. Signal word — h_codes güncellenince yeniden hesapla ───────────────
+        _clean_h = {h.split()[0] for h in h_codes if isinstance(h, str)}
+        signal = 'Danger' if _clean_h & DANGER_H else 'Warning'
+
+        # ── eco_result fallback ───────────────────────────────────────────────────
+        if eco_result is None:
+            eco_result = {'sds_section_12': {}}
+
+        # P kodlarını son h_codes + signal ile hesapla
         p_result = assign_p_codes(h_codes, signal, usage=usage)
         p_result['label'] = select_label_p_codes(p_result['p_codes'], 6, h_codes=h_codes)
         p_result['sds']   = classify_sds_p_codes(p_result['p_codes'])
-
-        if eco_result is None:
-            eco_result = {'sds_section_12': {}}  # boş fallback — dict olarak
 
         # ── PDF için Unicode → ASCII güvenli metin dönüşümü ──────────────────────
         # Avrupa kaynaklı DB'lerde (ECHA, CLP Annex VI) "…", "≤", "≥" karakterleri

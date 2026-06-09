@@ -375,8 +375,8 @@ def calc_theo_props(comps: List[Dict]) -> Optional[Dict]:
         sol_cov = round((sol_cov_w / total_w_all) * 100) if total_w_all > 0 else 0
         if water_frac >= 0.5:
             sol_val     = None
-            sol_desc    = 'Tam karışır — su bazlı ürün (su > %50)'
-            sol_display = 'Karışır (su bazlı ürün, su > %50)'
+            sol_desc    = 'Su ile tam karışır — su bazlı ürün (su kütlece > %50; OECD 105 referans)'
+            sol_display = 'Su ile tam karışır — su bazlı ürün (su > %50; OECD 105 referans)'
         else:
             sol_raw  = 10 ** (sol_log_sum / sol_cov_w)
             sol_val  = round(sol_raw, 1)
@@ -388,12 +388,12 @@ def calc_theo_props(comps: List[Dict]) -> Optional[Dict]:
             _density_limit = float(_density_val) * 1e6 if _density_val else None
             if sol_val >= 900000:
                 sol_val     = None
-                sol_desc    = 'Karışır (tahmini — yüksek çözünürlük)'
-                sol_display = 'Karışır (tahmini — yüksek çözünürlük)'
+                sol_desc    = f'Su ile tam karışır (hesaplanmış — ağırlıklı geometrik ortalama; OECD 105 referans; DB kapsama %{sol_cov})'
+                sol_display = 'Su ile tam karışır (hesaplanmış — ağırlıklı geometrik ortalama; OECD 105 referans)'
             elif _density_limit and sol_val >= _density_limit * 0.9:
                 sol_val     = None
-                sol_desc    = 'Karışır (yüksek çözünürlük — tam karışır, tahmini)'
-                sol_display = 'Karışır (tahmini — yoğunluk bazlı fiziksel üst sınır aşıldı)'
+                sol_desc    = f'Su ile tam karışır (hesaplanmış — yoğunluk referans sınırı aşıldı; OECD 105 referans; DB kapsama %{sol_cov})'
+                sol_display = 'Su ile tam karışır (hesaplanmış — yoğunluk referans sınırı; OECD 105 referans)'
             else:
                 sol_desc    = (f'Çözünür (>10 g/L), tahmini ~{sol_val} mg/L' if sol_val >= 10000 else
                                f'Kısmen çözünür (0,1–10 g/L), tahmini ~{sol_val} mg/L' if sol_val >= 100 else

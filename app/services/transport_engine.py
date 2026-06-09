@@ -166,8 +166,18 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
         }
     if cls == '3':
         if sub == '8':
-            return {'un': 'UN 2924', 'label': 'Yanıcı Sıvı, Korozif, B.N.O.',
-                    'note': 'ADR 2023: Sınıf 3 birincil, Sınıf 8 yan tehlike'}
+            return {
+                'un': 'UN 2924', 'label': 'Yanıcı Sıvı, Korozif, B.N.O.',
+                'note': (
+                    'UN 2924 seçim gerekçesi (ADR 2023): '
+                    'Alevlenir sıvı (H224/H225/H226, Sınıf 3) + aşındırıcı (H314, Sınıf 8) kombinasyonu. '
+                    'ADR Tablo 2.1.3.10: Sınıf 3 birincil, Sınıf 8 yan tehlike — '
+                    'birincil sınıf Sınıf 3 PG ≤ II ile aşındırıcı PG II birlikteliğinde Sınıf 3 önceliği korur. '
+                    'ADR 3.1.2.8.1: Ürüne özgü UN girişi yoksa UN 2924 N.O.S. uygulanır. '
+                    'Ambalaj grubu birincil sınıfın PG değerinden belirlenir. '
+                    'Taşımacılık uzmanı onayı önerilir.'
+                ),
+            }
         if sub == '6.1':
             return {'un': 'UN 1992', 'label': 'Yanıcı Sıvı, Toksik, B.N.O.',
                     'note': 'ADR 2023: Sınıf 3 birincil, Sınıf 6.1 yan tehlike'}

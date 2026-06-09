@@ -175,9 +175,17 @@ def format_section3_component(
     conc_min = comp.get('conc_min')
     conc_max = comp.get('conc_max')
     if conc_str:
-        conc_display = f'%{conc_str}'
+        # Tire ile ayrılmış aralık girilmişse (ör: "1-3" ya da "1–3") → standart formata çevir
+        import re as _rc
+        _m = _rc.match(r'^(\d[\d,.]*)[\-–](\d[\d,.]*)$', conc_str)
+        if _m:
+            _lo, _hi = _m.group(1).replace(',', '.'), _m.group(2).replace(',', '.')
+            conc_display = f'%{_lo}–<%{_hi}'
+        else:
+            conc_display = f'%{conc_str}'
     elif conc_min is not None and conc_max is not None and conc_min != conc_max:
-        conc_display = f'%{conc_min}–%{conc_max}'
+        # CLP Annex I §3 notasyonu: üst sınır önünde '<' zorunlu — örn. %1–<%5
+        conc_display = f'%{conc_min}–<%{conc_max}'
     else:
         conc_display = f'%{conc:.1f}'
 

@@ -10,6 +10,7 @@ Kullanım:
     # issues: [{"level": "error/warning", "code": "V001", "msg": "..."}]
 """
 
+import re
 from typing import List, Dict, Any
 from app.services.clp_service import _parse_ph_range, normalize_ph_display
 
@@ -43,7 +44,15 @@ def validate_sds(
             v = v.get('calc') if v.get('calc') is not None else v.get('value')
             if v is None: return None
         s = str(v).strip()
-        # Aralık değerleri için alt sınırı döndür (genel sayısal alanlar için yeterli)
+        # Önek sembollerini temizle: ~, >, <, ≈, ≤, ≥  (ör. "~1.000.000 mg/L")
+        s = re.sub(r'^[~><≈≤≥]+\s*', '', s)
+        # Birim ve açıklama kısmını at — ilk boşluğa kadar al (ör. "27 °C" → "27")
+        s = s.split()[0] if s else ''
+        # Türkçe/Avrupa binlik ayracı: "1.000.000" → "1000000"
+        # Kalıp: rakam + nokta + tam olarak 3 rakam (en az 1 kez)
+        if re.search(r'\d\.\d{3}', s):
+            s = s.replace('.', '')
+        # Aralık değerleri için alt sınırı döndür (ör. "23-60" → "23")
         if '-' in s and not s.startswith('-'):
             s = s.split('-')[0].strip()
         try: return float(s)

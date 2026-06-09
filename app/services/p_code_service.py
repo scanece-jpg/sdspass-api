@@ -687,7 +687,7 @@ P_SDS_PRIORITY: Dict[str, str] = {
     'P201':           'mandatory',   # CMR — talimat al
     'P202':           'mandatory',   # CMR — oku anla
     'P263':           'mandatory',   # Hamile/emziren
-    'P391':           'evaluate',    # Döküntü toplama (aquatic) — KDU değerlendirmeli (Cat.1'de de iyi uygulama)
+    'P391':           'mandatory',   # Döküntü toplama (aquatic) — H400/H410/H411 için CLP Annex IV zorunlu
     'P405':           'mandatory',   # Kilitli sakla
     # ── KDU DEĞERLENDİRMELİ ──────────────────────────────────
     'P271':           'evaluate',    # Açık hava — ortama bağlı

@@ -1570,9 +1570,9 @@ function _autofillPhysFields(tp) {
     if (_solVal == null && _solText) {
       _solEl.dataset.source = 'theo';
       _updateSrcBadge('sol', 'theo');
-      _warnSol.textContent  = '● Motor: ' + _solText;
-      _warnSol.className    = 'thresh-warn info';
-      _warnSol.style.display = '';
+      _warnSol.textContent   = '● Motor: ' + _solText;
+      _warnSol.className     = 'thresh-warn info';
+      _warnSol.style.display = 'block';
     }
   }
 }

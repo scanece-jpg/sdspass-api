@@ -365,6 +365,20 @@ async def generate_pdf(data: dict = Body(...)):
             except Exception:
                 pass
 
+        # ── 2b. B12.1 garantisi — motor bulamasa bile h_codes'taki eco kodu yansıt ─
+        # Durum: eco_engine + ecological_service ikisi de bulamadı (_final_eco_h=None),
+        # ama frontend h_codes'ta H400 var → B2.1'de H400 görünüyor, B12.1 boş kalıyor.
+        # Bu adım h_codes'u yetkili kaynak olarak kullanarak tutarlılığı sağlar.
+        _eco_h_in_hcodes = next((h for h in h_codes if h in ECO_H_CODES), None)
+        if _eco_h_in_hcodes:
+            try:
+                _s12b = (getattr(eco_result, 'sds_section_12', None) or
+                         (eco_result.get('sds_section_12', {}) if isinstance(eco_result, dict) else {}))
+                if isinstance(_s12b, dict) and _s12b.get('12.1', '') in ('Sınıflandırma yok', '', None):
+                    _s12b['12.1'] = _eco_h_in_hcodes
+            except Exception:
+                pass
+
         # ── 3. H420 — Ozon tabakasına zararlı ────────────────────────────────────
         _sds12_ref = (getattr(eco_result, 'sds_section_12', None) or
                       (eco_result.get('sds_section_12', {}) if isinstance(eco_result, dict) else {}))

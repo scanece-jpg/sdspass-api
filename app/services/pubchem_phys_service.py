@@ -224,11 +224,11 @@ async def fetch_phys(cas: str) -> dict:
                         props['solubility_text'] = s[:150]
                         sl = s.lower()
                         if any(w in sl for w in ('miscible', 'soluble in all', 'completely')):
-                            # Tam karışır — sayısal değer yerine açıklayıcı metin kullan.
-                            # 1e6 mg/L sabit değeri fiziksel olarak imkânsız görünebilir
-                            # (yoğunluk < 1 g/mL ise üst sınır 786.000 – 999.000 mg/L),
-                            # PDF'de "~1.000.000 mg/L" yerine "Karışır" gösterilmeli.
-                            props['solubility']      = None
+                            # Tam karışır — SOL_DB güncellemesi ve çapraz kontrol için 1e6 kullan.
+                            # physical_engine sol_val >= 900000 kontrolüyle bunu "Karışır" olarak
+                            # gösterir; PDF'de "~1.000.000 mg/L" yerine "Karışır" çıkar.
+                            # NOT: None kullanılırsa dosya sonundaki çapraz kontrol TypeError verir.
+                            props['solubility']      = 1e6
                             props['solubility_text'] = 'Karışır'
                         elif 'insoluble' in sl or 'immiscible' in sl:
                             props['solubility'] = 0.1

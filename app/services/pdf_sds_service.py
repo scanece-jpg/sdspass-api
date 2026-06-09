@@ -1506,11 +1506,12 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     na = term(lang,'not_available')
     
     # PCN zorunlu alanlar kontrolü
-    pcn_required = ['ph','solubility','density','flash_point']
+    # Çözünürlük teorik olarak hesaplanır — PCN zorunlu alanı değil.
+    pcn_required = ['ph', 'density', 'flash_point']
     pcn_missing = [k for k in pcn_required if not phys.get(k)]
     if pcn_missing and lang == 'TR':
         missing_labels = {
-            'ph': 'pH', 'solubility': 'Çözünürlük',
+            'ph': 'pH',
             'density': 'Yoğunluk', 'flash_point': 'Parlama Noktası'
         }
         warn_text = 'PCN bildirimi için zorunlu eksik alanlar: ' + \

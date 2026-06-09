@@ -371,9 +371,15 @@ def calc_theo_props(comps: List[Dict]) -> Optional[Dict]:
             sol_val  = round(sol_raw, 1)
             # Fiziksel üst sınır: 1 litre çözücü en fazla yoğunluk×1.000.000 mg madde çözebilir.
             # Bu sınırı aşan tahmini değer gerçekte "tam karışır" anlamına gelir.
-            _density_val = res.get('density', {}).get('value') if isinstance(res.get('density'), dict) else res.get('density')
+            # SOL_DB'de 1e6 = "karışır" proxy değeri (PubChem'den gelen miscible).
+            # >= 900000 eşiği: yoğunluk verisi olmasa da karışır olarak tanı.
+            _density_val   = res.get('density', {}).get('value') if isinstance(res.get('density'), dict) else res.get('density')
             _density_limit = float(_density_val) * 1e6 if _density_val else None
-            if _density_limit and sol_val >= _density_limit * 0.9:
+            if sol_val >= 900000:
+                sol_val     = None
+                sol_desc    = 'Karışır (tahmini — yüksek çözünürlük)'
+                sol_display = 'Karışır (tahmini — yüksek çözünürlük)'
+            elif _density_limit and sol_val >= _density_limit * 0.9:
                 sol_val     = None
                 sol_desc    = 'Karışır (yüksek çözünürlük — tam karışır, tahmini)'
                 sol_display = 'Karışır (tahmini — yoğunluk bazlı fiziksel üst sınır aşıldı)'

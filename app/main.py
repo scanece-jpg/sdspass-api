@@ -126,6 +126,9 @@ async def generate_pdf(data: dict = Body(...)):
         eco_comps = [{'cas': c.get('cas',''), 'name': c.get('name',''),
                       'name_tr': c.get('name_tr',''),
                       'conc': float(c.get('conc', c.get('concentration',0)) or 0),
+                      # worst_case_conc: ecological_service.calculate_aquatic() bunu okur.
+                      # concMax varsa aralığın üst sınırını kullan (eco_engine ile tutarlılık).
+                      'worst_case_conc': float(c.get('concMax') or c.get('conc', c.get('concentration',0)) or 0),
                       'hazards': c.get('hazards',[]),
                       'm_factors': c.get('m_factors', {})} for c in components]
         try:
@@ -287,6 +290,29 @@ async def generate_pdf(data: dict = Body(...)):
                 _cp = [e for e in _cp if e['h_code'] not in _dominated]
 
             py_clp_passed = _cp
+
+            # ── Eco H kodunu eco_engine ile senkronize et ─────────────────────────────
+            # eco_engine (h_code bazlı) py_clp_passed ile aynı motor — yetkili kaynak.
+            # calculate_ecological (h_class bazlı) farklı sonuç verebilir:
+            #   - h_class eksik/hatalıysa H400 bulamaz → h_codes boş kalır
+            #   - concMax desteği zayıf olduğunda eşik aşılamayabilir
+            # Bu blok eco_engine sonucunu h_codes, all_h_codes ve Bölüm 12'ye yansıtır.
+            _eco_h_final = next(
+                (_eco_res2[_k].get('h') for _k in ('aquatic', 'aquatic_acute')
+                 if isinstance(_eco_res2.get(_k), dict) and _eco_res2[_k].get('h')),
+                None
+            )
+            if _eco_h_final:
+                h_codes     = [h for h in h_codes     if h not in ECO_H_CODES] + [_eco_h_final]
+                all_h_codes = [h for h in all_h_codes if h not in ECO_H_CODES] + [_eco_h_final]
+                # Bölüm 12 — eco_result.sds_section_12 boşsa güncelle
+                try:
+                    _s12 = (eco_result.sds_section_12
+                            if hasattr(eco_result, 'sds_section_12') else {})
+                    if isinstance(_s12, dict) and _s12.get('12.1', '') in ('Sınıflandırma yok', '', None):
+                        _s12['12.1'] = _eco_h_final
+                except Exception:
+                    pass
 
             # Transport — fiziksel H kodlarını da ilet
             _phys_h_tr = [(r.get('h') or r.get('h_code') or '')

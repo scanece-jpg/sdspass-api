@@ -495,7 +495,10 @@ H_BASED_LABEL_FORCED: Dict[str, List[str]] = {
     # Cilt aşınması — 4 kritik müdahale + KKE kodu zorunlu (CLP Annex IV Tablo 6.3)
     # P260 (solunum koruma) önem sırasında daha düşük → öncelik yarışına bırakıldı
     # Bu sayede H272/H410 gibi ek tehlikeler için etiket kontenjanı açık kalır
-    'H314': ['P280', 'P301+P330+P331', 'P303+P361+P353', 'P305+P351+P338'],
+    # P310 (zehir danışma hattı) CLP Ek-IV: H314 Cilt Aşın. 1A için zorunlu.
+    # H225/H400 ile birleşince forced toplam 7'yi aşabilir — CLP Madde 22(4)
+    # gereği 6 limiti aşıldığında tüm forced kodlar korunur (trim kaldırıldı).
+    'H314': ['P280', 'P301+P330+P331', 'P303+P361+P353', 'P305+P351+P338', 'P310'],
     # Ağır göz hasarı — KKE zorunlu (H318, H314 ile çakışırsa P280 zaten var)
     'H318': ['P280'],
     # Cilt tahrişi / Cilt duyarlılaştırma — KKE zorunlu (CLP Annex IV)
@@ -569,16 +572,11 @@ def select_label_p_codes(all_p_codes: List[str], max_codes: int = 6,
             if p in all_p_codes:
                 forced_by_h.add(p)
 
-    # Birden fazla tehlike sınıfı forced_by_h'ı max_codes'u aşabilir.
-    # CLP Madde 28(3): "gerekmedikçe 6'yı geçme" — limit aşılıyorsa öncelik sırasına göre kırp.
-    # P501 (bertaraf) limitin dışında tutulur — her zaman "+1 Bertaraf Kodu" olarak eklenir.
-    limit_exceeded = len(forced_by_h) > max_codes
-    if limit_exceeded:
-        forced_by_h = set(sorted(
-            forced_by_h,
-            key=lambda p: P_LABEL_PRIORITY.get(p, 5),
-            reverse=True
-        )[:max_codes])
+    # CLP Madde 22(4): H kodu bazlı zorunlu P kodları (forced_by_h) HİÇBİR ZAMAN kesilemez.
+    # Tehlikenin niteliği gerektiriyorsa 6 limitinin üzeri zorunlu olabilir.
+    # Opsiyonel (candidate) kodlar remaining_slots ile zaten sınırlı kalır.
+    # sds_validator.py V013 uyarısı 6+ durumunu kullanıcıya bildirir — bu yeterli.
+    limit_exceeded = len(forced_by_h) > max_codes  # bilgi amaçlı; trim uygulanmaz
 
     # P_LABEL_MANDATORY (P101/P102/P501) + forced_by_h → aday listesinden çıkar
     excluded_from_candidates = set(P_LABEL_MANDATORY) | forced_by_h

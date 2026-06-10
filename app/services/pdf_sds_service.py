@@ -2551,20 +2551,28 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         _sum_acute  = 0.0
         _sum_h411   = 0.0
         for _mp in _mp_comps:
-            _thr = '≥ 0.1' if _mp['h_code'] in {'H400', 'H410'} else '≥ 1.0'
-            _cxm = _mp['conc'] * _mp['m']
+            _is_acute_mp = _mp['h_code'] in {'H400', 'H410'}
+            _thr = '≥ 0.1' if _is_acute_mp else '≥ 1.0'
+            if _is_acute_mp:
+                # Test 1: akut M-faktörlü — Σ(C×M) ≥ 0.1
+                _cxm      = _mp['conc'] * _mp['m']
+                _m_str    = f"{int(_mp['m'])}"
+                _cxm_str  = f"{_cxm:.2f}"
+                _sum_acute += _cxm
+            else:
+                # Test 2: H411 kronik bileşen — Σ(C) ≥ 1.0, M-faktör uygulanmaz
+                _cxm     = 0.0
+                _m_str   = '—'
+                _cxm_str = '—'
+                _sum_h411 += _mp['conc']
             _mp_rows.append([
                 _mp['cas'],
                 Paragraph(_mp['name'], styles['small']),
                 f"{_mp['conc']:.1f}",
-                f"{int(_mp['m'])}",
-                f"{_cxm:.2f}",
+                _m_str,
+                _cxm_str,
                 _thr,
             ])
-            if _mp['h_code'] in {'H400', 'H410'}:
-                _sum_acute += _cxm
-            else:
-                _sum_h411  += _mp['conc']
 
         story.append(data_table(_mp_rows, [24*mm, 50*mm, 18*mm, 12*mm, 18*mm, 22*mm], styles))
 

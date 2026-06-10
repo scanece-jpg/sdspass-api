@@ -808,10 +808,12 @@ async def calculate_clp(db: AsyncSession, components: List[Any]) -> Dict:
         if total <= 0:
             continue
         # CLP 3.1.3.6.2.3: Bilinmeyen bileşenler > %10 → revize formül ZORUNLU
+        # Formül: ATEmix = 100 / Σ(Ci/ATEi)  — Ci % cinsinden
+        # ate_sum = Σ(Ci/100 / ATEi) = (1/100)×Σ(Ci/ATEi)  → mix_ate = 1.0/total
         if unknown_conc > 10.0:
-            mix_ate = (100.0 - unknown_conc) / total
+            mix_ate = (100.0 - unknown_conc) / 100.0 / total
         else:
-            mix_ate = 100.0 / total
+            mix_ate = 1.0 / total
         # Sınıflandırma için CLP Tablo 3.1.1 kategori üst sınırlarını kullan
         # (ATE_DEFAULTS nokta tahminleri FORMÜL için, SINIFLANDIRMA için değil)
         thresholds = ATE_THRESHOLDS.get(route, {})

@@ -1,7 +1,49 @@
-# SDSPass — Hesaplama Motoru Kontrol Kriterleri
+# SDSPass — Motor Mimarisi ve Validator Referansı
 
-> Bu dosya Claude.ai Project'te SDS PDF'ini kontrol ederken başvuru kaynağıdır.
-> Her motor için: ne kontrol edilir, hangi hata nasıl görünür, nasıl raporlanır.
+> **Bu belge bir yönetmelik kaynağı değildir.**
+> Mevzuat kuralları için projeye yüklenen KKDİK Ek-2, SEA Yönetmeliği ve CLP belgelerini kullanın.
+>
+> Bu dosya yalnızca şu soruyu yanıtlar:
+> **"PDF'deki bu hata hangi SDSPass motoruna işaret eder?"**
+>
+> Her bölüm için: hangi motor besliyor, ne kontrol edilir, hata varsa hangi engine'i şüphelendir.
+
+---
+
+## Motor Haritası (Özet)
+
+| Bölüm | Birincil Motor | İkincil Motor |
+|-------|---------------|---------------|
+| B1 | Kullanıcı girişi (frontend) | — |
+| B2.1 | `clp_service` | `physical_engine`, `stot_engine`, `eco_engine` |
+| B2.2 | `clp_service`, `ghs_pictogram` | `p_code_service`, `euh_service` |
+| B3 | `substance_lookup` | `reach_db`, `concentration_ranges` |
+| B4–B7 | `sds_sentence_service` | `p_code_service` |
+| B8 | `tr_oel_service`, `ppe_engine` | `sds_sentence_service` |
+| B9 | `physical_engine`, `phys_props_parser` | `pubchem_phys_service` |
+| B10 | `sds_sentence_service` | `physical_engine` |
+| B11 | `stot_engine`, `clp_service` (ATE) | `sds_sentence_service` |
+| B12 | `eco_engine`, `ecological_service` | — |
+| B13 | `sds_sentence_service` | — |
+| B14 | `transport_engine` | — |
+| B15 | `tr_mevzuat_service`, `svhc_service` | `reach_db` |
+| B16 | Kullanıcı girişi (revision) | — |
+
+---
+
+## B1 — Madde/Karışım ve Şirket Bilgileri
+
+**Motor:** Kullanıcı girişi — `product` ve `supplier` alanları
+
+### Motor bağlamı:
+- Ürün adı, kodu, kullanım amacı → frontend `product` objesi
+- Tedarikçi adı, adres, telefon, e-posta → frontend `supplier` objesi
+- Acil durum telefonu → `supplier.emergency_tel` alanı
+
+### Kırmızı bayraklar (motor kaynağı):
+- Acil durum telefonu boş → `supplier.emergency_tel` frontend'den iletilmemiş
+- Tedarikçi bilgileri eksik → frontend'de doldurulmamış alan
+- Ürün kullanım amacı yok → `product.usage_desc` boş
 
 ---
 
@@ -9,62 +51,44 @@
 
 **Motorlar:** `clp_service`, `physical_engine`, `stot_engine`, `eco_engine`
 
-### Kontrol soruları:
-1. Tabloda her tehlike sınıfı için hem TR hem EN sütunu var mı?
-2. Sucul tehlike varsa (H400/H410/H411) tabloda "Sucul çevre..." satırı görünüyor mu?
-3. STOT varsa (H370/H371/H372/H373) "Hedef organ..." satırı var mı?
-4. Patlayıcı/oksitleyici H kodu varsa fiziksel tehlike satırı var mı?
-5. Tablo "Sınıflandırma yapılmamıştır" diyorsa ama B2.2'de H kodu varsa → çelişki.
+### Motor bağlamı:
+- Sağlık tehlikeleri (H3xx) → `clp_service.classify_mixture_clp()`
+- Fiziksel tehlikeler (H22x, H26x) → `physical_engine.calculate()`
+- Hedef organ (H370–H373) → `stot_engine.calculate()`
+- Sucul tehlike (H400–H413) → `eco_engine.calculate()` + `ecological_service`
+- Tablo satırları `py_clp_passed` listesinden üretilir
 
 ### Kırmızı bayraklar:
-- B2.1'de H400 var, B2.2'de GHS09 piktogram yok → motor senkron sorunu
-- "Sınıflandırma yok" + B2.2'de H kodu → hata
-- ATE değerleri aşırı düşük/yüksek (< 1 mg/kg veya > 50.000 mg/kg) → veri sorunu
+- H400/H410/H411 var → B2.1'de sucul satır yok → `eco_engine` veya reconciliation sorunu
+- "Sınıflandırma yok" ama B2.2'de H kodu var → `clp_service` veya veri senkron sorunu
+- ATE değerleri aşırı (< 1 mg/kg veya > 50.000 mg/kg) → `clp_service` ATE hesabı sorunu
+
+### H318 kuralı (V020):
+- H314 varsa → H318, `all_h_codes`'ta bulunmalı (B2.1 tablosunda görünmeli)
+- H318, etikette (B2.2) **yazmamalı** — H314 baskın gelir (dominance)
+- Detay: `sds_validator.py` → V020
 
 ---
 
 ## B2.2 — Etiket Unsurları (Sinyal, Piktogram, H/P Kodları)
 
-**Motorlar:** `clp_service` (h_codes), `ghs_pictogram`, `p_code_service`, `euh_service`
+**Motorlar:** `clp_service`, `ghs_pictogram`, `p_code_service`, `euh_service`
 
-### Kontrol soruları:
-1. **Sinyal kelimesi** doğru mu?
-   - Danger H kodları (H300, H301, H310, H314, H318, H340, H350, H360, H370, H372, H224, H225) → "Tehlike / Danger"
-   - Diğerleri → "Uyarı / Warning"
-2. **Piktogramlar** H kodlarıyla örtüşüyor mu?
-   - H400/H410/H411 → GHS09 (çevre)
-   - H314/H318 → GHS05 (aşındırıcı)
-   - H225/H226 → GHS02 (alev)
-   - H330/H331/H332 → GHS06 (kuru kafa)
-3. **Her H kodu için hazard statement** var mı?
-   - Özellikle H400 ifadesi ("Sucul organizmalar için çok toksik") görünüyor mu?
-4. **P kodları** H kodlarına uygun mu?
-   - H314 → P280, P301+P330+P331, P310 zorunlu
-   - H400/H410 → P273, P391 zorunlu
-   - H225/H226 → P210 zorunlu
-5. **EUH kodları** varsa ifadeleri yazıyor mu?
-6. P kodu sayısı 6'yı aşıyorsa — bu **ihlal değil**, CLP Md. 22(4) uyarınca zorunlu olabilir.
+### Motor bağlamı:
+- Piktogram listesi → `ghs_pictogram.get_ghs_codes(h_codes)`
+- P kodları → `p_code_service.assign_p_codes()` + `select_label_p_codes()`
+- EUH kodları → `euh_service`
+- Sinyal kelimesi → `clp_service.DANGER_H` seti ile hesaplanır
+
+### GHS09 özel durumu:
+- H400/H410/H411 → GHS09 **gerekli**
+- H412/H413 → GHS09 **gerekmez** (validator V019 bunu denetler)
+- PDF'de GHS09 var ama validator "eksik" diyorsa → `sds_data['clp']['pictograms']` senkron sorunu
 
 ### Kırmızı bayraklar:
-- H400 var → GHS09 yok → piktogram motoru sorunu
-- H314 var → P310 yok → p_code_service sorunu
-- H400 var → P273 yok → p_code_service sorunu
-- Sinyal kelimesi "Warning" ama H300 var → clp_service sorunu
-
-### H318 — Otomatik tetikleme kontrolü (V020)
-
-**Kural:** H314 (Cilt Aş. 1) varsa → H318 (Göz Hasarı 1) **B2.1 sınıflandırma tablosuna** otomatik eklenir.
-Kaynak: SEA Ek-1, Tablo 3.3.1.
-
-**B2.1 kontrolü:**
-- H314 varsa, `all_h_codes`'ta H318 bulunmalıdır.
-- Yoksa → `V020` UYARI
-
-**B2.2 kontrolü:**
-- Etikette H318 **yazmaması normaldir** — SEA Madde 28 öncelik kuralı gereği H314 baskın gelir, H318 gizlenir.
-- H318'in etikette görünmesi → `V020` BİLGİ (ihlal değil, kaldırılması tavsiye edilir)
-
-**Validator kodu:** `V020` — `sds_validator.py`
+- GHS09 eksik ama H400/H410/H411 var → `ghs_pictogram` veya `eco_engine` senkron sorunu (V019)
+- H314 var → P310 yok → `p_code_service` sorunu
+- Sinyal "Warning" ama Danger H kodu var → `clp_service.DANGER_H` listesi sorunu (V014)
 
 ---
 
@@ -72,18 +96,16 @@ Kaynak: SEA Ek-1, Tablo 3.3.1.
 
 **Motorlar:** `substance_lookup`, `concentration_ranges`, `svhc_service`
 
-### Kontrol soruları:
-1. Her bileşen için CAS numarası, EC numarası, konsantrasyon aralığı var mı?
-2. Konsantrasyon aralıkları KKDİK EK-2 B3'e uygun mu? (Örn: %10-25 değil %10-<25)
-3. Konsantrasyon aralıklarının toplamı %100'ü mantıklı kapsıyor mu?
-4. SVHC maddesi varsa "Aday Liste" notu var mı?
-5. KKDİK Ek-6'daki sınıflandırma ile tablodaki sınıflandırma örtüşüyor mu?
-6. CLP Annex VI'daki limit konsantrasyonlar dikkate alınmış mı?
+### Motor bağlamı:
+- CAS/EC/REACH no → `substance_lookup` + `reach_db`
+- Konsantrasyon aralıkları → `concentration_ranges.build_concentration_ranges()`
+- SVHC kontrolü → `svhc_service`
+- Kaynak önceliği: SEA Ek-6 (source_priority=1) > Annex VI (2) > Custom (3) > ECHA C&L (4) > PubChem (5)
 
 ### Kırmızı bayraklar:
-- EC numarası boş veya "Bilinmiyor" → reach_db sorunu
-- Konsantrasyon aralığı ">%99" ama birden fazla bileşen var → veri hatası
-- SVHC bileşen var ama B15'te kayıt no yok
+- EC numarası boş → `reach_db` sorunu
+- REACH no boş, source_priority ≥ 4 → V018 uyarısı (ECHA/PubChem kaynaklı, kayıt no doğrulanamaz)
+- SVHC bileşen var ama B15'te kayıt no yok → `svhc_service` sorunu
 
 ---
 
@@ -91,20 +113,14 @@ Kaynak: SEA Ek-1, Tablo 3.3.1.
 
 **Motor:** `sds_sentence_service`, `p_code_service`
 
-### Kontrol soruları:
-1. **B4 (İlk Yardım):** Maruz kalma yollarının hepsi var mı? (göz, deri, soluma, yutma)
-   - H314 varsa → göz ve deri için acil yıkama talimatı zorunlu
-   - H330/H331 varsa → soluma için "temiz havaya çık + tıbbi yardım" zorunlu
-2. **B5 (Yangın):** Uygun söndürücü maddeler belirtilmiş mi?
-   - H225/H226 varsa → köpük, CO2, kuru kimyasal
-   - Su reaktif (H260/H261) varsa → "suyla söndürmeyin" uyarısı
-3. **B6 (Kaza):** Döküntü için toprak/su ayrımı var mı?
-4. **B7 (Elleçleme):** Depolama sıcaklık sınırı ve bağdaşmayan maddeler belirtilmiş mi?
+### Motor bağlamı:
+- B4–B7 metinleri H kodlarına göre `sds_sentence_service` tarafından üretilir
+- H kodu listesi değişirse cümleler otomatik güncellenir
 
 ### Kırmızı bayraklar:
-- H314 var → B4'te "hemen tıbbi yardım" yok
-- H226 var → B5'te yanıcı sıvı söndürme talimatı yok
-- B7 tamamen boş/genel
+- H314 var → B4'te göz/deri için acil yıkama + tıbbi yardım yok → `sds_sentence_service` sorunu
+- H226 var → B5'te yanıcı sıvı söndürme talimatı yok → `sds_sentence_service` sorunu
+- H260/H261 var → B5'te "suyla söndürmeyin" uyarısı yok → `sds_sentence_service` sorunu
 
 ---
 
@@ -112,21 +128,15 @@ Kaynak: SEA Ek-1, Tablo 3.3.1.
 
 **Motorlar:** `tr_oel_service`, `ppe_engine`, `sds_sentence_service`
 
-### Kontrol soruları:
-1. **B8.1 OEL tablosu:**
-   - Her bileşen için TWA ve/veya STEL değeri var mı?
-   - Değerler mg/m³ ve ppm cinsinden mi?
-   - Kaynak "Türkiye KKDİK" olarak gösteriliyor mu?
-2. **B8.2 KKE:**
-   - El koruma: Eldiven malzemesi belirtilmiş mi? (nitril, neopren, vb.)
-   - Göz koruma: Gözlük tipi (kimyasal gözlük / siperlik)?
-   - Solunum: H330/H331/H334 varsa solunum maskesi tipi belirtilmiş mi?
-   - H334 varsa → SCBA veya tam yüz maskesi zorunlu
+### Motor bağlamı:
+- OEL değerleri → `tr_oel_service.get_oel(cas)` — TR KKDİK veritabanı
+- KKE seçimi → `ppe_engine.select(h_codes)` — H koduna göre otomatik
+- KKE metinleri → `sds_sentence_service`
 
 ### Kırmızı bayraklar:
-- OEL tablosu boş ama bilinen bileşenler var (NaOH, HCl vb.) → tr_oel_service sorunu
-- KKE "gerekmiyor" ama H314 (aşındırıcı) var → ppe_engine sorunu
-- H334 var → solunum koruyucu belirsiz/yetersiz
+- OEL tablosu boş ama bilinen bileşenler var → `tr_oel_service` veri eksikliği
+- KKE "gerekmiyor" ama H314 var → `ppe_engine` sorunu
+- H334 var → solunum koruyucu belirsiz → `ppe_engine` sorunu (V012)
 
 ---
 
@@ -134,18 +144,33 @@ Kaynak: SEA Ek-1, Tablo 3.3.1.
 
 **Motorlar:** `physical_engine`, `phys_props_parser`, `pubchem_phys_service`
 
-### Kontrol soruları:
-1. Parlama noktası: H226 varsa ≤60°C mi? H225 varsa ≤23°C mi?
-2. Viskozite: H304 varsa viskozite değeri var mı ve <20 mm²/s mi?
-3. pH: H314 (aşındırıcı) varsa pH <2 veya >11.5 mi?
-4. Yoğunluk ve çözünürlük birbiriyle fiziksel olarak uyumlu mu?
-   - Çözünürlük (mg/L) < Yoğunluk × 1.000.000 olmalı
-5. Kaynama noktası: H225 için <35°C mi?
+### Motor bağlamı:
+- Kullanıcı değerleri → `phys_props_parser.parse_all_phys_props()`
+- Teorik hesaplama → `physical_engine` → `theo_props` (backfill ile B9'a yazılır)
+- PubChem önbellek → `pubchem_phys_service.fetch_phys(cas)` — TTL: kritik alanlar 90 gün, diğerleri 365 gün
+- `_classification_h22x` değişirse önbellek geçersiz sayılır
 
 ### Kırmızı bayraklar:
 - Parlama noktası yok ama H226 var → V001 hatası
-- pH 7 ama H314 var → V006 uyarısı (nötralizasyon veya veri hatası)
+- Parlama noktası >60°C ama H226 var → V002 uyarısı
 - Viskozite yok ama H304 var → V003 hatası
+- pH 7 ama H314 var → V006 uyarısı
+
+---
+
+## B10 — Kararlılık ve Tepkime
+
+**Motor:** `sds_sentence_service`, `physical_engine`
+
+### Motor bağlamı:
+- B10 metinleri H kodlarına göre `sds_sentence_service` tarafından üretilir
+- H272 (oksitleyici) → bağdaşmayan maddeler listesi otomatik eklenmeli
+- H260/H261 (su reaktif) → nem/su uyarısı otomatik eklenmeli
+
+### Kırmızı bayraklar:
+- H272 var → "bağdaşmayan maddeler" bölümü boş → `sds_sentence_service` sorunu (V009)
+- H260/H261 var → nem uyarısı yok → `sds_sentence_service` sorunu (V010)
+- Tehlikeli bozunma ürünleri bölümü tamamen boş → `sds_sentence_service` veri eksikliği
 
 ---
 
@@ -153,18 +178,15 @@ Kaynak: SEA Ek-1, Tablo 3.3.1.
 
 **Motorlar:** `stot_engine`, `clp_service` (ATE), `sds_sentence_service`
 
-### Kontrol soruları:
-1. ATE (Akut Toksisite Tahmini) hesabı var mı?
-   - Değer LD50 mg/kg veya LC50 mg/L cinsinden mi?
-2. STOT SE/RE varsa hangi organ(lar) etkilendiği belirtilmiş mi?
-3. H350 (kanserojen) varsa IARC/NTP sınıfı ve açıklama var mı?
-4. H360 (üreme toksik) varsa "Üreme sistemine zarar verebilir" metni var mı?
-5. Maruz kalma yollarına göre toksikoloji açıklaması var mı? (deri, soluma, yutma)
+### Motor bağlamı:
+- ATE hesabı → `clp_service` (karışım LD50/LC50)
+- STOT organ listesi → `stot_engine.calculate()`
+- Toksikoloji metinleri → `sds_sentence_service`
 
 ### Kırmızı bayraklar:
-- H301 var → B11'de "LD50 değeri bilinmiyor" → eksik veri
-- STOT RE var → hedef organ boş
-- ATE hesabı yok ama akut toksisite H kodu var
+- H301 var → B11'de LD50 değeri yok → `clp_service` ATE eksikliği
+- STOT RE/SE var → hedef organ boş → `stot_engine` sorunu (V017)
+- ATE hesabı yok ama akut toksisite H kodu var → `clp_service` sorunu
 
 ---
 
@@ -172,19 +194,32 @@ Kaynak: SEA Ek-1, Tablo 3.3.1.
 
 **Motorlar:** `eco_engine`, `ecological_service`
 
-### Kontrol soruları:
-1. **B12.1 Zehirlilik:** H400/H410/H411 sınıfı doğru yazıyor mu?
-   - "Sucul Akut 1" veya "Sucul Kronik 1/2/3" gibi tam sınıf adı var mı?
-   - "Sınıflandırma yok" yazıyorsa B2.1'de sucul H kodu var mı? → Çelişki
-2. **B12.2 Kalıcılık/Biyobozunurluk:** "Biyolojik olarak parçalanabilir/parçalanamaz" var mı?
-3. **B12.3 Biyobirikim:** Log Kow değeri varsa değerlendirme var mı?
-4. **B12.4 Toprak hareketliliği:** En azından "veri yok" yazıyor mu?
-5. **B12.5 PBT/vPvB:** Sonuç net mi? ("PBT değildir" veya "PBT kriterleri karşılanmaktadır")
-6. **M-Faktörü tablosu:** H400/H410 bileşeni varsa M-faktörü tablosu var mı?
+### Motor bağlamı:
+- Sucul sınıflandırma → `eco_engine.calculate()` (CLP Ek-I Tablo 4.1.1/4.1.2)
+- B12.1 metni → `ecological_service.calculate_ecological()` → `sds_section_12['12.1']`
+- Divergence çözümü: M-faktörleri eksiksizse `eco_engine` kazanır (high confidence); eksikse daha tehlikeli seçilir
+- `ecological_service`, `eco_engine_aquatic` parametresiyle eco_engine sonucunu devralır
 
 ### Kırmızı bayraklar:
-- B2.1'de H400 var, B12.1'de "Sınıflandırma yok" → eco_engine/ecological_service senkron sorunu
-- M-Faktörü tablosu boş ama H400 bileşeni var
+- B2.1'de H400 var, B12.1'de "Sınıflandırma yok" → `eco_engine`/`ecological_service` senkron sorunu
+- M-Faktörü tablosu boş ama H400 bileşeni var → `eco_engine` veri eksikliği
+- B12.1 ↔ B2.1 sucul H kodu uyuşmuyor → reconciliation bloğu sorunu
+
+---
+
+## B13 — Bertaraf
+
+**Motor:** `sds_sentence_service`
+
+### Motor bağlamı:
+- Bertaraf metinleri `sds_sentence_service` tarafından üretilir
+- EWC atık kodu sistem tarafından önerilmez — kullanıcı girişi veya `sds_sentence_service` şablonu
+- Tehlikeli H kodu varsa bertaraf yöntemi "normal atık" olamaz
+
+### Kırmızı bayraklar:
+- EWC atık kodu yok → `sds_sentence_service` şablon eksikliği
+- H kodlu ürün için "evsel atık gibi bertaraf" ifadesi → `sds_sentence_service` hatalı şablon
+- TR atık mevzuatı atfı yok → `sds_sentence_service` sorunu
 
 ---
 
@@ -192,17 +227,15 @@ Kaynak: SEA Ek-1, Tablo 3.3.1.
 
 **Motor:** `transport_engine`
 
-### Kontrol soruları:
-1. UN numarası doğru mu? (karışım için UN3082 sucul çevre tehlikesi gibi)
-2. ADR sınıfı H kodlarıyla uyumlu mu?
-   - H225/H226 → ADR Sınıf 3 (yanıcı sıvı)
-   - H400/H410 (çevre tehlikesi) → "Çevre tehlikesine zararlı" ek uyarı
-3. IMDG ve IATA sütunları dolu mu?
-4. Ambalaj grubu (PG I/II/III) belirtilmiş mi?
+### Motor bağlamı:
+- ADR/IMDG/IATA sınıflandırması → `transport_engine.classify(h_codes, form, phys_h_codes)`
+- UN numarası, ambalaj grubu, çevre tehlike işareti otomatik belirlenir
+- Fiziksel motor H kodları (H22x) transport_engine'e iletilir
 
 ### Kırmızı bayraklar:
-- ADR "N/A" ama H225 var → transport_engine sorunu
-- UN numarası yok ama tehlikeli madde → zorunlu
+- ADR "Düzenlemeye tabi değil" ama H225 var → `transport_engine` sorunu
+- UN numarası yok ama tehlikeli madde → zorunlu alan
+- Çevre tehlike işareti yok ama H400/H410 var → `transport_engine` env_mark sorunu
 
 ---
 
@@ -210,34 +243,54 @@ Kaynak: SEA Ek-1, Tablo 3.3.1.
 
 **Motorlar:** `tr_mevzuat_service`, `svhc_service`, `reach_db`
 
-### Kontrol soruları:
-1. KKDİK kayıt numarası var mı? (bileşen için)
-2. REACH kayıt numarası (01-XXXX...) doğru formatta mı?
-3. SVHC bileşen varsa "Yetkilendirme Listesi" referansı var mı?
-4. Türkiye-spesifik mevzuat atıfları doğru mu? (KKDİK, SEA Yönetmeliği)
+### Motor bağlamı:
+- REACH kayıt numarası → `reach_db.get_reg_no(cas)`
+- SVHC kontrolü → `svhc_service`
+- TR mevzuat atıfları → `tr_mevzuat_service`
 
 ---
 
-## Genel Çapraz Kontroller (sds_validator)
+## B16 — Diğer Bilgiler
 
-`sds_validator.py` şu kontrolleri otomatik yapar — PDF'de doğrulama raporu varsa bakın:
+**Motor:** Kullanıcı girişi — `revision` objesi
 
-| Kod | Kural |
-|-----|-------|
-| V001 | H226 var → parlama noktası zorunlu |
-| V002 | H226 ama parlama noktası >60°C |
-| V003 | H304 var → viskozite zorunlu |
-| V004 | H304 ama viskozite >20 mm²/s |
-| V005 | H314 var → pH önerilir |
-| V006 | H314 ama pH 2–11.5 arası (aşındırıcı eşiği dışı) |
-| V009 | H272 var → B10'da bağdaşmayan maddeler belirtilmeli |
-| V010 | H260/H261 var → B7'de nem uyarısı |
-| V011 | CMR madde → B8'de özel KKE |
-| V012 | H334 var → SCBA/tam yüz maskesi |
-| V013 | 6'dan fazla P kodu (CLP 22(4) — zorunluysa geçerli) |
-| V014 | Danger H kodu var ama sinyal "Warning" |
-| V016 | Çözünürlük > yoğunluk × 10⁶ (fizik imkânsız) |
+### Motor bağlamı:
+- Revizyon tarihi → `revision.date`
+- Versiyon numarası → `revision.version`
+- Değişiklik özeti → `revision.notes`
+
+### Kırmızı bayraklar:
+- Revizyon tarihi yok → `revision.date` boş veya iletilmemiş
+- Versiyon numarası yok → `revision.version` boş
+- İkinci+ revizyon ama değişiklik özeti "İlk yayın" → `revision.notes` güncellenmemiş
 
 ---
 
-*Son güncelleme: 2026-06-09*
+## Otomatik Validator Kuralları (sds_validator.py)
+
+PDF header'ında `X-SDS-Issues` ve `X-SDS-Issue-Counts` alanları bu kuralların sonucunu taşır.
+
+| Kod | Kural | Seviye |
+|-----|-------|--------|
+| V001 | H226 var → parlama noktası zorunlu | error |
+| V002 | H226 ama parlama noktası >60°C | warning |
+| V003 | H304 var → viskozite zorunlu | error |
+| V004 | H304 ama viskozite >20 mm²/s | warning |
+| V005 | H314 var → pH önerilir | info |
+| V006 | H314 ama pH 2–11.5 arası | warning |
+| V009 | H272 var → B10'da bağdaşmayan maddeler belirtilmeli | warning |
+| V010 | H260/H261 var → B7'de nem uyarısı | warning |
+| V011 | CMR madde → B8'de özel KKE | warning |
+| V012 | H334 var → SCBA/tam yüz maskesi | warning |
+| V013 | 6'dan fazla P kodu (CLP 22(4) — zorunluysa ihlal değil) | info |
+| V014 | Danger H kodu var ama sinyal "Warning" | error |
+| V016 | Çözünürlük > yoğunluk × 10⁶ (fiziksel imkânsız) | warning |
+| V017 | STOT RE var ama bileşen verisi erişilemez | warning |
+| V018 | ECHA/PubChem kaynaklı bileşende REACH no eksik | warning |
+| V019 | GHS09 tutarsızlığı: H400/410/411 varken yok, ya da H412/413 ile birlikte var | warning |
+| V020-A | H314 var ama all_h_codes'ta H318 yok (B2.1 eksik) | warning |
+| V020-B | H314 var ve H318 etiket H kodlarında görünüyor (kaldırılmalı) | info |
+
+---
+
+*Son güncelleme: 2026-06-10*

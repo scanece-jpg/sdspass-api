@@ -18,6 +18,7 @@ Döndürülen alanlar (SI/standart birimlerde):
 """
 
 import re, json, asyncio
+from datetime import datetime, timezone
 from pathlib import Path
 
 import httpx
@@ -27,6 +28,33 @@ _BASE.mkdir(exist_ok=True, parents=True)
 
 _PUBCHEM = "https://pubchem.ncbi.nlm.nih.gov/rest/pug"
 _PUGVIEW = "https://pubchem.ncbi.nlm.nih.gov/rest/pug_view"
+
+# ── Cache TTL (gün) ───────────────────────────────────────────────────────────
+# Güvenlik sınıflandırmasını doğrudan etkileyen kritik alanlar daha sık yenilenir.
+_TTL_CRITICAL = 90    # gün — flash_point, boiling_point, lel, uel
+_TTL_STANDARD = 365   # gün — mw, density, vapor_pressure, solubility
+_CRITICAL_FIELDS = frozenset({'flash_point', 'boiling_point', 'lel', 'uel'})
+# Önbellekte saklanır ama dışarıya dönmez (iç meta veriler)
+_CACHE_META_KEYS = frozenset({'_cached_at', '_classification_h22x'})
+
+
+def _h22x_category(flash_point, boiling_point=None) -> str | None:
+    """
+    Flash point + boiling point → CLP H22x kategorisi.
+    Değer değişirse önbellekten uyarı tetiklemek için kullanılır.
+    """
+    if flash_point is None:
+        return None
+    try:
+        fp = float(flash_point)
+        bp = float(boiling_point) if boiling_point is not None else None
+    except (TypeError, ValueError):
+        return None
+    if fp < 23:
+        return 'H224' if (bp is not None and bp <= 35) else 'H225'
+    if fp <= 60:
+        return 'H226'
+    return None
 
 # ── Yardımcı: Metin içinden ilk sayıyı çek ───────────────────────────────────
 _NUM_RE = re.compile(r'[-+]?\d[\d,]*\.?\d*')
@@ -131,9 +159,28 @@ async def fetch_phys(cas: str) -> dict:
     safe_name = cas.replace('/', '_').replace('\\', '_')
     cache_file = _BASE / f"{safe_name}.json"
 
+    _prev_cached: dict = {}   # önceki önbellek verisi (kategori karşılaştırması için)
+    _ttl_expired = False
+
     if cache_file.exists():
         try:
-            return json.loads(cache_file.read_text(encoding='utf-8'))
+            _prev_cached = json.loads(cache_file.read_text(encoding='utf-8'))
+            _cached_at_str = _prev_cached.get('_cached_at')
+            if _cached_at_str:
+                age_days = (datetime.now(timezone.utc)
+                            - datetime.fromisoformat(_cached_at_str)).days
+                has_critical = any(f in _prev_cached for f in _CRITICAL_FIELDS)
+                ttl = _TTL_CRITICAL if has_critical else _TTL_STANDARD
+                if age_days < ttl:
+                    # TTL geçerli → meta anahtarları çıkar ve döndür
+                    return {k: v for k, v in _prev_cached.items()
+                            if k not in _CACHE_META_KEYS}
+                else:
+                    _ttl_expired = True   # TTL doldu → PubChem'den yenile
+            else:
+                # Eski format — _cached_at yok → dokunma, yeni sorguları bekle
+                return {k: v for k, v in _prev_cached.items()
+                        if k not in _CACHE_META_KEYS}
         except Exception:
             pass
 
@@ -278,10 +325,33 @@ async def fetch_phys(cas: str) -> dict:
                 f"yoğunluk üst sınırına göre düzeltildi]"
             ).strip()
 
-    # Önbelleğe kaydet (boş sonuç kaydedilmez)
+    # ── Kategorisel değişiklik tespiti ───────────────────────────────────────────
+    # TTL dolup yenilenen veride H22x kategorisi değişmişse kullanıcı uyarılır.
+    if _ttl_expired and _prev_cached:
+        _old_h22x = _prev_cached.get('_classification_h22x')
+        _new_h22x = _h22x_category(
+            props.get('flash_point'), props.get('boiling_point')
+        )
+        if _old_h22x is not None and _new_h22x != _old_h22x:
+            props['_category_changed'] = True
+            props['_category_change_detail'] = (
+                f"Parlama noktası kategorisi değişti: "
+                f"{_old_h22x} → {_new_h22x or 'sınıfsız'}. "
+                f"Sınıflandırmayı ve etiket bilgilerini gözden geçirin."
+            )
+
+    # ── Önbelleğe kaydet (boş sonuç kaydedilmez) ─────────────────────────────────
     if props:
         try:
-            cache_file.write_text(json.dumps(props, ensure_ascii=False), encoding='utf-8')
+            _to_cache = {k: v for k, v in props.items()
+                         if not k.startswith('_')}   # uyarı meta'larını kaydetme
+            _to_cache['_cached_at'] = datetime.now(timezone.utc).isoformat()
+            _to_cache['_classification_h22x'] = _h22x_category(
+                props.get('flash_point'), props.get('boiling_point')
+            )
+            cache_file.write_text(
+                json.dumps(_to_cache, ensure_ascii=False), encoding='utf-8'
+            )
         except Exception:
             pass
 

@@ -121,6 +121,49 @@ def get_section15_text(
     return '\n'.join(lines)
 
 
+def _ewc_code_bullet(h_codes: list, lang: str = 'TR') -> str:
+    """
+    H kodlarından gösterge EWC/Ek-4 atık kodu üret.
+    KKDİK Ek-2 §13.1: atık tanımlama kodu zorunlu unsurdur.
+    Öncelik sırası: CMR > yanıcı çözücü > korozif/toksik > genel tehlikeli > tehlikesiz.
+    """
+    h_set = set(h_codes or [])
+
+    if h_set & {'H340', 'H341', 'H350', 'H351', 'H360', 'H361', 'H362'}:
+        code = '16 05 06*'
+        desc_tr = 'Tehlikeli madde içeren atık laboratuvar kimyasalları'
+        desc_en = 'Laboratory chemicals, consisting of or containing dangerous substances'
+    elif h_set & {'H224', 'H225', 'H226', 'H227'}:
+        code = '14 06 03*'
+        desc_tr = 'Diğer çözücüler ve çözücü karışımları'
+        desc_en = 'Other solvents and solvent mixtures'
+    elif h_set & {'H314', 'H300', 'H301', 'H302', 'H310', 'H311',
+                  'H330', 'H331', 'H400', 'H410', 'H411'}:
+        code = '07 01 08*'
+        desc_tr = 'Tehlikeli madde içeren diğer dip artıkları ve reaksiyon kalıntıları'
+        desc_en = 'Other still bottoms and reaction residues containing dangerous substances'
+    elif h_set & {'H412', 'H413', 'H315', 'H317', 'H319', 'H332', 'H335', 'H336'}:
+        code = '07 01 99'
+        desc_tr = 'Başka türlü tanımlanmamış atık'
+        desc_en = 'Wastes not otherwise specified'
+    else:
+        code = '07 01 08*'
+        desc_tr = 'Tehlikeli madde içeren diğer dip artıkları ve reaksiyon kalıntıları'
+        desc_en = 'Other still bottoms and reaction residues containing dangerous substances'
+
+    if lang == 'TR':
+        return (
+            f"Atık tanımlama kodu (gösterge): {code} — {desc_tr} "
+            f"(Atık Yönetimi Yönetmeliği Ek-4). "
+            f"Kesin kod için yetkili çevre danışmanına veya lisanslı atık bertaraf şirketine başvurun."
+        )
+    return (
+        f"Indicative waste code: {code} — {desc_en} "
+        f"(Turkish Hazardous Waste Regulations Annex 4 / EU Waste Catalogue). "
+        f"Confirm the exact code with a licensed waste management consultant."
+    )
+
+
 def get_disposal_regulation(lang: str = 'TR') -> str:
     """Bölüm 13 için atık yönetimi mevzuat metni (geriye dönük uyumluluk)."""
     reg = TR_REGULATIONS['atik']
@@ -179,19 +222,20 @@ def get_disposal_content(h_codes: list = None, lang: str = 'TR') -> dict:
     if lang == 'TR' and any(h in h_codes for h in _flam_h):
         method_bullet = (
             'Yanıcı sıvı — lisanslı tehlikeli atık tesisinde kontrollü yakma yöntemiyle '
-            'bertaraf edin. Açık alev veya kıvılcım kaynağına yakın bertaraf etmeyin. '
-            'Atık kodu için Atık Yönetimi Yönetmeliği Ek-4 listesine başvurun.'
+            'bertaraf edin. Açık alev veya kıvılcım kaynağına yakın bertaraf etmeyin.'
         )
     elif any(h in h_codes for h in _flam_h) and lang != 'TR':
         method_bullet = (
             'Flammable liquid — dispose of by controlled incineration at a licensed '
-            'hazardous waste facility. Keep away from ignition sources during disposal. '
-            'Refer to applicable waste catalogue for waste classification code.'
+            'hazardous waste facility. Keep away from ignition sources during disposal.'
         )
 
-    # ── 5. CMR maddeler → ek uyarı ───────────────────────────────────────────
+    # ── 5. EWC atık kodu (KKDİK Ek-2 §13.1 zorunlu unsur) ───────────────────
+    ewc_bullet = _ewc_code_bullet(h_codes, lang)
+
+    # ── 6. CMR maddeler → ek uyarı ───────────────────────────────────────────
     _cmr_h = {'H340', 'H341', 'H350', 'H351', 'H360', 'H361', 'H362'}
-    product_bullets = [ref_bullet, method_bullet]
+    product_bullets = [ref_bullet, method_bullet, ewc_bullet]
     if any(h in h_codes for h in _cmr_h):
         if lang == 'TR':
             product_bullets.append(

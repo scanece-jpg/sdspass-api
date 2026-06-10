@@ -298,6 +298,34 @@ def validate_sds(
              f"(Madde tescilsizse REACH Art. 2 kapsamında muafiyet gerekçesi zorunludur.)",
              "REACH (AT) 1907/2006 Madde 31(6)(a) + KKDİK B15")
 
+    # V019: GHS09 / env_mark tutarlılık kontrolü
+    # SEA Ek-5 §3.1: H400, H410, H411 → GHS09 zorunlu
+    #                H412, H413 (kronik 3-4) → GHS09 piktogramı ALMAZ
+    _GHS09_TRIGGER = {'H400', 'H410', 'H411'}
+    _ECO_ALL       = {'H400', 'H410', 'H411', 'H412', 'H413'}
+    _h_set          = set(h_codes)
+    _ghs09_required = bool(_h_set & _GHS09_TRIGGER)
+    _eco_present    = bool(_h_set & _ECO_ALL)
+    _clp_pics       = set(sds_data.get('clp', {}).get('pictograms', []))
+    _ghs09_on_label = 'GHS09' in _clp_pics
+
+    if _ghs09_required and not _ghs09_on_label:
+        warn("V019", "B2",
+             f"H kodu ({', '.join(_h_set & _GHS09_TRIGGER)}) var ama GHS09 (çevre tehlikesi) "
+             f"piktogramı etikette eksik. "
+             f"SEA Ek-5 §3.1: H400/H410/H411 → GHS09 zorunludur.",
+             "SEA Ek-5 §3.1 / CLP Annex V Tablo 1.4")
+    elif _ghs09_on_label and not _eco_present:
+        warn("V019", "B2",
+             "GHS09 piktogramı etikette var ancak H400/H410/H411/H412/H413 yok. "
+             "Sucul tehlike sınıflandırmasını ekleyin veya GHS09'u kaldırın.",
+             "SEA Ek-5 §3.1 / CLP Annex V")
+    elif _eco_present and not _ghs09_required and _ghs09_on_label:
+        # Yalnızca H412/H413 var; piktogram yanlışlıkla eklenmiş
+        info("V019", "B2",
+             f"Yalnızca H412/H413 için GHS09 piktogramı gerekmez (SEA Ek-5 §3.1). "
+             f"Etiket tasarımında GHS09'u kaldırabilirsiniz.")
+
     return issues
 
 

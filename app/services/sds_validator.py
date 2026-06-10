@@ -274,6 +274,30 @@ def validate_sds(
                  f"örn. 'H372 (nervous system)' veya 'H370 (liver)'.",
                  "CLP Ek-VI (**) dipnotu — hedef organ zorunlu")
 
+    # V018: ECHA C&L / PubChem kaynaklı bileşende REACH numarası eksik
+    # source_priority ≥ 4 → ECHA C&L (4) veya PubChem (5) — daha az güvenilir kaynak.
+    # Bu bileşenlerde REACH kayıt numarası bulunamadıysa B15 eksik kalır.
+    # Not: bu uyarı PDF'e değil, yalnızca API yanıtına / uygulama içi uyarıya eklenir.
+    _v018_comps = (components or []) or sds_data.get('components', [])
+    _echa_no_reach = [
+        c for c in _v018_comps
+        if int(c.get('source_priority') or 1) >= 4
+        and not (c.get('reach_no') or '').strip()
+        and not c.get('ate_unknown', False)   # "mevzuata göre sınıflandırılmamış" bileşeni atla
+    ]
+    if _echa_no_reach:
+        _v018_names = ', '.join(
+            (c.get('name_tr') or c.get('name') or c.get('cas_no') or '?')
+            for c in _echa_no_reach[:3]
+        )
+        _v018_suffix = f' (+{len(_echa_no_reach) - 3} daha)' if len(_echa_no_reach) > 3 else ''
+        warn("V018", "B15",
+             f"ECHA C&L / PubChem kaynaklı {len(_echa_no_reach)} bileşende REACH numarası "
+             f"bulunamadı: {_v018_names}{_v018_suffix}. "
+             f"B15 için REACH kayıt numarasını doğrulayın veya 'muaf — [gerekçe]' belirtin. "
+             f"(Madde tescilsizse REACH Art. 2 kapsamında muafiyet gerekçesi zorunludur.)",
+             "REACH (AT) 1907/2006 Madde 31(6)(a) + KKDİK B15")
+
     return issues
 
 

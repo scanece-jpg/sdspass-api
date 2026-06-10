@@ -2291,14 +2291,15 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     # Fallback: eco_result.aquatic yoksa veya component_details boşsa
     # bileşen listesinden H400/H410 sınıflı maddeleri topla (M=1 varsayılan)
     if not _mf_details:
-        _M_FACTOR_H_CODES   = {'H400', 'H401', 'H410', 'H411'}
+        _M_FACTOR_H_CODES   = {'H400', 'H401', 'H410'}   # H411 dahil değil — Kronik 2'nin M-faktörü yok
         _M_FACTOR_CLASSES   = {'Aquatic Acute 1', 'Aquatic Chronic 1'}
         for _comp in sds_data.get('components', []):
             _comp_hazards   = _comp.get('hazards', [])
             _comp_h_codes   = {(h.get('h_code') or '').strip() for h in _comp_hazards}
             _comp_h_classes = {(h.get('h_class') or '').strip() for h in _comp_hazards}
             _has_aa1 = bool(_comp_h_codes & {'H400','H401'} or _comp_h_classes & {'Aquatic Acute 1'})
-            _has_ac1 = bool(_comp_h_codes & {'H410','H411'} or _comp_h_classes & {'Aquatic Chronic 1'})
+            # H411 (Suk. Kron. 2) M-faktör gerektirmez — sadece H410 (Suk. Kron. 1) tabloya girer
+            _has_ac1 = bool(_comp_h_codes & {'H410'} or _comp_h_classes & {'Aquatic Chronic 1'})
             if _has_aa1 or _has_ac1:
                 _mf_raw = _comp.get('m_factors') or {}
                 _m_a    = _mf_raw.get('acute',   1) if _mf_raw else 1

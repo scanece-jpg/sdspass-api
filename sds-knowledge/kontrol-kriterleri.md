@@ -252,7 +252,7 @@ Bir bulgu hata olarak işaretlenmeden önce şu adımlar izlenmelidir:
 - Marine Pollutant kriteri: H400/H410 → ≥0.1%, H411 → ≥1% konsantrasyon eşiği
 - B14'te sadece "Evet/Hayır" değil, **hesap gerekçesi** gösterilmelidir
 - Gerekçe formatı: `Σ (bileşen konst% × M-faktörü)` ile eşik karşılaştırması
-- `pdf_sds_service.py` henüz hesap göstermiyor — açık eksiklik
+- Hesap gerekçesi (Σ C×M tablosu + sonuç satırı) B14 sonunda gösterilir — `pdf_sds_service.py`
 
 ### Kırmızı bayraklar:
 - ADR "Düzenlemeye tabi değil" ama H225 var → `transport_engine` sorunu

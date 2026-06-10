@@ -258,10 +258,10 @@ def validate_sds(
     import re as _re
     stot_codes_present = [h for h in h_codes if h in ('H370', 'H371', 'H372', 'H373')]
     if stot_codes_present:
-        components = sds_data.get('components', [])
+        _stot_comps = (components or []) or sds_data.get('components', [])
         has_organ_info = any(
             _re.search(r'\(([^)]+)\)', (haz.get('h_code') or ''))
-            for c in (components or [])
+            for c in _stot_comps
             for haz in (c.get('hazards') or [])
             if (haz.get('h_code') or '').replace('*', '').strip()[:4]
             in ('H370', 'H371', 'H372', 'H373')

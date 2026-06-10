@@ -92,6 +92,21 @@ READILY_BIODEGRADABLE_CAS = {
     '79-09-4',   # propionic acid
 }
 
+# Toprak hareketliliği değerlendirmesinden hariç tutulan taşıyıcı/çözücü maddeler
+# Bunların log Koc hesabı çevre risk anlamı taşımaz
+SOIL_MOBILITY_SKIP_CAS = {
+    '7732-18-5',  # water
+    '64-17-5',    # ethanol
+    '67-63-0',    # IPA
+    '71-23-8',    # n-propanol
+    '71-36-3',    # n-butanol
+    '57-55-6',    # propylene glycol
+    '56-81-5',    # glycerol
+    '77-92-9',    # citric acid
+    '64-19-7',    # acetic acid
+    '79-09-4',    # propionic acid
+}
+
 # Zor biyobozunur (persistent)
 PERSISTENT_CAS = {
     '1330-20-7', # xylene (moderate)
@@ -599,6 +614,8 @@ def assess_soil_mobility(
         cas = comp.get('cas_no', comp.get('cas', '')).strip()
         conc = float(comp.get('worst_case_conc', comp.get('conc', 0)) or 0)
         if conc < 0.1:
+            continue
+        if cas in SOIL_MOBILITY_SKIP_CAS:
             continue
         name    = comp.get('name') or cas
         name_tr = comp.get('name_tr') or name   # TR SDS için Türkçe ad

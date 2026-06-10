@@ -69,14 +69,17 @@ const STOTEngine = (() => {
       organSums[org].cat2 += generalCat2;
     }
 
-    // Sonuç değerlendirme
+    // Sonuç değerlendirme — CLP Ek-1 §3.9 Tablo 3.9.4
     for (const [org, sums] of Object.entries(organSums)) {
-      if (sums.cat1 >= 1.0) {
+      if (sums.cat1 >= 10.0) {
         results.push({ h:'H372', h_class:'STOT RE 1', organ: org, signal:'Danger',
-          reason:`${org}: STOT RE 1 toplamı %${sums.cat1.toFixed(1)} ≥ %1.0 (KKDİK Ek-2, Tablo 3.9.4)` });
-      } else if (sums.cat2 >= 10.0) {
+          reason:`${org}: STOT RE 1 toplamı %${sums.cat1.toFixed(1)} ≥ %10.0 (KKDİK Ek-2, Tablo 3.9.4)` });
+      } else if (sums.cat1 >= 1.0 || sums.cat2 >= 10.0) {
+        const parts = [];
+        if (sums.cat1 >= 1.0) parts.push(`STOT RE 1 toplamı %${sums.cat1.toFixed(1)} (%1.0–%10.0 → H373)`);
+        if (sums.cat2 >= 10.0) parts.push(`STOT RE 2 toplamı %${sums.cat2.toFixed(1)} ≥ %10.0`);
         results.push({ h:'H373', h_class:'STOT RE 2', organ: org, signal:'Warning',
-          reason:`${org}: STOT RE 2 toplamı %${sums.cat2.toFixed(1)} ≥ %10.0 (KKDİK Ek-2, Tablo 3.9.4)` });
+          reason:`${org}: ${parts.join('; ')} (KKDİK Ek-2, Tablo 3.9.4)` });
       }
     }
 
@@ -84,23 +87,29 @@ const STOTEngine = (() => {
     for (const [org, sums] of Object.entries(organSums)) {
       const c1 = sums.cat1 - generalCat1;
       const c2 = sums.cat2 - generalCat2;
-      if (c1 >= 1.0) {
+      if (c1 >= 10.0) {
         analyticResults.push({ h:'H372', h_class:'STOT RE 1', organ: org, signal:'Danger',
-          reason:`${org}: Eşleşen Cat1=%${c1.toFixed(1)} ≥ %1.0`, general_excl: generalCat1 });
-      } else if (c2 >= 10.0) {
+          reason:`${org}: Eşleşen Cat1=%${c1.toFixed(1)} ≥ %10.0`, general_excl: generalCat1 });
+      } else if (c1 >= 1.0 || c2 >= 10.0) {
+        const parts = [];
+        if (c1 >= 1.0) parts.push(`Eşleşen Cat1=%${c1.toFixed(1)} (%1.0–%10.0 → H373)`);
+        if (c2 >= 10.0) parts.push(`Eşleşen Cat2=%${c2.toFixed(1)} ≥ %10.0`);
         analyticResults.push({ h:'H373', h_class:'STOT RE 2', organ: org, signal:'Warning',
-          reason:`${org}: Eşleşen Cat2=%${c2.toFixed(1)} ≥ %10.0`, general_excl: generalCat2 });
+          reason:`${org}: ${parts.join('; ')}`, general_excl: generalCat1 });
       }
     }
 
     // Organ belirsiz — genel
     if (Object.keys(organSums).length === 0) {
-      if (generalCat1 >= 1.0) {
+      if (generalCat1 >= 10.0) {
         results.push({ h:'H372', h_class:'STOT RE 1', organ:'Genel (organ belirsiz)', signal:'Danger',
-          reason:`Genel: Cat1=%${generalCat1.toFixed(1)} ≥ %1.0` });
-      } else if (generalCat2 >= 10.0) {
+          reason:`Genel: Cat1=%${generalCat1.toFixed(1)} ≥ %10.0 (Tablo 3.9.4)` });
+      } else if (generalCat1 >= 1.0 || generalCat2 >= 10.0) {
+        const parts = [];
+        if (generalCat1 >= 1.0) parts.push(`Cat1=%${generalCat1.toFixed(1)} (%1.0–%10.0 → H373)`);
+        if (generalCat2 >= 10.0) parts.push(`Cat2=%${generalCat2.toFixed(1)} ≥ %10.0`);
         results.push({ h:'H373', h_class:'STOT RE 2', organ:'Genel (organ belirsiz)', signal:'Warning',
-          reason:`Genel: Cat2=%${generalCat2.toFixed(1)} ≥ %10.0` });
+          reason:`Genel: ${parts.join('; ')} (Tablo 3.9.4)` });
       }
     }
 

@@ -7,7 +7,7 @@ from fastapi import FastAPI, Body, Response, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
-import sys, os
+import sys, os, json
 
 # Data yolu — deploy'da /app/data, lokalde /home/claude
 DATA_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')
@@ -723,6 +723,19 @@ async def generate_pdf(data: dict = Body(...)):
             'ppe': py_ppe,
         }
 
+        # ── Validator pipeline — PDF öncesi çapraz bölüm denetimi ──────────────
+        _val_issues: list = []
+        try:
+            from app.services.sds_validator import validate_sds as _validate
+            _val_issues = _validate(
+                sds_data,
+                h_codes,
+                _parsed_phys,
+                mapped_comps,
+            )
+        except Exception as _val_err:
+            print(f'[PDF] Validator hatası (PDF oluşturma devam eder): {_val_err}')
+
         pdf_bytes = generate_sds_pdf(sds_data, lang=lang)
 
         _tr_map = str.maketrans('ıİğĞüÜşŞçÇöÖ', 'iIgGuUsScCoO')
@@ -731,11 +744,30 @@ async def generate_pdf(data: dict = Body(...)):
                        for x in _name_ascii)[:30]
         rev_no = revision_in.get('no','1')
 
+        # Validator sonuçlarını response header'a ekle (frontend toast için)
+        _val_errors   = sum(1 for i in _val_issues if i['level'] == 'error')
+        _val_warnings = sum(1 for i in _val_issues if i['level'] == 'warning')
+        _val_infos    = sum(1 for i in _val_issues if i['level'] == 'info')
+        _val_summary  = json.dumps(
+            {'error': _val_errors, 'warning': _val_warnings, 'info': _val_infos},
+            ensure_ascii=False,
+        )
+        # İlk 5 issue'yu header'a sığdır (büyük yükten kaçın)
+        _val_top = json.dumps(
+            _val_issues[:5], ensure_ascii=False, separators=(',', ':')
+        )
+
         return Response(
             content=pdf_bytes,
             media_type='application/pdf',
-            headers={'Content-Disposition':
-                     f'attachment; filename="{safe}_GBF_{lang}_Rev{rev_no}.pdf"'}
+            headers={
+                'Content-Disposition':
+                    f'attachment; filename="{safe}_GBF_{lang}_Rev{rev_no}.pdf"',
+                'X-SDS-Issue-Counts': _val_summary,
+                'X-SDS-Issues':       _val_top,
+                'Access-Control-Expose-Headers':
+                    'X-SDS-Issue-Counts, X-SDS-Issues',
+            }
         )
 
     except Exception as e:

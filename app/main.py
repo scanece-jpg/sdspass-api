@@ -122,7 +122,8 @@ async def generate_pdf(data: dict = Body(...)):
         euh_details = data.get('euh_details', []) or [{'code':c,'text':''} for c in euh_codes]
         euh_result  = {'euh_codes': euh_codes, 'euh_details': euh_details}
 
-        # Ekoloji
+        # Ekoloji — eco_comps hazırla; calculate_ecological try bloğundan çağrılacak
+        # (eco_engine handoff: aquatic iki kez hesaplanmaz, divergence önlenir)
         eco_comps = [{'cas': c.get('cas',''), 'name': c.get('name',''),
                       'name_tr': c.get('name_tr',''),
                       'conc': float(c.get('conc', c.get('concentration',0)) or 0),
@@ -131,10 +132,7 @@ async def generate_pdf(data: dict = Body(...)):
                       'worst_case_conc': float(c.get('concMax') or c.get('conc', c.get('concentration',0)) or 0),
                       'hazards': c.get('hazards',[]),
                       'm_factors': c.get('m_factors', {})} for c in components]
-        try:
-            eco_result = calculate_ecological(eco_comps)
-        except Exception:
-            eco_result = None
+        eco_result = None  # try bloğunda güncellenir; hata varsa reconciliation fallback devreye girer
 
         # Sabitler ve yetkili motor çıktıları — reconciliation bloğunda uygulanır
         ECO_H_CODES  = {'H400', 'H410', 'H411', 'H412', 'H413'}
@@ -218,6 +216,20 @@ async def generate_pdf(data: dict = Body(...)):
                 'high' if (not _eco_haz_comps or _eco_explicit_m == len(_eco_haz_comps))
                 else 'low'
             )
+
+            # ── ecological_service — eco_engine aquatic handoff ──────────────────
+            # eco_engine'in aquatic sonucu parametre olarak geçirilir;
+            # ecological_service yeniden hesaplama yapmaz → divergence önlenir.
+            try:
+                eco_result = calculate_ecological(
+                    eco_comps,
+                    eco_engine_aquatic=_eco_res2.get('aquatic'),
+                )
+            except Exception:
+                try:
+                    eco_result = calculate_ecological(eco_comps)
+                except Exception:
+                    eco_result = None
             # ────────────────────────────────────────────────────────────────────
 
             # ── B9 theo_props backfill ───────────────────────────────────────────
@@ -410,6 +422,12 @@ async def generate_pdf(data: dict = Body(...)):
             py_clp_passed = data.get('clp_passed', [])
             py_transport  = data.get('transport', {})
             py_ppe        = data.get('ppe', {})
+            # eco_result try bloğu içinde atanamamışsa bağımsız hesapla
+            if eco_result is None:
+                try:
+                    eco_result = calculate_ecological(eco_comps)
+                except Exception:
+                    eco_result = None
 
         # ════════════════════════════════════════════════════════════════════════════
         # TEK UZLAŞTIRMA BLOĞU — backend motorlarının kesin sonuçları atomik olarak

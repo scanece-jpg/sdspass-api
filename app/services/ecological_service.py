@@ -652,15 +652,32 @@ def check_endocrine_disruptors(comp_list: List[Dict]) -> List[str]:
 
 def calculate_ecological(
     comp_list: List[Dict],
-    eco_test_data: Optional[Dict[str, EcoTestData]] = None
+    eco_test_data: Optional[Dict[str, EcoTestData]] = None,
+    eco_engine_aquatic: Optional[Dict] = None,
 ) -> EcoOutput:
     """
     Tam ekolojik değerlendirme — SDS Bölüm 12
+
+    eco_engine_aquatic: eco_engine'in {'h', 'h_class', 'formula'} dict'i.
+      Sağlandığında aquatic yeniden hesaplanmaz — eco_engine sonucu kullanılır
+      (divergence önleme, Sıra 4 eco handoff).
     """
     out = EcoOutput()
 
-    # 12.1 Aquatic
-    out.aquatic = calculate_aquatic(comp_list, eco_test_data)
+    # 12.1 Aquatic — eco_engine handoff veya bağımsız hesap
+    if eco_engine_aquatic and eco_engine_aquatic.get('h'):
+        out.aquatic = AquaticResult(
+            h_code=eco_engine_aquatic['h'],
+            h_class=eco_engine_aquatic.get('h_class', ''),
+            signal='Warning',
+            sum_value=0.0,
+            formula=eco_engine_aquatic.get(
+                'formula', 'eco_engine (CLP Ek-I Tablo 4.1.2)'
+            ),
+            note='eco_engine handoff — toplama formülü eco_engine tarafından hesaplandı',
+        )
+    else:
+        out.aquatic = calculate_aquatic(comp_list, eco_test_data)
 
     # 12.2 Degradability
     out.biodegradability = assess_biodegradability(comp_list, eco_test_data)

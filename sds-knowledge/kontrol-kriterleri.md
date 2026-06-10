@@ -10,6 +10,22 @@
 
 ---
 
+## Denetim Metodolojisi
+
+Bir bulgu hata olarak işaretlenmeden önce şu adımlar izlenmelidir:
+
+1. **Yönetmeliği doğrula** — Bulguyu projeye yüklenen kaynak belgelere karşı kontrol et:
+   - P kodları için: **CLP Ek-I §2–§3 tabloları** (karışımın H koduna göre zorunlu P listesi)
+   - Konsantrasyon aralıkları için: **ECHA SDS Rehberi Bölüm 3.2** (standart bantlar)
+   - H kodu baskı/dominance için: **CLP Ek-I §3.x.x tabloları** (hangi H kodu hangisini bastırır)
+   - Taşımacılık kriterleri için: **IMDG Kodu §2.10** / **ADR Bölüm 2**
+
+2. **SDSPass motorunu doğrula** — Yönetmelik doğruysa ilgili motoru incele (bu dosyadaki motor haritasına bak). Bulgu, mevzuata aykırı bir çıktı ise hata; mevzuata uygunsa hata değildir.
+
+3. **Emin olmadan işaretleme** — "Muhtemelen hata" veya "eksik görünüyor" yeterli değildir. Yönetmelik referansı gösterilemeyen bulgular raporlanmamalıdır.
+
+---
+
 ## Motor Haritası (Özet)
 
 | Bölüm | Birincil Motor | İkincil Motor |
@@ -90,18 +106,6 @@
 - H314 var → P310 yok → `p_code_service` sorunu
 - Sinyal "Warning" ama Danger H kodu var → `clp_service.DANGER_H` listesi sorunu (V014)
 
-### P kodu denetim kuralı (audit tuzağı):
-> **P kodları karışımın sınıflandırmasına göre seçilir. Bileşen H kodlarına bakılmaz.**
-- H412 karışım → P273 + P501 yeterli. P391 gerekmez (sadece H400/H410 için).
-- Bir bileşen H410 taşısa bile karışım H412 ise P391 zorunlu değildir.
-- Kaynak: CLP Ek-I §2.8 / CLP Madde 22 — `p_code_service.py` bunu doğru uygular.
-
-### H318/H319 dominance (audit tuzağı):
-> **H314 varken H318 ve H319 etiket H kodları listesinde (B2.2) gösterilmez. Bu hata değil, CLP baskı kuralıdır.**
-- H318 → B2.1 sınıflandırma tablosunda **bulunmalı** (CLP §3.3.1.4)
-- H318 → B2.2 etiket H kodlarında **yazılmamalı** (H314 baskılar)
-- İkisi aynı anda doğrudur. "B2.2'de H318 yok" → hata değil.
-
 ---
 
 ## B3 — Bileşim / İçerik Bilgisi
@@ -113,14 +117,6 @@
 - Konsantrasyon aralıkları → `concentration_ranges.build_concentration_ranges()`
 - SVHC kontrolü → `svhc_service`
 - Kaynak önceliği: SEA Ek-6 (source_priority=1) > Annex VI (2) > Custom (3) > ECHA C&L (4) > PubChem (5)
-
-### ECHA konsantrasyon bantları (audit tuzağı):
-> **"≥ 25%" doğru ECHA üst bandıdır. "≥25–<70%" veya benzeri özel aralıklar geçersizdir.**
-```
-< 1%  |  ≥1%–<5%  |  ≥5%–<10%  |  ≥10%–<25%  |  ≥25%   ← üst sınır yok
-```
-- `concentration_ranges.ECHA_RANGES` bu 5 bandı uygular.
-- Denetimde "üst sınır eksik" bulgusu → ECHA standardına göre yanlış yorum.
 
 ### Kırmızı bayraklar:
 - EC numarası boş → `reach_db` sorunu
@@ -319,11 +315,5 @@ PDF header'ında `X-SDS-Issues` ve `X-SDS-Issue-Counts` alanları bu kuralların
 | V020-B | H314 var ve H318 etiket H kodlarında görünüyor (kaldırılmalı) | info |
 
 ---
-
----
-
-## Audit Hata Referansı
-
-Belgelenmiş yanlış yorumlar ve düzeltmeleri için bakınız: [dipol-108-audit-duzeltme.md](dipol-108-audit-duzeltme.md)
 
 *Son güncelleme: 2026-06-10*

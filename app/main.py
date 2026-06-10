@@ -305,7 +305,10 @@ async def generate_pdf(data: dict = Body(...)):
 
             for p in _clp_res.get('passed', []):
                 hc = (p.get('h_code') or '').replace('*','').strip()[:4]
-                if hc and hc not in _seen:
+                # ECO_H_CODES burada filtreleniyor: aquatik sınıflandırma yalnızca
+                # eco_engine'den gelir (SEA Tablo 4.1.2 toplamsal formül).
+                # clp_service'in 0.1% kesme değeri raporlama eşiğidir, sınıflandırma eşiği değil.
+                if hc and hc not in _seen and hc not in ECO_H_CODES:
                     _seen.add(hc)
                     _fixed = _correct_hclass(hc, p.get('h_class',''))
                     _cp.append({

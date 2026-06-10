@@ -750,11 +750,10 @@ async def generate_pdf(data: dict = Body(...)):
         _val_infos    = sum(1 for i in _val_issues if i['level'] == 'info')
         _val_summary  = json.dumps(
             {'error': _val_errors, 'warning': _val_warnings, 'info': _val_infos},
-            ensure_ascii=False,
         )
-        # İlk 5 issue'yu header'a sığdır (büyük yükten kaçın)
+        # İlk 5 issue'yu header'a sığdır — ensure_ascii=True zorunlu (HTTP/1.1 latin-1)
         _val_top = json.dumps(
-            _val_issues[:5], ensure_ascii=False, separators=(',', ':')
+            _val_issues[:5], separators=(',', ':')
         )
 
         return Response(

@@ -1372,6 +1372,18 @@ async def sds_calculate(body: dict = Body(...)):
                     'cutoff_used':'—',
                 })
 
+        # ── H314 → H318 birlikteliği (CLP §3.3.1.4) ──────────────────────────
+        if 'H314' in all_h:
+            all_h.add('H318')
+            all_h_list = sorted(all_h)
+            if not any(p.get('h_code') == 'H318' for p in clp_passed):
+                clp_passed.append({
+                    'h_code':      'H318',
+                    'h_class':     'Eye Dam. 1',
+                    'reason':      'H314 varlığında otomatik (CLP §3.3.1.4)',
+                    'cutoff_used': '—',
+                })
+
         # ── P kodları ─────────────────────────────────────────────────────────
         p_result = assign_p_codes(all_h_list, signal, usage=usage)
         p_result['label'] = select_label_p_codes(p_result['p_codes'], 6, h_codes=all_h_list)

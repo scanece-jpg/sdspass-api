@@ -51,6 +51,21 @@
 - H400 var → P273 yok → p_code_service sorunu
 - Sinyal kelimesi "Warning" ama H300 var → clp_service sorunu
 
+### H318 — Otomatik tetikleme kontrolü (V020)
+
+**Kural:** H314 (Cilt Aş. 1) varsa → H318 (Göz Hasarı 1) **B2.1 sınıflandırma tablosuna** otomatik eklenir.
+Kaynak: SEA Ek-1, Tablo 3.3.1.
+
+**B2.1 kontrolü:**
+- H314 varsa, `all_h_codes`'ta H318 bulunmalıdır.
+- Yoksa → `V020` UYARI
+
+**B2.2 kontrolü:**
+- Etikette H318 **yazmaması normaldir** — SEA Madde 28 öncelik kuralı gereği H314 baskın gelir, H318 gizlenir.
+- H318'in etikette görünmesi → `V020` BİLGİ (ihlal değil, kaldırılması tavsiye edilir)
+
+**Validator kodu:** `V020` — `sds_validator.py`
+
 ---
 
 ## B3 — Bileşim / İçerik Bilgisi

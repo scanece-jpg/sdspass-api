@@ -326,6 +326,31 @@ def validate_sds(
              f"Yalnızca H412/H413 için GHS09 piktogramı gerekmez (SEA Ek-5 §3.1). "
              f"Etiket tasarımında GHS09'u kaldırabilirsiniz.")
 
+    # V020: H314 → H318 otomatik tetikleme kontrolü
+    # SEA Ek-1, Tablo 3.3.1: H314 (Cilt Aş. 1) mevcut olduğunda H318 (Göz Hasarı 1)
+    # sınıflandırmaya otomatik eklenir.
+    # Etikette H318 gizlenmesi normaldir — SEA Md. 28 dominance: H314 baskın gelir.
+    if 'H314' in h_codes:
+        _all_h = set(sds_data.get('clp', {}).get('all_h_codes', []))
+        # all_h_codes yoksa h_codes ile aynı kabul et (fallback)
+        if not _all_h:
+            _all_h = set(h_codes)
+
+        if 'H318' not in _all_h:
+            warn("V020", "B2",
+                 "H314 (Cilt Aşındırıcı 1) mevcut — SEA Ek-1 Tablo 3.3.1 uyarınca "
+                 "H318 (Göz Hasarı 1) sınıflandırma tablosuna (B2.1) otomatik eklenmeli. "
+                 "B2.1'de H318 satırı eksik.",
+                 "SEA Ek-1 Tablo 3.3.1 / CLP Annex I §3.3.2.1")
+
+        # H318 etiket h_codes'unda görünüyorsa uyar (dominance uygulanmamış)
+        if 'H318' in set(h_codes):
+            info("V020", "B2",
+                 "H318 etiket H kodları arasında görünüyor. H314 varken H318 etiketten "
+                 "gizlenmelidir (SEA Madde 28 öncelik kuralı). "
+                 "Etiket tasarımında H318 ifadesini kaldırın.",
+                 "SEA Madde 28(3) / CLP Article 27 — label dominance")
+
     return issues
 
 

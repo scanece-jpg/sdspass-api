@@ -68,12 +68,24 @@ RULES: Dict[str, List[Dict[str, Any]]] = {
             },
             'level': 1,
         },
-        # Seviye 2 — Tavsiye edilen (tahriş edici/aşındırıcı buhar/aerosol)
+        # Seviye 2 — Tavsiye edilen (tahriş edici/zararlı buhar veya toz)
         {
-            'h_codes': ['H332', 'H335', 'H336'],
+            # H332/H335: buhar veya toz olabilir → A1 filtreli VEYA FFP2
+            'h_codes': ['H332', 'H335'],
             'ppe': {
-                'TR': 'Yarım yüz maskesi veya FFP2 toz maskesi (EN 149)',
-                'EN': 'Half-face mask or FFP2 dust mask (EN 149)',
+                'TR': 'Yarım yüz maskesi — A1 filtreli veya FFP2 toz maskesi (EN 14387 / EN 149)',
+                'EN': 'Half-face mask with A1 filter or FFP2 dust mask (EN 14387 / EN 149)',
+            },
+            'level': 2,
+        },
+        {
+            # H336: narkotik — organik buhar; FFP2 toz maskesi koruma SAĞLAMAZ.
+            # H314/H330/H331 zaten A1B1E1P2/ABEK kapsıyor → kural atlanır (suppress_if).
+            'h_codes': ['H336'],
+            'suppress_if': ['H314', 'H330', 'H331'],
+            'ppe': {
+                'TR': 'Yarım yüz maskesi — A1 organik buhar filtreli (EN 14387)',
+                'EN': 'Half-face mask with A1 organic vapor filter (EN 14387)',
             },
             'level': 2,
         },
@@ -290,6 +302,10 @@ def select(h_codes: List[str], lang: str = 'TR') -> Dict[str, Any]:
         added_texts: set = set()
         for rule in rule_list:
             if any(hc in h_set for hc in rule['h_codes']):
+                # suppress_if: listede bir H kodu h_set'te varsa kural atlanır
+                # (daha kapsamlı bir kural zaten tetiklendi)
+                if any(hc in h_set for hc in rule.get('suppress_if', [])):
+                    continue
                 ppe_text = rule['ppe'].get(lang, rule['ppe']['TR'])
                 if ppe_text not in added_texts:
                     result[category].append({

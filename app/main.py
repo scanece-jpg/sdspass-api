@@ -542,6 +542,17 @@ async def generate_pdf(data: dict = Body(...)):
             if 'H318' in set(h_codes):
                 h_codes = [h for h in h_codes if h != 'H318']
 
+        # ── 6. Transport env_mark — eco reconciliation sonrası güncelle ──────────
+        # py_transport, eco_engine öncesi _clp_res.h_codes ile hesaplandı.
+        # env_mark (denizel kirletici) final h_codes'tan yeniden belirlenir.
+        # IMDG Kod §2.10.3: yalnızca H400/H410/H411 Marine Pollutant sayılır.
+        if py_transport and not py_transport.get('not_regulated'):
+            _imdg_env_h = {'H400', 'H410', 'H411'}
+            _correct_env = bool(set(h_codes) & _imdg_env_h)
+            for _mode in ('road', 'sea', 'air'):
+                if isinstance(py_transport.get(_mode), dict):
+                    py_transport[_mode]['env_mark'] = _correct_env
+
         # ── eco_result fallback ───────────────────────────────────────────────────
         if eco_result is None:
             eco_result = {'sds_section_12': {}}

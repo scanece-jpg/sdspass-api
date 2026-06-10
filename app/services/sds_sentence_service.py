@@ -187,7 +187,8 @@ def format_section3_component(
         # CLP Annex I §3 notasyonu: üst sınır önünde '<' zorunlu — örn. %1–<%5
         conc_display = f'%{conc_min}–<%{conc_max}'
     else:
-        conc_display = f'%{conc:.1f}'
+        # Seçenek B: girilen tam değer worst-case, B3'te ≥%X formatı (CLP Annex II §3.2.3.1)
+        conc_display = f'≥%{conc:g}'
 
     if disclosure_level == 'show':
         return {

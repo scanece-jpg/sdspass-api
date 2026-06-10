@@ -405,6 +405,32 @@ body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min
     </button>
   </div>
 
+  <!-- Revizyon Bilgileri -->
+  <div class="product-card" style="margin-top:10px">
+    <label style="font-weight:700;color:var(--text2);margin:0 0 10px;display:block">📋 Revizyon Bilgileri</label>
+    <div class="row2">
+      <div>
+        <label>Revizyon No</label>
+        <input type="text" id="revNo" value="1" placeholder="1">
+      </div>
+      <div>
+        <label>Versiyon</label>
+        <input type="text" id="revVersion" value="1.0" placeholder="1.0">
+      </div>
+    </div>
+    <div class="row2" style="margin-top:8px">
+      <div>
+        <label>Tarih</label>
+        <input type="text" id="revDate" placeholder="GG.AA.YYYY">
+      </div>
+      <div>
+        <label>Değişiklik Notu</label>
+        <input type="text" id="revNotes" value="İlk yayın"
+               placeholder="Ör: İlk yayın / H315 eklendi / Konsantrasyon güncellendi">
+      </div>
+    </div>
+  </div>
+
   <!-- Hesapla -->
   <div class="calc-bar">
     <button class="bcalc" onclick="doCalculate()">⚡ Hesapla</button>
@@ -1773,7 +1799,12 @@ async function generatePDF() {
           selected: pcodes?.label_codes || [], // etiket için seçilmiş max 6-10
         },
       },
-      revision:     { date: new Date().toLocaleDateString('tr-TR'), no: '1', version: '1.0', notes: 'İlk yayın' },
+      revision: {
+        date:    (document.getElementById('revDate')?.value?.trim())    || new Date().toLocaleDateString('tr-TR'),
+        no:      (document.getElementById('revNo')?.value?.trim())      || '1',
+        version: (document.getElementById('revVersion')?.value?.trim()) || '1.0',
+        notes:   (document.getElementById('revNotes')?.value?.trim())   || 'İlk yayın',
+      },
     };
 
     const res = await fetch(API_BASE + '/sds/pdf', {

@@ -161,6 +161,7 @@ async def generate_pdf(data: dict = Body(...)):
         # Frontend'den gelen değerler YERINE Python sonuçları kullanılır.
         # ISO 27001: tüm sınıflandırma hesapları sunucu tarafında yapılır.
         py_ppe = data.get('ppe', {})   # fallback değeri (hata durumu için)
+        _eco_confidence = 'low'        # hata durumu için güvenli fallback
         try:
             from app.services.clp_service       import classify_mixture_clp as _clp_calc
             from app.services.physical_engine   import calculate as _phys_calc
@@ -195,6 +196,29 @@ async def generate_pdf(data: dict = Body(...)):
             _phys_res = _phys_calc(components, form=_form_val, user_fp=_user_fp)
             _stot_res = _stot_calc(components)
             _eco_res2 = _eco_calc2(components)
+
+            # ── Eco güvenilirlik skoru — M-faktör tamlığına göre ────────────────
+            # high: tüm H410/H400 bileşenlerinde açık M-faktörü girilmiş
+            # low : bazı bileşenler varsayılan M=1 kullanıyor → ihtiyatlı mod
+            _ECO_HAZ = {'H400', 'H410', 'H411', 'H412', 'H413'}
+            _eco_haz_comps = [
+                c for c in components
+                if any(
+                    (h.get('h_code') or '').replace('*','').strip()[:4] in _ECO_HAZ
+                    for h in (c.get('hazards') or [])
+                )
+                and float(c.get('concMax') or c.get('conc') or 0) > 0
+            ]
+            _eco_explicit_m = sum(
+                1 for c in _eco_haz_comps
+                if (c.get('m_factors') or {}).get('acute')   is not None
+                or (c.get('m_factors') or {}).get('chronic') is not None
+            )
+            _eco_confidence = (
+                'high' if (not _eco_haz_comps or _eco_explicit_m == len(_eco_haz_comps))
+                else 'low'
+            )
+            # ────────────────────────────────────────────────────────────────────
 
             # ── B9 theo_props backfill ───────────────────────────────────────────
             # physical_engine'in hesapladığı teorik değerleri kullanıcı boş
@@ -403,15 +427,33 @@ async def generate_pdf(data: dict = Body(...)):
             h_codes     = [h for h in h_codes     if h not in _FLAM_LIQ_H] + [_auth_flam_h]
             all_h_codes = [h for h in all_h_codes if h not in _FLAM_LIQ_H] + [_auth_flam_h]
 
-        # ── 2. Sucul Eko — eco_engine > ecological_service > frontend ─────────────
-        # Öncelik zinciri: eco_engine (try'dan) → ecological_service → frontend korunur
-        _final_eco_h = _auth_eco_h
-        if _final_eco_h is None:
-            try:
-                if eco_result and hasattr(eco_result, 'aquatic') and eco_result.aquatic:
-                    _final_eco_h = eco_result.aquatic.h_code
-            except Exception:
-                pass
+        # ── 2. Sucul Eko — güvenilirlik skorlu uzlaştırma ────────────────────────
+        # _eco_confidence='high' → eco_engine (CLP Ek-I Tablo 4.1.1) kazanır
+        # _eco_confidence='low'  → daha tehlikeli olan seçilir (ihtiyatlılık)
+        _final_eco_h   = _auth_eco_h   # eco_engine sonucu
+        _eco_service_h = None           # ecological_service sonucu
+        try:
+            if eco_result and hasattr(eco_result, 'aquatic') and eco_result.aquatic:
+                _eco_service_h = eco_result.aquatic.h_code
+            elif isinstance(eco_result, dict):
+                _s12_val = (eco_result.get('sds_section_12') or {}).get('12.1', '')
+                if _s12_val and _s12_val not in ('Sınıflandırma yok', ''):
+                    _eco_service_h = _s12_val
+        except Exception:
+            pass
+
+        # Divergence çözümü
+        _ECO_SEV = {'H410': 5, 'H400': 4, 'H411': 3, 'H412': 2, 'H413': 1}
+        if _final_eco_h and _eco_service_h and _final_eco_h != _eco_service_h:
+            if _eco_confidence == 'high':
+                pass  # eco_engine kazanır — _final_eco_h değişmez
+            else:
+                # M-faktörleri eksik → ihtiyatlı seç (daha tehlikeli)
+                if _ECO_SEV.get(_eco_service_h, 0) > _ECO_SEV.get(_final_eco_h, 0):
+                    _final_eco_h = _eco_service_h
+        elif _final_eco_h is None:
+            _final_eco_h = _eco_service_h  # eco_engine bulamadı, service'e fallback
+
         # _final_eco_h hâlâ None ise → frontend eco koduna dokunma
         if _final_eco_h:
             h_codes     = [h for h in h_codes     if h not in ECO_H_CODES] + [_final_eco_h]
@@ -424,12 +466,17 @@ async def generate_pdf(data: dict = Body(...)):
                     'reason':      'Sucul ekoloji (eco_engine / ecological_service)',
                     'cutoff_used': '—',
                 }]
-            # sds_section_12['12.1'] — 'Sınıflandırma yok' ise güncelle
+            # sds_section_12['12.1'] güncelle:
+            # - high confidence → her zaman güncelle (ecological_service'i ez)
+            # - low confidence  → yalnızca boşsa güncelle
             try:
                 _s12 = (getattr(eco_result, 'sds_section_12', None) or
                         (eco_result.get('sds_section_12', {}) if isinstance(eco_result, dict) else {}))
-                if isinstance(_s12, dict) and _s12.get('12.1', '') in ('Sınıflandırma yok', '', None):
-                    _s12['12.1'] = _final_eco_h
+                if isinstance(_s12, dict):
+                    _s12_cur = _s12.get('12.1', '')
+                    if (_eco_confidence == 'high'
+                            or _s12_cur in ('Sınıflandırma yok', '', None)):
+                        _s12['12.1'] = _final_eco_h
             except Exception:
                 pass
 

@@ -628,6 +628,28 @@ def _parse_pubchem_ld50(data: dict) -> dict:
 # PubChem GHS fallback — ECHA C&L bulunamazsa H-kodları için
 # ---------------------------------------------------------------------------
 
+async def _get_pubchem_ec_no(cid: int, client: httpx.AsyncClient) -> str:
+    """
+    PubChem synonym listesinden EC numarasını çıkar.
+    EC numarası formatı: ddd-ddd-d (EINECS/ELINCS/NLP, 9 karakter).
+    Örnek: 203-928-6 (HDTMAC), 200-578-6 (Etanol).
+    """
+    try:
+        r = await client.get(
+            f'https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/{cid}/synonyms/JSON',
+            timeout=8.0,
+        )
+        if r.status_code == 200:
+            info_list = r.json().get('InformationList', {}).get('Information', [])
+            for info in info_list:
+                for syn in info.get('Synonym', []):
+                    if re.match(r'^\d{3}-\d{3}-\d$', syn.strip()):
+                        return syn.strip()
+    except Exception:
+        pass
+    return ''
+
+
 async def _fetch_pubchem_ghs_fallback(cas: str, client: httpx.AsyncClient) -> dict | None:
     """
     ECHA C&L doğrudan API'si başarısız olursa PubChem GHS Classification'ı dene.
@@ -671,11 +693,14 @@ async def _fetch_pubchem_ghs_fallback(cas: str, client: httpx.AsyncClient) -> di
         if not best or not best['h_codes']:
             return None
 
-        # Madde ismi için temel PubChem sorgusu
-        props_r = await client.get(
-            f'https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/{cid}/property/'
-            'IUPACName,MolecularFormula/JSON',
-            timeout=8.0
+        # Madde ismi ve EC numarası için PubChem sorguları (paralel)
+        props_r, ec_no = await asyncio.gather(
+            client.get(
+                f'https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/{cid}/property/'
+                'IUPACName,MolecularFormula/JSON',
+                timeout=8.0,
+            ),
+            _get_pubchem_ec_no(cid, client),
         )
         name = cas
         if props_r.status_code == 200:
@@ -686,7 +711,7 @@ async def _fetch_pubchem_ghs_fallback(cas: str, client: httpx.AsyncClient) -> di
         result = {
             'cas'           : cas,
             'name'          : name,
-            'ec_no'         : '',
+            'ec_no'         : ec_no,
             'source'        : f'PubChem/ECHA C&L ({best["notif_count"]} bildirim)',
             'source_note'   : src_note,
             'signal'        : best['signal'],

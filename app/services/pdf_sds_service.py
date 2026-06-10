@@ -2508,6 +2508,82 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             styles['small']
         ))
 
+    # ── Deniz Kirletici hesap gerekçesi (IMDG §2.10.3) ───────────────────────
+    _imdg_mp_h = {'H400', 'H410', 'H411'}
+    _mp_comps = []
+    for _c in sds_data.get('components', []):
+        _c_h_codes = {(h.get('h_code') or '').strip() for h in (_c.get('hazards') or [])}
+        _c_mp_h = _c_h_codes & _imdg_mp_h
+        if not _c_mp_h:
+            continue
+        _conc = float(_c.get('concMax') or _c.get('conc') or _c.get('concentration') or 0)
+        _mf_raw = _c.get('m_factors') or {}
+        _m_a = float(_mf_raw.get('acute', 1)) if _mf_raw else 1.0
+        _name = (_c.get('name_tr', '') if lang == 'TR' else '') or _c.get('name', '')
+        _cas  = _c.get('cas_no', _c.get('cas', ''))
+        _dominant_h = 'H400' if ('H400' in _c_mp_h or 'H410' in _c_mp_h) else 'H411'
+        _mp_comps.append({
+            'cas':    _cas,
+            'name':   _name or _cas,
+            'conc':   _conc,
+            'm':      _m_a,
+            'h_code': _dominant_h,
+        })
+
+    if _mp_comps:
+        _mp_title = ('Deniz Kirletici Hesap Gerekçesi (IMDG §2.10.3)'
+                     if lang == 'TR' else
+                     'Marine Pollutant Calculation (IMDG §2.10.3)')
+        story.append(Spacer(1, 4))
+        story.append(Paragraph(f"<b>{_mp_title}:</b>", styles['body_bold']))
+
+        _col1 = 'CAS No'
+        _col2 = 'Madde'          if lang == 'TR' else 'Substance'
+        _col3 = 'C (%)'
+        _col4 = 'M'
+        _col5 = 'C×M'
+        _col6 = 'Eşik (%)'       if lang == 'TR' else 'Threshold (%)'
+        _mp_rows = [[_col1, _col2, _col3, _col4, _col5, _col6]]
+
+        _sum_acute  = 0.0
+        _sum_h411   = 0.0
+        for _mp in _mp_comps:
+            _thr = '≥ 0.1' if _mp['h_code'] in {'H400', 'H410'} else '≥ 1.0'
+            _cxm = _mp['conc'] * _mp['m']
+            _mp_rows.append([
+                _mp['cas'],
+                Paragraph(_mp['name'], styles['small']),
+                f"{_mp['conc']:.1f}",
+                f"{int(_mp['m'])}",
+                f"{_cxm:.2f}",
+                _thr,
+            ])
+            if _mp['h_code'] in {'H400', 'H410'}:
+                _sum_acute += _cxm
+            else:
+                _sum_h411  += _mp['conc']
+
+        story.append(data_table(_mp_rows, [24*mm, 50*mm, 18*mm, 12*mm, 18*mm, 22*mm], styles))
+
+        _is_mp = (_sum_acute >= 0.1) or (_sum_h411 >= 1.0)
+        if _sum_acute > 0 and _sum_h411 > 0:
+            _sum_txt = (f"Σ(C×M) = {_sum_acute:.2f}% (H400/H410) | "
+                        f"Σ(C) = {_sum_h411:.2f}% (H411)")
+        elif _sum_acute > 0:
+            _sum_txt = f"Σ(C×M) = {_sum_acute:.2f}%"
+        else:
+            _sum_txt = f"Σ(C) = {_sum_h411:.2f}%"
+
+        if _is_mp:
+            _verdict = ('Deniz Kirletici: Evet — IMDG §2.10.3 eşiği aşıldı.'
+                        if lang == 'TR' else
+                        'Marine Pollutant: Yes — IMDG §2.10.3 threshold exceeded.')
+        else:
+            _verdict = ('Deniz Kirletici: Hayır — IMDG §2.10.3 eşiği aşılmadı.'
+                        if lang == 'TR' else
+                        'Marine Pollutant: No — IMDG §2.10.3 threshold not exceeded.')
+        story.append(Paragraph(f"{_sum_txt} → {_verdict}", styles['small']))
+
     # ─────────────────────────────────────────────────────────────────────────
     # BÖLÜM 15 — Mevzuat
     # ─────────────────────────────────────────────────────────────────────────

@@ -526,6 +526,22 @@ async def generate_pdf(data: dict = Body(...)):
         _clean_h = {h.split()[0] for h in h_codes if isinstance(h, str)}
         signal = 'Danger' if _clean_h & DANGER_H else 'Warning'
 
+        # ── 5. H314 → H318 birlikteliği (CLP §3.3.1.4 / SEA Tablo 3.3.1) ────────
+        # Skin Corr. 1 (H314) varlığında Eye Dam. 1 (H318) sınıflandırma tablosuna
+        # zorunlu eklenir. Etiket (h_codes): H318 gizlenir — SEA Madde 28 dominance.
+        if 'H314' in set(h_codes):
+            if 'H318' not in set(all_h_codes):
+                all_h_codes = list(all_h_codes) + ['H318']
+            if not any(e.get('h_code') == 'H318' for e in py_clp_passed):
+                py_clp_passed = list(py_clp_passed) + [{
+                    'h_code':      'H318',
+                    'h_class':     'Eye Dam. 1',
+                    'reason':      'H314 varlığında otomatik (CLP §3.3.1.4)',
+                    'cutoff_used': '—',
+                }]
+            if 'H318' in set(h_codes):
+                h_codes = [h for h in h_codes if h != 'H318']
+
         # ── eco_result fallback ───────────────────────────────────────────────────
         if eco_result is None:
             eco_result = {'sds_section_12': {}}

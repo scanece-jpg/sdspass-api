@@ -723,6 +723,14 @@ async def generate_pdf(data: dict = Body(...)):
             'ppe': py_ppe,
         }
 
+        # sds_data['clp']['pictograms'] h_codes'tan türet — V019 için gerekli
+        # (eco_engine GHS09'u PDF'e ekler ama clp dict'ine yazmaz → false-positive)
+        try:
+            from app.services.ghs_pictogram import get_ghs_codes as _get_ghs
+            sds_data['clp']['pictograms'] = _get_ghs(h_codes)
+        except Exception:
+            pass
+
         # ── Validator pipeline — PDF öncesi çapraz bölüm denetimi ──────────────
         _val_issues: list = []
         try:

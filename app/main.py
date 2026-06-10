@@ -196,6 +196,74 @@ async def generate_pdf(data: dict = Body(...)):
             _stot_res = _stot_calc(components)
             _eco_res2 = _eco_calc2(components)
 
+            # ── B9 theo_props backfill ───────────────────────────────────────────
+            # physical_engine'in hesapladığı teorik değerleri kullanıcı boş
+            # bıraktığı alanlar için _parsed_phys'e aktar.
+            # measured: True  → kullanıcı girdi (ölçülen/beyan değer)
+            # measured: False → motor hesapladı (teorik, KKDİK Ek-2 §9 dipnotu)
+            _theo = _phys_res.get('theo_props') or {}
+            _phys_methods: dict = {}
+            _BACKFILL_FIELDS = (
+                'flash_point', 'boiling_point', 'density', 'vapor_density',
+                'vapor_pressure', 'lel', 'uel', 'viscosity', 'solubility',
+            )
+            for _bk in _BACKFILL_FIELDS:
+                _tp = _theo.get(_bk)
+                if not _tp:
+                    continue
+                _tp_val  = _tp.get('value')
+                _tp_disp = _tp.get('display') or (str(_tp_val) if _tp_val is not None else None)
+                _tp_std  = _tp.get('standard', '')
+                _tp_mth  = _tp.get('method', '')
+                _tp_err  = (_tp.get('error') or {}).get('pct')
+
+                _existing = _parsed_phys.get(_bk)
+                _has_user_val = (
+                    isinstance(_existing, dict) and _existing.get('calc') is not None
+                ) or (
+                    _existing and not isinstance(_existing, dict)
+                    and str(_existing).strip() not in ('', '0')
+                )
+
+                if _has_user_val:
+                    # Kullanıcı değer girmiş — ölçülen olarak işaretle
+                    _phys_methods[_bk] = {
+                        'measured': True, 'standard': _tp_std, 'error_pct': None,
+                    }
+                elif _tp_val is not None:
+                    # Kullanıcı boş bırakmış, teorik değer var → backfill
+                    _parsed_phys[_bk] = {
+                        'display': _tp_disp,
+                        'calc':    _tp_val,
+                        'pcn':     _tp_val,
+                        'nd':      False,
+                        'na':      False,
+                        'theo':    True,   # PDF'de "hesaplanmış" notu için
+                    }
+                    _phys_methods[_bk] = {
+                        'measured':  False,
+                        'standard':  _tp_std,
+                        'method':    _tp_mth,
+                        'error_pct': _tp_err,
+                    }
+                elif _tp_disp:
+                    # Sayısal değer yok ama metin açıklama var
+                    # (örn. çözünürlük: "Su ile tam karışır")
+                    _parsed_phys[_bk] = {
+                        'display': _tp_disp,
+                        'calc':    None,
+                        'nd':      False,
+                        'na':      False,
+                        'theo':    True,
+                    }
+                    _phys_methods[_bk] = {
+                        'measured':  False,
+                        'standard':  _tp_std,
+                        'method':    _tp_mth,
+                        'error_pct': None,
+                    }
+            # ────────────────────────────────────────────────────────────────────
+
             _cp   = []
             _seen = set()
 
@@ -573,6 +641,7 @@ async def generate_pdf(data: dict = Body(...)):
             'components':   mapped_comps,
             'disclosure_map': disc_map,
             'phys_props':   _parsed_phys,
+            'phys_methods': _phys_methods,   # ölçülen/hesaplanmış etiket (KKDİK Ek-2 §9)
             'eco':          eco_result,
             # Python transport_engine sonucunu kullan (ISO 27001 uyumu).
             'transport':    _map_transport(py_transport),

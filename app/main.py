@@ -542,13 +542,22 @@ async def generate_pdf(data: dict = Body(...)):
             if 'H318' in set(h_codes):
                 h_codes = [h for h in h_codes if h != 'H318']
 
-        # ── 6. Transport env_mark — eco reconciliation sonrası güncelle ──────────
-        # py_transport, eco_engine öncesi _clp_res.h_codes ile hesaplandı.
-        # env_mark (denizel kirletici) final h_codes'tan yeniden belirlenir.
-        # IMDG Kod §2.10.3: yalnızca H400/H410/H411 Marine Pollutant sayılır.
+        # ── 6. Transport env_mark — IMDG §2.10.3 bileşen bazlı akut M-faktör testi ─
+        # CLP ekoloji motoru kronik M-faktör kullanır (H412 çıkabilir ama Marine Pollutant değil).
+        # IMDG §2.10.3: Σ(Ci × M_akut) ≥ 0.1 (H400/H410) veya Σ(Ci) ≥ 1.0 (H411) → Marine Pollutant.
         if py_transport and not py_transport.get('not_regulated'):
-            _imdg_env_h = {'H400', 'H410', 'H411'}
-            _correct_env = bool(set(h_codes) & _imdg_env_h)
+            _mp_sum_a  = 0.0
+            _mp_sum_11 = 0.0
+            for _c in components:
+                _c_h = {(h.get('h_code') or '').strip() for h in (_c.get('hazards') or [])}
+                _conc_c = float(_c.get('concMax') or _c.get('conc') or _c.get('concentration') or 0)
+                if _c_h & {'H400', 'H410'}:
+                    _mf = _c.get('m_factors') or {}
+                    _m_a = float(_mf.get('acute', 1)) if _mf else 1.0
+                    _mp_sum_a += _conc_c * _m_a
+                elif 'H411' in _c_h:
+                    _mp_sum_11 += _conc_c
+            _correct_env = (_mp_sum_a >= 0.1) or (_mp_sum_11 >= 1.0)
             for _mode in ('road', 'sea', 'air'):
                 if isinstance(py_transport.get(_mode), dict):
                     py_transport[_mode]['env_mark'] = _correct_env

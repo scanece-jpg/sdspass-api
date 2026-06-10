@@ -2463,7 +2463,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     # Marine Pollutant (IMDG) — çevre H kodları varsa
     _marine_lbl = 'Evet — Deniz Kirletici (Marine Pollutant)' if lang == 'TR' else 'Yes — Marine Pollutant'
     _marine_no  = term(lang, 'not_applicable')
-    _imdg_env   = _marine_lbl if is_env_hazard else _marine_no
+    # env_mark: main.py Step 6'da IMDG §2.10.3 bileşen bazlı hesap ile set edilir.
+    # Eski transport datası gelirse is_env_hazard'a fallback.
+    _sea_env_mark = _sea.get('env_mark')
+    _imdg_env = _marine_lbl if (_sea_env_mark if _sea_env_mark is not None else is_env_hazard) else _marine_no
 
     # 14.6 — Kullanıcı için özel önlemler (standart metin)
     _sec14_6 = 'Bkz. Bölüm 6 (Kaza önleme), 7 (Elleçleme/depolama) ve 8 (KKD).' if lang == 'TR' \

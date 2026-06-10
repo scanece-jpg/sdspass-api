@@ -975,7 +975,9 @@ def generate_section3(
     rows = []
     for comp in components:
         cas = comp.get('cas_no', comp.get('cas', '')).strip()
-        level = disclosure_map.get(cas, 'show')
+        # Varsayılan 'range': ticari sır koruması (CLP Madde 24(2) / KKDİK Ek-2 B3.2).
+        # Frontend disclosure_map'te explicit 'show' göndermezse ECHA aralığı kullanılır.
+        level = disclosure_map.get(cas, 'range')
         # Esans/gizli karışım → disclosure_map'te 'show' bırakılmışsa min. 'range'e zorla
         if comp.get('comp_type') == 'fragrance' and level == 'show':
             level = 'range'

@@ -414,6 +414,14 @@ async def _fetch_echa_cl_direct(cas: str, client: httpx.AsyncClient) -> dict | N
         echa_id  = substance.get('id') or substance.get('substanceId') or substance.get('ecNumber')
         name     = substance.get('iupacName') or substance.get('name') or cas
         ec_no    = substance.get('ecNumber', '')
+        # REACH kayıt numarasını yakala ve önbelleğe al (C&L ile aynı API çağrısında)
+        try:
+            from app.services.reach_cache import extract_reg_no, save_cached
+            _reg = extract_reg_no(substance)
+            if _reg:
+                save_cached(cas, _reg)
+        except Exception:
+            pass
 
         # 2. C&L bildirimlerini çek
         cl_r = await client.get(

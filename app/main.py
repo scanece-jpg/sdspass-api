@@ -932,13 +932,20 @@ async def substance_lookup(cas: str):
             pass
 
     if result:
+        _reach = get_reg_no(cas)
+        if not _reach:
+            try:
+                from app.services.reach_cache import fetch_reach_no_async
+                _reach = await fetch_reach_no_async(cas)
+            except Exception:
+                pass
         return {
             "found"     : True,
             "cas"       : cas,
             "name"      : result.get("name", ""),
             "name_tr"   : result.get("name_tr", ""),   # Türkçe SDS Bölüm 3 için
             "ec_no"     : result.get("ec_no", "") or get_ec_no(cas),
-            "reach_no"  : get_reg_no(cas),
+            "reach_no"  : _reach,
             "sea_ek6"   : result.get("sea_ek6", False),
             "annex_vi"  : result.get("annex_vi", False),
             "signal"    : result.get("signal", ""),
@@ -953,6 +960,12 @@ async def substance_lookup(cas: str):
     # REACH DB'de EC/REACH no var mı?
     ec  = get_ec_no(cas)
     reg = get_reg_no(cas)
+    if not reg:
+        try:
+            from app.services.reach_cache import fetch_reach_no_async
+            reg = await fetch_reach_no_async(cas)
+        except Exception:
+            pass
     if ec or reg:
         return {"found": True, "cas": cas, "name": "", "ec_no": ec,
                 "reach_no": reg, "annex_vi": False, "hazards": [], "oel": oel}

@@ -111,14 +111,23 @@ def get_reach(cas: str) -> dict | None:
 
 
 def get_reg_no(cas: str) -> str:
-    """İlk kayıt numarasını döndür veya boş string."""
-    d = REACH_DB.get(cas.strip())
-    if not d:
-        return ''
-    regs = d.get('reg', [])
-    if regs and regs[0] not in ('exempt', 'polymer'):
-        return regs[0]
-    return regs[0] if regs else ''
+    """İlk kayıt numarasını döndür: statik DB → disk önbelleği → boş string."""
+    cas = cas.strip()
+    d = REACH_DB.get(cas)
+    if d:
+        regs = d.get('reg', [])
+        if regs and regs[0] not in ('exempt', 'polymer'):
+            return regs[0]
+        return regs[0] if regs else ''
+    # Statik DB'de yoksa disk önbelleğini dene
+    try:
+        from app.services.reach_cache import load_cached
+        cached = load_cached(cas)
+        if cached:
+            return cached
+    except Exception:
+        pass
+    return ''
 
 
 def get_ec_no(cas: str) -> str:

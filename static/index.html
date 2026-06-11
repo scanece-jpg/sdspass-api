@@ -1535,12 +1535,14 @@ function completeToHundred() {
     alert(`Toplam zaten %${Math.round(total * 10) / 10} — tamamlama gerekmiyor.`);
     return;
   }
-  // Kalan kısım — mevzuata göre ayrıca belirtilmesi gerekmiyor
-  addComp({ name: 'Mevzuata göre gerekli değildir', conc: remaining });
+  // Kalan kısım — varsayılan olarak su (7732-18-5)
+  addComp({ cas: '7732-18-5', conc: remaining });
   const id = _compId;
   const manualEl = document.getElementById('cmanual' + id);
   if (manualEl) { manualEl.value = remaining; onManualConc(id); }
   updateConcTotal();
+  // CAS araması tetikle — madde adı, EC, REACH otomatik dolsun
+  onCas(id);
 }
 
 function addChip(id, hclass, hcode, annexSupplement) {

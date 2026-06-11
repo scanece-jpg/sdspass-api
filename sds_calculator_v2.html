@@ -622,7 +622,14 @@ function addComp(pf = {}) {
   return id;
 }
 
-function delComp(id) { document.getElementById('cw'+id)?.remove(); updateConcTotal(); }
+function delComp(id) {
+  document.getElementById('cw'+id)?.remove();
+  updateConcTotal();
+  // Bileşen silindikten sonra eski hesap sonuçları geçersiz — yeniden hesap zorunlu
+  _lastCalcState = null;
+  const el = document.getElementById('results');
+  if (el) el.innerHTML = '<div style="color:var(--text3);font-size:11px;padding:20px 0;text-align:center">Bileşenler değişti — yeniden hesaplayın</div>';
+}
 
 function updateConcTotal() {
   const comps = getComps();

@@ -11,12 +11,8 @@
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
-        "h_code": "H314"
-      },
-      {
         "class": "Skin Corr. 1A",
-        "h_code": ""
+        "h_code": "H314"
       }
     ],
     "m_factors": {},
@@ -56,7 +52,6 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS04",
       "GHS05"
     ],
     "h_codes": [

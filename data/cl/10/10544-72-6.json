@@ -14,15 +14,15 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": "H330"
+        "h_code": "H280"
       },
       {
         "class": "Acute Tox. 2 *",
-        "h_code": "H314"
+        "h_code": "H330"
       },
       {
         "class": "Skin Corr. 1B",
-        "h_code": ""
+        "h_code": "H314"
       }
     ],
     "m_factors": {},
@@ -45,6 +45,7 @@
     ],
     "h_codes": [
       "H270",
+      "H280",
       "H330",
       "H314"
     ],

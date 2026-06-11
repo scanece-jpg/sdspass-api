@@ -12,15 +12,15 @@
     "hazards": [
       {
         "class": "Press. Gas",
-        "h_code": "H335"
+        "h_code": "H280"
       },
       {
         "class": "STOT SE 3",
-        "h_code": "H314"
+        "h_code": "H335"
       },
       {
         "class": "Skin Corr. 1A",
-        "h_code": ""
+        "h_code": "H314"
       }
     ],
     "m_factors": {},
@@ -34,6 +34,7 @@
       "GHS07"
     ],
     "h_codes": [
+      "H280",
       "H335",
       "H314"
     ],

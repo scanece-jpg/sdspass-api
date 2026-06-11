@@ -1,6 +1,6 @@
 {
   "cas": "75-28-5",
-  "name": "butane (containing â‰¥ 0,1  % butadiene (203-450-8)) [1]\nisobutane (containing â‰¥ 0,1  % butadiene (203-450-8)) [2]",
+  "name": "butane (containing ≥ 0,1  % butadiene (203-450-8)) [1]\nisobutane (containing ≥ 0,1  % butadiene (203-450-8)) [2]",
   "name_tr": "bütan; [1] ve izobütan [2]",
   "ec_no": "200-857-2",
   "index_no": "601-004-01-8",
@@ -14,15 +14,15 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": "H350"
+        "h_code": "H280"
       },
       {
         "class": "Carc. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "m_factors": {},
@@ -37,6 +37,7 @@
     ],
     "h_codes": [
       "H220",
+      "H280",
       "H350",
       "H340"
     ],

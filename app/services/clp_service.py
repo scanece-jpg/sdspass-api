@@ -814,23 +814,26 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> list:
                         'cutoff_used': f'ATEmix={mix_ate:.1f}',
                     })
                 break
-        # B11 ATEmix detayı — B2.1 ile senkron (sunucu tarafı, DB ATE kullanır)
-        b11_key = _ROUTE_TO_B11.get(route, 'inhal')
-        mix_ate_r = round(mix_ate, 1)
-        if b11_key not in ate_b11 or mix_ate_r < ate_b11[b11_key]['ateMix']:
-            result_code_b11 = None
-            for threshold_b11, hcode_b11 in _CLASSIFY_B11.get(b11_key, []):
-                if mix_ate_r <= threshold_b11:
-                    result_code_b11 = hcode_b11
-                    break
-            ate_b11[b11_key] = {
-                'ateMix':          mix_ate_r,
-                'resultCode':      result_code_b11,
-                'unknownPct':      round(unknown_conc, 1),
-                'revisedFormula':  unknown_conc > 10.0,
-                'statementNeeded': stmt_needed,
-                'components':      ate_comps.get(route, []),
-            }
+        # B11 ATEmix detayı — hata olursa görmezden gel, B2.1 hesabını etkilemesin
+        try:
+            b11_key = _ROUTE_TO_B11.get(route, 'inhal')
+            mix_ate_r = round(mix_ate, 1)
+            if b11_key not in ate_b11 or mix_ate_r < ate_b11[b11_key]['ateMix']:
+                result_code_b11 = None
+                for threshold_b11, hcode_b11 in _CLASSIFY_B11.get(b11_key, []):
+                    if mix_ate_r <= threshold_b11:
+                        result_code_b11 = hcode_b11
+                        break
+                ate_b11[b11_key] = {
+                    'ateMix':          mix_ate_r,
+                    'resultCode':      result_code_b11,
+                    'unknownPct':      round(unknown_conc, 1),
+                    'revisedFormula':  unknown_conc > 10.0,
+                    'statementNeeded': stmt_needed,
+                    'components':      ate_comps.get(route, []),
+                }
+        except Exception:
+            pass
 
     # Baskınlık: H300>H301>H302, H310>H311>H312, H330>H331>H332
     _h_set = {e['h_code'] for e in results}

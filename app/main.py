@@ -193,6 +193,10 @@ async def generate_pdf(data: dict = Body(...)):
             _ph_raw = phys_in.get('ph') or None
             _clp_res  = _clp_calc(components, mixture_ph=_ph_raw)
             _be_ate_h, _be_ate_details = _ate_h_calc(components, form=_form_val)   # classify_mixture_clp Acute Tox. atlar
+            print(f'[ATE DEBUG] form={_form_val!r} | _be_ate_h={_be_ate_h} | comp_count={len(components)}')
+            for _dc in components:
+                print(f'  comp cas={_dc.get("cas")} conc={_dc.get("concMax") or _dc.get("conc")} ate_unknown={_dc.get("ate_unknown")} ate={_dc.get("ate")} hazards={[h.get("h_code") for h in (_dc.get("hazards") or [])]}')
+
             _phys_res = _phys_calc(components, form=_form_val, user_fp=_user_fp)
             _stot_res = _stot_calc(components)
             _eco_res2 = _eco_calc2(components)
@@ -550,17 +554,23 @@ async def generate_pdf(data: dict = Body(...)):
         _ACUTE_TOX_H = {'H300','H301','H302','H310','H311','H312','H330','H331','H332'}
         if _be_ate_h:
             _be_ate_hcodes = [e['h_code'] for e in _be_ate_h]
-            h_codes     = [h for h in h_codes     if h not in _ACUTE_TOX_H] + _be_ate_hcodes
-            all_h_codes = [h for h in all_h_codes if h not in _ACUTE_TOX_H] + _be_ate_hcodes
-            _passed_hset = {e['h_code'] for e in py_clp_passed}
+            _ate_hset = {e['h_code'] for e in _be_ate_h}
+            # h_codes (etiket/sinyal kelimesi): sunucu ATE sonucu kesin
+            h_codes = [h for h in h_codes if h not in _ACUTE_TOX_H] + _be_ate_hcodes
+            # all_h_codes (B2.1 tam tablo): frontend kodlarını SİLME — sunucu kodlarını EKLE
+            # Sunucu ATEmix eşiği aşarsa (örn. H331 yok ama bileşen bireysel H331 taşıyor)
+            # frontend kodları B2.1'de "Baskın tehlike sınıfı kapsamında" ile görünmeye devam eder
+            _existing_h = set(all_h_codes)
+            all_h_codes = list(all_h_codes) + [h for h in _be_ate_hcodes if h not in _existing_h]
+            # Server ATE entry'lerini py_clp_passed'a yaz — önceki boş/yanlış entry'leri ez
+            py_clp_passed = [e for e in py_clp_passed if e.get('h_code') not in _ate_hset]
             for _ate_e in _be_ate_h:
-                if _ate_e['h_code'] not in _passed_hset:
-                    py_clp_passed = list(py_clp_passed) + [{
-                        'h_code':      _ate_e['h_code'],
-                        'h_class':     _ate_e['h_class'],
-                        'reason':      _ate_e['reason'],
-                        'cutoff_used': _ate_e['cutoff_used'],
-                    }]
+                py_clp_passed.append({
+                    'h_code':      _ate_e['h_code'],
+                    'h_class':     _ate_e['h_class'],
+                    'reason':      _ate_e['reason'],
+                    'cutoff_used': _ate_e['cutoff_used'],
+                })
 
         # ── 7. Transport env_mark — IMDG §2.10.3 bileşen bazlı akut M-faktör testi ─
         # CLP ekoloji motoru kronik M-faktör kullanır (H412 çıkabilir ama Marine Pollutant değil).

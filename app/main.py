@@ -192,7 +192,7 @@ async def generate_pdf(data: dict = Body(...)):
             # ham string geçirilir; clp_service _parse_ph_range ile lo/hi ayırır
             _ph_raw = phys_in.get('ph') or None
             _clp_res  = _clp_calc(components, mixture_ph=_ph_raw)
-            _be_ate_h = _ate_h_calc(components, form=_form_val)   # classify_mixture_clp Acute Tox. atlar
+            _be_ate_h, _be_ate_details = _ate_h_calc(components, form=_form_val)   # classify_mixture_clp Acute Tox. atlar
             _phys_res = _phys_calc(components, form=_form_val, user_fp=_user_fp)
             _stot_res = _stot_calc(components)
             _eco_res2 = _eco_calc2(components)
@@ -427,7 +427,7 @@ async def generate_pdf(data: dict = Body(...)):
             py_clp_passed = data.get('clp_passed', [])
             py_transport  = data.get('transport', {})
             py_ppe        = data.get('ppe', {})
-            _be_ate_h     = []   # motor hatası — ATE sağlık kodları hesaplanamadı
+            _be_ate_h, _be_ate_details = [], {}   # motor hatası — ATE sağlık kodları hesaplanamadı
             # eco_result try bloğu içinde atanamamışsa bağımsız hesapla
             if eco_result is None:
                 try:
@@ -775,7 +775,7 @@ async def generate_pdf(data: dict = Body(...)):
                 'version': revision_in.get('version', '1.0'),
                 'notes':   revision_in.get('notes', 'İlk yayın'),
             },
-            'ate_mix_details': data.get('ate_mix_details', {}),
+            'ate_mix_details': {**data.get('ate_mix_details', {}), **_be_ate_details},
             'h314_neutralization_removed': bool(data.get('h314_neutralization_removed', False)),
             'clp_note_overrides': data.get('clp_note_overrides', {}),
             # Python PPE motoru sonucu (ISO 27001 uyumu — sunucu tarafı)

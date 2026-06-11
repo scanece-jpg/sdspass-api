@@ -688,11 +688,13 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> list:
     classify_mixture_clp Acute Tox. sınıfını atladığı için bu fonksiyon ayrı çağrılır.
     Component objesindeki 'ate' ve 'hazards' alanlarını kullanır.
     form: ürün fiziksel formu ('liquid','solution',...) — sıvı ise toz/sis rotası atlanır.
-    Döndürür: [{'h_code','h_class','reason','cutoff_used'}] — baskınlık uygulanmış
+    Döndürür: ([{'h_code','h_class','reason','cutoff_used'}], ate_b11_dict) — baskınlık uygulanmış
     """
     ate_routes = list(ATE_DEFAULTS.keys())
     ate_sum = {r: 0.0 for r in ate_routes}
+    ate_comps: dict = {r: [] for r in ate_routes}
     unknown_conc = 0.0
+    stmt_needed = False
 
     for c in components:
         conc = float(c.get('concMax') or c.get('conc') or c.get('concentration') or 0)
@@ -702,6 +704,8 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> list:
 
         if c.get('ate_unknown', False):
             unknown_conc += conc
+            if conc >= 1.0:
+                stmt_needed = True
             continue
 
         hazards = c.get('hazards') or []
@@ -717,6 +721,8 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> list:
                     ate_sum[route] += conc_frac / 5000.0
             else:
                 unknown_conc += conc
+                if conc >= 1.0:
+                    stmt_needed = True
             continue
 
         # Frontend ate alanı: {oral, dermal, inhal} — inhal → inhalation normalize et
@@ -766,14 +772,27 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> list:
                 ate_val = _get_ate_value(combined_ate, route, hc)
                 if ate_val and ate_val > 0:
                     ate_sum[route] += conc_frac / ate_val
+                    _cn = c.get('name_tr', '') or c.get('name', '') or str(c.get('cas', ''))
+                    if not any(x.get('name') == _cn for x in ate_comps[route]):
+                        ate_comps[route].append({'name': _cn, 'conc': conc, 'code': h_code_raw, 'ate': ate_val})
 
     _route_labels = {
         'oral': 'oral', 'dermal': 'dermal',
         'inhalation': 'inhalasyon', 'inhalation_vapour': 'inhalasyon (buhar)',
         'inhalation_dust': 'inhalasyon (toz)',
     }
+    _ROUTE_TO_B11 = {
+        'oral': 'oral', 'dermal': 'dermal',
+        'inhalation': 'inhal', 'inhalation_vapour': 'inhal', 'inhalation_dust': 'inhal',
+    }
+    _CLASSIFY_B11 = {
+        'oral':   [(5,'H300'),(50,'H300'),(300,'H301'),(2000,'H302')],
+        'dermal': [(50,'H310'),(200,'H310'),(1000,'H311'),(2000,'H312')],
+        'inhal':  [(0.5,'H330'),(2.0,'H330'),(10,'H331'),(20,'H332')],
+    }
     results = []
     seen_h: set = set()
+    ate_b11: dict = {}
     for route, total in ate_sum.items():
         if total <= 0:
             continue
@@ -795,6 +814,23 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> list:
                         'cutoff_used': f'ATEmix={mix_ate:.1f}',
                     })
                 break
+        # B11 ATEmix detayı — B2.1 ile senkron (sunucu tarafı, DB ATE kullanır)
+        b11_key = _ROUTE_TO_B11.get(route, 'inhal')
+        mix_ate_r = round(mix_ate, 1)
+        if b11_key not in ate_b11 or mix_ate_r < ate_b11[b11_key]['ateMix']:
+            result_code_b11 = None
+            for threshold_b11, hcode_b11 in _CLASSIFY_B11.get(b11_key, []):
+                if mix_ate_r <= threshold_b11:
+                    result_code_b11 = hcode_b11
+                    break
+            ate_b11[b11_key] = {
+                'ateMix':          mix_ate_r,
+                'resultCode':      result_code_b11,
+                'unknownPct':      round(unknown_conc, 1),
+                'revisedFormula':  unknown_conc > 10.0,
+                'statementNeeded': stmt_needed,
+                'components':      ate_comps.get(route, []),
+            }
 
     # Baskınlık: H300>H301>H302, H310>H311>H312, H330>H331>H332
     _h_set = {e['h_code'] for e in results}
@@ -804,7 +840,7 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> list:
                          ('H330', ['H331', 'H332']), ('H331', ['H332'])]:
         if _dom in _h_set:
             _dominated.update(_subs)
-    return [e for e in results if e['h_code'] not in _dominated]
+    return [e for e in results if e['h_code'] not in _dominated], ate_b11
 
 
 async def calculate_clp(db: AsyncSession, components: List[Any], form: str = '') -> Dict:

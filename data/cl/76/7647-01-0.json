@@ -11,16 +11,12 @@
   "classification": {
     "hazards": [
       {
-        "class": "Press. Gas",
+        "class": "Acute Tox. 3",
         "h_code": "H331"
       },
       {
-        "class": "Acute Tox. 3",
-        "h_code": "H314"
-      },
-      {
         "class": "Skin Corr. 1A",
-        "h_code": ""
+        "h_code": "H314"
       }
     ],
     "m_factors": {},
@@ -29,7 +25,6 @@
   "labelling": {
     "signal": "Danger",
     "pictograms": [
-      "GHS04",
       "GHS06",
       "GHS05"
     ],

@@ -1312,6 +1312,13 @@ async def sds_calculate(body: dict = Body(...)):
         # ── 5. Ekoloji ────────────────────────────────────────────────────────
         eco_result = eco_calculate(comps)
 
+        # ── 5b. ATE sağlık tehlikeleri — classify_mixture_clp Acute Tox. atlar ─
+        from app.services.clp_service import calculate_ate_health_h_codes as _calc_ate
+        try:
+            _ate_h_list, _ate_b11 = _calc_ate(comps, form=form)
+        except Exception:
+            _ate_h_list, _ate_b11 = [], {}
+
         # ── 6. Taşımacılık — ADR 2023 / IMDG / IATA ──────────────────────────
         # Fiziksel motordaki H22x/H228 kodlarını CLP'ye ilave et
         _phys_h_transport = [
@@ -1351,6 +1358,12 @@ async def sds_calculate(body: dict = Body(...)):
         # Ekoloji
         for h in eco_result.get('h_codes', []):
             all_h.add(h)
+
+        # ATE sağlık tehlikeleri (Acute Tox.) — baskınlık uygulanmış
+        _ACUTE_TOX_H_CALC = {'H300','H301','H302','H310','H311','H312','H330','H331','H332'}
+        all_h = {h for h in all_h if h not in _ACUTE_TOX_H_CALC}
+        for _ae in _ate_h_list:
+            all_h.add(_ae['h_code'])
 
         all_h_list = sorted(all_h)
 
@@ -1423,6 +1436,18 @@ async def sds_calculate(body: dict = Body(...)):
                     'reason':     aq.get('formula','Sucul akut'),
                     'cutoff_used':'—',
                 })
+
+        # ── ATE sağlık tehlikeleri — clp_passed'a ekle ───────────────────────
+        _ate_hset_calc = {e['h_code'] for e in _ate_h_list}
+        clp_passed = [e for e in clp_passed if e.get('h_code') not in _ate_hset_calc]
+        for _ae in _ate_h_list:
+            seen.add(_ae['h_code'])
+            clp_passed.append({
+                'h_code':     _ae['h_code'],
+                'h_class':    _ae['h_class'],
+                'reason':     _ae['reason'],
+                'cutoff_used':_ae['cutoff_used'],
+            })
 
         # ── H314 → H318 birlikteliği (CLP §3.3.1.4) ──────────────────────────
         if 'H314' in all_h:

@@ -3940,18 +3940,21 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
         };
       })(),
       components: comps.map(c => ({
-        cas:      c.cas,
-        name:     c.name,
-        name_tr:  c.name_tr || '',
-        conc:     c.conc,
-        conc_str: c.concStr || '',   // kullanıcının girdiği orijinal metin (ör: "25-50")
-        conc_min: c.concMin || 0,
-        conc_max: c.concMax || c.conc,
-        ec_no:    c.ec || '',
-        reach_no: c.reach || '',
-        hazards:  c.hazards || [],
-        scl:      c.scl || {},
-        m_factors: c.m_factors || {},  // M-faktörler — sucul eko hesabı için zorunlu (H410/H411)
+        cas:         c.cas,
+        name:        c.name,
+        name_tr:     c.name_tr || '',
+        conc:        c.conc,
+        concMax:     c.concMax || c.conc,
+        conc_str:    c.concStr || '',
+        conc_min:    c.concMin || 0,
+        conc_max:    c.concMax || c.conc,
+        ec_no:       c.ec || '',
+        reach_no:    c.reach || '',
+        hazards:     c.hazards || [],
+        scl:         c.scl || {},
+        m_factors:   c.m_factors || {},
+        ate:         c.ate || null,
+        ate_unknown: c.ate_unknown || false,
       })),
       h_codes:      allH,
       all_h_codes:  [...new Set([...allH, ...(clp?.dominated || [])])], // SDS 2.1 tam sınıflandırma

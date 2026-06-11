@@ -192,7 +192,7 @@ async def generate_pdf(data: dict = Body(...)):
             # ham string geçirilir; clp_service _parse_ph_range ile lo/hi ayırır
             _ph_raw = phys_in.get('ph') or None
             _clp_res  = _clp_calc(components, mixture_ph=_ph_raw)
-            _be_ate_h = _ate_h_calc(components)   # classify_mixture_clp Acute Tox. atlar
+            _be_ate_h = _ate_h_calc(components, form=_form_val)   # classify_mixture_clp Acute Tox. atlar
             _phys_res = _phys_calc(components, form=_form_val, user_fp=_user_fp)
             _stot_res = _stot_calc(components)
             _eco_res2 = _eco_calc2(components)

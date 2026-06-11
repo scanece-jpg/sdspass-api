@@ -639,8 +639,12 @@ def _get_ate_value(ate_data: dict, route: str, h_class: str) -> Optional[float]:
     if ate_data.get(route):
         return ate_data[route]
     # İnhalasyon alt türleri birbirinin yerine
-    if route in ('inhalation_dust', 'inhalation_vapour') and ate_data.get('inhalation'):
-        return ate_data['inhalation']
+    # inhalation_mgl = mg/L/4h ölçümü — buhar ve jenerik rota için kullan (toz değil)
+    if route in ('inhalation_dust', 'inhalation_vapour', 'inhalation'):
+        if ate_data.get('inhalation'):
+            return ate_data['inhalation']
+        if route != 'inhalation_dust' and ate_data.get('inhalation_mgl'):
+            return ate_data['inhalation_mgl']
     # Kategori varsayılanı
     return ATE_DEFAULTS.get(route, {}).get(h_class)
 
@@ -668,11 +672,22 @@ def _is_note1_applicable(cas: str, h_class: str, form: Optional[str]) -> bool:
     return True
 
 
-def calculate_ate_health_h_codes(components: list) -> list:
+_LIQUID_FORMS = frozenset({
+    'liquid', 'solution', 'sıvı', 'çözelti', 'aqueous', 'slurry', 'emulsion',
+    'concentrate', 'konsantre', 'suspension', 'süspansiyon',
+})
+
+def _is_liquid_form(form: str) -> bool:
+    """Ürün formu sıvı/çözelti ise True döner — inhalasyon toz rotasını atlamak için."""
+    return bool(form) and form.lower() in _LIQUID_FORMS
+
+
+def calculate_ate_health_h_codes(components: list, form: str = '') -> list:
     """
     Sync ATE sağlık tehlike hesabı — PDF endpoint için (DB gerekmez).
     classify_mixture_clp Acute Tox. sınıfını atladığı için bu fonksiyon ayrı çağrılır.
     Component objesindeki 'ate' ve 'hazards' alanlarını kullanır.
+    form: ürün fiziksel formu ('liquid','solution',...) — sıvı ise toz/sis rotası atlanır.
     Döndürür: [{'h_code','h_class','reason','cutoff_used'}] — baskınlık uygulanmış
     """
     ate_routes = list(ATE_DEFAULTS.keys())
@@ -721,6 +736,9 @@ def calculate_ate_health_h_codes(components: list) -> list:
                     routes_to_process = ['inhalation_vapour', 'inhalation']
                 elif combined_ate.get('inhalation_dust'):
                     routes_to_process = ['inhalation_dust', 'inhalation']
+                elif combined_ate.get('inhalation_mgl') or _is_liquid_form(form):
+                    # inhalation_mgl = mg/L ölçümü (buhar eşdeğeri) veya sıvı form → toz rotası yok
+                    routes_to_process = ['inhalation_vapour', 'inhalation']
                 else:
                     routes_to_process = ['inhalation_vapour', 'inhalation_dust', 'inhalation']
             else:
@@ -771,10 +789,11 @@ def calculate_ate_health_h_codes(components: list) -> list:
     return [e for e in results if e['h_code'] not in _dominated]
 
 
-async def calculate_clp(db: AsyncSession, components: List[Any]) -> Dict:
+async def calculate_clp(db: AsyncSession, components: List[Any], form: str = '') -> Dict:
     """
     Ana CLP hesaplama fonksiyonu — v3
     CLP Regulation (EC) No 1272/2008, Annex I'e göre
+    form: ürün fiziksel formu — sıvı ise inhalasyon toz rotası atlanır.
     """
     results_passed = []
     results_failed = []
@@ -883,6 +902,9 @@ async def calculate_clp(db: AsyncSession, components: List[Any]) -> Dict:
                     routes_to_process = ['inhalation_vapour', 'inhalation']
                 elif combined_ate.get('inhalation_dust'):
                     routes_to_process = ['inhalation_dust', 'inhalation']
+                elif combined_ate.get('inhalation_mgl') or _is_liquid_form(form):
+                    # inhalation_mgl = mg/L ölçümü (buhar eşdeğeri) veya sıvı form → toz rotası yok
+                    routes_to_process = ['inhalation_vapour', 'inhalation']
                 else:
                     routes_to_process = ['inhalation_vapour', 'inhalation_dust', 'inhalation']
             else:

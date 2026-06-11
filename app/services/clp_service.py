@@ -719,9 +719,27 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> list:
                 unknown_conc += conc
             continue
 
-        base_ate = c.get('ate') or {}
+        # Frontend ate alanı: {oral, dermal, inhal} — inhal → inhalation normalize et
+        _fe_ate = c.get('ate') or {}
+        if _fe_ate.get('inhal') is not None:
+            _fe_ate = {**_fe_ate, 'inhalation': _fe_ate['inhal']}
+        base_ate = _fe_ate
+
         user_ate = c.get('user_ate') or {}
         combined_ate = {**base_ate, **user_ate}
+
+        # DB fallback: inhalasyon ATE verisi yoksa substance DB'den çek
+        _ATE_KEYS = ('inhalation', 'inhalation_vapour', 'inhalation_dust', 'inhalation_mgl')
+        if not any(combined_ate.get(k) for k in _ATE_KEYS):
+            _cas = str(c.get('cas') or '').strip()
+            if _cas:
+                try:
+                    from app.services.substance_lookup import lookup_substance as _sl
+                    _sub = _sl(_cas)
+                    if _sub and _sub.get('ate'):
+                        combined_ate = {**_sub['ate'], **combined_ate}
+                except Exception:
+                    pass
 
         for haz in hazards:
             hc = (haz.get('h_class') or '').replace('*', '').strip()

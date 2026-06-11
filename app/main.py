@@ -162,6 +162,7 @@ async def generate_pdf(data: dict = Body(...)):
         _eco_confidence = 'low'        # hata durumu için güvenli fallback
         try:
             from app.services.clp_service       import classify_mixture_clp as _clp_calc
+            from app.services.clp_service       import calculate_ate_health_h_codes as _ate_h_calc
             from app.services.physical_engine   import calculate as _phys_calc
             from app.services.stot_engine       import calculate as _stot_calc
             from app.services.eco_engine        import calculate as _eco_calc2
@@ -191,6 +192,7 @@ async def generate_pdf(data: dict = Body(...)):
             # ham string geçirilir; clp_service _parse_ph_range ile lo/hi ayırır
             _ph_raw = phys_in.get('ph') or None
             _clp_res  = _clp_calc(components, mixture_ph=_ph_raw)
+            _be_ate_h = _ate_h_calc(components)   # classify_mixture_clp Acute Tox. atlar
             _phys_res = _phys_calc(components, form=_form_val, user_fp=_user_fp)
             _stot_res = _stot_calc(components)
             _eco_res2 = _eco_calc2(components)
@@ -425,6 +427,7 @@ async def generate_pdf(data: dict = Body(...)):
             py_clp_passed = data.get('clp_passed', [])
             py_transport  = data.get('transport', {})
             py_ppe        = data.get('ppe', {})
+            _be_ate_h     = []   # motor hatası — ATE sağlık kodları hesaplanamadı
             # eco_result try bloğu içinde atanamamışsa bağımsız hesapla
             if eco_result is None:
                 try:
@@ -542,7 +545,24 @@ async def generate_pdf(data: dict = Body(...)):
             if 'H318' in set(h_codes):
                 h_codes = [h for h in h_codes if h != 'H318']
 
-        # ── 6. Transport env_mark — IMDG §2.10.3 bileşen bazlı akut M-faktör testi ─
+        # ── 6. Sağlık tehlikeleri (ATE) — classify_mixture_clp Acute Tox. atlar ─────
+        # Tam ATE async DB fonksiyonunda yapılır; bu sync sonuç h_codes'ta eksikleri tamamlar.
+        _ACUTE_TOX_H = {'H300','H301','H302','H310','H311','H312','H330','H331','H332'}
+        if _be_ate_h:
+            _be_ate_hcodes = [e['h_code'] for e in _be_ate_h]
+            h_codes     = [h for h in h_codes     if h not in _ACUTE_TOX_H] + _be_ate_hcodes
+            all_h_codes = [h for h in all_h_codes if h not in _ACUTE_TOX_H] + _be_ate_hcodes
+            _passed_hset = {e['h_code'] for e in py_clp_passed}
+            for _ate_e in _be_ate_h:
+                if _ate_e['h_code'] not in _passed_hset:
+                    py_clp_passed = list(py_clp_passed) + [{
+                        'h_code':      _ate_e['h_code'],
+                        'h_class':     _ate_e['h_class'],
+                        'reason':      _ate_e['reason'],
+                        'cutoff_used': _ate_e['cutoff_used'],
+                    }]
+
+        # ── 7. Transport env_mark — IMDG §2.10.3 bileşen bazlı akut M-faktör testi ─
         # CLP ekoloji motoru kronik M-faktör kullanır (H412 çıkabilir ama Marine Pollutant değil).
         # IMDG §2.10.3: Σ(Ci × M_akut) ≥ 0.1 (H400/H410) veya Σ(Ci) ≥ 1.0 (H411) → Marine Pollutant.
         if py_transport and not py_transport.get('not_regulated'):

@@ -668,6 +668,109 @@ def _is_note1_applicable(cas: str, h_class: str, form: Optional[str]) -> bool:
     return True
 
 
+def calculate_ate_health_h_codes(components: list) -> list:
+    """
+    Sync ATE sağlık tehlike hesabı — PDF endpoint için (DB gerekmez).
+    classify_mixture_clp Acute Tox. sınıfını atladığı için bu fonksiyon ayrı çağrılır.
+    Component objesindeki 'ate' ve 'hazards' alanlarını kullanır.
+    Döndürür: [{'h_code','h_class','reason','cutoff_used'}] — baskınlık uygulanmış
+    """
+    ate_routes = list(ATE_DEFAULTS.keys())
+    ate_sum = {r: 0.0 for r in ate_routes}
+    unknown_conc = 0.0
+
+    for c in components:
+        conc = float(c.get('concMax') or c.get('conc') or c.get('concentration') or 0)
+        if conc <= 0:
+            continue
+        conc_frac = conc / 100.0
+
+        if c.get('ate_unknown', False):
+            unknown_conc += conc
+            continue
+
+        hazards = c.get('hazards') or []
+        has_acute_tox = any(
+            (h.get('h_class') or '').replace('*', '').strip().startswith('Acute Tox.')
+            for h in hazards
+        )
+
+        if not has_acute_tox:
+            source_priority = c.get('source_priority', 4)
+            if source_priority <= 2:
+                for route in ate_routes:
+                    ate_sum[route] += conc_frac / 5000.0
+            else:
+                unknown_conc += conc
+            continue
+
+        base_ate = c.get('ate') or {}
+        user_ate = c.get('user_ate') or {}
+        combined_ate = {**base_ate, **user_ate}
+
+        for haz in hazards:
+            hc = (haz.get('h_class') or '').replace('*', '').strip()
+            if not hc.startswith('Acute Tox.'):
+                continue
+            h_code_raw = (haz.get('h_code') or '').split('(')[0].split()[0].strip()
+            base_route = _H_CODE_TO_ROUTE.get(h_code_raw)
+            if not base_route:
+                routes_to_process = ate_routes
+            elif base_route == 'inhalation':
+                if combined_ate.get('inhalation_vapour'):
+                    routes_to_process = ['inhalation_vapour', 'inhalation']
+                elif combined_ate.get('inhalation_dust'):
+                    routes_to_process = ['inhalation_dust', 'inhalation']
+                else:
+                    routes_to_process = ['inhalation_vapour', 'inhalation_dust', 'inhalation']
+            else:
+                routes_to_process = [base_route]
+
+            for route in routes_to_process:
+                ate_val = _get_ate_value(combined_ate, route, hc)
+                if ate_val and ate_val > 0:
+                    ate_sum[route] += conc_frac / ate_val
+
+    _route_labels = {
+        'oral': 'oral', 'dermal': 'dermal',
+        'inhalation': 'inhalasyon', 'inhalation_vapour': 'inhalasyon (buhar)',
+        'inhalation_dust': 'inhalasyon (toz)',
+    }
+    results = []
+    seen_h: set = set()
+    for route, total in ate_sum.items():
+        if total <= 0:
+            continue
+        mix_ate = ((100.0 - unknown_conc) / 100.0 / total
+                   if unknown_conc > 10.0 else 1.0 / total)
+        thresholds = ATE_THRESHOLDS.get(route, {})
+        for n in [1, 2, 3, 4]:
+            if mix_ate <= thresholds.get(n, float('inf')):
+                hcode = ATE_HCODES[route][n]
+                if hcode not in seen_h:
+                    seen_h.add(hcode)
+                    results.append({
+                        'h_code':      hcode,
+                        'h_class':     f'Acute Tox. {n} ({_route_labels.get(route, route)})',
+                        'reason':      (
+                            f'Karışım ATE={mix_ate:.1f} ≤ {thresholds[n]} (CLP Tablo 3.1.1 Kat{n})'
+                            + (f' [Revize: %{unknown_conc:.1f} bilinmiyor]' if unknown_conc > 10.0 else '')
+                        ),
+                        'cutoff_used': f'ATEmix={mix_ate:.1f}',
+                    })
+                break
+
+    # Baskınlık: H300>H301>H302, H310>H311>H312, H330>H331>H332
+    _h_set = {e['h_code'] for e in results}
+    _dominated: set = set()
+    for _dom, _subs in [('H300', ['H301', 'H302']), ('H301', ['H302']),
+                         ('H310', ['H311', 'H312']), ('H311', ['H312']),
+                         ('H330', ['H331', 'H332']), ('H331', ['H332'])]:
+        if _dom in _h_set:
+            _dominated.update(_subs)
+    return [e for e in results if e['h_code'] not in _dominated]
+
+
 async def calculate_clp(db: AsyncSession, components: List[Any]) -> Dict:
     """
     Ana CLP hesaplama fonksiyonu — v3

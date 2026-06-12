@@ -160,9 +160,23 @@ async def generate_pdf(data: dict = Body(...)):
         # ISO 27001: tüm sınıflandırma hesapları sunucu tarafında yapılır.
         py_ppe = data.get('ppe', {})   # fallback değeri (hata durumu için)
         _eco_confidence = 'low'        # hata durumu için güvenli fallback
+
+        # ATE sağlık tehlikeleri — motor try'ından ÖNCE hesapla, böylece
+        # motor hatası _be_ate_h'ı sıfırlayamaz (eski satır 434 sorunu giderildi)
+        try:
+            from app.services.clp_service import calculate_ate_health_h_codes as _ate_h_calc_pre
+            _be_ate_h, _be_ate_details = _ate_h_calc_pre(
+                components, form=product.get('form', 'liquid')
+            )
+            print(f'[ATE DEBUG] form={product.get("form","liquid")!r} | _be_ate_h={_be_ate_h} | comp_count={len(components)}')
+            for _dc in components:
+                print(f'  comp cas={_dc.get("cas")} conc={_dc.get("concMax") or _dc.get("conc")} ate_unknown={_dc.get("ate_unknown")} ate={_dc.get("ate")} hazards={[h.get("h_code") for h in (_dc.get("hazards") or [])]}')
+        except Exception as _ate_pre_err:
+            print(f'[ATE PRE ERROR] {_ate_pre_err}')
+            _be_ate_h, _be_ate_details = [], {}
+
         try:
             from app.services.clp_service       import classify_mixture_clp as _clp_calc
-            from app.services.clp_service       import calculate_ate_health_h_codes as _ate_h_calc
             from app.services.physical_engine   import calculate as _phys_calc
             from app.services.stot_engine       import calculate as _stot_calc
             from app.services.eco_engine        import calculate as _eco_calc2
@@ -192,11 +206,6 @@ async def generate_pdf(data: dict = Body(...)):
             # ham string geçirilir; clp_service _parse_ph_range ile lo/hi ayırır
             _ph_raw = phys_in.get('ph') or None
             _clp_res  = _clp_calc(components, mixture_ph=_ph_raw)
-            _be_ate_h, _be_ate_details = _ate_h_calc(components, form=_form_val)   # classify_mixture_clp Acute Tox. atlar
-            print(f'[ATE DEBUG] form={_form_val!r} | _be_ate_h={_be_ate_h} | comp_count={len(components)}')
-            for _dc in components:
-                print(f'  comp cas={_dc.get("cas")} conc={_dc.get("concMax") or _dc.get("conc")} ate_unknown={_dc.get("ate_unknown")} ate={_dc.get("ate")} hazards={[h.get("h_code") for h in (_dc.get("hazards") or [])]}')
-
             _phys_res = _phys_calc(components, form=_form_val, user_fp=_user_fp)
             _stot_res = _stot_calc(components)
             _eco_res2 = _eco_calc2(components)
@@ -431,7 +440,7 @@ async def generate_pdf(data: dict = Body(...)):
             py_clp_passed = data.get('clp_passed', [])
             py_transport  = data.get('transport', {})
             py_ppe        = data.get('ppe', {})
-            _be_ate_h, _be_ate_details = [], {}   # motor hatası — ATE sağlık kodları hesaplanamadı
+            # _be_ate_h sıfırlanmıyor — motor try'ından önce hesaplandı, korunuyor
             # eco_result try bloğu içinde atanamamışsa bağımsız hesapla
             if eco_result is None:
                 try:

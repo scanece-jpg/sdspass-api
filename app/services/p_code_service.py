@@ -23,7 +23,7 @@ Veri Kaynağı: CLP Annex IV (2023 güncellemeli)
 
 from app.services.codes_i18n import get_p
 
-from typing import List, Dict, Set, Optional
+from typing import List, Dict, Set, Tuple, Optional
 
 
 # ─── P KODU METİNLERİ (Türkçe) ───────────────────────────────────────────────
@@ -229,7 +229,7 @@ H_TO_P: Dict[str, List[str]] = {
     'H311': ['P280','P302+P352','P312','P321','P361','P405','P501'],
     'H312': ['P280','P302+P352','P312','P321','P501'],
     'H330': ['P260','P271','P284','P304+P340','P310','P320','P403+P233','P405','P501'],
-    'H331': ['P261','P271','P304+P340','P311','P321','P403+P233','P405','P501'],
+    'H331': ['P260','P271','P304+P340','P311','P321','P403+P233','P405','P501'],
     'H332': ['P261','P271','P304+P340','P312','P501'],
 
     # ── Mutajenisite/Karsinojenite/Üreme ─────────────────────────────────────
@@ -314,19 +314,31 @@ H_TO_P: Dict[str, List[str]] = {
 
 
 # ─── P KODU ÇAKIŞMA KURALLARI ────────────────────────────────────────────────
-# Daha güçlü P kodu varsa zayıfı çıkar
-P_SUPERSEDES: Dict[str, List[str]] = {
-    # P310 (derhal ara) daha güçlü — P311/P312 ve P301+P312 kombine kodunu da ezer
-    # H314+H302 kombinasyonunda: P310 gelir (H314'ten), P301+P312 silinir (H302'den)
-    # Sonuç: P301+P330+P331 + P310 kalır → korozif yutma için doğru
-    'P310':           ['P311', 'P312', 'P301+P312'],
-    'P301+P310':      ['P301+P312'],
-    'P304+P340':      ['P304+P341'],    # P340 daha kapsamlı
-    'P305+P351+P338': [],
-    'P260':           ['P261'],         # P260 (solunum) daha güçlü
-    'P271':           ['P261'],
-    # P403+P233 varsa ayrı P233 gereksiz
-    'P403+P233':      ['P233'],
+# (güçlü_kod, kaynak_h) → bastırılan_kodlar
+# '__any__': kaynak bağımsız — her zaman uygula.
+# Kaynak-spesifik kurallar __any__ üstüne additif eklenir.
+# Mimari not: __any__ kuralının bastırdığı bir kodu kaynak-spesifik kural
+# "koruyamaz" — şu tabloda bu senaryo yok; ileride gerekirse allow-list eklenmeli.
+CONTEXT_SUPERSEDES: Dict[Tuple[str, str], List[str]] = {
+    # ── P310 aciliyet hiyerarşisi ─────────────────────────────────────────────
+    # __any__: her kaynaktan P310, rota-bağımsız zayıf çağrıları ezer
+    ('P310', '__any__'): ['P311', 'P312'],
+    # H314 korozif: yutulunca da tehlikeli → oral P301+P312'yi de ezer
+    # H310 (dermal) / H318 (göz) / H330 (inhalasyon): oral rota kapsanmıyor → P301+P312 korunur
+    ('P310', 'H314'):    ['P301+P312'],
+
+    # ── P301+P310: oral acil "derhal ara" ─────────────────────────────────────
+    ('P301+P310', '__any__'): ['P301+P312'],
+
+    # ── Kaynak bağımsız kurallar ───────────────────────────────────────────────
+    ('P260',           '__any__'): ['P261'],
+    ('P271',           '__any__'): ['P261'],
+    ('P304+P340',      '__any__'): ['P304+P341'],
+    ('P305+P351+P338', '__any__'): ['P337+P313', 'P338', 'P351'],
+    ('P303+P361+P353', '__any__'): ['P302+P352', 'P361', 'P353'],
+    ('P308+P311',      '__any__'): ['P308+P313'],
+    ('P333+P313',      '__any__'): ['P332+P313'],
+    ('P403+P233',      '__any__'): ['P233'],
 }
 
 
@@ -354,14 +366,14 @@ def assign_p_codes(
           'mandatory': ['P101', 'P102'],
         }
     """
-    assigned: Set[str] = set()
+    # Kaynak takibi: her P kodunun hangi H'lardan üretildiği
+    p_to_sources: Dict[str, Set[str]] = {}
 
     # Her H kodu için P kodlarını topla
     for h in h_codes:
         h_clean = h.replace('*', '').replace(' ', '').strip()
-        p_list = H_TO_P.get(h_clean, [])
-        for p in p_list:
-            assigned.add(p)
+        for p in H_TO_P.get(h_clean, []):
+            p_to_sources.setdefault(p, set()).add(h_clean)
 
     # Zorunlu P kodları — çakışma sonrası eklenecek
     if usage == 'consumer':
@@ -371,12 +383,15 @@ def assign_p_codes(
     else:  # industrial
         mandatory = []
 
-    # Çakışma kontrolü — güçlü kod varsa zayıfı çıkar
-    final = set(assigned)
-    for strong, weaks in P_SUPERSEDES.items():
-        if strong in final:
-            for weak in weaks:
-                final.discard(weak)
+    # Bağlama duyarlı bastırma — __any__ önce, sonra kaynak-spesifik (additive)
+    suppressed: Set[str] = set()
+    for (strong_code, source_h), weaks in CONTEXT_SUPERSEDES.items():
+        if strong_code not in p_to_sources:
+            continue
+        if source_h == '__any__' or source_h in p_to_sources[strong_code]:
+            suppressed.update(weaks)
+
+    final = set(p_to_sources.keys()) - suppressed
 
     # P103 consumer/professional için usage mantığında zaten eklendi
 

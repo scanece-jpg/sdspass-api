@@ -510,9 +510,12 @@ H_BASED_LABEL_FORCED: Dict[str, List[str]] = {
     'H301': ['P405'],
     'H310': ['P280', 'P405'],
     'H311': ['P280'],
-    # Akut inhalasyon — solunum koruma + havalandırma zorunlu (CLP Ek-IV)
-    'H330': ['P260', 'P271', 'P405'],
-    'H331': ['P261', 'P271'],
+    # Akut inhalasyon — solunum koruma + havalandırma + müdahale zorunlu (CLP Ek-IV Tablo 6.1)
+    # H330 (Kat.1-2): P304+P340 CLP Tablo 6.1 zorunlu response ifadesi
+    # H331 (Kat.3): P304+P340 zorunlu; P260 (P261'den güçlü — Kat.3 için); P271 ventilasyon
+    # H332 (Kat.4): P304+P340 zorunlu değil (Kat.4 hafif — P261/P271 yeterli, assign_p_codes üretir)
+    'H330': ['P260', 'P271', 'P304+P340', 'P405'],
+    'H331': ['P260', 'P271', 'P304+P340'],
     # ── STOT ──────────────────────────────────────────────────────────────────
     'H370': ['P405'],
     'H371': ['P308+P313'],

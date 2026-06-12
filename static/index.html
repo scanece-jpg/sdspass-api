@@ -3718,6 +3718,7 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
     // Sayısal alanlar (DOM'dan gelen kullanıcı değerleri motoru ezer)
     const _pairs = [
       ['tf_density','density'], ['tf_bp','boiling_point'],
+      ['tf_fp',    'flash_point'],
       ['tf_visc','viscosity'],  ['tf_sol','solubility'],   ['tf_mp','melting_point'],
       ['tf_ait','auto_ignition'],['tf_decomp','decomposition_temp'],
       ['tf_logkow','log_kow'],  ['tf_odor_thresh','odour_threshold'],

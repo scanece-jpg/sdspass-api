@@ -20,7 +20,7 @@
       },
       {
         "class": "STOT SE 1",
-        "h_code": "H370"
+        "h_code": "H370 (respiratory tract)"
       },
       {
         "class": "Skin Corr. 1B",
@@ -41,12 +41,12 @@
     "h_codes": [
       "H280",
       "H331",
-      "H370",
+      "H370 (respiratory tract)",
       "H314"
     ],
     "suppl_h": []
   },
   "ate": {
-    "inhalation_ppm": 1000.0
+    "inhalation_ppm": 1000
   }
 }

@@ -18,7 +18,7 @@
       },
       {
         "class": "STOT SE 1",
-        "h_code": "H370"
+        "h_code": "H370 (nervous system)"
       },
       {
         "class": "Aquatic Acute 1",
@@ -42,7 +42,7 @@
     "h_codes": [
       "H301",
       "H312",
-      "H370",
+      "H370 (nervous system)",
       "H400",
       "H410"
     ],

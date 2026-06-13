@@ -10,11 +10,11 @@
     "hazards": [
       {
         "class": "STOT SE 1",
-        "h_code": "H370(lung)"
+        "h_code": "H370 (lungs)"
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373(blood_system)"
+        "h_code": "H373 (blood)"
       },
       {
         "class": "Skin Sens. 1",
@@ -53,9 +53,9 @@
     "h_codes": [
       "H317",
       "H370",
-      "H370(lung)",
+      "H370 (lungs)",
       "H373",
-      "H373(blood_system)",
+      "H373 (blood)",
       "H400",
       "H410"
     ],

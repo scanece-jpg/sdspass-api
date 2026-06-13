@@ -26,11 +26,11 @@
       },
       {
         "class": "STOT SE 1",
-        "h_code": "H370(upper_respiratory_tract)"
+        "h_code": "H370 (upper respiratory tract)"
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H373(blood_system)"
+        "h_code": "H373 (blood)"
       },
       {
         "class": "Skin Irrit. 2",
@@ -72,14 +72,14 @@
       "H336",
       "H350",
       "H370",
-      "H370(upper_respiratory_tract)",
+      "H370 (upper respiratory tract)",
       "H373",
-      "H373(blood_system)"
+      "H373 (blood)"
     ],
     "suppl_h": []
   },
   "ate": {
-    "oral": 100.0,
-    "dermal": 1100.0
+    "oral": 100,
+    "dermal": 1100
   }
 }

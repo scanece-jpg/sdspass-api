@@ -73,12 +73,13 @@ ORGAN_TR = {
     'heart':                    'kalp',
     'teeth':                    'diş',
     'upper respiratory tract':  'üst solunum yolu',
+    'nervous system, eyes':     'sinir sistemi ve gözler',
 }
 
 
 def normalize_organ(raw: str) -> str:
     """Organ adını normalize et — virgülle ayrılmış çoklu organları ayır"""
-    raw = raw.lower().strip()
+    raw = raw.lower().strip().replace('_', ' ')
     return ORGAN_ALIASES.get(raw, raw)
 
 

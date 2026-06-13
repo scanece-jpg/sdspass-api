@@ -10,7 +10,7 @@
     "hazards": [
       {
         "class": "STOT SE 1",
-        "h_code": "H370"
+        "h_code": "H370 (nervous system)"
       }
     ],
     "m_factors": {},
@@ -22,7 +22,7 @@
       "GHS08"
     ],
     "h_codes": [
-      "H370"
+      "H370 (nervous system)"
     ],
     "suppl_h": []
   }

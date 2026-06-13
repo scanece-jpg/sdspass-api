@@ -14,7 +14,7 @@
       },
       {
         "class": "STOT SE 1",
-        "h_code": "H370(nervous_system)"
+        "h_code": "H370 (nervous system)"
       },
       {
         "class": "Skin Irrit. 2",
@@ -55,12 +55,12 @@
       "H317",
       "H319",
       "H370",
-      "H370(nervous_system)",
+      "H370 (nervous system)",
       "H400"
     ],
     "suppl_h": []
   },
   "ate": {
-    "oral": 500.0
+    "oral": 500
   }
 }

@@ -424,14 +424,7 @@ async def generate_pdf(data: dict = Body(...)):
                 phys_h_codes=_phys_h_tr,
             )
 
-            # PPE — tüm H kodlarıyla (CLP + fiziksel + STOT + eko)
-            _all_h_pdf = (
-                list(_clp_res.get('h_codes', []))
-                + [r.get('h') or r.get('h_code') or '' for r in _phys_res.get('results', [])]
-                + _stot_res.get('h_codes', [])
-                + _eco_res2.get('h_codes', [])
-            )
-            py_ppe = _ppe_calc([h for h in _all_h_pdf if h], lang=lang)
+            pass  # PPE reconciliation sonrası hesaplanır (ATE H kodları dahil olsun)
 
         except Exception as _eng_err:
             import traceback as _tb
@@ -604,6 +597,13 @@ async def generate_pdf(data: dict = Body(...)):
         # ── eco_result fallback ───────────────────────────────────────────────────
         if eco_result is None:
             eco_result = {'sds_section_12': {}}
+
+        # PPE — reconciliation sonrası final h_codes ile hesapla
+        # ATE H kodları (H330/H331/H302 vb.) artık h_codes'ta → doğru KKD profili
+        try:
+            py_ppe = _ppe_calc([h for h in h_codes if h], lang=lang)
+        except Exception:
+            pass  # _ppe_calc tanımsızsa (try bloğu erken exception) fallback korunur
 
         # P kodlarını son h_codes + signal ile hesapla
         p_result = assign_p_codes(h_codes, signal, usage=usage)

@@ -421,9 +421,9 @@ def get_stot_stmt(h_code: str, lang: str, organ_en: str) -> str:
     if lang == 'TR':
         organ = ORGAN_TR.get(organ_en.lower(), organ_en)
         if h_code == 'H370':
-            return f'Tek maruziyetle {organ} hasar verir.'
+            return f'Organlara ({organ}) hasar verir.'
         elif h_code == 'H371':
-            return f'Tek maruziyetle {organ} hasar verebilir.'
+            return f'Organlara ({organ}) hasar verebilir.'
         elif h_code == 'H372':
             return f'Uzun süreli veya tekrarlanan maruziyetle {organ} hasar verir.'
         return f'Uzun süreli veya tekrarlanan maruziyetle {organ} hasar verebilir.'

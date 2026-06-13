@@ -361,7 +361,7 @@ H_STMTS_TR = {
     'H361':'Doğurganlığa veya doğmamış çocuğa zarar verebileceğinden şüphelenilmektedir.',
     'H370':'Organlara hasar verir.',
     'H371':'Organlara hasar verebilir.',
-    'H372':'Uzun süreli veya tekrarlanan maruziyetle organlara hasar verir.',
+    'H372':'Uzun süreli veya tekrarlı maruz kalma sonucu organlarda hasara yol açar.',
     'H373':'Uzun süreli veya tekrarlanan maruziyetle organlara hasar verebilir.',
     'H400':'Sucul organizmalar için çok toksiktir.',
     'H401':'Sucul organizmalar için toksiktir.',
@@ -425,8 +425,8 @@ def get_stot_stmt(h_code: str, lang: str, organ_en: str) -> str:
         elif h_code == 'H371':
             return f'Organlara ({organ}) hasar verebilir.'
         elif h_code == 'H372':
-            return f'Uzun süreli veya tekrarlanan maruziyetle {organ} hasar verir.'
-        return f'Uzun süreli veya tekrarlanan maruziyetle {organ} hasar verebilir.'
+            return f'Uzun süreli veya tekrarlı maruz kalma sonucu organlarda ({organ}) hasara yol açar.'
+        return f'Uzun süreli veya tekrarlanan maruziyetle organlarda ({organ}) hasar verebilir.'
     else:
         if h_code == 'H370':
             return f'Causes damage to {organ_en} following single exposure.'

@@ -172,7 +172,11 @@ Not: Kinematik viskozite > 20,5 mm²/s (40 °C) → H304 uygulanmaz.
 
 M-faktörü belirtilmemişse M = 1 (varsayılan).
 
-### Tablo 4.1.3 — Kronik Sucul Toksisite Karışım Kesme Değerleri
+### §4.1.3.5.4 — Kronik Sucul Toksisite: Kesme Değeri Yöntemi (Alternatif)
+
+> **Not:** Bu tablo CLP §4.1.3.5.4'teki basit kesme değeri yaklaşımını gösterir.
+> SDSPass bu yöntemi KULLANMAZ — §4.1.3.5.5 toplamsal yöntemini kullanır (aşağıya bakın).
+> İki yöntem CLP'de **alternatif** olarak tanımlanmıştır; birbirini geçersiz kılmaz.
 
 | Bileşen sınıfı | Karışım H410 (Chr.1) eşiği | Karışım H411 (Chr.2) eşiği | Karışım H412 (Chr.3) eşiği |
 |---|---|---|---|
@@ -181,6 +185,32 @@ M-faktörü belirtilmemişse M = 1 (varsayılan).
 | H412 (Aquatic Chr. 3) | — | — | Σ Ci ≥ %1,0 |
 | H413 (Aquatic Chr. 4) | — | — | — |
 | H400 (sadece Akut, BCF yok) | Σ(Ci × Mi_akut) ≥ %0,1 | Σ(Ci × Mi_akut) ≥ %1,0 | Σ(Ci × Mi_akut) ≥ %10 |
+
+---
+
+### §4.1.3.5.5 — Kronik Sucul Toksisite: Toplamsal Yöntem (SDSPass kullanır — tercih edilen)
+
+> Kaynak: CLP Ek-I §4.1.3.5.5, Tablo 4.1.2
+> Eşik: **%25** (tüm formüller için)
+> K1 = Σ(Ci × M_kronik) / 100 [H410 bileşenler]
+> K2 = Σ(Ci) / 100            [H411 bileşenler]
+> K3 = Σ(Ci) / 100            [H412 + H413 bileşenler]
+
+| Koşul | Karışım sınıfı |
+|---|---|
+| K1 × M ≥ %25 (eşd. K1 ≥ 0,25) | H410 (Kronik 1) |
+| 10×K1 + K2 ≥ %25 (eşd. ≥ 0,25) | H411 (Kronik 2) |
+| 100×K1 + 10×K2 + K3 ≥ %25 (eşd. ≥ 0,25) | H412 (Kronik 3) |
+| K1 + K2 + K3 ≥ %25 (eşd. ≥ 0,25) | H413 (Kronik 4) |
+
+**Örnek:** H411 bileşen %20 konsantrasyonda (K1=0, K2=0,20):
+- H411 kontrolü: 10×0 + 0,20 = 0,20 < 0,25 → H411 yok
+- H412 kontrolü: 100×0 + 10×0,20 + 0 = 2,00 ≥ 0,25 → **Karışım H412** ✓ (CLP uyumlu)
+
+**Audit notu:** Kesme değeri yönteminde %20 H411 bileşen → H411 görünür. Toplamsal yöntemde → H412 çıkar.
+Bu bir hata değil; iki meşru yöntemin farklı sonuç vermesidir (CLP §4.1.3.5.3).
+
+---
 
 **M-faktörü:** L(E)C50 değerine göre tablo (CLP §4.1.3.5.5):
 

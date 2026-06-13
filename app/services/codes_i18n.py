@@ -91,7 +91,7 @@ H_STMTS = {
         'H362':'Emzirilen çocuğa zarar verebilir.',
         'H370':'Organlara hasar verir.',
         'H371':'Organlara hasar verebilir.',
-        'H372':'Uzun süreli veya tekrarlanan maruziyetle organlara hasar verir.',
+        'H372':'Uzun süreli veya tekrarlı maruz kalma sonucu organlarda hasara yol açar.',
         'H373':'Uzun süreli veya tekrarlanan maruziyetle organlara hasar verebilir.',
         'H400':'Sucul organizmalar için çok toksiktir.',
         'H401':'Sucul organizmalar için toksiktir.',

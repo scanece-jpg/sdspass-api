@@ -504,63 +504,66 @@ P_LABEL_MANDATORY = ['P101', 'P102', 'P501']
 # H kodu bazlı etiket zorunlu P kodları — CLP Annex IV zorunluluğu
 # Bu P kodları ilgili H kodu varken her zaman etikete yazılmalı (6 limitinden önce eklenir)
 H_BASED_LABEL_FORCED: Dict[str, List[str]] = {
-    # ── Alevlenir Sıvı — P210 + P233 zorunlu (CLP Ek-IV Tablo 6.2) ──────────
-    'H224': ['P210', 'P233'],
-    'H225': ['P210', 'P233'],
-    'H226': ['P210', 'P233'],
-    # ── Alevlenir Gaz — P210 zorunlu (CLP Ek-IV) ─────────────────────────────
+    # ── Alevlenir Sıvı — CLP Annex IV §2.6 ───────────────────────────────────
+    # P403+P235: H_TO_P çıktısıyla örtüşüyor (P233 standalone H_TO_P'de ayrıca var ama
+    # depolama güvenliği için havalandırma+serin kritik — P403+P235 öncelikli)
+    'H224': ['P210', 'P403+P235'],
+    'H225': ['P210', 'P403+P235'],
+    'H226': ['P210', 'P403+P235'],
+    # ── Alevlenir Gaz / Katı ──────────────────────────────────────────────────
     'H220': ['P210'],
     'H221': ['P210'],
-    # ── Alevlenir Katı — P210 zorunlu (CLP Ek-IV) ────────────────────────────
     'H228': ['P210'],
-    # ── Cilt Aşınması — 4 kritik müdahale + KKE (CLP Ek-IV Tablo 6.3) ───────
-    # H225/H400 ile birleşince forced 6'yı aşabilir — CLP Madde 22(4) gereği
-    # tüm forced kodlar korunur, trim uygulanmaz.
+    # ── Cilt Aşınması — CLP Annex IV §3.2 ────────────────────────────────────
+    # CLP Madde 22(4): forced kodlar 6 limitini aşabilir, trim uygulanmaz
     'H314': ['P280', 'P301+P330+P331', 'P303+P361+P353', 'P305+P351+P338', 'P310'],
-    # ── Göz / Cilt Hasarı ─────────────────────────────────────────────────────
-    'H318': ['P280'],
-    'H315': ['P280'],
-    'H317': ['P280'],
-    'H319': ['P280'],
-    # ── Akut Toksisite ────────────────────────────────────────────────────────
-    'H300': ['P405'],
-    'H301': ['P405'],
-    'H310': ['P280', 'P405'],
-    'H311': ['P280'],
-    # Akut inhalasyon — solunum koruma + havalandırma + müdahale zorunlu (CLP Ek-IV Tablo 6.1)
-    # H330 (Kat.1-2): P304+P340 CLP Tablo 6.1 zorunlu response ifadesi
-    # H331 (Kat.3): P304+P340 zorunlu; P260 (P261'den güçlü — Kat.3 için); P271 ventilasyon
-    # H332 (Kat.4): P304+P340 zorunlu değil (Kat.4 hafif — P261/P271 yeterli, assign_p_codes üretir)
-    'H330': ['P260', 'P271', 'P304+P340', 'P405'],
-    'H331': ['P260', 'P271', 'P304+P340'],
-    # ── STOT ──────────────────────────────────────────────────────────────────
-    'H370': ['P405'],
-    'H371': ['P308+P313'],
-    'H372': ['P314'],
-    'H373': ['P314'],
-    # ── CMR Kat.1 — özel talimat + KKE + kilitli + hamile uyarısı ───────────
-    'H340':  ['P201', 'P202', 'P280', 'P405'],
-    'H350':  ['P201', 'P202', 'P280', 'P405'],
-    'H350i': ['P201', 'P202', 'P280', 'P405'],
-    'H360':  ['P201', 'P202', 'P263', 'P280', 'P405'],
-    'H360D': ['P201', 'P202', 'P263', 'P280', 'P405'],
-    'H360F': ['P201', 'P202', 'P263', 'P280', 'P405'],
-    # ── CMR Kat.2 (Şüpheli) — P201 + P202 zorunlu (CLP Ek-IV) ──────────────
-    'H341':  ['P201', 'P202'],
-    'H351':  ['P201', 'P202'],
-    'H361':  ['P201', 'P202', 'P263'],
-    'H361d': ['P201', 'P202', 'P263'],
-    # ── Oksitleyici ───────────────────────────────────────────────────────────
-    'H271': ['P220', 'P221'],
-    'H272': ['P220', 'P221'],
+    # ── Göz / Cilt Hasarı — CLP Annex IV §3.2–§3.3 ───────────────────────────
+    'H318': ['P280', 'P305+P351+P338', 'P310'],   # geri dönüşsüz göz hasarı
+    'H315': ['P280', 'P302+P352'],
+    'H317': ['P280', 'P302+P352'],
+    'H319': ['P280', 'P305+P351+P338'],
+    # ── Akut Toksisite — oral — CLP Annex IV §3.1 Tablo 6.1 ──────────────────
+    # H_TO_P H300 ve H301 her ikisi için P301+P310 üretiyor (SEA Rehberi ile tutarlı)
+    'H300': ['P301+P310', 'P405'],
+    'H301': ['P301+P310', 'P405'],
+    # ── Akut Toksisite — dermal — CLP Annex IV §3.1 Tablo 6.1 ───────────────
+    'H310': ['P280', 'P302+P350', 'P310', 'P405'],
+    'H311': ['P280', 'P302+P352',         'P405'],
+    # ── Akut Toksisite — inhalasyon — CLP Annex IV §3.1 Tablo 6.1 ───────────
+    # H330: P310 H_TO_P'de var (line 231) — ölümcül, hemen ara
+    # H331: P311 H_TO_P'de var (line 232); SUPERSEDE_LABEL P301+P310 ile çakışmayı yönetir
+    # H332 (Kat.4): P304+P340 zorunlu değil — assign_p_codes P261/P271 üretir
+    'H330': ['P260', 'P271', 'P304+P340', 'P310', 'P405'],
+    'H331': ['P260', 'P271', 'P304+P340', 'P311', 'P405'],
+    # ── STOT — CLP Annex IV §3.8 ─────────────────────────────────────────────
+    'H370': ['P307+P311', 'P405'],
+    'H371': ['P308+P313', 'P405'],
+    'H372': ['P260', 'P314', 'P405'],
+    'H373': ['P260', 'P314'],
+    # ── CMR Kat.1 — CLP Annex IV §3.5–§3.7 ──────────────────────────────────
+    'H340':  ['P201', 'P202', 'P280', 'P308+P313', 'P405'],
+    'H350':  ['P201', 'P202', 'P280', 'P308+P313', 'P405'],
+    'H350i': ['P201', 'P202', 'P280', 'P308+P313', 'P405'],
+    'H360':  ['P201', 'P202', 'P263', 'P280', 'P308+P313', 'P405'],
+    'H360D': ['P201', 'P202', 'P263', 'P280', 'P308+P313', 'P405'],
+    'H360F': ['P201', 'P202', 'P263', 'P280', 'P308+P313', 'P405'],
+    # ── CMR Kat.2 — CLP Annex IV §3.5–§3.7 ──────────────────────────────────
+    'H341':  ['P201', 'P202', 'P308+P313'],
+    'H351':  ['P201', 'P202', 'P308+P313'],
+    'H361':  ['P201', 'P202', 'P263', 'P308+P313'],
+    'H361d': ['P201', 'P202', 'P263', 'P308+P313'],
+    # ── Oksitleyici — CLP Annex IV §2.13–§2.14 ───────────────────────────────
+    'H271': ['P210', 'P220', 'P221', 'P280'],
+    'H272': ['P210', 'P220', 'P221', 'P280'],
     # ── Aspirasyon — KUSMayı UYARMAYIN hayati önem ───────────────────────────
-    'H304': ['P331'],
-    # ── Solunum Duyarlılaştırıcı — P260 + P271 + P284 zorunlu ───────────────
-    'H334': ['P260', 'P271', 'P284'],
-    # ── Su Reaktif ────────────────────────────────────────────────────────────
-    'H260': ['P231+P232'],
-    'H261': ['P231+P232'],
-    # ── Sucul Çevre — P273 tüm kategoriler, P391 akut/kronik 1-2 ─────────────
+    'H304': ['P301+P310', 'P331', 'P405'],
+    # ── Solunum Duyarlılaştırıcı — CLP Annex IV §3.4 ─────────────────────────
+    # P304+P340 ve P342+P311 her ikisi H_TO_P H334'te mevcut (line 220)
+    'H334': ['P260', 'P271', 'P284', 'P304+P340', 'P342+P311'],
+    # ── Su Reaktif — CLP Annex IV §2.15 ──────────────────────────────────────
+    'H260': ['P231+P232', 'P370+P378'],
+    'H261': ['P231+P232', 'P370+P378'],
+    # ── Sucul Çevre — CLP Annex IV §4.1 ─────────────────────────────────────
     'H400': ['P273', 'P391'],
     'H401': ['P273'],
     'H410': ['P273', 'P391'],

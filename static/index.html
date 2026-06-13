@@ -1549,7 +1549,16 @@ function addChip(id, hclass, hcode, annexSupplement) {
   const chips = document.getElementById('chips'+id);
   if (!chips) return;
   const code = (hcode||'').replace(/[*\s]/g,'').substring(0,4);
-  if ([...chips.querySelectorAll('.hchip')].some(c => c.dataset.code === code)) return;
+  const existingChip = [...chips.querySelectorAll('.hchip')].find(
+    c => c.dataset.code.replace(/[*\s]/g,'').substring(0,4) === code
+  );
+  if (existingChip) {
+    if (hcode.includes('(') && !existingChip.dataset.code.includes('(')) {
+      existingChip.remove(); // organ notasyonlu yeni kod düz kodu değiştirir
+    } else {
+      return;
+    }
+  }
   const cls = DANGER_H.has(code) ? 'danger' : 'warn';
   const annexCls = annexSupplement ? ' annex' : '';
   const span = document.createElement('span');

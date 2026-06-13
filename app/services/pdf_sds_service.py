@@ -1087,7 +1087,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         story.append(Paragraph(f"<b>{label_term(lang,'hazard_stmts')}:</b>",
                                styles['body_bold']))
         for hc in h_stmts:
-            hc_base = hc.split('(')[0].strip()
+            hc_base = hc.split('(')[0].split()[0]
             if hc.startswith('EUH'):
                 stmt = get_euh(lang, hc)
                 if not stmt or stmt == hc:
@@ -1942,7 +1942,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         }
     added_routes = set()
     for h in h_codes:
-        h_base = h.split('(')[0].strip()
+        h_base = h.split('(')[0].split()[0]
         route = exposure_map.get(h_base)
         if route and route not in added_routes:
             if h_base in ('H370', 'H371', 'H372', 'H373') and h_base in _stot_organ_map:

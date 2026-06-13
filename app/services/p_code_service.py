@@ -393,6 +393,8 @@ def assign_p_codes(
 
     final = set(p_to_sources.keys()) - suppressed
 
+    print(f'[ASSIGN] h={sorted(h_codes)} suppressed={sorted(suppressed)} final={sorted(final)}')
+
     # P103 consumer/professional için usage mantığında zaten eklendi
 
     # Zorunlu P kodlarını ekle (çakışma sonrası)
@@ -623,6 +625,8 @@ def select_label_p_codes(all_p_codes: List[str], max_codes: int = 6,
         'P308+P311':     ['P308+P313'],
     }
 
+    print(f'[LABEL] forced={sorted(forced_by_h)} slots={remaining_slots} candidates={sorted(candidates)}')
+
     selected_set = set(forced_by_h)  # Zorla eklenenlerle başla
     excluded_by_supersede = set()
 
@@ -642,6 +646,8 @@ def select_label_p_codes(all_p_codes: List[str], max_codes: int = 6,
         reverse=True
     )
     excluded = [p for p in candidates if p not in selected_set]
+
+    print(f'[LABEL] selected={sorted(selected_set)} excluded_supersede={sorted(excluded_by_supersede)} excluded={sorted(excluded)}')
 
     # Mandatory P kodlarını all_codes'tan belirle (usage bilgisi all_codes'a yansımış)
     # P501: sınıflandırılmış her ürün için zorunlu (ECHA kılavuzu / CLP Annex IV)

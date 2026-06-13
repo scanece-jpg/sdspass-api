@@ -2706,6 +2706,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         hdr_txt = 'Tehlike / EUH İfadeleri (Tam Metin):' if lang=='TR' else 'Hazard / EUH Statements (Full Text):'
         story.append(Paragraph(f'<b>{hdr_txt}</b>', styles['body_bold']))
         for hc in all_h:
+            hc_base = hc.split('(')[0].strip()  # organ notasyonunu at: "H370 (organ)" → "H370"
             if hc.startswith('EUH'):
                 # Önce euh_details'dan tam metin
                 detail = next((d for d in euh.get('euh_details',[]) if d.get('code')==hc), {})
@@ -2722,9 +2723,12 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                         substance = detail.get('source_name', '')
                     stmt = get_euh(lang, hc, substance)
             else:
-                stmt = get_h_stmt(hc, lang)
-            if stmt and stmt != hc:
-                story.append(Paragraph(f'• <b>{hc}:</b> {stmt}', styles['small']))
+                if hc_base in ('H370', 'H371', 'H372', 'H373') and hc_base in _stot_organ_map:
+                    stmt = get_stot_stmt(hc_base, lang, _stot_organ_map[hc_base])
+                else:
+                    stmt = get_h_stmt(hc_base, lang)
+            if stmt and stmt != hc_base:
+                story.append(Paragraph(f'• <b>{hc_base}:</b> {stmt}', styles['small']))
         story.append(Spacer(1, 4))
 
     # Revizyon geçmişi

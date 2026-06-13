@@ -46,33 +46,33 @@ CLP Tablo 4.1.2 formülüyle birebir uyumlu.
 Kesme değeri tablosu, toplamsal formülün **uygulanamadığı durumlarda** kullanılan
 basitleştirilmiş alternatif — eş zamanlı çalıştırılan paralel bir yöntem değil.
 
-**Sonuç:** §4.1.3.5.4 kuralının kesme değeri tablosu vs toplamsal formül arasında
-uygulanıp uygulanmadığı **kesin olarak netleşmedi.**
+**Sonuç:** ECHA kılavuzu okundu — **BULGU 1 KESİN OLARAK GEÇERSİZ.**
 
 ---
 
-### Neden askıda?
+### Karar — KAPANDI ✅
 
-Bu oturumda aynı soru için üç farklı analiz sonucu üretildi:
+**Tarih:** 2026-06-13  
+**Kaynak:** ECHA Guidance on Application of CLP Criteria, Parts 4 and 5 (Version 4.0, Nov 2024)  
+**Dosya:** `sds-knowledge/clp_parts4-5_en.pdf`
 
-1. Kod doğru → BULGU 1 geçersiz (toplamsal yöntem CLP uyumlu)
-2. §4.1.3.5.4 bunu kapsar → BULGU 1 geçerli (daha koruyucu seçilmeli)
-3. §4.1.3.5.4'ün gerçek kapsamı → BULGU 1 muhtemelen geçersiz (kesme değeri alternatif yöntem)
+**Sayfa 63 — Relevance eşikleri:**
+> *"The 'relevant components' of a mixture are those which are classified 'Chronic 2',
+> 'Chronic 3' or 'Chronic 4' and present in a concentration of 1 % (w/w) or greater."*
 
-Karar için **ECHA Guidance on Application of CLP Criteria** Bölüm 4 gerekiyor.  
-Spesifik bölüm: §4.1.3.5 yöntem seçimi, kesme değeri tablosu ile toplamsal formül ilişkisi.
+`H411 bileşeni ≥ %1` kuralı bir **sınıflandırma eşiği değil**, toplamsal hesaba dahil edilme eşiğidir.
+Bu eşiğin üzerindeki bileşen K2 havuzuna eklenir; sınıflandırmayı Tablo 4.1.2 formülü belirler.
 
----
+**Sayfa 70 — §4.1.3.5.4 "daha koruyucu" kuralının gerçek kapsamı:**
+> *"NOTE: If a mixture is classified in more than one way, the method yielding the most
+> stringent result should be used."*
 
-### Gerekli Belge
+Bu kural `§4.1.3.5.2 additivity formülü` ile `§4.1.3.5.5 toplamsal yöntem` arasında geçerlidir.
+Kesme değeri tablosu ayrı bir sınıflandırma yöntemi değildir.
 
-**ECHA Guidance on Application of CLP Criteria**  
-Kaynak: https://echa.europa.eu/guidance-documents/guidance-on-clp  
-İlgili bölüm: Chapter 4 — Hazardous to the aquatic environment  
-Alt bölüm: §4.1.3.5 — Summation method vs generic concentration limits
-
-> **Not:** Bu belgeye 2026-06-13 tarihinde HTTP 403 nedeniyle erişilemedi.
-> Bir sonraki denetimden önce manuel olarak indirilmeli ve projeye eklenmeli.
+**eco_engine.py davranışı: DOĞRU**
+- %20 H411 bileşen → K2=0.20 → K2 < 0.25 → H411 yok; 10×K2=2.00 ≥ 0.25 → **H412 ✓**
+- CLP Tablo 4.1.2 formülüyle birebir uyumlu
 
 ---
 

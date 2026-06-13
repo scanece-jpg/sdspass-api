@@ -172,19 +172,26 @@ Not: Kinematik viskozite > 20,5 mm²/s (40 °C) → H304 uygulanmaz.
 
 M-faktörü belirtilmemişse M = 1 (varsayılan).
 
-### §4.1.3.5.4 — Kronik Sucul Toksisite: Kesme Değeri Yöntemi (Alternatif)
+### §4.1.3.5 — Kronik Sucul Toksisite: Hesaba Dahil Edilme (Relevance) Eşikleri
 
-> **Not:** Bu tablo CLP §4.1.3.5.4'teki basit kesme değeri yaklaşımını gösterir.
-> SDSPass bu yöntemi KULLANMAZ — §4.1.3.5.5 toplamsal yöntemini kullanır (aşağıya bakın).
-> İki yöntem CLP'de **alternatif** olarak tanımlanmıştır; birbirini geçersiz kılmaz.
+> **DÜZELTİLMİŞ NOT (2026-06-13 — ECHA Guidance Parts 4/5, s.63):**
+> Aşağıdaki tablo bir sınıflandırma tablosu **değildir.**
+> CLP Madde 11 kapsamında "ilgili bileşen" (relevant component) belirleme eşiklerini gösterir.
+> Bu eşiğin üzerindeki bileşenler toplamsal hesaba **dahil edilir** — doğrudan H kodu atamazlar.
+> Sınıflandırma her zaman §4.1.3.5.5 Tablo 4.1.2 toplamsal formülüyle yapılır.
+>
+> ECHA alıntısı: *"The 'relevant components' of a mixture are those which are classified
+> 'Chronic 2', 'Chronic 3' or 'Chronic 4' and present in a concentration of 1 % (w/w) or greater."*
 
-| Bileşen sınıfı | Karışım H410 (Chr.1) eşiği | Karışım H411 (Chr.2) eşiği | Karışım H412 (Chr.3) eşiği |
-|---|---|---|---|
-| H410 (Aquatic Chr. 1) | Σ(Ci × Mi_kronik) ≥ %0,1 | — | — |
-| H411 (Aquatic Chr. 2) | — | Σ Ci ≥ %1,0 | — |
-| H412 (Aquatic Chr. 3) | — | — | Σ Ci ≥ %1,0 |
-| H413 (Aquatic Chr. 4) | — | — | — |
-| H400 (sadece Akut, BCF yok) | Σ(Ci × Mi_akut) ≥ %0,1 | Σ(Ci × Mi_akut) ≥ %1,0 | Σ(Ci × Mi_akut) ≥ %10 |
+| Bileşen sınıfı | Toplamsal hesaba dahil edilme eşiği |
+|---|---|
+| H410 (Aquatic Chr. 1) | Σ(Ci × Mi_kronik) ≥ %0,1 → K1 havuzuna eklenir |
+| H411 (Aquatic Chr. 2) | Ci ≥ %1,0 → K2 havuzuna eklenir |
+| H412 (Aquatic Chr. 3) | Ci ≥ %1,0 → K3 havuzuna eklenir |
+| H413 (Aquatic Chr. 4) | Ci ≥ %1,0 → K3 havuzuna eklenir |
+| H400 (sadece Akut, BCF yok) | Σ(Ci × Mi_akut) ≥ %0,1 → akut hesabına eklenir |
+
+**Sınıflandırma kararı:** Dahil edilen bileşenler §4.1.3.5.5 Tablo 4.1.2 formülleriyle değerlendirilir (eşik: %25).
 
 ---
 

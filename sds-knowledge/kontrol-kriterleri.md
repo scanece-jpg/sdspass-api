@@ -26,6 +26,97 @@ Bir bulgu hata olarak işaretlenmeden önce şu adımlar izlenmelidir:
 
 ---
 
+## Geçmiş Hatalardan Öğrenilen Kurallar
+
+> Her kural bir gerçek denetim hatasından türetilmiştir.
+
+### KURAL 1 — Piktogram bulgusu yazmadan önce dominance listesini oku
+
+**Kök hata:** GHS06 varlığında GHS07'nin bastırıldığını bilmeden
+"H302 için GHS07 eksik" diye bulgu yazıldı.
+
+**Zorunlu adım:**
+Herhangi bir GHS piktogramı eksikliği bulgusu yazmadan önce
+SEA Madde 28(1) dominance kurallarını kontrol et:
+
+- GHS01 varsa → GHS02 ve GHS03 bastırılabilir
+- GHS06 varsa → GHS07 tamamen kaldırılır
+- GHS05 varsa ve GHS06 yoksa → GHS07 yalnızca H315/H319 için kaldırılır;
+  H302/H312/H332/H317/H335/H336 varsa GHS07 kalır
+
+**Kural:** "Bu piktogram eksik" demeden önce —
+"Bu piktogramı bastıran üst piktogram var mı?" sorusunu sor.
+
+---
+
+### KURAL 2 — Validator uyarısı için kodu okumadan "yanlış tetikleme" deme
+
+**Kök hata:** V006 uyarısı "H314 bazlı tetikleniyor, H314 yok → yanlış" diye
+raporlandı. Kod `H314 OR H290` koşulunu kullanıyor; H290 mevcuttu, tetikleme doğruydu.
+
+**Zorunlu adım:**
+PDF'de bir validator uyarısı veya P kodu görüldüğünde —
+önce ilgili motordaki tetikleme koşulunu koda bak (`assign_p_codes`,
+`clp_service`, `stot_engine` vb.), sonra bulgu yaz.
+
+**Kural:** Motor bir şey ürettiyse bir gerekçesi var.
+Gerekçeyi doğrulamadan "yanlış tetikleme" yazma.
+
+---
+
+### KURAL 3 — P kodu veya fiziksel veri bulgusunda log olmadan yorum yapma
+
+**Kök hata:** P301+P330+P331 eksik diye bulgu yazıldı, asıl eksik P301+P312'ydi.
+FP=BP çakışması motor hatası sanıldı, kullanıcı girişiydi.
+
+**Zorunlu adım:**
+P kodu eksikliği veya fiziksel veri anomalisi bulgusunda önce şunlara bak:
+
+1. `assign_p_codes` çıktısı — hangi P kodları üretildi, hangi H koduna bağlı?
+2. `forced_by_h` slot sayısı — slot doluysa bazı kodlar düşmüş olabilir
+3. Kullanıcı girişi mi, motor çıktısı mı? — override alanlarını kontrol et
+
+**Kural:** PDF'de eksik görünen her şey motor hatası değil.
+Slot tükenmesi, kullanıcı override'ı veya kasıtlı davranış olabilir.
+Log veya kaynak koda bakmadan bulgu yazma.
+
+---
+
+### KURAL 4 — Metodoloji seçimi gerektiren konularda tek kaynakla karar verme
+
+**Kök hata:** Sucul sınıflandırmada H411/H412 sorusunda üç ayrı kaynaktan
+üç farklı sonuç çıktı. Her seferinde "kesin" denildi, her seferinde değişti.
+
+**Zorunlu adım:**
+Aşağıdaki konularda ECHA Guidance on Application of CLP Criteria olmadan
+kesin bulgu yazma:
+
+- Sucul toksisite metodoloji seçimi (toplamsal vs kesme değeri)
+- M-faktörü hesabı ve kaynak seçimi
+- İki yöntem farklı sonuç verdiğinde hangisinin uygulanacağı
+- §4.1.3.5.x yöntem seçimi soruları
+
+**Kural:** Birden fazla kaynaktan farklı sonuç çıkıyorsa —
+bulguyu "ASKIDA" olarak işaretle, "geçerli" veya "geçersiz" deme.
+ECHA kılavuzuna erişilene kadar karar verme.
+
+**ECHA kaynağı:**
+https://echa.europa.eu/guidance-documents/guidance-on-clp
+İlgili bölüm: Chapter 4 — Hazardous to the aquatic environment
+
+---
+
+### Hızlı Kontrol Listesi (Denetim Başlamadan Önce)
+
+Her GBF denetiminde bulgu yazmadan önce şu soruları sor:
+
+- [ ] Piktogram bulgusunda dominance listesini kontrol ettim mi? (KURAL 1)
+- [ ] Validator/P kodu bulgusunda tetikleme koşulunu kodda baktım mı? (KURAL 2)
+- [ ] P kodu veya fiziksel veri bulgusunda log/kaynak inceledim mi? (KURAL 3)
+- [ ] Metodoloji sorusunda birden fazla kaynak tutarlı mı? (KURAL 4)
+
+---
+
 ## Motor Haritası (Özet)
 
 | Bölüm | Birincil Motor | İkincil Motor |
@@ -316,4 +407,4 @@ PDF header'ında `X-SDS-Issues` ve `X-SDS-Issue-Counts` alanları bu kuralların
 
 ---
 
-*Son güncelleme: 2026-06-10*
+*Son güncelleme: 2026-06-13*

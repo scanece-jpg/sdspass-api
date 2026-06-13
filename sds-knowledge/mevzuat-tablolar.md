@@ -257,4 +257,105 @@ genel %5 eşiği yerine %2 eşiği uygulanır.
 
 ---
 
-*SDSPass sds-knowledge/mevzuat-tablolar.md — v1.0 | CLP (AT) No 1272/2008 Ek-1*
+---
+
+## CLP Madde 26 — GHS Piktogram Dominance (Öncelik) Kuralları
+
+> Kaynak: CLP (AT) No 1272/2008 Madde 26 / SEA Yönetmeliği Madde 28(1)
+> ReachOnline doğrulandı: 2026-06-13
+
+Birden fazla piktogram uygulandığında aşağıdaki öncelik kuralları geçerlidir:
+
+| Kural | Koşul | Sonuç |
+|---|---|---|
+| (a) | GHS01 (patlayıcı) uygulanıyorsa | GHS02 (alevlenir) ve GHS03 (oksitleyici) isteğe bağlı |
+| (b) | GHS06 (kurukafa) uygulanıyorsa | GHS07 (ünlem) **etiket üzerinde görünmez** |
+| (c) | GHS05 (aşındırıcı) uygulanıyorsa | GHS07 **yalnızca cilt/göz tahrişi (H315/H319) için** görünmez |
+| (d) | GHS08 solunum sensitizasyonu (H334) için uygulanıyorsa | GHS07 cilt sensitizasyonu (H317) ve cilt/göz tahrişi için görünmez |
+| (e) | GHS02 veya GHS06 uygulanıyorsa | GHS04 (basınçlı gaz) isteğe bağlı |
+
+**Kural (c) için önemli istisna:**
+GHS05 varken GHS07'nin KALDIRILMAMASI gereken durumlar:
+- H302, H312, H332 (Akut Toks. Kat.4) → GHS07 kalır
+- H317 (Cilt Sensitizasyonu Kat.1) → GHS07 kalır
+- H335, H336 (STOT SE Kat.3) → GHS07 kalır
+
+**Kural (d) için önemli istisna:**
+GHS08 + H334 varken GHS07'nin KALDIRILMAMASI gereken durumlar:
+- H302, H312, H332 (Akut Toks. Kat.4) → GHS07 kalır
+- H335, H336 (STOT SE Kat.3) → GHS07 kalır
+
+**Audit kuralı:** "Bu piktogram eksik" demeden önce bu 5 kuralı kontrol et.
+GHS06 varsa GHS07 eksikliği hata değildir — kasıtlı dominance uygulamasıdır.
+
+---
+
+## §4.1.3.5 — Sucul Toksisite: Yöntem Seçimi Kuralları
+
+> Kaynak: CLP Ek-I §4.1.3.5 | ReachOnline + Alchemy Compliance doğrulandı: 2026-06-13
+
+### Mevcut Yöntemler
+
+| Yöntem | Bölüm | Ne zaman uygulanır |
+|---|---|---|
+| Toplamsal yöntem (H-kodu bazlı) | §4.1.3.5.5 | Bileşenler H kodu ile sınıflandırılmış, ham L(E)C50 verisi yok |
+| Additivity formülü (L(E)C50 bazlı) | §4.1.3.5.2 | Bir veya daha fazla bileşen için ham toksisite verisi mevcut |
+| Köprüleme ilkeleri | §4.1.3.4 | Test edilmiş benzer karışım verisi mevcut |
+| Kesme değeri tablosu (basitleştirilmiş) | §4.1.3.5.5 içi | Toplamsal yöntemin uygulanamadığı karmaşık durumlar |
+
+### §4.1.3.5.4 — Daha Koruyucu Sonucu Seç
+
+**Tam metin:** *"If a mixture is classified in more than one way, the method yielding the more conservative result shall be used."*
+
+Bu kural kesin olarak şu senaryolara uygulanır:
+- §4.1.3.5.2 additivity formülü vs §4.1.3.5.5 toplamsal yöntem
+- Köprüleme ilkeleri vs toplamsal yöntem
+- Test edilmiş karışım verisi vs bileşen bazlı yöntem
+
+**Belirsiz senaryo (BULGU 1 — ASKIDA):**
+Kesme değeri tablosu (H411 ≥ %1 → H411) ile toplamsal formül
+(10×K1+K2 ≥ %25) çakıştığında §4.1.3.5.4 uygulanıp uygulanmadığı
+ECHA Guidance Bölüm 4 olmadan netleşmedi.
+
+### SDSPass eco_engine.py Davranışı
+
+eco_engine.py yalnızca §4.1.3.5.5 toplamsal yöntemini kullanır:
+- Bileşenler için ham L(E)C50 verisi bulunmuyor → additivity formülü uygulanamaz
+- Toplamsal yöntem CLP Tablo 4.1.2 formüllerini doğru uygular
+- %20 H411 bileşen → K2=0.20 < 0.25 → H411 yok; 10×K2=2.0 ≥ 0.25 → **H412**
+- Bu sonuç CLP Tablo 4.1.2 ile birebir uyumlu
+
+---
+
+## M-Faktörü — Yaygın Maddeler
+
+> Kaynak: SDSPass data/annex6 (ATP21+ATP22) | Annex VI listesi
+
+### n-Hekzan (CAS: 110-54-3) — Audit Referansı
+
+| Alan | Değer |
+|---|---|
+| H kodları | H225, H361f, H304, H336, H372(sinir sistemi), H315, H411 |
+| Akut M-faktörü | — (yok, varsayılan M=1) |
+| Kronik M-faktörü | — (yok, varsayılan M=1) |
+| ATP | ATP22 |
+
+**Sonuç:** n-Hekzan için M-faktörü uygulanmaz.
+%20 H411 konsantrasyonda: K2 = 20/100 = 0.20 (M çarpanı yok).
+
+### M-Faktörü Olan Yaygın Maddeler (Seçili Örnekler)
+
+| CAS | Ad | Akut M | Kronik M |
+|---|---|---|---|
+| 107-02-8 | Akrolein | 100 | — |
+| 112-90-3 | Oleylamin | 10 | — |
+| 111-30-8 | Glutaraldehid | 1 | — |
+| 106-51-4 | Kinon (p-benzoquinone) | 10 | — |
+| 10049-04-4 | Klor dioksit | 10 | — |
+
+**M-faktörü kontrolü:** Annex VI listesinde `Akut=X` veya `Kr=X` sütununa bak.
+Değer `—` ise M=1 varsayılan (CLP Ek-I §4.1.3.5.5 Tablo 4.1.3).
+
+---
+
+*SDSPass sds-knowledge/mevzuat-tablolar.md — v1.1 | CLP (AT) No 1272/2008 Ek-1 | Güncelleme: 2026-06-13*

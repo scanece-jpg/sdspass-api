@@ -3,6 +3,12 @@
 > Kaynak: ADR 2025, ECE/TRANS/352 Vol.I
 > UNECE, Cenevre 2024 — 1 Ocak 2025'ten itibaren geçerli
 
+> **IMDG §2.10.3 Notu:** IMDG §2.10.3 marine pollutant sınıflandırma kriterleri
+> (Test 1 ve Test 2) ADR §2.2.9.1.10 ile özdeştir — her ikisi de UN Model
+> Regulations §2.9.3'ten türetilmiştir. GBF B14 denetiminde bu dosya
+> IMDG §2.10.3 referansı olarak kullanılabilir.
+> Not: IMDG'ye özgü işaretleme/ambalajlama gereklilikleri bu kapsam dışındadır.
+
 ## §2.1 Genel Hükümler
 
 2.1.1 Introduction  ...................................................................................................  101

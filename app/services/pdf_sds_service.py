@@ -2564,9 +2564,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 _sum_acute += _cxm
             else:
                 # Test 2: H411 kronik bileşen — Σ(C) ≥ 1.0, M-faktör uygulanmaz
-                _cxm     = 0.0
+                _cxm     = _mp['conc']   # katkı = C (M-faktörsüz)
                 _m_str   = '—'
-                _cxm_str = '—'
+                _cxm_str = f"{_cxm:.1f}*"  # * = Test 2, M-faktör yok
                 _sum_h411 += _mp['conc']
             _mp_rows.append([
                 _mp['cas'],
@@ -2597,6 +2597,17 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                         if lang == 'TR' else
                         'Marine Pollutant: No — IMDG §2.10.3 threshold not exceeded.')
         story.append(Paragraph(f"{_sum_txt} → {_verdict}", styles['small']))
+
+        # H411 bileşeni varsa Test 2 dipnotu ekle
+        if any(_mp['h_code'] == 'H411' for _mp in _mp_comps):
+            _t2_note = (
+                '* H411 (Sucul Kronik 2): M-faktör uygulanmaz. '
+                'IMDG §2.10.3 Test 2 kapsamında konsantrasyon değeri doğrudan toplanır — eşik: Σ(C) ≥ %1,0.'
+                if lang == 'TR' else
+                '* H411 (Aquatic Chronic 2): No M-factor applies. '
+                'IMDG §2.10.3 Test 2: concentration summed directly — threshold: Σ(C) ≥ 1.0%.'
+            )
+            story.append(Paragraph(_t2_note, styles['small']))
 
     # ─────────────────────────────────────────────────────────────────────────
     # BÖLÜM 15 — Mevzuat

@@ -115,26 +115,27 @@ P305+P351+P338 VE P337+P313. Farklı senaryolar (anlık müdahale vs. kalıcı t
 
 ## BULGU 5 — B14 Deniz Kirletici hesap tablosunda M ve C×M sütunları boş
 
-**Durum:** ⏸ ASKIDA — `pdf_sds_service` render düzeltmesi gerekiyor
+**Durum:** ✅ KAPANDI — Kod düzeltildi
 
-**Tarih:** 2026-06-14 | **Ürün:** DIPOL 130 denetiminde tespit edildi
+**Tarih:** 2026-06-14 (tespit) / 2026-06-14 (kapatıldı) | **Ürün:** DIPOL 130 denetiminde tespit edildi
 
 **Konu:** H411 bileşeni olan karışımlarda B14 deniz kirletici hesap tablosu üretiliyor
-ancak M-faktörü atanmadığında M sütunu ve C×M sütunu boş kalıyor. Tablo Test 2
-(Σ C_H411 ≥ %1) yolunu kullanıyor ama bunu gösteremiyor. Sonuç doğru; format belirsiz.
+ancak M-faktörü atanmadığında M sütunu ve C×M sütunu boş kalıyordu. Tablo Test 2
+(Σ C_H411 ≥ %1) yolunu kullanıyor ama bunu gösteremiyordu. Sonuç doğru; format belirsizdi.
 
 **Örnek (DIPOL 130):**
 - n-Hekzan H411, %20 → Σ(C_H411) = %20 ≥ %1 → Deniz Kirletici: Evet ✓
-- Tablo: M=— , C×M=— gösteriyor (Test 1 gibi görünüyor ama hesap yapılmamış)
+- Eskiden: M=— , C×M=— (Test 1 gibi görünüyordu, hesap yapılmamış izlenimi)
 
-**Mevzuat:** IMDG §2.10.3 — sonuç doğru; format zorunluluğu yok.
-Bulgu seviyesi: UYARI (SDSPass belgeleme standardı).
+**Yapılan düzeltme (`pdf_sds_service.py`):**
+- H411 satırında `_cxm_str = f"{_conc:.1f}*"` — konsantrasyon değeri C×M sütununda gösteriliyor
+- Tablo altına dipnot eklendi: "* H411 (Sucul Kronik 2): M-faktör uygulanmaz. Test 2 kapsamında
+  konsantrasyon doğrudan toplanır — eşik: Σ(C) ≥ %1,0 (IMDG §2.10.3)."
 
-**Yapılacak:** `pdf_sds_service.py` — H411 bileşeni için M=1 varsayılan olarak
-atanmalı veya tablo "Test 2: Σ C_H411 = %X ≥ %1" formatında gösterilmeli.
+**Mevzuat:** IMDG §2.10.3 — sonuç doğru; format netleştirildi.
 
-**Validator:** V022 olarak eklendi — `kontrol-kriterleri.md`
+**Validator:** V022 — `kontrol-kriterleri.md`
 
 ---
 
-*SDSPass sds-knowledge/kontrol.md — Güncelleme: 2026-06-14*
+*SDSPass sds-knowledge/kontrol.md — Güncelleme: 2026-06-14 (BULGU 5 kapatıldı)*

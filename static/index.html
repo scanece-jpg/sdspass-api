@@ -1351,12 +1351,13 @@ function addComp(pf = {}) {
       </div>
     </div>
     <div>
-      <label>Konsantrasyon (%) <span style="font-size:9px;color:var(--text3)">— tek değer veya aralık &nbsp;·&nbsp; <span style="color:#f6ad55">⚠ Toplam hesabında en yüksek değer kullanılır</span></span></label>
+      <label>Konsantrasyon (%) <span style="font-size:9px;color:var(--text3)">— kesin değer girin; B3'te REACH standardı aralığı olarak gösterilir</span></label>
       <input type="text" class="conc-manual" id="cmanual${id}"
-             placeholder="örn: 40  veya  25-50"
+             placeholder="örn: 30"
              oninput="onManualConc(${id});updateConcTotal()"
              value="${pf.conc||''}"
              style="width:100%;padding:6px 10px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-family:var(--mono);font-size:12px;box-sizing:border-box">
+      <div id="crange${id}" style="font-size:10px;color:var(--text3);margin-top:3px;display:none">→ B3'te gösterilecek: <b id="crangeVal${id}" style="color:var(--accent)"></b></div>
       <div class="crp" id="crp${id}"></div>
       <input type="hidden" class="kimin" id="cmin${id}" value="${pf.conc||''}">
       <input type="hidden" class="kimax" id="cmax${id}" value="">
@@ -1749,6 +1750,18 @@ function parseManualConc(val) {
   return null;
 }
 
+// REACH Annex II Tablo 1.1 — kesin değeri standart aralığa çevirir
+function concToRange(v) {
+  if (!v || isNaN(v) || v <= 0) return '';
+  if (v >= 25)  return '≥ 25%';
+  if (v >= 10)  return '≥ 10 - < 25%';
+  if (v >= 5)   return '≥ 5 - < 10%';
+  if (v >= 2.5) return '≥ 2,5 - < 5%';
+  if (v >= 1)   return '≥ 1 - < 2,5%';
+  if (v >= 0.1) return '≥ 0,1 - < 1%';
+  return '< 0,1%';
+}
+
 const _manualDebounce = {};
 function onManualConc(id) {
   clearTimeout(_manualDebounce[id]);
@@ -1767,6 +1780,14 @@ function onManualConc(id) {
     // Hidden alanları güncelle
     document.getElementById('cmin'+id).value = parsed.lo;
     document.getElementById('cmax'+id).value = parsed.hi;
+    // B3 aralık önizlemesini göster
+    const _rangeDiv = document.getElementById('crange'+id);
+    const _rangeVal = document.getElementById('crangeVal'+id);
+    if (_rangeDiv && _rangeVal) {
+      const _rs = concToRange(parsed.lo);
+      if (_rs) { _rangeVal.textContent = _rs; _rangeDiv.style.display = ''; }
+      else { _rangeDiv.style.display = 'none'; }
+    }
     // Refinement panelini göster — önce SCL, sonra GCL fallback
     const sclRaw = _sclRaw[id] || [];
     const sclThresholds = findThresholdsFromSCL(parsed.lo, parsed.hi, sclRaw);
@@ -2146,7 +2167,7 @@ function getComps() {
     const cwId  = parseInt((w.id || '').replace('cw','')) || 0;
     // SCL: maddeye özel kesme değerleri — Öncelik 1 (GCL'yi ezer)
     const scl   = _sclMap[cwId] || {};
-    const concStr = w.querySelector('.conc-manual')?.value?.trim() || '';
+    const concStr = concToRange(concMin || (concMax ?? 0));  // REACH Annex II Tablo 1.1 aralığı
     // Annex VI bayrağı — component-manager tarafından CAS sorgusunda kaydedilir
     // CLP 3.1.3.6.2.3 revize formül hesabı için clp_engine.js okur
     const annexVi = w.querySelector('.cc')?.dataset?.annexVi === '1';

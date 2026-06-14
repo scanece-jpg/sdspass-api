@@ -2723,7 +2723,7 @@ function renderAll(s) {
     ...(stot.h_codes || []),
     ...(eco.h_codes || []),
     ...(phys.results||[]).map(r => r.h || r.h_code),
-  ])].filter(Boolean).map(c => c.replace(/[*\s]/g,'').substring(0,4));
+  ])].filter(Boolean).map(c => { const n = c.replace(/[*\s]/g,''); return /^H36[01]/i.test(n) ? n.toUpperCase() : n.substring(0,4); });
 
   // Motorlar arası dominance — CLP Annex I dominance tablosu
   const allH = [...allHRaw];

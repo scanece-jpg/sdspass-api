@@ -344,12 +344,18 @@ Her GBF denetiminde bulgu yazmadan önce şu soruları sor:
 - B14'te sadece "Evet/Hayır" değil, **hesap gerekçesi** gösterilmelidir
 - Gerekçe formatı: `Σ (bileşen konst% × M-faktörü)` ile eşik karşılaştırması
 - Hesap gerekçesi (Σ C×M tablosu + sonuç satırı) B14 sonunda gösterilir — `pdf_sds_service.py`
+- **Bilinen render sorunu:** H411 bileşen mevcut ama M-faktörü atanmamışsa M ve C×M sütunları
+  boş kalıyor; tablo Test 2 (Σ C_H411 ≥ %1) yolunu kullanıyor ancak bunu gösteremiyor.
+  Sonuç doğru olabilir; format belirsizliği `pdf_sds_service` render düzeltmesi gerektiriyor.
+- **Sucul H kodu yoksa:** hesap tablosu hiç üretilmiyor — `transport_engine`/`pdf_sds_service`
+  kasıtlı davranışı; sonuç "Uygulanamaz" doğruysa bulgu yazılmaz (DIPOL 128–129 emsal).
 
 ### Kırmızı bayraklar:
 - ADR "Düzenlemeye tabi değil" ama H225 var → `transport_engine` sorunu
 - UN numarası yok ama tehlikeli madde → zorunlu alan
 - Çevre tehlike işareti yok ama H400/H410 var → `transport_engine` env_mark sorunu
-- Deniz kirletici evet/hayır var ama hesap gerekçesi yok → `pdf_sds_service` eksikliği
+- Deniz kirletici evet/hayır var ama hesap tablosu yok → `pdf_sds_service` eksikliği
+- Hesap tablosu var ama M ve C×M sütunları boş → `pdf_sds_service` render hatası (V022)
 
 ---
 
@@ -404,7 +410,9 @@ PDF header'ında `X-SDS-Issues` ve `X-SDS-Issue-Counts` alanları bu kuralların
 | V019 | GHS09 tutarsızlığı: H400/410/411 varken yok, ya da H412/413 ile birlikte var | warning |
 | V020-A | H314 var ama all_h_codes'ta H318 yok (B2.1 eksik) | warning |
 | V020-B | H314 var ve H318 etiket H kodlarında görünüyor (kaldırılmalı) | info |
+| V021 | H319 var → P337+P313 zorunlu yanıt P kodu eksik (CLP Ek-I Tablo 3.3.5) | warning |
+| V022 | B14 hesap tablosu var ama M ve C×M sütunları boş (pdf_sds_service render hatası) | warning |
 
 ---
 
-*Son güncelleme: 2026-06-13*
+*Son güncelleme: 2026-06-14*

@@ -91,4 +91,50 @@ Bu CLP §1.2.1.2 dominance kuralının doğru uygulamasıdır.
 
 ---
 
-*SDSPass sds-knowledge/kontrol.md — Güncelleme: 2026-06-13*
+## BULGU 4 — H319 için P337+P313 eksik üretiliyordu
+
+**Durum:** ✅ KAPANDI — Kod düzeltildi
+
+**Tarih:** 2026-06-14 | **Ürün:** DIPOL 129 denetiminde tespit edildi
+
+**Konu:** H319 (Göz Tahriş. 2) içeren karışımlarda `p_code_service` P337+P313'ü
+üretmiyordu. Sebebi: REDUNDANCY_MAP ve SUPERSEDE_LABEL içinde P305+P351+P338 varlığında
+P337+P313 redundant sayılıp düşürülüyordu.
+
+**Mevzuat:** CLP Annex I Tablo 3.3.5 — H319 için zorunlu yanıt P kodları:
+P305+P351+P338 VE P337+P313. Farklı senaryolar (anlık müdahale vs. kalıcı tahriş → doktor).
+
+**Yapılan düzeltme (`p_code_service.py`):**
+- `H_BASED_LABEL_FORCED['H319']` listesine P337+P313 eklendi
+- `REDUNDANCY_MAP`: P305+P351+P338 varlığında P337+P313 artık silinmiyor
+- `SUPERSEDE_LABEL`: aynı düzeltme etiket slot seçiminde de uygulandı
+
+**Validator:** V021 olarak eklendi — `kontrol-kriterleri.md`
+
+---
+
+## BULGU 5 — B14 Deniz Kirletici hesap tablosunda M ve C×M sütunları boş
+
+**Durum:** ⏸ ASKIDA — `pdf_sds_service` render düzeltmesi gerekiyor
+
+**Tarih:** 2026-06-14 | **Ürün:** DIPOL 130 denetiminde tespit edildi
+
+**Konu:** H411 bileşeni olan karışımlarda B14 deniz kirletici hesap tablosu üretiliyor
+ancak M-faktörü atanmadığında M sütunu ve C×M sütunu boş kalıyor. Tablo Test 2
+(Σ C_H411 ≥ %1) yolunu kullanıyor ama bunu gösteremiyor. Sonuç doğru; format belirsiz.
+
+**Örnek (DIPOL 130):**
+- n-Hekzan H411, %20 → Σ(C_H411) = %20 ≥ %1 → Deniz Kirletici: Evet ✓
+- Tablo: M=— , C×M=— gösteriyor (Test 1 gibi görünüyor ama hesap yapılmamış)
+
+**Mevzuat:** IMDG §2.10.3 — sonuç doğru; format zorunluluğu yok.
+Bulgu seviyesi: UYARI (SDSPass belgeleme standardı).
+
+**Yapılacak:** `pdf_sds_service.py` — H411 bileşeni için M=1 varsayılan olarak
+atanmalı veya tablo "Test 2: Σ C_H411 = %X ≥ %1" formatında gösterilmeli.
+
+**Validator:** V022 olarak eklendi — `kontrol-kriterleri.md`
+
+---
+
+*SDSPass sds-knowledge/kontrol.md — Güncelleme: 2026-06-14*

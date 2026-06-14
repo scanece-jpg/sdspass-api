@@ -261,7 +261,7 @@ Her GBF denetiminde bulgu yazmadan önce şu soruları sor:
 - Parlama noktası yok ama H226 var → V001 hatası
 - Parlama noktası >60°C ama H226 var → V002 uyarısı
 - Viskozite yok ama H304 var → V003 hatası
-- pH 7 ama H314 var → V006 uyarısı
+- pH 7 ama H314 var → V006 uyarısı (**İstisna:** H314 bileşen bazlı toplamsal yoldan geliyorsa V006 tetiklenmez — CLP §3.2.3.3 toplamsal yol pH yoluyla çelişmez)
 
 ---
 
@@ -397,7 +397,7 @@ PDF header'ında `X-SDS-Issues` ve `X-SDS-Issue-Counts` alanları bu kuralların
 | V003 | H304 var → viskozite zorunlu | error |
 | V004 | H304 ama viskozite >20 mm²/s | warning |
 | V005 | H314 var → pH önerilir | info |
-| V006 | H314 ama pH 2–11.5 arası | warning |
+| V006 | H314 ama pH 2–11.5 arası — yalnızca pH bazlı sınıflandırma yolunda; bileşen toplamsal yolunda (§3.2.3.3) tetiklenmez | warning |
 | V009 | H272 var → B10'da bağdaşmayan maddeler belirtilmeli | warning |
 | V010 | H260/H261 var → B7'de nem uyarısı | warning |
 | V011 | CMR madde → B8'de özel KKE | warning |

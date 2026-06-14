@@ -138,6 +138,18 @@ def validate_sds(
     _has_corr_acid = any(cas in _CORROSIVE_ACIDS for cas in _comp_cas_list)
     _neutralization_likely = _has_corr_base and _has_corr_acid
 
+    # H314 bileşen bazlı toplamsal yoldan mı geliyor?
+    # Herhangi bir bileşenin hazards listesinde H314 varsa → additivity yolu → V006 tetiklemez.
+    # CLP Annex I §3.2.3.1.2 (pH yolu) ile §3.2.3.3 (toplamsal yol) bağımsız alternatif yöntemlerdir.
+    _h314_from_additivity = (
+        "H314" in h_codes and
+        any(
+            any((h.get('h_code') or '').replace('*', '').strip().startswith('H314')
+                for h in (c.get('hazards') or []))
+            for c in (components or [])
+        )
+    )
+
     # V005: H314 (Aşındırıcı) → pH zorunlu
     if "H314" in h_codes or "H290" in h_codes:
         if ph is None:
@@ -160,7 +172,8 @@ def validate_sds(
                      f"KKDİK Ek-1 §3.2.3.3: nötralizasyon gerçekleşmişse H314 geçersiz olabilir. "
                      f"Karışımı test ettirin veya serbest bileşen konsantrasyonlarını gözden geçirin.",
                      "KKDİK Ek-1 §3.2.3.3.3 / CLP Annex I §3.2.3.3")
-            else:
+            elif not _h314_from_additivity:
+                # H314 bileşen bazlı toplamsal yoldan gelmiyorsa → pH çelişkisi uyarısı
                 _ph_disp = f"{ph_low}–{ph_high}" if ph_low != ph_high else str(ph_low)
                 warn("V006","B2+B9",
                      f"pH {_ph_disp} — aşındırıcı özellik için pH<2 veya pH>11.5 beklenir. Sınıflandırmayı kontrol edin.",

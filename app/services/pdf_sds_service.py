@@ -904,7 +904,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     for entry in clp.get('passed', []):
         _hc_full = (entry.get('h_code','') or '').replace('*','').strip()
         # Preserve H360D/F/FD and H361D/F/FD sub-codes; truncate others to 4 chars
-        hc = _hc_full if (_hc_full[4:].replace('D','').replace('F','') == '') else _hc_full[:4]
+        hc = _hc_full if (_hc_full[4:].upper().replace('D','').replace('F','') == '') else _hc_full[:4]
         if hc in seen_clf:
             continue
         seen_clf.add(hc)

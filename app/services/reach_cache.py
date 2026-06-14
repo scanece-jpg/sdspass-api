@@ -1,19 +1,21 @@
 """
 REACH Kayıt Numarası Önbelleği
-ECHA substances API'sinden çekilen kayıt numaralarını diske kaydeder.
-Format: data/reach_cache/{prefix}/{cas}.json
+Kayıt numarasını şu sırayla arar: statik DB → disk önbelleği → Claude AI + web arama.
+Bulunan numara disk önbelleğine ve reach_db.py'e kalıcı olarak kaydedilir.
 
 Kullanım:
-  load_cached(cas)              → str (önbellekten oku)
-  save_cached(cas, reg_no)      → None (diske yaz)
-  fetch_reach_no_async(cas)     → str (statik DB → önbellek → canlı API)
-  extract_reg_no(substance)     → str (ECHA API yanıtından çıkar)
+  load_cached(cas)              → str (disk önbelleğinden oku)
+  save_cached(cas, reg_no)      → None (disk önbelleğine yaz)
+  fetch_reach_no_async(cas)     → str (tam arama zinciri)
+  extract_reg_no(substance)     → str (eski ECHA API yanıtı için — geriye dönük uyum)
 """
 import json, os, re
-import httpx
 
 _BASE    = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'reach_cache')
+_DB_PATH = os.path.join(os.path.dirname(__file__), 'reach_db.py')
 _REG_PAT = re.compile(r'01-\d{10}-\d{2}-\d{4}')
+_EC_PAT  = re.compile(r'\b\d{3}-\d{3}-\d\b')
+
 
 # ── Disk I/O ──────────────────────────────────────────────────────────────────
 
@@ -41,12 +43,49 @@ def save_cached(cas: str, reg_no: str) -> None:
         pass
 
 
-# ── ECHA API yanıtından REACH no çıkarımı ────────────────────────────────────
+# ── reach_db.py'e kalıcı kayıt ───────────────────────────────────────────────
+
+def _append_to_reach_db(cas: str, reg_no: str, ec: str = '', name: str = '') -> bool:
+    """Bulunan REACH numarasını reach_db.py'deki REACH_DB sözlüğüne ekler.
+    Sunucu yeniden başlatıldığında statik DB'den okunur."""
+    try:
+        with open(_DB_PATH, 'r', encoding='utf-8') as f:
+            content = f.read()
+
+        # Zaten mevcutsa atla
+        if f"'{cas}'" in content or f'"{cas}"' in content:
+            return False
+
+        ec_s   = (ec   or '').replace("'", '')
+        name_s = (name or cas).replace("'", '').replace('"', '')
+        new_line = (
+            f"    '{cas}':  {{'reg':['{reg_no}'],'ec':'{ec_s}',"
+            f"'name':'{name_s}'}},  # AI\n"
+        )
+
+        # REACH_DB'yi kapatan ilk tek-'}' satırını bul ve önüne ekle
+        lines = content.split('\n')
+        for i, line in enumerate(lines):
+            if line.strip() == '}':
+                lines.insert(i, new_line.rstrip('\n'))
+                break
+        else:
+            return False
+
+        with open(_DB_PATH, 'w', encoding='utf-8') as f:
+            f.write('\n'.join(lines))
+
+        print(f'[REACH DB] {cas} → reach_db.py\'e eklendi: {reg_no}')
+        return True
+    except Exception as e:
+        print(f'[REACH DB] reach_db.py güncelleme hatası: {e}')
+        return False
+
+
+# ── ECHA API yanıtından REACH no çıkarımı (geriye dönük uyum) ────────────────
 
 def extract_reg_no(substance: dict) -> str:
-    """ECHA API substance dict'inden REACH kayıt numarasını çıkar.
-    Birden fazla olası alan adı denenir; regex ile 01-XXXXXXXXXX-XX-XXXX aranır."""
-    # Liste tipli alanlar (birden fazla kayıt olabilir)
+    """Eski ECHA API JSON yanıtından REACH kayıt numarası çıkarır."""
     for field in ('registrationNumbers', 'registrationDossiers', 'registrations',
                   'regNos', 'dossierNumbers', 'reachRegNumbers'):
         val = substance.get(field)
@@ -69,7 +108,6 @@ def extract_reg_no(substance: dict) -> str:
             m = _REG_PAT.search(val)
             if m:
                 return m.group()
-    # String değerli tekil alanlar
     for field in ('registrationNumber', 'regNo', 'reach_no', 'reachNo',
                   'firstRegistrationNumber'):
         val = substance.get(field, '')
@@ -80,14 +118,67 @@ def extract_reg_no(substance: dict) -> str:
     return ''
 
 
-# ── Canlı ECHA API çekimi ─────────────────────────────────────────────────────
+# ── Claude AI + web arama ─────────────────────────────────────────────────────
+
+async def _fetch_via_ai(cas: str) -> tuple[str, str, str]:
+    """Claude AI ve web aramasıyla REACH numarasını resmi kaynaklardan bulur.
+    Returns: (reg_no, ec, name) — bulunamazsa ('', '', '')"""
+    api_key = os.environ.get('ANTHROPIC_API_KEY', '')
+    if not api_key:
+        return '', '', ''
+
+    try:
+        import anthropic
+    except ImportError:
+        print('[REACH AI] anthropic paketi kurulu değil — pip install anthropic')
+        return '', '', ''
+
+    try:
+        client = anthropic.AsyncAnthropic(api_key=api_key)
+        prompt = (
+            f"CAS numarası {cas} olan kimyasalın REACH kayıt numarasını resmi "
+            f"kaynaklardan bul. ECHA web sitesi (echa.europa.eu), üretici GBF/SDS "
+            f"belgeleri veya kimyasal veritabanlarında ara. "
+            f"Yalnızca 01-XXXXXXXXXX-XX-XXXX formatındaki gerçek kayıt numarasını, "
+            f"EC numarasını (XXX-XXX-X) ve kimyasalın İngilizce adını yaz. "
+            f"Kaynak URL'sini de belirt. Uydurma."
+        )
+        response = await client.messages.create(
+            model='claude-haiku-4-5-20251001',
+            max_tokens=512,
+            tools=[{'type': 'web_search_20250305', 'name': 'web_search', 'max_uses': 3}],
+            messages=[{'role': 'user', 'content': prompt}],
+        )
+
+        # Tüm metin bloklarından bilgileri çıkar
+        full_text = ' '.join(
+            block.text for block in response.content if hasattr(block, 'text')
+        )
+
+        reg_m = _REG_PAT.search(full_text)
+        if not reg_m:
+            print(f'[REACH AI] {cas}: kayıt no bulunamadı')
+            return '', '', ''
+
+        reg_no = reg_m.group()
+        ec_m   = _EC_PAT.search(full_text)
+        ec     = ec_m.group() if ec_m else ''
+        print(f'[REACH AI] {cas} → {reg_no}  EC={ec}')
+        return reg_no, ec, ''
+
+    except Exception as e:
+        print(f'[REACH AI] {cas} hata: {e}')
+        return '', '', ''
+
+
+# ── Ana arama zinciri ─────────────────────────────────────────────────────────
 
 async def fetch_reach_no_async(cas: str) -> str:
     """REACH kayıt numarasını şu sırayla arar:
-      1. Statik reach_db (import ederek)
-      2. Disk önbelleği (data/reach_cache/)
-      3. ECHA substances API (canlı)
-    Sonuç disk önbelleğine kaydedilir."""
+      1. Statik reach_db (sunucu başlangıcında yüklenir)
+      2. Disk önbelleği (data/reach_cache/{prefix}/{cas}.json)
+      3. Claude AI + web arama (ANTHROPIC_API_KEY gerekli)
+    Adım 3'te bulunan numara hem disk önbelleğine hem reach_db.py'e yazılır."""
     cas = cas.strip()
     if not cas:
         return ''
@@ -106,33 +197,10 @@ async def fetch_reach_no_async(cas: str) -> str:
     if cached:
         return cached
 
-    # 3. ECHA substances API
-    try:
-        async with httpx.AsyncClient() as client:
-            r = await client.get(
-                'https://api.echa.europa.eu/api/substances/search',
-                params={'q': cas, 'number_type': 'cas'},
-                timeout=10.0,
-                headers={'Accept': 'application/json'},
-            )
-            if r.status_code != 200:
-                print(f'[REACH API] {cas}: HTTP {r.status_code}')
-                return ''
-            raw = r.json()
-            substances = raw if isinstance(raw, list) else raw.get('results', [])
-            if not substances:
-                print(f'[REACH API] {cas}: sonuç yok')
-                return ''
-            substance = substances[0]
-            print(f'[REACH API] {cas} alan adları: {list(substance.keys())}')
-            reg_no = extract_reg_no(substance)
-            if reg_no:
-                save_cached(cas, reg_no)
-                print(f'[REACH API] {cas} → {reg_no} (önbelleğe alındı)')
-            else:
-                # İlk birkaç çağrıda yanıtı görmek için tam substance logla
-                print(f'[REACH API] {cas}: kayıt no bulunamadı — yanıt: {substance}')
-            return reg_no
-    except Exception as e:
-        print(f'[REACH API] {cas} hata: {e}')
-    return ''
+    # 3. Claude AI + web arama
+    reg_no, ec, name = await _fetch_via_ai(cas)
+    if reg_no:
+        save_cached(cas, reg_no)
+        _append_to_reach_db(cas, reg_no, ec, name)
+
+    return reg_no

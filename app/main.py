@@ -272,6 +272,7 @@ async def generate_pdf(data: dict = Body(...)):
             # measured: False → motor hesapladı (teorik, KKDİK Ek-2 §9 dipnotu)
             _theo = _phys_res.get('theo_props') or {}
             _phys_methods: dict = {}
+            _req_methods: dict = data.get('phys_methods', {})  # JS'den gelen measured bayrağı
             _BACKFILL_FIELDS = (
                 'flash_point', 'boiling_point', 'density', 'vapor_density',
                 'vapor_pressure', 'lel', 'uel', 'viscosity', 'solubility',
@@ -295,9 +296,12 @@ async def generate_pdf(data: dict = Body(...)):
                 )
 
                 if _has_user_val:
-                    # Kullanıcı değer girmiş — ölçülen olarak işaretle
+                    # Kullanıcı değer girmiş — JS'den gelen measured bayrağına güven
+                    # (motor auto-fill ise JS dataset.source='theo' → measured=False gönderir)
+                    _req_m = _req_methods.get(_bk)
+                    _is_measured = bool(_req_m.get('measured', True)) if isinstance(_req_m, dict) else True
                     _phys_methods[_bk] = {
-                        'measured': True, 'standard': _tp_std, 'error_pct': None,
+                        'measured': _is_measured, 'standard': _tp_std, 'error_pct': None,
                     }
                 elif _tp_val is not None:
                     # Kullanıcı boş bırakmış, teorik değer var → backfill

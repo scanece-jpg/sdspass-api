@@ -3775,11 +3775,16 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
     const physMethods = {};
     const _methodKeys = ['density','boiling_point','flash_point','lel','uel',
                          'vapor_pressure','vapor_density','viscosity','solubility'];
+    // Form alanı → dataset.source eşlemesi (motor auto-fill mi kullanıcı girişi mi?)
+    const _formSrcMap = { density:'tf_density', boiling_point:'tf_bp',
+                          flash_point:'tf_fp', viscosity:'tf_visc', solubility:'tf_sol' };
     _methodKeys.forEach(k => {
       const tprop = tp[k];
       if (!tprop || typeof tprop !== 'object') return;
+      const formEl   = _formSrcMap[k] ? document.getElementById(_formSrcMap[k]) : null;
+      const userEntered = formEl?.dataset?.source === 'user'; // kullanıcı bizzat girdiyse true
       physMethods[k] = {
-        measured:  tprop.measured  || false,
+        measured:  userEntered || (tprop.measured || false),
         method:    tprop.method    || '',
         standard:  tprop.standard  || '',
         error_pct: tprop.error?.pct ?? null,

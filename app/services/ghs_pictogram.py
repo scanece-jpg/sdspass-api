@@ -44,7 +44,10 @@ H_TO_GHS = {
     'GHS05': {'H290','H314','H318'},
     'GHS06': {'H300','H301','H310','H311','H330','H331'},
     'GHS07': {'H302','H312','H315','H316','H317','H319','H320','H332','H335','H336'},
-    'GHS08': {'H304','H334','H340','H341','H350','H351','H360','H361','H362','H370','H371','H372','H373'},
+    'GHS08': {'H304','H334','H340','H341','H350','H351',
+              'H360','H360D','H360F','H360FD',
+              'H361','H361D','H361F','H361FD',
+              'H362','H370','H371','H372','H373'},
     # SEA Ek-5 §3.1: Yalnızca H400, H410, H411 GHS09 piktogramı alır.
     # H412 (Aquatic Chronic 3) ve H413 (Aquatic Chronic 4) piktogram ALMAZ.
     'GHS09': {'H400','H401','H410','H411'},
@@ -71,6 +74,7 @@ def get_ghs_codes(h_codes: list) -> list:
     """H kodlarından ilgili GHS piktogram kodlarını döndür.
     SEA Madde 28 öncelik kuralları uygulanır.
     """
+    h_codes = [h.upper() for h in h_codes]
     pics = set()
     for ghs, h_set in H_TO_GHS.items():
         if any(h in h_set for h in h_codes):

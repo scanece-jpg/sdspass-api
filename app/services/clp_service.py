@@ -159,7 +159,7 @@ DANGER_H = {
     # H272 — Ox. Liq. 2 (Danger) veya Ox. Liq. 3 (Warning) için aynı kod kullanılır.
     # Kategori bilinmeden Danger/Warning ayrımı yapılamaz → JS motoru ile tutarlı: Warning.
     'H300','H301','H304','H310','H311','H314','H318','H330','H331',
-    'H334','H340','H350','H360','H370','H372',
+    'H334','H340','H350','H360','H360D','H360F','H360FD','H370','H372',
 }
 
 # CLP Annex I üstünlük (dominance) kuralları — alt kategori H kodlarını sil
@@ -482,6 +482,39 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
                 if sub in seen_h:
                     seen_h.discard(sub)
                     passed = [p for p in passed if p.get("h_code") != sub]
+
+    # Prefix dominance: herhangi bir H360x varsa tüm H361x kaldırılır
+    if any(h.startswith('H360') for h in seen_h):
+        for _h in list(seen_h):
+            if _h.startswith('H361'):
+                seen_h.discard(_h)
+                passed = [p for p in passed if not p.get('h_code','').startswith('H361')]
+
+    # Sub-kod çözümleme: H360/H361 → H360D/H361D vb. (bileşen h_code'larından)
+    for _base, _classes in (('H360', ('Repr. 1A', 'Repr. 1B')), ('H361', ('Repr. 2',))):
+        if _base not in seen_h:
+            continue
+        _cutoff = CLP_CUTOFFS_DICT[_classes[0]]['cutoff']
+        _has_d = _has_f = False
+        for _comp in components:
+            _conc = float(_comp.get('concentration', _comp.get('conc', 0)) or 0)
+            if _conc < _cutoff:
+                continue
+            for _haz in _comp.get('hazards', []):
+                _hc   = (_haz.get('h_code')  or '').replace('*', '').strip()
+                _hcls = (_haz.get('h_class') or '').replace('*', '').strip()
+                if any(c in _hcls for c in _classes) and _hc.upper().startswith(_base) and len(_hc) > 4:
+                    _sfx = _hc[4:].upper()
+                    if 'D' in _sfx: _has_d = True
+                    if 'F' in _sfx: _has_f = True
+        if not (_has_d or _has_f):
+            continue
+        _resolved = _base + ('FD' if _has_d and _has_f else ('D' if _has_d else 'F'))
+        seen_h.discard(_base)
+        seen_h.add(_resolved)
+        for _p in passed:
+            if _p.get('h_code') == _base:
+                _p['h_code'] = _resolved
 
     h_codes = sorted(seen_h)
     signal  = "Danger" if any(h in DANGER_H for h in h_codes) else ("Warning" if h_codes else "")

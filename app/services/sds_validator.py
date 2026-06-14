@@ -188,7 +188,10 @@ def validate_sds(
              "Su reaktif madde — B7 Depolama: nem ve su kaynaklarından korunma zorunludur.")
 
     # V011: CMR maddeler → B8'de özel KKE
-    cmr_h = {"H340","H341","H350","H351","H360","H361","H362"}
+    cmr_h = {"H340","H341","H350","H351",
+             "H360","H360D","H360F","H360FD",
+             "H361","H361D","H361F","H361FD",
+             "H362"}
     if any(h in h_codes for h in cmr_h):
         info("V011","B8",
              "CMR maddesi (kanserojen/mutajen/üreme toksik) — B8'de solunum koruması ve özel KKE gerekebilir.")

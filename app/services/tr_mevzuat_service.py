@@ -84,7 +84,10 @@ def get_section15_text(
     applicable = ['kkdik', 'sea', 'kimyasal_is', 'adr_tr', 'atik']
 
     # Kanserojenik/mutajenik maddeler
-    cancer_h = {'H340','H341','H350','H351','H360','H361','H362'}
+    cancer_h = {'H340','H341','H350','H351',
+                'H360','H360D','H360F','H360FD',
+                'H361','H361D','H361F','H361FD',
+                'H362'}
     if any(h in h_codes for h in cancer_h):
         applicable.append('kanserojen')
 
@@ -129,7 +132,10 @@ def _ewc_code_bullet(h_codes: list, lang: str = 'TR') -> str:
     """
     h_set = set(h_codes or [])
 
-    if h_set & {'H340', 'H341', 'H350', 'H351', 'H360', 'H361', 'H362'}:
+    if h_set & {'H340','H341','H350','H351',
+                'H360','H360D','H360F','H360FD',
+                'H361','H361D','H361F','H361FD',
+                'H362'}:
         code = '16 05 06*'
         desc_tr = 'Tehlikeli madde içeren atık laboratuvar kimyasalları'
         desc_en = 'Laboratory chemicals, consisting of or containing dangerous substances'
@@ -234,7 +240,10 @@ def get_disposal_content(h_codes: list = None, lang: str = 'TR') -> dict:
     ewc_bullet = _ewc_code_bullet(h_codes, lang)
 
     # ── 6. CMR maddeler → ek uyarı ───────────────────────────────────────────
-    _cmr_h = {'H340', 'H341', 'H350', 'H351', 'H360', 'H361', 'H362'}
+    _cmr_h = {'H340','H341','H350','H351',
+              'H360','H360D','H360F','H360FD',
+              'H361','H361D','H361F','H361FD',
+              'H362'}
     product_bullets = [ref_bullet, method_bullet, ewc_bullet]
     if any(h in h_codes for h in _cmr_h):
         if lang == 'TR':

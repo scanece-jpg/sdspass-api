@@ -2663,7 +2663,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
 
     # CSA zorunluluğu kontrolü — KKDİK Madde 14: yıllık ≥1 ton üretim/ithalat +
     # SVHC/kanserojen/mutajen/üreme toksik ise KGA (Kimyasal Güvenlik Değerlendirmesi) zorunlu
-    _cmr_h = {'H340','H341','H350','H350i','H351','H360','H360D','H360F','H361','H361d','H361f','H334'}
+    _cmr_h = {'H340','H341','H350','H350i','H351',
+              'H360','H360D','H360F','H360FD',
+              'H361','H361d','H361f','H361fd','H361D','H361F','H361FD',
+              'H334'}
     _has_cmr = bool(set(h_codes) & _cmr_h)
     if _has_cmr:
         story.append(Paragraph(

@@ -97,10 +97,28 @@ async def generate_pdf(data: dict = Body(...)):
         lang        = data.get('lang', 'TR')
         product     = data.get('product', {})
         components  = data.get('components', [])
+        # H360x/H361x sub-kodlarını kanonik büyük harfe normalize et (H361d→H361D, H360Df→H360FD)
+        def _norm_sub(h: str) -> str:
+            s = str(h).replace('*', '').strip()
+            if len(s) <= 4:
+                return s
+            base, sfx = s[:4], s[4:].upper()
+            if base in ('H360', 'H361'):
+                if 'D' in sfx and 'F' in sfx:
+                    sfx = 'FD'
+                elif 'D' in sfx:
+                    sfx = 'D'
+                elif 'F' in sfx:
+                    sfx = 'F'
+                else:
+                    sfx = ''
+                return base + sfx
+            return s
+
         # Tüm H kodlarını str'e normalize et — int/None gelirse PDF çökmez
-        h_codes     = [str(h) for h in data.get('h_codes', []) if h is not None]
+        h_codes     = [_norm_sub(h) for h in data.get('h_codes', []) if h is not None]
         # all_h_codes: dominance öncesi tam sınıflandırma (SDS Bölüm 2.1 için)
-        all_h_codes = [str(h) for h in data.get('all_h_codes', []) if h is not None] or h_codes
+        all_h_codes = [_norm_sub(h) for h in data.get('all_h_codes', []) if h is not None] or h_codes
         euh_codes   = [str(h) for h in data.get('euh_codes', []) if h is not None]
         p_codes_in  = data.get('p_codes', [])
         disc_map    = data.get('disclosure_map', {})
@@ -319,7 +337,10 @@ async def generate_pdf(data: dict = Body(...)):
             _seen = set()
 
             for p in _clp_res.get('passed', []):
-                hc = (p.get('h_code') or '').replace('*','').strip()[:4]
+                _hcf = (p.get('h_code') or '').replace('*','').strip()
+                hc   = _norm_sub(_hcf)
+                if hc[:4] not in ('H360', 'H361'):
+                    hc = hc[:4]
                 # ECO_H_CODES burada filtreleniyor: aquatik sınıflandırma yalnızca
                 # eco_engine'den gelir (SEA Tablo 4.1.2 toplamsal formül).
                 # clp_service'in 0.1% kesme değeri raporlama eşiğidir, sınıflandırma eşiği değil.

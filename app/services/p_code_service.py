@@ -338,7 +338,7 @@ CONTEXT_SUPERSEDES: Dict[Tuple[str, str], List[str]] = {
     ('P260',           '__any__'): ['P261'],
     ('P271',           '__any__'): ['P261'],
     ('P304+P340',      '__any__'): ['P304+P341'],
-    ('P305+P351+P338', '__any__'): ['P337+P313', 'P338', 'P351'],
+    ('P305+P351+P338', '__any__'): ['P338', 'P351'],  # P337+P313 ayrı senaryo (kalıcı tahriş → doktor)
     ('P303+P361+P353', '__any__'): ['P302+P352', 'P361', 'P353'],
     ('P308+P311',      '__any__'): ['P308+P313'],
     ('P333+P313',      '__any__'): ['P332+P313'],
@@ -525,7 +525,7 @@ H_BASED_LABEL_FORCED: Dict[str, List[str]] = {
     'H318': ['P280', 'P305+P351+P338', 'P310'],   # geri dönüşsüz göz hasarı
     'H315': ['P280', 'P302+P352'],
     'H317': ['P280', 'P302+P352'],
-    'H319': ['P280', 'P305+P351+P338'],
+    'H319': ['P280', 'P305+P351+P338', 'P337+P313'],  # CLP Annex IV §3.3.4.1 Tablo 3.3.5
     # ── Akut Toksisite — oral — CLP Annex IV §3.1 Tablo 6.1 ──────────────────
     # H_TO_P H300 ve H301 her ikisi için P301+P310 üretiyor (SEA Rehberi ile tutarlı)
     'H300': ['P301+P310', 'P405'],
@@ -630,7 +630,7 @@ def select_label_p_codes(all_p_codes: List[str], max_codes: int = 6,
     SUPERSEDE_LABEL = {
         'P301+P310':     ['P301+P312', 'P310', 'P311', 'P312'],
         'P303+P361+P353':['P302+P352', 'P361', 'P353'],
-        'P305+P351+P338':['P338', 'P351', 'P337+P313'],  # P305 göz müdahalesini kapsıyor
+        'P305+P351+P338':['P338', 'P351'],  # P337+P313 ayrı senaryo (kalıcı tahriş → doktor)
         'P260':          ['P261'],
         'P333+P313':     ['P332+P313'],
         'P308+P311':     ['P308+P313'],

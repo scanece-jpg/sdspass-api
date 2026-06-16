@@ -36,8 +36,10 @@ H_TO_ADR: Dict[str, Dict] = {
     # Sınıf 2.1 — Yanıcı Gaz
     'H220': {'class': '2.1', 'pg': None}, 'H221': {'class': '2.1', 'pg': None},
     'H222': {'class': '2.1', 'pg': None}, 'H223': {'class': '2.1', 'pg': None},
-    # Sınıf 2.2 — Oksitleyici Gaz
+    # Sınıf 2.2 — Oksitleyici Gaz + Yanıcı Olmayan Sıkıştırılmış/Soğutulmuş Gaz
     'H270': {'class': '2.2', 'pg': None},
+    'H280': {'class': '2.2', 'pg': None},   # Sıkıştırılmış/sıvılaştırılmış gaz (CLP §2.5)
+    'H281': {'class': '2.2', 'pg': None},   # Soğutulmuş sıvılaştırılmış gaz (kriyojenik)
     # Sınıf 3 — Yanıcı Sıvı (parlama noktasına göre PG)
     'H224': {'class': '3', 'pg': 'I'},    # FP < 23°C, BP ≤ 35°C
     'H225': {'class': '3', 'pg': 'II'},   # FP < 23°C, BP > 35°C
@@ -148,8 +150,10 @@ def resolve_conflict(cls_a: str, pg_a: Optional[str],
     return {'winner': cls_a, 'win_pg': pg_a, 'loser': cls_b}
 
 
-def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: bool) -> Dict:
+def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: bool,
+                  h_set: set = None) -> Dict:
     """UN numarası ve etiket belirle."""
+    h_set = h_set or set()
     if cls == '1':
         return {
             'un': 'UN 0000*', 'label': 'Patlayıcı',
@@ -161,9 +165,19 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
             'note': 'Maddeye özgü UN numarası önceliklidir (ör. UN1978 propan, UN1001 asetilen)',
         }
     if cls == '2.2':
+        if 'H270' in h_set:
+            return {
+                'un': 'UN 3156', 'label': 'Sıkıştırılmış Gaz, Oksitleyici, B.N.O.',
+                'note': 'ADR Sınıf 2.2 oksitleyici — tüp/tank özel kuralları geçerlidir',
+            }
+        if 'H281' in h_set:
+            return {
+                'un': 'UN 3158', 'label': 'Basınç Altında Soğutulmuş Gaz, Yanıcı Olmayan, B.N.O.',
+                'note': 'Kriyojenik gaz — özel yalıtımlı tank gerektirir (ADR P203)',
+            }
         return {
-            'un': 'UN 3156', 'label': 'Sıkıştırılmış Gaz, Oksitleyici, B.N.O.',
-            'note': 'ADR Sınıf 2.2 oksitleyici — tüp/tank özel kuralları geçerlidir',
+            'un': 'UN 1956', 'label': 'Sıkıştırılmış Gaz, Yanıcı Olmayan, B.N.O.',
+            'note': 'Maddeye özgü UN numarası önceliklidir (ör. UN1066 azot, UN1046 helyum)',
         }
     if cls == '3':
         if sub == '8':
@@ -324,7 +338,17 @@ def classify(h_codes: List[str], form: str = 'liquid',
     sub_class = subs[0]['class'] if subs else None
 
     # ── Adım 4: UN ve etiket ──────────────────────────────────────────────────
-    un_entry = _get_un_entry(primary['class'], primary['pg'], sub_class, is_solid)
+    un_entry = _get_un_entry(primary['class'], primary['pg'], sub_class, is_solid, h_set)
+
+    # Aerosol formu — her zaman UN 1950 (CLP §2.3.6 / ADR 2023 Sınıf 2)
+    # H222/H223 → Sınıf 2.1 doğru; ama UN 1954 değil UN 1950 kullanılır
+    if form == 'aerosol':
+        _aero_lbl = 'Aerosol, Yanıcı' if h_set & {'H222', 'H223'} else 'Aerosol'
+        un_entry = {
+            'un':   'UN 1950',
+            'label': _aero_lbl + ', B.N.O.',
+            'note': 'Aerosol dispensers her zaman UN 1950 — CLP §2.3.6 / ADR 2023',
+        }
 
     # ── Adım 5: Uyarılar ─────────────────────────────────────────────────────
     # (a) H22x çelişki kontrolü

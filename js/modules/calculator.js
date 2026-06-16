@@ -53,6 +53,17 @@ const CalculatorModule = (() => {
     _td('tf_solubility',  'solubility');
     if (phRaw) testData.ph = phRaw;
 
+    // Özel fiziksel tehlike muafiyet soruları (Adım 3)
+    const _exVal = (name, selId) => {
+      const checked = document.querySelector(`input[name="${name}"]:checked`)?.value;
+      if (!checked || checked === 'na') return 'na';
+      return document.getElementById(selId)?.value || null;
+    };
+    testData.water_reactive  = _exVal('ex_wr',   'sel_wr');
+    testData.pyrophoric      = _exVal('ex_pyro', 'sel_pyro');
+    testData.self_heating    = _exVal('ex_sh',   'sel_sh');
+    testData.metal_corrosive = _exVal('ex_mc',   'sel_mc');
+
     const payload = {
       components:  comps,
       form,

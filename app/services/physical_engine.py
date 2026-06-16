@@ -756,6 +756,23 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                           'signal': 'Warning', 'source': _ox_src,
                           'cutoff_used': '≥ %1 oksitleyici bileşen (CLP Ek-I Tablo 2.13)'})
 
+    # Özel fiziksel tehlike muafiyet/manuel giriş (kullanıcı beyanı)
+    _MANUAL_H_MAP = {
+        'water_reactive':  {'H260': ('H260', 'Water React. 1',   'Danger'),
+                            'H261': ('H261', 'Water React. 2/3', 'Warning')},
+        'pyrophoric':      {'H250': ('H250', 'Pyr. Liq./Sol. 1', 'Danger')},
+        'self_heating':    {'H251': ('H251', 'Self-heat. 1',     'Danger'),
+                            'H252': ('H252', 'Self-heat. 2',     'Warning')},
+        'metal_corrosive': {'H290': ('H290', 'Met. Corr. 1',    'Warning')},
+    }
+    for field, h_map in _MANUAL_H_MAP.items():
+        val = (test_data.get(field) or '').strip()
+        if val and val != 'na' and val in h_map:
+            h, h_class, signal = h_map[val]
+            extra.append({'type': f'manual_{field}', 'h': h, 'h_class': h_class,
+                          'signal': signal, 'source': 'Kullanıcı beyanı — test sonucu',
+                          'cutoff_used': 'Manuel giriş (CLP Ek-I muafiyet dışı)'})
+
     # Teorik fiziksel özellikler
     theo_props = calc_theo_props(comps) if form in ('liquid', 'paste', 'aerosol') else {}
     if theo_props is None:

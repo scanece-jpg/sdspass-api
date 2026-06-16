@@ -794,6 +794,11 @@ async def generate_pdf(data: dict = Body(...)):
         # (ör. H241 kalkınca Danger devam edip etmediğini doğrula)
         _clean_after_filter = {h.split()[0] for h in h_codes if isinstance(h, str)}
         signal = 'Danger' if _clean_after_filter & DANGER_H else ('Warning' if _clean_after_filter else '')
+        # P kodlarını temizlenmiş h_codes ile yeniden hesapla
+        # (filtreden önce H260/H261 vb. varsa P231+P232 gibi yanlış P kodları atanmış olabilir)
+        p_result = assign_p_codes(h_codes, signal, usage=usage)
+        p_result['label'] = select_label_p_codes(p_result['p_codes'], 6, h_codes=h_codes)
+        p_result['sds']   = classify_sds_p_codes(p_result['p_codes'])
 
         # Revizyon tarihi
         import datetime

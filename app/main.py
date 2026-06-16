@@ -768,6 +768,24 @@ async def generate_pdf(data: dict = Body(...)):
         except Exception:
             pass  # Hata durumunda frontend verisi korunur
 
+        # ── all_h_codes temizle — eski frontend verisinden gelen geçersiz kodları çıkar ──
+        # Senaryo 3 "manuel" fiziksel tehlike kodları yalnızca physical_engine veya
+        # test_data üretebilir. py_clp_passed'da yoklarsa all_h_codes'tan silinir.
+        # Böylece eski JS motorundan veya eski hesaptan kalan H242/H250/H260/H290 vb.
+        # kodlar B2.1'de "Baskın tehlike sınıfı kapsamında" notu ile görünmez.
+        _MANUAL_PHYS_H = {
+            'H240','H241','H242',           # Organik peroksit / öz-reaktif
+            'H250','H251','H252',           # Pirofor / kendiliğinden ısınan
+            'H260','H261',                  # Su-reaktif
+            'H270','H271','H272',           # Oksitleyici gaz/katı/sıvı
+            'H290',                         # Metal aşındırıcı
+        }
+        _engine_h_set = {e['h_code'] for e in py_clp_passed}
+        all_h_codes = [
+            h for h in all_h_codes
+            if h not in _MANUAL_PHYS_H or h in _engine_h_set
+        ]
+
         # Revizyon tarihi
         import datetime
         rev_date = revision_in.get('date', datetime.datetime.now().strftime('%d.%m.%Y'))

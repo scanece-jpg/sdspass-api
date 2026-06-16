@@ -49,8 +49,8 @@ const CalculatorModule = (() => {
     };
     _td('tf_density',     'density');
     _td('tf_bp',          'boiling_point');
-    _td('tf_viscosity',   'viscosity');
-    _td('tf_solubility',  'solubility');
+    _td('tf_visc',        'viscosity');
+    _td('tf_sol',         'solubility');
     _td('tf_mp',          'melting_point');
     _td('tf_ait',         'auto_ignition');
     _td('tf_decomp',      'decomp_temp');

@@ -2369,6 +2369,7 @@ function _autofillPhysFields(tp) {
     { id: 'tf_sol',     key: 'sol',     val: tp.solubility?.value },
     { id: 'tf_bp',      key: 'bp',      val: tp.boiling_point?.value },
     { id: 'tf_fp',      key: 'fp',      val: tp.flash_point?.value },
+    { id: 'tf_vp',      key: 'vp',      val: tp.vapor_pressure?.value },
   ];
   for (const { id, key, val } of FIELDS) {
     const el = document.getElementById(id);

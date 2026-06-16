@@ -730,6 +730,18 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                           'signal': 'Danger', 'source': _ox_src,
                           'cutoff_used': '≥ %1 oksitleyici gaz bileşen (CLP Ek-I §2.4)'})
 
+        # H280/H281 — Basınçlı kap (CLP Ek-I §2.5, Tablo 2.5.1)
+        # Gaz formu = ≥200 kPa gauge ambalaj → H280 zorunlu (ambalaj özelliği, içerikten bağımsız)
+        is_cryo = bool(test_data.get('cryo_gas'))
+        extra.append({
+            'type':        'press_gas',
+            'h':           'H281' if is_cryo else 'H280',
+            'h_class':     'Press. Gas (Refrigerated liq.)' if is_cryo else 'Press. Gas (Compressed/Liquefied/Dissolved)',
+            'signal':      'Warning',
+            'source':      'Gaz formu — CLP Ek-I §2.5 Tablo 2.5.1',
+            'cutoff_used': 'Gaz formundaki tüm ürünlere uygulanır (≥200 kPa gauge @20°C)',
+        })
+
     if form in ('solid', 'powder'):
         fs = [c for c in comps
               if (c.get('cas') or c.get('cas_no') or '').strip() in FLAM_SOL_CAS
@@ -739,6 +751,13 @@ def calculate(comps: List[Dict], form: str = 'liquid',
             extra.append({'type': 'flam_sol', 'h': 'H228', 'h_class': 'Flam. Sol. 2',
                           'signal': 'Warning', 'source': _fs_src,
                           'cutoff_used': '≥ %1 yanıcı katı bileşen (CLP Ek-I Tablo 2.7)'})
+
+        # H228 validator uyarısı — katı/toz formda otomatik atama yapılmaz (test zorunlu)
+        warnings.append(
+            'Katı/toz form: Yanıcı katı sınıflandırması (H228) UN Test N.1 test verisine dayanır '
+            '(CLP Ek-I §2.7) — motor bileşen H kodundan karışım H228 ataması yapmaz. '
+            'Bileşen Ek-VI kaydında H228 varsa CLP motoru tarafından değerlendirilir.'
+        )
 
         ox_sol_triggers = []
         ox_sol_has_h271 = False

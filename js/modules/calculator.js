@@ -56,6 +56,7 @@ const CalculatorModule = (() => {
     _td('tf_decomp',      'decomp_temp');
     _td('tf_vp',          'vapor_pressure');
     _td('tf_aerosol_flam_pct', 'aerosol_flam_pct');
+    if (document.getElementById('cb_cryo_gas')?.checked) testData.cryo_gas = true;
     if (phRaw) testData.ph = phRaw;
     const _evapRaw = document.getElementById('tf_evap')?.value?.trim();
     if (_evapRaw) testData.evap_rate = _evapRaw;

@@ -947,6 +947,17 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
           <input type="number" id="tf_decomp" placeholder="Ör: 250">
         </div>
 
+        <!-- Kriyojenik: sadece gaz -->
+        <div class="phys-fw" data-forms="gas">
+          <div class="phys-fh">
+            <label>Kriyojenik / Soğutulmuş</label>
+          </div>
+          <label style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:12px;cursor:pointer">
+            <input type="checkbox" id="cb_cryo_gas" style="width:14px;height:14px">
+            H281 — Soğutulmuş sıvılaştırılmış gaz (CLP §2.5)
+          </label>
+        </div>
+
         <!-- Yanıcı İçerik: sadece aerosol -->
         <div class="phys-fw" data-forms="aerosol">
           <div class="phys-fh">
@@ -2925,6 +2936,13 @@ function renderAll(s) {
         <div class="ecard-head"><span class="ecard-code">${code}</span><span class="ecard-label">${p.label||''}</span></div>
         ${p.source ? `<div class="ecard-source">📦 ${p.source}</div>` : ''}
       </div>`;
+    });
+  }
+
+  // ── Fiziksel Uyarılar ────────────────────────────────────────────────────
+  if ((phys.warnings||[]).length) {
+    phys.warnings.forEach(w => {
+      h += `<div class="warn-box" style="margin-bottom:6px">ℹ ${w}</div>`;
     });
   }
 

@@ -170,7 +170,8 @@ DOMINANCE: dict = {
     'H310': ['H311', 'H312'], 'H311': ['H312'],
     'H330': ['H331', 'H332'], 'H331': ['H332'],
     'H370': ['H371', 'H335', 'H336'], 'H371': ['H335', 'H336'],
-    'H372': ['H373'],
+    # H372 → H373 kuralı KALDIRILDI: stot_re_service organ başına öncelik uygular;
+    # farklı hedef organlar (örn. H372 sinir + H373 işitme) her ikisi de etikette görünmeli.
     'H340': ['H341'], 'H350': ['H351'], 'H360': ['H361'],
     'H410': ['H400', 'H411', 'H412', 'H413'],
     'H411': ['H412', 'H413'],

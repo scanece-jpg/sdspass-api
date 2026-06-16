@@ -10,7 +10,7 @@
 | Motor (servis dosyası) | Ne Hesaplar | Ana Değişken (main.py) | Beslediği SDS Bölümleri |
 |------------------------|-------------|------------------------|-------------------------|
 | `clp_service` — `classify_mixture_clp` | CLP karışım sınıflandırması (cut-off, ATE, dilüsyon) | `py_clp_passed`, `h_codes` | **B2.1** (sınıflandırma tablosu), **B2.2** (H ifadeleri), **B11** (ATE karışım) |
-| `physical_engine` — `calculate` | Fiziksel tehlikeler (parlama noktası, patlayıcı, oksitleyici) | `_phys_res` | **B2.1**, **B9** (fiziksel özellikler), **B10** (stabilite/reaktivite) |
+| `physical_engine` — `calculate` | Fiziksel tehlikeler: H224-H226 (sıvı), H222/H223+H229 (aerosol), H220/H232 (gaz), H270 (oks.gaz), H228 (katı), H271/H272 (oks.katı/sıvı), H304 (aspirasyon) | `_phys_res` | **B2.1**, **B9** (fiziksel özellikler), **B10** (stabilite/reaktivite) |
 | `stot_engine` — `calculate` | Hedef organ toksisitesi (STOT SE/RE sınıflandırması) | `_stot_res` | **B2.1**, **B11** (toksikoloji) |
 | `eco_engine` — `calculate` | Sucul ekotoksisite (M-faktör, eşik, H400/410/411) | `_eco_res2` | **B2.1**, **B12.1** (M-faktör tablosu) |
 | `ecological_service` — `calculate_ecological` | PBT, biyobozunurluk, biyobirikim, endokrin bozucu, toprak | `eco_result` | **B2.3** (PBT/vPvB), **B12.1–12.6** |
@@ -87,4 +87,4 @@
 
 ---
 
-*Son güncelleme: 2026-06-09 — SDSPass sdspass-api main branch*
+*Son güncelleme: 2026-06-16 — physical_engine aerosol H222/H223, H270 (oks.gaz), H271/H272 (oks.katı) eklendi*

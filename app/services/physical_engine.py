@@ -6,11 +6,15 @@ JS physical_engine.js'nin Python karşılığı.
 Bölüm 2.1 (Fiziksel tehlike sınıflandırması) + Bölüm 9 (Fiziksel/kimyasal özellikler)
 
 Kapsanan tehlikeler:
-  Flam. Liq. 1/2/3  (H224/H225/H226) — CLP Annex I Tablo 2.6
+  Flam. Liq. 1/2/3   (H224/H225/H226) — CLP Annex I Tablo 2.6
+  Flam. Aerosol 1/2  (H222/H223)      — CLP Annex I §2.3
+  Aerosol basınç     (H229)           — CLP Annex I §2.3 (tüm aerosoller)
   Asp. Tox. 1        (H304)           — CLP Annex I Tablo 3.10
   Flam. Gas 1A+H232  (H220/H232)      — CLP Annex I §2.2.3
+  Ox. Gas 1          (H270)           — CLP Annex I §2.4
   Flam. Sol. 2       (H228)           — CLP Annex I Tablo 2.7
   Ox. Liq. 3         (H272)           — CLP Annex I Tablo 2.13
+  Ox. Sol. 1/2       (H271/H272)      — CLP Annex I Tablo 2.13
 
 Teorik özellikler:
   Yoğunluk        : ρ_mix = Σwᵢ / Σ(wᵢ/ρᵢ)        ISO 2811
@@ -204,6 +208,35 @@ ASP_CAS = {
 }
 OXIDIZING_CAS = {'7722-84-1','7790-98-9','7775-09-9','7727-54-0'}
 FLAM_SOL_CAS  = {'7704-34-9','1333-86-4','12185-10-3'}
+
+OXIDIZING_GAS_CAS = {
+    '7782-44-7',   # O₂  oksijen
+    '10028-15-6',  # O₃  ozon
+    '7782-50-5',   # Cl₂ klor
+    '7782-41-4',   # F₂  flor
+    '10024-97-2',  # N₂O diazot monoksit
+    '10102-44-0',  # NO₂ azot dioksit
+    '7790-91-2',   # ClF₃ klortriflorür
+}
+
+OXIDIZING_SOLID_CAS = {
+    '7722-64-7',   # KMnO₄     potasyum permanganat   Ox. Sol. 2
+    '6484-52-2',   # NH₄NO₃    amonyum nitrat          Ox. Sol. 3
+    '7757-79-1',   # KNO₃      potasyum nitrat         Ox. Sol. 3
+    '7631-99-4',   # NaNO₃     sodyum nitrat           Ox. Sol. 3
+    '7778-74-7',   # KClO₄     potasyum perklorat      Ox. Sol. 2
+    '7789-38-0',   # NaBrO₃    sodyum bromat           Ox. Sol. 2
+    '10124-37-5',  # Ca(NO₃)₂  kalsiyum nitrat         Ox. Sol. 3
+    '7776-28-5',   # Na₂S₂O₈   sodyum persülfat        Ox. Sol. 2
+    '7727-21-1',   # K₂S₂O₈    potasyum persülfat      Ox. Sol. 2
+    '7778-54-3',   # Ca(ClO)₂  kalsiyum hipoklorit     Ox. Sol. 1
+}
+
+# CLP Ek-I Tablo 2.13.1 — oksitleyici katı kesme değerleri (%w/w)
+OXIDIZING_SOLID_CUTOFFS: Dict[str, float] = {
+    'H271': 1.0,  # Ox. Sol. 1
+    'H272': 1.0,  # Ox. Sol. 2 ve 3
+}
 PYRO_GAS_CAS  = {
     '7803-62-5','19287-45-7','7782-65-2','7803-52-3',
     '13765-25-8','992-94-9','7784-42-1',
@@ -506,6 +539,55 @@ def _calc_flam_liq(comps: List[Dict], user_fp=None) -> Dict:
     return {'result': None, 'source': None, 'fp': None}
 
 
+def _calc_flam_aerosol(comps: List[Dict], user_fp=None) -> Optional[Dict]:
+    """
+    CLP Ek-I §2.3 — Aerosol yanıcılık sınıflandırması (parlama noktası tabanlı).
+    H222 Kat.1: FP < 23°C bileşen ≥ %1
+    H223 Kat.2: FP 23-60°C bileşen ≥ %1 (ve Kat.1 tetiklenmiyorsa)
+    Kat.3     : yanıcı bileşen yok → None (sadece H229 atanır)
+    """
+    DECLARED_FALLBACK = {
+        'H224': -20, 'H225': 15, 'H226': 40,
+    }
+    sum_cat1, sum_cat2 = 0.0, 0.0
+    triggers_cat1: list = []
+    triggers_cat2: list = []
+
+    for c in comps:
+        cas  = (c.get('cas') or c.get('cas_no') or '').strip()
+        conc = float(c.get('concMax') or c.get('conc') or 0)
+        if conc <= 0:
+            continue
+
+        fp = user_fp if user_fp is not None else FP_DB.get(cas, 'MISSING')
+
+        if fp == 'MISSING':
+            hazard_codes = [(h.get('h_code') or '').replace('*','').strip()[:4]
+                            for h in (c.get('hazards') or [])]
+            decl_h = next((h for h in hazard_codes if h in DECLARED_FALLBACK), None)
+            if decl_h:
+                fp = DECLARED_FALLBACK[decl_h]
+
+        if fp is None or fp == 'MISSING' or fp >= 60:
+            continue
+
+        label = f"{c.get('name') or cas} (%{conc:.0f}, FP={fp}°C)"
+        if fp < 23:
+            sum_cat1 += conc
+            triggers_cat1.append(label)
+        else:
+            sum_cat2 += conc
+            triggers_cat2.append(label)
+
+    if sum_cat1 >= 1:
+        return {'h': 'H222', 'h_class': 'Flam. Aerosol 1', 'signal': 'Danger',
+                'source': ', '.join(triggers_cat1)}
+    if sum_cat2 >= 1:
+        return {'h': 'H223', 'h_class': 'Flam. Aerosol 2', 'signal': 'Warning',
+                'source': ', '.join(triggers_cat2)}
+    return None
+
+
 def _calc_asp_tox(comps: List[Dict], test_data: Dict = None) -> Dict:
     kin_visc = None
     if test_data:
@@ -582,7 +664,7 @@ def calculate(comps: List[Dict], form: str = 'liquid',
     primary, extra, warnings = [], [], []
 
     fl = {'result': None, 'source': None, 'fp': None}
-    if form in ('liquid', 'paste', 'aerosol'):
+    if form in ('liquid', 'paste'):
         fl = _calc_flam_liq(comps, user_fp)
         if fl['result']:
             _flam_cutoff = {
@@ -593,6 +675,15 @@ def calculate(comps: List[Dict], form: str = 'liquid',
             primary.append({'type': 'flam_liq', **fl['result'],
                             'source': fl['source'], 'fp': fl['fp'],
                             'cutoff_used': _flam_cutoff})
+
+    if form == 'aerosol':
+        fa = _calc_flam_aerosol(comps, user_fp)
+        if fa:
+            primary.append({'type': 'flam_aerosol', **fa,
+                            'cutoff_used': 'CLP Ek-I §2.3 — Aerosol yanıcılık sınıflandırması'})
+        extra.append({'type': 'aerosol_press', 'h': 'H229', 'h_class': 'Aerosol 3',
+                      'signal': 'Warning', 'source': 'Aerosol ürün — basınçlı kap',
+                      'cutoff_used': 'CLP Ek-I §2.3 — tüm aerosollere uygulanır'})
 
     if form in ('liquid', 'paste'):
         asp = _calc_asp_tox(comps, test_data)
@@ -610,6 +701,19 @@ def calculate(comps: List[Dict], form: str = 'liquid',
             primary.append({'type': 'flam_gas',      **fg['result_h220'], 'source': fg['source'], 'cutoff_used': _pyro_cutoff})
             primary.append({'type': 'flam_gas_pyro', **fg['result_h232'], 'source': fg['source'], 'cutoff_used': _pyro_cutoff})
 
+        ox_gas = [c for c in comps
+                  if ((c.get('cas') or c.get('cas_no') or '').strip() in OXIDIZING_GAS_CAS
+                      or any((h.get('h_code') or '').replace('*','').strip()[:4] == 'H270'
+                             for h in (c.get('hazards') or [])))
+                  and float(c.get('concMax') or c.get('conc') or 0) >= 1]
+        if ox_gas:
+            _ox_src = ', '.join(
+                f"{c.get('name') or (c.get('cas') or c.get('cas_no') or '')} "
+                f"(%{float(c.get('concMax') or c.get('conc') or 0):.0f})" for c in ox_gas)
+            extra.append({'type': 'ox_gas', 'h': 'H270', 'h_class': 'Ox. Gas 1',
+                          'signal': 'Danger', 'source': _ox_src,
+                          'cutoff_used': '≥ %1 oksitleyici gaz bileşen (CLP Ek-I §2.4)'})
+
     if form in ('solid', 'powder'):
         fs = [c for c in comps
               if (c.get('cas') or c.get('cas_no') or '').strip() in FLAM_SOL_CAS
@@ -619,6 +723,28 @@ def calculate(comps: List[Dict], form: str = 'liquid',
             extra.append({'type': 'flam_sol', 'h': 'H228', 'h_class': 'Flam. Sol. 2',
                           'signal': 'Warning', 'source': _fs_src,
                           'cutoff_used': '≥ %1 yanıcı katı bileşen (CLP Ek-I Tablo 2.7)'})
+
+        ox_sol_triggers = []
+        ox_sol_has_h271 = False
+        for c in comps:
+            cas  = (c.get('cas') or c.get('cas_no') or '').strip()
+            conc = float(c.get('concMax') or c.get('conc') or 0)
+            comp_h = {(h.get('h_code') or '').replace('*','').strip()[:4]
+                      for h in (c.get('hazards') or [])}
+            h_match = comp_h & {'H271', 'H272'}
+            in_list = cas in OXIDIZING_SOLID_CAS
+            if (in_list or h_match) and conc >= OXIDIZING_SOLID_CUTOFFS['H272']:
+                ox_sol_triggers.append({'name': c.get('name') or cas, 'conc': conc})
+                if 'H271' in h_match:
+                    ox_sol_has_h271 = True
+        if ox_sol_triggers:
+            _ox_h   = 'H271' if ox_sol_has_h271 else 'H272'
+            _ox_cls = 'Ox. Sol. 1' if ox_sol_has_h271 else 'Ox. Sol. 2'
+            _ox_sig = 'Danger'  if ox_sol_has_h271 else 'Warning'
+            _ox_src = ', '.join(f"{t['name']} (%{t['conc']:.0f})" for t in ox_sol_triggers)
+            extra.append({'type': 'oxidizing_solid', 'h': _ox_h, 'h_class': _ox_cls,
+                          'signal': _ox_sig, 'source': _ox_src,
+                          'cutoff_used': f'≥ %{OXIDIZING_SOLID_CUTOFFS[_ox_h]:.0f} oksitleyici katı bileşen (CLP Ek-I Tablo 2.13)'})
 
     if form in ('liquid', 'paste'):
         ox = [c for c in comps

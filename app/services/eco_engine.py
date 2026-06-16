@@ -9,7 +9,7 @@ SEA Tablo 4.1.1 / 4.1.2 formülleri:
   sumChronicK1 = Σ(Ci × M_kronik) / 100  → H410: ≥ 0.25
   h411Sum      = 10×K1 + K2              → H411: ≥ 0.25
   h412Sum      = 100×K1 + 10×K2 + K3    → H412: ≥ 0.25
-  h413Sum      = K1 + K2 + K3            → H413: ≥ 0.25
+  h413Sum      = K1 + K2 + K3 + K4       → H413: ≥ 0.25
 """
 
 from typing import List, Dict, Optional
@@ -67,6 +67,7 @@ def calculate(comps: List[Dict], eco_test_data: Dict = None) -> Dict:
     sum_chronic_k1  = 0.0
     sum_chronic_k2  = 0.0
     sum_chronic_k3  = 0.0
+    sum_chronic_k4  = 0.0
     ozone: list = []
     pbt:   list = []
 
@@ -98,8 +99,11 @@ def calculate(comps: List[Dict], eco_test_data: Dict = None) -> Dict:
         if 'H411' in haz_set and conc >= 1.0:
             sum_chronic_k2 += conc / 100
 
-        if ('H412' in haz_set or 'H413' in haz_set) and conc >= 1.0:
+        if 'H412' in haz_set and conc >= 1.0:
             sum_chronic_k3 += conc / 100
+
+        if 'H413' in haz_set and conc >= 1.0:
+            sum_chronic_k4 += conc / 100
 
         if cas in OZONE_CAS and conc >= 0.1:
             ozone.append({'name': c.get('name') or cas, 'cas': cas, 'conc': conc})
@@ -109,7 +113,7 @@ def calculate(comps: List[Dict], eco_test_data: Dict = None) -> Dict:
     # ── SEA Tablo 4.1.2 — kronik eşik kararı ────────────────────────────────
     h411_sum = 10  * sum_chronic_k1 + sum_chronic_k2
     h412_sum = 100 * sum_chronic_k1 + 10 * sum_chronic_k2 + sum_chronic_k3
-    h413_sum = sum_chronic_k1 + sum_chronic_k2 + sum_chronic_k3
+    h413_sum = sum_chronic_k1 + sum_chronic_k2 + sum_chronic_k3 + sum_chronic_k4
 
     aquatic: Optional[Dict] = None
     if sum_chronic_k1 >= 0.25:
@@ -130,7 +134,7 @@ def calculate(comps: List[Dict], eco_test_data: Dict = None) -> Dict:
     elif h413_sum >= 0.25:
         aquatic = {
             'h': 'H413', 'h_class': 'Aquatic Chronic 4',
-            'formula': f'Σ(Ci tüm kronik)/100={h413_sum:.4f} ≥ 0.25',
+            'formula': f'K1+K2+K3+K4={h413_sum:.4f} ≥ 0.25',
         }
 
     if aquatic:

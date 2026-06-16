@@ -539,7 +539,11 @@ H_BASED_LABEL_FORCED: Dict[str, List[str]] = {
     # H332 (Kat.4): P304+P340 zorunlu değil — assign_p_codes P261/P271 üretir
     'H330': ['P260', 'P271', 'P304+P340', 'P310', 'P405'],
     'H331': ['P260', 'P271', 'P304+P340', 'P311', 'P405'],
-    # ── STOT — CLP Annex IV §3.8 ─────────────────────────────────────────────
+    # ── STOT SE Kat.3 — CLP Annex I Tablo 3.8.4 ─────────────────────────────
+    # Yanıt P kodları zorunlu: P304+P340 (solunursa) + P312 (iyi hissetmiyorsa ara)
+    'H335': ['P304+P340', 'P312'],   # Solunum yolu tahrişi
+    'H336': ['P304+P340', 'P312'],   # Narkotik etki
+    # ── STOT SE/RE — CLP Annex IV §3.8 ──────────────────────────────────────
     'H370': ['P307+P311', 'P405'],
     'H371': ['P308+P313', 'P405'],
     'H372': ['P260', 'P314', 'P405'],

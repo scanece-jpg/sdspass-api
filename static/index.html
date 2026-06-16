@@ -947,6 +947,15 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
           <input type="number" id="tf_decomp" placeholder="Ör: 250">
         </div>
 
+        <!-- Yanıcı İçerik: sadece aerosol -->
+        <div class="phys-fw" data-forms="aerosol">
+          <div class="phys-fh">
+            <label>Yanıcı İçerik (%w/w)</label>
+            <label class="na-check"><input type="checkbox" id="na_aerosol_flam_pct" onchange="toggleNA(this,'tf_aerosol_flam_pct','aerosol_flam_pct')"> N/A</label>
+          </div>
+          <input type="number" id="tf_aerosol_flam_pct" step="0.1" min="0" max="100" placeholder="CLP §2.3.3 — motor hesaplar">
+        </div>
+
       </div><!-- /phys-grid -->
     </div>
 
@@ -2390,7 +2399,7 @@ function _autofillPhysFields(tp) {
 }
 
 function _resetPhysSourceFields() {
-  ['density','visc','sol','bp','fp'].forEach(key => {
+  ['density','visc','sol','bp','fp','vp'].forEach(key => {
     const el = document.getElementById('tf_' + (key === 'visc' ? 'visc' : key === 'sol' ? 'sol' : key));
     if (el && el.dataset.source === 'theo') { el.value = ''; el.dataset.source = ''; }
     _updateSrcBadge(key, '');

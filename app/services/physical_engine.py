@@ -539,13 +539,28 @@ def _calc_flam_liq(comps: List[Dict], user_fp=None) -> Dict:
     return {'result': None, 'source': None, 'fp': None}
 
 
-def _calc_flam_aerosol(comps: List[Dict], user_fp=None) -> Optional[Dict]:
+def _calc_flam_aerosol(comps: List[Dict], user_fp=None,
+                        aerosol_flam_pct=None) -> Optional[Dict]:
     """
-    CLP Ek-I §2.3 — Aerosol yanıcılık sınıflandırması (parlama noktası tabanlı).
-    H222 Kat.1: FP < 23°C bileşen ≥ %1
-    H223 Kat.2: FP 23-60°C bileşen ≥ %1 (ve Kat.1 tetiklenmiyorsa)
-    Kat.3     : yanıcı bileşen yok → None (sadece H229 atanır)
+    CLP Ek-I §2.3 — Aerosol yanıcılık sınıflandırması.
+    aerosol_flam_pct: Kullanıcı beyanı — yanıcı içerik % (w/w).
+      ≥ 85% → H222 Kat.1 (ısı yanma ≥30 kJ/g doğrulanmalı)
+      1–85% → H223 Kat.2
+      <  1% → None (sadece H229)
+    Girilmemişse parlama noktası tabanlı yöntem kullanılır:
+      H222 Kat.1: FP < 23°C bileşen ≥ %1
+      H223 Kat.2: FP 23-60°C bileşen ≥ %1
     """
+    if aerosol_flam_pct is not None:
+        pct = float(aerosol_flam_pct)
+        if pct >= 85:
+            return {'h': 'H222', 'h_class': 'Flam. Aerosol 1', 'signal': 'Danger',
+                    'source': (f'Kullanıcı beyanı: yanıcı içerik %{pct:.0f} — '
+                               'H222 Cat.1; ısı yanma değeri ≥30 kJ/g doğrulanmalı (CLP Ek-I §2.3.3.1)')}
+        if pct >= 1:
+            return {'h': 'H223', 'h_class': 'Flam. Aerosol 2', 'signal': 'Warning',
+                    'source': f'Kullanıcı beyanı: yanıcı içerik %{pct:.0f} (CLP Ek-I §2.3.3.1)'}
+        return None
     DECLARED_FALLBACK = {
         'H224': -20, 'H225': 15, 'H226': 40,
     }
@@ -677,7 +692,8 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                             'cutoff_used': _flam_cutoff})
 
     if form == 'aerosol':
-        fa = _calc_flam_aerosol(comps, user_fp)
+        fa = _calc_flam_aerosol(comps, user_fp,
+                                aerosol_flam_pct=test_data.get('aerosol_flam_pct'))
         if fa:
             primary.append({'type': 'flam_aerosol', **fa,
                             'cutoff_used': 'CLP Ek-I §2.3 — Aerosol yanıcılık sınıflandırması'})
@@ -776,10 +792,8 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                           'signal': signal, 'source': 'Kullanıcı beyanı — test sonucu',
                           'cutoff_used': 'Manuel giriş (CLP Ek-I muafiyet dışı)'})
 
-    # Teorik fiziksel özellikler
-    theo_props = calc_theo_props(comps) if form in ('liquid', 'paste', 'aerosol') else {}
-    if theo_props is None:
-        theo_props = {}   # calc_theo_props bileşen yoksa None döner — sonraki adımlar için {}
+    # Teorik fiziksel özellikler — katı/toz için yoğunluk+çözünürlük, gaz için buhar yoğunluğu
+    theo_props = calc_theo_props(comps) or {}
 
     # Test verisi varsa üzerine yaz
     if test_data:

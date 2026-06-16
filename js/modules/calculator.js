@@ -51,7 +51,13 @@ const CalculatorModule = (() => {
     _td('tf_bp',          'boiling_point');
     _td('tf_viscosity',   'viscosity');
     _td('tf_solubility',  'solubility');
+    _td('tf_mp',          'melting_point');
+    _td('tf_ait',         'auto_ignition');
+    _td('tf_decomp',      'decomp_temp');
+    _td('tf_vp',          'vapor_pressure');
     if (phRaw) testData.ph = phRaw;
+    const _evapRaw = document.getElementById('tf_evap')?.value?.trim();
+    if (_evapRaw) testData.evap_rate = _evapRaw;
 
     // Uzman karışım test override (sonuç ekranındaki gizli panel)
     const _ovVal = id => document.getElementById(id)?.value || null;

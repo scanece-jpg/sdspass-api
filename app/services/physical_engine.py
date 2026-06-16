@@ -821,19 +821,24 @@ def _apply_test_data(props: Dict, test_data: Dict) -> None:
         'viscosity':     ('viscosity',     'ISO 3219 / ASTM D2196'),
         'solubility':    ('solubility',    'OECD 105'),
         'flash_point':   ('flash_point',   'ISO 2719 / ASTM D93'),
+        'vapor_pressure':('vapor_pressure','Raoult Yasası / OECD 104'),
     }
     for key, (prop, std) in mapping.items():
         if test_data.get(key) is not None:
             props[prop] = meas(test_data[key], std)
 
-    # Yalnızca kullanıcı girer
-    for key, std in [('appearance','REACH Ek II §9'), ('odor','Duyusal test'),
-                     ('melting_point','ISO 1218 / ASTM D97'),
-                     ('auto_ignition','EN 14522 / ASTM E659'),
-                     ('decomp_temp','ISO 11357 / DSC'),
-                     ('log_kow','OECD 117 / 107')]:
-        if test_data.get(key) is not None:
-            props[key] = meas(test_data[key], std)
+    # Yalnızca kullanıcı girer; (test_key, prop_key, std)
+    for test_key, prop_key, std in [
+        ('appearance',  'appearance',        'REACH Ek II §9'),
+        ('odor',        'odor',              'Duyusal test'),
+        ('melting_point','melting_point',    'ISO 1218 / ASTM D97'),
+        ('auto_ignition','auto_ignition',    'EN 14522 / ASTM E659'),
+        ('decomp_temp', 'decomposition_temp','ISO 11357 / DSC'),
+        ('evap_rate',   'evap_rate',         'ASTM D3539'),
+        ('log_kow',     'log_kow',           'OECD 117 / 107'),
+    ]:
+        if test_data.get(test_key) is not None:
+            props[prop_key] = meas(test_data[test_key], std)
 
 
 def update_db(cas: str, props: Dict) -> None:

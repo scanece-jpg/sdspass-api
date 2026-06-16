@@ -276,6 +276,7 @@ async def generate_pdf(data: dict = Body(...)):
             _BACKFILL_FIELDS = (
                 'flash_point', 'boiling_point', 'density', 'vapor_density',
                 'vapor_pressure', 'lel', 'uel', 'viscosity', 'solubility',
+                'melting_point', 'auto_ignition', 'decomposition_temp', 'evap_rate',
             )
             for _bk in _BACKFILL_FIELDS:
                 _tp = _theo.get(_bk)
@@ -305,32 +306,35 @@ async def generate_pdf(data: dict = Body(...)):
                     }
                 elif _tp_val is not None:
                     # Kullanıcı boş bırakmış, teorik değer var → backfill
+                    # _tp.get('measured') True ise kullanıcı test verisi girmiş (theo değil)
+                    _tp_measured = _tp.get('measured', False)
                     _parsed_phys[_bk] = {
                         'display': _tp_disp,
                         'calc':    _tp_val,
                         'pcn':     _tp_val,
                         'nd':      False,
                         'na':      False,
-                        'theo':    True,   # PDF'de "hesaplanmış" notu için
+                        'theo':    not _tp_measured,
                     }
                     _phys_methods[_bk] = {
-                        'measured':  False,
+                        'measured':  _tp_measured,
                         'standard':  _tp_std,
                         'method':    _tp_mth,
                         'error_pct': _tp_err,
                     }
                 elif _tp_disp:
                     # Sayısal değer yok ama metin açıklama var
-                    # (örn. çözünürlük: "Su ile tam karışır")
+                    # (örn. çözünürlük: "Su ile tam karışır", buharlaşma hızı: "Yavaş")
+                    _tp_measured = _tp.get('measured', False)
                     _parsed_phys[_bk] = {
                         'display': _tp_disp,
                         'calc':    None,
                         'nd':      False,
                         'na':      False,
-                        'theo':    True,
+                        'theo':    not _tp_measured,
                     }
                     _phys_methods[_bk] = {
-                        'measured':  False,
+                        'measured':  _tp_measured,
                         'standard':  _tp_std,
                         'method':    _tp_mth,
                         'error_pct': None,

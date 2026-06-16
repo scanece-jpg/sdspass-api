@@ -911,6 +911,42 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
           <input type="number" id="tf_mp" placeholder="Ör: 50°C">
         </div>
 
+        <!-- Buhar Basıncı: sıvı, pasta, aerosol, gaz -->
+        <div class="phys-fw" data-forms="liquid paste aerosol gas">
+          <div class="phys-fh">
+            <label>Buhar Basıncı (hPa @20°C) <span class="motor-badge">● motor</span></label>
+            <label class="na-check"><input type="checkbox" id="na_vp" onchange="toggleNA(this,'tf_vp','vp')"> N/A</label>
+          </div>
+          <input type="number" id="tf_vp" step="0.01" min="0" placeholder="OECD 104 / Raoult">
+        </div>
+
+        <!-- Buharlaşma Hızı: sıvı, pasta, aerosol -->
+        <div class="phys-fw" data-forms="liquid paste aerosol">
+          <div class="phys-fh">
+            <label>Buharlaşma Hızı</label>
+            <label class="na-check"><input type="checkbox" id="na_evap" onchange="toggleNA(this,'tf_evap','evap')"> N/A</label>
+          </div>
+          <input type="text" id="tf_evap" placeholder="Ör: &lt;1 (n-BuAc=1), Yavaş">
+        </div>
+
+        <!-- Kendiliğinden Tutuşma: tüm formlar -->
+        <div class="phys-fw" data-forms="liquid solid gas paste powder aerosol">
+          <div class="phys-fh">
+            <label>Kendiliğinden Tutuşma (°C)</label>
+            <label class="na-check"><input type="checkbox" id="na_ait" onchange="toggleNA(this,'tf_ait','ait')"> N/A</label>
+          </div>
+          <input type="number" id="tf_ait" placeholder="Ör: 400">
+        </div>
+
+        <!-- Bozunma Sıcaklığı: katı, toz, pasta, sıvı -->
+        <div class="phys-fw" data-forms="solid powder paste liquid">
+          <div class="phys-fh">
+            <label>Bozunma Sıcaklığı (°C)</label>
+            <label class="na-check"><input type="checkbox" id="na_decomp" onchange="toggleNA(this,'tf_decomp','decomp')"> N/A</label>
+          </div>
+          <input type="number" id="tf_decomp" placeholder="Ör: 250">
+        </div>
+
       </div><!-- /phys-grid -->
     </div>
 
@@ -921,24 +957,6 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
         <div>
           <label>Koku Eşiği (ppm)</label>
           <input type="number" id="tf_odor_thresh" placeholder="Ör: 0.5" step="0.01">
-        </div>
-      </div>
-
-      <div style="font-size:9px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;margin:12px 0 6px;padding-bottom:4px;border-bottom:1px solid var(--border2)">Termal Özellikler</div>
-      <div class="row2">
-        <div>
-          <label>Buharlaşma Hızı</label>
-          <input type="text" id="tf_evap" placeholder="Ör: &lt;1 (n-BuAc=1), Yavaş">
-        </div>
-        <div>
-          <label>Kendiliğinden Tutuşma (°C)</label>
-          <input type="number" id="tf_ait" placeholder="Ör: 400">
-        </div>
-      </div>
-      <div class="row2" style="margin-top:8px">
-        <div>
-          <label>Bozunma Sıcaklığı (°C)</label>
-          <input type="number" id="tf_decomp" placeholder="Ör: 250">
         </div>
       </div>
 

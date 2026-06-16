@@ -1043,6 +1043,21 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
         </div>
       </div>
 
+      <!-- H240/H241/H242 Organik Peroksit / Öz-Reaktif -->
+      <div class="ex-row">
+        <div class="ex-q">Ürün organik peroksit veya öz-reaktif bileşen içeriyor mu? <span class="ex-tag">H240/H241/H242 Org. Peroksit / Öz-Reaktif</span></div>
+        <div class="ex-opts">
+          <label class="ex-radio"><input type="radio" name="ex_op" value="na" checked onchange="toggleExSel('sel_op',false)"> Hayır — Uygulanamaz</label>
+          <label class="ex-radio"><input type="radio" name="ex_op" value="yes" onchange="toggleExSel('sel_op',true)"> Evet — Test raporum var:</label>
+          <select id="sel_op" class="ex-sel" disabled>
+            <option value="">— Seç —</option>
+            <option value="H240">H240 — ısıtma patlama riski (Tip A)</option>
+            <option value="H241">H241 — ısıtma yangın/patlama riski (Tip B)</option>
+            <option value="H242">H242 — ısıtma yangın riski (Tip C/D/E/F)</option>
+          </select>
+        </div>
+      </div>
+
     </div><!-- /ex-section -->
 
     <!-- Nav Adım 3 -->

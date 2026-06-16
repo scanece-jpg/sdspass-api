@@ -59,10 +59,11 @@ const CalculatorModule = (() => {
       if (!checked || checked === 'na') return 'na';
       return document.getElementById(selId)?.value || null;
     };
-    testData.water_reactive  = _exVal('ex_wr',   'sel_wr');
-    testData.pyrophoric      = _exVal('ex_pyro', 'sel_pyro');
-    testData.self_heating    = _exVal('ex_sh',   'sel_sh');
-    testData.metal_corrosive = _exVal('ex_mc',   'sel_mc');
+    testData.water_reactive    = _exVal('ex_wr',   'sel_wr');
+    testData.pyrophoric        = _exVal('ex_pyro', 'sel_pyro');
+    testData.self_heating      = _exVal('ex_sh',   'sel_sh');
+    testData.metal_corrosive   = _exVal('ex_mc',   'sel_mc');
+    testData.organic_peroxide  = _exVal('ex_op',   'sel_op');
 
     const payload = {
       components:  comps,

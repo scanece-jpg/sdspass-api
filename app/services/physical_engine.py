@@ -764,6 +764,9 @@ def calculate(comps: List[Dict], form: str = 'liquid',
         'self_heating':    {'H251': ('H251', 'Self-heat. 1',     'Danger'),
                             'H252': ('H252', 'Self-heat. 2',     'Warning')},
         'metal_corrosive': {'H290': ('H290', 'Met. Corr. 1',    'Warning')},
+        'organic_peroxide':{'H240': ('H240', 'Org. Perox. Type A', 'Danger'),
+                            'H241': ('H241', 'Org. Perox. Type B', 'Danger'),
+                            'H242': ('H242', 'Org. Perox. Type C/D/E/F', 'Warning')},
     }
     for field, h_map in _MANUAL_H_MAP.items():
         val = (test_data.get(field) or '').strip()

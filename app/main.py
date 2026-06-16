@@ -768,11 +768,12 @@ async def generate_pdf(data: dict = Body(...)):
         except Exception:
             pass  # Hata durumunda frontend verisi korunur
 
-        # ── all_h_codes temizle — eski frontend verisinden gelen geçersiz kodları çıkar ──
+        # ── h_codes + all_h_codes temizle — eski/geçersiz fiziksel H kodlarını çıkar ───
         # Senaryo 3 "manuel" fiziksel tehlike kodları yalnızca physical_engine veya
-        # test_data üretebilir. py_clp_passed'da yoklarsa all_h_codes'tan silinir.
-        # Böylece eski JS motorundan veya eski hesaptan kalan H242/H250/H260/H290 vb.
-        # kodlar B2.1'de "Baskın tehlike sınıfı kapsamında" notu ile görünmez.
+        # test_data üretebilir. py_clp_passed'da yoklarsa h_codes (B2.2 etiketi) ve
+        # all_h_codes (B2.1 sınıflandırma tablosu) listelerinden silinir.
+        # Temizlenmezse: eski JS motor kalıntısı H241 → GHS01 (patlayıcı) üretir ve
+        # ghs_pictogram dominance kuralı GHS02 (alev) piktogramını siler (B2.2 BULGU 2).
         _MANUAL_PHYS_H = {
             'H240','H241','H242',           # Organik peroksit / öz-reaktif
             'H250','H251','H252',           # Pirofor / kendiliğinden ısınan
@@ -781,10 +782,18 @@ async def generate_pdf(data: dict = Body(...)):
             'H290',                         # Metal aşındırıcı
         }
         _engine_h_set = {e['h_code'] for e in py_clp_passed}
+        h_codes = [
+            h for h in h_codes
+            if h not in _MANUAL_PHYS_H or h in _engine_h_set
+        ]
         all_h_codes = [
             h for h in all_h_codes
             if h not in _MANUAL_PHYS_H or h in _engine_h_set
         ]
+        # h_codes temizlendikten sonra sinyal kelimesini yeniden hesapla
+        # (ör. H241 kalkınca Danger devam edip etmediğini doğrula)
+        _clean_after_filter = {h.split()[0] for h in h_codes if isinstance(h, str)}
+        signal = 'Danger' if _clean_after_filter & DANGER_H else ('Warning' if _clean_after_filter else '')
 
         # Revizyon tarihi
         import datetime

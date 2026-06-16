@@ -990,7 +990,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
       <div class="ex-section-sub">Bu tehlike sınıfları laboratuvar testi gerektirir. "Hayır" seçilirse SDS'te "Uygulanamaz" yazar.</div>
 
       <!-- H260/H261 Su Reaktif -->
-      <div class="ex-row">
+      <div class="ex-row" data-forms="liquid solid paste powder">
         <div class="ex-q">Ürün metal veya metaloid içeriyor mu? <span class="ex-tag">H260/H261 Su Reaktif</span></div>
         <div class="ex-opts">
           <label class="ex-radio"><input type="radio" name="ex_wr" value="na" checked onchange="toggleExSel('sel_wr',false)"> Hayır — Uygulanamaz</label>
@@ -1004,7 +1004,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
       </div>
 
       <!-- H250 Piroforik -->
-      <div class="ex-row">
+      <div class="ex-row" data-forms="liquid solid paste powder">
         <div class="ex-q">Ürün piroforik madde içeriyor mu? <span class="ex-tag">H250 Piroforik</span></div>
         <div class="ex-opts">
           <label class="ex-radio"><input type="radio" name="ex_pyro" value="na" checked onchange="toggleExSel('sel_pyro',false)"> Hayır — Uygulanamaz</label>
@@ -1017,7 +1017,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
       </div>
 
       <!-- H251/H252 Kendiliğinden ısınan -->
-      <div class="ex-row">
+      <div class="ex-row" data-forms="liquid solid paste powder">
         <div class="ex-q">Ürün kendiliğinden ısınan bileşen içeriyor mu? <span class="ex-tag">H251/H252 Kendiliğinden Isınan</span></div>
         <div class="ex-opts">
           <label class="ex-radio"><input type="radio" name="ex_sh" value="na" checked onchange="toggleExSel('sel_sh',false)"> Hayır — Uygulanamaz</label>
@@ -1031,7 +1031,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
       </div>
 
       <!-- H290 Metal Aşındırıcı -->
-      <div class="ex-row">
+      <div class="ex-row" data-forms="liquid solid gas aerosol paste powder">
         <div class="ex-q">Ürün metalı aşındıran bileşen içeriyor mu? <span class="ex-tag">H290 Metal Aşındırıcı</span></div>
         <div class="ex-opts">
           <label class="ex-radio"><input type="radio" name="ex_mc" value="na" checked onchange="toggleExSel('sel_mc',false)"> Hayır — Uygulanamaz</label>
@@ -1044,7 +1044,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
       </div>
 
       <!-- H240/H241/H242 Organik Peroksit / Öz-Reaktif -->
-      <div class="ex-row">
+      <div class="ex-row" data-forms="liquid solid paste powder">
         <div class="ex-q">Ürün organik peroksit veya öz-reaktif bileşen içeriyor mu? <span class="ex-tag">H240/H241/H242 Org. Peroksit / Öz-Reaktif</span></div>
         <div class="ex-opts">
           <label class="ex-radio"><input type="radio" name="ex_op" value="na" checked onchange="toggleExSel('sel_op',false)"> Hayır — Uygulanamaz</label>
@@ -2343,6 +2343,17 @@ function updatePhysFieldsByForm() {
     // Gizlenen alanlarda data-auto-hidden işaretle (NA'ya zorlamadan)
     const inp = wrap.querySelector('input[type=number],input[type=text]');
     if (inp) inp.dataset.autoHidden = visible ? '' : 'true';
+  });
+
+  // Özel fiziksel tehlike soruları — fiziksel hale göre göster/gizle
+  document.querySelectorAll('.ex-row[data-forms]').forEach(row => {
+    const visible = row.dataset.forms.split(' ').includes(form);
+    row.style.display = visible ? '' : 'none';
+    // Gizlenince seçimi sıfırla (Hayır — Uygulanamaz'a döndür)
+    if (!visible) {
+      const radio = row.querySelector('input[type=radio][value="na"]');
+      if (radio) { radio.checked = true; radio.dispatchEvent(new Event('change')); }
+    }
   });
 
   const titles = {

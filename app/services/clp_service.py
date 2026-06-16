@@ -177,7 +177,8 @@ DOMINANCE: dict = {
     'H412': ['H413'],
     'H224': ['H225', 'H226'], 'H225': ['H226'],
     'H271': ['H272'],
-    'H260': ['H261'],
+    'H260': ['H261', 'H220', 'H221'],        # CLP §2.12.4.4: su reaktif Cat1 → alevlenir gaz gereksiz
+    'H250': ['H224', 'H225', 'H226', 'H228'], # CLP §2.6.4.7: piroforik → alevlenir sıvı/katı gereksiz
     'H240': ['H241', 'H242'], 'H241': ['H242'],
     'H251': ['H252'],
 }

@@ -69,9 +69,10 @@ H_TO_ADR: Dict[str, Dict] = {
     'H331': {'class': '6.1', 'pg': 'II'},  # İnhalasyon Kat.2-3
     # Sınıf 8 — Korozif
     'H314': {'class': '8', 'pg': 'II'},
-    # Sınıf 9 — Aspirasyon ve Çevre Tehlikesi
+    # Sınıf 9 — Çevre Tehlikesi
     # ADR 2.2.9.1.10: H412/H413 ADR Sınıf 9 kriterini karşılamaz
-    'H304': {'class': '9', 'pg': 'III'},
+    # H304 (Aspirasyon Tehlikesi): ADR'de bağımsız Sınıf 9 oluşturmaz;
+    # yanıcı sıvılarla birlikte Sınıf 3 kapsamında değerlendirilir.
     'H400': {'class': '9', 'pg': 'III'},
     'H410': {'class': '9', 'pg': 'III'},
     'H411': {'class': '9', 'pg': 'III'},
@@ -353,7 +354,19 @@ def classify(h_codes: List[str], form: str = 'liquid',
             ),
         }
 
-    # (c) H370/H371 bilgi notu — STOT SE doğrudan ADR Sınıf 6.1'e eşlenmez
+    # (c) H304 bilgi notu — aspirasyon tehlikesi tek başına ADR Sınıf 9 oluşturmaz
+    if 'H304' in h_set and adr_caution is None:
+        adr_caution = {
+            'level': 'INFO',
+            'message': (
+                "H304 (Aspirasyon Tehlikesi Kat.1) mevcut. "
+                "ADR 2023: Aspirasyon tehlikesi bağımsız bir ADR sınıfı oluşturmaz — "
+                "yanıcı sıvı (Sınıf 3) kapsamında değerlendirilir. "
+                "Parlama noktası > 60°C ise taşımacılık uzmanı değerlendirmesi önerilir."
+            ),
+        }
+
+    # (d) H370/H371 bilgi notu — STOT SE doğrudan ADR Sınıf 6.1'e eşlenmez
     stot_se_present = [h for h in ['H370', 'H371'] if h in h_set]
     if stot_se_present and adr_caution is None:
         acute_tox_present = bool(h_set & {'H300', 'H301', 'H310', 'H311', 'H330', 'H331'})

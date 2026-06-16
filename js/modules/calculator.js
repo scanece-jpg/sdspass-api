@@ -53,17 +53,18 @@ const CalculatorModule = (() => {
     _td('tf_solubility',  'solubility');
     if (phRaw) testData.ph = phRaw;
 
-    // Özel fiziksel tehlike muafiyet soruları (Adım 3)
-    const _exVal = (name, selId) => {
-      const checked = document.querySelector(`input[name="${name}"]:checked`)?.value;
-      if (!checked || checked === 'na') return 'na';
-      return document.getElementById(selId)?.value || null;
-    };
-    testData.water_reactive    = _exVal('ex_wr',   'sel_wr');
-    testData.pyrophoric        = _exVal('ex_pyro', 'sel_pyro');
-    testData.self_heating      = _exVal('ex_sh',   'sel_sh');
-    testData.metal_corrosive   = _exVal('ex_mc',   'sel_mc');
-    testData.organic_peroxide  = _exVal('ex_op',   'sel_op');
+    // Uzman karışım test override (sonuç ekranındaki gizli panel)
+    const _ovVal = id => document.getElementById(id)?.value || null;
+    const ov_wr   = _ovVal('ov_wr');
+    const ov_pyro = _ovVal('ov_pyro');
+    const ov_sh   = _ovVal('ov_sh');
+    const ov_mc   = _ovVal('ov_mc');
+    const ov_op   = _ovVal('ov_op');
+    if (ov_wr)   testData.water_reactive   = ov_wr;
+    if (ov_pyro) testData.pyrophoric       = ov_pyro;
+    if (ov_sh)   testData.self_heating     = ov_sh;
+    if (ov_mc)   testData.metal_corrosive  = ov_mc;
+    if (ov_op)   testData.organic_peroxide = ov_op;
 
     const payload = {
       components:  comps,

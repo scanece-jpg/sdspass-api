@@ -303,17 +303,12 @@ body::after{display:none}
 .na-check input[type=checkbox]{width:11px;height:11px;cursor:pointer;accent-color:var(--accent);margin:0}
 .motor-badge{color:var(--safe);font-size:8px;font-weight:400}
 .phys-fw input:disabled{opacity:.35;cursor:not-allowed;background:rgba(106,106,136,.08)!important}
-.ex-section{margin-top:10px;border-top:1px dashed rgba(251,191,36,.3);padding-top:10px}
-.ex-section-hdr{font-size:9px;color:#f59e0b;text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px;font-weight:700}
-.ex-section-sub{font-size:10px;color:var(--text3);margin-bottom:8px}
-.ex-row{border-bottom:1px solid var(--border2);padding:7px 0}
-.ex-row:last-child{border-bottom:none;padding-bottom:0}
-.ex-q{font-size:11px;color:var(--text2);margin-bottom:4px}
-.ex-tag{font-size:9px;color:var(--text3);background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.25);border-radius:3px;padding:1px 5px;margin-left:4px;white-space:nowrap}
-.ex-opts{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-.ex-radio{font-size:11px;color:var(--text2);cursor:pointer;display:flex;align-items:center;gap:4px}
-.ex-sel{font-size:11px;padding:3px 6px;border:1px solid var(--border2);border-radius:4px;background:var(--surface2);color:var(--text2);max-width:240px}
-.ex-sel:disabled{opacity:.35;cursor:not-allowed}
+.mix-ov-bar{padding:8px 12px;border-top:1px solid var(--border2);background:var(--bg2)}
+.mix-ov-btn{font-size:10px;color:var(--text3);background:transparent;border:1px dashed var(--border2);border-radius:6px;padding:4px 10px;cursor:pointer;width:100%}
+.mix-ov-btn:hover{color:var(--accent);border-color:var(--accent)}
+.mix-ov-panel{margin-top:8px;display:flex;flex-direction:column;gap:6px}
+.mix-ov-row{display:flex;align-items:center;gap:8px;font-size:11px;color:var(--text2)}
+.mix-ov-sel{font-size:11px;padding:3px 6px;border:1px solid var(--border2);border-radius:4px;background:var(--bg);color:var(--text);flex:1}
 .pwb.na{background:rgba(106,106,136,.12);color:var(--text3);border:1px solid var(--border2)}
 
 /* Refinement panel */
@@ -984,82 +979,6 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
     </button>
   </div>
 
-    <!-- Özel Fiziksel Tehlike Muafiyet Soruları -->
-    <div class="ex-section">
-      <div class="ex-section-hdr">Özel Fiziksel Tehlike Değerlendirmesi</div>
-      <div class="ex-section-sub">Bu tehlike sınıfları laboratuvar testi gerektirir. "Hayır" seçilirse SDS'te "Uygulanamaz" yazar.</div>
-
-      <!-- H260/H261 Su Reaktif -->
-      <div class="ex-row" data-forms="liquid solid paste powder">
-        <div class="ex-q">Ürün metal veya metaloid içeriyor mu? <span class="ex-tag">H260/H261 Su Reaktif</span></div>
-        <div class="ex-opts">
-          <label class="ex-radio"><input type="radio" name="ex_wr" value="na" checked onchange="toggleExSel('sel_wr',false)"> Hayır — Uygulanamaz</label>
-          <label class="ex-radio"><input type="radio" name="ex_wr" value="yes" onchange="toggleExSel('sel_wr',true)"> Evet — Test sonucum var:</label>
-          <select id="sel_wr" class="ex-sel" disabled onchange="">
-            <option value="">— Seç —</option>
-            <option value="H260">H260 Kat.1 — yanıcı gaz çıkar</option>
-            <option value="H261">H261 Kat.2/3 — yanıcı gaz çıkabilir</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- H250 Piroforik -->
-      <div class="ex-row" data-forms="liquid solid paste powder">
-        <div class="ex-q">Ürün piroforik madde içeriyor mu? <span class="ex-tag">H250 Piroforik</span></div>
-        <div class="ex-opts">
-          <label class="ex-radio"><input type="radio" name="ex_pyro" value="na" checked onchange="toggleExSel('sel_pyro',false)"> Hayır — Uygulanamaz</label>
-          <label class="ex-radio"><input type="radio" name="ex_pyro" value="yes" onchange="toggleExSel('sel_pyro',true)"> Evet — Test sonucum var:</label>
-          <select id="sel_pyro" class="ex-sel" disabled>
-            <option value="">— Seç —</option>
-            <option value="H250">H250 — hava ile temas anında alev alır</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- H251/H252 Kendiliğinden ısınan -->
-      <div class="ex-row" data-forms="liquid solid paste powder">
-        <div class="ex-q">Ürün kendiliğinden ısınan bileşen içeriyor mu? <span class="ex-tag">H251/H252 Kendiliğinden Isınan</span></div>
-        <div class="ex-opts">
-          <label class="ex-radio"><input type="radio" name="ex_sh" value="na" checked onchange="toggleExSel('sel_sh',false)"> Hayır — Uygulanamaz</label>
-          <label class="ex-radio"><input type="radio" name="ex_sh" value="yes" onchange="toggleExSel('sel_sh',true)"> Evet — Test sonucum var:</label>
-          <select id="sel_sh" class="ex-sel" disabled>
-            <option value="">— Seç —</option>
-            <option value="H251">H251 Kat.1 — ısınarak alev alabilir</option>
-            <option value="H252">H252 Kat.2 — büyük miktarda ısınabilir</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- H290 Metal Aşındırıcı -->
-      <div class="ex-row" data-forms="liquid solid gas aerosol paste powder">
-        <div class="ex-q">Ürün metalı aşındıran bileşen içeriyor mu? <span class="ex-tag">H290 Metal Aşındırıcı</span></div>
-        <div class="ex-opts">
-          <label class="ex-radio"><input type="radio" name="ex_mc" value="na" checked onchange="toggleExSel('sel_mc',false)"> Hayır — Uygulanamaz</label>
-          <label class="ex-radio"><input type="radio" name="ex_mc" value="yes" onchange="toggleExSel('sel_mc',true)"> Evet — Test sonucum var:</label>
-          <select id="sel_mc" class="ex-sel" disabled>
-            <option value="">— Seç —</option>
-            <option value="H290">H290 — metal aşındırıcı</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- H240/H241/H242 Organik Peroksit / Öz-Reaktif -->
-      <div class="ex-row" data-forms="liquid solid paste powder">
-        <div class="ex-q">Ürün organik peroksit veya öz-reaktif bileşen içeriyor mu? <span class="ex-tag">H240/H241/H242 Org. Peroksit / Öz-Reaktif</span></div>
-        <div class="ex-opts">
-          <label class="ex-radio"><input type="radio" name="ex_op" value="na" checked onchange="toggleExSel('sel_op',false)"> Hayır — Uygulanamaz</label>
-          <label class="ex-radio"><input type="radio" name="ex_op" value="yes" onchange="toggleExSel('sel_op',true)"> Evet — Test raporum var:</label>
-          <select id="sel_op" class="ex-sel" disabled>
-            <option value="">— Seç —</option>
-            <option value="H240">H240 — ısıtma patlama riski (Tip A)</option>
-            <option value="H241">H241 — ısıtma yangın/patlama riski (Tip B)</option>
-            <option value="H242">H242 — ısıtma yangın riski (Tip C/D/E/F)</option>
-          </select>
-        </div>
-      </div>
-
-    </div><!-- /ex-section -->
-
     <!-- Nav Adım 3 -->
     <div class="wz-nav">
       <button class="wz-prev" onclick="wizardGo(2)">← Geri</button>
@@ -1135,6 +1054,54 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
       <div class="es-text" style="font-size:13px">Bileşen ekleyip <strong style="color:var(--accent)">Hesapla</strong>'ya basın</div>
       <div style="font-size:11px;color:var(--text3);margin-top:4px">H kodları, GHS piktogramları ve taşımacılık sınıfı burada görünür</div>
     </div>
+  </div>
+</div>
+
+<!-- Uzman Karışım Test Override — hesaplamadan sonra görünür -->
+<div id="mix-ov-bar" class="mix-ov-bar" style="display:none">
+  <button id="mix-ov-btn" class="mix-ov-btn" onclick="toggleMixOverride()">+ Karışım test verisi ekle (uzman)</button>
+  <div id="mix-ov-panel" style="display:none;margin-top:8px">
+    <div style="font-size:10px;color:var(--text3);margin-bottom:6px">Bileşen verilerinden tespit edilemeyen karışım düzeyi test sonuçlarını girin. Sadece test yaptırdıysanız doldurun.</div>
+    <div class="mix-ov-row">
+      <span style="min-width:140px">Su Reaktif (H260/H261)</span>
+      <select id="ov_wr" class="mix-ov-sel">
+        <option value="">— Test yok —</option>
+        <option value="H260">H260 Kat.1 — yanıcı gaz çıkar</option>
+        <option value="H261">H261 Kat.2/3 — yanıcı gaz çıkabilir</option>
+      </select>
+    </div>
+    <div class="mix-ov-row">
+      <span style="min-width:140px">Piroforik (H250)</span>
+      <select id="ov_pyro" class="mix-ov-sel">
+        <option value="">— Test yok —</option>
+        <option value="H250">H250 — havada kendiliğinden tutuşur</option>
+      </select>
+    </div>
+    <div class="mix-ov-row">
+      <span style="min-width:140px">Kendiliğinden Isınan</span>
+      <select id="ov_sh" class="mix-ov-sel">
+        <option value="">— Test yok —</option>
+        <option value="H251">H251 Kat.1</option>
+        <option value="H252">H252 Kat.2</option>
+      </select>
+    </div>
+    <div class="mix-ov-row">
+      <span style="min-width:140px">Metal Aşındırıcı (H290)</span>
+      <select id="ov_mc" class="mix-ov-sel">
+        <option value="">— Test yok —</option>
+        <option value="H290">H290 — metal aşındırıcı</option>
+      </select>
+    </div>
+    <div class="mix-ov-row">
+      <span style="min-width:140px">Org. Peroksit / Öz-Reaktif</span>
+      <select id="ov_op" class="mix-ov-sel">
+        <option value="">— Test yok —</option>
+        <option value="H240">H240 — patlama riski (Tip A)</option>
+        <option value="H241">H241 — yangın/patlama riski (Tip B)</option>
+        <option value="H242">H242 — yangın riski (Tip C-F)</option>
+      </select>
+    </div>
+    <button onclick="applyMixOverride()" style="margin-top:8px;font-size:11px;padding:5px 14px;background:var(--accent);color:#fff;border:none;border-radius:6px;cursor:pointer">Yeniden Hesapla</button>
   </div>
 </div>
 
@@ -2345,16 +2312,6 @@ function updatePhysFieldsByForm() {
     if (inp) inp.dataset.autoHidden = visible ? '' : 'true';
   });
 
-  // Özel fiziksel tehlike soruları — fiziksel hale göre göster/gizle
-  document.querySelectorAll('.ex-row[data-forms]').forEach(row => {
-    const visible = row.dataset.forms.split(' ').includes(form);
-    row.style.display = visible ? '' : 'none';
-    // Gizlenince seçimi sıfırla (Hayır — Uygulanamaz'a döndür)
-    if (!visible) {
-      const radio = row.querySelector('input[type=radio][value="na"]');
-      if (radio) { radio.checked = true; radio.dispatchEvent(new Event('change')); }
-    }
-  });
 
   const titles = {
     liquid: 'Sıvı Ürün — Zorunlu Alanlar',
@@ -3176,6 +3133,10 @@ function renderResults(euh, phys, stot, eco, pRes, comps, showExtra,
   };
 
   renderAll(s);
+
+  // Hesaplama tamamlandı — uzman override bar'ı göster
+  const ovBar = document.getElementById('mix-ov-bar');
+  if (ovBar) ovBar.style.display = 'block';
 }
 
 function showError(msg) {
@@ -4150,11 +4111,16 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
   }
 }
 
-function toggleExSel(selId, enable) {
-  const sel = document.getElementById(selId);
-  if (!sel) return;
-  sel.disabled = !enable;
-  if (!enable) sel.value = '';
+function toggleMixOverride() {
+  const panel = document.getElementById('mix-ov-panel');
+  const btn   = document.getElementById('mix-ov-btn');
+  const open  = panel.style.display !== 'none';
+  panel.style.display = open ? 'none' : 'block';
+  btn.textContent = open ? '+ Karışım test verisi ekle (uzman)' : '▲ Kapat';
+}
+
+function applyMixOverride() {
+  EventBus.emit('CALC_REQUESTED', {});
 }
 
 function toggleSec9Extra() {

@@ -781,14 +781,24 @@ async def generate_pdf(data: dict = Body(...)):
             'H270','H271','H272',           # Oksitleyici gaz/katı/sıvı
             'H290',                         # Metal aşındırıcı
         }
+        # Geçerli fiziksel H kodları: Python motorundan VEYA Senaryo 3 test_data'dan gelenler
+        # PDF uç noktası _phys_calc'ı test_data olmadan çağırdığından Senaryo 3 kodları
+        # py_clp_passed'a girmiyor; ancak calculate API'si onları physical.results'ta saklar.
+        # Eski JS motor kalıntıları ise physical.results'ta yer almaz — bu farkı kullanıyoruz.
         _engine_h_set = {e['h_code'] for e in py_clp_passed}
+        _stored_phys_h = {
+            (r.get('h') or r.get('h_code') or '').replace('*','').strip()[:4]
+            for r in (data.get('physical') or {}).get('results', [])
+            if r.get('h') or r.get('h_code')
+        }
+        _valid_phys_h = _engine_h_set | _stored_phys_h
         h_codes = [
             h for h in h_codes
-            if h not in _MANUAL_PHYS_H or h in _engine_h_set
+            if h not in _MANUAL_PHYS_H or h in _valid_phys_h
         ]
         all_h_codes = [
             h for h in all_h_codes
-            if h not in _MANUAL_PHYS_H or h in _engine_h_set
+            if h not in _MANUAL_PHYS_H or h in _valid_phys_h
         ]
         # h_codes temizlendikten sonra sinyal kelimesini yeniden hesapla
         # (ör. H241 kalkınca Danger devam edip etmediğini doğrula)

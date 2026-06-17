@@ -1712,24 +1712,36 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _prod_form = product.get('form', '')
     _is_solid_form = _prod_form in ('solid', 'powder')
     _is_gas_form   = _prod_form == 'gas'
-    _fp_lbl = phys_prop(lang, 'flash_point')
-    _bp_lbl = phys_prop(lang, 'boiling_point')
+    _fp_lbl  = phys_prop(lang, 'flash_point')
+    _bp_lbl  = phys_prop(lang, 'boiling_point')
+    _ph_lbl  = phys_prop(lang, 'ph')
+    _vis_lbl = phys_prop(lang, 'viscosity')
     _optional = {_rd_lbl, _vd_lbl, _ai_lbl, _ex_lbl, _ot_lbl, _dc_lbl, _er_lbl, _kow_lbl}
     if not _is_solid_form:
         _optional.add(_mp_lbl)
+    # Katı/toz formda pH ve viskozite uygulanamaz — değer girilmemişse gizle
+    if _is_solid_form:
+        _optional.add(_ph_lbl)
+        _optional.add(_vis_lbl)
 
-    # ECHA Kılavuz v4 §9.1(h)(e): Gaz formda parlama/kaynama noktası "uygulanamaz" olarak
-    # açıkça belirtilmeli — gizlemek yerine "Uygulanamaz (gaz)" göster.
-    # "Where any statement is made to indicate that a particular property does not apply this
-    #  should be based on a clear lack of relevance, the reason for which should be stated."
+    # ECHA Kılavuz v4 §9.1(h)(e): Gaz/katı formda parlama/kaynama noktası "uygulanamaz"
+    # olarak açıkça belirtilmeli — gizlemek yerine "Uygulanamaz (gaz)" göster.
     _na_gas = (
         term(lang, 'not_applicable') +
         (' (gaz form)' if lang == 'TR' else ' (gas form)')
+    )
+    _na_solid = (
+        term(lang, 'not_applicable') +
+        (' (katı/toz form)' if lang == 'TR' else ' (solid/powder form)')
     )
     if _is_gas_form:
         for row in all_phys_rows:
             if row[0] in (_fp_lbl, _bp_lbl) and row[1] == na:
                 row[1] = _na_gas
+    elif _is_solid_form:
+        for row in all_phys_rows:
+            if row[0] in (_fp_lbl, _bp_lbl) and row[1] == na:
+                row[1] = _na_solid
 
     phys_rows = [r for r in all_phys_rows if r[1] != na or r[0] not in _optional]
 

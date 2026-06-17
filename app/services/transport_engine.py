@@ -36,8 +36,10 @@ H_TO_ADR: Dict[str, Dict] = {
     # Sınıf 2.1 — Yanıcı Gaz
     'H220': {'class': '2.1', 'pg': None}, 'H221': {'class': '2.1', 'pg': None},
     'H222': {'class': '2.1', 'pg': None}, 'H223': {'class': '2.1', 'pg': None},
-    # Sınıf 2.2 — Oksitleyici Gaz
+    # Sınıf 2.2 — Oksitleyici Gaz + Yanıcı Olmayan Sıkıştırılmış/Soğutulmuş Gaz
     'H270': {'class': '2.2', 'pg': None},
+    'H280': {'class': '2.2', 'pg': None},   # Sıkıştırılmış/sıvılaştırılmış gaz (CLP §2.5)
+    'H281': {'class': '2.2', 'pg': None},   # Soğutulmuş sıvılaştırılmış gaz (kriyojenik)
     # Sınıf 3 — Yanıcı Sıvı (parlama noktasına göre PG)
     'H224': {'class': '3', 'pg': 'I'},    # FP < 23°C, BP ≤ 35°C
     'H225': {'class': '3', 'pg': 'II'},   # FP < 23°C, BP > 35°C
@@ -69,9 +71,10 @@ H_TO_ADR: Dict[str, Dict] = {
     'H331': {'class': '6.1', 'pg': 'II'},  # İnhalasyon Kat.2-3
     # Sınıf 8 — Korozif
     'H314': {'class': '8', 'pg': 'II'},
-    # Sınıf 9 — Aspirasyon ve Çevre Tehlikesi
+    # Sınıf 9 — Çevre Tehlikesi
     # ADR 2.2.9.1.10: H412/H413 ADR Sınıf 9 kriterini karşılamaz
-    'H304': {'class': '9', 'pg': 'III'},
+    # H304 (Aspirasyon Tehlikesi): ADR'de bağımsız Sınıf 9 oluşturmaz;
+    # yanıcı sıvılarla birlikte Sınıf 3 kapsamında değerlendirilir.
     'H400': {'class': '9', 'pg': 'III'},
     'H410': {'class': '9', 'pg': 'III'},
     'H411': {'class': '9', 'pg': 'III'},
@@ -147,8 +150,10 @@ def resolve_conflict(cls_a: str, pg_a: Optional[str],
     return {'winner': cls_a, 'win_pg': pg_a, 'loser': cls_b}
 
 
-def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: bool) -> Dict:
+def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: bool,
+                  h_set: set = None) -> Dict:
     """UN numarası ve etiket belirle."""
+    h_set = h_set or set()
     if cls == '1':
         return {
             'un': 'UN 0000*', 'label': 'Patlayıcı',
@@ -160,9 +165,19 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
             'note': 'Maddeye özgü UN numarası önceliklidir (ör. UN1978 propan, UN1001 asetilen)',
         }
     if cls == '2.2':
+        if 'H270' in h_set:
+            return {
+                'un': 'UN 3156', 'label': 'Sıkıştırılmış Gaz, Oksitleyici, B.N.O.',
+                'note': 'ADR Sınıf 2.2 oksitleyici — tüp/tank özel kuralları geçerlidir',
+            }
+        if 'H281' in h_set:
+            return {
+                'un': 'UN 3158', 'label': 'Basınç Altında Soğutulmuş Gaz, Yanıcı Olmayan, B.N.O.',
+                'note': 'Kriyojenik gaz — özel yalıtımlı tank gerektirir (ADR P203)',
+            }
         return {
-            'un': 'UN 3156', 'label': 'Sıkıştırılmış Gaz, Oksitleyici, B.N.O.',
-            'note': 'ADR Sınıf 2.2 oksitleyici — tüp/tank özel kuralları geçerlidir',
+            'un': 'UN 1956', 'label': 'Sıkıştırılmış Gaz, Yanıcı Olmayan, B.N.O.',
+            'note': 'Maddeye özgü UN numarası önceliklidir (ör. UN1066 azot, UN1046 helyum)',
         }
     if cls == '3':
         if sub == '8':
@@ -323,7 +338,17 @@ def classify(h_codes: List[str], form: str = 'liquid',
     sub_class = subs[0]['class'] if subs else None
 
     # ── Adım 4: UN ve etiket ──────────────────────────────────────────────────
-    un_entry = _get_un_entry(primary['class'], primary['pg'], sub_class, is_solid)
+    un_entry = _get_un_entry(primary['class'], primary['pg'], sub_class, is_solid, h_set)
+
+    # Aerosol formu — her zaman UN 1950 (CLP §2.3.6 / ADR 2023 Sınıf 2)
+    # H222/H223 → Sınıf 2.1 doğru; ama UN 1954 değil UN 1950 kullanılır
+    if form == 'aerosol':
+        _aero_lbl = 'Aerosol, Yanıcı' if h_set & {'H222', 'H223'} else 'Aerosol'
+        un_entry = {
+            'un':   'UN 1950',
+            'label': _aero_lbl + ', B.N.O.',
+            'note': 'Aerosol dispensers her zaman UN 1950 — CLP §2.3.6 / ADR 2023',
+        }
 
     # ── Adım 5: Uyarılar ─────────────────────────────────────────────────────
     # (a) H22x çelişki kontrolü
@@ -353,7 +378,19 @@ def classify(h_codes: List[str], form: str = 'liquid',
             ),
         }
 
-    # (c) H370/H371 bilgi notu — STOT SE doğrudan ADR Sınıf 6.1'e eşlenmez
+    # (c) H304 bilgi notu — aspirasyon tehlikesi tek başına ADR Sınıf 9 oluşturmaz
+    if 'H304' in h_set and adr_caution is None:
+        adr_caution = {
+            'level': 'INFO',
+            'message': (
+                "H304 (Aspirasyon Tehlikesi Kat.1) mevcut. "
+                "ADR 2023: Aspirasyon tehlikesi bağımsız bir ADR sınıfı oluşturmaz — "
+                "yanıcı sıvı (Sınıf 3) kapsamında değerlendirilir. "
+                "Parlama noktası > 60°C ise taşımacılık uzmanı değerlendirmesi önerilir."
+            ),
+        }
+
+    # (d) H370/H371 bilgi notu — STOT SE doğrudan ADR Sınıf 6.1'e eşlenmez
     stot_se_present = [h for h in ['H370', 'H371'] if h in h_set]
     if stot_se_present and adr_caution is None:
         acute_tox_present = bool(h_set & {'H300', 'H301', 'H310', 'H311', 'H330', 'H331'})

@@ -67,7 +67,7 @@ P_TEXTS: Dict[str, str] = {
     'P273': 'Çevreye salınımından kaçının.',
     'P280': 'Koruyucu eldiven/koruyucu giysi/göz koruyucu/yüz koruyucu kullanın.',
     'P281': 'Gerekli kişisel koruyucu ekipmanı kullanın.',
-    'P282': 'Soğuğa karşı koruyucu eldiven ve yüz/göz koruyucu kullanın.',
+    'P282': 'Soğuk geçirmez eldiven/yüz kalkanı/göz koruyucu kullanın.',
     'P283': 'Aleve dayanıklı/yanmaz giysi kullanın.',
     'P284': 'İyi havalandırma yoksa solunum koruyucu kullanın.',
     'P285': 'Yetersiz havalandırma durumunda solunum koruyucu kullanın.',
@@ -86,7 +86,7 @@ P_TEXTS: Dict[str, str] = {
     'P312': 'Kendinizi iyi hissetmiyorsanız ZEHİR MERKEZİ/doktoru/... arayın.',
     'P313': 'Tıbbi yardım alın.',
     'P314': 'Kendinizi iyi hissetmiyorsanız tıbbi yardım alın.',
-    'P315': 'Derhal tıbbi yardım alın.',
+    'P315': 'Hemen tıbbi tavsiye/müdahale alın.',
     'P320': 'Acil tedavi gereklidir (bkz. bu etiket).',
     'P321': 'Özel tedavi (bkz. bu etiket).',
     'P330': 'Ağzı çalkalayın.',
@@ -95,7 +95,7 @@ P_TEXTS: Dict[str, str] = {
     'P333': 'Cilt tahrişi veya kızarıklık oluşursa:',
     'P334': 'Soğuk suya batırın/nemli bandaj uygulayın.',
     'P335': 'Ciltteki gevşek partikülleri fırçalayın.',
-    'P336': 'Donmuş bölgeleri ılık suyla çözün. Etkilenen bölgeyi ovalamayın.',
+    'P336': 'Donmuş bölümleri ılık su ile eritin. Etkilenmiş alanı silmeyin.',
     'P337': 'Göz tahrişi devam ederse:',
     'P338': 'Varsa kontakt lensleri çıkarın. Gözleri yıkamaya devam edin.',
     'P340': 'Kişiyi temiz havaya çıkarın ve rahat nefes almasını sağlayın.',
@@ -279,7 +279,7 @@ H_TO_P: Dict[str, List[str]] = {
 
     # ── Basınçlı Gaz ─────────────────────────────────────────────────────────
     'H280': ['P410','P403'],
-    'H281': ['P282','P410','P403'],
+    'H281': ['P282','P336','P315','P403'],   # CLP Annex IV Tablo 6.3/6.5: P410 yalnızca H280
     'H229': ['P210','P251','P410+P412'],
 
     # ── Oksitleyici Gaz ──────────────────────────────────────────────────────

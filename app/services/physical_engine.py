@@ -539,13 +539,28 @@ def _calc_flam_liq(comps: List[Dict], user_fp=None) -> Dict:
     return {'result': None, 'source': None, 'fp': None}
 
 
-def _calc_flam_aerosol(comps: List[Dict], user_fp=None) -> Optional[Dict]:
+def _calc_flam_aerosol(comps: List[Dict], user_fp=None,
+                        aerosol_flam_pct=None) -> Optional[Dict]:
     """
-    CLP Ek-I §2.3 — Aerosol yanıcılık sınıflandırması (parlama noktası tabanlı).
-    H222 Kat.1: FP < 23°C bileşen ≥ %1
-    H223 Kat.2: FP 23-60°C bileşen ≥ %1 (ve Kat.1 tetiklenmiyorsa)
-    Kat.3     : yanıcı bileşen yok → None (sadece H229 atanır)
+    CLP Ek-I §2.3 — Aerosol yanıcılık sınıflandırması.
+    aerosol_flam_pct: Kullanıcı beyanı — yanıcı içerik % (w/w).
+      ≥ 85% → H222 Kat.1 (ısı yanma ≥30 kJ/g doğrulanmalı)
+      1–85% → H223 Kat.2
+      <  1% → None (sadece H229)
+    Girilmemişse parlama noktası tabanlı yöntem kullanılır:
+      H222 Kat.1: FP < 23°C bileşen ≥ %1
+      H223 Kat.2: FP 23-60°C bileşen ≥ %1
     """
+    if aerosol_flam_pct is not None:
+        pct = float(aerosol_flam_pct)
+        if pct >= 85:
+            return {'h': 'H222', 'h_class': 'Flam. Aerosol 1', 'signal': 'Danger',
+                    'source': (f'Kullanıcı beyanı: yanıcı içerik %{pct:.0f} — '
+                               'H222 Cat.1; ısı yanma değeri ≥30 kJ/g doğrulanmalı (CLP Ek-I §2.3.3.1)')}
+        if pct >= 1:
+            return {'h': 'H223', 'h_class': 'Flam. Aerosol 2', 'signal': 'Warning',
+                    'source': f'Kullanıcı beyanı: yanıcı içerik %{pct:.0f} (CLP Ek-I §2.3.3.1)'}
+        return None
     DECLARED_FALLBACK = {
         'H224': -20, 'H225': 15, 'H226': 40,
     }
@@ -677,7 +692,8 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                             'cutoff_used': _flam_cutoff})
 
     if form == 'aerosol':
-        fa = _calc_flam_aerosol(comps, user_fp)
+        fa = _calc_flam_aerosol(comps, user_fp,
+                                aerosol_flam_pct=test_data.get('aerosol_flam_pct'))
         if fa:
             primary.append({'type': 'flam_aerosol', **fa,
                             'cutoff_used': 'CLP Ek-I §2.3 — Aerosol yanıcılık sınıflandırması'})
@@ -714,6 +730,18 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                           'signal': 'Danger', 'source': _ox_src,
                           'cutoff_used': '≥ %1 oksitleyici gaz bileşen (CLP Ek-I §2.4)'})
 
+        # H280/H281 — Basınçlı kap (CLP Ek-I §2.5, Tablo 2.5.1)
+        # Gaz formu = ≥200 kPa gauge ambalaj → H280 zorunlu (ambalaj özelliği, içerikten bağımsız)
+        is_cryo = bool(test_data.get('cryo_gas'))
+        extra.append({
+            'type':        'press_gas',
+            'h':           'H281' if is_cryo else 'H280',
+            'h_class':     'Press. Gas (Refrigerated liq.)' if is_cryo else 'Press. Gas (Compressed/Liquefied/Dissolved)',
+            'signal':      'Warning',
+            'source':      'Gaz formu — CLP Ek-I §2.5 Tablo 2.5.1',
+            'cutoff_used': 'Gaz formundaki tüm ürünlere uygulanır (≥200 kPa gauge @20°C)',
+        })
+
     if form in ('solid', 'powder'):
         fs = [c for c in comps
               if (c.get('cas') or c.get('cas_no') or '').strip() in FLAM_SOL_CAS
@@ -723,6 +751,13 @@ def calculate(comps: List[Dict], form: str = 'liquid',
             extra.append({'type': 'flam_sol', 'h': 'H228', 'h_class': 'Flam. Sol. 2',
                           'signal': 'Warning', 'source': _fs_src,
                           'cutoff_used': '≥ %1 yanıcı katı bileşen (CLP Ek-I Tablo 2.7)'})
+
+        # H228 validator uyarısı — katı/toz formda otomatik atama yapılmaz (test zorunlu)
+        warnings.append(
+            'Katı/toz form: Yanıcı katı sınıflandırması (H228) UN Test N.1 test verisine dayanır '
+            '(CLP Ek-I §2.7) — motor bileşen H kodundan karışım H228 ataması yapmaz. '
+            'Bileşen Ek-VI kaydında H228 varsa CLP motoru tarafından değerlendirilir.'
+        )
 
         ox_sol_triggers = []
         ox_sol_has_h271 = False
@@ -776,10 +811,8 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                           'signal': signal, 'source': 'Kullanıcı beyanı — test sonucu',
                           'cutoff_used': 'Manuel giriş (CLP Ek-I muafiyet dışı)'})
 
-    # Teorik fiziksel özellikler
-    theo_props = calc_theo_props(comps) if form in ('liquid', 'paste', 'aerosol') else {}
-    if theo_props is None:
-        theo_props = {}   # calc_theo_props bileşen yoksa None döner — sonraki adımlar için {}
+    # Teorik fiziksel özellikler — katı/toz için yoğunluk+çözünürlük, gaz için buhar yoğunluğu
+    theo_props = calc_theo_props(comps) or {}
 
     # Test verisi varsa üzerine yaz
     if test_data:
@@ -821,19 +854,24 @@ def _apply_test_data(props: Dict, test_data: Dict) -> None:
         'viscosity':     ('viscosity',     'ISO 3219 / ASTM D2196'),
         'solubility':    ('solubility',    'OECD 105'),
         'flash_point':   ('flash_point',   'ISO 2719 / ASTM D93'),
+        'vapor_pressure':('vapor_pressure','Raoult Yasası / OECD 104'),
     }
     for key, (prop, std) in mapping.items():
         if test_data.get(key) is not None:
             props[prop] = meas(test_data[key], std)
 
-    # Yalnızca kullanıcı girer
-    for key, std in [('appearance','REACH Ek II §9'), ('odor','Duyusal test'),
-                     ('melting_point','ISO 1218 / ASTM D97'),
-                     ('auto_ignition','EN 14522 / ASTM E659'),
-                     ('decomp_temp','ISO 11357 / DSC'),
-                     ('log_kow','OECD 117 / 107')]:
-        if test_data.get(key) is not None:
-            props[key] = meas(test_data[key], std)
+    # Yalnızca kullanıcı girer; (test_key, prop_key, std)
+    for test_key, prop_key, std in [
+        ('appearance',  'appearance',        'REACH Ek II §9'),
+        ('odor',        'odor',              'Duyusal test'),
+        ('melting_point','melting_point',    'ISO 1218 / ASTM D97'),
+        ('auto_ignition','auto_ignition',    'EN 14522 / ASTM E659'),
+        ('decomp_temp', 'decomposition_temp','ISO 11357 / DSC'),
+        ('evap_rate',   'evap_rate',         'ASTM D3539'),
+        ('log_kow',     'log_kow',           'OECD 117 / 107'),
+    ]:
+        if test_data.get(test_key) is not None:
+            props[prop_key] = meas(test_data[test_key], std)
 
 
 def update_db(cas: str, props: Dict) -> None:

@@ -847,9 +847,10 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> list:
         _unk = unknown_conc[route]
         mix_ate = ((100.0 - _unk) / 100.0 / total
                    if _unk > 10.0 else 1.0 / total)
+        mix_ate_cmp = round(mix_ate, 6)  # FP gürültüsünü gider (50.0000000000001 → 50.0)
         thresholds = ATE_THRESHOLDS.get(route, {})
         for n in [1, 2, 3, 4]:
-            if mix_ate <= thresholds.get(n, float('inf')):
+            if mix_ate_cmp <= thresholds.get(n, float('inf')):
                 hcode = ATE_HCODES[route][n]
                 if hcode not in seen_h:
                     seen_h.add(hcode)
@@ -857,10 +858,10 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> list:
                         'h_code':      hcode,
                         'h_class':     f'Acute Tox. {n} ({_route_labels.get(route, route)})',
                         'reason':      (
-                            f'Karışım ATE={mix_ate:.1f} ≤ {thresholds[n]} (CLP Tablo 3.1.1 Kat{n})'
+                            f'Karışım ATE={mix_ate_cmp} ≤ {thresholds[n]} (CLP Tablo 3.1.1 Kat{n})'
                             + (f' [Revize: %{_unk:.1f} bilinmiyor]' if _unk > 10.0 else '')
                         ),
-                        'cutoff_used': f'ATEmix={mix_ate:.1f}',
+                        'cutoff_used': f'ATEmix={mix_ate_cmp}',
                     })
                 break
         # B11 ATEmix detayı — hata olursa görmezden gel, B2.1 hesabını etkilemesin
@@ -1045,13 +1046,13 @@ async def calculate_clp(db: AsyncSession, components: List[Any], form: str = '')
             mix_ate = (100.0 - unknown_conc) / 100.0 / total
         else:
             mix_ate = 1.0 / total
+        mix_ate_cmp = round(mix_ate, 6)  # FP gürültüsünü gider (50.0000000000001 → 50.0)
         # Sınıflandırma için CLP Tablo 3.1.1 kategori üst sınırlarını kullan
         # (ATE_DEFAULTS nokta tahminleri FORMÜL için, SINIFLANDIRMA için değil)
         thresholds = ATE_THRESHOLDS.get(route, {})
         cat_num = None
         for n in [1, 2, 3, 4]:
-            # <= kullanıyoruz: tam eşit değerler de geçiyor
-            if mix_ate <= thresholds.get(n, float('inf')):
+            if mix_ate_cmp <= thresholds.get(n, float('inf')):
                 cat_num = n
                 break
         if cat_num:
@@ -1061,10 +1062,10 @@ async def calculate_clp(db: AsyncSession, components: List[Any], form: str = '')
             results_passed.append({
                 'cas': 'KARIŞIM', 'name': f'ATE ({route})',
                 'conc': '-', 'h_class': f'Acute Tox. {cat_num}', 'h_code': hcode,
-                'cutoff_used': f'ATE={mix_ate:.1f}',
+                'cutoff_used': f'ATE={mix_ate_cmp}',
                 'passed': True,
                 'reason': (
-                    f'Karışım ATE={mix_ate:.1f} ≤ {thresholds.get(cat_num)} (Tablo 3.1.1 Kat{cat_num})'
+                    f'Karışım ATE={mix_ate_cmp} ≤ {thresholds.get(cat_num)} (Tablo 3.1.1 Kat{cat_num})'
                     + (f' [Revize formül: %{unknown_conc:.1f} bilinmiyor — CLP 3.1.3.6.2.3]'
                        if unknown_conc > 10.0 else '')
                 ),

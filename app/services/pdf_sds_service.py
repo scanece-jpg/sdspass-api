@@ -43,6 +43,7 @@ COL_R    = PAGE_W - COL_L  # Sağ değer sütunu, Any
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
 import os
+import json as _json
 
 def _register_fonts():
     """DejaVu Sans — 12 dil Unicode desteği (TR/PL/RO/BG/CZ/HR vs.)
@@ -2303,8 +2304,28 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _mf_details = (getattr(_eco_aq,'component_details',None) or []) if _eco_aq else []
 
     # Fallback: eco_result.aquatic yoksa veya component_details boşsa
-    # bileşen listesinden H400/H410 sınıflı maddeleri topla (M=1 varsayılan)
+    # bileşen listesinden H400/H410 sınıflı maddeleri topla
     if not _mf_details:
+        _DATA_ROOT = os.path.normpath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..', 'data'))
+
+        def _lookup_m_factors(cas: str) -> dict:
+            """CAS numarasıyla annex6 → cl sırasıyla m_factors ara. Bulunamazsa {} döner."""
+            if not cas:
+                return {}
+            _prefix = cas[:2]  # '55965-84-9' → '55'
+            for _subdir in ('annex6', 'cl'):
+                _fp = os.path.join(_DATA_ROOT, _subdir, _prefix, f'{cas}.json')
+                try:
+                    with open(_fp, encoding='utf-8') as _f:
+                        _raw = _json.load(_f)
+                        # m_factors, classification altında veya üst seviyede olabilir
+                        _mf = (_raw.get('classification') or {}).get('m_factors') or _raw.get('m_factors')
+                        if _mf:
+                            return _mf
+                except (FileNotFoundError, OSError, _json.JSONDecodeError, KeyError):
+                    pass
+            return {}
+
         _M_FACTOR_H_CODES   = {'H400', 'H401', 'H410'}   # H411 dahil değil — Kronik 2'nin M-faktörü yok
         _M_FACTOR_CLASSES   = {'Aquatic Acute 1', 'Aquatic Chronic 1'}
         for _comp in sds_data.get('components', []):
@@ -2315,18 +2336,20 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             # H411 (Suk. Kron. 2) M-faktör gerektirmez — sadece H410 (Suk. Kron. 1) tabloya girer
             _has_ac1 = bool(_comp_h_codes & {'H410'} or _comp_h_classes & {'Aquatic Chronic 1'})
             if _has_aa1 or _has_ac1:
-                _mf_raw = _comp.get('m_factors') or {}
-                _m_a    = _mf_raw.get('acute',   1) if _mf_raw else 1
-                _m_c    = _mf_raw.get('chronic',  1) if _mf_raw else 1
+                _cas_key = str(_comp.get('cas_no') or _comp.get('cas') or '').strip()
+                # Bileşen objesinde m_factors yoksa annex6/cl DB'den doğrudan oku
+                _mf_raw  = _comp.get('m_factors') or _lookup_m_factors(_cas_key)
+                _m_a    = float(_mf_raw.get('acute',   1) or 1) if _mf_raw else 1
+                _m_c    = float(_mf_raw.get('chronic', _m_a) or _m_a) if _mf_raw else _m_a
                 _mf_details.append({
-                    'cas':      _comp.get('cas_no', _comp.get('cas', '')),
+                    'cas':      _cas_key,
                     'name':     _comp.get('name', ''),
                     'name_tr':  _comp.get('name_tr', _comp.get('name', '')),
                     'm_acute':   _m_a,
                     'm_chronic': _m_c,
                     'h_class':  'Aquatic Acute 1' if _has_aa1 else 'Aquatic Chronic 1',
                     'h_code':   'H400' if _has_aa1 else 'H410',
-                    '_m_default': not bool(_mf_raw),  # True → M=1 varsayıldı
+                    '_m_default': not bool(_mf_raw),  # True → DB'de de bulunamadı, M=1 gerçekten varsayılan
                 })
 
     _M_FACTOR_CLASSES = {'Aquatic Acute 1', 'Aquatic Chronic 1'}

@@ -866,7 +866,7 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> list:
         # B11 ATEmix detayı — hata olursa görmezden gel, B2.1 hesabını etkilemesin
         try:
             b11_key = _ROUTE_TO_B11.get(route, 'inhal')
-            mix_ate_r = round(mix_ate, 1)
+            mix_ate_r = round(mix_ate, 2)
             if b11_key not in ate_b11 or mix_ate_r < ate_b11[b11_key]['ateMix']:
                 result_code_b11 = None
                 for threshold_b11, hcode_b11 in _CLASSIFY_B11.get(b11_key, []):

@@ -77,8 +77,9 @@ def calculate(comps: List[Dict], eco_test_data: Dict = None) -> Dict:
         if conc <= 0:
             continue
 
-        m_acute   = float((c.get('m_factors') or {}).get('acute',   1) or 1)
-        m_chronic = float((c.get('m_factors') or {}).get('chronic', 1) or 1)
+        _mf       = c.get('m_factors') or {}
+        m_acute   = float(_mf.get('acute',   1) or 1)
+        m_chronic = float(_mf.get('chronic', m_acute) or m_acute)  # CLP kılavuz: kronik belirtilmemişse akut M kullan
 
         # Bileşen sucul H kodları — çift sayımı önlemek için Set
         haz_set = set()
@@ -140,10 +141,10 @@ def calculate(comps: List[Dict], eco_test_data: Dict = None) -> Dict:
     if aquatic:
         h_codes.append(aquatic['h'])
 
-    # H400: H410 atanmamışsa ve akut eşik aşılmışsa
-    has_h410 = 'H410' in h_codes
+    # H400: CLP §4.1.3.5.5 — H410 bağımsız, akut eşik aşılmışsa B2.1'e eklenir
+    # (etiket baskınlığı main.py'de ayrıca uygulanır)
     aquatic_acute: Optional[Dict] = None
-    if sum_acute_m >= 0.25 and not has_h410:
+    if sum_acute_m >= 0.25:
         h_codes.append('H400')
         aquatic_acute = {
             'h': 'H400', 'h_class': 'Aquatic Acute 1',

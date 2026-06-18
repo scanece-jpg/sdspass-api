@@ -727,7 +727,7 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> list:
     ate_routes = list(ATE_DEFAULTS.keys())
     ate_sum = {r: 0.0 for r in ate_routes}
     ate_comps: dict = {r: [] for r in ate_routes}
-    unknown_conc = 0.0
+    unknown_conc = {r: 0.0 for r in ate_routes}  # rota bazında bilinmeyen %
     stmt_needed = False
 
     for c in components:
@@ -737,7 +737,8 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> list:
         conc_frac = conc / 100.0
 
         if c.get('ate_unknown', False):
-            unknown_conc += conc
+            for _r in ate_routes:
+                unknown_conc[_r] += conc
             if conc >= 1.0:
                 stmt_needed = True
             continue
@@ -754,7 +755,8 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> list:
                 for route in ate_routes:
                     ate_sum[route] += conc_frac / 5000.0
             else:
-                unknown_conc += conc
+                for _r in ate_routes:
+                    unknown_conc[_r] += conc
                 if conc >= 1.0:
                     stmt_needed = True
             continue
@@ -781,6 +783,8 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> list:
                 except Exception:
                     pass
 
+        contributed_routes: set = set()
+        source_priority = c.get('source_priority', 4)
         for haz in hazards:
             hc = (haz.get('h_class') or '').replace('*', '').strip()
             if not hc.startswith('Acute Tox.'):
@@ -806,9 +810,19 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> list:
                 ate_val = _get_ate_value(combined_ate, route, hc)
                 if ate_val and ate_val > 0:
                     ate_sum[route] += conc_frac / ate_val
+                    contributed_routes.add(route)
                     _cn = c.get('name_tr', '') or c.get('name', '') or str(c.get('cas', ''))
                     if not any(x.get('name') == _cn for x in ate_comps[route]):
                         ate_comps[route].append({'name': _cn, 'conc': conc, 'code': h_code_raw, 'ate': ate_val})
+
+        # Yalnızca gayri-resmi kaynaklar için: katkısız rotalar = bilinmiyor
+        # Resmi kaynak (≤2) → sınıflandırılmamış rota = test edilmiş-negatif (bilinmiyor değil)
+        if source_priority > 2:
+            for _r in ate_routes:
+                if _r not in contributed_routes:
+                    unknown_conc[_r] += conc
+                    if conc >= 1.0:
+                        stmt_needed = True
 
     _route_labels = {
         'oral': 'oral', 'dermal': 'dermal',
@@ -830,8 +844,9 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> list:
     for route, total in ate_sum.items():
         if total <= 0:
             continue
-        mix_ate = ((100.0 - unknown_conc) / 100.0 / total
-                   if unknown_conc > 10.0 else 1.0 / total)
+        _unk = unknown_conc[route]
+        mix_ate = ((100.0 - _unk) / 100.0 / total
+                   if _unk > 10.0 else 1.0 / total)
         thresholds = ATE_THRESHOLDS.get(route, {})
         for n in [1, 2, 3, 4]:
             if mix_ate <= thresholds.get(n, float('inf')):
@@ -843,7 +858,7 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> list:
                         'h_class':     f'Acute Tox. {n} ({_route_labels.get(route, route)})',
                         'reason':      (
                             f'Karışım ATE={mix_ate:.1f} ≤ {thresholds[n]} (CLP Tablo 3.1.1 Kat{n})'
-                            + (f' [Revize: %{unknown_conc:.1f} bilinmiyor]' if unknown_conc > 10.0 else '')
+                            + (f' [Revize: %{_unk:.1f} bilinmiyor]' if _unk > 10.0 else '')
                         ),
                         'cutoff_used': f'ATEmix={mix_ate:.1f}',
                     })
@@ -861,8 +876,8 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> list:
                 ate_b11[b11_key] = {
                     'ateMix':          mix_ate_r,
                     'resultCode':      result_code_b11,
-                    'unknownPct':      round(unknown_conc, 1),
-                    'revisedFormula':  unknown_conc > 10.0,
+                    'unknownPct':      round(_unk, 1),
+                    'revisedFormula':  _unk > 10.0,
                     'statementNeeded': stmt_needed,
                     'components':      ate_comps.get(route, []),
                 }

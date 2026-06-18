@@ -158,6 +158,7 @@ async def generate_pdf(data: dict = Body(...)):
         _FLAM_LIQ_H  = {'H224', 'H225', 'H226'}
         _auth_flam_h = None   # physical_engine: ölçülen FP → flam_liq H kodu
         _auth_eco_h  = None   # eco_engine: sucul eko H kodu
+        _clp_res     = {}     # classify_mixture_clp sonucu — try bloğunda doldurulur
         # NOT: h_codes/all_h_codes güncellemeleri TEK reconciliation bloğunda yapılır
 
         # H314 nötralizasyon kararı — P kodu hesabından ÖNCE h_codes filtrelenir
@@ -564,6 +565,26 @@ async def generate_pdf(data: dict = Body(...)):
         # ── 4. Signal word — h_codes güncellenince yeniden hesapla ───────────────
         _clean_h = {h.split()[0] for h in h_codes if isinstance(h, str)}
         signal = 'Danger' if _clean_h & DANGER_H else 'Warning'
+
+        # ── 4b. Skin/Eye kodları — classify_mixture_clp override ─────────────────
+        # Reconciliation sadece flam/eco/ozone h_codes'u güncelliyor; H314/H315/H318/H319
+        # frontend'den ne geldiyse kalıyordu. pH-tabanlı H314 B2.1'e yazılıyor ama
+        # h_codes (etiket/P-kodu/B11 kaynağı) güncellenmiyordu → H315/H318 etikette kalıyordu.
+        _SKIN_EYE_H = {'H314', 'H315', 'H318', 'H319'}
+        _clp_skin_new = {h for h in _clp_res.get('h_codes', []) if h in _SKIN_EYE_H}
+        if _clp_skin_new:
+            # Backend CLP motor sonucu var → frontend skin/eye kodlarını ez
+            h_codes = [h for h in h_codes if h not in _SKIN_EYE_H] + sorted(_clp_skin_new)
+            # all_h_codes: B2.1 için dominated kodları da ekle (H318 "Baskın kapsamında" notu)
+            _clp_all_skin = set(_clp_skin_new)
+            for _pe in _clp_res.get('passed', []):
+                if _pe.get('h_code', '') in _SKIN_EYE_H:
+                    _clp_all_skin.add(_pe['h_code'])
+            _exist_all = set(all_h_codes)
+            all_h_codes = list(all_h_codes) + [h for h in sorted(_clp_all_skin) if h not in _exist_all]
+            # H314 Danger getirir — signal word yeniden hesapla
+            _clean_h = {h.split()[0] for h in h_codes if isinstance(h, str)}
+            signal = 'Danger' if _clean_h & DANGER_H else 'Warning'
 
         # ── 5. H314 → H318 birlikteliği (CLP §3.3.1.4 / SEA Tablo 3.3.1) ────────
         # Skin Corr. 1 (H314) varlığında Eye Dam. 1 (H318) sınıflandırma tablosuna

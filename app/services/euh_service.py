@@ -481,11 +481,35 @@ def check_euh(components: List[Dict]) -> Dict:
         })
         detected_codes.add('EUH208')
 
-    # Manuel kontrol gerekli olanlar (EUH019 artık otomatik tespit ediliyor)
+    # ── suppl_h — Annex VI / CL harmonize ek zararlılık ifadeleri ─────────────
+    # Bileşen datasında suppl_h varsa (annex6/cl'den yüklendiyse) otomatik ekle.
+    # Desteklenen: EUH071 ve diğer harmonize EUH kodları.
+    _SUPPL_H_TEXTS = {
+        'EUH071': 'Solunum yoluna aşındırıcıdır.',
+        'EUH070': 'Gözle temas halinde toksiktir.',
+        'EUH059': 'Ozon tabakasına zararlıdır.',
+        'EUH044': 'Kapalı alanda ısıtıldığında patlama riski taşır.',
+        'EUH029': 'Su ile temas halinde toksik gaz oluşturur.',
+    }
+    for comp in components:
+        cas  = str(comp.get('cas', '')).strip()
+        name = comp.get('name', '') or ''
+        for euh in (comp.get('suppl_h') or []):
+            if euh not in detected_codes and euh in _SUPPL_H_TEXTS:
+                detected.append({
+                    'code':        euh,
+                    'text':        _SUPPL_H_TEXTS[euh],
+                    'source_cas':  cas,
+                    'source_name': name,
+                })
+                detected_codes.add(euh)
+
+    # Manuel kontrol gerekli olanlar (suppl_h ile tespit edilmediyse)
     manual_check = [
-        'EUH001', 'EUH006', 'EUH018',
-        'EUH044', 'EUH059', 'EUH070', 'EUH071',
-        'EUH209', 'EUH209A', 'EUH401'
+        c for c in ['EUH001', 'EUH006', 'EUH018',
+                    'EUH044', 'EUH059', 'EUH070', 'EUH071',
+                    'EUH209', 'EUH209A', 'EUH401']
+        if c not in detected_codes
     ]
 
     return {

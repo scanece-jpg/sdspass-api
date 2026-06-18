@@ -157,7 +157,8 @@ async def generate_pdf(data: dict = Body(...)):
         ECO_H_CODES  = {'H400', 'H410', 'H411', 'H412', 'H413'}
         _FLAM_LIQ_H  = {'H224', 'H225', 'H226'}
         _auth_flam_h = None   # physical_engine: ölçülen FP → flam_liq H kodu
-        _auth_eco_h  = None   # eco_engine: sucul eko H kodu
+        _auth_eco_h  = None   # eco_engine: sucul eko H kodu (birincil)
+        _auth_eco_hs = []    # eco_engine: tüm sucul H kodları (H410 + H400 birlikte olabilir)
         _clp_res     = {}     # classify_mixture_clp sonucu — try bloğunda doldurulur
         # NOT: h_codes/all_h_codes güncellemeleri TEK reconciliation bloğunda yapılır
 
@@ -439,12 +440,15 @@ async def generate_pdf(data: dict = Body(...)):
 
             py_clp_passed = _cp
 
-            # Eco H kodunu reconciliation için sakla (h_codes güncelleme reconciliation'da)
-            _auth_eco_h = next(
-                (_eco_res2[_k].get('h') for _k in ('aquatic', 'aquatic_acute')
-                 if isinstance(_eco_res2.get(_k), dict) and _eco_res2[_k].get('h')),
-                None
-            )
+            # Eco H kodlarını reconciliation için sakla (h_codes güncelleme reconciliation'da)
+            # aquatic → kronik (H410/H411/...), aquatic_acute → akut (H400)
+            # İkisi aynı anda olabilir: H410 bileşeni aynı zamanda H400 üretir (CLP §4.1.3.5.5)
+            _auth_eco_hs = [
+                _eco_res2[_k]['h']
+                for _k in ('aquatic', 'aquatic_acute')
+                if isinstance(_eco_res2.get(_k), dict) and _eco_res2[_k].get('h')
+            ]
+            _auth_eco_h = _auth_eco_hs[0] if _auth_eco_hs else None
 
             # Transport — fiziksel H kodlarını da ilet
             _phys_h_tr = [(r.get('h') or r.get('h_code') or '')
@@ -517,8 +521,13 @@ async def generate_pdf(data: dict = Body(...)):
 
         # _final_eco_h hâlâ None ise → frontend eco koduna dokunma
         if _final_eco_h:
-            h_codes     = [h for h in h_codes     if h not in ECO_H_CODES] + [_final_eco_h]
-            all_h_codes = [h for h in all_h_codes if h not in ECO_H_CODES] + [_final_eco_h]
+            # CLP §4.1.3.5.5: H410 bileşeni aynı zamanda H400 üretir → ikisi B2.1'de ayrı satır
+            # _auth_eco_hs'de H400 varsa (eco_engine aquatic_acute döndürdüyse) listeye ekle
+            _eco_add = [_final_eco_h]
+            if _final_eco_h != 'H400' and 'H400' in _auth_eco_hs:
+                _eco_add.append('H400')
+            h_codes     = [h for h in h_codes     if h not in ECO_H_CODES] + _eco_add
+            all_h_codes = [h for h in all_h_codes if h not in ECO_H_CODES] + _eco_add
             # py_clp_passed'da eko yoksa ekle (try başarısız olmuşsa fallback)
             if not any(e.get('h_code', '') in ECO_H_CODES for e in py_clp_passed):
                 py_clp_passed = list(py_clp_passed) + [{

@@ -126,6 +126,7 @@ async def generate_pdf(data: dict = Body(...)):
         phys_in     = data.get('phys_props', {})
         revision_in = data.get('revision', {})
         usage       = product.get('usage', 'industrial')
+        form        = data.get('form', product.get('form', 'liquid'))
 
         # Signal word — clp_service.DANGER_H kullan (H225 dahil, doğru liste)
         # Frontend'den gelen signal_word öncelikli, fallback hesaplama

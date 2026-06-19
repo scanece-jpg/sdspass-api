@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SDSPass — Dakikalar İçinde Yasal Uyumlu GBF</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   RESET & BASE
+═══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #080809;
+  --bg2:       #0d0d0e;
+  --surface:   #111113;
+  --surface2:  #18181a;
+  --border:    rgba(255,255,255,0.08);
+  --border2:   rgba(255,255,255,0.14);
+  --accent:    #E2DFD8;
+  --accent2:   #EDEAE4;
+  --text:      #E2DFD8;
+  --text2:     #8A8880;
+  --text3:     #4A4946;
+  --green:     #B0AFA8;
+  --radius:    12px;
+  --radius-lg: 20px;
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Dot grid background */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(circle, rgba(255,255,255,0.04) 1px, transparent 1px);
+  background-size: 32px 32px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container { max-width: 1160px; margin: 0 auto; padding: 0 28px; position: relative; z-index: 1; }
+
+a { text-decoration: none; color: inherit; }
+
+/* ═══════════════════════════════════════
+   BUTTONS
+═══════════════════════════════════════ */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 10px 22px; border-radius: 8px; font-size: 14px;
+  font-weight: 600; font-family: inherit; cursor: pointer;
+  border: none; transition: all 0.18s ease; white-space: nowrap;
+}
+.btn-primary {
+  background: #E2DFD8;
+  color: #0d0d0e;
+  box-shadow: none;
+}
+.btn-primary:hover {
+  background: #EDEAE4;
+  box-shadow: 0 0 20px rgba(226,223,216,0.1);
+  transform: translateY(-1px);
+}
+.btn-ghost {
+  background: transparent;
+  color: var(--text2);
+  border: 1.5px solid var(--border2);
+}
+.btn-ghost:hover {
+  color: var(--text);
+  border-color: rgba(255,255,255,0.25);
+  background: rgba(255,255,255,0.04);
+}
+.btn-lg { padding: 13px 28px; font-size: 15px; border-radius: 10px; }
+
+/* ═══════════════════════════════════════
+   NAVBAR
+═══════════════════════════════════════ */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  height: 60px;
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  background: rgba(15,15,16,0.8);
+}
+.nav-inner {
+  height: 60px; display: flex; align-items: center;
+  justify-content: space-between;
+}
+.nav-logo {
+  font-size: 18px; font-weight: 800; color: var(--text);
+  letter-spacing: -0.5px;
+}
+.nav-logo span { color: var(--accent); }
+.nav-links { display: flex; gap: 4px; align-items: center; }
+.nav-links a {
+  padding: 6px 14px; font-size: 14px; color: var(--text2);
+  border-radius: 6px; font-weight: 500; transition: all 0.15s;
+}
+.nav-links a:hover { color: var(--text); background: rgba(255,255,255,0.06); }
+.nav-actions { display: flex; gap: 10px; align-items: center; }
+
+/* ═══════════════════════════════════════
+   HERO
+═══════════════════════════════════════ */
+.hero {
+  padding: 100px 0 80px;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* Glow arka plan */
+.hero::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%; transform: translateX(-50%);
+  width: 800px; height: 400px;
+  background: radial-gradient(ellipse at center top, rgba(255,255,255,0.04) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.hero > * { position: relative; z-index: 1; }
+
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 100px;
+  padding: 5px 16px;
+  font-size: 12px; font-weight: 500;
+  color: var(--text2);
+  margin-bottom: 28px;
+  letter-spacing: 0.3px;
+}
+.hero-badge::before {
+  content: '';
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--text2);
+  box-shadow: none;
+}
+
+.hero h1 {
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -1.5px;
+  margin-bottom: 24px;
+  background: linear-gradient(180deg, #ffffff 0%, rgba(255,255,255,0.7) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.hero p {
+  font-size: 18px; color: var(--text2);
+  max-width: 540px; margin: 0 auto 40px;
+  line-height: 1.7; font-weight: 400;
+}
+
+.hero-btns {
+  display: flex; gap: 14px; justify-content: center; margin-bottom: 64px;
+  flex-wrap: wrap;
+}
+
+/* Mockup */
+.hero-mockup {
+  max-width: 860px; margin: 0 auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border2);
+  background: var(--surface);
+  overflow: hidden;
+  box-shadow: 0 0 0 1px rgba(94,106,210,0.1), 0 40px 80px rgba(0,0,0,0.5);
+}
+.mockup-bar {
+  background: var(--surface2);
+  padding: 12px 20px;
+  display: flex; align-items: center; gap: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.mockup-dot { width: 10px; height: 10px; border-radius: 50%; }
+.mockup-body {
+  display: grid; grid-template-columns: 200px 1fr;
+  min-height: 340px;
+}
+.mockup-sidebar {
+  background: rgba(0,0,0,0.2);
+  border-right: 1px solid var(--border);
+  padding: 20px 16px;
+}
+.mockup-sidebar-item {
+  padding: 8px 12px; border-radius: 6px;
+  font-size: 12px; color: var(--text3);
+  display: flex; align-items: center; gap: 8px;
+  margin-bottom: 2px;
+}
+.mockup-sidebar-item.active {
+  background: rgba(94,106,210,0.15);
+  color: var(--accent2);
+}
+.mockup-content { padding: 24px; }
+.mockup-title { font-size: 13px; font-weight: 600; margin-bottom: 16px; color: var(--text2); }
+.mockup-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px; margin-bottom: 16px;
+}
+.mockup-card {
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 8px; padding: 12px;
+}
+.mockup-card-val { font-size: 20px; font-weight: 700; margin-bottom: 2px; }
+.mockup-card-lbl { font-size: 10px; color: var(--text3); }
+.mockup-table { width: 100%; }
+.mockup-th {
+  background: var(--surface2); text-align: left;
+  padding: 8px 12px; font-size: 10px; font-weight: 700;
+  color: var(--text3); text-transform: uppercase; letter-spacing: 0.5px;
+}
+.mockup-td {
+  padding: 10px 12px; font-size: 11px; color: var(--text2);
+  border-top: 1px solid var(--border);
+}
+.mockup-badge {
+  display: inline-block; padding: 2px 8px; border-radius: 10px;
+  font-size: 10px; font-weight: 600;
+}
+.mockup-badge.green { background: rgba(255,255,255,0.07); color: var(--text2); }
+.mockup-badge.yellow { background: rgba(255,255,255,0.05); color: var(--text3); }
+
+/* ═══════════════════════════════════════
+   SOCIAL PROOF
+═══════════════════════════════════════ */
+.social-proof {
+  padding: 28px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  position: relative; z-index: 1;
+}
+.social-proof-inner {
+  display: flex; align-items: center; gap: 48px;
+  justify-content: center; flex-wrap: wrap;
+}
+.social-label {
+  font-size: 12px; font-weight: 600;
+  color: var(--text3); letter-spacing: 0.8px; text-transform: uppercase;
+  white-space: nowrap;
+}
+.logo-row { display: flex; gap: 40px; align-items: center; flex-wrap: wrap; justify-content: center; }
+.logo-placeholder {
+  height: 28px; border-radius: 4px;
+  background: rgba(255,255,255,0.06);
+  display: flex; align-items: center; justify-content: center;
+  padding: 0 16px; font-size: 11px; font-weight: 700;
+  color: var(--text3); letter-spacing: 1px; white-space: nowrap;
+}
+
+/* ═══════════════════════════════════════
+   FEATURES — 4 SÜTUN YANYANA
+═══════════════════════════════════════ */
+.section { padding: 96px 0; position: relative; z-index: 1; }
+
+.section-label {
+  display: inline-block;
+  font-size: 11px; font-weight: 600;
+  color: var(--text3);
+  letter-spacing: 1.5px; text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.section-title {
+  font-size: clamp(26px, 3.5vw, 40px);
+  font-weight: 700; letter-spacing: -0.8px;
+  color: var(--text); margin-bottom: 12px;
+}
+.section-sub {
+  font-size: 16px; color: var(--text2);
+  max-width: 500px; line-height: 1.7;
+}
+.section-head { text-align: center; margin-bottom: 56px; }
+.section-head .section-sub { margin: 0 auto; }
+
+/* 4 sütun grid */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.feature-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 28px 24px;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+.feature-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.feature-card:hover {
+  border-color: rgba(255,255,255,0.18);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(0,0,0,0.4);
+}
+.feature-card:hover::before { opacity: 1; }
+
+.feature-icon {
+  width: 44px; height: 44px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 20px; margin-bottom: 18px;
+}
+.feature-card h3 {
+  font-size: 15px; font-weight: 700;
+  color: var(--text); margin-bottom: 8px;
+}
+.feature-card p {
+  font-size: 13px; color: var(--text2); line-height: 1.65;
+}
+
+/* ═══════════════════════════════════════
+   HOW IT WORKS
+═══════════════════════════════════════ */
+.how-section { background: var(--bg2); }
+.steps-row {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 0; position: relative;
+}
+.steps-row::before {
+  content: '';
+  position: absolute;
+  top: 28px; left: calc(33.33% - 20px); right: calc(33.33% - 20px);
+  height: 1px;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--border2) 50%, var(--accent) 100%);
+  z-index: 0;
+}
+.step {
+  text-align: center; padding: 0 32px;
+  position: relative; z-index: 1;
+}
+.step-num {
+  width: 56px; height: 56px; border-radius: 50%;
+  background: var(--surface);
+  border: 1.5px solid rgba(255,255,255,0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; font-weight: 800; color: var(--text);
+  margin: 0 auto 24px;
+  box-shadow: none;
+}
+.step h3 { font-size: 17px; font-weight: 700; margin-bottom: 10px; }
+.step p { font-size: 14px; color: var(--text2); line-height: 1.65; }
+
+/* ═══════════════════════════════════════
+   PRICING
+═══════════════════════════════════════ */
+.pricing-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 20px; max-width: 940px; margin: 0 auto;
+}
+.plan {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 36px 32px;
+  position: relative;
+  transition: transform 0.2s;
+}
+.plan:hover { transform: translateY(-4px); }
+.plan.popular {
+  border-color: rgba(255,255,255,0.2);
+  background: linear-gradient(180deg, rgba(255,255,255,0.04) 0%, var(--surface) 40%);
+  box-shadow: 0 0 0 1px rgba(255,255,255,0.1), 0 24px 60px rgba(0,0,0,0.4);
+}
+.plan-badge {
+  position: absolute; top: -14px; left: 50%;
+  transform: translateX(-50%);
+  background: #E2DFD8;
+  color: #0d0d0e; padding: 4px 18px;
+  border-radius: 100px; font-size: 12px; font-weight: 700;
+  white-space: nowrap; letter-spacing: 0.3px;
+}
+.plan-name { font-size: 14px; font-weight: 600; color: var(--text2); margin-bottom: 4px; }
+.plan-desc { font-size: 12px; color: var(--text3); margin-bottom: 20px; }
+.plan-price {
+  font-size: 42px; font-weight: 800; color: var(--text);
+  letter-spacing: -1px; margin-bottom: 4px;
+}
+.plan.popular .plan-price { color: #ffffff; }
+.plan-price sup { font-size: 20px; vertical-align: super; font-weight: 700; margin-right: 2px; }
+.plan-price span { font-size: 14px; color: var(--text3); font-weight: 400; }
+.plan-divider { height: 1px; background: var(--border); margin: 24px 0; }
+.plan-features { list-style: none; margin-bottom: 28px; }
+.plan-features li {
+  padding: 7px 0; font-size: 14px; color: var(--text2);
+  display: flex; gap: 10px; align-items: center;
+}
+.plan-features li.yes::before { content: '✓'; color: var(--text2); font-weight: 700; flex-shrink: 0; }
+.plan-features li.no { color: var(--text3); }
+.plan-features li.no::before { content: '–'; color: var(--text3); flex-shrink: 0; }
+.plan-btn { width: 100%; justify-content: center; }
+
+/* ═══════════════════════════════════════
+   FAQ
+═══════════════════════════════════════ */
+.faq-list { max-width: 720px; margin: 0 auto; }
+.faq-item {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  margin-bottom: 10px;
+  background: var(--surface);
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+.faq-item.open { border-color: var(--border2); }
+.faq-question {
+  padding: 20px 24px;
+  display: flex; justify-content: space-between; align-items: center;
+  cursor: pointer; user-select: none;
+  font-size: 15px; font-weight: 600; color: var(--text);
+  gap: 16px;
+}
+.faq-question:hover { background: rgba(255,255,255,0.03); }
+.faq-arrow {
+  width: 24px; height: 24px;
+  border: 1px solid var(--border2); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; flex-shrink: 0;
+  transition: transform 0.2s, background 0.2s;
+}
+.faq-item.open .faq-arrow {
+  transform: rotate(180deg);
+  background: rgba(94,106,210,0.12);
+  border-color: rgba(94,106,210,0.3);
+  color: var(--accent);
+}
+.faq-answer {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.2s;
+}
+.faq-item.open .faq-answer { max-height: 200px; }
+.faq-answer p {
+  padding: 0 24px 20px;
+  font-size: 14px; color: var(--text2); line-height: 1.7;
+  border-top: 1px solid var(--border);
+  padding-top: 16px;
+}
+
+/* ═══════════════════════════════════════
+   CTA BANNER
+═══════════════════════════════════════ */
+.cta-section { padding: 96px 0; }
+.cta-box {
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: var(--radius-lg);
+  padding: 72px 48px;
+  text-align: center;
+  position: relative; overflow: hidden;
+}
+.cta-box::before {
+  content: '';
+  position: absolute; top: -100px; left: 50%; transform: translateX(-50%);
+  width: 600px; height: 300px;
+  background: radial-gradient(ellipse, rgba(255,255,255,0.04) 0%, transparent 70%);
+  pointer-events: none;
+}
+.cta-box h2 {
+  font-size: clamp(24px, 3vw, 38px);
+  font-weight: 700; letter-spacing: -0.8px;
+  margin-bottom: 16px; position: relative;
+}
+.cta-box p {
+  font-size: 16px; color: var(--text2);
+  margin-bottom: 36px; position: relative;
+}
+.cta-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; }
+.cta-note {
+  margin-top: 20px; font-size: 13px; color: var(--text3); position: relative;
+}
+
+/* ═══════════════════════════════════════
+   FOOTER
+═══════════════════════════════════════ */
+footer {
+  border-top: 1px solid var(--border);
+  padding: 64px 0 32px;
+  position: relative; z-index: 1;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px; margin-bottom: 56px;
+}
+.footer-brand p {
+  font-size: 13px; color: var(--text3);
+  line-height: 1.7; margin-top: 12px; max-width: 280px;
+}
+.footer-badges { display: flex; gap: 8px; margin-top: 20px; flex-wrap: wrap; }
+.footer-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid var(--border);
+  border-radius: 6px; padding: 4px 10px;
+  font-size: 11px; color: var(--text3); font-weight: 500;
+}
+.footer-col h4 {
+  font-size: 12px; font-weight: 700;
+  color: var(--text); letter-spacing: 0.8px;
+  text-transform: uppercase; margin-bottom: 20px;
+}
+.footer-col a {
+  display: block; font-size: 14px;
+  color: var(--text3); margin-bottom: 10px;
+  transition: color 0.15s;
+}
+.footer-col a:hover { color: var(--text); }
+.footer-bottom {
+  border-top: 1px solid var(--border);
+  padding-top: 28px;
+  display: flex; justify-content: space-between;
+  align-items: center; font-size: 13px; color: var(--text3);
+  flex-wrap: wrap; gap: 12px;
+}
+
+/* ═══════════════════════════════════════
+   RESPONSIVE
+═══════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .features-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+}
+
+@media (max-width: 768px) {
+  .nav-links { display: none; }
+  .hero { padding: 64px 0 48px; }
+  .features-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+  .steps-row { grid-template-columns: 1fr; gap: 40px; }
+  .steps-row::before { display: none; }
+  .pricing-grid { grid-template-columns: 1fr; max-width: 400px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 32px; }
+  .mockup-body { grid-template-columns: 1fr; }
+  .mockup-sidebar { display: none; }
+  .mockup-row { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 480px) {
+  .features-grid { grid-template-columns: 1fr; }
+  .hero-btns { flex-direction: column; align-items: center; }
+  .cta-btns { flex-direction: column; align-items: center; }
+}
+</style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════
+     NAVİGASYON
+════════════════════════════════════ -->
+<nav>
+  <div class="container">
+    <div class="nav-inner">
+      <div class="nav-logo">SDS<span>Pass</span></div>
+      <div class="nav-links">
+        <a href="#ozellikler">Özellikler</a>
+        <a href="#fiyatlandirma">Fiyatlandırma</a>
+        <a href="#kkdik">KKDİK Rehberi</a>
+        <a href="#sss">SSS</a>
+        <a href="#iletisim">İletişim</a>
+      </div>
+      <div class="nav-actions">
+        <button class="btn btn-ghost">Giriş Yap</button>
+        <button class="btn btn-primary">Ücretsiz Başla →</button>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════
+     HERO
+════════════════════════════════════ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-badge">KKDİK / REACH 2020/878 Uyumlu</div>
+    <h1>Dakikalar İçinde<br>Yasal Uyumlu GBF</h1>
+    <p>CAS numarası girin, CLP sınıflandırması otomatik hesaplansın, PDF olarak indirin. Türkiye mevzuatına tam uyumlu teknik altyapı.</p>
+    <div class="hero-btns">
+      <button class="btn btn-primary btn-lg">Ücretsiz Dene — 3 GBF</button>
+      <button class="btn btn-ghost btn-lg">▶ Demo İzle</button>
+    </div>
+
+    <!-- UI Mockup -->
+    <div class="hero-mockup">
+      <div class="mockup-bar">
+        <div class="mockup-dot" style="background:#ff5f57;"></div>
+        <div class="mockup-dot" style="background:#ffbd2e;"></div>
+        <div class="mockup-dot" style="background:#28c840;"></div>
+        <div style="flex:1; text-align:center; font-size:12px; color:var(--text3);">app.sdspass.com/dashboard</div>
+      </div>
+      <div class="mockup-body">
+        <div class="mockup-sidebar">
+          <div class="mockup-sidebar-item active">📊 Dashboard</div>
+          <div class="mockup-sidebar-item">➕ Yeni GBF</div>
+          <div class="mockup-sidebar-item">📄 GBF'lerim</div>
+          <div class="mockup-sidebar-item">📝 Taslaklar</div>
+          <div class="mockup-sidebar-item">⚙️ Ayarlar</div>
+        </div>
+        <div class="mockup-content">
+          <div class="mockup-title">Son GBF'ler</div>
+          <div class="mockup-row">
+            <div class="mockup-card">
+              <div class="mockup-card-val" style="color:var(--text);">12</div>
+              <div class="mockup-card-lbl">Toplam GBF</div>
+            </div>
+            <div class="mockup-card">
+              <div class="mockup-card-val" style="color:var(--text);">9</div>
+              <div class="mockup-card-lbl">Tamamlandı</div>
+            </div>
+            <div class="mockup-card">
+              <div class="mockup-card-val" style="color:var(--text2);">2</div>
+              <div class="mockup-card-lbl">Taslak</div>
+            </div>
+            <div class="mockup-card">
+              <div class="mockup-card-val">47</div>
+              <div class="mockup-card-lbl">İndirme</div>
+            </div>
+          </div>
+          <table class="mockup-table">
+            <tr>
+              <th class="mockup-th">Ürün Adı</th>
+              <th class="mockup-th">Tarih</th>
+              <th class="mockup-th">Durum</th>
+            </tr>
+            <tr>
+              <td class="mockup-td">Temizleme Solüsyonu A</td>
+              <td class="mockup-td">15 May</td>
+              <td class="mockup-td"><span class="mockup-badge green">Tamamlandı</span></td>
+            </tr>
+            <tr>
+              <td class="mockup-td">Endüstriyel Yağlayıcı B</td>
+              <td class="mockup-td">10 May</td>
+              <td class="mockup-td"><span class="mockup-badge green">Tamamlandı</span></td>
+            </tr>
+            <tr>
+              <td class="mockup-td">Aseton Karışımı D</td>
+              <td class="mockup-td">28 Nis</td>
+              <td class="mockup-td"><span class="mockup-badge yellow">Taslak</span></td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     SOSYAL KANIT
+════════════════════════════════════ -->
+<div class="social-proof">
+  <div class="container">
+    <div class="social-proof-inner">
+      <div class="social-label">500+ Firmada Kullanılıyor</div>
+      <div class="logo-row">
+        <div class="logo-placeholder">AKZO NOBEL</div>
+        <div class="logo-placeholder">BASF</div>
+        <div class="logo-placeholder">ARKEMA</div>
+        <div class="logo-placeholder">SOLVAY</div>
+        <div class="logo-placeholder">LANXESS</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════
+     ÖZELLİKLER — 4 SÜTUN YANYANA
+════════════════════════════════════ -->
+<section class="section" id="ozellikler">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-label">Özellikler</div>
+      <div class="section-title">Her Şey Otomatik</div>
+      <p class="section-sub">Manuel hesaplama yok, mevzuat takibi yok. Sistem halleder.</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <div class="feature-icon">⚗️</div>
+        <h3>CLP Sınıflandırma</h3>
+        <p>CAS numarasından otomatik H kodu, piktogram ve etiket bilgisi. ECHA veritabanıyla senkron.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📋</div>
+        <h3>16 Bölüm GBF</h3>
+        <p>KKDİK Ek-II standardında eksiksiz, denetim hazır GBF. Hiçbir bölüm eksik kalmaz.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🌍</div>
+        <h3>Çok Dilli PDF</h3>
+        <p>Türkçe, İngilizce ve AB dillerinde PDF üretimi. Aynı anda birden fazla dil seçilebilir.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔄</div>
+        <h3>Otomatik Güncelleme</h3>
+        <p>Mevzuat değişince sistem güncellenir, etkilenen GBF'leriniz için bildirim alırsınız.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔒</div>
+        <h3>ISO 27001 Güvenlik</h3>
+        <p>AWS Frankfurt altyapısı, TLS şifreleme, KVKK uyumlu veri işleme. Verileriniz güvende.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">📦</div>
+        <h3>10 Yıl Arşiv</h3>
+        <p>Tüm GBF versiyonlarınız tarih damgasıyla saklanır. Denetimde anında erişin.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">⚡</div>
+        <h3>Saniyeler İçinde</h3>
+        <p>Onlarca hesaplama motoru paralel çalışır. Ortalama GBF üretim süresi: 8 saniye.</p>
+      </div>
+      <div class="feature-card">
+        <div class="feature-icon">🔗</div>
+        <h3>API Erişimi</h3>
+        <p>ERP veya kendi sisteminize entegre edin. REST API, JSON format, kapsamlı dokümantasyon.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     NASIL ÇALIŞIR
+════════════════════════════════════ -->
+<section class="section how-section" id="nasil-calisir">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-label">Nasıl Çalışır</div>
+      <div class="section-title">3 Adımda GBF</div>
+      <p class="section-sub">Kimya bilgisi gerekmez, mevzuat bilgisi gerekmez.</p>
+    </div>
+    <div class="steps-row">
+      <div class="step">
+        <div class="step-num">1</div>
+        <h3>Maddeleri Girin</h3>
+        <p>CAS numarası veya madde adıyla bileşenlerinizi ekleyin, konsantrasyon aralığını girin.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <h3>Hesapla'ya Basın</h3>
+        <p>Sistem CLP sınıflandırmasını, OEL değerlerini ve tüm 16 bölümü otomatik hesaplar.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <h3>PDF İndirin</h3>
+        <p>Yasal uyumlu, arşivlenmiş GBF'niz hazır. İstediğiniz dilde indirin.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     FİYATLANDIRMA
+════════════════════════════════════ -->
+<section class="section" id="fiyatlandirma">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-label">Fiyatlandırma</div>
+      <div class="section-title">Şeffaf Fiyatlandırma</div>
+      <p class="section-sub">Gizli ücret yok. İstediğiniz zaman iptal. KDV dahil.</p>
+    </div>
+    <div class="pricing-grid">
+
+      <div class="plan">
+        <div class="plan-name">Başlangıç</div>
+        <div class="plan-desc">Deneme amaçlı</div>
+        <div class="plan-price"><sup>₺</sup>0 <span>/ ay</span></div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li class="yes">Ayda 3 GBF</li>
+          <li class="yes">3 revizyon hakkı</li>
+          <li class="yes">Türkçe PDF</li>
+          <li class="no">Temiz PDF (filigrансız)</li>
+          <li class="no">Geçmiş arşivi</li>
+          <li class="no">API erişimi</li>
+        </ul>
+        <button class="btn btn-ghost plan-btn">Hemen Başla</button>
+      </div>
+
+      <div class="plan popular">
+        <div class="plan-badge">⭐ En Popüler</div>
+        <div class="plan-name">Profesyonel</div>
+        <div class="plan-desc">Bireysel / KOBİ</div>
+        <div class="plan-price"><sup>₺</sup>XXX <span>/ ay</span></div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li class="yes">Sınırsız GBF</li>
+          <li class="yes">Sınırsız revizyon</li>
+          <li class="yes">TR + EN PDF</li>
+          <li class="yes">Temiz PDF (filigrансız)</li>
+          <li class="yes">10 yıl arşiv</li>
+          <li class="no">API erişimi</li>
+        </ul>
+        <button class="btn btn-primary plan-btn">Başla →</button>
+      </div>
+
+      <div class="plan">
+        <div class="plan-name">Kurumsal</div>
+        <div class="plan-desc">Firma / Danışman</div>
+        <div class="plan-price"><sup>₺</sup>XXX <span>/ ay</span></div>
+        <div class="plan-divider"></div>
+        <ul class="plan-features">
+          <li class="yes">Sınırsız GBF</li>
+          <li class="yes">Tüm diller</li>
+          <li class="yes">API erişimi</li>
+          <li class="yes">Temiz PDF</li>
+          <li class="yes">10 yıl arşiv</li>
+          <li class="yes">ISO 27001 raporu</li>
+        </ul>
+        <button class="btn btn-ghost plan-btn">İletişime Geç</button>
+      </div>
+
+    </div>
+    <p style="text-align:center;font-size:13px;color:var(--text3);margin-top:28px;">
+      Yıllık ödemede %20 indirim &nbsp;·&nbsp; Tüm planlar KDV dahil &nbsp;·&nbsp; 14 gün para iade garantisi
+    </p>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     SSS
+════════════════════════════════════ -->
+<section class="section" id="sss" style="background:var(--bg2);">
+  <div class="container">
+    <div class="section-head">
+      <div class="section-label">SSS</div>
+      <div class="section-title">Sık Sorulan Sorular</div>
+    </div>
+    <div class="faq-list">
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          GBF nedir, neden zorunlu?
+          <div class="faq-arrow">▾</div>
+        </div>
+        <div class="faq-answer">
+          <p>Güvenlik Bilgi Formu (GBF), kimyasal madde ve karışımların güvenli kullanımı, taşınması ve bertarafı hakkında bilgi içeren yasal bir belgedir. KKDİK kapsamında tüm kimyasal tedarikçiler için zorunludur.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Çıktı gerçekten yasal uyumlu mu?
+          <div class="faq-arrow">▾</div>
+        </div>
+        <div class="faq-answer">
+          <p>Evet. Sistem KKDİK Ek-II (REACH 2020/878 uyarlaması) ve CLP tüzüğüne göre tasarlanmıştır. Denetimde kabul görebilecek kalitede GBF üretir.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Verilerim güvende mi?
+          <div class="faq-arrow">▾</div>
+        </div>
+        <div class="faq-answer">
+          <p>Evet. AWS Frankfurt sunucularında şifreli olarak saklanır. ISO 27001:2022 sertifikalı altyapı, TLS 1.3 şifreleme, KVKK uyumlu veri işleme protokolleri uygulanmaktadır.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          Eski GBF'lerimi içe aktarabilir miyim?
+          <div class="faq-arrow">▾</div>
+        </div>
+        <div class="faq-answer">
+          <p>Evet, Excel veya JSON formatındaki bileşen listelerinizi içe aktarabilirsiniz. Mevcut PDF'lerden veri çekme özelliği roadmap'te yer almaktadır.</p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question" onclick="toggleFaq(this)">
+          İstediğim zaman iptal edebilir miyim?
+          <div class="faq-arrow">▾</div>
+        </div>
+        <div class="faq-answer">
+          <p>Evet. Fatura döneminin sonuna kadar erişiminiz devam eder. Uzun dönem taahhüt yoktur, herhangi bir ücret kesintisi uygulanmaz.</p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     CTA
+════════════════════════════════════ -->
+<section class="cta-section">
+  <div class="container">
+    <div class="cta-box">
+      <h2>İlk GBF'nizi Bugün Ücretsiz Oluşturun</h2>
+      <p>Kredi kartı gerekmez. 3 dakikada hazır.</p>
+      <div class="cta-btns">
+        <button class="btn btn-primary btn-lg">Ücretsiz Başla — 3 GBF</button>
+        <button class="btn btn-ghost btn-lg">Demo Talep Et</button>
+      </div>
+      <p class="cta-note">✓ Ücretsiz plan &nbsp;&nbsp; ✓ Kurulum gerektirmez &nbsp;&nbsp; ✓ İstediğiniz zaman iptal</p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════
+     FOOTER
+════════════════════════════════════ -->
+<footer id="iletisim">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div style="font-size:18px;font-weight:800;color:var(--text);">SDSPass</div>
+        <p>Türkiye'nin KKDİK uyumlu GBF hazırlama platformu. CLP sınıflandırması, otomatik hesaplama, profesyonel PDF.</p>
+        <div class="footer-badges">
+          <span class="footer-badge">🔒 ISO 27001</span>
+          <span class="footer-badge">🇹🇷 KKDİK</span>
+          <span class="footer-badge">🇪🇺 REACH</span>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h4>Ürün</h4>
+        <a href="#">Özellikler</a>
+        <a href="#">Fiyatlandırma</a>
+        <a href="#">API Dokümantasyonu</a>
+        <a href="#">Güncellemeler</a>
+      </div>
+      <div class="footer-col">
+        <h4>Kaynaklar</h4>
+        <a href="#">KKDİK Rehberi</a>
+        <a href="#">CLP Kılavuzu</a>
+        <a href="#">Sık Sorulan Sorular</a>
+        <a href="#">Destek Merkezi</a>
+      </div>
+      <div class="footer-col">
+        <h4>Şirket</h4>
+        <a href="#">Hakkımızda</a>
+        <a href="#">İletişim</a>
+        <a href="#">Gizlilik Politikası</a>
+        <a href="#">Kullanım Şartları</a>
+        <a href="#">KVKK Aydınlatma</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 SDSPass. Tüm hakları saklıdır.</span>
+      <span style="display:flex;gap:16px;align-items:center;">
+        <span>🇹🇷 Türkiye</span>
+        <span>AWS Frankfurt eu-central-1</span>
+        <span>ISO 27001:2022</span>
+      </span>
+    </div>
+  </div>
+</footer>
+
+<!-- ════════════════════════════════════
+     JS — FAQ accordion
+════════════════════════════════════ -->
+<script>
+function toggleFaq(el) {
+  const item = el.closest('.faq-item');
+  const isOpen = item.classList.contains('open');
+  // Tüm faq'ları kapat
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+  // Tıklanan kapalıysa aç
+  if (!isOpen) item.classList.add('open');
+}
+</script>
+
+</body>
+</html>

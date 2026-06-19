@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<title>SDSPass — Logo Showcase</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  background: #080B14;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+.showcase {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 60px 40px;
+  width: 100%;
+  max-width: 760px;
+}
+.section-label {
+  font-size: 10px;
+  color: #2e2e4e;
+  text-transform: uppercase;
+  letter-spacing: .15em;
+  font-weight: 600;
+  margin-bottom: 14px;
+}
+.preview-box {
+  border-radius: 20px;
+  padding: 48px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  flex-wrap: wrap;
+}
+.preview-dark  { background: #0d0d1f; border: 1px solid #16162a; }
+.preview-light { background: #f8fafc; border: 1px solid #e2e8f0; }
+.logo-item { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.size-tag  { font-size: 9px; font-family: monospace; color: #2e2e4e; letter-spacing: .05em; }
+.sep       { width: 1px; height: 52px; background: #16162a; }
+.sep-light { width: 1px; height: 52px; background: #e2e8f0; }
+
+/* Glow pulse animation */
+@keyframes glowPulse {
+  0%, 100% { filter: drop-shadow(0 0 6px rgba(129,140,248,.5)); }
+  50%       { filter: drop-shadow(0 0 14px rgba(56,189,248,.7)); }
+}
+.logo-glow { animation: glowPulse 3s ease-in-out infinite; }
+
+/* Checkmark draw animation */
+@keyframes drawCheck {
+  from { stroke-dashoffset: 40; }
+  to   { stroke-dashoffset: 0; }
+}
+.check-animated {
+  stroke-dasharray: 40;
+  stroke-dashoffset: 40;
+  animation: drawCheck .6s ease forwards .3s;
+}
+</style>
+</head>
+<body>
+<div class="showcase">
+
+  <!-- ── KOYU TEMA — FULL LOGO ───────────────────────────────────────── -->
+  <div>
+    <div class="section-label">Ana Logo — Koyu Tema</div>
+    <div class="preview-box preview-dark">
+
+      <!-- LARGE -->
+      <div class="logo-item">
+        <svg width="230" height="54" viewBox="0 0 230 54" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gDark" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%"   stop-color="#818cf8"/>
+              <stop offset="100%" stop-color="#38bdf8"/>
+            </linearGradient>
+          </defs>
+          <g class="logo-glow">
+            <!-- Hexagon fill -->
+            <polygon points="27,3 46,14 46,36 27,47 8,36 8,14"
+                     fill="url(#gDark)"/>
+            <!-- Inner subtle ring -->
+            <polygon points="27,8 42,17 42,33 27,42 12,33 12,17"
+                     fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+            <!-- Checkmark -->
+            <polyline class="check-animated"
+                      points="16,27 23,35 38,18"
+                      stroke="white" stroke-width="3"
+                      stroke-linecap="round" stroke-linejoin="round"
+                      fill="none"/>
+          </g>
+          <!-- Wordmark -->
+          <text x="62" y="34"
+                font-family="system-ui,-apple-system,'Segoe UI',sans-serif"
+                font-size="25" fill="rgba(255,255,255,0.45)"
+                font-weight="300" letter-spacing="-0.3">SDS</text>
+          <text x="108" y="34"
+                font-family="system-ui,-apple-system,'Segoe UI',sans-serif"
+                font-size="25" fill="white"
+                font-weight="800" letter-spacing="-0.5">Pass</text>
+        </svg>
+        <div class="size-tag">Full — 230px</div>
+      </div>
+
+      <div class="sep"></div>
+
+      <!-- MEDIUM -->
+      <div class="logo-item">
+        <svg width="160" height="40" viewBox="0 0 160 40" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gDark2" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%"   stop-color="#818cf8"/>
+              <stop offset="100%" stop-color="#38bdf8"/>
+            </linearGradient>
+          </defs>
+          <polygon points="20,2 34,10 34,26 20,34 6,26 6,10" fill="url(#gDark2)"/>
+          <polygon points="20,6 31,12.5 31,23.5 20,30 9,23.5 9,12.5"
+                   fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+          <polyline points="11,20 17,26 29,13"
+                    stroke="white" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <text x="44" y="25"
+                font-family="system-ui,-apple-system,'Segoe UI',sans-serif"
+                font-size="18" fill="rgba(255,255,255,0.45)"
+                font-weight="300" letter-spacing="-0.3">SDS</text>
+          <text x="77" y="25"
+                font-family="system-ui,-apple-system,'Segoe UI',sans-serif"
+                font-size="18" fill="white"
+                font-weight="800" letter-spacing="-0.5">Pass</text>
+        </svg>
+        <div class="size-tag">Medium — 160px</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── AÇIK TEMA — FULL LOGO ───────────────────────────────────────── -->
+  <div>
+    <div class="section-label">Ana Logo — Açık Tema</div>
+    <div class="preview-box preview-light">
+
+      <div class="logo-item">
+        <svg width="230" height="54" viewBox="0 0 230 54" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gLight" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%"   stop-color="#6366f1"/>
+              <stop offset="100%" stop-color="#0ea5e9"/>
+            </linearGradient>
+          </defs>
+          <polygon points="27,3 46,14 46,36 27,47 8,36 8,14" fill="url(#gLight)"/>
+          <polygon points="27,8 42,17 42,33 27,42 12,33 12,17"
+                   fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+          <polyline points="16,27 23,35 38,18"
+                    stroke="white" stroke-width="3"
+                    stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <text x="62" y="34"
+                font-family="system-ui,-apple-system,'Segoe UI',sans-serif"
+                font-size="25" fill="#64748b"
+                font-weight="300" letter-spacing="-0.3">SDS</text>
+          <text x="108" y="34"
+                font-family="system-ui,-apple-system,'Segoe UI',sans-serif"
+                font-size="25" fill="#0f172a"
+                font-weight="800" letter-spacing="-0.5">Pass</text>
+        </svg>
+        <div class="size-tag" style="color:#94a3b8">Full — 230px</div>
+      </div>
+
+      <div class="sep-light"></div>
+
+      <!-- SMALL -->
+      <div class="logo-item">
+        <svg width="130" height="34" viewBox="0 0 130 34" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gLight2" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%"   stop-color="#6366f1"/>
+              <stop offset="100%" stop-color="#0ea5e9"/>
+            </linearGradient>
+          </defs>
+          <polygon points="17,2 29,9 29,23 17,30 5,23 5,9" fill="url(#gLight2)"/>
+          <polyline points="9,17 14,23 25,11"
+                    stroke="white" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <text x="37" y="22"
+                font-family="system-ui,-apple-system,'Segoe UI',sans-serif"
+                font-size="16" fill="#64748b"
+                font-weight="300" letter-spacing="-0.2">SDS</text>
+          <text x="65" y="22"
+                font-family="system-ui,-apple-system,'Segoe UI',sans-serif"
+                font-size="16" fill="#0f172a"
+                font-weight="800" letter-spacing="-0.4">Pass</text>
+        </svg>
+        <div class="size-tag" style="color:#94a3b8">Small — 130px</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── İKON / FAVICON ─────────────────────────────────────────────── -->
+  <div>
+    <div class="section-label">İkon — Favicon &amp; App Icon</div>
+    <div class="preview-box preview-dark" style="gap:32px">
+
+      <!-- 64px -->
+      <div class="logo-item">
+        <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gi64" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%"   stop-color="#818cf8"/>
+              <stop offset="100%" stop-color="#38bdf8"/>
+            </linearGradient>
+          </defs>
+          <polygon points="32,4 56,18 56,46 32,60 8,46 8,18" fill="url(#gi64)"/>
+          <polygon points="32,10 50,21 50,43 32,54 14,43 14,21"
+                   fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+          <polyline points="18,33 27,43 46,23"
+                    stroke="white" stroke-width="4"
+                    stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <div class="size-tag">64px</div>
+      </div>
+
+      <!-- 48px -->
+      <div class="logo-item">
+        <svg width="48" height="48" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gi48" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%"   stop-color="#818cf8"/>
+              <stop offset="100%" stop-color="#38bdf8"/>
+            </linearGradient>
+          </defs>
+          <polygon points="24,3 42,13.5 42,34.5 24,45 6,34.5 6,13.5" fill="url(#gi48)"/>
+          <polygon points="24,8 38,16 38,32 24,40 10,32 10,16"
+                   fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+          <polyline points="13,25 20,32 35,17"
+                    stroke="white" stroke-width="3"
+                    stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <div class="size-tag">48px</div>
+      </div>
+
+      <!-- 32px -->
+      <div class="logo-item">
+        <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gi32" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%"   stop-color="#818cf8"/>
+              <stop offset="100%" stop-color="#38bdf8"/>
+            </linearGradient>
+          </defs>
+          <polygon points="16,2 28,9 28,23 16,30 4,23 4,9" fill="url(#gi32)"/>
+          <polyline points="9,17 14,23 23,12"
+                    stroke="white" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <div class="size-tag">32px</div>
+      </div>
+
+      <!-- 20px -->
+      <div class="logo-item">
+        <svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gi20" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%"   stop-color="#818cf8"/>
+              <stop offset="100%" stop-color="#38bdf8"/>
+            </linearGradient>
+          </defs>
+          <polygon points="10,1 18,5.5 18,14.5 10,19 2,14.5 2,5.5" fill="url(#gi32)"/>
+          <polyline points="5,11 9,15 15,7"
+                    stroke="white" stroke-width="1.8"
+                    stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+        <div class="size-tag">20px</div>
+      </div>
+
+      <div class="sep"></div>
+
+      <!-- App icon style — rounded square -->
+      <div class="logo-item">
+        <svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="giApp" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%"   stop-color="#818cf8"/>
+              <stop offset="100%" stop-color="#38bdf8"/>
+            </linearGradient>
+            <clipPath id="roundedClip">
+              <rect width="64" height="64" rx="14" ry="14"/>
+            </clipPath>
+          </defs>
+          <!-- Rounded square background -->
+          <rect width="64" height="64" rx="14" fill="#0d0d1f"/>
+          <!-- Subtle gradient bg -->
+          <rect width="64" height="64" rx="14"
+                fill="url(#giApp)" opacity="0.08"/>
+          <!-- Centered hexagon -->
+          <g transform="translate(8,8)">
+            <polygon points="24,3 42,13.5 42,34.5 24,45 6,34.5 6,13.5" fill="url(#giApp)"/>
+            <polygon points="24,8 38,16 38,32 24,40 10,32 10,16"
+                     fill="none" stroke="rgba(255,255,255,0.2)" stroke-width="1"/>
+            <polyline points="13,25 20,32 35,17"
+                      stroke="white" stroke-width="3"
+                      stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </g>
+        </svg>
+        <div class="size-tag">App Icon</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ── DİKEY / STACKED VERSİYON ───────────────────────────────────── -->
+  <div>
+    <div class="section-label">Dikey Versiyon — Splash / Loading</div>
+    <div class="preview-box preview-dark">
+      <div class="logo-item">
+        <svg width="160" height="100" viewBox="0 0 160 100" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <linearGradient id="gVert" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%"   stop-color="#818cf8"/>
+              <stop offset="100%" stop-color="#38bdf8"/>
+            </linearGradient>
+          </defs>
+          <!-- Center hexagon -->
+          <g transform="translate(80,4)">
+            <polygon points="0,-28 24.2,-14 24.2,14 0,28 -24.2,14 -24.2,-14"
+                     fill="url(#gVert)" class="logo-glow"/>
+            <polygon points="0,-22 19,-11 19,11 0,22 -19,11 -19,-11"
+                     fill="none" stroke="rgba(255,255,255,0.18)" stroke-width="1"/>
+            <polyline points="-12,4 -4,14 16,-8"
+                      stroke="white" stroke-width="3"
+                      stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </g>
+          <!-- Text below -->
+          <text x="80" y="78"
+                font-family="system-ui,-apple-system,'Segoe UI',sans-serif"
+                font-size="22" fill="rgba(255,255,255,0.45)"
+                font-weight="300" letter-spacing="1" text-anchor="middle">SDS</text>
+          <text x="80" y="100"
+                font-family="system-ui,-apple-system,'Segoe UI',sans-serif"
+                font-size="22" fill="white"
+                font-weight="800" letter-spacing="-0.5" text-anchor="middle">Pass</text>
+        </svg>
+        <div class="size-tag">Splash / Yüklenme ekranı</div>
+      </div>
+
+      <div class="sep"></div>
+
+      <!-- Monochrome white version -->
+      <div class="logo-item">
+        <svg width="160" height="40" viewBox="0 0 160 40" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="20,2 34,10 34,26 20,34 6,26 6,10"
+                   fill="none" stroke="white" stroke-width="1.5"/>
+          <polyline points="11,20 17,26 29,13"
+                    stroke="white" stroke-width="2"
+                    stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          <text x="44" y="25"
+                font-family="system-ui,-apple-system,'Segoe UI',sans-serif"
+                font-size="18" fill="rgba(255,255,255,0.45)"
+                font-weight="300" letter-spacing="-0.3">SDS</text>
+          <text x="77" y="25"
+                font-family="system-ui,-apple-system,'Segoe UI',sans-serif"
+                font-size="18" fill="white"
+                font-weight="800" letter-spacing="-0.5">Pass</text>
+        </svg>
+        <div class="size-tag">Monokrom — Beyaz</div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Footer note -->
+  <div style="text-align:center;font-size:10px;color:#1e1e38;letter-spacing:.05em">
+    SDSPass Logo Showcase — SVG / Ölçeklenebilir Vektör
+  </div>
+
+</div>
+</body>
+</html>

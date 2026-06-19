@@ -521,13 +521,17 @@ async def generate_pdf(data: dict = Body(...)):
 
         # _final_eco_h hâlâ None ise → frontend eco koduna dokunma
         if _final_eco_h:
-            # CLP §4.1.3.5.5: H410 bileşeni aynı zamanda H400 üretir → ikisi B2.1'de ayrı satır
-            # _auth_eco_hs'de H400 varsa (eco_engine aquatic_acute döndürdüyse) listeye ekle
-            _eco_add = [_final_eco_h]
+            # CLP §4.1.3.5.5: H410 bileşeni aynı zamanda H400 üretir → B2.1'de iki ayrı satır
+            # Ama etikette (h_codes) H410 varken H400 fazlalık sayılır (SEA Md.29(1))
+            # → all_h_codes (B2.1 sınıflandırma) her ikisini alır
+            # → h_codes (B2.2 etiket) sadece baskın kodu alır
+            _eco_add_label = [_final_eco_h]
+            _eco_add_class = [_final_eco_h]
             if _final_eco_h != 'H400' and 'H400' in _auth_eco_hs:
-                _eco_add.append('H400')
-            h_codes     = [h for h in h_codes     if h not in ECO_H_CODES] + _eco_add
-            all_h_codes = [h for h in all_h_codes if h not in ECO_H_CODES] + _eco_add
+                _eco_add_class.append('H400')  # B2.1'e H400 da gider
+                # h_codes'a H400 eklenmez — H410 zaten H400'ü kapsıyor
+            h_codes     = [h for h in h_codes     if h not in ECO_H_CODES] + _eco_add_label
+            all_h_codes = [h for h in all_h_codes if h not in ECO_H_CODES] + _eco_add_class
             # py_clp_passed'da eko yoksa ekle (try başarısız olmuşsa fallback)
             if not any(e.get('h_code', '') in ECO_H_CODES for e in py_clp_passed):
                 py_clp_passed = list(py_clp_passed) + [{

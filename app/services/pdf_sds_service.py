@@ -1546,6 +1546,23 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             styles['small']
         ))
 
+    # Sıvı ürün + yanıcı sıvı bileşen girilmemişse parlama noktası hesaplanamaz uyarısı
+    _FLAM_LIQ_H = {'H224', 'H225', 'H226', 'H227'}
+    if (lang == 'TR'
+            and product.get('form', '') == 'liquid'
+            and not phys.get('flash_point')):
+        _comp_h_all = set()
+        for _c in components:
+            for _h in (_c.get('h_codes') or _c.get('hazard_statements') or []):
+                _comp_h_all.add(_h if isinstance(_h, str) else _h.get('code', ''))
+        if not (_comp_h_all & _FLAM_LIQ_H):
+            story.append(Paragraph(
+                "<font color='orange'>⚠ Ürün formu sıvı ancak hiçbir bileşende yanıcı sıvı "
+                "(H224/H225/H226) bulunmuyor. Su veya çözücü girilmediyse parlama noktası "
+                "hesaplanamaz — bileşen listesini kontrol edin.</font>",
+                styles['small']
+            ))
+
     # Sıvı ürün için viskozite ve çözünürlük eksikliği uyarısı
     # KKDİK Ek-2 Bölüm 9: Sıvı karışımlarda bu parametreler "Bilgi yok" bırakılamaz
     def _method_note(key):
@@ -1735,13 +1752,16 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         term(lang, 'not_applicable') +
         (' (katı/toz form)' if lang == 'TR' else ' (solid/powder form)')
     )
+    # "Veri yok" (frontend display) veya "Bilgi yok" (i18n) — her ikisini de yakala
+    _NO_DATA_VALS = {na, '', 'Veri yok', 'Veri Yok', 'Bilgi yok', 'Bilgi Yok',
+                     'No data available', 'No data', 'N/A', '-'}
     if _is_gas_form:
         for row in all_phys_rows:
-            if row[0] in (_fp_lbl, _bp_lbl) and row[1] == na:
+            if row[0] in (_fp_lbl, _bp_lbl) and row[1] in _NO_DATA_VALS:
                 row[1] = _na_gas
     elif _is_solid_form:
         for row in all_phys_rows:
-            if row[0] in (_fp_lbl, _bp_lbl) and row[1] == na:
+            if row[0] in (_fp_lbl, _bp_lbl) and row[1] in _NO_DATA_VALS:
                 row[1] = _na_solid
 
     phys_rows = [r for r in all_phys_rows if r[1] != na or r[0] not in _optional]

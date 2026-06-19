@@ -189,9 +189,6 @@ async def generate_pdf(data: dict = Body(...)):
             _be_ate_h, _be_ate_details = _ate_h_calc_pre(
                 components, form=product.get('form', 'liquid')
             )
-            print(f'[ATE DEBUG] form={product.get("form","liquid")!r} | _be_ate_h={_be_ate_h} | comp_count={len(components)}')
-            for _dc in components:
-                print(f'  comp cas={_dc.get("cas")} conc={_dc.get("concMax") or _dc.get("conc")} ate_unknown={_dc.get("ate_unknown")} ate={_dc.get("ate")} hazards={[h.get("h_code") for h in (_dc.get("hazards") or [])]}')
         except Exception as _ate_pre_err:
             print(f'[ATE PRE ERROR] {_ate_pre_err}')
             _be_ate_h, _be_ate_details = [], {}
@@ -527,17 +524,27 @@ async def generate_pdf(data: dict = Body(...)):
             # → h_codes (B2.2 etiket) sadece baskın kodu alır
             _eco_add_label = [_final_eco_h]
             _eco_add_class = [_final_eco_h]
-            if _final_eco_h != 'H400' and 'H400' in _auth_eco_hs:
+            _h400_also = _final_eco_h != 'H400' and 'H400' in _auth_eco_hs
+            if _h400_also:
                 _eco_add_class.append('H400')  # B2.1'e H400 da gider
-                # h_codes'a H400 eklenmez — H410 zaten H400'ü kapsıyor
+                # h_codes'a H400 eklenmez — H410 zaten H400'ü kapsıyor (SEA Md.29(1))
             h_codes     = [h for h in h_codes     if h not in ECO_H_CODES] + _eco_add_label
             all_h_codes = [h for h in all_h_codes if h not in ECO_H_CODES] + _eco_add_class
-            # py_clp_passed'da eko yoksa ekle (try başarısız olmuşsa fallback)
-            if not any(e.get('h_code', '') in ECO_H_CODES for e in py_clp_passed):
+            # py_clp_passed'da eko yoksa ekle
+            _passed_eco_set = {e.get('h_code', '') for e in py_clp_passed}
+            if _final_eco_h not in _passed_eco_set:
                 py_clp_passed = list(py_clp_passed) + [{
                     'h_code':      _final_eco_h,
                     'h_class':     '',
                     'reason':      'Sucul ekoloji (eco_engine / ecological_service)',
+                    'cutoff_used': '—',
+                }]
+            # H400 ayrı passed satırı — "Baskın tehlike sınıfı" notu yerine doğru gerekçe
+            if _h400_also and 'H400' not in _passed_eco_set:
+                py_clp_passed = list(py_clp_passed) + [{
+                    'h_code':      'H400',
+                    'h_class':     'Aquatic Acute 1',
+                    'reason':      'CLP §4.1.3.5.5: H410 bileşeni Sucul Akut 1 (H400) de üretir',
                     'cutoff_used': '—',
                 }]
             # sds_section_12['12.1'] güncelle:

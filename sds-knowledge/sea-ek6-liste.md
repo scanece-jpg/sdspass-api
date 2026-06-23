@@ -10,7 +10,7 @@
 | 100-02-7 | 4-nitrofenol; p-nitrofenol | H332, H312, H302, H373 | — | — | CLP00 |
 | 100-22-1 | N,N,N'-N'-tetrametil-p- fenilendiamin | H332, H312, H302 | — | — | CLP00 |
 | 100-25-4 | dinitrobenzen; [1] 1,4-dinitrobenzen; [2] 1,3-dinitrobenzen; [... | H330, H310, H300, H373 **, H400, H410 | — | — | CLP00 |
-| 100-37-8 | 2-dietilaminoetanol; N,N- dietiletanolamin | H226, H332, H312, H302, H314 | — | H335:5.0% | CLP00 |
+| 100-37-8 | 2-dietilaminoetanol; N,N- dietiletanolamin | H226, H332, H312, H302, H314 | — | H335(3):≥5.0% | CLP00 |
 | 100-39-0 | α-bromotoluen; benzil bromür | H335, H315, H319 | — | — | CLP00 |
 | 100-40-3 | 4-vinilsiklohegzen | H351 | — | — | ATP6 |
 | 100-41-4 | Etilbenzen | H225, H332, H304, H373(hearing_organs), H373 | — | — | ATP6 |
@@ -29,23 +29,23 @@
 | 10004-44-1 | hymeksazol (ISO); 3-hidroksi-5-metilizoksazol; | H361d, H302, H318, H317, H411 | — | — | ATP15 |
 | 10007-85-9 | 3,6-dikloro-o-anisik asit, dimetilamin (1:1) ile birleşik [1];... | H319, H412 | — | — | CLP00 |
 | 100181-71-3 | izobütil-3,4-epoksibütirat | H315, H317, H400, H410 | — | — | CLP00 |
-| 10025-67-9 | dikükürt diklorür; kükürt monoklorür | H301, H332, H314, H400 | — | H335:1.0% | CLP00 |
+| 10025-67-9 | dikükürt diklorür; kükürt monoklorür | H301, H332, H314, H400 | — | H335(3):≥1.0% | CLP00 |
 | 10025-78-2 | triklorosilan | H224, H260, H331, H302, H314, H318 | — | — | ATP18 |
 | 10025-87-3 | Fosforil triklorür | H330, H302, H372, H314 | — | — | CLP00 |
-| 10025-91-9 | Antimon triklorür | H314, H411 | — | H335:5.0% | CLP00 |
+| 10025-91-9 | Antimon triklorür | H314, H411 | — | H335(3):≥5.0% | CLP00 |
 | 10025-99-7 | Dipotasyum tetrakloroplatinat | H301, H315, H318, H334, H317 | — | — | CLP00 |
 | 10026-00-3 | Disodyum tetrakloroplatinat | H301, H315, H318, H334, H317 | — | — | CLP00 |
 | 10026-04-7 | silisyum tetraklorür | H335, H315, H319 | — | — | CLP00 |
 | 10026-13-8 | Fosfor pentaklorür | H330, H302, H373, H314 | — | — | CLP00 |
 | 10027-06-2 | 8,9,10-trinorborn-2-il akrilat | H312, H315, H317 | — | — | CLP00 |
-| 10028-18-9 | nikel diflorür;[1] nikel dibromür; [2] nikel diiyodür; [3] nik... | H350i, H341, H360D, H372, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
-| 10034-85-2 | Hidrojen iyodür | H314 | — | H314:10.0%; H314:0.2%; H315:0.02%; H319:0.02%; ... | CLP00 |
+| 10028-18-9 | nikel diflorür;[1] nikel dibromür; [2] nikel diiyodür; [3] nik... | H350i, H341, H360D, H372, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
+| 10034-85-2 | Hidrojen iyodür | H314 | — | H314(1A):≥10.0%; H314(1B):0.2–10.0%; H315(2):0.... | CLP00 |
 | 10035-10-6 | Hidrojen bromür | H280, H335, H314 | — | — | CLP00 |
 | 10039-54-0 | hidroksilamonyum klorür; hidroksilamin hidroklorür; [1] bis(hi... | H290, H351, H312, H302, H373 **, H315, H319, H317, H400 | — | — | ATP01 |
 | 100418-33-5 | 2-((4-metil-2- nitrofenil)amino)etanol | H302, H317, H412 | — | — | CLP00 |
 | 10043-52-4 | Kalsiyum klorür | H319 | — | — | CLP00 |
 | 10046-00-1 | hidroksilamonyum hidrojen sülfat; hidroksilamin sülfat (1:1) [... | H201, H351, H312, H302, H373, H315, H319, H317, H400 | — | — | ATP1 |
-| 10049-04-4 | Klor dioksit . . . % | H301, H314, H400, H270, H330 | Akut=10 | H335:3.0%; H314:5.0%; H315:1.0%; H318:3.0%; H31... | ATP1 |
+| 10049-04-4 | Klor dioksit . . . % | H301, H314, H400, H270, H330 | Akut=10 | H335(3):≥3.0%; H314(1B):≥5.0%; H315(2):1.0–5.0%... | ATP1 |
 | 100491-29-0 | etil 7-kloro-1-(2,4-diflorofenil)- 6-floro-1,4-dihidro-4-okso-... | H317, H411 | — | — | ATP1 |
 | 100501-62-0 | etil-1-etil-6,7,8-trifloro-1,4- dihidro-4-oksokinolin-3- karbo... | H317, H412 | — | — | CLP00 |
 | 10061-01-5 | 1,3-dikloropropen [1]; (Z)-1,3-dikloropropen [2]; | H226, H332, H311, H301, H304, H335, H315, H319, H317, H400, H410 | — | — | ATP01 |
@@ -66,29 +66,29 @@
 | 100801-66-9 | hidrokarbon yağları,aromatik, polistiren ile karışık, pirolizl... | H350, H340 | — | — | ATP1 |
 | 10097-02-6 | 2,2-bis(hidroksimetil)bütanoik asit | H318, H412 | — | — | CLP00 |
 | 100988-63-4 | (6R-trans)-1-((7-amonyo-2- karboksilato-8-okso-5-tiya-1- azabi... | H341, H317, H411 | — | — | ATP1 |
-| 101-02-0 | Trifenil fosfit | H315, H319, H400, H410 | — | H315:5.0%; H319:5.0% | CLP00 |
+| 101-02-0 | Trifenil fosfit | H315, H319, H400, H410 | — | H315(2):≥5.0%; H319(2):≥5.0% | CLP00 |
 | 101-05-3 | anilazin (ISO); 2-kloro-N-(4,6-dikloro-1,3,5- triazin-2-il)anilin | H315, H319, H400, H410 | — | — | CLP00 |
 | 101-14-4 | 2,2'-dikloro-4,4'-metilendianilin; 4,4'-metilenbis(2-kloroanilin) | H350, H302, H400, H410 | — | — | CLP00 |
 | 101-21-3 | klorprofam (ISO); izopropil 3-klorokarbanilat | H351, H373, H411 | — | — | ATP1 |
 | 101-27-9 | barban (ISO); (4-klorbüt-2-inil N-3- klorofenilkarbamat | H302, H317, H400, H410 | — | — | CLP00 |
 | 101-31-5 | hiyosiamin | H330, H300 | — | — | CLP00 |
 | 101-61-1 | N,N,N',N'-tetrametil-4,4'- metilendianilin | H350, H400, H410 | — | — | CLP00 |
-| 101-68-8 | 4,4'metilendifenil-diizosiyanat; difenilmetan-4,4' –diizosiyan... | H351, H332, H335, H373, H315, H319, H334, H317 | — | H319:5.0%; H315:5.0%; H334:0.1%; H335:5.0% | ATP1 |
-| 101-72-4 | N-izopropil-N'-fenil-p- fenilendiamin | H302, H317, H400, H410 | — | H317:0.1% | CLP00 |
+| 101-68-8 | 4,4'metilendifenil-diizosiyanat; difenilmetan-4,4' –diizosiyan... | H351, H332, H335, H373, H315, H319, H334, H317 | — | H319(2):≥5.0%; H315(2):≥5.0%; H334:≥0.1%; H335(... | ATP1 |
+| 101-72-4 | N-izopropil-N'-fenil-p- fenilendiamin | H302, H317, H400, H410 | — | H317(1):≥0.1% | CLP00 |
 | 101-77-9 | 4,4'-diaminodifenilmetan; 4,4'- metilendianilin | H350, H341, H370 (liver), H373 (liver), H317, H411 | — | — | CLP00 |
 | 101-80-4 | 4,4'-oksidianilin ve tuzları; p-aminofenileter | H350, H340, H361f, H331, H311, H301, H411 | — | — | CLP00 |
 | 101-83-7 | disiklohekzilamin | H302, H314, H400, H410 | — | — | CLP00 |
 | 101-90-6 | resorsinol diglisidil eter; 1,3- bis(2,3-epoksipropoksi)benzen | H350, H341, H311, H302, H315, H319, H317, H412 | — | — | ATP15 |
 | 10101-96-9 | nikel(II) selenit | H350i, H372, H334, H317, H400, H410 | — | — | ATP1 |
 | 10102-18-8 | Sodyum selenit | H300, H331, H317, H411 | — | — | CLP00 |
-| 10102-44-0 | Azot dioksit [1]; diazot tetraoksit [2] | H270, H330, H314 | — | H335:0.5% | ATP1 |
-| 10108-64-2 | Kadmiyum klorür | H350, H340, H360FD, H330, H301, H372, H400, H410 | — | H350:0.01%; H372:7.0%; H373:0.1% | CLP00 |
+| 10102-44-0 | Azot dioksit [1]; diazot tetraoksit [2] | H270, H330, H314 | — | H335(3):≥0.5% | ATP1 |
+| 10108-64-2 | Kadmiyum klorür | H350, H340, H360FD, H330, H301, H372, H400, H410 | — | H350:≥0.01%; H372:≥7.0%; H373:0.1–7.0% | CLP00 |
 | 10112-91-1 | Diciva diklorür; Civa (I) klorür; kalomel | H302, H335, H315, H319, H400, H410 | — | — | CLP00 |
 | 101200-48-0 | tribenuron-metil (ISO); 2-[4-metoksi-6-metil-1,3,5- triazin-2-... | H373, H317, H400, H410 | Akut=100 / Kr=100 | — | ATP15 |
 | 101205-02-1 | sikloksidim (ISO); 2-(N- etoksibutanimidoil)-3- hidroksi- 5-(t... | H361d | — | — | ATP6 |
 | 101226-85-1 | trans-metil-2-etil-büt-2-tenoat | H226 | — | — | ATP1 |
-| 10124-36-4 | Kadmiyum sülfat | H350, H340, H360FD, H330, H301, H372, H400, H410 | — | H350:0.01%; H372:7.0%; H373:0.1% | CLP00 |
-| 10124-43-3 | Kobalt sülfat | H350i, H341, H360F, H302, H334, H317, H400, H410 | Akut=10 / Kr=10 | H350i:0.01% | ATP1 |
+| 10124-36-4 | Kadmiyum sülfat | H350, H340, H360FD, H330, H301, H372, H400, H410 | — | H350:≥0.01%; H372:≥7.0%; H373:0.1–7.0% | CLP00 |
+| 10124-43-3 | Kobalt sülfat | H350i, H341, H360F, H302, H334, H317, H400, H410 | Akut=10 / Kr=10 | H350i:≥0.01% | ATP1 |
 | 101316-45-4 | Absorpsiyon yağları, bisikloaromatik ve heterosiklik hidrokarb... | H350 | — | — | CLP00 |
 | 101316-49-8 | Damıtıklar (kömür zifti), ziftli; ağır antrasen yağı; [Ziftin ... | H350 | — | — | CLP00 |
 | 101316-56-7 | Damıtıklar (petrol), C7-9, C8- zengin, hidrojenle kükürtü gide... | H350, H340, H304 | — | — | ATP1 |
@@ -117,7 +117,7 @@
 | 1014-69-3 | desmetrin (ISO); 6-izopropilamino-2-metilamino- 4-metiltiyo-1,... | H312, H302, H400, H410 | — | — | CLP00 |
 | 1014-70-6 | simetrin (ISO); 2,4-bis(etilamino)-6-metiltiyo- 1,3,5-triazin | H302, H400, H410 | — | — | CLP00 |
 | 101408-30-4 | (dodesakis(p- toliltiyo)ftalosiyaninato)bakır(II) den (hekzade... | H317 | — | — | CLP00 |
-| 10141-05-6 | kobalt dinitrat | H350i, H341, H360F, H334, H317, H400, H410 | Akut=10 / Kr=10 | H350i:0.01% | ATP1 |
+| 10141-05-6 | kobalt dinitrat | H350i, H341, H360F, H334, H317, H400, H410 | Akut=10 / Kr=10 | H350i:≥0.01% | ATP1 |
 | 101463-69-8 | flufenoxuron (ISO); 1-(4-(2- cloro-α,α,α-p-trifluorotolyloxy)-... | H362, H400, H410 | Akut=10000 / Kr=10000 | — | ATP5 |
 | 101513-70-6 | 3,5-dikloro-2,4-diflorobenzoil florür | H331, H302, H314, H317, H412 | — | — | CLP00 |
 | 101631-13-4 | Damıtıklar (petrol), katalitik parçalanmış ağır zift hafif; pa... | H304 | — | — | CLP00 |
@@ -169,8 +169,8 @@
 | 103112-35-2 | etil 1-(2,4-diklorofenil)-5- (triklorometil)-1H-1,2,4-triazol-... | H350, H400, H410 | — | — | ATP1 |
 | 103122-66-3 | O-izobütil-N-etoksi karboniltiyokarbamat | H226, H350, H340, H302, H373, H317, H411 | — | — | ATP1 |
 | 103146-25-4 | (R,S)-4-(4- dimetilamino-1-(4- florofenil)-1-hidroksibütil)-3-... | H302, H317, H411 | — | — | ATP1 |
-| 10325-94-7 | kadmiyum nitrat; kadmiyum dinitrat | H350, H340, H332, H312, H302, H372(kidney,_bone), H400, H410, H372 | — | H350:0.01% | ATP10 |
-| 10332-33-9 | Perborik asit, sodyum tuzu; [1] perborik asit, sodyum tuzu, mo... | H272, H360FD, H331, H302, H335, H318 | — | H318:22.0%; H319:14.0% | — |
+| 10325-94-7 | kadmiyum nitrat; kadmiyum dinitrat | H350, H340, H332, H312, H302, H372(kidney,_bone), H400, H410, H372 | — | H350:≥0.01% | ATP10 |
+| 10332-33-9 | Perborik asit, sodyum tuzu; [1] perborik asit, sodyum tuzu, mo... | H272, H360FD, H331, H302, H335, H318 | — | H318(1):≥22.0%; H319(2):≥14.0% | — |
 | 103361-09-7 | flumioksazin (ISO); 2-[7-floro-3-okso-4-(prop-2-in- 1-il)-3,4-... | H361d, H400, H410 | Akut=1000 / Kr=1000 | — | ATP17 |
 | 1034-01-1 | oktil-3,4,5-trihidroksibenzoat | H302, H317 | — | — | CLP00 |
 | 10357-99-0 | N,N-dimetil-2-(3-(4-klorofenil)- 4,5-dihidropirazol-1- ilfenil... | H373, H317, H411 | — | — | CLP00 |
@@ -181,9 +181,9 @@
 | 10381-36-9 | nikel hidrojen fosfat, [1] nikel bis(dihidrojenfosfat); [2] tr... | H350i, H372 **, H334, H317, H400, H410 | — | — | ATP02 |
 | 103976-28-9 | dietil[(p- etoksianilino)metilen]malonat | H302, H411 | — | — | ATP1 |
 | 104-12-1 | 4-klorofenilizosiyanat | H330, H302, H335, H315, H318, H334, H400, H410 | — | — | ATP1 |
-| 104-15-4 | p-toluensülfonik asit, (maksimum % 5 H2SO4 içeren) | H335, H315, H319 | — | H335:20.0% | CLP00 |
+| 104-15-4 | p-toluensülfonik asit, (maksimum % 5 H2SO4 içeren) | H335, H315, H319 | — | H335(3):≥20.0% | CLP00 |
 | 104-78-9 | 3-aminopropildietilamin; N,N- dietil-1,3-diaminopropan | H226, H312, H302, H314, H317 | — | — | CLP00 |
-| 104-80-3 | tetrahidrofuran-2,5-diildimetanol | H335, H315, H319 | — | H335:10.0% | CLP00 |
+| 104-80-3 | tetrahidrofuran-2,5-diildimetanol | H335, H315, H319 | — | H335(3):≥10.0% | CLP00 |
 | 104-91-6 | 4-nitrosofenol | H341, H302, H318, H411 | — | — | CLP00 |
 | 104-94-9 | p-anisidin; 4-metoksianilin | H310, H330, H300, H373, H400 | — | — | CLP00 |
 | 10403-74-4 | 1,2-bis(fenoksimetil)benzen | H400, H410 | — | — | ATP1 |
@@ -202,9 +202,9 @@
 | 104558-95-4 | tepkime kütlesi: tiyobis(4,1- fenilen)-S,S,S',S'- tetrafenildi... | H319, H317, H400, H410 | — | — | CLP00 |
 | 104560-40-9 | N,N,N',N'-tetrasikloheksil-1,3- benzendikarboksamid | H400, H410 | — | — | ATP1 |
 | 10461-98-0 | 2-siklohekziliden-2- fenilasetonitril | H302, H411 | — | — | ATP1 |
-| 104653-34-1 | difethialone (ISO); 3-[3-(4’-bromobifenil-4-il)- 1,2,3,4-tetra... | H360D, H330, H310, H300, H372(blood), H400, H410, H372 | Akut=100 / Kr=100 | H360D:0.003%; H372:0.02%; H373:0.002% | ATP9 |
+| 104653-34-1 | difethialone (ISO); 3-[3-(4’-bromobifenil-4-il)- 1,2,3,4-tetra... | H360D, H330, H310, H300, H372(blood), H400, H410, H372 | Akut=100 / Kr=100 | H360D:≥0.003%; H372:≥0.02%; H373:0.002–0.02% | ATP9 |
 | 104788-63-8 | 6-(nonilamino)-6-okso- peroksihekzanoik asit | H242, H318, H317, H400 | — | — | CLP00 |
-| 10486-00-7 | perborik asit (H3BO2(O2)), monosodyum tuzu, trihidrat; [1] per... | H360FD, H332, H335, H318 | — | H318:36.0%; H319:22.0% | — |
+| 10486-00-7 | perborik asit (H3BO2(O2)), monosodyum tuzu, trihidrat; [1] per... | H360FD, H332, H335, H318 | — | H318(1):≥36.0%; H319(2):≥22.0% | — |
 | 104860-26-6 | cis-1-(3-(4-florofenoksi)propil)- 3-metoksi-4-piperidinamin | H312, H302, H373, H318, H400, H410 | — | — | ATP1 |
 | 104872-06-2 | (3S,4S)-3-hekzil-4-[(R)-2- hidroksitridesil]-2-oksetanon | H400, H410 | — | — | CLP00 |
 | 104958-67-0 | N-bütil-2-(4- morfolinilkarbonil)benzamid | H319, H317, H412 | — | — | CLP00 |
@@ -226,17 +226,17 @@
 | 105043-55-8 | 3-metil-N-(5,8,13,14-tetrahidro- 5,8,14-trioksonaft[2,3-c]akri... | H413 | — | — | ATP1 |
 | 105076-77-5 | N-(5-(bis(2-metoksietil)amino)- 2-((5-nitro-2,1-benzisotiyazol... | H413 | — | — | CLP00 |
 | 105254-85-1 | 3-(bis(2- etilhekzil)aminometil)benzotiyaz ol-2(3H)-tiyon | H314, H317, H400, H410 | — | — | CLP00 |
-| 10544-72-6 | Azot dioksit [1]; diazot tetraoksit [2] | H270, H280, H330, H314 | — | H335:0.5% | ATP01 |
-| 10545-99-0 | kükürt diklorür | H335, H314, H400 | — | H335:5.0% | CLP00 |
+| 10544-72-6 | Azot dioksit [1]; diazot tetraoksit [2] | H270, H280, H330, H314 | — | H335(3):≥0.5% | ATP01 |
+| 10545-99-0 | kükürt diklorür | H335, H314, H400 | — | H335(3):≥5.0% | CLP00 |
 | 105488-33-3 | 3-(3-(4-(2,4-bis(1,1- dimetilpropil)fenoksi)bütilamino karboni... | H413 | — | — | CLP00 |
 | 10551-42-5 | 1-(3-fenilpropil)-2- metilpiridinyum bromür | H302, H319, H412 | — | — | CLP00 |
-| 105512-06-9 | klodinafop-propargil (ISO) | H302, H373, H317, H400, H410 | Akut=1 / Kr=1 | H317:0.001% | ATP1 |
+| 105512-06-9 | klodinafop-propargil (ISO) | H302, H373, H317, H400, H410 | Akut=1 / Kr=1 | H317(1):≥0.001% | ATP1 |
 | 105560-93-8 | metil-2R,3S-(-)-3-(4- metoksifenil)oksirankarboksilat | H318, H317, H412 | — | — | CLP00 |
 | 105726-67-8 | metil neodekanamid | H302 | — | — | ATP1 |
 | 105812-81-5 | (-)-trans-4-(4'-florofenil)-3- hidroksimetil-N-metilpiperidin | H302, H318, H411 | — | — | CLP00 |
 | 105813-13-6 | (-)(3S,4R)-4-(4-florofenil)-3- (3,4-metilindioksi-fenoksimetil... | H302, H317, H400, H410 | — | — | ATP1 |
 | 105827-91-6 | 2-kloro-5-klorometiltiyazol | H311, H302, H314, H317, H411 | — | — | ATP1 |
-| 10588-01-9 | sodyumdikromat | H272, H350, H340, H360FD, H330, H301, H312, H372, H314, H334, H317, H400, H410 | — | H335:5.0%; H334:0.2%; H317:0.2% | ATP1 |
+| 10588-01-9 | sodyumdikromat | H272, H350, H340, H360FD, H330, H301, H312, H372, H314, H334, H317, H400, H410 | — | H335(3):≥5.0%; H334:≥0.2%; H317(1):≥0.2% | ATP1 |
 | 10591-85-2 | tetrakis(fenilmetil)tiyoperoksidi( karbotiyoamid) | H413 | — | — | CLP00 |
 | 10596-22-2 | Tetraizopropan- 2il(diklorometan- diil)bis(bisfosfonat) | H302, H319, H317 | — | — | ATP1 |
 | 105996-54-1 | N,N'-bis(trifloroasetil)-S,S'-bis- L-homosistein | H318, H317 | — | — | CLP00 |
@@ -256,7 +256,7 @@
 | 106-87-6 | 1,2-epoksi-4- epoksietilsiklohekzan; 4-vinilsiklohekzan diepoksit | H350, H341, H360F, H331, H302 | — | — | ATP17 |
 | 106-88-7 | 1,2-epoksibütan | H225, H351, H332, H312, H302, H335, H315, H319 | — | — | ATP7 |
 | 106-89-8 | 1-kloro-2,3-epoksipropan; epiklorohidrin | H226, H350, H331, H311, H301, H314, H317 | — | — | CLP00 |
-| 106-90-1 | 2,3-epoksipropilakrilat; glisidil akrilat | H331, H311, H301, H314, H317 | — | H317:0.2% | CLP00 |
+| 106-90-1 | 2,3-epoksipropilakrilat; glisidil akrilat | H331, H311, H301, H314, H317 | — | H317(1):≥0.2% | CLP00 |
 | 106-91-2 | 2,3-epoksipropilmetakrilat; glisidil metakrilat | H350, H341, H360F, H311, H302, H335, H372(respiratory_tract), H314, H318, H317, H372 | — | — | ATP10 |
 | 106-92-3 | allil glisidil eter; allil 2,3- epoksipropil eter; prop-2-en-1... | H226, H351, H341, H361f, H332, H302, H335, H315, H318, H317, H412 | — | — | CLP00 |
 | 106-93-4 | 1,2-dibromoetan | H350, H331, H311, H301, H335, H315, H319, H411 | — | — | CLP00 |
@@ -278,7 +278,7 @@
 | 106917-31-1 | 1-asetil-4-(3-dodesil-2,5-diokso- 1-pirrolidinil)-2,2,6,6- tet... | H315, H317, H400, H410 | — | — | ATP1 |
 | 106990-43-6 | N,N,N,N-tetrakis(4,6-bis(bütil- (N-metil-2,2,6,6- tetrametilpi... | H317, H411 | — | — | CLP00 |
 | 107-01-7 | büt-1-en; [1] büten, 1-ve-2-izomer karışımları; [2] 2-metilpro... | H220 | — | — | CLP00 |
-| 107-02-8 | akrolein; prop-2-enal akrilaldehid | H225, H330, H300, H311, H314, H400, H410 | Akut=100 / Kr=100 | H314:0.1% | ATP6 |
+| 107-02-8 | akrolein; prop-2-enal akrilaldehid | H225, H330, H300, H311, H314, H400, H410 | Akut=100 / Kr=100 | H314(1B):≥0.1% | ATP6 |
 | 107-05-1 | 3-kloropropen; allil klorür | H225, H351, H341, H332, H312, H302, H335, H373, H315, H319, H400 | — | — | CLP00 |
 | 107-06-2 | 1,2-dikloroetan; etilen diklorür | H225, H350, H302, H335, H315, H319 | — | — | CLP00 |
 | 107-07-3 | 2-kloroetanol; etilen klorohidrin | H310, H330, H300 | — | — | CLP00 |
@@ -288,7 +288,7 @@
 | 107-15-3 | etilendiamin; 1,2-diaminoetan | H226, H312, H302, H314, H334, H317 | — | — | CLP00 |
 | 107-18-6 | allil alkol | H225, H331, H311, H301, H335, H315, H319, H400 | — | — | CLP00 |
 | 107-19-7 | prop-2-in-1-ol; propargil alkol | H226, H331, H311, H301, H314, H411 | — | — | CLP00 |
-| 107-20-0 | kloroasetaldehid | H351, H330, H311, H301, H314, H400 | — | H335:5.0% | CLP00 |
+| 107-20-0 | kloroasetaldehid | H351, H330, H311, H301, H314, H400 | — | H335(3):≥5.0% | CLP00 |
 | 107-21-1 | etandiol; etilen glikol | H302 | — | — | CLP00 |
 | 107-22-2 | glioksal...%; etandial...% | H341, H332, H315, H319, H317 | — | — | CLP00 |
 | 107-25-5 | metil-vinil-eter | H220 | — | — | CLP00 |
@@ -306,7 +306,7 @@
 | 1070-70-8 | tetrametilendiakrilat; 1,4-bütilenglikol diakrilat | H312, H314, H317 | — | — | CLP00 |
 | 1071-83-6 | glifosat (ISO); N- (fosfonometil)glisin | H318, H411 | — | — | ATP22 |
 | 107144-30-9 | 4-(4,4-dimetil-3-okso- pirazolidin-1-il)-benzoik asit | H302, H411 | — | — | CLP00 |
-| 1072-63-5 | 1-vinilimidazol | H360D | — | H360D:0.03% | ATP13 |
+| 1072-63-5 | 1-vinilimidazol | H360D | — | H360D:≥0.03% | ATP13 |
 | 107246-80-0 | tetralityum-6-amino-4-hidroksi- 3-[7-sülfonato-4-(5-sülfonato-... | H411 | — | — | ATP1 |
 | 1072957-71-1 | benzovindiflupyr (ISO); N-[9- (diklorometilen)-1,2,3,4- tetrah... | H331, H301, H400, H410 | Akut=100 / Kr=100 | — | ATP9 |
 | 1075-89-4 | 8-azaspiro[4.5]dekan-7,9-dion | H301, H411 | — | — | ATP1 |
@@ -317,18 +317,18 @@
 | 107898-54-4 | (±) trans-3,3-dimetil-5-(2,2,3- trimetil-siklopent-3-en-1-il)-... | H315, H400, H410 | — | — | CLP00 |
 | 107934-68-9 | 4,4'-(9H-floren-9-ilidin)bis(2- kloroanilin) | H411 | — | — | CLP00 |
 | 108-00-9 | 2-aminoetildimetilamin; 2-dimetilaminoetilamin | H225, H312, H302, H314 | — | — | CLP00 |
-| 108-01-0 | 2-dimetilaminoetanol; N,N- dimetiletanolamin | H226, H332, H312, H302, H314 | — | H335:5.0% | CLP00 |
+| 108-01-0 | 2-dimetilaminoetanol; N,N- dimetiletanolamin | H226, H332, H312, H302, H314 | — | H335(3):≥5.0% | CLP00 |
 | 108-03-2 | 1-nitropropan | H226, H332, H312, H302 | — | — | CLP00 |
 | 108-05-4 | vinil asetat | H225, H351, H332, H335 | — | — | ATP5 |
 | 108-10-1 | 4-metilpentan-2-on; izobütil metil keton | H225, H351, H332, H336, H319 | — | — | ATP17 |
-| 108-11-2 | 4-metilpentan-2-ol; metilisobütil karbinol | H226, H335 | — | H335:25.0% | CLP00 |
+| 108-11-2 | 4-metilpentan-2-ol; metilisobütil karbinol | H226, H335 | — | H335(3):≥25.0% | CLP00 |
 | 108-16-7 | 1-dimetilaminopropan-2-ol; dimepranol (INN) | H226, H302, H314 | — | — | CLP00 |
-| 108-18-9 | diizopropilamin | H225, H332, H302, H314 | — | H335:5.0% | CLP00 |
+| 108-18-9 | diizopropilamin | H225, H332, H302, H314 | — | H335(3):≥5.0% | CLP00 |
 | 108-20-3 | diizopropil eter [1] dipropil eter [2]; | H225, H336 | — | — | CLP00 |
 | 108-21-4 | propil asetat [1]; izopropil asetat [2]. | H225, H336, H319 | — | — | CLP00 |
-| 108-24-7 | Asetik anhidrid | H226, H332, H302, H314 | — | H314:25.0%; H315:5.0%; H318:5.0%; H319:1.0%; H3... | CLP00 |
+| 108-24-7 | Asetik anhidrid | H226, H332, H302, H314 | — | H314(1B):≥25.0%; H315(2):5.0–25.0%; H318(1):5.0... | CLP00 |
 | 108-30-5 | süksinik anhidrit | H302, H314, H318, H334, H317 | — | — | ATP13 |
-| 108-31-6 | maleik anhidrit | H302, H372(respiratory_system,_inhalation), H314, H318, H334, H317, H372 | — | H317:0.001% | ATP13 |
+| 108-31-6 | maleik anhidrit | H302, H372(respiratory_system,_inhalation), H314, H318, H334, H317, H372 | — | H317(1):≥0.001% | ATP13 |
 | 108-32-7 | Propilenkarbonat | H319 | — | — | CLP00 |
 | 108-34-9 | pirazokson; dietil 3-metilpirazol-5-il fosfat | H310, H330, H300 | — | — | CLP00 |
 | 108-38-3 | o-ksilen [1]; p-ksilen [2]; m-ksilen [3]; ksilen [4] | H226, H332, H312, H315 | — | — | CLP00 |
@@ -340,10 +340,10 @@
 | 108-46-3 | resorsinol; 1,3-benzendiol | H302, H370 (nervous system), H315, H319, H317, H400, H370 | Akut=1 | — | ATP21 |
 | 108-62-3 | 2,4,6,8-tetrametil-1,3,5,7- tetraoksasikloktan; metaldehid | H228, H361f, H301, H412 | — | — | ATP14 |
 | 108-65-6 | 2-metoksi-1-metiletilasetat | H226 | — | — | ATP1 |
-| 108-67-8 | mesitilen; 1,3,5-trimetilbenzen | H226, H335, H411 | — | H335:25.0% | CLP00 |
+| 108-67-8 | mesitilen; 1,3,5-trimetilbenzen | H226, H335, H411 | — | H335(3):≥25.0% | CLP00 |
 | 108-68-9 | 3,5-ksilenol; 3,5-dimetilfenol | H311, H301, H314 | — | — | CLP00 |
-| 108-77-0 | 2,4,6-trikloro-1,3,5-triazin ;siyanürik klorür | H330, H302, H314, H317 | — | H335:5.0% | CLP00 |
-| 108-83-8 | 2,6-dimetilheptan-4-on; di-izobütilketon | H226, H335 | — | H335:10.0% | CLP00 |
+| 108-77-0 | 2,4,6-trikloro-1,3,5-triazin ;siyanürik klorür | H330, H302, H314, H317 | — | H335(3):≥5.0% | CLP00 |
+| 108-83-8 | 2,6-dimetilheptan-4-on; di-izobütilketon | H226, H335 | — | H335(3):≥10.0% | CLP00 |
 | 108-86-1 | bromobenzen | H226, H315, H411 | — | — | CLP00 |
 | 108-87-2 | metilsiklohekzan | H225, H304, H336, H315, H411 | — | — | CLP00 |
 | 108-88-3 | toluen | H225, H361d, H304, H336, H373 (nervous system), H315 | — | — | CLP00 |
@@ -352,7 +352,7 @@
 | 108-91-8 | siklohekzilamin | H226, H361f, H312, H302, H314 | — | — | ATP1 |
 | 108-93-0 | siklohekzanol | H332, H302, H335, H315 | — | — | CLP00 |
 | 108-94-1 | siklohekzanon | H226, H332 | — | — | CLP00 |
-| 108-95-2 | fenol; karbolik asit; monohidroksibenzen; fenilalkol | H341, H331, H311, H301, H373, H314 | — | H314:3.0%; H315:1.0%; H319:1.0% | CLP00 |
+| 108-95-2 | fenol; karbolik asit; monohidroksibenzen; fenilalkol | H341, H331, H311, H301, H373, H314 | — | H314(1B):≥3.0%; H315(2):1.0–3.0%; H319(2):1.0–3.0% | CLP00 |
 | 108173-90-6 | Guazatin (ISO) | H330, H312, H302, H335, H315, H318, H400, H410 | — | — | CLP00 |
 | 108225-03-2 | (6-(4-hidroksi-3-(2- metoksifenilazo)-2-sülfonato-7- naftilami... | H350, H318, H411 | — | — | CLP00 |
 | 1085-98-9 | diklofluanid (ISO); N-[(dikloroflorometil)tiyo]- N',N'-dimetil... | H332, H319, H317, H400 | Akut=10 | — | ATP10 |
@@ -367,15 +367,15 @@
 | 109-61-5 | propil kloroformat; kloroformik asit propilester; n-propil klo... | H225, H331, H314 | — | — | ATP1 |
 | 109-66-0 | Pentan | H225, H304, H336, H411 | — | — | CLP00 |
 | 109-69-3 | 1-klorobütan bütil klorür | H225 | — | — | CLP00 |
-| 109-73-9 | bütilamin | H225, H332, H312, H302, H314 | — | H335:1.0% | CLP00 |
+| 109-73-9 | bütilamin | H225, H332, H312, H302, H314 | — | H335(3):≥1.0% | CLP00 |
 | 109-74-0 | n-bütironitril | H225, H331, H311, H301 | — | — | ATP1 |
 | 109-77-3 | malononitril | H331, H311, H301, H400, H410 | — | — | CLP00 |
-| 109-83-1 | 2-metilaminoetanol; N-metiletanolamin; N-metil-2-etanolamin; N... | H312, H302, H314 | — | H335:5.0% | CLP00 |
+| 109-83-1 | 2-metilaminoetanol; N-metiletanolamin; N-metil-2-etanolamin; N... | H312, H302, H314 | — | H335(3):≥5.0% | CLP00 |
 | 109-86-4 | 2-metoksietanol; etilen glikol monometil eter | H226, H360FD, H332, H312, H302 | — | — | CLP00 |
-| 109-89-7 | dietilamin | H225, H332, H312, H302, H314 | — | H335:1.0% | CLP00 |
+| 109-89-7 | dietilamin | H225, H332, H312, H302, H314 | — | H335(3):≥1.0% | CLP00 |
 | 109-94-4 | etil format | H225, H332, H302, H335, H319 | — | — | CLP00 |
 | 109-95-5 | etil nitrit | H220, H332, H312, H302 | — | — | CLP00 |
-| 109-99-9 | tetrahidrofuran | H225, H351, H335, H319 | — | H335:25.0%; H319:25.0% | ATP3 |
+| 109-99-9 | tetrahidrofuran | H225, H351, H335, H319 | — | H335(3):≥25.0%; H319(2):≥25.0% | ATP3 |
 | 109125-51-1 | amonyum bis(1-(3,5-dinitro-2- oksidofenilazo)-3-(N- fenilkarba... | H242, H400, H410 | — | — | CLP00 |
 | 109125-56-6 | tetrasodyum-10-amino-6,13- dikloro-3-(3-(4-(2,5- disülfonatoan... | H318 | — | — | CLP00 |
 | 109678-33-3 | 2,2,6,6-tetrakis(bromometil)-4- oksaheptan-1,7-diol | H317, H411 | — | — | CLP00 |
@@ -384,7 +384,7 @@
 | 110-01-0 | tetrahidrotiyofen | H225, H332, H312, H302, H315, H319, H412 | — | — | CLP00 |
 | 110-05-4 | di-ter-bütilperoksit | H225, H242, H341 | — | — | ATP3 |
 | 110-12-3 | 5-metilhekzan-2-on; izoamil metilketon | H226, H332 | — | — | CLP00 |
-| 110-16-7 | maleik asit | H302, H335, H315, H319, H317 | — | H317:0.1% | ATP1 |
+| 110-16-7 | maleik asit | H302, H335, H315, H319, H317 | — | H317(1):≥0.1% | ATP1 |
 | 110-17-8 | fumarik asit | H319 | — | — | CLP00 |
 | 110-18-9 | N,N,N',N'-tetrametiletilendiamin | H225, H332, H302, H314 | — | — | CLP00 |
 | 110-19-0 | sec-bütil asetat [1]; izobütil asetat [2]; ter-bütil asetat [3] | H225 | — | — | CLP00 |
@@ -393,7 +393,7 @@
 | 110-46-3 | Pentil nitrit [1]; "amil nitrit", karışık izomerler [2] | H225, H332, H302 | — | — | CLP00 |
 | 110-49-6 | 2-metoksietil asetat; metilglikol asetat | H360FD, H332, H312, H302 | — | — | CLP00 |
 | 110-54-3 | n-hekzan | H225, H361f, H304, H336, H372(nervous_system), H315, H411, H372 | — | — | ATP22 |
-| 110-65-6 | büt-2-in-1,4-diol; 2-bütin-1,4-diol | H331, H301, H312, H373, H314, H317 | — | H314:50.0%; H315:25.0%; H319:25.0% | CLP00 |
+| 110-65-6 | büt-2-in-1,4-diol; 2-bütin-1,4-diol | H331, H301, H312, H373, H314, H317 | — | H314(1B):≥50.0%; H315(2):25.0–50.0%; H319(2):25... | CLP00 |
 | 110-69-0 | bütiraldehidoksim | H311, H302, H319 | — | — | CLP00 |
 | 110-71-4 | 1,2-dimetoksietan; etilen glikol dimetil eter; EGDME | H225, H360FD, H332 | — | — | CLP00 |
 | 110-74-7 | propil format [1]; izopropil format [2] | H225, H335, H336, H319 | — | — | CLP00 |
@@ -419,16 +419,16 @@
 | 111-14-8 | heptanoik asit | H314 | — | — | CLP00 |
 | 111-15-9 | 2-etoksietil asetat; etilglikolasetat | H226, H360FD, H332, H312, H302 | — | — | ATP1 |
 | 111-27-3 | hekzan-1-ol | H302 | — | — | CLP00 |
-| 111-30-8 | glutaral; glutaraldehid; 1,5-pentandial | H330, H301, H335, H314, H334, H317, H400, H411, H410 | Akut=1 / Kr=1 | H335:0.5% | ATP9 |
+| 111-30-8 | glutaral; glutaraldehid; 1,5-pentandial | H330, H301, H335, H314, H334, H317, H400, H411, H410 | Akut=1 / Kr=1 | H335(3):0.5–5.0% | ATP9 |
 | 111-40-0 | 2,2'-iminodietilamin; dietilentriamin | H312, H302, H314, H317 | — | — | CLP00 |
-| 111-41-1 | 2-(2-aminoetilamino)etanol; (AEEA) | H360Df, H314, H317 | — | H335:5.0% | ATP1 |
+| 111-41-1 | 2-(2-aminoetilamino)etanol; (AEEA) | H360Df, H314, H317 | — | H335(3):≥5.0% | ATP1 |
 | 111-42-2 | 2,2'-iminodietanol; dietanolamin | H302, H373, H315, H318 | — | — | CLP00 |
 | 111-43-3 | diizopropil eter [1] dipropil eter [2]; | H225, H336 | — | — | CLP00 |
 | 111-44-4 | bis(2-dikloroetil)eter | H351, H310, H330, H300 | — | — | ATP1 |
 | 111-46-6 | 2,2' -oksibisetanol; dietilen glikol | H302 | — | — | CLP00 |
 | 111-48-8 | 2,2'-tiyodietanol; tiyodiglikol | H319 | — | — | CLP00 |
 | 111-76-2 | 2-bütoksietanol; etilen glikol monobütil eter; bütilsellosolve | H331, H302, H315, H319 | — | — | ATP18 |
-| 111-77-3 | 2-(2-metoksietoksi)etanol; dietilen glikolmonometileter | H360D | — | H360D:3.0% | ATP18 |
+| 111-77-3 | 2-(2-metoksietoksi)etanol; dietilen glikolmonometileter | H360D | — | H360D:≥3.0% | ATP18 |
 | 111-92-2 | di-n-bütilamin; [1] di-sek-bütilamin [2] | H226, H330, H311, H301, H314, H318 | — | — | ATP21 |
 | 111-96-6 | bis(2-metoksietil)eter | H226, H360FD | — | — | CLP00 |
 | 1111-67-7 | bakır tiyosiyanat | H400, H410 | Akut=10 / Kr=10 | — | ATP17 |
@@ -437,9 +437,9 @@
 | 111244-14-5 | N-[3-(2,4-di-(1,1-dimetil- propil)fenoksi)-propil]-1- hidroksi... | H413 | — | — | ATP1 |
 | 111298-82-9 | 7-amino-3-((5-karboksimetil-4- metil-1,3-tiazol-2-iltiyo)metil... | H334, H317, H412 | — | — | CLP00 |
 | 1113-02-6 | ometoat (ISO); O,O-dimetil S- metilkarbamoilmetil fosforotiyoat | H301, H312, H400 | — | — | CLP00 |
-| 11132-10-8 | nikel diflorür;[1] nikel dibromür; [2] nikel diiyodür; [3] nik... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 11132-10-8 | nikel diflorür;[1] nikel dibromür; [2] nikel diiyodür; [3] nik... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 111337-53-2 | lityum-3-okso-1,2(2H)- benzizotiyazol-2-id | H302, H314, H317, H411 | — | — | CLP00 |
-| 11138-47-9 | Perborik asit, sodyum tuzu; [1] perborik asit, sodyum tuzu, mo... | H272, H360FD, H331, H302, H335, H318 | — | H318:22.0%; H319:14.0% | ATP22 |
+| 11138-47-9 | Perborik asit, sodyum tuzu; [1] perborik asit, sodyum tuzu, mo... | H272, H360FD, H331, H302, H335, H318 | — | H318(1):≥22.0%; H319(2):14.0–22.0% | ATP22 |
 | 111381-11-4 | tepkime kütlesi (1:1): 2-[[4-[N- etil-N-(2- asetoksietil)amino... | H413 | — | — | CLP00 |
 | 111381-12-5 | tepkime kütlesi (1:1): 2-[[4- [bis(2- asetoksietil)amino]fenil... | H413 | — | — | CLP00 |
 | 1114-71-2 | pebulat (ISO); N-bütil-N-etil-S- propiltiyokarbamat | H302, H411 | — | — | CLP00 |
@@ -462,7 +462,7 @@
 | 112-57-2 | 3,6,9- triazaundekametilendiamin; tetraetilenpentamin | H312, H302, H314, H317, H411 | — | — | CLP00 |
 | 112-59-4 | 2-(2-hekziloksietoksi)etanol; DEGHE; dietilenglikolmonohekzile... | H312, H318 | — | — | CLP00 |
 | 112-90-3 | (Z)-oktadek-9-enilamin | H302, H304, H335, H373(gastro-intestinal_tract,_liver,_immune_system), H314, H400, H410, H373 | Akut=10 / Kr=10 | — | ATP5 |
-| 1120-71-4 | 1,3-propansulton; 1,2- oksatiyolan 2,2-dioksit | H350, H312, H302 | — | H350:0.01% | CLP00 |
+| 1120-71-4 | 1,3-propansulton; 1,2- oksatiyolan 2,2-dioksit | H350, H312, H302 | — | H350:≥0.01% | CLP00 |
 | 112006-75-4 | 2-aminosülfonil-N,N- dimetilnikotinamid | H317, H412 | — | — | CLP00 |
 | 112193-77-8 | 1,4,7,10-tetraazasiklododekan disülfat | H302, H335, H318, H412 | — | — | CLP00 |
 | 112195-27-4 | 3-amino-4-hidroksi-N-(2- metoksietil)-benzensülfonamid | H318, H317, H411 | — | — | CLP00 |
@@ -496,7 +496,7 @@
 | 115-10-6 | dimetil eter | H220 | — | — | CLP00 |
 | 115-11-7 | büt-1-en; [1] büten, 1-ve-2-izomer karışımları; [2] 2-metilpro... | H220 | — | — | CLP00 |
 | 115-26-4 | dimefoks (ISO); tetrametilfosforodiamidik florür | H310, H300 | — | — | CLP00 |
-| 115-27-5 | 1,4,5,6,7,7-hekzaklorobisiklo [2,2,1]hept-5-en-2,3- dikarboksi... | H335, H315, H319 | — | H315:1.0%; H319:1.0%; H335:1.0% | CLP00 |
+| 115-27-5 | 1,4,5,6,7,7-hekzaklorobisiklo [2,2,1]hept-5-en-2,3- dikarboksi... | H335, H315, H319 | — | H315(2):≥1.0%; H319(2):≥1.0%; H335(3):≥1.0% | CLP00 |
 | 115-29-7 | endosülfan (ISO); 1,2,3,4,7,7-hekzakloro-8,9,10- trinorborn-2-... | H330, H300, H312, H400, H410 | — | — | ATP1 |
 | 115-31-1 | 1,7,7-trimetilbisiklo(2,2,1)hept- 2-il tiyosiyanatoasetat; izo... | H302, H400, H410 | — | — | CLP00 |
 | 115-32-2 | dikofol (İSO); 2,2,2-trikloro-1,1-bis(4- klorofenil)etanol | H312, H302, H315, H317, H400, H410 | — | — | CLP00 |
@@ -600,7 +600,7 @@
 | 12035-64-2 | nikel borit (NiB; [1] dinikel borit; [2] trinikel borit; [3] n... | H350i, H372 **, H317, H400, H410 | — | — | ATP02 |
 | 12035-71-1 | trinikel disülfür; nikel subsülfür; [1] heyzılvudit [2] | H350i, H341, H331, H372 **, H317, H400, H410 | — | — | ATP17 |
 | 12035-72-2 | trinikel disülfür; nikel subsülfür; [1] heyzılvudit [2] | H350i, H341, H331, H372, H317, H400, H410 | — | — | ATP17 |
-| 12040-72-1 | Perborik asit, sodyum tuzu; [1] perborik asit, sodyum tuzu, mo... | H272, H360FD, H331, H302, H335, H318 | — | H318:22.0%; H319:14.0% | — |
+| 12040-72-1 | Perborik asit, sodyum tuzu; [1] perborik asit, sodyum tuzu, mo... | H272, H360FD, H331, H302, H335, H318 | — | H318(1):≥22.0%; H319(2):≥14.0% | — |
 | 120447-91-8 | potasyum-2-amino-2- metilpropiyonatoktahidrat | H302, H314 | — | — | CLP00 |
 | 12054-48-7 | Nikel dihidroksit; [1] Nikel hidroksit [2] | H350i, H341, H360D, H332, H302, H372, H315, H334, H317, H400, H410 | — | — | ATP1 |
 | 12056-51-8 | potasyum titanyum oksit (K2Ti6O13) | H351 | — | — | ATP1 |
@@ -619,7 +619,7 @@
 | 121-21-1 | 2-metil-4-okso-3-(penta-2,4- denil)siklopent-2-enil [1R- [1α[S... | H332, H312, H302, H400, H410 | — | — | CLP00 |
 | 121-29-9 | 2-metil-4-okso-3-(penta-2,4- dienil)siklopent-2-enil-[1R- [1α[... | H332, H312, H302, H400, H410 | — | — | CLP00 |
 | 121-43-7 | trimetil borat | H226, H360FD, H312 | — | — | ATP22 |
-| 121-44-8 | trietilamin | H225, H331, H311, H301, H314, H318 | — | H335:1.0% | ATP21 |
+| 121-44-8 | trietilamin | H225, H331, H311, H301, H314, H318 | — | H335(3):≥1.0% | ATP21 |
 | 121-47-1 | 3-aminobenzen sülfonik asit; metanilik asit | H332, H312, H302 | — | — | CLP00 |
 | 121-57-3 | sülfanilik asit; 4- aminobenzensülfonik asit | H315, H319, H317 | — | — | CLP00 |
 | 121-69-7 | N,N-dimetilanilin | H351, H331, H311, H301, H411 | — | — | CLP00 |
@@ -669,7 +669,7 @@
 | 122384-77-4 | özüt artıkları (kömür), Kreosot yağı asidi; yıkama yağı özüt a... | H350 | — | — | ATP1 |
 | 122384-78-5 | özüt artıkları (kömür), düşük sıcaklık kömür zifti bazı; [Düşü... | H350, H340 | — | — | ATP1 |
 | 122453-73-0 | klorfenapir(ISO); 4-bromo-2-(4-klorofenil)-1- etoksimetil-5-tr... | H331, H302, H400, H410 | Akut=100 / Kr=100 | — | ATP1 |
-| 12262-58-7 | 1-hidroperoksisikloheksil 1- hidroksisikloheksil peroksit; [1]... | H242, H302, H314 | — | H335:5.0% | CLP00 |
+| 12262-58-7 | 1-hidroperoksisikloheksil 1- hidroksisikloheksil peroksit; [1]... | H242, H302, H314 | — | H335(3):≥5.0% | CLP00 |
 | 122630-55-1 | dimetil 3,3'-(N-(4-(4-bromo-2,6- disiyanofenilazo)-3- hidroksi... | H413 | — | — | CLP00 |
 | 122665-86-5 | etil (3-siyanometil-3,4-dihidro- 4-oksofitalazin-1-il)asetat | H317, H412 | — | — | ATP1 |
 | 122760-84-3 | 4-metil-8- metilentrisiklo[3.3.1.13,7]dekan- 2-ol | H315, H317, H411 | — | — | CLP00 |
@@ -680,9 +680,9 @@
 | 123-31-9 | 1,4-dihidroksibenzen; hidrokinon; kinol | H351, H341, H302, H318, H317, H400 | Akut=10 | — | ATP1 |
 | 123-38-6 | propanal; propionaldehid | H225, H335, H315, H319 | — | — | CLP00 |
 | 123-39-7 | N-metilformamid | H360D, H312 | — | — | CLP00 |
-| 123-42-2 | 4-hidroksi-4-metilpentan-2-on; diaseton alkol | H319 | — | H319:10.0% | CLP00 |
+| 123-42-2 | 4-hidroksi-4-metilpentan-2-on; diaseton alkol | H319 | — | H319(2):≥10.0% | CLP00 |
 | 123-54-6 | pentan-2,4-dion; asetilaseton | H226, H302 | — | — | CLP00 |
-| 123-62-6 | propionik anhidrid | H314 | — | H314:25.0%; H315:10.0%; H319:10.0% | CLP00 |
+| 123-62-6 | propionik anhidrid | H314 | — | H314(1B):≥25.0%; H315(2):10.0–25.0%; H319(2):10... | CLP00 |
 | 123-63-7 | 2,4,6-trimetil-1,3,5-trioksan; paraldehid | H226 | — | — | ATP1 |
 | 123-72-8 | bütiraldehid | H225 | — | — | CLP00 |
 | 123-73-9 | krotonaldehid; 2-bütenal [1]; (E)-2-bütenal; (E)-krotonaldehid... | H225, H341, H330, H311, H301, H335, H373 **, H315, H318, H400 | — | — | CLP00 |
@@ -697,14 +697,14 @@
 | 123439-82-7 | tetraamin platinyum (II) hidrojen karbonat | H302, H318, H412 | — | — | ATP1 |
 | 123590-00-1 | N-(2-(1-allil-4,5- disiyanoimidazol-2-ilazo)-5- (dipropilamino... | H413 | — | — | CLP00 |
 | 123599-82-6 | [[2-metil-2-(2- oksopoksi)propoksi](4- fenilbütil)fosfonil]ase... | H319 | — | — | ATP1 |
-| 123748-85-6 | 8,9-dinorborn-5-en-2,3- dikarboksilik anhidrit | H302, H335, H315, H319, H334 | — | H335:10.0% | CLP00 |
+| 123748-85-6 | 8,9-dinorborn-5-en-2,3- dikarboksilik anhidrit | H302, H335, H315, H319, H334 | — | H335(3):≥10.0% | CLP00 |
 | 1239-45-8 | etidyum bromür; 3,8-diamino-1-etil-6- fenilfenantridinyum bromür | H341, H330, H302 | — | — | ATP1 |
 | 123968-25-2 | 2-(1-(2-hidroksi-3,5-di-ter- pentil-fenil)etil)-4,6-di-ter- pe... | H413 | — | — | CLP00 |
 | 124-04-9 | adipik asit | H319 | — | — | CLP00 |
 | 124-07-2 | oktanoik asit | H314, H412 | — | — | ATP7 |
 | 124-09-4 | heksametilendiamin | H312, H302, H335, H314 | — | — | CLP00 |
 | 124-30-1 | oktadesilamin | H304, H373(gastro-intestinal_tract,_liver,_immune_system), H315, H318, H400, H410, H373 | Akut=10 / Kr=10 | — | ATP5 |
-| 124-40-3 | mono-metilamin; [1] di-metilamin; [2] tri-metilamin [3] | H224, H332, H302, H314 | — | H335:5.0% | CLP00 |
+| 124-40-3 | mono-metilamin; [1] di-metilamin; [2] tri-metilamin [3] | H224, H332, H302, H314 | — | H335(3):≥5.0% | CLP00 |
 | 124-41-4 | sodyum metanolat; sodyum metoksit [1]; potasyum metanolat; pot... | H251, H314 | — | — | CLP00 |
 | 124-68-5 | 2-amino-2-metilpropanol | H315, H319, H412 | — | — | CLP00 |
 | 124172-53-8 | N,N'-1,6-hekzandilbis(N- (2,2,6,6-tetrametil-piperidin-4- il)-... | H319, H412 | — | — | CLP00 |
@@ -741,7 +741,7 @@
 | 126-75-0 | demeton-S (ISO); dietil-S-2- etiltiyoetilfosforotiyoat | H310, H300 | — | — | CLP00 |
 | 126-90-9 | linalool; 3,7-dimetil-1,6- oktadien-3-ol; dl-linalool; [1] kor... | H317 | — | — | ATP10 |
 | 126-91-0 | linalool; 3,7-dimetil-1,6- oktadien-3-ol; dl-linalool; [1] kor... | H317 | — | — | ATP10 |
-| 126-98-7 | metakrilonitril; 2-metil-2-propen nitril | H225, H331, H311, H301, H317 | — | H317:0.2% | CLP00 |
+| 126-98-7 | metakrilonitril; 2-metil-2-propen nitril | H225, H331, H311, H301, H317 | — | H317(1):≥0.2% | CLP00 |
 | 126-99-8 | kloropren (kararlı hale getirilmiş); 2-klorobüta-1,3-dien (kar... | H225, H350, H332, H302, H335, H373, H315, H319 | — | — | CLP00 |
 | 126050-54-2 | 2,2'-metilenbis(4,6-di-ter- bütilfenil)-2-etilhekzilfosfit | H413 | — | — | CLP00 |
 | 12607-70-4 | nikel karbonat; basit nikel karbonat; karbonik asit, nikel (2+... | H350i, H341, H360D ***, H332, H302, H372 **, H315, H334, H317, H400, H410 | — | — | ATP01 |
@@ -794,7 +794,7 @@
 | 13048-33-4 | hekzametilen diakrilat; hekzan-1,6-diol diakrilat | H315, H319, H317 | — | — | CLP00 |
 | 1305-99-3 | kalsiyum fosfür; trikalsiyum difosfür | H260, H330, H300, H311, H318, H400 | Akut=100 | — | ATP7 |
 | 1306-19-0 | kadmiyum (piroforik olmayan) [1] kadmiyum oksit (piroforik olm... | H350, H341, H361fd, H330, H372 **, H400, H410 | — | — | CLP00 |
-| 1306-23-6 | Kadmiyum sülfür | H350, H341, H361fd, H302, H372, H413 | — | H372:10.0%; H373:0.1% | CLP00 |
+| 1306-23-6 | Kadmiyum sülfür | H350, H341, H361fd, H302, H372, H413 | — | H372:≥10.0%; H373:0.1–10.0% | CLP00 |
 | 130603-71-3 | 3-(6-O-(6-dezoksi-α-l- mannopiranosil-O-(α-d- glukopiranosil)-... | H317, H411 | — | — | ATP1 |
 | 13067-93-1 | siyanofenfos (ISO); O-4-siyanofenil O-etil fenilfosfonotiyoat | H301, H312, H370 (nervous system), H319, H411 | — | — | CLP00 |
 | 1307-96-6 | Kobalt oksit | H302, H317, H400, H410 | Akut=10 / Kr=10 | — | ATP1 |
@@ -808,8 +808,8 @@
 | 131-52-2 | sodyum pentaklorofenolat [1]; potasyum pentaklorofenolat [2] | H351, H330, H311, H301, H335, H315, H319, H400, H410 | — | — | CLP00 |
 | 131-73-7 | bis(2,4,6-trinitrofenil)amin; hekzil | H201, H310, H330, H300, H373, H411 | — | — | ATP1 |
 | 131-89-5 | dineks (ISO): 2-siklohekzil-4,6-dinitrofenol | H331, H311, H301, H400, H410 | — | — | CLP00 |
-| 1310-58-3 | potasyum hidroksit; kostik potas | H302, H314 | — | H314:5.0%; H314:2.0%; H315:0.5%; H319:0.5% | CLP00 |
-| 1310-73-2 | sodyum hidroksit; kostik soda | H314 | — | H314:5.0%; H314:2.0%; H315:0.5%; H319:0.5% | CLP00 |
+| 1310-58-3 | potasyum hidroksit; kostik potas | H302, H314 | — | H314(1A):≥5.0%; H314(1B):2.0–5.0%; H315(2):0.5–... | CLP00 |
+| 1310-73-2 | sodyum hidroksit; kostik soda | H314 | — | H314(1A):≥5.0%; H314(1B):2.0–5.0%; H315(2):0.5–... | CLP00 |
 | 131013-81-5 | tris(tetrametilamonyum) 5- hidroksi-1-(4-sülfonatofenil)-4- (4... | H301, H412 | — | — | CLP00 |
 | 131013-83-7 | tetrakis(tetrametilamonyum)3,3'- (6-(2-hidroksietilamino)1,3,5... | H301, H412 | — | — | CLP00 |
 | 13108-52-6 | metil-2,3,5,6-tetrakloro-4- piridilsülfon; 2,3,5,6-tetrakloro-... | H312, H302, H319, H317 | — | — | CLP00 |
@@ -822,7 +822,7 @@
 | 1313-60-6 | sodyum peroksit | H271, H314 | — | — | CLP00 |
 | 1313-82-2 | Disodyum sülfür; sodyum sülfür | H311, H302, H314, H400 | — | — | ATP1 |
 | 1313-99-1 | Nikel monoksit; [1] nikel oksit; [2] bunsenit [3] | H350i, H372, H317, H413 | — | — | ATP1 |
-| 13138-45-9 | nikel dinitrat; [1] nitrik asit, nikel tuzu[2] | H272, H350i, H341, H360D, H332, H302, H372, H315, H318, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:1.0%; H373:0.1%; H315:20.0%; H317:0.01% | ATP1 |
+| 13138-45-9 | nikel dinitrat; [1] nitrik asit, nikel tuzu[2] | H272, H350i, H341, H360D, H332, H302, H372, H315, H318, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:≥1.0%; H373:0.1–1.0%; H315(2):≥20.0%; H317... | ATP1 |
 | 1314-04-1 | Nikel (II) sülfür; [1] Nikel sülfür; [2] Millerit [3] | H350i, H341, H372 **, H317, H400, H410 | — | — | ATP01 |
 | 1314-05-2 | nikel selenit | H350i, H372, H317, H400, H410 | — | — | ATP1 |
 | 1314-06-3 | Dinikel trioksit | H350i, H372, H317, H413 | — | — | ATP1 |
@@ -862,13 +862,13 @@
 | 132983-41-6 | mono-(2-tetradesil)naftalin; di- (2-tetradesil)naftalin; tri-(... | H319, H413 | — | — | CLP00 |
 | 133-06-2 | kaptan (ISO) ;1,2,3,6-tetrahidro- N-(triklorometiltiyo)ftalimid | H351, H331, H318, H317, H400 | Akut=10 | — | ATP1 |
 | 133-07-3 | folpet (ISO); N-(triklorometiltiyo)ftalimid | H351, H332, H319, H317, H400 | Akut=10 | — | ATP1 |
-| 1330-20-7 | o-ksilen [1]; p-ksilen [2]; m-ksilen [3]; ksilen [4] | H226, H332, H312, H315 | — | H373:10.0%; H315:10.0%; H335:20.0%; H304:10.0% | CLP00 |
+| 1330-20-7 | o-ksilen [1]; p-ksilen [2]; m-ksilen [3]; ksilen [4] | H226, H332, H312, H315 | — | H373(2):≥10.0%; H315(2):≥10.0%; H335:≥20.0%; H3... | CLP00 |
 | 133167-77-8 | sodyum-3-asetoasetilamino-4- metoksitolil-6-sülfonat | H317 | — | — | CLP00 |
 | 1332-65-6 | dibakır klorür trihidroksit | H301, H332, H400, H410 | Akut=10 / Kr=10 | — | ATP17 |
 | 1333-22-8 | tetrabakır hekzahidroksit sülfat; [1] tetrabakır hekzahidroksi... | H302, H400, H410 | Akut=10 / Kr=10 | — | ATP17 |
 | 1333-74-0 | hidrojen | H220 | — | — | CLP00 |
-| 1333-82-0 | krom (VI) trioksit | H271, H350, H340, H361f, H330, H311, H301, H372, H314, H334, H317, H400, H410 | — | H335:1.0% | CLP00 |
-| 1333-83-1 | sodyum biflorür; sodyum hidrojen diflorür | H301, H314 | — | H314:1.0%; H315:0.1%; H319:0.1% | CLP00 |
+| 1333-82-0 | krom (VI) trioksit | H271, H350, H340, H361f, H330, H311, H301, H372, H314, H334, H317, H400, H410 | — | H335(3):≥1.0% | CLP00 |
+| 1333-83-1 | sodyum biflorür; sodyum hidrojen diflorür | H301, H314 | — | H314(1B):≥1.0%; H315(2):0.1–1.0%; H319(2):0.1–1.0% | CLP00 |
 | 133336-92-2 | N,N''-(metilendi-4,1- fenilen)bis[N’-(4- metilfenil)ürea] | H317, H413 | — | — | ATP1 |
 | 13335-71-2 | (2,6-ksililoksi) asetik asit | H302, H318, H412 | — | — | ATP1 |
 | 133413-70-4 | (3S,6R,9S,12R,15S,18R,21S,24 R)-6,18-dibenzil-3,9,15,21- tetra... | H319, H413 | — | — | ATP1 |
@@ -877,8 +877,8 @@
 | 1335-31-5 | diciva disiyanür oksit; civa (II) oksisiyanür | H201, H331, H311, H301, H373, H400, H410 | — | — | ATP1 |
 | 1335-32-6 | kurşun asetat, bazik; | H351, H360Df, H373, H400, H410 | — | — | CLP00 |
 | 13356-08-6 | fenbutakalay oksit (ISO); bis(tris(2-metil-2- fenilpropil)kala... | H330, H315, H319, H400, H410 | — | — | CLP00 |
-| 1336-21-6 | amonyak ....% | H314, H400 | — | H335:5.0% | CLP00 |
-| 1336-36-3 | poliklorobifeniller; PCB | H373, H400, H410 | — | H373:0.005% | CLP00 |
+| 1336-21-6 | amonyak ....% | H314, H400 | — | H335(3):≥5.0% | CLP00 |
+| 1336-36-3 | poliklorobifeniller; PCB | H373, H400, H410 | — | H373:≥0.005% | CLP00 |
 | 13360-57-1 | dimetilsülfamoilklorür | H350, H330, H312, H302, H314 | — | — | CLP00 |
 | 133636-82-5 | (+)-(1S,2S,3S,5R)-2,6,6- trimetilbisiklo[3.1.1]heptan-3- spiro... | H314, H317, H400, H410 | — | — | ATP1 |
 | 1338-02-9 | Naftenik asit, bakır tuzları, bakır naftenat | H226, H302, H400, H410 | — | — | CLP00 |
@@ -889,18 +889,18 @@
 | 134-32-7 | 1-naftilamin | H302, H411 | — | — | CLP00 |
 | 134-62-3 | N,N-dietil-m-toluamid; deet | H302, H315, H319 | — | — | ATP14 |
 | 134098-61-6 | fenpiroksimat (ISO); tert-bütil 4- [({(E)-[(1,3-dimetil-5-feno... | H330, H301, H317, H400, H410 | Akut=100 / Kr=100 | — | ATP7 |
-| 1341-49-7 | amonyum biflorür; amonyum hidrojen diflorür | H301, H314 | — | H314:1.0%; H315:0.1%; H319:0.1% | CLP00 |
+| 1341-49-7 | amonyum biflorür; amonyum hidrojen diflorür | H301, H314 | — | H314(1B):≥1.0%; H315(2):0.1–1.0%; H319(2):0.1–1.0% | CLP00 |
 | 134164-24-2 | dibenzilfenilsülfonyum hekzafloroantimonat | H302, H372, H318, H317, H411 | — | — | CLP00 |
 | 13424-46-9 | kurşun diazid; kurşun azid (≥ %20 flegmatizer) | H201, H360Df, H332, H302, H373, H400, H410, H200 | — | — | CLP00 |
 | 1344-08-7 | Sodyum polisülfürler | H301, H314, H400 | — | — | CLP00 |
 | 1344-37-2 | kurşun sülfokromat sarısı; C.I. Pigment sarı 34 [bu madde Renk... | H350, H360Df, H373, H400, H410 | — | — | ATP1 |
 | 1344-81-6 | Kalsiyum polisülfürler | H335, H315, H319, H400 | — | — | CLP00 |
-| 13451-08-6 | kükürt tetraklorür | H314, H400 | — | H335:5.0% | CLP00 |
+| 13451-08-6 | kükürt tetraklorür | H314, H400 | — | H335(3):≥5.0% | CLP00 |
 | 13457-18-6 | pirazofos (ISO); O,O-dietil O-(6-etoksikarbonil- 5-metilpirazo... | H332, H302, H400, H410 | — | — | CLP00 |
 | 134575-17-0 | ter-bütil (1R, 5S)-3- azabisiklo[3.1.0]hek-6- zilkarbamat | H302, H373, H318, H317 | — | — | ATP1 |
 | 134595-59-8 | sodyum (1.0-1.95)/lityum (0.05- 1) 5-((5-((5-kloro-6-floro- pr... | H317 | — | — | CLP00 |
-| 13462-88-9 | nikel diflorür;[1] nikel dibromür; [2] nikel diiyodür; [3] nik... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
-| 13462-90-3 | nikel diflorür;[1] nikel dibromür; [2] nikel diiyodür; [3] nik... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 13462-88-9 | nikel diflorür;[1] nikel dibromür; [2] nikel diiyodür; [3] nik... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
+| 13462-90-3 | nikel diflorür;[1] nikel dibromür; [2] nikel diiyodür; [3] nik... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 134620-00-1 | tetraamin paladyum (II) hidrojen karbonat | H302, H373, H318, H317, H400, H410 | — | — | ATP1 |
 | 13463-39-3 | tetrakarbonilnikel; nikel tetrakarbonil | H225, H351, H360D, H330, H400, H410 | — | — | CLP00 |
 | 13465-08-2 | Hidroksilamonyum nitrat | H201, H351, H311, H302, H373, H315, H319, H317, H400 | — | — | ATP1 |
@@ -914,7 +914,7 @@
 | 135-88-6 | N-2-naftilanilin; N-fenil-2- naftilamin | H351, H315, H319, H317, H411 | — | — | CLP00 |
 | 135043-64-0 | 4-amino-2- (aminometil)fenoldihidroklorür | H302, H317, H400, H410 | — | — | CLP00 |
 | 135158-54-2 | asibenzolar-S-metil; benzo[1,2,3]tiyadiazol-7- karbotiyoik asi... | H335, H315, H319, H317, H400, H410 | — | — | CLP00 |
-| 13517-20-9 | perborik asit (H3BO2(O2)), monosodyum tuzu, trihidrat; [1] per... | H360FD, H332, H335, H318 | — | H318:36.0%; H319:22.0% | ATP22 |
+| 13517-20-9 | perborik asit (H3BO2(O2)), monosodyum tuzu, trihidrat; [1] per... | H360FD, H332, H335, H318 | — | H318(1):≥36.0%; H319(2):22.0–36.0% | ATP22 |
 | 135410-20-7 | asetamiprid (ISO); (E)-N1-[(6-kloro-3-pridil)metil]- N2-siyano... | H361d, H301, H400, H410 | Akut=10 / Kr=10 | — | ATP18 |
 | 135756-61-5 | 1,3-bis(dimetilkarbamoil)- imidazolyum klorür | H302, H318, H412 | — | — | ATP1 |
 | 13593-03-8 | kinalfos (ISO); O,O-dietil-O-kinoksalin-2-il fosforotiyoat | H301, H312, H400, H410 | Akut=1000 / Kr=1000 | — | CLP00 |
@@ -931,7 +931,7 @@
 | 136213-75-7 | sodyum 4-(4-kloro-6-(N- etilanilino)-1,3,5-triazin-2- ilamino)... | H317, H411 | — | — | CLP00 |
 | 136213-76-8 | tepkime kütlesi: sodyum 3,3'- (1,4-fenilenbis(karbonilimino- 3... | H411 | — | — | CLP00 |
 | 136248-03-8 | trisodyum-3-amino-6,13- dikloro-10-((3-((4-kloro-6-(2- sülfofe... | H317 | — | — | CLP00 |
-| 13637-71-3 | nikel diperklorat; perklorik asit, nikel(II) tuzu | H350i, H341, H360D, H372, H314, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
+| 13637-71-3 | nikel diperklorat; perklorik asit, nikel(II) tuzu | H350i, H341, H360D, H372, H314, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
 | 136426-54-5 | flukinkonazol (ISO); 3-(2,4- diklorofenil)-6-floro-2-(1H- 1,2,... | H331, H301, H312, H372, H315, H400, H410 | — | — | CLP00 |
 | 136450-06-1 | N-(3-asetil-2-hidroksifenil)-4-(4- fenilbütoksi)benzamid | H413 | — | — | CLP00 |
 | 136465-81-1 | (3S,4aS,8aS)-N-ter- bütildekahidro-3- izokinolinkarboksamid | H302, H318, H412 | — | — | ATP1 |
@@ -940,11 +940,11 @@
 | 13674-87-8 | tris[2-kloro-1-klorometil)etil] fosfat | H351 | — | — | ATP3 |
 | 13684-56-5 | desmedifam (ISO); etil-3- fenilkarbamiloksifenilkarbamat | H361d, H400, H410 | Akut=10 / Kr=10 | — | ATP17 |
 | 13684-63-4 | fenmedifam (ISO); metil 3-(3- metilkarbanililoksi)karbanilat | H400, H410 | Akut=10 / Kr=10 | — | ATP17 |
-| 13689-92-4 | nikel ditiyosiyanat | H350i, H341, H360D, H372, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
+| 13689-92-4 | nikel ditiyosiyanat | H350i, H341, H360D, H372, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
 | 136897-58-0 | dodekanamid, N,N'-(9,9',10,10'- tetrahidro-9,9',10,10'- tetrao... | H413 | — | — | CLP00 |
 | 136920-10-0 | behenamidopropil-dimetil- (dihidroksipropil) amonyumklorür | H318, H317, H400, H410 | — | — | CLP00 |
 | 136997-71-2 | 1-dimetilkarbamoil-4-(2- sülfonatoetil)piridinyum | H317 | — | — | ATP1 |
-| 137-05-3 | mekrilat; metil2-siyanoakrilat | H335, H315, H319 | — | H335:10.0% | CLP00 |
+| 137-05-3 | mekrilat; metil2-siyanoakrilat | H335, H315, H319 | — | H335(3):≥10.0% | CLP00 |
 | 137-17-7 | 2,4,5-trimetilanilin; [1] 2,4,5-trimetilanilin hidroklorür [2] | H350, H331, H311, H301, H411 | — | — | CLP00 |
 | 137-26-8 | tiram; tetrametiltiüram disülfür | H332, H302, H373, H315, H319, H317, H400, H410 | Akut=10 / Kr=10 | — | CLP00 |
 | 137-30-4 | ziram (ISO); bis(dimetilditiyokarbamat) çinko | H330, H302, H335, H373, H318, H317, H400, H410 | Akut=100 / Kr=100 | — | CLP00 |
@@ -956,10 +956,10 @@
 | 137605-95-9 | 2-bütil-2-etil-1,5-diaminopentan | H312, H302, H373, H314, H317, H412 | — | — | CLP00 |
 | 13765-19-0 | Kalsiyum kromat | H350, H302, H400, H410 | — | — | CLP00 |
 | 137658-79-8 | 2-(4,6-bis(2,4-dimetilfenil)- 1,3,5-triazin-2-il)-5-(3-((2- et... | H413 | — | — | CLP00 |
-| 13770-89-3 | Nikel bis(sülfamidat); nikel sülfamat | H350i, H341, H360D, H302, H372, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP14 |
+| 13770-89-3 | Nikel bis(sülfamidat); nikel sülfamat | H350i, H341, H360D, H302, H372, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP14 |
 | 13775-53-6 | Trisodyumhekzafloroalüminat [1] trisodyum hekzafloroalüminat (... | H332, H372, H411 | — | — | ATP3 |
 | 13775-54-7 | nikel(II) silikat;[1] dinikel ortosilikat, [2] nikel silikat (... | H350i, H372 **, H317, H400, H410 | — | — | ATP02 |
-| 137796-06-6 | 4-etil-2-metil-2-izopentil-1,3- oksazolidin | H314, H317 | — | H335:5.0% | CLP00 |
+| 137796-06-6 | 4-etil-2-metil-2-izopentil-1,3- oksazolidin | H314, H317 | — | H335(3):≥5.0% | CLP00 |
 | 137864-22-3 | benzil(S)-2--[(2'-siyanobifenil-4- ilmetil)pentanoilamino]-3- ... | H302, H317 | — | — | ATP1 |
 | 138-24-9 | N,N,N-trimetilanilinyumklorür | H311, H301 | — | — | CLP00 |
 | 138-86-3 | dipenten; limonene; [1] (R)-p-menta-1,8-dien; d-limonen; [2] (... | H226, H315, H317, H400, H410 | — | — | ATP17 |
@@ -968,7 +968,7 @@
 | 138261-41-3 | imidakloprid (ISO); 1-(6-klorpiridin-3-ilmetil)-N- nitroimidaz... | H301, H400, H410 | Akut=100 / Kr=100 | — | ATP17 |
 | 138271-16-6 | (Z)-(2,4-diflorofenil)piperidin-4- ilmetanon oksim monohidrokl... | H302, H318, H412 | — | — | ATP1 |
 | 138401-24-8 | 4'-((2-bütil-4-okso-1,3- diazaspiro[4.4]non-1-en-3- il)metil)(... | H400, H410 | — | — | CLP00 |
-| 13842-46-1 | nikel dipotasyum bis(sülfat);[1] diamonyum nikel bis(sülfat) [2] | H350i, H341, H360D, H332, H302, H372, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
+| 13842-46-1 | nikel dipotasyum bis(sülfat);[1] diamonyum nikel bis(sülfat) [2] | H350i, H341, H360D, H332, H302, H372, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
 | 138526-69-9 | 1-bromo-3,4,5-triflorobenzen | H226, H351, H315, H318, H411 | — | — | CLP00 |
 | 138564-59-7 | 5-metil-2-[(2-nitrolfenil)amino]- 3-tiyofenkarbonitril | H400, H410 | — | — | ATP1 |
 | 138666-92-9 | potasyum 2-kloro-3- (benziloksi)propiyonat | H302, H373, H318, H317 | — | — | ATP1 |
@@ -987,7 +987,7 @@
 | 140-41-0 | 3-(4-klorofenil)-1,1- dimetilüronyumtrikloroasetat; monuron-TCA | H351, H315, H319, H400, H410 | — | — | CLP00 |
 | 140-56-7 | fenaminosülf (ISO); sodyum-4- dimetilaminobenzendiazosülfona t | H301, H312, H412 | — | — | CLP00 |
 | 140-66-9 | 4-(1,1,3,3-tetrametilbütil)fenol; 4-ter-oktilfenol | H315, H318, H400, H410 | Akut=10 / Kr=10 | — | ATP1 |
-| 140-88-5 | etil akrilat | H225, H331, H312, H302, H335, H315, H319, H317 | — | H335:5.0%; H315:5.0%; H319:5.0% | ATP21 |
+| 140-88-5 | etil akrilat | H225, H331, H312, H302, H335, H315, H319, H317 | — | H335(3):≥5.0%; H315(2):≥5.0%; H319(2):≥5.0% | ATP21 |
 | 140-93-2 | proksan-sodyum (ISO); sodyum O- izopropilditiyokarbonat | H302, H315, H411 | — | — | CLP00 |
 | 140623-89-8 | 2,6-dikloro-1- floropiridinyumtetrafloroborat | H302, H314, H317, H400, H410 | — | — | ATP1 |
 | 140681-55-6 | 1-klorometil-4-floro-1,4- diazoniabisiklo[2.2.2]oktan bis(tetr... | H302, H318, H317, H412 | — | — | ATP1 |
@@ -995,7 +995,7 @@
 | 140876-13-7 | postasyum sodyum 3,3'-(3(veya 4)-metil-1,2-fenilenbis(imino(6-... | H318 | — | — | CLP00 |
 | 140921-24-0 | 1,6-hekzandil-bis(2-(2-(1- etilpentil)-3- oksazolidinil)etil)k... | H317 | — | — | CLP00 |
 | 141-32-2 | n-bütil akrilat | H226, H335, H315, H319, H317 | — | — | CLP00 |
-| 141-43-5 | 2-amino-etanol; etanolamin | H332, H312, H302, H314 | — | H335:5.0% | CLP00 |
+| 141-43-5 | 2-amino-etanol; etanolamin | H332, H312, H302, H314 | — | H335(3):≥5.0% | CLP00 |
 | 141-52-6 | potasyum etanolat; potasyum etoksit [1]; sodyum etanolat; sody... | H251, H314 | — | — | CLP00 |
 | 141-66-2 | Dikrotofos (ISO); (Z)-2-dimetilkarbamoil-1- metilvinil dimetil... | H300, H311, H400, H410 | — | — | CLP00 |
 | 141-75-3 | bütiril klorür | H225, H314 | — | — | CLP00 |
@@ -1019,12 +1019,12 @@
 | 141942-85-0 | etil (3R)-4-siyano-3- hidroksibütanoat | H319 | — | — | ATP1 |
 | 142-59-6 | nabam (ISO); disodyum etilenbis(N,N’- ditiyokarbamat) | H302, H335, H317, H400, H410 | — | — | CLP00 |
 | 142-64-3 | piperazin hidroklorür; [1] piperazin dihidroklorür; [2] pipera... | H361fd, H315, H319, H334, H317, H412 | — | — | ATP01 |
-| 142-84-7 | Dipropilamin | H225, H332, H312, H302, H314 | — | H335:1.0% | CLP00 |
-| 142-90-5 | dodesil metakrilat | H335 | — | H335:10.0% | ATP14 |
-| 142-96-1 | di-n-bütil eter; dibütil eter | H226, H335, H315, H319, H412 | — | H335:10.0% | CLP00 |
+| 142-84-7 | Dipropilamin | H225, H332, H312, H302, H314 | — | H335(3):≥1.0% | CLP00 |
+| 142-90-5 | dodesil metakrilat | H335 | — | H335(3):≥10.0% | ATP14 |
+| 142-96-1 | di-n-bütil eter; dibütil eter | H226, H335, H315, H319, H412 | — | H335(3):≥10.0% | CLP00 |
 | 1420-06-0 | trifenmorf (ISO); 4-tritilmorfolin | H302, H400, H410 | — | — | CLP00 |
 | 1420-07-1 | dinoterb (ISO); 2-ter-bütil-4,6-dinitrofenol | H360D, H300, H311, H400, H410 | — | — | CLP00 |
-| 14216-75-2 | nikel dinitrat; [1] nitrik asit, nikel tuzu[2] | H272, H350i, H341, H360D ***, H332, H302, H372 **, H315, H318, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H315:20.0%; H317:0.01% | ATP01corr |
+| 14216-75-2 | nikel dinitrat; [1] nitrik asit, nikel tuzu[2] | H272, H350i, H341, H360D ***, H332, H302, H372 **, H315, H318, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H315(2):≥20.0%; H... | ATP01corr |
 | 142459-58-3 | flufenaset (ISO); N-(4-florofenil)-N-izopropil-2- (5-triflorom... | H302, H373, H317, H400, H410 | Akut=100 / Kr=100 | — | ATP1 |
 | 142469-14-5 | tritosülfuron (ISO) (≤ %0,02 AMTT içeren); 1-[4-metoksi-6-(tri... | H317, H400, H410 | Akut=10 / Kr=10 | — | ATP1 |
 | 14255-88-0 | fenazaflor (ISO); fenil 5,6- dikloro-2- triflorometilbenzimida... | H312, H302, H400, H410 | — | — | CLP00 |
@@ -1034,7 +1034,7 @@
 | 142859-67-4 | N-(2-(6-etil-7-(4-metilfenoksi)- 1H-pirazol[1,5-b][1,2,4]triya... | H317, H413 | — | — | CLP00 |
 | 142877-45-0 | (2,3-dimetilbüt-2-il)- trimetoksisilan | H315, H318, H412 | — | — | ATP1 |
 | 142891-20-1 | kinidon etil (ISO); etil (Z)-2-kloro-3-[2-kloro-5- (siklohekz-... | H351, H317, H400, H410 | — | — | ATP1 |
-| 143-22-6 | 2-[2-(2- bütoksietoksi)etoksi]etanol; TEGBE; trietilenglikolmo... | H318 | — | H318:30.0%; H319:20.0% | CLP00 |
+| 143-22-6 | 2-[2-(2- bütoksietoksi)etoksi]etanol; TEGBE; trietilenglikolmo... | H318 | — | H318(1):≥30.0%; H319(2):20.0–30.0% | CLP00 |
 | 143-50-0 | klordeson (ISO); perkloropentasiklo[5,3,0,02,6,03,9, 04,8]deka... | H351, H311, H301, H400, H410 | — | — | CLP00 |
 | 143052-96-4 | N-(4-dimetilaminopiridinyum)- 3-metoksi-4-(1-metil-5- nitroind... | H413 | — | — | CLP00 |
 | 143145-93-1 | tepkime kütlesi: 2-[2- asetilamino-4-[N,N-bis[2-etoksi- karbon... | H413 | — | — | CLP00 |
@@ -1071,7 +1071,7 @@
 | 145052-34-2 | bis(2,6-dimetoksibenzoil)-2,4,4- trimetilpentilfosfinoksit | H317, H400, H410 | — | — | CLP00 |
 | 14507-36-9 | nikel hidrojen fosfat, [1] nikel bis(dihidrojenfosfat); [2] tr... | H350i, H372 **, H334, H317, H400, H410 | — | — | ATP02 |
 | 145153-52-2 | 2-metil-1,5-pentadiamin-1,3- benzendikarboksilat | H317 | — | — | ATP1 |
-| 14550-87-9 | nikel diklorat; [1] nikel dibromat; [2] etil hidrojen sülfat, ... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 14550-87-9 | nikel diklorat; [1] nikel dibromat; [2] etil hidrojen sülfat, ... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 145701-23-1 | florasulam (ISO); 2',6',8-trifloro-5-metoksi-5- triyazol[1,5-c... | H400, H410 | — | — | CLP00 |
 | 145963-84-4 | 2-amino-4-dimetilamino-6- trifloroetoksi-1,3,5-triazin | H302, H373, H412 | — | — | ATP1 |
 | 146177-84-6 | sodyum 2-(4-(4-floro-6-(2-sülfo- etilamino)-[1,3,5]triazin-2- ... | H317 | — | — | CLP00 |
@@ -1083,7 +1083,7 @@
 | 146925-83-9 | 2-(hidroksimetil)-2-[[2-hidroksi- 3- (izoktadesiloksi)propoksi... | H400, H410 | — | — | CLP00 |
 | 147027-04-1 | tepkime kütlesi: trans-(2R)-5- asetoksi-1,3-oksatiyolan-2- kar... | H302, H315, H318, H317 | — | — | CLP00 |
 | 147027-10-9 | 2S-izopropil-5R-metil-1R- siklohekzil(2R,5S’)-5-(4-amino- 2-ok... | H411 | — | — | ATP1 |
-| 14708-14-6 | nikel bis(tetrafloroborat) | H350i, H341, H360D, H372, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
+| 14708-14-6 | nikel bis(tetrafloroborat) | H350i, H341, H360D, H372, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
 | 147086-81-5 | trans-(4S,6S)-5,6-dihidro-6- metil-4H-tieno[2,3-b]tiyopiran- 4... | H302 | — | — | CLP00 |
 | 14721-18-7 | nikel kromat | H350i, H372, H334, H317, H400, H410 | — | — | ATP1 |
 | 147315-50-2 | 2-(4,6-difenil-1,3,5-triazin-2-il)- 5-((hekzil)oksi)-fenol | H413 | — | — | CLP00 |
@@ -1122,18 +1122,18 @@
 | 149564-66-9 | lityum sodyum (4-((5-kloro-2- hidroksifenil)azo)-2,4-dihidro-5... | H302, H318, H412 | — | — | CLP00 |
 | 149591-38-8 | N,N'-dihekzadesil-N,N'-bis(2- hidroksietil)propandiamid | H361f, H319, H413 | — | — | CLP00 |
 | 149626-00-6 | lityum sodyum (2-(((5-((2,5- diklorofenil)azo)-2- hidroksifeni... | H411 | — | — | CLP00 |
-| 14977-61-8 | kromil diklorür; kromik oksiklorür | H271, H350i, H340, H314, H317, H400, H410 | — | H314:10.0%; H314:5.0%; H315:0.5%; H319:0.5%; H3... | CLP00 |
+| 14977-61-8 | kromil diklorür; kromik oksiklorür | H271, H350i, H340, H314, H317, H400, H410 | — | H314(1A):≥10.0%; H314(1B):5.0–10.0%; H315(2):0.... | CLP00 |
 | 149850-29-3 | 1,3-bis{}{6-floro-4-[1,5-disülfo- 4-(3-aminokarbonil-1-etil-6-... | H317 | — | — | CLP00 |
 | 149850-30-6 | metil N-[3-asetilamino)-4-(2- siyano-4-nitrofenilazo)fenil]-N-... | H317 | — | — | CLP00 |
 | 149877-41-8 | bifenazat (ISO); isopropil 2-(4- metoksibifenil-3- il)hidrazin... | H373, H317, H400, H410 | Akut=1 / Kr=1 | — | ATP7 |
 | 149961-52-4 | dimoksistrobin (ISO); (E)-2-(metoksimino)-N-metil-2- [α-(2,5-k... | H351, H361d, H332, H400, H410 | Akut=100 / Kr=100 | — | ATP18 |
 | 149979-41-9 | tepraloksidim (ISO); (RS)-(EZ)-2-{1-[(2E)-3- kloroalliloksiimi... | H351, H361fd | — | — | ATP1 |
-| 14998-37-9 | nikel di(asetat);[1] nikel asetat [2] | H350i, H341, H360D ***, H332, H302, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP01corr |
+| 14998-37-9 | nikel di(asetat);[1] nikel asetat [2] | H350i, H341, H360D ***, H332, H302, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP01corr |
 | 150-68-5 | monuron (ISO); 3-(4-klorofenil)-1,1-dimetilüre | H351, H302, H400, H410 | — | — | CLP00 |
 | 150-76-5 | mekinol; 4-metoksifenol; hidrokinon monometileter | H302, H319, H317 | — | — | CLP00 |
 | 15024-10-9 | p-tolil-4-klorobenzoat | H317, H400, H410 | — | — | CLP00 |
 | 150522-10-4 | sodyum-[29H,31H- ftalosiyaninato-(2-)- N29,N30,N31,N32]-((3-(N... | H314 | — | — | CLP00 |
-| 15060-62-5 | nikel selenat | H350i, H341, H360D, H372, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
+| 15060-62-5 | nikel selenat | H350i, H341, H360D, H372, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
 | 150919-56-5 | N-(3-(2-(4,4-dimetil-2,5- dioksoimidazolin-1-il)-4,4- dimetil-... | H413 | — | — | CLP00 |
 | 15096-52-3 | Trisodyumhekzafloroalüminat [1] trisodyum hekzafloroalüminat (... | H332, H372, H411 | — | — | ATP03 |
 | 151-56-4 | etilenimin; aziridin | H225, H350, H340, H310, H330, H300, H314, H411 | — | — | CLP00 |
@@ -1141,7 +1141,7 @@
 | 151006-59-6 | tepkime kütlesi: dallanmış triakontan; dallanmış dotriakontan;... | H413 | — | — | CLP00 |
 | 151006-61-0 | dallanmış tetrakosan izomerlerinin tepkime kütlesi | H332, H413 | — | — | CLP00 |
 | 151006-62-1 | dallanmış hekzatriakontan | H413 | — | — | — |
-| 15120-21-5 | sodyum perborat; [1] peroksometaborat; [2] sodyum peroksoborat... | H272, H360FD, H331, H302, H335, H318 | — | H318:22.0%; H319:14.0% | — |
+| 15120-21-5 | sodyum perborat; [1] peroksometaborat; [2] sodyum peroksoborat... | H272, H360FD, H331, H302, H335, H318 | — | H318(1):≥22.0%; H319(2):≥14.0% | — |
 | 15121-89-8 | E-etil-4-okso-4-fenilkrotonat | H312, H302, H315, H318, H317, H400, H410 | — | — | CLP00 |
 | 151213-39-7 | (4aS-cis-)-6-benzil- oktahidropirrolo[3.4-b]piridin | H332, H302, H373, H314, H411 | — | — | ATP1 |
 | 151257-01-1 | 2-butil-1,3-diazaspiro[4.4]non-1- en-4-on hidroklorür | H302, H319 | — | — | ATP1 |
@@ -1183,7 +1183,7 @@
 | 155522-12-6 | metil-2-[4-(2-kloro-4- nitrofenilazo)-3-(1- oksopropil)amino]f... | H317, H413 | — | — | CLP00 |
 | 155601-30-2 | 1-(2-hidroksietil)-1H-pirazol- 4,5-dildiamonyumsülfat | H318, H317, H411 | — | — | ATP1 |
 | 15571-58-1 | 2- etilhegzil 10-etil-4,4- dioctyl- 7-okzo-8-okza-3,5-ditia-4-... | H360D, H372(immune_system), H400, H410, H372 | — | — | ATP15 |
-| 15586-38-6 | nikel dikromat | H350i, H341, H360D, H372, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
+| 15586-38-6 | nikel dikromat | H350i, H341, H360D, H372, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
 | 155925-27-2 | gümüş sodyum zirkonyum hidrojenfosfat | H400, H410 | — | — | CLP00 |
 | 156-43-4 | 4-etoksianilin; p-fentidin | H341, H332, H312, H302, H319, H317 | — | — | CLP00 |
 | 156-59-2 | 1,2-dikloroetilen [1]; cis-dikloroetilen [2] trans-dikloroetil... | H225, H332, H412 | — | — | CLP00 |
@@ -1198,15 +1198,15 @@
 | 1563-66-2 | karbofüran(ISO); 2,3-dihidro-2,2- dimetilbenzofuran-7-il N- me... | H330, H300, H400, H410 | — | — | CLP00 |
 | 1563-67-3 | Dekarbofuran (ISO); 2,3-dihidro-2-metilbenzofuran- 7-il metil ... | H331, H311, H301 | — | — | CLP00 |
 | 156324-82-2 | 2-izopropil-5- metilsiklohekziloksikarboniloksi -2-hidroksipropan | H319, H411 | — | — | CLP00 |
-| 15646-96-5 | 2,2,4-trimetilhekzametilen-1,6- di-izosiyanat; [1] 2,4,4-trime... | H331, H335, H315, H319, H334 | — | H334:0.5%; H317:0.5% | CLP00 |
+| 15646-96-5 | 2,2,4-trimetilhekzametilen-1,6- di-izosiyanat; [1] 2,4,4-trime... | H331, H335, H315, H319, H334 | — | H334(1):≥0.5%; H317(1):≥0.5% | CLP00 |
 | 15662-33-6 | 6-(1α-5aβ,8aβ,9-pentahidroksi- 7β-izopropil-2β,5β,8β- trimetil... | H312, H302, H400, H410 | — | — | CLP00 |
 | 156679-41-3 | N-dodesil-[3-(4- dimetilamino)benzamido)- propil]dimetilamonyu... | H318, H317, H400, H410 | — | — | CLP00 |
 | 156732-13-7 | 5-amino-[2S- di(metilfenil)amino]-1,6-difenil- 4Z-hekzen-3-on;... | H413 | — | — | ATP1 |
 | 156738-27-1 | sodyum-4-[4-(4- hidroksifenilazo)fenilamino]-3- nitrobenzensül... | H317, H412 | — | — | CLP00 |
 | 156769-97-0 | sodyum ve potasyum-4-(3- aminopropilamino)-2,6-bis[3-(4- metok... | H317 | — | — | CLP00 |
 | 1569-02-4 | 1-etoksipropan-2-ol; 2PG1EE; 1-etoksi-2-propanol; propilenglik... | H226, H336 | — | — | CLP00 |
-| 15699-18-0 | nikel dipotasyum bis(sülfat);[1] diamonyum nikel bis(sülfat) [2] | H350i, H341, H360D ***, H332, H302, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
-| 1570-64-5 | 4-kloro-o-kresol; 4-kloro-2- metilfenol | H331, H314, H400 | — | H335:1.0% | CLP00 |
+| 15699-18-0 | nikel dipotasyum bis(sülfat);[1] diamonyum nikel bis(sülfat) [2] | H350i, H341, H360D ***, H332, H302, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
+| 1570-64-5 | 4-kloro-o-kresol; 4-kloro-2- metilfenol | H331, H314, H400 | — | H335(3):≥1.0% | CLP00 |
 | 1570-95-2 | 2-fenil-1,3-propandiol | H318 | — | — | CLP00 |
 | 1571-75-1 | 1,1-bis(4-hidroksifenil)-1- feniletan | H400, H410 | — | — | ATP1 |
 | 157362-53-3 | 2-(4-(4-(bütil-(1- metilhekzil)amino)fenil)-3- siyano-5-okso-1... | H317, H400, H410 | — | — | ATP1 |
@@ -1218,7 +1218,7 @@
 | 158062-67-0 | flonisamid (ISO); N- (siyanometil)-4- (triflorometil)pridin-3-... | H302 | — | — | ATP7 |
 | 1582-09-8 | trifluralin (ISO) ( 0.5 ppm den daha az NPDA içeren); α,α,α-tr... | H351, H317, H400, H410 | Akut=10 / Kr=10 | — | ATP1 |
 | 15825-70-4 | mannitol hekzanitrat; nitromannit [>%40 % flegmatizer] | H201, H200 | — | — | CLP00 |
-| 15843-02-4 | nikel diformat; [1] formik asit, nikel tuzu; [2] formik asit, ... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 15843-02-4 | nikel diformat; [1] formik asit, nikel tuzu; [2] formik asit, ... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 15851-52-2 | nikel(II) sülfit; [1] nikel telleryum trioksit; [2] nikel tell... | H350i, H372 **, H334, H317, H400, H410 | — | — | ATP02 |
 | 15852-21-8 | nikel(II) sülfit; [1] nikel telleryum trioksit; [2] nikel tell... | H350i, H372 **, H334, H317, H400, H410 | — | — | ATP02 |
 | 158570-99-1 | karışık lineer ve dallanmış etoksilenmiş C14-15 alkollerin epi... | H315, H317, H400, H410 | — | — | CLP00 |
@@ -1237,7 +1237,7 @@
 | 159939-85-2 | 4-[(3-klorofenil)(1H-imidazol-1- il)metil]-1,2-benzendiamin di... | H361f, H302, H314, H317, H411 | — | — | ATP1 |
 | 160194-26-3 | 1-(3-iodo-4-aminobenzil)-1H- 1,2,4-triazol | H302, H317, H411 | — | — | ATP1 |
 | 160236-81-7 | bis[tribütil(4- metilbenzil)amonyum]-1,5- naftalindisülfonat | H332, H302, H318, H400, H410 | — | — | CLP00 |
-| 16039-61-5 | nikel dilaktat | H350i, H341, H360D, H372, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
+| 16039-61-5 | nikel dilaktat | H350i, H341, H360D, H372, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
 | 16063-70-0 | 2,3,5-trikloropiridin | H412 | — | — | CLP00 |
 | 16071-86-6 | disodyum {5-[(4'-((2,6-hidroksi- 3-((2-hidroksi-5- sülfofenil)... | H350 | — | — | CLP00 |
 | 160987-57-5 | tepkime kütlesi: etil 2-((4-(5,6- diklorobenzotiazol-2- ilazo)... | H413 | — | — | ATP1 |
@@ -1278,7 +1278,7 @@
 | 1668-86-6 | (4aR,8aR)-4a,5,9,10,11,12- hekzahidro-3-metoksi-11-metil- 6H-b... | H302, H319, H412 | — | — | ATP1 |
 | 16695-22-0 | N,N-bis(2-(p- toluensülfoniloksi)etil)-p- toluensülfonamid | H317, H413 | — | — | CLP00 |
 | 1671-49-4 | 4-mesil-2-nitrotoluen | H361f, H302, H317, H412 | — | — | ATP1 |
-| 1675-54-3 | bis[4(2,3-epoksipropoksi)fenil]- propan | H315, H319, H317 | — | H319:5.0%; H315:5.0% | CLP00 |
+| 1675-54-3 | bis[4(2,3-epoksipropoksi)fenil]- propan | H315, H319, H317 | — | H319(2):≥5.0%; H315(2):≥5.0% | CLP00 |
 | 16752-77-5 | Metomil (ISO); 1-(metiltiyo)etilidenamino N- metilkarbamat | H300, H400, H410 | Akut=100 / Kr=100 | — | ATP1 |
 | 167678-46-8 | [3-(klorokarbonil)-2- metilfenil]asetat | H314, H317 | — | — | ATP1 |
 | 167684-63-1 | 3-[3-(2-dodesiloksi-5- metilfenilkarbamoil)-4-hidroksi- 1-naft... | H413 | — | — | CLP00 |
@@ -1291,7 +1291,7 @@
 | 168612-06-4 | N,N-dibutil-(2,5-dihidro-5- tiokso-1H-tetrazol-1-il)asetamid | H319, H317 | — | — | ATP1 |
 | 168689-49-4 | hekzadesil 4-kloro-3-[2-(5,5- dimetil-2,4-diokso-1,3- oksazoli... | H413 | — | — | CLP00 |
 | 16871-90-2 | alkali (bazik) hekzaflorosilikat(Na); [1] alkali (bazik) hekza... | H331, H311, H301 | — | — | CLP00 |
-| 16872-11-0 | floroborik asit ... % | H314 | — | H314:25.0%; H315:10.0%; H319:10.0% | CLP00 |
+| 16872-11-0 | floroborik asit ... % | H314 | — | H314(1B):≥25.0%; H315(2):10.0–25.0%; H319(2):10... | CLP00 |
 | 1689-83-4 | iyoksinil (ISO) ve tuzları; 4-hidroksi-3,5- diiyodobenzonitril | H361d, H331, H301, H312, H373, H319, H400, H410 | Akut=10 / Kr=10 | — | CLP00 |
 | 1689-84-5 | bromoksinil (ISO) ve tuzları; 3,5-dibromo-4- hidroksibenzonitr... | H361d, H330, H301, H317, H400, H410 | Akut=10 / Kr=10 | — | CLP00 |
 | 1689-99-2 | Bromosinil oktanat (ISO); 2,6-dibromo-4- siyanofeniloktanoat | H361d, H331, H302, H317, H400, H410 | Akut=10 / Kr=10 | — | CLP00 |
@@ -1303,7 +1303,7 @@
 | 16921-30-5 | Dipotasyum hekzakloroplatinat | H301, H318, H334, H317 | — | — | CLP00 |
 | 16923-58-3 | Disodyum hekzakloroplatinat | H301, H318, H334, H317 | — | — | CLP00 |
 | 169314-88-9 | alüminyum-magnezyum-çinko- karbonat-hidroksit | H413 | — | — | ATP5 |
-| 16938-22-0 | 2,2,4-trimetilhekzametilen-1,6- di-izosiyanat; [1] 2,4,4-trime... | H331, H335, H315, H319, H334 | — | H334:0.5%; H317:0.5% | CLP00 |
+| 16938-22-0 | 2,2,4-trimetilhekzametilen-1,6- di-izosiyanat; [1] 2,4,4-trime... | H331, H335, H315, H319, H334 | — | H334:≥0.5%; H317(1):≥0.5% | CLP00 |
 | 1694-09-3 | benzil mor 4B; α-[4-(4-dimetilamino-α-{4- [etil(3- sodyosülfon... | H351 | — | — | CLP00 |
 | 1694-82-2 | cis-1,2,3,6-tetrahidro-4- metilftalik anhidrit; [1] 1,2,3,6-te... | H318, H334, H317 | — | — | CLP00 |
 | 16941-12-1 | hekzakloroplatinik asit | H301, H314, H334, H317 | — | — | CLP00 |
@@ -1311,7 +1311,7 @@
 | 16961-83-4 | florosilisik asit ... % | H314 | — | — | CLP00 |
 | 1698-60-8 | kloridazon (ISO); 5-amino-4-kloro-2- fenilpiridazin-3-(2H)-on;... | H317, H400, H410 | — | — | CLP00 |
 | 169939-84-8 | tuz: (1S-cis)-1-amino-2,3- dihidro-1H-inden-2-ol ve [R- [RR]]-... | H317 | — | — | ATP1 |
-| 17010-21-8 | kadmiyumhekzaflorosilikat(2-); kadmiyum florosilika | H351, H331, H301, H373, H400, H410 | — | H373:0.1% | CLP00 |
+| 17010-21-8 | kadmiyumhekzaflorosilikat(2-); kadmiyum florosilika | H351, H331, H301, H373, H400, H410 | — | H373:≥0.1% | CLP00 |
 | 1702-17-6 | klopiralid (ISO); 3,6-dikloropiridin-2-karboksilik asit | H318 | — | — | ATP1 |
 | 170222-39-6 | 2-ftalimidoetil N-[4-(2-siyano-4- nitrofenilazo)fenil]-N-metil... | H317, H413 | — | — | ATP1 |
 | 170292-97-4 | N-[(benzotriyazol-1-il)metil)]-4- karboksibenzensülfonamid | H319, H411 | — | — | CLP00 |
@@ -1536,15 +1536,15 @@
 | 22212-55-1 | etil-N-benzoil-N-(3,4- diklorofenil)-DL-alaninat; benzoilprop-... | H302, H400, H410 | — | — | CLP00 |
 | 22224-92-6 | fenamifos (ISO); etil-4-metiltiyo-m-tolil izopropil fosforamidat | H330, H310, H300, H319, H400, H410 | Akut=100 / Kr=100 | — | ATP5 |
 | 2223-82-7 | 2,2-dimetiltrimetilen diakrilat; neopentil glikol diakrilat | H311, H315, H319, H317 | — | — | CLP00 |
-| 2223-95-2 | nikel(II) stearat; nikel (II) oktadekanoat | H350i, H341, H360D, H372, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
+| 2223-95-2 | nikel(II) stearat; nikel (II) oktadekanoat | H350i, H341, H360D, H372, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
 | 22259-30-9 | formetanat (ISO); 3-[(EZ)- dimetilaminometilenamino]fenil meti... | H330, H300, H317, H400, H410 | — | — | CLP00 |
 | 22288-41-1 | 1,1,3,3- tetrametilbütilperoksipivalat | H225, H242, H315, H317, H411 | — | — | ATP1 |
-| 22398-80-7 | indiyum fosfit | H350, H361f, H372(lungs), H372 | — | H350:0.01%; H373:0.01% | ATP3 |
+| 22398-80-7 | indiyum fosfit | H350, H361f, H372(lungs), H372 | — | H350:≥0.01%; H373:0.01–0.1% | ATP3 |
 | 22411-22-9 | hafniyum-tetra-n-butoksit | H318, H317 | — | — | CLP00 |
 | 2243-62-1 | 1,5-naftilendiamin | H351, H400, H410 | — | — | CLP00 |
 | 22432-68-4 | 4,4,5,5-tetrakloro-1,3-dioksolan- 2-on | H330, H302, H314 | — | — | CLP00 |
 | 2244-16-8 | karvon (ISO); 2-metil-5-(prop-1-en-2- il)siklohekz-2-en-1-on; ... | H317 | — | — | ATP07 |
-| 2244-21-5 | troklosen potasyum; [1] troklosen sodyum [2] | H272, H302, H335, H319, H400, H410 | — | H335:10.0%; H031:10.0% | ATP1 |
+| 2244-21-5 | troklosen potasyum; [1] troklosen sodyum [2] | H272, H302, H335, H319, H400, H410 | — | H335(3):≥10.0%; H031:≥10.0% | ATP1 |
 | 225786-91-4 | tetrakis(bis(2- hidroksietil)metilamonyum) 3- (4-(7-asetilamin... | H411 | — | — | ATP1 |
 | 226065-73-2 | 3,4,3',4'-tetrafenil-1,1'- etandiilbispirol-2,5-dion | H317, H413 | — | — | ATP1 |
 | 226996-19-6 | 3,5-di-ter-bütilsalisilik asit ve zirkonyum oksiklorür’ün tepk... | H400, H410 | — | — | ATP1 |
@@ -1579,12 +1579,12 @@
 | 23950-58-5 | propizamind (ISO); 3,5-dikloro-N-(1,1-dimetilprop- 2-inil)benz... | H351, H400, H410 | — | — | CLP00 |
 | 24017-47-8 | triazofos (ISO); O,O-dietil-O-1-fenil-1H,2,4- triazol-3-il fos... | H331, H301, H312, H400, H410 | Akut=100 / Kr=100 | — | ATP1 |
 | 240494-71-7 | 2,3,5,6-tetrafloro-4- (metoksimetil)benzil (1R,3R)- 2,2-dimeti... | H301, H332, H370 (nervous system), H373 (nervous system), H400, H410 | Akut=100 / Kr=100 | — | ATP13 |
-| 2407-94-5 | 1-hidroperoksisikloheksil 1- hidroksisikloheksil peroksit; [1]... | H242, H302, H314 | — | H335:5.0% | CLP00 |
+| 2407-94-5 | 1-hidroperoksisikloheksil 1- hidroksisikloheksil peroksit; [1]... | H242, H302, H314 | — | H335(3):≥5.0% | CLP00 |
 | 24083-03-2 | 1-(2-bütoksipropoksi)-propan-2- ol | H312, H302 | — | — | CLP00 |
 | 24085-06-1 | 2-asetoksimetilen-4- asetilfenilasetat | H302, H373, H318, H317, H400, H410 | — | — | ATP1 |
 | 24151-93-7 | piperofos (ISO); S-2- metilpiperidinokarbonilmetil- O,O-diprop... | H302, H400, H410 | Akut=10 / Kr=10 | — | CLP00 |
 | 24197-34-0 | 4,4'-tiyodi-o-kresol | H318, H400, H410 | — | — | CLP00 |
-| 2421-28-5 | benzofenon-3,3',4,4'- tetrakarboksilik dianhidrit; 4,4'-karbon... | H335, H319 | — | H319:1.0%; H335:1.0% | CLP00 |
+| 2421-28-5 | benzofenon-3,3',4,4'- tetrakarboksilik dianhidrit; 4,4'-karbon... | H335, H319 | — | H319(2):≥1.0%; H335(3):≥1.0% | CLP00 |
 | 2425-06-1 | captafol (ISO); 1,2,3,6- tetrahidro-N-(1,1,2,2- tetrakloroetil... | H350, H317, H400, H410 | — | — | CLP00 |
 | 2425-10-7 | ksililkarb (ISO); 3,4-dimetilfenil N- metilkarbamat; 3,4-ksili... | H302, H400, H410 | — | — | CLP00 |
 | 2425-79-8 | 1,4-bis(2,3 epoksipropoksi)bütan; bütandioldiglisidil eter | H332, H312, H315, H319, H317 | — | — | CLP00 |
@@ -1593,7 +1593,7 @@
 | 24279-39-8 | 2,6-dikloro-4-triflormetilanilin | H332, H302, H315, H317, H400, H410 | — | — | CLP00 |
 | 24294-01-7 | 3-N,N- bis(metoksietil)aminoasetanilid | H302, H412 | — | — | ATP1 |
 | 24307-26-4 | 1,1-dimetilpiperidinyum klorür; mepikuat klorür | H301, H332, H412 | — | — | ATP21 |
-| 2431-50-7 | 2,3,4-triklorobüt-1-en | H351, H331, H302, H335, H315, H319, H400, H410 | — | H351:0.1% | ATP1 |
+| 2431-50-7 | 2,3,4-triklorobüt-1-en | H351, H331, H302, H335, H315, H319, H400, H410 | — | H351:≥0.1% | ATP1 |
 | 24342-03-8 | izobütil büt-3-enoat | H226 | — | — | CLP00 |
 | 243662-67-1 | alkanlar, C12-14, hidroformülasyon ürünleri, damıtma ürünleri,... | H315, H317 | — | — | ATP1 |
 | 2437-29-8 | malaşit yeşili hidroklorür [1]; malaşit yeşili oksalat [2] | H361d ***, H302, H318, H400, H410 | — | — | CLP00 |
@@ -1620,7 +1620,7 @@
 | 25057-89-0 | bentazon (ISO); 3-izopropil-2,1,3- benzotiyadiazin-4-on-2,2-di... | H361d, H302, H319, H317 | — | — | ATP18 |
 | 25059-78-3 | sodyum 3,6-dikloro-o-anisat; [1] 3,6-dikloro-o-anisik asit, il... | H412 | — | — | CLP00 |
 | 25059-80-7 | benazolin-etil; etil-4-kloro-2- okso-2H-benzotiyazol-3-asetat | H411 | — | — | CLP00 |
-| 25068-38-6 | tepkime ürünü: bisfenol-A- (epiklorohidrin); epoksi reçinesi (... | H315, H319, H317, H411 | — | H319:5.0%; H315:5.0% | CLP00 |
+| 25068-38-6 | tepkime ürünü: bisfenol-A- (epiklorohidrin); epoksi reçinesi (... | H315, H319, H317, H411 | — | H319(2):≥5.0%; H315(2):≥5.0% | CLP00 |
 | 250688-43-8 | disodyum 8-amino-5-{4-[2- sülfonatoetoksi)sülfonil]fenilazo }n... | H318 | — | — | ATP1 |
 | 2511-00-4 | etil-2-siklohekzilpropiyonat | H411 | — | — | CLP00 |
 | 2514-53-6 | Etilen bis(trikloroasetat) | H315 | — | — | CLP00 |
@@ -1634,7 +1634,7 @@
 | 25311-71-1 | izofenfos (ISO); O-etilO-2- izopropoksikarbonilfenil- izopropi... | H311, H301, H400, H410 | Akut=100 / Kr=100 | — | CLP00 |
 | 2532-43-6 | 3-metilpirazol-5-il- dimetilkarbamat; monometilan | H331, H311, H301 | — | — | CLP00 |
 | 25321-14-6 | 2,4-dinitrotoluen; [1] dinitrotoluen [2] | H350, H341, H361f ***, H331, H311, H301, H373 **, H400, H410 | — | — | ATP01 |
-| 2536-05-2 | 4,4'metilendifenil-diizosiyanat; difenilmetan-4,4' –diizosiyan... | H351, H332, H335, H373 **, H315, H319, H334, H317 | — | H319:5.0%; H315:5.0%; H334:0.1%; H335:5.0% | ATP01 |
+| 2536-05-2 | 4,4'metilendifenil-diizosiyanat; difenilmetan-4,4' –diizosiyan... | H351, H332, H335, H373 **, H315, H319, H334, H317 | — | H319(2):≥5.0%; H315(2):≥5.0%; H334(1):≥0.1%; H3... | ATP01 |
 | 25366-23-8 | tiyazfluron (ISO); 1,3-dimetil-1-(5-triflorometil- 1,3,4-tiyad... | H302, H400, H410 | — | — | CLP00 |
 | 25383-07-7 | (R)-α-feniletilamonyum-(-)-(1R, 2S)-(1,2- epoksipropil)fosfona... | H361f, H411 | — | — | CLP00 |
 | 2540-82-1 | formotiyon (ISO); N-formil-N- metilkarbamoilmetil-O,O- dimetil... | H312, H302 | — | — | CLP00 |
@@ -1643,7 +1643,7 @@
 | 255387-46-3 | dimetil[2S,2S']-6,6,6'6'- tetrametoksi 2,2'-[N,N'-bis(trifloro... | H317 | — | — | ATP1 |
 | 25550-51-0 | hekzahidro-4-metilftalik anhidrit; [1] hekzahidrometilftalik a... | H318, H334, H317 | — | — | CLP00 |
 | 25550-58-7 | dinitrofenol(izomerlerin tepkime kütlesi); [1] 2,4(ya da 2,6)-... | H331, H311, H301, H373, H400, H410 | — | — | CLP00 |
-| 25584-83-2 | 2-hidroksi-1-metiletilakrilat; [1] 2-hidroksipropilakrilat; [2... | H331, H311, H301, H314, H317 | — | H317:0.2% | CLP00 |
+| 25584-83-2 | 2-hidroksi-1-metiletilakrilat; [1] 2-hidroksipropilakrilat; [2... | H331, H311, H301, H314, H317 | — | H317(1):≥0.2% | CLP00 |
 | 25634-93-9 | 2-metil-5-fenilpentanol | H315, H319 | — | — | CLP00 |
 | 25637-27-8 | florotripentilstannan; [1] Hekzapentildistannoksan [2] | H332, H312, H302, H400, H410 | — | — | CLP00 |
 | 25637-99-4 | Hekzabromosiklododekan [1] 1,2,5,6,9,10- hekzabromosiklododeka... | H361, H362 | — | — | ATP3 |
@@ -1658,7 +1658,7 @@
 | 2597-03-7 | fentoat (ISO); etil-2- (dimetoksifosfinotiyoiltiyo)-2- fenilas... | H312, H302, H400, H410 | Akut=100 / Kr=100 | — | CLP00 |
 | 2602-46-2 | tetrasodyum 3,3'-[[1,1'-bifenil]- 4,4'-diilbis(azo)]bis[5-amin... | H350, H361d | — | — | CLP00 |
 | 260408-02-4 | 4,4’-sülfonilbisfenol, amonyum klorürlü (NH4Cl) polimer, penta... | H413 | — | — | — |
-| 26043-11-8 | nikel hekzaflorosilikat | H350i, H341, H360D, H372, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
+| 26043-11-8 | nikel hekzaflorosilikat | H350i, H341, H360D, H372, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
 | 26087-47-8 | iprobenfos (ISO); S-benzil diizopropil fosforotiyoat | H302, H411 | — | — | CLP00 |
 | 26116-56-3 | (9S)-9-amino-9- deoksieritromisin | H318, H400, H410 | — | — | CLP00 |
 | 26157-73-3 | N,N',N''-tris(2-metil-2,3- epoksipropil)-perhidro-2,4,6- okso-... | H341, H412 | — | — | ATP1 |
@@ -1669,15 +1669,15 @@
 | 2631-37-0 | promekarb (ISO); 3-izopropil-5-metilfenil N- metilkarbamat | H301, H400, H410 | — | — | CLP00 |
 | 2631-40-5 | izoprokarb (ISO); 2- izopropilfenil N-metilkarbamat | H302, H400, H410 | — | — | CLP00 |
 | 2633-67-2 | stiren-4-sülfonil klorür | H315, H318, H317 | — | — | CLP00 |
-| 2634-33-5 | 1,2-benzizotiyazol-3(2H)-on; 1,2-benzizotiyazolin-3-on | H330, H302, H315, H318, H317, H400, H410 | Akut=1 / Kr=1 | H317:0.036% | ATP21 |
+| 2634-33-5 | 1,2-benzizotiyazol-3(2H)-on; 1,2-benzizotiyazolin-3-on | H330, H302, H315, H318, H317, H400, H410 | Akut=1 / Kr=1 | H317(1):≥0.036% | ATP21 |
 | 2635-50-9 | S-[2-(izopropilsülfinil)etil] O,O- dimetil fosforotiyoat | H331, H311, H301 | — | — | CLP00 |
 | 2636-26-2 | siyanofos (ISO); O-4-siyanofenil-O,O-dimetil fosforotiyoat | H312, H302, H400, H410 | — | — | CLP00 |
 | 26364-65-8 | 2-tiyazolidinilidinsiyanamid | H302, H373, H412 | — | — | ATP1 |
 | 26399-36-0 | Profluralin (ISO); N-(siklopropilmetil)-α,α,α- trifloro-2,6-di... | H319, H400, H410 | — | — | CLP00 |
 | 2642-71-9 | azinfos-etil (ISO); O,O-dietil-4-oksobenzotriazin-3- ilmetil f... | H300, H311, H400, H410 | Akut=100 / Kr=100 | — | ATP1 |
 | 26447-14-3 | [(p-toliloksi)metil]oksiran [1] [(m-toliloksi)metil]oksiran [2... | H341, H315, H317, H411 | — | — | CLP00 |
-| 26447-40-5 | 4,4'metilendifenil-diizosiyanat; difenilmetan-4,4' –diizosiyan... | H351, H332, H335, H373 **, H315, H319, H334, H317 | — | H319:5.0%; H315:5.0%; H334:0.1%; H335:5.0% | ATP01 |
-| 26471-62-5 | 2-metil-m-fenilen diizosiyanat ;toluen-2,4-di-izosiyanat; [1] ... | H351, H330, H335, H315, H319, H334, H317, H412 | — | H334:0.1% | CLP00 |
+| 26447-40-5 | 4,4'metilendifenil-diizosiyanat; difenilmetan-4,4' –diizosiyan... | H351, H332, H335, H373 **, H315, H319, H334, H317 | — | H319(2):≥5.0%; H315(2):≥5.0%; H334(1):≥0.1%; H3... | ATP01 |
+| 26471-62-5 | 2-metil-m-fenilen diizosiyanat ;toluen-2,4-di-izosiyanat; [1] ... | H351, H330, H335, H315, H319, H334, H317, H412 | — | H334(1):≥0.1% | CLP00 |
 | 26523-78-4 | tris(nonilfenil) fosfit | H317, H400, H410 | — | — | ATP3 |
 | 26530-20-1 | oktilinon (ISO); 2-oktil-2H- izotiyazol-3-on | H330, H311, H301, H314, H318, H317, H400, H410 | Akut=100 / Kr=100 | — | ATP15 |
 | 2655-14-3 | XMC, 3,5-ksilil metilkarbamat | H302 | — | — | CLP00 |
@@ -1686,12 +1686,12 @@
 | 26628-22-8 | sodyum azid | H300, H400, H410 | — | — | CLP00 |
 | 26739-54-8 | guanidinyum benzoat | H302 | — | — | ATP1 |
 | 26766-27-8 | triarimol (ISO); 2,4-dikloro-α-(pirimidin-5-il) benzhidril alkol | H302 | — | — | CLP00 |
-| 2682-20-4 | 2-metilisotiyazol-3(2H)-on | H330, H311, H301, H314, H318, H317, H400, H410 | Akut=10 / Kr=10 | H317:0.0015% | ATP13 |
+| 2682-20-4 | 2-metilisotiyazol-3(2H)-on | H330, H311, H301, H314, H318, H317, H400, H410 | Akut=10 / Kr=10 | H317(1):≥0.0015% | ATP13 |
 | 2687-91-4 | N-etil-2-pyrolidon; 1- etilpyrolidin-2-on | H360D | — | — | ATP5 |
 | 2687-94-7 | N-(n-oktil)-2-pirrolidon | H314, H411 | — | — | CLP00 |
 | 2687-96-9 | 1-dodesil-2-pirrolidon | H314, H317, H400, H410 | — | — | CLP00 |
 | 26912-64-1 | 9-(2- propeniloksi)trisiklo[5.2.1.0(2,6) ] des-3(or-4-)-en | H315, H411 | — | — | ATP1 |
-| 2699-11-8 | 1-hidroperoksisikloheksil 1- hidroksisikloheksil peroksit; [1]... | H242, H302, H314 | — | H335:5.0% | CLP00 |
+| 2699-11-8 | 1-hidroperoksisikloheksil 1- hidroksisikloheksil peroksit; [1]... | H242, H302, H314 | — | H335(3):≥5.0% | CLP00 |
 | 2699-79-8 | Sülfüril diflorür | H280, H331, H373, H400 | — | — | CLP00 |
 | 27016-75-7 | nikel diarsenid; [1] nikel arsenid [2] | H350i, H372 **, H317, H400, H410 | — | — | ATP02 |
 | 2703-37-9 | S-[2-(etil-sülfinil)etil] O,O- dimetil fosforoditiyoat | H310, H330, H300, H411 | — | — | CLP00 |
@@ -1724,23 +1724,23 @@
 | 28434-00-6 | alletrin; (RS)-3-allil-2-metil-4- oksosiklopent-2-enil (1RS,3R... | H332, H302, H400, H410 | — | — | CLP00 |
 | 28434-01-7 | biyoresmetrin; (5-benzil-3- furil)metil (1R)-2,2-dimetil-3-(2-... | H400, H410 | Akut=1000 / Kr=1000 | — | ATP1 |
 | 2844-92-0 | dipikrilamin, amonyum tuzu | H201, H310, H330, H300, H373, H411 | — | — | ATP1 |
-| 2855-13-2 | 3-aminometil-3,5,5- trimetilsiklohekzilamin | H302, H314, H318, H317 | — | H317:0.001% | ATP17 |
+| 2855-13-2 | 3-aminometil-3,5,5- trimetilsiklohekzilamin | H302, H314, H318, H317 | — | H317(1):≥0.001% | ATP17 |
 | 2867-47-2 | 2-dimetilaminoetilmetakrilat | H312, H302, H315, H319, H317 | — | — | CLP00 |
 | 28698-31-9 | [(1-metil-1,2- etandiil)bis[nitrilobis(metilen)]]t etrakis(fos... | H318, H400, H410 | — | — | ATP1 |
 | 287-92-3 | siklopentan | H225, H412 | — | — | CLP00 |
-| 28772-56-7 | bromadiolon (ISO); 3-[3-(4’-bromobifenil-4-il)-3- hidroksi-1-f... | H360D, H330, H310, H300, H372(blood), H400, H410, H372 | Akut=1 / Kr=1 | H360D:0.003%; H372:0.005%; H373:0.0005% | ATP9 |
+| 28772-56-7 | bromadiolon (ISO); 3-[3-(4’-bromobifenil-4-il)-3- hidroksi-1-f... | H360D, H330, H310, H300, H372(blood), H400, H410, H372 | Akut=1 / Kr=1 | H360D:≥0.003%; H372:≥0.005%; H373:0.0005–0.005% | ATP9 |
 | 287933-44-2 | 2-etil-1-(2-(1,3-dioksanil)etil)- piridinyumbromür | H412 | — | — | CLP00 |
 | 288-32-4 | imidazol | H360D, H302, H314 | — | — | ATP7 |
 | 288-88-0 | 1,2,4-triyazol | H360FD, H302, H319 | — | — | ATP17 |
-| 2893-78-9 | troklosen potasyum; [1] troklosen sodyum [2] | H272, H302, H335, H319, H400, H410 | — | H335:10.0% | ATP01 |
+| 2893-78-9 | troklosen potasyum; [1] troklosen sodyum [2] | H272, H302, H335, H319, H400, H410 | — | H335(3):≥10.0% | ATP01 |
 | 2905-69-3 | metil 2,5-diklorobenzoat | H302, H336, H411 | — | — | ATP6 |
 | 29081-56-9 | perflorooktan sülfonik asit; heptadekaflorooktan-1-sülfonik as... | H351, H360D ***, H362, H332, H302, H372 **, H411 | — | — | ATP01 |
-| 2918-23-2 | 2-hidroksi-1-metiletilakrilat; [1] 2-hidroksipropilakrilat; [2... | H331, H311, H301, H314, H317 | — | H317:0.2% | CLP00 |
+| 2918-23-2 | 2-hidroksi-1-metiletilakrilat; [1] 2-hidroksipropilakrilat; [2... | H331, H311, H301, H314, H317 | — | H317(1):≥0.2% | CLP00 |
 | 2921-88-2 | kloropirifos (ISO); O,O-dietil-O-3,5,6-trikloro-2- piridil fos... | H301, H400, H410 | Akut=10000 / Kr=10000 | — | CLP00 |
 | 29232-93-7 | pirimifos-metil (ISO); O-(2-dietilamino-6- metilpirimidin-4-il... | H302, H372(nervous_system), H400, H410, H372 | Akut=1000 / Kr=1000 | — | ATP15 |
 | 294-90-6 | 1,4,7,10-tetraazasiklododekan | H312, H302, H314, H400, H410 | — | — | ATP1 |
 | 29457-72-5 | perflorooktan sülfonik asit; heptadekaflorooktan-1-sülfonik as... | H351, H360D ***, H362, H332, H302, H372 **, H411 | — | — | ATP01 |
-| 29590-42-9 | izooktilakrilat | H335, H315, H319, H400, H410 | — | H335:10.0% | CLP00 |
+| 29590-42-9 | izooktilakrilat | H335, H315, H319, H400, H410 | — | H335(3):≥10.0% | CLP00 |
 | 29617-66-1 | (S)-2-kloropropiyonik asit | H312, H302, H314 | — | — | CLP00 |
 | 297-78-9 | izobenzan (ISO); 1,3,4,5,6,7,8,8-oktakloro- 1,3,3a,4,7,7a-hekz... | H310, H300, H400 | — | — | CLP00 |
 | 297-97-2 | tiyonazin (ISO); O,O-dietil-O- pirazin-2-il fosforotiyoat | H310, H300 | — | — | CLP00 |
@@ -1762,7 +1762,7 @@
 | 30043-49-3 | etidimuron (ISO); 1-(5- etilsülfonil-1,3,4-tiadiazol-2-il)- 1,... | H317, H400, H410 | — | — | CLP00 |
 | 301-04-2 | Kurşun di(asetat) | H360Df, H373, H400, H410 | — | — | CLP00 |
 | 301-12-2 | oksidemeton-metil; S-2- (etilsülfinil)etil O,O- dimetilfosforo... | H311, H301, H400 | — | — | CLP00 |
-| 302-01-2 | hidrazin | H226, H350, H331, H311, H301, H314, H317, H400, H410 | — | H314:10.0%; H315:3.0%; H319:3.0% | CLP00 |
+| 302-01-2 | hidrazin | H226, H350, H331, H311, H301, H314, H317, H400, H410 | — | H314(1B):≥10.0%; H315(2):3.0–10.0%; H319(2):3.0... | CLP00 |
 | 302-17-0 | kloral hidrat; 2,2,2-trikloroetan-1,1-diol | H301, H315, H319 | — | — | CLP00 |
 | 302-27-2 | akonitin | H330, H300 | — | — | CLP00 |
 | 302-97-6 | 3-oksoandrost-4-en-17- β- karboksilik asit | H361f, H413 | — | — | ATP1 |
@@ -1770,7 +1770,7 @@
 | 3030-47-5 | bis(2- dimetilaminoetil)(metil)amin | H311, H302, H314 | — | — | CLP00 |
 | 3033-77-0 | 2,3- epoksirpopiltrilmetilamonyum klorür …%; glisidil trimetil... | H350, H341, H361f, H312, H302, H373, H318, H317, H412 | — | — | ATP1 |
 | 30560-19-1 | acefat (ISO); O S-dimetil asetilfosforamidotiyoat | H302 | — | — | CLP00 |
-| 3066-71-5 | siklohekzil akrilat | H335, H315, H411 | — | H335:10.0% | CLP00 |
+| 3066-71-5 | siklohekzil akrilat | H335, H315, H411 | — | H335(3):≥10.0% | CLP00 |
 | 30785-74-1 | Ana bileşen 6(izomer):asim. 1:2 Cr(III)-kompleksi: A: 3- hidro... | H318, H400, H410 | — | — | CLP00 |
 | 30864-28-9 | metil3- [(dimetoksifosfinotiyoil)oksi]me takrilt; [1] metakrif... | H302, H317, H400, H410 | — | — | CLP00 |
 | 309-00-2 | aldrin (ISO) | H351, H311, H301, H372, H400, H410 | — | — | CLP00 |
@@ -1818,8 +1818,8 @@
 | 334-48-5 | dekanoik asit | H315, H319, H412 | — | — | ATP7 |
 | 334-88-3 | diazometan | H350 | — | — | CLP00 |
 | 3347-22-6 | ditiyanon (ISO); 5,10-dihidro-5,10- dioksonafto(2,3-b)(1,4)dit... | H302, H400, H410 | — | — | CLP00 |
-| 3349-06-2 | nikel diformat; [1] formik asit, nikel tuzu; [2] formik asit, ... | H350i, H341, H360D, H372, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
-| 3349-08-4 | nikel(II) trifloroasetat; [1] nikel(II) propiyonat; [2] nikel ... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 3349-06-2 | nikel diformat; [1] formik asit, nikel tuzu; [2] formik asit, ... | H350i, H341, H360D, H372, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
+| 3349-08-4 | nikel(II) trifloroasetat; [1] nikel(II) propiyonat; [2] nikel ... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 335-67-1 | perflorooktanoik asit | H351, H360D, H362, H332, H302, H372(liver), H318, H372 | — | — | ATP5 |
 | 335-76-2 | nonadekaflorodekanoik asit; [1] amounyum nonadeka florodekanoa... | H351, H360Df, H362 | — | — | ATP10 |
 | 335104-84-2 | tembotrione (ISO); 2-{2- kloro-4-(metilsülfonil)-3- [(2,2,2-tr... | H361d, H373(eyes,_kidneys,_liver), H317, H400, H410, H373 | Akut=100 / Kr=100 | — | ATP7 |
@@ -1848,7 +1848,7 @@
 | 3508-98-3 | 2-fenilhekzannitril | H302, H411 | — | — | ATP14 |
 | 3524-68-3 | pentaeritritoltriakrilat | H315, H319, H317 | — | — | CLP00 |
 | 3535-84-0 | talyum tiyosiyanat | H330, H300, H312, H373, H411 | — | — | ATP1 |
-| 3542-36-7 | dikorodioktil stannan | H360D, H330, H372, H412 | — | H360D:0.03% | ATP15 |
+| 3542-36-7 | dikorodioktil stannan | H360D, H330, H372, H412 | — | H360D:≥0.03% | ATP15 |
 | 3547-33-9 | 2-(oktiltiyo)etanol; 2-hidroksietil oktil sülfür | H318 | — | — | CLP00 |
 | 35541-81-2 | tepkime kütlesi:cis-1,4- dimetilsikloheksil dibenzoat; trans-1... | H413 | — | — | CLP00 |
 | 35554-44-0 | Imazalil (ISO); 1-[2-(alliloksi)-2-(2,4- diklorofenil)etil-1H-... | H351, H301, H332, H318, H410 | Kr=10 | — | ATP7 |
@@ -1867,14 +1867,14 @@
 | 3681-73-0 | (E)-3,7-dimetil-2,6- oktadenilhekzadekanoat | H315, H413 | — | — | CLP00 |
 | 368450-39-9 | N-[2-(2-butil-4,6-disiyano-1,3- diokso-2,3-dihidro-1H-isoindol... | H413 | — | — | ATP1 |
 | 3689-24-5 | sülfotep (ISO); O,O,O,O-tetraetil ditiyopirofosfat | H310, H300, H400, H410 | Akut=1000 / Kr=1000 | — | CLP00 |
-| 3691-35-8 | klorofasinon (İSO); 2-[(4-klorofenil)(fenil)asetil]- 1H-inden-... | H360D, H330, H310, H300, H372(blood), H400, H410, H372 | Akut=1 / Kr=1 | H360D:0.003%; H372:0.1%; H373:0.01% | ATP9 |
+| 3691-35-8 | klorofasinon (İSO); 2-[(4-klorofenil)(fenil)asetil]- 1H-inden-... | H360D, H330, H310, H300, H372(blood), H400, H410, H372 | Akut=1 / Kr=1 | H360D:≥0.003%; H372:≥0.1%; H373:0.01–0.1% | ATP9 |
 | 371-86-8 | mipafoks (ISO); N,N'-di- izopropilfosforodiamidik florür | H370 (nervous system) | — | — | CLP00 |
 | 37143-54-7 | 1-metoksi-2-propilamin | H225, H302, H314, H412 | — | — | CLP00 |
 | 371921-63-0 | 3,10-diamino-6,13-dikloro-2- ((6-(((4-(1,1- dimetiletil)fenil)... | H318, H412 | — | — | ATP1 |
 | 37199-66-9 | Potasyum polisülfürler | H314, H400 | — | — | CLP00 |
 | 3724-43-4 | kloro-N,N-dimetilformiminyum klorür | H360D, H302, H314 | — | — | ATP1 |
-| 37244-98-7 | perborik asit (H3BO2(O2)), monosodyum tuzu, trihidrat; [1] per... | H360FD, H332, H335, H318 | — | H318:36.0%; H319:22.0% | — |
-| 373-02-4 | nikel di(asetat);[1] nikel asetat [2] | H350i, H341, H360D, H332, H302, H372, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
+| 37244-98-7 | perborik asit (H3BO2(O2)), monosodyum tuzu, trihidrat; [1] per... | H360FD, H332, H335, H318 | — | H318(1):≥36.0%; H319(2):≥22.0% | — |
+| 373-02-4 | nikel di(asetat);[1] nikel asetat [2] | H350i, H341, H360D, H332, H302, H372, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
 | 37321-15-6 | nikel(II) silikat;[1] dinikel ortosilikat, [2] nikel silikat (... | H350i, H372 **, H317, H400, H410 | — | — | ATP02 |
 | 37329-65-0 | sellobiyohidrolaz, ekzo- | H334 | — | — | CLP00 |
 | 3734-95-0 | siyantoat (ISO); S-(N-(1-siyano-1- metiletil)karbamoilmetil) O... | H300, H311 | — | — | CLP00 |
@@ -1904,7 +1904,7 @@
 | 3861-47-0 | ioksinil oktanoat (ISO); 4-siyano-2,6-diiyodofenil oktanoat | H361d, H301, H319, H317, H400, H410 | Akut=10 / Kr=10 | — | CLP00 |
 | 3862-73-5 | 2,3,4-trifloranilin | H312, H302, H373, H315, H318, H411 | — | — | CLP00 |
 | 3878-19-1 | fuberidazol (ISO); 2-(2-furil)- 1H-benzimidazol | H351, H302, H373(heart), H317, H400, H410, H373 | Akut=1 / Kr=1 | — | ATP3 |
-| 3906-55-6 | nikel bis(4-siklohekzilbütirat) | H350i, H341, H360D, H372, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
+| 3906-55-6 | nikel bis(4-siklohekzilbütirat) | H350i, H341, H360D, H372, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
 | 39148-24-8 | fosetil-aluminyum (ISO); alumnyum trietil trifosfonat | H318 | — | — | ATP1 |
 | 39156-41-7 | 2,4-diaminoanizol; 4-metoksi-m- fenilendiamin; [1] 2,4-diamino... | H350, H341, H302, H411 | — | — | CLP00 |
 | 39196-18-4 | tiyofanoks (ISO); 3,3-dimetil-1- (metiltiyo)bütanon-O-(N- meti... | H310, H300, H400, H410 | — | — | CLP00 |
@@ -1919,7 +1919,7 @@
 | 399-95-1 | 4-amino-3-florofenol | H350, H302, H317, H411 | — | — | CLP00 |
 | 40188-41-8 | 3,7-dimetiloktannitril | H315, H317, H411 | — | — | CLP00 |
 | 4023-02-3 | pirazol-1-karboksamidin monohidroklorür | H302, H373, H318, H317, H412 | — | — | ATP1 |
-| 40292-82-8 | neodekanoilklorür | H330, H302, H314 | — | H335:5.0% | CLP00 |
+| 40292-82-8 | neodekanoilklorür | H330, H302, H314 | — | H335(3):≥5.0% | CLP00 |
 | 4032-26-2 | diquat dibromür; [1] diquat diklorür; [2] 6,7-dihidrodipirido[... | H330, H302, H335, H372 **, H315, H319, H317, H400, H410 | — | — | CLP00 |
 | 40487-42-1 | pendimetalin (ISO); N-(1-etilpropil)-2,6-dinitro-3,4- ksilidin | H361d, H400, H410 | Akut=100 / Kr=100 | — | ATP18 |
 | 406-58-6 | 1,1,1,3,3-pentaflorobütan | H225 | — | — | ATP1 |
@@ -1927,11 +1927,11 @@
 | 40649-36-3 | 4-propilsiklohekzanon | H315, H412 | — | — | CLP00 |
 | 4067-16-7 | 3,6,9,12-tetra- azatetradekametilendiamin; pentaktilenhekzamin | H314, H317, H400, H410 | — | — | CLP00 |
 | 40722-80-3 | (2-kloroetil)(3- hidroksipropil)amonyum klorür | H350, H340, H373, H317, H412 | — | — | ATP1 |
-| 4074-88-8 | 2,2’-oksidietil diakrilat; dietilen glikol diakrilat | H311, H315, H319, H317 | — | H317:0.2% | CLP00 |
-| 4083-64-1 | 4-izosiyanatosülfoniltoluen; tosilizosiyanat | H335, H315, H319, H334 | — | H319:5.0%; H335:5.0%; H315:5.0% | CLP00 |
+| 4074-88-8 | 2,2’-oksidietil diakrilat; dietilen glikol diakrilat | H311, H315, H319, H317 | — | H317(1):≥0.2% | CLP00 |
+| 4083-64-1 | 4-izosiyanatosülfoniltoluen; tosilizosiyanat | H335, H315, H319, H334 | — | H319(2):≥5.0%; H335(3):≥5.0%; H315(2):≥5.0% | CLP00 |
 | 4084-38-2 | (2,3,5,6-tetraflorofenil)metanol | H302, H319, H317 | — | — | ATP1 |
 | 4097-36-3 | dinosam; 2-(1-metilbütil)-4,6-dinitrofenol | H331, H311, H301, H400, H410 | — | — | CLP00 |
-| 4098-71-9 | 3-izosiyanatometil-3,5,5- trimetilsiklohekzilizosiyanat izofro... | H331, H335, H315, H319, H334, H317, H411 | — | H334:0.5%; H317:0.5% | CLP00 |
+| 4098-71-9 | 3-izosiyanatometil-3,5,5- trimetilsiklohekzilizosiyanat izofro... | H331, H335, H315, H319, H334, H317, H411 | — | H334:≥0.5%; H317(1):≥0.5% | CLP00 |
 | 4104-14-7 | fosasetim (ISO); O,O-bis(4-klorofenil)-N- asetimidoifosforamid... | H310, H300, H400, H410 | — | — | CLP00 |
 | 41083-11-8 | azosiklokalay (ISO); 1-(trisiklohekzilstannil)-1H- 1,2,4-triyazol | H330, H301, H335, H315, H318, H400, H410 | — | — | CLP00 |
 | 41107-56-6 | 5-(2,4-diokso-1,2,3,4- tetrahidropirimidin)-3- flor-2- hidroks... | H341 | — | — | CLP00 |
@@ -1963,7 +1963,7 @@
 | 4274-38-8 | 2-amino-4- (triflorometil)benzentiol hidroklorür | H332, H312, H302, H373, H314, H317, H400 | — | — | ATP1 |
 | 4277-06-9 | Siklohekzadeka-1,9-dien | H315, H317, H413 | — | — | ATP1 |
 | 42774-15-2 | N,N'-bis(2,2,6,6-tetrametil-4- piperidil)izoftalamid | H302, H319 | — | — | CLP00 |
-| 42978-66-5 | (1-metil-1,2- etandil)bis[oksi(metil-2,1- etandil) diakrilat | H335, H315, H319, H317, H411 | — | H335:10.0% | CLP00 |
+| 42978-66-5 | (1-metil-1,2- etandil)bis[oksi(metil-2,1- etandil) diakrilat | H335, H315, H319, H317, H411 | — | H335(3):≥10.0% | CLP00 |
 | 4299-07-4 | 2-n-bütilbenzo[d]izotiyazol-3-on | H314, H317, H400, H410 | — | — | CLP00 |
 | 4301-50-2 | fluenetil (ISO); 2- floroetilbifenil-4-ilasetat | H310, H300 | — | — | CLP00 |
 | 43028-69-9 | 2-(formilamino)-3- tiyofenkarboksilik asit; 2-formamido-3- tiy... | H302, H317 | — | — | ATP1 |
@@ -1978,9 +1978,9 @@
 | 4418-26-2 | sodyum-1-(3,4-dihidro-6-metil- 2,4-diokso-2H-piran-3- ilidin)e... | H302 | — | — | CLP00 |
 | 444-14-4 | 2-bromo-4,6-difloroanilin | H302, H411 | — | — | ATP1 |
 | 444065-11-6 | 2-(4-tert-butilfenil)-6-siyano-5- [bis(etoksikarbonilmetil)kar... | H413 | — | — | ATP1 |
-| 4454-16-4 | nikel(II) trifloroasetat; [1] nikel(II) propiyonat; [2] nikel ... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 4454-16-4 | nikel(II) trifloroasetat; [1] nikel(II) propiyonat; [2] nikel ... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 4463-59-6 | 2-(2-bromoetoksi)anizol | H302, H412 | — | — | CLP00 |
-| 4464-23-7 | kadmiyum diformat; kadmiyumformat | H351, H331, H301, H373, H400, H410 | — | H373:0.25% | CLP00 |
+| 4464-23-7 | kadmiyum diformat; kadmiyumformat | H351, H331, H301, H373, H400, H410 | — | H373:≥0.25% | CLP00 |
 | 4482-55-7 | 1,1-dimetil-3- fenilüronyumtrikloroasetat; fenuron-TCA | H315, H400, H410 | — | — | CLP00 |
 | 4524-95-2 | 2-metil-2- azabisiklo[2.2.1]heptan | H226, H312, H302, H373, H314 | — | — | CLP00 |
 | 452962-97-9 | N-[5-(bis-(2-metoksi-etil)- amino]-2-(6-bromo-2-metil-1,3- dio... | H413 | — | — | ATP1 |
@@ -1997,7 +1997,7 @@
 | 467-69-6 | flurenol (ISO); 9-hidroksi-9H-floren-9- karboksilik asit | H411 | — | — | CLP00 |
 | 470-90-6 | Klorfenvinfos (ISO); 2-kloro-1-(2,4-diklorofenil) vinil dietil... | H300, H311, H400, H410 | — | — | CLP00 |
 | 47073-92-7 | 4,4'-etilidindifenildisiyanat | H332, H302, H373, H318, H400, H410 | — | — | CLP00 |
-| 4719-04-4 | 2,2',2"-(hekzahidro-1,3,5-triazin- 1,3,5-triyl)trietanol; 1,3,... | H302, H317 | — | H317:0.1% | CLP00 |
+| 4719-04-4 | 2,2',2"-(hekzahidro-1,3,5-triazin- 1,3,5-triyl)trietanol; 1,3,... | H302, H317 | — | H317(1):≥0.1% | CLP00 |
 | 473798-59-3 | fenpirazamin (ISO); S-allil 5-amino-2,3-dihidro-2- isopropil-3... | H400, H410 | Akut=10 / Kr=10 | — | ATP10 |
 | 474510-57-1 | 2-hidroksi-1-(4-(4-(2-hidroksi-2- metilpropiyonil)benzil)fenil... | H373, H400, H410 | — | — | ATP1 |
 | 479-45-8 | N-metil-N,2,4,6-tetranitroanilin ; tetril | H201, H331, H311, H301, H373 | — | — | ATP1 |
@@ -2013,23 +2013,23 @@
 | 497-19-8 | sodyum karbonat | H319 | — | — | CLP00 |
 | 49805-30-3 | (R,S)-2-azabisiklo[2.2.1]hept-5- en-3-on | H302, H317 | — | — | ATP1 |
 | 4986-89-4 | Pentaeritritoltetraakrilat | H315, H319, H317 | — | — | CLP00 |
-| 4995-91-9 | nikel(II) oktanoat | H350i, H341, H360D, H372, H314, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
-| 50-00-0 | formaldehit | H350, H341, H330, H302, H314, H317 | — | H350:0.1%; H341:1.0%; H330:5.0%; H302:25.0%; H3... | ATP22 |
+| 4995-91-9 | nikel(II) oktanoat | H350i, H341, H360D, H372, H314, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
+| 50-00-0 | formaldehit | H350, H341, H330, H302, H314, H317 | — | H350(1B):≥0.1%; H341(2):≥1.0%; H330(3):≥5.0%; H... | ATP22 |
 | 50-01-1 | guanidinyum klorür; guanadin hidroklorür | H302, H315, H319 | — | — | CLP00 |
 | 50-14-6 | Ergokalsiferol (ISO); Vitamin D2 | H330, H311, H301, H372 | — | — | CLP00 |
 | 50-29-3 | DDT (ISO); klofenotan (INN); dikofan; 1,1,1-trikloro-2,2- bis(... | H351, H301, H372, H400, H410 | — | — | CLP00 |
 | 50-31-7 | 2,3,6-TBA (ISO); 2,3,6-triklorobenzoik asit | H302, H411 | — | — | CLP00 |
-| 50-32-8 | benzo[a]piren; benzo[def]krizen | H350, H340, H360FD, H317, H400, H410 | — | H350:0.01% | CLP00 |
+| 50-32-8 | benzo[a]piren; benzo[def]krizen | H350, H340, H360FD, H317, H400, H410 | — | H350:≥0.01% | CLP00 |
 | 500-28-7 | klortiyon; O-(3-kloro-4-nitrofenil)-O,O- dimetil-dimetil fosfo... | H332, H312, H302, H400, H410 | Akut=100 / Kr=100 | — | CLP00 |
 | 500717-36-2 | 1-amino-4-[(4-amino-2- sülfofenil)amino]-9,10-dihidro- 9,10-di... | H318, H317, H412 | — | — | ATP1 |
 | 500791-70-8 | dibütil-3-(4-(5-amonyo-2- bütil)benzofuran-3- il)karbonil)feno... | H373, H318, H317, H400, H410 | Akut=10 / Kr=10 | — | ATP1 |
-| 501-53-1 | benzil kloroformat | H314, H400, H410 | — | H335:5.0% | CLP00 |
+| 501-53-1 | benzil kloroformat | H314, H400, H410 | — | H335(3):≥5.0% | CLP00 |
 | 502-55-6 | diksantojen; O,O-dietilditiyobis(tiyoformat ) | H302 | — | — | CLP00 |
 | 503-30-0 | 1,3-propilen oksit | H225, H332, H312, H302 | — | — | CLP00 |
 | 50471-44-8 | vinklozolin (ISO); N-3,5-diklorofenil-5-metil-5- vinil-1,3-oks... | H351, H360FD, H317, H411 | — | — | CLP00 |
 | 50563-36-5 | dimetaklor (ISO); 2-kloro-N- (2,6-dimetilfenil)-N-(2- metoksie... | H302, H317, H400, H410 | — | — | CLP00 |
 | 50594-66-6 | asiflorfen (ISO); 5-[2-kloro-4- (triflormetil)fenoksi]-2- nitr... | H302, H315, H318, H400, H410 | — | — | CLP00 |
-| 5064-31-3 | trisodyum nitrilotriasetat | H351, H302, H319 | — | H351:5.0% | ATP1 |
+| 5064-31-3 | trisodyum nitrilotriasetat | H351, H302, H319 | — | H351:≥5.0% | ATP1 |
 | 507-60-8 | bufa-4,20,22-trienolid, 6- (asetiloksi)-3-(β-D- glukopiranosil... | H300 | — | — | CLP00 |
 | 50715-28-1 | siklopentilkloroformat | H226, H331, H302, H373, H318, H317 | — | — | CLP00 |
 | 508202-43-5 | tepkime kütlesi: pentasodyum bis[6-anilino-3,5'- disülfonatona... | H318, H317, H412 | — | — | ATP1 |
@@ -2046,12 +2046,12 @@
 | 51178-75-7 | 1,6-hekzandiamonyum, sodyum 5-sülfato-1,3- benzendikarboksilat | H317 | — | — | ATP1 |
 | 51229-78-8 | cis-1-(3-kloroallil)-3,5,7-triaza- 1-azonyaadamantane klorür | H228, H361d, H302, H315, H317, H411 | — | — | ATP1 |
 | 51235-04-2 | hekzazinon (ISO); 3-sikloheksil- 6-dimetilamino-1-metil-1,2,3,... | H302, H319, H400, H410 | — | — | CLP00 |
-| 5124-30-1 | 4,4'-metilendi(sikloheksil izosiyanat); disiklohekzilmetan-4,4... | H331, H335, H315, H319, H334, H317 | — | H334:0.5%; H317:0.5% | CLP00 |
+| 5124-30-1 | 4,4'-metilendi(sikloheksil izosiyanat); disiklohekzilmetan-4,4... | H331, H335, H315, H319, H334, H317 | — | H334:≥0.5%; H317(1):≥0.5% | CLP00 |
 | 51285-81-5 | gadalinyum(III)sülfit trihidrat | H411 | — | — | ATP1 |
 | 513-49-5 | (S)-sek-bütilamin; (S)-2-aminobütan; [1] (R)-2-aminobütan; [2]... | H225, H332, H302, H314, H400 | — | — | CLP00 |
 | 513-77-9 | Baryum karbonat | H302 | — | — | CLP00 |
 | 513-78-0 | kadmiyum karbonat | H350, H340, H332, H312, H302, H372(kidney,_bone), H400, H410, H372 | — | — | ATP10 |
-| 513-79-1 | kobalt karbonat | H350i, H341, H360F, H334, H317, H400, H410 | Akut=10 / Kr=10 | H350i:0.01% | ATP1 |
+| 513-79-1 | kobalt karbonat | H350i, H341, H360F, H334, H317, H400, H410 | Akut=10 / Kr=10 | H350i:≥0.01% | ATP1 |
 | 5131-24-8 | ditalimfos (ISO); O,O-dietilftalimidofosfonotiyoat | H315, H317 | — | — | CLP00 |
 | 5131-66-8 | 3-bütoksipropan-2-ol; propilen glikol monobütil eter | H315, H319 | — | — | CLP00 |
 | 51337-71-4 | izobütil2-(4-(4- klorofenoksi)fenoksi)propiyonat; klofop-izobü... | H302 | — | — | CLP00 |
@@ -2086,7 +2086,7 @@
 | 52888-80-9 | prosülfokarb (ISO); S-benzil- N,N-dipropiltiyokarbamat | H302, H317, H411 | — | — | CLP00 |
 | 52894-02-7 | bis(2-etilhekzil)oktilfosfonat | H400, H410 | — | — | CLP00 |
 | 52918-63-5 | deltametrin (ISO); (S)-α-siyano- 3-fenoksibenzil (1R, 3R)-3-(2... | H331, H301, H400, H410 | Akut=1000000 / Kr=1000000 | — | ATP1 |
-| 53-70-3 | dibenz[a,h]antrasen | H350, H400, H410 | Akut=100 / Kr=100 | H350:0.01% | ATP1 |
+| 53-70-3 | dibenz[a,h]antrasen | H350, H400, H410 | Akut=100 / Kr=100 | H350:≥0.01% | ATP1 |
 | 531-85-1 | benzidin tuzları [1] | H350, H302, H400, H410 | — | — | CLP00 |
 | 531-86-2 | benzidin tuzları [1] | H350, H302, H400, H410 | — | — | — |
 | 53112-28-0 | primetanil (ISO); N-(4,6-dimetilprimidin-2- il)anilin | H411 | — | — | ATP1 |
@@ -2112,19 +2112,19 @@
 | 540-54-5 | 1-kloropropan [1]; 2-kloropropan [2] | H225, H332, H312, H302 | — | — | CLP00 |
 | 540-59-0 | 1,2-dikloroetilen [1]; cis-dikloroetilen [2] trans-dikloroetil... | H225, H332, H412 | — | — | CLP00 |
 | 540-67-0 | etil-metil-eter | H220 | — | — | CLP00 |
-| 540-73-8 | 1,2-dimetilhidrazin | H350, H331, H311, H301, H411 | — | H350:0.01% | CLP00 |
+| 540-73-8 | 1,2-dimetilhidrazin | H350, H331, H311, H301, H411 | — | H350:≥0.01% | CLP00 |
 | 540-80-7 | tersiyer-bütil nitrit | H225, H332, H302 | — | — | CLP00 |
 | 540-88-5 | sec-bütil asetat [1]; izobütil asetat [2]; ter-bütil asetat [3] | H225 | — | — | CLP00 |
 | 5406-86-0 | 2-(4-ter-bütilfenil)etanol | H361f, H373, H318, H411 | — | — | CLP00 |
 | 541-41-3 | etil kloroformat | H225, H330, H302, H314 | — | — | CLP00 |
 | 541-69-5 | m-fenilendiamindihidroklorür | H341, H331, H311, H301, H319, H317, H400, H410 | — | — | CLP00 |
 | 541-73-1 | 1,3-diklorobenzen | H302, H411 | — | — | CLP00 |
-| 541-85-5 | 5-metilheptan-3-on | H226, H335, H319 | — | H335:10.0% | CLP00 |
+| 541-85-5 | 5-metilheptan-3-on | H226, H335, H319 | — | H335(3):≥10.0% | CLP00 |
 | 542-55-2 | Bütilformat [1]; ter-bütilformat [2]; izobütilformat [3] | H225, H335, H319 | — | — | CLP00 |
 | 542-56-3 | Izobütil nitrit | H225, H350, H341, H332, H302 | — | — | CLP00 |
 | 542-75-6 | 1,3-dikloropropen [1]; (Z)-1,3-dikloropropen [2]; | H226, H311, H301, H332, H304, H335, H315, H319, H317, H400, H410 | — | — | ATP1 |
-| 542-83-6 | Kadmiyum siyanür | H351, H310, H330, H300, H373, H400, H410 | — | H373:0.1%; H032:1.0% | CLP00 |
-| 542-88-1 | bis (klorometil) eter; oksibis(klorometan) | H225, H350, H330, H311, H302 | — | H350:0.001% | ATP1 |
+| 542-83-6 | Kadmiyum siyanür | H351, H310, H330, H300, H373, H400, H410 | — | H373:≥0.1%; H032:≥1.0% | CLP00 |
+| 542-88-1 | bis (klorometil) eter; oksibis(klorometan) | H225, H350, H330, H311, H302 | — | H350:≥0.001% | ATP1 |
 | 54236-98-5 | 2,4-diamino-5- metoksimetilpirimidin | H302, H373, H319 | — | — | CLP00 |
 | 54253-62-2 | bakır(II )metansülfonat | H302, H318, H400, H410 | — | — | CLP00 |
 | 54275-93-3 | (1S,3S,5R,6R)-(4- nitrofenilmetil)-1-diokso-6- fenilasetamido-... | H334 | — | — | CLP00 |
@@ -2155,12 +2155,12 @@
 | 55219-65-3 | triadimenol (ISO); (1RS,2RS;1RS,2SR)-1-(4- klorofenoksi)-3,3-d... | H360, H362, H302, H411 | — | — | ATP10 |
 | 55285-14-8 | karbosülfan (ISO); 2,3-dihidro- 2,2-dimetil-7-benzofuril- [(di... | H330, H301, H317, H400, H410 | — | — | ATP1 |
 | 553-00-4 | 2-naftilamin tuzları | H350, H302, H411 | — | — | CLP00 |
-| 553-71-9 | nikel dibenzoat | H350i, H341, H360D, H372, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
+| 553-71-9 | nikel dibenzoat | H350i, H341, H360D, H372, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
 | 554-12-1 | metil propionat | H225, H332 | — | — | CLP00 |
 | 55406-53-6 | 3-iyodo-2-propinil butilkarbamat; 3-iyodoprop-2- in-1-il bütil... | H331, H302, H372(larynx), H318, H317, H400, H410, H372 | Akut=10 / Kr=10 | — | ATP6 |
 | 55426-95-4 | dietil(etildimetilsilanolato)alümi nyum | H250, H260, H314 | — | — | CLP00 |
-| 5543-57-7 | varfarin (ISO); 4-hidroksi-3-(3-okso-1- fenilbütil)-2H-kromen-... | H360D, H330, H310, H300, H372 (blood), H411 | — | H360D:0.003%; H372:0.5%; H373:0.05% | ATP09 |
-| 5543-58-8 | varfarin (ISO); 4-hidroksi-3-(3-okso-1- fenilbütil)-2H-kromen-... | H360D, H330, H310, H300, H372 (blood), H411 | — | H360D:0.003%; H372:0.5%; H373:0.05% | ATP09 |
+| 5543-57-7 | varfarin (ISO); 4-hidroksi-3-(3-okso-1- fenilbütil)-2H-kromen-... | H360D, H330, H310, H300, H372 (blood), H411 | — | H360D(1A):≥0.003%; H372(1):≥0.5%; H373(2):≥0.05% | ATP09 |
+| 5543-58-8 | varfarin (ISO); 4-hidroksi-3-(3-okso-1- fenilbütil)-2H-kromen-... | H360D, H330, H310, H300, H372 (blood), H411 | — | H360D(1A):≥0.003%; H372(1):≥0.5%; H373(2):≥0.05% | ATP09 |
 | 555-31-7 | alüminyum tri-izopropoksit | H228 | — | — | CLP00 |
 | 55512-33-9 | piridat (ISO); O-(6-kloro-3-fenilpiridazin-4-il) S-oktiltiyoka... | H302, H315, H317, H400, H410 | Akut=1 / Kr=1 | — | ATP14 |
 | 556-52-5 | 2,3-epoksipropan-1-ol; glisidol; oksiranmetanol | H350, H341, H360F, H331, H312, H302, H335, H315, H319 | — | — | CLP00 |
@@ -2172,15 +2172,15 @@
 | 557-20-0 | Dimetilçinko [1] Dietilçinko [2] | H250, H260, H314, H400, H410 | — | — | CLP00 |
 | 5571-36-8 | siklik3-(1,2-etandiilasetal)-estra- 5(10), 9(11)-dien-3,17-dion | H360F, H373, H411 | — | — | ATP1 |
 | 55845-90-4 | (N-benzil-N-etil)amino-3- hidroksiasetofenonhidroklorür | H318, H411 | — | — | CLP00 |
-| 55965-84-9 | tepkime kütlesi: 5-kloro-2-metil- 2H-izotiyazol-3-on ve 2-meti... | H330, H310, H301, H314, H318, H317, H400, H410 | Akut=100 / Kr=100 | H315:0.06%; H319:0.06% | ATP13 |
+| 55965-84-9 | tepkime kütlesi: 5-kloro-2-metil- 2H-izotiyazol-3-on ve 2-meti... | H330, H310, H301, H314, H318, H317, H400, H410 | Akut=100 / Kr=100 | H315(2):0.06–0.6%; H319(2):0.06–0.6% | ATP13 |
 | 5598-13-0 | kloropirifos-metil (ISO) O,O- dimetil O-3,5,6-trikloro-2-pirid... | H317, H400, H410 | Akut=10000 / Kr=10000 | — | CLP00 |
 | 56-18-8 | 3,3'-iminodi(propilamin); dipropilentriamin | H330, H311, H302, H314, H317 | — | — | CLP00 |
-| 56-23-5 | karbon tetraklorür; tetraklorometan | H351, H331, H311, H301, H372, H412, H420 | — | H372:1.0%; H373:0.2% | ATP2 |
+| 56-23-5 | karbon tetraklorür; tetraklorometan | H351, H331, H311, H301, H372, H412, H420 | — | H372:≥1.0%; H373:0.2–1.0% | ATP2 |
 | 56-38-2 | paratiyon (ISO); O,O-dietil-O-4-nitrofenil fosforotiyoat | H330, H300, H311, H372, H400, H410 | Akut=100 / Kr=100 | — | CLP00 |
 | 56-55-3 | benzo[a]antrasen | H350, H400, H410 | Akut=100 / Kr=100 | — | ATP1 |
 | 56-72-4 | kumafos (ISO); O-3-kloro-4-metilkumarin-7-il- O,O-dietil fosfo... | H300, H312, H400, H410 | — | — | CLP00 |
-| 56073-07-5 | difenakum (ISO); 3-(3-bifenil-4-il-1,2,3,4- tetrahidro-1-nafti... | H360D, H330, H310, H300, H372(blood), H400, H410, H372 | Akut=10 / Kr=10 | H360D:0.003%; H372:0.02%; H373:0.002% | ATP9 |
-| 56073-10-0 | brodifakum (ISO); 4-hidroksi-3-(3-(4'-bromo-4- bifenilil)-1,2,... | H360D, H330, H310, H300, H372(blood), H400, H410, H372 | Akut=10 / Kr=10 | H360D:0.003%; H372:0.02%; H373:0.002% | ATP9 |
+| 56073-07-5 | difenakum (ISO); 3-(3-bifenil-4-il-1,2,3,4- tetrahidro-1-nafti... | H360D, H330, H310, H300, H372(blood), H400, H410, H372 | Akut=10 / Kr=10 | H360D:≥0.003%; H372:≥0.02%; H373:0.002–0.02% | ATP9 |
+| 56073-10-0 | brodifakum (ISO); 4-hidroksi-3-(3-(4'-bromo-4- bifenilil)-1,2,... | H360D, H330, H310, H300, H372(blood), H400, H410, H372 | Akut=10 / Kr=10 | H360D:≥0.003%; H372:≥0.02%; H373:0.002–0.02% | ATP9 |
 | 56187-04-3 | 4-metil-N,N-bis(2-(((4- metilfenil)sülfonil)amino)etil)- benze... | H413 | — | — | CLP00 |
 | 5625-90-1 | N,N′-metilendimorfolin; N,N′-metilenbismorfolin; [N,N′-metilen... | H350, H341, H332, H312, H302, H373(gastrointestinal_tract,_respiratory_tract), H314, H318, H317, H373 | — | — | ATP10 |
 | 563-12-2 | etiyon (ISO); O,O,O',O'-tetraetil S,S'-metilendi (fosforoditiy... | H301, H312, H400, H410 | Akut=10000 / Kr=10000 | — | CLP00 |
@@ -2229,22 +2229,22 @@
 | 58-08-2 | kafein; | H302 | — | — | CLP00 |
 | 58-74-2 | papaverin | H302 | — | — | CLP00 |
 | 58-89-9 | linden (ISO); γ-HCH veya γ-BHC; γ-1,2,3,4,5,6- hekzaklorosiklo... | H362, H301, H332, H312, H373, H400, H410 | Akut=10 / Kr=10 | — | CLP00 |
-| 58-90-2 | 2,3,4,6-tetraklorofenol | H301, H315, H319, H400, H410 | — | H319:5.0%; H315:5.0% | CLP00 |
+| 58-90-2 | 2,3,4,6-tetraklorofenol | H301, H315, H319, H400, H410 | — | H319(2):≥5.0%; H315(2):≥5.0% | CLP00 |
 | 581-89-5 | 2-nitronaftalin | H350, H411 | — | — | CLP00 |
 | 5826-76-6 | fosniklor (ISO); O-4-kloro-3- nitrofenil O,O-dimetil fosforoti... | H332, H312, H302 | — | — | CLP00 |
 | 5827-05-4 | IPSP; S-etilsülfinilmetil-O,O- diizopropilfosforoditiyoat | H310, H301, H400, H410 | Akut=100 / Kr=100 | — | CLP00 |
 | 583-59-5 | 2-metilsiklohekzanol, izomerleri karışımı [1]; cis-2-metilsikl... | H332 | — | — | CLP00 |
 | 583-60-8 | 2-metilsiklohekzanon | H226, H332 | — | — | CLP00 |
 | 5834-96-8 | azotoat (ISO); O-4-(4-klorofenilazo)fenil O,O- dimetil fosforo... | H332, H302 | — | — | CLP00 |
-| 5836-29-3 | Kumatetralil (İSO); 4-hidroksi-3-(1,2,3,4-tetrahidro- 1-naftil... | H360D, H330, H300, H311, H372(blood), H410, H372 | Kr=10 | H360D:0.003%; H372:1.0%; H373:0.1% | ATP9 |
+| 5836-29-3 | Kumatetralil (İSO); 4-hidroksi-3-(1,2,3,4-tetrahidro- 1-naftil... | H360D, H330, H300, H311, H372(blood), H410, H372 | Kr=10 | H360D:≥0.003%; H372:≥1.0%; H373:0.1–1.0% | ATP9 |
 | 5836-73-7 | 1-(3,4-diklorofenilimino) tiyosemikarbazid | H300 | — | — | CLP00 |
 | 584-02-1 | 1-pentanol; [1] 3-pentanol [2] | H226, H332, H335, H315 | — | — | ATP01 |
 | 584-79-2 | alletrin; (RS)-3-allil-2-metil-4- oksosiklopent-2-enil (1RS,3R... | H332, H302, H400, H410 | — | — | CLP00 |
-| 584-84-9 | 2-metil-m-fenilen diizosiyanat ;toluen-2,4-di-izosiyanat; [1] ... | H351, H330, H335, H315, H319, H334, H317, H412 | — | H334:0.1% | CLP00 |
+| 584-84-9 | 2-metil-m-fenilen diizosiyanat ;toluen-2,4-di-izosiyanat; [1] ... | H351, H330, H335, H315, H319, H334, H317, H412 | — | H334(1):≥0.1% | CLP00 |
 | 58591-45-0 | kobalt nikel grisi periklas; C.I. Pigment Siyah 25; C.I. 77332... | H350i, H372 **, H317 | — | — | ATP02 |
-| 58594-72-2 | imazalil sulfat (ISO), sulu çözelti; 1- [2-(alliloksi)etil-2-(... | H302, H314, H317, H400, H410 | — | H314:50.0%; H315:30.0%; H318:15.0%; H319:5.0% | CLP00 |
+| 58594-72-2 | imazalil sulfat (ISO), sulu çözelti; 1- [2-(alliloksi)etil-2-(... | H302, H314, H317, H400, H410 | — | H314(1B):≥50.0%; H315(2):30.0–50.0%; H318(1):15... | CLP00 |
 | 586372-44-3 | tepkime kütlesi: 4-amino-3-(4- etensülfonil-2- sülfonatofenila... | H318 | — | — | ATP1 |
-| 5873-54-1 | 4,4'metilendifenil-diizosiyanat; difenilmetan-4,4' –diizosiyan... | H351, H332, H335, H373 **, H315, H319, H334, H317 | — | H319:5.0%; H315:5.0%; H334:0.1%; H335:5.0% | ATP01 |
+| 5873-54-1 | 4,4'metilendifenil-diizosiyanat; difenilmetan-4,4' –diizosiyan... | H351, H332, H335, H373 **, H315, H319, H334, H317 | — | H319(2):≥5.0%; H315(2):≥5.0%; H334(1):≥0.1%; H3... | ATP01 |
 | 58834-75-6 | Vanadil pirofosfat | H319, H317, H412 | — | — | CLP00 |
 | 58856-63-6 | tepkime kütlesi: dodekanoik asit (%35-40); poli(1-7)laktat est... | H315, H318, H317, H400, H410 | — | — | CLP00 |
 | 58890-25-8 | 3,3'-disiklohekzil-1,1'- metilenbis(4,1-fenilen)diüre | H413 | — | — | ATP10 |
@@ -2257,7 +2257,7 @@
 | 591-27-5 | 3-aminofenol | H332, H302, H411 | — | — | CLP00 |
 | 591-34-4 | n-bütil propionat [1]; sec-bütil propionat [2]; ter-bütil prop... | H226 | — | — | CLP00 |
 | 591-78-6 | hekzan-2-on; metilbütilketon; bütilmetilketon; metil-n-bütilketon | H226, H361f, H336, H372 | — | — | CLP00 |
-| 5912-86-7 | isoöjenol; [1] (E)-2-metoksi-4-(prop-1-enil) fenol; [2] (Z)-2-... | H317 | — | H317:0.01% | ATP13 |
+| 5912-86-7 | isoöjenol; [1] (E)-2-metoksi-4-(prop-1-enil) fenol; [2] (Z)-2-... | H317 | — | H317(1A):≥0.01% | ATP13 |
 | 5915-41-3 | terbütilazin (ISO); N-tert-bütil-6-kloro-N’-etil- 1,3,5-triazi... | H302, H373, H400, H410 | Akut=10 / Kr=10 | — | ATP10 |
 | 592-01-8 | Kalsiyum siyanür | H300, H400, H410 | — | — | CLP00 |
 | 592-34-7 | bütilkloroformat; kloroformik asit bütilester | H226, H331, H314 | — | — | CLP00 |
@@ -2265,8 +2265,8 @@
 | 592-84-7 | Bütilformat [1]; ter-bütilformat [2]; izobütilformat [3] | H225, H335, H319 | — | — | CLP00 |
 | 59227-88-2 | 1-oktilazepin-2-on | H314, H317, H411 | — | — | CLP00 |
 | 593-60-2 | bromoetilen | H220, H350 | — | — | CLP00 |
-| 593-74-8 | Dimetilciva; [1] Dietilciva [2] | H310, H330, H300, H373, H400, H410 | — | H373:0.05% | CLP00 |
-| 5932-68-3 | isoöjenol; [1] (E)-2-metoksi-4-(prop-1-enil) fenol; [2] (Z)-2-... | H317 | — | H317:0.01% | ATP13 |
+| 593-74-8 | Dimetilciva; [1] Dietilciva [2] | H310, H330, H300, H373, H400, H410 | — | H373:≥0.05% | CLP00 |
+| 5932-68-3 | isoöjenol; [1] (E)-2-metoksi-4-(prop-1-enil) fenol; [2] (Z)-2-... | H317 | — | H317(1A):≥0.01% | ATP13 |
 | 59320-13-7 | 2-[(4-kloro-2- nitrofenil)amino]etanol | H302, H411 | — | — | CLP00 |
 | 594-72-9 | 1,1-dikloro-1-nitroetan | H331, H311, H301 | — | — | CLP00 |
 | 59493-72-0 | 1-[3-[4- ((heptadekaflorononil)oksi)- benzamido]propil]-N,N,N-... | H318, H400, H410 | — | — | CLP00 |
@@ -2291,7 +2291,7 @@
 | 60207-90-1 | propikonazol (ISO); (2RS,4RS;2RS,4SR)-1-{[2-(2,4- diklorofenil... | H360D, H302, H317, H400, H410 | Akut=1 / Kr=1 | — | ATP13 |
 | 60372-77-2 | etil N2-dodekarnoil-1-argininat hidroklorür | H318, H400 | — | — | ATP1 |
 | 605-50-5 | 1,2-benzendikarboksilik asit, dipentilester, dallanmış ve line... | H360FD, H400 | — | — | CLP00 |
-| 6053-68-5 | siklopentan-1,2,3,4- tetrakarboksilik dianhidrit | H335, H319 | — | H319:1.0%; H335:1.0% | CLP00 |
+| 6053-68-5 | siklopentan-1,2,3,4- tetrakarboksilik dianhidrit | H335, H319 | — | H319(2):≥1.0%; H335(3):≥1.0% | CLP00 |
 | 60568-05-0 | furmesikloks (ISO); N- siklohekzil-N-metoksi-2,5- dimetil-3-fu... | H351, H400, H410 | — | — | CLP00 |
 | 606-20-2 | 2,6-dinitrotoluen | H350, H341, H361f, H331, H311, H301, H373, H412 | — | — | CLP00 |
 | 606-35-9 | 2,4,6-trinitroanizol | H201, H332, H312, H302, H411 | — | — | CLP00 |
@@ -2337,15 +2337,15 @@
 | 619-15-8 | 2,5-dinitrotoluen | H350, H341, H361f, H331, H311, H301, H373, H411 | — | — | CLP00 |
 | 6195-20-6 | dodesil 3-amino-4-klorobenzoat | H317, H413 | — | — | ATP1 |
 | 62-38-4 | Fenilciva asetat | H301, H372, H314, H400, H410 | — | — | CLP00 |
-| 62-53-3 | anilin | H351, H341, H331, H311, H301, H372, H318, H317, H400 | — | H372:1.0%; H373:0.2% | CLP00 |
+| 62-53-3 | anilin | H351, H341, H331, H311, H301, H372, H318, H317, H400 | — | H372:≥1.0%; H373:0.2–1.0% | CLP00 |
 | 62-55-5 | tiyoasetamid | H350, H302, H315, H319, H412 | — | — | CLP00 |
 | 62-56-6 | tiyoüre; tiyokarbamid | H351, H361d, H302, H411 | — | — | CLP00 |
 | 62-73-7 | diklorvos (ISO); 2,2-diklorovinil dimetil fosfat | H330, H311, H301, H317, H400 | Akut=1000 | — | ATP1 |
 | 62-74-8 | sodyumfloroasetat | H310, H330, H300, H400 | — | — | CLP00 |
-| 62-75-9 | Dimetilnitrosoamin; N-nitrosodimetilamin | H350, H330, H301, H372, H411 | — | H350:0.001% | CLP00 |
+| 62-75-9 | Dimetilnitrosoamin; N-nitrosodimetilamin | H350, H330, H301, H372, H411 | — | H350:≥0.001% | CLP00 |
 | 6202-15-9 | 1,2,3,4-tetranitrokarbazol | H201, H332, H312, H302 | — | — | ATP1 |
 | 62096-63-3 | 2-amino-6-etoksi-4-metilamino- 1,3,5-triazin | H302 | — | — | CLP00 |
-| 621-64-7 | Nitrosodipropilamin | H350, H302, H411 | — | H350:0.001% | ATP1 |
+| 621-64-7 | Nitrosodipropilamin | H350, H302, H411 | — | H350:≥0.001% | ATP1 |
 | 62268-47-7 | bis(2-etilhekzil)ditiyodiasetat | H302, H317, H411 | — | — | CLP00 |
 | 623-08-5 | N-metil-o-toluidin; [1] N-metil-m-toluidin; [2] N-metil-p-tolu... | H331, H311, H301, H373 **, H412 | — | — | CLP00 |
 | 624-18-0 | benzen-1,4-diamindihidroklorür; p-fenilendiamindihidroklorür | H331, H311, H301, H319, H317, H400, H410 | — | — | CLP00 |
@@ -2358,14 +2358,14 @@
 | 62476-59-9 | asiflorfen (ISO); 5-[2-kloro-4- (triflormetil)fenoksi]-2- nitr... | H302, H315, H318, H400, H410 | — | — | CLP00 |
 | 62478-82-4 | N,N-dietil-N',N'-dimetilpropan- 1,3-diil-diamin | H226, H332, H302, H373, H314, H412 | — | — | CLP00 |
 | 625-29-6 | 1-kloropentan [1]; 2-kloropentan [2]; 3-kloropentan [3]; | H225, H332, H312, H302 | — | — | CLP00 |
-| 625-45-6 | metoksiasetikasit | H360FD, H302, H314 | — | H335:5.0% | CLP00 |
+| 625-45-6 | metoksiasetikasit | H360FD, H302, H314 | — | H335(3):≥5.0% | CLP00 |
 | 625-55-8 | propil format [1]; izopropil format [2] | H225, H335, H336, H319 | — | — | CLP00 |
 | 625-58-1 | etil nitrat | H200 | — | — | ATP1 |
 | 626-23-3 | di-n-bütilamin; [1] di-sek-bütilamin [2] | H226, H332, H312, H302 | — | — | — |
 | 626-38-0 | pentil asetat; [1] izopentil asetat; [2] 1-metilbütil asetat; ... | H226 | — | — | CLP00 |
 | 6261-30-9 | 2-siklopentiliden siklopentanol; 1,1'-bi(siklopentiliden)-2-ol | H315, H318, H412 | — | — | ATP1 |
 | 62610-77-9 | metil3- [(dimetoksifosfinotiyoil)oksi]me takrilt; [1] metakrif... | H302, H317, H400, H410 | — | — | CLP00 |
-| 627-44-1 | Dimetilciva; [1] Dietilciva [2] | H330, H310, H300, H373 **, H400, H410 | — | H373:0.05% | CLP00 |
+| 627-44-1 | Dimetilciva; [1] Dietilciva [2] | H330, H310, H300, H373 **, H400, H410 | — | H373(2):≥0.05% | CLP00 |
 | 62782-03-0 | bis(2,2,6,6-tetrametil-4- piperidil)süksinat | H319, H412 | — | — | CLP00 |
 | 628-11-5 | 3-kloropropilkloroformiat | H331, H302, H373, H315, H318, H317 | — | — | ATP1 |
 | 628-63-7 | pentil asetat; [1] izopentil asetat; [2] 1-metilbütil asetat; ... | H226 | — | — | CLP00 |
@@ -2394,8 +2394,8 @@
 | 63919-26-6 | dinokton; izomerlerin tepkime kütlesi: metil 2-oktil-4,6-dinit... | H302, H400, H410 | — | — | CLP00 |
 | 64-02-8 | tetrasodyum etilen daimin tetraasetat | H302, H318 | — | — | ATP1 |
 | 64-17-5 | etanol; etil alkol | H225 | — | — | CLP00 |
-| 64-18-6 | formik asit ... % | H226, H290, H331, H302, H314, H318 | — | H226:85.0%; H314:90.0%; H315:2.0%; H318:10.0%; ... | ATP22 |
-| 64-19-7 | asetik asit ... % | H226, H314 | — | H314:90.0%; H314:25.0%; H315:10.0%; H319:10.0% | CLP00 |
+| 64-18-6 | formik asit ... % | H226, H290, H331, H302, H314, H318 | — | H226:≥85.0%; H314(1A):≥90.0%; H315(2):2.0–10.0%... | ATP22 |
+| 64-19-7 | asetik asit ... % | H226, H314 | — | H314(1A):≥90.0%; H314(1B):25.0–90.0%; H315(2):1... | CLP00 |
 | 64-67-5 | Dietil sülfat | H350, H340, H332, H312, H302, H314 | — | — | CLP00 |
 | 64-69-7 | iyodoasetikasit | H301, H314 | — | — | CLP00 |
 | 64-86-8 | kolçisin | H340, H300 | — | — | ATP1 |
@@ -2528,7 +2528,7 @@
 | 65-85-0 | benzoik asit | H372(lungs), H315, H318, H372 | — | — | ATP6 |
 | 650-51-1 | TCA-sodyum (İSO); sodyum trikloroasetat | H335, H400, H410 | — | — | CLP00 |
 | 65181-78-4 | N,N'-difenil-N,N'-bis(3- metilfenil)-(1,1'-difenil)-4,4'- diamin | H411 | — | — | CLP00 |
-| 65195-55-3 | abamektin (avermektin B1a ve avermektin B1b bileşimi) (ISO) [1... | H361d, H330, H300, H372 (nervous system), H400, H410 | Akut=10000 | H372:5.0%; H373:0.5% | ATP03 |
+| 65195-55-3 | abamektin (avermektin B1a ve avermektin B1b bileşimi) (ISO) [1... | H361d, H330, H300, H372 (nervous system), H400, H410 | Akut=10000 | H372(1):≥5.0%; H373(2):≥0.5% | ATP03 |
 | 65197-96-8 | D,L-(N,N-dietil-2-hidroksi-2- fenilasetamid) | H302, H318 | — | — | CLP00 |
 | 652-18-6 | 2,3,5,6-tetraflorobenzoik asit | H315, H318 | — | — | CLP00 |
 | 65229-23-4 | nikel borit (NiB; [1] dinikel borit; [2] trinikel borit; [3] n... | H350i, H372 **, H317, H400, H410 | — | — | ATP02 |
@@ -2573,11 +2573,11 @@
 | 66531-87-1 | sodyum-benziloksibenzen-4- sülfonat | H317 | — | — | CLP00 |
 | 66710-66-5 | N,N'- etilenbis(vinilsülfonilasetamid) | H318, H317 | — | — | CLP00 |
 | 66938-41-8 | (3-klorfenil)-(4-metoksi-3- nitrofenil)metanon | H341, H400, H410 | — | — | CLP00 |
-| 67-56-1 | metanol | H225, H331, H311, H301, H370 (nervous system, eyes) | — | H370:10%; H371:3% | CLP00 |
+| 67-56-1 | metanol | H225, H331, H311, H301, H370 (nervous system, eyes) | — | H370:≥10%; H371:3–10% | CLP00 |
 | 67-63-0 | propan-2-ol; izopropil alkol; izopropanol | H225, H336, H319 | — | — | CLP00 |
 | 67-64-1 | aseton; propan-2-on; propanon | H225, H336, H319 | — | — | CLP00 |
 | 67-66-3 | triklorometan; kloroform | H351, H361d, H331, H302, H372, H315, H319 | — | — | ATP5 |
-| 67-97-0 | kolekalsiferol; Vitamin D3 | H330, H310, H300, H372 | — | H372:3.0%; H373:0.3% | ATP13 |
+| 67-97-0 | kolekalsiferol; Vitamin D3 | H330, H310, H300, H372 | — | H372:≥3.0%; H373:0.3–3.0% | ATP13 |
 | 67014-36-2 | 5-amino-6-metil-1,3- dihidrobenzoimidazol-2-on | H302, H317, H411 | — | — | ATP1 |
 | 67129-08-2 | Metazaklor (ISO); 2-kloro-N- (2,6-dimetilfenil)- N-(1H- pirazo... | H351, H317, H400, H410 | Akut=100 / Kr=100 | — | ATP3 |
 | 67299-45-0 | benzil cis-4-amonyum-4'- toluensülfonato-1- siklohekzankarboks... | H412 | — | — | ATP1 |
@@ -2596,10 +2596,10 @@
 | 67891-79-6 | Damıtıklar (petrol), ağır aromatik; düşük kaynama noktalı ısıl... | H350, H340, H304 | — | — | ATP1 |
 | 67891-80-9 | Damıtıklar (petrol),hafif aromatik; düşük kaynama noktalı ısıl... | H350, H340, H304 | — | — | ATP1 |
 | 67914-69-6 | etil cis-4-[4-[[2-(2,4- diklorofenil)-2-(1H-imidazol-1- ilmeti... | H302, H373, H400, H410 | — | — | ATP1 |
-| 67952-43-6 | nikel diklorat; [1] nikel dibromat; [2] etil hidrojen sülfat, ... | H350i, H341, H360D, H372, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
+| 67952-43-6 | nikel diklorat; [1] nikel dibromat; [2] etil hidrojen sülfat, ... | H350i, H341, H360D, H372, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
 | 68-11-1 | tiyoglikolik asit | H331, H311, H301, H314 | — | — | CLP00 |
 | 68-12-2 | N,N-dimetilformamid; dimetilformamid | H360D, H332, H312, H319 | — | — | CLP00 |
-| 680-31-9 | Hekzametilfosforik triamid; hekzametilfosforamid | H350, H340 | — | H350:0.01% | CLP00 |
+| 680-31-9 | Hekzametilfosforik triamid; hekzametilfosforamid | H350, H340 | — | H350:≥0.01% | CLP00 |
 | 6804-07-5 | karbadoks(INN); metil 3- (kinoksalin-2- ilmetilen)carbazate 1,... | H228, H350, H302 | — | — | CLP00 |
 | 68049-83-2 | azafenidin (ISO); 2-(2,4-dikloro-5-prop-2- iniloksifenil)-5,6,... | H360Df, H373, H400, H410 | Akut=1000 / Kr=1000 | — | CLP00 |
 | 6807-17-6 | 4,4-izobütiletilidindifenol | H360F, H319, H400, H410 | — | — | CLP00 |
@@ -2609,14 +2609,14 @@
 | 68131-73-7 | aminler, polietilenpoli-; HEPA | H312, H302, H314, H317, H400, H410 | — | — | CLP00 |
 | 68131-75-9 | Gazlar (petrol), C3-4; Petrol gazı; [Ham petrolün parçalanması... | H220, H350, H340 | — | — | ATP1 |
 | 68132-19-4 | C8-18 alkil bis(2- hidroksietil)amonyumbis(2- etilhekzil)fosfat | H331, H314, H317, H400, H410 | — | — | CLP00 |
-| 68134-59-8 | nikel diformat; [1] formik asit, nikel tuzu; [2] formik asit, ... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 68134-59-8 | nikel diformat; [1] formik asit, nikel tuzu; [2] formik asit, ... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 68157-60-8 | forklorfenuron (ISO); 1-(2-kloro-4-piridil)-3-fenilüre | H351, H411 | — | — | ATP1 |
 | 68186-89-0 | kobalt nikel grisi periklas; C.I. Pigment Siyah 25; C.I. 77332... | H350i, H372, H317 | — | — | ATP1 |
 | 68187-57-5 | zift, kömür zifti-petrol; ziftli artıklar; [Kömür zifti ve aro... | H350 | — | — | CLP00 |
 | 68188-48-7 | Damıtıklar (kömür-petrol), yoğuşmuş-halkalı aromatikler; damıt... | H350 | — | — | CLP00 |
 | 682-80-4 | demefion-S (ISO); O,O-dimetil O-2-metiltiyoetil fosforotiyoat | H300, H311 | — | — | CLP00 |
 | 68239-26-9 | brusin sülfat; [1] brusin nitrat; [2] striknidin-10-on, 2,3-di... | H330, H300, H412 | — | — | CLP00 |
-| 683-18-1 | dibütilkalay diklorür; (DBTC) | H341, H360FD, H330, H301, H312, H372, H314, H400, H410 | Akut=10 / Kr=10 | H314:5.0%; H315:0.01%; H318:3.0%; H319:0.01% | ATP1 |
+| 683-18-1 | dibütilkalay diklorür; (DBTC) | H341, H360FD, H330, H301, H312, H372, H314, H400, H410 | Akut=10 / Kr=10 | H314(1B):≥5.0%; H315(2):0.01–5.0%; H318(1):3.0–... | ATP1 |
 | 68307-98-2 | Artık gaz (petrol), katalitik olarak parçalanmış damıtık ve ka... | H220, H350, H340 | — | — | ATP1 |
 | 68307-99-3 | Artık gaz (petrol), katalitik polimerizasyon nafta ayrımsal da... | H220, H350, H340 | — | — | ATP1 |
 | 68308-00-9 | Artık gaz (petrol), katalitik olarak dönüştürülmüş nafta ayrım... | H220, H350, H340 | — | — | ATP1 |
@@ -2861,7 +2861,7 @@
 | 6903-18-0 | 3-(2'-fenoksietoksi)propilamin | H302, H315, H318, H412 | — | — | ATP1 |
 | 69045-82-5 | 2-floro-5-triflorometilpiridin | H226, H317, H412 | — | — | CLP00 |
 | 69045-84-7 | 2,3-dikloro-5-triflorometil- piridin | H332, H302, H318, H317, H411 | — | — | CLP00 |
-| 69094-18-4 | 2,2-dibromo-2-nitroetanol | H201, H351, H302, H373, H314, H317, H400, H410 | — | H335:1.0% | CLP00 |
+| 69094-18-4 | 2,2-dibromo-2-nitroetanol | H201, H351, H302, H373, H314, H317, H400, H410 | — | H335(3):≥1.0% | CLP00 |
 | 6914-71-2 | dimetilsiklopropan-1,1- dikarboksilat | H412 | — | — | CLP00 |
 | 69184-17-4 | metil-O-(4-amino-3,5-dikloro-6- florpiridin-2-iloksi)asetat | H411 | — | — | CLP00 |
 | 69227-51-6 | 1-etil-1- metilpirrolidinyumbromür | H341 | — | — | CLP00 |
@@ -2876,7 +2876,7 @@
 | 69788-75-6 | 4-klorobütil veratrat | H317, H411 | — | — | CLP00 |
 | 69806-50-4 | fluazifop-bütil (ISO); butil (RS)-2-[4-(5-triflorometil)- 2-pi... | H360D, H400, H410 | — | — | CLP00 |
 | 6988-21-2 | dioksakarb; 2-(1,3-dioksolan-2-il) fenil N- metilkarbamat | H301, H411 | — | — | CLP00 |
-| 70-25-7 | 1-metil-3-nitro-1- nitrosoguanidin | H350, H332, H315, H319, H411 | — | H350:0.01% | ATP1 |
+| 70-25-7 | 1-metil-3-nitro-1- nitrosoguanidin | H350, H332, H315, H319, H411 | — | H350:≥0.01% | ATP1 |
 | 70-30-4 | 2,2'-metilen-bis-(3,4,6- triklorofenol); hekzaklorofen | H311, H301, H400, H410 | — | — | CLP00 |
 | 700-13-0 | 2,3,5-trimetilhidrokinon | H332, H335, H315, H318, H317, H400, H410 | — | — | CLP00 |
 | 70225-14-8 | perflorooktan sülfonik asit; heptadekaflorooktan-1-sülfonik as... | H351, H360D ***, H362, H332, H302, H372 **, H411 | — | — | ATP01 |
@@ -2896,7 +2896,7 @@
 | 7076-53-1 | 2,2-diklorovinil 2-etilsülfiniletil metil fosfat | H331, H311, H301 | — | — | CLP00 |
 | 7078-98-0 | 2,6-bis(1,1-dimetiletil)-4- (fenilenmetilen)siklohek-2,5- dien... | H317, H413 | — | — | ATP1 |
 | 7085-19-0 | Mekoprop(ISO); 2-(4-kloro-o-toliloksi)propiyonik asit; (RS)-2-... | H302, H315, H318, H400, H410 | Akut=100 / Kr=100 | — | CLP00 |
-| 7085-85-0 | etil-2-siyanoakrilat | H335, H315, H319 | — | H335:10.0% | CLP00 |
+| 7085-85-0 | etil-2-siyanoakrilat | H335, H315, H319 | — | H335(3):≥10.0% | CLP00 |
 | 709-98-8 | propanil (ISO); 3',4'-dikloropropionanilid | H302, H400 | Akut=10 | — | ATP1 |
 | 70918-74-0 | 1-(1,4-benzodioksan-2- ilkarbonil)piperazinhidroklorür | H331, H311, H301, H373, H411 | — | — | CLP00 |
 | 7093-55-2 | pregn-5-en-3,20-dion bis(etilen ketal) | H413 | — | — | CLP00 |
@@ -2906,7 +2906,7 @@
 | 71-36-3 | bütan-1-ol; n-bütanol | H226, H302, H335, H336, H315, H318 | — | — | CLP00 |
 | 71-41-0 | 1-pentanol; [1] 3-pentanol [2] | H226, H332, H335, H315 | — | — | ATP1 |
 | 71-43-2 | benzen | H225, H350, H340, H304, H372, H315, H319 | — | — | CLP00 |
-| 71-48-7 | kobalt di (asetat) | H350i, H341, H360F, H334, H317, H400, H410 | Akut=10 / Kr=10 | H350i:0.01% | ATP1 |
+| 71-48-7 | kobalt di (asetat) | H350i, H341, H360F, H334, H317, H400, H410 | Akut=10 / Kr=10 | H350i:≥0.01% | ATP1 |
 | 71-55-6 | 1,1,1-trikloroetan; metil kloroform | H332, H420 | — | — | ATP2 |
 | 71-63-6 | dijitoksin | H331, H301, H373 | — | — | CLP00 |
 | 71283-80-2 | fenokzaprop-P-etil (ISO); etil (2R)-2-{4-[(6-kloro-1,3- benzok... | H373(kidneys), H317, H400, H410, H373 | Akut=1 / Kr=1 | — | ATP7 |
@@ -2919,9 +2919,9 @@
 | 71566-50-2 | tepkime kütlesi: 1-metil-1-(3-(1- metiletil)fenil)etil-1-metil... | H242, H411 | — | — | CLP00 |
 | 71626-11-4 | benalaksil (ISO); metil N-(2,6-dimetilfenil)-N- (fenilasetil)-... | H302, H400, H410 | Akut=1 / Kr=1 | — | ATP21 |
 | 71629-74-8 | dinitrofenol(izomerlerin tepkime kütlesi); [1] 2,4(ya da 2,6)-... | H331, H311, H301, H373 **, H400, H410 | — | — | CLP00 |
-| 71720-48-4 | nikel diklorat; [1] nikel dibromat; [2] etil hidrojen sülfat, ... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 71720-48-4 | nikel diklorat; [1] nikel dibromat; [2] etil hidrojen sülfat, ... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 7173-51-5 | didesildimetilamonyumklorür | H302, H314 | — | — | CLP00 |
-| 71751-41-2 | abamektin (avermektin B1a ve avermektin B1b bileşimi) (ISO) [1... | H361d, H330, H300, H372(nervous_system), H400, H410 | Akut=10000 / Kr=10000 | H372:5.0%; H373:0.5% | ATP3 |
+| 71751-41-2 | abamektin (avermektin B1a ve avermektin B1b bileşimi) (ISO) [1... | H361d, H330, H300, H372(nervous_system), H400, H410 | Akut=10000 / Kr=10000 | H372:≥5.0%; H373:0.5–5.0% | ATP3 |
 | 71786-70-4 | bis(4-dodesilfenil)iyodonyum hekzafloroantimonat | H317, H412 | — | — | CLP00 |
 | 71868-10-5 | 2-metil-1-(4-metiltiyofenil)-2- morfolinopropan-1-on | H360FD, H302, H411 | — | — | ATP10 |
 | 71888-89-6 | 1,2-benzendikarboksilik asit; di-C6-8-dallanmış alkil esterler... | H360D | — | — | ATP1 |
@@ -2965,7 +2965,7 @@
 | 74-86-2 | asetilen; etin | H220 | — | — | CLP00 |
 | 74-87-3 | klorometan; metil klorür | H220, H351, H373 | — | — | CLP00 |
 | 74-88-4 | metiliyodür; iyodometan | H351, H331, H301, H312, H335, H315 | — | — | CLP00 |
-| 74-89-5 | mono-metilamin ...%; [1] di-metilamin ...%; [2] tri-metilamin ... | H224, H332, H302, H314 | — | H335:5.0% | CLP00 |
+| 74-89-5 | mono-metilamin ...%; [1] di-metilamin ...%; [2] tri-metilamin ... | H224, H332, H302, H314 | — | H335(3):≥5.0% | CLP00 |
 | 74-90-8 | hidrojensiyanür ...% hidrosiyanik asit …% | H310, H330, H300, H400, H410, H224 | — | — | CLP00 |
 | 74-93-1 | metantiyol; metil merkaptan | H220, H331, H400, H410 | — | — | CLP00 |
 | 74-95-3 | dibromometan | H332, H412 | — | — | CLP00 |
@@ -3019,7 +3019,7 @@
 | 75-08-1 | etantiyol; etil merkaptan | H224, H331, H302, H400, H410 | — | — | ATP22 |
 | 75-09-2 | diklorometan; metilen klorür | H351 | — | — | CLP00 |
 | 75-12-7 | formamid | H360D | — | — | CLP00 |
-| 75-15-0 | karbon disülfür | H225, H361fd, H372, H315, H319 | — | H361f:1.0%; H372:1.0%; H373:0.2% | CLP00 |
+| 75-15-0 | karbon disülfür | H225, H361fd, H372, H315, H319 | — | H361f:≥1.0%; H372:≥1.0%; H373:0.2–1.0% | CLP00 |
 | 75-19-4 | siklopropan | H220 | — | — | CLP00 |
 | 75-20-7 | kalsiyum karbür | H260 | — | — | CLP00 |
 | 75-21-8 | etilenoksit; oksiran | H220, H350, H340, H360Fd, H331, H301, H335, H336, H372(nervous_system), H314, H318, H372 | — | — | ATP14 |
@@ -3032,14 +3032,14 @@
 | 75-35-4 | 1,1-dikloroetilen; vinilidin klorür | H224, H351, H332 | — | — | CLP00 |
 | 75-36-5 | asetil klorür | H225, H314 | — | — | CLP00 |
 | 75-44-5 | fosgen; karbonil klorür | H280, H330, H314 | — | — | CLP00 |
-| 75-50-3 | mono-metilamin; [1] di-metilamin; [2] tri-metilamin [3] | H224, H332, H302, H314 | — | H335:5.0% | CLP00 |
+| 75-50-3 | mono-metilamin; [1] di-metilamin; [2] tri-metilamin [3] | H224, H332, H302, H314 | — | H335(3):≥5.0% | CLP00 |
 | 75-52-5 | nitrometan | H226, H302 | — | — | CLP00 |
-| 75-55-8 | 2-metilaziridin; propilenimin | H225, H350, H310, H330, H300, H318, H411 | — | H350:0.01% | CLP00 |
+| 75-55-8 | 2-metilaziridin; propilenimin | H225, H350, H310, H330, H300, H318, H411 | — | H350:≥0.01% | CLP00 |
 | 75-56-9 | propilen oksit; 1,2-epoksipropan; metiloksiran | H224, H350, H340, H331, H311, H302, H335, H319 | — | — | ATP9 |
 | 75-65-0 | 2-metilpropan-2-ol; ter-bütil alkol | H225, H332, H335, H319 | — | — | ATP1 |
 | 75-75-2 | metansülfonik asit | H314 | — | — | CLP00 |
 | 75-78-5 | dimetildiklorosilan | H225, H335, H315, H319 | — | — | CLP00 |
-| 75-79-6 | trikloro(metil)silan; metiltriklorosilan | H225, H335, H315, H319 | — | H315:1.0%; H319:1.0%; H335:1.0% | CLP00 |
+| 75-79-6 | trikloro(metil)silan; metiltriklorosilan | H225, H335, H315, H319 | — | H315(2):≥1.0%; H319(2):≥1.0%; H335(3):≥1.0% | CLP00 |
 | 75-83-2 | hekzan (<% 5 n-hekzan (203- 777-6) içeren); 2-metilpentan; [1]... | H225, H304, H336, H315, H411 | — | — | ATP01 |
 | 75-85-4 | 2-metilbütan-2-ol; ter-pentanol | H225, H332, H335, H315 | — | — | CLP00 |
 | 75-86-5 | 2-hidroksi-2-metilpropiyonitril; 2-siyanopropan-2-ol; aseton s... | H310, H330, H300, H400, H410 | — | — | CLP00 |
@@ -3055,73 +3055,73 @@
 | 75660-25-2 | krisoidin monohidroklorür; 4-fenilazofenilen-1,3-diamin monohi... | H341, H302, H315, H318, H400, H410 | — | — | ATP01 |
 | 7572-29-4 | dikloroasetilen | H200, H351, H373 | — | — | CLP00 |
 | 75736-33-3 | diklobütrazol (ISO); (R, R)-(±)- β-[(2,4-diklorofenil)metil]- ... | H319, H411 | — | — | CLP00 |
-| 7580-31-6 | nikel(II) trifloroasetat; [1] nikel(II) propiyonat; [2] nikel ... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 7580-31-6 | nikel(II) trifloroasetat; [1] nikel(II) propiyonat; [2] nikel ... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 7585-14-0 | di-n-oktilalüminyum iyodür | H250, H314, H400, H410 | — | — | CLP00 |
 | 759-94-4 | EPTC (ISO); S-etildipropiltiyokarbamat | H302 | — | — | CLP00 |
 | 75980-60-8 | difenil(2,4,6- trimetilbenzoil)fosfin oksit | H360Fd, H317 | — | — | ATP21 |
-| 76-01-7 | pentakloroetan | H351, H372, H411 | — | H372:1.0%; H373:0.2% | CLP00 |
-| 76-03-9 | TCA (ISO); trikloroasetik asit | H314, H400, H410 | — | H335:1.0% | CLP00 |
+| 76-01-7 | pentakloroetan | H351, H372, H411 | — | H372:≥1.0%; H373:0.2–1.0% | CLP00 |
+| 76-03-9 | TCA (ISO); trikloroasetik asit | H314, H400, H410 | — | H335(3):≥1.0% | CLP00 |
 | 76-05-1 | trifloroasetik asit . . . % | H332, H314, H412 | — | — | CLP00 |
 | 76-06-2 | trikloronitrometan; kloropikrin | H330, H302, H335, H315, H319 | — | — | CLP00 |
 | 76-44-8 | heptaklor (ISO); 1,4,5,6,7,8,8-heptakloro- 3a,4,7,7a-tetrahidr... | H351, H311, H301, H373, H400, H410 | — | — | CLP00 |
 | 76-87-9 | Fentin hidroksit (ISO); trifenilkalay hidroksit | H351, H361d, H330, H311, H301, H335, H372, H315, H318, H400, H410 | Akut=10 / Kr=10 | — | ATP1 |
 | 7601-89-0 | Sodyum perklorat | H271, H302 | — | — | CLP00 |
-| 7601-90-3 | Perklorik asit ... % | H271, H314 | — | H314:50.0%; H314:10.0%; H315:1.0%; H319:1.0%; H... | CLP00 |
+| 7601-90-3 | Perklorik asit ... % | H271, H314 | — | H314(1A):≥50.0%; H314(1B):10.0–50.0%; H315(2):1... | CLP00 |
 | 76109-32-5 | (1S,4R,6R,7R)-(4- nitrofenilmetil)3-metilen-1- okso-7-fenilase... | H334 | — | — | CLP00 |
 | 76145-91-0 | (2,4-diamino-pretidin-6- il)metanol hidrobromür | H373, H317, H412 | — | — | ATP1 |
 | 762-75-4 | Bütilformat [1]; ter-bütilformat [2]; izobütilformat [3] | H225, H335, H319 | — | — | CLP00 |
 | 76253-60-6 | dikloro [(diklorofenil)metil]metilbenzen, izomerlerinin tepkim... | H400, H410 | — | — | CLP00 |
 | 7631-90-5 | sodyum hidrojensülfit . . . %; sodyum bisülfit . . . % | H302 | — | — | CLP00 |
 | 7632-00-0 | Sodyum nitrit | H272, H301, H400 | — | — | CLP00 |
-| 7632-04-4 | sodyum perborat; [1] peroksometaborat; [2] sodyum peroksoborat... | H272, H360FD, H331, H302, H335, H318 | — | H318:22.0%; H319:14.0% | ATP22 |
+| 7632-04-4 | sodyum perborat; [1] peroksometaborat; [2] sodyum peroksoborat... | H272, H360FD, H331, H302, H335, H318 | — | H318(1):≥22.0%; H319(2):14.0–22.0% | ATP22 |
 | 7637-07-2 | boron triflorür | H280, H330, H314 | — | — | CLP00 |
-| 764-41-0 | 1,4-diklorobüt-2-en | H350, H330, H311, H301, H314, H400, H410 | — | H350:0.01%; H335:5.0% | CLP00 |
+| 764-41-0 | 1,4-diklorobüt-2-en | H350, H330, H311, H301, H314, H400, H410 | — | H350:≥0.01%; H335(3):≥5.0% | CLP00 |
 | 7646-69-7 | Sodyum hidrür | H260 | — | — | CLP00 |
-| 7646-78-8 | Kalay tetraklorür; Stannik klorür | H314, H412 | — | H335:5.0% | CLP00 |
-| 7646-79-9 | Kobalt diklorür | H350i, H341, H360F, H302, H334, H317, H400, H410 | Akut=10 / Kr=10 | H350i:0.01% | ATP1 |
-| 7646-85-7 | Çinko klorür | H302, H314, H400, H410 | — | H335:5.0% | CLP00 |
+| 7646-78-8 | Kalay tetraklorür; Stannik klorür | H314, H412 | — | H335(3):≥5.0% | CLP00 |
+| 7646-79-9 | Kobalt diklorür | H350i, H341, H360F, H302, H334, H317, H400, H410 | Akut=10 / Kr=10 | H350i:≥0.01% | ATP1 |
+| 7646-85-7 | Çinko klorür | H302, H314, H400, H410 | — | H335(3):≥5.0% | CLP00 |
 | 7646-93-7 | Potasyum hidrojensülfat | H335, H314 | — | — | CLP00 |
 | 7647-01-0 | Hidrojen klorür | H331, H314 | — | — | CLP00 |
-| 7647-18-9 | Antimon pentaklorür | H314, H411 | — | H335:5.0% | CLP00 |
+| 7647-18-9 | Antimon pentaklorür | H314, H411 | — | H335(3):≥5.0% | CLP00 |
 | 76508-02-6 | hekzasodyum-2,2'-vinilenbis((3- sülfonato-4,1-fenilen)imino(6-... | H319 | — | — | CLP00 |
-| 7664-38-2 | fosforik asit ... %, ortofosforik asit ... % | H314 | — | H314:25.0%; H315:10.0%; H319:10.0% | CLP00 |
-| 7664-39-3 | Hidroflorik asit ... % | H310, H330, H300, H314 | — | H314:7.0%; H314:1.0%; H319:0.1% | CLP00 |
+| 7664-38-2 | fosforik asit ... %, ortofosforik asit ... % | H314 | — | H314(1B):≥25.0%; H315(2):10.0–25.0%; H319(2):10... | CLP00 |
+| 7664-39-3 | Hidroflorik asit ... % | H310, H330, H300, H314 | — | H314(1A):≥7.0%; H314(1B):1.0–7.0%; H319(2):0.1–... | CLP00 |
 | 7664-41-7 | amonyak, susuz | H221, H331, H314, H400 | — | — | CLP00 |
-| 7664-93-9 | sülfürik asit | H314 | — | H314:15.0%; H315:5.0%; H319:5.0% | CLP00 |
+| 7664-93-9 | sülfürik asit | H314 | — | H314(1A):≥15.0%; H315(2):5.0–15.0%; H319(2):5.0... | CLP00 |
 | 76646-91-8 | (2S,5R)-6,6-dibromo-3,3- dimetil-7-okso-4-tia-1- azabisiklo[3.... | H302, H315, H318, H317 | — | — | ATP1 |
 | 76714-88-0 | dinikonazol (ISO); (E)- β -[(2,4-diklorofenil) metilen]-α-(1,1... | H302, H400, H410 | — | — | CLP00 |
 | 768-56-9 | 4-fenilbüt-1-en | H315, H411 | — | — | CLP00 |
 | 7681-38-1 | Sodyum hidrojensülfat | H318 | — | — | CLP00 |
 | 7681-49-4 | Sodyum florür | H301, H315, H319 | — | — | CLP00 |
-| 7681-52-9 | Sodyum hipoklorit, aktif Cl % ….. çözeltisi | H314, H318, H400, H410 | Akut=10 / Kr=10 | H031:5.0% | ATP13 |
+| 7681-52-9 | Sodyum hipoklorit, aktif Cl % ….. çözeltisi | H314, H318, H400, H410 | Akut=10 / Kr=10 | H031:≥5.0% | ATP13 |
 | 7681-57-4 | sodyum metabisülfit | H302, H318 | — | — | CLP00 |
 | 76823-93-3 | 3-(2- (diaminometilenamino)tiazol-4- ilmetiltiyo)propiyonitril | H302, H317 | — | — | CLP00 |
 | 76855-69-1 | (2R,3R)-3-((R)-1-(ter- bütildimetilsiloksi)etil)-4- oksoazetid... | H319, H317, H411 | — | — | CLP00 |
 | 7693-82-5 | 4-desiloksazolidin-2-on; 4-desil-1,3-oksazolidin-2-on | H400, H410 | — | — | ATP1 |
 | 76932-17-7 | (S)-α- (asetiltiyo)benzenpropanoik asit | H302, H318, H317 | — | — | CLP00 |
 | 7696-12-0 | tetrametrin (ISO); (1,3-diokso-1,3,4,5,6,7- heksahidro-2H-isoi... | H351, H302, H371 (nervous system), H400, H410, H371 | Akut=100 / Kr=100 | — | ATP13 |
-| 7697-37-2 | nitrik asit ... % | H272, H331, H314, H330 | — | H272:65.0%; H314:20.0%; H314:5.0% | ATP15 |
-| 77-09-8 | fenolfitaleyn | H350, H341, H361f | — | H350:1.0% | ATP1 |
+| 7697-37-2 | nitrik asit ... % | H272, H331, H314, H330 | — | H272:≥65.0%; H314(1A):≥20.0%; H314(1B):5.0–20.0% | ATP15 |
+| 77-09-8 | fenolfitaleyn | H350, H341, H361f | — | H350:≥1.0% | ATP1 |
 | 77-47-4 | hekzaklorosiklopentadien | H330, H311, H302, H314, H400, H410 | — | — | CLP00 |
 | 77-58-7 | dibütil kalay dilaurat; dibütil[bis(dodekanoiloksi)]stan nan | H341, H360FD, H372(immune_system), H372 | — | — | ATP10 |
 | 77-73-6 | 3a,4,7,7a-tetrahidro-4,7- metanoinden | H225, H332, H302, H335, H315, H319, H411 | — | — | CLP00 |
-| 77-78-1 | Dimetil sülfat | H350, H341, H330, H301, H314, H317 | — | H350:0.01%; H341:0.01%; H335:5.0% | CLP00 |
+| 77-78-1 | Dimetil sülfat | H350, H341, H330, H301, H314, H317 | — | H350:≥0.01%; H341:≥0.01%; H335(3):≥5.0% | CLP00 |
 | 77-92-9 | sitrik asit | H335, H319 | — | — | ATP17 |
 | 7700-17-6 | krotoksifos (ISO); 1-feniletil-3- (dimetoksifosfiniloksi) izok... | H311, H301, H400, H410 | Akut=10 / Kr=10 | — | CLP00 |
 | 7704-34-9 | sülfür | H315 | — | — | ATP22 |
 | 7705-14-8 | dipenten; limonene; [1] (R)-p-menta-1,8-dien; d-limonen; [2] (... | H226, H315, H317, H400, H410 | — | — | ATP17 |
 | 770722-36-6 | dikloro-(3-(3-kloro-4- florofenil)propil)metilsilan | H314 | — | — | CLP00 |
 | 770722-46-8 | kloro(3-(3-kloro-4- florofenil)propil)dimetilsilan | H314 | — | — | CLP00 |
-| 771-29-9 | 1,2,3,4-tetrahidro-1- naftilhidroperoksit | H242, H302, H314, H400, H410 | — | H335:5.0% | CLP00 |
+| 771-29-9 | 1,2,3,4-tetrahidro-1- naftilhidroperoksit | H242, H302, H314, H400, H410 | — | H335(3):≥5.0% | CLP00 |
 | 771478-66-1 | 1,6-bis(3,3-bis((1- metilpentilidinimino)propil)üred o)hekzan | H312, H302, H373, H314, H317, H400, H410 | — | — | CLP00 |
-| 7718-54-9 | nikel diklorür | H350i, H341, H360D, H331, H301, H372, H315, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:1.0%; H373:0.1%; H315:20.0%; H317:0.01% | ATP1 |
+| 7718-54-9 | nikel diklorür | H350i, H341, H360D, H331, H301, H372, H315, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:≥1.0%; H373:0.1–1.0%; H315(2):≥20.0%; H317... | ATP1 |
 | 77182-82-2 | glufosinat amonyum (ISO); amonyum 2-amino-4- (hidroksimetilfos... | H360Fd, H332, H312, H302, H373 | — | — | ATP1 |
-| 7719-09-7 | Tiyoni ldiklorür; tiyonil klorür | H332, H302, H314 | — | H335:1.0% | CLP00 |
+| 7719-09-7 | Tiyoni ldiklorür; tiyonil klorür | H332, H302, H314 | — | H335(3):≥1.0% | CLP00 |
 | 7719-12-2 | Fosfor triklorür | H330, H300, H373, H314 | — | — | CLP00 |
 | 7720-78-7 | demir (II) sülfat | H302, H315, H319 | — | — | ATP1 |
 | 77214-82-5 | demir (III) tris(4- metilbenzensülfonat) | H318 | — | — | CLP00 |
 | 7722-64-7 | Potasyum permanganat | H272, H361d, H302, H400, H410 | — | — | ATP13 |
-| 7722-84-1 | hidrojenperoksit çözeltisi ... % | H271, H332, H302, H314 | — | H271:70.0%; H272:50.0%; H314:70.0%; H314:50.0%;... | CLP00 |
+| 7722-84-1 | hidrojenperoksit çözeltisi ... % | H271, H332, H302, H314 | — | H271:≥70.0%; H272:50.0–70.0%; H314(1A):≥70.0%; ... | CLP00 |
 | 77227-99-7 | 3-kloro-4,5,alfa,alfa,alfa- pentaflortoluen | H226, H332, H302, H400 | — | — | CLP00 |
 | 7723-14-0 | kırmızı fosfor | H228, H412 | — | — | CLP00 |
 | 7726-95-6 | Brom | H330, H314, H400 | — | — | CLP00 |
@@ -3147,10 +3147,10 @@
 | 7758-99-8 | bakır sülfat pentahidrat | H302, H318, H400, H410 | Akut=10 / Kr=1 | — | ATP17 |
 | 7761-88-8 | Gümüş nitrat | H272, H314, H400, H410 | — | — | ATP1 |
 | 7775-09-9 | Sodyum klorat | H271, H301 | — | — | ATP21 |
-| 7775-11-3 | Sodyum kromat | H350, H340, H360FD, H330, H301, H312, H372, H314, H334, H317, H400, H410 | — | H334:0.2%; H317:0.2% | CLP00 |
+| 7775-11-3 | Sodyum kromat | H350, H340, H360FD, H330, H301, H312, H372, H314, H334, H317, H400, H410 | — | H334:≥0.2%; H317(1):≥0.2% | CLP00 |
 | 7775-14-6 | sodyum ditiyonit; sodyum hidrosülfit | H251, H302 | — | — | CLP00 |
-| 7778-50-9 | Potasyum dikromat | H272, H350, H340, H360FD, H330, H301, H312, H372, H314, H334, H317, H400, H410 | — | H335:5.0% | CLP00 |
-| 7778-54-3 | Kalsiyum hipoklorit | H272, H302, H314, H400 | Akut=10 | H314:5.0%; H315:1.0%; H318:3.0%; H319:0.5% | ATP1 |
+| 7778-50-9 | Potasyum dikromat | H272, H350, H340, H360FD, H330, H301, H312, H372, H314, H334, H317, H400, H410 | — | H335(3):≥5.0% | CLP00 |
+| 7778-54-3 | Kalsiyum hipoklorit | H272, H302, H314, H400 | Akut=10 | H314(1B):≥5.0%; H315(2):1.0–5.0%; H318(1):3.0–5... | ATP1 |
 | 7778-73-6 | sodyum pentaklorofenolat [1]; potasyum pentaklorofenolat [2] | H351, H330, H311, H301, H335, H315, H319, H400, H410 | — | — | CLP00 |
 | 7778-74-7 | Potasyum perklorat | H271, H302 | — | — | CLP00 |
 | 7778-85-0 | 1,2-dimetoksipropan | H225 | — | — | CLP00 |
@@ -3160,7 +3160,7 @@
 | 7782-44-7 | oksijen | H270 | — | — | CLP00 |
 | 7782-49-2 | selenyum | H331, H301, H373, H413 | — | — | CLP00 |
 | 7782-50-5 | klor | H270, H331, H335, H315, H319, H400 | Akut=100 | — | ATP1 |
-| 7782-63-0 | demir(II) sülfat (1:1) heptahidrat; sülfürik asit, demir(II) t... | H302, H315, H319 | — | H315:25.0% | ATP1 |
+| 7782-63-0 | demir(II) sülfat (1:1) heptahidrat; sülfürik asit, demir(II) t... | H302, H315, H319 | — | H315(2):≥25.0% | ATP1 |
 | 7783-06-4 | Hidrojen sülfür | H220, H280, H330, H400 | — | — | ATP21 |
 | 7783-56-4 | Antimon triflorür | H331, H311, H301, H411 | — | — | CLP00 |
 | 7784-40-9 | Kurşun hidrojenarsenat | H350, H360Df, H331, H301, H373, H400, H410 | — | — | CLP00 |
@@ -3169,31 +3169,31 @@
 | 778577-53-0 | 3-tridesiloksi-propil-amonyum 9-oktadesenoat | H373, H315, H319, H400, H410 | — | — | CLP00 |
 | 778583-04-3 | tris(2-hidroksietil)amonyum 7- {4-[4-(2-siyanoamino-4- hidroks... | H412 | — | — | CLP00 |
 | 7786-34-7 | mevinfos (ISO); 2-metoksikarbonil-1-metilvinil dimetil fosfat | H310, H300, H400, H410 | Akut=10000 / Kr=10000 | — | CLP00 |
-| 7786-81-4 | nikel sülfat | H350i, H341, H360D, H332, H302, H372, H315, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:1.0%; H373:0.1%; H315:20.0%; H317:0.01% | ATP1 |
+| 7786-81-4 | nikel sülfat | H350i, H341, H360D, H332, H302, H372, H315, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:≥1.0%; H373:0.1–1.0%; H315(2):≥20.0%; H317... | ATP1 |
 | 77889-90-8 | 5-(4-kloro-2-nitro-fenilazo)-1,2- dihidro-6-hidroksi-1,4-dimet... | H413 | — | — | ATP1 |
-| 7789-00-6 | Potasyum kromat | H350i, H340, H335, H315, H319, H317, H400, H410 | — | H317:0.5% | CLP00 |
+| 7789-00-6 | Potasyum kromat | H350i, H340, H335, H315, H319, H317, H400, H410 | — | H317(1):≥0.5% | CLP00 |
 | 7789-06-2 | Stronsiyum kromat | H350, H302, H400, H410 | — | — | CLP00 |
-| 7789-09-5 | Amonyum dikromat | H272, H350, H340, H360FD, H330, H301, H312, H372, H314, H334, H317, H400, H410 | — | H335:5.0%; H334:0.2%; H317:0.2% | CLP00 |
+| 7789-09-5 | Amonyum dikromat | H272, H350, H340, H360FD, H330, H301, H312, H372, H314, H334, H317, H400, H410 | — | H335(3):≥5.0%; H334:≥0.2%; H317(1):≥0.2% | CLP00 |
 | 7789-21-1 | florosülfonik asit | H332, H314 | — | — | CLP00 |
 | 7789-23-3 | Potasyum florür | H331, H311, H301 | — | — | CLP00 |
-| 7789-29-9 | potasyum biflorür; potasyum hidrojen diflorür | H301, H314 | — | H314:1.0%; H315:0.1%; H319:0.1% | CLP00 |
+| 7789-29-9 | potasyum biflorür; potasyum hidrojen diflorür | H301, H314 | — | H314(1B):≥1.0%; H315(2):0.1–1.0%; H319(2):0.1–1.0% | CLP00 |
 | 7789-60-8 | Fosfor tribromür | H335, H314 | — | — | CLP00 |
 | 7789-78-8 | Kalsiyum hidrür | H260 | — | — | CLP00 |
-| 7790-79-6 | Kadmiyum florür | H350, H340, H360FD, H330, H301, H372, H400, H410 | — | H350:0.01%; H372:7.0%; H373:0.1% | CLP00 |
-| 7790-80-9 | Kadmiyum iyodür | H351, H331, H301, H373, H400, H410 | — | H373:0.1% | CLP00 |
+| 7790-79-6 | Kadmiyum florür | H350, H340, H360FD, H330, H301, H372, H400, H410 | — | H350:≥0.01%; H372:≥7.0%; H373:0.1–7.0% | CLP00 |
+| 7790-80-9 | Kadmiyum iyodür | H351, H331, H301, H373, H400, H410 | — | H373:≥0.1% | CLP00 |
 | 7790-94-5 | klorosülfonik asit | H335, H314 | — | — | CLP00 |
 | 7790-98-9 | Amonyum perklorat; | H201, H271 | — | — | ATP1 |
 | 7791-25-5 | Kükürt klorür | H335, H314 | — | — | CLP00 |
 | 779343-34-9 | mono[2- (dimetilamino)etil]monohidrojen -2-(hekzadek-2-enil)bü... | H315, H318, H317, H400, H410 | — | — | CLP00 |
 | 78-10-4 | Tetraetil silikat; etilsilikat | H226, H332, H335, H319 | — | — | CLP00 |
 | 78-11-5 | pentaeritritol tetranitrat; P.E.T.N. [>%20 flegmatizer] | H201, H200 | — | — | CLP00 |
-| 78-18-2 | 1-hidroperoksisikloheksil 1- hidroksisikloheksil peroksit; [1]... | H242, H302, H314 | — | H335:5.0% | CLP00 |
-| 78-30-8 | trikresil fosfat (o-o-o-, o-o-m-, o-o-p-,o-m-m-, o-m-p-, o-p-p... | H370 (nervous system), H411 | — | H370:1%; H371:0.2% | CLP00 |
+| 78-18-2 | 1-hidroperoksisikloheksil 1- hidroksisikloheksil peroksit; [1]... | H242, H302, H314 | — | H335(3):≥5.0% | CLP00 |
+| 78-30-8 | trikresil fosfat (o-o-o-, o-o-m-, o-o-p-,o-m-m-, o-m-p-, o-p-p... | H370 (nervous system), H411 | — | H370:≥1%; H371:0.2–1% | CLP00 |
 | 78-32-0 | trikresil fosfat (m-m-m-, m-m-p- , m-p-p-,p-p-p-); tritolil fo... | H312, H302, H411 | — | — | CLP00 |
 | 78-34-2 | dioksatiyon (ISO); 1,4-dioksan-2,3-dil-O,O,O',O'- tetraetil di... | H330, H300, H311, H400, H410 | Akut=1000 / Kr=1000 | — | CLP00 |
 | 78-40-0 | Trietil fosfat | H302 | — | — | CLP00 |
 | 78-57-9 | menazon (ISO); S-[(4,6-diamino-1,3,5-triazin-2- il)metil] O,O-... | H302, H412 | — | — | CLP00 |
-| 78-59-1 | 3,5,5-trimetilsikloheks-2-enon; izoforon | H351, H312, H302, H335, H319 | — | H335:10.0% | CLP00 |
+| 78-59-1 | 3,5,5-trimetilsikloheks-2-enon; izoforon | H351, H312, H302, H335, H319 | — | H335(3):≥10.0% | CLP00 |
 | 78-67-1 | 2,2'-dimetil-2,2'- azodipropiyononitril; ADZN | H242, H332, H302, H412 | — | — | CLP00 |
 | 78-70-6 | linalool; 3,7-dimetil-1,6- oktadien-3-ol; dl-linalool; [1] kor... | H317 | — | — | ATP10 |
 | 78-78-4 | izopentan; 2-metilbütan | H224, H304, H336, H411 | — | — | CLP00 |
@@ -3218,14 +3218,14 @@
 | 79-03-8 | propiyonil klorür | H225, H314 | — | — | CLP00 |
 | 79-04-9 | kloroasetil klorür | H331, H311, H301, H372, H314, H400 | — | — | CLP00 |
 | 79-06-1 | akrilamid; prop-2-enamid | H350, H340, H361f, H301, H332, H312, H372, H315, H319, H317 | — | — | CLP00 |
-| 79-07-2 | 2-kloroasetamid | H361f, H301, H317 | — | H317:0.1% | CLP00 |
+| 79-07-2 | 2-kloroasetamid | H361f, H301, H317 | — | H317(1):≥0.1% | CLP00 |
 | 79-08-3 | bromoasetikasit | H331, H311, H301, H314, H317, H400 | — | — | ATP1 |
-| 79-09-4 | propiyonik asit ... % | H314 | — | H335:10.0%; H314:25.0%; H315:10.0%; H319:10.0% | CLP00 |
-| 79-10-7 | akrilik asit; prop-2-enoik asit | H226, H332, H312, H302, H314, H400 | — | H335:1.0% | CLP00 |
-| 79-11-8 | Kloroasetik asit | H331, H311, H301, H314, H400 | — | H335:5.0% | ATP1 |
+| 79-09-4 | propiyonik asit ... % | H314 | — | H335(3):≥10.0%; H314(1B):≥25.0%; H315(2):10.0–2... | CLP00 |
+| 79-10-7 | akrilik asit; prop-2-enoik asit | H226, H332, H312, H302, H314, H400 | — | H335(3):≥1.0% | CLP00 |
+| 79-11-8 | Kloroasetik asit | H331, H311, H301, H314, H400 | — | H335(3):≥5.0% | ATP1 |
 | 79-16-3 | N-metilasetamid | H360D | — | — | CLP00 |
 | 79-20-9 | metil asetat | H225, H336, H319 | — | — | CLP00 |
-| 79-21-0 | perasetik asit ….% | H242, H330, H310, H301, H314, H400, H410 | Akut=10 / Kr=10 | H335:1.0% | ATP22 |
+| 79-21-0 | perasetik asit ….% | H242, H330, H310, H301, H314, H400, H410 | Akut=10 / Kr=10 | H335(3):≥1.0% | ATP22 |
 | 79-22-1 | metil kloroformat | H225, H330, H312, H302, H314 | — | — | CLP00 |
 | 79-24-3 | nitroetan | H226, H332, H302 | — | — | CLP00 |
 | 79-27-6 | 1,1,2,2-tetrabromoetan | H330, H319, H412 | — | — | CLP00 |
@@ -3234,9 +3234,9 @@
 | 79-31-2 | izobütirik asit | H312, H302 | — | — | CLP00 |
 | 79-34-5 | 1,1,2,2-tetrakloroetan | H310, H330, H411 | — | — | CLP00 |
 | 79-36-7 | dikloroasetilklorür | H314, H400 | — | — | CLP00 |
-| 79-41-4 | metakrilik asit; 2-metilpropenoik asit | H312, H302, H314 | — | H335:1.0% | CLP00 |
+| 79-41-4 | metakrilik asit; 2-metilpropenoik asit | H312, H302, H314 | — | H335(3):≥1.0% | CLP00 |
 | 79-43-6 | dikloroasetikasit | H314, H400 | — | — | CLP00 |
-| 79-44-7 | Dimetilkarbamoil klorür | H350, H331, H302, H335, H315, H319 | — | H350:0.001% | CLP00 |
+| 79-44-7 | Dimetilkarbamoil klorür | H350, H331, H302, H335, H315, H319 | — | H350:≥0.001% | CLP00 |
 | 79-46-9 | 2-nitropropan | H226, H350, H332, H302 | — | — | CLP00 |
 | 79-94-7 | tetra bromobisfenol-A; 2,2',6,6'-tetrabromo-4,4'- izopropilide... | H350, H400, H410 | — | — | ATP21 |
 | 79026-02-1 | 3-(2-{4-[2-(4- siyanofenil)vinil]fenil}vinil) benzonitril | H413 | — | — | CLP00 |
@@ -3263,11 +3263,11 @@
 | 80-05-7 | bisfenol A; 4,4′-izopropilidendifenol | H360F, H335, H318, H317, H400, H410 | Akut=1 / Kr=1 | — | ATP18 |
 | 80-06-8 | klorfenetol (İSO); 1,1-bis(4-klorofenil) etanol | H302, H411 | — | — | CLP00 |
 | 80-08-0 | dapson; 4,4'-diaminodifenilsülfon; | H302 | — | — | CLP00 |
-| 80-15-9 | α,α-dimetilbenzilhidroperoksit; kümenhidroperoksit | H242, H331, H312, H302, H373, H314, H411 | — | H314:10.0%; H315:3.0%; H318:3.0%; H319:1.0%; H3... | CLP00 |
+| 80-15-9 | α,α-dimetilbenzilhidroperoksit; kümenhidroperoksit | H242, H331, H312, H302, H373, H314, H411 | — | H314(1B):≥10.0%; H315(2):3.0–10.0%; H318(1):3.0... | CLP00 |
 | 80-33-1 | klorfenson (ISO); 4-klorofenil-4- klorobenzensülfonat | H302, H315, H400, H410 | — | — | CLP00 |
 | 80-38-6 | fenson (ISO); 4-klorofenil benzensülfonat; | H302, H319, H411 | — | — | CLP00 |
 | 80-43-3 | bis(α,α-dimetilbenzil)peroksit | H242, H360D, H315, H319, H411 | — | — | ATP15 |
-| 80-47-7 | 8-p-mentilhidroperoksit; p- mentan hidroperoksit | H242, H332, H314 | — | H335:5.0% | CLP00 |
+| 80-47-7 | 8-p-mentilhidroperoksit; p- mentan hidroperoksit | H242, H332, H314 | — | H335(3):≥5.0% | CLP00 |
 | 80-62-6 | metil metakrilat; metil 2- metilprop-2-enoat; metil 2- metilpr... | H225, H335, H315, H317 | — | — | CLP00 |
 | 8001-35-2 | kamfeklor (ISO); toksafen | H351, H301, H312, H335, H315, H400, H410 | — | — | CLP00 |
 | 8001-58-9 | kreosot; [Taş kömürünün yüksek sıcaklıkta karbonizasyonundan e... | H350 | — | — | CLP00 |
@@ -3296,13 +3296,13 @@
 | 80844-07-1 | etofenproks (ISO); 2-(4- ethoksifenil)-2-methilpropil 3- fenok... | H362, H400, H410 | Akut=100 / Kr=100 | — | ATP6 |
 | 81-14-1 | keton misk; 3,5-dinitro-2,6-dimetil-4-ter- bütilasetofenon; 4’... | H351, H400, H410 | — | — | ATP1 |
 | 81-15-2 | ksilen misk; 5-ter-bütil-2,4,6-trinitro-m- ksilen | H201, H351, H400, H410 | — | — | CLP00 |
-| 81-81-2 | varfarin (ISO); 4-hidroksi-3-(3-okso-1- fenilbütil)-2H-kromen-... | H360D, H330, H310, H300, H372(blood), H411 | — | H360D:0.003%; H372:0.5%; H373:0.05% | ATP9 |
+| 81-81-2 | varfarin (ISO); 4-hidroksi-3-(3-okso-1- fenilbütil)-2H-kromen-... | H360D, H330, H310, H300, H372(blood), H411 | — | H360D:≥0.003%; H372:≥0.5%; H373:0.05–0.5% | ATP9 |
 | 81-82-3 | kumaklor (ISO); 3-[1-(4- klorofenil)-3-oksobütil]-4- hidroksik... | H373, H412 | — | — | CLP00 |
 | 81334-34-1 | imazapir (ISO); 2-[4,5-dihidro- 4-metil-4-(1-metiletil)-5-okso... | H319, H412 | — | — | CLP00 |
 | 81406-37-3 | Floroksipir-meptil(ISO); metilheptil, O-(4-amino-3,5- dikloro-... | H400, H410 | — | — | CLP00 |
 | 81591-81-3 | glifosat-trimesyum; glifosat- trimetilsülfonyum | H302, H411 | — | — | CLP00 |
 | 81752-87-6 | metil 2,2-dimetil-6- metilensiklohekzankarboksilat | H315 | — | — | ATP1 |
-| 818-61-1 | 2-hidroksietil akrilat | H311, H314, H317, H400 | — | H317:0.2% | CLP00 |
+| 818-61-1 | 2-hidroksietil akrilat | H311, H314, H317, H400 | — | H317(1):≥0.2% | CLP00 |
 | 81880-96-8 | (4-hidrazinofenil)-N- metilmetansülfonamid hidroklorür | H341, H301, H372, H317, H400, H410 | — | — | CLP00 |
 | 81898-60-4 | tetrasodyum-3,3'-(piperazin-1,4- diilbis((6-kloro-1,3,5-triazi... | H317 | — | — | CLP00 |
 | 81992-66-7 | sodyum 2-[[4-[(4,6-dikloro- 1,3,5-triazin-2- il)amino]fenil]sü... | H317, H400, H410 | — | — | ATP1 |
@@ -3311,7 +3311,7 @@
 | 82-71-3 | 2,4,6-trinitroresorsinol; stifnik asit | H201, H332, H312, H302 | — | — | ATP1 |
 | 82027-60-9 | hekzasodyum-[4,4''- azoksibis(2,2'- disülfonatostilben-4,4'-di... | H411 | — | — | CLP00 |
 | 82097-50-5 | triasulfuron (ISO); 1-[2-(2- kloroetoksi)fenilsülfonil]-3-(4- ... | H400, H410 | — | — | CLP00 |
-| 822-06-0 | hekzametilen-diizosiyanat | H331, H335, H315, H319, H334, H317 | — | H334:0.5%; H317:0.5% | CLP00 |
+| 822-06-0 | hekzametilen-diizosiyanat | H331, H335, H315, H319, H334, H317 | — | H334:≥0.5%; H317(1):≥0.5% | CLP00 |
 | 823-40-5 | 2-metil-m-fenilendiamin; 2,6- toluendiamin | H341, H312, H302, H317, H411 | — | — | CLP00 |
 | 82380-18-5 | 2-floro-4-hidroksibenzonitril | H302, H318, H411 | — | — | ATP1 |
 | 82413-20-5 | (E)-3-[1-[4-[2- (dimetilamino)etoksi]fenil]-2- fenilbüt-1-enil... | H351, H360F, H317, H400, H410 | — | — | ATP1 |
@@ -3338,7 +3338,7 @@
 | 83708-14-9 | 3-ikosil-4-henikosiliden-2- oksetanon | H413 | — | — | CLP00 |
 | 838-88-0 | 4,4'-metilendi-o-toluidin | H350, H302, H317, H400, H410 | — | — | CLP00 |
 | 83857-96-9 | 2-bütil-4-kloro-5-formilimidazol | H317, H411 | — | — | CLP00 |
-| 83918-57-4 | imazalilsülfat (ISO) tozu; 1-[2-(alliloksi)etil- 2-(2,4- diklo... | H302, H314, H317, H400, H410 | — | H314:50.0%; H315:30.0%; H318:15.0%; H319:5.0% | CLP00 |
+| 83918-57-4 | imazalilsülfat (ISO) tozu; 1-[2-(alliloksi)etil- 2-(2,4- diklo... | H302, H314, H317, H400, H410 | — | H314(1B):≥50.0%; H315(2):≥30.0%; H318(1):≥15.0%... | CLP00 |
 | 83926-73-2 | 4-siklohekzil-2-metil-2-bütanol | H318, H411 | — | — | CLP00 |
 | 83968-67-6 | krisoidin monohidroklorür; 4-fenilazofenilen-1,3-diamin monohi... | H341, H302, H315, H318, H400, H410 | — | — | ATP01 |
 | 84-61-7 | disiklohekzil fitalat | H360D, H317 | — | — | ATP9 |
@@ -3428,7 +3428,7 @@
 | 87113-78-8 | 3,5-bis((3,5-di-tert-bütil-4- hidroksi)benzil)-2,4,6- trimetil... | H412 | — | — | CLP00 |
 | 87172-89-2 | ekzo-1-metil-4-(1-metiletil)-7- oksabisiklo[2.2.1]heptan-2-ol | H302, H318 | — | — | CLP00 |
 | 87199-17-5 | 4-formilfenilboronik asit | H317 | — | — | ATP1 |
-| 872-50-4 | N-metil-2-pirrolidon; 1-metil-2-pirrolidon | H360D, H335, H315, H319 | — | H335:10.0% | ATP9 |
+| 872-50-4 | N-metil-2-pirrolidon; 1-metil-2-pirrolidon | H360D, H335, H315, H319 | — | H335(3):≥10.0% | ATP9 |
 | 87237-48-7 | haloksifop-etotil (ISO); 2-etoksietil2-(4-(3-kloro-5- trifloro... | H302, H400, H410 | — | — | CLP00 |
 | 873-32-5 | 2-klorobenzonitril | H312, H302, H319 | — | — | CLP00 |
 | 87333-22-0 | metil 2-(asetilamino)-3- kloropropiyonat | H317, H400, H410 | — | — | ATP1 |
@@ -3490,7 +3490,7 @@
 | 9001-75-6 | Pepsin A | H335, H315, H319, H334 | — | — | CLP00 |
 | 9001-98-3 | Renin | H335, H315, H319, H334 | — | — | CLP00 |
 | 9002-07-7 | tripsin | H335, H315, H319, H334 | — | — | CLP00 |
-| 90035-08-8 | flokomafen (ISO); tepkime kütlesi: cis-4-hidroksi- 3-(1,2,3,4-... | H360D, H330, H310, H300, H372(blood), H400, H410, H372 | Akut=10 / Kr=10 | H360D:0.003%; H372:0.05%; H373:0.005% | ATP9 |
+| 90035-08-8 | flokomafen (ISO); tepkime kütlesi: cis-4-hidroksi- 3-(1,2,3,4-... | H360D, H330, H310, H300, H372(blood), H400, H410, H372 | Akut=10 / Kr=10 | H360D:≥0.003%; H372:≥0.05%; H373:0.005–0.05% | ATP9 |
 | 9004-07-3 | kimotripsin | H335, H315, H319, H334 | — | — | CLP00 |
 | 90076-65-6 | lityum- bis(triflormetilsülfonil)imid | H311, H301, H373, H314, H412 | — | — | ATP1 |
 | 9012-54-8 | selülaz | H334 | — | — | CLP00 |
@@ -3543,19 +3543,19 @@
 | 90669-77-5 | Yağlı mum (petrol), asit ile muamele edilmiş; Yağlı mum; [Petr... | H350 | — | — | CLP00 |
 | 90669-78-6 | yağlı mum (petrol), kil ile muamele edilmiş; Yağlı mum; [Petro... | H350 | — | — | CLP00 |
 | 9068-59-1 | Proteinaz, mikrobial olarak nötral | H335, H315, H319, H334 | — | — | CLP00 |
-| 9080-17-5 | Amonyum polisülfürler | H314, H400 | — | H031:1.0% | CLP00 |
+| 9080-17-5 | Amonyum polisülfürler | H314, H400 | — | H031:≥1.0% | CLP00 |
 | 90884-29-0 | 4,4'-oksibis(etilentiyo)difenol | H317, H411 | — | — | CLP00 |
 | 90886-53-6 | metil 3-amino-2,2,3- trimetilbütirat | H302, H314, H412 | — | — | ATP1 |
 | 90989-38-1 | Aromatik hidrokarbonlar, C8; tekrar damıtılmış hafif yağ, yüks... | H350, H340 | — | — | ATP1 |
 | 90989-39-2 | Aromatik hidrokarbonlar, C8-10; düşük kaynama noktalı nafta - ... | H350, H340, H304 | — | — | ATP1 |
 | 90989-41-6 | Aromatik hidrokarbonlar, C6-10, C8-zengin; tekrar damıtılmış h... | H350, H340 | — | — | ATP1 |
 | 90989-42-7 | Aromatik hidrokarbonlar, C7-8, alkil giderme ürünleri, damıtma... | H350, H340, H304 | — | — | ATP1 |
-| 91-08-7 | 2-metil-m-fenilen diizosiyanat ;toluen-2,4-di-izosiyanat; [1] ... | H351, H330, H335, H315, H319, H334, H317, H412 | — | H334:0.1% | CLP00 |
+| 91-08-7 | 2-metil-m-fenilen diizosiyanat ;toluen-2,4-di-izosiyanat; [1] ... | H351, H330, H335, H315, H319, H334, H317, H412 | — | H334:≥0.1% | CLP00 |
 | 91-20-3 | naftalin | H351, H302, H400, H410 | — | — | CLP00 |
 | 91-22-5 | kinolin | H350, H341, H312, H302, H315, H319, H411 | — | — | ATP1 |
 | 91-23-6 | 2-nitroanizol | H350, H302 | — | — | CLP00 |
 | 91-53-2 | etoksikuin (ISO); 6-etoksi-1,2-dihidro-2,2,4- trimetilkinolin | H302 | — | — | CLP00 |
-| 91-59-8 | 2-naftilamin | H350, H302, H411 | — | H350:0.01% | CLP00 |
+| 91-59-8 | 2-naftilamin | H350, H302, H411 | — | H350:≥0.01% | CLP00 |
 | 91-66-7 | N,N-dietilanilin | H331, H311, H301, H373, H411 | — | — | CLP00 |
 | 91-76-9 | 6-fenil-1,3,5-triazin-2,4- dildiamin; 6-fenil-1,3,5-triazin- 2... | H302, H412 | — | — | CLP00 |
 | 91-94-1 | 3,3'-diklorobenzidin; 3,3'-diklorobifenil-4,4'- ilendiamin | H350, H312, H317, H400, H410 | — | — | CLP00 |
@@ -3614,7 +3614,7 @@
 | 92-43-3 | 1-fenil-3-pirazolidon | H302, H411 | — | — | CLP00 |
 | 92-52-4 | bifenil; difenil | H335, H315, H319, H400, H410 | — | — | CLP00 |
 | 92-67-1 | bifenil-4-ilamin; ksenilamin; 4-aminobifenil | H350, H302 | — | — | CLP00 |
-| 92-87-5 | benzidin; 1,1'-bifenil-4-4’diamin; 4,4'- diaminobifenil-4-4’-i... | H350, H302, H400, H410 | — | H350:0.01% | CLP00 |
+| 92-87-5 | benzidin; 1,1'-bifenil-4-4’diamin; 4,4'- diaminobifenil-4-4’-i... | H350, H302, H400, H410 | — | H350:≥0.01% | CLP00 |
 | 92-93-3 | 4-nitrobifenil | H350, H411 | — | — | CLP00 |
 | 920-36-5 | (2-metilpropil)lityum; izobütillityum | H250, H260, H336, H314, H400, H410 | — | — | ATP1 |
 | 92045-12-0 | Petrol Tortu yağı, hidrojenle muamele edilmiş; Tortu yağı | H350 | — | — | CLP00 |
@@ -3673,7 +3673,7 @@
 | 92062-36-7 | Aromatik hidrokarbonlar, C9-12, benzen damıtığı; tekrar damıtı... | H350, H340 | — | — | ATP1 |
 | 92128-94-4 | hidrokarbonlar, C8-12, katalitik- parçalama, kimyasal olarak n... | H350, H340, H304 | — | — | ATP1 |
 | 92129-09-4 | Parafin yağları (petrol), çözücü ile rafine edilmiş ve cilası ... | H350 | — | — | CLP00 |
-| 92129-57-2 | Balçık ve çamur, bakır elektrolitik rafine, bakırdan arındırıl... | H350i, H341, H360D, H332, H302, H372, H315, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
+| 92129-57-2 | Balçık ve çamur, bakır elektrolitik rafine, bakırdan arındırıl... | H350i, H341, H360D, H332, H302, H372, H315, H334, H317, H400, H410 | Akut=1 / Kr=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
 | 92201-59-7 | Damıtıklar (petrol), orta derecede katalitik olarak parçalanmı... | H350 | — | — | CLP00 |
 | 92201-60-0 | Damıtıklar (petrol),hafif katalitik olarak parçalanmış, ısıl o... | H350 | — | — | CLP00 |
 | 92201-97-3 | Nafta (petrol), hafif ısı ile muamele edilmiş, buhar- parçalan... | H350, H340, H304 | — | — | ATP1 |
@@ -3786,7 +3786,7 @@
 | 95-80-7 | 4-metil-m-fenilendiamin; 2,4- toluendiamin | H350, H341, H361f, H301, H312, H373, H317, H411 | — | — | ATP1 |
 | 95-87-4 | 3,4-ksilenol [1]; 2,5-ksilenol [2]; 2,4-ksilenol [3]; 2,3-ksil... | H311, H301, H314, H411 | — | — | CLP00 |
 | 95-92-1 | oksalik asit dietilester; dietiloksalat | H302, H319 | — | — | CLP00 |
-| 95-95-4 | 2,4,5-triklorofenol | H302, H315, H319, H400, H410 | — | H319:5.0%; H315:5.0% | CLP00 |
+| 95-95-4 | 2,4,5-triklorofenol | H302, H315, H319, H400, H410 | — | H319(2):≥5.0%; H315(2):≥5.0% | CLP00 |
 | 950-10-7 | mefosfolan (ISO); dietil-4-metil-1,3-ditiyolan-2- ilidenfosfor... | H310, H300, H411 | — | — | CLP00 |
 | 950-37-8 | metidatiyon (ISO); 2,3-dihidro-5-metoksi-2-okso- 1,3,4-tiyadia... | H300, H312, H400, H410 | — | — | CLP00 |
 | 95009-23-7 | Damıtıklar (petrol), buhar ile parçalanmış, C8-12 fraksiyon, p... | H350, H340, H304 | — | — | ATP1 |
@@ -3830,7 +3830,7 @@
 | 97-02-9 | 2,4-dinitroanilin | H310, H330, H300, H373, H411 | — | — | CLP00 |
 | 97-17-6 | diklofentiyon (ISO); O-2,4-diklorofenil O,O-dietil fosforotiyoat | H302, H400, H410 | — | — | CLP00 |
 | 97-23-4 | diklorofen | H302, H319, H400, H410 | — | — | CLP00 |
-| 97-54-1 | isoöjenol; [1] (E)-2-metoksi-4-(prop-1-enil) fenol; [2] (Z)-2-... | H317 | — | H317:0.01% | ATP13 |
+| 97-54-1 | isoöjenol; [1] (E)-2-metoksi-4-(prop-1-enil) fenol; [2] (Z)-2-... | H317 | — | H317(1):≥0.01% | ATP13 |
 | 97-56-3 | 4-o-tolilazo-o-toluidin; 4-amino-2',3-dimetilazobenzen; GBC es... | H350, H317 | — | — | CLP00 |
 | 97-63-2 | etil metakrilat | H225, H335, H315, H319, H317 | — | — | CLP00 |
 | 97-64-3 | Etil laktat;etil DL-laktat; [1] Etil(S)-2-hidroksipropiyonat ;... | H226, H335, H318 | — | — | CLP00 |
@@ -3838,7 +3838,7 @@
 | 97-77-8 | disülfiram; tetraetiltiüramdisülfür | H302, H373, H317, H400, H410 | — | — | CLP00 |
 | 97-86-9 | izobütil metakrilat | H226, H335, H315, H317 | — | — | ATP13 |
 | 97-88-1 | n-bütil metakrilat | H226, H335, H315, H319, H317 | — | — | CLP00 |
-| 97-90-5 | etilen dimetakrilat | H335, H317 | — | H335:10.0% | CLP00 |
+| 97-90-5 | etilen dimetakrilat | H335, H317 | — | H335(3):≥10.0% | CLP00 |
 | 97-95-0 | 2-etilbütan-1-ol | H312, H302 | — | — | CLP00 |
 | 97-99-4 | tetrahidro-2-furilmetanol; tetrahidrofurfuril alkol | H360Df, H319 | — | — | ATP6 |
 | 97101-46-7 | metil-3-(asetiltiyo)-2-metil- propanoat | H302, H317, H400, H410 | — | — | CLP00 |
@@ -3888,7 +3888,7 @@
 | 98-54-4 | 4-tert-butilfenol | H361f, H315, H318, H410 | Kr=1 | — | ATP13 |
 | 98-73-7 | 4-ter-bütilbenzoik asit | H360F, H302, H372 | — | — | ATP3 |
 | 98-82-8 | Kumen; [1] Propilbenzen [2] | H226, H350, H304, H335, H411 | — | — | ATP18 |
-| 98-83-9 | 2-fenilpropen; α-metilstiren | H226, H335, H319, H411 | — | H335:25.0% | CLP00 |
+| 98-83-9 | 2-fenilpropen; α-metilstiren | H226, H335, H319, H411 | — | H335(3):≥25.0% | CLP00 |
 | 98-84-0 | 1-feniletilamin; [1] DL-α-metilbenzilamin [2] | H312, H302, H314 | — | — | CLP00 |
 | 98-86-2 | asetofenon | H302, H319 | — | — | CLP00 |
 | 98-87-3 | α,α-diklorotoluen; benzilidin klorür; benzal klorür | H351, H331, H302, H335, H315, H318 | — | — | CLP00 |
@@ -3924,5 +3924,5 @@
 | 99688-47-8 | bromobenzilbromotoluen, izomerlerinin tepkime kütlesi | H373, H317, H400, H410 | — | — | CLP00 |
 | 99788-75-7 | 1,4-bis(2,3- dihidroksipropilamino)antrakino n | H411 | — | — | ATP1 |
 | 99817-36-4 | 2,4-dikloro-3-etil-6-nitrofenol | H301, H318, H317, H400, H410 | — | — | CLP00 |
-| 999-61-1 | 2-hidroksi-1-metiletilakrilat; [1] 2-hidroksipropilakrilat; [2... | H331, H311, H301, H314, H317 | — | H317:0.2% | CLP00 |
+| 999-61-1 | 2-hidroksi-1-metiletilakrilat; [1] 2-hidroksipropilakrilat; [2... | H331, H311, H301, H314, H317 | — | H317(1):≥0.2% | CLP00 |
 | 999-81-5 | Kloromekuat klorür (ISO); 2- kloroetiltrimetilamonyumklorür | H312, H302 | — | — | CLP00 |

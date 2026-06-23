@@ -11,7 +11,7 @@
 | 100-02-7 | 4-nitrophenol; p-nitrophenol | H332 **, H312 **, H302 **, H373 ** | — | — | CLP00 |
 | 100-22-1 | N,N,N',N'-tetramethyl-p-phenylenediamine | H332 **, H312 **, H302 ** | — | — | CLP00 |
 | 100-25-4 | dinitrobenzene [1] 1,4-dinitrobenzene [2] 1,3-dinitrobenzene [... | H330, H310, H300, H373 **, H400, H410 | — | — | CLP00 |
-| 100-37-8 | 2-diethylaminoethanol; N,N-diethylethanolamine | H226, H332 **, H312 **, H302 **, H314 | — | H335:5.0% | CLP00 |
+| 100-37-8 | 2-diethylaminoethanol; N,N-diethylethanolamine | H226, H332 **, H312 **, H302 **, H314 | — | H335(3):≥5.0% | CLP00 |
 | 100-39-0 | α-bromotoluene; benzyl bromide | H335, H315, H319 | — | — | CLP00 |
 | 100-40-3 | 4-vinylcyclohexene | H351 | — | — | ATP6 |
 | 100-41-4 | ethylbenzene | H225, H332 **, H304, H373(hearing_organs) | — | — | ATP6 |
@@ -30,25 +30,25 @@
 | 10004-44-1 | hymexazol (ISO); 3-hydroxy-5-methylisoxazole | H361d, H302, H318, H317, H411 | — | — | ATP15 |
 | 10007-85-9 | 3,6-dichloro-o-anisic acid, compound with dimethylamine (1:1) ... | H319, H412 | — | — | CLP00 |
 | 100181-71-3 | isobutyl 3,4-epoxybutyrate | H315, H317, H400, H410 | — | — | CLP00 |
-| 10025-67-9 | disulphur dichloride; sulfur monochloride | H301 **, H332 **, H314, H400 | — | H335:1.0% | CLP00 |
+| 10025-67-9 | disulphur dichloride; sulfur monochloride | H301 **, H332 **, H314, H400 | — | H335(3):≥1.0% | CLP00 |
 | 10025-78-2 | trichlorosilane | H224, H260, H331, H302, H314, H318 | — | — | ATP18 |
 | 10025-87-3 | phosphoryl trichloride | H330 **, H302 **, H372 **, H314 | — | — | CLP00 |
-| 10025-91-9 | antimony trichloride | H314, H411 | — | H335:5.0% | CLP00 |
+| 10025-91-9 | antimony trichloride | H314, H411 | — | H335(3):≥5.0% | CLP00 |
 | 10025-99-7 | dipotassium tetrachloroplatinate | H301 **, H315, H318, H334, H317 | — | — | CLP00 |
 | 10026-00-3 | disodium tetrachloroplatinate | H301 **, H315, H318, H334, H317 | — | — | CLP00 |
 | 10026-04-7 | silicon tetrachloride | H335, H315, H319 | — | — | CLP00 |
 | 10026-13-8 | phosphorus pentachloride | H330 **, H302 **, H373 **, H314 | — | — | CLP00 |
 | 10027-06-2 | 8,9,10-trinorborn-2-yl acrylate | H312 **, H315, H317 | — | — | CLP00 |
-| 10028-18-9 | nickel difluoride [1] nickel dibromide [2] nickel diiodide [3]... | H350i, H341, H360D **, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
+| 10028-18-9 | nickel difluoride [1] nickel dibromide [2] nickel diiodide [3]... | H350i, H341, H360D **, H372 **, H334, H317, H400, H410 | Akut=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
 | 1003318-67-9 | oxathiapiprolin (ISO); 1-(4-{4-[5-(2,6-di­fluorophenyl)-4,5-di... | H410 | Kr=1 | — | ATP15 |
-| 10034-85-2 | hydrogen iodide | H314 | — | H314:10.0%; H314:0.2%; H315:0.02%; H319:0.02%; ... | CLP00 |
+| 10034-85-2 | hydrogen iodide | H314 | — | H314:≥10.0%; H314(1B):0.2–10.0%; H315(2):0.02–0... | CLP00 |
 | 10035-10-6 | hydrogen bromide | H335, H314 | — | — | CLP00 |
 | 10039-54-0 | hydroxylammonium chloride; hydroxylamine hydrochloride [1] bis... | H290, H351, H312, H302, H373 **, H315, H319, H317, H400 | — | — | ATP01 |
 | 100418-33-5 | 2-((4-methyl-2-nitrophenyl)amino)ethanol | H302 **, H317, H412 | — | — | CLP00 |
 | 10043-35-3 | boric acid [1] boric acid [2] | H360FD | — | — | ATP20 |
 | 10043-52-4 | calcium chloride | H319 | — | — | CLP00 |
 | 10046-00-1 | hydroxylammonium hydrogensulfate; hydroxylamine sulfate(1:1) [... | H201, H351, H312 **, H302 **, H373 **, H315, H319, H317, H400 | — | — | ATP1 |
-| 10049-04-4 | chlorine dioxide … % | H301 **, H314, H400 | Akut=10 | H335:3.0%; H314:5.0%; H315:1.0%; H318:3.0%; H31... | ATP1 |
+| 10049-04-4 | chlorine dioxide … % | H301 **, H314, H400 | Akut=10 | H335(3):≥3.0%; H314(1B):≥5.0%; H315(2):1.0–5.0%... | ATP1 |
 | 100491-29-0 | ethyl 7-chloro-1-(2,4-difluorophenyl)-6-fluoro-1,4-dihydro-4-o... | H317, H411 | — | — | ATP1 |
 | 100501-62-0 | ethyl 1-ethyl-6,7,8-trifluoro-1,4-dihydro-4-oxoquinoline-3-car... | H317, H412 | — | — | CLP00 |
 | 100556-82-9 | tetrasodium 4-amino-5-hydroxy-3,6-bis[[4-[[2-(sulphonatooxy)et... | H334, H317 | — | — | — |
@@ -72,29 +72,29 @@
 | 100801-66-9 | Hydrocarbon oils, arom., mixed with polystyrene, pyrolyzed, li... | H350, H340 | — | — | ATP1 |
 | 10097-02-6 | 2,2-bis(hydroxymethyl)butanoic acid | H318, H412 | — | — | CLP00 |
 | 100988-63-4 | (6R-trans)-1-((7-ammonio-2-carboxylato-8-oxo-5-thia-1-azabicyc... | H341, H317, H411 | — | — | ATP1 |
-| 101-02-0 | triphenyl phosphite | H315, H319, H400, H410 | — | H315:5.0%; H319:5.0% | CLP00 |
+| 101-02-0 | triphenyl phosphite | H315, H319, H400, H410 | — | H315(2):≥5.0%; H319(2):≥5.0% | CLP00 |
 | 101-05-3 | anilazine (ISO); 2-chloro-N-(4,6-dichloro-1,3,5-triazin-2-yl)a... | H315, H319, H400, H410 | — | — | CLP00 |
 | 101-14-4 | 2,2'-dichloro-4,4'-methylenedianiline; 4,4'-methylene bis(2-ch... | H350, H302 **, H400, H410 | — | — | CLP00 |
 | 101-21-3 | chlorpropham (ISO); isopropyl 3-chlorocarbanilate | H351, H373 **, H411 | — | — | ATP1 |
 | 101-27-9 | barban (ISO); 4-chlorbut-2-ynyl N-(3-chlorophenyl)carbamate | H302 **, H317, H400, H410 | — | — | CLP00 |
 | 101-31-5 | hyoscyamine | H330 **, H300 ** | — | — | CLP00 |
 | 101-61-1 | N,N,N',N'-tetramethyl-4,4'-methylendianiline | H350, H400, H410 | — | — | CLP00 |
-| 101-68-8 | 4,4'-methylenediphenyl diisocyanate; diphenylmethane-4,4'-diis... | H351, H332 **, H335, H373 **, H315, H319, H334, H317 | — | H319:5.0%; H315:5.0%; H334:0.1%; H335:5.0% | ATP1 |
-| 101-72-4 | N-isopropyl-N'-phenyl-p-phenylenediamine | H302 **, H317, H400, H410 | — | H317:0.1% | CLP00 |
+| 101-68-8 | 4,4'-methylenediphenyl diisocyanate; diphenylmethane-4,4'-diis... | H351, H332 **, H335, H373 **, H315, H319, H334, H317 | — | H319(2):≥5.0%; H315(2):≥5.0%; H334:≥0.1%; H335(... | ATP1 |
+| 101-72-4 | N-isopropyl-N'-phenyl-p-phenylenediamine | H302 **, H317, H400, H410 | — | H317(1):≥0.1% | CLP00 |
 | 101-77-9 | 4,4'-diaminodiphenylmethane; 4,4'-methylenedianiline | H350, H341, H370 **, H373 **, H317, H411 | — | — | CLP00 |
 | 101-80-4 | 4,4'-oxydianiline and its salts; p-aminophenyl ether | H350, H340, H361f **, H331 **, H311 **, H301 **, H411 | — | — | CLP00 |
 | 101-83-7 | dicyclohexylamine | H302 **, H314, H400, H410 | — | — | CLP00 |
 | 101-90-6 | m-bis(2,3-epoxypropoxy)benzene; resorcinol diglycidyl ether | H350, H341, H311, H302, H315, H319, H317, H412 | — | — | ATP15 |
 | 10101-96-9 | nickel(II) selenite | H350i, H372 **, H334, H317, H400, H410 | — | — | ATP1 |
 | 10102-18-8 | sodium selenite | H300 **, H331 **, H317, H411 | — | — | CLP00 |
-| 10102-44-0 | nitrogen dioxide [1] dinitrogen tetraoxide  [2] | H270, H330 **, H314 | — | H335:0.5% | ATP1 |
-| 10108-64-2 | cadmium chloride | H350, H340, H360FD, H330 **, H301 **, H372 **, H400, H410 | — | H350:0.01%; H372:7.0%; H373:0.1% | CLP00 |
+| 10102-44-0 | nitrogen dioxide [1] dinitrogen tetraoxide  [2] | H270, H330 **, H314 | — | H335(3):≥0.5% | ATP1 |
+| 10108-64-2 | cadmium chloride | H350, H340, H360FD, H330 **, H301 **, H372 **, H400, H410 | — | H350:≥0.01%; H372:≥7.0%; H373:0.1–7.0% | CLP00 |
 | 10112-91-1 | dimercury dichloride; mercurous chloride; calomel | H302 **, H335, H315, H319, H400, H410 | — | — | CLP00 |
 | 101200-48-0 | tribenuron-methyl (ISO); methyl 2-[N-(4-methoxy-6-methyl-1,3,5... | H373, H317, H400, H410 | Akut=100 | — | ATP15 |
 | 101205-02-1 | cycloxydim (ISO); 2-(N-ethoxybutanimidoyl)-3-hydroxy-5-(tetrah... | H361d | — | — | ATP6 |
 | 101226-85-1 | trans-methyl-2-ethyl-but-2-enoate | H226 | — | — | ATP1 |
-| 10124-36-4 | cadmium sulphate | H350, H340, H360FD, H330 **, H301 **, H372 **, H400, H410 | — | H350:0.01%; H372:7.0%; H373:0.1% | CLP00 |
-| 10124-43-3 | cobalt sulfate | H350i, H341, H360F **, H302 **, H334, H317, H400, H410 | Akut=10 | H350i:0.01% | ATP1 |
+| 10124-36-4 | cadmium sulphate | H350, H340, H360FD, H330 **, H301 **, H372 **, H400, H410 | — | H350:≥0.01%; H372:≥7.0%; H373:0.1–7.0% | CLP00 |
+| 10124-43-3 | cobalt sulfate | H350i, H341, H360F **, H302 **, H334, H317, H400, H410 | Akut=10 | H350i:≥0.01% | ATP1 |
 | 101316-45-4 | Absorption oils, bicyclo arom. and heterocyclic hydrocarbon fr... | H350 | — | — | CLP00 |
 | 101316-49-8 | Distillates (coal tar), pitch; Heavy Anthracene Oil; [The oil ... | H350 | — | — | CLP00 |
 | 101316-56-7 | Distillates (petroleum), C7-9, C8-rich, hydrodesulfurized dear... | H350, H340, H304 | — | — | ATP1 |
@@ -123,7 +123,7 @@
 | 1014-69-3 | desmetryne (ISO); 6-isopropylamino-2-methylamino-4-methylthio-... | H312 **, H302 **, H400, H410 | — | — | CLP00 |
 | 1014-70-6 | simetryn (ISO); 2,4-bis(ethylamino)-6-methylthio-1,3,5-triazine | H302 **, H400, H410 | — | — | CLP00 |
 | 101408-30-4 | reaction mass of compounds from (dodecakis(p-tolylthio)phthalo... | H317 | — | — | CLP00 |
-| 10141-05-6 | cobalt dinitrate | H350i, H341, H360F **, H334, H317, H400, H410 | Akut=10 | H350i:0.01% | ATP1 |
+| 10141-05-6 | cobalt dinitrate | H350i, H341, H360F **, H334, H317, H400, H410 | Akut=10 | H350i:≥0.01% | ATP1 |
 | 101463-69-8 | flufenoxuron (ISO); 1-(4-(2-cloro-α,α,α-p-trifluorotolyloxy)-2... | H362, H400, H410 | Akut=10000 | — | ATP5 |
 | 101513-70-6 | 3,5-dichloro-2,4-difluorobenzoyl fluoride | H331 **, H302 **, H314, H317, H412 | — | — | CLP00 |
 | 101631-13-4 | Distillates (petroleum), catalytic cracked heavy tar light; Cr... | H304 | — | — | CLP00 |
@@ -176,8 +176,8 @@
 | 103112-35-2 | ethyl 1-(2,4-dichlorophenyl)-5-(trichloromethyl)-1H-1,2,4-tria... | H350, H400, H410 | — | — | ATP1 |
 | 103122-66-3 | O-isobutyl-N-ethoxy carbonylthiocarbamate | H226, H350, H340, H302 **, H373 **, H317, H411 | — | — | ATP1 |
 | 103146-25-4 | (R,S)-4-(4-dimethylamino-1-(4-fluorophenyl)-1-hydroxybutyl)-3-... | H302 **, H317, H411 | — | — | ATP1 |
-| 10325-94-7 | cadmium nitrate; cadmium dinitrate | H350, H340, H332 **, H312 **, H302 **, H372(kidney,_bone), H400, H410 | — | H350:0.01% | ATP10 |
-| 10332-33-9 | perboric acid, sodium salt [1] perboric acid, sodium salt, mon... | H272, H360FD, H331, H302, H335, H318 | — | H318:22.0%; H319:14.0% | — |
+| 10325-94-7 | cadmium nitrate; cadmium dinitrate | H350, H340, H332 **, H312 **, H302 **, H372(kidney,_bone), H400, H410 | — | H350:≥0.01% | ATP10 |
+| 10332-33-9 | perboric acid, sodium salt [1] perboric acid, sodium salt, mon... | H272, H360FD, H331, H302, H335, H318 | — | H318(1):≥22.0%; H319(2):≥14.0% | — |
 | 103361-09-7 | flumioxazin (ISO); N-(7-fluoro-3,4-dihydro- 3-oxo-4-prop- 2-yn... | H361d, H400, H410 | Akut=1000 | — | ATP17 |
 | 1034-01-1 | octyl 3,4,5-trihydroxybenzoate | H302 **, H317 | — | — | CLP00 |
 | 10357-99-0 | N,N-dimethyl-2-(3-(4-chlorophenyl)-4,5-dihydropyrazol-1-ylphen... | H373 **, H317, H411 | — | — | CLP00 |
@@ -188,10 +188,10 @@
 | 10381-36-9 | nickel hydrogen phosphate [1] nickel bis(dihydrogen phosphate)... | H350i, H372 **, H334, H317, H400, H410 | — | — | ATP02 |
 | 103976-28-9 | diethyl[(p-ethoxyanilino)methylene]malonate | H302 **, H411 | — | — | ATP1 |
 | 104-12-1 | 4-chlorophenylisocyanate | H330 **, H302 **, H335, H315, H318, H334, H400, H410 | — | — | ATP1 |
-| 104-15-4 | p-toluenesulphonic acid (containing a maximum of 5 % H2SO4) | H335, H315, H319 | — | H335:20.0% | CLP00 |
-| 104-55-2 | cinnamaldehyde; 3-phenylprop-2-enal;  cinnamic aldehyde; cinna... | H317 | — | H317:0.01% | ATP21 |
+| 104-15-4 | p-toluenesulphonic acid (containing a maximum of 5 % H2SO4) | H335, H315, H319 | — | H335(3):≥20.0% | CLP00 |
+| 104-55-2 | cinnamaldehyde; 3-phenylprop-2-enal;  cinnamic aldehyde; cinna... | H317 | — | H317(1):≥0.01% | ATP21 |
 | 104-78-9 | 3-aminopropyldiethylamine; N,N-diethyl-1,3-diaminopropane | H226, H312 **, H302 **, H314, H317 | — | — | CLP00 |
-| 104-80-3 | tetrahydrofuran-2,5-diyldimethanol | H335, H315, H319 | — | H335:10.0% | CLP00 |
+| 104-80-3 | tetrahydrofuran-2,5-diyldimethanol | H335, H315, H319 | — | H335(3):≥10.0% | CLP00 |
 | 104-91-6 | 4-nitrosophenol | H341, H302 **, H318, H411 | — | — | CLP00 |
 | 104-94-9 | p-anisidine; 4-methoxyaniline | H310, H330 **, H300 **, H373 **, H400 | — | — | CLP00 |
 | 10403-74-4 | 1,2-bis(phenoxymethyl)benzene | H400, H410 | — | — | ATP1 |
@@ -210,9 +210,9 @@
 | 104558-95-4 | reaction mass of: thiobis(4,1-phenylene)-S,S,S',S'-tetraphenyl... | H319, H317, H400, H410 | — | — | CLP00 |
 | 104560-40-9 | N,N,N',N'-tetracyclohexyl-1,3-benzenedicarboxamide | H400, H410 | — | — | ATP1 |
 | 10461-98-0 | 2-cyclohexylidene-2-phenylacetonitrile | H302 **, H411 | — | — | ATP1 |
-| 104653-34-1 | difethialone (ISO); 3-[3-(4′-bromobiphenyl-4-yl)-1,2,3,4-tetra... | H360D, H330, H310, H300, H372(blood), H400, H410 | Akut=100 | H360D:0.003%; H372:0.02%; H373:0.002% | ATP9 |
+| 104653-34-1 | difethialone (ISO); 3-[3-(4′-bromobiphenyl-4-yl)-1,2,3,4-tetra... | H360D, H330, H310, H300, H372(blood), H400, H410 | Akut=100 | H360D:≥0.003%; H372:≥0.02%; H373:0.002–0.02% | ATP9 |
 | 104788-63-8 | 6-(nonylamino)-6-oxo-peroxyhexanoic acid | H242 **, H318, H317, H400 | — | — | CLP00 |
-| 10486-00-7 | perboric acid (H3BO2(O2)), monosodium salt trihydrate [1] perb... | H360FD, H332, H335, H318 | — | H318:36.0%; H319:22.0% | — |
+| 10486-00-7 | perboric acid (H3BO2(O2)), monosodium salt trihydrate [1] perb... | H360FD, H332, H335, H318 | — | H318(1):≥36.0%; H319(2):≥22.0% | — |
 | 104860-26-6 | cis-1-(3-(4-fluorophenoxy)propyl)-3-methoxy-4-piperidinamine | H312 **, H302 **, H373 **, H318, H400, H410 | — | — | ATP1 |
 | 104872-06-2 | (3S,4S)-3-hexyl-4-[(R)-2-hydroxytridecyl]-2-oxetanone | H400, H410 | — | — | CLP00 |
 | 104958-67-0 | N-butyl-2-(4-morpholinylcarbonyl)benzamide | H319, H317, H412 | — | — | CLP00 |
@@ -234,17 +234,17 @@
 | 105043-55-8 | 3-methyl-N-(5,8,13,14-tetrahydro-5,8,14-trioxonaphth[2,3-c]acr... | H413 | — | — | ATP1 |
 | 105076-77-5 | N-(5-(bis(2-methoxyethyl)amino)-2-((5-nitro-2,1-benzisothiazol... | H413 | — | — | CLP00 |
 | 105254-85-1 | 3-(bis(2-ethylhexyl)aminomethyl)benzothiazole-2(3H)-thione | H314, H317, H400, H410 | — | — | CLP00 |
-| 10544-72-6 | nitrogen dioxide [1] dinitrogen tetraoxide [2] | H270, H330, H314 | — | H335:0.5% | ATP01 |
-| 10545-99-0 | sulphur dichloride | H335, H314, H400 | — | H335:5.0% | CLP00 |
+| 10544-72-6 | nitrogen dioxide [1] dinitrogen tetraoxide [2] | H270, H330, H314 | — | H335(3):≥0.5% | ATP01 |
+| 10545-99-0 | sulphur dichloride | H335, H314, H400 | — | H335(3):≥5.0% | CLP00 |
 | 105488-33-3 | 3-(3-(4-(2,4-bis(1,1-dimethylpropyl)phenoxy)butylaminocarbonyl... | H413 | — | — | CLP00 |
 | 10551-42-5 | 1-(3-phenylpropyl)-2-methylpyridinium bromide | H302 **, H319, H412 | — | — | CLP00 |
-| 105512-06-9 | clodinafop-propargyl (ISO) | H302 **, H373 **, H317, H400, H410 | Akut=1 | H317:0.001% | ATP1 |
+| 105512-06-9 | clodinafop-propargyl (ISO) | H302 **, H373 **, H317, H400, H410 | Akut=1 | H317(1):≥0.001% | ATP1 |
 | 105560-93-8 | methyl 2R,3S-(-)-3-(4-methoxyphenyl)oxiranecarboxylate | H318, H317, H412 | — | — | CLP00 |
 | 105726-67-8 | methyl neodecanamide | H302 ** | — | — | ATP1 |
 | 105812-81-5 | (-)-trans-4-(4'-fluorophenyl)-3-hydroxymethyl-N-methylpiperidine | H302 **, H318, H411 | — | — | CLP00 |
 | 105813-13-6 | (-)(3S,4R)-4-(4-fluorophenyl)-3-(3,4-methylenedioxy-phenoxymet... | H302 **, H317, H400, H410 | — | — | ATP1 |
 | 105827-91-6 | 2-chloro-5-chloromethylthiazole | H311 **, H302 **, H314, H317, H411 | — | — | ATP1 |
-| 10588-01-9 | sodium dichromate | H272, H350, H340, H360FD, H330 **, H301 **, H312 **, H372 **, H314, H334, H317, H400, H410 | — | H335:5.0%; H334:0.2%; H317:0.2% | ATP1 |
+| 10588-01-9 | sodium dichromate | H272, H350, H340, H360FD, H330 **, H301 **, H312 **, H372 **, H314, H334, H317, H400, H410 | — | H335(3):≥5.0%; H334:≥0.2%; H317(1):≥0.2% | ATP1 |
 | 10591-85-2 | tetrakis(phenylmethyl)thioperoxydi(carbothioamide) | H413 | — | — | CLP00 |
 | 10596-22-2 | tetrapropan-2-yl (dichloromethanediyl)bis(phosphonate) | H302 **, H319, H317 | — | — | ATP1 |
 | 105996-54-1 | N,N'-bis(trifluoroacetyl)-S,S'-bis L-homocysteine | H318, H317 | — | — | CLP00 |
@@ -265,7 +265,7 @@
 | 106-87-6 | 7-oxa-3-oxiranylbicyclo [4.1.0]heptane; 1,2-epoxy- 4-epoxyethy... | H350, H341, H360F, H331, H302 | — | — | ATP17 |
 | 106-88-7 | 1,2-epoxybutane | H225, H351, H332 **, H312 **, H302 **, H335, H315, H319 | — | — | ATP7 |
 | 106-89-8 | 1-chloro-2,3-epoxypropane; epichlorhydrin | H226, H350, H331 **, H311 **, H301 **, H314, H317 | — | — | CLP00 |
-| 106-90-1 | 2,3-epoxypropyl acrylate; glycidyl acrylate | H331 **, H311 **, H301 **, H314, H317 | — | H317:0.2% | CLP00 |
+| 106-90-1 | 2,3-epoxypropyl acrylate; glycidyl acrylate | H331 **, H311 **, H301 **, H314, H317 | — | H317(1):≥0.2% | CLP00 |
 | 106-91-2 | 2,3-epoxypropyl methacrylate; glycidyl methacrylate | H350, H341, H360F, H311, H302, H335, H372(respiratory_tract), H314, H318, H317 | — | — | ATP10 |
 | 106-92-3 | allyl glycidyl ether; allyl 2,3-epoxypropyl ether; prop-2-en-1... | H226, H351, H341, H361f **, H332 **, H302 **, H335, H315, H318, H317, H412 | — | — | CLP00 |
 | 106-93-4 | 1,2-dibromoethane | H350, H331 **, H311 **, H301 **, H335, H315, H319, H411 | — | — | CLP00 |
@@ -290,7 +290,7 @@
 | 106917-31-1 | 1-acetyl-4-(3-dodecyl-2,5-dioxo-1-pyrrolidinyl)-2,2,6,6-tetram... | H315, H317, H400, H410 | — | — | ATP1 |
 | 106990-43-6 | N,N,N,N-tetrakis(4,6-bis(butyl-(N-methyl-2,2,6,6-tetramethylpi... | H317, H411 | — | — | CLP00 |
 | 107-01-7 | but-1-ene [1] butene, mixed-1-and-2-isomers [2] 2-methylpropen... | H220 | — | — | CLP00 |
-| 107-02-8 | acrolein; prop-2-enal; acrylaldehyde | H225, H330, H300, H311, H314, H400, H410 | Akut=100 | H314:0.1% | ATP6 |
+| 107-02-8 | acrolein; prop-2-enal; acrylaldehyde | H225, H330, H300, H311, H314, H400, H410 | Akut=100 | H314(1B):≥0.1% | ATP6 |
 | 107-05-1 | 3-chloropropene; allyl chloride | H225, H351, H341, H332 **, H312 **, H302 **, H335, H373 **, H315, H319, H400 | — | — | CLP00 |
 | 107-06-2 | 1,2-dichloroethane; ethylene dichloride | H225, H350, H302 **, H335, H315, H319 | — | — | CLP00 |
 | 107-07-3 | 2-chloroethanol; ethylene chlorohydrin | H310, H330 **, H300 ** | — | — | CLP00 |
@@ -300,7 +300,7 @@
 | 107-15-3 | ethylenediamine; 1,2-diaminoethane | H226, H312 **, H302 **, H314, H334, H317 | — | — | CLP00 |
 | 107-18-6 | allyl alcohol | H225, H331 **, H311 **, H301 **, H335, H315, H319, H400 | — | — | CLP00 |
 | 107-19-7 | prop-2-yn-1-ol; propargyl alcohol | H226, H331 **, H311 **, H301 **, H314, H411 | — | — | CLP00 |
-| 107-20-0 | chloroacetaldehyde | H351, H330 **, H311 **, H301 **, H314, H400 | — | H335:5.0% | CLP00 |
+| 107-20-0 | chloroacetaldehyde | H351, H330 **, H311 **, H301 **, H314, H400 | — | H335(3):≥5.0% | CLP00 |
 | 107-21-1 | ethanediol; ethylene glycol | H302 ** | — | — | CLP00 |
 | 107-22-2 | glyoxal … %; ethandial … % | H341, H332 **, H315, H319, H317 | — | — | CLP00 |
 | 107-25-5 | methyl vinyl ether | H220 | — | — | CLP00 |
@@ -318,7 +318,7 @@
 | 1070-70-8 | tetramethylene diacrylate; 1,4-butyleneglycol diacrylate | H312 **, H314, H317 | — | — | CLP00 |
 | 1071-83-6 | glyphosate (ISO); N-(phosphonomethyl)glycine | H318, H411 | — | — | ATP22 |
 | 107144-30-9 | 4-(4,4-dimethyl-3-oxo-pyrazolidin-1-yl)-benzoic acid | H302 **, H411 | — | — | CLP00 |
-| 1072-63-5 | 1-vinylimidazole | H360D | — | H360D:0.03% | ATP13 |
+| 1072-63-5 | 1-vinylimidazole | H360D | — | H360D:≥0.03% | ATP13 |
 | 107246-80-0 | tetralithium 6-amino-4-hydroxy-3-[7-sulfonato-4-(5-sulfonato-2... | H411 | — | — | ATP1 |
 | 1072957-71-1 | benzovindiflupyr (ISO); N-[9-(dichloromethylene)-1,2,3,4-tetra... | H331, H301, H400, H410 | Akut=100 | — | ATP9 |
 | 1075-89-4 | 8-azaspiro[4.5]decane-7,9-dione | H301 **, H411 | — | — | ATP1 |
@@ -329,19 +329,19 @@
 | 107898-54-4 | (±) trans-3,3-dimethyl-5-(2,2,3-trimethyl-cyclopent-3-en-1-yl)... | H315, H400, H410 | — | — | CLP00 |
 | 107934-68-9 | 4,4'-(9H-fluoren-9-ylidene)bis(2-chloroaniline) | H411 | — | — | CLP00 |
 | 108-00-9 | 2-aminoethyldimethylamine; 2-dimethylaminoethylamine | H225, H312 **, H302 **, H314 | — | — | CLP00 |
-| 108-01-0 | 2-dimethylaminoethanol; N,N-dimethylethanolamine | H226, H332 **, H312 **, H302 **, H314 | — | H335:5.0% | CLP00 |
+| 108-01-0 | 2-dimethylaminoethanol; N,N-dimethylethanolamine | H226, H332 **, H312 **, H302 **, H314 | — | H335(3):≥5.0% | CLP00 |
 | 108-03-2 | 1-nitropropane | H226, H332 **, H312 **, H302 ** | — | — | CLP00 |
 | 108-05-4 | vinyl acetate | H225, H351, H332, H335 | — | — | ATP5 |
 | 108-08-7 | heptane; n-heptane [1] 2,4-dimethylpentane [2] 2,2,3-trimethyl... | H225, H304, H336, H315, H400, H410 | — | — | ATP01 |
 | 108-10-1 | 4-methylpentan-2-one; isobutyl methyl ketone | H225, H351, H332, H336, H319 | — | — | ATP17 |
-| 108-11-2 | 4-methylpentan-2-ol; methyl isobutyl carbinol | H226, H335 | — | H335:25.0% | CLP00 |
+| 108-11-2 | 4-methylpentan-2-ol; methyl isobutyl carbinol | H226, H335 | — | H335(3):≥25.0% | CLP00 |
 | 108-16-7 | 1-dimethylaminopropan-2-ol; dimepranol (INN) | H226, H302 **, H314 | — | — | CLP00 |
-| 108-18-9 | diisopropylamine | H225, H332 **, H302 **, H314 | — | H335:5.0% | CLP00 |
+| 108-18-9 | diisopropylamine | H225, H332 **, H302 **, H314 | — | H335(3):≥5.0% | CLP00 |
 | 108-20-3 | diisopropyl ether [1] dipropyl ether  [2] | H225, H336 | — | — | CLP00 |
 | 108-21-4 | propyl acetate [1] isopropyl acetate [2] | H225, H336, H319 | — | — | CLP00 |
-| 108-24-7 | acetic anhydride | H226, H332 **, H302 **, H314 | — | H314:25.0%; H315:5.0%; H318:5.0%; H319:1.0%; H3... | CLP00 |
+| 108-24-7 | acetic anhydride | H226, H332 **, H302 **, H314 | — | H314(1B):≥25.0%; H315(2):5.0–25.0%; H318(1):5.0... | CLP00 |
 | 108-30-5 | succinic anhydride | H302, H314, H318, H334, H317 | — | — | ATP13 |
-| 108-31-6 | maleic anhydride | H302, H372(respiratory_system,_inhalation), H314, H318, H334, H317 | — | H317:0.001% | ATP13 |
+| 108-31-6 | maleic anhydride | H302, H372(respiratory_system,_inhalation), H314, H318, H334, H317 | — | H317(1):≥0.001% | ATP13 |
 | 108-32-7 | propylene carbonate | H319 | — | — | CLP00 |
 | 108-34-9 | pyrazoxon; diethyl 3-methylpyrazol-5-yl phosphate | H310, H330 **, H300 ** | — | — | CLP00 |
 | 108-38-3 | o-xylene [1] p-xylene [2] m-xylene [3] xylene [4] | H226, H332, H312, H315 | — | — | CLP00 |
@@ -353,11 +353,11 @@
 | 108-46-3 | resorcinol; 1,3-benzenediol | H302, H370(nervous_system), H315, H319, H317, H400 | Akut=1 | — | ATP21 |
 | 108-62-3 | metaldehyde (ISO); 2,4,6,8-tetramethyl- 1,3,5,7-tetraoxacycloo... | H228, H361f, H301, H412 | — | — | ATP14 |
 | 108-65-6 | 2-methoxy-1-methylethyl acetate | H226 | — | — | ATP1 |
-| 108-67-8 | mesitylene; 1,3,5-trimethylbenzene | H226, H335, H411 | — | H335:25.0% | CLP00 |
+| 108-67-8 | mesitylene; 1,3,5-trimethylbenzene | H226, H335, H411 | — | H335(3):≥25.0% | CLP00 |
 | 108-68-9 | 3,5-xylenol; 3,5-dimethylphenol | H311 **, H301 **, H314 | — | — | CLP00 |
-| 108-77-0 | 2,4,6-trichloro-1,3,5-triazine; cyanuric chloride | H330 **, H302 **, H314, H317 | — | H335:5.0% | CLP00 |
+| 108-77-0 | 2,4,6-trichloro-1,3,5-triazine; cyanuric chloride | H330 **, H302 **, H314, H317 | — | H335(3):≥5.0% | CLP00 |
 | 108-78-1 | 1,3,5-triazine-2,4,6-triamine;  melamine | H351, H373(urinary_tract) | — | — | ATP18 |
-| 108-83-8 | 2,6-dimethylheptan-4-one; di-isobutyl ketone | H226, H335 | — | H335:10.0% | CLP00 |
+| 108-83-8 | 2,6-dimethylheptan-4-one; di-isobutyl ketone | H226, H335 | — | H335(3):≥10.0% | CLP00 |
 | 108-86-1 | bromobenzene | H226, H315, H411 | — | — | CLP00 |
 | 108-87-2 | methylcyclohexane | H225, H304, H336, H315, H411 | — | — | CLP00 |
 | 108-88-3 | toluene | H225, H361d **, H304, H336, H373 **, H315 | — | — | CLP00 |
@@ -366,7 +366,7 @@
 | 108-91-8 | cyclohexylamine | H226, H361f **, H312 **, H302 **, H314 | — | — | ATP1 |
 | 108-93-0 | cyclohexanol | H332 **, H302 **, H335, H315 | — | — | CLP00 |
 | 108-94-1 | cyclohexanone | H226, H332 ** | — | — | CLP00 |
-| 108-95-2 | phenol; carbolic acid; monohydroxybenzene; phenylalcohol | H341, H331 **, H311 **, H301 **, H373 **, H314 | — | H314:3.0%; H315:1.0%; H319:1.0% | CLP00 |
+| 108-95-2 | phenol; carbolic acid; monohydroxybenzene; phenylalcohol | H341, H331 **, H311 **, H301 **, H373 **, H314 | — | H314(1B):≥3.0%; H315(2):1.0–3.0%; H319(2):1.0–3.0% | CLP00 |
 | 108173-90-6 | guazatine (ISO) | H330 **, H312 **, H302 **, H335, H315, H318, H400, H410 | — | — | CLP00 |
 | 108225-03-2 | (6-(4-hydroxy-3-(2-methoxyphenylazo)-2-sulfonato-7-naphthylami... | H350, H318, H411 | — | — | CLP00 |
 | 1085-98-9 | dichlofluanid (ISO); N-[(dichlorofluoromethyl)thio]-N′,N′-dime... | H332, H319, H317, H400 | Akut=10 | — | ATP10 |
@@ -382,15 +382,15 @@
 | 109-61-5 | propyl chloroformate; chloroformic acid propylester; n-propyl ... | H225, H331 **, H314 | — | — | ATP1 |
 | 109-66-0 | pentane | H225, H304, H336, H411 | — | — | CLP00 |
 | 109-69-3 | 1-chlorobutane; butyl chloride | H225 | — | — | CLP00 |
-| 109-73-9 | butylamine | H225, H332 **, H312 **, H302 **, H314 | — | H335:1.0% | CLP00 |
+| 109-73-9 | butylamine | H225, H332 **, H312 **, H302 **, H314 | — | H335(3):≥1.0% | CLP00 |
 | 109-74-0 | n-butyronitrile | H225, H331 **, H311 **, H301 ** | — | — | ATP1 |
 | 109-77-3 | malononitrile | H331 **, H311 **, H301 **, H400, H410 | — | — | CLP00 |
-| 109-83-1 | 2-methylaminoethanol; N-methylethanolamine; N-methyl-2-ethanol... | H312 **, H302 **, H314 | — | H335:5.0% | CLP00 |
+| 109-83-1 | 2-methylaminoethanol; N-methylethanolamine; N-methyl-2-ethanol... | H312 **, H302 **, H314 | — | H335(3):≥5.0% | CLP00 |
 | 109-86-4 | 2-methoxyethanol; ethylene glycol monomethyl ether | H226, H360FD, H332 **, H312 **, H302 ** | — | — | CLP00 |
-| 109-89-7 | diethylamine | H225, H332 **, H312 **, H302 **, H314 | — | H335:1.0% | CLP00 |
+| 109-89-7 | diethylamine | H225, H332 **, H312 **, H302 **, H314 | — | H335(3):≥1.0% | CLP00 |
 | 109-94-4 | ethyl formate | H225, H332 **, H302 **, H335, H319 | — | — | CLP00 |
 | 109-95-5 | ethyl nitrite | H220, H332 **, H312 **, H302 ** | — | — | CLP00 |
-| 109-99-9 | tetrahydrofuran | H225, H351, H335, H319 | — | H335:25.0%; H319:25.0% | ATP3 |
+| 109-99-9 | tetrahydrofuran | H225, H351, H335, H319 | — | H335(3):≥25.0%; H319(2):≥25.0% | ATP3 |
 | 109125-51-1 | ammonium bis(1-(3,5-dinitro-2-oxidophenylazo)-3-(N-phenylcarba... | H242 **, H400, H410 | — | — | CLP00 |
 | 109125-56-6 | tetrasodium 10-amino-6,13-dichloro-3-(3-(4-(2,5-disulfonatoani... | H318 | — | — | CLP00 |
 | 109678-33-3 | 2,2,6,6-tetrakis(bromomethyl)-4-oxaheptane-1,7-diol | H317, H411 | — | — | CLP00 |
@@ -399,7 +399,7 @@
 | 110-01-0 | tetrahydrothiophene | H225, H332 **, H312 **, H302 **, H315, H319, H412 | — | — | CLP00 |
 | 110-05-4 | di-tert-butyl peroxide | H225, H242, H341 | — | — | ATP3 |
 | 110-12-3 | 5-methylhexan-2-one; isoamyl methyl ketone | H226, H332 ** | — | — | CLP00 |
-| 110-16-7 | maleic acid | H302 **, H335, H315, H319, H317 | — | H317:0.1% | ATP1 |
+| 110-16-7 | maleic acid | H302 **, H335, H315, H319, H317 | — | H317(1):≥0.1% | ATP1 |
 | 110-17-8 | fumaric acid | H319 | — | — | CLP00 |
 | 110-18-9 | N,N,N',N'-tetramethylethylenediamine | H225, H332 **, H302 **, H314 | — | — | CLP00 |
 | 110-19-0 | sec-butyl acetate [1] isobutyl acetate [2] tert-butyl acetate [3] | H225 | — | — | CLP00 |
@@ -409,7 +409,7 @@
 | 110-46-3 | pentyl nitrite [1] â€˜amyl nitriteâ€™, mixed isomers [2] | H225, H332, H302 | — | — | CLP00 |
 | 110-49-6 | 2-methoxyethyl acetate; methylglycol acetate | H360FD, H332 **, H312 **, H302 ** | — | — | CLP00 |
 | 110-54-3 | n-hexane | H225, H361f **, H304, H336, H372(nervous_system), H315, H411 | — | — | ATP22 |
-| 110-65-6 | but-2-yne-1,4-diol; 2-butyne-1,4-diol | H331 **, H301 **, H312 **, H373 **, H314, H317 | — | H314:50.0%; H315:25.0%; H319:25.0% | CLP00 |
+| 110-65-6 | but-2-yne-1,4-diol; 2-butyne-1,4-diol | H331 **, H301 **, H312 **, H373 **, H314, H317 | — | H314(1B):≥50.0%; H315(2):25.0–50.0%; H319(2):25... | CLP00 |
 | 110-69-0 | butyraldehyde oxime | H311 **, H302 **, H319 | — | — | CLP00 |
 | 110-71-4 | 1,2-dimethoxyethane; ethylene glycol dimethyl ether; EGDME | H225, H360FD, H332 ** | — | — | CLP00 |
 | 110-74-7 | propyl formate [1] isopropyl formate  [2] | H225, H335, H336, H319 | — | — | CLP00 |
@@ -437,9 +437,9 @@
 | 111-14-8 | heptanoic acid | H314 | — | — | CLP00 |
 | 111-15-9 | 2-ethoxyethyl acetate; ethylglycol acetate | H226, H360FD, H332 **, H312 **, H302 ** | — | — | ATP1 |
 | 111-27-3 | hexan-1-ol | H302 ** | — | — | CLP00 |
-| 111-30-8 | glutaral; glutaraldehyde; 1,5-pentanedial | H330, H301, H335, H314, H334, H317, H400, H411 | Akut=1 | H335:0.5% | ATP9 |
+| 111-30-8 | glutaral; glutaraldehyde; 1,5-pentanedial | H330, H301, H335, H314, H334, H317, H400, H411 | Akut=1 | H335(3):0.5–5.0% | ATP9 |
 | 111-40-0 | 2,2'-iminodiethylamine; diethylenetriamine | H312 **, H302 **, H314, H317 | — | — | CLP00 |
-| 111-41-1 | 2-(2-aminoethylamino)ethanol; (AEEA) | H360Df, H314, H317 | — | H335:5.0% | ATP1 |
+| 111-41-1 | 2-(2-aminoethylamino)ethanol; (AEEA) | H360Df, H314, H317 | — | H335(3):≥5.0% | ATP1 |
 | 111-42-2 | 2,2'-iminodiethanol; diethanolamine | H302 **, H373 **, H315, H318 | — | — | CLP00 |
 | 111-43-3 | diisopropyl ether [1] dipropyl ether [2] | H225, H336 | — | — | CLP00 |
 | 111-44-4 | bis(2-chloroethyl) ether | H351, H310, H330 **, H300 ** | — | — | ATP1 |
@@ -447,7 +447,7 @@
 | 111-48-8 | 2,2'-thiodiethanol; thiodiglycol | H319 | — | — | CLP00 |
 | 111-65-9 | octane; n-octane [1] 2,2,4-trimethylpentane [2] 2,3,3-trimethy... | H225, H304, H336, H315, H400, H410 | — | — | ATP1 |
 | 111-76-2 | 2-butoxyethanol; ethylene glycol monobutyl ether | H331, H302, H315, H319 | — | — | ATP18 |
-| 111-77-3 | 2-(2-methoxyethoxy)ethanol; diethylene glycol monomethyl ether | H360D | — | H360D:3.0% | ATP18 |
+| 111-77-3 | 2-(2-methoxyethoxy)ethanol; diethylene glycol monomethyl ether | H360D | — | H360D:≥3.0% | ATP18 |
 | 111-92-2 | di-n-butylamine | H226, H330, H311, H301, H314, H318 | — | — | ATP21 |
 | 111-96-6 | bis(2-methoxyethyl) ether | H226, H360FD | — | — | CLP00 |
 | 1111-67-7 | copper thiocyanate | H400, H410 | Akut=10 | — | ATP17 |
@@ -457,9 +457,9 @@
 | 111244-14-5 | N-[3-(2,4-di-(1,1-dimethyl-propyl)phenoxy)-propyl]-1-hydroxy-5... | H413 | — | — | ATP1 |
 | 111298-82-9 | 7-amino-3-((5-carboxymethyl-4-methyl-1,3-thiazol-2-ylthio)meth... | H334, H317, H412 | — | — | CLP00 |
 | 1113-02-6 | omethoate (ISO); O,O-dimethyl S-methylcarbamoylmethyl phosphor... | H301 **, H312 **, H400 | — | — | CLP00 |
-| 11132-10-8 | nickel difluoride [1] nickel dibromide [2] nickel diiodide [3]... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 11132-10-8 | nickel difluoride [1] nickel dibromide [2] nickel diiodide [3]... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 111337-53-2 | lithium 3-oxo-1,2(2H)-benzisothiazol-2-ide | H302 **, H314, H317, H411 | — | — | CLP00 |
-| 11138-47-9 | perboric acid, sodium salt [1] perboric acid, sodium salt, mon... | H272, H360FD, H331, H302, H335, H318 | — | H318:22.0%; H319:14.0% | ATP22 |
+| 11138-47-9 | perboric acid, sodium salt [1] perboric acid, sodium salt, mon... | H272, H360FD, H331, H302, H335, H318 | — | H318(1):≥22.0%; H319(2):14.0–22.0% | ATP22 |
 | 111381-11-4 | reaction mass of: 2-[[4-[N-ethyl-N-(2-acetoxyethyl)amino]pheny... | H413 | — | — | CLP00 |
 | 111381-12-5 | reaction mass of: 2-[[4-[bis(2-acetoxyethyl)amino]phenyl]azo]-... | H413 | — | — | CLP00 |
 | 1114-71-2 | pebulate (ISO); N-butyl-N-ethyl-S-propylthiocarbamate | H302 **, H411 | — | — | CLP00 |
@@ -482,7 +482,7 @@
 | 112-57-2 | 3,6,9-triazaundecamethylenediamine; tetraethylenepentamine | H312 **, H302 **, H314, H317, H411 | — | — | CLP00 |
 | 112-59-4 | 2-(2-hexyloxyethoxy)ethanol; DEGHE; diethylene glycol monohexy... | H312 **, H318 | — | — | CLP00 |
 | 112-90-3 | (Z)-octadec-9-enylamine | H302, H304, H335, H373(gastro-intestinal_tract,_liver,_immune_system), H314, H400, H410 | Akut=10 | — | ATP5 |
-| 1120-71-4 | 1,3-propanesultone; 1,2-oxathiolane 2,2-dioxide | H350, H312 **, H302 ** | — | H350:0.01% | CLP00 |
+| 1120-71-4 | 1,3-propanesultone; 1,2-oxathiolane 2,2-dioxide | H350, H312 **, H302 ** | — | H350:≥0.01% | CLP00 |
 | 112006-75-4 | 2-aminosulfonyl-N,N-dimethylnicotinamide | H317, H412 | — | — | CLP00 |
 | 112193-77-8 | 1,4,7,10-tetraazacyclododecane disulfate | H302 **, H335, H318, H412 | — | — | CLP00 |
 | 112195-27-4 | 3-amino-4-hydroxy-N-(2-methoxyethyl)-benzenesulfonamide | H318, H317, H411 | — | — | CLP00 |
@@ -517,7 +517,7 @@
 | 115-10-6 | dimethyl ether | H220 | — | — | CLP00 |
 | 115-11-7 | but-1-ene [1] butene, mixed-1-and-2-isomers [2] 2-methylpropen... | H220 | — | — | CLP00 |
 | 115-26-4 | dimefox (ISO); tetramethylphosphorodiamidic fluoride | H310, H300 ** | — | — | CLP00 |
-| 115-27-5 | 1,4,5,6,7,7-hexachlorobicyclo [2,2,1]hept-5-ene-2,3-dicarboxyl... | H335, H315, H319 | — | H315:1.0%; H319:1.0%; H335:1.0% | CLP00 |
+| 115-27-5 | 1,4,5,6,7,7-hexachlorobicyclo [2,2,1]hept-5-ene-2,3-dicarboxyl... | H335, H315, H319 | — | H315(2):≥1.0%; H319(2):≥1.0%; H335(3):≥1.0% | CLP00 |
 | 115-29-7 | endosulfan (ISO); 1,2,3,4,7,7-hexachloro-8,9,10-trinorborn-2-e... | H330 **, H300 **, H312 **, H400, H410 | — | — | ATP1 |
 | 115-31-1 | 1,7,7-trimethylbicyclo(2,2,1)hept-2-yl thiocyanatoacetate; iso... | H302 **, H400, H410 | — | — | CLP00 |
 | 115-32-2 | dicofol (ISO); 2,2,2-trichloro-1,1-bis(4-chlorophenyl)ethanol | H312 **, H302 **, H315, H317, H400, H410 | — | — | CLP00 |
@@ -634,7 +634,7 @@
 | 12035-64-2 | nickel boride (NiB) [1] dinickel boride [2] trinickel boride [... | H350i, H372 **, H317, H400, H410 | — | — | ATP02 |
 | 12035-71-1 | trinickel disulfide; nickel subsulfide [1] heazlewoodite [2] | H350i, H341, H331, H372 **, H317, H400, H410 | — | — | ATP17 |
 | 12035-72-2 | trinickel disulphide; nickel subsulfide [1] heazlewoodite  [2] | H350i, H341, H331, H372 **, H317, H400, H410 | — | — | ATP17 |
-| 12040-72-1 | perboric acid, sodium salt [1] perboric acid, sodium salt, mon... | H272, H360FD, H331, H302, H335, H318 | — | H318:22.0%; H319:14.0% | — |
+| 12040-72-1 | perboric acid, sodium salt [1] perboric acid, sodium salt, mon... | H272, H360FD, H331, H302, H335, H318 | — | H318(1):≥22.0%; H319(2):≥14.0% | — |
 | 120447-91-8 | potassium 2-amino-2-methylpropionate octahydrate | H302 **, H314 | — | — | CLP00 |
 | 1205-17-0 | α-methyl-1,3-benzodioxole-5-propionaldehyde [1] (S)-α-methyl-1... | H317 | — | — | ATP22 |
 | 12054-48-7 | nickel dihydroxide [1] nickel hydroxide  [2] | H350i, H341, H360D **, H332 **, H302 **, H372 **, H315, H334, H317, H400, H410 | — | — | ATP1 |
@@ -654,7 +654,7 @@
 | 121-21-1 | 2-methyl-4-oxo-3-(penta-2,4-dienyl)cyclopent-2-enyl [1R-[1α[S*... | H332 **, H312 **, H302 **, H400, H410 | — | — | CLP00 |
 | 121-29-9 | 2-methyl-4-oxo-3-(penta-2,4-dienyl)cyclopent-2-enyl[1R-[1α[S*(... | H332 **, H312 **, H302 **, H400, H410 | — | — | CLP00 |
 | 121-43-7 | trimethyl borate | H226, H360FD, H312 ** | — | — | ATP22 |
-| 121-44-8 | triethylamine | H225, H331, H311, H301, H314, H318 | — | H335:1.0% | ATP21 |
+| 121-44-8 | triethylamine | H225, H331, H311, H301, H314, H318 | — | H335(3):≥1.0% | ATP21 |
 | 121-47-1 | 3-aminobenzene sulphonic acid; metanilic acid | H332 **, H312 **, H302 ** | — | — | CLP00 |
 | 121-57-3 | sulphanilic acid; 4-aminobenzenesulphonic acid | H315, H319, H317 | — | — | CLP00 |
 | 121-69-7 | N,N-dimethylaniline | H351, H331 **, H311 **, H301 **, H411 | — | — | CLP00 |
@@ -705,7 +705,7 @@
 | 122384-77-4 | Extract residues (coal), creosote oil acid; Wash Oil Extract R... | H350 | — | — | ATP1 |
 | 122384-78-5 | Extract residues (coal), low temp. coal atar alk.; [The residu... | H350, H340 | — | — | ATP1 |
 | 122453-73-0 | chlorfenapyr (ISO); 4-bromo-2-(4-chlorophenyl)-1-ethoxymethyl-... | H331 **, H302 **, H400, H410 | Akut=100 | — | ATP1 |
-| 12262-58-7 | 1-hydroperoxycyclohexyl 1-hydroxycyclohexyl peroxide; [â‰¤ 91 ... | H242, H302, H314 | — | H335:5.0% | CLP00 |
+| 12262-58-7 | 1-hydroperoxycyclohexyl 1-hydroxycyclohexyl peroxide; [â‰¤ 91 ... | H242, H302, H314 | — | H335(3):≥5.0% | CLP00 |
 | 122630-55-1 | dimethyl 3,3'-(N-(4-(4-bromo-2,6-dicyanophenylazo)-3-hydroxyph... | H413 | — | — | CLP00 |
 | 122665-86-5 | ethyl (3-cyanomethyl-3,4-dihydro-4-oxophthalazin-1-yl)acetate | H317, H412 | — | — | ATP1 |
 | 12267-73-1 | tetraboron disodium heptaoxide, hydrate [1] disodium tetrabora... | H360FD | — | — | ATP20 |
@@ -719,9 +719,9 @@
 | 123-31-9 | 1,4-dihydroxybenzene; hydroquinone; quinol | H351, H341, H302 **, H318, H317, H400 | Akut=10 | — | ATP1 |
 | 123-38-6 | propanal; propionaldehyde | H225, H335, H315, H319 | — | — | CLP00 |
 | 123-39-7 | N-methylformamide | H360D **, H312 ** | — | — | CLP00 |
-| 123-42-2 | 4-hydroxy-4-methylpentan-2-one; diacetone alcohol | H319 | — | H319:10.0% | CLP00 |
+| 123-42-2 | 4-hydroxy-4-methylpentan-2-one; diacetone alcohol | H319 | — | H319(2):≥10.0% | CLP00 |
 | 123-54-6 | pentane-2,4-dione; acetylacetone | H226, H302 ** | — | — | CLP00 |
-| 123-62-6 | propionic anhydride | H314 | — | H314:25.0%; H315:10.0%; H319:10.0% | CLP00 |
+| 123-62-6 | propionic anhydride | H314 | — | H314(1B):≥25.0%; H315(2):10.0–25.0%; H319(2):10... | CLP00 |
 | 123-63-7 | 2,4,6-trimethyl-1,3,5-trioxane; paraldehyde | H226 | — | — | ATP1 |
 | 123-72-8 | butyraldehyde | H225 | — | — | CLP00 |
 | 123-73-9 | crotonaldehyde; 2-butenal [1] (E)-2-butenal; (E)-crotonaldehyd... | H225, H341, H330, H311, H301, H335, H373 **, H315, H318, H400 | — | — | CLP00 |
@@ -736,14 +736,14 @@
 | 123439-82-7 | tetraammine platinum (II) hydrogen carbonate | H302 **, H318, H412 | — | — | ATP1 |
 | 123590-00-1 | N-(2-(1-allyl-4,5-dicyanoimidazol-2-ylazo)-5-(dipropylamino)ph... | H413 | — | — | CLP00 |
 | 123599-82-6 | [[2-methyl-1-(1-oxopropoxy)propoxy](4-phenylbutyl)phosphinyl] ... | H319 | — | — | ATP1 |
-| 123748-85-6 | 8,9-dinorborn-5-ene-2,3-dicarboxylic anhydride | H302 **, H335, H315, H319, H334 | — | H335:10.0% | CLP00 |
+| 123748-85-6 | 8,9-dinorborn-5-ene-2,3-dicarboxylic anhydride | H302 **, H335, H315, H319, H334 | — | H335(3):≥10.0% | CLP00 |
 | 1239-45-8 | ethidium bromide; 3,8-diamino-1-ethyl-6-phenylphenantridinium ... | H341, H330 **, H302 ** | — | — | ATP1 |
 | 123968-25-2 | 2-(1-(2-hydroxy-3,5-di-tert-pentyl-phenyl)ethyl)-4,6-di-tert-p... | H413 | — | — | CLP00 |
 | 124-04-9 | adipic acid | H319 | — | — | CLP00 |
 | 124-07-2 | octanoic acid | H314, H412 | — | — | ATP7 |
 | 124-09-4 | hexamethylenediamine | H312 **, H302 **, H335, H314 | — | — | CLP00 |
 | 124-30-1 | octadecylamine | H304, H373(gastro-intestinal_tract,_liver,_immune_system), H315, H318, H400, H410 | Akut=10 | — | ATP5 |
-| 124-40-3 | mono-methylamine ... % [1] di-methylamine ... % [2] tri-methyl... | H224, H332, H302, H314 | — | H335:5.0% | CLP00 |
+| 124-40-3 | mono-methylamine ... % [1] di-methylamine ... % [2] tri-methyl... | H224, H332, H302, H314 | — | H335(3):≥5.0% | CLP00 |
 | 124-41-4 | sodium methanolate; sodium methoxide [1] potassium methanolate... | H251, H314 | — | — | CLP00 |
 | 124-68-5 | 2-amino-2-methylpropanol | H315, H319, H412 | — | — | CLP00 |
 | 124172-53-8 | N,N'-1,6-hexanediylbis(N-(2,2,6,6-tetramethyl-piperidin-4-yl)-... | H319, H412 | — | — | CLP00 |
@@ -783,7 +783,7 @@
 | 126-75-0 | demeton-S (ISO); diethyl-S-2-ethylthioethyl phosphorothioate | H310, H300 ** | — | — | CLP00 |
 | 126-90-9 | linalool; 3,7-dimethyl-1,6-octadien-3-ol; dl-linalool [1] cori... | H317 | — | — | ATP10 |
 | 126-91-0 | linalool; 3,7-dimethyl-1,6-octadien-3-ol; dl-linalool [1] cori... | H317 | — | — | ATP10 |
-| 126-98-7 | methacrylonitrile; 2-methyl-2-propene nitrile | H225, H331 **, H311 **, H301 **, H317 | — | H317:0.2% | CLP00 |
+| 126-98-7 | methacrylonitrile; 2-methyl-2-propene nitrile | H225, H331 **, H311 **, H301 **, H317 | — | H317(1):≥0.2% | CLP00 |
 | 126-99-8 | chloroprene (stabilised); 2-chlorobuta-1,3-diene (stabilised) | H225, H350, H332 **, H302 **, H335, H373 **, H315, H319 | — | — | CLP00 |
 | 126050-54-2 | 2,2'-methylenebis(4,6-di-tert-butyl-phenyl)-2-ethylhexyl phosp... | H413 | — | — | CLP00 |
 | 12607-70-4 | nickel carbonate; basic nickel carbonate; carbonic acid, nicke... | H350i, H341, H360D ***, H332, H302, H372 **, H315, H334, H317, H400, H410 | — | — | ATP01 |
@@ -835,14 +835,14 @@
 | 1303-00-0 | gallium arsenide | H350, H360F, H372(respiratory_and_haematopoietic_systems) | — | — | ATP7 |
 | 1303-28-2 | diarsenic pentaoxide; arsenic pentoxide; arsenic oxide | H350, H331 **, H301 **, H400, H410 | — | — | CLP00 |
 | 1303-86-2 | diboron trioxide | H360FD | — | — | ATP20 |
-| 1303-96-4 | tetraboron disodium heptaoxide, hydrate [1] disodium tetrabora... | H360FD | — | H360FD:0.55% | ATP20 |
+| 1303-96-4 | tetraboron disodium heptaoxide, hydrate [1] disodium tetrabora... | H360FD | — | H360FD(1B):≥0.55% | ATP20 |
 | 130328-20-0 | silver zinc zeolite (Zeolite, LTA framework type, surface-modi... | H361d, H315, H318, H400, H410 | Akut=100 | — | ATP10 |
 | 1304-29-6 | barium peroxide | H272, H332 **, H302 ** | — | — | CLP00 |
 | 1304-56-9 | beryllium oxide | H350i, H330 **, H301 **, H335, H372 **, H315, H319, H317 | — | — | CLP00 |
 | 13048-33-4 | hexamethylene diacrylate; hexane-1,6-diol diacrylate | H315, H319, H317 | — | — | CLP00 |
 | 1305-99-3 | calcium phosphide; tricalcium diphosphide | H260, H330, H300, H311, H318, H400 | Akut=100 | — | ATP7 |
 | 1306-19-0 | cadmium (non-pyrophoric) [1] cadmium oxide (non-pyrophoric) [2] | H350, H341, H361fd, H330, H372 **, H400, H410 | — | — | CLP00 |
-| 1306-23-6 | cadmium sulphide | H350, H341, H361fd, H302 **, H372 **, H413 | — | H372:10.0%; H373:0.1% | CLP00 |
+| 1306-23-6 | cadmium sulphide | H350, H341, H361fd, H302 **, H372 **, H413 | — | H372:≥10.0%; H373:0.1–10.0% | CLP00 |
 | 130603-71-3 | 3-(6-O-(6-desoxy-α-.sc.l.sc.-mannopyranosyl-O-(α-.sc.d.sc.-glu... | H317, H411 | — | — | ATP1 |
 | 13067-93-1 | cyanofenphos (ISO); O-4-cyanophenyl O-ethyl phenylphosphonothi... | H301 **, H312 **, H370 **, H319, H411 | — | — | CLP00 |
 | 1307-96-6 | cobalt oxide | H302 **, H317, H400, H410 | Akut=10 | — | ATP1 |
@@ -856,8 +856,8 @@
 | 131-52-2 | sodium pentachlorophenolate [1] potassium pentachlorophenolate... | H351, H330 **, H311 **, H301 **, H335, H315, H319, H400, H410 | — | — | CLP00 |
 | 131-73-7 | bis(2,4,6-trinitrophenyl)amine; hexyl | H201, H310, H330 **, H300 **, H373 **, H411 | — | — | ATP1 |
 | 131-89-5 | dinex (ISO); 2-cyclohexyl-4,6-dinitrophenol | H331 **, H311 **, H301 **, H400, H410 | — | — | CLP00 |
-| 1310-58-3 | potassium hydroxide; caustic potash | H302 **, H314 | — | H314:5.0%; H314:2.0%; H315:0.5%; H319:0.5% | CLP00 |
-| 1310-73-2 | sodium hydroxide; caustic soda | H314 | — | H314:5.0%; H314:2.0%; H315:0.5%; H319:0.5% | CLP00 |
+| 1310-58-3 | potassium hydroxide; caustic potash | H302 **, H314 | — | H314(1A):≥5.0%; H314(1B):2.0–5.0%; H315(2):0.5–... | CLP00 |
+| 1310-73-2 | sodium hydroxide; caustic soda | H314 | — | H314(1A):≥5.0%; H314(1B):2.0–5.0%; H315(2):0.5–... | CLP00 |
 | 131013-81-5 | tris(tetramethylammonium) 5-hydroxy-1-(4-sulphonatophenyl)-4-(... | H301 **, H412 | — | — | CLP00 |
 | 131013-83-7 | tetrakis(tetramethylammonium)3,3'-(6-(2-hydroxyethylamino)1,3,... | H301 **, H412 | — | — | CLP00 |
 | 13108-52-6 | methyl-2,3,5,6-tetrachloro-4-pyridylsulphone; 2,3,5,6-tetrachl... | H312 **, H302 **, H319, H317 | — | — | CLP00 |
@@ -871,7 +871,7 @@
 | 1313-82-2 | disodium sulfide; sodium sulfide | H311 **, H302 **, H314, H400 | — | — | ATP1 |
 | 1313-99-1 | nickel monoxide [1] nickel oxide [2] bunsenite  [3] | H350i, H372 **, H317, H413 | — | — | ATP1 |
 | 131341-86-1 | fludioxonil (ISO); 4-(2,2-difluoro-1,3-benzodioxol-4-yl)-1H-py... | H400, H410 | Akut=1 | — | ATP14 |
-| 13138-45-9 | nickel dinitrate [1] nitric acid, nickel salt [2] | H272, H350i, H341, H360D **, H332 **, H302 **, H372 **, H315, H318, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H315:20.0%; H317:0.01% | ATP1 |
+| 13138-45-9 | nickel dinitrate [1] nitric acid, nickel salt [2] | H272, H350i, H341, H360D **, H332 **, H302 **, H372 **, H315, H318, H334, H317, H400, H410 | Akut=1 | H372:≥1.0%; H373:0.1–1.0%; H315(2):≥20.0%; H317... | ATP1 |
 | 1314-04-1 | nickel (II) sulfide [1] nickel sulfide [2] millerite [3] | H350i, H341, H372 **, H317, H400, H410 | — | — | ATP01 |
 | 1314-05-2 | nickel selenide | H350i, H372 **, H317, H400, H410 | — | — | ATP1 |
 | 1314-06-3 | dinickel trioxide | H350i, H372 **, H317, H413 | — | — | ATP1 |
@@ -909,14 +909,14 @@
 | 132983-41-6 | reaction mass of isomers of: mono-(2-tetradecyl)naphthalenes; ... | H319, H413 | — | — | CLP00 |
 | 133-06-2 | captan (ISO); 1,2,3,6-tetrahydro-N-(trichloromethylthio)phthal... | H351, H331 **, H318, H317, H400 | Akut=10 | — | ATP1 |
 | 133-07-3 | folpet (ISO); N-(trichloromethylthio)phthalimide | H351, H332 **, H319, H317, H400 | Akut=10 | — | ATP1 |
-| 1330-20-7 | o-xylene [1] p-xylene [2] m-xylene [3] xylene [4] | H226, H332, H312, H315 | — | H373:10.0%; H315:10.0%; H335:20.0%; H304:10.0% | CLP00 |
+| 1330-20-7 | o-xylene [1] p-xylene [2] m-xylene [3] xylene [4] | H226, H332, H312, H315 | — | H373(2):≥10.0%; H315(2):≥10.0%; H335:≥20.0%; H3... | CLP00 |
 | 1330-43-4 | tetraboron disodium heptaoxide, hydrate [1] disodium tetrabora... | H360FD | — | — | ATP20 |
 | 133167-77-8 | sodium 3-acetoacetylamino-4-methoxytolyl-6-sulfonate | H317 | — | — | CLP00 |
 | 1332-65-6 | dicopper chloride trihydroxide | H301, H332, H400, H410 | Akut=10 | — | ATP17 |
 | 1333-22-8 | tetracopper hexahydroxide sulphate [1] tetracopper hexahydroxi... | H302, H400, H410 | Akut=10 | — | ATP17 |
 | 1333-74-0 | hydrogen | H220 | — | — | CLP00 |
-| 1333-82-0 | chromium (VI) trioxide | H271, H350, H340, H361f **, H330 **, H311 **, H301 **, H372 **, H314, H334, H317, H400, H410 | — | H335:1.0% | CLP00 |
-| 1333-83-1 | sodium bifluoride; sodium hydrogen difluoride | H301 **, H314 | — | H314:1.0%; H315:0.1%; H319:0.1% | CLP00 |
+| 1333-82-0 | chromium (VI) trioxide | H271, H350, H340, H361f **, H330 **, H311 **, H301 **, H372 **, H314, H334, H317, H400, H410 | — | H335(3):≥1.0% | CLP00 |
+| 1333-83-1 | sodium bifluoride; sodium hydrogen difluoride | H301 **, H314 | — | H314(1B):≥1.0%; H315(2):0.1–1.0%; H319(2):0.1–1.0% | CLP00 |
 | 133336-92-2 | N,N''-(methylenedi-4,1-phenylene)bis[N'-(4-methylphenyl)urea] | H317, H413 | — | — | ATP1 |
 | 13335-71-2 | (2,6-xylyloxy) acetic acid | H302 **, H318, H412 | — | — | ATP1 |
 | 133413-70-4 | (3S,6R,9S,12R,15S,18R,21S,24R)-6,18-dibenzyl-3,9,15,21-tetrais... | H319, H413 | — | — | ATP1 |
@@ -926,8 +926,8 @@
 | 1335-32-6 | lead acetate, basic | H351, H360Df, H373 **, H400, H410 | — | — | CLP00 |
 | 1335-66-6 | 2,4-dimethylcyclohex-3-ene-1-carbaldehyde [1] (1Î±,2Î±,5Î±)-2,... | H317 | — | — | — |
 | 13356-08-6 | fenbutatin oxide (ISO); bis(tris(2-methyl-2-phenylpropyl)tin)o... | H330 **, H315, H319, H400, H410 | — | — | CLP00 |
-| 1336-21-6 | ammonia ....% | H314, H400 | — | H335:5.0% | CLP00 |
-| 1336-36-3 | polychlorobiphenyls; PCB | H373 **, H400, H410 | — | H373:0.005% | CLP00 |
+| 1336-21-6 | ammonia ....% | H314, H400 | — | H335(3):≥5.0% | CLP00 |
+| 1336-36-3 | polychlorobiphenyls; PCB | H373 **, H400, H410 | — | H373:≥0.005% | CLP00 |
 | 13360-57-1 | dimethylsulfamoylchloride | H350, H330 **, H312 **, H302 **, H314 | — | — | CLP00 |
 | 133636-82-5 | (+)-(1S,2S,3S,5R)-2,6,6-trimethylbicyclo[3.1.1]heptane-3-spiro... | H314, H317, H400, H410 | — | — | ATP1 |
 | 1338-02-9 | Naphthenic acids, copper salts; copper naphthenate | H226, H302 **, H400, H410 | — | — | CLP00 |
@@ -938,18 +938,18 @@
 | 134-32-7 | 1-naphthylamine | H302 **, H411 | — | — | CLP00 |
 | 134-62-3 | diethyltoluamide (ISO): N,N-diethyl-m-toluamide; [deet] | H302, H315, H319 | — | — | ATP14 |
 | 134098-61-6 | fenpyroximate (ISO); tert-butyl 4-[({(E)-[(1,3-dimethyl-5-phen... | H330, H301, H317, H400, H410 | Akut=100 | — | ATP7 |
-| 1341-49-7 | ammonium bifluoride; ammonium hydrogen difluoride | H301 **, H314 | — | H314:1.0%; H315:0.1%; H319:0.1% | CLP00 |
+| 1341-49-7 | ammonium bifluoride; ammonium hydrogen difluoride | H301 **, H314 | — | H314(1B):≥1.0%; H315(2):0.1–1.0%; H319(2):0.1–1.0% | CLP00 |
 | 134164-24-2 | dibenzylphenylsulfonium hexafluoroantimonate | H302 **, H372 **, H318, H317, H411 | — | — | CLP00 |
 | 13424-46-9 | lead diazide; lead azide [≥ 20 % phlegmatiser] | H201, H360Df, H332 **, H302 **, H373 **, H400, H410 | — | — | CLP00 |
 | 1344-08-7 | sodium polysulphides | H301 **, H314, H400 | — | — | CLP00 |
 | 1344-37-2 | lead sulfochromate yellow; C.I. Pigment Yellow 34; [This subst... | H350, H360Df, H373 **, H400, H410 | — | — | ATP1 |
 | 1344-81-6 | calcium polysulphides | H335, H315, H319, H400 | — | — | CLP00 |
-| 13451-08-6 | sulphur tetrachloride | H314, H400 | — | H335:5.0% | CLP00 |
+| 13451-08-6 | sulphur tetrachloride | H314, H400 | — | H335(3):≥5.0% | CLP00 |
 | 13457-18-6 | pyrazophos (ISO); O,O-diethyl O-(6-ethoxycarbonyl-5-methylpyra... | H332 **, H302 **, H400, H410 | — | — | CLP00 |
 | 134575-17-0 | tert-butyl (1R,5S)-3-azabicyclo[3.1.0]hex-6-ylcarbamate | H302 **, H373 **, H318, H317 | — | — | ATP1 |
 | 134595-59-8 | sodium (1.0-1.95)/lithium (0.05-1) 5-((5-((5-chloro-6-fluoro-p... | H317 | — | — | CLP00 |
-| 13462-88-9 | nickel difluoride [1] nickel dibromide [2] nickel diiodide [3]... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
-| 13462-90-3 | nickel difluoride [1] nickel dibromide [2] nickel diiodide [3]... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 13462-88-9 | nickel difluoride [1] nickel dibromide [2] nickel diiodide [3]... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
+| 13462-90-3 | nickel difluoride [1] nickel dibromide [2] nickel diiodide [3]... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 134620-00-1 | tetraammine palladium (II) hydrogen carbonate | H302 **, H373 **, H318, H317, H400, H410 | — | — | ATP1 |
 | 13463-39-3 | tetracarbonylnickel; nickel tetracarbonyl | H225, H351, H360D **, H330 **, H400, H410 | — | — | CLP00 |
 | 13463-41-7 | pyrithione zinc; (T-4)- bis[1-(hydroxy-.kappa.O)pyridine-2(1H)... | H360D, H330, H301, H372, H318, H400, H410 | Akut=1000 | — | ATP15 |
@@ -966,7 +966,7 @@
 | 135-88-6 | N-2-naphthylaniline; N-phenyl-2-naphthylamine | H351, H315, H319, H317, H411 | — | — | CLP00 |
 | 135043-64-0 | 4-amino-2-(aminomethyl)phenol dihydrochloride | H302 **, H317, H400, H410 | — | — | CLP00 |
 | 135158-54-2 | acibenzolar-S-methyl; benzo[1,2,3]thiadiazole-7-carbothioic ac... | H335, H315, H319, H317, H400, H410 | — | — | CLP00 |
-| 13517-20-9 | perboric acid (H 3 BO 2(O2 )), monosodium salt trihydrate [1] ... | H360FD, H332, H335, H318 | — | H318:36.0%; H319:22.0% | ATP22 |
+| 13517-20-9 | perboric acid (H 3 BO 2(O2 )), monosodium salt trihydrate [1] ... | H360FD, H332, H335, H318 | — | H318(1):≥36.0%; H319(2):22.0–36.0% | ATP22 |
 | 135410-20-7 | acetamiprid (ISO); (1E)-N-[(6-chloropyridin-3-yl) methyl]-N’-c... | H361d, H301, H400, H410 | Akut=10 | — | ATP18 |
 | 135756-61-5 | 1,3-bis(dimethylcarbamoyl)-imidazolium chloride | H302 **, H318, H412 | — | — | ATP1 |
 | 13593-03-8 | quinalphos (ISO); O,O-diethyl-O-quinoxalin-2-yl phosphorothioate | H301 **, H312 **, H400, H410 | Akut=1000 | — | CLP00 |
@@ -984,21 +984,21 @@
 | 136213-75-7 | sodium 4-(4-chloro-6-(N-ethylanilino)-1,3,5-triazin-2-ylamino)... | H317, H411 | — | — | CLP00 |
 | 136213-76-8 | reaction mass of: sodium 3,3'-(1,4-phenylenebis(carbonylimino-... | H411 | — | — | CLP00 |
 | 136248-03-8 | trisodium 3-amino-6,13-dichloro-10-((3-((4-chloro-6-(2-sulfoph... | H317 | — | — | CLP00 |
-| 13637-71-3 | nickel diperchlorate; perchloric acid, nickel(II) salt | H350i, H341, H360D **, H372 **, H314, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
+| 13637-71-3 | nickel diperchlorate; perchloric acid, nickel(II) salt | H350i, H341, H360D **, H372 **, H314, H334, H317, H400, H410 | Akut=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
 | 136426-54-5 | fluquinconazole (ISO); 3-(2,4-dichlorophenyl)-6-fluoro-2-(1H-1... | H331 **, H301 **, H312 **, H372 **, H315, H400, H410 | — | — | CLP00 |
 | 136450-06-1 | N-(3-acetyl-2-hydroxyphenyl)-4-(4-phenylbutoxy)benzamide | H413 | — | — | CLP00 |
 | 136465-81-1 | (3S,4aS,8aS)-N-tert-butyldecahydro-3-isoquinolinecarboxamide | H302 **, H318, H412 | — | — | ATP1 |
 | 136465-99-1 | 1-((2-quinolinyl-carbonyl)oxy)-2,5-pyrrolidinedione | H318, H317 | — | — | CLP00 |
 | 136522-17-3 | (3S,4aS,8aS)-2-[(2R,3S)-3-amino-2-hydroxy-4-phenylbutyl]-N-ter... | H302 **, H412 | — | — | CLP00 |
-| 13654-40-5 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 13654-40-5 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 13674-87-8 | tris[2-chloro-1-(chloromethyl)ethyl] phosphate | H351 | — | — | ATP3 |
 | 13684-56-5 | desmedipham (ISO); ethyl 3-phenylcarbamoyloxyphenylcarbamate | H361d, H400, H410 | Akut=10 | — | ATP17 |
 | 13684-63-4 | phenmedipham (ISO); methyl 3-(3-methylcarbaniloyloxy)carbanilate | H400, H410 | Akut=10 | — | ATP17 |
-| 13689-92-4 | nickel dithiocyanate | H350i, H341, H360D **, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
+| 13689-92-4 | nickel dithiocyanate | H350i, H341, H360D **, H372 **, H334, H317, H400, H410 | Akut=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
 | 136897-58-0 | dodecanamide, N,N'-(9,9',10,10'-tetrahydro-9,9',10,10'-tetraox... | H413 | — | — | CLP00 |
 | 136920-10-0 | behenamidopropyl-dimethyl-(dihydroxypropyl) ammonium chloride | H318, H317, H400, H410 | — | — | CLP00 |
 | 136997-71-2 | 1-dimethylcarbamoyl-4-(2-sulfonatoethyl)pyridinium | H317 | — | — | ATP1 |
-| 137-05-3 | mecrilate; methyl 2-cyanoacrylate | H335, H315, H319 | — | H335:10.0% | CLP00 |
+| 137-05-3 | mecrilate; methyl 2-cyanoacrylate | H335, H315, H319 | — | H335(3):≥10.0% | CLP00 |
 | 137-17-7 | 2,4,5-trimethylaniline [1] 2,4,5-trimethylaniline hydrochlorid... | H350, H331 **, H311 **, H301 **, H411 | — | — | CLP00 |
 | 137-26-8 | thiram (ISO); tetramethylthiuram disulphide | H332 **, H302 **, H373 **, H315, H319, H317, H400, H410 | Akut=10 | — | CLP00 |
 | 137-30-4 | ziram (ISO); zinc bis dimethyldithiocarbamate | H330 **, H302 **, H335, H373 **, H318, H317, H400, H410 | Akut=100 | — | CLP00 |
@@ -1012,10 +1012,10 @@
 | 137641-05-5 | picolinafen (ISO); N-(4-fluorophenyl)-6-[3-(trifluoromethyl)ph... | H373(blood_system,_thyroid), H400, H410 | Akut=1000 | — | ATP21 |
 | 13765-19-0 | calcium chromate | H350, H302 **, H400, H410 | — | — | CLP00 |
 | 137658-79-8 | 2-(4,6-bis(2,4-dimethylphenyl)-1,3,5-triazin-2-yl)-5-(3-((2-et... | H413 | — | — | CLP00 |
-| 13770-89-3 | nickel bis(sulfamidate); nickel sulfamate | H350i, H341, H360D **, H302, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP14 |
+| 13770-89-3 | nickel bis(sulfamidate); nickel sulfamate | H350i, H341, H360D **, H302, H372 **, H334, H317, H400, H410 | Akut=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP14 |
 | 13775-53-6 | trisodium hexafluoroaluminate [1] trisodium hexafluoroaluminat... | H332, H372, H411 | — | — | ATP3 |
 | 13775-54-7 | nickel(II) silicate [1] dinickel orthosilicate [2] nickel sili... | H350i, H372 **, H317, H400, H410 | — | — | ATP02 |
-| 137796-06-6 | 4-ethyl-2-methyl-2-isopentyl-1,3-oxazolidine | H314, H317 | — | H335:5.0% | CLP00 |
+| 137796-06-6 | 4-ethyl-2-methyl-2-isopentyl-1,3-oxazolidine | H314, H317 | — | H335(3):≥5.0% | CLP00 |
 | 137864-22-3 | benzyl(S)-2-[(2'-cyanobiphenyl-4-ylmethyl)pentanoylamino]-3-me... | H302 **, H317 | — | — | ATP1 |
 | 138-24-9 | N,N,N-trimethylanilinium chloride | H311 **, H301 ** | — | — | CLP00 |
 | 138-86-3 | dipentene; limonene [1] (S)-p-mentha-1,8-diene; l-limonene [2]... | H226, H315, H317, H400, H410 | — | — | ATP17 |
@@ -1026,7 +1026,7 @@
 | 138271-16-6 | (Z)-(2,4-difluorophenyl)piperidin-4-ylmethanone oxime monohydr... | H302 **, H318, H412 | — | — | ATP1 |
 | 13840-56-7 | tetraboron disodium heptaoxide, hydrate [1] disodium tetrabora... | H360FD | — | — | ATP20 |
 | 138401-24-8 | 4'-((2-butyl-4-oxo-1,3-diazaspiro[4.4]non-1-ene-3-yl)methyl)(1... | H400, H410 | — | — | CLP00 |
-| 13842-46-1 | nickel dipotassium bis(sulfate) [1] diammonium nickel bis(sulf... | H350i, H341, H360D **, H332 **, H302 **, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
+| 13842-46-1 | nickel dipotassium bis(sulfate) [1] diammonium nickel bis(sulf... | H350i, H341, H360D **, H332 **, H302 **, H372 **, H334, H317, H400, H410 | Akut=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
 | 138526-69-9 | 1-bromo-3,4,5-trifluorobenzene | H226, H351, H315, H318, H411 | — | — | CLP00 |
 | 138564-59-7 | 5-methyl-2-[(2-nitrophenyl)amino]-3-thiophenecarbonitrile | H400, H410 | — | — | ATP1 |
 | 138666-92-9 | potassium 2-chloro-3-(benzyloxy)propionate | H302 **, H373 **, H318, H317 | — | — | ATP1 |
@@ -1041,12 +1041,12 @@
 | 139528-85-1 | metosulam (ISO); N-(2,6-dichloro-3-methylphenyl)-5,7-dimethoxy... | H351, H373(eyes,_kidneys), H400, H410 | Akut=1000 | — | ATP7 |
 | 139756-01-7 | 1-methyl-4-nitro-3-propyl-1H-pyrazole-5-carboxamide | H302 **, H373 **, H412 | — | — | ATP1 |
 | 139968-49-3 | metaflumizone (ISO); (EZ)-2'-[2-(4-cyanophenyl)-1-(α,α,α -trif... | H361fd, H362, H373 | — | — | ATP14 |
-| 140-01-2 | pentasodium (carboxylatomethyl)iminobis(ethylenenitrilo)tetraa... | H360D, H332, H373(Inhalation) | — | H360D:3.0% | ATP18 |
+| 140-01-2 | pentasodium (carboxylatomethyl)iminobis(ethylenenitrilo)tetraa... | H360D, H332, H373(Inhalation) | — | H360D:≥3.0% | ATP18 |
 | 140-31-8 | 2-piperazin-1-ylethylamine | H312 **, H302 **, H314, H317, H412 | — | — | CLP00 |
 | 140-41-0 | 3-(4-chlorophenyl)-1,1-dimethyluronium trichloroacetate; monur... | H351, H315, H319, H400, H410 | — | — | CLP00 |
 | 140-56-7 | fenaminosulf (ISO); sodium 4-dimethylaminobenzenediazosulphonate | H301 **, H312 **, H412 | — | — | CLP00 |
 | 140-66-9 | 4-(1,1,3,3-tetramethylbutyl)phenol; 4-tert-octylphenol | H315, H318, H400, H410 | Akut=10 | — | ATP1 |
-| 140-88-5 | ethyl acrylate | H225, H331, H312, H302, H335, H315, H319, H317 | — | H335:5.0%; H315:5.0%; H319:5.0% | ATP21 |
+| 140-88-5 | ethyl acrylate | H225, H331, H312, H302, H335, H315, H319, H317 | — | H335(3):≥5.0%; H315(2):≥5.0%; H319(2):≥5.0% | ATP21 |
 | 140-93-2 | proxan-sodium (ISO); sodium O-isopropyldithiocarbonate | H302 **, H315, H411 | — | — | CLP00 |
 | 140623-89-8 | 2,6-dichloro-1-fluoropyridiniumtetrafluoroborate | H302 **, H314, H317, H400, H410 | — | — | ATP1 |
 | 140681-55-6 | 1-chloromethyl-4-fluoro-1,4-diazoniabicyclo[2.2.2]octane bis(t... | H302 **, H318, H317, H412 | — | — | ATP1 |
@@ -1055,7 +1055,7 @@
 | 140921-24-0 | 1,6-hexanediyl-bis(2-(2-(1-ethylpentyl)-3-oxazolidinyl)ethyl)c... | H317 | — | — | CLP00 |
 | 140923-17-7 | iprovalicarb (ISO); isopropyl [(2S)-3-methyl-1-{[1-(4- methylp... | H351 | — | — | ATP15 |
 | 141-32-2 | n-butyl acrylate | H226, H335, H315, H319, H317 | — | — | CLP00 |
-| 141-43-5 | 2-aminoethanol; ethanolamine | H332 **, H312 **, H302 **, H314 | — | H335:5.0% | CLP00 |
+| 141-43-5 | 2-aminoethanol; ethanolamine | H332 **, H312 **, H302 **, H314 | — | H335(3):≥5.0% | CLP00 |
 | 141-52-6 | potassium ethanolate; potassium ethoxide [1] sodium ethanolate... | H251, H314 | — | — | CLP00 |
 | 141-66-2 | dicrotophos (ISO); (Z)-2-dimethylcarbamoyl-1-methylvinyl dimet... | H300 **, H311 **, H400, H410 | — | — | CLP00 |
 | 141-75-3 | butyryl chloride | H225, H314 | — | — | CLP00 |
@@ -1083,12 +1083,12 @@
 | 142-59-6 | nabam (ISO); disodium ethylenebis(N,N'-dithiocarbamate) | H302 **, H335, H317, H400, H410 | — | — | CLP00 |
 | 142-64-3 | piperazine hydrochloride [1] piperazine dihydrochloride [2] pi... | H361fd, H315, H319, H334, H317, H412 | — | — | ATP01 |
 | 142-82-5 | heptane; n-heptane [1] 2,4-dimethylpentane [2] 2,2,3-trimethyl... | H225, H304, H336, H315, H400, H410 | — | — | ATP1 |
-| 142-84-7 | dipropylamine | H225, H332 **, H312 **, H302 **, H314 | — | H335:1.0% | CLP00 |
-| 142-90-5 | dodecyl methacrylate | H335 | — | H335:10.0% | ATP14 |
-| 142-96-1 | di-n-butyl ether; dibutyl ether | H226, H335, H315, H319, H412 | — | H335:10.0% | CLP00 |
+| 142-84-7 | dipropylamine | H225, H332 **, H312 **, H302 **, H314 | — | H335(3):≥1.0% | CLP00 |
+| 142-90-5 | dodecyl methacrylate | H335 | — | H335(3):≥10.0% | ATP14 |
+| 142-96-1 | di-n-butyl ether; dibutyl ether | H226, H335, H315, H319, H412 | — | H335(3):≥10.0% | CLP00 |
 | 1420-06-0 | trifenmorph (ISO); 4-tritylmorpholine | H302 **, H400, H410 | — | — | CLP00 |
 | 1420-07-1 | dinoterb (ISO); 2-tert-butyl-4,6-dinitrophenol | H360D **, H300 **, H311 **, H400, H410 | — | — | CLP00 |
-| 14216-75-2 | nickel dinitrate [1] nitric acid, nickel salt [2] | H272, H350i, H341, H360D ***, H332, H302, H372 **, H315, H318, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H315:20.0%; H317:0.01% | ATP01corr |
+| 14216-75-2 | nickel dinitrate [1] nitric acid, nickel salt [2] | H272, H350i, H341, H360D ***, H332, H302, H372 **, H315, H318, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H315(2):≥20.0%; H... | ATP01corr |
 | 1423-46-7 | 2,4-dimethylcyclohex-3-ene-1-carbaldehyde [1] (1Î±,2Î±,5Î±)-2,... | H317 | — | — | — |
 | 142459-58-3 | flufenacet (ISO); N-(4-fluorophenyl)-N-isopropyl-2-(5-trifluor... | H302 **, H373 **, H317, H400, H410 | Akut=100 | — | ATP1 |
 | 142469-14-5 | tritosulfuron (ISO) (containing ≤ 0,02% AMTT); 1-[4-methoxy-6-... | H317, H400, H410 | Akut=10 | — | ATP1 |
@@ -1099,7 +1099,7 @@
 | 142859-67-4 | N-(2-(6-ethyl-7-(4-methylphenoxy)-1H-pyrazolo[1,5-b][1,2,4]tri... | H317, H413 | — | — | CLP00 |
 | 142877-45-0 | (2,3-dimethylbut-2-yl)-trimethoxysilane | H315, H318, H412 | — | — | ATP1 |
 | 142891-20-1 | cinidon ethyl (ISO); ethyl (Z)-2-chloro-3-[2-chloro-5-(cyclohe... | H351, H317, H400, H410 | — | — | ATP1 |
-| 143-22-6 | 2-[2-(2-butoxyethoxy)ethoxy]ethanol; TEGBE; triethylene glycol... | H318 | — | H318:30.0%; H319:20.0% | CLP00 |
+| 143-22-6 | 2-[2-(2-butoxyethoxy)ethoxy]ethanol; TEGBE; triethylene glycol... | H318 | — | H318(1):≥30.0%; H319(2):20.0–30.0% | CLP00 |
 | 143-24-8 | bis(2-(2-methoxyethoxy)ethyl)ether; tetraglyme | H360FD | — | — | ATP15 |
 | 143-50-0 | chlordecone (ISO); perchloropentacyclo[5,3,0,02,6,03,9,04,8]de... | H351, H311 **, H301 **, H400, H410 | — | — | CLP00 |
 | 143052-96-4 | N-(4-dimethylaminopyridinium)-3-methoxy-4-(1-methyl-5-nitroind... | H413 | — | — | CLP00 |
@@ -1113,7 +1113,7 @@
 | 143468-96-6 | ethyl 2-carboxy-3-(2-thienyl)propionate | H315, H318, H317 | — | — | CLP00 |
 | 1435-48-9 | 1,3-dichloro-4-fluorobenzene | H302 **, H373 **, H315, H411 | — | — | CLP00 |
 | 143683-23-2 | tetrasodium 1,2-bis(4-fluoro-6-[5-(1-amino-2-sulfonatoanthrach... | H317, H412 | — | — | CLP00 |
-| 14371-10-9 | cinnamaldehyde; 3-phenylprop-2-enal; cinnamic aldehyde; cinnam... | H317 | — | H317:0.01% | ATP21 |
+| 14371-10-9 | cinnamaldehyde; 3-phenylprop-2-enal; cinnamic aldehyde; cinnam... | H317 | — | H317(1):≥0.01% | ATP21 |
 | 143747-72-2 | 6,9-bis(hexadecyloxymethyl)-4,7-dioxanonane-1,2,9-triol | H413 | — | — | CLP00 |
 | 143747-73-3 | Polymer of 1,3-dibromopropane and N,N-diethyl-N',N'-dimethyl-1... | H400, H410 | — | — | CLP00 |
 | 143860-04-2 | 3-ethyl-2-methyl-2-(3-methylbutyl)-1,3-oxazolidine | H360F **, H314, H400, H410 | — | — | CLP00 |
@@ -1139,7 +1139,7 @@
 | 14507-36-9 | nickel hydrogen phosphate [1] nickel bis(dihydrogen phosphate)... | H350i, H372 **, H334, H317, H400, H410 | — | — | ATP02 |
 | 145153-52-2 | 2-methyl-1,5-pentanediamine-1,3-benzenedicarboxylate | H317 | — | — | ATP1 |
 | 1453-58-3 | 3-methylpyrazole | H360D, H302, H373(lung), H314, H318 | — | — | ATP17 |
-| 14550-87-9 | nickel dichlorate [1] nickel dibromate [2] ethyl hydrogen sulf... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 14550-87-9 | nickel dichlorate [1] nickel dibromate [2] ethyl hydrogen sulf... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 145701-23-1 | florasulam (ISO); 2',6',8-trifluoro-5-methoxy-5-triazolo[1,5-c... | H400, H410 | — | — | CLP00 |
 | 145963-84-4 | 2-amino-4-dimethylamino-6-trifluoroethoxy-1,3,5-triazine | H302 **, H373 **, H412 | — | — | ATP1 |
 | 146177-84-6 | sodium 2-(4-(4-fluoro-6-(2-sulfo-ethylamino)-[1,3,5]triazin-2-... | H317 | — | — | CLP00 |
@@ -1151,7 +1151,7 @@
 | 146925-83-9 | 2-(hydroxymethyl)-2-[[2-hydroxy-3-(isooctadecyloxy)propoxy]met... | H400, H410 | — | — | CLP00 |
 | 147027-04-1 | reaction mass of: trans-(2R)-5-acetoxy-1,3-oxathiolane-2-carbo... | H302 **, H315, H318, H317 | — | — | CLP00 |
 | 147027-10-9 | 2S-isopropyl-5R-methyl-1R-cyclohexyl (2R,5S)-5-(4-amino-2-oxo-... | H411 | — | — | ATP1 |
-| 14708-14-6 | nickel bis(tetrafluoroborate) | H350i, H341, H360D **, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
+| 14708-14-6 | nickel bis(tetrafluoroborate) | H350i, H341, H360D **, H372 **, H334, H317, H400, H410 | Akut=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
 | 147086-81-5 | trans-(4S,6S)-5,6-dihydro-6-methyl-4H-thieno[2,3-b]thiopyran-4... | H302 ** | — | — | CLP00 |
 | 14721-18-7 | nickel chromate | H350i, H372 **, H334, H317, H400, H410 | — | — | ATP1 |
 | 147315-50-2 | 2-(4,6-diphenyl-1,3,5-triazin-2-yl)-5-((hexyl)oxy)-phenol | H413 | — | — | CLP00 |
@@ -1190,30 +1190,30 @@
 | 149564-66-9 | lithium sodium (4-((5-chloro-2-hydroxyphenyl)azo)-2,4-dihydro-... | H302 **, H318, H412 | — | — | CLP00 |
 | 149591-38-8 | N,N'-dihexadecyl-N,N'-bis(2-hydroxyethyl)propanediamide | H361f **, H319, H413 | — | — | CLP00 |
 | 149626-00-6 | lithium sodium (2-(((5-((2,5-dichlorophenyl)azo)-2-hydroxyphen... | H411 | — | — | CLP00 |
-| 14977-61-8 | chromyl dichloride; chromic oxychloride | H271, H350i, H340, H314, H317, H400, H410 | — | H314:10.0%; H314:5.0%; H315:0.5%; H319:0.5%; H3... | CLP00 |
+| 14977-61-8 | chromyl dichloride; chromic oxychloride | H271, H350i, H340, H314, H317, H400, H410 | — | H314(1A):≥10.0%; H314(1B):5.0–10.0%; H315(2):0.... | CLP00 |
 | 149850-29-3 | 1,3-bis{}{6-fluoro-4-[1,5-disulfo-4-(3-aminocarbonyl-1-ethyl-6... | H317 | — | — | CLP00 |
 | 149850-30-6 | methyl N-[3-acetylamino)-4-(2-cyano-4-nitrophenylazo)phenyl]-N... | H317 | — | — | CLP00 |
 | 149877-41-8 | bifenazate (ISO); isopropyl 2-(4-methoxybiphenyl-3-yl)hydrazin... | H373, H317, H400, H410 | Akut=1 | — | ATP7 |
 | 149961-52-4 | dimoxystrobin (ISO); (2E)-2-{2-[(2,5-dimethylphenoxy)methyl]ph... | H351, H361d, H332, H400, H410 | Akut=100 | — | ATP18 |
 | 149979-41-9 | tepraloxydim (ISO); (RS)-(EZ)-2-{1-[(2E)-3-chloroallyloxyimino... | H351, H361fd | — | — | ATP1 |
-| 14998-37-9 | nickel di(acetate) [1] nickel acetate [2] | H350i, H341, H360D ***, H332, H302, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP01corr |
+| 14998-37-9 | nickel di(acetate) [1] nickel acetate [2] | H350i, H341, H360D ***, H332, H302, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP01corr |
 | 150-68-5 | monuron (ISO); 3-(4-chlorophenyl)-1,1-dimethylurea | H351, H302 **, H400, H410 | — | — | CLP00 |
 | 150-76-5 | mequinol; 4-methoxyphenol; hydroquinone monomethyl ether | H302 **, H319, H317 | — | — | CLP00 |
 | 15024-10-9 | p-tolyl 4-chlorobenzoate | H317, H400, H410 | — | — | CLP00 |
 | 150522-10-4 | sodium [29H,31H-phthalocyaninato-(2-)-N29,N30,N31,N32]-((3-(N-... | H314 | — | — | CLP00 |
-| 15060-62-5 | nickel selenate | H350i, H341, H360D **, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
+| 15060-62-5 | nickel selenate | H350i, H341, H360D **, H372 **, H334, H317, H400, H410 | Akut=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
 | 150919-56-5 | N-(3-(2-(4,4-dimethyl-2,5-dioxo-imidazolin-1-yl)-4,4-dimethyl-... | H413 | — | — | CLP00 |
 | 15096-52-3 | trisodium hexafluoroaluminate [1] trisodium hexafluoroaluminat... | H332, H372, H411 | — | — | ATP03 |
 | 151-56-4 | ethyleneimine; aziridine | H225, H350, H340, H310, H330 **, H300 **, H314, H411 | — | — | CLP00 |
 | 151006-58-5 | reaction mass of: branched icosane; branched docosane; branche... | H332 **, H413 | — | — | ATP1 |
 | 151006-59-6 | reaction mass of: branched triacontane; branched dotriacontane... | H413 | — | — | CLP00 |
 | 151006-61-0 | reaction mass of isomers of branched tetracosane | H332 **, H413 | — | — | CLP00 |
-| 15120-21-5 | perboric acid, sodium salt [1] perboric acid, sodium salt, mon... | H272, H360FD, H331, H302, H335, H318 | — | H318:22.0%; H319:14.0% | — |
+| 15120-21-5 | perboric acid, sodium salt [1] perboric acid, sodium salt, mon... | H272, H360FD, H331, H302, H335, H318 | — | H318(1):≥22.0%; H319(2):≥14.0% | — |
 | 15121-89-8 | E-ethyl-4-oxo-4-phenylcrotonate | H312 **, H302 **, H315, H318, H317, H400, H410 | — | — | CLP00 |
 | 151213-39-7 | (4aS-cis-)-6-benzyl-octahydropyrrolo[3.4-b]pyridine | H332 **, H302 **, H373 **, H314, H411 | — | — | ATP1 |
 | 151257-01-1 | 2-butyl-1,3-diazaspiro[4.4]non-1-en-4-one hydrochloride | H302 **, H319 | — | — | ATP1 |
 | 151338-11-3 | 3-cyano-N-(1,1-dimethylethyl)androsta-3,5-diene-17-β-carboxamide | H400, H410 | — | — | CLP00 |
-| 15141-18-1 | 2-[N-ethyl-4-[(5-nitrothiazol-2-yl)azo]-m-toluidino]ethyl acet... | H317 | — | H317:0.001% | ATP18 |
+| 15141-18-1 | 2-[N-ethyl-4-[(5-nitrothiazol-2-yl)azo]-m-toluidino]ethyl acet... | H317 | — | H317(1):≥0.001% | ATP18 |
 | 151436-99-6 | hexasodium (di[N-(3-(4-[5-(5-amino-3-methyl-1-phenylpyrazol-4-... | H318, H317 | — | — | CLP00 |
 | 15159-40-7 | morpholine-4-carbonyl chloride | H351, H315, H319 | — | — | CLP00 |
 | 15165-67-0 | dichlorprop-P (ISO); (+)-R-2-(2,4-dichlorophenoxy)propionic acid | H302 **, H315, H318, H317 | — | — | CLP00 |
@@ -1250,10 +1250,10 @@
 | 15545-48-9 | chlorotoluron (ISO); 3-(3-chloro-p-tolyl)-1,1-dimethylurea | H351, H361d **, H400, H410 | — | — | CLP00 |
 | 155522-09-1 | 1,2-bis[4-fluoro-6-{}{4-sulfo-5-(2-(4-sulfonaphtalene-3-ylazo)... | H317 | — | — | CLP00 |
 | 155522-12-6 | methyl 2-[4-(2-chloro-4-nitrophenylazo)-3-(1-oxopropyl)amino]p... | H317, H413 | — | — | CLP00 |
-| 155569-91-8 | emamectin benzoate (ISO); (4"R)-4"-deoxy-4"-(methylamino) aver... | H331, H311, H301, H370(nervous_system), H372(nervous_system), H318, H400, H410 | Akut=10000 | H372:5.0%; H373:0.5% | ATP17 |
+| 155569-91-8 | emamectin benzoate (ISO); (4"R)-4"-deoxy-4"-(methylamino) aver... | H331, H311, H301, H370(nervous_system), H372(nervous_system), H318, H400, H410 | Akut=10000 | H372:≥5.0%; H373:0.5–5.0% | ATP17 |
 | 155601-30-2 | 1-(2-hydroxyethyl)-1H-pyrazol-4,5-diyldiammoniumsulfate | H318, H317, H411 | — | — | ATP1 |
 | 15571-58-1 | 2-ethylhexyl 10-ethyl-4,4-dioctyl-7-oxo-8-oxa-3,5-dithia-4-sta... | H360D, H372(immune_system), H400, H410 | — | — | ATP15 |
-| 15586-38-6 | nickel dichromate | H350i, H341, H360D **, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
+| 15586-38-6 | nickel dichromate | H350i, H341, H360D **, H372 **, H334, H317, H400, H410 | Akut=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
 | 155925-27-2 | silver sodium zirconium hydrogenphosphate | H400, H410 | — | — | CLP00 |
 | 156-43-4 | 4-ethoxyaniline; p-phenetidine | H341, H332 **, H312 **, H302 **, H319, H317 | — | — | CLP00 |
 | 156-59-2 | 1,2-dichloroethylene [1] cis-dichloroethylene [2] trans-dichlo... | H225, H332, H412 | — | — | CLP00 |
@@ -1269,15 +1269,15 @@
 | 1563-66-2 | carbofuran (ISO); 2,3-dihydro-2,2-dimethylbenzofuran-7-yl N-me... | H330 **, H300 **, H400, H410 | — | — | CLP00 |
 | 1563-67-3 | decarbofuran (ISO); 2,3-dihydro-2-methylbenzofuran-7-yl methyl... | H331 **, H311 **, H301 ** | — | — | CLP00 |
 | 156324-82-2 | 2-isopropyl-5-methylcyclohexyloxycarbonyloxy-2-hydroxypropane | H319, H411 | — | — | CLP00 |
-| 15646-96-5 | 2,2,4-trimethylhexamethylene-1,6-di-isocyanate [1] 2,4,4-trime... | H331, H335, H315, H319, H334 | — | H334:0.5%; H317:0.5% | CLP00 |
+| 15646-96-5 | 2,2,4-trimethylhexamethylene-1,6-di-isocyanate [1] 2,4,4-trime... | H331, H335, H315, H319, H334 | — | H334(1):≥0.5%; H317(1):≥0.5% | CLP00 |
 | 15662-33-6 | 6-(1α,5aβ,8aβ,9-pentahydroxy-7β-isopropyl-2β,5β,8β-trimethylpe... | H312 **, H302 **, H400, H410 | — | — | CLP00 |
 | 156679-41-3 | N-dodecyl-[3-(4-(dimethylamino)benzamido)-propyl]dimethylammon... | H318, H317, H400, H410 | — | — | CLP00 |
 | 156732-13-7 | 5-amino-[2S-di(methylphenyl)amino]-1,6-diphenyl-4Z-hexen-3-one... | H413 | — | — | ATP1 |
 | 156738-27-1 | sodium 4-[4-(4-hydroxyphenylazo)phenylamino]-3-nitrobenzenesul... | H317, H412 | — | — | CLP00 |
 | 156769-97-0 | sodium and potassium 4-(3-aminopropylamino)-2,6-bis[3-(4-metho... | H317 | — | — | CLP00 |
 | 1569-02-4 | 1-ethoxypropan-2-ol; 2PG1EE; 1-ethoxy-2-propanol; propylene gl... | H226, H336 | — | — | CLP00 |
-| 15699-18-0 | nickel dipotassium bis(sulfate) [1] diammonium nickel bis(sulf... | H350i, H341, H360D ***, H332, H302, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
-| 1570-64-5 | 4-chloro-o-cresol; 4-chloro-2-methyl phenol | H331 **, H314, H400 | — | H335:1.0% | CLP00 |
+| 15699-18-0 | nickel dipotassium bis(sulfate) [1] diammonium nickel bis(sulf... | H350i, H341, H360D ***, H332, H302, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
+| 1570-64-5 | 4-chloro-o-cresol; 4-chloro-2-methyl phenol | H331 **, H314, H400 | — | H335(3):≥1.0% | CLP00 |
 | 1570-95-2 | 2-phenyl-1,3-propanediol | H318 | — | — | CLP00 |
 | 1571-75-1 | 1,1-bis(4-hydroxyphenyl)-1-phenylethane | H400, H410 | — | — | ATP1 |
 | 157362-53-3 | 2-(4-(4-(butyl-(1-methylhexyl)amino)phenyl)-3-cyano-5-oxo-1,5-... | H317, H400, H410 | — | — | ATP1 |
@@ -1290,7 +1290,7 @@
 | 158062-67-0 | flonicamid (ISO); N-(cyanomethyl)-4-(trifluoromethyl)pyridine-... | H302 | — | — | ATP7 |
 | 1582-09-8 | trifluralin (ISO) (containing < 0.5 ppm NPDA); α,α,α-trifluoro... | H351, H317, H400, H410 | Akut=10 | — | ATP1 |
 | 15825-70-4 | mannitol hexanitrate; nitromannite; [>40 % phlegmatiser] | H201 | — | — | CLP00 |
-| 15843-02-4 | nickel diformate [1] formic acid, nickel salt [2] formic acid,... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 15843-02-4 | nickel diformate [1] formic acid, nickel salt [2] formic acid,... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 15851-52-2 | nickel(II) sulfite [1] nickel tellurium trioxide [2] nickel te... | H350i, H372 **, H334, H317, H400, H410 | — | — | ATP02 |
 | 15852-21-8 | nickel(II) sulfite [1] nickel tellurium trioxide [2] nickel te... | H350i, H372 **, H334, H317, H400, H410 | — | — | ATP02 |
 | 158570-99-1 | mixed linear and branched C14-15 alcohols ethoxylated, reactio... | H315, H317, H400, H410 | — | — | CLP00 |
@@ -1311,11 +1311,11 @@
 | 159939-85-2 | 4-[(3-chlorophenyl)(1H-imidazol-1-yl)methyl]-1,2-benzenediamin... | H361f **, H302 **, H314, H317, H411 | — | — | ATP1 |
 | 160194-26-3 | 1-(3-iodo-4-aminobenzyl)-1H-1,2,4-triazole | H302 **, H317, H411 | — | — | ATP1 |
 | 160236-81-7 | bis[tributyl 4-(methylbenzyl)ammonium] 1,5-naphthalenedisulfonate | H332 **, H302 **, H318, H400, H410 | — | — | CLP00 |
-| 16039-61-5 | nickel dilactate | H350i, H341, H360D **, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
+| 16039-61-5 | nickel dilactate | H350i, H341, H360D **, H372 **, H334, H317, H400, H410 | Akut=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
 | 160430-64-8 | acetamiprid (ISO); (1E)-N-[(6-chloropyridin-3-yl)methyl]-N-cya... | H361d, H301, H400, H410 | Akut=10 / Kr=10 | — | ATP18 |
 | 16063-70-0 | 2,3,5-trichloropyridine | H412 | — | — | CLP00 |
 | 16071-86-6 | disodium {}{5-[(4'-((2,6-hydroxy-3-((2-hydroxy-5-sulphophenyl)... | H350 | — | — | CLP00 |
-| 16083-14-0 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D **, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
+| 16083-14-0 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D **, H372 **, H334, H317, H400, H410 | Akut=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
 | 160987-57-5 | reaction mass of: ethyl 2-((4-(5,6-dichlorobenzothiazol-2-ylaz... | H413 | — | — | ATP1 |
 | 16118-49-3 | carbetamide (ISO); (R)-1-(ethylcarbamoyl)ethyl carbanilate; (2... | H351, H360D, H302, H411 | — | — | ATP10 |
 | 161326-34-7 | fenamidone (ISO); (S)-5-methyl-2-methylthio-5-phenyl-3-phenyla... | H400, H410 | — | — | CLP00 |
@@ -1355,7 +1355,7 @@
 | 166900-80-7 | cymoxanil (ISO); 2-cyano-N-[(ethylamino)carbonyl]-2-(methoxyim... | H361fd, H302, H373 (blood system, thymus, eyes), H317, H400, H410 | Akut=1 / Kr=1 | — | ATP21 |
 | 16695-22-0 | N,N-bis(2-(p-toluenesulfonyloxy)ethyl)-p-toluenesulfonamide | H317, H413 | — | — | CLP00 |
 | 1671-49-4 | 4-mesyl-2-nitrotoluene | H361f **, H302 **, H317, H412 | — | — | ATP1 |
-| 1675-54-3 | bis-[4-(2,3-epoxipropoxi)phenyl]propane | H315, H319, H317 | — | H319:5.0%; H315:5.0% | CLP00 |
+| 1675-54-3 | bis-[4-(2,3-epoxipropoxi)phenyl]propane | H315, H319, H317 | — | H319(2):≥5.0%; H315(2):≥5.0% | CLP00 |
 | 16752-77-5 | methomyl (ISO); 1-(methylthio)ethylideneamino N-methylcarbamate | H300 **, H400, H410 | Akut=100 | — | ATP1 |
 | 167678-46-8 | [3-(chlorocarbonyl)-2-methylphenyl]acetate | H314, H317 | — | — | ATP1 |
 | 167684-63-1 | 3-[3-(2-dodecyloxy-5-methylphenylcarbamoyl)-4-hydroxy-1-naphth... | H413 | — | — | CLP00 |
@@ -1368,7 +1368,7 @@
 | 168612-06-4 | N,N-dibutyl-(2,5-dihydro-5-thioxo-1H-tetrazol-1-yl)acetamide | H319, H317 | — | — | ATP1 |
 | 168689-49-4 | hexadecyl 4-chloro-3-[2-(5,5-dimethyl-2,4-dioxo-1,3-oxazolidin... | H413 | — | — | CLP00 |
 | 16871-90-2 | alkali fluorosilicates(Na) [1] alkali fluorosilicates(K) [2] a... | H331, H311, H301 | — | — | CLP00 |
-| 16872-11-0 | fluoroboric acid ... % | H314 | — | H314:25.0%; H315:10.0%; H319:10.0% | CLP00 |
+| 16872-11-0 | fluoroboric acid ... % | H314 | — | H314(1B):≥25.0%; H315(2):10.0–25.0%; H319(2):10... | CLP00 |
 | 1689-83-4 | ioxynil (ISO); 4-hydroxy-3,5-diiodobenzonitrile | H361d **, H331 **, H301 **, H312 **, H373 **, H319, H400, H410 | Akut=10 | — | CLP00 |
 | 1689-84-5 | bromoxynil (ISO); 3,5-dibromo-4-hydroxybenzonitrile; bromoxyni... | H361d **, H330 **, H301 **, H317, H400, H410 | Akut=10 | — | CLP00 |
 | 1689-99-2 | bromoxynil octanoate (ISO); 2,6-dibromo-4-cyanophenyl octanoate | H361d **, H331 **, H302 **, H317, H400, H410 | Akut=10 | — | CLP00 |
@@ -1380,7 +1380,7 @@
 | 16921-30-5 | dipotassium hexachloroplatinate | H301 **, H318, H334, H317 | — | — | CLP00 |
 | 16923-58-3 | disodium hexachloroplatinate | H301 **, H318, H334, H317 | — | — | CLP00 |
 | 169314-88-9 | aluminium-magnesium-zinc-carbonate-hydroxide | H413 | — | — | ATP5 |
-| 16938-22-0 | 2,2,4-trimethylhexamethylene-1,6-di-isocyanate [1] 2,4,4-trime... | H331 **, H335, H315, H319, H334 | — | H334:0.5%; H317:0.5% | CLP00 |
+| 16938-22-0 | 2,2,4-trimethylhexamethylene-1,6-di-isocyanate [1] 2,4,4-trime... | H331 **, H335, H315, H319, H334 | — | H334:≥0.5%; H317(1):≥0.5% | CLP00 |
 | 1694-09-3 | benzyl violet 4B; α-[4-(4-dimethylamino-α-{}{4-[ethyl(3-sodios... | H351 | — | — | CLP00 |
 | 1694-82-2 | cis-1,2,3,6-tetrahydro-4-methylphthalic anhydride [1] 1,2,3,6-... | H318, H334, H317 | — | — | CLP00 |
 | 16941-12-1 | hexachloroplatinic acid | H301 **, H314, H334, H317 | — | — | CLP00 |
@@ -1388,7 +1388,7 @@
 | 16961-83-4 | fluorosilicic acid ... % | H314 | — | — | CLP00 |
 | 1698-60-8 | chloridazon (ISO); 5-amino-4-chloro-2-phenylpyridazine-3-(2H)-... | H317, H400, H410 | — | — | CLP00 |
 | 169939-84-8 | salt of: (1S-cis)-1-amino-2,3-dihydro-1H-inden-2-ol and [R-[R*... | H317 | — | — | ATP1 |
-| 17010-21-8 | cadmiumhexafluorosilicate(2-); cadmium fluorosilica | H351, H331 **, H301 **, H373 **, H400, H410 | — | H373:0.1% | CLP00 |
+| 17010-21-8 | cadmiumhexafluorosilicate(2-); cadmium fluorosilica | H351, H331 **, H301 **, H373 **, H400, H410 | — | H373:≥0.1% | CLP00 |
 | 1702-17-6 | clopyralid (ISO); 3,6-dichloropyridine-2-carboxylic acid | H318 | — | — | ATP1 |
 | 170222-39-6 | 2-phthalimidoethyl N-[4-(2-cyano-4-nitrophenylazo)phenyl]-N-me... | H317, H413 | — | — | ATP1 |
 | 170292-97-4 | N-[(benzotriazole-1-yl)methyl)]-4-carboxybenzenesulfonamide | H319, H411 | — | — | CLP00 |
@@ -1459,7 +1459,7 @@
 | 182235-14-9 | 4,4'-(1,6-hexamethylenebis(formylimino))bis(2,2,6,6-tetramethy... | H411 | — | — | ATP1 |
 | 1823-59-2 | 4,4'-oxydiphthalic anhydride | H412 | — | — | CLP00 |
 | 18230-61-0 | bis(1-methylethyl)-dimethoxysilane | H226, H315, H317, H412 | — | — | CLP00 |
-| 18283-82-4 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 18283-82-4 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 182926-43-8 | trisodium 2,4-diamino-3,5-bis-[4-(2-sulfonatoethoxy)sulfonyl)p... | H412 | — | — | CLP00 |
 | 183130-96-3 | tetra-ammonium 2-[6-[7-(2-carboxylato-phenylazo)-8-hydroxy-3,6... | H319, H412 | — | — | ATP1 |
 | 183196-57-8 | potassium 1-methyl-3-morpholinocarbonyl-4-[3-(1-methyl-3-morph... | H360D **, H317 | — | — | ATP1 |
@@ -1479,7 +1479,7 @@
 | 18691-97-9 | methabenzthiazuron (ISO); 1-(1,3-benzothiazol-2-yl)1,3-dimethy... | H400, H410 | — | — | CLP00 |
 | 187026-95-5 | potassium,sodium 2,4-diamino-3-[4-(2-sulfonatoethoxysulfonyl)p... | H318 | — | — | CLP00 |
 | 18718-11-1 | nickel hydrogen phosphate [1] nickel bis(dihydrogen phosphate)... | H350i, H372 **, H334, H317, H400, H410 | — | — | ATP02 |
-| 18721-51-2 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 18721-51-2 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 187285-15-0 | reaction mass of: sodium 5-[8-[4-[4-[4-[7-(3,5-dicarboxylatoph... | H318 | — | — | CLP00 |
 | 1873-90-1 | 3-hexylheptamethyltrisiloxane | H332 **, H413 | — | — | ATP1 |
 | 187412-41-5 | pentaerythritol, dipentaerythritol, fatty acids, C6-10, mixed ... | H317 | — | — | ATP1 |
@@ -1498,7 +1498,7 @@
 | 190085-41-7 | 2-hydroxybenzoic acid 2-butyloctyl ester | H413 | — | — | ATP1 |
 | 19060-15-2 | 4,4-dimethoxybutylamine | H302 **, H314, H317, H412 | — | — | CLP00 |
 | 19098-16-9 | hydroxylammonium hydrogensulfate; hydroxylamine sulfate(1:1) [... | H201, H351, H312, H302, H373 **, H315, H319, H317, H400 | — | — | ATP01corr |
-| 191-30-0 | dibenzo[def,p]chrysene; dibenzo[a,l]pyrene | H350, H341 | — | H350:0.001% | ATP15 |
+| 191-30-0 | dibenzo[def,p]chrysene; dibenzo[a,l]pyrene | H350, H341 | — | H350:≥0.001% | ATP15 |
 | 1910-42-5 | paraquat dichloride; 1,1-dimethyl-4,4'-bipyridinium dichloride... | H330 **, H311 **, H301 **, H335, H372 **, H315, H319, H400, H410 | — | — | CLP00 |
 | 1912-24-9 | atrazine (ISO); 2-chloro-4-ethylamine-6-isopropylamine-1,3,5-t... | H373 **, H317, H400, H410 | — | — | CLP00 |
 | 191617-13-7 | bis(2-hydroxyethyl)-(2-hydroxypropyl)ammonium acetate | H412 | — | — | ATP1 |
@@ -1635,17 +1635,17 @@
 | 22212-55-1 | ethyl N-benzoyl-N-(3,4-dichlorophenyl)-DL-alaninate; benzoylpr... | H302 **, H400, H410 | — | — | CLP00 |
 | 22224-92-6 | fenamiphos (ISO); ethyl-4-methylthio-m-tolyl isopropyl phospho... | H330, H310, H300, H319, H400, H410 | Akut=100 | — | ATP5 |
 | 2223-82-7 | 2,2-dimethyltrimethylene diacrylate; neopentyl glycol diacrylate | H311 **, H315, H319, H317 | — | — | CLP00 |
-| 2223-95-2 | nickel(II) stearate; nickel(II) octadecanoate | H350i, H341, H360D **, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
+| 2223-95-2 | nickel(II) stearate; nickel(II) octadecanoate | H350i, H341, H360D **, H372 **, H334, H317, H400, H410 | Akut=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
 | 22259-30-9 | formetanate (ISO); 3-[(EZ)-dimethylaminomethyleneamino]phenyl ... | H330 **, H300 **, H317, H400, H410 | — | — | CLP00 |
 | 22288-41-1 | 1,1,3,3-tetramethylbutylperoxypivalate | H225, H242, H315, H317, H411 | — | — | ATP1 |
-| 22398-80-7 | indium phosphide | H350, H361f, H372(lungs) | — | H350:0.01%; H373:0.01% | ATP3 |
+| 22398-80-7 | indium phosphide | H350, H361f, H372(lungs) | — | H350:≥0.01%; H373:0.01–0.1% | ATP3 |
 | 22411-22-9 | hafnium tetra-n-butoxide | H318, H317 | — | — | CLP00 |
 | 2243-62-1 | 1,5-naphthylenediamine | H351, H400, H410 | — | — | CLP00 |
 | 22432-68-4 | 4,4,5,5-tetrachloro-1,3-dioxolan-2-one | H330 **, H302 **, H314 | — | — | CLP00 |
 | 2244-16-8 | carvone (ISO); 2-methyl-5-(prop-1-en-2-yl)cyclohex-2-en-1-one ... | H317 | — | — | ATP07 |
-| 2244-21-5 | troclosene potassium [1] troclosene sodium  [2] | H272, H302 **, H335, H319, H400, H410 | — | H335:10.0%; H031:10.0% | ATP1 |
+| 2244-21-5 | troclosene potassium [1] troclosene sodium  [2] | H272, H302 **, H335, H319, H400, H410 | — | H335(3):≥10.0%; H031:≥10.0% | ATP1 |
 | 225786-91-4 | tetrakis(bis(2-hydroxyethyl)methylammonium) 3-(4-(7-acetylamin... | H411 | — | — | ATP1 |
-| 22605-92-1 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 22605-92-1 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 226065-73-2 | 3,4,3',4'-tetraphenyl-1,1'-ethandiylbispyrol-2,5-dione | H317, H413 | — | — | ATP1 |
 | 22673-19-4 | dibutylbis(pentane-2,4-dionato-O,O')tin | H360FD, H372(immune_system) | — | — | ATP14 |
 | 226996-19-6 | reaction product of 3,5-di-tert-butylsalicylic acid and zircon... | H400, H410 | — | — | ATP1 |
@@ -1682,12 +1682,12 @@
 | 23950-58-5 | propyzamide (ISO); 3,5-dichloro-N-(1,1-dimethylprop-2-ynyl)ben... | H351, H400, H410 | — | — | CLP00 |
 | 24017-47-8 | triazophos (ISO); O,O-diethyl-O-1-phenyl-1H-1,2,4-triazol-3-yl... | H331 **, H301 **, H312 **, H400, H410 | Akut=100 | — | ATP1 |
 | 240494-71-7 | 2,3,5,6-tetrafluoro-4-(methoxymethyl)benzyl (1R,3R)-2,2-dimeth... | H301, H332, H370(nervous_system), H373, H400, H410 | Akut=100 | — | ATP13 |
-| 2407-94-5 | 1-hydroperoxycyclohexyl 1-hydroxycyclohexyl peroxide; [â‰¤ 91 ... | H242, H302, H314 | — | H335:5.0% | CLP00 |
+| 2407-94-5 | 1-hydroperoxycyclohexyl 1-hydroxycyclohexyl peroxide; [â‰¤ 91 ... | H242, H302, H314 | — | H335(3):≥5.0% | CLP00 |
 | 24083-03-2 | 1-(2-Butoxypropoxy)propan-2-ol | H312 **, H302 ** | — | — | CLP00 |
 | 24085-06-1 | 2-acetoxymethylene-4-acetylphenylacetate | H302 **, H373 **, H318, H317, H400, H410 | — | — | ATP1 |
 | 24151-93-7 | piperophos (ISO); S-2-methylpiperidinocarbonylmethyl-O,O-dipro... | H302 **, H400, H410 | Akut=10 | — | CLP00 |
 | 24197-34-0 | 4,4'-thiodi-o-cresol | H318, H400, H410 | — | — | CLP00 |
-| 2421-28-5 | benzophenone-3,3',4,4'-tetracarboxylic dianhydride; 4,4'-carbo... | H335, H319 | — | H319:1.0%; H335:1.0% | CLP00 |
+| 2421-28-5 | benzophenone-3,3',4,4'-tetracarboxylic dianhydride; 4,4'-carbo... | H335, H319 | — | H319(2):≥1.0%; H335(3):≥1.0% | CLP00 |
 | 2425-06-1 | captafol (ISO); 1,2,3,6-tetrahydro-N-(1,1,2,2-tetrachloroethyl... | H350, H317, H400, H410 | — | — | CLP00 |
 | 2425-10-7 | xylylcarb (ISO); 3,4-dimethylphenyl N-methylcarbamate; 3,4-xyl... | H302 **, H400, H410 | — | — | CLP00 |
 | 2425-79-8 | 1,4-bis(2,3 epoxypropoxy)butane; butanedioldiglycidyl ether | H332 **, H312 **, H315, H319, H317 | — | — | CLP00 |
@@ -1696,7 +1696,7 @@
 | 24279-39-8 | 2,6-dichloro-4-trifluoromethylaniline | H332 **, H302 **, H315, H317, H400, H410 | — | — | CLP00 |
 | 24294-01-7 | 3-N,N-bis(methoxyethyl)aminoacetanilide | H302 **, H412 | — | — | ATP1 |
 | 24307-26-4 | mepiquat chloride (ISO); 1,1-dimethylpiperidinium chloride | H301, H332, H412 | — | — | ATP21 |
-| 2431-50-7 | 2,3,4-trichlorobut-1-ene | H351, H331 **, H302 **, H335, H315, H319, H400, H410 | — | H351:0.1% | ATP1 |
+| 2431-50-7 | 2,3,4-trichlorobut-1-ene | H351, H331 **, H302 **, H335, H315, H319, H400, H410 | — | H351:≥0.1% | ATP1 |
 | 24342-03-8 | isobutyl but-3-enoate | H226 | — | — | CLP00 |
 | 243662-67-1 | alkenes, C12-14, hydroformylation products, distn. residues, C... | H315, H317 | — | — | ATP1 |
 | 2437-29-8 | malachite green hydrochloride [1] malachite green oxalate [2] | H361d ***, H302, H318, H400, H410 | — | — | CLP00 |
@@ -1724,7 +1724,7 @@
 | 25057-89-0 | bentazone (ISO); 3-isopropyl-2,1,3-benzothiadiazine-4-one-2,2-... | H361d, H302, H319, H317 | — | — | ATP18 |
 | 25059-78-3 | sodium 3,6-dichloro-o-anisate [1] 3,6-dichloro-o-anisic acid, ... | H412 | — | — | CLP00 |
 | 25059-80-7 | benazolin-ethyl; ethyl 4-chloro-2-oxo-2H-benzothiazole-3-acetate | H411 | — | — | CLP00 |
-| 25068-38-6 | reaction product: bisphenol-A-(epichlorhydrin); epoxy resin (n... | H315, H319, H317, H411 | — | H319:5.0%; H315:5.0% | CLP00 |
+| 25068-38-6 | reaction product: bisphenol-A-(epichlorhydrin); epoxy resin (n... | H315, H319, H317, H411 | — | H319(2):≥5.0%; H315(2):≥5.0% | CLP00 |
 | 250688-43-8 | disodium 8-amino-5-{4-[2-(sulfonatoethoxy)sulfonyl]phenylazo}n... | H318 | — | — | ATP1 |
 | 2511-00-4 | ethyl 2-cyclohexylpropionate | H411 | — | — | CLP00 |
 | 2514-53-6 | ethylene bis(trichloroacetate) | H315 | — | — | CLP00 |
@@ -1734,13 +1734,13 @@
 | 25167-70-8 | 2,4,4-trimethylpentene | H225, H304, H336 | — | — | ATP5 |
 | 25167-80-0 | 2-chlorophenol [1] 4-chlorophenol [2] 3-chlorophenol [3] chlor... | H332, H312, H302, H411 | — | — | CLP00 |
 | 25168-05-2 | 2-chlorotoluene [1] 3-chlorotoluene [2] 4-chlorotoluene [3] ch... | H332, H411 | — | — | CLP00 |
-| 2527-66-4 | 2-methyl-1,2-ben­zothiazol-3(2H)-one; [MBIT] | H301, H312, H314, H318, H317, H400, H411 | Akut=1 | H317:0.0015% | ATP15 |
+| 2527-66-4 | 2-methyl-1,2-ben­zothiazol-3(2H)-one; [MBIT] | H301, H312, H314, H318, H317, H400, H411 | Akut=1 | H317(1):≥0.0015% | ATP15 |
 | 252977-62-1 | 3-(4-aminophenyl)-2-cyano-2-propenoic acid | H317 | — | — | CLP00 |
 | 25311-71-1 | isofenphos (ISO); O-ethyl O-2-isopropoxycarbonylphenyl-isoprop... | H311 **, H301 **, H400, H410 | Akut=100 | — | CLP00 |
 | 25319-90-8 | MCPA-thioethyl (ISO); S-ethyl   (4-chloro-2- methylphenoxy)eth... | H302, H373(liver), H400, H410 | Akut=10 | — | ATP15 |
 | 2532-43-6 | 3-methylpyrazol-5-yl-dimethylcarbamate; monometilan | H331 **, H311 **, H301 ** | — | — | CLP00 |
 | 25321-14-6 | 2,4-dinitrotoluene [1] dinitrotoluene [2] | H350, H341, H361f ***, H331, H311, H301, H373 **, H400, H410 | — | — | ATP01 |
-| 2536-05-2 | 4,4'-methylenediphenyl diisocyanate; diphenylmethane-4,4'-diis... | H351, H332, H335, H373 **, H315, H319, H334, H317 | — | H319:5.0%; H315:5.0%; H334:0.1%; H335:5.0% | ATP01 |
+| 2536-05-2 | 4,4'-methylenediphenyl diisocyanate; diphenylmethane-4,4'-diis... | H351, H332, H335, H373 **, H315, H319, H334, H317 | — | H319(2):≥5.0%; H315(2):≥5.0%; H334(1):≥0.1%; H3... | ATP01 |
 | 25366-23-8 | thiazafluron (ISO); 1,3-dimethyl-1-(5-trifluoromethyl-1,3,4-th... | H302 **, H400, H410 | — | — | CLP00 |
 | 25383-07-7 | (R)-α-phenylethylammonium (-)-(1R, 2S)-(1,2-epoxypropyl)phosph... | H361f **, H411 | — | — | CLP00 |
 | 2540-82-1 | formothion (ISO); N-formyl-N-methylcarbamoylmethyl O,O-dimethy... | H312 **, H302 ** | — | — | CLP00 |
@@ -1749,7 +1749,7 @@
 | 255387-46-3 | dimethyl[2S,2S']-6,6,6'6'-tetramethoxy-2,2'-[N,N'-bis(trifluor... | H317 | — | — | ATP1 |
 | 25550-51-0 | hexahydro-4-methylphthalic anhydride [1] hexahydromethylphthal... | H318, H334, H317 | — | — | CLP00 |
 | 25550-58-7 | dinitrophenol (reaction mass of isomers) [1] 2,4(or 2,6)-dinit... | H331 **, H311 **, H301 **, H373 **, H400, H410 | — | — | CLP00 |
-| 25584-83-2 | 2-hydroxy-1-methylethylacrylate [1] 2-hydroxypropylacrylate [2... | H331, H311, H301, H314, H317 | — | H317:0.2% | CLP00 |
+| 25584-83-2 | 2-hydroxy-1-methylethylacrylate [1] 2-hydroxypropylacrylate [2... | H331, H311, H301, H314, H317 | — | H317(1):≥0.2% | CLP00 |
 | 25634-93-9 | 2-methyl-5-phenylpentanol | H315, H319 | — | — | CLP00 |
 | 25637-27-8 | fluorotripentylstannane [1] hexapentyldistannoxane [2] | H332, H312, H302, H400, H410 | — | — | CLP00 |
 | 25637-99-4 | Hexabromocyclododecane [1] 1,2,5,6,9,10-hexabromocyclododecane... | H361, H362 | — | — | ATP3 |
@@ -1763,11 +1763,11 @@
 | 25965-81-5 | 1-(2-propenyl)pyridinium chloride | H302 **, H317 | — | — | CLP00 |
 | 2597-03-7 | phenthoate (ISO); ethyl 2-(dimethoxyphosphinothioylthio)-2-phe... | H312 **, H302 **, H400, H410 | Akut=100 | — | CLP00 |
 | 2602-46-2 | tetrasodium 3,3'-[[1,1'-biphenyl]-4,4'-diylbis(azo)]bis[5-amin... | H350, H361d ** | — | — | CLP00 |
-| 26043-11-8 | nickel hexafluorosilicate | H350i, H341, H360D **, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
+| 26043-11-8 | nickel hexafluorosilicate | H350i, H341, H360D **, H372 **, H334, H317, H400, H410 | Akut=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
 | 26087-47-8 | iprobenfos (ISO); S-benzyl diisopropyl phosphorothioate | H302 **, H411 | — | — | CLP00 |
 | 26116-56-3 | (9S)-9-amino-9-deoxyerythromycin | H318, H400, H410 | — | — | CLP00 |
 | 26157-73-3 | N,N',N''-tris(2-methyl-2,3-epoxypropyl)-perhydro-2,4,6-oxo-1,3... | H341, H412 | — | — | ATP1 |
-| 26172-54-3 | 2-methyl-2H-isothiazol-3-one hydrochloride; 2-methyl-2,3-dihyd... | H330, H311, H301, H314, H318, H317, H400, H410 | Akut=10 / Kr=1 | H317:0.0015% | — |
+| 26172-54-3 | 2-methyl-2H-isothiazol-3-one hydrochloride; 2-methyl-2,3-dihyd... | H330, H311, H301, H314, H318, H317, H400, H410 | Akut=10 / Kr=1 | H317(1A):≥0.0015% | — |
 | 26218-04-2 | 2-ethylhexyl 4-aminobenzoate | H400, H410 | — | — | CLP00 |
 | 26225-79-6 | ethofumesate (ISO); (RS)-2-ethoxy-2,3-di­hydro-3,3-dimethyl­be... | H400, H410 | Akut=1 | — | ATP15 |
 | 26259-45-0 | secbumeton (ISO); 2-sec-butylamino-4-ethylamino-6-methoxy-1,3,... | H302 **, H319, H400, H410 | — | — | CLP00 |
@@ -1775,15 +1775,15 @@
 | 2631-37-0 | promecarb (ISO); 3-isopropyl-5-methylphenyl N-methylcarbamate | H301 **, H400, H410 | — | — | CLP00 |
 | 2631-40-5 | isoprocarb (ISO); 2-isopropylphenyl N-methylcarbamate | H302 **, H400, H410 | — | — | CLP00 |
 | 2633-67-2 | styrene-4-sulfonyl chloride | H315, H318, H317 | — | — | CLP00 |
-| 2634-33-5 | 1,2-benzisothiazol-3(2H)-one; 1,2-benzisothiazolin-3-one | H330, H302, H315, H318, H317, H400, H410 | Akut=1 | H317:0.036% | ATP21 |
+| 2634-33-5 | 1,2-benzisothiazol-3(2H)-one; 1,2-benzisothiazolin-3-one | H330, H302, H315, H318, H317, H400, H410 | Akut=1 | H317(1):≥0.036% | ATP21 |
 | 2635-50-9 | S-[2-(isopropylsulphinyl)ethyl] O,O-dimethyl phosphorothioate | H331 **, H311 **, H301 ** | — | — | CLP00 |
 | 2636-26-2 | cyanophos (ISO); O-4-cyanophenyl O,O-dimethyl phosphorothioate | H312 **, H302 **, H400, H410 | — | — | CLP00 |
 | 26364-65-8 | 2-thiazolidinylidenecyanamide | H302 **, H373 **, H412 | — | — | ATP1 |
 | 26399-36-0 | profluralin (ISO); N-(cyclopropylmethyl)-α,α,α-trifluoro-2,6-d... | H319, H400, H410 | — | — | CLP00 |
 | 2642-71-9 | azinphos-ethyl (ISO); O,O-diethyl 4-oxobenzotriazin-3-ylmethyl... | H300 **, H311 **, H400, H410 | Akut=100 | — | ATP1 |
 | 26447-14-3 | [(p-tolyloxy)methyl]oxirane; cresyl glycidyl ether [4] [1] [(m... | H341, H315, H317, H411 | — | — | CLP00 |
-| 26447-40-5 | 4,4'-methylenediphenyl diisocyanate; diphenylmethane-4,4'-diis... | H351, H332, H335, H373 **, H315, H319, H334, H317 | — | H319:5.0%; H315:5.0%; H334:0.1%; H335:5.0% | ATP01 |
-| 26471-62-5 | 2-methyl-m-phenylene diisocyanate; toluene-2,4-di-isocyanate [... | H351, H330, H335, H315, H319, H334, H317, H412 | — | H334:0.1% | CLP00 |
+| 26447-40-5 | 4,4'-methylenediphenyl diisocyanate; diphenylmethane-4,4'-diis... | H351, H332, H335, H373 **, H315, H319, H334, H317 | — | H319(2):≥5.0%; H315(2):≥5.0%; H334(1):≥0.1%; H3... | ATP01 |
+| 26471-62-5 | 2-methyl-m-phenylene diisocyanate; toluene-2,4-di-isocyanate [... | H351, H330, H335, H315, H319, H334, H317, H412 | — | H334(1):≥0.1% | CLP00 |
 | 26523-78-4 | tris(nonylphenyl) phosphite | H317, H400, H410 | — | — | ATP3 |
 | 26530-20-1 | octhilinone (ISO); 2-octyl-2H-isothiazol-3-one; [OIT] | H330, H311, H301, H314, H318, H317, H400, H410 | Akut=100 | — | ATP15 |
 | 2655-14-3 | XMC; 3,5-xylyl methylcarbamate | H302 ** | — | — | CLP00 |
@@ -1792,14 +1792,14 @@
 | 26628-22-8 | sodium azide | H300 **, H400, H410 | — | — | CLP00 |
 | 26635-64-3 | octane; n-octane [1] 2,2,4-trimethylpentane [2] 2,3,3-trimethy... | H225, H304, H336, H315, H400, H410 | — | — | ATP01 |
 | 26739-54-8 | guanidinium benzoate | H302 ** | — | — | ATP1 |
-| 26761-45-5 | 2,3-epoxypropyl neodecanoate | H341, H317 | — | H317:0.001% | ATP22 |
+| 26761-45-5 | 2,3-epoxypropyl neodecanoate | H341, H317 | — | H317(1):≥0.001% | ATP22 |
 | 26766-27-8 | triarimol (ISO); 2,4-dichloro-α-(pyrimidin-5-yl) benzhydryl al... | H302 ** | — | — | CLP00 |
-| 2682-20-4 | 2-methylisothiazol-3(2H)-one | H330, H311, H301, H314, H318, H317, H400, H410 | Akut=10 | H317:0.0015% | ATP13 |
+| 2682-20-4 | 2-methylisothiazol-3(2H)-one | H330, H311, H301, H314, H318, H317, H400, H410 | Akut=10 | H317(1):≥0.0015% | ATP13 |
 | 2687-91-4 | N-ethyl-2-pyrrolidone; 1-ethylpyrrolidin-2-one | H360D | — | — | ATP5 |
 | 2687-94-7 | N-(n-octyl)-2-pyrrolidone | H314, H411 | — | — | CLP00 |
 | 2687-96-9 | 1-dodecyl-2-pyrrolidone | H314, H317, H400, H410 | — | — | CLP00 |
 | 26912-64-1 | 9-(2-propenyloxy)tricyclo[5.2.1.0(2,6)]dec-3(or-4-)-ene | H315, H411 | — | — | ATP1 |
-| 2699-11-8 | 1-hydroperoxycyclohexyl 1-hydroxycyclohexyl peroxide; [â‰¤ 91 ... | H242, H302, H314 | — | H335:5.0% | CLP00 |
+| 2699-11-8 | 1-hydroperoxycyclohexyl 1-hydroxycyclohexyl peroxide; [â‰¤ 91 ... | H242, H302, H314 | — | H335(3):≥5.0% | CLP00 |
 | 2699-79-8 | sulphuryl difluoride | H331, H373 **, H400 ** | — | — | CLP00 |
 | 27016-75-7 | nickel diarsenide [1] nickel arsenide [2] | H350i, H372 **, H317, H400, H410 | — | — | ATP02 |
 | 2703-37-9 | S-[2-(ethylsulphinyl)ethyl] O,O-dimethyl phosphorodithioate | H310, H330 **, H300 **, H411 | — | — | CLP00 |
@@ -1815,7 +1815,7 @@
 | 2761-09-3 | 2-hydroxypropyl methacrylate [1] 3-hydroxypropyl methacrylate [2] | H319, H317 | — | — | CLP00 |
 | 27610-48-6 | 6-glycidyloxynapht-1-yl oxymethyloxirane | H341, H312 **, H315, H317, H412 | — | — | ATP1 |
 | 27624-67-5 | 2,4-diamino-5-[4-[(2-sulfoxyl ethyl)sulfonyl]phenylazo]benzene... | H201, H318, H412 | — | — | ATP1 |
-| 27637-46-3 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 27637-46-3 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 2768-02-7 | trimethoxyvinylsilane; trimethoxy(vinyl)silane | H317 | — | — | ATP15 |
 | 2778-04-3 | endothion (ISO); S-5-methoxy-4-oxopyran-2-ylmethyl dimethyl ph... | H311 **, H301 ** | — | — | CLP00 |
 | 2778-42-9 | 1,3-bis(1-isocyanato-1-methylethyl)benzene; [m-TMXDI] | H334, H317 | — | — | ATP18 |
@@ -1840,25 +1840,25 @@
 | 28434-00-6 | allethrin; S-bioallethrin; esbiothrin; (RS)-3-allyl-2-methyl-4... | H332, H302, H400, H410 | — | — | CLP00 |
 | 28434-01-7 | bioresmethrin (ISO); (5-benzyl-3-furyl)methyl (1R)-2,2-dimethy... | H400, H410 | Akut=1000 | — | ATP1 |
 | 2844-92-0 | dipicrylamine, ammonium salt | H201, H310, H330 **, H300 **, H373 **, H411 | — | — | ATP1 |
-| 2855-13-2 | 3-aminomethyl-3,5,5-trimethylcyclohexylamine | H302, H314, H318, H317 | — | H317:0.001% | ATP17 |
+| 2855-13-2 | 3-aminomethyl-3,5,5-trimethylcyclohexylamine | H302, H314, H318, H317 | — | H317(1):≥0.001% | ATP17 |
 | 2867-47-2 | 2-dimethylaminoethyl methacrylate | H312 **, H302 **, H315, H319, H317 | — | — | CLP00 |
 | 28698-31-9 | [(1-methyl-1,2-ethanediyl)bis[nitrilobis(methylene)]]tetrakis(... | H318, H400, H410 | — | — | ATP1 |
 | 287-92-3 | cyclopentane | H225, H412 | — | — | CLP00 |
-| 28772-56-7 | bromadiolone (ISO); 3-[3-(4′-bromobiphenyl-4-yl)-3-hydroxy-1-p... | H360D, H330, H310, H300, H372(blood), H400, H410 | Akut=1 | H360D:0.003%; H372:0.005%; H373:0.0005% | ATP9 |
+| 28772-56-7 | bromadiolone (ISO); 3-[3-(4′-bromobiphenyl-4-yl)-3-hydroxy-1-p... | H360D, H330, H310, H300, H372(blood), H400, H410 | Akut=1 | H360D:≥0.003%; H372:≥0.005%; H373:0.0005–0.005% | ATP9 |
 | 287933-44-2 | 2-ethyl-1-(2-(1,3-dioxanyl)ethyl)-pyridinium bromide | H412 | — | — | CLP00 |
 | 288-32-4 | imidazole | H360D, H302, H314 | — | — | ATP7 |
 | 288-88-0 | 1,2,4-triazole | H360FD, H302, H319 | — | — | ATP17 |
-| 2893-78-9 | troclosene potassium [1] troclosene sodium [2] | H272, H302, H335, H319, H400, H410 | — | H335:10.0% | ATP01 |
+| 2893-78-9 | troclosene potassium [1] troclosene sodium [2] | H272, H302, H335, H319, H400, H410 | — | H335(3):≥10.0% | ATP01 |
 | 2905-69-3 | methyl 2,5-dichlorobenzoate | H302, H336, H411 | — | — | ATP6 |
 | 29081-56-9 | perfluorooctane sulfonic acid; heptadecafluorooctane-1-sulfoni... | H351, H360D ***, H362, H332, H302, H372 **, H411 | — | — | ATP01 |
-| 2918-23-2 | 2-hydroxy-1-methylethylacrylate [1] 2-hydroxypropylacrylate [2... | H331 **, H311 **, H301 **, H314, H317 | — | H317:0.2% | CLP00 |
+| 2918-23-2 | 2-hydroxy-1-methylethylacrylate [1] 2-hydroxypropylacrylate [2... | H331 **, H311 **, H301 **, H314, H317 | — | H317(1):≥0.2% | CLP00 |
 | 2921-88-2 | chlorpyrifos (ISO); O,O-diethyl O-3,5,6-trichloro-2-pyridyl ph... | H301 **, H400, H410 | Akut=10000 | — | CLP00 |
 | 29232-93-7 | pirimiphos-methyl (ISO); O-[2-(diethylamino)-6-methylpyrimidin... | H302, H372(nervous_system), H400, H410 | Akut=1000 | — | ATP15 |
-| 29317-63-3 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 29317-63-3 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 29385-43-1 | methyl-1H-benzotriazole | H411 | — | — | ATP22 |
 | 294-90-6 | 1,4,7,10-tetraazacyclododecane | H312 **, H302 **, H314, H400, H410 | — | — | ATP1 |
 | 29457-72-5 | perfluorooctane sulfonic acid; heptadecafluorooctane-1-sulfoni... | H351, H360D ***, H362, H332, H302, H372 **, H411 | — | — | ATP01 |
-| 29590-42-9 | isooctyl acrylate | H335, H315, H319, H400, H410 | — | H335:10.0% | CLP00 |
+| 29590-42-9 | isooctyl acrylate | H335, H315, H319, H400, H410 | — | H335(3):≥10.0% | CLP00 |
 | 29617-66-1 | (S)-2-chloropropionic acid | H312 **, H302 **, H314 | — | — | CLP00 |
 | 297-78-9 | isobenzan (ISO); 1,3,4,5,6,7,8,8-octachloro-1,3,3a,4,7,7a-hexa... | H310, H300 **, H400 | — | — | CLP00 |
 | 297-97-2 | thionazin (ISO); O,O-diethyl O-pyrazin-2-yl phosphorothioate | H310, H300 ** | — | — | CLP00 |
@@ -1883,14 +1883,14 @@
 | 3006-82-4 | tert-butyl 2-ethylperoxyhexanoate | H360FD, H317 | — | — | ATP22 |
 | 301-04-2 | lead di(acetate) | H360Df, H373 **, H400, H410 | — | — | CLP00 |
 | 301-12-2 | oxydemeton-methyl; S-2-(ethylsulphinyl)ethyl O,O-dimethyl phos... | H311 **, H301 **, H400 | — | — | CLP00 |
-| 302-01-2 | hydrazine | H226, H350, H331 **, H311 **, H301 **, H314, H317, H400, H410 | — | H314:10.0%; H315:3.0%; H319:3.0% | CLP00 |
+| 302-01-2 | hydrazine | H226, H350, H331 **, H311 **, H301 **, H314, H317, H400, H410 | — | H314(1B):≥10.0%; H315(2):3.0–10.0%; H319(2):3.0... | CLP00 |
 | 302-17-0 | chloral hydrate; 2,2,2-trichloroethane-1,1-diol | H301 **, H315, H319 | — | — | CLP00 |
 | 302-27-2 | aconitine | H330 **, H300 ** | — | — | CLP00 |
 | 302-97-6 | 3-oxoandrost-4-ene-17-ß-carboxylic acid | H361f, H413 | — | — | ATP1 |
 | 3030-47-5 | bis(2-dimethylaminoethyl)(methyl)amine | H311 **, H302 **, H314 | — | — | CLP00 |
 | 3033-77-0 | 2,3-epoxypropyltrimethylammonium chloride ...%; glycidyl trime... | H350, H341, H361f **, H312 **, H302 **, H373 **, H318, H317, H412 | — | — | ATP1 |
 | 30560-19-1 | acephate (ISO); O,S-dimethyl acetylphosphoramidothioate | H302 ** | — | — | CLP00 |
-| 3066-71-5 | cyclohexyl acrylate | H335, H315, H411 | — | H335:10.0% | CLP00 |
+| 3066-71-5 | cyclohexyl acrylate | H335, H315, H411 | — | H335(3):≥10.0% | CLP00 |
 | 30785-74-1 | Main component 6 (isomer): asym. 1:2 Cr(III)-complex of: A: 3-... | H318, H400, H410 | — | — | CLP00 |
 | 308076-74-6 | silicon carbide fibres (with diameter < 3 Î¼m, length > 5 Î¼m ... | H350i | — | — | ATP15 |
 | 30864-28-9 | methyl 3-[(dimethoxyphosphinothioyl)oxy]methacrylate [1] metha... | H302 **, H317, H400, H410 | — | — | CLP00 |
@@ -1945,8 +1945,8 @@
 | 334-48-5 | decanoic acid | H315, H319, H412 | — | — | ATP7 |
 | 334-88-3 | diazomethane | H350 | — | — | CLP00 |
 | 3347-22-6 | dithianon (ISO); 5,10-dihydro-5,10-dioxonaphtho(2,3-b)(1,4)dit... | H302 **, H400, H410 | — | — | CLP00 |
-| 3349-06-2 | nickel diformate [1] formic acid, nickel salt [2] formic acid,... | H350i, H341, H360D **, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
-| 3349-08-4 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 3349-06-2 | nickel diformate [1] formic acid, nickel salt [2] formic acid,... | H350i, H341, H360D **, H372 **, H334, H317, H400, H410 | Akut=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
+| 3349-08-4 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 335-67-1 | perfluorooctanoic acid | H351, H360D, H362, H332, H302, H372(liver), H318 | — | — | ATP5 |
 | 335-76-2 | nonadecafluorodecanoic acid [1] ammonium nonadecafluorodecanoa... | H351, H360Df, H362 | — | — | ATP10 |
 | 335104-84-2 | tembotrione (ISO); 2-{2-chloro-4-(methylsulfonyl)-3-[(2,2,2-tr... | H361d, H373(eyes,_kidneys,_liver), H317, H400, H410 | Akut=100 | — | ATP7 |
@@ -1976,19 +1976,19 @@
 | 35145-02-9 | 2,4-dimethylcyclohex-3-ene-1-carbaldehyde [1] (1Î±,2Î±,5Î±)-2,... | H317 | — | — | — |
 | 3524-68-3 | pentaerythritol triacrylate | H315, H319, H317 | — | — | CLP00 |
 | 3535-84-0 | thallium thiocyanate | H330 **, H300 **, H312 **, H373 **, H411 | — | — | ATP1 |
-| 3542-36-7 | dichlorodioctylstannane | H360D, H330, H372 **, H412 | — | H360D:0.03% | ATP15 |
+| 3542-36-7 | dichlorodioctylstannane | H360D, H330, H372 **, H412 | — | H360D:≥0.03% | ATP15 |
 | 3547-33-9 | 2-(octylthio)ethanol; 2-hydroxyethyl octyl sulphide | H318 | — | — | CLP00 |
 | 35541-81-2 | reaction mass of: cis-1,4-dimethylcyclohexyl dibenzoate; trans... | H413 | — | — | CLP00 |
 | 35554-44-0 | imazalil (ISO); 1-[2-(allyloxy)-2-(2,4-dichlorophenyl)ethyl]-1... | H351, H301, H332, H318, H410 | Kr=10 | — | ATP7 |
 | 35575-96-3 | azamethiphos (ISO); S-[(6-chloro-2-oxooxazolo[4,5-b]pyridin-3(... | H351, H331, H302, H370(nervous_system), H317, H400, H410 | Akut=1000 | — | ATP17 |
 | 35687-90-2 | tripropylammonium dihydrogenphosphate | H302 ** | — | — | ATP1 |
-| 35691-65-7 | 2-bromo-2-(bromomethyl)pentanedinitrile; [DBDCB] | H330, H302, H373 (thyroid, central nervous system), H318, H317, H411 | — | H317:0.001% | — |
+| 35691-65-7 | 2-bromo-2-(bromomethyl)pentanedinitrile; [DBDCB] | H330, H302, H373 (thyroid, central nervous system), H318, H317, H411 | — | H317(1A):≥0.001% | — |
 | 357-57-3 | brucine; 2,3-dimethoxystrychnine | H330 **, H300 **, H412 | — | — | CLP00 |
 | 35950-52-8 | 2-bromo-1-(2-furyl)-2-nitroethylene | H302 **, H373 **, H314, H317, H400, H410 | — | — | CLP00 |
 | 36026-88-7 | nickel hydrogen phosphate [1] nickel bis(dihydrogen phosphate)... | H350i, H372 **, H334, H317, H400, H410 | — | — | ATP02 |
 | 362-03-8 | 3-(phenothiazin-10-yl)propionic acid | H411 | — | — | CLP00 |
 | 363138-44-7 | 11-amino-3-chloro-6,11-dihydro-5,5-dioxo-6-methyl-dibenzo[c,f]... | H302 **, H318, H412 | — | — | ATP1 |
-| 3634-83-1 | Bis(isocyanatomethyl)benzene; [m-XDI] | H334, H317 | — | H317:0.001% | ATP18 |
+| 3634-83-1 | Bis(isocyanatomethyl)benzene; [m-XDI] | H334, H317 | — | H317(1):≥0.001% | ATP18 |
 | 36362-09-1 | 2-(decylthio)ethylammonium chloride | H373 **, H315, H318, H400, H410 | — | — | CLP00 |
 | 36394-75-9 | (S)-(-)-2-acetoxypropionylchloride; (1S)-2-chloro-1-methyl-2-o... | H302 **, H314, H317 | — | — | ATP1 |
 | 3648-18-8 | dioctyltin dilaurate [1] stannane, dioctyl-, bis (coco acyloxy... | H360D, H372(immune_system) | — | — | ATP15 |
@@ -2000,14 +2000,14 @@
 | 3681-73-0 | (E)-3,7-dimethyl-2,6-octadienylhexadecanoate | H315, H413 | — | — | CLP00 |
 | 368450-39-9 | N-[2-(2-butyl-4,6-dicyano-1,3-dioxo-2,3-dihydro-1H-isoindol-5-... | H413 | — | — | ATP1 |
 | 3689-24-5 | sulfotep (ISO); O,O,O,O-tetraethyl dithiopyrophosphate | H310, H300 **, H400, H410 | Akut=1000 | — | CLP00 |
-| 3691-35-8 | chlorophacinone (ISO); 2-[(4-chlorophenyl)(phenyl)acetyl]-1H-i... | H360D, H330, H310, H300, H372(blood), H400, H410 | Akut=1 | H360D:0.003%; H372:0.1%; H373:0.01% | ATP9 |
+| 3691-35-8 | chlorophacinone (ISO); 2-[(4-chlorophenyl)(phenyl)acetyl]-1H-i... | H360D, H330, H310, H300, H372(blood), H400, H410 | Akut=1 | H360D:≥0.003%; H372:≥0.1%; H373:0.01–0.1% | ATP9 |
 | 371-86-8 | mipafox (ISO); N,N'- di-isopropylphosphorodiamidic fluoride | H370 ** | — | — | CLP00 |
 | 37143-54-7 | 1-methoxy-2-propylamine | H225, H302 **, H314, H412 | — | — | CLP00 |
 | 371921-63-0 | 3,10-diamino-6,13-dichloro-2-((6-(((4-(1,1-dimethylethyl)pheny... | H318, H412 | — | — | ATP1 |
 | 37199-66-9 | potassium polysulphides | H314, H400 | — | — | CLP00 |
 | 3724-43-4 | chloro-N,N-dimethylformiminium chloride | H360D **, H302 **, H314 | — | — | ATP1 |
-| 37244-98-7 | perboric acid (H3BO2(O2)), monosodium salt trihydrate [1] perb... | H360FD, H332, H335, H318 | — | H318:36.0%; H319:22.0% | — |
-| 373-02-4 | nickel di(acetate) [1] nickel acetate [2] | H350i, H341, H360D **, H332 **, H302 **, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
+| 37244-98-7 | perboric acid (H3BO2(O2)), monosodium salt trihydrate [1] perb... | H360FD, H332, H335, H318 | — | H318(1):≥36.0%; H319(2):≥22.0% | — |
+| 373-02-4 | nickel di(acetate) [1] nickel acetate [2] | H350i, H341, H360D **, H332 **, H302 **, H372 **, H334, H317, H400, H410 | Akut=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
 | 37321-15-6 | nickel(II) silicate [1] dinickel orthosilicate [2] nickel sili... | H350i, H372 **, H317, H400, H410 | — | — | ATP02 |
 | 37329-65-0 | cellobiohydrolase, exo- | H334 | — | — | CLP00 |
 | 3734-95-0 | cyanthoate (ISO); S-(N-(1-cyano-1-methylethyl)carbamoylmethyl)... | H300 **, H311 ** | — | — | CLP00 |
@@ -2039,7 +2039,7 @@
 | 3861-47-0 | ioxynil octanoate (ISO); 4-cyano-2,6-diiodophenyl octanoate | H361d **, H301 **, H319, H317, H400, H410 | Akut=10 | — | CLP00 |
 | 3862-73-5 | 2,3,4-trifluoroaniline | H312 **, H302 **, H373 **, H315, H318, H411 | — | — | CLP00 |
 | 3878-19-1 | fuberidazole (ISO); 2-(2-furyl)-1H-benzimidazole | H351, H302, H373(heart), H317, H400, H410 | Akut=1 | — | ATP3 |
-| 3906-55-6 | nickel bis(4-cyclohexylbutyrate) | H350i, H341, H360D **, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
+| 3906-55-6 | nickel bis(4-cyclohexylbutyrate) | H350i, H341, H360D **, H372 **, H334, H317, H400, H410 | Akut=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
 | 39148-24-8 | fosetyl-aluminium (ISO); aluminium triethyl triphosphonate | H318 | — | — | ATP1 |
 | 39156-41-7 | 2,4-diaminoanisole; 4-methoxy-m-phenylenediamine [1] 2,4-diami... | H350, H341, H302, H411 | — | — | CLP00 |
 | 39196-18-4 | thiofanox (ISO); 3,3-dimethyl-1-(methylthio)butanone-O-(N-meth... | H310, H300 **, H400, H410 | — | — | CLP00 |
@@ -2051,12 +2051,12 @@
 | 39562-17-9 | methyl 2-(3-nitrobenzylidene)acetoacetate | H317, H400, H410 | — | — | CLP00 |
 | 39562-27-1 | methyl 2-(2-nitrobenzylidene)acetoacetate | H317, H411 | — | — | CLP00 |
 | 39807-15-3 | oxadiargyl (ISO); 3-[2,4-dichloro-5-(2-propynyloxy)phenyl]-5-(... | H361d **, H373 **, H400, H410 | Akut=1000 | — | ATP1 |
-| 39819-65-3 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 39819-65-3 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 399-95-1 | 4-amino-3-fluorophenol | H350, H302 **, H317, H411 | — | — | CLP00 |
 | 400882-07-7 | cyflumetofen (ISO); 2-methoxyethyl (RS)-2-(4- tert-butylphenyl... | H351, H317 | — | — | ATP14 |
 | 40188-41-8 | 3,7-dimethyloctanenitrile | H315, H317, H411 | — | — | CLP00 |
 | 4023-02-3 | pyrazole-1-carboxamidine monohydrochloride | H302 **, H373 **, H318, H317, H412 | — | — | ATP1 |
-| 40292-82-8 | neodecanoyl chloride | H330 **, H302 **, H314 | — | H335:5.0% | CLP00 |
+| 40292-82-8 | neodecanoyl chloride | H330 **, H302 **, H314 | — | H335(3):≥5.0% | CLP00 |
 | 4032-26-2 | diquat dibromide [1] diquat dichloride [2] 6,7-dihydrodipyrido... | H330, H302, H335, H372 **, H315, H319, H317, H400, H410 | — | — | CLP00 |
 | 40487-42-1 | pendimethalin (ISO); N-(1-ethylpropyl)-2,6-dinitro-3,4-xylidine | H361d, H400, H410 | Akut=100 | — | ATP18 |
 | 406-58-6 | 1,1,1,3,3-pentafluorobutane | H225 | — | — | ATP1 |
@@ -2065,12 +2065,12 @@
 | 4067-16-7 | 3,6,9,12-tetra-azatetradecamethylenediamine; pentacthylenehexa... | H314, H317, H400, H410 | — | — | CLP00 |
 | 40702-26-9 | 2,4-dimethylcyclohex-3-ene-1-carbaldehyde [1] (1Î±,2Î±,5Î±)-2,... | H317 | — | — | — |
 | 40722-80-3 | (2-chloroethyl)(3-hydroxypropyl)ammonium chloride | H350, H340, H373 **, H317, H412 | — | — | ATP1 |
-| 4074-88-8 | 2,2'-oxydiethyl diacrylate; diethylene glycol diacrylate | H311 **, H315, H319, H317 | — | H317:0.2% | CLP00 |
-| 4083-64-1 | 4-isocyanatosulphonyltoluene; tosyl isocyanate | H335, H315, H319, H334 | — | H319:5.0%; H335:5.0%; H315:5.0% | CLP00 |
+| 4074-88-8 | 2,2'-oxydiethyl diacrylate; diethylene glycol diacrylate | H311 **, H315, H319, H317 | — | H317(1):≥0.2% | CLP00 |
+| 4083-64-1 | 4-isocyanatosulphonyltoluene; tosyl isocyanate | H335, H315, H319, H334 | — | H319(2):≥5.0%; H335(3):≥5.0%; H315(2):≥5.0% | CLP00 |
 | 4084-38-2 | (2,3,5,6-tetrafluorophenyl)methanol | H302 **, H319, H317 | — | — | ATP1 |
 | 409-21-2 | silicon carbide fibres (with diameter < 3 μm, length > 5 μm an... | H350i | — | — | ATP15 |
 | 4097-36-3 | dinosam (ISO); 2-(1-methylbutyl)-4,6-dinitrophenol | H331 **, H311 **, H301 **, H400, H410 | — | — | CLP00 |
-| 4098-71-9 | 3-isocyanatomethyl-3,5,5-trimethylcyclohexyl isocyanate; isoph... | H331 **, H335, H315, H319, H334, H317, H411 | — | H334:0.5%; H317:0.5% | CLP00 |
+| 4098-71-9 | 3-isocyanatomethyl-3,5,5-trimethylcyclohexyl isocyanate; isoph... | H331 **, H335, H315, H319, H334, H317, H411 | — | H334:≥0.5%; H317(1):≥0.5% | CLP00 |
 | 4104-14-7 | phosacetim (ISO); O,O-bis(4-chlorophenyl) N-acetimidoylphospho... | H310, H300 **, H400, H410 | — | — | CLP00 |
 | 41083-11-8 | azocyclotin (ISO); 1-(tricyclohexylstannyl)-1H-1,2,4-triazole | H330 **, H301 **, H335, H315, H318, H400, H410 | — | — | CLP00 |
 | 41107-56-6 | 5-(2,4-dioxo-1,2,3,4-tetrahydropyrimidine)-3-fluoro-2-hydroxym... | H341 | — | — | CLP00 |
@@ -2103,7 +2103,7 @@
 | 4274-38-8 | 2-amino-4-(trifluoromethyl)benzenethiol hydrochloride | H332 **, H312 **, H302 **, H373 **, H314, H317, H400 | — | — | ATP1 |
 | 4277-06-9 | cyclohexadeca-1,9-diene | H315, H317, H413 | — | — | ATP1 |
 | 42774-15-2 | N,N'-bis(2,2,6,6-tetramethyl-4-piperidyl)isophthalamide | H302 **, H319 | — | — | CLP00 |
-| 42978-66-5 | (1-methyl-1,2-ethanediyl)bis[oxy(methyl-2,1-ethanediyl)] diacr... | H335, H315, H319, H317, H411 | — | H335:10.0% | CLP00 |
+| 42978-66-5 | (1-methyl-1,2-ethanediyl)bis[oxy(methyl-2,1-ethanediyl)] diacr... | H335, H315, H319, H317, H411 | — | H335(3):≥10.0% | CLP00 |
 | 4299-07-4 | 2-n-butyl-benzo[d]isothiazol-3-one | H314, H317, H400, H410 | — | — | CLP00 |
 | 4301-50-2 | fluenetil (ISO); 2-fluoroethyl biphenyl-4-ylacetate | H310, H300 ** | — | — | CLP00 |
 | 43028-69-9 | 2-(formylamino)-3-thiophenecarboxylic acid; 2-formamido-3-thio... | H302 **, H317 | — | — | ATP1 |
@@ -2118,9 +2118,9 @@
 | 4418-26-2 | sodium 1-(3,4-dihydro-6-methyl-2,4-dioxo-2H-pyran-3-ylidene)et... | H302 ** | — | — | CLP00 |
 | 444-14-4 | 2-bromo-4,6-difluoroaniline | H302 **, H411 | — | — | ATP1 |
 | 444065-11-6 | 2-(4-tert-butylphenyl)-6-cyano-5-[bis(ethoxycarbonylmethyl)car... | H413 | — | — | ATP1 |
-| 4454-16-4 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 4454-16-4 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 4463-59-6 | 2-(2-bromoethoxy)anisole | H302 **, H412 | — | — | CLP00 |
-| 4464-23-7 | cadmium diformate; cadmiumformate | H351, H331 **, H301 **, H373 **, H400, H410 | — | H373:0.25% | CLP00 |
+| 4464-23-7 | cadmium diformate; cadmiumformate | H351, H331 **, H301 **, H373 **, H400, H410 | — | H373:≥0.25% | CLP00 |
 | 4482-55-7 | 1,1-dimethyl-3-phenyluronium trichloroacetate; fenuron-TCA | H315, H400, H410 | — | — | CLP00 |
 | 4524-95-2 | 2-methyl-2-azabicyclo[2.2.1]heptane | H226, H312 **, H302 **, H373 **, H314 | — | — | CLP00 |
 | 452962-97-9 | N-[5-(bis-(2-methoxy-ethyl)-amino]-2-(6-bromo-2-methyl-1,3-dio... | H413 | — | — | ATP1 |
@@ -2138,7 +2138,7 @@
 | 467-69-6 | flurenol (ISO); 9-hydroxy-9H-fluorene-9-carboxylic acid | H411 | — | — | CLP00 |
 | 470-90-6 | chlorfenvinphos (ISO); 2-chloro-1-(2,4 dichlorophenyl) vinyl d... | H300 **, H311 **, H400, H410 | — | — | CLP00 |
 | 47073-92-7 | 4,4'-ethylidenediphenyl dicyanate | H332 **, H302 **, H373 **, H318, H400, H410 | — | — | CLP00 |
-| 4719-04-4 | 2,2',2"-(hexahydro-1,3,5-triazine-1,3,5-triyl)triethanol; 1,3,... | H302 **, H317 | — | H317:0.1% | CLP00 |
+| 4719-04-4 | 2,2',2"-(hexahydro-1,3,5-triazine-1,3,5-triyl)triethanol; 1,3,... | H302 **, H317 | — | H317(1):≥0.1% | CLP00 |
 | 473798-59-3 | fenpyrazamine (ISO); S-allyl 5-amino-2,3-dihydro-2-isopropyl-3... | H400, H410 | Akut=10 | — | ATP10 |
 | 474510-57-1 | 2-hydroxy-1-(4-(4-(2-hydroxy-2-methylpropionyl)benzyl)phenyl)-... | H373 **, H400, H410 | — | — | ATP1 |
 | 479-45-8 | N-methyl-N-2,4,6-tetranitroaniline; tetryl | H201, H331 **, H311 **, H301 **, H373 ** | — | — | ATP1 |
@@ -2155,23 +2155,23 @@
 | 497-19-8 | sodium carbonate | H319 | — | — | CLP00 |
 | 49805-30-3 | (R,S)-2-azabicyclo[2.2.1]hept-5-en-3-one | H302 **, H317 | — | — | ATP1 |
 | 4986-89-4 | pentaerythritol tetraacrylate | H315, H319, H317 | — | — | CLP00 |
-| 4995-91-9 | nickel(II) octanoate | H350i, H341, H360D **, H372 **, H314, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
-| 50-00-0 | formaldehyde …% | H350, H341, H330, H302, H314, H317 | — | H335:5.0%; H314:25.0%; H315:5.0%; H319:5.0% | ATP22 |
+| 4995-91-9 | nickel(II) octanoate | H350i, H341, H360D **, H372 **, H314, H334, H317, H400, H410 | Akut=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
+| 50-00-0 | formaldehyde …% | H350, H341, H330, H302, H314, H317 | — | H335(3):≥5.0%; H314(1B):≥25.0%; H315(2):5.0–25.... | ATP22 |
 | 50-01-1 | guanidinium chloride; guanadine hydrochloride | H302 **, H315, H319 | — | — | CLP00 |
 | 50-14-6 | ergocalciferol (ISO); Vitamin D2 | H330 **, H311 **, H301 **, H372 ** | — | — | CLP00 |
 | 50-29-3 | DDT (ISO); clofenotane (INN); dicophane; 1,1,1-trichloro-2,2-b... | H351, H301 **, H372 **, H400, H410 | — | — | CLP00 |
 | 50-31-7 | 2,3,6-TBA (ISO); 2,3,6-trichlorobenzoic acid | H302 **, H411 | — | — | CLP00 |
-| 50-32-8 | benzo[a]pyrene; benzo[def]chrysene | H350, H340, H360FD, H317, H400, H410 | — | H350:0.01% | CLP00 |
+| 50-32-8 | benzo[a]pyrene; benzo[def]chrysene | H350, H340, H360FD, H317, H400, H410 | — | H350:≥0.01% | CLP00 |
 | 500-28-7 | chlorthion; O-(3-chloro-4-nitrophenyl) O,O-dimethyl phosphorot... | H332 **, H312 **, H302 **, H400, H410 | Akut=100 | — | CLP00 |
 | 500717-36-2 | 1-amino-4-[(4-amino-2-sulfofenyl)amino]-9,10-dihydro-9,10-diox... | H318, H317, H412 | — | — | ATP1 |
 | 500791-70-8 | dibutyl-3-(4-(5-ammonio-2-butyl)benzofuran-3-yl)carbonyl)pheno... | H373 **, H318, H317, H400, H410 | Akut=10 | — | ATP1 |
-| 501-53-1 | benzyl chloroformate | H314, H400, H410 | — | H335:5.0% | CLP00 |
+| 501-53-1 | benzyl chloroformate | H314, H400, H410 | — | H335(3):≥5.0% | CLP00 |
 | 502-55-6 | dixanthogen; O,O-diethyl dithiobis(thioformate) | H302 ** | — | — | CLP00 |
 | 503-30-0 | 1,3-propylene oxide | H225, H332 **, H312 **, H302 ** | — | — | CLP00 |
 | 50471-44-8 | vinclozolin (ISO); N-3,5-dichlorophenyl-5-methyl-5-vinyl-1,3-o... | H351, H360FD, H317, H411 | — | — | CLP00 |
 | 50563-36-5 | dimethachlor (ISO); 2-chloro-N-(2,6-dimethylphenyl)-N-(2-metho... | H302 **, H317, H400, H410 | — | — | CLP00 |
 | 50594-66-6 | acifluorfen (ISO); 5-[2-chloro-4-(trifluoromethyl)phenoxy]-2-n... | H302 **, H315, H318, H400, H410 | — | — | CLP00 |
-| 5064-31-3 | trisodium nitrilotriacetate | H351, H302 **, H319 | — | H351:5.0% | ATP1 |
+| 5064-31-3 | trisodium nitrilotriacetate | H351, H302 **, H319 | — | H351:≥5.0% | ATP1 |
 | 507-60-8 | bufa-4,20,22-trienolide, 6-(acetyloxy)-3-(β-D-glucopyranosylox... | H300 ** | — | — | CLP00 |
 | 50715-28-1 | cyclopentyl chloroformate | H226, H331 **, H302 **, H373 **, H318, H317 | — | — | CLP00 |
 | 508202-43-5 | reaction mass of: pentasodium bis[6-anilino-3,5'-disulfonatona... | H318, H317, H412 | — | — | ATP1 |
@@ -2189,12 +2189,12 @@
 | 51178-75-7 | 1,6-hexanediammonium, sodium 5-sulfato-1,3-benzenedicarboxylate | H317 | — | — | ATP1 |
 | 51229-78-8 | cis-1-(3-chloroallyl)-3,5,7-triaza-1-azoniaadamantane chloride | H228, H361d **, H302 **, H315, H317, H411 | — | — | ATP1 |
 | 51235-04-2 | hexazinone (ISO); 3-cyclohexyl-6-dimethylamino-1-methyl-1,2,3,... | H302 **, H319, H400, H410 | — | — | CLP00 |
-| 5124-30-1 | 4,4'-methylenedi(cyclohexyl isocyanate); dicyclohexylmethane-4... | H331 **, H335, H315, H319, H334, H317 | — | H334:0.5%; H317:0.5% | CLP00 |
+| 5124-30-1 | 4,4'-methylenedi(cyclohexyl isocyanate); dicyclohexylmethane-4... | H331 **, H335, H315, H319, H334, H317 | — | H334:≥0.5%; H317(1):≥0.5% | CLP00 |
 | 51285-81-5 | gadolinium(III)sulfite trihydrate | H411 | — | — | ATP1 |
 | 513-49-5 | (S)-sec-butylamine; (S)-2-aminobutane [1] (R)-sec-butylamine; ... | H225, H332 **, H302 **, H314, H400 | — | — | CLP00 |
 | 513-77-9 | barium carbonate | H302 ** | — | — | CLP00 |
 | 513-78-0 | cadmium carbonate | H350, H340, H332 **, H312 **, H302 **, H372(kidney,_bone), H400, H410 | — | — | ATP10 |
-| 513-79-1 | cobalt carbonate | H350i, H341, H360F **, H334, H317, H400, H410 | Akut=10 | H350i:0.01% | ATP1 |
+| 513-79-1 | cobalt carbonate | H350i, H341, H360F **, H334, H317, H400, H410 | Akut=10 | H350i:≥0.01% | ATP1 |
 | 5131-24-8 | ditalimfos (ISO); O,O-diethyl phthalimidophosphonothioate | H315, H317 | — | — | CLP00 |
 | 5131-66-8 | 3-butoxypropan-2-ol; propylene glycol monobutyl ether | H315, H319 | — | — | CLP00 |
 | 51337-71-4 | isobutyl 2-(4-(4-chlorophenoxy)phenoxy)propionate; clofop-isob... | H302 ** | — | — | CLP00 |
@@ -2206,7 +2206,7 @@
 | 51580-86-0 | troclosene sodium, dihydrate | H302 **, H335, H319, H400, H410 | — | — | CLP00 |
 | 51594-55-9 | R-1-chloro-2,3-epoxypropane | H226, H350, H331 **, H311 **, H301 **, H314, H317 | — | — | CLP00 |
 | 51601-57-1 | 4-(4-tolyloxy)biphenyl | H373 **, H413 | — | — | CLP00 |
-| 51818-56-5 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 51818-56-5 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 52-51-7 | bronopol (INN); 2-bromo-2-nitropropane-1,3-diol | H312 **, H302 **, H335, H315, H318, H400 | Akut=10 | — | ATP1 |
 | 52-68-6 | trichlorfon (ISO); dimethyl 2,2,2-trichloro-1-hydroxyethylphos... | H302 **, H317, H400, H410 | Akut=1000 | — | CLP00 |
 | 520-45-6 | 3-acetyl-6-methyl-2H-pyran-2,4(3H)-dione; dehydracetic acid | H302 ** | — | — | CLP00 |
@@ -2223,7 +2223,7 @@
 | 52583-35-4 | N-(5-(bis(2-methoxyethyl)amino)-2-((2-cyano-4,6-dinitrophenyl)... | H413 | — | — | ATP1 |
 | 5259-88-1 | oxycarboxin (ISO); 2,3-dihydro-6-methyl-5-(N-phenylcarbamoyl)-... | H302 **, H412 | — | — | CLP00 |
 | 526-75-0 | 3,4-xylenol [1] 2,5-xylenol [2] 2,4-xylenol [3] 2,3-xylenol [4... | H311, H301, H314, H411 | — | — | CLP00 |
-| 52625-25-9 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 52625-25-9 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 52645-53-1 | permethrin (ISO); m-phenoxybenzyl 3-(2,2-dichlorovinyl)-2,2-di... | H332 **, H302 **, H317, H400, H410 | Akut=1000 | — | CLP00 |
 | 52658-19-2 | reaction mass of: 7,9,9-trimethyl-3,14-dioxa-4,13-dioxo-5,12-d... | H319, H317, H411 | — | — | CLP00 |
 | 52667-88-6 | 1,4,7,10-tetrakis(p-toluensulfonyl)-1,4,7,10-tetraazacyclodode... | H317, H400, H410 | — | — | CLP00 |
@@ -2234,7 +2234,7 @@
 | 52888-80-9 | prosulfocarb(ISO); S-benzyl N,N-dipropylthiocarbamate | H302 **, H317, H411 | — | — | CLP00 |
 | 52894-02-7 | bis(2-ethylhexyl)octylphosphonate | H400, H410 | — | — | CLP00 |
 | 52918-63-5 | deltamethrin (ISO); (S)-α-cyano-3-phenoxybenzyl (1R, 3R)-3-(2,... | H331 **, H301 **, H400, H410 | Akut=1000000 | — | ATP1 |
-| 53-70-3 | dibenz[a,h]anthracene | H350, H400, H410 | Akut=100 | H350:0.01% | ATP1 |
+| 53-70-3 | dibenz[a,h]anthracene | H350, H400, H410 | Akut=100 | H350:≥0.01% | ATP1 |
 | 531-85-1 | salts of benzidine [ [1] salts of benzidine [ [2] salts of ben... | H350, H302 **, H400, H410 | — | — | CLP00 |
 | 53112-28-0 | pyrimethanil (ISO); N-(4,6-dimethylpyrimidin-2-yl)aniline | H411 | — | — | ATP1 |
 | 532-82-1 | chrysoidine monohydrochloride; 4-phenylazophenylene-1,3-diamin... | H341, H302 **, H315, H318, H400, H410 | — | — | ATP1 |
@@ -2259,7 +2259,7 @@
 | 540-54-5 | 1-chloropropane [1] 2-chloropropane  [2] | H225, H332 **, H312 **, H302 ** | — | — | CLP00 |
 | 540-59-0 | 1,2-dichloroethylene [1] cis-dichloroethylene [2] trans-dichlo... | H225, H332 **, H412 | — | — | CLP00 |
 | 540-67-0 | ethyl methyl ether | H220 | — | — | CLP00 |
-| 540-73-8 | 1,2-dimethylhydrazine | H350, H331 **, H311 **, H301 **, H411 | — | H350:0.01% | CLP00 |
+| 540-73-8 | 1,2-dimethylhydrazine | H350, H331 **, H311 **, H301 **, H411 | — | H350:≥0.01% | CLP00 |
 | 540-80-7 | tert-butyl nitrite | H225, H332 **, H302 ** | — | — | CLP00 |
 | 540-84-1 | octane; n-octane [1] 2,2,4-trimethylpentane [2] 2,3,3-trimethy... | H225, H304, H336, H315, H400, H410 | — | — | ATP01 |
 | 540-88-5 | sec-butyl acetate [1] isobutyl acetate [2] tert-butyl acetate [3] | H225 | — | — | CLP00 |
@@ -2267,12 +2267,12 @@
 | 541-41-3 | ethyl chloroformate | H225, H330 **, H302 **, H314 | — | — | CLP00 |
 | 541-69-5 | m-phenylenediamine dihydrochloride | H341, H331 **, H311 **, H301 **, H319, H317, H400, H410 | — | — | CLP00 |
 | 541-73-1 | 1,3-dichlorbenzene | H302 **, H411 | — | — | CLP00 |
-| 541-85-5 | 5-methylheptan-3-one | H226, H335, H319 | — | H335:10.0% | CLP00 |
+| 541-85-5 | 5-methylheptan-3-one | H226, H335, H319 | — | H335(3):≥10.0% | CLP00 |
 | 542-55-2 | butyl formate [1] tert-butyl formate [2] isobutyl formate [3] | H225, H335, H319 | — | — | CLP00 |
 | 542-56-3 | isobutyl nitrite | H225, H350, H341, H332 **, H302 ** | — | — | CLP00 |
 | 542-75-6 | 1,3-dichloropropene [1] (Z)-1,3-dichloropropene  [2] | H226, H311 **, H301 **, H332 **, H304, H335, H315, H319, H317, H400, H410 | — | — | ATP1 |
-| 542-83-6 | cadmium cyanide | H351, H310, H330 **, H300 **, H373 **, H400, H410 | — | H373:0.1%; H032:1.0% | CLP00 |
-| 542-88-1 | bis(chloromethyl) ether; oxybis(chloromethane) | H225, H350, H330 **, H311 **, H302 ** | — | H350:0.001% | ATP1 |
+| 542-83-6 | cadmium cyanide | H351, H310, H330 **, H300 **, H373 **, H400, H410 | — | H373:≥0.1%; H032:≥1.0% | CLP00 |
+| 542-88-1 | bis(chloromethyl) ether; oxybis(chloromethane) | H225, H350, H330 **, H311 **, H302 ** | — | H350:≥0.001% | ATP1 |
 | 54236-98-5 | 2,4-diamino-5-methoxymethylpyrimidine | H302 **, H373 **, H319 | — | — | CLP00 |
 | 54253-62-2 | copper(II) methanesulfonate | H302 **, H318, H400, H410 | — | — | CLP00 |
 | 54275-93-3 | (1S,3S,5R,6R)-(4-nitrophenylmethyl)-1-dioxo-6-phenylacetamido-... | H334 | — | — | CLP00 |
@@ -2303,12 +2303,12 @@
 | 55219-65-3 | triadimenol (ISO); (1RS,2RS;1RS,2SR)-1-(4-chlorophenoxy)-3,3-d... | H360, H362, H302, H411 | — | — | ATP10 |
 | 55285-14-8 | carbosulfan (ISO); 2,3-dihydro-2,2-dimethyl-7-benzofuryl [(dib... | H330 **, H301 **, H317, H400, H410 | — | — | ATP1 |
 | 553-00-4 | salts of 2-naphthylamine [1] salts of 2-naphthylamine [2] | H350, H302 **, H411 | — | — | CLP00 |
-| 553-71-9 | nickel dibenzoate | H350i, H341, H360D **, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
+| 553-71-9 | nickel dibenzoate | H350i, H341, H360D **, H372 **, H334, H317, H400, H410 | Akut=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
 | 554-12-1 | methyl propionate | H225, H332 ** | — | — | CLP00 |
 | 55406-53-6 | 3-iodo-2-propynyl butylcarbamate; 3-iodoprop-2-yn-1-yl butylca... | H331, H302, H372(larynx), H318, H317, H400, H410 | Akut=10 | — | ATP6 |
 | 55426-95-4 | diethyl(ethyldimethylsilanolato)aluminium | H250, H260, H314 | — | — | CLP00 |
-| 5543-57-7 | warfarin (ISO); 4-hydroxy-3-(3-oxo-1-phenylbutyl)-2H-chromen-2... | H360D, H330, H310, H300, H372 (blood), H411 | — | H360D:0.003%; H372:0.5%; H373:0.05% | ATP09 |
-| 5543-58-8 | warfarin (ISO); 4-hydroxy-3-(3-oxo-1-phenylbutyl)-2H-chromen-2... | H360D, H330, H310, H300, H372 (blood), H411 | — | H360D:0.003%; H372:0.5%; H373:0.05% | ATP09 |
+| 5543-57-7 | warfarin (ISO); 4-hydroxy-3-(3-oxo-1-phenylbutyl)-2H-chromen-2... | H360D, H330, H310, H300, H372 (blood), H411 | — | H360D(1A):≥0.003%; H372(1):≥0.5%; H373(2):≥0.05% | ATP09 |
+| 5543-58-8 | warfarin (ISO); 4-hydroxy-3-(3-oxo-1-phenylbutyl)-2H-chromen-2... | H360D, H330, H310, H300, H372 (blood), H411 | — | H360D(1A):≥0.003%; H372(1):≥0.5%; H373(2):≥0.05% | ATP09 |
 | 555-31-7 | aluminium-tri-isopropoxide | H228 | — | — | CLP00 |
 | 55512-33-9 | pyridate (ISO); O-(6-chloro-3-phenylpyridazin-4-yl) S-octyl th... | H302, H315, H317, H400, H410 | Akut=1 | — | ATP14 |
 | 556-52-5 | 2,3-epoxypropan-1-ol; glycidol; oxiranemethanol | H350, H341, H360F **, H331 **, H312 **, H302 **, H335, H315, H319 | — | — | CLP00 |
@@ -2320,16 +2320,16 @@
 | 557-20-0 | dimethylzinc [1] diethylzinc [2] | H250, H260, H314, H400, H410 | — | — | CLP00 |
 | 5571-36-8 | cyclic 3-(1,2-ethanediylacetale)-estra-5(10),9(11)-diene-3,17-... | H360F **, H373 **, H411 | — | — | ATP1 |
 | 55845-90-4 | (N-benzyl-N-ethyl)amino-3-hydroxyacetophenone hydrochloride | H318, H411 | — | — | CLP00 |
-| 55965-84-9 | reaction mass of 5-chloro-2-methyl-2H-isothiazol-3-one and 2-m... | H330, H310, H301, H314, H318, H317, H400, H410 | Akut=100 | H315:0.06%; H319:0.06% | ATP13 |
+| 55965-84-9 | reaction mass of 5-chloro-2-methyl-2H-isothiazol-3-one and 2-m... | H330, H310, H301, H314, H318, H317, H400, H410 | Akut=100 | H315(2):0.06–0.6%; H319(2):0.06–0.6% | ATP13 |
 | 5598-13-0 | chlorpyrifos-methyl (ISO),; O, O-dimethyl O-3,5,6-trichloro-2-... | H317, H400, H410 | Akut=10000 | — | CLP00 |
 | 56-18-8 | 3,3'-iminodi(propylamine); dipropylenetriamine | H330 **, H311 **, H302 **, H314, H317 | — | — | CLP00 |
-| 56-23-5 | carbon tetrachloride; tetrachloromethane | H351, H331 **, H311 **, H301 **, H372 **, H412, H420 | — | H372:1.0%; H373:0.2% | ATP2 |
+| 56-23-5 | carbon tetrachloride; tetrachloromethane | H351, H331 **, H311 **, H301 **, H372 **, H412, H420 | — | H372:≥1.0%; H373:0.2–1.0% | ATP2 |
 | 56-38-2 | parathion (ISO); O,O-diethyl O-4-nitrophenyl phosphorothioate | H330 **, H300 **, H311 **, H372 **, H400, H410 | Akut=100 | — | CLP00 |
 | 56-55-3 | benz[a]anthracene | H350, H400, H410 | Akut=100 | — | ATP1 |
 | 56-72-4 | coumaphos (ISO); O-3-chloro-4-methylcoumarin-7-yl O,O-diethyl ... | H300 **, H312 **, H400, H410 | — | — | CLP00 |
 | 560-21-4 | octane; n-octane [1] 2,2,4-trimethylpentane [2] 2,3,3-trimethy... | H225, H304, H336, H315, H400, H410 | — | — | ATP01 |
-| 56073-07-5 | difenacoum (ISO); 3-(3-biphenyl-4-yl-1,2,3,4-tetrahydro-1-naph... | H360D, H330, H310, H300, H372(blood), H400, H410 | Akut=10 | H360D:0.003%; H372:0.02%; H373:0.002% | ATP9 |
-| 56073-10-0 | brodifacoum (ISO); 4-hydroxy-3-(3-(4'-bromo-4-biphenylyl)-1,2,... | H360D, H330, H310, H300, H372(blood), H400, H410 | Akut=10 | H360D:0.003%; H372:0.02%; H373:0.002% | ATP9 |
+| 56073-07-5 | difenacoum (ISO); 3-(3-biphenyl-4-yl-1,2,3,4-tetrahydro-1-naph... | H360D, H330, H310, H300, H372(blood), H400, H410 | Akut=10 | H360D:≥0.003%; H372:≥0.02%; H373:0.002–0.02% | ATP9 |
+| 56073-10-0 | brodifacoum (ISO); 4-hydroxy-3-(3-(4'-bromo-4-biphenylyl)-1,2,... | H360D, H330, H310, H300, H372(blood), H400, H410 | Akut=10 | H360D:≥0.003%; H372:≥0.02%; H373:0.002–0.02% | ATP9 |
 | 56187-04-3 | 4-methyl-N,N-bis(2-(((4-methylphenyl)sulfonyl)amino)ethyl)benz... | H413 | — | — | CLP00 |
 | 562-49-2 | heptane; n-heptane [1] 2,4-dimethylpentane [2] 2,2,3-trimethyl... | H225, H304, H336, H315, H400, H410 | — | — | ATP01 |
 | 5625-90-1 | N,N′-methylenedimorpholine; N,N′-methylenebismorpholine; [form... | H350, H341, H332, H312, H302, H373(gastrointestinal_tract,_respiratory_tract), H314, H318, H317 | — | — | ATP10 |
@@ -2387,7 +2387,7 @@
 | 58-55-9 | theophylline; 1,3-dimethyl-3,7-dihydro-1H-purine-2,6-dione | H360D | — | — | ATP18 |
 | 58-74-2 | papaverine | H302 ** | — | — | CLP00 |
 | 58-89-9 | lindane (ISO); γ-HCH or γ-BHC; γ-1,2,3,4,5,6-hexachlorocyclohe... | H362, H301 **, H332 **, H312 **, H373 **, H400, H410 | Akut=10 | — | CLP00 |
-| 58-90-2 | 2,3,4,6-tetrachlorophenol | H301 **, H315, H319, H400, H410 | — | H319:5.0%; H315:5.0% | CLP00 |
+| 58-90-2 | 2,3,4,6-tetrachlorophenol | H301 **, H315, H319, H400, H410 | — | H319(2):≥5.0%; H315(2):≥5.0% | CLP00 |
 | 581-89-5 | 2-nitronaphthalene | H350, H411 | — | — | CLP00 |
 | 5826-76-6 | phosnichlor (ISO); O-4-chloro-3-nitrophenyl O,O-dimethyl phosp... | H332 **, H312 **, H302 ** | — | — | CLP00 |
 | 5827-05-4 | IPSP; S-ethylsulphinylmethyl O,O-diisopropylphosphorodithioate | H310, H301 **, H400, H410 | Akut=100 | — | CLP00 |
@@ -2395,16 +2395,16 @@
 | 583-59-5 | 2-methylcyclohexanol, mixed isomers [1] cis-2-methylcyclohexan... | H332 ** | — | — | CLP00 |
 | 583-60-8 | 2-methylcyclohexanone | H226, H332 ** | — | — | CLP00 |
 | 5834-96-8 | azothoate (ISO); O-4-(4-chlorophenylazo)phenyl O,O-dimethyl ph... | H332 **, H302 ** | — | — | CLP00 |
-| 5836-29-3 | coumatetralyl (ISO); 4-hydroxy-3-(1,2,3,4-tetrahydro-1-naphthy... | H360D, H330, H300, H311, H372(blood), H410 | Kr=10 | H360D:0.003%; H372:1.0%; H373:0.1% | ATP9 |
+| 5836-29-3 | coumatetralyl (ISO); 4-hydroxy-3-(1,2,3,4-tetrahydro-1-naphthy... | H360D, H330, H300, H311, H372(blood), H410 | Kr=10 | H360D:≥0.003%; H372:≥1.0%; H373:0.1–1.0% | ATP9 |
 | 5836-73-7 | 1-(3,4-dichlorophenylimino) thiosemicarbazide | H300 ** | — | — | CLP00 |
 | 584-02-1 | 1-pentanol [1] 3-pentanol [2] | H226, H332, H335, H315 | — | — | ATP01 |
 | 584-79-2 | allethrin; (RS)-3-allyl-2-methyl-4-oxocyclopent-2-enyl (1RS,3R... | H332 **, H302 **, H400, H410 | — | — | CLP00 |
-| 584-84-9 | 2-methyl-m-phenylene diisocyanate; toluene-2,4-di-isocyanate [... | H351, H330, H335, H315, H319, H334, H317, H412 | — | H334:0.1% | CLP00 |
+| 584-84-9 | 2-methyl-m-phenylene diisocyanate; toluene-2,4-di-isocyanate [... | H351, H330, H335, H315, H319, H334, H317, H412 | — | H334(1):≥0.1% | CLP00 |
 | 584-94-1 | octane; n-octane [1] 2,2,4-trimethylpentane [2] 2,3,3-trimethy... | H225, H304, H336, H315, H400, H410 | — | — | ATP01 |
 | 58591-45-0 | cobalt nickel gray periclase; C.I. Pigment Black 25; C.I. 7733... | H350i, H372 **, H317 | — | — | ATP02 |
-| 58594-72-2 | imazalil sulphate (ISO), aqueous solution; 1- [2-(allyloxy)eth... | H302 **, H314, H317, H400, H410 | — | H314:50.0%; H315:30.0%; H318:15.0%; H319:5.0% | CLP00 |
+| 58594-72-2 | imazalil sulphate (ISO), aqueous solution; 1- [2-(allyloxy)eth... | H302 **, H314, H317, H400, H410 | — | H314(1B):≥50.0%; H315(2):30.0–50.0%; H318(1):15... | CLP00 |
 | 586372-44-3 | reaction mass of: 4-amino-3-(4-ethenesulfonyl-2-sulfonatopheny... | H318 | — | — | ATP1 |
-| 5873-54-1 | 4,4'-methylenediphenyl diisocyanate; diphenylmethane-4,4'-diis... | H351, H332, H335, H373 **, H315, H319, H334, H317 | — | H319:5.0%; H315:5.0%; H334:0.1%; H335:5.0% | ATP01 |
+| 5873-54-1 | 4,4'-methylenediphenyl diisocyanate; diphenylmethane-4,4'-diis... | H351, H332, H335, H373 **, H315, H319, H334, H317 | — | H319(2):≥5.0%; H315(2):≥5.0%; H334(1):≥0.1%; H3... | ATP01 |
 | 58834-75-6 | vanadyl pyrophosphate | H319, H317, H412 | — | — | CLP00 |
 | 58856-63-6 | reaction mass of: dodecanoic acid (35-40 %); poly(1-7)lactate ... | H315, H318, H317, H400, H410 | — | — | CLP00 |
 | 5888-33-5 | exo-1,7,7-trimethylbicyclo[2.2.1]hept-2-yl acrylate; isobornyl... | H317 | — | — | ATP18 |
@@ -2416,7 +2416,7 @@
 | 589-90-2 | 1,4-dimethylcyclohexane | H225, H304, H336, H315, H411 | — | — | CLP00 |
 | 59-50-7 | chlorocresol; 4-chloro-m-cresol; 4-chloro-3-methylphenol | H302, H335, H314, H318, H317, H400, H412 | Akut=1 | — | ATP13 |
 | 59-88-1 | phenylhydrazine [1] phenylhydrazinium chloride [2] phenylhydra... | H350, H341, H331, H311, H301, H372 **, H315, H319, H317, H400 | — | — | CLP00 |
-| 59-89-2 | 4-nitrosomorpholine | H350, H341, H372(liver) | — | H350:0.001% | ATP21 |
+| 59-89-2 | 4-nitrosomorpholine | H350, H341, H372(liver) | — | H350:≥0.001% | ATP21 |
 | 590-01-2 | n-butyl propionate [1] sec-butyl propionate [2] tert-butyl pro... | H226 | — | — | CLP00 |
 | 590-18-1 | but-1-ene [1] butene, mixed-1-and-2-isomers [2] 2-methylpropen... | H220 | — | — | CLP00 |
 | 590-28-3 | potassium cyanate | H302 ** | — | — | CLP00 |
@@ -2426,7 +2426,7 @@
 | 591-34-4 | n-butyl propionate [1] sec-butyl propionate [2] iso-butyl prop... | H226 | — | — | CLP00 |
 | 591-76-4 | heptane; n-heptane [1] 2,4-dimethylpentane [2] 2,2,3-trimethyl... | H225, H304, H336, H315, H400, H410 | — | — | ATP01 |
 | 591-78-6 | hexan-2-one; methyl butyl ketone; butyl methyl ketone; methyl-... | H226, H361f **, H336, H372 ** | — | — | CLP00 |
-| 5912-86-7 | isoeugenol [1] (E)-2-methoxy-4-(prop-1-enyl)phenol [2] (Z)-2-m... | H317 | — | H317:0.01% | ATP13 |
+| 5912-86-7 | isoeugenol [1] (E)-2-methoxy-4-(prop-1-enyl)phenol [2] (Z)-2-m... | H317 | — | H317(1A):≥0.01% | ATP13 |
 | 5915-41-3 | terbuthylazine (ISO); N-tert-butyl-6-chloro-N′-ethyl-1,3,5-tri... | H302, H373, H400, H410 | Akut=10 | — | ATP10 |
 | 592-01-8 | calcium cyanide | H300 **, H400, H410 | — | — | CLP00 |
 | 592-13-2 | octane; n-octane [1] 2,2,4-trimethylpentane [2] 2,3,3-trimethy... | H225, H304, H336, H315, H400, H410 | — | — | ATP01 |
@@ -2436,8 +2436,8 @@
 | 592-84-7 | butyl formate [1] tert-butyl formate [2] isobutyl formate  [3] | H225, H335, H319 | — | — | CLP00 |
 | 59227-88-2 | 1-octylazepin-2-one | H314, H317, H411 | — | — | CLP00 |
 | 593-60-2 | bromoethylene | H220, H350 | — | — | CLP00 |
-| 593-74-8 | dimethylmercury [1] diethylmercury  [2] | H310, H330 **, H300 **, H373 **, H400, H410 | — | H373:0.05% | CLP00 |
-| 5932-68-3 | isoeugenol [1] (E)-2-methoxy-4-(prop-1-enyl)phenol [2] (Z)-2-m... | H317 | — | H317:0.01% | ATP13 |
+| 593-74-8 | dimethylmercury [1] diethylmercury  [2] | H310, H330 **, H300 **, H373 **, H400, H410 | — | H373:≥0.05% | CLP00 |
+| 5932-68-3 | isoeugenol [1] (E)-2-methoxy-4-(prop-1-enyl)phenol [2] (Z)-2-m... | H317 | — | H317(1A):≥0.01% | ATP13 |
 | 59320-13-7 | 2-[(4-chloro-2-nitrophenyl)amino]ethanol | H302 **, H411 | — | — | CLP00 |
 | 594-72-9 | 1,1-dichloro-1-nitroethane | H331 **, H311 **, H301 ** | — | — | CLP00 |
 | 594-82-1 | octane; n-octane [1] 2,2,4-trimethylpentane [2] 2,3,3-trimethy... | H225, H304, H336, H315, H400, H410 | — | — | ATP01 |
@@ -2463,7 +2463,7 @@
 | 60207-90-1 | propiconazole (ISO); (2RS,4RS;2RS,4SR)-1-{[2-(2,4-dichlorophen... | H360D, H302, H317, H400, H410 | Akut=1 | — | ATP13 |
 | 60372-77-2 | ethyl N2-dodecanoyl-.sc.l.sc.-argininate hydrochloride | H318, H400 | — | — | ATP1 |
 | 605-50-5 | 1,2-benzenedicarboxylic acid, dipentylester, branched and line... | H360FD, H400 | — | — | CLP00 |
-| 6053-68-5 | cyclopentane-1,2,3,4-tetracarboxylic dianhydride | H335, H319 | — | H319:1.0%; H335:1.0% | CLP00 |
+| 6053-68-5 | cyclopentane-1,2,3,4-tetracarboxylic dianhydride | H335, H319 | — | H319(2):≥1.0%; H335(3):≥1.0% | CLP00 |
 | 60568-05-0 | furmecyclox (ISO); N-cyclohexyl-N-methoxy-2,5-dimethyl-3-furamide | H351, H400, H410 | — | — | CLP00 |
 | 606-20-2 | 2,6-dinitrotoluene | H350, H341, H361f **, H331 **, H311 **, H301 **, H373 **, H412 | — | — | CLP00 |
 | 606-35-9 | 2,4,6-trinitroanisole | H201, H332 **, H312 **, H302 **, H411 | — | — | CLP00 |
@@ -2512,15 +2512,15 @@
 | 619-99-8 | octane; n-octane [1] 2,2,4-trimethylpentane [2] 2,3,3-trimethy... | H225, H304, H336, H315, H400, H410 | — | — | ATP01 |
 | 6195-20-6 | dodecyl 3-amino-4-chlorobenzoate | H317, H413 | — | — | ATP1 |
 | 62-38-4 | phenylmercury acetate | H301 **, H372 **, H314, H400, H410 | — | — | CLP00 |
-| 62-53-3 | aniline | H351, H341, H331 **, H311 **, H301 **, H372 **, H318, H317, H400 | — | H372:1.0%; H373:0.2% | CLP00 |
+| 62-53-3 | aniline | H351, H341, H331 **, H311 **, H301 **, H372 **, H318, H317, H400 | — | H372:≥1.0%; H373:0.2–1.0% | CLP00 |
 | 62-55-5 | thioacetamide | H350, H302 **, H315, H319, H412 | — | — | CLP00 |
 | 62-56-6 | thiourea; thiocarbamide | H351, H361d **, H302 **, H411 | — | — | CLP00 |
 | 62-73-7 | dichlorvos (ISO); 2,2-dichlorovinyl dimethyl phosphate | H330 **, H311 **, H301 **, H317, H400 | Akut=1000 | — | ATP1 |
 | 62-74-8 | sodium fluoroacetate | H310, H330 **, H300 **, H400 | — | — | CLP00 |
-| 62-75-9 | dimethylnitrosoamine; N-nitrosodimethylamine | H350, H330 **, H301 **, H372 **, H411 | — | H350:0.001% | CLP00 |
+| 62-75-9 | dimethylnitrosoamine; N-nitrosodimethylamine | H350, H330 **, H301 **, H372 **, H411 | — | H350:≥0.001% | CLP00 |
 | 6202-15-9 | 1,2,3,4-tetranitrocarbazole | H201, H332 **, H312 **, H302 ** | — | — | ATP1 |
 | 62096-63-3 | 2-amino-6-ethoxy-4-methylamino-1,3,5-triazine | H302 ** | — | — | CLP00 |
-| 621-64-7 | nitrosodipropylamine | H350, H302 **, H411 | — | H350:0.001% | ATP1 |
+| 621-64-7 | nitrosodipropylamine | H350, H302 **, H411 | — | H350:≥0.001% | ATP1 |
 | 62268-47-7 | bis(2-ethylhexyl) dithiodiacetate | H302 **, H317, H411 | — | — | CLP00 |
 | 623-08-5 | N-methyl-o-toluidine [1] N-methyl-m-toluidine [2] N-methyl-p-t... | H331, H311, H301, H373 **, H412 | — | — | CLP00 |
 | 624-18-0 | benzene-1,4-diamine dihydrochloride; p-phenylenediamine dihydr... | H331 **, H311 **, H301 **, H319, H317, H400, H410 | — | — | CLP00 |
@@ -2534,14 +2534,14 @@
 | 62476-59-9 | acifluorfen (ISO); 5-[2-chloro-4-(trifluoromethyl)phenoxy]-2-n... | H302, H315, H318, H400, H410 | — | — | CLP00 |
 | 62478-82-4 | N,N-diethyl-N',N'-dimethylpropan-1,3-diyl-diamine | H226, H332 **, H302 **, H373 **, H314, H412 | — | — | CLP00 |
 | 625-29-6 | 1-chloropentane [1] 2-chloropentane [2] 3-chloropentane [3] | H225, H332, H312, H302 | — | — | CLP00 |
-| 625-45-6 | methoxyacetic acid | H360FD, H302 **, H314 | — | H335:5.0% | CLP00 |
+| 625-45-6 | methoxyacetic acid | H360FD, H302 **, H314 | — | H335(3):≥5.0% | CLP00 |
 | 625-55-8 | propyl formate [1] isopropyl formate [2] | H225, H335, H336, H319 | — | — | CLP00 |
 | 625-58-1 | ethyl nitrate | H200 | — | — | ATP1 |
 | 6259-76-3 | hexyl salicylate | H361d, H317 | — | — | ATP22 |
 | 626-38-0 | pentyl acetate [1] isopentyl acetate [2] 1-methylbutyl acetate... | H226 | — | — | CLP00 |
 | 6261-30-9 | 2-cyclopentylidene cyclopentanol; 1,1'-bi(cyclopentyliden)-2-ol | H315, H318, H412 | — | — | ATP1 |
 | 62610-77-9 | methyl 3-[(dimethoxyphosphinothioyl)oxy]methacrylate; methyl (... | H302, H317, H400, H410 | — | — | CLP00 |
-| 627-44-1 | dimethylmercury [1] diethylmercury [2] | H330, H310, H300, H373 **, H400, H410 | — | H373:0.05% | CLP00 |
+| 627-44-1 | dimethylmercury [1] diethylmercury [2] | H330, H310, H300, H373 **, H400, H410 | — | H373(2):≥0.05% | CLP00 |
 | 62782-03-0 | bis(2,2,6,6-tetramethyl-4-piperidyl) succinate | H319, H412 | — | — | CLP00 |
 | 628-11-5 | 3-chloropropyl chloroformiate | H331 **, H302 **, H373 **, H315, H318, H317 | — | — | ATP1 |
 | 628-63-7 | pentyl acetate [1] isopentyl acetate [2] 1-methylbutyl acetate... | H226 | — | — | CLP00 |
@@ -2570,8 +2570,8 @@
 | 63919-26-6 | dinocton; reaction mass of isomers: methyl 2-octyl-4,6-dinitro... | H302 **, H400, H410 | — | — | CLP00 |
 | 64-02-8 | tetrasodium ethylene diamine tetraacetate | H302 **, H318 | — | — | ATP1 |
 | 64-17-5 | ethanol; ethyl alcohol | H225 | — | — | CLP00 |
-| 64-18-6 | formic acid … % | H226, H290, H331, H302, H314, H318 | — | H226:85.0%; H314:90.0%; H315:2.0%; H318:10.0%; ... | ATP22 |
-| 64-19-7 | acetic acid … % | H226, H314 | — | H314:90.0%; H314:25.0%; H315:10.0%; H319:10.0% | CLP00 |
+| 64-18-6 | formic acid … % | H226, H290, H331, H302, H314, H318 | — | H226:≥85.0%; H314(1A):≥90.0%; H315(2):2.0–10.0%... | ATP22 |
+| 64-19-7 | acetic acid … % | H226, H314 | — | H314(1A):≥90.0%; H314(1B):25.0–90.0%; H315(2):1... | CLP00 |
 | 64-67-5 | diethyl sulphate | H350, H340, H332 **, H312 **, H302 **, H314 | — | — | CLP00 |
 | 64-69-7 | iodoacetic acid | H301 **, H314 | — | — | CLP00 |
 | 64-86-8 | colchicine | H340, H300 ** | — | — | ATP1 |
@@ -2579,7 +2579,7 @@
 | 640-19-7 | 2-fluoroacetamide | H300 **, H311 ** | — | — | CLP00 |
 | 64026-19-3 | N-decyl-4-nitrobenzamide | H413 | — | — | ATP1 |
 | 64137-52-6 | 2-[3-(methylamino)propyl]-1H-benzimidazole | H318, H412 | — | — | ATP1 |
-| 64359-81-5 | 4,5-dichloro-2-octyl- 2H-isothiazol-3-one; [DCOIT] | H330, H302, H314, H318, H317, H400, H410 | Akut=100 | H315:0.025%; H319:0.025%; H317:0.0015% | ATP15 |
+| 64359-81-5 | 4,5-dichloro-2-octyl- 2H-isothiazol-3-one; [DCOIT] | H330, H302, H314, H318, H317, H400, H410 | Akut=100 | H315(2):0.025–5.0%; H319(2):0.025–3.0%; H317(1)... | ATP15 |
 | 644-64-4 | 1-dimethylcarbamoyl-5-methylpyrazol-3-yl dimethylcarbamate; di... | H301 **, H312 **, H400, H410 | — | — | CLP00 |
 | 64485-90-1 | (Z)-2-methoxymino-2-[2-(tritylamino)thiazol-4-yl]acetic acid | H228 **, H351, H412 | — | — | ATP1 |
 | 646-06-0 | 1,3-dioxolane | H225 | — | — | CLP00 |
@@ -2705,7 +2705,7 @@
 | 65-85-0 | benzoic acid | H372(lungs), H315, H318 | — | — | ATP6 |
 | 650-51-1 | TCA-sodium (ISO); sodium trichloroacetate | H335, H400, H410 | — | — | CLP00 |
 | 65181-78-4 | N,N'-diphenyl-N,N'-bis(3-methylphenyl)-(1,1'-diphenyl)-4,4'-di... | H411 | — | — | CLP00 |
-| 65195-55-3 | abamectin (combination of avermectin B1a and avermectin B1b) (... | H361d, H330, H300, H372 (nervous system), H400, H410 | Akut=10000 | H372:5.0%; H373:0.5% | ATP03 |
+| 65195-55-3 | abamectin (combination of avermectin B1a and avermectin B1b) (... | H361d, H330, H300, H372 (nervous system), H400, H410 | Akut=10000 | H372(1):≥5.0%; H373(2):≥0.5% | ATP03 |
 | 65197-96-8 | D,L-(N,N-diethyl-2-hydroxy-2-phenylacetamide) | H302 **, H318 | — | — | CLP00 |
 | 652-18-6 | 2,3,5,6-tetrafluorobenzoic acid | H315, H318 | — | — | CLP00 |
 | 65229-23-4 | nickel boride (NiB) [1] dinickel boride [2] trinickel boride [... | H350i, H372 **, H317, H400, H410 | — | — | ATP02 |
@@ -2751,12 +2751,12 @@
 | 66603-10-9 | potassium (oxido-N­NO-azoxy)cyclohexane; cyclohexylhydroxydia­... | H228, H301, H373(liver), H315, H318, H411 | — | — | ATP15 |
 | 66710-66-5 | N,N'-ethylenebis(vinylsulfonylacetamide) | H318, H317 | — | — | CLP00 |
 | 66938-41-8 | (3-chlorophenyl)-(4-methoxy-3-nitrophenyl)methanone | H341, H400, H410 | — | — | CLP00 |
-| 67-43-6 | N-carboxymethyliminobis(ethylenenitrilo)tetra(acetic acid) | H360D, H332, H373(Inhalation), H319 | — | H360D:3.0% | ATP18 |
-| 67-56-1 | methanol | H225, H331 **, H311 **, H301 **, H370 ** | — | H370:10.0%; H371:3.0% | CLP00 |
+| 67-43-6 | N-carboxymethyliminobis(ethylenenitrilo)tetra(acetic acid) | H360D, H332, H373(Inhalation), H319 | — | H360D:≥3.0% | ATP18 |
+| 67-56-1 | methanol | H225, H331 **, H311 **, H301 **, H370 ** | — | H370:≥10.0%; H371:3.0–10.0% | CLP00 |
 | 67-63-0 | propan-2-ol; isopropyl alcohol; isopropanol | H225, H336, H319 | — | — | CLP00 |
 | 67-64-1 | acetone; propan-2-one; propanone | H225, H336, H319 | — | — | CLP00 |
 | 67-66-3 | chloroform; trichloromethane | H351, H361d, H331, H302, H372, H315, H319 | — | — | ATP5 |
-| 67-97-0 | colecalciferol; cholecalciferol; Vitamin D3 | H330, H310, H300, H372 | — | H372:3.0%; H373:0.3% | ATP13 |
+| 67-97-0 | colecalciferol; cholecalciferol; Vitamin D3 | H330, H310, H300, H372 | — | H372:≥3.0%; H373:0.3–3.0% | ATP13 |
 | 67014-36-2 | 5-amino-6-methyl-1,3-dihydrobenzoimidazol-2-one | H302 **, H317, H411 | — | — | ATP1 |
 | 67129-08-2 | Metazachlor (ISO); 2-chloro-N-(2,6-dimethylphenyl)-N-(1H-pyraz... | H351, H317, H400, H410 | Akut=100 | — | ATP3 |
 | 67299-45-0 | benzyl cis-4-ammonium-4'-toluenesulfonato-1-cyclohexanecarboxy... | H412 | — | — | ATP1 |
@@ -2779,10 +2779,10 @@
 | 67891-79-6 | Distillates (petroleum), heavy arom.; Low boiling point therma... | H350, H340, H304 | — | — | ATP1 |
 | 67891-80-9 | Distillates (petroleum), light arom.; Low boiling point therma... | H350, H340, H304 | — | — | ATP1 |
 | 67914-69-6 | ethyl cis-4-[4-[[2-(2,4-dichlorophenyl)-2-(1H-imidazol-1-ylmet... | H302 **, H373 **, H400, H410 | — | — | ATP1 |
-| 67952-43-6 | nickel dichlorate [1] nickel dibromate [2] ethyl hydrogen sulf... | H350i, H341, H360D **, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
+| 67952-43-6 | nickel dichlorate [1] nickel dibromate [2] ethyl hydrogen sulf... | H350i, H341, H360D **, H372 **, H334, H317, H400, H410 | Akut=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
 | 68-11-1 | thioglycolic acid | H331 **, H311 **, H301 **, H314 | — | — | CLP00 |
 | 68-12-2 | N,N-dimethylformamide; dimethyl formamide | H360D **, H332 **, H312 **, H319 | — | — | CLP00 |
-| 680-31-9 | hexamethylphosphoric triamide; hexamethylphosphoramide | H350, H340 | — | H350:0.01% | CLP00 |
+| 680-31-9 | hexamethylphosphoric triamide; hexamethylphosphoramide | H350, H340 | — | H350:≥0.01% | CLP00 |
 | 68016-03-5 | dialuminium nickel tetraoxide [1] nickel titanium trioxide [2]... | H350i, H372 **, H317 | — | — | ATP02 |
 | 68039-48-5 | 2,4-dimethylcyclohex-3-ene-1-carbaldehyde [1] (1Î±,2Î±,5Î±)-2,... | H317 | — | — | — |
 | 68039-49-6 | 2,4-dimethylcyclohex-3-ene-1-carbaldehyde [1] (1α,2α,5α)-2,5-d... | H317 | — | — | ATP22 |
@@ -2795,14 +2795,14 @@
 | 68131-73-7 | amines, polyethylenepoly-; HEPA | H312 **, H302 **, H314, H317, H400, H410 | — | — | CLP00 |
 | 68131-75-9 | Gases (petroleum), C3-4; Petroleum gas; [A complex combination... | H220, H350, H340 | — | — | ATP1 |
 | 68132-19-4 | C8-18alkylbis(2-hydroxyethyl)ammonium bis(2-ethylhexyl)phosphate | H331 **, H314, H317, H400, H410 | — | — | CLP00 |
-| 68134-59-8 | nickel diformate [1] formic acid, nickel salt [2] formic acid,... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 68134-59-8 | nickel diformate [1] formic acid, nickel salt [2] formic acid,... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 68157-60-8 | forchlorfenuron (ISO); 1-(2-chloro-4-pyridyl)-3-phenylurea | H351, H411 | — | — | ATP1 |
 | 68186-89-0 | cobalt nickel gray periclase; C.I. Pigment Black 25; C.I. 7733... | H350i, H372 **, H317 | — | — | ATP1 |
 | 68187-57-5 | Pitch, coal tar-petroleum; Pitch Residues; [The residue from t... | H350 | — | — | CLP00 |
 | 68188-48-7 | Distillates (coal-petroleum), condensed-ring arom; Distillates... | H350 | — | — | CLP00 |
 | 682-80-4 | demephion-O (ISO); O,O-dimethyl O-2-methylthioethyl phosphorot... | H300 **, H311 ** | — | — | CLP00 |
 | 68239-26-9 | brucine sulphate [1] brucine nitrate [2] strychnidin-10-one, 2... | H330, H300, H412 | — | — | CLP00 |
-| 683-18-1 | dibutyltin dichloride; (DBTC) | H341, H360FD, H330 **, H301 **, H312 **, H372 **, H314, H400, H410 | Akut=10 | H314:5.0%; H315:0.01%; H318:3.0%; H319:0.01% | ATP1 |
+| 683-18-1 | dibutyltin dichloride; (DBTC) | H341, H360FD, H330 **, H301 **, H312 **, H372 **, H314, H400, H410 | Akut=10 | H314(1B):≥5.0%; H315(2):0.01–5.0%; H318(1):3.0–... | ATP1 |
 | 68307-98-2 | Tail gas (petroleum), catalytic cracked distillate and catalyt... | H220, H350, H340 | — | — | ATP1 |
 | 68307-99-3 | Tail gas (petroleum), catalytic polymn. naphtha fractionation ... | H220, H350, H340 | — | — | ATP1 |
 | 68308-00-9 | Tail gas (petroleum), catalytic reformed naphtha fractionation... | H220, H350, H340 | — | — | ATP1 |
@@ -2955,7 +2955,7 @@
 | 68515-50-4 | 1,2-benzenedicarboxylic acid, dihexyl ester, branched and linear | H360FD | — | — | ATP7 |
 | 68515-84-4 | dialuminium nickel tetraoxide [1] nickel titanium trioxide [2]... | H350i, H372 **, H317 | — | — | ATP02 |
 | 68516-20-1 | Naphtha (petroleum), steam-cracked middle arom.; Low boiling p... | H350, H340, H304 | — | — | ATP1 |
-| 68516-81-4 | 2-[ethyl[3-methyl-4-[(5-nitrothiazol-2-yl)azo]phenyl]amino]eth... | H317 | — | H317:0.001% | ATP22 |
+| 68516-81-4 | 2-[ethyl[3-methyl-4-[(5-nitrothiazol-2-yl)azo]phenyl]amino]eth... | H317 | — | H317(1):≥0.001% | ATP22 |
 | 68527-15-1 | Gases (petroleum), oil refinery gas distn. off; Refinery gas; ... | H220, H350, H340 | — | — | ATP1 |
 | 68527-16-2 | Hydrocarbons, C1-3; Petroleum gas; [A complex combination of h... | H220, H350, H340 | — | — | ATP1 |
 | 68527-18-4 | Gas oils (petroleum), steam-cracked; Cracked gasoil; [A comple... | H350 | — | — | CLP00 |
@@ -3053,7 +3053,7 @@
 | 6903-18-0 | 3-(2'-phenoxyethoxy)propylamine | H302 **, H315, H318, H412 | — | — | ATP1 |
 | 69045-82-5 | 2-fluoro-5-trifluoromethylpyridine | H226, H317, H412 | — | — | CLP00 |
 | 69045-84-7 | 2,3-dichloro-5-trifluoromethyl-pyridine | H332 **, H302 **, H318, H317, H411 | — | — | CLP00 |
-| 69094-18-4 | 2,2-dibromo-2-nitroethanol | H201, H351, H302 **, H373 **, H314, H317, H400, H410 | — | H335:1.0% | CLP00 |
+| 69094-18-4 | 2,2-dibromo-2-nitroethanol | H201, H351, H302 **, H373 **, H314, H317, H400, H410 | — | H335(3):≥1.0% | CLP00 |
 | 6914-71-2 | dimethylcyclopropane-1,1-dicarboxylate | H412 | — | — | CLP00 |
 | 69184-17-4 | methyl O-(4-amino-3,5-dichloro-6-fluoropyridin-2-yloxy)acetate | H411 | — | — | CLP00 |
 | 69227-51-6 | 1-ethyl-1-methylpyrrolidinium bromide | H341 | — | — | CLP00 |
@@ -3070,7 +3070,7 @@
 | 69788-75-6 | 4-chlorobutyl veratrate | H317, H411 | — | — | CLP00 |
 | 69806-50-4 | fluazifop-butyl (ISO); butyl (RS)-2-[4-(5-trifluoromethyl-2-py... | H360D **, H400, H410 | — | — | CLP00 |
 | 6988-21-2 | dioxacarb (ISO); 2-(1,3-dioxolan-2-yl)phenyl N-methylcarbamate | H301 **, H411 | — | — | CLP00 |
-| 70-25-7 | 1-methyl-3-nitro-1-nitrosoguanidine | H350, H332 **, H315, H319, H411 | — | H350:0.01% | ATP1 |
+| 70-25-7 | 1-methyl-3-nitro-1-nitrosoguanidine | H350, H332 **, H315, H319, H411 | — | H350:≥0.01% | ATP1 |
 | 70-30-4 | 2,2'-methylenebis-(3,4,6-trichlorophenol); hexachlorophene | H311 **, H301 **, H400, H410 | — | — | CLP00 |
 | 700-13-0 | 2,3,5-trimethylhydroquinone | H332 **, H335, H315, H318, H317, H400, H410 | — | — | CLP00 |
 | 70161-44-3 | sodium N-(hydroxymethyl)glycinate; [formaldehyde released from... | H350, H341, H332, H302, H335, H315, H319, H317 | — | — | ATP15 |
@@ -3092,7 +3092,7 @@
 | 7076-53-1 | 2,2-dichlorovinyl 2-ethylsulphinylethyl methyl phosphate | H331 **, H311 **, H301 ** | — | — | CLP00 |
 | 7078-98-0 | 2,6-bis(1,1-dimethylethyl)-4-(phenylenemethylene)cyclohexa-2,5... | H317, H413 | — | — | ATP1 |
 | 7085-19-0 | mecoprop (ISO); 2-(4-chloro-o-tolyloxy) propionic acid; (RS)-2... | H302 **, H315, H318, H400, H410 | Akut=100 | — | CLP00 |
-| 7085-85-0 | ethyl 2-cyanoacrylate | H335, H315, H319 | — | H335:10.0% | CLP00 |
+| 7085-85-0 | ethyl 2-cyanoacrylate | H335, H315, H319 | — | H335(3):≥10.0% | CLP00 |
 | 709-98-8 | propanil (ISO); 3',4'-dichloropropionanilide | H302 **, H400 | Akut=10 | — | ATP1 |
 | 70918-74-0 | 1-(1,4-benzodioxan-2-ylcarbonyl)piperazine hydrochloride | H331 **, H311 **, H301 **, H373 **, H411 | — | — | CLP00 |
 | 7093-55-2 | pregn-5-ene-3,20-dione bis(ethylene ketal) | H413 | — | — | CLP00 |
@@ -3102,7 +3102,7 @@
 | 71-36-3 | butan-1-ol; n-butanol | H226, H302 **, H335, H336, H315, H318 | — | — | CLP00 |
 | 71-41-0 | 1-pentanol [1] 3-pentanol  [2] | H226, H332 **, H335, H315 | — | — | ATP1 |
 | 71-43-2 | benzene | H225, H350, H340, H304, H372 **, H315, H319 | — | — | CLP00 |
-| 71-48-7 | cobalt di(acetate) | H350i, H341, H360F **, H334, H317, H400, H410 | Akut=10 | H350i:0.01% | ATP1 |
+| 71-48-7 | cobalt di(acetate) | H350i, H341, H360F **, H334, H317, H400, H410 | Akut=10 | H350i:≥0.01% | ATP1 |
 | 71-55-6 | 1,1,1-trichloroethane; methyl chloroform | H332 **, H420 | — | — | ATP2 |
 | 71-63-6 | digitoxin | H331 **, H301 **, H373 ** | — | — | CLP00 |
 | 71283-80-2 | fenoxaprop-P-ethyl (ISO); ethyl (2R)-2-{4-[(6-chloro-1,3-benzo... | H373(kidneys), H317, H400, H410 | Akut=1 | — | ATP7 |
@@ -3115,9 +3115,9 @@
 | 71566-50-2 | reaction mass of: 1-methyl-1-(3-(1-methylethyl)phenyl)ethyl-1-... | H242 **, H411 | — | — | CLP00 |
 | 71626-11-4 | benalaxyl (ISO); methyl N-(2,6-dimethylphenyl)-N-(phenylacetyl... | H302, H400, H410 | Akut=1 | — | ATP21 |
 | 71629-74-8 | dinitrophenol (reaction mass of isomers) [1] 2,4(or 2,6)-dinit... | H331, H311, H301, H373 **, H400, H410 | — | — | CLP00 |
-| 71720-48-4 | nickel dichlorate [1] nickel dibromate [2] ethyl hydrogen sulf... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 71720-48-4 | nickel dichlorate [1] nickel dibromate [2] ethyl hydrogen sulf... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 7173-51-5 | didecyldimethylammonium chloride | H302 **, H314 | — | — | CLP00 |
-| 71751-41-2 | abamectin (combination of avermectin B1a and avermectin B1b) (... | H361d, H330, H300, H372(nervous_system), H400, H410 | Akut=10000 | H372:5.0%; H373:0.5% | ATP3 |
+| 71751-41-2 | abamectin (combination of avermectin B1a and avermectin B1b) (... | H361d, H330, H300, H372(nervous_system), H400, H410 | Akut=10000 | H372:≥5.0%; H373:0.5–5.0% | ATP3 |
 | 71786-70-4 | bis(4-dodecylphenyl)iodonium hexafluoroantimonate | H317, H412 | — | — | CLP00 |
 | 71832-78-5 | 2,4-dimethylcyclohex-3-ene-1-carbaldehyde [1] (1Î±,2Î±,5Î±)-2,... | H317 | — | — | — |
 | 71850-09-4 | diisohexyl phthalate | H360FD | — | — | ATP14 |
@@ -3125,13 +3125,13 @@
 | 71888-89-6 | 1,2-benzenedicarboxylic acid; di-C6-8-branched alkylesters, C7... | H360D ** | — | — | ATP1 |
 | 719-86-8 | 3-acetyl-1-phenyl-pyrrolidine-2,4-dione | H373 **, H411 | — | — | CLP00 |
 | 719-96-0 | N-(dichlorofluoromethylthio)phthalimide; N-(fluorodichlorometh... | H315 | — | — | CLP00 |
-| 71957-07-8 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 71957-07-8 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 71975-58-1 | 3,4-xylenol [1] 2,5-xylenol [2] 2,4-xylenol [3] 2,3-xylenol [4... | H311, H301, H314, H411 | — | — | CLP00 |
 | 72-20-8 | endrin (ISO); 1,2,3,4,10,10-hexachloro-6,7-epoxy-1,4,4a,5,6,7,... | H300 **, H311 **, H400, H410 | — | — | CLP00 |
-| 7216-95-7 | pentapotassium 2,2’,2’’,2’’’,2’’’’-(ethane-1,2-diylnitrilo)pen... | H360D, H332, H373(Inhalation), H319 | — | H360D:3.0% | ATP18 |
+| 7216-95-7 | pentapotassium 2,2’,2’’,2’’’,2’’’’-(ethane-1,2-diylnitrilo)pen... | H360D, H332, H373(Inhalation), H319 | — | H360D:≥3.0% | ATP18 |
 | 72178-02-0 | fomesafen (ISO); 5-[2-chloro-4-(trifluoromethyl)phenoxy]-N-(me... | H302 ** | — | — | CLP00 |
 | 7226-23-5 | tetrahydro-1,3-dimethyl-1H-pyrimidin-2-one; dimethyl propylene... | H361f **, H302 **, H318 | — | — | ATP1 |
-| 72319-19-8 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 72319-19-8 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 72453-58-8 | 6-anilino-1-benzoyl-4-(4-tert-pentylphenoxy)naphto[1,2,3-de]qu... | H411 | — | — | CLP00 |
 | 72490-01-8 | fenoxycarb (ISO); ethyl [2-(4-phenoxyphenoxy)ethyl]carbamate | H351, H400, H410 | Akut=1 | — | ATP6 |
 | 72531-53-4 | 2-methylpropyl 2-hydroxy-2-methylbut-3-enoate | H315, H319 | — | — | CLP00 |
@@ -3172,7 +3172,7 @@
 | 74-86-2 | acetylene; ethyne | H220 | — | — | CLP00 |
 | 74-87-3 | chloromethane; methyl chloride | H220, H351, H373 ** | — | — | CLP00 |
 | 74-88-4 | methyl iodide; iodomethane | H351, H331 **, H301 **, H312 **, H335, H315 | — | — | CLP00 |
-| 74-89-5 | mono-methylamine ... % [1] di-methylamine ... % [2] tri-methyl... | H224, H332 **, H302 **, H314 | — | H335:5.0% | CLP00 |
+| 74-89-5 | mono-methylamine ... % [1] di-methylamine ... % [2] tri-methyl... | H224, H332 **, H302 **, H314 | — | H335(3):≥5.0% | CLP00 |
 | 74-90-8 | hydrogen cyanide ...%; hydrocyanic acid ...% | H310, H330 **, H300 **, H400, H410 | — | — | CLP00 |
 | 74-93-1 | methanethiol; methyl mercaptan | H220, H331 **, H400, H410 | — | — | CLP00 |
 | 74-95-3 | dibromomethane | H332 **, H412 | — | — | CLP00 |
@@ -3229,7 +3229,7 @@
 | 75-08-1 | ethanethiol; ethyl mercaptan | H224, H331, H302, H400, H410 | — | — | ATP22 |
 | 75-09-2 | dichloromethane; methylene chloride | H351 | — | — | CLP00 |
 | 75-12-7 | formamide | H360D ** | — | — | CLP00 |
-| 75-15-0 | carbon disulphide | H225, H361fd, H372 **, H315, H319 | — | H361f:1.0%; H372:1.0%; H373:0.2% | CLP00 |
+| 75-15-0 | carbon disulphide | H225, H361fd, H372 **, H315, H319 | — | H361f:≥1.0%; H372:≥1.0%; H373:0.2–1.0% | CLP00 |
 | 75-19-4 | cyclopropane | H220 | — | — | CLP00 |
 | 75-20-7 | calcium carbide | H260 | — | — | CLP00 |
 | 75-21-8 | ethylene oxide; oxirane | H220, H350, H340, H360Fd, H331, H301, H335, H336, H372(nervous_system), H314, H318 | — | — | ATP14 |
@@ -3242,14 +3242,14 @@
 | 75-35-4 | 1,1-dichloroethylene; vinylidene chloride | H224, H351, H332 ** | — | — | CLP00 |
 | 75-36-5 | acetyl chloride | H225, H314 | — | — | CLP00 |
 | 75-44-5 | phosgene; carbonyl chloride | H330, H314 ** | — | — | CLP00 |
-| 75-50-3 | mono-methylamine ... % [1] di-methylamine ... % [2] tri-methyl... | H224, H332, H302, H314 | — | H335:5.0% | CLP00 |
+| 75-50-3 | mono-methylamine ... % [1] di-methylamine ... % [2] tri-methyl... | H224, H332, H302, H314 | — | H335(3):≥5.0% | CLP00 |
 | 75-52-5 | nitromethane | H226, H302 ** | — | — | CLP00 |
-| 75-55-8 | 2-methylaziridine; propyleneimine | H225, H350, H310, H330 **, H300 **, H318, H411 | — | H350:0.01% | CLP00 |
+| 75-55-8 | 2-methylaziridine; propyleneimine | H225, H350, H310, H330 **, H300 **, H318, H411 | — | H350:≥0.01% | CLP00 |
 | 75-56-9 | propylene oxide; 1,2-epoxypropane; methyloxirane | H224, H350, H340, H331, H311, H302, H335, H319 | — | — | ATP9 |
 | 75-65-0 | 2-methylpropan-2-ol; tert-butyl alcohol | H225, H332 **, H335, H319 | — | — | ATP1 |
 | 75-75-2 | methanesulphonic acid | H314 | — | — | CLP00 |
 | 75-78-5 | dimethyldichlorosilane | H225, H335, H315, H319 | — | — | CLP00 |
-| 75-79-6 | trichloro(methyl)silane; methyltrichlorosilane | H225, H335, H315, H319 | — | H315:1.0%; H319:1.0%; H335:1.0% | CLP00 |
+| 75-79-6 | trichloro(methyl)silane; methyltrichlorosilane | H225, H335, H315, H319 | — | H315(2):≥1.0%; H319(2):≥1.0%; H335(3):≥1.0% | CLP00 |
 | 75-83-2 | hexane (containing < 5 % n-hexane (203-777-6)); 2-methylpentan... | H225, H304, H336, H315, H411 | — | — | ATP01 |
 | 75-85-4 | 2-methylbutan-2-ol; tert-pentanol | H225, H332 **, H335, H315 | — | — | CLP00 |
 | 75-86-5 | 2-hydroxy-2-methylpropionitrile; 2-cyanopropan-2-ol; acetone c... | H310, H330 **, H300 **, H400, H410 | — | — | CLP00 |
@@ -3266,74 +3266,74 @@
 | 7572-29-4 | dichloroacetylene | H200, H351, H373 ** | — | — | CLP00 |
 | 75736-33-3 | diclobutrazole (ISO); (R*, R*)-(±)-β-[(2,4-dichlorophenyl)meth... | H319, H411 | — | — | CLP00 |
 | 75768-65-9 | benzyltriphenylphosphonium, salt with 4,4'-[2,2,2-trifluoro-1-... | H360F | — | — | ATP21 |
-| 7580-31-6 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 7580-31-6 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 7585-14-0 | di-n-octylaluminium iodide | H250, H314, H400, H410 | — | — | CLP00 |
 | 759-94-4 | EPTC (ISO); S-ethyl dipropylthiocarbamate | H302 ** | — | — | CLP00 |
 | 75980-60-8 | diphenyl(2,4,6-trimethylbenzoyl)phosphine oxide | H360Fd, H317 | — | — | ATP21 |
-| 76-01-7 | pentachloroethane | H351, H372 **, H411 | — | H372:1.0%; H373:0.2% | CLP00 |
-| 76-03-9 | TCA (ISO); trichloroacetic acid | H314, H400, H410 | — | H335:1.0% | CLP00 |
+| 76-01-7 | pentachloroethane | H351, H372 **, H411 | — | H372:≥1.0%; H373:0.2–1.0% | CLP00 |
+| 76-03-9 | TCA (ISO); trichloroacetic acid | H314, H400, H410 | — | H335(3):≥1.0% | CLP00 |
 | 76-05-1 | trifluoroacetic acid . . . % | H332 **, H314, H412 | — | — | CLP00 |
 | 76-06-2 | trichloronitromethane; chloropicrin | H330 **, H302 **, H335, H315, H319 | — | — | CLP00 |
 | 76-44-8 | heptachlor (ISO); 1,4,5,6,7,8,8-heptachloro-3a,4,7,7a-tetrahyd... | H351, H311 **, H301 **, H373 **, H400, H410 | — | — | CLP00 |
 | 76-87-9 | fentin hydroxide (ISO); triphenyltin hydroxide | H351, H361d **, H330 **, H311 **, H301 **, H335, H372 **, H315, H318, H400, H410 | Akut=10 | — | ATP1 |
 | 7601-89-0 | sodium perchlorate | H271, H302 ** | — | — | CLP00 |
-| 7601-90-3 | perchloric acid ... % | H271, H314 | — | H314:50.0%; H314:10.0%; H315:1.0%; H319:1.0%; H... | CLP00 |
+| 7601-90-3 | perchloric acid ... % | H271, H314 | — | H314(1A):≥50.0%; H314(1B):10.0–50.0%; H315(2):1... | CLP00 |
 | 76109-32-5 | (1S,4R,6R,7R)-(4-nitrophenylmethyl)3-methylene-1-oxo-7-phenyla... | H334 | — | — | CLP00 |
 | 76145-91-0 | (2,4-diaminopteridin-6-yl)methanol hydrobromide | H373 **, H317, H412 | — | — | ATP1 |
 | 762-75-4 | butyl formate [1] tert-butyl formate [2] isobutyl formate [3] | H225, H335, H319 | — | — | CLP00 |
 | 76253-60-6 | dichloro [(dichlorophenyl)methyl]methylbenzene, reaction mass ... | H400, H410 | — | — | CLP00 |
 | 7631-90-5 | sodium hydrogensulphite … %; sodium bisulphite … % | H302 ** | — | — | CLP00 |
 | 7632-00-0 | sodium nitrite | H272, H301 **, H400 | — | — | CLP00 |
-| 7632-04-4 | sodium peroxometaborate | H272, H360FD, H331, H302, H335, H318 | — | H318:22.0%; H319:14.0% | ATP22 |
+| 7632-04-4 | sodium peroxometaborate | H272, H360FD, H331, H302, H335, H318 | — | H318(1):≥22.0%; H319(2):14.0–22.0% | ATP22 |
 | 7637-07-2 | boron trifluoride | H330, H314 ** | — | — | CLP00 |
-| 764-41-0 | 1,4-dichlorobut-2-ene | H350, H330 **, H311 **, H301 **, H314, H400, H410 | — | H350:0.01%; H335:5.0% | CLP00 |
+| 764-41-0 | 1,4-dichlorobut-2-ene | H350, H330 **, H311 **, H301 **, H314, H400, H410 | — | H350:≥0.01%; H335(3):≥5.0% | CLP00 |
 | 7646-69-7 | sodium hydride | H260 | — | — | CLP00 |
-| 7646-78-8 | tin tetrachloride; stannic chloride | H314, H412 | — | H335:5.0% | CLP00 |
-| 7646-79-9 | cobalt dichloride | H350i, H341, H360F **, H302 **, H334, H317, H400, H410 | Akut=10 | H350i:0.01% | ATP1 |
-| 7646-85-7 | zinc chloride | H302 **, H314, H400, H410 | — | H335:5.0% | CLP00 |
+| 7646-78-8 | tin tetrachloride; stannic chloride | H314, H412 | — | H335(3):≥5.0% | CLP00 |
+| 7646-79-9 | cobalt dichloride | H350i, H341, H360F **, H302 **, H334, H317, H400, H410 | Akut=10 | H350i:≥0.01% | ATP1 |
+| 7646-85-7 | zinc chloride | H302 **, H314, H400, H410 | — | H335(3):≥5.0% | CLP00 |
 | 7646-93-7 | potassium hydrogensulphate | H335, H314 | — | — | CLP00 |
 | 7647-01-0 | hydrogen chloride | H331 **, H314 | — | — | CLP00 |
-| 7647-18-9 | antimony pentachloride | H314, H411 | — | H335:5.0% | CLP00 |
+| 7647-18-9 | antimony pentachloride | H314, H411 | — | H335(3):≥5.0% | CLP00 |
 | 76508-02-6 | hexasodium 2,2'-vinylenebis((3-sulfonato-4,1-phenylene)imino(6... | H319 | — | — | CLP00 |
-| 7664-38-2 | phosphoric acid ... %, orthophosphoric acid ... % | H314 | — | H314:25.0%; H315:10.0%; H319:10.0% | CLP00 |
-| 7664-39-3 | hydrofluoric acid ... % | H310, H330 **, H300 **, H314 | — | H314:7.0%; H314:1.0%; H319:0.1% | CLP00 |
+| 7664-38-2 | phosphoric acid ... %, orthophosphoric acid ... % | H314 | — | H314(1B):≥25.0%; H315(2):10.0–25.0%; H319(2):10... | CLP00 |
+| 7664-39-3 | hydrofluoric acid ... % | H310, H330 **, H300 **, H314 | — | H314(1A):≥7.0%; H314(1B):1.0–7.0%; H319(2):0.1–... | CLP00 |
 | 7664-41-7 | ammonia, anhydrous | H221, H331 **, H314, H400 | — | — | CLP00 |
-| 7664-93-9 | sulphuric acid | H314 | — | H314:15.0%; H315:5.0%; H319:5.0% | CLP00 |
+| 7664-93-9 | sulphuric acid | H314 | — | H314(1A):≥15.0%; H315(2):5.0–15.0%; H319(2):5.0... | CLP00 |
 | 76646-91-8 | (2S,5R)-6,6-dibromo-3,3-dimethyl-7-oxo-4-thia-1-azabicyclo[3.2... | H302 **, H315, H318, H317 | — | — | ATP1 |
 | 76714-88-0 | diniconazole (ISO); (E)-β-[(2,4-dichlorophenyl)methylene]-α-(1... | H302 **, H400, H410 | — | — | CLP00 |
 | 76738-62-0 | paclobutrazol (ISO); (2RS,3RS)-1-(4-chloro­phenyl)-4,4-dimethy... | H361d, H332, H302, H319, H400, H410 | Akut=10 | — | ATP15 |
 | 768-56-9 | 4-phenylbut-1-ene | H315, H411 | — | — | CLP00 |
 | 7681-38-1 | sodium hydrogensulphate | H318 | — | — | CLP00 |
 | 7681-49-4 | sodium fluoride | H301 **, H315, H319 | — | — | CLP00 |
-| 7681-52-9 | sodium hypochlorite, solution ... % Cl active | H314, H318, H400, H410 | Akut=10 | H031:5.0% | ATP13 |
+| 7681-52-9 | sodium hypochlorite, solution ... % Cl active | H314, H318, H400, H410 | Akut=10 | H031:≥5.0% | ATP13 |
 | 7681-57-4 | sodium metabisulphite | H302 **, H318 | — | — | CLP00 |
 | 76823-93-3 | 3-(2-(diaminomethyleneamino)thiazol-4-ylmethylthio)propionitrile | H302 **, H317 | — | — | CLP00 |
 | 76855-69-1 | (2R,3R)-3-((R)-1-(tert-butyldimethylsiloxy)ethyl)-4-oxoazetidi... | H319, H317, H411 | — | — | CLP00 |
 | 7693-82-5 | 4-decyloxazolidin-2-one; 4-decyl-1,3-oxazolidin-2-one | H400, H410 | — | — | ATP1 |
 | 76932-17-7 | (S)-α-(acetylthio)benzenepropanoic acid | H302 **, H318, H317 | — | — | CLP00 |
 | 7696-12-0 | tetramethrin (ISO); (1,3-dioxo-1,3,4,5,6,7-hexahydro-2H-isoind... | H351, H302, H371(nervous_system), H400, H410 | Akut=100 | — | ATP13 |
-| 7697-37-2 | nitric acid …% [C ≤ 70 %] | H272, H331, H314 | — | H272:65.0%; H314:20.0%; H314:5.0% | ATP15 |
-| 77-09-8 | phenolphthalein | H350, H341, H361f ** | — | H350:1.0% | ATP1 |
+| 7697-37-2 | nitric acid …% [C ≤ 70 %] | H272, H331, H314 | — | H272:≥65.0%; H314(1A):≥20.0%; H314(1B):5.0–20.0% | ATP15 |
+| 77-09-8 | phenolphthalein | H350, H341, H361f ** | — | H350:≥1.0% | ATP1 |
 | 77-47-4 | hexachlorocyclopentadiene | H330 **, H311 **, H302 **, H314, H400, H410 | — | — | CLP00 |
 | 77-58-7 | dibutyltin dilaurate; dibutyl[bis(dodecanoyloxy)]stannane | H341, H360FD, H372(immune_system) | — | — | ATP10 |
 | 77-73-6 | 3a,4,7,7a-tetrahydro-4,7-methanoindene | H225, H332 **, H302 **, H335, H315, H319, H411 | — | — | CLP00 |
-| 77-78-1 | dimethyl sulphate | H350, H341, H330 **, H301 **, H314, H317 | — | H350:0.01%; H341:0.01%; H335:5.0% | CLP00 |
+| 77-78-1 | dimethyl sulphate | H350, H341, H330 **, H301 **, H314, H317 | — | H350:≥0.01%; H341:≥0.01%; H335(3):≥5.0% | CLP00 |
 | 77-92-9 | citric acid | H335, H319 | — | — | ATP17 |
 | 7700-17-6 | crotoxyphos (ISO); 1-phenylethyl 3-(dimethoxyphosphinyloxy) is... | H311 **, H301 **, H400, H410 | Akut=10 | — | CLP00 |
 | 7704-34-9 | sulfur | H315 | — | — | ATP22 |
 | 7705-14-8 | dipentene; limonene [1] (S)-p-mentha-1,8-diene; l-limonene [2]... | H226, H315, H317, H400, H410 | — | — | ATP17 |
 | 770722-36-6 | dichloro-(3-(3-chloro-4-fluorophenyl)propyl)methylsilane | H314 | — | — | CLP00 |
 | 770722-46-8 | chloro(3-(3-chloro-4-fluorophenyl)propyl)dimethylsilane | H314 | — | — | CLP00 |
-| 771-29-9 | 1,2,3,4-tetrahydro-1-naphthyl hydroperoxide | H242, H302 **, H314, H400, H410 | — | H335:5.0% | CLP00 |
+| 771-29-9 | 1,2,3,4-tetrahydro-1-naphthyl hydroperoxide | H242, H302 **, H314, H400, H410 | — | H335(3):≥5.0% | CLP00 |
 | 771478-66-1 | 1,6-bis(3,3-bis((1-methylpentylidenimino)propyl)ureido)hexane | H312 **, H302 **, H373 **, H314, H317, H400, H410 | — | — | CLP00 |
-| 7718-54-9 | nickel dichloride | H350i, H341, H360D **, H331 **, H301 **, H372 **, H315, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H315:20.0%; H317:0.01% | ATP1 |
+| 7718-54-9 | nickel dichloride | H350i, H341, H360D **, H331 **, H301 **, H372 **, H315, H334, H317, H400, H410 | Akut=1 | H372:≥1.0%; H373:0.1–1.0%; H315(2):≥20.0%; H317... | ATP1 |
 | 77182-82-2 | glufosinate ammonium (ISO); ammonium 2-amino-4-(hydroxymethylp... | H360Fd, H332 **, H312 **, H302 **, H373 ** | — | — | ATP1 |
-| 7719-09-7 | thionyl dichloride; thionyl chloride | H332 **, H302 **, H314 | — | H335:1.0% | CLP00 |
+| 7719-09-7 | thionyl dichloride; thionyl chloride | H332 **, H302 **, H314 | — | H335(3):≥1.0% | CLP00 |
 | 7719-12-2 | phosphorus trichloride | H330 **, H300 **, H373 **, H314 | — | — | CLP00 |
 | 7720-78-7 | iron (II) sulfate | H302 **, H315, H319 | — | — | ATP1 |
 | 77214-82-5 | Iron (III) tris(4-methylbenzenesulfonate) | H318 | — | — | CLP00 |
 | 7722-64-7 | potassium permanganate | H272, H361d, H302 **, H400, H410 | — | — | ATP13 |
-| 7722-84-1 | hydrogen peroxide solution ...% | H271, H332 **, H302 **, H314 | — | H271:70.0%; H272:50.0%; H314:70.0%; H314:50.0%;... | CLP00 |
+| 7722-84-1 | hydrogen peroxide solution ...% | H271, H332 **, H302 **, H314 | — | H271:≥70.0%; H272:50.0–70.0%; H314(1A):≥70.0%; ... | CLP00 |
 | 77227-99-7 | 3-chloro-4,5,α, α,α-pentafluorotoluene | H226, H332 **, H302 **, H400 | — | — | CLP00 |
 | 7723-14-0 | red phosphorus | H228, H412 | — | — | CLP00 |
 | 7726-95-6 | bromine | H330 **, H314, H400 | — | — | CLP00 |
@@ -3355,10 +3355,10 @@
 | 7758-99-8 | copper sulphate pentahydrate | H302, H318, H400, H410 | Akut=10 | — | ATP17 |
 | 7761-88-8 | silver nitrate | H272, H314, H400, H410 | — | — | ATP1 |
 | 7775-09-9 | sodium chlorate | H271, H301 | — | — | ATP21 |
-| 7775-11-3 | sodium chromate | H350, H340, H360FD, H330 **, H301 **, H312 **, H372 **, H314, H334, H317, H400, H410 | — | H334:0.2%; H317:0.2% | CLP00 |
+| 7775-11-3 | sodium chromate | H350, H340, H360FD, H330 **, H301 **, H312 **, H372 **, H314, H334, H317, H400, H410 | — | H334:≥0.2%; H317(1):≥0.2% | CLP00 |
 | 7775-14-6 | sodium dithionite; sodium hydrosulphite | H251, H302 ** | — | — | CLP00 |
-| 7778-50-9 | potassium dichromate | H272, H350, H340, H360FD, H330 **, H301 **, H312 **, H372 **, H314, H334, H317, H400, H410 | — | H335:5.0% | CLP00 |
-| 7778-54-3 | calcium hypochlorite | H272, H302 **, H314, H400 | Akut=10 | H314:5.0%; H315:1.0%; H318:3.0%; H319:0.5% | ATP1 |
+| 7778-50-9 | potassium dichromate | H272, H350, H340, H360FD, H330 **, H301 **, H312 **, H372 **, H314, H334, H317, H400, H410 | — | H335(3):≥5.0% | CLP00 |
+| 7778-54-3 | calcium hypochlorite | H272, H302 **, H314, H400 | Akut=10 | H314(1B):≥5.0%; H315(2):1.0–5.0%; H318(1):3.0–5... | ATP1 |
 | 7778-73-6 | sodium pentachlorophenolate [1] potassium pentachlorophenolate... | H351, H330, H311, H301, H335, H315, H319, H400, H410 | — | — | CLP00 |
 | 7778-74-7 | potassium perchlorate | H271, H302 ** | — | — | CLP00 |
 | 7778-85-0 | 1,2-dimethoxypropane | H225 | — | — | CLP00 |
@@ -3368,7 +3368,7 @@
 | 7782-44-7 | oxygen | H270 | — | — | CLP00 |
 | 7782-49-2 | selenium | H331 **, H301 **, H373 **, H413 | — | — | CLP00 |
 | 7782-50-5 | chlorine | H270, H331 **, H335, H315, H319, H400 | Akut=100 | — | ATP1 |
-| 7782-63-0 | iron (II) sulfate (1:1) heptahydrate; sulfuric acid, iron(II) ... | H302 **, H315, H319 | — | H315:25.0% | ATP1 |
+| 7782-63-0 | iron (II) sulfate (1:1) heptahydrate; sulfuric acid, iron(II) ... | H302 **, H315, H319 | — | H315(2):≥25.0% | ATP1 |
 | 7783-06-4 | hydrogen sulphide, hydrogen sulfide | H220, H330, H400 | — | — | ATP21 |
 | 7783-56-4 | antimony trifluoride | H331 **, H311 **, H301 **, H411 | — | — | CLP00 |
 | 7784-40-9 | lead hydrogen arsenate | H350, H360Df, H331 **, H301 **, H373 **, H400, H410 | — | — | CLP00 |
@@ -3377,18 +3377,18 @@
 | 778577-53-0 | 3-tridecyloxy-propyl-ammonium 9-octadecenoate | H373 **, H315, H319, H400, H410 | — | — | CLP00 |
 | 778583-04-3 | tris(2-hydroxyethyl)ammonium 7-{}{4-[4-(2-cyanoamino-4-hydroxy... | H412 | — | — | CLP00 |
 | 7786-34-7 | mevinphos (ISO); 2-methoxycarbonyl-1-methylvinyl dimethyl phos... | H310, H300 **, H400, H410 | Akut=10000 | — | CLP00 |
-| 7786-81-4 | nickel sulfate | H350i, H341, H360D **, H332 **, H302 **, H372 **, H315, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H315:20.0%; H317:0.01% | ATP1 |
+| 7786-81-4 | nickel sulfate | H350i, H341, H360D **, H332 **, H302 **, H372 **, H315, H334, H317, H400, H410 | Akut=1 | H372:≥1.0%; H373:0.1–1.0%; H315(2):≥20.0%; H317... | ATP1 |
 | 77889-90-8 | 5-(4-chloro-2-nitro-phenylazo)-1,2-dihydro-6-hydroxy-1,4-dimet... | H413 | — | — | ATP1 |
-| 7789-00-6 | potassium chromate | H350i, H340, H335, H315, H319, H317, H400, H410 | — | H317:0.5% | CLP00 |
+| 7789-00-6 | potassium chromate | H350i, H340, H335, H315, H319, H317, H400, H410 | — | H317(1):≥0.5% | CLP00 |
 | 7789-06-2 | strontium chromate | H350, H302 **, H400, H410 | — | — | CLP00 |
-| 7789-09-5 | ammonium dichromate | H272 **, H350, H340, H360FD, H330 **, H301 **, H312 **, H372 **, H314, H334, H317, H400, H410 | — | H335:5.0%; H334:0.2%; H317:0.2% | CLP00 |
+| 7789-09-5 | ammonium dichromate | H272 **, H350, H340, H360FD, H330 **, H301 **, H312 **, H372 **, H314, H334, H317, H400, H410 | — | H335(3):≥5.0%; H334:≥0.2%; H317(1):≥0.2% | CLP00 |
 | 7789-21-1 | fluorosulphonic acid | H332 **, H314 | — | — | CLP00 |
 | 7789-23-3 | potassium fluoride | H331 **, H311 **, H301 ** | — | — | CLP00 |
-| 7789-29-9 | potassium bifluoride; potassium hydrogen difluoride | H301 **, H314 | — | H314:1.0%; H315:0.1%; H319:0.1% | CLP00 |
+| 7789-29-9 | potassium bifluoride; potassium hydrogen difluoride | H301 **, H314 | — | H314(1B):≥1.0%; H315(2):0.1–1.0%; H319(2):0.1–1.0% | CLP00 |
 | 7789-60-8 | phosphorus tribromide | H335, H314 | — | — | CLP00 |
 | 7789-78-8 | calcium hydride | H260 | — | — | CLP00 |
-| 7790-79-6 | cadmium fluoride | H350, H340, H360FD, H330 **, H301 **, H372 **, H400, H410 | — | H350:0.01%; H372:7.0%; H373:0.1% | CLP00 |
-| 7790-80-9 | cadmium iodide | H351, H331 **, H301 **, H373 **, H400, H410 | — | H373:0.1% | CLP00 |
+| 7790-79-6 | cadmium fluoride | H350, H340, H360FD, H330 **, H301 **, H372 **, H400, H410 | — | H350:≥0.01%; H372:≥7.0%; H373:0.1–7.0% | CLP00 |
+| 7790-80-9 | cadmium iodide | H351, H331 **, H301 **, H373 **, H400, H410 | — | H373:≥0.1% | CLP00 |
 | 7790-94-5 | chlorosulphonic acid | H335, H314 | — | — | CLP00 |
 | 7790-98-9 | ammonium perchlorate; [containing ≥ 80 % of 0-30 µm particles] | H201, H271 | — | — | ATP1 |
 | 7791-25-5 | sulphuryl chloride | H335, H314 | — | — | CLP00 |
@@ -3396,13 +3396,13 @@
 | 78-04-6 | dibutyltin maleate | H341, H360FD, H330, H302, H372(immune_system), H314, H318 | — | — | ATP21 |
 | 78-10-4 | tetraethyl silicate; ethyl silicate | H226, H332 **, H335, H319 | — | — | CLP00 |
 | 78-11-5 | pentaerythritol tetranitrate; pentaerythrite tetranitrate; P.E... | H201 | — | — | CLP00 |
-| 78-18-2 | 1-hydroperoxycyclohexyl 1-hydroxycyclohexyl peroxide; [≤ 91 % ... | H242, H302 **, H314 | — | H335:5.0% | CLP00 |
-| 78-30-8 | tricresyl phosphate (o-o-o-, o-o-m-, o-o-p-, o-m-m-, o-m-p-, o... | H370 **, H411 | — | H370:1.0%; H371:0.2% | CLP00 |
+| 78-18-2 | 1-hydroperoxycyclohexyl 1-hydroxycyclohexyl peroxide; [≤ 91 % ... | H242, H302 **, H314 | — | H335(3):≥5.0% | CLP00 |
+| 78-30-8 | tricresyl phosphate (o-o-o-, o-o-m-, o-o-p-, o-m-m-, o-m-p-, o... | H370 **, H411 | — | H370:≥1.0%; H371:0.2–1.0% | CLP00 |
 | 78-32-0 | tricresyl phosphate (m-m-m-, m-m-p-, m-p-p-, p-p-p-); tritolyl... | H312 **, H302 **, H411 | — | — | CLP00 |
 | 78-34-2 | dioxathion (ISO); 1,4-dioxan-2,3-diyl-O,O,O',O'-tetraethyl di(... | H330 **, H300 **, H311 **, H400, H410 | Akut=1000 | — | CLP00 |
 | 78-40-0 | triethyl phosphate | H302 ** | — | — | CLP00 |
 | 78-57-9 | menazon (ISO); S-[(4,6-diamino-1,3,5-triazin-2-yl)methyl] O,O-... | H302 **, H412 | — | — | CLP00 |
-| 78-59-1 | 3,5,5-trimethylcyclohex-2-enone; isophorone | H351, H312 **, H302 **, H335, H319 | — | H335:10.0% | CLP00 |
+| 78-59-1 | 3,5,5-trimethylcyclohex-2-enone; isophorone | H351, H312 **, H302 **, H335, H319 | — | H335(3):≥10.0% | CLP00 |
 | 78-67-1 | 2,2'-dimethyl-2,2'-azodipropiononitrile; ADZN | H242, H332 **, H302 **, H412 | — | — | CLP00 |
 | 78-70-6 | linalool; 3,7-dimethyl-1,6-octadien-3-ol; dl-linalool [1] cori... | H317 | — | — | ATP10 |
 | 78-78-4 | isopentane; 2-methylbutane | H224, H304, H336, H411 | — | — | CLP00 |
@@ -3428,14 +3428,14 @@
 | 79-03-8 | propionyl chloride | H225, H314 | — | — | CLP00 |
 | 79-04-9 | chloroacetyl chloride | H331 **, H311 **, H301 **, H372 **, H314, H400 | — | — | CLP00 |
 | 79-06-1 | acrylamide; prop-2-enamide | H350, H340, H361f **, H301 **, H332 **, H312 **, H372 **, H315, H319, H317 | — | — | CLP00 |
-| 79-07-2 | 2-chloracetamide | H361f **, H301 **, H317 | — | H317:0.1% | CLP00 |
+| 79-07-2 | 2-chloracetamide | H361f **, H301 **, H317 | — | H317(1):≥0.1% | CLP00 |
 | 79-08-3 | bromoacetic acid | H331 **, H311 **, H301 **, H314, H317, H400 | — | — | ATP1 |
-| 79-09-4 | propionic acid … % | H314 | — | H335:10.0%; H314:25.0%; H315:10.0%; H319:10.0% | CLP00 |
-| 79-10-7 | acrylic acid; prop-2-enoic acid | H226, H332 **, H312 **, H302 **, H314, H400 | — | H335:1.0% | CLP00 |
-| 79-11-8 | chloroacetic acid | H331 **, H311 **, H301 **, H314, H400 | — | H335:5.0% | ATP1 |
+| 79-09-4 | propionic acid … % | H314 | — | H335(3):≥10.0%; H314(1B):≥25.0%; H315(2):10.0–2... | CLP00 |
+| 79-10-7 | acrylic acid; prop-2-enoic acid | H226, H332 **, H312 **, H302 **, H314, H400 | — | H335(3):≥1.0% | CLP00 |
+| 79-11-8 | chloroacetic acid | H331 **, H311 **, H301 **, H314, H400 | — | H335(3):≥5.0% | ATP1 |
 | 79-16-3 | N-methylacetamide | H360D ** | — | — | CLP00 |
 | 79-20-9 | methyl acetate | H225, H336, H319 | — | — | CLP00 |
-| 79-21-0 | peracetic acid . . . % | H242, H330, H310, H301, H314, H400, H410 | Akut=10 | H335:1.0% | ATP22 |
+| 79-21-0 | peracetic acid . . . % | H242, H330, H310, H301, H314, H400, H410 | Akut=10 | H335(3):≥1.0% | ATP22 |
 | 79-22-1 | methyl chloroformate | H225, H330 **, H312 **, H302 **, H314 | — | — | CLP00 |
 | 79-24-3 | nitroethane | H226, H332 **, H302 ** | — | — | CLP00 |
 | 79-27-6 | 1,1,2,2-tetrabromoethane | H330 **, H319, H412 | — | — | CLP00 |
@@ -3445,9 +3445,9 @@
 | 79-33-4 | L-(+)-lactic acid; (2S)-2-hydroxypropanoic acid | H314, H318 | — | — | ATP15 |
 | 79-34-5 | 1,1,2,2-tetrachloroethane | H310, H330 **, H411 | — | — | CLP00 |
 | 79-36-7 | dichloroacetyl chloride | H314, H400 | — | — | CLP00 |
-| 79-41-4 | methacrylic acid; 2-methylpropenoic acid | H312 **, H302 **, H314 | — | H335:1.0% | CLP00 |
+| 79-41-4 | methacrylic acid; 2-methylpropenoic acid | H312 **, H302 **, H314 | — | H335(3):≥1.0% | CLP00 |
 | 79-43-6 | dichloroacetic acid | H314, H400 | — | — | CLP00 |
-| 79-44-7 | dimethylcarbamoyl chloride | H350, H331 **, H302 **, H335, H315, H319 | — | H350:0.001% | CLP00 |
+| 79-44-7 | dimethylcarbamoyl chloride | H350, H331 **, H302 **, H335, H315, H319 | — | H350:≥0.001% | CLP00 |
 | 79-46-9 | 2-nitropropane | H226, H350, H332 **, H302 ** | — | — | CLP00 |
 | 79-94-7 | 2,2',6,6'-tetrabromo–4,4'-isopropylidenediphenol; tetrabromobi... | H350, H400, H410 | — | — | ATP21 |
 | 79026-02-1 | 3-(2-{}{4-[2-(4-cyanophenyl)vinyl]phenyl}}vinyl)benzonitrile | H413 | — | — | CLP00 |
@@ -3475,11 +3475,11 @@
 | 80-06-8 | chlorfenethol (ISO); 1,1-bis (4-chlorophenyl) ethanol | H302 **, H411 | — | — | CLP00 |
 | 80-08-0 | dapsone; 4,4'-diamino diphenyl sulfone | H302 ** | — | — | CLP00 |
 | 80-09-1 | 4,4’-sulphonyldiphenol; bisphenol S | H360FD | — | — | ATP18 |
-| 80-15-9 | α,α-dimethylbenzyl hydroperoxide; cumene hydroperoxide | H242, H331 **, H312 **, H302 **, H373 **, H314, H411 | — | H314:10.0%; H315:3.0%; H318:3.0%; H319:1.0%; H3... | CLP00 |
+| 80-15-9 | α,α-dimethylbenzyl hydroperoxide; cumene hydroperoxide | H242, H331 **, H312 **, H302 **, H373 **, H314, H411 | — | H314(1B):≥10.0%; H315(2):3.0–10.0%; H318(1):3.0... | CLP00 |
 | 80-33-1 | chlorfenson (ISO); 4-chlorophenyl 4-chlorobenzenesulfonate | H302 **, H315, H400, H410 | — | — | CLP00 |
 | 80-38-6 | fenson (ISO); 4-chlorophenyl benzenesulphonate | H302 **, H319, H411 | — | — | CLP00 |
 | 80-43-3 | bis(α,α-dimethylbenzyl) peroxide | H242, H360D, H315, H319, H411 | — | — | ATP15 |
-| 80-47-7 | 8-p-menthyl hydroperoxide; p-menthane hydroperoxide | H242, H332 **, H314 | — | H335:5.0% | CLP00 |
+| 80-47-7 | 8-p-menthyl hydroperoxide; p-menthane hydroperoxide | H242, H332 **, H314 | — | H335(3):≥5.0% | CLP00 |
 | 80-51-3 | 4,4'-oxydi(benzenesulphonohydrazide) | H242, H400, H410 | Akut=1 | — | ATP18 |
 | 80-54-6 | 2-(4-tert-butylbenzyl) propionaldehyde | H360Fd | — | — | ATP15 |
 | 80-62-6 | methyl methacrylate; methyl 2-methylprop-2-enoate; methyl 2-me... | H225, H335, H315, H317 | — | — | CLP00 |
@@ -3509,7 +3509,7 @@
 | 80844-07-1 | etofenprox (ISO); 2-(4-ethoxyphenyl)-2-methylpropyl 3-phenoxyb... | H362, H400, H410 | Akut=100 | — | ATP6 |
 | 81-14-1 | musk ketone; 3,5-dinitro-2,6-dimethyl-4-tert-butylacetophenone... | H351, H400, H410 | — | — | ATP1 |
 | 81-15-2 | musk xylene; 5-tert-butyl-2,4,6-trinitro-m-xylene | H201, H351, H400, H410 | — | — | CLP00 |
-| 81-81-2 | warfarin (ISO); 4-hydroxy-3-(3-oxo-1-phenylbutyl)-2H-chromen-2... | H360D, H330, H310, H300, H372(blood), H411 | — | H360D:0.003%; H372:0.5%; H373:0.05% | ATP9 |
+| 81-81-2 | warfarin (ISO); 4-hydroxy-3-(3-oxo-1-phenylbutyl)-2H-chromen-2... | H360D, H330, H310, H300, H372(blood), H411 | — | H360D:≥0.003%; H372:≥0.5%; H373:0.05–0.5% | ATP9 |
 | 81-82-3 | coumachlor (ISO); 3-[1-(4-chlorophenyl)-3-oxobutyl]-4-hydroxyc... | H373 **, H412 | — | — | CLP00 |
 | 81334-34-1 | imazapyr (ISO); 2-[4,5-dihydro-4-methyl-4-(1-methylethyl)-5-ox... | H319, H412 | — | — | CLP00 |
 | 81406-37-3 | fluroxypyr-meptyl (ISO); methylheptyl, O-(4-amino-3,5-dichloro... | H400, H410 | — | — | CLP00 |
@@ -3517,7 +3517,7 @@
 | 81752-87-6 | methyl 2,2-dimethyl-6-methylenecyclohexanecarboxylate | H315 | — | — | ATP1 |
 | 81777-89-1 | clomazone (ISO); 2-(2-chlorobenzyl)-4,4-dimethyl-1,2-oxazolidi... | H332, H302, H400, H410 | Akut=1 | — | ATP17 |
 | 818-08-6 | dibutyltin oxide | H341, H360FD, H301, H372(immune_system), H315, H318 | — | — | ATP21 |
-| 818-61-1 | 2-hydroxyethyl acrylate | H311 **, H314, H317, H400 | — | H317:0.2% | CLP00 |
+| 818-61-1 | 2-hydroxyethyl acrylate | H311 **, H314, H317, H400 | — | H317(1):≥0.2% | CLP00 |
 | 81880-96-8 | (4-hydrazinophenyl)-N-methylmethanesulfonamide hydrochloride | H341, H301 **, H372 **, H317, H400, H410 | — | — | CLP00 |
 | 81898-60-4 | tetrasodium 3,3'-(piperazine-1,4-diylbis((6-chloro-1,3,5-triaz... | H317 | — | — | CLP00 |
 | 81992-66-7 | sodium 2-[[4-[(4,6-dichloro-1,3,5-triazin-2-yl)amino]phenyl]su... | H317, H400, H410 | — | — | ATP1 |
@@ -3526,7 +3526,7 @@
 | 82-71-3 | 2,4,6-trinitroresorcinol; styphnic acid | H201, H332 **, H312 **, H302 ** | — | — | ATP1 |
 | 82027-60-9 | hexasodium [4,4''-azoxybis(2,2'-disulfonatostilbene-4,4'-diyla... | H411 | — | — | CLP00 |
 | 82097-50-5 | triasulfuron (ISO); 1-[2-(2-chloroethoxy)phenylsulfonyl]-3-(4-... | H400, H410 | — | — | CLP00 |
-| 822-06-0 | hexamethylene-di-isocyanate | H331 **, H335, H315, H319, H334, H317 | — | H334:0.5%; H317:0.5% | CLP00 |
+| 822-06-0 | hexamethylene-di-isocyanate | H331 **, H335, H315, H319, H334, H317 | — | H334:≥0.5%; H317(1):≥0.5% | CLP00 |
 | 822-36-6 | 4-methylimidazole | H350, H360Fd | — | — | ATP21 |
 | 823-40-5 | 2-methyl-m-phenylenediamine; 2,6-toluenediamine | H341, H312 **, H302 **, H317, H411 | — | — | CLP00 |
 | 82380-18-5 | 2-fluoro-4-hydroxybenzonitrile | H302 **, H318, H411 | — | — | ATP1 |
@@ -3554,7 +3554,7 @@
 | 83708-14-9 | 3-icosyl-4-henicosylidene-2-oxetanone | H413 | — | — | CLP00 |
 | 838-88-0 | 4,4'-methylenedi-o-toluidine | H350, H302 **, H317, H400, H410 | — | — | CLP00 |
 | 83857-96-9 | 2-butyl-4-chloro-5-formylimidazole | H317, H411 | — | — | CLP00 |
-| 83918-57-4 | imazalil sulphate (ISO), aqueous solution; 1- [2-(allyloxy)eth... | H302, H314, H317, H400, H410 | — | H314:50.0%; H315:30.0%; H318:15.0%; H319:5.0% | CLP00 |
+| 83918-57-4 | imazalil sulphate (ISO), aqueous solution; 1- [2-(allyloxy)eth... | H302, H314, H317, H400, H410 | — | H314(1B):≥50.0%; H315(2):≥30.0%; H318(1):≥15.0%... | CLP00 |
 | 83926-73-2 | 4-cyclohexyl-2-methyl-2-butanol | H318, H411 | — | — | CLP00 |
 | 83968-67-6 | chrysoidine monohydrochloride; 4-phenylazophenylene-1,3-diamin... | H341, H302, H315, H318, H400, H410 | — | — | ATP01 |
 | 84-61-7 | dicyclohexyl phthalate | H360D, H317 | — | — | ATP9 |
@@ -3575,14 +3575,14 @@
 | 84650-03-3 | Distillates (coal tar), light oils; Carbolic Oil; [A complex c... | H350, H340 | — | — | ATP1 |
 | 84650-04-4 | Distillates (coal tar), naphthalene oils; Naphthalene Oil; [A ... | H350, H340 | — | — | ATP1 |
 | 84696-25-3 | Margosa, ext. [from the kernels of Azadirachta indica extracte... | H361d, H317, H410 | Kr=10 | — | ATP18 |
-| 84776-45-4 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 84776-45-4 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 84777-06-0 | 1,2-benzenedicarboxylic acid, dipentylester, branched and line... | H360FD, H400 | — | — | CLP00 |
 | 84793-24-8 | N-[1-(S)-ethoxycarbonyl-3-phenylpropyl]-.sc.l.sc.-alanyl-N-car... | H318, H317 | — | — | ATP1 |
 | 84852-15-3 | nonylphenol [1] 4-nonylphenol, branched [2] | H361fd, H302, H314, H400, H410 | — | — | CLP00 |
-| 84852-35-7 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
-| 84852-36-8 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
-| 84852-37-9 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
-| 84852-39-1 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 84852-35-7 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
+| 84852-36-8 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
+| 84852-37-9 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
+| 84852-39-1 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 84988-93-2 | Phenols, ammonia liquor ext.; Alkaline Extract; [The combinati... | H350, H340 | — | — | ATP1 |
 | 84989-03-7 | Tar acids, ethylphenol fraction; Distillate Phenols; [The frac... | H350, H340 | — | — | ATP1 |
 | 84989-04-8 | Tar acids, methylphenol fraction; Distillate Phenols; [The fra... | H350, H340 | — | — | ATP1 |
@@ -3609,25 +3609,25 @@
 | 85116-60-5 | Naphtha (petroleum), hydrodesulfurized thermal cracked light; ... | H350, H340, H304 | — | — | ATP1 |
 | 85116-61-6 | Naphtha (petroleum), hydrotreated light, cycloalkane-contg.; L... | H350, H340, H304 | — | — | ATP1 |
 | 85117-03-9 | Gas oils (petroleum), hydrodesulfurized coker heavy vacuum; He... | H350 | — | — | CLP00 |
-| 85135-77-9 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 85135-77-9 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 85136-74-9 | 6-hydroxy-1-(3-isopropoxypropyl)-4-methyl-2-oxo-5-[4-(phenylaz... | H350, H413 | — | — | CLP00 |
 | 85153-92-0 | hexasodium 6,13-dichloro-3,10-bis((4-(2,5-disulfonatoanilino)-... | H334, H317 | — | — | CLP00 |
 | 85153-93-1 | disodium 1-amino-4-(4-benzenesulphonamido-3-sulphonatoanilino)... | H318, H412 | — | — | CLP00 |
-| 85166-19-4 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 85166-19-4 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 852403-68-0 | metaflumizone (ISO); (EZ)-2-[2-(4-cyanophenyl)-1-(Î±,Î±,Î± -tr... | H361fd, H362, H373 | — | — | ATP14 |
 | 85407-90-5 | chrysoidine C10-14-alkyl derivatives; benzenesulfonic acid, mo... | H341, H302 **, H315, H318 | — | — | ATP1 |
 | 85491-26-5 | (chloromethyl)bis(4-fluorophenyl)methylsilane | H411 | — | — | CLP00 |
-| 85508-43-6 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
-| 85508-44-7 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
-| 85508-45-8 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
-| 85508-46-9 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 85508-43-6 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
+| 85508-44-7 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
+| 85508-45-8 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
+| 85508-46-9 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 85509-19-9 | flusilazole (ISO); bis(4-fluorophenyl)(methyl)(1H-1,2,4-triazo... | H351, H360D **, H302 **, H411 | — | — | CLP00 |
 | 85535-84-8 | alkanes, C10-13, chloro; chlorinated paraffins, C10-13 | H351, H400, H410 | — | — | ATP1 |
 | 85535-85-9 | alkanes, C14-17, chloro; chlorinated paraffins, C14-17 | H362, H400, H410 | — | — | ATP1 |
 | 85536-17-0 | Solvent naphtha (coal), light; Light Oil Redistillate, low boi... | H350, H340 | — | — | ATP1 |
 | 85536-19-2 | Solvent naphtha (coal), coumarone-styrene contg.; Light Oil Re... | H350, H340 | — | — | ATP1 |
 | 85536-20-5 | Solvent naphtha (coal), xylene-styrene cut; Light Oil Redistil... | H350, H340 | — | — | ATP1 |
-| 85551-28-6 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 85551-28-6 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 85665-96-9 | hexasodium 7-(4-(4-(4-(2,5-disulphonatoanilino)-6-fluoro-1,3,5... | H317 | — | — | CLP00 |
 | 85665-97-0 | tetrasodium 5-benzamido-3-(5-(4-fluoro-6-(1-sulphonato-2-napht... | H315, H319, H317 | — | — | CLP00 |
 | 85665-98-1 | tetrasodium 4-amino-3,6-bis(5-[4-chloro-6-(2-hydroxyethylamino... | H411 | — | — | CLP00 |
@@ -3659,7 +3659,7 @@
 | 87113-78-8 | 3,5-bis((3,5-di-tert-butyl-4-hydroxy)benzyl)-2,4,6-trimethylph... | H412 | — | — | CLP00 |
 | 87172-89-2 | exo-1-methyl-4-(1-methylethyl)-7-oxabicyclo[2.2.1]heptan-2-ol | H302 **, H318 | — | — | CLP00 |
 | 87199-17-5 | 4-formylphenylboronic acid | H317 | — | — | ATP1 |
-| 872-50-4 | N-methyl-2-pyrrolidone; 1-methyl-2-pyrrolidone | H360D **, H335, H315, H319 | — | H335:10.0% | ATP9 |
+| 872-50-4 | N-methyl-2-pyrrolidone; 1-methyl-2-pyrrolidone | H360D **, H335, H315, H319 | — | H335(3):≥10.0% | ATP9 |
 | 87237-48-7 | haloxyfop-etotyl (ISO); 2-ethoxyethyl 2-(4-(3-chloro-5-trifluo... | H302 **, H400, H410 | — | — | CLP00 |
 | 873-32-5 | 2-chlorobenzonitrile | H312 **, H302 **, H319 | — | — | CLP00 |
 | 87333-22-0 | methyl 2-(acetylamino)-3-chloropropionate | H317, H400, H410 | — | — | ATP1 |
@@ -3727,7 +3727,7 @@
 | 9001-75-6 | pepsin A | H335, H315, H319, H334 | — | — | CLP00 |
 | 9001-98-3 | rennin | H335, H315, H319, H334 | — | — | CLP00 |
 | 9002-07-7 | trypsin | H335, H315, H319, H334 | — | — | CLP00 |
-| 90035-08-8 | flocoumafen (ISO); reaction mass of: cis-4-hydroxy-3-(1,2,3,4-... | H360D, H330, H310, H300, H372(blood), H400, H410 | Akut=10 | H360D:0.003%; H372:0.05%; H373:0.005% | ATP9 |
+| 90035-08-8 | flocoumafen (ISO); reaction mass of: cis-4-hydroxy-3-(1,2,3,4-... | H360D, H330, H310, H300, H372(blood), H400, H410 | Akut=10 | H360D:≥0.003%; H372:≥0.05%; H373:0.005–0.05% | ATP9 |
 | 9004-07-3 | chymotrypsin | H335, H315, H319, H334 | — | — | CLP00 |
 | 90076-65-6 | lithium bis(trifluoromethylsulfonyl)imide | H311 **, H301 **, H373 **, H314, H412 | — | — | ATP1 |
 | 9012-54-8 | cellulase | H334 | — | — | CLP00 |
@@ -3781,24 +3781,24 @@
 | 90669-78-6 | Slack wax (petroleum), clay-treated; Slack wax; [A complex com... | H350 | — | — | CLP00 |
 | 9068-59-1 | proteinase, microbial neutral | H335, H315, H319, H334 | — | — | CLP00 |
 | 907204-31-3 | 3-(difluoromethyl)-1-methyl-N-(3',4',5'-tri­fluorobiphenyl-2-y... | H362, H400, H410 | Akut=1 | — | ATP15 |
-| 9080-17-5 | ammonium polysulphides | H314, H400 | — | H031:1.0% | CLP00 |
+| 9080-17-5 | ammonium polysulphides | H314, H400 | — | H031:≥1.0% | CLP00 |
 | 90884-29-0 | 4,4'-oxybis(ethylenethio)diphenol | H317, H411 | — | — | CLP00 |
 | 90886-53-6 | methyl 3-amino-2,2,3-trimethylbutyrate | H302 **, H314, H412 | — | — | ATP1 |
 | 90989-38-1 | Aromatic hydrocarbons, C8; Light Oil Redistillate, high boiling | H350, H340 | — | — | ATP1 |
 | 90989-39-2 | Aromatic hydrocarbons, C8-10; Low boiling point naphtha - unsp... | H350, H340, H304 | — | — | ATP1 |
 | 90989-41-6 | Aromatic hydrocarbons, C6-10, C8-rich; Light Oil Redistillate,... | H350, H340 | — | — | ATP1 |
 | 90989-42-7 | Aromatic hydrocarbons, C7-8, dealkylation products, distn. res... | H350, H340, H304 | — | — | ATP1 |
-| 91-08-7 | 2-methyl-m-phenylene diisocyanate; toluene-2,6-di-isocyanate [... | H351, H330 **, H335, H315, H319, H334, H317, H412 | — | H334:0.1% | CLP00 |
+| 91-08-7 | 2-methyl-m-phenylene diisocyanate; toluene-2,6-di-isocyanate [... | H351, H330 **, H335, H315, H319, H334, H317, H412 | — | H334:≥0.1% | CLP00 |
 | 91-20-3 | naphthalene | H351, H302 **, H400, H410 | — | — | CLP00 |
 | 91-22-5 | quinoline | H350, H341, H312 **, H302 **, H315, H319, H411 | — | — | ATP1 |
 | 91-23-6 | 2-nitroanisole | H350, H302 ** | — | — | CLP00 |
 | 91-53-2 | ethoxyquin (ISO); 6-ethoxy-1,2-dihydro-2,2,4-trimethylquinoline | H302 ** | — | — | CLP00 |
-| 91-59-8 | 2-naphthylamine | H350, H302 **, H411 | — | H350:0.01% | CLP00 |
+| 91-59-8 | 2-naphthylamine | H350, H302 **, H411 | — | H350:≥0.01% | CLP00 |
 | 91-66-7 | N,N-diethylaniline | H331 **, H311 **, H301 **, H373 **, H411 | — | — | CLP00 |
 | 91-76-9 | 6-phenyl-1,3,5-triazine-2,4-diyldiamine; 6-phenyl-1,3,5-triazi... | H302 **, H412 | — | — | CLP00 |
 | 91-94-1 | 3,3'-dichlorobenzidine; 3,3'-dichlorobiphenyl-4,4'-ylenediamine | H350, H312 **, H317, H400, H410 | — | — | CLP00 |
 | 91-95-2 | biphenyl-3,3',4,4'-tetrayltetraamine; diaminobenzidine | H350, H341 | — | — | ATP1 |
-| 91-97-4 | 3,3'-dimethylbiphenyl–4,4'-diyl diisocyanate | H351, H334, H317 | — | H317:0.001% | ATP21 |
+| 91-97-4 | 3,3'-dimethylbiphenyl–4,4'-diyl diisocyanate | H351, H334, H317 | — | H317(1):≥0.001% | ATP21 |
 | 91079-47-9 | Phenols, C9-11; Distillate Phenols | H350, H340 | — | — | ATP1 |
 | 91082-50-7 | Tar, coal, storage residues; Coal Tar Solids Residue; [The dep... | H350 | — | — | CLP00 |
 | 91082-52-9 | Tar bases, coal, lutidine fraction; Distillate Bases | H350, H340 | — | — | ATP1 |
@@ -3809,7 +3809,7 @@
 | 91648-39-4 | dioctyltin dilaurate [1] stannane, dioctyl-, bis(coco acyloxy)... | H360D, H372 (immune system) | — | — | ATP15 |
 | 91673-30-2 | formaldehyde, reaction products with butylphenol | H317 | — | — | CLP00 |
 | 91697-23-3 | Extract residues (coal), brown; Coal Tar Extract; [The residue... | H350 | — | — | CLP00 |
-| 91697-41-5 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 91697-41-5 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 917-58-8 | potassium ethanolate; potassium ethoxide [1] sodium ethanolate... | H251, H314 | — | — | CLP00 |
 | 917-61-3 | sodium cyanate | H302 **, H412 | — | — | CLP00 |
 | 91770-15-9 | Kerosine (petroleum), sweetened; Kerosine - unspecified; [A co... | H304 | — | — | CLP00 |
@@ -3854,7 +3854,7 @@
 | 92-43-3 | 1-phenyl-3-pyrazolidone | H302 **, H411 | — | — | CLP00 |
 | 92-52-4 | biphenyl; diphenyl | H335, H315, H319, H400, H410 | — | — | CLP00 |
 | 92-67-1 | biphenyl-4-ylamine; xenylamine; 4-aminobiphenyl | H350, H302 ** | — | — | CLP00 |
-| 92-87-5 | benzidine; 1,1'-biphenyl-4,4'-diamine; 4,4'-diaminobiphenyl; b... | H350, H302 **, H400, H410 | — | H350:0.01% | CLP00 |
+| 92-87-5 | benzidine; 1,1'-biphenyl-4,4'-diamine; 4,4'-diaminobiphenyl; b... | H350, H302 **, H400, H410 | — | H350:≥0.01% | CLP00 |
 | 92-93-3 | 4-nitrobiphenyl | H350, H411 | — | — | CLP00 |
 | 920-36-5 | (2-methylpropyl)lithium; isobutyllithium | H250, H260, H336, H314, H400, H410 | — | — | ATP1 |
 | 92045-12-0 | Foots oil (petroleum), hydrotreated; Foots oil | H350 | — | — | CLP00 |
@@ -3913,7 +3913,7 @@
 | 92062-36-7 | Aromatic hydrocarbons, C9-12, benzene distn.; Light Oil Redist... | H350, H340 | — | — | ATP1 |
 | 92128-94-4 | Hydrocarbons, C8-12, catalytic-cracking, chem. neutralized; Lo... | H350, H340, H304 | — | — | ATP1 |
 | 92129-09-4 | Paraffin oils (petroleum), solvent-refined dewaxed heavy; Base... | H350 | — | — | CLP00 |
-| 92129-57-2 | slimes and sludges, copper electrolytic refining, decopperised... | H350i, H341, H360D **, H332 **, H302 **, H372 **, H315, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP1 |
+| 92129-57-2 | slimes and sludges, copper electrolytic refining, decopperised... | H350i, H341, H360D **, H332 **, H302 **, H372 **, H315, H334, H317, H400, H410 | Akut=1 | H372:≥1.0%; H373:0.1–1.0%; H317(1):≥0.01% | ATP1 |
 | 92201-59-7 | Distillates (petroleum), intermediate catalytic cracked, therm... | H350 | — | — | CLP00 |
 | 92201-60-0 | Distillates (petroleum), light catalytic cracked, thermally de... | H350 | — | — | CLP00 |
 | 92201-97-3 | Naphtha (petroleum), light heat-soaked, steam-cracked; Low boi... | H350, H340, H304 | — | — | ATP1 |
@@ -3960,8 +3960,8 @@
 | 93763-85-0 | Residues (petroleum), steam-cracked heat-soaked naphtha; Crack... | H350 | — | — | CLP00 |
 | 93821-38-6 | Extract residues (coal), benzole fraction acid; Light Oil Extr... | H350, H340 | — | — | ATP1 |
 | 93821-66-0 | Residual oils (petroleum); Heavy Fuel oil; [A complex combinat... | H350 | — | — | CLP00 |
-| 93920-09-3 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
-| 93920-10-6 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 93920-09-3 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
+| 93920-10-6 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 93924-31-3 | Foots oil (petroleum), acid-treated; Foots oil; [A complex com... | H220, H350 | — | — | CLP00 |
 | 93924-32-4 | Foots oil (petroleum), clay-treated; Foots oil; [A complex com... | H220, H350 | — | — | CLP00 |
 | 93924-33-5 | Gas oils, paraffinic; Gasoil - unspecified; [A distillate obta... | H350 | — | — | CLP00 |
@@ -3970,7 +3970,7 @@
 | 93957-49-4 | N-isopropyl-3-(4-fluorophenyl)-1H-indole | H413 | — | — | CLP00 |
 | 93957-50-7 | 3-[3-(4-fluorophenyl)-1-(1-methylethyl)-1H-indol-2-yl]-(E)-2-p... | H317, H400, H410 | — | — | ATP1 |
 | 93971-95-0 | phthalocyanine-N-[3-(diethylamino)propyl]sulfonamide copper co... | H412 | — | — | CLP00 |
-| 93983-68-7 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372:1.0%; H373:0.1%; H317:0.01% | ATP02 |
+| 93983-68-7 | nickel(II) trifluoroacetate [1] nickel(II) propionate [2] nick... | H350i, H341, H360D ***, H372 **, H334, H317, H400, H410 | Akut=1 | H372(1):≥1.0%; H373(2):≥0.1%; H317(1):≥0.01% | ATP02 |
 | 94-36-0 | dibenzoyl peroxide; benzoyl peroxide | H241, H319, H317, H400, H410 | Akut=10 | — | ATP22 |
 | 94-37-1 | bis(piperidinothiocarbonyl) disulphide | H335, H315, H319, H317 | — | — | CLP00 |
 | 94-59-7 | safrole; 5-allyl-1,3-benzodioxole | H350, H341, H302 ** | — | — | CLP00 |
@@ -4031,7 +4031,7 @@
 | 95-80-7 | 4-methyl-m-phenylenediamine; 2,4-toluenediamine | H350, H341, H361f **, H301 **, H312 **, H373 **, H317, H411 | — | — | ATP1 |
 | 95-87-4 | 3,4-xylenol [1] 2,5-xylenol [2] 2,4-xylenol [3] 2,3-xylenol [4... | H311, H301, H314, H411 | — | — | CLP00 |
 | 95-92-1 | oxalic acid diethylester; diethyl oxalate | H302 **, H319 | — | — | CLP00 |
-| 95-95-4 | 2,4,5-trichlorophenol | H302 **, H315, H319, H400, H410 | — | H319:5.0%; H315:5.0% | CLP00 |
+| 95-95-4 | 2,4,5-trichlorophenol | H302 **, H315, H319, H400, H410 | — | H319(2):≥5.0%; H315(2):≥5.0% | CLP00 |
 | 950-10-7 | mephosfolan (ISO); diethyl 4-methyl-1,3-dithiolan-2-ylidenepho... | H310, H300 **, H411 | — | — | CLP00 |
 | 950-37-8 | methidathion (ISO); 2,3-dihydro-5-methoxy-2-oxo-1,3,4-thiadiaz... | H300 **, H312 **, H400, H410 | — | — | CLP00 |
 | 95009-23-7 | Distillates (petroleum), steam-cracked, C8-12 fraction, polymd... | H350, H340, H304 | — | — | ATP1 |
@@ -4077,7 +4077,7 @@
 | 97-02-9 | 2,4-dinitroaniline | H310, H330 **, H300 **, H373 **, H411 | — | — | CLP00 |
 | 97-17-6 | dichlofenthion (ISO); O-,4-dichlorophenyl O,O-diethyl phosphor... | H302 **, H400, H410 | — | — | CLP00 |
 | 97-23-4 | dichlorophen (ISO) | H302 **, H319, H400, H410 | — | — | CLP00 |
-| 97-54-1 | isoeugenol [1] (E)-2-methoxy-4-(prop-1-enyl) phenol [2] (Z)-2-... | H317 | — | H317:0.01% | ATP13 |
+| 97-54-1 | isoeugenol [1] (E)-2-methoxy-4-(prop-1-enyl) phenol [2] (Z)-2-... | H317 | — | H317(1):≥0.01% | ATP13 |
 | 97-56-3 | 4-o-tolylazo-o-toluidine; 4-amino-2',3-dimethylazobenzene; fas... | H350, H317 | — | — | CLP00 |
 | 97-63-2 | ethyl methacrylate | H225, H335, H315, H319, H317 | — | — | CLP00 |
 | 97-64-3 | ethyl lactate; ethyl DL-lactate [1] ethyl (S)-2-hydroxypropion... | H226, H335, H318 | — | — | CLP00 |
@@ -4085,7 +4085,7 @@
 | 97-77-8 | disulfiram; tetraethylthiuramdisulfide | H302 **, H373 **, H317, H400, H410 | — | — | CLP00 |
 | 97-86-9 | isobutyl methacrylate | H226, H335, H315, H317 | — | — | ATP13 |
 | 97-88-1 | n-butyl methacrylate | H226, H335, H315, H319, H317 | — | — | CLP00 |
-| 97-90-5 | ethylene dimethacrylate | H335, H317 | — | H335:10.0% | CLP00 |
+| 97-90-5 | ethylene dimethacrylate | H335, H317 | — | H335(3):≥10.0% | CLP00 |
 | 97-95-0 | 2-ethylbutan-1-ol | H312 **, H302 ** | — | — | CLP00 |
 | 97-99-4 | tetrahydro-2-furylmethanol; tetrahydrofurfuryl alcohol | H360Df, H319 | — | — | ATP6 |
 | 97101-46-7 | methyl 3-(acetylthio)-2-methyl-propanoate | H302 **, H317, H400, H410 | — | — | CLP00 |
@@ -4137,7 +4137,7 @@
 | 98-54-4 | 4-tert-butylphenol | H361f, H315, H318, H410 | Kr=1 | — | ATP13 |
 | 98-73-7 | 4-tert-butylbenzoic acid | H360F, H302, H372 | — | — | ATP3 |
 | 98-82-8 | Cumene | H226, H350, H304, H335, H411 | — | — | ATP18 |
-| 98-83-9 | 2-phenylpropene; α-methylstyrene | H226, H335, H319, H411 | — | H335:25.0% | CLP00 |
+| 98-83-9 | 2-phenylpropene; α-methylstyrene | H226, H335, H319, H411 | — | H335(3):≥25.0% | CLP00 |
 | 98-84-0 | 1-phenylethylamine [1] Dl-α-methylbenzylamine  [2] | H312 **, H302 **, H314 | — | — | CLP00 |
 | 98-86-2 | acetophenone | H302 **, H319 | — | — | CLP00 |
 | 98-87-3 | α,α-dichlorotoluene; benzylidene chloride; benzal chloride | H351, H331 **, H302 **, H335, H315, H318 | — | — | CLP00 |
@@ -4176,5 +4176,5 @@
 | 99688-47-8 | bromobenzylbromotoluene, reaction mass of isomers | H373 **, H317, H400, H410 | — | — | CLP00 |
 | 99788-75-7 | 1,4-bis(2,3-dihydroxypropylamino)anthraquinone | H411 | — | — | ATP1 |
 | 99817-36-4 | 2,4-dichloro-3-ethyl-6-nitrophenol | H301 **, H318, H317, H400, H410 | — | — | CLP00 |
-| 999-61-1 | 2-hydroxy-1-methylethylacrylate [1] 2-hydroxypropylacrylate [2... | H331, H311, H301, H314, H317 | — | H317:0.2% | CLP00 |
+| 999-61-1 | 2-hydroxy-1-methylethylacrylate [1] 2-hydroxypropylacrylate [2... | H331, H311, H301, H314, H317 | — | H317(1):≥0.2% | CLP00 |
 | 999-81-5 | chlormequat chloride (ISO); 2-chloroethyltrimethylammonium chl... | H312 **, H302 ** | — | — | CLP00 |

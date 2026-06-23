@@ -70,6 +70,15 @@ def _m_factors(m_factors: dict) -> str:
     return ' / '.join(parts) if parts else '—'
 
 
+def _cls_abbr(cls: str) -> str:
+    """'Skin Corr. 1A' → '1A', 'Eye Dam. 1' → '1', '' → ''"""
+    if not cls:
+        return ''
+    # Son token'ı al; rakam içeriyorsa kullan
+    token = cls.strip().split()[-1]
+    return token if any(c.isdigit() for c in token) else ''
+
+
 def _scl(scl_limits: list) -> str:
     if not scl_limits:
         return '—'
@@ -77,8 +86,17 @@ def _scl(scl_limits: list) -> str:
     for s in scl_limits:
         hc    = (s.get('h_code') or '').strip()
         c_min = s.get('c_min')
-        if hc and c_min is not None:
-            parts.append(f'{hc}:{c_min}%')
+        c_max = s.get('c_max')
+        cls   = (s.get('class') or '').strip()
+        if not hc or c_min is None:
+            continue
+        abbr  = _cls_abbr(cls)
+        code  = f'{hc}({abbr})' if abbr else hc
+        if c_max is None:
+            rng = f'≥{c_min}%'          # ≥c_min%
+        else:
+            rng = f'{c_min}–{c_max}%'   # c_min–c_max%
+        parts.append(f'{code}:{rng}')
     if not parts:
         return '—'
     joined = '; '.join(parts)

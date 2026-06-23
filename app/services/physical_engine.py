@@ -2173,7 +2173,7 @@ def calculate(comps: List[Dict], form: str = 'liquid',
             _ox_src = ', '.join(f"{t['name']} (%{t['conc']:.0f})" for t in ox_sol_triggers)
             extra.append({'type': 'oxidizing_solid', 'h': _ox_h, 'h_class': _ox_cls,
                           'signal': _ox_sig, 'source': _ox_src,
-                          'cutoff_used': f'≥ %{OXIDIZING_SOLID_CUTOFFS[_ox_h]:.0f} oksitleyici katı bileşen (CLP Ek-I Tablo 2.13)'})
+                          'cutoff_used': f'Bileşen verisi ≥ %{OXIDIZING_SOLID_CUTOFFS[_ox_h]:.0f} — karışım test verisi mevcut değil (CLP §2.13.4.2 bridging prensibi)'})
 
     if form in ('liquid', 'paste'):
         ox = [c for c in comps
@@ -2183,7 +2183,7 @@ def calculate(comps: List[Dict], form: str = 'liquid',
             _ox_src = ', '.join(f"{c.get('name') or c.get('cas','')} (%{float(c.get('concMax') or c.get('conc') or 0):.0f})" for c in ox)
             extra.append({'type': 'oxidizing', 'h': 'H272', 'h_class': 'Ox. Liq. 3',
                           'signal': 'Warning', 'source': _ox_src,
-                          'cutoff_used': '≥ %1 oksitleyici bileşen (CLP Ek-I Tablo 2.13)'})
+                          'cutoff_used': 'Bileşen verisi — karışım test verisi mevcut değil (CLP §2.13.4.2 bridging prensibi)'})
 
     # Özel fiziksel tehlike muafiyet/manuel giriş (kullanıcı beyanı)
     _MANUAL_H_MAP = {

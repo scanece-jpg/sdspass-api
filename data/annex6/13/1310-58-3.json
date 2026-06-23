@@ -23,13 +23,13 @@
     "scl_limits": [
       {
         "h_code": "H314",
-        "class": "",
+        "class": "Skin Corr. 1A",
         "c_min": 5.0,
         "c_max": null
       },
       {
         "h_code": "H314",
-        "class": "",
+        "class": "Skin Corr. 1B",
         "c_min": 2.0,
         "c_max": 5.0
       },

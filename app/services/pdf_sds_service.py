@@ -1530,27 +1530,21 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
 
     na = term(lang,'not_available')
     
-    # PCN zorunlu alanlar kontrolü
-    # Çözünürlük teorik olarak hesaplanır — PCN zorunlu alanı değil.
+    # PCN zorunlu alanlar kontrolü — yalnızca API yanıtına/uygulama içi uyarıya eklenir,
+    # PDF çıktısına iç teknik mesaj basılmaz.
     pcn_required = ['ph', 'density', 'flash_point']
     pcn_missing = [k for k in pcn_required if not phys.get(k)]
-    if pcn_missing and lang == 'TR':
-        missing_labels = {
-            'ph': 'pH',
-            'density': 'Yoğunluk', 'flash_point': 'Parlama Noktası'
-        }
-        warn_text = 'PCN bildirimi için zorunlu eksik alanlar: ' + \
-                    ', '.join(missing_labels.get(k,k) for k in pcn_missing)
-        story.append(Paragraph(
-            f"<font color='red'>⚠ {warn_text}</font>",
-            styles['small']
-        ))
 
     # Sıvı ürün + yanıcı sıvı bileşen girilmemişse parlama noktası hesaplanamaz uyarısı
     _FLAM_LIQ_H = {'H224', 'H225', 'H226', 'H227'}
+    # Su (7732-18-5) veya seyreltici CAS'lar girilmişse parlama noktası hesabı zaten anlamsız
+    # (su için uyarı bastırılır — yanıcı değil ama sıvı karışım oluşturur).
+    _DILUENT_CAS = {'7732-18-5', '7664-41-7', '124-38-9', '7727-37-9'}
+    _comp_cas_all = {(c.get('cas_no') or c.get('cas') or '').strip() for c in components}
     if (lang == 'TR'
             and product.get('form', '') == 'liquid'
-            and not phys.get('flash_point')):
+            and not phys.get('flash_point')
+            and not (_comp_cas_all & _DILUENT_CAS)):
         _comp_h_all = set()
         for _c in components:
             for _h in (_c.get('h_codes') or _c.get('hazard_statements') or []):
@@ -1558,8 +1552,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         if not (_comp_h_all & _FLAM_LIQ_H):
             story.append(Paragraph(
                 "<font color='orange'>⚠ Ürün formu sıvı ancak hiçbir bileşende yanıcı sıvı "
-                "(H224/H225/H226) bulunmuyor. Su veya çözücü girilmediyse parlama noktası "
-                "hesaplanamaz — bileşen listesini kontrol edin.</font>",
+                "(H224/H225/H226) bulunmuyor. Parlama noktası hesaplanamaz — "
+                "bileşen listesini kontrol edin.</font>",
                 styles['small']
             ))
 

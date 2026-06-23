@@ -973,13 +973,18 @@ def generate_section3(
     disclosure_map: {cas: 'show'|'range'|'hide'} — varsayılan 'show'
     lang: 'TR' | 'EN' — Türkçe SDS için name_tr kullanılır
     """
+    # Su, hava gibi CAS numaraları için ticari sır koruması anlamsız — her zaman 'show'.
+    _ALWAYS_SHOW_CAS = {'7732-18-5', '7664-41-7', '124-38-9', '7727-37-9', '7782-44-7'}
+
     disclosure_map = disclosure_map or {}
     rows = []
     for comp in components:
         cas = comp.get('cas_no', comp.get('cas', '')).strip()
-        # Varsayılan 'range': ticari sır koruması (CLP Madde 24(2) / KKDİK Ek-2 B3.2).
-        # Frontend disclosure_map'te explicit 'show' göndermezse ECHA aralığı kullanılır.
-        level = disclosure_map.get(cas, 'range')
+        if cas in _ALWAYS_SHOW_CAS:
+            level = 'show'
+        else:
+            # Varsayılan 'range': ticari sır koruması (CLP Madde 24(2) / KKDİK Ek-2 B3.2).
+            level = disclosure_map.get(cas, 'range')
         # Esans/gizli karışım → disclosure_map'te 'show' bırakılmışsa min. 'range'e zorla
         if comp.get('comp_type') == 'fragrance' and level == 'show':
             level = 'range'

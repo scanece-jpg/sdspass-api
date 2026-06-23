@@ -1002,8 +1002,8 @@ cadmium oxide (non-pyrophori... | H350, H341, H361fd, H330, H372 **, H400, H410 
 | 1309-64-4 | antimony trioxide | H351 | — | — | CLP00 |
 | 131013-81-5 | tris(tetramethylammonium) 5-hydroxy-1-(4-sulphonatophenyl... | H301, H412 | — | — | CLP00 |
 | 131013-83-7 | tetrakis(tetramethylammonium)3,3'-(6-(2-hydroxyethylamino... | H301, H412 | — | — | CLP00 |
-| 1310-58-3 | potassium hydroxide; caustic potash | H302, H314 | — | H314:5.0%; H314:2.0%; H315:0.5%; H319... | CLP00 |
-| 1310-73-2 | sodium hydroxide; caustic soda | H314 | — | H314:5.0%; H314:2.0%; H315:0.5%; H319... | CLP00 |
+| 1310-58-3 | potassium hydroxide; caustic potash | H302, H314, H315, H318, H319 | — | H314:5.0%(1A); H314:2.0%(1B); H318:2.0%; H315:0.5%; H319:0.5% | CLP00 |
+| 1310-73-2 | sodium hydroxide; caustic soda | H314, H315, H318, H319 | — | H314:5.0%(1A); H314:2.0%(1B); H318:2.0%; H315:0.5%; H319:0.5% | CLP00 |
 | 13108-52-6 | methyl-2,3,5,6-tetrachloro-4-pyridylsulphone; 2,3,5,6-tet... | H312, H302, H319, H317 | — | — | CLP00 |
 | 131-17-9 | diallyl phthalate | H302, H400, H410 | — | — | CLP00 |
 | 131-18-0 | 1,2-benzenedicarboxylic acid, dipentylester, branched and... | H360FD, H400 | — | — | CLP00 |

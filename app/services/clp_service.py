@@ -716,52 +716,66 @@ def _is_liquid_form(form: str) -> bool:
     return bool(form) and form.lower() in _LIQUID_FORMS
 
 
-def calculate_ate_health_h_codes(components: list, form: str = '') -> list:
+# CLP §3.1.3.6.1(b): "akut toksik olmadığı varsayılan" maddeler
+# ATEmix formülünden tamamen dışlanır — "bilinmiyor" sayılmaz.
+_PRESUME_NOT_ACUTELY_TOXIC_CAS: frozenset = frozenset({
+    '7732-18-5',  # su / water
+    '57-50-1',    # sakkaroz / sucrose
+    '50-99-7',    # glikoz / glucose
+    '7647-14-5',  # NaCl
+    '10043-52-4', # CaCl₂
+    '497-19-8',   # Na₂CO₃
+})
+
+
+def _ate_core(items: list, form: str = '') -> tuple:
     """
-    Sync ATE sağlık tehlike hesabı — PDF endpoint için (DB gerekmez).
-    classify_mixture_clp Acute Tox. sınıfını atladığı için bu fonksiyon ayrı çağrılır.
-    Component objesindeki 'ate' ve 'hazards' alanlarını kullanır.
-    form: ürün fiziksel formu ('liquid','solution',...) — sıvı ise toz/sis rotası atlanır.
-    Döndürür: ([{'h_code','h_class','reason','cutoff_used'}], ate_b11_dict) — baskınlık uygulanmış
+    ATE karışım hesabının paylaşılan çekirdeği — sync ve async her ikisi de buraya çağırır.
+    items: [{cas, conc (%), hazards, ate, source_priority, ate_unknown, name}]
+    form:  ürün fiziksel formu — sıvı ise inhalasyon toz rotası atlanır.
+
+    Döner: (ate_h_results, ate_b11, unknown_conc_per_route, ate_annex_vi_5000, stmt_needed)
+      ate_h_results:         [{h_code, h_class, reason, cutoff_used, route, cat_num, mix_ate, _unk}]
+      ate_b11:               {oral/dermal/inhal: {ateMix, resultCode, ...}}
+      unknown_conc_per_route:{route: float (bilinmeyen konsantrasyon %)}
+      ate_annex_vi_5000:     [name, ...] — Annex VI ATE=5000 alınan bileşenler
+      stmt_needed:           True ise ≥%1 bilinmiyor bileşen var → B11 ifadesi ekle
     """
     ate_routes = list(ATE_DEFAULTS.keys())
-    ate_sum = {r: 0.0 for r in ate_routes}
+    ate_sum: dict = {r: 0.0 for r in ate_routes}
     ate_comps: dict = {r: [] for r in ate_routes}
-    unknown_conc = {r: 0.0 for r in ate_routes}  # rota bazında bilinmeyen %
+    unknown_conc: dict = {r: 0.0 for r in ate_routes}
     stmt_needed = False
+    ate_annex_vi_5000: list = []
 
-    for c in components:
-        conc = float(c.get('concMax') or c.get('conc') or c.get('concentration') or 0)
+    for item in items:
+        conc = float(item.get('conc') or 0)
         if conc <= 0:
             continue
         conc_frac = conc / 100.0
+        cas = str(item.get('cas') or '').strip()
 
-        if c.get('ate_unknown', False):
+        if item.get('ate_unknown', False):
             for _r in ate_routes:
                 unknown_conc[_r] += conc
             if conc >= 1.0:
                 stmt_needed = True
             continue
 
-        hazards = c.get('hazards') or []
+        hazards = item.get('hazards') or []
         has_acute_tox = any(
             (h.get('h_class') or '').replace('*', '').strip().startswith('Acute Tox.')
             for h in hazards
         )
 
         if not has_acute_tox:
-            # CLP §3.1.3.6.1(b): su ve benzeri "akut toksik olmadığı varsayılan"
-            # maddeler formülden tamamen dışlanır — "bilinmiyor" sayılmaz.
-            _PRESUME_NOT_TOXIC_SYNC = {
-                '7732-18-5', '57-50-1', '50-99-7', '7647-14-5', '10043-52-4', '497-19-8',
-            }
-            _cas_val = str(c.get('cas') or c.get('cas_no') or '').strip()
-            if _cas_val in _PRESUME_NOT_TOXIC_SYNC:
-                continue
-            source_priority = c.get('source_priority', 4)
+            if cas in _PRESUME_NOT_ACUTELY_TOXIC_CAS:
+                continue  # CLP §3.1.3.6.1(b): tamamen dışla — bilinmiyor sayma
+            source_priority = int(item.get('source_priority') or 4)
             if source_priority <= 2:
                 for route in ate_routes:
                     ate_sum[route] += conc_frac / 5000.0
+                ate_annex_vi_5000.append(item.get('name') or cas)
             else:
                 for _r in ate_routes:
                     unknown_conc[_r] += conc
@@ -769,30 +783,10 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> list:
                     stmt_needed = True
             continue
 
-        # Frontend ate alanı: {oral, dermal, inhal} — inhal → inhalation normalize et
-        _fe_ate = c.get('ate') or {}
-        if _fe_ate.get('inhal') is not None:
-            _fe_ate = {**_fe_ate, 'inhalation': _fe_ate['inhal']}
-        base_ate = _fe_ate
-
-        user_ate = c.get('user_ate') or {}
-        combined_ate = {**base_ate, **user_ate}
-
-        # DB fallback: inhalasyon ATE verisi yoksa substance DB'den çek
-        _ATE_KEYS = ('inhalation', 'inhalation_vapour', 'inhalation_dust', 'inhalation_mgl')
-        if not any(combined_ate.get(k) for k in _ATE_KEYS):
-            _cas = str(c.get('cas') or '').strip()
-            if _cas:
-                try:
-                    from app.services.substance_lookup import lookup_substance as _sl
-                    _sub = _sl(_cas)
-                    if _sub and _sub.get('ate'):
-                        combined_ate = {**_sub['ate'], **combined_ate}
-                except Exception:
-                    pass
-
+        combined_ate = item.get('ate') or {}
         contributed_routes: set = set()
-        source_priority = c.get('source_priority', 4)
+        source_priority = int(item.get('source_priority') or 4)
+
         for haz in hazards:
             hc = (haz.get('h_class') or '').replace('*', '').strip()
             if not hc.startswith('Acute Tox.'):
@@ -807,7 +801,6 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> list:
                 elif combined_ate.get('inhalation_dust'):
                     routes_to_process = ['inhalation_dust', 'inhalation']
                 elif combined_ate.get('inhalation_mgl') or _is_liquid_form(form):
-                    # inhalation_mgl = mg/L ölçümü (buhar eşdeğeri) veya sıvı form → toz rotası yok
                     routes_to_process = ['inhalation_vapour', 'inhalation']
                 else:
                     routes_to_process = ['inhalation_vapour', 'inhalation_dust', 'inhalation']
@@ -819,12 +812,12 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> list:
                 if ate_val and ate_val > 0:
                     ate_sum[route] += conc_frac / ate_val
                     contributed_routes.add(route)
-                    _cn = c.get('name_tr', '') or c.get('name', '') or str(c.get('cas', ''))
+                    _cn = item.get('name') or cas
                     if not any(x.get('name') == _cn for x in ate_comps[route]):
                         ate_comps[route].append({'name': _cn, 'conc': conc, 'code': h_code_raw, 'ate': ate_val})
 
-        # Yalnızca gayri-resmi kaynaklar için: katkısız rotalar = bilinmiyor
-        # Resmi kaynak (≤2) → sınıflandırılmamış rota = test edilmiş-negatif (bilinmiyor değil)
+        # Gayri-resmi kaynaklar için: katkı vermediği rotalar = bilinmiyor
+        # Resmi kaynak (≤2) → katkısız rota = test edilmiş-negatif (bilinmiyor değil)
         if source_priority > 2:
             for _r in ate_routes:
                 if _r not in contributed_routes:
@@ -832,6 +825,7 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> list:
                     if conc >= 1.0:
                         stmt_needed = True
 
+    # ── Sınıflandırma ──────────────────────────────────────────────────────
     _route_labels = {
         'oral': 'oral', 'dermal': 'dermal',
         'inhalation': 'inhalasyon', 'inhalation_vapour': 'inhalasyon (buhar)',
@@ -846,23 +840,24 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> list:
         'dermal': [(50,'H310'),(200,'H310'),(1000,'H311'),(2000,'H312')],
         'inhal':  [(0.5,'H330'),(2.0,'H330'),(10,'H331'),(20,'H332')],
     }
-    results = []
+    ate_h_results: list = []
     seen_h: set = set()
     ate_b11: dict = {}
+
     for route, total in ate_sum.items():
         if total <= 0:
             continue
         _unk = unknown_conc[route]
         mix_ate = ((100.0 - _unk) / 100.0 / total
                    if _unk > 10.0 else 1.0 / total)
-        mix_ate_cmp = round(mix_ate, 6)  # FP gürültüsünü gider (50.0000000000001 → 50.0)
+        mix_ate_cmp = round(mix_ate, 6)  # FP gürültüsünü gider
         thresholds = ATE_THRESHOLDS.get(route, {})
         for n in [1, 2, 3, 4]:
             if mix_ate_cmp <= thresholds.get(n, float('inf')):
                 hcode = ATE_HCODES[route][n]
                 if hcode not in seen_h:
                     seen_h.add(hcode)
-                    results.append({
+                    ate_h_results.append({
                         'h_code':      hcode,
                         'h_class':     f'Acute Tox. {n} ({_route_labels.get(route, route)})',
                         'reason':      (
@@ -870,9 +865,12 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> list:
                             + (f' [Revize: %{_unk:.1f} bilinmiyor]' if _unk > 10.0 else '')
                         ),
                         'cutoff_used': f'ATEmix={mix_ate_cmp}',
+                        'route':       route,
+                        'cat_num':     n,
+                        'mix_ate':     mix_ate_cmp,
+                        '_unk':        _unk,
                     })
                 break
-        # B11 ATEmix detayı — hata olursa görmezden gel, B2.1 hesabını etkilemesin
         try:
             b11_key = _ROUTE_TO_B11.get(route, 'inhal')
             mix_ate_r = round(mix_ate, 2)
@@ -893,15 +891,62 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> list:
         except Exception:
             pass
 
+    return ate_h_results, ate_b11, unknown_conc, ate_annex_vi_5000, stmt_needed
+
+
+def calculate_ate_health_h_codes(components: list, form: str = '') -> tuple:
+    """
+    Sync ATE sağlık tehlike hesabı — PDF endpoint için (DB gerekmez).
+    classify_mixture_clp Acute Tox. sınıfını atladığı için bu fonksiyon ayrı çağrılır.
+    form: ürün fiziksel formu ('liquid','solution',...) — sıvı ise toz/sis rotası atlanır.
+    Döndürür: ([{'h_code','h_class','reason','cutoff_used'}], ate_b11_dict) — baskınlık uygulanmış
+    """
+    items = []
+    for c in components:
+        conc = float(c.get('concMax') or c.get('conc') or c.get('concentration') or 0)
+        if conc <= 0:
+            continue
+
+        # Frontend ate alanı: {oral, dermal, inhal} — inhal → inhalation normalize et
+        _fe_ate = dict(c.get('ate') or {})
+        if _fe_ate.get('inhal') is not None:
+            _fe_ate['inhalation'] = _fe_ate['inhal']
+        combined_ate = {**_fe_ate, **(c.get('user_ate') or {})}
+
+        # DB fallback: inhalasyon ATE yoksa substance DB'den çek
+        _ATE_KEYS = ('inhalation', 'inhalation_vapour', 'inhalation_dust', 'inhalation_mgl')
+        if not any(combined_ate.get(k) for k in _ATE_KEYS):
+            _cas = str(c.get('cas') or '').strip()
+            if _cas:
+                try:
+                    from app.services.substance_lookup import lookup_substance as _sl
+                    _sub = _sl(_cas)
+                    if _sub and _sub.get('ate'):
+                        combined_ate = {**_sub['ate'], **combined_ate}
+                except Exception:
+                    pass
+
+        items.append({
+            'cas':             str(c.get('cas') or c.get('cas_no') or '').strip(),
+            'conc':            conc,
+            'hazards':         c.get('hazards') or [],
+            'ate':             combined_ate,
+            'source_priority': c.get('source_priority', 4),
+            'ate_unknown':     bool(c.get('ate_unknown', False)),
+            'name':            c.get('name_tr', '') or c.get('name', '') or str(c.get('cas', '')),
+        })
+
+    ate_h_results, ate_b11, _unk_r, _ann5000, _stmt = _ate_core(items, form)
+
     # Baskınlık: H300>H301>H302, H310>H311>H312, H330>H331>H332
-    _h_set = {e['h_code'] for e in results}
+    _h_set = {e['h_code'] for e in ate_h_results}
     _dominated: set = set()
     for _dom, _subs in [('H300', ['H301', 'H302']), ('H301', ['H302']),
                          ('H310', ['H311', 'H312']), ('H311', ['H312']),
                          ('H330', ['H331', 'H332']), ('H331', ['H332'])]:
         if _dom in _h_set:
             _dominated.update(_subs)
-    return [e for e in results if e['h_code'] not in _dominated], ate_b11
+    return [e for e in ate_h_results if e['h_code'] not in _dominated], ate_b11
 
 
 async def calculate_clp(db: AsyncSession, components: List[Any], form: str = '') -> Dict:
@@ -950,151 +995,71 @@ async def calculate_clp(db: AsyncSession, components: List[Any], form: str = '')
         })
 
     # ─── ADIM 1: ATE TOPLAMA ────────────────────────────────────────────
-    # CLP Annex I 3.1.3.6.2.3 — Revize formül:
-    #   Bilinmeyen bileşenler ≤ %10 → ATEmix = 100 / Σ(Ci/ATEi)
-    #   Bilinmeyen bileşenler > %10 → ATEmix = (100 − ΣC_unknown) / Σ(Ci/ATEi)  [ZORUNLU]
-    #
-    # "Bilinmiyor" tanımı (kaynak güvenilirliğine göre):
-    #   • Veri yok / DB'de bulunamadı           → bilinmiyor
-    #   • Kaynak priority ≥ 4 (C&L/tedarikçi) ve Acute Tox. yok → bilinmiyor
-    #   • Kaynak priority ≤ 2 (Annex VI) ve Acute Tox. yok      → resmi değerlendirme: ATE = 5000
-    ate_routes = list(ATE_DEFAULTS.keys())
-    ate_sum = {r: 0.0 for r in ate_routes}
-    unknown_conc = 0.0   # Akut toksisitesi bilinmeyen bileşenlerin toplam %'si
-    ate_annex_vi_5000 = []   # Annex VI kaynaklı ATE=5000 bileşenler (uyarı için)
-
+    # _ate_core: sync ve async her ikisinin de paylaştığı hesaplama çekirdeği
+    _ate_items = []
     for item in enriched:
-        conc_frac = item['conc'] / 100
         data = item['data']
+        base_ate = (data.get('ate') or {}) if data else {}
+        _ate_items.append({
+            'cas':             item['cas'],
+            'conc':            item['conc'],
+            'hazards':         (data.get('hazards') or []) if data else [],
+            'ate':             {**base_ate, **(item['user_ate'] or {})},
+            'source_priority': (data.get('source_priority', 4) if data else 4),
+            # "veri yok" durumu ate_unknown=True'ya katla — _ate_core tek yol bilir
+            'ate_unknown':     (
+                bool(item.get('ate_unknown', False))
+                or not data
+                or data.get('source') == 'not_found'
+            ),
+            'name':            item['name'] or item['cas'],
+        })
 
-        # ── Kullanıcı beyanı: "bilinmiyor" → hiç hesaplamaya alma ────────────
-        if item.get('ate_unknown', False):
-            unknown_conc += item['conc']
-            continue
+    _ate_h, _ate_b11_ignored, _unk_r, _ate_ann5000, _stmt = _ate_core(_ate_items, form)
 
-        # ── Veri yok → tamamen bilinmiyor ─────────────────────────────────
-        if not data or data.get('source') == 'not_found':
-            unknown_conc += item['conc']
-            continue
+    # Sonuçları results_passed'a aktar
+    for _r in _ate_h:
+        _hcode = _r['h_code']
+        _cat   = _r['cat_num']
+        _route = _r['route']
+        _mxate = _r['mix_ate']
+        _unk   = _r['_unk']
+        results_passed.append({
+            'cas':         'KARIŞIM',
+            'name':        f'ATE ({_route})',
+            'conc':        '-',
+            'h_class':     f'Acute Tox. {_cat}',
+            'h_code':      _hcode,
+            'cutoff_used': f'ATE={_mxate}',
+            'passed':      True,
+            'reason':      (
+                f'Karışım ATE={_mxate} ≤ {ATE_THRESHOLDS.get(_route, {}).get(_cat)} '
+                f'(Tablo 3.1.1 Kat{_cat})'
+                + (f' [Revize formül: %{_unk:.1f} bilinmiyor — CLP 3.1.3.6.2.3]'
+                   if _unk > 10.0 else '')
+            ),
+        })
+        passed_h_codes.add(_hcode)
+        passed_pictograms.add(ATE_PICS[_cat])
+        if ATE_SIGS[_cat] == 'Danger':
+            signal_danger = True
+        else:
+            signal_warning = True
 
-        # ── Bileşenin Acute Tox. sınıflandırması var mı? ──────────────────
-        has_acute_tox = any(
-            haz.get('h_class', '').replace('*', '').strip().startswith('Acute Tox.')
-            for haz in data.get('hazards', [])
-        )
-
-        if not has_acute_tox:
-            # CLP §3.1.3.6.1(b): "akut toksik olmadığı varsayılan" maddeler (su, şeker vb.)
-            # formülden tamamen dışlanır — "bilinmiyor" sayılmaz.
-            _PRESUME_NOT_TOXIC = {
-                '7732-18-5',  # su
-                '57-50-1',    # sakkaroz
-                '50-99-7',    # glikoz
-                '7647-14-5',  # NaCl
-                '10043-52-4', # CaCl₂
-                '497-19-8',   # Na₂CO₃
-            }
-            if item.get('cas') in _PRESUME_NOT_TOXIC or item.get('cas_no') in _PRESUME_NOT_TOXIC:
-                # Tamamen yoksay — ne ate_sum'a ne unknown_conc'a ekle
-                continue
-            source_priority = data.get('source_priority', 4)
-            if source_priority <= 2:
-                # Annex VI resmi değerlendirmesi: akut toksik değil → ATE = 5000 (tüm rotalar)
-                for route in ate_routes:
-                    ate_sum[route] += conc_frac / 5000.0
-                ate_annex_vi_5000.append(item['name'] or item['cas'])
-            else:
-                # C&L / tedarikçi verisi: yetersiz bilgi → bilinmiyor
-                unknown_conc += item['conc']
-            continue
-
-        # ── Acute Tox. var → normal ATE hesabı ────────────────────────────
-        # Kullanıcı spesifik ATE her zaman öncelikli (test verisi)
-        base_ate = data.get('ate', {}) or {}
-        combined_ate = {**base_ate, **item['user_ate']}
-
-        for haz in data.get('hazards', []):
-            hc = haz.get('h_class', '').replace('*', '').strip()
-            if not hc.startswith('Acute Tox.'):
-                continue
-
-            # Rotayı H kodundan belirle — oral/dermal/inhalasyon ayrı hesaplanır.
-            h_code_raw = haz.get('h_code', '').split('(')[0].split()[0].strip()
-            base_route = _H_CODE_TO_ROUTE.get(h_code_raw)
-            if not base_route:
-                # H kodu tanınmıyorsa tüm rotalara dağıt
-                routes_to_process = ate_routes
-            elif base_route == 'inhalation':
-                # İnhalasyon: spesifik alt-rota varsa onu kullan
-                if combined_ate.get('inhalation_vapour'):
-                    routes_to_process = ['inhalation_vapour', 'inhalation']
-                elif combined_ate.get('inhalation_dust'):
-                    routes_to_process = ['inhalation_dust', 'inhalation']
-                elif combined_ate.get('inhalation_mgl') or _is_liquid_form(form):
-                    # inhalation_mgl = mg/L ölçümü (buhar eşdeğeri) veya sıvı form → toz rotası yok
-                    routes_to_process = ['inhalation_vapour', 'inhalation']
-                else:
-                    routes_to_process = ['inhalation_vapour', 'inhalation_dust', 'inhalation']
-            else:
-                routes_to_process = [base_route]
-
-            for route in routes_to_process:
-                ate_val = _get_ate_value(combined_ate, route, hc)
-                if ate_val and ate_val > 0:
-                    ate_sum[route] += conc_frac / ate_val
-
-    # ── Bilinmeyen bileşen uyarıları ──────────────────────────────────────
-    if unknown_conc > 0:
+    # Bilinmeyen bileşen uyarıları (per-route maksimum kullan)
+    _unk_max = max(_unk_r.values(), default=0.0)
+    if _unk_max > 0:
         warnings.append(
-            f"ATEmix: Karışımın %{unknown_conc:.1f}'i için akut toksisite verisi "
+            f"ATEmix: Karışımın %{_unk_max:.1f}'i için akut toksisite verisi "
             f"güvenilir kaynakta bulunamamıştır "
-            f"({'Revize formül uygulandı — CLP 3.1.3.6.2.3' if unknown_conc > 10 else 'Standart formül kullanıldı'})."
+            f"({'Revize formül uygulandı — CLP 3.1.3.6.2.3' if _unk_max > 10 else 'Standart formül kullanıldı'})."
         )
-    if ate_annex_vi_5000:
+    if _ate_ann5000:
         warnings.append(
-            f"ATEmix: {len(ate_annex_vi_5000)} bileşen ({', '.join(ate_annex_vi_5000[:3])}"
-            f"{'...' if len(ate_annex_vi_5000) > 3 else ''}) Annex VI'da akut toksik "
+            f"ATEmix: {len(_ate_ann5000)} bileşen ({', '.join(_ate_ann5000[:3])}"
+            f"{'...' if len(_ate_ann5000) > 3 else ''}) Annex VI'da akut toksik "
             f"sınıflandırılmamış → ATE=5000 alındı (muhafazakâr)."
         )
-
-    for route, total in ate_sum.items():
-        if total <= 0:
-            continue
-        # CLP 3.1.3.6.2.3: Bilinmeyen bileşenler > %10 → revize formül ZORUNLU
-        # Formül: ATEmix = 100 / Σ(Ci/ATEi)  — Ci % cinsinden
-        # ate_sum = Σ(Ci/100 / ATEi) = (1/100)×Σ(Ci/ATEi)  → mix_ate = 1.0/total
-        if unknown_conc > 10.0:
-            mix_ate = (100.0 - unknown_conc) / 100.0 / total
-        else:
-            mix_ate = 1.0 / total
-        mix_ate_cmp = round(mix_ate, 6)  # FP gürültüsünü gider (50.0000000000001 → 50.0)
-        # Sınıflandırma için CLP Tablo 3.1.1 kategori üst sınırlarını kullan
-        # (ATE_DEFAULTS nokta tahminleri FORMÜL için, SINIFLANDIRMA için değil)
-        thresholds = ATE_THRESHOLDS.get(route, {})
-        cat_num = None
-        for n in [1, 2, 3, 4]:
-            if mix_ate_cmp <= thresholds.get(n, float('inf')):
-                cat_num = n
-                break
-        if cat_num:
-            hcode = ATE_HCODES[route][cat_num]
-            pic = ATE_PICS[cat_num]
-            sig = ATE_SIGS[cat_num]
-            results_passed.append({
-                'cas': 'KARIŞIM', 'name': f'ATE ({route})',
-                'conc': '-', 'h_class': f'Acute Tox. {cat_num}', 'h_code': hcode,
-                'cutoff_used': f'ATE={mix_ate_cmp}',
-                'passed': True,
-                'reason': (
-                    f'Karışım ATE={mix_ate_cmp} ≤ {thresholds.get(cat_num)} (Tablo 3.1.1 Kat{cat_num})'
-                    + (f' [Revize formül: %{unknown_conc:.1f} bilinmiyor — CLP 3.1.3.6.2.3]'
-                       if unknown_conc > 10.0 else '')
-                ),
-            })
-            passed_h_codes.add(hcode)
-            passed_pictograms.add(pic)
-            if sig == 'Danger': signal_danger = True
-            else: signal_warning = True
 
     # ─── ADIM 2: CUT-OFF / SCL ──────────────────────────────────────────
     for item in enriched:

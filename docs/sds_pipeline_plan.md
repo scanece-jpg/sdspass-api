@@ -1,6 +1,6 @@
 # SDSPass — SDS Üretim Süreci ve QA Mimarisi
 **Durum:** Faz 1 planı tamamlandı. Faz 2 (PDF extraction) kapsam dışı, ayrı plan gerektirir.
-**Kaynak:** SDSPass Kontrol Asistanı denetimleri (DIPL222–DIPL225), 8 doğrulanmış bulgu üzerinden türetildi.
+**Kaynak:** SDSPass Kontrol Asistanı denetimleri (DIPL222–DIPL225), 8 doğrulanmış + 1 devam eden bulgu (BULGU 9) üzerinden türetildi.
 ---
 ## 1. Veri Akışı (Faz 1 — extraction var olduğu andan itibaren)
 ```
@@ -113,4 +113,34 @@ p_code_service → H281 P282+P336+P315+P403, H280 P410+P403
 - Tedarikçi PDF → normalize veri modeli (OCR/extraction motoru)
 - Extraction'a özgü (a0) genişletmesi (OCR yanlış okuma, sütun eşleme hataları)
 ---
-*Bu belge, SDSPass Kontrol Asistanı'nın DIPL222–DIPL225 denetimlerinde bulduğu 8 doğrulanmış bulgudan (BULGU 1-8) türetilmiştir. Her QA katmanı, en az bir gerçek bulguyla doğrulanmıştır — boşta kalan kategori yoktur.*
+---
+## 8. BULGU 9 — CLP Ek-VI `*` Dipnotu Yanlış Yorumlanmış (Teyit Bekliyor)
+
+**Tespit:** `update_annex_vi.py` `NOTE_TEXTS['*']` ve `pdf_sds_service.py` `_NOTE_FLAG_LABELS['*']` aynı yanlış metni içeriyor:
+> "Sınıflandırma koşula bağlı (belirli form veya konsantrasyon)"
+
+**Gerçek anlam (CLP Ek-VI Part 1):** Sınıflandırma tablosunda `Acute Tox. 4*` gibi `h_class` sonundaki tek yıldız = **asgari sınıflandırma** — üretici/ithalatçı daha ağır kategoriye işaret eden veriye sahipse daha ağır sınıflandırma uygulanmalıdır. "Form veya konsantrasyon" farklı bir CLP not türüdür.
+
+**Ölçek:** Annex VI verilerinde 1.640 madde (4.173'ün ~%39'u) `note_flag='*'` taşıyor. Bu maddelerin geçtiği her SDS'te bu yanlış footnote üretiliyor. DIPL223/224/225 denetimlerinde görülen "*" footnote'unun kaynağı bu satır.
+
+**Not ayrımı — kodda doğru olan:**
+| Bayrak | PDF metni (mevcut) | Doğru mu? |
+|--------|-------------------|-----------|
+| `*`    | "form veya konsantrasyon" | **YANLIŞ** — asgari sınıflandırma olmalı |
+| `**`   | "Hedef organ ve/veya maruziyet yolu SDS Bölüm 11'de belirtilmeli" | DOĞRU (STOT) |
+| `***`  | "Üreme toks. yalnızca belirtilen alt kategori için geçerli" | DOĞRU |
+| `****` | "Patlayıcı alt sınıfı belirsiz" | DOĞRU |
+
+**Ayrıca:** `generate_knowledge_lists.py` tüm `note_flag` değerlerini `' **'` (çift yıldız) olarak markdown'a yazıyor — `*`/`**`/`***`/`****` ayrımı kayboluyor, bilgi listesi yanıltıcı hale geliyor.
+
+**Durum:** Birincil kaynaktan (CLP Tüzüğü Ek-VI Part 1 veya SEA Yönetmeliği Ek-6) teyit bekleniyor. Teyit sonrası:
+1. `update_annex_vi.py` `NOTE_TEXTS['*']` düzelt
+2. `pdf_sds_service.py` `_NOTE_FLAG_LABELS['*']` düzelt
+3. `generate_knowledge_lists.py` `note_flag` marker'ını gerçek flag değerini yansıtacak şekilde düzelt
+4. `data/annex6/*.json` + `data/cl/*.json` içindeki `"note"` alanlarını yeniden üret (`update_annex_vi.py` ile)
+5. Never-regress fixture ekle: `*` bayraklı madde → SDS'te doğru footnote metni
+
+**QA katmanı:** (a2) — veri mevcut ve doğru (`note_flag=True`), ama metin yorumu yanlış → yanlış SDS çıktısı.
+
+---
+*Bu belge, SDSPass Kontrol Asistanı'nın DIPL222–DIPL225 denetimlerinde bulduğu 8 doğrulanmış bulgudan (BULGU 1-8) türetilmiştir. BULGU 9 teyit sürecindedir. Her QA katmanı, en az bir gerçek bulguyla doğrulanmıştır — boşta kalan kategori yoktur.*

@@ -148,6 +148,15 @@ _INORGANIC_NO_BP = {
     '1305-78-8',  # CaO
     '1313-59-3',  # Na₂O
     '7779-90-0',  # Zn₃(PO₄)₂
+    # Oksitleyici/reaktif inorganik tuzlar — PubChem bozunma/ergime sıcaklığını BP olarak listeler
+    '7632-00-0',  # NaNO₂ (sodyum nitrit) — BP değil bozunma ~320°C
+    '7631-99-4',  # NaNO₃ (sodyum nitrat)
+    '7757-79-1',  # KNO₃ (potasyum nitrat)
+    '7778-74-7',  # KClO₄ (potasyum perklorat)
+    '7775-09-9',  # NaClO₃ (sodyum klorat)
+    '7601-89-0',  # NaClO₄ (sodyum perklorat)
+    '10102-44-0', # NO₂ (azot dioksit)
+    '7782-99-2',  # H₂SO₃ (sülfüroz asit)
 }
 
 

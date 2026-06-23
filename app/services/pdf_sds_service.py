@@ -1749,6 +1749,13 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     # "Veri yok" (frontend display) veya "Bilgi yok" (i18n) — her ikisini de yakala
     _NO_DATA_VALS = {na, '', 'Veri yok', 'Veri Yok', 'Bilgi yok', 'Bilgi Yok',
                      'No data available', 'No data', 'N/A', '-'}
+    _WATER_CAS = {'7732-18-5', '7647-01-0', '1310-73-2', '1310-58-3'}
+    _comp_cas_set_fp = {(c.get('cas_no') or c.get('cas') or '').strip() for c in components}
+    _has_aqueous = bool(_comp_cas_set_fp & {'7732-18-5'})
+    _na_aqueous = (
+        term(lang, 'not_applicable') +
+        (' (sulu karışım — su içeriyor)' if lang == 'TR' else ' (aqueous mixture — contains water)')
+    )
     if _is_gas_form:
         for row in all_phys_rows:
             if row[0] in (_fp_lbl, _bp_lbl) and row[1] in _NO_DATA_VALS:
@@ -1757,6 +1764,11 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         for row in all_phys_rows:
             if row[0] in (_fp_lbl, _bp_lbl) and row[1] in _NO_DATA_VALS:
                 row[1] = _na_solid
+    elif _has_aqueous:
+        # KKDİK Ek-2 §9.1: "Bilgi yok" için neden belirtilmeli; sulu karışımda FP uygulanamaz
+        for row in all_phys_rows:
+            if row[0] == _fp_lbl and row[1] in _NO_DATA_VALS:
+                row[1] = _na_aqueous
 
     phys_rows = [r for r in all_phys_rows if r[1] != na or r[0] not in _optional]
 

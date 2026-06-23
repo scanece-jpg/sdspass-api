@@ -976,6 +976,19 @@ async def calculate_clp(db: AsyncSession, components: List[Any], form: str = '')
         )
 
         if not has_acute_tox:
+            # CLP §3.1.3.6.1(b): "akut toksik olmadığı varsayılan" maddeler (su, şeker vb.)
+            # formülden tamamen dışlanır — "bilinmiyor" sayılmaz.
+            _PRESUME_NOT_TOXIC = {
+                '7732-18-5',  # su
+                '57-50-1',    # sakkaroz
+                '50-99-7',    # glikoz
+                '7647-14-5',  # NaCl
+                '10043-52-4', # CaCl₂
+                '497-19-8',   # Na₂CO₃
+            }
+            if item.get('cas') in _PRESUME_NOT_TOXIC or item.get('cas_no') in _PRESUME_NOT_TOXIC:
+                # Tamamen yoksay — ne ate_sum'a ne unknown_conc'a ekle
+                continue
             source_priority = data.get('source_priority', 4)
             if source_priority <= 2:
                 # Annex VI resmi değerlendirmesi: akut toksik değil → ATE = 5000 (tüm rotalar)

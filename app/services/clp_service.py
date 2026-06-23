@@ -755,6 +755,11 @@ def _ate_core(items: list, form: str = '') -> tuple:
         conc_frac = conc / 100.0
         cas = str(item.get('cas') or '').strip()
 
+        # CLP §3.1.3.6.1(b): dışlama listesi en önce — ate_unknown'dan bağımsız
+        # (DB lookup başarısız olsa bile su/glikoz/sakkaroz bilinmiyor sayılmaz)
+        if cas in _PRESUME_NOT_ACUTELY_TOXIC_CAS:
+            continue
+
         if item.get('ate_unknown', False):
             for _r in ate_routes:
                 unknown_conc[_r] += conc
@@ -770,7 +775,7 @@ def _ate_core(items: list, form: str = '') -> tuple:
 
         if not has_acute_tox:
             if cas in _PRESUME_NOT_ACUTELY_TOXIC_CAS:
-                continue  # CLP §3.1.3.6.1(b): tamamen dışla — bilinmiyor sayma
+                continue  # bu dala artık ulaşılmaz — üstte yakalanır (savunma kopyası)
             source_priority = int(item.get('source_priority') or 4)
             if source_priority <= 2:
                 for route in ate_routes:

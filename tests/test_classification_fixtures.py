@@ -263,6 +263,89 @@ class TestClpDominance:
             )
 
 
+# ── NEVER-REGRESS — BULGU 8: ATEmix su-exclude ───────────────────────────────
+# CLP Ek-I §3.1.3.6.1(b): akut toksik olmadığı bilinen bileşenler (su, glikoz, ...)
+# ATEmix formülünden TAMAMEN DIŞLANIR — bilinmiyor sayılmaz.
+# Bu sınıfı silmeyin: her fixture gerçek bir denetim maliyetiyle bulundu.
+class TestAteNeverRegress:
+    """NEVER-REGRESS — CLP Ek-I §3.1.3.6.1(b) — ATEmix su-exclude (BULGU 8)."""
+
+    def _call_core(self, items):
+        from app.services.clp_service import _ate_core
+        ate_h, ate_b11, unk, annex_5000, stmt = _ate_core(items, form='liquid')
+        return ate_h, unk
+
+    def test_water_excluded_when_ate_unknown_true(self):
+        """Su %96, ate_unknown=True (DB lookup başarısız) + madde %4 ATE_oral=500.
+        Beklenen: su bilinmiyor sayılmaz, dışlanır → ATEmix=12500 > 2000 → sınıflandırma yok.
+        Yanlış davranış (eski kod): unknown_conc[oral]=96 → ATEmix=500 → H302.
+        CLP Ek-I §3.1.3.6.1(b) — su exclude edilir.
+        """
+        items = [
+            {
+                'cas': '7732-18-5',  # su — _PRESUME_NOT_ACUTELY_TOXIC_CAS
+                'name': 'Su',
+                'conc': 96,
+                'ate_unknown': True,   # DB lookup başarısız simülasyonu — yine de dışlanmalı
+                'hazards': [],
+                'ate': {},
+                'source_priority': 4,
+            },
+            {
+                'cas': '108-88-3',
+                'name': 'TestBileşen',
+                'conc': 4,
+                'ate_unknown': False,
+                'hazards': [{'h_code': 'H302', 'h_class': 'Acute Tox. 4'}],
+                'ate': {'oral': 500},
+                'source_priority': 1,
+            },
+        ]
+        ate_h, unk = self._call_core(items)
+        assert unk.get('oral', 0) == pytest.approx(0.0), (
+            f"Su dışlanmalıydı ama unknown_conc[oral]={unk.get('oral')} — bilinmiyor sayıldı"
+        )
+        h_codes = [r['h_code'] for r in ate_h]
+        assert not any(c in h_codes for c in ('H300', 'H301', 'H302')), (
+            f"CLP §3.1.3.6.1(b): su dışlandığında Acute Tox. sınıflandırması beklenmez. "
+            f"Hesaplanan H kodları: {h_codes}"
+        )
+
+    def test_water_excluded_when_ate_unknown_false(self):
+        """Su %96, ate_unknown=False (normal lookup) + madde %4 ATE_oral=500.
+        Beklenen: her iki ate_unknown değerinde de aynı sonuç — dışla, bilinmiyor sayma.
+        CLP Ek-I §3.1.3.6.1(b) — su exclude edilir.
+        """
+        items = [
+            {
+                'cas': '7732-18-5',
+                'name': 'Su',
+                'conc': 96,
+                'ate_unknown': False,  # normal DB lookup — akut toks. yok
+                'hazards': [],
+                'ate': {},
+                'source_priority': 1,
+            },
+            {
+                'cas': '108-88-3',
+                'name': 'TestBileşen',
+                'conc': 4,
+                'ate_unknown': False,
+                'hazards': [{'h_code': 'H302', 'h_class': 'Acute Tox. 4'}],
+                'ate': {'oral': 500},
+                'source_priority': 1,
+            },
+        ]
+        ate_h, unk = self._call_core(items)
+        assert unk.get('oral', 0) == pytest.approx(0.0), (
+            f"Su (ate_unknown=False) dışlanmalıydı, unknown_conc[oral]={unk.get('oral')}"
+        )
+        h_codes = [r['h_code'] for r in ate_h]
+        assert not any(c in h_codes for c in ('H300', 'H301', 'H302')), (
+            f"Su dışlandığında sınıflandırma beklenmez: {h_codes}"
+        )
+
+
 if __name__ == "__main__":
     # pytest olmadan doğrudan çalıştırma için basit runner
     import traceback

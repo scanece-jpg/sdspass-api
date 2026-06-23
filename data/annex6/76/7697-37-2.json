@@ -33,13 +33,13 @@
       },
       {
         "h_code": "H314",
-        "class": "",
+        "class": "Skin Corr. 1A",
         "c_min": 20.0,
         "c_max": null
       },
       {
         "h_code": "H314",
-        "class": "",
+        "class": "Skin Corr. 1B",
         "c_min": 5.0,
         "c_max": 20.0
       }

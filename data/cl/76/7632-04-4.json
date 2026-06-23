@@ -39,13 +39,13 @@
     "scl_limits": [
       {
         "h_code": "H318",
-        "class": "",
+        "class": "Eye Dam. 1",
         "c_min": 22.0,
         "c_max": null
       },
       {
         "h_code": "H319",
-        "class": "",
+        "class": "Eye Irrit. 2",
         "c_min": 14.0,
         "c_max": 22.0
       }

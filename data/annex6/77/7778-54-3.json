@@ -35,25 +35,25 @@
     "scl_limits": [
       {
         "h_code": "H314",
-        "class": "",
+        "class": "Skin Corr. 1B",
         "c_min": 5.0,
         "c_max": null
       },
       {
         "h_code": "H315",
-        "class": "",
+        "class": "Skin Irrit. 2",
         "c_min": 1.0,
         "c_max": 5.0
       },
       {
         "h_code": "H318",
-        "class": "",
+        "class": "Eye Dam. 1",
         "c_min": 3.0,
         "c_max": 5.0
       },
       {
         "h_code": "H319",
-        "class": "",
+        "class": "Eye Irrit. 2",
         "c_min": 0.5,
         "c_max": 3.0
       }

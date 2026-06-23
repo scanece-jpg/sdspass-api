@@ -45,7 +45,7 @@
     "scl_limits": [
       {
         "h_code": "H314",
-        "class": "",
+        "class": "Skin Corr. 1B",
         "c_min": 0.1,
         "c_max": null
       }

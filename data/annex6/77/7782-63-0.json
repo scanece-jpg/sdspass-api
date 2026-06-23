@@ -27,7 +27,7 @@
     "scl_limits": [
       {
         "h_code": "H315",
-        "class": "",
+        "class": "Skin Irrit. 2",
         "c_min": 25.0,
         "c_max": null
       }

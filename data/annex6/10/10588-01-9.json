@@ -75,7 +75,7 @@
     "scl_limits": [
       {
         "h_code": "H335",
-        "class": "",
+        "class": "STOT SE 3",
         "c_min": 5.0,
         "c_max": null
       },
@@ -87,7 +87,7 @@
       },
       {
         "h_code": "H317",
-        "class": "",
+        "class": "Skin Sens. 1",
         "c_min": 0.2,
         "c_max": null
       }

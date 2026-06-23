@@ -29,7 +29,7 @@
     "scl_limits": [
       {
         "h_code": "H335",
-        "class": "",
+        "class": "STOT SE 3",
         "c_min": 5.0,
         "c_max": null
       }

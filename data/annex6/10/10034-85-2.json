@@ -23,31 +23,31 @@
     "scl_limits": [
       {
         "h_code": "H314",
-        "class": "",
+        "class": "Press. Gas",
         "c_min": 10.0,
         "c_max": null
       },
       {
         "h_code": "H314",
-        "class": "",
+        "class": "Skin Corr. 1B",
         "c_min": 0.2,
         "c_max": 10.0
       },
       {
         "h_code": "H315",
-        "class": "",
+        "class": "Skin Irrit. 2",
         "c_min": 0.02,
         "c_max": 0.2
       },
       {
         "h_code": "H319",
-        "class": "",
+        "class": "Eye Irrit. 2",
         "c_min": 0.02,
         "c_max": 0.2
       },
       {
         "h_code": "H335",
-        "class": "",
+        "class": "STOT SE 3",
         "c_min": 0.02,
         "c_max": null
       }

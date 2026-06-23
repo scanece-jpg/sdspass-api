@@ -29,13 +29,13 @@
     "scl_limits": [
       {
         "h_code": "H335",
-        "class": "",
+        "class": "STOT SE 3",
         "c_min": 25.0,
         "c_max": null
       },
       {
         "h_code": "H319",
-        "class": "",
+        "class": "Eye Irrit. 2",
         "c_min": 25.0,
         "c_max": null
       }

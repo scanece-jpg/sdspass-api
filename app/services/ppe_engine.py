@@ -215,6 +215,8 @@ RULES: Dict[str, List[Dict[str, Any]]] = {
                 'EN': 'Chemical protective suit — minimum Type 4 (EN 14605)',
             },
             'level': 1,
+            # H314/H300/H310/H330 zaten Tip 3 veya 4 gerektiriyor; Tip 4 minimum bunu kapsar
+            'suppress_if': ['H314', 'H300', 'H310', 'H330'],
         },
         {
             'h_codes': ['H224', 'H225', 'H226'],

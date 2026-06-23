@@ -750,6 +750,14 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> list:
         )
 
         if not has_acute_tox:
+            # CLP §3.1.3.6.1(b): su ve benzeri "akut toksik olmadığı varsayılan"
+            # maddeler formülden tamamen dışlanır — "bilinmiyor" sayılmaz.
+            _PRESUME_NOT_TOXIC_SYNC = {
+                '7732-18-5', '57-50-1', '50-99-7', '7647-14-5', '10043-52-4', '497-19-8',
+            }
+            _cas_val = str(c.get('cas') or c.get('cas_no') or '').strip()
+            if _cas_val in _PRESUME_NOT_TOXIC_SYNC:
+                continue
             source_priority = c.get('source_priority', 4)
             if source_priority <= 2:
                 for route in ate_routes:

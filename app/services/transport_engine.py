@@ -212,6 +212,16 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
     if cls == '4.3':
         return {'un': 'UN 3148', 'label': 'Su ile Tepkiyen Sıvı, B.N.O.'}
     if cls == '5.1':
+        if sub == '8':
+            return {
+                'un': 'UN 3098', 'label': 'Oksitleyici Sıvı, Aşındırıcı, B.N.O.',
+                'note': (
+                    'UN 3098 (OC1) seçim gerekçesi (ADR 2025): '
+                    'Oksitleyici sıvı (Sınıf 5.1) + aşındırıcı (H314, Sınıf 8) kombinasyonu. '
+                    'ADR §2.1.3.10 Tehlike Öncelik Tablosu: 5.1+8 → UN3098 (kod OC1). '
+                    'Taşımacılık uzmanı onayı önerilir.'
+                ),
+            }
         if pg == 'I':
             return {'un': 'UN 2912', 'label': 'Oksitleyici Sıvı, B.N.O.'}
         return {'un': 'UN 3139', 'label': 'Oksitleyici Sıvı, B.N.O.'}

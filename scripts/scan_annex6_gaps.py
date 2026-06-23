@@ -18,12 +18,16 @@ Kullanım:
   python scripts/scan_annex6_gaps.py --cas 1310-73-2   # tek madde
 """
 
+import io
 import json
 import sys
 import argparse
 import csv
 from pathlib import Path
 from typing import List, Dict
+
+# Windows konsolunda UTF-8 zorla
+sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='replace')
 
 _ROOT   = Path(__file__).parent.parent
 _A6     = _ROOT / 'data' / 'annex6'
@@ -73,9 +77,9 @@ def scan_file(path: Path) -> List[Dict]:
             if not isinstance(h, dict):
                 add('KRITIK', 'HAZARD_TIP', f"hazards[{i}] dict değil")
                 continue
-            if not h.get('h_code', '').strip():
-                add('KRITIK', 'HCODE_BOS', f"hazards[{i}] 'h_code' boş")
-            cls = h.get('class', '')
+            if not (h.get('h_code') or '').strip():
+                add('KRITIK', 'HCODE_BOS', f"hazards[{i}] 'h_code' boş veya null")
+            cls = h.get('class') or ''
             if not isinstance(cls, str) or not cls.strip():
                 add('KRITIK', 'CLASS_BOS',
                     f"hazards[{i}] ({h.get('h_code','?')}) 'class' alanı boş — "
@@ -85,8 +89,8 @@ def scan_file(path: Path) -> List[Dict]:
     for i, scl in enumerate(clf.get('scl_limits', [])):
         if not isinstance(scl, dict):
             continue
-        h_code = scl.get('h_code', '?')
-        if not scl.get('class', '').strip():
+        h_code = scl.get('h_code') or '?'
+        if not (scl.get('class') or '').strip():
             # Boş class SCL'de bazı H kodları için sorunsuz (H315/H319),
             # ama H314 için her zaman KRİTİK
             sev = 'KRITIK' if h_code in ('H314', 'H318', 'H317') else 'UYARI'

@@ -1,0 +1,404 @@
+﻿--- SAYFA 1 ---
+dip 2043 SDS | Rev.17 | 29.04.2026
+GÜVENLİK BİLGİ FORMU
+Ürün Adı DIP 2043
+Ürün Kodu
+Revizyon Tarihi 29.04.2026
+Version 2.6
+Mevzuat KKDİK (30105/2017)
+Tehlike Kodları: H350 H334 H317 H304 H360 H314 H301 H310 H331 H226 H411
+BÖLÜM 1: Madde/Karışım ve Şirket/İş Sahibi Hakkında Bilgiler
+1.1 Ürün tanımlayıcısı
+Ürün Adı DIP 2043
+Ürün Kodu
+1.2 Madde veya karışımın belirlenmiş kullanımları ve tavsiye edilmeyen kullanımları
+Sanayi ve mesleki kullanım.
+1.3 Güvenlik bilgi formu tedarikçisinin bilgileri
+Üretici / Tedarikçi DIPOL KIMYA SAN TIC LTD STI
+Adres SUMER MH 2296 SK NO2 MERKEZEFENDI DENIZLI
+Telefon +905552786490
+E-posta dipol@dipolkimya.com
+1.4 Acil durum telefon numarası
+UZEM — Ulusal Zehir Danışma Merkezi: 114 (T.C. Sağlık Bakanlığı, 7/24)
+Tel: (+90) 555 247 56 58 — Hafta içi 09:00–18:00
+BÖLÜM 2: Zararlılık Tanımlaması
+2.1 Madde veya karışımın sınıflandırılması
+Sınıflandırma H Kodu Kesme Değeri / Gerekçe
+Kans. 1A H350 Genel Kons. Sınırı (GKS) >= %0.1
+Sol. Duyar. 1 H334 Genel Kons. Sınırı (GKS) >= %0.1
+Cilt Duyar. 1 H317 Maddeye Özgü Kons. Sınırı (MÖKS)
+>= %0.01 (Skin Sens. 1)
+Asp. Toks. 1 H304 Genel Kons. Sınırı (GKS) >= %10
+Üreme Toks. 1B H360 Genel Kons. Sınırı (GKS) >= %0.3
+Cilt Aş. 1A H314 pH=12 (>= 11.5) → SEA Tablo 3.2.3
+>= %12
+Akut Toks. 3 H301 ATE karışım = 100 mg/kg (SEA Tablo
+3.1.2)
+H310 ATE karışım = 200 mg/kg (SEA Tablo
+3.1.2)
+Akut Toks. 3 H331 ATE karışım = 3 mg/L (SEA Tablo
+3.1.2)
+Suk. Kron. 1 H410 Σ(CixM_kr)/100=0.3812 >= 0.25
+Bu GBF KKDİK Ek-2 formatına uygundur. Sayfa 1
+--- SAYFA 2 ---
+dip 2043 SDS | Rev.17 | 29.04.2026
+H226 Kullanıcı girişi (43°C)
+Göz Hasar. 1 H318 H314 sınıflandırması tarafından
+kapsandı (CLP Ek-I §1.2.2)
+Cilt Tahriş. 2 H315 H314 sınıflandırması tarafından
+kapsandı (CLP Ek-I §1.2.2)
+Kans. 2 H351 H350 sınıflandırması tarafından
+kapsandı (CLP Ek-I §1.2.2)
+Suk. Kron. 2 H411 Baskın H kodu ile kapsandı (CLP Ek-I
+§1.2.2)
+H-kodları, 11 Aralık 2013 tarihli ve 28848 sayılı Resmî Gazete'de yayımlanan Maddelerin ve Karışımların Sınıflandırılması,
+Etiketlenmesi ve Ambalajlanması Hakkında Yönetmelik (SEA) esaslarına göre belirlenmiştir.
+2.2 Etiket unsurları
+Alevlenir Aşındırıcı Toksik Sağlık Teh. Çevre Teh.
+Uyarı Sözcüğü Tehlike
+Tehlike İfadeleri:
+• H350: Kansere yol açabilir.
+• H334: Solunması halinde alerji veya astım belirtilerine ya da solunum güçlüklerine yol açabilir.
+• H317: Alerjik cilt reaksiyonuna yol açabilir.
+• H304: Yutulması ve soluk yoluna girmesi halinde öldürücü olabilir.
+• H360: Doğurganlığa veya doğmamış çocuğa zarar verebilir.
+• H314: Ciddi cilt yanıklarına ve göz hasarına yol açar.
+• H301: Yutulması halinde toksiktir.
+• H310: Cilt ile teması halinde öldürücüdür.
+• H331: Solunması halinde toksiktir.
+• H226: Alevlenir sıvı ve buhar.
+• H411: Uzun süre kalıcı etkiyle sucul organizmalar için toksiktir.
+Ek Etiket Unsurları (EUH):
+• EUH208: nikel sülfat içerir. Alerjik reaksiyona yol açabilir.
+• EUH066: Tekrarlayan maruziyetle deri kuruluğuna veya çatlamaya yol açabilir.
+• EUH210: Güvenlik bilgi formu talep üzerine temin edilir.
+Önlem İfadeleri:
+• P301+P310: YUTULMASI HALİNDE: Hemen Zehir Danışma Merkezi'ni (114) veya doktoru arayın.
+• P331: KUSTURMAYINIZ.
+• P273: Çevreye salınımından kaçının.
+• P280: Koruyucu eldiven/koruyucu giysi/göz koruyucu/yüz koruyucu kullanın.
+• P284: Yeterli havalandırma sağlanamıyorsa solunum koruyucu kullanın.
+• P405: Kilitli yerde saklayın.
+• P501: İçeriği/kabı yerel/bölgesel/ulusal/uluslararası düzenlemelere uygun olarak imha edin.
+Duyarlılaştırıcı içerir (CLP Ek II §2.8 / SEA Madde 20): mancozeb (ISO); çinko tuzlu manganez
+etilenbis(ditiyokarbamat) (polimerik) kompleksi, nikel sülfat
+2.3 Diğer tehlikeler
+PBT/vPvB: Bu karışım PBT veya vPvB kriterlerini karşılamamaktadır.
+Endokrin Bozucu Özellikler: Endokrin bozucu özellik tespit edilmemiştir.
+BÖLÜM 3: Bileşim/İçindekiler Hakkında Bilgi
+3.2 Karışımlar
+CAS No EC / KKDİK İçerik / Madde Konsantr Sınıflandırma
+No asyon
+Bu GBF KKDİK Ek-2 formatına uygundur. Sayfa 2
+--- SAYFA 3 ---
+dip 2043 SDS | Rev.17 | 29.04.2026
+107-11-9 Allilamin %8 Alev. Sıv. 2
+203-463-9 Akut Toks. 3
+— Suk. Kron. 2
+7786-81-4 nikel sülfat %0,12 Kans. 1A
+232-104-9 Muta. 2
+— Üreme Toks. 1B
+BHOT Tkr. Mar. 1
+Akut Toks. 4
+Cilt Tahriş. 2
+Sol. Duyar. 1
+Cilt Duyar. 1
+Suk. Akut 1
+Suk. Kron. 1
+142-82-5 heptane; n-heptane [1] %15 Alev. Sıv. 2
+205-563-8 [1]203-548-0 2,4-dimethylpentane [2] Asp. Toks. 1
+[2]207-346-3 [3]209-230-8 2,2,3-trimethylbutane [3] BHOT Tek Mar. 3
+[4]209-280-0 [5]209-643-3 3,3-dimethylpentane [4] Cilt Tahriş. 2
+[6]209-680-5 [7]209-730-6
+2,3-dimethylpentane [5] Suk. Akut 1
+[8]210-529-0 [9]250-610-8
+3-methylhexane [6] Suk. Kron. 1
+[10]
+2,2-dimethylpentane [7]
+01-2119480533-43-0000
+2-methylhexane [8] 3-ethylpentane
+[9] isoheptane [10]
+1310-73-2 sodyum hidroksit; kostik soda %1,8 Cilt Aş. 1A
+215-185-5
+01-2119457892-27-0000
+8018-01-7 mancozeb (ISO); çinko tuzlu %2,3 Üreme Toks. 1B
+— manganez etilenbis(ditiyokarbamat) Cilt Duyar. 1
+— (polimerik) kompleksi Suk. Akut 1
+Kans. 2
+BHOT Tkr. Mar. 2
+Suk. Kron. 1
+7732-18-5 water; eau; Wasser %72,28 Sınıflandırılmamış
+231-791-2
+01-2119558006-37-0000
+* KKDİK kayıt numarası bulunamayan maddeler için tedarikçiye başvurun: 107-11-9, 7786-81-4, 8018-01-7
+BÖLÜM 4: İlk Yardım Önlemleri
+4.1 İlk yardım önlemlerinin tanımlanması
+• Solunursa temiz havaya çıkarın. Belirtiler devam ederse tıbbi yardım alın.
+• CİLDE TEMAS: Acil servis arayın. Kirlenmiş giysileri çıkarın. Cilt ve gözleri bol su ile yıkayın.
+• YUTULURSA: Derhal Zehir Merkezi (0800 314 6120) veya acile gidin. Kusturmayın.
+• CİLDE TEMAS: Kirlenmiş giysileri hemen çıkarın. Cilt ve gözleri en az 15-20 dakika bol su ile yıkayın. Derhal tıbbi
+yardım alın.
+• YUTULURSA VE SOLUK BORUSUNA KAÇARSA: Hayati tehlike yaratabilir. KESİNLİKLE KUSTURMAYINIZ. Derhal
+acile gidin.
+• Kanserojen. Maruziyet sonrası tıbbi değerlendirme yapılmalıdır.
+• Üreme sistemine zarar verir. Hamile veya emziren kadınlar bu maddeyle çalışmamalıdır.
+• SOLUNMA: Kişiyi temiz havaya çıkarın. Nefes almakta güçlük çekiyorsa oksijen verin. CİLT: Kirlenmiş giysileri
+çıkarın, bol su ve sabunla yıkayın. GÖZ: En az 15 dakika bol suyla yıkayın. Tahriş devam ederse doktora başvurun.
+• Deri duyarlılaştırıcı. Temas halinde bol su ve sabunla yıkayın. Kızarıklık veya döküntü olursa tıbbi yardım alın.
+• Su ile temasa geçmesini önleyin. Deri veya gözle temas halinde suyla yıkayın. Tıbbi semptom halinde doktora
+başvurun. Ürünü çevreye dökmeyiniz.
+• SOLUNURSA: Derhal temiz havaya çıkarın. Astım semptomu: acil servis.
+4.2 En önemli akut ve gecikmiş semptomlar ile etkiler
+Başlıca semptomlar maruziyet tipine göre değişir.
+Bu GBF KKDİK Ek-2 formatına uygundur. Sayfa 3
+--- SAYFA 4 ---
+dip 2043 SDS | Rev.17 | 29.04.2026
+4.3 Tıbbi müdahale ve özel tedavi gerekliliğinin belirtilmesi
+Ulusal Zehir Danışma Merkezi (UZEM): 114
+BÖLÜM 5: Yangınla Mücadele Önlemleri
+5.1 Söndürme maddeleri
+CO₂, kuru kimyasal veya su sisi. Su jeti kullanmayın.
+5.2 Maddeden veya karışımdan kaynaklanan özel tehlikeler
+• Korozif madde. Yangın söndürücü olarak CO₂, kuru kimyasal veya su sisi kullanın. Su jeti kullanmayın.
+• Su ile söndürmeyiniz (yanıcı sıvının yayılmasına yol açabilir). CO₂ veya kuru toz kullanın.
+• Söndürme maddesi: Kuru kimyasal toz, CO₂ veya alkole dayanıklı köpük. Yangını kesinlikle su ile söndürmeyin
+(yayılmaya neden olabilir). Özel tehlike: Yanma sırasında CO₂ ve CO oluşur. Isınan konteynerler patlayabilir.
+• Yangın söndürme suyunun çevreye yayılmasını önleyin. Su kaynaklarına, kanalizasyona karışmasını engelleyin.
+• SCBA ile söndürün. Dumanı solumayın.
+5.3 Yangın söndürme ekibine tavsiyeler
+Yangın söndürme ekibi uygun KKE ve bağımsız solunum cihazı (SCBA) kullanmalıdır.
+Bu GBF KKDİK Ek-2 formatına uygundur. Sayfa 4
+--- SAYFA 5 ---
+dip 2043 SDS | Rev.17 | 29.04.2026
+BÖLÜM 6: Kaza Sonucu Yayılmaya Karşı Önlemler
+6.1 Kişisel önlemler, koruyucu ekipman ve acil durum prosedürleri
+Kişisel koruyucu ekipman (KKE) kullanın. Uygun solunum koruması sağlayın.
+6.2 Çevresel önlemler
+• KKE giymeden yaklaşmayın. Asit/baz nötralizasyonu yapmayın. Döküntüyü kuru absorban malzeme ile toplayın.
+• Tüm tutuşturma kaynaklarını ortadan kaldırın. Yeterli havalandırma sağlayın. Kuru absorban malzeme (kum,
+vermikülit) ile toplayın. Döküntünün kanalizasyon ve su kaynaklarına ulaşmasını önleyin.
+• Cilt temasından kaçının. Uygun KKE giyin. Absorban malzeme ile toplayın.
+• ÇEVRESEL TEHLİKE: Döküntünün su kaynaklarına ve kanalizasyona ulaşmasını kesinlikle önleyin. Gerekirse yerel
+çevre müdahale ekibini haberdar edin.
+• Yalnızca SCBA ile müdahale edin. Bölgeyi tahliye edin.
+6.3 Sınırlandırma ve temizleme için yöntemler ve materyaller
+Kuru absorban malzeme (vermikülit, kum) ile toplayın. Uygun atık kabına koyun.
+6.4 Diğer bölümlere atıflar
+Bkz. Bölüm 8 (KKE), 13 (Bertaraf)
+BÖLÜM 7: Elleçleme ve Depolama
+7.1 Güvenli elleçleme için önlemler
+• İyi havalandırılan yerde saklayın.
+• Korozif metallere, asite/baza duyarlı malzemelere zarar verir. Ayrı, iyi havalandırılan yerde saklayın.
+• Serin (≤25°C), iyi havalandırılmış yerde, orijinal kabında saklayın. Isı, kıvılcım ve açık alevden uzak tutun. Güçlü
+oksitleyicilerden ayrı saklayın. Statik elektriklenmeye karşı topraklama yapın.
+• Serin, kuru yerde orijinal ambalajında saklayın.
+• Çevre açısından tehlikeli ürün. Kanalizasyona veya açık suya dökmeyin. Sıkıca kapalı, çevreyle uyumlu kapta
+saklayın.
+• Sıkıca kapalı, serin, iyi havalandırılmış yerde saklayın.
+7.2 Güvenli depolama koşulları (uyumsuz maddeler dahil)
+Orijinal ambalajında, serin ve kuru yerde saklayın. Çocukların erişemeyeceği yerde tutun.
+7.3 Belirli son kullanımlar
+Belirli bir son kullanım önerilmemektedir. Müşteri uygulamalarına yönelik genişletilmiş maruziyet senaryosu için
+tedarikçiye başvurunuz.
+BÖLÜM 8: Maruziyet Kontrolleri/Kişisel Korunma
+8.1 Kontrol parametreleri
+CAS No Madde Adı TWA (8h) STEL (15dk) Not
+142-82-5 n-Heptan 500 ppm / 2085 — —
+mg/m³
+1310-73-2 Sodyum hidroksit 2.0 mg/m³ — —
+Kaynak: 12.08.2013 tarihli ve 28733 sayılı Kimyasal Maddelerle Çalışmalarda Sağlık ve Güvenlik Önlemleri Hakkında Yönetmelik
+Ek-1
+8.2 Maruziyet kontrolleri
+El Koruması Kimyasala dayanıklı eldiven
+Göz Koruması Kimyasal gözlük
+Solunum Koruması Organik/inorganik gaz filtreli yarım veya tam yüz maskesi
+Vücut Koruması Kimyasala dayanıklı tulum
+Bu GBF KKDİK Ek-2 formatına uygundur. Sayfa 5
+--- SAYFA 6 ---
+dip 2043 SDS | Rev.17 | 29.04.2026
+BÖLÜM 9: Fiziksel ve Kimyasal Özellikler
+9.1 Temel fiziksel ve kimyasal özellikler hakkında bilgiler
+Görünüm sıvı
+Renk renksiz
+Koku kokusuz
+pH 12
+Parlama noktası 43 °C
+İlk kaynama noktası 55 °C
+Yoğunluk 0.929 g/cm³
+Viskozite 0.61 cSt @40°C
+Çözünürlük Tam karışır — su bazlı ürün (su > %50)
+Buhar basıncı 41.3 hPa
+Buhar Yoğunluğu (hava=1) 0.79
+Patlama Sınırları (LEL/UEL) %1.1 – %6.7
+Patlayıcı/Oksitleyici Özellikler Yok
+BÖLÜM 10: Kararlılık ve Tepkime
+Tepkimelilik Bilgi yok
+Kimyasal kararlılık Normal koşullarda kararlıdır.
+Tehlikeli tepkimelerin olasılığı Bkz. Bölüm 7
+Kaçınılması gereken koşullar Açık alev, ısı kaynakları, kıvılcım ve statik elektrik; Yüksek sıcaklıklar ve
+doğrudan güneş ışığı; Oksitleyici maddeler ve kuvvetli asitler.
+Bağdaşmayan maddeler Asitler, güçlü oksitleyiciler, su (ekzotermik).
+Tehlikeli bozunma ürünleri Karbon oksitler (CO, CO₂); NH₃; Sucul ortama zararlı organik fragmentler.
+Bu GBF KKDİK Ek-2 formatına uygundur. Sayfa 6
+--- SAYFA 7 ---
+dip 2043 SDS | Rev.17 | 29.04.2026
+BÖLÜM 11: Toksikolojik Bilgi
+11.1 Toksikolojik etkiler hakkında bilgi
+Maruziyet Yolu Bilgi
+H350 — Kanserojen (kategori 1) Kansere yol açabilir.
+H334 — Solunum duyarlılaştırması Solunması halinde alerji veya astım belirtilerine ya da solunum
+güçlüklerine yol açabilir.
+H317 — Cilt duyarlılaştırması Alerjik cilt reaksiyonuna yol açabilir.
+H304 — Aspirasyon tehlikesi Yutulması ve soluk yoluna girmesi halinde öldürücü olabilir.
+H360 — Üreme toksisitesi (kategori 1) Doğurganlığa veya doğmamış çocuğa zarar verebilir.
+H314 — Cilt/mukoza aşındırıcısı Ciddi cilt yanıklarına ve göz hasarına yol açar.
+H301 — Akut oral toksisite Yutulması halinde toksiktir.
+H310 — Akut dermal toksisite Cilt ile teması halinde öldürücüdür.
+H331 — Akut inhalasyon toksisitesi Solunması halinde toksiktir.
+BÖLÜM 12: Ekolojik Bilgi
+Toksisite H411
+Kalıcılık ve bozunabilirlik Büyük ölçüde biyobozunur (>%70 hızlı bozunan bileşen)
+Biyobirikim potansiyeli Biyobirikim potansiyeli düşük
+Topraktaki hareketlilik water; eau; Wasser: Yüksek (log Koc=-1.02 < 2 — yeraltı suyu riski)
+PBT ve vPvB değerlendirmesinin PBT/vPvB değil
+sonuçları
+Endokrin bozucu özellikler Endokrin bozucu özellik tespit edilmemiştir.
+M Faktörleri — CLP Tablo 4.1.3 (Toplamsal Yöntem):
+CAS No Madde Tehlike Sınıfı M (Akut) M (Kronik)
+107-11-9 Allilamin Suk. Kron. 2 1 1
+7786-81-4 nikel sülfat Suk. Akut 1 1 1
+7786-81-4 nikel sülfat Suk. Kron. 1 1 1
+142-82-5 heptane; n-heptane [1] Suk. Akut 1 1 1
+2,4-dimethylpentane [2]
+2,2,3-trimethylbutane [3]
+3,3-dimethylpentane [4]
+2,3-dimethylpentane [5]
+3-methylhexane [6]
+2,2-dimethylpentane [7]
+2-methylhexane [8]
+3-ethylpentane [9] isoheptane
+[10]
+142-82-5 heptane; n-heptane [1] Suk. Kron. 1 1 1
+2,4-dimethylpentane [2]
+2,2,3-trimethylbutane [3]
+3,3-dimethylpentane [4]
+2,3-dimethylpentane [5]
+3-methylhexane [6]
+2,2-dimethylpentane [7]
+2-methylhexane [8]
+3-ethylpentane [9] isoheptane
+[10]
+Bu GBF KKDİK Ek-2 formatına uygundur. Sayfa 7
+--- SAYFA 8 ---
+dip 2043 SDS | Rev.17 | 29.04.2026
+8018-01-7 mancozeb (ISO); çinko tuzlu Suk. Akut 1 1 1
+manganez
+etilenbis(ditiyokarbamat)
+(polimerik) kompleksi
+8018-01-7 mancozeb (ISO); çinko tuzlu Suk. Kron. 1 1 1
+manganez
+etilenbis(ditiyokarbamat)
+(polimerik) kompleksi
+BÖLÜM 13: Bertaraf Bilgileri
+13.1 Atık arıtma yöntemleri
+Atık Yönetimi Yönetmeliği (02.04.2015 tarihli ve 29314 sayılı RG) ve yerel atık yönetimi düzenlemelerine uygun
+olarak bertaraf edin. Atık kodu için yetkili çevre danışmanına başvurun.
+BÖLÜM 14: Taşımacılık Bilgileri
+UN numarası veya ID numarası (UN No) UN 2924
+UN uygun nakliye adı Yanıcı Sıvı, Korozif, B.N.O.
+Taşımacılık tehlike sınıfı/sınıfları 3 (8)
+(ADR/IMDG/IATA)
+Ambalaj grubu III
+Çevre tehlikeleri True
+Sınıflandırma Kodu (ADR) CF2
+Kemler Kodu / Tehlike No 38
+Tünel Kısıtlama Kodu E
+BÖLÜM 15: Mevzuat Bilgileri
+15.1 Madde veya karışıma özgü güvenlik, sağlık ve çevre mevzuatı
+Bu ürün aşağıdaki Türk mevzuatı kapsamında sınıflandırılmıştır:
+• KKDİK — Kimyasalların Kaydı, Değerlendirilmesi, İzni ve Kısıtlanması Hakkında Yönetmelik (RG: 23.06.2017, Sayı:
+30105)
+• SEA Yönetmeliği — Maddelerin ve Karışımların Sınıflandırılması, Etiketlenmesi ve Ambalajlanması Hakkında
+Yönetmelik (RG: 11.12.2013, Sayı: 28848)
+• Kimyasal Maddeler Yönetmeliği — Kimyasal Maddelerle Çalışmalarda Sağlık ve Güvenlik Önlemleri Hakkında
+Yönetmelik (RG: 12.08.2013, Sayı: 28733)
+• ADR (Türkiye) — Tehlikeli Maddelerin Karayoluyla Taşınması Hakkında Yönetmelik (RG: 24.04.2019, Sayı: 30754)
+• Atık Yönetimi Yönetmeliği — Atık Yönetimi Yönetmeliği (RG: 02.04.2015, Sayı: 29314)
+• Kanserojen/Mutajen Yönetmeliği — Kanserojen veya Mutajen Maddelerle Çalışmalarda Sağlık ve Güvenlik
+Önlemleri Hakkında Yönetmelik (RG: 26.12.2003, Sayı: 25328)
+SVHC (Çok Yüksek Endişe Veren Madde): Bu karışım ECHA SVHC Aday Listesi'nde yer alan madde içermemektedir (≥ %0,1 eşiği).
+15.2 Kimyasal güvenlik değerlendirmesi
+⚠ KKDİK Uyarısı: Bu karışım kanserojen/mutajen/üreme toksik veya solunum duyarlılaştırıcı madde içermektedir. Yıllık ≥1 ton üretim
+veya ithalat durumunda KKDİK Madde 14 kapsamında Kimyasal Güvenlik Değerlendirmesi (KGA) zorunludur.
+Bu GBF KKDİK Ek-2 formatına uygundur. Sayfa 8
+--- SAYFA 9 ---
+dip 2043 SDS | Rev.17 | 29.04.2026
+BÖLÜM 16: Diğer Bilgiler
+⚠ GBF Doğrulama Uyarıları:
+⚠ [V012] B8: H334 (Solunum duyarlılaştırıcı) — B8.2'de SCBA veya tam yüz maskesi belirtilmeli.
+⚠ [V015] B16: GBF Hazırlayıcı sertifika numarası girilmemiş. KKDİK kapsamında zorunludur.
+Tehlike / EUH İfadeleri (Tam Metin):
+• H350: Kansere yol açabilir.
+• H334: Solunması halinde alerji veya astım belirtilerine ya da solunum güçlüklerine yol açabilir.
+• H317: Alerjik cilt reaksiyonuna yol açabilir.
+• H304: Yutulması ve soluk yoluna girmesi halinde öldürücü olabilir.
+• H360: Doğurganlığa veya doğmamış çocuğa zarar verebilir.
+• H314: Ciddi cilt yanıklarına ve göz hasarına yol açar.
+• H301: Yutulması halinde toksiktir.
+• H310: Cilt ile teması halinde öldürücüdür.
+• H331: Solunması halinde toksiktir.
+• H226: Alevlenir sıvı ve buhar.
+• H411: Uzun süre kalıcı etkiyle sucul organizmalar için toksiktir.
+Revizyon Geçmişi: Rev.17 — 29.04.2026
+Güvenlik Önlemleri (Tam Liste):
+✓ Zorunlu:
+P301+P310: YUTULMASI HALİNDE: Hemen Zehir Danışma Merkezi'ni (114) veya doktoru arayın.
+P301+P330+P331: YUTULMASI HALİNDE: Ağzı çalkalayın. Kusturmayın.
+P303+P361+P353: CİLDE (veya SAÇA) TEMAS DURUMUNDA: Kirlenmiş giysileri hemen çıkarın. Cilt suyla durulanır/duş alınır.
+P304+P340: SOLUNMASI HALİNDE: Kişiyi temiz havaya çıkarın. Nefes almakta güçlük çekiyorsa solunum kolaşlaştırıcı pozisyona
+getirin.
+P331: KUSTURMAYINIZ.
+P305+P351+P338: GÖZ İLE TEMAS HALİNDE: Birkaç dakika suyla dikkatlice durulayın. Varsa ve çıkarması kolaysa kontak lensleri
+çıkartın. Durulamaya devam edin.
+P308+P313: MARUZ KALMA VEYA ENDİŞE DURUMUNDA: Tıbbi yardım/bakım alın.
+P310: Hemen Zehir Danışma Merkezi'ni (114) veya doktoru arayın.
+P342+P311: SOLUNUM SEMPTOMLARININ OLUŞMASI HALİNDE: Zehir Danışma Merkezi'ni (114) veya doktoru arayın.
+P370+P378: YANGIN HALINDE: Kuru kimyasal, CO₂ veya alkole dayanıklı köpük kullanın.
+P210: Isı, kıvılcım, açık alev ve sıcak yüzeylerden uzak tutun. Sigara içmeyin.
+P273: Çevreye salınımından kaçının.
+P280: Koruyucu eldiven/koruyucu giysi/göz koruyucu/yüz koruyucu kullanın.
+P260: Toz/duman/gaz/sis/buhar/sprey solumayın.
+P284: Yeterli havalandırma sağlanamıyorsa solunum koruyucu kullanın.
+P201: Kullanmadan önce özel talimatları edinin.
+P263: Hamilelik ve emzirme döneminde temastan kaçının.
+P405: Kilitli yerde saklayın.
+P202: Tüm güvenlik talimatlarını okuyup anlamadan kullanmayın.
+~ Değerlendirmeli:
+P302+P352: CİLDE TEMAS DURUMUNDA: Bol sabun ve su ile yıkayın.
+P333+P313: CİLT TAHRİŞİ VEYA DÖKÜNTÜLERİ OLUŞMASI HALİNDE: Tıbbi yardım alın.
+P271: Yalnızca açık alanda veya iyi havalandırılmış bir alanda kullanın.
+P403+P235: İyi havalandırılmış serin yerde saklayın.
+P403+P233: İyi havalandırılmış yerde saklayın. Kabı sıkıca kapalı tutun.
+P391: Döküntüyü toplayın.
+P264: Kullanımdan sonra ellerinizi iyice yıkayın.
+P270: Bu ürünü kullanırken yiyip içmeyin veya sigara içmeyin.
+P262: Gözlerle, ciltle veya giysilerle temasına izin vermeyin.
+P272: Kirlenmiş iş giysisinin işyeri dışına çıkarılmasına izin vermeyin.
+P302+P350: CİLDE TEMAS DURUMUNDA: Bol su ve sabunla dikkatlice yıkayın.
+P321: Özel tedavi (bakınız bu etiket).
+P330: Ağzı çalkalayın.
+P361: Kirlenmiş giysileri hemen çıkarın.
+P363: Yeniden giymeden önce kirlenmiş giysileri yıkayın.
+○ Opsiyonel:
+P501: İçeriği/kabı yerel/bölgesel/ulusal/uluslararası düzenlemelere uygun olarak imha edin.
+Kısaltmalar: CLP — Classification, Labelling and Packaging | GHS — Globally Harmonised System | KKDİK — Kimyasalların Kaydı,
+Değerlendirilmesi, İzni ve Kısıtlanması | GBF — Güvenlik Bilgi Formu | KKE — Kişisel Koruyucu Ekipman | SDS — Safety Data Sheet |
+PPE — Personal Protective Equipment
+Bu GBF KKDİK Ek-2 formatına uygundur. Sayfa 9
+--- SAYFA 10 ---
+dip 2043 SDS | Rev.17 | 29.04.2026
+Bu Güvenlik Bilgi Formu KKDİK Ek-2 formatına uygun olarak hazırlanmıştır. Verilen bilgiler mevcut bilgi düzeyini yansıtmaktadır.
+Kullanıcı bu bilgileri kendi koşullarına uygunluğu açısından değerlendirmelidir.
+UYARI: Bu form henüz sertifikalı bir GBF hazırlayıcısı tarafından onaylanmamıştır. KKDİK kapsamında yasal geçerliliği
+bulunmamaktadır.
+Bu GBF KKDİK Ek-2 formatına uygundur. Sayfa 10

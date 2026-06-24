@@ -1,0 +1,13 @@
+Toplam annex6 CAS: 4172
+Tamamlanan: 0, Kalan: 4172
+Traceback (most recent call last):
+  File "C:\Users\user\Desktop\sdspass\scripts\fetch_pubchem_props.py", line 235, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\user\Desktop\sdspass\scripts\fetch_pubchem_props.py", line 211, in main
+    print(f'  [{i}/{len(todo)}] {cas} (CID {cid}) \u2192 {status}')
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\user\AppData\Local\Python\pythoncore-3.14-64\Lib\encodings\cp1254.py", line 19, in encode
+    return codecs.charmap_encode(input,self.errors,encoding_table)[0]
+           ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+UnicodeEncodeError: 'charmap' codec can't encode character '\u2192' in position 31: character maps to <undefined>

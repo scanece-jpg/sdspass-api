@@ -1,0 +1,565 @@
+================================================================================
+SDSPass — ATP22 Doğrulama Scripti
+================================================================================
+
+ADIM 1: Excel okunuyor...
+Excel okunuyor...
+  Toplam Excel satırı: 4420
+  Sütunlar: ['index_no', 'name', 'ec_no', 'cas_no', 'hazard_classes', 'h_codes_class', 'pictogram_signal', 'h_codes_label', 'suppl_h', 'scl', 'notes', 'atp']
+  İlk 3 satır:
+       index_no                       name      cas_no h_codes_label   pictogram_signal
+0  001-001-00-9                   hydrogen   1333-74-0        H220\n  GHS02\nGHS04\nDgr
+1  001-002-00-4  aluminium lithium hydride  16853-85-3  H260\nH314\n  GHS02\nGHS05\nDgr
+2  001-003-00-X             sodium hydride   7646-69-7        H260\n         GHS02\nDgr
+
+ADIM 2: CAS -> Excel mapping olusturuluyor...
+  CAS-eşleşmeli Excel kayıtları: 4191
+  CAS numarası olmayan Excel satırları: 579
+
+ADIM 3: data/cl taranıyor...
+  cl: 3920 JSON dosyası bulundu
+  Tamamlandı. 3920 madde, 7205 hata.
+
+ADIM 4: data/annex6 taranıyor...
+  annex6: 4173 JSON dosyası bulundu
+  Tamamlandı. 4173 madde, 11753 hata.
+
+ADIM 5: Rapor oluşturuluyor...
+================================================================================
+SDSPass — ATP22 Doğrulama Raporu
+================================================================================
+
+── ÖZET ──────────────────────────────────────────────────────────────────────
+  data/cl    : 3920 madde kontrol edildi
+    Excel eşleşen   : 3494
+    Excel eşleşmeyen: 426  (CAS yok veya Excel'de bulunmuyor)
+
+  data/annex6: 4173 madde kontrol edildi
+    Excel eşleşen   : 3652
+    Excel eşleşmeyen: 521  (CAS yok veya Excel'de bulunmuyor)
+
+── HATA SAYILARI ─────────────────────────────────────────────────────────────
+  Hata Tipi                                        data/cl  data/annex6
+  --------------------------------------------- ---------- ------------
+  A1 — name_tr boş                                       0         4171
+  A2 — Signal 'Danger' olmalı                          764          839
+  A2 — Signal 'Warning' olmalı                          53           88
+  A3 — Eksik piktogram                                2412         2476
+  A4 — Eksik dermal ATE                                554          554
+  A4 — Eksik inhalasyon ATE                            697          723
+  A4 — Eksik oral ATE                                 1422         1419
+  B1 — JSON'da Excel'de olmayan H kodu                 991         1095
+  B2 — JSON'da Excel kaynağından eksik H kodu          308          384
+  B3 — Signal word uyuşmazlığı                           4            4
+  TOPLAM                                              7205        11753
+
+================================================================================
+  DETAYLAR — data/cl
+================================================================================
+
+  [A2 — Signal 'Danger' olmalı]  (764 adet)
+      1. 100-51-6 (benzyl alcohol) [cl] | Danger gerektiren kodlar: ['H317']
+      2. 100-97-0 (methenamine; hexamethylenetetramine) [cl] | Danger gerektiren kodlar: ['H317']
+      3. 1000-78-8 (N,N'-(2,2-dimethylpropylidene)hexamethylenediamine) [cl] | Danger gerektiren kodlar: ['H317']
+      4. 100181-71-3 (isobutyl 3,4-epoxybutyrate) [cl] | Danger gerektiren kodlar: ['H317', 'H400', 'H410']
+      5. 10027-06-2 (8,9,10-trinorborn-2-yl acrylate) [cl] | Danger gerektiren kodlar: ['H317']
+      6. 10039-54-0 (hydroxylammonium chloride; hydroxylamine hydrochloride [1]
+bis(hydroxylammonium) sulfate; hydroxylamine sulfate (2:1) [2]) [cl] | Danger gerektiren kodlar: ['H290', 'H317', 'H400']
+      7. 100418-33-5 (2-((4-methyl-2-nitrophenyl)amino)ethanol) [cl] | Danger gerektiren kodlar: ['H317']
+      8. 100491-29-0 (ethyl 7-chloro-1-(2,4-difluorophenyl)-6-fluoro-1,4-dihydro-4-oxo-1,8-naphthyridine-3-carboxylate) [cl] | Danger gerektiren kodlar: ['H317']
+      9. 100501-62-0 (ethyl 1-ethyl-6,7,8-trifluoro-1,4-dihydro-4-oxoquinoline-3-carboxylate) [cl] | Danger gerektiren kodlar: ['H317']
+     10. 100988-63-4 ((6R-trans)-1-((7-ammonio-2-carboxylato-8-oxo-5-thia-1-azabicyclo-[4.2.0]oct-2-en-3-yl)methyl)pyridinium iodide) [cl] | Danger gerektiren kodlar: ['H317']
+     11. 101-02-0 (triphenyl phosphite) [cl] | Danger gerektiren kodlar: ['H400', 'H410']
+     12. 101-05-3 (anilazine (ISO); 2-chloro-N-(4,6-dichloro-1,3,5-triazin-2-yl)aniline) [cl] | Danger gerektiren kodlar: ['H400', 'H410']
+     13. 101-27-9 (barban (ISO); 4-chlorbut-2-ynyl N-(3-chlorophenyl)carbamate) [cl] | Danger gerektiren kodlar: ['H317', 'H400', 'H410']
+     14. 101-72-4 (N-isopropyl-N'-phenyl-p-phenylenediamine) [cl] | Danger gerektiren kodlar: ['H317', 'H400', 'H410']
+     15. 10112-91-1 (dimercury dichloride; mercurous chloride; calomel) [cl] | Danger gerektiren kodlar: ['H400', 'H410']
+     16. 101200-48-0 (tribenuron-methyl (ISO); methyl 2-[N-(4-methoxy-6-methyl-1,3,5-triazin-2-yl)-N-methylcarbamoylsulfamoyl]benzoate) [cl] | Danger gerektiren kodlar: ['H317', 'H400', 'H410']
+     17. 10138-36-0 (bis(2-ethylhexyl)-4,5-epoxycyclohexane-1,2-dicarboxylate) [cl] | Danger gerektiren kodlar: ['H317']
+     18. 1014-69-3 (desmetryne (ISO); 6-isopropylamino-2-methylamino-4-methylthio-1,3,5-triazine) [cl] | Danger gerektiren kodlar: ['H400', 'H410']
+     19. 1014-70-6 (simetryn (ISO); 2,4-bis(ethylamino)-6-methylthio-1,3,5-triazine) [cl] | Danger gerektiren kodlar: ['H400', 'H410']
+     20. 101408-30-4 (reaction mass of compounds from (dodecakis(p-tolylthio)phthalocyaninato)copper(II) to (hexadecakis(p-tolylthio)phthalocyaninato)copper(II)) [cl] | Danger gerektiren kodlar: ['H317']
+    ... ve 744 kayıt daha
+
+  [A2 — Signal 'Warning' olmalı]  (53 adet)
+      1. 100-42-5 (styrene) [cl] | Mevcut H kodları: ['H226', 'H315', 'H319', 'H332', 'H361d', 'H372(hearing_organs)']
+      2. 1072-63-5 (1-vinylimidazole) [cl] | Mevcut H kodları: ['H360D']
+      3. 109-86-4 (2-methoxyethanol; ethylene glycol monomethyl ether) [cl] | Mevcut H kodları: ['H226', 'H302', 'H312', 'H332', 'H360FD']
+      4. 110-49-6 (2-methoxyethyl acetate; methylglycol acetate) [cl] | Mevcut H kodları: ['H302', 'H312', 'H332', 'H360FD']
+      5. 110-88-3 (1,3,5-trioxan; trioxymethylene) [cl] | Mevcut H kodları: ['H228', 'H335', 'H361d']
+      6. 110488-70-5 (dimethomorph (ISO);
+(E,Z)- 4-(3-(4-chlorophenyl)- 3-(3,4-dimethoxyphenyl) acryloyl)morpholine) [cl] | Mevcut H kodları: ['H360F', 'H411']
+      7. 111-15-9 (2-ethoxyethyl acetate; ethylglycol acetate) [cl] | Mevcut H kodları: ['H226', 'H302', 'H312', 'H332', 'H360FD']
+      8. 111-77-3 (2-(2-methoxyethoxy)ethanol; diethylene glycol monomethyl ether) [cl] | Mevcut H kodları: ['H360D']
+      9. 111-96-6 (bis(2-methoxyethyl) ether) [cl] | Mevcut H kodları: ['H226', 'H360FD']
+     10. 112-49-2 (1,2-bis(2-methoxyethoxy)ethane; TEGDME; triethylene glycol dimethyl ether; triglyme) [cl] | Mevcut H kodları: ['H360Df']
+     11. 115-96-8 (tris(2-chloroethyl)phosphate) [cl] | Mevcut H kodları: ['H302', 'H351', 'H360F', 'H411']
+     12. 117-81-7 (bis(2-ethylhexyl) phthalate; di-(2-ethylhexyl) phthalate; DEHP) [cl] | Mevcut H kodları: ['H360FD']
+     13. 117-82-8 (bis(2-methoxyethyl) phthalate) [cl] | Mevcut H kodları: ['H360Df']
+     14. 121-43-7 (trimethyl borate) [cl] | Mevcut H kodları: ['H226', 'H312', 'H360FD']
+     15. 123-39-7 (N-methylformamide) [cl] | Mevcut H kodları: ['H312', 'H360D']
+     16. 125051-32-3 (bis(η5-cyclopentadienyl)-bis(2,6-difluoro-3-[pyrrol-1-yl]-phenyl)titanium) [cl] | Mevcut H kodları: ['H228', 'H361f', 'H373', 'H411']
+     17. 127-19-5 (N,N-dimethylacetamide) [cl] | Mevcut H kodları: ['H312', 'H332', 'H360D']
+     18. 133855-98-8 (epoxiconazole (ISO); (2RS,3SR)-3-(2-chlorophenyl)-2-(4-fluorophenyl)-[( 1H-1,2,4-triazol-1-yl)methyl]oxirane) [cl] | Mevcut H kodları: ['H351', 'H360Df', 'H411']
+     19. 151798-26-4 (2-[2-hydroxy-3-(2-chlorophenyl)carbamoyl-1-naphthylazo]-7-[2-hydroxy-3-(3-methylphenyl)carbamoyl-1-naphthylazo]fluoren-9-one) [cl] | Mevcut H kodları: ['H360D', 'H413']
+     20. 16118-49-3 (carbetamide (ISO);
+(R)-1-(ethylcarbamoyl)ethyl carbanilate;
+(2R)-1-(ethylamino)-1-oxopropan-2-yl phenylcarbamate) [cl] | Mevcut H kodları: ['H302', 'H351', 'H360D', 'H411']
+    ... ve 33 kayıt daha
+
+  [A3 — Eksik piktogram]  (2412 adet)
+      1. 100-01-6 (o-nitroaniline [1]
+m-nitroaniline [2]
+p-nitroaniline [3]) [cl] | H412 var ama GHS09 yok | Mevcut: ['GHS06', 'GHS08']
+      2. 100-02-7 (4-nitrophenol; p-nitrophenol) [cl] | H302 var ama GHS06 yok | Mevcut: ['GHS07', 'GHS08']
+      3. 100-02-7 (4-nitrophenol; p-nitrophenol) [cl] | H312 var ama GHS06 yok | Mevcut: ['GHS07', 'GHS08']
+      4. 100-02-7 (4-nitrophenol; p-nitrophenol) [cl] | H332 var ama GHS06 yok | Mevcut: ['GHS07', 'GHS08']
+      5. 100-22-1 (N,N,N',N'-tetramethyl-p-phenylenediamine) [cl] | H302 var ama GHS06 yok | Mevcut: ['GHS07']
+      6. 100-22-1 (N,N,N',N'-tetramethyl-p-phenylenediamine) [cl] | H312 var ama GHS06 yok | Mevcut: ['GHS07']
+      7. 100-22-1 (N,N,N',N'-tetramethyl-p-phenylenediamine) [cl] | H332 var ama GHS06 yok | Mevcut: ['GHS07']
+      8. 100-37-8 (2-diethylaminoethanol; N,N-diethylethanolamine) [cl] | H302 var ama GHS06 yok | Mevcut: ['GHS02', 'GHS05', 'GHS07', 'GHS09']
+      9. 100-37-8 (2-diethylaminoethanol; N,N-diethylethanolamine) [cl] | H312 var ama GHS06 yok | Mevcut: ['GHS02', 'GHS05', 'GHS07', 'GHS09']
+     10. 100-37-8 (2-diethylaminoethanol; N,N-diethylethanolamine) [cl] | H332 var ama GHS06 yok | Mevcut: ['GHS02', 'GHS05', 'GHS07', 'GHS09']
+     11. 100-41-4 (ethylbenzene) [cl] | H332 var ama GHS06 yok | Mevcut: ['GHS02', 'GHS07', 'GHS08']
+     12. 100-42-5 (styrene) [cl] | H332 var ama GHS06 yok | Mevcut: ['GHS02', 'GHS07', 'GHS08']
+     13. 100-46-9 (benzylamine) [cl] | H302 var ama GHS06 yok | Mevcut: ['GHS05', 'GHS07']
+     14. 100-46-9 (benzylamine) [cl] | H312 var ama GHS06 yok | Mevcut: ['GHS05', 'GHS07']
+     15. 100-47-0 (benzonitrile) [cl] | H302 var ama GHS06 yok | Mevcut: ['GHS07']
+     16. 100-47-0 (benzonitrile) [cl] | H312 var ama GHS06 yok | Mevcut: ['GHS07']
+     17. 100-51-6 (benzyl alcohol) [cl] | H302 var ama GHS06 yok | Mevcut: ['GHS07']
+     18. 100-51-6 (benzyl alcohol) [cl] | H317 var ama GHS08 yok | Mevcut: ['GHS07']
+     19. 100-52-7 (benzaldehyde) [cl] | H302 var ama GHS06 yok | Mevcut: ['GHS07']
+     20. 100-97-0 (methenamine; hexamethylenetetramine) [cl] | H317 var ama GHS08 yok | Mevcut: ['GHS02', 'GHS07']
+    ... ve 2392 kayıt daha
+
+  [A4 — Eksik dermal ATE]  (554 adet)
+      1. 100-00-5 (1-chloro-4-nitrobenzene) [cl] | ['H311'] var ama dermal ATE yok
+      2. 100-01-6 (o-nitroaniline [1]
+m-nitroaniline [2]
+p-nitroaniline [3]) [cl] | ['H311'] var ama dermal ATE yok
+      3. 100-02-7 (4-nitrophenol; p-nitrophenol) [cl] | ['H312'] var ama dermal ATE yok
+      4. 100-22-1 (N,N,N',N'-tetramethyl-p-phenylenediamine) [cl] | ['H312'] var ama dermal ATE yok
+      5. 100-25-4 (dinitrobenzene [1]
+1,4-dinitrobenzene [2]
+1,3-dinitrobenzene [3]
+1,2-dinitrobenzene [4]) [cl] | ['H310'] var ama dermal ATE yok
+      6. 100-37-8 (2-diethylaminoethanol; N,N-diethylethanolamine) [cl] | ['H312'] var ama dermal ATE yok
+      7. 100-46-9 (benzylamine) [cl] | ['H312'] var ama dermal ATE yok
+      8. 100-47-0 (benzonitrile) [cl] | ['H312'] var ama dermal ATE yok
+      9. 100-61-8 (N-methylaniline) [cl] | ['H311'] var ama dermal ATE yok
+     10. 100-63-0 (phenylhydrazine [1]
+phenylhydrazinium chloride [2]
+phenylhydrazine hydrochloride [3]
+phenylhydrazinium sulphate (2:1)  [4]) [cl] | ['H311'] var ama dermal ATE yok
+     11. 10027-06-2 (8,9,10-trinorborn-2-yl acrylate) [cl] | ['H312'] var ama dermal ATE yok
+     12. 10039-54-0 (hydroxylammonium chloride; hydroxylamine hydrochloride [1]
+bis(hydroxylammonium) sulfate; hydroxylamine sulfate (2:1) [2]) [cl] | ['H312'] var ama dermal ATE yok
+     13. 10046-00-1 (hydroxylammonium hydrogensulfate; hydroxylamine sulfate(1:1) [1]
+hydroxylamine phosphate [2]
+hydroxylamine dihydrogenphosphate [3]
+hydroxylamine 4-methylbenzenesulfonate [4]) [cl] | ['H312'] var ama dermal ATE yok
+     14. 10061-01-5 (1,3-dichloropropene [1]
+(Z)-1,3-dichloropropene [2]) [cl] | ['H311'] var ama dermal ATE yok
+     15. 101-80-4 (4,4'-oxydianiline and its salts; p-aminophenyl ether) [cl] | ['H311'] var ama dermal ATE yok
+     16. 1014-69-3 (desmetryne (ISO); 6-isopropylamino-2-methylamino-4-methylthio-1,3,5-triazine) [cl] | ['H312'] var ama dermal ATE yok
+     17. 10265-92-6 (methamidophos (ISO); O,S-dimethyl phosphoramidothioate) [cl] | ['H311'] var ama dermal ATE yok
+     18. 103-69-5 (N-ethylaniline) [cl] | ['H311'] var ama dermal ATE yok
+     19. 103-83-3 (benzyldimethylamine) [cl] | ['H312'] var ama dermal ATE yok
+     20. 1031-15-8 (methyltriphenylphosphonium chloride) [cl] | ['H312'] var ama dermal ATE yok
+    ... ve 534 kayıt daha
+
+  [A4 — Eksik inhalasyon ATE]  (697 adet)
+      1. 100-00-5 (1-chloro-4-nitrobenzene) [cl] | ['H331'] var ama inhalasyon ATE yok
+      2. 100-01-6 (o-nitroaniline [1]
+m-nitroaniline [2]
+p-nitroaniline [3]) [cl] | ['H331'] var ama inhalasyon ATE yok
+      3. 100-02-7 (4-nitrophenol; p-nitrophenol) [cl] | ['H332'] var ama inhalasyon ATE yok
+      4. 100-22-1 (N,N,N',N'-tetramethyl-p-phenylenediamine) [cl] | ['H332'] var ama inhalasyon ATE yok
+      5. 100-25-4 (dinitrobenzene [1]
+1,4-dinitrobenzene [2]
+1,3-dinitrobenzene [3]
+1,2-dinitrobenzene [4]) [cl] | ['H330'] var ama inhalasyon ATE yok
+      6. 100-37-8 (2-diethylaminoethanol; N,N-diethylethanolamine) [cl] | ['H332'] var ama inhalasyon ATE yok
+      7. 100-41-4 (ethylbenzene) [cl] | ['H332'] var ama inhalasyon ATE yok
+      8. 100-42-5 (styrene) [cl] | ['H332'] var ama inhalasyon ATE yok
+      9. 100-44-7 (α-chlorotoluene; benzyl chloride) [cl] | ['H331'] var ama inhalasyon ATE yok
+     10. 100-61-8 (N-methylaniline) [cl] | ['H331'] var ama inhalasyon ATE yok
+     11. 100-63-0 (phenylhydrazine [1]
+phenylhydrazinium chloride [2]
+phenylhydrazine hydrochloride [3]
+phenylhydrazinium sulphate (2:1)  [4]) [cl] | ['H331'] var ama inhalasyon ATE yok
+     12. 10025-67-9 (disulphur dichloride; sulfur monochloride) [cl] | ['H332'] var ama inhalasyon ATE yok
+     13. 10025-78-2 (trichlorosilane) [cl] | ['H331'] var ama inhalasyon ATE yok
+     14. 10025-87-3 (phosphoryl trichloride) [cl] | ['H330'] var ama inhalasyon ATE yok
+     15. 10026-13-8 (phosphorus pentachloride) [cl] | ['H330'] var ama inhalasyon ATE yok
+     16. 10061-01-5 (1,3-dichloropropene [1]
+(Z)-1,3-dichloropropene [2]) [cl] | ['H332'] var ama inhalasyon ATE yok
+     17. 101-31-5 (hyoscyamine) [cl] | ['H330'] var ama inhalasyon ATE yok
+     18. 101-68-8 (4,4'-methylenediphenyl diisocyanate; diphenylmethane-4,4'-diisocyanate [1]
+2,2'-methylenediphenyl diisocyanate; diphenylmethane-2,2'-diisocyanate [2]
+o-(p-isocyanatobenzyl)phenyl isocyanate; diphenylmethane-2,4'-diisocyanate [3]
+methylenediphenyl diisocyanate  [4]) [cl] | ['H332'] var ama inhalasyon ATE yok
+     19. 101-80-4 (4,4'-oxydianiline and its salts; p-aminophenyl ether) [cl] | ['H331'] var ama inhalasyon ATE yok
+     20. 10102-18-8 (sodium selenite) [cl] | ['H331'] var ama inhalasyon ATE yok
+    ... ve 677 kayıt daha
+
+  [A4 — Eksik oral ATE]  (1422 adet)
+      1. 100-00-5 (1-chloro-4-nitrobenzene) [cl] | ['H301'] var ama oral ATE yok
+      2. 100-01-6 (o-nitroaniline [1]
+m-nitroaniline [2]
+p-nitroaniline [3]) [cl] | ['H301'] var ama oral ATE yok
+      3. 100-02-7 (4-nitrophenol; p-nitrophenol) [cl] | ['H302'] var ama oral ATE yok
+      4. 100-22-1 (N,N,N',N'-tetramethyl-p-phenylenediamine) [cl] | ['H302'] var ama oral ATE yok
+      5. 100-25-4 (dinitrobenzene [1]
+1,4-dinitrobenzene [2]
+1,3-dinitrobenzene [3]
+1,2-dinitrobenzene [4]) [cl] | ['H300'] var ama oral ATE yok
+      6. 100-37-8 (2-diethylaminoethanol; N,N-diethylethanolamine) [cl] | ['H302'] var ama oral ATE yok
+      7. 100-44-7 (α-chlorotoluene; benzyl chloride) [cl] | ['H302'] var ama oral ATE yok
+      8. 100-46-9 (benzylamine) [cl] | ['H302'] var ama oral ATE yok
+      9. 100-47-0 (benzonitrile) [cl] | ['H302'] var ama oral ATE yok
+     10. 100-52-7 (benzaldehyde) [cl] | ['H302'] var ama oral ATE yok
+     11. 100-57-2 (phenylmercury nitrate [1]
+phenylmercury hydroxide [2]
+basic phenylmercury nitrate [3]) [cl] | ['H301'] var ama oral ATE yok
+     12. 100-61-8 (N-methylaniline) [cl] | ['H301'] var ama oral ATE yok
+     13. 100-63-0 (phenylhydrazine [1]
+phenylhydrazinium chloride [2]
+phenylhydrazine hydrochloride [3]
+phenylhydrazinium sulphate (2:1)  [4]) [cl] | ['H301'] var ama oral ATE yok
+     14. 100011-37-8 ((η-cumene)-(η-cyclopentadienyl)iron(II) hexafluoroantimonate) [cl] | ['H302'] var ama oral ATE yok
+     15. 10025-67-9 (disulphur dichloride; sulfur monochloride) [cl] | ['H301'] var ama oral ATE yok
+     16. 10025-78-2 (trichlorosilane) [cl] | ['H302'] var ama oral ATE yok
+     17. 10025-87-3 (phosphoryl trichloride) [cl] | ['H302'] var ama oral ATE yok
+     18. 10025-99-7 (dipotassium tetrachloroplatinate) [cl] | ['H301'] var ama oral ATE yok
+     19. 10026-00-3 (disodium tetrachloroplatinate) [cl] | ['H301'] var ama oral ATE yok
+     20. 10026-13-8 (phosphorus pentachloride) [cl] | ['H302'] var ama oral ATE yok
+    ... ve 1402 kayıt daha
+
+  [B1 — JSON'da Excel'de olmayan H kodu]  (991 adet)
+      1. 100-41-4 (ethylbenzene) [cl] | JSON'da fazla: ['H373(hearing_organs)'] | Excel: ['H225', 'H304', 'H332', 'H373']
+      2. 100-42-5 (styrene) [cl] | JSON'da fazla: ['H361d', 'H372(hearing_organs)'] | Excel: ['H226', 'H315', 'H319', 'H332', 'H361', 'H372']
+      3. 100-61-8 (N-methylaniline) [cl] | JSON'da fazla: ['H400'] | Excel: ['H301', 'H311', 'H331', 'H373', 'H410']
+      4. 10004-44-1 (hymexazol (ISO); 3-hydroxy-5-methylisoxazole) [cl] | JSON'da fazla: ['H361d'] | Excel: ['H302', 'H317', 'H318', 'H361', 'H411']
+      5. 100181-71-3 (isobutyl 3,4-epoxybutyrate) [cl] | JSON'da fazla: ['H400'] | Excel: ['H315', 'H317', 'H410']
+      6. 10025-78-2 (trichlorosilane) [cl] | JSON'da fazla: ['H318'] | Excel: ['H224', 'H260', 'H302', 'H314', 'H331']
+      7. 10049-04-4 (chlorine dioxide … %) [cl] | JSON'da fazla: ['H301'] | Excel: ['H270', 'H314', 'H330', 'H400']
+      8. 101-02-0 (triphenyl phosphite) [cl] | JSON'da fazla: ['H400'] | Excel: ['H315', 'H319', 'H410']
+      9. 101-05-3 (anilazine (ISO); 2-chloro-N-(4,6-dichloro-1,3,5-triazin-2-yl)aniline) [cl] | JSON'da fazla: ['H400'] | Excel: ['H315', 'H319', 'H410']
+     10. 101-14-4 (2,2'-dichloro-4,4'-methylenedianiline; 4,4'-methylene bis(2-chloroaniline)) [cl] | JSON'da fazla: ['H400'] | Excel: ['H302', 'H350', 'H410']
+     11. 101-27-9 (barban (ISO); 4-chlorbut-2-ynyl N-(3-chlorophenyl)carbamate) [cl] | JSON'da fazla: ['H400'] | Excel: ['H302', 'H317', 'H410']
+     12. 101-61-1 (N,N,N',N'-tetramethyl-4,4'-methylendianiline) [cl] | JSON'da fazla: ['H400'] | Excel: ['H350', 'H410']
+     13. 101-72-4 (N-isopropyl-N'-phenyl-p-phenylenediamine) [cl] | JSON'da fazla: ['H400'] | Excel: ['H302', 'H317', 'H410']
+     14. 101-80-4 (4,4'-oxydianiline and its salts; p-aminophenyl ether) [cl] | JSON'da fazla: ['H361f'] | Excel: ['H301', 'H311', 'H331', 'H340', 'H350', 'H361', 'H411']
+     15. 101-83-7 (dicyclohexylamine) [cl] | JSON'da fazla: ['H400'] | Excel: ['H302', 'H314', 'H410']
+     16. 10101-96-9 (nickel(II) selenite) [cl] | JSON'da fazla: ['H350i', 'H400'] | Excel: ['H317', 'H334', 'H350', 'H372', 'H410']
+     17. 10108-64-2 (cadmium chloride) [cl] | JSON'da fazla: ['H360FD', 'H400'] | Excel: ['H301', 'H330', 'H340', 'H350', 'H360F', 'H372', 'H410']
+     18. 10112-91-1 (dimercury dichloride; mercurous chloride; calomel) [cl] | JSON'da fazla: ['H400'] | Excel: ['H302', 'H315', 'H319', 'H335', 'H410']
+     19. 101200-48-0 (tribenuron-methyl (ISO); methyl 2-[N-(4-methoxy-6-methyl-1,3,5-triazin-2-yl)-N-methylcarbamoylsulfamoyl]benzoate) [cl] | JSON'da fazla: ['H400'] | Excel: ['H317', 'H373', 'H410']
+     20. 101205-02-1 (cycloxydim (ISO); 2-(N-ethoxybutanimidoyl)-3-hydroxy-5-(tetrahydro-2H-thiopyran-3-yl)cyclohex-2-en-1-one) [cl] | JSON'da fazla: ['H361d'] | Excel: ['H361']
+    ... ve 971 kayıt daha
+
+  [B2 — JSON'da Excel kaynağından eksik H kodu]  (308 adet)
+      1. 100-41-4 (ethylbenzene) [cl] | JSON'da eksik: ['H373'] | Excel: ['H225', 'H304', 'H332', 'H373']
+      2. 100-42-5 (styrene) [cl] | JSON'da eksik: ['H361', 'H372'] | Excel: ['H226', 'H315', 'H319', 'H332', 'H361', 'H372']
+      3. 10004-44-1 (hymexazol (ISO); 3-hydroxy-5-methylisoxazole) [cl] | JSON'da eksik: ['H361'] | Excel: ['H302', 'H317', 'H318', 'H361', 'H411']
+      4. 10049-04-4 (chlorine dioxide … %) [cl] | JSON'da eksik: ['H270', 'H330'] | Excel: ['H270', 'H314', 'H330', 'H400']
+      5. 101-80-4 (4,4'-oxydianiline and its salts; p-aminophenyl ether) [cl] | JSON'da eksik: ['H361'] | Excel: ['H301', 'H311', 'H331', 'H340', 'H350', 'H361', 'H411']
+      6. 10101-96-9 (nickel(II) selenite) [cl] | JSON'da eksik: ['H350'] | Excel: ['H317', 'H334', 'H350', 'H372', 'H410']
+      7. 10108-64-2 (cadmium chloride) [cl] | JSON'da eksik: ['H360F'] | Excel: ['H301', 'H330', 'H340', 'H350', 'H360F', 'H372', 'H410']
+      8. 101205-02-1 (cycloxydim (ISO); 2-(N-ethoxybutanimidoyl)-3-hydroxy-5-(tetrahydro-2H-thiopyran-3-yl)cyclohex-2-en-1-one) [cl] | JSON'da eksik: ['H361'] | Excel: ['H361']
+      9. 10124-36-4 (cadmium sulphate) [cl] | JSON'da eksik: ['H360F'] | Excel: ['H301', 'H330', 'H340', 'H350', 'H360F', 'H372', 'H410']
+     10. 10124-43-3 (cobalt sulfate) [cl] | JSON'da eksik: ['H350'] | Excel: ['H302', 'H317', 'H334', 'H341', 'H350', 'H360F', 'H410']
+     11. 10141-05-6 (cobalt dinitrate) [cl] | JSON'da eksik: ['H350'] | Excel: ['H317', 'H334', 'H341', 'H350', 'H360F', 'H410']
+     12. 102-06-7 (1,3-diphenylguanidine) [cl] | JSON'da eksik: ['H361'] | Excel: ['H302', 'H315', 'H319', 'H335', 'H361', 'H411']
+     13. 10325-94-7 (cadmium nitrate; cadmium dinitrate) [cl] | JSON'da eksik: ['H372'] | Excel: ['H302', 'H312', 'H332', 'H340', 'H350', 'H372', 'H410']
+     14. 103361-09-7 (flumioxazin (ISO);
+N-(7-fluoro-3,4-dihydro- 3-oxo-4-prop- 2-ynyl-2H-1,4-benzoxazin- 6-yl)cyclohex- 1-ene-1,2-dicarboximide) [cl] | JSON'da eksik: ['H361'] | Excel: ['H361', 'H410']
+     15. 104206-82-8 (mesotrione (ISO); 2-[4-(methylsulfonyl)-2-nitrobenzoyl]-1,3-cyclohexanedione) [cl] | JSON'da eksik: ['H361', 'H373'] | Excel: ['H361', 'H373', 'H410']
+     16. 104653-34-1 (difethialone (ISO);
+3-[3-(4′-bromobiphenyl-4-yl)-1,2,3,4-tetrahydronaphthalen-1-yl]-4-hydroxy-2H-1-benzothiopyran-2-one) [cl] | JSON'da eksik: ['H372'] | Excel: ['H300', 'H310', 'H330', 'H360D', 'H372', 'H410']
+     17. 10588-01-9 (sodium dichromate) [cl] | JSON'da eksik: ['H360F'] | Excel: ['H272', 'H301', 'H312', 'H314', 'H317', 'H330', 'H334', 'H340', 'H350', 'H360F', 'H372', 'H410']
+     18. 106-91-2 (2,3-epoxypropyl methacrylate; glycidyl methacrylate) [cl] | JSON'da eksik: ['H372'] | Excel: ['H302', 'H311', 'H314', 'H317', 'H335', 'H341', 'H350', 'H360F', 'H372']
+     19. 106-92-3 (allyl glycidyl ether; allyl 2,3-epoxypropyl ether; prop-2-en-1-yl 2,3-epoxypropyl ether) [cl] | JSON'da eksik: ['H361'] | Excel: ['H226', 'H302', 'H315', 'H317', 'H318', 'H332', 'H335', 'H341', 'H351', 'H361', 'H412']
+     20. 106-94-5 (1-bromopropane; n-propyl bromide) [cl] | JSON'da eksik: ['H360F'] | Excel: ['H225', 'H315', 'H319', 'H335', 'H336', 'H360F', 'H373']
+    ... ve 288 kayıt daha
+
+  [B3 — Signal word uyuşmazlığı]  (4 adet)
+      1. 183196-57-8 (potassium 1-methyl-3-morpholinocarbonyl-4-[3-(1-methyl-3-morpholinocarbonyl-5-oxo-2-pyrazolin-4-ylidene)-1-propenyl]pyrazole-5-olate; [containing ≥ 0.5 % N,N-dimethylformamide (EC No 200-679-5)]) [cl] | JSON=Danger | Excel=Warning
+      2. 731-27-1 (tolylfluanid (ISO); dichloro-N-[(dimethylamino)sulphonyl]fluoro-N-(p-tolyl)methanesulphenamide; [containing < 0.1% (w/w) of particles with an aerodynamic diameter of below 50 μm]) [cl] | JSON=Warning | Excel=Danger
+      3. 7440-66-6 (zinc powder - zinc dust (stabilised)) [cl] | JSON=Warning | Excel=Danger
+      4. 96-91-3 (2-amino-4,6-dinitrophenol; picramic acid; [≥ 20 % water]) [cl] | JSON=Warning | Excel=Danger
+
+================================================================================
+  DETAYLAR — data/annex6
+================================================================================
+
+  [A1 — name_tr boş]  (4171 adet)
+      1. - (reaction mass of: 1-methyl-3-hydroxypropyl 3,5-[1,1-dimethylethyl]-4-hydroxydihydro-cinnamate and/or 3-hydroxybutyl 3,5-[1,1-dimethylethyl]-4-hydroxydihydrocinnamate; 1,3-butanediol bis[3-(3'-(1,1-dimethylethyl)4'-hydroxy-phenyl)propionate] isomers; 1,3-butanediol bis[3-(3',5'-(1,1-dimethylethyl)-4'-hydroxyphenyl)propionate] isomers) [annex6]
+      2. 100-00-5 (1-chloro-4-nitrobenzene) [annex6]
+      3. 100-01-6 (o-nitroaniline [1]
+m-nitroaniline [2]
+p-nitroaniline [3]) [annex6]
+      4. 100-02-7 (4-nitrophenol; p-nitrophenol) [annex6]
+      5. 100-22-1 (N,N,N',N'-tetramethyl-p-phenylenediamine) [annex6]
+      6. 100-25-4 (dinitrobenzene [1]
+1,4-dinitrobenzene [2]
+1,3-dinitrobenzene [3]
+1,2-dinitrobenzene [4]) [annex6]
+      7. 100-37-8 (2-diethylaminoethanol; N,N-diethylethanolamine) [annex6]
+      8. 100-39-0 (α-bromotoluene; benzyl bromide) [annex6]
+      9. 100-40-3 (4-vinylcyclohexene) [annex6]
+     10. 100-41-4 (ethylbenzene) [annex6]
+     11. 100-42-5 (styrene) [annex6]
+     12. 100-44-7 (α-chlorotoluene; benzyl chloride) [annex6]
+     13. 100-46-9 (benzylamine) [annex6]
+     14. 100-47-0 (benzonitrile) [annex6]
+     15. 100-51-6 (benzyl alcohol) [annex6]
+     16. 100-52-7 (benzaldehyde) [annex6]
+     17. 100-57-2 (phenylmercury nitrate [1]
+phenylmercury hydroxide [2]
+basic phenylmercury nitrate [3]) [annex6]
+     18. 100-61-8 (N-methylaniline) [annex6]
+     19. 100-63-0 (phenylhydrazine [1]
+phenylhydrazinium chloride [2]
+phenylhydrazine hydrochloride [3]
+phenylhydrazinium sulphate (2:1)  [4]) [annex6]
+     20. 100-97-0 (methenamine; hexamethylenetetramine) [annex6]
+    ... ve 4151 kayıt daha
+
+  [A2 — Signal 'Danger' olmalı]  (839 adet)
+      1. 100-51-6 (benzyl alcohol) [annex6] | Danger gerektiren kodlar: ['H317']
+      2. 100-97-0 (methenamine; hexamethylenetetramine) [annex6] | Danger gerektiren kodlar: ['H317']
+      3. 1000-78-8 (N,N'-(2,2-dimethylpropylidene)hexamethylenediamine) [annex6] | Danger gerektiren kodlar: ['H317']
+      4. 100181-71-3 (isobutyl 3,4-epoxybutyrate) [annex6] | Danger gerektiren kodlar: ['H317', 'H400', 'H410']
+      5. 10027-06-2 (8,9,10-trinorborn-2-yl acrylate) [annex6] | Danger gerektiren kodlar: ['H317']
+      6. 1003318-67-9 (oxathiapiprolin (ISO); 1-(4-{4-[5-(2,6-di­fluorophenyl)-4,5-di­hydro-1,2-oxazol-3- yl]-1,3-thiazol-2-yl}piperidin-1-yl)-2-[5- methyl-3-(trifluoro­methyl)-1H-pyrazol-1-yl]ethanone) [annex6] | Danger gerektiren kodlar: ['H410']
+      7. 10039-54-0 (hydroxylammonium chloride; hydroxylamine hydrochloride [1]
+bis(hydroxylammonium) sulfate; hydroxylamine sulfate (2:1) [2]) [annex6] | Danger gerektiren kodlar: ['H290', 'H317', 'H400']
+      8. 100418-33-5 (2-((4-methyl-2-nitrophenyl)amino)ethanol) [annex6] | Danger gerektiren kodlar: ['H317']
+      9. 100491-29-0 (ethyl 7-chloro-1-(2,4-difluorophenyl)-6-fluoro-1,4-dihydro-4-oxo-1,8-naphthyridine-3-carboxylate) [annex6] | Danger gerektiren kodlar: ['H317']
+     10. 100501-62-0 (ethyl 1-ethyl-6,7,8-trifluoro-1,4-dihydro-4-oxoquinoline-3-carboxylate) [annex6] | Danger gerektiren kodlar: ['H317']
+     11. 100988-63-4 ((6R-trans)-1-((7-ammonio-2-carboxylato-8-oxo-5-thia-1-azabicyclo-[4.2.0]oct-2-en-3-yl)methyl)pyridinium iodide) [annex6] | Danger gerektiren kodlar: ['H317']
+     12. 101-02-0 (triphenyl phosphite) [annex6] | Danger gerektiren kodlar: ['H400', 'H410']
+     13. 101-05-3 (anilazine (ISO); 2-chloro-N-(4,6-dichloro-1,3,5-triazin-2-yl)aniline) [annex6] | Danger gerektiren kodlar: ['H400', 'H410']
+     14. 101-27-9 (barban (ISO); 4-chlorbut-2-ynyl N-(3-chlorophenyl)carbamate) [annex6] | Danger gerektiren kodlar: ['H317', 'H400', 'H410']
+     15. 101-72-4 (N-isopropyl-N'-phenyl-p-phenylenediamine) [annex6] | Danger gerektiren kodlar: ['H317', 'H400', 'H410']
+     16. 10112-91-1 (dimercury dichloride; mercurous chloride; calomel) [annex6] | Danger gerektiren kodlar: ['H400', 'H410']
+     17. 101200-48-0 (tribenuron-methyl (ISO); methyl 2-[N-(4-methoxy-6-methyl-1,3,5-triazin-2-yl)-N-methylcarbamoylsulfamoyl]benzoate) [annex6] | Danger gerektiren kodlar: ['H317', 'H400', 'H410']
+     18. 10138-36-0 (bis(2-ethylhexyl)-4,5-epoxycyclohexane-1,2-dicarboxylate) [annex6] | Danger gerektiren kodlar: ['H317']
+     19. 1014-69-3 (desmetryne (ISO); 6-isopropylamino-2-methylamino-4-methylthio-1,3,5-triazine) [annex6] | Danger gerektiren kodlar: ['H400', 'H410']
+     20. 1014-70-6 (simetryn (ISO); 2,4-bis(ethylamino)-6-methylthio-1,3,5-triazine) [annex6] | Danger gerektiren kodlar: ['H400', 'H410']
+    ... ve 819 kayıt daha
+
+  [A2 — Signal 'Warning' olmalı]  (88 adet)
+      1. 100-42-5 (styrene) [annex6] | Mevcut H kodları: ['H226', 'H315', 'H319', 'H332', 'H361d', 'H372(hearing_organs)']
+      2. 10043-35-3 (boric acid [1]
+boric acid [2]) [annex6] | Mevcut H kodları: ['H360FD']
+      3. 1067-33-0 (dibutyltin di(acetate)) [annex6] | Mevcut H kodları: ['H341', 'H360FD', 'H372(immune_system)']
+      4. 1067-53-4 (tris(2-methoxyethoxy) vinylsilane; 6-(2-methoxyethoxy)- 6-vinyl-2,5,7,10-tetra­oxa-6-silaundecane) [annex6] | Mevcut H kodları: ['H360FD']
+      5. 1072-63-5 (1-vinylimidazole) [annex6] | Mevcut H kodları: ['H360D']
+      6. 109-86-4 (2-methoxyethanol; ethylene glycol monomethyl ether) [annex6] | Mevcut H kodları: ['H226', 'H302', 'H312', 'H332', 'H360FD']
+      7. 110-49-6 (2-methoxyethyl acetate; methylglycol acetate) [annex6] | Mevcut H kodları: ['H302', 'H312', 'H332', 'H360FD']
+      8. 110-88-3 (1,3,5-trioxan; trioxymethylene) [annex6] | Mevcut H kodları: ['H228', 'H335', 'H361d']
+      9. 110488-70-5 (dimethomorph (ISO);
+(E,Z)- 4-(3-(4-chlorophenyl)- 3-(3,4-dimethoxyphenyl) acryloyl)morpholine) [annex6] | Mevcut H kodları: ['H360F', 'H411']
+     10. 111-15-9 (2-ethoxyethyl acetate; ethylglycol acetate) [annex6] | Mevcut H kodları: ['H226', 'H302', 'H312', 'H332', 'H360FD']
+     11. 111-77-3 (2-(2-methoxyethoxy)ethanol; diethylene glycol monomethyl ether) [annex6] | Mevcut H kodları: ['H360D']
+     12. 111-96-6 (bis(2-methoxyethyl) ether) [annex6] | Mevcut H kodları: ['H226', 'H360FD']
+     13. 11113-50-1 (boric acid [1]
+boric acid [2]) [annex6] | Mevcut H kodları: ['H360FD']
+     14. 112-49-2 (1,2-bis(2-methoxyethoxy)ethane; TEGDME; triethylene glycol dimethyl ether; triglyme) [annex6] | Mevcut H kodları: ['H360Df']
+     15. 115-96-8 (tris(2-chloroethyl)phosphate) [annex6] | Mevcut H kodları: ['H302', 'H351', 'H360F', 'H411']
+     16. 117-81-7 (bis(2-ethylhexyl) phthalate; di-(2-ethylhexyl) phthalate; DEHP) [annex6] | Mevcut H kodları: ['H360FD']
+     17. 117-82-8 (bis(2-methoxyethyl) phthalate) [annex6] | Mevcut H kodları: ['H360Df']
+     18. 119-47-1 (6,6'-di-tert-butyl-2,2'-methylenedi-p-cresol;
+[DBMC]) [annex6] | Mevcut H kodları: ['H360F']
+     19. 12008-41-2 (disodium octaborate anhydrous [1]
+disodium octaborate tetrahydrate [2]) [annex6] | Mevcut H kodları: ['H360FD']
+     20. 121-43-7 (trimethyl borate) [annex6] | Mevcut H kodları: ['H226', 'H312', 'H360FD']
+    ... ve 68 kayıt daha
+
+  [A3 — Eksik piktogram]  (2476 adet)
+      1. - (reaction mass of: 1-methyl-3-hydroxypropyl 3,5-[1,1-dimethylethyl]-4-hydroxydihydro-cinnamate and/or 3-hydroxybutyl 3,5-[1,1-dimethylethyl]-4-hydroxydihydrocinnamate; 1,3-butanediol bis[3-(3'-(1,1-dimethylethyl)4'-hydroxy-phenyl)propionate] isomers; 1,3-butanediol bis[3-(3',5'-(1,1-dimethylethyl)-4'-hydroxyphenyl)propionate] isomers) [annex6] | H411 var ama GHS09 yok | Mevcut: []
+      2. 100-01-6 (o-nitroaniline [1]
+m-nitroaniline [2]
+p-nitroaniline [3]) [annex6] | H412 var ama GHS09 yok | Mevcut: ['GHS06', 'GHS08']
+      3. 100-02-7 (4-nitrophenol; p-nitrophenol) [annex6] | H302 var ama GHS06 yok | Mevcut: ['GHS07', 'GHS08']
+      4. 100-02-7 (4-nitrophenol; p-nitrophenol) [annex6] | H312 var ama GHS06 yok | Mevcut: ['GHS07', 'GHS08']
+      5. 100-02-7 (4-nitrophenol; p-nitrophenol) [annex6] | H332 var ama GHS06 yok | Mevcut: ['GHS07', 'GHS08']
+      6. 100-22-1 (N,N,N',N'-tetramethyl-p-phenylenediamine) [annex6] | H302 var ama GHS06 yok | Mevcut: ['GHS07']
+      7. 100-22-1 (N,N,N',N'-tetramethyl-p-phenylenediamine) [annex6] | H312 var ama GHS06 yok | Mevcut: ['GHS07']
+      8. 100-22-1 (N,N,N',N'-tetramethyl-p-phenylenediamine) [annex6] | H332 var ama GHS06 yok | Mevcut: ['GHS07']
+      9. 100-37-8 (2-diethylaminoethanol; N,N-diethylethanolamine) [annex6] | H302 var ama GHS06 yok | Mevcut: ['GHS02', 'GHS05', 'GHS07', 'GHS09']
+     10. 100-37-8 (2-diethylaminoethanol; N,N-diethylethanolamine) [annex6] | H312 var ama GHS06 yok | Mevcut: ['GHS02', 'GHS05', 'GHS07', 'GHS09']
+     11. 100-37-8 (2-diethylaminoethanol; N,N-diethylethanolamine) [annex6] | H332 var ama GHS06 yok | Mevcut: ['GHS02', 'GHS05', 'GHS07', 'GHS09']
+     12. 100-41-4 (ethylbenzene) [annex6] | H332 var ama GHS06 yok | Mevcut: ['GHS02', 'GHS07', 'GHS08']
+     13. 100-42-5 (styrene) [annex6] | H332 var ama GHS06 yok | Mevcut: ['GHS02', 'GHS07', 'GHS08']
+     14. 100-46-9 (benzylamine) [annex6] | H302 var ama GHS06 yok | Mevcut: ['GHS05', 'GHS07']
+     15. 100-46-9 (benzylamine) [annex6] | H312 var ama GHS06 yok | Mevcut: ['GHS05', 'GHS07']
+     16. 100-47-0 (benzonitrile) [annex6] | H302 var ama GHS06 yok | Mevcut: ['GHS07']
+     17. 100-47-0 (benzonitrile) [annex6] | H312 var ama GHS06 yok | Mevcut: ['GHS07']
+     18. 100-51-6 (benzyl alcohol) [annex6] | H302 var ama GHS06 yok | Mevcut: ['GHS07']
+     19. 100-51-6 (benzyl alcohol) [annex6] | H317 var ama GHS08 yok | Mevcut: ['GHS07']
+     20. 100-52-7 (benzaldehyde) [annex6] | H302 var ama GHS06 yok | Mevcut: ['GHS07']
+    ... ve 2456 kayıt daha
+
+  [A4 — Eksik dermal ATE]  (554 adet)
+      1. 100-00-5 (1-chloro-4-nitrobenzene) [annex6] | ['H311'] var ama dermal ATE yok
+      2. 100-01-6 (o-nitroaniline [1]
+m-nitroaniline [2]
+p-nitroaniline [3]) [annex6] | ['H311'] var ama dermal ATE yok
+      3. 100-02-7 (4-nitrophenol; p-nitrophenol) [annex6] | ['H312'] var ama dermal ATE yok
+      4. 100-22-1 (N,N,N',N'-tetramethyl-p-phenylenediamine) [annex6] | ['H312'] var ama dermal ATE yok
+      5. 100-25-4 (dinitrobenzene [1]
+1,4-dinitrobenzene [2]
+1,3-dinitrobenzene [3]
+1,2-dinitrobenzene [4]) [annex6] | ['H310'] var ama dermal ATE yok
+      6. 100-37-8 (2-diethylaminoethanol; N,N-diethylethanolamine) [annex6] | ['H312'] var ama dermal ATE yok
+      7. 100-46-9 (benzylamine) [annex6] | ['H312'] var ama dermal ATE yok
+      8. 100-47-0 (benzonitrile) [annex6] | ['H312'] var ama dermal ATE yok
+      9. 100-61-8 (N-methylaniline) [annex6] | ['H311'] var ama dermal ATE yok
+     10. 100-63-0 (phenylhydrazine [1]
+phenylhydrazinium chloride [2]
+phenylhydrazine hydrochloride [3]
+phenylhydrazinium sulphate (2:1)  [4]) [annex6] | ['H311'] var ama dermal ATE yok
+     11. 10027-06-2 (8,9,10-trinorborn-2-yl acrylate) [annex6] | ['H312'] var ama dermal ATE yok
+     12. 10039-54-0 (hydroxylammonium chloride; hydroxylamine hydrochloride [1]
+bis(hydroxylammonium) sulfate; hydroxylamine sulfate (2:1) [2]) [annex6] | ['H312'] var ama dermal ATE yok
+     13. 10046-00-1 (hydroxylammonium hydrogensulfate; hydroxylamine sulfate(1:1) [1]
+hydroxylamine phosphate [2]
+hydroxylamine dihydrogenphosphate [3]
+hydroxylamine 4-methylbenzenesulfonate [4]) [annex6] | ['H312'] var ama dermal ATE yok
+     14. 10061-01-5 (1,3-dichloropropene [1]
+(Z)-1,3-dichloropropene [2]) [annex6] | ['H311'] var ama dermal ATE yok
+     15. 101-80-4 (4,4'-oxydianiline and its salts; p-aminophenyl ether) [annex6] | ['H311'] var ama dermal ATE yok
+     16. 1014-69-3 (desmetryne (ISO); 6-isopropylamino-2-methylamino-4-methylthio-1,3,5-triazine) [annex6] | ['H312'] var ama dermal ATE yok
+     17. 10265-92-6 (methamidophos (ISO); O,S-dimethyl phosphoramidothioate) [annex6] | ['H311'] var ama dermal ATE yok
+     18. 103-69-5 (N-ethylaniline) [annex6] | ['H311'] var ama dermal ATE yok
+     19. 103-83-3 (benzyldimethylamine) [annex6] | ['H312'] var ama dermal ATE yok
+     20. 1031-15-8 (methyltriphenylphosphonium chloride) [annex6] | ['H312'] var ama dermal ATE yok
+    ... ve 534 kayıt daha
+
+  [A4 — Eksik inhalasyon ATE]  (723 adet)
+      1. 100-00-5 (1-chloro-4-nitrobenzene) [annex6] | ['H331'] var ama inhalasyon ATE yok
+      2. 100-01-6 (o-nitroaniline [1]
+m-nitroaniline [2]
+p-nitroaniline [3]) [annex6] | ['H331'] var ama inhalasyon ATE yok
+      3. 100-02-7 (4-nitrophenol; p-nitrophenol) [annex6] | ['H332'] var ama inhalasyon ATE yok
+      4. 100-22-1 (N,N,N',N'-tetramethyl-p-phenylenediamine) [annex6] | ['H332'] var ama inhalasyon ATE yok
+      5. 100-25-4 (dinitrobenzene [1]
+1,4-dinitrobenzene [2]
+1,3-dinitrobenzene [3]
+1,2-dinitrobenzene [4]) [annex6] | ['H330'] var ama inhalasyon ATE yok
+      6. 100-37-8 (2-diethylaminoethanol; N,N-diethylethanolamine) [annex6] | ['H332'] var ama inhalasyon ATE yok
+      7. 100-41-4 (ethylbenzene) [annex6] | ['H332'] var ama inhalasyon ATE yok
+      8. 100-42-5 (styrene) [annex6] | ['H332'] var ama inhalasyon ATE yok
+      9. 100-44-7 (α-chlorotoluene; benzyl chloride) [annex6] | ['H331'] var ama inhalasyon ATE yok
+     10. 100-61-8 (N-methylaniline) [annex6] | ['H331'] var ama inhalasyon ATE yok
+     11. 100-63-0 (phenylhydrazine [1]
+phenylhydrazinium chloride [2]
+phenylhydrazine hydrochloride [3]
+phenylhydrazinium sulphate (2:1)  [4]) [annex6] | ['H331'] var ama inhalasyon ATE yok
+     12. 10025-67-9 (disulphur dichloride; sulfur monochloride) [annex6] | ['H332'] var ama inhalasyon ATE yok
+     13. 10025-78-2 (trichlorosilane) [annex6] | ['H331'] var ama inhalasyon ATE yok
+     14. 10025-87-3 (phosphoryl trichloride) [annex6] | ['H330'] var ama inhalasyon ATE yok
+     15. 10026-13-8 (phosphorus pentachloride) [annex6] | ['H330'] var ama inhalasyon ATE yok
+     16. 10061-01-5 (1,3-dichloropropene [1]
+(Z)-1,3-dichloropropene [2]) [annex6] | ['H332'] var ama inhalasyon ATE yok
+     17. 101-31-5 (hyoscyamine) [annex6] | ['H330'] var ama inhalasyon ATE yok
+     18. 101-68-8 (4,4'-methylenediphenyl diisocyanate; diphenylmethane-4,4'-diisocyanate [1]
+2,2'-methylenediphenyl diisocyanate; diphenylmethane-2,2'-diisocyanate [2]
+o-(p-isocyanatobenzyl)phenyl isocyanate; diphenylmethane-2,4'-diisocyanate [3]
+methylenediphenyl diisocyanate  [4]) [annex6] | ['H332'] var ama inhalasyon ATE yok
+     19. 101-80-4 (4,4'-oxydianiline and its salts; p-aminophenyl ether) [annex6] | ['H331'] var ama inhalasyon ATE yok
+     20. 10102-18-8 (sodium selenite) [annex6] | ['H331'] var ama inhalasyon ATE yok
+    ... ve 703 kayıt daha
+
+  [A4 — Eksik oral ATE]  (1419 adet)
+      1. 100-00-5 (1-chloro-4-nitrobenzene) [annex6] | ['H301'] var ama oral ATE yok
+      2. 100-01-6 (o-nitroaniline [1]
+m-nitroaniline [2]
+p-nitroaniline [3]) [annex6] | ['H301'] var ama oral ATE yok
+      3. 100-02-7 (4-nitrophenol; p-nitrophenol) [annex6] | ['H302'] var ama oral ATE yok
+      4. 100-22-1 (N,N,N',N'-tetramethyl-p-phenylenediamine) [annex6] | ['H302'] var ama oral ATE yok
+      5. 100-25-4 (dinitrobenzene [1]
+1,4-dinitrobenzene [2]
+1,3-dinitrobenzene [3]
+1,2-dinitrobenzene [4]) [annex6] | ['H300'] var ama oral ATE yok
+      6. 100-37-8 (2-diethylaminoethanol; N,N-diethylethanolamine) [annex6] | ['H302'] var ama oral ATE yok
+      7. 100-44-7 (α-chlorotoluene; benzyl chloride) [annex6] | ['H302'] var ama oral ATE yok
+      8. 100-46-9 (benzylamine) [annex6] | ['H302'] var ama oral ATE yok
+      9. 100-47-0 (benzonitrile) [annex6] | ['H302'] var ama oral ATE yok
+     10. 100-52-7 (benzaldehyde) [annex6] | ['H302'] var ama oral ATE yok
+     11. 100-57-2 (phenylmercury nitrate [1]
+phenylmercury hydroxide [2]
+basic phenylmercury nitrate [3]) [annex6] | ['H301'] var ama oral ATE yok
+     12. 100-61-8 (N-methylaniline) [annex6] | ['H301'] var ama oral ATE yok
+     13. 100-63-0 (phenylhydrazine [1]
+phenylhydrazinium chloride [2]
+phenylhydrazine hydrochloride [3]
+phenylhydrazinium sulphate (2:1)  [4]) [annex6] | ['H301'] var ama oral ATE yok
+     14. 100011-37-8 ((η-cumene)-(η-cyclopentadienyl)iron(II) hexafluoroantimonate) [annex6] | ['H302'] var ama oral ATE yok
+     15. 10025-67-9 (disulphur dichloride; sulfur monochloride) [annex6] | ['H301'] var ama oral ATE yok
+     16. 10025-78-2 (trichlorosilane) [annex6] | ['H302'] var ama oral ATE yok
+     17. 10025-87-3 (phosphoryl trichloride) [annex6] | ['H302'] var ama oral ATE yok
+     18. 10025-99-7 (dipotassium tetrachloroplatinate) [annex6] | ['H301'] var ama oral ATE yok
+     19. 10026-00-3 (disodium tetrachloroplatinate) [annex6] | ['H301'] var ama oral ATE yok
+     20. 10026-13-8 (phosphorus pentachloride) [annex6] | ['H302'] var ama oral ATE yok
+    ... ve 1399 kayıt daha
+
+  [B1 — JSON'da Excel'de olmayan H kodu]  (1095 adet)
+      1. 100-41-4 (ethylbenzene) [annex6] | JSON'da fazla: ['H373(hearing_organs)'] | Excel: ['H225', 'H304', 'H332', 'H373']
+      2. 100-42-5 (styrene) [annex6] | JSON'da fazla: ['H361d', 'H372(hearing_organs)'] | Excel: ['H226', 'H315', 'H319', 'H332', 'H361', 'H372']
+      3. 100-61-8 (N-methylaniline) [annex6] | JSON'da fazla: ['H400'] | Excel: ['H301', 'H311', 'H331', 'H373', 'H410']
+      4. 10004-44-1 (hymexazol (ISO); 3-hydroxy-5-methylisoxazole) [annex6] | JSON'da fazla: ['H361d'] | Excel: ['H302', 'H317', 'H318', 'H361', 'H411']
+      5. 100181-71-3 (isobutyl 3,4-epoxybutyrate) [annex6] | JSON'da fazla: ['H400'] | Excel: ['H315', 'H317', 'H410']
+      6. 10025-78-2 (trichlorosilane) [annex6] | JSON'da fazla: ['H318'] | Excel: ['H224', 'H260', 'H302', 'H314', 'H331']
+      7. 10049-04-4 (chlorine dioxide … %) [annex6] | JSON'da fazla: ['H301'] | Excel: ['H270', 'H314', 'H330', 'H400']
+      8. 100784-20-1 (halosulfuron-methyl (ISO);
+methyl 3-chloro-5-{[(4,6-dimethoxypyrimidin-2-yl)carbamoyl]sulfamoyl}-1-methyl-1H-pyrazole-4-carboxylate) [annex6] | JSON'da fazla: ['H400'] | Excel: ['H360D', 'H410']
+      9. 101-02-0 (triphenyl phosphite) [annex6] | JSON'da fazla: ['H400'] | Excel: ['H315', 'H319', 'H410']
+     10. 101-05-3 (anilazine (ISO); 2-chloro-N-(4,6-dichloro-1,3,5-triazin-2-yl)aniline) [annex6] | JSON'da fazla: ['H400'] | Excel: ['H315', 'H319', 'H410']
+     11. 101-14-4 (2,2'-dichloro-4,4'-methylenedianiline; 4,4'-methylene bis(2-chloroaniline)) [annex6] | JSON'da fazla: ['H400'] | Excel: ['H302', 'H350', 'H410']
+     12. 101-27-9 (barban (ISO); 4-chlorbut-2-ynyl N-(3-chlorophenyl)carbamate) [annex6] | JSON'da fazla: ['H400'] | Excel: ['H302', 'H317', 'H410']
+     13. 101-61-1 (N,N,N',N'-tetramethyl-4,4'-methylendianiline) [annex6] | JSON'da fazla: ['H400'] | Excel: ['H350', 'H410']
+     14. 101-72-4 (N-isopropyl-N'-phenyl-p-phenylenediamine) [annex6] | JSON'da fazla: ['H400'] | Excel: ['H302', 'H317', 'H410']
+     15. 101-80-4 (4,4'-oxydianiline and its salts; p-aminophenyl ether) [annex6] | JSON'da fazla: ['H361f'] | Excel: ['H301', 'H311', 'H331', 'H340', 'H350', 'H361', 'H411']
+     16. 101-83-7 (dicyclohexylamine) [annex6] | JSON'da fazla: ['H400'] | Excel: ['H302', 'H314', 'H410']
+     17. 10101-96-9 (nickel(II) selenite) [annex6] | JSON'da fazla: ['H350i', 'H400'] | Excel: ['H317', 'H334', 'H350', 'H372', 'H410']
+     18. 10108-64-2 (cadmium chloride) [annex6] | JSON'da fazla: ['H360FD', 'H400'] | Excel: ['H301', 'H330', 'H340', 'H350', 'H360F', 'H372', 'H410']
+     19. 10112-91-1 (dimercury dichloride; mercurous chloride; calomel) [annex6] | JSON'da fazla: ['H400'] | Excel: ['H302', 'H315', 'H319', 'H335', 'H410']
+     20. 101200-48-0 (tribenuron-methyl (ISO); methyl 2-[N-(4-methoxy-6-methyl-1,3,5-triazin-2-yl)-N-methylcarbamoylsulfamoyl]benzoate) [annex6] | JSON'da fazla: ['H400'] | Excel: ['H317', 'H373', 'H410']
+    ... ve 1075 kayıt daha
+
+  [B2 — JSON'da Excel kaynağından eksik H kodu]  (384 adet)
+      1. 100-41-4 (ethylbenzene) [annex6] | JSON'da eksik: ['H373'] | Excel: ['H225', 'H304', 'H332', 'H373']
+      2. 100-42-5 (styrene) [annex6] | JSON'da eksik: ['H361', 'H372'] | Excel: ['H226', 'H315', 'H319', 'H332', 'H361', 'H372']
+      3. 10004-44-1 (hymexazol (ISO); 3-hydroxy-5-methylisoxazole) [annex6] | JSON'da eksik: ['H361'] | Excel: ['H302', 'H317', 'H318', 'H361', 'H411']
+      4. 10049-04-4 (chlorine dioxide … %) [annex6] | JSON'da eksik: ['H270', 'H330'] | Excel: ['H270', 'H314', 'H330', 'H400']
+      5. 101-80-4 (4,4'-oxydianiline and its salts; p-aminophenyl ether) [annex6] | JSON'da eksik: ['H361'] | Excel: ['H301', 'H311', 'H331', 'H340', 'H350', 'H361', 'H411']
+      6. 10101-96-9 (nickel(II) selenite) [annex6] | JSON'da eksik: ['H350'] | Excel: ['H317', 'H334', 'H350', 'H372', 'H410']
+      7. 10108-64-2 (cadmium chloride) [annex6] | JSON'da eksik: ['H360F'] | Excel: ['H301', 'H330', 'H340', 'H350', 'H360F', 'H372', 'H410']
+      8. 101205-02-1 (cycloxydim (ISO); 2-(N-ethoxybutanimidoyl)-3-hydroxy-5-(tetrahydro-2H-thiopyran-3-yl)cyclohex-2-en-1-one) [annex6] | JSON'da eksik: ['H361'] | Excel: ['H361']
+      9. 10124-36-4 (cadmium sulphate) [annex6] | JSON'da eksik: ['H360F'] | Excel: ['H301', 'H330', 'H340', 'H350', 'H360F', 'H372', 'H410']
+     10. 10124-43-3 (cobalt sulfate) [annex6] | JSON'da eksik: ['H350'] | Excel: ['H302', 'H317', 'H334', 'H341', 'H350', 'H360F', 'H410']
+     11. 10141-05-6 (cobalt dinitrate) [annex6] | JSON'da eksik: ['H350'] | Excel: ['H317', 'H334', 'H341', 'H350', 'H360F', 'H410']
+     12. 102-06-7 (1,3-diphenylguanidine) [annex6] | JSON'da eksik: ['H361'] | Excel: ['H302', 'H315', 'H319', 'H335', 'H361', 'H411']
+     13. 10222-01-2 (2,2-dibromo-2-cyanoacetamide; [DBNPA]) [annex6] | JSON'da eksik: ['H372'] | Excel: ['H301', 'H315', 'H317', 'H318', 'H330', 'H372', 'H410']
+     14. 10325-94-7 (cadmium nitrate; cadmium dinitrate) [annex6] | JSON'da eksik: ['H372'] | Excel: ['H302', 'H312', 'H332', 'H340', 'H350', 'H372', 'H410']
+     15. 103361-09-7 (flumioxazin (ISO);
+N-(7-fluoro-3,4-dihydro- 3-oxo-4-prop- 2-ynyl-2H-1,4-benzoxazin- 6-yl)cyclohex- 1-ene-1,2-dicarboximide) [annex6] | JSON'da eksik: ['H361'] | Excel: ['H361', 'H410']
+     16. 104206-82-8 (mesotrione (ISO); 2-[4-(methylsulfonyl)-2-nitrobenzoyl]-1,3-cyclohexanedione) [annex6] | JSON'da eksik: ['H361', 'H373'] | Excel: ['H361', 'H373', 'H410']
+     17. 104653-34-1 (difethialone (ISO);
+3-[3-(4′-bromobiphenyl-4-yl)-1,2,3,4-tetrahydronaphthalen-1-yl]-4-hydroxy-2H-1-benzothiopyran-2-one) [annex6] | JSON'da eksik: ['H372'] | Excel: ['H300', 'H310', 'H330', 'H360D', 'H372', 'H410']
+     18. 10588-01-9 (sodium dichromate) [annex6] | JSON'da eksik: ['H360F'] | Excel: ['H272', 'H301', 'H312', 'H314', 'H317', 'H330', 'H334', 'H340', 'H350', 'H360F', 'H372', 'H410']
+     19. 106-91-2 (2,3-epoxypropyl methacrylate; glycidyl methacrylate) [annex6] | JSON'da eksik: ['H372'] | Excel: ['H302', 'H311', 'H314', 'H317', 'H335', 'H341', 'H350', 'H360F', 'H372']
+     20. 106-92-3 (allyl glycidyl ether; allyl 2,3-epoxypropyl ether; prop-2-en-1-yl 2,3-epoxypropyl ether) [annex6] | JSON'da eksik: ['H361'] | Excel: ['H226', 'H302', 'H315', 'H317', 'H318', 'H332', 'H335', 'H341', 'H351', 'H361', 'H412']
+    ... ve 364 kayıt daha
+
+  [B3 — Signal word uyuşmazlığı]  (4 adet)
+      1. 183196-57-8 (potassium 1-methyl-3-morpholinocarbonyl-4-[3-(1-methyl-3-morpholinocarbonyl-5-oxo-2-pyrazolin-4-ylidene)-1-propenyl]pyrazole-5-olate; [containing ≥ 0.5 % N,N-dimethylformamide (EC No 200-679-5)]) [annex6] | JSON=Danger | Excel=Warning
+      2. 731-27-1 (tolylfluanid (ISO); dichloro-N-[(dimethylamino)sulphonyl]fluoro-N-(p-tolyl)methanesulphenamide; [containing < 0.1% (w/w) of particles with an aerodynamic diameter of below 50 μm]) [annex6] | JSON=Warning | Excel=Danger
+      3. 7440-66-6 (zinc powder - zinc dust (stabilised)) [annex6] | JSON=Warning | Excel=Danger
+      4. 96-91-3 (2-amino-4,6-dinitrophenol; picramic acid; [≥ 20 % water]) [annex6] | JSON=Warning | Excel=Danger
+

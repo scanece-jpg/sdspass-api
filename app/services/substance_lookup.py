@@ -24,14 +24,18 @@ from typing import Optional, Dict
 
 _BASE          = os.path.join(os.path.dirname(__file__), '..', '..', 'data')
 _CL_DIR        = os.path.join(_BASE, 'cl')           # SEA Ek-6 (TR, statik)
-_ANNEX6_DIR    = os.path.join(_BASE, 'annex6')        # CLP Annex VI (EU, statik + ECHA API)
+_ANNEX6_DIR    = os.path.join(_BASE, 'annex6')        # CLP Annex VI eski per-dosya arşiv
 _ECHA_CL_DIR   = os.path.join(_BASE, 'echa_cl')       # ECHA C&L API önbelleği
 _PUBCHEM_DIR   = os.path.join(_BASE, 'pubchem_cl')    # PubChem önbelleği
 _CUSTOM_PATH   = os.path.join(_BASE, 'substances_custom.json')
 _OEL_PATH      = os.path.join(_BASE, 'tr_oel_limits.json')
+_DB_PATH       = os.path.join(_BASE, 'substance_db.json')   # ECHA ATP22 yeni format
+_IDX_PATH      = os.path.join(_BASE, 'h_code_index.json')   # H-kod indeksi
 
 _CUSTOM_DB: Optional[Dict] = None
 _OEL_DB:    Optional[Dict] = None
+_SUBSTANCE_DB: Optional[Dict] = None
+_H_CODE_IDX:   Optional[Dict] = None
 _lock = threading.Lock()
 
 # ---------------------------------------------------------------------------
@@ -196,6 +200,100 @@ def _cl_to_legacy(entry: dict, priority: int, source_label: str) -> dict:
 # Custom (tedarikçi) DB — küçük, JSON yüklemek sorun değil
 # ---------------------------------------------------------------------------
 
+def _load_substance_db() -> Dict:
+    global _SUBSTANCE_DB
+    if _SUBSTANCE_DB is None:
+        with _lock:
+            if _SUBSTANCE_DB is None:
+                try:
+                    with open(_DB_PATH, encoding='utf-8') as f:
+                        _SUBSTANCE_DB = json.load(f)
+                except Exception:
+                    _SUBSTANCE_DB = {}
+    return _SUBSTANCE_DB
+
+
+def _load_h_code_idx() -> Dict:
+    global _H_CODE_IDX
+    if _H_CODE_IDX is None:
+        with _lock:
+            if _H_CODE_IDX is None:
+                try:
+                    with open(_IDX_PATH, encoding='utf-8') as f:
+                        _H_CODE_IDX = json.load(f)
+                except Exception:
+                    _H_CODE_IDX = {}
+    return _H_CODE_IDX
+
+
+def _scl_op_to_cmin_cmax(scl: dict) -> dict:
+    """op/min/max formatını eski c_min/c_max formatına çevirir (motor uyumu)."""
+    op   = scl.get('op', '')
+    vmin = scl.get('min')
+    vmax = scl.get('max')
+    if op == 'range':
+        c_min, c_max = vmin, vmax
+    elif op == '>=':
+        c_min, c_max = vmin, None
+    elif op == '<':
+        c_min, c_max = None, vmax
+    else:
+        c_min, c_max = vmin, vmax
+    return {
+        'h_code' : scl.get('h_code', ''),
+        'h_class': scl.get('class', ''),
+        'c_min'  : c_min,
+        'c_max'  : c_max,
+    }
+
+
+def _db_to_legacy(entry: dict) -> dict:
+    """
+    substance_db.json formatını eski API formatına çevirir.
+    classification listesi → hazards; scl_limits op/min/max → c_min/c_max.
+    """
+    hazards = []
+    for c in entry.get('classification', []):
+        h = {'h_class': c.get('class', ''), 'h_code': c.get('h_code', '')}
+        if c.get('class_asterisk'):
+            h['note_flag'] = '*'
+        hazards.append(h)
+
+    return {
+        'cas'            : entry.get('cas', ''),
+        'name'           : (entry.get('names') or [''])[0],
+        'name_tr'        : '',
+        'ec_no'          : entry.get('ec_no', ''),
+        'index_no'       : entry.get('index_no', ''),
+        'atp'            : entry.get('atp', ''),
+        'notes'          : entry.get('notes', []),
+        'ate'            : entry.get('ate', {}),
+        'signal'         : '',
+        'pictograms'     : [],
+        'hazards'        : hazards,
+        'suppl_hazards'  : [],
+        'm_factors'      : entry.get('m_factors', {}),
+        'scl'            : [_scl_op_to_cmin_cmax(s) for s in entry.get('scl_limits', [])],
+        'sea_ek6'        : False,
+        'annex_vi'       : True,
+        'source'         : f'ECHA ATP22 ({entry.get("atp","?")})',
+        'source_priority': 2,
+    }
+
+
+def _db_lookup(cas: str) -> Optional[dict]:
+    """substance_db.json'dan CAS veya alias ile ara."""
+    db = _load_substance_db()
+    entry = db.get(cas)
+    if entry is None:
+        return None
+    if '_alias' in entry:
+        entry = db.get(entry['_alias'])
+    if entry is None or '_alias' in entry:
+        return None
+    return entry
+
+
 def _load_custom() -> Dict:
     global _CUSTOM_DB
     if _CUSTOM_DB is None:
@@ -274,7 +372,12 @@ def lookup_substance(cas: str) -> Optional[Dict]:
                 )
         return result
 
-    # ── Sıra 2 (tek başına): Annex VI arşiv ─────────────────────────────────
+    # ── Sıra 2 (tek başına): substance_db (ECHA ATP22 yeni format) ──────────
+    db_entry = _db_lookup(cas)
+    if db_entry:
+        return _db_to_legacy(db_entry)
+
+    # ── Sıra 2b: Eski Annex VI per-dosya arşiv (fallback) ───────────────────
     if ax_entry:
         return _cl_to_legacy(ax_entry, 2, f'CLP Annex VI ({ax_entry.get("atp","?")})')
 
@@ -495,3 +598,40 @@ def get_custom_count() -> int:
 
 def get_oel_count() -> int:
     return len(_load_oel())
+
+
+# ---------------------------------------------------------------------------
+# Yeni API — motorlar doğrudan bu fonksiyonları çağırır
+# ---------------------------------------------------------------------------
+
+def scl_category(cas: str, h_code: str, conc: float) -> Optional[str]:
+    """
+    Verilen CAS + H-kodu + konsantrasyon için SCL kategorisini döndür.
+    Örn: scl_category('1310-73-2', 'H314', 3.0) → 'Skin Corr. 1B'
+    Eşleşme yoksa None.
+    """
+    entry = _db_lookup(cas)
+    if not entry:
+        return None
+    for scl in entry.get('scl_limits', []):
+        if scl.get('h_code') != h_code:
+            continue
+        op   = scl.get('op', '')
+        vmin = scl.get('min')
+        vmax = scl.get('max')
+        if op == '>=' and vmin is not None and conc >= vmin:
+            return scl.get('class')
+        if op == 'range' and vmin is not None and vmax is not None:
+            if vmin <= conc < vmax:
+                return scl.get('class')
+        if op == '<' and vmax is not None and conc < vmax:
+            return scl.get('class')
+    return None
+
+
+def h_code_info(h_code: str) -> Optional[dict]:
+    """
+    H-kodu için indeks bilgisi döndür.
+    Döner: {count, occurrences, scl_cas, m_cas} veya None.
+    """
+    return _load_h_code_idx().get(h_code)

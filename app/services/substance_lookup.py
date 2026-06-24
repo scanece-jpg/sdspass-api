@@ -31,11 +31,13 @@ _CUSTOM_PATH   = os.path.join(_BASE, 'substances_custom.json')
 _OEL_PATH      = os.path.join(_BASE, 'tr_oel_limits.json')
 _DB_PATH       = os.path.join(_BASE, 'substance_db.json')   # ECHA ATP22 yeni format
 _IDX_PATH      = os.path.join(_BASE, 'h_code_index.json')   # H-kod indeksi
+_NAMES_PATH    = os.path.join(_BASE, 'substance_names.json') # CAS → {en, tr, ...}
 
 _CUSTOM_DB: Optional[Dict] = None
 _OEL_DB:    Optional[Dict] = None
 _SUBSTANCE_DB: Optional[Dict] = None
 _H_CODE_IDX:   Optional[Dict] = None
+_NAMES_DB:     Optional[Dict] = None
 _lock = threading.Lock()
 
 # ---------------------------------------------------------------------------
@@ -200,6 +202,24 @@ def _cl_to_legacy(entry: dict, priority: int, source_label: str) -> dict:
 # Custom (tedarikçi) DB — küçük, JSON yüklemek sorun değil
 # ---------------------------------------------------------------------------
 
+def _load_names() -> Dict:
+    global _NAMES_DB
+    if _NAMES_DB is None:
+        with _lock:
+            if _NAMES_DB is None:
+                try:
+                    with open(_NAMES_PATH, encoding='utf-8') as f:
+                        _NAMES_DB = json.load(f)
+                except Exception:
+                    _NAMES_DB = {}
+    return _NAMES_DB
+
+
+def get_name(cas: str, lang: str = 'en') -> Optional[str]:
+    """CAS için istenen dilde isim döndür. Bulamazsa None."""
+    return _load_names().get(cas.strip(), {}).get(lang)
+
+
 def _load_substance_db() -> Dict:
     global _SUBSTANCE_DB
     if _SUBSTANCE_DB is None:
@@ -259,10 +279,12 @@ def _db_to_legacy(entry: dict) -> dict:
             h['note_flag'] = '*'
         hazards.append(h)
 
+    cas = entry.get('cas', '')
+    names = _load_names().get(cas, {})
     return {
-        'cas'            : entry.get('cas', ''),
-        'name'           : (entry.get('names') or [''])[0],
-        'name_tr'        : '',
+        'cas'            : cas,
+        'name'           : names.get('en') or (entry.get('names') or [''])[0],
+        'name_tr'        : names.get('tr', ''),
         'ec_no'          : entry.get('ec_no', ''),
         'index_no'       : entry.get('index_no', ''),
         'atp'            : entry.get('atp', ''),

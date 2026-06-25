@@ -1044,6 +1044,14 @@ async def substance_lookup(cas: str):
             if echa and echa.get('h_codes'):
                 cache_src  = echa.get('_cache_source', 'echa_cl')
                 is_pubchem = cache_src == 'pubchem'
+                try:
+                    from app.services.substance_lookup import save_echa_cl_substance, save_pubchem_substance
+                    if is_pubchem:
+                        save_pubchem_substance(cas, echa)
+                    else:
+                        save_echa_cl_substance(cas, echa)
+                except Exception:
+                    pass
                 return {
                     "found"     : True,
                     "cas"       : cas,

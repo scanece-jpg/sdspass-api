@@ -1246,7 +1246,45 @@
     ],
     "scl_limits": [],
     "m_factors": {},
-    "ate": {}
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "006-006-01-7",
+        "names": [
+          "hydrogen cyanide ...%; hydrocyanic acid ...%"
+        ],
+        "classification": [
+          {
+            "class": "Acute Tox. 1",
+            "h_code": "H310"
+          },
+          {
+            "class": "Acute Tox. 2",
+            "h_code": "H330",
+            "class_asterisk": 1
+          },
+          {
+            "class": "Acute Tox. 2",
+            "h_code": "H300",
+            "class_asterisk": 1
+          },
+          {
+            "class": "Aquatic Acute 1",
+            "h_code": "H400"
+          },
+          {
+            "class": "Aquatic Chronic 1",
+            "h_code": "H410"
+          }
+        ],
+        "scl_limits": [],
+        "m_factors": {},
+        "ate": {},
+        "notes": [
+          "B"
+        ]
+      }
+    ]
   },
   "86-88-4": {
     "index_no": "006-008-00-0",
@@ -1512,7 +1550,9 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
+    "m_factors": {
+      "default": 100
+    },
     "ate": {}
   },
   "114-26-1": {
@@ -4285,7 +4325,66 @@
       }
     ],
     "m_factors": {},
-    "ate": {}
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "007-030-00-3",
+        "names": [
+          "nitric acid …% [C ≤ 70 %]"
+        ],
+        "classification": [
+          {
+            "class": "Ox. Liq. 3",
+            "h_code": "H272"
+          },
+          {
+            "class": "Acute Tox. 3",
+            "h_code": "H331"
+          },
+          {
+            "class": "Skin Corr. 1A",
+            "h_code": "H314"
+          }
+        ],
+        "scl_limits": [
+          {
+            "h_code": "H272",
+            "class": "Ox. Liq. 3",
+            "op": ">=",
+            "min": 65.0,
+            "max": null,
+            "unit": "%"
+          },
+          {
+            "h_code": "H314",
+            "class": "Skin Corr. 1A",
+            "op": ">=",
+            "min": 20.0,
+            "max": null,
+            "unit": "%"
+          },
+          {
+            "h_code": "H314",
+            "class": "Skin Corr. 1B",
+            "op": "range",
+            "min": 5.0,
+            "max": 20.0,
+            "unit": "%"
+          }
+        ],
+        "m_factors": {},
+        "ate": {
+          "inhalation": {
+            "value": 2.65,
+            "unit": "mg/L",
+            "form": "Vapours"
+          }
+        },
+        "notes": [
+          "B"
+        ]
+      }
+    ]
   },
   "109-95-5": {
     "index_no": "007-006-00-2",
@@ -5274,7 +5373,66 @@
     ],
     "scl_limits": [],
     "m_factors": {},
-    "ate": {}
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "009-003-00-1",
+        "names": [
+          "hydrofluoric acid ... %"
+        ],
+        "classification": [
+          {
+            "class": "Acute Tox. 1",
+            "h_code": "H310"
+          },
+          {
+            "class": "Acute Tox. 2",
+            "h_code": "H330",
+            "class_asterisk": 1
+          },
+          {
+            "class": "Acute Tox. 2",
+            "h_code": "H300",
+            "class_asterisk": 1
+          },
+          {
+            "class": "Skin Corr. 1A",
+            "h_code": "H314"
+          }
+        ],
+        "scl_limits": [
+          {
+            "h_code": "H314",
+            "class": "Skin Corr. 1A",
+            "op": ">=",
+            "min": 7.0,
+            "max": null,
+            "unit": "%"
+          },
+          {
+            "h_code": "H314",
+            "class": "Skin Corr. 1B",
+            "op": "range",
+            "min": 1.0,
+            "max": 7.0,
+            "unit": "%"
+          },
+          {
+            "h_code": "H319",
+            "class": "Eye Irrit. 2",
+            "op": "range",
+            "min": 0.1,
+            "max": 1.0,
+            "unit": "%"
+          }
+        ],
+        "m_factors": {},
+        "ate": {},
+        "notes": [
+          "B"
+        ]
+      }
+    ]
   },
   "7681-49-4": {
     "index_no": "009-004-00-7",
@@ -6031,21 +6189,21 @@
     "ate": {}
   },
   "7429-90-5": {
-    "index_no": "013-002-00-1",
+    "index_no": "013-001-00-6",
     "names": [
-      "aluminium powder (stabilised)"
+      "aluminium powder (pyrophoric)"
     ],
     "ec_no": "231-072-3",
     "cas": "7429-90-5",
     "synonyms": [],
-    "atp": "CLP00/ATP01",
+    "atp": "CLP00",
     "notes": [
       "T"
     ],
     "classification": [
       {
-        "class": "Flam. Sol. 1",
-        "h_code": "H228"
+        "class": "Pyr. Sol. 1",
+        "h_code": "H250"
       },
       {
         "class": "Water-react. 2",
@@ -6054,7 +6212,31 @@
     ],
     "scl_limits": [],
     "m_factors": {},
-    "ate": {}
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "013-002-00-1",
+        "names": [
+          "aluminium powder (stabilised)"
+        ],
+        "classification": [
+          {
+            "class": "Flam. Sol. 1",
+            "h_code": "H228"
+          },
+          {
+            "class": "Water-react. 2",
+            "h_code": "H261"
+          }
+        ],
+        "scl_limits": [],
+        "m_factors": {},
+        "ate": {},
+        "notes": [
+          "T"
+        ]
+      }
+    ]
   },
   "7446-70-0": {
     "index_no": "013-003-00-7",
@@ -16036,7 +16218,79 @@
     "m_factors": {
       "default": 10
     },
-    "ate": {}
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "017-026-01-0",
+        "names": [
+          "chlorine dioxide … %"
+        ],
+        "classification": [
+          {
+            "class": "Acute Tox. 3",
+            "h_code": "H301",
+            "class_asterisk": 1
+          },
+          {
+            "class": "Skin Corr. 1B",
+            "h_code": "H314"
+          },
+          {
+            "class": "Aquatic Acute 1",
+            "h_code": "H400"
+          }
+        ],
+        "scl_limits": [
+          {
+            "h_code": "H335",
+            "class": "STOT SE 3",
+            "op": ">=",
+            "min": 3.0,
+            "max": null,
+            "unit": "%"
+          },
+          {
+            "h_code": "H314",
+            "class": "Skin Corr. 1B",
+            "op": ">=",
+            "min": 5.0,
+            "max": null,
+            "unit": "%"
+          },
+          {
+            "h_code": "H315",
+            "class": "Skin Irrit. 2",
+            "op": "range",
+            "min": 1.0,
+            "max": 5.0,
+            "unit": "%"
+          },
+          {
+            "h_code": "H318",
+            "class": "Eye Dam. 1",
+            "op": "range",
+            "min": 3.0,
+            "max": 5.0,
+            "unit": "%"
+          },
+          {
+            "h_code": "H319",
+            "class": "Eye Irrit. 2",
+            "op": "range",
+            "min": 0.3,
+            "max": 3.0,
+            "unit": "%"
+          }
+        ],
+        "m_factors": {
+          "default": 10
+        },
+        "ate": {},
+        "notes": [
+          "B"
+        ]
+      }
+    ]
   },
   "7440-09-7": {
     "index_no": "019-001-00-2",
@@ -17896,7 +18150,38 @@
     ],
     "scl_limits": [],
     "m_factors": {},
-    "ate": {}
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "028-002-01-4",
+        "names": [
+          "nickel powder; [particle diameter < 1 mm]"
+        ],
+        "classification": [
+          {
+            "class": "Carc. 2",
+            "h_code": "H351"
+          },
+          {
+            "class": "STOT RE 1",
+            "h_code": "H372",
+            "h_code_asterisk": 2
+          },
+          {
+            "class": "Skin Sens. 1",
+            "h_code": "H317"
+          },
+          {
+            "class": "Aquatic Chronic 3",
+            "h_code": "H412"
+          }
+        ],
+        "scl_limits": [],
+        "m_factors": {},
+        "ate": {},
+        "notes": []
+      }
+    ]
   },
   "1313-99-1": {
     "index_no": "028-003-00-2",
@@ -22114,7 +22399,29 @@
     ],
     "scl_limits": [],
     "m_factors": {},
-    "ate": {}
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "030-001-01-9",
+        "names": [
+          "zinc powder - zinc dust (stabilised)"
+        ],
+        "classification": [
+          {
+            "class": "Aquatic Acute 1",
+            "h_code": "H400"
+          },
+          {
+            "class": "Aquatic Chronic 1",
+            "h_code": "H410"
+          }
+        ],
+        "scl_limits": [],
+        "m_factors": {},
+        "ate": {},
+        "notes": []
+      }
+    ]
   },
   "7646-85-7": {
     "index_no": "030-003-00-2",
@@ -23020,9 +23327,9 @@
     "ate": {}
   },
   "7440-22-4": {
-    "index_no": "047-004-00-9",
+    "index_no": "047-006-00-X",
     "names": [
-      "silver massive: [particle diameter ≥ 1 mm]"
+      "silver nano: [particle diameter > 1 nm ≤ 100 nm]"
     ],
     "ec_no": "231-131-3",
     "cas": "7440-22-4",
@@ -23037,11 +23344,103 @@
       {
         "class": "STOT RE 2",
         "h_code": "H373 (nervous system)"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
-    "ate": {}
+    "m_factors": {
+      "default": 1000
+    },
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "047-005-00-4",
+        "names": [
+          "silver powder: [particle diameter > 100 nm < 1 mm]"
+        ],
+        "classification": [
+          {
+            "class": "Repr. 2",
+            "h_code": "H361f"
+          },
+          {
+            "class": "STOT RE 2",
+            "h_code": "H373 (nervous system)"
+          },
+          {
+            "class": "Aquatic Acute 1",
+            "h_code": "H400"
+          },
+          {
+            "class": "Aquatic Chronic 1",
+            "h_code": "H410"
+          }
+        ],
+        "scl_limits": [],
+        "m_factors": {
+          "default": 10
+        },
+        "ate": {},
+        "notes": []
+      },
+      {
+        "index_no": "047-004-00-9",
+        "names": [
+          "silver massive: [particle diameter ≥ 1 mm]"
+        ],
+        "classification": [
+          {
+            "class": "Repr. 2",
+            "h_code": "H361f"
+          },
+          {
+            "class": "STOT RE 2",
+            "h_code": "H373 (nervous system)"
+          }
+        ],
+        "scl_limits": [],
+        "m_factors": {},
+        "ate": {},
+        "notes": []
+      },
+      {
+        "index_no": "047-006-00-X",
+        "names": [
+          "silver nano: [particle diameter > 1 nm ≤ 100 nm]"
+        ],
+        "classification": [
+          {
+            "class": "Repr. 2",
+            "h_code": "H361f"
+          },
+          {
+            "class": "STOT RE 2",
+            "h_code": "H373 (nervous system)"
+          },
+          {
+            "class": "Aquatic Acute 1",
+            "h_code": "H400"
+          },
+          {
+            "class": "Aquatic Chronic 1",
+            "h_code": "H410"
+          }
+        ],
+        "scl_limits": [],
+        "m_factors": {
+          "default": 1000
+        },
+        "ate": {},
+        "notes": []
+      }
+    ]
   },
   "7440-43-9": {
     "index_no": "048-002-00-0",
@@ -23090,7 +23489,55 @@
     ],
     "scl_limits": [],
     "m_factors": {},
-    "ate": {}
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "048-011-00-X",
+        "names": [
+          "cadmium (pyrophoric)"
+        ],
+        "classification": [
+          {
+            "class": "Pyr. Sol. 1",
+            "h_code": "H250"
+          },
+          {
+            "class": "Carc. 1B",
+            "h_code": "H350"
+          },
+          {
+            "class": "Muta. 2",
+            "h_code": "H341"
+          },
+          {
+            "class": "Repr. 2",
+            "h_code": "H361fd"
+          },
+          {
+            "class": "Acute Tox. 2",
+            "h_code": "H330",
+            "class_asterisk": 1
+          },
+          {
+            "class": "STOT RE 1",
+            "h_code": "H372",
+            "h_code_asterisk": 2
+          },
+          {
+            "class": "Aquatic Acute 1",
+            "h_code": "H400"
+          },
+          {
+            "class": "Aquatic Chronic 1",
+            "h_code": "H410"
+          }
+        ],
+        "scl_limits": [],
+        "m_factors": {},
+        "ate": {},
+        "notes": []
+      }
+    ]
   },
   "1306-19-0": {
     "_alias": "7440-43-9"
@@ -25779,7 +26226,54 @@
     ],
     "scl_limits": [],
     "m_factors": {},
-    "ate": {}
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "080-005-01-X",
+        "names": [
+          "mercury difulminate; mercuric fulminate; fulminate of mercury [≥ 20 % phlegmatiser]"
+        ],
+        "classification": [
+          {
+            "class": "Expl. 1.1",
+            "h_code": "H201"
+          },
+          {
+            "class": "Acute Tox. 3",
+            "h_code": "H331",
+            "class_asterisk": 1
+          },
+          {
+            "class": "Acute Tox. 3",
+            "h_code": "H311",
+            "class_asterisk": 1
+          },
+          {
+            "class": "Acute Tox. 3",
+            "h_code": "H301",
+            "class_asterisk": 1
+          },
+          {
+            "class": "STOT RE 2",
+            "h_code": "H373",
+            "class_asterisk": 1,
+            "h_code_asterisk": 2
+          },
+          {
+            "class": "Aquatic Acute 1",
+            "h_code": "H400"
+          },
+          {
+            "class": "Aquatic Chronic 1",
+            "h_code": "H410"
+          }
+        ],
+        "scl_limits": [],
+        "m_factors": {},
+        "ate": {},
+        "notes": []
+      }
+    ]
   },
   "1335-31-5": {
     "index_no": "080-006-00-8",
@@ -26248,7 +26742,55 @@
     ],
     "scl_limits": [],
     "m_factors": {},
-    "ate": {}
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "082-003-01-4",
+        "names": [
+          "lead diazide; lead azide [≥ 20 % phlegmatiser]"
+        ],
+        "classification": [
+          {
+            "class": "Expl. 1.1",
+            "h_code": "H201"
+          },
+          {
+            "class": "Repr. 1A",
+            "h_code": "H360Df"
+          },
+          {
+            "class": "Acute Tox. 4",
+            "h_code": "H332",
+            "class_asterisk": 1
+          },
+          {
+            "class": "Acute Tox. 4",
+            "h_code": "H302",
+            "class_asterisk": 1
+          },
+          {
+            "class": "STOT RE 2",
+            "h_code": "H373",
+            "class_asterisk": 1,
+            "h_code_asterisk": 2
+          },
+          {
+            "class": "Aquatic Acute 1",
+            "h_code": "H400"
+          },
+          {
+            "class": "Aquatic Chronic 1",
+            "h_code": "H410"
+          }
+        ],
+        "scl_limits": [],
+        "m_factors": {},
+        "ate": {},
+        "notes": [
+          "1"
+        ]
+      }
+    ]
   },
   "7758-97-6": {
     "index_no": "082-004-00-2",
@@ -26644,8 +27186,38 @@
         "unit": "%"
       }
     ],
-    "m_factors": {},
-    "ate": {}
+    "m_factors": {
+      "default": 100
+    },
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "082-014-00-7",
+        "names": [
+          "lead massive:  [particle diameter ≥ 1 mm]"
+        ],
+        "classification": [
+          {
+            "class": "Repr. 1A",
+            "h_code": "H360FD"
+          },
+          {
+            "class": "Lact.",
+            "h_code": "H362"
+          },
+          {
+            "class": "Aquatic Chronic 1",
+            "h_code": "H410"
+          }
+        ],
+        "scl_limits": [],
+        "m_factors": {
+          "default": 10
+        },
+        "ate": {},
+        "notes": []
+      }
+    ]
   },
   "7440-61-1": {
     "index_no": "092-001-00-8",
@@ -26789,7 +27361,42 @@
     ],
     "scl_limits": [],
     "m_factors": {},
-    "ate": {}
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "601-004-01-8",
+        "names": [
+          "butane (containing ≥ 0,1 % butadiene (203-450-8))",
+          "isobutane (containing ≥ 0,1 % butadiene (203-450-8))"
+        ],
+        "classification": [
+          {
+            "class": "Flam. Gas 1",
+            "h_code": "H220"
+          },
+          {
+            "class": "Press. Gas",
+            "h_code": "H350"
+          },
+          {
+            "class": "Carc. 1A",
+            "h_code": "H340"
+          },
+          {
+            "class": "Muta. 1B",
+            "h_code": ""
+          }
+        ],
+        "scl_limits": [],
+        "m_factors": {},
+        "ate": {},
+        "notes": [
+          "C",
+          "S",
+          "U"
+        ]
+      }
+    ]
   },
   "75-28-5": {
     "_alias": "106-97-8"
@@ -34442,7 +35049,49 @@
     ],
     "scl_limits": [],
     "m_factors": {},
-    "ate": {}
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "603-033-01-1",
+        "names": [
+          "oxydiethylene dinitrate; diethylene glycol dinitrate; digol dinitrate; [>25 % phlegmatiser]"
+        ],
+        "classification": [
+          {
+            "class": "Expl. 1.1",
+            "h_code": "H201"
+          },
+          {
+            "class": "Acute Tox. 1",
+            "h_code": "H310"
+          },
+          {
+            "class": "Acute Tox. 2",
+            "h_code": "H330",
+            "class_asterisk": 1
+          },
+          {
+            "class": "Acute Tox. 2",
+            "h_code": "H300",
+            "class_asterisk": 1
+          },
+          {
+            "class": "STOT RE 2",
+            "h_code": "H373",
+            "class_asterisk": 1,
+            "h_code_asterisk": 2
+          },
+          {
+            "class": "Aquatic Chronic 3",
+            "h_code": "H412"
+          }
+        ],
+        "scl_limits": [],
+        "m_factors": {},
+        "ate": {},
+        "notes": []
+      }
+    ]
   },
   "55-63-0": {
     "index_no": "603-034-00-X",
@@ -34486,7 +35135,49 @@
     ],
     "scl_limits": [],
     "m_factors": {},
-    "ate": {}
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "603-034-01-7",
+        "names": [
+          "glycerol trinitrate; nitroglycerine; [>40 % phlegmatiser]"
+        ],
+        "classification": [
+          {
+            "class": "Expl. 1.1",
+            "h_code": "H201"
+          },
+          {
+            "class": "Acute Tox. 1",
+            "h_code": "H310"
+          },
+          {
+            "class": "Acute Tox. 2",
+            "h_code": "H330",
+            "class_asterisk": 1
+          },
+          {
+            "class": "Acute Tox. 2",
+            "h_code": "H300",
+            "class_asterisk": 1
+          },
+          {
+            "class": "STOT RE 2",
+            "h_code": "H373",
+            "class_asterisk": 1,
+            "h_code_asterisk": 2
+          },
+          {
+            "class": "Aquatic Chronic 2",
+            "h_code": "H411"
+          }
+        ],
+        "scl_limits": [],
+        "m_factors": {},
+        "ate": {},
+        "notes": []
+      }
+    ]
   },
   "78-11-5": {
     "index_no": "603-035-00-5",
@@ -34506,7 +35197,27 @@
     ],
     "scl_limits": [],
     "m_factors": {},
-    "ate": {}
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "603-035-01-2",
+        "names": [
+          "pentaerythritol tetranitrate; pentaerythrite tetranitrate; P.E.T.N.; [>20 % phlegmatiser]"
+        ],
+        "classification": [
+          {
+            "class": "Expl. 1.1",
+            "h_code": "H201"
+          }
+        ],
+        "scl_limits": [],
+        "m_factors": {},
+        "ate": {},
+        "notes": [
+          "T"
+        ]
+      }
+    ]
   },
   "15825-70-4": {
     "index_no": "603-036-00-0",
@@ -34526,7 +35237,25 @@
     ],
     "scl_limits": [],
     "m_factors": {},
-    "ate": {}
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "603-036-01-8",
+        "names": [
+          "mannitol hexanitrate; nitromannite; [>40 % phlegmatiser]"
+        ],
+        "classification": [
+          {
+            "class": "Expl. 1.1",
+            "h_code": "H201"
+          }
+        ],
+        "scl_limits": [],
+        "m_factors": {},
+        "ate": {},
+        "notes": []
+      }
+    ]
   },
   "106-92-3": {
     "index_no": "603-038-00-1",
@@ -39360,7 +40089,38 @@
     ],
     "scl_limits": [],
     "m_factors": {},
-    "ate": {}
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "603-221-01-3",
+        "names": [
+          "1-(2-amino-5-chlorophenyl)-2,2,2-trifluoro-1,1-ethanediol, hydrochloride; [containing ≥ 0.1 % 4-chloroaniline (EC No 203-401-0)]"
+        ],
+        "classification": [
+          {
+            "class": "Carc. 1B",
+            "h_code": "H350"
+          },
+          {
+            "class": "Acute Tox. 4",
+            "h_code": "H302",
+            "class_asterisk": 1
+          },
+          {
+            "class": "Skin Corr. 1B",
+            "h_code": "H314"
+          },
+          {
+            "class": "Aquatic Chronic 2",
+            "h_code": "H411"
+          }
+        ],
+        "scl_limits": [],
+        "m_factors": {},
+        "ate": {},
+        "notes": []
+      }
+    ]
   },
   "118058-74-5": {
     "index_no": "603-222-00-1",
@@ -39706,30 +40466,6 @@
     "m_factors": {},
     "ate": {}
   },
-  "36483-57-5; 1522-92-5": {
-    "index_no": "603-243-00-6",
-    "names": [
-      "2,2-dimethylpropan-1-ol, tribromo derivative; 3-bromo-2,2-bis(bromomethyl)propan-1-ol"
-    ],
-    "ec_no": "253-057-0",
-    "cas": "36483-57-5; 1522-92-5",
-    "synonyms": [],
-    "atp": "ATP18",
-    "notes": [],
-    "classification": [
-      {
-        "class": "Carc. 1B",
-        "h_code": "H350"
-      },
-      {
-        "class": "Muta. 2",
-        "h_code": "H341"
-      }
-    ],
-    "scl_limits": [],
-    "m_factors": {},
-    "ate": {}
-  },
   "3179-89-3": {
     "index_no": "603-245-00-7",
     "names": [
@@ -39771,7 +40507,9 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
+    "m_factors": {
+      "default": 1
+    },
     "ate": {}
   },
   "108-95-2": {
@@ -40277,7 +41015,9 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
+    "m_factors": {
+      "default": 1
+    },
     "ate": {
       "oral": {
         "value": 500.0,
@@ -40912,7 +41652,9 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
+    "m_factors": {
+      "default": 10
+    },
     "ate": {}
   },
   "90-05-1": {
@@ -42473,8 +43215,7 @@
       "27942-27-4",
       "26264-02-8",
       "27177-05-5",
-      "14409-72-4",
-      "and others"
+      "14409-72-4"
     ],
     "atp": "ATP21",
     "notes": [],
@@ -42489,7 +43230,9 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
+    "m_factors": {
+      "default": 10
+    },
     "ate": {}
   },
   "9016-45-9": {
@@ -42526,9 +43269,6 @@
     "_alias": "127087-87-0"
   },
   "14409-72-4": {
-    "_alias": "127087-87-0"
-  },
-  "and others": {
     "_alias": "127087-87-0"
   },
   "50-00-0": {
@@ -44916,7 +45656,9 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
+    "m_factors": {
+      "default": 10
+    },
     "ate": {
       "oral": {
         "value": 320.0,
@@ -49428,7 +50170,9 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
+    "m_factors": {
+      "default": 1
+    },
     "ate": {
       "inhalation": {
         "value": 4.0,
@@ -50954,7 +51698,9 @@
         "unit": "%"
       }
     ],
-    "m_factors": {},
+    "m_factors": {
+      "default": 100
+    },
     "ate": {
       "inhalation": {
         "value": 0.2,
@@ -51668,7 +52414,9 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
+    "m_factors": {
+      "default": 1
+    },
     "ate": {}
   },
   "2223-82-7": {
@@ -53994,7 +54742,9 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
+    "m_factors": {
+      "default": 1
+    },
     "ate": {}
   },
   "1034-01-1": {
@@ -54510,7 +55260,9 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
+    "m_factors": {
+      "default": 1000
+    },
     "ate": {
       "oral": {
         "value": 580.0,
@@ -55501,7 +56253,9 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
+    "m_factors": {
+      "default": 1
+    },
     "ate": {}
   },
   "1820573-27-0": {
@@ -55542,7 +56296,9 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
+    "m_factors": {
+      "default": 1
+    },
     "ate": {}
   },
   "69377-81-7": {
@@ -58903,7 +59659,46 @@
         "value": 500.0,
         "unit": "mg/kg"
       }
-    }
+    },
+    "forms": [
+      {
+        "index_no": "607-433-00-X",
+        "names": [
+          "cypermethrin cis/trans +/- 80/20; (RS)-α-cyano-3-phenoxybenzyl (1RS; 3RS; 1RS, 3SR)-3-(2,2-dichlorovinyl)-2,2-dimethylcyclopropanecarboxylate"
+        ],
+        "classification": [
+          {
+            "class": "Acute Tox. 4",
+            "h_code": "H302",
+            "class_asterisk": 1
+          },
+          {
+            "class": "STOT SE 3",
+            "h_code": "H335"
+          },
+          {
+            "class": "Skin Irrit. 2",
+            "h_code": "H315"
+          },
+          {
+            "class": "Skin Sens. 1",
+            "h_code": "H317"
+          },
+          {
+            "class": "Aquatic Acute 1",
+            "h_code": "H400"
+          },
+          {
+            "class": "Aquatic Chronic 1",
+            "h_code": "H410"
+          }
+        ],
+        "scl_limits": [],
+        "m_factors": {},
+        "ate": {},
+        "notes": []
+      }
+    ]
   },
   "67375-30-8": {
     "index_no": "607-422-00-X",
@@ -59226,7 +60021,9 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
+    "m_factors": {
+      "default": 10
+    },
     "ate": {}
   },
   "16484-77-8": {
@@ -66089,7 +66886,9 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
+    "m_factors": {
+      "default": 1000
+    },
     "ate": {
       "oral": {
         "value": 1500.0,
@@ -67297,16 +68096,14 @@
     "m_factors": {},
     "ate": {}
   },
-  "135410-20-7;": {
+  "160430-64-8": {
     "index_no": "608-032-00-2",
     "names": [
       "acetamiprid (ISO); (1E)-N-[(6-chloropyridin-3-yl) methyl]-N’-cyano-N-methylethanimidamide; (E)-N1-[(6-chloro-3-pyridyl)methyl]-N2-cyano-N1-methylacetamidine"
     ],
     "ec_no": "-",
-    "cas": "135410-20-7;",
-    "synonyms": [
-      "160430-64-8"
-    ],
+    "cas": "160430-64-8",
+    "synonyms": [],
     "atp": "ATP01/ATP18",
     "notes": [],
     "classification": [
@@ -67328,11 +68125,10 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
+    "m_factors": {
+      "default": 10
+    },
     "ate": {}
-  },
-  "160430-64-8": {
-    "_alias": "135410-20-7;"
   },
   "75511-91-0": {
     "index_no": "608-033-00-8",
@@ -68800,7 +69596,55 @@
     ],
     "scl_limits": [],
     "m_factors": {},
-    "ate": {}
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "609-019-01-1",
+        "names": [
+          "lead 2,4,6-trinitro-m-phenylene dioxide; lead 2,4,6-trinitroresorcinoxide; lead styphnate (≥ 20 % phlegmatiser)"
+        ],
+        "classification": [
+          {
+            "class": "Expl. 1.1",
+            "h_code": "H201"
+          },
+          {
+            "class": "Repr. 1A",
+            "h_code": "H360Df"
+          },
+          {
+            "class": "Acute Tox. 4",
+            "h_code": "H332",
+            "class_asterisk": 1
+          },
+          {
+            "class": "Acute Tox. 4",
+            "h_code": "H302",
+            "class_asterisk": 1
+          },
+          {
+            "class": "STOT RE 2",
+            "h_code": "H373",
+            "class_asterisk": 1,
+            "h_code_asterisk": 2
+          },
+          {
+            "class": "Aquatic Acute 1",
+            "h_code": "H400"
+          },
+          {
+            "class": "Aquatic Chronic 1",
+            "h_code": "H410"
+          }
+        ],
+        "scl_limits": [],
+        "m_factors": {},
+        "ate": {},
+        "notes": [
+          "1"
+        ]
+      }
+    ]
   },
   "534-52-1": {
     "index_no": "609-020-00-X",
@@ -69494,7 +70338,9 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
+    "m_factors": {
+      "default": 10
+    },
     "ate": {}
   },
   "82-68-8": {
@@ -73565,7 +74411,52 @@
       }
     ],
     "m_factors": {},
-    "ate": {}
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "612-001-01-6",
+        "names": [
+          "mono-methylamine ... %",
+          "di-methylamine ... %",
+          "tri-methylamine ... %"
+        ],
+        "classification": [
+          {
+            "class": "Flam. Liq. 1",
+            "h_code": "H224"
+          },
+          {
+            "class": "Acute Tox. 4",
+            "h_code": "H332",
+            "class_asterisk": 1
+          },
+          {
+            "class": "Acute Tox. 4",
+            "h_code": "H302",
+            "class_asterisk": 1
+          },
+          {
+            "class": "Skin Corr. 1B",
+            "h_code": "H314"
+          }
+        ],
+        "scl_limits": [
+          {
+            "h_code": "H335",
+            "class": "STOT SE 3",
+            "op": ">=",
+            "min": 5.0,
+            "max": null,
+            "unit": "%"
+          }
+        ],
+        "m_factors": {},
+        "ate": {},
+        "notes": [
+          "B"
+        ]
+      }
+    ]
   },
   "124-40-3": {
     "_alias": "74-89-5"
@@ -74768,7 +75659,42 @@
     ],
     "scl_limits": [],
     "m_factors": {},
-    "ate": {}
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "612-034-01-6",
+        "names": [
+          "2-amino-4,6-dinitrophenol; picramic acid; [≥ 20 % water]"
+        ],
+        "classification": [
+          {
+            "class": "Acute Tox. 4",
+            "h_code": "H332",
+            "class_asterisk": 1
+          },
+          {
+            "class": "Acute Tox. 4",
+            "h_code": "H312",
+            "class_asterisk": 1
+          },
+          {
+            "class": "Acute Tox. 4",
+            "h_code": "H302",
+            "class_asterisk": 1
+          },
+          {
+            "class": "Aquatic Chronic 3",
+            "h_code": "H412"
+          }
+        ],
+        "scl_limits": [],
+        "m_factors": {},
+        "ate": {},
+        "notes": [
+          "G"
+        ]
+      }
+    ]
   },
   "90-04-0": {
     "index_no": "612-035-00-4",
@@ -75607,7 +76533,37 @@
     ],
     "scl_limits": [],
     "m_factors": {},
-    "ate": {}
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "612-057-01-1",
+        "names": [
+          "piperazine; [liquid]"
+        ],
+        "classification": [
+          {
+            "class": "Repr. 2",
+            "h_code": "H361fd"
+          },
+          {
+            "class": "Skin Corr. 1B",
+            "h_code": "H314"
+          },
+          {
+            "class": "Resp. Sens. 1",
+            "h_code": "H334"
+          },
+          {
+            "class": "Skin Sens. 1",
+            "h_code": "H317"
+          }
+        ],
+        "scl_limits": [],
+        "m_factors": {},
+        "ate": {},
+        "notes": []
+      }
+    ]
   },
   "111-40-0": {
     "index_no": "612-058-00-X",
@@ -77637,7 +78593,67 @@
     ],
     "scl_limits": [],
     "m_factors": {},
-    "ate": {}
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "612-122-01-4",
+        "names": [
+          "hydroxylamine ...% [≤ 55% in aqueous solution]"
+        ],
+        "classification": [
+          {
+            "class": "Met. Corr. 1",
+            "h_code": "H290"
+          },
+          {
+            "class": "Carc. 2",
+            "h_code": "H351"
+          },
+          {
+            "class": "Acute Tox. 4",
+            "h_code": "H312",
+            "class_asterisk": 1
+          },
+          {
+            "class": "Acute Tox. 4",
+            "h_code": "H302",
+            "class_asterisk": 1
+          },
+          {
+            "class": "STOT SE 3",
+            "h_code": "H335"
+          },
+          {
+            "class": "STOT RE 2",
+            "h_code": "H373",
+            "class_asterisk": 1,
+            "h_code_asterisk": 2
+          },
+          {
+            "class": "Skin Irrit. 2",
+            "h_code": "H315"
+          },
+          {
+            "class": "Eye Dam. 1",
+            "h_code": "H318"
+          },
+          {
+            "class": "Skin Sens. 1",
+            "h_code": "H317"
+          },
+          {
+            "class": "Aquatic Acute 1",
+            "h_code": "H400"
+          }
+        ],
+        "scl_limits": [],
+        "m_factors": {},
+        "ate": {},
+        "notes": [
+          "B"
+        ]
+      }
+    ]
   },
   "5470-11-1": {
     "index_no": "612-123-00-2",
@@ -80245,7 +81261,42 @@
     ],
     "scl_limits": [],
     "m_factors": {},
-    "ate": {}
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "612-205-00-8",
+        "names": [
+          "C.I. Basic Violet 3 with ≥ 0.1 % of Michler's ketone (EC no. 202-027-5)"
+        ],
+        "classification": [
+          {
+            "class": "Carc. 1B",
+            "h_code": "H350"
+          },
+          {
+            "class": "Acute Tox. 4",
+            "h_code": "H302",
+            "class_asterisk": 1
+          },
+          {
+            "class": "Eye Dam. 1",
+            "h_code": "H318"
+          },
+          {
+            "class": "Aquatic Acute 1",
+            "h_code": "H400"
+          },
+          {
+            "class": "Aquatic Chronic 1",
+            "h_code": "H410"
+          }
+        ],
+        "scl_limits": [],
+        "m_factors": {},
+        "ate": {},
+        "notes": []
+      }
+    ]
   },
   "131807-57-3": {
     "index_no": "612-206-00-3",
@@ -81512,7 +82563,30 @@
     ],
     "scl_limits": [],
     "m_factors": {},
-    "ate": {}
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "612-253-01-7",
+        "names": [
+          "7-methoxy-6-(3-morpholin-4-yl-propoxy)-3H-quinazolin-4-one; [containing ≥ 0.5 % formamide (EC No 200-842-0) ]"
+        ],
+        "classification": [
+          {
+            "class": "Repr. 1B",
+            "h_code": "H360D",
+            "h_code_asterisk": 3
+          },
+          {
+            "class": "Aquatic Chronic 3",
+            "h_code": "H412"
+          }
+        ],
+        "scl_limits": [],
+        "m_factors": {},
+        "ate": {},
+        "notes": []
+      }
+    ]
   },
   "220444-73-5": {
     "index_no": "612-254-00-5",
@@ -82391,7 +83465,9 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
+    "m_factors": {
+      "default": 10
+    },
     "ate": {}
   },
   "99-97-8": {
@@ -82541,7 +83617,9 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
+    "m_factors": {
+      "default": 10000
+    },
     "ate": {
       "inhalation": {
         "value": 1.2,
@@ -83972,7 +85050,76 @@
     ],
     "scl_limits": [],
     "m_factors": {},
-    "ate": {}
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "613-043-01-8",
+        "names": [
+          "imazalil sulphate (ISO), aqueous solution; 1- [2-(allyloxy)ethyl-2-(2,4-dichlorophenyl)]-1H-imidazolium hydrogen sulphate",
+          "(±)-1- [2-(allyloxy)ethyl-2-(2,4-dichlorophenyl)]-1H-imidazolium hydrogen sulphate"
+        ],
+        "classification": [
+          {
+            "class": "Acute Tox. 4",
+            "h_code": "H302",
+            "class_asterisk": 1
+          },
+          {
+            "class": "Skin Corr. 1B",
+            "h_code": "H314"
+          },
+          {
+            "class": "Skin Sens. 1",
+            "h_code": "H317"
+          },
+          {
+            "class": "Aquatic Acute 1",
+            "h_code": "H400"
+          },
+          {
+            "class": "Aquatic Chronic 1",
+            "h_code": "H410"
+          }
+        ],
+        "scl_limits": [
+          {
+            "h_code": "H314",
+            "class": "Skin Corr. 1B",
+            "op": ">=",
+            "min": 50.0,
+            "max": null,
+            "unit": "%"
+          },
+          {
+            "h_code": "H315",
+            "class": "Skin Irrit. 2",
+            "op": "range",
+            "min": 30.0,
+            "max": 50.0,
+            "unit": "%"
+          },
+          {
+            "h_code": "H318",
+            "class": "Eye Dam. 1",
+            "op": "range",
+            "min": 15.0,
+            "max": 50.0,
+            "unit": "%"
+          },
+          {
+            "h_code": "H319",
+            "class": "Eye Irrit. 2",
+            "op": "range",
+            "min": 5.0,
+            "max": 15.0,
+            "unit": "%"
+          }
+        ],
+        "m_factors": {},
+        "ate": {},
+        "notes": []
+      }
+    ]
   },
   "83918-57-4": {
     "_alias": "58594-72-2"
@@ -85268,7 +86415,9 @@
         "unit": "%"
       }
     ],
-    "m_factors": {},
+    "m_factors": {
+      "default": 1
+    },
     "ate": {
       "inhalation": {
         "value": 0.21,
@@ -86123,7 +87272,43 @@
     "m_factors": {
       "default": 10
     },
-    "ate": {}
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "613-116-01-4",
+        "names": [
+          "tolylfluanid (ISO); dichloro-N-[(dimethylamino)sulphonyl]fluoro-N-(p-tolyl)methanesulphenamide; [containing < 0.1% (w/w) of particles with an aerodynamic diameter of below 50 μm]"
+        ],
+        "classification": [
+          {
+            "class": "STOT SE 3",
+            "h_code": "H335"
+          },
+          {
+            "class": "Skin Irrit. 2",
+            "h_code": "H315"
+          },
+          {
+            "class": "Eye Irrit. 2",
+            "h_code": "H319"
+          },
+          {
+            "class": "Skin Sens. 1",
+            "h_code": "H317"
+          },
+          {
+            "class": "Aquatic Acute 1",
+            "h_code": "H400"
+          }
+        ],
+        "scl_limits": [],
+        "m_factors": {
+          "default": 10
+        },
+        "ate": {},
+        "notes": []
+      }
+    ]
   },
   "76714-88-0": {
     "index_no": "613-117-00-2",
@@ -90159,7 +91344,9 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
+    "m_factors": {
+      "default": 100
+    },
     "ate": {
       "inhalation": {
         "value": 0.58,
@@ -90587,7 +91774,30 @@
     ],
     "scl_limits": [],
     "m_factors": {},
-    "ate": {}
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "613-286-01-X",
+        "names": [
+          "potassium 1-methyl-3-morpholinocarbonyl-4-[3-(1-methyl-3-morpholinocarbonyl-5-oxo-2-pyrazolin-4-ylidene)-1-propenyl]pyrazole-5-olate; [containing ≥ 0.5 % N,N-dimethylformamide (EC No 200-679-5)]"
+        ],
+        "classification": [
+          {
+            "class": "Repr. 1B",
+            "h_code": "H360D",
+            "h_code_asterisk": 3
+          },
+          {
+            "class": "Skin Sens. 1",
+            "h_code": "H317"
+          }
+        ],
+        "scl_limits": [],
+        "m_factors": {},
+        "ate": {},
+        "notes": []
+      }
+    ]
   },
   "160194-26-3": {
     "index_no": "613-287-00-8",
@@ -90977,7 +92187,9 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
+    "m_factors": {
+      "default": 100
+    },
     "ate": {
       "oral": {
         "value": 390.0,
@@ -92381,7 +93593,9 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
+    "m_factors": {
+      "default": 10
+    },
     "ate": {
       "oral": {
         "value": 1450.0,
@@ -92422,7 +93636,9 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
+    "m_factors": {
+      "default": 1
+    },
     "ate": {
       "oral": {
         "value": 280.0,
@@ -94295,7 +95511,25 @@
     ],
     "scl_limits": [],
     "m_factors": {},
-    "ate": {}
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "616-204-00-3",
+        "names": [
+          "N,N''-(methylenedi-4,1-phenylene)bis[N'-octylurea]"
+        ],
+        "classification": [
+          {
+            "class": "Aquatic Chronic 4",
+            "h_code": "H413"
+          }
+        ],
+        "scl_limits": [],
+        "m_factors": {},
+        "ate": {},
+        "notes": []
+      }
+    ]
   },
   "104-12-1": {
     "index_no": "615-044-00-1",
@@ -94467,7 +95701,50 @@
     ],
     "scl_limits": [],
     "m_factors": {},
-    "ate": {}
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "615-050-00-4",
+        "names": [
+          "1,5-naphthylene diisocyanate",
+          "[containing ≥ 0.1 % (w/w) of particles with an aerodynamic diameter of below 50 µm]"
+        ],
+        "classification": [
+          {
+            "class": "Acute Tox. 2",
+            "h_code": "H330"
+          },
+          {
+            "class": "STOT SE 3",
+            "h_code": "H335"
+          },
+          {
+            "class": "Skin Irrit. 2",
+            "h_code": "H315"
+          },
+          {
+            "class": "Eye Irrit. 2",
+            "h_code": "H319"
+          },
+          {
+            "class": "Resp. Sens. 1",
+            "h_code": "H334"
+          },
+          {
+            "class": "Skin Sens. 1A",
+            "h_code": "H317"
+          },
+          {
+            "class": "Aquatic Chronic 3",
+            "h_code": "H412"
+          }
+        ],
+        "scl_limits": [],
+        "m_factors": {},
+        "ate": {},
+        "notes": []
+      }
+    ]
   },
   "91-97-4": {
     "index_no": "615-051-00-X",
@@ -95530,7 +96807,9 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
+    "m_factors": {
+      "default": 1
+    },
     "ate": {
       "oral": {
         "value": 360.0,
@@ -96968,7 +98247,9 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
+    "m_factors": {
+      "default": 1
+    },
     "ate": {
       "oral": {
         "value": 1000.0,
@@ -98298,7 +99579,9 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
+    "m_factors": {
+      "default": 100
+    },
     "ate": {}
   },
   "113614-08-7": {
@@ -99994,7 +101277,9 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
+    "m_factors": {
+      "default": 10
+    },
     "ate": {}
   },
   "173159-57-4": {
@@ -100022,7 +101307,9 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
+    "m_factors": {
+      "default": 100
+    },
     "ate": {}
   },
   "137641-05-5": {
@@ -100050,7 +101337,9 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
+    "m_factors": {
+      "default": 1000
+    },
     "ate": {}
   },
   "110-26-9": {
@@ -100354,7 +101643,9 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
+    "m_factors": {
+      "default": 10
+    },
     "ate": {}
   },
   "78-18-2": {
@@ -100406,7 +101697,53 @@
       }
     ],
     "m_factors": {},
-    "ate": {}
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "617-010-01-9",
+        "names": [
+          "1-hydroperoxycyclohexyl 1-hydroxycyclohexyl peroxide;",
+          "[≤ 91 % solution]",
+          "1,1'-dioxybiscyclohexan-1-ol;",
+          "[≤ 91 % solution]",
+          "cyclohexylidene hydroperoxide;",
+          "[≤ 91 % solution]",
+          "cyclohexanone, peroxide;",
+          "[≤ 91 % solution]"
+        ],
+        "classification": [
+          {
+            "class": "Org. Perox. C",
+            "h_code": "H242"
+          },
+          {
+            "class": "Acute Tox. 4",
+            "h_code": "H302",
+            "class_asterisk": 1
+          },
+          {
+            "class": "Skin Corr. 1B",
+            "h_code": "H314"
+          }
+        ],
+        "scl_limits": [
+          {
+            "h_code": "H335",
+            "class": "STOT SE 3",
+            "op": ">=",
+            "min": 5.0,
+            "max": null,
+            "unit": "%"
+          }
+        ],
+        "m_factors": {},
+        "ate": {},
+        "notes": [
+          "C",
+          "T"
+        ]
+      }
+    ]
   },
   "2407-94-5": {
     "_alias": "78-18-2"
@@ -120473,7 +121810,53 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
-    "ate": {}
+    "m_factors": {
+      "default": 10
+    },
+    "ate": {},
+    "forms": [
+      {
+        "index_no": "650-058-00-1",
+        "names": [
+          "Margosa, ext. [from the kernels of Azadirachta indica extracted with water and further processed with organic solvents]"
+        ],
+        "classification": [
+          {
+            "class": "Repr. 2",
+            "h_code": "H361d"
+          },
+          {
+            "class": "Skin Sens. 1",
+            "h_code": "H317"
+          },
+          {
+            "class": "Aquatic Chronic 1",
+            "h_code": "H410"
+          }
+        ],
+        "scl_limits": [],
+        "m_factors": {
+          "default": 10
+        },
+        "ate": {},
+        "notes": []
+      },
+      {
+        "index_no": "650-057-00-6",
+        "names": [
+          "Margosa, ext. [cold-pressed oil of Azadirachta indica seeds without shells extracted with super-critical carbon dioxide]"
+        ],
+        "classification": [
+          {
+            "class": "Aquatic Chronic 3",
+            "h_code": "H412"
+          }
+        ],
+        "scl_limits": [],
+        "m_factors": {},
+        "ate": {},
+        "notes": []
+      }
+    ]
   }
 }

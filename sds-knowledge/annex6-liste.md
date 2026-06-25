@@ -1,6 +1,6 @@
 # CLP Annex VI — Uyumlaştırılmış Sınıflandırma Listesi (ECHA ATP22)
 # Kaynak: data/substance_db.json (ECHA ATP22 tam)
-# Madde sayısı: 3806
+# Madde sayısı: 3805
 
 | Index No | Madde Adı (EN) | EC No | CAS No | Tehlike Sınıfı | H Kodu | Notlar | ATP |
 |---|---|---|---|---|---|---|---|
@@ -177,7 +177,7 @@
 | 011-006-00-8 | sodium cyanate | 213-030-6 | 917-61-3 | Acute Tox. 4 / Aquatic Chronic 3 | H302 / H412 | - | CLP00 |
 | 011-007-00-3 | propoxycarbazone-sodium |  | 181274-15-7 | Aquatic Acute 1 / Aquatic Chronic 1 | H400 / H410 | - | CLP00 |
 | 012-001-00-3 | magnesium powder (pyrophoric) | 231-104-6 | 7439-95-4 | Pyr. Sol. 1 / Water-react. 1 | H250 / H260 | T | CLP00 |
-| 013-002-00-1 | aluminium powder (stabilised) | 231-072-3 | 7429-90-5 | Flam. Sol. 1 / Water-react. 2 | H228 / H261 | T | CLP00/ATP01 |
+| 013-001-00-6 | aluminium powder (pyrophoric) | 231-072-3 | 7429-90-5 | Pyr. Sol. 1 / Water-react. 2 | H250 / H261 | T | CLP00 |
 | 013-003-00-7 | aluminium chloride, anhydrous | 231-208-1 | 7446-70-0 | Skin Corr. 1B | H314 | - | CLP00 |
 | 013-005-00-8 | diethyl(ethyldimethylsilanolato)aluminium | 401-160-8 | 55426-95-4 | Pyr. Liq. 1 / Water-react. 1 / Skin Corr. 1A | H250 / H260 / H314 | - | CLP00 |
 | 013-008-00-4 | di-n-octylaluminium iodide | 408-190-0 | 7585-14-0 | Pyr. Liq. 1 / Skin Corr. 1B / Aquatic Acute 1 / Aquatic Chronic 1 | H250 / H314 / H400 / H410 | - | CLP00 |
@@ -647,7 +647,7 @@
 | 046-001-00-X | tetraammine palladium (II) hydrogen carbonate | 425-270-0 | 134620-00-1 | Acute Tox. 4 / STOT RE 2 / Eye Dam. 1 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H373 / H318 / H317 / H400 / H410 | - | ATP01 |
 | 047-001-00-2 | silver nitrate | 231-853-9 | 7761-88-8 | Ox. Sol. 2 / Skin Corr. 1B / Aquatic Acute 1 / Aquatic Chronic 1 | H272 / H314 / H400 / H410 | - | CLP00/ATP01 |
 | 047-003-00-3 | silver zinc zeolite (Zeolite, LTA framework type, surface-modified with silver and zinc ions); [This entry covers LTA (Linde Type A) framework type zeolite which has been surface-modified with both silver and zinc ions at contents Ag+ 0,5 %-6 %, Zn2 + 5 %-16 %, and potentially with phosphorus, NH4+, Mg2+ and/or Ca2+ each at level < 3 %] |  | 130328-20-0 | Repr. 2 / Skin Irrit. 2 / Eye Dam. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H361d / H315 / H318 / H400 / H410 | - | ATP10 |
-| 047-004-00-9 | silver massive: [particle diameter ≥ 1 mm] | 231-131-3 | 7440-22-4 | Repr. 2 / STOT RE 2 | H361f / H373 (nervous system) | - | ATP22 |
+| 047-006-00-X | silver nano: [particle diameter > 1 nm ≤ 100 nm] | 231-131-3 | 7440-22-4 | Repr. 2 / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H361f / H373 (nervous system) / H400 / H410 | - | ATP22 |
 | 048-002-00-0 | cadmium (non-pyrophoric); cadmium oxide (non-pyrophoric) | 231-152-8 [1] / 215-146-2 [2] | 7440-43-9 | Carc. 1B / Muta. 2 / Repr. 2 / Acute Tox. 2 / STOT RE 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H350 / H341 / H361fd / H330 / H372 / H400 / H410 | - | CLP00 |
 | 048-003-00-6 | cadmium diformate; cadmiumformate | 224-729-0 | 4464-23-7 | Carc. 2 / Acute Tox. 3 / Acute Tox. 3 / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H351 / H331 / H301 / H373 / H400 / H410 | - | CLP00 |
 | 048-004-00-1 | cadmium cyanide | 208-829-1 | 542-83-6 | Carc. 2 / Acute Tox. 1 / Acute Tox. 2 / Acute Tox. 2 / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H351 / H310 / H330 / H300 / H373 / H400 / H410 | - | CLP00 |
@@ -1128,7 +1128,6 @@
 | 603-239-00-4 | paclobutrazol (ISO); (2RS,3RS)-1-(4-chloro­phenyl)-4,4-dimethyl- 2-(1H-1,2,4-triazol-1-yl)pentan-3-ol |  | 76738-62-0 | Repr. 2 / Acute Tox. 4 / Acute Tox. 4 / Eye Irrit. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H361d / H332 / H302 / H319 / H400 / H410 | - | ATP15 |
 | 603-240-00-X | 2,2-bis(bromomethyl) propane-1,3-diol | 221-967-7 | 3296-90-0 | Carc. 1B / Muta. 1B | H350 / H340 | - | ATP15 |
 | 603-241-00-5 | geraniol; (2E)-3,7-dimethylocta-2,6-dien-1-ol | 203-377-1 | 106-24-1 | Skin Sens. 1 | H317 | - | ATP15 |
-| 603-243-00-6 | 2,2-dimethylpropan-1-ol, tribromo derivative; 3-bromo-2,2-bis(bromomethyl)propan-1-ol | 253-057-0 | 36483-57-5; 1522-92-5 | Carc. 1B / Muta. 2 | H350 / H341 | - | ATP18 |
 | 603-245-00-7 | 2,2'-[[3-methyl-4-[(4-nitrophenyl)azo]phenyl]imino]bisethanol | 221-665-5 | 3179-89-3 | Skin Sens. 1 | H317 | - | ATP21 |
 | 603-246-00-2 | 3,3,4,4,5,5,6,6,7,7,8,8,8-tridecafluorooctan-1-ol | 211-477-1 | 647-42-7 | STOT RE 2 / Aquatic Chronic 1 | H373 (teeth, bones) / H410 | - | ATP21 |
 | 604-001-00-2 | phenol; carbolic acid; monohydroxybenzene; phenylalcohol | 203-632-7 | 108-95-2 | Muta. 2 / Acute Tox. 3 / Acute Tox. 3 / Acute Tox. 3 / STOT RE 2 / Skin Corr. 1B | H341 / H331 / H311 / H301 / H373 / H314 | - | CLP00 |
@@ -2033,7 +2032,7 @@
 | 608-029-00-6 | 1,2-dihydro-6-hydroxy-4-methyl-1-[3-(1-methylethoxy)propyl]-2-oxo-3-pyridinecarbonitrile | 411-990-2 | 68612-94-2 | Skin Sens. 1 | H317 | - | CLP00 |
 | 608-030-00-1 | N-acetyl-N-[5-cyano-3-(2-dibutylamino-4-phenylthyazol-5-yl-methylene)-4-methyl-2,6-dioxo-1,2,3,6-tetrahydropyridin-1-yl]benzamide | 412-340-0 | 147741-93-3 | Aquatic Acute 1 / Aquatic Chronic 1 | H400 / H410 | - | CLP00 |
 | 608-031-00-7 | 2-benzyl-2-methyl-3-butenitrile | 407-870-4 | 97384-48-0 | Acute Tox. 4 / Aquatic Chronic 3 | H302 / H412 | - | CLP00 |
-| 608-032-00-2 | acetamiprid (ISO); (1E)-N-[(6-chloropyridin-3-yl) methyl]-N’-cyano-N-methylethanimidamide; (E)-N1-[(6-chloro-3-pyridyl)methyl]-N2-cyano-N1-methylacetamidine | - | 135410-20-7; | Repr. 2 / Acute Tox. 3 / Aquatic Acute 1 / Aquatic Chronic 1 | H361d / H301 / H400 / H410 | - | ATP01/ATP18 |
+| 608-032-00-2 | acetamiprid (ISO); (1E)-N-[(6-chloropyridin-3-yl) methyl]-N’-cyano-N-methylethanimidamide; (E)-N1-[(6-chloro-3-pyridyl)methyl]-N2-cyano-N1-methylacetamidine | - | 160430-64-8 | Repr. 2 / Acute Tox. 3 / Aquatic Acute 1 / Aquatic Chronic 1 | H361d / H301 / H400 / H410 | - | ATP01/ATP18 |
 | 608-033-00-8 | N-butyl-3-(2-chloro-4-nitrophenylhydrazono)-1-cyano-2-methylprop-1-ene-1,3-dicarboximide | 407-970-8 | 75511-91-0 | Skin Sens. 1 / Aquatic Chronic 3 | H317 / H412 | - | CLP00 |
 | 608-034-00-3 | chlorfenapyr (ISO); 4-bromo-2-(4-chlorophenyl)-1-ethoxymethyl-5-trifluoromethylpyrrole-3-carbonitrile | - | 122453-73-0 | Acute Tox. 3 / Acute Tox. 4 / Aquatic Acute 1 / Aquatic Chronic 1 | H331 / H302 / H400 / H410 | - | CLP00/ATP01 |
 | 608-036-00-4 | 3-(2-{}{4-[2-(4-cyanophenyl)vinyl]phenyl}}vinyl)benzonitrile | 419-060-8 | 79026-02-1 | Aquatic Chronic 4 | H413 | - | CLP00 |

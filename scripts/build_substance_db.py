@@ -50,8 +50,8 @@ _RE_SCL_RANGE = re.compile(r"^(.+?);\s*(H\d+\w*)\s*:\s*([\d,\.]+)\s*%\s*[≤<=]+
 # Örn: "Skin Corr. 1A; H314: C < 5 %"  (sadece üst sınır)
 _RE_SCL_LT    = re.compile(r"^(.+?);\s*(H\d+\w*)\s*:\s*C\s*[<≤]+\s*([\d,\.]+)\s*%")
 
-# M-faktör: "M=100" veya "M(acute)=10" veya "M(chronic)=1"
-_RE_M         = re.compile(r"M(?:\((\w+)\))?=(\d+)", re.IGNORECASE)
+# M-faktör: "M=100" veya "M = 100" veya "M(acute)=10" veya "M(chronic) = 1"
+_RE_M         = re.compile(r"M(?:\((\w+)\))?\s*=\s*(\d+)", re.IGNORECASE)
 
 # ATE: "oral: ATE = 300 mg/kg bw"  |  "inhalation: ATE = 0,75 mg/L (dusts or mists)"
 _RE_ATE       = re.compile(
@@ -167,10 +167,22 @@ def _parse_classification(pairs: list[dict]) -> list[dict]:
 # Ana dönüştürücü
 # ---------------------------------------------------------------------------
 
+_VALID_CAS = re.compile(r'^\d{2,7}-\d{2}-\d$')
+
+
+def _is_valid_cas(s: str) -> bool:
+    return bool(_VALID_CAS.match(s.strip()))
+
+
 def build(rows: list[dict]) -> dict:
     """
     Ham satır listesini substance_db dict'ine dönüştürür.
     Anahtar: birincil CAS (ilk CAS). Çoklu CAS → synonyms.
+
+    Çakışma kuralı (aynı CAS, farklı fiziksel form/index_no):
+      Gümüş kütle/toz/nano gibi aynı CAS'a sahip farklı girdiler
+      tek dict anahtarına sığmaz. Her girdi index_no ile ayrıştırılır;
+      ikincil formlar 'forms' listesine eklenir.
     """
     db = {}
 
@@ -179,10 +191,15 @@ def build(rows: list[dict]) -> dict:
         if not cas_list:
             continue
 
+        # Geçersiz CAS formatlarını filtrele (Bulgu 4)
+        cas_list = [c for c in cas_list if _is_valid_cas(c)]
+        if not cas_list:
+            continue
+
         primary_cas = cas_list[0]
         synonyms    = cas_list[1:] if len(cas_list) > 1 else []
 
-        classification          = _parse_classification(row["class_h_pairs"])
+        classification             = _parse_classification(row["class_h_pairs"])
         scl_limits, m_factors, ate = _parse_scl(row["scl_raw"])
 
         notes_raw = row["notes_raw"].strip()
@@ -202,18 +219,44 @@ def build(rows: list[dict]) -> dict:
             "ate":            ate,
         }
 
-        # Çakışma: aynı CAS farklı Index No ile iki kez geliyor (nadiren)
+        # Çakışma: aynı CAS farklı Index No ile geliyor (Bulgu 1 — gümüş/kurşun/kadmiyum nano vs kütle)
+        # Her fiziksel form ayrı saklanır; birincil entry en tehlikeli form (M-faktörü yüksek olan).
         if primary_cas in db:
             existing = db[primary_cas]
-            # ATP numarası yüksek olanı tut
-            if row["atp"] > existing["atp"]:
+            if "_alias" in existing:
+                # alias kaydı varsa gerçek entry ile değiştir
                 db[primary_cas] = entry
+            else:
+                # 'forms' listesine ekle — tüm formlar korunur
+                if "forms" not in existing:
+                    existing["forms"] = []
+                existing["forms"].append({
+                    "index_no":       entry["index_no"],
+                    "names":          entry["names"],
+                    "classification": entry["classification"],
+                    "scl_limits":     entry["scl_limits"],
+                    "m_factors":      entry["m_factors"],
+                    "ate":            entry["ate"],
+                    "notes":          entry["notes"],
+                })
+                # Birincil entry olarak en yüksek M-faktörlü formu öne al
+                new_max = max(entry["m_factors"].values(), default=0)
+                ex_max  = max(existing["m_factors"].values(), default=0)
+                if new_max > ex_max:
+                    # Yeni entry birincil olsun, eskisi forms'a geri gitsin
+                    old_form = {k: existing[k] for k in
+                                ("index_no","names","classification","scl_limits","m_factors","ate","notes")}
+                    db[primary_cas] = entry
+                    db[primary_cas]["forms"] = existing.get("forms", [])
+                    # eski formu da forms'a ekle (zaten eklenmişse tekrar ekleme)
+                    if old_form not in db[primary_cas]["forms"]:
+                        db[primary_cas]["forms"].append(old_form)
         else:
             db[primary_cas] = entry
 
         # Synonym CAS'ları da birincil CAS'a işaret etsin
         for syn in synonyms:
-            if syn not in db:
+            if syn and _is_valid_cas(syn) and syn not in db:
                 db[syn] = {"_alias": primary_cas}
 
     return db

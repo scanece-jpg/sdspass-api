@@ -1,23 +1,17 @@
 """
-Substance Lookup Service — Per-Dosya Mimarisi
-=============================================
-"Sıfır Render Kilidi" — Hiçbir zaman büyük JSON yüklenmez.
-Her CAS lookup → tek küçük dosya açılır (~1-2 KB).
+Substance Lookup Service
+========================
+Arama Hiyerarşisi:
+  Sıra 1 — data/sea_ek6_tr.json      SEA Ek-6 (TR kanunu, mutlak öncelik)
+            + ECHA ATP22'den eksik tehlike sınıfları merge edilir
+  Sıra 2 — data/substance_db.json    ECHA ATP22 (EN, harmonize sınıflandırma)
+  Sıra 3 — data/echa_cl/             ECHA C&L API önbelleği
+  Sıra 4 — data/pubchem_cl/          PubChem önbelleği
+  Sıra 5 — substances_custom.json    Tedarikçi/kullanıcı girişi
 
-Arama Hiyerarşisi (merge mantığı):
-  Sıra 1 — data/cl/{xx}/{cas}.json        SEA Ek-6  (TR kanunu, mutlak, yasal zemin)
-  Sıra 2 — data/annex6/{xx}/{cas}.json    CLP Annex VI (AB, ek tehlikeler için)
-  Sıra 3 — substances_custom.json         Tedarikçi/kullanıcı girişi
-
-Merge kuralı:
-  - TR Ek-6 VE Annex VI varsa: TR Ek-6 temel alınır; Annex VI'daki tehlike SINIFLARI
-    TR Ek-6'da yoksa ek olarak eklenir (örn. sucul zararlılık).
-  - Sadece TR Ek-6 varsa: TR Ek-6 döndürülür.
-  - Sadece Annex VI varsa: Annex VI döndürülür.
-
-Eski büyük JSON dosyaları (substances_sea_ek6.json, substances_annex_vi.json)
-artık lookup'ta kullanılmıyor; yalnızca generate_cl_files.py tarafından
-kaynak olarak tüketildi.
+Yardımcı veriler:
+  data/h_code_index.json             H-kod istatistik indeksi
+  data/substance_names.json          CAS → {en, tr} çok dilli isimler
 """
 import json, os, threading, re
 from typing import Optional, Dict

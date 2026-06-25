@@ -35,12 +35,14 @@ def _split_lines(cell) -> list[str]:
 
 def _parse_cas_list(cell) -> list[str]:
     """
-    'CAS [1]\nCAS2 [2]\n...' formatını CAS listesine çevirir.
-    '[N]' etiketlerini temizler; '-' ve nan'ı atlar.
+    Hem '\n' hem ';' ile ayrılmış CAS formatlarını destekler.
+    '[N]' etiketlerini ve sondaki noktalı virgülleri temizler; '-' ve nan'ı atlar.
     """
+    if pd.isna(cell):
+        return []
     result = []
-    for line in _split_lines(cell):
-        cas = re.sub(r"\s*\[\d+\]", "", line).strip()
+    for segment in re.split(r'[\n;]', str(cell)):
+        cas = re.sub(r"\s*\[\d+\]", "", segment).strip().rstrip(';').strip()
         if cas and cas != "-":
             result.append(cas)
     return result

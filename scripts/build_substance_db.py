@@ -67,12 +67,13 @@ def _parse_scl(raw: str) -> tuple[list[dict], dict, dict]:
     Ham SCL hücresini parse eder.
     Döner: (scl_limits, m_factors, ate)
       scl_limits : [{h_code, class, op, min, max, unit}]
-      m_factors  : {"acute": int, "chronic": int}  (veya {"default": int})
+      m_factors  : {"acute": int, "chronic": int}
       ate        : {"oral": float, "dermal": float, "inhalation": {...}}
     """
-    scl_limits = []
-    m_factors  = {}
-    ate        = {}
+    scl_limits  = []
+    m_factors   = {}
+    ate         = {}
+    bare_m_vals = []   # tiplendirilmemiş "M = N" değerleri (sıralı)
 
     for line in raw.split("\n"):
         line = line.strip()
@@ -82,8 +83,12 @@ def _parse_scl(raw: str) -> tuple[list[dict], dict, dict]:
         # M-faktör
         m_match = _RE_M.search(line)
         if m_match:
-            mtype = (m_match.group(1) or "default").lower()
-            m_factors[mtype] = int(m_match.group(2))
+            mtype = m_match.group(1)
+            mval  = int(m_match.group(2))
+            if mtype:
+                m_factors[mtype.lower()] = mval   # M(acute)/M(chronic) açık
+            else:
+                bare_m_vals.append(mval)           # tipisiz — sıra önemli
             continue
 
         # ATE
@@ -132,6 +137,11 @@ def _parse_scl(raw: str) -> tuple[list[dict], dict, dict]:
                 "unit": "%",
             })
             continue
+
+    # Tipisiz M değerlerini ata: tek değer → acute=chronic; iki değer → 1.akut 2.kronik
+    if bare_m_vals and 'acute' not in m_factors and 'chronic' not in m_factors:
+        m_factors['acute']   = bare_m_vals[0]
+        m_factors['chronic'] = bare_m_vals[1] if len(bare_m_vals) > 1 else bare_m_vals[0]
 
     return scl_limits, m_factors, ate
 
@@ -205,6 +215,8 @@ def build(rows: list[dict]) -> dict:
         notes_raw = row["notes_raw"].strip()
         notes = [n.strip() for n in re.split(r"[\s,]+", notes_raw) if n.strip()] if notes_raw else []
 
+        euh_codes = [s for s in row.get("suppl_h", []) if re.match(r"EUH\d+", s.strip())]
+
         entry = {
             "index_no":       row["index_no"],
             "names":          row["names"],
@@ -213,44 +225,47 @@ def build(rows: list[dict]) -> dict:
             "synonyms":       synonyms,
             "atp":            row["atp"],
             "notes":          notes,
+            "euh_codes":      euh_codes,
             "classification": classification,
             "scl_limits":     scl_limits,
             "m_factors":      m_factors,
             "ate":            ate,
         }
 
-        # Çakışma: aynı CAS farklı Index No ile geliyor (Bulgu 1 — gümüş/kurşun/kadmiyum nano vs kütle)
-        # Her fiziksel form ayrı saklanır; birincil entry en tehlikeli form (M-faktörü yüksek olan).
+        # Çakışma: aynı CAS farklı Index No ile geliyor (gümüş/kurşun/kadmiyum nano vs kütle)
+        # Birincil entry en yüksek M-faktörlü form; diğerleri 'forms' listesinde.
         if primary_cas in db:
             existing = db[primary_cas]
             if "_alias" in existing:
-                # alias kaydı varsa gerçek entry ile değiştir
                 db[primary_cas] = entry
             else:
-                # 'forms' listesine ekle — tüm formlar korunur
-                if "forms" not in existing:
-                    existing["forms"] = []
-                existing["forms"].append({
+                new_max = max(entry["m_factors"].values(), default=0)
+                ex_max  = max(existing["m_factors"].values(), default=0)
+                new_form = {
                     "index_no":       entry["index_no"],
                     "names":          entry["names"],
+                    "ec_no":          entry["ec_no"],
+                    "atp":            entry["atp"],
                     "classification": entry["classification"],
                     "scl_limits":     entry["scl_limits"],
                     "m_factors":      entry["m_factors"],
                     "ate":            entry["ate"],
                     "notes":          entry["notes"],
-                })
-                # Birincil entry olarak en yüksek M-faktörlü formu öne al
-                new_max = max(entry["m_factors"].values(), default=0)
-                ex_max  = max(existing["m_factors"].values(), default=0)
+                }
                 if new_max > ex_max:
-                    # Yeni entry birincil olsun, eskisi forms'a geri gitsin
+                    # Yeni entry birincil — eski entry forms'a gider
                     old_form = {k: existing[k] for k in
-                                ("index_no","names","classification","scl_limits","m_factors","ate","notes")}
+                                ("index_no","names","ec_no","atp","classification","scl_limits","m_factors","ate","notes")}
                     db[primary_cas] = entry
                     db[primary_cas]["forms"] = existing.get("forms", [])
-                    # eski formu da forms'a ekle (zaten eklenmişse tekrar ekleme)
                     if old_form not in db[primary_cas]["forms"]:
                         db[primary_cas]["forms"].append(old_form)
+                else:
+                    # Mevcut birincil korunur — yeni entry forms'a eklenir
+                    if "forms" not in existing:
+                        existing["forms"] = []
+                    if new_form not in existing["forms"]:
+                        existing["forms"].append(new_form)
         else:
             db[primary_cas] = entry
 

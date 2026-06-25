@@ -1,6 +1,6 @@
 # CLP Annex VI — Uyumlaştırılmış Sınıflandırma Listesi (ECHA ATP22)
 # Kaynak: data/substance_db.json (ECHA ATP22 tam)
-# Madde sayısı: 3808
+# Madde sayısı: 3806
 
 | Index No | Madde Adı (EN) | EC No | CAS No | Tehlike Sınıfı | H Kodu | Notlar | ATP |
 |---|---|---|---|---|---|---|---|
@@ -8,14 +8,14 @@
 | 001-002-00-4 | aluminium lithium hydride | 240-877-9 | 16853-85-3 | Water-react. 1 / Skin Corr. 1A | H260 / H314 | - | CLP00/ATP01 |
 | 001-003-00-X | sodium hydride | 231-587-3 | 7646-69-7 | Water-react. 1 | H260 | - | CLP00 |
 | 001-004-00-5 | calcium hydride | 232-189-2 | 7789-78-8 | Water-react. 1 | H260 | - | CLP00 |
-| 003-001-00-4 | lithium | 231-102-5 | 7439-93-2 | Water-react. 1 / Skin Corr. 1B | H260 / H314 | - | CLP00 |
-| 003-002-00-X | n-hexyllithium | 404-950-0 | 21369-64-2 | Pyr. Sol. 1 / Water-react. 1 / Skin Corr. 1A | H250 / H260 / H314 | - | CLP00 |
-| 003-003-00-5 | (2-methylpropyl)lithium; isobutyllithium | 440-620-2 | 920-36-5 | Pyr. Liq. 1 / Water-react. 1 / STOT SE 3 / Skin Corr. 1A / Aquatic Acute 1 / Aquatic Chronic 1 | H250 / H260 / H336 / H314 / H400 / H410 | - | ATP01 |
+| 003-001-00-4 | lithium | 231-102-5 | 7439-93-2 | Water-react. 1 / Skin Corr. 1B | H260 / H314 | EUH014 | CLP00 |
+| 003-002-00-X | n-hexyllithium | 404-950-0 | 21369-64-2 | Pyr. Sol. 1 / Water-react. 1 / Skin Corr. 1A | H250 / H260 / H314 | EUH014 | CLP00 |
+| 003-003-00-5 | (2-methylpropyl)lithium; isobutyllithium | 440-620-2 | 920-36-5 | Pyr. Liq. 1 / Water-react. 1 / STOT SE 3 / Skin Corr. 1A / Aquatic Acute 1 / Aquatic Chronic 1 | H250 / H260 / H336 / H314 / H400 / H410 | EUH014 | ATP01 |
 | 004-001-00-7 | beryllium | 231-150-7 | 7440-41-7 | Carc. 1B / Acute Tox. 2 / Acute Tox. 3 / STOT SE 3 / STOT RE 1 / Skin Irrit. 2 / Eye Irrit. 2 / Skin Sens. 1 | H350i / H330 / H301 / H335 / H372 / H315 / H319 / H317 | - | CLP00 |
 | 004-003-00-8 | beryllium oxide | 215-133-1 | 1304-56-9 | Carc. 1B / Acute Tox. 2 / Acute Tox. 3 / STOT SE 3 / STOT RE 1 / Skin Irrit. 2 / Eye Irrit. 2 / Skin Sens. 1 | H350i / H330 / H301 / H335 / H372 / H315 / H319 / H317 | - | CLP00 |
-| 005-001-00-X | boron trifluoride | 231-569-5 | 7637-07-2 | Press. Gas / Acute Tox. 2 / Skin Corr. 1A | H330 / H314 | U | CLP00 |
-| 005-002-00-5 | boron trichloride | 233-658-4 | 10294-34-5 | Press. Gas / Acute Tox. 2 / Acute Tox. 2 / Skin Corr. 1B | H330 / H300 / H314 | U | CLP00 |
-| 005-003-00-0 | boron tribromide | 233-657-9 | 10294-33-4 | Acute Tox. 2 / Acute Tox. 2 / Skin Corr. 1A | H330 / H300 / H314 | - | CLP00 |
+| 005-001-00-X | boron trifluoride | 231-569-5 | 7637-07-2 | Press. Gas / Acute Tox. 2 / Skin Corr. 1A | H330 / H314 | U, EUH014 | CLP00 |
+| 005-002-00-5 | boron trichloride | 233-658-4 | 10294-34-5 | Press. Gas / Acute Tox. 2 / Acute Tox. 2 / Skin Corr. 1B | H330 / H300 / H314 | U, EUH014 | CLP00 |
+| 005-003-00-0 | boron tribromide | 233-657-9 | 10294-33-4 | Acute Tox. 2 / Acute Tox. 2 / Skin Corr. 1A | H330 / H300 / H314 | EUH014 | CLP00 |
 | 005-005-00-1 | trimethyl borate | 204-468-9 | 121-43-7 | Flam. Liq. 3 / Repr. 1B / Acute Tox. 4 | H226 / H360FD / H312 | 11 | CLP00/ATP22 |
 | 005-006-00-7 | dibutyltin hydrogen borate | 401-040-5 | 75113-37-0 | Muta. 2 / Repr. 1B / Acute Tox. 4 / Acute Tox. 4 / STOT RE 1 / Eye Dam. 1 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H341 / H360FD / H312 / H302 / H372 / H318 / H317 / H400 / H410 | - | CLP00/ATP01corr |
 | 005-007-00-2 | boric acid; boric acid | 233-139-2 [1] / 234-343-4 [2] | 10043-35-3 | Repr. 1B | H360FD | 11 | ATP01/ATP20 |
@@ -37,12 +37,13 @@
 | 006-004-00-9 | calcium carbide | 200-848-3 | 75-20-7 | Water-react. 1 | H260 | T | CLP00 |
 | 006-005-00-4 | thiram (ISO); tetramethylthiuram disulphide | 205-286-2 | 137-26-8 | Acute Tox. 4 / Acute Tox. 4 / STOT RE 2 / Skin Irrit. 2 / Eye Irrit. 2 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H332 / H302 / H373 / H315 / H319 / H317 / H400 / H410 | - | CLP00 |
 | 006-006-00-X | hydrogen cyanide; hydrocyanic acid | 200-821-6 | 74-90-8 | Flam. Liq. 1 / Acute Tox. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H224 / H330 / H400 / H410 | - | CLP00 |
+| 006-006-01-7 | hydrogen cyanide ...%; hydrocyanic acid ...% | 200-821-6 | 74-90-8 | Acute Tox. 1 / Acute Tox. 2 / Acute Tox. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H310 / H330 / H300 / H400 / H410 | B | CLP00 |
 | 006-008-00-0 | antu (ISO); 1-(1-naphthyl)-2-thiourea | 201-706-3 | 86-88-4 | Carc. 2 / Acute Tox. 2 | H351 / H300 | - | CLP00 |
 | 006-009-00-6 | 1-isopropyl-3-methylpyrazol-5-yl dimethylcarbamate; Isolan | 204-318-2 | 119-38-0 | Acute Tox. 1 / Acute Tox. 2 | H310 / H300 | - | CLP00 |
 | 006-010-00-1 | 5,5-dimethyl-3-oxocyclohex-1-enyl dimethylcarbamate 5,5-dimethyldihydroresorcinol dimethylcarbamate; Dimetan | 204-525-8 | 122-15-6 | Acute Tox. 3 | H301 | - | CLP00 |
 | 006-011-00-7 | carbaryl (ISO); 1-naphthyl methylcarbamate | 200-555-0 | 63-25-2 | Carc. 2 / Acute Tox. 4 / Acute Tox. 4 / Aquatic Acute 1 | H351 / H332 / H302 / H400 | - | CLP00/ATP01 |
 | 006-012-00-2 | ziram (ISO); zinc bis dimethyldithiocarbamate | 205-288-3 | 137-30-4 | Acute Tox. 2 / Acute Tox. 4 / STOT SE 3 / STOT RE 2 / Eye Dam. 1 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H330 / H302 / H335 / H373 / H318 / H317 / H400 / H410 | - | CLP00 |
-| 006-013-00-8 | metam-sodium (ISO); sodium methyldithiocarbamate | 205-293-0 | 137-42-8 | Acute Tox. 4 / Skin Corr. 1B / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H314 / H317 / H400 / H410 | - | CLP00 |
+| 006-013-00-8 | metam-sodium (ISO); sodium methyldithiocarbamate | 205-293-0 | 137-42-8 | Acute Tox. 4 / Skin Corr. 1B / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H314 / H317 / H400 / H410 | EUH031 | CLP00 |
 | 006-014-00-3 | nabam (ISO); disodium ethylenebis(N,N'-dithiocarbamate) | 205-547-0 | 142-59-6 | Acute Tox. 4 / STOT SE 3 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H335 / H317 / H400 / H410 | - | CLP00 |
 | 006-015-00-9 | diuron (ISO); 3-(3,4-dichlorophenyl)-1,1-dimethylurea | 206-354-4 | 330-54-1 | Carc. 1B / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H350 / H373 (blood system) / H400 / H410 | - | CLP00/ATP21 |
 | 006-016-00-4 | propoxur (ISO); 2-isopropyloxyphenyl N-methylcarbamate; 2-isopropoxyphenyl methylcarbamate | 204-043-8 | 114-26-1 | Acute Tox. 3 / Aquatic Acute 1 / Aquatic Chronic 1 | H301 / H400 / H410 | - | CLP00 |
@@ -129,7 +130,8 @@
 | 007-001-01-2 | ammonia ....% | 215-647-6 | 1336-21-6 | Skin Corr. 1B / Aquatic Acute 1 | H314 / H400 | B | CLP00 |
 | 007-002-00-0 | nitrogen dioxide; dinitrogen tetraoxide | 233-272-6 [1] / 234-126-4 [2] | 10102-44-0 | Ox. Gas 1 / Press. Gas / Acute Tox. 2 / Skin Corr. 1B | H270 / H330 / H314 | 5 | CLP00/ATP01 |
 | 007-003-00-6 | chlormequat chloride (ISO); 2-chloroethyltrimethylammonium chloride | 213-666-4 | 999-81-5 | Acute Tox. 4 / Acute Tox. 4 | H312 / H302 | - | CLP00 |
-| 007-004-00-1 | nitric acid ...% [C > 70 %] | 231-714-2 | 7697-37-2 | Ox. Liq. 2 / Acute Tox. 1 / Skin Corr. 1A | H272 / H330 / H314 | B | CLP00/ATP15 |
+| 007-004-00-1 | nitric acid ...% [C > 70 %] | 231-714-2 | 7697-37-2 | Ox. Liq. 2 / Acute Tox. 1 / Skin Corr. 1A | H272 / H330 / H314 | B, EUH071 | CLP00/ATP15 |
+| 007-030-00-3 | nitric acid …% [C ≤ 70 %] | 231-714-2 | 7697-37-2 | Ox. Liq. 3 / Acute Tox. 3 / Skin Corr. 1A | H272 / H331 / H314 | B | ATP15 |
 | 007-006-00-2 | ethyl nitrite | 203-722-6 | 109-95-5 | Flam. Gas 1 / Press. Gas / Acute Tox. 4 / Acute Tox. 4 / Acute Tox. 4 | H220 / H332 / H312 / H302 | U | CLP00 |
 | 007-007-00-8 | ethyl nitrate | 210-903-3 | 625-58-1 | Unst. Expl. | H200 | - | CLP00/ATP01corr |
 | 007-008-00-3 | hydrazine | 206-114-9 | 302-01-2 | Flam. Liq. 3 / Carc. 1B / Acute Tox. 3 / Acute Tox. 3 / Acute Tox. 3 / Skin Corr. 1B / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H226 / H350 / H331 / H311 / H301 / H314 / H317 / H400 / H410 | - | CLP00 |
@@ -155,7 +157,8 @@
 | 008-003-00-9 | hydrogen peroxide solution ...% | 231-765-0 | 7722-84-1 | Ox. Liq. 1 / Acute Tox. 4 / Acute Tox. 4 / Skin Corr. 1A | H271 / H332 / H302 / H314 | B | CLP00 |
 | 009-001-00-0 | fluorine | 231-954-8 | 7782-41-4 | Ox. Gas 1 / Press. Gas / Acute Tox. 2 / Skin Corr. 1A | H270 / H330 / H314 | - | CLP00/ATP01 |
 | 009-002-00-6 | hydrogen fluoride | 231-634-8 | 7664-39-3 | Acute Tox. 1 / Acute Tox. 2 / Acute Tox. 2 / Skin Corr. 1A | H310 / H330 / H300 / H314 | - | CLP00 |
-| 009-004-00-7 | sodium fluoride | 231-667-8 | 7681-49-4 | Acute Tox. 3 / Skin Irrit. 2 / Eye Irrit. 2 | H301 / H315 / H319 | - | CLP00 |
+| 009-003-00-1 | hydrofluoric acid ... % | 231-634-8 | 7664-39-3 | Acute Tox. 1 / Acute Tox. 2 / Acute Tox. 2 / Skin Corr. 1A | H310 / H330 / H300 / H314 | B | CLP00 |
+| 009-004-00-7 | sodium fluoride | 231-667-8 | 7681-49-4 | Acute Tox. 3 / Skin Irrit. 2 / Eye Irrit. 2 | H301 / H315 / H319 | EUH032 | CLP00 |
 | 009-005-00-2 | potassium fluoride | 232-151-5 | 7789-23-3 | Acute Tox. 3 / Acute Tox. 3 / Acute Tox. 3 | H331 / H311 / H301 | - | CLP00 |
 | 009-006-00-8 | ammonium fluoride | 235-185-9 | 12125-01-8 | Acute Tox. 3 / Acute Tox. 3 / Acute Tox. 3 | H331 / H311 / H301 | - | CLP00 |
 | 009-007-00-3 | sodium bifluoride; sodium hydrogen difluoride | 215-608-3 | 1333-83-1 | Acute Tox. 3 / Skin Corr. 1B | H301 / H314 | - | CLP00 |
@@ -167,25 +170,26 @@
 | 009-014-00-1 | lead hexafluorosilicate | 247-278-1 | 25808-74-6 | Repr. 1A / Acute Tox. 4 / Acute Tox. 4 / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H360Df / H332 / H302 / H373 / H400 / H410 | 1 | CLP00 |
 | 009-015-00-7 | sulphuryl difluoride | 220-281-5 | 2699-79-8 | Press. Gas / Acute Tox. 3 / STOT RE 2 / Aquatic Acute 1 | H331 / H373 / H400 | U | CLP00 |
 | 009-016-00-2 | trisodium hexafluoroaluminate; trisodium hexafluoroaluminate (cryolite) | 237-410-6 [1] / 239-148-8 [2] | 13775-53-6 | Acute Tox. 4 / STOT RE 1 / Aquatic Chronic 2 | H332 / H372 / H411 | - | CLP00/ATP03 |
-| 009-017-00-8 | potassium mu-fluoro-bis(triethylaluminium) | 400-040-2 | 12091-08-6 | Flam. Sol. 1 / Water-react. 1 / Acute Tox. 4 / Skin Corr. 1A | H228 / H260 / H332 / H314 | T | CLP00 |
+| 009-017-00-8 | potassium mu-fluoro-bis(triethylaluminium) | 400-040-2 | 12091-08-6 | Flam. Sol. 1 / Water-react. 1 / Acute Tox. 4 / Skin Corr. 1A | H228 / H260 / H332 / H314 | T, EUH014 | CLP00 |
 | 009-018-00-3 | magnesium hexafluorosilicate | 241-022-2 | 16949-65-8 | Acute Tox. 3 | H301 | - | CLP00 |
-| 011-001-00-0 | sodium | 231-132-9 | 7440-23-5 | Water-react. 1 / Skin Corr. 1B | H260 / H314 | - | CLP00 |
+| 011-001-00-0 | sodium | 231-132-9 | 7440-23-5 | Water-react. 1 / Skin Corr. 1B | H260 / H314 | EUH014 | CLP00 |
 | 011-002-00-6 | sodium hydroxide; caustic soda | 215-185-5 | 1310-73-2 | Skin Corr. 1A | H314 | - | CLP00 |
 | 011-003-00-1 | sodium peroxide | 215-209-4 | 1313-60-6 | Ox. Sol. 1 / Skin Corr. 1A | H271 / H314 | - | CLP00 |
-| 011-004-00-7 | sodium azide | 247-852-1 | 26628-22-8 | Acute Tox. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H300 / H400 / H410 | - | CLP00 |
+| 011-004-00-7 | sodium azide | 247-852-1 | 26628-22-8 | Acute Tox. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H300 / H400 / H410 | EUH032 | CLP00 |
 | 011-005-00-2 | sodium carbonate | 207-838-8 | 497-19-8 | Eye Irrit. 2 | H319 | - | CLP00 |
 | 011-006-00-8 | sodium cyanate | 213-030-6 | 917-61-3 | Acute Tox. 4 / Aquatic Chronic 3 | H302 / H412 | - | CLP00 |
 | 011-007-00-3 | propoxycarbazone-sodium |  | 181274-15-7 | Aquatic Acute 1 / Aquatic Chronic 1 | H400 / H410 | - | CLP00 |
 | 012-001-00-3 | magnesium powder (pyrophoric) | 231-104-6 | 7439-95-4 | Pyr. Sol. 1 / Water-react. 1 | H250 / H260 | T | CLP00 |
 | 013-001-00-6 | aluminium powder (pyrophoric) | 231-072-3 | 7429-90-5 | Pyr. Sol. 1 / Water-react. 2 | H250 / H261 | T | CLP00 |
+| 013-002-00-1 | aluminium powder (stabilised) | 231-072-3 | 7429-90-5 | Flam. Sol. 1 / Water-react. 2 | H228 / H261 | T | CLP00/ATP01 |
 | 013-003-00-7 | aluminium chloride, anhydrous | 231-208-1 | 7446-70-0 | Skin Corr. 1B | H314 | - | CLP00 |
-| 013-005-00-8 | diethyl(ethyldimethylsilanolato)aluminium | 401-160-8 | 55426-95-4 | Pyr. Liq. 1 / Water-react. 1 / Skin Corr. 1A | H250 / H260 / H314 | - | CLP00 |
-| 013-008-00-4 | di-n-octylaluminium iodide | 408-190-0 | 7585-14-0 | Pyr. Liq. 1 / Skin Corr. 1B / Aquatic Acute 1 / Aquatic Chronic 1 | H250 / H314 / H400 / H410 | - | CLP00 |
+| 013-005-00-8 | diethyl(ethyldimethylsilanolato)aluminium | 401-160-8 | 55426-95-4 | Pyr. Liq. 1 / Water-react. 1 / Skin Corr. 1A | H250 / H260 / H314 | EUH014 | CLP00 |
+| 013-008-00-4 | di-n-octylaluminium iodide | 408-190-0 | 7585-14-0 | Pyr. Liq. 1 / Skin Corr. 1B / Aquatic Acute 1 / Aquatic Chronic 1 | H250 / H314 / H400 / H410 | EUH014 | CLP00 |
 | 013-010-00-5 | hydroxy aluminium bis(2,4,8,10-tetra-tert-butyl-6-hydroxy-12H-dibenzo[d,g][1.3.2]dioxaphosphocin-6-oxide) | 430-650-4 | 151841-65-5 | Aquatic Chronic 2 | H411 | - | ATP01 |
-| 014-001-00-9 | trichlorosilane | 233-042-5 | 10025-78-2 | Flam. Liq. 1 / Water-react. 1 / Acute Tox. 3 / Acute Tox. 4 / Skin Corr. 1A / Eye Dam. 1 | H224 / H260 / H331 / H302 / H314 / H318 | - | CLP00/ATP18 |
-| 014-002-00-4 | silicon tetrachloride | 233-054-0 | 10026-04-7 | STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 | H335 / H315 / H319 | - | CLP00 |
+| 014-001-00-9 | trichlorosilane | 233-042-5 | 10025-78-2 | Flam. Liq. 1 / Water-react. 1 / Acute Tox. 3 / Acute Tox. 4 / Skin Corr. 1A / Eye Dam. 1 | H224 / H260 / H331 / H302 / H314 / H318 | EUH014 EUH029 EUH071 | CLP00/ATP18 |
+| 014-002-00-4 | silicon tetrachloride | 233-054-0 | 10026-04-7 | STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 | H335 / H315 / H319 | EUH014 | CLP00 |
 | 014-003-00-X | dimethyldichlorosilane | 200-901-0 | 75-78-5 | Flam. Liq. 2 / STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 | H225 / H335 / H315 / H319 | - | CLP00 |
-| 014-004-00-5 | trichloro(methyl)silane; methyltrichlorosilane | 200-902-6 | 75-79-6 | Flam. Liq. 2 / STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 | H225 / H335 / H315 / H319 | - | CLP00 |
+| 014-004-00-5 | trichloro(methyl)silane; methyltrichlorosilane | 200-902-6 | 75-79-6 | Flam. Liq. 2 / STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 | H225 / H335 / H315 / H319 | EUH014 | CLP00 |
 | 014-005-00-0 | tetraethyl silicate; ethyl silicate | 201-083-8 | 78-10-4 | Flam. Liq. 3 / Acute Tox. 4 / STOT SE 3 / Eye Irrit. 2 | H226 / H332 / H335 / H319 | - | CLP00 |
 | 014-007-00-1 | triethoxyisobutylsilane | 402-810-3 | 17980-47-1 | Skin Irrit. 2 | H315 | - | CLP00 |
 | 014-008-00-7 | (chloromethyl)bis(4-fluorophenyl)methylsilane | 401-200-4 | 85491-26-5 | Aquatic Chronic 2 | H411 | - | CLP00 |
@@ -219,16 +223,16 @@
 | 014-048-00-5 | silicon carbide fibres (with diameter < 3 μm, length > 5 μm and as­pect ratio ≥ 3:1) | 206-991-8 | 409-21-2 | Carc. 1B | H350i | - | ATP15 |
 | 014-049-00-0 | trimethoxyvinylsilane; trimethoxy(vinyl)silane | 220-449-8 | 2768-02-7 | Skin Sens. 1B | H317 | - | ATP15 |
 | 014-050-00-6 | tris(2-methoxyethoxy) vinylsilane; 6-(2-methoxyethoxy)- 6-vinyl-2,5,7,10-tetra­oxa-6-silaundecane | 213-934-0 | 1067-53-4 | Repr. 1B | H360FD | - | ATP15 |
-| 014-052-00-7 | silanamine,; 1,1,1-trimethyl-N-(trimethylsilyl)-, hydrolysis products with silica; pyrogenic, synthetic amorphous, nano, surface treated silicon dioxide | 272-697-1 | 68909-20-6 | STOT RE 2 | H373 (lungs, inhalation) | - | ATP18 |
+| 014-052-00-7 | silanamine,; 1,1,1-trimethyl-N-(trimethylsilyl)-, hydrolysis products with silica; pyrogenic, synthetic amorphous, nano, surface treated silicon dioxide | 272-697-1 | 68909-20-6 | STOT RE 2 | H373 (lungs, inhalation) | EUH066 | ATP18 |
 | 015-001-00-1 | white phosphorus | 231-768-7 | 12185-10-3 | Pyr. Sol. 1 / Acute Tox. 2 / Acute Tox. 2 / Skin Corr. 1A / Aquatic Acute 1 | H250 / H330 / H300 / H314 / H400 | - | CLP00 |
 | 015-002-00-7 | red phosphorus | 231-768-7 | 7723-14-0 | Flam. Sol. 1 / Aquatic Chronic 3 | H228 / H412 | - | CLP00 |
-| 015-003-00-2 | calcium phosphide; tricalcium diphosphide | 215-142-0 | 1305-99-3 | Water-react. 1 / Acute Tox. 1 / Acute Tox. 2 / Acute Tox. 3 / Eye Dam. 1 / Aquatic Acute 1 | H260 / H330 / H300 / H311 / H318 / H400 | - | CLP00/ATP07 |
-| 015-004-00-8 | aluminium phosphide | 244-088-0 | 20859-73-8 | Water-react. 1 / Acute Tox. 1 / Acute Tox. 2 / Acute Tox. 3 / Aquatic Acute 1 | H260 / H330 / H300 / H311 / H400 | - | CLP00/ATP05 |
-| 015-005-00-3 | magnesium phosphide; trimagnesium diphosphide | 235-023-7 | 12057-74-8 | Water-react. 1 / Acute Tox. 1 / Acute Tox. 2 / Acute Tox. 3 / Aquatic Acute 1 | H260 / H330 / H300 / H311 / H400 | - | CLP00/ATP05 |
-| 015-006-00-9 | trizinc diphosphide; zinc phosphide | 215-244-5 | 1314-84-7 | Water-react. 1 / Acute Tox. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H260 / H300 / H400 / H410 | T | CLP00/ATP01 |
-| 015-007-00-4 | phosphorus trichloride | 231-749-3 | 7719-12-2 | Acute Tox. 2 / Acute Tox. 2 / STOT RE 2 / Skin Corr. 1A | H330 / H300 / H373 / H314 | - | CLP00 |
-| 015-008-00-X | phosphorus pentachloride | 233-060-3 | 10026-13-8 | Acute Tox. 2 / Acute Tox. 4 / STOT RE 2 / Skin Corr. 1B | H330 / H302 / H373 / H314 | - | CLP00 |
-| 015-009-00-5 | phosphoryl trichloride | 233-046-7 | 10025-87-3 | Acute Tox. 2 / Acute Tox. 4 / STOT RE 1 / Skin Corr. 1A | H330 / H302 / H372 / H314 | - | CLP00 |
+| 015-003-00-2 | calcium phosphide; tricalcium diphosphide | 215-142-0 | 1305-99-3 | Water-react. 1 / Acute Tox. 1 / Acute Tox. 2 / Acute Tox. 3 / Eye Dam. 1 / Aquatic Acute 1 | H260 / H330 / H300 / H311 / H318 / H400 | EUH029 EUH032 | CLP00/ATP07 |
+| 015-004-00-8 | aluminium phosphide | 244-088-0 | 20859-73-8 | Water-react. 1 / Acute Tox. 1 / Acute Tox. 2 / Acute Tox. 3 / Aquatic Acute 1 | H260 / H330 / H300 / H311 / H400 | EUH029 EUH032 | CLP00/ATP05 |
+| 015-005-00-3 | magnesium phosphide; trimagnesium diphosphide | 235-023-7 | 12057-74-8 | Water-react. 1 / Acute Tox. 1 / Acute Tox. 2 / Acute Tox. 3 / Aquatic Acute 1 | H260 / H330 / H300 / H311 / H400 | EUH029 EUH032 | CLP00/ATP05 |
+| 015-006-00-9 | trizinc diphosphide; zinc phosphide | 215-244-5 | 1314-84-7 | Water-react. 1 / Acute Tox. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H260 / H300 / H400 / H410 | T, EUH029 EUH032 | CLP00/ATP01 |
+| 015-007-00-4 | phosphorus trichloride | 231-749-3 | 7719-12-2 | Acute Tox. 2 / Acute Tox. 2 / STOT RE 2 / Skin Corr. 1A | H330 / H300 / H373 / H314 | EUH014 EUH029 | CLP00 |
+| 015-008-00-X | phosphorus pentachloride | 233-060-3 | 10026-13-8 | Acute Tox. 2 / Acute Tox. 4 / STOT RE 2 / Skin Corr. 1B | H330 / H302 / H373 / H314 | EUH014 EUH029 | CLP00 |
+| 015-009-00-5 | phosphoryl trichloride | 233-046-7 | 10025-87-3 | Acute Tox. 2 / Acute Tox. 4 / STOT RE 1 / Skin Corr. 1A | H330 / H302 / H372 / H314 | EUH014 EUH029 | CLP00 |
 | 015-010-00-0 | phosphorus pentoxide | 215-236-1 | 1314-56-3 | Skin Corr. 1A | H314 | - | CLP00 |
 | 015-011-00-6 | phosphoric acid ... %, orthophosphoric acid ... % | 231-633-2 | 7664-38-2 | Skin Corr. 1B | H314 | B | CLP00 |
 | 015-012-00-1 | tetraphosphorus trisulphide; phosphorus sesquisulphid | 215-245-0 | 1314-85-8 | Flam. Sol. 2 / Water-react. 1 / Acute Tox. 4 / Aquatic Acute 1 | H228 / H260 / H302 / H400 | T | CLP00 |
@@ -320,8 +324,8 @@
 | 015-100-00-X | phoxim (ISO); α-(diethoxyphosphinothioylimino) phenylacetonitrile | 238-887-3 | 14816-18-3 | Repr. 2 / Acute Tox. 4 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H361f / H302 / H317 / H400 / H410 | - | CLP00/ATP01 |
 | 015-101-00-5 | phosmet (ISO);; S-[(1,3-dioxo-1,3-dihydro-2H-isoindol-2-yl)methyl] O,O-di-methyl phosphorodithioate;; O,O-dimethyl-S-phthalimido-methyl phosphorodithioate | 211-987-4 | 732-11-6 | Repr. 2 / Acute Tox. 3 / Acute Tox. 4 / STOT SE 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H361f / H301 / H332 / H370 (nervous system) / H400 / H410 | - | CLP00/ATP13 |
 | 015-102-00-0 | tris(2-chloroethyl)phosphate | 204-118-5 | 115-96-8 | Carc. 2 / Repr. 1B / Acute Tox. 4 / Aquatic Chronic 2 | H351 / H360F / H302 / H411 | - | CLP00/ATP01 |
-| 015-103-00-6 | phosphorus tribromide | 232-178-2 | 7789-60-8 | STOT SE 3 / Skin Corr. 1B | H335 / H314 | - | CLP00 |
-| 015-104-00-1 | diphosphorus pentasulphide; phosphorus pentasulphide | 215-242-4 | 1314-80-3 | Flam. Sol. 1 / Water-react. 1 / Acute Tox. 4 / Acute Tox. 4 / Aquatic Acute 1 | H228 / H260 / H332 / H302 / H400 | T | CLP00 |
+| 015-103-00-6 | phosphorus tribromide | 232-178-2 | 7789-60-8 | STOT SE 3 / Skin Corr. 1B | H335 / H314 | EUH014 | CLP00 |
+| 015-104-00-1 | diphosphorus pentasulphide; phosphorus pentasulphide | 215-242-4 | 1314-80-3 | Flam. Sol. 1 / Water-react. 1 / Acute Tox. 4 / Acute Tox. 4 / Aquatic Acute 1 | H228 / H260 / H332 / H302 / H400 | T, EUH029 | CLP00 |
 | 015-105-00-7 | triphenyl phosphite | 202-908-4 | 101-02-0 | Skin Irrit. 2 / Eye Irrit. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H315 / H319 / H400 / H410 | - | CLP00 |
 | 015-106-00-2 | hexamethylphosphoric triamide; hexamethylphosphoramide | 211-653-8 | 680-31-9 | Carc. 1B / Muta. 1B | H350 / H340 | - | CLP00 |
 | 015-107-00-8 | ethoprophos (ISO); ethyl-S,S-dipropyl phosphorodithioate | 236-152-1 | 13194-48-4 | Acute Tox. 1 / Acute Tox. 2 / Acute Tox. 3 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H310 / H330 / H301 / H317 / H400 / H410 | - | CLP00 |
@@ -363,7 +367,7 @@
 | 015-150-00-2 | (2-(1,3-dioxolan-2-yl)ethyl)triphenylphosphonium bromide | 404-940-6 | 86608-70-0 | Acute Tox. 4 / STOT RE 2 / Eye Dam. 1 / Aquatic Chronic 3 | H302 / H373 / H318 / H412 | - | CLP00 |
 | 015-152-00-3 | dioxabenzofos (ISO); 2-methoxy-4H-1,3,2-benzodioxaphosphorin 2-sulphide | 223-292-3 | 3811-49-2 | Acute Tox. 3 / Acute Tox. 3 / STOT SE 1 / Aquatic Chronic 2 | H311 / H301 / H370 / H411 | - | CLP00 |
 | 015-153-00-9 | isazofos (ISO); O-(5-chloro-1-isopropyl-1,2,4-triazol-3-yl) O,O-diethyl phosphorothioate | 255-863-8 | 42509-80-8 | Acute Tox. 2 / Acute Tox. 3 / Acute Tox. 3 / STOT RE 2 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H330 / H311 / H301 / H373 / H317 / H400 / H410 | - | CLP00 |
-| 015-154-00-4 | ethephon; 2-chloroethylphosphonic acid | 240-718-3 | 16672-87-0 | Acute Tox. 3 / Acute Tox. 4 / Acute Tox. 4 / Skin Corr. 1C / Aquatic Chronic 2 | H311 / H332 / H302 / H314 / H411 | - | CLP00/ATP06 |
+| 015-154-00-4 | ethephon; 2-chloroethylphosphonic acid | 240-718-3 | 16672-87-0 | Acute Tox. 3 / Acute Tox. 4 / Acute Tox. 4 / Skin Corr. 1C / Aquatic Chronic 2 | H311 / H332 / H302 / H314 / H411 | EUH071 | CLP00/ATP06 |
 | 015-155-00-X | glufosinate ammonium (ISO); ammonium 2-amino-4-(hydroxymethylphosphinyl)butyrate | 278-636-5 | 77182-82-2 | Repr. 1B / Acute Tox. 4 / Acute Tox. 4 / Acute Tox. 4 / STOT RE 2 | H360Fd / H332 / H312 / H302 / H373 | - | CLP00/ATP01 |
 | 015-156-00-5 | methyl 3-[(dimethoxyphosphinothioyl)oxy]methacrylate; methacrifos (ISO); methyl (E)-3-[(dimethoxyphosphinothioyl)oxy]methacrylate | 250-366-2 [1] / 250-366-2 [2] | 30864-28-9 | Acute Tox. 4 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H317 / H400 / H410 | - | CLP00 |
 | 015-157-00-0 | phosphonic acid; phosphorous acid | 237-066-7 [1] / 233-663-1 [2] | 13598-36-2 | Acute Tox. 4 / Skin Corr. 1A | H302 / H314 | - | CLP00 |
@@ -375,7 +379,7 @@
 | 015-164-00-9 | calcium P,P'-(1-hydroxyethylene)bis(hydrogen phosphonate)dihydrate | 400-480-5 | 36669-85-9 | Aquatic Chronic 3 | H412 | - | CLP00 |
 | 015-166-00-X | 3,9-bis(2,6-di-tert-butyl-4-methylphenoxy)-2,4,8,10-tetraoxa-3,9-diphosphaspiro[5.5]undecane | 410-290-4 | 80693-00-1 | Aquatic Chronic 4 | H413 | - | CLP00 |
 | 015-167-00-5 | 3-(hydroxyphenylphosphinyl)propanoic acid | 411-200-6 | 14657-64-8 | Eye Dam. 1 | H318 | - | CLP00 |
-| 015-168-00-0 | fosthiazate (ISO); (RS)-S-sec-butyl-O-ethyl-2-oxo-1,3-thiazolidin-3-ylphosphonothioate |  | 98886-44-3 | Acute Tox. 3 / Acute Tox. 3 / Acute Tox. 4 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H331 / H301 / H312 / H317 / H400 / H410 | - | CLP00 |
+| 015-168-00-0 | fosthiazate (ISO); (RS)-S-sec-butyl-O-ethyl-2-oxo-1,3-thiazolidin-3-ylphosphonothioate |  | 98886-44-3 | Acute Tox. 3 / Acute Tox. 3 / Acute Tox. 4 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H331 / H301 / H312 / H317 / H400 / H410 | EUH070 | CLP00 |
 | 015-173-00-8 | methyl [2-(1,1-dimethylethyl)-6-methoxypyrimidin-4-yl]ethylphosphonothioate | 414-080-3 | 117291-73-3 | Acute Tox. 4 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H400 / H410 | - | CLP00 |
 | 015-174-00-3 | 1-chloro-N,N-diethyl-1,1-diphenyl-1-(phenylmethyl)phosphoramine | 411-370-1 | 82857-68-9 | Acute Tox. 3 / Eye Dam. 1 / Aquatic Chronic 2 | H301 / H318 / H411 | - | CLP00 |
 | 015-175-00-9 | tert-butyl (triphenylphosphoranylidene) acetate | 412-880-7 | 35000-38-5 | Acute Tox. 3 / STOT RE 2 / Eye Irrit. 2 / Skin Sens. 1 / Aquatic Chronic 2 | H301 / H373 / H319 / H317 / H411 | - | CLP00 |
@@ -404,22 +408,22 @@
 | 015-205-00-0 | benzyltriphenylphosphonium, salt with 4,4'-[2,2,2-trifluoro-1-(trifluoromethyl)ethylidene]bis[phenol] (1:1) | 278-305-5 | 75768-65-9 | Repr. 1B | H360F | - | ATP21 |
 | 015-208-00-7 | dimethyl propylphosphonate | 242-555-3 | 18755-43-6 | Muta. 1B / Repr. 1B | H340 / H360Df | - | ATP21 |
 | 016-001-00-4 | hydrogen sulphide, hydrogen sulfide | 231-977-3 | 7783-06-4 | Flam. Gas 1A / Press. Gas / Acute Tox. 2 / Aquatic Acute 1 | H220 / H330 / H400 | U | CLP00/ATP21 |
-| 016-002-00-X | barium sulphide | 244-214-4 | 21109-95-5 | Acute Tox. 4 / Acute Tox. 4 / Aquatic Acute 1 | H332 / H302 / H400 | - | CLP00 |
-| 016-003-00-5 | barium polysulphides | 256-814-3 | 50864-67-0 | STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 / Aquatic Acute 1 | H335 / H315 / H319 / H400 | - | CLP00 |
-| 016-004-00-0 | calcium sulphide | 243-873-5 | 20548-54-3 | STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 / Aquatic Acute 1 | H335 / H315 / H319 / H400 | - | CLP00 |
-| 016-005-00-6 | calcium polysulphides | 215-709-2 | 1344-81-6 | STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 / Aquatic Acute 1 | H335 / H315 / H319 / H400 | - | CLP00 |
-| 016-006-00-1 | dipotassium sulphide; potassium sulphide | 215-197-0 | 1312-73-8 | Skin Corr. 1B / Aquatic Acute 1 | H314 / H400 | - | CLP00 |
-| 016-007-00-7 | potassium polysulphides | 253-390-1 | 37199-66-9 | Skin Corr. 1B / Aquatic Acute 1 | H314 / H400 | - | CLP00 |
-| 016-008-00-2 | ammonium polysulphides | 232-989-1 | 9080-17-5 | Skin Corr. 1B / Aquatic Acute 1 | H314 / H400 | - | CLP00 |
+| 016-002-00-X | barium sulphide | 244-214-4 | 21109-95-5 | Acute Tox. 4 / Acute Tox. 4 / Aquatic Acute 1 | H332 / H302 / H400 | EUH031 | CLP00 |
+| 016-003-00-5 | barium polysulphides | 256-814-3 | 50864-67-0 | STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 / Aquatic Acute 1 | H335 / H315 / H319 / H400 | EUH031 | CLP00 |
+| 016-004-00-0 | calcium sulphide | 243-873-5 | 20548-54-3 | STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 / Aquatic Acute 1 | H335 / H315 / H319 / H400 | EUH031 | CLP00 |
+| 016-005-00-6 | calcium polysulphides | 215-709-2 | 1344-81-6 | STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 / Aquatic Acute 1 | H335 / H315 / H319 / H400 | EUH031 | CLP00 |
+| 016-006-00-1 | dipotassium sulphide; potassium sulphide | 215-197-0 | 1312-73-8 | Skin Corr. 1B / Aquatic Acute 1 | H314 / H400 | EUH031 | CLP00 |
+| 016-007-00-7 | potassium polysulphides | 253-390-1 | 37199-66-9 | Skin Corr. 1B / Aquatic Acute 1 | H314 / H400 | EUH031 | CLP00 |
+| 016-008-00-2 | ammonium polysulphides | 232-989-1 | 9080-17-5 | Skin Corr. 1B / Aquatic Acute 1 | H314 / H400 | EUH031 | CLP00 |
 | 016-009-00-8 | disodium sulfide; sodium sulfide | 215-211-5 | 1313-82-2 | Acute Tox. 3 / Acute Tox. 4 / Skin Corr. 1B / Aquatic Acute 1 | H311 / H302 / H314 / H400 | - | CLP00/ATP01 |
-| 016-010-00-3 | sodium polysulphides | 215-686-9 | 1344-08-7 | Acute Tox. 3 / Skin Corr. 1B / Aquatic Acute 1 | H301 / H314 / H400 | - | CLP00 |
+| 016-010-00-3 | sodium polysulphides | 215-686-9 | 1344-08-7 | Acute Tox. 3 / Skin Corr. 1B / Aquatic Acute 1 | H301 / H314 / H400 | EUH031 | CLP00 |
 | 016-011-00-9 | sulphur dioxide; sulfur dioxide | 231-195-2 | 7446-09-5 | Press. Gas / Acute Tox. 3 / STOT SE 1 / Skin. Corr. 1B | H331 / H370(respiratory system, inhalation) / H314 | U, 5 | CLP00/ATP21 |
-| 016-012-00-4 | disulphur dichloride; sulfur monochloride | 233-036-2 | 10025-67-9 | Acute Tox. 3 / Acute Tox. 4 / Skin Corr. 1A / Aquatic Acute 1 | H301 / H332 / H314 / H400 | - | CLP00 |
-| 016-013-00-X | sulphur dichloride | 234-129-0 | 10545-99-0 | STOT SE 3 / Skin Corr. 1B / Aquatic Acute 1 | H335 / H314 / H400 | - | CLP00 |
-| 016-014-00-5 | sulphur tetrachloride |  | 13451-08-6 | Skin Corr. 1B / Aquatic Acute 1 | H314 / H400 | - | CLP00 |
-| 016-015-00-0 | thionyl dichloride; thionyl chloride | 231-748-8 | 7719-09-7 | Acute Tox. 4 / Acute Tox. 4 / Skin Corr. 1A | H332 / H302 / H314 | - | CLP00 |
-| 016-016-00-6 | sulphuryl chloride | 232-245-6 | 7791-25-5 | STOT SE 3 / Skin Corr. 1B | H335 / H314 | - | CLP00 |
-| 016-017-00-1 | chlorosulphonic acid | 232-234-6 | 7790-94-5 | STOT SE 3 / Skin Corr. 1A | H335 / H314 | - | CLP00 |
+| 016-012-00-4 | disulphur dichloride; sulfur monochloride | 233-036-2 | 10025-67-9 | Acute Tox. 3 / Acute Tox. 4 / Skin Corr. 1A / Aquatic Acute 1 | H301 / H332 / H314 / H400 | EUH014 EUH029 | CLP00 |
+| 016-013-00-X | sulphur dichloride | 234-129-0 | 10545-99-0 | STOT SE 3 / Skin Corr. 1B / Aquatic Acute 1 | H335 / H314 / H400 | EUH014 | CLP00 |
+| 016-014-00-5 | sulphur tetrachloride |  | 13451-08-6 | Skin Corr. 1B / Aquatic Acute 1 | H314 / H400 | EUH014 | CLP00 |
+| 016-015-00-0 | thionyl dichloride; thionyl chloride | 231-748-8 | 7719-09-7 | Acute Tox. 4 / Acute Tox. 4 / Skin Corr. 1A | H332 / H302 / H314 | EUH014 EUH029 | CLP00 |
+| 016-016-00-6 | sulphuryl chloride | 232-245-6 | 7791-25-5 | STOT SE 3 / Skin Corr. 1B | H335 / H314 | EUH014 | CLP00 |
+| 016-017-00-1 | chlorosulphonic acid | 232-234-6 | 7790-94-5 | STOT SE 3 / Skin Corr. 1A | H335 / H314 | EUH014 | CLP00 |
 | 016-018-00-7 | fluorosulphonic acid | 232-149-4 | 7789-21-1 | Acute Tox. 4 / Skin Corr. 1A | H332 / H314 | - | CLP00 |
 | 016-020-00-8 | sulphuric acid ... % | 231-639-5 | 7664-93-9 | Skin Corr. 1A | H314 | B | CLP00 |
 | 016-021-00-3 | methanethiol; methyl mercaptan | 200-822-1 | 74-93-1 | Flam. Gas 1 / Press. Gas / Acute Tox. 3 / Aquatic Acute 1 / Aquatic Chronic 1 | H220 / H331 / H400 / H410 | U | CLP00 |
@@ -429,7 +433,7 @@
 | 016-025-00-5 | disul (ISO); 2-(2,4-dichlorophenoxy)ethyl hydrogensulphate; 2,4-DES | 205-259-5 | 149-26-8 | Acute Tox. 4 / Skin Irrit. 2 / Eye Dam. 1 | H302 / H315 / H318 | - | CLP00 |
 | 016-026-00-0 | sulphamidic acid; sulphamic acid; sulfamic acid | 226-218-8 | 5329-14-6 | Skin Irrit. 2 / Eye Irrit. 2 / Aquatic Chronic 3 | H315 / H319 / H412 | - | CLP00 |
 | 016-027-00-6 | diethyl sulphate | 200-589-6 | 64-67-5 | Carc. 1B / Muta. 1B / Acute Tox. 4 / Acute Tox. 4 / Acute Tox. 4 / Skin Corr. 1B | H350 / H340 / H332 / H312 / H302 / H314 | - | CLP00 |
-| 016-028-00-1 | sodium dithionite; sodium hydrosulphite | 231-890-0 | 7775-14-6 | Self-heat. 1 / Acute Tox. 4 | H251 / H302 | - | CLP00 |
+| 016-028-00-1 | sodium dithionite; sodium hydrosulphite | 231-890-0 | 7775-14-6 | Self-heat. 1 / Acute Tox. 4 | H251 / H302 | EUH031 | CLP00 |
 | 016-030-00-2 | p-toluenesulphonic acid (containing a maximum of 5 % H2SO4) | 203-180-0 | 104-15-4 | STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 | H335 / H315 / H319 | - | CLP00 |
 | 016-031-00-8 | tetrahydrothiophene-1,1-dioxide; sulpholane | 204-783-1 | 126-33-0 | Acute Tox. 4 | H302 | - | CLP00 |
 | 016-032-00-3 | 1,3-propanesultone; 1,2-oxathiolane 2,2-dioxide | 214-317-9 | 1120-71-4 | Carc. 1B / Acute Tox. 4 / Acute Tox. 4 | H350 / H312 / H302 | - | CLP00 |
@@ -449,8 +453,8 @@
 | 016-060-00-6 | diammonium peroxodisulphate; ammonium persulphate | 231-786-5 | 7727-54-0 | Ox. Sol. 3 / Acute Tox. 4 / STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 / Resp. Sens. 1 / Skin Sens. 1 | H272 / H302 / H335 / H315 / H319 / H334 / H317 | - | CLP00 |
 | 016-061-00-1 | dipotassium peroxodisulphate; potassium persulphate | 231-781-8 | 7727-21-1 | Ox. Sol. 3 / Acute Tox. 4 / STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 / Resp. Sens. 1 / Skin Sens. 1 | H272 / H302 / H335 / H315 / H319 / H334 / H317 | - | CLP00 |
 | 016-062-00-7 | bensultap (ISO); 1,3-bis(phenylsulfonylthio)-2-(N,N-dimethylamino)propane |  | 17606-31-4 | Acute Tox. 4 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H400 / H410 | - | CLP00 |
-| 016-063-00-2 | sodium metabisulphite | 231-673-0 | 7681-57-4 | Acute Tox. 4 / Eye Dam. 1 | H302 / H318 | - | CLP00 |
-| 016-064-00-8 | sodium hydrogensulphite … %; sodium bisulphite … % | 231-548-0 | 7631-90-5 | Acute Tox. 4 | H302 | B | CLP00 |
+| 016-063-00-2 | sodium metabisulphite | 231-673-0 | 7681-57-4 | Acute Tox. 4 / Eye Dam. 1 | H302 / H318 | EUH031 | CLP00 |
+| 016-064-00-8 | sodium hydrogensulphite … %; sodium bisulphite … % | 231-548-0 | 7631-90-5 | Acute Tox. 4 | H302 | B, EUH031 | CLP00 |
 | 016-065-00-3 | sodium 1-amino-4-[2-methyl-5-(4-methylphenylsulfonylamino)phenylamino]anthraquinone-2-sulfonate | 400-100-8 | 84057-97-6 | Aquatic Chronic 2 | H411 | - | CLP00 |
 | 016-066-00-9 | tetrasodium [5-((4-amino-6-chloro-1,3,5-triazin-2-yl)amino)-2-((2-hydroxy-3,5-disulfonatophenylazo)-2- sulfonatobenzylidenehydrazino)benzoate]copper(II) | 404-070-7 | 116912-62-0 | Aquatic Chronic 3 | H412 | - | CLP00 |
 | 016-067-00-4 | (4-methylphenyl)mesitylene sulfonate | 407-530-5 | 67811-06-7 | Aquatic Chronic 4 | H413 | - | CLP00 |
@@ -488,24 +492,25 @@
 | 017-008-00-5 | potassium perchlorate | 231-912-9 | 7778-74-7 | Ox. Sol. 1 / Acute Tox. 4 | H271 / H302 | - | CLP00 |
 | 017-009-00-0 | ammonium perchlorate; [containing ≥ 80 % of 0-30 µm particles] | 232-235-1 | 7790-98-9 | Expl. 1.1 / Ox. Sol. 1 | H201 / H271 | T | CLP00/ATP01 |
 | 017-010-00-6 | sodium perchlorate | 231-511-9 | 7601-89-0 | Ox. Sol. 1 / Acute Tox. 4 | H271 / H302 | - | CLP00 |
-| 017-011-00-1 | sodium hypochlorite, solution ... % Cl active | 231-668-3 | 7681-52-9 | Skin Corr. 1B / Eye Dam. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H314 / H318 / H400 / H410 | B | CLP00/ATP13 |
-| 017-012-00-7 | calcium hypochlorite | 231-908-7 | 7778-54-3 | Ox. Sol. 2 / Acute Tox. 4 / Skin Corr. 1B / Aquatic Acute 1 | H272 / H302 / H314 / H400 | T | CLP00/ATP01corr |
+| 017-011-00-1 | sodium hypochlorite, solution ... % Cl active | 231-668-3 | 7681-52-9 | Skin Corr. 1B / Eye Dam. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H314 / H318 / H400 / H410 | B, EUH031 | CLP00/ATP13 |
+| 017-012-00-7 | calcium hypochlorite | 231-908-7 | 7778-54-3 | Ox. Sol. 2 / Acute Tox. 4 / Skin Corr. 1B / Aquatic Acute 1 | H272 / H302 / H314 / H400 | T, EUH031 | CLP00/ATP01corr |
 | 017-013-00-2 | calcium chloride | 233-140-8 | 10043-52-4 | Eye Irrit. 2 | H319 | - | CLP00 |
 | 017-014-00-8 | ammonium chloride | 235-186-4 | 12125-02-9 | Acute Tox. 4 / Eye Irrit. 2 | H302 / H319 | - | CLP00 |
 | 017-015-00-3 | (2-(aminomethyl)phenyl)acetylchloride hydrochloride | 417-410-4 | 61807-67-8 | Acute Tox. 4 / Skin Corr. 1A / Skin Sens. 1 | H302 / H314 / H317 | - | CLP00 |
 | 017-016-00-9 | methyltriphenylphosphonium chloride | 418-400-2 | 1031-15-8 | Acute Tox. 4 / Acute Tox. 4 / Skin Irrit. 2 / Eye Dam. 1 / Aquatic Chronic 2 | H312 / H302 / H315 / H318 / H411 | - | CLP00 |
 | 017-017-00-4 | (Z)-13-docosenyl-N,N-bis(2-hydroxyethyl)-N-methyl-ammonium-chloride | 426-210-6 | 120086-58-0 | Skin Corr. 1B / Aquatic Acute 1 / Aquatic Chronic 1 | H314 / H400 / H410 | - | CLP00 |
 | 017-019-00-5 | (R)-1,2,3,4-tetrahydro-6,7-dimethoxy-1-veratrylisoquinoline hydrochloride | 415-110-8 | 54417-53-7 | Acute Tox. 4 / Aquatic Chronic 3 | H302 / H412 | - | CLP00 |
-| 017-020-00-0 | ethyl propoxy aluminium chloride | 421-790-7 | 13014-29-4 | Water-react. 1 / Skin Corr. 1A | H260 / H314 | - | CLP00 |
+| 017-020-00-0 | ethyl propoxy aluminium chloride | 421-790-7 | 13014-29-4 | Water-react. 1 / Skin Corr. 1A | H260 / H314 | EUH014 | CLP00 |
 | 017-021-00-6 | behenamidopropyl-dimethyl-(dihydroxypropyl) ammonium chloride | 423-420-1 | 136920-10-0 | Eye Dam. 1 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H318 / H317 / H400 / H410 | - | CLP00 |
 | 017-023-00-7 | [phosphinyldynetris(oxy)] tris[3-aminopropyl-2-hydroxy-N,N-dimethyl-N-(C6-18)-alkyl] trichlorides | 425-520-9 | 197179-61-6 | Eye Dam. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H318 / H400 / H410 | - | ATP01 |
 | 017-026-00-3 | chlorine dioxide | 233-162-8 | 10049-04-4 | Ox. Gas 1 / Press. Gas / Acute Tox. 2 / Skin Corr. 1B / Aquatic Acute 1 | H270 / H330 / H314 / H400 | 5 | CLP00/ATP01corr |
-| 019-001-00-2 | potassium | 231-119-8 | 7440-09-7 | Water-react. 1 / Skin Corr. 1B | H260 / H314 | - | CLP00 |
+| 017-026-01-0 | chlorine dioxide … % | 233-162-8 | 10049-04-4 | Acute Tox. 3 / Skin Corr. 1B / Aquatic Acute 1 | H301 / H314 / H400 | B | CLP00/ATP01corr |
+| 019-001-00-2 | potassium | 231-119-8 | 7440-09-7 | Water-react. 1 / Skin Corr. 1B | H260 / H314 | EUH014 | CLP00 |
 | 019-002-00-8 | potassium hydroxide; caustic potash | 215-181-3 | 1310-58-3 | Acute Tox. 4 / Skin Corr. 1A | H302 / H314 | - | CLP00 |
 | 019-003-00-3 | potassium (E,E)-hexa-2,4-dienoate | 246-376-1 | 24634-61-5 | Eye Irrit. 2 | H319 | - | ATP07 |
 | 020-001-00-X | calcium | 231-179-5 | 7440-70-2 | Water-react. 2 | H261 | - | CLP00 |
-| 020-002-00-5 | calcium cyanide | 209-740-0 | 592-01-8 | Acute Tox. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H300 / H400 / H410 | - | CLP00 |
-| 022-001-00-5 | titanium tetrachloride | 231-441-9 | 7550-45-0 | Skin Corr. 1B | H314 | - | CLP00 |
+| 020-002-00-5 | calcium cyanide | 209-740-0 | 592-01-8 | Acute Tox. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H300 / H400 / H410 | EUH032 | CLP00 |
+| 022-001-00-5 | titanium tetrachloride | 231-441-9 | 7550-45-0 | Skin Corr. 1B | H314 | EUH014 | CLP00 |
 | 022-003-00-6 | bis(η5-cyclopentadienyl)-bis(2,6-difluoro-3-[pyrrol-1-yl]-phenyl)titanium | 412-000-1 | 125051-32-3 | Flam. Sol. 1 / Repr. 2 / STOT RE 2 / Aquatic Chronic 2 | H228 / H361f / H373 / H411 | T | CLP00 |
 | 022-004-00-1 | potassium titanium oxide (K2Ti6O13) | 432-240-0 | 12056-51-8 | Carc. 2 | H351 | - | ATP01/ATP01corr |
 | 022-005-00-7 | [N-(1,1-dimethylethyl)-1,1-dimethyl-1-[(1,2,3,4,5-η)-2,3,4,5-tetramethyl-2,4-cyclopentadien-1-yl]silanaminato(2-)-κN][(1,2,3,4-η)-1,3-pentadiene]-titanium | 419-840-8 | 169104-71-6 | Flam. Sol. 1 / Skin Corr. 1B / Skin Sens. 1 / Aquatic Chronic 4 | H228 / H314 / H317 / H413 | - | ATP01 |
@@ -543,6 +548,7 @@
 | 027-010-00-8 | cobalt carbonate | 208-169-4 | 513-79-1 | Carc. 1B / Muta. 2 / Repr. 1B / Resp. Sens. 1 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H350i / H341 / H360F / H334 / H317 / H400 / H410 | 1 | ATP01 |
 | 028-001-00-1 | tetracarbonylnickel; nickel tetracarbonyl | 236-669-2 | 13463-39-3 | Flam. Liq. 2 / Carc. 2 / Repr. 1B / Acute Tox. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H225 / H351 / H360D / H330 / H400 / H410 | - | CLP00 |
 | 028-002-00-7 | nickel | 231-111-4 | 7440-02-0 | Carc. 2 / STOT RE 1 / Skin Sens. 1 | H351 / H372 / H317 | 7, S | CLP00/ATP01 |
+| 028-002-01-4 | nickel powder; [particle diameter < 1 mm] | 231-111-4 | 7440-02-0 | Carc. 2 / STOT RE 1 / Skin Sens. 1 / Aquatic Chronic 3 | H351 / H372 / H317 / H412 | - | ATP01 |
 | 028-003-00-2 | nickel monoxide; nickel oxide; bunsenite | 215-215-7 [1] / 234-323-5 [2] | 1313-99-1 | Carc. 1A / STOT RE 1 / Skin Sens. 1 / Aquatic Chronic 4 | H350i / H372 / H317 / H413 | - | CLP00/ATP01 |
 | 028-004-00-8 | nickel dioxide | 234-823-3 | 12035-36-8 | Carc. 1A / STOT RE 1 / Skin Sens. 1 / Aquatic Chronic 4 | H350i / H372 / H317 / H413 | - | CLP00/ATP01 |
 | 028-005-00-3 | dinickel trioxide | 215-217-8 | 1314-06-3 | Carc. 1A / STOT RE 1 / Skin Sens. 1 / Aquatic Chronic 4 | H350i / H372 / H317 / H413 | - | CLP00/ATP01 |
@@ -572,7 +578,7 @@
 | 028-031-00-5 | nickel selenate | 239-125-2 | 15060-62-5 | Carc. 1A / Muta. 2 / Repr. 1B / STOT RE 1 / Resp. Sens. 1 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H350i / H341 / H360D / H372 / H334 / H317 / H400 / H410 | - | ATP01 |
 | 028-032-00-0 | nickel hydrogen phosphate; nickel bis(dihydrogen phosphate); trinickel bis(orthophosphate); dinickel diphosphate; nickel bis(phosphinate); nickel phosphinate; phosphoric acid, calcium nickel salt; diphosphoric acid, nickel(II) salt | 238-278-2 [1] / 242-522-3 [2] / 233-844-5 [3] / 238-426-6 [4] / 238-511-8 [5] / 252-840-4 [6] | 14332-34-4 | Carc. 1A / STOT RE 1 / Resp. Sens. 1 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H350i / H372 / H334 / H317 / H400 / H410 | - | ATP01 |
 | 028-033-00-6 | diammonium nickel hexacyanoferrate | - | 74195-78-1 | Carc. 1A / STOT RE 1 / Resp. Sens. 1 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H350i / H372 / H334 / H317 / H400 / H410 | - | ATP01 |
-| 028-034-00-1 | nickel dicyanide | 209-160-8 | 557-19-7 | Carc. 1A / STOT RE 1 / Resp. Sens. 1 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H350i / H372 / H334 / H317 / H400 / H410 | - | ATP01 |
+| 028-034-00-1 | nickel dicyanide | 209-160-8 | 557-19-7 | Carc. 1A / STOT RE 1 / Resp. Sens. 1 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H350i / H372 / H334 / H317 / H400 / H410 | EUH032 | ATP01 |
 | 028-035-00-7 | nickel chromate | 238-766-5 | 14721-18-7 | Carc. 1A / STOT RE 1 / Resp. Sens. 1 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H350i / H372 / H334 / H317 / H400 / H410 | - | ATP01 |
 | 028-036-00-2 | nickel(II) silicate; dinickel orthosilicate; nickel silicate (3:4); silicic acid, nickel salt; trihydrogen hydroxybis[orthosilicato(4-)]trinickelate(3-) | 244-578-4 [1] / 237-411-1 [2] / 250-788-7 [3] / 253-461-7 [4] / 235-688-3 [5] | 21784-78-1 | Carc. 1A / STOT RE 1 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H350i / H372 / H317 / H400 / H410 | - | ATP01 |
 | 028-037-00-8 | dinickel hexacyanoferrate | 238-946-3 | 14874-78-3 | Carc. 1A / STOT RE 1 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H350i / H372 / H317 / H400 / H410 | - | ATP01 |
@@ -584,7 +590,7 @@
 | 028-043-00-0 | cobalt nickel gray periclase; C.I. Pigment Black 25; C.I. 77332; cobalt nickel dioxide; cobalt nickel oxide | 269-051-6 [1] / 261-346-8 [2] | 68186-89-0 | Carc. 1A / STOT RE 1 / Skin Sens. 1 | H350i / H372 / H317 | - | ATP01 |
 | 028-044-00-6 | nickel tin trioxide; nickel stannate | 234-824-9 | 12035-38-0 | Carc. 1A / STOT RE 1 / Skin Sens. 1 | H350i / H372 / H317 | - | ATP01 |
 | 028-045-00-1 | nickel triuranium decaoxide | 239-876-6 | 15780-33-3 | Carc. 1A / STOT RE 1 / Skin Sens. 1 | H350i / H372 / H317 | - | ATP01 |
-| 028-046-00-7 | nickel dithiocyanate | 237-205-1 | 13689-92-4 | Carc. 1A / Muta. 2 / Repr. 1B / STOT RE 1 / Resp. Sens. 1 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H350i / H341 / H360D / H372 / H334 / H317 / H400 / H410 | - | ATP01 |
+| 028-046-00-7 | nickel dithiocyanate | 237-205-1 | 13689-92-4 | Carc. 1A / Muta. 2 / Repr. 1B / STOT RE 1 / Resp. Sens. 1 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H350i / H341 / H360D / H372 / H334 / H317 / H400 / H410 | EUH032 | ATP01 |
 | 028-047-00-2 | nickel dichromate | 239-646-5 | 15586-38-6 | Carc. 1A / Muta. 2 / Repr. 1B / STOT RE 1 / Resp. Sens. 1 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H350i / H341 / H360D / H372 / H334 / H317 / H400 / H410 | - | ATP01 |
 | 028-048-00-8 | nickel(II) selenite | 233-263-7 | 10101-96-9 | Carc. 1A / STOT RE 1 / Resp. Sens. 1 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H350i / H372 / H334 / H317 / H400 / H410 | - | ATP01 |
 | 028-049-00-3 | nickel selenide | 215-216-2 | 1314-05-2 | Carc. 1A / STOT RE 1 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H350i / H372 / H317 / H400 / H410 | - | ATP01 |
@@ -608,7 +614,7 @@
 | 029-012-00-4 | sodium ((N-(3-trimethylammoniopropyl)sulfamoyl)methylsulfonatophthalocyaninato)copper(II) | 407-340-2 | 124719-24-0 | Eye Dam. 1 | H318 | - | CLP00 |
 | 029-013-00-X | trisodium(2-(α-(3-(4-chloro-6-(2-(2-(vinylsulfonyl)ethoxy)ethylamino)-1,3,5-triazin-2-ylamino)-2-oxido-5-sulfonatophenylazo)benzylidenehydrazino)-4-sulfonatobenzoato)copper(II) | 407-580-8 | 130201-51-3 | Eye Dam. 1 | H318 | - | CLP00/ATP01 |
 | 029-014-00-5 | reaction mass of:  2,2'-[[cis-1,2-cyclohexanediylbis(nitrilomethylidene)]bis[phenolate]](2-)N,N',O,O'-copper complex; 2,2'-[[trans-1,2-cyclohexanediylbis(nitrilomethylidyne)]bis[phenolate]](2-)N,N',O,O'-copper complex | 419-610-7 | 171866-24-3 | STOT RE 2 / Aquatic Chronic 2 | H373 / H411 | - | ATP01 |
-| 029-015-00-0 | copper thiocyanate | 214-183-1 | 1111-67-7 | Aquatic Acute 1 / Aquatic Chronic 1 | H400 / H410 | - | ATP09/ATP17 |
+| 029-015-00-0 | copper thiocyanate | 214-183-1 | 1111-67-7 | Aquatic Acute 1 / Aquatic Chronic 1 | H400 / H410 | EUH032 | ATP09/ATP17 |
 | 029-016-00-6 | copper(II) oxide | 215-269-1 | 1317-38-0 | Aquatic Acute 1 / Aquatic Chronic 1 | H400 / H410 | - | ATP09/ATP17 |
 | 029-017-00-1 | dicopper chloride trihydroxide | 215-572-9 | 1332-65-6 | Acute Tox. 3 / Acute Tox. 4 / Aquatic Acute 1 / Aquatic Chronic 1 | H301 / H332 / H400 / H410 | - | ATP09/ATP17 |
 | 029-018-00-7 | tetracopper hexahydroxide sulphate; tetracopper hexahydroxide sulphate hydrate | 215-582-3 [1] / 215-582-3 [2] | 1333-22-8 | Acute Tox. 4 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H400 / H410 | - | ATP09/ATP17 |
@@ -619,8 +625,9 @@
 | 029-025-00-5 | bis(N-hydroxy-N-ni­trosocyclohexylamina­to-O,O’)copper; bis(N-cyclohexyl-diazenium-dioxy)-copper; [Cu-HDO] | 239-703-4 | 312600-89-8 | Flam. Sol. 1 / Acute Tox. 4 / STOT RE 2 / Eye Dam. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H228 / H302 / H373 (liver) / H318 / H400 / H410 | - | ATP15 |
 | 029-026-00-0 | copper [specific surface area > 0,67 mm2/mg] | 231-159-6 | 7440-50-8 | Aquatic Acute 1 / Aquatic Chronic 1 | H400 / H410 | - | ATP22 |
 | 030-001-00-1 | zinc powder - zinc dust (pyrophoric) | 231-175-3 | 7440-66-6 | Pyr. Sol. 1 / Water-react. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H250 / H260 / H400 / H410 | T | CLP00 |
+| 030-001-01-9 | zinc powder - zinc dust (stabilised) | 231-175-3 | 7440-66-6 | Aquatic Acute 1 / Aquatic Chronic 1 | H400 / H410 | - | CLP00 |
 | 030-003-00-2 | zinc chloride | 231-592-0 | 7646-85-7 | Acute Tox. 4 / Skin Corr. 1B / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H314 / H400 / H410 | - | CLP00 |
-| 030-004-00-8 | dimethylzinc; diethylzinc | 208-884-1 [1] / 209-161-3 [2] | 544-97-8 | Pyr. Liq. 1 / Water-react. 1 / Skin Corr. 1B / Aquatic Acute 1 / Aquatic Chronic 1 | H250 / H260 / H314 / H400 / H410 | - | CLP00 |
+| 030-004-00-8 | dimethylzinc; diethylzinc | 208-884-1 [1] / 209-161-3 [2] | 544-97-8 | Pyr. Liq. 1 / Water-react. 1 / Skin Corr. 1B / Aquatic Acute 1 / Aquatic Chronic 1 | H250 / H260 / H314 / H400 / H410 | EUH014 | CLP00 |
 | 030-006-00-9 | zinc sulphate (hydrous) (mono-, hexa- and hepta hydrate); zinc sulphate (anhydrous) | 231-793-3 [1] / 231-793-3 [2] | 7446-19-7 | Acute Tox. 4 / Eye Dam. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H318 / H400 / H410 | - | CLP00 |
 | 030-007-00-4 | bis(3,5-di-tert-butylsalicylato-O1,O2)zinc | 403-360-0 | 42405-40-3 | Flam. Sol. 1 / Acute Tox. 4 / Aquatic Acute 1 / Aquatic Chronic 1 | H228 / H302 / H400 / H410 | T | CLP00 |
 | 030-008-00-X | hydroxo(2-(benzenesulfonamido)benzoato)zinc(II) | 403-750-0 | 113036-91-2 | Acute Tox. 4 / Aquatic Chronic 2 | H332 / H411 | - | CLP00 |
@@ -634,7 +641,7 @@
 | 033-006-00-7 | arsine | 232-066-3 | 7784-42-1 | Flam. Gas 1 / Press. Gas / Acute Tox. 2 / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H220 / H330 / H373 / H400 / H410 | U | CLP00 |
 | 033-007-00-2 | tert-butylarsine | 423-320-6 | 4262-43-5 | Pyr. Liq. 1 / Acute Tox. 2 | H250 / H330 | - | CLP00 |
 | 034-001-00-2 | selenium | 231-957-4 | 7782-49-2 | Acute Tox. 3 / Acute Tox. 3 / STOT RE 2 / Aquatic Chronic 4 | H331 / H301 / H373 / H413 | - | CLP00 |
-| 034-003-00-3 | sodium selenite | 233-267-9 | 10102-18-8 | Acute Tox. 2 / Acute Tox. 3 / Skin Sens. 1 / Aquatic Chronic 2 | H300 / H331 / H317 / H411 | - | CLP00 |
+| 034-003-00-3 | sodium selenite | 233-267-9 | 10102-18-8 | Acute Tox. 2 / Acute Tox. 3 / Skin Sens. 1 / Aquatic Chronic 2 | H300 / H331 / H317 / H411 | EUH031 | CLP00 |
 | 035-001-00-5 | bromine | 231-778-1 | 7726-95-6 | Acute Tox. 2 / Skin Corr. 1A / Aquatic Acute 1 | H330 / H314 / H400 | - | CLP00 |
 | 035-002-00-0 | hydrogen bromide | 233-113-0 | 10035-10-6 | Press. Gas / STOT SE 3 / Skin Corr. 1A | H335 / H314 | U | CLP00 |
 | 035-003-00-6 | potassium bromate | 231-829-8 | 7758-01-2 | Ox. Sol. 1 / Carc. 1B / Acute Tox. 3 | H271 / H350 / H301 | - | CLP00 |
@@ -648,9 +655,12 @@
 | 047-001-00-2 | silver nitrate | 231-853-9 | 7761-88-8 | Ox. Sol. 2 / Skin Corr. 1B / Aquatic Acute 1 / Aquatic Chronic 1 | H272 / H314 / H400 / H410 | - | CLP00/ATP01 |
 | 047-003-00-3 | silver zinc zeolite (Zeolite, LTA framework type, surface-modified with silver and zinc ions); [This entry covers LTA (Linde Type A) framework type zeolite which has been surface-modified with both silver and zinc ions at contents Ag+ 0,5 %-6 %, Zn2 + 5 %-16 %, and potentially with phosphorus, NH4+, Mg2+ and/or Ca2+ each at level < 3 %] |  | 130328-20-0 | Repr. 2 / Skin Irrit. 2 / Eye Dam. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H361d / H315 / H318 / H400 / H410 | - | ATP10 |
 | 047-006-00-X | silver nano: [particle diameter > 1 nm ≤ 100 nm] | 231-131-3 | 7440-22-4 | Repr. 2 / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H361f / H373 (nervous system) / H400 / H410 | - | ATP22 |
+| 047-004-00-9 | silver massive: [particle diameter ≥ 1 mm] | 231-131-3 | 7440-22-4 | Repr. 2 / STOT RE 2 | H361f / H373 (nervous system) | - | ATP22 |
+| 047-005-00-4 | silver powder: [particle diameter > 100 nm < 1 mm] | 231-131-3 | 7440-22-4 | Repr. 2 / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H361f / H373 (nervous system) / H400 / H410 | - | ATP22 |
 | 048-002-00-0 | cadmium (non-pyrophoric); cadmium oxide (non-pyrophoric) | 231-152-8 [1] / 215-146-2 [2] | 7440-43-9 | Carc. 1B / Muta. 2 / Repr. 2 / Acute Tox. 2 / STOT RE 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H350 / H341 / H361fd / H330 / H372 / H400 / H410 | - | CLP00 |
+| 048-011-00-X | cadmium (pyrophoric) | 231-152-8 | 7440-43-9 | Pyr. Sol. 1 / Carc. 1B / Muta. 2 / Repr. 2 / Acute Tox. 2 / STOT RE 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H250 / H350 / H341 / H361fd / H330 / H372 / H400 / H410 | - | CLP00 |
 | 048-003-00-6 | cadmium diformate; cadmiumformate | 224-729-0 | 4464-23-7 | Carc. 2 / Acute Tox. 3 / Acute Tox. 3 / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H351 / H331 / H301 / H373 / H400 / H410 | - | CLP00 |
-| 048-004-00-1 | cadmium cyanide | 208-829-1 | 542-83-6 | Carc. 2 / Acute Tox. 1 / Acute Tox. 2 / Acute Tox. 2 / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H351 / H310 / H330 / H300 / H373 / H400 / H410 | - | CLP00 |
+| 048-004-00-1 | cadmium cyanide | 208-829-1 | 542-83-6 | Carc. 2 / Acute Tox. 1 / Acute Tox. 2 / Acute Tox. 2 / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H351 / H310 / H330 / H300 / H373 / H400 / H410 | EUH032 | CLP00 |
 | 048-005-00-7 | cadmiumhexafluorosilicate(2-); cadmium fluorosilica | 241-084-0 | 17010-21-8 | Carc. 2 / Acute Tox. 3 / Acute Tox. 3 / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H351 / H331 / H301 / H373 / H400 / H410 | - | CLP00 |
 | 048-006-00-2 | cadmium fluoride | 232-222-0 | 7790-79-6 | Carc. 1B / Muta. 1B / Repr. 1B / Acute Tox. 2 / Acute Tox. 3 / STOT RE 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H350 / H340 / H360FD / H330 / H301 / H372 / H400 / H410 | - | CLP00 |
 | 048-007-00-8 | cadmium iodide | 232-223-6 | 7790-80-9 | Carc. 2 / Acute Tox. 3 / Acute Tox. 3 / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H351 / H331 / H301 / H373 / H400 / H410 | - | CLP00 |
@@ -677,7 +687,7 @@
 | 050-026-00-1 | 2-ethylhexyl 10-ethyl-4-[[2-[(2-ethylhexyl)oxy]-2-oxoethyl]thio]-4-methyl-7-oxo-8-oxa-3,5-dithia-4-stannatetradecanoate | 260-828-5 | 57583-34-3 | Repr. 2 | H361d | - | ATP05 |
 | 050-027-00-7 | 2-ethylhexyl 10-ethyl-4,4-dioctyl-7-oxo-8-oxa-3,5-dithia-4-stannatetradecanoate; [DOTE] | 239-622-4 | 15571-58-1 | Repr. 1B / STOT RE 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H360D / H372 (immune system) / H400 / H410 | - | ATP05/ATP15 |
 | 050-028-00-2 | 2-ethylhexyl 10-ethyl-4,4-dimethyl-7-oxo-8-oxa-3,5-dithia-4-stannatetradecanoate | 260-829-0 | 57583-35-4 | Repr. 2 / Acute Tox. 4 / STOT RE 1 / Skin Sens. 1A | H361d / H302 / H372 (nervous system, immune system) / H317 | - | ATP06 |
-| 050-029-00-8 | dimethyltin dichloride | 212-039-2 | 753-73-1 | Repr. 2 / Acute Tox. 2 / Acute Tox. 3 / Acute Tox. 3 / STOT RE 1 / Skin Corr. 1B | H361d / H330 / H311 / H301 / H372 (nervous system, immune system) / H314 | - | ATP06 |
+| 050-029-00-8 | dimethyltin dichloride | 212-039-2 | 753-73-1 | Repr. 2 / Acute Tox. 2 / Acute Tox. 3 / Acute Tox. 3 / STOT RE 1 / Skin Corr. 1B | H361d / H330 / H311 / H301 / H372 (nervous system, immune system) / H314 | EUH071 | ATP06 |
 | 050-030-00-3 | dibutyltin dilaurate; dibutyl[bis(dodecanoyloxy)]stannane | 201-039-8 | 77-58-7 | Muta. 2 / Repr. 1B / STOT RE 1 | H341 / H360FD / H372 (immune system) | - | ATP10 |
 | 050-031-00-9 | dioctyltin dilaurate; stannane, dioctyl-, bis (coco acyloxy)  derivs. | 222-883-3 [1] / 293-901-5 [2] | 3648-18-8 | Repr. 1B / STOT RE 1 | H360D / H372 (immune system) | - | ATP15 |
 | 050-032-00-4 | dibutyltin bis; (2-ethylhexanoate) | 220-481-2 | 2781-10-4 | Muta. 2 / Repr. 1B / STOT RE 1 | H341 / H360FD / H372 (immune system) | - | ATP18 |
@@ -715,6 +725,7 @@
 | 080-001-00-0 | mercury | 231-106-7 | 7439-97-6 | Repr. 1B / Acute Tox. 2 / STOT RE 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H360D / H330 / H372 / H400 / H410 | - | CLP00/ATP01 |
 | 080-003-00-1 | dimercury dichloride; mercurous chloride; calomel | 233-307-5 | 10112-91-1 | Acute Tox. 4 / STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H335 / H315 / H319 / H400 / H410 | - | CLP00 |
 | 080-005-00-2 | mercury difulminate; mercuric fulminate; fulminate of mercury | 211-057-8 | 628-86-4 | Unst. Expl. / Acute Tox. 3 / Acute Tox. 3 / Acute Tox. 3 / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H200 / H331 / H311 / H301 / H373 / H400 / H410 | - | CLP00 |
+| 080-005-01-X | mercury difulminate; mercuric fulminate; fulminate of mercury [≥ 20 % phlegmatiser] | 211-057-8 | 628-86-4 | Expl. 1.1 / Acute Tox. 3 / Acute Tox. 3 / Acute Tox. 3 / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H201 / H331 / H311 / H301 / H373 / H400 / H410 | - | CLP00 |
 | 080-006-00-8 | dimercury dicyanide oxide; mercuric oxycyanide | 215-629-8 | 1335-31-5 | Expl. 1.1 / Acute Tox. 3 / Acute Tox. 3 / Acute Tox. 3 / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H201 / H331 / H311 / H301 / H373 / H400 / H410 | - | CLP00/ATP01 |
 | 080-007-00-3 | dimethylmercury; diethylmercury | 209-805-3 [1] / 211-000-7 [2] | 593-74-8 | Acute Tox. 1 / Acute Tox. 2 / Acute Tox. 2 / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H310 / H330 / H300 / H373 / H400 / H410 | 1 | CLP00 |
 | 080-008-00-9 | phenylmercury nitrate; phenylmercury hydroxide; basic phenylmercury nitrate | 200-242-9 [1] / 202-866-7 [2] | 55-68-5 | Acute Tox. 3 / STOT RE 1 / Skin Corr. 1B / Aquatic Acute 1 / Aquatic Chronic 1 | H301 / H372 / H314 / H400 / H410 | - | CLP00 |
@@ -725,6 +736,7 @@
 | 081-001-00-3 | thallium | 231-138-1 | 7440-28-0 | Acute Tox. 2 / Acute Tox. 2 / STOT RE 2 / Aquatic Chronic 4 | H330 / H300 / H373 / H413 | - | CLP00 |
 | 081-003-00-4 | dithallium sulphate; thallic sulphate | 231-201-3 | 7446-18-6 | Acute Tox. 2 / STOT RE 1 / Skin Irrit. 2 / Aquatic Chronic 2 | H300 / H372 / H315 / H411 | - | CLP00 |
 | 082-003-00-7 | lead diazide; lead azide | 236-542-1 | 13424-46-9 | Unst. Expl. / Repr. 1A / Acute Tox. 4 / Acute Tox. 4 / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H200 / H360Df / H332 / H302 / H373 / H400 / H410 | 1 | CLP00 |
+| 082-003-01-4 | lead diazide; lead azide [≥ 20 % phlegmatiser] | 236-542-1 | 13424-46-9 | Expl. 1.1 / Repr. 1A / Acute Tox. 4 / Acute Tox. 4 / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H201 / H360Df / H332 / H302 / H373 / H400 / H410 | 1 | CLP00 |
 | 082-004-00-2 | lead chromate | 231-846-0 | 7758-97-6 | Carc. 1B / Repr. 1A / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H350 / H360Df / H373 / H400 / H410 | 1 | CLP00/ATP01 |
 | 082-005-00-8 | lead di(acetate) | 206-104-4 | 301-04-2 | Repr. 1A / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H360Df / H373 / H400 / H410 | 1 | CLP00 |
 | 082-006-00-3 | trilead bis(orthophosphate) | 231-205-5 | 7446-27-7 | Repr. 1A / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H360Df / H373 / H400 / H410 | 1 | CLP00 |
@@ -735,13 +747,15 @@
 | 082-011-00-0 | lead hydrogen arsenate | 232-064-2 | 7784-40-9 | Carc. 1A / Repr. 1A / Acute Tox. 3 / Acute Tox. 3 / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H350 / H360Df / H331 / H301 / H373 / H400 / H410 | 1 | CLP00 |
 | 082-012-00-6 | barium calcium cesium lead samarium strontium bromide chloride fluoride iodide europium doped | 431-780-4 | 199876-46-5 | Acute Tox. 4 / STOT RE 2 / Aquatic Chronic 2 | H302 / H373 / H411 | - | ATP01 |
 | 082-013-00-1 | lead powder;  [particle diameter < 1 mm] | 231-100-4 | 7439-92-1 | Repr. 1A / Lact. / Aquatic Acute 1 / Aquatic Chronic 1 | H360FD / H362 / H400 / H410 | - | ATP09/ATP21 |
+| 082-014-00-7 | lead massive:  [particle diameter ≥ 1 mm] | 231-100-4 | 7439-92-1 | Repr. 1A / Lact. / Aquatic Chronic 1 | H360FD / H362 / H410 | - | ATP09/ATP21 |
 | 092-001-00-8 | uranium | 231-170-6 | 7440-61-1 | Acute Tox. 2 / Acute Tox. 2 / STOT RE 2 / Aquatic Chronic 4 | H330 / H300 / H373 / H413 | - | CLP00 |
 | 601-001-00-4 | methane | 200-812-7 | 74-82-8 | Flam. Gas 1 / Press. Gas | H220 | U | CLP00 |
 | 601-002-00-X | ethane | 200-814-8 | 74-84-0 | Flam. Gas 1 / Press. Gas | H220 | U | CLP00 |
 | 601-003-00-5 | propane | 200-827-9 | 74-98-6 | Flam. Gas 1 / Press. Gas | H220 | U | CLP00 |
 | 601-004-00-0 | butane; and isobutane | 203-448-7 [1] / 200-857-2 [2] | 106-97-8 | Flam. Gas 1 / Press. Gas | H220 | C, U | CLP00 |
+| 601-004-01-8 | butane (containing ≥ 0,1 % butadiene (203-450-8)); isobutane (containing ≥ 0,1 % butadiene (203-450-8)) | 203-448-7 [1] / 200-857-2 [2] | 106-97-8 | Flam. Gas 1 / Press. Gas / Carc. 1A / Muta. 1B | H220 / H350 / H340 | C, S, U | CLP00 |
 | 601-005-00-6 | 2,2-dimethylpropane; neopentane | 207-343-7 | 463-82-1 | Flam. Gas 1 / Press. Gas / Aquatic Chronic 2 | H220 / H411 | U | CLP00 |
-| 601-006-00-1 | pentane | 203-692-4 | 109-66-0 | Flam. Liq. 2 / Asp. Tox. 1 / STOT SE 3 / Aquatic Chronic 2 | H225 / H304 / H336 / H411 | C | CLP00 |
+| 601-006-00-1 | pentane | 203-692-4 | 109-66-0 | Flam. Liq. 2 / Asp. Tox. 1 / STOT SE 3 / Aquatic Chronic 2 | H225 / H304 / H336 / H411 | C, EUH066 | CLP00 |
 | 601-007-00-7 | hexane (containing < 5 % n-hexane (203-777-6)); 2-methylpentane; 3-methylpentane; 2,2-dimethylbutane; 2,3-dimethylbutane | 203-523-4 [1] / 202-481-4 [2] / 200-906-8 [3] / 201-193-6 [4] | 107-83-5 | Flam. Liq. 2 / Asp. Tox. 1 / STOT SE 3 / Skin Irrit. 2 / Aquatic Chronic 2 | H225 / H304 / H336 / H315 / H411 | C | CLP00/ATP01 |
 | 601-008-00-2 | heptane; n-heptane; 2,4-dimethylpentane; 2,2,3-trimethylbutane; 3,3-dimethylpentane; 2,3-dimethylpentane; 3-methylhexane; 2,2-dimethylpentane; 2-methylhexane; 3-ethylpentane; isoheptane | 205-563-8 [1] / 203-548-0 [2] / 207-346-3 [3] / 209-230-8 [4] / 209-280-0 [5] / 209-643-3 [6] / 209-680-5 [7] / 209-730-6 [8] / 210-529-0 [9] / 250-610-8 [10] | 142-82-5 | Flam. Liq. 2 / Asp. Tox. 1 / STOT SE 3 / Skin Irrit. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H225 / H304 / H336 / H315 / H400 / H410 | C | CLP00/ATP01 |
 | 601-009-00-8 | octane; n-octane; 2,2,4-trimethylpentane; 2,3,3-trimethylpentane; 3,3-dimethylhexane; 2,2,3-trimethylpentane; 2,3,4-trimethylpentane; 3,4-dimethylhexane; 2,3-dimethylhexane; 2,4-dimethylhexane; 4-methylheptane; 3-methylheptane; 2,2-dimethylhexane; 2,5-dimethylhexane; 2-methylheptane; 2,2,3,3-tetramethylbutane; 3-ethyl-2-methylpentane; 3-ethylhexane; 3-ethyl-3-methylpentane; isooctane | 203-892-1 [1] / 208-759-1 [2] / 209-207-2 [3] / 209-243-9 [4] / 209-266-4 [5] / 209-292-6 [6] / 209-504-7 [7] / 209-547-1 [8] / 209-649-6 [9] / 209-650-1 [10] / 209-660-6 [11] / 209-689-4 [12] / 209-745-8 [13] / 209-747-9 [14] / 209-855-6 [15] / 210-187-2 [16] / 210-621-0 [17] / 213-923-0 [18] / 247-861-0 [19] | 111-65-9 | Flam. Liq. 2 / Asp. Tox. 1 / STOT SE 3 / Skin Irrit. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H225 / H304 / H336 / H315 / H400 / H410 | C | CLP00/ATP01 |
@@ -777,7 +791,7 @@
 | 601-042-00-8 | biphenyl; diphenyl | 202-163-5 | 92-52-4 | STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H335 / H315 / H319 / H400 / H410 | - | CLP00 |
 | 601-043-00-3 | 1,2,4-trimethylbenzene | 202-436-9 | 95-63-6 | Flam. Liq. 3 / Acute Tox. 4 / STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 / Aquatic Chronic 2 | H226 / H332 / H335 / H315 / H319 / H411 | - | CLP00 |
 | 601-044-00-9 | 3a,4,7,7a-tetrahydro-4,7-methanoindene | 201-052-9 | 77-73-6 | Flam. Liq. 2 / Acute Tox. 4 / Acute Tox. 4 / STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 / Aquatic Chronic 2 | H225 / H332 / H302 / H335 / H315 / H319 / H411 | - | CLP00 |
-| 601-045-00-4 | 1,2,3,4-tetrahydronaphthalene | 204-340-2 | 119-64-2 | Skin Irrit. 2 / Eye Irrit. 2 / Aquatic Chronic 2 | H315 / H319 / H411 | - | CLP00 |
+| 601-045-00-4 | 1,2,3,4-tetrahydronaphthalene | 204-340-2 | 119-64-2 | Skin Irrit. 2 / Eye Irrit. 2 / Aquatic Chronic 2 | H315 / H319 / H411 | EUH019 | CLP00 |
 | 601-046-00-X | 7-methylocta-1,6-diene | 404-210-7 | 42152-47-6 | Flam. Liq. 3 / Aquatic Acute 1 / Aquatic Chronic 1 | H226 / H400 / H410 | - | CLP00 |
 | 601-047-00-5 | m-mentha-1,3(8)-diene | 404-150-1 | 17092-80-7 | Skin Irrit. 2 / Aquatic Chronic 2 | H315 / H411 | - | CLP00 |
 | 601-048-00-0 | chrysene | 205-923-4 | 218-01-9 | Carc. 1B / Muta. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H350 / H341 / H400 / H410 | - | CLP00 |
@@ -806,7 +820,7 @@
 | 601-077-00-9 | reaction mass of: 1-heptyl-4-ethyl-2,6,7-trioxabicyclo[2.2.2]octane; 1-nonyl-4-ethyl-2,6,7-trioxabicyclo[2.2.2]octane | 426-510-7 | 196965-91-0 | Aquatic Acute 1 / Aquatic Chronic 1 | H400 / H410 | - | ATP01 |
 | 601-081-00-0 | cyclohexadeca-1,9-diene | 431-730-1 | 4277-06-9 | Skin Irrit. 2 / Skin Sens. 1 / Aquatic Chronic 4 | H315 / H317 / H413 | - | ATP01 |
 | 601-083-00-1 | 5-endo-hexyl-bicyclo[2.2.1]hept-2-ene | 435-000-3 | 22094-83-3 | Asp. Tox. 1 / Skin Irrit. 2 / Aquatic Chronic 4 | H304 / H315 / H413 | - | ATP01 |
-| 601-085-00-2 | isopentane; 2-methylbutane | 201-142-8 | 78-78-4 | Flam. Liq. 1 / Asp. Tox. 1 / STOT SE 3 / Aquatic Chronic 2 | H224 / H304 / H336 / H411 | - | CLP00 |
+| 601-085-00-2 | isopentane; 2-methylbutane | 201-142-8 | 78-78-4 | Flam. Liq. 1 / Asp. Tox. 1 / STOT SE 3 / Aquatic Chronic 2 | H224 / H304 / H336 / H411 | EUH066 | CLP00 |
 | 601-087-00-3 | 2,4,4-trimethylpentene | 246-690-9 | 25167-70-8 | Flam. Liq. 2 / Asp. Tox. 1 / STOT SE 3 | H225 / H304 / H336 | D | ATP05 |
 | 601-088-00-9 | 4-vinylcyclohexene | 202-848-9 | 100-40-3 | Carc. 2 | H351 | - | ATP06 |
 | 601-089-00-4 | muscalure; cis-tricos-9-ene | 248-505-7 | 27519-02-4 | Skin Sens. 1B | H317 | - | ATP06 |
@@ -831,7 +845,7 @@
 | 602-011-00-1 | 1,1-dichloroethane | 200-863-5 | 75-34-3 | Flam. Liq. 2 / Acute Tox. 4 / STOT SE 3 / Eye Irrit. 2 / Aquatic Chronic 3 | H225 / H302 / H335 / H319 / H412 | - | CLP00 |
 | 602-012-00-7 | 1,2-dichloroethane; ethylene dichloride | 203-458-1 | 107-06-2 | Flam. Liq. 2 / Carc. 1B / Acute Tox. 4 / STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 | H225 / H350 / H302 / H335 / H315 / H319 | - | CLP00 |
 | 602-013-00-2 | 1,1,1-trichloroethane; methyl chloroform | 200-756-3 | 71-55-6 | Acute Tox. 4 / Ozone 1 | H332 / H420 | F | CLP00/ATP02 |
-| 602-014-00-8 | 1,1,2-trichloroethane | 201-166-9 | 79-00-5 | Carc. 2 / Acute Tox. 4 / Acute Tox. 4 / Acute Tox. 4 | H351 / H332 / H312 / H302 | - | CLP00 |
+| 602-014-00-8 | 1,1,2-trichloroethane | 201-166-9 | 79-00-5 | Carc. 2 / Acute Tox. 4 / Acute Tox. 4 / Acute Tox. 4 | H351 / H332 / H312 / H302 | EUH066 | CLP00 |
 | 602-015-00-3 | 1,1,2,2-tetrachloroethane | 201-197-8 | 79-34-5 | Acute Tox. 1 / Acute Tox. 2 / Aquatic Chronic 2 | H310 / H330 / H411 | - | CLP00 |
 | 602-016-00-9 | 1,1,2,2-tetrabromoethane | 201-191-5 | 79-27-6 | Acute Tox. 2 / Eye Irrit. 2 / Aquatic Chronic 3 | H330 / H319 / H412 | - | CLP00 |
 | 602-017-00-4 | pentachloroethane | 200-925-1 | 76-01-7 | Carc. 2 / STOT RE 1 / Aquatic Chronic 2 | H351 / H372 / H411 | - | CLP00 |
@@ -896,11 +910,11 @@
 | 602-077-00-1 | dodecachloropentacyclo[5.2.1.02,6.03,9.05,8]decane; mirex | 219-196-6 | 2385-85-5 | Carc. 2 / Repr. 2 / Lact. / Acute Tox. 4 / Acute Tox. 4 / Aquatic Acute 1 / Aquatic Chronic 1 | H351 / H361fd / H362 / H312 / H302 / H400 / H410 | - | CLP00 |
 | 602-078-00-7 | hexachlorocyclopentadiene | 201-029-3 | 77-47-4 | Acute Tox. 2 / Acute Tox. 3 / Acute Tox. 4 / Skin Corr. 1B / Aquatic Acute 1 / Aquatic Chronic 1 | H330 / H311 / H302 / H314 / H400 / H410 | - | CLP00 |
 | 602-079-00-2 | 2,3-dichloropropene; 2,3-dichloropropylene | 201-153-8 | 78-88-6 | Flam. Liq. 2 / Muta. 2 / Acute Tox. 4 / Acute Tox. 4 / Acute Tox. 4 / STOT SE 3 / Skin Irrit. 2 / Eye Dam. 1 / Aquatic Chronic 3 | H225 / H341 / H332 / H312 / H302 / H335 / H315 / H318 / H412 | - | CLP00 |
-| 602-080-00-8 | alkanes, C10-13, chloro; chlorinated paraffins, C10-13 | 287-476-5 | 85535-84-8 | Carc. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H351 / H400 / H410 | - | CLP00/ATP01 |
+| 602-080-00-8 | alkanes, C10-13, chloro; chlorinated paraffins, C10-13 | 287-476-5 | 85535-84-8 | Carc. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H351 / H400 / H410 | EUH066 | CLP00/ATP01 |
 | 602-082-00-9 | 2,2,6,6-tetrakis(bromomethyl)-4-oxaheptane-1,7-diol | 408-020-5 | 109678-33-3 | Skin Sens. 1 / Aquatic Chronic 2 | H317 / H411 | - | CLP00 |
 | 602-083-00-4 | diphenyl ether, pentabromo derivative pentabromodiphenyl ether | 251-084-2 | 32534-81-9 | Lact. / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H362 / H373 / H400 / H410 | - | CLP00 |
 | 602-084-00-X | 1,1-dichloro-1-fluoroethane | 404-080-1 | 1717-00-6 | Aquatic Chronic 3 / Ozone 1 | H412 / H420 | - | CLP00/ATP02 |
-| 602-085-00-5 | 2-bromopropane | 200-855-1 | 75-26-3 | Flam. Liq. 2 / Repr. 1A / STOT RE 2 | H225 / H360F / H373 | - | CLP00 |
+| 602-085-00-5 | 2-bromopropane | 200-855-1 | 75-26-3 | Flam. Liq. 2 / Repr. 1A / STOT RE 2 | H225 / H360F / H373 | EUH066 | CLP00 |
 | 602-086-00-0 | trifluoroiodomethane; trifluoromethyl iodide | 219-014-5 | 2314-97-8 | Muta. 2 | H341 | - | CLP00 |
 | 602-087-00-6 | 1,2,4-trichlorobenzene | 204-428-0 | 120-82-1 | Acute Tox. 4 / Skin Irrit. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H315 / H400 / H410 | - | CLP00 |
 | 602-088-00-1 | 2,3-dibromopropan-1-ol; 2,3-dibromo-1-propanol | 202-480-9 | 96-13-9 | Carc. 1B / Repr. 2 / Acute Tox. 3 / Acute Tox. 4 / Acute Tox. 4 / Aquatic Chronic 3 | H350 / H361f / H311 / H332 / H302 / H412 | - | CLP00 |
@@ -910,7 +924,7 @@
 | 602-092-00-3 | 1-bromo-3,4,5-trifluorobenzene | 418-480-9 | 138526-69-9 | Flam. Liq. 3 / Carc. 2 / Skin Irrit. 2 / Eye Dam. 1 / Aquatic Chronic 2 | H226 / H351 / H315 / H318 / H411 | - | CLP00 |
 | 602-093-00-9 | α, α,α,4-tetrachlorotoluene; p-chlorobenzotrichloride | 226-009-1 | 5216-25-1 | Carc. 1B / Repr. 2 / Acute Tox. 4 / Acute Tox. 4 / STOT SE 3 / STOT RE 1 / Skin Irrit. 2 | H350 / H361f / H312 / H302 / H335 / H372 / H315 | - | CLP00 |
 | 602-094-00-4 | diphenylether; octabromo derivate | 251-087-9 | 32536-52-0 | Repr. 1B | H360Df | - | CLP00 |
-| 602-095-00-X | alkanes, C14-17, chloro; chlorinated paraffins, C14-17 | 287-477-0 | 85535-85-9 | Lact. / Aquatic Acute 1 / Aquatic Chronic 1 | H362 / H400 / H410 | - | ATP01 |
+| 602-095-00-X | alkanes, C14-17, chloro; chlorinated paraffins, C14-17 | 287-477-0 | 85535-85-9 | Lact. / Aquatic Acute 1 / Aquatic Chronic 1 | H362 / H400 / H410 | EUH066 | ATP01 |
 | 602-096-00-5 | malachite green hydrochloride; malachite green oxalate | 209-322-8 [1] / 219-441-7 [2] | 569-64-2 | Repr. 2 / Acute Tox. 4 / Eye Dam. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H361d / H302 / H318 / H400 / H410 | - | CLP00 |
 | 602-097-00-0 | 1-bromo-9-(4,4,5,5,5-pentafluoropentylthio)nonane | 422-850-5 | 148757-89-5 | Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H317 / H400 / H410 | - | CLP00 |
 | 602-098-00-6 | 2-(3-bromophenoxy)tetrahydro-2H-pyran | 429-030-6 | 57999-49-2 | Skin Sens. 1 / Aquatic Chronic 2 | H317 / H411 | - | ATP01 |
@@ -943,29 +957,33 @@
 | 603-019-00-8 | dimethyl ether | 204-065-8 | 115-10-6 | Flam. Gas 1 / Press. Gas | H220 | U | CLP00 |
 | 603-020-00-3 | ethyl methyl ether |  | 540-67-0 | Flam. Gas 1 / Press. Gas | H220 | U | CLP00 |
 | 603-021-00-9 | methyl vinyl ether | 203-475-4 | 107-25-5 | Flam. Gas 1 / Press. Gas | H220 | D, U | CLP00 |
-| 603-022-00-4 | diethyl ether; ether | 200-467-2 | 60-29-7 | Flam. Liq. 1 / Acute Tox. 4 / STOT SE 3 | H224 / H302 / H336 | - | CLP00 |
+| 603-022-00-4 | diethyl ether; ether | 200-467-2 | 60-29-7 | Flam. Liq. 1 / Acute Tox. 4 / STOT SE 3 | H224 / H302 / H336 | EUH019 EUH066 | CLP00 |
 | 603-023-00-X | ethylene oxide;; oxirane | 200-849-9 | 75-21-8 | Flam. Gas 1 / Press. Gas / Carc. 1B / Muta. 1B / Repr. 1B / Acute Tox. 3 / Acute Tox. 3 / STOT SE 3 / STOT SE 3 / STOT RE 1 / Skin Corr. 1 / Eye Dam. 1 | H220 / H350 / H340 / H360Fd / H331 / H301 / H335 / H336 / H372 (nervous system) / H314 / H318 | U | CLP00/ATP14 |
-| 603-024-00-5 | 1,4-dioxane | 204-661-8 | 123-91-1 | Flam. Liq. 2 / Carc. 1B / STOT SE 3 / Eye Irrit. 2 | H225 / H350 / H335 / H319 | D | CLP00/ATP17 |
-| 603-025-00-0 | tetrahydrofuran | 203-726-8 | 109-99-9 | Flam. Liq. 2 / Carc. 2 / STOT SE 3 / Eye Irrit. 2 | H225 / H351 / H335 / H319 | - | CLP00/ATP03 |
+| 603-024-00-5 | 1,4-dioxane | 204-661-8 | 123-91-1 | Flam. Liq. 2 / Carc. 1B / STOT SE 3 / Eye Irrit. 2 | H225 / H350 / H335 / H319 | D, EUH019 EUH066 | CLP00/ATP17 |
+| 603-025-00-0 | tetrahydrofuran | 203-726-8 | 109-99-9 | Flam. Liq. 2 / Carc. 2 / STOT SE 3 / Eye Irrit. 2 | H225 / H351 / H335 / H319 | EUH019 | CLP00/ATP03 |
 | 603-026-00-6 | 1-chloro-2,3-epoxypropane; epichlorhydrin | 203-439-8 | 106-89-8 | Flam. Liq. 3 / Carc. 1B / Acute Tox. 3 / Acute Tox. 3 / Acute Tox. 3 / Skin Corr. 1B / Skin Sens. 1 | H226 / H350 / H331 / H311 / H301 / H314 / H317 | - | CLP00 |
 | 603-027-00-1 | ethanediol; ethylene glycol | 203-473-3 | 107-21-1 | Acute Tox. 4 | H302 | - | CLP00 |
 | 603-028-00-7 | 2-chloroethanol; ethylene chlorohydrin | 203-459-7 | 107-07-3 | Acute Tox. 1 / Acute Tox. 2 / Acute Tox. 2 | H310 / H330 / H300 | - | CLP00 |
 | 603-029-00-2 | bis(2-chloroethyl) ether | 203-870-1 | 111-44-4 | Carc. 2 / Acute Tox. 1 / Acute Tox. 2 / Acute Tox. 2 | H351 / H310 / H330 / H300 | - | CLP00/ATP01 |
 | 603-030-00-8 | 2-aminoethanol; ethanolamine | 205-483-3 | 141-43-5 | Acute Tox. 4 / Acute Tox. 4 / Acute Tox. 4 / Skin Corr. 1B | H332 / H312 / H302 / H314 | - | CLP00 |
-| 603-031-00-3 | 1,2-dimethoxyethane; ethylene glycol dimethyl ether; EGDME | 203-794-9 | 110-71-4 | Flam. Liq. 2 / Repr. 1B / Acute Tox. 4 | H225 / H360FD / H332 | - | CLP00 |
+| 603-031-00-3 | 1,2-dimethoxyethane; ethylene glycol dimethyl ether; EGDME | 203-794-9 | 110-71-4 | Flam. Liq. 2 / Repr. 1B / Acute Tox. 4 | H225 / H360FD / H332 | EUH019 | CLP00 |
 | 603-032-00-9 | ethylene dinitrate; ethylene glycol dinitrate | 211-063-0 | 628-96-6 | Unst. Expl. / Acute Tox. 1 / Acute Tox. 2 / Acute Tox. 2 / STOT RE 2 | H200 / H310 / H330 / H300 / H373 | - | CLP00/ATP01 |
 | 603-033-00-4 | oxydiethylene dinitrate; diethylene glycol dinitrate; digol dinitrate | 211-745-8 | 693-21-0 | Acute Tox. 1 / Acute Tox. 2 / Acute Tox. 2 / STOT RE 2 / Aquatic Chronic 3 / Unst. Expl. | H310 / H330 / H300 / H373 / H412 / H200 | - | CLP00 |
+| 603-033-01-1 | oxydiethylene dinitrate; diethylene glycol dinitrate; digol dinitrate; [>25 % phlegmatiser] | 211-745-8 | 693-21-0 | Expl. 1.1 / Acute Tox. 1 / Acute Tox. 2 / Acute Tox. 2 / STOT RE 2 / Aquatic Chronic 3 | H201 / H310 / H330 / H300 / H373 / H412 | - | CLP00 |
 | 603-034-00-X | glycerol trinitrate; nitroglycerine | 200-240-8 | 55-63-0 | Unst. Expl. / Acute Tox. 1 / Acute Tox. 2 / Acute Tox. 2 / STOT RE 2 / Aquatic Chronic 2 | H200 / H310 / H330 / H300 / H373 / H411 | - | CLP00 |
+| 603-034-01-7 | glycerol trinitrate; nitroglycerine; [>40 % phlegmatiser] | 200-240-8 | 55-63-0 | Expl. 1.1 / Acute Tox. 1 / Acute Tox. 2 / Acute Tox. 2 / STOT RE 2 / Aquatic Chronic 2 | H201 / H310 / H330 / H300 / H373 / H411 | - | CLP00 |
 | 603-035-00-5 | pentaerythritol tetranitrate; P.E.T.N. | 201-084-3 | 78-11-5 | Unst. Expl. | H200 | - | CLP00 |
+| 603-035-01-2 | pentaerythritol tetranitrate; pentaerythrite tetranitrate; P.E.T.N.; [>20 % phlegmatiser] | 201-084-3 | 78-11-5 | Expl. 1.1 | H201 | T | CLP00 |
 | 603-036-00-0 | mannitol hexanitrate; nitromannite | 239-924-6 | 15825-70-4 | Unst. Expl. | H200 | - | CLP00 |
+| 603-036-01-8 | mannitol hexanitrate; nitromannite; [>40 % phlegmatiser] | 239-924-6 | 15825-70-4 | Expl. 1.1 | H201 | - | CLP00 |
 | 603-038-00-1 | allyl glycidyl ether; allyl 2,3-epoxypropyl ether; prop-2-en-1-yl 2,3-epoxypropyl ether | 203-442-4 | 106-92-3 | Flam. Liq. 3 / Carc. 2 / Muta. 2 / Repr. 2 / Acute Tox. 4 / Acute Tox. 4 / STOT SE 3 / Skin Irrit. 2 / Eye Dam. 1 / Skin Sens. 1 / Aquatic Chronic 3 | H226 / H351 / H341 / H361f / H332 / H302 / H335 / H315 / H318 / H317 / H412 | - | CLP00 |
 | 603-039-00-7 | butyl glycidyl ether; butyl 2,3-epoxypropyl ether | 219-376-4 | 2426-08-6 | Flam. Liq. 3 / Carc. 2 / Muta. 2 / Acute Tox. 4 / Acute Tox. 4 / STOT SE 3 / Skin Sens. 1 / Aquatic Chronic 3 | H226 / H351 / H341 / H332 / H302 / H335 / H317 / H412 | - | CLP00 |
-| 603-040-00-2 | sodium methanolate; sodium methoxide; potassium methanolate; potassium methoxide; lithium methanolate; lithium methoxide | 204-699-5 [1] / 212-736-1 [2] / 212-737-7 [3] | 124-41-4 | Self-heat. 1 / Skin Corr. 1B | H251 / H314 | T | CLP00 |
-| 603-041-00-8 | potassium ethanolate; potassium ethoxide; sodium ethanolate; sodium ethoxide | 213-029-0 [1] / 205-487-5 [2] | 917-58-8 | Self-heat. 1 / Skin Corr. 1B | H251 / H314 | T | CLP00 |
+| 603-040-00-2 | sodium methanolate; sodium methoxide; potassium methanolate; potassium methoxide; lithium methanolate; lithium methoxide | 204-699-5 [1] / 212-736-1 [2] / 212-737-7 [3] | 124-41-4 | Self-heat. 1 / Skin Corr. 1B | H251 / H314 | T, EUH014 | CLP00 |
+| 603-041-00-8 | potassium ethanolate; potassium ethoxide; sodium ethanolate; sodium ethoxide | 213-029-0 [1] / 205-487-5 [2] | 917-58-8 | Self-heat. 1 / Skin Corr. 1B | H251 / H314 | T, EUH014 | CLP00 |
 | 603-042-00-3 | aluminium-tri-isopropoxide | 209-090-8 | 555-31-7 | Flam. Sol. 1 | H228 | T | CLP00 |
 | 603-043-00-9 | triarimol (ISO); 2,4-dichloro-α-(pyrimidin-5-yl) benzhydryl alcohol |  | 26766-27-8 | Acute Tox. 4 | H302 | - | CLP00 |
 | 603-044-00-4 | dicofol (ISO); 2,2,2-trichloro-1,1-bis(4-chlorophenyl)ethanol | 204-082-0 | 115-32-2 | Acute Tox. 4 / Acute Tox. 4 / Skin Irrit. 2 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H312 / H302 / H315 / H317 / H400 / H410 | - | CLP00 |
-| 603-045-00-X | diisopropyl ether; dipropyl ether | 203-560-6 [1] / 203-869-6 [2] | 108-20-3 | Flam. Liq. 2 / STOT SE 3 | H225 / H336 | C | CLP00 |
+| 603-045-00-X | diisopropyl ether; dipropyl ether | 203-560-6 [1] / 203-869-6 [2] | 108-20-3 | Flam. Liq. 2 / STOT SE 3 | H225 / H336 | C, EUH019 EUH066 | CLP00 |
 | 603-046-00-5 | bis(chloromethyl) ether; oxybis(chloromethane) | 208-832-8 | 542-88-1 | Flam. Liq. 2 / Carc. 1A / Acute Tox. 2 / Acute Tox. 3 / Acute Tox. 4 | H225 / H350 / H330 / H311 / H302 | - | CLP00/ATP01 |
 | 603-047-00-0 | 2-dimethylaminoethanol; N,N-dimethylethanolamine | 203-542-8 | 108-01-0 | Flam. Liq. 3 / Acute Tox. 4 / Acute Tox. 4 / Acute Tox. 4 / Skin Corr. 1B | H226 / H332 / H312 / H302 / H314 | - | CLP00 |
 | 603-048-00-6 | 2-diethylaminoethanol; N,N-diethylethanolamine | 202-845-2 | 100-37-8 | Flam. Liq. 3 / Acute Tox. 4 / Acute Tox. 4 / Acute Tox. 4 / Skin Corr. 1B | H226 / H332 / H312 / H302 / H314 | - | CLP00 |
@@ -1019,11 +1037,11 @@
 | 603-097-00-3 | 1,1',1'-nitrilotripropan-2-ol; triisopropanolamine | 204-528-4 | 122-20-3 | Eye Irrit. 2 | H319 | - | CLP00/ATP05 |
 | 603-098-00-9 | 2-phenoxyethanol | 204-589-7 | 122-99-6 | Acute Tox. 4 / STOT SE 3 / Eye Dam. 1 | H302 / H335 / H318 | - | CLP00/ATP17 |
 | 603-099-00-4 | 3-(N-methyl-N-(4-methylamino-3-nitrophenyl)amino)propane-1,2-diol hydrochloride | 403-440-5 | 93633-79-5 | Acute Tox. 4 / Aquatic Chronic 3 | H302 / H412 | - | CLP00 |
-| 603-100-00-8 | 1,2-dimethoxypropane | 404-630-0 | 7778-85-0 | Flam. Liq. 2 | H225 | - | CLP00 |
+| 603-100-00-8 | 1,2-dimethoxypropane | 404-630-0 | 7778-85-0 | Flam. Liq. 2 | H225 | EUH019 | CLP00 |
 | 603-102-00-9 | 1,2-epoxybutane | 203-438-2 | 106-88-7 | Flam. Liq. 2 / Carc. 2 / Acute Tox. 4 / Acute Tox. 4 / Acute Tox. 4 / STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 | H225 / H351 / H332 / H312 / H302 / H335 / H315 / H319 | - | CLP00/ATP07 |
 | 603-103-00-4 | oxirane, mono[(C12-14-alkyloxy)methyl] derivs. | 271-846-8 | 68609-97-2 | Skin Irrit. 2 / Skin Sens. 1 | H315 / H317 | - | CLP00 |
 | 603-104-00-X | fenarimol (ISO); 2,4'-dichloro-α-(pyrimidin-5-yl)benzhydryl alcohol | 262-095-7 | 60168-88-9 | Repr. 2 / Lact. / Aquatic Chronic 2 | H361fd / H362 / H411 | - | CLP00 |
-| 603-105-00-5 | furan | 203-727-3 | 110-00-9 | Flam. Liq. 1 / Carc. 1B / Muta. 2 / Acute Tox. 4 / Acute Tox. 4 / STOT RE 2 / Skin Irrit. 2 / Aquatic Chronic 3 | H224 / H350 / H341 / H332 / H302 / H373 / H315 / H412 | - | CLP00 |
+| 603-105-00-5 | furan | 203-727-3 | 110-00-9 | Flam. Liq. 1 / Carc. 1B / Muta. 2 / Acute Tox. 4 / Acute Tox. 4 / STOT RE 2 / Skin Irrit. 2 / Aquatic Chronic 3 | H224 / H350 / H341 / H332 / H302 / H373 / H315 / H412 | EUH019 | CLP00 |
 | 603-106-00-0 | 2-methoxypropanol | 216-455-5 | 1589-47-5 | Flam. Liq. 3 / Repr. 1B / STOT SE 3 / Skin Irrit. 2 / Eye Dam. 1 | H226 / H360D / H335 / H315 / H318 | - | CLP00 |
 | 603-107-00-6 | 2-(2-methoxyethoxy)ethanol; diethylene glycol monomethyl ether | 203-906-6 | 111-77-3 | Repr. 1B | H360D | - | CLP00/ATP18 |
 | 603-108-00-1 | 2-methylpropan-1-ol; iso-butanol | 201-148-0 | 78-83-1 | Flam. Liq. 3 / STOT SE 3 / STOT SE 3 / Skin Irrit. 2 / Eye Dam. 1 | H226 / H335 / H336 / H315 / H318 | - | CLP00 |
@@ -1046,7 +1064,7 @@
 | 603-132-00-2 | 2-hydroxymethyl-9-methyl-6-(1-methylethyl)-1,4-dioxaspiro[4.5]decane | 408-200-3 | 63187-91-7 | Skin Irrit. 2 / Eye Dam. 1 / Aquatic Chronic 3 | H315 / H318 / H412 | - | CLP00 |
 | 603-136-00-4 | 3-((4-(bis(2-hydroxyethyl)amino)-2-nitrophenyl)amino)-1-propanol | 410-910-3 | 104226-19-9 | Skin Sens. 1 / Aquatic Chronic 3 | H317 / H412 | - | CLP00 |
 | 603-138-00-5 | 3-(2,2-dimethyl-3-hydroxypropyl)toluene; (alt.): 2,2-dimethyl-3-(3-methylphenyl)propanol | 403-140-4 | 103694-68-4 | Aquatic Chronic 3 | H412 | - | CLP00 |
-| 603-139-00-0 | bis(2-methoxyethyl) ether | 203-924-4 | 111-96-6 | Flam. Liq. 3 / Repr. 1B | H226 / H360FD | - | CLP00 |
+| 603-139-00-0 | bis(2-methoxyethyl) ether | 203-924-4 | 111-96-6 | Flam. Liq. 3 / Repr. 1B | H226 / H360FD | EUH019 | CLP00 |
 | 603-140-00-6 | 2,2' -oxybisethanol; diethylene glycol | 203-872-2 | 111-46-6 | Acute Tox. 4 | H302 | - | CLP00 |
 | 603-142-00-7 | 2-(2-(2-hydroxyethoxy)ethyl)-2-aza-bicyclo[2.2.1]heptane | 407-360-1 | 116230-20-7 | Acute Tox. 4 / Acute Tox. 4 / STOT RE 2 / Skin Irrit. 2 / Eye Dam. 1 | H312 / H302 / H373 / H315 / H318 | - | CLP00 |
 | 603-143-00-2 | R-2,3-epoxy-1-propanol | 404-660-4 | 57044-25-4 | Self-react. C / Carc. 1B / Muta. 2 / Repr. 1B / Acute Tox. 3 / Acute Tox. 4 / Acute Tox. 4 / Skin Corr. 1B | H242 / H350 / H341 / H360F / H331 / H312 / H302 / H314 | - | CLP00 |
@@ -1063,7 +1081,7 @@
 | 603-156-00-3 | 2-(2,4-dichlorophenyl)-2-(2-propenyl)oxirane | 411-210-0 | 89544-48-9 | Skin Irrit. 2 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H315 / H317 / H400 / H410 | - | CLP00 |
 | 603-157-00-9 | 6,9-bis(hexadecyloxymethyl)-4,7-dioxanonane-1,2,9-triol | 411-450-6 | 143747-72-2 | Aquatic Chronic 4 | H413 | - | CLP00 |
 | 603-159-00-X | 2-cyclododecylpropan-1-ol | 411-410-8 | 118562-73-5 | Aquatic Acute 1 / Aquatic Chronic 1 | H400 / H410 | - | CLP00 |
-| 603-160-00-5 | 1,2-diethoxypropane | 412-180-1 | 10221-57-5 | Flam. Liq. 2 | H225 | - | CLP00 |
+| 603-160-00-5 | 1,2-diethoxypropane | 412-180-1 | 10221-57-5 | Flam. Liq. 2 | H225 | EUH019 | CLP00 |
 | 603-161-00-0 | 1,3-diethoxypropane | 413-140-6 | 3459-83-4 | Flam. Liq. 3 | H226 | - | CLP00 |
 | 603-162-00-6 | α[2-[[[(2-hydroxyethyl)methylamino]acetyl]amino]propyl]-ω-(nonylphenoxy)poly[oxo(methyl-1,2-ethanediyl)] | 413-420-8 | 144736-29-8 | Skin Corr. 1B / Skin Sens. 1 / Aquatic Chronic 2 | H314 / H317 / H411 | - | CLP00 |
 | 603-163-00-1 | 2-phenyl-1,3-propanediol | 411-810-2 | 1570-95-2 | Eye Dam. 1 | H318 | - | CLP00 |
@@ -1078,7 +1096,7 @@
 | 603-173-00-6 | 4,4-dimethyl-3,5,8-trioxabicyclo[5.1.0]octane | 421-750-9 | 57280-22-5 | Eye Irrit. 2 / Skin Sens. 1 | H319 / H317 | - | CLP00 |
 | 603-174-00-1 | 4-cyclohexyl-2-methyl-2-butanol | 420-630-3 | 83926-73-2 | Eye Dam. 1 / Aquatic Chronic 2 | H318 / H411 | - | CLP00 |
 | 603-175-00-7 | 2-(2-hexyloxyethoxy)ethanol; DEGHE; diethylene glycol monohexyl ether; 3,6-dioxa-1-dodecanol; hexyl carbitol; 3,6-dioxadodecan-1-ol | 203-988-3 | 112-59-4 | Acute Tox. 4 / Eye Dam. 1 | H312 / H318 | - | CLP00 |
-| 603-176-00-2 | 1,2-bis(2-methoxyethoxy)ethane; TEGDME; triethylene glycol dimethyl ether; triglyme | 203-977-3 | 112-49-2 | Repr. 1B | H360Df | - | CLP00 |
+| 603-176-00-2 | 1,2-bis(2-methoxyethoxy)ethane; TEGDME; triethylene glycol dimethyl ether; triglyme | 203-977-3 | 112-49-2 | Repr. 1B | H360Df | EUH019 | CLP00 |
 | 603-177-00-8 | 1-ethoxypropan-2-ol; 2PG1EE; 1-ethoxy-2-propanol; propylene glycol monoethyl ether; 2-ethoxy-1-methylethyl acetate; 2PG1EEA | 216-374-5 [1] / 259-370-9 [2] | 1569-02-4 | Flam. Liq. 3 / STOT SE 3 | H226 / H336 | - | CLP00 |
 | 603-178-00-3 | 2-hexyloxyethanol; ethylene glycol monohexyl ether; n-hexylglycol | 203-951-1 | 112-25-4 | Acute Tox. 4 / Acute Tox. 4 / Skin Corr. 1B | H312 / H302 / H314 | - | CLP00 |
 | 603-179-00-9 | ergocalciferol (ISO); Vitamin D2 | 200-014-9 | 50-14-6 | Acute Tox. 2 / Acute Tox. 3 / Acute Tox. 3 / STOT RE 1 | H330 / H311 / H301 / H372 | - | CLP00 |
@@ -1101,9 +1119,9 @@
 | 603-200-00-1 | 1-pentanol; 3-pentanol | 200-752-1 [1] / 209-526-7 [2] | 71-41-0 | Flam. Liq. 3 / Acute Tox. 4 / STOT SE 3 / Skin Irrit. 2 | H226 / H332 / H335 / H315 | - | ATP01 |
 | 603-202-00-2 | 4,4,5,5,5-pentafluoropentan-1-ol | 421-360-9 | 148043-73-6 | Acute Tox. 4 / Aquatic Chronic 3 | H302 / H412 | - | ATP01 |
 | 603-205-00-9 | (1S-cis)-4-(2-amino-6-chloro-9H-purin-9-yl)-2-cyclopentene-1-methanol hydrochloride | 426-200-1 | 172015-79-1 | Acute Tox. 4 / STOT RE 1 / Eye Dam. 1 / Skin Sens. 1 / Aquatic Chronic 3 | H302 / H372 / H318 / H317 / H412 | - | ATP01 |
-| 603-206-00-4 | 2,2-dichloro-1,3-benzodioxol | 426-850-6 | 2032-75-9 | Flam. Liq. 3 / Acute Tox. 4 / Skin Corr. 1A / Skin Sens. 1 | H226 / H302 / H314 / H317 | - | ATP01 |
+| 603-206-00-4 | 2,2-dichloro-1,3-benzodioxol | 426-850-6 | 2032-75-9 | Flam. Liq. 3 / Acute Tox. 4 / Skin Corr. 1A / Skin Sens. 1 | H226 / H302 / H314 / H317 | EUH014 | ATP01 |
 | 603-207-00-X | 2-isobutyl-2-isopropyl-1,3-dimethoxypropane | 430-800-9 | 129228-21-3 | Skin Irrit. 2 / Aquatic Chronic 2 | H315 / H411 | - | ATP01 |
-| 603-208-00-5 | 1,2-diethoxyethane | 211-076-1 | 629-14-1 | Flam. Liq. 2 / Repr. 1A / Eye Irrit. 2 | H225 / H360Df / H319 | - | ATP01 |
+| 603-208-00-5 | 1,2-diethoxyethane | 211-076-1 | 629-14-1 | Flam. Liq. 2 / Repr. 1A / Eye Irrit. 2 | H225 / H360Df / H319 | EUH019 | ATP01 |
 | 603-209-00-0 | spinosad (ISO) (reaction mass of spinosyn A and spinosyn D in ratios between 95:5 to 50:50); reaction mass of 50-95% of (2R,3aS,5aR,5bS,9S,13S,14R,16aS,16bR)-2-(6-deoxy-2,3,4-tri-O-methyl-α-.sc.l.sc.-mannopyranosyloxy)-13-(4-dimethylamino-2,3,4,6-tetradeoxy-β-.sc.d.sc.-erythropyranosyloxy)-9-ethyl-2,3,3a,5a,5b,6,7,9,10,11,12,13,14,15,16a,16b-hexadecahydro-14-methyl-1H-8-oxacyclododeca[b]as-indacene-7,15-dione and 50-5% (2S,3aR,5aS,5bS,9S,13S,14R,16aS,16bS)-2-(6-deoxy-2,3,4-tri-O-methyl-α-.sc.l.sc.-mannopyranosyloxy)-13-(4-dimethylamino-2,3,4,6-tetradeoxy-β-.sc.d.sc.-erythropyranosyloxy)-9-ethyl-2,3,3a,5a,5b,6,7,9,10,11,12,13,14,15,16a,16b-hexadecahydro-4,14-dimethyl-1H-8-oxacyclododeca[b]as-indacene-7,15-dione; spinosyn A; spinosyn D |  | 131929-60-7 | Aquatic Acute 1 / Aquatic Chronic 1 | H400 / H410 | - | ATP01 |
 | 603-210-00-6 | 2,4-diethyl-1,5-pentanediol | 429-310-8 | 57987-55-0 | Eye Dam. 1 | H318 | - | ATP01 |
 | 603-211-00-1 | 2,3-epoxypropyltrimethylammonium chloride ...%; glycidyl trimethylammonium chloride ...% | 221-221-0 | 3033-77-0 | Carc. 1B / Muta. 2 / Repr. 2 / Acute Tox. 4 / Acute Tox. 4 / STOT RE 2 / Eye Dam. 1 / Skin Sens. 1 / Aquatic Chronic 3 | H350 / H341 / H361f / H312 / H302 / H373 / H318 / H317 / H412 | B | ATP01 |
@@ -1115,6 +1133,7 @@
 | 603-217-00-4 | 2,4,6-tri-tert-butylphenyl 2-butyl-2-ethyl-1,3-propanediolphosphite | 423-560-1 | 161717-32-4 | Skin Sens. 1 / Aquatic Chronic 4 | H317 / H413 | - | ATP01 |
 | 603-220-00-0 | 1-{benzyl[2-(2-methoxyphenoxy)ethyl]amino}-3-(9H-carbazol-4-yloxy)propan-2-ol | 432-890-5 | 72955-94-3 | Aquatic Chronic 4 | H413 | - | ATP01 |
 | 603-221-00-6 | 1-(2-amino-5-chlorophenyl)-2,2,2-trifluoro-1,1-ethanediol, hydrochloride; [containing < 0.1 % 4-chloroaniline (EC No 203-401-0)] | 433-580-2 | 214353-17-0 | Acute Tox. 4 / Skin Corr. 1B / Aquatic Chronic 2 | H302 / H314 / H411 | - | ATP01 |
+| 603-221-01-3 | 1-(2-amino-5-chlorophenyl)-2,2,2-trifluoro-1,1-ethanediol, hydrochloride; [containing ≥ 0.1 % 4-chloroaniline (EC No 203-401-0)] | 433-580-2 | 214353-17-0 | Carc. 1B / Acute Tox. 4 / Skin Corr. 1B / Aquatic Chronic 2 | H350 / H302 / H314 / H411 | - | ATP01 |
 | 603-222-00-1 | (2R,3S,4R,5R,7R,9R,10R,11S,12S,13R)-10-[(4-dimethylamino-3-hydroxy-6-methyltetrahydropyran-2-yl)oxy]-2-ethyl-3,4,12-trihydroxy-9-methoxy-3,5,7,9,11,13-hexamethyl-6,14-dioxo-1-oxacyclotetradecane | 433-820-6 | 118058-74-5 | Eye Irrit. 2 | H319 | - | ATP01 |
 | 603-223-00-7 | 2-cyclopentylidene cyclopentanol; 1,1'-bi(cyclopentyliden)-2-ol | 434-270-1 | 6261-30-9 | Skin Irrit. 2 / Eye Dam. 1 / Aquatic Chronic 3 | H315 / H318 / H412 | - | ATP01 |
 | 603-224-00-2 | 3-ethoxy-1,1,1,2,3,4,4,5,5,6,6,6-dodecafluoro-2-(trifluoromethyl)-hexane | 435-790-1 | 297730-93-9 | Aquatic Chronic 4 | H413 | - | ATP01 |
@@ -1129,7 +1148,6 @@
 | 603-240-00-X | 2,2-bis(bromomethyl) propane-1,3-diol | 221-967-7 | 3296-90-0 | Carc. 1B / Muta. 1B | H350 / H340 | - | ATP15 |
 | 603-241-00-5 | geraniol; (2E)-3,7-dimethylocta-2,6-dien-1-ol | 203-377-1 | 106-24-1 | Skin Sens. 1 | H317 | - | ATP15 |
 | 603-243-00-6 | 2,2-dimethylpropan-1-ol, tribromo derivative; 3-bromo-2,2-bis(bromomethyl)propan-1-ol | 253-057-0 | 36483-57-5 | Carc. 1B / Muta. 2 | H350 / H341 | - | ATP18 |
-| 603-243-00-6 | 2,2-dimethylpropan-1-ol, tribromo derivative; 3-bromo-2,2-bis(bromomethyl)propan-1-ol | 253-057-0 | 1522-92-5 | Carc. 1B / Muta. 2 | H350 / H341 | - | ATP18 |
 | 603-245-00-7 | 2,2'-[[3-methyl-4-[(4-nitrophenyl)azo]phenyl]imino]bisethanol | 221-665-5 | 3179-89-3 | Skin Sens. 1 | H317 | - | ATP21 |
 | 603-246-00-2 | 3,3,4,4,5,5,6,6,7,7,8,8,8-tridecafluorooctan-1-ol | 211-477-1 | 647-42-7 | STOT RE 2 / Aquatic Chronic 1 | H373 (teeth, bones) / H410 | - | ATP21 |
 | 604-001-00-2 | phenol; carbolic acid; monohydroxybenzene; phenylalcohol | 203-632-7 | 108-95-2 | Muta. 2 / Acute Tox. 3 / Acute Tox. 3 / Acute Tox. 3 / STOT RE 2 / Skin Corr. 1B | H341 / H331 / H311 / H301 / H373 / H314 | - | CLP00 |
@@ -1207,19 +1225,19 @@
 | 604-093-00-4 | clorofene;; chlorophene;; 2-benzyl-4-chlorophenol | 204-385-8 | 120-32-1 | Carc. 2 / Repr. 2 / Acute Tox. 4 / STOT RE 2 / Skin Irrit. 2 / Eye Dam. 1 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H351 / H361f / H332 / H373 (kidney) / H315 / H318 / H317 / H400 / H410 | - | ATP10 |
 | 604-094-00-X | isoeugenol; (E)-2-methoxy-4-(prop-1-enyl) phenol; (Z)-2-methoxy-4-(prop-1-enyl) phenol | 202-590-7 [1] / 227-678-2 [2] / 227-633-7 [3] | 97-54-1 | Skin Sens. 1A | H317 | - | ATP13 |
 | 604-095-00-5 | 6,6'-di-tert-butyl-2,2'-methylenedi-p-cresol;; [DBMC] | 204-327-1 | 119-47-1 | Repr. 1B | H360F | - | ATP17 |
-| 604-096-00-0 | piperonyl butoxide (ISO); 2-(2-butoxyethoxy)ethyl 6-propylpiperonyl ether | 200-076-7 | 51-03-6 | STOT SE 3 / Eye Irrit. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H335 / H319 / H400 / H410 | - | ATP18 |
+| 604-096-00-0 | piperonyl butoxide (ISO); 2-(2-butoxyethoxy)ethyl 6-propylpiperonyl ether | 200-076-7 | 51-03-6 | STOT SE 3 / Eye Irrit. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H335 / H319 / H400 / H410 | EUH066 | ATP18 |
 | 604-097-00-6 | 2,4,6-tri-tert-butylphenol | 211-989-5 | 732-26-3 | Repr. 1B / Acute Tox. 4 / STOT RE 2 / Skin Sens. 1B | H360D / H302 / H373 (liver) / H317 | - | ATP18 |
 | 604-098-00-1 | 4,4’-sulphonyldiphenol; bisphenol S | 201-250-5 | 80-09-1 | Repr. 1B | H360FD | - | ATP18 |
 | 604-099-00-7 | 4,4'-[2,2,2-trifluoro-1-(trifluoromethyl)ethylidene]diphenol; bisphenol AF | 216-036-7 | 1478-61-1 | Repr. 1B | H360F | - | ATP21 |
 | 604-100-00-0 | nonylphenol, branched and linear, ethoxylated (with average molecular weight ≤ 1 540 g/mol) [includes ortho-, meta-, para- isomers or any combination thereof] | 500-315-8 / 500-024-6 / 500-045-0 / 500-209-1 / 248-762-5 / 243-816-4 / 248-291-5 / 230-770-5 / 248-743-1 / 247-555-7 / 248-293-6 / and others | 127087-87-0 | Aquatic Acute 1 / Aquatic Chronic 1 | H400 / H410 | - | ATP21 |
-| 605-001-00-5 | formaldehyde …% | 200-001-8 | 50-00-0 | Carc. 1B / Muta. 2 / Acute Tox. 2 / Acute Tox. 4 / Skin Corr. 1B / Skin Sens. 1A | H350 / H341 / H330 / H302 / H314 / H317 | B, D, F | CLP00/ATP22 |
+| 605-001-00-5 | formaldehyde …% | 200-001-8 | 50-00-0 | Carc. 1B / Muta. 2 / Acute Tox. 2 / Acute Tox. 4 / Skin Corr. 1B / Skin Sens. 1A | H350 / H341 / H330 / H302 / H314 / H317 | B, D, F, EUH071 | CLP00/ATP22 |
 | 605-002-00-0 | 1,3,5-trioxan; trioxymethylene | 203-812-5 | 110-88-3 | Flam. Sol. 1 / Repr. 2 / STOT SE 3 | H228 / H361d / H335 | T | CLP00 |
 | 605-003-00-6 | acetaldehyde;; ethanal | 200-836-8 | 75-07-0 | Flam. Liq. 1 / Carc. 1B / Muta. 2 / STOT SE 3 / Eye Irrit. 2 | H224 / H350 / H341 / H335 / H319 | - | CLP00/ATP13 |
 | 605-004-00-1 | 2,4,6-trimethyl-1,3,5-trioxane; paraldehyde | 204-639-8 | 123-63-7 | Flam. Liq. 3 | H226 | - | CLP00/ATP01 |
 | 605-005-00-7 | metaldehyde (ISO); 2,4,6,8-tetramethyl- 1,3,5,7-tetraoxacyclooctane | 203-600-2 | 108-62-3 | Flam. Sol. 2 / Repr. 2 / Acute Tox. 3 / Aquatic Chronic 3 | H228 / H361f / H301 / H412 | - | CLP00/ATP14 |
 | 605-006-00-2 | butyraldehyde | 204-646-6 | 123-72-8 | Flam. Liq. 2 | H225 | - | CLP00 |
 | 605-007-00-8 | 1,1-dimethoxyethane; dimethyl acetal | 208-589-8 | 534-15-6 | Flam. Liq. 2 | H225 | - | CLP00 |
-| 605-008-00-3 | acrolein; prop-2-enal; acrylaldehyde | 203-453-4 | 107-02-8 | Flam. Liq. 2 / Acute Tox. 1 / Acute Tox. 2 / Acute Tox. 3 / Skin Corr. 1B / Aquatic Acute 1 / Aquatic Chronic 1 | H225 / H330 / H300 / H311 / H314 / H400 / H410 | D | CLP00/ATP06 |
+| 605-008-00-3 | acrolein; prop-2-enal; acrylaldehyde | 203-453-4 | 107-02-8 | Flam. Liq. 2 / Acute Tox. 1 / Acute Tox. 2 / Acute Tox. 3 / Skin Corr. 1B / Aquatic Acute 1 / Aquatic Chronic 1 | H225 / H330 / H300 / H311 / H314 / H400 / H410 | D, EUH071 | CLP00/ATP06 |
 | 605-009-00-9 | crotonaldehyde; 2-butenal; (E)-2-butenal; (E)-crotonaldehyde | 224-030-0 [1] / 204-647-1 [2] | 4170-30-3 | Flam. Liq. 2 / Muta. 2 / Acute Tox. 2 / Acute Tox. 3 / Acute Tox. 3 / STOT SE 3 / STOT RE 2 / Skin Irrit. 2 / Eye Dam. 1 / Aquatic Acute 1 | H225 / H341 / H330 / H311 / H301 / H335 / H373 / H315 / H318 / H400 | - | CLP00 |
 | 605-010-00-4 | 2-furaldehyde | 202-627-7 | 98-01-1 | Carc. 2 / Acute Tox. 3 / Acute Tox. 3 / Acute Tox. 4 / STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 | H351 / H331 / H301 / H312 / H335 / H315 / H319 | - | CLP00/ATP01 |
 | 605-011-00-X | 2-chlorobenzaldehyde; o-chlorobenzaldehyde | 201-956-3 | 89-98-5 | Skin Corr. 1B | H314 | - | CLP00 |
@@ -1233,7 +1251,7 @@
 | 605-019-00-3 | citral | 226-394-6 | 5392-40-5 | Skin Irrit. 2 / Skin Sens. 1 | H315 / H317 | - | CLP00 |
 | 605-020-00-9 | safrole; 5-allyl-1,3-benzodioxole | 202-345-4 | 94-59-7 | Carc. 1B / Muta. 2 / Acute Tox. 4 | H350 / H341 / H302 | - | CLP00 |
 | 605-021-00-4 | formaldehyde, reaction products with butylphenol | 294-145-9 | 91673-30-2 | Skin Sens. 1 | H317 | - | CLP00 |
-| 605-022-00-X | glutaral; glutaraldehyde; 1,5-pentanedial | 203-856-5 | 111-30-8 | Acute Tox. 2 / Acute Tox. 3 / STOT SE 3 / Skin Corr. 1B / Resp. Sens. 1 / Skin Sens. 1A / Aquatic Acute 1 / Aquatic Chronic 2 | H330 / H301 / H335 / H314 / H334 / H317 / H400 / H411 | - | CLP00/ATP09 |
+| 605-022-00-X | glutaral; glutaraldehyde; 1,5-pentanedial | 203-856-5 | 111-30-8 | Acute Tox. 2 / Acute Tox. 3 / STOT SE 3 / Skin Corr. 1B / Resp. Sens. 1 / Skin Sens. 1A / Aquatic Acute 1 / Aquatic Chronic 2 | H330 / H301 / H335 / H314 / H334 / H317 / H400 / H411 | EUH071 | CLP00/ATP09 |
 | 605-023-00-5 | 5-chloro-2-(4-chlorophenoxy)phenol; [DCPP] | 429-290-0 | 3380-30-1 | Eye Dam. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H318 / H400 / H410 | - | ATP01/ATP10 |
 | 605-024-00-0 | 2-bromo-5-hydroxy-4-methoxybenzaldehyde | 426-540-0 | 2973-59-3 | Skin Sens. 1 / Aquatic Chronic 2 | H317 / H411 | - | ATP01 |
 | 605-025-00-6 | chloroacetaldehyde | 203-472-8 | 107-20-0 | Carc. 2 / Acute Tox. 2 / Acute Tox. 3 / Acute Tox. 3 / Skin Corr. 1B / Aquatic Acute 1 | H351 / H330 / H311 / H301 / H314 / H400 | - | CLP00 |
@@ -1252,12 +1270,12 @@
 | 605-041-00-3 | 2-(4-tert-butylbenzyl) propionaldehyde | 201-289-8 | 80-54-6 | Repr. 1B | H360Fd | - | ATP15 |
 | 605-042-00-9 | α-methyl-1,3-benzodioxole-5-propionaldehyde; (S)-α-methyl-1,3-benzodioxole-5-propionaldehyde; (2S)-3-(1,3-benzodioxol-5-yl)-2-methylpropanal; (R)-α-methyl-1,3-benzodioxole-5-propionaldehyde; (2R)-3-(1,3-benzodioxol-5-yl)-2-methylpropanal | 214-881-6 [1] / - [2] / - [3] | 1205-17-0 | Skin Sens. 1B | H317 | - | ATP22 |
 | 605-043-00-4 | 2,4-dimethylcyclohex-3-ene-1-carbaldehyde; (1α,2α,5α)-2,5-dimethylcyclohex-3-ene-1-carbaldehyde; 2,6-dimethylcyclohex-3-ene-1-carbaldehyde; 3,5-dimethylcyclohex-3-ene-1-carbaldehyde; 3,6-dimethylcyclohex-3-ene-1-carbaldehyde; 4,6-dimethylcyclohex-3-ene-1-carbaldehyde; reaction mass of 3,5-dimethylcyclohex-3-ene-1-carbaldehyde and 2,4-dimethylcyclohex-3-ene-1-carbaldehyde; dimethylcyclohex-3-ene-1-carbaldehyde; Dimethylcyclohex-3-ene-1-carbaldehyde; 1,2,4(or 1,3,5)-trimethylcyclohex-3-ene-1-carbaldehyde; 1,3,4-trimethylcyclohex-3-ene-1-carbaldehyde; 2,2,4-trimethylcyclohex-3-ene-1-carbaldehyde; 2,4,6-trimethylcyclohex-3-enecarbaldehyde; isocyclocitral; 3,5,6-trimethylcyclohex-3-ene-1-carbaldehyde; 4,6,6-trimethylcyclohex-3-ene-1-carbaldehyde | 268-264-1 [1] / 252-395-6 [2] / - [3] / 268-263-6 [4] / 267-186-5 [5] / 253-139-6 [6] / - [7] / 248-742-6 [8] / 272-113-5 [9] / 276-055-1 [10] / - [11] / - [12] / 215-833-7 [13] / 215-638-7 [14] / 266-810-3 [15] / - [16] | 68039-49-6 | Skin Sens. 1B | H317 | - | ATP22 |
-| 606-001-00-8 | acetone; propan-2-one; propanone | 200-662-2 | 67-64-1 | Flam. Liq. 2 / STOT SE 3 / Eye Irrit. 2 | H225 / H336 / H319 | - | CLP00 |
-| 606-002-00-3 | butanone; ethyl methyl ketone | 201-159-0 | 78-93-3 | Flam. Liq. 2 / STOT SE 3 / Eye Irrit. 2 | H225 / H336 / H319 | - | CLP00 |
+| 606-001-00-8 | acetone; propan-2-one; propanone | 200-662-2 | 67-64-1 | Flam. Liq. 2 / STOT SE 3 / Eye Irrit. 2 | H225 / H336 / H319 | EUH066 | CLP00 |
+| 606-002-00-3 | butanone; ethyl methyl ketone | 201-159-0 | 78-93-3 | Flam. Liq. 2 / STOT SE 3 / Eye Irrit. 2 | H225 / H336 / H319 | EUH066 | CLP00 |
 | 606-003-00-9 | heptan-3-one; butyl ethyl ketone | 203-388-1 | 106-35-4 | Flam. Liq. 3 / Acute Tox. 4 / Eye Irrit. 2 | H226 / H332 / H319 | - | CLP00 |
-| 606-004-00-4 | 4-methylpentan-2-one;; isobutyl methyl ketone | 203-550-1 | 108-10-1 | Flam. Liq. 2 / Carc. 2 / Acute Tox. 4 / STOT SE 3 / Eye Irrit. 2 | H225 / H351 / H332 / H336 / H319 | - | CLP00/ATP17 |
+| 606-004-00-4 | 4-methylpentan-2-one;; isobutyl methyl ketone | 203-550-1 | 108-10-1 | Flam. Liq. 2 / Carc. 2 / Acute Tox. 4 / STOT SE 3 / Eye Irrit. 2 | H225 / H351 / H332 / H336 / H319 | EUH066 | CLP00/ATP17 |
 | 606-005-00-X | 2,6-dimethylheptan-4-one; di-isobutyl ketone | 203-620-1 | 108-83-8 | Flam. Liq. 3 / STOT SE 3 | H226 / H335 | - | CLP00 |
-| 606-006-00-5 | pentan-3-one; diethyl ketone | 202-490-3 | 96-22-0 | Flam. Liq. 2 / STOT SE 3 / STOT SE 3 | H225 / H335 / H336 | - | CLP00 |
+| 606-006-00-5 | pentan-3-one; diethyl ketone | 202-490-3 | 96-22-0 | Flam. Liq. 2 / STOT SE 3 / STOT SE 3 | H225 / H335 / H336 | EUH066 | CLP00 |
 | 606-007-00-0 | 3-methylbutan-2-one; methyl isopropyl ketone | 209-264-3 | 563-80-4 | Flam. Liq. 2 | H225 | - | CLP00 |
 | 606-009-00-1 | 4-methylpent-3-en-2-one; mesityl oxide | 205-502-5 | 141-79-7 | Flam. Liq. 3 / Acute Tox. 4 / Acute Tox. 4 / Acute Tox. 4 | H226 / H332 / H312 / H302 | - | CLP00 |
 | 606-010-00-7 | cyclohexanone | 203-631-1 | 108-94-1 | Flam. Liq. 3 / Acute Tox. 4 | H226 / H332 | - | CLP00 |
@@ -1383,16 +1401,16 @@
 | 606-147-00-2 | cycloxydim (ISO); 2-(N-ethoxybutanimidoyl)-3-hydroxy-5-(tetrahydro-2H-thiopyran-3-yl)cyclohex-2-en-1-one | 405-230-9 | 101205-02-1 | Repr. 2 | H361d | - | ATP06 |
 | 606-148-00-8 | carvone (ISO); 2-methyl-5-(prop-1-en-2-yl)cyclohex-2-en-1-one; d-carvone; (5S)-2-methyl-5-(prop-1-en-2-yl)cyclohex-2-en-1-one; l-carvone; (5R)-2-methyl-5-(prop-1-en-2-yl)cyclohex-2-en-1-one | 202-759-5 [1] / 218-827-2 [2] / 229-352-5 [3] | 99-49-0 | Skin Sens. 1 | H317 | - | ATP07 |
 | 606-149-00-3 | tembotrione (ISO); 2-{2-chloro-4-(methylsulfonyl)-3-[(2,2,2-trifluoroethoxy)methyl]benzoyl}cyclohexane-1,3-dione |  | 335104-84-2 | Repr. 2 / STOT RE 2 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H361d / H373 (eyes, kidneys, liver) / H317 / H400 / H410 | - | ATP07 |
-| 606-150-00-9 | clethodim (ISO); (5RS)-2-{(1EZ)-1-[(2E)-3-chloroallyloxyimino]propyl}-5-[(2RS)-2-(ethylthio)propyl]-3-hydroxycyclohex-2-en-1-one |  | 99129-21-2 | Acute Tox. 4 / Skin Sens. 1 / Aquatic Chronic 3 | H302 / H317 / H412 | - | ATP10 |
+| 606-150-00-9 | clethodim (ISO); (5RS)-2-{(1EZ)-1-[(2E)-3-chloroallyloxyimino]propyl}-5-[(2RS)-2-(ethylthio)propyl]-3-hydroxycyclohex-2-en-1-one |  | 99129-21-2 | Acute Tox. 4 / Skin Sens. 1 / Aquatic Chronic 3 | H302 / H317 / H412 | EUH066 | ATP10 |
 | 606-151-00-4 | anthraquinone | 201-549-0 | 84-65-1 | Carc. 1B | H350 | - | ATP10 |
 | 606-152-00-X | (5-chloro-2-methoxy-4-methyl-3-pyridyl)(4,5,6-trimethoxy-o-tolyl)methanone; pyriofenone |  | 688046-61-9 | Carc. 2 / Aquatic Chronic 1 | H351 / H410 | - | ATP17 |
 | 606-153-00-5 | benzophenone | 204-337-6 | 119-61-9 | Carc. 1B | H350 | - | ATP18 |
 | 606-154-00-0 | quinoclamine (ISO); 2-amino-3-chloro-1,4-naphthoquinone | 220-529-2 | 2797-51-5 | Carc. 2 / Repr. 2 / Acute Tox. 4 / STOT RE 2 / Eye Irrit. 2 / Skin Sens. 1A / Aquatic Acute 1 / Aquatic Chronic 1 | H351 / H361d / H302 / H373 (blood system, kidney) / H319 / H317 / H400 / H410 | - | ATP18 |
 | 606-155-00-6 | cinnamaldehyde; 3-phenylprop-2-enal;  cinnamic aldehyde; cinnamal;; (2E)-3-phenylprop-2-enal | 203-213-9[1] / -[2] | 104-55-2 | Skin Sens. 1A | H317 | - | ATP21 |
 | 606-156-00-1 | acetone oxime | 204-820-1 | 127-06-0 | Carc. 1B / Acute Tox. 4 / STOT SE 3 / STOT RE 2 / Eye Dam. 1 / Skin Sens. 1 | H350 / H312 / H336 / H373 (blood system) / H318 / H317 | - | ATP22 |
-| 606-157-00-7 | (3E)-dec-3-en-2-one | - | 18402-84-1 | Acute Tox. 4 / Asp. Tox. 1 / Skin Irrit. 2 / Aquatic Chronic 2 | H332 / H304 / H315 / H411 | - | ATP22 |
+| 606-157-00-7 | (3E)-dec-3-en-2-one | - | 18402-84-1 | Acute Tox. 4 / Asp. Tox. 1 / Skin Irrit. 2 / Aquatic Chronic 2 | H332 / H304 / H315 / H411 | EUH071 | ATP22 |
 | 606-158-00-2 | 2-(dimethylamino)-; 2-[(4-methylphenyl); methyl]-1-[4-(morpholin-; 4-yl)phenyl]butan-1-one | 438-340-0 | 119344-86-4 | Repr. 1B / Aquatic Acute 1 / Aquatic Chronic 1 | H360Df / H400 / H410 | - | ATP22 |
-| 607-001-00-0 | formic acid … % | 200-579-1 | 64-18-6 | Flam. Liq. 3 / Met. Corr. 1 / Acute Tox. 3 / Acute Tox. 4 / Skin Corr. 1A / Eye Dam. 1 | H226 / H290 / H331 / H302 / H314 / H318 | B | CLP00/ATP22 |
+| 607-001-00-0 | formic acid … % | 200-579-1 | 64-18-6 | Flam. Liq. 3 / Met. Corr. 1 / Acute Tox. 3 / Acute Tox. 4 / Skin Corr. 1A / Eye Dam. 1 | H226 / H290 / H331 / H302 / H314 / H318 | B, EUH071 | CLP00/ATP22 |
 | 607-002-00-6 | acetic acid … % | 200-580-7 | 64-19-7 | Flam. Liq. 3 / Skin Corr. 1A | H226 / H314 | B | CLP00 |
 | 607-003-00-1 | chloroacetic acid | 201-178-4 | 79-11-8 | Acute Tox. 3 / Acute Tox. 3 / Acute Tox. 3 / Skin Corr. 1B / Aquatic Acute 1 | H331 / H311 / H301 / H314 / H400 | - | CLP00/ATP01 |
 | 607-004-00-7 | TCA (ISO); trichloroacetic acid | 200-927-2 | 76-03-9 | Skin Corr. 1A / Aquatic Acute 1 / Aquatic Chronic 1 | H314 / H400 / H410 | - | CLP00 |
@@ -1401,7 +1419,7 @@
 | 607-008-00-9 | acetic anhydride | 203-564-8 | 108-24-7 | Flam. Liq. 3 / Acute Tox. 4 / Acute Tox. 4 / Skin Corr. 1B | H226 / H332 / H302 / H314 | - | CLP00 |
 | 607-009-00-4 | phthalic anhydride | 201-607-5 | 85-44-9 | Acute Tox. 4 / STOT SE 3 / Skin Irrit. 2 / Eye Dam. 1 / Resp. Sens. 1 / Skin Sens. 1 | H302 / H335 / H315 / H318 / H334 / H317 | - | CLP00 |
 | 607-010-00-X | propionic anhydride | 204-638-2 | 123-62-6 | Skin Corr. 1B | H314 | - | CLP00 |
-| 607-011-00-5 | acetyl chloride | 200-865-6 | 75-36-5 | Flam. Liq. 2 / Skin Corr. 1B | H225 / H314 | - | CLP00 |
+| 607-011-00-5 | acetyl chloride | 200-865-6 | 75-36-5 | Flam. Liq. 2 / Skin Corr. 1B | H225 / H314 | EUH014 | CLP00 |
 | 607-012-00-0 | benzoyl chloride | 202-710-8 | 98-88-4 | Acute Tox. 4 / Acute Tox. 4 / Acute Tox. 4 / Skin Corr. 1B / Skin Sens. 1 | H332 / H312 / H302 / H314 / H317 | - | CLP00/ATP01 |
 | 607-013-00-6 | dimethyl carbonate | 210-478-4 | 616-38-6 | Flam. Liq. 2 | H225 | - | CLP00 |
 | 607-014-00-1 | methyl formate | 203-481-7 | 107-31-3 | Flam. Liq. 1 / Acute Tox. 4 / Acute Tox. 4 / STOT SE 3 / Eye Irrit. 2 | H224 / H332 / H302 / H335 / H319 | - | CLP00 |
@@ -1411,12 +1429,12 @@
 | 607-018-00-3 | isopentyl formate; pentyl formate | 203-769-2 [1] / 252-343-2 [2] | 110-45-2 | Flam. Liq. 2 / STOT SE 3 / Eye Irrit. 2 | H225 / H335 / H319 | C | CLP00 |
 | 607-019-00-9 | methyl chloroformate | 201-187-3 | 79-22-1 | Flam. Liq. 2 / Acute Tox. 2 / Acute Tox. 4 / Acute Tox. 4 / Skin Corr. 1B | H225 / H330 / H312 / H302 / H314 | - | CLP00 |
 | 607-020-00-4 | ethyl chloroformate | 208-778-5 | 541-41-3 | Flam. Liq. 2 / Acute Tox. 2 / Acute Tox. 4 / Skin Corr. 1B | H225 / H330 / H302 / H314 | - | CLP00 |
-| 607-021-00-X | methyl acetate | 201-185-2 | 79-20-9 | Flam. Liq. 2 / STOT SE 3 / Eye Irrit. 2 | H225 / H336 / H319 | - | CLP00 |
-| 607-022-00-5 | ethyl acetate | 205-500-4 | 141-78-6 | Flam. Liq. 2 / STOT SE 3 / Eye Irrit. 2 | H225 / H336 / H319 | - | CLP00 |
+| 607-021-00-X | methyl acetate | 201-185-2 | 79-20-9 | Flam. Liq. 2 / STOT SE 3 / Eye Irrit. 2 | H225 / H336 / H319 | EUH066 | CLP00 |
+| 607-022-00-5 | ethyl acetate | 205-500-4 | 141-78-6 | Flam. Liq. 2 / STOT SE 3 / Eye Irrit. 2 | H225 / H336 / H319 | EUH066 | CLP00 |
 | 607-023-00-0 | vinyl acetate | 203-545-4 | 108-05-4 | Flam. Liq. 2 / Carc. 2 / Acute Tox. 4 / STOT SE 3 | H225 / H351 / H332 / H335 | D | CLP00/ATP05 |
-| 607-024-00-6 | propyl acetate; isopropyl acetate | 203-686-1 [1] / 203-561-1 [2] | 109-60-4 | Flam. Liq. 2 / STOT SE 3 / Eye Irrit. 2 | H225 / H336 / H319 | C | CLP00 |
-| 607-025-00-1 | n-butyl acetate | 204-658-1 | 123-86-4 | Flam. Liq. 3 / STOT SE 3 | H226 / H336 | - | CLP00 |
-| 607-026-00-7 | sec-butyl acetate; isobutyl acetate; tert-butyl acetate | 203-300-1 [1] / 203-745-1 [2] / 208-760-7 [3] | 105-46-4 | Flam. Liq. 2 | H225 | C | CLP00 |
+| 607-024-00-6 | propyl acetate; isopropyl acetate | 203-686-1 [1] / 203-561-1 [2] | 109-60-4 | Flam. Liq. 2 / STOT SE 3 / Eye Irrit. 2 | H225 / H336 / H319 | C, EUH066 | CLP00 |
+| 607-025-00-1 | n-butyl acetate | 204-658-1 | 123-86-4 | Flam. Liq. 3 / STOT SE 3 | H226 / H336 | EUH066 | CLP00 |
+| 607-026-00-7 | sec-butyl acetate; isobutyl acetate; tert-butyl acetate | 203-300-1 [1] / 203-745-1 [2] / 208-760-7 [3] | 105-46-4 | Flam. Liq. 2 | H225 | C, EUH066 | CLP00 |
 | 607-027-00-2 | methyl propionate | 209-060-4 | 554-12-1 | Flam. Liq. 2 / Acute Tox. 4 | H225 / H332 | - | CLP00 |
 | 607-028-00-8 | ethyl propionate | 203-291-4 | 105-37-3 | Flam. Liq. 2 | H225 | - | CLP00 |
 | 607-029-00-3 | n-butyl propionate; sec-butyl propionate; tert-butyl propionate | 209-669-5 [1] / 208-746-0 [3] | 590-01-2 | Flam. Liq. 3 | H226 | C | CLP00 |
@@ -1463,7 +1481,7 @@
 | 607-077-00-5 | erbon (ISO); 2-(2,4,5-trichlorophenoxy)ethyl 2,2-dichloropropionate |  | 136-25-4 | Acute Tox. 4 / Aquatic Chronic 2 | H302 / H411 | - | CLP00 |
 | 607-078-00-0 | fluenetil (ISO); 2-fluoroethyl biphenyl-4-ylacetate |  | 4301-50-2 | Acute Tox. 1 / Acute Tox. 2 | H310 / H300 | - | CLP00 |
 | 607-079-00-6 | kelevan (ISO); ethyl 5-(perchloro-5-hydroxypentacyclo[5,3,0,02,6,03,9,04,8]decan-5-yl)-4-oxopentanoate; ethyl 5-(1,2,3,5,6,7,8,9,10,10-decachloro-4-hydroxypentacyclo(5,2,1,02,6,03,9,05,8)dec-4-yl)-4-oxovalerate |  | 4234-79-1 | Acute Tox. 3 / Acute Tox. 4 / Aquatic Chronic 2 | H311 / H302 / H411 | - | CLP00 |
-| 607-080-00-1 | chloroacetyl chloride | 201-171-6 | 79-04-9 | Acute Tox. 3 / Acute Tox. 3 / Acute Tox. 3 / STOT RE 1 / Skin Corr. 1A / Aquatic Acute 1 | H331 / H311 / H301 / H372 / H314 / H400 | - | CLP00 |
+| 607-080-00-1 | chloroacetyl chloride | 201-171-6 | 79-04-9 | Acute Tox. 3 / Acute Tox. 3 / Acute Tox. 3 / STOT RE 1 / Skin Corr. 1A / Aquatic Acute 1 | H331 / H311 / H301 / H372 / H314 / H400 | EUH014 EUH029 | CLP00 |
 | 607-081-00-7 | fluoroacetic acid | 205-631-7 | 144-49-0 | Acute Tox. 2 / Aquatic Acute 1 | H300 / H400 | - | CLP00 |
 | 607-083-00-8 | 2,4-DB (ISO); 4-(2,4-dichlorophenoxy)butyric acid | 202-366-9 | 94-82-6 | Acute Tox. 4 / Aquatic Chronic 2 | H302 / H411 | - | CLP00 |
 | 607-085-00-9 | benzyl benzoate | 204-402-9 | 120-51-4 | Acute Tox. 4 / Aquatic Chronic 2 | H302 / H411 | - | CLP00/ATP01 |
@@ -1473,17 +1491,17 @@
 | 607-090-00-6 | thioglycolic acid | 200-677-4 | 68-11-1 | Acute Tox. 3 / Acute Tox. 3 / Acute Tox. 3 / Skin Corr. 1B | H331 / H311 / H301 / H314 | - | CLP00 |
 | 607-091-00-1 | trifluoroacetic acid . . . % | 200-929-3 | 76-05-1 | Acute Tox. 4 / Skin Corr. 1A / Aquatic Chronic 3 | H332 / H314 / H412 | B | CLP00 |
 | 607-092-00-7 | methyl lactate; methyl (±)-lactate; methyl (R)-lactate; methyl (S)-(-)-lactate | 208-930-0 [1] / 218-449-8 [2] / 241-420-6 [3] / 248-704-9 [4] | 547-64-8 | Flam. Liq. 3 / STOT SE 3 / Eye Irrit. 2 | H226 / H335 / H319 | C | CLP00 |
-| 607-093-00-2 | propionyl chloride | 201-170-0 | 79-03-8 | Flam. Liq. 2 / Skin Corr. 1B | H225 / H314 | B, D | CLP00 |
-| 607-094-00-8 | peracetic acid . . . % | 201-186-8 | 79-21-0 | Org. Perox. D / Acute Tox. 2 / Acute Tox. 2 / Acute Tox. 3 / Skin Corr. 1A / Aquatic Acute 1 / Aquatic Chronic 1 | H242 / H330 / H310 / H301 / H314 / H400 / H410 | B, D, T | CLP00/ATP22 |
+| 607-093-00-2 | propionyl chloride | 201-170-0 | 79-03-8 | Flam. Liq. 2 / Skin Corr. 1B | H225 / H314 | B, D, EUH014 | CLP00 |
+| 607-094-00-8 | peracetic acid . . . % | 201-186-8 | 79-21-0 | Org. Perox. D / Acute Tox. 2 / Acute Tox. 2 / Acute Tox. 3 / Skin Corr. 1A / Aquatic Acute 1 / Aquatic Chronic 1 | H242 / H330 / H310 / H301 / H314 / H400 / H410 | B, D, T, EUH071 | CLP00/ATP22 |
 | 607-095-00-3 | maleic acid | 203-742-5 | 110-16-7 | Acute Tox. 4 / STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 / Skin Sens. 1 | H302 / H335 / H315 / H319 / H317 | - | CLP00/ATP01 |
-| 607-096-00-9 | maleic anhydride | 203-571-6 | 108-31-6 | Acute Tox. 4 / STOT RE 1 / Skin Corr. 1B / Eye Dam. 1 / Resp. Sens. 1 / Skin Sens. 1A | H302 / H372 (respiratory system, inhalation) / H314 / H318 / H334 / H317 | - | CLP00/ATP13 |
+| 607-096-00-9 | maleic anhydride | 203-571-6 | 108-31-6 | Acute Tox. 4 / STOT RE 1 / Skin Corr. 1B / Eye Dam. 1 / Resp. Sens. 1 / Skin Sens. 1A | H302 / H372 (respiratory system, inhalation) / H314 / H318 / H334 / H317 | EUH071 | CLP00/ATP13 |
 | 607-097-00-4 | benzene-1,2,4-tricarboxylic acid 1,2-anhydride; trimellitic anhydride | 209-008-0 | 552-30-7 | STOT SE 3 / Eye Dam. 1 / Resp. Sens. 1 / Skin Sens. 1 | H335 / H318 / H334 / H317 | - | CLP00 |
 | 607-098-00-X | benzene-1,2:4,5-tetracarboxylic dianhydride; benzene-1,2:4,5-tetracarboxylic dianhydride; pyromellitic dianhydride | 201-898-9 | 89-32-7 | Eye Dam. 1 / Resp. Sens. 1 / Skin Sens. 1 | H318 / H334 / H317 | - | CLP00 |
 | 607-099-00-5 | 1,2,3,6-tetrahydrophthalic anhydride; cis-1,2,3,6-tetrahydrophthalic anhydride; 3,4,5,6-tetrahydrophthalic anhydride; tetrahydrophthalic anhydride | 201-605-4 [1] / 213-308-7 [2] / 219-374-3 [3] / 247-570-9 [4] | 85-43-8 | Eye Dam. 1 / Resp. Sens. 1 / Skin Sens. 1 / Aquatic Chronic 3 | H318 / H334 / H317 / H412 | C | CLP00 |
 | 607-100-00-9 | benzophenone-3,3',4,4'-tetracarboxylic dianhydride; 4,4'-carbonyldi(phthalic anhydride) | 219-348-1 | 2421-28-5 | STOT SE 3 / Eye Irrit. 2 | H335 / H319 | - | CLP00 |
 | 607-101-00-4 | 1,4,5,6,7,7-hexachlorobicyclo [2,2,1]hept-5-ene-2,3-dicarboxylic anhydride chlorendic anhydride | 204-077-3 | 115-27-5 | STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 | H335 / H315 / H319 | - | CLP00 |
 | 607-102-00-X | cyclohexane-1,2-dicarboxylic anhydride; cis-cyclohexane-1,2-dicarboxylic anhydride; trans-cyclohexane-1,2-dicarboxylic anhydride | 201-604-9 [1] / 236-086-3 [2] / 238-009-9 [3] | 85-42-7 | Eye Dam. 1 / Resp. Sens. 1 / Skin Sens. 1 | H318 / H334 / H317 | C | CLP00 |
-| 607-103-00-5 | succinic anhydride | 203-570-0 | 108-30-5 | Acute Tox. 4 / Skin Corr. 1 / Eye Dam. 1 / Resp. Sens. 1 / Skin Sens. 1 | H302 / H314 / H318 / H334 / H317 | - | CLP00/ATP13 |
+| 607-103-00-5 | succinic anhydride | 203-570-0 | 108-30-5 | Acute Tox. 4 / Skin Corr. 1 / Eye Dam. 1 / Resp. Sens. 1 / Skin Sens. 1 | H302 / H314 / H318 / H334 / H317 | EUH071 | CLP00/ATP13 |
 | 607-104-00-0 | cyclopentane-1,2,3,4-tetracarboxylic dianhydride | 227-964-7 | 6053-68-5 | STOT SE 3 / Eye Irrit. 2 | H335 / H319 | - | CLP00 |
 | 607-105-00-6 | 8,9,10-trinorborn-5-ene-2,3-dicarboxylic anhydride; 1,2,3,6-tetrahydro-3,6-methanophthalic anhydride; (1α,2α,3β,6β)-1,2,3,6-tetrahydro-3,6-methanophthalic anhydride | 204-957-7 [1] / 212-557-9 [2] / 220-384-5 [3] | 129-64-6 | Eye Dam. 1 / Resp. Sens. 1 / Skin Sens. 1 | H318 / H334 / H317 | C | CLP00 |
 | 607-106-00-1 | 8,9-dinorborn-5-ene-2,3-dicarboxylic anhydride |  | 123748-85-6 | Acute Tox. 4 / STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 / Resp. Sens. 1 | H302 / H335 / H315 / H319 / H334 | C | CLP00 |
@@ -1510,7 +1528,7 @@
 | 607-127-00-6 | 2-diethylaminoethyl methacrylate | 203-275-7 | 105-16-8 | Acute Tox. 4 / Skin Irrit. 2 / Eye Irrit. 2 / Skin Sens. 1 | H332 / H315 / H319 / H317 | D | CLP00 |
 | 607-128-00-1 | 2-tert-butylaminoethyl methacrylate | 223-228-4 | 3775-90-4 | Skin Irrit. 2 / Eye Irrit. 2 / Skin Sens. 1 | H315 / H319 / H317 | D | CLP00 |
 | 607-129-00-7 | ethyl lactate; ethyl DL-lactate; ethyl (S)-2-hydroxypropionate; ethyl L-lactate; ethyl-(S)-lactate | 202-598-0 [1] / 211-694-1 [2] | 97-64-3 | Flam. Liq. 3 / STOT SE 3 / Eye Dam. 1 | H226 / H335 / H318 | C | CLP00 |
-| 607-130-00-2 | pentyl acetate; isopentyl acetate; 1-methylbutyl acetate; 2-methylbutyl acetat; 2(or 3)-methylbutyl acetate | 211-047-3 [1] / 204-662-3 [2] / 210-946-8 [3] / 210-843-8 [4] / 282-263-3 [5] | 628-63-7 | Flam. Liq. 3 | H226 | C | CLP00 |
+| 607-130-00-2 | pentyl acetate; isopentyl acetate; 1-methylbutyl acetate; 2-methylbutyl acetat; 2(or 3)-methylbutyl acetate | 211-047-3 [1] / 204-662-3 [2] / 210-946-8 [3] / 210-843-8 [4] / 282-263-3 [5] | 628-63-7 | Flam. Liq. 3 | H226 | C, EUH066 | CLP00 |
 | 607-131-00-8 | isopentyl propionate; pentyl propionate; 2-methylbutyl propionate | 203-322-1 [1] / 210-852-7 [2] / 219-449-0 [3] | 105-68-0 | Flam. Liq. 3 | H226 | C | CLP00 |
 | 607-132-00-3 | 2-dimethylaminoethyl methacrylate | 220-688-8 | 2867-47-2 | Acute Tox. 4 / Acute Tox. 4 / Skin Irrit. 2 / Eye Irrit. 2 / Skin Sens. 1 | H312 / H302 / H315 / H319 / H317 | D | CLP00 |
 | 607-135-00-X | butyric acid | 203-532-3 | 107-92-6 | Skin Corr. 1B | H314 | - | CLP00 |
@@ -1554,7 +1572,7 @@
 | 607-178-00-4 | methyl α-((4,6-dimethoxypyrimidin-2-yl)ureidosulphonyl)-o-toluate | 401-340-6 | 83055-99-6 | Skin Sens. 1 / Aquatic Chronic 2 | H317 / H411 | - | CLP00 |
 | 607-179-00-X | (benzothiazol-2-ylthio)succinic acid | 401-450-4 | 95154-01-1 | Skin Sens. 1 | H317 | - | CLP00 |
 | 607-180-00-5 | potassium 2-hydroxycarbazole-1-carboxylate | 401-630-2 | 96566-70-0 | Acute Tox. 4 / STOT SE 3 / Eye Irrit. 2 / Aquatic Chronic 3 | H302 / H335 / H319 / H412 | - | CLP00 |
-| 607-181-00-0 | 3,5-dichloro-2,4-difluorobenzoyl fluoride | 401-800-6 | 101513-70-6 | Acute Tox. 3 / Acute Tox. 4 / Skin Corr. 1B / Skin Sens. 1 / Aquatic Chronic 3 | H331 / H302 / H314 / H317 / H412 | - | CLP00 |
+| 607-181-00-0 | 3,5-dichloro-2,4-difluorobenzoyl fluoride | 401-800-6 | 101513-70-6 | Acute Tox. 3 / Acute Tox. 4 / Skin Corr. 1B / Skin Sens. 1 / Aquatic Chronic 3 | H331 / H302 / H314 / H317 / H412 | EUH029 | CLP00 |
 | 607-184-00-7 | S-(3-trimethoxysilyl)propyl 19-isocyanato-11-(6-isocyanatohexyl)-10,12-dioxo-2,9,11,13-tetraazanonadecanethioate | 402-290-8 | 85702-90-5 | Flam. Liq. 3 / Resp. Sens. 1 / Skin Sens. 1 | H226 / H334 / H317 | - | CLP00 |
 | 607-185-00-2 | ethyl trans-3-dimethylaminoacrylate | 402-650-4 | 1117-37-9 | Skin Sens. 1 | H317 | - | CLP00 |
 | 607-186-00-8 | quinclorac (ISO); 3,7-dichloroquinoline-8-carboxylic acid | 402-780-1 | 84087-01-4 | Skin Sens. 1 | H317 | - | CLP00 |
@@ -1584,7 +1602,7 @@
 | 607-218-00-0 | dichlorprop-P (ISO); (+)-R-2-(2,4-dichlorophenoxy)propionic acid | 403-980-1 | 15165-67-0 | Acute Tox. 4 / Skin Irrit. 2 / Eye Dam. 1 / Skin Sens. 1 | H302 / H315 / H318 / H317 | - | CLP00 |
 | 607-219-00-6 | bis(2-ethylhexyl) dithiodiacetate | 404-510-8 | 62268-47-7 | Acute Tox. 4 / Skin Sens. 1 / Aquatic Chronic 2 | H302 / H317 / H411 | - | CLP00 |
 | 607-222-00-2 | 6-(2,3-dimethylmaleimido)hexyl methacrylate | 404-870-6 | 63740-41-0 | Skin Sens. 1 / Aquatic Chronic 2 | H317 / H411 | - | CLP00 |
-| 607-223-00-8 | transfluthrin (ISO); 2,3,5,6-tetrafluorobenzyl (1R,3S)-3-(2,2-dichlorovinyl)-2,2-dimethylcyclopropanecarboxylate | 405-060-5 | 118712-89-3 | Carc. 2 / Acute Tox. 4 / STOT SE 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H351 / H302 / H370 (nervous system) / H400 / H410 | - | CLP00/ATP21 |
+| 607-223-00-8 | transfluthrin (ISO); 2,3,5,6-tetrafluorobenzyl (1R,3S)-3-(2,2-dichlorovinyl)-2,2-dimethylcyclopropanecarboxylate | 405-060-5 | 118712-89-3 | Carc. 2 / Acute Tox. 4 / STOT SE 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H351 / H302 / H370 (nervous system) / H400 / H410 | EUH066 | CLP00/ATP21 |
 | 607-224-00-3 | methyl 2-(3-nitrobenzylidene)acetoacetate | 405-270-7 | 39562-17-9 | Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H317 / H400 / H410 | - | CLP00 |
 | 607-225-00-9 | 3-azidosulfonylbenzoic acid | 405-310-3 | 15980-11-7 | STOT RE 2 / Eye Dam. 1 / Skin Sens. 1 / Self-React. C | H373 / H318 / H317 / H241 | - | CLP00 |
 | 607-227-00-X | potassium 2-amino-2-methylpropionate octahydrate | 405-560-3 | 120447-91-8 | Acute Tox. 4 / Skin Corr. 1A | H302 / H314 | - | CLP00 |
@@ -1739,6 +1757,7 @@
 | 607-419-00-3 | (3'-carboxymethyl-5-(2-(3-ethyl-3H-benzothiazol-2-ylidene)-1-methyl-ethylidene)-4,4'-dioxo-2'-thioxo-(2,5')bithiazolidinyliden-3-yl)-acetic acid | 422-240-9 | 166596-68-5 | Eye Dam. 1 / Skin Sens. 1 | H318 / H317 | - | CLP00 |
 | 607-420-00-9 | 2,2-bis(hydroxymethyl)butanoic acid | 424-090-1 | 10097-02-6 | Eye Dam. 1 / Aquatic Chronic 3 | H318 / H412 | - | CLP00 |
 | 607-421-00-4 | cypermethrin (ISO);; α-cyano-3-phenoxybenzyl 3-(2,2-dichlorovi-nyl)-2,2-dimethylcyclopro-panecarboxylate; cypermethrin cis/trans +/- 40/60 | 257-842-9 | 52315-07-8 | Acute Tox. 4 / Acute Tox. 4 / STOT SE 3 / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H332 / H302 / H335 / H373 (nervous system) / H400 / H410 | - | CLP00/ATP17 |
+| 607-433-00-X | cypermethrin cis/trans +/- 80/20; (RS)-α-cyano-3-phenoxybenzyl (1RS; 3RS; 1RS, 3SR)-3-(2,2-dichlorovinyl)-2,2-dimethylcyclopropanecarboxylate | 257-842-9 | 52315-07-8 | Acute Tox. 4 / STOT SE 3 / Skin Irrit. 2 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H335 / H315 / H317 / H400 / H410 | - | CLP00 |
 | 607-422-00-X | α-cypermethrin (ISO); racemate comprising (R)-α-cyano-3-phenoxybenzyl (1S,3S)-3-(2,2-dichlorovinyl)-2,2-dimethylcyclopropanecarboxylate; (S)-α-cyano-3-phenoxybenzyl (1R,3R)-3-(2,2-dichlorovinyl)-2,2-dimethylcyclopropanecarboxylate | 257-842-9 | 67375-30-8 | Acute Tox. 3 / STOT SE 3 / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H301 / H335 / H373 / H400 / H410 | - | CLP00/ATP01 |
 | 607-424-00-0 | trifloxystrobin (ISO);; methyl (E)-methoxyimino- {(E)-α-[1-(α,α,α-trifluoro-m- tolyl) ethylideneaminooxy]-o- tolyl}acetate |  | 141517-21-7 | Lact. / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H362 / H317 / H400 / H410 | - | CLP00/ATP17 |
 | 607-425-00-6 | metalaxyl (ISO); methyl-N-(2,6-dimethylphenyl)-N-(methoxyacetyl)-DL-alaninate | 260-979-7 | 57837-19-1 | Acute Tox. 4 / Skin Sens. 1 / Aquatic Chronic 3 | H302 / H317 / H412 | - | CLP00 |
@@ -1748,7 +1767,7 @@
 | 607-429-00-8 | edetic acid; (EDTA) | 200-449-4 | 60-00-4 | Eye Irrit. 2 | H319 | - | ATP01 |
 | 607-430-00-3 | BBP; benzyl butyl phthalate | 201-622-7 | 85-68-7 | Repr. 1B / Aquatic Acute 1 / Aquatic Chronic 1 | H360Df / H400 / H410 | - | CLP00 |
 | 607-431-00-9 | prallethrin (ISO); ETOC; 2-methyl-4-oxo-3-(prop-2-ynyl)cyclopent-2-en-1-yl 2,2-dimethyl-3-(2-methylprop-1-enyl)cyclopropanecarboxylate | 245-387-9 | 23031-36-9 | Acute Tox. 3 / Acute Tox. 4 / Aquatic Acute 1 / Aquatic Chronic 1 | H331 / H302 / H400 / H410 | - | CLP00 |
-| 607-432-00-4 | S-metolachlor (ISO); 2-chloro-N-(2-ethyl-6-methylphenyl)-N-[(2S)-1-methoxypropan-2-yl]acetamide; (R a S a)-2-chloro-N-(6-ethyl-o-tolyl)-N-[(1S)-2-methoxy-1-methylethyl]acetamide; [contains 80-100 % 2-chloro-N-(2-ethyl-6-methylphenyl)-N-[(2S)-1-methoxypropan-2-yl]acetamide and 0-20 % 2-chloro-N-(2-ethyl-6-methylphenyl)-N-[(2R)-1-methoxypropan-2-yl]acetamide] | - | 87392-12-9 | Carc. 2 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H351 / H317 / H400 / H410 | - | CLP00/ATP22 |
+| 607-432-00-4 | S-metolachlor (ISO); 2-chloro-N-(2-ethyl-6-methylphenyl)-N-[(2S)-1-methoxypropan-2-yl]acetamide; (R a S a)-2-chloro-N-(6-ethyl-o-tolyl)-N-[(1S)-2-methoxy-1-methylethyl]acetamide; [contains 80-100 % 2-chloro-N-(2-ethyl-6-methylphenyl)-N-[(2S)-1-methoxypropan-2-yl]acetamide and 0-20 % 2-chloro-N-(2-ethyl-6-methylphenyl)-N-[(2R)-1-methoxypropan-2-yl]acetamide] | - | 87392-12-9 | Carc. 2 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H351 / H317 / H400 / H410 | EUH066 | CLP00/ATP22 |
 | 607-434-00-5 | mecoprop-P and its salts;; (R)-2-(4-chloro-2-methylphenoxy)propionic acid and its salts | 240-539-0 | 16484-77-8 | Acute Tox. 4 / Eye Dam. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H318 / H400 / H410 | - | CLP00/ATP17 |
 | 607-435-00-0 | 2S-isopropyl-5R-methyl-1R-cyclohexyl 2,2-dihydroxyacetate | 416-810-6 | 111969-64-3 | STOT RE 2 / Eye Dam. 1 / Aquatic Chronic 2 | H373 / H318 / H411 | - | CLP00 |
 | 607-437-00-1 | 3-(4-aminophenyl)-2-cyano-2-propenoic acid | 417-480-6 | 252977-62-1 | Skin Sens. 1 | H317 | - | CLP00 |
@@ -1943,16 +1962,16 @@
 | 607-709-00-X | decanoic acid | 206-376-4 | 334-48-5 | Skin Irrit. 2 / Eye Irrit. 2 / Aquatic Chronic 3 | H315 / H319 / H412 | - | ATP07 |
 | 607-710-00-5 | 1,2-benzenedicarboxylic acid, dihexyl ester, branched and linear | 271-093-5 | 68515-50-4 | Repr. 1B | H360FD | - | ATP07 |
 | 607-711-00-0 | spirotetramat (ISO); (5s,8s)-3-(2,5-dimethylphenyl)-8-methoxy-2-oxo-1-azaspiro[4,5]dec-3-en-4-yl ethyl carbonate |  | 203313-25-1 | Repr. 2 / STOT SE 3 / Eye Irrit. 2 / Skin Sens. 1A / Aquatic Acute 1 / Aquatic Chronic 1 | H361fd / H335 / H319 / H317 / H400 / H410 | - | ATP07 |
-| 607-712-00-6 | dodemorph acetate; 4-cyclododecyl-2,6-dimethylmorpholin-4-ium acetate | 250-778-2 | 31717-87-0 | Repr. 2 / STOT RE 2 / Skin Corr. 1C / Skin Sens. 1A / Aquatic Chronic 1 | H361d / H373 (liver) / H314 / H317 / H410 | - | ATP07 |
+| 607-712-00-6 | dodemorph acetate; 4-cyclododecyl-2,6-dimethylmorpholin-4-ium acetate | 250-778-2 | 31717-87-0 | Repr. 2 / STOT RE 2 / Skin Corr. 1C / Skin Sens. 1A / Aquatic Chronic 1 | H361d / H373 (liver) / H314 / H317 / H410 | EUH071 | ATP07 |
 | 607-713-00-1 | fenpyroximate (ISO); tert-butyl 4-[({(E)-[(1,3-dimethyl-5-phenoxy-1H-pyrazol-4-yl)methylene]amino}oxy)methyl]benzoate |  | 134098-61-6 | Acute Tox. 2 / Acute Tox. 3 / Skin Sens. 1B / Aquatic Acute 1 / Aquatic Chronic 1 | H330 / H301 / H317 / H400 / H410 | - | ATP07 |
 | 607-714-00-7 | triflusulfuron-methyl; methyl 2-({[4-(dimethylamino)-6-(2,2,2- trifluoroethoxy)-1,3,5-triazin-2- yl]carbamoyl}sulfamoyl)-3- methylbenzoate |  | 126535-15-7 | Carc. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H351 / H400 / H410 | - | CLP00/ATP07 |
 | 607-715-00-2 | bifenazate (ISO); isopropyl 2-(4-methoxybiphenyl-3-yl)hydrazinecarboxylate | 442-820-5 | 149877-41-8 | STOT RE 2 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H373 / H317 / H400 / H410 | - | ATP07 |
 | 607-716-00-8 | bromadiolone (ISO); 3-[3-(4′-bromobiphenyl-4-yl)-3-hydroxy-1-phenylpropyl]-4-hydroxy-2H-chromen-2-one | 249-205-9 | 28772-56-7 | Repr. 1B / Acute Tox. 1 / Acute Tox. 1 / Acute Tox. 1 / STOT RE 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H360D / H330 / H310 / H300 / H372 (blood) / H400 / H410 | - | ATP09 |
-| 607-717-00-3 | difethialone (ISO);; 3-[3-(4′-bromobiphenyl-4-yl)-1,2,3,4-tetrahydronaphthalen-1-yl]-4-hydroxy-2H-1-benzothiopyran-2-one |  | 104653-34-1 | Repr. 1B / Acute Tox. 1 / Acute Tox. 1 / Acute Tox. 1 / STOT RE 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H360D / H330 / H310 / H300 / H372 (blood) / H400 / H410 | - | ATP09 |
+| 607-717-00-3 | difethialone (ISO);; 3-[3-(4′-bromobiphenyl-4-yl)-1,2,3,4-tetrahydronaphthalen-1-yl]-4-hydroxy-2H-1-benzothiopyran-2-one |  | 104653-34-1 | Repr. 1B / Acute Tox. 1 / Acute Tox. 1 / Acute Tox. 1 / STOT RE 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H360D / H330 / H310 / H300 / H372 (blood) / H400 / H410 | EUH070 | ATP09 |
 | 607-718-00-9 | perfluorononan-1-oic acid; perfluorononan-1-oic acid sodium salt; perfluorononan-1-oic acid ammonium salt | 206-801-3 [1] | 375-95-1 | Carc. 2 / Repr. 1B / Lact. / Acute Tox. 4 / Acute Tox. 4 / STOT RE 1 / Eye Dam. 1 | H351 / H360Df / H362 / H332 / H302 / H372 (liver, thymus, spleen) / H318 | - | ATP09 |
 | 607-719-00-4 | dicyclohexyl phthalate | 201-545-9 | 84-61-7 | Repr. 1B / Skin Sens. 1 | H360D / H317 | - | ATP09 |
 | 607-720-00-X | nonadecafluorodecanoic acid; ammonium nonadecafluorodecanoate; sodium nonadecafluorodecanoate | 206-400-3 [1] / 221-470-5 [2] | 335-76-2 | Carc. 2 / Repr. 1B / Lact. | H351 / H360Df / H362 | - | ATP10 |
-| 607-721-00-5 | N,N′-methylenedimorpholine;; N,N′-methylenebismorpholine;; [formaldehyde released from N,N′-methylenebismorpholine];; [MBM] | 227-062-3 | 5625-90-1 | Carc. 1B / Muta. 2 / Acute Tox. 4 / Acute Tox. 4 / Acute Tox. 4 / STOT RE 2 / Skin Corr. 1B / Eye Dam. 1 / Skin Sens. 1 | H350 / H341 / H332 / H312 / H302 / H373 (gastrointestinal tract, respiratory tract) / H314 / H318 / H317 | 8, 9 | ATP10 |
+| 607-721-00-5 | N,N′-methylenedimorpholine;; N,N′-methylenebismorpholine;; [formaldehyde released from N,N′-methylenebismorpholine];; [MBM] | 227-062-3 | 5625-90-1 | Carc. 1B / Muta. 2 / Acute Tox. 4 / Acute Tox. 4 / Acute Tox. 4 / STOT RE 2 / Skin Corr. 1B / Eye Dam. 1 / Skin Sens. 1 | H350 / H341 / H332 / H312 / H302 / H373 (gastrointestinal tract, respiratory tract) / H314 / H318 / H317 | 8, 9, EUH071 | ATP10 |
 | 607-722-00-0 | 2,3,5,6-tetrafluoro-4-(methoxymethyl)benzyl (Z)-(1R,3R)-3-(2-cyanoprop-1-enyl)-2,2-dimethylcyclopropanecarboxylate;; epsilon-momfluorothrin |  | 1065124-65-3 | Acute Tox. 4 / STOT SE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H371 (nervous system) / H400 / H410 | - | ATP10 |
 | 607-723-00-6 | tefluthrin (ISO);; 2,3,5,6-tetrafluoro-4-methylbenzyl (1RS,3RS)-3-[(Z)-2-chloro-3,3,3-trifluoroprop-1-enyl]-2,2-dimethylcyclopropanecarboxylate |  | 79538-32-2 | Acute Tox. 1 / Acute Tox. 2 / Acute Tox. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H330 / H310 / H300 / H400 / H410 | - | ATP10 |
 | 607-724-00-1 | 2,3,5,6-tetrafluoro-4-(methoxymethyl)benzyl (1R,3R)-2,2-dimethyl-3-[(1Z)-prop-1-en-1-yl] cyclopropanecarboxylate;; epsilon-metofluthrin |  | 240494-71-7 | Acute Tox. 3 / Acute Tox. 4 / STOT SE 1 / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H301 / H332 / H370 (nervous system) / H373 / H400 / H410 | - | ATP13 |
@@ -1973,8 +1992,8 @@
 | 607-740-00-9 | diisooctyl phthalate | 248-523-5 | 27554-26-3 | Repr. 1B | H360FD | - | ATP15 |
 | 607-741-00-4 | 4-{[(6-chloropyridin-3-yl)methyl](2,2-di­fluoroethyl)amino}furan-2(5H)-one; flupyra­difurone |  | 951659-40-8 | Acute Tox. 4 / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H373 (muscle) / H400 / H410 | - | ATP15 |
 | 607-742-00-X | thiencarbazone-methyl (ISO); methyl   4-[(4,5-dihydro-3-methoxy-4- methyl-5-oxo-1H-1,2,4-triazol-1-yl)carbonylsulfamoyl]-5- methylthiophene-3- carboxylate |  | 317815-83-1 | Aquatic Acute 1 / Aquatic Chronic 1 | H400 / H410 | - | ATP15 |
-| 607-743-00-5 | L-(+)-lactic acid; (2S)-2-hydroxypropanoic acid | 201-196-2 | 79-33-4 | Skin Corr. 1C / Eye Dam. 1 | H314 / H318 | - | ATP15 |
-| 607-744-00-0 | 2-methoxyethyl acrylate | 221-499-3 | 3121-61-7 | Flam. Liq. 3 / Muta. 2 / Repr. 1B / Acute Tox. 3 / Acute Tox. 4 / Skin Corr. 1C / Eye Dam. 1 / Skin Sens. 1 | H226 / H341 / H360FD / H331 / H302 / H314 / H318 / H317 | - | ATP15 |
+| 607-743-00-5 | L-(+)-lactic acid; (2S)-2-hydroxypropanoic acid | 201-196-2 | 79-33-4 | Skin Corr. 1C / Eye Dam. 1 | H314 / H318 | EUH071 | ATP15 |
+| 607-744-00-0 | 2-methoxyethyl acrylate | 221-499-3 | 3121-61-7 | Flam. Liq. 3 / Muta. 2 / Repr. 1B / Acute Tox. 3 / Acute Tox. 4 / Skin Corr. 1C / Eye Dam. 1 / Skin Sens. 1 | H226 / H341 / H360FD / H331 / H302 / H314 / H318 / H317 | EUH071 | ATP15 |
 | 607-745-00-6 | glyoxylic acid ...% | 206-058-5 | 298-12-4 | Eye Dam. 1 / Skin Sens. 1B | H318 / H317 | B | ATP15 |
 | 607-746-00-1 | sodium N-(hydroxymethyl)glycinate; [formaldehyde released from sodium N-(hydroxymethyl)glycinate] | 274-357-8 | 70161-44-3 | Carc. 1B / Muta. 2 / Acute Tox. 4 / Acute Tox. 4 / STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 / Skin Sens. 1 | H350 / H341 / H332 / H302 / H335 / H315 / H319 / H317 | 8, 9 | ATP15 |
 | 607-747-00-7 | 2,2-dibromo-2-cyanoacetamide; [DBNPA] | 233-539-7 | 10222-01-2 | Acute Tox. 2 / Acute Tox. 3 / STOT RE 1 / Skin Irrit. 2 / Eye Dam. 1 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H330 / H301 / H372 (respiratory tract, inhalation) / H315 / H318 / H317 / H400 / H410 | - | ATP17 |
@@ -2034,7 +2053,6 @@
 | 608-029-00-6 | 1,2-dihydro-6-hydroxy-4-methyl-1-[3-(1-methylethoxy)propyl]-2-oxo-3-pyridinecarbonitrile | 411-990-2 | 68612-94-2 | Skin Sens. 1 | H317 | - | CLP00 |
 | 608-030-00-1 | N-acetyl-N-[5-cyano-3-(2-dibutylamino-4-phenylthyazol-5-yl-methylene)-4-methyl-2,6-dioxo-1,2,3,6-tetrahydropyridin-1-yl]benzamide | 412-340-0 | 147741-93-3 | Aquatic Acute 1 / Aquatic Chronic 1 | H400 / H410 | - | CLP00 |
 | 608-031-00-7 | 2-benzyl-2-methyl-3-butenitrile | 407-870-4 | 97384-48-0 | Acute Tox. 4 / Aquatic Chronic 3 | H302 / H412 | - | CLP00 |
-| 608-032-00-2 | acetamiprid (ISO); (1E)-N-[(6-chloropyridin-3-yl) methyl]-N’-cyano-N-methylethanimidamide; (E)-N1-[(6-chloro-3-pyridyl)methyl]-N2-cyano-N1-methylacetamidine | - | 160430-64-8 | Repr. 2 / Acute Tox. 3 / Aquatic Acute 1 / Aquatic Chronic 1 | H361d / H301 / H400 / H410 | - | ATP01/ATP18 |
 | 608-032-00-2 | acetamiprid (ISO); (1E)-N-[(6-chloropyridin-3-yl) methyl]-N’-cyano-N-methylethanimidamide; (E)-N1-[(6-chloro-3-pyridyl)methyl]-N2-cyano-N1-methylacetamidine | - | 135410-20-7 | Repr. 2 / Acute Tox. 3 / Aquatic Acute 1 / Aquatic Chronic 1 | H361d / H301 / H400 / H410 | - | ATP01/ATP18 |
 | 608-033-00-8 | N-butyl-3-(2-chloro-4-nitrophenylhydrazono)-1-cyano-2-methylprop-1-ene-1,3-dicarboximide | 407-970-8 | 75511-91-0 | Skin Sens. 1 / Aquatic Chronic 3 | H317 / H412 | - | CLP00 |
 | 608-034-00-3 | chlorfenapyr (ISO); 4-bromo-2-(4-chlorophenyl)-1-ethoxymethyl-5-trifluoromethylpyrrole-3-carbonitrile | - | 122453-73-0 | Acute Tox. 3 / Acute Tox. 4 / Aquatic Acute 1 / Aquatic Chronic 1 | H331 / H302 / H400 / H410 | - | CLP00/ATP01 |
@@ -2079,15 +2097,16 @@
 | 609-016-00-8 | dinitrophenol (reaction mass of isomers); 2,4(or 2,6)-dinitrophenol | 247-096-2 [1] / 275-732-9 [2] | 25550-58-7 | Acute Tox. 3 / Acute Tox. 3 / Acute Tox. 3 / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H331 / H311 / H301 / H373 / H400 / H410 | - | CLP00 |
 | 609-018-00-9 | 2,4,6-trinitroresorcinol; styphnic acid | 201-436-6 | 82-71-3 | Expl. 1.1 / Acute Tox. 4 / Acute Tox. 4 / Acute Tox. 4 | H201 / H332 / H312 / H302 | - | CLP00/ATP01 |
 | 609-019-00-4 | lead 2,4,6-trinitro-m-phenylene dioxide; lead 2,4,6-trinitroresorcinoxide; lead styphnate | 239-290-0 | 15245-44-0 | Repr. 1A / Acute Tox. 4 / Acute Tox. 4 / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 / Unst. Expl. | H360Df / H332 / H302 / H373 / H400 / H410 / H200 | 1 | CLP00 |
-| 609-020-00-X | DNOC (ISO); 4,6-dinitro-o-cresol | 208-601-1 | 534-52-1 | Muta. 2 / Acute Tox. 1 / Acute Tox. 2 / Acute Tox. 2 / Skin Irrit. 2 / Eye Dam. 1 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H341 / H310 / H330 / H300 / H315 / H318 / H317 / H400 / H410 | - | CLP00 |
+| 609-019-01-1 | lead 2,4,6-trinitro-m-phenylene dioxide; lead 2,4,6-trinitroresorcinoxide; lead styphnate (≥ 20 % phlegmatiser) | 239-290-0 | 15245-44-0 | Expl. 1.1 / Repr. 1A / Acute Tox. 4 / Acute Tox. 4 / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H201 / H360Df / H332 / H302 / H373 / H400 / H410 | 1 | CLP00 |
+| 609-020-00-X | DNOC (ISO); 4,6-dinitro-o-cresol | 208-601-1 | 534-52-1 | Muta. 2 / Acute Tox. 1 / Acute Tox. 2 / Acute Tox. 2 / Skin Irrit. 2 / Eye Dam. 1 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H341 / H310 / H330 / H300 / H315 / H318 / H317 / H400 / H410 | EUH044 | CLP00 |
 | 609-021-00-5 | sodium salt of DNOC; sodium 4,6-dinitro-o-cresolate; potassium salt of DNOC; potassium 4,6-dinitro-o-cresolate | 219-007-7 [1] | 2312-76-7 | Acute Tox. 3 / Acute Tox. 3 / Acute Tox. 3 / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H331 / H311 / H301 / H373 / H400 / H410 | - | CLP00 |
 | 609-022-00-0 | ammonium salt of DNOC; ammonium 4,6-dinitro-o-tolyl oxide | 221-037-0 | 2980-64-5 | Acute Tox. 1 / Acute Tox. 2 / Acute Tox. 2 / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H310 / H330 / H300 / H373 / H400 / H410 | - | CLP00 |
 | 609-023-00-6 | dinocap (ISO); (RS)-2,6-dinitro-4-octylphenyl crotonates and (RS)-2,4-dinitro-6-octylphenyl crotonates in which “octyl” is a reaction mass of 1-methylheptyl, 1-ethylhexyl and 1-propylpentyl groups | 254-408-0 | 39300-45-3 | Repr. 1B / Acute Tox. 4 / Acute Tox. 4 / STOT RE 2 / Skin Irrit. 2 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H360D / H332 / H302 / H373 / H315 / H317 / H400 / H410 | - | CLP00/ATP01 |
 | 609-024-00-1 | binapacryl (ISO); 2-sec-butyl-4,6-dinitrophenyl-3-methylcrotonate | 207-612-9 | 485-31-4 | Repr. 1B / Acute Tox. 4 / Acute Tox. 4 / Aquatic Acute 1 / Aquatic Chronic 1 | H360D / H312 / H302 / H400 / H410 | - | CLP00 |
-| 609-025-00-7 | dinoseb (ISO); 6-sec-butyl-2,4-dinitrophenol | 201-861-7 | 88-85-7 | Repr. 1B / Acute Tox. 3 / Acute Tox. 3 / Eye Irrit. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H360Df / H311 / H301 / H319 / H400 / H410 | - | CLP00 |
+| 609-025-00-7 | dinoseb (ISO); 6-sec-butyl-2,4-dinitrophenol | 201-861-7 | 88-85-7 | Repr. 1B / Acute Tox. 3 / Acute Tox. 3 / Eye Irrit. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H360Df / H311 / H301 / H319 / H400 / H410 | EUH044 | CLP00 |
 | 609-027-00-8 | dinocton; reaction mass of isomers: methyl 2-octyl-4,6-dinitrophenyl carbonate, methyl 4-octyl-2,6-dinitrophenyl carbonate |  | 63919-26-6 | Acute Tox. 4 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H400 / H410 | - | CLP00 |
 | 609-028-00-3 | dinex (ISO); 2-cyclohexyl-4,6-dinitrophenol | 205-042-5 | 131-89-5 | Acute Tox. 3 / Acute Tox. 3 / Acute Tox. 3 / Aquatic Acute 1 / Aquatic Chronic 1 | H331 / H311 / H301 / H400 / H410 | - | CLP00 |
-| 609-030-00-4 | dinoterb (ISO); 2-tert-butyl-4,6-dinitrophenol | 215-813-8 | 1420-07-1 | Repr. 1B / Acute Tox. 2 / Acute Tox. 3 / Aquatic Acute 1 / Aquatic Chronic 1 | H360D / H300 / H311 / H400 / H410 | - | CLP00 |
+| 609-030-00-4 | dinoterb (ISO); 2-tert-butyl-4,6-dinitrophenol | 215-813-8 | 1420-07-1 | Repr. 1B / Acute Tox. 2 / Acute Tox. 3 / Aquatic Acute 1 / Aquatic Chronic 1 | H360D / H300 / H311 / H400 / H410 | EUH044 | CLP00 |
 | 609-032-00-5 | bromofenoxim (ISO); 3,5-dibromo-4-hydroxybenzaldehyde-O-(2,4-dinitrophenyl)-oxime | 236-129-6 | 13181-17-4 | Acute Tox. 4 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H400 / H410 | - | CLP00 |
 | 609-033-00-0 | dinosam (ISO); 2-(1-methylbutyl)-4,6-dinitrophenol |  | 4097-36-3 | Acute Tox. 3 / Acute Tox. 3 / Acute Tox. 3 / Aquatic Acute 1 / Aquatic Chronic 1 | H331 / H311 / H301 / H400 / H410 | - | CLP00 |
 | 609-035-00-1 | nitroethane | 201-188-9 | 79-24-3 | Flam. Liq. 3 / Acute Tox. 4 / Acute Tox. 4 | H226 / H332 / H302 | - | CLP00 |
@@ -2112,7 +2131,7 @@
 | 609-055-00-0 | 2,5-dinitrotoluene | 210-581-4 | 619-15-8 | Carc. 1B / Muta. 2 / Repr. 2 / Acute Tox. 3 / Acute Tox. 3 / Acute Tox. 3 / STOT RE 2 / Aquatic Chronic 2 | H350 / H341 / H361f / H331 / H311 / H301 / H373 / H411 | - | CLP00 |
 | 609-056-00-6 | 2,2-dibromo-2-nitroethanol | 412-380-9 | 69094-18-4 | Expl. 1.1 / Carc. 2 / Acute Tox. 4 / STOT RE 2 / Skin Corr. 1A / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H201 / H351 / H302 / H373 / H314 / H317 / H400 / H410 | T | CLP00 |
 | 609-057-00-1 | 3-chloro-2,4-difluoronitrobenzene | 411-980-8 | 3847-58-3 | Acute Tox. 4 / Skin Corr. 1B / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H314 / H317 / H400 / H410 | - | CLP00 |
-| 609-058-00-7 | 2-nitro-2-phenyl-1,3-propanediol | 410-360-4 | 5428-02-4 | Acute Tox. 4 / Acute Tox. 4 / STOT RE 1 / Skin Sens. 1 / Aquatic Chronic 2 | H312 / H302 / H372 / H317 / H411 | - | CLP00 |
+| 609-058-00-7 | 2-nitro-2-phenyl-1,3-propanediol | 410-360-4 | 5428-02-4 | Acute Tox. 4 / Acute Tox. 4 / STOT RE 1 / Skin Sens. 1 / Aquatic Chronic 2 | H312 / H302 / H372 / H317 / H411 | EUH070 | CLP00 |
 | 609-059-00-2 | 2-chloro-6-(ethylamino)-4-nitrophenol | 411-440-1 | 131657-78-8 | Acute Tox. 4 / Skin Sens. 1 / Aquatic Chronic 2 | H302 / H317 / H411 | - | CLP00 |
 | 609-060-00-8 | 4-[(3-hydroxypropyl)amino]-3-nitrophenol | 406-305-9 | 92952-81-3 | Skin Irrit. 2 / Aquatic Chronic 2 | H315 / H411 | - | CLP00 |
 | 609-061-00-3 | (E,Z)-4-chlorophenyl(cyclopropyl)ketone O-(4-nitrophenylmethyl)oxime | 406-100-4 | 94097-88-8 | Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H317 / H400 / H410 | - | CLP00 |
@@ -2239,6 +2258,7 @@
 | 611-181-00-6 | potassium (oxido-N­NO-azoxy)cyclohexane; cyclohexylhydroxydia­zene 1-oxide, potassium salt; [K-HDO] |  | 66603-10-9 | Flam. Sol. 1 / Acute Tox. 3 / STOT RE 2 / Skin Irrit. 2 / Eye Dam. 1 / Aquatic Chronic 2 | H228 / H301 / H373 (liver) / H315 / H318 / H411 | - | ATP15 |
 | 611-182-00-1 | 2-[ethyl[3-methyl-4-[(5-nitrothiazol-2-yl)azo]phenyl]amino]ethanol | 271-183-4 | 68516-81-4 | Skin Sens. 1A | H317 | - | ATP22 |
 | 612-001-00-9 | mono-methylamine; di-methylamine; tri-methylamine | 200-820-0 [1] / 204-697-4 [2] / 200-875-0 [3] | 74-89-5 | Flam. Gas 1 / Press. Gas / Acute Tox. 4 / STOT SE 3 / Skin Irrit. 2 / Eye Dam. 1 | H220 / H332 / H335 / H315 / H318 | 5, U | CLP00 |
+| 612-001-01-6 | mono-methylamine ... %; di-methylamine ... %; tri-methylamine ... % | 200-820-0 [1] / 204-697-4 [2] / 200-875-0 [3] | 74-89-5 | Flam. Liq. 1 / Acute Tox. 4 / Acute Tox. 4 / Skin Corr. 1B | H224 / H332 / H302 / H314 | B | CLP00 |
 | 612-002-00-4 | ethylamine | 200-834-7 | 75-04-7 | Flam. Gas 1 / Press. Gas / STOT SE 3 / Eye Irrit. 2 | H220 / H335 / H319 | U | CLP00 |
 | 612-003-00-X | diethylamine | 203-716-3 | 109-89-7 | Flam. Liq. 2 / Acute Tox. 4 / Acute Tox. 4 / Acute Tox. 4 / Skin Corr. 1A | H225 / H332 / H312 / H302 / H314 | - | CLP00 |
 | 612-004-00-5 | triethylamine | 204-469-4 | 121-44-8 | Flam. Liq. 2 / Acute Tox. 3 / Acute Tox. 3 / Acute Tox. 3 / Skin Corr. 1A / Eye Dam. 1 | H225 / H331 / H311 / H301 / H314 / H318 | - | CLP00/ATP21 |
@@ -2267,6 +2287,7 @@
 | 612-032-00-8 | N,N,N',N'-tetramethyl-p-phenylenediamine | 202-831-6 | 100-22-1 | Acute Tox. 4 / Acute Tox. 4 / Acute Tox. 4 | H332 / H312 / H302 | - | CLP00 |
 | 612-033-00-3 | 2-aminophenol | 202-431-1 | 95-55-6 | Muta. 2 / Acute Tox. 4 / Acute Tox. 4 | H341 / H332 / H302 | - | CLP00 |
 | 612-034-00-9 | 2-amino-4,6-dinitrophenol; picramic acid | 202-544-6 | 96-91-3 | Expl. 1.1 / Acute Tox. 4 / Acute Tox. 4 / Acute Tox. 4 / Aquatic Chronic 3 | H201 / H332 / H312 / H302 / H412 | - | CLP00/ATP01 |
+| 612-034-01-6 | 2-amino-4,6-dinitrophenol; picramic acid; [≥ 20 % water] | 202-544-6 | 96-91-3 | Acute Tox. 4 / Acute Tox. 4 / Acute Tox. 4 / Aquatic Chronic 3 | H332 / H312 / H302 / H412 | G | CLP00 |
 | 612-035-00-4 | 2-methoxyaniline; o-anisidine | 201-963-1 | 90-04-0 | Carc. 1B / Muta. 2 / Acute Tox. 3 / Acute Tox. 3 / Acute Tox. 3 | H350 / H341 / H331 / H311 / H301 | - | CLP00 |
 | 612-036-00-X | 3,3'-dimethoxybenzidine; o-dianisidine | 204-355-4 | 119-90-4 | Carc. 1B / Acute Tox. 4 | H350 / H302 | - | CLP00 |
 | 612-038-00-0 | 2-nitro-p-anisidine; 4-methoxy-2-nitroaniline | 202-547-2 | 96-96-8 | Acute Tox. 1 / Acute Tox. 2 / Acute Tox. 2 / STOT RE 2 / Aquatic Chronic 3 | H310 / H330 / H300 / H373 / H412 | - | CLP00 |
@@ -2279,7 +2300,7 @@
 | 612-046-00-4 | allylamine | 203-463-9 | 107-11-9 | Flam. Liq. 2 / Acute Tox. 3 / Acute Tox. 3 / Acute Tox. 3 / Aquatic Chronic 2 | H225 / H331 / H311 / H301 / H411 | - | CLP00 |
 | 612-047-00-X | benzylamine | 202-854-1 | 100-46-9 | Acute Tox. 4 / Acute Tox. 4 / Skin Corr. 1B | H312 / H302 / H314 | - | CLP00 |
 | 612-048-00-5 | dipropylamine | 205-565-9 | 142-84-7 | Flam. Liq. 2 / Acute Tox. 4 / Acute Tox. 4 / Acute Tox. 4 / Skin Corr. 1A | H225 / H332 / H312 / H302 / H314 | - | CLP00 |
-| 612-049-00-0 | di-n-butylamine | 203-921-8 | 111-92-2 | Flam. Liq. 3 / Acute Tox. 2 / Acute Tox. 3 / Acute Tox. 3 / Skin Corr. 1B / Eye Dam. 1 | H226 / H330 / H311 / H301 / H314 / H318 | - | CLP00/ATP21 |
+| 612-049-00-0 | di-n-butylamine | 203-921-8 | 111-92-2 | Flam. Liq. 3 / Acute Tox. 2 / Acute Tox. 3 / Acute Tox. 3 / Skin Corr. 1B / Eye Dam. 1 | H226 / H330 / H311 / H301 / H314 / H318 | EUH071 | CLP00/ATP21 |
 | 612-050-00-6 | cyclohexylamine | 203-629-0 | 108-91-8 | Flam. Liq. 3 / Repr. 2 / Acute Tox. 4 / Acute Tox. 4 / Skin Corr. 1B | H226 / H361f / H312 / H302 / H314 | - | CLP00/ATP01corr |
 | 612-051-00-1 | 4,4'-diaminodiphenylmethane; 4,4'-methylenedianiline | 202-974-4 | 101-77-9 | Carc. 1B / Muta. 2 / STOT SE 1 / STOT RE 2 / Skin Sens. 1 / Aquatic Chronic 2 | H350 / H341 / H370 / H373 / H317 / H411 | - | CLP00 |
 | 612-052-00-7 | (S)-sec-butylamine; (S)-2-aminobutane; (R)-sec-butylamine; (R)-2-aminobutane; sec-butylamine; 2-aminobutane | 208-164-7 [1] / 236-232-6 [2] / 237-732-7 [3] | 513-49-5 | Flam. Liq. 2 / Acute Tox. 4 / Acute Tox. 4 / Skin Corr. 1A / Aquatic Acute 1 | H225 / H332 / H302 / H314 / H400 | C | CLP00 |
@@ -2288,6 +2309,7 @@
 | 612-055-00-3 | N-methyl-o-toluidine; N-methyl-m-toluidine; N-methyl-p-toluidine | 210-260-9 [1] / 211-795-0 [2] / 210-769-6 [3] | 611-21-2 | Acute Tox. 3 / Acute Tox. 3 / Acute Tox. 3 / STOT RE 2 / Aquatic Chronic 3 | H331 / H311 / H301 / H373 / H412 | C | CLP00 |
 | 612-056-00-9 | N,N-dimethyl-m-toluidine;; N,N-dimethyl-o-toluidine | 204-495-6[1] / 210-199-8[2] | 121-72-2 | Acute Tox. 3 / Acute Tox. 3 / Acute Tox. 3 / STOT RE 2 / Aquatic Chronic 3 | H331 / H311 / H301 / H373 / H412 | C | CLP00/ATP21 |
 | 612-057-00-4 | piperazine; [solid] | 203-808-3 | 110-85-0 | Repr. 2 / Skin Corr. 1B / Resp. Sens. 1 / Skin Sens. 1 | H361fd / H314 / H334 / H317 | - | CLP00/ATP01 |
+| 612-057-01-1 | piperazine; [liquid] | 203-808-3 | 110-85-0 | Repr. 2 / Skin Corr. 1B / Resp. Sens. 1 / Skin Sens. 1 | H361fd / H314 / H334 / H317 | - | ATP01 |
 | 612-058-00-X | 2,2'-iminodiethylamine; diethylenetriamine | 203-865-4 | 111-40-0 | Acute Tox. 4 / Acute Tox. 4 / Skin Corr. 1B / Skin Sens. 1 | H312 / H302 / H314 / H317 | - | CLP00 |
 | 612-059-00-5 | 3,6-diazaoctanethylenediamin; triethylenetetramine | 203-950-6 | 112-24-3 | Acute Tox. 4 / Skin Corr. 1B / Skin Sens. 1 / Aquatic Chronic 3 | H312 / H314 / H317 / H412 | - | CLP00 |
 | 612-060-00-0 | 3,6,9-triazaundecamethylenediamine; tetraethylenepentamine | 203-986-2 | 112-57-2 | Acute Tox. 4 / Acute Tox. 4 / Skin Corr. 1B / Skin Sens. 1 / Aquatic Chronic 2 | H312 / H302 / H314 / H317 / H411 | - | CLP00 |
@@ -2345,6 +2367,7 @@
 | 612-120-00-6 | aclonifen (ISO); 2-chloro-6-nitro-3-phenoxyaniline | 277-704-1 | 74070-46-5 | Carc. 2 / Skin Sens. 1A / Aquatic Acute 1 / Aquatic Chronic 1 | H351 / H317 / H400 / H410 | - | CLP00/ATP05 |
 | 612-121-00-1 | amines, polyethylenepoly-; HEPA | 268-626-9 | 68131-73-7 | Acute Tox. 4 / Acute Tox. 4 / Skin Corr. 1B / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H312 / H302 / H314 / H317 / H400 / H410 | - | CLP00 |
 | 612-122-00-7 | hydroxylamine  ....% [> 55 % in aqueous solution] | 232-259-2 | 7803-49-8 | Unst. Expl. / Met. Corr. 1 / Carc. 2 / Acute Tox. 4 / Acute Tox. 4 / STOT SE 3 / STOT RE 2 / Skin Irrit. 2 / Eye Dam. 1 / Skin Sens. 1 / Aquatic Acute 1 | H200 / H290 / H351 / H312 / H302 / H335 / H373 / H315 / H318 / H317 / H400 | B | CLP00/ATP01 |
+| 612-122-01-4 | hydroxylamine ...% [≤ 55% in aqueous solution] | 232-259-2 | 7803-49-8 | Met. Corr. 1 / Carc. 2 / Acute Tox. 4 / Acute Tox. 4 / STOT SE 3 / STOT RE 2 / Skin Irrit. 2 / Eye Dam. 1 / Skin Sens. 1 / Aquatic Acute 1 | H290 / H351 / H312 / H302 / H335 / H373 / H315 / H318 / H317 / H400 | B | ATP01 |
 | 612-123-00-2 | hydroxylammonium chloride; hydroxylamine hydrochloride; bis(hydroxylammonium) sulfate; hydroxylamine sulfate (2:1) | 226-798-2 [1] / 233-118-8 [2] | 5470-11-1 | Met. Corr. 1 / Carc. 2 / Acute Tox. 4 / Acute Tox. 4 / STOT RE 2 / Skin Irrit. 2 / Eye Irrit. 2 / Skin Sens. 1 / Aquatic Acute 1 | H290 / H351 / H312 / H302 / H373 / H315 / H319 / H317 / H400 | - | CLP00/ATP01 |
 | 612-124-00-8 | N,N,N-trimethylanilinium chloride | 205-319-0 | 138-24-9 | Acute Tox. 3 / Acute Tox. 3 | H311 / H301 | - | CLP00 |
 | 612-125-00-3 | 2-methyl-p-phenylenediamine; 2,5-toluenediamine | 202-442-1 | 95-70-5 | Acute Tox. 3 / Acute Tox. 4 / Acute Tox. 4 / Skin Sens. 1 / Aquatic Chronic 2 | H301 / H332 / H312 / H317 / H411 | - | CLP00 |
@@ -2419,6 +2442,7 @@
 | 612-201-00-6 | N,N,N',N'-tetramethyl-4,4'-methylendianiline | 202-959-2 | 101-61-1 | Carc. 1B / Aquatic Acute 1 / Aquatic Chronic 1 | H350 / H400 / H410 | - | CLP00 |
 | 612-202-00-1 | 3,4-dichloroaniline | 202-448-4 | 95-76-1 | Acute Tox. 3 / Acute Tox. 3 / Acute Tox. 3 / Eye Dam. 1 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H331 / H311 / H301 / H318 / H317 / H400 / H410 | - | CLP00 |
 | 612-204-00-2 | C.I. Basic Violet 3; 4-[4,4'-bis(dimethylamino) benzhydrylidene]cyclohexa-2,5-dien-1-ylidene]dimethylammonium chloride | 208-953-6 | 548-62-9 | Carc. 2 / Acute Tox. 4 / Eye Dam. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H351 / H302 / H318 / H400 / H410 | - | CLP00 |
+| 612-205-00-8 | C.I. Basic Violet 3 with ≥ 0.1 % of Michler's ketone (EC no. 202-027-5) | 208-953-6 | 548-62-9 | Carc. 1B / Acute Tox. 4 / Eye Dam. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H350 / H302 / H318 / H400 / H410 | - | CLP00 |
 | 612-206-00-3 | famoxadone (ISO); 3-anilino-5-methyl-5-(4-phenoxyphenyl)-1,3-oxazolidine-2,4-dione |  | 131807-57-3 | STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H373 / H400 / H410 | - | CLP00 |
 | 612-207-00-9 | 4-ethoxyaniline; p-phenetidine | 205-855-5 | 156-43-4 | Muta. 2 / Acute Tox. 4 / Acute Tox. 4 / Acute Tox. 4 / Eye Irrit. 2 / Skin Sens. 1 | H341 / H332 / H312 / H302 / H319 / H317 | - | CLP00 |
 | 612-209-00-X | 6-methoxy-m-toluidine; p-cresidine | 204-419-1 | 120-71-8 | Carc. 1B / Acute Tox. 4 | H350 / H302 | - | CLP00 |
@@ -2453,10 +2477,11 @@
 | 612-246-00-1 | (2-chloroethyl)(3-hydroxypropyl)ammonium chloride | 429-740-6 | 40722-80-3 | Carc. 1B / Muta. 1B / STOT RE 2 / Skin Sens. 1 / Aquatic Chronic 3 | H350 / H340 / H373 / H317 / H412 | - | ATP01 |
 | 612-247-00-7 | N-[3-(1,1-dimethylethyl)-1H-pyrazol-5-yl]-N'-hydroxy-4-nitrobenzenecarboximidamide | 423-530-8 | 152828-23-4 | Acute Tox. 4 / STOT RE 1 / Aquatic Chronic 3 | H302 / H372 / H412 | - | ATP01 |
 | 612-249-00-8 | 4-[(3-chlorophenyl)(1H-imidazol-1-yl)methyl]-1,2-benzenediamine dihydrochloride | 425-030-5 | 159939-85-2 | Repr. 2 / Acute Tox. 4 / Skin Corr. 1B / Skin Sens. 1 / Aquatic Chronic 2 | H361f / H302 / H314 / H317 / H411 | - | ATP01 |
-| 612-250-00-3 | chloro-N,N-dimethylformiminium chloride | 425-970-6 | 3724-43-4 | Repr. 1B / Acute Tox. 4 / Skin Corr. 1A | H360D / H302 / H314 | - | ATP01 |
+| 612-250-00-3 | chloro-N,N-dimethylformiminium chloride | 425-970-6 | 3724-43-4 | Repr. 1B / Acute Tox. 4 / Skin Corr. 1A | H360D / H302 / H314 | EUH014 | ATP01 |
 | 612-251-00-9 | cis-1-(3-chloroallyl)-3,5,7-triaza-1-azoniaadamantane chloride | 426-020-3 | 51229-78-8 | Flam. Sol. 2 / Repr. 2 / Acute Tox. 4 / Skin Irrit. 2 / Skin Sens. 1 / Aquatic Chronic 2 | H228 / H361d / H302 / H315 / H317 / H411 | - | ATP01 |
 | 612-252-00-4 | imidacloprid (ISO);; (E)-1-(6-chloro- 3-pyridylmethyl)-N-nitroimidazolidin-2-ylideneamine;(2E)-1-[(6-chloropyridin- 3-yl) methyl]-N-nitroimidazolidin-2-imine | 428-040-8 | 138261-41-3 | Acute Tox. 3 / Aquatic Acute 1 / Aquatic Chronic 1 | H301 / H400 / H410 | - | ATP01/ATP17 |
 | 612-253-00-X | 7-methoxy-6-(3-morpholin-4-yl-propoxy)-3H-quinazolin-4-one; [containing < 0.5 % formamide (EC No 200-842-0)] | 429-400-7 | 199327-61-2 | Aquatic Chronic 3 | H412 | - | ATP01 |
+| 612-253-01-7 | 7-methoxy-6-(3-morpholin-4-yl-propoxy)-3H-quinazolin-4-one; [containing ≥ 0.5 % formamide (EC No 200-842-0) ] | 429-400-7 | 199327-61-2 | Repr. 1B / Aquatic Chronic 3 | H360D / H412 | - | ATP01 |
 | 612-254-00-5 | reaction products of diisopropanolamine with formaldehyde (1:4) | 432-440-8 | 220444-73-5 | Carc. 2 / Acute Tox. 4 / Skin Corr. 1B / Skin Sens. 1 / Aquatic Chronic 2 | H351 / H302 / H314 / H317 / H411 | - | ATP01 |
 | 612-255-00-0 | 1-(3-methoxypropyl)-4-piperidinamine | 431-950-8 | 179474-79-4 | Acute Tox. 4 / Acute Tox. 4 / Skin Corr. 1B / Aquatic Chronic 3 | H312 / H302 / H314 / H412 | - | ATP01 |
 | 612-256-00-6 | benzyl(S)-2-[(2'-cyanobiphenyl-4-ylmethyl)pentanoylamino]-3-methylbutyrate | 427-470-3 | 137864-22-3 | Acute Tox. 4 / Skin Sens. 1 | H302 / H317 | - | ATP01 |
@@ -2482,7 +2507,7 @@
 | 612-288-00-0 | bupirimate (ISO); 5-butyl-2-ethylamino-6-methylpyrimidin-4-yl dimethylsulphamate | 255-391-2 | 41483-43-6 | Carc. 2 / Skin Sens. 1B / Aquatic Chronic 1 | H351 / H317 / H410 | - | ATP09 |
 | 612-289-00-6 | triflumizole (ISO); (1E)-N-[4-chloro-2-(trifluoromethyl)phenyl]-1-(1H-imidazol-1-yl)-2-propoxyethanimine |  | 68694-11-1 | Repr. 1B / Acute Tox. 4 / STOT RE 2 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H360D / H302 / H373 (liver) / H317 / H400 / H410 | - | ATP09 |
 | 612-292-00-2 | methylhydrazine | 200-471-4 | 60-34-4 | Carc. 1B | H350 | - | ATP10 |
-| 612-294-00-3 | mecetronium etilsul­fate; N-ethyl-N,N-dimethyl­hexadecan-1-aminium ethyl sulfate; mecetronium ethyl sulphate; [MES] | 221-106-5 | 3006-10-8 | Skin Corr. 1 / Eye Dam. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H314 / H318 / H400 / H410 | - | ATP15 |
+| 612-294-00-3 | mecetronium etilsul­fate; N-ethyl-N,N-dimethyl­hexadecan-1-aminium ethyl sulfate; mecetronium ethyl sulphate; [MES] | 221-106-5 | 3006-10-8 | Skin Corr. 1 / Eye Dam. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H314 / H318 / H400 / H410 | EUH071 | ATP15 |
 | 612-295-00-9 | benfluralin (ISO); N-butyl-N-ethyl-α,α,α-trifluoro-2,6-dinitro-p-toluidine | 217-465-2 | 1861-40-1 | Carc. 2 / Repr. 2 / Skin Irrit. 2 / Eye Irrit. 2 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H351 / H361d / H315 / H319 / H317 / H400 / H410 | - | ATP21 |
 | 612-296-00-4 | N,N-dimethyl-p-toluidine | 202-805-4 | 99-97-8 | Carc. 1B / Acute Tox. 3 / Acute Tox. 4 / STOT RE 2 / Aquatic Chronic 3 | H350 / H301 / H332 / H373 (blood system, respiratory tract) / H412 | - | ATP21 |
 | 612-297-00-X | 1-phenylethan-1-one (1-phenylethylidene)hydrazone | 211-979-0 | 729-43-1 | Skin Sens. 1 | H317 | - | ATP21 |
@@ -2494,7 +2519,7 @@
 | 613-004-00-8 | crimidine (ISO); 2-chloro-6-methylpyrimidin-4-yldimethylamine | 208-622-6 | 535-89-7 | Acute Tox. 2 | H300 | - | CLP00 |
 | 613-007-00-4 | desmetryne (ISO); 6-isopropylamino-2-methylamino-4-methylthio-1,3,5-triazine | 213-800-1 | 1014-69-3 | Acute Tox. 4 / Acute Tox. 4 / Aquatic Acute 1 / Aquatic Chronic 1 | H312 / H302 / H400 / H410 | - | CLP00 |
 | 613-008-00-X | dazomet (ISO); tetrahydro-3,5-dimethyl-1,3,5-thiadiazine-2-thione | 208-576-7 | 533-74-4 | Acute Tox. 4 / Eye Irrit. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H319 / H400 / H410 | - | CLP00 |
-| 613-009-00-5 | 2,4,6-trichloro-1,3,5-triazine; cyanuric chloride | 203-614-9 | 108-77-0 | Acute Tox. 2 / Acute Tox. 4 / Skin Corr. 1B / Skin Sens. 1 | H330 / H302 / H314 / H317 | - | CLP00 |
+| 613-009-00-5 | 2,4,6-trichloro-1,3,5-triazine; cyanuric chloride | 203-614-9 | 108-77-0 | Acute Tox. 2 / Acute Tox. 4 / Skin Corr. 1B / Skin Sens. 1 | H330 / H302 / H314 / H317 | EUH014 | CLP00 |
 | 613-010-00-0 | ametryn (ISO); N-ethyl-N'-isopropyl-6-(methylthio)-1,3,5-triazine-2,4-diamine | 212-634-7 | 834-12-8 | Acute Tox. 4 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H400 / H410 | - | CLP00/ATP01corr |
 | 613-011-00-6 | amitrole (ISO); 1,2,4-triazol-3-ylamine | 200-521-5 | 61-82-5 | Repr. 2 / STOT RE 2 / Aquatic Chronic 2 | H361d / H373 / H411 | - | CLP00 |
 | 613-012-00-1 | bentazone (ISO); 3-isopropyl-2,1,3-benzothiadiazine-4-one-2,2-dioxide | 246-585-8 | 25057-89-0 | Repr. 2 / Acute Tox. 4 / Eye Irrit. 2 / Skin Sens. 1 | H361d / H302 / H319 / H317 | - | CLP00/ATP18 |
@@ -2513,10 +2538,10 @@
 | 613-026-00-8 | cinerin II; 3-(but-2-enyl)-2-methyl-4-oxocyclopent-2-enyl 2,2-dimethyl-3-(3-methoxy-2-methyl-3-oxoprop-1-enyl)cyclopropanecarboxylate | 204-454-2 | 121-20-0 | Acute Tox. 4 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H400 / H410 | - | CLP00 |
 | 613-027-00-3 | piperidine | 203-813-0 | 110-89-4 | Flam. Liq. 2 / Acute Tox. 3 / Acute Tox. 3 / Skin Corr. 1B | H225 / H331 / H311 / H314 | - | CLP00 |
 | 613-028-00-9 | morpholine | 203-815-1 | 110-91-8 | Flam. Liq. 3 / Acute Tox. 4 / Acute Tox. 4 / Acute Tox. 4 / Skin Corr. 1B | H226 / H332 / H312 / H302 / H314 | - | CLP00 |
-| 613-029-00-4 | dichloro-1,3,5-triazinetrione; dichloroisocyanuric acid | 220-487-5 | 2782-57-2 | Ox. Sol. 2 / Acute Tox. 4 / STOT SE 3 / Eye Irrit. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H272 / H302 / H335 / H319 / H400 / H410 | T | CLP00 |
-| 613-030-00-X | troclosene potassium; troclosene sodium | 218-828-8 [1] / 220-767-7 [2] | 2244-21-5 | Ox. Sol. 2 / Acute Tox. 4 / STOT SE 3 / Eye Irrit. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H272 / H302 / H335 / H319 / H400 / H410 | G | CLP00/ATP01 |
-| 613-030-01-7 | troclosene sodium, dihydrate | 220-767-7 | 51580-86-0 | Acute Tox. 4 / STOT SE 3 / Eye Irrit. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H335 / H319 / H400 / H410 | - | CLP00 |
-| 613-031-00-5 | symclosene; trichloroisocyanuric acid; trichloro-1,3,5-triazinetrion | 201-782-8 | 87-90-1 | Ox. Sol. 2 / Acute Tox. 4 / STOT SE 3 / Eye Irrit. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H272 / H302 / H335 / H319 / H400 / H410 | - | CLP00 |
+| 613-029-00-4 | dichloro-1,3,5-triazinetrione; dichloroisocyanuric acid | 220-487-5 | 2782-57-2 | Ox. Sol. 2 / Acute Tox. 4 / STOT SE 3 / Eye Irrit. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H272 / H302 / H335 / H319 / H400 / H410 | T, EUH031 | CLP00 |
+| 613-030-00-X | troclosene potassium; troclosene sodium | 218-828-8 [1] / 220-767-7 [2] | 2244-21-5 | Ox. Sol. 2 / Acute Tox. 4 / STOT SE 3 / Eye Irrit. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H272 / H302 / H335 / H319 / H400 / H410 | G, EUH031 | CLP00/ATP01 |
+| 613-030-01-7 | troclosene sodium, dihydrate | 220-767-7 | 51580-86-0 | Acute Tox. 4 / STOT SE 3 / Eye Irrit. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H335 / H319 / H400 / H410 | EUH031 | CLP00 |
+| 613-031-00-5 | symclosene; trichloroisocyanuric acid; trichloro-1,3,5-triazinetrion | 201-782-8 | 87-90-1 | Ox. Sol. 2 / Acute Tox. 4 / STOT SE 3 / Eye Irrit. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H272 / H302 / H335 / H319 / H400 / H410 | EUH031 | CLP00 |
 | 613-032-00-0 | methyl-2,3,5,6-tetrachloro-4-pyridylsulphone; 2,3,5,6-tetrachloro-4-(methylsulphonyl)pyridine | 236-035-5 | 13108-52-6 | Acute Tox. 4 / Acute Tox. 4 / Eye Irrit. 2 / Skin Sens. 1 | H312 / H302 / H319 / H317 | - | CLP00 |
 | 613-033-00-6 | 2-methylaziridine; propyleneimine | 200-878-7 | 75-55-8 | Flam. Liq. 2 / Carc. 1B / Acute Tox. 1 / Acute Tox. 2 / Acute Tox. 2 / Eye Dam. 1 / Aquatic Chronic 2 | H225 / H350 / H310 / H330 / H300 / H318 / H411 | - | CLP00 |
 | 613-034-00-1 | 1,2-dimethylimidazole | 217-101-2 | 1739-84-0 | Acute Tox. 4 / Skin Irrit. 2 / Eye Dam. 1 | H302 / H315 / H318 | - | CLP00 |
@@ -2526,9 +2551,10 @@
 | 613-038-00-3 | 6-phenyl-1,3,5-triazine-2,4-diyldiamine; 6-phenyl-1,3,5-triazine-2,4-diamine; benzoguanamine | 202-095-6 | 91-76-9 | Acute Tox. 4 / Aquatic Chronic 3 | H302 / H412 | - | CLP00 |
 | 613-039-00-9 | ethylene thiourea; imidazolidine-2-thione; 2-imidazoline-2-thiol | 202-506-9 | 96-45-7 | Repr. 1B / Acute Tox. 4 | H360D / H302 | - | CLP00 |
 | 613-040-00-4 | azaconazole (ISO); 1-{}{[2-(2,4-dichlorophenyl)-1,3-dioxolan-2-yl]methyl}}-1H-1,2.4-triazole | 262-102-3 | 60207-31-0 | Acute Tox. 4 | H302 | - | CLP00 |
-| 613-041-00-X | morpholine-4-carbonyl chloride | 239-213-0 | 15159-40-7 | Carc. 2 / Skin Irrit. 2 / Eye Irrit. 2 | H351 / H315 / H319 | - | CLP00 |
+| 613-041-00-X | morpholine-4-carbonyl chloride | 239-213-0 | 15159-40-7 | Carc. 2 / Skin Irrit. 2 / Eye Irrit. 2 | H351 / H315 / H319 | EUH014 | CLP00 |
 | 613-042-00-5 | imazalil (ISO); 1-[2-(allyloxy)-2-(2,4-dichlorophenyl)ethyl]-1H-imidazole | 252-615-0 | 35554-44-0 | Carc. 2 / Acute Tox. 3 / Acute Tox. 4 / Eye Dam. 1 / Aquatic Chronic 1 | H351 / H301 / H332 / H318 / H410 | - | CLP00/ATP07 |
 | 613-043-00-0 | imazalil sulphate (ISO) powder; 1- [2-(allyloxy)ethyl-2-(2,4-dichlorophenyl)]-1H-imidazolium hydrogen sulphate; (±)-1- [2-(allyloxy)ethyl-2-(2,4-dichlorophenyl)]-1H-imidazolium hydrogen sulphate | 261-351-5 [1] / 281-291-3 [2] | 58594-72-2 | Acute Tox. 4 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H317 / H400 / H410 | - | CLP00 |
+| 613-043-01-8 | imazalil sulphate (ISO), aqueous solution; 1- [2-(allyloxy)ethyl-2-(2,4-dichlorophenyl)]-1H-imidazolium hydrogen sulphate; (±)-1- [2-(allyloxy)ethyl-2-(2,4-dichlorophenyl)]-1H-imidazolium hydrogen sulphate | 261-351-5 [1] / 281-291-3 [2] | 58594-72-2 | Acute Tox. 4 / Skin Corr. 1B / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H314 / H317 / H400 / H410 | - | CLP00 |
 | 613-044-00-6 | captan (ISO); 1,2,3,6-tetrahydro-N-(trichloromethylthio)phthalimide | 205-087-0 | 133-06-2 | Carc. 2 / Acute Tox. 3 / Eye Dam. 1 / Skin Sens. 1 / Aquatic Acute 1 | H351 / H331 / H318 / H317 / H400 | - | CLP00/ATP01 |
 | 613-045-00-1 | folpet (ISO); N-(trichloromethylthio)phthalimide | 205-088-6 | 133-07-3 | Carc. 2 / Acute Tox. 4 / Eye Irrit. 2 / Skin Sens. 1 / Aquatic Acute 1 | H351 / H332 / H319 / H317 / H400 | - | CLP00/ATP01 |
 | 613-046-00-7 | captafol (ISO); 1,2,3,6-tetrahydro-N-(1,1,2,2-tetrachloroethylthio)phthalimide | 219-363-3 | 2425-06-1 | Carc. 1B / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H350 / H317 / H400 / H410 | - | CLP00 |
@@ -2541,7 +2567,7 @@
 | 613-053-00-5 | anilazine (ISO); 2-chloro-N-(4,6-dichloro-1,3,5-triazin-2-yl)aniline | 202-910-5 | 101-05-3 | Skin Irrit. 2 / Eye Irrit. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H315 / H319 / H400 / H410 | - | CLP00 |
 | 613-054-00-0 | thiabendazole (ISO); 2-(thiazol-4-yl)benzimidazole | 205-725-8 | 148-79-8 | Aquatic Acute 1 / Aquatic Chronic 1 | H400 / H410 | - | CLP00/ATP14 |
 | 613-056-00-1 | 1,2-dimethyl-3,5-diphenylpyrazolium methylsulphate; difenzoquat methyl sulfate | 256-152-5 | 43222-48-6 | Acute Tox. 4 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H400 / H410 | - | CLP00 |
-| 613-057-00-7 | dodemorph (ISO); 4-cyclododecyl-2,6-dimethylmorpholine | 216-474-9 | 1593-77-7 | Repr. 2 / STOT RE 2 / Skin Corr. 1C / Skin Sens. 1A / Aquatic Acute 1 / Aquatic Chronic 1 | H361d / H373 (liver) / H314 / H317 / H400 / H410 | - | CLP00/ATP07 |
+| 613-057-00-7 | dodemorph (ISO); 4-cyclododecyl-2,6-dimethylmorpholine | 216-474-9 | 1593-77-7 | Repr. 2 / STOT RE 2 / Skin Corr. 1C / Skin Sens. 1A / Aquatic Acute 1 / Aquatic Chronic 1 | H361d / H373 (liver) / H314 / H317 / H400 / H410 | EUH071 | CLP00/ATP07 |
 | 613-058-00-2 | permethrin (ISO); m-phenoxybenzyl 3-(2,2-dichlorovinyl)-2,2-dimethylcyclopropanecarboxylate | 258-067-9 | 52645-53-1 | Acute Tox. 4 / Acute Tox. 4 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H332 / H302 / H317 / H400 / H410 | - | CLP00 |
 | 613-059-00-8 | profluralin (ISO); N-(cyclopropylmethyl)-α,α,α-trifluoro-2,6-dinitro-N-propyl-p-toluidine | 247-656-6 | 26399-36-0 | Eye Irrit. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H319 / H400 / H410 | - | CLP00 |
 | 613-060-00-3 | resmethrin (ISO); 5-benzyl-3-furylmethyl (±)-cis-trans-chrysanthemate | 233-940-7 | 10453-86-8 | Acute Tox. 4 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H400 / H410 | - | CLP00/ATP01 |
@@ -2588,11 +2614,12 @@
 | 613-109-00-9 | bis(piperidinothiocarbonyl) disulphide | 202-328-1 | 94-37-1 | STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 / Skin Sens. 1 | H335 / H315 / H319 / H317 | - | CLP00 |
 | 613-110-00-4 | dimepiperate (ISO); S-(1-methyl-1-phenylethyl) piperidine-1-carbothioate | 262-784-2 | 61432-55-1 | Acute Tox. 4 / Aquatic Chronic 2 | H302 / H411 | - | CLP00 |
 | 613-111-00-X | 1,2,4-triazole | 206-022-9 | 288-88-0 | Repr. 1B / Acute Tox. 4 / Eye Irrit. 2 | H360FD / H302 / H319 | - | CLP00/ATP17 |
-| 613-112-00-5 | octhilinone (ISO); 2-octyl-2H-isothiazol-3-one; [OIT] | 247-761-7 | 26530-20-1 | Acute Tox. 2 / Acute Tox. 3 / Acute Tox. 3 / Skin Corr. 1 / Eye Dam. 1 / Skin Sens. 1A / Aquatic Acute 1 / Aquatic Chronic 1 | H330 / H311 / H301 / H314 / H318 / H317 / H400 / H410 | - | CLP00/ATP15 |
+| 613-112-00-5 | octhilinone (ISO); 2-octyl-2H-isothiazol-3-one; [OIT] | 247-761-7 | 26530-20-1 | Acute Tox. 2 / Acute Tox. 3 / Acute Tox. 3 / Skin Corr. 1 / Eye Dam. 1 / Skin Sens. 1A / Aquatic Acute 1 / Aquatic Chronic 1 | H330 / H311 / H301 / H314 / H318 / H317 / H400 / H410 | EUH071 | CLP00/ATP15 |
 | 613-113-00-0 | 2-(morpholinothio)benzothiazole | 203-052-4 | 102-77-2 | Skin Irrit. 2 / Eye Irrit. 2 / Skin Sens. 1 / Aquatic Chronic 2 | H315 / H319 / H317 / H411 | - | CLP00 |
 | 613-114-00-6 | 2,2',2"-(hexahydro-1,3,5-triazine-1,3,5-triyl)triethanol; 1,3,5-tris(2-hydroxyethyl)hexahydro-1,3,5-triazine | 225-208-0 | 4719-04-4 | Acute Tox. 4 / Skin Sens. 1 | H302 / H317 | - | CLP00 |
 | 613-115-00-1 | hymexazol (ISO); 3-hydroxy-5-methylisoxazole | 233-000-6 | 10004-44-1 | Repr. 2 / Acute Tox. 4 / Eye Dam. 1 / Skin Sens. 1 / Aquatic Chronic 2 | H361d / H302 / H318 / H317 / H411 | - | CLP00/ATP15 |
 | 613-116-00-7 | tolylfluanid (ISO); dichloro-N- [(dimethylamino)sulphonyl]fluoro-N-(p-tolyl)methanesulphenamide; [containing ≥ 0.1 % (w/w) of particles with an aerodynamic diameter of below 50 µm] | 211-986-9 | 731-27-1 | Acute Tox. 2 / STOT SE 3 / STOT RE 1 / Skin Irrit. 2 / Eye Irrit. 2 / Skin Sens. 1 / Aquatic Acute 1 | H330 / H335 / H372 / H315 / H319 / H317 / H400 | - | CLP00/ATP01 |
+| 613-116-01-4 | tolylfluanid (ISO); dichloro-N-[(dimethylamino)sulphonyl]fluoro-N-(p-tolyl)methanesulphenamide; [containing < 0.1% (w/w) of particles with an aerodynamic diameter of below 50 μm] | 211-986-9 | 731-27-1 | STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 / Skin Sens. 1 / Aquatic Acute 1 | H335 / H315 / H319 / H317 / H400 | - | ATP01 |
 | 613-117-00-2 | diniconazole (ISO); (E)-β-[(2,4-dichlorophenyl)methylene]-α-(1,1-dimethylethyl)-1H-1,2,4-triazol-1-ethanol; (E)-(RS)-1-(2,4-dichlorophenyl)-4,4-dimethyl-2-(1H-1,2,4-triazol-1-yl)pent-1-en-3-ol |  | 76714-88-0 | Acute Tox. 4 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H400 / H410 | - | CLP00 |
 | 613-118-00-8 | flubenzimine (ISO); N-[3-phenyl-4,5-bis[(trifluoromethyl)imino]thiazolidin-2-ylidene]aniline | 253-703-1 | 37893-02-0 | Eye Irrit. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H319 / H400 / H410 | - | CLP00 |
 | 613-119-00-3 | (benzothiazol-2-ylthio)methyl thiocyanate; TCMTB | 244-445-0 | 21564-17-0 | Acute Tox. 2 / Acute Tox. 4 / Skin Irrit. 2 / Eye Irrit. 2 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H330 / H302 / H315 / H319 / H317 / H400 / H410 | - | CLP00 |
@@ -2610,7 +2637,7 @@
 | 613-132-00-4 | hexazinone (ISO); 3-cyclohexyl-6-dimethylamino-1-methyl-1,2,3,4-tetrahydro-1,3,5-triazine-2,4-dione | 257-074-4 | 51235-04-2 | Acute Tox. 4 / Eye Irrit. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H319 / H400 / H410 | - | CLP00 |
 | 613-133-00-X | etridiazole (ISO); 5-ethoxy-3-trichloromethyl-1,2,4-thiadiazole | 219-991-8 | 2593-15-9 | Carc. 2 / Acute Tox. 4 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H351 / H302 / H317 / H400 / H410 | - | CLP00/ATP07 |
 | 613-134-00-5 | myclobutanil (ISO); 2-(4-chlorophenyl)-2-(1H-1,2,4-triazol-1-ylmethyl)hexanenitrile |  | 88671-89-0 | Repr. 2 / Acute Tox. 4 / Eye Irrit. 2 / Aquatic Chronic 2 | H361d / H302 / H319 / H411 | - | CLP00 |
-| 613-135-00-0 | di(benzothiazol-2-yl) disulphide | 204-424-9 | 120-78-5 | Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H317 / H400 / H410 | - | CLP00 |
+| 613-135-00-0 | di(benzothiazol-2-yl) disulphide | 204-424-9 | 120-78-5 | Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H317 / H400 / H410 | EUH031 | CLP00 |
 | 613-136-00-6 | N-cyclohexylbenzothiazole-2-sulphenamide | 202-411-2 | 95-33-0 | Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H317 / H400 / H410 | - | CLP00 |
 | 613-137-00-1 | methabenzthiazuron (ISO); 1-(1,3-benzothiazol-2-yl)1,3-dimethylurea | 242-505-0 | 18691-97-9 | Aquatic Acute 1 / Aquatic Chronic 1 | H400 / H410 | - | CLP00 |
 | 613-138-00-7 | quinoxyfen (ISO); 5,7-dichloro-4-(4-fluorophenoxy)quinoline |  | 124495-18-7 | Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H317 / H400 / H410 | - | CLP00 |
@@ -2640,7 +2667,7 @@
 | 613-164-00-9 | flufenacet (ISO); N-(4-fluorophenyl)-N-isopropyl-2-(5-trifluoromethyl-[1,3,4]thiadiazol-2-yloxy)acetamide | - | 142459-58-3 | Acute Tox. 4 / STOT RE 2 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H373 / H317 / H400 / H410 | - | CLP00/ATP01 |
 | 613-165-00-4 | flupyrsulfuron-methyl-sodium (ISO); methyl 2-[[(4,6-dimethoxypyrimidin-2-ylcarbamoyl)sulfamoyl]-6-trifluoromethyl]nicotinate, monosodium salt | - | 144740-54-5 | Aquatic Acute 1 / Aquatic Chronic 1 | H400 / H410 | - | CLP00/ATP01 |
 | 613-166-00-X | flumioxazin (ISO);; N-(7-fluoro-3,4-dihydro- 3-oxo-4-prop- 2-ynyl-2H-1,4-benzoxazin- 6-yl)cyclohex- 1-ene-1,2-dicarboximide |  | 103361-09-7 | Repr. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H361d / H400 / H410 | - | CLP00/ATP17 |
-| 613-167-00-5 | reaction mass of 5-chloro-2-methyl-2H-isothiazol-3-one and 2-methyl-2H-isothiazol-3-one (3:1) |  | 55965-84-9 | Acute Tox. 2 / Acute Tox. 2 / Acute Tox. 3 / Skin Corr. 1C / Eye Dam. 1 / Skin Sens. 1A / Aquatic Acute 1 / Aquatic Chronic 1 | H330 / H310 / H301 / H314 / H318 / H317 / H400 / H410 | B | CLP00/ATP13 |
+| 613-167-00-5 | reaction mass of 5-chloro-2-methyl-2H-isothiazol-3-one and 2-methyl-2H-isothiazol-3-one (3:1) |  | 55965-84-9 | Acute Tox. 2 / Acute Tox. 2 / Acute Tox. 3 / Skin Corr. 1C / Eye Dam. 1 / Skin Sens. 1A / Aquatic Acute 1 / Aquatic Chronic 1 | H330 / H310 / H301 / H314 / H318 / H317 / H400 / H410 | B, EUH071 | CLP00/ATP13 |
 | 613-168-00-0 | 1-vinyl-2-pyrrolidone | 201-800-4 | 88-12-0 | Carc. 2 / Acute Tox. 4 / Acute Tox. 4 / Acute Tox. 4 / STOT SE 3 / STOT RE 2 / Eye Dam. 1 | H351 / H332 / H312 / H302 / H335 / H373 / H318 | D | CLP00 |
 | 613-169-00-6 | 9-vinylcarbazole | 216-055-0 | 1484-13-5 | Muta. 2 / Acute Tox. 4 / Acute Tox. 4 / Skin Irrit. 2 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H341 / H312 / H302 / H315 / H317 / H400 / H410 | - | CLP00/ATP01 |
 | 613-170-00-1 | 2,2-ethylmethylthiazolidine | 404-500-3 | 694-64-4 | Acute Tox. 4 / Eye Dam. 1 / Skin Sens. 1 / Aquatic Chronic 2 | H302 / H318 / H317 / H411 | - | CLP00 |
@@ -2668,7 +2695,7 @@
 | 613-196-00-3 | 5-[[4-chloro-6-[[2-[[4-fluoro-6-[[5-hydroxy-6-[(4-methoxy-2-sulfophenyl)azo]-7-sulfo-2-naphthalenyl]amino]-1,3,5-triazin-2-yl]amino]-1-methylethyl]amino]-1,3,5-triazin-2-yl]amino]-3-[[4-(ethenylsulfonyl)phenyl]azo]-4-hydroxy-naphtalene-2,7-disulfonic acid, sodium salt | 418-380-5 | 168113-78-8 | Eye Dam. 1 | H318 | - | CLP00 |
 | 613-197-00-9 | reaction mass of: 2,4,6-tri(butylcarbamoyl)-1,3,5-triazine; 2,4,6-tri(methylcarbamoyl)-1,3,5-triazine; [(2-butyl-4,6-dimethyl)tricarbamoyl]-1,3,5-triazine; [(2,4-dibutyl-6-methyl)tricarbamoyl]-1,3,5-triazine | 420-390-1 | 187547-46-2 | Skin Sens. 1 / Aquatic Chronic 2 | H317 / H411 | - | CLP00 |
 | 613-198-00-4 | 2-amino-4-dimethylamino-6-trifluoroethoxy-1,3,5-triazine | 415-500-8 | 145963-84-4 | Acute Tox. 4 / STOT RE 2 / Aquatic Chronic 3 | H302 / H373 / H412 | - | ATP01 |
-| 613-201-00-9 | (R)-5-bromo-3-(1-methyl-2-pyrrolidinyl methyl)-1H-indole | 422-390-5 | 143322-57-0 | Repr. 2 / Acute Tox. 4 / Acute Tox. 4 / STOT RE 1 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H361f / H332 / H302 / H372 / H317 / H400 / H410 | - | CLP00 |
+| 613-201-00-9 | (R)-5-bromo-3-(1-methyl-2-pyrrolidinyl methyl)-1H-indole | 422-390-5 | 143322-57-0 | Repr. 2 / Acute Tox. 4 / Acute Tox. 4 / STOT RE 1 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H361f / H332 / H302 / H372 / H317 / H400 / H410 | EUH070 | CLP00 |
 | 613-202-00-4 | pymetrozine (ISO); (E)-4,5-dihydro-6-methyl-4-(3-pyridylmethyleneamino)-1,2,4-triazin-3(2H)-one |  | 123312-89-0 | Carc. 2 / Repr. 2 / Aquatic Chronic 1 | H351 / H361fd / H410 | - | CLP00/ATP15 |
 | 613-203-00-X | pyraflufen-ethyl (ISO); 2-chloro-5-(4-chloro-5-difluoromethoxy-1-methylpyrazol-3-yl)-4-fluorophenoxyacetic acid ethyl ester; pyraflufen (ISO); 2-chloro-5-(4-chloro-5-difluoromethoxy-1-methylpyrazol-3-yl)-4-fluorophenoxyacetic acid |  | 129630-19-9 | Aquatic Acute 1 / Aquatic Chronic 1 | H400 / H410 | - | CLP00/ATP01 |
 | 613-204-00-5 | oxadiargyl (ISO); 3-[2,4-dichloro-5-(2-propynyloxy)phenyl]-5-(1,1-dimethylethyl)-1,3,4-oxadiazol-2(3H)-one | 254-637-6 | 39807-15-3 | Repr. 2 / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H361d / H373 / H400 / H410 | - | CLP00/ATP01corr |
@@ -2742,6 +2769,7 @@
 | 613-284-00-1 | metconazole (ISO); (1RS,5RS;1RS,5SR)-5-(4-chlorobenzyl)-2,2-dimethyl-1-(1H-1,2,4-triazol-1-ylmethyl)cyclopentanol | - | 125116-23-6 | Repr. 2 / Acute Tox. 4 / Aquatic Chronic 2 | H361d / H302 / H411 | - | ATP01 |
 | 613-285-00-7 | 1-hydroxybenzotriazole, anhydrous; 1-hydroxybenzotriazole, monohydrated | 219-989-7 [1] / 219-989-7 [2] | 2592-95-2 | Expl. 1.3 | H203 | - | ATP01 |
 | 613-286-00-2 | potassium 1-methyl-3-morpholinocarbonyl-4-[3-(1-methyl-3-morpholinocarbonyl-5-oxo-2-pyrazolin-4-ylidene)-1-propenyl]pyrazole-5-olate; [containing < 0.5 % N,N-dimethylformamide (EC no 200-679-5)] | 418-260-2 | 183196-57-8 | Skin Sens. 1 | H317 | - | ATP01 |
+| 613-286-01-X | potassium 1-methyl-3-morpholinocarbonyl-4-[3-(1-methyl-3-morpholinocarbonyl-5-oxo-2-pyrazolin-4-ylidene)-1-propenyl]pyrazole-5-olate; [containing ≥ 0.5 % N,N-dimethylformamide (EC No 200-679-5)] | 418-260-2 | 183196-57-8 | Repr. 1B / Skin Sens. 1 | H360D / H317 | - | ATP01 |
 | 613-287-00-8 | 1-(3-iodo-4-aminobenzyl)-1H-1,2,4-triazole | 419-540-7 | 160194-26-3 | Acute Tox. 4 / Skin Sens. 1 / Aquatic Chronic 2 | H302 / H317 / H411 | - | ATP01 |
 | 613-288-00-3 | 1,3-bis(dimethylcarbamoyl)-imidazolium chloride | 420-930-4 | 135756-61-5 | Acute Tox. 4 / Eye Dam. 1 / Aquatic Chronic 3 | H302 / H318 / H412 | - | ATP01 |
 | 613-289-00-9 | 3-(4-chloro-2-fluoro-5-methylphenyl)-1-methyl-5-(trifluoromethyl)-1H-pyrazole | 432-020-4 | 142623-48-1 | Aquatic Acute 1 / Aquatic Chronic 1 | H400 / H410 | - | ATP01 |
@@ -2773,7 +2801,7 @@
 | 613-323-00-2 | terbuthylazine (ISO);; N-tert-butyl-6-chloro-N′-ethyl-1,3,5-triazine-2,4-diamine | 227-637-9 | 5915-41-3 | Acute Tox. 4 / STOT RE 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H373 / H400 / H410 | - | ATP10 |
 | 613-324-00-8 | quinolin-8-ol;; 8-hydroxyquinoline | 205-711-1 | 148-24-3 | Repr. 1B / Acute Tox. 3 / Eye Dam. 1 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H360D / H301 / H318 / H317 / H400 / H410 | - | ATP10 |
 | 613-325-00-3 | thiacloprid (ISO);; (Z)-3-(6-chloro-3-pyridylmethyl)-1,3-thiazolidin-2-ylidenecyanamide;; {(2Z)-3-[(6-chloropyridin-3-yl)methyl]-1,3-thiazolidin-2-ylidene}cyanamide |  | 111988-49-9 | Carc. 2 / Repr. 1B / Acute Tox. 3 / Acute Tox. 4 / STOT SE 3 / Aquatic Acute 1 / Aquatic Chronic 1 | H351 / H360FD / H301 / H332 / H336 / H400 / H410 | - | ATP10 |
-| 613-326-00-9 | 2-methylisothiazol-3(2H)-one | 220-239-6 | 2682-20-4 | Acute Tox. 2 / Acute Tox. 3 / Acute Tox. 3 / Skin Corr. 1B / Eye Dam. 1 / Skin Sens. 1A / Aquatic Acute 1 / Aquatic Chronic 1 | H330 / H311 / H301 / H314 / H318 / H317 / H400 / H410 | - | ATP13 |
+| 613-326-00-9 | 2-methylisothiazol-3(2H)-one | 220-239-6 | 2682-20-4 | Acute Tox. 2 / Acute Tox. 3 / Acute Tox. 3 / Skin Corr. 1B / Eye Dam. 1 / Skin Sens. 1A / Aquatic Acute 1 / Aquatic Chronic 1 | H330 / H311 / H301 / H314 / H318 / H317 / H400 / H410 | EUH071 | ATP13 |
 | 613-327-00-4 | pyroxsulam (ISO);; N-(5,7-dimethoxy[1,2,4]triazolo[1,5-a]pyrimidin-2-yl)-2-methoxy-4-(trifluoromethyl) pyridine-3-sulfonamide |  | 422556-08-9 | Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H317 / H400 / H410 | - | ATP13 |
 | 613-328-00-X | 1-vinylimidazole | 214-012-0 | 1072-63-5 | Repr. 1B | H360D | - | ATP13 |
 | 613-329-00-5 | halosulfuron-methyl (ISO);; methyl 3-chloro-5-{[(4,6-dimethoxypyrimidin-2-yl)carbamoyl]sulfamoyl}-1-methyl-1H-pyrazole-4-carboxylate |  | 100784-20-1 | Repr. 1B / Aquatic Acute 1 / Aquatic Chronic 1 | H360D / H400 / H410 | - | ATP14 |
@@ -2782,8 +2810,8 @@
 | 613-332-00-1 | oxathiapiprolin (ISO); 1-(4-{4-[5-(2,6-di­fluorophenyl)-4,5-di­hydro-1,2-oxazol-3- yl]-1,3-thiazol-2-yl}piperidin-1-yl)-2-[5- methyl-3-(trifluoro­methyl)-1H-pyrazol-1-yl]ethanone |  | 1003318-67-9 | Aquatic Chronic 1 | H410 | - | ATP15 |
 | 613-333-00-7 | pyrithione zinc; (T-4)- bis[1-(hydroxy-.kappa.O)pyridine-2(1H)- thionato-.kappa.S]zinc | 236-671-3 | 13463-41-7 | Repr. 1B / Acute Tox. 2 / Acute Tox. 3 / STOT RE 1 / Eye Dam. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H360D / H330 / H301 / H372 / H318 / H400 / H410 | - | ATP15 |
 | 613-334-00-2 | flurochloridone (ISO); 3-chloro-4-(chloro­methyl)-1-[3-(trifluor­omethyl)phenyl]pyrrolidin-2-one | 262-661-3 | 61213-25-0 | Repr. 1B / Acute Tox. 4 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H360FD / H302 / H317 / H400 / H410 | - | ATP15 |
-| 613-335-00-8 | 4,5-dichloro-2-octyl- 2H-isothiazol-3-one; [DCOIT] | 264-843-8 | 64359-81-5 | Acute Tox. 2 / Acute Tox. 4 / Skin Corr. 1 / Eye Dam. 1 / Skin Sens. 1A / Aquatic Acute 1 / Aquatic Chronic 1 | H330 / H302 / H314 / H318 / H317 / H400 / H410 | - | ATP15 |
-| 613-336-00-3 | 2-methyl-1,2-ben­zothiazol-3(2H)-one; [MBIT] |  | 2527-66-4 | Acute Tox. 3 / Acute Tox. 4 / Skin Corr. 1C / Eye Dam. 1 / Skin Sens. 1A / Aquatic Acute 1 / Aquatic Chronic 2 | H301 / H312 / H314 / H318 / H317 / H400 / H411 | - | ATP15 |
+| 613-335-00-8 | 4,5-dichloro-2-octyl- 2H-isothiazol-3-one; [DCOIT] | 264-843-8 | 64359-81-5 | Acute Tox. 2 / Acute Tox. 4 / Skin Corr. 1 / Eye Dam. 1 / Skin Sens. 1A / Aquatic Acute 1 / Aquatic Chronic 1 | H330 / H302 / H314 / H318 / H317 / H400 / H410 | EUH071 | ATP15 |
+| 613-336-00-3 | 2-methyl-1,2-ben­zothiazol-3(2H)-one; [MBIT] |  | 2527-66-4 | Acute Tox. 3 / Acute Tox. 4 / Skin Corr. 1C / Eye Dam. 1 / Skin Sens. 1A / Aquatic Acute 1 / Aquatic Chronic 2 | H301 / H312 / H314 / H318 / H317 / H400 / H411 | EUH071 | ATP15 |
 | 613-337-00-9 | prothioconazole (ISO);; 2-[2-(1-chlorocyclopropyl)-3-(2-chlorophenyl)-2-hydroxypropyl]-2,4-dihydro-3H-1,2,4-triazole-3-thione |  | 178928-70-6 | Aquatic Acute 1 / Aquatic Chronic 1 | H400 / H410 | - | ATP17 |
 | 613-338-00-4 | azamethiphos (ISO); S-[(6-chloro-2-oxooxazolo[4,5-b]pyridin-3(2H)-yl)methyl] O,O-dimethyl thiophosphate | 252-626-0 | 35575-96-3 | Carc. 2 / Acute Tox. 3 / Acute Tox. 4 / STOT SE 1 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H351 / H331 / H302 / H370 (nervous system) / H317 / H400 / H410 | - | ATP17 |
 | 613-339-00-X | 3-methylpyrazole | 215-925-7 | 1453-58-3 | Repr. 1B / Acute Tox. 4 / STOT RE 2 / Skin Corr. 1 / Eye Dam. 1 | H360D / H302 / H373 (lung) / H314 / H318 | - | ATP17 |
@@ -2791,7 +2819,7 @@
 | 613-341-00-0 | clofentezine (ISO); 3,6-bis(o-chlorophenyl)-1,2,4,5-tetrazine | 277-728-2 | 74115-24-5 | Aquatic Chronic 1 | H410 | - | ATP18 |
 | 613-342-00-6 | theophylline; 1,3-dimethyl-3,7-dihydro-1H-purine-2,6-dione | 200-385-7 | 58-55-9 | Repr. 1B | H360D | - | ATP18 |
 | 613-343-00-1 | pyridalyl (ISO); 2,6-dichloro-4-(3,3-dichloroallyloxy)phenyl 3-[5-(trifluoromethyl)-2-pyridyloxy]propyl ether |  | 179101-81-6 | Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H317 / H400 / H410 | - | ATP18 |
-| 613-344-00-7 | Pyridine-2-thiol 1-oxide, sodium salt; pyrithione sodium; sodium pyrithione | 223-296-5 / 240-062-8 | 3811-73-2 | Acute Tox. 3 / Acute Tox. 3 / Acute Tox. 4 / STOT RE 1 / Skin Irrit. 2 / Eye Irrit. 2 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 2 | H331 / H311 / H302 / H372 (nervous system) / H315 / H319 / H317 / H400 / H411 | - | ATP18 |
+| 613-344-00-7 | Pyridine-2-thiol 1-oxide, sodium salt; pyrithione sodium; sodium pyrithione | 223-296-5 / 240-062-8 | 3811-73-2 | Acute Tox. 3 / Acute Tox. 3 / Acute Tox. 4 / STOT RE 1 / Skin Irrit. 2 / Eye Irrit. 2 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 2 | H331 / H311 / H302 / H372 (nervous system) / H315 / H319 / H317 / H400 / H411 | EUH070 | ATP18 |
 | 613-345-00-2 | 1,3,5-triazine-2,4,6-triamine;; melamine | 203-615-4 | 108-78-1 | Carc. 2 / STOT RE 2 | H351 / H373 (urinary tract) | - | ATP18 |
 | 613-346-00-8 | 4-nitrosomorpholine |  | 59-89-2 | Carc. 1B / Muta. 2 / STOT RE 1 | H350 / H341 / H372 (liver) | - | ATP21 |
 | 613-347-00-3 | difenoconazole (ISO); 1-({2-[2-chloro-4-(4-chlorophenoxy)phenyl]-4-methyl–1,3-dioxolan-2-yl}methyl)-1H-1,2,4-triazole; 3-chloro-4-[(2RS,4RS;2RS,4SR)-4-methyl-2-(1H-1,2,4-triazol-1-ylmethyl)-1,3-dioxolan-2-yl]phenyl 4-chlorophenyl ether |  | 119446-68-3 | Carc. 2 / Acute Tox. 4 / Eye Irrit. 2 / Aquatic Acute 1 / Aquatic Chronic 1 | H351 / H302 / H319 / H400 / H410 | - | ATP21 |
@@ -2820,14 +2848,14 @@
 | 614-030-00-2 | emamectin benzoate (ISO); (4"R)-4"-deoxy-4"-(methylamino) avermectin B1 benzoate |  | 155569-91-8 | Acute Tox. 3 / Acute Tox. 3 / Acute Tox. 3 / STOT SE 1 / STOT RE 1 / Eye Dam. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H331 / H311 / H301 / H370 (nervous system) / H372 (nervous system) / H318 / H400 / H410 | - | ATP17 |
 | 615-001-00-7 | methyl isocyanate | 210-866-3 | 624-83-9 | Flam. Liq. 2 / Repr. 2 / Acute Tox. 2 / Acute Tox. 3 / Acute Tox. 3 / STOT SE 3 / Skin Irrit. 2 / Eye Dam. 1 / Resp. Sens. 1 / Skin Sens. 1 | H225 / H361d / H330 / H311 / H301 / H335 / H315 / H318 / H334 / H317 | - | CLP00/ATP01 |
 | 615-002-00-2 | methyl isothiocyanate | 209-132-5 | 556-61-6 | Acute Tox. 3 / Acute Tox. 3 / Skin Corr. 1B / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H331 / H301 / H314 / H317 / H400 / H410 | - | CLP00 |
-| 615-003-00-8 | thiocyanic acid | 207-337-4 | 463-56-9 | Acute Tox. 4 / Acute Tox. 4 / Acute Tox. 4 / Aquatic Chronic 3 | H332 / H312 / H302 / H412 | - | CLP00 |
+| 615-003-00-8 | thiocyanic acid | 207-337-4 | 463-56-9 | Acute Tox. 4 / Acute Tox. 4 / Acute Tox. 4 / Aquatic Chronic 3 | H332 / H312 / H302 / H412 | EUH032 | CLP00 |
 | 615-005-00-9 | 4,4'-methylenediphenyl diisocyanate; diphenylmethane-4,4'-diisocyanate; 2,2'-methylenediphenyl diisocyanate; diphenylmethane-2,2'-diisocyanate; o-(p-isocyanatobenzyl)phenyl isocyanate; diphenylmethane-2,4'-diisocyanate; methylenediphenyl diisocyanate | 202-966-0 [1] / 219-799-4 [2] / 227-534-9 [3] / 247-714-0 [4] | 101-68-8 | Carc. 2 / Acute Tox. 4 / STOT SE 3 / STOT RE 2 / Skin Irrit. 2 / Eye Irrit. 2 / Resp. Sens. 1 / Skin Sens. 1 | H351 / H332 / H335 / H373 / H315 / H319 / H334 / H317 | 2, C | CLP00/ATP01 |
 | 615-006-00-4 | 2-methyl-m-phenylene diisocyanate; toluene-2,6-di-isocyanate; 4-methyl-m-phenylene diisocyanate; toluene-2,4-di-isocyanate; m-tolylidene diisocyanate; toluene-diisocyanate | 202-039-0 [1] / 209-544-5 [2] / 247-722-4 [3] | 91-08-7 | Carc. 2 / Acute Tox. 2 / STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 / Resp. Sens. 1 / Skin Sens. 1 / Aquatic Chronic 3 | H351 / H330 / H335 / H315 / H319 / H334 / H317 / H412 | C | CLP00 |
 | 615-008-00-5 | 3-isocyanatomethyl-3,5,5-trimethylcyclohexyl isocyanate; isophorone di-isocyanate | 223-861-6 | 4098-71-9 | Acute Tox. 3 / STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 / Resp. Sens. 1 / Skin Sens. 1 / Aquatic Chronic 2 | H331 / H335 / H315 / H319 / H334 / H317 / H411 | 2 | CLP00 |
 | 615-009-00-0 | 4,4'-methylenedi(cyclohexyl isocyanate); dicyclohexylmethane-4,4'-di-isocyanate | 225-863-2 | 5124-30-1 | Acute Tox. 3 / STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 / Resp. Sens. 1 / Skin Sens. 1 | H331 / H335 / H315 / H319 / H334 / H317 | 2 | CLP00 |
 | 615-010-00-6 | 2,2,4-trimethylhexamethylene-1,6-di-isocyanate; 2,4,4-trimethylhexamethylene-1,6-di-isocyanate | 241-001-8 [1] / 239-714-4 [2] | 16938-22-0 | Acute Tox. 3 / STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 / Resp. Sens. 1 | H331 / H335 / H315 / H319 / H334 | 2, C | CLP00 |
 | 615-011-00-1 | hexamethylene-di-isocyanate | 212-485-8 | 822-06-0 | Acute Tox. 3 / STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 / Resp. Sens. 1 / Skin Sens. 1 | H331 / H335 / H315 / H319 / H334 / H317 | 2 | CLP00 |
-| 615-012-00-7 | 4-isocyanatosulphonyltoluene; tosyl isocyanate | 223-810-8 | 4083-64-1 | STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 / Resp. Sens. 1 | H335 / H315 / H319 / H334 | - | CLP00 |
+| 615-012-00-7 | 4-isocyanatosulphonyltoluene; tosyl isocyanate | 223-810-8 | 4083-64-1 | STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 / Resp. Sens. 1 | H335 / H315 / H319 / H334 | EUH014 | CLP00 |
 | 615-013-00-2 | cyanamide; carbamonitril | 206-992-3 | 420-04-2 | Carc. 2 / Repr. 2 / Acute Tox. 3 / Acute Tox. 3 / STOT RE 2 / Skin Corr. 1 / Eye Dam. 1 / Skin Sens. 1 / Aquatic Chronic 3 | H351 / H361fd / H311 / H301 / H373 (thyroid) / H314 / H318 / H317 / H412 | - | CLP00/ATP10 |
 | 615-014-00-8 | tris(1-dodecyl-3-methyl-2-phenylbenzimidazolium)hexacyanoferrate |  | 7276-58-6 | Acute Tox. 4 | H302 | - | CLP00 |
 | 615-015-00-3 | 1,7,7-trimethylbicyclo(2,2,1)hept-2-yl thiocyanatoacetate; isobornyl thiocyanoacetate | 204-081-5 | 115-31-1 | Acute Tox. 4 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H400 / H410 | - | CLP00 |
@@ -2837,19 +2865,21 @@
 | 615-019-00-5 | dicyclohexylcarbodiimide | 208-704-1 | 538-75-0 | Acute Tox. 3 / Acute Tox. 4 / Eye Dam. 1 / Skin Sens. 1 | H311 / H302 / H318 / H317 | - | CLP00 |
 | 615-020-00-0 | methylene dithiocyanate | 228-652-3 | 6317-18-6 | Acute Tox. 2 / Acute Tox. 3 / Skin Corr. 1B / Skin Sens. 1 / Aquatic Acute 1 | H330 / H301 / H314 / H317 / H400 | - | CLP00 |
 | 615-021-00-6 | 1,3,5-tris(oxiranylmethyl)-1,3,5-triazine-2,4,6(1H,3H,5H)-trione; TGIC | 219-514-3 | 2451-62-9 | Muta. 1B / Acute Tox. 3 / Acute Tox. 3 / STOT RE 2 / Eye Dam. 1 / Skin Sens. 1 / Aquatic Chronic 3 | H340 / H331 / H301 / H373 / H318 / H317 / H412 | - | CLP00 |
-| 615-022-00-1 | methyl 3-isocyanatosulfonyl-2-thiophene-carboxylate | 410-550-7 | 79277-18-2 | STOT RE 2 / Resp. Sens. 1 / Skin Sens. 1 | H373 / H334 / H317 | - | CLP00/ATP01 |
-| 615-023-00-7 | 2-(isocyanatosulfonylmethyl)benzoic acid methyl ester; (alt.):methyl 2-(isocyanatosulfonylmethyl)benzoate | 410-900-9 | 83056-32-0 | Flam. Liq. 3 / Muta. 2 / Acute Tox. 4 / STOT RE 2 / Eye Dam. 1 / Resp. Sens. 1 | H226 / H341 / H332 / H373 / H318 / H334 | - | CLP00 |
+| 615-022-00-1 | methyl 3-isocyanatosulfonyl-2-thiophene-carboxylate | 410-550-7 | 79277-18-2 | STOT RE 2 / Resp. Sens. 1 / Skin Sens. 1 | H373 / H334 / H317 | EUH014 | CLP00/ATP01 |
+| 615-023-00-7 | 2-(isocyanatosulfonylmethyl)benzoic acid methyl ester; (alt.):methyl 2-(isocyanatosulfonylmethyl)benzoate | 410-900-9 | 83056-32-0 | Flam. Liq. 3 / Muta. 2 / Acute Tox. 4 / STOT RE 2 / Eye Dam. 1 / Resp. Sens. 1 | H226 / H341 / H332 / H373 / H318 / H334 | EUH014 | CLP00 |
 | 615-024-00-2 | 2-phenylethylisocyanate | 413-080-0 | 1943-82-4 | Acute Tox. 3 / Acute Tox. 4 / Skin Corr. 1A / Resp. Sens. 1 / Skin Sens. 1 / Aquatic Chronic 2 | H331 / H302 / H314 / H334 / H317 / H411 | - | CLP00 |
 | 615-025-00-8 | 4,4'-ethylidenediphenyl dicyanate | 405-740-1 | 47073-92-7 | Acute Tox. 4 / Acute Tox. 4 / STOT RE 2 / Eye Dam. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H332 / H302 / H373 / H318 / H400 / H410 | - | CLP00 |
 | 615-026-00-3 | 4,4'-methylenebis(2,6-dimethylphenyl cyanate) | 405-790-4 | 101657-77-6 | Skin Sens. 1 / Aquatic Chronic 3 | H317 / H412 | - | CLP00 |
-| 615-028-00-4 | ethyl 2-(isocyanatosulfonyl)benzoate | 410-220-2 | 77375-79-2 | Acute Tox. 4 / STOT RE 2 / Eye Dam. 1 / Resp. Sens. 1 / Skin Sens. 1 | H302 / H373 / H318 / H334 / H317 | - | CLP00/ATP01 |
+| 615-028-00-4 | ethyl 2-(isocyanatosulfonyl)benzoate | 410-220-2 | 77375-79-2 | Acute Tox. 4 / STOT RE 2 / Eye Dam. 1 / Resp. Sens. 1 / Skin Sens. 1 | H302 / H373 / H318 / H334 / H317 | EUH014 | CLP00/ATP01 |
 | 615-031-00-0 | thallium thiocyanate | 222-571-7 | 3535-84-0 | Acute Tox. 2 / Acute Tox. 2 / Acute Tox. 4 / STOT RE 2 / Aquatic Chronic 2 | H330 / H300 / H312 / H373 / H411 | - | CLP00/ATP01 |
 | 615-035-00-2 | reaction product of diphenylmethanediisocyanate, octylamine and oleylamine (molar ratio 1:1.86:0.14) | 430-930-6 | 122886-55-9 | Aquatic Chronic 4 | H413 | - | ATP01 |
+| 616-204-00-3 | N,N''-(methylenedi-4,1-phenylene)bis[N'-octylurea] | 451-060-3 | 122886-55-9 | Aquatic Chronic 4 | H413 | - | ATP01 |
 | 615-044-00-1 | 4-chlorophenylisocyanate | 203-176-9 | 104-12-1 | Acute Tox. 2 / Acute Tox. 4 / STOT SE 3 / Skin Irrit. 2 / Eye Dam. 1 / Resp. Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H330 / H302 / H335 / H315 / H318 / H334 / H400 / H410 | - | ATP01 |
 | 615-046-00-2 | 1,3-bis(1-isocyanato-1-methylethyl)benzene; [m-TMXDI] | 220-474-4 | 2778-42-9 | Resp. Sens. 1 / Skin Sens. 1A | H334 / H317 | - | ATP18 |
 | 615-047-00-8 | Bis(isocyanatomethyl)benzene; [m-XDI] | 222-852-4 | 3634-83-1 | Resp. Sens. 1 / Skin Sens. 1A | H334 / H317 | - | ATP18 |
 | 615-048-00-3 | 2,4,6-triisopropyl-m-phenylene diisocyanate | 218-485-4 | 2162-73-4 | Resp. Sens. 1 / Skin Sens. 1 | H334 / H317 | - | ATP18 |
 | 615-049-00-9 | 1,5-naphthylene diisocyanate; [containing < 0.1 % (w/w) of particles with an aerodynamic diameter of below 50 µm] | 221-641-4 | 3173-72-6 | STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 / Resp. Sens. 1 / Skin Sens. 1A / Aquatic Chronic 3 | H335 / H315 / H319 / H334 / H317 / H412 | - | ATP18 |
+| 615-050-00-4 | 1,5-naphthylene diisocyanate; [containing ≥ 0.1 % (w/w) of particles with an aerodynamic diameter of below 50 µm] | 221-641-4 | 3173-72-6 | Acute Tox. 2 / STOT SE 3 / Skin Irrit. 2 / Eye Irrit. 2 / Resp. Sens. 1 / Skin Sens. 1A / Aquatic Chronic 3 | H330 / H335 / H315 / H319 / H334 / H317 / H412 | - | ATP18 |
 | 615-051-00-X | 3,3'-dimethylbiphenyl–4,4'-diyl diisocyanate | 202-112-7 | 91-97-4 | Carc. 2 / Resp. Sens. 1 / Skin Sens. 1A | H351 / H334 / H317 | - | ATP21 |
 | 616-001-00-X | N,N-dimethylformamide; dimethyl formamide | 200-679-5 | 68-12-2 | Repr. 1B / Acute Tox. 4 / Acute Tox. 4 / Eye Irrit. 2 | H360D / H332 / H312 / H319 | - | CLP00 |
 | 616-002-00-5 | 2-fluoroacetamide | 211-363-1 | 640-19-7 | Acute Tox. 2 / Acute Tox. 3 | H300 / H311 | - | CLP00 |
@@ -2860,7 +2890,7 @@
 | 616-007-00-2 | diphenamid (ISO); N,N-dimethyl-2,2-diphenylacetamide | 213-482-4 | 957-51-7 | Acute Tox. 4 / Aquatic Chronic 3 | H302 / H412 | - | CLP00 |
 | 616-008-00-8 | propachlor (ISO); 2-chloro-N-isopropylacetanilide; α-chloro-N-isopropylacetanilide | 217-638-2 | 1918-16-7 | Acute Tox. 4 / Eye Irrit. 2 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H302 / H319 / H317 / H400 / H410 | - | CLP00 |
 | 616-009-00-3 | propanil (ISO); 3',4'-dichloropropionanilide | 211-914-6 | 709-98-8 | Acute Tox. 4 / Aquatic Acute 1 | H302 / H400 | - | CLP00/ATP01 |
-| 616-010-00-9 | tosylchloramide sodium | 204-854-7 | 127-65-1 | Acute Tox. 4 / Skin Corr. 1B / Resp. Sens. 1 | H302 / H314 / H334 | - | CLP00 |
+| 616-010-00-9 | tosylchloramide sodium | 204-854-7 | 127-65-1 | Acute Tox. 4 / Skin Corr. 1B / Resp. Sens. 1 | H302 / H314 / H334 | EUH031 | CLP00 |
 | 616-011-00-4 | N,N-dimethylacetamide | 204-826-4 | 127-19-5 | Repr. 1B / Acute Tox. 4 / Acute Tox. 4 | H360D / H332 / H312 | - | CLP00/ATP09 |
 | 616-012-00-X | N-(dichlorofluoromethylthio)phthalimide; N-(fluorodichloromethylthio)phthalimide | 211-952-3 | 719-96-0 | Skin Irrit. 2 | H315 | - | CLP00 |
 | 616-013-00-5 | butyraldehyde oxime | 203-792-8 | 110-69-0 | Acute Tox. 3 / Acute Tox. 4 / Eye Irrit. 2 | H311 / H302 / H319 | - | CLP00 |
@@ -3065,6 +3095,7 @@
 | 617-007-00-5 | tert-butyl α,α-dimethylbenzyl peroxide | 222-389-8 | 3457-61-2 | Org. Perox. E / Skin Irrit. 2 / Aquatic Chronic 2 | H242 / H315 / H411 | - | CLP00 |
 | 617-008-00-0 | dibenzoyl peroxide; benzoyl peroxide | 202-327-6 | 94-36-0 | Org. Perox. B / Eye Irrit. 2 / Skin Sens. 1 / Aquatic Acute 1 / Aquatic Chronic 1 | H241 / H319 / H317 / H400 / H410 | - | CLP00/ATP22 |
 | 617-010-00-1 | 1-hydroperoxycyclohexyl 1-hydroxycyclohexyl peroxide;; [> 91 % solution]; 1,1’-dioxybiscyclohexan-1-ol;; [> 91 % solution]; cyclohexylidene hydroperoxide;; [> 91 % solution]; cyclohexanone, peroxide;; [> 91 % solution] | 201-091-1 [1] / 219-306-2 [2] / 220-279-4 [3] / 235-527-7 [4] | 78-18-2 | Org. Perox. A / Acute Tox. 4 / Skin Corr. 1B | H240 / H302 / H314 | C | CLP00/ATP01corr |
+| 617-010-01-9 | 1-hydroperoxycyclohexyl 1-hydroxycyclohexyl peroxide;; [≤ 91 % solution]; 1,1'-dioxybiscyclohexan-1-ol;; [≤ 91 % solution]; cyclohexylidene hydroperoxide;; [≤ 91 % solution]; cyclohexanone, peroxide;; [≤ 91 % solution] | 201-091-1 [1] / 219-306-2 [2] / 220-279-4 [3] / 235-527-7 [4] | 78-18-2 | Org. Perox. C / Acute Tox. 4 / Skin Corr. 1B | H242 / H302 / H314 | C, T | CLP00 |
 | 617-012-00-2 | 8-p-menthyl hydroperoxide; p-menthane hydroperoxide | 201-281-4 | 80-47-7 | Org. Perox. D / Acute Tox. 4 / Skin Corr. 1B | H242 / H332 / H314 | - | CLP00 |
 | 617-013-00-8 | O,O-tert-butyl O-docosyl monoperoxyoxalate | 404-300-6 | 116753-76-5 | Org. Perox. C / Aquatic Acute 1 / Aquatic Chronic 1 | H242 / H400 / H410 | - | CLP00 |
 | 617-014-00-3 | 6-(nonylamino)-6-oxo-peroxyhexanoic acid | 406-680-9 | 104788-63-8 | Org. Perox. C / Eye Dam. 1 / Skin Sens. 1 / Aquatic Acute 1 | H242 / H318 / H317 / H400 | - | CLP00 |
@@ -3812,3 +3843,4 @@
 | 650-055-00-5 | silver sodium zirconium hydrogenphosphate | 422-570-3 | 155925-27-2 | Aquatic Acute 1 / Aquatic Chronic 1 | H400 / H410 | - | CLP00 |
 | 650-056-00-0 | dibutylbis(pentane-2,4-dionato-O,O')tin | 245-152-0 | 22673-19-4 | Repr. 1B / STOT RE 1 | H360FD / H372 (immune system) | - | ATP14 |
 | 650-058-00-1 | Margosa, ext. [from the kernels of Azadirachta indica extracted with water and further processed with organic solvents] | 283-644-7 | 84696-25-3 | Repr. 2 / Skin Sens. 1 / Aquatic Chronic 1 | H361d / H317 / H410 | - | ATP18 |
+| 650-057-00-6 | Margosa, ext. [cold-pressed oil of Azadirachta indica seeds without shells extracted with super-critical carbon dioxide] | 283-644-7 | 84696-25-3 | Aquatic Chronic 3 | H412 | - | ATP15 |

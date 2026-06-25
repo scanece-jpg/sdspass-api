@@ -123,16 +123,35 @@ def build_annex6_md():
     lines.append('| Index No | Madde Adı (EN) | EC No | CAS No | Tehlike Sınıfı | H Kodu | Notlar | ATP |')
     lines.append('|---|---|---|---|---|---|---|---|')
 
-    for cas, e in sorted(real.items(), key=lambda x: x[1].get('index_no', '')):
-        index_no = _esc(e.get('index_no', '') or '')
-        names    = _esc('; '.join(e.get('names', [])))
-        ec_no    = _esc(e.get('ec_no', '') or '')
-        cls_list = e.get('classification', [])
+    def _entry_row(index_no, names, ec_no, cas, cls_list, notes, atp, euh_codes):
         cls_str  = _esc(' / '.join(c.get('class', '') for c in cls_list if c.get('class'))) or '-'
         hc_str   = _esc(' / '.join(c.get('h_code', '') for c in cls_list if c.get('h_code'))) or '-'
-        notes    = _esc(', '.join(e.get('notes', []))) or '-'
-        atp      = _esc(e.get('atp', '') or '')
-        lines.append(f'| {index_no} | {names} | {ec_no} | {cas} | {cls_str} | {hc_str} | {notes} | {atp} |')
+        notlar   = ', '.join(filter(None, [', '.join(notes), ' '.join(euh_codes)]))
+        notlar   = _esc(notlar) or '-'
+        return f'| {_esc(index_no)} | {_esc("; ".join(names))} | {_esc(ec_no)} | {cas} | {cls_str} | {hc_str} | {notlar} | {_esc(atp)} |'
+
+    for cas, e in sorted(real.items(), key=lambda x: x[1].get('index_no', '')):
+        lines.append(_entry_row(
+            e.get('index_no', '') or '',
+            e.get('names', []),
+            e.get('ec_no', '') or '',
+            cas,
+            e.get('classification', []),
+            e.get('notes', []),
+            e.get('atp', '') or '',
+            e.get('euh_codes', []),
+        ))
+        for f in e.get('forms', []):
+            lines.append(_entry_row(
+                f.get('index_no', '') or '',
+                f.get('names', []),
+                f.get('ec_no', '') or '',
+                cas,
+                f.get('classification', []),
+                f.get('notes', []),
+                f.get('atp', '') or '',
+                f.get('euh_codes', []),
+            ))
 
     content = '\n'.join(lines)
     AX6_OUT.write_text(content, encoding='utf-8')

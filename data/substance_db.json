@@ -1211,7 +1211,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -1389,7 +1390,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -1443,7 +1445,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -1551,7 +1554,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -2171,7 +2175,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 10,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -2479,7 +2484,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -2510,7 +2516,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -2548,7 +2555,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 10,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -3204,7 +3212,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {
       "inhalation": {
@@ -3397,7 +3406,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -3441,7 +3451,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -3762,7 +3773,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10000
+      "acute": 1,
+      "chronic": 10000
     },
     "ate": {}
   },
@@ -3816,7 +3828,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -6158,7 +6171,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -6754,7 +6768,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -7163,7 +7178,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -7451,7 +7467,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -7489,7 +7506,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -7527,7 +7545,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -7564,7 +7583,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -7940,7 +7960,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -7975,7 +7996,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10000
+      "acute": 10000,
+      "chronic": 10000
     },
     "ate": {}
   },
@@ -8010,7 +8032,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -8192,7 +8215,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -8361,7 +8385,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -8407,7 +8432,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -8458,7 +8484,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -8671,7 +8698,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -8712,7 +8740,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -8877,7 +8906,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10000
+      "acute": 10000,
+      "chronic": 10000
     },
     "ate": {}
   },
@@ -8927,7 +8957,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -9133,7 +9164,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -9169,7 +9201,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -9384,7 +9417,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -9527,7 +9561,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -9832,7 +9867,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -10055,7 +10091,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10000
+      "acute": 10000,
+      "chronic": 10000
     },
     "ate": {}
   },
@@ -10442,7 +10479,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -10478,7 +10516,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -10586,7 +10625,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -10630,7 +10670,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -10883,7 +10924,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -10919,7 +10961,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -11039,7 +11082,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -11074,7 +11118,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -11110,7 +11155,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -11314,7 +11360,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -11356,7 +11403,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -11432,7 +11480,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -11492,7 +11541,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -11528,7 +11578,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -11624,7 +11675,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -11655,7 +11707,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -11689,7 +11742,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {
       "oral": {
@@ -11735,7 +11789,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -11766,7 +11821,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -11836,7 +11892,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -11871,7 +11928,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -11912,7 +11970,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -12850,7 +12909,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10000
+      "acute": 10000,
+      "chronic": 10000
     },
     "ate": {}
   },
@@ -15172,7 +15232,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -15369,7 +15430,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -15456,7 +15518,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 1,
+      "chronic": 10
     },
     "ate": {
       "inhalation": {
@@ -15515,7 +15578,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -15856,7 +15920,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 10,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -15926,7 +15991,8 @@
       }
     ],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -16216,7 +16282,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {},
     "forms": [
@@ -17744,7 +17811,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -17774,7 +17842,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -17837,7 +17906,8 @@
       }
     ],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -17900,7 +17970,8 @@
       }
     ],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -17958,7 +18029,8 @@
       }
     ],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -18016,7 +18088,8 @@
       }
     ],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -18074,7 +18147,8 @@
       }
     ],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -18568,7 +18642,8 @@
       }
     ],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -18747,7 +18822,8 @@
       }
     ],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -18857,7 +18933,8 @@
       }
     ],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -18988,7 +19065,8 @@
       }
     ],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -19119,7 +19197,8 @@
       }
     ],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -19209,7 +19288,8 @@
       }
     ],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -19294,7 +19374,8 @@
       }
     ],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {
       "oral": {
@@ -19376,7 +19457,8 @@
       }
     ],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -19458,7 +19540,8 @@
       }
     ],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -19554,7 +19637,8 @@
       }
     ],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -19634,7 +19718,8 @@
       }
     ],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -19711,7 +19796,8 @@
       }
     ],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -19788,7 +19874,8 @@
       }
     ],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -19865,7 +19952,8 @@
       }
     ],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -19946,7 +20034,8 @@
       }
     ],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -20030,7 +20119,8 @@
       }
     ],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -20116,7 +20206,8 @@
       }
     ],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -20193,7 +20284,8 @@
       }
     ],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -20854,7 +20946,8 @@
       }
     ],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -20931,7 +21024,8 @@
       }
     ],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -21204,7 +21298,8 @@
       }
     ],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -21348,7 +21443,8 @@
       }
     ],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -21716,7 +21812,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 100,
+      "chronic": 10
     },
     "ate": {
       "inhalation": {
@@ -22003,7 +22100,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -22029,7 +22127,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 100,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -22063,7 +22162,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {
       "oral": {
@@ -22106,7 +22206,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {
       "oral": {
@@ -22152,7 +22253,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {
       "inhalation": {
@@ -22200,7 +22302,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {
       "inhalation": {
@@ -22245,7 +22348,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 10,
+      "chronic": 1
     },
     "ate": {
       "inhalation": {
@@ -22285,7 +22389,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 10,
+      "chronic": 1
     },
     "ate": {
       "oral": {
@@ -22332,7 +22437,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {
       "oral": {
@@ -22363,7 +22469,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 10,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -23322,7 +23429,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -23356,7 +23464,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {},
     "forms": [
@@ -24289,7 +24398,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -24356,7 +24466,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -24423,7 +24534,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -24848,7 +24960,8 @@
       }
     ],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -27187,7 +27300,8 @@
       }
     ],
     "m_factors": {
-      "default": 100
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {},
     "forms": [
@@ -28609,7 +28723,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -28777,7 +28892,8 @@
       }
     ],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -29930,7 +30046,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {
       "oral": {
@@ -30057,7 +30174,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -31801,7 +31919,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -32092,7 +32211,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -37012,7 +37132,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -39540,7 +39661,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 1,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -39566,7 +39688,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -39783,7 +39906,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -40341,7 +40465,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {
       "oral": {
@@ -40408,7 +40533,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {
       "inhalation": {
@@ -40508,7 +40634,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -40785,7 +40912,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -41016,7 +41144,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {
       "oral": {
@@ -41195,7 +41324,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -41449,7 +41579,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -41653,7 +41784,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 1,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -42500,7 +42632,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -42643,7 +42776,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -42888,7 +43022,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -42918,7 +43053,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 100,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -42963,7 +43099,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -43025,7 +43162,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 1,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -43120,7 +43258,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -43231,45 +43370,94 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 1,
+      "chronic": 10
     },
     "ate": {}
   },
   "9016-45-9": {
-    "_alias": "127087-87-0"
+    "_alias": "127087-87-0",
+    "m_factors": {
+      "acute": 1,
+      "chronic": 10
+    }
   },
   "26027-38-3": {
-    "_alias": "127087-87-0"
+    "_alias": "127087-87-0",
+    "m_factors": {
+      "acute": 1,
+      "chronic": 10
+    }
   },
   "68412-54-4": {
-    "_alias": "127087-87-0"
+    "_alias": "127087-87-0",
+    "m_factors": {
+      "acute": 1,
+      "chronic": 10
+    }
   },
   "27986-36-3": {
-    "_alias": "127087-87-0"
+    "_alias": "127087-87-0",
+    "m_factors": {
+      "acute": 1,
+      "chronic": 10
+    }
   },
   "20427-84-3": {
-    "_alias": "127087-87-0"
+    "_alias": "127087-87-0",
+    "m_factors": {
+      "acute": 1,
+      "chronic": 10
+    }
   },
   "27176-93-8": {
-    "_alias": "127087-87-0"
+    "_alias": "127087-87-0",
+    "m_factors": {
+      "acute": 1,
+      "chronic": 10
+    }
   },
   "1119449-38-5": {
-    "_alias": "127087-87-0"
+    "_alias": "127087-87-0",
+    "m_factors": {
+      "acute": 1,
+      "chronic": 10
+    }
   },
   "7311-27-5": {
-    "_alias": "127087-87-0"
+    "_alias": "127087-87-0",
+    "m_factors": {
+      "acute": 1,
+      "chronic": 10
+    }
   },
   "27942-27-4": {
-    "_alias": "127087-87-0"
+    "_alias": "127087-87-0",
+    "m_factors": {
+      "acute": 1,
+      "chronic": 10
+    }
   },
   "26264-02-8": {
-    "_alias": "127087-87-0"
+    "_alias": "127087-87-0",
+    "m_factors": {
+      "acute": 1,
+      "chronic": 10
+    }
   },
   "27177-05-5": {
-    "_alias": "127087-87-0"
+    "_alias": "127087-87-0",
+    "m_factors": {
+      "acute": 1,
+      "chronic": 10
+    }
   },
   "14409-72-4": {
-    "_alias": "127087-87-0"
+    "_alias": "127087-87-0",
+    "m_factors": {
+      "acute": 1,
+      "chronic": 10
+    }
   },
   "50-00-0": {
     "index_no": "605-001-00-5",
@@ -43575,7 +43763,8 @@
       }
     ],
     "m_factors": {
-      "default": 1
+      "acute": 100,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -43771,7 +43960,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -44051,7 +44241,8 @@
       }
     ],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -44081,7 +44272,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -44999,7 +45191,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -45070,7 +45263,8 @@
       }
     ],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -45657,7 +45851,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {
       "oral": {
@@ -46153,7 +46348,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 10,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -48015,7 +48211,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -48127,7 +48324,8 @@
       }
     ],
     "m_factors": {
-      "default": 10000
+      "acute": 10000,
+      "chronic": 10000
     },
     "ate": {}
   },
@@ -48168,7 +48366,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -48206,7 +48405,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 1,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -48323,7 +48523,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 100,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -48397,7 +48598,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -48467,7 +48669,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -48613,7 +48816,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -50171,7 +50375,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {
       "inhalation": {
@@ -50314,7 +50519,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -50612,7 +50818,8 @@
       }
     ],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -51699,7 +51906,8 @@
       }
     ],
     "m_factors": {
-      "default": 100
+      "acute": 10,
+      "chronic": 100
     },
     "ate": {
       "inhalation": {
@@ -52415,7 +52623,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -53626,7 +53835,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -53833,7 +54043,8 @@
       }
     ],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -54246,7 +54457,8 @@
       }
     ],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -54304,7 +54516,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -54743,7 +54956,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -55261,7 +55475,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {
       "oral": {
@@ -55474,7 +55689,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 1,
+      "chronic": 10
     },
     "ate": {
       "oral": {
@@ -56212,7 +56428,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10000
+      "acute": 10000,
+      "chronic": 10000
     },
     "ate": {}
   },
@@ -56254,7 +56471,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -56297,7 +56515,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -56347,7 +56566,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {
       "inhalation": {
@@ -57352,7 +57572,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -57481,7 +57702,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000000
+      "acute": 1000000,
+      "chronic": 1000000
     },
     "ate": {}
   },
@@ -58590,7 +58812,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -58685,7 +58908,8 @@
       }
     ],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -59646,9 +59870,7 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {
-      "default": 100000
-    },
+    "m_factors": {},
     "ate": {
       "inhalation": {
         "value": 3.3,
@@ -59737,7 +59959,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -59772,7 +59995,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 100,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -60022,7 +60246,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -60056,7 +60281,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {
       "oral": {
@@ -63389,7 +63615,8 @@
       }
     ],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -64374,7 +64601,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -64617,7 +64845,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100000
+      "acute": 10000,
+      "chronic": 100000
     },
     "ate": {}
   },
@@ -64662,7 +64891,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -64863,7 +65093,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -64977,7 +65208,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -65015,7 +65247,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -65053,7 +65286,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 100,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -65083,7 +65317,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 100,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -65117,7 +65352,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -65188,7 +65424,8 @@
       }
     ],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -65260,7 +65497,8 @@
       }
     ],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -65471,7 +65709,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -65510,7 +65749,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10000
+      "acute": 10000,
+      "chronic": 10000
     },
     "ate": {}
   },
@@ -65553,7 +65793,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -65580,7 +65821,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -65631,7 +65873,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {
       "inhalation": {
@@ -65680,7 +65923,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -65718,7 +65962,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -65745,7 +65990,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -65784,7 +66030,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -65814,7 +66061,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -66058,7 +66306,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {
       "oral": {
@@ -66117,7 +66366,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {
       "oral": {
@@ -66148,7 +66398,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -66367,7 +66618,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {
       "inhalation": {
@@ -66404,7 +66656,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -66496,7 +66749,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 1000,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -66527,7 +66781,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -66606,7 +66861,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 10,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -66676,7 +66932,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -66887,7 +67144,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {
       "oral": {
@@ -67317,7 +67575,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -67373,7 +67632,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -67639,7 +67899,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -67737,7 +67998,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -67781,7 +68043,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -68126,7 +68389,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -68186,7 +68450,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -68636,7 +68901,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10000
+      "acute": 1000,
+      "chronic": 10000
     },
     "ate": {}
   },
@@ -68712,7 +68978,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10000
+      "acute": 10000,
+      "chronic": 10000
     },
     "ate": {
       "inhalation": {
@@ -68875,7 +69142,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -68901,7 +69169,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 1,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -69846,7 +70115,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -70339,7 +70609,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 100,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -70463,7 +70734,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -71170,7 +71442,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -73888,7 +74161,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -77475,7 +77749,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -78483,7 +78758,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 100,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -79756,7 +80032,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -82207,7 +82484,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -82237,7 +82515,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -82327,7 +82606,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -82536,7 +82816,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 100,
+      "chronic": 1000
     },
     "ate": {
       "oral": {
@@ -82756,7 +83037,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -82873,7 +83155,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -83076,7 +83359,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -83122,7 +83406,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -83164,7 +83449,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -83210,7 +83496,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -83252,7 +83539,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -83294,7 +83582,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -83324,7 +83613,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -83366,7 +83656,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -83420,7 +83711,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 100,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -83466,7 +83758,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -83618,7 +83911,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10000
+      "acute": 1000,
+      "chronic": 10000
     },
     "ate": {
       "inhalation": {
@@ -83908,7 +84202,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -84097,7 +84392,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -85012,7 +85308,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -85159,7 +85456,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -85198,7 +85496,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -85303,7 +85602,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -85349,7 +85649,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -85435,7 +85736,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -85522,7 +85824,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -85593,7 +85896,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -85633,7 +85937,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -85692,7 +85997,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -86416,7 +86722,8 @@
       }
     ],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {
       "inhalation": {
@@ -87101,7 +87408,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {
       "inhalation": {
@@ -87270,7 +87578,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {},
     "forms": [
@@ -87435,7 +87744,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -87461,7 +87771,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 1000,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -87574,7 +87885,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -87786,7 +88098,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -87954,7 +88267,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -88180,7 +88494,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -88525,7 +88840,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -88566,7 +88882,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -88592,7 +88909,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -88623,7 +88941,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -88692,7 +89011,8 @@
       }
     ],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -88791,7 +89111,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -89641,7 +89962,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -89670,7 +89992,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -89710,7 +90033,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -89749,7 +90073,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -89804,7 +90129,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -91027,7 +91353,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {
       "inhalation": {
@@ -91169,7 +91496,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {
       "oral": {
@@ -91295,7 +91623,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -91345,7 +91674,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {
       "inhalation": {
@@ -91656,7 +91986,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -92188,7 +92519,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 10,
+      "chronic": 100
     },
     "ate": {
       "oral": {
@@ -92438,7 +92770,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -92464,7 +92797,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 10,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -92522,7 +92856,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -92569,7 +92904,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 1,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -92638,7 +92974,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -92681,7 +93018,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -92729,7 +93067,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -92788,7 +93127,8 @@
       }
     ],
     "m_factors": {
-      "default": 1
+      "acute": 10,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -92819,7 +93159,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -92879,7 +93220,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -92929,7 +93271,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -92951,7 +93294,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -92997,7 +93341,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 1000,
+      "chronic": 10
     },
     "ate": {
       "inhalation": {
@@ -93045,7 +93390,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {
       "oral": {
@@ -93121,7 +93467,8 @@
       }
     ],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {
       "inhalation": {
@@ -93186,7 +93533,8 @@
       }
     ],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {
       "oral": {
@@ -93222,7 +93570,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 10,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -93268,7 +93617,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {
       "inhalation": {
@@ -93353,7 +93703,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {
       "inhalation": {
@@ -93385,7 +93736,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -93435,7 +93787,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 1000,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -93491,12 +93844,17 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
   "15922-78-8": {
-    "_alias": "3811-73-2"
+    "_alias": "3811-73-2",
+    "m_factors": {
+      "acute": 100,
+      "chronic": 100
+    }
   },
   "108-78-1": {
     "index_no": "613-345-00-2",
@@ -93594,7 +93952,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {
       "oral": {
@@ -93637,7 +93996,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 10,
+      "chronic": 1
     },
     "ate": {
       "oral": {
@@ -94296,7 +94656,8 @@
       }
     ],
     "m_factors": {
-      "default": 10000
+      "acute": 10000,
+      "chronic": 10000
     },
     "ate": {
       "inhalation": {
@@ -95996,7 +96357,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -96085,7 +96447,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -96295,7 +96658,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -96709,7 +97073,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 10000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -96808,7 +97173,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {
       "oral": {
@@ -96909,7 +97275,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 1000,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -98248,7 +98615,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {
       "oral": {
@@ -98313,7 +98681,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -98499,7 +98868,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -99129,7 +99499,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -99225,7 +99596,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -99580,7 +99952,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -99606,7 +99979,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -99632,7 +100006,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -100268,7 +100643,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -100298,7 +100674,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10000
+      "acute": 10000,
+      "chronic": 10000
     },
     "ate": {}
   },
@@ -100351,7 +100728,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -100400,7 +100778,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -100442,7 +100821,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -100472,7 +100852,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 1,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -100518,7 +100899,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 10,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -100544,7 +100926,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -100578,7 +100961,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 1000,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -100612,7 +100996,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -100662,7 +101047,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -100696,7 +101082,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 100,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -100742,7 +101129,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -100769,7 +101157,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10000
+      "acute": 1000,
+      "chronic": 10000
     },
     "ate": {}
   },
@@ -100796,7 +101185,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -100865,7 +101255,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -100891,7 +101282,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 1,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -100927,7 +101319,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -100992,7 +101385,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -101050,7 +101444,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -101128,7 +101523,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -101158,7 +101554,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 1,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -101240,7 +101637,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 10,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -101278,7 +101676,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -101308,7 +101707,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 100
+      "acute": 1000,
+      "chronic": 100
     },
     "ate": {}
   },
@@ -101338,7 +101738,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1000
+      "acute": 1000,
+      "chronic": 1000
     },
     "ate": {}
   },
@@ -101644,7 +102045,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {}
   },
@@ -121608,7 +122010,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 1
+      "acute": 10,
+      "chronic": 1
     },
     "ate": {}
   },
@@ -121811,7 +122214,8 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "default": 10
+      "acute": 10,
+      "chronic": 10
     },
     "ate": {},
     "forms": [
@@ -121858,5 +122262,96 @@
         "notes": []
       }
     ]
+  },
+  "135410-20-7": {
+    "index_no": "608-032-00-2",
+    "names": [
+      "acetamiprid (ISO); (1E)-N-[(6-chloropyridin-3-yl) methyl]-N’-cyano-N-methylethanimidamide; (E)-N1-[(6-chloro-3-pyridyl)methyl]-N2-cyano-N1-methylacetamidine"
+    ],
+    "ec_no": "-",
+    "cas": "135410-20-7",
+    "synonyms": [],
+    "atp": "ATP01/ATP18",
+    "notes": [],
+    "classification": [
+      {
+        "class": "Repr. 2",
+        "h_code": "H361d"
+      },
+      {
+        "class": "Acute Tox. 3",
+        "h_code": "H301"
+      },
+      {
+        "class": "Aquatic Acute 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Aquatic Chronic 1",
+        "h_code": "H410"
+      }
+    ],
+    "scl_limits": [],
+    "m_factors": {
+      "acute": 10,
+      "chronic": 10
+    },
+    "ate": {}
+  },
+  "36483-57-5": {
+    "index_no": "603-243-00-6",
+    "names": [
+      "2,2-dimethylpropan-1-ol, tribromo derivative; 3-bromo-2,2-bis(bromomethyl)propan-1-ol"
+    ],
+    "ec_no": "253-057-0",
+    "cas": "36483-57-5",
+    "synonyms": [
+      "1522-92-5"
+    ],
+    "atp": "ATP18",
+    "notes": [],
+    "classification": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350",
+        "note_flag": ""
+      },
+      {
+        "class": "Muta. 2",
+        "h_code": "H341",
+        "note_flag": ""
+      }
+    ],
+    "scl_limits": [],
+    "m_factors": {},
+    "ate": {}
+  },
+  "1522-92-5": {
+    "index_no": "603-243-00-6",
+    "names": [
+      "2,2-dimethylpropan-1-ol, tribromo derivative; 3-bromo-2,2-bis(bromomethyl)propan-1-ol"
+    ],
+    "ec_no": "253-057-0",
+    "cas": "1522-92-5",
+    "synonyms": [
+      "1522-92-5"
+    ],
+    "atp": "ATP18",
+    "notes": [],
+    "classification": [
+      {
+        "class": "Carc. 1B",
+        "h_code": "H350",
+        "note_flag": ""
+      },
+      {
+        "class": "Muta. 2",
+        "h_code": "H341",
+        "note_flag": ""
+      }
+    ],
+    "scl_limits": [],
+    "m_factors": {},
+    "ate": {}
   }
 }

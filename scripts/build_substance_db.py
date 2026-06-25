@@ -21,8 +21,8 @@ OUT_PATH = Path(__file__).parent.parent / "data" / "substance_db.json"
 # ---------------------------------------------------------------------------
 
 def _num(s: str) -> float:
-    """'0,75' veya '0.75' → float"""
-    return float(s.replace(",", "."))
+    """'0,75' veya '0.75' veya '1 700' → float (binlik ayracı olarak boşluk desteklenir)"""
+    return float(s.replace(",", ".").replace(" ", ""))
 
 
 def _strip_asterisk(s: str) -> tuple[str, int]:
@@ -54,8 +54,9 @@ _RE_SCL_LT    = re.compile(r"^(.+?);\s*(H\d+\w*)\s*:\s*C\s*[<≤]+\s*([\d,\.]+)\
 _RE_M         = re.compile(r"M(?:\((\w+)\))?\s*=\s*(\d+)", re.IGNORECASE)
 
 # ATE: "oral: ATE = 300 mg/kg bw"  |  "inhalation: ATE = 0,75 mg/L (dusts or mists)"
+# Pattern B: binlik ayracı boşluk desteklenir: "1 700 mg/kg" → 1700
 _RE_ATE       = re.compile(
-    r"(oral|dermal|inhalation)\s*:\s*ATE\s*=\s*([\d,\.]+)\s*(mg/kg|mg/L|ppm)"
+    r"(oral|dermal|inhalation)\s*:\s*ATE\s*=\s*([\d,\.]+(?:\s[\d,\.]+)?)\s*(mg/kg|mg/L|ppm)"
     r"(?:\s*(?:bw|body weight))?"
     r"(?:\s*\((.+?)\))?",
     re.IGNORECASE,
@@ -70,6 +71,14 @@ def _parse_scl(raw: str) -> tuple[list[dict], dict, dict]:
       m_factors  : {"acute": int, "chronic": int}
       ate        : {"oral": float, "dermal": float, "inhalation": {...}}
     """
+    # Ön-işleme: satır kırılmasından kaynaklanan parse hatalarını gider
+    # SCL Pattern A: "Repr. 1B; \nH360D: C ≥ 3 %" → "Repr. 1B; H360D: C ≥ 3 %"
+    raw = re.sub(r';\s*\n\s*(H\d+)', r'; \1', raw)
+    # SCL Pattern B: "H360D: \nC ≥ 3%" → "H360D: C ≥ 3%"
+    raw = re.sub(r'(H\d+\w*)\s*:\s*\n\s*(C\s*[≥>=<≤])', r'\1: \2', raw)
+    # ATE Pattern A: "inhalation:\nATE = 7,6 mg/L" → "inhalation: ATE = 7,6 mg/L"
+    raw = re.sub(r'(oral|dermal|inhalation)\s*:\s*\n\s*ATE', r'\1: ATE', raw, flags=re.IGNORECASE)
+
     scl_limits  = []
     m_factors   = {}
     ate         = {}

@@ -105,14 +105,14 @@ def _parse_hazards(class_col: str, hcode_col: str) -> list[dict]:
     burada tek \n ile bölerek boş satırları KORUYORUZ — kayma önlenir.
 
     Yıldız notasyonları (CLP Annex VI Tablo 3.1):
-      *    → Sınıflandırma koşula bağlı (belirli form veya konsantrasyon)
+      *    → Asgari sınıflandırmadır (CLP Ek-VI §1.2.1) — gerçek sınıf daha yüksek olabilir
       **   → Hedef organ ve/veya maruziyet yolu SDS'de belirtilmeli
       ***  → Üreme toks. yalnızca belirtilen alt kategori için geçerli (F veya D)
       **** → Manuel değerlendirme gerekli — patlayıcı alt sınıfı henüz belirsiz
     """
     # Yıldız → açıklama metni
     NOTE_TEXTS = {
-        '*':    'Sınıflandırma koşula bağlı (belirli form veya konsantrasyon)',
+        '*':    'Asgari sınıflandırmadır — mevcut verilere göre gerçek sınıf daha yüksek olabilir (CLP Ek-VI §1.2.1)',
         '**':   'Hedef organ ve/veya maruziyet yolu SDS Bölüm 11\'de belirtilmeli',
         '***':  'Üreme toksisitesi yalnızca belirtilen alt kategori için geçerli (F=fertilite veya D=gelişim)',
         '****': 'Patlayıcı alt sınıfı belirsiz — test verisiyle manuel değerlendirme gerekli',

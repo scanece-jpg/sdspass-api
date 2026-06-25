@@ -983,8 +983,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         if clf_notes:
             story.append(Spacer(1, 4))
             _NOTE_FLAG_LABELS = {
-                '*':    ('*',    'Sınıflandırma koşula bağlı (belirli form veya konsantrasyon)',
-                                 'Classification is conditional (specific form or concentration)'),
+                '*':    ('*',    'Asgari sınıflandırmadır — mevcut verilere göre gerçek sınıf daha yüksek olabilir (CLP Ek-VI §1.2.1)',
+                                 'This is a minimum classification — the actual classification may be higher based on available data (CLP Annex VI §1.2.1)'),
                 '**':   ('**',   'Hedef organ ve/veya maruziyet yolunun SDS Bölüm 11\'de belirtilmesi zorunludur (CLP Ek-VI dipnotu).',
                                  'Target organ and/or route of exposure must be specified in SDS Section 11 (CLP Annex VI footnote).'),
                 '***':  ('***',  'Bu sınıflandırma yalnızca belirtilen üreme toksisitesi alt kategorisi için geçerlidir (F=Fertilite, D=Gelişim).',

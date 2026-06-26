@@ -1949,68 +1949,6 @@ async def ai_chat(body: dict = Body(...)):
     kb_blocks = build_context_blocks(message)
     user_parts.extend(kb_blocks)
 
-    # CAS: (1) body'den gelen 'cas', (2) mesaj metninden regex, (3) isim araması
-    import re as _re
-    _cas_re = _re.compile(r'\b\d{2,7}-\d{2}-\d\b')
-
-    resolved_cas = cas  # body'den
-    if not resolved_cas:
-        _m = _cas_re.search(message)
-        if _m:
-            resolved_cas = _m.group()
-
-    if not resolved_cas and mode != "sds":
-        from app.services.substance_lookup import search_substances
-        _results = search_substances(message, limit=1)
-        if _results:
-            resolved_cas = _results[0].get('cas')
-
-    _official_table = ""
-    if resolved_cas:
-        from app.services.substance_lookup import lookup_substance
-        from app.services.codes_i18n import H_STMTS, EUH_STMTS
-        entry = lookup_substance(resolved_cas)
-        if entry:
-            h_map   = H_STMTS.get('TR', {})
-            euh_map = EUH_STMTS.get('TR', {})
-            _seen   = set()
-            _rows: list[str] = []
-            # lookup_substance legacy format: 'hazards' listesi (classification değil)
-            for _cls in entry.get('hazards', []):
-                _code = _cls.get('h_code', '')
-                if _code and _code not in _seen:
-                    _seen.add(_code)
-                    _txt = h_map.get(_code, '')
-                    if _txt:
-                        _rows.append(f"| **{_code}** | {_txt} |")
-            # euh_codes: _sea_ek6_to_legacy ile aktarılıyor
-            for _code in entry.get('euh_codes', []):
-                if _code not in _seen:
-                    _seen.add(_code)
-                    _txt = euh_map.get(_code, '')
-                    if _txt:
-                        _rows.append(f"| **{_code}** | {_txt} |")
-            # legacy format: name_tr (TR adı), name (EN adı) — ilk adı al, noktalı virgül temizle
-            _raw_name = entry.get('name_tr') or entry.get('name') or resolved_cas
-            _name = _raw_name.split(';')[0].split(',')[0].strip().capitalize()
-            if _rows:
-                _official_table = (
-                    f"**{_name} (CAS {resolved_cas})** — SEA Ek-6 / KKDİK Ek-6\n\n"
-                    f"| H/EUH Kodu | Resmi Türkçe Tehlike İfadesi |\n"
-                    f"|------------|------------------------------|\n"
-                    + '\n'.join(_rows)
-                    + "\n\n*Kaynak: SEA Ek-6 harmonize sınıflandırma listesi*\n\n"
-                )
-            ctx = json.dumps(entry, ensure_ascii=False, indent=2)
-            user_parts.append({
-                "type": "text",
-                "text": (
-                    f"CAS {resolved_cas} için veritabanı kaydı:\n```json\n{ctx}\n```\n\n"
-                    "H/EUH kod metinleri ayrıca tablo olarak oluşturuldu ve yanıta eklendi. "
-                    "Sen bu metinleri TEKRARLAMA. Sadece ek bağlam veya sorulan konuya yanıt ver."
-                )
-            })
-
     if sds_text and mode == "sds":
         user_parts.append({
             "type": "text",
@@ -2019,19 +1957,131 @@ async def ai_chat(body: dict = Body(...)):
 
     user_parts.append({"type": "text", "text": message})
 
-    # Kaç belge seçildi — yanıtta bilgi olarak dön
     kb_count = len(kb_blocks)
 
+    # ── Tool tanımı (sadece data modunda) ────────────────────────────────────
+    _lookup_tool = {
+        "name": "lookup_substance",
+        "description": (
+            "Madde adı veya CAS numarasıyla SEA Ek-6 / KKDİK harmonize "
+            "sınıflandırma veritabanından resmi H/EUH kodu bilgisi çeker. "
+            "Kullanıcı herhangi bir kimyasal madde sorduğunda bu aracı çağır."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "query": {
+                    "type": "string",
+                    "description": "Madde adı (örn: 'aseton') veya CAS numarası (örn: '67-64-1')"
+                }
+            },
+            "required": ["query"]
+        }
+    }
+
     # ── API çağrısı ──────────────────────────────────────────────────────────
-    client = _anthropic.Anthropic(api_key=api_key)
-    resp = client.messages.create(
+    import re as _re
+    client   = _anthropic.Anthropic(api_key=api_key)
+    _msgs    = [{"role": "user", "content": user_parts}]
+    _official_table = ""
+
+    _create_kw: dict = dict(
         model="claude-haiku-4-5-20251001",
         max_tokens=1024,
         system=system_prompt,
-        messages=[{"role": "user", "content": user_parts}],
+        messages=_msgs,
     )
+    if mode != "sds":
+        _create_kw["tools"] = [_lookup_tool]
 
-    reply = resp.content[0].text if resp.content else ""
+    resp = client.messages.create(**_create_kw)
+
+    # ── Tool Use döngüsü ─────────────────────────────────────────────────────
+    while resp.stop_reason == "tool_use":
+        from app.services.substance_lookup import lookup_substance, search_substances
+        from app.services.codes_i18n import H_STMTS, EUH_STMTS
+
+        _tool_results = []
+        for _blk in resp.content:
+            if getattr(_blk, "type", None) != "tool_use":
+                continue
+            _query = _blk.input.get("query", "")
+
+            # CAS regex veya isim araması
+            _cm = _re.search(r'\b\d{2,7}-\d{2}-\d\b', _query)
+            _rcas = _cm.group() if _cm else None
+            if not _rcas:
+                _sr = search_substances(_query, limit=1)
+                if not _sr:
+                    for _w in _query.split():
+                        if len(_w) >= 4:
+                            _sr = search_substances(_w, limit=1)
+                            if _sr:
+                                break
+                if _sr:
+                    _rcas = _sr[0].get("cas")
+
+            _entry = lookup_substance(_rcas) if _rcas else None
+            if _entry:
+                _hmap  = H_STMTS.get("TR", {})
+                _emap  = EUH_STMTS.get("TR", {})
+                _seen2: set = set()
+                _rows2: list[str] = []
+                _hres: list = []
+                _eres: list = []
+
+                for _c in _entry.get("hazards", []):
+                    _cd = _c.get("h_code", "")
+                    if _cd and _cd not in _seen2:
+                        _seen2.add(_cd)
+                        _tx = _hmap.get(_cd, "")
+                        _hres.append({"code": _cd, "class": _c.get("h_class", ""), "text_tr": _tx})
+                        if _tx:
+                            _rows2.append(f"| **{_cd}** | {_tx} |")
+
+                for _cd in _entry.get("euh_codes", []):
+                    if _cd not in _seen2:
+                        _seen2.add(_cd)
+                        _tx = _emap.get(_cd, "")
+                        _eres.append({"code": _cd, "text_tr": _tx})
+                        if _tx:
+                            _rows2.append(f"| **{_cd}** | {_tx} |")
+
+                _rname = (_entry.get("name_tr") or _entry.get("name") or _rcas)
+                _rname = _rname.split(";")[0].strip().capitalize()
+
+                if _rows2:
+                    _official_table = (
+                        f"**{_rname} (CAS {_rcas})** — SEA Ek-6 / KKDİK Ek-6\n\n"
+                        f"| H/EUH Kodu | Resmi Türkçe Tehlike İfadesi |\n"
+                        f"|------------|------------------------------|\n"
+                        + "\n".join(_rows2)
+                        + "\n\n*Kaynak: SEA Ek-6 harmonize sınıflandırma listesi*\n\n"
+                    )
+
+                _tdata: dict = {
+                    "cas": _rcas, "name": _rname,
+                    "source": _entry.get("source", "SEA Ek-6 (TR)"),
+                    "h_codes": _hres, "euh_codes": _eres,
+                    "m_factors": _entry.get("m_factors", {}),
+                    "notes": _entry.get("notes", []),
+                }
+            else:
+                _tdata = {"error": f"'{_query}' veritabanında bulunamadı."}
+
+            _tool_results.append({
+                "type": "tool_result",
+                "tool_use_id": _blk.id,
+                "content": json.dumps(_tdata, ensure_ascii=False),
+            })
+
+        _msgs.append({"role": "assistant", "content": resp.content})
+        _msgs.append({"role": "user",      "content": _tool_results})
+        resp = client.messages.create(**{**_create_kw, "messages": _msgs})
+
+    reply = "".join(
+        b.text for b in resp.content if getattr(b, "type", None) == "text"
+    )
     if _official_table:
         reply = _official_table + reply
     return {

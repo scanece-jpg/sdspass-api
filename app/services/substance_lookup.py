@@ -10,7 +10,6 @@ Arama Hiyerarşisi:
   Sıra 5 — substances_custom.json    Tedarikçi/kullanıcı girişi
 
 Yardımcı veriler:
-  data/h_code_index.json             H-kod istatistik indeksi
   data/substance_names.json          CAS → {en, tr} çok dilli isimler
 """
 import json, os, threading, re
@@ -22,14 +21,12 @@ _PUBCHEM_DIR   = os.path.join(_BASE, 'pubchem_cl')    # PubChem önbelleği
 _CUSTOM_PATH   = os.path.join(_BASE, 'substances_custom.json')
 _OEL_PATH      = os.path.join(_BASE, 'tr_oel_limits.json')
 _DB_PATH       = os.path.join(_BASE, 'substance_db.json')    # ECHA ATP22 (EN)
-_IDX_PATH      = os.path.join(_BASE, 'h_code_index.json')    # H-kod indeksi
 _NAMES_PATH    = os.path.join(_BASE, 'substance_names.json')  # CAS → {en, tr, ...}
 _SEA_EK6_PATH  = os.path.join(_BASE, 'sea_ek6_tr.json')      # SEA Ek-6 (TR, Sıra 1)
 
 _CUSTOM_DB:    Optional[Dict] = None
 _OEL_DB:       Optional[Dict] = None
 _SUBSTANCE_DB: Optional[Dict] = None
-_H_CODE_IDX:   Optional[Dict] = None
 _NAMES_DB:     Optional[Dict] = None
 _SEA_EK6_DB:   Optional[Dict] = None
 _lock = threading.Lock()
@@ -283,18 +280,6 @@ def _load_substance_db() -> Dict:
                     _SUBSTANCE_DB = {}
     return _SUBSTANCE_DB
 
-
-def _load_h_code_idx() -> Dict:
-    global _H_CODE_IDX
-    if _H_CODE_IDX is None:
-        with _lock:
-            if _H_CODE_IDX is None:
-                try:
-                    with open(_IDX_PATH, encoding='utf-8') as f:
-                        _H_CODE_IDX = json.load(f)
-                except Exception:
-                    _H_CODE_IDX = {}
-    return _H_CODE_IDX
 
 
 def _scl_op_to_cmin_cmax(scl: dict) -> dict:
@@ -655,9 +640,3 @@ def scl_category(cas: str, h_code: str, conc: float) -> Optional[str]:
     return None
 
 
-def h_code_info(h_code: str) -> Optional[dict]:
-    """
-    H-kodu için indeks bilgisi döndür.
-    Döner: {count, occurrences, scl_cas, m_cas} veya None.
-    """
-    return _load_h_code_idx().get(h_code)

@@ -10,7 +10,6 @@ import sys
 from pathlib import Path
 
 DB_PATH    = Path(__file__).parent.parent / "data" / "substance_db.json"
-IDX_PATH   = Path(__file__).parent.parent / "data" / "h_code_index.json"
 
 ERRORS   = []
 WARNINGS = []
@@ -62,29 +61,6 @@ def check_scl_vs_classification(db: dict):
                      f"{cas} scl={hc} classification={sorted(cl_hcodes)}")
 
 
-# ---------------------------------------------------------------------------
-# Katman 3 — h_code_index tutarlılığı
-# ---------------------------------------------------------------------------
-
-def check_index_vs_db(db: dict, idx: dict):
-    """
-    h_code_index'teki occurrence'lar substance_db'de gerçekten o H-kodu
-    taşıyan maddeler olmalı.
-    """
-    for hc, data in idx.items():
-        for cas in data.get("occurrences", []):
-            if cas not in db:
-                err(f"[K3] Index'te CAS yok: h_code={hc} cas={cas}")
-                continue
-            entry = db[cas]
-            if "_alias" in entry:
-                err(f"[K3] Index'te alias CAS: h_code={hc} cas={cas}")
-                continue
-            cl_hcodes = {c["h_code"] for c in entry.get("classification", [])}
-            if hc not in cl_hcodes:
-                err(f"[K3] Index ↔ DB çelişkisi: h_code={hc} cas={cas} "
-                    f"ama classification={sorted(cl_hcodes)}")
-
 
 # ---------------------------------------------------------------------------
 # Katman 4 — Yetim kayıt tespiti
@@ -118,17 +94,11 @@ def main():
     if not DB_PATH.exists():
         print(f"HATA: {DB_PATH} bulunamadı — önce build_substance_db.py çalıştırın")
         sys.exit(1)
-    if not IDX_PATH.exists():
-        print(f"HATA: {IDX_PATH} bulunamadı — önce generate_h_code_index.py çalıştırın")
-        sys.exit(1)
-
     db  = json.loads(DB_PATH.read_text(encoding="utf-8"))
-    idx = json.loads(IDX_PATH.read_text(encoding="utf-8"))
 
     print("Kontrol ediliyor...")
     check_aliases(db)
     check_scl_vs_classification(db)
-    check_index_vs_db(db, idx)
     check_orphans(db)
 
     print(f"  Hata   : {len(ERRORS)}")

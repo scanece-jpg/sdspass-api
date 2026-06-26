@@ -14,6 +14,39 @@ import re
 from typing import List, Dict, Any
 from app.services.clp_service import _parse_ph_range, normalize_ph_display
 
+# H kodu → zorunlu piktogramlar (CLP Annex V)
+_H_TO_PIC: Dict[str, str] = {
+    'H200':'GHS01','H201':'GHS01','H202':'GHS01','H203':'GHS01','H204':'GHS01','H205':'GHS01','H241':'GHS01',
+    'H220':'GHS02','H221':'GHS02','H222':'GHS02','H223':'GHS02','H224':'GHS02','H225':'GHS02',
+    'H226':'GHS02','H228':'GHS02','H229':'GHS02','H230':'GHS02','H231':'GHS02','H232':'GHS02',
+    'H270':'GHS03','H271':'GHS03','H272':'GHS03',
+    'H280':'GHS04','H281':'GHS04',
+    'H290':'GHS05','H314':'GHS05','H318':'GHS05',
+    'H300':'GHS06','H301':'GHS06','H304':'GHS06','H310':'GHS06','H311':'GHS06','H330':'GHS06','H331':'GHS06',
+    'H334':'GHS08','H340':'GHS08','H341':'GHS08','H350':'GHS08','H351':'GHS08',
+    'H360':'GHS08','H361':'GHS08','H362':'GHS08',
+    'H370':'GHS08','H371':'GHS08','H372':'GHS08','H373':'GHS08',
+    'H302':'GHS07','H303':'GHS07','H312':'GHS07','H315':'GHS07','H317':'GHS07',
+    'H319':'GHS07','H320':'GHS07','H332':'GHS07','H333':'GHS07','H335':'GHS07','H336':'GHS07','H420':'GHS07',
+    'H400':'GHS09','H410':'GHS09','H411':'GHS09','H412':'GHS09','H413':'GHS09',
+}
+
+# GHS09 gerektiren H kodları varken GHS07 de varsa GHS09 baskın olur (CLP kural: çevre + irritant)
+_DANGER_PICS = {'GHS01','GHS02','GHS03','GHS05','GHS06','GHS08'}  # GHS07'yi baskılar
+
+# H kodu → ADR sınıfı eşleşmesi (temel kontrol)
+_H_TO_ADR_CLASS: Dict[str, str] = {
+    'H200':'1','H201':'1','H202':'1','H203':'1','H204':'1','H205':'1',
+    'H220':'2','H221':'2','H222':'2','H223':'2','H224':'3','H225':'3','H226':'3','H228':'4.1',
+    'H250':'4.2','H251':'4.2','H252':'4.2','H260':'4.3','H261':'4.3',
+    'H270':'2','H271':'5.1','H272':'5.1',
+    'H280':'2','H281':'2',
+    'H290':'8',
+    'H300':'6.1','H301':'6.1','H302':'6.1','H310':'6.1','H311':'6.1','H330':'6.1','H331':'6.1',
+    'H314':'8','H290':'8',
+    'H400':'9','H410':'9','H411':'9',
+}
+
 
 def validate_sds(
     sds_data: Dict,
@@ -366,6 +399,151 @@ def validate_sds(
                  "gizlenmelidir (SEA Madde 28 öncelik kuralı). "
                  "Etiket tasarımında H318 ifadesini kaldırın.",
                  "SEA Madde 28(3) / CLP Article 27 — label dominance")
+
+    # ── V021: H kodu substance_db / sea_ek6 doğrulaması ─────────────────────
+    # Her bileşenin CAS'ı için resmi sınıflandırmayı çek, bildirilen H kodlarını karşılaştır
+    if components:
+        try:
+            from app.services.substance_lookup import lookup_substance
+            for comp in components:
+                cas = (comp.get('cas') or '').strip()
+                if not cas:
+                    continue
+                comp_h = {h.get('h_code','')[:4] for h in comp.get('hazards', []) if h.get('h_code')}
+                if not comp_h:
+                    continue
+                ref = lookup_substance(cas)
+                if not ref:
+                    continue
+                ref_h = {h.get('h_code','')[:4] for h in ref.get('hazards', []) if h.get('h_code')}
+                if not ref_h:
+                    continue
+                # Resmi listede olan ama bileşende eksik H kodları
+                missing = ref_h - comp_h - {'H318'}  # H318 dominance ile gizlenebilir
+                # Bileşende olan ama resmi listede olmayan H kodları
+                extra = comp_h - ref_h
+                name = comp.get('name') or cas
+                if missing:
+                    warn("V021", "B2+B3",
+                         f"{name} ({cas}): Resmi sınıflandırmada olan H kodları eksik: "
+                         f"{', '.join(sorted(missing))}. Kaynak: {ref.get('source','')}",
+                         "CLP Annex VI / SEA Ek-6 / KKDİK")
+                if extra:
+                    warn("V021", "B2+B3",
+                         f"{name} ({cas}): Resmi sınıflandırmada olmayan H kodları mevcut: "
+                         f"{', '.join(sorted(extra))}. Kaynak: {ref.get('source','')}",
+                         "CLP Annex VI / SEA Ek-6 / KKDİK")
+        except Exception:
+            pass
+
+    # ── V022: H kodundan piktogram doğruluğu ─────────────────────────────────
+    _label_pics = set(sds_data.get('clp', {}).get('pictograms', []))
+    _h_set_base = {h[:4] for h in h_codes}
+    _required_pics: set = set()
+    for h in _h_set_base:
+        p = _H_TO_PIC.get(h)
+        if p:
+            _required_pics.add(p)
+    # GHS07 baskınlık: tehlike piktogramları varken GHS07 gizlenebilir (CLP Art.26)
+    if _required_pics & _DANGER_PICS:
+        _required_pics.discard('GHS07')
+    # GHS05 varken GHS07 gizlenir (H314+H315 aynı anda)
+    if 'GHS05' in _required_pics:
+        _required_pics.discard('GHS07')
+    _missing_pics = _required_pics - _label_pics
+    _extra_pics   = _label_pics - _required_pics - {'GHS09'}  # GHS09 ayrıca V019'da
+    if _missing_pics:
+        error("V022", "B2",
+              f"H kodlarından zorunlu piktogram(lar) etikette eksik: {', '.join(sorted(_missing_pics))}. "
+              f"İlgili H kodları: {', '.join(h for h in sorted(_h_set_base) if _H_TO_PIC.get(h) in _missing_pics)}",
+              "CLP Annex V / SEA Ek-5")
+    if _extra_pics:
+        warn("V022", "B2",
+             f"Etikette H kodlarıyla desteklenmeyen piktogram(lar) var: {', '.join(sorted(_extra_pics))}",
+             "CLP Annex V / SEA Ek-5")
+
+    # ── V023: P kodu uyumu ────────────────────────────────────────────────────
+    # p_code_service'in önerdiği zorunlu P kodlarını hesapla, etikettekilerle karşılaştır
+    try:
+        from app.services.p_code_service import assign_p_codes
+        _p_raw = sds_data.get('p_codes', {})
+        if isinstance(_p_raw, list):
+            _label_p = set(_p_raw)
+        elif isinstance(_p_raw, dict):
+            _label_p = set(_p_raw.get('codes', _p_raw.get('selected', [])))
+        else:
+            _label_p = set()
+        _signal = sds_data.get('clp', {}).get('signal_word', 'Warning')
+        _assigned = assign_p_codes(list(_h_set_base), signal_word=_signal)
+        _req_p_codes = set(_assigned.get('p_codes', []))
+        _missing_p = _req_p_codes - _label_p
+        if _missing_p:
+            warn("V023", "B2",
+                 f"H kodlarından önerilen P kodu(ları) etikette eksik: {', '.join(sorted(_missing_p))}",
+                 "CLP Annex IV / SEA Ek-4 / KKDİK Ek-2 §2.2")
+    except Exception:
+        pass
+
+    # ── V024: ADR sınıfı H koduna uygun mu ───────────────────────────────────
+    _adr = sds_data.get('adr', {})
+    _adr_class = str(_adr.get('class', '') or _adr.get('adr_class', '')).strip()
+    if _adr_class and _adr_class not in ('-', ''):
+        _expected_adr = set()
+        for h in _h_set_base:
+            ac = _H_TO_ADR_CLASS.get(h)
+            if ac:
+                _expected_adr.add(ac)
+        if _expected_adr and _adr_class not in _expected_adr:
+            warn("V024", "B14",
+                 f"ADR sınıfı '{_adr_class}' H kodlarından beklenen sınıf(lar) ile uyuşmuyor: "
+                 f"{', '.join(sorted(_expected_adr))}. ADR 2025 tablosunu kontrol edin.",
+                 "ADR 2025 Bölüm 3.2 Tablo A / TMKTBY")
+
+    # ── V025: SVHC bileşen bildirimi B15 ─────────────────────────────────────
+    if components:
+        try:
+            from app.services.svhc_service import check_svhc_mixture
+            _svhc_result = check_svhc_mixture(components)
+            _svhc_above  = _svhc_result.get('above_threshold', [])
+            _b15_text    = str(sds_data.get('section15', '') or sds_data.get('regulatory', '') or '')
+            for sv in _svhc_above:
+                sv_cas  = sv.get('cas', '')
+                sv_name = sv.get('name', sv_cas)
+                sv_conc = sv.get('concentration', 0)
+                if sv_cas and sv_cas not in _b15_text and sv_name not in _b15_text:
+                    error("V025", "B15",
+                          f"SVHC madde '{sv_name}' ({sv_cas}) karışımda ≥{sv_conc}% konsantrasyonda "
+                          f"ama B15'te bildirilmemiş. KKDİK Madde 33 / REACH Art.33 uyarınca "
+                          f"zorunlu bildirim gereklidir.",
+                          "KKDİK Madde 33 / REACH Art.33 / SEA Ek-2 §15")
+        except Exception:
+            pass
+
+    # ── V026: OEL değerleri B8 doğruluğu ─────────────────────────────────────
+    if components:
+        try:
+            import json, os
+            _oel_path = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'tr_oel_limits.json')
+            with open(_oel_path, encoding='utf-8') as _f:
+                _oel_db = json.load(_f)
+            _b8_text = str(sds_data.get('section8', '') or sds_data.get('exposure', '') or '')
+            for comp in components:
+                cas = (comp.get('cas') or '').strip()
+                if not cas or cas not in _oel_db:
+                    continue
+                oel = _oel_db[cas]
+                tw  = oel.get('tw_mgm3')
+                name = comp.get('name') or cas
+                if tw and _b8_text:
+                    # B8 metninde bu CAS'ın TWA değeri var mı kontrol et
+                    if cas not in _b8_text and name[:10] not in _b8_text:
+                        warn("V026", "B8",
+                             f"{name} ({cas}) için TR OEL limiti mevcut "
+                             f"(TWA: {tw} mg/m³) ancak B8'de belirtilmemiş. "
+                             f"KKDİK Ek-2 §8.1 uyarınca zorunludur.",
+                             "KKDİK Ek-2 §8.1 / Mesleki Maruziyet Sınır Değerleri Yönetmeliği")
+        except Exception:
+            pass
 
     return issues
 

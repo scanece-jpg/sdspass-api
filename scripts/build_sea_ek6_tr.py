@@ -181,7 +181,7 @@ def _parse_classification(class_raw: str, hcode_raw: str) -> list[dict]:
         hc_ast  = len(re.search(r'\*+$', hc).group()) if re.search(r'\*+$', hc) else 0
         cls = cls.rstrip('* ').strip()
         hc  = hc.rstrip('* ').strip()
-        if cls or hc:
+        if cls and hc:
             entry = {'class': cls, 'h_code': hc}
             if cls_ast: entry['class_asterisk'] = cls_ast
             if hc_ast:  entry['h_code_asterisk'] = hc_ast
@@ -195,17 +195,12 @@ def _parse_classification(class_raw: str, hcode_raw: str) -> list[dict]:
 
 def _parse_notes(notes_raw: str) -> list[str]:
     """
-    'U 5' gibi boşluklu kodları 'U5' olarak birleştirir.
-    Virgülle ayrılmış birden fazla not desteklenir: 'A, B' → ['A', 'B']
+    Virgül veya boşlukla ayrılmış notları ayrı token'lara böler.
+    'J M' → ['J', 'M'],  'A, B' → ['A', 'B']
     """
     if not notes_raw:
         return []
-    tokens = []
-    for part in re.split(r',\s*', notes_raw.strip()):
-        token = re.sub(r'\s+', '', part).strip()
-        if token:
-            tokens.append(token)
-    return tokens
+    return [t for t in re.split(r'[,\s]+', notes_raw.strip()) if t]
 
 
 # ---------------------------------------------------------------------------

@@ -321,15 +321,15 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H330"
+        "h_code": "H280"
       },
       {
         "class": "Akut Tok. 2",
-        "h_code": "H314"
+        "h_code": "H330"
       },
       {
         "class": "Cilt Aşnd. 1A",
-        "h_code": ""
+        "h_code": "H314"
       }
     ],
     "scl_limits": [],
@@ -355,11 +355,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H330"
+        "h_code": "H280"
       },
       {
         "class": "Akut Tok. 2",
-        "h_code": "H300"
+        "h_code": "H330"
       },
       {
         "class": "Akut Tok. 2",
@@ -894,11 +894,11 @@
       },
       {
         "class": "Basınç Gaz",
-        "h_code": "H360D"
+        "h_code": "H280"
       },
       {
         "class": "Ürm. Sis. Tok. 1A",
-        "h_code": "H331"
+        "h_code": "H360D"
       },
       {
         "class": "Akut Tok. 3",
@@ -931,15 +931,15 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H330"
+        "h_code": "H280"
       },
       {
         "class": "Akut Tok. 2",
-        "h_code": "H314"
+        "h_code": "H330"
       },
       {
         "class": "Cilt Aşnd. 1B",
-        "h_code": ""
+        "h_code": "H314"
       }
     ],
     "scl_limits": [],
@@ -4091,11 +4091,11 @@
       },
       {
         "class": "Basınç Gaz",
-        "h_code": "H331"
+        "h_code": "H280"
       },
       {
         "class": "Akut Tok. 3",
-        "h_code": "H314"
+        "h_code": "H331"
       },
       {
         "class": "Cilt Aşnd. 1B",
@@ -4167,11 +4167,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H270"
+        "h_code": "H280"
       },
       {
         "class": "Oksit. Gaz 1",
-        "h_code": "H330"
+        "h_code": "H270"
       },
       {
         "class": "Akut Tok. 2",
@@ -4307,11 +4307,11 @@
       },
       {
         "class": "Basınç Gaz",
-        "h_code": "H332"
+        "h_code": "H280"
       },
       {
         "class": "Akut Tok. 4",
-        "h_code": "H312"
+        "h_code": "H332"
       },
       {
         "class": "Akut Tok. 4",
@@ -5222,11 +5222,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H270"
+        "h_code": "H280"
       },
       {
         "class": "Oksit. Gaz 1",
-        "h_code": "H330"
+        "h_code": "H270"
       },
       {
         "class": "Akut Tok. 2",
@@ -5697,11 +5697,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H331"
+        "h_code": "H280"
       },
       {
         "class": "Akut Tok. 3",
-        "h_code": "H373"
+        "h_code": "H331"
       },
       {
         "class": "BHOT Tekrar.Mrz. 2",
@@ -12809,11 +12809,11 @@
       },
       {
         "class": "Basınç Gaz",
-        "h_code": "H330"
+        "h_code": "H280"
       },
       {
         "class": "Akut Tok. 2",
-        "h_code": "H314"
+        "h_code": "H330"
       },
       {
         "class": "Cilt Aşnd. 1B",
@@ -13314,15 +13314,15 @@
       },
       {
         "class": "Basınç Gaz",
-        "h_code": "H330"
+        "h_code": "H280"
       },
       {
         "class": "Akut Tok. 2",
-        "h_code": "H400"
+        "h_code": "H330"
       },
       {
         "class": "Sucul Akut 1",
-        "h_code": ""
+        "h_code": "H400"
       }
     ],
     "scl_limits": [],
@@ -13638,15 +13638,15 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H331"
+        "h_code": "H280"
       },
       {
         "class": "Akut Tok. 3",
-        "h_code": "H314"
+        "h_code": "H331"
       },
       {
         "class": "Cilt Aşnd. 1B",
-        "h_code": ""
+        "h_code": "H314"
       }
     ],
     "scl_limits": [],
@@ -13973,11 +13973,11 @@
       },
       {
         "class": "Basınç Gaz",
-        "h_code": "H331"
+        "h_code": "H280"
       },
       {
         "class": "Akut Tok. 3",
-        "h_code": "H400"
+        "h_code": "H331"
       },
       {
         "class": "Sucul Akut 1",
@@ -15610,11 +15610,11 @@
       },
       {
         "class": "Basınç Gaz",
-        "h_code": "H331"
+        "h_code": "H280"
       },
       {
         "class": "Akut Tok. 3",
-        "h_code": "H319"
+        "h_code": "H331"
       },
       {
         "class": "Göz Tah. 2",
@@ -15657,15 +15657,15 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H331"
+        "h_code": "H280"
       },
       {
         "class": "Akut Tok. 3",
-        "h_code": "H314"
+        "h_code": "H331"
       },
       {
         "class": "Cilt Aşnd. 1A",
-        "h_code": ""
+        "h_code": "H314"
       }
     ],
     "scl_limits": [],
@@ -16353,11 +16353,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H270"
+        "h_code": "H280"
       },
       {
         "class": "Oksit. Gaz 1",
-        "h_code": "H330"
+        "h_code": "H270"
       },
       {
         "class": "Akut Tok. 2",
@@ -22842,11 +22842,11 @@
       },
       {
         "class": "Basınç Gaz",
-        "h_code": "H330"
+        "h_code": "H280"
       },
       {
         "class": "Akut Tok. 2",
-        "h_code": "H373"
+        "h_code": "H330"
       },
       {
         "class": "BHOT Tekrar.Mrz. 2",
@@ -23008,15 +23008,15 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H314"
+        "h_code": "H280"
       },
       {
         "class": "Cilt Aşnd. 1A",
-        "h_code": "H335"
+        "h_code": "H314"
       },
       {
         "class": "BHOT Tek Mrz. 3",
-        "h_code": ""
+        "h_code": "H335"
       }
     ],
     "scl_limits": [],
@@ -25014,11 +25014,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H314"
+        "h_code": "H280"
       },
       {
         "class": "Cilt Aşnd. 1A",
-        "h_code": ""
+        "h_code": "H314"
       }
     ],
     "scl_limits": [
@@ -26724,11 +26724,11 @@
       },
       {
         "class": "Basınç Gaz",
-        "h_code": "H411"
+        "h_code": "H280"
       },
       {
         "class": "Sucul Kronik 2",
-        "h_code": ""
+        "h_code": "H411"
       }
     ],
     "scl_limits": [],
@@ -27078,11 +27078,11 @@
       },
       {
         "class": "Basınç Gaz",
-        "h_code": "H336"
+        "h_code": "H280"
       },
       {
         "class": "BHOT Tek Mrz. 3",
-        "h_code": ""
+        "h_code": "H336"
       }
     ],
     "scl_limits": [],
@@ -27189,15 +27189,15 @@
       },
       {
         "class": "Basınç Gaz",
-        "h_code": "H350"
+        "h_code": "H280"
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -29325,15 +29325,15 @@
       },
       {
         "class": "Basınç Gaz",
-        "h_code": "H351"
+        "h_code": "H280"
       },
       {
         "class": "Kans. 2",
-        "h_code": "H373"
+        "h_code": "H351"
       },
       {
         "class": "BHOT Tekrar.Mrz. 2",
-        "h_code": ""
+        "h_code": "H373"
       }
     ],
     "scl_limits": [],
@@ -29358,11 +29358,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H341"
+        "h_code": "H280"
       },
       {
         "class": "Muta. 2",
-        "h_code": "H331"
+        "h_code": "H341"
       },
       {
         "class": "Akut Tok. 3",
@@ -29663,15 +29663,15 @@
       },
       {
         "class": "Basınç Gaz",
-        "h_code": "H351"
+        "h_code": "H280"
       },
       {
         "class": "Kans. 2",
-        "h_code": "H412"
+        "h_code": "H351"
       },
       {
         "class": "Sucul Kronik 3",
-        "h_code": ""
+        "h_code": "H412"
       }
     ],
     "scl_limits": [],
@@ -30212,15 +30212,15 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
-        "h_code": ""
+        "h_code": "H350"
       }
     ],
     "scl_limits": [],
@@ -30244,15 +30244,15 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1B",
-        "h_code": ""
+        "h_code": "H350"
       }
     ],
     "scl_limits": [],
@@ -31681,15 +31681,15 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H332"
+        "h_code": "H280"
       },
       {
         "class": "Akut Tok. 4",
-        "h_code": "H335"
+        "h_code": "H332"
       },
       {
         "class": "BHOT Tek Mrz. 3",
-        "h_code": ""
+        "h_code": "H335"
       }
     ],
     "scl_limits": [],
@@ -33945,11 +33945,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1B",
@@ -65826,11 +65826,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H331"
+        "h_code": "H220"
       },
       {
         "class": "Akut Tok. 3",
@@ -72712,11 +72712,11 @@
       },
       {
         "class": "Basınç Gaz",
-        "h_code": "H332"
+        "h_code": "H280"
       },
       {
         "class": "Akut Tok. 4",
-        "h_code": "H335"
+        "h_code": "H332"
       },
       {
         "class": "BHOT Tek Mrz. 3",
@@ -72795,15 +72795,15 @@
       },
       {
         "class": "Basınç Gaz",
-        "h_code": "H319"
+        "h_code": "H280"
       },
       {
         "class": "Göz Tah. 2",
-        "h_code": "H335"
+        "h_code": "H319"
       },
       {
         "class": "BHOT Tek Mrz. 3",
-        "h_code": ""
+        "h_code": "H335"
       }
     ],
     "scl_limits": [],
@@ -104754,11 +104754,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -104792,11 +104792,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -104829,11 +104829,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -104866,11 +104866,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -104904,11 +104904,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -104942,11 +104942,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -104980,11 +104980,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -105018,11 +105018,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -105056,11 +105056,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -105094,11 +105094,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -105132,11 +105132,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -105169,11 +105169,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -105207,11 +105207,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -105244,11 +105244,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -105282,11 +105282,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -105320,11 +105320,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -105358,11 +105358,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -105396,11 +105396,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -105434,11 +105434,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -105472,11 +105472,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -105510,11 +105510,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -105548,11 +105548,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -105586,11 +105586,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -105623,11 +105623,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -105661,11 +105661,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -105699,11 +105699,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -105737,11 +105737,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -105775,11 +105775,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -105813,11 +105813,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -105850,11 +105850,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -105887,11 +105887,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -105924,11 +105924,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -105961,11 +105961,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -105999,11 +105999,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -106037,11 +106037,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -106075,11 +106075,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -106113,11 +106113,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -106151,11 +106151,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -106188,11 +106188,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -106226,11 +106226,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -106264,11 +106264,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -106302,11 +106302,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -106340,11 +106340,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -106376,11 +106376,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -106415,11 +106415,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -106453,11 +106453,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -106491,11 +106491,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -106529,11 +106529,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -106567,11 +106567,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -106605,11 +106605,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -106643,11 +106643,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -106680,11 +106680,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -106716,11 +106716,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -106754,11 +106754,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -106792,11 +106792,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -106830,11 +106830,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -106867,11 +106867,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -106904,11 +106904,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -106942,11 +106942,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -106980,11 +106980,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -107018,11 +107018,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -107056,11 +107056,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -107094,11 +107094,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -107132,11 +107132,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -107170,11 +107170,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -107207,11 +107207,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -107245,11 +107245,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -107283,11 +107283,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -107320,11 +107320,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -107357,11 +107357,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -107394,11 +107394,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -107432,11 +107432,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -107469,11 +107469,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -107505,11 +107505,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -107542,11 +107542,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -107579,11 +107579,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -107616,11 +107616,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -107653,11 +107653,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -107691,11 +107691,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -107729,11 +107729,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -107767,11 +107767,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -107804,11 +107804,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -107842,11 +107842,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -107880,11 +107880,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -107918,11 +107918,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -107956,11 +107956,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -107992,11 +107992,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -108029,11 +108029,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -108066,11 +108066,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -108103,11 +108103,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -108141,11 +108141,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -108178,11 +108178,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -108216,11 +108216,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -108254,11 +108254,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -108292,11 +108292,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -108330,11 +108330,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -108367,11 +108367,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -108405,11 +108405,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -108443,11 +108443,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -108480,11 +108480,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -108517,11 +108517,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -108555,11 +108555,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -108593,11 +108593,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -108631,11 +108631,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -108668,11 +108668,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -108706,11 +108706,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -108744,11 +108744,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -108782,11 +108782,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -108819,11 +108819,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -108856,11 +108856,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -108892,11 +108892,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -108930,11 +108930,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -108968,11 +108968,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -109009,11 +109009,11 @@
       },
       {
         "class": "Basınç Gaz",
-        "h_code": "H350"
+        "h_code": "H280"
       },
       {
         "class": "Kans. 1B",
-        "h_code": "H340"
+        "h_code": "H350"
       }
     ],
     "scl_limits": [],
@@ -109042,11 +109042,11 @@
       },
       {
         "class": "Basınç Gaz",
-        "h_code": "H350"
+        "h_code": "H280"
       },
       {
         "class": "Kans. 1B",
-        "h_code": "H340"
+        "h_code": "H350"
       }
     ],
     "scl_limits": [],
@@ -109072,11 +109072,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -109110,11 +109110,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -109148,11 +109148,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -109186,11 +109186,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -109223,11 +109223,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -109261,11 +109261,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -109299,11 +109299,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -109337,11 +109337,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -109374,11 +109374,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -109412,11 +109412,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -109450,11 +109450,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -109488,11 +109488,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -109525,11 +109525,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -109562,11 +109562,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -109600,11 +109600,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -109636,11 +109636,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -109672,11 +109672,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -109708,11 +109708,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -109744,11 +109744,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -109782,11 +109782,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -109820,11 +109820,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -109857,11 +109857,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -109894,11 +109894,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -109931,11 +109931,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -109968,11 +109968,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -110006,11 +110006,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -110044,11 +110044,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -110081,11 +110081,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -110118,11 +110118,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -110155,11 +110155,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -110193,11 +110193,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -110230,11 +110230,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",
@@ -110267,11 +110267,11 @@
     "classification": [
       {
         "class": "Basınç Gaz",
-        "h_code": "H220"
+        "h_code": "H280"
       },
       {
         "class": "Alev.Gaz 1",
-        "h_code": "H350"
+        "h_code": "H220"
       },
       {
         "class": "Kans. 1A",

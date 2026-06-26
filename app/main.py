@@ -1944,14 +1944,48 @@ async def ai_chat(body: dict = Body(...)):
     kb_blocks = build_context_blocks(message)
     user_parts.extend(kb_blocks)
 
-    if cas and mode == "data":
+    # CAS: (1) body'den gelen 'cas', (2) mesaj metninden regex, (3) isim araması
+    import re as _re
+    _cas_re = _re.compile(r'\b\d{2,7}-\d{2}-\d\b')
+
+    resolved_cas = cas  # body'den
+    if not resolved_cas:
+        _m = _cas_re.search(message)
+        if _m:
+            resolved_cas = _m.group()
+
+    if not resolved_cas and mode != "sds":
+        from app.services.substance_lookup import search_substances
+        _results = search_substances(message, limit=1)
+        if _results:
+            resolved_cas = _results[0].get('cas')
+
+    if resolved_cas:
         from app.services.substance_lookup import lookup_substance
-        entry = lookup_substance(cas)
+        from app.services.codes_i18n import H_STMTS, EUH_STMTS
+        entry = lookup_substance(resolved_cas)
         if entry:
-            ctx = json.dumps(entry, ensure_ascii=False, indent=2)
+            h_map   = H_STMTS.get('TR', {})
+            euh_map = EUH_STMTS.get('TR', {})
+            _seen   = set()
+            _h_lines: list[str] = []
+            for _cls in entry.get('classification', []):
+                _code = _cls.get('h_code', '')
+                if _code and _code not in _seen:
+                    _seen.add(_code)
+                    _h_lines.append(f"{_code}: {h_map.get(_code, '')}")
+            for _code in entry.get('euh_codes', []):
+                if _code not in _seen:
+                    _seen.add(_code)
+                    _h_lines.append(f"{_code}: {euh_map.get(_code, '')}")
+            ctx     = json.dumps(entry, ensure_ascii=False, indent=2)
+            h_block = '\n'.join(_h_lines)
             user_parts.append({
                 "type": "text",
-                "text": f"CAS {cas} için veritabanı kaydı:\n```json\n{ctx}\n```\n\n"
+                "text": (
+                    f"CAS {resolved_cas} için veritabanı kaydı:\n```json\n{ctx}\n```\n\n"
+                    + (f"Resmi Türkçe tehlike ifadeleri (codes_i18n.py):\n{h_block}\n\n" if h_block else "")
+                )
             })
 
     if sds_text and mode == "sds":

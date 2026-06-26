@@ -19,7 +19,7 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": ""
+        "h_code": "H280"
       }
     ],
     "scl_limits": [],
@@ -359,12 +359,12 @@
       },
       {
         "class": "Acute Tox. 2",
-        "h_code": "H314",
+        "h_code": "H300",
         "class_asterisk": 1
       },
       {
         "class": "Skin Corr. 1B",
-        "h_code": ""
+        "h_code": "H314"
       }
     ],
     "scl_limits": [],
@@ -1064,22 +1064,22 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": "H280",
-        "h_code_asterisk": 3
+        "h_code": "H280"
       },
       {
         "class": "Repr. 1A",
-        "h_code": "H360D"
+        "h_code": "H360D",
+        "h_code_asterisk": 3
       },
       {
         "class": "Acute Tox. 3",
-        "h_code": "H372",
-        "class_asterisk": 1,
-        "h_code_asterisk": 2
+        "h_code": "H331",
+        "class_asterisk": 1
       },
       {
         "class": "STOT RE 1",
-        "h_code": ""
+        "h_code": "H372",
+        "h_code_asterisk": 2
       }
     ],
     "scl_limits": [],
@@ -4310,11 +4310,11 @@
       },
       {
         "class": "Skin Corr. 1B",
-        "h_code": "H400"
+        "h_code": "H314"
       },
       {
         "class": "Aquatic Acute 1",
-        "h_code": ""
+        "h_code": "H400"
       }
     ],
     "scl_limits": [],
@@ -4578,12 +4578,12 @@
       },
       {
         "class": "Acute Tox. 4",
-        "h_code": "H302",
+        "h_code": "H312",
         "class_asterisk": 1
       },
       {
         "class": "Acute Tox. 4",
-        "h_code": "",
+        "h_code": "H302",
         "class_asterisk": 1
       }
     ],
@@ -5393,7 +5393,7 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": ""
+        "h_code": "H280"
       }
     ],
     "scl_limits": [],
@@ -6058,17 +6058,17 @@
       {
         "class": "Acute Tox. 3",
         "h_code": "H331",
+        "class_asterisk": 1
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373",
         "class_asterisk": 1,
         "h_code_asterisk": 2
       },
       {
-        "class": "STOT RE 2",
-        "h_code": "H400",
-        "class_asterisk": 1
-      },
-      {
         "class": "Aquatic Acute 1",
-        "h_code": ""
+        "h_code": "H400"
       }
     ],
     "scl_limits": [],
@@ -13282,11 +13282,11 @@
       },
       {
         "class": "Skin Corr. 1B",
-        "h_code": "H400"
+        "h_code": "H314"
       },
       {
         "class": "Aquatic Acute 1",
-        "h_code": ""
+        "h_code": "H400"
       }
     ],
     "scl_limits": [],
@@ -14144,11 +14144,11 @@
       },
       {
         "class": "STOT SE 1",
-        "h_code": "H314"
+        "h_code": "H370(respiratory system, inhalation)"
       },
       {
         "class": "Skin. Corr. 1B",
-        "h_code": ""
+        "h_code": "H314"
       }
     ],
     "scl_limits": [],
@@ -14483,11 +14483,11 @@
       },
       {
         "class": "Aquatic Acute 1",
-        "h_code": "H410"
+        "h_code": "H400"
       },
       {
         "class": "Aquatic Chronic 1",
-        "h_code": ""
+        "h_code": "H410"
       }
     ],
     "scl_limits": [],
@@ -16163,19 +16163,19 @@
       },
       {
         "class": "STOT SE 3",
-        "h_code": "H315"
+        "h_code": "H335"
       },
       {
         "class": "Skin Irrit. 2",
-        "h_code": "H319"
+        "h_code": "H315"
       },
       {
         "class": "Eye Irrit. 2",
-        "h_code": "H400"
+        "h_code": "H319"
       },
       {
         "class": "Aquatic Acute 1",
-        "h_code": ""
+        "h_code": "H400"
       }
     ],
     "scl_limits": [],
@@ -16902,11 +16902,11 @@
       },
       {
         "class": "Skin Corr. 1B",
-        "h_code": "H400"
+        "h_code": "H314"
       },
       {
         "class": "Aquatic Acute 1",
-        "h_code": ""
+        "h_code": "H400"
       }
     ],
     "scl_limits": [],
@@ -23737,21 +23737,21 @@
       {
         "class": "Acute Tox. 2",
         "h_code": "H330",
+        "class_asterisk": 1
+      },
+      {
+        "class": "STOT RE 2",
+        "h_code": "H373",
         "class_asterisk": 1,
         "h_code_asterisk": 2
       },
       {
-        "class": "STOT RE 2",
-        "h_code": "H400",
-        "class_asterisk": 1
-      },
-      {
         "class": "Aquatic Acute 1",
-        "h_code": "H410"
+        "h_code": "H400"
       },
       {
         "class": "Aquatic Chronic 1",
-        "h_code": ""
+        "h_code": "H410"
       }
     ],
     "scl_limits": [],
@@ -28284,7 +28284,7 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": ""
+        "h_code": "H280"
       }
     ],
     "scl_limits": [],
@@ -28311,7 +28311,7 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": ""
+        "h_code": "H280"
       }
     ],
     "scl_limits": [],
@@ -28338,7 +28338,7 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": ""
+        "h_code": "H280"
       }
     ],
     "scl_limits": [],
@@ -28369,7 +28369,7 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": ""
+        "h_code": "H280"
       }
     ],
     "scl_limits": [],
@@ -28814,7 +28814,7 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": ""
+        "h_code": "H280"
       }
     ],
     "scl_limits": [],
@@ -28851,7 +28851,7 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": ""
+        "h_code": "H280"
       }
     ],
     "scl_limits": [],
@@ -28961,7 +28961,7 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": ""
+        "h_code": "H280"
       }
     ],
     "scl_limits": [],
@@ -28988,7 +28988,7 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": ""
+        "h_code": "H280"
       }
     ],
     "scl_limits": [],
@@ -31221,13 +31221,13 @@
       },
       {
         "class": "Carc. 2",
-        "h_code": "H351",
-        "h_code_asterisk": 2
+        "h_code": "H351"
       },
       {
         "class": "STOT RE 2",
         "h_code": "H373",
-        "class_asterisk": 1
+        "class_asterisk": 1,
+        "h_code_asterisk": 2
       }
     ],
     "scl_limits": [],
@@ -31258,38 +31258,38 @@
       },
       {
         "class": "Acute Tox. 3",
-        "h_code": "H301",
+        "h_code": "H331",
         "class_asterisk": 1
       },
       {
         "class": "Acute Tox. 3",
-        "h_code": "H335",
+        "h_code": "H301",
         "class_asterisk": 1
       },
       {
         "class": "STOT SE 3",
-        "h_code": "H373"
+        "h_code": "H335"
       },
       {
         "class": "STOT RE 2",
-        "h_code": "H315",
+        "h_code": "H373",
         "class_asterisk": 1
       },
       {
         "class": "Skin Irrit. 2",
-        "h_code": "H319"
+        "h_code": "H315"
       },
       {
         "class": "Eye Irrit. 2",
-        "h_code": "H400"
+        "h_code": "H319"
       },
       {
         "class": "Aquatic Acute 1",
-        "h_code": "H420"
+        "h_code": "H400"
       },
       {
         "class": "Ozone 1",
-        "h_code": ""
+        "h_code": "H420"
       }
     ],
     "scl_limits": [],
@@ -35762,7 +35762,7 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": ""
+        "h_code": "H280"
       }
     ],
     "scl_limits": [],
@@ -35789,7 +35789,7 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": ""
+        "h_code": "H280"
       }
     ],
     "scl_limits": [],
@@ -35817,7 +35817,7 @@
       },
       {
         "class": "Press. Gas",
-        "h_code": ""
+        "h_code": "H280"
       }
     ],
     "scl_limits": [],
@@ -35886,10 +35886,14 @@
       },
       {
         "class": "Muta. 1B",
-        "h_code": "H360Fd"
+        "h_code": "H340"
       },
       {
         "class": "Repr. 1B",
+        "h_code": "H360Fd"
+      },
+      {
+        "class": "Acute Tox. 3",
         "h_code": "H331"
       },
       {
@@ -35897,7 +35901,7 @@
         "h_code": "H301"
       },
       {
-        "class": "Acute Tox. 3",
+        "class": "STOT SE 3",
         "h_code": "H335"
       },
       {
@@ -35905,20 +35909,16 @@
         "h_code": "H336"
       },
       {
-        "class": "STOT SE 3",
+        "class": "STOT RE 1",
         "h_code": "H372 (nervous system)"
       },
       {
-        "class": "STOT RE 1",
+        "class": "Skin Corr. 1",
         "h_code": "H314"
       },
       {
-        "class": "Skin Corr. 1",
-        "h_code": "H318"
-      },
-      {
         "class": "Eye Dam. 1",
-        "h_code": ""
+        "h_code": "H318"
       }
     ],
     "scl_limits": [],
@@ -70138,11 +70138,11 @@
       },
       {
         "class": "Aquatic Acute 1",
-        "h_code": "H410"
+        "h_code": "H400"
       },
       {
         "class": "Aquatic Chronic 1",
-        "h_code": ""
+        "h_code": "H410"
       }
     ],
     "scl_limits": [],
@@ -77232,15 +77232,15 @@
       },
       {
         "class": "STOT SE 3",
-        "h_code": "H315"
+        "h_code": "H335"
       },
       {
         "class": "Skin Irrit. 2",
-        "h_code": "H318"
+        "h_code": "H315"
       },
       {
         "class": "Eye Dam. 1",
-        "h_code": ""
+        "h_code": "H318"
       }
     ],
     "scl_limits": [

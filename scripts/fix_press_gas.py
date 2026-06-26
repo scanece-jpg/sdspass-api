@@ -20,12 +20,17 @@ sys.stdout.reconfigure(encoding='utf-8')
 ROOT = Path(__file__).parent.parent
 
 PRESS_GAS_CLASSES = {'Press. Gas', 'Basınç Gaz'}
-VALID_PRESS_H     = {'H280', 'H281', ''}  # boş = parse edilmemiş, geçerli değil
 
 
 def fix_classification(cls_list: list) -> tuple[list, bool]:
     """
     classification listesindeki Press. Gas H kodu kaymasını düzeltir.
+
+    İki durum:
+      A) Press. Gas H kodu yanlış (H330 vb.) → H280 yap, yanlış kodu
+         sonraki boş sınıfa zincirleme taşı
+      B) Press. Gas H kodu boş → H280 ekle (toksik olmayan gazlar)
+
     Döner: (düzeltilmiş_liste, değişti_mi)
     """
     changed = False
@@ -34,28 +39,38 @@ def fix_classification(cls_list: list) -> tuple[list, bool]:
     for i, entry in enumerate(result):
         if entry.get('class') not in PRESS_GAS_CLASSES:
             continue
-        h = entry.get('h_code', '')
-        if h in VALID_PRESS_H:
-            continue  # zaten doğru veya boş (farklı sorun)
 
-        # Press. Gas'taki yanlış H kodunu bir sonraki sınıfa taşı
+        h = entry.get('h_code', '')
+
+        if h in ('H280', 'H281'):
+            continue  # zaten doğru
+
+        if not h:
+            # Durum B: boş — sadece H280 ekle
+            result[i] = {**entry, 'h_code': 'H280'}
+            changed = True
+            continue
+
+        # Durum A: yanlış H kodu var — zincirleme taşı
         displaced_h = h
         result[i] = {**entry, 'h_code': 'H280'}
-
-        # Sonraki sınıfa taşı (kayma zinciri)
-        if i + 1 < len(result):
-            next_entry = result[i + 1]
-            next_h = next_entry.get('h_code', '')
-            result[i + 1] = {**next_entry, 'h_code': displaced_h}
-            displaced_h = next_h
-
-            # İkinci sonraki sınıfa taşı (ikinci kayma)
-            if displaced_h and i + 2 < len(result):
-                next2 = result[i + 2]
-                if not next2.get('h_code'):
-                    result[i + 2] = {**next2, 'h_code': displaced_h}
-
         changed = True
+
+        # Sonraki boş sınıflara zincirleme taşı (sınır yok)
+        j = i + 1
+        while displaced_h and j < len(result):
+            next_entry = result[j]
+            current_h  = next_entry.get('h_code', '')
+            result[j]  = {**next_entry, 'h_code': displaced_h}
+            displaced_h = current_h  # bir sonraki için
+            if current_h:
+                # Bir sonraki doluysa zincir devam eder;
+                # ama son boş sınıfa ulaşmak için devam et
+                pass
+            j += 1
+            # Son entry'yi doldurduktan sonra artık displaced_h boşsa dur
+            if not displaced_h:
+                break
 
     return result, changed
 

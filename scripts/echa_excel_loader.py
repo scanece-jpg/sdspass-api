@@ -60,19 +60,35 @@ def _parse_name_list(cell) -> list[str]:
     return result
 
 
+_PRESS_GAS_LABELS = {"Press. Gas", "Basınç Gaz"}
+
 def _zip_class_h(class_cell, h_cell) -> list[dict]:
     """
     Classification ve H-code sütunlarını pozisyona göre eşleştirir.
     Satır 1↔Satır 1, Satır 2↔Satır 2.
-    Eksik taraf için '' kullanılır.
+
+    CLP Annex VI Excel'inde "Press. Gas" sınıfı için H kodu sütununda
+    H280 satırı bulunmaz (standart sayılır). Bu nedenle sınıf listesinde
+    Press. Gas görüldüğünde H kodu listesine H280 enjekte edilir; böylece
+    sonraki sınıfların H kodları bir kayma olmadan doğru konuma denk gelir.
     """
     classes = _split_lines(class_cell)
     h_codes = _split_lines(h_cell)
-    length = max(len(classes), len(h_codes))
+
+    # Press. Gas olan pozisyonlara H280 enjekte et
+    adjusted_h = list(h_codes)
+    for i, cls in enumerate(classes):
+        if cls.strip() in _PRESS_GAS_LABELS and i <= len(adjusted_h):
+            # Bu pozisyonda zaten H280/H281 varsa dokunma
+            existing = adjusted_h[i] if i < len(adjusted_h) else ""
+            if existing not in ("H280", "H281"):
+                adjusted_h.insert(i, "H280")
+
+    length = max(len(classes), len(adjusted_h))
     pairs = []
     for i in range(length):
-        cls  = classes[i]  if i < len(classes)  else ""
-        hc   = h_codes[i]  if i < len(h_codes)  else ""
+        cls = classes[i]     if i < len(classes)     else ""
+        hc  = adjusted_h[i] if i < len(adjusted_h) else ""
         if cls or hc:
             pairs.append({"class": cls, "h_code": hc})
     return pairs

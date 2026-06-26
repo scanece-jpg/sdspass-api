@@ -243,6 +243,7 @@ def _sea_ek6_to_legacy(entry: dict) -> dict:
         'suppl_hazards'  : [],
         'm_factors'      : entry.get('m_factors', {}),
         'scl'            : [_scl_op_to_cmin_cmax(s) for s in entry.get('scl_limits', [])],
+        'euh_codes'      : entry.get('euh_codes', []),
         'sea_ek6'        : True,
         'annex_vi'       : False,
         'source'         : 'SEA Ek-6 (TR)',
@@ -487,16 +488,23 @@ def search_substances(query: str, limit: int = 20) -> list:
 def _build_search_result(cas: str, entry: dict, priority: int, src: str) -> dict:
     cl = entry.get('classification', {})
     lb = entry.get('labelling', {})
-    h_codes = lb.get('h_codes', [cl_h.get('h_code', '') for cl_h in cl.get('hazards', [])])
+    # sea_ek6_tr: classification list içinde {h_code, class} dict'leri
+    # substance_db/ECHA: classification dict içinde 'hazards' listesi
+    if isinstance(cl, list):
+        h_codes = [c.get('h_code', '') for c in cl if isinstance(c, dict) and c.get('h_code')]
+    else:
+        h_codes = lb.get('h_codes', [cl_h.get('h_code', '') for cl_h in cl.get('hazards', [])])
+    # sea_ek6_tr 'names' listesi kullanır, substance_db 'name' string kullanır
+    name = (entry.get('names') or [entry.get('name', '')])[0]
     return {
         'cas'            : cas,
-        'name'           : entry.get('name', ''),
+        'name'           : name,
         'ec_no'          : entry.get('ec_no', ''),
         'sea_ek6'        : priority == 1,
         'annex_vi'       : priority <= 2,
-        'source'         : f'{src} ({entry.get("atp","?")})',
+        'source'         : src,
         'source_priority': priority,
-        'hazard_count'   : len(cl.get('hazards', [])),
+        'hazard_count'   : len(h_codes),
         'h_codes'        : [c for c in h_codes if c],
     }
 

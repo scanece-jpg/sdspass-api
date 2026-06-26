@@ -1975,20 +1975,24 @@ async def ai_chat(body: dict = Body(...)):
             euh_map = EUH_STMTS.get('TR', {})
             _seen   = set()
             _rows: list[str] = []
-            for _cls in entry.get('classification', []):
+            # lookup_substance legacy format: 'hazards' listesi (classification değil)
+            for _cls in entry.get('hazards', []):
                 _code = _cls.get('h_code', '')
                 if _code and _code not in _seen:
                     _seen.add(_code)
                     _txt = h_map.get(_code, '')
                     if _txt:
                         _rows.append(f"| **{_code}** | {_txt} |")
+            # euh_codes: _sea_ek6_to_legacy ile aktarılıyor
             for _code in entry.get('euh_codes', []):
                 if _code not in _seen:
                     _seen.add(_code)
                     _txt = euh_map.get(_code, '')
                     if _txt:
                         _rows.append(f"| **{_code}** | {_txt} |")
-            _name = (entry.get('names') or [entry.get('name_en', resolved_cas)])[0]
+            # legacy format: name_tr (TR adı), name (EN adı) — ilk adı al, noktalı virgül temizle
+            _raw_name = entry.get('name_tr') or entry.get('name') or resolved_cas
+            _name = _raw_name.split(';')[0].split(',')[0].strip().capitalize()
             if _rows:
                 _official_table = (
                     f"**{_name} (CAS {resolved_cas})** — SEA Ek-6 / KKDİK Ek-6\n\n"

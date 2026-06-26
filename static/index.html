@@ -4265,7 +4265,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closePhysMod
     $('aiChips') && ($('aiChips').style.display='flex');
   };
 
-  // Soru-cevap
+  // Soru-cevap — gerçek Anthropic API
   window.aiAsk = async function(q){
     if(!q) return;
     $('aiInput') && ($('aiInput').value='');
@@ -4277,24 +4277,33 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closePhysMod
     c.appendChild(ud); c.scrollTop=c.scrollHeight;
     aiSetStatus('Yanıtlıyor...', true);
     aiTyping();
-    await new Promise(r=>setTimeout(r,700));
+
+    // Aktif CAS'ı bağlam olarak gönder (arama kutusundan al)
+    const casVal = ($('casInput')||$('cas_input')||{}).value?.trim() || '';
+    // SDS modu: sayfada sds-text alanı varsa kullan
+    const sdsEl  = document.getElementById('sdsCheckText');
+    const mode   = (sdsEl && sdsEl.value) ? 'sds' : 'data';
+    const body   = { message: q, mode, cas: casVal, sds_text: sdsEl ? sdsEl.value : '' };
+
+    let ans = '';
+    try {
+      const r = await fetch('/api/v1/ai/chat', {
+        method: 'POST',
+        headers: {'Content-Type':'application/json'},
+        body: JSON.stringify(body)
+      });
+      if (!r.ok) {
+        const err = await r.json().catch(()=>({detail:'Sunucu hatası'}));
+        ans = `⚠️ Hata: ${err.detail || r.statusText}`;
+      } else {
+        const d = await r.json();
+        ans = d.reply || '(boş yanıt)';
+      }
+    } catch(e) {
+      ans = `⚠️ Bağlantı hatası: ${e.message}`;
+    }
+
     aiStopTyping();
-    const ql=q.toLowerCase();
-    let ans='';
-    if(ql.includes('h kod'))
-      ans='H kodları (Hazard Statement) CLP tüzüğü tehlike ifadeleridir. H200–299 fiziksel, H300–399 sağlık, H400–499 çevresel tehlikeleri kapsar.';
-    else if(ql.includes('p kod'))
-      ans='P kodları (Precautionary Statement) güvenlik önlemlerini tanımlar. CLP Article 22(4) gereği etikette max 6 P kodu bulunabilir (P501/P101/P102 hariç).';
-    else if(ql.includes('taşı')||ql.includes('transport')||ql.includes('adr'))
-      ans='Taşımacılık sınıfı H kodlarından otomatik hesaplanır. ADR (kara), IMDG (deniz), IATA (hava) için ayrı sınıflandırma uygulanır.';
-    else if(ql.includes('kke')||ql.includes('ppe')||ql.includes('koruyucu'))
-      ans='KKE (Kişisel Koruyucu Ekipman) H kodlarına göre seçilir. CMR maddeler için SCBA veya tam yüz maskesi gerekebilir.';
-    else if(ql.includes('cmr'))
-      ans='CMR maddeler; kanserojen (H350), mutajen (H340) ve üreme toksik (H360) maddelerdir. İşyerinde özel önlem ve risk değerlendirmesi zorunludur.';
-    else if(ql.includes('svhc'))
-      ans='SVHC (Çok Endişe Verici Maddeler) REACH Madde 57 kapsamındadır. Ürün >0.1% SVHC içeriyorsa müşteri bilgilendirmesi zorunludur.';
-    else
-      ans='Bu konuda daha fazla bilgi için ECHA rehber belgelerine veya GBF hazırlayıcınıza başvurun: <a href="https://echa.europa.eu" target="_blank" style="color:var(--accent)">echa.europa.eu</a>';
     aiAddMsg(ans);
     aiSetStatus('Aktif');
   };

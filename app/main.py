@@ -1866,3 +1866,94 @@ async def concentration_refine(
         "refinement_count": len(refs),
         "refinements": refs,
     }
+
+
+# ---------------------------------------------------------------------------
+# AI Chat — Anthropic API ile veri doğrulama ve SDS uyumluluk asistanı
+# ---------------------------------------------------------------------------
+
+@app.post("/api/v1/ai/chat")
+async def ai_chat(body: dict = Body(...)):
+    """
+    İki mod:
+      mode=data   — SEA Ek-6 / Annex VI verisi doğrulama
+      mode=sds    — Hazırlanmış SDS metninin yönetmelik uygunluğu kontrolü
+    Gelen alanlar:
+      message   : str   (kullanıcı sorusu)
+      mode      : str   "data" | "sds"  (varsayılan: "data")
+      cas       : str   (isteğe bağlı, veri modunda bağlam zenginleştirme)
+      sds_text  : str   (isteğe bağlı, sds modunda yüklenen SDS içeriği)
+    """
+    import os
+    try:
+        import anthropic as _anthropic
+    except ImportError:
+        raise HTTPException(status_code=500, detail="anthropic paketi kurulu değil")
+
+    api_key = os.getenv("ANTHROPIC_API_KEY")
+    if not api_key:
+        raise HTTPException(status_code=500, detail="ANTHROPIC_API_KEY tanımlı değil")
+
+    message  = (body.get("message") or "").strip()
+    mode     = (body.get("mode") or "data").lower()
+    cas      = (body.get("cas") or "").strip()
+    sds_text = (body.get("sds_text") or "").strip()
+
+    if not message:
+        raise HTTPException(status_code=400, detail="message alanı boş olamaz")
+
+    # ── Sistem mesajı ────────────────────────────────────────────────────────
+    if mode == "sds":
+        system_prompt = (
+            "Sen bir Türk kimyasal güvenlik veri formu (GBF/SDS) uyumluluk uzmanısın. "
+            "KKDİK (REACH TR), SEA (CLP TR) ve ilgili AB/TR yönetmeliklerine göre "
+            "hazırlanmış SDS belgelerini inceleyerek eksik, hatalı veya uyumsuz bölümleri "
+            "Türkçe olarak raporlarsın. Yanıtların net, madde madde ve eylem odaklı olsun."
+        )
+    else:
+        system_prompt = (
+            "Sen SDSPass sisteminin kimyasal veri asistanısın. "
+            "SEA Ek-6 (KKDİK Ek-6) ve ECHA CLP Annex VI verilerini bilerek "
+            "kullanıcıların sınıflandırma, H/P/EUH kodları, M-faktör, ATE ve SCL "
+            "sorularını Türkçe olarak yanıtlarsın. "
+            "Verdiğin bilgilerin kaynağını belirt (SEA Ek-6 / Annex VI / CLP)."
+        )
+
+    # ── Kullanıcı içeriği ────────────────────────────────────────────────────
+    user_parts: list[dict] = []
+
+    if cas and mode == "data":
+        from app.services.substance_lookup import lookup_substance
+        entry = lookup_substance(cas)
+        if entry:
+            ctx = json.dumps(entry, ensure_ascii=False, indent=2)
+            user_parts.append({
+                "type": "text",
+                "text": f"CAS {cas} için veritabanı kaydı:\n```json\n{ctx}\n```\n\n"
+            })
+
+    if sds_text and mode == "sds":
+        user_parts.append({
+            "type": "text",
+            "text": f"İncelenecek SDS metni:\n---\n{sds_text[:8000]}\n---\n\n"
+        })
+
+    user_parts.append({"type": "text", "text": message})
+
+    # ── API çağrısı ──────────────────────────────────────────────────────────
+    client = _anthropic.Anthropic(api_key=api_key)
+    resp = client.messages.create(
+        model="claude-haiku-4-5-20251001",
+        max_tokens=1024,
+        system=system_prompt,
+        messages=[{"role": "user", "content": user_parts}],
+    )
+
+    reply = resp.content[0].text if resp.content else ""
+    return {
+        "reply": reply,
+        "mode":  mode,
+        "model": resp.model,
+        "input_tokens":  resp.usage.input_tokens,
+        "output_tokens": resp.usage.output_tokens,
+    }

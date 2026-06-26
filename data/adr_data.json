@@ -8726,7 +8726,8 @@
     "limited_qty": "0",
     "kemler": "",
     "tunnel": "E",
-    "transport_cat": "4"
+    "transport_cat": "4",
+    "name_tr": "YANGIN SÖNDÜRÜCÜ DAĞITICI CİHAZLAR"
   },
   "UN1002": {
     "name": "AIR, COMPRESSED",
@@ -38676,7 +38677,8 @@
     "limited_qty": "0",
     "kemler": "66",
     "tunnel": "C/E",
-    "transport_cat": "1"
+    "transport_cat": "1",
+    "name_tr": "KOBALT DİHİDROKSİT TOZU, en az %10 solunabilir parçacık içeren"
   },
   "UN3551": {
     "name": "SODIUM ION BATTERIES with organic electrolyte",
@@ -38701,7 +38703,8 @@
     "limited_qty": "0",
     "kemler": "",
     "tunnel": "E",
-    "transport_cat": "2"
+    "transport_cat": "2",
+    "name_tr": "SODYUM İYON BATARYALARI, organik elektrolitli"
   },
   "UN3552": {
     "name": "SODIUM ION BATTERIES CONTAINED IN EQUIPMENT or SODIUM ION BATTERIES PACKED WITH EQUIPMENT, with organic electrolyte",
@@ -38727,7 +38730,8 @@
     "limited_qty": "0",
     "kemler": "",
     "tunnel": "E",
-    "transport_cat": "2"
+    "transport_cat": "2",
+    "name_tr": "TEÇHİZAT İÇERİSİNDE BULUNAN SODYUM İYON BATARYALARI veya TEÇHİZATLA BİRLİKTE AMBALAJLANMIŞ SODYUM İYON BATARYALARI, organik elektrolitli"
   },
   "UN3553": {
     "name": "DISILANE",
@@ -38744,7 +38748,8 @@
     "limited_qty": "0",
     "kemler": "23",
     "tunnel": "B/D",
-    "transport_cat": "2"
+    "transport_cat": "2",
+    "name_tr": "DİSİLAN"
   },
   "UN3554": {
     "name": "GALLIUM CONTAINED IN MANUFACTURED ARTICLES",
@@ -38760,7 +38765,8 @@
     "limited_qty": "5 kg",
     "kemler": "",
     "tunnel": "E",
-    "transport_cat": "3"
+    "transport_cat": "3",
+    "name_tr": "ÜRETİLMİŞ NESNELERDE BULUNAN GALYUM"
   },
   "UN3555": {
     "name": "TRIFLUOROMETHYLTETRAZOL E-SODIUM SALT IN ACETONE, with not less than 68 % acetone, by mass",
@@ -38776,7 +38782,8 @@
     "limited_qty": "0",
     "kemler": "",
     "tunnel": "B",
-    "transport_cat": "2"
+    "transport_cat": "2",
+    "name_tr": "ASETON İÇİNDE TRİFLUOROETİLTETRAZOL-SODYUM TUZU, en az ağırlıkça %68 aseton içeren"
   },
   "UN3556": {
     "name": "VEHICLE, LITHIUM ION BATTERY POWERED",
@@ -38795,7 +38802,8 @@
     "limited_qty": "0",
     "kemler": "",
     "tunnel": "- (-)",
-    "transport_cat": ""
+    "transport_cat": "",
+    "name_tr": "ARAÇ, LİTYUM İYON BATARYA İLE ÇALIŞAN"
   },
   "UN3557": {
     "name": "VEHICLE, LITHIUM METAL BATTERY POWERED",
@@ -38814,7 +38822,8 @@
     "limited_qty": "0",
     "kemler": "",
     "tunnel": "- (-)",
-    "transport_cat": ""
+    "transport_cat": "",
+    "name_tr": "ARAÇ, LİTYUM METAL BATARYA İLE ÇALIŞAN"
   },
   "UN3558": {
     "name": "VEHICLE, SODIUM ION BATTERY POWERED",
@@ -38834,7 +38843,8 @@
     "limited_qty": "0",
     "kemler": "",
     "tunnel": "- (-)",
-    "transport_cat": ""
+    "transport_cat": "",
+    "name_tr": "ARAÇ, SODYUM İYON BATARYA İLE ÇALIŞAN"
   },
   "UN3559": {
     "name": "FIRE SUPPRESSANT DISPERSING DEVICES",

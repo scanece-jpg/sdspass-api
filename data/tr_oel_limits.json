@@ -212,10 +212,10 @@
   },
   "141-78-6": {
     "name_tr": "Etil asetat",
-    "tw_ppm": 400,
-    "tw_mgm3": 1468,
-    "stel_ppm": null,
-    "stel_mgm3": null,
+    "tw_ppm": 200,
+    "tw_mgm3": 734,
+    "stel_ppm": 400,
+    "stel_mgm3": 1468,
     "skin": false,
     "carcinogen": false,
     "regulation": "EK-1"
@@ -3069,5 +3069,75 @@
     "skin": false,
     "carcinogen": false,
     "regulation": "KİM.MAD.YÖN. EK-1 (RG-20/10/2023-32345)"
+  },
+  "88-89-1": {
+    "name_tr": "Pikrik asit",
+    "tw_mgm3": 0.1,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "EK-1"
+  },
+  "91-20-3": {
+    "name_tr": "Naftalin",
+    "tw_mgm3": 50.0,
+    "tw_ppm": 10.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "EK-1"
+  },
+  "110-86-1": {
+    "name_tr": "Piridin",
+    "tw_mgm3": 15.0,
+    "tw_ppm": 5.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "EK-1"
+  },
+  "1319-77-3": {
+    "name_tr": "Kresoller (tüm izomerler)",
+    "tw_mgm3": 22.0,
+    "tw_ppm": 5.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "EK-1"
+  },
+  "7440-06-4": {
+    "name_tr": "Platin (metalik)",
+    "tw_mgm3": 1.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "EK-1"
+  },
+  "105-46-4": {
+    "name_tr": "Sec-bütil asetat",
+    "tw_mgm3": 241.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 723.0,
+    "stel_ppm": 150.0,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "EK-1"
+  },
+  "99-65-0": {
+    "name_tr": "1,3-Dinitrobenzen",
+    "tw_mgm3": 1.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "carcinogen": false,
+    "regulation": "EK-1"
   }
 }

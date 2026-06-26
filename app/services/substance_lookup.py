@@ -427,7 +427,7 @@ def lookup_substance(cas: str) -> Optional[Dict]:
 
     # ── Sıra 2 (tek başına): substance_db (ECHA ATP22 yeni format) ──────────
     db_entry = _db_lookup(cas)
-    if db_entry:
+    if db_entry and db_entry.get('classification'):
         return _db_to_legacy(db_entry)
 
     # ── Sıra 3: ECHA C&L API önbelleği ──────────────────────────────────────

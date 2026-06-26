@@ -1442,8 +1442,7 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 100,
-      "chronic": 100
+      "acute": 100
     },
     "ate": {}
   },
@@ -7020,7 +7019,6 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 10,
       "chronic": 10
     },
     "ate": {}
@@ -7751,8 +7749,7 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 100,
-      "chronic": 100
+      "acute": 100
     },
     "ate": {}
   },
@@ -7794,8 +7791,7 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 100,
-      "chronic": 100
+      "acute": 100
     },
     "ate": {}
   },
@@ -7837,8 +7833,7 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 100,
-      "chronic": 100
+      "acute": 100
     },
     "ate": {}
   },
@@ -8276,8 +8271,7 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 1000,
-      "chronic": 1000
+      "acute": 1000
     },
     "ate": {}
   },
@@ -9516,8 +9510,7 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 1000,
-      "chronic": 1000
+      "acute": 1000
     },
     "ate": {}
   },
@@ -16180,8 +16173,7 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 100,
-      "chronic": 100
+      "acute": 100
     },
     "ate": {}
   },
@@ -16608,8 +16600,7 @@
       }
     ],
     "m_factors": {
-      "acute": 10,
-      "chronic": 10
+      "acute": 10
     },
     "ate": {}
   },
@@ -16911,8 +16902,7 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 10,
-      "chronic": 10
+      "acute": 10
     },
     "ate": {},
     "forms": [
@@ -16981,8 +16971,7 @@
           }
         ],
         "m_factors": {
-          "acute": 10,
-          "chronic": 10
+          "acute": 10
         },
         "ate": {},
         "notes": [
@@ -28218,7 +28207,6 @@
         ],
         "scl_limits": [],
         "m_factors": {
-          "acute": 10,
           "chronic": 10
         },
         "ate": {},
@@ -38353,8 +38341,7 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 10,
-      "chronic": 10
+      "acute": 10
     },
     "ate": {}
   },
@@ -41830,7 +41817,6 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 100,
       "chronic": 100
     },
     "ate": {
@@ -42035,7 +42021,6 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 1,
       "chronic": 1
     },
     "ate": {}
@@ -42318,8 +42303,7 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 10,
-      "chronic": 10
+      "acute": 10
     },
     "ate": {}
   },
@@ -42555,8 +42539,7 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 1,
-      "chronic": 1
+      "acute": 1
     },
     "ate": {
       "oral": {
@@ -44493,7 +44476,6 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 1,
       "chronic": 1
     },
     "ate": {}
@@ -46697,8 +46679,7 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 10,
-      "chronic": 10
+      "acute": 10
     },
     "ate": {}
   },
@@ -50228,7 +50209,6 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 1,
       "chronic": 1
     },
     "ate": {}
@@ -52535,7 +52515,6 @@
       }
     ],
     "m_factors": {
-      "acute": 10,
       "chronic": 10
     },
     "ate": {}
@@ -67517,7 +67496,6 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 1,
       "chronic": 1
     },
     "ate": {}
@@ -68322,7 +68300,6 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 10,
       "chronic": 10
     },
     "ate": {}
@@ -69098,7 +69075,6 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 1,
       "chronic": 1
     },
     "ate": {}
@@ -71547,7 +71523,6 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 100,
       "chronic": 100
     },
     "ate": {}
@@ -86469,7 +86444,6 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 1,
       "chronic": 1
     },
     "ate": {}
@@ -88235,7 +88209,6 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 10,
       "chronic": 10
     },
     "ate": {}
@@ -88388,8 +88361,7 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 10,
-      "chronic": 10
+      "acute": 10
     },
     "ate": {}
   },
@@ -88429,8 +88401,7 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 10,
-      "chronic": 10
+      "acute": 10
     },
     "ate": {}
   },
@@ -90577,8 +90548,7 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 10,
-      "chronic": 10
+      "acute": 10
     },
     "ate": {},
     "forms": [
@@ -90613,8 +90583,7 @@
         ],
         "scl_limits": [],
         "m_factors": {
-          "acute": 10,
-          "chronic": 10
+          "acute": 10
         },
         "ate": {},
         "notes": [],
@@ -93048,7 +93017,6 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 1,
       "chronic": 1
     },
     "ate": {}
@@ -94484,7 +94452,7 @@
       },
       {
         "class": "Aquatic Chronic 1",
-        "h_code": ""
+        "h_code": "H410"
       }
     ],
     "scl_limits": [],
@@ -96495,7 +96463,6 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 1,
       "chronic": 1
     },
     "ate": {}
@@ -96950,7 +96917,6 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 1,
       "chronic": 1
     },
     "ate": {}
@@ -99673,8 +99639,7 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 10,
-      "chronic": 10
+      "acute": 10
     },
     "ate": {}
   },
@@ -99766,8 +99731,7 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 10,
-      "chronic": 10
+      "acute": 10
     },
     "ate": {}
   },
@@ -126511,7 +126475,6 @@
     ],
     "scl_limits": [],
     "m_factors": {
-      "acute": 10,
       "chronic": 10
     },
     "ate": {},

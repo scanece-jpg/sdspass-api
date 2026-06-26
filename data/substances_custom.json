@@ -4,41 +4,28 @@
     "ec_no": "614-482-0",
     "annex_vi": false,
     "signal": "Danger",
-    "pictograms": ["GHS05", "GHS07"],
+    "pictograms": [
+      "GHS05",
+      "GHS07",
+      "GHS09"
+    ],
     "hazards": [
-      {"h_class": "Eye Dam. 1", "h_code": "H318"},
-      {"h_class": "Skin Irrit. 2", "h_code": "H315"},
-      {"h_class": "Aquatic Chronic 3", "h_code": "H412"}
+      {
+        "h_class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "h_class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "h_class": "Aquatic Chronic 3",
+        "h_code": "H412"
+      }
     ],
     "m_factors": {},
     "index_no": "",
     "atp": "custom"
-  },
-  "121-43-7": {
-    "name": "trimethyl borate",
-    "ec_no": "",
-    "annex_vi": false,
-    "signal": "Danger",
-    "pictograms": [
-      "GHS02",
-      "GHS08",
-      "GHS07"
-    ],
-    "hazards": [
-      {
-        "h_class": "Flam. Liq. 3",
-        "h_code": "H226"
-      },
-      {
-        "h_class": "Repr. 1B",
-        "h_code": "H360FD"
-      },
-      {
-        "h_class": "Acute Tox. 4 *",
-        "h_code": "H312"
-      }
-    ],
-    "m_factors": {}
   },
   "10024-97-2": {
     "name": "dinitrogen oxide",
@@ -119,31 +106,6 @@
       "chronic": 1
     }
   },
-  "1314-85-8": {
-    "name": "tetraphosphorus trisulphide; phosphorus sesquisulphid",
-    "ec_no": "",
-    "annex_vi": false,
-    "signal": "Danger",
-    "pictograms": [
-      "GHS02",
-      "GHS07"
-    ],
-    "hazards": [
-      {
-        "h_class": "Flam. Sol. 1",
-        "h_code": "H228"
-      },
-      {
-        "h_class": "Self-heat. 1",
-        "h_code": "H251"
-      },
-      {
-        "h_class": "Acute Tox. 4 *",
-        "h_code": "H302"
-      }
-    ],
-    "m_factors": {}
-  },
   "512-56-1": {
     "name": "trimethyl phosphate",
     "ec_no": "",
@@ -177,95 +139,6 @@
     ],
     "m_factors": {}
   },
-  "75-08-1": {
-    "name": "ethanethiol; ethyl mercaptan",
-    "ec_no": "",
-    "annex_vi": false,
-    "signal": "Danger",
-    "pictograms": [
-      "GHS02",
-      "GHS06",
-      "GHS09"
-    ],
-    "hazards": [
-      {
-        "h_class": "Flam. Liq. 1",
-        "h_code": "H224"
-      },
-      {
-        "h_class": "Acute Tox. 3",
-        "h_code": "H331"
-      },
-      {
-        "h_class": "Acute Tox. 4",
-        "h_code": "H302"
-      },
-      {
-        "h_class": "Aquatic Acute 1",
-        "h_code": "H400"
-      },
-      {
-        "h_class": "Aquatic Chronic 1",
-        "h_code": "H410"
-      }
-    ],
-    "m_factors": {}
-  },
-  "7440-50-8": {
-    "name": "copper [specific surface area > 0,67 mm2/mg]",
-    "ec_no": "",
-    "annex_vi": false,
-    "signal": "Warning",
-    "pictograms": [
-      "GHS09"
-    ],
-    "hazards": [
-      {
-        "h_class": "Aquatic Acute 1",
-        "h_code": "H400"
-      },
-      {
-        "h_class": "Aquatic Chronic 1",
-        "h_code": "H410"
-      }
-    ],
-    "m_factors": {
-      "acute": 10,
-      "chronic": 1
-    }
-  },
-  "7440-22-4": {
-    "name": "silver nano: [particle diameter > 1 nm â‰¤ 100 nm]",
-    "ec_no": "",
-    "annex_vi": false,
-    "signal": "Warning",
-    "pictograms": [
-      "GHS08",
-      "GHS09"
-    ],
-    "hazards": [
-      {
-        "h_class": "Repr. 2",
-        "h_code": "H361f"
-      },
-      {
-        "h_class": "STOT RE 2",
-        "h_code": "H373 (nervous system)"
-      },
-      {
-        "h_class": "Aquatic Acute 1",
-        "h_code": "H400"
-      },
-      {
-        "h_class": "Aquatic Chronic 1",
-        "h_code": "H410"
-      }
-    ],
-    "m_factors": {
-      "acute": 1000,
-      "chronic": 1000
-    }
-  },
   "10294-40-3": {
     "name": "barium chromate",
     "ec_no": "",
@@ -278,48 +151,6 @@
       {
         "h_class": "Carc. 1B",
         "h_code": "H350"
-      }
-    ],
-    "m_factors": {}
-  },
-  "75-35-4": {
-    "name": "1,1-dichloroethylene; vinylidene chloride",
-    "ec_no": "",
-    "annex_vi": false,
-    "signal": "Danger",
-    "pictograms": [
-      "GHS02",
-      "GHS08",
-      "GHS06"
-    ],
-    "hazards": [
-      {
-        "h_class": "Flam. Liq. 1",
-        "h_code": "H224"
-      },
-      {
-        "h_class": "Carc. 1B",
-        "h_code": "H350"
-      },
-      {
-        "h_class": "Muta. 2",
-        "h_code": "H341"
-      },
-      {
-        "h_class": "Acute Tox. 1",
-        "h_code": "H330"
-      },
-      {
-        "h_class": "Acute Tox. 3",
-        "h_code": "H301"
-      },
-      {
-        "h_class": "STOT RE 1",
-        "h_code": "H372 (respiratory tract, kidney, liver)"
-      },
-      {
-        "h_class": "Aquatic Chronic 3",
-        "h_code": "H412"
       }
     ],
     "m_factors": {}
@@ -401,34 +232,6 @@
     ],
     "m_factors": {}
   },
-  "119344-86-4": {
-    "name": "2-(dimethylamino)-2-[(4-methylphenyl)methyl]-1-[4-(morpholin-4-yl)phenyl]butan-1-one",
-    "ec_no": "",
-    "annex_vi": false,
-    "signal": "Danger",
-    "pictograms": [
-      "GHS08",
-      "GHS09"
-    ],
-    "hazards": [
-      {
-        "h_class": "Repr. 1B",
-        "h_code": "H360Df"
-      },
-      {
-        "h_class": "Aquatic Acute 1",
-        "h_code": "H400"
-      },
-      {
-        "h_class": "Aquatic Chronic 1",
-        "h_code": "H410"
-      }
-    ],
-    "m_factors": {
-      "acute": 1,
-      "chronic": 1
-    }
-  },
   "85114-00-7": {
     "name": "2-ethylhexanoic acid, monoester with propane-1,2-diol",
     "ec_no": "",
@@ -493,22 +296,6 @@
     ],
     "m_factors": {}
   },
-  "89-61-2": {
-    "name": "1,4-dichloro-2-nitrobenzene",
-    "ec_no": "",
-    "annex_vi": false,
-    "signal": "Danger",
-    "pictograms": [
-      "GHS08"
-    ],
-    "hazards": [
-      {
-        "h_class": "Carc. 1B",
-        "h_code": "H350"
-      }
-    ],
-    "m_factors": {}
-  },
   "165252-70-0": {
     "name": "dinotefuran (ISO); (RS)-1-methyl-2-nitro-3-(tetrahydro-3-furylmethyl)guanidine",
     "ec_no": "",
@@ -537,38 +324,6 @@
       "chronic": 10
     }
   },
-  "95-14-7": {
-    "name": "1H-benzotriazole",
-    "ec_no": "",
-    "annex_vi": false,
-    "signal": "",
-    "pictograms": [
-      "GHS09"
-    ],
-    "hazards": [
-      {
-        "h_class": "Aquatic Chronic 2",
-        "h_code": "H411"
-      }
-    ],
-    "m_factors": {}
-  },
-  "29385-43-1": {
-    "name": "methyl-1H-benzotriazole",
-    "ec_no": "",
-    "annex_vi": false,
-    "signal": "",
-    "pictograms": [
-      "GHS09"
-    ],
-    "hazards": [
-      {
-        "h_class": "Aquatic Chronic 2",
-        "h_code": "H411"
-      }
-    ],
-    "m_factors": {}
-  },
   "81777-95-9": {
     "name": "bixlozone (ISO); 2-(2,4-dichlorobenzyl)-4,4-dimethyl-1,2-oxazolidin-3-one",
     "ec_no": "",
@@ -591,54 +346,6 @@
       "acute": 1,
       "chronic": 10
     }
-  },
-  "189278-12-4": {
-    "name": "proquinazid (ISO); 6-iodo-2-propoxy-3-propylquinazolin-4(3H)-one",
-    "ec_no": "",
-    "annex_vi": false,
-    "signal": "Danger",
-    "pictograms": [
-      "GHS08",
-      "GHS09"
-    ],
-    "hazards": [
-      {
-        "h_class": "Carc. 2",
-        "h_code": "H351"
-      },
-      {
-        "h_class": "STOT RE 1",
-        "h_code": "H372 (thyroid, liver)"
-      },
-      {
-        "h_class": "Aquatic Acute 1",
-        "h_code": "H400"
-      },
-      {
-        "h_class": "Aquatic Chronic 1",
-        "h_code": "H410"
-      }
-    ],
-    "m_factors": {
-      "acute": 1,
-      "chronic": 10
-    }
-  },
-  "110-26-9": {
-    "name": "N,N'-methylenediacrylamide",
-    "ec_no": "",
-    "annex_vi": false,
-    "signal": "Danger",
-    "pictograms": [
-      "GHS08"
-    ],
-    "hazards": [
-      {
-        "h_class": "Muta. 1B",
-        "h_code": "H340"
-      }
-    ],
-    "m_factors": {}
   },
   "7732-18-5": {
     "name": "water; eau; Wasser",
@@ -667,7 +374,10 @@
     "ec_no": "253-733-5",
     "annex_vi": false,
     "signal": "",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
     "hazards": [
       {
         "h_class": "Eye Irrit. 2",
@@ -689,7 +399,9 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "",
-    "pictograms": [],
+    "pictograms": [
+      "GHS05"
+    ],
     "hazards": [
       {
         "h_class": "Skin Corr. 1B",
@@ -707,7 +419,9 @@
     "ec_no": "229-146-5",
     "annex_vi": false,
     "signal": "",
-    "pictograms": [],
+    "pictograms": [
+      "GHS05"
+    ],
     "hazards": [
       {
         "h_class": "Skin Corr. 1B",
@@ -725,7 +439,10 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "",
-    "pictograms": [],
+    "pictograms": [
+      "GHS05",
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Skin Irrit. 2",
@@ -743,7 +460,9 @@
     "ec_no": "618-339-6",
     "annex_vi": false,
     "signal": "",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Eye Irrit. 2",
@@ -770,7 +489,9 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Eye Irrit. 2",
@@ -784,7 +505,10 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "",
-    "pictograms": [],
+    "pictograms": [
+      "GHS08",
+      "GHS09"
+    ],
     "hazards": [
       {
         "h_class": "Repr. 1B",
@@ -802,7 +526,11 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "",
-    "pictograms": [],
+    "pictograms": [
+      "GHS05",
+      "GHS07",
+      "GHS09"
+    ],
     "hazards": [
       {
         "h_class": "Acute Tox. 4",
@@ -828,7 +556,9 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Eye Irrit. 2",
@@ -842,7 +572,9 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "",
-    "pictograms": [],
+    "pictograms": [
+      "GHS05"
+    ],
     "hazards": [
       {
         "h_class": "Skin Corr. 1B",
@@ -860,7 +592,9 @@
     "ec_no": "231-025-7",
     "annex_vi": false,
     "signal": "",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Eye Irrit. 2",
@@ -878,7 +612,9 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Eye Irrit. 2",
@@ -892,7 +628,9 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Eye Irrit. 2",
@@ -906,7 +644,9 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Eye Irrit. 2",
@@ -924,7 +664,9 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Eye Irrit. 2",
@@ -942,7 +684,9 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Eye Irrit. 2",
@@ -956,7 +700,9 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "",
-    "pictograms": [],
+    "pictograms": [
+      "GHS05"
+    ],
     "hazards": [
       {
         "h_class": "Skin Corr. 1B",
@@ -974,7 +720,9 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Eye Irrit. 2",
@@ -988,7 +736,9 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Eye Irrit. 2",
@@ -1006,7 +756,9 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Eye Irrit. 2",
@@ -1020,7 +772,9 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Eye Irrit. 2",
@@ -1047,7 +801,9 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Eye Irrit. 2",
@@ -1070,7 +826,9 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "",
-    "pictograms": [],
+    "pictograms": [
+      "GHS05"
+    ],
     "hazards": [
       {
         "h_class": "Skin Corr. 1B",
@@ -1088,7 +846,9 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Skin Irrit. 2",
@@ -1106,7 +866,9 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Eye Irrit. 2",
@@ -1120,7 +882,9 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Eye Irrit. 2",
@@ -1152,7 +916,10 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "",
-    "pictograms": [],
+    "pictograms": [
+      "GHS05",
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Acute Tox. 4",
@@ -1170,7 +937,9 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Eye Irrit. 2",
@@ -1188,7 +957,10 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
     "hazards": [
       {
         "h_class": "Acute Tox. 4",
@@ -1206,7 +978,9 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "Warning",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Skin Irrit. 2",
@@ -1224,7 +998,12 @@
     "ec_no": "247-500-7",
     "annex_vi": false,
     "signal": "Danger",
-    "pictograms": [],
+    "pictograms": [
+      "GHS05",
+      "GHS06",
+      "GHS07",
+      "GHS09"
+    ],
     "hazards": [
       {
         "h_class": "Acute Tox. 3",
@@ -1254,7 +1033,10 @@
     "ec_no": "203-714-2",
     "annex_vi": false,
     "signal": "Warning",
-    "pictograms": [],
+    "pictograms": [
+      "GHS02",
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Flam. Liq. 2",
@@ -1272,7 +1054,9 @@
     "ec_no": "233-135-0",
     "annex_vi": false,
     "signal": "Warning",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Skin Irrit. 2",
@@ -1294,7 +1078,10 @@
     "ec_no": "500-315-8",
     "annex_vi": false,
     "signal": "Warning",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07",
+      "GHS09"
+    ],
     "hazards": [
       {
         "h_class": "Aquatic Acute 1",
@@ -1320,7 +1107,10 @@
     "ec_no": "205-788-1",
     "annex_vi": false,
     "signal": "Danger",
-    "pictograms": [],
+    "pictograms": [
+      "GHS05",
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Skin Irrit. 2",
@@ -1338,7 +1128,9 @@
     "ec_no": "500-234-8",
     "annex_vi": false,
     "signal": "Warning",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Skin Irrit. 2",
@@ -1356,7 +1148,9 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "Warning",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Skin Irrit. 2",
@@ -1374,7 +1168,9 @@
     "ec_no": "231-448-7",
     "annex_vi": false,
     "signal": "Warning",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Eye Irrit. 2",
@@ -1388,7 +1184,9 @@
     "ec_no": "233-343-1",
     "annex_vi": false,
     "signal": "Warning",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Skin Irrit. 2",
@@ -1406,7 +1204,9 @@
     "ec_no": "231-867-5",
     "annex_vi": false,
     "signal": "Warning",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Eye Irrit. 2",
@@ -1420,7 +1220,9 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "Warning",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Eye Irrit. 2",
@@ -1434,7 +1236,9 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "Warning",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Eye Irrit. 2",
@@ -1448,7 +1252,9 @@
     "ec_no": "231-984-1",
     "annex_vi": false,
     "signal": "Warning",
-    "pictograms": [],
+    "pictograms": [
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Eye Irrit. 2",
@@ -1480,7 +1286,11 @@
     "ec_no": "233-276-9",
     "annex_vi": false,
     "signal": "Danger",
-    "pictograms": [],
+    "pictograms": [
+      "GHS06",
+      "GHS08",
+      "GHS09"
+    ],
     "hazards": [
       {
         "h_class": "Acute Tox. 3",
@@ -1506,7 +1316,9 @@
     "ec_no": "205-011-6",
     "annex_vi": false,
     "signal": "Warning",
-    "pictograms": [],
+    "pictograms": [
+      "GHS09"
+    ],
     "hazards": [
       {
         "h_class": "Aquatic Chronic 3",
@@ -1520,7 +1332,10 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "Danger",
-    "pictograms": [],
+    "pictograms": [
+      "GHS05",
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Skin Corr. 1",
@@ -1544,7 +1359,10 @@
     "ec_no": "",
     "annex_vi": false,
     "signal": "Danger",
-    "pictograms": [],
+    "pictograms": [
+      "GHS05",
+      "GHS07"
+    ],
     "hazards": [
       {
         "h_class": "Acute Tox. 4 (oral)",

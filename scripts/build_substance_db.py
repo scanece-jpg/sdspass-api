@@ -221,6 +221,14 @@ def build(rows: list[dict]) -> dict:
         classification             = _parse_classification(row["class_h_pairs"])
         scl_limits, m_factors, ate = _parse_scl(row["scl_raw"])
 
+        # Bare M değerleri (tipisiz) her iki kategoriye atanır; ama maddenin
+        # ilgili Aquatic sınıfı yoksa o M-faktörü anlamsız → sil.
+        cls_names = [c.get("class", "") for c in classification]
+        if "acute" in m_factors and not any("Aquatic Acute" in c for c in cls_names):
+            del m_factors["acute"]
+        if "chronic" in m_factors and not any("Aquatic Chronic" in c for c in cls_names):
+            del m_factors["chronic"]
+
         notes_raw = row["notes_raw"].strip()
         notes = [n.strip() for n in re.split(r"[\s,]+", notes_raw) if n.strip()] if notes_raw else []
 

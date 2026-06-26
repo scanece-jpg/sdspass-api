@@ -1,0 +1,1307 @@
+{
+  "60-29-7": {
+    "name_en": "Diethylether",
+    "tw_mgm3": 308.0,
+    "tw_ppm": 100.0,
+    "stel_mgm3": 616.0,
+    "stel_ppm": 200.0,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "67-64-1": {
+    "name_en": "Acetone",
+    "tw_mgm3": 1210.0,
+    "tw_ppm": 500.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "67-66-3": {
+    "name_en": "Chloroform",
+    "tw_mgm3": 10.0,
+    "tw_ppm": 2.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": true,
+    "directive": "2000/39/EC"
+  },
+  "71-55-6": {
+    "name_en": "1,1,1-Trichloroethane",
+    "tw_mgm3": 555.0,
+    "tw_ppm": 100.0,
+    "stel_mgm3": 1110.0,
+    "stel_ppm": 200.0,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "75-04-7": {
+    "name_en": "Ethylamine",
+    "tw_mgm3": 9.4,
+    "tw_ppm": 5.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "75-34-3": {
+    "name_en": "1,1-Dichloroethane",
+    "tw_mgm3": 412.0,
+    "tw_ppm": 100.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": true,
+    "directive": "2000/39/EC"
+  },
+  "75-44-5": {
+    "name_en": "Phosgene",
+    "tw_mgm3": 0.08,
+    "tw_ppm": 0.02,
+    "stel_mgm3": 0.4,
+    "stel_ppm": 0.1,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "75-45-6": {
+    "name_en": "Chlorodifluoromethane",
+    "tw_mgm3": 3600.0,
+    "tw_ppm": 1000.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "78-93-3": {
+    "name_en": "Butanone",
+    "tw_mgm3": 600.0,
+    "tw_ppm": 200.0,
+    "stel_mgm3": 900.0,
+    "stel_ppm": 300.0,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "79-09-4": {
+    "name_en": "Propionic acid",
+    "tw_mgm3": 31.0,
+    "tw_ppm": 10.0,
+    "stel_mgm3": 62.0,
+    "stel_ppm": 20.0,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "95-47-6": {
+    "name_en": "o-Xylene",
+    "tw_mgm3": 221.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 442.0,
+    "stel_ppm": 100.0,
+    "skin": true,
+    "directive": "2000/39/EC"
+  },
+  "95-50-1": {
+    "name_en": "1,2-Dichlorobenzene",
+    "tw_mgm3": 122.0,
+    "tw_ppm": 20.0,
+    "stel_mgm3": 306.0,
+    "stel_ppm": 50.0,
+    "skin": true,
+    "directive": "2000/39/EC"
+  },
+  "95-63-6": {
+    "name_en": "1,2,4-Trimethylbenzene",
+    "tw_mgm3": 100.0,
+    "tw_ppm": 20.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "98-82-8": {
+    "name_en": "Cumene",
+    "tw_mgm3": 100.0,
+    "tw_ppm": 20.0,
+    "stel_mgm3": 250.0,
+    "stel_ppm": 50.0,
+    "skin": true,
+    "directive": "2000/39/EC, 2019/1831/EU"
+  },
+  "98-83-9": {
+    "name_en": "2-Phenylpropene",
+    "tw_mgm3": 246.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 492.0,
+    "stel_ppm": 100.0,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "100-41-4": {
+    "name_en": "Ethylbenzene",
+    "tw_mgm3": 442.0,
+    "tw_ppm": 100.0,
+    "stel_mgm3": 884.0,
+    "stel_ppm": 200.0,
+    "skin": true,
+    "directive": "2000/39/EC"
+  },
+  "105-60-2": {
+    "name_en": "e-Caprolactam, (dust and vapour)",
+    "tw_mgm3": 10.0,
+    "tw_ppm": null,
+    "stel_mgm3": 40.0,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "106-35-4": {
+    "name_en": "Heptan-3-one",
+    "tw_mgm3": 95.0,
+    "tw_ppm": 20.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "106-42-3": {
+    "name_en": "p-Xylene",
+    "tw_mgm3": 221.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 442.0,
+    "stel_ppm": 100.0,
+    "skin": true,
+    "directive": "2000/39/EC"
+  },
+  "106-46-7": {
+    "name_en": "1,4-Dichlorobenzene",
+    "tw_mgm3": 122.0,
+    "tw_ppm": 20.0,
+    "stel_mgm3": 306.0,
+    "stel_ppm": 50.0,
+    "skin": false,
+    "directive": "2000/39/EC, 2017/164/EU"
+  },
+  "107-18-6": {
+    "name_en": "Allyl alcohol",
+    "tw_mgm3": 4.8,
+    "tw_ppm": 2.0,
+    "stel_mgm3": 12.1,
+    "stel_ppm": 5.0,
+    "skin": true,
+    "directive": "2000/39/EC"
+  },
+  "107-21-1": {
+    "name_en": "Ethylene glycol",
+    "tw_mgm3": 52.0,
+    "tw_ppm": 20.0,
+    "stel_mgm3": 104.0,
+    "stel_ppm": 40.0,
+    "skin": true,
+    "directive": "2000/39/EC"
+  },
+  "107-98-2": {
+    "name_en": "1-Methoxypropanol-2",
+    "tw_mgm3": 375.0,
+    "tw_ppm": 100.0,
+    "stel_mgm3": 568.0,
+    "stel_ppm": 150.0,
+    "skin": true,
+    "directive": "2000/39/EC"
+  },
+  "108-10-1": {
+    "name_en": "4-Methylpentan-2-one",
+    "tw_mgm3": 83.0,
+    "tw_ppm": 20.0,
+    "stel_mgm3": 208.0,
+    "stel_ppm": 50.0,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "108-38-3": {
+    "name_en": "m-Xylene",
+    "tw_mgm3": 221.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 442.0,
+    "stel_ppm": 100.0,
+    "skin": true,
+    "directive": "2000/39/EC"
+  },
+  "108-65-6": {
+    "name_en": "2-Methoxy-1-methylethylacetate",
+    "tw_mgm3": 275.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 550.0,
+    "stel_ppm": 100.0,
+    "skin": true,
+    "directive": "2000/39/EC"
+  },
+  "108-67-8": {
+    "name_en": "Mesitylene (Trimethylbenzenes)",
+    "tw_mgm3": 100.0,
+    "tw_ppm": 20.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "108-90-7": {
+    "name_en": "Chlorobenzene",
+    "tw_mgm3": 47.0,
+    "tw_ppm": 10.0,
+    "stel_mgm3": 94.0,
+    "stel_ppm": 20.0,
+    "skin": false,
+    "directive": "2000/39/EC, 2006/15/EC"
+  },
+  "108-94-1": {
+    "name_en": "Cyclohexanone",
+    "tw_mgm3": 40.8,
+    "tw_ppm": 10.0,
+    "stel_mgm3": 81.6,
+    "stel_ppm": 20.0,
+    "skin": true,
+    "directive": "2000/39/EC"
+  },
+  "108-95-2": {
+    "name_en": "Phenol",
+    "tw_mgm3": 7.8,
+    "tw_ppm": 2.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": true,
+    "directive": "2000/39/EC, 2009/161/EU"
+  },
+  "109-99-9": {
+    "name_en": "Tetrahydrofuran",
+    "tw_mgm3": 150.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 300.0,
+    "stel_ppm": 100.0,
+    "skin": true,
+    "directive": "2000/39/EC"
+  },
+  "110-12-3": {
+    "name_en": "5-Methylhexan-2-one",
+    "tw_mgm3": 95.0,
+    "tw_ppm": 20.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "110-43-0": {
+    "name_en": "Heptan-2-one",
+    "tw_mgm3": 238.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 475.0,
+    "stel_ppm": 100.0,
+    "skin": true,
+    "directive": "2000/39/EC"
+  },
+  "110-85-0": {
+    "name_en": "Piperazine",
+    "tw_mgm3": 0.1,
+    "tw_ppm": null,
+    "stel_mgm3": 0.3,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "111-76-2": {
+    "name_en": "2-Butoxyethanol",
+    "tw_mgm3": 98.0,
+    "tw_ppm": 20.0,
+    "stel_mgm3": 246.0,
+    "stel_ppm": 50.0,
+    "skin": true,
+    "directive": "2000/39/EC"
+  },
+  "112-07-2": {
+    "name_en": "2-Butoxyethyl acetate",
+    "tw_mgm3": 133.0,
+    "tw_ppm": 20.0,
+    "stel_mgm3": 333.0,
+    "stel_ppm": 50.0,
+    "skin": true,
+    "directive": "2000/39/EC"
+  },
+  "115-10-6": {
+    "name_en": "Dimethylether",
+    "tw_mgm3": 1920.0,
+    "tw_ppm": 1000.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "120-82-1": {
+    "name_en": "1,2,4-Trichlorobenzene",
+    "tw_mgm3": 15.1,
+    "tw_ppm": 2.0,
+    "stel_mgm3": 37.8,
+    "stel_ppm": 5.0,
+    "skin": true,
+    "directive": "2000/39/EC"
+  },
+  "121-44-8": {
+    "name_en": "Triethylamine",
+    "tw_mgm3": 8.4,
+    "tw_ppm": 2.0,
+    "stel_mgm3": 12.6,
+    "stel_ppm": 3.0,
+    "skin": true,
+    "directive": "2000/39/EC"
+  },
+  "123-92-2": {
+    "name_en": "Isopentylacetate",
+    "tw_mgm3": 270.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 540.0,
+    "stel_ppm": 100.0,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "124-40-3": {
+    "name_en": "Dimethylamine",
+    "tw_mgm3": 3.8,
+    "tw_ppm": 2.0,
+    "stel_mgm3": 9.4,
+    "stel_ppm": 5.0,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "127-19-5": {
+    "name_en": "N,N-Dimethylacetamide",
+    "tw_mgm3": 36.0,
+    "tw_ppm": 10.0,
+    "stel_mgm3": 72.0,
+    "stel_ppm": 20.0,
+    "skin": true,
+    "directive": "2000/39/EC"
+  },
+  "141-32-2": {
+    "name_en": "n-Butylacrylate",
+    "tw_mgm3": 11.0,
+    "tw_ppm": 2.0,
+    "stel_mgm3": 53.0,
+    "stel_ppm": 10.0,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "142-82-5": {
+    "name_en": "n-Heptane",
+    "tw_mgm3": 2085.0,
+    "tw_ppm": 500.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "526-73-8": {
+    "name_en": "1,2,3-Trimethylbenzene",
+    "tw_mgm3": 100.0,
+    "tw_ppm": 20.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "541-85-5": {
+    "name_en": "5-Methylheptan-3-one",
+    "tw_mgm3": 53.0,
+    "tw_ppm": 10.0,
+    "stel_mgm3": 107.0,
+    "stel_ppm": 20.0,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "626-38-0": {
+    "name_en": "1-Methylbutylacetate",
+    "tw_mgm3": 270.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 540.0,
+    "stel_ppm": 100.0,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "628-63-7": {
+    "name_en": "Pentylacetate",
+    "tw_mgm3": 270.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 540.0,
+    "stel_ppm": 100.0,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "620-11-1": {
+    "name_en": "3-Pentylacetate",
+    "tw_mgm3": 270.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 540.0,
+    "stel_ppm": 100.0,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "625-16-1": {
+    "name_en": "Amylacetate, tert",
+    "tw_mgm3": 270.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 540.0,
+    "stel_ppm": 100.0,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "1330-20-7": {
+    "name_en": "Xylene, mixed isomers, pure",
+    "tw_mgm3": 221.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 442.0,
+    "stel_ppm": 100.0,
+    "skin": true,
+    "directive": "2000/39/EC"
+  },
+  "3689-24-5": {
+    "name_en": "Sulphotep",
+    "tw_mgm3": 0.1,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": true,
+    "directive": "2000/39/EC"
+  },
+  "7664-39-3": {
+    "name_en": "Hydrogen fluoride",
+    "tw_mgm3": 1.5,
+    "tw_ppm": 1.8,
+    "stel_mgm3": 2.5,
+    "stel_ppm": 3.0,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "7440-22-4": {
+    "name_en": "Silver, metallic",
+    "tw_mgm3": 0.1,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "7647-01-0": {
+    "name_en": "Hydrogen chloride",
+    "tw_mgm3": 8.0,
+    "tw_ppm": 5.0,
+    "stel_mgm3": 15.0,
+    "stel_ppm": 10.0,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "7664-38-2": {
+    "name_en": "Orthophosphoric acid",
+    "tw_mgm3": 1.0,
+    "tw_ppm": null,
+    "stel_mgm3": 2.0,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "7664-41-7": {
+    "name_en": "Ammonia, anhydrous",
+    "tw_mgm3": 14.0,
+    "tw_ppm": 20.0,
+    "stel_mgm3": 36.0,
+    "stel_ppm": 50.0,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "7782-41-4": {
+    "name_en": "Fluorine",
+    "tw_mgm3": 1.58,
+    "tw_ppm": 1.0,
+    "stel_mgm3": 3.16,
+    "stel_ppm": 2.0,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "7783-07-5": {
+    "name_en": "Dihydrogen selenide",
+    "tw_mgm3": 0.07,
+    "tw_ppm": 0.02,
+    "stel_mgm3": 0.17,
+    "stel_ppm": 0.05,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "10035-10-6": {
+    "name_en": "Hydrogen bromide",
+    "tw_mgm3": null,
+    "tw_ppm": null,
+    "stel_mgm3": 6.7,
+    "stel_ppm": 2.0,
+    "skin": false,
+    "directive": "2000/39/EC"
+  },
+  "26628-22-8": {
+    "name_en": "Sodium azide",
+    "tw_mgm3": 0.1,
+    "tw_ppm": null,
+    "stel_mgm3": 0.3,
+    "stel_ppm": null,
+    "skin": true,
+    "directive": "2000/39/EC"
+  },
+  "34590-94-8": {
+    "name_en": "(2-Methoxymethylethoxy)-propanol",
+    "tw_mgm3": 308.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": true,
+    "directive": "2000/39/EC"
+  },
+  "54-11-5": {
+    "name_en": "Nicotine",
+    "tw_mgm3": 0.5,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": true,
+    "directive": "2006/15/EC"
+  },
+  "64-18-6": {
+    "name_en": "Formic acid",
+    "tw_mgm3": 9.0,
+    "tw_ppm": 5.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2006/15/EC"
+  },
+  "67-56-1": {
+    "name_en": "Methanol",
+    "tw_mgm3": 260.0,
+    "tw_ppm": 200.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": true,
+    "directive": "2006/15/EC"
+  },
+  "75-00-3": {
+    "name_en": "Chloroethane",
+    "tw_mgm3": 268.0,
+    "tw_ppm": 100.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2006/15/EC"
+  },
+  "75-05-8": {
+    "name_en": "Acetonitrile",
+    "tw_mgm3": 70.0,
+    "tw_ppm": 40.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": true,
+    "directive": "2006/15/EC"
+  },
+  "78-78-4": {
+    "name_en": "Isopentane",
+    "tw_mgm3": 3000.0,
+    "tw_ppm": 1000.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2006/15/EC"
+  },
+  "98-95-3": {
+    "name_en": "Nitrobenzene",
+    "tw_mgm3": 1.0,
+    "tw_ppm": 0.2,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": true,
+    "directive": "2006/15/EC"
+  },
+  "108-46-3": {
+    "name_en": "Resorcinol",
+    "tw_mgm3": 45.0,
+    "tw_ppm": 10.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": true,
+    "directive": "2006/15/EC"
+  },
+  "108-88-3": {
+    "name_en": "Toluene",
+    "tw_mgm3": 192.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 384.0,
+    "stel_ppm": 100.0,
+    "skin": true,
+    "directive": "2006/15/EC"
+  },
+  "109-66-0": {
+    "name_en": "Pentane",
+    "tw_mgm3": 3000.0,
+    "tw_ppm": 1000.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2006/15/EC"
+  },
+  "109-89-7": {
+    "name_en": "Diethylamine",
+    "tw_mgm3": 15.0,
+    "tw_ppm": 5.0,
+    "stel_mgm3": 30.0,
+    "stel_ppm": 10.0,
+    "skin": false,
+    "directive": "2006/15/EC"
+  },
+  "110-54-3": {
+    "name_en": "n-Hexane",
+    "tw_mgm3": 72.0,
+    "tw_ppm": 20.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2006/15/EC"
+  },
+  "110-82-7": {
+    "name_en": "Cyclohexane",
+    "tw_mgm3": 700.0,
+    "tw_ppm": 200.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2006/15/EC"
+  },
+  "110-91-8": {
+    "name_en": "Morpholine",
+    "tw_mgm3": 36.0,
+    "tw_ppm": 10.0,
+    "stel_mgm3": 72.0,
+    "stel_ppm": 20.0,
+    "skin": false,
+    "directive": "2006/15/EC"
+  },
+  "111-77-3": {
+    "name_en": "2-(2-Methoxyethoxy)ethanol",
+    "tw_mgm3": 50.1,
+    "tw_ppm": 10.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": true,
+    "directive": "2006/15/EC"
+  },
+  "112-34-5": {
+    "name_en": "2-(2-Butoxyethoxy)ethanol",
+    "tw_mgm3": 67.5,
+    "tw_ppm": 10.0,
+    "stel_mgm3": 101.2,
+    "stel_ppm": 15.0,
+    "skin": false,
+    "directive": "2006/15/EC"
+  },
+  "124-38-9": {
+    "name_en": "Carbon dioxide",
+    "tw_mgm3": 9000.0,
+    "tw_ppm": 5000.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2006/15/EC"
+  },
+  "141-43-5": {
+    "name_en": "2-Aminoethanol",
+    "tw_mgm3": 2.5,
+    "tw_ppm": 1.0,
+    "stel_mgm3": 7.6,
+    "stel_ppm": 3.0,
+    "skin": true,
+    "directive": "2006/15/EC"
+  },
+  "144-62-7": {
+    "name_en": "Oxalic acid",
+    "tw_mgm3": 1.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2006/15/EC"
+  },
+  "420-04-2": {
+    "name_en": "Cyanamide",
+    "tw_mgm3": 1.0,
+    "tw_ppm": 0.58,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": true,
+    "directive": "2006/15/EC"
+  },
+  "463-82-1": {
+    "name_en": "Neopentane",
+    "tw_mgm3": 3000.0,
+    "tw_ppm": 1000.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2006/15/EC"
+  },
+  "1314-56-3": {
+    "name_en": "Diphosphorus pentaoxide",
+    "tw_mgm3": 1.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2006/15/EC"
+  },
+  "1314-80-3": {
+    "name_en": "Diphosphorus pentasulphide",
+    "tw_mgm3": 1.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2006/15/EC"
+  },
+  "7697-37-2": {
+    "name_en": "Nitric acid",
+    "tw_mgm3": 2.6,
+    "tw_ppm": 1.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2006/15/EC"
+  },
+  "7726-95-6": {
+    "name_en": "Bromine",
+    "tw_mgm3": 0.7,
+    "tw_ppm": 0.1,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2006/15/EC"
+  },
+  "7782-50-5": {
+    "name_en": "Chlorine",
+    "tw_mgm3": 1.5,
+    "tw_ppm": 0.5,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2006/15/EC"
+  },
+  "7803-51-2": {
+    "name_en": "Phosphine",
+    "tw_mgm3": 0.14,
+    "tw_ppm": 0.1,
+    "stel_mgm3": 0.28,
+    "stel_ppm": 0.2,
+    "skin": false,
+    "directive": "2006/15/EC"
+  },
+  "8003-34-7": {
+    "name_en": "Pyrethrum (purified of sensitising lactones)",
+    "tw_mgm3": 1.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2006/15/EC"
+  },
+  "10026-13-8": {
+    "name_en": "Phosphorus pentachloride",
+    "tw_mgm3": 1.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2006/15/EC"
+  },
+  "68-12-2": {
+    "name_en": "N,N Dimethylformamide",
+    "tw_mgm3": 15.0,
+    "tw_ppm": 5.0,
+    "stel_mgm3": 30.0,
+    "stel_ppm": 10.0,
+    "skin": true,
+    "directive": "2009/161/EU"
+  },
+  "75-15-0": {
+    "name_en": "Carbon disulphide",
+    "tw_mgm3": 15.0,
+    "tw_ppm": 5.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": true,
+    "directive": "2009/161/EU"
+  },
+  "80-05-7": {
+    "name_en": "Bisphenol A (inhalable dust)",
+    "tw_mgm3": 10.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2009/161/EU, 2017/164/EU"
+  },
+  "80-62-6": {
+    "name_en": "Methyl methacrylate",
+    "tw_mgm3": null,
+    "tw_ppm": 50.0,
+    "stel_mgm3": null,
+    "stel_ppm": 100.0,
+    "skin": false,
+    "directive": "2009/161/EU"
+  },
+  "96-33-3": {
+    "name_en": "Methylacrylate",
+    "tw_mgm3": 18.0,
+    "tw_ppm": 5.0,
+    "stel_mgm3": 36.0,
+    "stel_ppm": 10.0,
+    "skin": false,
+    "directive": "2009/161/EU"
+  },
+  "108-05-4": {
+    "name_en": "Vinyl acetate",
+    "tw_mgm3": 17.6,
+    "tw_ppm": 5.0,
+    "stel_mgm3": 35.2,
+    "stel_ppm": 10.0,
+    "skin": false,
+    "directive": "2009/161/EU"
+  },
+  "109-86-4": {
+    "name_en": "2-Methoxyethanol",
+    "tw_mgm3": null,
+    "tw_ppm": 1.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": true,
+    "directive": "2009/161/EU"
+  },
+  "110-49-6": {
+    "name_en": "2-Methyoxyethyl acetate",
+    "tw_mgm3": null,
+    "tw_ppm": 1.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": true,
+    "directive": "2009/161/EU"
+  },
+  "110-80-5": {
+    "name_en": "2-Ethoxy ethanol",
+    "tw_mgm3": 8.0,
+    "tw_ppm": 2.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": true,
+    "directive": "2009/161/EU"
+  },
+  "111-15-9": {
+    "name_en": "2-Ethoxyethyl acetate",
+    "tw_mgm3": 11.0,
+    "tw_ppm": 2.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": true,
+    "directive": "2009/161/EU"
+  },
+  "123-91-1": {
+    "name_en": "",
+    "tw_mgm3": 1.4,
+    "tw_ppm": null,
+    "stel_mgm3": 73.0,
+    "stel_ppm": 20.0,
+    "skin": false,
+    "directive": "2009/161/EU"
+  },
+  "140-88-5": {
+    "name_en": "Ethylacrylate",
+    "tw_mgm3": 21.0,
+    "tw_ppm": 5.0,
+    "stel_mgm3": 42.0,
+    "stel_ppm": 10.0,
+    "skin": false,
+    "directive": "2009/161/EU"
+  },
+  "624-83-9": {
+    "name_en": "Methylisocyanate",
+    "tw_mgm3": null,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": 0.02,
+    "skin": false,
+    "directive": "2009/161/EU"
+  },
+  "872-50-4": {
+    "name_en": "n-Methyl-2-pyrrolidone",
+    "tw_mgm3": 40.0,
+    "tw_ppm": 10.0,
+    "stel_mgm3": 80.0,
+    "stel_ppm": 20.0,
+    "skin": true,
+    "directive": "2009/161/EU"
+  },
+  "1634-04-4": {
+    "name_en": "Tertiary-butyl-methyl ether",
+    "tw_mgm3": 183.5,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 367.0,
+    "stel_ppm": 100.0,
+    "skin": false,
+    "directive": "2009/161/EU"
+  },
+  "7664-93-9": {
+    "name_en": "Sulphuric acid (mist) (",
+    "tw_mgm3": 8.0,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": 9.0,
+    "skin": false,
+    "directive": "2009/161/EU"
+  },
+  "7783-06-4": {
+    "name_en": "Hydrogen sulphide",
+    "tw_mgm3": 7.0,
+    "tw_ppm": 5.0,
+    "stel_mgm3": 14.0,
+    "stel_ppm": 10.0,
+    "skin": false,
+    "directive": "2009/161/EU"
+  },
+  "55-63-0": {
+    "name_en": "Glycerol trinitrate",
+    "tw_mgm3": 0.095,
+    "tw_ppm": 0.01,
+    "stel_mgm3": 0.19,
+    "stel_ppm": 0.02,
+    "skin": true,
+    "directive": "2017/164/EU"
+  },
+  "56-23-5": {
+    "name_en": "Carbon tetrachloride; Tetra",
+    "tw_mgm3": 6.4,
+    "tw_ppm": 1.0,
+    "stel_mgm3": 32.0,
+    "stel_ppm": 5.0,
+    "skin": true,
+    "directive": "2017/164/EU"
+  },
+  "61-82-5": {
+    "name_en": "Amitrole",
+    "tw_mgm3": 0.2,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2017/164/EU"
+  },
+  "64-19-7": {
+    "name_en": "Acetic acid",
+    "tw_mgm3": 25.0,
+    "tw_ppm": 10.0,
+    "stel_mgm3": 50.0,
+    "stel_ppm": 20.0,
+    "skin": false,
+    "directive": "2017/164/EU"
+  },
+  "74-90-8": {
+    "name_en": "Hydrogen cyanide",
+    "tw_mgm3": 1.0,
+    "tw_ppm": 0.9,
+    "stel_mgm3": 5.0,
+    "stel_ppm": 4.5,
+    "skin": true,
+    "directive": "2017/164/EU"
+  },
+  "75-09-2": {
+    "name_en": "Methylene chloride; Dichlo",
+    "tw_mgm3": 353.0,
+    "tw_ppm": 100.0,
+    "stel_mgm3": 706.0,
+    "stel_ppm": 200.0,
+    "skin": true,
+    "directive": "2017/164/EU"
+  },
+  "75-35-4": {
+    "name_en": "Vinylidene chloride; 1,1-Di",
+    "tw_mgm3": 8.0,
+    "tw_ppm": 2.0,
+    "stel_mgm3": 20.0,
+    "stel_ppm": 5.0,
+    "skin": false,
+    "directive": "2017/164/EU"
+  },
+  "78-10-4": {
+    "name_en": "Tetraethyl orthosilicate",
+    "tw_mgm3": 44.0,
+    "tw_ppm": 5.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2017/164/EU"
+  },
+  "79-10-7": {
+    "name_en": "Acrylic acid; Prop-2-enoic",
+    "tw_mgm3": 29.0,
+    "tw_ppm": 10.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2017/164/EU"
+  },
+  "79-24-3": {
+    "name_en": "Nitroethane",
+    "tw_mgm3": 62.0,
+    "tw_ppm": 20.0,
+    "stel_mgm3": 312.0,
+    "stel_ppm": 100.0,
+    "skin": true,
+    "directive": "2017/164/EU"
+  },
+  "101-84-8": {
+    "name_en": "Diphenyl ether",
+    "tw_mgm3": 7.0,
+    "tw_ppm": 1.0,
+    "stel_mgm3": 14.0,
+    "stel_ppm": 2.0,
+    "skin": false,
+    "directive": "2017/164/EU"
+  },
+  "104-76-7": {
+    "name_en": "2-ethylhexan-1-ol",
+    "tw_mgm3": 5.4,
+    "tw_ppm": 1.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2017/164/EU"
+  },
+  "107-02-8": {
+    "name_en": "Acrolein; Acrylaldehyde;",
+    "tw_mgm3": 0.05,
+    "tw_ppm": 0.02,
+    "stel_mgm3": 0.12,
+    "stel_ppm": 0.05,
+    "skin": false,
+    "directive": "2017/164/EU"
+  },
+  "107-31-3": {
+    "name_en": "Methyl formate",
+    "tw_mgm3": 125.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 250.0,
+    "stel_ppm": 100.0,
+    "skin": true,
+    "directive": "2017/164/EU"
+  },
+  "110-65-6": {
+    "name_en": "But-2-yne-1,4-diol",
+    "tw_mgm3": 0.5,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2017/164/EU"
+  },
+  "127-18-4": {
+    "name_en": "Tetrachloroethylene",
+    "tw_mgm3": 138.0,
+    "tw_ppm": 20.0,
+    "stel_mgm3": 275.0,
+    "stel_ppm": 40.0,
+    "skin": true,
+    "directive": "2017/164/EU"
+  },
+  "141-78-6": {
+    "name_en": "Ethyl acetate",
+    "tw_mgm3": 734.0,
+    "tw_ppm": 200.0,
+    "stel_mgm3": 1.0,
+    "stel_ppm": 468.0,
+    "skin": false,
+    "directive": "2017/164/EU"
+  },
+  "143-33-9": {
+    "name_en": "Sodium cyanide",
+    "tw_mgm3": 1.0,
+    "tw_ppm": null,
+    "stel_mgm3": 5.0,
+    "stel_ppm": null,
+    "skin": true,
+    "directive": "2017/164/EU"
+  },
+  "151-50-8": {
+    "name_en": "Potassium cyanide",
+    "tw_mgm3": 1.0,
+    "tw_ppm": null,
+    "stel_mgm3": 5.0,
+    "stel_ppm": null,
+    "skin": true,
+    "directive": "2017/164/EU"
+  },
+  "431-03-8": {
+    "name_en": "Diacetyl; Butanedione",
+    "tw_mgm3": 0.07,
+    "tw_ppm": 0.02,
+    "stel_mgm3": 0.36,
+    "stel_ppm": 0.1,
+    "skin": false,
+    "directive": "2017/164/EU"
+  },
+  "630-08-0": {
+    "name_en": "Carbon monoxide",
+    "tw_mgm3": 23.0,
+    "tw_ppm": 20.0,
+    "stel_mgm3": 117.0,
+    "stel_ppm": 100.0,
+    "skin": false,
+    "directive": "2017/164/EU"
+  },
+  "1305-62-0": {
+    "name_en": "Calcium dihydroxide 1(9)",
+    "tw_mgm3": null,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2017/164/EU"
+  },
+  "1305-78-8": {
+    "name_en": "Calcium oxide 1(9)",
+    "tw_mgm3": null,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2017/164/EU"
+  },
+  "7446-09-5": {
+    "name_en": "Sulphur dioxide",
+    "tw_mgm3": 1.3,
+    "tw_ppm": 0.5,
+    "stel_mgm3": 2.7,
+    "stel_ppm": 1.0,
+    "skin": false,
+    "directive": "2017/164/EU"
+  },
+  "7580-67-8": {
+    "name_en": "Lithium hydride",
+    "tw_mgm3": null,
+    "tw_ppm": null,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2017/164/EU"
+  },
+  "10102-43-9": {
+    "name_en": "Nitrogen monoxide",
+    "tw_mgm3": 2.5,
+    "tw_ppm": 2.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2017/164/EU"
+  },
+  "10102-44-0": {
+    "name_en": "Nitrogen dioxide",
+    "tw_mgm3": 0.96,
+    "tw_ppm": 0.5,
+    "stel_mgm3": 1.91,
+    "stel_ppm": 1.0,
+    "skin": false,
+    "directive": "2017/164/EU"
+  },
+  "61788-32-7": {
+    "name_en": "Terphenyl, hydrogenated",
+    "tw_mgm3": 19.0,
+    "tw_ppm": 2.0,
+    "stel_mgm3": 48.0,
+    "stel_ppm": 5.0,
+    "skin": false,
+    "directive": "2017/164/EU"
+  },
+  "62-53-3": {
+    "name_en": "Aniline (8)",
+    "tw_mgm3": 7.74,
+    "tw_ppm": 2.0,
+    "stel_mgm3": 19.35,
+    "stel_ppm": 5.0,
+    "skin": true,
+    "directive": "2019/1831/EU"
+  },
+  "74-87-3": {
+    "name_en": "Chlorome",
+    "tw_mgm3": 42.0,
+    "tw_ppm": 20.0,
+    "stel_mgm3": null,
+    "stel_ppm": null,
+    "skin": false,
+    "directive": "2019/1831/EU"
+  },
+  "75-50-3": {
+    "name_en": "Trimethyla",
+    "tw_mgm3": 4.9,
+    "tw_ppm": 2.0,
+    "stel_mgm3": 12.5,
+    "stel_ppm": 5.0,
+    "skin": false,
+    "directive": "2019/1831/EU"
+  },
+  "105-46-4": {
+    "name_en": "sec-Butyl",
+    "tw_mgm3": 241.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 723.0,
+    "stel_ppm": 150.0,
+    "skin": false,
+    "directive": "2019/1831/EU"
+  },
+  "106-49-0": {
+    "name_en": "4-aminoto",
+    "tw_mgm3": 4.46,
+    "tw_ppm": 1.0,
+    "stel_mgm3": 8.92,
+    "stel_ppm": 2.0,
+    "skin": true,
+    "directive": "2019/1831/EU"
+  },
+  "110-19-0": {
+    "name_en": "Isobutyl",
+    "tw_mgm3": 241.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 723.0,
+    "stel_ppm": 150.0,
+    "skin": false,
+    "directive": "2019/1831/EU"
+  },
+  "123-51-3": {
+    "name_en": "Isoamyl al",
+    "tw_mgm3": 18.0,
+    "tw_ppm": 5.0,
+    "stel_mgm3": 37.0,
+    "stel_ppm": 10.0,
+    "skin": false,
+    "directive": "2019/1831/EU"
+  },
+  "123-86-4": {
+    "name_en": "n-Butyl",
+    "tw_mgm3": 241.0,
+    "tw_ppm": 50.0,
+    "stel_mgm3": 723.0,
+    "stel_ppm": 150.0,
+    "skin": false,
+    "directive": "2019/1831/EU"
+  },
+  "10025-87-3": {
+    "name_en": "Phosphoryl trichloride",
+    "tw_mgm3": 0.064,
+    "tw_ppm": 0.01,
+    "stel_mgm3": 0.12,
+    "stel_ppm": 0.02,
+    "skin": false,
+    "directive": "2019/1831/EU"
+  }
+}

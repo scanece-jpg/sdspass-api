@@ -324,6 +324,31 @@ if __name__ == "__main__":
     OUT_PATH.write_text(json.dumps(db, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"\nKaydedildi: {OUT_PATH}")
 
+    # annex6_meta.json otomatik güncelle
+    from collections import Counter
+    from datetime import date
+    atp_cnt: Counter = Counter()
+    for v in db.values():
+        if "_alias" not in v:
+            atp_cnt[v.get("atp", "?")] += 1
+    latest_atp = max((k for k in atp_cnt if re.match(r'ATP\d+', k, re.I)),
+                     key=lambda x: int(re.search(r'\d+', x).group()), default="?")
+    meta = {
+        "dataset": "CLP Annex VI (Regulation (EC) No 1272/2008, Table 3.1)",
+        "latest_atp": latest_atp,
+        "substances_total": real,
+        "aliases_total": alias,
+        "last_updated": date.today().isoformat(),
+        "atp_coverage": dict(sorted(atp_cnt.items())),
+        "notes": [
+            "ATP değeri birden fazla olan maddelerde son ATP esas alınır.",
+            "TR SEA Ek-6 maddelerinin büyük çoğunluğunda ATP alanı boş; KKDİK Ek-6 tablosuna dayanır.",
+        ]
+    }
+    meta_path = OUT_PATH.parent / "annex6_meta.json"
+    meta_path.write_text(json.dumps(meta, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"Kaydedildi: {meta_path}")
+
     # Örnek çıktı
     print("\n--- Örnek (NaOH 1310-73-2) ---")
     if "1310-73-2" in db:

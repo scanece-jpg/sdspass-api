@@ -121,6 +121,45 @@ _CATALOGUE: dict[str, tuple[Path, str, list[str]]] = {
     ),
 }
 
+_ZIP_PATH = _KD / "tr" / "7.5.23694-Ek.zip"
+
+# ZIP içindeki KKDİK ekleri — (iç dosya adı, açıklama, anahtar kelimeler)
+_ZIP_CATALOGUE: dict[str, tuple[str, str, list[str]]] = {
+    "kkdik_ek1": (
+        "KKDİK_EK-01.docx",
+        "KKDİK Ek-1 — Genel hükümler ve tanımlar",
+        ["ek-1", "ek 1", "kkdik genel", "tanım", "kapsam"],
+    ),
+    "kkdik_ek2": (
+        "KKDİK_EK-02.docx",
+        "KKDİK Ek-2 — GBF/SDS hazırlama gereklilikleri",
+        ["ek-2", "ek 2", "gbf", "sds", "güvenlik bilgi formu",
+         "sds bölüm", "gbf bölüm", "sds içerik"],
+    ),
+    "kkdik_ek3": (
+        "KKDİK_EK-03.docx",
+        "KKDİK Ek-3 — Kayıttan muaf maddeler listesi",
+        ["ek-3", "ek 3", "muaf madde", "kayıt muaf", "exempt"],
+    ),
+    "kkdik_ek6": (
+        "KKDİK_EK-06.docx",
+        "KKDİK Ek-6 — SVHC kriterleri ve yetkilendirme",
+        ["ek-6", "ek 6", "svhc", "yetkilendirme", "authorization",
+         "çok endişe", "madde listesi"],
+    ),
+    "kkdik_ek7": (
+        "KKDİK_EK-07.docx",
+        "KKDİK Ek-7 — Kayıt için gerekli bilgiler (ton/yıl <10)",
+        ["ek-7", "ek 7", "kayıt bilgi", "tonaj", "10 ton"],
+    ),
+    "kkdik_ek17": (
+        "KKDİK_EK-17.docx",
+        "KKDİK Ek-17 — Belirli maddelerin kısıtlamaları",
+        ["ek-17", "ek 17", "kısıtlama", "restriction", "yasaklı madde",
+         "kullanım kısıt"],
+    ),
+}
+
 _MAX_CHARS = 12_000  # belge başına max karakter (~3K token)
 
 
@@ -168,24 +207,77 @@ def _read_docx(path: Path, max_chars: int = _MAX_CHARS) -> str:
         return f"[DOCX okunamadı: {e}]"
 
 
+def _read_docx_from_zip(zip_path: Path, inner_name: str, max_chars: int = _MAX_CHARS) -> str:
+    """
+    ZIP içindeki DOCX'ten metin çıkarır. Hiçbir dosyaya dokunmaz.
+    inner_name: "KKDİK_EK-02.docx" gibi — ZIP encoding sorununu
+    aşmak için EK numarasına göre eşleştirme yapılır.
+    """
+    import io
+    # ZIP dosya adları bozuk encoding ile kaydedilmiş olabilir.
+    # "EK-02" gibi sabit ASCII parçasına göre eşleştir.
+    ek_pattern = re.search(r"EK-(\d+)", inner_name, re.IGNORECASE)
+    ek_num = ek_pattern.group(1) if ek_pattern else None
+
+    try:
+        with zipfile.ZipFile(zip_path, "r") as outer:
+            # Önce tam eşleşme dene
+            names = outer.namelist()
+            matched = None
+            if inner_name in names:
+                matched = inner_name
+            elif ek_num:
+                # EK numarasına göre bul (encoding farkına karşın)
+                pattern = f"EK-{ek_num}.docx"
+                for n in names:
+                    if n.endswith(pattern) or n.endswith(f"EK-{ek_num.zfill(2)}.docx"):
+                        matched = n
+                        break
+            if not matched:
+                return f"[ZIP içinde bulunamadı: {inner_name}]"
+            docx_bytes = outer.read(matched)
+
+        with zipfile.ZipFile(io.BytesIO(docx_bytes), "r") as inner:
+            xml_bytes = inner.read("word/document.xml")
+        root = ET.fromstring(xml_bytes)
+        parts = []
+        for el in root.iter(f"{{{_DOCX_NS}}}t"):
+            if el.text:
+                parts.append(el.text)
+        return " ".join(parts)[:max_chars]
+    except Exception as e:
+        return f"[ZIP/DOCX okunamadı: {e}]"
+
+
 # ── Belge seçici ──────────────────────────────────────────────────────────────
 
 def _score(query_lower: str, keywords: list[str]) -> int:
     return sum(1 for kw in keywords if kw in query_lower)
 
 
-def select_docs(query: str, max_docs: int = 3) -> list[str]:
-    """Sorguya göre en alakalı max_docs belge anahtarını döner."""
+def select_docs(query: str, max_docs: int = 3) -> list[tuple[str, str]]:
+    """
+    Sorguya göre en alakalı max_docs belgeyi döner.
+    Her eleman: ("catalogue" | "zip", key)
+    """
     q = query.lower()
     scored = []
+
     for key, (path, _, keywords) in _CATALOGUE.items():
         if not path.exists():
             continue
         s = _score(q, keywords)
         if s > 0:
-            scored.append((s, key))
+            scored.append((s, "catalogue", key))
+
+    if _ZIP_PATH.exists():
+        for key, (_, _, keywords) in _ZIP_CATALOGUE.items():
+            s = _score(q, keywords)
+            if s > 0:
+                scored.append((s, "zip", key))
+
     scored.sort(reverse=True)
-    return [k for _, k in scored[:max_docs]]
+    return [(src, k) for _, src, k in scored[:max_docs]]
 
 
 # ── Bağlam bloğu üretici ─────────────────────────────────────────────────────
@@ -195,21 +287,26 @@ def build_context_blocks(query: str) -> list[dict]:
     Seçilen belgelerden metin çıkarır ve Anthropic Messages API
     text content bloklarını döner.
     """
-    keys = select_docs(query)
+    selections = select_docs(query)
     blocks: list[dict] = []
 
-    for key in keys:
-        path, desc, _ = _CATALOGUE[key]
-        if not path.exists():
-            continue
-
-        suffix = path.suffix.lower()
-        if suffix == ".pdf":
-            text = _read_pdf(path)
-        elif suffix == ".docx":
-            text = _read_docx(path)
-        else:
-            continue
+    for src, key in selections:
+        if src == "catalogue":
+            path, desc, _ = _CATALOGUE[key]
+            if not path.exists():
+                continue
+            suffix = path.suffix.lower()
+            if suffix == ".pdf":
+                text = _read_pdf(path)
+            elif suffix == ".docx":
+                text = _read_docx(path)
+            else:
+                continue
+        else:  # zip
+            if not _ZIP_PATH.exists():
+                continue
+            inner_name, desc, _ = _ZIP_CATALOGUE[key]
+            text = _read_docx_from_zip(_ZIP_PATH, inner_name)
 
         if text:
             blocks.append({

@@ -1903,21 +1903,34 @@ async def ai_chat(body: dict = Body(...)):
         raise HTTPException(status_code=400, detail="message alanı boş olamaz")
 
     # ── Sistem mesajı ────────────────────────────────────────────────────────
+    _kural = (
+        "\n\nKESİN KURAL: Yanıtlarında YALNIZCA sana sağlanan veriler ve aşağıdaki resmi "
+        "mevzuatı kullan:\n"
+        "  - SEA Ek-6 / KKDİK Ek-6 (Türkiye harmonize sınıflandırma listesi)\n"
+        "  - CLP Annex VI (ECHA ATP22, AB harmonize sınıflandırma)\n"
+        "  - KKDİK Yönetmeliği (REACH TR karşılığı)\n"
+        "  - SEA Yönetmeliği (CLP TR karşılığı)\n"
+        "  - ADR 2025 (tehlikeli madde taşımacılığı)\n"
+        "Eğer sana verilen veride veya yukarıdaki mevzuatta bilgi yoksa, "
+        "'Bu madde/konu için veritabanında veya ilgili yönetmelikte bilgi bulunamadı.' "
+        "de. Genel kimya bilgine veya tahmine dayanma."
+    )
     if mode == "sds":
         system_prompt = (
-            "Sen bir Türk kimyasal güvenlik veri formu (GBF/SDS) uyumluluk uzmanısın. "
-            "KKDİK (REACH TR), SEA (CLP TR) ve ilgili AB/TR yönetmeliklerine göre "
-            "hazırlanmış SDS belgelerini inceleyerek eksik, hatalı veya uyumsuz bölümleri "
-            "Türkçe olarak raporlarsın. Yanıtların net, madde madde ve eylem odaklı olsun."
-        )
+            "Sen bir Türk kimyasal güvenlik veri formu (GBF/SDS) uyumluluk denetçisisin. "
+            "Sana sunulan SDS metnini ve madde verilerini, yalnızca KKDİK ve SEA yönetmelikleri "
+            "ile eklerindeki (Ek-1, Ek-2, Ek-6) zorunlu gerekliliklere göre değerlendirirsin. "
+            "Her bulguyu hangi yönetmelik maddesine aykırı olduğunu belirterek Türkçe raporlarsın. "
+            "Yanıtların net, madde madde ve eylem odaklı olsun."
+        ) + _kural
     else:
         system_prompt = (
-            "Sen SDSPass sisteminin kimyasal veri asistanısın. "
-            "SEA Ek-6 (KKDİK Ek-6) ve ECHA CLP Annex VI verilerini bilerek "
-            "kullanıcıların sınıflandırma, H/P/EUH kodları, M-faktör, ATE ve SCL "
-            "sorularını Türkçe olarak yanıtlarsın. "
-            "Verdiğin bilgilerin kaynağını belirt (SEA Ek-6 / Annex VI / CLP)."
-        )
+            "Sen SDSPass sisteminin resmi veri doğrulama asistanısın. "
+            "Sana madde kaydı (JSON) veya soru geldiğinde, yalnızca o kayıttaki verilerden "
+            "ve aşağıdaki resmi mevzuattan hareketle yanıt verirsin. "
+            "Her yanıtta bilginin kaynağını mutlaka belirt: "
+            "'SEA Ek-6 kaydına göre…' veya 'CLP Annex VI kaydına göre…' gibi."
+        ) + _kural
 
     # ── Kullanıcı içeriği ────────────────────────────────────────────────────
     user_parts: list[dict] = []

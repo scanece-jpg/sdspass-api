@@ -344,7 +344,7 @@ def _db_to_legacy(entry: dict) -> dict:
         'signal'         : '',
         'pictograms'     : [],
         'hazards'        : hazards,
-        'suppl_hazards'  : [],
+        'suppl_hazards'  : entry.get('euh_codes', []),
         'm_factors'      : entry.get('m_factors', {}),
         'scl'            : [_scl_op_to_cmin_cmax(s) for s in entry.get('scl_limits', [])],
         'sea_ek6'        : False,

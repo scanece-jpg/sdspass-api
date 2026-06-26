@@ -8,6 +8,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 import sys, os, json
+from dotenv import load_dotenv
+load_dotenv()
 
 # Data yolu — deploy'da /app/data, lokalde /home/claude
 DATA_DIR = os.path.join(os.path.dirname(__file__), '..', 'data')

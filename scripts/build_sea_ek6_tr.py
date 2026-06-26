@@ -12,7 +12,7 @@ import zipfile
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
-DOCX_PATH = Path(__file__).parent.parent / "sds-knowledge" / "sea_ek6_l-ste_15062020-20200618142549.docx"
+DOCX_PATH = Path(__file__).parent.parent / "sds-knowledge" / "tr" / "sea_ek6_l-ste_15062020-20200618142549.docx"
 OUT_PATH  = Path(__file__).parent.parent / "data" / "sea_ek6_tr.json"
 
 NS = {'w': 'http://schemas.openxmlformats.org/wordprocessingml/2006/main'}

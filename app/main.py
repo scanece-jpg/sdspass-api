@@ -1933,7 +1933,13 @@ async def ai_chat(body: dict = Body(...)):
         ) + _kural
 
     # ── Kullanıcı içeriği ────────────────────────────────────────────────────
+    from app.services.knowledge_service import build_context_blocks
+
     user_parts: list[dict] = []
+
+    # sds-knowledge/ dosyalarından ilgili belgeler (sorguya göre seçilir)
+    kb_blocks = build_context_blocks(message)
+    user_parts.extend(kb_blocks)
 
     if cas and mode == "data":
         from app.services.substance_lookup import lookup_substance
@@ -1953,6 +1959,9 @@ async def ai_chat(body: dict = Body(...)):
 
     user_parts.append({"type": "text", "text": message})
 
+    # Kaç belge seçildi — yanıtta bilgi olarak dön
+    kb_count = len(kb_blocks)
+
     # ── API çağrısı ──────────────────────────────────────────────────────────
     client = _anthropic.Anthropic(api_key=api_key)
     resp = client.messages.create(
@@ -1967,6 +1976,7 @@ async def ai_chat(body: dict = Body(...)):
         "reply": reply,
         "mode":  mode,
         "model": resp.model,
+        "docs_used":     kb_count,
         "input_tokens":  resp.usage.input_tokens,
         "output_tokens": resp.usage.output_tokens,
     }

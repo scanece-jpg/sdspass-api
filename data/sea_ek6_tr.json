@@ -20,7 +20,7 @@
       },
       {
         "class": "Basınç Gaz",
-        "h_code": ""
+        "h_code": "H280"
       }
     ],
     "scl_limits": [],
@@ -363,11 +363,11 @@
       },
       {
         "class": "Akut Tok. 2",
-        "h_code": "H314"
+        "h_code": "H300"
       },
       {
         "class": "Cilt Aşnd. 1B",
-        "h_code": ""
+        "h_code": "H314"
       }
     ],
     "scl_limits": [],
@@ -902,11 +902,11 @@
       },
       {
         "class": "Akut Tok. 3",
-        "h_code": "H372"
+        "h_code": "H331"
       },
       {
         "class": "BHOT Tekrar.Mrz. 1",
-        "h_code": ""
+        "h_code": "H372"
       }
     ],
     "scl_limits": [],
@@ -4099,11 +4099,11 @@
       },
       {
         "class": "Cilt Aşnd. 1B",
-        "h_code": "H400"
+        "h_code": "H314"
       },
       {
         "class": "Sucul Akut 1",
-        "h_code": ""
+        "h_code": "H400"
       }
     ],
     "scl_limits": [],
@@ -4175,11 +4175,11 @@
       },
       {
         "class": "Akut Tok. 2",
-        "h_code": "H314"
+        "h_code": "H330"
       },
       {
         "class": "Cilt Aşnd. 1B",
-        "h_code": ""
+        "h_code": "H314"
       }
     ],
     "scl_limits": [
@@ -4315,11 +4315,11 @@
       },
       {
         "class": "Akut Tok. 4",
-        "h_code": "H302"
+        "h_code": "H312"
       },
       {
         "class": "Akut Tok. 4",
-        "h_code": ""
+        "h_code": "H302"
       }
     ],
     "scl_limits": [],
@@ -5107,7 +5107,7 @@
       },
       {
         "class": "Basınç Gaz",
-        "h_code": ""
+        "h_code": "H280"
       }
     ],
     "scl_limits": [],
@@ -5230,11 +5230,11 @@
       },
       {
         "class": "Akut Tok. 2",
-        "h_code": "H314"
+        "h_code": "H330"
       },
       {
         "class": "Cilt Aşnd. 1A",
-        "h_code": ""
+        "h_code": "H314"
       }
     ],
     "scl_limits": [],
@@ -5705,11 +5705,11 @@
       },
       {
         "class": "BHOT Tekrar.Mrz. 2",
-        "h_code": "H400"
+        "h_code": "H373"
       },
       {
         "class": "Sucul Akut 1",
-        "h_code": ""
+        "h_code": "H400"
       }
     ],
     "scl_limits": [],
@@ -12817,11 +12817,11 @@
       },
       {
         "class": "Cilt Aşnd. 1B",
-        "h_code": "H400"
+        "h_code": "H314"
       },
       {
         "class": "Sucul Akut 1",
-        "h_code": ""
+        "h_code": "H400"
       }
     ],
     "scl_limits": [],
@@ -13981,11 +13981,11 @@
       },
       {
         "class": "Sucul Akut 1",
-        "h_code": "H410"
+        "h_code": "H400"
       },
       {
         "class": "Sucul Kronik 1",
-        "h_code": ""
+        "h_code": "H410"
       }
     ],
     "scl_limits": [],
@@ -15618,19 +15618,19 @@
       },
       {
         "class": "Göz Tah. 2",
-        "h_code": "H335"
+        "h_code": "H319"
       },
       {
         "class": "BHOT Tek Mrz. 3",
-        "h_code": "H315"
+        "h_code": "H335"
       },
       {
         "class": "Cilt Tah. 2",
-        "h_code": "H400"
+        "h_code": "H315"
       },
       {
         "class": "Sucul Akut 1",
-        "h_code": ""
+        "h_code": "H400"
       }
     ],
     "scl_limits": [],
@@ -16361,15 +16361,15 @@
       },
       {
         "class": "Akut Tok. 2",
-        "h_code": "H314"
+        "h_code": "H330"
       },
       {
         "class": "Cilt Aşnd. 1B",
-        "h_code": "H400"
+        "h_code": "H314"
       },
       {
         "class": "Sucul Akut 1",
-        "h_code": ""
+        "h_code": "H400"
       }
     ],
     "scl_limits": [],
@@ -22850,15 +22850,15 @@
       },
       {
         "class": "BHOT Tekrar.Mrz. 2",
-        "h_code": "H400"
+        "h_code": "H373"
       },
       {
         "class": "Sucul Akut 1",
-        "h_code": "H410"
+        "h_code": "H400"
       },
       {
         "class": "Sucul Kronik 1",
-        "h_code": ""
+        "h_code": "H410"
       }
     ],
     "scl_limits": [],
@@ -26605,7 +26605,7 @@
       },
       {
         "class": "Basınç Gaz",
-        "h_code": ""
+        "h_code": "H280"
       }
     ],
     "scl_limits": [],
@@ -26633,7 +26633,7 @@
       },
       {
         "class": "Basınç Gaz",
-        "h_code": ""
+        "h_code": "H280"
       }
     ],
     "scl_limits": [],
@@ -26661,7 +26661,7 @@
       },
       {
         "class": "Basınç Gaz",
-        "h_code": ""
+        "h_code": "H280"
       }
     ],
     "scl_limits": [],
@@ -26692,7 +26692,7 @@
       },
       {
         "class": "Basınç Gaz",
-        "h_code": ""
+        "h_code": "H280"
       }
     ],
     "scl_limits": [],
@@ -27111,7 +27111,7 @@
       },
       {
         "class": "Basınç Gaz",
-        "h_code": ""
+        "h_code": "H280"
       }
     ],
     "scl_limits": [],
@@ -27148,7 +27148,7 @@
       },
       {
         "class": "Basınç Gaz",
-        "h_code": ""
+        "h_code": "H280"
       }
     ],
     "scl_limits": [],
@@ -27263,7 +27263,7 @@
       },
       {
         "class": "Basınç Gaz",
-        "h_code": ""
+        "h_code": "H280"
       }
     ],
     "scl_limits": [],
@@ -27291,7 +27291,7 @@
       },
       {
         "class": "Basınç Gaz",
-        "h_code": ""
+        "h_code": "H280"
       }
     ],
     "scl_limits": [],
@@ -29366,35 +29366,35 @@
       },
       {
         "class": "Akut Tok. 3",
-        "h_code": "H301"
+        "h_code": "H331"
       },
       {
         "class": "Akut Tok. 3",
-        "h_code": "H373"
+        "h_code": "H301"
       },
       {
         "class": "BHOT Tekrar.Mrz. 2",
-        "h_code": "H319"
+        "h_code": "H373"
       },
       {
         "class": "Göz Tah. 2",
-        "h_code": "H335"
+        "h_code": "H319"
       },
       {
         "class": "BHOT Tek Mrz. 3",
-        "h_code": "H315"
+        "h_code": "H335"
       },
       {
         "class": "Cilt Tah. 2",
-        "h_code": "H400"
+        "h_code": "H315"
       },
       {
         "class": "Sucul Akut 1",
-        "h_code": "H420"
+        "h_code": "H400"
       },
       {
         "class": "Ozon 1",
-        "h_code": ""
+        "h_code": "H420"
       }
     ],
     "scl_limits": [],
@@ -33830,7 +33830,7 @@
       },
       {
         "class": "Basınç Gaz",
-        "h_code": ""
+        "h_code": "H280"
       }
     ],
     "scl_limits": [],
@@ -33858,7 +33858,7 @@
       },
       {
         "class": "Basınç Gaz",
-        "h_code": ""
+        "h_code": "H280"
       }
     ],
     "scl_limits": [],
@@ -33886,7 +33886,7 @@
       },
       {
         "class": "Basınç Gaz",
-        "h_code": ""
+        "h_code": "H280"
       }
     ],
     "scl_limits": [],
@@ -33953,27 +33953,27 @@
       },
       {
         "class": "Kans. 1B",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": "H331"
+        "h_code": "H340"
       },
       {
         "class": "Akut Tok. 3",
-        "h_code": "H319"
+        "h_code": "H331"
       },
       {
         "class": "Göz Tah. 2",
-        "h_code": "H335"
+        "h_code": "H319"
       },
       {
         "class": "BHOT Tek Mrz. 3",
-        "h_code": "H315"
+        "h_code": "H335"
       },
       {
         "class": "Cilt Tah. 2",
-        "h_code": ""
+        "h_code": "H315"
       }
     ],
     "scl_limits": [],
@@ -65834,15 +65834,15 @@
       },
       {
         "class": "Akut Tok. 3",
-        "h_code": "H400"
+        "h_code": "H331"
       },
       {
         "class": "Sucul Akut 1",
-        "h_code": "H410"
+        "h_code": "H400"
       },
       {
         "class": "Sucul Kronik 1",
-        "h_code": ""
+        "h_code": "H410"
       }
     ],
     "scl_limits": [],
@@ -72720,15 +72720,15 @@
       },
       {
         "class": "BHOT Tek Mrz. 3",
-        "h_code": "H315"
+        "h_code": "H335"
       },
       {
         "class": "Cilt Tah. 2",
-        "h_code": "H318"
+        "h_code": "H315"
       },
       {
         "class": "Göz Hsr. 1",
-        "h_code": ""
+        "h_code": "H318"
       }
     ],
     "scl_limits": [
@@ -104762,11 +104762,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -104800,11 +104800,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -104837,11 +104837,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -104874,11 +104874,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -104912,11 +104912,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -104950,11 +104950,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -104988,11 +104988,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -105026,11 +105026,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -105064,11 +105064,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -105102,11 +105102,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -105140,11 +105140,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -105177,11 +105177,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -105215,11 +105215,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -105252,11 +105252,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -105290,11 +105290,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -105328,11 +105328,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -105366,11 +105366,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -105404,11 +105404,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -105442,11 +105442,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -105480,11 +105480,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -105518,11 +105518,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -105556,11 +105556,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -105594,11 +105594,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -105631,11 +105631,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -105669,11 +105669,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -105707,11 +105707,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -105745,11 +105745,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -105783,11 +105783,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -105821,11 +105821,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -105858,11 +105858,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -105895,11 +105895,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -105932,11 +105932,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -105969,11 +105969,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -106007,11 +106007,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -106045,11 +106045,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Ürm. Sis.Tok. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -106083,11 +106083,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -106121,11 +106121,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -106159,11 +106159,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -106196,11 +106196,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -106234,11 +106234,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -106272,11 +106272,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Ürm. Sis.Tok. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -106310,11 +106310,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -106348,11 +106348,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -106384,11 +106384,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -106423,11 +106423,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -106461,11 +106461,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -106499,11 +106499,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -106537,11 +106537,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -106575,11 +106575,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -106613,11 +106613,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -106651,11 +106651,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -106688,11 +106688,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -106724,11 +106724,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -106762,11 +106762,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -106800,11 +106800,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -106838,11 +106838,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -106875,11 +106875,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -106912,11 +106912,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -106950,11 +106950,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -106988,11 +106988,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -107026,11 +107026,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -107064,11 +107064,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -107102,11 +107102,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -107140,11 +107140,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -107178,11 +107178,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -107215,11 +107215,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -107253,11 +107253,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -107291,11 +107291,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -107328,11 +107328,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -107365,11 +107365,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -107402,11 +107402,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -107440,11 +107440,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -107477,11 +107477,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -107513,11 +107513,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -107550,11 +107550,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -107587,11 +107587,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -107624,11 +107624,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -107661,11 +107661,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -107699,11 +107699,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -107737,11 +107737,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -107775,11 +107775,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -107812,11 +107812,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -107850,11 +107850,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -107888,11 +107888,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -107926,11 +107926,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -107964,11 +107964,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -108000,11 +108000,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -108037,11 +108037,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -108074,11 +108074,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -108111,11 +108111,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -108149,11 +108149,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -108186,11 +108186,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -108224,11 +108224,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -108262,11 +108262,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -108300,11 +108300,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -108338,11 +108338,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -108375,11 +108375,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -108413,11 +108413,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -108451,11 +108451,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -108488,11 +108488,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -108525,11 +108525,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -108563,11 +108563,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -108601,11 +108601,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -108639,11 +108639,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -108676,11 +108676,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -108714,11 +108714,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -108752,11 +108752,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -108790,11 +108790,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -108827,11 +108827,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -108864,11 +108864,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -108900,11 +108900,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -108938,11 +108938,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -108976,11 +108976,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -109014,6 +109014,10 @@
       {
         "class": "Kans. 1B",
         "h_code": "H350"
+      },
+      {
+        "class": "",
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -109047,6 +109051,10 @@
       {
         "class": "Kans. 1B",
         "h_code": "H350"
+      },
+      {
+        "class": "",
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -109080,11 +109088,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -109118,11 +109126,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -109156,11 +109164,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -109194,11 +109202,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -109231,11 +109239,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -109269,11 +109277,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -109307,11 +109315,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -109345,11 +109353,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -109382,11 +109390,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -109420,11 +109428,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -109458,11 +109466,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -109496,11 +109504,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -109533,11 +109541,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -109570,11 +109578,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -109608,11 +109616,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -109644,11 +109652,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -109680,11 +109688,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -109716,11 +109724,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -109752,11 +109760,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -109790,11 +109798,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -109828,11 +109836,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -109865,11 +109873,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -109902,11 +109910,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -109939,11 +109947,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -109976,11 +109984,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -110014,11 +110022,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -110052,11 +110060,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -110089,11 +110097,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -110126,11 +110134,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -110163,11 +110171,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -110201,11 +110209,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -110238,11 +110246,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -110275,11 +110283,11 @@
       },
       {
         "class": "Kans. 1A",
-        "h_code": "H340"
+        "h_code": "H350"
       },
       {
         "class": "Muta. 1B",
-        "h_code": ""
+        "h_code": "H340"
       }
     ],
     "scl_limits": [],

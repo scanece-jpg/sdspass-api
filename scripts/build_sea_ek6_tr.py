@@ -156,14 +156,27 @@ def _parse_scl(raw: str):
 # Sınıflandırma parse
 # ---------------------------------------------------------------------------
 
+_PRESS_GAS_TR = {'Basınç Gaz', 'Press. Gas'}
+
 def _parse_classification(class_raw: str, hcode_raw: str) -> list[dict]:
     classes = [l.strip() for l in class_raw.split('\n') if l.strip()]
     hcodes  = [l.strip() for l in hcode_raw.split('\n') if l.strip()]
-    length  = max(len(classes), len(hcodes))
+
+    # SEA Ek-6 Word belgesinde "Basınç Gaz" için H kodu sütununda H280
+    # yazılmaz (standart sayılır). Press. Gas pozisyonuna H280 enjekte et.
+    adjusted = list(hcodes)
+    for i, cls in enumerate(classes):
+        cls_clean = cls.rstrip('* ').strip()
+        if cls_clean in _PRESS_GAS_TR and i <= len(adjusted):
+            existing = adjusted[i].rstrip('* ').strip() if i < len(adjusted) else ''
+            if existing not in ('H280', 'H281'):
+                adjusted.insert(i, 'H280')
+
+    length  = max(len(classes), len(adjusted))
     result  = []
     for i in range(length):
         cls = classes[i] if i < len(classes) else ''
-        hc  = hcodes[i]  if i < len(hcodes)  else ''
+        hc  = adjusted[i] if i < len(adjusted) else ''
         cls_ast = 1 if cls.endswith('*') else 0
         hc_ast  = len(re.search(r'\*+$', hc).group()) if re.search(r'\*+$', hc) else 0
         cls = cls.rstrip('* ').strip()

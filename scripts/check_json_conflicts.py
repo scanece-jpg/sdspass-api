@@ -305,10 +305,13 @@ if __name__ == "__main__":
                         help="Her dosyadan kaç kayıt kontrol edilsin (varsayılan: 50)")
     parser.add_argument("--file", choices=["sea", "substance", "both"], default="both",
                         help="Hangi dosya kontrol edilsin")
-    parser.add_argument("--all",   action="store_true",
+    parser.add_argument("--all",     action="store_true",
                         help="Tüm kayıtları tara (pahalı olabilir!)")
-    parser.add_argument("--reset", action="store_true",
+    parser.add_argument("--reset",   action="store_true",
                         help="İlerlemeyi sıfırla, baştan başla")
+    parser.add_argument("--recheck", nargs="+", metavar="CAS",
+                        help="Belirtilen CAS numaralarını tekrar kontrol et "
+                             "(örn: --recheck 7637-07-2 1333-74-0)")
     args = parser.parse_args()
 
     if args.reset:
@@ -317,16 +320,36 @@ if __name__ == "__main__":
         print("İlerleme sıfırlandı.\n")
 
     progress = _load_progress()
+
+    # --recheck: belirtilen CAS'ları progress'ten çıkar → yeniden taranır
+    if args.recheck:
+        recheck_set = set(args.recheck)
+        progress["sea"]      = [c for c in progress.get("sea", [])      if c not in recheck_set]
+        progress["substance"] = [c for c in progress.get("substance", []) if c not in recheck_set]
+        _save_progress(progress)
+        # Rapordaki o CAS'ların eski satırlarını da temizle
+        prev_sea, prev_sub = _load_existing_conflicts()
+        prev_sea = [r for r in prev_sea if not any(c in r for c in recheck_set)]
+        prev_sub = [r for r in prev_sub if not any(c in r for c in recheck_set)]
+        write_report(prev_sea, prev_sub, args)
+        print(f"Yeniden taranacak: {', '.join(recheck_set)}\n")
+
     done_sea = set(progress.get("sea", []))
     done_sub = set(progress.get("substance", []))
 
-    n = None if args.all else args.n
+    n = None if args.all else (args.n if not args.recheck else None)
 
     do_sea       = args.file in ("sea", "both")
     do_substance = args.file in ("substance", "both")
 
     sea_entries = load_sea_entries(n, done_sea)       if do_sea      else []
     sub_entries = load_substance_entries(n, done_sub) if do_substance else []
+
+    # recheck modunda sadece istenen CAS'ları tara
+    if args.recheck:
+        recheck_set = set(args.recheck)
+        sea_entries = [e for e in sea_entries if e["cas"] in recheck_set]
+        sub_entries = [e for e in sub_entries if e["cas"] in recheck_set]
 
     if done_sea or done_sub:
         print(f"Daha önce tarananlar atlanıyor: {len(done_sea)} SEA, {len(done_sub)} substance")

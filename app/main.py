@@ -1916,7 +1916,12 @@ async def ai_chat(body: dict = Body(...)):
         "  - ADR 2025 (tehlikeli madde taşımacılığı)\n"
         "Eğer sana verilen veride veya yukarıdaki mevzuatta bilgi yoksa, "
         "'Bu madde/konu için veritabanında veya ilgili yönetmelikte bilgi bulunamadı.' "
-        "de. Genel kimya bilgine veya tahmine dayanma."
+        "de. Genel kimya bilgine veya tahmine dayanma.\n\n"
+        "H/EUH/P KODU METİNLERİ: Sana 'Resmi Türkçe tehlike ifadeleri' başlığıyla "
+        "kod → metin eşleştirmesi verildiğinde, bu metinleri AYNEN kullan. "
+        "Hiçbir şekilde parafraz yapma, çevirme veya değiştirme. "
+        "Örneğin H225 için 'Kolay alevlenir sıvı ve buhar.' yazıyorsa yanıtta da "
+        "tam bu metin geçmeli."
     )
     if mode == "sds":
         system_prompt = (

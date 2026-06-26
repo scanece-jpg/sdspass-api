@@ -79,7 +79,7 @@ def get_adr_details(un_no: str, packing_group: str = 'II') -> dict:
         'label':               pg_data.get('label', entry.get('class', '—')),
         'packing_group':       pg,
         'special_provisions':  entry.get('special_provisions', []),
-        'limited_qty':         entry.get('limited_qty', {}).get(pg, '—'),
+        'limited_qty':         (lambda lq: lq.get(pg, '—') if isinstance(lq, dict) else (lq or '—'))(entry.get('limited_qty', '—')),
         # IMDG ve IATA için sınıf aynı, isim farklı olabilir
         'imdg_class':          entry.get('class', '—'),
         'iata_class':          entry.get('class', '—'),

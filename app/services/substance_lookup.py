@@ -462,16 +462,21 @@ def search_substances(query: str, limit: int = 20) -> list:
         for cas, entry in db_dict.items():
             if '_alias' in entry:
                 continue
-            if q in cas.lower() or q in ' '.join(entry.get('names', [])).lower():
-                results.append(_build_search_result(cas, entry, priority, src))
-            if len(results) >= limit * 3:
-                        break
+            names = entry.get('names', [])
+            names_clean = [n.lower().rstrip('; ').strip() for n in names]
+            cas_l = cas.lower()
+            if q in cas_l or q in ' '.join(names).lower():
+                r = _build_search_result(cas, entry, priority, src)
+                # Tam eşleşme = 0, CAS eşleşmesi = 0, alt dize = 1
+                exact = (q == cas_l) or any(q == nc for nc in names_clean)
+                r['_mscore'] = 0 if exact else 1
+                results.append(r)
 
     # Custom'a da bak
     for cas, data in _load_custom().items():
         name = (data.get('name') or '').lower()
         if q in cas.lower() or q in name:
-            results.append({
+            r = {
                 'cas': cas, 'name': data.get('name', ''),
                 'ec_no': data.get('ec_no', ''),
                 'sea_ek6': False, 'annex_vi': False,
@@ -479,9 +484,11 @@ def search_substances(query: str, limit: int = 20) -> list:
                 'source_priority': 4,
                 'hazard_count': len(data.get('hazards', [])),
                 'h_codes': [h['h_code'] for h in data.get('hazards', []) if h.get('h_code')],
-            })
+            }
+            r['_mscore'] = 0 if q == name.rstrip('; ').strip() else 1
+            results.append(r)
 
-    results.sort(key=lambda x: (x['source_priority'], x['name'].lower()))
+    results.sort(key=lambda x: (x.get('_mscore', 1), x['source_priority'], x['name'].lower()))
     return results[:limit]
 
 

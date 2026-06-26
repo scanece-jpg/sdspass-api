@@ -1577,7 +1577,10 @@
       }
     ],
     "scl_limits": [],
-    "m_factors": {},
+    "m_factors": {
+      "acute": 1,
+      "chronic": 1
+    },
     "ate": {}
   },
   "330-54-1": {

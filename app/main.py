@@ -1965,6 +1965,7 @@ async def ai_chat(body: dict = Body(...)):
         if _results:
             resolved_cas = _results[0].get('cas')
 
+    _official_table = ""
     if resolved_cas:
         from app.services.substance_lookup import lookup_substance
         from app.services.codes_i18n import H_STMTS, EUH_STMTS
@@ -1973,23 +1974,36 @@ async def ai_chat(body: dict = Body(...)):
             h_map   = H_STMTS.get('TR', {})
             euh_map = EUH_STMTS.get('TR', {})
             _seen   = set()
-            _h_lines: list[str] = []
+            _rows: list[str] = []
             for _cls in entry.get('classification', []):
                 _code = _cls.get('h_code', '')
                 if _code and _code not in _seen:
                     _seen.add(_code)
-                    _h_lines.append(f"{_code}: {h_map.get(_code, '')}")
+                    _txt = h_map.get(_code, '')
+                    if _txt:
+                        _rows.append(f"| **{_code}** | {_txt} |")
             for _code in entry.get('euh_codes', []):
                 if _code not in _seen:
                     _seen.add(_code)
-                    _h_lines.append(f"{_code}: {euh_map.get(_code, '')}")
-            ctx     = json.dumps(entry, ensure_ascii=False, indent=2)
-            h_block = '\n'.join(_h_lines)
+                    _txt = euh_map.get(_code, '')
+                    if _txt:
+                        _rows.append(f"| **{_code}** | {_txt} |")
+            _name = (entry.get('names') or [entry.get('name_en', resolved_cas)])[0]
+            if _rows:
+                _official_table = (
+                    f"**{_name} (CAS {resolved_cas})** — SEA Ek-6 / KKDİK Ek-6\n\n"
+                    f"| H/EUH Kodu | Resmi Türkçe Tehlike İfadesi |\n"
+                    f"|------------|------------------------------|\n"
+                    + '\n'.join(_rows)
+                    + "\n\n*Kaynak: SEA Ek-6 harmonize sınıflandırma listesi*\n\n"
+                )
+            ctx = json.dumps(entry, ensure_ascii=False, indent=2)
             user_parts.append({
                 "type": "text",
                 "text": (
                     f"CAS {resolved_cas} için veritabanı kaydı:\n```json\n{ctx}\n```\n\n"
-                    + (f"Resmi Türkçe tehlike ifadeleri (codes_i18n.py):\n{h_block}\n\n" if h_block else "")
+                    "H/EUH kod metinleri ayrıca tablo olarak oluşturuldu ve yanıta eklendi. "
+                    "Sen bu metinleri TEKRARLAMA. Sadece ek bağlam veya sorulan konuya yanıt ver."
                 )
             })
 
@@ -2014,6 +2028,8 @@ async def ai_chat(body: dict = Body(...)):
     )
 
     reply = resp.content[0].text if resp.content else ""
+    if _official_table:
+        reply = _official_table + reply
     return {
         "reply": reply,
         "mode":  mode,

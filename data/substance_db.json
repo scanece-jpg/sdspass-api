@@ -1330,7 +1330,8 @@
         "ate": {},
         "notes": [
           "B"
-        ]
+        ],
+        "euh_codes": []
       }
     ]
   },
@@ -4541,6 +4542,9 @@
         },
         "notes": [
           "B"
+        ],
+        "euh_codes": [
+          "EUH071"
         ]
       }
     ]
@@ -5616,7 +5620,8 @@
         "ate": {},
         "notes": [
           "B"
-        ]
+        ],
+        "euh_codes": []
       }
     ]
   },
@@ -6454,7 +6459,8 @@
         "ate": {},
         "notes": [
           "T"
-        ]
+        ],
+        "euh_codes": []
       }
     ]
   },
@@ -16981,7 +16987,8 @@
         "ate": {},
         "notes": [
           "B"
-        ]
+        ],
+        "euh_codes": []
       }
     ]
   },
@@ -18940,7 +18947,8 @@
         "scl_limits": [],
         "m_factors": {},
         "ate": {},
-        "notes": []
+        "notes": [],
+        "euh_codes": []
       }
     ]
   },
@@ -23297,7 +23305,8 @@
         "scl_limits": [],
         "m_factors": {},
         "ate": {},
-        "notes": []
+        "notes": [],
+        "euh_codes": []
       }
     ]
   },
@@ -24293,7 +24302,8 @@
         "scl_limits": [],
         "m_factors": {},
         "ate": {},
-        "notes": []
+        "notes": [],
+        "euh_codes": []
       },
       {
         "index_no": "047-005-00-4",
@@ -24326,7 +24336,8 @@
           "chronic": 10
         },
         "ate": {},
-        "notes": []
+        "notes": [],
+        "euh_codes": []
       }
     ]
   },
@@ -24426,7 +24437,8 @@
         "scl_limits": [],
         "m_factors": {},
         "ate": {},
-        "notes": []
+        "notes": [],
+        "euh_codes": []
       }
     ]
   },
@@ -27238,7 +27250,8 @@
         "scl_limits": [],
         "m_factors": {},
         "ate": {},
-        "notes": []
+        "notes": [],
+        "euh_codes": []
       }
     ]
   },
@@ -27767,7 +27780,8 @@
         "ate": {},
         "notes": [
           "1"
-        ]
+        ],
+        "euh_codes": []
       }
     ]
   },
@@ -28208,7 +28222,8 @@
           "chronic": 10
         },
         "ate": {},
-        "notes": []
+        "notes": [],
+        "euh_codes": []
       }
     ]
   },
@@ -28394,7 +28409,8 @@
           "C",
           "S",
           "U"
-        ]
+        ],
+        "euh_codes": []
       }
     ]
   },
@@ -36346,7 +36362,8 @@
         "scl_limits": [],
         "m_factors": {},
         "ate": {},
-        "notes": []
+        "notes": [],
+        "euh_codes": []
       }
     ]
   },
@@ -36435,7 +36452,8 @@
         "scl_limits": [],
         "m_factors": {},
         "ate": {},
-        "notes": []
+        "notes": [],
+        "euh_codes": []
       }
     ]
   },
@@ -36478,7 +36496,8 @@
         "ate": {},
         "notes": [
           "T"
-        ]
+        ],
+        "euh_codes": []
       }
     ]
   },
@@ -36519,7 +36538,8 @@
         "scl_limits": [],
         "m_factors": {},
         "ate": {},
-        "notes": []
+        "notes": [],
+        "euh_codes": []
       }
     ]
   },
@@ -41577,7 +41597,8 @@
         "scl_limits": [],
         "m_factors": {},
         "ate": {},
-        "notes": []
+        "notes": [],
+        "euh_codes": []
       }
     ]
   },
@@ -61957,7 +61978,8 @@
         "scl_limits": [],
         "m_factors": {},
         "ate": {},
-        "notes": []
+        "notes": [],
+        "euh_codes": []
       }
     ]
   },
@@ -72313,7 +72335,8 @@
         "ate": {},
         "notes": [
           "1"
-        ]
+        ],
+        "euh_codes": []
       }
     ]
   },
@@ -77300,7 +77323,8 @@
         "ate": {},
         "notes": [
           "B"
-        ]
+        ],
+        "euh_codes": []
       }
     ]
   },
@@ -78568,7 +78592,8 @@
         "ate": {},
         "notes": [
           "G"
-        ]
+        ],
+        "euh_codes": []
       }
     ]
   },
@@ -79462,7 +79487,8 @@
         "scl_limits": [],
         "m_factors": {},
         "ate": {},
-        "notes": []
+        "notes": [],
+        "euh_codes": []
       }
     ]
   },
@@ -81613,7 +81639,8 @@
         "ate": {},
         "notes": [
           "B"
-        ]
+        ],
+        "euh_codes": []
       }
     ]
   },
@@ -84333,7 +84360,8 @@
         "scl_limits": [],
         "m_factors": {},
         "ate": {},
-        "notes": []
+        "notes": [],
+        "euh_codes": []
       }
     ]
   },
@@ -85669,7 +85697,8 @@
         "scl_limits": [],
         "m_factors": {},
         "ate": {},
-        "notes": []
+        "notes": [],
+        "euh_codes": []
       }
     ]
   },
@@ -88315,7 +88344,8 @@
         ],
         "m_factors": {},
         "ate": {},
-        "notes": []
+        "notes": [],
+        "euh_codes": []
       }
     ]
   },
@@ -90587,7 +90617,8 @@
           "chronic": 10
         },
         "ate": {},
-        "notes": []
+        "notes": [],
+        "euh_codes": []
       }
     ]
   },
@@ -95255,7 +95286,8 @@
         "scl_limits": [],
         "m_factors": {},
         "ate": {},
-        "notes": []
+        "notes": [],
+        "euh_codes": []
       }
     ]
   },
@@ -99150,7 +99182,8 @@
         "scl_limits": [],
         "m_factors": {},
         "ate": {},
-        "notes": []
+        "notes": [],
+        "euh_codes": []
       }
     ]
   },
@@ -99378,7 +99411,8 @@
             "form": "dusts or mists"
           }
         },
-        "notes": []
+        "notes": [],
+        "euh_codes": []
       }
     ]
   },
@@ -105658,7 +105692,8 @@
         "notes": [
           "C",
           "T"
-        ]
+        ],
+        "euh_codes": []
       }
     ]
   },
@@ -126497,7 +126532,8 @@
         "scl_limits": [],
         "m_factors": {},
         "ate": {},
-        "notes": []
+        "notes": [],
+        "euh_codes": []
       }
     ]
   }

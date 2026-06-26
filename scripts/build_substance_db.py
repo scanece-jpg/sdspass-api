@@ -260,11 +260,12 @@ def build(rows: list[dict]) -> dict:
                     "m_factors":      entry["m_factors"],
                     "ate":            entry["ate"],
                     "notes":          entry["notes"],
+                    "euh_codes":      entry["euh_codes"],
                 }
                 if new_max > ex_max:
                     # Yeni entry birincil — eski entry forms'a gider
                     old_form = {k: existing[k] for k in
-                                ("index_no","names","ec_no","atp","classification","scl_limits","m_factors","ate","notes")}
+                                ("index_no","names","ec_no","atp","classification","scl_limits","m_factors","ate","notes","euh_codes")}
                     db[primary_cas] = entry
                     db[primary_cas]["forms"] = existing.get("forms", [])
                     if old_form not in db[primary_cas]["forms"]:

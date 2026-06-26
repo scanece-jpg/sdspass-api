@@ -166,24 +166,20 @@ _MAX_CHARS = 12_000  # belge başına max karakter (~3K token)
 # ── PDF metin çıkarıcı ────────────────────────────────────────────────────────
 
 def _read_pdf(path: Path, max_chars: int = _MAX_CHARS) -> str:
-    """pdfplumber ile PDF'ten düz metin çıkarır. Dosyaya dokunmaz."""
+    """PyMuPDF (fitz) ile PDF'ten düz metin çıkarır. Dosyaya dokunmaz."""
     try:
-        import pdfplumber
-        text_parts = []
+        import fitz
+        parts = []
         total = 0
-        with pdfplumber.open(path) as pdf:
-            for page in pdf.pages:
-                t = page.extract_text(x_tolerance=2, y_tolerance=2) or ""
-                # Encoding düzeltme: latin-1 → utf-8
-                try:
-                    t = t.encode("latin-1").decode("utf-8")
-                except (UnicodeEncodeError, UnicodeDecodeError):
-                    pass  # zaten utf-8, dokunma
-                text_parts.append(t)
-                total += len(t)
-                if total >= max_chars * 2:
-                    break
-        return " ".join(text_parts)[:max_chars]
+        doc = fitz.open(str(path))
+        for page in doc:
+            t = page.get_text()
+            parts.append(t)
+            total += len(t)
+            if total >= max_chars * 2:
+                break
+        doc.close()
+        return "".join(parts)[:max_chars]
     except Exception as e:
         return f"[PDF okunamadı: {e}]"
 

@@ -1458,6 +1458,17 @@ async def sds_calculate(body: dict = Body(...)):
         stot_result = stot_calculate(comps)
 
         # ── 4. EUH kodları ────────────────────────────────────────────────────
+        # suppl_hazards injection: ATP22 / substance_db → comps (EUH071 vb.)
+        try:
+            from app.services.substance_lookup import lookup_substance as _lu_euh
+            for _c in comps:
+                _cas = (_c.get('cas') or _c.get('cas_no') or '').strip()
+                if _cas and not _c.get('suppl_hazards'):
+                    _sub = _lu_euh(_cas)
+                    if _sub and _sub.get('suppl_hazards'):
+                        _c['suppl_hazards'] = _sub['suppl_hazards']
+        except Exception:
+            pass
         euh_result = euh_calculate(comps)
 
         # ── 5. Ekoloji ────────────────────────────────────────────────────────

@@ -184,6 +184,25 @@ DOMINANCE: dict = {
 }
 
 
+# h_code bazlı fallback — TR class name'leri (Cilt Hassas. 1A vb.) CLP_CUTOFFS_DICT'te
+# eşleşmediğinde kullanılır. Acute tox, fiziksel tehlike ve özel döngüyle işlenen
+# H314/H315/H318/H319 buraya dahil edilmez.
+_H_CODE_FALLBACK: dict = {
+    'H317': {"h": "H317", "cutoff": 1.0,  "signal": "Warning"},
+    'H334': {"h": "H334", "cutoff": 0.1,  "signal": "Danger"},
+    'H340': {"h": "H340", "cutoff": 0.1,  "signal": "Danger"},
+    'H341': {"h": "H341", "cutoff": 1.0,  "signal": "Warning"},
+    'H350': {"h": "H350", "cutoff": 0.1,  "signal": "Danger"},
+    'H351': {"h": "H351", "cutoff": 1.0,  "signal": "Warning"},
+    'H360': {"h": "H360", "cutoff": 0.3,  "signal": "Danger"},
+    'H361': {"h": "H361", "cutoff": 3.0,  "signal": "Warning"},
+    'H362': {"h": "H362", "cutoff": 0.1,  "signal": "Warning"},
+    'H304': {"h": "H304", "cutoff": 10.0, "signal": "Danger"},
+    'H370': {"h": "H370", "cutoff": 10.0, "signal": "Danger"},
+    'H371': {"h": "H371", "cutoff": 10.0, "signal": "Warning"},
+}
+
+
 def _normalize_scl_list(scl_raw) -> list:
     """
     SCL verisini her zaman liste formatına normalize et.
@@ -303,12 +322,15 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
             # Acute Tox. — karışım için ATE yöntemi (CLP Annex I 3.1.3.6) birincil yöntemdir.
             # Cutoff/konvansiyonel yöntem (Tablo 3.1.3) Acute Tox. için kullanılmaz;
             # ATE hesabı aşağıdaki calculate_clp() async fonksiyonunda yapılır.
-            if h_class.startswith('Acute Tox.'):
+            if h_class.startswith('Acute Tox.') or h_class.startswith('Akut Tok.'):
                 continue
 
             rule = CLP_CUTOFFS_DICT.get(h_class)
             if not rule:
-                # h_code'dan fallback
+                # h_code bazlı fallback: TR class name'leri (örn. "Cilt Hassas. 1A")
+                # CLP_CUTOFFS_DICT'te İngilizce key olduğundan eşleşmez; h_code ile ara.
+                rule = _H_CODE_FALLBACK.get(h_code)
+            if not rule:
                 continue
 
             cutoff = rule["cutoff"]

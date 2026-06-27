@@ -78,7 +78,6 @@ CAS_TO_EUH: Dict[str, List[str]] = {
 
 # ── H KODU → EUH ─────────────────────────────────────────────────────────────
 H_TO_EUH: Dict[str, List[str]] = {
-    'H290': ['EUH014'],
     'H260': ['EUH014'],
     'H261': ['EUH014'],
 }

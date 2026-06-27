@@ -412,6 +412,15 @@ def lookup_substance(cas: str) -> Optional[Dict]:
             # suppl_hazards (EUH kodları) — SEA boşsa ATP22'den tamamla
             if not result.get('suppl_hazards') and db_result.get('suppl_hazards'):
                 result['suppl_hazards'] = db_result['suppl_hazards']
+            # M faktörü — daha yüksek (daha zararlı) olanı kullan
+            db_mf = db_result.get('m_factors') or {}
+            if db_mf:
+                tr_mf = result.get('m_factors') or {}
+                merged_mf = dict(tr_mf)
+                for key, val in db_mf.items():
+                    if val and (not merged_mf.get(key) or val > merged_mf[key]):
+                        merged_mf[key] = val
+                result['m_factors'] = merged_mf
         return result
 
     # ── Sıra 2 (tek başına): substance_db (ECHA ATP22 yeni format) ──────────

@@ -35,12 +35,12 @@ def load_cached(cas: str) -> str:
 def save_cached(cas: str, reg_no: str) -> None:
     """REACH kayıt numarasını disk önbelleğine yaz."""
     p = _path(cas.strip())
-    os.makedirs(os.path.dirname(p), exist_ok=True)
     try:
+        os.makedirs(os.path.dirname(p), exist_ok=True)
         with open(p, 'w', encoding='utf-8') as f:
             json.dump({'cas': cas, 'reg_no': reg_no}, f)
-    except Exception:
-        pass
+    except Exception as e:
+        print(f'[REACH CACHE] {cas} kayıt hatası ({p}): {e}')
 
 
 # ── reach_db.py'e kalıcı kayıt ───────────────────────────────────────────────

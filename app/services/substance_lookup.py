@@ -568,7 +568,8 @@ def _save_api_result(directory: str, cas: str, api_result: dict, source_label: s
         with open(file_path, 'w', encoding='utf-8') as f:
             json.dump(entry, f, ensure_ascii=False, indent=2)
         return True
-    except Exception:
+    except Exception as e:
+        print(f'[CL CACHE] {cas} kayıt hatası ({file_path}): {e}')
         return False
 
 

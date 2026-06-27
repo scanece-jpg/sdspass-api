@@ -797,6 +797,9 @@ def _ate_core(items: list, form: str = '') -> tuple:
             h_code_raw = (haz.get('h_code') or '').replace('*','').strip()[:4]
             if h_code_raw not in _ACUTE_TOKS:
                 continue
+            hc = (haz.get('h_class') or '').replace('*','').strip()
+            if hc.startswith('Akut Tok.'):
+                hc = hc.replace('Akut Tok.', 'Acute Tox.')
             base_route = _H_CODE_TO_ROUTE.get(h_code_raw)
             if not base_route:
                 routes_to_process = ate_routes

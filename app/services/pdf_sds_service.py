@@ -2420,6 +2420,14 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                             '* M-factor not determined; M=1 assumed per CLP Annex I §4.1.3.5.5. '
                             'Verify with EC50/LC50 data from supplier.')
                 story.append(Paragraph(_mf_note, styles['small']))
+            # Kaynaktan gelen M değerleri varsa kaynak dipnotu
+            if any(not _d.get('_m_default') for _d in _aquatic_comps):
+                _mf_src = ('M-faktörü değerleri SEA Ek-6 (TR) harmonik sınıflandırması '
+                           've/veya ECHA CLP Ek-VI (ATP22) esas alınarak belirlenmiştir.'
+                           if lang == 'TR' else
+                           'M-factor values are based on TR SEA Annex VI harmonised '
+                           'classification and/or ECHA CLP Annex VI (ATP22).')
+                story.append(Paragraph(_mf_src, styles['small']))
             story.append(Spacer(1, 3))
 
     # ─────────────────────────────────────────────────────────────────────────

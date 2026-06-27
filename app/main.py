@@ -305,7 +305,8 @@ async def generate_pdf(data: dict = Body(...)):
                     _req_m = _req_methods.get(_bk)
                     _is_measured = bool(_req_m.get('measured', True)) if isinstance(_req_m, dict) else True
                     _phys_methods[_bk] = {
-                        'measured': _is_measured, 'standard': _tp_std, 'error_pct': None,
+                        'measured': _is_measured, 'standard': _tp_std,
+                        'error_pct': None if _is_measured else _tp_err,
                     }
                 elif _tp_val is not None:
                     # Kullanıcı boş bırakmış, teorik değer var → backfill

@@ -768,8 +768,9 @@ def _ate_core(items: list, form: str = '') -> tuple:
             continue
 
         hazards = item.get('hazards') or []
+        _ACUTE_TOKS = {'H300','H301','H302','H310','H311','H312','H330','H331','H332'}
         has_acute_tox = any(
-            (h.get('h_class') or '').replace('*', '').strip().startswith('Acute Tox.')
+            (h.get('h_code') or '').replace('*','').strip()[:4] in _ACUTE_TOKS
             for h in hazards
         )
 
@@ -793,10 +794,9 @@ def _ate_core(items: list, form: str = '') -> tuple:
         source_priority = int(item.get('source_priority') or 4)
 
         for haz in hazards:
-            hc = (haz.get('h_class') or '').replace('*', '').strip()
-            if not hc.startswith('Acute Tox.'):
+            h_code_raw = (haz.get('h_code') or '').replace('*','').strip()[:4]
+            if h_code_raw not in _ACUTE_TOKS:
                 continue
-            h_code_raw = (haz.get('h_code') or '').split('(')[0].split()[0].strip()
             base_route = _H_CODE_TO_ROUTE.get(h_code_raw)
             if not base_route:
                 routes_to_process = ate_routes

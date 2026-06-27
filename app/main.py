@@ -830,6 +830,8 @@ async def generate_pdf(data: dict = Body(...)):
                 if _sub and _sub.get('sea_ek6', False):
                     # SEA Ek-6 yetkili veri — frontend'den gelen kodları geçersiz kıl
                     _mc['hazards'] = _sub.get('hazards', [])
+                if _sub and _sub.get('suppl_hazards'):
+                    _mc['suppl_hazards'] = _sub['suppl_hazards']
         except Exception:
             pass  # Hata durumunda frontend verisi korunur
 

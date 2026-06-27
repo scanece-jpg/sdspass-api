@@ -103,8 +103,6 @@ REACH_DB: dict = {
     '51274-37-4': {'reg':['polymer'],'ec':'257-098-5','name':'PESA (Polyepoxysuccinic acid Na)'},
     '23783-26-8': {'reg':['01-2119973903-31-0000'],'ec':'245-910-6','name':'HPAA (Hydroxyphosphonoacetic acid)'},
     '70715-06-9': {'reg':['01-2119973903-31-0001'],'ec':'274-877-8','name':'HPCA (2-Hydroxyphosphonocarboxylic acid)'},
-    # ── Biyositler / Dezenfektanlar ───────────────────────────────────────────
-    '55965-84-9': {'reg':['01-2119977853-24-0000'],'ec':'611-341-5','name':'CMIT/MIT (3:1 mixture)'},
     # ── İnorganik tuzlar ─────────────────────────────────────────────────────
     '7786-30-3':  {'reg':['01-2119485597-19-0000'],'ec':'232-094-6','name':'Magnesium chloride'},
 }

@@ -2059,7 +2059,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     ACUTE_H = {'H300','H301','H302','H310','H311','H312','H330','H331','H332'}
 
     comp_has_acute = any(
-        hz.get('h_class','').replace('*','').strip() in ACUTE_TOX_CLASSES
+        (hz.get('h_code') or '').replace('*','').strip()[:4] in ACUTE_H
         for comp_item in sds_data.get('components', [])
         for hz in comp_item.get('hazards', [])
     )

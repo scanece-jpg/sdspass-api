@@ -465,7 +465,6 @@ def validate_sds(
     # ── V023: P kodu uyumu ────────────────────────────────────────────────────
     # p_code_service'in önerdiği zorunlu P kodlarını hesapla, etikettekilerle karşılaştır
     try:
-        from app.services.p_code_service import assign_p_codes
         _p_raw = sds_data.get('p_codes', {})
         if isinstance(_p_raw, list):
             _label_p = set(_p_raw)
@@ -475,14 +474,16 @@ def validate_sds(
             _label_p   = set(_selected) | set(_mandatory)
         else:
             _label_p = set()
-        _signal = sds_data.get('clp', {}).get('signal_word', 'Warning')
-        _assigned = assign_p_codes(list(_h_set_base), signal_word=_signal)
-        _req_p_codes = set(_assigned.get('p_codes', []))
-        _missing_p = _req_p_codes - _label_p
+        from app.services.p_code_service import H_BASED_LABEL_FORCED
+        _forced_p = set()
+        for _hc in _h_set_base:
+            for _p in H_BASED_LABEL_FORCED.get(_hc.replace('*','').strip(), []):
+                _forced_p.add(_p)
+        _missing_p = _forced_p - _label_p
         if _missing_p:
             warn("V023", "B2",
-                 f"H kodlarından önerilen P kodu(ları) etikette eksik: {', '.join(sorted(_missing_p))}",
-                 "CLP Annex IV / SEA Ek-4 / KKDİK Ek-2 §2.2")
+                 f"Etikette zorunlu P kodu(ları) eksik: {', '.join(sorted(_missing_p))}",
+                 "CLP Annex IV §1.2 / KKDİK Madde 22(4) — H koduna bağlı zorunlu kodlar")
     except Exception:
         pass
 

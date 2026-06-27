@@ -447,8 +447,11 @@ def validate_sds(
     # GHS07 baskınlık: tehlike piktogramları varken GHS07 gizlenebilir (CLP Art.26)
     if _required_pics & _DANGER_PICS:
         _required_pics.discard('GHS07')
-    # GHS05 varken GHS07 gizlenir (H314+H315 aynı anda)
-    if 'GHS05' in _required_pics:
+    # GHS05 varken GHS07 yalnızca cilt/göz tahrişi (H315/H319) kaynaklıysa gizlenir.
+    # H317 (cilt duyar.), H334 (solunum duyar.), H302/H312/H332, H335/H336 varsa GHS07 KALIR.
+    # ghs_pictogram.py ile tutarlı olmalı.
+    _GHS07_KEEPS = {'H302', 'H312', 'H332', 'H317', 'H334', 'H335', 'H336'}
+    if 'GHS05' in _required_pics and not (_h_set_base & _GHS07_KEEPS):
         _required_pics.discard('GHS07')
     _missing_pics = _required_pics - _label_pics
     _extra_pics   = _label_pics - _required_pics - {'GHS09'}  # GHS09 ayrıca V019'da
@@ -480,6 +483,10 @@ def validate_sds(
             for _p in H_BASED_LABEL_FORCED.get(_hc.replace('*','').strip(), []):
                 _forced_p.add(_p)
         _missing_p = _forced_p - _label_p
+        # P303+P361+P353 etikette varsa P302+P352'yi bastırır (aşındırıcı temas acil
+        # yanıtı daha kapsamlı; p_code_service suppress kuralıyla tutarlı).
+        if 'P303+P361+P353' in _label_p:
+            _missing_p.discard('P302+P352')
         if _missing_p:
             warn("V023", "B2",
                  f"Etikette zorunlu P kodu(ları) eksik: {', '.join(sorted(_missing_p))}",

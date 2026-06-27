@@ -240,7 +240,7 @@ def _sea_ek6_to_legacy(entry: dict) -> dict:
         'signal'         : '',
         'pictograms'     : [],
         'hazards'        : hazards,
-        'suppl_hazards'  : [],
+        'suppl_hazards'  : entry.get('euh_codes', []),
         'm_factors'      : entry.get('m_factors', {}),
         'scl'            : [_scl_op_to_cmin_cmax(s) for s in entry.get('scl_limits', [])],
         'euh_codes'      : entry.get('euh_codes', []),
@@ -409,6 +409,9 @@ def lookup_substance(cas: str) -> Optional[Dict]:
             if supplements:
                 result['hazards'] = result['hazards'] + supplements
                 result['source']  = f'SEA Ek-6 (TR) + ECHA ATP22 ek ({len(supplements)} tehlike sınıfı)'
+            # suppl_hazards (EUH kodları) — SEA boşsa ATP22'den tamamla
+            if not result.get('suppl_hazards') and db_result.get('suppl_hazards'):
+                result['suppl_hazards'] = db_result['suppl_hazards']
         return result
 
     # ── Sıra 2 (tek başına): substance_db (ECHA ATP22 yeni format) ──────────

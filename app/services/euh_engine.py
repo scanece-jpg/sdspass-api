@@ -138,6 +138,13 @@ def calculate(comps: List[Dict]) -> Dict:
         conc = float(c.get('concMax') or c.get('conc') or 0)
         name = c.get('name_tr') or c.get('name') or cas
 
+        # Harmonik sınıflandırmadan gelen EUH kodları (SEA Ek-6 / CLP Annex VI)
+        for code in (c.get('suppl_hazards') or []):
+            if code not in codes:
+                codes.add(code)
+                details.append({'code': code, 'text': EUH_TEXTS.get(code, code),
+                                 'source': f'{name} — harmonik sınıflandırma (SEA/CLP)', 'type': 'auto'})
+
         # CAS bazlı EUH
         for code in CAS_TO_EUH.get(cas, []):
             if code not in codes:

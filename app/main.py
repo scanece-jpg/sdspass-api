@@ -745,6 +745,11 @@ async def generate_pdf(data: dict = Body(...)):
 
         # Bileşenler
         def _map_comp(c):
+            # Önce tüm alanları kopyala — bilinmeyen alanlar downstream servislere geçer,
+            # elle listeleme hatası yüzünden veri düşmez.
+            result = dict(c)
+
+            # ── Metin normalizasyonu ──────────────────────────────────────────
             name    = _safe(c.get('name', ''))
             name_tr = _safe(c.get('name_tr', ''))
             # "%100'e tamamla" bileşeni — PDF'de standart metin
@@ -752,6 +757,13 @@ async def generate_pdf(data: dict = Body(...)):
                 name = 'Mevzuata göre sınıflandırılmamıştır'
             if name_tr and 'mevzuata' in name_tr.lower():
                 name_tr = 'Mevzuata göre sınıflandırılmamıştır'
+            result['name']    = name
+            result['name_tr'] = name_tr
+
+            # ── CAS no normalizasyonu ─────────────────────────────────────────
+            result['cas_no'] = c.get('cas', c.get('cas_no', ''))
+
+            # ── Konsantrasyon normalizasyonu ──────────────────────────────────
             conc     = float(c.get('conc', c.get('concentration', 0)) or 0)
             conc_min = c.get('conc_min')
             conc_max = c.get('conc_max')
@@ -766,42 +778,38 @@ async def generate_pdf(data: dict = Body(...)):
                     conc_str = f'{hi}'
                 elif lo > 0:
                     conc_str = f'{lo}'
-            return {
-                'cas_no':        c.get('cas', c.get('cas_no', '')),
-                'name':          name,
-                'name_tr':       name_tr,   # Türkçe SDS için
-                'concentration': conc,      # standart alan (servisler bu adı kullanır)
-                'conc':          conc,      # eski servisler için alias (comp.get('conc',...))
-                'conc_str':      conc_str,
-                'conc_min':      conc_min,
-                'conc_max':      conc_max,
-                # PCN bandı (CLP Ek VIII) — worst-case = max değer
-                'conc_pcn_band': _get_pcn_band(
-                    conc_min=float(conc_min) if conc_min is not None else None,
-                    conc_max=float(conc_max) if conc_max is not None else None,
-                    conc_exact=conc if conc and not (conc_min or conc_max) else None,
-                ),
-                'hazards':       [
-                    {k: v for k, v in {
-                        'h_class':   h.get('h_class', ''),
-                        'h_code':    h.get('h_code', ''),
-                        'note_flag': h.get('note_flag'),
-                        'note':      h.get('note'),
-                        'repro_sub': h.get('repro_sub'),
-                    }.items() if v is not None and v != ''}
-                    for h in c.get('hazards', [])
-                ],
-                'scl':           c.get('scl', []),
-                'ec_no':         c.get('ec_no', ''),
-                'reach_no':      c.get('reach_no', ''),
-                'annex_vi':      c.get('annex_vi', False),
-                'source_priority': c.get('source_priority', 4),
-                # ATE kullanıcı beyanı — SEA §3.1.3.6.2.2
-                'ate_unknown':   bool(c.get('ate_unknown', False)),
-                'ate_dict':      c.get('ate') or {},
-                # Bileşen tipi: 'normal' | 'polymer' | 'uvcb' | 'fragrance'
-                'comp_type':     c.get('comp_type', 'normal'),
-            }
+            result['concentration'] = conc   # standart alan
+            result['conc']          = conc   # eski servisler için alias
+            result['conc_str']      = conc_str
+            result['conc_min']      = conc_min
+            result['conc_max']      = conc_max
+            # PCN bandı — hesaplanan alan, orijinalde bulunmaz
+            result['conc_pcn_band'] = _get_pcn_band(
+                conc_min=float(conc_min) if conc_min is not None else None,
+                conc_max=float(conc_max) if conc_max is not None else None,
+                conc_exact=conc if conc and not (conc_min or conc_max) else None,
+            )
+
+            # ── Tehlike listesi normalizasyonu ────────────────────────────────
+            result['hazards'] = [
+                {k: v for k, v in {
+                    'h_class':   h.get('h_class', ''),
+                    'h_code':    h.get('h_code', ''),
+                    'note_flag': h.get('note_flag'),
+                    'note':      h.get('note'),
+                    'repro_sub': h.get('repro_sub'),
+                }.items() if v is not None and v != ''}
+                for h in c.get('hazards', [])
+            ]
+
+            # ── Tip dönüşümleri ───────────────────────────────────────────────
+            result['annex_vi']        = c.get('annex_vi', False)
+            result['source_priority'] = c.get('source_priority', 4)
+            result['ate_unknown']     = bool(c.get('ate_unknown', False))
+            result['ate_dict']        = c.get('ate') or {}   # frontend 'ate' → 'ate_dict'
+            result['comp_type']       = c.get('comp_type', 'normal')
+
+            return result
         mapped_comps = [_map_comp(c) for c in components]
 
         # ── Bileşen tehlike kodlarını doğrula (Bölüm 3 kalite kontrolü) ──────────

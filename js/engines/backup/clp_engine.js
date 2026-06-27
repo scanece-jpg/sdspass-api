@@ -605,7 +605,7 @@ const CLPEngine = (() => {
 
           let ate = ATE_POINT[code];
           if (!ate) return;
-          if (hclass === 'Acute Tox. 2' && ATE_CAT2[code] !== undefined) {
+          if ((hclass === 'Acute Tox. 2' || hclass === 'Akut Tok. 2') && ATE_CAT2[code] !== undefined) {
             ate = ATE_CAT2[code];
           }
           sumInv += conc / ate;

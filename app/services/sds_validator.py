@@ -470,7 +470,9 @@ def validate_sds(
         if isinstance(_p_raw, list):
             _label_p = set(_p_raw)
         elif isinstance(_p_raw, dict):
-            _label_p = set(_p_raw.get('codes', _p_raw.get('selected', [])))
+            _selected  = _p_raw.get('label', {}).get('selected', []) or []
+            _mandatory = _p_raw.get('label', {}).get('mandatory', []) or []
+            _label_p   = set(_selected) | set(_mandatory)
         else:
             _label_p = set()
         _signal = sds_data.get('clp', {}).get('signal_word', 'Warning')

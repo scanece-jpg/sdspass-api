@@ -2126,7 +2126,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                         ate = _ATE_POINT.get(code)
                         if ate is None:
                             continue
-                        if hclass == 'Acute Tox. 2' and code in _ATE_CAT2:
+                        if hclass in ('Acute Tox. 2', 'Akut Tok. 2') and code in _ATE_CAT2:
                             ate = _ATE_CAT2[code]
                         sum_inv += conc / ate
                         _cname = (comp_item.get('name_tr','') if lang=='TR' else '') or comp_item.get('name','') or comp_item.get('cas_no','')

@@ -739,6 +739,47 @@ async def _fetch_pubchem_ghs_fallback(cas: str, client: httpx.AsyncClient) -> di
     return None
 
 
+def _dedupe_h_codes(result: dict) -> dict:
+    """
+    CLP dominans kurallarını API yanıtına uygula — çakışan H kodlarını temizle.
+    Örn: H318 varsa H319 düşer; H314 varsa H315+H319 düşer.
+    ECHA C&L çoklu bildirim birleştirmesinden kaynaklanan çakışmaları önler.
+    clp_service.DOMINANCE ile aynı kural seti.
+    """
+    _DOM = {
+        'H314': ['H318', 'H315', 'H319'],
+        'H318': ['H319'],
+        'H300': ['H301', 'H302'], 'H301': ['H302'],
+        'H310': ['H311', 'H312'], 'H311': ['H312'],
+        'H330': ['H331', 'H332'], 'H331': ['H332'],
+        'H370': ['H371', 'H335', 'H336'], 'H371': ['H335', 'H336'],
+        'H340': ['H341'], 'H350': ['H351'], 'H360': ['H361'],
+        'H410': ['H400', 'H411', 'H412', 'H413'],
+        'H411': ['H412', 'H413'], 'H412': ['H413'],
+        'H224': ['H225', 'H226'], 'H225': ['H226'],
+        'H271': ['H272'], 'H260': ['H261'],
+        'H240': ['H241', 'H242'], 'H241': ['H242'],
+        'H251': ['H252'],
+    }
+    h_codes = result.get('h_codes', [])
+    hazard_classes = result.get('hazard_classes', [])
+    h_set = set(h_codes)
+    dominated = set()
+    for dominant, subs in _DOM.items():
+        if dominant in h_set:
+            dominated.update(subs)
+    if not dominated:
+        return result
+    kept = [i for i, h in enumerate(h_codes) if h not in dominated]
+    result['h_codes'] = [h_codes[i] for i in kept]
+    if hazard_classes:
+        result['hazard_classes'] = [hazard_classes[i] for i in kept if i < len(hazard_classes)]
+    removed = dominated & h_set
+    if removed:
+        print(f'[dedupe_h_codes] Cakisan kodlar kaldirildi: {sorted(removed)}')
+    return result
+
+
 async def lookup_echa_api(cas: str) -> dict | None:
     """
     Canlı API hiyerarşisi (lokal önbellekte bulunamazsa çağrılır):
@@ -752,7 +793,12 @@ async def lookup_echa_api(cas: str) -> dict | None:
     cas = cas.strip()
     cache = _load_cache()
     if cas in cache:
-        return cache[cas]
+        before = list(cache[cas].get('h_codes', []))
+        result = _dedupe_h_codes(cache[cas])
+        if list(result.get('h_codes', [])) != before:
+            cache[cas] = result
+            _save_cache(cache)
+        return result
 
     try:
         async with httpx.AsyncClient(timeout=12.0, follow_redirects=True) as client:
@@ -760,6 +806,7 @@ async def lookup_echa_api(cas: str) -> dict | None:
             # Sıra 1: ECHA C&L API → data/echa_cl/
             result = await _fetch_echa_cl_direct(cas, client)
             if result:
+                result = _dedupe_h_codes(result)
                 result['_cache_source'] = 'echa_cl'
                 save_echa_cl_substance(cas, result)
                 cache[cas] = result
@@ -770,6 +817,7 @@ async def lookup_echa_api(cas: str) -> dict | None:
             print(f'[ECHA C&L] {cas}: doğrudan API boş, PubChem fallback deneniyor')
             result = await _fetch_pubchem_ghs_fallback(cas, client)
             if result:
+                result = _dedupe_h_codes(result)
                 result['_cache_source'] = 'pubchem'
                 save_pubchem_substance(cas, result)
                 cache[cas] = result

@@ -34,16 +34,40 @@ veya **kullanıcı tarafından aksiyona ihtiyaç duyan** maddeleri takip eder.
 
 ---
 
-## MgCl2 Bileşen Verisi (KULLANICI AKSİYONU BEKLİYOR)
+## MgCl2 H318/H319 Çakışması (KAPATILDI — BACKEND OTOMATİK)
 
 - **Sorun:** DIPOL 206, 207, 208 ürünlerinde magnezyum diklorür (7786-30-3) bileşeni
-  Bölüm 3.2'de H318 + H319 birlikte listelenmiş (çakışan ECHA C&L bildirimi).
-- **Doğru sınıflandırma:** Yalnızca H318 (Göz Hasar. 1, Danger, GHS05)
-- **Backend düzeltmesi:** `data/substances_custom.json`'a H318-only kayıt eklendi (commit 60af6882).
-  Bundan sonraki aramalar doğru veriyi döndürür.
-- **Aksiyon:** Her üç üründe ürün editöründe MgCl2 bileşeni yeniden
-  aratılıp kaydedilmeli (H319 düşer, H318 kalır).
-- **Durum:** ⏳ Kullanıcı frontend güncellemesi bekliyor (3 ürün)
+  Bölüm 3.2'de H318 + H319 birlikte listeleniyordu (PubChem çakışan ECHA C&L bildirimi).
+- **Kök neden:** ECHA C&L Inventory'de farklı firmalar H318 (Göz Hasar. 1) veya H319
+  (Göz Tahriş. 2) bildirmiş; PubChem ikisini birleştirip döndürüyor. MgCl2 harmonize
+  listede (SEA Ek-6) yer almadığından tek bir resmi sınıflandırma yok.
+- **Doğru sınıflandırma:** Yalnızca H318 (Göz Hasar. 1) — H318 varken H319 CLP gereği geçersiz.
+- **Backend düzeltmeleri (commit 3a72c34b):**
+  - `echa_service.py`'e `_dedupe_h_codes()` fonksiyonu eklendi.
+  - Her API çekiminde (hem ECHA hem PubChem) ve önbellek okumada CLP dominans
+    kuralları uygulanır: H318 varsa H319 otomatik düşer; H314 varsa H315+H319 düşer vb.
+  - Temizlenen veri önbelleğe (echa_cache.json) geri yazılır — sonraki sorgular temiz gelir.
+  - `clp_service.py` (commit 60af6882): Eye Irrit. 2 çift sayım hatası da düzeltildi
+    (H318 olan bileşen Eye Dam. 1 toplamına eklenirken yanlışlıkla Eye Irrit. 2
+    toplamına da ekleniyordu).
+- **Kapsam:** Bu düzeltme MgCl2'ye özgü değil — tüm maddelerde çakışan H kodları
+  otomatik temizlenir (2026-06-28 itibarıyla sistem doğru çalışmaktadır).
+- **Durum:** ✅ Kapatıldı
+
+---
+
+## Magnesium Dinitrate — SEA Ek-6 Index Numarası (DOĞRULANDI — BOŞ KALMASI DOĞRU)
+
+- **Soru:** Magnesium dinitrate (10377-60-3) için SDS Bölüm 3.2'de KKDİK/SEA
+  index numarası neden yok?
+- **Araştırma (2026-06-28):** SEA Ek-6 (sea_ek6_l-ste_15062020-20200618142549.docx)
+  Tablo 3 incelendi. Magnesium nitrate/dinitrate bu listede yer almıyor.
+  Listede yalnızca şu magnezyum bileşikleri var: hexafluorosilicate (009-018-00-3),
+  powder pyrophoric (012-001-00-3), powder/turnings (012-002-00-9),
+  alkyls (012-003-00-4), phosphide (015-005-00-3) ve birkaç kompleks tuz.
+- **Sonuç:** Harmonize sınıflandırma listesinde olmayan maddeler için
+  SEA/CLP index numarası yoktur. SDS'de bu alanın boş kalması **doğru ve mevzuata uygundur**.
+- **Durum:** ✅ Doğrulandı — sistem doğru davranıyor
 
 ---
 

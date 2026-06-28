@@ -70,7 +70,8 @@ H_TO_ADR: Dict[str, Dict] = {
     'H311': {'class': '6.1', 'pg': 'II'},  # Dermal Kat.2-3
     'H331': {'class': '6.1', 'pg': 'II'},  # İnhalasyon Kat.2-3
     # Sınıf 8 — Korozif
-    'H314': {'class': '8', 'pg': 'II'},
+    # ADR §2.1.3.5.5: Test verisi yoksa en kötü senaryo → PG I varsayılan.
+    'H314': {'class': '8', 'pg': 'I'},
     # Sınıf 9 — Çevre Tehlikesi
     # ADR 2.2.9.1.10: H412/H413 ADR Sınıf 9 kriterini karşılamaz
     # H304 (Aspirasyon Tehlikesi): ADR'de bağımsız Sınıf 9 oluşturmaz;
@@ -100,6 +101,17 @@ def resolve_conflict(cls_a: str, pg_a: Optional[str],
     İki ADR sınıfını karşılaştırır; kazananı ve kaybedeni döner.
     Returns: { winner, win_pg, loser }
     """
+    # ── ÖZEL KURAL: Sınıf 5.1 vs Sınıf 8 — rank hesabından önce ──────────────
+    # ADR §2.1.3.10: Sınıf 8 PG I, Sınıf 5.1'i (tüm PG) yener.
+    # CLASS_RANK 5.1>8 verir; bu kural rank'tan önce uygulanarak doğru sonuç sağlanır.
+    if {cls_a, cls_b} == {'5.1', '8'}:
+        pg8 = _pg_num(pg_a if cls_a == '8' else pg_b)
+        if pg8 == 1:
+            win_pg8 = pg_a if cls_a == '8' else pg_b
+            return {'winner': '8', 'win_pg': win_pg8, 'loser': '5.1'}
+        win_pg51 = pg_a if cls_a == '5.1' else pg_b
+        return {'winner': '5.1', 'win_pg': win_pg51, 'loser': '8'}
+
     rank_a = CLASS_RANK.get(cls_a, 0)
     rank_b = CLASS_RANK.get(cls_b, 0)
 
@@ -250,6 +262,19 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
             'note': 'UN 2810/2811 organik bileşikler için; inorganik → UN 3287/3288',
         }
     if cls == '8':
+        if sub == '5.1':
+            return {
+                'un': 'UN 3093',
+                'label': 'Korozif Sıvı, Oksitleyici, B.N.O.',
+                'note': (
+                    'UN 3093 (CO1) seçim gerekçesi (ADR 2025): '
+                    'Aşındırıcı sıvı (H314, Sınıf 8 PG I) + oksitleyici (H271/H272, Sınıf 5.1) kombinasyonu. '
+                    'ADR §2.1.3.10: Sınıf 8 PG I, Sınıf 5.1\'i her durumda yener. '
+                    'ADR §2.1.3.5.5: Test verisi yoksa en kötü senaryo (PG I) uygulanır. '
+                    'ADR 2025 Tablo A UN3093 PG I: kemler=885, tünel=E. '
+                    'Gerçek korozivite test verisi (§2.2.8.1.4.1) mevcutsa PG II veya III\'e revize edilebilir.'
+                ),
+            }
         if sub == '3':
             return {
                 'un': 'UN 2921' if is_solid else 'UN 2920',

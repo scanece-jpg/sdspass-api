@@ -1,4 +1,21 @@
 {
+  "7786-30-3": {
+    "name": "Magnesium chloride",
+    "name_tr": "Magnezyum klorür",
+    "ec_no": "232-094-6",
+    "index_no": "",
+    "annex_vi": false,
+    "sea_ek6": false,
+    "signal": "Danger",
+    "pictograms": ["GHS05"],
+    "hazards": [
+      {"h_class": "Eye Dam. 1", "h_code": "H318"}
+    ],
+    "m_factors": {},
+    "atp": "custom",
+    "source": "ECHA C&L Inventory — en yaygın bildirim (Eye Dam. 1 H318)",
+    "source_priority": 5
+  },
   "68439-46-3": {
     "name": "Alcohols, C12-14, ethoxylated",
     "ec_no": "614-482-0",

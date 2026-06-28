@@ -304,12 +304,18 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
                 sum_eye_dam1 += conc
                 break  # bileşen başına bir kez say
 
-    sum_eye_irrit2 = sum(
-        float(comp.get("concentration", comp.get("conc", 0)) or 0)
-        for comp in components
-        for h in comp.get("hazards", [])
-        if h.get("h_class","") == "Eye Irrit. 2"
-    )
+    # Eye Irrit. 2 toplamı: Eye Dam. 1 veya Skin Corr. 1 içeren bileşenler hariç.
+    # Aynı bileşende H318/H314 + H319 birlikte bulunuyorsa sum_eye_dam1'e zaten katkı yaptı;
+    # H319'a da eklemek çift sayıma yol açar (ECHA C&L çakışan bildirimlerde olabilir).
+    sum_eye_irrit2 = 0.0
+    for _comp_ei in components:
+        if any(_hh.get("h_class", "") in _EYE_DAM1_CLASSES
+               for _hh in _comp_ei.get("hazards", [])):
+            continue
+        for _hh in _comp_ei.get("hazards", []):
+            if _hh.get("h_class", "") == "Eye Irrit. 2":
+                sum_eye_irrit2 += float(_comp_ei.get("concentration", _comp_ei.get("conc", 0)) or 0)
+                break
 
     # Her bileşen × her tehlike sınıfı
     for comp in components:
@@ -1201,10 +1207,14 @@ async def calculate_clp(db: AsyncSession, components: List[Any], form: str = '')
     sum_eye_dam1      = 0.0  # Eye Dam. 1 bileşen toplamı
     sum_eye_irrit2_b  = 0.0  # Eye Irrit. 2 bileşen toplamı
 
+    _EYE_DAM1_HCS = {'Eye Dam. 1', 'Skin Corr. 1', 'Skin Corr. 1A', 'Skin Corr. 1B', 'Skin Corr. 1C'}
     for item in enriched:
         if not item['data']:
             continue
         conc = item['conc']
+        _item_hcs = {haz.get('h_class', '').replace('*', '').strip()
+                     for haz in item['data'].get('hazards', [])}
+        _has_eye_dam1 = bool(_item_hcs & _EYE_DAM1_HCS)
         for haz in item['data'].get('hazards', []):
             hc = haz.get('h_class', '').replace('*', '').strip()
             if hc in ('Skin Corr. 1', 'Skin Corr. 1A', 'Skin Corr. 1B', 'Skin Corr. 1C'):
@@ -1213,7 +1223,9 @@ async def calculate_clp(db: AsyncSession, components: List[Any], form: str = '')
                 sum_skin_irrit2_b += conc
             if hc == 'Eye Dam. 1':
                 sum_eye_dam1 += conc
-            if hc == 'Eye Irrit. 2':
+            if hc == 'Eye Irrit. 2' and not _has_eye_dam1:
+                # Eye Dam. 1 / Skin Corr. 1 taşıyan bileşen zaten sum_eye_dam1'e dahil;
+                # H319'a da eklemek çift sayıma yol açar (ECHA C&L çakışan bildirimlerde olabilir).
                 sum_eye_irrit2_b += conc
 
     # Kural 1: ΣSkin Corr.1 ≥ %5 → H314 (toplamsal — Tablo 3.2.3 additivity)

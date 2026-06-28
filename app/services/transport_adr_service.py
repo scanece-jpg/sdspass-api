@@ -64,9 +64,25 @@ def get_adr_details(un_no: str, packing_group: str = 'II') -> dict:
     pg = packing_group.upper().replace('PG', '').strip()
     pg_data = entry.get('packing_groups', {}).get(pg, {})
 
-    # PG bulunamazsa ilk olanı al
+    # İç içe yapıda PG bulunamazsa ilk olanı al
+    _pg_used = pg
     if not pg_data and entry.get('packing_groups'):
-        pg_data = list(entry['packing_groups'].values())[0]
+        _first_key = list(entry['packing_groups'].keys())[0]
+        pg_data = entry['packing_groups'][_first_key]
+        _pg_used = _first_key
+
+    # Düz (flat) yapı desteği: packing_groups yoksa üst seviyeden oku.
+    # Bazı kayıtlar (örn. UN3098) packing_groups dict'i taşımaz;
+    # packing_group / kemler / tunnel alanları doğrudan giriş seviyesindedir.
+    _has_nested = bool(entry.get('packing_groups'))
+    _pg_final      = _pg_used if _has_nested else (entry.get('packing_group') or _pg_used)
+    _kemler_final  = pg_data.get('kemler') if _has_nested else entry.get('kemler', '')
+    _tunnel_final  = pg_data.get('tunnel') if _has_nested else entry.get('tunnel', '—')
+    # Her iki yapıda da pg_data boşsa üst seviyeye düş (ek güvence)
+    if _kemler_final is None:
+        _kemler_final = entry.get('kemler', '')
+    if _tunnel_final is None:
+        _tunnel_final = entry.get('tunnel', '—')
 
     return {
         'un_no':               un_key,
@@ -74,12 +90,12 @@ def get_adr_details(un_no: str, packing_group: str = 'II') -> dict:
         'name_tr':             entry.get('name_tr', ''),
         'class':               entry.get('class', '—'),
         'classification_code': pg_data.get('classification_code') or entry.get('classification_code', '—'),
-        'kemler':              pg_data.get('kemler', '—'),
-        'tunnel_code':         pg_data.get('tunnel', '—'),
+        'kemler':              _kemler_final if _kemler_final else '—',
+        'tunnel_code':         _tunnel_final if _tunnel_final else '—',
         'label':               pg_data.get('label', entry.get('class', '—')),
-        'packing_group':       pg,
+        'packing_group':       _pg_final,
         'special_provisions':  entry.get('special_provisions', []),
-        'limited_qty':         (lambda lq: lq.get(pg, '—') if isinstance(lq, dict) else (lq or '—'))(entry.get('limited_qty', '—')),
+        'limited_qty':         (lambda lq: lq.get(_pg_final, '—') if isinstance(lq, dict) else (lq or '—'))(entry.get('limited_qty', '—')),
         # IMDG ve IATA için sınıf aynı, isim farklı olabilir
         'imdg_class':          entry.get('class', '—'),
         'iata_class':          entry.get('class', '—'),

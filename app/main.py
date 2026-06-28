@@ -100,6 +100,38 @@ async def generate_pdf(data: dict = Body(...)):
         lang        = data.get('lang', 'TR')
         product     = data.get('product', {})
         components  = data.get('components', [])
+
+        # Bileşen H kodlarını yerel önbellekten tazele — eski kayıtlardaki stale veriyi düzelt.
+        # Sadece yerel dosyalar okunur (echa_cache.json + substance_lookup); canlı API çağrısı yok.
+        def _refresh_comp_hazards(comp: dict) -> dict:
+            cas = (comp.get('cas_no') or comp.get('cas') or '').strip()
+            if not cas:
+                return comp
+            try:
+                # 1. Yerel DB (SEA Ek-6, Annex VI, custom, arşiv)
+                from app.services.substance_lookup import lookup_substance as _lu
+                fresh = _lu(cas)
+                if fresh and fresh.get('hazards'):
+                    c = dict(comp)
+                    c['hazards'] = fresh['hazards']
+                    return c
+                # 2. ECHA önbelleği (echa_cache.json) — dominans kuralı uygulanmış
+                from app.services.echa_service import _load_cache, _dedupe_h_codes
+                cached = _dedupe_h_codes(dict(_load_cache().get(cas, {})))
+                h_codes_c = cached.get('h_codes', [])
+                h_cls_c   = cached.get('hazard_classes', [])
+                if h_codes_c:
+                    c = dict(comp)
+                    c['hazards'] = [
+                        {'h_class': cls, 'h_code': code}
+                        for cls, code in zip(h_cls_c, h_codes_c)
+                    ]
+                    return c
+            except Exception:
+                pass
+            return comp
+
+        components = [_refresh_comp_hazards(c) for c in components]
         # H360x/H361x sub-kodlarını kanonik büyük harfe normalize et (H361d→H361D, H360Df→H360FD)
         def _norm_sub(h: str) -> str:
             s = str(h).replace('*', '').strip()

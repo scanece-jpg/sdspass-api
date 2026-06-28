@@ -1,21 +1,4 @@
 {
-  "7786-30-3": {
-    "name": "Magnesium chloride",
-    "name_tr": "Magnezyum klorür",
-    "ec_no": "232-094-6",
-    "index_no": "",
-    "annex_vi": false,
-    "sea_ek6": false,
-    "signal": "Danger",
-    "pictograms": ["GHS05"],
-    "hazards": [
-      {"h_class": "Eye Dam. 1", "h_code": "H318"}
-    ],
-    "m_factors": {},
-    "atp": "custom",
-    "source": "ECHA C&L Inventory — en yaygın bildirim (Eye Dam. 1 H318)",
-    "source_priority": 5
-  },
   "68439-46-3": {
     "name": "Alcohols, C12-14, ethoxylated",
     "ec_no": "614-482-0",
@@ -1409,5 +1392,41 @@
     "m_factors": {},
     "index_no": "",
     "atp": "PubChem/33 notif"
+  },
+  "7786-30-3": {
+    "name": "magnesium dichloride",
+    "name_tr": "magnezyum diklorür",
+    "ec_no": "232-094-6",
+    "annex_vi": false,
+    "signal": "Danger",
+    "pictograms": [
+      "GHS05",
+      "GHS07"
+    ],
+    "hazards": [
+      {
+        "h_class": "Met. Corr. 1",
+        "h_code": "H290"
+      },
+      {
+        "h_class": "Acute Tox. 4",
+        "h_code": "H302"
+      },
+      {
+        "h_class": "Skin Irrit. 2",
+        "h_code": "H315"
+      },
+      {
+        "h_class": "Eye Dam. 1",
+        "h_code": "H318"
+      },
+      {
+        "h_class": "STOT SE 3",
+        "h_code": "H335"
+      }
+    ],
+    "m_factors": {},
+    "index_no": "",
+    "atp": "PubChem+CLP-dedup"
   }
 }

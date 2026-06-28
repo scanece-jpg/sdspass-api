@@ -101,49 +101,48 @@ async def generate_pdf(data: dict = Body(...)):
         product     = data.get('product', {})
         components  = data.get('components', [])
 
-        # Bileşen H kodlarını yerel önbellekten tazele + CLP dominans uygula.
-        # Sadece yerel dosyalar okunur; canlı API çağrısı yok.
+        # Bileşen H kodlarını tazele + CLP dominans uygula.
+        # Render'da lokal cache yok → lookup_echa_api ile önbellek/canlı çekim kullan.
+        import asyncio as _aio
         from app.services.substance_lookup import lookup_substance as _lu_sub
-        from app.services.echa_service import _load_cache as _ec_cache, _dedupe_h_codes as _dedup
+        from app.services.echa_service import _dedupe_h_codes as _dedup, lookup_echa_api as _lu_echa
 
-        def _refresh_comp_hazards(comp: dict) -> dict:
+        async def _refresh_comp(comp: dict) -> dict:
             cas = (comp.get('cas_no') or comp.get('cas') or '').strip()
             if not cas:
                 return comp
             try:
+                # 1. Yerel DB (SEA Ek-6, CLP Annex VI — git'te mevcut)
                 fresh = _lu_sub(cas)
                 if fresh and fresh.get('hazards'):
-                    # CLP dominans kurallarını uygula (H318 varsa H319 düşür, vb.)
                     raw = {
-                        'h_codes':       [h['h_code'] for h in fresh['hazards']],
-                        'hazard_classes': [h['h_class'] for h in fresh['hazards']],
+                        'h_codes':        [h['h_code'] for h in fresh['hazards']],
+                        'hazard_classes':  [h['h_class'] for h in fresh['hazards']],
                     }
-                    deduped = _dedup(raw)
+                    _dedup(raw)   # in-place deduplikasyon
+                    c = dict(comp)
+                    c['hazards'] = [
+                        {'h_class': cls, 'h_code': code}
+                        for cls, code in zip(raw['hazard_classes'], raw['h_codes'])
+                    ]
+                    return c
+                # 2. ECHA/PubChem API — önbellekten veya canlı çekim, deduplikasyon dahil
+                echa = await _lu_echa(cas)
+                if echa and echa.get('h_codes'):
                     c = dict(comp)
                     c['hazards'] = [
                         {'h_class': cls, 'h_code': code}
                         for cls, code in zip(
-                            deduped.get('hazard_classes', []),
-                            deduped.get('h_codes', [])
+                            echa.get('hazard_classes', []),
+                            echa.get('h_codes', [])
                         )
-                    ]
-                    return c
-                # Yerel DB'de yoksa echa_cache.json'a bak (zaten deduplikasyon uygulanmış)
-                cached = _dedup(dict(_ec_cache().get(cas, {})))
-                h_codes_c = cached.get('h_codes', [])
-                h_cls_c   = cached.get('hazard_classes', [])
-                if h_codes_c:
-                    c = dict(comp)
-                    c['hazards'] = [
-                        {'h_class': cls, 'h_code': code}
-                        for cls, code in zip(h_cls_c, h_codes_c)
                     ]
                     return c
             except Exception:
                 pass
             return comp
 
-        components = [_refresh_comp_hazards(c) for c in components]
+        components = list(await _aio.gather(*[_refresh_comp(c) for c in components]))
         # H360x/H361x sub-kodlarını kanonik büyük harfe normalize et (H361d→H361D, H360Df→H360FD)
         def _norm_sub(h: str) -> str:
             s = str(h).replace('*', '').strip()

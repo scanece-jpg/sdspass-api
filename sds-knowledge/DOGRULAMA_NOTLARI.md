@@ -18,22 +18,19 @@ veya **kullanıcı tarafından aksiyona ihtiyaç duyan** maddeleri takip eder.
 
 ---
 
-### UN3098 → UN3093 Sınıf Değişikliği (KULLANICI AKSİYONU BEKLİYOR)
+### UN3098 → UN3093 Sınıf Değişikliği (KAPATILDI — BACKEND OTOMATİK)
 - **Ürünler:** DIPOL 206, DIPOL 207, DIPOL 208
-- **Mevcut:** UN3098 / Sınıf 5.1 / PG III
-- **Önerilen:** UN3093 / Sınıf 8 / PG I
-- **Gerekçe:**
-  - ADR §2.1.3.5.5 — test verisi yoksa en kötü senaryo uygulanır
-  - pH ≤ 2 → CLP Cilt Aş. 1 (H314) → ADR aşındırıcılık PG I (ihtiyaten)
-  - ADR §2.1.3.10 matrisine göre Sınıf 8 PG I, Sınıf 5.1'i her durumda yener
-  - UN3093 PG I ADR değerleri (resmi ADR 2025 onaylı):
-    - Kemler: 885 | Tünel: E | Taşıma kategorisi: 1 | Etiket: 8 (5.1)
-- **Aksiyon:** Ürün editöründe her üç ürünün taşımacılık bölümünde
-  UN3098 → UN3093 ve PG III → PG I olarak güncellenmeli.
+- **Eski çıktı:** UN3098 / Sınıf 5.1 / PG III
+- **Yeni çıktı:** UN3093 / Sınıf 8 / PG I (otomatik)
+- **Backend düzeltmesi (commit 0db7a6a5):**
+  - `H_TO_ADR['H314']`: PG II → **PG I** (ADR §2.1.3.5.5 en kötü senaryo)
+  - `resolve_conflict`: Sınıf 5.1 vs 8 için erken çıkış kuralı — Sınıf 8 PG I olduğunda kazanır
+  - `_get_un_entry`: Sınıf 8 + yan tehlike 5.1 → **UN3093** Korozif Sıvı, Oksitleyici
+- **Doğrulanan ADR değerleri (ADR 2025 Tablo A, sayfa 499):**
+  - Kemler: 885 | Tünel: E | Sınıflandırma kodu: CO1 | Etiket: 8 (5.1)
 - **Not:** Gerçek ADR korozivite test verisi (§2.2.8.1.4.1, zaman-bazlı doku hasarı)
-  mevcut olursa PG II veya III'e revize edilebilir — o zaman UN3093/PG II
-  (kemler 85, tünel E) veya UN3098/PG III geçerli olabilir.
-- **Durum:** ⏳ Kullanıcı frontend güncellemesi bekliyor
+  mevcut olursa motor güncellenebilir — PG II veya III'e revize mümkün.
+- **Durum:** ✅ Kapatıldı (backend otomatik olarak doğru UN3093/PG I üretir)
 
 ---
 

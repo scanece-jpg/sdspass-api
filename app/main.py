@@ -104,7 +104,11 @@ async def generate_pdf(data: dict = Body(...)):
         # Bileşen H kodlarını tazele + CLP dominans uygula.
         # Render'da lokal cache yok → lookup_echa_api ile önbellek/canlı çekim kullan.
         import asyncio as _aio
-        from app.services.substance_lookup import lookup_substance as _lu_sub
+        from app.services.substance_lookup import (
+            lookup_substance as _lu_sub,
+            save_custom_substance as _save_custom,
+            _load_custom as _custom_db,
+        )
         from app.services.echa_service import _dedupe_h_codes as _dedup, lookup_echa_api as _lu_echa
 
         async def _refresh_comp(comp: dict) -> dict:
@@ -112,14 +116,14 @@ async def generate_pdf(data: dict = Body(...)):
             if not cas:
                 return comp
             try:
-                # 1. Yerel DB (SEA Ek-6, CLP Annex VI — git'te mevcut)
+                # 1. Yerel DB (SEA Ek-6, CLP Annex VI, substances_custom — git'te mevcut)
                 fresh = _lu_sub(cas)
                 if fresh and fresh.get('hazards'):
                     raw = {
                         'h_codes':        [h['h_code'] for h in fresh['hazards']],
                         'hazard_classes':  [h['h_class'] for h in fresh['hazards']],
                     }
-                    _dedup(raw)   # in-place deduplikasyon
+                    _dedup(raw)
                     c = dict(comp)
                     c['hazards'] = [
                         {'h_class': cls, 'h_code': code}
@@ -129,6 +133,27 @@ async def generate_pdf(data: dict = Body(...)):
                 # 2. ECHA/PubChem API — önbellekten veya canlı çekim, deduplikasyon dahil
                 echa = await _lu_echa(cas)
                 if echa and echa.get('h_codes'):
+                    # substances_custom.json'a kaydet — kalıcı, git'te commit'li
+                    if cas not in _custom_db():
+                        try:
+                            _save_custom(cas, {
+                                'name':       echa.get('name', ''),
+                                'ec_no':      echa.get('ec_no', ''),
+                                'signal':     echa.get('signal', ''),
+                                'pictograms': echa.get('pictograms', []),
+                                'hazards': [
+                                    {'h_class': c2, 'h_code': h2}
+                                    for c2, h2 in zip(
+                                        echa.get('hazard_classes', []),
+                                        echa.get('h_codes', [])
+                                    )
+                                ],
+                                'm_factors': echa.get('m_factors', {}),
+                                'index_no':  '',
+                                'atp':       'pubchem-auto',
+                            })
+                        except Exception:
+                            pass
                     c = dict(comp)
                     c['hazards'] = [
                         {'h_class': cls, 'h_code': code}

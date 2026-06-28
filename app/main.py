@@ -1102,11 +1102,32 @@ async def substance_lookup(cas: str):
                 cache_src  = echa.get('_cache_source', 'echa_cl')
                 is_pubchem = cache_src == 'pubchem'
                 try:
-                    from app.services.substance_lookup import save_echa_cl_substance, save_pubchem_substance
+                    from app.services.substance_lookup import (
+                        save_echa_cl_substance, save_pubchem_substance,
+                        save_custom_substance, _load_custom,
+                    )
                     if is_pubchem:
                         save_pubchem_substance(cas, echa)
                     else:
                         save_echa_cl_substance(cas, echa)
+                    # substances_custom.json'a da yaz — git'te commit'li, Render'da kalıcı.
+                    # Manuel kurasyon varsa üzerine yazma.
+                    if cas not in _load_custom():
+                        _h_codes = echa.get('h_codes', [])
+                        _h_cls   = echa.get('hazard_classes', [])
+                        save_custom_substance(cas, {
+                            'name':       echa.get('name', ''),
+                            'ec_no':      echa.get('ec_no', '') or get_ec_no(cas),
+                            'signal':     echa.get('signal', ''),
+                            'pictograms': echa.get('pictograms', []),
+                            'hazards': [
+                                {'h_class': c, 'h_code': h}
+                                for c, h in zip(_h_cls, _h_codes)
+                            ],
+                            'm_factors':  echa.get('m_factors', {}),
+                            'index_no':   '',
+                            'atp':        'pubchem-auto',
+                        })
                 except Exception:
                     pass
                 return {

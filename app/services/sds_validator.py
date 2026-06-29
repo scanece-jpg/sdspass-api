@@ -444,14 +444,28 @@ def validate_sds(
         p = _H_TO_PIC.get(h)
         if p:
             _required_pics.add(p)
-    # GHS07 baskınlık: tehlike piktogramları varken GHS07 gizlenebilir (CLP Art.26)
-    if _required_pics & _DANGER_PICS:
+    # GHS07 baskınlık — CLP Madde 26 / SEA Madde 28, ghs_pictogram.py ile tutarlı:
+    #
+    # Kural A — CLP Art.26(3): GHS06 (kafatası) varsa GHS07 tamamen kaldırılır.
+    if 'GHS06' in _required_pics:
         _required_pics.discard('GHS07')
-    # GHS05 varken GHS07 yalnızca cilt/göz tahrişi (H315/H319) kaynaklıysa gizlenir.
-    # H317 (cilt duyar.), H334 (solunum duyar.), H302/H312/H332, H335/H336 varsa GHS07 KALIR.
-    # ghs_pictogram.py ile tutarlı olmalı.
-    _GHS07_KEEPS = {'H302', 'H312', 'H332', 'H317', 'H334', 'H335', 'H336'}
-    if 'GHS05' in _required_pics and not (_h_set_base & _GHS07_KEEPS):
+
+    # Kural B — CLP Art.26(4): GHS05 (aşındırıcı) varsa GHS07 yalnızca H315/H319
+    #   kaynaklıysa gizlenir; H317/H302/H312/H332/H335/H336 varsa KALIR.
+    _GHS07_KEEPS_GHS05 = {'H302', 'H312', 'H332', 'H317', 'H335', 'H336'}
+    if 'GHS05' in _required_pics and 'GHS06' not in _required_pics:
+        if not (_h_set_base & _GHS07_KEEPS_GHS05):
+            _required_pics.discard('GHS07')
+
+    # Kural C — CLP Art.26(5): GHS08 YALNIZCA solunum hassasiyeti (H334) nedeniyle
+    #   varsa GHS07 cilt duyar.(H317) + cilt/göz tahrişi(H315/H319) için gizlenir;
+    #   H302/H312/H332/H335/H336 varsa GHS07 KALIR.
+    #   GHS08 kanserojen(H350)/mutajen(H340)/repro(H360) nedeniyle varsa kural
+    #   devreye GİRMEZ — GHS07 etkilenmez.
+    _GHS07_KEEPS_H334 = {'H302', 'H312', 'H332', 'H335', 'H336'}
+    if ('GHS08' in _required_pics
+            and 'H334' in _h_set_base
+            and not (_h_set_base & _GHS07_KEEPS_H334)):
         _required_pics.discard('GHS07')
     _missing_pics = _required_pics - _label_pics
     _extra_pics   = _label_pics - _required_pics - {'GHS09'}  # GHS09 ayrıca V019'da

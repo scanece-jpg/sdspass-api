@@ -118,18 +118,26 @@ async def generate_pdf(data: dict = Body(...)):
             try:
                 # 1. Yerel DB (SEA Ek-6, CLP Annex VI, substances_custom — git'te mevcut)
                 fresh = _lu_sub(cas)
-                if fresh and fresh.get('hazards'):
-                    raw = {
-                        'h_codes':        [h['h_code'] for h in fresh['hazards']],
-                        'hazard_classes':  [h['h_class'] for h in fresh['hazards']],
-                    }
-                    _dedup(raw)
-                    c = dict(comp)
-                    c['hazards'] = [
-                        {'h_class': cls, 'h_code': code}
-                        for cls, code in zip(raw['hazard_classes'], raw['h_codes'])
-                    ]
-                    return c
+                if fresh is not None:
+                    # DB'de kayıt var — hazards boş olsa bile (sınıflandırılmamış madde: su, glikoz vb.)
+                    # ECHA API'ye düşme; boş hazards kasıtlı "sınıflandırılmamış" anlamına gelir.
+                    if fresh.get('hazards'):
+                        raw = {
+                            'h_codes':        [h['h_code'] for h in fresh['hazards']],
+                            'hazard_classes':  [h['h_class'] for h in fresh['hazards']],
+                        }
+                        _dedup(raw)
+                        c = dict(comp)
+                        c['hazards'] = [
+                            {'h_class': cls, 'h_code': code}
+                            for cls, code in zip(raw['hazard_classes'], raw['h_codes'])
+                        ]
+                        return c
+                    else:
+                        # Sınıflandırılmamış — hazards listesini temizle, ECHA'ya gitme
+                        c = dict(comp)
+                        c['hazards'] = []
+                        return c
                 # 2. ECHA/PubChem API — önbellekten veya canlı çekim, deduplikasyon dahil
                 echa = await _lu_echa(cas)
                 if echa and echa.get('h_codes'):

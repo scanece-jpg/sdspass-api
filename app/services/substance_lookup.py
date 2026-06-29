@@ -32,6 +32,148 @@ _SEA_EK6_DB:   Optional[Dict] = None
 _lock = threading.Lock()
 
 # ---------------------------------------------------------------------------
+# Türkçe → İngilizce h_class normalizer
+# sea_ek6_tr.json'daki Türkçe sınıf adlarını CLP/clp_service'in beklediği
+# İngilizce kanonik isimlere çevirir. Regex tabanlı — yazım varyasyonlarını
+# (nokta, boşluk farkları, kısaltma değişimleri) hepsini yakalar.
+# ---------------------------------------------------------------------------
+def _normalize_hclass(raw: str) -> str:
+    """
+    Türkçe veya tutarsız CLP sınıf adını kanonik İngilizce forma çevirir.
+    Bilinmeyenler olduğu gibi döner.
+    """
+    s = raw.strip().replace(' ', ' ')
+    # Boşluk/nokta normalizasyonu: "Akut Tok.2" → "Akut Tok. 2"
+    s = re.sub(r'\.\s*(\d)', r'. \1', s)
+    s = re.sub(r'\s+', ' ', s).strip()
+
+    # Kategori numarasını sona al
+    _cat = re.search(r'(\d+\w*)$', s)
+    cat = ' ' + _cat.group(1) if _cat else ''
+    base = s[:_cat.start()].strip() if _cat else s
+
+    b = base.upper()
+
+    # Akut toksisite
+    if re.match(r'AKUT\s*TOK', b):
+        return f'Acute Tox.{cat}'
+
+    # Cilt aşındırıcı
+    if re.match(r'CILT\s*A[ŞS]', b):
+        return f'Skin Corr.{cat}'
+
+    # Cilt tahrişi
+    if re.match(r'CILT\s*(TAH|THR)', b):
+        return f'Skin Irrit.{cat}'
+
+    # Cilt hassasiyeti
+    if re.match(r'CILT\s*HASSAS', b):
+        return f'Skin Sens.{cat}'
+
+    # Göz hasarı
+    if re.match(r'G[ÖO]Z\s*(HASAR|HSR)', b):
+        return f'Eye Dam.{cat}'
+
+    # Göz tahrişi
+    if re.match(r'G[ÖO]Z\s*(TAH|THR)', b):
+        return f'Eye Irrit.{cat}'
+
+    # Solunum hassasiyeti
+    if re.match(r'SOLNM\s*HASSAS', b):
+        return f'Resp. Sens.{cat}'
+
+    # BHOT Tek Maruziyet (STOT SE)
+    if re.match(r'BHOT\s*TEK', b):
+        return f'STOT SE{cat}'
+
+    # BHOT Tekrarlanan Maruziyet (STOT RE)
+    if re.match(r'BHOT\s*TEKR', b):
+        return f'STOT RE{cat}'
+
+    # Kanserojen
+    if re.match(r'KANS', b):
+        return f'Carc.{cat}'
+
+    # Mutajen
+    if re.match(r'MUTA', b):
+        return f'Muta.{cat}'
+
+    # Üreme toksisitesi — "Örm. Sis. Tok." / "Üreme"
+    if re.match(r'([ÜU]REM|[ÖO]RM)', b):
+        return f'Repr.{cat}'
+
+    # Sucul akut
+    if re.match(r'SUCUL\s*AKUT', b):
+        return f'Aquatic Acute{cat}'
+
+    # Sucul kronik
+    if re.match(r'SUCUL\s*KRON', b):
+        return f'Aquatic Chronic{cat}'
+
+    # Alevlenir sıvı
+    if re.match(r'ALEV[^G]*(SIV|SÜV|SIV)', b) or re.match(r'ALEV\.\s*SIV', b) or 'SIV' in b and 'ALEV' in b:
+        return f'Flam. Liq.{cat}'
+
+    # Alevlenir katı
+    if re.match(r'ALEV.*KAT', b):
+        return f'Flam. Sol.{cat}'
+
+    # Alevlenir gaz
+    if re.match(r'ALEV.*GAZ', b):
+        return f'Flam. Gas{cat}'
+
+    # Aspirasyon toksisitesi
+    if re.match(r'ASP', b):
+        return f'Asp. Tox.{cat}'
+
+    # Metal aşındırıcı
+    if re.match(r'MET', b):
+        return f'Met. Corr.{cat}'
+
+    # Basınçlı gaz
+    if re.match(r'BAS[Iİ]N', b):
+        return 'Press. Gas'
+
+    # Oksitleyici gaz/sıvı/katı
+    if re.match(r'OKSIT.*GAZ', b):
+        return f'Ox. Gas{cat}'
+    if re.match(r'OKSIT.*SIV', b):
+        return f'Ox. Liq.{cat}'
+    if re.match(r'OKSIT.*KAT', b):
+        return f'Ox. Sol.{cat}'
+
+    # Organik peroksit
+    if re.match(r'ORG.*PEROKS', b):
+        return f'Org. Perox.{cat}'
+
+    # Patlayıcı
+    if re.match(r'PAT', b) and 'KARS' not in b:
+        return f'Explos.{cat}'
+
+    # Pirofori
+    if re.match(r'PIRO', b):
+        return f'Pyr.{cat}'
+
+    # Kendiliğinden ısınan
+    if re.match(r'KEND.*ISIN', b):
+        return f'Self-heat.{cat}'
+
+    # Su ile tepkimeye giren
+    if re.match(r'SU[-\s]*TEPK', b):
+        return f'Water-react.{cat}'
+
+    # Ozon
+    if re.match(r'OZON', b):
+        return f'Ozone{cat}'
+
+    # Karsiyojenik patlamaz
+    if re.match(r'KAR.*PAT', b):
+        return 'Explos. (unstable)'
+
+    return raw  # bilinmeyen — değiştirme
+
+
+# ---------------------------------------------------------------------------
 # Tehlike sınıfı grupları — merge için aynı sınıfın farklı H kodlarını eşleştirir
 # CLP/KKDİK Ek-2 sınıf yapısına göre: aynı gruptaki kodlar birbirini kapsar
 # (örn. H314 ve H315 aynı sınıf — cilt korozif/tahriş edici)
@@ -224,7 +366,12 @@ def _sea_ek6_to_legacy(entry: dict) -> dict:
     names = _load_names().get(cas, {})
     hazards = []
     for c in entry.get('classification', []):
-        h = {'h_class': c.get('class', ''), 'h_code': c.get('h_code', '')}
+        raw_class = c.get('class', '')
+        h = {
+            'h_class':    _normalize_hclass(raw_class),  # İngilizce kanonik ad
+            'h_class_tr': raw_class,                      # Türkçe orijinal (görüntü için)
+            'h_code':     c.get('h_code', ''),
+        }
         if c.get('class_asterisk'):
             h['note_flag'] = '*'
         hazards.append(h)

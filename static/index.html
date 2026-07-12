@@ -4437,57 +4437,6 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closePhysMod
 </script>
 
 <!-- ═══════════════════════════════════════════════════════════ -->
-<!-- HATA RAPOR MODALI                                          -->
-<!-- ═══════════════════════════════════════════════════════════ -->
-<div id="error-report-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:1500;align-items:center;justify-content:center;padding:16px">
-  <div style="background:var(--bg2);border:1px solid rgba(252,129,74,.4);border-radius:12px;width:min(680px,98vw);max-height:90vh;overflow-y:auto;box-shadow:0 24px 64px rgba(0,0,0,.8)">
-    <div style="padding:14px 18px;background:rgba(252,129,74,.08);border-bottom:1px solid rgba(252,129,74,.25);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:1">
-      <span style="font-size:13px;font-weight:700;color:#fc814a">📝 Hata Raporu — Önizleme</span>
-      <button onclick="document.getElementById('error-report-modal').style.display='none'"
-        style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:16px">✕</button>
-    </div>
-
-    <!-- Yükleniyor -->
-    <div id="error-report-loading" style="padding:32px;text-align:center;color:var(--text3);font-size:12px">
-      ⏳ Claude raporu analiz ediyor…
-    </div>
-
-    <!-- İçerik (yüklendikten sonra gösterilir) -->
-    <div id="error-report-content-area" style="display:none;padding:14px 18px">
-
-      <!-- Doğrulama notu -->
-      <div style="margin-bottom:14px">
-        <div style="font-size:11px;font-weight:700;color:#fc814a;margin-bottom:4px">
-          📄 DOGRULAMA_NOTLARI.md — İnsan referansı
-        </div>
-        <textarea id="error-report-note"
-          style="width:100%;height:160px;background:rgba(0,0,0,.3);border:1px solid var(--border2);border-radius:6px;color:var(--text);font-family:var(--mono);font-size:11px;padding:10px;resize:vertical;box-sizing:border-box"></textarea>
-        <button onclick="saveErrorNote()"
-          style="margin-top:6px;background:rgba(252,129,74,.15);border:1px solid rgba(252,129,74,.4);color:#fc814a;cursor:pointer;font-size:11px;font-weight:700;border-radius:6px;padding:5px 14px">
-          💾 Notu Kaydet
-        </button>
-        <span id="note-save-status" style="font-size:11px;margin-left:8px"></span>
-      </div>
-
-      <hr style="border-color:var(--border2);margin:10px 0">
-
-      <!-- Sistem kuralı -->
-      <div>
-        <div style="font-size:11px;font-weight:700;color:#63b3ed;margin-bottom:4px">
-          ⚙️ Sistem Kuralı — Gelecek denetimlere otomatik eklenir
-        </div>
-        <textarea id="error-report-rule"
-          style="width:100%;height:80px;background:rgba(0,0,0,.3);border:1px solid rgba(99,179,237,.3);border-radius:6px;color:var(--text);font-family:var(--mono);font-size:11px;padding:10px;resize:vertical;box-sizing:border-box"></textarea>
-        <button onclick="saveErrorRule()"
-          style="margin-top:6px;background:rgba(43,108,176,.2);border:1px solid rgba(43,108,176,.4);color:#63b3ed;cursor:pointer;font-size:11px;font-weight:700;border-radius:6px;padding:5px 14px">
-          ✅ Kuralı Onayla ve Ekle
-        </button>
-        <span id="rule-save-status" style="font-size:11px;margin-left:8px"></span>
-      </div>
-
-    </div>
-  </div>
-</div>
 
 <!-- DENETIM PANELİ                                             -->
 <!-- ═══════════════════════════════════════════════════════════ -->
@@ -4500,9 +4449,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closePhysMod
       <div style="display:flex;gap:8px;align-items:center">
         <button id="review-copy-btn" onclick="copyReviewReport()"
           style="background:none;border:1px solid var(--border2);color:var(--text3);cursor:pointer;font-size:11px;border-radius:6px;padding:4px 10px">📋 Kopyala</button>
-        <button onclick="openErrorReport()"
-          style="background:none;border:1px solid rgba(252,129,74,.4);color:#fc814a;cursor:pointer;font-size:11px;border-radius:6px;padding:4px 10px">📝 Hata Raporla</button>
-        <button onclick="document.getElementById('review-overlay').style.display='none'"
+<button onclick="document.getElementById('review-overlay').style.display='none'"
           style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:16px;line-height:1">✕</button>
       </div>
     </div>
@@ -4763,78 +4710,6 @@ async function sendReviewChat() {
   }
 }
 
-async function openErrorReport() {
-  const modal = document.getElementById('error-report-modal');
-  const loading = document.getElementById('error-report-loading');
-  const contentArea = document.getElementById('error-report-content-area');
-
-  // Sıfırla ve aç
-  loading.style.display = 'block';
-  contentArea.style.display = 'none';
-  document.getElementById('note-save-status').textContent = '';
-  document.getElementById('rule-save-status').textContent = '';
-  modal.style.display = 'flex';
-
-  const report = window._reviewReport || '';
-  const pname  = document.getElementById('productName')?.value?.trim() || 'Ürün';
-
-  try {
-    const res = await fetch(API_BASE + '/sds/draft-error-report', {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ report, product_name: pname }),
-    });
-    if (!res.ok) throw new Error(await res.text());
-    const data = await res.json();
-
-    document.getElementById('error-report-note').value = data.note || '';
-    document.getElementById('error-report-rule').value = data.rule || '';
-    loading.style.display = 'none';
-    contentArea.style.display = 'block';
-  } catch (e) {
-    loading.textContent = '⚠️ Hata: ' + e.message;
-  }
-}
-
-async function saveErrorNote() {
-  const content = document.getElementById('error-report-note').value.trim();
-  const status  = document.getElementById('note-save-status');
-  if (!content) return;
-  status.style.color = 'var(--text3)';
-  status.textContent = 'Kaydediliyor…';
-  try {
-    const res = await fetch(API_BASE + '/sds/report-error', {
-      method: 'POST', headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ content }),
-    });
-    if (!res.ok) throw new Error(await res.text());
-    status.style.color = '#68d391';
-    status.textContent = '✓ Kaydedildi';
-  } catch (e) {
-    status.style.color = '#fc8181';
-    status.textContent = 'Hata: ' + e.message;
-  }
-}
-
-async function saveErrorRule() {
-  const rule   = document.getElementById('error-report-rule').value.trim();
-  const status = document.getElementById('rule-save-status');
-  if (!rule) return;
-  status.style.color = 'var(--text3)';
-  status.textContent = 'Ekleniyor…';
-  try {
-    const res = await fetch(API_BASE + '/sds/add-rule', {
-      method: 'POST', headers: {'Content-Type':'application/json'},
-      body: JSON.stringify({ rule }),
-    });
-    if (!res.ok) throw new Error(await res.text());
-    status.style.color = '#68d391';
-    status.textContent = '✓ Kural eklendi — sonraki denetimde aktif';
-  } catch (e) {
-    status.style.color = '#fc8181';
-    status.textContent = 'Hata: ' + e.message;
-  }
-}
 
 function copyChat(msgId) {
   const el = document.getElementById(msgId);

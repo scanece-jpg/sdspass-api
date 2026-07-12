@@ -25,7 +25,7 @@ const ResultsRenderer = (() => {
 
   function render(result) {
     const { hCodes, signal, stot, euh, pRes, eco, phys, phAssess, theoPhys,
-            chipHCodes, comps, showExtra, transport, ppe, pictograms } = result;
+            chipHCodes, comps, showExtra, transport, ppe, pictograms, clpPassed } = result;
 
     // theoPhys'ı phys nesnesine göm (renderAll phys.theoProps olarak bekler)
     const physWithTheo = Object.assign({}, phys || {}, { theoProps: theoPhys || null });
@@ -43,7 +43,8 @@ const ResultsRenderer = (() => {
       transport   || null,
       ppe         || {},
       signal      || 'None',
-      pictograms  || []
+      pictograms  || [],
+      clpPassed   || []
     );
   }
 

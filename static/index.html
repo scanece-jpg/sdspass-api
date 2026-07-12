@@ -3162,11 +3162,12 @@ async function _checkSVHC(comps) {
 // Parametreler: euh, phys, stot, eco, pRes, comps, showExtra,
 //               allH (tüm H kodları), transport, ppe, signal, pictograms
 function renderResults(euh, phys, stot, eco, pRes, comps, showExtra,
-                       allH, transport, ppe, signal, pictograms) {
+                       allH, transport, ppe, signal, pictograms, apiClpPassed) {
   // API verisini renderAll'ın beklediği formata dönüştür
   const clp = {
-    hCodes:     allH || [],    // tüm H kodları (renderAll iç filtresiyle health H'lar ayrılır)
-    cutoffUsed: {},            // API akışında SCL bilgisi ayrı gelmez — CLP_CUTOFFS kullanılır
+    hCodes:     allH || [],
+    passed:     apiClpPassed || [],   // Python API'den gelen clp_passed (h_class + cutoff_source/value)
+    cutoffUsed: {},
     signal:     signal || 'None',
   };
 
@@ -3944,20 +3945,24 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
         if (code && !hClassMap[code]) hClassMap[code] = correctHClass(code, hz.h_class || '');
       });
     });
-    // SCL override — konsantrasyona göre doğru kategori (örn. NaOH %3 → 1B, %6 → 1A)
-    // Bileşen hazard chip'i her zaman saf madde kategorisini gösterir (1A),
-    // ama SCL'de aralığa özgü kategori varsa (1B) onu kullan.
+    // SCL override — Python API clp.passed öncelikli (doğru İngilizce h_class garantili)
+    // Fallback: sclRaw bant eşleşmesi (eski yol, Türkçe h_class riski var)
+    (clp?.passed || []).forEach(p => {
+      const h4 = (p.h_code || '').replace(/[*\s]/g,'').substring(0,4);
+      if (h4 && p.h_class) hClassMap[h4] = p.h_class;
+    });
+    // sclRaw fallback — passed boşsa veya bir H kodu eksikse
     comps.forEach(c => {
       const conc = parseFloat(c.concMax || c.conc) || 0;
-      // c.sclRaw getComps()'dan geliyor — doğrudan kullan
       (c.sclRaw || []).forEach(s => {
         const h4 = (s.h_code || '').replace(/[*\s]/g,'').substring(0,4);
         if (!h4 || !s.h_class) return;
         if (s.c_min == null) return;
         if (conc < s.c_min) return;
         if (s.c_max != null && conc >= s.c_max) return;
-        // Bu entry uygun ve h_class bilgisi var → override
-        hClassMap[h4] = correctHClass(h4, s.h_class);
+        // Sadece passed'dan gelmemişse override et
+        if (!clp?.passed?.some(p => (p.h_code||'').substring(0,4) === h4))
+          hClassMap[h4] = correctHClass(h4, s.h_class);
       });
     });
     // cutoffUsed: backend passed[] içindeki cutoff_source/cutoff_value alanlarından oluştur

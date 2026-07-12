@@ -62,6 +62,18 @@ def _build_sds_text(sds_data: dict, h_codes: list, phys_props: dict, components:
     revision = sds_data.get("revision", {})
     phys     = sds_data.get("phys_props", {}) or phys_props
 
+    # Türkçe görüntüleme dönüşümleri (PDF ile aynı)
+    _SIGNAL_TR = {"danger": "TEHLİKE", "warning": "UYARI", "none": "—"}
+    _USAGE_TR  = {
+        "industrial":   "Endüstriyel",
+        "professional": "Mesleki/Profesyonel",
+        "consumer":     "Tüketici",
+    }
+    signal_raw = clp.get("signal_word", "")
+    signal_tr  = _SIGNAL_TR.get(signal_raw.lower(), signal_raw)
+    usage_raw  = product.get("usage", "industrial")
+    usage_tr   = _USAGE_TR.get(usage_raw.lower(), usage_raw)
+
     # ── EUH kodları ──────────────────────────────────────────────────────────
     euh_codes = []
     if isinstance(euh_data, dict):
@@ -166,18 +178,19 @@ def _build_sds_text(sds_data: dict, h_codes: list, phys_props: dict, components:
         f"BÖLÜM 1 — Madde/Karışım ve Şirket/Üstlenen Tanımlaması",
         f"B1.1 Ürün adı        : {product.get('name') or 'belirtilmemiş'}",
         f"     Ürün kodu       : {product.get('code') or '-'}",
-        f"     Kullanım        : {product.get('usage') or 'industrial'}",
+        f"     Kullanım        : {usage_tr}",
         f"B1.3 Tedarikçi       : {supplier.get('name') or 'belirtilmemiş'}",
         f"     Adres           : {supplier.get('address') or 'belirtilmemiş'}",
         f"     Telefon         : {supplier.get('phone') or 'belirtilmemiş'}",
         f"     E-posta         : {supplier.get('email') or 'belirtilmemiş'}",
-        f"B1.4 Acil tel        : {supplier.get('emergency_tel') or 'belirtilmemiş'}",
+        f"B1.4 Acil tel (şirket): {supplier.get('emergency_tel') or 'belirtilmemiş'}",
+        f"B1.4 Acil tel (UZM)  : UZEM — Ulusal Zehir Danışma Merkezi: 114 (KKDİK Ek-2 B1.4 zorunlu)",
         "",
         f"BÖLÜM 2 — Zararlılık Tanımlaması",
         f"B2.1 Etiket H kodları: {', '.join(clp.get('h_codes', h_codes)) or 'yok'}",
         f"B2.1 Tüm H kodları   : {', '.join(clp.get('all_h_codes', h_codes)) or 'yok'}",
         f"B2.1 EUH kodları     : {', '.join(euh_codes) or 'yok'}",
-        f"B2.2 Sinyal kelimesi : {clp.get('signal_word') or 'belirtilmemiş'}",
+        f"B2.2 Sinyal kelimesi : {signal_tr}",
         f"B2.2 Piktogramlar    : {', '.join(clp.get('pictograms', [])) or 'yok'}",
         f"B2.2 Etiket P kodları: {', '.join(label_sel) or 'yok'}",
         f"B2.3 PBT/vPvB        : {pbt_line}",

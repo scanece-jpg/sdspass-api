@@ -785,8 +785,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     # H kodları — etiket için (dominance uygulanmış) ve SDS 2.1 için (tam sınıflandırma)
     h_codes     = clp.get('h_codes', [])             # Bölüm 2.2 etiket — dominant H-kodları
     all_h_codes = clp.get('all_h_codes') or h_codes  # Bölüm 2.1 sınıflandırma — tüm H-kodları
-    if h_codes:
-        hc_str = '  '.join(h_codes)
+    if all_h_codes:
+        hc_str = '  '.join(all_h_codes)
         story.append(Paragraph(
             f"<b>{S(lang,'hazard_codes_label')}:</b> {hc_str}",
             styles['body']

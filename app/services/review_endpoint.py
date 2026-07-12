@@ -9,6 +9,7 @@ Akış:
 """
 
 import os
+import json as _json
 import pathlib
 from datetime import date
 from fastapi import APIRouter, Body, HTTPException

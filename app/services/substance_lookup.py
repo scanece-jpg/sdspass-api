@@ -817,28 +817,38 @@ def scl_category(cas: str, h_code: str, conc: float) -> Optional[str]:
 
 def get_substance_scl(cas_no: str, h_code: str) -> dict:
     """
-    Bir CAS numarası + H kodu için özel konsantrasyon sınırını (SCL) döndürür.
+    Bir CAS numarası + H kodu için TÜM özel konsantrasyon bantlarını (SCL) döndürür.
+
+    H314 gibi kodlar birden fazla alt kategoriye (1A, 1B) sahip olabilir; model
+    doğru bandı seçebilmek için tüm bantları görmek zorundadır.
 
     Dönüş şeması:
       {
-        "found":   bool,          # SCL kaydı bulundu mu
+        "found":   bool,
         "cas_no":  str,
-        "h_code":  str,
-        "c_min":   float | None,  # alt sınır (dahil) — None = sınır yok
-        "c_max":   float | None,  # üst sınır (hariç) — None = sınır yok
-        "h_class": str,           # tehlike sınıfı etiketi
+        "h_code":  str,           # sorgulanan H kodu
+        "bands": [                # eşleşen tüm bantlar (boşsa found=False)
+          {
+            "h_class": str,       # örn. "Cilt Aşınd. 1A"
+            "c_min":   float|None,# alt sınır (dahil) — None = üst sınır yok
+            "c_max":   float|None,# üst sınır (hariç) — None = alt sınır yok
+          }, ...
+        ],
         "source":  str,           # "sea_ek6" | "substance_db" | "not_found"
       }
 
-    found=False durumunu asla sessizce 0 ya da sınırsız olarak işleme;
-    çağıran kod bu durumu açıkça ele almalıdır.
+    KULLANIM: bands listesini al, konsantrasyonu her banda karşılaştır:
+      c_min <= konsantrasyon < c_max → o bant geçerli.
+      c_max=None → üst sınır yok (örn. 1A: ≥90).
+      c_min=None → alt sınır yok (genellikle olmaz).
+    found=False ise bu bileşen için kayıtlı SCL yok — sessizce 0 veya sınırsız alma.
     """
     cas_no  = (cas_no or '').strip()
     h_code  = (h_code or '').strip().upper()
 
     not_found = {
         'found': False, 'cas_no': cas_no, 'h_code': h_code,
-        'c_min': None, 'c_max': None, 'h_class': '', 'source': 'not_found',
+        'bands': [], 'source': 'not_found',
     }
 
     if not cas_no or not h_code:
@@ -851,23 +861,21 @@ def get_substance_scl(cas_no: str, h_code: str) -> dict:
     scl_list = sub.get('scl') or []
     source   = 'sea_ek6' if sub.get('sea_ek6') else 'substance_db'
 
-    # H kodu tam eşleşme — önce tam, sonra kök (H314 → H314A/B'yi yakalar)
-    match = next((s for s in scl_list if s.get('h_code', '').upper() == h_code), None)
-    if match is None:
-        match = next(
-            (s for s in scl_list if s.get('h_code', '').upper().startswith(h_code)),
-            None,
-        )
+    # Tam eşleşme VEYA aynı H-kodu ailesindeki tüm bantlar (H314 → 1A ve 1B)
+    bands = [
+        {'h_class': s.get('h_class', ''), 'c_min': s.get('c_min'), 'c_max': s.get('c_max')}
+        for s in scl_list
+        if s.get('h_code', '').upper() == h_code
+        or s.get('h_code', '').upper().startswith(h_code)
+    ]
 
-    if match is None:
+    if not bands:
         return not_found
 
     return {
-        'found':   True,
-        'cas_no':  cas_no,
-        'h_code':  h_code,
-        'c_min':   match.get('c_min'),
-        'c_max':   match.get('c_max'),
-        'h_class': match.get('h_class', ''),
-        'source':  source,
+        'found':  True,
+        'cas_no': cas_no,
+        'h_code': h_code,
+        'bands':  bands,
+        'source': source,
     }

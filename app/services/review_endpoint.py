@@ -142,19 +142,28 @@ SDS: B3.2'de formik asit H331, B2.1'de H332, B11'de ATEmix=14,2 mg/L/4h.
                BULGU YOK. "Bileşen H331 iken karışım H332" hata değildir.
 ```
 
-### Örnek 3: SCL — sülfürik asit %10, B2.1'de H314
+### Örnek 3: SCL çok-bantlı seçim — formik asit %15, B2.1'de H314 (1A)
 
-SDS: B3.2'de sülfürik asit (CAS 7664-93-9) %10, B2.1'de H314 (Cilt Aş. 1A).
+SDS: B3.2'de formik asit (CAS 64-18-6) %15, B2.1'de H314 Cilt Aşınd. 1A yazıyor.
 
 ```
-[Araç çağrısı] get_substance_scl("7664-93-9", "H314")
-[Sonuç]        found=True, c_min=15.0, c_max=None, h_class="Cilt Aşınd. 1A"
+[Araç çağrısı] get_substance_scl("64-18-6", "H314")
+[Sonuç]        found=True, bands=[
+                 {h_class: "Cilt Aşınd. 1A", c_min: 90.0, c_max: null},
+                 {h_class: "Cilt Aşınd. 1B", c_min: 10.0, c_max: 90.0},
+                 {h_class: "Cilt Tah. 2",    c_min:  2.0, c_max: 10.0}
+               ]
 
-[Karar]        SEA Ek-6 SCL: H314 (1A) için alt sınır %15.
-               Karışımdaki konsantrasyon %10 < %15 → H314 (1A) uygulanamaz.
-               Doğru sınıflandırma H314 değil H315 veya H318 olabilir.
-               BULGU VAR — B2.1 H314 (1A) sınıflandırması SCL eşiğini karşılamıyor.
-```"""
+[Karar]        Konsantrasyon %15 — hangi banda düşüyor?
+               1A bandı: c_min=90 → %15 < 90 → 1A HAYIR
+               1B bandı: 10 ≤ 15 < 90 → 1B EVET
+               SDS'te "1A" yazıyor → yanlış.
+               BULGU VAR — H314 kategorisi 1A değil 1B olmalı.
+```
+
+UYARI: bands listesi boş veya tek bantlı dönse bile tek eşik karşılaştırması
+yapma. Her zaman tüm bantları kontrol et; konsantrasyon hangi aralığa düşüyorsa
+o kategori geçerlidir."""
 
 
 def _format_ate_b11(sds_data: dict) -> list[str]:

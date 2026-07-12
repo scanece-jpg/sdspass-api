@@ -220,15 +220,17 @@ def _normalize_scl_list(scl_raw) -> list:
 
 
 def _get_scl_cutoff(comp: dict, h_class: str, h_code4: str) -> float | None:
-    """Bileşenin SCL listesinden ilgili H kodu/sınıfı için c_min döndürür; yoksa None."""
-    for scl in _normalize_scl_list(comp.get("scl", [])):
+    """Bileşenin SCL listesinden ilgili H kodu/sınıfı için minimum c_min döndürür; yoksa None."""
+    raw = _normalize_scl_list(comp.get("sclRaw") or comp.get("scl", []))
+    matched_mins = []
+    for scl in raw:
         sc = scl.get("h_class", scl.get("hazard", "")).replace("*", "").strip()
         sh = scl.get("h_code", "").replace("*", "").strip()[:4]
         if sc == h_class or (h_code4 and sh == h_code4):
             c_min = scl.get("c_min")
             if c_min is not None:
-                return float(c_min)
-    return None
+                matched_mins.append(float(c_min))
+    return min(matched_mins) if matched_mins else None
 
 
 def _get_scl_entry_for_conc(scl_list: list, h_code4: str, conc: float) -> dict | None:
@@ -285,7 +287,7 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
             if h.get("h_class","") not in ("Skin Corr. 1","Skin Corr. 1A","Skin Corr. 1B","Skin Corr. 1C"):
                 continue
             scl = _get_scl_cutoff(comp, h.get("h_class",""), "H314")
-            effective = scl if scl is not None else 0.0
+            effective = scl if scl is not None else 5.0  # SCL yoksa GCL (Skin Corr.1 = %5)
             if conc >= effective:
                 sum_corr1 += conc
                 break  # bileşen başına bir kez say
@@ -302,7 +304,7 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
             # SCL: Eye Dam. 1 için H318, Skin Corr. için H314 SCL'sini kontrol et
             h_code_ref = "H318" if h.get("h_class","") == "Eye Dam. 1" else "H314"
             scl = _get_scl_cutoff(comp, h.get("h_class",""), h_code_ref)
-            effective = scl if scl is not None else 0.0
+            effective = scl if scl is not None else 3.0  # SCL yoksa GCL (Eye Dam.1 = %3)
             if conc >= effective:
                 sum_eye_dam1 += conc
                 break  # bileşen başına bir kez say

@@ -382,4 +382,63 @@ async def sds_review(data: dict = Body(...)):
         "docs_used":     len(kb_blocks),
         "input_tokens":  resp.usage.input_tokens,
         "output_tokens": resp.usage.output_tokens,
+        "sds_text":      sds_text,   # chat için sakla
+    }
+
+
+@router.post("/api/v1/sds/chat")
+async def sds_chat(data: dict = Body(...)):
+    """
+    Denetim sonrası soru-cevap.
+    data: { sds_text, report, history: [{role, content}], question }
+    """
+    try:
+        import anthropic as _anthropic
+    except ImportError:
+        raise HTTPException(status_code=500, detail="anthropic paketi kurulu değil")
+
+    api_key = os.getenv("ANTHROPIC_API_KEY")
+    if not api_key:
+        raise HTTPException(status_code=500, detail="ANTHROPIC_API_KEY tanımlı değil")
+
+    sds_text = data.get("sds_text", "")
+    report   = data.get("report", "")
+    history  = data.get("history", [])   # [{role:"user"|"assistant", content:"..."}]
+    question = (data.get("question") or "").strip()
+
+    if not question:
+        raise HTTPException(status_code=400, detail="Soru boş olamaz")
+
+    system = (
+        "Sen KKDİK ve SEA yönetmelikleri uzmanı bir GBF/SDS denetçisisin. "
+        "Sana denetlenen SDS'in tam metni ve denetim raporu verildi. "
+        "Kullanıcının sorularını bu bağlam üzerinden Türkçe olarak yanıtla. "
+        "Her yanıtta ilgili mevzuat maddesini ve mümkünse resmi URL bağlantısını ver.\n\n"
+        f"=== SDS METNİ ===\n{sds_text[:6000]}\n\n"
+        f"=== DENETİM RAPORU ===\n{report[:3000]}"
+    )
+
+    # Konuşma geçmişi + yeni soru
+    messages = []
+    for h in history[-10:]:   # son 10 tur
+        role = h.get("role")
+        if role in ("user", "assistant"):
+            messages.append({"role": role, "content": h.get("content", "")})
+    messages.append({"role": "user", "content": question})
+
+    client = _anthropic.Anthropic(api_key=api_key)
+    resp = client.messages.create(
+        model="claude-sonnet-4-6",
+        max_tokens=1024,
+        system=system,
+        messages=messages,
+    )
+
+    answer = "".join(
+        b.text for b in resp.content if getattr(b, "type", None) == "text"
+    )
+    return {
+        "answer":        answer,
+        "input_tokens":  resp.usage.input_tokens,
+        "output_tokens": resp.usage.output_tokens,
     }

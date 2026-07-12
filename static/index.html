@@ -3492,7 +3492,9 @@ function _checkPDFMandatory() {
   // 6. Çözünürlük — gaz hariç tüm formlar zorunlu (EU 2020/878 §9.1: "Does not apply to gases")
   const solEl = document.getElementById('tf_sol');
   const solNA = solEl?.dataset?.na === 'true';
-  const solHasMotorText = solEl?.dataset?.source === 'theo' || !!window._lastTheoProps?.solubility?.text;
+  const _solTp = _lastTheoProps || _lastCalcState?.theoPhys || _lastCalcState?.phys?.theoProps || {};
+  const solHasMotorText = solEl?.dataset?.source === 'theo' || !!solEl?.value?.trim()
+                        || !!_solTp?.solubility?.text || !!_solTp?.solubility?.value;
   if (form !== 'gas' && !solNA && !solEl?.value?.trim() && !solHasMotorText) {
     missing.push({ label: 'Çözünürlük (mg/L)', reason: 'Gaz hariç tüm formlar için zorunlu — EU 2020/878 §9.1' });
   }

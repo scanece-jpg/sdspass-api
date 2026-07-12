@@ -519,9 +519,9 @@ H_BASED_LABEL_FORCED: Dict[str, List[str]] = {
     # depolama güvenliği için havalandırma+serin kritik — P403+P235 öncelikli)
     # P370+P378 H226 için koşullu — sadece özel söndürücü gerekiyorsa (su riski varsa)
     # Koşulsuz eklemek over-forcing yapar; B5 "su ile söndürmeyin" varsa kullanıcı manuel ekler
-    'H224': ['P210', 'P403+P235'],
-    'H225': ['P210', 'P403+P235'],
-    'H226': ['P210', 'P403+P235'],
+    'H224': ['P210', 'P403+P235', 'P370+P378'],
+    'H225': ['P210', 'P403+P235', 'P370+P378'],
+    'H226': ['P210', 'P403+P235', 'P370+P378'],
     # ── Alevlenir Gaz / Katı ──────────────────────────────────────────────────
     'H220': ['P210'],
     'H221': ['P210'],

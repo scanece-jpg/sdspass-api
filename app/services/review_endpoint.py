@@ -30,7 +30,13 @@ Yanıtını şu formatta ver:
 ## Bilgi Notları
 ## Genel Değerlendirme
 
-Yanıt dili: Türkçe. Teknik terimler için parantez içinde İngilizce karşılık ekle."""
+Yanıt dili: Türkçe. Teknik terimler için parantez içinde İngilizce karşılık ekle.
+
+KESİN KURAL: Yanıtlarında YALNIZCA sana verilen mevzuat paragraflarını (B kaynağı) ve \
+kural kontrolü sonuçlarını (A kaynağı) kullan. \
+Bu kaynaklarda bulunmayan bir bilgiyi kendi genel bilginden üretme, tahmin etme veya tamamlama. \
+İlgili mevzuat paragrafı sağlanmamışsa "İlgili mevzuat paragrafı bu denetimde sağlanmadı." yaz \
+ve o konuda yorum yapma."""
 
 
 @router.post("/api/v1/sds/review")

@@ -349,8 +349,9 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
             # Mevzuat: SEA Ek-I §1.2.1.3 / CLP 1272/2008 Art.10(3):
             # SCL büyük de olsa küçük de olsa GCL'yi tamamen devre dışı bırakır.
             # ÖNEMLİ: SCL h_code suffix içerebilir (H361f, H361fd, H314 *) — 4 karaktere normalize et
-            # NOT: Frontend dict {"H314":2.0} veya liste gönderebilir — normalize et
-            scl_list = _normalize_scl_list(comp.get("scl", []))
+            # sclRaw: tam bant bilgisi (h_class + c_max) — 1A/1B override için zorunlu
+            # scl: sadece dict fallback {"H314":2.0} — c_max ve h_class yok, yalnızca eşik kesimi
+            scl_list = _normalize_scl_list(comp.get("sclRaw") or comp.get("scl", []))
             for scl_entry in scl_list:
                 scl_hclass = scl_entry.get("h_class", scl_entry.get("hazard", ""))
                 scl_hcode4 = scl_entry.get("h_code", "").replace("*", "").strip()[:4]

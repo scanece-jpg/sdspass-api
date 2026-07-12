@@ -569,6 +569,36 @@ def validate_sds(
         except Exception:
             pass
 
+    # ── V027: B16 ↔ B2.2 P-kodu tutarlılık kontrolü ─────────────────────────
+    # classify_sds_p_codes 'mandatory' dediği + H_BASED_LABEL_FORCED'da olan
+    # her P kodu B2.2 etiketinde de bulunmalı.
+    try:
+        _p_raw27 = sds_data.get('p_codes', {})
+        if isinstance(_p_raw27, dict):
+            _sds_classif = _p_raw27.get('sds', {})
+            _sds_mandatory = set(
+                _sds_classif.get('mandatory', []) if isinstance(_sds_classif, dict) else []
+            )
+            _label_sel27 = set(_p_raw27.get('label', {}).get('selected', []))
+            _LABEL_EXCL  = {'P501', 'P101', 'P102'}
+
+            from app.services.p_code_service import H_BASED_LABEL_FORCED as _HBLF
+            _label_forced27 = set()
+            for _hc27 in _h_set_base:
+                for _p27 in _HBLF.get(_hc27.replace('*', '').strip(), []):
+                    _label_forced27.add(_p27)
+
+            # Mandatory (B16) + label-forced kesişimi → etikette OLMAK ZORUNDA
+            _v027_missing = (_sds_mandatory & _label_forced27) - _label_sel27 - _LABEL_EXCL
+            if _v027_missing:
+                error("V027", "B2+B16",
+                      f"B16'da 'Zorunlu' sınıflandırılan P kodu/ları B2.2 etiketinde eksik: "
+                      f"{', '.join(sorted(_v027_missing))}. "
+                      f"Sınıflandırma motoru (B16) ile etiket render'ı (B2.2) uyumsuz.",
+                      "SEA Madde 24 / CLP Annex IV — zorunlu önlem ifadeleri")
+    except Exception:
+        pass
+
     return issues
 
 

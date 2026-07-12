@@ -416,13 +416,15 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
                     _cutoff_str = f'%{conc:.1f} (fiziksel tehlike, bileşen varlığı)'
                 else:
                     _cutoff_str = f'%{conc:.1f} ≥ kesme %{cutoff}'
+                _scl_used = bool(_scl_matched_mins)
+                _cutoff_display = float(scl_entry_conc["c_min"]) if scl_entry_conc and scl_entry_conc.get("c_min") is not None else cutoff
                 passed.append({
                     "h_class":       effective_hclass,
                     "h_code":        h,
                     "conc":          conc,
                     "reason":        f"{cas} {_cutoff_str}",
-                    "cutoff_source": "SCL" if scl_list else "GCL",
-                    "cutoff_value":  cutoff,
+                    "cutoff_source": "SCL" if _scl_used else "GCL",
+                    "cutoff_value":  _cutoff_display,
                 })
 
     # ── pH Uç Değer Kontrolü — SEA/CLP Annex I Tablo 3.2.3 notu ─────────────────

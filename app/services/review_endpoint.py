@@ -72,6 +72,9 @@ Ancak B2.1'de yer alan bir H kodunun B3.2'de hiçbir bileşende dayanağı yoksa
 **3. Zorunlu / Opsiyonel ayrımı:**
 Mevzuat ifadesinde "verilir / sağlanır / bulunur" → zorunlu gereklilik.
 "Sağlanabilir / verilebilir / eklenebilir" → opsiyonel. İkisini aynı ağırlıkta hata sayma.
+Opsiyonel öneriler "Hatalar (Düzeltilmesi Zorunlu)" bölümüne yazılamaz; en fazla "Uyarılar" bölümüne gider.
+Bir alan mevzuatta zorunlu sayılıyor olsa bile, kullanıcı geçerli bir içerik girmişse ("yok", "—", boşluk yerine açıklayıcı metin)
+bu girişi yetersiz bulmak için ayrıca mevzuattan açık bir format şartı gösterilmelidir.
 
 **4. Metin doğrulama (halüsinasyon önleme):**
 Bir terimi, kısaltmayı veya alanı "eksik" ya da "çelişkili" olarak raporlamadan önce
@@ -87,7 +90,13 @@ Bir bulgunun mevzuat dayanağı, SANA VERİLEN B kaynağı (rule_blocks / sistem
 paragraflardan biriyle birebir eşleşmelidir. B kaynağında açıkça yer almayan bir hükmü
 "ima eder", "mantıken gerektirir" veya "ruhuna aykırıdır" gerekçesiyle bulgu olarak yazma.
 Kural metnini okumadan bir madde numarası veya kota rakamı türetme.
-Verilmeyen bilgi → bulgu yok; verilmeyen bilgi → "kapsam dışı" notu."""
+Verilmeyen bilgi → bulgu yok; verilmeyen bilgi → "kapsam dışı" notu.
+
+**6a. M-faktör bağlam kısıtlaması:**
+M-faktör (çarpım faktörü) YALNIZCA sucul ortam toksisitesi (H400 Akut Kat.1 / H410-H412 Kronik) sınıflandırmasında
+karışım hesabına girer. Cilt aşındırıcılık (H314), göz hasarı (H318), akut toksisite (H300/H310/H330),
+solunum tahrişi veya başka tehlike sınıflarında M-faktör kavramı geçerli değildir — bu bağlamlarda
+M-faktör gerekliliği iddia eden herhangi bir bulgu yazma."""
 
 
 def _format_ate_b11(sds_data: dict) -> list[str]:

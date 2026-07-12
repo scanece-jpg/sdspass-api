@@ -3960,7 +3960,14 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
         hClassMap[h4] = correctHClass(h4, s.h_class);
       });
     });
-    const cutoffUsed = clp?.cutoffUsed || {};
+    // cutoffUsed: backend passed[] içindeki cutoff_source/cutoff_value alanlarından oluştur
+    const cutoffUsed = {};
+    (clp?.passed || []).forEach(p => {
+      const h4 = (p.h_code || '').replace(/[*\s]/g,'').substring(0,4);
+      if (h4 && p.cutoff_source && p.cutoff_value != null && !cutoffUsed[h4]) {
+        cutoffUsed[h4] = { source: p.cutoff_source, value: p.cutoff_value };
+      }
+    });
 
     // Fiziksel H kodları için gerekçe (parlama noktası / aspirasyon kaynağı)
     const physReasonMap = {};

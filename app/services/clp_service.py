@@ -417,10 +417,12 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
                 else:
                     _cutoff_str = f'%{conc:.1f} ≥ kesme %{cutoff}'
                 passed.append({
-                    "h_class": effective_hclass,
-                    "h_code":  h,
-                    "conc":    conc,
-                    "reason":  f"{cas} {_cutoff_str}",
+                    "h_class":       effective_hclass,
+                    "h_code":        h,
+                    "conc":          conc,
+                    "reason":        f"{cas} {_cutoff_str}",
+                    "cutoff_source": "SCL" if scl_list else "GCL",
+                    "cutoff_value":  cutoff,
                 })
 
     # ── pH Uç Değer Kontrolü — SEA/CLP Annex I Tablo 3.2.3 notu ─────────────────

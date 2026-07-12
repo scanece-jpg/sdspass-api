@@ -59,6 +59,16 @@ Yanıtını şu formatta ver:
 ## Uyumlu Bölümler
 ## Genel Değerlendirme
 
+**Her bulgu (hata/uyarı/not) şu şablona göre yazılmalıdır:**
+- **Alan:** [SDS bölümü ve alan adı, ör. B2.1 — H kodları]
+- **Okunan değer:** [JSON'dan birebir alınan değer veya "mevcut değil"]
+- **Sorun:** [neden yanlış olduğunun kısa açıklaması]
+- **Beklenen:** [doğru değer veya format]
+> 📋 **[Mevzuat Adı — Madde/Ek No]** — [kısa açıklama]
+
+**Uyumlu bölümlerde her satır şu formatta olmalıdır:**
+✅ **[Bölüm adı]** — Okunan: [JSON'daki değer veya "mevcut ve eksiksiz"] → Uygun
+
 Her bulgu için dayanak şu formatta olsun:
 > 📋 **[Mevzuat Adı — Madde/Ek No]** — [kısa açıklama]
 > 🔗 [bağlantı metni](URL)

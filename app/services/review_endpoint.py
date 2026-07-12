@@ -9,6 +9,8 @@ Akış:
 """
 
 import os
+import pathlib
+from datetime import date
 from fastapi import APIRouter, Body, HTTPException
 
 router = APIRouter()
@@ -442,3 +444,24 @@ async def sds_chat(data: dict = Body(...)):
         "input_tokens":  resp.usage.input_tokens,
         "output_tokens": resp.usage.output_tokens,
     }
+
+
+_DOGRULAMA_PATH = pathlib.Path(__file__).parents[2] / "sds-knowledge" / "DOGRULAMA_NOTLARI.md"
+
+@router.post("/api/v1/sds/report-error")
+async def report_error(data: dict = Body(...)):
+    """
+    Denetim hatasını DOGRULAMA_NOTLARI.md dosyasına ekler.
+    data: { content: str }  — kullanıcının onayladığı / düzenlediği markdown bloğu
+    """
+    content = (data.get("content") or "").strip()
+    if not content:
+        raise HTTPException(status_code=400, detail="İçerik boş olamaz")
+
+    try:
+        with open(_DOGRULAMA_PATH, "a", encoding="utf-8") as f:
+            f.write("\n\n" + content + "\n")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Dosya yazma hatası: {e}")
+
+    return {"ok": True}

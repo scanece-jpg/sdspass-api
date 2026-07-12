@@ -4436,6 +4436,32 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closePhysMod
 </script>
 
 <!-- ═══════════════════════════════════════════════════════════ -->
+<!-- HATA RAPOR MODALI                                          -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div id="error-report-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:1500;align-items:center;justify-content:center;padding:16px">
+  <div style="background:var(--bg2);border:1px solid rgba(252,129,74,.4);border-radius:12px;width:min(640px,98vw);box-shadow:0 24px 64px rgba(0,0,0,.8)">
+    <div style="padding:14px 18px;background:rgba(252,129,74,.08);border-bottom:1px solid rgba(252,129,74,.25);display:flex;align-items:center;justify-content:space-between">
+      <span style="font-size:13px;font-weight:700;color:#fc814a">📝 Hata Raporu — Önizleme</span>
+      <button onclick="document.getElementById('error-report-modal').style.display='none'"
+        style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:16px">✕</button>
+    </div>
+    <div style="padding:14px 18px">
+      <p style="font-size:11px;color:var(--text3);margin:0 0 8px">
+        Aşağıdaki metin <code>DOGRULAMA_NOTLARI.md</code> dosyasına eklenecek. Düzenleyip onaylayabilirsiniz.
+      </p>
+      <textarea id="error-report-content"
+        style="width:100%;height:220px;background:rgba(0,0,0,.3);border:1px solid var(--border2);border-radius:6px;color:var(--text);font-family:var(--mono);font-size:11px;padding:10px;resize:vertical;box-sizing:border-box"></textarea>
+      <div style="display:flex;justify-content:flex-end;gap:8px;margin-top:10px">
+        <button onclick="document.getElementById('error-report-modal').style.display='none'"
+          style="background:none;border:1px solid var(--border2);color:var(--text3);cursor:pointer;font-size:12px;border-radius:6px;padding:6px 16px">İptal</button>
+        <button onclick="saveErrorReport()"
+          style="background:linear-gradient(135deg,#c05621,#9c4221);color:#fff;border:none;cursor:pointer;font-size:12px;font-weight:700;border-radius:6px;padding:6px 18px">✅ Onayla ve Kaydet</button>
+      </div>
+      <div id="error-report-status" style="font-size:11px;margin-top:6px;text-align:right"></div>
+    </div>
+  </div>
+</div>
+
 <!-- DENETIM PANELİ                                             -->
 <!-- ═══════════════════════════════════════════════════════════ -->
 <div id="review-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:1300;align-items:flex-start;justify-content:center;overflow-y:auto;padding:24px 12px">
@@ -4447,6 +4473,8 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closePhysMod
       <div style="display:flex;gap:8px;align-items:center">
         <button id="review-copy-btn" onclick="copyReviewReport()"
           style="background:none;border:1px solid var(--border2);color:var(--text3);cursor:pointer;font-size:11px;border-radius:6px;padding:4px 10px">📋 Kopyala</button>
+        <button onclick="openErrorReport()"
+          style="background:none;border:1px solid rgba(252,129,74,.4);color:#fc814a;cursor:pointer;font-size:11px;border-radius:6px;padding:4px 10px">📝 Hata Raporla</button>
         <button onclick="document.getElementById('review-overlay').style.display='none'"
           style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:16px;line-height:1">✕</button>
       </div>
@@ -4705,6 +4733,60 @@ async function sendReviewChat() {
     const waitEl = document.getElementById(waitId);
     if (waitEl) waitEl.remove();
     msgs.innerHTML += `<div style="color:#fc8181;font-size:11px">Bağlantı hatası: ${e.message}</div>`;
+  }
+}
+
+function openErrorReport() {
+  const report  = window._reviewReport || '';
+  const pname   = document.getElementById('productName')?.value?.trim() || 'Ürün';
+  const today   = new Date().toLocaleDateString('tr-TR');
+
+  // Rapordaki hata satırlarını topla (❌ veya HATA: ile başlayanlar)
+  const errorLines = report.split('\n')
+    .filter(l => /❌|HATA|eksik|hatalı|yanlış|bulunmamaktadır/i.test(l))
+    .slice(0, 8)
+    .map(l => '  - ' + l.replace(/^[#\-\*\s]+/, '').trim())
+    .join('\n');
+
+  const template =
+`---
+
+## ${pname} — ${today}
+
+- **Tespit edilen sorunlar:**
+${errorLines || '  - (açıklayın)'}
+- **Kök neden:**
+- **Düzeltme:**
+- **Durum:** ⏳ Açık`;
+
+  document.getElementById('error-report-content').value = template;
+  document.getElementById('error-report-status').textContent = '';
+  document.getElementById('error-report-modal').style.display = 'flex';
+}
+
+async function saveErrorReport() {
+  const content = document.getElementById('error-report-content').value.trim();
+  const status  = document.getElementById('error-report-status');
+  if (!content) { status.textContent = 'İçerik boş olamaz.'; return; }
+
+  status.style.color = 'var(--text3)';
+  status.textContent = 'Kaydediliyor…';
+
+  try {
+    const res = await fetch(API_BASE + '/sds/report-error', {
+      method:  'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ content }),
+    });
+    if (!res.ok) throw new Error(await res.text());
+    status.style.color = '#68d391';
+    status.textContent = '✓ Kaydedildi';
+    setTimeout(() => {
+      document.getElementById('error-report-modal').style.display = 'none';
+    }, 1200);
+  } catch (e) {
+    status.style.color = '#fc8181';
+    status.textContent = 'Hata: ' + e.message;
   }
 }
 

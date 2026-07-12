@@ -4428,8 +4428,12 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closePhysMod
     <!-- Başlık -->
     <div style="padding:14px 18px;background:rgba(43,108,176,.12);border-bottom:1px solid rgba(43,108,176,.25);display:flex;align-items:center;justify-content:space-between">
       <span style="font-size:13px;font-weight:700;color:#63b3ed">🔍 SDS Denetim Raporu</span>
-      <button onclick="document.getElementById('review-overlay').style.display='none'"
-        style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:16px;line-height:1">✕</button>
+      <div style="display:flex;gap:8px;align-items:center">
+        <button id="review-copy-btn" onclick="copyReviewReport()"
+          style="background:none;border:1px solid var(--border2);color:var(--text3);cursor:pointer;font-size:11px;border-radius:6px;padding:4px 10px">📋 Kopyala</button>
+        <button onclick="document.getElementById('review-overlay').style.display='none'"
+          style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:16px;line-height:1">✕</button>
+      </div>
     </div>
 
     <!-- Özet sayaçlar -->
@@ -4446,6 +4450,16 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closePhysMod
 </div>
 
 <script>
+function copyReviewReport() {
+  const body = document.getElementById('review-body');
+  const text = body?.innerText || '';
+  if (!text) return;
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById('review-copy-btn');
+    if (btn) { btn.textContent = '✓ Kopyalandı'; setTimeout(() => btn.textContent = '📋 Kopyala', 2000); }
+  });
+}
+
 async function runReview() {
   const state = window._lastCalcState || _lastCalcState;
   if (!state) {
@@ -4467,9 +4481,27 @@ async function runReview() {
   if (btn) { btn.disabled = true; btn.textContent = '⏳ Denetleniyor…'; }
 
   try {
+    // DOM'dan fiziksel özellikleri oku (PDF endpoint ile aynı mantık)
+    const _n = id => { const v = parseFloat(document.getElementById(id)?.value); return isNaN(v) ? null : v; };
+    const _g = id => document.getElementById(id)?.value?.trim() || '';
+    const tp = state.phys?.theoProps || {};
+    const _tv = d => (d && d.value !== undefined && d.value !== null) ? d.value : (d !== null && d !== undefined && typeof d !== 'object' ? d : null);
+    const flatPhys = {};
+    [['tf_fp','flash_point'],['tf_bp','boiling_point'],['tf_density','density'],
+     ['tf_visc','viscosity'],['tf_sol','solubility'],['tf_mp','melting_point'],
+     ['tf_ait','auto_ignition'],['tf_decomp','decomposition_temp'],
+     ['tf_logkow','log_kow']].forEach(([id, key]) => {
+      const v = _n(id); if (v !== null) flatPhys[key] = v;
+    });
+    const phVal = _g('tf_ph'); if (phVal) flatPhys.ph = phVal;
+    ['density','boiling_point','flash_point','lel','uel','vapor_pressure','vapor_density',
+     'viscosity','melting_point','auto_ignition','log_kow'].forEach(k => {
+      if (flatPhys[k] === undefined) { const v = _tv(tp[k]); if (v !== null && v !== undefined) flatPhys[k] = v; }
+    });
+
     const payload = {
       h_codes:    state.allH || [],
-      phys_props: state.phys  || {},
+      phys_props: flatPhys,
       components: (typeof getComps === 'function') ? getComps() : [],
       sds_data: {
         clp: {

@@ -53,7 +53,34 @@ Mevzuat URL tablosu (bulguya göre uygun olanı seç):
 - ECHA CLP Kılavuzu : https://echa.europa.eu/tr/guidance-documents/guidance-on-clp
 - ADR 2023          : https://unece.org/transport/dangerous-goods/adr-2023
 
-Yanıt dili: Türkçe. Teknik terimler için parantez içinde İngilizce karşılık ekle."""
+Yanıt dili: Türkçe. Teknik terimler için parantez içinde İngilizce karşılık ekle.
+
+## Bulgu Doğrulama Protokolü — Uygulanması Zorunlu
+
+Bir bulgu yazmadan önce aşağıdaki kontrolleri sırayla yap:
+
+**1. ATEmix kontrolü (H300-H302 oral / H310-H312 dermal / H330-H332 inhalasyon):**
+B11'de ATEmix hesabı varsa ve hesap matematiksel olarak tutarlıysa (1/ATEmix = Σ Ci/ATEi formülü),
+bileşen H kodu ile karışım H kodunun farklı olması normaldir — gerekçesizlik değildir.
+Hesap B11'de yoksa VEYA rakamlar tutmuyorsa, bu bulgu konusudur.
+
+**2. B3.2 ↔ B2.1 H kodu farkı († işareti):**
+B3.2'deki bir bileşen H kodunun B2.1'de görünmemesi normaldir (bileşen katkısı eşiğin altında kalabilir).
+Ancak B2.1'de yer alan bir H kodunun B3.2'de hiçbir bileşende dayanağı yoksa, bu ayrı bir bulgudur.
+"Bileşen H331, karışım H332" gibi ATEmix kaynaklı farklılıklar kural 1 kapsamındadır.
+
+**3. Zorunlu / Opsiyonel ayrımı:**
+Mevzuat ifadesinde "verilir / sağlanır / bulunur" → zorunlu gereklilik.
+"Sağlanabilir / verilebilir / eklenebilir" → opsiyonel. İkisini aynı ağırlıkta hata sayma.
+
+**4. Metin doğrulama (halüsinasyon önleme):**
+Bir terimi, kısaltmayı veya alanı "eksik" ya da "çelişkili" olarak raporlamadan önce
+o terimin SDS metninde birebir geçip geçmediğini doğrula (Ctrl+F mantığıyla ara).
+Metinde bulunmayan bir ifadeye dayanan bulgu yazma.
+
+**5. Başlık / B2.1 tutarsızlığı:**
+Belgenin üst bilgi / metadata alanındaki H-kodu özeti ile B2.1 tablosu karşılaştırılmalıdır.
+Tutarsızlık varsa bulgu "B2.1 içinde çelişki" değil "başlık ile B2.1 tutarsızlığı" olarak tanımlanmalıdır."""
 
 
 def _build_sds_text(sds_data: dict, h_codes: list, phys_props: dict, components: list) -> str:
@@ -464,7 +491,11 @@ def _load_extra_rules() -> str:
     return ""
 
 _DRAFT_SYSTEM = """Sen GBF/SDS denetim sisteminin kalite güvence modülüsün.
-Sana bir denetim raporu verilecek — bu rapordaki bir bulgunun yanlış veya yanıltıcı olduğu belirlendi.
+Sana bir denetim raporu ve kullanıcının bu rapor üzerine yaptığı sohbet verilecek.
+
+ÖNEMLİ: Kullanıcı sohbette hangi bulguların yanlış olduğunu bizzat açıkladı.
+Rapordaki tüm bulguları değil, YALNIZCA kullanıcının sohbette işaret ettiği hataları yaz.
+Sohbet yoksa raporu genel olarak değerlendir.
 
 İKİ AYRI BÖLÜM üret, başka hiçbir şey yazma:
 
@@ -473,7 +504,7 @@ Sana bir denetim raporu verilecek — bu rapordaki bir bulgunun yanlış veya ya
 Şu format:
 ---
 ## [Ürün adı] — [Tarih]
-- **Hatalı denetim çıktısı:** sistemin ne dediği
+- **Hatalı denetim çıktısı:** sistemin ne söylediği (kullanıcının işaret ettiği bulgu)
 - **Neden yanlıştı:** mevzuat/hesap açıklaması
 - **Doğru davranış:** olması gereken
 - **Durum:** ⏳ Açık

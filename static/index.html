@@ -4490,12 +4490,19 @@ async function runReview() {
     [['tf_fp','flash_point'],['tf_bp','boiling_point'],['tf_density','density'],
      ['tf_visc','viscosity'],['tf_sol','solubility'],['tf_mp','melting_point'],
      ['tf_ait','auto_ignition'],['tf_decomp','decomposition_temp'],
-     ['tf_logkow','log_kow']].forEach(([id, key]) => {
+     ['tf_logkow','log_kow'],['tf_vp','vapor_pressure'],
+     ['tf_odor_thresh','odour_threshold'],['tf_aerosol_flam_pct','aerosol_flam_pct']].forEach(([id, key]) => {
       const v = _n(id); if (v !== null) flatPhys[key] = v;
     });
     const phVal = _g('tf_ph'); if (phVal) flatPhys.ph = phVal;
+    const evapVal = _g('tf_evap'); if (evapVal) flatPhys.evap_rate = evapVal;
+    const flamSg  = _g('tf_flam_sg'); if (flamSg) flatPhys.is_flammable = flamSg;
+    const explVal = _g('tf_expl');    if (explVal) flatPhys.is_explosive = explVal;
+    const oxidVal = _g('tf_oxid');    if (oxidVal) flatPhys.is_oxidising = oxidVal;
+    const solOth  = _g('tf_sol_other'); if (solOth) flatPhys.sol_other = solOth;
+    // Motor hesaplanan alanlar (kullanıcı girişi yoksa theoProps'tan al)
     ['density','boiling_point','flash_point','lel','uel','vapor_pressure','vapor_density',
-     'viscosity','melting_point','auto_ignition','log_kow'].forEach(k => {
+     'viscosity','melting_point','auto_ignition','log_kow','decomposition_temp'].forEach(k => {
       if (flatPhys[k] === undefined) { const v = _tv(tp[k]); if (v !== null && v !== undefined) flatPhys[k] = v; }
     });
 

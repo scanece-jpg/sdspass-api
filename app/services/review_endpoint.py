@@ -421,37 +421,159 @@ async def sds_review(data: dict = Body(...)):
             issues_text += "\n\n"
     issues_text += "=== KURAL KONTROLÜ SONU ==="
 
-    # ── 5. Claude çağrısı ────────────────────────────────────────────────────
+    # ── 5. Tool tanımları ────────────────────────────────────────────────────
+    _tools = [
+        {
+            "name": "get_substance_scl",
+            "description": (
+                "Bir bileşenin CAS numarası ve H kodu için SEA Ek-6 / substance_db'den "
+                "özel konsantrasyon sınırını (SCL) sorgular. "
+                "Bir bileşenin karışımdaki konsantrasyonunun SCL eşiğini aşıp aşmadığını "
+                "doğrulamak için kullan. found=False ise bu bileşen için kayıtlı SCL yok."
+            ),
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "cas_no": {"type": "string", "description": "CAS numarası (örn: '7664-93-9')"},
+                    "h_code": {"type": "string", "description": "H kodu (örn: 'H314')"},
+                },
+                "required": ["cas_no", "h_code"],
+            },
+        },
+        {
+            "name": "verify_text_in_sds",
+            "description": (
+                "SDS metninde bir ifadenin birebir geçip geçmediğini kontrol eder. "
+                "Bir alanın 'eksik' veya 'mevcut' olduğunu iddia etmeden önce bu araçla doğrula. "
+                "Türkçe karakter farklılıklarını tolere eder."
+            ),
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "phrase": {"type": "string", "description": "Aranacak ifade veya kelime"},
+                },
+                "required": ["phrase"],
+            },
+        },
+        {
+            "name": "search_regulation",
+            "description": (
+                "Mevzuat kural bloklarında anahtar kelime araması yapar. "
+                "Bir hükmün gerçekten mevzuatta var olup olmadığını doğrulamak için kullan. "
+                "B kaynağında bulamazsan bulgu yazma."
+            ),
+            "input_schema": {
+                "type": "object",
+                "properties": {
+                    "query": {"type": "string", "description": "Arama sorgusu (örn: 'H318 dominance H314')"},
+                    "top_k": {"type": "integer", "description": "Kaç sonuç dönsün (varsayılan 4)", "default": 4},
+                },
+                "required": ["query"],
+            },
+        },
+    ]
+
+    # ── 6. Tool-use döngüsü ──────────────────────────────────────────────────
+    from app.services.substance_lookup import get_substance_scl as _get_scl
+    from app.services.regulation_search import (
+        verify_text_in_sds as _verify_text,
+        search_regulation   as _search_reg,
+    )
+    import json as _json
+
+    def _dispatch_tool(name: str, inputs: dict) -> str:
+        """Tool çağrısını gerçek fonksiyona yönlendirir, JSON string döner."""
+        try:
+            if name == "get_substance_scl":
+                result = _get_scl(inputs["cas_no"], inputs["h_code"])
+            elif name == "verify_text_in_sds":
+                result = _verify_text(inputs["phrase"], sds_text)
+            elif name == "search_regulation":
+                result = _search_reg(inputs["query"], inputs.get("top_k", 4))
+            else:
+                result = {"error": f"Bilinmeyen araç: {name}"}
+        except Exception as exc:
+            result = {"error": str(exc)}
+        return _json.dumps(result, ensure_ascii=False)
+
+    client = _anthropic.Anthropic(api_key=api_key)
+    system_prompt = _SYSTEM_PROMPT + _load_extra_rules()
+
     user_parts: list[dict] = []
     user_parts.extend(kb_blocks)
     user_parts.append({"type": "text", "text": sds_text})
     user_parts.append({"type": "text", "text": issues_text})
     user_parts.append({
         "type": "text",
-        "text": "Yukarıdaki SDS metnini (A) mevzuat paragraflarıyla (B) karşılaştırarak "
-                "bağımsız denetim raporu yaz. Otomatik bulgular (C) ek bağlam olarak kullan.",
+        "text": (
+            "Yukarıdaki SDS metnini (A) mevzuat paragraflarıyla (B) karşılaştırarak "
+            "bağımsız denetim raporu yaz. Otomatik bulgular (C) ek bağlam olarak kullan.\n"
+            "Bir bulgu yazmadan önce:\n"
+            "  • Metinde olmayan bir şeyi iddia ediyorsan → verify_text_in_sds ile doğrula\n"
+            "  • SCL sınırı ile ilgili bir bulgu varsa → get_substance_scl ile sorgula\n"
+            "  • Mevzuat hükmünden emin değilsen → search_regulation ile kontrol et"
+        ),
     })
 
-    client = _anthropic.Anthropic(api_key=api_key)
-    system_prompt = _SYSTEM_PROMPT + _load_extra_rules()
-    resp = client.messages.create(
-        model="claude-sonnet-4-6",
-        max_tokens=2048,
-        system=system_prompt,
-        messages=[{"role": "user", "content": user_parts}],
-    )
+    messages: list[dict] = [{"role": "user", "content": user_parts}]
 
-    report = "".join(
-        b.text for b in resp.content if getattr(b, "type", None) == "text"
-    )
+    total_input  = 0
+    total_output = 0
+    report       = ""
+    MAX_ROUNDS   = 8  # sonsuz döngü güvenliği
+
+    for _round in range(MAX_ROUNDS):
+        resp = client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=2048,
+            system=system_prompt,
+            tools=_tools,
+            messages=messages,
+        )
+        total_input  += resp.usage.input_tokens
+        total_output += resp.usage.output_tokens
+
+        # Nihai metin yanıtı — döngüyü bitir
+        if resp.stop_reason == "end_turn":
+            report = "".join(
+                b.text for b in resp.content if getattr(b, "type", None) == "text"
+            )
+            break
+
+        # Tool çağrısı — araçları çalıştır, sonuçları ekle, devam et
+        if resp.stop_reason == "tool_use":
+            # Asistan yanıtını mesaj geçmişine ekle
+            messages.append({"role": "assistant", "content": resp.content})
+
+            # Her tool_use bloğu için sonuç üret
+            tool_results = []
+            for block in resp.content:
+                if getattr(block, "type", None) != "tool_use":
+                    continue
+                tool_output = _dispatch_tool(block.name, block.input)
+                tool_results.append({
+                    "type":        "tool_result",
+                    "tool_use_id": block.id,
+                    "content":     tool_output,
+                })
+
+            messages.append({"role": "user", "content": tool_results})
+            continue
+
+        # Beklenmedik stop_reason — çık
+        report = "".join(
+            b.text for b in resp.content if getattr(b, "type", None) == "text"
+        )
+        break
 
     return {
         "issues":        issues,
         "summary":       summary,
         "report":        report,
         "docs_used":     len(kb_blocks),
-        "input_tokens":  resp.usage.input_tokens,
-        "output_tokens": resp.usage.output_tokens,
+        "input_tokens":  total_input,
+        "output_tokens": total_output,
+        "tool_rounds":   _round + 1,
         "sds_text":      sds_text,   # chat için sakla
     }
 

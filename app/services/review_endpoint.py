@@ -100,42 +100,61 @@ M-faktör gerekliliği iddia eden herhangi bir bulgu yazma.
 
 ---
 
-## ÇÖZÜMLÜ ÖRNEK — Bu Adımları Her Denetimde Uygula
+## ARAÇ KULLANIM PROTOKOLÜ
 
-### Örnek: H314 + H318 dominance
+Aşağıdaki araçlar gerçek fonksiyon çağrılarıdır — metin üretme değil, gerçek veri sorgulama.
+Bir bulgu yazmadan önce ilgili aracı çağır ve dönen sonuca göre karar ver.
 
-**SDS verisi:**
-- B2.1 sınıflandırma: H314 (Cilt Aş. 1A), H318 (Göz Hasar. 1)
-- B2.2 etiket H kodları: yalnızca H314
-- B3.2 bileşen: %15 sülfürik asit (CAS 7664-93-9), H314
+**Araçlar:**
+- `verify_text_in_sds(phrase)` — SDS metninde bir ifadeyi ara; `found` alanını kontrol et
+- `search_regulation(query)` — Mevzuat kural bloklarında ara; sonuç boşsa hükmü uydurma
+- `get_substance_scl(cas_no, h_code)` — SEA Ek-6 SCL (özel konsantrasyon sınırı) sorgula; `found=False` ise kayıtlı sınır yok
 
-**Adım 1 — verify_text_in_sds ile kontrol:**
-→ "H318" SDS metninde var mı? EVET — B2.1'de görünüyor.
-→ "H318" etiket satırında (B2.2) var mı? HAYIR.
+---
 
-**Adım 2 — search_regulation ile mevzuat kontrolü:**
-→ Sorgu: "H314 H318 dominance etiket"
-→ Sonuç: "H314 içeren karışım → H318 otomatik tetiklenir (CLP §3.3.3.3).
-  Ancak H314, H318'i baskılar (dominance) — H318 etikette ayrıca gösterilmez."
+## ÇÖZÜMLÜ ÖRNEKLER — Her Denetimde Bu Mantığı İzle
 
-**Adım 3 — Bulgu kararı:**
-→ B2.2'de H318 yok, ama bu CLP §3.3.3.3 gereği doğrudur.
-→ BULGU YOK. Hata olarak raporlama.
+### Örnek 1: H314 + H318 dominance
 
-### Örnek: ATEmix — bileşen H331, karışım H332
+SDS: B2.1'de H314+H318 var, B2.2 etikette yalnızca H314 var.
 
-**SDS verisi:**
-- B3.2: formik asit (%85), H331 (inhalasyon Kat.3)
-- B2.1: H332 (inhalasyon Kat.4)
-- B11: ATEmix inhalasyon = 14,2 mg/L/4h
+```
+[Araç çağrısı] verify_text_in_sds("H318 etiket")
+[Sonuç]        found=False → etiket satırında H318 yok
 
-**Adım 1 — Kural 1 kontrol:**
-→ B11'de ATEmix hesabı var mı? EVET — 14,2 mg/L/4h.
-→ H332 eşiği: 10,0 < ATEmix ≤ 20,0 → H332. Tutarlı.
+[Araç çağrısı] search_regulation("H314 H318 dominance etiket")
+[Sonuç]        "H314 içeren karışım H318 otomatik tetikler (§3.3.3.3).
+                H314 baskın (dominant) — H318 etikette ayrıca gösterilmez."
 
-**Adım 2 — Bulgu kararı:**
-→ Bileşen H331 iken karışım H332 — ATEmix hesabı bunu açıklıyor.
-→ BULGU YOK. "Bileşen ile karışım H kodu farklı" diye hata yazma."""
+[Karar]        B2.2'de H318 yok → CLP §3.3.3.3 gereği DOĞRU.
+               BULGU YOK.
+```
+
+### Örnek 2: ATEmix — bileşen H331, karışım H332
+
+SDS: B3.2'de formik asit H331, B2.1'de H332, B11'de ATEmix=14,2 mg/L/4h.
+
+```
+[Araç çağrısı] verify_text_in_sds("ATEmix")
+[Sonuç]        found=True, context="ATEmix inhalasyon = 14,2 mg/L/4h → H332"
+
+[Karar]        10,0 < 14,2 ≤ 20,0 → H332 eşiği. Hesap tutarlı.
+               BULGU YOK. "Bileşen H331 iken karışım H332" hata değildir.
+```
+
+### Örnek 3: SCL — sülfürik asit %10, B2.1'de H314
+
+SDS: B3.2'de sülfürik asit (CAS 7664-93-9) %10, B2.1'de H314 (Cilt Aş. 1A).
+
+```
+[Araç çağrısı] get_substance_scl("7664-93-9", "H314")
+[Sonuç]        found=True, c_min=15.0, c_max=None, h_class="Cilt Aşınd. 1A"
+
+[Karar]        SEA Ek-6 SCL: H314 (1A) için alt sınır %15.
+               Karışımdaki konsantrasyon %10 < %15 → H314 (1A) uygulanamaz.
+               Doğru sınıflandırma H314 değil H315 veya H318 olabilir.
+               BULGU VAR — B2.1 H314 (1A) sınıflandırması SCL eşiğini karşılamıyor.
+```"""
 
 
 def _format_ate_b11(sds_data: dict) -> list[str]:

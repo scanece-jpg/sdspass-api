@@ -4506,6 +4506,13 @@ async function runReview() {
       if (flatPhys[k] === undefined) { const v = _tv(tp[k]); if (v !== null && v !== undefined) flatPhys[k] = v; }
     });
 
+    // PBT/vPvB — ekolojik sınıftan türet
+    const ecoH = (state.eco?.h_codes || []);
+    const hasPBT = ecoH.some(h => ['H400','H410','H411','H412','H413'].includes(h));
+    const pbtText = hasPBT
+      ? `Karışım su ortamı tehlikesi taşıyor (${ecoH.join(', ')}). PBT/vPvB değerlendirmesi gerekli.`
+      : 'Bu karışım PBT veya vPvB kriterlerini karşılamamaktadır.';
+
     const payload = {
       h_codes:    state.allH || [],
       phys_props: flatPhys,
@@ -4515,10 +4522,24 @@ async function runReview() {
           signal_word: state.combinedSignal || '',
           pictograms:  state.clp?.pictograms || [],
           all_h_codes: state.allH || [],
+          euh_codes:   state.euh || [],
         },
         p_codes:  state.pcodes || {},
         adr:      state.transport || {},
-        author:   {},
+        eco:      state.eco || {},
+        ppe:      state.ppe || {},
+        pbt_statement: pbtText,
+        product_info: {
+          product_name:  document.getElementById('productName')?.value?.trim() || '',
+          supplier_name: document.getElementById('suppName')?.value?.trim() || '',
+          supplier_phone: document.getElementById('suppPhone')?.value?.trim() || '',
+          emergency_tel: document.getElementById('supplierEmergencyTel')?.value?.trim() || '',
+          supplier_address: document.getElementById('suppAddress')?.value?.trim() || '',
+          supplier_email: document.getElementById('suppEmail')?.value?.trim() || '',
+          usage: document.getElementById('pusage')?.value || 'industrial',
+          form:  document.getElementById('pform')?.value || '',
+        },
+        author: {},
       },
     };
 

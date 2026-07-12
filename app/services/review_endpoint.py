@@ -140,15 +140,30 @@ async def sds_review(data: dict = Body(...)):
     # Kural sonuçları
     user_parts.append({"type": "text", "text": issues_text})
 
-    # H kodları ve bileşen özeti
+    # SDS özet metni — tüm mevcut alanlar (halüsinasyon önleme)
+    clp      = sds_data.get("clp", {})
+    prod     = sds_data.get("product_info", {})
     comp_summary = ", ".join(
         f"{c.get('name') or c.get('cas_no', '?')} (%{c.get('conc', c.get('concentration', '?'))})"
         for c in components[:6]
     )
     context_text = (
-        f"H kodları: {', '.join(h_codes)}\n"
-        f"Bileşenler: {comp_summary or 'belirtilmemiş'}\n"
-        f"Sinyal kelimesi: {sds_data.get('clp', {}).get('signal_word', 'belirtilmemiş')}\n"
+        f"=== SDS VERİSİ ===\n"
+        f"B1.1 Ürün adı: {prod.get('product_name') or 'belirtilmemiş'}\n"
+        f"B1.3 Tedarikçi: {prod.get('supplier_name') or 'belirtilmemiş'} | "
+        f"Tel: {prod.get('supplier_phone') or 'belirtilmemiş'} | "
+        f"Adres: {prod.get('supplier_address') or 'belirtilmemiş'}\n"
+        f"B1.4 Acil tel: {prod.get('emergency_tel') or 'belirtilmemiş'}\n"
+        f"B2.1 H kodları: {', '.join(h_codes) or 'yok'}\n"
+        f"B2.1 EUH kodları: {', '.join(clp.get('euh_codes', [])) or 'yok'}\n"
+        f"B2.2 Sinyal kelimesi: {clp.get('signal_word') or 'belirtilmemiş'}\n"
+        f"B2.2 Piktogramlar: {', '.join(clp.get('pictograms', [])) or 'yok'}\n"
+        f"B2.3 PBT/vPvB: {sds_data.get('pbt_statement') or 'belirtilmemiş'}\n"
+        f"B3.2 Bileşenler: {comp_summary or 'belirtilmemiş'}\n"
+        f"B8 KKE: {str(sds_data.get('ppe') or 'belirtilmemiş')[:200]}\n"
+        f"B14 ADR: {sds_data.get('adr', {}).get('road', {}).get('un') or 'UN no yok'}\n"
+        f"Kullanım kategorisi: {prod.get('usage') or 'industrial'}\n"
+        f"=== SDS VERİSİ SONU ===\n"
     )
     user_parts.append({"type": "text", "text": context_text})
     user_parts.append({

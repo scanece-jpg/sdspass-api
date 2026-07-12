@@ -352,15 +352,18 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
             # sclRaw: tam bant bilgisi (h_class + c_max) — 1A/1B override için zorunlu
             # scl: sadece dict fallback {"H314":2.0} — c_max ve h_class yok, yalnızca eşik kesimi
             scl_list = _normalize_scl_list(comp.get("sclRaw") or comp.get("scl", []))
-            for scl_entry in scl_list:
-                scl_hclass = scl_entry.get("h_class", scl_entry.get("hazard", ""))
-                scl_hcode4 = scl_entry.get("h_code", "").replace("*", "").strip()[:4]
-                h4 = h[:4]
-                if scl_hclass == h_class or scl_hcode4 == h4:
-                    c_min = scl_entry.get("c_min")
-                    if c_min is not None:
-                        cutoff = float(c_min)  # SCL her zaman GCL'nin yerini alır
-                        break
+            # Çok-bantlı SCL (1A/1B): tüm eşleşen bantların minimum c_min'i geçerli eşiktir.
+            # İlk eşleşmeyi almak yanlış: 1A c_min=90 alınırsa %15 katkı atlanır.
+            _h4 = h[:4]
+            _scl_matched_mins = [
+                float(s.get("c_min", 0))
+                for s in scl_list
+                if (s.get("h_class","") == h_class or
+                    s.get("h_code","").replace("*","").strip()[:4] == _h4)
+                and s.get("c_min") is not None
+            ]
+            if _scl_matched_mins:
+                cutoff = min(_scl_matched_mins)
 
             # Fiziksel tehlikeler (cutoff=0.0) — fiziksel tehlike motoru tarafından da
             # hesaplanır; burada sadece B2.1 tablosu için ek kayıt tutulur.

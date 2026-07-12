@@ -4146,13 +4146,29 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
       throw new Error(`API hatası ${res.status}: ${err}`);
     }
 
-    const blob = await res.blob();
+    const resJson = await res.json();
+
+    // PDF indir
+    const pdfBytes = Uint8Array.from(atob(resJson.pdf), c => c.charCodeAt(0));
+    const blob = new Blob([pdfBytes], { type: 'application/pdf' });
     const url  = URL.createObjectURL(blob);
     const a    = document.createElement('a');
     a.href     = url;
-    a.download = `${productName.replace(/\s+/g,'_')}_SDS.pdf`;
+    a.download = resJson.filename || `${productName.replace(/\s+/g,'_')}_SDS.pdf`;
     a.click();
     URL.revokeObjectURL(url);
+
+    // Temiz sds_data'yı sakla — denetim butonu kullanacak
+    window._lastSdsJson = resJson.sds_data || null;
+
+    // Validator sonuçları (eski header mantığı yerine JSON'dan)
+    const _valData = resJson.validation || {};
+    if (_valData.error || _valData.warning) {
+      const _valSummary = JSON.stringify({ error: _valData.error || 0, warning: _valData.warning || 0, info: _valData.info || 0 });
+      const _valIssues  = JSON.stringify(_valData.issues || []);
+      // Mevcut toast/header mantığını tetikle
+      window.dispatchEvent(new CustomEvent('sds-validation', { detail: { summary: _valSummary, issues: _valIssues } }));
+    }
     _bumpVersion();
 
   } catch (e) {
@@ -4517,6 +4533,9 @@ async function runReview() {
       h_codes:    state.allH || [],
       phys_props: flatPhys,
       components: (typeof getComps === 'function') ? getComps() : [],
+      // PDF oluşturduktan sonra saklanan tam sds_data — en doğru veri kaynağı
+      full_sds_data: window._lastSdsJson || null,
+      // Fallback: PDF oluşturulmadıysa basit veri
       sds_data: {
         clp: {
           signal_word: state.combinedSignal || '',

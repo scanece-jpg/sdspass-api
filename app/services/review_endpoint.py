@@ -3,7 +3,7 @@ SDS Denetim Endpoint — /api/v1/sds/review
 
 Akış:
   1. validate_sds()           → V001-V027 kural sonuçları
-  2. _build_sds_text()        → tüm 16 bölüm düz metin
+  2. _build_sds_text()        → PDF motoruyla aynı sds_data'dan 16 bölüm düz metin
   3. build_context_blocks()   → ilgili mevzuat paragrafları
   4. Claude API               → bağımsız denetim raporu (Markdown)
 """
@@ -46,130 +46,197 @@ bilginden üretme veya tahmin etme. İlgili mevzuat paragrafı sağlanmamışsa 
 "İlgili mevzuat paragrafı bu denetimde sağlanmadı." yaz ve o konuda yorum yapma."""
 
 
-def _build_sds_text(h_codes, phys_props, components, sds_data) -> str:
-    """Tüm 16 SDS bölümünü denetim için düz metin olarak oluştur."""
+def _build_sds_text(sds_data: dict, h_codes: list, phys_props: dict, components: list) -> str:
+    """
+    PDF motoruyla aynı sds_data yapısından 16 bölüm okunabilir metin üretir.
+    PDF endpoint'in döndürdüğü sds_data direkt buraya girer — ham dict/liste yok.
+    """
+    product  = sds_data.get("product", {})
+    supplier = sds_data.get("supplier", {})
+    clp      = sds_data.get("clp", {})
+    euh_data = sds_data.get("euh", {})
+    p_data   = sds_data.get("p_codes", {})
+    eco      = sds_data.get("eco", {})
+    ppe      = sds_data.get("ppe", {})
+    transport= sds_data.get("transport", {})
+    revision = sds_data.get("revision", {})
+    phys     = sds_data.get("phys_props", {}) or phys_props
 
-    clp  = sds_data.get("clp", {})
-    prod = sds_data.get("product_info", {})
-    adr  = sds_data.get("adr", {})
-    ppe  = sds_data.get("ppe", {})
-    eco  = sds_data.get("eco", {})
+    # ── EUH kodları ──────────────────────────────────────────────────────────
+    euh_codes = []
+    if isinstance(euh_data, dict):
+        euh_codes = euh_data.get("codes", []) or []
+    elif isinstance(euh_data, list):
+        euh_codes = euh_data
 
-    # Seçili P kodları
-    p_raw = sds_data.get("p_codes", {})
-    if isinstance(p_raw, dict):
-        label_sel  = p_raw.get("label", {}).get("selected", [])
-        sds_mand   = p_raw.get("sds", {}).get("mandatory", []) if isinstance(p_raw.get("sds"), dict) else []
-        sds_eval   = p_raw.get("sds", {}).get("evaluate", []) if isinstance(p_raw.get("sds"), dict) else []
-    else:
-        label_sel = sds_mand = sds_eval = []
+    # ── P kodları ─────────────────────────────────────────────────────────────
+    label_sel, sds_mand, sds_eval = [], [], []
+    if isinstance(p_data, dict):
+        lbl = p_data.get("label", {})
+        if isinstance(lbl, dict):
+            label_sel = lbl.get("selected", []) or []
+        sds_cls = p_data.get("sds", {})
+        if isinstance(sds_cls, dict):
+            sds_mand = sds_cls.get("mandatory", []) or []
+            sds_eval = sds_cls.get("evaluate", []) or []
 
-    # ADR özet
-    road = adr.get("road", {}) if isinstance(adr, dict) else {}
+    # ── ADR ──────────────────────────────────────────────────────────────────
+    road = {}
+    if isinstance(transport, dict):
+        road = transport.get("road", {}) or {}
     adr_line = (
         f"UN {road.get('un','-')} | Sınıf {road.get('class','-')} | "
-        f"PG {road.get('pg','-')} | {road.get('shipping_name','-')}"
-        if road.get("un") else "Tehlikeli madde değil"
+        f"PG {road.get('pg','-')} | {road.get('shipping_name') or road.get('label','-')}"
+        if road.get("un") else "Tehlikeli madde değil / belirsiz"
     )
 
-    # Bileşenler
-    comp_lines = []
-    for c in components:
-        name = c.get("name_tr") or c.get("name") or c.get("cas_no", "?")
-        conc = c.get("conc") or c.get("concentration", "?")
-        cas  = c.get("cas_no") or c.get("cas", "")
-        reach = c.get("reach_no", "")
-        h_list = ", ".join(
-            h.get("h_code", "") for h in c.get("hazards", []) if h.get("h_code")
-        )
-        comp_lines.append(
-            f"  • {name} (CAS: {cas}) — %{conc}"
-            + (f" | REACH: {reach}" if reach else "")
-            + (f" | H: {h_list}" if h_list else "")
-        )
+    # ── KKE ──────────────────────────────────────────────────────────────────
+    ppe_line = "belirtilmemiş"
+    if isinstance(ppe, dict):
+        parts = []
+        for key, label in [("eye","Göz"),("skin","Cilt"),("resp","Solunum"),("hand","El")]:
+            val = ppe.get(key)
+            if val and isinstance(val, str) and val.strip():
+                parts.append(f"{label}: {val.strip()[:80]}")
+        ppe_line = " | ".join(parts) if parts else "belirtilmemiş"
 
-    # Fiziksel özellikler
+    # ── Ekoloji ───────────────────────────────────────────────────────────────
+    eco_h = []
+    if isinstance(eco, dict):
+        eco_h = eco.get("h_codes", []) or []
+    eco_line = ", ".join(eco_h) if eco_h else "Sucul tehlike sınıfı yok"
+
+    # ── PBT ──────────────────────────────────────────────────────────────────
+    pbt_h = {"H400","H410","H411","H412","H413"}
+    has_pbt = bool(set(eco_h) & pbt_h)
+    pbt_line = (
+        f"Karışım sucul tehlike içeriyor ({', '.join(eco_h)}). PBT/vPvB değerlendirmesi gerekli."
+        if has_pbt else "Bu karışım PBT veya vPvB kriterlerini karşılamamaktadır."
+    )
+
+    # ── Bileşenler ────────────────────────────────────────────────────────────
+    comp_lines = []
+    for c in (components or sds_data.get("components", [])):
+        name  = c.get("name_tr") or c.get("name") or c.get("cas_no", "?")
+        conc  = c.get("conc") or c.get("concentration", "?")
+        cas   = c.get("cas_no") or c.get("cas", "")
+        reach = c.get("reach_no", "")
+        h_list= ", ".join(
+            h.get("h_code","") for h in (c.get("hazards") or []) if h.get("h_code")
+        )
+        line = f"  • {name} (CAS: {cas}) — %{conc}"
+        if reach: line += f" | REACH: {reach}"
+        if h_list: line += f" | H: {h_list}"
+        comp_lines.append(line)
+
+    # ── Fiziksel özellikler ───────────────────────────────────────────────────
     def _pv(key, unit=""):
-        v = phys_props.get(key)
-        if v is None:
-            return "N/A"
+        v = phys.get(key)
+        if v is None: return "N/A"
         if isinstance(v, dict):
             v = v.get("display") or v.get("value") or v.get("calc")
         return f"{v} {unit}".strip() if v is not None else "N/A"
 
-    # Bölüm 4-8 cümleleri — sds_sentence_service'ten üret
-    sec4 = sec5 = sec6 = sec7 = sec8_text = ""
+    # ── B4-B8 cümleleri ───────────────────────────────────────────────────────
+    sec4 = sec5 = sec6 = sec7 = ""
+    mixture_form = product.get("form", "liquid")
     try:
         from app.services.sds_sentence_service import generate_section
-        mixture_form = prod.get("form", "liquid")
-        for sec_no, var in [(4, "sec4"), (5, "sec5"), (6, "sec6"), (7, "sec7")]:
-            res = generate_section(sec_no, h_codes, mixture_form)
+        for no, var in [(4,"sec4"),(5,"sec5"),(6,"sec6"),(7,"sec7")]:
+            res = generate_section(no, h_codes, mixture_form)
             bullets = res.get("bullets", [])
-            text    = res.get("text", "")
-            val     = text or (" | ".join(bullets) if bullets else "Motor çıktısı yok")
-            if sec_no == 4: sec4 = val
-            if sec_no == 5: sec5 = val
-            if sec_no == 6: sec6 = val
-            if sec_no == 7: sec7 = val
+            txt = res.get("text", "") or (" | ".join(bullets) if bullets else "N/A")
+            if no == 4: sec4 = txt
+            if no == 5: sec5 = txt
+            if no == 6: sec6 = txt
+            if no == 7: sec7 = txt
         res8 = generate_section(8, h_codes, mixture_form)
-        ppe_dict = res8.get("ppe", {})
-        sec8_text = (
-            f"Göz: {ppe_dict.get('eye','-')} | "
-            f"Cilt: {ppe_dict.get('skin','-')} | "
-            f"Solunum: {ppe_dict.get('resp','-')}"
-        )
+        ppe_motor = res8.get("ppe", {})
+        ppe_line = " | ".join(
+            f"{lbl}: {ppe_motor.get(k,'').strip()[:80]}"
+            for k, lbl in [("eye","Göz"),("skin","Cilt"),("resp","Solunum")]
+            if ppe_motor.get(k,"").strip()
+        ) or ppe_line
     except Exception:
-        sec8_text = str(ppe)[:300] if ppe else "Motor çıktısı yok"
-
-    # Ekoloji özeti
-    eco_h = eco.get("h_codes", []) if isinstance(eco, dict) else []
-    eco_line = ", ".join(eco_h) if eco_h else "Sucul tehlike sınıfı yok"
+        pass
 
     lines = [
         "=== GBF/SDS TAM METNİ (16 BÖLÜM) ===",
         "",
-        f"B1.1 Ürün adı       : {prod.get('product_name') or 'belirtilmemiş'}",
-        f"B1.1 Form / Kullanım: {prod.get('form') or '-'} / {prod.get('usage') or 'industrial'}",
-        f"B1.3 Tedarikçi      : {prod.get('supplier_name') or 'belirtilmemiş'}",
-        f"      Adres          : {prod.get('supplier_address') or 'belirtilmemiş'}",
-        f"      Telefon        : {prod.get('supplier_phone') or 'belirtilmemiş'}",
-        f"      E-posta        : {prod.get('supplier_email') or 'belirtilmemiş'}",
-        f"B1.4 Acil tel       : {prod.get('emergency_tel') or 'belirtilmemiş'}",
+        f"BÖLÜM 1 — Madde/Karışım ve Şirket/Üstlenen Tanımlaması",
+        f"B1.1 Ürün adı        : {product.get('name') or 'belirtilmemiş'}",
+        f"     Ürün kodu       : {product.get('code') or '-'}",
+        f"     Kullanım        : {product.get('usage') or 'industrial'}",
+        f"B1.3 Tedarikçi       : {supplier.get('name') or 'belirtilmemiş'}",
+        f"     Adres           : {supplier.get('address') or 'belirtilmemiş'}",
+        f"     Telefon         : {supplier.get('phone') or 'belirtilmemiş'}",
+        f"     E-posta         : {supplier.get('email') or 'belirtilmemiş'}",
+        f"B1.4 Acil tel        : {supplier.get('emergency_tel') or 'belirtilmemiş'}",
         "",
-        f"B2.1 H kodları (sınıf.): {', '.join(clp.get('all_h_codes', h_codes)) or 'yok'}",
-        f"B2.1 EUH kodları       : {', '.join(clp.get('euh_codes', [])) or 'yok'}",
-        f"B2.2 Sinyal kelimesi   : {clp.get('signal_word') or 'belirtilmemiş'}",
-        f"B2.2 Piktogramlar      : {', '.join(clp.get('pictograms', [])) or 'yok'}",
-        f"B2.2 Etiket P kodları  : {', '.join(label_sel) or 'yok'}",
-        f"B2.3 PBT/vPvB          : {sds_data.get('pbt_statement') or 'belirtilmemiş'}",
+        f"BÖLÜM 2 — Zararlılık Tanımlaması",
+        f"B2.1 Etiket H kodları: {', '.join(clp.get('h_codes', h_codes)) or 'yok'}",
+        f"B2.1 Tüm H kodları   : {', '.join(clp.get('all_h_codes', h_codes)) or 'yok'}",
+        f"B2.1 EUH kodları     : {', '.join(euh_codes) or 'yok'}",
+        f"B2.2 Sinyal kelimesi : {clp.get('signal_word') or 'belirtilmemiş'}",
+        f"B2.2 Piktogramlar    : {', '.join(clp.get('pictograms', [])) or 'yok'}",
+        f"B2.2 Etiket P kodları: {', '.join(label_sel) or 'yok'}",
+        f"B2.3 PBT/vPvB        : {pbt_line}",
         "",
-        "B3.2 Bileşenler:",
+        f"BÖLÜM 3 — Bileşim/İçindekiler Hakkında Bilgi",
         *comp_lines,
         "",
-        f"B4  İlk yardım         : {sec4[:400] if sec4 else 'N/A'}",
-        f"B5  Yangınla mücadele  : {sec5[:300] if sec5 else 'N/A'}",
-        f"B6  Kaza döküntüsü     : {sec6[:300] if sec6 else 'N/A'}",
-        f"B7  Elleçleme/depolama : {sec7[:300] if sec7 else 'N/A'}",
-        f"B8  KKE                : {sec8_text[:300]}",
+        f"BÖLÜM 4 — İlk Yardım Önlemleri",
+        sec4[:500] if sec4 else "N/A",
         "",
-        f"B9  Parlama noktası    : {_pv('flash_point','°C')}",
-        f"    Kaynama noktası    : {_pv('boiling_point','°C')}",
-        f"    Yoğunluk           : {_pv('density','g/mL')}",
-        f"    pH                 : {_pv('ph')}",
-        f"    Buhar basıncı      : {_pv('vapor_pressure','hPa')}",
-        f"    Viskozite          : {_pv('viscosity','mm²/s')}",
-        f"    Su çözünürlüğü     : {_pv('solubility','mg/L')}",
-        f"    Tutuşma sıcaklığı  : {_pv('auto_ignition','°C')}",
-        f"    Log Kow            : {_pv('log_kow')}",
+        f"BÖLÜM 5 — Yangınla Mücadele Önlemleri",
+        sec5[:400] if sec5 else "N/A",
         "",
-        f"B10 Kararlılık/reaktivite: H kodlarına göre — {', '.join(h_codes)}",
-        f"B11 Toksikoloji          : H kodlarına göre — {', '.join(h_codes)}",
-        f"B12 Ekoloji              : {eco_line}",
-        f"B12.5 PBT/vPvB           : {sds_data.get('pbt_statement') or 'belirtilmemiş'}",
-        f"B14 ADR taşımacılık      : {adr_line}",
+        f"BÖLÜM 6 — Kaza Sonucu Yayılmaya Karşı Önlemler",
+        sec6[:400] if sec6 else "N/A",
         "",
-        f"B16 SDS P kodları (zorunlu): {', '.join(sds_mand) or 'yok'}",
-        f"B16 SDS P kodları (değerl.): {', '.join(sds_eval[:10]) or 'yok'}",
+        f"BÖLÜM 7 — Elleçleme ve Depolama",
+        sec7[:400] if sec7 else "N/A",
+        "",
+        f"BÖLÜM 8 — Maruziyet Kontrolleri/Kişisel Korunma",
+        f"KKE: {ppe_line}",
+        "",
+        f"BÖLÜM 9 — Fiziksel ve Kimyasal Özellikler",
+        f"Parlama noktası   : {_pv('flash_point','°C')}",
+        f"Kaynama noktası   : {_pv('boiling_point','°C')}",
+        f"Yoğunluk          : {_pv('density','g/mL')}",
+        f"pH                : {_pv('ph')}",
+        f"Buhar basıncı     : {_pv('vapor_pressure','hPa')}",
+        f"Viskozite         : {_pv('viscosity','mm²/s')}",
+        f"Su çözünürlüğü    : {_pv('solubility','mg/L')}",
+        f"Tutuşma sıc.      : {_pv('auto_ignition','°C')}",
+        f"Log Kow           : {_pv('log_kow')}",
+        f"Erime noktası     : {_pv('melting_point','°C')}",
+        "",
+        f"BÖLÜM 10 — Kararlılık ve Reaktivite",
+        f"H kodlarına göre değerlendirme: {', '.join(h_codes)}",
+        "",
+        f"BÖLÜM 11 — Toksikolojik Bilgi",
+        f"H kodlarına göre: {', '.join(h_codes)}",
+        "",
+        f"BÖLÜM 12 — Ekolojik Bilgi",
+        f"Ekolojik H kodları: {eco_line}",
+        f"PBT/vPvB          : {pbt_line}",
+        "",
+        f"BÖLÜM 13 — Bertaraf Etme",
+        "Yerel yönetmeliklere uygun bertaraf.",
+        "",
+        f"BÖLÜM 14 — Taşımacılık Bilgisi",
+        f"ADR (Karayolu): {adr_line}",
+        "",
+        f"BÖLÜM 15 — Mevzuat Bilgisi",
+        f"KKDİK kapsamında kayıtlı bileşenler listesi yukarıda (B3.2).",
+        "",
+        f"BÖLÜM 16 — Diğer Bilgiler",
+        f"SDS zorunlu P kodları   : {', '.join(sds_mand) or 'yok'}",
+        f"SDS değerl. P kodları   : {', '.join(sds_eval[:12]) or 'yok'}",
+        f"Revizyon tarihi         : {revision.get('date', 'belirtilmemiş')}",
+        f"Revizyon no             : {revision.get('no', '-')}",
+        f"Revizyon notları        : {revision.get('notes', '-')}",
         "",
         "=== SDS METNİ SONU ===",
     ]
@@ -190,29 +257,44 @@ async def sds_review(data: dict = Body(...)):
     h_codes    = list(data.get("h_codes", []))
     phys_props = data.get("phys_props", {})
     components = data.get("components", [])
-    sds_data   = data.get("sds_data", {})
 
-    # ── Motor düzeltmeleri (PDF endpoint ile aynı) ────────────────────────────
-    all_h_codes = list(sds_data.get("clp", {}).get("all_h_codes", h_codes))
-    if "H314" in h_codes and "H318" not in all_h_codes:
-        all_h_codes = all_h_codes + ["H318"]
+    # PDF endpoint'ten gelen tam sds_data var mı? (öncelikli)
+    # Yoksa eski review payload'undan basit sds_data kullan
+    full_sds_data = data.get("full_sds_data") or None
+    sds_data_simple = data.get("sds_data", {})
 
-    try:
-        from app.services.ghs_pictogram import get_ghs_codes
-        motor_pictograms = get_ghs_codes(h_codes)
-    except Exception:
-        motor_pictograms = sds_data.get("clp", {}).get("pictograms", [])
-
-    sds_data = dict(sds_data)
-    sds_data["clp"] = {
-        **sds_data.get("clp", {}),
-        "all_h_codes": all_h_codes,
-        "pictograms":  motor_pictograms,
-    }
+    # ── Motor düzeltmeleri ────────────────────────────────────────────────────
+    if full_sds_data:
+        # PDF motorundan gelen veri — direkt kullan, sadece piktogramı güncelle
+        sds_for_validator = dict(full_sds_data)
+        clp_val = dict(sds_for_validator.get("clp", {}))
+        try:
+            from app.services.ghs_pictogram import get_ghs_codes
+            clp_val["pictograms"] = get_ghs_codes(h_codes)
+        except Exception:
+            pass
+        sds_for_validator["clp"] = clp_val
+    else:
+        # Eski yol: basit sds_data_simple kullan
+        all_h_codes = list(sds_data_simple.get("clp", {}).get("all_h_codes", h_codes))
+        if "H314" in h_codes and "H318" not in all_h_codes:
+            all_h_codes = all_h_codes + ["H318"]
+        try:
+            from app.services.ghs_pictogram import get_ghs_codes
+            motor_pictograms = get_ghs_codes(h_codes)
+        except Exception:
+            motor_pictograms = sds_data_simple.get("clp", {}).get("pictograms", [])
+        sds_data_simple = dict(sds_data_simple)
+        sds_data_simple["clp"] = {
+            **sds_data_simple.get("clp", {}),
+            "all_h_codes": all_h_codes,
+            "pictograms":  motor_pictograms,
+        }
+        sds_for_validator = sds_data_simple
 
     # ── 1. Kural kontrolü (V001-V027) ────────────────────────────────────────
     from app.services.sds_validator import validate_sds
-    issues = validate_sds(sds_data, h_codes, phys_props, components)
+    issues = validate_sds(sds_for_validator, h_codes, phys_props, components)
     issues = [i for i in issues if i.get("code") not in ("V013", "V015")]
 
     summary = {
@@ -221,14 +303,19 @@ async def sds_review(data: dict = Body(...)):
         "info":    sum(1 for i in issues if i["level"] == "info"),
     }
 
-    # ── 2. Tüm 16 bölüm SDS metni ────────────────────────────────────────────
-    sds_text = _build_sds_text(h_codes, phys_props, components, sds_data)
+    # ── 2. SDS tam metin ─────────────────────────────────────────────────────
+    sds_text = _build_sds_text(
+        sds_data   = full_sds_data if full_sds_data else sds_for_validator,
+        h_codes    = h_codes,
+        phys_props = phys_props,
+        components = components,
+    )
 
     # ── 3. Mevzuat bağlamı ───────────────────────────────────────────────────
     from app.services.knowledge_service import build_context_blocks
     kb_blocks = build_context_blocks("sds gbf bölüm " + " ".join(h_codes[:8]))
 
-    # ── 4. Otomatik kural sonuçları metni ────────────────────────────────────
+    # ── 4. Kural sonuçları metni ─────────────────────────────────────────────
     _icon = {"error": "❌", "warning": "⚠️", "info": "ℹ️"}
     issues_text = "=== OTOMATİK KURAL KONTROLÜ (V001-V027) ===\n\n"
     if not issues:
@@ -236,7 +323,7 @@ async def sds_review(data: dict = Body(...)):
     else:
         for iss in issues:
             issues_text += (
-                f"{_icon.get(iss['level'], '•')} [{iss['code']}] "
+                f"{_icon.get(iss['level'],'•')} [{iss['code']}] "
                 f"Bölüm {iss['section']}: {iss['msg']}"
             )
             if iss.get("rule"):
@@ -244,11 +331,11 @@ async def sds_review(data: dict = Body(...)):
             issues_text += "\n\n"
     issues_text += "=== KURAL KONTROLÜ SONU ==="
 
-    # ── 5. Claude'a gönder ───────────────────────────────────────────────────
+    # ── 5. Claude çağrısı ────────────────────────────────────────────────────
     user_parts: list[dict] = []
-    user_parts.extend(kb_blocks)                                         # B kaynağı
-    user_parts.append({"type": "text", "text": sds_text})               # A kaynağı
-    user_parts.append({"type": "text", "text": issues_text})            # C kaynağı
+    user_parts.extend(kb_blocks)
+    user_parts.append({"type": "text", "text": sds_text})
+    user_parts.append({"type": "text", "text": issues_text})
     user_parts.append({
         "type": "text",
         "text": "Yukarıdaki SDS metnini (A) mevzuat paragraflarıyla (B) karşılaştırarak "

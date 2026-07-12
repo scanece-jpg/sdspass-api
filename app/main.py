@@ -1057,18 +1057,32 @@ async def generate_pdf(data: dict = Body(...)):
             _val_issues[:5], separators=(',', ':')
         )
 
-        return Response(
-            content=pdf_bytes,
-            media_type='application/pdf',
-            headers={
-                'Content-Disposition':
-                    f'attachment; filename="{safe}_GBF_{lang}_Rev{rev_no}.pdf"',
-                'X-SDS-Issue-Counts': _val_summary,
-                'X-SDS-Issues':       _val_top,
-                'Access-Control-Expose-Headers':
-                    'X-SDS-Issue-Counts, X-SDS-Issues',
-            }
-        )
+        # sds_data'nın JSON-serileştirilebilir temiz kopyası (review için)
+        import base64 as _b64
+        def _jsonable(obj, depth=0):
+            if depth > 6: return str(obj)
+            if obj is None or isinstance(obj, (bool, int, float, str)): return obj
+            if isinstance(obj, dict):
+                return {str(k): _jsonable(v, depth+1) for k, v in obj.items()}
+            if isinstance(obj, (list, tuple)):
+                return [_jsonable(i, depth+1) for i in obj]
+            return str(obj)
+
+        _sds_for_review = _jsonable(sds_data)
+        _filename = f'{safe}_GBF_{lang}_Rev{rev_no}.pdf'
+
+        from fastapi.responses import JSONResponse as _JR
+        return _JR({
+            'pdf':      _b64.b64encode(pdf_bytes).decode(),
+            'filename': _filename,
+            'sds_data': _sds_for_review,
+            'validation': {
+                'error':   _val_errors,
+                'warning': _val_warnings,
+                'info':    _val_infos,
+                'issues':  _val_issues[:5],
+            },
+        })
 
     except Exception as e:
         import traceback

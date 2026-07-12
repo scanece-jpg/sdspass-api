@@ -815,3 +815,59 @@ def scl_category(cas: str, h_code: str, conc: float) -> Optional[str]:
     return None
 
 
+def get_substance_scl(cas_no: str, h_code: str) -> dict:
+    """
+    Bir CAS numarası + H kodu için özel konsantrasyon sınırını (SCL) döndürür.
+
+    Dönüş şeması:
+      {
+        "found":   bool,          # SCL kaydı bulundu mu
+        "cas_no":  str,
+        "h_code":  str,
+        "c_min":   float | None,  # alt sınır (dahil) — None = sınır yok
+        "c_max":   float | None,  # üst sınır (hariç) — None = sınır yok
+        "h_class": str,           # tehlike sınıfı etiketi
+        "source":  str,           # "sea_ek6" | "substance_db" | "not_found"
+      }
+
+    found=False durumunu asla sessizce 0 ya da sınırsız olarak işleme;
+    çağıran kod bu durumu açıkça ele almalıdır.
+    """
+    cas_no  = (cas_no or '').strip()
+    h_code  = (h_code or '').strip().upper()
+
+    not_found = {
+        'found': False, 'cas_no': cas_no, 'h_code': h_code,
+        'c_min': None, 'c_max': None, 'h_class': '', 'source': 'not_found',
+    }
+
+    if not cas_no or not h_code:
+        return not_found
+
+    sub = lookup_substance(cas_no)
+    if not sub:
+        return not_found
+
+    scl_list = sub.get('scl') or []
+    source   = 'sea_ek6' if sub.get('sea_ek6') else 'substance_db'
+
+    # H kodu tam eşleşme — önce tam, sonra kök (H314 → H314A/B'yi yakalar)
+    match = next((s for s in scl_list if s.get('h_code', '').upper() == h_code), None)
+    if match is None:
+        match = next(
+            (s for s in scl_list if s.get('h_code', '').upper().startswith(h_code)),
+            None,
+        )
+
+    if match is None:
+        return not_found
+
+    return {
+        'found':   True,
+        'cas_no':  cas_no,
+        'h_code':  h_code,
+        'c_min':   match.get('c_min'),
+        'c_max':   match.get('c_max'),
+        'h_class': match.get('h_class', ''),
+        'source':  source,
+    }

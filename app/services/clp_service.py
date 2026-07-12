@@ -2,6 +2,9 @@
 # ─── SDSPASS CLP Hesaplayıcı (dict tabanlı, ORM bağımsız) ───────────────────
 # CLP Annex I (KKDİK Ek-2) cut-off ve sınıflandırma kuralları
 import re as _re
+import logging as _logging
+
+_log = _logging.getLogger(__name__)
 
 
 def _parse_ph_range(ph_raw):
@@ -697,16 +700,32 @@ def _get_ate_value(ate_data: dict, route: str, h_class: str) -> Optional[float]:
     ATE değerini önce spesifik veriden, sonra kategori varsayılanından al.
     Spesifik ATE her zaman önceliklidir.
     """
+    def _to_float(raw) -> Optional[float]:
+        """Ham değeri güvenle float'a çevirir; dict ise 'value' anahtarını dener."""
+        if raw is None:
+            return None
+        if isinstance(raw, dict):
+            raw = raw.get('value') or raw.get('ate') or raw.get('val')
+        try:
+            val = float(raw)
+            return val if val > 0 else None
+        except (TypeError, ValueError):
+            return None
+
     # Spesifik ATE varsa kullan
-    if ate_data.get(route):
-        return ate_data[route]
+    val = _to_float(ate_data.get(route))
+    if val is not None:
+        return val
     # İnhalasyon alt türleri birbirinin yerine
     # inhalation_mgl = mg/L/4h ölçümü — buhar ve jenerik rota için kullan (toz değil)
     if route in ('inhalation_dust', 'inhalation_vapour', 'inhalation'):
-        if ate_data.get('inhalation'):
-            return ate_data['inhalation']
-        if route != 'inhalation_dust' and ate_data.get('inhalation_mgl'):
-            return ate_data['inhalation_mgl']
+        val = _to_float(ate_data.get('inhalation'))
+        if val is not None:
+            return val
+        if route != 'inhalation_dust':
+            val = _to_float(ate_data.get('inhalation_mgl'))
+            if val is not None:
+                return val
     # Kategori varsayılanı
     return ATE_DEFAULTS.get(route, {}).get(h_class)
 
@@ -924,8 +943,8 @@ def _ate_core(items: list, form: str = '') -> tuple:
                     'statementNeeded': stmt_needed,
                     'components':      ate_comps.get(route, []),
                 }
-        except Exception:
-            pass
+        except Exception as _e:
+            _log.warning("ate_b11 hesaplanamadı (rota=%s, mix_ate=%s): %s", route, mix_ate, _e)
 
     return ate_h_results, ate_b11, unknown_conc, ate_annex_vi_5000, stmt_needed
 
@@ -959,8 +978,8 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> tuple:
                     _sub = _sl(_cas)
                     if _sub and _sub.get('ate'):
                         combined_ate = {**_sub['ate'], **combined_ate}
-                except Exception:
-                    pass
+                except Exception as _e:
+                    _log.warning("substance_lookup ATE alınamadı (cas=%s): %s", _cas, _e)
 
         items.append({
             'cas':             str(c.get('cas') or c.get('cas_no') or '').strip(),

@@ -1659,10 +1659,12 @@ async def sds_calculate(body: dict = Body(...)):
                 seen.add(hc)
                 fixed = correct_hclass(hc, p.get('h_class',''))
                 clp_passed.append({
-                    'h_code':     hc,
-                    'h_class':    fixed or p.get('h_class',''),
-                    'reason':     p.get('reason',''),
-                    'cutoff_used':p.get('cutoff_used',''),
+                    'h_code':        hc,
+                    'h_class':       fixed or p.get('h_class',''),
+                    'reason':        p.get('reason',''),
+                    'cutoff_used':   p.get('cutoff_used',''),
+                    'cutoff_source': p.get('cutoff_source','GCL'),
+                    'cutoff_value':  p.get('cutoff_value'),
                 })
 
         # Fiziksel tehlikeler

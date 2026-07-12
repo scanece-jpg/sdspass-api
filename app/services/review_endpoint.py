@@ -33,12 +33,15 @@ Görevin:
    - Mevzuat kaynağına doğrudan bağlantı (aşağıdaki URL tablosundan)
    - Somut düzeltme adımı
 4. C kaynağındaki otomatik bulgular varsa onları da açıkla ve yorumla.
-5. Bir bölümde sorun görmüyorsan onu raporlama.
+5. Sorun tespit etmediğin bölümleri "## Uyumlu Bölümler" başlığı altında tek satırla listele:
+   örn. "✓ B1 — Kimyasal tanımlama tam ve doğru."
+   Bu bölüm ZORUNLUDUR — rapor her zaman hem hataları hem uyumlu bölümleri içermelidir.
 
 Yanıtını şu formatta ver:
 ## Hatalar (Düzeltilmesi Zorunlu)
 ## Uyarılar (Kontrol Edilmeli)
 ## Bilgi Notları
+## Uyumlu Bölümler
 ## Genel Değerlendirme
 
 Her bulgu için dayanak şu formatta olsun:
@@ -634,6 +637,25 @@ async def sds_review(data: dict = Body(...)):
             b.text for b in resp.content if getattr(b, "type", None) == "text"
         )
         break
+
+    # Döngü bitti ama rapor hâlâ boşsa → araçsız final çağrı
+    if not report.strip():
+        messages.append({
+            "role": "user",
+            "content": "Araç çağrıları tamamlandı. Şimdi lütfen denetim raporunu yaz. "
+                       "Hem hataları hem de uyumlu bölümleri (## Uyumlu Bölümler başlığıyla) mutlaka ekle.",
+        })
+        final = client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=4096,
+            system=system_prompt,
+            messages=messages,
+        )
+        total_input  += final.usage.input_tokens
+        total_output += final.usage.output_tokens
+        report = "".join(
+            b.text for b in final.content if getattr(b, "type", None) == "text"
+        )
 
     return {
         "issues":        issues,

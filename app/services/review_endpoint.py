@@ -19,12 +19,26 @@ _SYSTEM_PROMPT = """Sen KKDİK ve SEA yönetmelikleri uzmanı bir GBF/SDS denet�
 CLP Tüzüğü (EC 1272/2008), KKDİK, SEA, ADR ve ilgili ECHA kılavuzlarını tam olarak biliyorsun.
 
 Sana üç kaynak verilecek:
-  A) Denetlenecek SDS'in 16 bölümü (tam metin)
+  A) Denetlenecek SDS'in yapılandırılmış verisi (JSON) — PDF'deki gerçek değerler
   B) İlgili mevzuat paragrafları (SEA, KKDİK, CLP, ADR) — ek bağlam olarak kullan
   C) Otomatik kural kontrolü sonuçları (V001-V027 kodlu bulgular)
 
+A kaynağı JSON formatındadır. Alanların anlamı:
+  product/supplier   → Bölüm 1 (kimlik ve tedarikçi)
+  clp.all_h_codes    → Bölüm 2.1 (tam tehlike sınıflandırması)
+  clp.h_codes        → Bölüm 2.2 etiket H kodları (dominance uygulanmış)
+  clp.signal_word    → Bölüm 2.2 uyarı kelimesi
+  components         → Bölüm 3.2 (bileşenler, CAS, konsantrasyon, H kodları)
+  phys_props         → Bölüm 9 (fiziksel ve kimyasal özellikler)
+  eco                → Bölüm 12 (ekoloji / sucul tehlike)
+  transport          → Bölüm 14 (ADR taşıma)
+  p_codes            → Bölüm 2.2 güvenlik önlemleri (P kodları)
+  euh                → Bölüm 2.2 EUH kodları
+  ate_mix_details    → Bölüm 11 ATEmix hesap detayı
+  revision           → Bölüm 16 revizyon bilgisi
+
 Görevin:
-1. SDS metnini (A kaynağı) baştan sona oku.
+1. A kaynağındaki SDS verisini baştan sona oku.
 2. Her bölümü KKDİK Ek-2 ve CLP Tüzüğü gerekliliklerine göre bağımsız olarak denetle.
 3. Tespit ettiğin her sorunu şu şekilde raporla:
    - Hangi bölüm (B1–B16)
@@ -463,12 +477,13 @@ async def sds_review(data: dict = Body(...)):
         "info":    sum(1 for i in issues if i["level"] == "info"),
     }
 
-    # ── 2. SDS tam metin ─────────────────────────────────────────────────────
-    sds_text = _build_sds_text(
-        sds_data   = full_sds_data if full_sds_data else sds_for_validator,
-        h_codes    = h_codes,
-        phys_props = phys_props,
-        components = components,
+    # ── 2. SDS verisi — PDF ile birebir aynı yapılandırılmış JSON ──────────────
+    # _build_sds_text yerine ham JSON: sıfır dönüşüm kaybı, model gerçek değerleri görür.
+    _raw_sds = full_sds_data if full_sds_data else sds_for_validator
+    sds_text = (
+        "=== SDS VERİSİ (JSON) ===\n"
+        + _json.dumps(_raw_sds, ensure_ascii=False, indent=2)
+        + "\n=== SDS VERİSİ SONU ==="
     )
 
     # ── 3. Mevzuat bağlamı — artık search_regulation aracı on-demand sağlıyor ─
@@ -578,10 +593,10 @@ async def sds_review(data: dict = Body(...)):
     user_parts.append({
         "type": "text",
         "text": (
-            "Yukarıdaki SDS metnini (A) mevzuat paragraflarıyla (B) karşılaştırarak "
+            "Yukarıdaki SDS verisini (A — JSON formatı) mevzuat paragraflarıyla (B) karşılaştırarak "
             "bağımsız denetim raporu yaz. Otomatik bulgular (C) ek bağlam olarak kullan.\n"
             "Bir bulgu yazmadan önce:\n"
-            "  • Metinde olmayan bir şeyi iddia ediyorsan → verify_text_in_sds ile doğrula\n"
+            "  • JSON'da olmayan bir şeyi iddia ediyorsan → verify_text_in_sds ile doğrula\n"
             "  • SCL sınırı ile ilgili bir bulgu varsa → get_substance_scl ile sorgula\n"
             "  • Mevzuat hükmünden emin değilsen → search_regulation ile kontrol et"
         ),

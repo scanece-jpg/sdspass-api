@@ -4685,9 +4685,20 @@ async function sendReviewChat() {
                '<a href="$2" target="_blank" style="color:#63b3ed">$1</a>')
       .replace(/\n/g, '<br>');
 
-    msgs.innerHTML += `<div style="align-self:flex-start;background:rgba(255,255,255,.06);
-      border-radius:10px 10px 10px 2px;padding:8px 12px;font-size:12px;
-      max-width:90%;color:var(--text);line-height:1.6">${html}</div>`;
+    const msgId = 'cmsg-' + Date.now();
+    const escaped = answer.replace(/\\/g,'\\\\').replace(/`/g,'\\`');
+    msgs.innerHTML += `<div style="align-self:flex-start;position:relative;
+      background:rgba(255,255,255,.06);border-radius:10px 10px 10px 2px;
+      padding:8px 12px 8px 12px;font-size:12px;max-width:90%;
+      color:var(--text);line-height:1.6">
+      <button onclick="copyChat('${msgId}')" id="${msgId}-btn"
+        title="Kopyala"
+        style="position:absolute;top:5px;right:6px;background:transparent;
+          border:none;cursor:pointer;color:var(--text3);font-size:13px;
+          padding:2px 4px;line-height:1;opacity:.55"
+        onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.55">⧉</button>
+      <span id="${msgId}">${html}</span>
+    </div>`;
     msgs.scrollTop = msgs.scrollHeight;
 
   } catch (e) {
@@ -4695,6 +4706,23 @@ async function sendReviewChat() {
     if (waitEl) waitEl.remove();
     msgs.innerHTML += `<div style="color:#fc8181;font-size:11px">Bağlantı hatası: ${e.message}</div>`;
   }
+}
+
+function copyChat(msgId) {
+  const el = document.getElementById(msgId);
+  if (!el) return;
+  const text = el.innerText || el.textContent || '';
+  navigator.clipboard.writeText(text).then(() => {
+    const btn = document.getElementById(msgId + '-btn');
+    if (btn) { btn.textContent = '✓'; setTimeout(() => { btn.textContent = '⧉'; }, 1500); }
+  }).catch(() => {
+    // Clipboard API yoksa seçim yöntemi
+    const range = document.createRange();
+    range.selectNodeContents(el);
+    const sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+  });
 }
 </script>
 </body>

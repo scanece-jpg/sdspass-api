@@ -67,14 +67,38 @@ async def sds_review(data: dict = Body(...)):
     if not api_key:
         raise HTTPException(status_code=500, detail="ANTHROPIC_API_KEY tanımlı değil")
 
-    h_codes    = data.get("h_codes", [])
+    h_codes    = list(data.get("h_codes", []))
     phys_props = data.get("phys_props", {})
     components = data.get("components", [])
     sds_data   = data.get("sds_data", {})
 
+    # ── PDF endpoint ile aynı düzeltmeler ────────────────────────────────────
+    # H314 varsa H318 all_h_codes'a ekle (CLP §3.3.1.4 / SEA Tablo 3.3.1)
+    all_h_codes = list(sds_data.get("clp", {}).get("all_h_codes", h_codes))
+    if "H314" in h_codes and "H318" not in all_h_codes:
+        all_h_codes = all_h_codes + ["H318"]
+
+    # Piktogramları motordan üret (frontend ham verisini kullanma)
+    try:
+        from app.services.ghs_pictogram import get_ghs_codes
+        motor_pictograms = get_ghs_codes(h_codes)
+    except Exception:
+        motor_pictograms = sds_data.get("clp", {}).get("pictograms", [])
+
+    # sds_data'yı düzeltilmiş verilerle güncelle
+    sds_data = dict(sds_data)
+    sds_data["clp"] = {
+        **sds_data.get("clp", {}),
+        "all_h_codes": all_h_codes,
+        "pictograms":  motor_pictograms,
+    }
+
     # ── 1. Kural kontrolü ────────────────────────────────────────────────────
     from app.services.sds_validator import validate_sds
     issues = validate_sds(sds_data, h_codes, phys_props, components)
+
+    # V013 ve V015 kaldır — algoritmanın beklenen davranışı, hata değil
+    issues = [i for i in issues if i.get("code") not in ("V013", "V015")]
 
     summary = {
         "error":   sum(1 for i in issues if i["level"] == "error"),

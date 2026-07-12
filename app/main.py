@@ -57,6 +57,11 @@ async def health():
     return {"status": "ok", "service": "HazardDesk PDF API"}
 
 
+# ─── SDS DENETIM ENDPOINT ─────────────────────────────────────────────────────
+from app.services.review_endpoint import router as review_router
+app.include_router(review_router)
+
+
 @app.get("/")
 async def serve_frontend():
     """SDS Hesaplama arayüzü — cache'lenmez, her zaman taze yüklenir"""

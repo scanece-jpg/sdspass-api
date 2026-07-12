@@ -468,9 +468,10 @@ async def sds_review(data: dict = Body(...)):
         components = components,
     )
 
-    # ── 3. Mevzuat bağlamı (H koduna göre hedefli kural blokları) ───────────
-    from app.services.rule_blocks import get_blocks_for_hcodes
-    kb_blocks = get_blocks_for_hcodes(h_codes)
+    # ── 3. Mevzuat bağlamı — artık search_regulation aracı on-demand sağlıyor ─
+    # kb_blocks prompt'a eklenmez; model search_regulation() ile ihtiyaç duyduğunu çeker.
+    # Önceki yaklaşım (~120K token): tüm H kodu blokları önceden yüklenir, her turda tekrar gönderilir.
+    kb_blocks = []   # docs_used için sıfır bırak
 
     # ── 4. Kural sonuçları metni ─────────────────────────────────────────────
     _icon = {"error": "❌", "warning": "⚠️", "info": "ℹ️"}

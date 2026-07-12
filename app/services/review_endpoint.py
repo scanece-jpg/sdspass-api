@@ -494,9 +494,10 @@ async def sds_review(data: dict = Body(...)):
             "name": "get_substance_scl",
             "description": (
                 "Bir bileşenin CAS numarası ve H kodu için SEA Ek-6 / substance_db'den "
-                "özel konsantrasyon sınırını (SCL) sorgular. "
-                "Bir bileşenin karışımdaki konsantrasyonunun SCL eşiğini aşıp aşmadığını "
-                "doğrulamak için kullan. found=False ise bu bileşen için kayıtlı SCL yok."
+                "tüm SCL bantlarını döndürür. "
+                "Dönen 'bands' listesindeki her bant {h_class, c_min, c_max} içerir. "
+                "c_min <= konsantrasyon < c_max olan bant geçerlidir; c_max=None üst sınır yok demektir. "
+                "found=False ise bu bileşen için kayıtlı SCL yok — varsayım yapma."
             ),
             "input_schema": {
                 "type": "object",
@@ -592,7 +593,7 @@ async def sds_review(data: dict = Body(...)):
     for _round in range(MAX_ROUNDS):
         resp = client.messages.create(
             model="claude-sonnet-4-6",
-            max_tokens=2048,
+            max_tokens=4096,
             system=system_prompt,
             tools=_tools,
             messages=messages,
@@ -601,7 +602,7 @@ async def sds_review(data: dict = Body(...)):
         total_output += resp.usage.output_tokens
 
         # Nihai metin yanıtı — döngüyü bitir
-        if resp.stop_reason == "end_turn":
+        if resp.stop_reason in ("end_turn", "max_tokens"):
             report = "".join(
                 b.text for b in resp.content if getattr(b, "type", None) == "text"
             )

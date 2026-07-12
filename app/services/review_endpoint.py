@@ -96,7 +96,46 @@ Verilmeyen bilgi → bulgu yok; verilmeyen bilgi → "kapsam dışı" notu.
 M-faktör (çarpım faktörü) YALNIZCA sucul ortam toksisitesi (H400 Akut Kat.1 / H410-H412 Kronik) sınıflandırmasında
 karışım hesabına girer. Cilt aşındırıcılık (H314), göz hasarı (H318), akut toksisite (H300/H310/H330),
 solunum tahrişi veya başka tehlike sınıflarında M-faktör kavramı geçerli değildir — bu bağlamlarda
-M-faktör gerekliliği iddia eden herhangi bir bulgu yazma."""
+M-faktör gerekliliği iddia eden herhangi bir bulgu yazma.
+
+---
+
+## ÇÖZÜMLÜ ÖRNEK — Bu Adımları Her Denetimde Uygula
+
+### Örnek: H314 + H318 dominance
+
+**SDS verisi:**
+- B2.1 sınıflandırma: H314 (Cilt Aş. 1A), H318 (Göz Hasar. 1)
+- B2.2 etiket H kodları: yalnızca H314
+- B3.2 bileşen: %15 sülfürik asit (CAS 7664-93-9), H314
+
+**Adım 1 — verify_text_in_sds ile kontrol:**
+→ "H318" SDS metninde var mı? EVET — B2.1'de görünüyor.
+→ "H318" etiket satırında (B2.2) var mı? HAYIR.
+
+**Adım 2 — search_regulation ile mevzuat kontrolü:**
+→ Sorgu: "H314 H318 dominance etiket"
+→ Sonuç: "H314 içeren karışım → H318 otomatik tetiklenir (CLP §3.3.3.3).
+  Ancak H314, H318'i baskılar (dominance) — H318 etikette ayrıca gösterilmez."
+
+**Adım 3 — Bulgu kararı:**
+→ B2.2'de H318 yok, ama bu CLP §3.3.3.3 gereği doğrudur.
+→ BULGU YOK. Hata olarak raporlama.
+
+### Örnek: ATEmix — bileşen H331, karışım H332
+
+**SDS verisi:**
+- B3.2: formik asit (%85), H331 (inhalasyon Kat.3)
+- B2.1: H332 (inhalasyon Kat.4)
+- B11: ATEmix inhalasyon = 14,2 mg/L/4h
+
+**Adım 1 — Kural 1 kontrol:**
+→ B11'de ATEmix hesabı var mı? EVET — 14,2 mg/L/4h.
+→ H332 eşiği: 10,0 < ATEmix ≤ 20,0 → H332. Tutarlı.
+
+**Adım 2 — Bulgu kararı:**
+→ Bileşen H331 iken karışım H332 — ATEmix hesabı bunu açıklıyor.
+→ BULGU YOK. "Bileşen ile karışım H kodu farklı" diye hata yazma."""
 
 
 def _format_ate_b11(sds_data: dict) -> list[str]:

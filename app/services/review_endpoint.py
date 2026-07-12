@@ -334,9 +334,9 @@ async def sds_review(data: dict = Body(...)):
         components = components,
     )
 
-    # ── 3. Mevzuat bağlamı ───────────────────────────────────────────────────
-    from app.services.knowledge_service import build_context_blocks
-    kb_blocks = build_context_blocks("sds gbf bölüm " + " ".join(h_codes[:8]))
+    # ── 3. Mevzuat bağlamı (H koduna göre hedefli kural blokları) ───────────
+    from app.services.rule_blocks import get_blocks_for_hcodes
+    kb_blocks = get_blocks_for_hcodes(h_codes)
 
     # ── 4. Kural sonuçları metni ─────────────────────────────────────────────
     _icon = {"error": "❌", "warning": "⚠️", "info": "ℹ️"}

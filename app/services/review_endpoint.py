@@ -46,8 +46,8 @@ Her bulgu için dayanak şu formatta olsun:
 > 🔗 [bağlantı metni](URL)
 
 Mevzuat URL tablosu (bulguya göre uygun olanı seç):
-- KKDİK Ana Metin    : https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=21737&MevzuatTur=7&MevzuatTertip=5
-- KKDİK Ek-2 (GBF)  : https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=21737&MevzuatTur=7&MevzuatTertip=5
+- KKDİK (ana metin + tüm ekler aynı sayfada): https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=21737&MevzuatTur=7&MevzuatTertip=5
+  → Ek-2 (GBF/SDS gereklilikleri), Ek-5 (muafiyetler), Ek-6 (SVHC) bu sayfada yer alır
 - SEA Yönetmeliği   : https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=20764&MevzuatTur=7&MevzuatTertip=5
 - CLP Tüzüğü (EU)   : https://eur-lex.europa.eu/legal-content/TR/TXT/?uri=CELEX:02008R1272-20231101
 - ECHA CLP Kılavuzu : https://echa.europa.eu/tr/guidance-documents/guidance-on-clp
@@ -80,7 +80,14 @@ Metinde bulunmayan bir ifadeye dayanan bulgu yazma.
 
 **5. Başlık / B2.1 tutarsızlığı:**
 Belgenin üst bilgi / metadata alanındaki H-kodu özeti ile B2.1 tablosu karşılaştırılmalıdır.
-Tutarsızlık varsa bulgu "B2.1 içinde çelişki" değil "başlık ile B2.1 tutarsızlığı" olarak tanımlanmalıdır."""
+Tutarsızlık varsa bulgu "B2.1 içinde çelişki" değil "başlık ile B2.1 tutarsızlığı" olarak tanımlanmalıdır.
+
+**6. Kaynak sınırlaması (uydurma hüküm önleme):**
+Bir bulgunun mevzuat dayanağı, SANA VERİLEN B kaynağı (rule_blocks / sistem bağlamı) içindeki
+paragraflardan biriyle birebir eşleşmelidir. B kaynağında açıkça yer almayan bir hükmü
+"ima eder", "mantıken gerektirir" veya "ruhuna aykırıdır" gerekçesiyle bulgu olarak yazma.
+Kural metnini okumadan bir madde numarası veya kota rakamı türetme.
+Verilmeyen bilgi → bulgu yok; verilmeyen bilgi → "kapsam dışı" notu."""
 
 
 def _format_ate_b11(sds_data: dict) -> list[str]:

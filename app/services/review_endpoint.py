@@ -366,10 +366,11 @@ async def sds_review(data: dict = Body(...)):
     })
 
     client = _anthropic.Anthropic(api_key=api_key)
+    system_prompt = _SYSTEM_PROMPT + _load_extra_rules()
     resp = client.messages.create(
         model="claude-sonnet-4-6",
         max_tokens=2048,
-        system=_SYSTEM_PROMPT,
+        system=system_prompt,
         messages=[{"role": "user", "content": user_parts}],
     )
 
@@ -447,6 +448,113 @@ async def sds_chat(data: dict = Body(...)):
 
 
 _DOGRULAMA_PATH = pathlib.Path(__file__).parents[2] / "sds-knowledge" / "DOGRULAMA_NOTLARI.md"
+_RULES_PATH     = pathlib.Path(__file__).parents[2] / "sds-knowledge" / "review_rules.md"
+
+
+def _load_extra_rules() -> str:
+    """review_rules.md dosyasındaki kullanıcı onaylı kuralları yükler."""
+    try:
+        text = _RULES_PATH.read_text(encoding="utf-8").strip()
+        # Sadece kural satırlarını al (- ile başlayanlar)
+        rules = [l for l in text.splitlines() if l.strip().startswith("-")]
+        if rules:
+            return "\n\nGeçmişte tespit edilen denetim düzeltmeleri (bunlara dikkat et):\n" + "\n".join(rules)
+    except FileNotFoundError:
+        pass
+    return ""
+
+_DRAFT_SYSTEM = """Sen GBF/SDS denetim sisteminin kalite güvence modülüsün.
+Sana bir denetim raporu verilecek — bu rapordaki bir bulgunun yanlış veya yanıltıcı olduğu belirlendi.
+
+İKİ AYRI BÖLÜM üret, başka hiçbir şey yazma:
+
+### DOGRULAMA_NOTU
+(Markdown, DOGRULAMA_NOTLARI.md dosyasına eklenecek insan referansı)
+Şu format:
+---
+## [Ürün adı] — [Tarih]
+- **Hatalı denetim çıktısı:** sistemin ne dediği
+- **Neden yanlıştı:** mevzuat/hesap açıklaması
+- **Doğru davranış:** olması gereken
+- **Durum:** ⏳ Açık
+
+### SISTEM_KURALI
+(1-3 cümle, Türkçe, doğrudan system prompt'a eklenecek — gelecekte bu hata tekrarlanmasın)
+Başına "- " koy.
+"""
+
+@router.post("/api/v1/sds/draft-error-report")
+async def draft_error_report(data: dict = Body(...)):
+    """
+    Denetim raporundan hata taslağı + sistem kuralı üretir.
+    data: { report: str, product_name: str, sds_text: str (opsiyonel) }
+    """
+    try:
+        import anthropic as _anthropic
+    except ImportError:
+        raise HTTPException(status_code=500, detail="anthropic paketi kurulu değil")
+
+    api_key = os.getenv("ANTHROPIC_API_KEY")
+    if not api_key:
+        raise HTTPException(status_code=500, detail="ANTHROPIC_API_KEY tanımlı değil")
+
+    report       = (data.get("report") or "").strip()
+    product_name = (data.get("product_name") or "Ürün").strip()
+    today        = date.today().strftime("%d.%m.%Y")
+
+    if not report:
+        raise HTTPException(status_code=400, detail="Denetim raporu boş")
+
+    user_msg = (
+        f"Ürün adı: {product_name}\nTarih: {today}\n\n"
+        f"=== DENETİM RAPORU ===\n{report[:4000]}"
+    )
+
+    client = _anthropic.Anthropic(api_key=api_key)
+    resp = client.messages.create(
+        model="claude-sonnet-4-6",
+        max_tokens=800,
+        system=_DRAFT_SYSTEM,
+        messages=[{"role": "user", "content": user_msg}],
+    )
+    raw = "".join(b.text for b in resp.content if getattr(b, "type", None) == "text")
+
+    # Bölümleri ayır
+    note = rule = ""
+    if "### DOGRULAMA_NOTU" in raw and "### SISTEM_KURALI" in raw:
+        parts = raw.split("### SISTEM_KURALI")
+        note  = parts[0].replace("### DOGRULAMA_NOTU", "").strip()
+        rule  = parts[1].strip()
+    else:
+        note = raw.strip()
+
+    return {"note": note, "rule": rule}
+
+
+@router.post("/api/v1/sds/add-rule")
+async def add_rule(data: dict = Body(...)):
+    """
+    Onaylanan kuralı review_rules.md dosyasına ekler.
+    data: { rule: str }
+    """
+    rule = (data.get("rule") or "").strip()
+    if not rule:
+        raise HTTPException(status_code=400, detail="Kural boş olamaz")
+
+    try:
+        if not _RULES_PATH.exists():
+            _RULES_PATH.write_text(
+                "# Denetim Düzeltme Kuralları\n"
+                "Bu dosya, tespit edilen denetim hatalarından üretilen kalıcı kurallardır.\n\n",
+                encoding="utf-8"
+            )
+        with open(_RULES_PATH, "a", encoding="utf-8") as f:
+            f.write(rule + "\n")
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Dosya yazma hatası: {e}")
+
+    return {"ok": True}
+
 
 @router.post("/api/v1/sds/report-error")
 async def report_error(data: dict = Body(...)):

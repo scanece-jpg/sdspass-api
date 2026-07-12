@@ -3624,7 +3624,7 @@ const _PSRC_FIELDS = [
   { formId:'tf_bp',         label:'Kaynama Noktası',       type:'number', unit:'°C',   theoKey:'boiling_point',  naId:'na_bp',      mandatory:false },
   { formId:'tf_density',    label:'Yoğunluk',             type:'number', unit:'g/mL', theoKey:'density',        naId:'na_density', mandatory:false },
   { formId:'tf_visc',       label:'Viskozite @40°C',      type:'number', unit:'cSt',  theoKey:'viscosity',      naId:'na_visc',    mandatory:false },
-  { formId:'tf_sol',        label:'Çözünürlük',           type:'number', unit:'mg/L', theoKey:'solubility',     naId:'na_sol',     mandatory:false },
+  { formId:'tf_sol',        label:'Çözünürlük',           type:'number', unit:'mg/L', theoKey:'solubility',     naId:'na_sol',     mandatory:true  },
   { formId:'tf_mp',         label:'Erime Noktası',         type:'number', unit:'°C',   theoKey:null,             naId:'na_mp',      mandatory:false },
   { formId:'tf_evap',       label:'Buharlaşma Hızı',      type:'text',   unit:'',     theoKey:null,             naId:null,         mandatory:false },
   { formId:'tf_ait',        label:'Ototutuşma Sıcaklığı', type:'number', unit:'°C',   theoKey:null,             naId:null,         mandatory:false },
@@ -3695,7 +3695,9 @@ function _showPhysSrcModal(callback) {
   const motorRows = toShow.filter(f => {
     const el = document.getElementById(f.formId);
     const mv = f.theoKey ? (tp[f.theoKey]?.value ?? null) : null;
-    return (el?.dataset?.source === 'theo') || (mv !== null && mv !== undefined);
+    // solubility.text (metin açıklama) varsa da motor sayılır
+    const solText = f.formId === 'tf_sol' ? (tp.solubility?.text ?? null) : null;
+    return (el?.dataset?.source === 'theo') || (mv !== null && mv !== undefined) || (solText !== null);
   });
   const emptyRows = toShow.filter(f => !motorRows.includes(f));
   const mandEmptyRows = emptyRows.filter(f => f.mandatory);

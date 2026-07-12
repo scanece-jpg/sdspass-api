@@ -511,9 +511,9 @@ H_BASED_LABEL_FORCED: Dict[str, List[str]] = {
     # ── Alevlenir Sıvı — CLP Annex IV §2.6 ───────────────────────────────────
     # P403+P235: H_TO_P çıktısıyla örtüşüyor (P233 standalone H_TO_P'de ayrıca var ama
     # depolama güvenliği için havalandırma+serin kritik — P403+P235 öncelikli)
-    'H224': ['P210', 'P403+P235'],
-    'H225': ['P210', 'P403+P235'],
-    'H226': ['P210', 'P403+P235'],
+    'H224': ['P210', 'P370+P378', 'P403+P235'],
+    'H225': ['P210', 'P370+P378', 'P403+P235'],
+    'H226': ['P210', 'P370+P378', 'P403+P235'],
     # ── Alevlenir Gaz / Katı ──────────────────────────────────────────────────
     'H220': ['P210'],
     'H221': ['P210'],
@@ -702,7 +702,7 @@ P_SDS_PRIORITY: Dict[str, str] = {
     'P301+P312':      'mandatory',
     'P303+P361+P353': 'mandatory',
     'P335+P334':      'mandatory',   # Pirofor (H250) — partikülleri fırçala, soğut
-    'P304+P340':      'mandatory',
+    'P304+P340':      'evaluate',   # Mevzuatta hiçbir koşulda zorunlu değil
     'P304+P341':      'mandatory',
     'P305+P351+P338': 'mandatory',
     'P306+P360':      'mandatory',
@@ -770,16 +770,34 @@ P_SDS_LABELS = {
 }
 
 
-def classify_sds_p_codes(p_codes: List[str]) -> Dict:
+def classify_sds_p_codes(p_codes: List[str], usage: str = 'industrial') -> Dict:
     """
     P kodlarını SDS'e yazılma önceliğine göre sınıflandır.
     CLP Annex IV Not 3 — üretici/KDU seçim yapabilir.
     Her grup içi sıralama: tehlike şiddetine göre (yüksek önce).
+
+    usage: 'consumer' | 'professional' | 'industrial'
+      - consumer    : tüm mandatory kodlar geçerli
+      - professional: P301+P330+P331 → evaluate, P405 → evaluate
+      - industrial  : P301+P330+P331 → evaluate, P405 → optional
     """
+    # Kullanım kategorisine göre öncelik geçersizleştirme
+    _OVERRIDE: Dict[str, str] = {}
+    if usage == 'industrial':
+        _OVERRIDE = {
+            'P301+P330+P331': 'evaluate',  # Endüstriyelde zorunlu değil, önerilir
+            'P405':           'optional',   # Endüstriyelde opsiyonel
+        }
+    elif usage == 'professional':
+        _OVERRIDE = {
+            'P301+P330+P331': 'evaluate',  # Profesyonelde zorunlu değil, önerilir
+            'P405':           'evaluate',   # Profesyonelde değerlendirmeli
+        }
+
     groups = {'mandatory': [], 'evaluate': [], 'optional': []}
 
     for code in p_codes:
-        priority = P_SDS_PRIORITY.get(code, 'evaluate')  # Bilinmeyenler evaluate
+        priority = _OVERRIDE.get(code) or P_SDS_PRIORITY.get(code, 'evaluate')
         groups[priority].append(code)
 
     # Her grup içinde şiddet sırası — P_LABEL_PRIORITY kullan

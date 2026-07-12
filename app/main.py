@@ -771,7 +771,7 @@ async def generate_pdf(data: dict = Body(...)):
         # P kodlarını son h_codes + signal ile hesapla
         p_result = assign_p_codes(h_codes, signal, usage=usage)
         p_result['label'] = select_label_p_codes(p_result['p_codes'], 6, h_codes=h_codes)
-        p_result['sds']   = classify_sds_p_codes(p_result['p_codes'])
+        p_result['sds']   = classify_sds_p_codes(p_result['p_codes'], usage=usage)
 
         # ── PDF için Unicode → ASCII güvenli metin dönüşümü ──────────────────────
         # Avrupa kaynaklı DB'lerde (ECHA, CLP Annex VI) "…", "≤", "≥" karakterleri
@@ -956,7 +956,7 @@ async def generate_pdf(data: dict = Body(...)):
         # (filtreden önce H260/H261 vb. varsa P231+P232 gibi yanlış P kodları atanmış olabilir)
         p_result = assign_p_codes(h_codes, signal, usage=usage)
         p_result['label'] = select_label_p_codes(p_result['p_codes'], 6, h_codes=h_codes)
-        p_result['sds']   = classify_sds_p_codes(p_result['p_codes'])
+        p_result['sds']   = classify_sds_p_codes(p_result['p_codes'], usage=usage)
 
         # Revizyon tarihi
         import datetime
@@ -1427,7 +1427,7 @@ async def p_codes_assign(body: dict):
     try:
         result = assign_p_codes(h_codes, signal, usage=usage)
         result["label"]    = select_label_p_codes(result["p_codes"], max_label, h_codes=h_codes)
-        result["sds"]      = classify_sds_p_codes(result["p_codes"])
+        result["sds"]      = classify_sds_p_codes(result["p_codes"], usage=usage)
         result["p_texts"]  = {p: get_p(lang, p) for p in result["p_codes"]}
         return {"success": True, **result}
     except Exception as e:
@@ -1728,7 +1728,7 @@ async def sds_calculate(body: dict = Body(...)):
         # ── P kodları ─────────────────────────────────────────────────────────
         p_result = assign_p_codes(all_h_list, signal, usage=usage)
         p_result['label'] = select_label_p_codes(p_result['p_codes'], 6, h_codes=all_h_list)
-        p_result['sds']   = classify_sds_p_codes(p_result['p_codes'])
+        p_result['sds']   = classify_sds_p_codes(p_result['p_codes'], usage=usage)
 
         # ── Teorik özellikler ─────────────────────────────────────────────────
         theo_props = phys_result.get('theo_props', {})

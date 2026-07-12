@@ -397,7 +397,13 @@ def assign_p_codes(
 
     final = set(p_to_sources.keys()) - suppressed
 
-    print(f'[ASSIGN] h={sorted(h_codes)} suppressed={sorted(suppressed)} final={sorted(final)}')
+    # Kullanım kategorisine göre ek bastırma
+    # P405 ve P301+P330+P331 sadece tüketici ürünlerinde H_TO_P'den zorunlu gelir;
+    # endüstriyel/profesyonel kullanımda SDS'e yazılır ama etiket forced listesinden düşer.
+    # Not: H_TO_P listesinden SİLMİYORUZ — SDS bölüm 2.2'de "değerlendirmeli" olarak kalır.
+    # classify_sds_p_codes usage override'ı bu kodların B16 etiketini ayarlar.
+
+    print(f'[ASSIGN] usage={usage} h={sorted(h_codes)} suppressed={sorted(suppressed)} final={sorted(final)}')
 
     # P103 consumer/professional için usage mantığında zaten eklendi
 
@@ -511,9 +517,11 @@ H_BASED_LABEL_FORCED: Dict[str, List[str]] = {
     # ── Alevlenir Sıvı — CLP Annex IV §2.6 ───────────────────────────────────
     # P403+P235: H_TO_P çıktısıyla örtüşüyor (P233 standalone H_TO_P'de ayrıca var ama
     # depolama güvenliği için havalandırma+serin kritik — P403+P235 öncelikli)
-    'H224': ['P210', 'P370+P378', 'P403+P235'],
-    'H225': ['P210', 'P370+P378', 'P403+P235'],
-    'H226': ['P210', 'P370+P378', 'P403+P235'],
+    # P370+P378 H226 için koşullu — sadece özel söndürücü gerekiyorsa (su riski varsa)
+    # Koşulsuz eklemek over-forcing yapar; B5 "su ile söndürmeyin" varsa kullanıcı manuel ekler
+    'H224': ['P210', 'P403+P235'],
+    'H225': ['P210', 'P403+P235'],
+    'H226': ['P210', 'P403+P235'],
     # ── Alevlenir Gaz / Katı ──────────────────────────────────────────────────
     'H220': ['P210'],
     'H221': ['P210'],

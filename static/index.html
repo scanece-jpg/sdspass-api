@@ -872,7 +872,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
         <!-- Çözünürlük: sıvı, katı, pasta, toz, aerosol, gaz -->
         <div class="phys-fw" data-forms="liquid solid paste powder aerosol gas">
           <div class="phys-fh">
-            <label>Su Çözünürlüğü (mg/L) <span class="motor-badge">● motor</span><span id="src_sol" class="src-badge"></span></label>
+            <label>Su Çözünürlüğü (mg/L) <span style="color:var(--danger);font-size:10px">*</span> <span class="motor-badge">● motor</span><span id="src_sol" class="src-badge"></span></label>
             <label class="na-check"><input type="checkbox" id="na_sol" onchange="toggleNA(this,'tf_sol','sol')"> N/A</label>
           </div>
           <input type="number" id="tf_sol" min="0" placeholder="OECD 105"

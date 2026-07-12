@@ -290,7 +290,7 @@ def _cl_to_legacy(entry: dict, priority: int, source_label: str) -> dict:
 
     # classification.hazards → [{h_class, h_code, note_flag?, note?, repro_sub?}] formatına çevir
     def _build_hazard(h: dict) -> dict:
-        d = {'h_class': h.get('class', ''), 'h_code': h.get('h_code', '')}
+        d = {'h_class': _normalize_hclass(h.get('class', '')), 'h_code': h.get('h_code', '')}
         if h.get('note_flag'):
             d['note_flag'] = h['note_flag']
         if h.get('note'):
@@ -318,7 +318,7 @@ def _cl_to_legacy(entry: dict, priority: int, source_label: str) -> dict:
         'scl'            : [
             {
                 'h_code' : s.get('h_code', ''),
-                'h_class': s.get('class', ''),
+                'h_class': _normalize_hclass(s.get('class', '')),
                 'c_min'  : s.get('c_min'),
                 'c_max'  : s.get('c_max'),
             }
@@ -445,7 +445,7 @@ def _scl_op_to_cmin_cmax(scl: dict) -> dict:
         c_min, c_max = vmin, vmax
     return {
         'h_code' : scl.get('h_code', ''),
-        'h_class': scl.get('class', ''),
+        'h_class': _normalize_hclass(scl.get('class', '')),
         'c_min'  : c_min,
         'c_max'  : c_max,
     }
@@ -458,7 +458,7 @@ def _db_to_legacy(entry: dict) -> dict:
     """
     hazards = []
     for c in entry.get('classification', []):
-        h = {'h_class': c.get('class', ''), 'h_code': c.get('h_code', '')}
+        h = {'h_class': _normalize_hclass(c.get('class', '')), 'h_code': c.get('h_code', '')}
         if c.get('class_asterisk'):
             h['note_flag'] = '*'
         hazards.append(h)

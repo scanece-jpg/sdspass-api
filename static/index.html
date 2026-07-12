@@ -4447,7 +4447,7 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closePhysMod
 
 <script>
 async function runReview() {
-  const state = window._lastCalcState;
+  const state = window._lastCalcState || _lastCalcState;
   if (!state) {
     alert('Önce hesaplama yapın.');
     return;

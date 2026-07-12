@@ -83,6 +83,27 @@ Belgenin üst bilgi / metadata alanındaki H-kodu özeti ile B2.1 tablosu karş�
 Tutarsızlık varsa bulgu "B2.1 içinde çelişki" değil "başlık ile B2.1 tutarsızlığı" olarak tanımlanmalıdır."""
 
 
+def _format_ate_b11(sds_data: dict) -> list[str]:
+    """ate_mix_details'dan B11 için okunabilir ATEmix satırları üretir."""
+    details = sds_data.get("ate_mix_details") or {}
+    if not details:
+        return []
+    _route_tr = {"oral": "Oral", "dermal": "Dermal", "inhal": "İnhalasyon"}
+    lines = ["ATEmix hesabı (CLP Ek-I §3.1.3.6 / SEA §3.1.3.6.2):"]
+    for route, rd in details.items():
+        if not isinstance(rd, dict):
+            continue
+        ate_val  = rd.get("ateMix") or rd.get("ate_mix")
+        code     = rd.get("resultCode") or rd.get("result_code") or "sınıflandırma yok"
+        unk_pct  = rd.get("unknownPct", 0)
+        route_tr = _route_tr.get(route, route)
+        line = f"  {route_tr}: ATEmix = {ate_val} → {code}"
+        if unk_pct and float(unk_pct) > 0:
+            line += f" (bilinmeyen konsantrasyon: %{unk_pct})"
+        lines.append(line)
+    return lines
+
+
 def _build_sds_text(sds_data: dict, h_codes: list, phys_props: dict, components: list) -> str:
     """
     PDF motoruyla aynı sds_data yapısından 16 bölüm okunabilir metin üretir.
@@ -266,7 +287,8 @@ def _build_sds_text(sds_data: dict, h_codes: list, phys_props: dict, components:
         f"H kodlarına göre değerlendirme: {', '.join(h_codes)}",
         "",
         f"BÖLÜM 11 — Toksikolojik Bilgi",
-        f"H kodlarına göre: {', '.join(h_codes)}",
+        f"Akut toksisite H kodları: {', '.join(h_codes)}",
+        *_format_ate_b11(sds_data),
         "",
         f"BÖLÜM 12 — Ekolojik Bilgi",
         f"Ekolojik H kodları: {eco_line}",

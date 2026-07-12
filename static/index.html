@@ -3651,12 +3651,15 @@ function _showPhysSrcModal(callback) {
     const el       = document.getElementById(f.formId);
     const motorVal = f.theoKey ? (tp[f.theoKey]?.value ?? null) : null;
     const measured = f.theoKey ? (tp[f.theoKey]?.measured ?? false) : false;
-    // Motor dolu mu? — source=theo VEYA theoKey'den değer var
-    const isMotor  = (el?.dataset?.source === 'theo') || (motorVal !== null && motorVal !== undefined);
+    // Çözünürlük için text fallback (sayısal değer yoksa metin açıklama)
+    const solText  = f.formId === 'tf_sol' ? (tp.solubility?.text ?? null) : null;
+    // Motor dolu mu? — source=theo VEYA theoKey'den değer var VEYA solubility.text var
+    const isMotor  = (el?.dataset?.source === 'theo') || (motorVal !== null && motorVal !== undefined) || (solText !== null);
     // Kutuda gösterilecek değer: mevcut form değeri (motor dolgusu olabilir) ya da tp'den al
     const curVal   = el?.value ?? '';
     const fillVal  = (curVal !== '' && curVal !== null) ? curVal
-                     : (motorVal !== null && motorVal !== undefined ? motorVal : '');
+                     : (motorVal !== null && motorVal !== undefined ? motorVal
+                       : (solText !== null ? solText : ''));
 
     // Rozet
     let badgeCls, badgeTxt;
@@ -3733,10 +3736,13 @@ function _physSrcConfirm() {
   // ── Zorunlu alan kontrolü ─────────────────────────────────────────────────
   const mandFields = _PSRC_FIELDS.filter(f => f.mandatory);
   let hasError = false;
+  const tp2 = _lastCalcState?.theoPhys || _lastCalcState?.phys?.theoProps || {};
   mandFields.forEach(f => {
     const inp = document.querySelector(`#physSrcBody input[data-psrc-field="${f.formId}"]`);
     if (!inp) return; // Modal'da gösterilmiyorsa (kullanıcı zaten doldurmuş) atla
-    if (!inp.value.trim()) {
+    // Çözünürlük: motor text değeri varsa zorunlu kontrolü geç
+    const hasSolText = f.formId === 'tf_sol' && !!(tp2.solubility?.text);
+    if (!inp.value.trim() && !hasSolText) {
       inp.style.borderColor = 'var(--danger)';
       inp.style.boxShadow   = '0 0 0 2px rgba(252,129,129,.35)';
       hasError = true;
@@ -3748,7 +3754,7 @@ function _physSrcConfirm() {
 
   const errEl = document.getElementById('physSrcErrMsg');
   if (hasError) {
-    if (errEl) { errEl.textContent = '⚠ Görünüm, Renk ve Koku alanları zorunludur — lütfen doldurun.'; errEl.style.display = ''; }
+    if (errEl) { errEl.textContent = '⚠ Görünüm, Renk, Koku ve Çözünürlük alanları zorunludur — lütfen doldurun.'; errEl.style.display = ''; }
     return; // Kapatma — kullanıcı doldurmalı
   }
   if (errEl) errEl.style.display = 'none';

@@ -733,8 +733,8 @@
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 14.0,
         "max": 22.0,
         "unit": "%"
       }
@@ -786,8 +786,8 @@
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 22.0,
         "max": 36.0,
         "unit": "%"
       }
@@ -850,8 +850,8 @@
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 14.0,
         "max": 22.0,
         "unit": "%"
       },
@@ -1000,8 +1000,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.2,
         "max": 1.0,
         "unit": "%"
       }
@@ -4261,8 +4261,8 @@
       {
         "h_code": "H314",
         "class": "Cilt Aşnd. 1B",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 5.0,
         "max": 20.0,
         "unit": "%"
       },
@@ -4410,16 +4410,16 @@
       {
         "h_code": "H315",
         "class": "Cilt Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 3.0,
         "max": 10.0,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 3.0,
         "max": 10.0,
         "unit": "%"
       }
@@ -5158,8 +5158,8 @@
       {
         "h_code": "H272",
         "class": "Oksit. Sıvı 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 50.0,
         "max": 70.0,
         "unit": "%"
       },
@@ -5174,32 +5174,32 @@
       {
         "h_code": "H314",
         "class": "Cilt Aşnd. 1B",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 50.0,
         "max": 70.0,
         "unit": "%"
       },
       {
         "h_code": "H315",
         "class": "Cilt Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 35.0,
         "max": 50.0,
         "unit": "%"
       },
       {
         "h_code": "H318",
         "class": "Göz Hsr. 1",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 8.0,
         "max": 50.0,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 5.0,
         "max": 8.0,
         "unit": "%"
       }
@@ -5401,16 +5401,16 @@
       {
         "h_code": "H315",
         "class": "Cilt Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.1,
         "max": 1.0,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.1,
         "max": 1.0,
         "unit": "%"
       }
@@ -5452,16 +5452,16 @@
       {
         "h_code": "H315",
         "class": "Cilt Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.1,
         "max": 1.0,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.1,
         "max": 1.0,
         "unit": "%"
       }
@@ -5503,16 +5503,16 @@
       {
         "h_code": "H315",
         "class": "Cilt Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.1,
         "max": 1.0,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.1,
         "max": 1.0,
         "unit": "%"
       }
@@ -5552,16 +5552,16 @@
       {
         "h_code": "H315",
         "class": "Cilt Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 10.0,
         "max": 25.0,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 10.0,
         "max": 25.0,
         "unit": "%"
       }
@@ -7598,16 +7598,16 @@
       {
         "h_code": "H315",
         "class": "Cilt Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 10.0,
         "max": 25.0,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 10.0,
         "max": 25.0,
         "unit": "%"
       }
@@ -7741,8 +7741,8 @@
       {
         "h_code": "H371",
         "class": "BHOT Tek Mrz. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.2,
         "max": 1.0,
         "unit": "%"
       }
@@ -13210,8 +13210,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar. Mrz. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.01,
         "max": 0.1,
         "unit": "%"
       }
@@ -15838,8 +15838,8 @@
       {
         "h_code": "H272",
         "class": "Oksit. Sıvı 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.0,
         "max": 50.0,
         "unit": "%"
       }
@@ -18596,8 +18596,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.1,
         "max": 1.0,
         "unit": "%"
       },
@@ -18774,8 +18774,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz.. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.1,
         "max": 1.0,
         "unit": "%"
       },
@@ -18883,8 +18883,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz.. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.1,
         "max": 1.0,
         "unit": "%"
       },
@@ -19022,8 +19022,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.1,
         "max": 1.0,
         "unit": "%"
       },
@@ -19155,8 +19155,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.1,
         "max": 1.0,
         "unit": "%"
       },
@@ -19244,8 +19244,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.1,
         "max": 1.0,
         "unit": "%"
       },
@@ -19326,8 +19326,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.1,
         "max": 1.0,
         "unit": "%"
       },
@@ -19404,8 +19404,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.1,
         "max": 1.0,
         "unit": "%"
       },
@@ -19487,8 +19487,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.1,
         "max": 1.0,
         "unit": "%"
       },
@@ -19584,8 +19584,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.1,
         "max": 1.0,
         "unit": "%"
       },
@@ -19665,8 +19665,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.1,
         "max": 1.0,
         "unit": "%"
       },
@@ -19743,8 +19743,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.1,
         "max": 1.0,
         "unit": "%"
       },
@@ -19822,8 +19822,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.1,
         "max": 1.0,
         "unit": "%"
       },
@@ -19900,8 +19900,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.1,
         "max": 1.0,
         "unit": "%"
       },
@@ -19982,8 +19982,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.1,
         "max": 1.0,
         "unit": "%"
       },
@@ -20067,8 +20067,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.1,
         "max": 1.0,
         "unit": "%"
       },
@@ -20154,8 +20154,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.1,
         "max": 1.0,
         "unit": "%"
       },
@@ -20232,8 +20232,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.1,
         "max": 1.0,
         "unit": "%"
       },
@@ -20915,8 +20915,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.1,
         "max": 1.0,
         "unit": "%"
       },
@@ -20993,8 +20993,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.1,
         "max": 1.0,
         "unit": "%"
       },
@@ -21274,8 +21274,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.1,
         "max": 1.0,
         "unit": "%"
       },
@@ -21419,8 +21419,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.1,
         "max": 1.0,
         "unit": "%"
       },
@@ -24612,24 +24612,24 @@
       {
         "h_code": "H315",
         "class": "Cilt Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.01,
         "max": 5.0,
         "unit": "%"
       },
       {
         "h_code": "H318",
         "class": "Göz Hsr. 1",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 3.0,
         "max": 5.0,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.01,
         "max": 3.0,
         "unit": "%"
       }
@@ -25033,24 +25033,24 @@
       {
         "h_code": "H314",
         "class": "Cilt Aşnd. 1B",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.2,
         "max": 10.0,
         "unit": "%"
       },
       {
         "h_code": "H315",
         "class": "Cilt Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.02,
         "max": 0.2,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.02,
         "max": 0.2,
         "unit": "%"
       },
@@ -29633,8 +29633,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.2,
         "max": 1.0,
         "unit": "%"
       }
@@ -29972,8 +29972,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.2,
         "max": 1.0,
         "unit": "%"
       }
@@ -35956,16 +35956,16 @@
       {
         "h_code": "H315",
         "class": "Cilt Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 25.0,
         "max": 50.0,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 25.0,
         "max": 50.0,
         "unit": "%"
       }
@@ -38499,8 +38499,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.3,
         "max": 3.0,
         "unit": "%"
       }
@@ -43124,8 +43124,8 @@
       {
         "h_code": "H335",
         "class": "BHOT Tek Mrz.3",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.5,
         "max": 5.0,
         "unit": "%"
       }
@@ -47578,24 +47578,24 @@
       {
         "h_code": "H314",
         "class": "Cilt Aşnd. 1B",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 10.0,
         "max": 90.0,
         "unit": "%"
       },
       {
         "h_code": "H315",
         "class": "Cilt Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 2.0,
         "max": 10.0,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 2.0,
         "max": 10.0,
         "unit": "%"
       }
@@ -47639,24 +47639,24 @@
       {
         "h_code": "H314",
         "class": "Cilt Aşnd. 1B",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 25.0,
         "max": 90.0,
         "unit": "%"
       },
       {
         "h_code": "H315",
         "class": "Cilt Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 10.0,
         "max": 25.0,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 10.0,
         "max": 25.0,
         "unit": "%"
       }
@@ -47848,24 +47848,24 @@
       {
         "h_code": "H315",
         "class": "Cilt Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 5.0,
         "max": 25.0,
         "unit": "%"
       },
       {
         "h_code": "H318",
         "class": "Göz Hsr. 1",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 5.0,
         "max": 25.0,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 1.0,
         "max": 5.0,
         "unit": "%"
       },
@@ -47953,16 +47953,16 @@
       {
         "h_code": "H315",
         "class": "Cilt Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 10.0,
         "max": 25.0,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 10.0,
         "max": 25.0,
         "unit": "%"
       }
@@ -50399,16 +50399,16 @@
       {
         "h_code": "H315",
         "class": "Cilt Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 10.0,
         "max": 25.0,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 10.0,
         "max": 25.0,
         "unit": "%"
       },
@@ -73090,8 +73090,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.2,
         "max": 1.0,
         "unit": "%"
       }
@@ -86758,8 +86758,8 @@
       {
         "h_code": "H315",
         "class": "Cilt Thr. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.06,
         "max": 0.6,
         "unit": "%"
       },
@@ -86774,8 +86774,8 @@
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.06,
         "max": 0.6,
         "unit": "%"
       },
@@ -98206,24 +98206,24 @@
       {
         "h_code": "H318",
         "class": "Göz Hsr. 1",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 3.0,
         "max": 10.0,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 1.0,
         "max": 3.0,
         "unit": "%"
       },
       {
         "h_code": "H335",
         "class": "BHOT Tek Mrz. 3",
-        "op": "<",
-        "min": null,
+        "op": "range",
+        "min": 0.0,
         "max": 10.0,
         "unit": "%"
       }

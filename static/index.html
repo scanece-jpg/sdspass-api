@@ -4106,6 +4106,7 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
 
     // Temiz sds_data'yı sakla — denetim butonu kullanacak
     window._lastSdsJson = resJson.sds_data || null;
+    window._lastSdsXml  = resJson.sds_xml  || null;
 
     // Validator sonuçları (eski header mantığı yerine JSON'dan)
     const _valData = resJson.validation || {};
@@ -4498,7 +4499,9 @@ async function runReview() {
       h_codes:    state.allH || [],
       phys_props: flatPhys,
       components: (typeof getComps === 'function') ? getComps() : [],
-      // PDF oluşturduktan sonra saklanan tam sds_data — en doğru veri kaynağı
+      // XML — PDF ile aynı anda üretilir, denetim metni olarak kullanılır
+      sds_xml:      window._lastSdsXml  || null,
+      // PDF oluşturduktan sonra saklanan tam sds_data — araç çağrıları için
       full_sds_data: window._lastSdsJson || null,
       // Fallback: PDF oluşturulmadıysa basit veri
       sds_data: {

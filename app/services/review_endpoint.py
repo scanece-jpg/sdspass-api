@@ -547,6 +547,7 @@ async def sds_review(data: dict = Body(...)):
         phys_props = data.get("phys_props", {})
         components = data.get("components", [])
 
+        sds_xml          = data.get("sds_xml") or None
         full_sds_data    = data.get("full_sds_data") or None
         sds_data_simple  = data.get("sds_data", {})
 
@@ -588,8 +589,11 @@ async def sds_review(data: dict = Body(...)):
             "info":    sum(1 for i in issues if i["level"] == "info"),
         }
 
-        # ── 2. SDS verisi — okunabilir 16-bölüm metin (JSON yerine) ─────────────
-        sds_text = _build_sds_text(sds_for_validator, h_codes, phys_props, components)
+        # ── 2. SDS verisi — XML öncelikli, yoksa metin özeti ────────────────────
+        if sds_xml:
+            sds_text = sds_xml
+        else:
+            sds_text = _build_sds_text(sds_for_validator, h_codes, phys_props, components)
 
         # ── 3. Mevzuat bağlamı ─────────────────────────────────────────────────
         kb_blocks = []

@@ -460,7 +460,7 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
                             _c315 = float(_h315_entry.get("c_min", _H315_GCL))
                             seen_h.add('H315')
                             passed.append({
-                                "h_class":       "Deri Tahriş 2",
+                                "h_class":       "Skin Irrit. 2",
                                 "h_code":        "H315",
                                 "conc":          conc,
                                 "reason":        _cascade_reason(
@@ -472,7 +472,7 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
                         elif conc >= _H315_GCL:
                             seen_h.add('H315')
                             passed.append({
-                                "h_class":       "Deri Tahriş 2",
+                                "h_class":       "Skin Irrit. 2",
                                 "h_code":        "H315",
                                 "conc":          conc,
                                 "reason":        _cascade_reason(
@@ -489,7 +489,7 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
                             _c319 = float(_h319_entry.get("c_min", _H319_GCL))
                             seen_h.add('H319')
                             passed.append({
-                                "h_class":       "Göz Tahriş 2",
+                                "h_class":       "Eye Irrit. 2",
                                 "h_code":        "H319",
                                 "conc":          conc,
                                 "reason":        _cascade_reason(
@@ -523,7 +523,7 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
                     elif conc >= _H319_GCL:
                         seen_h.add('H319')
                         passed.append({
-                            "h_class":       "Göz Tahriş 2",
+                            "h_class":       "Eye Irrit. 2",
                             "h_code":        "H319",
                             "conc":          conc,
                             "reason":        _cascade_reason(
@@ -633,7 +633,7 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
     if "H314" not in seen_h and sum_corr1 >= 5.0:
         seen_h.add("H314")
         passed.append({"h_class":"Skin Corr. 1","h_code":"H314","conc":sum_corr1,
-                       "reason":f"Toplama: Σ Skin Corr.1=%{sum_corr1:.1f} ≥ %5 (CLP Tablo 3.2.3 additivity)"})
+                       "reason":f"Toplama: Σ Cilt Aş.1=%{sum_corr1:.1f} ≥ %5 (CLP Tablo 3.2.3 toplamsal kural)"})
 
     # Kural 2: 10×ΣSkin Corr.1 + ΣSkin Irrit.2 ≥ %10 → H315 (H314 yoksa)
     # Bu ağırlıklı formül hem ΣKat2≥%10 hem de %1≤ΣKat1<%5 geçiş durumunu kapsar
@@ -652,7 +652,7 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
     if "H318" not in seen_h and sum_eye_dam1 >= 3.0:
         seen_h.add("H318")
         passed.append({"h_class":"Eye Dam. 1","h_code":"H318","conc":sum_eye_dam1,
-                       "reason":f"Toplama: Σ Eye Dam.1=%{sum_eye_dam1:.1f} ≥ %3 (CLP Tablo 3.3.3 additivity)"})
+                       "reason":f"Toplama: Σ Göz Hasar.1=%{sum_eye_dam1:.1f} ≥ %3 (CLP Tablo 3.3.3 toplamsal kural)"})
 
     # Kural 2: 10×ΣEye Dam.1 + ΣEye Irrit.2 ≥ %10 → H319 (H318 yoksa)
     if "H318" not in seen_h and "H319" not in seen_h:
@@ -1415,10 +1415,10 @@ async def calculate_clp(db: AsyncSession, components: List[Any], form: str = '')
             'conc': sum_corr1, 'h_class': 'Skin Corr. 1', 'h_code': 'H314',
             'cutoff_used': 'Tablo 3.2.3 Σ≥%5',
             'passed': True,
-            'reason': f'Toplama: Σ Skin Corr.1 = %{sum_corr1:.1f} ≥ %5 → H314 (CLP Tablo 3.2.3 additivity)',
+            'reason': f'Toplama: Σ Cilt Aş.1 = %{sum_corr1:.1f} ≥ %5 → H314 (CLP Tablo 3.2.3 toplamsal kural)',
         })
         warnings.append(
-            f"Toplamsal kural: Σ Skin Corr.1 = %{sum_corr1:.1f} ≥ %5 → H314 Skin Corr. 1 atandı (CLP Tablo 3.2.3)"
+            f"Toplamsal kural: Σ Cilt Aş.1 = %{sum_corr1:.1f} ≥ %5 → H314 Cilt Aş. 1 atandı (CLP Tablo 3.2.3)"
         )
 
     # Kural 2: 10×ΣSkin Corr.1 + ΣSkin Irrit.2 ≥ %10 → H315 (H314 yoksa — Tablo 3.2.3)
@@ -1440,7 +1440,7 @@ async def calculate_clp(db: AsyncSession, components: List[Any], form: str = '')
             })
             warnings.append(
                 f"Ağırlıklı skin formülü: 10×{sum_corr1:.1f}+{sum_skin_irrit2_b:.1f}"
-                f"={weighted_skin_b:.1f} ≥ %10 → H315 Skin Irrit. 2 uygulandı (CLP Tablo 3.2.3)"
+                f"={weighted_skin_b:.1f} ≥ %10 → H315 Cilt Tahriş. 2 uygulandı (CLP Tablo 3.2.3)"
             )
 
     # Kural 1: ΣEye Dam.1 ≥ %3 → H318 (toplamsal — Tablo 3.3.3 additivity)
@@ -1453,10 +1453,10 @@ async def calculate_clp(db: AsyncSession, components: List[Any], form: str = '')
             'conc': sum_eye_dam1, 'h_class': 'Eye Dam. 1', 'h_code': 'H318',
             'cutoff_used': 'Tablo 3.3.3 Σ≥%3',
             'passed': True,
-            'reason': f'Toplama: Σ Eye Dam.1 = %{sum_eye_dam1:.1f} ≥ %3 → H318 (CLP Tablo 3.3.3 additivity)',
+            'reason': f'Toplama: Σ Göz Hasar.1 = %{sum_eye_dam1:.1f} ≥ %3 → H318 (CLP Tablo 3.3.3 toplamsal kural)',
         })
         warnings.append(
-            f"Toplamsal kural: Σ Eye Dam.1 = %{sum_eye_dam1:.1f} ≥ %3 → H318 Eye Dam. 1 atandı (CLP Tablo 3.3.3)"
+            f"Toplamsal kural: Σ Göz Hasar.1 = %{sum_eye_dam1:.1f} ≥ %3 → H318 Göz Hasar. 1 atandı (CLP Tablo 3.3.3)"
         )
 
     # Kural 2: 10×ΣEye Dam.1 + ΣEye Irrit.2 ≥ %10 → H319 (H318 yoksa — Tablo 3.3.3)
@@ -1478,7 +1478,7 @@ async def calculate_clp(db: AsyncSession, components: List[Any], form: str = '')
             })
             warnings.append(
                 f"Ağırlıklı göz formülü: 10×{sum_eye_dam1:.1f}+{sum_eye_irrit2_b:.1f}"
-                f"={weighted_eye_b:.1f} ≥ %10 → H319 Eye Irrit. 2 uygulandı (CLP Tablo 3.3.3)"
+                f"={weighted_eye_b:.1f} ≥ %10 → H319 Göz Tahriş. 2 uygulandı (CLP Tablo 3.3.3)"
             )
 
     # ─── ADIM 3: AQUATIC (CLP Annex I Tablo 4.1.3) ──────────────────────

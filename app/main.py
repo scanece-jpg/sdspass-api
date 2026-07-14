@@ -180,7 +180,7 @@ async def generate_pdf(data: dict = Body(...)):
                 pass
             return comp
 
-        _prod_form_for_refresh = data.get('form', product.get('form', 'liquid'))
+        _prod_form_for_refresh = data.get('form') or product.get('form') or 'liquid'
         components = list(await _aio.gather(*[_refresh_comp(c, _prod_form=_prod_form_for_refresh) for c in components]))
         # H360x/H361x sub-kodlarını kanonik büyük harfe normalize et (H361d→H361D, H360Df→H360FD)
         def _norm_sub(h: str) -> str:
@@ -295,7 +295,7 @@ async def generate_pdf(data: dict = Body(...)):
             # Fiziksel özellikleri parse et → display/calc/pcn/range_notes
             _parsed_phys = _parse_phys(phys_in)
 
-            _form_val = product.get('form', 'liquid')
+            _form_val = product.get('form') or 'liquid'
             # Flash point — aralık girilmişse worst-case (min) alınır
             _user_fp = _phys_calc_val(_parsed_phys, 'flash_point')
             if _user_fp is None:

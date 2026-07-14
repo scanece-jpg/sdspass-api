@@ -589,11 +589,25 @@ async def sds_review(data: dict = Body(...)):
             "info":    sum(1 for i in issues if i["level"] == "info"),
         }
 
-        # ── 2. SDS verisi — XML öncelikli, yoksa metin özeti ────────────────────
-        if sds_xml:
-            sds_text = sds_xml
-        else:
-            sds_text = _build_sds_text(sds_for_validator, h_codes, phys_props, components)
+        # ── 2. SDS verisi — PDF'den gerçek metin ayıkla ────────────────────────
+        try:
+            import io
+            import pdfplumber
+            from app.services.pdf_sds_service import generate_sds_pdf
+            _pdf_bytes = generate_sds_pdf(sds_for_validator)
+            _pages = []
+            with pdfplumber.open(io.BytesIO(_pdf_bytes)) as _pdf:
+                for _page in _pdf.pages:
+                    _t = _page.extract_text(x_tolerance=2, y_tolerance=2)
+                    if _t:
+                        _pages.append(_t)
+            sds_text = "\n\n--- SAYFA SONU ---\n\n".join(_pages)
+        except Exception as _e:
+            # PDF üretilemezse metin özetine geri dön
+            if sds_xml:
+                sds_text = sds_xml
+            else:
+                sds_text = _build_sds_text(sds_for_validator, h_codes, phys_props, components)
 
         # ── 3. Mevzuat bağlamı ─────────────────────────────────────────────────
         kb_blocks = []

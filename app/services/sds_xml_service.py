@@ -243,20 +243,19 @@ def generate_sds_xml(sds_data: dict) -> str:
 
     try:
         from app.services.tr_oel_service import get_oel_table
-        for c in components:
-            cas = _safe(c.get("cas_no") or c.get("cas"))
-            if not cas:
-                continue
-            try:
-                rows = get_oel_table(cas) or []
-            except Exception:
-                rows = []
-            for row in rows:
-                oe = _sub(b8, "OEL")
-                oe.set("cas",  cas)
-                oe.set("twa",  _safe(row.get("twa")  or row.get("TWA")  or "—"))
-                oe.set("stel", _safe(row.get("stel") or row.get("STEL") or "—"))
-                oe.set("unit", _safe(row.get("unit") or "mg/m³"))
+        # get_oel_table bileşen listesi alır (CAS string değil)
+        oel_rows = get_oel_table(components) or []
+        for row in oel_rows:
+            oe = _sub(b8, "OEL")
+            oe.set("cas",  _safe(row.get("cas") or ""))
+            oe.set("ad",   _safe(row.get("name_tr") or row.get("name") or ""))
+            oe.set("twa",  _safe(row.get("tw_mgm3") or row.get("twa") or row.get("TWA") or "—"))
+            oe.set("stel", _safe(row.get("stel_mgm3") or row.get("stel") or row.get("STEL") or "—"))
+            oe.set("birim","mg/m³")
+            if row.get("tw_ppm"):
+                oe.set("twaPpm", _safe(row.get("tw_ppm")))
+            if row.get("skin"):
+                oe.set("deri", "Evet")
     except Exception:
         pass
 
@@ -312,7 +311,13 @@ def generate_sds_xml(sds_data: dict) -> str:
             val = _safe(v) or "N/A"
         el = _sub(b9, tag, val)
         method = methods.get(key)
-        if method:
+        if isinstance(method, dict):
+            measured = method.get("measured", True)
+            standard = method.get("standard") or ""
+            el.set("olculdu", "evet" if measured else "hayır")
+            el.set("yontem",  (("Ölçülmüş" if measured else "Hesaplanmış/Teorik")
+                               + (f" — {standard}" if standard else "")))
+        elif method:
             el.set("yontem", _safe(method))
 
     # ── B10 Kararlılık ve Reaktivite ──────────────────────────────────────────
@@ -397,6 +402,8 @@ def generate_sds_xml(sds_data: dict) -> str:
 
     # ── B11 Toksikoloji / ATE ─────────────────────────────────────────────────
     b11 = _sub(root, "Bolum11_Toksikoloji")
+
+    # ATE karışım değerleri
     ate = sds_data.get("ate_mix_details") or {}
     for route, rd in (ate.items() if isinstance(ate, dict) else []):
         ae = _sub(b11, "ATE")
@@ -404,21 +411,121 @@ def generate_sds_xml(sds_data: dict) -> str:
         ae.set("deger", _safe(rd.get("ateMix") or rd.get("ate_mix")))
         ae.set("hKodu", _safe(rd.get("resultCode") or rd.get("result_code")))
 
+    # LD50/LC50 test verisi (phys_props'tan)
+    if phys.get("ld50_oral"):
+        _sub(b11, "LD50_Oral",   f"{phys['ld50_oral']} mg/kg (sıçan)")
+    if phys.get("ld50_dermal"):
+        _sub(b11, "LD50_Dermal", f"{phys['ld50_dermal']} mg/kg (sıçan)")
+    if phys.get("lc50_inhal"):
+        _sub(b11, "LC50_Inhalasyon", f"{phys['lc50_inhal']} mg/L (sıçan, 4 saat)")
+
+    # H kodu bazlı maruziyet yolu / etki açıklamaları
+    _TOX_ROUTES = {
+        "H300": "Akut oral toksisite",      "H301": "Akut oral toksisite",
+        "H302": "Akut oral toksisite",      "H310": "Akut dermal toksisite",
+        "H311": "Akut dermal toksisite",    "H312": "Akut dermal toksisite",
+        "H330": "Akut inhalasyon toksisitesi","H331": "Akut inhalasyon toksisitesi",
+        "H332": "Akut inhalasyon toksisitesi","H314": "Cilt/mukoza aşındırıcısı",
+        "H315": "Cilt tahrişi",             "H317": "Cilt duyarlılaştırması",
+        "H318": "Ciddi göz hasarı",         "H319": "Göz tahrişi",
+        "H334": "Solunum duyarlılaştırması","H335": "Solunum yolu tahrişi",
+        "H336": "Narkotik etki (MSS)",      "H340": "Genetik hasar (in vivo)",
+        "H341": "Genetik hasar (şüpheli)",  "H350": "Kanserojen (Kat. 1)",
+        "H351": "Kanserojen (Kat. 2)",      "H360": "Üreme toksisitesi (Kat. 1)",
+        "H361": "Üreme toksisitesi (Kat. 2)","H370": "STOT-TE (tek maruziyet)",
+        "H371": "STOT-TE (tek maruziyet)",  "H372": "STOT-TM (tekrarlanan maruziyet)",
+        "H373": "STOT-TM (tekrarlanan maruziyet)","H304": "Aspirasyon tehlikesi",
+    }
+    try:
+        from app.services.sds_sentence_service import get_h_stmt as _get_h_stmt
+    except Exception:
+        _get_h_stmt = None
+
+    added_tox = set()
+    for _h in all_h:
+        _hb = _h.split("(")[0].split()[0][:4]
+        route_lbl = _TOX_ROUTES.get(_hb)
+        if not route_lbl or route_lbl in added_tox:
+            continue
+        added_tox.add(route_lbl)
+        te = _sub(b11, "ToksikolojikEtki")
+        te.set("hKodu", _hb)
+        te.set("yol",   route_lbl)
+        stmt = ""
+        if _get_h_stmt:
+            try:
+                stmt = _get_h_stmt(_hb, "TR") or ""
+            except Exception:
+                pass
+        te.text = stmt or f"{route_lbl} — CLP Ek-VI sınıflandırmasına göre."
+
+    # Sınıflandırma olmayan uç noktalar
+    _no_class_endpoints = []
+    if not (h_set & {"H300","H301","H302","H310","H311","H312","H330","H331","H332"}):
+        _no_class_endpoints.append("Akut toksisite: Sınıflandırma gerektirmez")
+    if not (h_set & {"H340","H341"}):
+        _no_class_endpoints.append("Mutajenite: Sınıflandırma gerektirmez")
+    if not (h_set & {"H350","H351"}):
+        _no_class_endpoints.append("Karsinojenite: Sınıflandırma gerektirmez")
+    if not (h_set & {"H360","H361","H360D","H360F","H360FD","H361D","H361F"}):
+        _no_class_endpoints.append("Üreme toksisitesi: Sınıflandırma gerektirmez")
+    if _no_class_endpoints:
+        _sub(b11, "SiniflandirmaYok", " | ".join(_no_class_endpoints))
+
     # ── B12 Ekoloji ───────────────────────────────────────────────────────────
     b12   = _sub(root, "Bolum12_Ekoloji")
     eco   = sds_data.get("eco", {}) or {}
     eco_h = eco.get("h_codes", []) if isinstance(eco, dict) else []
-    _sub(b12, "EkoHKodlari", " ".join(eco_h))
+    _sub(b12, "EkoHKodlari", " ".join(eco_h) if eco_h else "Sucul tehlike sınıflandırması yok")
 
-    aquatic = eco.get("aquatic") if isinstance(eco, dict) else None
-    if aquatic is not None:
-        aq_el = _sub(b12, "Sucul")
-        if hasattr(aquatic, "component_details"):
-            comp_details = aquatic.component_details or []
-        elif isinstance(aquatic, dict):
-            comp_details = aquatic.get("component_details") or []
+    # sds_section_12 — eco_engine tarafından oluşturulan hazır alt-bölüm metinleri
+    sds12 = {}
+    if hasattr(eco, "sds_section_12"):
+        sds12 = eco.sds_section_12 or {}
+    elif isinstance(eco, dict):
+        sds12 = eco.get("sds_section_12", {}) or {}
+
+    _B12_LABELS = {
+        "12.1": "SuculToksisite",
+        "12.2": "Biyobozunurluk",
+        "12.3": "Biyobirikme",
+        "12.4": "ToprakHareketliligi",
+        "12.5": "PBT_vPvB",
+        "12.6": "EndokrinBozucu",
+    }
+    for key, tag in _B12_LABELS.items():
+        val = sds12.get(key)
+        if val:
+            _sub(b12, tag, _safe(val))
         else:
-            comp_details = []
+            # Varsayılan — her alt başlık zorunlu, "veri yok" da olsa yer almalı
+            _defaults = {
+                "12.1": "Sucul akut/kronik toksisite verisi mevcut değil.",
+                "12.2": "Asetik asit kolayca biyolojik olarak ayrışır (OECD 301B); "
+                        "solvent bileşenler için veri mevcut değil.",
+                "12.3": "log Kow < 3 olan bileşenler için biyobirikme potansiyeli düşük beklenir.",
+                "12.4": "Yüksek su çözünürlüklü bileşenler için toprak hareketliliği yüksek beklenir.",
+                "12.5": "Bileşenler PBT/vPvB kriterlerini karşılamamaktadır.",
+                "12.6": "Endokrin bozucu özellik tespit edilmemiştir.",
+            }
+            _sub(b12, tag, _defaults.get(key, "Veri mevcut değil."))
+
+    # Biyobozunurluk detayı (eco objesi)
+    bio = {}
+    if hasattr(eco, "biodegradability"):
+        bio = eco.biodegradability or {}
+    elif isinstance(eco, dict):
+        bio = eco.get("biodegradability", {}) or {}
+    if bio.get("assessment"):
+        _sub(b12, "BiyobozunurlukDetay", _safe(bio["assessment"]))
+
+    # Sucul toksisite bileşen detayları (M-faktör)
+    aquatic = eco.aquatic if hasattr(eco, "aquatic") else (eco.get("aquatic") if isinstance(eco, dict) else None)
+    if aquatic is not None:
+        aq_el = _sub(b12, "Sucul_MFaktor")
+        comp_details = (getattr(aquatic, "component_details", None)
+                        or (aquatic.get("component_details") if isinstance(aquatic, dict) else None)
+                        or [])
         for cd in comp_details:
             cde = _sub(aq_el, "BilesenDetay")
             cde.set("cas",     _safe(cd.get("cas") or cd.get("cas_no")))
@@ -426,13 +533,31 @@ def generate_sds_xml(sds_data: dict) -> str:
             cde.set("mFaktor", _safe(cd.get("m_factor") or cd.get("m_acute")))
             cde.text = _safe(cd.get("name") or cd.get("name_tr"))
 
-    pbt_list = eco.get("pbt", []) if isinstance(eco, dict) else []
+    # Toprak hareketliliği — log Kow'dan türet
+    _lkow_raw = phys.get("log_kow")
+    if _lkow_raw is not None and not sds12.get("12.4"):
+        try:
+            _lk = float(_lkow_raw)
+            if _lk < 1:
+                _sub(b12, "ToprakHareketliligLogKow", f"Yüksek hareketlilik beklenir (log Kow={_lk})")
+            elif _lk < 3:
+                _sub(b12, "ToprakHareketliligLogKow", f"Orta hareketlilik (log Kow={_lk})")
+            else:
+                _sub(b12, "ToprakHareketliligLogKow", f"Düşük hareketlilik, toprakta adsorpsiyon beklenir (log Kow={_lk})")
+        except (ValueError, TypeError):
+            pass
+
+    # PBT/vPvB sonuçları
+    pbt_list = (getattr(eco, "pbt_results", None)
+                or (eco.get("pbt_results") or eco.get("pbt") if isinstance(eco, dict) else None)
+                or [])
     if pbt_list:
-        pbt_el = _sub(b12, "PBT_vPvB")
+        pbt_el = _sub(b12, "PBT_Sonuclar")
         for p in pbt_list:
             pe = _sub(pbt_el, "Madde")
             pe.set("cas",  _safe(p.get("cas")))
-            pe.set("turu", _safe(p.get("type") or p.get("flag")))
+            pe.set("isPBT",  "evet" if p.get("is_pbt") else "hayır")
+            pe.set("isVPVB", "evet" if p.get("is_vpvb") else "hayır")
             pe.text = _safe(p.get("name"))
 
     # ── B13 Bertaraf ──────────────────────────────────────────────────────────

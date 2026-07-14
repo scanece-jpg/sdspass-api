@@ -120496,5 +120496,67 @@
     "scl_limits": [],
     "m_factors": {},
     "ate": {}
+  },
+  "7647-01-0-AQ": {
+    "index_no": "017-002-01-X",
+    "names": [
+      "Hidroklorik asit ...%",
+      "Hidroklorik asit çözeltisi"
+    ],
+    "name_en": "hydrochloric acid ...%",
+    "ec_no": "231-595-7",
+    "cas": "7647-01-0",
+    "synonyms": [
+      "HCl çözeltisi",
+      "Tuzruhu"
+    ],
+    "lang": "tr",
+    "notes": [
+      "B"
+    ],
+    "euh_codes": [],
+    "classification": [
+      {
+        "class": "Cilt Aşınd. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "BHOT Tek Mrz. 3",
+        "h_code": "H335"
+      }
+    ],
+    "scl_limits": [
+      {
+        "h_code": "H314",
+        "class": "Cilt Aşınd. 1B",
+        "op": ">=",
+        "min": 25.0,
+        "max": null
+      },
+      {
+        "h_code": "H315",
+        "class": "Cilt Tahriş. 2",
+        "op": "range",
+        "min": 10.0,
+        "max": 25.0
+      },
+      {
+        "h_code": "H319",
+        "class": "Göz Tahriş. 2",
+        "op": "range",
+        "min": 10.0,
+        "max": 25.0
+      },
+      {
+        "h_code": "H335",
+        "class": "BHOT Tek Mrz. 3",
+        "op": ">=",
+        "min": 10.0,
+        "max": null
+      }
+    ],
+    "m_factors": {},
+    "atp": "SEA",
+    "sea_ek6": true
   }
 }

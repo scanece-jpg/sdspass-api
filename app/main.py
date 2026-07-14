@@ -1333,10 +1333,11 @@ async def clp_calculate(body: dict):
     components  = body.get("components", [])
     lang        = body.get("lang", "TR")
     mixture_ph  = body.get("mixture_ph", None)   # Karışım pH değeri (opsiyonel)
+    mixture_form = body.get("form", "")
 
     try:
         # 1. Ana CLP (cut-off tablosu) — pH uç değer varsa doğrudan H314+H318 atanır
-        result = classify_mixture_clp(components, mixture_ph=mixture_ph)
+        result = classify_mixture_clp(components, mixture_ph=mixture_ph, mixture_form=mixture_form)
 
         # 2. STOT RE (hedef organ bazlı)
         stot = calculate_stot_re(components)
@@ -1577,7 +1578,7 @@ async def sds_calculate(body: dict = Body(...)):
         phys_result = phys_calculate(comps, form=form, user_fp=user_fp, test_data=test_data)
 
         # ── 2. CLP karışım hesabı (cut-off tablosu + ATE) ────────────────────
-        clp_result = classify_mixture_clp(comps, mixture_ph=mixture_ph)
+        clp_result = classify_mixture_clp(comps, mixture_ph=mixture_ph, mixture_form=form)
 
         # ── 3. STOT RE ────────────────────────────────────────────────────────
         stot_result = stot_calculate(comps)

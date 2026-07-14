@@ -307,16 +307,37 @@ def _get_scl_entry_for_conc(scl_list: list, h_code4: str, conc: float) -> dict |
     return max(matches, key=lambda s: float(s.get("c_min", 0)))
 
 
-def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
+def classify_mixture_clp(components: list, mixture_ph: float = None,
+                         mixture_form: str = '') -> dict:
     """
     CLP Annex I karışım sınıflandırması.
     Giriş: [{cas_no, name, concentration, hazards:[{h_class, h_code}]}]
-           mixture_ph: ölçülen karışım pH değeri (opsiyonel)
+           mixture_ph:   ölçülen karışım pH değeri (opsiyonel)
+           mixture_form: ürün fiziksel formu ('liquid','sıvı','solid' vb.)
+                         Not B maddeleri için sıvı formda sulu SCL verisi kullanılır.
     Çıkış: {h_codes, signal_word, passed:[{h_class,h_code,conc,reason}], warnings}
     """
+    from app.services.substance_lookup import lookup_substance as _lu, _NOTE_B_CAS, _is_liquid
+
     passed = []
     warnings = []
     seen_h = set()
+
+    # Not B override: sıvı ürünlerde gaz formu SCL'si yerine sulu form SCL'si kullan.
+    # Bileşen hazards listesini AQ kaydındakiyle değiştir (gaz-özgü H280/H331 kalkar).
+    _use_liquid = _is_liquid(mixture_form)
+    def _maybe_override_comp(comp: dict) -> dict:
+        cas = comp.get("cas_no", comp.get("cas", "")).strip()
+        if _use_liquid and cas in _NOTE_B_CAS:
+            aq = _lu(cas, form=mixture_form)
+            if aq and aq.get('hazards'):
+                comp = dict(comp)
+                comp['hazards'] = aq['hazards']
+                # sclRaw da AQ kaydından gelsin
+                comp['sclRaw'] = aq.get('scl', [])
+        return comp
+
+    components = [_maybe_override_comp(c) for c in components]
 
     # STOT RE — hedef organ bazlı ayrı hesapla
     stot_comps = []

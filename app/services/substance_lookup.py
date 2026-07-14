@@ -530,9 +530,28 @@ def _load_oel() -> Dict:
 # Public API
 # ---------------------------------------------------------------------------
 
-def lookup_substance(cas: str) -> Optional[Dict]:
+# Not B maddeleri: aynı CAS için gaz ve sulu form ayrı Ek-VI girdisine sahip.
+# form='liquid' olduğunda CAS+'-AQ' anahtarını tercih et.
+_NOTE_B_CAS = {'7647-01-0'}  # HCl — gerektiğinde genişlet (HNO3, H2SO4 vb.)
+
+_LIQUID_FORM_KEYWORDS = frozenset({
+    'liquid', 'solution', 'aqueous', 'sıvı', 'çözelti',
+    'concentrate', 'konsantre', 'emulsion', 'suspension',
+})
+
+def _is_liquid(form: str) -> bool:
+    if not form:
+        return False
+    f = form.lower().strip()
+    return any(kw in f for kw in _LIQUID_FORM_KEYWORDS)
+
+
+def lookup_substance(cas: str, form: str = '') -> Optional[Dict]:
     """
     CAS numarasına göre madde bilgisi döndür.
+
+    form: ürün fiziksel formu ('liquid','sıvı','solution' vb.)
+          Not B maddeleri için sıvı formda AQ (sulu) kaydı tercih edilir.
 
     Hiyerarşi:
       1. data/cl/       — TR SEA Ek-6 (yasal zemin, mutlak)
@@ -543,6 +562,12 @@ def lookup_substance(cas: str) -> Optional[Dict]:
       [5-7: canlı API çekimleri main.py'de yapılır ve buraya kaydedilir]
     """
     cas = cas.strip()
+
+    # Not B: sıvı form + bilinen çift-giriş CAS → AQ kaydına yönlendir
+    if cas in _NOTE_B_CAS and _is_liquid(form):
+        aq_result = _sea_ek6_lookup(cas + '-AQ')
+        if aq_result:
+            return _sea_ek6_to_legacy(aq_result)
 
     # ── Sıra 1: SEA Ek-6 TR (yasal zemin, mutlak öncelik) ───────────────────
     tr_entry = _sea_ek6_lookup(cas)

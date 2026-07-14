@@ -908,7 +908,7 @@ async def generate_pdf(data: dict = Body(...)):
                 _cas = _mc.get('cas_no', '').strip()
                 if not _cas:
                     continue
-                _sub = _lu_check(_cas)
+                _sub = _lu_check(_cas, form=_prod_form_for_refresh)
                 if _sub and _sub.get('sea_ek6', False):
                     # SEA Ek-6 yetkili veri — frontend'den gelen kodları geçersiz kıl
                     _mc['hazards'] = _sub.get('hazards', [])

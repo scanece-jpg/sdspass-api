@@ -225,6 +225,71 @@ def _format_ate_b11(sds_data: dict) -> list[str]:
     return lines
 
 
+def _format_oel_b8(sds_data: dict, components: list) -> list[str]:
+    """B8 — OEL/TWA/STEL değerlerini bileşen bazında listeler."""
+    try:
+        from app.services.tr_oel_service import get_oel_table
+    except Exception:
+        return []
+    lines = []
+    for c in (components or sds_data.get("components", [])):
+        cas = c.get("cas_no") or c.get("cas", "")
+        if not cas:
+            continue
+        try:
+            oel = get_oel_table(cas)
+        except Exception:
+            continue
+        if not oel:
+            continue
+        name = c.get("name_tr") or c.get("name") or cas
+        for row in oel:
+            twa  = row.get("twa")  or row.get("TWA")  or "—"
+            stel = row.get("stel") or row.get("STEL") or "—"
+            unit = row.get("unit") or "mg/m³"
+            lines.append(f"  OEL {name} (CAS {cas}): TWA={twa} {unit} | STEL={stel} {unit}")
+    return lines if lines else ["  OEL: Bileşenler için ulusal OEL tablosunda kayıt yok"]
+
+
+def _format_disposal_b13(sds_data: dict) -> list[str]:
+    """B13 — atık kodu ve bertaraf yönetmeliği."""
+    try:
+        from app.services.tr_mevzuat_service import get_disposal_content
+        disposal = get_disposal_content(sds_data.get("clp", {}).get("all_h_codes", []))
+    except Exception:
+        disposal = None
+    waste_code = sds_data.get("waste_code") or sds_data.get("product", {}).get("waste_code") or "—"
+    lines = [f"  Atık kodu (EWC/AVY): {waste_code}"]
+    if disposal:
+        lines.append(f"  Bertaraf: {str(disposal)[:300]}")
+    else:
+        lines.append("  Bertaraf: Yerel yönetmeliklere uygun bertaraf.")
+    return lines
+
+
+def _format_transport_b14(sds_data: dict) -> list[str]:
+    """B14 — IMDG (deniz) ve IATA (hava) taşıma bilgileri + çevre tehlikeli."""
+    transport = sds_data.get("transport", {}) or {}
+    lines = []
+    sea = transport.get("sea", {}) or {}
+    if sea.get("un_no") or sea.get("un"):
+        un  = sea.get("un_no") or sea.get("un", "—")
+        cls = sea.get("class", "—")
+        pg  = sea.get("pg", "—")
+        mp  = "Evet" if sea.get("marine_pollutant") else "Hayır"
+        lines.append(f"  IMDG (Deniz): UN {un} | Sınıf {cls} | PG {pg} | Deniz kirleticisi: {mp}")
+    air = transport.get("air", {}) or {}
+    if air.get("un_no") or air.get("un"):
+        un  = air.get("un_no") or air.get("un", "—")
+        cls = air.get("class", "—")
+        pg  = air.get("pg", "—")
+        lines.append(f"  IATA (Hava): UN {un} | Sınıf {cls} | PG {pg}")
+    env = transport.get("env_hazard") or transport.get("road", {}).get("env_hazard")
+    if env is not None:
+        lines.append(f"  Çevre açısından tehlikeli: {'Evet' if env else 'Hayır'}")
+    return lines
+
+
 def _build_sds_text(sds_data: dict, h_codes: list, phys_props: dict, components: list) -> str:
     """
     PDF motoruyla aynı sds_data yapısından 16 bölüm okunabilir metin üretir.
@@ -275,11 +340,24 @@ def _build_sds_text(sds_data: dict, h_codes: list, phys_props: dict, components:
     road = {}
     if isinstance(transport, dict):
         road = transport.get("road", {}) or {}
-    adr_line = (
-        f"UN {road.get('un','-')} | Sınıf {road.get('class','-')} | "
-        f"PG {road.get('pg','-')} | {road.get('shipping_name') or road.get('label','-')}"
-        if road.get("un") else "Tehlikeli madde değil / belirsiz"
-    )
+    _un_raw = road.get('un', '-')
+    _un_str = _un_raw if str(_un_raw).upper().startswith('UN') else f"UN {_un_raw}"
+    if road.get("un"):
+        try:
+            from app.services.transport_adr_service import get_adr_details as _get_adr
+            _adr_det = _get_adr(_un_str, road.get('pg', 'II'))
+        except Exception:
+            _adr_det = {}
+        _kemler  = _adr_det.get('kemler') or road.get('kemler_code') or '—'
+        _tunnel  = _adr_det.get('tunnel_code') or road.get('tunnel_code') or '—'
+        _clf_code= _adr_det.get('classification_code') or '—'
+        adr_line = (
+            f"{_un_str} | Sınıf {road.get('class','-')} | "
+            f"PG {road.get('pg','-')} | {road.get('shipping_name') or road.get('label','-')} | "
+            f"Kemler: {_kemler} | Tünel: {_tunnel} | Sınıf Kodu: {_clf_code}"
+        )
+    else:
+        adr_line = "Tehlikeli madde değil / belirsiz"
 
     # ── KKE ──────────────────────────────────────────────────────────────────
     ppe_line = "belirtilmemiş"
@@ -306,17 +384,21 @@ def _build_sds_text(sds_data: dict, h_codes: list, phys_props: dict, components:
     )
 
     # ── Bileşenler ────────────────────────────────────────────────────────────
+    try:
+        from app.services.reach_db import get_reg_no, get_ec_no as _get_ec
+    except Exception:
+        get_reg_no = _get_ec = lambda x: ""
     comp_lines = []
     for c in (components or sds_data.get("components", [])):
         name  = c.get("name_tr") or c.get("name") or c.get("cas_no", "?")
         conc  = c.get("conc") or c.get("concentration", "?")
         cas   = c.get("cas_no") or c.get("cas", "")
-        reach = c.get("reach_no", "")
+        ec    = c.get("ec_no", "") or _get_ec(cas) or "—"
+        reach = c.get("reach_no", "") or get_reg_no(cas) or "—"
         h_list= ", ".join(
             h.get("h_code","") for h in (c.get("hazards") or []) if h.get("h_code")
         )
-        line = f"  • {name} (CAS: {cas}) — %{conc}"
-        if reach: line += f" | REACH: {reach}"
+        line = f"  • {name} (CAS: {cas} | EC: {ec} | REACH: {reach}) — %{conc}"
         if h_list: line += f" | H: {h_list}"
         comp_lines.append(line)
 
@@ -393,6 +475,7 @@ def _build_sds_text(sds_data: dict, h_codes: list, phys_props: dict, components:
         "",
         f"BÖLÜM 8 — Maruziyet Kontrolleri/Kişisel Korunma",
         f"KKE: {ppe_line}",
+        *_format_oel_b8(sds_data, components),
         "",
         f"BÖLÜM 9 — Fiziksel ve Kimyasal Özellikler",
         f"Parlama noktası   : {_pv('flash_point','°C')}",
@@ -418,10 +501,11 @@ def _build_sds_text(sds_data: dict, h_codes: list, phys_props: dict, components:
         f"PBT/vPvB          : {pbt_line}",
         "",
         f"BÖLÜM 13 — Bertaraf Etme",
-        "Yerel yönetmeliklere uygun bertaraf.",
+        *_format_disposal_b13(sds_data),
         "",
         f"BÖLÜM 14 — Taşımacılık Bilgisi",
         f"ADR (Karayolu): {adr_line}",
+        *_format_transport_b14(sds_data),
         "",
         f"BÖLÜM 15 — Mevzuat Bilgisi",
         f"KKDİK kapsamında kayıtlı bileşenler listesi yukarıda (B3.2).",

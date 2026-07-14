@@ -428,10 +428,18 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
                 })
 
     # ── pH Uç Değer Kontrolü — SEA/CLP Annex I Tablo 3.2.3 notu ─────────────────
-    # Ölçülen karışım pH ≤ 2 VEYA ≥ 11.5 ise hesaplama yapılmadan doğrudan:
-    #   H314 (Skin Corr. 1) + H318 (Eye Dam. 1) atanır.
-    # Bu değerler bileşen konsantrasyonlarından bağımsız, karışımın pH'ına dayanır.
-    if mixture_ph is not None:
+    # Ölçülen karışım pH ≤ 2 VEYA ≥ 11.5 ise H314+H318 atanır.
+    # ANCAK: CLP Rehberi Part 3 — korozif/tahrişçi bileşen için Annex VI SCL tanımlıysa
+    # pH uygulanmaz; SCL türetilirken pH davranışı zaten hesaba katılmıştır (double counting).
+    # pH yalnızca SCL'si olmayan güçlü asit/baz içeren karışımlar için geçerlidir.
+    _CORR_CLASSES = {"Skin Corr. 1", "Skin Corr. 1A", "Skin Corr. 1B", "Skin Corr. 1C"}
+    _has_scl_corrosive = any(
+        _get_scl_cutoff(comp, h.get("h_class", ""), "H314") is not None
+        for comp in components
+        for h in comp.get("hazards", [])
+        if h.get("h_class", "") in _CORR_CLASSES
+    )
+    if mixture_ph is not None and not _has_scl_corrosive:
         try:
             # _parse_ph_range: her türlü ayracı kabul eder (-, /, –, boşluk, "to")
             ph_low, ph_high = _parse_ph_range(mixture_ph)

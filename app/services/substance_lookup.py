@@ -532,7 +532,17 @@ def _load_oel() -> Dict:
 
 # Not B maddeleri: aynı CAS için gaz ve sulu form ayrı Ek-VI girdisine sahip.
 # form='liquid' olduğunda CAS+'-AQ' anahtarını tercih et.
-_NOTE_B_CAS = {'7647-01-0'}  # HCl — gerektiğinde genişlet (HNO3, H2SO4 vb.)
+_NOTE_B_CAS = {
+    '7647-01-0',   # HCl — gaz CAS, sulu form AQ kaydına yönlendirir
+    '7664-93-9',   # H2SO4 — sülfürik asit çözeltisi, SCL: H314≥%15, H315/H319 %5-15
+    '7697-37-2',   # HNO3 — nitrik asit çözeltisi, SCL: H314≥%20, H314B %5-20
+    '7664-38-2',   # H3PO4 — fosforik asit, SCL: H314≥%25, H315/H319 %10-25
+    '1336-21-6',   # NH3 çözeltisi — amonyak sulu çözelti
+    '7722-84-1',   # H2O2 — hidrojen peroksit çözeltisi, SCL karmaşık
+    '64-19-7',     # Asetik asit — %'lik çözelti
+    '64-18-6',     # Formik asit — %'lik çözelti
+    '7681-52-9',   # NaOCl — sodyum hipoklorit çözeltisi
+}
 
 _LIQUID_FORM_KEYWORDS = frozenset({
     'liquid', 'solution', 'aqueous', 'sıvı', 'çözelti',

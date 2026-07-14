@@ -449,6 +449,14 @@ def _build_sds_text(sds_data: dict, h_codes: list, phys_props: dict, components:
         "",
         f"BÖLÜM 2 — Zararlılık Tanımlaması",
         f"B2.1 Sınıflandırma (tüm H kodları) : {', '.join(clp.get('all_h_codes', h_codes)) or 'yok'}",
+        *[
+            f"  → {p.get('h_code','')} ({p.get('h_class','')}) | "
+            f"Kaynak: {p.get('cutoff_source','?')} | "
+            f"Eşik: %{p.get('cutoff_value','?')} | "
+            f"Gerekçe: {p.get('reason','')}"
+            for p in (clp.get('passed') or [])
+            if p.get('h_code')
+        ],
         f"B2.1 EUH kodları                   : {', '.join(euh_codes) or 'yok'}",
         f"B2.2 Etiket H kodları (dominant)   : {', '.join(clp.get('h_codes', h_codes)) or 'yok'}",
         f"     NOT: Etiket H kodları B2.1'den az olabilir — CLP dominance kuralı gereği",

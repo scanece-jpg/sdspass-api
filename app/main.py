@@ -983,13 +983,15 @@ async def generate_pdf(data: dict = Body(...)):
                 'signal_word': signal,
                 'passed': [
                     {k: v for k, v in {
-                        'h_class':    h.get('h_class',''),
-                        'h_code':     h.get('h_code',''),
-                        'reason':     _safe(h.get('reason','')),
-                        'cutoff_used':_safe(h.get('cutoff_used','')),
-                        'note_flag':  h.get('note_flag'),
-                        'note':       h.get('note'),
-                        'repro_sub':  h.get('repro_sub'),
+                        'h_class':       h.get('h_class',''),
+                        'h_code':        h.get('h_code',''),
+                        'reason':        _safe(h.get('reason','')),
+                        'cutoff_used':   _safe(h.get('cutoff_used','')),
+                        'cutoff_source': h.get('cutoff_source'),
+                        'cutoff_value':  h.get('cutoff_value'),
+                        'note_flag':     h.get('note_flag'),
+                        'note':          h.get('note'),
+                        'repro_sub':     h.get('repro_sub'),
                     }.items() if v is not None and v != ''}
                     for h in py_clp_passed
                 ],

@@ -2457,6 +2457,13 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
 
     # Otomatik UN tespiti — kullanıcı vermemişse H kodlarından
     _phys_state = (phys.get('state') or phys.get('physical_state') or 'liquid').lower()
+    # not_regulated bayrağı — tehlikeli madde değil, tablo yerine açıklama notu yaz
+    _not_regulated = transport.get('not_regulated', False) and not transport.get('un_no')
+    _not_reg_text  = (transport.get('note') or '').strip() or (
+        'Bu ürün ADR/RID, IMDG ve IATA-DGR kapsamında tehlikeli madde olarak sınıflandırılmamıştır.'
+        if lang == 'TR' else
+        'This product is not classified as dangerous goods under ADR/RID, IMDG or IATA-DGR.'
+    )
     auto_t = _auto_un(h_codes, state=_phys_state) if not transport.get('un_no') else None
     t_src = transport if transport.get('un_no') else (auto_t or {})
     un_no = t_src.get('un_no', '—')
@@ -2575,8 +2582,12 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             'must appear on packages and transport documents.'
         )
         transport_rows.append([_ctm_label, _ctm_value])
-    story.append(data_table(transport_rows, [75*mm, 105*mm], styles, header=False))
-    if auto_t:
+    if _not_regulated:
+        story.append(Paragraph(_not_reg_text, styles['body']))
+        story.append(Spacer(1, 4))
+    else:
+        story.append(data_table(transport_rows, [75*mm, 105*mm], styles, header=False))
+    if not _not_regulated and auto_t:
         story.append(Paragraph(
             '* Taşımacılık sınıflandırması CLP tehlike sınıfına göre otomatik belirlenmiştir. Sevkiyat öncesi yetkili taşımacılık uzmanına danışınız.' if lang=='TR'
             else '* Transport classification determined automatically from CLP hazard class. Consult a transport specialist before shipment.',

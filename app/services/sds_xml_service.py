@@ -610,8 +610,11 @@ def generate_sds_xml(sds_data: dict) -> str:
     _transport_mode(b14, "IMDG_Deniz",   transport.get("sea", {}) or {})
     _transport_mode(b14, "IATA_Hava",    transport.get("air", {}) or {})
 
-    if transport.get("not_regulated"):
-        _sub(b14, "DuzenlenmemisEmtia", "Evet")
+    if transport.get("not_regulated") and not transport.get("un_no") and not transport.get("un_no"):
+        _sub(b14, "TehlikeliMaddeDeğil",
+             transport.get("note") or
+             "Bu ürün ADR/RID, IMDG ve IATA-DGR kapsamında tehlikeli madde olarak "
+             "sınıflandırılmamıştır. (CLP Annex I §14 — Kat. 2 tahriş tehlikeli madde eşiğini aşmaz)")
 
     # ── B15 Mevzuat ───────────────────────────────────────────────────────────
     b15 = _sub(root, "Bolum15_Mevzuat")

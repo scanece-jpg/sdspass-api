@@ -3892,6 +3892,8 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
         cutoffUsed[h4] = { source: p.cutoff_source, value: p.cutoff_value };
       }
     });
+    // Görüntüleme kodu clp.cutoffUsed'ı okur — yerel değişkeni nesneye yaz
+    if (clp) clp.cutoffUsed = cutoffUsed;
 
     // Fiziksel H kodları için gerekçe (parlama noktası / aspirasyon kaynağı)
     const physReasonMap = {};

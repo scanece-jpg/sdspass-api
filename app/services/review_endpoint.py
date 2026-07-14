@@ -20,11 +20,11 @@ _SYSTEM_PROMPT = """Sen KKDİK ve SEA yönetmelikleri uzmanı bir GBF/SDS denet�
 CLP Tüzüğü (EC 1272/2008), KKDİK, SEA, ADR ve ilgili ECHA kılavuzlarını tam olarak biliyorsun.
 
 Sana üç kaynak verilecek:
-  A) Denetlenecek SDS'in yapılandırılmış verisi (JSON) — PDF'deki gerçek değerler
+  A) Denetlenecek SDS'in 16 bölüm okunabilir metni — PDF'deki gerçek değerler
   B) İlgili mevzuat paragrafları (SEA, KKDİK, CLP, ADR) — ek bağlam olarak kullan
   C) Otomatik kural kontrolü sonuçları (V001-V027 kodlu bulgular)
 
-A kaynağı JSON formatındadır. Alanların anlamı:
+A kaynağı bölüm bölüm düz metin formatındadır. Bölümlerin içerdiği alanlar:
   product/supplier   → Bölüm 1 (kimlik ve tedarikçi)
   clp.all_h_codes    → Bölüm 2.1 (tam tehlike sınıflandırması)
   clp.h_codes        → Bölüm 2.2 etiket H kodları (dominance uygulanmış)
@@ -119,6 +119,16 @@ paragraflardan biriyle birebir eşleşmelidir. B kaynağında açıkça yer alma
 "ima eder", "mantıken gerektirir" veya "ruhuna aykırıdır" gerekçesiyle bulgu olarak yazma.
 Kural metnini okumadan bir madde numarası veya kota rakamı türetme.
 Verilmeyen bilgi → bulgu yok; verilmeyen bilgi → "kapsam dışı" notu.
+
+**6b. B3.2 ↔ B2.1 kategori farkı (SCL bant kaynaklı):**
+Konsantrasyon-bağımlı sınıflandırılan maddelerde (ör. formik asit, asetik asit, H2O2) B3.2 ve B2.1'deki
+alt-kategori (1A/1B) farklı olabilir — bu HATA DEĞİLDİR.
+Nedeni: B3.2'deki sınıflandırma maddenin kendi CLP Ek-VI/veritabanı sınıfıdır (saf madde olarak ne?).
+B2.1'deki sınıflandırma ise karışımın hesaplanmış sınıfıdır — SCL bantlarına göre bileşenin karışımdaki
+konsantrasyonuna karşılık gelen alt-kategori seçilir.
+Örnek: Formik asit saf madde olarak Skin Corr. 1A (≥%90), ama %15 konsantrasyonlu karışımda
+SCL bant kuralı gereği karışım B2.1'de Skin Corr. 1B çıkar. B3.2'de "1A", B2.1'de "1B" → DOĞRU.
+Bu tür farklılıkları "tutarsızlık" veya "hata" olarak raporlama. BULGU YOK.
 
 **6a. M-faktör bağlam kısıtlaması:**
 M-faktör (çarpım faktörü) YALNIZCA sucul ortam toksisitesi (H400 Akut Kat.1 / H410-H412 Kronik) sınıflandırmasında
@@ -486,13 +496,8 @@ async def sds_review(data: dict = Body(...)):
             "info":    sum(1 for i in issues if i["level"] == "info"),
         }
 
-        # ── 2. SDS verisi — PDF ile birebir aynı yapılandırılmış JSON ──────────
-        _raw_sds = full_sds_data if full_sds_data else sds_for_validator
-        sds_text = (
-            "=== SDS VERİSİ (JSON) ===\n"
-            + _json.dumps(_raw_sds, ensure_ascii=False, indent=2)
-            + "\n=== SDS VERİSİ SONU ==="
-        )
+        # ── 2. SDS verisi — okunabilir 16-bölüm metin (JSON yerine) ─────────────
+        sds_text = _build_sds_text(sds_for_validator, h_codes, phys_props, components)
 
         # ── 3. Mevzuat bağlamı ─────────────────────────────────────────────────
         kb_blocks = []
@@ -611,7 +616,7 @@ async def sds_review(data: dict = Body(...)):
         total_input  = 0
         total_output = 0
         report       = ""
-        MAX_ROUNDS   = 8
+        MAX_ROUNDS   = 4
 
         for _round in range(MAX_ROUNDS):
             resp = client.messages.create(

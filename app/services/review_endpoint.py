@@ -130,6 +130,17 @@ konsantrasyonuna karşılık gelen alt-kategori seçilir.
 SCL bant kuralı gereği karışım B2.1'de Skin Corr. 1B çıkar. B3.2'de "1A", B2.1'de "1B" → DOĞRU.
 Bu tür farklılıkları "tutarsızlık" veya "hata" olarak raporlama. BULGU YOK.
 
+**6c. B14 ADR — pH kullanılmaz, yalnızca nihai H kodu:**
+ADR/IMDG/IATA taşımacılık motoru karışımın pH değerine BAKMAZ; yalnızca B2.1'in ürettiği nihai H kodlarını girdi olarak kullanır.
+Bunun nedeni: ADR Sınıf 8 kriterleri CLP Cilt Aşındırıcılığı Kat.1 test metodolojisiyle örtüşür.
+B2.1 SCL-öncelikli mantıkla H314'ü zaten elemişse (sadece H315/H319 üretmişse), ADR motorunun pH'a bakıp
+Sınıf 8 ataması yapması ÇİFTE HESAPLAMA hatasıdır — CLP seviyesinde elenmiş korozifliği taşımacılıkta geri sokar.
+"Karışım pH'ı ≤2/≥11,5 ama ADR Sınıf 8 yok" gözlemi TEK BAŞINA hata değildir. Karar ağacı:
+  - B2.1'de H314 VAR → ADR'de Sınıf 8 yoksa → GERÇEK HATA, raporla.
+  - B2.1'de H314 YOK (yalnızca H315/H319) → ADR'de Sınıf 8 yoksa → DOĞRU DAVRANIŞ, bulgu yazma.
+Ayrıca: Projede ADR Tablo A'nın tam listesi yoksa, doğrulanamayan UN numarası (ör. "UN 1805 olmalı") kesinlikle UYDURMA.
+Doğrulanamayan UN numarası önerisi "doğrulanamadı" olarak işaretle, kesin bir numara türetme.
+
 **6a. M-faktör bağlam kısıtlaması:**
 M-faktör (çarpım faktörü) YALNIZCA sucul ortam toksisitesi (H400 Akut Kat.1 / H410-H412 Kronik) sınıflandırmasında
 karışım hesabına girer. Cilt aşındırıcılık (H314), göz hasarı (H318), akut toksisite (H300/H310/H330),

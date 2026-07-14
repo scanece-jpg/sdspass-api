@@ -7,6 +7,21 @@ veya **kullanıcı tarafından aksiyona ihtiyaç duyan** maddeleri takip eder.
 
 ## ADR Taşımacılık
 
+### ADR Sınıflandırmasında pH Kullanılmaz — Tasarım Kararı (KALICI)
+
+- **Kural:** ADR/IMDG/IATA motoru karışımın pH değerine BAKMAZ; yalnızca B2.1'in ürettiği nihai H kodlarını kullanır.
+- **Gerekçe:** ADR Sınıf 8 kriterleri CLP Cilt Aşındırıcılığı Kat.1 test metodolojisiyle örtüşür.
+  B2.1 SCL-öncelikli mantıkla H314'ü elimine etmişse (H315/H319 ürettiyse), ADR motorunun
+  pH'a bakıp Sınıf 8 ataması yapması çifte hesaplama hatasıdır.
+- **Karar ağacı (denetimde kullan):**
+  - B2.1'de H314 VAR → ADR Sınıf 8 yoksa → GERÇEK HATA
+  - B2.1'de H314 YOK (yalnızca H315/H319) → ADR Sınıf 8 yoksa → DOĞRU DAVRANIŞ, bulgu yazma
+- **Ek kural:** Projede ADR Tablo A tam listesi yoksa, doğrulanamayan UN numarası kesinlikle
+  üretilmemeli — "doğrulanamadı" olarak işaretlenmelidir.
+- **Durum:** ✅ Kalıcı tasarım kararı (sistem promptuna da eklendi — kural 6c)
+
+---
+
 ### UN3093 — Tünel Kodu (KAPATILDI)
 - **Sorun:** `adr_data.json`'da UN3093 PG I için tünel kodu `B/E` olarak girilmişti.
 - **Resmi kaynak:** ADR 2025 Tablo A (sds-knowledge/tr/adr-2025-cilt-i-vurgulu.pdf, sayfa 499)
@@ -68,6 +83,61 @@ veya **kullanıcı tarafından aksiyona ihtiyaç duyan** maddeleri takip eder.
 - **Sonuç:** Harmonize sınıflandırma listesinde olmayan maddeler için
   SEA/CLP index numarası yoktur. SDS'de bu alanın boş kalması **doğru ve mevzuata uygundur**.
 - **Durum:** ✅ Doğrulandı — sistem doğru davranıyor
+
+---
+
+## Render Ortamı — Madde Verisi Kalıcılığı (YÖNTEM BELİRLENDİ)
+
+### Sorun: Bileşen H Kodları Eski SDS'lerde Eksil
+
+- **Tespit tarihi:** 2026-06-28
+- **Etkilenen ürün:** DIPOL 209 — MgCl2 (7786-30-3) Bölüm 3.2'de sadece H318 görünüyordu.
+- **Beklenen:** H290, H302, H315, H318, H335 (PubChem + CLP deduplikasyon)
+
+### Kök Neden — Render Ephemeral Filesystem
+
+Render.com deploy ettiğinde sunucu diski git deposuna sıfırlanır.
+Çalışma sırasında yazılan dosyalar bir sonraki deploy'da silinir:
+
+| Dosya | Git'te? | Render deploy'da kalır mı? |
+|---|---|---|
+| `data/substances_custom.json` | ✅ commit'li | ✅ **Evet** |
+| `data/sea_ek6_tr.json` | ✅ commit'li | ✅ **Evet** |
+| `data/substance_db.json` (Annex VI) | ✅ commit'li | ✅ **Evet** |
+| `app/services/echa_cache.json` | ❌ gitignore | ❌ Hayır |
+| `data/pubchem_cl/7786-30-3.json` | ❌ sadece .gitkeep | ❌ Hayır |
+
+MgCl2 bir noktada `substances_custom.json`'a **sadece H318** ile eklenmişti.
+`substance_lookup` custom'u en yüksek öncelikli kaynak olarak gördüğünden
+PubChem'e gitmeyi bıraktı ve eksik veri kaldı.
+
+### Çözüm Yöntemi: substances_custom.json'a Commit
+
+**Kalıcı veri için tek güvenilir yol:** maddeyi doğru H kodlarıyla
+`data/substances_custom.json`'a ekleyip git'e commit etmek.
+
+Uygulanan değişiklikler (2026-06-28):
+1. MgCl2 (7786-30-3) doğru verilerle custom'a eklendi ve commit edildi
+   → H290, H302, H315, H318, H335
+2. `generate_pdf` endpoint'i (`_refresh_comp`) artık:
+   - Önce `substances_custom.json`'a bakar (git'te commit'li)
+   - Bulamazsa `lookup_echa_api` ile PubChem/ECHA'dan çeker
+   - Başarılı çekimde sonucu `substances_custom.json`'a da yazar
+3. Madde arama endpoint'i (`/api/v1/sds/substance/lookup`) de API
+   sonucunu `substances_custom.json`'a otomatik kaydediyor
+
+### Önemli Kısıt
+
+Render runtime'da `substances_custom.json`'a yazılan veriler
+**bir sonraki deploy'da git versiyonuna sıfırlanır.**
+Yeni bir madde kalıcı olsun isteniyorsa lokalde `substances_custom.json`'a
+eklenip commit + push yapılmalıdır.
+
+### Uzun Vadeli Alternatif
+
+Render PostgreSQL (ücretsiz tier) kullanılırsa madde verisi
+sunucu-bağımsız kalıcı veritabanında saklanır, deploy sıfırlamaz.
+Karar verildiğinde uygulanacak.
 
 ---
 

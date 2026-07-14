@@ -398,6 +398,106 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
                                 f"%{h371_cutoff} ≤ C < {cutoff}% → CLP Tablo 3.8.3 geçiş: STOT SE 2"
                             ),
                         })
+                elif h == 'H314':
+                    # ── Skin Corr. 1 → Skin Irrit. 2 / Eye Irrit. 2 cascade ─────────
+                    # CLP Annex VI çok-bantlı SCL: bileşenin H314 eşiği aşılmadıysa
+                    # sclRaw'daki H315/H319 bantlarına bak — asetik asit %10-25 bandı gibi.
+                    # SCL bandı yoksa GCL (Skin Irrit. 2 = %10) kullan.
+                    _H315_GCL = 10.0
+                    _H319_GCL = 10.0
+                    # H315
+                    if 'H315' not in seen_h:
+                        _h315_entry = _get_scl_entry_for_conc(scl_list, "H315", conc)
+                        if _h315_entry is not None:
+                            # SCL bandında: sclRaw'da açık H315 kaydı var
+                            _c315 = float(_h315_entry.get("c_min", _H315_GCL))
+                            seen_h.add('H315')
+                            passed.append({
+                                "h_class":       "Skin Irrit. 2",
+                                "h_code":        "H315",
+                                "conc":          conc,
+                                "reason":        (
+                                    f"{cas} %{conc:.1f} — Skin Corr. 1 SCL eşiği "
+                                    f"(%{cutoff}) altında ama H315 SCL bandında "
+                                    f"(%{_c315} ≤ C < %{cutoff}) → CLP Annex VI çok-bantlı cascade"
+                                ),
+                                "cutoff_source": "SCL",
+                                "cutoff_value":  _c315,
+                            })
+                        elif conc >= _H315_GCL:
+                            # SCL bandı yok ama GCL %10 üstünde — CLP Tablo 3.2.3 not b
+                            seen_h.add('H315')
+                            passed.append({
+                                "h_class":       "Skin Irrit. 2",
+                                "h_code":        "H315",
+                                "conc":          conc,
+                                "reason":        (
+                                    f"{cas} %{conc:.1f} — Skin Corr. 1 SCL eşiği "
+                                    f"(%{cutoff}) altında, H315 SCL yok, GCL %{_H315_GCL} ≥ eşik → H315"
+                                ),
+                                "cutoff_source": "GCL",
+                                "cutoff_value":  _H315_GCL,
+                            })
+                    # H319
+                    if 'H319' not in seen_h:
+                        _h319_entry = _get_scl_entry_for_conc(scl_list, "H319", conc)
+                        if _h319_entry is not None:
+                            _c319 = float(_h319_entry.get("c_min", _H319_GCL))
+                            seen_h.add('H319')
+                            passed.append({
+                                "h_class":       "Eye Irrit. 2",
+                                "h_code":        "H319",
+                                "conc":          conc,
+                                "reason":        (
+                                    f"{cas} %{conc:.1f} — Skin Corr. 1 SCL eşiği "
+                                    f"(%{cutoff}) altında ama H319 SCL bandında "
+                                    f"(%{_c319} ≤ C < %{cutoff}) → CLP Annex VI çok-bantlı cascade"
+                                ),
+                                "cutoff_source": "SCL",
+                                "cutoff_value":  _c319,
+                            })
+                    if 'H315' not in seen_h and 'H319' not in seen_h:
+                        warnings.append(
+                            f"{cas} ({h_class} %{conc:.1f}) → "
+                            f"cut-off %{cutoff} altı, H315/H319 cascade yok → dahil edilmedi"
+                        )
+                elif h == 'H318' and 'H319' not in seen_h:
+                    # ── Eye Dam. 1 → Eye Irrit. 2 cascade — CLP Tablo 3.3.3 ──────────
+                    _H319_GCL = 10.0
+                    _h319_entry = _get_scl_entry_for_conc(scl_list, "H319", conc)
+                    if _h319_entry is not None:
+                        _c319 = float(_h319_entry.get("c_min", _H319_GCL))
+                        seen_h.add('H319')
+                        passed.append({
+                            "h_class":       "Eye Irrit. 2",
+                            "h_code":        "H319",
+                            "conc":          conc,
+                            "reason":        (
+                                f"{cas} %{conc:.1f} — Eye Dam. 1 SCL eşiği "
+                                f"(%{cutoff}) altında ama H319 SCL bandında "
+                                f"(%{_c319} ≤ C < %{cutoff}) → CLP Annex VI çok-bantlı cascade"
+                            ),
+                            "cutoff_source": "SCL",
+                            "cutoff_value":  _c319,
+                        })
+                    elif conc >= _H319_GCL:
+                        seen_h.add('H319')
+                        passed.append({
+                            "h_class":       "Eye Irrit. 2",
+                            "h_code":        "H319",
+                            "conc":          conc,
+                            "reason":        (
+                                f"{cas} %{conc:.1f} — Eye Dam. 1 SCL eşiği "
+                                f"(%{cutoff}) altında, H319 SCL yok, GCL %{_H319_GCL} ≥ eşik → H319"
+                            ),
+                            "cutoff_source": "GCL",
+                            "cutoff_value":  _H319_GCL,
+                        })
+                    else:
+                        warnings.append(
+                            f"{cas} ({h_class} %{conc:.1f}) → "
+                            f"cut-off %{cutoff} altı, H319 cascade yok → dahil edilmedi"
+                        )
                 else:
                     warnings.append(
                         f"{cas} ({h_class} %{conc:.1f}) → "

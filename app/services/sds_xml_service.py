@@ -338,7 +338,8 @@ def generate_sds_xml(sds_data: dict) -> str:
     is_flammable    = bool(h_set & {"H224","H225","H226","H228"})
     acid_cas        = {"7664-93-9","7647-01-0","7697-37-2","7664-38-2","64-19-7"}
     base_cas        = {"1310-73-2","1310-58-3","1336-21-6","7664-41-7"}
-    is_acid = ("H314" in h_set or "H290" in h_set) and bool(comp_cas_set & acid_cas)
+    # Asit CAS'ı bileşende varsa H315 gibi alt seviye sınıf olsa bile asit olarak tanı
+    is_acid = bool(comp_cas_set & acid_cas)
     is_base = "H314" in h_set and bool(comp_cas_set & base_cas)
 
     _sub(b10, "Reaktivite", _safe(phys.get("reactivity")) or "Standart koşullarda reaktif değil.")
@@ -501,8 +502,7 @@ def generate_sds_xml(sds_data: dict) -> str:
             # Varsayılan — her alt başlık zorunlu, "veri yok" da olsa yer almalı
             _defaults = {
                 "12.1": "Sucul akut/kronik toksisite verisi mevcut değil.",
-                "12.2": "Asetik asit kolayca biyolojik olarak ayrışır (OECD 301B); "
-                        "solvent bileşenler için veri mevcut değil.",
+                "12.2": "Biyobozunurluk verisi mevcut değil; bileşenlerin büyük çoğunluğu biyolojik olarak ayrışabilir niteliktedir.",
                 "12.3": "log Kow < 3 olan bileşenler için biyobirikme potansiyeli düşük beklenir.",
                 "12.4": "Yüksek su çözünürlüklü bileşenler için toprak hareketliliği yüksek beklenir.",
                 "12.5": "Bileşenler PBT/vPvB kriterlerini karşılamamaktadır.",
@@ -563,7 +563,14 @@ def generate_sds_xml(sds_data: dict) -> str:
     # ── B13 Bertaraf ──────────────────────────────────────────────────────────
     b13   = _sub(root, "Bolum13_Bertaraf")
     waste = _safe(sds_data.get("waste_code") or prod.get("waste_code"))
-    _sub(b13, "AtikKodu", waste or "—")
+    if not waste:
+        # sds_data'da yoksa H kodlarından otomatik türet (pdf_sds_service ile aynı mantık)
+        try:
+            from app.services.tr_mevzuat_service import _ewc_code_bullet
+            waste = _ewc_code_bullet(all_h, lang="TR")
+        except Exception:
+            waste = "—"
+    _sub(b13, "AtikKodu", waste)
     _sub(b13, "BertarafYontemi",
          "Yetkili bertaraf kuruluşlarına teslim edin. "
          "Kanalizasyona veya doğal ortama dökmeyin. "

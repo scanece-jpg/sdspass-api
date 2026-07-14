@@ -116,13 +116,13 @@ async def generate_pdf(data: dict = Body(...)):
         )
         from app.services.echa_service import _dedupe_h_codes as _dedup, lookup_echa_api as _lu_echa
 
-        async def _refresh_comp(comp: dict) -> dict:
+        async def _refresh_comp(comp: dict, _prod_form: str = '') -> dict:
             cas = (comp.get('cas_no') or comp.get('cas') or '').strip()
             if not cas:
                 return comp
             try:
                 # 1. Yerel DB (SEA Ek-6, CLP Annex VI, substances_custom — git'te mevcut)
-                fresh = _lu_sub(cas)
+                fresh = _lu_sub(cas, form=_prod_form)
                 if fresh is not None:
                     # DB'de kayıt var — hazards boş olsa bile (sınıflandırılmamış madde: su, glikoz vb.)
                     # ECHA API'ye düşme; boş hazards kasıtlı "sınıflandırılmamış" anlamına gelir.
@@ -180,7 +180,8 @@ async def generate_pdf(data: dict = Body(...)):
                 pass
             return comp
 
-        components = list(await _aio.gather(*[_refresh_comp(c) for c in components]))
+        _prod_form_for_refresh = data.get('form', product.get('form', 'liquid'))
+        components = list(await _aio.gather(*[_refresh_comp(c, _prod_form=_prod_form_for_refresh) for c in components]))
         # H360x/H361x sub-kodlarını kanonik büyük harfe normalize et (H361d→H361D, H360Df→H360FD)
         def _norm_sub(h: str) -> str:
             s = str(h).replace('*', '').strip()

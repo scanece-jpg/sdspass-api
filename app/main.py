@@ -1334,7 +1334,7 @@ async def clp_calculate(body: dict):
     components  = body.get("components", [])
     lang        = body.get("lang", "TR")
     mixture_ph  = body.get("mixture_ph", None)   # Karışım pH değeri (opsiyonel)
-    mixture_form = body.get("form", "")
+    mixture_form = body.get("form") or "liquid"
 
     try:
         # 1. Ana CLP (cut-off tablosu) — pH uç değer varsa doğrudan H314+H318 atanır

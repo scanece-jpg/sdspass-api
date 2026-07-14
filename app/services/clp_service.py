@@ -112,7 +112,7 @@ CLP_CUTOFFS_DICT = {
     # 3.8 STOT SE
     "STOT SE 1": {"h":"H370","cutoff":10.0,"signal":"Danger"},
     "STOT SE 2": {"h":"H371","cutoff":10.0,"signal":"Warning"},
-    "STOT SE 3": {"h":"H336","cutoff":20.0,"signal":"Warning"},  # narkotik/solunum tahrişi
+    "STOT SE 3": {"h":"H336","cutoff":20.0,"signal":"Warning"},  # varsayılan narkotik; H335 ayrıca _H_CODE_FALLBACK'te
     # 3.9 STOT RE — hedef organ servisi ayrı (stot_re_service)
     "STOT RE 1": {"h":"H372","cutoff":1.0, "signal":"Danger"},
     "STOT RE 2": {"h":"H373","cutoff":10.0,"signal":"Warning"},
@@ -203,6 +203,9 @@ _H_CODE_FALLBACK: dict = {
     'H304': {"h": "H304", "cutoff": 10.0, "signal": "Danger"},
     'H370': {"h": "H370", "cutoff": 10.0, "signal": "Danger"},
     'H371': {"h": "H371", "cutoff": 10.0, "signal": "Warning"},
+    # STOT SE 3 etki ayrımı: H335=solunum tahrişi, H336=narkotik — CLP §3.8.3.4.5
+    'H335': {"h": "H335", "cutoff": 20.0, "signal": "Warning"},
+    'H336': {"h": "H336", "cutoff": 20.0, "signal": "Warning"},
 }
 
 
@@ -415,6 +418,12 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
 
             cutoff = rule["cutoff"]
             h = rule["h"]
+
+            # STOT SE 3 etki ayrımı — CLP §3.8.3.4.5:
+            # H335 (solunum tahrişi) ve H336 (narkotik) aynı kategoride farklı etkilerdir.
+            # CLP_CUTOFFS_DICT varsayılanı H336; bileşen H335 veriyorsa karışıma H335 yazılır.
+            if h_class == "STOT SE 3" and h_code == "H335":
+                h = "H335"
 
             # SCL override — SEA Ek-6 / CLP Annex VI maddeye özel sınır GCL'nin YERİNE GEÇİCEKTİR.
             # Mevzuat: SEA Ek-I §1.2.1.3 / CLP 1272/2008 Art.10(3):

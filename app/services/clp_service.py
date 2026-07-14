@@ -233,6 +233,54 @@ def _get_scl_cutoff(comp: dict, h_class: str, h_code4: str) -> float | None:
     return min(matched_mins) if matched_mins else None
 
 
+_TR_HCLASS = {
+    "Skin Corr. 1":  "Deri Korozyon 1",
+    "Skin Corr. 1A": "Deri Korozyon 1A",
+    "Skin Corr. 1B": "Deri Korozyon 1B",
+    "Skin Corr. 1C": "Deri Korozyon 1C",
+    "Skin Irrit. 2": "Deri Tahriş 2",
+    "Eye Dam. 1":    "Göz Hasarı 1",
+    "Eye Irrit. 2":  "Göz Tahriş 2",
+}
+
+
+def _cascade_reason(cas: str, conc: float, scl_list: list,
+                    parent_h4: str, triggered_code: str, triggered_c_min: float,
+                    triggered_cutoff: float, gcl_fallback: bool = False) -> str:
+    """
+    H314→H315/H319 ve H318→H319 cascade için tam denetim izi metni.
+    Tüm üst sınıf eşiklerini (1A/1B/1C) sırayla listeler, her birinin
+    sonucunu (elendi / TETİKLENDİ) gösterir.
+    """
+    steps = []
+    # Üst sınıf (H314 veya H318) alt-eşiklerini yüksekten düşüğe sırala
+    parent_bands = sorted(
+        [s for s in scl_list
+         if s.get("h_code", "").replace("*", "").strip()[:4] == parent_h4
+         and s.get("c_min") is not None],
+        key=lambda s: float(s["c_min"]),
+        reverse=True,
+    )
+    for band in parent_bands:
+        tr = _TR_HCLASS.get(band.get("h_class", ""), band.get("h_class", ""))
+        cmin = float(band["c_min"])
+        steps.append(f"{tr} (C≥%{cmin:.0f}): %{conc:.1f} < %{cmin:.0f} → elendi")
+
+    tr_out = "Deri Tahriş 2" if triggered_code == "H315" else "Göz Tahriş 2"
+    if gcl_fallback:
+        steps.append(
+            f"SKS bandı yok; {tr_out} GCL (C≥%{triggered_c_min:.0f}): "
+            f"%{conc:.1f} ≥ %{triggered_c_min:.0f} → TETİKLENDİ"
+        )
+    else:
+        steps.append(
+            f"{tr_out} ({triggered_code}) SKS bandı "
+            f"(%{triggered_c_min:.0f}≤C<%{triggered_cutoff:.0f}): "
+            f"%{conc:.1f} bu aralıkta → TETİKLENDİ"
+        )
+    return f"{cas} %{conc:.1f} — CLP Ek-VI SKS: " + " | ".join(steps)
+
+
 def _get_scl_entry_for_conc(scl_list: list, h_code4: str, conc: float) -> dict | None:
     """
     Konsantrasyona göre uygun SCL entry'sini bul — h_class override için.
@@ -409,33 +457,29 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
                     if 'H315' not in seen_h:
                         _h315_entry = _get_scl_entry_for_conc(scl_list, "H315", conc)
                         if _h315_entry is not None:
-                            # SCL bandında: sclRaw'da açık H315 kaydı var
                             _c315 = float(_h315_entry.get("c_min", _H315_GCL))
                             seen_h.add('H315')
                             passed.append({
-                                "h_class":       "Skin Irrit. 2",
+                                "h_class":       "Deri Tahriş 2",
                                 "h_code":        "H315",
                                 "conc":          conc,
-                                "reason":        (
-                                    f"{cas} %{conc:.1f} — Skin Corr. 1 SCL eşiği "
-                                    f"(%{cutoff}) altında ama H315 SCL bandında "
-                                    f"(%{_c315} ≤ C < %{cutoff}) → CLP Annex VI çok-bantlı cascade"
+                                "reason":        _cascade_reason(
+                                    cas, conc, scl_list, "H314", "H315", _c315, cutoff
                                 ),
-                                "cutoff_source": "SCL",
+                                "cutoff_source": "SKS",
                                 "cutoff_value":  _c315,
                             })
                         elif conc >= _H315_GCL:
-                            # SCL bandı yok ama GCL %10 üstünde — CLP Tablo 3.2.3 not b
                             seen_h.add('H315')
                             passed.append({
-                                "h_class":       "Skin Irrit. 2",
+                                "h_class":       "Deri Tahriş 2",
                                 "h_code":        "H315",
                                 "conc":          conc,
-                                "reason":        (
-                                    f"{cas} %{conc:.1f} — Skin Corr. 1 SCL eşiği "
-                                    f"(%{cutoff}) altında, H315 SCL yok, GCL %{_H315_GCL} ≥ eşik → H315"
+                                "reason":        _cascade_reason(
+                                    cas, conc, scl_list, "H314", "H315", _H315_GCL, cutoff,
+                                    gcl_fallback=True
                                 ),
-                                "cutoff_source": "GCL",
+                                "cutoff_source": "GKS",
                                 "cutoff_value":  _H315_GCL,
                             })
                     # H319
@@ -445,15 +489,13 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
                             _c319 = float(_h319_entry.get("c_min", _H319_GCL))
                             seen_h.add('H319')
                             passed.append({
-                                "h_class":       "Eye Irrit. 2",
+                                "h_class":       "Göz Tahriş 2",
                                 "h_code":        "H319",
                                 "conc":          conc,
-                                "reason":        (
-                                    f"{cas} %{conc:.1f} — Skin Corr. 1 SCL eşiği "
-                                    f"(%{cutoff}) altında ama H319 SCL bandında "
-                                    f"(%{_c319} ≤ C < %{cutoff}) → CLP Annex VI çok-bantlı cascade"
+                                "reason":        _cascade_reason(
+                                    cas, conc, scl_list, "H314", "H319", _c319, cutoff
                                 ),
-                                "cutoff_source": "SCL",
+                                "cutoff_source": "SKS",
                                 "cutoff_value":  _c319,
                             })
                     if 'H315' not in seen_h and 'H319' not in seen_h:
@@ -469,28 +511,26 @@ def classify_mixture_clp(components: list, mixture_ph: float = None) -> dict:
                         _c319 = float(_h319_entry.get("c_min", _H319_GCL))
                         seen_h.add('H319')
                         passed.append({
-                            "h_class":       "Eye Irrit. 2",
+                            "h_class":       "Göz Tahriş 2",
                             "h_code":        "H319",
                             "conc":          conc,
-                            "reason":        (
-                                f"{cas} %{conc:.1f} — Eye Dam. 1 SCL eşiği "
-                                f"(%{cutoff}) altında ama H319 SCL bandında "
-                                f"(%{_c319} ≤ C < %{cutoff}) → CLP Annex VI çok-bantlı cascade"
+                            "reason":        _cascade_reason(
+                                cas, conc, scl_list, "H318", "H319", _c319, cutoff
                             ),
-                            "cutoff_source": "SCL",
+                            "cutoff_source": "SKS",
                             "cutoff_value":  _c319,
                         })
                     elif conc >= _H319_GCL:
                         seen_h.add('H319')
                         passed.append({
-                            "h_class":       "Eye Irrit. 2",
+                            "h_class":       "Göz Tahriş 2",
                             "h_code":        "H319",
                             "conc":          conc,
-                            "reason":        (
-                                f"{cas} %{conc:.1f} — Eye Dam. 1 SCL eşiği "
-                                f"(%{cutoff}) altında, H319 SCL yok, GCL %{_H319_GCL} ≥ eşik → H319"
+                            "reason":        _cascade_reason(
+                                cas, conc, scl_list, "H318", "H319", _H319_GCL, cutoff,
+                                gcl_fallback=True
                             ),
-                            "cutoff_source": "GCL",
+                            "cutoff_source": "GKS",
                             "cutoff_value":  _H319_GCL,
                         })
                     else:

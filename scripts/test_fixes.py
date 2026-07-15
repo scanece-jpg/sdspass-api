@@ -97,7 +97,7 @@ for ate_val, expected_cat, expected_h in cases_vapor:
 # --- STOT RE testi ---
 print()
 print('=== STOT RE siniflandirma ===')
-from app.services.stot_re_service import calculate_stot_re
+from app.services.stot_engine import calculate as calculate_stot_re
 
 stot_cases = [
     # cat1_sum, cat2_sum, expected_h

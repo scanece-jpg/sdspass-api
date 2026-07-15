@@ -10,6 +10,53 @@ Kaynak: CLP Ek-1 §3.9, Tablo 3.9.4
 
 from typing import List, Dict
 
+# ─── SABİTLER (stot_re_service'den taşındı) ──────────────────────────────────
+
+GENERAL_ORGAN = 'Genel (organ belirsiz)'  # Organ belirtilmemiş sentinel
+
+ORGAN_ALIASES = {
+    'blood system': 'blood',
+    'haematopoietic system': 'blood',
+    'haematopoietic': 'blood',
+    'cns': 'nervous system',
+    'central nervous system': 'nervous system',
+    'peripheral nervous system': 'nervous system',
+    'kidney': 'kidneys',
+    'renal': 'kidneys',
+    'hepatic': 'liver',
+    'lung': 'lungs',
+    'respiratory tract': 'respiratory tract',
+    'respiratory system': 'respiratory system',
+    'eye': 'eyes',
+    'gi tract': 'gastro-intestinal tract',
+    'gastrointestinal tract': 'gastro-intestinal tract',
+    'gi': 'gastro-intestinal tract',
+    'bone marrow': 'bone',
+    'thymus': 'immune system',
+    'spleen': 'immune system',
+}
+
+ORGAN_TR = {
+    'blood':                    'kan',
+    'nervous system':           'sinir sistemi',
+    'kidneys':                  'böbrekler',
+    'liver':                    'karaciğer',
+    'lungs':                    'akciğerler',
+    'respiratory tract':        'solunum yolu',
+    'respiratory system':       'solunum sistemi',
+    'eyes':                     'gözler',
+    'gastro-intestinal tract':  'gastrointestinal sistem',
+    'skin':                     'cilt',
+    'thyroid':                  'tiroid bezi',
+    'bone':                     'kemik iliği',
+    'immune system':            'bağışıklık sistemi',
+    'cardiovascular system':    'kardiyovasküler sistem',
+    'heart':                    'kalp',
+    'teeth':                    'diş',
+    'upper respiratory tract':  'üst solunum yolu',
+    'nervous system, eyes':     'sinir sistemi ve gözler',
+}
+
 _ORGAN_MAP = {
     'upper respiratory': 'üst solunum yolu',
     'respiratory':       'solunum sistemi',
@@ -64,10 +111,10 @@ def _get_scl_cmin(comp: dict, h_code4: str) -> float | None:
 def _scl_update(scl_organ: Dict, org: str, trig_h: str, reason: str) -> None:
     """SCL organ takibini güncelle — H372 > H373 önceliği."""
     if org not in scl_organ:
-        scl_organ[org] = {'h': trig_h, 'reasons': [reason]}
+        scl_organ[org] = {'h_code': trig_h, 'reasons': [reason]}
     else:
-        if trig_h == 'H372' and scl_organ[org]['h'] == 'H373':
-            scl_organ[org]['h'] = 'H372'
+        if trig_h == 'H372' and scl_organ[org]['h_code'] == 'H373':
+            scl_organ[org]['h_code'] = 'H372'
         scl_organ[org]['reasons'].append(reason)
 
 
@@ -151,7 +198,7 @@ def calculate(comps: List[Dict]) -> Dict:
     for org, sums in organ_sums.items():
         if sums['cat1'] >= 10.0:
             results.append({
-                'h': 'H372', 'h_class': 'STOT RE 1', 'organ': org, 'signal': 'Danger',
+                'h_code': 'H372', 'h_class': 'STOT RE 1', 'organ': org, 'signal': 'Danger',
                 'reason': f"{org}: STOT RE 1 toplamı %{sums['cat1']:.1f} ≥ %10.0 (KKDİK Ek-2, Tablo 3.9.4)",
             })
         elif sums['cat1'] >= 1.0 or sums['cat2'] >= 10.0:
@@ -161,28 +208,28 @@ def calculate(comps: List[Dict]) -> Dict:
             if sums['cat2'] >= 10.0:
                 parts.append(f"STOT RE 2 toplamı %{sums['cat2']:.1f} ≥ %10.0")
             results.append({
-                'h': 'H373', 'h_class': 'STOT RE 2', 'organ': org, 'signal': 'Warning',
+                'h_code': 'H373', 'h_class': 'STOT RE 2', 'organ': org, 'signal': 'Warning',
                 'reason': f"{org}: {'; '.join(parts)} (KKDİK Ek-2, Tablo 3.9.4)",
             })
 
     # SCL sonuçlarını ekle veya mevcut generic sonuçla birleştir
     generic_by_organ = {r['organ']: r for r in results}
     for org, sd in scl_organ.items():
-        trig_h    = sd['h']
+        trig_h    = sd['h_code']
         scl_rsn   = f"{org}: {'; '.join(sd['reasons'])} (CLP Art.10(3), Tablo 3.9.4)"
         if org not in generic_by_organ:
             results.append({
-                'h': trig_h,
+                'h_code': trig_h,
                 'h_class': 'STOT RE 1' if trig_h == 'H372' else 'STOT RE 2',
                 'organ': org,
                 'signal': 'Danger' if trig_h == 'H372' else 'Warning',
                 'reason': scl_rsn,
                 'scl_based': True,
             })
-        elif trig_h == 'H372' and generic_by_organ[org]['h'] == 'H373':
+        elif trig_h == 'H372' and generic_by_organ[org]['h_code'] == 'H373':
             # SCL H372 generic H373'ü geçersiz kılar
             r = generic_by_organ[org]
-            r['h']        = 'H372'
+            r['h_code']   = 'H372'
             r['h_class']  = 'STOT RE 1'
             r['signal']   = 'Danger'
             r['reason']  += f'; + SCL: {scl_rsn}'
@@ -194,7 +241,7 @@ def calculate(comps: List[Dict]) -> Dict:
         c2 = sums['cat2'] - general_cat2
         if c1 >= 10.0:
             analytic_results.append({
-                'h': 'H372', 'h_class': 'STOT RE 1', 'organ': org, 'signal': 'Danger',
+                'h_code': 'H372', 'h_class': 'STOT RE 1', 'organ': org, 'signal': 'Danger',
                 'reason': f"{org}: Eşleşen Cat1=%{c1:.1f} ≥ %10.0",
                 'general_excl': general_cat1,
             })
@@ -205,16 +252,16 @@ def calculate(comps: List[Dict]) -> Dict:
             if c2 >= 10.0:
                 parts.append(f"Eşleşen Cat2=%{c2:.1f} ≥ %10.0")
             analytic_results.append({
-                'h': 'H373', 'h_class': 'STOT RE 2', 'organ': org, 'signal': 'Warning',
+                'h_code': 'H373', 'h_class': 'STOT RE 2', 'organ': org, 'signal': 'Warning',
                 'reason': f"{org}: {'; '.join(parts)}",
                 'general_excl': general_cat1,
             })
 
     # SCL sonuçları analitik listede de yer alır
     for org, sd in scl_organ.items():
-        trig_h = sd['h']
+        trig_h = sd['h_code']
         analytic_results.append({
-            'h': trig_h,
+            'h_code': trig_h,
             'h_class': 'STOT RE 1' if trig_h == 'H372' else 'STOT RE 2',
             'organ': org,
             'signal': 'Danger' if trig_h == 'H372' else 'Warning',
@@ -226,7 +273,7 @@ def calculate(comps: List[Dict]) -> Dict:
     if not organ_sums:
         if general_cat1 >= 10.0:
             results.append({
-                'h': 'H372', 'h_class': 'STOT RE 1', 'organ': 'Genel (organ belirsiz)',
+                'h_code': 'H372', 'h_class': 'STOT RE 1', 'organ': GENERAL_ORGAN,
                 'signal': 'Danger',
                 'reason': f'Genel: Cat1=%{general_cat1:.1f} ≥ %10.0 (Tablo 3.9.4)',
             })
@@ -237,12 +284,12 @@ def calculate(comps: List[Dict]) -> Dict:
             if general_cat2 >= 10.0:
                 parts.append(f"Cat2=%{general_cat2:.1f} ≥ %10.0")
             results.append({
-                'h': 'H373', 'h_class': 'STOT RE 2', 'organ': 'Genel (organ belirsiz)',
+                'h_code': 'H373', 'h_class': 'STOT RE 2', 'organ': GENERAL_ORGAN,
                 'signal': 'Warning',
                 'reason': f"Genel: {'; '.join(parts)} (Tablo 3.9.4)",
             })
 
-    h_codes = list({r['h'] for r in results})
+    h_codes = list({r['h_code'] for r in results})
 
     return {
         'results':          results,

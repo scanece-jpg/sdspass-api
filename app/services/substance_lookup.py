@@ -1,13 +1,18 @@
 """
 Substance Lookup Service
 ========================
-Arama Hiyerarşisi:
-  Sıra 1 — data/sea_ek6_tr.json      SEA Ek-6 (TR kanunu, mutlak öncelik)
-            + ECHA ATP22'den eksik tehlike sınıfları merge edilir
-  Sıra 2 — data/substance_db.json    ECHA ATP22 (EN, harmonize sınıflandırma)
-  Sıra 3 — data/echa_cl/             ECHA C&L API önbelleği
-  Sıra 4 — data/pubchem_cl/          PubChem önbelleği
-  Sıra 5 — substances_custom.json    Tedarikçi/kullanıcı girişi
+Üç Katmanlı Arama Hiyerarşisi — listeler birbirine GIRMEZ:
+
+  Katman 1 — data/sea_ek6_tr.json      SEA Ek-6 TR (yasal zemin, mutlak öncelik)
+               kaynak: 'SEA_EK6_TR'
+  Katman 2 — data/substance_db.json    CLP Annex VI / ECHA ATP22
+               kaynak: 'CLP_ANNEX_VI_ATP22'  |  tr_yasal_onay_durumu: 'doğrulanmadı'
+  Katman 3 — data/echa_cl/ / pubchem_cl/   ECHA C&L API / PubChem önbelleği
+               kaynak: 'ECHA_API'           |  tr_yasal_onay_durumu: 'doğrulanmadı'
+  +Custom  — substances_custom.json    Tedarikçi/kullanıcı girişi
+
+Her katman içinde arama sırası: CAS → EC No → Index No
+Not B maddeleri (CAS boş): EC No ile yakalanır.
 
 Yardımcı veriler:
   data/substance_names.json          CAS → {en, tr} çok dilli isimler
@@ -24,11 +29,17 @@ _DB_PATH       = os.path.join(_BASE, 'substance_db.json')    # ECHA ATP22 (EN)
 _NAMES_PATH    = os.path.join(_BASE, 'substance_names.json')  # CAS → {en, tr, ...}
 _SEA_EK6_PATH  = os.path.join(_BASE, 'sea_ek6_tr.json')      # SEA Ek-6 (TR, Sıra 1)
 
-_CUSTOM_DB:    Optional[Dict] = None
-_OEL_DB:       Optional[Dict] = None
-_SUBSTANCE_DB: Optional[Dict] = None
-_NAMES_DB:     Optional[Dict] = None
-_SEA_EK6_DB:   Optional[Dict] = None
+_CUSTOM_DB:       Optional[Dict] = None
+_OEL_DB:          Optional[Dict] = None
+_SUBSTANCE_DB:    Optional[Dict] = None
+_NAMES_DB:        Optional[Dict] = None
+_SEA_EK6_DB:      Optional[Dict] = None
+_SEA_EK6_BY_EC:   Optional[Dict] = None  # EC No → CAS ters indeksi
+_SEA_EK6_BY_IDX:  Optional[Dict] = None  # Index No → CAS ters indeksi
+_TR_NAME_BY_EC:   Optional[Dict] = None  # EC No → Türkçe ad (Katman 2/3 tamamlama)
+_TR_NAME_BY_IDX:  Optional[Dict] = None  # Index No → Türkçe ad (Katman 2/3 tamamlama)
+_DB_BY_EC:        Optional[Dict] = None  # EC No → CAS ters indeksi (substance_db)
+_DB_BY_IDX:       Optional[Dict] = None  # Index No → CAS ters indeksi (substance_db)
 _lock = threading.Lock()
 
 # ---------------------------------------------------------------------------
@@ -324,10 +335,12 @@ def _cl_to_legacy(entry: dict, priority: int, source_label: str) -> dict:
             }
             for s in cl.get('scl_limits', [])
         ],
-        'sea_ek6'        : priority == 1,
-        'annex_vi'       : priority <= 2,
-        'source'         : source_label,
-        'source_priority': priority,
+        'sea_ek6'              : priority == 1,
+        'annex_vi'             : priority <= 2,
+        'source'               : source_label,
+        'source_priority'      : priority,
+        'kaynak'               : 'ECHA_API',
+        'tr_yasal_onay_durumu' : 'doğrulanmadı',
     }
 
 
@@ -336,7 +349,7 @@ def _cl_to_legacy(entry: dict, priority: int, source_label: str) -> dict:
 # ---------------------------------------------------------------------------
 
 def _load_sea_ek6() -> Dict:
-    global _SEA_EK6_DB
+    global _SEA_EK6_DB, _SEA_EK6_BY_EC, _SEA_EK6_BY_IDX, _TR_NAME_BY_EC, _TR_NAME_BY_IDX
     if _SEA_EK6_DB is None:
         with _lock:
             if _SEA_EK6_DB is None:
@@ -345,19 +358,76 @@ def _load_sea_ek6() -> Dict:
                         _SEA_EK6_DB = json.load(f)
                 except Exception:
                     _SEA_EK6_DB = {}
+                by_ec: Dict = {}
+                by_idx: Dict = {}
+                tr_by_ec: Dict = {}
+                tr_by_idx: Dict = {}
+                for cas_key, entry in _SEA_EK6_DB.items():
+                    if '_alias' in entry:
+                        continue
+                    ec  = entry.get('ec_no', '').strip()
+                    idx = entry.get('index_no', '').strip()
+                    tr_name = (entry.get('names') or [''])[0]
+                    if ec:
+                        if ec not in by_ec:
+                            by_ec[ec] = cas_key
+                        if ec not in tr_by_ec and tr_name:
+                            tr_by_ec[ec] = tr_name
+                    if idx:
+                        if idx not in by_idx:
+                            by_idx[idx] = cas_key
+                        if idx not in tr_by_idx and tr_name:
+                            tr_by_idx[idx] = tr_name
+                _SEA_EK6_BY_EC  = by_ec
+                _SEA_EK6_BY_IDX = by_idx
+                _TR_NAME_BY_EC  = tr_by_ec
+                _TR_NAME_BY_IDX = tr_by_idx
     return _SEA_EK6_DB
 
 
-def _sea_ek6_lookup(cas: str) -> Optional[dict]:
+def _fill_tr_name(result: dict) -> dict:
+    """Katman 2/3 sonucunda name_tr boşsa SEA Ek-6 sözlüğünden tamamla."""
+    if result.get('name_tr'):
+        return result
+    _load_sea_ek6()  # indeksler yüklü olsun
+    ec  = result.get('ec_no', '').strip()
+    idx = result.get('index_no', '').strip()
+    tr  = ''
+    if ec and _TR_NAME_BY_EC:
+        tr = _TR_NAME_BY_EC.get(ec, '')
+    if not tr and idx and _TR_NAME_BY_IDX:
+        tr = _TR_NAME_BY_IDX.get(idx, '')
+    if tr:
+        result['name_tr'] = tr
+    return result
+
+
+def _sea_ek6_lookup(cas: str = '', ec_no: str = '', index_no: str = '') -> Optional[dict]:
+    """SEA Ek-6'da CAS, EC No veya Index No ile ara (öncelik sırası: CAS > EC No > Index No)."""
     db = _load_sea_ek6()
-    entry = db.get(cas)
-    if entry is None:
-        return None
-    if '_alias' in entry:
-        entry = db.get(entry['_alias'])
-    if entry is None or '_alias' in entry:
-        return None
-    return entry
+    # CAS ile ara
+    if cas:
+        entry = db.get(cas)
+        if entry is not None:
+            if '_alias' in entry:
+                entry = db.get(entry['_alias'])
+            if entry and '_alias' not in entry:
+                return entry
+    # EC No ile ara
+    if ec_no and _SEA_EK6_BY_EC:
+        cas_key = _SEA_EK6_BY_EC.get(ec_no.strip())
+        if cas_key:
+            entry = db.get(cas_key)
+            if entry and '_alias' not in entry:
+                return entry
+    # Index No ile ara
+    if index_no and _SEA_EK6_BY_IDX:
+        cas_key = _SEA_EK6_BY_IDX.get(index_no.strip())
+        if cas_key:
+            entry = db.get(cas_key)
+            if entry and '_alias' not in entry:
+                return entry
+    return None
 
 
 def _sea_ek6_to_legacy(entry: dict) -> dict:
@@ -395,6 +465,7 @@ def _sea_ek6_to_legacy(entry: dict) -> dict:
         'annex_vi'       : False,
         'source'         : 'SEA Ek-6 (TR)',
         'source_priority': 1,
+        'kaynak'         : 'SEA_EK6_TR',
     }
 
 
@@ -417,7 +488,7 @@ def get_name(cas: str, lang: str = 'en') -> Optional[str]:
 
 
 def _load_substance_db() -> Dict:
-    global _SUBSTANCE_DB
+    global _SUBSTANCE_DB, _DB_BY_EC, _DB_BY_IDX
     if _SUBSTANCE_DB is None:
         with _lock:
             if _SUBSTANCE_DB is None:
@@ -426,6 +497,22 @@ def _load_substance_db() -> Dict:
                         _SUBSTANCE_DB = json.load(f)
                 except Exception:
                     _SUBSTANCE_DB = {}
+                by_ec: Dict = {}
+                by_idx: Dict = {}
+                for cas_key, entry in _SUBSTANCE_DB.items():
+                    if '_alias' in entry:
+                        continue
+                    # ec_no_list varsa tüm EC No'ları indeksle
+                    ec_list = entry.get('ec_no_list') or ([entry['ec_no']] if entry.get('ec_no') else [])
+                    for ec in ec_list:
+                        ec = ec.strip()
+                        if ec and ec not in by_ec:
+                            by_ec[ec] = cas_key
+                    idx = entry.get('index_no', '').strip()
+                    if idx and idx not in by_idx:
+                        by_idx[idx] = cas_key
+                _DB_BY_EC  = by_ec
+                _DB_BY_IDX = by_idx
     return _SUBSTANCE_DB
 
 
@@ -480,24 +567,41 @@ def _db_to_legacy(entry: dict) -> dict:
         'suppl_hazards'  : entry.get('euh_codes', []),
         'm_factors'      : entry.get('m_factors', {}),
         'scl'            : [_scl_op_to_cmin_cmax(s) for s in entry.get('scl_limits', [])],
-        'sea_ek6'        : False,
-        'annex_vi'       : True,
-        'source'         : f'ECHA ATP22 ({entry.get("atp","?")})',
-        'source_priority': 2,
+        'sea_ek6'              : False,
+        'annex_vi'             : True,
+        'source'               : f'ECHA ATP22 ({entry.get("atp","?")})',
+        'source_priority'      : 2,
+        'kaynak'               : 'CLP_ANNEX_VI_ATP22',
+        'tr_yasal_onay_durumu' : 'doğrulanmadı',
     }
 
 
-def _db_lookup(cas: str) -> Optional[dict]:
-    """substance_db.json'dan CAS veya alias ile ara."""
+def _db_lookup(cas: str = '', ec_no: str = '', index_no: str = '') -> Optional[dict]:
+    """substance_db.json'dan CAS, EC No veya Index No ile ara."""
     db = _load_substance_db()
-    entry = db.get(cas)
-    if entry is None:
-        return None
-    if '_alias' in entry:
-        entry = db.get(entry['_alias'])
-    if entry is None or '_alias' in entry:
-        return None
-    return entry
+    # CAS ile ara
+    if cas:
+        entry = db.get(cas)
+        if entry is not None:
+            if '_alias' in entry:
+                entry = db.get(entry['_alias'])
+            if entry and '_alias' not in entry:
+                return entry
+    # EC No ile ara
+    if ec_no and _DB_BY_EC:
+        cas_key = _DB_BY_EC.get(ec_no.strip())
+        if cas_key:
+            entry = db.get(cas_key)
+            if entry and '_alias' not in entry:
+                return entry
+    # Index No ile ara
+    if index_no and _DB_BY_IDX:
+        cas_key = _DB_BY_IDX.get(index_no.strip())
+        if cas_key:
+            entry = db.get(cas_key)
+            if entry and '_alias' not in entry:
+                return entry
+    return None
 
 
 def _load_custom() -> Dict:
@@ -556,69 +660,52 @@ def _is_liquid(form: str) -> bool:
     return any(kw in f for kw in _LIQUID_FORM_KEYWORDS)
 
 
-def lookup_substance(cas: str, form: str = '') -> Optional[Dict]:
+def lookup_substance(cas: str, form: str = '',
+                     ec_no: str = '', index_no: str = '') -> Optional[Dict]:
     """
-    CAS numarasına göre madde bilgisi döndür.
+    Madde bilgisi döndür. Üç katmanlı arama — listeler birbirine GIRMEZ.
 
-    form: ürün fiziksel formu ('liquid','sıvı','solution' vb.)
-          Not B maddeleri için sıvı formda AQ (sulu) kaydı tercih edilir.
+    Katman 1 — SEA Ek-6 TR (yasal zemin, mutlak öncelik)
+    Katman 2 — CLP Annex VI / substance_db (ECHA ATP22)
+    Katman 3 — ECHA C&L API önbelleği / PubChem önbelleği
 
-    Hiyerarşi:
-      1. data/cl/       — TR SEA Ek-6 (yasal zemin, mutlak)
-      2. data/annex6/   — CLP Annex VI statik arşiv (bilimsel rehber)
-         → Merge: TR Ek-6 + Annex VI varsa, TR Ek-6 temel; Annex VI eksik sınıfları ek
-      3. data/echa_cl/  — ECHA C&L API önbelleği (önceki canlı çekimler)
-      4. data/pubchem_cl/ — PubChem önbelleği (önceki canlı çekimler)
-      [5-7: canlı API çekimleri main.py'de yapılır ve buraya kaydedilir]
+    Her katman içinde arama sırası: CAS → EC No → Index No
+    Not B maddeleri: sıvı formda CAS+'-AQ' kaydı tercih edilir.
     """
     cas = cas.strip()
 
     # Not B: sıvı form + bilinen çift-giriş CAS → AQ kaydına yönlendir
     if cas in _NOTE_B_CAS and _is_liquid(form):
-        aq_result = _sea_ek6_lookup(cas + '-AQ')
+        aq_result = _sea_ek6_lookup(cas=cas + '-AQ')
         if aq_result:
             return _sea_ek6_to_legacy(aq_result)
 
-    # ── Sıra 1: SEA Ek-6 TR (yasal zemin, mutlak öncelik) ───────────────────
-    tr_entry = _sea_ek6_lookup(cas)
+    # ── Katman 1: SEA Ek-6 TR ────────────────────────────────────────────────
+    tr_entry = _sea_ek6_lookup(cas=cas, ec_no=ec_no, index_no=index_no)
     if tr_entry:
-        result   = _sea_ek6_to_legacy(tr_entry)
-        # EN/EU veritabanından eksik tehlike sınıflarını ekle
-        db_entry = _db_lookup(cas)
-        if db_entry:
-            db_result   = _db_to_legacy(db_entry)
-            supplements = _merge_annex_supplements(result['hazards'], db_result['hazards'])
-            if supplements:
-                result['hazards'] = result['hazards'] + supplements
-                result['source']  = f'SEA Ek-6 (TR) + ECHA ATP22 ek ({len(supplements)} tehlike sınıfı)'
-            # suppl_hazards (EUH kodları) — SEA boşsa ATP22'den tamamla
-            if not result.get('suppl_hazards') and db_result.get('suppl_hazards'):
-                result['suppl_hazards'] = db_result['suppl_hazards']
-            # M faktörü — daha yüksek (daha zararlı) olanı kullan
-            db_mf = db_result.get('m_factors') or {}
-            if db_mf:
-                tr_mf = result.get('m_factors') or {}
-                merged_mf = dict(tr_mf)
-                for key, val in db_mf.items():
-                    if val and (not merged_mf.get(key) or val > merged_mf[key]):
-                        merged_mf[key] = val
-                result['m_factors'] = merged_mf
+        result = _sea_ek6_to_legacy(tr_entry)
+        # Sınıflandırma karışmaz; sadece boş ATE ve asterisk Katman 2'den tamamlanır
+        if not result.get('ate'):
+            db_entry = _db_lookup(cas=result.get('cas',''), ec_no=result.get('ec_no',''),
+                                  index_no=result.get('index_no',''))
+            if db_entry and db_entry.get('ate'):
+                result['ate'] = db_entry['ate']
         return result
 
-    # ── Sıra 2 (tek başına): substance_db (ECHA ATP22 yeni format) ──────────
-    db_entry = _db_lookup(cas)
+    # ── Katman 2: CLP Annex VI / substance_db (ECHA ATP22) ──────────────────
+    db_entry = _db_lookup(cas=cas, ec_no=ec_no, index_no=index_no)
     if db_entry and db_entry.get('classification'):
-        return _db_to_legacy(db_entry)
+        return _fill_tr_name(_db_to_legacy(db_entry))
 
-    # ── Sıra 3: ECHA C&L API önbelleği ──────────────────────────────────────
+    # ── Katman 3: ECHA C&L API önbelleği ────────────────────────────────────
     echa_entry = _read_cl_file(_ECHA_CL_DIR, cas)
     if echa_entry:
-        return _cl_to_legacy(echa_entry, 3, f'ECHA C&L ({echa_entry.get("atp","?")})')
+        return _fill_tr_name(_cl_to_legacy(echa_entry, 3, f'ECHA C&L ({echa_entry.get("atp","?")})')  )
 
-    # ── Sıra 4: PubChem önbelleği ────────────────────────────────────────────
+    # ── Katman 3b: PubChem önbelleği ─────────────────────────────────────────
     pub_entry = _read_cl_file(_PUBCHEM_DIR, cas)
     if pub_entry:
-        return _cl_to_legacy(pub_entry, 4, f'PubChem ({pub_entry.get("atp","?")})')
+        return _fill_tr_name(_cl_to_legacy(pub_entry, 4, f'PubChem ({pub_entry.get("atp","?")})')  )
 
     # ── Sıra 5: Custom (tedarikçi/kullanıcı) ─────────────────────────────────
     custom = _load_custom()
@@ -782,16 +869,18 @@ def save_custom_substance(cas: str, entry: Dict) -> bool:
     return is_new
 
 
-def is_annex_vi(cas: str) -> bool:
+def is_annex_vi(cas: str, ec_no: str = '', index_no: str = '') -> bool:
     """Madde SEA Ek-6 veya ECHA ATP22'de mi?"""
     cas = cas.strip()
-    return cas in _load_sea_ek6() or cas in _load_substance_db()
+    if _sea_ek6_lookup(cas=cas, ec_no=ec_no, index_no=index_no):
+        return True
+    return _db_lookup(cas=cas, ec_no=ec_no, index_no=index_no) is not None
 
 
-def is_sea_ek6(cas: str) -> bool:
+def is_sea_ek6(cas: str, ec_no: str = '', index_no: str = '') -> bool:
     """Madde SEA Ek-6'da mı?"""
     cas = cas.strip()
-    return cas in _load_sea_ek6()
+    return _sea_ek6_lookup(cas=cas, ec_no=ec_no, index_no=index_no) is not None
 
 
 def get_oel(cas: str) -> Optional[Dict]:

@@ -733,8 +733,8 @@
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "range",
-        "min": 14.0,
+        "op": "<",
+        "min": null,
         "max": 22.0,
         "unit": "%"
       }
@@ -786,8 +786,8 @@
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "range",
-        "min": 22.0,
+        "op": "<",
+        "min": null,
         "max": 36.0,
         "unit": "%"
       }
@@ -850,8 +850,8 @@
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "range",
-        "min": 14.0,
+        "op": "<",
+        "min": null,
         "max": 22.0,
         "unit": "%"
       },
@@ -1000,8 +1000,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "range",
-        "min": 0.2,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       }
@@ -1359,10 +1359,6 @@
       {
         "class": "Sucul Akut 1",
         "h_code": "H410"
-      },
-      {
-        "class": "Sucul Kronik 1",
-        "h_code": ""
       }
     ],
     "scl_limits": [],
@@ -4261,8 +4257,8 @@
       {
         "h_code": "H314",
         "class": "Cilt Aşnd. 1B",
-        "op": "range",
-        "min": 5.0,
+        "op": "<",
+        "min": null,
         "max": 20.0,
         "unit": "%"
       },
@@ -4410,16 +4406,16 @@
       {
         "h_code": "H315",
         "class": "Cilt Tah. 2",
-        "op": "range",
-        "min": 3.0,
+        "op": "<",
+        "min": null,
         "max": 10.0,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "range",
-        "min": 3.0,
+        "op": "<",
+        "min": null,
         "max": 10.0,
         "unit": "%"
       }
@@ -5158,8 +5154,8 @@
       {
         "h_code": "H272",
         "class": "Oksit. Sıvı 2",
-        "op": "range",
-        "min": 50.0,
+        "op": "<",
+        "min": null,
         "max": 70.0,
         "unit": "%"
       },
@@ -5174,32 +5170,32 @@
       {
         "h_code": "H314",
         "class": "Cilt Aşnd. 1B",
-        "op": "range",
-        "min": 50.0,
+        "op": "<",
+        "min": null,
         "max": 70.0,
         "unit": "%"
       },
       {
         "h_code": "H315",
         "class": "Cilt Tah. 2",
-        "op": "range",
-        "min": 35.0,
+        "op": "<",
+        "min": null,
         "max": 50.0,
         "unit": "%"
       },
       {
         "h_code": "H318",
         "class": "Göz Hsr. 1",
-        "op": "range",
-        "min": 8.0,
+        "op": "<",
+        "min": null,
         "max": 50.0,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "range",
-        "min": 5.0,
+        "op": "<",
+        "min": null,
         "max": 8.0,
         "unit": "%"
       }
@@ -5401,16 +5397,16 @@
       {
         "h_code": "H315",
         "class": "Cilt Tah. 2",
-        "op": "range",
-        "min": 0.1,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "range",
-        "min": 0.1,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       }
@@ -5452,16 +5448,16 @@
       {
         "h_code": "H315",
         "class": "Cilt Tah. 2",
-        "op": "range",
-        "min": 0.1,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "range",
-        "min": 0.1,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       }
@@ -5503,16 +5499,16 @@
       {
         "h_code": "H315",
         "class": "Cilt Tah. 2",
-        "op": "range",
-        "min": 0.1,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "range",
-        "min": 0.1,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       }
@@ -5552,16 +5548,16 @@
       {
         "h_code": "H315",
         "class": "Cilt Tah. 2",
-        "op": "range",
-        "min": 10.0,
+        "op": "<",
+        "min": null,
         "max": 25.0,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "range",
-        "min": 10.0,
+        "op": "<",
+        "min": null,
         "max": 25.0,
         "unit": "%"
       }
@@ -7598,16 +7594,16 @@
       {
         "h_code": "H315",
         "class": "Cilt Tah. 2",
-        "op": "range",
-        "min": 10.0,
+        "op": "<",
+        "min": null,
         "max": 25.0,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "range",
-        "min": 10.0,
+        "op": "<",
+        "min": null,
         "max": 25.0,
         "unit": "%"
       }
@@ -7741,8 +7737,8 @@
       {
         "h_code": "H371",
         "class": "BHOT Tek Mrz. 2",
-        "op": "range",
-        "min": 0.2,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       }
@@ -13210,8 +13206,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar. Mrz. 2",
-        "op": "range",
-        "min": 0.01,
+        "op": "<",
+        "min": null,
         "max": 0.1,
         "unit": "%"
       }
@@ -13632,7 +13628,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "U5"
+      "U",
+      "5"
     ],
     "euh_codes": [],
     "classification": [
@@ -15651,7 +15648,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "U5"
+      "U",
+      "5"
     ],
     "euh_codes": [],
     "classification": [
@@ -15838,8 +15836,8 @@
       {
         "h_code": "H272",
         "class": "Oksit. Sıvı 2",
-        "op": "range",
-        "min": 0.0,
+        "op": "<",
+        "min": null,
         "max": 50.0,
         "unit": "%"
       }
@@ -16876,7 +16874,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "G3"
+      "G",
+      "3"
     ],
     "euh_codes": [],
     "classification": [
@@ -17069,7 +17068,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "T3"
+      "T",
+      "3"
     ],
     "euh_codes": [],
     "classification": [
@@ -18222,7 +18222,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "S7"
+      "S",
+      "7"
     ],
     "euh_codes": [],
     "classification": [
@@ -18596,8 +18597,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "range",
-        "min": 0.1,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       },
@@ -18774,8 +18775,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz.. 2",
-        "op": "range",
-        "min": 0.1,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       },
@@ -18865,10 +18866,6 @@
       {
         "class": "Sucul Akut 1",
         "h_code": "H410"
-      },
-      {
-        "class": "Sucul Kronik 1",
-        "h_code": ""
       }
     ],
     "scl_limits": [
@@ -18883,8 +18880,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz.. 2",
-        "op": "range",
-        "min": 0.1,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       },
@@ -19022,8 +19019,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "range",
-        "min": 0.1,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       },
@@ -19155,8 +19152,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "range",
-        "min": 0.1,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       },
@@ -19244,8 +19241,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "range",
-        "min": 0.1,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       },
@@ -19326,8 +19323,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "range",
-        "min": 0.1,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       },
@@ -19404,8 +19401,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "range",
-        "min": 0.1,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       },
@@ -19487,8 +19484,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "range",
-        "min": 0.1,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       },
@@ -19584,8 +19581,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "range",
-        "min": 0.1,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       },
@@ -19665,8 +19662,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "range",
-        "min": 0.1,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       },
@@ -19743,8 +19740,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "range",
-        "min": 0.1,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       },
@@ -19822,8 +19819,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "range",
-        "min": 0.1,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       },
@@ -19900,8 +19897,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "range",
-        "min": 0.1,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       },
@@ -19982,8 +19979,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "range",
-        "min": 0.1,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       },
@@ -20067,8 +20064,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "range",
-        "min": 0.1,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       },
@@ -20154,8 +20151,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "range",
-        "min": 0.1,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       },
@@ -20232,8 +20229,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "range",
-        "min": 0.1,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       },
@@ -20915,8 +20912,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "range",
-        "min": 0.1,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       },
@@ -20993,8 +20990,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "range",
-        "min": 0.1,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       },
@@ -21274,8 +21271,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "range",
-        "min": 0.1,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       },
@@ -21419,8 +21416,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "range",
-        "min": 0.1,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       },
@@ -24335,7 +24332,8 @@
     ],
     "lang": "tr",
     "notes": [
-      "A1"
+      "A",
+      "1"
     ],
     "euh_codes": [],
     "classification": [
@@ -24612,24 +24610,24 @@
       {
         "h_code": "H315",
         "class": "Cilt Tah. 2",
-        "op": "range",
-        "min": 0.01,
+        "op": "<",
+        "min": null,
         "max": 5.0,
         "unit": "%"
       },
       {
         "h_code": "H318",
         "class": "Göz Hsr. 1",
-        "op": "range",
-        "min": 3.0,
+        "op": "<",
+        "min": null,
         "max": 5.0,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "range",
-        "min": 0.01,
+        "op": "<",
+        "min": null,
         "max": 3.0,
         "unit": "%"
       }
@@ -24722,18 +24720,6 @@
       {
         "class": "Ürm. Sis.Tok. 2",
         "h_code": "H361d H302 H372 (sinir sistemi, bağışıklık sistemi) H317"
-      },
-      {
-        "class": "Akut Tok. 4",
-        "h_code": ""
-      },
-      {
-        "class": "BHOT Tekrar.Mrz. 1",
-        "h_code": ""
-      },
-      {
-        "class": "Cilt Hassas.  1A",
-        "h_code": ""
       }
     ],
     "scl_limits": [],
@@ -24762,22 +24748,6 @@
       {
         "class": "Akut Tok. 2",
         "h_code": "H314"
-      },
-      {
-        "class": "Akut Tok. 3",
-        "h_code": ""
-      },
-      {
-        "class": "Akut Tok. 3",
-        "h_code": ""
-      },
-      {
-        "class": "BHOT Tek Mrz.  1",
-        "h_code": ""
-      },
-      {
-        "class": "Cilt Aşnd. 1B",
-        "h_code": ""
       }
     ],
     "scl_limits": [],
@@ -25008,7 +24978,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "U5"
+      "U",
+      "5"
     ],
     "euh_codes": [],
     "classification": [
@@ -25033,24 +25004,24 @@
       {
         "h_code": "H314",
         "class": "Cilt Aşnd. 1B",
-        "op": "range",
-        "min": 0.2,
+        "op": "<",
+        "min": null,
         "max": 10.0,
         "unit": "%"
       },
       {
         "h_code": "H315",
         "class": "Cilt Tah. 2",
-        "op": "range",
-        "min": 0.02,
+        "op": "<",
+        "min": null,
         "max": 0.2,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "range",
-        "min": 0.02,
+        "op": "<",
+        "min": null,
         "max": 0.2,
         "unit": "%"
       },
@@ -25078,12 +25049,7 @@
     "lang": "tr",
     "notes": [],
     "euh_codes": [],
-    "classification": [
-      {
-        "class": "Pat.",
-        "h_code": ""
-      }
-    ],
+    "classification": [],
     "scl_limits": [],
     "m_factors": {},
     "ate": {}
@@ -26682,7 +26648,8 @@
     ],
     "lang": "tr",
     "notes": [
-      "CU"
+      "C",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -27138,7 +27105,8 @@
     ],
     "lang": "tr",
     "notes": [
-      "CU"
+      "C",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -27179,7 +27147,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "DU"
+      "D",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -29633,8 +29602,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "range",
-        "min": 0.2,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       }
@@ -29972,8 +29941,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "range",
-        "min": 0.2,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       }
@@ -30206,7 +30175,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "DU"
+      "D",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -30483,7 +30453,8 @@
     ],
     "lang": "tr",
     "notes": [
-      "CD"
+      "C",
+      "D"
     ],
     "euh_codes": [],
     "classification": [
@@ -32709,10 +32680,6 @@
       {
         "class": "Cilt Tah. 2",
         "h_code": "H315"
-      },
-      {
-        "class": "",
-        "h_code": "H411"
       }
     ],
     "scl_limits": [],
@@ -33876,7 +33843,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "DU"
+      "D",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -35956,16 +35924,16 @@
       {
         "h_code": "H315",
         "class": "Cilt Tah. 2",
-        "op": "range",
-        "min": 25.0,
+        "op": "<",
+        "min": null,
         "max": 50.0,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "range",
-        "min": 25.0,
+        "op": "<",
+        "min": null,
         "max": 50.0,
         "unit": "%"
       }
@@ -38499,14 +38467,27 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "range",
-        "min": 0.3,
+        "op": "<",
+        "min": null,
         "max": 3.0,
         "unit": "%"
       }
     ],
     "m_factors": {},
-    "ate": {}
+    "ate": {
+      "inhalation": {
+        "value": 0.05,
+        "unit": "mg/L"
+      },
+      "dermal": {
+        "value": 50.0,
+        "unit": "mg/kg"
+      },
+      "oral": {
+        "value": 35.0,
+        "unit": "mg/kg"
+      }
+    }
   },
   "1634-04-4": {
     "index_no": "603-181-00-X",
@@ -40440,7 +40421,16 @@
     ],
     "scl_limits": [],
     "m_factors": {},
-    "ate": {}
+    "ate": {
+      "oral": {
+        "value": 300.0,
+        "unit": "mg/kg"
+      },
+      "dermal": {
+        "value": 600.0,
+        "unit": "mg/kg"
+      }
+    }
   },
   "95-95-4": {
     "index_no": "604-017-00-X",
@@ -42118,14 +42108,6 @@
       {
         "class": "Cilt Tah. 2",
         "h_code": "H410"
-      },
-      {
-        "class": "Göz Hsr. 1",
-        "h_code": ""
-      },
-      {
-        "class": "Sucul Kronik 1",
-        "h_code": ""
       }
     ],
     "scl_limits": [],
@@ -42151,14 +42133,6 @@
       {
         "class": "Emzr.",
         "h_code": "H362 H400 H410"
-      },
-      {
-        "class": "Sucul Akut 1",
-        "h_code": ""
-      },
-      {
-        "class": "Sucul Kronik 1",
-        "h_code": ""
       }
     ],
     "scl_limits": [],
@@ -43124,8 +43098,8 @@
       {
         "h_code": "H335",
         "class": "BHOT Tek Mrz.3",
-        "op": "range",
-        "min": 0.5,
+        "op": "<",
+        "min": null,
         "max": 5.0,
         "unit": "%"
       }
@@ -47379,14 +47353,6 @@
       {
         "class": "Kans. 2",
         "h_code": "H351 H302 H411"
-      },
-      {
-        "class": "Akut Tok. 4",
-        "h_code": ""
-      },
-      {
-        "class": "Sucul Kronik 2",
-        "h_code": ""
       }
     ],
     "scl_limits": [],
@@ -47466,22 +47432,6 @@
       {
         "class": "Ürm. Sis. Tok.",
         "h_code": "H361d H373 (gözler, böbrekler, karaciğer) H317 H400 H410"
-      },
-      {
-        "class": "BHOT Tekrar.Mrz.2",
-        "h_code": ""
-      },
-      {
-        "class": "Cilt Hassas. 1",
-        "h_code": ""
-      },
-      {
-        "class": "Sucul Akut 1",
-        "h_code": ""
-      },
-      {
-        "class": "Sucul Kronik 1",
-        "h_code": ""
       }
     ],
     "scl_limits": [],
@@ -47578,24 +47528,24 @@
       {
         "h_code": "H314",
         "class": "Cilt Aşnd. 1B",
-        "op": "range",
-        "min": 10.0,
+        "op": "<",
+        "min": null,
         "max": 90.0,
         "unit": "%"
       },
       {
         "h_code": "H315",
         "class": "Cilt Tah. 2",
-        "op": "range",
-        "min": 2.0,
+        "op": "<",
+        "min": null,
         "max": 10.0,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "range",
-        "min": 2.0,
+        "op": "<",
+        "min": null,
         "max": 10.0,
         "unit": "%"
       }
@@ -47639,24 +47589,24 @@
       {
         "h_code": "H314",
         "class": "Cilt Aşnd. 1B",
-        "op": "range",
-        "min": 25.0,
+        "op": "<",
+        "min": null,
         "max": 90.0,
         "unit": "%"
       },
       {
         "h_code": "H315",
         "class": "Cilt Tah. 2",
-        "op": "range",
-        "min": 10.0,
+        "op": "<",
+        "min": null,
         "max": 25.0,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "range",
-        "min": 10.0,
+        "op": "<",
+        "min": null,
         "max": 25.0,
         "unit": "%"
       }
@@ -47848,24 +47798,24 @@
       {
         "h_code": "H315",
         "class": "Cilt Tah. 2",
-        "op": "range",
-        "min": 5.0,
+        "op": "<",
+        "min": null,
         "max": 25.0,
         "unit": "%"
       },
       {
         "h_code": "H318",
         "class": "Göz Hsr. 1",
-        "op": "range",
-        "min": 5.0,
+        "op": "<",
+        "min": null,
         "max": 25.0,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "range",
-        "min": 1.0,
+        "op": "<",
+        "min": null,
         "max": 5.0,
         "unit": "%"
       },
@@ -47953,16 +47903,16 @@
       {
         "h_code": "H315",
         "class": "Cilt Tah. 2",
-        "op": "range",
-        "min": 10.0,
+        "op": "<",
+        "min": null,
         "max": 25.0,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "range",
-        "min": 10.0,
+        "op": "<",
+        "min": null,
         "max": 25.0,
         "unit": "%"
       }
@@ -50399,16 +50349,16 @@
       {
         "h_code": "H315",
         "class": "Cilt Tah. 2",
-        "op": "range",
-        "min": 10.0,
+        "op": "<",
+        "min": null,
         "max": 25.0,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "range",
-        "min": 10.0,
+        "op": "<",
+        "min": null,
         "max": 25.0,
         "unit": "%"
       },
@@ -50549,7 +50499,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "BD"
+      "B",
+      "D"
     ],
     "euh_codes": [
       "EUH014"
@@ -50579,7 +50530,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "BD"
+      "B",
+      "D"
     ],
     "euh_codes": [],
     "classification": [
@@ -50706,14 +50658,6 @@
       {
         "class": "Cilt Hassas. 1",
         "h_code": "H318"
-      },
-      {
-        "class": "",
-        "h_code": "H334"
-      },
-      {
-        "class": "",
-        "h_code": "H317"
       }
     ],
     "scl_limits": [
@@ -51213,7 +51157,8 @@
     ],
     "lang": "tr",
     "notes": [
-      "CD"
+      "C",
+      "D"
     ],
     "euh_codes": [],
     "classification": [
@@ -51877,7 +51822,8 @@
     ],
     "lang": "tr",
     "notes": [
-      "CD"
+      "C",
+      "D"
     ],
     "euh_codes": [],
     "classification": [
@@ -64309,10 +64255,6 @@
       {
         "class": "Göz Hsr. 1",
         "h_code": "H315"
-      },
-      {
-        "class": "",
-        "h_code": "H318"
       }
     ],
     "scl_limits": [],
@@ -64335,14 +64277,6 @@
       {
         "class": "Akut Tok. 4",
         "h_code": "H302 H336 H411"
-      },
-      {
-        "class": "BHOT Tek Mrz.3",
-        "h_code": ""
-      },
-      {
-        "class": "Sucul Kronik 2",
-        "h_code": ""
       }
     ],
     "scl_limits": [],
@@ -64369,14 +64303,6 @@
       {
         "class": "Cilt Hassas. 1",
         "h_code": "H317 H400 H410"
-      },
-      {
-        "class": "Sucul Akut 1",
-        "h_code": ""
-      },
-      {
-        "class": "Sucul Kronik 1",
-        "h_code": ""
       }
     ],
     "scl_limits": [],
@@ -64480,26 +64406,6 @@
       {
         "class": "Ürm. Sis. Tok. 2",
         "h_code": "H361fd H335 H319 H317 H400 H410"
-      },
-      {
-        "class": "BHOT Tek Mrz. 3",
-        "h_code": ""
-      },
-      {
-        "class": "Göz Tah. 2",
-        "h_code": ""
-      },
-      {
-        "class": "Cilt Hassas. 1A",
-        "h_code": ""
-      },
-      {
-        "class": "Sucul Akut 1",
-        "h_code": ""
-      },
-      {
-        "class": "Sucul Kronik 1",
-        "h_code": ""
       }
     ],
     "scl_limits": [],
@@ -64527,22 +64433,6 @@
       {
         "class": "Ürm. Sis. Tok. 2",
         "h_code": "H361d H373 (karaciğer) H314 H317 H410"
-      },
-      {
-        "class": "BHOT Tekrar.Mrz. 2",
-        "h_code": ""
-      },
-      {
-        "class": "Cilt Aşnd. 1C",
-        "h_code": ""
-      },
-      {
-        "class": "Cilt Hassas. 1A",
-        "h_code": ""
-      },
-      {
-        "class": "Sucul Kronik 1",
-        "h_code": ""
       }
     ],
     "scl_limits": [],
@@ -64568,22 +64458,6 @@
       {
         "class": "Akut Tok. 3",
         "h_code": "H301 H330 H317 H400 H410"
-      },
-      {
-        "class": "Akut Tok. 2",
-        "h_code": ""
-      },
-      {
-        "class": "Cilt Hassas. 1B",
-        "h_code": ""
-      },
-      {
-        "class": "Sucul Akut 1",
-        "h_code": ""
-      },
-      {
-        "class": "Sucul Kronik 1",
-        "h_code": ""
       }
     ],
     "scl_limits": [],
@@ -64610,14 +64484,6 @@
       {
         "class": "Kans. 2",
         "h_code": "H351 H400 H410"
-      },
-      {
-        "class": "Sucul Akut 1",
-        "h_code": ""
-      },
-      {
-        "class": "Sucul Kronik 1",
-        "h_code": ""
       }
     ],
     "scl_limits": [],
@@ -64643,18 +64509,6 @@
       {
         "class": "BHOT Tekrar.Mrz. 2",
         "h_code": "H373 H317 H400 H410"
-      },
-      {
-        "class": "Cilt Hassas. 1",
-        "h_code": ""
-      },
-      {
-        "class": "Sucul Akut 1",
-        "h_code": ""
-      },
-      {
-        "class": "Sucul Kronik 1",
-        "h_code": ""
       }
     ],
     "scl_limits": [],
@@ -64807,10 +64661,6 @@
       {
         "class": "Göz Hsr. 1",
         "h_code": "timus, dalak)"
-      },
-      {
-        "class": "",
-        "h_code": "H318"
       }
     ],
     "scl_limits": [],
@@ -64904,7 +64754,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "89’"
+      "8",
+      "9’"
     ],
     "euh_codes": [
       "EUH071"
@@ -65157,7 +65008,16 @@
       "acute": 1,
       "chronic": 1
     },
-    "ate": {}
+    "ate": {
+      "inhalation": {
+        "value": 4.63,
+        "unit": "mg/L"
+      },
+      "oral": {
+        "value": 500.0,
+        "unit": "mg/kg"
+      }
+    }
   },
   "7696-12-0": {
     "index_no": "607-727-00-8",
@@ -65192,10 +65052,6 @@
       {
         "class": "Sucul Kronik 1",
         "h_code": "H400"
-      },
-      {
-        "class": "",
-        "h_code": "H410"
       }
     ],
     "scl_limits": [],
@@ -72702,7 +72558,8 @@
     ],
     "lang": "tr",
     "notes": [
-      "U5"
+      "U",
+      "5"
     ],
     "euh_codes": [],
     "classification": [
@@ -73090,8 +72947,8 @@
       {
         "h_code": "H373",
         "class": "BHOT Tekrar.Mrz. 2",
-        "op": "range",
-        "min": 0.2,
+        "op": "<",
+        "min": null,
         "max": 1.0,
         "unit": "%"
       }
@@ -81280,10 +81137,6 @@
       {
         "class": "Sucul Kronik 1",
         "h_code": "H400"
-      },
-      {
-        "class": "",
-        "h_code": "H410"
       }
     ],
     "scl_limits": [],
@@ -81333,10 +81186,6 @@
       {
         "class": "Sucul Kronik 1",
         "h_code": "H400"
-      },
-      {
-        "class": "",
-        "h_code": "H410"
       }
     ],
     "scl_limits": [],
@@ -81382,10 +81231,6 @@
       {
         "class": "Sucul Kronik 1",
         "h_code": "H400"
-      },
-      {
-        "class": "",
-        "h_code": "H410"
       }
     ],
     "scl_limits": [],
@@ -81480,10 +81325,6 @@
       {
         "class": "Sucul Kronik 1",
         "h_code": "H400"
-      },
-      {
-        "class": "",
-        "h_code": "H410"
       }
     ],
     "scl_limits": [],
@@ -81509,26 +81350,6 @@
       {
         "class": "Ürm. Sis.Tok. 2",
         "h_code": "H361d H332 H318 H317 H400 H410"
-      },
-      {
-        "class": "Akut Tok. 4",
-        "h_code": ""
-      },
-      {
-        "class": "Göz Hsr. 1",
-        "h_code": ""
-      },
-      {
-        "class": "Cilt Hassas. 1A",
-        "h_code": ""
-      },
-      {
-        "class": "Sucul Akut 1",
-        "h_code": ""
-      },
-      {
-        "class": "Sucul Kronik 1",
-        "h_code": ""
       }
     ],
     "scl_limits": [],
@@ -85790,10 +85611,6 @@
       {
         "class": "Sucul Akut 1",
         "h_code": "H410"
-      },
-      {
-        "class": "Sucul Kronik 1",
-        "h_code": ""
       }
     ],
     "scl_limits": [],
@@ -86758,8 +86575,8 @@
       {
         "h_code": "H315",
         "class": "Cilt Thr. 2",
-        "op": "range",
-        "min": 0.06,
+        "op": "<",
+        "min": null,
         "max": 0.6,
         "unit": "%"
       },
@@ -86774,8 +86591,8 @@
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "range",
-        "min": 0.06,
+        "op": "<",
+        "min": null,
         "max": 0.6,
         "unit": "%"
       },
@@ -90514,18 +90331,6 @@
       {
         "class": "Ürm. Sis.Tok. 2",
         "h_code": "H361d H302 H400 H410"
-      },
-      {
-        "class": "Akut Tok. 4",
-        "h_code": ""
-      },
-      {
-        "class": "Sucul Akut 1",
-        "h_code": ""
-      },
-      {
-        "class": "Sucul Kronik 1",
-        "h_code": ""
       }
     ],
     "scl_limits": [],
@@ -90612,14 +90417,6 @@
       {
         "class": "Kans. 2",
         "h_code": "H351 H400 H410"
-      },
-      {
-        "class": "Sucul Akut 1",
-        "h_code": ""
-      },
-      {
-        "class": "Sucul Kronik 1",
-        "h_code": ""
       }
     ],
     "scl_limits": [],
@@ -91011,7 +90808,21 @@
     ],
     "scl_limits": [],
     "m_factors": {},
-    "ate": {}
+    "ate": {
+      "inhalation": {
+        "value": 0.19,
+        "unit": "mg/L",
+        "form": "tozlar veya buharlar"
+      },
+      "dermal": {
+        "value": 70.0,
+        "unit": "mg/kg"
+      },
+      "oral": {
+        "value": 5.0,
+        "unit": "mg/kg"
+      }
+    }
   },
   "57-24-9": {
     "index_no": "614-003-00-5",
@@ -91643,7 +91454,8 @@
     ],
     "lang": "tr",
     "notes": [
-      "C2"
+      "C",
+      "2"
     ],
     "euh_codes": [],
     "classification": [
@@ -91983,7 +91795,8 @@
     ],
     "lang": "tr",
     "notes": [
-      "C2"
+      "C",
+      "2"
     ],
     "euh_codes": [],
     "classification": [
@@ -97734,30 +97547,6 @@
       {
         "class": "Akut Tok. 3",
         "h_code": "H331 H302 H372 (larynx) H318 H317 H400 H410"
-      },
-      {
-        "class": "Akut Tok. 4",
-        "h_code": ""
-      },
-      {
-        "class": "BHOT Tekrar. Mrz.1",
-        "h_code": ""
-      },
-      {
-        "class": "Göz Hsr. 1",
-        "h_code": ""
-      },
-      {
-        "class": "Cilt Hassas. 1",
-        "h_code": ""
-      },
-      {
-        "class": "Sucul Akut 1",
-        "h_code": ""
-      },
-      {
-        "class": "Sucul Kronik 1",
-        "h_code": ""
       }
     ],
     "scl_limits": [],
@@ -97783,10 +97572,6 @@
       {
         "class": "Sucul Akut 1",
         "h_code": "H400 H410"
-      },
-      {
-        "class": "Sucul Kronik 1",
-        "h_code": ""
       }
     ],
     "scl_limits": [],
@@ -97816,14 +97601,6 @@
       {
         "class": "BHOT Tekrar.Mrz. 2",
         "h_code": "H400 H410"
-      },
-      {
-        "class": "Sucul Akut 1",
-        "h_code": ""
-      },
-      {
-        "class": "Sucul Kronik 1",
-        "h_code": ""
       }
     ],
     "scl_limits": [],
@@ -97849,18 +97626,6 @@
       {
         "class": "Akut Tok. 4",
         "h_code": "H302 H317 H400 H410"
-      },
-      {
-        "class": "Cilt Hassas. 1",
-        "h_code": ""
-      },
-      {
-        "class": "Sucul Akut 1",
-        "h_code": ""
-      },
-      {
-        "class": "Sucul Kronik 1",
-        "h_code": ""
       }
     ],
     "scl_limits": [],
@@ -98206,24 +97971,24 @@
       {
         "h_code": "H318",
         "class": "Göz Hsr. 1",
-        "op": "range",
-        "min": 3.0,
+        "op": "<",
+        "min": null,
         "max": 10.0,
         "unit": "%"
       },
       {
         "h_code": "H319",
         "class": "Göz Tah. 2",
-        "op": "range",
-        "min": 1.0,
+        "op": "<",
+        "min": null,
         "max": 3.0,
         "unit": "%"
       },
       {
         "h_code": "H335",
         "class": "BHOT Tek Mrz. 3",
-        "op": "range",
-        "min": 0.0,
+        "op": "<",
+        "min": null,
         "max": 10.0,
         "unit": "%"
       }
@@ -98354,10 +98119,6 @@
       {
         "class": "Sucul Kronik 2",
         "h_code": "H315"
-      },
-      {
-        "class": "",
-        "h_code": "H411"
       }
     ],
     "scl_limits": [],
@@ -101302,7 +101063,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -101331,7 +101093,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -101360,7 +101123,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -101389,7 +101153,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -101418,7 +101183,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -101447,7 +101213,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -101476,7 +101243,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -101505,7 +101273,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -101534,7 +101303,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -101563,7 +101333,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -101592,7 +101363,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -101621,7 +101393,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -101650,7 +101423,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -101679,7 +101453,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -101831,7 +101606,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -101860,7 +101636,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -101889,7 +101666,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -101918,7 +101696,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -101947,7 +101726,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -101976,7 +101756,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102005,7 +101786,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102034,7 +101816,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102063,7 +101846,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102092,7 +101876,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102121,7 +101906,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102150,7 +101936,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102179,7 +101966,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102208,7 +101996,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102237,7 +102026,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102266,7 +102056,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102295,7 +102086,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102324,7 +102116,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102353,7 +102146,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102382,7 +102176,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102411,7 +102206,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102440,7 +102236,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102469,7 +102266,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102498,7 +102296,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102526,7 +102325,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102555,7 +102355,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102584,7 +102385,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102613,7 +102415,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102641,7 +102444,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102669,7 +102473,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102698,7 +102503,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102727,7 +102533,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102756,7 +102563,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102785,7 +102593,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102814,7 +102623,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102866,7 +102676,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102895,7 +102706,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -102925,7 +102737,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "JM"
+      "J",
+      "M"
     ],
     "euh_codes": [],
     "classification": [
@@ -104748,7 +104561,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -104786,7 +104600,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -104823,7 +104638,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -104860,7 +104676,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -104898,7 +104715,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -104936,7 +104754,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -104974,7 +104793,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -105012,7 +104832,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -105050,7 +104871,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -105088,7 +104910,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -105126,7 +104949,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -105163,7 +104987,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -105201,7 +105026,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -105238,7 +105064,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -105276,7 +105103,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -105314,7 +105142,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -105352,7 +105181,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -105390,7 +105220,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -105428,7 +105259,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -105466,7 +105298,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -105504,7 +105337,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -105542,7 +105376,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -105580,7 +105415,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -105617,7 +105453,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -105655,7 +105492,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -105693,7 +105531,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -105731,7 +105570,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -105769,7 +105609,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -105807,7 +105648,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -105844,7 +105686,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -105881,7 +105724,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -105918,7 +105762,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -105955,7 +105800,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -105993,7 +105839,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -106031,7 +105878,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -106069,7 +105917,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -106107,7 +105956,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -106145,7 +105995,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -106182,7 +106033,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -106220,7 +106072,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -106258,7 +106111,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -106296,7 +106150,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -106334,7 +106189,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -106370,7 +106226,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -106409,7 +106266,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -106447,7 +106305,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -106485,7 +106344,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -106523,7 +106383,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -106561,7 +106422,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -106599,7 +106461,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -106637,7 +106500,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -106674,7 +106538,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -106710,7 +106575,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -106748,7 +106614,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -106786,7 +106653,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -106824,7 +106692,9 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KSU"
+      "K",
+      "S",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -106861,7 +106731,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -106898,7 +106769,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -106936,7 +106808,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -106974,7 +106847,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -107012,7 +106886,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -107050,7 +106925,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -107088,7 +106964,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -107126,7 +107003,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -107164,7 +107042,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -107201,7 +107080,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -107239,7 +107119,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -107277,7 +107158,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -107314,7 +107196,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -107351,7 +107234,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -107388,7 +107272,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -107426,7 +107311,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -107463,7 +107349,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -107499,7 +107386,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -107536,7 +107424,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -107573,7 +107462,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -107610,7 +107500,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -107647,7 +107538,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -107685,7 +107577,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -107723,7 +107616,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -107761,7 +107655,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -107798,7 +107693,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -107836,7 +107732,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -107874,7 +107771,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -107912,7 +107810,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -107950,7 +107849,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -107986,7 +107886,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -108023,7 +107924,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -108060,7 +107962,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -108097,7 +108000,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -108135,7 +108039,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -108172,7 +108077,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -108210,7 +108116,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -108248,7 +108155,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -108286,7 +108194,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -108324,7 +108233,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -108361,7 +108271,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -108399,7 +108310,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -108437,7 +108349,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -108474,7 +108387,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -108511,7 +108425,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -108549,7 +108464,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -108587,7 +108503,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -108625,7 +108542,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -108662,7 +108580,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -108700,7 +108619,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -108738,7 +108658,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -108776,7 +108697,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -108813,7 +108735,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -108850,7 +108773,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -108886,7 +108810,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -108924,7 +108849,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -108962,7 +108888,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -108999,7 +108926,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -109014,10 +108942,6 @@
       {
         "class": "Kans. 1B",
         "h_code": "H350"
-      },
-      {
-        "class": "",
-        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -109036,7 +108960,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -109051,10 +108976,6 @@
       {
         "class": "Kans. 1B",
         "h_code": "H350"
-      },
-      {
-        "class": "",
-        "h_code": "H340"
       }
     ],
     "scl_limits": [],
@@ -109074,7 +108995,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -109112,7 +109034,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -109150,7 +109073,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -109188,7 +109112,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -109225,7 +109150,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -109263,7 +109189,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -109301,7 +109228,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -109339,7 +109267,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -109376,7 +109305,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -109414,7 +109344,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -109452,7 +109383,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -109490,7 +109422,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -109527,7 +109460,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -109564,7 +109498,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -109602,7 +109537,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -109638,7 +109574,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -109674,7 +109611,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -109710,7 +109648,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -109746,7 +109685,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -109784,7 +109724,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -109822,7 +109763,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -109859,7 +109801,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -109896,7 +109839,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -109933,7 +109877,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -109970,7 +109915,9 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KSU"
+      "K",
+      "S",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -110008,7 +109955,9 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KSU"
+      "K",
+      "S",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -110046,7 +109995,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -110083,7 +110033,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -110120,7 +110071,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -110157,7 +110109,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -110195,7 +110148,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -110232,7 +110186,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -110269,7 +110224,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "KU"
+      "K",
+      "U"
     ],
     "euh_codes": [],
     "classification": [
@@ -113360,10 +113316,6 @@
       {
         "class": "Kans. 1B",
         "h_code": "H350"
-      },
-      {
-        "class": "",
-        "h_code": "H304"
       }
     ],
     "scl_limits": [],
@@ -120496,67 +120448,5 @@
     "scl_limits": [],
     "m_factors": {},
     "ate": {}
-  },
-  "7647-01-0-AQ": {
-    "index_no": "017-002-01-X",
-    "names": [
-      "Hidroklorik asit ...%",
-      "Hidroklorik asit çözeltisi"
-    ],
-    "name_en": "hydrochloric acid ...%",
-    "ec_no": "231-595-7",
-    "cas": "7647-01-0",
-    "synonyms": [
-      "HCl çözeltisi",
-      "Tuzruhu"
-    ],
-    "lang": "tr",
-    "notes": [
-      "B"
-    ],
-    "euh_codes": [],
-    "classification": [
-      {
-        "class": "Cilt Aşınd. 1B",
-        "h_code": "H314"
-      },
-      {
-        "class": "BHOT Tek Mrz. 3",
-        "h_code": "H335"
-      }
-    ],
-    "scl_limits": [
-      {
-        "h_code": "H314",
-        "class": "Cilt Aşınd. 1B",
-        "op": ">=",
-        "min": 25.0,
-        "max": null
-      },
-      {
-        "h_code": "H315",
-        "class": "Cilt Tahriş. 2",
-        "op": "range",
-        "min": 10.0,
-        "max": 25.0
-      },
-      {
-        "h_code": "H319",
-        "class": "Göz Tahriş. 2",
-        "op": "range",
-        "min": 10.0,
-        "max": 25.0
-      },
-      {
-        "h_code": "H335",
-        "class": "BHOT Tek Mrz. 3",
-        "op": ">=",
-        "min": 10.0,
-        "max": null
-      }
-    ],
-    "m_factors": {},
-    "atp": "SEA",
-    "sea_ek6": true
   }
 }

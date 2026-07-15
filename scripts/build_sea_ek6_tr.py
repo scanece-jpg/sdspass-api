@@ -79,7 +79,9 @@ def _parse_cas_raw(cas_raw: str) -> list[str]:
 
 _RE_M   = re.compile(r'M(?:\((\w+)\))?\s*=\s*(\d+)', re.IGNORECASE)
 _RE_ATE = re.compile(
-    r'(oral|dermal|inhalation|ağızdan|soluma)\s*:\s*ATE\s*=\s*([\d,\.]+)\s*(mg/kg|mg/L|ppm)',
+    r'(oral|dermal|inhalation|ağızdan|soluma|solunum|cilt|deri)\s*:\s*ATE\s*=\s*([\d,\.]+)\s*(mg/kg|mg/L|ppm)'
+    r'(?:\s*(?:bw|body\s*weight|va|v\.a\.|vücut\s*ağırlığı))?'
+    r'(?:\s*\((.+?)\))?',
     re.IGNORECASE,
 )
 _RE_GE    = re.compile(r'C\s*[≥>=]+\s*%?\s*([\d,\.]+)\s*%?')
@@ -103,6 +105,18 @@ def _parse_scl(raw: str):
     ate         = {}
     bare_m_vals = []
 
+    # Ön-işleme: "route:\nATE=..." → "route: ATE=..." (TR ve EN rota adları)
+    raw = re.sub(
+        r'(oral|dermal|inhalation|ağızdan|soluma|solunum|cilt|deri)\s*:\s*\n\s*ATE',
+        r'\1: ATE',
+        raw,
+        flags=re.IGNORECASE,
+    )
+    # "ATE ()=..." veya "ATE=..." arası boşluk/parantez varyantlarını normalize et
+    raw = re.sub(r'ATE\s*(?:\(\))?\s*=\s*', 'ATE=', raw)
+    # Birim ile değer arasındaki boşluğu sağla: "5mg/kg" → "5 mg/kg"
+    raw = re.sub(r'(\d)(mg/)', r'\1 \2', raw)
+
     for line in _split_scl_entries(raw):
         m = _RE_M.search(line)
         if m:
@@ -116,7 +130,15 @@ def _parse_scl(raw: str):
 
         a = _RE_ATE.search(line)
         if a:
-            ate[a.group(1).lower()] = {'value': _num(a.group(2)), 'unit': a.group(3)}
+            _TR_ROUTE = {
+                'ağızdan': 'oral', 'soluma': 'inhalation', 'solunum': 'inhalation',
+                'cilt': 'dermal', 'deri': 'dermal',
+            }
+            route = _TR_ROUTE.get(a.group(1).lower(), a.group(1).lower())
+            entry = {'value': _num(a.group(2)), 'unit': a.group(3)}
+            if a.group(4):
+                entry['form'] = a.group(4)
+            ate[route] = entry
             continue
 
         cm = re.match(r'^(.+?);\s*(H\d+\w*)\s*:\s*(.+)$', line)

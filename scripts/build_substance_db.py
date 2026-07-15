@@ -238,6 +238,7 @@ def build(rows: list[dict]) -> dict:
             "index_no":       row["index_no"],
             "names":          row["names"],
             "ec_no":          row["ec_no"],
+            "ec_no_list":     row.get("ec_no_list", [row["ec_no"]] if row["ec_no"] else []),
             "cas":            primary_cas,
             "synonyms":       synonyms,
             "atp":            row["atp"],

@@ -3,7 +3,7 @@
   "latest_atp": "ATP22",
   "substances_total": 3806,
   "aliases_total": 380,
-  "last_updated": "2026-06-26",
+  "last_updated": "2026-07-15",
   "atp_coverage": {
     "ATP01": 504,
     "ATP01/ATP01corr": 23,
@@ -59,7 +59,7 @@
     "CLP00/ATP22": 12
   },
   "notes": [
-    "ATP degeri birden fazla olan maddelerde son ATP esas alinir.",
-    "TR SEA Ek-6 maddelerinin buyuk cogunlugunda ATP alani bos; KKDiK Ek-6 tablosuna dayanir."
+    "ATP değeri birden fazla olan maddelerde son ATP esas alınır.",
+    "TR SEA Ek-6 maddelerinin büyük çoğunluğunda ATP alanı boş; KKDİK Ek-6 tablosuna dayanır."
   ]
 }

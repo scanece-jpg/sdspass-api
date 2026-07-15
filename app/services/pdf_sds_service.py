@@ -385,7 +385,7 @@ def _build_stot_organ_map(components: list) -> dict:
     Döner: {h_code: organ_name_en}  (yalnızca organ bilinen sonuçlar)
     """
     import re as _re
-    from app.services.stot_re_service import calculate_stot_re, GENERAL_ORGAN
+    from app.services.stot_engine import calculate as calculate_stot_re, GENERAL_ORGAN
     stot_comps = [
         {'cas': c.get('cas_no', ''), 'name': c.get('name', ''),
          'conc': c.get('concentration', 0), 'hazards': c.get('hazards', [])}
@@ -396,7 +396,7 @@ def _build_stot_organ_map(components: list) -> dict:
     for sr in stot_res.get('results', []):
         h = sr['h_code']
         organ = sr['organ']
-        if organ == 'Genel (organ belirtilmemiş)':
+        if organ == GENERAL_ORGAN:
             continue
         if h not in organ_map:
             organ_map[h] = organ
@@ -418,7 +418,7 @@ def _build_stot_organ_map(components: list) -> dict:
 
 def get_stot_stmt(h_code: str, lang: str, organ_en: str) -> str:
     """H370/H371/H372/H373 için hedef organ adı içeren H ifadesi üret."""
-    from app.services.stot_re_service import ORGAN_TR
+    from app.services.stot_engine import ORGAN_TR
     if lang == 'TR':
         organ = ORGAN_TR.get(organ_en.lower(), organ_en)
         if h_code == 'H370':

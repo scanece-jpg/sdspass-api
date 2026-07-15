@@ -1833,7 +1833,7 @@ async def calculate_clp_with_non_additivity(db, components: List[Any]) -> Dict:
     clp_result['manual_check_euh'] = euh_result['manual_check']
 
     # ─── 4. STOT RE Hedef Organ Toplamı ─────────────────────────────────────
-    from app.services.stot_re_service import calculate_stot_re
+    from app.services.stot_engine import calculate as calculate_stot_re
 
     stot_result = calculate_stot_re(comp_list)
     if stot_result['h_codes']:

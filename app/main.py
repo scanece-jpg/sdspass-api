@@ -471,7 +471,7 @@ async def generate_pdf(data: dict = Body(...)):
                     })
 
             for r in _stot_res.get('results', []):
-                hc = (r.get('h') or '').replace('*','').strip()[:4]
+                hc = (r.get('h_code') or '').replace('*','').strip()[:4]
                 if hc and hc not in _seen:
                     _seen.add(hc)
                     _cp.append({
@@ -1327,7 +1327,7 @@ async def clp_calculate(body: dict):
     Output: {h_codes, signal_word, signal_word_tr, passed, warnings}
     """
     from app.services.clp_service import classify_mixture_clp
-    from app.services.stot_re_service import calculate_stot_re
+    from app.services.stot_engine import calculate as calculate_stot_re
     from app.services.ecological_service import calculate_ecological
     import dataclasses
 

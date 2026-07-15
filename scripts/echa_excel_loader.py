@@ -48,6 +48,22 @@ def _parse_cas_list(cell) -> list[str]:
     return result
 
 
+def _parse_ec_list(cell) -> list[str]:
+    """
+    EC No hücresini ayrıştırır. Gruplu satırlarda birden fazla EC No olabilir:
+    '233-139-2 [1]\n234-343-4 [2]' → ['233-139-2', '234-343-4']
+    Tekil: '231-595-7' → ['231-595-7']
+    """
+    if pd.isna(cell):
+        return []
+    result = []
+    for segment in re.split(r'[\n;]', str(cell)):
+        ec = re.sub(r"\s*\[\d+\]", "", segment).strip().rstrip(';').strip()
+        if ec and ec != "-" and ec != "nan":
+            result.append(ec)
+    return result
+
+
 def _parse_name_list(cell) -> list[str]:
     """
     'Name [1]\nName2 [2]\n...' formatını isim listesine çevirir.
@@ -114,7 +130,8 @@ def load(excel_path: Path = EXCEL_PATH) -> list[dict]:
         rows.append({
             "index_no":    index_no,
             "names":       _parse_name_list(row[COL_NAME]),
-            "ec_no":       str(row[COL_EC_NO]).strip() if pd.notna(row[COL_EC_NO]) else "",
+            "ec_no_list":  _parse_ec_list(row[COL_EC_NO]),
+            "ec_no":       (_parse_ec_list(row[COL_EC_NO]) or [""])[0],
             "cas_list":    _parse_cas_list(row[COL_CAS]),
             "class_h_pairs": _zip_class_h(row[COL_CLASS], row[COL_H_CODE]),
             "suppl_h":     _split_lines(row[COL_SUPPL_H]),

@@ -177,6 +177,7 @@ class PBTResult:
 @dataclass
 class EcoOutput:
     aquatic: Optional[AquaticResult] = None
+    aquatic_acute: Optional[AquaticResult] = None  # H400 — H410 varsa da ayrıca set edilir
     pbt_results: List[Dict] = field(default_factory=list)
     ozone_hazard: List[str] = field(default_factory=list)
     biodegradability: Dict = field(default_factory=dict)
@@ -208,6 +209,29 @@ def _classify_log_kow(log_kow: float) -> str:
 
 
 # ─── ANA HESAPLAR ─────────────────────────────────────────────────────────────
+
+def _compute_sum_acute_m(
+    comp_list: List[Dict],
+    eco_test_data: Optional[Dict] = None,
+) -> float:
+    """H400 eşiği için sum_acute_m'i hesapla (H410 bileşenleri dahil)."""
+    total = 0.0
+    for comp in comp_list:
+        cas  = comp.get('cas_no', comp.get('cas', '')).strip()
+        conc = float(comp.get('worst_case_conc', comp.get('conc', 0)) or 0)
+        m_acute = comp.get('m_factors', {}).get('acute', 1) if comp.get('m_factors') else 1
+        td = (eco_test_data or {}).get(cas)
+        if td:
+            if td.ec50_algae:   m_acute = max(m_acute, _ec50_to_m_factor(td.ec50_algae))
+            if td.lc50_fish:    m_acute = max(m_acute, _ec50_to_m_factor(td.lc50_fish))
+            if td.ec50_daphnia: m_acute = max(m_acute, _ec50_to_m_factor(td.ec50_daphnia))
+        haz_classes = {h.get('h_class', '').replace('*', '').strip() for h in comp.get('hazards', [])}
+        if 'Aquatic Acute 1' in haz_classes or 'Aquatic Chronic 1' in haz_classes:
+            cutoff = 0.1 / max(m_acute, 1)
+            if conc >= cutoff:
+                total += (conc * m_acute) / 100
+    return total
+
 
 def calculate_aquatic(
     comp_list: List[Dict],
@@ -670,31 +694,21 @@ def check_endocrine_disruptors(comp_list: List[Dict]) -> List[str]:
 def calculate_ecological(
     comp_list: List[Dict],
     eco_test_data: Optional[Dict[str, EcoTestData]] = None,
-    eco_engine_aquatic: Optional[Dict] = None,
 ) -> EcoOutput:
-    """
-    Tam ekolojik değerlendirme — SDS Bölüm 12
-
-    eco_engine_aquatic: eco_engine'in {'h', 'h_class', 'formula'} dict'i.
-      Sağlandığında aquatic yeniden hesaplanmaz — eco_engine sonucu kullanılır
-      (divergence önleme, Sıra 4 eco handoff).
-    """
+    """Tam ekolojik değerlendirme — SDS Bölüm 12"""
     out = EcoOutput()
 
-    # 12.1 Aquatic — eco_engine handoff veya bağımsız hesap
-    if eco_engine_aquatic and eco_engine_aquatic.get('h'):
-        out.aquatic = AquaticResult(
-            h_code=eco_engine_aquatic['h'],
-            h_class=eco_engine_aquatic.get('h_class', ''),
-            signal='Warning',
-            sum_value=0.0,
-            formula=eco_engine_aquatic.get(
-                'formula', 'eco_engine (CLP Ek-I Tablo 4.1.2)'
-            ),
-            note='eco_engine handoff — toplama formülü eco_engine tarafından hesaplandı',
-        )
-    else:
-        out.aquatic = calculate_aquatic(comp_list, eco_test_data)
+    # 12.1 Aquatic — kronik önce; H410 varsa H400 de ayrıca kontrol et (CLP §4.1.3.5.5)
+    out.aquatic = calculate_aquatic(comp_list, eco_test_data)
+    if out.aquatic and out.aquatic.h_code != 'H400':
+        _sum_am = _compute_sum_acute_m(comp_list, eco_test_data)
+        if _sum_am >= 0.25:
+            out.aquatic_acute = AquaticResult(
+                h_code='H400', h_class='Aquatic Acute 1', signal='Warning',
+                sum_value=_sum_am,
+                formula=f"Σ(Ci×M_akut)/100={_sum_am:.4f} ≥ 0.25 (Tablo 4.1.1)",
+                note='H410 baskın — H400 yalnızca B2.1 sınıflandırmasına girer',
+            )
 
     # 12.2 Degradability
     out.biodegradability = assess_biodegradability(comp_list, eco_test_data)

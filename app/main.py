@@ -226,13 +226,12 @@ async def generate_pdf(data: dict = Body(...)):
         euh_details = data.get('euh_details', []) or [{'code':c,'text':''} for c in euh_codes]
         euh_result  = {'euh_codes': euh_codes, 'euh_details': euh_details}
 
-        # Ekoloji — eco_comps hazırla; calculate_ecological try bloğundan çağrılacak
-        # (eco_engine handoff: aquatic iki kez hesaplanmaz, divergence önlenir)
+        # Ekoloji — eco_comps hazırla
         eco_comps = [{'cas': c.get('cas',''), 'name': c.get('name',''),
                       'name_tr': c.get('name_tr',''),
                       'conc': float(c.get('conc', c.get('concentration',0)) or 0),
                       # worst_case_conc: ecological_service.calculate_aquatic() bunu okur.
-                      # concMax varsa aralığın üst sınırını kullan (eco_engine ile tutarlılık).
+                      # concMax varsa aralığın üst sınırını kullan.
                       'worst_case_conc': float(c.get('concMax') or c.get('conc', c.get('concentration',0)) or 0),
                       'hazards': c.get('hazards',[]),
                       'm_factors': c.get('m_factors', {})} for c in components]
@@ -242,8 +241,6 @@ async def generate_pdf(data: dict = Body(...)):
         ECO_H_CODES  = {'H400', 'H410', 'H411', 'H412', 'H413'}
         _FLAM_LIQ_H  = {'H224', 'H225', 'H226'}
         _auth_flam_h = None   # physical_engine: ölçülen FP → flam_liq H kodu
-        _auth_eco_h  = None   # eco_engine: sucul eko H kodu (birincil)
-        _auth_eco_hs = []    # eco_engine: tüm sucul H kodları (H410 + H400 birlikte olabilir)
         _clp_res     = {}     # classify_mixture_clp sonucu — try bloğunda doldurulur
         # NOT: h_codes/all_h_codes güncellemeleri TEK reconciliation bloğunda yapılır
 
@@ -265,7 +262,6 @@ async def generate_pdf(data: dict = Body(...)):
         # Frontend'den gelen değerler YERINE Python sonuçları kullanılır.
         # ISO 27001: tüm sınıflandırma hesapları sunucu tarafında yapılır.
         py_ppe = data.get('ppe', {})   # fallback değeri (hata durumu için)
-        _eco_confidence = 'low'        # hata durumu için güvenli fallback
 
         # ATE sağlık tehlikeleri — motor try'ından ÖNCE hesapla, böylece
         # motor hatası _be_ate_h'ı sıfırlayamaz (eski satır 434 sorunu giderildi)
@@ -282,7 +278,6 @@ async def generate_pdf(data: dict = Body(...)):
             from app.services.clp_service       import classify_mixture_clp as _clp_calc
             from app.services.physical_engine   import calculate as _phys_calc
             from app.services.stot_engine       import calculate as _stot_calc
-            from app.services.eco_engine        import calculate as _eco_calc2
             from app.services.transport_engine  import classify as _transport_calc
             from app.services.ppe_engine        import select as _ppe_calc
             from app.services.codes_i18n        import correct_hclass as _correct_hclass
@@ -311,44 +306,11 @@ async def generate_pdf(data: dict = Body(...)):
             _clp_res  = _clp_calc(components, mixture_ph=_ph_raw, mixture_form=_form_val)
             _phys_res = _phys_calc(components, form=_form_val, user_fp=_user_fp)
             _stot_res = _stot_calc(components)
-            _eco_res2 = _eco_calc2(components)
 
-            # ── Eco güvenilirlik skoru — M-faktör tamlığına göre ────────────────
-            # high: tüm H410/H400 bileşenlerinde açık M-faktörü girilmiş
-            # low : bazı bileşenler varsayılan M=1 kullanıyor → ihtiyatlı mod
-            _ECO_HAZ = {'H400', 'H410', 'H411', 'H412', 'H413'}
-            _eco_haz_comps = [
-                c for c in components
-                if any(
-                    (h.get('h_code') or '').replace('*','').strip()[:4] in _ECO_HAZ
-                    for h in (c.get('hazards') or [])
-                )
-                and float(c.get('concMax') or c.get('conc') or 0) > 0
-            ]
-            _eco_explicit_m = sum(
-                1 for c in _eco_haz_comps
-                if (c.get('m_factors') or {}).get('acute')   is not None
-                or (c.get('m_factors') or {}).get('chronic') is not None
-            )
-            _eco_confidence = (
-                'high' if (not _eco_haz_comps or _eco_explicit_m == len(_eco_haz_comps))
-                else 'low'
-            )
-
-            # ── ecological_service — eco_engine aquatic handoff ──────────────────
-            # eco_engine'in aquatic sonucu parametre olarak geçirilir;
-            # ecological_service yeniden hesaplama yapmaz → divergence önlenir.
             try:
-                eco_result = calculate_ecological(
-                    eco_comps,
-                    eco_engine_aquatic=_eco_res2.get('aquatic'),
-                )
+                eco_result = calculate_ecological(eco_comps)
             except Exception:
-                try:
-                    eco_result = calculate_ecological(eco_comps)
-                except Exception:
-                    eco_result = None
-            # ────────────────────────────────────────────────────────────────────
+                eco_result = None
 
             # ── B9 theo_props backfill ───────────────────────────────────────────
             # physical_engine'in hesapladığı teorik değerleri kullanıcı boş
@@ -436,7 +398,7 @@ async def generate_pdf(data: dict = Body(...)):
                 if hc[:4] not in ('H360', 'H361'):
                     hc = hc[:4]
                 # ECO_H_CODES burada filtreleniyor: aquatik sınıflandırma yalnızca
-                # eco_engine'den gelir (SEA Tablo 4.1.2 toplamsal formül).
+                # ecological_service'den gelir (SEA Tablo 4.1.2 toplamsal formül).
                 # clp_service'in 0.1% kesme değeri raporlama eşiğidir, sınıflandırma eşiği değil.
                 if hc and hc not in _seen and hc not in ECO_H_CODES:
                     _seen.add(hc)
@@ -481,18 +443,17 @@ async def generate_pdf(data: dict = Body(...)):
                         'cutoff_used': '—',
                     })
 
-            for _aq_key in ('aquatic', 'aquatic_acute'):
-                _aq = _eco_res2.get(_aq_key)
-                if _aq:
-                    hc = _aq.get('h','')
-                    if hc and hc not in _seen:
-                        _seen.add(hc)
-                        _cp.append({
-                            'h_code':      hc,
-                            'h_class':     _aq.get('h_class',''),
-                            'reason':      _aq.get('formula','Sucul ekoloji'),
-                            'cutoff_used': '—',
-                        })
+            if eco_result and hasattr(eco_result, 'aquatic') and eco_result.aquatic:
+                _aq = eco_result.aquatic
+                hc = _aq.h_code
+                if hc and hc not in _seen:
+                    _seen.add(hc)
+                    _cp.append({
+                        'h_code':      hc,
+                        'h_class':     _aq.h_class,
+                        'reason':      _aq.formula or 'Sucul ekoloji',
+                        'cutoff_used': '—',
+                    })
 
             # ── CLP Baskınlık kuralı — Bölüm 2.1 tablosuna uygula ───────────────
             # Fiziksel motor sonuçları CLP dominance'dan sonra eklendi;
@@ -522,16 +483,6 @@ async def generate_pdf(data: dict = Body(...)):
                 _cp = [e for e in _cp if e['h_code'] not in _dominated]
 
             py_clp_passed = _cp
-
-            # Eco H kodlarını reconciliation için sakla (h_codes güncelleme reconciliation'da)
-            # aquatic → kronik (H410/H411/...), aquatic_acute → akut (H400)
-            # İkisi aynı anda olabilir: H410 bileşeni aynı zamanda H400 üretir (CLP §4.1.3.5.5)
-            _auth_eco_hs = [
-                _eco_res2[_k]['h']
-                for _k in ('aquatic', 'aquatic_acute')
-                if isinstance(_eco_res2.get(_k), dict) and _eco_res2[_k].get('h')
-            ]
-            _auth_eco_h = _auth_eco_hs[0] if _auth_eco_hs else None
 
             # Transport — fiziksel H kodlarını da ilet
             _phys_h_tr = [(r.get('h') or r.get('h_code') or '')
@@ -575,32 +526,13 @@ async def generate_pdf(data: dict = Body(...)):
             h_codes     = [h for h in h_codes     if h not in _FLAM_LIQ_H] + [_auth_flam_h]
             all_h_codes = [h for h in all_h_codes if h not in _FLAM_LIQ_H] + [_auth_flam_h]
 
-        # ── 2. Sucul Eko — güvenilirlik skorlu uzlaştırma ────────────────────────
-        # _eco_confidence='high' → eco_engine (CLP Ek-I Tablo 4.1.1) kazanır
-        # _eco_confidence='low'  → daha tehlikeli olan seçilir (ihtiyatlılık)
-        _final_eco_h   = _auth_eco_h   # eco_engine sonucu
-        _eco_service_h = None           # ecological_service sonucu
+        # ── 2. Sucul Eko — ecological_service tek yetkili kaynak ───────────────────
+        _final_eco_h = None
         try:
             if eco_result and hasattr(eco_result, 'aquatic') and eco_result.aquatic:
-                _eco_service_h = eco_result.aquatic.h_code
-            elif isinstance(eco_result, dict):
-                _s12_val = (eco_result.get('sds_section_12') or {}).get('12.1', '')
-                if _s12_val and _s12_val not in ('Sınıflandırma yok', ''):
-                    _eco_service_h = _s12_val
+                _final_eco_h = eco_result.aquatic.h_code
         except Exception:
             pass
-
-        # Divergence çözümü
-        _ECO_SEV = {'H410': 5, 'H400': 4, 'H411': 3, 'H412': 2, 'H413': 1}
-        if _final_eco_h and _eco_service_h and _final_eco_h != _eco_service_h:
-            if _eco_confidence == 'high':
-                pass  # eco_engine kazanır — _final_eco_h değişmez
-            else:
-                # M-faktörleri eksik → ihtiyatlı seç (daha tehlikeli)
-                if _ECO_SEV.get(_eco_service_h, 0) > _ECO_SEV.get(_final_eco_h, 0):
-                    _final_eco_h = _eco_service_h
-        elif _final_eco_h is None:
-            _final_eco_h = _eco_service_h  # eco_engine bulamadı, service'e fallback
 
         # _final_eco_h hâlâ None ise → frontend eco koduna dokunma
         if _final_eco_h:
@@ -610,7 +542,14 @@ async def generate_pdf(data: dict = Body(...)):
             # → h_codes (B2.2 etiket) sadece baskın kodu alır
             _eco_add_label = [_final_eco_h]
             _eco_add_class = [_final_eco_h]
-            _h400_also = _final_eco_h != 'H400' and 'H400' in _auth_eco_hs
+            # H410 → CLP §4.1.3.5.5: aynı zamanda H400 (B2.1 sınıflandırma)
+            # ecological_service baskınlık kuralıyla tek sonuç döndürüyor;
+            # H400 satırını eco_result.aquatic_acute üzerinden kontrol et
+            _h400_also = False
+            if _final_eco_h not in (None, 'H400') and eco_result is not None:
+                _aq_acute = getattr(eco_result, 'aquatic_acute', None)
+                if _aq_acute and getattr(_aq_acute, 'h_code', None) == 'H400':
+                    _h400_also = True
             if _h400_also:
                 _eco_add_class.append('H400')  # B2.1'e H400 da gider
                 # h_codes'a H400 eklenmez — H410 zaten H400'ü kapsıyor (SEA Md.29(1))
@@ -622,7 +561,7 @@ async def generate_pdf(data: dict = Body(...)):
                 py_clp_passed = list(py_clp_passed) + [{
                     'h_code':      _final_eco_h,
                     'h_class':     '',
-                    'reason':      'Sucul ekoloji (eco_engine / ecological_service)',
+                    'reason':      'Sucul ekoloji (ecological_service)',
                     'cutoff_used': '—',
                 }]
             # H400 ayrı passed satırı — "Baskın tehlike sınıfı" notu yerine doğru gerekçe
@@ -641,15 +580,12 @@ async def generate_pdf(data: dict = Body(...)):
                         (eco_result.get('sds_section_12', {}) if isinstance(eco_result, dict) else {}))
                 if isinstance(_s12, dict):
                     _s12_cur = _s12.get('12.1', '')
-                    if (_eco_confidence == 'high'
-                            or _s12_cur in ('Sınıflandırma yok', '', None)):
+                    if _s12_cur in ('Sınıflandırma yok', '', None):
                         _s12['12.1'] = _final_eco_h
             except Exception:
                 pass
 
         # ── 2b. B12.1 garantisi — motor bulamasa bile h_codes'taki eco kodu yansıt ─
-        # Durum: eco_engine + ecological_service ikisi de bulamadı (_final_eco_h=None),
-        # ama frontend h_codes'ta H400 var → B2.1'de H400 görünüyor, B12.1 boş kalıyor.
         # Bu adım h_codes'u yetkili kaynak olarak kullanarak tutarlılığı sağlar.
         _eco_h_in_hcodes = next((h for h in h_codes if h in ECO_H_CODES), None)
         if _eco_h_in_hcodes:
@@ -1554,7 +1490,7 @@ async def sds_calculate(body: dict = Body(...)):
     from app.services.physical_engine     import calculate as phys_calculate
     from app.services.stot_engine         import calculate as stot_calculate
     from app.services.euh_engine          import calculate as euh_calculate
-    from app.services.eco_engine          import calculate as eco_calculate
+    from app.services.ecological_service  import calculate_aquatic as eco_calculate_aquatic
     from app.services.transport_engine    import classify as transport_classify
     from app.services.ppe_engine          import select as ppe_select
     from app.services.p_code_service      import assign_p_codes, select_label_p_codes, classify_sds_p_codes
@@ -1599,7 +1535,8 @@ async def sds_calculate(body: dict = Body(...)):
         euh_result = euh_calculate(comps)
 
         # ── 5. Ekoloji ────────────────────────────────────────────────────────
-        eco_result = eco_calculate(comps)
+        _aq = eco_calculate_aquatic(comps)
+        eco_result = {'h_codes': [_aq.h_code] if _aq else []}
 
         # ── 5b. ATE sağlık tehlikeleri — classify_mixture_clp Acute Tox. atlar ─
         from app.services.clp_service import calculate_ate_health_h_codes as _calc_ate

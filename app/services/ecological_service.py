@@ -218,7 +218,7 @@ def _compute_sum_acute_m(
     total = 0.0
     for comp in comp_list:
         cas  = comp.get('cas_no', comp.get('cas', '')).strip()
-        conc = float(comp.get('worst_case_conc', comp.get('conc', 0)) or 0)
+        conc = float(comp.get('worst_case_conc') or comp.get('concMax') or comp.get('conc') or 0)
         m_acute = comp.get('m_factors', {}).get('acute', 1) if comp.get('m_factors') else 1
         td = (eco_test_data or {}).get(cas)
         if td:
@@ -259,7 +259,7 @@ def calculate_aquatic(
 
     for comp in comp_list:
         cas = comp.get('cas_no', comp.get('cas', '')).strip()
-        conc = float(comp.get('worst_case_conc', comp.get('conc', 0)) or 0)
+        conc = float(comp.get('worst_case_conc') or comp.get('concMax') or comp.get('conc') or 0)
         hazards = comp.get('hazards', [])
 
         # M-faktörler — önce veritabanı
@@ -423,7 +423,7 @@ def assess_pbt(
 
     for comp in comp_list:
         cas = comp.get('cas_no', comp.get('cas', '')).strip()
-        conc = float(comp.get('worst_case_conc', comp.get('conc', 0)) or 0)
+        conc = float(comp.get('worst_case_conc') or comp.get('concMax') or comp.get('conc') or 0)
         if conc < 0.1:
             continue  # < %0.1 SDS'de belirtilmez
 
@@ -536,7 +536,7 @@ def assess_biodegradability(
 
     for comp in comp_list:
         cas = comp.get('cas_no', comp.get('cas', '')).strip()
-        conc = float(comp.get('worst_case_conc', comp.get('conc', 0)) or 0)
+        conc = float(comp.get('worst_case_conc') or comp.get('concMax') or comp.get('conc') or 0)
         if conc <= 0:
             continue
         total += conc
@@ -636,7 +636,7 @@ def assess_soil_mobility(
     results = []
     for comp in comp_list:
         cas = comp.get('cas_no', comp.get('cas', '')).strip()
-        conc = float(comp.get('worst_case_conc', comp.get('conc', 0)) or 0)
+        conc = float(comp.get('worst_case_conc') or comp.get('concMax') or comp.get('conc') or 0)
         if conc < 0.1:
             continue
         if cas in SOIL_MOBILITY_SKIP_CAS:
@@ -717,7 +717,7 @@ def calculate_ecological(
     kow_data = []
     for comp in comp_list:
         cas = comp.get('cas_no', comp.get('cas', '')).strip()
-        conc = float(comp.get('worst_case_conc', comp.get('conc', 0)) or 0)
+        conc = float(comp.get('worst_case_conc') or comp.get('concMax') or comp.get('conc') or 0)
         if conc < 0.1:
             continue
         td = (eco_test_data or {}).get(cas)

@@ -528,6 +528,19 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
                                 "cutoff_source": "SKS",
                                 "cutoff_value":  _c319,
                             })
+                        elif conc >= _H319_GCL:
+                            seen_h.add('H319')
+                            passed.append({
+                                "h_class":       "Eye Irrit. 2",
+                                "h_code":        "H319",
+                                "conc":          conc,
+                                "reason":        _cascade_reason(
+                                    cas, conc, scl_list, "H314", "H319", _H319_GCL, cutoff,
+                                    gcl_fallback=True
+                                ),
+                                "cutoff_source": "GKS",
+                                "cutoff_value":  _H319_GCL,
+                            })
                     if 'H315' not in seen_h and 'H319' not in seen_h:
                         warnings.append(
                             f"{cas} ({h_class} %{conc:.1f}) → "

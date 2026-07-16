@@ -837,8 +837,8 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
       <div class="phys-section-hdr" id="phys-section-hdr">Sıvı Ürün — Zorunlu Alanlar</div>
       <div class="phys-grid">
 
-        <!-- pH: sıvı, pasta, aerosol -->
-        <div class="phys-fw" data-forms="liquid paste aerosol">
+        <!-- pH: tüm formlar (katı/toz için sulu çözelti) -->
+        <div class="phys-fw" data-forms="liquid solid gas paste powder aerosol" data-mandatory="liquid solid gas paste powder aerosol">
           <div class="phys-fh">
             <label>pH Değeri <span class="motor-badge">● motor</span></label>
             <label class="na-check"><input type="checkbox" id="na_ph" onchange="toggleNA(this,'tf_ph','ph')"> N/A</label>
@@ -848,7 +848,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
         </div>
 
         <!-- Yoğunluk: tüm formlar -->
-        <div class="phys-fw" data-forms="liquid solid gas paste powder aerosol">
+        <div class="phys-fw" data-forms="liquid solid gas paste powder aerosol" data-mandatory="liquid solid gas paste powder aerosol">
           <div class="phys-fh">
             <label>Yoğunluk (g/mL) <span class="motor-badge">● motor</span><span id="src_density" class="src-badge"></span></label>
             <label class="na-check"><input type="checkbox" id="na_density" onchange="toggleNA(this,'tf_density','density')"> N/A</label>
@@ -859,7 +859,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
         </div>
 
         <!-- Viskozite: sıvı, pasta, aerosol -->
-        <div class="phys-fw" data-forms="liquid paste aerosol">
+        <div class="phys-fw" data-forms="liquid paste aerosol" data-mandatory="liquid paste aerosol">
           <div class="phys-fh">
             <label>Viskozite (mm²/s @40°C) <span class="motor-badge">● motor</span><span id="src_visc" class="src-badge"></span></label>
             <label class="na-check"><input type="checkbox" id="na_visc" onchange="toggleNA(this,'tf_visc','visc')"> N/A</label>
@@ -870,7 +870,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
         </div>
 
         <!-- Çözünürlük: sıvı, katı, pasta, toz, aerosol, gaz -->
-        <div class="phys-fw" data-forms="liquid solid paste powder aerosol gas">
+        <div class="phys-fw" data-forms="liquid solid paste powder aerosol gas" data-mandatory="liquid solid gas paste powder aerosol">
           <div class="phys-fh">
             <label>Su Çözünürlüğü (mg/L) <span style="color:var(--danger);font-size:10px">*</span> <span class="motor-badge">● motor</span><span id="src_sol" class="src-badge"></span></label>
             <label class="na-check"><input type="checkbox" id="na_sol" onchange="toggleNA(this,'tf_sol','sol')"> N/A</label>
@@ -881,7 +881,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
         </div>
 
         <!-- Parlama Noktası: sıvı, pasta, aerosol -->
-        <div class="phys-fw" data-forms="liquid paste aerosol">
+        <div class="phys-fw" data-forms="liquid paste aerosol" data-mandatory="liquid paste aerosol">
           <div class="phys-fh">
             <label>Parlama Noktası (°C) <span class="motor-badge">● motor</span><span id="src_fp" class="src-badge"></span></label>
             <label class="na-check"><input type="checkbox" id="na_fp" onchange="toggleNA(this,'tf_fp','fp')"> N/A</label>
@@ -891,8 +891,8 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
           <div id="warn_fp" class="thresh-warn"></div>
         </div>
 
-        <!-- Kaynama Noktası: sıvı, pasta, aerosol -->
-        <div class="phys-fw" data-forms="liquid paste aerosol">
+        <!-- Kaynama Noktası: gaz hariç tüm formlar -->
+        <div class="phys-fw" data-forms="liquid solid paste powder aerosol" data-mandatory="liquid solid paste powder aerosol">
           <div class="phys-fh">
             <label>Kaynama Noktası (°C) <span class="motor-badge">● motor</span><span id="src_bp" class="src-badge"></span></label>
             <label class="na-check"><input type="checkbox" id="na_bp" onchange="toggleNA(this,'tf_bp','bp')"> N/A</label>
@@ -902,8 +902,8 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
           <div id="warn_bp" class="thresh-warn"></div>
         </div>
 
-        <!-- Erime/Donma: sıvı, katı, toz, pasta (aerosol ve gaz hariç) -->
-        <div class="phys-fw" data-forms="liquid solid powder paste">
+        <!-- Erime/Donma: katı/toz için zorunlu, sıvı/pasta için opsiyonel -->
+        <div class="phys-fw" data-forms="liquid solid powder paste" data-mandatory="solid powder">
           <div class="phys-fh">
             <label>Erime / Donma Noktası (°C)</label>
             <label class="na-check"><input type="checkbox" id="na_mp" onchange="toggleNA(this,'tf_mp','mp')"> N/A</label>
@@ -912,7 +912,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
         </div>
 
         <!-- Buhar Basıncı: sıvı, pasta, aerosol, gaz -->
-        <div class="phys-fw" data-forms="liquid paste aerosol gas">
+        <div class="phys-fw" data-forms="liquid paste aerosol gas" data-mandatory="liquid paste aerosol gas">
           <div class="phys-fh">
             <label>Buhar Basıncı (hPa @20°C) <span class="motor-badge">● motor</span></label>
             <label class="na-check"><input type="checkbox" id="na_vp" onchange="toggleNA(this,'tf_vp','vp')"> N/A</label>
@@ -920,8 +920,8 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
           <input type="number" id="tf_vp" step="0.01" min="0" placeholder="OECD 104 / Raoult">
         </div>
 
-        <!-- Buharlaşma Hızı: sıvı, pasta, aerosol -->
-        <div class="phys-fw" data-forms="liquid paste aerosol">
+        <!-- Buharlaşma Hızı: opsiyonel -->
+        <div class="phys-fw" data-forms="liquid paste aerosol" data-mandatory="">
           <div class="phys-fh">
             <label>Buharlaşma Hızı</label>
             <label class="na-check"><input type="checkbox" id="na_evap" onchange="toggleNA(this,'tf_evap','evap')"> N/A</label>
@@ -929,8 +929,8 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
           <input type="text" id="tf_evap" placeholder="Ör: &lt;1 (n-BuAc=1), Yavaş">
         </div>
 
-        <!-- Kendiliğinden Tutuşma: tüm formlar -->
-        <div class="phys-fw" data-forms="liquid solid gas paste powder aerosol">
+        <!-- Kendiliğinden Tutuşma: opsiyonel -->
+        <div class="phys-fw" data-forms="liquid solid gas paste powder aerosol" data-mandatory="">
           <div class="phys-fh">
             <label>Kendiliğinden Tutuşma (°C)</label>
             <label class="na-check"><input type="checkbox" id="na_ait" onchange="toggleNA(this,'tf_ait','ait')"> N/A</label>
@@ -938,8 +938,8 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
           <input type="number" id="tf_ait" placeholder="Ör: 400">
         </div>
 
-        <!-- Bozunma Sıcaklığı: katı, toz, pasta, sıvı -->
-        <div class="phys-fw" data-forms="solid powder paste liquid">
+        <!-- Bozunma Sıcaklığı: opsiyonel -->
+        <div class="phys-fw" data-forms="solid powder paste liquid" data-mandatory="">
           <div class="phys-fh">
             <label>Bozunma Sıcaklığı (°C)</label>
             <label class="na-check"><input type="checkbox" id="na_decomp" onchange="toggleNA(this,'tf_decomp','decomp')"> N/A</label>
@@ -947,8 +947,8 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
           <input type="number" id="tf_decomp" placeholder="Ör: 250">
         </div>
 
-        <!-- Kriyojenik: sadece gaz -->
-        <div class="phys-fw" data-forms="gas">
+        <!-- Kriyojenik: sadece gaz, zorunlu -->
+        <div class="phys-fw" data-forms="gas" data-mandatory="gas">
           <div class="phys-fh">
             <label>Kriyojenik / Soğutulmuş</label>
           </div>
@@ -958,8 +958,8 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
           </label>
         </div>
 
-        <!-- Yanıcı İçerik: sadece aerosol -->
-        <div class="phys-fw" data-forms="aerosol">
+        <!-- Yanıcı İçerik: sadece aerosol, zorunlu -->
+        <div class="phys-fw" data-forms="aerosol" data-mandatory="aerosol">
           <div class="phys-fh">
             <label>Yanıcı İçerik (%w/w)</label>
             <label class="na-check"><input type="checkbox" id="na_aerosol_flam_pct" onchange="toggleNA(this,'tf_aerosol_flam_pct','aerosol_flam_pct')"> N/A</label>
@@ -968,6 +968,15 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
         </div>
 
       </div><!-- /phys-grid -->
+
+      <!-- Daha fazla toggle -->
+      <div id="phys-more-btn" style="margin-top:8px;display:none">
+        <button type="button" onclick="togglePhysMore()" id="phys-more-toggle"
+          style="width:100%;padding:6px;background:transparent;border:1px dashed var(--border2);border-radius:6px;color:var(--text3);font-size:11px;cursor:pointer;">
+          ▼ Diğer Alanlar
+        </button>
+      </div>
+      <div id="phys-more-items" style="display:none;margin-top:4px"></div>
     </div>
 
     <!-- ADIM 3: İkincil / isteğe bağlı alanlar -->
@@ -2362,6 +2371,33 @@ function updatePhysFieldsByForm() {
   const hdr = document.getElementById('phys-section-hdr');
   if (hdr) hdr.textContent = titles[form] || 'Zorunlu Alanlar';
 
+  // Zorunlu / opsiyonel ayrımı
+  const physGrid   = document.querySelector('.phys-grid');
+  const moreItems  = document.getElementById('phys-more-items');
+  const moreBtn    = document.getElementById('phys-more-btn');
+  if (physGrid && moreItems && moreBtn) {
+    // Önce daha-fazla içindekileri phys-grid'e geri taşı (reset)
+    Array.from(moreItems.querySelectorAll('.phys-fw')).forEach(el => physGrid.appendChild(el));
+    moreItems.style.display = 'none';
+    const btn = document.getElementById('phys-more-toggle');
+    if (btn) btn.textContent = '▼ Diğer Alanlar';
+
+    // Görünür alanları zorunlu/opsiyonel diye ayır
+    let optCount = 0;
+    document.querySelectorAll('.phys-grid .phys-fw[data-forms]').forEach(wrap => {
+      const visible = wrap.dataset.forms.split(' ').includes(form);
+      if (!visible) return; // zaten gizli, dokunma
+      const mandForms = (wrap.dataset.mandatory || '').split(' ').filter(Boolean);
+      const isMandatory = mandForms.includes(form);
+      if (!isMandatory) {
+        moreItems.appendChild(wrap);
+        optCount++;
+      }
+    });
+    moreBtn.style.display = optCount > 0 ? '' : 'none';
+    if (btn) btn.textContent = '▼ Diğer Alanlar (' + optCount + ')';
+  }
+
   // B9 Görünüm alanını yönetmeliğe göre otomatik doldur (sadece boşsa)
   const appearMap = {
     liquid: 'Sıvı',
@@ -2377,6 +2413,17 @@ function updatePhysFieldsByForm() {
     appInp.value = appearMap[form] || '';
     appInp.style.borderColor = '';
   }
+}
+
+// ── Fiziksel alan daha fazla toggle ──────────────────────────────────────────
+function togglePhysMore() {
+  const items = document.getElementById('phys-more-items');
+  const btn   = document.getElementById('phys-more-toggle');
+  if (!items || !btn) return;
+  const open = items.style.display !== 'none';
+  items.style.display = open ? 'none' : '';
+  const count = items.querySelectorAll('.phys-fw').length;
+  btn.textContent = open ? '▼ Diğer Alanlar (' + count + ')' : '▲ Diğer Alanları Gizle';
 }
 
 // ── Uygulanamaz toggle ────────────────────────────────────────────────────────

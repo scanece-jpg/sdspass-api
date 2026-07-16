@@ -2372,7 +2372,8 @@ function updatePhysFieldsByForm() {
     aerosol:'Aerosol',
   };
   const appInp = document.getElementById('tf_appearance');
-  if (appInp && !appInp.value.trim()) {
+  const autoVals = new Set(Object.values(appearMap));
+  if (appInp && (!appInp.value.trim() || autoVals.has(appInp.value.trim()))) {
     appInp.value = appearMap[form] || '';
     appInp.style.borderColor = '';
   }

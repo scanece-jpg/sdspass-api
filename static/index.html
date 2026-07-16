@@ -2361,6 +2361,21 @@ function updatePhysFieldsByForm() {
   };
   const hdr = document.getElementById('phys-section-hdr');
   if (hdr) hdr.textContent = titles[form] || 'Zorunlu Alanlar';
+
+  // B9 Görünüm alanını yönetmeliğe göre otomatik doldur (sadece boşsa)
+  const appearMap = {
+    liquid: 'Sıvı',
+    paste:  'Sıvı',
+    solid:  'Katı',
+    powder: 'Katı',
+    gas:    'Gaz',
+    aerosol:'Aerosol',
+  };
+  const appInp = document.getElementById('tf_appearance');
+  if (appInp && !appInp.value.trim()) {
+    appInp.value = appearMap[form] || '';
+    appInp.style.borderColor = '';
+  }
 }
 
 // ── Uygulanamaz toggle ────────────────────────────────────────────────────────

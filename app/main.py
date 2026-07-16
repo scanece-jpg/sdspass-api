@@ -343,8 +343,12 @@ async def generate_pdf(data: dict = Body(...)):
                     # (motor auto-fill ise JS dataset.source='theo' → measured=False gönderir)
                     _req_m = _req_methods.get(_bk)
                     _is_measured = bool(_req_m.get('measured', True)) if isinstance(_req_m, dict) else True
+                    # Kullanıcı girişinde standart = kullanıcının girdiği yöntem bilgisi;
+                    # teorik engine standardı (_tp_std) buraya taşınmaz — Bölüm 9'da
+                    # "hesaplanmış – CLP Annex VI" yerine doğru kaynak gösterilsin.
+                    _user_std = (_req_m.get('standard', '') or '') if isinstance(_req_m, dict) else ''
                     _phys_methods[_bk] = {
-                        'measured': _is_measured, 'standard': _tp_std,
+                        'measured': _is_measured, 'standard': _user_std,
                         'error_pct': None if _is_measured else _tp_err,
                     }
                 elif _tp_val is not None:

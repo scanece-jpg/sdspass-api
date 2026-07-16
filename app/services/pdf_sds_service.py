@@ -1756,7 +1756,30 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         term(lang, 'not_applicable') +
         (' (sulu karışım — su içeriyor)' if lang == 'TR' else ' (aqueous mixture — contains water)')
     )
-    if _is_gas_form:
+    # Aerosol form: CLP Ek-I §2.3 Not 2 — alevlenirlik H222/H223 üzerinden iletilir,
+    # bileşen parlama noktası aerosol için uygulanamaz.
+    _is_aerosol_form = _prod_form == 'aerosol'
+    if _is_aerosol_form:
+        _h_codes_all = clp.get('h_codes', []) + clp.get('all_h_codes', [])
+        _aerosol_h_ref = 'H222' if 'H222' in _h_codes_all else ('H223' if 'H223' in _h_codes_all else 'H222')
+        _na_aerosol_tr = (
+            f"Uygulanamaz — Ürün aerosol dispenser olarak sınıflandırılmıştır "
+            f"(bkz. Bölüm 2, {_aerosol_h_ref}). CLP Ek-I §2.3 Not 2 uyarınca aerosoller "
+            f"ayrıca alevlenebilir sıvı (§2.6) kriterine göre sınıflandırılmaz; "
+            f"alevlenirlik ısı yanma değeri ve/veya beyan edilen yanıcı içerik yüzdesi "
+            f"üzerinden değerlendirilir."
+        )
+        _na_aerosol_en = (
+            f"Not applicable — Product is classified as an aerosol dispenser "
+            f"(see Section 2, {_aerosol_h_ref}). Per CLP Annex I §2.3 Note 2, aerosols are "
+            f"not additionally classified under flammable liquids (§2.6); flammability is "
+            f"assessed via heat of combustion and/or declared flammable content percentage."
+        )
+        _na_aerosol = _na_aerosol_tr if lang == 'TR' else _na_aerosol_en
+        for row in all_phys_rows:
+            if row[0] == _fp_lbl:
+                row[1] = _na_aerosol
+    elif _is_gas_form:
         for row in all_phys_rows:
             if row[0] in (_fp_lbl, _bp_lbl) and row[1] in _NO_DATA_VALS:
                 row[1] = _na_gas

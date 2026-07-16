@@ -407,6 +407,19 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
                 sum_eye_irrit2 += float(_comp_ei.get("concentration", _comp_ei.get("conc", 0)) or 0)
                 break
 
+    # CLP Annex I §2.3 Not 2: Aerosol form olduğunda bileşenlerin Flam.Gas / Press.Gas /
+    # Flam.Liq / Flam.Sol sınıflandırmaları karışıma miras bırakılmaz — bu tehlikeler
+    # yalnızca Aerosol sınıfı (H222/H223/H229) üzerinden iletilir.
+    _is_aerosol = (mixture_form or '').lower() == 'aerosol'
+    _AEROSOL_EXCLUDED_CLASSES = {
+        'Flam. Gas 1', 'Flam. Gas 2',
+        'Press. Gas', 'Ref. Gas',
+        'Flam. Liq. 1', 'Flam. Liq. 2', 'Flam. Liq. 3',
+        'Flam. Sol. 1', 'Flam. Sol. 2',
+        'Aerosol 1', 'Aerosol 2',  # physical_engine ayrıca üretiyor, çift sayımı önle
+    }
+    _AEROSOL_EXCLUDED_H = {'H220','H221','H222','H223','H224','H225','H226','H228','H280','H281'}
+
     # Her bileşen × her tehlike sınıfı
     for comp in components:
         cas = comp.get("cas_no", comp.get("cas", ""))
@@ -419,6 +432,11 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
             # Cutoff/konvansiyonel yöntem (Tablo 3.1.3) Acute Tox. için kullanılmaz;
             # ATE hesabı aşağıdaki calculate_clp() async fonksiyonunda yapılır.
             if h_class.startswith('Acute Tox.') or h_class.startswith('Akut Tok.'):
+                continue
+
+            # CLP Annex I §2.3 Not 2: Aerosol ürünlerde Flam.Gas/Press.Gas/Flam.Liq/Flam.Sol
+            # bileşen sınıfları karışıma taşınmaz — alevlenirlik yalnızca H222/H223 ile iletilir.
+            if _is_aerosol and (h_class in _AEROSOL_EXCLUDED_CLASSES or h_code in _AEROSOL_EXCLUDED_H):
                 continue
 
             rule = CLP_CUTOFFS_DICT.get(h_class)

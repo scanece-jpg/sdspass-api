@@ -93,13 +93,13 @@ def _normalize_hclass(raw: str) -> str:
     if re.match(r'SOLNM\s*HASSAS', b):
         return f'Resp. Sens.{cat}'
 
+    # BHOT Tekrarlanan Maruziyet (STOT RE) — önce kontrol et (TEKR, TEKRAr, TEKRarlı)
+    if re.match(r'BHOT\s*TEKR', b):
+        return f'STOT RE{cat}'
+
     # BHOT Tek Maruziyet (STOT SE)
     if re.match(r'BHOT\s*TEK', b):
         return f'STOT SE{cat}'
-
-    # BHOT Tekrarlanan Maruziyet (STOT RE)
-    if re.match(r'BHOT\s*TEKR', b):
-        return f'STOT RE{cat}'
 
     # Kanserojen
     if re.match(r'KANS', b):

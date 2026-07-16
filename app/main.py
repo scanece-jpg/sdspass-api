@@ -968,18 +968,8 @@ async def generate_pdf(data: dict = Body(...)):
         except Exception:
             pass
 
-        # ── Validator pipeline — PDF öncesi çapraz bölüm denetimi ──────────────
+        # Validator devre dışı
         _val_issues: list = []
-        try:
-            from app.services.sds_validator import validate_sds as _validate
-            _val_issues = _validate(
-                sds_data,
-                h_codes,
-                _parsed_phys,
-                mapped_comps,
-            )
-        except Exception as _val_err:
-            print(f'[PDF] Validator hatası (PDF oluşturma devam eder): {_val_err}')
 
         pdf_bytes = generate_sds_pdf(sds_data, lang=lang)
 

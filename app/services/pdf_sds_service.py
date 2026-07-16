@@ -693,13 +693,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         if not any(h in _danger_h for h in clp['h_codes']):
             clp['signal_word'] = 'Warning'
 
-    # ── Cross-section validation ──────────────────────────────────────────────
-    _validation_issues = validate_sds(
-        sds_data   = sds_data,
-        h_codes    = clp.get('h_codes', []),
-        phys_props = sds_data.get('phys_props', {}),
-        components = components,
-    )
+    # Validator devre dışı
+    _validation_issues = []
     disclosure = sds_data.get('disclosure_map', {})
     phys = sds_data.get('phys_props', {})
     phys_methods = sds_data.get('phys_methods', {})

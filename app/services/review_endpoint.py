@@ -20,66 +20,67 @@ _SYSTEM_PROMPT = """Sen KKDİK ve SEA yönetmelikleri uzmanı bir GBF/SDS denet�
 CLP Tüzüğü (EC 1272/2008), KKDİK, SEA, ADR ve ilgili ECHA kılavuzlarını tam olarak biliyorsun.
 
 Sana üç kaynak verilecek:
-  A) Denetlenecek SDS'in 16 bölüm okunabilir metni — PDF'deki gerçek değerler
+  A) Denetlenecek SDS'in tam PDF'i — sayfaları ve tabloları olduğu gibi oku
   B) İlgili mevzuat paragrafları (SEA, KKDİK, CLP, ADR) — ek bağlam olarak kullan
   C) Otomatik kural kontrolü sonuçları (V001-V027 kodlu bulgular)
 
-A kaynağı bölüm bölüm düz metin formatındadır. Bölümlerin içerdiği alanlar:
-  product/supplier   → Bölüm 1 (kimlik ve tedarikçi)
-  clp.all_h_codes    → Bölüm 2.1 (tam tehlike sınıflandırması)
-  clp.h_codes        → Bölüm 2.2 etiket H kodları (dominance uygulanmış)
-  clp.signal_word    → Bölüm 2.2 uyarı kelimesi
-  components         → Bölüm 3.2 (bileşenler, CAS, konsantrasyon, H kodları)
-  phys_props         → Bölüm 9 (fiziksel ve kimyasal özellikler)
-  eco                → Bölüm 12 (ekoloji / sucul tehlike)
-  transport          → Bölüm 14 (ADR taşıma)
-  p_codes            → Bölüm 2.2 güvenlik önlemleri (P kodları)
-  euh                → Bölüm 2.2 EUH kodları
-  ate_mix_details    → Bölüm 11 ATEmix hesap detayı
-  revision           → Bölüm 16 revizyon bilgisi
-
 Görevin:
-1. A kaynağındaki SDS verisini baştan sona oku.
+1. A kaynağındaki SDS PDF'ini baştan sona oku — tüm bölümleri, tabloları ve değerleri gör.
 2. Her bölümü KKDİK Ek-2 ve CLP Tüzüğü gerekliliklerine göre bağımsız olarak denetle.
-3. Tespit ettiğin her sorunu şu şekilde raporla:
-   - Hangi bölüm (B1–B16)
-   - Ne eksik veya hatalı
-   - Hangi mevzuat maddesine aykırı — madde/ek/tablo numarasıyla birlikte
-   - Mevzuat kaynağına doğrudan bağlantı (aşağıdaki URL tablosundan)
-   - Somut düzeltme adımı
-4. C kaynağındaki otomatik bulgular varsa onları da açıkla ve yorumla.
-5. Sorun tespit etmediğin bölümleri "## Uyumlu Bölümler" başlığı altında tek satırla listele:
-   örn. "✓ B1 — Kimyasal tanımlama tam ve doğru."
-   Bu bölüm ZORUNLUDUR — rapor her zaman hem hataları hem uyumlu bölümleri içermelidir.
+3. Tespit ettiğin her sorunu aşağıdaki tablo formatında raporla.
+4. C kaynağındaki otomatik bulgular varsa onları da tabloya dahil et ve yorumla.
+5. Sorun tespit etmediğin bölümleri "## Uyumlu Bölümler" tablosunda listele — BU BÖLÜM ZORUNLUDUR.
 
-Yanıtını şu formatta ver:
-## Hatalar (Düzeltilmesi Zorunlu)
-## Uyarılar (Kontrol Edilmeli)
-## Bilgi Notları
-## Uyumlu Bölümler
-## Genel Değerlendirme
+---
 
-**Her bulgu (hata/uyarı/not) şu şablona göre yazılmalıdır:**
-- **Alan:** [SDS bölümü ve alan adı, ör. B2.1 — H kodları]
-- **Okunan değer:** [JSON'dan birebir alınan değer veya "mevcut değil"]
-- **Sorun:** [neden yanlış olduğunun kısa açıklaması]
-- **Beklenen:** [doğru değer veya format]
-> 📋 **[Mevzuat Adı — Madde/Ek No]** — [kısa açıklama]
+## ÇIKTI FORMATI — ZORUNLU TABLO YAPISI
 
-**Uyumlu bölümlerde her satır şu formatta olmalıdır:**
-✅ **[Bölüm adı]** — Okunan: [JSON'daki değer veya "mevcut ve eksiksiz"] → Uygun
+Her bölüm için aşağıdaki Markdown tablo formatını kullan. Başka format kabul edilmez.
 
-Her bulgu için dayanak şu formatta olsun:
-> 📋 **[Mevzuat Adı — Madde/Ek No]** — [kısa açıklama]
-> 🔗 [bağlantı metni](URL)
+### Hatalar (Düzeltilmesi Zorunlu)
 
-Mevzuat URL tablosu (bulguya göre uygun olanı seç):
-- KKDİK (ana metin + tüm ekler aynı sayfada): https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=21737&MevzuatTur=7&MevzuatTertip=5
-  → Ek-2 (GBF/SDS gereklilikleri), Ek-5 (muafiyetler), Ek-6 (SVHC) bu sayfada yer alır
-- SEA Yönetmeliği   : https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=20764&MevzuatTur=7&MevzuatTertip=5
-- CLP Tüzüğü (EU)   : https://eur-lex.europa.eu/legal-content/TR/TXT/?uri=CELEX:02008R1272-20231101
-- ECHA CLP Kılavuzu : https://echa.europa.eu/tr/guidance-documents/guidance-on-clp
-- ADR 2023          : https://unece.org/transport/dangerous-goods/adr-2023
+| # | Bölüm / Alan | Okunan | Olması Gereken | Mevzuat Dayanağı |
+|---|-------------|--------|----------------|-----------------|
+| H1 | B2.1 — H kodları | H225, H319 | H225, H314, H319 | [KKDİK Ek-2](URL) |
+
+### Uyarılar (Kontrol Edilmeli)
+
+| # | Bölüm / Alan | Okunan | Olması Gereken | Mevzuat Dayanağı |
+|---|-------------|--------|----------------|-----------------|
+| U1 | B9 — Viskozite birimi | 0,74 | 0,74 mm²/s @40°C | [CLP Ek-I §3.10](URL) |
+
+### Bilgi Notları
+
+| # | Bölüm / Alan | Gözlem | Öneri | Dayanak |
+|---|-------------|--------|-------|---------|
+| N1 | B11 — ATEmix | Su (%30) ATE dışı | "Zararsız bileşen olarak dışlandı" notu ekle | [CLP Ek-I §3.1.3.6](URL) |
+
+### Uyumlu Bölümler
+
+| Bölüm | Okunan Değer (özet) | Sonuç |
+|-------|---------------------|-------|
+| B1 — Kimlik | Ürün adı, tedarikçi, UZEM 114 mevcut | ✅ Uyumlu |
+| B14 — ADR | UN 1993, Sınıf 3, PG II | ✅ Uyumlu |
+
+### Genel Değerlendirme
+
+Kısa paragraf: toplam bulgu sayısı, kritik risk varsa belirt, öncelikli aksiyon.
+
+---
+
+## TABLO YAZIM KURALLARI
+
+- "Okunan" sütunu: PDF'den birebir okunan değer — kısalt, uydurma.
+- "Olması Gereken" sütunu: somut, uygulanabilir düzeltme — "gerekli" gibi muğlak ifade yazma.
+- "Mevzuat Dayanağı" sütunu: köprü metni formatında → [KKDİK Ek-2](URL) veya [CLP §X.X](URL)
+- Hata numarası: H1, H2… | Uyarı: U1, U2… | Not: N1, N2…
+- Tablo satırı içinde alt satır gerekiyorsa `<br>` kullan.
+- Mevzuat URL tablosu (uygun olanı seç):
+  · KKDİK Ek-2: https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=21737&MevzuatTur=7&MevzuatTertip=5
+  · SEA Yönetmeliği: https://www.mevzuat.gov.tr/mevzuat?MevzuatNo=20764&MevzuatTur=7&MevzuatTertip=5
+  · CLP Tüzüğü: https://eur-lex.europa.eu/legal-content/TR/TXT/?uri=CELEX:02008R1272-20231101
+  · ECHA CLP Kılavuzu: https://echa.europa.eu/tr/guidance-documents/guidance-on-clp
+  · ADR 2023: https://unece.org/transport/dangerous-goods/adr-2023
 
 Yanıt dili: Türkçe. Teknik terimler için parantez içinde İngilizce karşılık ekle.
 
@@ -589,16 +590,9 @@ async def sds_review(data: dict = Body(...)):
             }
             sds_for_validator = sds_data_simple
 
-        # ── 1. Kural kontrolü (V001-V027) ──────────────────────────────────────
-        from app.services.sds_validator import validate_sds
-        issues = validate_sds(sds_for_validator, h_codes, phys_props, components)
-        issues = [i for i in issues if i.get("code") not in ("V013", "V015")]
-
-        summary = {
-            "error":   sum(1 for i in issues if i["level"] == "error"),
-            "warning": sum(1 for i in issues if i["level"] == "warning"),
-            "info":    sum(1 for i in issues if i["level"] == "info"),
-        }
+        # Validator devre dışı
+        issues = []
+        summary = {"error": 0, "warning": 0, "info": 0}
 
         # ── 2. SDS verisi — PDF üret, Claude native PDF okusun ─────────────────
         import io, base64

@@ -2118,7 +2118,14 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                       'cutoff_used': 'CLP Ek-I §2.3 — tüm aerosollere uygulanır'})
 
     if form in ('liquid', 'paste'):
-        asp = _calc_asp_tox(comps, test_data)
+        # Kullanıcı viskozite girmemişse hesaplanmış değeri kullan
+        _asp_test = dict(test_data)
+        if _asp_test.get('viscosity') is None:
+            _pre_props = calc_theo_props(comps) or {}
+            _calc_visc = (_pre_props.get('viscosity') or {}).get('value')
+            if _calc_visc is not None:
+                _asp_test['viscosity'] = _calc_visc
+        asp = _calc_asp_tox(comps, _asp_test)
         if asp['result']:
             primary.append({'type': 'asp_tox', **asp['result'],
                             'source': asp['source'], 'total': asp['total'],

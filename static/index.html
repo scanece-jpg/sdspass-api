@@ -840,8 +840,15 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
         <!-- pH: tüm formlar (katı/toz için sulu çözelti) -->
         <div class="phys-fw" data-forms="liquid solid gas paste powder aerosol" data-mandatory="liquid solid gas paste powder aerosol">
           <div class="phys-fh">
-            <label>pH Değeri <span class="motor-badge">● motor</span></label>
+            <label id="ph_label">pH Değeri <span class="motor-badge">● motor</span></label>
             <label class="na-check"><input type="checkbox" id="na_ph" onchange="toggleNA(this,'tf_ph','ph')"> N/A</label>
+          </div>
+          <div id="ph_conc_row" style="display:none;align-items:center;gap:6px;margin-bottom:4px;font-size:11px;color:var(--text2)">
+            <span>%</span>
+            <input type="number" id="tf_ph_conc" value="1" min="0.01" max="100" step="0.1"
+                   style="width:60px;padding:3px 6px;border-radius:4px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:11px;font-family:var(--mono)"
+                   oninput="updatePhLabel()">
+            <span>sulu çözeltide</span>
           </div>
           <input type="text" id="tf_ph" placeholder="Ör: 7.0 veya 2-4 (aralık)"
                  onblur="normalizePh(this)">
@@ -2398,18 +2405,15 @@ function updatePhysFieldsByForm() {
     if (btn) btn.textContent = '▼ Diğer Alanlar (' + optCount + ')';
   }
 
-  // pH etiketi ve placeholder'ı form'a göre güncelle
-  const phLabel = document.querySelector('#na_ph')?.closest('.phys-fw')?.querySelector('label');
-  const phInp   = document.getElementById('tf_ph');
-  if (phLabel && phInp) {
-    if (['solid','powder'].includes(form)) {
-      phLabel.childNodes[0].textContent = 'pH Değeri (%1 sulu çözeltide) ';
-      phInp.placeholder = 'Ör: %1 sulu çözeltide pH 9,5';
-    } else {
-      phLabel.childNodes[0].textContent = 'pH Değeri ';
-      phInp.placeholder = 'Ör: 7.0 veya 2-4 (aralık)';
-    }
+  // pH konsantrasyon satırını form'a göre göster/gizle
+  const phConcRow = document.getElementById('ph_conc_row');
+  const phInp     = document.getElementById('tf_ph');
+  if (phConcRow) {
+    const isSolidForm = ['solid','powder'].includes(form);
+    phConcRow.style.display = isSolidForm ? 'flex' : 'none';
+    if (phInp) phInp.placeholder = isSolidForm ? 'Ör: 9,5 veya 8-10 (aralık)' : 'Ör: 7.0 veya 2-4 (aralık)';
   }
+  updatePhLabel();
 
   // B9 Görünüm alanını yönetmeliğe göre otomatik doldur (sadece boşsa)
   const appearMap = {
@@ -2426,6 +2430,21 @@ function updatePhysFieldsByForm() {
     appInp.value = appearMap[form] || '';
     appInp.style.borderColor = '';
   }
+}
+
+// ── pH etiketi güncelle ───────────────────────────────────────────────────────
+function updatePhLabel() {
+  const form = document.getElementById('pform')?.value || 'liquid';
+  const label = document.getElementById('ph_label');
+  if (!label) return;
+  const motorBadge = label.querySelector('.motor-badge');
+  if (['solid','powder'].includes(form)) {
+    const conc = document.getElementById('tf_ph_conc')?.value || '1';
+    label.childNodes[0].textContent = 'pH Değeri (%' + conc + ' sulu çözeltide) ';
+  } else {
+    label.childNodes[0].textContent = 'pH Değeri ';
+  }
+  if (motorBadge && !label.contains(motorBadge)) label.appendChild(motorBadge);
 }
 
 // ── Fiziksel alan daha fazla toggle ──────────────────────────────────────────

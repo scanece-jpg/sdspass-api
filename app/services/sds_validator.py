@@ -113,11 +113,14 @@ def validate_sds(
 
     # ── B Fiziksel Doğrulama ────────────────────────────────────────────
     
-    # V001: H226 → Parlama Noktası zorunlu ve ≤60°C olmalı
-    if "H226" in h_codes or "H225" in h_codes or "H224" in h_codes:
+    # V001: Alevlenir Sıvı → Parlama Noktası zorunlu (aerosol formda uygulanmaz)
+    _flam_liq_present = {h for h in ("H224","H225","H226") if h in h_codes}
+    _form_val = (sds_data.get('product') or {}).get('form', '')
+    if _flam_liq_present and _form_val != 'aerosol':
+        _flam_codes_str = '/'.join(sorted(_flam_liq_present))
         if fp is None:
             error("V001","B9",
-                  "H226 (Alevlenir Sıvı) kodunuz var. Bölüm 9'da Parlama Noktası zorunludur.",
+                  f"{_flam_codes_str} (Alevlenir Sıvı) kodunuz var. Bölüm 9'da Parlama Noktası zorunludur.",
                   "CLP Annex I 2.6 + KKDİK EK-2")
         elif fp > 60 and "H226" in h_codes:
             warn("V002","B9",
@@ -444,6 +447,11 @@ def validate_sds(
         p = _H_TO_PIC.get(h)
         if p:
             _required_pics.add(p)
+    # GHS04 baskınlık — CLP Art.26(1)(d): GHS02 (alev) veya GHS06 (kafatası) varsa
+    # GHS04 (tüp) opsiyoneldir — eksik olması hata değil.
+    if 'GHS04' in _required_pics and ('GHS02' in _required_pics or 'GHS06' in _required_pics):
+        _required_pics.discard('GHS04')
+
     # GHS07 baskınlık — CLP Madde 26 / SEA Madde 28, ghs_pictogram.py ile tutarlı:
     #
     # Kural A — CLP Art.26(3): GHS06 (kafatası) varsa GHS07 tamamen kaldırılır.

@@ -963,6 +963,15 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             hc = hc[:4]
         if not hc or hc in seen_clf:
             continue
+        # H229 ayrı satır değil — CLP Tablo 2.3.1'e göre H222/H223 ile birlikte
+        # verilir; ayrı "Aerosol 3" kategorisi yoktur. H222/H223 satırına eklenir.
+        if hc == 'H229':
+            for row in clf_rows:
+                if row[1] in ('H222', 'H223'):
+                    if 'H229' not in row[1]:
+                        row[1] = row[1] + ' + H229'
+            seen_clf.add('H229')
+            continue
         seen_clf.add(hc)
         hclass_fallback = translate_hclass(_h_to_class.get(hc, ''), lang) + _route_sfx.get(hc, '')
         clf_rows.append([hclass_fallback, hc_raw, dom_note])

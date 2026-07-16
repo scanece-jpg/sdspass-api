@@ -2398,6 +2398,19 @@ function updatePhysFieldsByForm() {
     if (btn) btn.textContent = '▼ Diğer Alanlar (' + optCount + ')';
   }
 
+  // pH etiketi ve placeholder'ı form'a göre güncelle
+  const phLabel = document.querySelector('#na_ph')?.closest('.phys-fw')?.querySelector('label');
+  const phInp   = document.getElementById('tf_ph');
+  if (phLabel && phInp) {
+    if (['solid','powder'].includes(form)) {
+      phLabel.childNodes[0].textContent = 'pH Değeri (%1 sulu çözeltide) ';
+      phInp.placeholder = 'Ör: %1 sulu çözeltide pH 9,5';
+    } else {
+      phLabel.childNodes[0].textContent = 'pH Değeri ';
+      phInp.placeholder = 'Ör: 7.0 veya 2-4 (aralık)';
+    }
+  }
+
   // B9 Görünüm alanını yönetmeliğe göre otomatik doldur (sadece boşsa)
   const appearMap = {
     liquid: 'Sıvı',
@@ -2430,6 +2443,7 @@ function togglePhysMore() {
 function toggleNA(cb, inputId, key) {
   const inp = document.getElementById(inputId);
   if (!inp) return;
+  const reasonId = 'na_reason_' + key;
   if (cb.checked) {
     inp.value = '';
     inp.disabled = true;
@@ -2438,9 +2452,20 @@ function toggleNA(cb, inputId, key) {
     _updateSrcBadge(key, '');
     const w = document.getElementById('warn_' + key);
     if (w) w.style.display = 'none';
+    // Gerekçe alanı ekle
+    if (!document.getElementById(reasonId)) {
+      const r = document.createElement('input');
+      r.type = 'text';
+      r.id = reasonId;
+      r.placeholder = 'Gerekçe: ör. "Bu koşullarda uygulanamaz" veya "Test edilmemiş"';
+      r.style.cssText = 'margin-top:4px;font-size:10px;opacity:0.8';
+      inp.parentNode.insertBefore(r, inp.nextSibling);
+    }
   } else {
     inp.disabled = false;
     inp.dataset.na = '';
+    // Gerekçe alanını kaldır
+    document.getElementById(reasonId)?.remove();
   }
 }
 
@@ -3421,80 +3446,79 @@ function _checkPDFMandatory() {
 
   const missing = [];
 
-  // 1. Fiziksel hal — her formda zorunlu
+  // 1. Fiziksel hal — her formda zorunlu (SDS'de mutlaka yazılmalı)
   if (!document.getElementById('tf_appearance')?.value?.trim()) {
-    missing.push({ label: 'Görünüm (Fiziksel hal)', reason: 'SDS Bölüm 9 — "bilgi yok" kabul edilmez (KKDİK Ek-2)' });
+    missing.push({ label: 'Görünüm (Fiziksel hal)', reason: 'SDS Bölüm 9 — ürünün fiziksel hali belirtilmeli (KKDİK Ek-2 §9.1)' });
   }
 
   // 2. Renk — her formda zorunlu
   if (!document.getElementById('tf_color')?.value?.trim()) {
-    missing.push({ label: 'Renk', reason: 'SDS Bölüm 9 — "bilgi yok" kabul edilmez (KKDİK Ek-2)' });
+    missing.push({ label: 'Renk', reason: 'SDS Bölüm 9 — renk bilgisi belirtilmeli; bilinmiyorsa gerekçe yazın (KKDİK Ek-2 §9.1)' });
   }
 
   // 3. Koku — her formda zorunlu
   if (!document.getElementById('tf_odor')?.value?.trim()) {
-    missing.push({ label: 'Koku', reason: 'SDS Bölüm 9 — "bilgi yok" kabul edilmez (KKDİK Ek-2)' });
+    missing.push({ label: 'Koku', reason: 'SDS Bölüm 9 — koku bilgisi belirtilmeli; bilinmiyorsa gerekçe yazın (KKDİK Ek-2 §9.1)' });
   }
 
-  // 4. pH Değeri — gaz formu hariç tüm formlarda zorunlu (EU 2020/878 §9.1(k): "Does not apply to gases")
-  // Katı/toz için sulu çözelti pH'ı ölçülür; sıvı/pasta/aerosol için doğrudan ölçülür.
+  // 4. pH Değeri — motor hesabı + KKDİK Ek-2 §9.1
   const phNA = document.getElementById('na_ph')?.checked;
-  if (form !== 'gas' && !phNA && !document.getElementById('tf_ph')?.value?.trim()) {
+  if (!phNA && !document.getElementById('tf_ph')?.value?.trim()) {
     const phReason = ['solid','powder'].includes(form)
-      ? 'SDS Bölüm 9 — katı/toz için sulu çözelti pH\'ı belirtin (EU 2020/878 §9.1(k))'
-      : 'SDS Bölüm 9 — ölçülemeyen/uygulanamayan durumlarda N/A işaretleyin (KKDİK Ek-2)';
+      ? 'Motor için gerekli — katı/toz için %1 sulu çözeltide pH ölçün; uygulanamıyorsa N/A + gerekçe'
+      : 'Motor için gerekli — ölçülemeyen/uygulanamayan durumlarda N/A + gerekçe yazın';
     missing.push({ label: 'pH Değeri', reason: phReason });
   }
 
-  // 5. Parlama Noktası — sadece sıvı/pasta/aerosol, N/A işaretlenmemişse
+  // 5. Parlama Noktası — alevlenirlik motoru için gerekli
   if (isLiquid) {
     const fpEl = document.getElementById('tf_fp');
     const fpNA = fpEl?.dataset?.na === 'true';
     if (!fpNA && !fpEl?.value?.trim()) {
-      missing.push({ label: 'Parlama Noktası', reason: 'Alevlenirlik sınıfı (H224/H225/H226) belirlenemez — ölçülen değer gerekli' });
+      missing.push({ label: 'Parlama Noktası', reason: 'Motor için gerekli — H224/H225/H226 sınıfı belirlenemez; N/A ise N/A + gerekçe yazın' });
     }
   }
 
-  // 4. Erime/Donma Noktası — katı ve toz formlar için zorunlu
+  // 6. Erime/Donma Noktası — katı/toz için motor + SDS
   const isSolid = ['solid', 'powder'].includes(form);
   if (isSolid) {
     const mpEl = document.getElementById('tf_mp');
-    if (!mpEl?.value?.trim()) {
-      missing.push({ label: 'Erime/Donma Noktası', reason: 'Katı/toz formlar için zorunlu — KKDİK Ek-2 §9.1' });
+    const mpNA = document.getElementById('na_mp')?.checked;
+    if (!mpNA && !mpEl?.value?.trim()) {
+      missing.push({ label: 'Erime/Donma Noktası', reason: 'Motor için gerekli — katı/toz SDS\'de beklenir; bilinmiyorsa N/A + gerekçe' });
     }
   }
 
-  // 5. Yoğunluk — gaz hariç tüm formlar zorunlu (EU 2020/878 §9.1: "Only apply to liquids and solids")
+  // 7. Yoğunluk — konsantrasyon ve karışım hesabı için gerekli
   const densEl = document.getElementById('tf_density');
   const densNA = densEl?.dataset?.na === 'true';
-  if (form !== 'gas' && !densNA && !densEl?.value?.trim()) {
-    const densLabel = form === 'gas' ? 'Yoğunluk / Buhar Yoğunluğu' : 'Yoğunluk (g/mL)';
-    missing.push({ label: densLabel, reason: 'Gaz hariç tüm formlar için zorunlu — EU 2020/878 §9.1 / PCN zorunlu' });
+  if (!densNA && !densEl?.value?.trim()) {
+    missing.push({ label: 'Yoğunluk (g/mL)', reason: 'Motor için gerekli — konsantrasyon ve karışım hesabında kullanılır' });
   }
 
-  // 6. Çözünürlük — gaz hariç tüm formlar zorunlu (EU 2020/878 §9.1: "Does not apply to gases")
+  // 8. Çözünürlük — çevre tehlike ve maruz kalma hesabı için
   const solEl = document.getElementById('tf_sol');
   const solNA = solEl?.dataset?.na === 'true';
   const _solTp = _lastTheoProps || _lastCalcState?.theoPhys || _lastCalcState?.phys?.theoProps || {};
   const solHasMotorText = solEl?.dataset?.source === 'theo' || !!solEl?.value?.trim()
                         || !!_solTp?.solubility?.text || !!_solTp?.solubility?.value;
-  if (form !== 'gas' && !solNA && !solEl?.value?.trim() && !solHasMotorText) {
-    missing.push({ label: 'Çözünürlük (mg/L)', reason: 'Gaz hariç tüm formlar için zorunlu — EU 2020/878 §9.1' });
+  if (!solNA && !solEl?.value?.trim() && !solHasMotorText) {
+    missing.push({ label: 'Çözünürlük (mg/L)', reason: 'Motor için gerekli — çevre tehlike ve maruz kalma hesabında kullanılır' });
   }
 
-  // 7. Kaynama Noktası — gaz hariç tüm formlar zorunlu (EU 2020/878 §9.1: "Does not apply to gases")
+  // 9. Kaynama Noktası — alevlenirlik ve buharlaşma hesabı için
   const bpEl = document.getElementById('tf_bp');
   const bpNA = bpEl?.dataset?.na === 'true';
   if (form !== 'gas' && !bpNA && !bpEl?.value?.trim()) {
-    missing.push({ label: 'Kaynama Noktası', reason: 'Gaz hariç tüm formlar için zorunlu — EU 2020/878 §9.1 / H224-H225 sınıflandırması' });
+    missing.push({ label: 'Kaynama Noktası', reason: 'Motor için gerekli — alevlenirlik sınıfı ve buharlaşma hesabında kullanılır' });
   }
 
-  // 8. Viskozite — sadece sıvı/pasta/aerosol zorunlu (EU 2020/878 §9.1: "Only applies to liquids")
+  // 10. Viskozite — H304 aspirasyon toksisitesi hesabı için
   if (isLiquid) {
     const viscEl = document.getElementById('tf_visc');
     const viscNA = viscEl?.dataset?.na === 'true';
     if (!viscNA && !viscEl?.value?.trim()) {
-      missing.push({ label: 'Viskozite @40°C', reason: 'Sıvı formlar için zorunlu — EU 2020/878 §9.1 / H304 aspirasyon sınırı' });
+      missing.push({ label: 'Viskozite @40°C', reason: 'Motor için gerekli — H304 aspirasyon toksisitesi eşiği (≤20,5 mm²/s) hesabında kullanılır' });
     }
   }
 
@@ -3775,9 +3799,6 @@ async function _afterPhysSrc() {
   if (missing.length) {
     // Görünüm / Renk / Koku eksikse → kesinlikle engelle (bypass yok)
     // Diğer alanlar (Parlama Noktası, Yoğunluk vb.) → uyarı ama "Yine de oluştur" görünür
-    const HARD_LABELS = ['Görünüm (Fiziksel hal)', 'Renk', 'Koku', 'pH Değeri'];
-    const hasHard = missing.some(m => HARD_LABELS.includes(m.label));
-
     document.getElementById('pdfBlockItems').innerHTML = missing.map(m => `
       <div class="pdf-block-item">
         <div>
@@ -3787,8 +3808,8 @@ async function _afterPhysSrc() {
       </div>`).join('');
 
     const skipBtn = document.getElementById('pdfBlockSkipBtn');
-    if (skipBtn) skipBtn.style.display = hasHard ? 'none' : '';
-    _pdfBlockCallback = hasHard ? null : _doPdfGenerate;
+    if (skipBtn) skipBtn.style.display = '';
+    _pdfBlockCallback = _doPdfGenerate;
     document.getElementById('pdfBlockOverlay').classList.add('open');
     return;
   }

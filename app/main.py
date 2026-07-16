@@ -287,7 +287,12 @@ async def generate_pdf(data: dict = Body(...)):
 
             _form_val = product.get('form') or 'liquid'
             # Flash point — aralık girilmişse worst-case (min) alınır
-            _user_fp = _phys_calc_val(_parsed_phys, 'flash_point')
+            # JS auto-fill sonucu ise measured=False gelir → _user_fp=None bırak,
+            # engine bileşenlerden hesaplamalı (B2 ile B9 tutarlı olsun).
+            _req_methods: dict = data.get('phys_methods', {})
+            _fp_req_m = _req_methods.get('flash_point', {}) if isinstance(_req_methods, dict) else {}
+            _fp_is_user = _fp_req_m.get('measured', True) if isinstance(_fp_req_m, dict) else True
+            _user_fp = _phys_calc_val(_parsed_phys, 'flash_point') if _fp_is_user else None
             if _user_fp is None:
                 # Eski format fallback
                 _fp_raw = phys_in.get('user_fp')
@@ -314,7 +319,7 @@ async def generate_pdf(data: dict = Body(...)):
             # measured: False → motor hesapladı (teorik, KKDİK Ek-2 §9 dipnotu)
             _theo = _phys_res.get('theo_props') or {}
             _phys_methods: dict = {}
-            _req_methods: dict = data.get('phys_methods', {})  # JS'den gelen measured bayrağı
+            # _req_methods yukarıda (_user_fp öncesinde) tanımlandı
             _BACKFILL_FIELDS = (
                 'flash_point', 'boiling_point', 'density', 'vapor_density',
                 'vapor_pressure', 'lel', 'uel', 'viscosity', 'solubility',

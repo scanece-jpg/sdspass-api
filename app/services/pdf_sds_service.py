@@ -2068,105 +2068,13 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     ate_mix_details = sds_data.get('ate_mix_details', {})
 
     # Backend fallback: frontend boş gönderirse backend hesapla
-    # CLP Ek I §3.1.3 — SEA §3.1.3.6.2.2/3 — revize formül + zorunlu ibare desteği
+    # clp_service.calculate_ate_health_h_codes — buhar/toz ayrımı dahil doğru ATE formülü
     if not ate_mix_details and comp_has_acute:
-        _ATE_POINT = {
-            'H300': 0.5, 'H301': 100.0, 'H302': 500.0,
-            'H310': 5.0, 'H311': 300.0, 'H312': 1100.0,
-            'H330': 0.05,'H331': 3.0,   'H332': 11.0,
-        }
-        _ATE_CAT2  = {'H300': 5.0, 'H310': 50.0, 'H330': 0.5}
-        _ATE_ROUTES = {
-            'oral':   {'H300','H301','H302'},
-            'dermal': {'H310','H311','H312'},
-            'inhal':  {'H330','H331','H332'},
-        }
-        _ATE_CLASSIFY = {
-            'oral':   [(5,'H300'),(50,'H300'),(300,'H301'),(2000,'H302')],
-            'dermal': [(50,'H310'),(200,'H310'),(1000,'H311'),(2000,'H312')],
-            'inhal':  [(0.5,'H330'),(2.0,'H330'),(10,'H331'),(20,'H332')],
-        }
-        # ── Ön: bilinmeyen konsantrasyonları say ──
-        _fb_unknown_conc = 0.0
-        _fb_stmt_needed  = False
-        _ACUTE_CODES_ALL = {'H300','H301','H302','H310','H311','H312','H330','H331','H332'}
-        for _ci in sds_data.get('components', []):
-            _cc = float(_ci.get('concentration') or _ci.get('conc') or 0)
-            if _cc <= 0: continue
-            _ci_annex    = _ci.get('annex_vi', False)
-            _ci_ate_unk  = _ci.get('ate_unknown', False)
-            _ci_ate_dict = _ci.get('ate_dict') or {}
-            _ci_has_acute = any(
-                (h.get('h_code','') or '').replace('*','').strip()[:4] in _ACUTE_CODES_ALL
-                for h in _ci.get('hazards', [])
-            )
-            _ci_has_user_ate = bool(_ci_ate_dict.get('oral') or _ci_ate_dict.get('dermal') or _ci_ate_dict.get('inhal'))
-            if _ci_ate_unk or (not _ci_has_acute and not _ci_annex and not _ci_has_user_ate):
-                _fb_unknown_conc += _cc
-                if _cc >= 1.0:
-                    _fb_stmt_needed = True
-        for route, code_set in _ATE_ROUTES.items():
-            sum_inv = 0.0
-            ate_comps_r = []
-            for comp_item in sds_data.get('components', []):
-                conc = float(comp_item.get('concentration') or
-                             comp_item.get('conc') or 0)
-                if conc <= 0:
-                    continue
-                _ate_unk  = comp_item.get('ate_unknown', False)
-                _ate_dict = comp_item.get('ate_dict') or {}
-                _annex_vi = comp_item.get('annex_vi', False)
-                found_chip = False
-                if not _ate_unk:
-                    for hz in comp_item.get('hazards', []):
-                        code = (hz.get('h_code') or '').replace('*','').strip()[:4]
-                        if code not in code_set:
-                            continue
-                        hclass = (hz.get('h_class') or '').replace('*','').strip()
-                        ate = _ATE_POINT.get(code)
-                        if ate is None:
-                            continue
-                        if hclass in ('Acute Tox. 2', 'Akut Tok. 2') and code in _ATE_CAT2:
-                            ate = _ATE_CAT2[code]
-                        sum_inv += conc / ate
-                        _cname = (comp_item.get('name_tr','') if lang=='TR' else '') or comp_item.get('name','') or comp_item.get('cas_no','')
-                        ate_comps_r.append({'name': _cname, 'conc': conc, 'code': code, 'ate': ate})
-                        found_chip = True
-                        break  # her bileşenden yol başına tek katkı
-                if not found_chip and not _ate_unk:
-                    # Kullanıcı ATE değeri
-                    _user_ate_val = _ate_dict.get(route)
-                    if _user_ate_val and float(_user_ate_val) > 0:
-                        _uav = float(_user_ate_val)
-                        sum_inv += conc / _uav
-                        _cname_u = (comp_item.get('name_tr','') if lang=='TR' else '') or comp_item.get('name','') or comp_item.get('cas_no','')
-                        ate_comps_r.append({'name': _cname_u, 'conc': conc, 'code': 'user', 'ate': _uav, 'userProvided': True})
-                        found_chip = True
-                    elif _annex_vi:
-                        sum_inv += conc / 5000.0
-                        _cname_a = (comp_item.get('name_tr','') if lang=='TR' else '') or comp_item.get('name','') or comp_item.get('cas_no','')
-                        ate_comps_r.append({'name': _cname_a, 'conc': conc, 'code': '—', 'ate': 5000, 'annexVi': True})
-                        found_chip = True
-            if sum_inv <= 0:
-                continue
-            # SEA §3.1.3.6.2.3 revize formül
-            if _fb_unknown_conc > 10.0:
-                ate_mix_val = round((100.0 - _fb_unknown_conc) / sum_inv, 1)
-            else:
-                ate_mix_val = round(100.0 / sum_inv, 1)
-            result_code = None
-            for threshold, h in _ATE_CLASSIFY[route]:
-                if ate_mix_val <= threshold:
-                    result_code = h
-                    break
-            ate_mix_details[route] = {
-                'ateMix':         ate_mix_val,
-                'resultCode':     result_code,
-                'unknownPct':     round(_fb_unknown_conc, 1),
-                'revisedFormula': _fb_unknown_conc > 10.0,
-                'statementNeeded': _fb_stmt_needed,
-                'components':     ate_comps_r,
-            }
+        from app.services.clp_service import calculate_ate_health_h_codes as _calc_ate
+        _, ate_mix_details = _calc_ate(
+            sds_data.get('components', []),
+            form=sds_data.get('form', ''),
+        )
 
     _ROUTE_LABEL_TR = {'oral': 'Oral (Ağız)', 'dermal': 'Dermal (Deri)', 'inhal': 'İnhalasyon (Solunum)'}
     _ROUTE_LABEL_EN = {'oral': 'Oral', 'dermal': 'Dermal', 'inhal': 'Inhalation'}
@@ -2873,6 +2781,48 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
            else "PPE — Personal Protective Equipment"),
         styles['small']
     ))
+
+    # Fiziksel tehlike metodoloji notu (CLP §1.6.3.2)
+    _phys_no_test = [
+        w for w in clp.get('warnings', [])
+        if isinstance(w, dict) and w.get('code', '').startswith('PHYS_NO_TEST_BASIS')
+    ]
+    if _phys_no_test:
+        _affected_h = ', '.join(sorted({w['h_code'] for w in _phys_no_test}))
+        _note_tr = (
+            f"Not: {_affected_h} fiziksel tehlike sınıflandırması bileşen geçişkenliğine dayanır. "
+            f"CLP Ek-I §1.6.3.2 gereği fiziksel tehlikeler için resmi köprüleme ilkesi tanımlı "
+            f"değildir — karışımın test edilmesi önerilir."
+        )
+        _note_en = (
+            f"Note: {_affected_h} physical hazard classification is based on component pass-through. "
+            f"Per CLP Annex I §1.6.3.2, no formal bridging principle is defined for physical hazards "
+            f"— testing of the mixture is recommended."
+        )
+        story.append(Spacer(1, 4))
+        story.append(Paragraph(
+            _note_tr if lang == 'TR' else _note_en,
+            styles['small']
+        ))
+
+    # Aerosol parlama noktası fallback uyarısı
+    _aerosol_fp_warn = any(
+        isinstance(w, dict) and w.get('code') == 'AEROSOL_FP_FALLBACK'
+        for w in clp.get('warnings', [])
+    )
+    if _aerosol_fp_warn:
+        _aw_tr = (
+            "Not: Aerosol yanıcılık sınıflandırması (H222/H223) onaylı aerosol testi veya "
+            "beyan edilen yanıcı içerik yüzdesi yerine bileşen parlama noktaları üzerinden "
+            "tahmin edilmiştir. CLP Ek-I §2.3 uyarınca test ile doğrulama önerilir."
+        )
+        _aw_en = (
+            "Note: Aerosol flammability classification (H222/H223) is estimated from component "
+            "flash points rather than an approved aerosol test or declared flammable content "
+            "percentage. Verification by testing per CLP Annex I §2.3 is recommended."
+        )
+        story.append(Spacer(1, 4))
+        story.append(Paragraph(_aw_tr if lang == 'TR' else _aw_en, styles['small']))
 
     # Yasal uyarı
     story.append(Spacer(1, 6))

@@ -87,7 +87,7 @@ if os.path.exists(_JS_DIR):
 # ─── PDF ENDPOINT ─────────────────────────────────────────────────────────────
 
 from app.services.pdf_sds_service import generate_sds_pdf
-from app.services.clp_service import DANGER_H
+from app.services.clp_service import DANGER_H, is_danger
 from app.services.p_code_service import (
     assign_p_codes, select_label_p_codes, classify_sds_p_codes
 )
@@ -218,7 +218,7 @@ async def generate_pdf(data: dict = Body(...)):
         signal = data.get('signal_word', '')
         if signal not in ('Danger', 'Warning'):
             clean = {h.split()[0] for h in h_codes if isinstance(h, str)}
-            signal = 'Danger' if clean & DANGER_H else 'Warning'
+            signal = 'Danger' if is_danger(clean) else 'Warning'
 
         # P kodları — eko H kodu eklendikten SONRA hesaplanacak (aşağıda)
 
@@ -251,12 +251,7 @@ async def generate_pdf(data: dict = Body(...)):
             h_codes     = [h for h in h_codes     if h not in _H314_COVERED]
             all_h_codes = [h for h in all_h_codes if h not in _H314_COVERED]
             # Signal word yeniden hesapla (H314 kalkınca Danger→Warning olabilir)
-            _danger_h_set = {'H200','H201','H202','H203','H204','H205',
-                             'H220','H222','H224','H225','H240','H241',
-                             'H250','H260','H270','H271','H272',
-                             'H300','H301','H310','H311','H330','H331',
-                             'H334','H340','H350','H360','H370','H372'}
-            signal = 'Danger' if any(h in _danger_h_set for h in h_codes) else 'Warning'
+            signal = 'Danger' if is_danger({h.split()[0] for h in h_codes if isinstance(h, str)}) else 'Warning'
 
         # ── Python motorlarıyla clp_passed, transport ve ppe'yi yeniden hesapla ──
         # Frontend'den gelen değerler YERINE Python sonuçları kullanılır.
@@ -606,7 +601,7 @@ async def generate_pdf(data: dict = Body(...)):
 
         # ── 4. Signal word — h_codes güncellenince yeniden hesapla ───────────────
         _clean_h = {h.split()[0] for h in h_codes if isinstance(h, str)}
-        signal = 'Danger' if _clean_h & DANGER_H else 'Warning'
+        signal = 'Danger' if is_danger(_clean_h, _clp_res.get('passed', [])) else 'Warning'
 
         # ── 4b. Skin/Eye kodları — classify_mixture_clp override ─────────────────
         # Reconciliation sadece flam/eco/ozone h_codes'u güncelliyor; H314/H315/H318/H319
@@ -626,7 +621,7 @@ async def generate_pdf(data: dict = Body(...)):
             all_h_codes = list(all_h_codes) + [h for h in sorted(_clp_all_skin) if h not in _exist_all]
             # H314 Danger getirir — signal word yeniden hesapla
             _clean_h = {h.split()[0] for h in h_codes if isinstance(h, str)}
-            signal = 'Danger' if _clean_h & DANGER_H else 'Warning'
+            signal = 'Danger' if is_danger(_clean_h, _clp_res.get('passed', [])) else 'Warning'
 
         # ── 5. H314 → H318 birlikteliği (CLP §3.3.1.4 / SEA Tablo 3.3.1) ────────
         # Skin Corr. 1 (H314) varlığında Eye Dam. 1 (H318) sınıflandırma tablosuna
@@ -888,7 +883,7 @@ async def generate_pdf(data: dict = Body(...)):
         # h_codes temizlendikten sonra sinyal kelimesini yeniden hesapla
         # (ör. H241 kalkınca Danger devam edip etmediğini doğrula)
         _clean_after_filter = {h.split()[0] for h in h_codes if isinstance(h, str)}
-        signal = 'Danger' if _clean_after_filter & DANGER_H else ('Warning' if _clean_after_filter else '')
+        signal = 'Danger' if is_danger(_clean_after_filter, _clp_res.get('passed', [])) else ('Warning' if _clean_after_filter else '')
         # P kodlarını temizlenmiş h_codes ile yeniden hesapla
         # (filtreden önce H260/H261 vb. varsa P231+P232 gibi yanlış P kodları atanmış olabilir)
         p_result = assign_p_codes(h_codes, signal, usage=usage)
@@ -932,6 +927,7 @@ async def generate_pdf(data: dict = Body(...)):
                     }.items() if v is not None and v != ''}
                     for h in py_clp_passed
                 ],
+                'warnings': _clp_res.get('warnings', []) + _phys_res.get('warnings', []),
             },
             'euh':          euh_result,
             'p_codes':      p_result,
@@ -1043,7 +1039,7 @@ async def debug_signal(data: dict = Body(...)):
     h_codes = data.get('h_codes', [])
     signal_from_fe = data.get('signal_word', '')
     clean = {h.split()[0] for h in h_codes}
-    computed = 'Danger' if clean & DANGER_H else 'Warning'
+    computed = 'Danger' if is_danger(clean) else 'Warning'
     final = signal_from_fe if signal_from_fe in ('Danger', 'Warning') else computed
     return {
         "api_version": "1.2.0-DANGER_H_FIX",
@@ -1309,14 +1305,7 @@ async def clp_calculate(body: dict):
                 })
 
         # 4. Sinyal kelimesi güncelle
-        DANGER_H = {
-            'H200','H201','H202','H203','H204','H205',
-            'H220','H221','H222','H224','H225','H228','H240','H241',
-            'H250','H260','H270','H271','H272',
-            'H300','H301','H304','H310','H311','H314','H318','H330','H331',
-            'H334','H340','H350','H360','H370','H372',
-        }
-        signal = "Danger" if any(h in DANGER_H for h in result["h_codes"]) else (
+        signal = "Danger" if is_danger(set(result["h_codes"]), result.get("passed", [])) else (
                   "Warning" if result["h_codes"] else "")
         result["signal_word"] = signal
         result["signal_word_tr"] = {"Danger":"Tehlike","Warning":"Uyarı","":""}.get(signal,"")
@@ -1339,11 +1328,7 @@ async def clp_classify_single(body: dict):
     h_codes = body.get("h_codes", [])
     lang = body.get("lang", "TR")
     ghs = get_ghs_codes(h_codes)
-    signal = "Danger" if any(h in h_codes for h in [
-        "H200","H201","H202","H203","H204","H220","H222","H224","H225",
-        "H260","H270","H271","H300","H301","H310","H311","H314","H318",
-        "H330","H331","H340","H350","H360","H370","H372"
-    ]) else "Warning" if h_codes else ""
+    signal = "Danger" if is_danger(set(h_codes)) else ("Warning" if h_codes else "")
     return {
         "success": True,
         "h_codes": h_codes,
@@ -1402,13 +1387,15 @@ async def physical_hazards(body: dict):
     Input: {components:[...], form:"liquid", flash_point:27}
     Output: {h_codes, results, warnings}
     """
-    from app.services.physical_hazard_service import calc_physical_hazards
+    from app.services.physical_engine import calculate as phys_calculate
     components  = body.get("components", [])
     form        = body.get("form", "liquid")
     flash_point = body.get("flash_point")
     show_extra  = body.get("show_extra", False)
     try:
-        result = calc_physical_hazards(components, form, flash_point, show_extra)
+        result = phys_calculate(components, form=form, user_fp=flash_point, test_data=None)
+        if not show_extra:
+            result.pop('extra', None)
         return {"success": True, "result": result}
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
@@ -1486,10 +1473,10 @@ async def sds_calculate(body: dict = Body(...)):
         physical, stot, eco, theo_props, warnings
     """
     import dataclasses
-    from app.services.clp_service         import classify_mixture_clp, DANGER_H as _DANGER_H
+    from app.services.clp_service         import classify_mixture_clp, is_danger as _is_danger
     from app.services.physical_engine     import calculate as phys_calculate
     from app.services.stot_engine         import calculate as stot_calculate
-    from app.services.euh_engine          import calculate as euh_calculate
+    from app.services.euh_service         import check_euh as euh_calculate
     from app.services.ecological_service  import calculate_aquatic as eco_calculate_aquatic
     from app.services.transport_engine    import classify as transport_classify
     from app.services.ppe_engine          import select as ppe_select
@@ -1594,7 +1581,7 @@ async def sds_calculate(body: dict = Body(...)):
         all_h_list = sorted(all_h)
 
         # ── Sinyal kelimesi ───────────────────────────────────────────────────
-        signal = 'Danger' if (all_h & _DANGER_H) else ('Warning' if all_h else '')
+        signal = 'Danger' if _is_danger(all_h, clp_result.get('passed', [])) else ('Warning' if all_h else '')
 
         # ── clp_passed listesi (PDF Bölüm 2.1 için) ──────────────────────────
         clp_passed = []

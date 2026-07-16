@@ -222,8 +222,8 @@ GCL: dict[str, list[tuple]] = {
     'repr. lact.': [(0.0,'Repr. Lact.','H362')],  # her konsantrasyonda
 
     # --- STOT Tek Maruziyet ---
-    'stot se 1':  [(1.0,'STOT SE 1','H370'),
-                   (10.,'STOT SE 2','H371'),
+    'stot se 1':  [(10.,'STOT SE 1','H370'),
+                   (1.0,'STOT SE 2','H371'),
                    (20.,'STOT SE 3','H336')],
     'stot se 2':  [(10.,'STOT SE 2','H371'),
                    (20.,'STOT SE 3','H336')],

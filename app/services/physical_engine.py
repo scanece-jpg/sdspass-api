@@ -1917,23 +1917,27 @@ def _calc_flam_liq(comps: List[Dict], user_fp=None) -> Dict:
     sum12  = cat_sum[1] + cat_sum[2]
     sum123 = cat_sum[1] + cat_sum[2] + cat_sum[3]
 
+    # Kullanıcı FP girmediğinde bileşen-kategori toplamı tarama yöntemi olarak kullanılır.
+    # CLP Annex I §2.6.4 resmi yöntemi karışımın ölçülen/hesaplanan FP/BP'sine dayanır;
+    # bu yöntem §2.6.4.2 kapsamında muhafazakâr bir tahmini yaklaşımdır.
+    _screening = True
     if sum1 >= 1:
         src = ' + '.join(trig_src(t) for t in cat_triggers[1])
         return {'result': {'h':'H224','cat':1,'h_class':'Flam. Liq. 1','signal':'Danger'},
-                'source': src, 'fp': cat_fp[1]}
+                'source': src, 'fp': cat_fp[1], 'screening': _screening}
     if sum12 >= 1:
         trigs = cat_triggers[1] + cat_triggers[2]
         fps   = [cat_fp[k] for k in (1,2) if cat_fp[k] is not None]
         src   = ' + '.join(trig_src(t) for t in trigs)
         return {'result': {'h':'H225','cat':2,'h_class':'Flam. Liq. 2','signal':'Danger'},
-                'source': src, 'fp': min(fps) if fps else None}
+                'source': src, 'fp': min(fps) if fps else None, 'screening': _screening}
     if sum123 >= 10:
         all_trigs = cat_triggers[1] + cat_triggers[2] + cat_triggers[3]
         all_fps   = [cat_fp[k] for k in (1,2,3) if cat_fp[k] is not None]
         src       = ' + '.join(trig_src(t) for t in all_trigs)
         return {'result': {'h':'H226','cat':3,'h_class':'Flam. Liq. 3','signal':'Warning'},
-                'source': src, 'fp': min(all_fps) if all_fps else None}
-    return {'result': None, 'source': None, 'fp': None}
+                'source': src, 'fp': min(all_fps) if all_fps else None, 'screening': _screening}
+    return {'result': None, 'source': None, 'fp': None, 'screening': _screening}
 
 
 def _calc_flam_aerosol(comps: List[Dict], user_fp=None,
@@ -1991,12 +1995,25 @@ def _calc_flam_aerosol(comps: List[Dict], user_fp=None,
             sum_cat2 += conc
             triggers_cat2.append(label)
 
+    _warn = {
+        'code': 'AEROSOL_FP_FALLBACK',
+        'message': (
+            'Aerosol yanıcılık sınıflandırması onaylı aerosol testi veya beyan edilen '
+            'yanıcı içerik yüzdesi (aerosol_flam_pct) yerine bileşen parlama noktaları '
+            'üzerinden tahmin edilmiştir. CLP Ek-I §2.3 uyarınca doğrulama gerekir.'
+        ),
+        'message_en': (
+            'Aerosol flammability classification is estimated from component flash points '
+            'rather than an approved aerosol test or declared flammable content percentage. '
+            'Verification per CLP Annex I §2.3 is required.'
+        ),
+    }
     if sum_cat1 >= 1:
         return {'h': 'H222', 'h_class': 'Flam. Aerosol 1', 'signal': 'Danger',
-                'source': ', '.join(triggers_cat1)}
+                'source': ', '.join(triggers_cat1), 'warning': _warn}
     if sum_cat2 >= 1:
         return {'h': 'H223', 'h_class': 'Flam. Aerosol 2', 'signal': 'Warning',
-                'source': ', '.join(triggers_cat2)}
+                'source': ', '.join(triggers_cat2), 'warning': _warn}
     return None
 
 
@@ -2092,6 +2109,8 @@ def calculate(comps: List[Dict], form: str = 'liquid',
         fa = _calc_flam_aerosol(comps, user_fp,
                                 aerosol_flam_pct=test_data.get('aerosol_flam_pct'))
         if fa:
+            if fa.get('warning'):
+                warnings.append(fa.pop('warning'))
             primary.append({'type': 'flam_aerosol', **fa,
                             'cutoff_used': 'CLP Ek-I §2.3 — Aerosol yanıcılık sınıflandırması'})
         extra.append({'type': 'aerosol_press', 'h': 'H229', 'h_class': 'Aerosol 3',

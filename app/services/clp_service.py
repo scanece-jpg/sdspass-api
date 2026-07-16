@@ -156,7 +156,9 @@ CLP_CUTOFFS_DICT = {
 DANGER_H = {
     'H200','H201','H202','H203','H204','H205',
     'H220','H222','H224','H225',
-    'H228','H232',                   # H232: pirofor gaz → Danger (CLP Annex III)
+    # H228 buraya dahil DEĞİL: Flam. Sol. 1 = Danger, Flam. Sol. 2 = Warning;
+    # aynı H kodu iki farklı sinyal verir → is_danger() fonksiyonu clp_passed ile çözer.
+    'H232',                          # H232: pirofor gaz → Danger (CLP Annex III)
     'H240','H241','H250','H251',     # H251: kendiliğinden ısınan Kat.1 → Danger
     'H260','H270','H271',
     # H272 — Ox. Liq. 2 (Danger) veya Ox. Liq. 3 (Warning) için aynı kod kullanılır.
@@ -164,6 +166,25 @@ DANGER_H = {
     'H300','H301','H304','H310','H311','H314','H318','H330','H331',
     'H334','H340','H350','H360','H360D','H360F','H360FD','H370','H372',
 }
+
+
+def is_danger(h_codes_set: set, clp_passed=None) -> bool:
+    """
+    H kodları setinden signal word'ün 'Danger' olup olmayacağını döndürür.
+    H228 (Flam. Sol.) kategori-bağımlıdır: Kat.1=Danger, Kat.2=Warning.
+    clp_passed: classify_mixture_clp 'passed' listesi; sağlanmazsa H228 için
+    güvenli taraf olarak Danger kabul edilir.
+    """
+    if h_codes_set & DANGER_H:
+        return True
+    if 'H228' in h_codes_set:
+        if clp_passed:
+            return any(
+                p.get('h_code') == 'H228' and p.get('signal') == 'Danger'
+                for p in clp_passed
+            )
+        return True  # bilgi yoksa muhafazakâr: Danger
+    return False
 
 # CLP Annex I üstünlük (dominance) kuralları — alt kategori H kodlarını sil
 DOMINANCE: dict = {
@@ -589,6 +610,18 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
                 # Kesme değeri gösterimi: 0.0 → "bileşen varlığı" (fiziksel tehlike)
                 if _orig_cutoff == 0.0:
                     _cutoff_str = f'%{conc:.1f} (fiziksel tehlike, bileşen varlığı)'
+                    _warn_key = f'PHYS_NO_TEST_BASIS_{h}'
+                    if not any(isinstance(w, dict) and w.get('code') == _warn_key for w in warnings):
+                        warnings.append({
+                            'code': _warn_key,
+                            'h_code': h,
+                            'h_class': h_class,
+                            'message': (
+                                f'{h} ({h_class}) sınıflandırması bileşen geçişkenliğine dayanır. '
+                                f'CLP Annex I §1.6.3.2 gereği fiziksel tehlikeler için resmi '
+                                f'köprüleme ilkesi tanımlı değildir — karışımın test edilmesi önerilir.'
+                            ),
+                        })
                 else:
                     _cutoff_str = f'%{conc:.1f} ≥ kesme %{cutoff}'
                 _scl_used = bool(_scl_matched_mins)
@@ -600,6 +633,7 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
                     "reason":        f"{cas} {_cutoff_str}",
                     "cutoff_source": "SCL" if _scl_used else "GCL",
                     "cutoff_value":  _cutoff_display,
+                    "signal":        rule.get("signal", "Warning"),
                 })
 
     # ── pH Uç Değer Kontrolü — SEA/CLP Annex I Tablo 3.2.3 notu ─────────────────

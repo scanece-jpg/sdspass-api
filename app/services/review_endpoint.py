@@ -600,25 +600,30 @@ async def sds_review(data: dict = Body(...)):
             "info":    sum(1 for i in issues if i["level"] == "info"),
         }
 
-        # ── 2. SDS verisi — PDF'den gerçek metin ayıkla ────────────────────────
+        # ── 2. SDS verisi — PDF üret, Claude native PDF okusun ─────────────────
+        import io, base64
+        from app.services.pdf_sds_service import generate_sds_pdf
+        _pdf_bytes  = None
+        _pdf_b64    = None
+        sds_text    = ""   # araçlar + response için metin yedek
         try:
-            import io
-            import pdfplumber
-            from app.services.pdf_sds_service import generate_sds_pdf
             _pdf_bytes = generate_sds_pdf(sds_for_validator)
-            _pages = []
-            with pdfplumber.open(io.BytesIO(_pdf_bytes)) as _pdf:
-                for _page in _pdf.pages:
-                    _t = _page.extract_text(x_tolerance=2, y_tolerance=2)
-                    if _t:
-                        _pages.append(_t)
-            sds_text = "\n\n--- SAYFA SONU ---\n\n".join(_pages)
-        except Exception as _e:
-            # PDF üretilemezse metin özetine geri dön
-            if sds_xml:
-                sds_text = sds_xml
-            else:
+            _pdf_b64   = base64.b64encode(_pdf_bytes).decode("ascii")
+            # verify_text_in_sds tool'u için pdfplumber metni yedek olarak al
+            try:
+                import pdfplumber
+                _pages = []
+                with pdfplumber.open(io.BytesIO(_pdf_bytes)) as _pdf:
+                    for _page in _pdf.pages:
+                        _t = _page.extract_text(x_tolerance=2, y_tolerance=2)
+                        if _t:
+                            _pages.append(_t)
+                sds_text = "\n\n--- SAYFA SONU ---\n\n".join(_pages)
+            except Exception:
                 sds_text = _build_sds_text(sds_for_validator, h_codes, phys_props, components)
+        except Exception as _e:
+            # PDF üretilemezse metin özetine düş
+            sds_text = sds_xml or _build_sds_text(sds_for_validator, h_codes, phys_props, components)
 
         # ── 3. Mevzuat bağlamı ─────────────────────────────────────────────────
         kb_blocks = []
@@ -718,15 +723,27 @@ async def sds_review(data: dict = Body(...)):
 
         user_parts: list[dict] = []
         user_parts.extend(kb_blocks)
-        user_parts.append({"type": "text", "text": sds_text})
+        # A kaynağı: PDF varsa native document bloğu, yoksa metin yedek
+        if _pdf_b64:
+            user_parts.append({
+                "type": "document",
+                "source": {
+                    "type":       "base64",
+                    "media_type": "application/pdf",
+                    "data":       _pdf_b64,
+                },
+                "title": "SDS Belgesi (A kaynağı — tam PDF)",
+            })
+        else:
+            user_parts.append({"type": "text", "text": sds_text})
         user_parts.append({"type": "text", "text": issues_text})
         user_parts.append({
             "type": "text",
             "text": (
-                "Yukarıdaki SDS verisini (A — JSON formatı) mevzuat paragraflarıyla (B) karşılaştırarak "
+                "Yukarıdaki SDS PDF'ini (A kaynağı) mevzuat paragraflarıyla (B) karşılaştırarak "
                 "bağımsız denetim raporu yaz. Otomatik bulgular (C) ek bağlam olarak kullan.\n"
                 "Bir bulgu yazmadan önce:\n"
-                "  • JSON'da olmayan bir şeyi iddia ediyorsan → verify_text_in_sds ile doğrula\n"
+                "  • PDF'de olmayan bir şeyi iddia ediyorsan → verify_text_in_sds ile doğrula\n"
                 "  • SCL sınırı ile ilgili bir bulgu varsa → get_substance_scl ile sorgula\n"
                 "  • Mevzuat hükmünden emin değilsen → search_regulation ile kontrol et"
             ),

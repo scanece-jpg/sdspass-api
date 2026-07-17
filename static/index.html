@@ -1636,6 +1636,17 @@ function updateConcTotal() {
   el.textContent = `Toplam: %${rounded}${rounded === 100 ? ' ✓' : rounded > 100 ? ' ⚠ Aşıldı!' : ''}`;
 }
 
+const _SOLID_FILLERS = [
+  { label: 'Su',                  cas: '7732-18-5' },
+  { label: 'Sodyum Klorür (Tuz)', cas: '7647-14-5' },
+  { label: 'Kalsiyum Karbonat',   cas: '471-34-1'  },
+  { label: 'Silika (SiO₂)',       cas: '7631-86-9' },
+  { label: 'Kaolin',              cas: '1332-58-7' },
+  { label: 'Sodyum Sülfat',       cas: '7757-82-6' },
+  { label: 'Talk',                cas: '14807-96-6' },
+  { label: 'Mısır Nişastası',     cas: '9005-25-8' },
+];
+
 function completeToHundred() {
   const comps = getComps();
   const total = comps.reduce((s, c) => s + (parseFloat(c.concMax || c.conc) || 0), 0);
@@ -1644,13 +1655,63 @@ function completeToHundred() {
     alert(`Toplam zaten %${Math.round(total * 10) / 10} — tamamlama gerekmiyor.`);
     return;
   }
-  // Kalan kısım — varsayılan olarak su (7732-18-5)
-  addComp({ cas: '7732-18-5', conc: remaining });
+  const form = document.getElementById('pform')?.value || 'liquid';
+  if (['solid','powder'].includes(form)) {
+    _showFillerPicker(remaining);
+  } else {
+    _addFillerComp('7732-18-5', remaining);
+  }
+}
+
+function _showFillerPicker(remaining) {
+  const existing = document.getElementById('fillerPickerModal');
+  if (existing) existing.remove();
+  const overlay = document.createElement('div');
+  overlay.id = 'fillerPickerModal';
+  overlay.style.cssText = 'position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:9999;display:flex;align-items:center;justify-content:center';
+  const box = document.createElement('div');
+  box.style.cssText = 'background:var(--bg2);border-radius:10px;padding:20px 24px;width:340px;max-width:95vw;box-shadow:0 8px 32px rgba(0,0,0,.4)';
+  box.innerHTML = `
+    <div style="font-weight:700;font-size:14px;margin-bottom:4px">Tamamlayıcı Bileşen Seç</div>
+    <div style="font-size:12px;color:var(--text2);margin-bottom:14px">Kalan <b>%${remaining}</b> için eklenecek dolgu maddesi:</div>
+    <div id="fillerList" style="display:flex;flex-direction:column;gap:7px">
+      ${_SOLID_FILLERS.map(f => `
+        <button onclick="_addFillerComp('${f.cas}',${remaining});document.getElementById('fillerPickerModal').remove()"
+          style="text-align:left;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:8px 12px;cursor:pointer;font-size:12px;color:var(--text)">
+          <b>${f.label}</b> <span style="color:var(--text3);font-size:11px">CAS ${f.cas}</span>
+        </button>`).join('')}
+      <div style="margin-top:4px;border-top:1px solid var(--border);padding-top:10px">
+        <div style="font-size:11px;color:var(--text2);margin-bottom:6px">Diğer — CAS numarası girin:</div>
+        <div style="display:flex;gap:6px">
+          <input id="fillerCustomCas" type="text" placeholder="ör: 1309-48-4"
+            style="flex:1;padding:6px 8px;border-radius:5px;border:1px solid var(--border);background:var(--bg);color:var(--text);font-size:12px">
+          <button onclick="_fillerCustomAdd(${remaining})"
+            style="padding:6px 12px;background:var(--accent);color:#fff;border:none;border-radius:5px;cursor:pointer;font-size:12px;font-weight:600">Ekle</button>
+        </div>
+      </div>
+    </div>
+    <button onclick="document.getElementById('fillerPickerModal').remove()"
+      style="margin-top:14px;width:100%;padding:7px;background:none;border:1px solid var(--border);border-radius:6px;cursor:pointer;font-size:12px;color:var(--text2)">İptal</button>
+  `;
+  overlay.appendChild(box);
+  overlay.addEventListener('click', e => { if (e.target === overlay) overlay.remove(); });
+  document.body.appendChild(overlay);
+  setTimeout(() => document.getElementById('fillerCustomCas')?.focus(), 100);
+}
+
+function _fillerCustomAdd(remaining) {
+  const cas = document.getElementById('fillerCustomCas')?.value?.trim();
+  if (!cas) { alert('Lütfen CAS numarası girin.'); return; }
+  document.getElementById('fillerPickerModal')?.remove();
+  _addFillerComp(cas, remaining);
+}
+
+function _addFillerComp(cas, remaining) {
+  addComp({ cas, conc: remaining });
   const id = _compId;
   const manualEl = document.getElementById('cmanual' + id);
   if (manualEl) { manualEl.value = remaining; onManualConc(id); }
   updateConcTotal();
-  // CAS araması tetikle — madde adı, EC, REACH otomatik dolsun
   onCas(id);
 }
 
@@ -3906,6 +3967,8 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
     // pH: metin olarak oku (aralık değeri "2-4" gibi girişlere izin verir)
     const phVal = _g('tf_ph');
     if (phVal) flatPhys.ph = phVal;
+    const phConc = document.getElementById('tf_ph_conc')?.value;
+    if (phConc) flatPhys.ph_conc = phConc;
 
     // 3. theoProps'tan kalan alanlar (kullanıcı girmemişse motor değeri kullan)
     const _theoExtra = ['ph','viscosity','melting_point','auto_ignition','log_kow'];
@@ -4580,6 +4643,8 @@ async function runReview() {
       const v = _n(id); if (v !== null) flatPhys[key] = v;
     });
     const phVal = _g('tf_ph'); if (phVal) flatPhys.ph = phVal;
+    const phConc2 = document.getElementById('tf_ph_conc')?.value;
+    if (phConc2) flatPhys.ph_conc = phConc2;
     const evapVal = _g('tf_evap'); if (evapVal) flatPhys.evap_rate = evapVal;
     const flamSg  = _g('tf_flam_sg'); if (flamSg) flatPhys.is_flammable = flamSg;
     const explVal = _g('tf_expl');    if (explVal) flatPhys.is_explosive = explVal;

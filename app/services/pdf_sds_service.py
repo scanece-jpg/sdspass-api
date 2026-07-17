@@ -1680,12 +1680,21 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _er_lbl  = 'Buharlaşma Hızı' if lang=='TR' else 'Evaporation Rate'
     _kow_lbl = 'Dağılım Katsayısı (log Kow)' if lang=='TR' else 'Partition Coeff. (log Kow)'
 
+    _prod_form     = product.get('form', '')
+    _is_solid_form = _prod_form in ('solid', 'powder')
+    _is_gas_form   = _prod_form == 'gas'
+    _ph_conc_raw   = phys.get('ph_conc') or '1'
+    if lang == 'TR':
+        _ph_conc_lbl = f'pH Değeri (%{_ph_conc_raw} sulu çözeltide)'
+    else:
+        _ph_conc_lbl = f'pH Value ({_ph_conc_raw}% aqueous solution)'
+
     all_phys_rows = [
         [phys_prop(lang,'appearance'),
          _text(f'appearance_{lang}') or _text('appearance') or na],
         [phys_prop(lang,'color'),         _text('color') or na],
         [phys_prop(lang,'odor'),          _text('odor')  or na],
-        [phys_prop(lang,'ph'),            _pv_ph()],
+        [(_ph_conc_lbl if _is_solid_form else phys_prop(lang,'ph')), _pv_ph()],
         [phys_prop(lang,'flash_point'),   _pv('flash_point','°C')],
         [phys_prop(lang,'boiling_point'), _pv('boiling_point','°C')],
         [_mp_lbl,                         _pv('melting_point','°C')],
@@ -1727,9 +1736,6 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
 
     # Opsiyonel satırları — sadece değer varsa göster
     # Katı/toz formlar için erime noktası zorunlu (KKDİK Ek-2 §9)
-    _prod_form = product.get('form', '')
-    _is_solid_form = _prod_form in ('solid', 'powder')
-    _is_gas_form   = _prod_form == 'gas'
     _fp_lbl  = phys_prop(lang, 'flash_point')
     _bp_lbl  = phys_prop(lang, 'boiling_point')
     _ph_lbl  = phys_prop(lang, 'ph')
@@ -1740,6 +1746,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     # Katı/toz formda pH ve viskozite uygulanamaz — değer girilmemişse gizle
     if _is_solid_form:
         _optional.add(_ph_lbl)
+        _optional.add(_ph_conc_lbl)
         _optional.add(_vis_lbl)
 
     # ECHA Kılavuz v4 §9.1(h)(e): Gaz/katı formda parlama/kaynama noktası "uygulanamaz"

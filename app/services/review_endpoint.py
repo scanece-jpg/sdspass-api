@@ -105,10 +105,12 @@ Opsiyonel öneriler "Hatalar (Düzeltilmesi Zorunlu)" bölümüne yazılamaz; en
 Bir alan mevzuatta zorunlu sayılıyor olsa bile, kullanıcı geçerli bir içerik girmişse ("yok", "—", boşluk yerine açıklayıcı metin)
 bu girişi yetersiz bulmak için ayrıca mevzuattan açık bir format şartı gösterilmelidir.
 
-**4. Metin doğrulama (halüsinasyon önleme):**
+**4. Metin doğrulama ve alıntı zorunluluğu (halüsinasyon önleme):**
 Bir terimi, kısaltmayı veya alanı "eksik" ya da "çelişkili" olarak raporlamadan önce
 o terimin SDS metninde birebir geçip geçmediğini doğrula (Ctrl+F mantığıyla ara).
 Metinde bulunmayan bir ifadeye dayanan bulgu yazma.
+Her bulgunun "Okunan" sütununa PDF'ten birebir alıntıladığın değeri yaz.
+PDF'ten doğrudan alıntılayamadığın bir değeri "Okunan" sütununa yazma — o bulguyu atla.
 
 **5. Başlık / B2.1 tutarsızlığı:**
 Belgenin üst bilgi / metadata alanındaki H-kodu özeti ile B2.1 tablosu karşılaştırılmalıdır.

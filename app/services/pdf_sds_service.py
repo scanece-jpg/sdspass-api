@@ -1538,7 +1538,11 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     
     # PCN zorunlu alanlar kontrolü — yalnızca API yanıtına/uygulama içi uyarıya eklenir,
     # PDF çıktısına iç teknik mesaj basılmaz.
-    pcn_required = ['ph', 'density', 'flash_point']
+    _pcn_base = ['ph', 'density', 'flash_point']
+    # Gaz ve katı formda parlama noktası uygulanamaz — PCN kontrolünden çıkar
+    if _is_solid_form or _is_gas_form:
+        _pcn_base = [k for k in _pcn_base if k != 'flash_point']
+    pcn_required = _pcn_base
     pcn_missing = [k for k in pcn_required if not phys.get(k)]
 
     # Sıvı ürün + yanıcı sıvı bileşen girilmemişse parlama noktası hesaplanamaz uyarısı

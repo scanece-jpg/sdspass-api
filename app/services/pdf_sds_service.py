@@ -1535,7 +1535,11 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     story += sub_block(f"9.1 {sub_title(lang,'9.1')}", styles)
 
     na = term(lang,'not_available')
-    
+
+    _prod_form     = product.get('form', '')
+    _is_solid_form = _prod_form in ('solid', 'powder')
+    _is_gas_form   = _prod_form == 'gas'
+
     # PCN zorunlu alanlar kontrolü — yalnızca API yanıtına/uygulama içi uyarıya eklenir,
     # PDF çıktısına iç teknik mesaj basılmaz.
     _pcn_base = ['ph', 'density', 'flash_point']
@@ -1684,9 +1688,6 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _er_lbl  = 'Buharlaşma Hızı' if lang=='TR' else 'Evaporation Rate'
     _kow_lbl = 'Dağılım Katsayısı (log Kow)' if lang=='TR' else 'Partition Coeff. (log Kow)'
 
-    _prod_form     = product.get('form', '')
-    _is_solid_form = _prod_form in ('solid', 'powder')
-    _is_gas_form   = _prod_form == 'gas'
     _ph_conc_raw   = phys.get('ph_conc') or '1'
     if lang == 'TR':
         _ph_conc_lbl = f'pH Değeri (%{_ph_conc_raw} sulu çözeltide)'

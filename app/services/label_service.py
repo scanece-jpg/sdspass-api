@@ -237,7 +237,38 @@ def generate_label_pdf(data: dict) -> bytes:
             story.append(_para(t, styles['p_stmt']))
         story.append(sp(1.5))
 
-    # ── 7. Tüketici ürünü — ek zorunluluklar (CLP Madde 35) ──────────────────
+    # ── 7. EUH ifadeleri (CLP Ek-II) ─────────────────────────────────────────
+    euh_data    = data.get('euh', {})
+    euh_details = euh_data.get('details', [])
+    euh_codes   = euh_data.get('codes', [])
+    euh_texts   = []
+    seen_euh    = set()
+    for d in euh_details:
+        code = d.get('code', '')
+        if code in seen_euh:
+            continue
+        seen_euh.add(code)
+        txt = d.get('text_tr') or d.get('text') or ''
+        if txt:
+            euh_texts.append(f'{code}: {txt}')
+    for code in euh_codes:
+        if code in seen_euh:
+            continue
+        seen_euh.add(code)
+        from app.services.codes_i18n import EUH_STMTS
+        _euh_lang = 'EN' if lang == 'EN' else 'TR'
+        txt = EUH_STMTS.get(_euh_lang, {}).get(code, '')
+        if txt:
+            euh_texts.append(f'{code}: {txt}')
+    if euh_texts:
+        story.append(_para('Ek Etiket Unsurları (EUH):' if lang == 'TR' else 'Supplemental Hazard Info (EUH):',
+                           styles['section']))
+        story.append(sp(0.5))
+        for t in euh_texts:
+            story.append(_para(t, styles['h_stmt']))
+        story.append(sp(1.5))
+
+    # ── 9. Tüketici ürünü — ek zorunluluklar (CLP Madde 35) ──────────────────
     if usage == 'consumer':
         consumer_warns = []
         if lang == 'TR':
@@ -250,12 +281,12 @@ def generate_label_pdf(data: dict) -> bytes:
             story.append(_para(w, styles['warning']))
         story.append(sp(1))
 
-    # ── 8. UFI kodu ───────────────────────────────────────────────────────────
+    # ── 10. UFI kodu ──────────────────────────────────────────────────────────
     if ufi:
         story.append(_para(f'UFI: {ufi}', styles['ufi']))
         story.append(sp(1))
 
-    # ── 9. Tehlikeli bileşenler ───────────────────────────────────────────────
+    # ── 11. Tehlikeli bileşenler ──────────────────────────────────────────────
     hazardous = [
         c for c in components
         if c.get('hCodes') or c.get('h_codes')

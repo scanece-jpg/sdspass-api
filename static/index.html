@@ -4005,6 +4005,7 @@ async function generateLabel() {
     supplier: { name: supName, address: supAddr, phone: supPhone },
     volume_l:  volume,
     ufi,
+    euh: state.euh || {},
   };
 
   const btn = document.querySelector('#labelModal button[onclick="generateLabel()"]');

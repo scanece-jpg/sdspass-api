@@ -1670,6 +1670,15 @@ const _LIQUID_FILLERS = [
   { label: 'Ksilen (karışım)',    cas: '1330-20-7' },
 ];
 
+const _AEROSOL_FILLERS = [
+  { label: 'Dimetil Eter (DME)',  cas: '115-10-6'  },
+  { label: 'LPG (Propan/Bütan)', cas: '68476-85-7' },
+  { label: 'İzobütan',           cas: '75-28-5'    },
+  { label: 'Propan',             cas: '74-98-6'    },
+  { label: 'Bütan',              cas: '106-97-8'   },
+  { label: 'CO₂ (Karbondioksit)',cas: '124-38-9'   },
+];
+
 function completeToHundred() {
   const comps = getComps();
   const total = comps.reduce((s, c) => s + (parseFloat(c.concMax || c.conc) || 0), 0);
@@ -1679,7 +1688,14 @@ function completeToHundred() {
     return;
   }
   const form = document.getElementById('pform')?.value || 'liquid';
-  const fillers = ['solid','powder'].includes(form) ? _SOLID_FILLERS : _LIQUID_FILLERS;
+  if (form === 'gas') {
+    alert('Gaz formunda bileşenler tam yüzde ile girilmelidir. Otomatik tamamlama uygulanmaz.');
+    return;
+  }
+  let fillers;
+  if (['solid','powder'].includes(form)) fillers = _SOLID_FILLERS;
+  else if (form === 'aerosol') fillers = _AEROSOL_FILLERS;
+  else fillers = _LIQUID_FILLERS;
   _showFillerPicker(remaining, fillers);
 }
 

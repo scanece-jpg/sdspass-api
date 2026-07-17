@@ -222,9 +222,16 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
             return {'un': 'UN 3088', 'label': 'Kendiliğinden Isınan Katı, Organik, B.N.O.'}
         return {'un': 'UN 3190', 'label': 'Kendiliğinden Isınan Katı, Organik, B.N.O.'}
     if cls == '4.3':
+        if is_solid:
+            return {'un': 'UN 3132', 'label': 'Su ile Tepkiyen Katı, Yanıcı, B.N.O.'}
         return {'un': 'UN 3148', 'label': 'Su ile Tepkiyen Sıvı, B.N.O.'}
     if cls == '5.1':
         if sub == '8':
+            if is_solid:
+                return {
+                    'un': 'UN 3085', 'label': 'Oksitleyici Katı, Aşındırıcı, B.N.O.',
+                    'note': 'ADR 2025: Oksitleyici katı (Sınıf 5.1) + aşındırıcı (Sınıf 8) → UN 3085.',
+                }
             return {
                 'un': 'UN 3098', 'label': 'Oksitleyici Sıvı, Aşındırıcı, B.N.O.',
                 'note': (
@@ -234,10 +241,17 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
                     'Taşımacılık uzmanı onayı önerilir.'
                 ),
             }
+        if is_solid:
+            return {'un': 'UN 1479', 'label': 'Oksitleyici Katı, B.N.O.'}
         if pg == 'I':
             return {'un': 'UN 2912', 'label': 'Oksitleyici Sıvı, B.N.O.'}
         return {'un': 'UN 3139', 'label': 'Oksitleyici Sıvı, B.N.O.'}
     if cls == '5.2':
+        if is_solid:
+            return {
+                'un': 'UN 3106', 'label': 'Organik Peroksit, Tip D, E, F, Katı',
+                'note': 'Tip belirlenmesi (A-G) gereklidir; UN3106 Tip D/E/F katı varsayılan',
+            }
         return {
             'un': 'UN 3105', 'label': 'Organik Peroksit, Tip D, E, F, Sıvı',
             'note': 'Tip belirlenmesi (A-G) gereklidir; UN3105 Tip D/E/F varsayılan',
@@ -263,6 +277,12 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
         }
     if cls == '8':
         if sub == '5.1':
+            if is_solid:
+                return {
+                    'un': 'UN 3084',
+                    'label': 'Korozif Katı, Oksitleyici, B.N.O.',
+                    'note': 'ADR 2025: Aşındırıcı katı (Sınıf 8) + oksitleyici (Sınıf 5.1) → UN 3084.',
+                }
             return {
                 'un': 'UN 3093',
                 'label': 'Korozif Sıvı, Oksitleyici, B.N.O.',
@@ -318,7 +338,7 @@ def classify(h_codes: List[str], form: str = 'liquid',
           conflict_warning, adr_caution
         }
     """
-    is_solid = (form or 'liquid') == 'solid'
+    is_solid = (form or 'liquid') in ('solid', 'powder')
 
     # H kodlarını temizle ve birleştir
     def _clean(h: str) -> str:

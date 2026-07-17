@@ -856,7 +856,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         'H200','H201','H202','H203','H204','H205',
         'H220','H222','H224','H225','H228',
         'H232',
-        'H240','H241','H250','H251','H260','H270','H271',
+        'H240','H241','H250','H251','H260','H270','H271','H272',
         'H300','H301','H304','H310','H311',
         'H314','H318','H330','H331',
         'H334','H340','H350','H360','H360D','H360F','H360FD','H370','H372',
@@ -1196,8 +1196,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             if _cmp_ate_unk or (not _has_acute and not _cmp_annex and not _has_user_ate):
                 _stmt_needed = True
                 _unk_pct_for_stmt += _cmp_conc
+    if _stmt_needed and _unk_pct_for_stmt <= 0:
+        _stmt_needed = False  # Yüzde hesaplanamıyorsa ibare gösterilmez
     if _stmt_needed:
-        _unk_x = round(_unk_pct_for_stmt, 1) if _unk_pct_for_stmt > 0 else '?'
+        _unk_x = round(_unk_pct_for_stmt, 1)
         if lang == 'TR':
             _stmt_text = (f"Karışımın %{_unk_x}'i bilinmeyen akut toksisiteye sahip "
                           f"bileşenlerden oluşmaktadır.")

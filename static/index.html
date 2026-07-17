@@ -973,6 +973,14 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
           <input type="number" id="tf_aerosol_flam_pct" step="0.1" min="0" max="100" placeholder="CLP §2.3.3 — motor hesaplar">
         </div>
 
+        <div class="phys-fw" data-forms="aerosol">
+          <div class="phys-fh">
+            <label>Yanma Isısı (kJ/g)</label>
+            <label class="na-check"><input type="checkbox" id="na_aerosol_hoc" onchange="toggleNA(this,'tf_aerosol_hoc','aerosol_hoc')"> N/A</label>
+          </div>
+          <input type="number" id="tf_aerosol_hoc" step="0.1" min="0" placeholder="≥30 kJ/g → H222 Cat.1 (CLP §2.3.3.1)">
+        </div>
+
       </div><!-- /phys-grid -->
 
       <!-- Daha fazla toggle -->
@@ -4652,7 +4660,8 @@ async function runReview() {
      ['tf_visc','viscosity'],['tf_sol','solubility'],['tf_mp','melting_point'],
      ['tf_ait','auto_ignition'],['tf_decomp','decomposition_temp'],
      ['tf_logkow','log_kow'],['tf_vp','vapor_pressure'],
-     ['tf_odor_thresh','odour_threshold'],['tf_aerosol_flam_pct','aerosol_flam_pct']].forEach(([id, key]) => {
+     ['tf_odor_thresh','odour_threshold'],['tf_aerosol_flam_pct','aerosol_flam_pct'],
+     ['tf_aerosol_hoc','aerosol_hoc']].forEach(([id, key]) => {
       const v = _n(id); if (v !== null) flatPhys[key] = v;
     });
     const phVal = _g('tf_ph'); if (phVal) flatPhys.ph = phVal;

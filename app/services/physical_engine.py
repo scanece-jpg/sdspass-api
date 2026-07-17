@@ -1941,11 +1941,12 @@ def _calc_flam_liq(comps: List[Dict], user_fp=None) -> Dict:
 
 
 def _calc_flam_aerosol(comps: List[Dict], user_fp=None,
-                        aerosol_flam_pct=None) -> Optional[Dict]:
+                        aerosol_flam_pct=None, aerosol_hoc=None) -> Optional[Dict]:
     """
     CLP Ek-I §2.3 — Aerosol yanıcılık sınıflandırması.
     aerosol_flam_pct: Kullanıcı beyanı — yanıcı içerik % (w/w).
-      ≥ 85% → H222 Kat.1 (ısı yanma ≥30 kJ/g doğrulanmalı)
+      ≥ 85% VE yanma ısısı ≥30 kJ/g → H222 Kat.1
+      ≥ 85% ama yanma ısısı <30 kJ/g → H223 Kat.2
       1–85% → H223 Kat.2
       <  1% → None (sadece H229)
     Girilmemişse parlama noktası tabanlı yöntem kullanılır:
@@ -1955,9 +1956,19 @@ def _calc_flam_aerosol(comps: List[Dict], user_fp=None,
     if aerosol_flam_pct is not None:
         pct = float(aerosol_flam_pct)
         if pct >= 85:
-            return {'h': 'H222', 'h_class': 'Flam. Aerosol 1', 'signal': 'Danger',
-                    'source': (f'Kullanıcı beyanı: yanıcı içerik %{pct:.0f} — '
-                               'H222 Cat.1; ısı yanma değeri ≥30 kJ/g doğrulanmalı (CLP Ek-I §2.3.3.1)')}
+            hoc = float(aerosol_hoc) if aerosol_hoc is not None else None
+            if hoc is not None and hoc >= 30:
+                return {'h': 'H222', 'h_class': 'Flam. Aerosol 1', 'signal': 'Danger',
+                        'source': (f'Kullanıcı beyanı: yanıcı içerik %{pct:.0f}, '
+                                   f'yanma ısısı {hoc} kJ/g (CLP Ek-I §2.3.3.1)')}
+            elif hoc is None:
+                return {'h': 'H222', 'h_class': 'Flam. Aerosol 1', 'signal': 'Danger',
+                        'source': (f'Kullanıcı beyanı: yanıcı içerik %{pct:.0f} — '
+                                   'H222 Cat.1; yanma ısısı ≥30 kJ/g doğrulanmalı (CLP Ek-I §2.3.3.1)')}
+            else:
+                return {'h': 'H223', 'h_class': 'Flam. Aerosol 2', 'signal': 'Warning',
+                        'source': (f'Kullanıcı beyanı: yanıcı içerik %{pct:.0f}, '
+                                   f'yanma ısısı {hoc} kJ/g <30 → Kat.2 (CLP Ek-I §2.3.3.1)')}
         if pct >= 1:
             return {'h': 'H223', 'h_class': 'Flam. Aerosol 2', 'signal': 'Warning',
                     'source': f'Kullanıcı beyanı: yanıcı içerik %{pct:.0f} (CLP Ek-I §2.3.3.1)'}
@@ -2107,7 +2118,8 @@ def calculate(comps: List[Dict], form: str = 'liquid',
 
     if form == 'aerosol':
         fa = _calc_flam_aerosol(comps, user_fp,
-                                aerosol_flam_pct=test_data.get('aerosol_flam_pct'))
+                                aerosol_flam_pct=test_data.get('aerosol_flam_pct'),
+                                aerosol_hoc=test_data.get('aerosol_hoc'))
         if fa:
             if fa.get('warning'):
                 warnings.append(fa.pop('warning'))

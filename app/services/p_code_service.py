@@ -399,9 +399,7 @@ def assign_p_codes(
     # Zorunlu P kodları — çakışma sonrası eklenecek
     if usage == 'consumer':
         mandatory = ['P101', 'P102', 'P103']
-    elif usage == 'professional':
-        mandatory = ['P101']
-    else:  # industrial
+    else:  # industrial / professional
         mandatory = []
 
     # Bağlama duyarlı bastırma — __any__ önce, sonra kaynak-spesifik (additive)
@@ -820,15 +818,10 @@ def classify_sds_p_codes(p_codes: List[str], usage: str = 'industrial') -> Dict:
     """
     # Kullanım kategorisine göre öncelik geçersizleştirme
     _OVERRIDE: Dict[str, str] = {}
-    if usage == 'industrial':
+    if usage in ('industrial', 'professional'):
         _OVERRIDE = {
-            'P301+P330+P331': 'evaluate',  # Endüstriyelde zorunlu değil, önerilir
-            'P405':           'optional',   # Endüstriyelde opsiyonel
-        }
-    elif usage == 'professional':
-        _OVERRIDE = {
-            'P301+P330+P331': 'evaluate',  # Profesyonelde zorunlu değil, önerilir
-            'P405':           'evaluate',   # Profesyonelde değerlendirmeli
+            'P301+P330+P331': 'evaluate',
+            'P405':           'optional',
         }
 
     groups = {'mandatory': [], 'evaluate': [], 'optional': []}

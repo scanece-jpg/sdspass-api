@@ -321,8 +321,8 @@ def _build_sds_text(sds_data: dict, h_codes: list, phys_props: dict, components:
     # Türkçe görüntüleme dönüşümleri (PDF ile aynı)
     _SIGNAL_TR = {"danger": "TEHLİKE", "warning": "UYARI", "none": "—"}
     _USAGE_TR  = {
-        "industrial":   "Endüstriyel",
-        "professional": "Mesleki/Profesyonel",
+        "industrial":   "Endüstriyel / Profesyonel",
+        "professional": "Endüstriyel / Profesyonel",
         "consumer":     "Tüketici",
     }
     signal_raw = clp.get("signal_word", "")

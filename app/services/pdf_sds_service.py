@@ -810,9 +810,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     # Kullanım tipi etiketi — REACH Annex II §1.2 / KKDİK Ek-2
     _usage_val = product.get('usage', 'industrial')
     _usage_labels = {
-        'industrial':   ('Endüstriyel kullanım',    'Industrial use'),
-        'professional': ('Profesyonel kullanım',    'Professional use'),
-        'consumer':     ('Tüketici kullanımı',      'Consumer use'),
+        'industrial':   ('Endüstriyel / Profesyonel kullanım', 'Industrial / Professional use'),
+        'professional': ('Endüstriyel / Profesyonel kullanım', 'Industrial / Professional use'),
+        'consumer':     ('Tüketici kullanımı',                 'Consumer use'),
     }
     _usage_lbl_tr, _usage_lbl_en = _usage_labels.get(_usage_val, ('Endüstriyel kullanım', 'Industrial use'))
     _usage_lbl = _usage_lbl_tr if lang == 'TR' else _usage_lbl_en

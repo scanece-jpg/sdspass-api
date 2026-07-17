@@ -1091,7 +1091,7 @@ async def substance_lookup(cas: str):
         try:
             from app.services.echa_service import lookup_echa_api
             echa = await lookup_echa_api(cas)
-            if echa and echa.get('h_codes'):
+            if echa and (echa.get('h_codes') or echa.get('name')):
                 cache_src  = echa.get('_cache_source', 'echa_cl')
                 is_pubchem = cache_src == 'pubchem'
                 try:
@@ -1187,6 +1187,13 @@ async def substance_lookup(cas: str):
     if ec or reg:
         return {"found": True, "cas": cas, "name": "", "ec_no": ec,
                 "reach_no": reg, "annex_vi": False, "hazards": [], "oel": oel}
+
+    # Geçerli CAS formatı (##-##-#) → bilinmeyen madde olarak döndür; kullanıcı elle sınıflandırabilir
+    import re as _re
+    if _re.match(r'^\d{2,7}-\d{2}-\d$', cas.strip()):
+        return {"found": True, "cas": cas, "name": "", "ec_no": "",
+                "reach_no": None, "annex_vi": False, "hazards": [], "oel": oel,
+                "source": "Bilinmeyen madde — sınıflandırma manuel girilmeli"}
 
     return {"found": False, "cas": cas}
 

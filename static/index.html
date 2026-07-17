@@ -1848,9 +1848,16 @@ async function onCas(id) {
     const reach = document.getElementById('reach'+id);
     if (reach && data.reach_no) reach.value = data.reach_no;
 
-    // Başarı göstergesi
-    if (casEl) { casEl.style.borderColor = 'var(--safe)'; casEl.title = data.name || ''; }
-    setTimeout(() => { if(casEl){ casEl.style.borderColor=''; }}, 1800);
+    // Bilinmeyen madde — DB'de yok ama CAS formatı geçerli; uyar ama devam et
+    const isUnknown = data.found && !data.name && (!data.hazards || data.hazards.length === 0) && !data.sea_ek6 && !data.annex_vi;
+    if (isUnknown) {
+      if (casEl) { casEl.style.borderColor = '#f6ad55'; casEl.title = 'Veritabanında bulunamadı — madde adını ve tehlike sınıflarını elle girin'; }
+      setTimeout(() => { if(casEl){ casEl.style.borderColor=''; casEl.title=''; }}, 4000);
+    } else {
+      // Başarı göstergesi
+      if (casEl) { casEl.style.borderColor = 'var(--safe)'; casEl.title = data.name || data.source || ''; }
+      setTimeout(() => { if(casEl){ casEl.style.borderColor=''; }}, 1800);
+    }
 
     if (data.hazards) data.hazards.forEach(h => addChip(id, h.h_class, h.h_code, h._annex_supplement));
 

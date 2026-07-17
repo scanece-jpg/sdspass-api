@@ -548,6 +548,10 @@ H_BASED_LABEL_FORCED: Dict[str, List[str]] = {
     'H224': ['P210', 'P403+P235', 'P370+P378'],
     'H225': ['P210', 'P403+P235', 'P370+P378'],
     'H226': ['P210', 'P403+P235', 'P370+P378'],
+    # ── Aerosol — CLP Annex I Tablo 2.3.2: tüm aerosol kategorilerinde P210, P211, P251, P410+P412 zorunlu
+    'H222': ['P210', 'P211', 'P251', 'P410+P412'],
+    'H223': ['P210', 'P211', 'P251', 'P410+P412'],
+    'H229': ['P210', 'P251', 'P410+P412'],  # Basınçlı kap — P211 aerosol'a özgü, H229 tek başına gerektirmiyor
     # ── Alevlenir Gaz / Katı ──────────────────────────────────────────────────
     'H220': ['P210'],
     'H221': ['P210'],
@@ -753,6 +757,9 @@ P_SDS_PRIORITY: Dict[str, str] = {
     'P371+P380+P375': 'mandatory',
     # ── MUTLAKA YAZ (Prevention — kritik) ────────────────────
     'P210':           'mandatory',   # Yanıcı — tutuşma kaynağı
+    'P211':           'mandatory',   # Aerosol — açık aleve püskürtme (CLP Tablo 2.3.2 zorunlu)
+    'P251':           'mandatory',   # Aerosol — delme/yakma (CLP Tablo 2.3.2 zorunlu)
+    'P410+P412':      'mandatory',   # Aerosol depolama — güneş/sıcaklık (CLP Tablo 2.3.2 zorunlu)
     'P220':           'mandatory',   # Oksitleyici — yanıcılardan uzak tut (CLP Annex III H271/H272)
     'P221':           'mandatory',   # Oksitleyici — yanıcılarla karışımı kesinlikle önle (CLP Annex III)
     'P260':           'mandatory',   # Solunum koruma
@@ -785,7 +792,6 @@ P_SDS_PRIORITY: Dict[str, str] = {
     'P363':           'evaluate',    # Kirli giysi yıka
     'P403+P235':      'evaluate',    # Serin/havalandırmalı
     'P403+P233':      'evaluate',    # Havalandırmalı/kapalı
-    'P410+P412':      'evaluate',    # Güneş/sıcaklık
     'P410+P403':      'evaluate',
     'P402+P404':      'evaluate',
     # ── OPSİYONEL ────────────────────────────────────────────

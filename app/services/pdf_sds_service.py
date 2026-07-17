@@ -904,6 +904,13 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         if hc in seen_clf:
             continue
         seen_clf.add(hc)
+        # H229 ayrı satır değil — CLP Tablo 2.3.2: H222/H223 ile birlikte basınçlı kap ifadesi
+        if hc == 'H229':
+            for row in clf_rows:
+                if row[1] in ('H222', 'H223') or row[1].startswith('H222') or row[1].startswith('H223'):
+                    if 'H229' not in row[1]:
+                        row[1] = row[1] + ' + H229'
+            continue  # ayrı satır ekleme
         reason = entry.get('reason','')
         conc_info = reason or entry.get('cutoff_used','') or '—'
         # h_code'dan yetkili h_class türet (DB bozukluğuna karşı düzelt)

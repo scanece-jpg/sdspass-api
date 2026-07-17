@@ -2169,3 +2169,34 @@ async def ai_chat(body: dict = Body(...)):
         "input_tokens":  resp.usage.input_tokens,
         "output_tokens": resp.usage.output_tokens,
     }
+
+
+# ─── ETIKET ENDPOINT ──────────────────────────────────────────────────────────
+
+@app.post("/api/v1/label/pdf", response_class=Response)
+async def generate_label(data: dict = Body(...)):
+    """
+    CLP uyumlu etiket PDF üret.
+
+    Beklenen veri:
+      product    : {name, form, usage}
+      components : [{name, cas, concMin, concMax, hCodes}]
+      clp        : {h_codes, signal_word, p_codes}
+      supplier   : {name, address, phone}
+      volume_l   : float  — ambalaj hacmi (litre)
+      lang       : 'TR' | 'EN'
+      ufi        : str (isteğe bağlı)
+    """
+    from app.services.label_service import generate_label_pdf
+    try:
+        pdf_bytes = generate_label_pdf(data)
+        product_name = data.get('product', {}).get('name', 'etiket')
+        safe_name = ''.join(c for c in product_name if c.isalnum() or c in (' ', '-', '_'))[:40]
+        filename = f"{safe_name}_etiket.pdf"
+        return Response(
+            content=pdf_bytes,
+            media_type='application/pdf',
+            headers={'Content-Disposition': f'attachment; filename="{filename}"'},
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f'Etiket üretim hatası: {e}')

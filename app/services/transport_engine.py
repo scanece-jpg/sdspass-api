@@ -11,7 +11,7 @@ from typing import List, Optional, Dict
 CLASS_LABELS: Dict[str, str] = {
     '1'  : 'Patlayıcı Maddeler',
     '2.1': 'Yanıcı Gazlar',
-    '2.2': 'Yanıcı Olmayan/Zehirli Gazlar',
+    '2.2': 'Yanıcı Olmayan, Zehirli veya Oksitleyici Gazlar',
     '3'  : 'Yanıcı Sıvılar',
     '4.1': 'Yanıcı Katılar',
     '4.2': 'Kendiliğinden Alışan Maddeler',

@@ -405,14 +405,66 @@ def classify(h_codes: List[str], form: str = 'liquid',
     # ── Adım 4: UN ve etiket ──────────────────────────────────────────────────
     un_entry = _get_un_entry(primary['class'], primary['pg'], sub_class, is_solid, h_set, form)
 
-    # Aerosol formu — her zaman UN 1950 (CLP §2.3.6 / ADR 2023 Sınıf 2)
-    # H222/H223 → Sınıf 2.1 doğru; ama UN 1954 değil UN 1950 kullanılır
+    # Aerosol formu — her zaman UN 1950 (ADR 2023 Tablo A Sınıf 2)
+    # Sınıflandırma kodu hazard setine göre seçilir (ADR 2023 Tablo A).
+    # CMR (H340/H350) ADR anlamında "toksik" değildir — LC50 kriterleri (Div.2.3) geçerli.
     if form == 'aerosol':
-        _aero_lbl = 'Aerosol, Yanıcı' if h_set & {'H222', 'H223'} else 'Aerosol'
+        _is_flam = bool(h_set & {'H222', 'H223'})
+        _is_adr_toxic = bool(h_set & {'H330', 'H331'})  # ADR Div.2.3 inhalasyon toksisitesi
+        _is_ox   = 'H270' in h_set                       # Oksitleyici gaz
+        _is_corr = 'H314' in h_set                       # Aşındırıcı
+
+        if   _is_toxic := (_is_adr_toxic):
+            if   _is_ox and _is_corr:           _aero_code = '5TOC'
+            elif _is_flam and _is_corr:          _aero_code = '5TFC'
+            elif _is_ox:                         _aero_code = '5TO'
+            elif _is_corr:                       _aero_code = '5TC'
+            elif _is_flam:                       _aero_code = '5TF'
+            else:                                _aero_code = '5T'
+        elif _is_flam:                           _aero_code = '5F'
+        else:                                    _aero_code = '5A'
+
+        # UN1950 varyantına göre Sınıf 2 alt etiket
+        _AERO_CLASS = {
+            '5A':  '2.2', '5F':  '2.1',
+            '5T':  '2.3', '5TF': '2.3', '5TC': '2.3',
+            '5TO': '2.3', '5TFC':'2.3', '5TOC':'2.3',
+        }
+        _AERO_LABELS = {
+            '5A':   ['2.2'],
+            '5F':   ['2.1'],
+            '5T':   ['2.3', '2.2'],
+            '5TF':  ['2.3', '2.1'],
+            '5TC':  ['2.3', '8'],
+            '5TO':  ['2.3', '5.1'],
+            '5TFC': ['2.3', '2.1', '8'],
+            '5TOC': ['2.3', '5.1', '8'],
+        }
+        _AERO_TUNNEL = {
+            '5A': 'E', '5F': 'D',
+            '5T': 'C', '5TF': 'C', '5TC': 'C',
+            '5TO': 'C', '5TFC': 'C', '5TOC': 'D',
+        }
+        _AERO_NAMES = {
+            '5A':   ('AEROSOLS, non-flammable',         'AEROSOLLER, yanmaz'),
+            '5F':   ('AEROSOLS, flammable',             'AEROSOLLER, yanıcı'),
+            '5T':   ('AEROSOLS, toxic',                 'AEROSOLLER, zehirli'),
+            '5TF':  ('AEROSOLS, toxic, flammable',      'AEROSOLLER, zehirli, yanıcı'),
+            '5TC':  ('AEROSOLS, toxic, corrosive',      'AEROSOLLER, zehirli, aşındırıcı'),
+            '5TO':  ('AEROSOLS, toxic, oxidizing',      'AEROSOLLER, zehirli, yükseltgen'),
+            '5TFC': ('AEROSOLS, toxic, flam., corr.',   'AEROSOLLER, zehirli, yanıcı, aşındırıcı'),
+            '5TOC': ('AEROSOLS, toxic, ox., corr.',     'AEROSOLLER, zehirli, yükseltgen, aşındırıcı'),
+        }
+        _en_name, _tr_name = _AERO_NAMES.get(_aero_code, ('AEROSOLS', 'AEROSOLLER'))
         un_entry = {
-            'un':   'UN 1950',
-            'label': _aero_lbl + ', B.N.O.',
-            'note': 'Aerosol dispensers her zaman UN 1950 — CLP §2.3.6 / ADR 2023',
+            'un':    'UN 1950',
+            'label': (_tr_name if True else _en_name) + ', B.N.O.',
+            'classification_code': _aero_code,
+            'labels':   _AERO_LABELS.get(_aero_code, ['2.1']),
+            'tunnel':   _AERO_TUNNEL.get(_aero_code, 'D'),
+            'name':     _en_name,
+            'name_tr':  _tr_name,
+            'note': f'UN 1950 {_aero_code} — ADR 2023 Tablo A (kod hazard setinden otomatik seçildi)',
         }
 
     # ── Adım 5: Uyarılar ─────────────────────────────────────────────────────
@@ -476,16 +528,18 @@ def classify(h_codes: List[str], form: str = 'liquid',
     sub_label = f' (Yan Tehlike: {all_sub_labels})' if all_sub_labels else ''
 
     entry = {
-        'un':              un_entry['un'],
-        'class':           primary['class'],
-        'class_label':     CLASS_LABELS.get(primary['class'], primary['class']) + sub_label,
-        'pg':              primary['pg'],
-        'label':           un_entry['label'],
-        'sub_class':       sub_class,
-        'note':            un_entry.get('note'),
-        'env_mark':        env_mark,
-        'conflict_warning': conflict_warning,
-        'adr_caution':     adr_caution,
+        'un':                  un_entry['un'],
+        'class':               primary['class'],
+        'class_label':         CLASS_LABELS.get(primary['class'], primary['class']) + sub_label,
+        'pg':                  primary['pg'],
+        'label':               un_entry['label'],
+        'sub_class':           sub_class,
+        'note':                un_entry.get('note'),
+        'env_mark':            env_mark,
+        'conflict_warning':    conflict_warning,
+        'adr_caution':         adr_caution,
+        'classification_code': un_entry.get('classification_code'),  # aerosol için hazarda göre seçildi
+        'tunnel':              un_entry.get('tunnel'),
     }
 
     return {

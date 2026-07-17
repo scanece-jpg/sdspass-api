@@ -2475,9 +2475,13 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
 
     # ADR kemler + tünel kodu
     adr_det = get_adr_details(un_no, pack_grp) if un_no != '—' else {}
-    kemler     = adr_det.get('kemler', '—')
-    tunnel     = adr_det.get('tunnel_code', '—')
-    cl_code    = adr_det.get('classification_code', '—')
+    kemler  = adr_det.get('kemler', '—')
+    # Sınıflandırma kodu ve tünel: transport_engine aerosol için hazarda göre hesapladıysa onu kullan
+    _road_entry = t_src.get('road') or {}
+    cl_code = (_road_entry.get('classification_code')
+               or adr_det.get('classification_code', '—'))
+    tunnel  = (_road_entry.get('tunnel')
+               or adr_det.get('tunnel_code', '—'))
 
     # ── Mod bazlı sınıf bilgisi (road/sea/air ayrı) ──────────────────────────
     _road = t_src.get('road') or {}

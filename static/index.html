@@ -4889,13 +4889,19 @@ async function runReview() {
 
     const data = await res.json();
 
-    // Özet sayaçlar
-    const s = data.summary || {};
+    // Özet sayaçlar — AI raporundan parse et
+    const _rpt = data.report || '';
+    const _errM  = _rpt.match(/Hatalar[^|]*\|\s*(\d+)/i);
+    const _warnM = _rpt.match(/Uyar[^|]*\|\s*(\d+)/i);
+    const _infoM = _rpt.match(/Bilgi[^|]*\|\s*(\d+)/i);
+    const aiErr  = _errM  ? parseInt(_errM[1])  : 0;
+    const aiWarn = _warnM ? parseInt(_warnM[1]) : 0;
+    const aiInfo = _infoM ? parseInt(_infoM[1]) : 0;
     summary.innerHTML = [
-      s.error   ? `<span style="color:#fc8181;font-weight:700">❌ ${s.error} Hata</span>` : '',
-      s.warning ? `<span style="color:#f6ad55;font-weight:700">⚠️ ${s.warning} Uyarı</span>` : '',
-      s.info    ? `<span style="color:#63b3ed">ℹ️ ${s.info} Bilgi</span>` : '',
-      (!s.error && !s.warning && !s.info) ? '<span style="color:#68d391;font-weight:700">✓ Sorun tespit edilmedi</span>' : '',
+      aiErr  ? `<span style="color:#fc8181;font-weight:700">❌ ${aiErr} Hata</span>`   : '',
+      aiWarn ? `<span style="color:#f6ad55;font-weight:700">⚠️ ${aiWarn} Uyarı</span>` : '',
+      aiInfo ? `<span style="color:#63b3ed">ℹ️ ${aiInfo} Bilgi Notu</span>`             : '',
+      (!aiErr && !aiWarn && !aiInfo) ? '<span style="color:#68d391;font-weight:700">✅ Sorun tespit edilmedi</span>' : '',
     ].filter(Boolean).join('&nbsp;&nbsp;');
     summary.style.display = 'flex';
 

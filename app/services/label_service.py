@@ -162,7 +162,7 @@ def generate_label_pdf(data: dict) -> bytes:
     if supplier.get('phone'):
         sup_lines.append(supplier['phone'])
     if sup_lines:
-        story.append(_para(' | '.join(sup_lines), styles['supplier']))
+        story.append(_para('<br/>'.join(sup_lines), styles['supplier']))
         story.append(sp(1.5))
 
     # ── 3. Piktogramlar ───────────────────────────────────────────────────────

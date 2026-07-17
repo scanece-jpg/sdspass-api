@@ -125,8 +125,9 @@ CLP_CUTOFFS_DICT = {
     "Aquatic Chronic 3": {"h":"H412","cutoff":10.0,"signal":"Warning"},
     "Aquatic Chronic 4": {"h":"H413","cutoff":25.0,"signal":"Warning"},
     # 2.x Fiziksel — ayrı engine (physical_hazard_service)
-    "Flam. Gas 1":  {"h":"H220","cutoff":0.0,"signal":"Danger"},
-    "Flam. Gas 2":  {"h":"H221","cutoff":0.0,"signal":"Warning"},
+    "Flam. Gas 1":       {"h":"H220","cutoff":0.0,"signal":"Danger"},
+    "Flam. Gas 2":       {"h":"H221","cutoff":0.0,"signal":"Warning"},
+    "Pyrophoric Gas 1":  {"h":"H232","cutoff":0.0,"signal":"Danger"},
     "Aerosol 1":    {"h":"H222","cutoff":0.0,"signal":"Danger"},
     "Aerosol 2":    {"h":"H223","cutoff":0.0,"signal":"Warning"},
     "Flam. Liq. 1": {"h":"H224","cutoff":1.0, "signal":"Danger"},
@@ -412,7 +413,7 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
     # yalnızca Aerosol sınıfı (H222/H223/H229) üzerinden iletilir.
     _is_aerosol = (mixture_form or '').lower() == 'aerosol'
     _AEROSOL_EXCLUDED_CLASSES = {
-        'Flam. Gas 1', 'Flam. Gas 2',
+        'Flam. Gas 1', 'Flam. Gas 2', 'Pyrophoric Gas 1',
         'Press. Gas', 'Ref. Gas',
         'Flam. Liq. 1', 'Flam. Liq. 2', 'Flam. Liq. 3',
         'Flam. Sol. 1', 'Flam. Sol. 2',

@@ -15668,7 +15668,8 @@
     ],
     "scl_limits": [],
     "m_factors": {},
-    "ate": {}
+    "ate": {},
+    "form": "gas"
   },
   "13477-00-4": {
     "index_no": "017-003-00-8",
@@ -120446,6 +120447,54 @@
       }
     ],
     "scl_limits": [],
+    "m_factors": {},
+    "ate": {}
+  },
+  "7647-01-0-AQ": {
+    "index_no": "017-002-00-2",
+    "names": [
+      "Hidroklorik asit ... %"
+    ],
+    "name_en": "hydrochloric acid ... %",
+    "ec_no": "231-595-7",
+    "cas": "7647-01-0",
+    "synonyms": [
+      "muriatic acid solution"
+    ],
+    "lang": "tr",
+    "notes": [
+      "B"
+    ],
+    "form": "solution",
+    "euh_codes": [],
+    "classification": [
+      {
+        "class": "Cilt Asnd. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "BHOT Tek Mrz. 3",
+        "h_code": "H335"
+      }
+    ],
+    "scl_limits": [
+      {
+        "h_code": "H314",
+        "class": "Cilt Asnd. 1B",
+        "op": ">=",
+        "min": 25.0,
+        "max": null,
+        "unit": "%"
+      },
+      {
+        "h_code": "H315",
+        "class": "Cilt Tah. 2",
+        "op": "range",
+        "min": 10.0,
+        "max": 25.0,
+        "unit": "%"
+      }
+    ],
     "m_factors": {},
     "ate": {}
   }

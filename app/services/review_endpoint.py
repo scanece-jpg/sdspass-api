@@ -619,8 +619,31 @@ async def sds_review(data: dict = Body(...)):
             # PDF üretilemezse metin özetine düş
             sds_text = sds_xml or _build_sds_text(sds_for_validator, h_codes, phys_props, components)
 
-        # ── 3. Mevzuat bağlamı ─────────────────────────────────────────────────
+        # ── 3. Mevzuat bağlamı — H kodlarına ilgili kural bloklarını önceden yükle
         kb_blocks = []
+        try:
+            from app.services.regulation_search import search_regulation as _sreg
+            # Her H kodu için en iyi kuralı getir; tekrar eden kaynakları atla
+            _seen_sources: set[str] = set()
+            _kb_texts: list[str] = []
+            for _hc in h_codes[:12]:  # çok fazla H kodu varsa ilk 12 yeterli
+                _results = _sreg(_hc, top_k=2)
+                for _r in _results:
+                    if _r["source"] in _seen_sources:
+                        continue
+                    _seen_sources.add(_r["source"])
+                    _kb_texts.append(f"### {_r['title']}\n{_r['text'][:800]}")
+            if _kb_texts:
+                kb_blocks.append({
+                    "type": "text",
+                    "text": (
+                        "=== MEVZUAT KURALLARI (B kaynağı) ===\n\n"
+                        + "\n\n---\n\n".join(_kb_texts)
+                        + "\n\n=== B KAYNAĞI SONU ==="
+                    ),
+                })
+        except Exception:
+            pass
 
         # ── 4. Kural sonuçları metni ───────────────────────────────────────────
         _icon = {"error": "❌", "warning": "⚠️", "info": "ℹ️"}
@@ -754,6 +777,7 @@ async def sds_review(data: dict = Body(...)):
             resp = client.messages.create(
                 model="claude-sonnet-4-6",
                 max_tokens=4096,
+                temperature=0,
                 system=system_prompt,
                 tools=_tools,
                 messages=messages,
@@ -850,8 +874,8 @@ async def sds_chat(data: dict = Body(...)):
         "Sana denetlenen SDS'in tam metni ve denetim raporu verildi. "
         "Kullanıcının sorularını bu bağlam üzerinden Türkçe olarak yanıtla. "
         "Her yanıtta ilgili mevzuat maddesini ve mümkünse resmi URL bağlantısını ver.\n\n"
-        f"=== SDS METNİ ===\n{sds_text[:6000]}\n\n"
-        f"=== DENETİM RAPORU ===\n{report[:3000]}"
+        f"=== SDS METNİ ===\n{sds_text[:15000]}\n\n"
+        f"=== DENETİM RAPORU ===\n{report[:4000]}"
     )
 
     # Konuşma geçmişi + yeni soru
@@ -866,6 +890,7 @@ async def sds_chat(data: dict = Body(...)):
     resp = client.messages.create(
         model="claude-sonnet-4-6",
         max_tokens=1024,
+        temperature=0,
         system=system,
         messages=messages,
     )

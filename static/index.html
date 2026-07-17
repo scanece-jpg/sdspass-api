@@ -1647,6 +1647,17 @@ const _SOLID_FILLERS = [
   { label: 'Mısır Nişastası',     cas: '9005-25-8' },
 ];
 
+const _LIQUID_FILLERS = [
+  { label: 'Su',                  cas: '7732-18-5' },
+  { label: 'Etanol',              cas: '64-17-5'   },
+  { label: 'İzopropanol (IPA)',   cas: '67-63-0'   },
+  { label: 'Aseton',              cas: '67-64-1'   },
+  { label: 'Propilen Glikol',     cas: '57-55-6'   },
+  { label: 'Etilen Glikol',       cas: '107-21-1'  },
+  { label: 'Toluen',              cas: '108-88-3'  },
+  { label: 'Ksilen (karışım)',    cas: '1330-20-7' },
+];
+
 function completeToHundred() {
   const comps = getComps();
   const total = comps.reduce((s, c) => s + (parseFloat(c.concMax || c.conc) || 0), 0);
@@ -1656,14 +1667,12 @@ function completeToHundred() {
     return;
   }
   const form = document.getElementById('pform')?.value || 'liquid';
-  if (['solid','powder'].includes(form)) {
-    _showFillerPicker(remaining);
-  } else {
-    _addFillerComp('7732-18-5', remaining);
-  }
+  const fillers = ['solid','powder'].includes(form) ? _SOLID_FILLERS : _LIQUID_FILLERS;
+  _showFillerPicker(remaining, fillers);
 }
 
-function _showFillerPicker(remaining) {
+function _showFillerPicker(remaining, fillers) {
+  fillers = fillers || _LIQUID_FILLERS;
   const existing = document.getElementById('fillerPickerModal');
   if (existing) existing.remove();
   const overlay = document.createElement('div');

@@ -149,8 +149,12 @@ def generate_label_pdf(data: dict) -> bytes:
     story = []
     sp = lambda n=1: Spacer(1, n * mm)
 
-    # ── 1. Ürün adı ───────────────────────────────────────────────────────────
+    # ── 1. Ürün adı + nominal miktar ─────────────────────────────────────────
     story.append(_para(product.get('name', ''), styles['product']))
+    story.append(sp(0.5))
+    # Nominal miktar — CLP Md.17(1)(c): ambalaj hacmi etikette yer almalı
+    vol_str = f'{int(volume_l)} L' if volume_l == int(volume_l) else f'{volume_l} L'
+    story.append(_para(vol_str, styles['supplier']))
     story.append(sp(1.5))
 
     # ── 2. Tedarikçi bilgisi ──────────────────────────────────────────────────
@@ -162,7 +166,8 @@ def generate_label_pdf(data: dict) -> bytes:
     if supplier.get('phone'):
         sup_lines.append(supplier['phone'])
     if sup_lines:
-        story.append(_para('<br/>'.join(sup_lines), styles['supplier']))
+        for _sl in sup_lines:
+            story.append(_para(_sl, styles['supplier']))
         story.append(sp(1.5))
 
     # ── 3. Piktogramlar ───────────────────────────────────────────────────────

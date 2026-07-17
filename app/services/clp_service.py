@@ -1210,23 +1210,34 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> tuple:
             _fe_ate['inhalation'] = _fe_ate['inhal']
         combined_ate = {**_fe_ate, **(c.get('user_ate') or {})}
 
-        # DB fallback: inhalasyon ATE yoksa substance DB'den çek
+        # DB fallback: inhalasyon ATE yoksa substance DB'den çek (form ile — Note B override)
         _ATE_KEYS = ('inhalation', 'inhalation_vapour', 'inhalation_dust', 'inhalation_mgl')
+        _cas = str(c.get('cas') or '').strip()
         if not any(combined_ate.get(k) for k in _ATE_KEYS):
-            _cas = str(c.get('cas') or '').strip()
             if _cas:
                 try:
                     from app.services.substance_lookup import lookup_substance as _sl
-                    _sub = _sl(_cas)
+                    _sub = _sl(_cas, form=form)
                     if _sub and _sub.get('ate'):
                         combined_ate = {**_sub['ate'], **combined_ate}
                 except Exception as _e:
                     _log.warning("substance_lookup ATE alınamadı (cas=%s): %s", _cas, _e)
 
+        # Note B override: sıvı üründe bileşen hazards gaz formundan geldiyse sulu formla değiştir
+        _comp_hazards = c.get('hazards') or []
+        try:
+            from app.services.substance_lookup import _NOTE_B_CAS, _is_liquid, lookup_substance as _sl2
+            if _cas and _cas in _NOTE_B_CAS and _is_liquid(form):
+                _aq = _sl2(_cas, form=form)
+                if _aq and _aq.get('hazards'):
+                    _comp_hazards = _aq['hazards']
+        except Exception:
+            pass
+
         items.append({
-            'cas':             str(c.get('cas') or c.get('cas_no') or '').strip(),
+            'cas':             _cas or str(c.get('cas_no') or ''),
             'conc':            conc,
-            'hazards':         c.get('hazards') or [],
+            'hazards':         _comp_hazards,
             'ate':             combined_ate,
             'source_priority': c.get('source_priority', 4),
             'ate_unknown':     bool(c.get('ate_unknown', False)),

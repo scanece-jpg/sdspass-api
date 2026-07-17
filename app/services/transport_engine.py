@@ -40,6 +40,7 @@ H_TO_ADR: Dict[str, Dict] = {
     'H270': {'class': '2.2', 'pg': None},
     'H280': {'class': '2.2', 'pg': None},   # Sıkıştırılmış/sıvılaştırılmış gaz (CLP §2.5)
     'H281': {'class': '2.2', 'pg': None},   # Soğutulmuş sıvılaştırılmış gaz (kriyojenik)
+    'H232': {'class': '4.2', 'pg': 'I'},    # Pirofor Gaz 1 — ADR Sınıf 4.2 PG I
     # Sınıf 3 — Yanıcı Sıvı (parlama noktasına göre PG)
     'H224': {'class': '3', 'pg': 'I'},    # FP < 23°C, BP ≤ 35°C
     'H225': {'class': '3', 'pg': 'II'},   # FP < 23°C, BP > 35°C
@@ -163,7 +164,7 @@ def resolve_conflict(cls_a: str, pg_a: Optional[str],
 
 
 def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: bool,
-                  h_set: set = None) -> Dict:
+                  h_set: set = None, form: str = 'liquid') -> Dict:
     """UN numarası ve etiket belirle."""
     h_set = h_set or set()
     if cls == '1':
@@ -216,6 +217,15 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
         }
     if cls == '4.2':
         if pg == 'I':
+            if form == 'gas':
+                return {
+                    'un': 'UN 2188', 'label': 'Pirofor Gaz, B.N.O.',
+                    'note': (
+                        'H232: Hava temasında kendiliğinden alışan gaz — ADR Sınıf 2.1. '
+                        'Maddeye özgü UN numarası önceliklidir (ör. UN2188 Arsin, UN2199 Fosfin). '
+                        'Taşımacılık uzmanı onayı zorunludur.'
+                    ),
+                }
             return {'un': 'UN 2845', 'label': 'Pirofor Sıvı, Organik, B.N.O.',
                     'note': 'H250: Hava temasında kendiliğinden alışır — PG I, özel ambalaj'}
         if pg == 'II':
@@ -393,7 +403,7 @@ def classify(h_codes: List[str], form: str = 'liquid',
     sub_class = subs[0]['class'] if subs else None
 
     # ── Adım 4: UN ve etiket ──────────────────────────────────────────────────
-    un_entry = _get_un_entry(primary['class'], primary['pg'], sub_class, is_solid, h_set)
+    un_entry = _get_un_entry(primary['class'], primary['pg'], sub_class, is_solid, h_set, form)
 
     # Aerosol formu — her zaman UN 1950 (CLP §2.3.6 / ADR 2023 Sınıf 2)
     # H222/H223 → Sınıf 2.1 doğru; ama UN 1954 değil UN 1950 kullanılır

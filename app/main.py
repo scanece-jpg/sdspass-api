@@ -116,6 +116,14 @@ async def generate_pdf(data: dict = Body(...)):
         )
         from app.services.echa_service import _dedupe_h_codes as _dedup, lookup_echa_api as _lu_echa
 
+        # Form bazlı filtre: sıvı/katı/pasta formda basınçlı gaz H kodları geçersiz
+        _GAS_ONLY_H = {'H280', 'H281', 'H282', 'H283', 'H284', 'H285'}
+
+        def _filter_form_h(hazards: list, prod_form: str) -> list:
+            if prod_form in ('liquid', 'solid', 'paste'):
+                return [h for h in hazards if h.get('h_code') not in _GAS_ONLY_H]
+            return hazards
+
         async def _refresh_comp(comp: dict, _prod_form: str = '') -> dict:
             cas = (comp.get('cas_no') or comp.get('cas') or '').strip()
             if not cas:
@@ -127,9 +135,10 @@ async def generate_pdf(data: dict = Body(...)):
                     # DB'de kayıt var — hazards boş olsa bile (sınıflandırılmamış madde: su, glikoz vb.)
                     # ECHA API'ye düşme; boş hazards kasıtlı "sınıflandırılmamış" anlamına gelir.
                     if fresh.get('hazards'):
+                        filtered = _filter_form_h(fresh['hazards'], _prod_form)
                         raw = {
-                            'h_codes':        [h['h_code'] for h in fresh['hazards']],
-                            'hazard_classes':  [h['h_class'] for h in fresh['hazards']],
+                            'h_codes':        [h['h_code'] for h in filtered],
+                            'hazard_classes':  [h['h_class'] for h in filtered],
                         }
                         _dedup(raw)
                         c = dict(comp)

@@ -3998,9 +3998,9 @@ async function generateLabel() {
     product,
     components: getComps(),
     clp: {
-      h_codes:     state.h_codes     || [],
-      signal_word: state.signal_word || '',
-      p_codes:     state.p_codes     || [],
+      h_codes:     state.allH            || [],
+      signal_word: state.combinedSignal  || '',
+      p_codes:     state.pcodes?.label   || state.pcodes?.p_codes || [],
     },
     supplier: { name: supName, address: supAddr, phone: supPhone },
     volume_l:  volume,

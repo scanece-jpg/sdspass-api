@@ -738,7 +738,8 @@ async def sds_review(data: dict = Body(...)):
             return _json.dumps(result, ensure_ascii=False)
 
         client = _anthropic.Anthropic(api_key=api_key)
-        system_prompt = _SYSTEM_PROMPT + _load_extra_rules()
+        _today = date.today().strftime('%d.%m.%Y')
+        system_prompt = _SYSTEM_PROMPT + _load_extra_rules() + f"\n\nBugünün tarihi: {_today}. Denetim raporunda bu tarihi kullan."
 
         user_parts: list[dict] = []
         user_parts.extend(kb_blocks)

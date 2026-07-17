@@ -4899,11 +4899,36 @@ async function runReview() {
     ].filter(Boolean).join('&nbsp;&nbsp;');
     summary.style.display = 'flex';
 
-    // Rapor metni — basit markdown → HTML
+    // Rapor metni — markdown → HTML
     let report = data.report || 'Rapor alınamadı.';
+
+    // Markdown tabloları HTML tablosuna çevir
+    report = report.replace(/((?:^\|.+\|\s*\n)+)/gm, tableBlock => {
+      const lines = tableBlock.trim().split('\n').filter(l => l.trim());
+      if (lines.length < 2) return tableBlock;
+      const isSep = l => /^\|[-| :]+\|$/.test(l.trim());
+      const parseRow = l => l.trim().replace(/^\||\|$/g,'').split('|').map(c => c.trim());
+      let html = '<div style="overflow-x:auto;margin:8px 0"><table style="border-collapse:collapse;font-size:13px;width:100%">';
+      let inBody = false;
+      for (const line of lines) {
+        if (isSep(line)) { inBody = true; continue; }
+        const cells = parseRow(line);
+        const tag = inBody ? 'td' : 'th';
+        const style = inBody
+          ? 'border:1px solid var(--border2);padding:5px 10px;vertical-align:top'
+          : 'border:1px solid var(--border2);padding:5px 10px;background:rgba(43,108,176,.15);color:#63b3ed;white-space:nowrap';
+        html += '<tr>' + cells.map(c => `<${tag} style="${style}">${c}</${tag}>`).join('') + '</tr>';
+      }
+      html += '</table></div>';
+      return html;
+    });
+
     report = report
+      .replace(/^# (.+)$/gm, '<strong style="color:#a0c4ff;font-size:18px;display:block;margin-top:14px">$1</strong>')
       .replace(/^## (.+)$/gm, '<strong style="color:#63b3ed;font-size:17px;display:block;margin-top:12px">$1</strong>')
       .replace(/^### (.+)$/gm, '<strong style="color:#f6ad55;font-size:15px;display:block;margin-top:8px">$1</strong>')
+      .replace(/^> (.+)$/gm, '<blockquote style="border-left:3px solid #f6ad55;margin:6px 0;padding:4px 10px;color:var(--text2)">$1</blockquote>')
+      .replace(/^---+$/gm, '<hr style="border:none;border-top:1px solid var(--border2);margin:10px 0">')
       .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
       .replace(/\*(.+?)\*/g, '<em style="color:var(--text2)">$1</em>');
     body.innerHTML = report;

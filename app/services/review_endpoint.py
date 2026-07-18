@@ -160,7 +160,12 @@ Bir bulgu yazmadan önce ilgili aracı çağır ve dönen sonuca göre karar ver
 **Araçlar:**
 - `verify_text_in_sds(phrase)` — SDS metninde bir ifadeyi ara; `found` alanını kontrol et
 - `search_regulation(query)` — Mevzuat kural bloklarında ara; sonuç boşsa hükmü uydurma
-- `get_substance_scl(cas_no, h_code)` — SEA Ek-6 SCL (özel konsantrasyon sınırı) sorgula; `found=False` ise kayıtlı sınır yok
+- `get_substance_scl(cas_no, h_code)` — SEA Ek-6 SCL (özel konsantrasyon sınırı) sorgula
+
+**KRİTİK KURAL — Araç sonucu boş veya `found=false` gelirse:**
+- O konuda HİÇBİR BULGU üretme. "Bulunamadı" diye yazmak da yeterli değil — o satırı tamamen atla.
+- Aracın sorgusu yanlış anahtar/CAS ile çalışmış olabilir; boş sonuç "kural yok" anlamına gelmez.
+- Aynı şekilde: `verify_text_in_sds` `found=false` dönerse o ifadeyi PDF'te görmemiş gibi davran, onu bulgu olarak raporlama.
 
 ---
 
@@ -564,6 +569,8 @@ async def sds_review(data: dict = Body(...)):
         sds_xml          = data.get("sds_xml") or None
         full_sds_data    = data.get("full_sds_data") or None
         sds_data_simple  = data.get("sds_data", {})
+        _product_dict    = (full_sds_data or sds_data_simple).get("product", {})
+        mixture_form     = _product_dict.get("form", "liquid")
 
         # ── Motor düzeltmeleri ────────────────────────────────────────────────
         if full_sds_data:
@@ -726,7 +733,7 @@ async def sds_review(data: dict = Body(...)):
         def _dispatch_tool(name: str, inputs: dict) -> str:
             try:
                 if name == "get_substance_scl":
-                    result = _get_scl(inputs["cas_no"], inputs["h_code"])
+                    result = _get_scl(inputs["cas_no"], inputs["h_code"], form=mixture_form)
                 elif name == "verify_text_in_sds":
                     result = _verify_text(inputs["phrase"], sds_text)
                 elif name == "search_regulation":

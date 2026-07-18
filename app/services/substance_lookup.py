@@ -941,12 +941,15 @@ def scl_category(cas: str, h_code: str, conc: float) -> Optional[str]:
     return None
 
 
-def get_substance_scl(cas_no: str, h_code: str) -> dict:
+def get_substance_scl(cas_no: str, h_code: str, form: str = '') -> dict:
     """
     Bir CAS numarası + H kodu için TÜM özel konsantrasyon bantlarını (SCL) döndürür.
 
     H314 gibi kodlar birden fazla alt kategoriye (1A, 1B) sahip olabilir; model
     doğru bandı seçebilmek için tüm bantları görmek zorundadır.
+
+    form: ürün fiziksel formu ('liquid','solution',...) — Note B maddelerinde
+          sıvı formda AQ kaydına yönlendirmek için kullanılır.
 
     Dönüş şeması:
       {
@@ -980,7 +983,7 @@ def get_substance_scl(cas_no: str, h_code: str) -> dict:
     if not cas_no or not h_code:
         return not_found
 
-    sub = lookup_substance(cas_no)
+    sub = lookup_substance(cas_no, form=form)
     if not sub:
         return not_found
 

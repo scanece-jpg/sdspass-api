@@ -770,7 +770,8 @@ async def sds_review(data: dict = Body(...)):
                 "Yukarıdaki SDS PDF'ini (A kaynağı) mevzuat paragraflarıyla (B) karşılaştırarak "
                 "bağımsız denetim raporu yaz. Otomatik bulgular (C) ek bağlam olarak kullan.\n"
                 "Bir bulgu yazmadan önce:\n"
-                "  • PDF'de olmayan bir şeyi iddia ediyorsan → verify_text_in_sds ile doğrula\n"
+                "  • Belge içeriği hakkında HER iddia için önce verify_text_in_sds çağır; çağırmadan yazmak yasaktır\n"
+                "  • verify_text_in_sds found=false dönerse o ifadeyi belgede görmemiş say, bulgu olarak raporlama\n"
                 "  • SCL sınırı ile ilgili bir bulgu varsa → get_substance_scl ile sorgula\n"
                 "  • Mevzuat hükmünden emin değilsen → search_regulation ile kontrol et"
             ),

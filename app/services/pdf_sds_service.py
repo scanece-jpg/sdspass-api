@@ -2792,9 +2792,13 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         story.append(Spacer(1, 4))
 
     # Revizyon geçmişi
+    rev_notes = rev.get('notes') or (
+        'Sınıflandırma ve etiketleme bilgileri güncellenmiştir.' if lang == 'TR'
+        else 'Classification and labelling information updated.'
+    )
     story.append(Paragraph(
         f"<b>{S(lang,'revision_history')}:</b> "
-        f"Rev.{rev_no} — {rev_date}",
+        f"Rev.{rev_no} — {rev_date}: {rev_notes}",
         styles['body']
     ))
 

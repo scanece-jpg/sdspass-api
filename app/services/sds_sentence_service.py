@@ -266,6 +266,7 @@ H_SENTENCES: Dict[str, Dict[int, str]] = {
         4: [
             'CİLDE TEMAS: Kirlenmiş giysileri hemen çıkarın. Cildi en az 15-20 dakika bol suyla yıkayın. Derhal tıbbi yardım alın.',
             'GÖZLE TEMAS: Kontak lens varsa hemen çıkarın. Gözü açık tutarak en az 15-20 dakika bol akan suyla yıkayın. Derhal tıbbi yardım alın.',
+            'YUTULURSA: Ağzı suyla çalkalayın. Kusturmayın. Derhal tıbbi yardım alın veya Zehir Merkezi\'ni arayın (0800 314 6120).',
         ],
         5: 'Korozif madde. Yangın söndürücü olarak CO₂, kuru kimyasal veya su sisi kullanın. Su jeti kullanmayın.',
         6: 'KKE giymeden yaklaşmayın. Asit/baz nötralizasyonu yapmayın. Döküntüyü kuru absorban malzeme ile toplayın.',
@@ -279,8 +280,8 @@ H_SENTENCES: Dict[str, Dict[int, str]] = {
     },
     'H315': {
         4: 'Ciltle temastan sonra bol su ve sabunla yıkayın. Tahriş devam ederse tıbbi yardım alın.',
-        5: 'Su spreyi kullanın. Kuru kimyasal veya CO₂ de uygulanabilir.',
-        6: 'Kirlenmiş alanı havalandırın. KKE kullanın. Absorban malzeme ile toplayın.',
+        5: 'Tahriş edici buhar oluşabilir. Yangın ekibine solunum koruması önerilir.',
+        6: 'Kirlenmiş alanı havalandırın. KKE kullanın. Absorban malzeme ile toplayın. Kanalizasyon veya su kaynaklarına karışmasını önleyin.',
         7: 'Cilt temasından kaçının; koruyucu eldiven ve giysi kullanın. '
            'Kullanım sonrası maruz kalan bölgeleri bol su ve sabunla yıkayın.',
         72: 'Serin, kuru yerde saklayın. Gıda maddelerinden uzak tutun.',
@@ -609,7 +610,7 @@ H_SENTENCES: Dict[str, Dict[int, str]] = {
     'H335': {
         4: 'SOLUNUM: Temiz havaya çıkarın. Tahriş devam ederse doktora gidin.',
         5: 'Yangın gazlarından kaçının. Uygun solunum koruması.',
-        6: 'İyi havalandırma sağlayın. Buhar birikimini önleyin.',
+        6: 'İyi havalandırma sağlayın. Buhar birikimini önleyin. Döküntünün kanalizasyon veya su kaynaklarına ulaşmasını önleyin.',
         7: 'Yalnızca iyi havalandırılan alanlarda kullanın. '
            'Buhar/sis oluşumundan kaçının; solunum tahriş edicidir.',
         72: 'İyi havalandırılmış yerde, sıkıca kapalı kapta saklayın.',
@@ -801,6 +802,8 @@ H_TO_EXTINGUISHER: Dict[str, str] = {
     'H272': 'Bol su (oksitleyici). Yanıcı maddelerle temastan uzak tutun.',
     'H304': 'CO₂ veya kuru toz. Su yayılmaya neden olabilir.',
     'H314': 'CO₂, kuru kimyasal veya su sisi. Su jeti kullanmayın.',
+    'H315': 'Su spreyi kullanın. Kuru kimyasal veya CO₂ de uygulanabilir.',
+    'H335': 'Su spreyi kullanın. Kuru kimyasal veya CO₂ de uygulanabilir.',
     # ── Yanıcı Katı / Aerosol / Basınçlı ────────────────────────────────────
     'H229': {
         5: 'Basınçlı kap. Isınırsa patlayabilir. Açık alev veya ısı kaynağından uzak tutun.',

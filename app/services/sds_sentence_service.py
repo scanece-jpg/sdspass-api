@@ -279,7 +279,8 @@ H_SENTENCES: Dict[str, Dict[int, str]] = {
         8: 'Yüz siperi, kimyasala dayanıklı eldiven (nitril veya neopren ≥0.5mm), koruyucu giysi ve çizme. Göz yıkama istasyonu bulundurulmalıdır.',
     },
     'H315': {
-        4: 'Ciltle temastan sonra bol su ve sabunla yıkayın. Tahriş devam ederse tıbbi yardım alın.',
+        4: ['Ciltle temastan sonra bol su ve sabunla yıkayın. Tahriş devam ederse tıbbi yardım alın.',
+            'YUTULURSA: Ağzı suyla çalkalayın. Kusturmayın. Derhal tıbbi yardım alın veya Zehir Merkezi\'ni arayın (0800 314 6120).'],
         5: 'Tahriş edici buhar oluşabilir. Yangın ekibine solunum koruması önerilir.',
         6: 'Kirlenmiş alanı havalandırın. KKE kullanın. Absorban malzeme ile toplayın. Kanalizasyon veya su kaynaklarına karışmasını önleyin.',
         7: 'Cilt temasından kaçının; koruyucu eldiven ve giysi kullanın. '

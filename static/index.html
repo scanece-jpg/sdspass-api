@@ -1800,11 +1800,13 @@ function applySupplierComps() {
   document.getElementById('comps').innerHTML = '';
   toAdd.forEach(c => addComp(c));
 
-  let msg = `✅ ${toAdd.length} bileşen aktarıldı.`;
-  if (allWarnings.length) msg += ' ⚠️ ' + allWarnings.join(' | ');
   status.style.background = allWarnings.length ? '#7c5a00' : '#155724';
   status.style.color = '#fff';
-  status.textContent = msg;
+  let html = `<div style="font-weight:600;margin-bottom:${allWarnings.length?'6':'0'}px">✅ ${toAdd.length} bileşen aktarıldı.</div>`;
+  if (allWarnings.length) {
+    html += allWarnings.map(w => `<div style="margin-top:4px;padding:4px 6px;background:rgba(0,0,0,.2);border-radius:4px;font-size:11px;line-height:1.4">${w}</div>`).join('');
+  }
+  status.innerHTML = html;
   window._supplierParseResults = [];
 }
 

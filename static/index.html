@@ -1808,6 +1808,13 @@ function applySupplierComps() {
     });
   });
 
+  // Boş satırları temizle (CAS ve konsantrasyon ikisi de boşsa)
+  document.querySelectorAll('#comps .cw').forEach(cw => {
+    const cas = cw.querySelector('.ci')?.value?.trim() || '';
+    const conc = cw.querySelector('.conc-manual')?.value?.trim() || '';
+    if (!cas && !conc) cw.remove();
+  });
+
   // Formda zaten olan bileşenleri CAS'a göre bul — konsantrasyona ekle, yoksa yeni ekle
   toAdd.forEach(c => {
     let merged = false;

@@ -1691,8 +1691,8 @@ async function parseSupplerSds(input) {
   input.value = '';
   const status = document.getElementById('supplierParseStatus');
   status.style.display = 'block';
-  status.style.background = 'var(--bg2,#f0f4ff)';
-  status.style.color = 'var(--fg,#333)';
+  status.style.background = '#1e293b';
+  status.style.color = '#fff';
   status.textContent = `⏳ ${files.length} PDF işleniyor, lütfen bekleyin…`;
 
   try {
@@ -1710,7 +1710,7 @@ async function parseSupplerSds(input) {
 
     const hasComps = results.some(r => r.components.length > 0);
     if (!hasComps) {
-      status.style.background='#fff3cd'; status.style.color='#856404';
+      status.style.background='#7c5a00'; status.style.color='#fff';
       status.textContent='⚠️ PDF\'lerde bileşen bulunamadı.'; return;
     }
 
@@ -1736,7 +1736,7 @@ async function parseSupplerSds(input) {
     window._supplierParseResults = results;
 
   } catch(e) {
-    status.style.background = '#f8d7da'; status.style.color = '#721c24';
+    status.style.background = '#7b1d1d'; status.style.color = '#fff';
     status.textContent = '❌ Hata: ' + e.message;
   }
 }
@@ -1777,8 +1777,8 @@ function applySupplierComps() {
 
   let msg = `✅ ${toAdd.length} bileşen aktarıldı.`;
   if (allWarnings.length) msg += ' ⚠️ ' + allWarnings.join(' | ');
-  status.style.background = allWarnings.length ? '#fff3cd' : '#d4edda';
-  status.style.color = allWarnings.length ? '#856404' : '#155724';
+  status.style.background = allWarnings.length ? '#7c5a00' : '#155724';
+  status.style.color = '#fff';
   status.textContent = msg;
   window._supplierParseResults = null;
 }

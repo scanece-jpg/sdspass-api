@@ -110,7 +110,7 @@ CLP_CUTOFFS_DICT = {
     "Repr. 2":  {"h":"H361","cutoff":3.0,"signal":"Warning"},  # SEA Tablo 3.7.2: GCL=%3
     "Repr. Lact.":{"h":"H362","cutoff":0.1,"signal":"Warning"},
     # 3.8 STOT SE
-    "STOT SE 1": {"h":"H370","cutoff":10.0,"signal":"Danger"},
+    "STOT SE 1": {"h":"H370","cutoff":1.0,"signal":"Danger"},
     "STOT SE 2": {"h":"H371","cutoff":10.0,"signal":"Warning"},
     "STOT SE 3": {"h":"H336","cutoff":20.0,"signal":"Warning"},  # varsayılan narkotik; H335 ayrıca _H_CODE_FALLBACK'te
     # 3.9 STOT RE — hedef organ servisi ayrı (stot_re_service)
@@ -119,7 +119,7 @@ CLP_CUTOFFS_DICT = {
     # 3.10 Aspirasyon
     "Asp. Tox. 1": {"h":"H304","cutoff":10.0,"signal":"Danger"},
     # 4.1 Sucul — M-faktör ecological_service ile
-    "Aquatic Acute 1":   {"h":"H400","cutoff":0.1, "signal":"Warning"},
+    "Aquatic Acute 1":   {"h":"H400","cutoff":25.0,"signal":"Warning"},
     "Aquatic Chronic 1": {"h":"H410","cutoff":0.1, "signal":"Warning"},
     "Aquatic Chronic 2": {"h":"H411","cutoff":1.0, "signal":"Warning"},
     "Aquatic Chronic 3": {"h":"H412","cutoff":10.0,"signal":"Warning"},
@@ -189,7 +189,7 @@ def is_danger(h_codes_set: set, clp_passed=None) -> bool:
 
 # CLP Annex I üstünlük (dominance) kuralları — alt kategori H kodlarını sil
 DOMINANCE: dict = {
-    'H314': ['H318', 'H315', 'H319'],
+    'H314': ['H315', 'H319'],  # H318 burada değil: H314 ve H318 etikette birlikte yer alır
     'H318': ['H319'],
     'H300': ['H301', 'H302'], 'H301': ['H302'],
     'H310': ['H311', 'H312'], 'H311': ['H312'],

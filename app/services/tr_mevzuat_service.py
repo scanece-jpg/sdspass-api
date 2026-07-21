@@ -139,7 +139,7 @@ def _ewc_code_bullet(h_codes: list, lang: str = 'TR') -> str:
         code = '16 05 06*'
         desc_tr = 'Tehlikeli madde içeren atık laboratuvar kimyasalları'
         desc_en = 'Laboratory chemicals, consisting of or containing dangerous substances'
-    elif h_set & {'H224', 'H225', 'H226', 'H227'}:
+    elif h_set & {'H224', 'H225', 'H226'}:
         code = '14 06 03*'
         desc_tr = 'Diğer çözücüler ve çözücü karışımları'
         desc_en = 'Other solvents and solvent mixtures'
@@ -218,13 +218,13 @@ def get_disposal_content(h_codes: list = None, lang: str = 'TR') -> dict:
     method_bullet = S(lang, 'disposal_method_general')
 
     # ── 3. Sucul tehlike → kanalizasyon yasağı ───────────────────────────────
-    _aquatic_h = {'H400', 'H410', 'H411', 'H412', 'H413', 'H420'}
+    _aquatic_h = {'H400', 'H410', 'H411', 'H412', 'H413'}
     drain_note = None
     if any(h in h_codes for h in _aquatic_h):
         drain_note = S(lang, 'drain_prohibition')
 
     # ── 4. Yanıcı sıvılar → yakma yöntemi vurgusu ───────────────────────────
-    _flam_h = {'H224', 'H225', 'H226', 'H227'}
+    _flam_h = {'H224', 'H225', 'H226'}
     if lang == 'TR' and any(h in h_codes for h in _flam_h):
         method_bullet = (
             'Yanıcı sıvı — lisanslı tehlikeli atık tesisinde kontrollü yakma yöntemiyle '

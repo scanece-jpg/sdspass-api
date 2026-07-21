@@ -65,6 +65,10 @@ def normalize_ph_display(ph_raw) -> str:
         return str(ph_raw) if ph_raw else ''
 
 # Annex I Tablo — h_class → {h_code, cutoff_pct, signal, category}
+# ⚠️ BAKIM UYARISI — ÇİFT KAYNAK
+# Bu tablodaki eşik değerleri concentration_ranges.py · GCL ile AYNI
+# regülasyon verisidir. Burada bir eşik değiştirildiğinde concentration_ranges.py
+# içindeki GCL tablosuna da AYNI değişiklik uygulanmalıdır.
 CLP_CUTOFFS_DICT = {
     # 3.1 Akut Toksisite
     "Acute Tox. 1": {"h":"H300","cutoff":1.0,"signal":"Danger"},

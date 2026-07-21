@@ -163,6 +163,22 @@ CLASS_SIGNAL = {
 #     ...
 # ]}
 # Anlam: madde konsantrasyonu ≥ eşik_% ise → karışım bu sınıfa girer
+#
+# ⚠️ BAKIM UYARISI — ÇİFT KAYNAK
+# Bu GCL tablosundaki eşik değerleri, clp_service.py içindeki
+# CLP_CUTOFFS_DICT ile AYNI regülasyon verisidir (CLP Annex I).
+# GCL = UI dropdown için (kullanıcıya konsantrasyon aralığı gösterir)
+# CLP_CUTOFFS_DICT = sınıflandırma motoru için (gerçek H kodu kararı)
+#
+# Bu iki tablo senkronize TUTULMALIDIR. clp_service.py'de bir eşik
+# değiştirildiğinde BURAYA DA aynı değişiklik uygulanmalıdır.
+# Tek yetkili kaynak: clp_service.py · CLP_CUTOFFS_DICT
+#
+# Bilinen senkron sorunları (Temmuz 2026 denetiminde tespit edildi):
+#   - repr. lact.: (0.0, ...) → OLMALI (0.3, ...) — clp_service.py'de düzeltildi
+#   - stot se 1: sıra [(10, SE1), (1.0, SE2), (20, SE3)] — SE3 mantıksal şüpheli
+#   - skin corr. 1a → (0.5, Eye Dam.1): kaynağı belirsiz, CLP Tablo 3.3.3 eşiği %3
+#   - aquatic: motordan farklı (motor M-faktörlü toplamsal kullanır, burası tek eşik)
 
 GCL: dict[str, list[tuple]] = {
 

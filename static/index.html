@@ -1697,51 +1697,88 @@ async function parseSupplerSds(input) {
 
   try {
     // Tüm PDF'leri paralel gönder
-    const results = await Promise.all(files.map(async file => {
+    const results = await Promise.all(files.map(async (file, i) => {
       const fd = new FormData();
       fd.append('file', file);
       const res = await fetch('/api/v1/sds/parse-supplier', { method: 'POST', body: fd });
       const data = await res.json();
       if (!res.ok) throw new Error(`${file.name}: ${data.detail || 'Sunucu hatası'}`);
-      return data;
+      return { fileName: file.name, components: data.components || [], warnings: data.warnings || [] };
     }));
 
-    // Bileşenleri birleştir — aynı CAS varsa tekrar ekleme
-    const seenCas = new Set();
-    const allComps = [];
-    const allWarnings = [];
-    results.forEach(data => {
-      (data.warnings || []).forEach(w => allWarnings.push(w));
-      (data.components || []).forEach(c => {
-        const key = c.cas || c.name || Math.random();
-        if (c.cas && seenCas.has(c.cas)) return;
-        if (c.cas) seenCas.add(c.cas);
-        allComps.push(c);
-      });
-    });
-
-    if (!allComps.length) {
+    const hasComps = results.some(r => r.components.length > 0);
+    if (!hasComps) {
       status.style.background='#fff3cd'; status.style.color='#856404';
       status.textContent='⚠️ PDF\'lerde bileşen bulunamadı.'; return;
     }
 
-    // Mevcut bileşenleri temizle
-    document.getElementById('comps').innerHTML = '';
-    allComps.forEach(c => {
-      const hazards = (c.hCodes || []).map(h => ({ h_class: h, h_code: h }));
-      // Konsantrasyon boş bırak — karışımdaki gerçek oran kullanıcı tarafından girilmeli
-      addComp({ cas: c.cas || '', name: c.name || '', hazards });
+    // Her PDF için "% kaç katacaksınız?" formu göster
+    let html = `<div style="font-weight:600;margin-bottom:8px">Her üründen karışımınıza % kaç katacaksınız?</div>`;
+    results.forEach((r, i) => {
+      html += `<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+        <span style="flex:1;font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${r.fileName}">📄 ${r.fileName}</span>
+        <input type="number" id="pdfUsage${i}" min="0" max="100" step="0.1" placeholder="%"
+               style="width:80px;padding:4px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:12px">
+        <span style="font-size:11px;color:var(--text3)">(${r.components.length} bileşen)</span>
+      </div>`;
     });
+    html += `<button onclick="applySupplierComps()"
+              style="margin-top:4px;width:100%;padding:7px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer">
+              ✓ Uygula</button>`;
 
-    let msg = `✅ ${allComps.length} bileşen aktarıldı. ⚠️ Konsantrasyon alanları boş — karışımdaki gerçek yüzdeyi kendiniz girin.`;
-    if (allWarnings.length) msg += ' | ' + allWarnings.join(' | ');
-    status.style.background = '#fff3cd';
-    status.style.color = '#856404';
-    status.textContent = msg;
+    status.style.background = 'var(--bg2,#f0f4ff)';
+    status.style.color = 'var(--fg,#333)';
+    status.innerHTML = html;
+
+    // Sonuçları global olarak sakla
+    window._supplierParseResults = results;
+
   } catch(e) {
     status.style.background = '#f8d7da'; status.style.color = '#721c24';
     status.textContent = '❌ Hata: ' + e.message;
   }
+}
+
+function applySupplierComps() {
+  const results = window._supplierParseResults || [];
+  const status = document.getElementById('supplierParseStatus');
+  const seenCas = new Set();
+  const allWarnings = [];
+  const toAdd = [];
+
+  results.forEach((r, i) => {
+    const usagePct = parseFloat(document.getElementById('pdfUsage' + i)?.value);
+    if (isNaN(usagePct) || usagePct <= 0) {
+      allWarnings.push(`${r.fileName}: kullanım yüzdesi girilmedi, konsantrasyon boş bırakıldı`);
+    }
+    (r.warnings || []).forEach(w => allWarnings.push(w));
+    r.components.forEach(c => {
+      if (c.cas && seenCas.has(c.cas)) return;
+      if (c.cas) seenCas.add(c.cas);
+      // Gerçek konsantrasyonu hesapla
+      let concMin = null, concMax = null;
+      if (!isNaN(usagePct) && usagePct > 0) {
+        if (c.concMin != null) concMin = Math.round(c.concMin * usagePct / 100 * 100) / 100;
+        if (c.concMax != null) concMax = Math.round(c.concMax * usagePct / 100 * 100) / 100;
+        // Tek değer varsa ikisine de yaz
+        if (concMin == null && concMax != null) concMin = concMax;
+        if (concMax == null && concMin != null) concMax = concMin;
+      }
+      toAdd.push({ cas: c.cas || '', name: c.name || '', concMin, concMax,
+                   hazards: (c.hCodes || []).map(h => ({ h_class: h, h_code: h })) });
+    });
+  });
+
+  // Mevcut bileşenleri temizle ve ekle
+  document.getElementById('comps').innerHTML = '';
+  toAdd.forEach(c => addComp(c));
+
+  let msg = `✅ ${toAdd.length} bileşen aktarıldı.`;
+  if (allWarnings.length) msg += ' ⚠️ ' + allWarnings.join(' | ');
+  status.style.background = allWarnings.length ? '#fff3cd' : '#d4edda';
+  status.style.color = allWarnings.length ? '#856404' : '#155724';
+  status.textContent = msg;
+  window._supplierParseResults = null;
 }
 
 function completeToHundred() {

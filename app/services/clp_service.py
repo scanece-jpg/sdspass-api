@@ -108,7 +108,7 @@ CLP_CUTOFFS_DICT = {
     "Repr. 1A": {"h":"H360","cutoff":0.3,"signal":"Danger"},   # SEA Tablo 3.7.2: GCL=%0,3
     "Repr. 1B": {"h":"H360","cutoff":0.3,"signal":"Danger"},   # SEA Tablo 3.7.2: GCL=%0,3
     "Repr. 2":  {"h":"H361","cutoff":3.0,"signal":"Warning"},  # SEA Tablo 3.7.2: GCL=%3
-    "Repr. Lact.":{"h":"H362","cutoff":0.1,"signal":"Warning"},
+    "Repr. Lact.":{"h":"H362","cutoff":0.3,"signal":"Warning"},  # CLP Tablo 3.7.2: GCL=%0,3
     # 3.8 STOT SE
     "STOT SE 1": {"h":"H370","cutoff":10.0,"signal":"Danger"},
     "STOT SE 2": {"h":"H371","cutoff":10.0,"signal":"Warning"},
@@ -124,6 +124,8 @@ CLP_CUTOFFS_DICT = {
     "Aquatic Chronic 2": {"h":"H411","cutoff":1.0, "signal":"Warning"},
     "Aquatic Chronic 3": {"h":"H412","cutoff":10.0,"signal":"Warning"},
     "Aquatic Chronic 4": {"h":"H413","cutoff":25.0,"signal":"Warning"},
+    # 5.1 Ozon tabakasına zararlı — CLP Tablo 5.1: GCL=%0,1
+    "Ozone":             {"h":"H420","cutoff":0.1, "signal":"Warning"},
     # 2.x Fiziksel — ayrı engine (physical_hazard_service)
     "Flam. Gas 1":       {"h":"H220","cutoff":0.0,"signal":"Danger"},
     "Flam. Gas 2":       {"h":"H221","cutoff":0.0,"signal":"Warning"},
@@ -221,7 +223,7 @@ _H_CODE_FALLBACK: dict = {
     'H351': {"h": "H351", "cutoff": 1.0,  "signal": "Warning"},
     'H360': {"h": "H360", "cutoff": 0.3,  "signal": "Danger"},
     'H361': {"h": "H361", "cutoff": 3.0,  "signal": "Warning"},
-    'H362': {"h": "H362", "cutoff": 0.1,  "signal": "Warning"},
+    'H362': {"h": "H362", "cutoff": 0.3,  "signal": "Warning"},  # CLP Tablo 3.7.2
     'H304': {"h": "H304", "cutoff": 10.0, "signal": "Danger"},
     'H370': {"h": "H370", "cutoff": 10.0, "signal": "Danger"},
     'H371': {"h": "H371", "cutoff": 10.0, "signal": "Warning"},
@@ -861,6 +863,7 @@ _PICTOGRAM_MAP = {
     'H270':'GHS03','H271':'GHS03','H272':'GHS03',
     'H280':'GHS04','H290':'GHS05',
     'H400':'GHS09','H410':'GHS09','H411':'GHS09','H412':'GHS09','H413':'GHS09',
+    'H420':'GHS07',  # ozon tabakasına zararlı — ünlem işareti
 }
 
 CUTOFFS = {

@@ -1545,6 +1545,15 @@ async def sds_calculate(body: dict = Body(...)):
             phys_h_codes=_phys_h_transport,
         )
 
+        # ADR §2.2.9.1.10.5 — env_mark düzelt: clp_result h_codes aquatic içermez
+        # (ECO_H_CODES filtresi), doğru kaynak ecological_service'tir.
+        if transport_result and not transport_result.get('not_regulated'):
+            _tr_eco_h = eco_result.get('h_codes') or []
+            _tr_env = bool(set(_tr_eco_h) & {'H400', 'H410', 'H411'})
+            for _tr_mode in ('road', 'sea', 'air'):
+                if isinstance(transport_result.get(_tr_mode), dict):
+                    transport_result[_tr_mode]['env_mark'] = _tr_env
+
         # ── KKD (Bölüm 8) ────────────────────────────────────────────────────
         # all_h_list henüz hesaplanmamış, transport sonrasında yapılıyor;
         # şimdi mevcut h kodlarıyla PPE seç — ekoloji H'ları sonra eklenir.

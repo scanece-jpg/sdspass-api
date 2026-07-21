@@ -118,9 +118,16 @@ def _scl_update(scl_organ: Dict, org: str, trig_h: str, reason: str) -> None:
         scl_organ[org]['reasons'].append(reason)
 
 
+def _h_worse(current: 'str | None', new: str) -> str:
+    """H372 > H373 önceliği."""
+    return 'H372' if (current == 'H372' or new == 'H372') else new
+
+
 def calculate(comps: List[Dict]) -> Dict:
     """
-    STOT RE hesapla.
+    STOT RE hesapla — CLP §3.9.5.4: toplamsallık yok.
+    Her bileşen kendi konsantrasyonuyla tek başına Tablo 3.9.4 eşiklerine bakılır;
+    farklı bileşenler toplanmaz. En ağır tekil sonuç (H372 > H373) seçilir.
 
     Returns:
         {
@@ -128,16 +135,17 @@ def calculate(comps: List[Dict]) -> Dict:
           'analytic_results': [...],
           'h_codes': [...],
           'has_general': bool,
-          'general_cat1': float,
-          'general_cat2': float,
+          'general_cat1': float,  # backward compat — her zaman 0.0
+          'general_cat2': float,  # backward compat — her zaman 0.0
           'warnings': []
         }
     """
-    organ_sums: Dict[str, Dict] = {}
-    general_cat1 = 0.0
-    general_cat2 = 0.0
-    results, analytic_results = [], []
-    scl_organ: Dict[str, Dict] = {}  # org → {h: 'H372'|'H373', reasons: [str]}
+    # organ → {'h_code': 'H372'|'H373'|None, 'sources': [...]}
+    organ_best: Dict[str, Dict] = {}
+    general_best_h: 'str | None' = None  # organ belirsiz bileşenler — en kötü tekil
+    general_sources: list = []
+    results: list = []
+    scl_organ: Dict[str, Dict] = {}
 
     for c in comps:
         conc = float(c.get('concMax') or c.get('conc') or 0)
@@ -153,150 +161,112 @@ def calculate(comps: List[Dict]) -> Dict:
             organs = _extract_organs(h.get('h_code') or '')
             name   = c.get('name') or c.get('cas') or ''
 
-            # SCL kontrolü — CLP Art. 10(3): SCL generic eşiğin yerini alır
             scl_h372 = _get_scl_cmin(c, 'H372')
             scl_h373 = _get_scl_cmin(c, 'H373')
 
             if cat == 1 and (scl_h372 is not None or scl_h373 is not None):
-                # SCL tanımlı → bireysel değerlendirme, generic havuza katılmaz
-                for org in (organs or ['Genel (organ belirsiz)']):
+                # SCL → bireysel değerlendirme, generic havuza katılmaz
+                for org in (organs or [GENERAL_ORGAN]):
                     if scl_h372 is not None and conc >= scl_h372:
                         _scl_update(scl_organ, org, 'H372',
                                     f"{name} %{conc:.3g} ≥ SCL_H372=%{scl_h372}")
                     elif scl_h373 is not None and conc >= scl_h373:
                         _scl_update(scl_organ, org, 'H373',
                                     f"{name} %{conc:.3g} ≥ SCL_H373=%{scl_h373}")
-                    # SCL eşiği altındaysa katkı yok
 
             elif cat == 2 and scl_h373 is not None:
-                # H373 + SCL → bireysel değerlendirme
-                for org in (organs or ['Genel (organ belirsiz)']):
+                for org in (organs or [GENERAL_ORGAN]):
                     if conc >= scl_h373:
                         _scl_update(scl_organ, org, 'H373',
                                     f"{name} %{conc:.3g} ≥ SCL_H373=%{scl_h373}")
 
             else:
-                # Generic additive havuz — mevcut davranış
+                # Generic — Tablo 3.9.4, bireysel değerlendirme (toplama yok)
+                this_h: 'str | None' = None
+                if cat == 1:
+                    if   conc >= 10.0: this_h = 'H372'
+                    elif conc >=  1.0: this_h = 'H373'
+                else:  # cat == 2
+                    if conc >= 10.0:   this_h = 'H373'
+
+                if this_h is None:
+                    continue  # eşik altı — katkı yok
+
+                src = {'name': name, 'conc': conc, 'cat': cat, 'h': this_h}
+
                 if not organs:
-                    if cat == 1: general_cat1 += conc
-                    else:        general_cat2 += conc
+                    general_best_h = _h_worse(general_best_h, this_h)
+                    general_sources.append(src)
                 else:
                     for org in organs:
-                        if org not in organ_sums:
-                            organ_sums[org] = {'cat1': 0.0, 'cat2': 0.0, 'sources': []}
-                        if cat == 1: organ_sums[org]['cat1'] += conc
-                        else:        organ_sums[org]['cat2'] += conc
-                        organ_sums[org]['sources'].append(
-                            {'name': name, 'conc': conc, 'cat': cat})
+                        if org not in organ_best:
+                            organ_best[org] = {'h_code': None, 'sources': []}
+                        organ_best[org]['h_code'] = _h_worse(organ_best[org]['h_code'], this_h)
+                        organ_best[org]['sources'].append(src)
 
-    # Organ belirsiz maddeler tüm organlara muhafazakâr olarak eklenir
-    for org in organ_sums:
-        organ_sums[org]['cat1'] += general_cat1
-        organ_sums[org]['cat2'] += general_cat2
+    # Organ belirsiz bileşenler: eşiği tek başına aşıyorsa muhafazakâr uygulanır
+    if general_best_h is not None:
+        if not organ_best:
+            organ_best[GENERAL_ORGAN] = {'h_code': general_best_h, 'sources': general_sources}
+        else:
+            for org in organ_best:
+                organ_best[org]['h_code'] = _h_worse(organ_best[org]['h_code'], general_best_h)
+                organ_best[org]['sources'].extend(general_sources)
 
     # Generic sonuçlar — Tablo 3.9.4
-    for org, sums in organ_sums.items():
-        if sums['cat1'] >= 10.0:
-            results.append({
-                'h_code': 'H372', 'h_class': 'STOT RE 1', 'organ': org, 'signal': 'Danger',
-                'reason': f"{org}: STOT RE 1 toplamı %{sums['cat1']:.1f} ≥ %10.0 (KKDİK Ek-2, Tablo 3.9.4)",
-            })
-        elif sums['cat1'] >= 1.0 or sums['cat2'] >= 10.0:
+    for org, data in organ_best.items():
+        h = data['h_code']
+        if h is None:
+            continue
+        srcs = data['sources']
+        if h == 'H372':
+            parts = [f"{s['name']} %{s['conc']:.3g} (Cat1≥%10.0→H372)"
+                     for s in srcs if s['h'] == 'H372']
+        else:
             parts = []
-            if sums['cat1'] >= 1.0:
-                parts.append(f"STOT RE 1 toplamı %{sums['cat1']:.1f} (%1.0–%10.0 → H373)")
-            if sums['cat2'] >= 10.0:
-                parts.append(f"STOT RE 2 toplamı %{sums['cat2']:.1f} ≥ %10.0")
-            results.append({
-                'h_code': 'H373', 'h_class': 'STOT RE 2', 'organ': org, 'signal': 'Warning',
-                'reason': f"{org}: {'; '.join(parts)} (KKDİK Ek-2, Tablo 3.9.4)",
-            })
+            for s in srcs:
+                if s['h'] == 'H372':
+                    parts.append(f"{s['name']} %{s['conc']:.3g} (Cat1 %1–%10→H373)")
+                else:
+                    parts.append(f"{s['name']} %{s['conc']:.3g} (Cat2≥%10.0→H373)")
+        results.append({
+            'h_code':  h,
+            'h_class': 'STOT RE 1' if h == 'H372' else 'STOT RE 2',
+            'organ':   org,
+            'signal':  'Danger' if h == 'H372' else 'Warning',
+            'reason':  f"{org}: {'; '.join(parts)} (CLP §3.9, Tablo 3.9.4)",
+        })
 
     # SCL sonuçlarını ekle veya mevcut generic sonuçla birleştir
     generic_by_organ = {r['organ']: r for r in results}
     for org, sd in scl_organ.items():
-        trig_h    = sd['h_code']
-        scl_rsn   = f"{org}: {'; '.join(sd['reasons'])} (CLP Art.10(3), Tablo 3.9.4)"
+        trig_h  = sd['h_code']
+        scl_rsn = f"{org}: {'; '.join(sd['reasons'])} (CLP Art.10(3), Tablo 3.9.4)"
         if org not in generic_by_organ:
             results.append({
-                'h_code': trig_h,
+                'h_code':  trig_h,
                 'h_class': 'STOT RE 1' if trig_h == 'H372' else 'STOT RE 2',
-                'organ': org,
-                'signal': 'Danger' if trig_h == 'H372' else 'Warning',
-                'reason': scl_rsn,
+                'organ':   org,
+                'signal':  'Danger' if trig_h == 'H372' else 'Warning',
+                'reason':  scl_rsn,
                 'scl_based': True,
             })
         elif trig_h == 'H372' and generic_by_organ[org]['h_code'] == 'H373':
-            # SCL H372 generic H373'ü geçersiz kılar
             r = generic_by_organ[org]
-            r['h_code']   = 'H372'
-            r['h_class']  = 'STOT RE 1'
-            r['signal']   = 'Danger'
-            r['reason']  += f'; + SCL: {scl_rsn}'
+            r['h_code']    = 'H372'
+            r['h_class']   = 'STOT RE 1'
+            r['signal']    = 'Danger'
+            r['reason']   += f'; + SCL: {scl_rsn}'
             r['scl_based'] = True
-
-    # Analitik mod (genel katkı hariç) — generic
-    for org, sums in organ_sums.items():
-        c1 = sums['cat1'] - general_cat1
-        c2 = sums['cat2'] - general_cat2
-        if c1 >= 10.0:
-            analytic_results.append({
-                'h_code': 'H372', 'h_class': 'STOT RE 1', 'organ': org, 'signal': 'Danger',
-                'reason': f"{org}: Eşleşen Cat1=%{c1:.1f} ≥ %10.0",
-                'general_excl': general_cat1,
-            })
-        elif c1 >= 1.0 or c2 >= 10.0:
-            parts = []
-            if c1 >= 1.0:
-                parts.append(f"Eşleşen Cat1=%{c1:.1f} (%1.0–%10.0 → H373)")
-            if c2 >= 10.0:
-                parts.append(f"Eşleşen Cat2=%{c2:.1f} ≥ %10.0")
-            analytic_results.append({
-                'h_code': 'H373', 'h_class': 'STOT RE 2', 'organ': org, 'signal': 'Warning',
-                'reason': f"{org}: {'; '.join(parts)}",
-                'general_excl': general_cat1,
-            })
-
-    # SCL sonuçları analitik listede de yer alır
-    for org, sd in scl_organ.items():
-        trig_h = sd['h_code']
-        analytic_results.append({
-            'h_code': trig_h,
-            'h_class': 'STOT RE 1' if trig_h == 'H372' else 'STOT RE 2',
-            'organ': org,
-            'signal': 'Danger' if trig_h == 'H372' else 'Warning',
-            'reason': f"{org}: {'; '.join(sd['reasons'])} (SCL)",
-            'scl_based': True,
-        })
-
-    # Organ belirsiz — genel havuz (hiç organ eşleşmesi yoksa)
-    if not organ_sums:
-        if general_cat1 >= 10.0:
-            results.append({
-                'h_code': 'H372', 'h_class': 'STOT RE 1', 'organ': GENERAL_ORGAN,
-                'signal': 'Danger',
-                'reason': f'Genel: Cat1=%{general_cat1:.1f} ≥ %10.0 (Tablo 3.9.4)',
-            })
-        elif general_cat1 >= 1.0 or general_cat2 >= 10.0:
-            parts = []
-            if general_cat1 >= 1.0:
-                parts.append(f"Cat1=%{general_cat1:.1f} (%1.0–%10.0 → H373)")
-            if general_cat2 >= 10.0:
-                parts.append(f"Cat2=%{general_cat2:.1f} ≥ %10.0")
-            results.append({
-                'h_code': 'H373', 'h_class': 'STOT RE 2', 'organ': GENERAL_ORGAN,
-                'signal': 'Warning',
-                'reason': f"Genel: {'; '.join(parts)} (Tablo 3.9.4)",
-            })
 
     h_codes = list({r['h_code'] for r in results})
 
     return {
         'results':          results,
-        'analytic_results': analytic_results,
+        'analytic_results': list(results),  # backward compat — bireysel modda aynı liste
         'h_codes':          h_codes,
-        'has_general':      general_cat1 > 0 or general_cat2 > 0,
-        'general_cat1':     general_cat1,
-        'general_cat2':     general_cat2,
+        'has_general':      general_best_h is not None,
+        'general_cat1':     0.0,  # toplama kaldırıldı; backward compat için 0.0
+        'general_cat2':     0.0,
         'warnings':         [],
     }

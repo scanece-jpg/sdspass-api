@@ -20,6 +20,7 @@ Non-Additivity Grupları:
   eye_result        → Eye Dam./Irrit. sonucu
   non_additivity_flags → Hangi maddeler tetikledi
 """
+from collections import defaultdict
 from typing import List, Dict, Optional, Tuple
 
 # ─── NON-ADDITIVITY GRUPLARI ─────────────────────────────────────────────────
@@ -123,14 +124,14 @@ def is_non_additivity(cas: str, name: str) -> Tuple[bool, str]:
     cas = str(cas).strip()
     name_lower = (name or '').lower()
 
-    # CAS listesi kontrolü
-    if cas in NON_ADDITIVITY_CAS:
-        return True, 'cas_list'
-
-    # İsim bazlı kontrol
+    # İsim bazlı kontrol önce — grup bilgisi daha kesin (CAS'ı gruba atar)
     for group, keywords in NON_ADDITIVITY_KEYWORDS.items():
         if any(kw in name_lower for kw in keywords):
             return True, group
+
+    # CAS listesi: grup bilinmiyor → 'cas_list' (her CAS kendi grubu sayılır)
+    if cas in NON_ADDITIVITY_CAS:
+        return True, 'cas_list'
 
     return False, ''
 
@@ -155,13 +156,15 @@ def classify_skin_eye_non_additivity(components: List[Dict]) -> Dict:
     """
     details = []
     non_additivity_flags = []
-    skin_corr_sum = 0.0
-    skin_irrit_sum = 0.0
-    eye_dam_sum = 0.0
-    eye_irrit_sum = 0.0
 
-    # Ayrıca normal toplamada kullanılan ağırlıklı göz hesabı için
-    skin_corr_for_eye = 0.0  # 10× çarpanla göze katkı
+    # Annex I Tablo 3.2.4/3.3.4: her kimyasal grup BAĞIMSIZ değerlendirilir.
+    # Farklı gruplar (fenol + güçlü asit) toplanmaz — her grup kendi eşiğini ayrı karşılar.
+    # Aynı grup içindeki bileşenler (ör. 2 farklı fenol) toplanır.
+    skin_corr_by_group:   defaultdict = defaultdict(float)
+    skin_irrit_by_group:  defaultdict = defaultdict(float)
+    eye_dam_by_group:     defaultdict = defaultdict(float)
+    eye_irrit_by_group:   defaultdict = defaultdict(float)
+    skin_corr_eye_by_group: defaultdict = defaultdict(float)  # 10× çarpan için
 
     has_non_additivity = False
 
@@ -176,45 +179,43 @@ def classify_skin_eye_non_additivity(components: List[Dict]) -> Dict:
 
         if is_na:
             has_non_additivity = True
+            # CAS-eşleşmeli ama isimsiz grup → her CAS kendi ayrı grubu (karıştırmama)
+            grp_key = na_group if na_group != 'cas_list' else f'cas_{cas}'
             non_additivity_flags.append({
                 'cas': cas, 'name': name, 'conc': conc, 'group': na_group
             })
 
-            # Skin Corr. katkısı
             if hazard_classes & SKIN_CORR_CLASSES:
-                skin_corr_sum += conc
-                skin_corr_for_eye += conc  # göz hesabına da katkı
+                skin_corr_by_group[grp_key] += conc
+                skin_corr_eye_by_group[grp_key] += conc
                 details.append({
                     'cas': cas, 'name': name, 'conc': conc,
                     'hazard': next(h for h in hazard_classes if h in SKIN_CORR_CLASSES),
-                    'contribution_to': 'skin_corr'
+                    'contribution_to': 'skin_corr', 'group': grp_key,
                 })
 
-            # Skin Irrit. katkısı (Corr. yoksa)
             if hazard_classes & SKIN_IRRIT_CLASSES and not (hazard_classes & SKIN_CORR_CLASSES):
-                skin_irrit_sum += conc
+                skin_irrit_by_group[grp_key] += conc
                 details.append({
                     'cas': cas, 'name': name, 'conc': conc,
                     'hazard': 'Skin Irrit. 2',
-                    'contribution_to': 'skin_irrit'
+                    'contribution_to': 'skin_irrit', 'group': grp_key,
                 })
 
-            # Eye Dam. katkısı
             if hazard_classes & EYE_DAM_CLASSES:
-                eye_dam_sum += conc
+                eye_dam_by_group[grp_key] += conc
                 details.append({
                     'cas': cas, 'name': name, 'conc': conc,
                     'hazard': 'Eye Dam. 1',
-                    'contribution_to': 'eye_dam'
+                    'contribution_to': 'eye_dam', 'group': grp_key,
                 })
 
-            # Eye Irrit. katkısı
             if hazard_classes & EYE_IRRIT_CLASSES and not (hazard_classes & EYE_DAM_CLASSES):
-                eye_irrit_sum += conc
+                eye_irrit_by_group[grp_key] += conc
                 details.append({
                     'cas': cas, 'name': name, 'conc': conc,
                     'hazard': 'Eye Irrit. 2',
-                    'contribution_to': 'eye_irrit'
+                    'contribution_to': 'eye_irrit', 'group': grp_key,
                 })
 
     if not has_non_additivity:
@@ -223,64 +224,80 @@ def classify_skin_eye_non_additivity(components: List[Dict]) -> Dict:
             'non_additivity_flags': [], 'override': False, 'details': []
         }
 
-    # ─── Skin sınıflandırması (Tablo 3.2.4) ──────────────────────────────────
-    skin_result = None
+    # Tanı için toplam değerler (tüm gruplar birleşik)
+    skin_corr_sum  = sum(skin_corr_by_group.values())
+    skin_irrit_sum = sum(skin_irrit_by_group.values())
+    eye_dam_sum    = sum(eye_dam_by_group.values())
+    eye_irrit_sum  = sum(eye_irrit_by_group.values())
 
-    if skin_corr_sum >= TABLE_3_2_4['skin_corr']:
-        skin_result = {
-            'class': 'Skin Corr. 1', 'h_code': 'H314',
-            'pictogram': 'GHS05', 'signal': 'Danger',
-            'reason': f'Tablo 3.2.4: Σ Skin Corr. = %{skin_corr_sum:.3f} ≥ %{TABLE_3_2_4["skin_corr"]}',
-            'sum': skin_corr_sum,
-        }
-    elif skin_irrit_sum >= TABLE_3_2_4['skin_irrit']:
-        skin_result = {
-            'class': 'Skin Irrit. 2', 'h_code': 'H315',
-            'pictogram': 'GHS07', 'signal': 'Warning',
-            'reason': f'Tablo 3.2.4: Σ Skin Irrit. = %{skin_irrit_sum:.3f} ≥ %{TABLE_3_2_4["skin_irrit"]}',
-            'sum': skin_irrit_sum,
-        }
-    else:
-        # Eşiğin altında — karışım sınıflandırılmaz
+    # ─── Skin sınıflandırması (Tablo 3.2.4) — her grup bağımsız ─────────────
+    skin_result = None
+    all_skin_groups = set(skin_corr_by_group) | set(skin_irrit_by_group)
+    for grp in sorted(all_skin_groups):
+        g_corr  = skin_corr_by_group.get(grp, 0.0)
+        g_irrit = skin_irrit_by_group.get(grp, 0.0)
+        if g_corr >= TABLE_3_2_4['skin_corr']:
+            skin_result = {
+                'class': 'Skin Corr. 1', 'h_code': 'H314',
+                'pictogram': 'GHS05', 'signal': 'Danger',
+                'reason': f'Tablo 3.2.4 [{grp}]: Σ Skin Corr. = %{g_corr:.3f} ≥ %{TABLE_3_2_4["skin_corr"]}',
+                'sum': g_corr,
+            }
+            break  # en kötü kategori bulundu
+        if g_irrit >= TABLE_3_2_4['skin_irrit'] and skin_result is None:
+            skin_result = {
+                'class': 'Skin Irrit. 2', 'h_code': 'H315',
+                'pictogram': 'GHS07', 'signal': 'Warning',
+                'reason': f'Tablo 3.2.4 [{grp}]: Σ Skin Irrit. = %{g_irrit:.3f} ≥ %{TABLE_3_2_4["skin_irrit"]}',
+                'sum': g_irrit,
+            }
+    if skin_result is None:
         skin_result = {
             'class': None, 'h_code': None,
             'reason': (
-                f'Tablo 3.2.4: Σ Skin Corr. = %{skin_corr_sum:.3f} < %{TABLE_3_2_4["skin_corr"]} '
-                f've Σ Skin Irrit. = %{skin_irrit_sum:.3f} < %{TABLE_3_2_4["skin_irrit"]} '
+                f'Tablo 3.2.4: Hiçbir grup eşiği aşmadı '
+                f'(Σ Skin Corr. = %{skin_corr_sum:.3f} < %{TABLE_3_2_4["skin_corr"]}, '
+                f'Σ Skin Irrit. = %{skin_irrit_sum:.3f} < %{TABLE_3_2_4["skin_irrit"]}) '
                 f'→ Non-additivity grubu, sınıflandırma ÇIKMAZ'
             ),
             'sum': max(skin_corr_sum, skin_irrit_sum),
         }
 
-    # ─── Eye sınıflandırması (Tablo 3.3.4) ───────────────────────────────────
-    # Eye Dam. 1: Σ Eye Dam. ≥ %1
-    # Eye Irrit. 2: 10×Σ Skin Corr. + Σ Eye Irrit. ≥ %10
+    # ─── Eye sınıflandırması (Tablo 3.3.4) — her grup bağımsız ──────────────
     eye_result = None
-    weighted_eye = (10 * skin_corr_for_eye) + eye_irrit_sum
-
-    if eye_dam_sum >= TABLE_3_2_4['eye_dam']:
-        eye_result = {
-            'class': 'Eye Dam. 1', 'h_code': 'H318',
-            'pictogram': 'GHS05', 'signal': 'Danger',
-            'reason': f'Tablo 3.3.4: Σ Eye Dam. = %{eye_dam_sum:.3f} ≥ %{TABLE_3_2_4["eye_dam"]}',
-            'sum': eye_dam_sum,
-        }
-    elif weighted_eye >= EYE_WEIGHTED_THRESHOLD:
-        eye_result = {
-            'class': 'Eye Irrit. 2', 'h_code': 'H319',
-            'pictogram': 'GHS07', 'signal': 'Warning',
-            'reason': f'Tablo 3.3.4: 10×Σ Skin Corr. + Σ Eye Irrit. = {weighted_eye:.2f} ≥ {EYE_WEIGHTED_THRESHOLD}',
-            'sum': weighted_eye,
-        }
-    else:
+    all_eye_groups = set(eye_dam_by_group) | set(eye_irrit_by_group) | set(skin_corr_eye_by_group)
+    for grp in sorted(all_eye_groups):
+        g_dam      = eye_dam_by_group.get(grp, 0.0)
+        g_weighted = (10 * skin_corr_eye_by_group.get(grp, 0.0)) + eye_irrit_by_group.get(grp, 0.0)
+        if g_dam >= TABLE_3_2_4['eye_dam']:
+            eye_result = {
+                'class': 'Eye Dam. 1', 'h_code': 'H318',
+                'pictogram': 'GHS05', 'signal': 'Danger',
+                'reason': f'Tablo 3.3.4 [{grp}]: Σ Eye Dam. = %{g_dam:.3f} ≥ %{TABLE_3_2_4["eye_dam"]}',
+                'sum': g_dam,
+            }
+            break
+        if g_weighted >= EYE_WEIGHTED_THRESHOLD and eye_result is None:
+            eye_result = {
+                'class': 'Eye Irrit. 2', 'h_code': 'H319',
+                'pictogram': 'GHS07', 'signal': 'Warning',
+                'reason': f'Tablo 3.3.4 [{grp}]: 10×Skin Corr. + Eye Irrit. = {g_weighted:.2f} ≥ {EYE_WEIGHTED_THRESHOLD}',
+                'sum': g_weighted,
+            }
+    if eye_result is None:
+        weighted_total = sum(
+            10 * skin_corr_eye_by_group.get(g, 0.0) + eye_irrit_by_group.get(g, 0.0)
+            for g in all_eye_groups
+        ) if all_eye_groups else 0.0
         eye_result = {
             'class': None, 'h_code': None,
             'reason': (
-                f'Tablo 3.3.4: Eye Dam. %{eye_dam_sum:.3f} < %1, '
-                f'10×Skin Corr. + Eye Irrit. = {weighted_eye:.2f} < {EYE_WEIGHTED_THRESHOLD} '
+                f'Tablo 3.3.4: Hiçbir grup eşiği aşmadı '
+                f'(Eye Dam. %{eye_dam_sum:.3f} < %1, '
+                f'ağırlıklı göz toplamı = {weighted_total:.2f} < {EYE_WEIGHTED_THRESHOLD}) '
                 f'→ Sınıflandırma ÇIKMAZ'
             ),
-            'sum': max(eye_dam_sum, weighted_eye),
+            'sum': max(eye_dam_sum, weighted_total),
         }
 
     return {

@@ -1,6 +1,6 @@
 # SDSPass — SDS Üretim Süreci ve QA Mimarisi
 **Durum:** Faz 1 planı tamamlandı. Faz 2 (PDF extraction) kapsam dışı, ayrı plan gerektirir.
-**Kaynak:** SDSPass Kontrol Asistanı denetimleri (DIPL222–DIPL225), 8 doğrulanmış + 1 devam eden bulgu (BULGU 9) üzerinden türetildi.
+**Kaynak:** SDSPass Kontrol Asistanı denetimleri (DIPL222–DIPL225), 9 doğrulanmış bulgu üzerinden türetildi.
 ---
 ## 1. Veri Akışı (Faz 1 — extraction var olduğu andan itibaren)
 ```
@@ -114,9 +114,9 @@ p_code_service → H281 P282+P336+P315+P403, H280 P410+P403
 - Extraction'a özgü (a0) genişletmesi (OCR yanlış okuma, sütun eşleme hataları)
 ---
 ---
-## 8. BULGU 9 — CLP Ek-VI `*` Dipnotu Yanlış Yorumlanmış (Teyit Bekliyor)
+## 8. BULGU 9 — CLP Ek-VI `*` Dipnotu Yanlış Yorumlanmış ✓ DÜZELTİLDİ (commit 4630eee0)
 
-**Tespit:** `update_annex_vi.py` `NOTE_TEXTS['*']` ve `pdf_sds_service.py` `_NOTE_FLAG_LABELS['*']` aynı yanlış metni içeriyor:
+**Tespit:** `update_annex_vi.py` `NOTE_TEXTS['*']` ve `pdf_sds_service.py` `_NOTE_FLAG_LABELS['*']` aynı yanlış metni içeriyordu:
 > "Sınıflandırma koşula bağlı (belirli form veya konsantrasyon)"
 
 **Gerçek anlam (CLP Ek-VI Part 1):** Sınıflandırma tablosunda `Acute Tox. 4*` gibi `h_class` sonundaki tek yıldız = **asgari sınıflandırma** — üretici/ithalatçı daha ağır kategoriye işaret eden veriye sahipse daha ağır sınıflandırma uygulanmalıdır. "Form veya konsantrasyon" farklı bir CLP not türüdür.
@@ -126,7 +126,7 @@ p_code_service → H281 P282+P336+P315+P403, H280 P410+P403
 **Not ayrımı — kodda doğru olan:**
 | Bayrak | PDF metni (mevcut) | Doğru mu? |
 |--------|-------------------|-----------|
-| `*`    | "form veya konsantrasyon" | **YANLIŞ** — asgari sınıflandırma olmalı |
+| `*`    | ~~"form veya konsantrasyon"~~ → **"Asgari sınıflandırmadır (CLP Ek-VI §1.2.1)"** | DÜZELTİLDİ |
 | `**`   | "Hedef organ ve/veya maruziyet yolu SDS Bölüm 11'de belirtilmeli" | DOĞRU (STOT) |
 | `***`  | "Üreme toks. yalnızca belirtilen alt kategori için geçerli" | DOĞRU |
 | `****` | "Patlayıcı alt sınıfı belirsiz" | DOĞRU |

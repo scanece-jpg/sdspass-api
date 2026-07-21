@@ -401,7 +401,7 @@ def calculate_aquatic(
         return AquaticResult(
             h_code='H400', h_class='Aquatic Acute 1', signal='Warning',
             sum_value=sum_acute_m,
-            formula=f"Σ(Ci×M_akut)/100 = {sum_acute_m:.4f} ≥ 0.0025 [=%{sum_acute_m*100:.2f}≥%0.25] (Tablo 4.1.1)",
+            formula=f"Σ(Ci×M_akut)/100 = {sum_acute_m:.4f} ≥ 0.25 (Tablo 4.1.1)",
             component_details=comp_m_details,
         )
 

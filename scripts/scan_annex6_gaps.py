@@ -31,6 +31,7 @@ sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8', errors='repla
 
 _ROOT   = Path(__file__).parent.parent
 _A6     = _ROOT / 'data' / 'annex6'
+_CL     = _ROOT / 'data' / 'cl'
 _REPORT = Path(__file__).parent / 'scan_annex6_report.csv'
 
 VALID_SIGNALS = {'Danger', 'Warning', ''}
@@ -78,7 +79,12 @@ def scan_file(path: Path) -> List[Dict]:
                 add('KRITIK', 'HAZARD_TIP', f"hazards[{i}] dict değil")
                 continue
             if not (h.get('h_code') or '').strip():
-                add('KRITIK', 'HCODE_BOS', f"hazards[{i}] 'h_code' boş veya null")
+                cls_val = (h.get('class') or '').strip()
+                if 'Press. Gas' in cls_val or 'Pressurized' in cls_val:
+                    # CLP Annex VI'da kasıtlı boş — H280/H281 physical_engine tarafından form bazlı atanır
+                    add('BILGI', 'PRESS_GAS_HCODE', f"hazards[{i}] Press.Gas h_code boş (beklenen — physical_engine halleder)")
+                else:
+                    add('KRITIK', 'HCODE_BOS', f"hazards[{i}] h_code boş/null, class='{cls_val}'")
             cls = h.get('class') or ''
             if not isinstance(cls, str) or not cls.strip():
                 add('KRITIK', 'CLASS_BOS',
@@ -121,25 +127,39 @@ def scan_file(path: Path) -> List[Dict]:
 
 
 def main():
-    parser = argparse.ArgumentParser(description='Annex VI veri bütünlüğü taraması')
+    parser = argparse.ArgumentParser(description='Annex VI / SEA Ek-6 veri bütünlüğü taraması')
     parser.add_argument('--csv',    action='store_true', help='Raporu CSV olarak kaydet')
     parser.add_argument('--kritik', action='store_true', help='Sadece KRİTİK bulguları göster')
     parser.add_argument('--cas',    type=str,            help='Tek bir CAS no tara')
+    parser.add_argument('--dir',    type=str,            choices=['annex6','cl','her ikisi'],
+                        default='annex6', help='Taranacak dizin (varsayılan: annex6)')
     args = parser.parse_args()
+
+    # Taranacak dizinleri belirle
+    if args.dir == 'cl':
+        search_dirs = [(_CL, 'SEA Ek-6')]
+    elif args.dir == 'her ikisi':
+        search_dirs = [(_A6, 'Annex VI'), (_CL, 'SEA Ek-6')]
+    else:
+        search_dirs = [(_A6, 'Annex VI')]
 
     # Dosyaları topla
     if args.cas:
         cas_clean = args.cas.strip()
-        # CAS → klasör (ilk sayı grubu)
         prefix = cas_clean.split('-')[0]
-        targets = list(_A6.glob(f'{prefix}/{cas_clean}.json'))
-        if not targets:
-            targets = list(_A6.rglob(f'{cas_clean}.json'))
+        targets = []
+        for base_dir, _ in search_dirs:
+            found = list(base_dir.glob(f'{prefix}/{cas_clean}.json'))
+            if not found:
+                found = list(base_dir.rglob(f'{cas_clean}.json'))
+            targets.extend(found)
         if not targets:
             print(f'HATA: {cas_clean}.json bulunamadı')
             sys.exit(1)
     else:
-        targets = sorted(_A6.rglob('*.json'))
+        targets = []
+        for base_dir, _ in search_dirs:
+            targets.extend(sorted(base_dir.rglob('*.json')))
 
     total_files = len(targets)
     all_findings: List[Dict] = []
@@ -161,8 +181,9 @@ def main():
     for f in all_findings:
         counts[f['severity']] = counts.get(f['severity'], 0) + 1
 
+    dir_label = {'annex6': 'Annex VI', 'cl': 'SEA Ek-6', 'her ikisi': 'Annex VI + SEA Ek-6'}[args.dir]
     print(f'\n{"="*70}')
-    print(f'  ANNEX VI TARAMA RAPORU — {total_files} dosya')
+    print(f'  {dir_label} TARAMA RAPORU — {total_files} dosya')
     print(f'{"="*70}')
     print(f'  KRİTİK : {counts["KRITIK"]:>5}')
     print(f'  UYARI  : {counts["UYARI"]:>5}')

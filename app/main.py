@@ -401,9 +401,10 @@ async def generate_pdf(data: dict = Body(...)):
                 hc   = _norm_sub(_hcf)
                 if hc[:4] not in ('H360', 'H361'):
                     hc = hc[:4]
-                # ECO_H_CODES burada filtreleniyor: aquatik sınıflandırma yalnızca
-                # ecological_service'den gelir (SEA Tablo 4.1.2 toplamsal formül).
-                # clp_service'in 0.1% kesme değeri raporlama eşiğidir, sınıflandırma eşiği değil.
+                # ECO_H_CODES filtresi: aquatic sınıflandırma yalnızca ecological_service'den
+                # gelir (M-faktörlü toplamsal formül, CLP Tablo 4.1.1/4.1.2).
+                # classify_mixture_clp içindeki CLP_CUTOFFS_DICT aquatic satırları
+                # (H400/H410/H411/H412/H413) bu filtre nedeniyle asla kullanılmaz — ölü koddur.
                 if hc and hc not in _seen and hc not in ECO_H_CODES:
                     _seen.add(hc)
                     _fixed = _correct_hclass(hc, p.get('h_class',''))

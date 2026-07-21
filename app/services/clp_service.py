@@ -118,12 +118,15 @@ CLP_CUTOFFS_DICT = {
     "STOT RE 2": {"h":"H373","cutoff":10.0,"signal":"Warning"},
     # 3.10 Aspirasyon
     "Asp. Tox. 1": {"h":"H304","cutoff":10.0,"signal":"Danger"},
-    # 4.1 Sucul — M-faktör ecological_service ile
-    "Aquatic Acute 1":   {"h":"H400","cutoff":25.0,"signal":"Warning"},
-    "Aquatic Chronic 1": {"h":"H410","cutoff":0.1, "signal":"Warning"},
-    "Aquatic Chronic 2": {"h":"H411","cutoff":1.0, "signal":"Warning"},
-    "Aquatic Chronic 3": {"h":"H412","cutoff":10.0,"signal":"Warning"},
-    "Aquatic Chronic 4": {"h":"H413","cutoff":25.0,"signal":"Warning"},
+    # 4.1 Sucul — DEAD CODE: bu satırlar main.py ECO_H_CODES filtresi nedeniyle
+    # asla kullanılmaz. Aquatic sınıflandırma ecological_service'in M-faktörlü
+    # toplamsal formülüyle yapılır (CLP Tablo 4.1.1/4.1.2). Buradaki cutoff değerleri
+    # sınıflandırma sonucunu etkilemez; sadece yapısal tutarlılık için tutuluyor.
+    "Aquatic Acute 1":   {"h":"H400","cutoff":0.0,"signal":"Warning"},
+    "Aquatic Chronic 1": {"h":"H410","cutoff":0.0,"signal":"Warning"},
+    "Aquatic Chronic 2": {"h":"H411","cutoff":0.0,"signal":"Warning"},
+    "Aquatic Chronic 3": {"h":"H412","cutoff":0.0,"signal":"Warning"},
+    "Aquatic Chronic 4": {"h":"H413","cutoff":0.0,"signal":"Warning"},
     # 5.1 Ozon tabakasına zararlı — EUH059, piktogramsız, sinyal:Danger
     # euh_service.py'de CAS listesiyle işlenir; buraya cutoff eklenmez.
     # 2.x Fiziksel — ayrı engine (physical_hazard_service)

@@ -1873,9 +1873,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         avoid_parts.append('Su ve nem' if lang=='TR' else 'Water and moisture')
     if any(h in h_codes for h in ['H240','H241','H242']):
         avoid_parts.append('Isıtma ve sürtünme' if lang=='TR' else 'Heating and friction')
-    avoid_parts.append('Oksitleyici maddeler ve kuvvetli asitler' if lang=='TR'
-                       else 'Oxidising agents and strong acids')
-    avoid_str = '; '.join(avoid_parts) + '.'
+    avoid_str = ('; '.join(avoid_parts) + '.') if avoid_parts else (
+        'Uygunsuz depolama koşulları' if lang=='TR' else 'Inappropriate storage conditions'
+    )
 
     # ── 10.5 Bağdaşmayan maddeler — bileşenlerden dinamik ───────────────────
     comp_incompat = {

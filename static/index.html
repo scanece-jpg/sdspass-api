@@ -796,7 +796,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
       <label title="Tedarikçi SDS PDF'inden bileşen verisi çek"
              style="flex:1;display:flex;align-items:center;justify-content:center;gap:5px;background:none;border:1px dashed #8b5cf6;color:#8b5cf6;border-radius:6px;padding:6px 10px;font-size:11px;cursor:pointer;font-weight:600">
         📄 SDS'den Veri Al
-        <input type="file" id="supplierSdsPdf" accept=".pdf" style="display:none" onchange="parseSupplerSds(this)">
+        <input type="file" id="supplierSdsPdf" accept=".pdf" multiple style="display:none" onchange="parseSupplerSds(this)">
       </label>
     </div>
     <div id="supplierParseStatus" style="display:none;margin-top:6px;padding:8px;border-radius:6px;font-size:12px"></div>
@@ -1686,32 +1686,57 @@ const _AEROSOL_FILLERS = [
 ];
 
 async function parseSupplerSds(input) {
-  const file = input.files[0];
-  if (!file) return;
+  const files = Array.from(input.files);
+  if (!files.length) return;
   input.value = '';
   const status = document.getElementById('supplierParseStatus');
   status.style.display = 'block';
   status.style.background = 'var(--bg2,#f0f4ff)';
   status.style.color = 'var(--fg,#333)';
-  status.textContent = '⏳ PDF işleniyor, lütfen bekleyin…';
+  status.textContent = `⏳ ${files.length} PDF işleniyor, lütfen bekleyin…`;
+
   try {
-    const fd = new FormData();
-    fd.append('file', file);
-    const res = await fetch('/api/v1/sds/parse-supplier', { method: 'POST', body: fd });
-    const data = await res.json();
-    if (!res.ok) throw new Error(data.detail || 'Sunucu hatası');
-    const comps = data.components || [];
-    if (!comps.length) { status.style.background='#fff3cd'; status.style.color='#856404'; status.textContent='⚠️ PDF\'de bileşen bulunamadı.'; return; }
+    // Tüm PDF'leri paralel gönder
+    const results = await Promise.all(files.map(async file => {
+      const fd = new FormData();
+      fd.append('file', file);
+      const res = await fetch('/api/v1/sds/parse-supplier', { method: 'POST', body: fd });
+      const data = await res.json();
+      if (!res.ok) throw new Error(`${file.name}: ${data.detail || 'Sunucu hatası'}`);
+      return data;
+    }));
+
+    // Bileşenleri birleştir — aynı CAS varsa tekrar ekleme
+    const seenCas = new Set();
+    const allComps = [];
+    const allWarnings = [];
+    results.forEach(data => {
+      (data.warnings || []).forEach(w => allWarnings.push(w));
+      (data.components || []).forEach(c => {
+        const key = c.cas || c.name || Math.random();
+        if (c.cas && seenCas.has(c.cas)) return;
+        if (c.cas) seenCas.add(c.cas);
+        allComps.push(c);
+      });
+    });
+
+    if (!allComps.length) {
+      status.style.background='#fff3cd'; status.style.color='#856404';
+      status.textContent='⚠️ PDF\'lerde bileşen bulunamadı.'; return;
+    }
+
     // Mevcut bileşenleri temizle
     document.getElementById('comps').innerHTML = '';
-    comps.forEach(c => {
+    allComps.forEach(c => {
       const hazards = (c.hCodes || []).map(h => ({ h_class: h, h_code: h }));
-      addComp({ cas: c.cas || '', name: c.name || '', concMin: c.concMin, concMax: c.concMax, hazards });
+      // Konsantrasyon boş bırak — karışımdaki gerçek oran kullanıcı tarafından girilmeli
+      addComp({ cas: c.cas || '', name: c.name || '', hazards });
     });
-    let msg = `✅ ${comps.length} bileşen aktarıldı.`;
-    if (data.warnings && data.warnings.length) msg += ' ⚠️ ' + data.warnings.join(' | ');
-    status.style.background = data.warnings?.length ? '#fff3cd' : '#d4edda';
-    status.style.color = data.warnings?.length ? '#856404' : '#155724';
+
+    let msg = `✅ ${allComps.length} bileşen aktarıldı. ⚠️ Konsantrasyon alanları boş — karışımdaki gerçek yüzdeyi kendiniz girin.`;
+    if (allWarnings.length) msg += ' | ' + allWarnings.join(' | ');
+    status.style.background = '#fff3cd';
+    status.style.color = '#856404';
     status.textContent = msg;
   } catch(e) {
     status.style.background = '#f8d7da'; status.style.color = '#721c24';

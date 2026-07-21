@@ -1808,29 +1808,30 @@ function applySupplierComps() {
     });
   });
 
-  // Mevcut bileşenlerin CAS'larını al — zaten formda varsa konsantrasyona ekle, yoksa yeni ekle
-  const existingComps = getComps();
-  const existingCasMap = new Map(existingComps.map((c, i) => [c.cas, i]).filter(([k]) => k));
+  // Formda zaten olan bileşenleri CAS'a göre bul — konsantrasyona ekle, yoksa yeni ekle
   toAdd.forEach(c => {
-    if (c.cas && existingCasMap.has(c.cas)) {
-      // Formda zaten var — cmin/cmax input'larını güncelle
-      const idx = existingCasMap.get(c.cas);
-      const compId = document.getElementById('comps').children[idx]?.id?.replace('cw','');
-      if (compId) {
-        const minEl = document.getElementById('cmin' + compId);
-        const maxEl = document.getElementById('cmax' + compId);
-        const manEl = document.getElementById('cmanual' + compId);
-        if (minEl && c.concMin != null) {
-          const prev = parseFloat(minEl.value) || 0;
-          const newVal = Math.round((prev + c.concMin) * 100) / 100;
-          minEl.value = newVal;
-          if (maxEl) maxEl.value = Math.round(((parseFloat(maxEl.value)||0) + (c.concMax||0)) * 100) / 100;
-          if (manEl) manEl.value = newVal;
+    let merged = false;
+    if (c.cas) {
+      document.querySelectorAll('#comps .cw').forEach(cw => {
+        const casEl = cw.querySelector('.ci');
+        if (casEl && casEl.value.trim() === c.cas) {
+          // Formda var — konsantrasyonu topla
+          const compId = cw.id.replace('cw','');
+          const minEl = document.getElementById('cmin' + compId);
+          const maxEl = document.getElementById('cmax' + compId);
+          const manEl = document.getElementById('cmanual' + compId);
+          const prevMin = parseFloat(minEl?.value) || 0;
+          const prevMax = parseFloat(maxEl?.value) || 0;
+          const newMin = c.concMin != null ? Math.round((prevMin + c.concMin) * 100) / 100 : prevMin;
+          const newMax = c.concMax != null ? Math.round((prevMax + c.concMax) * 100) / 100 : prevMax;
+          if (minEl) minEl.value = newMin;
+          if (maxEl) maxEl.value = newMax || newMin;
+          if (manEl) manEl.value = newMax ? `${newMin}-${newMax}` : String(newMin);
+          merged = true;
         }
-      }
-    } else {
-      addComp(c);
+      });
     }
+    if (!merged) addComp(c);
   });
 
   status.style.background = allWarnings.length ? '#7c5a00' : '#155724';

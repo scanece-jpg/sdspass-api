@@ -2331,10 +2331,12 @@ Sadece JSON:"""
             pdf_hcodes = [h.strip().upper() for h in (comp.get("hCodes") or []) if h]
             comp["hCodes"] = pdf_hcodes
 
+            if not cas:
+                warnings.append(f"{comp.get('name','?')}: CAS numarası yok — H kodları doğrulanamadı, PDF değerleri kullanıldı")
             if cas:
                 sub = lookup_substance(cas)
                 if not sub:
-                    warnings.append(f"{comp.get('name','?')} (CAS {cas}) veritabanında bulunamadı, lütfen doğrulayın")
+                    warnings.append(f"{comp.get('name','?')} (CAS {cas}): veritabanında bulunamadı — H kodları doğrulanamadı, PDF değerleri kullanıldı")
                 else:
                     # EC no eksikse doldur
                     if not comp.get("ec_no") and sub.get("ec_no"):

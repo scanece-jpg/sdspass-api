@@ -267,8 +267,10 @@ H_TO_P: Dict[str, List[str]] = {
     # H273: Çevreye zararlı ama kategorilendirilmemiş — minimal P kodu
     'H273': ['P501'],
 
-    # ── Ozon ──────────────────────────────────────────────────────────────────
-    'H420': ['P502'],
+    # ── Ozon tabakasına zararlı — CLP Tablo 5.2 ──────────────────────────────
+    # EUH059: P273 (çevreye salınımından kaçın) + P501 (imha) zorunlu.
+    # H420 artık üretilmiyor; select_label_p_codes'a euh_codes parametresiyle gelir.
+    'EUH059': ['P273', 'P501'],
 
     # ── Patlayıcılar — CLP Annex IV Tablo 2.1.2 ─────────────────────────────
     'H200': ['P201','P250','P280','P370+P372+P380+P373','P401','P501'],
@@ -621,17 +623,20 @@ H_BASED_LABEL_FORCED: Dict[str, List[str]] = {
     'H411': ['P273', 'P391'],
     'H412': ['P273'],
     'H413': ['P273'],
-    # ── Ozon Tabakası ─────────────────────────────────────────────────────────
-    'H420': ['P502'],
+    # ── Ozon tabakasına zararlı — CLP Tablo 5.2 ──────────────────────────────
+    'EUH059': ['P273'],   # P501 zaten P_LABEL_MANDATORY'de
 }
 
 def select_label_p_codes(all_p_codes: List[str], max_codes: int = 6,
-                         h_codes: List[str] = None) -> Dict:
+                         h_codes: List[str] = None,
+                         euh_codes: List[str] = None) -> Dict:
     """
-    CLP Madde 22 — Etiket için maksimum 6 P kodu seçimi.
+    CLP Madde 22(4) — Etiket için maksimum 6 P kodu seçimi.
     Öncelik ağırlıklarına göre en kritik 6 kodu seç.
 
-    h_codes: H kod listesi — H kodu bazlı zorunlu P kodlarını belirlemeye yarar.
+    h_codes:   H kod listesi — H kodu bazlı zorunlu P kodlarını belirler.
+    euh_codes: EUH kod listesi — EUH059 gibi ek tehlike ifadelerinin
+               zorunlu P kodlarını (CLP Tablo 5.2) H_BASED_LABEL_FORCED'dan alır.
     Returns:
         {
           'selected': [...],      # Seçilen P kodları (zorunlular + öncelik sırası)
@@ -640,14 +645,19 @@ def select_label_p_codes(all_p_codes: List[str], max_codes: int = 6,
           'note': str             # Seçim gerekçesi
         }
     """
-    h_codes = h_codes or []
+    h_codes   = h_codes   or []
+    euh_codes = euh_codes or []
 
-    # H kodu bazlı zorunlu P kodlarını belirle
+    # H ve EUH kodu bazlı zorunlu P kodlarını belirle
     forced_by_h = set()
     for h in h_codes:
         for p in H_BASED_LABEL_FORCED.get(h, []):
             if p in all_p_codes:
                 forced_by_h.add(p)
+    # EUH059 gibi EUH kodları için zorunlu P kodları (CLP Tablo 5.2)
+    for euh in euh_codes:
+        for p in H_BASED_LABEL_FORCED.get(euh, []):
+            forced_by_h.add(p)   # all_p_codes'ta olmasa da ekle — EUH zorunlusu
 
     # CLP Madde 22(4): H kodu bazlı zorunlu P kodları (forced_by_h) HİÇBİR ZAMAN kesilemez.
     # Tehlikenin niteliği gerektiriyorsa 6 limitinin üzeri zorunlu olabilir.
@@ -710,7 +720,7 @@ def select_label_p_codes(all_p_codes: List[str], max_codes: int = 6,
     forced_note = (f" (H kodu zorunlu: {', '.join(sorted(forced_by_h))})" if forced_by_h else "")
     exceeded_note = (" Birden fazla tehlike sınıfı nedeniyle öncelikli kodlar seçildi." if limit_exceeded else "")
     note = (
-        f"CLP Madde 28(3): Etiket için {len(selected)}/{len(candidates)+len(forced_by_h)} "
+        f"CLP Madde 22(4): Etiket için {len(selected)}/{len(candidates)+len(forced_by_h)} "
         f"P kodu seçildi{forced_note}.{exceeded_note} "
         f"Kalan {len(excluded)} kod SDS Bölüm 2'ye yazılmalıdır."
         if excluded else

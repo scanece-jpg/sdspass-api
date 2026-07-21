@@ -12,7 +12,7 @@ from functools import lru_cache
 
 _DATA_PATH = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'svhc_candidate_list.json')
 
-# Zorunluluk eşiği (KKDİK Madde 33 / REACH Art. 33)
+# Zorunluluk eşiği (REACH Madde 59 / KKDİK Ek-14)
 SVHC_THRESHOLD_PCT = 0.1
 
 
@@ -80,7 +80,7 @@ def check_svhc_mixture(components: list) -> dict:
     for comp in components:
         cas  = (comp.get('cas_no') or comp.get('cas') or '').strip()
         name = comp.get('name', cas)
-        conc = float(comp.get('concentration', comp.get('conc', 0)) or 0)
+        conc = float(comp.get('concMax') or comp.get('concentration') or comp.get('conc', 0) or 0)
 
         entry = db['by_cas'].get(cas)
         if not entry:
@@ -127,7 +127,7 @@ def svhc_section15_text(svhc_result: dict, lang: str = 'TR') -> list[str]:
         return lines
 
     if lang == 'TR':
-        lines.append('⚠ SVHC (Çok Yüksek Endişe Veren Madde) — REACH Madde 33 / KKDİK Madde 35:')
+        lines.append('⚠ SVHC (Çok Yüksek Endişe Veren Madde) — REACH Madde 59 / KKDİK Ek-14:')
         lines.append('Aşağıdaki SVHC aday listesi maddeleri ≥ %0,1 konsantrasyonda bulunmaktadır:')
     else:
         lines.append('⚠ SVHC (Substances of Very High Concern) — REACH Article 33 / KKDİK Article 35:')
@@ -148,7 +148,7 @@ def svhc_section15_text(svhc_result: dict, lang: str = 'TR') -> list[str]:
 
     if lang == 'TR':
         lines.append(
-            'REACH Madde 33 / KKDİK Madde 35 uyarınca alıcılara bildirim yükümlülüğü doğmaktadır.'
+            'REACH Madde 59 / KKDİK Ek-14 uyarınca alıcılara bildirim yükümlülüğü doğmaktadır.'
         )
     else:
         lines.append(

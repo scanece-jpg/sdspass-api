@@ -364,19 +364,18 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
 
     components = [_maybe_override_comp(c) for c in components]
 
-    # İkincil Skin/Eye kuralı — SCL dikkate alarak toplam (CLP Tablo 3.2.3/3.3.3)
-    # SCL tanımlı bileşenler sadece SCL eşiğini aşarsa toplamına katkı yapar
+    # İkincil Skin/Eye kuralı — toplamsal (CLP Tablo 3.2.3)
+    # CLP Tablo 3.2.3: Skin Corr. 1A/1B/1C bileşenlerinin toplam konsantrasyonu ≥%5 → H314
+    # SCL tanımlı bileşen: SCL eşiği katkı sınırı olarak değil, bireysel tetik olarak kullanılır;
+    # toplamsal hesapta SCL eşiğinin altındaki bileşenler de toplanır (ECHA rehberi C&L §3.2.3)
     sum_corr1 = 0.0
     for comp in components:
         conc = float(comp.get("concentration", comp.get("conc", 0)) or 0)
         for h in comp.get("hazards", []):
             if h.get("h_class","") not in ("Skin Corr. 1","Skin Corr. 1A","Skin Corr. 1B","Skin Corr. 1C"):
                 continue
-            scl = _get_scl_cutoff(comp, h.get("h_class",""), "H314")
-            effective = scl if scl is not None else 5.0  # SCL yoksa GCL (Skin Corr.1 = %5)
-            if conc >= effective:
-                sum_corr1 += conc
-                break  # bileşen başına bir kez say
+            sum_corr1 += conc
+            break  # bileşen başına bir kez say
 
     # CLP §3.3.1.4: Skin Corr. 1 (H314) maddeler Eye Dam. 1 anlamına gelir.
     # Bileşen listesinde yalnızca H314 olsa bile göz toplamına dahil edilmeli.
@@ -387,13 +386,8 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
         for h in comp.get("hazards", []):
             if h.get("h_class","") not in _EYE_DAM1_CLASSES:
                 continue
-            # SCL: Eye Dam. 1 için H318, Skin Corr. için H314 SCL'sini kontrol et
-            h_code_ref = "H318" if h.get("h_class","") == "Eye Dam. 1" else "H314"
-            scl = _get_scl_cutoff(comp, h.get("h_class",""), h_code_ref)
-            effective = scl if scl is not None else 3.0  # SCL yoksa GCL (Eye Dam.1 = %3)
-            if conc >= effective:
-                sum_eye_dam1 += conc
-                break  # bileşen başına bir kez say
+            sum_eye_dam1 += conc
+            break  # bileşen başına bir kez say
 
     # Eye Irrit. 2 toplamı: Eye Dam. 1 veya Skin Corr. 1 içeren bileşenler hariç.
     # Aynı bileşende H318/H314 + H319 birlikte bulunuyorsa sum_eye_dam1'e zaten katkı yaptı;

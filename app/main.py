@@ -2253,34 +2253,44 @@ async def parse_supplier_sds(request: Request):
         import anthropic as _anthropic
         client = _anthropic.Anthropic(api_key=api_key)
 
-        schema_example = _json.dumps([
-            {
-                "name": "Madde adı",
-                "cas": "7647-01-0",
-                "ec_no": "231-595-7",
-                "index_no": "017-002-00-2",
-                "concMin": 15,
-                "concMax": 20,
-                "hCodes": ["H314", "H335"]
-            }
-        ], ensure_ascii=False)
+        schema_example = _json.dumps({
+            "supplier": {
+                "company": "Firma Adı",
+                "rev_no": "3",
+                "rev_date": "2024-05-01"
+            },
+            "components": [
+                {
+                    "name": "Madde adı",
+                    "cas": "7647-01-0",
+                    "ec_no": "231-595-7",
+                    "index_no": "017-002-00-2",
+                    "concMin": 15,
+                    "concMax": 20,
+                    "hCodes": ["H314", "H335"]
+                }
+            ]
+        }, ensure_ascii=False)
 
-        prompt = f"""Aşağıdaki SDS (Güvenlik Bilgi Formu) metninden Bölüm 3 (Bileşim/İçindekiler) bilgilerini çıkar.
+        prompt = f"""Aşağıdaki SDS (Güvenlik Bilgi Formu) metninden bilgileri çıkar.
 
 ÇIKTI KURALLARI:
-- Sadece JSON dizisi döndür, başka hiçbir şey yazma
-- Her bileşen için bu şemayı kullan: {schema_example}
+- Sadece JSON objesi döndür, başka hiçbir şey yazma
+- Bu şemayı kullan: {schema_example}
+- supplier.company: Bölüm 1'deki üretici/tedarikçi firma adı (yoksa null)
+- supplier.rev_no: Revizyon numarası (yoksa null)
+- supplier.rev_date: Revizyon tarihi YYYY-MM-DD formatında (yoksa null)
 - CAS No formatı: xxx-xx-x (belgede yoksa null)
 - EC No formatı: xxx-xxx-x (belgede yoksa null)
 - Index No / KKDIK No: xxx-xxx-xx-x (belgede yoksa null)
-- concMin / concMax: sayısal yüzde değeri (örn. 15.0), belgede tek değer varsa ikisine de yaz
+- concMin / concMax: sayısal yüzde değeri (örn. 15.0), belgede tek değer varsa ikisine de yaz, yoksa null
 - hCodes: belgede bu bileşen için listelenen H kodları (örn. ["H314","H335"])
 - Belgede yazan değerleri birebir al, tahmin etme
 
 SDS METNİ:
 {sds_text[:12000]}
 
-Sadece JSON dizisi:"""
+Sadece JSON:"""
 
         resp = client.messages.create(
             model="claude-sonnet-4-6",
@@ -2298,30 +2308,57 @@ Sadece JSON dizisi:"""
         raw = raw.strip().rstrip("```").strip()
 
         try:
-            components = _json.loads(raw)
+            parsed = _json.loads(raw)
         except Exception:
             raise HTTPException(status_code=422, detail=f"AI parse hatası — ham çıktı: {raw[:300]}")
 
-        if not isinstance(components, list):
+        # Eski format (liste) veya yeni format (obje) destekle
+        if isinstance(parsed, list):
+            components = parsed
+            supplier = {}
+        elif isinstance(parsed, dict):
+            components = parsed.get("components") or []
+            supplier = parsed.get("supplier") or {}
+        else:
             raise HTTPException(status_code=422, detail="AI geçersiz format döndürdü")
 
-        # 3. CAS doğrulama
+        # 3. CAS doğrulama + H kodu Ek-6/Annex VI karşılaştırması
         from app.services.substance_lookup import lookup_substance
         warnings = []
         validated = []
         for comp in components:
             cas = (comp.get("cas") or "").strip()
+            pdf_hcodes = [h.strip().upper() for h in (comp.get("hCodes") or []) if h]
+            comp["hCodes"] = pdf_hcodes
+
             if cas:
                 sub = lookup_substance(cas)
                 if not sub:
-                    warnings.append(f"{comp.get('name','?')} — CAS {cas} veritabanında bulunamadı, lütfen doğrulayın")
-                elif not comp.get("ec_no") and sub.get("ec_no"):
-                    comp["ec_no"] = sub["ec_no"]
-            # hCodes normalize
-            comp["hCodes"] = [h.strip().upper() for h in (comp.get("hCodes") or []) if h]
+                    warnings.append(f"{comp.get('name','?')} (CAS {cas}) veritabanında bulunamadı, lütfen doğrulayın")
+                else:
+                    # EC no eksikse doldur
+                    if not comp.get("ec_no") and sub.get("ec_no"):
+                        comp["ec_no"] = sub["ec_no"]
+                    # H kodlarını Ek-6/Annex VI ile karşılaştır
+                    db_hcodes = [h.get("h_code","").upper() for h in (sub.get("hazards") or []) if h.get("h_code")]
+                    if db_hcodes:
+                        pdf_set = set(pdf_hcodes)
+                        db_set  = set(db_hcodes)
+                        if pdf_set != db_set:
+                            added   = db_set - pdf_set
+                            removed = pdf_set - db_set
+                            parts = []
+                            if added:   parts.append(f"eklendi: {', '.join(sorted(added))}")
+                            if removed: parts.append(f"kaldırıldı: {', '.join(sorted(removed))}")
+                            warnings.append(
+                                f"⚠️ {comp.get('name','?')} (CAS {cas}): PDF'de {'+'.join(sorted(pdf_set)) or '—'} "
+                                f"→ SEA Ek-6/Annex VI: {'+'.join(sorted(db_set))} ({', '.join(parts)}) — güncel değer kullanıldı"
+                            )
+                        comp["hCodes"] = db_hcodes  # her zaman güncel DB değerini kullan
+
             validated.append(comp)
 
-        return {"components": validated, "warnings": warnings}
+        return {"components": validated, "warnings": warnings, "supplier": supplier}
 
     except HTTPException:
         raise

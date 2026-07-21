@@ -1703,7 +1703,9 @@ async function parseSupplerSds(input) {
       const res = await fetch('/api/v1/sds/parse-supplier', { method: 'POST', body: fd });
       const data = await res.json();
       if (!res.ok) throw new Error(`${file.name}: ${data.detail || 'Sunucu hatası'}`);
-      return { fileName: file.name, components: data.components || [], warnings: data.warnings || [] };
+      const sup = data.supplier || {};
+      const label = [sup.company, sup.rev_no ? 'Rev.'+sup.rev_no : null, sup.rev_date].filter(Boolean).join(' — ') || file.name;
+      return { fileName: file.name, label, components: data.components || [], warnings: data.warnings || [] };
     }));
 
     const hasComps = results.some(r => r.components.length > 0);
@@ -1716,7 +1718,7 @@ async function parseSupplerSds(input) {
     let html = `<div style="font-weight:600;margin-bottom:8px">Her üründen karışımınıza % kaç katacaksınız?</div>`;
     results.forEach((r, i) => {
       html += `<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-        <span style="flex:1;font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${r.fileName}">📄 ${r.fileName}</span>
+        <span style="flex:1;font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${r.fileName}">📄 ${r.label}</span>
         <input type="number" id="pdfUsage${i}" min="0" max="100" step="0.1" placeholder="%"
                style="width:80px;padding:4px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:12px">
         <span style="font-size:11px;color:var(--text3)">(${r.components.length} bileşen)</span>

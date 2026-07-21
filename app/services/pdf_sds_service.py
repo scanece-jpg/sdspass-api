@@ -1877,23 +1877,13 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         'Uygunsuz depolama koşulları' if lang=='TR' else 'Inappropriate storage conditions'
     )
 
-    # ── 10.5 Bağdaşmayan maddeler — bileşenlerden dinamik ───────────────────
-    comp_incompat = {
-        '1330-20-7': ['güçlü oksitleyiciler', 'kuvvetli asitler'],
-        '64-17-5':   ['güçlü oksitleyiciler', 'kuvvetli asitler', 'alkali metaller'],
-        '67-56-1':   ['güçlü oksitleyiciler', 'klorin bileşikleri'],
-        '67-64-1':   ['güçlü oksitleyiciler', 'kloroform'],
-        '1310-73-2': ['asitler', 'su (ekzotermik)'],
-        '7647-01-0': ['bazlar', 'oksitleyiciler'],
-        '71-43-2':   ['güçlü oksitleyiciler', 'kuvvetli asitler'],
-        '108-88-3':  ['güçlü oksitleyiciler', 'kuvvetli asitler'],
-    }
-    incompat_set = set()
-    for comp in components:
-        cas = comp.get('cas_no', comp.get('cas',''))
-        if cas in comp_incompat:
-            for item in comp_incompat[cas]:
-                incompat_set.add(item)
+    # ── 10.5 Bağdaşmayan maddeler — PubChem/CAMEO dinamik sorgu ────────────
+    try:
+        from app.services.cameo_service import get_mixture_incompatibilities as _get_incompat
+        _api_items = _get_incompat(components)
+    except Exception:
+        _api_items = []
+    incompat_set = set(_api_items)
 
     if is_flammable:
         incompat_set.add('güçlü oksitleyiciler' if lang=='TR' else 'strong oxidising agents')

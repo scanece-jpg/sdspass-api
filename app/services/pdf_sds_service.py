@@ -862,7 +862,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         'H334','H340','H350','H360','H360D','H360F','H360FD','H370','H372',
     }
     _hc_set = {h.split()[0] for h in h_codes}
-    signal = 'Danger' if (_hc_set & _DANGER_H) else 'Warning'
+    # EUH059 (ozon tabakası) sinyal kelimesi CLP Tablo 5.2 gereği "Danger"
+    _has_euh059 = 'EUH059' in (euh.get('euh_codes') or [])
+    signal = 'Danger' if (_hc_set & _DANGER_H) or _has_euh059 else 'Warning'
     sig_color = C_DANGER if signal=='Danger' else (C_WARNING if signal=='Warning' else black)
 
     # ── Bileşen bazlı not bayrak haritası (note_flag / note) ─────────────────

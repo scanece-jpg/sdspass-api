@@ -124,8 +124,8 @@ CLP_CUTOFFS_DICT = {
     "Aquatic Chronic 2": {"h":"H411","cutoff":1.0, "signal":"Warning"},
     "Aquatic Chronic 3": {"h":"H412","cutoff":10.0,"signal":"Warning"},
     "Aquatic Chronic 4": {"h":"H413","cutoff":25.0,"signal":"Warning"},
-    # 5.1 Ozon tabakasına zararlı — CLP Tablo 5.1: GCL=%0,1
-    "Ozone":             {"h":"H420","cutoff":0.1, "signal":"Warning"},
+    # 5.1 Ozon tabakasına zararlı — EUH059, piktogramsız, sinyal:Danger
+    # euh_service.py'de CAS listesiyle işlenir; buraya cutoff eklenmez.
     # 2.x Fiziksel — ayrı engine (physical_hazard_service)
     "Flam. Gas 1":       {"h":"H220","cutoff":0.0,"signal":"Danger"},
     "Flam. Gas 2":       {"h":"H221","cutoff":0.0,"signal":"Warning"},
@@ -863,7 +863,7 @@ _PICTOGRAM_MAP = {
     'H270':'GHS03','H271':'GHS03','H272':'GHS03',
     'H280':'GHS04','H290':'GHS05',
     'H400':'GHS09','H410':'GHS09','H411':'GHS09','H412':'GHS09','H413':'GHS09',
-    'H420':'GHS07',  # ozon tabakasına zararlı — ünlem işareti
+    # EUH059 (ozon): piktogram yok — euh_service.py işler
 }
 
 CUTOFFS = {

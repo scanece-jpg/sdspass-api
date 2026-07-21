@@ -164,25 +164,26 @@ CLASS_SIGNAL = {
 # ]}
 # Anlam: madde konsantrasyonu ≥ eşik_% ise → karışım bu sınıfa girer
 #
-# ⚠️ BAKIM UYARISI — ÇİFT KAYNAK
-# Bu GCL tablosundaki eşik değerleri, clp_service.py içindeki
-# CLP_CUTOFFS_DICT ile AYNI regülasyon verisidir (CLP Annex I).
-# GCL = UI dropdown için (kullanıcıya konsantrasyon aralığı gösterir)
-# CLP_CUTOFFS_DICT = sınıflandırma motoru için (gerçek H kodu kararı)
-#
-# Bu iki tablo senkronize TUTULMALIDIR. clp_service.py'de bir eşik
-# değiştirildiğinde BURAYA DA aynı değişiklik uygulanmalıdır.
-# Tek yetkili kaynak: clp_service.py · CLP_CUTOFFS_DICT
-#
-# Bilinen senkron sorunları (Temmuz 2026 denetiminde tespit edildi):
-#   - repr. lact.: (0.0, ...) → OLMALI (0.3, ...) — clp_service.py'de düzeltildi
-#   - stot se 1: sıra [(10, SE1), (1.0, SE2), (20, SE3)] — SE3 mantıksal şüpheli
-#   - skin corr. 1a → (0.5, Eye Dam.1): kaynağı belirsiz, CLP Tablo 3.3.3 eşiği %3
-#   - aquatic: motordan farklı (motor M-faktörlü toplamsal kullanır, burası tek eşik)
+# GCL tek kaynaktan besleniyor: basit (tek eşikli) satırlar clp_service.CLP_CUTOFFS_DICT'ten
+# türetilir; cascade (çok seviyeli / çapraz sınıf) satırlar hardcode kalır.
+# Artık elle senkronizasyon gerekmez — clp_service.py'deki cutoff değişince burası da güncellenir.
+from app.services.clp_service import CLP_CUTOFFS_DICT as _CLP
+
+
+def _s(h_class: str) -> list[tuple]:
+    """CLP_CUTOFFS_DICT'ten tek-eşikli GCL satırı üret. cutoff=0.0 → boş liste."""
+    e = _CLP.get(h_class)
+    if not e or e['cutoff'] == 0.0:
+        return []
+    return [(e['cutoff'], h_class, e['h'])]
+
 
 GCL: dict[str, list[tuple]] = {
 
-    # --- Akut Toksisite (CLP Tablo 3.1 / KKDİK Ek-1) ---
+    # ── CASCADE — çok seviyeli veya çapraz sınıf geçişleri ──────────────────
+    # (CLP_CUTOFFS_DICT'te karşılığı yok; burada hardcode kalır)
+
+    # Akut Toksisite — bileşen kat. → farklı karışım kategorileri (CLP Tablo 3.1.3)
     'acute tox. 1':   [(0.1,'Acute Tox. 1','H300/H310/H330'),
                        (1.0,'Acute Tox. 2','H300/H310/H330'),
                        (10.,'Acute Tox. 3','H301/H311/H331'),
@@ -195,63 +196,57 @@ GCL: dict[str, list[tuple]] = {
                        (10.,'Acute Tox. 4','H302/H312/H332')],
     'acute tox. 4':   [(1.0,'Acute Tox. 4','H302/H312/H332')],
 
-    # --- Deri Korozyonu / Tahrişi ---
-    # Skin Corr. 1A bileşeni → aşağıdaki karışım sınıflarını tetikler
-    'skin corr. 1a':  [(0.5,'Eye Dam. 1',   'H318'),
-                       (1.0,'Skin Corr. 1B', 'H314'),
-                       (5.0,'Skin Corr. 1A', 'H314')],
-
+    # Deri — çapraz sınıf: Skin Corr. bileşeni aynı zamanda Eye Dam. tetikler (CLP Tablo 3.2.3)
+    'skin corr. 1a':  [(1.0,'Skin Corr. 1B','H314'),
+                       (3.0,'Eye Dam. 1',   'H318'),
+                       (5.0,'Skin Corr. 1A','H314')],
     'skin corr. 1b':  [(1.0,'Skin Corr. 1B','H314'),
-                       (3.0,'Eye Dam. 1',    'H318')],   # Annex I 3.2.3.3
-
+                       (3.0,'Eye Dam. 1',   'H318')],
     'skin corr. 1':   [(1.0,'Skin Corr. 1B','H314'),
-                       (5.0,'Skin Corr. 1A', 'H314')],
+                       (5.0,'Skin Corr. 1A','H314')],
 
-    'skin irrit. 2':  [(10.,'Skin Irrit. 2','H315')],
-
-    # --- Göz Hasarı ---
-    'eye dam. 1':     [(3.0,'Eye Dam. 1',   'H318')],
-    'eye irrit. 2':   [(10.,'Eye Irrit. 2', 'H319')],
-
-    # --- Solunum / Deri Hassaslaştırıcı ---
-    'resp. sens. 1':  [(0.1,'Resp. Sens. 1','H334')],
-    'resp. sens. 1a': [(0.1,'Resp. Sens. 1A','H334')],
-    'resp. sens. 1b': [(0.1,'Resp. Sens. 1B','H334')],
-    'skin sens. 1':   [(0.1,'Skin Sens. 1', 'H317')],
-    'skin sens. 1a':  [(0.1,'Skin Sens. 1A','H317')],
-    'skin sens. 1b':  [(0.1,'Skin Sens. 1B','H317')],
-
-    # --- Mutajenite ---
-    'muta. 1a': [(0.1,'Muta. 1A','H340')],
-    'muta. 1b': [(0.1,'Muta. 1B','H340')],
-    'muta. 2':  [(1.0,'Muta. 2', 'H341')],
-
-    # --- Kanserojenite ---
-    'carc. 1a': [(0.1,'Carc. 1A','H350')],
-    'carc. 1b': [(0.1,'Carc. 1B','H350')],
-    'carc. 2':  [(1.0,'Carc. 2', 'H351')],
-
-    # --- Üreme Toksisitesi ---
-    'repr. 1a': [(0.1,'Repr. 1A','H360')],
-    'repr. 1b': [(0.1,'Repr. 1B','H360')],
-    'repr. 2':  [(3.0,'Repr. 2', 'H361')],
-    'repr. lact.': [(0.0,'Repr. Lact.','H362')],  # her konsantrasyonda
-
-    # --- STOT Tek Maruziyet ---
-    'stot se 1':  [(10.,'STOT SE 1','H370'),
-                   (1.0,'STOT SE 2','H371'),
-                   (20.,'STOT SE 3','H336')],
-    'stot se 2':  [(10.,'STOT SE 2','H371'),
-                   (20.,'STOT SE 3','H336')],
+    # STOT SE — geçiş kuralı: SE1 bileşen düşük konsantrasyonda SE2 tetikler (CLP Tablo 3.8.3)
+    'stot se 1':  [(1.0,'STOT SE 2','H371'),
+                   (10.,'STOT SE 1','H370')],
+    'stot se 2':  [(10.,'STOT SE 2','H371')],
     'stot se 3':  [(20.,'STOT SE 3','H335/H336')],
 
-    # --- STOT Tekrarlı Maruziyet ---
+    # STOT RE — iki kademe (CLP Tablo 3.9.4)
     'stot re 1':  [(1.0,'STOT RE 1','H372'),
                    (10.,'STOT RE 2','H373')],
-    'stot re 2':  [(10.,'STOT RE 2','H373')],
 
-    # --- Aspirasyon Toksisitesi ---
-    'asp. tox. 1': [(10.,'Asp. Tox. 1','H304')],
+    # ── SIMPLE — CLP_CUTOFFS_DICT tek kaynak (_s() fonksiyonu ile) ──────────
+    # Buradaki değerleri elle değiştirme — clp_service.py'de değiştir.
+
+    'skin irrit. 2':  _s('Skin Irrit. 2'),
+    'eye dam. 1':     _s('Eye Dam. 1'),
+    'eye irrit. 2':   _s('Eye Irrit. 2'),
+
+    'resp. sens. 1':  _s('Resp. Sens. 1'),
+    'resp. sens. 1a': _s('Resp. Sens. 1A'),
+    'resp. sens. 1b': _s('Resp. Sens. 1B'),
+    'skin sens. 1':   _s('Skin Sens. 1'),
+    'skin sens. 1a':  _s('Skin Sens. 1A'),
+    'skin sens. 1b':  _s('Skin Sens. 1B'),
+
+    'muta. 1a': _s('Muta. 1A'),
+    'muta. 1b': _s('Muta. 1B'),
+    'muta. 2':  _s('Muta. 2'),
+
+    'carc. 1a': _s('Carc. 1A'),
+    'carc. 1b': _s('Carc. 1B'),
+    'carc. 2':  _s('Carc. 2'),
+
+    'repr. 1a':    _s('Repr. 1A'),
+    'repr. 1b':    _s('Repr. 1B'),
+    'repr. 2':     _s('Repr. 2'),
+    'repr. lact.': _s('Repr. Lact.'),
+
+    'stot re 2':   _s('STOT RE 2'),
+    'asp. tox. 1': _s('Asp. Tox. 1'),
+
+    # ── AQUATIC — UI için basit eşikler; motor ecological_service kullanır ──
+    # (M-faktörlü toplamsal formül motordan farklı — hardcode kalır)
 
     # --- Su Ortamı ---
     'aquatic acute 1':   [(0.1,'Aquatic Acute 1',  'H400')],

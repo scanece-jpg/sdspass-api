@@ -1796,9 +1796,9 @@ function applySupplierComps() {
     });
   });
 
-  // Mevcut bileşenleri temizle ve ekle
-  document.getElementById('comps').innerHTML = '';
-  toAdd.forEach(c => addComp(c));
+  // Mevcut bileşenlerin CAS'larını al — duplicate ekleme
+  const existingCas = new Set(getComps().map(c => c.cas).filter(Boolean));
+  toAdd.filter(c => !c.cas || !existingCas.has(c.cas)).forEach(c => addComp(c));
 
   status.style.background = allWarnings.length ? '#7c5a00' : '#155724';
   status.style.color = '#fff';

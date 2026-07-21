@@ -5,11 +5,14 @@ PubChem "Stability and Reactivity" bölümünden:
   - Reactivity Profile  : serbest metin (İngilizce), section 10.5 için kaynak
   - Reactive Group      : CAMEO sınıfı (amin, asit, baz vs.) — Türkçe özet üretmek için
 
-Sonuç önbelleğe alınır (lru_cache — process ömrü boyunca).
+Sonuç iki katmanda önbelleğe alınır:
+  1. data/cameo_cache.json — kalıcı dosya (process restart'ta korunur)
+  2. lru_cache            — aynı process içinde tekrar disk okuma engellenir
 Ağ hatalarında boş dict döner; çağıran her zaman fallback'i kullanır.
 """
 
 import json
+import os
 import re
 import urllib.request
 from functools import lru_cache
@@ -18,6 +21,29 @@ from typing import Dict, List
 _PUBCHEM_BASE = 'https://pubchem.ncbi.nlm.nih.gov/rest'
 _TIMEOUT = 8
 
+_CACHE_PATH = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'cameo_cache.json')
+
+# ── Dosya önbelleği ───────────────────────────────────────────────────────────
+
+def _load_disk_cache() -> dict:
+    try:
+        with open(_CACHE_PATH, encoding='utf-8') as f:
+            return json.load(f)
+    except Exception:
+        return {}
+
+def _save_disk_cache(cache: dict) -> None:
+    try:
+        os.makedirs(os.path.dirname(_CACHE_PATH), exist_ok=True)
+        with open(_CACHE_PATH, 'w', encoding='utf-8') as f:
+            json.dump(cache, f, ensure_ascii=False, indent=2)
+    except Exception:
+        pass  # disk yazma başarısız olursa sessizce devam et
+
+_disk_cache: dict = _load_disk_cache()
+
+
+# ── PubChem sorguları ─────────────────────────────────────────────────────────
 
 @lru_cache(maxsize=256)
 def _get_cid(cas: str) -> int | None:
@@ -88,18 +114,29 @@ _GROUP_INCOMPAT_TR: Dict[str, List[str]] = {
 }
 
 
+# ── Ana sorgu fonksiyonu ──────────────────────────────────────────────────────
+
 def get_incompatibilities(cas: str) -> Dict:
     """
     CAS numarası için uyumsuzluk verisi döndür.
+    Önce dosya cache'e bakar; yoksa PubChem'den çeker ve cache'e yazar.
 
     Returns:
         {
-          'reactive_group': str,         # CAMEO reaktif grup adı (İngilizce)
-          'incompat_tr': [str],          # Türkçe uyumsuzluk listesi
-          'reactivity_text': str,        # PubChem serbest metin (İngilizce)
-          'source': 'pubchem' | 'none',
+          'reactive_group': str,
+          'incompat_tr': [str],
+          'reactivity_text': str,
+          'source': 'cache' | 'pubchem' | 'none',
         }
     """
+    global _disk_cache
+
+    # 1. Dosya önbelleği
+    if cas in _disk_cache:
+        entry = _disk_cache[cas]
+        return {**entry, 'source': 'cache'}
+
+    # 2. PubChem sorgusu
     cid = _get_cid(cas)
     if not cid:
         return {'reactive_group': '', 'incompat_tr': [], 'reactivity_text': '', 'source': 'none'}
@@ -120,7 +157,7 @@ def get_incompatibilities(cas: str) -> Dict:
                 reactive_group = t
                 break
 
-    # Reaktivite profili — uzun cümle, "Reacts with" veya "is a base/acid" içeriyor
+    # Reaktivite profili — uzun cümle
     reactivity_text = ''
     for t in texts:
         if len(t) > 80 and any(kw in t.lower() for kw in
@@ -129,25 +166,31 @@ def get_incompatibilities(cas: str) -> Dict:
             reactivity_text = t
             break
 
-    incompat_tr = _GROUP_INCOMPAT_TR.get(reactive_group, [])
+    incompat_tr = list(_GROUP_INCOMPAT_TR.get(reactive_group, []))
 
-    # Reaktivite metninden ek çıkarım — "kuvvetli oksitleyiciler" gibi terimleri bul
     text_lower = (reactivity_text or '').lower()
     if 'oxidiz' in text_lower or 'oxidis' in text_lower:
         if 'güçlü oksitleyiciler' not in incompat_tr:
-            incompat_tr = list(incompat_tr) + ['güçlü oksitleyiciler']
+            incompat_tr.append('güçlü oksitleyiciler')
     if 'strong acid' in text_lower or 'inorganic acid' in text_lower:
         if 'kuvvetli asitler' not in incompat_tr:
-            incompat_tr = list(incompat_tr) + ['kuvvetli asitler']
+            incompat_tr.append('kuvvetli asitler')
     if 'strong base' in text_lower or 'alkali' in text_lower:
         if 'güçlü bazlar' not in incompat_tr:
-            incompat_tr = list(incompat_tr) + ['güçlü bazlar']
+            incompat_tr.append('güçlü bazlar')
+
+    # 3. Dosya önbelleğine yaz
+    cache_entry = {
+        'reactive_group':  reactive_group,
+        'incompat_tr':     incompat_tr,
+        'reactivity_text': reactivity_text,
+    }
+    _disk_cache[cas] = cache_entry
+    _save_disk_cache(_disk_cache)
 
     return {
-        'reactive_group': reactive_group,
-        'incompat_tr':    incompat_tr,
-        'reactivity_text': reactivity_text,
-        'source':          'pubchem' if (reactive_group or reactivity_text) else 'none',
+        **cache_entry,
+        'source': 'pubchem' if (reactive_group or reactivity_text) else 'none',
     }
 
 

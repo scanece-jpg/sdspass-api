@@ -1685,6 +1685,9 @@ const _AEROSOL_FILLERS = [
   { label: 'CO₂ (Karbondioksit)',cas: '124-38-9'   },
 ];
 
+// Biriken PDF sonuçları — her yeni seçimde eklenir, Uygula'ya basınca sıfırlanır
+window._supplierParseResults = window._supplierParseResults || [];
+
 async function parseSupplerSds(input) {
   const files = Array.from(input.files);
   if (!files.length) return;
@@ -1696,8 +1699,7 @@ async function parseSupplerSds(input) {
   status.textContent = `⏳ ${files.length} PDF işleniyor, lütfen bekleyin…`;
 
   try {
-    // Tüm PDF'leri paralel gönder
-    const results = await Promise.all(files.map(async (file, i) => {
+    const newResults = await Promise.all(files.map(async file => {
       const fd = new FormData();
       fd.append('file', file);
       const res = await fetch('/api/v1/sds/parse-supplier', { method: 'POST', body: fd });
@@ -1708,37 +1710,62 @@ async function parseSupplerSds(input) {
       return { fileName: file.name, label, components: data.components || [], warnings: data.warnings || [] };
     }));
 
-    const hasComps = results.some(r => r.components.length > 0);
+    // Yeni sonuçları mevcut listeye ekle
+    newResults.forEach(r => window._supplierParseResults.push(r));
+
+    const allResults = window._supplierParseResults;
+    const hasComps = allResults.some(r => r.components.length > 0);
     if (!hasComps) {
       status.style.background='#7c5a00'; status.style.color='#fff';
       status.textContent='⚠️ PDF\'lerde bileşen bulunamadı.'; return;
     }
 
-    // Her PDF için "% kaç katacaksınız?" formu göster
-    let html = `<div style="font-weight:600;margin-bottom:8px">Her üründen karışımınıza % kaç katacaksınız?</div>`;
-    results.forEach((r, i) => {
-      html += `<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
-        <span style="flex:1;font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${r.fileName}">📄 ${r.label}</span>
-        <input type="number" id="pdfUsage${i}" min="0" max="100" step="0.1" placeholder="%"
-               style="width:80px;padding:4px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:12px">
-        <span style="font-size:11px;color:var(--text3)">(${r.components.length} bileşen)</span>
-      </div>`;
-    });
-    html += `<button onclick="applySupplierComps()"
-              style="margin-top:4px;width:100%;padding:7px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer">
-              ✓ Uygula</button>`;
-
-    status.style.background = 'var(--bg2,#f0f4ff)';
-    status.style.color = 'var(--fg,#333)';
-    status.innerHTML = html;
-
-    // Sonuçları global olarak sakla
-    window._supplierParseResults = results;
+    _renderSupplierForm(status);
 
   } catch(e) {
     status.style.background = '#7b1d1d'; status.style.color = '#fff';
     status.textContent = '❌ Hata: ' + e.message;
   }
+}
+
+function _renderSupplierForm(status) {
+  const allResults = window._supplierParseResults;
+  const totalComps = allResults.reduce((s, r) => s + r.components.length, 0);
+  let html = `<div style="font-weight:600;margin-bottom:8px;color:#fff">
+    Her üründen karışımınıza % kaç katacaksınız?
+    <span style="font-weight:400;font-size:10px;margin-left:6px;opacity:.7">(${allResults.length} ürün, ${totalComps} bileşen)</span>
+  </div>`;
+  allResults.forEach((r, i) => {
+    html += `<div style="display:flex;align-items:center;gap:8px;margin-bottom:6px">
+      <button onclick="removeSupplierResult(${i})" title="Kaldır"
+              style="background:none;border:none;color:#f87171;cursor:pointer;font-size:14px;padding:0 2px">×</button>
+      <span style="flex:1;font-size:11px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#fff" title="${r.fileName}">📄 ${r.label}</span>
+      <input type="number" id="pdfUsage${i}" min="0" max="100" step="0.1" placeholder="%"
+             style="width:80px;padding:4px 8px;border-radius:6px;border:1px solid #475569;background:#0f172a;color:#fff;font-size:12px">
+      <span style="font-size:11px;color:#94a3b8">(${r.components.length} bileşen)</span>
+    </div>`;
+  });
+  html += `<div style="display:flex;gap:6px;margin-top:4px">
+    <button onclick="window._supplierParseResults=[];document.getElementById('supplierParseStatus').style.display='none'"
+            style="flex:1;padding:7px;background:none;border:1px solid #475569;color:#94a3b8;border-radius:6px;font-size:12px;cursor:pointer">
+      ✕ Temizle</button>
+    <button onclick="applySupplierComps()"
+            style="flex:2;padding:7px;background:var(--accent);color:#fff;border:none;border-radius:6px;font-size:12px;font-weight:600;cursor:pointer">
+      ✓ Uygula</button>
+  </div>`;
+
+  status.style.background = '#1e293b';
+  status.style.color = '#fff';
+  status.innerHTML = html;
+}
+
+function removeSupplierResult(idx) {
+  window._supplierParseResults.splice(idx, 1);
+  const status = document.getElementById('supplierParseStatus');
+  if (!window._supplierParseResults.length) {
+    status.style.display = 'none'; return;
+  }
+  _renderSupplierForm(status);
 }
 
 function applySupplierComps() {
@@ -1751,18 +1778,16 @@ function applySupplierComps() {
   results.forEach((r, i) => {
     const usagePct = parseFloat(document.getElementById('pdfUsage' + i)?.value);
     if (isNaN(usagePct) || usagePct <= 0) {
-      allWarnings.push(`${r.fileName}: kullanım yüzdesi girilmedi, konsantrasyon boş bırakıldı`);
+      allWarnings.push(`${r.label}: kullanım yüzdesi girilmedi, konsantrasyon boş bırakıldı`);
     }
     (r.warnings || []).forEach(w => allWarnings.push(w));
     r.components.forEach(c => {
       if (c.cas && seenCas.has(c.cas)) return;
       if (c.cas) seenCas.add(c.cas);
-      // Gerçek konsantrasyonu hesapla
       let concMin = null, concMax = null;
       if (!isNaN(usagePct) && usagePct > 0) {
         if (c.concMin != null) concMin = Math.round(c.concMin * usagePct / 100 * 100) / 100;
         if (c.concMax != null) concMax = Math.round(c.concMax * usagePct / 100 * 100) / 100;
-        // Tek değer varsa ikisine de yaz
         if (concMin == null && concMax != null) concMin = concMax;
         if (concMax == null && concMin != null) concMax = concMin;
       }
@@ -1780,7 +1805,7 @@ function applySupplierComps() {
   status.style.background = allWarnings.length ? '#7c5a00' : '#155724';
   status.style.color = '#fff';
   status.textContent = msg;
-  window._supplierParseResults = null;
+  window._supplierParseResults = [];
 }
 
 function completeToHundred() {

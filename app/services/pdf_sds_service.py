@@ -2560,7 +2560,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             styles['small']
         ))
 
-    # ── Deniz Kirletici hesap gerekçesi (IMDG §2.10.3) ───────────────────────
+    # ── Deniz Kirletici gerekçe (ADR §2.2.9.1.10.5 / IMDG §2.10.3) ─────────────
+    # Karışım CLP'ye göre H400/H410/H411 ise deniz kirletici — ayrı Σ hesabı gerekmez.
+    # Karar main.py'de eco_result.aquatic.h_code üzerinden set ediliyor (_sea_env_mark).
     _imdg_mp_h = {'H400', 'H410', 'H411'}
     _mp_comps = []
     for _c in sds_data.get('components', []):
@@ -2583,66 +2585,39 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         })
 
     if _mp_comps:
-        _mp_title = ('Deniz Kirletici Hesap Gerekçesi (IMDG §2.10.3)'
+        _mp_title = ('Deniz Kirletici Gerekçesi (ADR §2.2.9.1.10.5)'
                      if lang == 'TR' else
-                     'Marine Pollutant Calculation (IMDG §2.10.3)')
+                     'Marine Pollutant Basis (ADR §2.2.9.1.10.5)')
         story.append(Spacer(1, 4))
         story.append(Paragraph(f"<b>{_mp_title}:</b>", styles['body_bold']))
 
         _col1 = 'CAS No'
-        _col2 = 'Madde'          if lang == 'TR' else 'Substance'
+        _col2 = 'Madde'  if lang == 'TR' else 'Substance'
         _col3 = 'C (%)'
-        _col4 = 'M'
-        _col5 = 'C×M'
-        _col6 = 'Eşik (%)'       if lang == 'TR' else 'Threshold (%)'
-        _mp_rows = [[_col1, _col2, _col3, _col4, _col5, _col6]]
-
-        _sum_acute  = 0.0
-        _sum_h411   = 0.0
+        _col4 = 'M (akut)' if lang == 'TR' else 'M (acute)'
+        _col5 = 'H Kodu'  if lang == 'TR' else 'H Code'
+        _mp_rows = [[_col1, _col2, _col3, _col4, _col5]]
         for _mp in _mp_comps:
-            _is_acute_mp = _mp['h_code'] in {'H400', 'H410'}
-            _thr = '≥ 0.1' if _is_acute_mp else '≥ 1.0'
-            if _is_acute_mp:
-                # Test 1: akut M-faktörlü — Σ(C×M) ≥ 0.1
-                _cxm      = _mp['conc'] * _mp['m']
-                _m_str    = f"{int(_mp['m'])}"
-                _cxm_str  = f"{_cxm:.2f}"
-                _sum_acute += _cxm
-            else:
-                # Test 2: H411 kronik bileşen — Σ(C) ≥ 1.0, M-faktör uygulanmaz
-                _cxm     = _mp['conc']   # katkı = C (M-faktörsüz)
-                _m_str   = '—'
-                _cxm_str = f"{_cxm:.1f}*"  # * = Test 2, M-faktör yok
-                _sum_h411 += _mp['conc']
             _mp_rows.append([
                 _mp['cas'],
                 Paragraph(_mp['name'], styles['small']),
                 f"{_mp['conc']:.1f}",
-                _m_str,
-                _cxm_str,
-                _thr,
+                f"{int(_mp['m'])}",
+                _mp['h_code'],
             ])
+        story.append(data_table(_mp_rows, [24*mm, 58*mm, 18*mm, 22*mm, 22*mm], styles))
 
-        story.append(data_table(_mp_rows, [24*mm, 50*mm, 18*mm, 12*mm, 18*mm, 22*mm], styles))
-
-        _is_mp = (_sum_acute >= 0.1) or (_sum_h411 >= 1.0)
-        if _sum_acute > 0 and _sum_h411 > 0:
-            _sum_txt = (f"Σ(C×M) = {_sum_acute:.2f}% (H400/H410) | "
-                        f"Σ(C) = {_sum_h411:.2f}% (H411)")
-        elif _sum_acute > 0:
-            _sum_txt = f"Σ(C×M) = {_sum_acute:.2f}%"
-        else:
-            _sum_txt = f"Σ(C) = {_sum_h411:.2f}%"
-
+        # Karar _sea_env_mark'tan (eco_result.aquatic.h_code) geliyor
+        _is_mp = bool(_sea_env_mark)
         if _is_mp:
-            _verdict = ('Deniz Kirletici: Evet — IMDG §2.10.3 eşiği aşıldı.'
+            _verdict = ('Karışım CLP ekoloji sınıflandırması H400/H410/H411 → Deniz Kirletici (ADR §2.2.9.1.10.5a).'
                         if lang == 'TR' else
-                        'Marine Pollutant: Yes — IMDG §2.10.3 threshold exceeded.')
+                        'Mixture CLP ecology classification H400/H410/H411 → Marine Pollutant (ADR §2.2.9.1.10.5a).')
         else:
-            _verdict = ('Deniz Kirletici: Hayır — IMDG §2.10.3 eşiği aşılmadı.'
+            _verdict = ('Karışım H400/H410/H411 sınıflandırması yok → Deniz Kirletici değil.'
                         if lang == 'TR' else
-                        'Marine Pollutant: No — IMDG §2.10.3 threshold not exceeded.')
-        story.append(Paragraph(f"{_sum_txt} → {_verdict}", styles['small']))
+                        'Mixture not classified H400/H410/H411 → Not a Marine Pollutant.')
+        story.append(Paragraph(_verdict, styles['small']))
 
         # H411 bileşeni varsa Test 2 dipnotu ekle
         if any(_mp['h_code'] == 'H411' for _mp in _mp_comps):

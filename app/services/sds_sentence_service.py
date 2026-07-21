@@ -707,91 +707,6 @@ H_SENTENCES: Dict[str, Dict[int, str]] = {
 
 }
 
-# Bölüm 8 — KKE: H kodundan ekipman listesi
-H_TO_PPE: Dict[str, Dict] = {
-    # ── Solunum Toksisitesi ───────────────────────────────────────────────────
-    'H330': {   # Kat.1-2 — ÖLÜMCÜL solunursa
-        'resp':   'ABEK filtreli tam yüz maskesi veya SCBA (bağımsız solunum cihazı)',
-        'gloves': 'Kimyasala dayanıklı eldiven',
-        'eyes':   'Kimyasal gözlük veya tam yüz koruyucu',
-    },
-    'H331': {   # Kat.3 — TOKSİK solunursa
-        'resp':   'Organik/inorganik gaz filtreli yarım veya tam yüz maskesi',
-        'gloves': 'Kimyasala dayanıklı eldiven',
-        'eyes':   'Kimyasal gözlük',
-    },
-    'H332': {   # Kat.4 — zararlı solunursa
-        'resp':   'OEL aşılma riskinde P2/P3 filtreli toz maskesi veya gaz filtreli maske',
-        'gloves': 'Nitril eldiven',
-        'eyes':   'Güvenlik gözlüğü',
-    },
-    'H334': {   # Solunum duyarlılaştırıcı — SCBA veya tam yüz maskesi zorunlu
-        'resp':   'Solunum duyarlılaştırıcı — SCBA veya tam yüz maskesi (ABEK filtre)',
-        'gloves': 'Kimyasala dayanıklı eldiven',
-    },
-    # ── Cilt Korozif / Aşındırıcı ────────────────────────────────────────────
-    'H314': {   # Kat.1A/1B/2 — cilt yanığı/göz hasarı
-        'resp':   'Buhar/aerosol oluşursa: ABEK filtreli maske veya ortama uygun solunum koruyucu',
-        'gloves': 'Kimyasala dayanıklı eldiven (nitril ≥0.4mm veya neopren/butil)',
-        'eyes':   'Kimyasal gözlük ve yüz siperi',
-        'body':   'Kimyasala dayanıklı koruyucu giysi ve çizme',
-    },
-    # ── Akut Toksisite — Deri ────────────────────────────────────────────────
-    'H310': {   # Kat.1-2 — ÖLÜMCÜL deri temasında
-        'resp':   'Buhar oluşursa SCBA veya ABEK filtreli tam yüz maskesi',
-        'gloves': 'Çift eldiven — kimyasala dayanıklı dış eldiven',
-        'eyes':   'Tam yüz koruyucu',
-        'body':   'Kimyasala dayanıklı tulum',
-    },
-    'H311': {   # Kat.3 — toksik deri temasında
-        'resp':   'Buhar/aerosol oluşursa uygun solunum koruyucu',
-        'gloves': 'Kimyasala dayanıklı eldiven',
-        'eyes':   'Kimyasal gözlük',
-    },
-    # ── Oksitleyici ──────────────────────────────────────────────────────────
-    'H271': {   # Kat.1 — yangın veya patlama yapabilir
-        'resp':   'SCBA veya ABEK-P3 filtreli tam yüz maskesi',
-        'gloves': 'Oksidana dayanıklı eldiven (butil veya neopren)',
-        'eyes':   'Kimyasal gözlük ve yüz siperi',
-        'body':   'Yanmaz/kimyasala dayanıklı koruyucu giysi',
-    },
-    'H272': {   # Kat.2-3 — yangını şiddetlendirebilir
-        'resp':   'OEL aşılma riskinde inorganik gaz filtreli yarım maske',
-        'gloves': 'Kimyasala dayanıklı eldiven (nitril veya neopren)',
-        'eyes':   'Kimyasal gözlük',
-    },
-    # ── Yanıcı Sıvı ──────────────────────────────────────────────────────────
-    'H225': {
-        'resp':   'Organik buhar filtreli maske (konsantrasyona bağlı)',
-        'gloves': 'Çözücüye dayanıklı eldiven',
-        'eyes':   'Kimyasal gözlük',
-        'body':   'Antistatik giysiler',
-    },
-    'H224': {
-        'resp':   'Organik buhar filtreli tam yüz maskesi',
-        'gloves': 'Çözücüye dayanıklı eldiven',
-        'eyes':   'Kimyasal gözlük',
-        'body':   'Antistatik ve kimyasala dayanıklı giysi',
-    },
-    # ── Karsinojen / Mutajen / Üreme Toksik ─────────────────────────────────
-    'H350': {
-        'resp':   'HEPA + gaz filtreli solunum koruyucu (ALARA ilkesi)',
-        'gloves': 'Kimyasala dayanıklı eldiven',
-        'body':   'Koruyucu giysi',
-    },
-    'H340': {
-        'resp':   'P3 filtreli toz maskesi veya gaz filtreli solunum koruyucu',
-        'gloves': 'Kimyasala dayanıklı eldiven',
-        'body':   'Koruyucu giysi',
-    },
-    # ── Su Reaktif ───────────────────────────────────────────────────────────
-    'H260': {
-        'resp':   'Su geçirmez tam yüz maskesi — H2 gazı oluşabilir',
-        'gloves': 'Su geçirmez kimyasal koruyucu eldiven',
-        'eyes':   'Tam yüz koruyucu',
-        'body':   'Su geçirmez koruyucu giysi',
-    },
-}
 
 # Bölüm 5 — H kodundan yangın söndürücü önerisi
 H_TO_EXTINGUISHER: Dict[str, str] = {
@@ -1048,28 +963,11 @@ def generate_section(
         if not extinguisher:
             extinguisher = 'Uygun yangın söndürücü kullanın. Büyük yangınlarda uzmanlaşmış ekip çağırın.'
 
-    # Bölüm 8 için KKE
+    # Bölüm 8 için KKE — tek kaynak: ppe_engine
     ppe = {}
     if section_num == 8:
-        for h in priority_order:
-            if h in h_codes and h in H_TO_PPE:
-                for eq, desc in H_TO_PPE[h].items():
-                    if eq not in ppe:  # İlk (en yüksek öncelikli) KKE kazanır
-                        ppe[eq] = desc
-
-        # Varsayılan KKE (yoksa)
-        if not ppe.get('gloves'):
-            ppe['gloves'] = 'Nitril veya lateks eldiven'
-        if not ppe.get('eyes'):
-            ppe['eyes'] = 'Güvenlik gözlüğü veya koruyucu yüz siperi'
-        # Body KKE — alevlenir sıvı veya cilt tahriş ediciler için
-        if not ppe.get('body'):
-            flam_h = [h for h in h_codes if h in ('H224','H225','H226','H228')]
-            skin_h = [h for h in h_codes if h in ('H314','H315','H317','H310','H311','H312')]
-            if flam_h or skin_h:
-                ppe['body'] = 'Antistatik ve kimyasala dayanıklı koruyucu giysi'
-            else:
-                ppe['body'] = 'Uygun iş giysisi'
+        from app.services.ppe_engine import select_flat as _ppe_select_flat
+        ppe = _ppe_select_flat(list(h_codes), lang='TR')
 
     # Bölüm 6 için genel çevre notu
     env_note = None

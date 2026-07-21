@@ -1476,12 +1476,12 @@ function addComp(pf = {}) {
       <input type="text" class="conc-manual" id="cmanual${id}"
              placeholder="örn: 30"
              oninput="onManualConc(${id});updateConcTotal()"
-             value="${pf.conc||''}"
+             value="${pf.concMin!=null&&pf.concMax!=null ? pf.concMin+'-'+pf.concMax : (pf.conc||'')}"
              style="width:100%;padding:6px 10px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-family:var(--mono);font-size:12px;box-sizing:border-box">
       <div id="crange${id}" style="font-size:10px;color:var(--text3);margin-top:3px;display:none">→ B3'te gösterilecek: <b id="crangeVal${id}" style="color:var(--accent)"></b></div>
       <div class="crp" id="crp${id}"></div>
-      <input type="hidden" class="kimin" id="cmin${id}" value="${pf.conc||''}">
-      <input type="hidden" class="kimax" id="cmax${id}" value="">
+      <input type="hidden" class="kimin" id="cmin${id}" value="${pf.concMin!=null ? pf.concMin : (pf.conc||'')}">
+      <input type="hidden" class="kimax" id="cmax${id}" value="${pf.concMax!=null ? pf.concMax : ''}">
     </div>
     <div style="margin-top:8px">
       <label>Tehlike Sınıfları <button class="add-chip-btn" onclick="toggleHazardPicker(${id})">+ Ekle</button></label>
@@ -1705,9 +1705,8 @@ async function parseSupplerSds(input) {
     // Mevcut bileşenleri temizle
     document.getElementById('comps').innerHTML = '';
     comps.forEach(c => {
-      const conc = c.concMin != null ? c.concMin : (c.concMax != null ? c.concMax : '');
       const hazards = (c.hCodes || []).map(h => ({ h_class: h, h_code: h }));
-      addComp({ cas: c.cas || '', name: c.name || '', conc: String(conc), hazards });
+      addComp({ cas: c.cas || '', name: c.name || '', concMin: c.concMin, concMax: c.concMax, hazards });
     });
     let msg = `✅ ${comps.length} bileşen aktarıldı.`;
     if (data.warnings && data.warnings.length) msg += ' ⚠️ ' + data.warnings.join(' | ');

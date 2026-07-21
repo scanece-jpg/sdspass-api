@@ -1775,6 +1775,9 @@ function applySupplierComps() {
   const allWarnings = [];
   const toAdd = [];
 
+  // toAdd: {cas, name, concMin, concMax, hazards} — aynı CAS varsa konsantrasyon toplanır
+  const casMap = new Map(); // cas → toAdd index
+
   results.forEach((r, i) => {
     const usagePct = parseFloat(document.getElementById('pdfUsage' + i)?.value);
     if (isNaN(usagePct) || usagePct <= 0) {
@@ -1782,8 +1785,6 @@ function applySupplierComps() {
     }
     (r.warnings || []).forEach(w => allWarnings.push(w));
     r.components.forEach(c => {
-      if (c.cas && seenCas.has(c.cas)) return;
-      if (c.cas) seenCas.add(c.cas);
       let concMin = null, concMax = null;
       if (!isNaN(usagePct) && usagePct > 0) {
         if (c.concMin != null) concMin = Math.round(c.concMin * usagePct / 100 * 100) / 100;
@@ -1791,14 +1792,46 @@ function applySupplierComps() {
         if (concMin == null && concMax != null) concMin = concMax;
         if (concMax == null && concMin != null) concMax = concMin;
       }
-      toAdd.push({ cas: c.cas || '', name: c.name || '', concMin, concMax,
-                   hazards: (c.hCodes || []).map(h => ({ h_class: h, h_code: h })) });
+      const key = c.cas || null;
+      if (key && casMap.has(key)) {
+        // Aynı CAS — konsantrasyonları topla
+        const existing = toAdd[casMap.get(key)];
+        if (concMin != null && existing.concMin != null) existing.concMin = Math.round((existing.concMin + concMin) * 100) / 100;
+        if (concMax != null && existing.concMax != null) existing.concMax = Math.round((existing.concMax + concMax) * 100) / 100;
+        allWarnings.push(`ℹ️ ${c.name || key} (CAS ${key}) birden fazla üründe — konsantrasyonlar toplandı`);
+      } else {
+        const idx = toAdd.length;
+        toAdd.push({ cas: c.cas || '', name: c.name || '', concMin, concMax,
+                     hazards: (c.hCodes || []).map(h => ({ h_class: h, h_code: h })) });
+        if (key) casMap.set(key, idx);
+      }
     });
   });
 
-  // Mevcut bileşenlerin CAS'larını al — duplicate ekleme
-  const existingCas = new Set(getComps().map(c => c.cas).filter(Boolean));
-  toAdd.filter(c => !c.cas || !existingCas.has(c.cas)).forEach(c => addComp(c));
+  // Mevcut bileşenlerin CAS'larını al — zaten formda varsa konsantrasyona ekle, yoksa yeni ekle
+  const existingComps = getComps();
+  const existingCasMap = new Map(existingComps.map((c, i) => [c.cas, i]).filter(([k]) => k));
+  toAdd.forEach(c => {
+    if (c.cas && existingCasMap.has(c.cas)) {
+      // Formda zaten var — cmin/cmax input'larını güncelle
+      const idx = existingCasMap.get(c.cas);
+      const compId = document.getElementById('comps').children[idx]?.id?.replace('cw','');
+      if (compId) {
+        const minEl = document.getElementById('cmin' + compId);
+        const maxEl = document.getElementById('cmax' + compId);
+        const manEl = document.getElementById('cmanual' + compId);
+        if (minEl && c.concMin != null) {
+          const prev = parseFloat(minEl.value) || 0;
+          const newVal = Math.round((prev + c.concMin) * 100) / 100;
+          minEl.value = newVal;
+          if (maxEl) maxEl.value = Math.round(((parseFloat(maxEl.value)||0) + (c.concMax||0)) * 100) / 100;
+          if (manEl) manEl.value = newVal;
+        }
+      }
+    } else {
+      addComp(c);
+    }
+  });
 
   status.style.background = allWarnings.length ? '#7c5a00' : '#155724';
   status.style.color = '#fff';

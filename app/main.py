@@ -3,7 +3,7 @@ HazardDesk PDF API — Minimal Deploy
 DB gerektirmez, sadece PDF üretimi + madde lookup
 """
 
-from fastapi import FastAPI, Body, Response, HTTPException
+from fastapi import FastAPI, Body, Response, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -116,14 +116,6 @@ async def generate_pdf(data: dict = Body(...)):
         )
         from app.services.echa_service import _dedupe_h_codes as _dedup, lookup_echa_api as _lu_echa
 
-        # Form bazlı filtre: sıvı/katı/pasta formda basınçlı gaz H kodları geçersiz
-        _GAS_ONLY_H = {'H280', 'H281', 'H282', 'H283', 'H284', 'H285'}
-
-        def _filter_form_h(hazards: list, prod_form: str) -> list:
-            if prod_form in ('liquid', 'solid', 'paste'):
-                return [h for h in hazards if h.get('h_code') not in _GAS_ONLY_H]
-            return hazards
-
         async def _refresh_comp(comp: dict, _prod_form: str = '') -> dict:
             cas = (comp.get('cas_no') or comp.get('cas') or '').strip()
             if not cas:
@@ -135,10 +127,9 @@ async def generate_pdf(data: dict = Body(...)):
                     # DB'de kayıt var — hazards boş olsa bile (sınıflandırılmamış madde: su, glikoz vb.)
                     # ECHA API'ye düşme; boş hazards kasıtlı "sınıflandırılmamış" anlamına gelir.
                     if fresh.get('hazards'):
-                        filtered = _filter_form_h(fresh['hazards'], _prod_form)
                         raw = {
-                            'h_codes':        [h['h_code'] for h in filtered],
-                            'hazard_classes':  [h['h_class'] for h in filtered],
+                            'h_codes':        [h['h_code'] for h in fresh['hazards']],
+                            'hazard_classes':  [h['h_class'] for h in fresh['hazards']],
                         }
                         _dedup(raw)
                         c = dict(comp)
@@ -2216,3 +2207,123 @@ async def generate_label(data: dict = Body(...)):
         )
     except Exception as e:
         raise HTTPException(status_code=500, detail=f'Etiket üretim hatası: {e}')
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Tedarikçi SDS Parse — PDF'den bileşen verisi çıkar
+# ─────────────────────────────────────────────────────────────────────────────
+@app.post("/api/v1/sds/parse-supplier")
+async def parse_supplier_sds(request: Request):
+    """
+    Tedarikçi SDS PDF'inden bileşen verisi çıkar.
+    Multipart form: file=<pdf>
+    Döner: {components:[{name,cas,ec_no,index_no,concMin,concMax,hCodes}], warnings:[]}
+    """
+    import io, json as _json
+
+    try:
+        form = await request.form()
+        file = form.get("file")
+        if not file:
+            raise HTTPException(status_code=400, detail="PDF dosyası gerekli (file alanı)")
+
+        pdf_bytes = await file.read()
+
+        # 1. pdfplumber ile metin çıkar
+        try:
+            import pdfplumber
+            pages = []
+            with pdfplumber.open(io.BytesIO(pdf_bytes)) as pdf:
+                for page in pdf.pages:
+                    t = page.extract_text(x_tolerance=2, y_tolerance=2)
+                    if t:
+                        pages.append(t)
+            sds_text = "\n\n--- SAYFA SONU ---\n\n".join(pages)
+        except Exception as e:
+            raise HTTPException(status_code=422, detail=f"PDF metin çıkarma hatası: {e}")
+
+        if not sds_text.strip():
+            raise HTTPException(status_code=422, detail="PDF'den metin çıkarılamadı (taranmış görsel olabilir)")
+
+        # 2. Claude ile parse
+        api_key = os.getenv("ANTHROPIC_API_KEY")
+        if not api_key:
+            raise HTTPException(status_code=500, detail="ANTHROPIC_API_KEY tanımlı değil")
+
+        import anthropic as _anthropic
+        client = _anthropic.Anthropic(api_key=api_key)
+
+        schema_example = _json.dumps([
+            {
+                "name": "Madde adı",
+                "cas": "7647-01-0",
+                "ec_no": "231-595-7",
+                "index_no": "017-002-00-2",
+                "concMin": 15,
+                "concMax": 20,
+                "hCodes": ["H314", "H335"]
+            }
+        ], ensure_ascii=False)
+
+        prompt = f"""Aşağıdaki SDS (Güvenlik Bilgi Formu) metninden Bölüm 3 (Bileşim/İçindekiler) bilgilerini çıkar.
+
+ÇIKTI KURALLARI:
+- Sadece JSON dizisi döndür, başka hiçbir şey yazma
+- Her bileşen için bu şemayı kullan: {schema_example}
+- CAS No formatı: xxx-xx-x (belgede yoksa null)
+- EC No formatı: xxx-xxx-x (belgede yoksa null)
+- Index No / KKDIK No: xxx-xxx-xx-x (belgede yoksa null)
+- concMin / concMax: sayısal yüzde değeri (örn. 15.0), belgede tek değer varsa ikisine de yaz
+- hCodes: belgede bu bileşen için listelenen H kodları (örn. ["H314","H335"])
+- Belgede yazan değerleri birebir al, tahmin etme
+
+SDS METNİ:
+{sds_text[:12000]}
+
+Sadece JSON dizisi:"""
+
+        resp = client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=2048,
+            temperature=0,
+            messages=[{"role": "user", "content": prompt}]
+        )
+
+        raw = resp.content[0].text.strip()
+        # JSON bloğunu temizle
+        if raw.startswith("```"):
+            raw = raw.split("```")[1]
+            if raw.startswith("json"):
+                raw = raw[4:]
+        raw = raw.strip().rstrip("```").strip()
+
+        try:
+            components = _json.loads(raw)
+        except Exception:
+            raise HTTPException(status_code=422, detail=f"AI parse hatası — ham çıktı: {raw[:300]}")
+
+        if not isinstance(components, list):
+            raise HTTPException(status_code=422, detail="AI geçersiz format döndürdü")
+
+        # 3. CAS doğrulama
+        from app.services.substance_lookup import lookup_substance
+        warnings = []
+        validated = []
+        for comp in components:
+            cas = (comp.get("cas") or "").strip()
+            if cas:
+                sub = lookup_substance(cas)
+                if not sub:
+                    warnings.append(f"{comp.get('name','?')} — CAS {cas} veritabanında bulunamadı, lütfen doğrulayın")
+                elif not comp.get("ec_no") and sub.get("ec_no"):
+                    comp["ec_no"] = sub["ec_no"]
+            # hCodes normalize
+            comp["hCodes"] = [h.strip().upper() for h in (comp.get("hCodes") or []) if h]
+            validated.append(comp)
+
+        return {"components": validated, "warnings": warnings}
+
+    except HTTPException:
+        raise
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))

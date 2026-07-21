@@ -130,7 +130,7 @@ def svhc_section15_text(svhc_result: dict, lang: str = 'TR') -> list[str]:
         lines.append('⚠ SVHC (Çok Yüksek Endişe Veren Madde) — REACH Madde 59 / KKDİK Ek-14:')
         lines.append('Aşağıdaki SVHC aday listesi maddeleri ≥ %0,1 konsantrasyonda bulunmaktadır:')
     else:
-        lines.append('⚠ SVHC (Substances of Very High Concern) — REACH Article 33 / KKDİK Article 35:')
+        lines.append('⚠ SVHC (Substances of Very High Concern) — REACH Article 59 / KKDİK Annex-14:')
         lines.append('The following SVHC candidate list substances are present at ≥ 0.1 %:')
 
     for s in above:
@@ -152,7 +152,7 @@ def svhc_section15_text(svhc_result: dict, lang: str = 'TR') -> list[str]:
         )
     else:
         lines.append(
-            'Notification obligations apply to recipients under REACH Article 33 / KKDİK Article 35.'
+            'Notification obligations apply to recipients under REACH Article 59 / KKDİK Annex-14.'
         )
 
     return lines

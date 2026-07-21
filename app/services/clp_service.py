@@ -79,10 +79,10 @@ CLP_CUTOFFS_DICT = {
     # 3.2 Cilt — CLP Tablo 3.2.3 bireysel GCL
     # H314 için tek bileşen eşiği = %5 (toplamsal kural da %5'i kullanır)
     # %1-5 arası SC1 → 10×[SC1]+[SI2] ≥ %10 formülüyle H315 yakalanır
-    "Skin Corr. 1":  {"h":"H314","cutoff":5.0, "signal":"Danger"},
-    "Skin Corr. 1A": {"h":"H314","cutoff":5.0, "signal":"Danger"},
-    "Skin Corr. 1B": {"h":"H314","cutoff":5.0, "signal":"Danger"},
-    "Skin Corr. 1C": {"h":"H314","cutoff":5.0, "signal":"Danger"},
+    "Skin Corr. 1":  {"h":"H314","cutoff":1.0, "signal":"Danger"},
+    "Skin Corr. 1A": {"h":"H314","cutoff":1.0, "signal":"Danger"},
+    "Skin Corr. 1B": {"h":"H314","cutoff":1.0, "signal":"Danger"},
+    "Skin Corr. 1C": {"h":"H314","cutoff":1.0, "signal":"Danger"},
     "Skin Irrit. 2": {"h":"H315","cutoff":10.0,"signal":"Warning"},
     # 3.3 Göz — CLP Tablo 3.3.3 bireysel GCL
     # H318 için tek bileşen eşiği = %3 (toplamsal kural da %3'ü kullanır)

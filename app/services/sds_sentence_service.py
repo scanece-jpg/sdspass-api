@@ -708,175 +708,32 @@ H_SENTENCES: Dict[str, Dict[int, str]] = {
 }
 
 
-# Bölüm 5 — H kodundan yangın söndürücü önerisi
+# Bölüm 5 — H kodundan yangın söndürücü önerisi (sadece düz string — Bölüm 5 metni)
 H_TO_EXTINGUISHER: Dict[str, str] = {
     'H224': 'Kuru kimyasal toz, CO₂, alkolle uyumlu köpük. Su spreyi soğutmak için kullanılabilir.',
     'H225': 'Kuru kimyasal, CO₂ veya köpük. Büyük yangın: su sisi.',
     'H226': 'Kuru kimyasal toz, CO₂ veya alkole dayanıklı köpük. Su kullanmayın.',
     'H228': 'Kuru kimyasal veya su spreyi. Toz halindeyse patlama riski — uzaktan müdahale.',
+    'H229': 'Basınçlı kap. Isınırsa patlayabilir. Açık alev veya ısı kaynağından uzak tutun.',
+    'H240': 'Patlama riski! Uzaktan söndürün. Ateş ekibini haberdar edin.',
+    'H241': 'Kuru kimyasal veya CO₂ kullanın. Büyük yangınlarda uzak durun.',
+    'H242': 'Kuru kimyasal veya CO₂ ile söndürün.',
+    'H250': 'HAVA İLE TEMAS ETMEYİN. Kuru kum veya özel söndürücü kullanın. Su kullanmayın.',
+    'H251': 'Büyük miktarlarda yangın riski. CO₂ veya kuru toz kullanın.',
+    'H252': 'Büyük miktarlarda depolama yangın riski. Dikkatli yaklaşın.',
+    'H260': 'SUYLA SÖNDÜRMEYIN. Kuru toz veya kum kullanın.',
+    'H261': 'SUYLA SÖNDÜRMEYIN. Kuru kimyasal kullanın.',
+    'H270': 'Oksitleyici gaz yangını — yanıcı maddeleri uzaklaştırın. Suyla soğutun.',
     'H271': 'CO₂ veya kum. Su KULLANILMAZ.',
     'H272': 'Bol su (oksitleyici). Yanıcı maddelerle temastan uzak tutun.',
+    'H280': 'Tüpleri serin tutun. Patlama riski. Su spreyi ile soğutun.',
+    'H281': 'Sıvılaşmış gaz yangını: soğuk tüp — uzaktan müdahale.',
+    'H290': 'Metal ekipmanla temas — kimyasal reaksiyon riski. CO₂ veya kuru toz.',
     'H304': 'CO₂ veya kuru toz. Su yayılmaya neden olabilir.',
+    'H305': 'Aspirasyon riski — yangın söndürme suyunun yayılmasını önleyin.',
     'H314': 'CO₂, kuru kimyasal veya su sisi. Su jeti kullanmayın.',
     'H315': 'Su spreyi kullanın. Kuru kimyasal veya CO₂ de uygulanabilir.',
     'H335': 'Su spreyi kullanın. Kuru kimyasal veya CO₂ de uygulanabilir.',
-    # ── Yanıcı Katı / Aerosol / Basınçlı ────────────────────────────────────
-    'H229': {
-        5: 'Basınçlı kap. Isınırsa patlayabilir. Açık alev veya ısı kaynağından uzak tutun.',
-        6: 'Isı kaynaklarından uzak tutun. Serin yerde bekletin.',
-        7: 'Doğrudan güneş ışığından ve 50°C üzerindeki sıcaklıklardan koruyun.',
-    },
-    'H240': {
-        4: 'Isı veya şok sonucu patlama olabilir. Tıbbi yardım alın.',
-        5: 'Patlama riski! Uzaktan söndürün. Ateş ekibini haberdar edin.',
-        6: 'Uzak durun. Uzman ekip çağırın. Isı kaynaklarını uzaklaştırın.',
-        7: 'Serin, kuru yerde saklayın. 15°C altında tutun.',
-    },
-    'H241': {
-        4: 'Isı sonucu yangın veya patlama. Tıbbi yardım alın.',
-        5: 'Kuru kimyasal veya CO₂ kullanın. Büyük yangınlarda uzak durun.',
-        6: 'Isı kaynaklarını ortadan kaldırın. KKE giyin.',
-        7: 'Serin, havalandırılmış yerde saklayın.',
-    },
-    'H242': {
-        4: 'Isı ile temas sonrası ilk yardım gerekliyse doktora gidin.',
-        5: 'Kuru kimyasal veya CO₂ ile söndürün.',
-        6: 'Sıcak yüzeylerden uzaklaştırın. Absorban malzeme ile toplayın.',
-        7: 'Serin yerde saklayın. Oksitleyicilerden uzak tutun.',
-    },
-
-    # ── Pirofor ──────────────────────────────────────────────────────────────
-    'H250': {
-        4: 'Havaya maruz kalan alanları suyla soğutun. Ciddi yanık riski — acil tıbbi yardım.',
-        5: 'HAVA İLE TEMAS ETMEYİN. Kuru kum veya özel söndürücü kullanın. Su kullanmayın.',
-        6: 'Oksijen kaynaklarını uzaklaştırın. İnert atmosfer altında toplayın.',
-        7: 'İnert gaz altında, hava ve nemden korumalı kapalı kapta saklayın.',
-        8: 'Tam koruyucu giysi, inert atmosfer. Cilt teması önleyin.',
-    },
-    'H251': {
-        4: 'Isıya bağlı yanık veya yangın sonrası tıbbi yardım alın.',
-        5: 'Büyük miktarlarda yangın riski. CO₂ veya kuru toz kullanın.',
-        6: 'Küçük miktarlarda toplayın. Isı kaynaklarından uzak tutun.',
-        7: 'Serin yerde, 35°C altında saklayın.',
-    },
-    'H252': {
-        4: 'Isıya bağlı yanık veya yangın sonrası tıbbi yardım alın.',
-        5: 'Büyük miktarlarda depolama yangın riski. Dikkatli yaklaşın.',
-        6: 'Büyük yığınlardan uzak durun. Uzman yardımı isteyin.',
-        7: 'Büyük miktarlar halinde saklamayın. Serin, havalandırılmış ortam.',
-    },
-
-    # ── Su Reaktif ───────────────────────────────────────────────────────────
-    'H260': {
-        4: 'SU İLE TEMAS ETMEYİN. Yanıcı gaz oluşur. Tutuşma riski — acil tahliye.',
-        5: 'SUYLA SÖNDÜRMEYIN. Kuru toz veya kum kullanın.',
-        6: 'Su ve yağmurdan koruyun. KKE giyin. İnert gaz ile koru.',
-        7: 'Kuru, nem içermeyen ortamda saklayın. Su kaynaklarından uzak tutun.',
-        8: 'Su geçirmez eldiven ve kıyafet. Nem ile teması kesinlikle önle.',
-    },
-    'H261': {
-        4: 'Su ile temas sonrası yanıcı gaz oluşabilir. Tıbbi yardım alın.',
-        5: 'SUYLA SÖNDÜRMEYIN. Kuru kimyasal kullanın.',
-        6: 'Su kaynaklarından uzak toplayın. KKE giyin.',
-        7: 'Nemden koruyun. Orijinal kapalı ambalajında saklayın.',
-        8: 'Su geçirmez eldiven. Nem ile teması önle.',
-    },
-
-    # ── Oksitleyici Gaz ──────────────────────────────────────────────────────
-    'H270': {
-        4: 'Yangın veya patlama sonrası acil tıbbi yardım alın.',
-        5: 'Oksitleyici gaz yangını — yanıcı maddeleri uzaklaştırın. Suyla soğutun.',
-        6: 'Tüm tutuşturma kaynaklarını uzaklaştırın. Bölgeyi boşaltın.',
-        7: 'Yanıcı ve organik maddelerden uzakta saklayın.',
-        8: 'SCBA ve tam koruyucu kıyafet. Oksijen zenginleşmesine dikkat.',
-    },
-
-    # ── Basınçlı Gaz ─────────────────────────────────────────────────────────
-    'H280': {
-        4: 'Donma veya basınç kaynaklı yaralanmada tıbbi yardım alın.',
-        5: 'Tüpleri serin tutun. Patlama riski. Su spreyi ile soğutun.',
-        6: 'Tüp düşmesin — bölgeden uzaklaştırın.',
-        7: 'Dik konumda, serin, havalandırılmış yerde saklayın. Güneşten koruyun.',
-        8: 'Gaz kaçağına karşı solunum koruması. İyi havalandırma.',
-    },
-    'H281': {
-        4: 'Kriyojenik yanık — suyla ısıtmayın. Acil tıbbi yardım.',
-        5: 'Sıvılaşmış gaz yangını: soğuk tüp — uzaktan müdahale.',
-        6: 'Kriyojenik temas riski. Uygun KKE ile toplayın.',
-        7: 'Kriyojenik kaplarda saklayın. Isıya maruz bırakmayın.',
-        8: 'Kriyojenik eldiven, gözlük. Ciltten uzak tutun.',
-    },
-
-    # ── Metallere Aşındırıcı ─────────────────────────────────────────────────
-    'H290': {
-        4: 'Metal kap veya araç hasarı sonrası yara oluşursa tıbbi yardım.',
-        5: 'Metal ekipmanla temas — kimyasal reaksiyon riski. CO₂ veya kuru toz.',
-        6: 'Metal yüzeylerle temasını önleyin. Absorban toplayın.',
-        7: 'Plastik veya cam kaplarda saklayın. Metalden uzak tutun.',
-        8: 'Paslanmaz çelik veya plastik ekipman kullanın.',
-    },
-
-    # ── Akut Toksisite "Olabilir" Sınıfları ──────────────────────────────────
-    'H303': {
-        4: 'Yutulursa ağzı çalkalayın. Rahatsızlık hissedilirse doktora gidin.',
-        6: 'Döküntüyü toplayın. Gıda maddelerinden uzak tutun.',
-        7: 'Gıda ve içeceklerden uzakta saklayın.',
-    },
-    'H305': {
-        4: 'Yutulursa KUSTURMAYINIZ. Soluk yoluna girme riski. Acil tıbbi yardım.',
-        5: 'Aspirasyon riski — yangın söndürme suyunun yayılmasını önleyin.',
-        6: 'Döküntüyü dikkatlice toplayın. Soluma riskini minimize edin.',
-        7: 'Aspirasyon riskli ürün. Orijinal kapakta saklayın.',
-    },
-    'H313': {
-        4: 'Cilt temasında bol su ile yıkayın. Rahatsızlık devam ederse doktora gidin.',
-        6: 'KKE ile toplayın. Cilt temasından kaçının.',
-        7: 'Serin, kuru yerde saklayın.',
-        8: 'Nitril eldiven. Cilt temasını önle.',
-    },
-    'H316': {
-        4: 'Cilt temasında su ile yıkayın. Tahriş devam ederse tıbbi yardım.',
-        6: 'KKE giyin. Cilt temas riskini azaltın.',
-        7: 'Serin, kuru yerde saklayın.',
-        8: 'Koruyucu eldiven kullanın.',
-    },
-    'H320': {
-        4: 'Gözle temasta bol su ile yıkayın. Rahatsızlık devam ederse göz doktoruna gidin.',
-        6: 'Göz koruması ile toplayın.',
-        7: 'Serin yerde saklayın.',
-        8: 'Kimyasal gözlük. Göz temasından kaçının.',
-    },
-    'H333': {
-        4: 'Solunursa temiz havaya çıkarın. Rahatsızlık devam ederse doktora gidin.',
-        6: 'Yeterli havalandırma sağlayın. KKE kullanın.',
-        7: 'İyi havalandırılmış yerde saklayın.',
-        8: 'Gerekirse organik buhar filtreli maske.',
-    },
-
-    # ── Sucul Akut / Kronik Kat.4 ────────────────────────────────────────────
-    'H401': {
-        6: 'Sucul ortama dökülmesini önleyin. Acil çevre müdahalesini bilgilendirin.',
-        7: 'Su kaynaklarından uzakta saklayın.',
-    },
-    'H413': {
-        6: 'Su kaynaklarına ulaşmasını önleyin. Absorban malzeme ile toplayın.',
-        7: 'Sıkıca kapalı kapta saklayın. Su kaynaklarından uzak.',
-        8: 'Çevre koruyucu önlem alın.',
-    },
-
-    # ── Üreme/Emzirme ────────────────────────────────────────────────────────
-    'H362': {
-        4: 'Emziren anneler bu ürünle çalışmamalıdır. Tıbbi yardım alın.',
-        7: 'Çocukların erişemeyeceği yerde saklayın.',
-        8: 'Hamile ve emziren kadınlar bu ürünle çalışmamalıdır.',
-    },
-
-    # ── Ozon ─────────────────────────────────────────────────────────────────
-    'H420': {
-        6: 'Atmosfere salınımı önleyin. Yetkili bertaraf noktasına iletin.',
-        7: 'Hava geçirmez kapalı kapta saklayın.',
-    },
-
 }
 
 
@@ -956,10 +813,12 @@ def generate_section(
     # Bölüm 5 için yangın söndürücü ekle
     extinguisher = None
     if section_num == 5:
-        for h in priority_order:
-            if h in h_codes and h in H_TO_EXTINGUISHER:
-                extinguisher = H_TO_EXTINGUISHER[h]
-                break
+        for h in (ordered + rest):
+            if h in H_TO_EXTINGUISHER:
+                _ext = H_TO_EXTINGUISHER[h]
+                extinguisher = _ext.get(5, '') if isinstance(_ext, dict) else _ext
+                if extinguisher:
+                    break
         if not extinguisher:
             extinguisher = 'Uygun yangın söndürücü kullanın. Büyük yangınlarda uzmanlaşmış ekip çağırın.'
 

@@ -70,6 +70,17 @@ RULES: Dict[str, List[Dict[str, Any]]] = {
         },
         # Seviye 2 — Tavsiye edilen (tahriş edici/zararlı buhar veya toz)
         {
+            # H373: tekrarlı maruziyette organ hasarı (STOT RE 2) — H370/H371/CMR yoksa
+            'h_codes': ['H373'],
+            'suppress_if': ['H370', 'H371', 'H330', 'H331',
+                            'H340', 'H350', 'H360', 'H360D', 'H360F', 'H360FD'],
+            'ppe': {
+                'TR': 'İyi havalandırma sağlayın; buhar/toz varsa yarım yüz maskesi — P2 filtreli (EN 149)',
+                'EN': 'Ensure adequate ventilation; if vapors/dust present, half-face mask with P2 filter (EN 149)',
+            },
+            'level': 2,
+        },
+        {
             # H332/H335: buhar veya toz olabilir → A1 filtreli VEYA FFP2
             'h_codes': ['H332', 'H335'],
             'ppe': {
@@ -201,22 +212,34 @@ RULES: Dict[str, List[Dict[str, Any]]] = {
     # ── Vücut / Giysi Koruma ──────────────────────────────────────────────
     'body': [
         {
-            'h_codes': ['H314', 'H300', 'H310', 'H330'],
-            'ppe': {
-                'TR': 'Kimyasal koruyucu giysi — Tip 3 veya 4 (EN 14605)',
-                'EN': 'Chemical protective suit — Type 3 or 4 (EN 14605)',
-            },
-            'level': 1,
-        },
-        {
+            # CMR: Tip 4 minimum — en sıkı gereksinim, önce değerlendirilir
             'h_codes': ['H340', 'H350', 'H360', 'H360D', 'H360F', 'H360FD'],
             'ppe': {
                 'TR': 'Kimyasal koruyucu giysi — Tip 4 minimum (EN 14605)',
                 'EN': 'Chemical protective suit — minimum Type 4 (EN 14605)',
             },
             'level': 1,
-            # H314/H300/H310/H330 zaten Tip 3 veya 4 gerektiriyor; Tip 4 minimum bunu kapsar
-            'suppress_if': ['H314', 'H300', 'H310', 'H330'],
+        },
+        {
+            # Korozif/akut toksik: Tip 3 veya 4 — CMR zaten Tip 4 gerektiriyorsa atlanır
+            'h_codes': ['H314', 'H300', 'H310', 'H330'],
+            'ppe': {
+                'TR': 'Kimyasal koruyucu giysi — Tip 3 veya 4 (EN 14605)',
+                'EN': 'Chemical protective suit — Type 3 or 4 (EN 14605)',
+            },
+            'level': 1,
+            'suppress_if': ['H340', 'H350', 'H360', 'H360D', 'H360F', 'H360FD'],
+        },
+        {
+            # STOT RE 2 (H373): tekrarlı maruziyette organ hasarı — kapalı/uzun kollu iş giysisi
+            'h_codes': ['H373'],
+            'ppe': {
+                'TR': 'Kimyasal koruyucu iş elbisesi (EN 13034 Tip 6)',
+                'EN': 'Chemical-resistant work clothing (EN 13034 Type 6)',
+            },
+            'level': 2,
+            'suppress_if': ['H314', 'H300', 'H310', 'H330',
+                            'H340', 'H350', 'H360', 'H360D', 'H360F', 'H360FD'],
         },
         {
             'h_codes': ['H224', 'H225', 'H226'],

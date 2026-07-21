@@ -744,23 +744,9 @@ def _dedupe_h_codes(result: dict) -> dict:
     CLP dominans kurallarını API yanıtına uygula — çakışan H kodlarını temizle.
     Örn: H318 varsa H319 düşer; H314 varsa H315+H319 düşer.
     ECHA C&L çoklu bildirim birleştirmesinden kaynaklanan çakışmaları önler.
-    clp_service.DOMINANCE ile aynı kural seti.
+    Kural seti: clp_service.DOMINANCE (tek kaynak — import ile).
     """
-    _DOM = {
-        'H314': ['H318', 'H315', 'H319'],
-        'H318': ['H319'],
-        'H300': ['H301', 'H302'], 'H301': ['H302'],
-        'H310': ['H311', 'H312'], 'H311': ['H312'],
-        'H330': ['H331', 'H332'], 'H331': ['H332'],
-        'H370': ['H371', 'H335', 'H336'], 'H371': ['H335', 'H336'],
-        'H340': ['H341'], 'H350': ['H351'], 'H360': ['H361'],
-        'H410': ['H400', 'H411', 'H412', 'H413'],
-        'H411': ['H412', 'H413'], 'H412': ['H413'],
-        'H224': ['H225', 'H226'], 'H225': ['H226'],
-        'H271': ['H272'], 'H260': ['H261'],
-        'H240': ['H241', 'H242'], 'H241': ['H242'],
-        'H251': ['H252'],
-    }
+    from app.services.clp_service import DOMINANCE as _DOM
     h_codes = result.get('h_codes', [])
     hazard_classes = result.get('hazard_classes', [])
     h_set = set(h_codes)

@@ -468,15 +468,18 @@ def check_euh(components: List[Dict]) -> Dict:
             # Madde H317 sınıflandırmasına neden oluyor mu?
             causes_skin_class = is_skin_sens and comp_conc >= skin_class_threshold
 
-            # EUH208'e dahil: sınıflandırmaya neden olmayan sensitizerlar (≥%0.1)
-            if not causes_skin_class and comp_conc >= 0.1:
+            # EUH208'e dahil: sınıflandırmaya neden olmayan sensitizerlar
+            # Eşik: SKIN_SENS_SCL_EUH208_THRESHOLD'dan CAS'a özel SCL/10 değeri;
+            # listede yoksa genel GCL %0.1 uygulanır (CLP Annex II §1.2).
+            euh208_threshold = SKIN_SENS_SCL_EUH208_THRESHOLD.get(cas, 0.1)
+            if not causes_skin_class and comp_conc >= euh208_threshold:
                 skin_sens_substances.append({
                     'name': name or cas,
                     'name_tr': name_tr or name or cas,
                     'cas': cas,
                     'conc': comp_conc,
-                    'threshold': 0.1,
-                    'has_scl': False,
+                    'threshold': euh208_threshold,
+                    'has_scl': cas in SKIN_SENS_SCL_EUH208_THRESHOLD,
                 })
 
     # EUH208: Deri sensitizeri varsa + SCL/10 eşiği kontrolü

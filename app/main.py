@@ -2358,6 +2358,10 @@ Sadece JSON:"""
                                 f"⚠️ {comp.get('name','?')} (CAS {cas}): PDF'de {'+'.join(sorted(pdf_set)) or '—'} "
                                 f"→ SEA Ek-6/Annex VI: {'+'.join(sorted(db_set))} ({', '.join(parts)}) — güncel değer kullanıldı"
                             )
+                        else:
+                            warnings.append(
+                                f"✅ {comp.get('name','?')} (CAS {cas}): H kodları tam uyuşuyor — {'+'.join(sorted(db_set))}"
+                            )
                         comp["hCodes"] = db_hcodes  # her zaman güncel DB değerini kullan
 
             validated.append(comp)

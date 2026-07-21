@@ -147,20 +147,8 @@ EUH201_CAS = {
 }
 
 # ─── EUH059 — Ozon tabakasına zararlı maddeler ───────────────────────────────
-
-OZONE_CAS = {
-    '75-69-4',   # trichlorofluoromethane (CFC-11)
-    '75-71-8',   # dichlorodifluoromethane (CFC-12)
-    '76-13-1',   # 1,1,2-trichloro-1,2,2-trifluoroethane (CFC-113)
-    '76-14-2',   # 1,2-dichloro-1,1,2,2-tetrafluoroethane (CFC-114)
-    '75-72-9',   # chlorotrifluoromethane (CFC-13)
-    '75-63-8',   # bromotrifluoromethane (Halon-1301)
-    '74-83-9',   # bromomethane (methyl bromide)
-    '74-87-3',   # chloromethane
-    '56-23-5',   # carbon tetrachloride
-    '67-66-3',   # chloroform
-    '79-01-6',   # trichloroethylene
-}
+# Tek kaynak: ecological_service.py · OZONE_CAS (import ile)
+from app.services.ecological_service import OZONE_CAS
 
 # ─── EUH202 — Siyanakrilat ───────────────────────────────────────────────────
 

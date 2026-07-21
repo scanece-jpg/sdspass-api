@@ -1706,7 +1706,7 @@ async function parseSupplerSds(input) {
       const data = await res.json();
       if (!res.ok) throw new Error(`${file.name}: ${data.detail || 'Sunucu hatası'}`);
       const sup = data.supplier || {};
-      const label = [sup.company, sup.rev_no ? 'Rev.'+sup.rev_no : null, sup.rev_date].filter(Boolean).join(' — ') || file.name;
+      const label = [sup.company, sup.product_name, sup.rev_no ? 'Rev.'+sup.rev_no : null, sup.rev_date].filter(Boolean).join(' — ') || file.name;
       return { fileName: file.name, label, components: data.components || [], warnings: data.warnings || [] };
     }));
 

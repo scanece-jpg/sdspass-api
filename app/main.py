@@ -2256,6 +2256,7 @@ async def parse_supplier_sds(request: Request):
         schema_example = _json.dumps({
             "supplier": {
                 "company": "Firma Adı",
+                "product_name": "Ürün Adı",
                 "rev_no": "3",
                 "rev_date": "2024-05-01"
             },
@@ -2278,6 +2279,7 @@ async def parse_supplier_sds(request: Request):
 - Sadece JSON objesi döndür, başka hiçbir şey yazma
 - Bu şemayı kullan: {schema_example}
 - supplier.company: Bölüm 1'deki üretici/tedarikçi firma adı (yoksa null)
+- supplier.product_name: Bölüm 1'deki ürün/karışım adı (yoksa null)
 - supplier.rev_no: Revizyon numarası (yoksa null)
 - supplier.rev_date: Revizyon tarihi YYYY-MM-DD formatında (yoksa null)
 - CAS No formatı: xxx-xx-x (belgede yoksa null)

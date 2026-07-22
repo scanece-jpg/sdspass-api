@@ -147,47 +147,50 @@ def generate_label_guide_pdf(data: dict) -> bytes:
 
     story = []
     sp = lambda n=1: Spacer(1, n*mm)
+    vol_str = f'{int(volume_l)} L' if volume_l == int(volume_l) else f'{volume_l} L'
 
-    # ── BAŞLIK ────────────────────────────────────────────────────────────────
+    # ── BAŞLIK + FİRMA + ACİL ────────────────────────────────────────────────
     story.append(Paragraph(product.get('name', '—'), st['title']))
     story.append(Paragraph('Etiket Teknik Rehber Kartı', st['sub']))
-    story.append(sp(2))
+    story.append(sp(1.5))
+
+    # Firma ve acil tel üstte yan yana
+    sup_block = [Paragraph('<b>Tedarikçi</b>', st['h1'])]
+    for k in ['name', 'address', 'phone']:
+        if supplier.get(k):
+            sup_block.append(_p(supplier[k], st['body']))
+
+    acil_block = [
+        Paragraph('<b>Acil Durum Telefonu</b>', st['h1']),
+        Paragraph('114 — Ulusal Zehir Danışma (7/24)', st['body']),
+    ]
+    if supplier.get('phone'):
+        acil_block.append(_p(f'Firma: {supplier["phone"]}', st['body']))
+
+    top_tbl = Table([[sup_block, acil_block]], colWidths=[inner*0.6, inner*0.4])
+    top_tbl.setStyle(TableStyle([
+        ('VALIGN',      (0,0),(-1,-1),'TOP'),
+        ('TOPPADDING',  (0,0),(-1,-1),0),
+        ('BOTTOMPADDING',(0,0),(-1,-1),0),
+        ('LEFTPADDING', (0,0),(-1,-1),0),
+        ('RIGHTPADDING',(0,0),(-1,-1),0),
+        ('LINEAFTER',   (0,0),(0,-1),0.4,_BORDER),
+        ('LEFTPADDING', (1,0),(1,-1),8),
+    ]))
+    story.append(top_tbl)
 
     # ── ETİKET BOYUTU ─────────────────────────────────────────────────────────
     story.append(_section('Etiket Boyutu', st))
-    vol_str  = f'{int(volume_l)} L' if volume_l == int(volume_l) else f'{volume_l} L'
-    size_idx = 0 if volume_l <= 3 else 1 if volume_l <= 50 else 2 if volume_l <= 500 else 3
-    hdr_s = ParagraphStyle('sh', fontName=_FONT_BOLD, fontSize=7, textColor=white, leading=10)
-    size_rows_data = [
-        [Paragraph(c, hdr_s) for c in ['Ambalaj Hacmi', 'Min. Etiket Boyutu', 'Min. Piktogram Boyutu']],
-        ['≤ 3 L',      '52 × 74 mm',   '10 × 10 mm'],
-        ['3 – 50 L',   '74 × 105 mm',  '12 × 12 mm'],
-        ['50 – 500 L', '105 × 148 mm', '16 × 16 mm'],
-        ['> 500 L',    '148 × 210 mm', '16 × 16 mm'],
-    ]
-    for i, row in enumerate(size_rows_data[1:], 0):
-        sty = st['code'] if i == size_idx else st['body']
-        size_rows_data[i+1] = [Paragraph(c, sty) for c in row]
-
-    cw = inner / 3
-    st_tbl = Table(size_rows_data, colWidths=[cw, cw, cw])
-    st_tbl.setStyle(TableStyle([
-        ('BACKGROUND',    (0,0),(-1,0),  _ACCENT),
-        ('ALIGN',         (0,0),(-1,-1), 'CENTER'),
-        ('VALIGN',        (0,0),(-1,-1), 'MIDDLE'),
-        ('TOPPADDING',    (0,0),(-1,-1), 3),
-        ('BOTTOMPADDING', (0,0),(-1,-1), 3),
-        ('ROWBACKGROUNDS',(0,1),(-1,-1), [white, _BG]),
-        ('LINEBELOW',     (0,0),(-1,-1), 0.25, _BORDER),
-        ('BACKGROUND',    (0,size_idx+1),(-1,size_idx+1), HexColor('#EAF4FB')),
-        ('LINEABOVE',     (0,size_idx+1),(-1,size_idx+1), 1.2, _ACCENT),
-        ('LINEBELOW',     (0,size_idx+1),(-1,size_idx+1), 1.2, _ACCENT),
-    ]))
-    story.append(st_tbl)
-    story.append(sp(1))
     story.append(Paragraph(
-        f'Bu ürün için seçilen boyut: <b>{w_mm:.0f} × {h_mm:.0f} mm</b> ({vol_str})',
+        f'Bu ambalaj ({vol_str}) için minimum etiket boyutu: '
+        f'<b>{w_mm:.0f} × {h_mm:.0f} mm</b> · '
+        f'Minimum piktogram boyutu: <b>{pic_min_mm} × {pic_min_mm} mm</b>',
         st['body']))
+    story.append(sp(0.5))
+    story.append(Paragraph(
+        'Not: Bu boyut CLP Tüzüğü Ek-I §1.2.1 kapsamında belirlenen minimum değerdir. '
+        'Etiket bu ölçüden küçük olamaz, daha büyük olabilir.',
+        st['note']))
 
     # ── PİKTOGRAMLAR ──────────────────────────────────────────────────────────
     story.append(_section('GHS Piktogramları', st))
@@ -274,56 +277,34 @@ def generate_label_guide_pdf(data: dict) -> bytes:
     story.append(_section(f'Önlem İfadeleri — {len(p_rows)} kod', st))
     story.append(_code_tbl(p_rows, 28*mm, inner, st))
 
-    # ── TEDARİKÇİ / ACİL / UFI / BİLEŞENLER ──────────────────────────────────
-    story.append(_section('Tedarikçi Bilgileri ve Diğer Zorunlu Unsurlar', st))
-
-    bottom_items = []
-
-    sup_lines = [Paragraph('<b>Tedarikçi</b>', st['h1'])]
-    for k in ['name','address','phone']:
-        if supplier.get(k):
-            sup_lines.append(_p(supplier[k], st['body']))
-    bottom_items.append(sup_lines)
-
-    acil_lines = [
-        Paragraph('<b>Acil Telefon</b>', st['h1']),
-        Paragraph('114 — Ulusal Zehir Danışma', st['body']),
-    ]
-    if supplier.get('phone'):
-        acil_lines.append(_p(f'Firma: {supplier["phone"]}', st['body']))
-    bottom_items.append(acil_lines)
-
-    ufi_lines = [Paragraph('<b>UFI Kodu</b>', st['h1'])]
-    ufi_lines.append(_p(ufi, st['code']) if ufi else Paragraph('—', st['body']))
-    bottom_items.append(ufi_lines)
-
+    # ── UFI + TEHLİKELİ BİLEŞENLER ───────────────────────────────────────────
     hazardous = [c for c in components if c.get('hCodes') or c.get('h_codes')]
-    comp_lines = [Paragraph('<b>Tehlikeli Bileşenler</b>', st['h1'])]
-    if hazardous:
-        for c in hazardous[:5]:
-            name = c.get('name','')
-            cas  = c.get('cas') or c.get('cas_no','')
-            cmax = c.get('concMax','')
-            conc = f' <%{cmax}' if cmax else ''
-            comp_lines.append(_p(f'{name} (CAS {cas}){conc}'.strip(), st['small']))
-        if len(hazardous) > 5:
-            comp_lines.append(Paragraph(f'... +{len(hazardous)-5} bileşen', st['small']))
-    else:
-        comp_lines.append(Paragraph('—', st['body']))
-    bottom_items.append(comp_lines)
 
-    n = len(bottom_items)
-    bot_tbl = Table([bottom_items], colWidths=[inner/n]*n)
-    bot_tbl.setStyle(TableStyle([
-        ('VALIGN',       (0,0),(-1,-1),'TOP'),
-        ('TOPPADDING',   (0,0),(-1,-1),0),
-        ('BOTTOMPADDING',(0,0),(-1,-1),0),
-        ('LEFTPADDING',  (0,0),(-1,-1),0),
-        ('RIGHTPADDING', (0,0),(-1,-1),0),
-        ('LINEAFTER',    (0,0),(-2,-1),0.4,_BORDER),
-        ('LEFTPADDING',  (1,0),(-1,-1),6),
-    ]))
-    story.append(bot_tbl)
+    if ufi or hazardous:
+        story.append(_section('Diğer Zorunlu Unsurlar', st))
+        extra_items = []
+
+        if ufi:
+            extra_items.append([
+                Paragraph('<b>UFI Kodu</b>', st['h1']),
+                _p(ufi, st['code']),
+            ])
+
+        if hazardous:
+            comp_rows = []
+            for c in hazardous[:6]:
+                name = c.get('name','')
+                cas  = c.get('cas') or c.get('cas_no','')
+                cmax = c.get('concMax','')
+                conc = f' <%{cmax}' if cmax else ''
+                comp_rows.append(_p(f'{name} (CAS {cas}){conc}'.strip(), st['small']))
+            if len(hazardous) > 6:
+                comp_rows.append(Paragraph(f'... +{len(hazardous)-6} bileşen daha', st['small']))
+            extra_items.append([Paragraph('<b>Tehlikeli Bileşenler</b>', st['h1'])] + comp_rows)
+
+        for item in extra_items:
+            story.append(KeepTogether(item))
+            story.append(sp(1))
 
     # ── MEVZUAT BİLGİ NOTU ────────────────────────────────────────────────────
     story.append(sp(3))

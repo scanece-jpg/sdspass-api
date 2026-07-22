@@ -199,6 +199,7 @@ def get_incompatibilities(cas: str) -> Dict:
     return {
         **cache_entry,
         'source': 'pubchem' if (reactive_group or reactivity_text) else 'none',
+        'unmatched_group': reactive_group if (reactive_group and reactive_group not in _GROUP_INCOMPAT_TR) else None,
     }
 
 

@@ -233,8 +233,7 @@ def generate_label_guide_pdf(data: dict) -> bytes:
         f'Bu urun UYARI gerektirir. Etiket uzerine buyuk, kalin ve {renk_adi} ({renk_kodu}) renkte yazilmalidir.'
     )
     story.append(Paragraph(
-        f'<font color="{sig_color_hex}"><b>{signal_txt}</b></font>  '
-        f'<font color="{sig_color_hex}">{renk_kodu}</font>',
+        f'<font color="{sig_color_hex}"><b>{signal_txt}</b></font>',
         ParagraphStyle('sig', fontName=_FONT_BOLD, fontSize=16, leading=20, alignment=TA_CENTER,
                        textColor=signal_col)))
     story.append(sp(0.8))
@@ -297,13 +296,13 @@ def generate_label_guide_pdf(data: dict) -> bytes:
     # ── OKUNABİLİRLİK GEREKSİNİMLERİ ────────────────────────────────────────
     story.append(_section('Okunabilirlik ve Görünürlük Gereksinimleri', st))
     okun_rows = [
-        ('Okunabilirlik', 'Tum yazilarciplak gozle rahatca okunabilmeli, minimum 6 punto olmalidir. '
-                          'Koyu yazi acik zemin uzerinde olmali, kontrast yuksek tutulmalidir.'),
-        ('Dayaniklilik',  'Yazilar ve piktogramlar normal kullanim, tasima ve saklama kosullarinda '
-                          'silinmez ve solmaz olmalidir. Etiket ambalaja saglamca yapismali, '
-                          'kolayca sokulememeli ve kivrilmamalidir.'),
-        ('Dil / Zemin',   'Turkiye pazarinda etiket Turkce olmalidir. Piktogramlar beyaz zemin uzerinde, '
-                          'kirmizi cerceve (#CC0000) ile baskiyi net sekilde gorunur olmalidir.'),
+        ('Okunabilirlik', f'Min. 6 punto, cıplak gozle rahatca okunabilmeli. '
+                          f'Koyu yazi + acik zemin (yuksek kontrast). '
+                          f'Sinyal kelimesi: {renk_kodu} renk kodu.'),
+        ('Dayaniklilik',  'Yazilar ve piktogramlar normal kullanim, tasima, saklama kosullarinda '
+                          'silinmez ve solmaz olmali. Etiket ambalaja saglamca yapismali.'),
+        ('Dil / Zemin',   'Turkiye pazarinda Turkce zorunlu. Piktogramlar beyaz zemin, '
+                          'kirmizi cerceve (#CC0000) ile net baskilmali.'),
     ]
     ok_tbl = Table(okun_rows, colWidths=[30*mm, inner - 30*mm])
     ok_tbl.setStyle(TableStyle([

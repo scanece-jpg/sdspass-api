@@ -127,18 +127,77 @@ def _divider(color=None):
                       color=color or HexColor('#CCCCCC'), spaceAfter=1.5*mm, spaceBefore=1.5*mm)
 
 
-# ── Sayfa kenarlığı çizen canvas callback ─────────────────────────────────────
+# ── Ölçü oku çizici ──────────────────────────────────────────────────────────
 
-def _make_border_canvas(w_pt, h_pt):
-    """Her sayfaya ince kırmızı kenarlık çizen onBuild callback üretir."""
-    def _draw_border(canvas, doc):
+def _draw_arrow(canvas, x1, y1, x2, y2, arrow_size=3):
+    """x1,y1 → x2,y2 yönünde ok çiz (her iki uçta ok başı)."""
+    import math
+    canvas.line(x1, y1, x2, y2)
+    for (ax, ay, bx, by) in [(x1, y1, x2, y2), (x2, y2, x1, y1)]:
+        angle = math.atan2(by - ay, bx - ax)
+        for side in (+0.4, -0.4):
+            ex = ax + arrow_size * math.cos(angle + math.pi + side)
+            ey = ay + arrow_size * math.sin(angle + math.pi + side)
+            canvas.line(ax, ay, ex, ey)
+
+
+# ── Sayfa kenarlığı + ölçü notasyonu çizen canvas callback ───────────────────
+
+def _make_page_callback(lbl_x, lbl_y, w_pt, h_pt, w_mm, h_mm):
+    """
+    Her sayfaya:
+      - Etiket etrafına kırmızı kenarlık
+      - Alt: yatay ölçü oku + "XX mm" yazısı
+      - Sağ: dikey ölçü oku + "XX mm" yazısı
+    çizer.
+    lbl_x, lbl_y: etiketin sol-alt köşesi (pt cinsinden sayfa koordinatı)
+    """
+    ANN   = 10 * mm   # ölçü çizgisi mesafesi
+    TICK  = 2.5 * mm  # referans çizgisi uzunluğu
+    COL   = HexColor('#444444')
+    ARROW = 4
+
+    def _draw(canvas, doc):
         canvas.saveState()
+
+        # Etiket kenarlığı
         canvas.setStrokeColor(_RED)
         canvas.setLineWidth(1.2)
-        margin = 1.5 * mm
-        canvas.rect(margin, margin, w_pt - 2 * margin, h_pt - 2 * margin)
+        canvas.rect(lbl_x, lbl_y, w_pt, h_pt)
+
+        # Ölçü çizgileri rengi
+        canvas.setStrokeColor(COL)
+        canvas.setFillColor(COL)
+        canvas.setLineWidth(0.5)
+
+        # ── Genişlik oku (altta) ───────────────────────────────────────────
+        ay = lbl_y - ANN
+        # Sol ve sağ referans çizgileri
+        canvas.line(lbl_x,        lbl_y - TICK * 0.3, lbl_x,        lbl_y - ANN - TICK * 0.5)
+        canvas.line(lbl_x + w_pt, lbl_y - TICK * 0.3, lbl_x + w_pt, lbl_y - ANN - TICK * 0.5)
+        # Ok
+        _draw_arrow(canvas, lbl_x + 1, ay, lbl_x + w_pt - 1, ay, ARROW)
+        # Yazı
+        canvas.setFont('Helvetica', 6.5)
+        canvas.drawCentredString(lbl_x + w_pt / 2, ay - 4, f'{w_mm:.0f} mm')
+
+        # ── Yükseklik oku (sağda) ─────────────────────────────────────────
+        ax = lbl_x + w_pt + ANN
+        # Alt ve üst referans çizgileri
+        canvas.line(lbl_x + w_pt + TICK * 0.3, lbl_y,        ax + TICK * 0.5, lbl_y)
+        canvas.line(lbl_x + w_pt + TICK * 0.3, lbl_y + h_pt, ax + TICK * 0.5, lbl_y + h_pt)
+        # Ok
+        _draw_arrow(canvas, ax, lbl_y + 1, ax, lbl_y + h_pt - 1, ARROW)
+        # Yazı — dikey
+        canvas.saveState()
+        canvas.translate(ax + 5, lbl_y + h_pt / 2)
+        canvas.rotate(90)
+        canvas.drawCentredString(0, 0, f'{h_mm:.0f} mm')
         canvas.restoreState()
-    return _draw_border
+
+        canvas.restoreState()
+
+    return _draw
 
 
 # ── Piktogram tablosu ─────────────────────────────────────────────────────────
@@ -210,21 +269,42 @@ def generate_label_pdf(data: dict) -> bytes:
 
     styles  = _build_styles(font_base)
     buf     = io.BytesIO()
-    w_pt    = w_mm * mm
-    h_pt    = h_mm * mm
+
+    # Etiket boyutları
+    w_pt = w_mm * mm
+    h_pt = h_mm * mm
+
+    # Ölçü notasyonu için sayfa etrafına ekstra boşluk
+    ANN_B = 18 * mm   # alt (genişlik oku)
+    ANN_R = 18 * mm   # sağ (yükseklik oku)
+    ANN_T = 6  * mm   # üst boşluk
+    ANN_L = 6  * mm   # sol boşluk
+
+    page_w = w_pt + ANN_L + ANN_R
+    page_h = h_pt + ANN_B + ANN_T
+
+    # Etiket sol-alt köşesi sayfa koordinatında
+    lbl_x = ANN_L
+    lbl_y = ANN_B
+
     margin  = 3.5 * mm
     inner_w = w_pt - 2 * margin
 
     doc = BaseDocTemplate(
         buf,
-        pagesize=(w_pt, h_pt),
-        leftMargin=margin, rightMargin=margin,
-        topMargin=margin,  bottomMargin=margin,
+        pagesize=(page_w, page_h),
+        leftMargin=lbl_x + margin,
+        rightMargin=ANN_R + margin,
+        topMargin=ANN_T + margin,
+        bottomMargin=lbl_y + margin,
     )
-    frame = Frame(margin, margin, inner_w, h_pt - 2 * margin,
+    frame = Frame(lbl_x + margin, lbl_y + margin,
+                  inner_w, h_pt - 2 * margin,
                   leftPadding=0, rightPadding=0, topPadding=0, bottomPadding=0)
-    doc.addPageTemplates([PageTemplate(id='label', frames=[frame],
-                                       onPage=_make_border_canvas(w_pt, h_pt))])
+    doc.addPageTemplates([PageTemplate(
+        id='label', frames=[frame],
+        onPage=_make_page_callback(lbl_x, lbl_y, w_pt, h_pt, w_mm, h_mm),
+    )])
 
     story = []
     sp    = lambda n=1: Spacer(1, n * mm)

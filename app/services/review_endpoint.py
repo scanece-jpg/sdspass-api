@@ -604,11 +604,23 @@ async def sds_review(data: dict = Body(...)):
         summary = {"error": 0, "warning": 0, "info": 0}
 
         # ── 2. SDS verisi — PDF üret, Claude native PDF okusun ─────────────────
-        import io, base64
+        import io, base64, asyncio as _asyncio
         from app.services.pdf_sds_service import generate_sds_pdf
         _pdf_bytes  = None
         _pdf_b64    = None
         sds_text    = ""   # araçlar + response için metin yedek
+
+        # CAMEO async pre-fetch
+        try:
+            from app.services.cameo_service import get_mixture_incompatibilities as _get_mi
+            _loop = _asyncio.get_event_loop()
+            sds_for_validator['_cameo_incompat'] = await _asyncio.wait_for(
+                _loop.run_in_executor(None, _get_mi, data.get('components', [])),
+                timeout=4.0,
+            )
+        except Exception:
+            sds_for_validator['_cameo_incompat'] = None
+
         try:
             _pdf_bytes = generate_sds_pdf(sds_for_validator)
             _pdf_b64   = base64.b64encode(_pdf_bytes).decode("ascii")

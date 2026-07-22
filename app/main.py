@@ -965,6 +965,18 @@ async def generate_pdf(data: dict = Body(...)):
         # Validator devre dışı
         _val_issues: list = []
 
+        # CAMEO async pre-fetch — event loop bloke olmadan, timeout ile
+        try:
+            import asyncio as _asyncio
+            from app.services.cameo_service import get_mixture_incompatibilities as _get_mi
+            _loop = _asyncio.get_event_loop()
+            sds_data['_cameo_incompat'] = await _asyncio.wait_for(
+                _loop.run_in_executor(None, _get_mi, components),
+                timeout=4.0,
+            )
+        except Exception:
+            sds_data['_cameo_incompat'] = None  # None → pdf_sds_service senkron fallback dener
+
         pdf_bytes = generate_sds_pdf(sds_data, lang=lang)
 
         _tr_map = str.maketrans('ıİğĞüÜşŞçÇöÖ', 'iIgGuUsScCoO')

@@ -35,10 +35,12 @@ def _load_disk_cache() -> dict:
 def _save_disk_cache(cache: dict) -> None:
     try:
         os.makedirs(os.path.dirname(_CACHE_PATH), exist_ok=True)
-        with open(_CACHE_PATH, 'w', encoding='utf-8') as f:
+        tmp = _CACHE_PATH + '.tmp'
+        with open(tmp, 'w', encoding='utf-8') as f:
             json.dump(cache, f, ensure_ascii=False, indent=2)
+        os.replace(tmp, _CACHE_PATH)  # atomic — yarım yazma riski yok
     except Exception:
-        pass  # disk yazma başarısız olursa sessizce devam et
+        pass
 
 _disk_cache: dict = _load_disk_cache()
 
@@ -137,13 +139,19 @@ def get_incompatibilities(cas: str) -> Dict:
         return {**entry, 'source': 'cache'}
 
     # 2. PubChem sorgusu
+    _empty = {'reactive_group': '', 'incompat_tr': [], 'reactivity_text': ''}
+
     cid = _get_cid(cas)
     if not cid:
-        return {'reactive_group': '', 'incompat_tr': [], 'reactivity_text': '', 'source': 'none'}
+        _disk_cache[cas] = _empty
+        _save_disk_cache(_disk_cache)
+        return {**_empty, 'source': 'none'}
 
     data = _get_stability_section(cid)
     if not data:
-        return {'reactive_group': '', 'incompat_tr': [], 'reactivity_text': '', 'source': 'none'}
+        _disk_cache[cas] = _empty
+        _save_disk_cache(_disk_cache)
+        return {**_empty, 'source': 'none'}
 
     texts = _extract_strings(data)
 

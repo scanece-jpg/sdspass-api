@@ -1877,12 +1877,19 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         'Uygunsuz depolama koşulları' if lang=='TR' else 'Inappropriate storage conditions'
     )
 
-    # ── 10.5 Bağdaşmayan maddeler — PubChem/CAMEO dinamik sorgu ────────────
-    try:
-        from app.services.cameo_service import get_mixture_incompatibilities as _get_incompat
-        _api_items = _get_incompat(components)
-    except Exception:
-        _api_items = []
+    # ── 10.5 Bağdaşmayan maddeler ────────────────────────────────────────────
+    # pre-fetch varsa (main.py/review_endpoint'in async handler'ında önceden çekildi):
+    #   None  → fetch başarısız/timeout → senkron fallback dene
+    #   list  → kullan (boş liste bile olsa gerçek sonuç, tekrar sorgu yapma)
+    _pre = sds_data.get('_cameo_incompat')
+    if _pre is not None:
+        _api_items = _pre
+    else:
+        try:
+            from app.services.cameo_service import get_mixture_incompatibilities as _get_incompat
+            _api_items = _get_incompat(components)
+        except Exception:
+            _api_items = []
     incompat_set = set(_api_items)
 
     if is_flammable:

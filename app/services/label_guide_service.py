@@ -225,32 +225,17 @@ def generate_label_guide_pdf(data: dict) -> bytes:
     # ── SİNYAL KELİMESİ ───────────────────────────────────────────────────────
     story.append(_section('Sinyal Kelimesi', st))
     sig_color_hex = '#CC0000' if is_danger else '#CC6600'
+    sig_aciklama  = (
+        'Bu ürün TEHLİKELİDİR. Etiketin üzerine büyük, kalın ve kırmızı renkte yazılmalıdır.'
+        if is_danger else
+        'Bu ürün UYARI gerektirir. Etiketin üzerine büyük, kalın ve turuncu renkte yazılmalıdır.'
+    )
     story.append(Paragraph(
         f'<font color="{sig_color_hex}"><b>{signal_txt}</b></font>',
-        ParagraphStyle('sig', fontName=_FONT_BOLD, fontSize=18, leading=22, alignment=TA_CENTER,
+        ParagraphStyle('sig', fontName=_FONT_BOLD, fontSize=20, leading=24, alignment=TA_CENTER,
                        textColor=signal_col)))
-    story.append(sp(1))
-
-    # Renk açıklaması tablosu
-    sig_info = Table([
-        [Paragraph('<b>TEHLİKE</b>', ParagraphStyle('sd', fontName=_FONT_BOLD, fontSize=8,
-                   textColor=_RED, leading=11)),
-         Paragraph('Kırmızı (#CC0000) · Daha yüksek tehlike kategorileri için kullanılır', st['body'])],
-        [Paragraph('<b>UYARI</b>', ParagraphStyle('sw', fontName=_FONT_BOLD, fontSize=8,
-                   textColor=_ORANGE, leading=11)),
-         Paragraph('Turuncu/Amber (#CC6600) · Daha düşük tehlike kategorileri için kullanılır', st['body'])],
-    ], colWidths=[30*mm, inner - 30*mm])
-    sig_info.setStyle(TableStyle([
-        ('VALIGN',       (0,0),(-1,-1),'MIDDLE'),
-        ('TOPPADDING',   (0,0),(-1,-1),3),
-        ('BOTTOMPADDING',(0,0),(-1,-1),3),
-        ('LEFTPADDING',  (0,0),(-1,-1),4),
-        ('RIGHTPADDING', (0,0),(-1,-1),4),
-        ('ROWBACKGROUNDS',(0,0),(-1,-1),[HexColor('#FFF5F5'), HexColor('#FFF9F0')]),
-        ('LINEBELOW',    (0,0),(-1,-1),0.25,_BORDER),
-        ('BOX',          (0,0),(-1,-1),0.4,_BORDER),
-    ]))
-    story.append(sig_info)
+    story.append(sp(0.8))
+    story.append(Paragraph(sig_aciklama, st['note']))
 
     # ── TEHLİKE İFADELERİ (H) ─────────────────────────────────────────────────
     h_rows = []
@@ -305,6 +290,37 @@ def generate_label_guide_pdf(data: dict) -> bytes:
         for item in extra_items:
             story.append(KeepTogether(item))
             story.append(sp(1))
+
+    # ── OKUNABİLİRLİK GEREKSİNİMLERİ ────────────────────────────────────────
+    story.append(_section('Okunabilirlik ve Görünürlük Gereksinimleri', st))
+    okun_rows = [
+        ('Yazı boyutu',    'Tüm yazılar çıplak gözle kolayca okunabilecek büyüklükte olmalıdır. '
+                           'Küçük etiketlerde bile minimum 6 punto önerilir.'),
+        ('Renk kontrastı', 'Yazılar arka plandan net biçimde ayrılmalıdır. '
+                           'Koyu yazı açık zemin üzerinde ya da tersi tercih edilmelidir.'),
+        ('Silinmezlik',    'Yazılar ve piktogramlar normal kullanım, taşıma ve saklama koşullarında '
+                           'silinmez ve solmaz olmalıdır.'),
+        ('Yapışkanlık',    'Etiket ambalaja sağlam yapışmalı, kolayca sökülmemeli ve kıvrılmamalıdır.'),
+        ('Dil',            'Türkiye\'de piyasaya sürülen ürünlerde etiket Türkçe olmalıdır.'),
+        ('Zemin rengi',    'Piktogramların beyaz zemini ve kırmızı çerçevesi açıkça görünür olmalıdır. '
+                           'Etiket zemini piktogramı gölgelememeli veya örtmemelidir.'),
+    ]
+    ok_tbl = Table(okun_rows, colWidths=[38*mm, inner - 38*mm])
+    ok_tbl.setStyle(TableStyle([
+        ('VALIGN',        (0,0),(-1,-1),'TOP'),
+        ('TOPPADDING',    (0,0),(-1,-1),3),
+        ('BOTTOMPADDING', (0,0),(-1,-1),3),
+        ('LEFTPADDING',   (0,0),(-1,-1),4),
+        ('RIGHTPADDING',  (0,0),(-1,-1),4),
+        ('FONTNAME',      (0,0),(0,-1), _FONT_BOLD),
+        ('FONTSIZE',      (0,0),(-1,-1), 7.5),
+        ('TEXTCOLOR',     (0,0),(0,-1), _ACCENT),
+        ('TEXTCOLOR',     (1,0),(1,-1), _GRAY),
+        ('ROWBACKGROUNDS',(0,0),(-1,-1),[white, _BG]),
+        ('LINEBELOW',     (0,0),(-1,-1),0.25,_BORDER),
+    ]))
+    story.append(ok_tbl)
+    story.append(sp(2))
 
     # ── MEVZUAT BİLGİ NOTU ────────────────────────────────────────────────────
     story.append(sp(3))

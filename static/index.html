@@ -4151,12 +4151,17 @@ function openLabelModal() {
         value="${sup.ufi || ''}"
         style="width:100%;box-sizing:border-box;padding:7px 10px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:12px;font-family:var(--mono);margin-bottom:16px">
 
-      <div style="display:flex;gap:8px">
-        <button onclick="generateLabel()" style="flex:1;padding:9px;border-radius:6px;border:none;background:#276749;color:#fff;font-size:12px;font-weight:700;cursor:pointer">
-          ⬇️ PDF İndir
-        </button>
+      <div style="display:flex;gap:8px;flex-direction:column">
+        <div style="display:flex;gap:8px">
+          <button onclick="generateLabel()" style="flex:1;padding:9px;border-radius:6px;border:none;background:#276749;color:#fff;font-size:12px;font-weight:700;cursor:pointer">
+            ⬇️ Etiket PDF
+          </button>
+          <button onclick="generateLabelGuide()" style="flex:1;padding:9px;border-radius:6px;border:none;background:#1A5276;color:#fff;font-size:12px;font-weight:700;cursor:pointer">
+            📋 Teknik Rehber Kartı
+          </button>
+        </div>
         <button onclick="document.getElementById('labelModal').remove()"
-          style="padding:9px 14px;border-radius:6px;border:1px solid var(--border2);background:none;color:var(--text3);font-size:11px;cursor:pointer">
+          style="padding:7px 14px;border-radius:6px;border:1px solid var(--border2);background:none;color:var(--text3);font-size:11px;cursor:pointer">
           İptal
         </button>
       </div>
@@ -4226,6 +4231,66 @@ async function generateLabel() {
     alert('Etiket hatası: ' + e.message);
   } finally {
     if (btn) { btn.textContent = '⬇️ PDF İndir'; btn.disabled = false; }
+  }
+}
+
+async function generateLabelGuide() {
+  const volumeEl = document.getElementById('lbl_volume');
+  const supName  = document.getElementById('lbl_sup_name')?.value.trim();
+  const supAddr  = document.getElementById('lbl_sup_addr')?.value.trim();
+  const supPhone = document.getElementById('lbl_sup_phone')?.value.trim();
+  const ufi      = document.getElementById('lbl_ufi')?.value.trim();
+  const volume   = parseFloat(volumeEl?.value);
+
+  if (!volume || volume <= 0) { alert('Ambalaj hacmi girilmedi.'); return; }
+  if (!supName) { alert('Firma adı zorunludur.'); return; }
+
+  const state   = _lastCalcState;
+  const product = {
+    name:  document.getElementById('pname')?.value || '',
+    form:  document.getElementById('pform')?.value || 'liquid',
+    usage: document.getElementById('pusage')?.value || 'industrial',
+  };
+
+  const payload = {
+    lang:       document.getElementById('lang_select')?.value || 'TR',
+    product,
+    components: getComps(),
+    clp: {
+      h_codes:     state.allH            || [],
+      signal_word: state.combinedSignal  || '',
+      p_codes:     state.pcodes?.label   || state.pcodes?.p_codes || [],
+    },
+    supplier: { name: supName, address: supAddr, phone: supPhone },
+    volume_l:  volume,
+    ufi,
+    euh: state.euh || {},
+  };
+
+  const btn = document.querySelector('#labelModal button[onclick="generateLabelGuide()"]');
+  if (btn) { btn.textContent = '⏳ Oluşturuluyor...'; btn.disabled = true; }
+
+  try {
+    const resp = await fetch('/api/v1/label/guide', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    if (!resp.ok) {
+      const err = await resp.json().catch(() => ({}));
+      throw new Error(err.detail || `HTTP ${resp.status}`);
+    }
+    const blob = await resp.blob();
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    a.href     = url;
+    a.download = (product.name || 'etiket') + '_etiket_rehber.pdf';
+    a.click();
+    URL.revokeObjectURL(url);
+  } catch (e) {
+    alert('Rehber kartı hatası: ' + e.message);
+  } finally {
+    if (btn) { btn.textContent = '📋 Teknik Rehber Kartı'; btn.disabled = false; }
   }
 }
 

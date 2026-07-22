@@ -124,7 +124,7 @@ def _build_styles(font_base: float):
 
 def _divider(color=None):
     return HRFlowable(width='100%', thickness=0.5,
-                      color=color or HexColor('#CCCCCC'), spaceAfter=1.5*mm, spaceBefore=1.5*mm)
+                      color=color or HexColor('#CCCCCC'), spaceAfter=0.8*mm, spaceBefore=0.8*mm)
 
 
 # ── Ölçü oku çizici ──────────────────────────────────────────────────────────
@@ -262,49 +262,21 @@ def generate_label_pdf(data: dict) -> bytes:
     else:
         signal_txt = 'DANGER'  if is_danger else 'WARNING'
 
-    w_mm, h_mm, pic_min_mm = _label_size(volume_l)
+    w_mm, h_mm_min, pic_min_mm = _label_size(volume_l)
     # Görsel kalite için min'den büyük piktogram — sayfanın %20'si max
     pic_mm    = max(pic_min_mm, min(w_mm * 0.18, 22))
-    font_base = max(5.5, min(8.5, h_mm / 14))
+    font_base = max(5.5, min(7.5, h_mm_min / 14))
 
     styles  = _build_styles(font_base)
-    buf     = io.BytesIO()
-
-    # Etiket boyutları
-    w_pt = w_mm * mm
-    h_pt = h_mm * mm
-
-    # Ölçü notasyonu için sayfa etrafına ekstra boşluk
-    ANN_B = 18 * mm   # alt (genişlik oku)
-    ANN_R = 18 * mm   # sağ (yükseklik oku)
-    ANN_T = 6  * mm   # üst boşluk
-    ANN_L = 6  * mm   # sol boşluk
-
-    page_w = w_pt + ANN_L + ANN_R
-    page_h = h_pt + ANN_B + ANN_T
-
-    # Etiket sol-alt köşesi sayfa koordinatında
-    lbl_x = ANN_L
-    lbl_y = ANN_B
-
     margin  = 3.5 * mm
+    w_pt    = w_mm * mm
     inner_w = w_pt - 2 * margin
 
-    doc = BaseDocTemplate(
-        buf,
-        pagesize=(page_w, page_h),
-        leftMargin=lbl_x + margin,
-        rightMargin=ANN_R + margin,
-        topMargin=ANN_T + margin,
-        bottomMargin=lbl_y + margin,
-    )
-    frame = Frame(lbl_x + margin, lbl_y + margin,
-                  inner_w, h_pt - 2 * margin,
-                  leftPadding=0, rightPadding=0, topPadding=0, bottomPadding=0)
-    doc.addPageTemplates([PageTemplate(
-        id='label', frames=[frame],
-        onPage=_make_page_callback(lbl_x, lbl_y, w_pt, h_pt, w_mm, h_mm),
-    )])
+    # Ölçü notasyonu boşlukları
+    ANN_B = 18 * mm
+    ANN_R = 18 * mm
+    ANN_T = 6  * mm
+    ANN_L = 6  * mm
 
     story = []
     sp    = lambda n=1: Spacer(1, n * mm)
@@ -460,5 +432,43 @@ def generate_label_pdf(data: dict) -> bytes:
                 line += f' {conc_str}'
             story.append(_para(line, styles['comp']))
 
+    # ── İçerik yüksekliği ölç; gerekirse h_mm büyüt (CLP min'i koru) ────────────
+    # Her flowable'ın wrap() ile gerçek yüksekliğini hesapla
+    _content_h_pt = 0.0
+    for _item in story:
+        try:
+            _w, _h = _item.wrap(inner_w, 9999 * mm)
+            _content_h_pt += _h
+        except Exception:
+            pass
+
+    # İçeriğe göre yükseklik belirle (CLP minimumunun altına inme)
+    _min_h_pt  = h_mm_min * mm
+    _needed_pt = _content_h_pt + 2 * margin + 4 * mm  # küçük pay
+    h_pt = max(_min_h_pt, _needed_pt)
+    h_mm = h_pt / mm
+
+    # Gerçek PDF'i üret
+    buf    = io.BytesIO()
+    page_w = w_pt + ANN_L + ANN_R
+    page_h = h_pt + ANN_B + ANN_T
+    lbl_x  = ANN_L
+    lbl_y  = ANN_B
+
+    doc = BaseDocTemplate(
+        buf,
+        pagesize=(page_w, page_h),
+        leftMargin=lbl_x + margin,
+        rightMargin=ANN_R + margin,
+        topMargin=ANN_T + margin,
+        bottomMargin=lbl_y + margin,
+    )
+    frame = Frame(lbl_x + margin, lbl_y + margin,
+                  inner_w, h_pt - 2 * margin,
+                  leftPadding=0, rightPadding=0, topPadding=0, bottomPadding=0)
+    doc.addPageTemplates([PageTemplate(
+        id='label', frames=[frame],
+        onPage=_make_page_callback(lbl_x, lbl_y, w_pt, h_pt, w_mm, h_mm),
+    )])
     doc.build(story)
     return buf.getvalue()

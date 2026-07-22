@@ -2226,6 +2226,24 @@ async def generate_label(data: dict = Body(...)):
         raise HTTPException(status_code=500, detail=f'Etiket üretim hatası: {e}')
 
 
+@app.post("/api/v1/label/guide", response_class=Response)
+async def generate_label_guide(data: dict = Body(...)):
+    """Etiket Teknik Rehber Kartı PDF üret."""
+    from app.services.label_guide_service import generate_label_guide_pdf
+    try:
+        pdf_bytes = generate_label_guide_pdf(data)
+        product_name = data.get('product', {}).get('name', 'etiket')
+        safe_name = ''.join(c for c in product_name if c.isalnum() or c in (' ', '-', '_'))[:40]
+        filename = f"{safe_name}_etiket_rehber.pdf"
+        return Response(
+            content=pdf_bytes,
+            media_type='application/pdf',
+            headers={'Content-Disposition': f'attachment; filename="{filename}"'},
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f'Rehber kartı üretim hatası: {e}')
+
+
 # ─────────────────────────────────────────────────────────────────────────────
 # Tedarikçi SDS Parse — PDF'den bileşen verisi çıkar
 # ─────────────────────────────────────────────────────────────────────────────

@@ -225,14 +225,17 @@ def generate_label_guide_pdf(data: dict) -> bytes:
     # ── SİNYAL KELİMESİ ───────────────────────────────────────────────────────
     story.append(_section('Sinyal Kelimesi', st))
     sig_color_hex = '#CC0000' if is_danger else '#CC6600'
-    sig_aciklama  = (
-        'Bu ürün TEHLİKELİDİR. Etiketin üzerine büyük, kalın ve kırmızı renkte yazılmalıdır.'
+    renk_kodu    = '#CC0000' if is_danger else '#CC6600'
+    renk_adi     = 'Kirmizi' if is_danger else 'Turuncu'
+    sig_aciklama = (
+        f'Bu urun TEHLIKELIDIR. Etiket uzerine buyuk, kalin ve {renk_adi} ({renk_kodu}) renkte yazilmalidir.'
         if is_danger else
-        'Bu ürün UYARI gerektirir. Etiketin üzerine büyük, kalın ve turuncu renkte yazılmalıdır.'
+        f'Bu urun UYARI gerektirir. Etiket uzerine buyuk, kalin ve {renk_adi} ({renk_kodu}) renkte yazilmalidir.'
     )
     story.append(Paragraph(
-        f'<font color="{sig_color_hex}"><b>{signal_txt}</b></font>',
-        ParagraphStyle('sig', fontName=_FONT_BOLD, fontSize=20, leading=24, alignment=TA_CENTER,
+        f'<font color="{sig_color_hex}"><b>{signal_txt}</b></font>  '
+        f'<font color="{sig_color_hex}">{renk_kodu}</font>',
+        ParagraphStyle('sig', fontName=_FONT_BOLD, fontSize=16, leading=20, alignment=TA_CENTER,
                        textColor=signal_col)))
     story.append(sp(0.8))
     story.append(Paragraph(sig_aciklama, st['note']))
@@ -294,18 +297,15 @@ def generate_label_guide_pdf(data: dict) -> bytes:
     # ── OKUNABİLİRLİK GEREKSİNİMLERİ ────────────────────────────────────────
     story.append(_section('Okunabilirlik ve Görünürlük Gereksinimleri', st))
     okun_rows = [
-        ('Yazı boyutu',    'Tüm yazılar çıplak gözle kolayca okunabilecek büyüklükte olmalıdır. '
-                           'Küçük etiketlerde bile minimum 6 punto önerilir.'),
-        ('Renk kontrastı', 'Yazılar arka plandan net biçimde ayrılmalıdır. '
-                           'Koyu yazı açık zemin üzerinde ya da tersi tercih edilmelidir.'),
-        ('Silinmezlik',    'Yazılar ve piktogramlar normal kullanım, taşıma ve saklama koşullarında '
-                           'silinmez ve solmaz olmalıdır.'),
-        ('Yapışkanlık',    'Etiket ambalaja sağlam yapışmalı, kolayca sökülmemeli ve kıvrılmamalıdır.'),
-        ('Dil',            'Türkiye\'de piyasaya sürülen ürünlerde etiket Türkçe olmalıdır.'),
-        ('Zemin rengi',    'Piktogramların beyaz zemini ve kırmızı çerçevesi açıkça görünür olmalıdır. '
-                           'Etiket zemini piktogramı gölgelememeli veya örtmemelidir.'),
+        ('Okunabilirlik', 'Tum yazilarciplak gozle rahatca okunabilmeli, minimum 6 punto olmalidir. '
+                          'Koyu yazi acik zemin uzerinde olmali, kontrast yuksek tutulmalidir.'),
+        ('Dayaniklilik',  'Yazilar ve piktogramlar normal kullanim, tasima ve saklama kosullarinda '
+                          'silinmez ve solmaz olmalidir. Etiket ambalaja saglamca yapismali, '
+                          'kolayca sokulememeli ve kivrilmamalidir.'),
+        ('Dil / Zemin',   'Turkiye pazarinda etiket Turkce olmalidir. Piktogramlar beyaz zemin uzerinde, '
+                          'kirmizi cerceve (#CC0000) ile baskiyi net sekilde gorunur olmalidir.'),
     ]
-    ok_tbl = Table(okun_rows, colWidths=[38*mm, inner - 38*mm])
+    ok_tbl = Table(okun_rows, colWidths=[30*mm, inner - 30*mm])
     ok_tbl.setStyle(TableStyle([
         ('VALIGN',        (0,0),(-1,-1),'TOP'),
         ('TOPPADDING',    (0,0),(-1,-1),3),
@@ -320,7 +320,7 @@ def generate_label_guide_pdf(data: dict) -> bytes:
         ('LINEBELOW',     (0,0),(-1,-1),0.25,_BORDER),
     ]))
     story.append(ok_tbl)
-    story.append(sp(2))
+    story.append(sp(1.5))
 
     # ── MEVZUAT BİLGİ NOTU ────────────────────────────────────────────────────
     story.append(sp(3))

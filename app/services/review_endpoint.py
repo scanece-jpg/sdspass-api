@@ -762,24 +762,19 @@ async def sds_review(data: dict = Body(...)):
 
         user_parts: list[dict] = []
         user_parts.extend(kb_blocks)
-        # A kaynağı: PDF varsa native document bloğu, yoksa metin yedek
-        if _pdf_b64:
-            user_parts.append({
-                "type": "document",
-                "source": {
-                    "type":       "base64",
-                    "media_type": "application/pdf",
-                    "data":       _pdf_b64,
-                },
-                "title": "SDS Belgesi (A kaynağı — tam PDF)",
-            })
-        else:
-            user_parts.append({"type": "text", "text": sds_text})
+        # A kaynağı: pdfplumber ile çıkarılan metin — tek ve güvenilir kaynak
+        # (PDF document block yerine metin kullanılıyor: verify_text_in_sds ile aynı kaynak,
+        #  hallucination riski ortadan kalkar)
+        _sds_text_block = sds_text if sds_text.strip() else _build_sds_text(sds_for_validator, h_codes, phys_props, components)
+        user_parts.append({
+            "type": "text",
+            "text": f"=== SDS BELGESİ METNİ (A kaynağı) ===\n\n{_sds_text_block}\n\n=== A KAYNAĞI SONU ===",
+        })
         user_parts.append({"type": "text", "text": issues_text})
         user_parts.append({
             "type": "text",
             "text": (
-                "Yukarıdaki SDS PDF'ini (A kaynağı) mevzuat paragraflarıyla (B) karşılaştırarak "
+                "Yukarıdaki SDS metnini (A kaynağı) mevzuat paragraflarıyla (B) karşılaştırarak "
                 "bağımsız denetim raporu yaz. Otomatik bulgular (C) ek bağlam olarak kullan.\n"
                 "Bir bulgu yazmadan önce:\n"
                 "  • Belge içeriği hakkında HER iddia için önce verify_text_in_sds çağır; çağırmadan yazmak yasaktır\n"

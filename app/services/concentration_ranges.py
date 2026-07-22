@@ -248,12 +248,12 @@ GCL: dict[str, list[tuple]] = {
     # ── AQUATIC — UI için basit eşikler; motor ecological_service kullanır ──
     # (M-faktörlü toplamsal formül motordan farklı — hardcode kalır)
 
-    # --- Su Ortamı ---
-    'aquatic acute 1':   [(0.1,'Aquatic Acute 1',  'H400')],
-    'aquatic chronic 1': [(0.1,'Aquatic Chronic 1','H410')],
-    'aquatic chronic 2': [(1.0,'Aquatic Chronic 2','H411')],
-    'aquatic chronic 3': [(10.,'Aquatic Chronic 3','H412')],
-    'aquatic chronic 4': [(10.,'Aquatic Chronic 4','H413')],
+    # --- Su Ortamı — CLP Tablo 4.1.0: taban eşik %25, _build_comp_gcl ÷M_faktör uygular ---
+    'aquatic acute 1':   [(25.,'Aquatic Acute 1',  'H400')],
+    'aquatic chronic 1': [(25.,'Aquatic Chronic 1','H410')],
+    'aquatic chronic 2': [(25.,'Aquatic Chronic 2','H411')],
+    'aquatic chronic 3': [(25.,'Aquatic Chronic 3','H412')],
+    'aquatic chronic 4': [(25.,'Aquatic Chronic 4','H413')],
 
     # --- Alevlenirlik (karışım için parlama noktası bazlı değil, yaklaşım) ---
     'flam. liq. 1': [(1.0,'Flam. Liq. 1','H224')],

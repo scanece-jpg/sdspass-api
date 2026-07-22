@@ -4198,7 +4198,7 @@ async function generateLabel() {
     clp: {
       h_codes:     state.allH            || [],
       signal_word: state.combinedSignal  || '',
-      p_codes:     state.pcodes?.label   || state.pcodes?.p_codes || [],
+      p_codes:     state.pcodes?.label?.selected || state.pcodes?.selected || state.pcodes?.p_codes || [],
     },
     supplier: { name: supName, address: supAddr, phone: supPhone },
     volume_l:  volume,
@@ -4259,7 +4259,7 @@ async function generateLabelGuide() {
     clp: {
       h_codes:     state.allH            || [],
       signal_word: state.combinedSignal  || '',
-      p_codes:     state.pcodes?.label   || state.pcodes?.p_codes || [],
+      p_codes:     state.pcodes?.label?.selected || state.pcodes?.selected || state.pcodes?.p_codes || [],
     },
     supplier: { name: supName, address: supAddr, phone: supPhone },
     volume_l:  volume,

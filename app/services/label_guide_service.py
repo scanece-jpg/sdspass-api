@@ -296,25 +296,24 @@ def generate_label_guide_pdf(data: dict) -> bytes:
     # ── OKUNABİLİRLİK GEREKSİNİMLERİ ────────────────────────────────────────
     story.append(_section('Okunabilirlik ve Görünürlük Gereksinimleri', st))
     okun_rows = [
-        ('Okunabilirlik', f'Min. 6 punto, cıplak gozle rahatca okunabilmeli. '
+        ('Okunabilirlik', f'Min. 6 punto, gozle rahatca okunabilmeli. '
                           f'Koyu yazi + acik zemin (yuksek kontrast). '
-                          f'Sinyal kelimesi: {renk_kodu} renk kodu.'),
-        ('Dayaniklilik',  'Yazilar ve piktogramlar normal kullanim, tasima, saklama kosullarinda '
-                          'silinmez ve solmaz olmali. Etiket ambalaja saglamca yapismali.'),
+                          f'Sinyal kelimesi renk kodu: {renk_kodu}.'),
+        ('Dayaniklilik',  'Yazilar ve piktogramlar normal kullanim, tasima ve saklama '
+                          'kosullarinda silinmez olmali. Etiket ambalaja saglamca yapismali.'),
         ('Dil / Zemin',   'Turkiye pazarinda Turkce zorunlu. Piktogramlar beyaz zemin, '
                           'kirmizi cerceve (#CC0000) ile net baskilmali.'),
     ]
-    ok_tbl = Table(okun_rows, colWidths=[30*mm, inner - 30*mm])
+    lbl_s = ParagraphStyle('okl', fontName=_FONT_BOLD, fontSize=7.5, textColor=_ACCENT, leading=10)
+    val_s = ParagraphStyle('okv', fontName=_FONT,      fontSize=7.5, textColor=_GRAY,  leading=10)
+    ok_data = [[Paragraph(r[0], lbl_s), Paragraph(r[1], val_s)] for r in okun_rows]
+    ok_tbl = Table(ok_data, colWidths=[30*mm, inner - 30*mm])
     ok_tbl.setStyle(TableStyle([
         ('VALIGN',        (0,0),(-1,-1),'TOP'),
         ('TOPPADDING',    (0,0),(-1,-1),3),
         ('BOTTOMPADDING', (0,0),(-1,-1),3),
         ('LEFTPADDING',   (0,0),(-1,-1),4),
         ('RIGHTPADDING',  (0,0),(-1,-1),4),
-        ('FONTNAME',      (0,0),(0,-1), _FONT_BOLD),
-        ('FONTSIZE',      (0,0),(-1,-1), 7.5),
-        ('TEXTCOLOR',     (0,0),(0,-1), _ACCENT),
-        ('TEXTCOLOR',     (1,0),(1,-1), _GRAY),
         ('ROWBACKGROUNDS',(0,0),(-1,-1),[white, _BG]),
         ('LINEBELOW',     (0,0),(-1,-1),0.25,_BORDER),
     ]))

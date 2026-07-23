@@ -1011,18 +1011,11 @@ async def generate_pdf(data: dict = Body(...)):
         _sds_for_review = _jsonable(sds_data)
         _filename = f'{safe}_GBF_{lang}_Rev{rev_no}.pdf'
 
-        try:
-            from app.services.sds_xml_service import generate_sds_xml as _gen_xml
-            _sds_xml = _gen_xml(_sds_for_review)
-        except Exception:
-            _sds_xml = None
-
         from fastapi.responses import JSONResponse as _JR
         return _JR({
             'pdf':      _b64.b64encode(pdf_bytes).decode(),
             'filename': _filename,
             'sds_data': _sds_for_review,
-            'sds_xml':  _sds_xml,
             'validation': {
                 'error':   _val_errors,
                 'warning': _val_warnings,

@@ -566,7 +566,6 @@ async def sds_review(data: dict = Body(...)):
         phys_props = data.get("phys_props", {})
         components = data.get("components", [])
 
-        sds_xml          = data.get("sds_xml") or None
         full_sds_data    = data.get("full_sds_data") or None
         sds_data_simple  = data.get("sds_data", {})
         _product_dict    = (full_sds_data or sds_data_simple).get("product", {})
@@ -637,8 +636,7 @@ async def sds_review(data: dict = Body(...)):
             except Exception:
                 sds_text = _build_sds_text(sds_for_validator, h_codes, phys_props, components)
         except Exception as _e:
-            # PDF üretilemezse metin özetine düş
-            sds_text = sds_xml or _build_sds_text(sds_for_validator, h_codes, phys_props, components)
+            sds_text = _build_sds_text(sds_for_validator, h_codes, phys_props, components)
 
         # ── 3. Mevzuat bağlamı — H kodlarına ilgili kural bloklarını önceden yükle
         kb_blocks = []

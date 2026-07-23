@@ -1442,29 +1442,6 @@ async def ecological_assess(body: dict):
         raise HTTPException(status_code=400, detail=str(e))
 
 
-@app.post("/api/v1/sds/validate")
-async def sds_validate(body: dict):
-    """
-    SDS çapraz bölüm doğrulaması.
-    Input: {sds_data:{...}, h_codes:[...], phys_props:{...}, components:[...]}
-    Output: {issues:[{level,code,section,msg}], error_count, warning_count}
-    """
-    from app.services.sds_validator import validate_sds
-    h_codes    = body.get("h_codes", [])
-    phys_props = body.get("phys_props", {})
-    sds_data   = body.get("sds_data", {})
-    components = body.get("components", [])
-    issues = validate_sds(sds_data, h_codes, phys_props, components)
-    return {
-        "success": True,
-        "issues": issues,
-        "error_count":   sum(1 for i in issues if i["level"] == "error"),
-        "warning_count": sum(1 for i in issues if i["level"] == "warning"),
-        "info_count":    sum(1 for i in issues if i["level"] == "info"),
-        "passed": len(issues) == 0,
-    }
-
-
 # ── ANA HESAP ENDPOİNT'İ — tek motor, tek kaynak ────────────────────────────
 @app.post("/api/v1/sds/calculate")
 async def sds_calculate(body: dict = Body(...)):

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="tr">
 <head>
 <meta charset="UTF-8">
@@ -16,16 +16,14 @@
   --grad:linear-gradient(135deg,var(--accent),var(--accent-cyan));
 }
 *{box-sizing:border-box;margin:0;padding:0}
-body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;min-height:100vh;font-size:14px}
+body{background:var(--bg);color:var(--text);font-family:system-ui,sans-serif;height:100vh;overflow:hidden;font-size:14px}
 body::before{display:none}
 body::after{display:none}
-.app{display:grid;grid-template-columns:1fr 380px;gap:0;min-height:100vh;position:relative;z-index:1}
-.left{padding:20px;overflow-y:auto;border-right:1px solid var(--border);
+.app{display:grid;grid-template-columns:1fr 380px;gap:0;height:100vh;overflow:hidden;position:relative;z-index:1}
+.left{padding:12px 16px;overflow-y:auto;border-right:1px solid var(--border);height:100vh;
       background:radial-gradient(ellipse 80% 60% at 40% 20%,rgba(226,232,240,.025) 0%,transparent 70%)}
 .right-col{display:flex;flex-direction:column;border-left:1px solid var(--border);background:var(--bg2);overflow:hidden}
-.right{padding:16px;overflow-y:auto;flex:1;border-bottom:1px solid var(--border)}
-.ai-panel{flex:0 0 auto;height:340px}
-
+.right{padding:16px;overflow-y:auto;flex:1}
 /* ── Premium Header ──────────────────────────────────────────────────── */
 .hdr{display:flex;align-items:center;gap:14px;margin-bottom:20px;padding-bottom:16px;
      border-bottom:1px solid var(--border);position:relative}
@@ -37,85 +35,6 @@ body::after{display:none}
 .version-badge{font-size:9px;background:rgba(226,232,240,.1);color:var(--accent);
                padding:2px 8px;border-radius:10px;font-family:var(--mono);
                border:1px solid rgba(226,232,240,.15)}
-
-/* ── AI Copilot Panel ────────────────────────────────────────────────── */
-.ai-panel{display:flex;flex-direction:column;background:var(--bg);
-          position:relative;overflow:hidden}
-.ai-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;
-                  background:var(--grad);opacity:.4}
-
-.ai-head{padding:16px;border-bottom:1px solid var(--border);
-         display:flex;align-items:center;gap:10px}
-.ai-orb{width:40px;height:40px;border-radius:50%;flex-shrink:0;position:relative;
-        background:radial-gradient(circle at 35% 35%,#e2e8f0,#94a3b8);
-        box-shadow:0 0 16px rgba(226,232,240,.2)}
-.ai-orb::before{content:'';position:absolute;inset:-5px;border-radius:50%;
-                border:1px solid rgba(226,232,240,.15);
-                animation:orbRing 2.5s ease-in-out infinite}
-.ai-orb::after{content:'';position:absolute;inset:-10px;border-radius:50%;
-               border:1px solid rgba(203,213,225,.08);
-               animation:orbRing 2.5s ease-in-out infinite .5s}
-@keyframes orbRing{0%,100%{opacity:.3;transform:scale(1)}50%{opacity:.8;transform:scale(1.05)}}
-.ai-head-name{font-size:14px;font-weight:700;color:var(--text);letter-spacing:-.01em}
-.ai-head-sub{font-size:11px;color:var(--text3);display:flex;align-items:center;gap:5px;margin-top:3px}
-.ai-dot{width:6px;height:6px;border-radius:50%;background:var(--safe);
-        animation:dotBlink 2.5s ease infinite;flex-shrink:0}
-@keyframes dotBlink{0%,100%{opacity:1}50%{opacity:.3}}
-.ai-dot.thinking{background:var(--accent);animation:dotSpin .8s linear infinite}
-@keyframes dotSpin{0%{box-shadow:0 0 0 0 rgba(226,232,240,.15)}
-                   100%{box-shadow:0 0 0 6px rgba(99,102,241,0)}}
-
-.ai-msgs{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px;
-         scroll-behavior:smooth}
-.ai-msgs::-webkit-scrollbar{width:3px}
-.ai-msgs::-webkit-scrollbar-track{background:transparent}
-.ai-msgs::-webkit-scrollbar-thumb{background:var(--border2);border-radius:2px}
-
-.ai-empty{flex:1;display:flex;flex-direction:column;align-items:center;
-          justify-content:center;padding:24px;text-align:center;color:var(--text3);gap:10px}
-.ai-empty-icon{font-size:32px;opacity:.25}
-.ai-empty-text{font-size:11px;line-height:1.6}
-
-@keyframes msgIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.ai-msg{animation:msgIn .22s ease both}
-.ai-bubble{background:var(--bg3);border:1px solid var(--border);border-radius:10px 10px 10px 2px;
-           padding:10px 13px;font-size:12px;color:var(--text2);line-height:1.6}
-.ai-bubble.ok{background:rgba(52,211,153,.05);border-color:rgba(52,211,153,.2)}
-.ai-bubble.warn{background:rgba(251,146,60,.05);border-color:rgba(251,146,60,.2)}
-.ai-bubble.error{background:rgba(248,113,113,.05);border-color:rgba(248,113,113,.2)}
-.ai-bubble.info{background:rgba(96,165,250,.05);border-color:rgba(96,165,250,.15)}
-.ai-msg-time{font-size:9px;color:var(--border2);margin-top:3px;padding-left:2px}
-
-.ai-user-msg{display:flex;justify-content:flex-end}
-.ai-user-bubble{background:rgba(226,232,240,.08);border:1px solid rgba(226,232,240,.2);
-                border-radius:10px 10px 2px 10px;padding:8px 12px;font-size:11px;
-                color:var(--text);line-height:1.6;max-width:90%}
-
-.ai-typing{display:flex;gap:4px;padding:6px 2px}
-.ai-typing span{width:5px;height:5px;border-radius:50%;background:var(--border2);
-                animation:typDot .8s ease-in-out infinite}
-.ai-typing span:nth-child(2){animation-delay:.15s}
-.ai-typing span:nth-child(3){animation-delay:.3s}
-@keyframes typDot{0%,100%{transform:translateY(0)}40%{transform:translateY(-4px)}}
-
-.ai-chips{display:flex;flex-wrap:wrap;gap:4px;padding:8px 12px;border-top:1px solid var(--border)}
-.ai-chip{background:var(--bg3);border:1px solid var(--border2);border-radius:12px;
-         padding:4px 10px;font-size:11px;color:var(--text3);cursor:pointer;white-space:nowrap;
-         transition:all .15s}
-.ai-chip:hover{border-color:var(--accent);color:var(--accent);
-               background:rgba(226,232,240,.04)}
-
-.ai-input-area{border-top:1px solid var(--border);padding:10px;display:flex;gap:6px;
-               background:var(--bg2)}
-.ai-input{flex:1;background:var(--bg3);border:1px solid var(--border2);border-radius:8px;
-          padding:8px 12px;font-size:13px;color:var(--text);outline:none;
-          font-family:system-ui;transition:border-color .15s}
-.ai-input:focus{border-color:var(--accent)}
-.ai-input::placeholder{color:var(--text3)}
-.ai-send{background:var(--grad);border:none;border-radius:8px;width:32px;height:32px;
-         cursor:pointer;display:flex;align-items:center;justify-content:center;
-         color:#fff;font-size:13px;flex-shrink:0;transition:opacity .15s}
-.ai-send:hover{opacity:.85}
 
 /* ── Premium card & input overrides ─────────────────────────────────── */
 .product-card,.cw{border-radius:12px;transition:border-color .15s}
@@ -502,11 +421,11 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
 .v0-uzem-sub{font-size:11px;color:var(--text3);margin-top:2px}
 
 /* ── Step Progress Bar (v0 style) ────────────────────────────────────────── */
-.sp-bar{display:flex;align-items:center;margin-bottom:16px;padding:2px 0}
-.sp-item{display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer;
+.sp-bar{display:flex;align-items:center;margin-bottom:8px;padding:2px 0}
+.sp-item{display:flex;flex-direction:column;align-items:center;gap:3px;cursor:pointer;
          flex-shrink:0}
-.sp-circle{width:30px;height:30px;border-radius:6px;display:flex;align-items:center;
-           justify-content:center;font-size:12px;font-weight:700;transition:all .25s;
+.sp-circle{width:26px;height:26px;border-radius:6px;display:flex;align-items:center;
+           justify-content:center;font-size:11px;font-weight:700;transition:all .25s;
            background:var(--bg3);border:1.5px solid var(--border2);color:var(--text3);
            font-family:'JetBrains Mono',monospace}
 .sp-circle.active{background:var(--accent);color:var(--accent-fg);border-color:var(--accent);
@@ -582,7 +501,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
 .wz-slide{animation:wzSlide .2s ease both}
 .wz-slide.back{animation:wzSlideBack .2s ease both}
 
-.wz-nav{display:flex;align-items:center;gap:8px;margin-top:16px;padding-top:14px;
+.wz-nav{display:flex;align-items:center;gap:8px;margin-top:10px;padding-top:10px;
         border-top:1px solid var(--border)}
 .wz-prev{background:var(--bg3);border:1px solid var(--border2);color:var(--text2);
          border-radius:8px;padding:10px 20px;font-size:13px;cursor:pointer;
@@ -748,24 +667,26 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
     <!-- Acil Telefon -->
     <div class="v0-card danger-top">
       <div class="v0-sec-title"><span class="v0-dot danger"></span>Bölüm 1.4 — Acil Durum Telefonu</div>
-      <div class="v0-uzem-box">
-        <span class="v0-uzem-num">114</span>
-        <div>
-          <div class="v0-uzem-title">UZEM — Ulusal Zehir Danışma Merkezi</div>
-          <div class="v0-uzem-sub">7/24 · T.C. Sağlık Bakanlığı · Zorunlu</div>
+      <div style="display:flex;align-items:center;gap:10px">
+        <div class="v0-uzem-box" style="margin-bottom:0;flex:0 0 auto">
+          <span class="v0-uzem-num">114</span>
+          <div>
+            <div class="v0-uzem-title">UZEM</div>
+            <div class="v0-uzem-sub">7/24 · Zorunlu</div>
+          </div>
         </div>
-      </div>
-      <div class="v0-field">
-        <label class="v0-label">Ek Acil Telefon (Tedarikçi)</label>
-        <input class="v0-inp mono" type="text" id="supplierEmergencyTel" placeholder="+90 5xx xxx xx xx">
-      </div>
-      <div style="display:flex;gap:16px;margin-top:12px">
-        <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);cursor:pointer">
-          <input type="radio" name="telHours" value="24_7" checked id="tel24_7" style="accent-color:var(--accent)"> 7/24
-        </label>
-        <label style="display:flex;align-items:center;gap:6px;font-size:12px;color:var(--text2);cursor:pointer">
-          <input type="radio" name="telHours" value="business" id="telBusiness" style="accent-color:var(--accent)"> Mesai saatleri
-        </label>
+        <div class="v0-field" style="margin:0;flex:1">
+          <label class="v0-label">Ek Acil Telefon (Tedarikçi)</label>
+          <input class="v0-inp mono" type="text" id="supplierEmergencyTel" placeholder="+90 5xx xxx xx xx">
+          <div style="display:flex;gap:14px;margin-top:5px">
+            <label style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text3);cursor:pointer">
+              <input type="radio" name="telHours" value="24_7" checked id="tel24_7" style="accent-color:var(--accent)"> 7/24
+            </label>
+            <label style="display:flex;align-items:center;gap:5px;font-size:11px;color:var(--text3);cursor:pointer">
+              <input type="radio" name="telHours" value="business" id="telBusiness" style="accent-color:var(--accent)"> Mesai saatleri
+            </label>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -1172,48 +1093,6 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
   </div>
 </div>
 
-<!-- ═══ AI COPILOT PANEL ════════════════════════════════════════════════ -->
-<div class="ai-panel">
-  <!-- Header -->
-  <div class="ai-head">
-    <div class="ai-orb"></div>
-    <div style="flex:1;min-width:0">
-      <div class="ai-head-name">AI Asistan</div>
-      <div class="ai-head-sub">
-        <div class="ai-dot" id="aiDot"></div>
-        <span id="aiStatusText">Hazır</span>
-      </div>
-    </div>
-    <div style="font-size:9px;color:var(--border2);font-family:var(--mono)">SDSPass</div>
-  </div>
-
-  <!-- Mesajlar -->
-  <div class="ai-msgs" id="aiMsgs">
-    <div class="ai-empty" id="aiEmpty">
-      <div class="ai-empty-icon" style="font-size:11px;font-family:var(--mono);font-weight:700;opacity:.2;color:var(--accent);letter-spacing:.05em">AI</div>
-      <div class="ai-empty-text">
-        Bileşen ekleyip <strong style="color:var(--text)">Hesapla</strong>'ya basın —<br>
-        sınıflandırmanızı analiz edeceğim.
-      </div>
-    </div>
-  </div>
-
-  <!-- Hızlı sorular -->
-  <div class="ai-chips" id="aiChips" style="display:none">
-    <div class="ai-chip" onclick="aiAsk('H kodları ne anlama gelir?')">H kodları</div>
-    <div class="ai-chip" onclick="aiAsk('P kodları neden bu kadar çıktı?')">P kodları</div>
-    <div class="ai-chip" onclick="aiAsk('Taşımacılık sınıfını açıkla')">Taşımacılık</div>
-    <div class="ai-chip" onclick="aiAsk('KKE önerilerini açıkla')">KKE</div>
-    <div class="ai-chip" onclick="aiAsk('CMR maddesi ne demek?')">CMR</div>
-  </div>
-
-  <!-- Soru kutusu -->
-  <div class="ai-input-area">
-    <input class="ai-input" id="aiInput" placeholder="Soru sor..."
-           onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();aiSend()}">
-    <button class="ai-send" onclick="aiSend()" title="Gönder">↑</button>
-  </div>
-</div><!-- /ai-panel -->
 </div><!-- /right-col -->
 
 </div><!-- /app -->
@@ -1596,21 +1475,30 @@ function addComp(pf = {}) {
       <div id="comp_type_note${id}" style="display:none;padding-top:18px;font-size:10px;color:var(--accent);line-height:1.4"></div>
     </div>
     <details style="margin-top:6px">
-      <summary style="font-size:11px;color:var(--text3);cursor:pointer;user-select:none;list-style:none;display:flex;align-items:center;gap:4px">▸ ATE Değerleri / Bilinmiyor Beyanı (SEA §3.1.3.6.2.2)</summary>
+      <summary style="font-size:11px;color:var(--text3);cursor:pointer;user-select:none;list-style:none;display:flex;align-items:center;gap:4px">▸ Sucul Toksisite (EC50/LC50) — M-Faktör Hesabı</summary>
       <div style="margin-top:6px;padding:8px;background:var(--bg2);border-radius:6px;border:1px solid var(--border2)">
-        <label style="display:flex;align-items:center;gap:6px;cursor:pointer;font-size:12px;margin-bottom:6px">
-          <input type="checkbox" id="ate_unk${id}" onchange="toggleAteFields(${id})">
-          <span>Akut toksisite <b>bilinmiyor</b> — kullanışlı bilgi yok</span>
-        </label>
-        <div id="ate_fields${id}">
-          <div class="cw-row3">
-            <div><label style="font-size:11px">LD50 Oral (mg/kg)</label><input type="number" class="ate-oral-input" id="ate_oral${id}" placeholder="—" min="0" step="any" style="width:100%;padding:5px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:12px;box-sizing:border-box"></div>
-            <div><label style="font-size:11px">LD50 Dermal (mg/kg)</label><input type="number" class="ate-dermal-input" id="ate_dermal${id}" placeholder="—" min="0" step="any" style="width:100%;padding:5px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:12px;box-sizing:border-box"></div>
-            <div><label style="font-size:11px">LC50 İnhalasyon (mg/L/4h)</label><input type="number" class="ate-inhal-input" id="ate_inhal${id}" placeholder="—" min="0" step="any" style="width:100%;padding:5px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:12px;box-sizing:border-box"></div>
-          </div>
+        <div class="cw-row3">
+          <div><label style="font-size:11px">EC50 Alg (mg/L, 72h)</label><input type="number" class="ec50-algae-input" id="ec50_algae${id}" placeholder="—" min="0" step="any" style="width:100%;padding:5px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:12px;box-sizing:border-box"></div>
+          <div><label style="font-size:11px">LC50 Balık (mg/L, 96h)</label><input type="number" class="ec50-fish-input" id="ec50_fish${id}" placeholder="—" min="0" step="any" style="width:100%;padding:5px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:12px;box-sizing:border-box"></div>
+          <div><label style="font-size:11px">EC50 Daphnia (mg/L, 48h)</label><input type="number" class="ec50-daphnia-input" id="ec50_daphnia${id}" placeholder="—" min="0" step="any" style="width:100%;padding:5px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:12px;box-sizing:border-box"></div>
+        </div>
+        <div style="margin-top:4px">
+          <div><label style="font-size:11px">NOEC Kronik (mg/L)</label><input type="number" class="ec50-noec-input" id="ec50_noec${id}" placeholder="—" min="0" step="any" style="width:calc(33% - 4px);padding:5px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:12px;box-sizing:border-box"></div>
+          <div style="font-size:10px;color:var(--text3);margin-top:4px">Girilirse M-Faktör CLP Tablo 4.1.3'e göre hesaplanır. Annex VI verisi önceliklidir.</div>
         </div>
       </div>
-    </details>`;
+    </details>
+    <div style="margin-top:6px">
+      <input type="hidden" id="ate_unk${id}" value="0">
+      <input type="hidden" class="ate-oral-input"   id="ate_oral${id}"   value="">
+      <input type="hidden" class="ate-dermal-input" id="ate_dermal${id}" value="">
+      <input type="hidden" class="ate-inhal-input"  id="ate_inhal${id}"  value="">
+      <button type="button" id="ate_btn${id}" onclick="openAteModal(${id})"
+        style="font-size:11px;padding:3px 10px;border-radius:5px;border:1px solid var(--border2);background:var(--bg2);color:var(--text3);cursor:pointer">
+        ⚗️ ATE Ekle
+      </button>
+      <span id="ate_summary${id}" style="font-size:10px;color:var(--accent);margin-left:6px"></span>
+    </div>`;
   document.getElementById('comps').appendChild(div);
   if (pf.hazards) pf.hazards.forEach(h => addChip(id, h.h_class, h.h_code, h._annex_supplement));
   return id;
@@ -1638,10 +1526,63 @@ function onCompType(id) {
   }
 }
 
-function toggleAteFields(id) {
-  const unk    = document.getElementById('ate_unk' + id);
-  const fields = document.getElementById('ate_fields' + id);
-  if (fields) fields.style.display = (unk && unk.checked) ? 'none' : '';
+function toggleAteFields(id) {} // artık modal kullanılıyor
+
+let _ateCurrentId = null;
+
+function openAteModal(id) {
+  _ateCurrentId = id;
+  const unk   = document.getElementById('ate_unk'   + id)?.value === '1';
+  const oral  = document.getElementById('ate_oral'  + id)?.value || '';
+  const derm  = document.getElementById('ate_dermal'+ id)?.value || '';
+  const inhal = document.getElementById('ate_inhal' + id)?.value || '';
+
+  document.getElementById('ate_modal_unk').checked   = unk;
+  document.getElementById('ate_modal_oral').value    = oral;
+  document.getElementById('ate_modal_dermal').value  = derm;
+  document.getElementById('ate_modal_inhal').value   = inhal;
+  document.getElementById('ate_modal_fields').style.display = unk ? 'none' : '';
+
+  document.getElementById('ate-modal').style.display = 'flex';
+}
+
+function closeAteModal() {
+  document.getElementById('ate-modal').style.display = 'none';
+  _ateCurrentId = null;
+}
+
+function saveAteModal() {
+  const id    = _ateCurrentId;
+  if (!id) return;
+  const unk   = document.getElementById('ate_modal_unk').checked;
+  const oral  = document.getElementById('ate_modal_oral').value.trim();
+  const derm  = document.getElementById('ate_modal_dermal').value.trim();
+  const inhal = document.getElementById('ate_modal_inhal').value.trim();
+
+  document.getElementById('ate_unk'   + id).value = unk ? '1' : '0';
+  document.getElementById('ate_oral'  + id).value = unk ? '' : oral;
+  document.getElementById('ate_dermal'+ id).value = unk ? '' : derm;
+  document.getElementById('ate_inhal' + id).value = unk ? '' : inhal;
+
+  // Butonu güncelle — değer girilmişse rengini değiştir
+  const btn = document.getElementById('ate_btn' + id);
+  const sum = document.getElementById('ate_summary' + id);
+  if (unk) {
+    if (btn) btn.style.color = '#f6ad55';
+    if (sum) sum.textContent = 'bilinmiyor';
+  } else if (oral || derm || inhal) {
+    if (btn) btn.style.color = 'var(--accent)';
+    const parts = [];
+    if (oral)  parts.push(`Oral: ${oral}`);
+    if (derm)  parts.push(`Derm: ${derm}`);
+    if (inhal) parts.push(`İnh: ${inhal}`);
+    if (sum) sum.textContent = parts.join(' · ');
+  } else {
+    if (btn) btn.style.color = 'var(--text3)';
+    if (sum) sum.textContent = '';
+  }
+
+  closeAteModal();
 }
 
 function updateConcTotal() {
@@ -1802,7 +1743,8 @@ function applySupplierComps() {
       } else {
         const idx = toAdd.length;
         toAdd.push({ cas: c.cas || '', name: c.name || '', concMin, concMax,
-                     hazards: (c.hCodes || []).map(h => ({ h_class: h, h_code: h })) });
+                     hazards: c.hazards || (c.hCodes || []).map(h => ({ h_class: h, h_code: h })),
+                     m_factors: c.m_factors || {} });
         if (key) casMap.set(key, idx);
       }
     });
@@ -1838,7 +1780,14 @@ function applySupplierComps() {
         }
       });
     }
-    if (!merged) addComp(c);
+    if (!merged) {
+      const newId = addComp(c);
+      if (c.ate && newId) {
+        if (c.ate.oral)   { const el = document.getElementById('ate_oral'   + newId); if (el) el.value = c.ate.oral; }
+        if (c.ate.dermal) { const el = document.getElementById('ate_dermal' + newId); if (el) el.value = c.ate.dermal; }
+        if (c.ate.inhal)  { const el = document.getElementById('ate_inhal'  + newId); if (el) el.value = c.ate.inhal; }
+      }
+    }
   });
 
   status.style.background = allWarnings.length ? '#7c5a00' : '#155724';
@@ -2557,7 +2506,7 @@ function getComps() {
     // CLP 3.1.3.6.2.3 revize formül hesabı için clp_engine.js okur
     const annexVi = w.querySelector('.cc')?.dataset?.annexVi === '1';
     // ATE kullanıcı beyanı — SEA §3.1.3.6.2.2
-    const ate_unknown = document.getElementById('ate_unk' + cwId)?.checked || false;
+    const ate_unknown = document.getElementById('ate_unk' + cwId)?.value === '1';
     const ate_oral_v   = parseFloat(document.getElementById('ate_oral'   + cwId)?.value) || null;
     const ate_dermal_v = parseFloat(document.getElementById('ate_dermal' + cwId)?.value) || null;
     const ate_inhal_v  = parseFloat(document.getElementById('ate_inhal'  + cwId)?.value) || null;
@@ -2566,7 +2515,11 @@ function getComps() {
       : null;
     const comp_type = document.getElementById('comp_type' + cwId)?.value || 'normal';
     const sclRaw = _sclRaw[cwId] || [];  // SCL ham liste — engine'de 1A/1B ayrımı için
-    return { cas, name, name_tr, conc, concMin, concMax, concStr, hazards, ec, reach, m_factors:{ acute: mf, chronic: mfc }, scl, sclRaw, annex_vi: annexVi, ate_unknown, ate, comp_type };
+    const ec50_algae   = parseFloat(document.getElementById('ec50_algae'   + cwId)?.value) || null;
+    const ec50_fish    = parseFloat(document.getElementById('ec50_fish'    + cwId)?.value) || null;
+    const ec50_daphnia = parseFloat(document.getElementById('ec50_daphnia' + cwId)?.value) || null;
+    const ec50_noec    = parseFloat(document.getElementById('ec50_noec'    + cwId)?.value) || null;
+    return { cas, name, name_tr, conc, concMin, concMax, concStr, hazards, ec, reach, m_factors:{ acute: mf, chronic: mfc }, scl, sclRaw, annex_vi: annexVi, ate_unknown, ate, comp_type, ec50_algae, ec50_fish, ec50_daphnia, ec50_noec };
   }).filter(c => c.cas || c.name);
 }
 
@@ -3338,6 +3291,12 @@ function renderAll(s) {
       <div class="ecard-head"><span class="ecard-code">${eco.aquatic.h}</span><span class="ecard-label">${eco.aquatic.cls}</span></div>
       <div class="ecard-source">${eco.aquatic.formula}</div>
     </div>`;
+    const mfWarnings = eco.aquatic.m_factor_warnings;
+    if (mfWarnings && mfWarnings.length) {
+      mfWarnings.forEach(w => {
+        h += `<div class="warn-box" style="margin-top:4px;font-size:11px">⚠ ${w}</div>`;
+      });
+    }
   }
 
   // ── Bölüm 2.2 — Etiket Unsurları ────────────────────────────────────────
@@ -3390,12 +3349,6 @@ function renderAll(s) {
       style="background:linear-gradient(135deg,#276749,#1e4d35);color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;font-family:var(--mono)"
       onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
       🏷️ Etiket Oluştur
-    </button>
-    <button onclick="runReview()"
-      id="review-btn"
-      style="background:linear-gradient(135deg,#2b6cb0,#1a4a8a);color:#fff;border:none;border-radius:8px;padding:8px 18px;font-size:12px;font-weight:700;cursor:pointer;display:flex;align-items:center;gap:6px;font-family:var(--mono)"
-      onmouseover="this.style.opacity='.85'" onmouseout="this.style.opacity='1'">
-      🔍 Denetle
     </button>
   </div>`;
   el.innerHTML = pdfBar + h;
@@ -3555,6 +3508,45 @@ window.addEventListener('DOMContentLoaded', () => {
     <div class="psrc-foot">
       <button class="psrc-btn-cancel" onclick="_physSrcClose()">İptal</button>
       <button class="psrc-btn-ok" id="physSrcOkBtn" onclick="_physSrcConfirm()">SDS Oluştur →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ATE MODAL ══════════════════════════════════════════════════════════ -->
+<div id="ate-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:1400;align-items:center;justify-content:center">
+  <div style="background:var(--bg2);border:1px solid var(--border2);border-radius:12px;width:min(440px,95vw);box-shadow:0 24px 64px rgba(0,0,0,.7);overflow:hidden">
+    <div style="padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+      <span style="font-size:13px;font-weight:700;color:var(--text)">⚗️ ATE Değerleri <span style="font-size:10px;color:var(--text3);font-weight:400">(SEA §3.1.3.6.2.2)</span></span>
+      <button onclick="closeAteModal()" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:18px;line-height:1">✕</button>
+    </div>
+    <div style="padding:18px">
+      <label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:12px;margin-bottom:14px;padding:8px 10px;background:rgba(255,170,0,.07);border-radius:6px;border:1px solid rgba(255,170,0,.2)">
+        <input type="checkbox" id="ate_modal_unk" onchange="document.getElementById('ate_modal_fields').style.display=this.checked?'none':''">
+        <span>Akut toksisite <b>bilinmiyor</b> — kullanışlı bilgi yok</span>
+      </label>
+      <div id="ate_modal_fields">
+        <div style="display:grid;gap:10px">
+          <div>
+            <label style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px">LD50 Oral (mg/kg)</label>
+            <input type="number" id="ate_modal_oral" placeholder="—" min="0" step="any"
+              style="width:100%;padding:7px 10px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:13px;font-family:var(--mono)">
+          </div>
+          <div>
+            <label style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px">LD50 Dermal (mg/kg)</label>
+            <input type="number" id="ate_modal_dermal" placeholder="—" min="0" step="any"
+              style="width:100%;padding:7px 10px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:13px;font-family:var(--mono)">
+          </div>
+          <div>
+            <label style="font-size:10px;color:var(--text3);text-transform:uppercase;letter-spacing:.05em;display:block;margin-bottom:4px">LC50 İnhalasyon (mg/L/4h)</label>
+            <input type="number" id="ate_modal_inhal" placeholder="—" min="0" step="any"
+              style="width:100%;padding:7px 10px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:13px;font-family:var(--mono)">
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="padding:12px 18px;border-top:1px solid var(--border);display:flex;gap:8px;justify-content:flex-end">
+      <button onclick="closeAteModal()" style="padding:7px 16px;border-radius:6px;border:1px solid var(--border2);background:transparent;color:var(--text3);cursor:pointer;font-size:12px">İptal</button>
+      <button onclick="saveAteModal()" style="padding:7px 18px;border-radius:6px;border:none;background:var(--accent);color:#fff;cursor:pointer;font-size:12px;font-weight:600">Kaydet</button>
     </div>
   </div>
 </div>
@@ -4740,141 +4732,6 @@ function toggleSec9Extra() {
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closePhysModal(); });
 </script>
 
-<!-- ═══ AI COPILOT JS ═══════════════════════════════════════════════════ -->
-<script>
-(function(){
-  function $(id){ return document.getElementById(id); }
-
-  function aiSetStatus(text, thinking=false){
-    const dot = $('aiDot'), st = $('aiStatusText');
-    if(!dot||!st) return;
-    st.textContent = text;
-    if(thinking){ dot.classList.add('thinking'); }
-    else { dot.classList.remove('thinking'); }
-  }
-
-  function aiAddMsg(html, type='', showTime=true){
-    const c = $('aiMsgs');
-    $('aiEmpty') && ($('aiEmpty').style.display='none');
-    const d = document.createElement('div');
-    d.className = 'ai-msg';
-    const t = showTime ? new Date().toLocaleTimeString('tr-TR',{hour:'2-digit',minute:'2-digit'}) : '';
-    d.innerHTML = `<div class="ai-bubble ${type}">${html}</div>`
-      + (t ? `<div class="ai-msg-time">${t}</div>` : '');
-    c.appendChild(d);
-    c.scrollTop = c.scrollHeight;
-    return d;
-  }
-
-  function aiTyping(){
-    const c = $('aiMsgs');
-    const d = document.createElement('div');
-    d.id = 'aiTypingDot'; d.className='ai-msg';
-    d.innerHTML='<div class="ai-bubble"><div class="ai-typing"><span></span><span></span><span></span></div></div>';
-    c.appendChild(d); c.scrollTop=c.scrollHeight;
-  }
-  function aiStopTyping(){ $('aiTypingDot')&&$('aiTypingDot').remove(); }
-
-  // Hesaplama sonrası AI yorumu
-  window._aiLastState = null;
-  window.aiFeedResults = async function(allH, issues, signal){
-    window._aiLastState = {allH, issues, signal};
-    aiSetStatus('Analiz ediliyor...', true);
-    aiTyping();
-    await new Promise(r=>setTimeout(r,700));
-    aiStopTyping();
-
-    // Özet mesaj
-    if(!allH || allH.length===0){
-      aiAddMsg('✅ Tehlike sınıflandırması çıkmadı — zararsız veya veri eksik.','ok');
-    } else {
-      const sig = signal==='Danger'?'🔴':'🟡';
-      aiAddMsg(`${sig} <strong>${allH.length} H kodu</strong> tespit edildi. Sinyal: <strong>${signal||'Warning'}</strong>.`);
-    }
-
-    // Doğrulama sorunları
-    if(issues && issues.length){
-      await new Promise(r=>setTimeout(r,300));
-      const errs  = issues.filter(i=>i.level==='error');
-      const warns = issues.filter(i=>i.level==='warning');
-      const infos = issues.filter(i=>i.level==='info');
-      if(errs.length)
-        aiAddMsg('❌ <strong>'+errs.length+' hata:</strong><br>'+errs.map(e=>`• [${e.code}] ${e.msg.substring(0,70)}`).join('<br>'),'error');
-      if(warns.length)
-        aiAddMsg('⚠️ <strong>'+warns.length+' uyarı:</strong><br>'+warns.map(w=>`• [${w.code}] ${w.msg.substring(0,70)}`).join('<br>'),'warn');
-      if(infos.length && !errs.length && !warns.length)
-        aiAddMsg('ℹ️ '+infos.map(i=>`• ${i.msg.substring(0,70)}`).join('<br>'),'info');
-    } else if(allH && allH.length>0){
-      await new Promise(r=>setTimeout(r,200));
-      aiAddMsg('✅ Çapraz bölüm kontrolleri geçti — tutarsızlık yok.','ok');
-    }
-
-    // H koduna özel ipuçları
-    await new Promise(r=>setTimeout(r,400));
-    const h = allH||[];
-    if(h.some(x=>x==='H350'||x==='H351'))
-      aiAddMsg('💡 Kanserojen içerik — Bölüm 15\'te SVHC ve mevzuat bilgisi eklenmeli.','info');
-    if(h.some(x=>x.startsWith('H360')||x.startsWith('H361')))
-      aiAddMsg('💡 Üreme toksisitesi — Hamile çalışanlar için özel KKE önlemi alınmalı.','info');
-    if(h.includes('H304'))
-      aiAddMsg('💡 H304 Aspirasyon — Bölüm 4\'te "Kusturmayın" talimatı zorunlu.','info');
-    if(h.includes('H334'))
-      aiAddMsg('💡 H334 Solunum duyarlılaştırıcı — SCBA veya tam yüz maskesi zorunlu.','warn');
-
-    aiSetStatus('Aktif');
-    $('aiChips') && ($('aiChips').style.display='flex');
-  };
-
-  // Soru-cevap — gerçek Anthropic API
-  window.aiAsk = async function(q){
-    if(!q) return;
-    $('aiInput') && ($('aiInput').value='');
-    const c=$('aiMsgs');
-    $('aiEmpty')&&($('aiEmpty').style.display='none');
-    const ud=document.createElement('div');
-    ud.className='ai-user-msg ai-msg';
-    ud.innerHTML=`<div class="ai-user-bubble">${q}</div>`;
-    c.appendChild(ud); c.scrollTop=c.scrollHeight;
-    aiSetStatus('Yanıtlıyor...', true);
-    aiTyping();
-
-    // Aktif CAS'ı bağlam olarak gönder (arama kutusundan al)
-    const casVal = ($('casInput')||$('cas_input')||{}).value?.trim() || '';
-    // SDS modu: sayfada sds-text alanı varsa kullan
-    const sdsEl  = document.getElementById('sdsCheckText');
-    const mode   = (sdsEl && sdsEl.value) ? 'sds' : 'data';
-    const body   = { message: q, mode, cas: casVal, sds_text: sdsEl ? sdsEl.value : '' };
-
-    let ans = '';
-    try {
-      const r = await fetch('/api/v1/ai/chat', {
-        method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify(body)
-      });
-      if (!r.ok) {
-        const err = await r.json().catch(()=>({detail:'Sunucu hatası'}));
-        ans = `⚠️ Hata: ${err.detail || r.statusText}`;
-      } else {
-        const d = await r.json();
-        ans = d.reply || '(boş yanıt)';
-      }
-    } catch(e) {
-      ans = `⚠️ Bağlantı hatası: ${e.message}`;
-    }
-
-    aiStopTyping();
-    aiAddMsg(ans);
-    aiSetStatus('Aktif');
-  };
-
-  window.aiSend = function(){
-    const v=($('aiInput')||{}).value?.trim();
-    if(v) aiAsk(v);
-  };
-})();
-</script>
-
 <!-- ══ WIZARD JS ═════════════════════════════════════════════════════════════ -->
 <script>
 (function(){
@@ -4971,341 +4828,6 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closePhysMod
   // Init
   _updateBar();
 })();
-</script>
-
-<!-- ═══════════════════════════════════════════════════════════ -->
-
-<!-- DENETIM PANELİ                                             -->
-<!-- ═══════════════════════════════════════════════════════════ -->
-<div id="review-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:1300;align-items:flex-start;justify-content:center;overflow-y:auto;padding:24px 12px">
-  <div style="background:var(--bg2);border:1px solid var(--border2);border-radius:12px;width:min(1400px,98vw);box-shadow:0 24px 64px rgba(0,0,0,.7);overflow:hidden">
-
-    <!-- Başlık -->
-    <div style="padding:14px 18px;background:rgba(43,108,176,.12);border-bottom:1px solid rgba(43,108,176,.25);display:flex;align-items:center;justify-content:space-between">
-      <span style="font-size:14px;font-weight:700;color:#63b3ed">🔍 SDS Denetim Raporu</span>
-      <div style="display:flex;gap:8px;align-items:center">
-        <button id="review-copy-btn" onclick="copyReviewReport()"
-          style="background:none;border:1px solid var(--border2);color:var(--text3);cursor:pointer;font-size:12px;border-radius:6px;padding:4px 10px">📋 Kopyala</button>
-        <button onclick="document.getElementById('review-overlay').style.display='none'"
-          style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:18px;line-height:1">✕</button>
-      </div>
-    </div>
-
-    <!-- Özet sayaçlar -->
-    <div id="review-summary" style="display:none;padding:10px 18px;border-bottom:1px solid var(--border2);display:flex;gap:12px;flex-wrap:wrap"></div>
-
-    <!-- İki sütun: rapor (sol) + chat (sağ) -->
-    <div style="display:flex;min-height:560px;max-height:80vh">
-
-      <!-- Rapor içeriği -->
-      <div id="review-body" style="flex:1;padding:22px 26px;font-size:15px;line-height:1.85;color:var(--text);overflow-y:auto;white-space:pre-wrap;font-family:var(--mono);border-right:1px solid var(--border2)">
-        <span style="color:var(--text3)">Denetim başlatılıyor…</span>
-      </div>
-
-      <!-- Chat (sağ sütun) -->
-      <div id="review-chat-section" style="display:none;width:400px;min-width:320px;background:rgba(0,0,0,.18);flex-direction:column">
-        <div style="padding:10px 16px;font-size:13px;font-weight:700;color:#63b3ed;letter-spacing:.5px;border-bottom:1px solid rgba(43,108,176,.2)">💬 SORU SOR</div>
-        <div id="review-chat-msgs" style="flex:1;overflow-y:auto;padding:12px 16px;display:flex;flex-direction:column;gap:10px"></div>
-        <div style="padding:10px 16px;display:flex;gap:8px;align-items:flex-end;border-top:1px solid var(--border2)">
-          <textarea id="review-chat-input" rows="3"
-            placeholder="Denetim hakkında soru sorun… (Enter = gönder, Shift+Enter = alt satır)"
-            style="flex:1;background:var(--bg);border:1px solid var(--border2);border-radius:8px;
-                   color:var(--text);font-size:13px;padding:8px 10px;resize:none;
-                   font-family:var(--mono);line-height:1.5"
-            onkeydown="if(event.key==='Enter'&&!event.shiftKey){event.preventDefault();sendReviewChat()}"
-          ></textarea>
-          <button onclick="sendReviewChat()"
-            style="background:rgba(43,108,176,.8);border:none;color:#fff;border-radius:8px;
-                   padding:8px 16px;cursor:pointer;font-size:15px;white-space:nowrap">➤</button>
-        </div>
-      </div>
-
-    </div>
-
-    <!-- Alt bilgi -->
-    <div id="review-footer" style="display:none;padding:8px 18px;border-top:1px solid var(--border2);font-size:11px;color:var(--text3)"></div>
-
-  </div>
-</div>
-
-<script>
-function copyReviewReport() {
-  const body = document.getElementById('review-body');
-  const text = body?.innerText || '';
-  if (!text) return;
-  navigator.clipboard.writeText(text).then(() => {
-    const btn = document.getElementById('review-copy-btn');
-    if (btn) { btn.textContent = '✓ Kopyalandı'; setTimeout(() => btn.textContent = '📋 Kopyala', 2000); }
-  });
-}
-
-async function runReview() {
-  const state = window._lastCalcState || _lastCalcState;
-  if (!state) {
-    alert('Önce hesaplama yapın.');
-    return;
-  }
-
-  // Paneli aç, yükleniyor göster
-  const overlay = document.getElementById('review-overlay');
-  const body    = document.getElementById('review-body');
-  const summary = document.getElementById('review-summary');
-  const footer  = document.getElementById('review-footer');
-  overlay.style.display = 'flex';
-  summary.style.display = 'none';
-  footer.style.display  = 'none';
-  body.innerHTML = '<span style="color:var(--text3)">⏳ Denetim yapılıyor, lütfen bekleyin…</span>';
-
-  const btn = document.getElementById('review-btn');
-  if (btn) { btn.disabled = true; btn.textContent = '⏳ Denetleniyor…'; }
-
-  try {
-    // DOM'dan fiziksel özellikleri oku (PDF endpoint ile aynı mantık)
-    const _n = id => { const v = parseFloat(document.getElementById(id)?.value); return isNaN(v) ? null : v; };
-    const _g = id => document.getElementById(id)?.value?.trim() || '';
-    const tp = state.phys?.theoProps || {};
-    const _tv = d => (d && d.value !== undefined && d.value !== null) ? d.value : (d !== null && d !== undefined && typeof d !== 'object' ? d : null);
-    const flatPhys = {};
-    [['tf_fp','flash_point'],['tf_bp','boiling_point'],['tf_density','density'],
-     ['tf_visc','viscosity'],['tf_sol','solubility'],['tf_mp','melting_point'],
-     ['tf_ait','auto_ignition'],['tf_decomp','decomposition_temp'],
-     ['tf_logkow','log_kow'],['tf_vp','vapor_pressure'],
-     ['tf_odor_thresh','odour_threshold'],['tf_aerosol_flam_pct','aerosol_flam_pct'],
-     ['tf_aerosol_hoc','aerosol_hoc']].forEach(([id, key]) => {
-      const v = _n(id); if (v !== null) flatPhys[key] = v;
-    });
-    const phVal = _g('tf_ph'); if (phVal) flatPhys.ph = phVal;
-    const phConc2 = document.getElementById('tf_ph_conc')?.value;
-    if (phConc2) flatPhys.ph_conc = phConc2;
-    const evapVal = _g('tf_evap'); if (evapVal) flatPhys.evap_rate = evapVal;
-    const flamSg  = _g('tf_flam_sg'); if (flamSg) flatPhys.is_flammable = flamSg;
-    const explVal = _g('tf_expl');    if (explVal) flatPhys.is_explosive = explVal;
-    const oxidVal = _g('tf_oxid');    if (oxidVal) flatPhys.is_oxidising = oxidVal;
-    const solOth  = _g('tf_sol_other'); if (solOth) flatPhys.sol_other = solOth;
-    // Motor hesaplanan alanlar (kullanıcı girişi yoksa theoProps'tan al)
-    ['density','boiling_point','flash_point','lel','uel','vapor_pressure','vapor_density',
-     'viscosity','melting_point','auto_ignition','log_kow','decomposition_temp'].forEach(k => {
-      if (flatPhys[k] === undefined) { const v = _tv(tp[k]); if (v !== null && v !== undefined) flatPhys[k] = v; }
-    });
-
-    // PBT/vPvB — ekolojik sınıftan türet
-    const ecoH = (state.eco?.h_codes || []);
-    const hasPBT = ecoH.some(h => ['H400','H410','H411','H412','H413'].includes(h));
-    const pbtText = hasPBT
-      ? `Karışım su ortamı tehlikesi taşıyor (${ecoH.join(', ')}). PBT/vPvB değerlendirmesi gerekli.`
-      : 'Bu karışım PBT veya vPvB kriterlerini karşılamamaktadır.';
-
-    const payload = {
-      h_codes:    state.allH || [],
-      phys_props: flatPhys,
-      components: (typeof getComps === 'function') ? getComps() : [],
-      // XML — PDF ile aynı anda üretilir, denetim metni olarak kullanılır
-      sds_xml:      window._lastSdsXml  || null,
-      // PDF oluşturduktan sonra saklanan tam sds_data — araç çağrıları için
-      full_sds_data: window._lastSdsJson || null,
-      // Fallback: PDF oluşturulmadıysa basit veri
-      sds_data: {
-        clp: {
-          signal_word: state.combinedSignal || '',
-          pictograms:  state.clp?.pictograms || [],
-          all_h_codes: state.allH || [],
-          euh_codes:   state.euh || [],
-        },
-        p_codes:  state.pcodes || {},
-        adr:      state.transport || {},
-        eco:      state.eco || {},
-        ppe:      state.ppe || {},
-        pbt_statement: pbtText,
-        product_info: {
-          product_name:  document.getElementById('productName')?.value?.trim() || '',
-          supplier_name: document.getElementById('suppName')?.value?.trim() || '',
-          supplier_phone: document.getElementById('suppPhone')?.value?.trim() || '',
-          emergency_tel: document.getElementById('supplierEmergencyTel')?.value?.trim() || '',
-          supplier_address: document.getElementById('suppAddress')?.value?.trim() || '',
-          supplier_email: document.getElementById('suppEmail')?.value?.trim() || '',
-          usage: document.getElementById('pusage')?.value || 'industrial',
-          form:  document.getElementById('pform')?.value || '',
-        },
-        author: {},
-      },
-    };
-
-    const res = await fetch(API_BASE + '/sds/review', {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body:    JSON.stringify(payload),
-    });
-
-    if (!res.ok) {
-      const err = await res.text();
-      body.innerHTML = `<span style="color:#fc8181">Hata: ${err}</span>`;
-      return;
-    }
-
-    const data = await res.json();
-
-    // Özet sayaçlar — AI raporundan parse et
-    const _rpt = data.report || '';
-    const _errM  = _rpt.match(/Hatalar[^|]*\|\s*(\d+)/i);
-    const _warnM = _rpt.match(/Uyar[^|]*\|\s*(\d+)/i);
-    const _infoM = _rpt.match(/Bilgi[^|]*\|\s*(\d+)/i);
-    const aiErr  = _errM  ? parseInt(_errM[1])  : 0;
-    const aiWarn = _warnM ? parseInt(_warnM[1]) : 0;
-    const aiInfo = _infoM ? parseInt(_infoM[1]) : 0;
-    summary.innerHTML = [
-      aiErr  ? `<span style="color:#fc8181;font-weight:700">❌ ${aiErr} Hata</span>`   : '',
-      aiWarn ? `<span style="color:#f6ad55;font-weight:700">⚠️ ${aiWarn} Uyarı</span>` : '',
-      aiInfo ? `<span style="color:#63b3ed">ℹ️ ${aiInfo} Bilgi Notu</span>`             : '',
-      (!aiErr && !aiWarn && !aiInfo) ? '<span style="color:#68d391;font-weight:700">✅ Sorun tespit edilmedi</span>' : '',
-    ].filter(Boolean).join('&nbsp;&nbsp;');
-    summary.style.display = 'flex';
-
-    // Rapor metni — markdown → HTML
-    let report = data.report || 'Rapor alınamadı.';
-
-    // Markdown tabloları HTML tablosuna çevir
-    report = report.replace(/((?:^\|.+\|\s*\n)+)/gm, tableBlock => {
-      const lines = tableBlock.trim().split('\n').filter(l => l.trim());
-      if (lines.length < 2) return tableBlock;
-      const isSep = l => /^\|[-| :]+\|$/.test(l.trim());
-      const parseRow = l => l.trim().replace(/^\||\|$/g,'').split('|').map(c => c.trim());
-      let html = '<div style="overflow-x:auto;margin:8px 0"><table style="border-collapse:collapse;font-size:13px;width:100%">';
-      let inBody = false;
-      for (const line of lines) {
-        if (isSep(line)) { inBody = true; continue; }
-        const cells = parseRow(line);
-        const tag = inBody ? 'td' : 'th';
-        const style = inBody
-          ? 'border:1px solid var(--border2);padding:5px 10px;vertical-align:top'
-          : 'border:1px solid var(--border2);padding:5px 10px;background:rgba(43,108,176,.15);color:#63b3ed;white-space:nowrap';
-        html += '<tr>' + cells.map(c => `<${tag} style="${style}">${c}</${tag}>`).join('') + '</tr>';
-      }
-      html += '</table></div>';
-      return html;
-    });
-
-    report = report
-      .replace(/^# (.+)$/gm, '<strong style="color:#a0c4ff;font-size:18px;display:block;margin-top:14px">$1</strong>')
-      .replace(/^## (.+)$/gm, '<strong style="color:#63b3ed;font-size:17px;display:block;margin-top:12px">$1</strong>')
-      .replace(/^### (.+)$/gm, '<strong style="color:#f6ad55;font-size:15px;display:block;margin-top:8px">$1</strong>')
-      .replace(/^> (.+)$/gm, '<blockquote style="border-left:3px solid #f6ad55;margin:6px 0;padding:4px 10px;color:var(--text2)">$1</blockquote>')
-      .replace(/^---+$/gm, '<hr style="border:none;border-top:1px solid var(--border2);margin:10px 0">')
-      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-      .replace(/\*(.+?)\*/g, '<em style="color:var(--text2)">$1</em>');
-    body.innerHTML = report;
-
-    // Alt bilgi
-    footer.textContent = `Kullanılan belge: ${data.docs_used} | Token: ${data.input_tokens} giriş / ${data.output_tokens} çıkış`;
-    footer.style.display = 'block';
-
-    // Chat bölümünü aç, geçmişi sıfırla
-    window._reviewSdsText  = data.sds_text  || '';
-    window._reviewReport   = data.report    || '';
-    window._reviewHistory  = [];
-    document.getElementById('review-chat-msgs').innerHTML = '';
-    document.getElementById('review-chat-section').style.display = 'flex';
-
-  } catch (e) {
-    body.innerHTML = `<span style="color:#fc8181">Bağlantı hatası: ${e.message}</span>`;
-  } finally {
-    if (btn) { btn.disabled = false; btn.innerHTML = '🔍 Denetle'; }
-  }
-}
-
-async function sendReviewChat() {
-  const input = document.getElementById('review-chat-input');
-  const msgs  = document.getElementById('review-chat-msgs');
-  const q = (input.value || '').trim();
-  if (!q) return;
-  input.value = '';
-
-  // Kullanıcı balonu
-  msgs.innerHTML += `<div style="align-self:flex-end;background:rgba(43,108,176,.3);
-    border-radius:10px 10px 2px 10px;padding:8px 14px;font-size:14px;
-    max-width:90%;color:var(--text);white-space:pre-wrap">${q.replace(/</g,'&lt;')}</div>`;
-  msgs.scrollTop = msgs.scrollHeight;
-
-  // Bekliyor göstergesi
-  const waitId = 'chat-wait-' + Date.now();
-  msgs.innerHTML += `<div id="${waitId}" style="align-self:flex-start;color:var(--text3);font-size:11px;padding:4px 8px">⏳ yanıtlanıyor…</div>`;
-  msgs.scrollTop = msgs.scrollHeight;
-
-  try {
-    const res = await fetch(API_BASE + '/sds/chat', {
-      method:  'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        sds_text: window._reviewSdsText || '',
-        report:   window._reviewReport  || '',
-        history:  window._reviewHistory || [],
-        question: q,
-      }),
-    });
-
-    const waitEl = document.getElementById(waitId);
-    if (waitEl) waitEl.remove();
-
-    if (!res.ok) {
-      msgs.innerHTML += `<div style="color:#fc8181;font-size:11px;padding:4px 8px">Hata: ${await res.text()}</div>`;
-      return;
-    }
-
-    const data = await res.json();
-    const answer = data.answer || '—';
-
-    // Geçmişe ekle
-    window._reviewHistory = window._reviewHistory || [];
-    window._reviewHistory.push({ role: 'user',      content: q      });
-    window._reviewHistory.push({ role: 'assistant', content: answer });
-
-    // Asistan balonu — basit markdown
-    let html = answer
-      .replace(/</g, '&lt;')
-      .replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>')
-      .replace(/\[(.+?)\]\((https?:\/\/[^\)]+)\)/g,
-               '<a href="$2" target="_blank" style="color:#63b3ed">$1</a>')
-      .replace(/\n/g, '<br>');
-
-    const msgId = 'cmsg-' + Date.now();
-    const escaped = answer.replace(/\\/g,'\\\\').replace(/`/g,'\\`');
-    msgs.innerHTML += `<div style="align-self:flex-start;position:relative;
-      background:rgba(255,255,255,.06);border-radius:10px 10px 10px 2px;
-      padding:10px 14px 10px 14px;font-size:14px;max-width:92%;
-      color:var(--text);line-height:1.6">
-      <button onclick="copyChat('${msgId}')" id="${msgId}-btn"
-        title="Kopyala"
-        style="position:absolute;top:5px;right:6px;background:transparent;
-          border:none;cursor:pointer;color:var(--text3);font-size:13px;
-          padding:2px 4px;line-height:1;opacity:.55"
-        onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=.55">⧉</button>
-      <span id="${msgId}">${html}</span>
-    </div>`;
-    msgs.scrollTop = msgs.scrollHeight;
-
-  } catch (e) {
-    const waitEl = document.getElementById(waitId);
-    if (waitEl) waitEl.remove();
-    msgs.innerHTML += `<div style="color:#fc8181;font-size:11px">Bağlantı hatası: ${e.message}</div>`;
-  }
-}
-
-
-function copyChat(msgId) {
-  const el = document.getElementById(msgId);
-  if (!el) return;
-  const text = el.innerText || el.textContent || '';
-  navigator.clipboard.writeText(text).then(() => {
-    const btn = document.getElementById(msgId + '-btn');
-    if (btn) { btn.textContent = '✓'; setTimeout(() => { btn.textContent = '⧉'; }, 1500); }
-  }).catch(() => {
-    // Clipboard API yoksa seçim yöntemi
-    const range = document.createRange();
-    range.selectNodeContents(el);
-    const sel = window.getSelection();
-    sel.removeAllRanges();
-    sel.addRange(range);
-  });
-}
 </script>
 </body>
 </html>

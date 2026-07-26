@@ -32,7 +32,6 @@ import re as _re
 from io import BytesIO
 from datetime import datetime
 from typing import Dict, List, Optional
-from app.services.sds_validator import validate_sds
 
 # ─── SAYFA DÜZENİ SABİTLERİ ─────────────────────────────────────────────────
 PAGE_W   = 180 * mm   # A4 kullanılabilir genişlik (210 - 15 - 15)

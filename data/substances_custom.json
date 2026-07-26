@@ -1429,5 +1429,33 @@
     "m_factors": {},
     "index_no": "",
     "atp": "PubChem+CLP-dedup"
+  },
+  "7440-47-3": {
+    "name": "chromium",
+    "ec_no": "231-157-5",
+    "annex_vi": false,
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "hazards": [
+      {
+        "h_class": "Skin Sens. 1",
+        "h_code": "H317"
+      },
+      {
+        "h_class": "Eye Irrit. 2",
+        "h_code": "H319"
+      },
+      {
+        "h_class": "Resp. Sens. 1",
+        "h_code": "H334"
+      }
+    ],
+    "m_factors": {},
+    "index_no": "",
+    "atp": "PubChem/0 notif",
+    "sea_ek6": false,
+    "source_priority": 4
   }
 }

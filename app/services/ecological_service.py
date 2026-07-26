@@ -162,6 +162,7 @@ class AquaticResult:
     formula: str
     note: Optional[str] = None
     component_details: list = None  # Her bileşen için M faktör detayı
+    m_factor_warnings: list = None  # M=1 varsayılan bileşenler için uyarılar
 
 
 @dataclass
@@ -256,17 +257,29 @@ def calculate_aquatic(
     sum_chronic_plain = 0.0  # H412/H413 için düz toplam (M-faktörsüz)
     detail_parts = []
     comp_m_details = []
+    m_factor_warnings = []
 
     for comp in comp_list:
         cas = comp.get('cas_no', comp.get('cas', '')).strip()
         conc = float(comp.get('worst_case_conc') or comp.get('concMax') or comp.get('conc') or 0)
         hazards = comp.get('hazards', [])
 
-        # M-faktörler — önce veritabanı
+        # M-faktörler — önce veritabanı (Annex VI)
         m_acute = comp.get('m_factors', {}).get('acute', 1) if comp.get('m_factors') else 1
         m_chronic = comp.get('m_factors', {}).get('chronic', 1) if comp.get('m_factors') else 1
+        has_annex_mf = m_acute > 1 or m_chronic > 1
 
-        # Kullanıcı EC50 override
+        # Bileşen dict'inden EC50 (kullanıcı girişi) — Annex VI yoksa devreye girer
+        if comp.get('ec50_algae'):
+            m_acute = max(m_acute, _ec50_to_m_factor(float(comp['ec50_algae'])))
+        if comp.get('ec50_fish'):
+            m_acute = max(m_acute, _ec50_to_m_factor(float(comp['ec50_fish'])))
+        if comp.get('ec50_daphnia'):
+            m_acute = max(m_acute, _ec50_to_m_factor(float(comp['ec50_daphnia'])))
+        if comp.get('ec50_noec'):
+            m_chronic = max(m_chronic, _ec50_to_m_factor(float(comp['ec50_noec'])))
+
+        # eco_test_data override (eski API yolu)
         td = (eco_test_data or {}).get(cas)
         if td:
             if td.ec50_algae:
@@ -282,6 +295,16 @@ def calculate_aquatic(
         # H410 zaten hem akut hem kronik katkıyı kapsar (çift sayım ve çift tablo satırı önleme)
         haz_classes = {h.get('h_class', '').replace('*', '').strip() for h in hazards}
         has_h410 = 'Aquatic Chronic 1' in haz_classes
+
+        # M=1 uyarısı: sucul tehlike var ama M faktörü verisi yok
+        is_aquatic = bool(haz_classes & {'Aquatic Acute 1', 'Aquatic Chronic 1'})
+        has_ec50_input = any(comp.get(k) for k in ('ec50_algae', 'ec50_fish', 'ec50_daphnia'))
+        if is_aquatic and not has_annex_mf and not has_ec50_input:
+            comp_name = comp.get('name') or comp.get('name_tr') or cas
+            m_factor_warnings.append(
+                f"{comp_name} ({cas}): M-Faktör verisi bulunamadı — M=1 varsayıldı. "
+                f"EC50/LC50 değeri girerek doğruluğu artırabilirsiniz."
+            )
 
         for haz in hazards:
             hc = haz.get('h_class', '').replace('*', '').strip()
@@ -357,6 +380,8 @@ def calculate_aquatic(
     # ── Kronik Sınıflandırma (öncelik sırası: H410 > H411 > H412 > H413) ────────
 
     # H410: Σ(Ci × M_kronik)[Kronik1]/100 ≥ 0.25  ↔  Σ(Ci × Mi) ≥ %25
+    mfw = m_factor_warnings or None
+
     if sum_chronic1_m >= 0.25:
         return AquaticResult(
             h_code='H410', h_class='Aquatic Chronic 1', signal='Warning',
@@ -364,6 +389,7 @@ def calculate_aquatic(
             formula=f"Σ(Ci×M_kr)[K1]/100 = {sum_chronic1_m:.4f} ≥ 0.25 [=%{sum_chronic1_m*100:.2f}≥%25] (Tablo 4.1.2)",
             note="H410 atandı → H400 etiket'ten elendi (baskınlık kuralı)",
             component_details=comp_m_details,
+            m_factor_warnings=mfw,
         )
 
     # H411: 10×Σ(Ci×M)[K1] + Σ(Ci)[K2] ≥ 0.25  ↔  ≥ %25
@@ -374,6 +400,7 @@ def calculate_aquatic(
             sum_value=h411_sum,
             formula=f"10×Σ[K1×M]+Σ[K2] = {h411_sum:.4f} ≥ 0.25 (Tablo 4.1.2)",
             component_details=comp_m_details,
+            m_factor_warnings=mfw,
         )
 
     # H412: 100×Σ[K1×M] + 10×Σ[K2] + Σ[K3] ≥ 0.25  ↔  ≥ %25
@@ -384,6 +411,7 @@ def calculate_aquatic(
             sum_value=h412_sum,
             formula=f"100×Σ[K1×M]+10×Σ[K2]+Σ[K3] = {h412_sum:.4f} ≥ 0.25 (Tablo 4.1.2)",
             component_details=comp_m_details,
+            m_factor_warnings=mfw,
         )
 
     # H413: Σ(Ci tüm kronik)/100 ≥ 0.25  ↔  ≥ %25
@@ -393,6 +421,7 @@ def calculate_aquatic(
             sum_value=sum_chronic_plain,
             formula=f"Σ(Ci tüm kronik)/100 = {sum_chronic_plain:.4f} ≥ 0.25 (Tablo 4.1.2)",
             component_details=comp_m_details,
+            m_factor_warnings=mfw,
         )
 
     # ── Akut Sınıflandırma — sadece kronik yoksa (H410 baskınlık kuralı) ────────
@@ -403,6 +432,7 @@ def calculate_aquatic(
             sum_value=sum_acute_m,
             formula=f"Σ(Ci×M_akut)/100 = {sum_acute_m:.4f} ≥ 0.25 (Tablo 4.1.1)",
             component_details=comp_m_details,
+            m_factor_warnings=mfw,
         )
 
     return None

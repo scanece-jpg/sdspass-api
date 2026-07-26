@@ -4,5 +4,32 @@
     "format": "CAS → {name, signal, pictograms, hazards, m_factors, notif_count, fetched_at}",
     "priority": "Sıra 3 — Annex VI'dan sonra, canlı API'den önce kontrol edilir",
     "auto_updated": true
+  },
+  "7440-47-3": {
+    "cas": "7440-47-3",
+    "name": "chromium",
+    "ec_no": "231-157-5",
+    "source": "PubChem/ECHA C&L (0 bildirim)",
+    "source_note": "",
+    "signal": "Danger",
+    "pictograms": [
+      "GHS08"
+    ],
+    "h_codes": [
+      "H317",
+      "H319",
+      "H334"
+    ],
+    "hazard_classes": [
+      "Skin Sens. 1",
+      "Eye Irrit. 2",
+      "Resp. Sens. 1"
+    ],
+    "m_factors": {},
+    "notif_count": 0,
+    "notif_summary": "",
+    "_cache_source": "pubchem",
+    "reach_no": "01-2119485652-27-0000",
+    "fetched_at": "2026-07-23T13:14:56Z"
   }
 }

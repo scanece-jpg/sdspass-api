@@ -70,16 +70,7 @@ def normalize_ph_display(ph_raw) -> str:
 # regülasyon verisidir. Burada bir eşik değiştirildiğinde concentration_ranges.py
 # içindeki GCL tablosuna da AYNI değişiklik uygulanmalıdır.
 CLP_CUTOFFS_DICT = {
-    # 3.1 Akut Toksisite
-    "Acute Tox. 1": {"h":"H300","cutoff":1.0,"signal":"Danger"},
-    "Acute Tox. 2": {"h":"H300","cutoff":1.0,"signal":"Danger"},
-    "Acute Tox. 3": {"h":"H301","cutoff":1.0,"signal":"Danger"},
-    "Acute Tox. 4": {"h":"H302","cutoff":5.0,"signal":"Warning"},
-    # inhalasyon
-    "Acute Tox. 1 *": {"h":"H330","cutoff":1.0,"signal":"Danger"},
-    "Acute Tox. 2 *": {"h":"H330","cutoff":1.0,"signal":"Danger"},
-    "Acute Tox. 3 *": {"h":"H331","cutoff":1.0,"signal":"Danger"},
-    "Acute Tox. 4 *": {"h":"H332","cutoff":5.0,"signal":"Warning"},
+    # 3.1 Akut Toksisite — ate_engine.py (ATE yöntemi, CLP §3.1.3.6)
     # 3.2 Cilt — CLP Tablo 3.2.3 bireysel GCL
     # H314 için tek bileşen eşiği = %5 (toplamsal kural da %5'i kullanır)
     # %1-5 arası SC1 → 10×[SC1]+[SI2] ≥ %10 formülüyle H315 yakalanır
@@ -117,23 +108,12 @@ CLP_CUTOFFS_DICT = {
     "STOT SE 1": {"h":"H370","cutoff":10.0,"signal":"Danger"},
     "STOT SE 2": {"h":"H371","cutoff":10.0,"signal":"Warning"},
     "STOT SE 3": {"h":"H336","cutoff":20.0,"signal":"Warning"},  # varsayılan narkotik; H335 ayrıca _H_CODE_FALLBACK'te
-    # 3.9 STOT RE — hedef organ servisi ayrı (stot_re_service)
-    "STOT RE 1": {"h":"H372","cutoff":1.0, "signal":"Danger"},
-    "STOT RE 2": {"h":"H373","cutoff":10.0,"signal":"Warning"},
+    # 3.9 STOT RE — stot_engine.py (iki kademeli eşik, organ bazlı)
     # 3.10 Aspirasyon
     "Asp. Tox. 1": {"h":"H304","cutoff":10.0,"signal":"Danger"},
-    # 4.1 Sucul — DEAD CODE: bu satırlar main.py ECO_H_CODES filtresi nedeniyle
-    # asla kullanılmaz. Aquatic sınıflandırma ecological_service'in M-faktörlü
-    # toplamsal formülüyle yapılır (CLP Tablo 4.1.1/4.1.2). Buradaki cutoff değerleri
-    # sınıflandırma sonucunu etkilemez; sadece yapısal tutarlılık için tutuluyor.
-    "Aquatic Acute 1":   {"h":"H400","cutoff":0.0,"signal":"Warning"},
-    "Aquatic Chronic 1": {"h":"H410","cutoff":0.0,"signal":"Warning"},
-    "Aquatic Chronic 2": {"h":"H411","cutoff":0.0,"signal":"Warning"},
-    "Aquatic Chronic 3": {"h":"H412","cutoff":0.0,"signal":"Warning"},
-    "Aquatic Chronic 4": {"h":"H413","cutoff":0.0,"signal":"Warning"},
-    # 5.1 Ozon tabakasına zararlı — EUH059, piktogramsız, sinyal:Danger
-    # euh_service.py'de CAS listesiyle işlenir; buraya cutoff eklenmez.
-    # 2.x Fiziksel — ayrı engine (physical_hazard_service)
+    # 4.1 Sucul — ecological_service.py (M-faktörlü toplamsal formül)
+    # 5.1 Ozon — euh_service.py (EUH059, CAS listesi)
+    # 2.x Fiziksel — physical_engine.py
     "Flam. Gas 1":       {"h":"H220","cutoff":0.0,"signal":"Danger"},
     "Flam. Gas 2":       {"h":"H221","cutoff":0.0,"signal":"Warning"},
     "Pyrophoric Gas 1":  {"h":"H232","cutoff":0.0,"signal":"Danger"},
@@ -435,7 +415,11 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
             # Acute Tox. — karışım için ATE yöntemi (CLP Annex I 3.1.3.6) birincil yöntemdir.
             # Cutoff/konvansiyonel yöntem (Tablo 3.1.3) Acute Tox. için kullanılmaz;
             # ATE hesabı aşağıdaki calculate_clp() async fonksiyonunda yapılır.
-            if h_class.startswith('Acute Tox.') or h_class.startswith('Akut Tok.'):
+            # STOT RE — CLP §3.9.5.4: toplamsallık yok; her bileşen tekil değerlendirilir.
+            # Doğru iki kademeli eşik (≥%10→H372, %1–%10→H373) stot_engine.calculate()
+            # tarafından uygulanır ve sonuçlar classify_mixture endpoint'inde birleştirilir.
+            if h_class.startswith('Acute Tox.') or h_class.startswith('Akut Tok.') \
+                    or h_class.startswith('STOT RE'):
                 continue
 
             # CLP Annex I §2.3 Not 2: Aerosol ürünlerde Flam.Gas/Press.Gas/Flam.Liq/Flam.Sol

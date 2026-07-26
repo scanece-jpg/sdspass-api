@@ -61,6 +61,10 @@ async def health():
 from app.services.review_endpoint import router as review_router
 app.include_router(review_router)
 
+# ─── SDS ASİSTAN ENDPOINT ─────────────────────────────────────────────────────
+from app.services.assistant_endpoint import router as assistant_router
+app.include_router(assistant_router)
+
 
 @app.get("/")
 async def serve_frontend():
@@ -234,7 +238,12 @@ async def generate_pdf(data: dict = Body(...)):
                       # concMax varsa aralığın üst sınırını kullan.
                       'worst_case_conc': float(c.get('concMax') or c.get('conc', c.get('concentration',0)) or 0),
                       'hazards': c.get('hazards',[]),
-                      'm_factors': c.get('m_factors', {})} for c in components]
+                      'm_factors': c.get('m_factors', {}),
+                      'ec50_algae':   c.get('ec50_algae'),
+                      'ec50_fish':    c.get('ec50_fish'),
+                      'ec50_daphnia': c.get('ec50_daphnia'),
+                      'ec50_noec':    c.get('ec50_noec'),
+                      } for c in components]
         eco_result = None  # try bloğunda güncellenir; hata varsa reconciliation fallback devreye girer
 
         # Sabitler ve yetkili motor çıktıları — reconciliation bloğunda uygulanır
@@ -1277,17 +1286,19 @@ async def clp_calculate(body: dict):
         # 1. Ana CLP (cut-off tablosu) — pH uç değer varsa doğrudan H314+H318 atanır
         result = classify_mixture_clp(components, mixture_ph=mixture_ph, mixture_form=mixture_form)
 
-        # 2. STOT RE (hedef organ bazlı)
+        # 2. STOT RE (hedef organ bazlı) — stot_engine doğru iki kademeli eşik uygular
         stot = calculate_stot_re(components)
-        for h in stot["h_codes"]:
+        for r_stot in stot["results"]:
+            h = r_stot["h_code"]
             if h not in result["h_codes"]:
                 result["h_codes"].append(h)
-                result["passed"].append({
-                    "h_class": "STOT RE",
-                    "h_code": h,
-                    "conc": 0,
-                    "reason": next((r["reason"] for r in stot["results"] if r["h_code"] == h), "STOT RE toplamsal"),
-                })
+            result["passed"] = [p for p in result["passed"] if p.get("h_code") != h]
+            result["passed"].append({
+                "h_class": r_stot.get("h_class", "STOT RE"),
+                "h_code":  h,
+                "conc":    0,
+                "reason":  r_stot.get("reason", "STOT RE"),
+            })
 
         # 3. Ekoloji (M-faktör ile sucul)
         def to_dict(obj):
@@ -1468,6 +1479,12 @@ async def sds_calculate(body: dict = Body(...)):
     from app.services.codes_i18n          import correct_hclass, translate_hclass
 
     comps       = body.get('components', [])
+    # concentration/conc/concMax anahtar tutarsızlığını tek noktada normalize et
+    for _c in comps:
+        if 'conc' not in _c and 'concentration' in _c:
+            _c['conc'] = _c['concentration']
+        if 'concMax' not in _c:
+            _c['concMax'] = _c.get('conc') or _c.get('concentration') or 0
     form        = body.get('form', 'liquid')
     user_fp_raw = body.get('user_fp') or body.get('flash_point')
     mixture_ph  = body.get('mixture_ph')
@@ -1506,7 +1523,14 @@ async def sds_calculate(body: dict = Body(...)):
 
         # ── 5. Ekoloji ────────────────────────────────────────────────────────
         _aq = eco_calculate_aquatic(comps)
-        eco_result = {'h_codes': [_aq.h_code] if _aq else []}
+        _aq_dict = None
+        if _aq:
+            _aq_dict = {
+                'h': _aq.h_code, 'cls': _aq.h_class,
+                'formula': _aq.formula, 'note': _aq.note,
+                'm_factor_warnings': _aq.m_factor_warnings or [],
+            }
+        eco_result = {'h_codes': [_aq.h_code] if _aq else [], 'aquatic': _aq_dict}
 
         # ── 5b. ATE sağlık tehlikeleri — classify_mixture_clp Acute Tox. atlar ─
         from app.services.clp_service import calculate_ate_health_h_codes as _calc_ate
@@ -1547,6 +1571,25 @@ async def sds_calculate(body: dict = Body(...)):
             + eco_result.get('h_codes', [])
         )
         ppe_result = ppe_select([h for h in _ppe_h_now if h], lang=lang)
+
+        # ── Flam.Liq. öncelik — physical_engine varsa clp_service tahminini temizle ─
+        # CLP §2.6.4: ölçülmüş/hesaplanmış parlama noktası konvansiyonel kesim değerinin
+        # önüne geçer. physical_engine sonuç ürettiyse clp_service'in tahmini kaydını
+        # hem passed'tan hem all_h'tan sil; physical_engine'in doğru kaydı aşağıdaki
+        # merge döngüsünde (phys_result['results']) zaten ekleniyor.
+        _phys_flam_h = {
+            r['h'] for r in phys_result.get('primary', [])
+            if r.get('type') == 'flam_liq' and r.get('h')
+        }
+        if _phys_flam_h:
+            clp_result['passed'] = [
+                p for p in clp_result.get('passed', [])
+                if p.get('h_code') not in ('H224', 'H225', 'H226')
+            ]
+            clp_result['h_codes'] = [
+                h for h in clp_result.get('h_codes', [])
+                if h not in ('H224', 'H225', 'H226')
+            ]
 
         # ── H kodlarını birleştir ─────────────────────────────────────────────
         all_h = set(clp_result.get('h_codes', []))
@@ -2273,7 +2316,10 @@ async def parse_supplier_sds(request: Request):
                     "index_no": "017-002-00-2",
                     "concMin": 15,
                     "concMax": 20,
-                    "hCodes": ["H314", "H335"]
+                    "hCodes": ["H314", "H335"],
+                    "ld50_oral": 300.0,
+                    "ld50_dermal": None,
+                    "lc50_inhal": None
                 }
             ]
         }, ensure_ascii=False)
@@ -2292,16 +2338,19 @@ async def parse_supplier_sds(request: Request):
 - Index No / KKDIK No: xxx-xxx-xx-x (belgede yoksa null)
 - concMin / concMax: sayısal yüzde değeri (örn. 15.0), belgede tek değer varsa ikisine de yaz, yoksa null
 - hCodes: belgede bu bileşen için listelenen H kodları (örn. ["H314","H335"])
-- Belgede yazan değerleri birebir al, tahmin etme
+- ld50_oral: Bölüm 11'deki oral LD50 değeri mg/kg cinsinden sayısal (yoksa null)
+- ld50_dermal: Bölüm 11'deki dermal LD50 değeri mg/kg cinsinden sayısal (yoksa null)
+- lc50_inhal: Bölüm 11'deki inhalasyon LC50 değeri mg/L/4h cinsinden sayısal (yoksa null)
+- Belgede yazan değerleri birebir al, tahmin etme; birim dönüşümü yapma
 
 SDS METNİ:
-{sds_text[:12000]}
+{sds_text[:30000]}
 
 Sadece JSON:"""
 
         resp = client.messages.create(
-            model="claude-sonnet-4-6",
-            max_tokens=2048,
+            model="claude-haiku-4-5-20251001",
+            max_tokens=4096,
             temperature=0,
             messages=[{"role": "user", "content": prompt}]
         )
@@ -2336,21 +2385,27 @@ Sadece JSON:"""
         for comp in components:
             cas = (comp.get("cas") or "").strip()
             pdf_hcodes = [h.strip().upper() for h in (comp.get("hCodes") or []) if h]
-            comp["hCodes"] = pdf_hcodes
 
             if not cas:
                 warnings.append(f"{comp.get('name','?')}: CAS numarası yok — H kodları doğrulanamadı, PDF değerleri kullanıldı")
-            if cas:
+                # PDF değerlerinden hazards üret (h_class bilinmiyor)
+                comp["hazards"] = [{"h_class": c, "h_code": c} for c in pdf_hcodes]
+            else:
                 sub = lookup_substance(cas)
                 if not sub:
                     warnings.append(f"{comp.get('name','?')} (CAS {cas}): veritabanında bulunamadı — H kodları doğrulanamadı, PDF değerleri kullanıldı")
+                    comp["hazards"] = [{"h_class": c, "h_code": c} for c in pdf_hcodes]
                 else:
                     # EC no eksikse doldur
                     if not comp.get("ec_no") and sub.get("ec_no"):
                         comp["ec_no"] = sub["ec_no"]
-                    # H kodlarını Ek-6/Annex VI ile karşılaştır
-                    db_hcodes = [h.get("h_code","").upper() for h in (sub.get("hazards") or []) if h.get("h_code")]
-                    if db_hcodes:
+                    # M faktörleri
+                    if sub.get("m_factors"):
+                        comp["m_factors"] = sub["m_factors"]
+                    # DB'deki hazards listesi — h_class doğru formatta (örn. "Skin Corr. 1A")
+                    db_hazards = [h for h in (sub.get("hazards") or []) if h.get("h_code")]
+                    db_hcodes  = [h["h_code"].upper() for h in db_hazards]
+                    if db_hazards:
                         pdf_set = set(pdf_hcodes)
                         db_set  = set(db_hcodes)
                         if pdf_set != db_set:
@@ -2367,7 +2422,20 @@ Sadece JSON:"""
                             warnings.append(
                                 f"✅ {comp.get('name','?')} (CAS {cas}): H kodları tam uyuşuyor — {'+'.join(sorted(db_set))}"
                             )
-                        comp["hCodes"] = db_hcodes  # her zaman güncel DB değerini kullan
+                        comp["hazards"] = db_hazards  # h_class + h_code doğru formatta
+                    else:
+                        comp["hazards"] = [{"h_class": c, "h_code": c} for c in pdf_hcodes]
+
+            # ATE değerleri — Bölüm 11'den çekilen, veritabanında yoksa ATEmix hesabına girer
+            ate_oral   = comp.get("ld50_oral")
+            ate_dermal = comp.get("ld50_dermal")
+            ate_inhal  = comp.get("lc50_inhal")
+            if ate_oral or ate_dermal or ate_inhal:
+                comp["ate"] = {
+                    "oral":   float(ate_oral)   if ate_oral   else None,
+                    "dermal": float(ate_dermal) if ate_dermal else None,
+                    "inhal":  float(ate_inhal)  if ate_inhal  else None,
+                }
 
             validated.append(comp)
 

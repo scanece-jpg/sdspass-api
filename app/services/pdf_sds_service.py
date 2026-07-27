@@ -1796,7 +1796,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         [phys_prop(lang,'viscosity'),     _pv('viscosity','cSt @40°C')],
         [phys_prop(lang,'solubility'),    _pv('solubility', 'mg/L')],
         [phys_prop(lang,'vapor_pressure'),_vp_val],
-        [_vd_lbl,                         _pv('vapor_density')],
+        [_vd_lbl,                         ('Uygulanamaz' if lang=='TR' else 'Not applicable') if _is_solid_form else _pv('vapor_density')],
         [_kow_lbl,                        _pv('log_kow')],
         [_ai_lbl,                         _pv('auto_ignition','°C')],
         [_ex_lbl,                         _ex_val],
@@ -1811,14 +1811,18 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _dc_lbl = 'Ayrışma Sıcaklığı' if lang=='TR' else 'Decomposition Temp.'
     _dc_val = _pv('decomposition_temp','°C')
 
-    # Patlayıcı / oksitleyici
+    # Patlayıcı / oksitleyici — phys alanı yoksa H kodlarından türet
     _prop_lbl = 'Patlayıcı/Oksitleyici Özellikler' if lang=='TR' else 'Explosive/Oxidising Properties'
+    _h_set = set(h_codes)
     _props = []
-    if phys.get('is_explosive'):
+    _is_expl = phys.get('is_explosive') or bool(_h_set & {'H200','H201','H202','H203','H204','H205','H240','H241'})
+    _is_oxid = phys.get('is_oxidising') or bool(_h_set & {'H270','H271','H272'})
+    _is_flam = phys.get('is_flammable') or bool(_h_set & {'H220','H221','H222','H223','H228','H232','H250','H251','H252'})
+    if _is_expl:
         _props.append('Patlayıcı özellik' if lang=='TR' else 'Explosive')
-    if phys.get('is_oxidising'):
+    if _is_oxid:
         _props.append('Oksitleyici özellik' if lang=='TR' else 'Oxidising')
-    if phys.get('is_flammable'):
+    if _is_flam:
         _props.append('Yanıcı (katı/gaz)' if lang=='TR' else 'Flammable solid/gas')
     _prop_val = '; '.join(_props) if _props else ('Yok' if lang=='TR' else 'None')
 

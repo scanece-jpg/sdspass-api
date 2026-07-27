@@ -1457,5 +1457,19 @@
     "atp": "PubChem/0 notif",
     "sea_ek6": false,
     "source_priority": 4
+  },
+  "7647-14-5": {
+    "name": "sodium chloride",
+    "name_tr": "sodyum klorür",
+    "ec_no": "231-598-3",
+    "signal": "",
+    "pictograms": [],
+    "hazards": [],
+    "m_factors": {},
+    "index_no": "",
+    "atp": "manual-unclassified",
+    "annex_vi": false,
+    "sea_ek6": false,
+    "source_priority": 4
   }
 }

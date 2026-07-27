@@ -2590,15 +2590,23 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             continue
         _conc = float(_c.get('concMax') or _c.get('conc') or _c.get('concentration') or 0)
         _mf_raw = _c.get('m_factors') or {}
-        _m_a = float(_mf_raw.get('acute', 1)) if _mf_raw else 1.0
+        _m_a = float(_mf_raw.get('acute',   1)) if _mf_raw else 1.0
+        _m_c = float(_mf_raw.get('chronic', 1)) if _mf_raw else 1.0
         _name = (_c.get('name_tr', '') if lang == 'TR' else '') or _c.get('name', '')
         _cas  = _c.get('cas_no', _c.get('cas', ''))
-        _dominant_h = 'H400' if ('H400' in _c_mp_h or 'H410' in _c_mp_h) else 'H411'
+        # Bileşenin gerçek en ağır H kodunu göster (H410 > H400 > H411)
+        if 'H410' in _c_mp_h:
+            _dominant_h = 'H410'
+        elif 'H400' in _c_mp_h:
+            _dominant_h = 'H400'
+        else:
+            _dominant_h = 'H411'
         _mp_comps.append({
             'cas':    _cas,
             'name':   _name or _cas,
             'conc':   _conc,
-            'm':      _m_a,
+            'm_a':    _m_a,
+            'm_c':    _m_c,
             'h_code': _dominant_h,
         })
 
@@ -2610,20 +2618,22 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         story.append(Paragraph(f"<b>{_mp_title}:</b>", styles['body_bold']))
 
         _col1 = 'CAS No'
-        _col2 = 'Madde'  if lang == 'TR' else 'Substance'
+        _col2 = 'Madde'    if lang == 'TR' else 'Substance'
         _col3 = 'C (%)'
         _col4 = 'M (akut)' if lang == 'TR' else 'M (acute)'
-        _col5 = 'H Kodu'  if lang == 'TR' else 'H Code'
-        _mp_rows = [[_col1, _col2, _col3, _col4, _col5]]
+        _col5 = 'M (kr.)'  if lang == 'TR' else 'M (chr.)'
+        _col6 = 'H Kodu'   if lang == 'TR' else 'H Code'
+        _mp_rows = [[_col1, _col2, _col3, _col4, _col5, _col6]]
         for _mp in _mp_comps:
             _mp_rows.append([
                 _mp['cas'],
                 Paragraph(_mp['name'], styles['small']),
                 f"{_mp['conc']:.1f}",
-                f"{int(_mp['m'])}",
+                f"{int(_mp['m_a'])}",
+                f"{int(_mp['m_c'])}",
                 _mp['h_code'],
             ])
-        story.append(data_table(_mp_rows, [24*mm, 58*mm, 18*mm, 22*mm, 22*mm], styles))
+        story.append(data_table(_mp_rows, [24*mm, 48*mm, 15*mm, 18*mm, 18*mm, 21*mm], styles))
 
         # Karar _sea_env_mark'tan (eco_result.aquatic.h_code) geliyor
         _is_mp = bool(_sea_env_mark)
@@ -2638,13 +2648,13 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         story.append(Paragraph(_verdict, styles['small']))
 
         # H411 bileşeni varsa Test 2 dipnotu ekle
-        if any(_mp['h_code'] == 'H411' for _mp in _mp_comps):
+        if any(_mp['h_code'] in ('H410', 'H411') for _mp in _mp_comps):
             _t2_note = (
-                '* H411 (Sucul Kronik 2): M-faktör uygulanmaz. '
-                'IMDG §2.10.3 Test 2 kapsamında konsantrasyon değeri doğrudan toplanır — eşik: Σ(C) ≥ %1,0.'
+                '* H410 (Sucul Kron. 1): M(kr.) kronik toplamsal formülde kullanılır. '
+                'H411 (Sucul Kron. 2): M-faktör uygulanmaz, konsantrasyon doğrudan toplanır — eşik: Σ(C) ≥ %1,0.'
                 if lang == 'TR' else
-                '* H411 (Aquatic Chronic 2): No M-factor applies. '
-                'IMDG §2.10.3 Test 2: concentration summed directly — threshold: Σ(C) ≥ 1.0%.'
+                '* H410 (Aquatic Chr. 1): M(chr.) applies in the chronic summation formula. '
+                'H411 (Aquatic Chr. 2): No M-factor; concentration summed directly — threshold: Σ(C) ≥ 1.0%.'
             )
             story.append(Paragraph(_t2_note, styles['small']))
 

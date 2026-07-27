@@ -79,10 +79,15 @@ def build_transport_components(raw_components: list) -> 'list[Component]':
             raise ValueError(
                 f'Bileşen {cas}: konsantrasyon parse edilemedi ({raw_conc!r}) — {_e}'
             ) from _e
+        # H kodları: flat 'h_codes' listesi varsa kullan, yoksa 'hazards' listesinden çek.
+        # PDF endpoint'inde _refresh_comp sonrası kodlar hazards[*].h_code'da saklanır.
+        _raw_h = c.get('h_codes')
+        if not _raw_h:
+            _raw_h = [h['h_code'] for h in (c.get('hazards') or []) if h.get('h_code')]
         result.append(Component(
             cas=cas,
             conc=conc,
-            h_codes=list(c.get('h_codes') or []),
+            h_codes=list(_raw_h),
             ec=c.get('ec_no') or None,
             name=c.get('name') or '',
             m_acute=c.get('m_acute') or None,

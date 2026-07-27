@@ -1278,6 +1278,17 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     story += section_block(section_title(lang, 3), styles)
     story += sub_block(f"3.2 {sub_title(lang,'3.2')}", styles)
 
+    def _disp_conc(cas: str, conc_val) -> str:
+        """Gizlilik seviyesine göre konsantrasyon gösterimi."""
+        level = disclosure.get(str(cas).strip(), 'show')
+        try:
+            c = float(conc_val or 0)
+        except (TypeError, ValueError):
+            c = 0.0
+        if level == 'show' or c == 0:
+            return f'{c:g}' if c else '—'
+        return get_echa_range(c)  # 'range' veya 'hide' → ECHA aralığı
+
     sec3_rows = generate_section3(components, disclosure, lang=lang)
     if sec3_rows:
         # B3.2 Tablo — 4 sütun, A4'e sığacak şekilde
@@ -2300,7 +2311,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             for c in detail.get('components', []):
                 comp_rows.append([
                     str((c.get('name_tr','') if lang=='TR' else '') or c.get('name', c.get('cas', '—'))),
-                    f"{c.get('conc', '—')}",
+                    _disp_conc(c.get('cas',''), c.get('conc')),
                     str(c.get('code', '—')),
                     f"{c.get('ate', '—')} {unit}",
                 ])
@@ -2733,7 +2744,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             _mp_rows.append([
                 _mp['cas'],
                 Paragraph(_mp['name'], styles['small']),
-                f"{_mp['conc']:.1f}",
+                _disp_conc(_mp['cas'], _mp['conc']),
                 f"{int(_mp['m_a'])}",
                 f"{int(_mp['m_c'])}",
                 _mp['h_code'],

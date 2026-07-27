@@ -1733,6 +1733,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         [_kow_lbl,                        _pv('log_kow')],
         [_ai_lbl,                         _pv('auto_ignition','°C')],
         [_ex_lbl,                         _ex_val],
+        [('Henry Sabiti' if lang=='TR' else 'Henry\'s Law Constant'),
+         phys.get('henry_constant', {}).get('display', na) if phys.get('henry_constant') else na],
     ]
     # Koku eşiği
     _ot_lbl = 'Koku Eşiği' if lang=='TR' else 'Odour Threshold'
@@ -1772,7 +1774,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _bp_lbl  = phys_prop(lang, 'boiling_point')
     _ph_lbl  = phys_prop(lang, 'ph')
     _vis_lbl = phys_prop(lang, 'viscosity')
-    _optional = {_rd_lbl, _vd_lbl, _ai_lbl, _ex_lbl, _ot_lbl, _dc_lbl, _er_lbl, _kow_lbl}
+    _henry_lbl = 'Henry Sabiti' if lang=='TR' else "Henry's Law Constant"
+    _optional = {_rd_lbl, _vd_lbl, _ai_lbl, _ex_lbl, _ot_lbl, _dc_lbl, _er_lbl, _kow_lbl, _henry_lbl}
     if not _is_solid_form:
         _optional.add(_mp_lbl)
     # Katı/toz formda pH ve viskozite uygulanamaz — değer girilmemişse gizle

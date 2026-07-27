@@ -1838,6 +1838,32 @@ def calc_theo_props(comps: List[Dict]) -> Optional[Dict]:
             'standard': 'OECD 105 (referans)',
         }
 
+    # ── Henry Sabiti (H, Pa·m³/mol) — Mackay & Shiu (1981) ──────────────────
+    # H = VP_Pa × MW / S_g_m3   (S mg/L = g/m³, MW = buhar_yoğunluğu × 29)
+    _vp_h  = res.get('vapor_pressure', {}).get('value')   # hPa
+    _vd_h  = res.get('vapor_density',  {}).get('value')   # adimensionel (hava=1)
+    _sol_h = res.get('solubility',     {}).get('value')   # mg/L
+    if _vp_h and _vd_h and _sol_h and _sol_h > 0:
+        _vp_pa = float(_vp_h) * 100          # hPa → Pa
+        _mw    = float(_vd_h) * 29           # g/mol
+        _s_gm3 = float(_sol_h)               # g/m³
+        _henry = (_vp_pa * _mw) / _s_gm3    # Pa·m³/mol
+        _hcc   = _henry / (8.314 * 298.15)  # boyutsuz (hava/su), 25°C
+        # Doğruluk notu: polarsız organiklerde ±50%, polar/iyonize bileşiklerde ±1 log birim
+        _henry_note = (
+            'Tahmin (VP/S oranı, Mackay & Shiu 1981). '
+            'Polarsız organiklerde ±50%; alkol/asit/baz içeren karışımlarda sapma büyük olabilir.'
+        )
+        res['henry_constant'] = {
+            'value':    round(_henry, 4),
+            'hcc':      round(_hcc, 5),
+            'display':  f'{_henry:.2e} Pa·m³/mol  (Hcc = {_hcc:.2e})',
+            'method':   'H = VP(Pa) × MW / S(g/m³) — Mackay & Shiu (1981)',
+            'standard': 'REACH SDS Kılavuzu §9.1',
+            'note':     _henry_note,
+            'error':    {'pct': 50},
+        }
+
     return res
 
 

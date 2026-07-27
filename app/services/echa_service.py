@@ -693,15 +693,11 @@ async def _fetch_pubchem_ghs_fallback(cas: str, client: httpx.AsyncClient) -> di
                         return res
             return None
 
-        ghs_node  = find_ghs(data)
-        if not ghs_node:
-            return None
-        groups = _parse_ghs_groups(ghs_node.get('Information', []))
-        best   = _best_group(groups)
-        if not best or not best['h_codes']:
-            return None
+        ghs_node = find_ghs(data)
+        groups   = _parse_ghs_groups(ghs_node.get('Information', [])) if ghs_node else []
+        best     = _best_group(groups) if groups else None
 
-        # Madde ismi ve EC numarası için PubChem sorguları (paralel)
+        # Madde ismi ve EC numarası — H kodu olmasa da çek (sınıflandırılmamış madde)
         props_r, ec_no = await asyncio.gather(
             client.get(
                 f'https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/{cid}/property/'
@@ -714,6 +710,23 @@ async def _fetch_pubchem_ghs_fallback(cas: str, client: httpx.AsyncClient) -> di
         if props_r.status_code == 200:
             p = props_r.json().get('PropertyTable', {}).get('Properties', [])
             name = (p[0].get('IUPACName') if p else '') or cas
+
+        # H kodu yok → sınıflandırılmamış madde olarak döndür (isim + boş hazards)
+        if not best or not best['h_codes']:
+            return {
+                'cas'           : cas,
+                'name'          : name,
+                'ec_no'         : ec_no,
+                'source'        : 'PubChem (sınıflandırılmamış)',
+                'source_note'   : '',
+                'signal'        : '',
+                'pictograms'    : [],
+                'h_codes'       : [],
+                'hazard_classes': [],
+                'm_factors'     : {},
+                'notif_count'   : 0,
+                'notif_summary' : '',
+            }
 
         src_note = 'CMR birleştirme aktif' if best.get('_cmr_merged') else ''
         result = {

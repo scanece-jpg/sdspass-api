@@ -230,7 +230,11 @@ SKIN_SENS_SCL_EUH208_THRESHOLD = {
 
 
 
-def check_euh(components: List[Dict]) -> Dict:
+_TIO2_CAS = {'13463-67-7', '1317-70-0', '1317-80-2'}  # rutil, anataz, brookit
+
+def check_euh(components: List[Dict],
+              mixture_form: str = 'liquid',
+              form_sub: str = '') -> Dict:
     """
     Formüldeki bileşenlere göre EUH ifadelerini tespit eder.
 
@@ -490,6 +494,40 @@ def check_euh(components: List[Dict]) -> Dict:
             'scl_note'     : '; '.join(scl_notes) if scl_notes else None,
         })
         detected_codes.add('EUH208')
+
+    # ── EUH211/EUH212 — TiO2 (EC 2021/2030 kararı) ─────────────────────────────
+    # EUH211: TiO2 sıvı form ≥%1 (sprey/sis oluşturabilir)
+    # EUH212: TiO2 katı/toz form ≥%1 (solunabilir toz oluşabilir)
+    # nano toz (form_sub='powder_nano') için eşik %0.1
+    _is_liquid_form = mixture_form in ('liquid', 'solution', 'paste', 'aerosol', 'emulsion')
+    _is_solid_form  = mixture_form in ('solid', 'powder')
+    _nano_sub       = form_sub in ('powder_nano',)
+    for comp in components:
+        cas  = str(comp.get('cas', '')).strip()
+        name = comp.get('name', '') or ''
+        conc = float(comp.get('conc', comp.get('concentration', 0)) or 0)
+        if cas not in _TIO2_CAS:
+            continue
+        _euh211_thresh = 1.0
+        _euh212_thresh = 0.1 if _nano_sub else 1.0
+        if _is_liquid_form and conc >= _euh211_thresh and 'EUH211' not in detected_codes:
+            detected.append({
+                'code':        'EUH211',
+                'text':        'Dikkat! Kullanımda solunum yoluyla maruz kalınabilecek tehlikeli ince damlacıklar (nano) oluşabilir. Sisi/buharı solumayın.',
+                'source_cas':  cas,
+                'source_name': name,
+                'note':        'TiO2 sıvı form ≥%1 — EC 2021/2030 Madde 2(3)',
+            })
+            detected_codes.add('EUH211')
+        if _is_solid_form and conc >= _euh212_thresh and 'EUH212' not in detected_codes:
+            detected.append({
+                'code':        'EUH212',
+                'text':        'Dikkat! Kullanımda solunum yoluyla maruz kalınabilecek tehlikeli ince partiküller (nano) oluşabilir. Solumayın.',
+                'source_cas':  cas,
+                'source_name': name,
+                'note':        f'TiO2 katı/toz form ≥%{_euh212_thresh} — EC 2021/2030 Madde 2(3)',
+            })
+            detected_codes.add('EUH212')
 
     # ── EUH059 — Ozon tüketen maddeler (CAS listesi) ────────────────────────────
     for comp in components:

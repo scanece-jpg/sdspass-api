@@ -1378,7 +1378,9 @@ async def euh_check(body: dict):
     from app.services.euh_service import check_euh
     components = body.get("components", [])
     try:
-        result = check_euh(components)
+        result = check_euh(components,
+                           mixture_form=body.get('form', 'liquid'),
+                           form_sub=body.get('form_sub', ''))
         return {"success": True, **result}
     except Exception as e:
         raise HTTPException(status_code=400, detail=str(e))
@@ -1533,7 +1535,9 @@ async def sds_calculate(body: dict = Body(...)):
                         _c['suppl_hazards'] = _sub['suppl_hazards']
         except Exception:
             pass
-        euh_result = euh_calculate(comps)
+        euh_result = euh_calculate(comps,
+                                    mixture_form=form,
+                                    form_sub=form_sub)
 
         # ── 5. Ekoloji ────────────────────────────────────────────────────────
         _aq = eco_calculate_aquatic(comps)

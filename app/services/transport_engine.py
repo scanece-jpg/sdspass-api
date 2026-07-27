@@ -6,8 +6,89 @@ Kaynak: ADR 2023 Tablo 3.1, IMDG Kod 2022, IATA-DGR 2024
 JS transport_engine.js'nin Python karşılığı.
 """
 
+from dataclasses import dataclass
 from typing import List, Optional, Dict
 from app.services.transport_adr_service import lookup_by_cas as _lookup_by_cas
+
+
+@dataclass
+class Component:
+    """Taşıma sayımı ve B3 render için birleşik bileşen nesnesi.
+
+    h_codes: B3 render ile AYNI kaynak — bu nesnenin kopyası değil, aynı listesi.
+    conc:    ham % değer (maske render'da uygulanır, burada ham sayı).
+    m_acute/m_chronic: deniz kirletici gerekçe tablosu için (şimdilik None kabul).
+    """
+    cas:       str
+    conc:      float
+    h_codes:   list
+    ec:        'str | None' = None
+    name:      str = ''
+    m_acute:   'int | None' = None
+    m_chronic: 'int | None' = None
+
+
+# ADR Bölüm 2'ye göre taşıma sınıfı tetikleyen H kodları.
+# Kapsam: Sınıf 3/4/5/6.1/8/9 — portföy ağırlıklı biyosid + kimyasal.
+# Kasıtlı dışarıda bırakılanlar (buraya eklenmeden önce ADR Tablo A'da doğrulayın):
+#   H200-H206 (Sınıf 1, patlayıcı)       — portföyde yok; CAS araması tüm sınıfları kapsar
+#   H280/H281 (Sınıf 2, basınçlı gaz)    — aerosol eklenince buraya eklenmeli
+#   H290 (Sınıf 8, metallere aşındırıcı, H314 olmadan tek başına) — şimdilik dışarıda; TODO
+#   H302/H312/H332 (Kat.4 akut toksisite) — ADR 6.1 LD50 ≤300 mg/kg eşiği; Kat.4 yetmez
+#   H315/H317/H319/H335/H336             — ADR sınıfı tetiklemez
+#   H412/H413                             — ADR sınıfı tetiklemez (H411 sınırı)
+_TRANSPORT_TRIGGER_H: frozenset = frozenset({
+    # Fiziksel tehlikeler
+    'H220', 'H221', 'H222', 'H223', 'H224', 'H225', 'H226', 'H228',
+    'H240', 'H241', 'H242', 'H250', 'H251', 'H252', 'H260', 'H261',
+    'H270', 'H271', 'H272',
+    # Akut toksisite Kat.1-3
+    'H300', 'H301', 'H310', 'H311', 'H330', 'H331',
+    # Aşındırıcılık
+    'H314',
+    # Sucul — ADR §2.2.9.1.10
+    'H400', 'H410', 'H411',
+})
+
+
+def build_transport_components(raw_components: list) -> 'list[Component]':
+    """Ham bileşen listesini (request body dict'leri) Component nesnelerine dönüştürür.
+
+    Konsantrasyon parse edilemezse ValueError yükseltir — sessiz 0.0 fallback yoktur.
+    Çağıran try bloğu içinde çağırmalı; hata PDF üretimini durdurur.
+    """
+    result: list[Component] = []
+    for c in raw_components:
+        cas = str(c.get('cas_no') or c.get('cas') or '').strip()
+        if not cas:
+            continue
+        raw_conc = c.get('conc') or c.get('concentration') or c.get('concMax')
+        if raw_conc is None:
+            raise ValueError(
+                f'Bileşen {cas}: konsantrasyon alanı eksik — '
+                'transport §3.1.3.2 sayımı yapılamaz'
+            )
+        try:
+            conc = float(
+                str(raw_conc)
+                .replace('%', '').replace('≥', '').replace('≤', '')
+                .replace('>', '').replace('<', '').strip()
+                .split('-')[0] or '0'
+            )
+        except (ValueError, TypeError) as _e:
+            raise ValueError(
+                f'Bileşen {cas}: konsantrasyon parse edilemedi ({raw_conc!r}) — {_e}'
+            ) from _e
+        result.append(Component(
+            cas=cas,
+            conc=conc,
+            h_codes=list(c.get('h_codes') or []),
+            ec=c.get('ec_no') or None,
+            name=c.get('name') or '',
+            m_acute=c.get('m_acute') or None,
+            m_chronic=c.get('m_chronic') or None,
+        ))
+    return result
 
 CLASS_LABELS: Dict[str, str] = {
     '1'  : 'Patlayıcı Maddeler',
@@ -346,52 +427,69 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
 def classify(h_codes: List[str], form: str = 'liquid',
              phys_h_codes: Optional[List[str]] = None,
              viscosity: Optional[float] = None,
-             cas_conc: Optional[Dict[str, float]] = None) -> Dict:
+             components: 'Optional[List[Component]]' = None) -> Dict:
     """
     ADR/IMDG/IATA sınıflandırması.
 
     Args:
-        h_codes      : CLP motorundan gelen H kodları
+        h_codes      : Nihai karışım H kodları (CLP + eco birleşimi) — env_mark bu parametreden türer
         form         : 'liquid' | 'solid' | 'aerosol' | 'gas'
         phys_h_codes : Fiziksel motordan gelen H22x/H228 kodları
         viscosity    : Kinematik viskozite (mm²/s @40°C) — UN 3082 ÖH 375 kontrolü için
-        cas_conc     : {CAS: konsantrasyon%} — maddeye özgü UN araması + konsantrasyon ayrımı
+        components   : Bileşen listesi — §3.1.3.2 tetikleyici sayımı + baskın madde denetimi için
 
     Returns:
-        {
-          not_regulated, road, sea, air,
-          conflict_warning, adr_caution
-        }
+        {not_regulated, road, sea, air, conflict_warning, adr_caution}
     """
     is_solid = (form or 'liquid') in ('solid', 'powder')
 
-    # ── CAS'a özgü Tablo 3.1 girişi — ADR Tablo A doğrudan arama ─────────────
-    # Konsantrasyon bilgisiyle birlikte doğru UN seçilir.
-    for _cas, _conc in (cas_conc or {}).items():
-        _details = _lookup_by_cas(_cas, concentration=_conc)
-        if _details:
-            # env_mark: CAS-lookup erken dönsün de olsa eko H kodları h_codes'tan gelir.
-            # ADR §2.2.9.1.10: H400/H410/H411 → deniz kirletici (CAS tablosundan bağımsız).
-            _cas_env = bool(set(h_codes or []) & {'H400', 'H410', 'H411'})
-            _road = {
-                'un':    _details['un_no'],
-                'label': _details.get('name_tr') or _details.get('name', ''),
-                'class': _details.get('class', ''),
-                'pg':    _details.get('packing_group', ''),
-                'kemler': _details.get('kemler', ''),
-                'tunnel': _details.get('tunnel_code', ''),
-                'note':  f"ADR Tablo A: {_details['un_no']} — Sınıf {_details.get('class','')}, PG {_details.get('packing_group','')}.",
-                'env_mark': _cas_env,
-            }
-            return {
-                'not_regulated': False,
-                'road': _road,
-                'sea':  _road,
-                'air':  _road,
-                'env_mark': _cas_env,
-                'conflict_warning': None,
-                'adr_caution': None,
-            }
+    # ── ADR §3.1.3.2: Baskın madde + spesifik Tablo A girişi ─────────────────
+    # Tetikleyici bileşenler: en az bir _TRANSPORT_TRIGGER_H kodu taşıyanlar.
+    # (H302/H312/H332/H315/H319/H335/H412/H413 → taşımayı tetiklemez.)
+    # env_mark her zaman nihai karışım H kodlarından (h_codes parametresi) türer —
+    # bileşen-bazlı hesap değil; karışımın Σ eco sınıflandırması belirler.
+    _mixture_env_mark = bool(set(h_codes or []) & {'H400', 'H410', 'H411'})
+
+    _comps = components or []
+    if _comps:
+        triggering = [c for c in _comps if set(c.h_codes) & _TRANSPORT_TRIGGER_H]
+        dominant   = max(_comps, key=lambda c: c.conc)
+
+        if len(triggering) == 1 and triggering[0] is dominant:
+            # §3.1.3.2: tek tetikleyici bileşen + o bileşen baskın → adlı giriş zorunlu
+            _t = triggering[0]
+            _details = _lookup_by_cas(_t.cas, concentration=_t.conc)
+            if _details:
+                # §3.1.3.2(c): spesifik girişin fiziksel hali ürünle uyuşmalı.
+                # Uyuşmazlık (ör. katı TCCA girişi ama sıvı ürün) → B.N.O.'ya düş.
+                _seed_state = _details.get('physical_state')
+                _prod_state = 'solid' if is_solid else ('gas' if form == 'gas' else 'liquid')
+                if _seed_state and _seed_state != _prod_state:
+                    pass  # hal uyumsuzluğu — aşağıya, B.N.O.'ya düş
+                else:
+                    _road = {
+                        'un':     _details['un_no'],
+                        'label':  _details.get('name_tr') or _details.get('name', ''),
+                        'class':  _details.get('class', ''),
+                        'pg':     _details.get('packing_group', ''),
+                        'kemler': _details.get('kemler', ''),
+                        'tunnel': _details.get('tunnel_code', ''),
+                        'note':   (f"ADR §3.1.3.2 — Baskın madde {_t.cas}: "
+                                   f"{_details['un_no']} Sınıf {_details.get('class','')}, "
+                                   f"PG {_details.get('packing_group','')}."),
+                        'env_mark': _mixture_env_mark,
+                    }
+                    return {
+                        'not_regulated': False,
+                        'road': _road,
+                        'sea':  _road,
+                        'air':  _road,
+                        'env_mark': _mixture_env_mark,
+                        'conflict_warning': None,
+                        'adr_caution': None,
+                    }
+        # len(triggering) == 0 → H-kodu yoluna düş (not_regulated veya eco → Sınıf 9)
+        # len(triggering) >= 2 → B.N.O. yolu; CAS araması uygulanmaz
 
     # H kodlarını temizle ve birleştir
     def _clean(h: str) -> str:

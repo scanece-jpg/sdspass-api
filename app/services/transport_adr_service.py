@@ -89,11 +89,11 @@ _SEED_ENTRIES: dict = {
         {'min_conc': 8,   'max_conc': 60,  'un': 'UN2014', 'pg': 'II'},
         # <8% taşıma yönetmeliği kapsamı dışı
     ],
-    '7681-52-9': {'un': 'UN1791', 'pg': 'II'},   # Sodyum hipoklorit çözelti
-    '7778-54-3': {'un': 'UN2208', 'pg': 'II'},   # Kalsiyum hipoklorit karışım
-    '87-90-1':   {'un': 'UN2468', 'pg': 'II'},   # TCCA
-    '2893-78-9': {'un': 'UN2468', 'pg': 'II'},   # Sodyum dikloroizosiyanurik asit
-    '10049-04-4':{'un': 'UN2548', 'pg': 'I'},    # Klor dioksit
+    '7681-52-9': {'un': 'UN1791', 'pg': 'II', 'physical_state': 'liquid'},  # Sodyum hipoklorit çözelti
+    '7778-54-3': {'un': 'UN2208', 'pg': 'II', 'physical_state': 'solid'},  # Kalsiyum hipoklorit karışım
+    '87-90-1':   {'un': 'UN2468', 'pg': 'II', 'physical_state': 'solid'},  # TCCA (ADR: "TRİKLOROİZOSİYANÜRİK ASİT, KURU")
+    '2893-78-9': {'un': 'UN2468', 'pg': 'II', 'physical_state': 'solid'},  # Sodyum dikloroizosiyanurik asit, kuru
+    '10049-04-4':{'un': 'UN2548', 'pg': 'I',  'physical_state': 'gas'},    # Klor dioksit
 
     # ── Halojenler / Gazlar ───────────────────────────────────────────────────
     '7726-95-6': {'un': 'UN1744', 'pg': 'I'},    # Brom
@@ -209,6 +209,7 @@ def lookup_by_cas(cas: str, concentration: Optional[float] = None) -> 'dict | No
 
     concentration: % ağırlık (0-100). None ise en yüksek tehlikeli giriş döner.
     Eşleşme yoksa None döner → çağıran jenerik H-kodu mantığına düşer.
+    Dönen dict'e 'physical_state' eklenir (seed'de tanımlıysa) — çağıran hal uyum kontrolü yapabilir.
     """
     mapping = _get_cas_map()
     entry = mapping.get(str(cas).strip())
@@ -229,14 +230,20 @@ def lookup_by_cas(cas: str, concentration: Optional[float] = None) -> 'dict | No
             matched = entry[0]  # konsantrasyon bilinmiyor → en tehlikelisi
         un_no = matched.get('un')
         pg    = matched.get('pg') or 'II'
+        seed_physical_state: 'str | None' = matched.get('physical_state')
     else:
         un_no = entry.get('un')
         pg    = entry.get('pg') or 'II'
+        seed_physical_state = entry.get('physical_state')
 
     if not un_no:
         return None
     details = get_adr_details(un_no, pg)
-    return details if details.get('found') else None
+    if not details.get('found'):
+        return None
+    if seed_physical_state:
+        details['physical_state'] = seed_physical_state
+    return details
 
 
 def get_adr_details(un_no: str, packing_group: str = 'II') -> dict:

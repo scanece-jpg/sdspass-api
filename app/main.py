@@ -519,18 +519,6 @@ async def generate_pdf(data: dict = Body(...)):
                 except (ValueError, TypeError): pass
             if _visc_tr is None:
                 _visc_tr = (_phys_res.get('theo_props') or {}).get('viscosity', {}).get('value')
-            _cas_conc_pdf = {}
-            for _c in components:
-                _c_cas = str(_c.get('cas_no') or _c.get('cas') or '').strip()
-                if not _c_cas:
-                    continue
-                try:
-                    _raw = _c.get('conc') or _c.get('concentration') or _c.get('concMax') or 0
-                    _c_conc = float(str(_raw).replace('%','').replace('≥','').replace('≤','').replace('>','').replace('<','').strip().split('-')[0] or 0)
-                except (ValueError, TypeError):
-                    _c_conc = 0.0
-                _cas_conc_pdf[_c_cas] = _c_conc
-
             # ── Nihai sınıflandırma birleştirmesi → transport girdisi ──────────────
             # ADR §2.2.9.1.10.3.1: Sınıf 9 kararı "nihai CLP sınıflandırmasından" türer.
             # Mimaride bu iki motorun birleşimi: classify_mixture_clp + ecological_service.
@@ -549,12 +537,14 @@ async def generate_pdf(data: dict = Body(...)):
             _final_cls_h = list(dict.fromkeys(
                 list(_clp_res.get('h_codes', [])) + _eco_h_merge
             ))
+            from app.services.transport_engine import build_transport_components as _build_tr_comps
+            _tr_components = _build_tr_comps(components)
             py_transport = _transport_calc(
                 h_codes=_final_cls_h,
                 form=_form_val,
                 phys_h_codes=_phys_h_tr,
                 viscosity=float(_visc_tr) if _visc_tr is not None else None,
-                cas_conc=_cas_conc_pdf,
+                components=_tr_components,
             )
 
             pass  # PPE reconciliation sonrası hesaplanır (ATE H kodları dahil olsun)
@@ -1606,31 +1596,22 @@ async def sds_calculate(body: dict = Body(...)):
         except (ValueError, TypeError): _visc_calc = None
         if _visc_calc is None:
             _visc_calc = (phys_result.get('theo_props') or {}).get('viscosity', {}).get('value')
-        _cas_conc = {}
-        for _c in comps:
-            _c_cas = str(_c.get('cas_no') or _c.get('cas') or '').strip()
-            if not _c_cas:
-                continue
-            try:
-                _raw_conc = _c.get('conc') or _c.get('concentration') or 0
-                _c_conc = float(str(_raw_conc).replace('%', '').replace('≥', '').replace('≤', '').replace('>', '').replace('<', '').strip().split('-')[0] or 0)
-            except (ValueError, TypeError):
-                _c_conc = 0.0
-            _cas_conc[_c_cas] = _c_conc
         import logging as _logging
-        _logging.getLogger(__name__).info('[transport] cas_conc=%s', _cas_conc)
         # Transport: CLP + eco H kodları birleşik olarak girer.
         # H400/H410 classify_mixture_clp'den değil ecological_service'ten gelir;
         # tek merge noktası burada — downstream tüketiciler ayrı kaynak görmez.
         _tr_h_merged = list(dict.fromkeys(
             list(clp_result.get('h_codes', [])) + list(eco_result.get('h_codes') or [])
         ))
+        from app.services.transport_engine import build_transport_components as _build_tr_comps_calc
+        _tr_components_calc = _build_tr_comps_calc(comps)
+        _logging.getLogger(__name__).info('[transport] components=%s', [(c.cas, c.conc) for c in _tr_components_calc])
         transport_result = transport_classify(
             h_codes=_tr_h_merged,
             form=form,
             phys_h_codes=_phys_h_transport,
             viscosity=float(_visc_calc) if _visc_calc is not None else None,
-            cas_conc=_cas_conc,
+            components=_tr_components_calc,
         )
 
         # Transport / eco invariant — düzeltme değil, assertion.

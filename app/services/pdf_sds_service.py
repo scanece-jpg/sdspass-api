@@ -400,41 +400,53 @@ def _build_stot_organ_map(components: list) -> dict:
         if h not in organ_map:
             organ_map[h] = organ
 
-    # H370/H371 (STOT SE) — bileşen tehlike kodu içindeki parentez bilgisinden organ çıkar
-    # Örnek: 'H370 (nervous system)' → organ_map['H370'] = 'nervous system'
+    # H370/H371/H372/H373 — bileşen tehlike kodundaki parentez bilgisinden organ (+ yol) çıkar
+    # Örnek: 'H370(sinir sistemi; inhalasyon)' → organ_map['H370'] = 'sinir sistemi; inhalasyon'
     for comp in components:
         for haz in (comp.get('hazards') or []):
             raw = (haz.get('h_code') or '').strip()
             h_base = raw.replace('*', '').strip()[:4]
-            if h_base in ('H370', 'H371') and h_base not in organ_map:
+            if h_base in ('H370', 'H371', 'H372', 'H373') and h_base not in organ_map:
                 m = _re.search(r'\(([^)]+)\)', raw)
                 if m:
-                    organs = [p.strip().lower() for p in m.group(1).split(',') if p.strip()]
-                    if organs:
-                        organ_map[h_base] = ', '.join(organs)
+                    organ_map[h_base] = m.group(1).strip()
     return organ_map
 
 
 def get_stot_stmt(h_code: str, lang: str, organ_en: str) -> str:
-    """H370/H371/H372/H373 için hedef organ adı içeren H ifadesi üret."""
+    """H370/H371/H372/H373 için hedef organ + maruziyet yolu içeren H ifadesi üret.
+    organ_en formatı: 'nervous system' veya 'nervous system; inhalation'
+    """
     from app.services.stot_engine import ORGAN_TR
+    _ROUTE_TR = {'inhalation': 'inhalasyon', 'dermal': 'deri teması', 'oral': 'ağız yolu',
+                 'inhalasyon': 'inhalasyon', 'deri teması': 'deri teması', 'ağız yolu': 'ağız yolu'}
+    _ROUTE_EN = {'inhalasyon': 'inhalation', 'deri teması': 'dermal contact', 'ağız yolu': 'oral'}
+    # organ_en "sinir sistemi; inhalasyon" veya "nervous system; inhalation" formatında gelebilir
+    parts = [p.strip() for p in organ_en.split(';')]
+    organ_raw = parts[0] if parts else organ_en
+    route_raw = parts[1] if len(parts) > 1 else ''
     if lang == 'TR':
-        organ = ORGAN_TR.get(organ_en.lower(), organ_en)
+        organ = ORGAN_TR.get(organ_raw.lower(), organ_raw)
+        route = _ROUTE_TR.get(route_raw.lower(), route_raw) if route_raw else ''
+        route_str = f' {route} yoluyla' if route else ''
         if h_code == 'H370':
-            return f'Organlara ({organ}) hasar verir.'
+            return f'Organlara ({organ}){route_str} hasar verir.'
         elif h_code == 'H371':
-            return f'Organlara ({organ}) hasar verebilir.'
+            return f'Organlara ({organ}){route_str} hasar verebilir.'
         elif h_code == 'H372':
-            return f'Uzun süreli veya tekrarlı maruz kalma sonucu organlarda ({organ}) hasara yol açar.'
-        return f'Uzun süreli veya tekrarlanan maruziyetle organlarda ({organ}) hasar verebilir.'
+            return f'Uzun süreli veya tekrarlı{route_str} maruz kalma sonucu organlarda ({organ}) hasara yol açar.'
+        return f'Uzun süreli veya tekrarlanan{route_str} maruziyetle organlarda ({organ}) hasar verebilir.'
     else:
+        organ = organ_raw
+        route = _ROUTE_EN.get(route_raw.lower(), route_raw) if route_raw else ''
+        route_str = f' via {route}' if route else ''
         if h_code == 'H370':
-            return f'Causes damage to {organ_en} following single exposure.'
+            return f'Causes damage to {organ}{route_str} following single exposure.'
         elif h_code == 'H371':
-            return f'May cause damage to {organ_en} following single exposure.'
+            return f'May cause damage to {organ}{route_str} following single exposure.'
         elif h_code == 'H372':
-            return f'Causes damage to {organ_en} through prolonged or repeated exposure.'
-        return f'May cause damage to {organ_en} through prolonged or repeated exposure.'
+            return f'Causes damage to {organ} through prolonged or repeated{route_str} exposure.'
+        return f'May cause damage to {organ} through prolonged or repeated{route_str} exposure.'
 
 
 # ─── UN NUMARASI OTOMATİK TESPİTİ (KALDIRILDI) ──────────────────────────────

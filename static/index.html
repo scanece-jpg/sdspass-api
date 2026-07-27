@@ -1446,11 +1446,22 @@ function addComp(pf = {}) {
           </select>
           <button class="add-chip-btn" onclick="addChipFromPicker(${id})" style="white-space:nowrap">✓ Ekle</button>
         </div>
-        <div id="hporgan${id}" style="display:none;margin-top:6px;display:none;align-items:center;gap:6px">
-          <span style="font-size:11px;color:var(--text2);white-space:nowrap">Etkilenen organ:</span>
-          <input type="text" id="hporganinp${id}" placeholder="örn: sinir sistemi, karaciğer, böbrekler"
-            style="flex:1;padding:4px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:12px"
-            onkeydown="if(event.key==='Enter'){addChipFromPicker(${id})}">
+        <div id="hporgan${id}" style="display:none;margin-top:6px;flex-direction:column;gap:6px">
+          <div style="display:flex;align-items:center;gap:6px">
+            <span style="font-size:11px;color:var(--text2);white-space:nowrap;min-width:90px">Etkilenen organ:</span>
+            <input type="text" id="hporganinp${id}" placeholder="örn: sinir sistemi, karaciğer"
+              style="flex:1;padding:4px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:12px"
+              onkeydown="if(event.key==='Enter'){addChipFromPicker(${id})}">
+          </div>
+          <div style="display:flex;align-items:center;gap:6px">
+            <span style="font-size:11px;color:var(--text2);white-space:nowrap;min-width:90px">Maruziyet yolu:</span>
+            <select id="hprouteinp${id}" style="flex:1;padding:4px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:12px">
+              <option value="">— Belirtilmemiş (opsiyonel) —</option>
+              <option value="inhalasyon">inhalasyon</option>
+              <option value="deri teması">deri teması</option>
+              <option value="ağız yolu">ağız yolu</option>
+            </select>
+          </div>
         </div>
         <details style="margin-top:2px">
           <summary style="font-size:11px;color:var(--text3);cursor:pointer">Manuel giriş (listede yoksa)</summary>
@@ -1917,12 +1928,14 @@ function onHpselChange(id) {
   const organBox = document.getElementById('hporgan'+id);
   if (!organBox) return;
   const hcode = (sel.value.split('|')[1] || '').trim();
-  if (hcode === 'H370' || hcode === 'H371') {
+  if (hcode === 'H370' || hcode === 'H371' || hcode === 'H372' || hcode === 'H373') {
     organBox.style.display = 'flex';
     document.getElementById('hporganinp'+id).focus();
   } else {
     organBox.style.display = 'none';
     document.getElementById('hporganinp'+id).value = '';
+    const ri = document.getElementById('hprouteinp'+id);
+    if (ri) ri.value = '';
   }
 }
 
@@ -1930,12 +1943,18 @@ function addChipFromPicker(id) {
   const sel = document.getElementById('hpsel'+id);
   if (!sel || !sel.value) return;
   let [hclass, hcode] = sel.value.split('|');
-  // H370/H371 için organ bilgisi ekle
-  if (hcode === 'H370' || hcode === 'H371') {
+  // H370/H371/H372/H373 için organ + maruziyet yolu ekle
+  if (hcode === 'H370' || hcode === 'H371' || hcode === 'H372' || hcode === 'H373') {
     const organInp = document.getElementById('hporganinp'+id);
+    const routeInp = document.getElementById('hprouteinp'+id);
     const organ = (organInp ? organInp.value.trim() : '');
-    if (organ) hcode = hcode + '(' + organ + ')';
+    const route = (routeInp ? routeInp.value.trim() : '');
+    if (organ || route) {
+      const parts = [organ, route].filter(Boolean).join('; ');
+      hcode = hcode + '(' + parts + ')';
+    }
     if (organInp) organInp.value = '';
+    if (routeInp) routeInp.value = '';
   }
   addChip(id, hclass, hcode);
   sel.value = '';

@@ -346,7 +346,7 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
 def classify(h_codes: List[str], form: str = 'liquid',
              phys_h_codes: Optional[List[str]] = None,
              viscosity: Optional[float] = None,
-             cas_list: Optional[List[str]] = None) -> Dict:
+             cas_conc: Optional[Dict[str, float]] = None) -> Dict:
     """
     ADR/IMDG/IATA sınıflandırması.
 
@@ -355,7 +355,7 @@ def classify(h_codes: List[str], form: str = 'liquid',
         form         : 'liquid' | 'solid' | 'aerosol' | 'gas'
         phys_h_codes : Fiziksel motordan gelen H22x/H228 kodları
         viscosity    : Kinematik viskozite (mm²/s @40°C) — UN 3082 ÖH 375 kontrolü için
-        cas_list     : Bileşen CAS numaraları — cas_to_un.json özel isimli UN araması için
+        cas_conc     : {CAS: konsantrasyon%} — maddeye özgü UN araması + konsantrasyon ayrımı
 
     Returns:
         {
@@ -365,11 +365,10 @@ def classify(h_codes: List[str], form: str = 'liquid',
     """
     is_solid = (form or 'liquid') in ('solid', 'powder')
 
-    # ── CAS'a özgü Tablo 3.1 girişi — cas_to_un.json + adr_data.json ──────────
-    # Tek bileşenli ürünlerde (veya dominant bileşen varsa) önce özel isimli
-    # UN'u dene; bulunamazsa jenerik H-kodu mantığına düş.
-    for _cas in (cas_list or []):
-        _details = _lookup_by_cas(_cas)
+    # ── CAS'a özgü Tablo 3.1 girişi — ADR Tablo A doğrudan arama ─────────────
+    # Konsantrasyon bilgisiyle birlikte doğru UN seçilir.
+    for _cas, _conc in (cas_conc or {}).items():
+        _details = _lookup_by_cas(_cas, concentration=_conc)
         if _details:
             _road = {
                 'un':    _details['un_no'],

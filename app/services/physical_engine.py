@@ -2189,7 +2189,7 @@ def calculate(comps: List[Dict], form: str = 'liquid',
     if test_data is None:
         test_data = {}
 
-    primary, extra, warnings = [], [], []
+    primary, extra, warnings, pending_decisions = [], [], [], []
 
     fl = {'result': None, 'source': None, 'fp': None}
     if form in ('liquid', 'paste'):
@@ -2314,8 +2314,9 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                 'yükümlülükleri kontrol edilmeli (ECHA Nanomaterials guidance, R.7c).'
             )
 
-        # Oksitleyici katı — CLP Ek-I Tablo 2.13.4 toplama yöntemi
-        # H271 chip → Cat.1, H272 chip → Cat.2 (muhafazakar), CAS dict öncelikli
+        # Oksitleyici katı — CLP Ek-I §2.14 gereği TEST (O.1) zorunlu; toplama yöntemi yok.
+        # Bileşende H271/H272 varsa kullanıcıya test sonucu sorulur (pending_decision).
+        # Test verisi test_data['oxidizing_solid'] üzerinden gelirse aşağıda _MANUAL_H_MAP işler.
         def _ox_sol_cat(c) -> int:
             cas = (c.get('cas') or c.get('cas_no') or '').strip()
             if cas in OXIDIZING_SOLID_CAS:
@@ -2326,48 +2327,75 @@ def calculate(comps: List[Dict], form: str = 'liquid',
             if 'H272' in hh: return 2
             return 0
 
-        sum_cat1 = sum_cat1_2 = sum_cat1_2_3 = 0.0
         ox_sol_comps: list = []
         for c in comps:
-            cat  = _ox_sol_cat(c)
+            cat = _ox_sol_cat(c)
             if not cat:
                 continue
             conc = float(c.get('concMax') or c.get('conc') or 0)
-            if conc <= 0:
-                continue
-            sum_cat1_2_3 += conc
-            if cat <= 2: sum_cat1_2 += conc
-            if cat == 1: sum_cat1   += conc
-            ox_sol_comps.append({'name': c.get('name') or (c.get('cas') or ''), 'conc': conc, 'cat': cat})
+            if conc > 0:
+                ox_sol_comps.append({
+                    'cas':  c.get('cas') or c.get('cas_no') or '',
+                    'name': c.get('name') or c.get('cas') or '',
+                    'conc': conc, 'cat': cat,
+                })
 
-        if ox_sol_comps:
-            _ox_src = ', '.join(f"{t['name']} (%{t['conc']:.1f} Cat{t['cat']})" for t in ox_sol_comps)
-            if sum_cat1 >= 1.0:
-                extra.append({'type': 'oxidizing_solid', 'h': 'H271', 'h_class': 'Ox. Sol. 1',
-                              'signal': 'Danger', 'source': _ox_src,
-                              'cutoff_used': f'Cat.1 toplamı %{sum_cat1:.1f} ≥ %1 → H271 (CLP Tablo 2.13.4)'})
-            elif sum_cat1_2 >= 5.0:
-                extra.append({'type': 'oxidizing_solid', 'h': 'H272', 'h_class': 'Ox. Sol. 2',
-                              'signal': 'Warning', 'source': _ox_src,
-                              'cutoff_used': f'Cat.1+2 toplamı %{sum_cat1_2:.1f} ≥ %5 → H272 Ox.Sol.2 (CLP Tablo 2.13.4)'})
-            elif sum_cat1_2_3 >= 10.0:
-                extra.append({'type': 'oxidizing_solid', 'h': 'H272', 'h_class': 'Ox. Sol. 3',
-                              'signal': 'Warning', 'source': _ox_src,
-                              'cutoff_used': f'Cat.1+2+3 toplamı %{sum_cat1_2_3:.1f} ≥ %10 → H272 Ox.Sol.3 (CLP Tablo 2.13.4)'})
+        if ox_sol_comps and not test_data.get('oxidizing_solid'):
+            _ox_comp_str = '; '.join(
+                f"{t['name']} %{t['conc']:.1f} (Ox.Sol.{t['cat']})" for t in ox_sol_comps
+            )
+            pending_decisions.append({
+                'code': 'PHYS_OX_SOL_UNTESTED',
+                'field': 'oxidizing_solid',
+                'question': (
+                    f'Karışımda oksitleyici katı bileşen var: {_ox_comp_str}. '
+                    'CLP Ek-I §2.14 gereği oksitleyici katı sınıflandırması yalnızca '
+                    'test O.1 (yakma süresi kıyaslaması) sonucuna dayanır — '
+                    'konsantrasyon toplama yöntemi mevzuatta tanımlı değildir. '
+                    'Bu karışım için test sonucu girin veya uzman kararı verin.'
+                ),
+                'test_guidance': (
+                    'Test O.1 (UN El Kitabı §34.4): karışım referans maddeyle kıyaslanarak '
+                    'yakma süresi ölçülür. '
+                    'Kategori 1 → alev, referans maddeden hızlı yayılıyor; '
+                    'Kategori 2 → referans maddeyle benzer; '
+                    'Kategori 3 → referans maddeden yavaş ama oksitleyici sayılıyor. '
+                    'Test yapılmadıysa uzman kararıyla "oksitleyici değil" seçilebilir '
+                    '(CLP Ek-I §1.6.3.2 — köprüleme ilkesi fiziksel tehlikeler için tanımlı değil).'
+                ),
+                'options': [
+                    {'value': 'H271',             'label': 'Test yapıldı — Kategori 1 (Ox. Sol. 1)',
+                     'effect': 'H271 → GHS03, Danger, B14: UN 1479 PG I'},
+                    {'value': 'H272_cat2',         'label': 'Test yapıldı — Kategori 2 (Ox. Sol. 2)',
+                     'effect': 'H272 → GHS03, Warning, B14: UN 1479 PG II'},
+                    {'value': 'H272_cat3',         'label': 'Test yapıldı — Kategori 3 (Ox. Sol. 3)',
+                     'effect': 'H272 → GHS03, Warning, B14: UN 1479 PG III'},
+                    {'value': 'not_oxidizing',     'label': 'Test yapıldı — Oksitleyici değil',
+                     'effect': 'H271/H272 atanmaz → B14 oksitleyici tehlike yok'},
+                    {'value': 'not_tested_exclude','label': 'Test yapılmadı — uzman kararıyla sınıflandırılmamış',
+                     'effect': 'H271/H272 atanmaz → B16\'ya gerekçe yazılır'},
+                ],
+                'legal_basis': 'CLP Ek-I §2.14 + SEA Madde 16(2)',
+                'b16_note': (
+                    'Oksitleyici katı sınıflandırması değerlendirilmemiştir '
+                    '(UN O.1 testi mevcut değil; CLP Ek-I §1.6.3.2 gereği fiziksel tehlikeler '
+                    'için köprüleme ilkesi tanımlı değildir).'
+                ),
+                'components': [f"{t['cas']} — {t['name']} %{t['conc']:.1f}" for t in ox_sol_comps],
+            })
 
     if form in ('liquid', 'paste'):
-        # CLP Ek-I Tablo 2.13.1 — oksitleyici sıvı karışım sınıflandırması
-        # Bileşenlerden kategori belirleme: (1) CAS sözlüğünden, (2) H-kod chip'inden
+        # Oksitleyici sıvı — CLP Ek-I §2.13 gereği TEST (L.1/L.2) zorunlu; toplama yöntemi yok.
+        # Bileşende H271/H272 varsa kullanıcıya test sonucu sorulur (pending_decision).
+        # Test verisi test_data['oxidizing_liquid'] üzerinden gelirse aşağıda _MANUAL_H_MAP işler.
         def _ox_liq_cat(c) -> int:
             cas = (c.get('cas') or c.get('cas_no') or '').strip()
             if cas in OXIDIZING_LIQ_CAS:
                 return OXIDIZING_LIQ_CAS[cas]
             h_codes = {(h.get('h_code') or '').replace('*','').strip()[:4]
                        for h in (c.get('hazards') or [])}
-            if 'H271' in h_codes:
-                return 1
-            if 'H272' in h_codes:
-                return 2  # H272 = Ox.Liq.2 veya 3; muhafazakar olarak 2 kabul et
+            if 'H271' in h_codes: return 1
+            if 'H272' in h_codes: return 2
             return 0
 
         ox_liq_triggers: list = []
@@ -2378,50 +2406,73 @@ def calculate(comps: List[Dict], form: str = 'liquid',
             conc = float(c.get('concMax') or c.get('conc') or 0)
             if conc > 0:
                 ox_liq_triggers.append({
+                    'cas':  c.get('cas') or c.get('cas_no') or '',
                     'name': c.get('name') or c.get('cas', ''),
                     'conc': conc, 'cat': cat,
                 })
 
-        if ox_liq_triggers:
-            # Toplama yöntemi (CLP Tablo 2.13.1)
-            sum_cat1     = sum(t['conc'] for t in ox_liq_triggers if t['cat'] == 1)
-            sum_cat1_2   = sum(t['conc'] for t in ox_liq_triggers if t['cat'] in (1, 2))
-            sum_cat1_2_3 = sum(t['conc'] for t in ox_liq_triggers)
-
-            if sum_cat1 >= 1.0:
-                _ox_h, _ox_cls, _ox_sig = 'H271', 'Ox. Liq. 1', 'Danger'
-            elif sum_cat1_2 >= 5.0:
-                _ox_h, _ox_cls, _ox_sig = 'H272', 'Ox. Liq. 2', 'Warning'
-            elif sum_cat1_2_3 >= 10.0:
-                _ox_h, _ox_cls, _ox_sig = 'H272', 'Ox. Liq. 3', 'Warning'
-            else:
-                _ox_h = None
-
-            if _ox_h:
-                _ox_src = ', '.join(
-                    f"{t['name']} (%{t['conc']:.0f}, Kat.{t['cat']})"
-                    for t in ox_liq_triggers
-                )
-                extra.append({'type': 'oxidizing', 'h': _ox_h, 'h_class': _ox_cls,
-                              'signal': _ox_sig, 'source': _ox_src,
-                              'cutoff_used': (
-                                  f'CLP Tablo 2.13.1 toplama yöntemi — '
-                                  f'Kat.1 toplamı %{sum_cat1:.1f}, '
-                                  f'Kat.1+2 toplamı %{sum_cat1_2:.1f}, '
-                                  f'Kat.1+2+3 toplamı %{sum_cat1_2_3:.1f}'
-                              )})
+        if ox_liq_triggers and not test_data.get('oxidizing_liquid'):
+            _ox_liq_str = '; '.join(
+                f"{t['name']} %{t['conc']:.1f} (Ox.Liq.{t['cat']})" for t in ox_liq_triggers
+            )
+            pending_decisions.append({
+                'code': 'PHYS_OX_LIQ_UNTESTED',
+                'field': 'oxidizing_liquid',
+                'question': (
+                    f'Karışımda oksitleyici sıvı bileşen var: {_ox_liq_str}. '
+                    'CLP Ek-I §2.13 gereği oksitleyici sıvı sınıflandırması yalnızca '
+                    'test L.1/L.2 sonucuna dayanır — konsantrasyon toplama yöntemi mevzuatta tanımlı değildir. '
+                    'Bu karışım için test sonucu girin veya uzman kararı verin.'
+                ),
+                'test_guidance': (
+                    'Test L.1/L.2 (UN El Kitabı §34.2): sıvı karışımın oksidatif gücü '
+                    'referans maddeyle (nitrik asit %65) kıyaslanır. '
+                    'Kategori 1 → basınç yükselme süresi referanstan kısa; '
+                    'Kategori 2 → referansla benzer; '
+                    'Kategori 3 → nitrik asit %40\'tan daha hızlı. '
+                    'Test yapılmadıysa uzman kararıyla "oksitleyici değil" seçilebilir '
+                    '(CLP Ek-I §1.6.3.2).'
+                ),
+                'options': [
+                    {'value': 'H271',             'label': 'Test yapıldı — Kategori 1 (Ox. Liq. 1)',
+                     'effect': 'H271 → GHS03, Danger, B14: UN 3139 PG I'},
+                    {'value': 'H272_cat2',         'label': 'Test yapıldı — Kategori 2 (Ox. Liq. 2)',
+                     'effect': 'H272 → GHS03, Warning, B14: UN 3139 PG II'},
+                    {'value': 'H272_cat3',         'label': 'Test yapıldı — Kategori 3 (Ox. Liq. 3)',
+                     'effect': 'H272 → GHS03, Warning, B14: UN 3139 PG III'},
+                    {'value': 'not_oxidizing',     'label': 'Test yapıldı — Oksitleyici değil',
+                     'effect': 'H271/H272 atanmaz → B14 oksitleyici tehlike yok'},
+                    {'value': 'not_tested_exclude','label': 'Test yapılmadı — uzman kararıyla sınıflandırılmamış',
+                     'effect': 'H271/H272 atanmaz → B16\'ya gerekçe yazılır'},
+                ],
+                'legal_basis': 'CLP Ek-I §2.13 + SEA Madde 16(2)',
+                'b16_note': (
+                    'Oksitleyici sıvı sınıflandırması değerlendirilmemiştir '
+                    '(UN L.1/L.2 testi mevcut değil; CLP Ek-I §1.6.3.2 gereği fiziksel tehlikeler '
+                    'için köprüleme ilkesi tanımlı değildir).'
+                ),
+                'components': [f"{t['cas']} — {t['name']} %{t['conc']:.1f}" for t in ox_liq_triggers],
+            })
 
     # Özel fiziksel tehlike muafiyet/manuel giriş (kullanıcı beyanı)
+    # oxidizing_solid/liquid: test sonucu gelirse burada işlenir;
+    # 'not_oxidizing' ve 'not_tested_exclude' → H kodu atanmaz (h_map'te yok)
     _MANUAL_H_MAP = {
-        'water_reactive':  {'H260': ('H260', 'Water React. 1',   'Danger'),
-                            'H261': ('H261', 'Water React. 2/3', 'Warning')},
-        'pyrophoric':      {'H250': ('H250', 'Pyr. Liq./Sol. 1', 'Danger')},
-        'self_heating':    {'H251': ('H251', 'Self-heat. 1',     'Danger'),
-                            'H252': ('H252', 'Self-heat. 2',     'Warning')},
-        'metal_corrosive': {'H290': ('H290', 'Met. Corr. 1',    'Warning')},
-        'organic_peroxide':{'H240': ('H240', 'Org. Perox. Type A', 'Danger'),
-                            'H241': ('H241', 'Org. Perox. Type B', 'Danger'),
-                            'H242': ('H242', 'Org. Perox. Type C/D/E/F', 'Warning')},
+        'water_reactive':    {'H260': ('H260', 'Water React. 1',   'Danger'),
+                              'H261': ('H261', 'Water React. 2/3', 'Warning')},
+        'pyrophoric':        {'H250': ('H250', 'Pyr. Liq./Sol. 1', 'Danger')},
+        'self_heating':      {'H251': ('H251', 'Self-heat. 1',     'Danger'),
+                              'H252': ('H252', 'Self-heat. 2',     'Warning')},
+        'metal_corrosive':   {'H290': ('H290', 'Met. Corr. 1',    'Warning')},
+        'organic_peroxide':  {'H240': ('H240', 'Org. Perox. Type A', 'Danger'),
+                              'H241': ('H241', 'Org. Perox. Type B', 'Danger'),
+                              'H242': ('H242', 'Org. Perox. Type C/D/E/F', 'Warning')},
+        'oxidizing_solid':   {'H271':      ('H271', 'Ox. Sol. 1',   'Danger'),
+                              'H272_cat2': ('H272', 'Ox. Sol. 2',   'Warning'),
+                              'H272_cat3': ('H272', 'Ox. Sol. 3',   'Warning')},
+        'oxidizing_liquid':  {'H271':      ('H271', 'Ox. Liq. 1',  'Danger'),
+                              'H272_cat2': ('H272', 'Ox. Liq. 2',  'Warning'),
+                              'H272_cat3': ('H272', 'Ox. Liq. 3',  'Warning')},
     }
     for field, h_map in _MANUAL_H_MAP.items():
         val = (test_data.get(field) or '').strip()
@@ -2452,11 +2503,12 @@ def calculate(comps: List[Dict], form: str = 'liquid',
         }
 
     return {
-        'results':    primary + extra,
-        'primary':    primary,
-        'extra':      extra,
-        'warnings':   warnings,
-        'theo_props': theo_props,
+        'results':             primary + extra,
+        'primary':             primary,
+        'extra':               extra,
+        'warnings':            warnings,
+        'theo_props':          theo_props,
+        'pending_decisions':   pending_decisions,
     }
 
 

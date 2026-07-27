@@ -552,6 +552,18 @@ async def generate_pdf(data: dict = Body(...)):
                 h_codes     = [h for h in h_codes     if h not in _H314_COVERED]
                 all_h_codes = [h for h in all_h_codes if h not in _H314_COVERED]
 
+            # Bekleyen kararlar — herhangi biri varsa PDF üretilmez
+            _pending = _phys_res.get('pending_decisions', [])
+            if _pending:
+                raise HTTPException(
+                    status_code=409,
+                    detail={
+                        'error': 'pending_decisions',
+                        'message': 'PDF üretilemiyor — aşağıdaki kararlar çözümlenmeden sınıflandırma tamamlanamaz.',
+                        'pending_decisions': _pending,
+                    },
+                )
+
         except Exception as _eng_err:
             import traceback as _tb
             _tb_str = _tb.format_exc()

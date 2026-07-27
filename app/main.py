@@ -720,7 +720,7 @@ async def generate_pdf(data: dict = Body(...)):
         # PPE — reconciliation sonrası final h_codes ile hesapla
         # ATE H kodları (H330/H331/H302 vb.) artık h_codes'ta → doğru KKD profili
         try:
-            py_ppe = _ppe_calc([h for h in h_codes if h], lang=lang)
+            py_ppe = _ppe_calc([h for h in h_codes if h], lang=lang, form=_form_val)
         except Exception:
             pass  # _ppe_calc tanımsızsa (try bloğu erken exception) fallback korunur
 
@@ -1596,7 +1596,7 @@ async def sds_calculate(body: dict = Body(...)):
             + stot_result.get('h_codes', [])
             + eco_result.get('h_codes', [])
         )
-        ppe_result = ppe_select([h for h in _ppe_h_now if h], lang=lang)
+        ppe_result = ppe_select([h for h in _ppe_h_now if h], lang=lang, form=form)
 
         # ── Flam.Liq. öncelik — physical_engine varsa clp_service tahminini temizle ─
         # CLP §2.6.4: ölçülmüş/hesaplanmış parlama noktası konvansiyonel kesim değerinin

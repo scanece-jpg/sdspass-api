@@ -285,13 +285,14 @@ _GENERAL_CMR = {
 }
 
 
-def select(h_codes: List[str], lang: str = 'TR') -> Dict[str, Any]:
+def select(h_codes: List[str], lang: str = 'TR', form: str = '') -> Dict[str, Any]:
     """
     H kodlarına göre KKD önerileri üret.
 
     Args:
         h_codes : karışımın H kodları (örn. ['H314', 'H412'])
         lang    : 'TR' veya 'EN'
+        form    : ürün fiziksel formu ('solid', 'powder', 'liquid', ...)
 
     Returns:
         {
@@ -338,6 +339,21 @@ def select(h_codes: List[str], lang: str = 'TR') -> Dict[str, Any]:
                         'level': rule['level'],
                     })
                     added_texts.add(ppe_text)
+
+    # Katı/toz form — H kodu bağımsız solunum KKD (REACH Annex II §8.2 / KKDİK Ek-2)
+    _is_solid_powder = (form or '').lower() in ('solid', 'powder')
+    _has_resp = bool(result['respiratory'])
+    if _is_solid_powder:
+        # Zaten FFP2 veya daha yüksek solunum koruyucu varsa ekleme
+        _resp_texts = ' '.join(i['ppe'] for i in result['respiratory']).upper()
+        _already_ffp = any(x in _resp_texts for x in ('FFP', 'P2', 'P3', 'ABEK', 'A1B1'))
+        if not _already_ffp:
+            result['respiratory'].append({
+                'ppe': ('FFP2 toz maskesi (EN 149) — katı/toz form; toz oluşumu söz konusuysa zorunlu'
+                        if lang == 'TR'
+                        else 'FFP2 dust mask (EN 149) — solid/powder form; mandatory when dust is generated'),
+                'level': 2,
+            })
 
     # Varsayılan KKD — eşleşme yoksa minimum öneri
     if not result['respiratory']:

@@ -1432,14 +1432,47 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     story += section_block(section_title(lang, 7), styles)
     story += sub_block(f"7.1 {sub_title(lang,'7.1')}", styles)
 
+    # Form bilgisi — B9 bloğundan önce burada da okunur
+    _b7_form     = product.get('form', '')
+    _b7_form_sub = product.get('form_sub', '') or ''
+    _b7_is_solid = _b7_form in ('solid', 'powder')
+
     sec7 = generate_section(7, h_codes)
-    story += bullet_list(sec7['bullets'], styles) or [na_text(lang, styles)]
+    _sec7_bullets = list(sec7['bullets'])
+    # Katı/toz forma özgü elleçleme notları
+    if _b7_is_solid:
+        _solid_handling_TR = ['Toz oluşumunu önlemek için uygun ekipman kullanın; kapalı sistemlerde çalışın.']
+        _solid_handling_EN = ['Use appropriate equipment to prevent dust generation; work in closed systems.']
+        _sec7_bullets = (_solid_handling_TR if lang == 'TR' else _solid_handling_EN) + _sec7_bullets
+    story += bullet_list(_sec7_bullets, styles) or [na_text(lang, styles)]
 
     story += sub_block(f"7.2 {sub_title(lang,'7.2')}", styles)
     # H kodu bazlı depolama metinleri (slot 72) — H224/H225/H226/H314 için özel
     sec72 = generate_section(72, h_codes)
-    if sec72['bullets']:
-        story += bullet_list(sec72['bullets'], styles)
+    _sec72_bullets = list(sec72['bullets'])
+
+    # Katı/toz forma özgü depolama notları — H228 olmasa bile gerekli
+    if _b7_is_solid:
+        _solid_storage_TR = [
+            'Kuru, serin ve iyi havalandırılmış alanda depolayın.',
+            'Toz oluşumundan kaçının; kapları kapalı tutun.',
+        ]
+        _solid_storage_EN = [
+            'Store in a dry, cool and well-ventilated area.',
+            'Avoid dust generation; keep containers closed.',
+        ]
+        _extra_storage = _solid_storage_TR if lang == 'TR' else _solid_storage_EN
+        # ATEX uyarısı — powder formu veya powder_fine/nano alt kategorisi
+        if _b7_form == 'powder' or _b7_form_sub in ('powder_fine', 'powder_nano'):
+            _extra_storage.append(
+                'Toz-hava bulutu patlama riski: ATEX 2014/34/AB gerekliliklerini göz önünde bulundurun; antistatik ekipman kullanın.'
+                if lang == 'TR' else
+                'Risk of dust-air cloud explosion: consider ATEX 2014/34/EU requirements; use antistatic equipment.'
+            )
+        _sec72_bullets = _extra_storage + _sec72_bullets
+
+    if _sec72_bullets:
+        story += bullet_list(_sec72_bullets, styles)
     else:
         story.append(Paragraph(
             get_sentence(lang,'storage_default') or S(lang,'storage_default'),

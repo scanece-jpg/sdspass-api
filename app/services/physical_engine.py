@@ -228,7 +228,7 @@ FP_DB: Dict[str, Optional[float]] = {
     '82657-04-3': 165.0,  '84-61-7': 207.2,  '84-65-1': 185.0,  '84-69-5': 196.1,
     '84-75-3': 176.7,  '84030-86-4': 60.0,  '85-42-7': 149.0,  '85-43-8': 157.2,
     '85-44-9': 151.7,  '85-68-7': 198.9,  '865-33-8': 11.0,  '868-77-9': 97.0,
-    '87-62-7': 91.1,  '87-90-1': 250.0,  '88-06-2': 99.0,  '88-10-8': 163.0,
+    '87-62-7': 91.1,  '87-90-1': None,   '88-06-2': 99.0,  '88-10-8': 163.0,
     '88-12-0': 95.0,  '88-72-2': 106.1,  '88-74-4': 168.3,  '88-85-7': 29.4,
     '88-89-1': 150.0,  '89-61-2': 135.0,  '89-83-8': 110.0,  '89-98-5': 87.8,
     '90-04-0': 98.9,  '90-05-1': 82.2,  '90-15-3': 153.0,  '90-30-2': 200.0,
@@ -1869,6 +1869,41 @@ def calc_theo_props(comps: List[Dict]) -> Optional[Dict]:
             'note':     _henry_note,
             'error':    {'pct': 50},
         }
+
+    # ── Erime Noktası — dominant bileşen (≥%80) için phys_cache'den oku ─────────
+    # Fiziksel motor erime noktası hesaplamaz; karışım kuralı yoktur.
+    # Tek baskın bileşen varsa onun ölçülen/önbellek değeri ürün değeri sayılır.
+    if not res.get('melting_point'):
+        _total_w_all = sum(r['w'] for r in rows)
+        _dominant = next((r for r in rows if _total_w_all > 0 and r['w'] / _total_w_all >= 0.80), None)
+        if _dominant:
+            try:
+                import json as _json_mp
+                from pathlib import Path as _Path_mp
+                _cache_file = _Path_mp(__file__).parent.parent.parent / 'data' / 'phys_cache' / f"{_dominant['cas'].replace('/', '_')}.json"
+                if _cache_file.exists():
+                    _cached = _json_mp.loads(_cache_file.read_text(encoding='utf-8'))
+                    _mp_val = _cached.get('melting_point')
+                    if _mp_val is not None:
+                        res['melting_point'] = {
+                            'value':    float(_mp_val),
+                            'display':  f'{_mp_val} °C',
+                            'method':   'Ölçülen (madde verisi)',
+                            'standard': 'ASTM E794 / ISO 11357',
+                        }
+                    _sol_val = _cached.get('solubility')
+                    if _sol_val is not None and not res.get('solubility', {}).get('value'):
+                        _sol_display = f'~{_sol_val:,.0f} mg/L' if _sol_val < 900000 else 'Tam karışır'
+                        res['solubility'] = {
+                            'value':    float(_sol_val),
+                            'display':  _sol_display,
+                            'text':     _sol_display,
+                            'method':   'Ölçülen (madde verisi)',
+                            'standard': 'OECD 105',
+                            'error':    None,
+                        }
+            except Exception:
+                pass
 
     return res
 

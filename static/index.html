@@ -2740,6 +2740,8 @@ function _applySubTypeBehavior(form, sub) {
     if (sub === 'polymer') {
       _markMandatory('tf_mp', '⚑ Polimerde erime/yumuşama noktası (Vicat) zorunlu');
       _addNote('tf_mp', 'ℹ Amorf polimerlerde erime noktası yerine Vicat yumuşama sıcaklığı (ISO 306) girin');
+      const _mpEl = document.getElementById('tf_mp');
+      if (_mpEl) _mpEl.placeholder = 'Vicat yumuşama noktası (°C) — ISO 306 / ASTM D1525';
     }
 
     if (sub === 'powder_fine' || form === 'powder') {

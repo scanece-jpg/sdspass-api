@@ -501,10 +501,21 @@ async def generate_pdf(data: dict = Body(...)):
             # Transport — fiziksel H kodlarını da ilet
             _phys_h_tr = [(r.get('h') or r.get('h_code') or '')
                           for r in _phys_res.get('results', [])]
+            # ÖH 375 için viskozite: önce phys_in (kullanıcı ölçümü), yoksa motor tahmini
+            _visc_tr = None
+            _visc_raw = phys_in.get('viscosity', {})
+            if isinstance(_visc_raw, dict):
+                _visc_tr = _visc_raw.get('value')
+            elif _visc_raw:
+                try: _visc_tr = float(_visc_raw)
+                except (ValueError, TypeError): pass
+            if _visc_tr is None:
+                _visc_tr = (_phys_res.get('theo_props') or {}).get('viscosity', {}).get('value')
             py_transport = _transport_calc(
                 h_codes=list(_clp_res.get('h_codes', [])),
                 form=_form_val,
                 phys_h_codes=_phys_h_tr,
+                viscosity=float(_visc_tr) if _visc_tr is not None else None,
             )
 
             pass  # PPE reconciliation sonrası hesaplanır (ATE H kodları dahil olsun)
@@ -1548,10 +1559,16 @@ async def sds_calculate(body: dict = Body(...)):
             (r.get('h') or r.get('h_code') or '')
             for r in phys_result.get('results', [])
         ]
+        _visc_calc = test_data.get('viscosity')
+        try: _visc_calc = float(_visc_calc) if _visc_calc is not None else None
+        except (ValueError, TypeError): _visc_calc = None
+        if _visc_calc is None:
+            _visc_calc = (phys_result.get('theo_props') or {}).get('viscosity', {}).get('value')
         transport_result = transport_classify(
             h_codes=list(clp_result.get('h_codes', [])),
             form=form,
             phys_h_codes=_phys_h_transport,
+            viscosity=float(_visc_calc) if _visc_calc is not None else None,
         )
 
         # ADR §2.2.9.1.10.5 — env_mark düzelt: clp_result h_codes aquatic içermez

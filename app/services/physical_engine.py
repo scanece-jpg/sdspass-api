@@ -1603,7 +1603,17 @@ ASP_CAS = {
     '64741-41-9','64741-42-0','64741-44-2','64741-45-3',
     '64741-47-5','64741-48-6','64742-54-7','8052-41-3',
 }
-OXIDIZING_CAS = {'7722-84-1','7790-98-9','7775-09-9','7727-54-0'}
+# CLP Ek-I Tablo 2.13.1 — oksitleyici sıvı CAS → kategori (1=H271, 2=H272, 3=H272)
+OXIDIZING_LIQ_CAS: Dict[str, int] = {
+    '7722-84-1': 1,   # H₂O₂   %≥50 hidrojen peroksit    Ox. Liq. 1
+    '7790-98-9': 1,   # NH₄ClO₄ amonyum perklorat         Ox. Liq. 1
+    '7775-09-9': 2,   # NaClO₃  sodyum klorat             Ox. Liq. 2
+    '7727-54-0': 2,   # (NH₄)₂S₂O₈ amonyum persülfat     Ox. Liq. 2
+    '7722-64-7': 2,   # KMnO₄   potasyum permanganat çöz. Ox. Liq. 2
+    '7681-52-9': 3,   # NaClO   sodyum hipoklorit          Ox. Liq. 3
+    '10102-17-7':3,   # Na₂S₂O₃ sodyum tiyosülfat         Ox. Liq. 3
+}
+OXIDIZING_CAS = set(OXIDIZING_LIQ_CAS.keys())  # geriye dönük uyumluluk
 FLAM_SOL_CAS  = {'7704-34-9','1333-86-4','12185-10-3'}
 
 OXIDIZING_GAS_CAS = {
@@ -2243,14 +2253,60 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                           'cutoff_used': f'Bileşen verisi ≥ %{OXIDIZING_SOLID_CUTOFFS[_ox_h]:.0f} — karışım test verisi mevcut değil (CLP §2.13.4.2 bridging prensibi)'})
 
     if form in ('liquid', 'paste'):
-        ox = [c for c in comps
-              if (c.get('cas') or c.get('cas_no') or '').strip() in OXIDIZING_CAS
-              and float(c.get('concMax') or c.get('conc') or 0) >= 1]
-        if ox:
-            _ox_src = ', '.join(f"{c.get('name') or c.get('cas','')} (%{float(c.get('concMax') or c.get('conc') or 0):.0f})" for c in ox)
-            extra.append({'type': 'oxidizing', 'h': 'H272', 'h_class': 'Ox. Liq. 3',
-                          'signal': 'Warning', 'source': _ox_src,
-                          'cutoff_used': 'Bileşen verisi — karışım test verisi mevcut değil (CLP §2.13.4.2 bridging prensibi)'})
+        # CLP Ek-I Tablo 2.13.1 — oksitleyici sıvı karışım sınıflandırması
+        # Bileşenlerden kategori belirleme: (1) CAS sözlüğünden, (2) H-kod chip'inden
+        def _ox_liq_cat(c) -> int:
+            cas = (c.get('cas') or c.get('cas_no') or '').strip()
+            if cas in OXIDIZING_LIQ_CAS:
+                return OXIDIZING_LIQ_CAS[cas]
+            h_codes = {(h.get('h_code') or '').replace('*','').strip()[:4]
+                       for h in (c.get('hazards') or [])}
+            if 'H271' in h_codes:
+                return 1
+            if 'H272' in h_codes:
+                return 2  # H272 = Ox.Liq.2 veya 3; muhafazakar olarak 2 kabul et
+            return 0
+
+        ox_liq_triggers: list = []
+        for c in comps:
+            cat = _ox_liq_cat(c)
+            if not cat:
+                continue
+            conc = float(c.get('concMax') or c.get('conc') or 0)
+            if conc > 0:
+                ox_liq_triggers.append({
+                    'name': c.get('name') or c.get('cas', ''),
+                    'conc': conc, 'cat': cat,
+                })
+
+        if ox_liq_triggers:
+            # Toplama yöntemi (CLP Tablo 2.13.1)
+            sum_cat1     = sum(t['conc'] for t in ox_liq_triggers if t['cat'] == 1)
+            sum_cat1_2   = sum(t['conc'] for t in ox_liq_triggers if t['cat'] in (1, 2))
+            sum_cat1_2_3 = sum(t['conc'] for t in ox_liq_triggers)
+
+            if sum_cat1 >= 1.0:
+                _ox_h, _ox_cls, _ox_sig = 'H271', 'Ox. Liq. 1', 'Danger'
+            elif sum_cat1_2 >= 5.0:
+                _ox_h, _ox_cls, _ox_sig = 'H272', 'Ox. Liq. 2', 'Warning'
+            elif sum_cat1_2_3 >= 10.0:
+                _ox_h, _ox_cls, _ox_sig = 'H272', 'Ox. Liq. 3', 'Warning'
+            else:
+                _ox_h = None
+
+            if _ox_h:
+                _ox_src = ', '.join(
+                    f"{t['name']} (%{t['conc']:.0f}, Kat.{t['cat']})"
+                    for t in ox_liq_triggers
+                )
+                extra.append({'type': 'oxidizing', 'h': _ox_h, 'h_class': _ox_cls,
+                              'signal': _ox_sig, 'source': _ox_src,
+                              'cutoff_used': (
+                                  f'CLP Tablo 2.13.1 toplama yöntemi — '
+                                  f'Kat.1 toplamı %{sum_cat1:.1f}, '
+                                  f'Kat.1+2 toplamı %{sum_cat1_2:.1f}, '
+                                  f'Kat.1+2+3 toplamı %{sum_cat1_2_3:.1f}'
+                              )})
 
     # Özel fiziksel tehlike muafiyet/manuel giriş (kullanıcı beyanı)
     _MANUAL_H_MAP = {

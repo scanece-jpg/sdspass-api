@@ -324,16 +324,25 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
             'note': 'Asidik inorganik → UN 3264 | Bazik → UN 3266 | Organik → UN 1760 | PG I uzman onayı',
         }
     if cls == '9':
+        if is_solid:
+            return {
+                'un': 'UN 3077',
+                'label': 'Çevre için Tehlikeli Madde, Katı, B.N.O.',
+            }
+        # UN 3082 — ÖH 375 viskozite muafiyeti (ADR 2023 Bölüm 3.3.1)
+        _visc = (h_set or set())  # visc bilgisi h_set üzerinden gelemiyor;
+        # viscosity değeri dışarıdan geçilecek — bkz. classify() fonksiyonu
         return {
-            'un': 'UN 3077' if is_solid else 'UN 3082',
-            'label': ('Çevre için Tehlikeli Madde, Katı, B.N.O.' if is_solid
-                      else 'Çevre için Tehlikeli Madde, Sıvı, B.N.O.'),
+            'un': 'UN 3082',
+            'label': 'Çevre için Tehlikeli Madde, Sıvı, B.N.O.',
+            '_sp375_check': True,  # classify() içinde viskozite kontrolü yapılacak
         }
     return {'un': '—', 'label': 'Bilinmiyor'}
 
 
 def classify(h_codes: List[str], form: str = 'liquid',
-             phys_h_codes: Optional[List[str]] = None) -> Dict:
+             phys_h_codes: Optional[List[str]] = None,
+             viscosity: Optional[float] = None) -> Dict:
     """
     ADR/IMDG/IATA sınıflandırması.
 
@@ -341,6 +350,7 @@ def classify(h_codes: List[str], form: str = 'liquid',
         h_codes      : CLP motorundan gelen H kodları
         form         : 'liquid' | 'solid' | 'aerosol' | 'gas'
         phys_h_codes : Fiziksel motordan gelen H22x/H228 kodları
+        viscosity    : Kinematik viskozite (mm²/s @40°C) — UN 3082 ÖH 375 kontrolü için
 
     Returns:
         {
@@ -404,6 +414,27 @@ def classify(h_codes: List[str], form: str = 'liquid',
 
     # ── Adım 4: UN ve etiket ──────────────────────────────────────────────────
     un_entry = _get_un_entry(primary['class'], primary['pg'], sub_class, is_solid, h_set, form)
+
+    # UN 3082 — ADR 3.3.1 Özel Hüküm 375 viskozite muafiyeti
+    if un_entry.get('_sp375_check') and primary['class'] == '9':
+        if viscosity is not None and viscosity >= 2500:
+            un_entry['note'] = (
+                f'ÖH 375 (ADR 3.3.1): Kinematik viskozite {viscosity:.0f} mm²/s ≥ 2500 mm²/s — '
+                'UN 3082 ambalaj hükümleri (P501, LP01) uygulanmaz; '
+                'muafiyet koşulları tam karşılanıyorsa taşıma belgesi düzenlenmeyebilir. '
+                'Taşımacılık uzmanı onayı önerilir.'
+            )
+        elif viscosity is not None:
+            un_entry['note'] = (
+                f'Kinematik viskozite {viscosity:.0f} mm²/s < 2500 mm²/s — '
+                'ÖH 375 muafiyeti uygulanmaz; UN 3082 tam hükümler geçerlidir.'
+            )
+        else:
+            un_entry['note'] = (
+                'ÖH 375 (ADR 3.3.1): Viskozite girilmedi — '
+                '≥ 2500 mm²/s ise ambalaj muafiyeti uygulanabilir. Kontrol edin.'
+            )
+        del un_entry['_sp375_check']
 
     # Aerosol formu — her zaman UN 1950 (ADR 2023 Tablo A Sınıf 2)
     # Sınıflandırma kodu hazard setine göre seçilir (ADR 2023 Tablo A).

@@ -1577,10 +1577,19 @@ async def sds_calculate(body: dict = Body(...)):
         except (ValueError, TypeError): _visc_calc = None
         if _visc_calc is None:
             _visc_calc = (phys_result.get('theo_props') or {}).get('viscosity', {}).get('value')
-        _cas_conc = {
-            str(c.get('cas_no') or c.get('cas')).strip(): float(c.get('conc') or c.get('concentration') or 0)
-            for c in comps if (c.get('cas_no') or c.get('cas'))
-        }
+        _cas_conc = {}
+        for _c in comps:
+            _c_cas = str(_c.get('cas_no') or _c.get('cas') or '').strip()
+            if not _c_cas:
+                continue
+            try:
+                _raw_conc = _c.get('conc') or _c.get('concentration') or 0
+                _c_conc = float(str(_raw_conc).replace('%', '').replace('≥', '').replace('≤', '').replace('>', '').replace('<', '').strip().split('-')[0] or 0)
+            except (ValueError, TypeError):
+                _c_conc = 0.0
+            _cas_conc[_c_cas] = _c_conc
+        import logging as _logging
+        _logging.getLogger(__name__).info('[transport] cas_conc=%s', _cas_conc)
         transport_result = transport_classify(
             h_codes=list(clp_result.get('h_codes', [])),
             form=form,

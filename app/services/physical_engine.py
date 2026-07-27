@@ -1910,6 +1910,17 @@ def _calc_flam_liq(comps: List[Dict], user_fp=None) -> Dict:
         return {'result': _cls_flam_liq(user_fp, effective_bp),
                 'source': f'Kullanıcı girişi ({user_fp}°C)', 'fp': user_fp}
 
+    # CLP §2.6.4.2 — su seyreltme etkisi:
+    # Su (CAS 7732-18-5) >= %50 olan karışımlarda yanıcı bileşenin FP'si
+    # doğrudan kullanılamaz; karışımın gerçek FP'si çok daha yüksek olur.
+    # Bu durumda kullanıcıdan ölçülmüş FP istenir.
+    _water_conc = sum(
+        float(c.get('concMax') or c.get('conc') or 0)
+        for c in comps
+        if (c.get('cas') or c.get('cas_no') or '').strip() == '7732-18-5'
+    )
+    _high_water = _water_conc >= 50.0
+
     cat_sum = {1: 0.0, 2: 0.0, 3: 0.0}
     cat_triggers = {1: [], 2: [], 3: []}
     cat_fp = {1: None, 2: None, 3: None}
@@ -1957,23 +1968,32 @@ def _calc_flam_liq(comps: List[Dict], user_fp=None) -> Dict:
     # CLP Annex I §2.6.4 resmi yöntemi karışımın ölçülen/hesaplanan FP/BP'sine dayanır;
     # bu yöntem §2.6.4.2 kapsamında muhafazakâr bir tahmini yaklaşımdır.
     _screening = True
+    _water_note = (
+        f'⚠ Su içeriği %{_water_conc:.0f} ≥ %50 — saf bileşen FP değerleri karışım FP\'sini '
+        'doğru yansıtmaz (su seyreltme etkisi). Ölçülmüş karışım FP\'si girilmesi önerilir (CLP §2.6.4.2).'
+        if _high_water else None
+    )
     if sum1 >= 1:
         src = ' + '.join(trig_src(t) for t in cat_triggers[1])
         return {'result': {'h':'H224','cat':1,'h_class':'Flam. Liq. 1','signal':'Danger'},
-                'source': src, 'fp': cat_fp[1], 'screening': _screening}
+                'source': src, 'fp': cat_fp[1], 'screening': _screening,
+                'water_dilution_warning': _water_note}
     if sum12 >= 1:
         trigs = cat_triggers[1] + cat_triggers[2]
         fps   = [cat_fp[k] for k in (1,2) if cat_fp[k] is not None]
         src   = ' + '.join(trig_src(t) for t in trigs)
         return {'result': {'h':'H225','cat':2,'h_class':'Flam. Liq. 2','signal':'Danger'},
-                'source': src, 'fp': min(fps) if fps else None, 'screening': _screening}
+                'source': src, 'fp': min(fps) if fps else None, 'screening': _screening,
+                'water_dilution_warning': _water_note}
     if sum123 >= 10:
         all_trigs = cat_triggers[1] + cat_triggers[2] + cat_triggers[3]
         all_fps   = [cat_fp[k] for k in (1,2,3) if cat_fp[k] is not None]
         src       = ' + '.join(trig_src(t) for t in all_trigs)
         return {'result': {'h':'H226','cat':3,'h_class':'Flam. Liq. 3','signal':'Warning'},
-                'source': src, 'fp': min(all_fps) if all_fps else None, 'screening': _screening}
-    return {'result': None, 'source': None, 'fp': None, 'screening': _screening}
+                'source': src, 'fp': min(all_fps) if all_fps else None, 'screening': _screening,
+                'water_dilution_warning': _water_note}
+    return {'result': None, 'source': None, 'fp': None, 'screening': _screening,
+            'water_dilution_warning': _water_note}
 
 
 def _calc_flam_aerosol(comps: List[Dict], user_fp=None,
@@ -2142,6 +2162,8 @@ def calculate(comps: List[Dict], form: str = 'liquid',
     fl = {'result': None, 'source': None, 'fp': None}
     if form in ('liquid', 'paste'):
         fl = _calc_flam_liq(comps, user_fp)
+        if fl.get('water_dilution_warning'):
+            warnings.append(fl['water_dilution_warning'])
         if fl['result']:
             _flam_cutoff = {
                 'H224': '≥ %1 Cat.1 yanıcı sıvı bileşen (CLP Ek-I Tablo 2.6)',

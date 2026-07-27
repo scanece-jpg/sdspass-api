@@ -225,7 +225,7 @@ def calculate(comps: List[Dict]) -> Dict:
         else:
             parts = []
             for s in srcs:
-                if s['h'] == 'H372':
+                if s.get('cat') == 1:
                     parts.append(f"{s['name']} %{s['conc']:.3g} (Cat1 %1–%10→H373)")
                 else:
                     parts.append(f"{s['name']} %{s['conc']:.3g} (Cat2≥%10.0→H373)")

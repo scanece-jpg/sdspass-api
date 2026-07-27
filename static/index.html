@@ -2653,6 +2653,83 @@ function markUserInput(el, key) {
   _checkPhysThreshold(key, parseFloat(el.value));
 }
 
+// ── Alt türe göre özel alan davranışları ─────────────────────────────────────
+function _applySubTypeBehavior(form, sub) {
+  // Önce tüm sub-type özel işaretleri sıfırla
+  document.querySelectorAll('.phys-fw[data-sub-mandatory]').forEach(w => {
+    w.removeAttribute('data-sub-mandatory');
+    const lbl = w.querySelector('label:first-child');
+    if (lbl) lbl.style.fontWeight = '';
+    const note = w.querySelector('.sub-type-note');
+    if (note) note.remove();
+  });
+
+  if (form !== 'liquid') return;
+
+  const _markMandatory = (inputId, noteText) => {
+    const inp = document.getElementById(inputId);
+    const wrap = inp ? inp.closest('.phys-fw') : null;
+    if (!wrap) return;
+    wrap.setAttribute('data-sub-mandatory', 'true');
+    const lbl = wrap.querySelector('label:first-child');
+    if (lbl) lbl.style.fontWeight = '700';
+    if (noteText && !wrap.querySelector('.sub-type-note')) {
+      const n = document.createElement('div');
+      n.className = 'sub-type-note';
+      n.style.cssText = 'font-size:9px;color:var(--accent);margin-top:3px';
+      n.textContent = noteText;
+      inp.after(n);
+    }
+    // Opsiyonel bölümdeyse zorunluya taşı
+    const moreItems = document.getElementById('phys-more-items');
+    const physGrid  = document.querySelector('.phys-grid');
+    if (moreItems && physGrid && moreItems.contains(wrap)) {
+      physGrid.appendChild(wrap);
+    }
+  };
+
+  if (sub === 'solvent') {
+    _markMandatory('tf_evap', '⚑ Çözücü karışımında buharlaşma hızı kritik (n-BuAc=1 referans)');
+    _markMandatory('tf_vp',   '⚑ Çözücüde buhar basıncı maruz kalım değerlendirmesi için gerekli');
+  }
+
+  if (sub === 'acid' || sub === 'base') {
+    _markMandatory('tf_ph', '⚑ ' + (sub === 'acid' ? 'Asit' : 'Baz') + ' çözeltisinde pH zorunlu (H314/H318 eşiği)');
+    // pH konsantrasyon satırını aç — seyreltik çözelti tespiti için
+    const phConcRow = document.getElementById('ph_conc_row');
+    if (phConcRow) phConcRow.style.display = 'flex';
+  }
+
+  if (sub === 'waterbased') {
+    _markMandatory('tf_ph', '⚑ Su bazlı üründe pH önemli');
+    // Parlama noktası için "Uygulanamaz" öner
+    const fpInp = document.getElementById('tf_fp');
+    const naFp  = document.getElementById('na_fp');
+    if (fpInp && !fpInp.value && naFp && !naFp.checked) {
+      const wrap = fpInp.closest('.phys-fw');
+      if (wrap && !wrap.querySelector('.sub-type-note')) {
+        const n = document.createElement('div');
+        n.className = 'sub-type-note';
+        n.style.cssText = 'font-size:9px;color:var(--text3);margin-top:3px';
+        n.textContent = 'ℹ Su bazlı ürünlerde parlama noktası genellikle uygulanamaz — N/A seçebilirsiniz';
+        fpInp.after(n);
+      }
+    }
+  }
+
+  if (sub === 'emulsion') {
+    const densInp = document.getElementById('tf_density');
+    const wrap = densInp ? densInp.closest('.phys-fw') : null;
+    if (wrap && !wrap.querySelector('.sub-type-note')) {
+      const n = document.createElement('div');
+      n.className = 'sub-type-note';
+      n.style.cssText = 'font-size:9px;color:var(--text3);margin-top:3px';
+      n.textContent = 'ℹ Emülsiyon yoğunluğu homojen karıştıktan sonra ölçülmeli (teorik değerden sapabilir)';
+      densInp.after(n);
+    }
+  }
+}
+
 // ── Forma göre fiziksel alan görünürlüğü ─────────────────────────────────────
 function updatePhysFieldsByForm() {
   const form = document.getElementById('pform')?.value || 'liquid';
@@ -2726,6 +2803,9 @@ function updatePhysFieldsByForm() {
     moreBtn.style.display = optCount > 0 ? '' : 'none';
     if (btn) btn.textContent = '▼ Diğer Alanlar (' + optCount + ')';
   }
+
+  // ── Alt türe göre özel alan davranışları ──────────────────────────────────
+  _applySubTypeBehavior(form, sub);
 
   // pH konsantrasyon satırını form'a göre göster/gizle
   const phConcRow = document.getElementById('ph_conc_row');

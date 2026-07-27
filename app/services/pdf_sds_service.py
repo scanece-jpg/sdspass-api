@@ -1280,7 +1280,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
 
     def _disp_conc(cas: str, conc_val) -> str:
         """Gizlilik seviyesine göre konsantrasyon gösterimi."""
-        level = disclosure.get(str(cas).strip(), 'show')
+        # generate_section3 ile tutarlı: disclosure_map'te yoksa varsayılan 'range'
+        level = disclosure.get(str(cas).strip(), 'range')
         try:
             c = float(conc_val or 0)
         except (TypeError, ValueError):
@@ -2311,7 +2312,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             for c in detail.get('components', []):
                 comp_rows.append([
                     str((c.get('name_tr','') if lang=='TR' else '') or c.get('name', c.get('cas', '—'))),
-                    _disp_conc(c.get('cas',''), c.get('conc')),
+                    _disp_conc(c.get('cas_no') or c.get('cas',''), c.get('conc')),
                     str(c.get('code', '—')),
                     f"{c.get('ate', '—')} {unit}",
                 ])
@@ -2882,9 +2883,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             ))
         story.append(Spacer(1,4))
 
-    # H kodu tam metin listesi
+    # H kodu tam metin listesi — EUH kodları da dahil (KKDİK Ek-2 §16(d))
     all_h_b16 = list(dict.fromkeys(h_codes))
-    all_h = all_h_b16  # EUH Bölüm 2'de gösterildi
+    _euh_b16 = [c for c in (euh.get('euh_codes') or []) if c not in all_h_b16]
+    all_h = all_h_b16 + _euh_b16
     if all_h:
         hdr_txt = 'Tehlike / EUH İfadeleri (Tam Metin):' if lang=='TR' else 'Hazard / EUH Statements (Full Text):'
         story.append(Paragraph(f'<b>{hdr_txt}</b>', styles['body_bold']))
@@ -2948,6 +2950,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 codes_sorted = sorted(codes, key=lambda p: P_LABEL_PRIORITY.get(p, 5), reverse=True)
                 for code in codes_sorted:
                     txt = get_p(lang, code) or P_COMBOS.get(code) or P_TEXTS.get(code, code)
+                    # P370+P378: oksitleyici (H271/H272) → söndürücüyü belirt (SEA Ek-4)
+                    if code == 'P370+P378' and bool(set(h_codes) & {'H271','H272'}):
+                        txt = ('Yangın durumunda: Bol su kullanın.' if lang == 'TR'
+                               else 'IN CASE OF FIRE: Use large amounts of water.')
                     story.append(Paragraph(f"  {code}: {txt}", styles['small']))
 
     # Kısaltmalar

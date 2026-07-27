@@ -904,6 +904,24 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
           <input type="number" id="tf_bulk_density" step="1" min="0" placeholder="Ör: 500 (EN ISO 60)">
         </div>
 
+        <!-- Dispersibilite: katı/toz için opsiyonel -->
+        <div class="phys-fw" data-forms="solid powder" data-mandatory="">
+          <div class="phys-fh">
+            <label>Dispersibilite / Dağılabilirlik</label>
+            <label class="na-check"><input type="checkbox" id="na_dispersibility" onchange="toggleNA(this,'tf_dispersibility','dispersibility')"> N/A</label>
+          </div>
+          <input type="text" id="tf_dispersibility" placeholder="Ör: Suya kolayca dağılır, Düşük dağılabilirlik">
+        </div>
+
+        <!-- Higroskopiklik: katı/toz için opsiyonel -->
+        <div class="phys-fw" data-forms="solid powder" data-mandatory="">
+          <div class="phys-fh">
+            <label>Higroskopiklik / Su Emme</label>
+            <label class="na-check"><input type="checkbox" id="na_hygroscopicity" onchange="toggleNA(this,'tf_hygroscopicity','hygroscopicity')"> N/A</label>
+          </div>
+          <input type="text" id="tf_hygroscopicity" placeholder="Ör: Higroskopik, Nem absorbe etmez">
+        </div>
+
         <!-- VOC içeriği: sadece sıvı + boya/vernik alt kategorisi -->
         <div class="phys-fw" id="voc_field_wrap" data-forms="liquid" data-mandatory="" style="display:none">
           <div class="phys-fh">
@@ -4683,6 +4701,10 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
     if (!flatPhys.decomposition_temp && _val(tp.decomp_temp)) flatPhys.decomposition_temp = _val(tp.decomp_temp);
     const _psEl = document.getElementById('tf_particle_size');
     if (_psEl && _psEl.value.trim() && !_psEl.disabled) flatPhys.particle_size = _psEl.value.trim();
+    const _dispEl = document.getElementById('tf_dispersibility');
+    if (_dispEl && _dispEl.value.trim() && !_dispEl.disabled) flatPhys.dispersibility = _dispEl.value.trim();
+    const _hygrEl = document.getElementById('tf_hygroscopicity');
+    if (_hygrEl && _hygrEl.value.trim() && !_hygrEl.disabled) flatPhys.hygroscopicity = _hygrEl.value.trim();
 
     // phys_methods — KKDİK Ek-2 §9 zorunluluğu: hesaplanmış değerler için yöntem/standart
     // Her özellik için { measured, method, standard, error_pct } meta bilgisi PDF'e aktarılır

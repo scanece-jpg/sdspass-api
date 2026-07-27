@@ -1579,6 +1579,20 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             ppe_rows.append([label, val])
         story.append(data_table(ppe_rows, [50*mm, 130*mm], styles, header=False))
 
+    # EUH212 nano toz uyarısı — B8 özel notu (CLP (AB) 2021/2030)
+    _euh_codes = euh.get('euh_codes', [])
+    if 'EUH212' in _euh_codes:
+        _euh212_note = (
+            '<b>Nano toz uyarısı (EUH212):</b> Tehlikeli nano boyutlu partiküller oluşabilir. '
+            'Toz solumaktan kaçının. FFP3 solunum koruyucu (EN 149) veya P3 filtreli yarım yüz '
+            'maskesi (EN 14387) kullanın. Nano tozlar için standart FFP2 yeterliliği değerlendirin.'
+            if lang == 'TR' else
+            '<b>Nano dust warning (EUH212):</b> Hazardous nano-sized particles may be generated. '
+            'Avoid inhalation of dust. Use FFP3 respirator (EN 149) or half-face mask with P3 '
+            'filter (EN 14387). Assess adequacy of standard FFP2 for nano dusts.'
+        )
+        story.append(Paragraph(_euh212_note, styles['body']))
+
     story.append(PageBreak())
 
     # ─────────────────────────────────────────────────────────────────────────
@@ -1812,9 +1826,16 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         [_dc_lbl,   _dc_val],
         [_prop_lbl, _prop_val],
     ]
+    _disp_lbl = 'Dispersibilite / Dağılabilirlik' if lang == 'TR' else 'Dispersibility'
+    _disp_val = phys.get('dispersibility') or na
+    _hygr_lbl = 'Higroskopiklik' if lang == 'TR' else 'Hygroscopicity'
+    _hygr_val = phys.get('hygroscopicity') or na
+
     if _is_solid_form:
         all_phys_rows.append([_ps_lbl, _ps_val])
         all_phys_rows.append([_bd_lbl, _bd_val])
+        all_phys_rows.append([_disp_lbl, _disp_val])
+        all_phys_rows.append([_hygr_lbl, _hygr_val])
     if _voc_val:
         all_phys_rows.append([_voc_lbl, _voc_val])
 
@@ -1826,13 +1847,12 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _vis_lbl = phys_prop(lang, 'viscosity')
     _henry_lbl = 'Henry Sabiti' if lang=='TR' else "Henry's Law Constant"
     _optional = {_rd_lbl, _vd_lbl, _ai_lbl, _ex_lbl, _ot_lbl, _dc_lbl, _er_lbl, _kow_lbl, _henry_lbl,
-                 _ps_lbl, _bd_lbl}
+                 _ps_lbl, _bd_lbl, _disp_lbl, _hygr_lbl}
     if not _is_solid_form:
         _optional.add(_mp_lbl)
-    # Katı/toz formda pH ve viskozite uygulanamaz — değer girilmemişse gizle
+    # Katı/toz formda viskozite uygulanamaz — değer girilmemişse gizle
+    # pH: "Uygulanamaz" olarak yazılır (gizlenmez)
     if _is_solid_form:
-        _optional.add(_ph_lbl)
-        _optional.add(_ph_conc_lbl)
         _optional.add(_vis_lbl)
 
     # ECHA Kılavuz v4 §9.1(h)(e): Gaz/katı formda parlama/kaynama noktası "uygulanamaz"
@@ -1891,12 +1911,20 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             ('Uygulanamaz (polimer/plastik — keskin kaynama noktası yok)' if lang == 'TR'
              else 'Not applicable (polymer/plastic — no defined boiling point)')
         )
+        _na_solid_ph = (
+            ('Uygulanamaz — katı form (sulu çözelti pH\'ı için bkz. §3.2 bileşen verileri)'
+             if lang == 'TR' else
+             'Not applicable — solid form (for aqueous solution pH see §3.2 component data)')
+        )
         for row in all_phys_rows:
             if row[0] in (_fp_lbl, _bp_lbl) and row[1] in _NO_DATA_VALS:
                 if _is_polymer and row[0] == _bp_lbl:
                     row[1] = _na_polymer_bp
                 else:
                     row[1] = _na_solid
+            # pH: katı formda değer girilmemişse "Uygulanamaz" yaz (gizleme değil)
+            elif row[0] in (_ph_lbl, _ph_conc_lbl) and row[1] in _NO_DATA_VALS:
+                row[1] = _na_solid_ph
     elif _has_aqueous:
         # KKDİK Ek-2 §9.1: "Bilgi yok" için neden belirtilmeli; sulu karışımda FP uygulanamaz
         for row in all_phys_rows:

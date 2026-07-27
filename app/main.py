@@ -212,9 +212,10 @@ async def generate_pdf(data: dict = Body(...)):
             return s
 
         # Tüm H kodlarını str'e normalize et — int/None gelirse PDF çökmez
-        h_codes     = [_norm_sub(h) for h in data.get('h_codes', []) if h is not None]
-        # all_h_codes: dominance öncesi tam sınıflandırma (SDS Bölüm 2.1 için)
-        all_h_codes = [_norm_sub(h) for h in data.get('all_h_codes', []) if h is not None] or h_codes
+        # h_codes / all_h_codes — yalnızca Python motorlarından üretilir (frontend verisi kullanılmaz).
+        # Motor başarısız olursa HTTP 500 döner; PDF oluşturulmaz (fail-closed).
+        h_codes     = []   # motor try'ında _clp_res + eco + ATE + phys birleşiminden doldurulur
+        all_h_codes = []   # motor try'ında doldurulur
         euh_codes   = [str(h) for h in data.get('euh_codes', []) if h is not None]
         p_codes_in  = data.get('p_codes', [])
         disc_map    = data.get('disclosure_map', {})
@@ -226,10 +227,7 @@ async def generate_pdf(data: dict = Body(...)):
 
         # Signal word — clp_service.DANGER_H kullan (H225 dahil, doğru liste)
         # Frontend'den gelen signal_word öncelikli, fallback hesaplama
-        signal = data.get('signal_word', '')
-        if signal not in ('Danger', 'Warning'):
-            clean = {h.split()[0] for h in h_codes if isinstance(h, str)}
-            signal = 'Danger' if is_danger(clean) else 'Warning'
+        signal = ''   # motor try'ında h_codes tamamlandıktan sonra hesaplanır
 
         # P kodları — eko H kodu eklendikten SONRA hesaplanacak (aşağıda)
 
@@ -260,14 +258,9 @@ async def generate_pdf(data: dict = Body(...)):
         _clp_res     = {}     # classify_mixture_clp sonucu — try bloğunda doldurulur
         # NOT: h_codes/all_h_codes güncellemeleri TEK reconciliation bloğunda yapılır
 
-        # H314 nötralizasyon kararı — P kodu hesabından ÖNCE h_codes filtrelenir
+        # H314 nötralizasyon bayrağı — filtre motor try'ından SONRA uygulanır
         _H314_COVERED = {'H314', 'H318', 'H315', 'H319'}
         _h314_removed_flag = bool(data.get('h314_neutralization_removed', False))
-        if _h314_removed_flag:
-            h_codes     = [h for h in h_codes     if h not in _H314_COVERED]
-            all_h_codes = [h for h in all_h_codes if h not in _H314_COVERED]
-            # Signal word yeniden hesapla (H314 kalkınca Danger→Warning olabilir)
-            signal = 'Danger' if is_danger({h.split()[0] for h in h_codes if isinstance(h, str)}) else 'Warning'
 
         # ── Python motorlarıyla clp_passed, transport ve ppe'yi yeniden hesapla ──
         # Frontend'den gelen değerler YERINE Python sonuçları kullanılır.
@@ -550,32 +543,26 @@ async def generate_pdf(data: dict = Body(...)):
                 components=_tr_components,
             )
 
-            pass  # PPE reconciliation sonrası hesaplanır (ATE H kodları dahil olsun)
+            # h_codes / all_h_codes — yalnızca CLP motoru çıktısından kur
+            # Reconciliation bloğu eco + ATE + phys kodlarını buraya ekleyecek
+            h_codes     = list(dict.fromkeys(_norm_sub(h) for h in _clp_res.get('h_codes', [])))
+            all_h_codes = list(h_codes)
+            # H314 nötralizasyon — motor h_codes'u kesinleşince uygula
+            if _h314_removed_flag:
+                h_codes     = [h for h in h_codes     if h not in _H314_COVERED]
+                all_h_codes = [h for h in all_h_codes if h not in _H314_COVERED]
 
         except Exception as _eng_err:
             import traceback as _tb
-            print(f'[PDF] Python motor hatası, frontend verisi kullanılıyor: {_eng_err}\n'
-                  + _tb.format_exc())
-            py_clp_passed = data.get('clp_passed', [])
-            py_transport  = data.get('transport', {})
-            py_ppe        = data.get('ppe', {})
-            # _be_ate_h sıfırlanmıyor — motor try'ından önce hesaplandı, korunuyor
-            # eco_result try bloğu içinde atanamamışsa bağımsız hesapla
-            if eco_result is None:
-                try:
-                    eco_result = calculate_ecological(eco_comps)
-                except Exception:
-                    eco_result = None
+            _tb_str = _tb.format_exc()
+            print(f'[PDF] Motor hatası — PDF üretilmedi: {_eng_err}\n{_tb_str}')
+            raise HTTPException(
+                status_code=500,
+                detail=f'SDS motor hatası: {_eng_err}',
+            )
 
-        # ════════════════════════════════════════════════════════════════════════════
-        # TEK UZLAŞTIRMA BLOĞU — backend motorlarının kesin sonuçları atomik olarak
-        # h_codes, all_h_codes, py_clp_passed ve sds_section_12'ye yansıtılır.
-        # Dağınık senkronizasyon kodunun TEK merkezi — buraya bakın, başka yerde yok.
-        #
-        # Politika:
-        #   • Backend KESİN sonuç bulursa  → frontend verisini ez
-        #   • Backend hiçbir şey bulamazsa → frontend verisine dokunma
-        # ════════════════════════════════════════════════════════════════════════════
+        # ── Motor çıktılarını birleştir ───────────────────────────────────────────
+        # h_codes motor try'ında _clp_res'ten kuruldu; burası eco/ATE/phys ekler.
 
         # ── 1. Yanıcı Sıvı — ölçülen FP varsa physical_engine kazanır ────────────
         # CLP Ek-I §2.6.4.2 — py_clp_passed try bloğunda zaten temizlendi

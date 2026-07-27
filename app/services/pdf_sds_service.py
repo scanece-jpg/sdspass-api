@@ -2650,11 +2650,13 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         # H411 bileşeni varsa Test 2 dipnotu ekle
         if any(_mp['h_code'] in ('H410', 'H411') for _mp in _mp_comps):
             _t2_note = (
-                '* H410 (Sucul Kron. 1): M(kr.) kronik toplamsal formülde kullanılır. '
-                'H411 (Sucul Kron. 2): M-faktör uygulanmaz, konsantrasyon doğrudan toplanır — eşik: Σ(C) ≥ %1,0.'
+                '* Deniz kirletici kararı, CLP Tablo 4.1.1/4.1.2 M-faktörlü toplamsal formülüyle '
+                'belirlenen H400/H410/H411 sınıflandırmasına dayanır (ADR §2.2.9.1.10.5a) — '
+                'ayrı bir eşik hesabı yoktur.'
                 if lang == 'TR' else
-                '* H410 (Aquatic Chr. 1): M(chr.) applies in the chronic summation formula. '
-                'H411 (Aquatic Chr. 2): No M-factor; concentration summed directly — threshold: Σ(C) ≥ 1.0%.'
+                '* Marine pollutant decision is based on H400/H410/H411 classification determined '
+                'by the CLP Table 4.1.1/4.1.2 M-factor summation formula (ADR §2.2.9.1.10.5a) — '
+                'no separate threshold calculation applies.'
             )
             story.append(Paragraph(_t2_note, styles['small']))
 

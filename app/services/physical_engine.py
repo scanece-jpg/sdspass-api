@@ -1626,23 +1626,19 @@ OXIDIZING_GAS_CAS = {
     '7790-91-2',   # ClF₃ klortriflorür
 }
 
-OXIDIZING_SOLID_CAS = {
-    '7722-64-7',   # KMnO₄     potasyum permanganat   Ox. Sol. 2
-    '6484-52-2',   # NH₄NO₃    amonyum nitrat          Ox. Sol. 3
-    '7757-79-1',   # KNO₃      potasyum nitrat         Ox. Sol. 3
-    '7631-99-4',   # NaNO₃     sodyum nitrat           Ox. Sol. 3
-    '7778-74-7',   # KClO₄     potasyum perklorat      Ox. Sol. 2
-    '7789-38-0',   # NaBrO₃    sodyum bromat           Ox. Sol. 2
-    '10124-37-5',  # Ca(NO₃)₂  kalsiyum nitrat         Ox. Sol. 3
-    '7776-28-5',   # Na₂S₂O₈   sodyum persülfat        Ox. Sol. 2
-    '7727-21-1',   # K₂S₂O₈    potasyum persülfat      Ox. Sol. 2
-    '7778-54-3',   # Ca(ClO)₂  kalsiyum hipoklorit     Ox. Sol. 1
-}
-
-# CLP Ek-I Tablo 2.13.1 — oksitleyici katı kesme değerleri (%w/w)
-OXIDIZING_SOLID_CUTOFFS: Dict[str, float] = {
-    'H271': 1.0,  # Ox. Sol. 1
-    'H272': 1.0,  # Ox. Sol. 2 ve 3
+# CLP Ek-I Tablo 2.13.4 — oksitleyici katı karışım sınıflandırması
+# CAS → kategori (1, 2 veya 3)
+OXIDIZING_SOLID_CAS: Dict[str, int] = {
+    '7778-54-3': 1,   # Ca(ClO)₂  kalsiyum hipoklorit     Ox. Sol. 1
+    '7722-64-7': 2,   # KMnO₄     potasyum permanganat   Ox. Sol. 2
+    '7778-74-7': 2,   # KClO₄     potasyum perklorat      Ox. Sol. 2
+    '7789-38-0': 2,   # NaBrO₃    sodyum bromat           Ox. Sol. 2
+    '7776-28-5': 2,   # Na₂S₂O₈   sodyum persülfat        Ox. Sol. 2
+    '7727-21-1': 2,   # K₂S₂O₈    potasyum persülfat      Ox. Sol. 2
+    '6484-52-2': 3,   # NH₄NO₃    amonyum nitrat          Ox. Sol. 3
+    '7757-79-1': 3,   # KNO₃      potasyum nitrat         Ox. Sol. 3
+    '7631-99-4': 3,   # NaNO₃     sodyum nitrat           Ox. Sol. 3
+    '10124-37-5': 3,  # Ca(NO₃)₂  kalsiyum nitrat         Ox. Sol. 3
 }
 PYRO_GAS_CAS  = {
     '7803-62-5','19287-45-7','7782-65-2','7803-52-3',
@@ -2237,20 +2233,31 @@ def calculate(comps: List[Dict], form: str = 'liquid',
         })
 
     if form in ('solid', 'powder'):
-        fs = [c for c in comps
-              if (c.get('cas') or c.get('cas_no') or '').strip() in FLAM_SOL_CAS
-              and float(c.get('concMax') or c.get('conc') or 0) >= 1]
+        # H228 — CAS listesi + bileşen H228 chip'i (CLP §2.7.4.3 bridging)
+        fs = []
+        for c in comps:
+            cas  = (c.get('cas') or c.get('cas_no') or '').strip()
+            conc = float(c.get('concMax') or c.get('conc') or 0)
+            if conc < 1.0:
+                continue
+            _chip_h = {(h.get('h_code') or '').replace('*', '').strip()[:4]
+                       for h in (c.get('hazards') or [])}
+            if cas in FLAM_SOL_CAS or 'H228' in _chip_h:
+                fs.append(c)
         if fs:
-            _fs_src = ', '.join(f"{c.get('name') or c.get('cas','')} (%{float(c.get('concMax') or c.get('conc') or 0):.0f})" for c in fs)
+            _fs_src = ', '.join(
+                f"{c.get('name') or c.get('cas','')} (%{float(c.get('concMax') or c.get('conc') or 0):.0f})"
+                for c in fs
+            )
             extra.append({'type': 'flam_sol', 'h': 'H228', 'h_class': 'Flam. Sol. 2',
                           'signal': 'Warning', 'source': _fs_src,
-                          'cutoff_used': '≥ %1 yanıcı katı bileşen (CLP Ek-I Tablo 2.7)'})
+                          'cutoff_used': '≥ %1 H228 bileşen — CAS listesi veya Ek-VI chip (CLP §2.7.4.3 bridging)'})
 
-        # H228 validator uyarısı — katı/toz formda otomatik atama yapılmaz (test zorunlu)
+        # H228 validator uyarısı — test verisi yoksa bridging prensibi uygulandı
         warnings.append(
-            'Katı/toz form: Yanıcı katı sınıflandırması (H228) UN Test N.1 test verisine dayanır '
-            '(CLP Ek-I §2.7) — motor bileşen H kodundan karışım H228 ataması yapmaz. '
-            'Bileşen Ek-VI kaydında H228 varsa CLP motoru tarafından değerlendirilir.'
+            'Katı/toz form: H228 ataması CAS listesi ve/veya bileşen Ek-VI H228 chip\'ine '
+            'dayanır (CLP §2.7.4.3 bridging). Kesin sınıflandırma için UN Test N.1 (CLP Ek-I §2.7) '
+            'zorunludur — test sonucu varsa manuel giriş yapın.'
         )
 
         # Toz patlama uyarısı — powder formu veya powder_fine/powder_nano alt kategorisi
@@ -2272,27 +2279,46 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                 'yükümlülükleri kontrol edilmeli (ECHA Nanomaterials guidance, R.7c).'
             )
 
-        ox_sol_triggers = []
-        ox_sol_has_h271 = False
+        # Oksitleyici katı — CLP Ek-I Tablo 2.13.4 toplama yöntemi
+        # H271 chip → Cat.1, H272 chip → Cat.2 (muhafazakar), CAS dict öncelikli
+        def _ox_sol_cat(c) -> int:
+            cas = (c.get('cas') or c.get('cas_no') or '').strip()
+            if cas in OXIDIZING_SOLID_CAS:
+                return OXIDIZING_SOLID_CAS[cas]
+            hh = {(h.get('h_code') or '').replace('*', '').strip()[:4]
+                  for h in (c.get('hazards') or [])}
+            if 'H271' in hh: return 1
+            if 'H272' in hh: return 2
+            return 0
+
+        sum_cat1 = sum_cat1_2 = sum_cat1_2_3 = 0.0
+        ox_sol_comps: list = []
         for c in comps:
-            cas  = (c.get('cas') or c.get('cas_no') or '').strip()
+            cat  = _ox_sol_cat(c)
+            if not cat:
+                continue
             conc = float(c.get('concMax') or c.get('conc') or 0)
-            comp_h = {(h.get('h_code') or '').replace('*','').strip()[:4]
-                      for h in (c.get('hazards') or [])}
-            h_match = comp_h & {'H271', 'H272'}
-            in_list = cas in OXIDIZING_SOLID_CAS
-            if (in_list or h_match) and conc >= OXIDIZING_SOLID_CUTOFFS['H272']:
-                ox_sol_triggers.append({'name': c.get('name') or cas, 'conc': conc})
-                if 'H271' in h_match:
-                    ox_sol_has_h271 = True
-        if ox_sol_triggers:
-            _ox_h   = 'H271' if ox_sol_has_h271 else 'H272'
-            _ox_cls = 'Ox. Sol. 1' if ox_sol_has_h271 else 'Ox. Sol. 2'
-            _ox_sig = 'Danger'  if ox_sol_has_h271 else 'Warning'
-            _ox_src = ', '.join(f"{t['name']} (%{t['conc']:.0f})" for t in ox_sol_triggers)
-            extra.append({'type': 'oxidizing_solid', 'h': _ox_h, 'h_class': _ox_cls,
-                          'signal': _ox_sig, 'source': _ox_src,
-                          'cutoff_used': f'Bileşen verisi ≥ %{OXIDIZING_SOLID_CUTOFFS[_ox_h]:.0f} — karışım test verisi mevcut değil (CLP §2.13.4.2 bridging prensibi)'})
+            if conc <= 0:
+                continue
+            sum_cat1_2_3 += conc
+            if cat <= 2: sum_cat1_2 += conc
+            if cat == 1: sum_cat1   += conc
+            ox_sol_comps.append({'name': c.get('name') or (c.get('cas') or ''), 'conc': conc, 'cat': cat})
+
+        if ox_sol_comps:
+            _ox_src = ', '.join(f"{t['name']} (%{t['conc']:.1f} Cat{t['cat']})" for t in ox_sol_comps)
+            if sum_cat1 >= 1.0:
+                extra.append({'type': 'oxidizing_solid', 'h': 'H271', 'h_class': 'Ox. Sol. 1',
+                              'signal': 'Danger', 'source': _ox_src,
+                              'cutoff_used': f'Cat.1 toplamı %{sum_cat1:.1f} ≥ %1 → H271 (CLP Tablo 2.13.4)'})
+            elif sum_cat1_2 >= 5.0:
+                extra.append({'type': 'oxidizing_solid', 'h': 'H272', 'h_class': 'Ox. Sol. 2',
+                              'signal': 'Warning', 'source': _ox_src,
+                              'cutoff_used': f'Cat.1+2 toplamı %{sum_cat1_2:.1f} ≥ %5 → H272 Ox.Sol.2 (CLP Tablo 2.13.4)'})
+            elif sum_cat1_2_3 >= 10.0:
+                extra.append({'type': 'oxidizing_solid', 'h': 'H272', 'h_class': 'Ox. Sol. 3',
+                              'signal': 'Warning', 'source': _ox_src,
+                              'cutoff_used': f'Cat.1+2+3 toplamı %{sum_cat1_2_3:.1f} ≥ %10 → H272 Ox.Sol.3 (CLP Tablo 2.13.4)'})
 
     if form in ('liquid', 'paste'):
         # CLP Ek-I Tablo 2.13.1 — oksitleyici sıvı karışım sınıflandırması

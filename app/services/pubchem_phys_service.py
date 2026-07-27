@@ -294,6 +294,15 @@ async def fetch_phys(cas: str) -> dict:
                                 props['solubility'] = _to_mg_l(v, s)
                     break
 
+                # Erime/Donma Noktası
+                for sec in _find_section(sections, 'Melting Point'):
+                    s = _first_string(sec)
+                    if s:
+                        v = _num(s)
+                        if v is not None:
+                            props['melting_point'] = _to_celsius(v, s)
+                    break
+
                 # Alt/Üst Patlama Sınırı
                 for sec in _find_section(sections, 'Lower Explosive Limit'):
                     s = _first_string(sec)

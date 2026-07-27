@@ -714,6 +714,7 @@ def classify(h_codes: List[str], form: str = 'liquid',
         'road': {**entry, 'regulation': 'ADR 2023'},
         'sea':  {**entry, 'regulation': 'IMDG Kod 2022'},
         'air':  {**entry, 'regulation': 'IATA-DGR 2024'},
+        'env_mark':         env_mark,
         'conflict_warning': conflict_warning,
         'adr_caution':      adr_caution,
     }

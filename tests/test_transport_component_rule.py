@@ -122,3 +122,50 @@ def test_missing_concentration_raises():
     ]
     with pytest.raises(ValueError, match='konsantrasyon'):
         build_transport_components(raw)
+
+
+# ── T2 regresyon: DIPOL 306 — SP 135 vakası, not_regulated ÇIKMAMALI ─────────
+
+def test_dipol306_sp135_not_regulated_regression():
+    """
+    51580-86-0 seed'de SP 135 sentinel olarak kayıtlı (un=None) → lookup None döner.
+    NaCl (7647-14-5) H kodu yok → tetiklemez.
+    Sayım: H302/H319/H335 tetiklemez; H400/H410 tetikler → triggering=[51580-86-0].
+    51580-86-0 dominant (%92) → §3.1.3.2 yolu → lookup None → B.N.O. yoluna düş.
+    Nihai h_codes içinde H410 var → Sınıf 9 → UN 3077. not_regulated=False OLMALI.
+    """
+    comps = [
+        Component(cas='51580-86-0', conc=92.0, h_codes=['H302', 'H319', 'H335', 'H400', 'H410']),
+        Component(cas='7647-14-5',  conc=8.0,  h_codes=[]),
+    ]
+    result = _cls(h_codes=['H302', 'H319', 'H335', 'H410'], form='solid', comps=comps)
+    assert not result.get('not_regulated'), (
+        'REGRESYON: DIPOL 306 not_regulated=True döndü — '
+        'Rev.150 B14 bulgusunun tekrarı'
+    )
+    road = result.get('road') or {}
+    assert road.get('class') == '9', f"Beklenen Sınıf 9, gelen: {road.get('class')}"
+    un = road.get('un', '')
+    assert '3077' in un, f"Beklenen UN3077, gelen: {un}"
+    assert result.get('env_mark') is True, 'env_mark=True bekleniyor (H410)'
+
+
+def test_dipol306_hazards_format_regression():
+    """
+    PDF endpoint'inden gelen hazards formatı (flat h_codes değil) ile aynı sonuç.
+    """
+    raw = [
+        {'cas_no': '51580-86-0', 'conc': 92.0, 'hazards': [
+            {'h_class': 'Acute Tox. 4', 'h_code': 'H302'},
+            {'h_class': 'Eye Irrit. 2', 'h_code': 'H319'},
+            {'h_class': 'STOT SE 3',    'h_code': 'H335'},
+            {'h_class': 'Aquatic Acute 1',   'h_code': 'H400'},
+            {'h_class': 'Aquatic Chronic 1', 'h_code': 'H410'},
+        ]},
+        {'cas_no': '7647-14-5', 'conc': 8.0, 'hazards': []},
+    ]
+    comps = build_transport_components(raw)
+    result = classify(h_codes=['H302', 'H319', 'H335', 'H410'], form='solid', components=comps)
+    assert not result.get('not_regulated')
+    road = result.get('road') or {}
+    assert '3077' in (road.get('un') or ''), f"Beklenen UN3077, gelen: {road.get('un')}"

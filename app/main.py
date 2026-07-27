@@ -285,6 +285,11 @@ async def generate_pdf(data: dict = Body(...)):
             print(f'[ATE PRE ERROR] {_ate_pre_err}')
             _be_ate_h, _be_ate_details = [], {}
 
+        # Taşıma bileşen listesi — motor try'ından ÖNCE kur; hata PDF üretimini durdurur.
+        # try içinde olsaydı ValueError sessizce frontend verisine (data['transport']) düşerdi.
+        from app.services.transport_engine import build_transport_components as _build_tr_comps
+        _tr_components = _build_tr_comps(components)
+
         try:
             from app.services.clp_service       import classify_mixture_clp as _clp_calc
             from app.services.physical_engine   import calculate as _phys_calc
@@ -537,8 +542,6 @@ async def generate_pdf(data: dict = Body(...)):
             _final_cls_h = list(dict.fromkeys(
                 list(_clp_res.get('h_codes', [])) + _eco_h_merge
             ))
-            from app.services.transport_engine import build_transport_components as _build_tr_comps
-            _tr_components = _build_tr_comps(components)
             py_transport = _transport_calc(
                 h_codes=_final_cls_h,
                 form=_form_val,

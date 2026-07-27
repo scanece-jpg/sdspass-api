@@ -93,6 +93,10 @@ _SEED_ENTRIES: dict = {
     '7778-54-3': {'un': 'UN2208', 'pg': 'II', 'physical_state': 'solid'},  # Kalsiyum hipoklorit karışım
     '87-90-1':   {'un': 'UN2468', 'pg': 'II', 'physical_state': 'solid'},  # TCCA (ADR: "TRİKLOROİZOSİYANÜRİK ASİT, KURU")
     '2893-78-9': {'un': 'UN2468', 'pg': 'II', 'physical_state': 'solid'},  # Sodyum dikloroizosiyanurik asit, kuru
+    # ADR SP 135 (Tablo A Satır 836): troklosen sodyum dihidrat Sınıf 5.1 kriterini KARŞILAMAZ.
+    # un=None sentinel: kayıt var ama adlı girdi yok → lookup_by_cas None döner → B.N.O. yolu.
+    # İsim-eşleştirmesinin yanlış giriş bulmasını engeller.
+    '51580-86-0': {'un': None, 'pg': None, 'sp_note': 'SP 135 — Sınıf 5.1 kriterleri karşılanmaz'},
     '10049-04-4':{'un': 'UN2548', 'pg': 'I',  'physical_state': 'gas'},    # Klor dioksit
 
     # ── Halojenler / Gazlar ───────────────────────────────────────────────────

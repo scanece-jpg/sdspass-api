@@ -226,6 +226,7 @@ _NUMERIC_PROPS: frozenset[str] = frozenset(WORST_CASE_RULE) | frozenset({
     'rel_density', 'decomposition_temp', 'odour_threshold',
     'vapor_density', 'lel', 'uel', 'vapor_pressure_num',
     'melting_point', 'solubility', 'log_kow', 'partition_coeff',
+    'bulk_density',
 })
 
 

@@ -885,6 +885,25 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
           <input type="number" id="tf_decomp" placeholder="Ör: 250">
         </div>
 
+        <!-- Tane Boyutu: katı/toz için -->
+        <div class="phys-fw" data-forms="solid powder" data-mandatory="">
+          <div class="phys-fh">
+            <label>Tane/Partikül Boyutu (µm) <span style="font-size:9px;color:var(--text3)">KKDİK Ek-2 §9.1</span></label>
+            <label class="na-check"><input type="checkbox" id="na_particle_size" onchange="toggleNA(this,'tf_particle_size','particle_size')"> N/A</label>
+          </div>
+          <input type="text" id="tf_particle_size" placeholder="Ör: d50 = 50 µm veya &lt;100 µm">
+          <div style="font-size:9px;color:var(--text3);margin-top:3px">Nano toz: &lt;1 µm · İnce toz: &lt;100 µm · Kaba toz: &gt;100 µm</div>
+        </div>
+
+        <!-- Dökme Yoğunluğu: katı/toz için -->
+        <div class="phys-fw" data-forms="solid powder" data-mandatory="">
+          <div class="phys-fh">
+            <label>Dökme Yoğunluğu (kg/m³)</label>
+            <label class="na-check"><input type="checkbox" id="na_bulk_density" onchange="toggleNA(this,'tf_bulk_density','bulk_density')"> N/A</label>
+          </div>
+          <input type="number" id="tf_bulk_density" step="1" min="0" placeholder="Ör: 500 (EN ISO 60)">
+        </div>
+
         <!-- VOC içeriği: sadece sıvı + boya/vernik alt kategorisi -->
         <div class="phys-fw" id="voc_field_wrap" data-forms="liquid" data-mandatory="" style="display:none">
           <div class="phys-fh">
@@ -4620,6 +4639,7 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
       ['tf_fp',    'flash_point'],
       ['tf_visc','viscosity'],  ['tf_sol','solubility'],   ['tf_mp','melting_point'],
       ['tf_ait','auto_ignition'],['tf_decomp','decomposition_temp'],
+      ['tf_bulk_density','bulk_density'],
       ['tf_logkow','log_kow'],  ['tf_odor_thresh','odour_threshold'],
     ];
     _pairs.forEach(([id, key]) => {
@@ -4661,6 +4681,8 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
     if (!flatPhys.sol_other    && _val(tp.sol_other)) flatPhys.sol_other    = _val(tp.sol_other);
     if (!flatPhys.odour_threshold && _val(tp.odor_threshold)) flatPhys.odour_threshold = _val(tp.odor_threshold);
     if (!flatPhys.decomposition_temp && _val(tp.decomp_temp)) flatPhys.decomposition_temp = _val(tp.decomp_temp);
+    const _psEl = document.getElementById('tf_particle_size');
+    if (_psEl && _psEl.value.trim() && !_psEl.disabled) flatPhys.particle_size = _psEl.value.trim();
 
     // phys_methods — KKDİK Ek-2 §9 zorunluluğu: hesaplanmış değerler için yöntem/standart
     // Her özellik için { measured, method, standard, error_pct } meta bilgisi PDF'e aktarılır

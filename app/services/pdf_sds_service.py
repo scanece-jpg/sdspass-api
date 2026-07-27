@@ -1798,11 +1798,23 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _voc_lbl = 'VOC İçeriği (2004/42/EC)' if lang == 'TR' else 'VOC Content (2004/42/EC)'
     _voc_val = f"{_voc_content} g/L" if _voc_content is not None else None
 
+    # Tane boyutu ve dökme yoğunluğu — sadece katı/toz form
+    _ps_lbl = 'Tane/Partikül Boyutu' if lang == 'TR' else 'Particle Size'
+    _ps_val = phys.get('particle_size') or na
+    if isinstance(_ps_val, dict):
+        _ps_val = _ps_val.get('display') or na
+
+    _bd_lbl = 'Dökme Yoğunluğu (kg/m³)' if lang == 'TR' else 'Bulk Density (kg/m³)'
+    _bd_val = _pv('bulk_density', 'kg/m³')
+
     all_phys_rows += [
         [_ot_lbl,   _ot_val],
         [_dc_lbl,   _dc_val],
         [_prop_lbl, _prop_val],
     ]
+    if _is_solid_form:
+        all_phys_rows.append([_ps_lbl, _ps_val])
+        all_phys_rows.append([_bd_lbl, _bd_val])
     if _voc_val:
         all_phys_rows.append([_voc_lbl, _voc_val])
 
@@ -1813,7 +1825,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _ph_lbl  = phys_prop(lang, 'ph')
     _vis_lbl = phys_prop(lang, 'viscosity')
     _henry_lbl = 'Henry Sabiti' if lang=='TR' else "Henry's Law Constant"
-    _optional = {_rd_lbl, _vd_lbl, _ai_lbl, _ex_lbl, _ot_lbl, _dc_lbl, _er_lbl, _kow_lbl, _henry_lbl}
+    _optional = {_rd_lbl, _vd_lbl, _ai_lbl, _ex_lbl, _ot_lbl, _dc_lbl, _er_lbl, _kow_lbl, _henry_lbl,
+                 _ps_lbl, _bd_lbl}
     if not _is_solid_form:
         _optional.add(_mp_lbl)
     # Katı/toz formda pH ve viskozite uygulanamaz — değer girilmemişse gizle

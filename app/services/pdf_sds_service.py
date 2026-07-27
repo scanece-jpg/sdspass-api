@@ -1517,6 +1517,21 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     else:
         story.append(Paragraph(S(lang,'oel_reference'), styles['body']))
 
+    # PNOC genel toz limiti — katı/toz formda her zaman göster
+    if _b7_is_solid:
+        _pnoc_tr = (
+            '<b>Genel Toz Limiti (PNOC):</b> Bileşene özgü mesleki maruziyet sınırı '
+            'bulunmayan tozlar için: İnhalable (solunabilir) toz — TWA 10 mg/m³; '
+            'Solunum fraksiyonu (respirable) — TWA 4 mg/m³. '
+            'Kaynak: 12.08.2013/28733 sayılı Yönetmelik Ek-1.'
+        )
+        _pnoc_en = (
+            '<b>Generic Dust Limit (PNOC):</b> For dusts without a substance-specific OEL: '
+            'Inhalable fraction — TWA 10 mg/m³; Respirable fraction — TWA 4 mg/m³. '
+            'Source: Turkish Chemical Agents Regulation (OG No. 28733, 12.08.2013) Annex-1.'
+        )
+        story.append(Paragraph(_pnoc_tr if lang == 'TR' else _pnoc_en, styles['small']))
+
     story += sub_block(f"8.2 {sub_title(lang,'8.2')}", styles)
 
     # Python PPE motoru çıktısı (sds_data['ppe']) tercih edilir;

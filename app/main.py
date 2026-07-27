@@ -1578,8 +1578,8 @@ async def sds_calculate(body: dict = Body(...)):
         if _visc_calc is None:
             _visc_calc = (phys_result.get('theo_props') or {}).get('viscosity', {}).get('value')
         _cas_conc = {
-            str(c.get('cas')).strip(): float(c.get('conc') or c.get('concentration') or 0)
-            for c in comps if c.get('cas')
+            str(c.get('cas_no') or c.get('cas')).strip(): float(c.get('conc') or c.get('concentration') or 0)
+            for c in comps if (c.get('cas_no') or c.get('cas'))
         }
         transport_result = transport_classify(
             h_codes=list(clp_result.get('h_codes', [])),

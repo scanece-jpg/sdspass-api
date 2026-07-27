@@ -530,22 +530,27 @@ async def generate_pdf(data: dict = Body(...)):
                 except (ValueError, TypeError):
                     _c_conc = 0.0
                 _cas_conc_pdf[_c_cas] = _c_conc
-            # Eko H kodlarını transport'a ekle — H400/H410 classify_mixture_clp değil
-            # ecological_service tarafından hesaplanır; transport çağrısından önce eklenmezse
-            # H302/H319/H335 gibi ADR-dışı kodlarla biten ürünlerde not_regulated=True döner.
-            _eco_h_for_tr: list = []
+
+            # ── Nihai sınıflandırma birleştirmesi → transport girdisi ──────────────
+            # ADR §2.2.9.1.10.3.1: Sınıf 9 kararı "nihai CLP sınıflandırmasından" türer.
+            # Mimaride bu iki motorun birleşimi: classify_mixture_clp + ecological_service.
+            # _clp_res değiştirilmez; _final_cls_h ayrı bir birleştirme nesnesidir.
+            _eco_h_merge: list = []
             try:
                 if eco_result and hasattr(eco_result, 'aquatic') and eco_result.aquatic:
-                    _aq_h = getattr(eco_result.aquatic, 'h_code', '') or ''
-                    if _aq_h:
-                        _eco_h_for_tr.append(_aq_h)
-                    _aq_a = getattr(eco_result, 'aquatic_acute', None)
-                    if _aq_a and getattr(_aq_a, 'h_code', None) == 'H400' and 'H400' not in _eco_h_for_tr:
-                        _eco_h_for_tr.append('H400')
+                    _aq_m = getattr(eco_result.aquatic, 'h_code', '') or ''
+                    if _aq_m:
+                        _eco_h_merge.append(_aq_m)
+                    _aqa_m = getattr(eco_result, 'aquatic_acute', None)
+                    if _aqa_m and getattr(_aqa_m, 'h_code', None) == 'H400' and 'H400' not in _eco_h_merge:
+                        _eco_h_merge.append('H400')
             except Exception:
                 pass
+            _final_cls_h = list(dict.fromkeys(
+                list(_clp_res.get('h_codes', [])) + _eco_h_merge
+            ))
             py_transport = _transport_calc(
-                h_codes=list(_clp_res.get('h_codes', [])) + _eco_h_for_tr,
+                h_codes=_final_cls_h,
                 form=_form_val,
                 phys_h_codes=_phys_h_tr,
                 viscosity=float(_visc_tr) if _visc_tr is not None else None,
@@ -733,18 +738,16 @@ async def generate_pdf(data: dict = Body(...)):
                     'cutoff_used': _ate_e['cutoff_used'],
                 })
 
-        # ── 8. Transport env_mark — ADR §2.2.9.1.10.5 / IMDG §2.10.3 ──────────────
-        # ADR §2.2.9.1.10.5(a): karışım CLP'ye göre Aquatic Acute 1 (H400),
-        # Aquatic Chronic 1 (H410) veya Aquatic Chronic 2 (H411) ise → deniz kirletici.
-        # Kronik 3/4 (H412/H413) kapsam dışı. Ayrı Σ(C×M) hesabı gerekmez;
-        # ecological_service.py zaten %25 M-faktörlü toplamsal formülü uyguluyor.
-        if py_transport and not py_transport.get('not_regulated'):
-            _eco_aq_h = (getattr(eco_result, 'aquatic', None) or {})
-            _eco_aq_hcode = (_eco_aq_h.h_code if hasattr(_eco_aq_h, 'h_code') else '')
-            _correct_env = _eco_aq_hcode in {'H400', 'H410', 'H411'}
-            for _mode in ('road', 'sea', 'air'):
-                if isinstance(py_transport.get(_mode), dict):
-                    py_transport[_mode]['env_mark'] = _correct_env
+        # ── 8. Transport / eco invariant — düzeltme değil, assertion ────────────
+        # py_transport try bloğunda _final_cls_h (CLP+eco birleşimi) ile hesaplandı.
+        # Eco H kodu all_h_codes içindeyken not_regulated=True pipeline hatasıdır;
+        # sessiz fallback yerine exception → PDF üretimi durur.
+        _inv_eco = {h for h in (all_h_codes or []) if h in {'H400', 'H410', 'H411'}}
+        if _inv_eco and py_transport and py_transport.get('not_regulated'):
+            raise RuntimeError(
+                f'Transport/eco pipeline tutarsızlığı: {_inv_eco} final sınıflandırmada '
+                f'var ama transport not_regulated=True döndürdü — pipeline hatası.'
+            )
 
         # ── eco_result fallback ───────────────────────────────────────────────────
         if eco_result is None:
@@ -1616,26 +1619,27 @@ async def sds_calculate(body: dict = Body(...)):
             _cas_conc[_c_cas] = _c_conc
         import logging as _logging
         _logging.getLogger(__name__).info('[transport] cas_conc=%s', _cas_conc)
-        # Eko H kodlarını transport'a ekle — H400/H410 eco_result'tan gelir,
-        # clp_result['h_codes']'ta yoktur. Yoksa sadece H302/H319 olan ürünlerde
-        # detected=[] → not_regulated=True yanlışlıkla döner.
-        _eco_h_calc: list = list(eco_result.get('h_codes') or [])
+        # Transport: CLP + eco H kodları birleşik olarak girer.
+        # H400/H410 classify_mixture_clp'den değil ecological_service'ten gelir;
+        # tek merge noktası burada — downstream tüketiciler ayrı kaynak görmez.
+        _tr_h_merged = list(dict.fromkeys(
+            list(clp_result.get('h_codes', [])) + list(eco_result.get('h_codes') or [])
+        ))
         transport_result = transport_classify(
-            h_codes=list(clp_result.get('h_codes', [])) + _eco_h_calc,
+            h_codes=_tr_h_merged,
             form=form,
             phys_h_codes=_phys_h_transport,
             viscosity=float(_visc_calc) if _visc_calc is not None else None,
             cas_conc=_cas_conc,
         )
 
-        # ADR §2.2.9.1.10.5 — env_mark doğrula (transport zaten eco h_codes ile çalıştı,
-        # bu adım sadece CAS-lookup yolundan gelen kayıtlar için güvence).
-        if transport_result and not transport_result.get('not_regulated'):
-            _tr_eco_h = eco_result.get('h_codes') or []
-            _tr_env = bool(set(_tr_eco_h) & {'H400', 'H410', 'H411'})
-            for _tr_mode in ('road', 'sea', 'air'):
-                if isinstance(transport_result.get(_tr_mode), dict):
-                    transport_result[_tr_mode]['env_mark'] = _tr_env
+        # Transport / eco invariant — düzeltme değil, assertion.
+        _calc_eco_h = {h for h in _tr_h_merged if h in {'H400', 'H410', 'H411'}}
+        if _calc_eco_h and transport_result.get('not_regulated'):
+            _logging.getLogger(__name__).error(
+                'Transport/eco pipeline tutarsızlığı: %s merged h_codes içinde '
+                'ama transport not_regulated=True — pipeline hatası.', _calc_eco_h
+            )
 
         # ── KKD (Bölüm 8) ────────────────────────────────────────────────────
         # all_h_list henüz hesaplanmamış, transport sonrasında yapılıyor;

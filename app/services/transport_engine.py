@@ -370,6 +370,9 @@ def classify(h_codes: List[str], form: str = 'liquid',
     for _cas, _conc in (cas_conc or {}).items():
         _details = _lookup_by_cas(_cas, concentration=_conc)
         if _details:
+            # env_mark: CAS-lookup erken dönsün de olsa eko H kodları h_codes'tan gelir.
+            # ADR §2.2.9.1.10: H400/H410/H411 → deniz kirletici (CAS tablosundan bağımsız).
+            _cas_env = bool(set(h_codes or []) & {'H400', 'H410', 'H411'})
             _road = {
                 'un':    _details['un_no'],
                 'label': _details.get('name_tr') or _details.get('name', ''),
@@ -378,13 +381,14 @@ def classify(h_codes: List[str], form: str = 'liquid',
                 'kemler': _details.get('kemler', ''),
                 'tunnel': _details.get('tunnel_code', ''),
                 'note':  f"ADR Tablo A: {_details['un_no']} — Sınıf {_details.get('class','')}, PG {_details.get('packing_group','')}.",
+                'env_mark': _cas_env,
             }
             return {
                 'not_regulated': False,
                 'road': _road,
                 'sea':  _road,
                 'air':  _road,
-                'env_mark': False,
+                'env_mark': _cas_env,
                 'conflict_warning': None,
                 'adr_caution': None,
             }

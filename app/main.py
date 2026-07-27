@@ -52,6 +52,13 @@ class NoCacheMiddleware(BaseHTTPMiddleware):
 app.add_middleware(NoCacheMiddleware)
 
 
+@app.on_event("startup")
+async def _startup_tasks():
+    """Sunucu başlarken arka plan hazırlık işleri."""
+    from app.services.transport_adr_service import _load_cas_map
+    _load_cas_map()  # substance_db.json güncellenmişse cas_to_un.json'ı yeniden oluşturur
+
+
 @app.get("/health")
 async def health():
     return {"status": "ok", "service": "HazardDesk PDF API"}
@@ -1570,11 +1577,13 @@ async def sds_calculate(body: dict = Body(...)):
         except (ValueError, TypeError): _visc_calc = None
         if _visc_calc is None:
             _visc_calc = (phys_result.get('theo_props') or {}).get('viscosity', {}).get('value')
+        _cas_list = [str(c.get('cas') or '').strip() for c in comps if c.get('cas')]
         transport_result = transport_classify(
             h_codes=list(clp_result.get('h_codes', [])),
             form=form,
             phys_h_codes=_phys_h_transport,
             viscosity=float(_visc_calc) if _visc_calc is not None else None,
+            cas_list=_cas_list,
         )
 
         # ADR §2.2.9.1.10.5 — env_mark düzelt: clp_result h_codes aquatic içermez

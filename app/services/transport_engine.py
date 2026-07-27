@@ -7,6 +7,7 @@ JS transport_engine.js'nin Python karşılığı.
 """
 
 from typing import List, Optional, Dict
+from app.services.transport_adr_service import lookup_by_cas as _lookup_by_cas
 
 CLASS_LABELS: Dict[str, str] = {
     '1'  : 'Patlayıcı Maddeler',
@@ -161,6 +162,8 @@ def resolve_conflict(cls_a: str, pg_a: Optional[str],
 
     # Bilinmeyen çift — A kazanır (muhafazakâr)
     return {'winner': cls_a, 'win_pg': pg_a, 'loser': cls_b}
+
+
 
 
 def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: bool,
@@ -342,7 +345,8 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
 
 def classify(h_codes: List[str], form: str = 'liquid',
              phys_h_codes: Optional[List[str]] = None,
-             viscosity: Optional[float] = None) -> Dict:
+             viscosity: Optional[float] = None,
+             cas_list: Optional[List[str]] = None) -> Dict:
     """
     ADR/IMDG/IATA sınıflandırması.
 
@@ -351,6 +355,7 @@ def classify(h_codes: List[str], form: str = 'liquid',
         form         : 'liquid' | 'solid' | 'aerosol' | 'gas'
         phys_h_codes : Fiziksel motordan gelen H22x/H228 kodları
         viscosity    : Kinematik viskozite (mm²/s @40°C) — UN 3082 ÖH 375 kontrolü için
+        cas_list     : Bileşen CAS numaraları — cas_to_un.json özel isimli UN araması için
 
     Returns:
         {
@@ -359,6 +364,31 @@ def classify(h_codes: List[str], form: str = 'liquid',
         }
     """
     is_solid = (form or 'liquid') in ('solid', 'powder')
+
+    # ── CAS'a özgü Tablo 3.1 girişi — cas_to_un.json + adr_data.json ──────────
+    # Tek bileşenli ürünlerde (veya dominant bileşen varsa) önce özel isimli
+    # UN'u dene; bulunamazsa jenerik H-kodu mantığına düş.
+    for _cas in (cas_list or []):
+        _details = _lookup_by_cas(_cas)
+        if _details:
+            _road = {
+                'un':    _details['un_no'],
+                'label': _details.get('name_tr') or _details.get('name', ''),
+                'class': _details.get('class', ''),
+                'pg':    _details.get('packing_group', ''),
+                'kemler': _details.get('kemler', ''),
+                'tunnel': _details.get('tunnel_code', ''),
+                'note':  f"ADR Tablo A: {_details['un_no']} — Sınıf {_details.get('class','')}, PG {_details.get('packing_group','')}.",
+            }
+            return {
+                'not_regulated': False,
+                'road': _road,
+                'sea':  _road,
+                'air':  _road,
+                'env_mark': False,
+                'conflict_warning': None,
+                'adr_caution': None,
+            }
 
     # H kodlarını temizle ve birleştir
     def _clean(h: str) -> str:

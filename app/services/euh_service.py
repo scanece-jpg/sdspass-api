@@ -7,8 +7,8 @@ Otomatik Tespit Edilen EUH Kodları (16 kural):
   EUH014  → Water-reactive bileşen
   EUH019  → Organik peroksit / H2O2 (patlayıcı peroksit oluşturabilir)
   EUH029  → Karbür/fosfür (asitle gaz)
-  EUH031  → Sülfit/siyanür/hipoklorit/H2SO4 (asitle Cl2/SO2 vb.)
-  EUH032  → Fosfür/sülfür (asitle H2S/PH3)
+  EUH031  → Sülfit/hipoklorit/izosiyanuratlar/klorat (asitle Cl2/SO2/NOx — toksik)
+  EUH032  → Siyanür/florür/fosfür/sülfür (asitle HCN/HF/PH3/H2S — çok toksik)
   EUH066  → Kural 1: Solvent CAS listesi | Kural 2: Skin Irrit.2 < cut-off
   EUH201  → Kurşun bileşikleri
   EUH202  → Siyanoakrilat
@@ -56,55 +56,62 @@ EUH019_CAS = {
 # ─── EUH031 / EUH032 — Asitle gaz çıkaran maddeler ─────────────────────────
 
 EUH031_CAS = {
-    # Sülfitler ve bisülfitler
+    # Sülfitler ve bisülfitler — asitle SO2 (Akut Toks. Cat.3) çıkarır
     '7631-90-5',   # sodium bisulphite
     '7681-57-4',   # sodium metabisulphite
     '7757-83-7',   # sodium sulphite
     '10102-15-5',  # sodium thiosulphate
     '7772-98-7',   # sodium thiosulphate anhydrous
-    # Siyanürler
-    '143-33-9',    # sodium cyanide
-    '151-50-8',    # potassium cyanide
-    '592-01-8',    # calcium cyanide
-    # Hipoklorit
+    # Hipoklorit — asitle Cl2 (Akut Toks. Cat.3) çıkarır
     '7681-52-9',   # sodium hypochlorite
     '7778-54-3',   # calcium hypochlorite
     '10022-70-5',  # sodium hypochlorite pentahydrate
-    # Nitrit
+    # Nitrit — asitle NO/NO2 çıkarır
     '7632-00-0',   # sodium nitrite
     '7758-09-0',   # potassium nitrite
-    # Florür
-    '7681-49-4',   # sodium fluoride
-    '7789-75-5',   # calcium fluoride
-    '16984-48-8',  # fluoride ion
-    # Kromat
+    # Kromat — asitle Cr(VI) buharı açığa çıkarır
     '10588-01-9',  # sodium dichromate
     '7789-00-6',   # potassium chromate
     '7778-50-9',   # potassium dichromate
-    # Diğer
+    # Klorat/klorit
     '7775-09-9',   # sodium chlorate
     '7758-19-2',   # sodium chlorite
     # Güçlü asitler — diğer maddelerle temas halinde toksik gaz açığa çıkarabilir
-    # (sülfürik asit: metalllerle SO2/H2S; karbonatlara CO2; sülfit içerenlere SO2)
-    '7664-93-9',   # sulfuric acid (sülfürik asit) — SEA Ek-6 / ECHA SDS uygulaması
-    '7647-01-0',   # hydrochloric acid (hidroklorik asit) — metal reaksiyonu → Cl2/H2
-    '7697-37-2',   # nitric acid (nitrik asit) — metal reaksiyonu → NOx gazları
+    '7664-93-9',   # sulfuric acid (sülfürik asit) — SEA Ek-6
+    '7647-01-0',   # hydrochloric acid (hidroklorik asit)
+    '7697-37-2',   # nitric acid (nitrik asit) — NOx gazları
+    # İzosiyanuratlar — asitle Cl2 çıkarır (SEA Ek-6 / CLP Annex VI)
+    '87-90-1',     # trikloroizosiyanürik asit (TCCA) — Index 613-031-00-5
+    '2782-57-2',   # dikloroizosiyanürik asit (DCCA serbest asit)
+    '2893-78-9',   # sodyum dikloroizosiyanürat (NaDCC) — Index 613-030-00-X
+    '2244-21-5',   # potasyum dikloroizosiyanürat
 }
 
 EUH032_CAS = {
-    # Fosfürler — çok toksik PH3 gazı
+    # Siyanürler — asitle HCN (Akut Toks. Cat.1/2, çok toksik) çıkarır
+    '143-33-9',    # sodium cyanide
+    '151-50-8',    # potassium cyanide
+    '592-01-8',    # calcium cyanide
+    '74-90-8',     # hydrogen cyanide (kendisi)
+    # Florürler — asitle HF (Akut Toks. Cat.1/2) çıkarır
+    '7681-49-4',   # sodium fluoride
+    '7789-75-5',   # calcium fluoride
+    '16984-48-8',  # fluoride ion
+    '7789-23-3',   # potassium fluoride
+    # Fosfürler — asitle PH3 (Akut Toks. Cat.1, çok toksik) çıkarır
     '20816-12-0',  # osmium tetroxide
     '1314-80-3',   # phosphorus pentasulphide
     '12037-82-0',  # phosphorus sesquisulphide
     '7723-14-0',   # white phosphorus
-    # Sülfürler
+    '12504-13-1',  # calcium phosphide
+    '20859-73-8',  # aluminium phosphide
+    '1314-56-3',   # phosphorus pentoxide
+    # Sülfürler — asitle H2S (Akut Toks. Cat.2, çok toksik) çıkarır
     '1313-82-2',   # sodium sulphide
     '1312-73-8',   # potassium sulphide
+    '16721-80-5',  # sodium hydrosulphide
     '20667-12-3',  # silver sulphide
-    # Metal fosfürler
-    '12504-13-1',  # calcium phosphide
-    '1314-56-3',   # phosphorus pentoxide
-    '20859-73-8',  # aluminium phosphide
+    '20548-54-3',  # calcium sulphide
 }
 
 # ─── EUH066 — Cilt kuruluğu yapan çözücüler ─────────────────────────────────
@@ -543,28 +550,37 @@ def check_euh(components: List[Dict],
             })
             detected_codes.add('EUH059')
 
-    # ── suppl_h — Annex VI / CL harmonize ek zararlılık ifadeleri ─────────────
-    # Bileşen datasında suppl_h varsa (annex6/cl'den yüklendiyse) otomatik ekle.
-    # Desteklenen: EUH071 ve diğer harmonize EUH kodları.
+    # ── suppl_hazards — Annex VI / SEA Ek-6 / CL harmonize ek zararlılık ifadeleri
+    # Bileşen datasında suppl_hazards (veya eski suppl_h) varsa otomatik ekle.
+    # Birincil kaynak: substance_lookup → DB'deki harmonize sınıflandırma.
+    # CAS listeleri (EUH031_CAS vb.) yalnızca DB'de kaydı olmayan maddeler için fallback.
     _SUPPL_H_TEXTS = {
-        'EUH071': 'Solunum yoluna aşındırıcıdır.',
-        'EUH070': 'Gözle temas halinde toksiktir.',
-        'EUH059': 'Ozon tabakasına zararlıdır.',
-        'EUH044': 'Kapalı alanda ısıtıldığında patlama riski taşır.',
         'EUH029': 'Su ile temas halinde toksik gaz oluşturur.',
+        'EUH031': 'Asitlerle temasında toksik gaz çıkarır.',
+        'EUH032': 'Asitlerle temasında çok toksik gaz çıkarır.',
+        'EUH044': 'Kapalı alanda ısıtıldığında patlama riski taşır.',
+        'EUH059': 'Ozon tabakasına zararlıdır.',
+        'EUH066': 'Tekrarlı maruz kalma cildin kurumasına veya çatlamasına yol açabilir.',
+        'EUH070': 'Gözle temas halinde toksiktir.',
+        'EUH071': 'Solunum yoluna aşındırıcıdır.',
     }
     for comp in components:
         cas  = str(comp.get('cas', '')).strip()
         name = comp.get('name', '') or ''
-        for euh in (comp.get('suppl_h') or []):
-            if euh not in detected_codes and euh in _SUPPL_H_TEXTS:
+        # suppl_hazards (main.py injection) veya suppl_h (eski alan adı) — ikisini de dene
+        _sh = comp.get('suppl_hazards') or comp.get('suppl_h') or []
+        for euh in _sh:
+            # dict formatı: {'code': 'EUH031'} veya string: 'EUH031'
+            euh_code = euh.get('code') if isinstance(euh, dict) else str(euh).strip()
+            if euh_code and euh_code not in detected_codes and euh_code in _SUPPL_H_TEXTS:
                 detected.append({
-                    'code':        euh,
-                    'text':        _SUPPL_H_TEXTS[euh],
+                    'code':        euh_code,
+                    'text':        _SUPPL_H_TEXTS[euh_code],
                     'source_cas':  cas,
                     'source_name': name,
+                    'source':      'SEA Ek-6 / Annex VI',
                 })
-                detected_codes.add(euh)
+                detected_codes.add(euh_code)
 
     # Manuel kontrol gerekli olanlar (suppl_h ile tespit edilmediyse)
     manual_check = [

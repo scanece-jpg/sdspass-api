@@ -419,7 +419,7 @@ P_STMTS = {
         'P261':'Tozunu/dumanını/gazını/sisini/buharını/spreyini solumaktan kaçının.',
         'P262':'Gözlerle, ciltle veya giysilerle temasına izin vermeyin.',
         'P263':'Hamilelik ve emzirme döneminde temastan kaçının.',
-        'P264':'Elleçlemeden sonra .... ile iyice yıkayın.',
+        'P264':'Elleçlemeden sonra ellerinizi ve cildinizi iyice yıkayın.',
         'P270':'Bu ürünü kullanırken yiyip içmeyin veya sigara içmeyin.',
         'P271':'Sadece dışarıda veya iyi havalandırılan bir alanda kullanın.',
         'P272':'Kirlenmiş iş giysisinin işyeri dışına çıkarılmasına izin vermeyin.',
@@ -475,7 +475,7 @@ P_STMTS = {
         'P364':'Yeniden kullanmadan önce yıkayın.',
         'P370+P372+P380+P373':'Yangın durumunda: Patlama riski. Bölgeyi boşaltın. Yangın patlayıcılara ulaşırsa MÜDAHALE ETMEYİN.',
         'P370+P376':'Yangın durumunda: Güvenli ise sızıntıyı durdurun.',
-        'P370+P378':'Yangın durumunda: Söndürme için ... kullanın.',
+        'P370+P378':'Yangın durumunda: Uygun yangın söndürme maddesi kullanın.',
         'P370+P380':'Yangın durumunda: Alanı boşaltın.',
         'P371+P380+P375':'Büyük yangın ve büyük miktarlar durumunda: Alanı boşaltın. Patlama riskine karşı yangına uzaktan müdahale edin.',
         'P372':'Yangın durumunda patlama riski.',
@@ -484,7 +484,7 @@ P_STMTS = {
         'P375':'Patlama riskine karşı yangınla uzaktan savaşın.',
         'P376':'Güvenli ise sızıntıyı durdurun.',
         'P377':'Gaz sızıntısına bağlı yangın: Sızıntı güvenli olarak durdurulmadan söndürmeyin.',
-        'P378':'Söndürmek için ... kullanın.',
+        'P378':'Söndürmek için uygun yangın söndürme maddesi kullanın.',
         'P380':'Bölgeden uzaklaşın.',
         'P381':'Güvenli ise tüm tutuşturma kaynaklarını ortadan kaldırın.',
         'P390':'Maddi hasarı önlemek için sıvı döküntüleri temizleyin.',
@@ -1093,7 +1093,8 @@ H_CODE_TO_CANONICAL_CLASS: dict = {
     'H226': 'Flam. Liq. 3',   # ← fiziksel motor / kullanıcı FP girişi için kritik
     'H232': 'Flam. Gas 1A',   # Pirofor gaz
     'H270': 'Ox. Gas 1',
-    'H271': 'Ox. Liq. 1',
+    # H271 ve H272 burada YOK — form bağımlı: Ox. Sol. 1/2/3 (katı) veya Ox. Liq. 1/2/3 (sıvı)
+    # Fiziksel motor ve DB verisindeki h_class korunur; overwrite yapılmaz.
     'H280': 'Press. Gas',      # Basınçlı gaz (sıkıştırılmış/sıvılaştırılmış/çözülmüş)
     'H281': 'Press. Gas',      # Soğutulmuş gaz
     'H290': 'Met. Corr. 1',   # Metal aşındırıcı

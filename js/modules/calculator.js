@@ -74,14 +74,19 @@ const CalculatorModule = (() => {
     if (ov_mc)   testData.metal_corrosive  = ov_mc;
     if (ov_op)   testData.organic_peroxide = ov_op;
 
+    const formSub  = document.getElementById('pform_sub')?.value || '';
+    const vocRaw   = parseFloat(document.getElementById('tf_voc')?.value);
+
     const payload = {
       components:  comps,
       form,
+      form_sub:    formSub || null,
       user_fp:     isNaN(userFP) ? null : userFP,
       mixture_ph:  phRaw || null,
       test_data:   testData,
       usage,
       lang:        (typeof getSdsLang === 'function' ? getSdsLang() : null) || 'TR',
+      voc_content: (!isNaN(vocRaw) && vocRaw >= 0) ? vocRaw : null,
     };
 
     try {

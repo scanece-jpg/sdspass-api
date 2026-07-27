@@ -1753,11 +1753,18 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         _props.append('Yanıcı (katı/gaz)' if lang=='TR' else 'Flammable solid/gas')
     _prop_val = '; '.join(_props) if _props else ('Yok' if lang=='TR' else 'None')
 
+    # VOC içeriği — sadece boya/vernik alt kategorisinde ve değer varsa göster
+    _voc_content = sds_data.get('voc_content')
+    _voc_lbl = 'VOC İçeriği (2004/42/EC)' if lang == 'TR' else 'VOC Content (2004/42/EC)'
+    _voc_val = f"{_voc_content} g/L" if _voc_content is not None else None
+
     all_phys_rows += [
         [_ot_lbl,   _ot_val],
         [_dc_lbl,   _dc_val],
         [_prop_lbl, _prop_val],
     ]
+    if _voc_val:
+        all_phys_rows.append([_voc_lbl, _voc_val])
 
     # Opsiyonel satırları — sadece değer varsa göster
     # Katı/toz formlar için erime noktası zorunlu (KKDİK Ek-2 §9)

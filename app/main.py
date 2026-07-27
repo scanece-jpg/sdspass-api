@@ -959,8 +959,9 @@ async def generate_pdf(data: dict = Body(...)):
             'ate_mix_details': {**data.get('ate_mix_details', {}), **_be_ate_details},
             'h314_neutralization_removed': bool(data.get('h314_neutralization_removed', False)),
             'clp_note_overrides': data.get('clp_note_overrides', {}),
-            # Python PPE motoru sonucu (ISO 27001 uyumu — sunucu tarafı)
             'ppe': py_ppe,
+            'form_sub':    data.get('form_sub'),
+            'voc_content': data.get('voc_content'),
         }
 
         # sds_data['clp']['pictograms'] h_codes'tan türet — V019 için gerekli
@@ -1486,11 +1487,13 @@ async def sds_calculate(body: dict = Body(...)):
         if 'concMax' not in _c:
             _c['concMax'] = _c.get('conc') or _c.get('concentration') or 0
     form        = body.get('form', 'liquid')
+    form_sub    = body.get('form_sub') or ''
     user_fp_raw = body.get('user_fp') or body.get('flash_point')
     mixture_ph  = body.get('mixture_ph')
     test_data   = body.get('test_data') or {}
     usage       = body.get('usage', 'industrial')
     lang        = body.get('lang', 'TR')
+    voc_content = body.get('voc_content')  # g/L, sadece boya/vernik için
 
     user_fp = None
     if user_fp_raw is not None:
@@ -1744,8 +1747,10 @@ async def sds_calculate(body: dict = Body(...)):
             'warnings':   (phys_result.get('warnings', []) +
                            stot_result.get('warnings', []) +
                            clp_result.get('warnings', [])),
-            'pictograms': get_ghs_codes(all_h_list),
-            'ate_details':clp_result.get('ate_mix_details', {}),
+            'pictograms':  get_ghs_codes(all_h_list),
+            'ate_details': clp_result.get('ate_mix_details', {}),
+            'form_sub':    form_sub or None,
+            'voc_content': voc_content,
         }
 
     except Exception as e:

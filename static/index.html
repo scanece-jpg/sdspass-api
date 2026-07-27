@@ -600,6 +600,18 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
               <option value="powder">Toz</option>
               <option value="aerosol">Aerosol</option>
             </select>
+            <div id="pform_sub_wrap" style="margin-top:6px">
+              <select class="v0-inp" id="pform_sub" onchange="updatePhysFieldsByForm()" style="font-size:11px;color:var(--text2)">
+                <option value="">— Alt tür seçin (opsiyonel) —</option>
+                <option value="solvent">Çözücü karışımı</option>
+                <option value="paint">Boya / Vernik / Lake</option>
+                <option value="acid">Asit çözeltisi</option>
+                <option value="base">Baz çözeltisi</option>
+                <option value="emulsion">Emülsiyon / Dispersiyon</option>
+                <option value="waterbased">Su bazlı ürün</option>
+                <option value="other_liquid">Diğer sıvı</option>
+              </select>
+            </div>
           </div>
           <div class="v0-field">
             <label class="v0-label">Kullanım Tipi</label>
@@ -878,6 +890,16 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
             <label class="na-check"><input type="checkbox" id="na_decomp" onchange="toggleNA(this,'tf_decomp','decomp')"> N/A</label>
           </div>
           <input type="number" id="tf_decomp" placeholder="Ör: 250">
+        </div>
+
+        <!-- VOC içeriği: sadece sıvı + boya/vernik alt kategorisi -->
+        <div class="phys-fw" id="voc_field_wrap" data-forms="liquid" data-mandatory="" style="display:none">
+          <div class="phys-fh">
+            <label>VOC İçeriği (g/L) <span style="font-size:9px;color:var(--text3)">2004/42/EC</span></label>
+            <label class="na-check"><input type="checkbox" id="na_voc" onchange="toggleNA(this,'tf_voc','voc')"> N/A</label>
+          </div>
+          <input type="number" id="tf_voc" step="1" min="0" placeholder="Ör: 420">
+          <div style="font-size:9px;color:var(--text3);margin-top:3px">Boya/vernik için yasal sınır: 30–840 g/L (ürün tipine bağlı)</div>
         </div>
 
         <!-- Kriyojenik: sadece gaz, zorunlu -->
@@ -2634,8 +2656,22 @@ function markUserInput(el, key) {
 // ── Forma göre fiziksel alan görünürlüğü ─────────────────────────────────────
 function updatePhysFieldsByForm() {
   const form = document.getElementById('pform')?.value || 'liquid';
+  const sub  = document.getElementById('pform_sub')?.value || '';
+
+  // Alt kategori seçiciyi sadece sıvıda göster
+  const subWrap = document.getElementById('pform_sub_wrap');
+  if (subWrap) subWrap.style.display = form === 'liquid' ? '' : 'none';
+  if (form !== 'liquid') {
+    const subSel = document.getElementById('pform_sub');
+    if (subSel) subSel.value = '';
+  }
+
+  // VOC alanını sadece sıvı + boya/vernik seçilince göster
+  const vocWrap = document.getElementById('voc_field_wrap');
+  if (vocWrap) vocWrap.style.display = (form === 'liquid' && sub === 'paint') ? '' : 'none';
 
   document.querySelectorAll('.phys-fw[data-forms]').forEach(wrap => {
+    if (wrap.id === 'voc_field_wrap') return; // VOC ayrıca kontrol edildi
     const visible = wrap.dataset.forms.split(' ').includes(form);
     wrap.style.display = visible ? '' : 'none';
     // Gizlenen alanlarda data-auto-hidden işaretle (NA'ya zorlamadan)
@@ -2643,7 +2679,11 @@ function updatePhysFieldsByForm() {
     if (inp) inp.dataset.autoHidden = visible ? '' : 'true';
   });
 
-
+  const subLabels = {
+    solvent: 'Çözücü Karışımı', paint: 'Boya / Vernik', acid: 'Asit Çözeltisi',
+    base: 'Baz Çözeltisi', emulsion: 'Emülsiyon', waterbased: 'Su Bazlı Ürün',
+    other_liquid: 'Sıvı',
+  };
   const titles = {
     liquid: 'Sıvı Ürün — Zorunlu Alanlar',
     solid:  'Katı Ürün — Zorunlu Alanlar',
@@ -2653,7 +2693,12 @@ function updatePhysFieldsByForm() {
     aerosol:'Aerosol — Zorunlu Alanlar',
   };
   const hdr = document.getElementById('phys-section-hdr');
-  if (hdr) hdr.textContent = titles[form] || 'Zorunlu Alanlar';
+  if (hdr) {
+    const base = titles[form] || 'Zorunlu Alanlar';
+    hdr.textContent = (form === 'liquid' && sub && subLabels[sub])
+      ? base.replace('Sıvı Ürün', subLabels[sub])
+      : base;
+  }
 
   // Zorunlu / opsiyonel ayrımı
   const physGrid   = document.querySelector('.phys-grid');
@@ -4709,6 +4754,8 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
       // Normal pH girişi (2<pH<11.5) artık otomatik silme yapmıyor —
       // bireysel bileşen GCL/SCL aşımı varsa H314 zorunludur (CLP Ek-I §3.2.2).
       h314_neutralization_removed: !h314KeepOverride,
+      form_sub:    document.getElementById('pform_sub')?.value || null,
+      voc_content: (() => { const v = parseFloat(document.getElementById('tf_voc')?.value); return isNaN(v) ? null : v; })(),
     };
 
     const res = await fetch(API_BASE + '/sds/pdf', {

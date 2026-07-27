@@ -519,11 +519,23 @@ async def generate_pdf(data: dict = Body(...)):
                 except (ValueError, TypeError): pass
             if _visc_tr is None:
                 _visc_tr = (_phys_res.get('theo_props') or {}).get('viscosity', {}).get('value')
+            _cas_conc_pdf = {}
+            for _c in components:
+                _c_cas = str(_c.get('cas_no') or _c.get('cas') or '').strip()
+                if not _c_cas:
+                    continue
+                try:
+                    _raw = _c.get('conc') or _c.get('concentration') or _c.get('concMax') or 0
+                    _c_conc = float(str(_raw).replace('%','').replace('≥','').replace('≤','').replace('>','').replace('<','').strip().split('-')[0] or 0)
+                except (ValueError, TypeError):
+                    _c_conc = 0.0
+                _cas_conc_pdf[_c_cas] = _c_conc
             py_transport = _transport_calc(
                 h_codes=list(_clp_res.get('h_codes', [])),
                 form=_form_val,
                 phys_h_codes=_phys_h_tr,
                 viscosity=float(_visc_tr) if _visc_tr is not None else None,
+                cas_conc=_cas_conc_pdf,
             )
 
             pass  # PPE reconciliation sonrası hesaplanır (ATE H kodları dahil olsun)

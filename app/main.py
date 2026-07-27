@@ -313,7 +313,8 @@ async def generate_pdf(data: dict = Body(...)):
             # ham string geçirilir; clp_service _parse_ph_range ile lo/hi ayırır
             _ph_raw = phys_in.get('ph') or None
             _clp_res  = _clp_calc(components, mixture_ph=_ph_raw, mixture_form=_form_val)
-            _phys_res = _phys_calc(components, form=_form_val, user_fp=_user_fp)
+            _phys_res = _phys_calc(components, form=_form_val, user_fp=_user_fp,
+                                   form_sub=product.get('form_sub') or '')
             _stot_res = _stot_calc(components)
 
             try:
@@ -1515,7 +1516,8 @@ async def sds_calculate(body: dict = Body(...)):
 
     try:
         # ── 1. Fiziksel tehlikeler + teorik özellikler ────────────────────────
-        phys_result = phys_calculate(comps, form=form, user_fp=user_fp, test_data=test_data)
+        phys_result = phys_calculate(comps, form=form, user_fp=user_fp, test_data=test_data,
+                                     form_sub=form_sub)
 
         # ── 2. CLP karışım hesabı (cut-off tablosu + ATE) ────────────────────
         clp_result = classify_mixture_clp(comps, mixture_ph=mixture_ph, mixture_form=form)

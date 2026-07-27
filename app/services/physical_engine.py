@@ -2141,7 +2141,8 @@ def _calc_flam_gas(comps: List[Dict]) -> Dict:
 # ── ANA HESAP FONKSİYONU ─────────────────────────────────────────────────────
 
 def calculate(comps: List[Dict], form: str = 'liquid',
-              user_fp=None, test_data: Dict = None) -> Dict:
+              user_fp=None, test_data: Dict = None,
+              form_sub: str = '') -> Dict:
     """
     Fiziksel tehlike sınıflandırması + teorik fiziksel özellikler hesapla.
 
@@ -2251,6 +2252,25 @@ def calculate(comps: List[Dict], form: str = 'liquid',
             '(CLP Ek-I §2.7) — motor bileşen H kodundan karışım H228 ataması yapmaz. '
             'Bileşen Ek-VI kaydında H228 varsa CLP motoru tarafından değerlendirilir.'
         )
+
+        # Toz patlama uyarısı — powder formu veya powder_fine/powder_nano alt kategorisi
+        if form == 'powder' or form_sub in ('powder_fine', 'powder_nano'):
+            warnings.append(
+                'Toz patlama riski: İnce toz (<500 µm) organik veya metal tozları için '
+                'toz-hava bulutu patlama riski değerlendirilmeli (ATEX 2014/34/AB; '
+                'EN 14034 Kst/Pmax testi önerilir). CLP toz patlamasını ayrı bir tehlike '
+                'sınıfı olarak sınıflandırmaz; SDS Bölüm 7 ve 8\'de belirtilmesi zorunludur.'
+            )
+
+        # Nano malzeme genel uyarısı — TiO2 dışı nano boyutlu bileşenler
+        if form_sub == 'powder_nano':
+            warnings.append(
+                'Nano boyutlu toz (< 1 µm): CLP 2021/2030 sayılı Tüzük TiO2 nano için özel '
+                'EUH212 gerektirir. Diğer nano malzemeler için: (1) bulk formdaki CLP '
+                'sınıflandırması başlangıç noktasıdır, (2) nano spesifik toksikoloji '
+                'verileri mevcutsa SDS Bölüm 11\'e eklenmeli, (3) REACH nano kayıt '
+                'yükümlülükleri kontrol edilmeli (ECHA Nanomaterials guidance, R.7c).'
+            )
 
         ox_sol_triggers = []
         ox_sol_has_h271 = False

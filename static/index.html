@@ -1368,7 +1368,7 @@ function addComp(pf = {}) {
       <input type="hidden" id="chipinput${id}" style="display:none">
       <div id="hpicker${id}" style="display:none;margin-top:6px;background:var(--bg2);border:1px solid var(--border2);border-radius:8px;padding:10px;gap:6px;flex-direction:column" class="hpicker-box">
         <div style="display:flex;gap:6px;flex-wrap:wrap;align-items:center">
-          <select id="hpsel${id}" style="flex:1;min-width:200px;padding:5px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:12px">
+          <select id="hpsel${id}" onchange="onHpselChange(${id})" style="flex:1;min-width:200px;padding:5px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:12px">
             <option value="">— Tehlike sınıfı seçin —</option>
             <optgroup label="Yanıcı Sıvılar">
               <option value="Flam. Liq. 1|H224">H224 — Flam. Liq. 1 (Aşırı yanıcı sıvı)</option>
@@ -1445,6 +1445,12 @@ function addComp(pf = {}) {
             </optgroup>
           </select>
           <button class="add-chip-btn" onclick="addChipFromPicker(${id})" style="white-space:nowrap">✓ Ekle</button>
+        </div>
+        <div id="hporgan${id}" style="display:none;margin-top:6px;display:none;align-items:center;gap:6px">
+          <span style="font-size:11px;color:var(--text2);white-space:nowrap">Etkilenen organ:</span>
+          <input type="text" id="hporganinp${id}" placeholder="örn: sinir sistemi, karaciğer, böbrekler"
+            style="flex:1;padding:4px 8px;border-radius:6px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:12px"
+            onkeydown="if(event.key==='Enter'){addChipFromPicker(${id})}">
         </div>
         <details style="margin-top:2px">
           <summary style="font-size:11px;color:var(--text3);cursor:pointer">Manuel giriş (listede yoksa)</summary>
@@ -1906,12 +1912,34 @@ function toggleHazardPicker(id) {
   box.style.display = visible ? 'none' : 'flex';
 }
 
+function onHpselChange(id) {
+  const sel = document.getElementById('hpsel'+id);
+  const organBox = document.getElementById('hporgan'+id);
+  if (!organBox) return;
+  const hcode = (sel.value.split('|')[1] || '').trim();
+  if (hcode === 'H370' || hcode === 'H371') {
+    organBox.style.display = 'flex';
+    document.getElementById('hporganinp'+id).focus();
+  } else {
+    organBox.style.display = 'none';
+    document.getElementById('hporganinp'+id).value = '';
+  }
+}
+
 function addChipFromPicker(id) {
   const sel = document.getElementById('hpsel'+id);
   if (!sel || !sel.value) return;
-  const [hclass, hcode] = sel.value.split('|');
+  let [hclass, hcode] = sel.value.split('|');
+  // H370/H371 için organ bilgisi ekle
+  if (hcode === 'H370' || hcode === 'H371') {
+    const organInp = document.getElementById('hporganinp'+id);
+    const organ = (organInp ? organInp.value.trim() : '');
+    if (organ) hcode = hcode + '(' + organ + ')';
+    if (organInp) organInp.value = '';
+  }
   addChip(id, hclass, hcode);
   sel.value = '';
+  document.getElementById('hporgan'+id).style.display = 'none';
   // keep picker open so user can add more
 }
 

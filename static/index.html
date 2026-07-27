@@ -603,13 +603,6 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
             <div id="pform_sub_wrap" style="margin-top:6px">
               <select class="v0-inp" id="pform_sub" onchange="updatePhysFieldsByForm()" style="font-size:11px;color:var(--text2)">
                 <option value="">— Alt tür seçin (opsiyonel) —</option>
-                <option value="solvent">Çözücü karışımı</option>
-                <option value="paint">Boya / Vernik / Lake</option>
-                <option value="acid">Asit çözeltisi</option>
-                <option value="base">Baz çözeltisi</option>
-                <option value="emulsion">Emülsiyon / Dispersiyon</option>
-                <option value="waterbased">Su bazlı ürün</option>
-                <option value="other_liquid">Diğer sıvı</option>
               </select>
             </div>
           </div>
@@ -2664,7 +2657,7 @@ function _applySubTypeBehavior(form, sub) {
     if (note) note.remove();
   });
 
-  if (form !== 'liquid') return;
+  if (form !== 'liquid' && form !== 'solid' && form !== 'powder') return;
 
   const _markMandatory = (inputId, noteText) => {
     const inp = document.getElementById(inputId);
@@ -2728,6 +2721,52 @@ function _applySubTypeBehavior(form, sub) {
       densInp.after(n);
     }
   }
+
+  // ── Katı alt türleri ──────────────────────────────────────────────────────
+  const _addNote = (inputId, text, color='var(--text3)') => {
+    const inp = document.getElementById(inputId);
+    if (!inp) return;
+    const wrap = inp.closest('.phys-fw');
+    if (wrap && !wrap.querySelector('.sub-type-note')) {
+      const n = document.createElement('div');
+      n.className = 'sub-type-note';
+      n.style.cssText = `font-size:9px;color:${color};margin-top:3px`;
+      n.textContent = text;
+      inp.after(n);
+    }
+  };
+
+  if (form === 'solid' || form === 'powder') {
+    if (sub === 'polymer') {
+      _markMandatory('tf_mp', '⚑ Polimerde erime/yumuşama noktası (Vicat) zorunlu');
+      _addNote('tf_mp', 'ℹ Amorf polimerlerde erime noktası yerine Vicat yumuşama sıcaklığı (ISO 306) girin');
+    }
+
+    if (sub === 'powder_fine' || form === 'powder') {
+      _markMandatory('tf_mp', '⚑ Toz ürünlerde erime noktası gerekli');
+      _addNote('tf_lel', 'ℹ İnce toz: patlama riski için LEL/UEL yerine toz patlama testi (EN 14034) önerilir', 'var(--accent)');
+    }
+
+    if (sub === 'powder_nano') {
+      _markMandatory('tf_mp', '⚑ Nano toz — erime noktası zorunlu');
+      _addNote('tf_density', 'ℹ Nano toz: parçacık yoğunluğu ile dökme yoğunluğu farklıdır; ikisini de belirtin', 'var(--accent)');
+      _addNote('tf_lel', '⚠ Nano toz: EUH212 değerlendirmesi gerekebilir (toz bulutunda patlama riski)', 'var(--warn, #e67e00)');
+    }
+
+    if (sub === 'granule') {
+      _markMandatory('tf_mp', '⚑ Granül/Pelet — erime noktası gerekli');
+      _addNote('tf_lel', 'ℹ Granül formda toz patlama riski düşük; LEL/UEL uygulanmayabilir');
+    }
+
+    if (sub === 'flake') {
+      _markMandatory('tf_mp', '⚑ Pul/Flake — erime noktası gerekli');
+    }
+
+    if (sub === 'block') {
+      _markMandatory('tf_mp', '⚑ Briket/Blok — erime/yumuşama noktası gerekli');
+      _addNote('tf_density', 'ℹ Briket/Blok: görünür yoğunluk (bulk density) ile gerçek yoğunluk arasındaki farkı belirtin');
+    }
+  }
 }
 
 // ── Forma göre fiziksel alan görünürlüğü ─────────────────────────────────────
@@ -2735,13 +2774,45 @@ function updatePhysFieldsByForm() {
   const form = document.getElementById('pform')?.value || 'liquid';
   const sub  = document.getElementById('pform_sub')?.value || '';
 
-  // Alt kategori seçiciyi sadece sıvıda göster
+  // Alt kategori seçenekleri forma göre
+  const _SUB_OPTIONS = {
+    liquid: [
+      ['', '— Alt tür seçin (opsiyonel) —'],
+      ['solvent',     'Çözücü karışımı'],
+      ['paint',       'Boya / Vernik / Lake'],
+      ['acid',        'Asit çözeltisi'],
+      ['base',        'Baz çözeltisi'],
+      ['emulsion',    'Emülsiyon / Dispersiyon'],
+      ['waterbased',  'Su bazlı ürün'],
+      ['other_liquid','Diğer sıvı'],
+    ],
+    solid: [
+      ['', '— Alt tür seçin (opsiyonel) —'],
+      ['granule',     'Granül / Pelet'],
+      ['flake',       'Pul / Flake'],
+      ['powder_fine', 'Toz / Pudra'],
+      ['polymer',     'Polimer / Plastik'],
+      ['block',       'Briket / Blok / Levha'],
+      ['other_solid', 'Diğer katı'],
+    ],
+    powder: [
+      ['', '— Alt tür seçin (opsiyonel) —'],
+      ['powder_fine', 'İnce toz (< 100 µm)'],
+      ['powder_nano', 'Nano toz (< 1 µm)'],
+      ['powder_coarse','Kaba toz (> 100 µm)'],
+    ],
+  };
   const subWrap = document.getElementById('pform_sub_wrap');
-  if (subWrap) subWrap.style.display = form === 'liquid' ? '' : 'none';
-  if (form !== 'liquid') {
-    const subSel = document.getElementById('pform_sub');
-    if (subSel) subSel.value = '';
+  const subSel  = document.getElementById('pform_sub');
+  const opts = _SUB_OPTIONS[form];
+  if (opts && subSel) {
+    const prevVal = subSel.value;
+    subSel.innerHTML = opts.map(([v,l]) => `<option value="${v}">${l}</option>`).join('');
+    // Aynı form içinde değer korunur, form değişince sıfırla
+    subSel.value = opts.some(([v]) => v === prevVal) ? prevVal : '';
   }
+  if (subWrap) subWrap.style.display = opts ? '' : 'none';
+  if (!opts && subSel) subSel.value = '';
 
   // VOC alanını sadece sıvı + boya/vernik seçilince göster
   const vocWrap = document.getElementById('voc_field_wrap');

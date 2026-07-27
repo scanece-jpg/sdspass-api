@@ -3551,9 +3551,9 @@ function renderAll(s) {
   }
 
   // ── EUH Kodları ──────────────────────────────────────────────────────────
-  if ((euh.codes||[]).length) {
+  if ((euh.euh_codes||[]).length) {
     h += `<div class="r-title">📋 EUH İfadeleri</div>`;
-    (euh.details||[]).forEach((d,i) => {
+    (euh.euh_details||[]).forEach((d,i) => {
       const cls = d.type === 'auto' ? 'danger' : 'info';
       h += `<div class="ecard ${cls}" style="animation-delay:${i*.03}s">
         <div class="ecard-head">
@@ -4924,8 +4924,8 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
       h_codes:      allH,
       all_h_codes:  [...new Set([...allH, ...(clp?.dominated || [])])], // SDS 2.1 tam sınıflandırma
       clp_passed:   clpPassed,
-      euh_codes:    euh?.codes || [],
-      euh_details:  euh?.details || [],
+      euh_codes:    euh?.euh_codes || [],
+      euh_details:  euh?.euh_details || [],
       signal_word:  combinedSignal,
       transport:    transport || {},
       phys_props:   flatPhys,

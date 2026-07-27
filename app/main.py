@@ -530,8 +530,22 @@ async def generate_pdf(data: dict = Body(...)):
                 except (ValueError, TypeError):
                     _c_conc = 0.0
                 _cas_conc_pdf[_c_cas] = _c_conc
+            # Eko H kodlarını transport'a ekle — H400/H410 classify_mixture_clp değil
+            # ecological_service tarafından hesaplanır; transport çağrısından önce eklenmezse
+            # H302/H319/H335 gibi ADR-dışı kodlarla biten ürünlerde not_regulated=True döner.
+            _eco_h_for_tr: list = []
+            try:
+                if eco_result and hasattr(eco_result, 'aquatic') and eco_result.aquatic:
+                    _aq_h = getattr(eco_result.aquatic, 'h_code', '') or ''
+                    if _aq_h:
+                        _eco_h_for_tr.append(_aq_h)
+                    _aq_a = getattr(eco_result, 'aquatic_acute', None)
+                    if _aq_a and getattr(_aq_a, 'h_code', None) == 'H400' and 'H400' not in _eco_h_for_tr:
+                        _eco_h_for_tr.append('H400')
+            except Exception:
+                pass
             py_transport = _transport_calc(
-                h_codes=list(_clp_res.get('h_codes', [])),
+                h_codes=list(_clp_res.get('h_codes', [])) + _eco_h_for_tr,
                 form=_form_val,
                 phys_h_codes=_phys_h_tr,
                 viscosity=float(_visc_tr) if _visc_tr is not None else None,
@@ -1602,16 +1616,20 @@ async def sds_calculate(body: dict = Body(...)):
             _cas_conc[_c_cas] = _c_conc
         import logging as _logging
         _logging.getLogger(__name__).info('[transport] cas_conc=%s', _cas_conc)
+        # Eko H kodlarını transport'a ekle — H400/H410 eco_result'tan gelir,
+        # clp_result['h_codes']'ta yoktur. Yoksa sadece H302/H319 olan ürünlerde
+        # detected=[] → not_regulated=True yanlışlıkla döner.
+        _eco_h_calc: list = list(eco_result.get('h_codes') or [])
         transport_result = transport_classify(
-            h_codes=list(clp_result.get('h_codes', [])),
+            h_codes=list(clp_result.get('h_codes', [])) + _eco_h_calc,
             form=form,
             phys_h_codes=_phys_h_transport,
             viscosity=float(_visc_calc) if _visc_calc is not None else None,
             cas_conc=_cas_conc,
         )
 
-        # ADR §2.2.9.1.10.5 — env_mark düzelt: clp_result h_codes aquatic içermez
-        # (ECO_H_CODES filtresi), doğru kaynak ecological_service'tir.
+        # ADR §2.2.9.1.10.5 — env_mark doğrula (transport zaten eco h_codes ile çalıştı,
+        # bu adım sadece CAS-lookup yolundan gelen kayıtlar için güvence).
         if transport_result and not transport_result.get('not_regulated'):
             _tr_eco_h = eco_result.get('h_codes') or []
             _tr_env = bool(set(_tr_eco_h) & {'H400', 'H410', 'H411'})

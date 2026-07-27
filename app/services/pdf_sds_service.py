@@ -925,6 +925,23 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                         row[1] = row[1] + ' + H229'
             continue  # ayrı satır ekleme
         reason = entry.get('reason','')
+        # Gerekçe metnindeki açık konsantrasyon değerlerini disclosure_map'e göre maskele.
+        # Format: "CAS %99.0 ≥ kesme %X" → CAS disclosure'ı 'show' değilse %99.0 → aralığa çevir.
+        _entry_conc = entry.get('conc')
+        if reason and _entry_conc is not None and disclosure:
+            import re as _re_clf
+            # CAS numarasını reason'dan çıkar (format: "CAS_NO %...")
+            _cas_m = _re_clf.match(r'^(\S+)\s+%', reason)
+            if _cas_m:
+                _r_cas = _cas_m.group(1)
+                _r_lvl = disclosure.get(str(_r_cas).strip(), 'range')
+                if _r_lvl != 'show':
+                    _r_range = get_echa_range(float(_entry_conc))
+                    reason = _re_clf.sub(
+                        rf'%{float(_entry_conc):.1f}',
+                        f'≥{_r_range.replace("≥","").strip()}',
+                        reason, count=1
+                    )
         conc_info = reason or entry.get('cutoff_used','') or '—'
         # h_code'dan yetkili h_class türet (DB bozukluğuna karşı düzelt)
         raw_hclass  = entry.get('h_class', '')

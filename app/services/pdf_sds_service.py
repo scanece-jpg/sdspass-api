@@ -1557,8 +1557,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     na = term(lang,'not_available')
 
     _prod_form     = product.get('form', '')
+    _prod_form_sub = product.get('form_sub', '') or ''
     _is_solid_form = _prod_form in ('solid', 'powder')
     _is_gas_form   = _prod_form == 'gas'
+    _is_polymer    = _prod_form_sub == 'polymer'
 
     # PCN zorunlu alanlar kontrolü — yalnızca API yanıtına/uygulama içi uyarıya eklenir,
     # PDF çıktısına iç teknik mesaj basılmaz.
@@ -1675,7 +1677,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         s = str(v).strip()
         return s if s else None
 
-    _mp_lbl  = 'Donma/Erime Noktası' if lang=='TR' else 'Melting/Freezing Point'
+    if _is_polymer:
+        _mp_lbl = 'Yumuşama Noktası (Vicat/VST)' if lang=='TR' else 'Softening Point (Vicat/VST)'
+    else:
+        _mp_lbl = 'Donma/Erime Noktası' if lang=='TR' else 'Melting/Freezing Point'
     _rd_lbl  = 'Bağıl Yoğunluk (su=1)' if lang=='TR' else 'Relative Density (water=1)'
     _vd_lbl  = 'Buhar Yoğunluğu (hava=1)' if lang=='TR' else 'Vapor Density (air=1)'
     _ai_lbl  = 'Kendiliğinden Tutuşma' if lang=='TR' else 'Auto-ignition Temp.'
@@ -1836,9 +1841,16 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             if row[0] in (_fp_lbl, _bp_lbl) and row[1] in _NO_DATA_VALS:
                 row[1] = _na_gas
     elif _is_solid_form:
+        _na_polymer_bp = (
+            ('Uygulanamaz (polimer/plastik — keskin kaynama noktası yok)' if lang == 'TR'
+             else 'Not applicable (polymer/plastic — no defined boiling point)')
+        )
         for row in all_phys_rows:
             if row[0] in (_fp_lbl, _bp_lbl) and row[1] in _NO_DATA_VALS:
-                row[1] = _na_solid
+                if _is_polymer and row[0] == _bp_lbl:
+                    row[1] = _na_polymer_bp
+                else:
+                    row[1] = _na_solid
     elif _has_aqueous:
         # KKDİK Ek-2 §9.1: "Bilgi yok" için neden belirtilmeli; sulu karışımda FP uygulanamaz
         for row in all_phys_rows:

@@ -2387,7 +2387,23 @@ async def parse_supplier_sds(request: Request):
                     "ld50_dermal": None,
                     "lc50_inhal": None
                 }
-            ]
+            ],
+            "phys_props": {
+                "appearance": "beyaz katı toz",
+                "color": "beyaz",
+                "odor": "kokusuz",
+                "ph": "7.0",
+                "melting_point": "801",
+                "boiling_point": "1413",
+                "flash_point": None,
+                "vapor_pressure": "< 0.1 hPa (20°C)",
+                "density": "2.16",
+                "solubility": "360 g/L (20°C)",
+                "viscosity": None,
+                "auto_ignition": None,
+                "decomp_temp": None,
+                "log_kow": None
+            }
         }, ensure_ascii=False)
 
         prompt = f"""Aşağıdaki SDS (Güvenlik Bilgi Formu) metninden bilgileri çıkar.
@@ -2407,7 +2423,23 @@ async def parse_supplier_sds(request: Request):
 - ld50_oral: Bölüm 11'deki oral LD50 değeri mg/kg cinsinden sayısal (yoksa null)
 - ld50_dermal: Bölüm 11'deki dermal LD50 değeri mg/kg cinsinden sayısal (yoksa null)
 - lc50_inhal: Bölüm 11'deki inhalasyon LC50 değeri mg/L/4h cinsinden sayısal (yoksa null)
+- phys_props: Bölüm 9'daki fiziksel ve kimyasal özellikler (yoksa null):
+  - appearance: görünüm/form (renk + fiziksel hal, örn. "beyaz katı toz")
+  - color: renk
+  - odor: koku
+  - ph: pH değeri (metin olarak, örn. "7.0" veya "6.5-7.5")
+  - melting_point: erime/donma noktası °C (sadece sayı veya aralık, örn. "801" veya "58-62")
+  - boiling_point: kaynama noktası °C
+  - flash_point: parlama noktası °C (yoksa null)
+  - vapor_pressure: buhar basıncı (birimi ile, örn. "< 0.1 hPa (20°C)")
+  - density: yoğunluk g/cm³ veya g/mL (sadece sayı, örn. "1.84")
+  - solubility: suda çözünürlük (birimi ile, örn. "360 g/L (20°C)" veya "tamamen karışır")
+  - viscosity: viskozite (birimi ile, örn. "50 mPa·s (20°C)")
+  - auto_ignition: kendiliğinden tutuşma sıcaklığı °C
+  - decomp_temp: ayrışma sıcaklığı °C
+  - log_kow: n-oktanol/su dağılım katsayısı (logP)
 - Belgede yazan değerleri birebir al, tahmin etme; birim dönüşümü yapma
+- Belirlenmemiş/uygulanamaz değerler için null yaz
 
 SDS METNİ:
 {sds_text[:30000]}
@@ -2505,7 +2537,23 @@ Sadece JSON:"""
 
             validated.append(comp)
 
-        return {"components": validated, "warnings": warnings, "supplier": supplier}
+        # B9 fiziksel özellikler — yalnızca tek bileşen + konsantrasyon ≥ 95% ise geçerli
+        phys_props = parsed.get("phys_props") if isinstance(parsed, dict) else None
+        _single = len(validated) == 1
+        _conc = validated[0].get("concMax") or validated[0].get("concMin") if _single else None
+        try:
+            _conc_val = float(_conc) if _conc is not None else 0.0
+        except (TypeError, ValueError):
+            _conc_val = 0.0
+        phys_props_applicable = bool(_single and _conc_val >= 95.0 and phys_props)
+
+        return {
+            "components": validated,
+            "warnings": warnings,
+            "supplier": supplier,
+            "phys_props": phys_props,
+            "phys_props_applicable": phys_props_applicable,
+        }
 
     except HTTPException:
         raise

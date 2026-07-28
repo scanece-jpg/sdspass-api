@@ -3,15 +3,15 @@ SDS Otomatik Cümle Servisi
 ===========================
 KKDİK Ek-2 — SDS Bölüm 1-16 için otomatik metin üretimi
 
-Bölüm 3: Konsantrasyon gizleme (ECHA aralıkları)
+Bölüm 3: Konsantrasyon gizleme (standart bantlar)
 Bölüm 4-8: H kodu → otomatik cümle veritabanı
 Bölüm 11-12: CLP/Ekoloji sonuçlarından metin
 Bölüm 14: ADR/IMDG/IATA UN numarası veritabanı
 
 Gizleme Seviyeleri (Bölüm 3):
   'show'   → Tam konsantrasyon göster (%20.0)
-  'range'  → ECHA aralığı ver (10-<25%)
-  'hide'   → CAS gizle, kimyasal grup adı + aralık
+  'range'  → Standart bant ver (≥ 10 - < 20%)
+  'hide'   → CAS gizle, kimyasal grup adı + bant
 
 Kaynak: CLP Madde 24(2), REACH Madde 119, KKDİK Madde 15
 """
@@ -20,19 +20,38 @@ from typing import List, Dict, Optional, Any
 from app.services.codes_i18n import correct_hclass
 
 
-# ─── BÖLÜM 3: ECHA KONSANTRASYON ARALIĞI ─────────────────────────────────────
-
-# ECHA SDS Kılavuzu Rev.4 (2022) Tablo 3.1 — Madde 3.2 CLP Annex I 1.1.3
-# Ticari sır durumunda kesin konsantrasyon yerine kullanılır.
+# ─── BÖLÜM 3: KONSANTRASYON GİZLEME BANTLARI ────────────────────────────────
+#
+# Bant kenarları CLP kesme değerleriyle hizalıdır:
+#   0,1 / 1 / 2,5 / 5 / 10 / 20 / 25 / 50 / 75
+# Kesin konsantrasyon gizlenmek istendiğinde veya CAS gizlendiğinde kullanılır.
+# Kullanıcının girdiği aralık (conc_str / conc_min+conc_max) bu bantlara dönüştürülmez —
+# aralıklar B3'e aynen yansıtılır.
 # Semboller: ≥ (büyük eşit), < (küçük)
 ECHA_RANGES = [
-    (25.0, 100.01, '≥ 25%'),
-    (10.0,  25.0,  '≥ 10 - < 25%'),
+    (75.0, 100.01, '≥ 75%'),
+    (50.0,  75.0,  '≥ 50 - < 75%'),
+    (25.0,  50.0,  '≥ 25 - < 50%'),
+    (20.0,  25.0,  '≥ 20 - < 25%'),
+    (10.0,  20.0,  '≥ 10 - < 20%'),
     ( 5.0,  10.0,  '≥ 5 - < 10%'),
     ( 2.5,   5.0,  '≥ 2,5 - < 5%'),
     ( 1.0,   2.5,  '≥ 1 - < 2,5%'),
     ( 0.1,   1.0,  '≥ 0,1 - < 1%'),
     ( 0.0,   0.1,  '< 0,1%'),
+]
+
+# ─── BÖLÜM 1.1.3.6: FORMÜLASYONDEĞİŞİM TOLERANSI ───────────────────────────
+# CLP Kılavuzu Bölüm 1, v5.0 (Kasım 2024) Tablo 1.2 — SEA Ek-1 §1.1.3.6
+# "Karışımın bileşimi değiştiğinde sınıflandırma ne zaman yeniden yapılmalıdır?"
+# Bir bileşenin konsantrasyonu bu tolerans içinde kalıyorsa mevcut test/karar
+# verisi geçerliliğini korur; dışına çıkınca yeniden değerlendirme gerekir.
+COMPOSITION_VARIATION_TABLE = [
+    # (üst_sınır_dahil, izin_verilen_değişim_yüzdesi)
+    (  2.5, 30.0),   # C ≤ 2,5%    → ± %30
+    ( 10.0, 20.0),   # 2,5 < C ≤ 10%  → ± %20
+    ( 25.0, 10.0),   # 10 < C ≤ 25%   → ± %10
+    (100.0,  5.0),   # 25 < C ≤ 100%  → ± %5
 ]
 
 # Kimyasal grup adları (CAS gizlendiğinde kullanılır)
@@ -85,8 +104,8 @@ CAS_TO_GROUP: Dict[str, str] = {
 
 def get_echa_range(concentration: float) -> str:
     """
-    Konsantrasyonu ECHA SDS Kılavuzu (Rev.4, 2022) aralığına çevir.
-    CLP Annex I Bölüm 1.1.3 — Ticari sır / konsantrasyon gizleme.
+    Konsantrasyonu standart gizleme bandına çevir.
+    Bant kenarları CLP kesme değerleriyle hizalıdır (KKDİK Madde 15 / CLP Madde 24(2)).
     """
     if concentration >= 100:
         return '100%'

@@ -1403,7 +1403,7 @@ function addComp(pf = {}) {
       </div>
     </div>
     <div>
-      <label>Konsantrasyon (%) <span style="font-size:9px;color:var(--text3)">— kesin değer girin; B3'te REACH standardı aralığı olarak gösterilir</span></label>
+      <label>Konsantrasyon (%) <span style="font-size:9px;color:var(--text3)">— kesin değer girin; B3'te standart bant olarak gösterilir</span></label>
       <input type="text" class="conc-manual" id="cmanual${id}"
              placeholder="örn: 30"
              oninput="onManualConc(${id});updateConcTotal()"
@@ -2186,8 +2186,11 @@ function parseManualConc(val) {
 // REACH Annex II Tablo 1.1 — kesin değeri standart aralığa çevirir
 function concToRange(v) {
   if (!v || isNaN(v) || v <= 0) return '';
-  if (v >= 25)  return '≥ 25%';
-  if (v >= 10)  return '≥ 10 - < 25%';
+  if (v >= 75)  return '≥ 75%';
+  if (v >= 50)  return '≥ 50 - < 75%';
+  if (v >= 25)  return '≥ 25 - < 50%';
+  if (v >= 20)  return '≥ 20 - < 25%';
+  if (v >= 10)  return '≥ 10 - < 20%';
   if (v >= 5)   return '≥ 5 - < 10%';
   if (v >= 2.5) return '≥ 2,5 - < 5%';
   if (v >= 1)   return '≥ 1 - < 2,5%';

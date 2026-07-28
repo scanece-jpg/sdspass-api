@@ -1717,7 +1717,8 @@ async function parseSupplerSds(input) {
       if (!res.ok) throw new Error(`${file.name}: ${data.detail || 'Sunucu hatası'}`);
       const sup = data.supplier || {};
       const label = [sup.company, sup.product_name, sup.rev_no ? 'Rev.'+sup.rev_no : null, sup.rev_date].filter(Boolean).join(' — ') || file.name;
-      return { fileName: file.name, label, components: data.components || [], warnings: data.warnings || [] };
+      return { fileName: file.name, label, components: data.components || [], warnings: data.warnings || [],
+               phys_props: data.phys_props || null, phys_props_applicable: data.phys_props_applicable || false };
     }));
 
     // Yeni sonuçları mevcut listeye ekle
@@ -1858,6 +1859,30 @@ function applySupplierComps() {
       }
     }
   });
+
+  // B9 fiziksel özellikler — tek SDS + konsantrasyon ≥ %95 ise otomatik doldur
+  const b9Source = results.find(r => r.phys_props_applicable && r.phys_props);
+  if (b9Source) {
+    const pp = b9Source.phys_props;
+    const _setField = (id, val) => {
+      if (!val) return;
+      const el = document.getElementById(id);
+      if (el && !el.value) el.value = val;
+    };
+    _setField('tf_appearance', pp.appearance || pp.color);
+    _setField('tf_ph',         pp.ph);
+    _setField('tf_mp',         pp.melting_point);
+    _setField('tf_bp',         pp.boiling_point);
+    _setField('tf_fp',         pp.flash_point);
+    _setField('tf_density',    pp.density);
+    _setField('tf_solubility', pp.solubility);
+    _setField('tf_visc',       pp.viscosity);
+    _setField('tf_vp',         pp.vapor_pressure);
+    _setField('tf_ait',        pp.auto_ignition);
+    _setField('tf_decomp',     pp.decomp_temp);
+    _setField('tf_logkow',     pp.log_kow);
+    allWarnings.push('ℹ️ B9 fiziksel özellikler tedarikçi SDS\'inden dolduruldu (sadece boş alanlar) — kontrol edin.');
+  }
 
   status.style.background = allWarnings.length ? '#7c5a00' : '#155724';
   status.style.color = '#fff';

@@ -49,6 +49,14 @@ Her bileşen için:
 - Madde bulunursa: adı, tehlike sınıflarını göster, onay iste
 - Bulunmazsa: tehlike sınıflarını kullanıcıdan iste
 
+**ÖNEMLİ:** Lookup sonucundan şu alanları API payload'a aynen kopyala:
+- `hazards` → bileşenin `hazards` alanı
+- `m_factors` → bileşenin `m_factors` alanı (sucul M-faktörleri — boş bırakma!)
+- `scl` → bileşenin `scl` alanı (özel konsantrasyon limitleri)
+- `ate` → bileşenin `ate` alanı (akut toksisite verileri)
+
+Eco motoru M-faktörsüz çalışırsa sucul sınıflandırma yanlış çıkar.
+
 ### 1.4 Fiziksel Özellikler (metin sor — ölçülen değerler)
 Aşağıdakileri sor, bilinmeyenler için "—" yaz:
 - Görünüm ve renk (ör: "berrak sarı sıvı")

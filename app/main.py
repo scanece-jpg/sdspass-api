@@ -1117,9 +1117,10 @@ async def substance_phys_lookup(cas: str):
 
 
 @app.get("/api/v1/sds/substance/lookup")
-async def substance_lookup(cas: str):
+async def substance_lookup(cas: str, form: str = None):
     """
     CAS numarasına göre madde bilgisi döndür.
+    form parametresi Not B maddeleri için (HCl gibi) sıvı/gaz ayrımı yapar.
     Hiyerarşi:
       1. data/cl/   — SEA Ek-6 (mutlak)
       2. data/annex6/ — CLP Annex VI
@@ -1132,7 +1133,7 @@ async def substance_lookup(cas: str):
     oel = get_oel(cas)
 
     # Sıra 1-2-3: Lokal dosyalar
-    result = lookup_substance(cas)
+    result = lookup_substance(cas, form=form)
 
     # Sıra 5-6: ECHA C&L API → data/echa_cl/ | PubChem → data/pubchem_cl/
     # (kaydetme echa_service.lookup_echa_api içinde yapılır)

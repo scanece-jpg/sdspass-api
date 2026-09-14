@@ -4077,7 +4077,8 @@
     "synonyms": [],
     "lang": "tr",
     "notes": [
-      "U"
+      "U",
+      "B"
     ],
     "euh_codes": [],
     "classification": [
@@ -4104,7 +4105,8 @@
     ],
     "scl_limits": [],
     "m_factors": {},
-    "ate": {}
+    "ate": {},
+    "form": "gas"
   },
   "1336-21-6": {
     "index_no": "007-001-01-2",
@@ -120496,6 +120498,1368 @@
       }
     ],
     "m_factors": {},
+    "ate": {}
+  },
+  "7664-41-7-AQ": {
+    "index_no": "007-001-00-5",
+    "names": [
+      "amonyak çözeltisi ... %"
+    ],
+    "name_en": "ammonia solution ... %",
+    "ec_no": "231-635-3",
+    "cas": "7664-41-7",
+    "synonyms": [
+      "ammonium hydroxide solution"
+    ],
+    "lang": "tr",
+    "notes": [
+      "B"
+    ],
+    "form": "solution",
+    "euh_codes": [],
+    "classification": [
+      {
+        "class": "Cilt Aşnd. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "BHOT Tek Mrz. 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Sucul Akut 1",
+        "h_code": "H400"
+      }
+    ],
+    "scl_limits": [
+      {
+        "h_code": "H314",
+        "class": "Cilt Aşnd. 1B",
+        "op": ">=",
+        "min": 5.0,
+        "max": null,
+        "unit": "%"
+      },
+      {
+        "h_code": "H315",
+        "class": "Cilt Tah. 2",
+        "op": "range",
+        "min": 2.0,
+        "max": 5.0,
+        "unit": "%"
+      },
+      {
+        "h_code": "H335",
+        "class": "BHOT Tek Mrz. 3",
+        "op": ">=",
+        "min": 5.0,
+        "max": null,
+        "unit": "%"
+      },
+      {
+        "h_code": "H400",
+        "class": "Sucul Akut 1",
+        "op": ">=",
+        "min": 5.0,
+        "max": null,
+        "unit": "%"
+      }
+    ],
+    "m_factors": {
+      "acute": 1
+    },
+    "ate": {}
+  },
+  "1336-21-6-AQ": {
+    "index_no": "007-001-00-5",
+    "names": [
+      "amonyak cozeltisi ... %"
+    ],
+    "name_en": "ammonia solution ... %",
+    "ec_no": "231-635-3",
+    "cas": "7664-41-7",
+    "synonyms": [
+      "ammonium hydroxide"
+    ],
+    "lang": "tr",
+    "notes": [
+      "B"
+    ],
+    "form": "solution",
+    "euh_codes": [],
+    "classification": [
+      {
+        "class": "Cilt Asnd. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "BHOT Tek Mrz. 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Sucul Akut 1",
+        "h_code": "H400"
+      }
+    ],
+    "scl_limits": [
+      {
+        "h_code": "H314",
+        "class": "Cilt Asnd. 1B",
+        "op": ">=",
+        "min": 5.0,
+        "max": null,
+        "unit": "%"
+      },
+      {
+        "h_code": "H315",
+        "class": "Cilt Tah. 2",
+        "op": "range",
+        "min": 2.0,
+        "max": 5.0,
+        "unit": "%"
+      },
+      {
+        "h_code": "H335",
+        "class": "BHOT Tek Mrz. 3",
+        "op": ">=",
+        "min": 5.0,
+        "max": null,
+        "unit": "%"
+      },
+      {
+        "h_code": "H400",
+        "class": "Sucul Akut 1",
+        "op": ">=",
+        "min": 5.0,
+        "max": null,
+        "unit": "%"
+      }
+    ],
+    "m_factors": {
+      "acute": 1
+    },
+    "ate": {}
+  },
+  "7697-37-2-AQ": {
+    "index_no": "007-004-00-1",
+    "names": [
+      "nitrik asit ... %"
+    ],
+    "name_en": "nitric acid ... %",
+    "ec_no": "231-714-2",
+    "cas": "7697-37-2",
+    "synonyms": [],
+    "lang": "tr",
+    "notes": [
+      "B"
+    ],
+    "form": "solution",
+    "euh_codes": [],
+    "classification": [
+      {
+        "class": "Oks. Siv. 3",
+        "h_code": "H272"
+      },
+      {
+        "class": "Cilt Asnd. 1A",
+        "h_code": "H314"
+      }
+    ],
+    "scl_limits": [
+      {
+        "h_code": "H272",
+        "class": "Oks. Siv. 3",
+        "op": ">=",
+        "min": 65.0,
+        "max": null,
+        "unit": "%"
+      },
+      {
+        "h_code": "H314",
+        "class": "Cilt Asnd. 1A",
+        "op": ">=",
+        "min": 20.0,
+        "max": null,
+        "unit": "%"
+      },
+      {
+        "h_code": "H314",
+        "class": "Cilt Asnd. 1B",
+        "op": "range",
+        "min": 5.0,
+        "max": 20.0,
+        "unit": "%"
+      },
+      {
+        "h_code": "H315",
+        "class": "Cilt Tah. 2",
+        "op": "range",
+        "min": 1.0,
+        "max": 5.0,
+        "unit": "%"
+      }
+    ],
+    "m_factors": {},
+    "ate": {}
+  },
+  "7722-84-1-AQ": {
+    "index_no": "008-003-00-9",
+    "names": [
+      "hidrojen peroksit cozeltisi ... %"
+    ],
+    "name_en": "hydrogen peroxide solution ... %",
+    "ec_no": "231-765-0",
+    "cas": "7722-84-1",
+    "synonyms": [],
+    "lang": "tr",
+    "notes": [
+      "B"
+    ],
+    "form": "solution",
+    "euh_codes": [],
+    "classification": [
+      {
+        "class": "Oks. Siv. 1",
+        "h_code": "H271"
+      },
+      {
+        "class": "Akut Tok. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Akut Tok. 4",
+        "h_code": "H332"
+      },
+      {
+        "class": "Cilt Asnd. 1A",
+        "h_code": "H314"
+      },
+      {
+        "class": "Gz Has. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "BHOT Tek Mrz. 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Kans. 2",
+        "h_code": "H351"
+      }
+    ],
+    "scl_limits": [
+      {
+        "h_code": "H271",
+        "class": "Oks. Siv. 1",
+        "op": ">=",
+        "min": 70.0,
+        "max": null,
+        "unit": "%"
+      },
+      {
+        "h_code": "H272",
+        "class": "Oks. Siv. 2",
+        "op": "range",
+        "min": 50.0,
+        "max": 70.0,
+        "unit": "%"
+      },
+      {
+        "h_code": "H272",
+        "class": "Oks. Siv. 3",
+        "op": "range",
+        "min": 8.0,
+        "max": 50.0,
+        "unit": "%"
+      },
+      {
+        "h_code": "H314",
+        "class": "Cilt Asnd. 1A",
+        "op": ">=",
+        "min": 50.0,
+        "max": null,
+        "unit": "%"
+      },
+      {
+        "h_code": "H314",
+        "class": "Cilt Asnd. 1B",
+        "op": "range",
+        "min": 8.0,
+        "max": 50.0,
+        "unit": "%"
+      },
+      {
+        "h_code": "H315",
+        "class": "Cilt Tah. 2",
+        "op": "range",
+        "min": 3.0,
+        "max": 8.0,
+        "unit": "%"
+      },
+      {
+        "h_code": "H318",
+        "class": "Gz Has. 1",
+        "op": ">=",
+        "min": 8.0,
+        "max": null,
+        "unit": "%"
+      },
+      {
+        "h_code": "H319",
+        "class": "Gz Tah. 2",
+        "op": "range",
+        "min": 3.0,
+        "max": 8.0,
+        "unit": "%"
+      }
+    ],
+    "m_factors": {},
+    "ate": {}
+  },
+  "7664-38-2-AQ": {
+    "index_no": "015-011-00-6",
+    "names": [
+      "fosforik asit ... %"
+    ],
+    "name_en": "phosphoric acid ... %",
+    "ec_no": "231-633-2",
+    "cas": "7664-38-2",
+    "synonyms": [
+      "orthophosphoric acid"
+    ],
+    "lang": "tr",
+    "notes": [
+      "B"
+    ],
+    "form": "solution",
+    "euh_codes": [],
+    "classification": [
+      {
+        "class": "Cilt Asnd. 1B",
+        "h_code": "H314"
+      }
+    ],
+    "scl_limits": [
+      {
+        "h_code": "H314",
+        "class": "Cilt Asnd. 1B",
+        "op": ">=",
+        "min": 25.0,
+        "max": null,
+        "unit": "%"
+      },
+      {
+        "h_code": "H315",
+        "class": "Cilt Tah. 2",
+        "op": "range",
+        "min": 10.0,
+        "max": 25.0,
+        "unit": "%"
+      },
+      {
+        "h_code": "H319",
+        "class": "Gz Tah. 2",
+        "op": "range",
+        "min": 10.0,
+        "max": 25.0,
+        "unit": "%"
+      }
+    ],
+    "m_factors": {},
+    "ate": {}
+  },
+  "7664-93-9-AQ": {
+    "index_no": "016-020-00-8",
+    "names": [
+      "sulfurik asit ... %"
+    ],
+    "name_en": "sulphuric acid ... %",
+    "ec_no": "231-639-5",
+    "cas": "7664-93-9",
+    "synonyms": [],
+    "lang": "tr",
+    "notes": [
+      "B"
+    ],
+    "form": "solution",
+    "euh_codes": [],
+    "classification": [
+      {
+        "class": "Cilt Asnd. 1A",
+        "h_code": "H314"
+      }
+    ],
+    "scl_limits": [
+      {
+        "h_code": "H314",
+        "class": "Cilt Asnd. 1A",
+        "op": ">=",
+        "min": 15.0,
+        "max": null,
+        "unit": "%"
+      },
+      {
+        "h_code": "H314",
+        "class": "Cilt Asnd. 1B",
+        "op": "range",
+        "min": 5.0,
+        "max": 15.0,
+        "unit": "%"
+      },
+      {
+        "h_code": "H315",
+        "class": "Cilt Tah. 2",
+        "op": "range",
+        "min": 1.0,
+        "max": 5.0,
+        "unit": "%"
+      }
+    ],
+    "m_factors": {},
+    "ate": {}
+  },
+  "7681-52-9-AQ": {
+    "index_no": "017-011-00-1",
+    "names": [
+      "sodyum hipoklorit cozeltisi ... % aktif Cl"
+    ],
+    "name_en": "sodium hypochlorite, solution ... % Cl active",
+    "ec_no": "231-668-3",
+    "cas": "7681-52-9",
+    "synonyms": [],
+    "lang": "tr",
+    "notes": [
+      "B"
+    ],
+    "form": "solution",
+    "euh_codes": [
+      "EUH031"
+    ],
+    "classification": [
+      {
+        "class": "Cilt Asnd. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Gz Has. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Sucul Akut 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Sucul Kron. 1",
+        "h_code": "H410"
+      }
+    ],
+    "scl_limits": [
+      {
+        "h_code": "H314",
+        "class": "Cilt Asnd. 1B",
+        "op": ">=",
+        "min": 5.0,
+        "max": null,
+        "unit": "% Cl"
+      },
+      {
+        "h_code": "H315",
+        "class": "Cilt Tah. 2",
+        "op": "range",
+        "min": 1.0,
+        "max": 5.0,
+        "unit": "% Cl"
+      },
+      {
+        "h_code": "H318",
+        "class": "Gz Has. 1",
+        "op": ">=",
+        "min": 5.0,
+        "max": null,
+        "unit": "% Cl"
+      },
+      {
+        "h_code": "H319",
+        "class": "Gz Tah. 2",
+        "op": "range",
+        "min": 0.5,
+        "max": 5.0,
+        "unit": "% Cl"
+      },
+      {
+        "h_code": "H400",
+        "class": "Sucul Akut 1",
+        "op": ">=",
+        "min": 5.0,
+        "max": null,
+        "unit": "% Cl"
+      },
+      {
+        "h_code": "H410",
+        "class": "Sucul Kron. 1",
+        "op": ">=",
+        "min": 5.0,
+        "max": null,
+        "unit": "% Cl"
+      }
+    ],
+    "m_factors": {
+      "acute": 10,
+      "chronic": 10
+    },
+    "ate": {}
+  },
+  "50-00-0-AQ": {
+    "index_no": "605-001-00-5",
+    "names": [
+      "formaldehit cozeltisi ... %"
+    ],
+    "name_en": "formaldehyde ... %",
+    "ec_no": "200-001-8",
+    "cas": "50-00-0",
+    "synonyms": [
+      "formalin"
+    ],
+    "lang": "tr",
+    "notes": [
+      "B"
+    ],
+    "form": "solution",
+    "euh_codes": [],
+    "classification": [
+      {
+        "class": "Alev. Siv. 3",
+        "h_code": "H226"
+      },
+      {
+        "class": "Akut Tok. 3",
+        "h_code": "H301"
+      },
+      {
+        "class": "Akut Tok. 3",
+        "h_code": "H311"
+      },
+      {
+        "class": "Akut Tok. 3",
+        "h_code": "H331"
+      },
+      {
+        "class": "Cilt Asnd. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Gz Has. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Cilt Duy. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      },
+      {
+        "class": "Kans. 1B",
+        "h_code": "H350"
+      }
+    ],
+    "scl_limits": [
+      {
+        "h_code": "H314",
+        "class": "Cilt Asnd. 1B",
+        "op": ">=",
+        "min": 25.0,
+        "max": null,
+        "unit": "%"
+      },
+      {
+        "h_code": "H314",
+        "class": "Cilt Asnd. 1B",
+        "op": "range",
+        "min": 5.0,
+        "max": 25.0,
+        "unit": "%"
+      },
+      {
+        "h_code": "H315",
+        "class": "Cilt Tah. 2",
+        "op": "range",
+        "min": 1.0,
+        "max": 5.0,
+        "unit": "%"
+      },
+      {
+        "h_code": "H317",
+        "class": "Cilt Duy. 1",
+        "op": ">=",
+        "min": 0.2,
+        "max": null,
+        "unit": "%"
+      },
+      {
+        "h_code": "H350",
+        "class": "Kans. 1B",
+        "op": ">=",
+        "min": 1.0,
+        "max": null,
+        "unit": "%"
+      },
+      {
+        "h_code": "H341",
+        "class": "Muta. 2",
+        "op": ">=",
+        "min": 1.0,
+        "max": null,
+        "unit": "%"
+      }
+    ],
+    "m_factors": {},
+    "ate": {}
+  },
+  "64-18-6-AQ": {
+    "index_no": "607-001-00-7",
+    "names": [
+      "formik asit ... %"
+    ],
+    "name_en": "formic acid ... %",
+    "ec_no": "200-579-1",
+    "cas": "64-18-6",
+    "synonyms": [],
+    "lang": "tr",
+    "notes": [
+      "B"
+    ],
+    "form": "solution",
+    "euh_codes": [],
+    "classification": [
+      {
+        "class": "Cilt Asnd. 1A",
+        "h_code": "H314"
+      }
+    ],
+    "scl_limits": [
+      {
+        "h_code": "H314",
+        "class": "Cilt Asnd. 1A",
+        "op": ">=",
+        "min": 90.0,
+        "max": null,
+        "unit": "%"
+      },
+      {
+        "h_code": "H314",
+        "class": "Cilt Asnd. 1B",
+        "op": "range",
+        "min": 10.0,
+        "max": 90.0,
+        "unit": "%"
+      },
+      {
+        "h_code": "H315",
+        "class": "Cilt Tah. 2",
+        "op": "range",
+        "min": 2.0,
+        "max": 10.0,
+        "unit": "%"
+      },
+      {
+        "h_code": "H319",
+        "class": "Gz Tah. 2",
+        "op": "range",
+        "min": 2.0,
+        "max": 10.0,
+        "unit": "%"
+      }
+    ],
+    "m_factors": {},
+    "ate": {}
+  },
+  "64-19-7-AQ": {
+    "index_no": "607-002-00-6",
+    "names": [
+      "asetik asit ... %"
+    ],
+    "name_en": "acetic acid ... %",
+    "ec_no": "200-580-7",
+    "cas": "64-19-7",
+    "synonyms": [],
+    "lang": "tr",
+    "notes": [
+      "B"
+    ],
+    "form": "solution",
+    "euh_codes": [],
+    "classification": [
+      {
+        "class": "Cilt Asnd. 1A",
+        "h_code": "H314"
+      }
+    ],
+    "scl_limits": [
+      {
+        "h_code": "H314",
+        "class": "Cilt Asnd. 1A",
+        "op": ">=",
+        "min": 90.0,
+        "max": null,
+        "unit": "%"
+      },
+      {
+        "h_code": "H314",
+        "class": "Cilt Asnd. 1B",
+        "op": "range",
+        "min": 10.0,
+        "max": 90.0,
+        "unit": "%"
+      },
+      {
+        "h_code": "H315",
+        "class": "Cilt Tah. 2",
+        "op": "range",
+        "min": 1.0,
+        "max": 10.0,
+        "unit": "%"
+      },
+      {
+        "h_code": "H319",
+        "class": "Gz Tah. 2",
+        "op": "range",
+        "min": 1.0,
+        "max": 10.0,
+        "unit": "%"
+      }
+    ],
+    "m_factors": {},
+    "ate": {}
+  },
+  "79-09-4-AQ": {
+    "index_no": "607-089-00-0",
+    "names": [
+      "propiyonik asit ... %"
+    ],
+    "name_en": "propionic acid ... %",
+    "ec_no": "201-176-3",
+    "cas": "79-09-4",
+    "synonyms": [],
+    "lang": "tr",
+    "notes": [
+      "B"
+    ],
+    "form": "solution",
+    "euh_codes": [],
+    "classification": [
+      {
+        "class": "Cilt Asnd. 1B",
+        "h_code": "H314"
+      }
+    ],
+    "scl_limits": [
+      {
+        "h_code": "H314",
+        "class": "Cilt Asnd. 1B",
+        "op": ">=",
+        "min": 10.0,
+        "max": null,
+        "unit": "%"
+      },
+      {
+        "h_code": "H315",
+        "class": "Cilt Tah. 2",
+        "op": "range",
+        "min": 1.0,
+        "max": 10.0,
+        "unit": "%"
+      },
+      {
+        "h_code": "H319",
+        "class": "Gz Tah. 2",
+        "op": "range",
+        "min": 1.0,
+        "max": 10.0,
+        "unit": "%"
+      }
+    ],
+    "m_factors": {},
+    "ate": {}
+  },
+  "79-21-0-AQ": {
+    "index_no": "607-094-00-8",
+    "names": [
+      "perasetik asit ... %"
+    ],
+    "name_en": "peracetic acid ... %",
+    "ec_no": "201-186-8",
+    "cas": "79-21-0",
+    "synonyms": [],
+    "lang": "tr",
+    "notes": [
+      "B"
+    ],
+    "form": "solution",
+    "euh_codes": [],
+    "classification": [
+      {
+        "class": "Oks. Siv. 3",
+        "h_code": "H272"
+      },
+      {
+        "class": "Akut Tok. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Cilt Asnd. 1A",
+        "h_code": "H314"
+      },
+      {
+        "class": "Gz Has. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "BHOT Tek Mrz. 3",
+        "h_code": "H335"
+      },
+      {
+        "class": "Sucul Akut 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Sucul Kron. 1",
+        "h_code": "H410"
+      }
+    ],
+    "scl_limits": [
+      {
+        "h_code": "H272",
+        "class": "Oks. Siv. 3",
+        "op": ">=",
+        "min": 17.0,
+        "max": null,
+        "unit": "%"
+      },
+      {
+        "h_code": "H314",
+        "class": "Cilt Asnd. 1A",
+        "op": ">=",
+        "min": 5.0,
+        "max": null,
+        "unit": "%"
+      },
+      {
+        "h_code": "H315",
+        "class": "Cilt Tah. 2",
+        "op": "range",
+        "min": 0.5,
+        "max": 5.0,
+        "unit": "%"
+      }
+    ],
+    "m_factors": {
+      "acute": 10,
+      "chronic": 10
+    },
+    "ate": {}
+  },
+  "7803-49-8-AQ": {
+    "index_no": "007-012-00-2",
+    "names": [
+      "hidroksilamin cozeltisi ... %"
+    ],
+    "name_en": "hydroxylamine ... %",
+    "ec_no": "232-259-7",
+    "cas": "7803-49-8",
+    "synonyms": [],
+    "lang": "tr",
+    "notes": [
+      "B"
+    ],
+    "form": "solution",
+    "euh_codes": [],
+    "classification": [
+      {
+        "class": "Akut Tok. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Cilt Asnd. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Gz Has. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      },
+      {
+        "class": "Kans. 2",
+        "h_code": "H351"
+      },
+      {
+        "class": "BHOT Tek Mrz. 3",
+        "h_code": "H335"
+      }
+    ],
+    "scl_limits": [
+      {
+        "h_code": "H314",
+        "class": "Cilt Asnd. 1B",
+        "op": ">=",
+        "min": 5.0,
+        "max": null,
+        "unit": "%"
+      },
+      {
+        "h_code": "H315",
+        "class": "Cilt Tah. 2",
+        "op": "range",
+        "min": 1.0,
+        "max": 5.0,
+        "unit": "%"
+      }
+    ],
+    "m_factors": {},
+    "ate": {}
+  },
+  "7631-90-5-AQ": {
+    "index_no": "016-064-00-8",
+    "names": [
+      "sodyum hidrojensulfit cozeltisi ... %"
+    ],
+    "name_en": "sodium hydrogensulphite solution ... %",
+    "ec_no": "231-548-0",
+    "cas": "7631-90-5",
+    "synonyms": [
+      "sodium bisulphite"
+    ],
+    "lang": "tr",
+    "notes": [
+      "B"
+    ],
+    "form": "solution",
+    "euh_codes": [],
+    "classification": [
+      {
+        "class": "Cilt Asnd. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "Gz Has. 1",
+        "h_code": "H318"
+      }
+    ],
+    "scl_limits": [
+      {
+        "h_code": "H314",
+        "class": "Cilt Asnd. 1B",
+        "op": ">=",
+        "min": 25.0,
+        "max": null,
+        "unit": "%"
+      },
+      {
+        "h_code": "H315",
+        "class": "Cilt Tah. 2",
+        "op": "range",
+        "min": 5.0,
+        "max": 25.0,
+        "unit": "%"
+      },
+      {
+        "h_code": "H319",
+        "class": "Gz Tah. 2",
+        "op": "range",
+        "min": 5.0,
+        "max": 25.0,
+        "unit": "%"
+      }
+    ],
+    "m_factors": {},
+    "ate": {}
+  },
+  "16872-11-0-AQ": {
+    "index_no": "009-011-00-X",
+    "names": [
+      "floroborik asit ... %"
+    ],
+    "name_en": "fluoroboric acid ... %",
+    "ec_no": "240-898-3",
+    "cas": "16872-11-0",
+    "synonyms": [],
+    "lang": "tr",
+    "notes": [
+      "B"
+    ],
+    "form": "solution",
+    "euh_codes": [],
+    "classification": [
+      {
+        "class": "Cilt Asnd. 1A",
+        "h_code": "H314"
+      },
+      {
+        "class": "Gz Has. 1",
+        "h_code": "H318"
+      }
+    ],
+    "scl_limits": [],
+    "m_factors": {},
+    "ate": {}
+  },
+  "16961-83-4-AQ": {
+    "index_no": "014-005-00-0",
+    "names": [
+      "florosilikat asit ... %"
+    ],
+    "name_en": "fluorosilicic acid ... %",
+    "ec_no": "241-034-8",
+    "cas": "16961-83-4",
+    "synonyms": [],
+    "lang": "tr",
+    "notes": [
+      "B"
+    ],
+    "form": "solution",
+    "euh_codes": [],
+    "classification": [
+      {
+        "class": "Akut Tok. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Cilt Asnd. 1A",
+        "h_code": "H314"
+      }
+    ],
+    "scl_limits": [],
+    "m_factors": {},
+    "ate": {}
+  },
+  "7601-90-3-AQ": {
+    "index_no": "017-008-00-0",
+    "names": [
+      "perklorik asit ... %"
+    ],
+    "name_en": "perchloric acid ... %",
+    "ec_no": "231-512-4",
+    "cas": "7601-90-3",
+    "synonyms": [],
+    "lang": "tr",
+    "notes": [
+      "B"
+    ],
+    "form": "solution",
+    "euh_codes": [],
+    "classification": [
+      {
+        "class": "Oks. Siv. 1",
+        "h_code": "H271"
+      },
+      {
+        "class": "Cilt Asnd. 1A",
+        "h_code": "H314"
+      }
+    ],
+    "scl_limits": [
+      {
+        "h_code": "H271",
+        "class": "Oks. Siv. 1",
+        "op": ">=",
+        "min": 50.0,
+        "max": null,
+        "unit": "%"
+      },
+      {
+        "h_code": "H271",
+        "class": "Oks. Siv. 2",
+        "op": "range",
+        "min": 10.0,
+        "max": 50.0,
+        "unit": "%"
+      }
+    ],
+    "m_factors": {},
+    "ate": {}
+  },
+  "107-22-2-AQ": {
+    "index_no": "605-019-00-3",
+    "names": [
+      "glioksal cozeltisi ... %"
+    ],
+    "name_en": "glyoxal ... %",
+    "ec_no": "203-474-9",
+    "cas": "107-22-2",
+    "synonyms": [
+      "ethandial"
+    ],
+    "lang": "tr",
+    "notes": [
+      "B"
+    ],
+    "form": "solution",
+    "euh_codes": [],
+    "classification": [
+      {
+        "class": "Akut Tok. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Cilt Tah. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Gz Tah. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Solunum Duy. 1",
+        "h_code": "H334"
+      },
+      {
+        "class": "Cilt Duy. 1",
+        "h_code": "H317"
+      },
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      },
+      {
+        "class": "Sucul Kron. 3",
+        "h_code": "H412"
+      }
+    ],
+    "scl_limits": [
+      {
+        "h_code": "H317",
+        "class": "Cilt Duy. 1",
+        "op": ">=",
+        "min": 1.0,
+        "max": null,
+        "unit": "%"
+      }
+    ],
+    "m_factors": {},
+    "ate": {}
+  },
+  "76-05-1-AQ": {
+    "index_no": "607-091-00-1",
+    "names": [
+      "trifloroasetik asit ... %"
+    ],
+    "name_en": "trifluoroacetic acid ... %",
+    "ec_no": "200-929-3",
+    "cas": "76-05-1",
+    "synonyms": [],
+    "lang": "tr",
+    "notes": [
+      "B"
+    ],
+    "form": "solution",
+    "euh_codes": [],
+    "classification": [
+      {
+        "class": "Cilt Asnd. 1A",
+        "h_code": "H314"
+      }
+    ],
+    "scl_limits": [],
+    "m_factors": {},
+    "ate": {}
+  },
+  "79-03-8-AQ": {
+    "index_no": "607-090-00-6",
+    "names": [
+      "propiyonil klorur cozeltisi"
+    ],
+    "name_en": "propionyl chloride",
+    "ec_no": "201-170-0",
+    "cas": "79-03-8",
+    "synonyms": [],
+    "lang": "tr",
+    "notes": [
+      "B"
+    ],
+    "form": "solution",
+    "euh_codes": [],
+    "classification": [
+      {
+        "class": "Cilt Asnd. 1A",
+        "h_code": "H314"
+      }
+    ],
+    "scl_limits": [],
+    "m_factors": {},
+    "ate": {}
+  },
+  "3033-77-0-AQ": {
+    "index_no": "603-191-00-6",
+    "names": [
+      "glisidil trimetilammonyum klorur ... %"
+    ],
+    "name_en": "2,3-epoxypropyltrimethylammonium chloride ... %",
+    "ec_no": "221-221-0",
+    "cas": "3033-77-0",
+    "synonyms": [],
+    "lang": "tr",
+    "notes": [
+      "B"
+    ],
+    "form": "solution",
+    "euh_codes": [],
+    "classification": [
+      {
+        "class": "Akut Tok. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Cilt Tah. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Gz Tah. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      },
+      {
+        "class": "Kans. 2",
+        "h_code": "H351"
+      }
+    ],
+    "scl_limits": [],
+    "m_factors": {},
+    "ate": {}
+  },
+  "3327-22-8-AQ": {
+    "index_no": "603-192-00-1",
+    "names": [
+      "(3-kloro-2-hidroksipropil) trimetilammonyum klorur ... %"
+    ],
+    "name_en": "(3-chloro-2-hydroxypropyl) trimethylammonium chloride ... %",
+    "ec_no": "222-048-3",
+    "cas": "3327-22-8",
+    "synonyms": [],
+    "lang": "tr",
+    "notes": [
+      "B"
+    ],
+    "form": "solution",
+    "euh_codes": [],
+    "classification": [
+      {
+        "class": "Akut Tok. 4",
+        "h_code": "H302"
+      },
+      {
+        "class": "Cilt Tah. 2",
+        "h_code": "H315"
+      },
+      {
+        "class": "Gz Tah. 2",
+        "h_code": "H319"
+      },
+      {
+        "class": "Muta. 2",
+        "h_code": "H341"
+      },
+      {
+        "class": "Kans. 2",
+        "h_code": "H351"
+      }
+    ],
+    "scl_limits": [],
+    "m_factors": {},
+    "ate": {}
+  },
+  "55965-84-9-AQ": {
+    "index_no": "613-167-00-5",
+    "names": [
+      "MIT/CMIT reaksiyon karismasi ... %"
+    ],
+    "name_en": "reaction mass of 5-chloro-2-methyl-2H-isothiazol-3-one and 2-methyl-2H-isothiazol-3-one (3:1) ... %",
+    "ec_no": "611-341-5",
+    "cas": "55965-84-9",
+    "synonyms": [
+      "CMIT/MIT",
+      "Kathon CG"
+    ],
+    "lang": "tr",
+    "notes": [
+      "B"
+    ],
+    "form": "solution",
+    "euh_codes": [],
+    "classification": [
+      {
+        "class": "Akut Tok. 3",
+        "h_code": "H301"
+      },
+      {
+        "class": "Akut Tok. 3",
+        "h_code": "H311"
+      },
+      {
+        "class": "Akut Tok. 3",
+        "h_code": "H331"
+      },
+      {
+        "class": "Cilt Asnd. 1A",
+        "h_code": "H314"
+      },
+      {
+        "class": "Gz Has. 1",
+        "h_code": "H318"
+      },
+      {
+        "class": "Solunum Duy. 1",
+        "h_code": "H334"
+      },
+      {
+        "class": "Cilt Duy. 1A",
+        "h_code": "H317"
+      },
+      {
+        "class": "Sucul Akut 1",
+        "h_code": "H400"
+      },
+      {
+        "class": "Sucul Kron. 1",
+        "h_code": "H410"
+      }
+    ],
+    "scl_limits": [
+      {
+        "h_code": "H317",
+        "class": "Cilt Duy. 1A",
+        "op": ">=",
+        "min": 0.0015,
+        "max": null,
+        "unit": "%"
+      },
+      {
+        "h_code": "H314",
+        "class": "Cilt Asnd. 1A",
+        "op": ">=",
+        "min": 0.6,
+        "max": null,
+        "unit": "%"
+      },
+      {
+        "h_code": "H318",
+        "class": "Gz Has. 1",
+        "op": ">=",
+        "min": 0.6,
+        "max": null,
+        "unit": "%"
+      }
+    ],
+    "m_factors": {
+      "acute": 100,
+      "chronic": 100
+    },
     "ate": {}
   }
 }

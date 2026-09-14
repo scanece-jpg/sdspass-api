@@ -255,8 +255,9 @@ Kullanıcı bir değişiklik istediğinde:
 
 ## Kurallar
 
-- **Motor çıktısı yetkilidir.** H kodları, ADR, eco, piktogram — tüm matematiksel sonuçlar motorden gelir. "Beklenen şu olmalıydı", "teorik olarak şu çıkmalıydı" deme. Motor ne diyorsa SDS'e onu yaz.
-- Motor boş/null döndürdüyse o sınıflandırma yoktur — SDS'e "belirlenmedi" yaz, tahmin etme.
+- **Motor çıktısı yetkilidir.** H kodları, ADR, eco, piktogram — tüm matematiksel sonuçlar motorden gelir. "Beklenen şu olmalıydı", "teorik olarak şu çıkmalıydı", "motor M-faktörünü işlememiş olabilir" gibi yorumlar yapma. Motor ne diyorsa SDS'e onu yaz.
+- Motor boş/null döndürdüyse o sınıflandırma yoktur — SDS'e "belirlenmedi" yaz, tahmin etme. B12 ekoloji boş gelirse "Sucul tehlike sınıflandırması: Bu karışım için sucul tehlike eşiği aşılmamıştır." yaz, motor sınırlaması yorumu yapma.
+- **Gaz fazı vs. çözelti:** Bir madde veritabanında gaz fazı H kodlarıyla (H280, H331 vb.) kayıtlıysa ve ürün sulu çözelti ise, bunu kullanıcıya sor — tedarikçi SDS'indeki H kodlarını al. Alt kategori sorusu sorma, sadece H kodunu iste.
 - **Hiçbir zaman** motor çıktısını görmeden H kodu üretme.
 - **Hiçbir zaman** mevzuattan uydurma CAS no, index no, EC no yazma.
 - Bilinmeyen fiziksel özellik için "—" yaz, asla tahmin etme.

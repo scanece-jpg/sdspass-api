@@ -66,6 +66,30 @@ Aşağıdakileri sor, bilinmeyenler için "—" yaz:
 
 ## Adım 2 — Motor Çağrıları
 
+### ÖNEMLİ: API Çağrı Kuralları
+
+**Encoding:** API'ye JSON gönderirken Türkçe karakterler (`ş ğ ü ö ç İ` vb.) bozulur.
+Her zaman JSON'u bir geçici dosyaya yaz (`/tmp/payload.json`), sonra `curl` ile gönder:
+```bash
+# DOĞRU yöntem — dosyadan gönder
+cat > /tmp/payload.json << 'JSONEOF'
+{ "components": [...] }
+JSONEOF
+curl -s -X POST https://sdspass-api-3.onrender.com/api/v1/sds/calculate \
+  -H "Content-Type: application/json; charset=utf-8" \
+  --data-binary @/tmp/payload.json
+```
+**Asla** Türkçe içerikli JSON'u doğrudan `-d '...'` ile gönderme.
+
+**Worst-case konsantrasyon:** CLP kuralı gereği sınıflandırma her zaman aralığın
+**en yüksek** değeriyle yapılmalıdır. Konsantrasyon aralık (min/max) ise:
+- `conc` = üst sınır (max)
+- `concMax` = üst sınır (max)
+
+Örnek: "%5-10" aralığı → `"conc": 10.0, "concMax": 10.0`
+
+---
+
 ### Ana Hesap
 `POST /api/v1/sds/calculate`
 ```json
@@ -73,10 +97,10 @@ Aşağıdakileri sor, bilinmeyenler için "—" yaz:
   "components": [
     {
       "cas": "7646-85-7",
-      "name": "Çinko klorür",
+      "name": "Cinko klorur",
       "conc": 30.0,
       "concMax": 30.0,
-      "hazards": [...],
+      "hazards": [],
       "m_factors": {},
       "scl": []
     }
@@ -92,6 +116,9 @@ Aşağıdakileri sor, bilinmeyenler için "—" yaz:
   "lang": "TR"
 }
 ```
+**Not:** `name` alanında Türkçe karakter kullanma — API yanıtı etkiler. Madde adını
+ASCII'ye çevir (ör. "Çinko" → "Cinko"). B3 tablosunda doğru Türkçe adı sen yaz.
+
 Döner: `h_codes, signal, clp_passed, pictograms, euh, p_codes, physical, stot, eco, theo_props`
 
 ### ADR Taşımacılık

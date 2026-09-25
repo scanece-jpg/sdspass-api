@@ -5,7 +5,8 @@ DB gerektirmez, sadece PDF üretimi + madde lookup
 
 from fastapi import FastAPI, Body, Response, HTTPException, Request
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, StreamingResponse
+import asyncio
 from fastapi.staticfiles import StaticFiles
 import sys, os, json
 from pathlib import Path
@@ -2743,55 +2744,41 @@ async def _run_agent_tool(tool_name: str, tool_input: dict, base_url: str) -> di
             return {"error": f"Bilinmeyen tool: {tool_name}"}
 
 
-@app.post("/api/v1/agent/chat")
-async def agent_chat(request: Request, body: dict = Body(...)):
-    """
-    SDS oluşturma agent'ı — Claude tool_use döngüsü.
+_TOOL_PROGRESS = {
+    "lookup_substance": "🔍 Madde verisi alınıyor ({cas})…",
+    "calculate_clp":    "⚗️ CLP sınıflandırması hesaplanıyor…",
+    "detect_adr":       "🚛 ADR taşımacılık sınıfı belirleniyor…",
+    "check_svhc":       "📋 SVHC / REACH kontrolü yapılıyor…",
+    "get_oel":          "🏭 OEL maruz kalma sınırları alınıyor…",
+    "get_section_texts":"📝 Standart güvenlik metinleri alınıyor…",
+}
 
-    Gelen:
-      messages : [{role, content}]  — konuşma geçmişi
-      lang     : "TR" | "EN"
+def _tool_progress_text(tu) -> str:
+    tpl = _TOOL_PROGRESS.get(tu.name, f"🔧 {tu.name} çalışıyor…")
+    cas = tu.input.get("cas", "")
+    return tpl.format(cas=cas) if cas else tpl.format(cas="")
 
-    Döner:
-      message  : str   — agent'ın yanıtı
-      done     : bool  — SDS tamamlandı mı (onay bekliyor mu)
-      sds_text : str   — done=true ise üretilen SDS metni
-    """
+
+async def _agent_stream(messages: list, lang: str, system_prompt: str, base_url: str):
+    """SSE generator — tool_use döngüsü + paralel çağrılar."""
     import anthropic as _anthropic
     import json as _json
 
+    def sse(data: dict) -> str:
+        return f"data: {_json.dumps(data, ensure_ascii=False)}\n\n"
+
     api_key = os.getenv("ANTHROPIC_API_KEY")
     if not api_key:
-        raise HTTPException(status_code=500, detail="ANTHROPIC_API_KEY tanımlı değil")
+        yield sse({"type": "error", "text": "ANTHROPIC_API_KEY tanımlı değil"})
+        return
 
-    messages = body.get("messages") or []
-    lang     = (body.get("lang") or "TR").upper()
-
-    if not messages:
-        raise HTTPException(status_code=400, detail="messages boş olamaz")
-
-    # Agent system prompt'unu oku
-    agent_md = Path(__file__).parent.parent / ".claude" / "agents" / "sds-olustur.md"
-    if agent_md.exists():
-        system_prompt = agent_md.read_text(encoding="utf-8")
-        # Frontmatter'ı at (--- ... --- bloğu)
-        if system_prompt.startswith("---"):
-            parts = system_prompt.split("---", 2)
-            system_prompt = parts[2].strip() if len(parts) >= 3 else system_prompt
-    else:
-        system_prompt = "KKDİK/SEA uyumlu 16 bölümlü SDS hazırlayan uzmansın. Matematiksel hesapları tool'larla yap."
-
-    system_prompt += f"\n\nÇalışma dili: {lang}"
-
-    # Base URL — kendi kendimize çağırıyoruz
-    base_url = str(request.base_url).rstrip("/")
-
-    client = _anthropic.Anthropic(api_key=api_key)
+    client = _anthropic.AsyncAnthropic(api_key=api_key)
     current_messages = list(messages)
 
-    # Tool_use döngüsü — max 10 tur
-    for _ in range(10):
-        resp = client.messages.create(
+    for _turn in range(10):
+        yield sse({"type": "progress", "text": "💭 Agent yanıt üretiyor…"})
+
+        resp = await client.messages.create(
             model="claude-haiku-4-5-20251001",
             max_tokens=8192,
             system=system_prompt,
@@ -2799,28 +2786,77 @@ async def agent_chat(request: Request, body: dict = Body(...)):
             messages=current_messages,
         )
 
-        # Tool_use var mı?
         tool_uses = [b for b in resp.content if b.type == "tool_use"]
 
         if not tool_uses:
-            # Son yanıt — metin çıktısı
             text = "".join(b.text for b in resp.content if hasattr(b, "text"))
             done = any(kw in text for kw in [
                 "SDS hazır", "GBF hazır", "onaylıyor musunuz", "onayladıktan sonra",
                 "SDS is ready", "approve", "Word belgesi"
             ])
-            return {"message": text, "done": done, "sds_text": text if done else ""}
+            yield sse({"type": "message", "text": text, "done": done,
+                       "sds_text": text if done else ""})
+            return
 
-        # Tool'ları çalıştır
+        # İlerleme mesajı
+        if len(tool_uses) == 1:
+            yield sse({"type": "progress", "text": _tool_progress_text(tool_uses[0])})
+        else:
+            names = " · ".join(_TOOL_PROGRESS.get(t.name, t.name).split(" ", 1)[-1].rstrip("…")
+                               for t in tool_uses)
+            yield sse({"type": "progress", "text": f"⚡ Paralel hesaplama: {names}…"})
+
         current_messages.append({"role": "assistant", "content": resp.content})
-        tool_results = []
-        for tu in tool_uses:
-            result = await _run_agent_tool(tu.name, tu.input, base_url)
-            tool_results.append({
+
+        # Tüm tool çağrılarını paralel çalıştır
+        results = await asyncio.gather(
+            *[_run_agent_tool(tu.name, tu.input, base_url) for tu in tool_uses]
+        )
+
+        tool_results = [
+            {
                 "type": "tool_result",
                 "tool_use_id": tu.id,
                 "content": _json.dumps(result, ensure_ascii=False),
-            })
+            }
+            for tu, result in zip(tool_uses, results)
+        ]
         current_messages.append({"role": "user", "content": tool_results})
 
-    raise HTTPException(status_code=500, detail="Agent döngüsü 10 turda tamamlanamadı")
+    yield sse({"type": "error", "text": "Agent döngüsü 10 turda tamamlanamadı"})
+
+
+@app.post("/api/v1/agent/chat")
+async def agent_chat(request: Request, body: dict = Body(...)):
+    """
+    SDS oluşturma agent'ı — SSE stream + paralel tool çağrıları.
+
+    Gelen:  messages:[{role,content}], lang:"TR"|"EN"
+    Döner:  text/event-stream — progress / message / error olayları
+    """
+    messages = body.get("messages") or []
+    lang     = (body.get("lang") or "TR").upper()
+
+    if not messages:
+        raise HTTPException(status_code=400, detail="messages boş olamaz")
+
+    agent_md = Path(__file__).parent.parent / ".claude" / "agents" / "sds-olustur.md"
+    if agent_md.exists():
+        system_prompt = agent_md.read_text(encoding="utf-8")
+        if system_prompt.startswith("---"):
+            parts = system_prompt.split("---", 2)
+            system_prompt = parts[2].strip() if len(parts) >= 3 else system_prompt
+    else:
+        system_prompt = "KKDİK/SEA uyumlu 16 bölümlü SDS hazırlayan uzmansın."
+
+    system_prompt += f"\n\nÇalışma dili: {lang}"
+    base_url = str(request.base_url).rstrip("/")
+
+    return StreamingResponse(
+        _agent_stream(messages, lang, system_prompt, base_url),
+        media_type="text/event-stream",
+        headers={
+            "Cache-Control": "no-cache",
+            "X-Accel-Buffering": "no",
+        },
+    )

@@ -2995,8 +2995,20 @@ async def agent_chat(body: dict = Body(...)):
     else:
         system_prompt = "KKDİK/SEA uyumlu 16 bölümlü SDS hazırlayan uzmansın."
 
-    # Bilgi tabanını doğrudan sistem promptuna göm — agent her SDS'de
-    # read_knowledge çağırmak yerine bu bilgileri hazır bulur.
+    # SABİT REFERANS NUMARALARI — bellekten yazma, buradan al
+    _SABIT = (
+        "\n\n## ⚠️ SABİT MEVZUAT NUMARALARI — EZBERDEN YAZMA, BURADAN AL\n\n"
+        "| Mevzuat | Resmi Gazete No | Tarih |\n"
+        "|---|---|---|\n"
+        "| KKDİK | **30105** | 11 Temmuz 2017 |\n"
+        "| SEA | **28848** | 26 Aralık 2013 |\n"
+        "| OEL (B8, B15) | **29204** | 12 Ağustos 2013 |\n\n"
+        "**YASAK:** `32345` bu belgede hiçbir yerde geçemez. OEL için her zaman `29204` kullan.\n"
+        "**YASAK:** `30105` OEL için kullanılamaz — OEL = 29204, KKDİK = 30105.\n\n"
+    )
+    system_prompt = _SABIT + system_prompt
+
+    # Bilgi tabanını doğrudan sistem promptuna göm
     system_prompt += _load_knowledge_into_prompt()
     system_prompt += f"\n\nÇalışma dili: {lang}"
 

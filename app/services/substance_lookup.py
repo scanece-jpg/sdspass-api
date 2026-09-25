@@ -705,9 +705,15 @@ def lookup_substance(cas: str, form: str = '',
         return _fill_tr_name(_cl_to_legacy(echa_entry, 3, f'ECHA C&L ({echa_entry.get("atp","?")})')  )
 
     # ── Katman 3b: PubChem önbelleği ─────────────────────────────────────────
+    # PubChem tehlike verisi harmonize değil (C&L bildirimi). Sadece fiziksel
+    # özellikler alınır; hazards/signal temizlenir.
     pub_entry = _read_cl_file(_PUBCHEM_DIR, cas)
     if pub_entry:
-        return _fill_tr_name(_cl_to_legacy(pub_entry, 4, f'PubChem ({pub_entry.get("atp","?")})')  )
+        result = _fill_tr_name(_cl_to_legacy(pub_entry, 4, f'PubChem ({pub_entry.get("atp","?")})')  )
+        result['hazards'] = []
+        result['signal'] = None
+        result['pictograms'] = []
+        return result
 
     # ── Sıra 5: Custom (tedarikçi/kullanıcı) ─────────────────────────────────
     custom = _load_custom()

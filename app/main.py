@@ -1117,9 +1117,10 @@ async def substance_phys_lookup(cas: str):
 
 
 @app.get("/api/v1/sds/substance/lookup")
-async def substance_lookup(cas: str):
+async def substance_lookup(cas: str, form: str = None):
     """
     CAS numarasına göre madde bilgisi döndür.
+    form parametresi Not B maddeleri için (HCl gibi) sıvı/gaz ayrımı yapar.
     Hiyerarşi:
       1. data/cl/   — SEA Ek-6 (mutlak)
       2. data/annex6/ — CLP Annex VI
@@ -1132,7 +1133,7 @@ async def substance_lookup(cas: str):
     oel = get_oel(cas)
 
     # Sıra 1-2-3: Lokal dosyalar
-    result = lookup_substance(cas)
+    result = lookup_substance(cas, form=form)
 
     # Sıra 5-6: ECHA C&L API → data/echa_cl/ | PubChem → data/pubchem_cl/
     # (kaydetme echa_service.lookup_echa_api içinde yapılır)
@@ -1764,9 +1765,13 @@ async def sds_calculate(body: dict = Body(...)):
             })
 
         # ── H314 → H318 birlikteliği (CLP §3.3.1.4) ──────────────────────────
+        # all_h_codes (B2.1 sınıflandırma tablosu): H318 göster
+        # h_codes (etiket): H314 baskın — H318 gizle (SEA Madde 28 / CLP Madde 26)
+        label_h = set(all_h)
         if 'H314' in all_h:
             all_h.add('H318')
             all_h_list = sorted(all_h)
+            label_h.discard('H318')  # etikette H318 gösterilmez
             if not any(p.get('h_code') == 'H318' for p in clp_passed):
                 clp_passed.append({
                     'h_code':      'H318',
@@ -1774,6 +1779,9 @@ async def sds_calculate(body: dict = Body(...)):
                     'reason':      'H314 varlığında otomatik (CLP §3.3.1.4)',
                     'cutoff_used': '—',
                 })
+        else:
+            all_h_list = sorted(all_h)
+        label_h_list = sorted(label_h)
 
         # ── P kodları ─────────────────────────────────────────────────────────
         _euh_list = euh_result.get('euh_codes', []) if isinstance(euh_result, dict) else []
@@ -1786,8 +1794,8 @@ async def sds_calculate(body: dict = Body(...)):
 
         return {
             'success':    True,
-            'h_codes':    all_h_list,
-            'all_h_codes':all_h_list,
+            'h_codes':    label_h_list,   # etiket: H318 H314 varken gizlenir
+            'all_h_codes':all_h_list,     # B2.1 sınıflandırma tablosu: H318 gösterilir
             'signal':     signal,
             'clp_passed': clp_passed,
             'euh':        euh_result,

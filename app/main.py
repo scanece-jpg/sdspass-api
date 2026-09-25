@@ -3059,9 +3059,11 @@ async def agent_export(body: dict = Body(...)):
 def _markdown_to_docx(md_text: str) -> bytes:
     """Markdown metnini python-docx Word belgesine dönüştür."""
     from docx import Document
-    from docx.shared import Pt, RGBColor, Cm
+    from docx.shared import Pt, RGBColor, Cm, Inches
     from docx.enum.text import WD_ALIGN_PARAGRAPH
-    import io, re
+    from docx.oxml.ns import qn
+    from docx.oxml import OxmlElement
+    import io, re, os
 
     doc = Document()
 
@@ -3072,28 +3074,54 @@ def _markdown_to_docx(md_text: str) -> bytes:
         section.left_margin   = Cm(2.5)
         section.right_margin  = Cm(2.5)
 
-    # Stil yardımcıları
-    def _set_heading(para, level: int):
-        sizes = {1: 14, 2: 12, 3: 11}
-        run = para.runs[0] if para.runs else para.add_run(para.text)
-        run.bold = True
-        run.font.size = Pt(sizes.get(level, 10))
-        if level == 1:
-            run.font.color.rgb = RGBColor(0x1a, 0x3a, 0x5c)
+    _GHS_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "ghs_icons")
 
-    def _add_table_row(table, cells: list[str], header: bool = False):
-        row = table.add_row()
-        for i, val in enumerate(cells):
-            if i < len(row.cells):
-                row.cells[i].text = val
-                if header:
-                    for run in row.cells[i].paragraphs[0].runs:
-                        run.bold = True
+    def _set_cell_bg(cell, hex_color: str):
+        """Tablo hücresine arka plan rengi ver (OOXML shading)."""
+        tc = cell._tc
+        tcPr = tc.get_or_add_tcPr()
+        shd = OxmlElement("w:shd")
+        shd.set(qn("w:val"), "clear")
+        shd.set(qn("w:color"), "auto")
+        shd.set(qn("w:fill"), hex_color.lstrip("#"))
+        tcPr.append(shd)
+
+    def _add_section_heading(text: str):
+        """## başlıkları için koyu mavi kutulu stil."""
+        # Tek hücreli tablo — arka plan efekti için
+        tbl = doc.add_table(rows=1, cols=1)
+        tbl.style = "Table Grid"
+        cell = tbl.rows[0].cells[0]
+        _set_cell_bg(cell, "1a3a5c")
+        p = cell.paragraphs[0]
+        p.paragraph_format.space_before = Pt(2)
+        p.paragraph_format.space_after  = Pt(2)
+        run = p.add_run(text)
+        run.bold = True
+        run.font.size = Pt(11)
+        run.font.color.rgb = RGBColor(0xFF, 0xFF, 0xFF)
+        # Tablodan sonra boşluk
+        doc.add_paragraph("")
+
+    def _extract_ghs_codes(text: str) -> list:
+        return re.findall(r"GHS0[1-9]", text.upper())
+
+    def _add_ghs_images(codes: list):
+        """GHS piktogramlarını yan yana tablo ile ekle."""
+        imgs = [os.path.join(_GHS_DIR, f"{c}.png") for c in codes if os.path.exists(os.path.join(_GHS_DIR, f"{c}.png"))]
+        if not imgs:
+            return
+        tbl = doc.add_table(rows=1, cols=len(imgs))
+        for j, img_path in enumerate(imgs):
+            cell = tbl.rows[0].cells[j]
+            p = cell.paragraphs[0]
+            p.alignment = WD_ALIGN_PARAGRAPH.CENTER
+            run = p.add_run()
+            run.add_picture(img_path, width=Cm(1.2), height=Cm(1.2))
 
     lines = md_text.splitlines()
     i = 0
     current_table = None
-    table_headers  = []
 
     while i < len(lines):
         line = lines[i]
@@ -3105,29 +3133,29 @@ def _markdown_to_docx(md_text: str) -> bytes:
             i += 1; continue
         if line.startswith("## "):
             current_table = None
-            p = doc.add_heading(line[3:].strip(), level=2)
+            _add_section_heading(line[3:].strip())
             i += 1; continue
         if line.startswith("# "):
             current_table = None
             p = doc.add_heading(line[2:].strip(), level=1)
+            for run in p.runs:
+                run.font.color.rgb = RGBColor(0x1a, 0x3a, 0x5c)
             i += 1; continue
 
         # Tablo satırları (|...|...|)
         if line.startswith("|"):
             cols = [c.strip() for c in line.strip("|").split("|")]
-            # Ayraç satırı (|---|---|) — atla
             if all(re.match(r"^[-:]+$", c) for c in cols if c):
                 i += 1; continue
             if current_table is None:
-                # Yeni tablo oluştur
                 ncols = len(cols)
                 current_table = doc.add_table(rows=0, cols=ncols)
                 current_table.style = "Table Grid"
-                # İlk satır header
                 hrow = current_table.add_row()
                 for j, h in enumerate(cols):
                     if j < len(hrow.cells):
                         hrow.cells[j].text = h
+                        _set_cell_bg(hrow.cells[j], "dce6f0")
                         for run in hrow.cells[j].paragraphs[0].runs:
                             run.bold = True
             else:
@@ -3142,8 +3170,11 @@ def _markdown_to_docx(md_text: str) -> bytes:
         # Madde işareti
         if re.match(r"^[-*]\s+", line):
             text = re.sub(r"^\s*[-*]\s+", "", line)
-            text = re.sub(r"\*\*(.+?)\*\*", r"\1", text)  # bold işaretleri kaldır
+            text = re.sub(r"\*\*(.+?)\*\*", r"\1", text)
+            ghs_codes = _extract_ghs_codes(text)
             p = doc.add_paragraph(text, style="List Bullet")
+            if ghs_codes:
+                _add_ghs_images(ghs_codes)
             i += 1; continue
 
         # Numaralı liste
@@ -3162,7 +3193,8 @@ def _markdown_to_docx(md_text: str) -> bytes:
         if not line.strip():
             i += 1; continue
 
-        # Normal paragraf — **bold** destekli
+        # Normal paragraf — **bold** destekli + GHS görseli
+        ghs_codes = _extract_ghs_codes(line)
         p = doc.add_paragraph()
         parts = re.split(r"(\*\*[^*]+\*\*)", line)
         for part in parts:
@@ -3171,6 +3203,8 @@ def _markdown_to_docx(md_text: str) -> bytes:
                 run.bold = True
             else:
                 p.add_run(part)
+        if ghs_codes:
+            _add_ghs_images(ghs_codes)
         i += 1
 
     buf = io.BytesIO()

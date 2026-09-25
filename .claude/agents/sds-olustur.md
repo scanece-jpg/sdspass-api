@@ -107,8 +107,7 @@ Kullanıcının verdiği değerleri **aynen** yaz — yorumlama, tamamlama, değ
 - Ürün adı / ticari adı → kullanıcının yazdığı isim (ör. "Dipol HCl" ise "Dipol HCl" yaz)
 - Firma adı → kullanıcının yazdığı isim (ör. "Dipol Kimya" ise "Dipol Kimya" yaz, "A.Ş." ekleme)
 - Revizyon no, tarih, adres, acil tel → aynen kopyala
-- B1'in sonuna her zaman şu sabit cümleyi ekle (değiştirme):
-  > *"Bu Güvenlik Bilgi Formu; 11 Temmuz 2017 tarihli ve 30105 sayılı Resmî Gazete'de yayımlanan Kimyasalların Kaydı, Değerlendirilmesi, İzni ve Kısıtlanması Hakkında Yönetmelik (KKDİK) ve 26 Aralık 2013 tarihli ve 28848 sayılı Resmî Gazete'de yayımlanan Maddelerin ve Karışımların Sınıflandırılması, Etiketlenmesi ve Ambalajlanması Hakkında Yönetmelik (SEA) hükümlerine uygun olarak hazırlanmıştır."*
+- B1'in sonuna sistem prompt başında verilen **B1 ATIF CÜMLESİ** değerini aynen ekle — numara veya tarih değiştirme, olduğu gibi kopyala
 
 ### B2 — Tehlike Tanımlaması
 Motor çıktısından: `h_codes`, `signal`, `pictograms`, `clp_passed`, `euh`.

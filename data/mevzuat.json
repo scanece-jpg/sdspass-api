@@ -1,0 +1,29 @@
+{
+  "_açıklama": "Türkiye GBF/SDS mevzuat referansları. Yönetmelik değişince sadece bu dosyayı güncelle.",
+  "mevzuat": [
+    {
+      "kod": "KKDİK",
+      "tam_ad": "Kimyasalların Kaydı, Değerlendirilmesi, İzni ve Kısıtlanması Hakkında Yönetmelik",
+      "rg_no": "30105",
+      "rg_tarih": "11 Temmuz 2017",
+      "kullanim": ["B1_atif", "sabit_tablo", "B15"],
+      "yasak_karismalar": []
+    },
+    {
+      "kod": "SEA",
+      "tam_ad": "Maddelerin ve Karışımların Sınıflandırılması, Etiketlenmesi ve Ambalajlanması Hakkında Yönetmelik",
+      "rg_no": "28848",
+      "rg_tarih": "26 Aralık 2013",
+      "kullanim": ["B1_atif", "sabit_tablo", "B2", "B15"],
+      "yasak_karismalar": []
+    },
+    {
+      "kod": "OEL",
+      "tam_ad": "Kimyasal Maddelerle Çalışmalarda Sağlık ve Güvenlik Önlemleri Hakkında Yönetmelik (Ek-1 OEL)",
+      "rg_no": "29204",
+      "rg_tarih": "12 Ağustos 2015",
+      "kullanim": ["B8", "B15"],
+      "yasak_karismalar": ["32345", "30105"]
+    }
+  ]
+}

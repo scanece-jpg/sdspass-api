@@ -2819,6 +2819,69 @@ def _read_knowledge_section(topic: str) -> dict:
     return {"topic": topic, "source": f"{filename} {section_prefix}", "content": section_text}
 
 
+def _load_mevzuat() -> list:
+    """data/mevzuat.json dosyasını yükle, hata olursa boş liste döndür."""
+    import json
+    path = Path(__file__).parent.parent / "data" / "mevzuat.json"
+    try:
+        return json.loads(path.read_text(encoding="utf-8")).get("mevzuat", [])
+    except Exception:
+        return []
+
+
+def _build_sabit_block() -> str:
+    """
+    data/mevzuat.json'dan _SABIT sistem prompt bloğunu oluştur.
+    Yönetmelik değişince sadece JSON güncellenir, kod değişmez.
+    """
+    mevzuat = _load_mevzuat()
+    if not mevzuat:
+        return ""
+
+    rows = "\n".join(
+        f"| {m['kod']} | **{m['rg_no']}** | {m['rg_tarih']} |"
+        for m in mevzuat
+    )
+
+    yasak_satirlar = []
+    for m in mevzuat:
+        for yasak in m.get("yasak_karismalar", []):
+            yasak_satirlar.append(
+                f"**YASAK:** `{yasak}` bu belgede geçemez — {m['kod']} için her zaman `{m['rg_no']}` kullan."
+            )
+
+    yasak_blok = "\n".join(yasak_satirlar)
+
+    # B1 atıf cümlesi
+    b1_atif = _build_b1_atif(mevzuat)
+
+    return (
+        "\n\n## ⚠️ SABİT MEVZUAT NUMARALARI — EZBERDEN YAZMA, BURADAN AL\n\n"
+        "| Mevzuat | Resmi Gazete No | Tarih |\n"
+        "|---|---|---|\n"
+        f"{rows}\n\n"
+        f"{yasak_blok}\n\n"
+        f"**B1 ATIF CÜMLESİ** (B1 bölümünün sonuna aynen ekle, değiştirme):\n"
+        f"> {b1_atif}\n\n"
+    )
+
+
+def _build_b1_atif(mevzuat: list | None = None) -> str:
+    """B1 bölümü için mevzuat atıf cümlesini JSON'dan üret."""
+    if mevzuat is None:
+        mevzuat = _load_mevzuat()
+    b1_list = [m for m in mevzuat if "B1_atif" in m.get("kullanim", [])]
+    if not b1_list:
+        return ""
+    parcalar = "; ".join(
+        f"{m['tam_ad']} ({m['kod']}, {m['rg_tarih']} tarihli {m['rg_no']} sayılı Resmî Gazete)"
+        for m in b1_list
+    )
+    return (
+        f"Bu Güvenlik Bilgi Formu; {parcalar} hükümlerine uygun olarak hazırlanmıştır."
+    )
+
+
 def _load_knowledge_into_prompt() -> str:
     """
     Bilgi tabanının değişmeyen bölümlerini sistem promptuna göm.
@@ -2995,18 +3058,8 @@ async def agent_chat(body: dict = Body(...)):
     else:
         system_prompt = "KKDİK/SEA uyumlu 16 bölümlü SDS hazırlayan uzmansın."
 
-    # SABİT REFERANS NUMARALARI — bellekten yazma, buradan al
-    _SABIT = (
-        "\n\n## ⚠️ SABİT MEVZUAT NUMARALARI — EZBERDEN YAZMA, BURADAN AL\n\n"
-        "| Mevzuat | Resmi Gazete No | Tarih |\n"
-        "|---|---|---|\n"
-        "| KKDİK | **30105** | 11 Temmuz 2017 |\n"
-        "| SEA | **28848** | 26 Aralık 2013 |\n"
-        "| OEL (B8, B15) | **29204** | 12 Ağustos 2013 |\n\n"
-        "**YASAK:** `32345` bu belgede hiçbir yerde geçemez. OEL için her zaman `29204` kullan.\n"
-        "**YASAK:** `30105` OEL için kullanılamaz — OEL = 29204, KKDİK = 30105.\n\n"
-    )
-    system_prompt = _SABIT + system_prompt
+    # Mevzuat verilerini JSON'dan yükle ve sistem promptuna ekle
+    system_prompt = _build_sabit_block() + system_prompt
 
     # Bilgi tabanını doğrudan sistem promptuna göm
     system_prompt += _load_knowledge_into_prompt()

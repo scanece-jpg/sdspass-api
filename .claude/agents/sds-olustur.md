@@ -103,7 +103,10 @@ Ayrıca `self_check` ile öz-denetim listesini çek ve SDS bittikten sonra uygul
 ## Adım 3 — 16 Bölüm Üretimi
 
 ### B1 — Kimyasal Ürün ve Firma
-Kullanıcıdan toplanan: ürün adı, firma, adres, acil tel, revizyon, kullanım tipi.
+Kullanıcının verdiği değerleri **aynen** yaz — yorumlama, tamamlama, değiştirme.
+- Ürün adı / ticari adı → kullanıcının yazdığı isim (ör. "Dipol HCl" ise "Dipol HCl" yaz)
+- Firma adı → kullanıcının yazdığı isim (ör. "Dipol Kimya" ise "Dipol Kimya" yaz, "A.Ş." ekleme)
+- Revizyon no, tarih, adres, acil tel → aynen kopyala
 
 ### B2 — Tehlike Tanımlaması
 Motor çıktısından: `h_codes`, `signal`, `pictograms`, `clp_passed`, `euh`.
@@ -269,6 +272,8 @@ Her SDS alanının kaynağı bellidir. **Kaynağı olmayan değer yazılmaz.**
 | B14 UN/Sınıf/PG | `detect_adr` tool sonucu |
 | B15 KKDİK/SEA/OEL no | read_knowledge(`kkdik_references`) |
 | CAS/EC numarası | `lookup_substance` tool sonucu |
+| B1 ürün adı / ticari adı | Kullanıcının verdiği isim — değiştirme, yorumlama |
+| B1 firma adı | Kullanıcının verdiği isim — "A.Ş.", "Ltd." gibi ekler yapma |
 
 **Kural:** Yukarıdaki kaynaklardan gelmeyen hiçbir sayısal değer veya referans numarası yazılmaz. "Bulamadım" demek, uydurulmuş değer yazmaktan iyidir.
 

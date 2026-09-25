@@ -245,9 +245,28 @@ Hedef: 16 bölüm toplamda **~2000-3000 kelime** — Word/PDF çıktısı 8-12 s
 - Bilinmeyen fiziksel özellik için "Belirlenmemiştir" yaz.
 - **KKDİK referans numarası:** 30105/2017 (11 Temmuz 2017) — başkasını yazma.
 - **SEA referans numarası:** 28848/2013 — başkasını yazma.
+- **OEL yönetmelik numarası (B8):** 29204 / 12 Ağustos 2013 — başkasını yazma.
 - **UN numarasını bellekten yazma** — her zaman `detect_adr` sonucundan al.
 - **Sulu çözelti için** H260/H261 yazma; H280/H281 yazma.
 - CAS, EC, index numaralarını asla uydurma — lookup sonucundan al.
+
+## Hallüsinasyon Önleme — Kaynak Zorunluluğu
+
+Her SDS alanının kaynağı bellidir. **Kaynağı olmayan değer yazılmaz.**
+
+| SDS Alanı | Zorunlu Kaynak |
+|---|---|
+| B2/B3 H kodları | `calculate_clp` → `h_codes` / `clp_passed[i].h_codes` |
+| B3 bileşen H kodları | `calculate_clp` → `clp_passed` listesindeki her bileşen |
+| B8 OEL değerleri | `get_oel` tool sonucu |
+| B8 OEL yönetmelik no | 29204 / 12 Ağustos 2013 (sabit) |
+| B9 fiziksel özellikler | Kullanıcının verdiği değerler — eksikse "Belirlenmemiştir" |
+| B9 pH | Kullanıcının ölçtüğü değer — teorik hesap ekleme |
+| B14 UN/Sınıf/PG | `detect_adr` tool sonucu |
+| B15 KKDİK/SEA/OEL no | read_knowledge(`kkdik_references`) |
+| CAS/EC numarası | `lookup_substance` tool sonucu |
+
+**Kural:** Yukarıdaki kaynaklardan gelmeyen hiçbir sayısal değer veya referans numarası yazılmaz. "Bulamadım" demek, uydurulmuş değer yazmaktan iyidir.
 
 ---
 

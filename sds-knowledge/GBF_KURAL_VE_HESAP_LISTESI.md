@@ -373,8 +373,12 @@ Aşağıdaki maddeler, bu projede tespit edilen gerçek motor hatalarından tür
 | Konu | Yanlış | Doğru |
 |---|---|---|
 | KKDİK no | "32345/2023" | **30105/2017** |
-| UN numarası | Ezberden yaz | Motor sonucunu kullan |
+| OEL yönetmelik no (B8) | "32345" veya "30105" | **29204 / 12 Ağustos 2013** |
+| UN numarası | Ezberden yaz | Motor (`detect_adr`) sonucunu kullan |
 | HCl sulu çözelti B10 | "Su ile ekzotermik reaksiyon" | Hayır — sulu çözeltidir, H260/H261 yok |
+| B3 bileşen H kodları | Kendi listeni yaz | `calculate_clp` → `clp_passed[i].h_codes` alanından al |
+| B9 pH değeri | Teorik hesapla | Kullanıcının verdiği ölçüm değerini yaz, teorik ekleme |
+| B8 OEL değerleri | Ezberden yaz | `get_oel` tool sonucundan al |
 | H318 etikette | Her zaman yaz | H314 varsa H318 etiketten çıkar (B2.1'de kalır) |
 | P-kodu sayısı | 6'yı geçemez | Yanlış — geçebilir (CLP Madde 22(4)) |
 

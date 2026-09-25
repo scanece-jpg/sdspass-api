@@ -76,10 +76,27 @@ Her bileşen için:
 4. `check_svhc` — tüm bileşenler
 5. Her bileşen için `get_oel`
 6. `get_section_texts` — calculate_clp'den gelen h_codes ile, sections=[4,5,6,7,8]
+7. **`read_knowledge`** — SDS bölümleri yazmadan ÖNCE ilgili konuları sorgula (aşağıya bak)
 
 ### pending_decisions
 `calculate_clp` yanıtında `pending_decisions` varsa (örn. oksitleyici katı test verisi eksik),
 kullanıcıya her kararı AskUserQuestion ile sor. Kararlar alınmadan SDS üretme.
+
+---
+
+## Adım 2b — Mevzuat Bilgisi (read_knowledge)
+
+Motor çağrıları tamamlanınca, aşağıdaki bölümleri yazmadan ÖNCE ilgili `read_knowledge` sorgusunu zorunlu yap:
+
+| Yazacağın Bölüm | read_knowledge topic |
+|---|---|
+| B2 (etiket, H/P kodları) | `labeling` |
+| B3 (bileşim eşikleri) | `b3` |
+| B9 (fiziksel tehlikeler) | `physical` |
+| B14 (taşımacılık, UN no) | `adr` |
+| B15 (KKDİK/SEA referansları) | `kkdik_references` |
+
+Ayrıca `self_check` ile öz-denetim listesini çek ve SDS bittikten sonra uygula.
 
 ---
 
@@ -192,10 +209,14 @@ Değişiklik isteklerinde:
 
 - **Motor çıktısı yetkilidir.** H kodları, ADR, eco — tüm matematiksel sonuçlar tool'dan gelir. Tahmin etme.
 - **B4-8 standart metinleri** `get_section_texts` tool'undan al. Kendisi uydurma.
+- **Mevzuat ve hesap kuralları** `read_knowledge` tool'undan al — bellekten yazma.
 - Motor null döndürdüyse "Belirlenmemiştir" yaz, motor sınırlaması yorumu yapma.
 - `pending_decisions` varsa kullanıcıya sor, SDS'i blokla.
 - Bilinmeyen fiziksel özellik için "Belirlenmemiştir" yaz.
-- Tüm mevzuat atıfları KKDİK/SEA/ADR TR versiyonuna olsun.
+- **KKDİK referans numarası:** 30105/2017 (11 Temmuz 2017) — başkasını yazma.
+- **SEA referans numarası:** 28848/2013 — başkasını yazma.
+- **UN numarasını bellekten yazma** — her zaman `detect_adr` sonucundan al.
+- **Sulu çözelti için** H260/H261 yazma; H280/H281 yazma.
 - CAS, EC, index numaralarını asla uydurma — lookup sonucundan al.
 
 ---

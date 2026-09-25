@@ -2704,8 +2704,99 @@ _AGENT_TOOLS = [
             },
             "required": ["h_codes"]
         }
+    },
+    {
+        "name": "read_knowledge",
+        "description": (
+            "KKDİK/CLP/ADR mevzuat kurallarını ve hesap yöntemlerini okur. "
+            "SDS bölümü yazmadan önce ilgili konuyu sorgula. "
+            "Özellikle B2, B3, B14, B15 yazmadan ÖNCE zorunlu çağır."
+        ),
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "topic": {
+                    "type": "string",
+                    "enum": [
+                        "workflow", "mixture_health", "mixture_eco",
+                        "labeling", "b3", "physical", "adr",
+                        "oel", "self_check", "validation", "kkdik_references"
+                    ],
+                    "description": (
+                        "workflow=genel iş akışı, "
+                        "mixture_health=sağlık karışım sınıflandırma hesabı, "
+                        "mixture_eco=çevre/sucul karışım hesabı, "
+                        "labeling=B2 etiket dominance/P-kodu kuralları, "
+                        "b3=B3 bileşim bildirimi eşikleri, "
+                        "physical=fiziksel tehlike kuralları, "
+                        "adr=B14 taşımacılık/UN numarası kuralları, "
+                        "oel=B8 OEL kaynakları, "
+                        "self_check=SDS hazırlama öz-denetim listesi, "
+                        "validation=doğrulama ve ADR notları, "
+                        "kkdik_references=KKDİK/SEA/UN sabit referanslar ve sık hata listesi"
+                    )
+                }
+            },
+            "required": ["topic"]
+        }
     }
 ]
+
+# Konu → (dosya, bölüm başlığı) eşlemesi
+_KNOWLEDGE_TOPIC_MAP = {
+    "workflow":          ("GBF_KURAL_VE_HESAP_LISTESI.md", "## 0."),
+    "mixture_health":    ("GBF_KURAL_VE_HESAP_LISTESI.md", "## 2."),
+    "mixture_eco":       ("GBF_KURAL_VE_HESAP_LISTESI.md", "## 3."),
+    "labeling":          ("GBF_KURAL_VE_HESAP_LISTESI.md", "## 4."),
+    "b3":                ("GBF_KURAL_VE_HESAP_LISTESI.md", "## 5."),
+    "physical":          ("GBF_KURAL_VE_HESAP_LISTESI.md", "## 6."),
+    "adr":               ("GBF_KURAL_VE_HESAP_LISTESI.md", "## 7."),
+    "oel":               ("GBF_KURAL_VE_HESAP_LISTESI.md", "## 8."),
+    "self_check":        ("GBF_KURAL_VE_HESAP_LISTESI.md", "## 10."),
+    "kkdik_references":  ("GBF_KURAL_VE_HESAP_LISTESI.md", "## 11."),
+    "validation":        ("DOGRULAMA_NOTLARI.md",           None),
+}
+
+_KNOWLEDGE_DIR = Path(__file__).parent.parent / "sds-knowledge"
+
+
+def _read_knowledge_section(topic: str) -> dict:
+    """Konuya göre bilgi tabanından ilgili bölümü döndür."""
+    if topic not in _KNOWLEDGE_TOPIC_MAP:
+        valid = list(_KNOWLEDGE_TOPIC_MAP.keys())
+        return {"error": f"Bilinmeyen konu: '{topic}'. Geçerliler: {valid}"}
+
+    filename, section_prefix = _KNOWLEDGE_TOPIC_MAP[topic]
+    filepath = _KNOWLEDGE_DIR / filename
+
+    if not filepath.exists():
+        return {"error": f"Dosya bulunamadı: {filename}"}
+
+    content = filepath.read_text(encoding="utf-8")
+
+    # Tüm dosya isteniyorsa
+    if section_prefix is None:
+        return {"topic": topic, "source": filename, "content": content}
+
+    # Bölüm başlığını bul, bir sonraki ## başlığına kadar al
+    lines = content.splitlines()
+    start_idx = None
+    for i, line in enumerate(lines):
+        if line.startswith(section_prefix):
+            start_idx = i
+            break
+
+    if start_idx is None:
+        return {"error": f"'{section_prefix}' bölümü {filename} içinde bulunamadı"}
+
+    end_idx = len(lines)
+    for i in range(start_idx + 1, len(lines)):
+        if lines[i].startswith("## ") and i > start_idx:
+            end_idx = i
+            break
+
+    section_text = "\n".join(lines[start_idx:end_idx]).strip()
+    return {"topic": topic, "source": f"{filename} {section_prefix}", "content": section_text}
 
 
 async def _run_agent_tool(tool_name: str, tool_input: dict, base_url: str = "") -> dict:
@@ -2731,6 +2822,10 @@ async def _run_agent_tool(tool_name: str, tool_input: dict, base_url: str = "") 
 
         elif tool_name == "get_section_texts":
             return await sds_section_texts(body=tool_input)
+
+        elif tool_name == "read_knowledge":
+            topic = tool_input.get("topic", "")
+            return _read_knowledge_section(topic)
 
         else:
             return {"error": f"Bilinmeyen tool: {tool_name}"}

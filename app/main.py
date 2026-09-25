@@ -2567,3 +2567,260 @@ Sadece JSON:"""
         raise
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# AGENT ENDPOINTLERİ
+# ─────────────────────────────────────────────────────────────────────────────
+
+@app.post("/api/v1/sds/section-texts")
+async def sds_section_texts(body: dict = Body(...)):
+    """
+    H kodları listesinden B4-8 standart SDS cümlelerini döndür.
+    Agent bu endpoint ile standart metinleri çeker — kendisi uydurmaz.
+
+    Gelen: { "h_codes": [...], "lang": "TR", "sections": [4,5,6,7,8] }
+    Döner: { "4": [{h_code, text}, ...], "5": [...], ... }
+    """
+    from app.services.sds_sentence_service import generate_section
+    from app.services.codes_i18n import get_h, get_p
+
+    h_codes = body.get("h_codes") or []
+    lang    = (body.get("lang") or "TR").upper()
+    sections = body.get("sections") or [4, 5, 6, 7, 8]
+
+    result = {}
+    for sec in sections:
+        sentences = generate_section(sec, h_codes)
+        result[str(sec)] = sentences
+
+    # H ve P kod metinleri — etiket için
+    h_texts = {h: get_h(lang, h) for h in h_codes}
+    return {"sections": result, "h_texts": h_texts}
+
+
+# ── Agent tool tanımları ──────────────────────────────────────────────────────
+_AGENT_TOOLS = [
+    {
+        "name": "lookup_substance",
+        "description": "CAS numarasına göre madde bilgisi çek (ad, tehlike sınıfları, M-faktörleri, SCL, ATE).",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "cas": {"type": "string", "description": "CAS numarası (örn. 7647-01-0)"},
+                "form": {"type": "string", "description": "Fiziksel hal: liquid | solid | gas (opsiyonel)"}
+            },
+            "required": ["cas"]
+        }
+    },
+    {
+        "name": "calculate_clp",
+        "description": "Karışım bileşenlerinden CLP sınıflandırması hesapla. H kodları, sinyal, piktogram, P kodları, EUH, ekoloji, STOT, fiziksel tehlike döner.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "components": {
+                    "type": "array",
+                    "description": "Bileşen listesi",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "cas":       {"type": "string"},
+                            "name":      {"type": "string"},
+                            "conc":      {"type": "number", "description": "Worst-case konsantrasyon (üst sınır)"},
+                            "concMax":   {"type": "number"},
+                            "hazards":   {"type": "array"},
+                            "m_factors": {"type": "object"},
+                            "scl":       {"type": "array"},
+                            "ate":       {"type": "object"}
+                        }
+                    }
+                },
+                "form":        {"type": "string", "description": "liquid | solid | gas | aerosol"},
+                "user_fp":     {"type": "number", "description": "Parlama noktası °C (ölçülmüşse)"},
+                "mixture_ph":  {"type": "number", "description": "Karışım pH değeri"},
+                "usage":       {"type": "string", "description": "industrial | professional | consumer"},
+                "lang":        {"type": "string", "description": "TR | EN"}
+            },
+            "required": ["components", "form"]
+        }
+    },
+    {
+        "name": "detect_adr",
+        "description": "H kodlarına göre ADR/IMDG/IATA taşımacılık sınıflandırması yap.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "h_codes":     {"type": "array", "items": {"type": "string"}},
+                "form":        {"type": "string"},
+                "flash_point": {"type": "number"},
+                "lang":        {"type": "string"}
+            },
+            "required": ["h_codes", "form"]
+        }
+    },
+    {
+        "name": "check_svhc",
+        "description": "Bileşenlerin SVHC (çok yüksek endişe verici madde) listesinde olup olmadığını kontrol et.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "components": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "cas":           {"type": "string"},
+                            "name":          {"type": "string"},
+                            "concentration": {"type": "number"}
+                        }
+                    }
+                }
+            },
+            "required": ["components"]
+        }
+    },
+    {
+        "name": "get_oel",
+        "description": "Bir maddenin KKDİK Ek-14 mesleki maruziyet limitini (OEL) döndür.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "cas": {"type": "string"}
+            },
+            "required": ["cas"]
+        }
+    },
+    {
+        "name": "get_section_texts",
+        "description": "H kodlarına göre B4-8 standart SDS cümlelerini döndür. Bu tool olmadan B4-8 metinleri yazma.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "h_codes":  {"type": "array", "items": {"type": "string"}},
+                "lang":     {"type": "string", "description": "TR | EN"},
+                "sections": {"type": "array",  "items": {"type": "integer"}, "description": "Örn. [4,5,6,7,8]"}
+            },
+            "required": ["h_codes"]
+        }
+    }
+]
+
+
+async def _run_agent_tool(tool_name: str, tool_input: dict, base_url: str) -> dict:
+    """Agent tool call'ını kendi API'mize yönlendir."""
+    import httpx
+    async with httpx.AsyncClient(timeout=60.0) as client:
+        if tool_name == "lookup_substance":
+            cas  = tool_input["cas"]
+            form = tool_input.get("form", "")
+            r = await client.get(f"{base_url}/api/v1/sds/substance/lookup",
+                                 params={"cas": cas, "form": form})
+            return r.json() if r.status_code == 200 else {"error": r.text}
+
+        elif tool_name == "calculate_clp":
+            r = await client.post(f"{base_url}/api/v1/sds/calculate", json=tool_input)
+            return r.json() if r.status_code == 200 else {"error": r.text}
+
+        elif tool_name == "detect_adr":
+            r = await client.post(f"{base_url}/api/v1/adr/auto-detect", json=tool_input)
+            return r.json() if r.status_code == 200 else {"error": r.text}
+
+        elif tool_name == "check_svhc":
+            r = await client.post(f"{base_url}/api/v1/svhc/check", json=tool_input)
+            return r.json() if r.status_code == 200 else {"error": r.text}
+
+        elif tool_name == "get_oel":
+            cas = tool_input["cas"]
+            r = await client.get(f"{base_url}/api/v1/oel/{cas}")
+            return r.json() if r.status_code == 200 else {"error": r.text}
+
+        elif tool_name == "get_section_texts":
+            r = await client.post(f"{base_url}/api/v1/sds/section-texts", json=tool_input)
+            return r.json() if r.status_code == 200 else {"error": r.text}
+
+        else:
+            return {"error": f"Bilinmeyen tool: {tool_name}"}
+
+
+@app.post("/api/v1/agent/chat")
+async def agent_chat(request: Request, body: dict = Body(...)):
+    """
+    SDS oluşturma agent'ı — Claude tool_use döngüsü.
+
+    Gelen:
+      messages : [{role, content}]  — konuşma geçmişi
+      lang     : "TR" | "EN"
+
+    Döner:
+      message  : str   — agent'ın yanıtı
+      done     : bool  — SDS tamamlandı mı (onay bekliyor mu)
+      sds_text : str   — done=true ise üretilen SDS metni
+    """
+    import anthropic as _anthropic
+    import json as _json
+
+    api_key = os.getenv("ANTHROPIC_API_KEY")
+    if not api_key:
+        raise HTTPException(status_code=500, detail="ANTHROPIC_API_KEY tanımlı değil")
+
+    messages = body.get("messages") or []
+    lang     = (body.get("lang") or "TR").upper()
+
+    if not messages:
+        raise HTTPException(status_code=400, detail="messages boş olamaz")
+
+    # Agent system prompt'unu oku
+    agent_md = Path(__file__).parent.parent / ".claude" / "agents" / "sds-olustur.md"
+    if agent_md.exists():
+        system_prompt = agent_md.read_text(encoding="utf-8")
+        # Frontmatter'ı at (--- ... --- bloğu)
+        if system_prompt.startswith("---"):
+            parts = system_prompt.split("---", 2)
+            system_prompt = parts[2].strip() if len(parts) >= 3 else system_prompt
+    else:
+        system_prompt = "KKDİK/SEA uyumlu 16 bölümlü SDS hazırlayan uzmansın. Matematiksel hesapları tool'larla yap."
+
+    system_prompt += f"\n\nÇalışma dili: {lang}"
+
+    # Base URL — kendi kendimize çağırıyoruz
+    base_url = str(request.base_url).rstrip("/")
+
+    client = _anthropic.Anthropic(api_key=api_key)
+    current_messages = list(messages)
+
+    # Tool_use döngüsü — max 10 tur
+    for _ in range(10):
+        resp = client.messages.create(
+            model="claude-haiku-4-5-20251001",
+            max_tokens=8192,
+            system=system_prompt,
+            tools=_AGENT_TOOLS,
+            messages=current_messages,
+        )
+
+        # Tool_use var mı?
+        tool_uses = [b for b in resp.content if b.type == "tool_use"]
+
+        if not tool_uses:
+            # Son yanıt — metin çıktısı
+            text = "".join(b.text for b in resp.content if hasattr(b, "text"))
+            done = any(kw in text for kw in [
+                "SDS hazır", "GBF hazır", "onaylıyor musunuz", "onayladıktan sonra",
+                "SDS is ready", "approve", "Word belgesi"
+            ])
+            return {"message": text, "done": done, "sds_text": text if done else ""}
+
+        # Tool'ları çalıştır
+        current_messages.append({"role": "assistant", "content": resp.content})
+        tool_results = []
+        for tu in tool_uses:
+            result = await _run_agent_tool(tu.name, tu.input, base_url)
+            tool_results.append({
+                "type": "tool_result",
+                "tool_use_id": tu.id,
+                "content": _json.dumps(result, ensure_ascii=False),
+            })
+        current_messages.append({"role": "user", "content": tool_results})
+
+    raise HTTPException(status_code=500, detail="Agent döngüsü 10 turda tamamlanamadı")

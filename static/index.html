@@ -23,6 +23,7 @@ body::after{display:none}
 .left{padding:12px 16px;overflow-y:auto;border-right:1px solid var(--border);height:100vh;
       background:radial-gradient(ellipse 80% 60% at 40% 20%,rgba(226,232,240,.025) 0%,transparent 70%)}
 .right-col{display:flex;flex-direction:column;border-left:1px solid var(--border);background:var(--bg2);overflow:hidden}
+@keyframes _dot{0%,60%,100%{opacity:.2;transform:scale(.8)}30%{opacity:1;transform:scale(1)}}
 .right{padding:16px;overflow-y:auto;flex:1}
 /* ── Premium Header ──────────────────────────────────────────────────── */
 .hdr{display:flex;align-items:center;gap:14px;margin-bottom:20px;padding-bottom:16px;
@@ -1075,8 +1076,15 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
 
 <!-- ═══ SAĞ KOLON — Sonuçlar + AI ══════════════════════════════════════════ -->
 <div class="right-col">
+
+<!-- ── Panel Tab Seçici ── -->
+<div id="rc-tabs" style="display:flex;border-bottom:1px solid var(--border);background:var(--bg2);flex-shrink:0">
+  <button id="tab-results" onclick="rcTab('results')" style="flex:1;padding:10px 4px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:none;border:none;border-bottom:2px solid var(--accent);color:var(--accent);cursor:pointer;transition:all .15s">Sınıflandırma</button>
+  <button id="tab-agent" onclick="rcTab('agent')" style="flex:1;padding:10px 4px;font-size:10px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;background:none;border:none;border-bottom:2px solid transparent;color:var(--text3);cursor:pointer;transition:all .15s">SDS Agent</button>
+</div>
+
 <!-- ── Sonuçlar ── -->
-<div class="right">
+<div id="panel-results" class="right">
   <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid var(--border)">
     <span style="font-size:11px;font-weight:700;color:var(--text3);text-transform:uppercase;letter-spacing:.1em">Siniflandirma</span>
     <span style="font-size:9px;font-family:var(--mono);color:var(--border2)">GHS / CLP</span>
@@ -1095,7 +1103,38 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
       <div style="font-size:11px;color:var(--text3);margin-top:4px">H kodları, GHS piktogramları ve taşımacılık sınıfı burada görünür</div>
     </div>
   </div>
-</div>
+</div><!-- /panel-results -->
+
+<!-- ── SDS Agent Chat Panel ── -->
+<div id="panel-agent" style="display:none;flex-direction:column;flex:1;overflow:hidden">
+  <!-- Mesaj alanı -->
+  <div id="agent-messages" style="flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px">
+    <div style="text-align:center;padding:24px 16px">
+      <div style="width:44px;height:44px;border-radius:11px;background:rgba(148,163,184,.08);border:1px solid rgba(148,163,184,.15);display:flex;align-items:center;justify-content:center;margin:0 auto 12px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(148,163,184,.5)" stroke-width="1.5"><path d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 3v-3z"/></svg>
+      </div>
+      <div style="font-size:12px;color:var(--text2);font-weight:600;margin-bottom:6px">SDS Agent</div>
+      <div style="font-size:11px;color:var(--text3);line-height:1.5">KKDİK/SEA uyumlu 16 bölümlü SDS hazırlamak için konuşmaya başlayın.<br><br><span style="color:var(--text2)">"Yeni SDS hazırla"</span> veya <span style="color:var(--text2)">"SDS kontrol et"</span> yazın.</div>
+    </div>
+  </div>
+
+  <!-- Onay + indirme butonları (done=true olunca görünür) -->
+  <div id="agent-export-bar" style="display:none;padding:10px 14px;border-top:1px solid var(--border);gap:8px;flex-direction:column">
+    <div style="font-size:10px;color:var(--text3);margin-bottom:4px;text-transform:uppercase;letter-spacing:.08em;font-weight:700">SDS Taslağı Hazır</div>
+    <div style="display:flex;gap:8px">
+      <button onclick="agentExport('docx')" style="flex:1;padding:8px;font-size:11px;font-weight:600;background:var(--bg3);border:1px solid var(--border);border-radius:7px;color:var(--text);cursor:pointer">⬇ Word (.docx)</button>
+      <button onclick="agentExport('pdf')" style="flex:1;padding:8px;font-size:11px;font-weight:600;background:var(--bg3);border:1px solid var(--border);border-radius:7px;color:var(--text);cursor:pointer">⬇ PDF</button>
+    </div>
+  </div>
+
+  <!-- Input alanı -->
+  <div style="padding:10px 14px;border-top:1px solid var(--border);background:var(--bg2);display:flex;gap:8px;align-items:flex-end;flex-shrink:0">
+    <textarea id="agent-input" rows="2" placeholder="Mesajınızı yazın…" onkeydown="agentInputKey(event)"
+      style="flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:12px;padding:8px 10px;resize:none;font-family:inherit;line-height:1.45;outline:none"></textarea>
+    <button id="agent-send-btn" onclick="agentSend()" title="Gönder (Enter)"
+      style="padding:8px 12px;background:var(--accent);color:var(--accent-fg);border:none;border-radius:8px;cursor:pointer;font-size:13px;font-weight:700;flex-shrink:0;align-self:flex-end">↑</button>
+  </div>
+</div><!-- /panel-agent -->
 
 <!-- Uzman Karışım Test Override — hesaplamadan sonra görünür -->
 <div id="mix-ov-bar" class="mix-ov-bar" style="display:none">
@@ -1175,6 +1214,146 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
 // ══════════════════════════════════════════════════════════════════════════════
 
 const API_BASE = (window.HAZARDDESK_API_URL || '/api/v1/sds/pdf').replace('/sds/pdf','');
+
+// ══════════════════════════════════════════════════════════════════════════════
+//  SDS Agent Chat
+// ══════════════════════════════════════════════════════════════════════════════
+
+// ── Tab yönetimi ─────────────────────────────────────────────────────────────
+function rcTab(name) {
+  const pr = document.getElementById('panel-results');
+  const pa = document.getElementById('panel-agent');
+  const tr = document.getElementById('tab-results');
+  const ta = document.getElementById('tab-agent');
+  if (name === 'results') {
+    pr.style.display = '';
+    pa.style.display = 'none';
+    tr.style.borderBottomColor = 'var(--accent)';
+    tr.style.color = 'var(--accent)';
+    ta.style.borderBottomColor = 'transparent';
+    ta.style.color = 'var(--text3)';
+  } else {
+    pr.style.display = 'none';
+    pa.style.display = 'flex';
+    ta.style.borderBottomColor = 'var(--accent)';
+    ta.style.color = 'var(--accent)';
+    tr.style.borderBottomColor = 'transparent';
+    tr.style.color = 'var(--text3)';
+    document.getElementById('agent-input').focus();
+  }
+}
+
+// ── Sohbet geçmişi ────────────────────────────────────────────────────────────
+let _agentMessages = [];   // [{role:'user'|'assistant', content:'...'}]
+let _agentSdsText  = null; // SDS taslak metni (done:true gelince)
+let _agentBusy     = false;
+
+function agentInputKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); agentSend(); }
+}
+
+function agentSend() {
+  if (_agentBusy) return;
+  const inp = document.getElementById('agent-input');
+  const text = inp.value.trim();
+  if (!text) return;
+  inp.value = '';
+  _agentMessages.push({ role: 'user', content: text });
+  _renderMsg('user', text);
+  _agentCall();
+}
+
+function _renderMsg(role, content) {
+  const box = document.getElementById('agent-messages');
+  const isUser = role === 'user';
+  const wrap = document.createElement('div');
+  wrap.style.cssText = `display:flex;flex-direction:column;align-items:${isUser ? 'flex-end' : 'flex-start'};gap:3px`;
+  const bubble = document.createElement('div');
+  bubble.style.cssText = `max-width:88%;padding:8px 11px;border-radius:${isUser ? '12px 12px 4px 12px' : '12px 12px 12px 4px'};font-size:12px;line-height:1.55;white-space:pre-wrap;word-break:break-word;${isUser ? 'background:var(--bg3);color:var(--text);border:1px solid var(--border)' : 'background:rgba(148,163,184,.07);color:var(--text2);border:1px solid rgba(148,163,184,.1)'}`;
+  bubble.textContent = content;
+  wrap.appendChild(bubble);
+  box.appendChild(wrap);
+  box.scrollTop = box.scrollHeight;
+  return bubble;
+}
+
+function _renderTyping() {
+  const box = document.getElementById('agent-messages');
+  const wrap = document.createElement('div');
+  wrap.id = '_agent-typing';
+  wrap.style.cssText = 'display:flex;align-items:flex-start;gap:3px';
+  wrap.innerHTML = `<div style="padding:8px 12px;border-radius:12px 12px 12px 4px;background:rgba(148,163,184,.07);border:1px solid rgba(148,163,184,.1);font-size:12px;color:var(--text3)">
+    <span style="display:inline-flex;gap:3px;align-items:center">
+      <span style="width:5px;height:5px;border-radius:50%;background:var(--text3);animation:_dot .9s ease-in-out infinite"></span>
+      <span style="width:5px;height:5px;border-radius:50%;background:var(--text3);animation:_dot .9s ease-in-out .2s infinite"></span>
+      <span style="width:5px;height:5px;border-radius:50%;background:var(--text3);animation:_dot .9s ease-in-out .4s infinite"></span>
+    </span>
+  </div>`;
+  box.appendChild(wrap);
+  box.scrollTop = box.scrollHeight;
+}
+
+function _removeTyping() {
+  const t = document.getElementById('_agent-typing');
+  if (t) t.remove();
+}
+
+async function _agentCall() {
+  _agentBusy = true;
+  const btn = document.getElementById('agent-send-btn');
+  btn.disabled = true;
+  btn.style.opacity = '.4';
+  _renderTyping();
+
+  try {
+    const resp = await fetch(`${API_BASE}/agent/chat`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ messages: _agentMessages, lang: 'TR' })
+    });
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const data = await resp.json();
+    _removeTyping();
+
+    const msg = data.message || '';
+    _agentMessages.push({ role: 'assistant', content: msg });
+    _renderMsg('assistant', msg);
+
+    if (data.sds_text) _agentSdsText = data.sds_text;
+    if (data.done) {
+      document.getElementById('agent-export-bar').style.display = 'flex';
+      document.getElementById('agent-export-bar').style.flexDirection = 'column';
+    }
+  } catch (err) {
+    _removeTyping();
+    _renderMsg('assistant', '⚠ Bağlantı hatası: ' + err.message);
+  }
+
+  _agentBusy = false;
+  btn.disabled = false;
+  btn.style.opacity = '1';
+}
+
+async function agentExport(format) {
+  if (!_agentSdsText) return;
+  try {
+    const resp = await fetch(`${API_BASE}/agent/export`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ sds_text: _agentSdsText, format })
+    });
+    if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+    const blob = await resp.blob();
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `SDS.${format === 'pdf' ? 'pdf' : 'docx'}`;
+    a.click();
+    URL.revokeObjectURL(url);
+  } catch (err) {
+    alert('İndirme hatası: ' + err.message);
+  }
+}
 
 // ── GHS Piktogram verileri ────────────────────────────────────────────────────
 const GHS_DATA = {

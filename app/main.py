@@ -2911,6 +2911,7 @@ async def _agent_stream(messages: list, lang: str, system_prompt: str):
 
     client = _anthropic.AsyncAnthropic(api_key=api_key)
     current_messages = list(messages)
+    _collected_sds: list[str] = []  # tüm asistan mesajlarını biriktir
 
     for _turn in range(10):
         yield sse({"type": "progress", "text": "💭 Agent yanıt üretiyor…"})
@@ -2927,12 +2928,15 @@ async def _agent_stream(messages: list, lang: str, system_prompt: str):
 
         if not tool_uses:
             text = "".join(b.text for b in resp.content if hasattr(b, "text"))
+            _collected_sds.append(text)
             done = any(kw in text for kw in [
                 "SDS hazır", "GBF hazır", "onaylıyor musunuz", "onayladıktan sonra",
                 "SDS is ready", "approve", "Word belgesi"
             ])
+            # done=True ise biriktirilen tüm SDS metnini gönder
+            full_sds = "\n\n".join(_collected_sds) if done else ""
             yield sse({"type": "message", "text": text, "done": done,
-                       "sds_text": text if done else ""})
+                       "sds_text": full_sds})
             return
 
         # İlerleme mesajı

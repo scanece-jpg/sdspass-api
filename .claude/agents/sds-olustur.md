@@ -153,7 +153,8 @@ H kodlarına göre:
 ### B11 — Toksikoloji
 `clp_passed` listesinden ATE değerleri dahil:
 - Akut toksisite: oral/dermal/inhalasyon LD50/LC50 (bileşen bazlı, varsa)
-- Tahriş, duyarlılaştırma, CMR, STOT: H kodlarından
+- Tahriş, duyarlılaştırma, CMR, STOT: **YALNIZCA** `calculate_clp` → `h_codes` listesindeki kodlardan yaz
+- `h_codes`'da olmayan hiçbir H kodu (H335, H336, H302 vb.) B11'e yazılmaz — motor dahil etmemişse sen de yazma
 - Bilgi yoksa "Bu madde/karışım için toksikolojik veri mevcut değildir" yaz
 
 ### B12 — Ekoloji
@@ -260,6 +261,7 @@ Her SDS alanının kaynağı bellidir. **Kaynağı olmayan değer yazılmaz.**
 | B3 bileşen H kodları | `calculate_clp` → `clp_passed` listesindeki her bileşen |
 | B8 OEL değerleri | `get_oel` tool sonucu |
 | B8 OEL yönetmelik no | 29204 / 12 Ağustos 2013 (sabit) |
+| B11 STOT/CMR/tahriş H kodları | `calculate_clp` → `h_codes` (motorda yoksa yazılmaz) |
 | B9 fiziksel özellikler | Kullanıcının verdiği değerler — eksikse "Belirlenmemiştir" |
 | B9 pH | Kullanıcının ölçtüğü değer — teorik hesap ekleme |
 | B14 UN/Sınıf/PG | `detect_adr` tool sonucu |

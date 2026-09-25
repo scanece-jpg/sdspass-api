@@ -3180,13 +3180,13 @@ def _markdown_to_docx(md_text: str) -> bytes:
 
 def _markdown_to_pdf(md_text: str) -> bytes:
     """Markdown metnini ReportLab ile PDF'e dönüştür."""
-    import io, re
+    import io, re, os
     from reportlab.lib.pagesizes import A4
     from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
     from reportlab.lib.units import cm
     from reportlab.lib import colors
     from reportlab.platypus import (
-        SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, ListFlowable, ListItem
+        SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, Image, HRFlowable
     )
 
     buf = io.BytesIO()
@@ -3203,8 +3203,53 @@ def _markdown_to_pdf(md_text: str) -> bytes:
     body = ParagraphStyle("Body", parent=styles["Normal"], fontSize=9, leading=13, spaceAfter=3)
     bullet_st = ParagraphStyle("Bullet", parent=body, leftIndent=12, bulletIndent=0)
 
+    # GHS pictogram klasörü
+    _GHS_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "ghs_icons")
+
+    def _sanitize(text: str) -> str:
+        """Unicode karakterleri Helvetica'nın anlayacağı biçime dönüştür."""
+        # Subscript rakamlar → ReportLab <sub> etiketi
+        subs = str.maketrans("₀₁₂₃₄₅₆₇₈₉", "0123456789")
+        # Önce subscript harfleri yakala, sonra normal rakama çevir
+        text = re.sub(r"([A-Za-z])([₀-₉]+)", lambda m: m.group(1) + "<sub>" + m.group(2).translate(subs) + "</sub>", text)
+        text = text.translate(subs)  # kalan tek rakam subscript'ler
+        # Superscript rakamlar → <super> etiketi
+        supers = {"⁰":"0","¹":"1","²":"2","³":"3","⁴":"4","⁵":"5","⁶":"6","⁷":"7","⁸":"8","⁹":"9"}
+        for u, a in supers.items():
+            text = text.replace(u, f"<super>{a}</super>")
+        # Ok ve matematik sembolleri
+        text = text.replace("→", "-&gt;").replace("←", "&lt;-").replace("↔", "&lt;-&gt;")
+        text = text.replace("≥", "&gt;=").replace("≤", "&lt;=")
+        text = text.replace("≠", "!=").replace("±", "+/-")
+        # Bullet ve özel semboller
+        text = text.replace("•", "-").replace("·", "-")
+        text = text.replace("✓", "OK").replace("✗", "X").replace("✔", "OK")
+        text = text.replace("™", "(TM)").replace("®", "(R)").replace("©", "(C)")
+        # Tırnak işaretleri
+        text = text.replace("“", '"').replace("”", '"')
+        text = text.replace("‘", "'").replace("’", "'")
+        # Tire türleri
+        text = text.replace("–", "-").replace("—", "--")
+        # Kalan 127+ ASCII dışı karakterleri kaldır (ama Türkçe harfleri koru — WinAnsi içinde)
+        result = []
+        for ch in text:
+            cp = ord(ch)
+            # WinAnsi (cp1252) kapsamı veya temel ASCII
+            if cp < 128 or (160 <= cp <= 255):
+                result.append(ch)
+            elif ch in "ğüşıöçĞÜŞİÖÇ":  # Türkçe harfler — cp1252 içinde
+                result.append(ch)
+            else:
+                result.append("?")
+        return "".join(result)
+
     def _strip_bold(text: str) -> str:
+        text = _sanitize(text)
         return re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", text)
+
+    def _extract_ghs_codes(text: str) -> list:
+        """Metinden GHS01..GHS09 kodlarını çıkar."""
+        return re.findall(r"GHS0[1-9]", text.upper())
 
     story = []
     lines = md_text.splitlines()
@@ -3234,7 +3279,6 @@ def _markdown_to_pdf(md_text: str) -> bytes:
                     tbl_rows.append(cols)
                 i += 1
             if tbl_rows:
-                # Sütun genişliklerini eşit böl
                 page_w = A4[0] - 5*cm
                 ncols  = max(len(r) for r in tbl_rows)
                 col_w  = [page_w / ncols] * ncols
@@ -3252,9 +3296,34 @@ def _markdown_to_pdf(md_text: str) -> bytes:
                 story.append(Spacer(1, 4))
             continue
 
+        # Bullet satır
         if re.match(r"^[-*]\s+", line):
             text = re.sub(r"^\s*[-*]\s+", "", line)
-            story.append(Paragraph(f"• {_strip_bold(text)}", bullet_st))
+            # GHS piktogram satırı mı?
+            ghs_codes = _extract_ghs_codes(text)
+            if ghs_codes:
+                imgs = []
+                for code in ghs_codes:
+                    img_path = os.path.join(_GHS_DIR, f"{code}.png")
+                    if os.path.exists(img_path):
+                        imgs.append(Image(img_path, width=1.2*cm, height=1.2*cm))
+                if imgs:
+                    row = [[img] for img in imgs]
+                    # Yan yana diz
+                    tbl_data = [imgs]
+                    pic_tbl = Table(tbl_data, colWidths=[1.4*cm]*len(imgs))
+                    pic_tbl.setStyle(TableStyle([
+                        ("ALIGN", (0,0), (-1,-1), "CENTER"),
+                        ("VALIGN", (0,0), (-1,-1), "MIDDLE"),
+                        ("LEFTPADDING", (0,0), (-1,-1), 2),
+                        ("RIGHTPADDING", (0,0), (-1,-1), 2),
+                    ]))
+                    story.append(pic_tbl)
+                    story.append(Spacer(1, 2))
+                else:
+                    story.append(Paragraph(f"- {_strip_bold(text)}", bullet_st))
+            else:
+                story.append(Paragraph(f"- {_strip_bold(text)}", bullet_st))
             i += 1; continue
 
         if re.match(r"^---+$", line.strip()):
@@ -3264,7 +3333,28 @@ def _markdown_to_pdf(md_text: str) -> bytes:
         if not line.strip():
             i += 1; continue
 
-        story.append(Paragraph(_strip_bold(line), body))
+        # Normal satır — GHS kodu geçiyorsa piktogram ekle
+        ghs_codes = _extract_ghs_codes(line)
+        if ghs_codes:
+            story.append(Paragraph(_strip_bold(line), body))
+            imgs = []
+            for code in ghs_codes:
+                img_path = os.path.join(_GHS_DIR, f"{code}.png")
+                if os.path.exists(img_path):
+                    imgs.append(Image(img_path, width=1.2*cm, height=1.2*cm))
+            if imgs:
+                tbl_data = [imgs]
+                pic_tbl = Table(tbl_data, colWidths=[1.4*cm]*len(imgs))
+                pic_tbl.setStyle(TableStyle([
+                    ("ALIGN", (0,0), (-1,-1), "CENTER"),
+                    ("VALIGN", (0,0), (-1,-1), "MIDDLE"),
+                    ("LEFTPADDING", (0,0), (-1,-1), 2),
+                    ("RIGHTPADDING", (0,0), (-1,-1), 2),
+                ]))
+                story.append(pic_tbl)
+                story.append(Spacer(1, 2))
+        else:
+            story.append(Paragraph(_strip_bold(line), body))
         i += 1
 
     doc.build(story)

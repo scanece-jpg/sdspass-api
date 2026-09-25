@@ -2819,6 +2819,33 @@ def _read_knowledge_section(topic: str) -> dict:
     return {"topic": topic, "source": f"{filename} {section_prefix}", "content": section_text}
 
 
+def _load_knowledge_into_prompt() -> str:
+    """
+    Bilgi tabanının değişmeyen bölümlerini sistem promptuna göm.
+    Her SDS üretiminde read_knowledge tool çağrısı yerine prompt'ta hazır olur:
+    - 5-6 tool call tasarrufu (hız)
+    - Mevzuat referansları hallüsinasyon riski sıfır
+    - B15/B16 sabit metinler her seferinde aynı
+    """
+    # Her SDS'de çağrılan sabit konular
+    ALWAYS_LOAD = [
+        "kkdik_references",  # B15: KKDİK/SEA/OEL no, sık hata listesi
+        "labeling",          # B2: dominance/P-kodu kuralları
+        "b3",                # B3: bileşim eşikleri
+        "adr",               # B14: UN numarası kuralları
+        "self_check",        # Genel: öz-denetim listesi
+    ]
+    parts = ["\n\n---\n## 📚 GÖMÜLÜ MEVZUAT BİLGİSİ (read_knowledge yerine kullan)\n"]
+    for topic in ALWAYS_LOAD:
+        result = _read_knowledge_section(topic)
+        if "error" not in result:
+            parts.append(f"\n### [{topic.upper()}] — {result['source']}\n{result['content']}\n")
+    parts.append("\n> NOT: Yukarıdaki bilgiler read_knowledge tool'u ile aynı kaynaktan gelir.\n"
+                 "> Bu konular için ayrıca read_knowledge çağırma — zaman kaybı olur.\n"
+                 "> physical / mixture_health / mixture_eco / validation için gerekirse çağır.\n---\n")
+    return "".join(parts)
+
+
 async def _run_agent_tool(tool_name: str, tool_input: dict, base_url: str = "") -> dict:
     """Agent tool call'ını HTTP yerine doğrudan Python fonksiyonları ile çalıştır."""
     try:
@@ -2959,6 +2986,9 @@ async def agent_chat(body: dict = Body(...)):
     else:
         system_prompt = "KKDİK/SEA uyumlu 16 bölümlü SDS hazırlayan uzmansın."
 
+    # Bilgi tabanını doğrudan sistem promptuna göm — agent her SDS'de
+    # read_knowledge çağırmak yerine bu bilgileri hazır bulur.
+    system_prompt += _load_knowledge_into_prompt()
     system_prompt += f"\n\nÇalışma dili: {lang}"
 
     return StreamingResponse(

@@ -2708,40 +2708,35 @@ _AGENT_TOOLS = [
 ]
 
 
-async def _run_agent_tool(tool_name: str, tool_input: dict, base_url: str) -> dict:
-    """Agent tool call'ını kendi API'mize yönlendir."""
-    import httpx
-    async with httpx.AsyncClient(timeout=60.0) as client:
+async def _run_agent_tool(tool_name: str, tool_input: dict, base_url: str = "") -> dict:
+    """Agent tool call'ını HTTP yerine doğrudan Python fonksiyonları ile çalıştır."""
+    try:
         if tool_name == "lookup_substance":
             cas  = tool_input["cas"]
-            form = tool_input.get("form", "")
-            r = await client.get(f"{base_url}/api/v1/sds/substance/lookup",
-                                 params={"cas": cas, "form": form})
-            return r.json() if r.status_code == 200 else {"error": r.text}
+            form = tool_input.get("form") or ""
+            return await substance_lookup(cas=cas, form=form or None)
 
         elif tool_name == "calculate_clp":
-            r = await client.post(f"{base_url}/api/v1/sds/calculate", json=tool_input)
-            return r.json() if r.status_code == 200 else {"error": r.text}
+            return await sds_calculate(body=tool_input)
 
         elif tool_name == "detect_adr":
-            r = await client.post(f"{base_url}/api/v1/adr/auto-detect", json=tool_input)
-            return r.json() if r.status_code == 200 else {"error": r.text}
+            return await adr_auto_detect(body=tool_input)
 
         elif tool_name == "check_svhc":
-            r = await client.post(f"{base_url}/api/v1/svhc/check", json=tool_input)
-            return r.json() if r.status_code == 200 else {"error": r.text}
+            return await svhc_check_mixture(body=tool_input)
 
         elif tool_name == "get_oel":
             cas = tool_input["cas"]
-            r = await client.get(f"{base_url}/api/v1/oel/{cas}")
-            return r.json() if r.status_code == 200 else {"error": r.text}
+            return await oel_lookup(cas=cas)
 
         elif tool_name == "get_section_texts":
-            r = await client.post(f"{base_url}/api/v1/sds/section-texts", json=tool_input)
-            return r.json() if r.status_code == 200 else {"error": r.text}
+            return await sds_section_texts(body=tool_input)
 
         else:
             return {"error": f"Bilinmeyen tool: {tool_name}"}
+
+    except Exception as e:
+        return {"error": f"{tool_name} hatası: {str(e)}"}
 
 
 _TOOL_PROGRESS = {
@@ -2759,7 +2754,7 @@ def _tool_progress_text(tu) -> str:
     return tpl.format(cas=cas) if cas else tpl.format(cas="")
 
 
-async def _agent_stream(messages: list, lang: str, system_prompt: str, base_url: str):
+async def _agent_stream(messages: list, lang: str, system_prompt: str):
     """SSE generator — tool_use döngüsü + paralel çağrılar."""
     import anthropic as _anthropic
     import json as _json
@@ -2780,7 +2775,7 @@ async def _agent_stream(messages: list, lang: str, system_prompt: str, base_url:
 
         resp = await client.messages.create(
             model="claude-haiku-4-5-20251001",
-            max_tokens=8192,
+            max_tokens=16384,
             system=system_prompt,
             tools=_AGENT_TOOLS,
             messages=current_messages,
@@ -2810,7 +2805,7 @@ async def _agent_stream(messages: list, lang: str, system_prompt: str, base_url:
 
         # Tüm tool çağrılarını paralel çalıştır
         results = await asyncio.gather(
-            *[_run_agent_tool(tu.name, tu.input, base_url) for tu in tool_uses]
+            *[_run_agent_tool(tu.name, tu.input) for tu in tool_uses]
         )
 
         tool_results = [
@@ -2827,7 +2822,7 @@ async def _agent_stream(messages: list, lang: str, system_prompt: str, base_url:
 
 
 @app.post("/api/v1/agent/chat")
-async def agent_chat(request: Request, body: dict = Body(...)):
+async def agent_chat(body: dict = Body(...)):
     """
     SDS oluşturma agent'ı — SSE stream + paralel tool çağrıları.
 
@@ -2850,10 +2845,9 @@ async def agent_chat(request: Request, body: dict = Body(...)):
         system_prompt = "KKDİK/SEA uyumlu 16 bölümlü SDS hazırlayan uzmansın."
 
     system_prompt += f"\n\nÇalışma dili: {lang}"
-    base_url = str(request.base_url).rstrip("/")
 
     return StreamingResponse(
-        _agent_stream(messages, lang, system_prompt, base_url),
+        _agent_stream(messages, lang, system_prompt),
         media_type="text/event-stream",
         headers={
             "Cache-Control": "no-cache",

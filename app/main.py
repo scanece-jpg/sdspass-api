@@ -2969,3 +2969,252 @@ async def agent_chat(body: dict = Body(...)):
             "X-Accel-Buffering": "no",
         },
     )
+
+
+@app.post("/api/v1/agent/export")
+async def agent_export(body: dict = Body(...)):
+    """
+    Agent SDS metnini (Markdown) Word veya PDF olarak dışa aktar.
+
+    Gelen:  { sds_text: "...", format: "docx"|"pdf", filename: "SDS" (opsiyonel) }
+    Döner:  application/vnd.openxmlformats-officedocument.wordprocessingml.document
+            veya application/pdf
+    """
+    sds_text = (body.get("sds_text") or "").strip()
+    fmt      = (body.get("format") or "docx").lower()
+    fname    = (body.get("filename") or "SDS").strip() or "SDS"
+
+    if not sds_text:
+        raise HTTPException(status_code=400, detail="sds_text boş olamaz")
+
+    if fmt == "docx":
+        content = _markdown_to_docx(sds_text)
+        media   = "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        dl_name = f"{fname}.docx"
+    elif fmt == "pdf":
+        content = _markdown_to_pdf(sds_text)
+        media   = "application/pdf"
+        dl_name = f"{fname}.pdf"
+    else:
+        raise HTTPException(status_code=400, detail="format 'docx' veya 'pdf' olmalı")
+
+    return Response(
+        content=content,
+        media_type=media,
+        headers={"Content-Disposition": f'attachment; filename="{dl_name}"'},
+    )
+
+
+def _markdown_to_docx(md_text: str) -> bytes:
+    """Markdown metnini python-docx Word belgesine dönüştür."""
+    from docx import Document
+    from docx.shared import Pt, RGBColor, Cm
+    from docx.enum.text import WD_ALIGN_PARAGRAPH
+    import io, re
+
+    doc = Document()
+
+    # Sayfa kenar boşlukları
+    for section in doc.sections:
+        section.top_margin    = Cm(2)
+        section.bottom_margin = Cm(2)
+        section.left_margin   = Cm(2.5)
+        section.right_margin  = Cm(2.5)
+
+    # Stil yardımcıları
+    def _set_heading(para, level: int):
+        sizes = {1: 14, 2: 12, 3: 11}
+        run = para.runs[0] if para.runs else para.add_run(para.text)
+        run.bold = True
+        run.font.size = Pt(sizes.get(level, 10))
+        if level == 1:
+            run.font.color.rgb = RGBColor(0x1a, 0x3a, 0x5c)
+
+    def _add_table_row(table, cells: list[str], header: bool = False):
+        row = table.add_row()
+        for i, val in enumerate(cells):
+            if i < len(row.cells):
+                row.cells[i].text = val
+                if header:
+                    for run in row.cells[i].paragraphs[0].runs:
+                        run.bold = True
+
+    lines = md_text.splitlines()
+    i = 0
+    current_table = None
+    table_headers  = []
+
+    while i < len(lines):
+        line = lines[i]
+
+        # Başlık satırları
+        if line.startswith("### "):
+            current_table = None
+            p = doc.add_heading(line[4:].strip(), level=3)
+            i += 1; continue
+        if line.startswith("## "):
+            current_table = None
+            p = doc.add_heading(line[3:].strip(), level=2)
+            i += 1; continue
+        if line.startswith("# "):
+            current_table = None
+            p = doc.add_heading(line[2:].strip(), level=1)
+            i += 1; continue
+
+        # Tablo satırları (|...|...|)
+        if line.startswith("|"):
+            cols = [c.strip() for c in line.strip("|").split("|")]
+            # Ayraç satırı (|---|---|) — atla
+            if all(re.match(r"^[-:]+$", c) for c in cols if c):
+                i += 1; continue
+            if current_table is None:
+                # Yeni tablo oluştur
+                ncols = len(cols)
+                current_table = doc.add_table(rows=0, cols=ncols)
+                current_table.style = "Table Grid"
+                # İlk satır header
+                hrow = current_table.add_row()
+                for j, h in enumerate(cols):
+                    if j < len(hrow.cells):
+                        hrow.cells[j].text = h
+                        for run in hrow.cells[j].paragraphs[0].runs:
+                            run.bold = True
+            else:
+                drow = current_table.add_row()
+                for j, val in enumerate(cols):
+                    if j < len(drow.cells):
+                        drow.cells[j].text = val
+            i += 1; continue
+        else:
+            current_table = None
+
+        # Madde işareti
+        if re.match(r"^[-*]\s+", line):
+            text = re.sub(r"^\s*[-*]\s+", "", line)
+            text = re.sub(r"\*\*(.+?)\*\*", r"\1", text)  # bold işaretleri kaldır
+            p = doc.add_paragraph(text, style="List Bullet")
+            i += 1; continue
+
+        # Numaralı liste
+        if re.match(r"^\d+\.\s+", line):
+            text = re.sub(r"^\d+\.\s+", "", line)
+            text = re.sub(r"\*\*(.+?)\*\*", r"\1", text)
+            p = doc.add_paragraph(text, style="List Number")
+            i += 1; continue
+
+        # Yatay çizgi
+        if re.match(r"^---+$", line.strip()):
+            doc.add_paragraph("")
+            i += 1; continue
+
+        # Boş satır
+        if not line.strip():
+            i += 1; continue
+
+        # Normal paragraf — **bold** destekli
+        p = doc.add_paragraph()
+        parts = re.split(r"(\*\*[^*]+\*\*)", line)
+        for part in parts:
+            if part.startswith("**") and part.endswith("**"):
+                run = p.add_run(part[2:-2])
+                run.bold = True
+            else:
+                p.add_run(part)
+        i += 1
+
+    buf = io.BytesIO()
+    doc.save(buf)
+    return buf.getvalue()
+
+
+def _markdown_to_pdf(md_text: str) -> bytes:
+    """Markdown metnini ReportLab ile PDF'e dönüştür."""
+    import io, re
+    from reportlab.lib.pagesizes import A4
+    from reportlab.lib.styles import getSampleStyleSheet, ParagraphStyle
+    from reportlab.lib.units import cm
+    from reportlab.lib import colors
+    from reportlab.platypus import (
+        SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle, ListFlowable, ListItem
+    )
+
+    buf = io.BytesIO()
+    doc = SimpleDocTemplate(
+        buf, pagesize=A4,
+        leftMargin=2.5*cm, rightMargin=2.5*cm,
+        topMargin=2*cm, bottomMargin=2*cm,
+    )
+
+    styles = getSampleStyleSheet()
+    h1 = ParagraphStyle("H1", parent=styles["Heading1"], fontSize=13, textColor=colors.HexColor("#1a3a5c"), spaceAfter=6)
+    h2 = ParagraphStyle("H2", parent=styles["Heading2"], fontSize=11, spaceAfter=4)
+    h3 = ParagraphStyle("H3", parent=styles["Heading3"], fontSize=10, spaceAfter=3)
+    body = ParagraphStyle("Body", parent=styles["Normal"], fontSize=9, leading=13, spaceAfter=3)
+    bullet_st = ParagraphStyle("Bullet", parent=body, leftIndent=12, bulletIndent=0)
+
+    def _strip_bold(text: str) -> str:
+        return re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", text)
+
+    story = []
+    lines = md_text.splitlines()
+    i = 0
+
+    while i < len(lines):
+        line = lines[i]
+
+        if line.startswith("### "):
+            story.append(Paragraph(_strip_bold(line[4:].strip()), h3))
+            i += 1; continue
+        if line.startswith("## "):
+            story.append(Spacer(1, 4))
+            story.append(Paragraph(_strip_bold(line[3:].strip()), h2))
+            i += 1; continue
+        if line.startswith("# "):
+            story.append(Spacer(1, 6))
+            story.append(Paragraph(_strip_bold(line[2:].strip()), h1))
+            i += 1; continue
+
+        # Tablo
+        if line.startswith("|"):
+            tbl_rows = []
+            while i < len(lines) and lines[i].startswith("|"):
+                cols = [c.strip() for c in lines[i].strip("|").split("|")]
+                if not all(re.match(r"^[-:]+$", c) for c in cols if c):
+                    tbl_rows.append(cols)
+                i += 1
+            if tbl_rows:
+                # Sütun genişliklerini eşit böl
+                page_w = A4[0] - 5*cm
+                ncols  = max(len(r) for r in tbl_rows)
+                col_w  = [page_w / ncols] * ncols
+                pdf_rows = [[Paragraph(_strip_bold(c), body) for c in r] for r in tbl_rows]
+                t = Table(pdf_rows, colWidths=col_w, repeatRows=1)
+                t.setStyle(TableStyle([
+                    ("BACKGROUND", (0,0), (-1,0), colors.HexColor("#dce6f0")),
+                    ("FONTNAME",   (0,0), (-1,0), "Helvetica-Bold"),
+                    ("FONTSIZE",   (0,0), (-1,-1), 8),
+                    ("GRID",       (0,0), (-1,-1), 0.4, colors.grey),
+                    ("VALIGN",     (0,0), (-1,-1), "TOP"),
+                    ("ROWBACKGROUNDS", (0,1), (-1,-1), [colors.white, colors.HexColor("#f5f8fb")]),
+                ]))
+                story.append(t)
+                story.append(Spacer(1, 4))
+            continue
+
+        if re.match(r"^[-*]\s+", line):
+            text = re.sub(r"^\s*[-*]\s+", "", line)
+            story.append(Paragraph(f"• {_strip_bold(text)}", bullet_st))
+            i += 1; continue
+
+        if re.match(r"^---+$", line.strip()):
+            story.append(Spacer(1, 6))
+            i += 1; continue
+
+        if not line.strip():
+            i += 1; continue
+
+        story.append(Paragraph(_strip_bold(line), body))
+        i += 1
+
+    doc.build(story)
+    return buf.getvalue()

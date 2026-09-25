@@ -3198,8 +3198,13 @@ def _markdown_to_pdf(md_text: str) -> bytes:
 
     styles = getSampleStyleSheet()
     h1 = ParagraphStyle("H1", parent=styles["Heading1"], fontSize=13, textColor=colors.HexColor("#1a3a5c"), spaceAfter=6)
-    h2 = ParagraphStyle("H2", parent=styles["Heading2"], fontSize=11, spaceAfter=4)
-    h3 = ParagraphStyle("H3", parent=styles["Heading3"], fontSize=10, spaceAfter=3)
+    # B1..B16 bölüm başlıkları — beyaz yazı, koyu mavi kutu
+    h2 = ParagraphStyle(
+        "H2", parent=styles["Heading2"], fontSize=11, spaceAfter=0, spaceBefore=8,
+        textColor=colors.white, backColor=colors.HexColor("#1a3a5c"),
+        leftPadding=6, rightPadding=6, topPadding=4, bottomPadding=4,
+    )
+    h3 = ParagraphStyle("H3", parent=styles["Heading3"], fontSize=10, spaceAfter=3, textColor=colors.HexColor("#1a3a5c"))
     body = ParagraphStyle("Body", parent=styles["Normal"], fontSize=9, leading=13, spaceAfter=3)
     bullet_st = ParagraphStyle("Bullet", parent=body, leftIndent=12, bulletIndent=0)
 
@@ -3262,8 +3267,9 @@ def _markdown_to_pdf(md_text: str) -> bytes:
             story.append(Paragraph(_strip_bold(line[4:].strip()), h3))
             i += 1; continue
         if line.startswith("## "):
-            story.append(Spacer(1, 4))
+            story.append(Spacer(1, 8))
             story.append(Paragraph(_strip_bold(line[3:].strip()), h2))
+            story.append(Spacer(1, 4))
             i += 1; continue
         if line.startswith("# "):
             story.append(Spacer(1, 6))

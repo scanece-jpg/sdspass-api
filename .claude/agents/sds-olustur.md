@@ -169,6 +169,16 @@ Fiziksel hale + H kodlarına göre:
 - Boş ambalaj bertarafı
 
 ### B14 — Taşımacılık
+`detect_adr` çağırırken `components` listesini de gönder:
+```json
+{
+  "h_codes": [...],
+  "form": "liquid",
+  "components": [
+    {"cas": "7647-01-0", "conc": 18.0, "h_codes": ["H314", "H335"]}
+  ]
+}
+```
 `detect_adr` çıktısından:
 - UN No, taşımacılık adı, tehlike sınıfı, ambalaj grubu, Kemler kodu, tünel kodu
 - Çevresel tehlike: H400/H410/H411 varsa "Deniz kirletici: Evet"

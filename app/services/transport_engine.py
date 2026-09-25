@@ -253,7 +253,8 @@ def resolve_conflict(cls_a: str, pg_a: Optional[str],
 
 
 def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: bool,
-                  h_set: set = None, form: str = 'liquid') -> Dict:
+                  h_set: set = None, form: str = 'liquid',
+                  components: 'Optional[List[Component]]' = None) -> Dict:
     """UN numarası ve etiket belirle."""
     h_set = h_set or set()
     if cls == '1':
@@ -407,6 +408,29 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
                 'label': ('Zehirli Katı, Korozif, Organik, B.N.O.' if is_solid
                           else 'Zehirli Sıvı, Korozif, Organik, B.N.O.'),
             }
+        # Sınıf 8, yan tehlike yok — önce CAS bazlı spesifik arama yap
+        if components:
+            _prod_state = 'solid' if is_solid else ('gas' if form == 'gas' else 'liquid')
+            # Tetikleyici (H314 taşıyan) bileşenler arasında en yüksek konsantrasyona sahip olanı al
+            trigger8 = [c for c in components if 'H314' in c.h_codes]
+            if trigger8:
+                dominant8 = max(trigger8, key=lambda c: c.conc)
+                _det = _lookup_by_cas(dominant8.cas, concentration=dominant8.conc)
+                if _det:
+                    _seed_state = _det.get('physical_state')
+                    if not _seed_state or _seed_state == _prod_state:
+                        return {
+                            'un':     _det['un_no'],
+                            'label':  _det.get('name_tr') or _det.get('name', ''),
+                            'class':  _det.get('class', '8'),
+                            'pg':     _det.get('packing_group', pg or ''),
+                            'kemler': _det.get('kemler', '80'),
+                            'tunnel': _det.get('tunnel_code', 'E'),
+                            'note':   (f"CAS {dominant8.cas} için spesifik ADR girişi: "
+                                       f"{_det['un_no']} Sınıf {_det.get('class','8')}, "
+                                       f"PG {_det.get('packing_group','')} — "
+                                       "ADR §3.1.2.8.1: mevcut spesifik giriş B.N.O.'ya tercih edilir."),
+                        }
         return {
             'un': 'UN 1759' if is_solid else 'UN 1760',
             'label': 'Korozif Katı, B.N.O.' if is_solid else 'Korozif Sıvı, B.N.O.',
@@ -549,7 +573,8 @@ def classify(h_codes: List[str], form: str = 'liquid',
     sub_class = subs[0]['class'] if subs else None
 
     # ── Adım 4: UN ve etiket ──────────────────────────────────────────────────
-    un_entry = _get_un_entry(primary['class'], primary['pg'], sub_class, is_solid, h_set, form)
+    un_entry = _get_un_entry(primary['class'], primary['pg'], sub_class, is_solid, h_set, form,
+                             components=_comps)
 
     # UN 3082 — ADR 3.3.1 Özel Hüküm 375 viskozite muafiyeti
     if un_entry.get('_sp375_check') and primary['class'] == '9':

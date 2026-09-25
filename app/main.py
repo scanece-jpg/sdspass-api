@@ -1898,13 +1898,17 @@ async def adr_auto_detect(body: dict):
         h_codes       : ['H226', 'H302', ...]
         phys_h_codes  : ['H224', 'H228', ...] (opsiyonel, fiziksel motordan)
         form          : 'liquid' | 'solid' | 'gas' | 'aerosol'
+        components    : [{'cas': '7647-01-0', 'conc': 18.0, 'h_codes': ['H314', ...]}, ...]
         lang          : 'TR' | 'EN'
     """
-    from app.services.transport_engine import classify as transport_classify
+    from app.services.transport_engine import classify as transport_classify, build_transport_components
     h_codes      = body.get('h_codes', [])
     phys_h_codes = body.get('phys_h_codes', [])
     form         = body.get('form', 'liquid')
-    result = transport_classify(h_codes=h_codes, form=form, phys_h_codes=phys_h_codes)
+    raw_comps    = body.get('components', [])
+    comps        = build_transport_components(raw_comps) if raw_comps else None
+    result = transport_classify(h_codes=h_codes, form=form, phys_h_codes=phys_h_codes,
+                                components=comps)
     return {'found': not result.get('not_regulated', True), **result}
 
 
@@ -2648,14 +2652,30 @@ _AGENT_TOOLS = [
     },
     {
         "name": "detect_adr",
-        "description": "H kodlarına göre ADR/IMDG/IATA taşımacılık sınıflandırması yap.",
+        "description": (
+            "H kodlarına göre ADR/IMDG/IATA taşımacılık sınıflandırması yap. "
+            "Doğru UN numarası için 'components' listesini MUTLAKA gönder — "
+            "aksi hâlde Sınıf 8 karışımlar için UN1760 (B.N.O.) döner."
+        ),
         "input_schema": {
             "type": "object",
             "properties": {
                 "h_codes":     {"type": "array", "items": {"type": "string"}},
                 "form":        {"type": "string"},
                 "flash_point": {"type": "number"},
-                "lang":        {"type": "string"}
+                "lang":        {"type": "string"},
+                "components": {
+                    "type": "array",
+                    "description": "Bileşen listesi — CAS bazlı spesifik UN araması için gerekli",
+                    "items": {
+                        "type": "object",
+                        "properties": {
+                            "cas":     {"type": "string"},
+                            "conc":    {"type": "number", "description": "Worst-case konsantrasyon %"},
+                            "h_codes": {"type": "array", "items": {"type": "string"}}
+                        }
+                    }
+                }
             },
             "required": ["h_codes", "form"]
         }

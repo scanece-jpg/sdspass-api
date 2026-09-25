@@ -246,7 +246,9 @@ Hedef: 16 bölüm toplamda **~2000-3000 kelime** — Word/PDF çıktısı 8-12 s
 - Bilinmeyen fiziksel özellik için "Belirlenmemiştir" yaz.
 - **KKDİK referans numarası:** 30105/2017 (11 Temmuz 2017) — başkasını yazma.
 - **SEA referans numarası:** 28848/2013 — başkasını yazma.
-- **OEL yönetmelik numarası (B8):** 29204 / 12 Ağustos 2013 — başkasını yazma.
+- **OEL yönetmelik numarası (B8 ve B15):** 29204 / 12 Ağustos 2013 — başkasını yazma.
+- **YASAK SAYI:** 32345 bu belgede hiçbir yerde geçemez — OEL için 29204 kullan.
+- **B2.1 sınıflandırma tablosu:** YALNIZCA `calculate_clp` → `h_codes` listesindeki H kodları yazılır. Motorda olmayan H kodu (H335 dahil) B2'ye eklenmez.
 - **UN numarasını bellekten yazma** — her zaman `detect_adr` sonucundan al.
 - **Sulu çözelti için** H260/H261 yazma; H280/H281 yazma.
 - CAS, EC, index numaralarını asla uydurma — lookup sonucundan al.

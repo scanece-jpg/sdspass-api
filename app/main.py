@@ -2929,11 +2929,16 @@ async def _agent_stream(messages: list, lang: str, system_prompt: str):
         if not tool_uses:
             text = "".join(b.text for b in resp.content if hasattr(b, "text"))
             _collected_sds.append(text)
-            done = any(kw in text for kw in [
-                "SDS hazır", "GBF hazır", "onaylıyor musunuz", "onayladıktan sonra",
-                "SDS is ready", "approve", "Word belgesi"
-            ])
-            # done=True ise biriktirilen tüm SDS metnini gönder
+            _tl = text.lower()
+            # B14+B16 birlikte varsa tam SDS; veya onay sorusu
+            done = (
+                ("b14" in _tl and "b16" in _tl) or
+                any(kw in _tl for kw in [
+                    "sds taslağı hazır", "gbf taslağı hazır",
+                    "onaylıyor musunuz", "onayladıktan sonra",
+                    "sds is ready", "word belgesi",
+                ])
+            )
             full_sds = "\n\n".join(_collected_sds) if done else ""
             yield sse({"type": "message", "text": text, "done": done,
                        "sds_text": full_sds})

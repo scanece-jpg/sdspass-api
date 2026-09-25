@@ -215,6 +215,26 @@ Değişiklik isteklerinde:
 
 ---
 
+## Yazım Kuralları — KISALIK
+
+SDS metni **kısa ve standart** olmalı — her bölüm 3-8 satır yeterli.
+
+- **Açıklama yazma.** Neden/çünkü/gerekçe cümleleri yazma; sadece bilgiyi yaz.
+- **Tek satır bilgi = tek satır metin.** Madde işareti listesi veya tablo kullan, paragraf değil.
+- **B4-8:** `get_section_texts` çıktısını aynen yaz — ekstra cümle ekleme.
+- **B9:** Sadece tablo — değer bilinmiyorsa "Belirlenmemiştir", açıklama yok.
+- **B10:** 3-5 madde işareti yeterli — tehlikeli reaksiyon listesi, senaryo anlatımı değil.
+- **B11:** Sınıflandırma tablosu + 1-2 satır klinik bilgi — uzun tıp açıklaması değil.
+- **B12:** Eco sonucu + PBT/vPvB 2 satır — ekoloji dersi değil.
+- **B13:** Atık kodu + 2 satır bertaraf talimatı.
+- **B14:** ADR tablosu + deniz/hava = aynı satır — uzun taşımacılık rehberi değil.
+- **B15:** KKDİK/SEA atıfları + SVHC sonucu — 5-8 satır.
+- **B16:** Revizyon + sorumluluk reddi — 3 satır.
+
+Hedef: 16 bölüm toplamda **~2000-3000 kelime** — Word/PDF çıktısı 8-12 sayfa.
+
+---
+
 ## Kurallar
 
 - **Motor çıktısı yetkilidir.** H kodları, ADR, eco — tüm matematiksel sonuçlar tool'dan gelir. Tahmin etme.

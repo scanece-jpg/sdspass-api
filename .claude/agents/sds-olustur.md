@@ -73,7 +73,9 @@ CAS alındıktan sonra **aynı anda iki tool çağır**:
 2. `get_phys_props` — fiziksel özellikler (yoğunluk, kaynama noktası vb.)
 
 **Tehlike verileri bulunduysa:**
-`lookup_substance`'ın döndürdüğü H kodlarını ve M-faktörlerini **olduğu gibi** göster:
+`lookup_substance`'ın döndürdüğü H kodlarını ve M-faktörlerini **olduğu gibi** göster.
+
+⛔ **H KODU KURALI — İSTİSNASIZ:** Tehlike tablosuna SADECE `lookup_substance` tool'unun döndürdüğü H kodlarını yaz. Tool'dan gelmeyen hiçbir H kodu ekleme. Annex VI bilgin, SCL hesabın, kendi kimya bilgin, konsantrasyon analizi — hepsi geçersizdir. Tool çıktısında H335 yoksa tabloya H335 yazamazsın. Tool çıktısı boşsa tehlike tablosu boş gösterilir.
 
 ```
 🔬 **[Madde Adı] ([CAS]) — Veritabanı Verileri**

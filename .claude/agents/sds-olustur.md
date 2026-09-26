@@ -221,12 +221,7 @@ Aşağıdaki bloğu mesajının **sonuna** ekle:
   "components": [
     {
       "cas": "0000-00-0",
-      "conc": 0.0,
-      "hazards": [
-        {"h_class": "Skin Corr. 1B", "h_code": "H314"}
-      ],
-      "m_factor": 1,
-      "m_factor_chronic": 1
+      "conc": 0.0
     }
   ],
   "physical": {
@@ -250,9 +245,7 @@ Aşağıdaki bloğu mesajının **sonuna** ekle:
 - `usage`: "industrial" / "consumer"
 - `export_format`: her zaman `"pdf"` yaz (sistem onay sonrası kullanıcıya format sorar)
 - `conc`: sayı (float) — aralıksa üst sınır
-- `hazards`: lookup_substance'dan gelen + kullanıcının onayladığı/değiştirdiği H kodları. Her eleman: `{"h_class": "...", "h_code": "H..."}`
-- `m_factor` / `m_factor_chronic`: sayı (int), varsayılan 1. lookup_substance'dan gelen veya kullanıcının değiştirdiği değer
-- Tehlike verisi yoksa: `"hazards": [], "m_factor": 1, "m_factor_chronic": 1`
+- `hazards` / `m_factor` / `m_factor_chronic`: **YAZMA** — backend veritabanından otomatik buluyor
 - Bilinmeyen / boş değer → `""` (boş string)
 - "Uygulanamaz" girişi → `"N/A"` yaz
 - `physical` alanındaki değerler: `get_phys_props`'tan gelen veya kullanıcının söylediği değerler — kendi bilginden tahmin etme

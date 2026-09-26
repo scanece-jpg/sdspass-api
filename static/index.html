@@ -1354,7 +1354,7 @@ function _agentShowCalcSummary(state, fmt) {
   if (hCodes.length) html += `**H Kodları:** ${hCodes.join(', ')}\n\n`;
   if (classes.length) html += `**CLP Sınıfları:** ${classes.slice(0,6).join(' | ')}\n\n`;
 
-  html += `---\nSonuçlar doğru görünüyor mu? **"Evet"** yazarsanız PDF oluşturma ekranı açılacak — orada **SDS Oluştur →** butonuna basın.`;
+  html += `---\nSonuçlar doğru görünüyor mu? Onaylıyorsanız PDF olarak çıktı alacağım — **"Oluştur"** yazın.`;
 
   _renderMsg('assistant', html);
   window._pendingExportConfirm = true;
@@ -1368,7 +1368,8 @@ function _agentTryExport(text) {
   window._pendingExportConfirm = false;
   const fmt = t.includes('word') || t.includes('docx') ? 'docx' : (window._pendingExportFmt || 'pdf');
   if (fmt === 'pdf') {
-    if (typeof generatePDF === 'function') generatePDF();
+    _renderMsg('assistant', '⏳ PDF oluşturuluyor…');
+    setTimeout(() => { if (typeof _afterPhysSrc === 'function') _afterPhysSrc(); }, 300);
   } else {
     _renderMsg('assistant', '✅ Hesaplama tamamlandı! Sol paneldeki **PDF Oluştur** butonuna basarak indirebilirsiniz. (Word desteği yakında)');
   }

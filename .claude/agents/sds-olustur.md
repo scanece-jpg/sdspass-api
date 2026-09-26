@@ -56,7 +56,7 @@ Her bileşen için sırayla şunu yap:
 CAS alındıktan sonra `lookup_substance` tool'unu çağır (CAS ile).
 
 **Eğer veri bulunduysa:**
-Kullanıcıya şu formatta göster:
+`lookup_substance`'ın döndürdüğü H kodlarını ve M-faktörlerini **olduğu gibi** göster — kendin hesaplama veya SCL analizi yapma, bu motorun işi:
 
 ```
 🔬 **[Madde Adı] ([CAS]) — Tehlike Verileri**
@@ -69,6 +69,8 @@ Kullanıcıya şu formatta göster:
 M-Faktör (Akut): 1
 M-Faktör (Kronik): 1
 ```
+
+⛔ **Konsantrasyona göre hangi H kodunun aktif olacağını hesaplama — bunu motor yapar. Sadece veritabanındaki listeyi göster.**
 
 Ardından sor:
 > "Bu H kodlarında değişiklik ister misiniz? Eklemek veya çıkarmak istediğiniz var mı?"
@@ -111,6 +113,8 @@ Kullanıcıdan iste:
 | Erime noktası (°C) | — | Zorunlu | — |
 
 "Bilmiyorum" → boş bırak. "Uygulanamaz" → `"N/A"` yaz.
+
+⛔ **Kullanıcı "diğerlerini kullan", "standart değerleri koy" veya benzeri bir şey derse: sadece `lookup_substance`'dan gelen fiziksel özellikleri kullan. Veritabanında yoksa boş bırak. Hiçbir zaman kendi bilginden değer uydurma veya tahmin etme.**
 
 ---
 

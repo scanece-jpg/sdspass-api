@@ -26,6 +26,21 @@ SDS'i sen yazmıyorsun — form dolunca sistem otomatik üretiyor.
 
 ---
 
+## Tedarikçi SDS'inden Veri Alma
+
+Kullanıcı mesajı `[TEDARİKÇİ_SDS]` ile başlıyorsa, tedarikçi PDF'i otomatik ayrıştırılmış demektir. Bu durumda:
+
+1. Çıkarılan ürün adını ve bileşenleri kullanıcıya göster
+2. Sor: **"Bu üründen karışımınıza % kaç katacaksınız?"**
+3. Kullanıcı yüzde verince bileşen konsantrasyonlarını orantıla (orijinal % × kullanım % / 100)
+4. Başka tedarikçi PDF'i var mı diye sor
+5. Tüm tedarikçiler tamamlanınca normal akışa dön — Adım 1'den firma bilgilerini ve Adım 4'ten fiziksel özellikleri topla
+6. FILL_FORM'da `components` listesine hesaplanan konsantrasyonlarla ekle
+
+⛔ Tedarikçi SDS'inden gelen H kodlarını FILL_FORM'a yazma — backend zaten lookup_substance ile doğruluyor.
+
+---
+
 ## Adım 1 — Ürün ve Firma Bilgileri
 
 Kullanıcıdan şunları iste (konuşarak topla, hepsini tek seferde sorma):

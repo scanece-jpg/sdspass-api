@@ -1129,6 +1129,9 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
 
   <!-- Input alanı -->
   <div style="padding:10px 14px;border-top:1px solid var(--border);background:var(--bg2);display:flex;gap:8px;align-items:flex-end;flex-shrink:0">
+    <label id="agent-attach-btn" title="Tedarikçi SDS PDF yükle" style="padding:8px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:13px;flex-shrink:0;align-self:flex-end;display:flex;align-items:center;color:var(--text3)">
+      📎<input type="file" accept=".pdf" style="display:none" onchange="agentAttachSds(this)">
+    </label>
     <textarea id="agent-input" rows="2" placeholder="Mesajınızı yazın…" onkeydown="agentInputKey(event)"
       style="flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:12px;padding:8px 10px;resize:none;font-family:inherit;line-height:1.45;outline:none"></textarea>
     <button id="agent-send-btn" onclick="agentSend()" title="Gönder (Enter)"
@@ -1263,6 +1266,48 @@ function agentSend() {
   if (_agentTryExport(text)) return;
   _agentMessages.push({ role: 'user', content: text });
   _agentCall();
+}
+
+async function agentAttachSds(input) {
+  const file = input.files[0];
+  input.value = '';
+  if (!file) return;
+  if (_agentBusy) { alert('Agent meşgul, lütfen bekleyin.'); return; }
+
+  _renderMsg('user', `📎 ${file.name}`);
+  _renderTyping('PDF ayrıştırılıyor…');
+
+  try {
+    const fd = new FormData();
+    fd.append('file', file);
+    const res = await fetch(`${API_BASE}/sds/parse-supplier`, { method: 'POST', body: fd });
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+
+    _removeTyping();
+
+    const comps = data.components || [];
+    if (!comps.length) {
+      _renderMsg('assistant', '⚠️ PDF\'de bileşen bulunamadı. Lütfen bileşenleri manuel girin.');
+      return;
+    }
+
+    const compLines = comps.map(c => {
+      const conc = c.conc_min != null && c.conc_max != null
+        ? `%${c.conc_min}–${c.conc_max}`
+        : c.conc_min != null ? `%${c.conc_min}` : '';
+      return `- ${c.name || ''}${c.cas ? ` (CAS ${c.cas})` : ''}${conc ? ': ' + conc : ''}`;
+    }).join('\n');
+
+    const productName = data.product_name || file.name.replace('.pdf','');
+    const msg = `[TEDARİKÇİ_SDS]\nÜrün: ${productName}\nBileşenler:\n${compLines}`;
+
+    _agentMessages.push({ role: 'user', content: msg });
+    _agentCall();
+  } catch(e) {
+    _removeTyping();
+    _renderMsg('assistant', `❌ PDF ayrıştırılamadı: ${e.message}`);
+  }
 }
 
 function _agentFillForm(p) {

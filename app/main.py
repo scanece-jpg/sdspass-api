@@ -2991,6 +2991,19 @@ async def _agent_stream(messages: list, lang: str, system_prompt: str):
 
         if not tool_uses:
             text = "".join(b.text for b in resp.content if hasattr(b, "text"))
+
+            # FILL_FORM bloğunu yakala ve SSE event olarak yayınla
+            import re as _re
+            _ff_match = _re.search(r"<FILL_FORM>(.*?)</FILL_FORM>", text, _re.DOTALL)
+            if _ff_match:
+                try:
+                    _ff_payload = _json.loads(_ff_match.group(1).strip())
+                    yield f"event: fill_form\ndata: {_json.dumps(_ff_payload, ensure_ascii=False)}\n\n"
+                except Exception:
+                    pass
+                # Bloğu görünen metinden çıkar
+                text = _re.sub(r"\n?<FILL_FORM>.*?</FILL_FORM>\n?", "", text, flags=_re.DOTALL).strip()
+
             _collected_sds.append(text)
             _tl = text.lower()
             # B14+B16 birlikte varsa tam SDS; veya onay sorusu

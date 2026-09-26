@@ -63,6 +63,47 @@ Her bileşen için:
 - Suda çözünürlük
 - Viskozite (varsa)
 
+### 1.5 FILL_FORM — Tüm veriler toplandıktan sonra
+
+Adım 1.1–1.4 tamamlanınca, **SDS üretimine geçmeden önce** aşağıdaki bloğu oluştur ve mesajına ekle:
+
+```
+<FILL_FORM>
+{
+  "form": "liquid",
+  "product_name": "Ürün adı",
+  "revision_no": "01",
+  "revision_date": "GG.AA.YYYY",
+  "firm_name": "Firma Adı",
+  "firm_phone": "+90 ...",
+  "firm_email": "",
+  "firm_address": "",
+  "components": [
+    {"cas": "7647-01-0", "conc": 18.0}
+  ],
+  "physical": {
+    "appearance": "Renksiz, berrak sıvı",
+    "color": "Renksiz",
+    "odor": "Keskin",
+    "ph": "",
+    "density": "",
+    "boiling_point": "",
+    "flash_point": "",
+    "vapor_pressure": "",
+    "solubility": "",
+    "viscosity": ""
+  }
+}
+</FILL_FORM>
+```
+
+Kurallar:
+- `form`: "liquid" / "solid" / "gas"
+- `conc`: tek sayı (worst-case üst sınır)
+- Bilinmeyen fiziksel özellik → boş string `""`
+- Bu bloğu daima mesaj sonuna koy
+- Bloğu yazdıktan sonra kullanıcıya "Form dolduruluyor, motor çalışıyor…" de ve Adım 2'ye geç
+
 ---
 
 ## Adım 2 — Motor Çağrıları

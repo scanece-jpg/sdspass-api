@@ -2950,6 +2950,9 @@ async def _run_agent_tool(tool_name: str, tool_input: dict, base_url: str = "") 
                     result_props["solubility"] = props["solubility_text"]
                 if props.get("mw") is not None:
                     result_props["mw"] = f"{props['mw']} g/mol"
+                if props.get("melting_point") is not None:
+                    result_props["melting_point"] = f"{props['melting_point']} °C"
+                    result_props["melting_point_note"] = "⚠️ Bu değer saf madde içindir — karışım/çözelti için farklı olabilir. Kullanıcıya sorun."
                 return {"found": True, "cas": cas, "props": result_props, "raw": props}
             except Exception as e:
                 return {"found": False, "cas": cas, "props": {}, "error": str(e)}

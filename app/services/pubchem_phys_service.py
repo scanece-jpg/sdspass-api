@@ -92,6 +92,9 @@ def _to_hpa(val: float, text: str) -> float:
 def _to_mg_l(val: float, text: str) -> float | None:
     """Çözünürlük birimini mg/L'ye çevir."""
     tl = text.lower()
+    if 'g/100' in tl:
+        # g/100g veya g/100mL → mg/L (yoğunluk ~1 g/mL varsayımı)
+        return round(val * 10000, 1)
     if 'g/l' in tl and 'mg' not in tl:
         return round(val * 1000, 1)
     if 'g/ml' in tl or 'g/cm' in tl:

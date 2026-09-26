@@ -129,6 +129,10 @@ Bu üçünü tek seferde sor:
 
 **Veritabanından gelen değerler:** Adım 3b'de kullanıcıya gösterildi ve onaylandı → bunları tekrar sorma.
 
+**`get_phys_props` sonucunda `melting_point_note` varsa:** Değeri kullanıcıya göster ve sor:
+> "Donma/erime noktası için veritabanında **[değer] °C** bulundu, ancak bu saf madde değeridir — çözeltiniz için farklı olabilir. Bu değeri kullanayım mı, yoksa ölçülmüş değeri girmek ister misiniz?"
+> <QUICK_REPLY>["Evet, bu değeri kullan","Farklı değer gireceğim","Boş bırak"]</QUICK_REPLY>
+
 **Veritabanında olmayan / eksik değerler:** Fiziksel forma göre sor:
 
 | Alan | Sıvı/Pasta/Aerosol | Katı/Toz | Gaz |

@@ -1282,16 +1282,18 @@ function _agentFillForm(p) {
   if (p.revision_date) {
     const el = document.getElementById('revDate');
     if (el) {
-      const rd = String(p.revision_date).trim().toLowerCase();
-      const todayWords = ['bugün', 'bugun', 'today', 'otomatik', 'auto', 'şimdi', 'simdi'];
-      if (todayWords.some(w => rd.includes(w))) {
+      const rd = String(p.revision_date).trim();
+      const rdL = rd.toLowerCase().replace(/[İ]/g,'i').replace(/[Ğ]/g,'g').replace(/[Ü]/g,'u').replace(/[Ş]/g,'s').replace(/[Ö]/g,'o').replace(/[Ç]/g,'c');
+      const todayWords = ['bugun', 'today', 'otomatik', 'auto', 'simdi', 'now'];
+      const looksLikeDate = /^\d{1,2}[.\-\/]\d{1,2}[.\-\/]\d{2,4}$/.test(rd);
+      if (!looksLikeDate && todayWords.some(w => rdL.includes(w))) {
         const now = new Date();
         const dd = String(now.getDate()).padStart(2,'0');
         const mm = String(now.getMonth()+1).padStart(2,'0');
         const yyyy = now.getFullYear();
         el.value = `${dd}.${mm}.${yyyy}`;
       } else {
-        el.value = p.revision_date;
+        el.value = rd;
       }
     }
   }
@@ -1446,7 +1448,7 @@ function _agentTryExport(text) {
   const fmt = t.includes('word') || t.includes('docx') ? 'docx' : (window._pendingExportFmt || 'pdf');
   if (fmt === 'pdf') {
     _renderMsg('assistant', '⏳ PDF oluşturuluyor…');
-    setTimeout(() => { if (typeof _afterPhysSrc === 'function') _afterPhysSrc(); }, 300);
+    setTimeout(() => { if (typeof _doPdfGenerate === 'function') _doPdfGenerate(); }, 300);
   } else {
     _renderMsg('assistant', '✅ Hesaplama tamamlandı! Sol paneldeki **PDF Oluştur** butonuna basarak indirebilirsiniz. (Word desteği yakında)');
   }

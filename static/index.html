@@ -1129,9 +1129,9 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
 
   <!-- Input alanı -->
   <div style="padding:10px 14px;border-top:1px solid var(--border);background:var(--bg2);display:flex;gap:8px;align-items:flex-end;flex-shrink:0">
-    <label id="agent-attach-btn" title="Tedarikçi SDS PDF yükle" style="padding:8px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:13px;flex-shrink:0;align-self:flex-end;display:flex;align-items:center;color:var(--text3)">
-      📎<input type="file" accept=".pdf" style="display:none" onchange="agentAttachSds(this)">
-    </label>
+    <input type="file" id="agent-attach-input" accept=".pdf" style="display:none" onchange="agentAttachSds(this)">
+    <button type="button" id="agent-attach-btn" title="Tedarikçi SDS PDF yükle" onclick="document.getElementById('agent-attach-input').click()"
+      style="padding:8px 10px;background:var(--bg3);border:1px solid var(--border);border-radius:8px;cursor:pointer;font-size:13px;flex-shrink:0;align-self:flex-end;color:var(--text2)">📎</button>
     <textarea id="agent-input" rows="2" placeholder="Mesajınızı yazın…" onkeydown="agentInputKey(event)"
       style="flex:1;background:var(--bg3);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:12px;padding:8px 10px;resize:none;font-family:inherit;line-height:1.45;outline:none"></textarea>
     <button id="agent-send-btn" onclick="agentSend()" title="Gönder (Enter)"

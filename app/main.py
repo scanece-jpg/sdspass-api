@@ -149,6 +149,8 @@ async def generate_pdf(data: dict = Body(...)):
                             {'h_class': cls, 'h_code': code}
                             for cls, code in zip(raw['hazard_classes'], raw['h_codes'])
                         ]
+                        c['m_factors'] = fresh.get('m_factors', {})
+                        c['ate'] = fresh.get('ate', {})
                         return c
                     else:
                         # Sınıflandırılmamış — hazards listesini temizle, ECHA'ya gitme

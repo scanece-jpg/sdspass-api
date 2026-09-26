@@ -1315,9 +1315,29 @@ function _agentFillForm(p) {
   setTf('tf_sol',        phys.solubility);
   setTf('tf_visc',       phys.viscosity);
 
-  // Hesapla butonunu çalıştır (kısa gecikme ile bileşenlerin yüklenmesini bekle)
+  // Hesapla butonunu çalıştır, bittikten sonra export tetikle
+  const exportFmt = (p.export_format || '').toLowerCase();
   setTimeout(() => {
     if (typeof doCalculate === 'function') doCalculate();
+    // doCalculate async — _lastCalcState set olana kadar bekle
+    if (exportFmt) {
+      const _pollExport = (attempt) => {
+        if (attempt > 30) return; // 15 sn timeout
+        if (window._lastCalcState) {
+          setTimeout(() => {
+            if (exportFmt === 'pdf') {
+              if (typeof generatePDF === 'function') generatePDF();
+            } else {
+              // Word: PDF butonunu göster, mesaj ver
+              _renderMsg('assistant', '✅ Hesaplama tamamlandı! Sonuçlar sol panelde görünüyor. PDF Oluştur butonuna basarak indirebilirsiniz. (Word desteği yakında)');
+            }
+          }, 500);
+        } else {
+          setTimeout(() => _pollExport(attempt + 1), 500);
+        }
+      };
+      _pollExport(0);
+    }
   }, 800);
 }
 

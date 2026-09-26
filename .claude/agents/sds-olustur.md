@@ -111,11 +111,23 @@ Kullanıcının verdiği değerleri **aynen** yaz — yorumlama, tamamlama, değ
 
 ### B2 — Tehlike Tanımlaması
 Motor çıktısından: `h_codes`, `signal`, `pictograms`, `clp_passed`, `euh`.
-- CLP/SEA sınıflandırma tablosu (h_class + h_code + kategori)
-- Etiket unsurları: piktogram sembol adları, sinyal kelimesi, H ifadeleri, EUH ifadeleri, P ifadeleri
-- `all_h_codes` → B2.1 sınıflandırma tablosu (H318 dahil)
-- `h_codes` → etiket (H314 varken H318 gizlenir — CLP Madde 26)
-- Diğer tehlikeler: PBT/vPvB değil ise "Bu madde/karışım PBT veya vPvB kriterlerini karşılamamaktadır."
+
+**B2.1 CLP Sınıflandırması** — `calculate_clp` → `all_h_codes` listesinden tablo oluştur:
+| Zararlılık Sınıfı | Kategori | H Kodu | H İfadesi |
+|---|---|---|---|
+| (h_class) | (kategori) | (H kodu) | (Türkçe ifade) |
+
+Motorda olmayan hiçbir H kodu bu tabloya eklenmez.
+
+**B2.2 Etiket Unsurları** — `calculate_clp` çıktısından aynen al:
+- Sinyal Kelimesi: `signal` değeri (Tehlike / Uyarı)
+- Piktogramlar: `pictograms` listesindeki her kod için GHS sembol adını yaz (ör. GHS05: Korozivite)
+- H İfadeleri: `h_codes` listesindeki her kod + Türkçe ifade — H314 varsa H318 yazılmaz (CLP Madde 26)
+- EUH İfadeleri: `euh` listesindeyse yaz, yoksa bu satırı koyma
+- P İfadeleri: `read_knowledge("labeling")` çıktısından H kodlarına uygun P kodlarını seç
+- Diğer tehlikeler: "Bu madde/karışım PBT veya vPvB kriterlerini karşılamamaktadır."
+
+⚠️ B2 hiçbir zaman boş bırakılamaz — en az sınıflandırma tablosu + sinyal kelimesi + piktogram listesi zorunludur.
 
 ### B3 — Bileşim/İçindekiler
 Her bileşen için: ad, CAS, EC no, index no, konsantrasyon aralığı, H kodları.
@@ -139,12 +151,33 @@ Fiziksel hal ve yanıcılık sınıfına göre uygun söndürücüleri yaz.
 
 ### B8 — Maruziyet Kontrolleri / KKE
 `get_section_texts` yanıtından section "8" cümlelerini kullan.
-`get_oel` sonuçlarından OEL değerlerini tabloya ekle.
+
+**OEL Tablosu** — `get_oel` sonucundan, değer varsa şu tabloyu yaz:
+| Madde | CAS | TWA (ppm) | TWA (mg/m³) | STEL (ppm) | STEL (mg/m³) | Dayanak |
+|---|---|---|---|---|---|---|
+| (madde adı) | (CAS) | (değer/—) | (değer/—) | (değer/—) | (değer/—) | 29204 sayılı RG |
+
+`get_oel` boş dönerse: "Bu karışım bileşenleri için Türkiye OEL listesinde (29204 sayılı RG) değer bulunmamaktadır." yaz.
+
+⚠️ OEL tablosu hiçbir zaman atlanamaz — ya değer ya "bulunmamaktadır" yazılır.
 
 ### B9 — Fiziksel ve Kimyasal Özellikler
-Kullanıcı girişi + `calculate_clp` yanıtındaki `theo_props`:
-- Teorik/hesaplanan değerler için "hesaplama ile tahmin" notu ekle
-- Bilinmeyen değerler için "Belirlenmemiştir" yaz, asla tahmin etme
+Kullanıcı girişi + `calculate_clp` yanıtındaki `theo_props`. **Tablo her zaman tam doldurulur** — bilinmeyen değer "Belirlenmemiştir", asla tahmin etme, asla boş bırakma.
+
+| Özellik | Değer | Kaynak |
+|---|---|---|
+| Görünüm / Renk | (kullanıcı girişi) | Ölçüm |
+| Koku | (kullanıcı girişi) | Ölçüm |
+| pH | (kullanıcı girişi) | Ölçüm |
+| Kaynama Noktası (°C) | (değer veya Belirlenmemiştir) | Ölçüm / Literatür |
+| Parlama Noktası (°C) | (değer veya Uygulanamaz) | Ölçüm / Literatür |
+| Yoğunluk (g/cm³) | (değer veya Belirlenmemiştir) | Ölçüm |
+| Buhar Basıncı (hPa, 20°C) | (değer veya Belirlenmemiştir) | Literatür |
+| Suda Çözünürlük | (değer veya Karışabilir) | Literatür |
+| Viskozite | (değer veya Belirlenmemiştir) | Ölçüm |
+| Patlama Sınırları (%, v/v) | (değer veya Uygulanamaz) | Literatür |
+
+⚠️ B9 tablosu hiçbir zaman boş bırakılamaz.
 
 ### B10 — Kararlılık ve Reaktivite
 H kodlarına göre:
@@ -158,7 +191,8 @@ H kodlarına göre:
 `clp_passed` listesinden ATE değerleri dahil:
 - Akut toksisite: oral/dermal/inhalasyon LD50/LC50 (bileşen bazlı, varsa)
 - Tahriş, duyarlılaştırma, CMR, STOT: **YALNIZCA** `calculate_clp` → `h_codes` listesindeki kodlardan yaz
-- `h_codes`'da olmayan hiçbir H kodu (H335, H336, H302 vb.) B11'e yazılmaz — motor dahil etmemişse sen de yazma
+- **`h_codes` listesinde YOKSA → yazma.** Kontrol et: H335 `h_codes`'da var mı? Yoksa "STOT SE 3" veya "H335" kesinlikle yazılmaz.
+- **Yasak:** Motora sormadan "Solunum tahrişi", "STOT", "H335", "H336" gibi ifadeler ekleme.
 - Bilgi yoksa "Bu madde/karışım için toksikolojik veri mevcut değildir" yaz
 
 ### B12 — Ekoloji
@@ -190,10 +224,18 @@ Fiziksel hale + H kodlarına göre:
 - Düzenlemeye tabi değilse: "Bu ürün ADR/RID/IMDG/IATA kapsamında tehlikeli madde değildir"
 
 ### B15 — Mevzuat
-`check_svhc` çıktısından + mevzuat bilgisinden:
-- KKDİK (30105/2017) ve SEA (28848/2013) atıfları
-- SVHC durumu: listede varsa madde adı + konsantrasyon + bildirim yükümlülüğü
-- SVHC yoksa: "Bu karışım ≥%0,1 konsantrasyonda SVHC içermemektedir"
+`check_svhc` çıktısından + `read_knowledge("kkdik_references")` bilgisinden. **Şu satırları her zaman yaz:**
+
+**Geçerli Mevzuat:**
+- KKDİK: 11 Temmuz 2017 tarihli **30105** sayılı Resmî Gazete
+- SEA: 26 Aralık 2013 tarihli **28848** sayılı Resmî Gazete
+- OEL: 12 Ağustos 2015 tarihli **29204** sayılı Resmî Gazete (B8 OEL değerleri)
+
+**SVHC Durumu** (`check_svhc` sonucundan):
+- SVHC varsa: madde adı + konsantrasyon + "ECHA Aday Listesi'nde yer almakta, bildirim yükümlülüğü uygulanır"
+- SVHC yoksa: "Bu karışım ≥%0,1 konsantrasyonda SVHC içermemektedir (REACH Madde 59)"
+
+⚠️ B15 hiçbir zaman boş bırakılamaz — en az mevzuat listesi + SVHC sonucu zorunludur.
 
 ### B16 — Diğer Bilgiler
 - Revizyon tarihi ve numarası

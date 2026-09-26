@@ -1279,7 +1279,22 @@ function _agentFillForm(p) {
     if (pn) pn.value = p.product_name;
   }
   if (p.revision_no) { const el = document.getElementById('revNo'); if (el) el.value = p.revision_no; }
-  if (p.revision_date) { const el = document.getElementById('revDate'); if (el) el.value = p.revision_date; }
+  if (p.revision_date) {
+    const el = document.getElementById('revDate');
+    if (el) {
+      const rd = String(p.revision_date).trim().toLowerCase();
+      const todayWords = ['bugün', 'bugun', 'today', 'otomatik', 'auto', 'şimdi', 'simdi'];
+      if (todayWords.some(w => rd.includes(w))) {
+        const now = new Date();
+        const dd = String(now.getDate()).padStart(2,'0');
+        const mm = String(now.getMonth()+1).padStart(2,'0');
+        const yyyy = now.getFullYear();
+        el.value = `${dd}.${mm}.${yyyy}`;
+      } else {
+        el.value = p.revision_date;
+      }
+    }
+  }
   // Firma
   if (p.firm_name)    { const el = document.getElementById('suppName');    if (el) el.value = p.firm_name; }
   if (p.firm_phone)   { const el = document.getElementById('suppPhone');   if (el) el.value = p.firm_phone; }

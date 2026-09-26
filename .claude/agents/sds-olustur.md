@@ -29,7 +29,7 @@ Kullanıcıdan şunları iste (konuşarak topla, hepsini tek seferde sorma):
 
 - Ürün adı / ticari adı
 - Revizyon numarası (yoksa: 00)
-- Revizyon tarihi (yoksa: bugünün tarihi)
+- Revizyon tarihi (yoksa veya "bugün" diyorsa: `"bugün"` yaz — sistem otomatik çevirir)
 - Firma adı
 - Firma adresi
 - Acil telefon numarası

@@ -13,11 +13,12 @@ description: >
 ## Genel Akış
 
 1. **Bilgi Toplama** — Sohbetle topla, seçenek gerektiren her şeyi AskUserQuestion ile sor
-2. **Madde Lookup** — Her CAS için `lookup_substance` tool'u çağır
-3. **Motor Çağrısı** — `calculate_clp` + `detect_adr` + `check_svhc` + `get_oel`
-4. **Standart Metinler** — `get_section_texts` ile B4-8 cümlelerini çek
-5. **SDS Üretimi** — Motor çıktıları + standart cümleler + mevzuat bilgisiyle 16 bölüm yaz
-6. **Onay** — Kullanıcıya göster, onaylayınca Word/PDF oluşturulur
+2. **⚡ FILL_FORM ZORUNLU** — Bilgi tamamlanınca `<FILL_FORM>` bloğunu mesajına ekle (bu adımı ASLA atlama)
+3. **Madde Lookup** — Her CAS için `lookup_substance` tool'u çağır
+4. **Motor Çağrısı** — `calculate_clp` + `detect_adr` + `check_svhc` + `get_oel`
+5. **Standart Metinler** — `get_section_texts` ile B4-8 cümlelerini çek
+6. **SDS Üretimi** — Motor çıktıları + standart cümleler + mevzuat bilgisiyle 16 bölüm yaz
+7. **Onay** — Kullanıcıya göster, onaylayınca Word/PDF oluşturulur
 
 ---
 
@@ -63,9 +64,11 @@ Her bileşen için:
 - Suda çözünürlük
 - Viskozite (varsa)
 
-### 1.5 FILL_FORM — Tüm veriler toplandıktan sonra
+### 1.5 FILL_FORM — ZORUNLU ADIM (Atlanırsa SDS üretilemez)
 
-Adım 1.1–1.4 tamamlanınca, **SDS üretimine geçmeden önce** aşağıdaki bloğu oluştur ve mesajına ekle:
+⚠️ **Adım 1.1–1.4 tamamlanınca bu adımı yapmadan Adım 2'ye geçme.**
+
+Aşağıdaki `<FILL_FORM>` bloğunu mesajının **en sonuna** ekle. JSON içindeki değerleri kullanıcıdan aldığın bilgilerle doldur:
 
 ```
 <FILL_FORM>
@@ -101,8 +104,11 @@ Kurallar:
 - `form`: "liquid" / "solid" / "gas"
 - `conc`: tek sayı (worst-case üst sınır)
 - Bilinmeyen fiziksel özellik → boş string `""`
-- Bu bloğu daima mesaj sonuna koy
-- Bloğu yazdıktan sonra kullanıcıya "Form dolduruluyor, motor çalışıyor…" de ve Adım 2'ye geç
+- Bu bloğu daima mesajın EN SONUNA koy
+- Bloğu yazdıktan hemen sonra tool_use ile Adım 2'ye geç (lookup_substance çağır)
+- Bu adımı atlarsan frontend formu dolmaz ve hesaplama çalışmaz
+
+⛔ **Bu adımı atlamak YASAKTIR. FILL_FORM çıkarmadan SDS yazma.**
 
 ---
 
@@ -163,7 +169,8 @@ Motorda olmayan hiçbir H kodu bu tabloya eklenmez.
 **B2.2 Etiket Unsurları** — `calculate_clp` çıktısından aynen al:
 - Sinyal Kelimesi: `signal` değeri (Tehlike / Uyarı)
 - Piktogramlar: `pictograms` listesindeki her kod için GHS sembol adını yaz (ör. GHS05: Korozivite)
-- H İfadeleri: `h_codes` listesindeki her kod + Türkçe ifade — H314 varsa H318 yazılmaz (CLP Madde 26)
+- H İfadeleri: `h_codes` listesindeki her kod + Türkçe ifade
+  - ⛔ **H314 varsa H318 kesinlikle yazılmaz** (CLP Madde 26 — H314 H318'i kapsar; ikisi birden etiket veya B2'de yer alamaz)
 - EUH İfadeleri: `euh` listesindeyse yaz, yoksa bu satırı koyma
 - P İfadeleri: `read_knowledge("labeling")` çıktısından H kodlarına uygun P kodlarını seç
 - Diğer tehlikeler: "Bu madde/karışım PBT veya vPvB kriterlerini karşılamamaktadır."

@@ -1258,8 +1258,10 @@ function agentSend() {
   const text = inp.value.trim();
   if (!text) return;
   inp.value = '';
-  _agentMessages.push({ role: 'user', content: text });
   _renderMsg('user', text);
+  // Onay bekleniyor mu? — agent API'ye gitmeden export tetikle
+  if (_agentTryExport(text)) return;
+  _agentMessages.push({ role: 'user', content: text });
   _agentCall();
 }
 
@@ -1292,13 +1294,17 @@ function _agentFillForm(p) {
     });
     // Yeni bileşenler ekle
     p.components.forEach(c => {
-      addComp({ cas: c.cas || '', conc: c.conc || '' });
+      const hazards = (c.hazards || []).map(h => ({ h_class: h.h_class, h_code: h.h_code }));
+      addComp({ cas: c.cas || '', conc: c.conc || '', hazards });
       // CAS arama tetikle
       const lastId = _compId;
       const ciEl = document.getElementById('ci' + lastId);
       if (ciEl && c.cas) { ciEl.value = c.cas; onCas(lastId); }
       const manEl = document.getElementById('cmanual' + lastId);
       if (manEl && c.conc) { manEl.value = String(c.conc); onManualConc(lastId); updateConcTotal(); }
+      // M-faktörü ayarla
+      if (c.m_factor != null) { const mfEl = document.getElementById('mf' + lastId); if (mfEl) mfEl.value = c.m_factor; }
+      if (c.m_factor_chronic != null) { const mfcEl = document.getElementById('mfc' + lastId); if (mfcEl) mfcEl.value = c.m_factor_chronic; }
     });
   }
   // Fiziksel özellikler
@@ -1315,30 +1321,58 @@ function _agentFillForm(p) {
   setTf('tf_sol',        phys.solubility);
   setTf('tf_visc',       phys.viscosity);
 
-  // Hesapla butonunu çalıştır, bittikten sonra export tetikle
-  const exportFmt = (p.export_format || '').toLowerCase();
+  // Hesapla çalıştır, bittikten sonra özetini chat'te göster ve onay iste
+  window._pendingExportFmt = (p.export_format || '').toLowerCase() || null;
   setTimeout(() => {
     if (typeof doCalculate === 'function') doCalculate();
-    // doCalculate async — _lastCalcState set olana kadar bekle
-    if (exportFmt) {
-      const _pollExport = (attempt) => {
-        if (attempt > 30) return; // 15 sn timeout
-        if (window._lastCalcState) {
-          setTimeout(() => {
-            if (exportFmt === 'pdf') {
-              if (typeof generatePDF === 'function') generatePDF();
-            } else {
-              // Word: PDF butonunu göster, mesaj ver
-              _renderMsg('assistant', '✅ Hesaplama tamamlandı! Sonuçlar sol panelde görünüyor. PDF Oluştur butonuna basarak indirebilirsiniz. (Word desteği yakında)');
-            }
-          }, 500);
-        } else {
-          setTimeout(() => _pollExport(attempt + 1), 500);
-        }
-      };
-      _pollExport(0);
-    }
+    const _pollSummary = (attempt) => {
+      if (attempt > 30) return;
+      if (_lastCalcState) {
+        _agentShowCalcSummary(_lastCalcState, window._pendingExportFmt);
+      } else {
+        setTimeout(() => _pollSummary(attempt + 1), 500);
+      }
+    };
+    _pollSummary(0);
   }, 800);
+}
+
+function _agentShowCalcSummary(state, fmt) {
+  const signal = state.combinedSignal || '';
+  const hCodes = (state.allH || []).filter(c => c.startsWith('H'));
+  const signalTr = signal === 'Danger' ? '🔴 TEHLİKE' : signal === 'Warning' ? '🟡 DİKKAT' : signal === 'None' ? '✅ Tehlikeli Değil' : '—';
+
+  // CLP sınıflarını topla
+  const clp = state.clp || {};
+  const classes = [];
+  Object.entries(clp).forEach(([eng, val]) => {
+    if (val && val.category) classes.push(`${eng} ${val.category}`);
+  });
+
+  let html = `📊 **Sınıflandırma Sonuçları**\n\n`;
+  html += `**Sinyal Kelimesi:** ${signalTr}\n\n`;
+  if (hCodes.length) html += `**H Kodları:** ${hCodes.join(', ')}\n\n`;
+  if (classes.length) html += `**CLP Sınıfları:** ${classes.slice(0,6).join(' | ')}\n\n`;
+
+  html += `---\nSonuçlar doğru görünüyor mu? **"Evet"** yazarsanız PDF oluşturma ekranı açılacak — orada **SDS Oluştur →** butonuna basın.`;
+
+  _renderMsg('assistant', html);
+  window._pendingExportConfirm = true;
+}
+
+function _agentTryExport(text) {
+  if (!window._pendingExportConfirm) return false;
+  const t = text.trim().toLowerCase();
+  const yes = ['evet', 'yes', 'tamam', 'ok', 'pdf', 'word', 'docx', 'indir', 'oluştur', 'onayla', 'onaylıyorum'];
+  if (!yes.some(k => t.includes(k))) return false;
+  window._pendingExportConfirm = false;
+  const fmt = t.includes('word') || t.includes('docx') ? 'docx' : (window._pendingExportFmt || 'pdf');
+  if (fmt === 'pdf') {
+    if (typeof generatePDF === 'function') generatePDF();
+  } else {
+    _renderMsg('assistant', '✅ Hesaplama tamamlandı! Sol paneldeki **PDF Oluştur** butonuna basarak indirebilirsiniz. (Word desteği yakında)');
+  }
+  return true;
 }
 
 function _renderMsg(role, content) {

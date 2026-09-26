@@ -121877,5 +121877,147 @@
       "chronic": 100
     },
     "ate": {}
+  },
+  "7789-21-1-AQ": {
+    "index_no": "016-019-00-2",
+    "names": [
+      "Oleum ... % SO3",
+      "Fuming sulfürik asit ... % SO3"
+    ],
+    "name_en": "oleum ... % SO3",
+    "ec_no": "",
+    "cas": "7789-21-1",
+    "synonyms": [],
+    "lang": "tr",
+    "notes": [
+      "B"
+    ],
+    "form": "solution",
+    "euh_codes": [],
+    "classification": [
+      {
+        "class": "Cilt Aşnd. 1A",
+        "h_code": "H314"
+      },
+      {
+        "class": "BHOT Tek Mrz. 3",
+        "h_code": "H335"
+      }
+    ],
+    "scl_limits": [],
+    "m_factors": {},
+    "ate": {}
+  },
+  "10035-10-6-AQ": {
+    "index_no": "035-002-01-8",
+    "names": [
+      "Hidrobromik asit ... %"
+    ],
+    "name_en": "hydrobromic acid ... %",
+    "ec_no": "",
+    "cas": "10035-10-6",
+    "synonyms": [],
+    "lang": "tr",
+    "notes": [
+      "B"
+    ],
+    "form": "solution",
+    "euh_codes": [],
+    "classification": [
+      {
+        "class": "Cilt Aşnd. 1B",
+        "h_code": "H314"
+      },
+      {
+        "class": "BHOT Tek Mrz. 3",
+        "h_code": "H335"
+      }
+    ],
+    "scl_limits": [
+      {
+        "h_code": "H314",
+        "class": "Cilt Asnd. 1B",
+        "op": ">=",
+        "min": 40.0,
+        "max": null,
+        "unit": "%"
+      },
+      {
+        "h_code": "H315",
+        "class": "Cilt Tah. 2",
+        "op": "range",
+        "min": 10.0,
+        "max": 40.0,
+        "unit": "%"
+      },
+      {
+        "h_code": "H319",
+        "class": "Göz Tah. 2",
+        "op": "range",
+        "min": 10.0,
+        "max": 40.0,
+        "unit": "%"
+      },
+      {
+        "h_code": "H335",
+        "class": "BHOT Tek Mrz. 3",
+        "op": ">=",
+        "min": 10.0,
+        "max": null,
+        "unit": "%"
+      }
+    ],
+    "m_factors": {},
+    "ate": {}
+  },
+  "10034-85-2-AQ": {
+    "index_no": "053-002-01-6",
+    "names": [
+      "Hidroiyodik asit ... %"
+    ],
+    "name_en": "hydriodic acid ... %",
+    "ec_no": "",
+    "cas": "10034-85-2",
+    "synonyms": [],
+    "lang": "tr",
+    "notes": [
+      "B"
+    ],
+    "form": "solution",
+    "euh_codes": [],
+    "classification": [
+      {
+        "class": "Cilt Aşnd. 1B",
+        "h_code": "H314"
+      }
+    ],
+    "scl_limits": [
+      {
+        "h_code": "H314",
+        "class": "Cilt Asnd. 1B",
+        "op": ">=",
+        "min": 25.0,
+        "max": null,
+        "unit": "%"
+      },
+      {
+        "h_code": "H315",
+        "class": "Cilt Tah. 2",
+        "op": "range",
+        "min": 10.0,
+        "max": 25.0,
+        "unit": "%"
+      },
+      {
+        "h_code": "H319",
+        "class": "Göz Tah. 2",
+        "op": "range",
+        "min": 10.0,
+        "max": 25.0,
+        "unit": "%"
+      }
+    ],
+    "m_factors": {},
+    "ate": {}
   }
 }

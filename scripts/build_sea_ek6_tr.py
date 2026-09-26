@@ -237,6 +237,7 @@ def parse(xml_str: str) -> dict:
 
     rows = tables[0].findall('w:tr', NS)
     db   = {}
+    _last_cas = None  # Not B çözelti kayıtları için bir önceki CAS'ı hatırla
 
     for row in rows[2:]:
         cells = row.findall('w:tc', NS)
@@ -263,17 +264,23 @@ def parse(xml_str: str) -> dict:
         else:
             continue
 
+        notes = _parse_notes(notes_raw)
+
+        # Not B çözelti kayıtları: CAS = "-", bir önceki maddenin CAS + "-AQ" kullan
         if not cas_raw or cas_raw == '-':
-            continue
+            if 'B' in notes and _last_cas:
+                primary_cas = _last_cas + '-AQ'
+                synonyms    = []
+            else:
+                continue
+        else:
+            cas_list = _parse_cas_raw(cas_raw)
+            if not cas_list:
+                continue
+            primary_cas = cas_list[0]
+            synonyms    = cas_list[1:]
+            _last_cas   = primary_cas
 
-        cas_list = _parse_cas_raw(cas_raw)
-        if not cas_list:
-            continue
-
-        primary_cas = cas_list[0]
-        synonyms    = cas_list[1:]
-
-        notes          = _parse_notes(notes_raw)
         euh_codes      = re.findall(r'EUH\d+\w*', euh_raw)
         classification = _parse_classification(class_raw, hcode_raw)
         scl_limits, m_factors, ate = _parse_scl(scl_raw)

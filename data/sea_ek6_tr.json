@@ -120495,6 +120495,22 @@
         "min": 10.0,
         "max": 25.0,
         "unit": "%"
+      },
+      {
+        "h_code": "H319",
+        "class": "Göz Tah. 2",
+        "op": "range",
+        "min": 10.0,
+        "max": 25.0,
+        "unit": "%"
+      },
+      {
+        "h_code": "H335",
+        "class": "BHOT Tek Mrz. 3",
+        "op": ">=",
+        "min": 10.0,
+        "max": null,
+        "unit": "%"
       }
     ],
     "m_factors": {},

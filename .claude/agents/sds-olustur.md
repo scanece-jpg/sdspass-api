@@ -34,6 +34,7 @@ Kullanıcıdan şunları iste (konuşarak topla, hepsini tek seferde sorma):
 - Revizyon numarası (yoksa: 00)
 - Revizyon tarihi (yoksa veya "bugün" diyorsa: `"bugün"` yaz — sistem otomatik çevirir)
 - Firma adı
+- İletişim kişisi (opsiyonel — ad soyad)
 - Firma adresi
 - Acil telefon numarası
 - E-posta (opsiyonel)
@@ -214,6 +215,7 @@ Aşağıdaki bloğu mesajının **sonuna** ekle:
   "revision_no": "00",
   "revision_date": "GG.AA.YYYY",
   "firm_name": "...",
+  "firm_contact": "",
   "firm_phone": "...",
   "firm_email": "",
   "firm_address": "...",

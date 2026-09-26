@@ -1299,6 +1299,7 @@ function _agentFillForm(p) {
   }
   // Firma
   if (p.firm_name)    { const el = document.getElementById('suppName');    if (el) el.value = p.firm_name; }
+  if (p.firm_contact) { const el = document.getElementById('suppContact'); if (el) el.value = p.firm_contact; }
   if (p.firm_phone)   { const el = document.getElementById('suppPhone');   if (el) el.value = p.firm_phone; }
   if (p.firm_email)   { const el = document.getElementById('suppEmail');   if (el) el.value = p.firm_email; }
   if (p.firm_address) { const el = document.getElementById('suppAddress'); if (el) el.value = p.firm_address; }
@@ -1465,7 +1466,7 @@ function _agentTryExport(text) {
   if (fmt === 'pdf') {
     _agentFillMissingPhys();
     _renderMsg('assistant', '⏳ PDF oluşturuluyor…');
-    setTimeout(() => { if (typeof _doPdfGenerate === 'function') _doPdfGenerate(); }, 300);
+    setTimeout(async () => { if (typeof _doPdfGenerate === 'function') { await _doPdfGenerate(); _renderMsg('assistant', '✅ PDF hazır — indirme başladı.'); } }, 300);
   } else {
     _renderMsg('assistant', '✅ Hesaplama tamamlandı! Sol paneldeki **PDF Oluştur** butonuna basarak indirebilirsiniz. (Word desteği yakında)');
   }

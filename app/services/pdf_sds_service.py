@@ -719,7 +719,11 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     # US_EN — OSHA HazCom format uyarlaması
     is_us = lang == 'US_EN'
     product_name = product.get('name', 'Product Name' if is_us else 'Ürün Adı')
-    rev_date = rev.get('date', datetime.now().strftime(L.get('date_format', '%d.%m.%Y')))
+    _raw_date = rev.get('date', '')
+    if not _raw_date or _raw_date.strip().lower() in ('bugün', 'bugun', 'today', ''):
+        rev_date = datetime.now().strftime(L.get('date_format', '%d.%m.%Y'))
+    else:
+        rev_date = _raw_date
     rev_no = rev.get('no', '1')
     version = rev.get('version', '1.0')
 

@@ -2957,7 +2957,12 @@ async def _run_agent_tool(tool_name: str, tool_input: dict, base_url: str = "") 
         elif tool_name == "lookup_substance":
             cas  = tool_input["cas"]
             form = tool_input.get("form") or ""
-            return await substance_lookup(cas=cas, form=form or None)
+            full = await substance_lookup(cas=cas, form=form or None)
+            # SCL verisini agent'a gönderme — konsantrasyon analizi motorun işi
+            # scl görünce agent kendi SCL hesabı yapıyor (yasak)
+            if isinstance(full, dict):
+                full.pop("scl", None)
+            return full
 
         elif tool_name == "calculate_clp":
             return await sds_calculate(body=tool_input)

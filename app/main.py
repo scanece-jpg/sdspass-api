@@ -2619,6 +2619,17 @@ _AGENT_TOOLS = [
         }
     },
     {
+        "name": "get_phys_props",
+        "description": "CAS numarasına göre PubChem'den fiziksel özellikler çek: yoğunluk, kaynama noktası, parlama noktası, buhar basıncı, viskozite, çözünürlük. Kullanıcıya sormadan önce bu tool'u çağır.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "cas": {"type": "string", "description": "CAS numarası (örn. 7647-01-0)"}
+            },
+            "required": ["cas"]
+        }
+    },
+    {
         "name": "calculate_clp",
         "description": "Karışım bileşenlerinden CLP sınıflandırması hesapla. H kodları, sinyal, piktogram, P kodları, EUH, ekoloji, STOT, fiziksel tehlike döner.",
         "input_schema": {
@@ -2912,7 +2923,38 @@ def _load_knowledge_into_prompt() -> str:
 async def _run_agent_tool(tool_name: str, tool_input: dict, base_url: str = "") -> dict:
     """Agent tool call'ını HTTP yerine doğrudan Python fonksiyonları ile çalıştır."""
     try:
-        if tool_name == "lookup_substance":
+        if tool_name == "get_phys_props":
+            cas = tool_input["cas"]
+            try:
+                from app.services.pubchem_phys_service import fetch_phys
+                props = await fetch_phys(cas.strip())
+                if not props:
+                    return {"found": False, "cas": cas, "props": {}}
+                # Agent'a anlamlı birimlerle göster
+                result_props = {}
+                if props.get("density") is not None:
+                    result_props["density"] = f"{props['density']} g/cm³"
+                if props.get("boiling_point") is not None:
+                    result_props["boiling_point"] = f"{props['boiling_point']} °C"
+                if props.get("flash_point") is not None:
+                    result_props["flash_point"] = f"{props['flash_point']} °C"
+                elif "flash_point" in props:
+                    result_props["flash_point"] = "Uygulanamaz (yanmaz)"
+                if props.get("vapor_pressure") is not None:
+                    result_props["vapor_pressure"] = f"{props['vapor_pressure']} hPa"
+                if props.get("viscosity") is not None:
+                    result_props["viscosity"] = f"{props['viscosity']} cSt"
+                if props.get("solubility") is not None:
+                    result_props["solubility"] = f"{props['solubility']} mg/L"
+                elif props.get("solubility_text"):
+                    result_props["solubility"] = props["solubility_text"]
+                if props.get("mw") is not None:
+                    result_props["mw"] = f"{props['mw']} g/mol"
+                return {"found": True, "cas": cas, "props": result_props, "raw": props}
+            except Exception as e:
+                return {"found": False, "cas": cas, "props": {}, "error": str(e)}
+
+        elif tool_name == "lookup_substance":
             cas  = tool_input["cas"]
             form = tool_input.get("form") or ""
             return await substance_lookup(cas=cas, form=form or None)
@@ -2945,6 +2987,7 @@ async def _run_agent_tool(tool_name: str, tool_input: dict, base_url: str = "") 
 
 
 _TOOL_PROGRESS = {
+    "get_phys_props":   "🧪 Fiziksel özellikler alınıyor ({cas})…",
     "lookup_substance": "🔍 Madde verisi alınıyor ({cas})…",
     "calculate_clp":    "⚗️ CLP sınıflandırması hesaplanıyor…",
     "detect_adr":       "🚛 ADR taşımacılık sınıfı belirleniyor…",

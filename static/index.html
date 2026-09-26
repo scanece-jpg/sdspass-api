@@ -1269,10 +1269,10 @@ function _agentFillForm(p) {
   // Fiziksel form
   const pformEl = document.getElementById('pform');
   if (pformEl && p.form) {
-    const map = { liquid: 'liquid', solid: 'solid', gas: 'gas' };
-    pformEl.value = map[p.form] || p.form;
+    pformEl.value = p.form;
     if (typeof updatePhysFieldsByForm === 'function') updatePhysFieldsByForm();
   }
+  if (p.usage) { const el = document.getElementById('pusage'); if (el) el.value = p.usage; }
   // Ürün/revizyon
   if (p.product_name) {
     const pn = document.getElementById('productName');
@@ -1486,6 +1486,43 @@ function _renderMsg(role, content) {
   return bubble;
 }
 
+function _renderAgentMsg(text) {
+  // <QUICK_REPLY>["seçenek1","seçenek2"]</QUICK_REPLY> bloğunu yakala
+  const qrMatch = text.match(/<QUICK_REPLY>([\s\S]*?)<\/QUICK_REPLY>/);
+  let options = null;
+  let cleanText = text;
+  if (qrMatch) {
+    try { options = JSON.parse(qrMatch[1].trim()); } catch {}
+    cleanText = text.replace(/<QUICK_REPLY>[\s\S]*?<\/QUICK_REPLY>/, '').trim();
+  }
+  // Mesaj balonunu render et
+  if (cleanText) _renderMsg('assistant', cleanText);
+  // Butonları render et
+  if (options && options.length) {
+    const box = document.getElementById('agent-messages');
+    const wrap = document.createElement('div');
+    wrap.style.cssText = 'display:flex;flex-wrap:wrap;gap:6px;padding:4px 0 8px 0;align-items:flex-start';
+    options.forEach(opt => {
+      const btn = document.createElement('button');
+      btn.textContent = opt;
+      btn.style.cssText = 'padding:5px 12px;border-radius:20px;border:1px solid var(--accent);background:transparent;color:var(--accent);font-size:11px;cursor:pointer;transition:background .15s,color .15s;white-space:nowrap';
+      btn.onmouseover = () => { btn.style.background = 'var(--accent)'; btn.style.color = '#fff'; };
+      btn.onmouseout  = () => { btn.style.background = 'transparent'; btn.style.color = 'var(--accent)'; };
+      btn.onclick = () => {
+        // Tüm butonları devre dışı bırak
+        wrap.querySelectorAll('button').forEach(b => { b.disabled = true; b.style.opacity = '.4'; b.style.cursor = 'default'; });
+        // Seçimi gönder
+        const inp = document.getElementById('agent-input');
+        if (inp) inp.value = opt;
+        agentSend();
+      };
+      wrap.appendChild(btn);
+    });
+    box.appendChild(wrap);
+    box.scrollTop = box.scrollHeight;
+  }
+}
+
 function _renderMsgHTML(html) {
   const box = document.getElementById('agent-messages');
   const wrap = document.createElement('div');
@@ -1579,7 +1616,7 @@ async function _agentCall() {
           _removeTyping();
           const msg = ev.text || '';
           _agentMessages.push({ role: 'assistant', content: msg });
-          _renderMsg('assistant', msg);
+          _renderAgentMsg(msg);
           if (ev.sds_text) _agentSdsText = ev.sds_text;
           if (ev.done) {
             const bar = document.getElementById('agent-export-bar');

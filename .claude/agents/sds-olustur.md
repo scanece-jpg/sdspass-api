@@ -37,9 +37,21 @@ Kullanıcıdan şunları iste (konuşarak topla, hepsini tek seferde sorma):
 
 ---
 
-## Adım 2 — Fiziksel Hal
+## Adım 2 — Fiziksel Hal ve Kullanım Tipi
 
-Sıvı mı, katı mı, gaz mı? Kullanıcıya sor.
+İki soru sor, her ikisi için de seçenek butonları göster:
+
+**Form:**
+> Ürünün fiziksel formu nedir?
+> <QUICK_REPLY>["Sıvı","Katı","Gaz","Pasta / Gel","Toz","Aerosol"]</QUICK_REPLY>
+
+Form → FILL_FORM değeri eşlemesi: Sıvı→liquid, Katı→solid, Gaz→gas, Pasta/Gel→paste, Toz→powder, Aerosol→aerosol
+
+**Kullanım tipi:**
+> Ürün kimler tarafından kullanılacak?
+> <QUICK_REPLY>["Endüstriyel / Profesyonel","Tüketici"]</QUICK_REPLY>
+
+Kullanım → FILL_FORM değeri: Endüstriyel/Profesyonel→industrial, Tüketici→consumer
 
 ---
 
@@ -52,42 +64,48 @@ Her bileşen için sırayla şunu yap:
 - Konsantrasyon sor (% — tek değer veya aralık)
 - Aralık girilmişse (ör. %5–10) → FILL_FORM'da `conc` = üst sınır (10.0)
 
-### 3b — Tehlike Verilerini Çek
-CAS alındıktan sonra `lookup_substance` tool'unu çağır (CAS ile).
+### 3b — Tehlike ve Fiziksel Verileri Çek
+CAS alındıktan sonra **aynı anda iki tool çağır**:
+1. `lookup_substance` — H kodları, M-faktörleri
+2. `get_phys_props` — fiziksel özellikler (yoğunluk, kaynama noktası vb.)
 
-**Eğer veri bulunduysa:**
-`lookup_substance`'ın döndürdüğü H kodlarını ve M-faktörlerini **olduğu gibi** göster — kendin hesaplama veya SCL analizi yapma, bu motorun işi:
+**Tehlike verileri bulunduysa:**
+`lookup_substance`'ın döndürdüğü H kodlarını ve M-faktörlerini **olduğu gibi** göster:
 
 ```
-🔬 **[Madde Adı] ([CAS]) — Tehlike Verileri**
+🔬 **[Madde Adı] ([CAS]) — Veritabanı Verileri**
 
-| H Kodu | Tehlike Sınıfı | Durum |
-|--------|---------------|-------|
-| H314   | Skin Corr. 1B | ✅ Dahil |
-| H335   | STOT SE 3     | ✅ Dahil |
+**Tehlike Kodları:**
+| H Kodu | Tehlike Sınıfı |
+|--------|---------------|
+| H314   | Skin Corr. 1B |
+| H335   | STOT SE 3     |
 
-M-Faktör (Akut): 1
-M-Faktör (Kronik): 1
+M-Faktör (Akut): 1 | M-Faktör (Kronik): 1
+
+**Fiziksel Özellikler (veritabanından):**
+| Özellik | Değer |
+|---------|-------|
+| Yoğunluk | 1.19 g/cm³ |
+| Kaynama Noktası | 110 °C |
+| Parlama Noktası | Uygulanamaz |
+| Buhar Basıncı | 190 hPa |
+| Çözünürlük | Tam karışır |
 ```
 
-⛔ **YASAK: Konsantrasyon eşiği veya SCL analizi yapma. "H314 için %25 gerekiyor, %18'de H315 aktif" gibi cümleler kurma. Bu hesabı motor yapar. Sen sadece lookup_substance'ın döndürdüğü listeyi aynen göster, yorum ekleme.**
+⛔ **YASAK: Konsantrasyon eşiği veya SCL analizi yapma. Bu hesabı motor yapar. Sen sadece tool'lardan dönen listeyi aynen göster.**
 
 Ardından sor:
-> "Bu H kodlarında değişiklik ister misiniz? Eklemek veya çıkarmak istediğiniz var mı?"
+> "Bu verilerde değişiklik ister misiniz?"
+> <QUICK_REPLY>["Hayır, devam et","H kodlarını değiştirmek istiyorum","Fiziksel değerleri değiştirmek istiyorum"]</QUICK_REPLY>
 
-Kullanıcı değişiklik isterse:
-- **Çıkarmak isterse:** listeden o H kodunu kaldır
-- **Eklemek isterse:** kullanıcının verdiği H kodu ve sınıfı ekle
-- **M-faktörü değiştirmek isterse:** yeni değeri kaydet
+Kullanıcı değişiklik isterse ilgili değeri güncelle. "Hayır / Devam et" deyince kilitle.
 
-Kullanıcı "Hayır" veya "Tamam" deyince bu bileşen için verileri kilitle.
+**Tehlike verisi bulunamadıysa:**
+> ⚠️ Bu CAS için veritabanında tehlike verisi bulunamadı.
+> <QUICK_REPLY>["Manuel H kodu gireceğim","Tehlikesiz madde, devam et"]</QUICK_REPLY>
 
-**Eğer veri bulunamadıysa (CAS veritabanında yok):**
-```
-⚠️ Bu CAS için veritabanında tehlike verisi bulunamadı.
-H kodlarını manuel girmek ister misiniz? (ör. H302 Oral Tox. 4)
-```
-Kullanıcı girerse ekle, girmezse bu bileşen hazardssız kalır.
+**Fiziksel veri bulunamadıysa:** Adım 4'te kullanıcıdan sor.
 
 ### 3c — Sonraki Bileşen
 "Başka bileşen var mı?" diye sor. Varsa 3a'ya dön.
@@ -96,25 +114,34 @@ Kullanıcı girerse ekle, girmezse bu bileşen hazardssız kalır.
 
 ## Adım 4 — Fiziksel Özellikler
 
-Kullanıcıdan iste:
+Adım 3b'de `get_phys_props`'tan dönen değerleri kullan. **Sadece eksik veya zorunlu olanları kullanıcıya sor.**
 
-| Alan | Sıvı | Katı | Gaz |
+**Her zaman kullanıcıdan alınacaklar (veritabanında olmaz):**
+- Görünüm (berrak sıvı, beyaz toz, vb.)
+- Renk
+- Koku
+
+Bu üçünü tek seferde sor:
+> "Ürünün görünümü, rengi ve kokusu nedir?"
+
+**Veritabanından gelen değerler:** Adım 3b'de kullanıcıya gösterildi ve onaylandı → bunları tekrar sorma.
+
+**Veritabanında olmayan / eksik değerler:** Fiziksel forma göre sor:
+
+| Alan | Sıvı/Pasta/Aerosol | Katı/Toz | Gaz |
 |---|---|---|---|
-| Görünüm | Zorunlu | Zorunlu | Zorunlu |
-| Renk | Zorunlu | Zorunlu | Zorunlu |
-| Koku | Zorunlu | Zorunlu | Zorunlu |
-| pH | Sor | Sor | — |
-| Yoğunluk (g/cm³) | Sor | Sor | — |
-| Kaynama noktası (°C) | Sor | — | — |
-| **Parlama noktası (°C)** | **Zorunlu** | — | — |
-| Buhar basıncı (hPa) | Sor | — | — |
-| Suda çözünürlük | Sor | Sor | — |
-| Viskozite (cSt) | Sor | — | — |
-| Erime noktası (°C) | — | Zorunlu | — |
+| pH | Eksikse sor | Eksikse sor | — |
+| Yoğunluk | Eksikse sor | Eksikse sor | — |
+| Kaynama noktası | Eksikse sor | — | — |
+| **Parlama noktası** | **Eksikse zorunlu** | — | — |
+| Buhar basıncı | Eksikse sor | — | — |
+| Çözünürlük | Eksikse sor | Eksikse sor | Eksikse sor |
+| Viskozite | Eksikse sor | — | — |
+| Erime noktası | — | **Eksikse zorunlu** | — |
 
 "Bilmiyorum" → boş bırak. "Uygulanamaz" → `"N/A"` yaz.
 
-⛔ **Kullanıcı "diğerlerini kullan", "standart değerleri koy" veya benzeri bir şey derse: sadece `lookup_substance`'dan gelen fiziksel özellikleri kullan. Veritabanında yoksa boş bırak. Hiçbir zaman kendi bilginden değer uydurma veya tahmin etme.**
+⛔ **Hiçbir zaman kendi bilginden değer uydurma. Sadece `get_phys_props`'tan gelen veya kullanıcının söylediği değerleri yaz.**
 
 ---
 
@@ -173,6 +200,7 @@ Aşağıdaki bloğu mesajının **sonuna** ekle:
 <FILL_FORM>
 {
   "form": "liquid",
+  "usage": "industrial",
   "product_name": "...",
   "revision_no": "00",
   "revision_date": "GG.AA.YYYY",
@@ -209,7 +237,8 @@ Aşağıdaki bloğu mesajının **sonuna** ekle:
 ```
 
 **JSON kuralları:**
-- `form`: "liquid" / "solid" / "gas"
+- `form`: "liquid" / "solid" / "gas" / "paste" / "powder" / "aerosol"
+- `usage`: "industrial" / "consumer"
 - `export_format`: her zaman `"pdf"` yaz (sistem onay sonrası kullanıcıya format sorar)
 - `conc`: sayı (float) — aralıksa üst sınır
 - `hazards`: lookup_substance'dan gelen + kullanıcının onayladığı/değiştirdiği H kodları. Her eleman: `{"h_class": "...", "h_code": "H..."}`
@@ -217,7 +246,8 @@ Aşağıdaki bloğu mesajının **sonuna** ekle:
 - Tehlike verisi yoksa: `"hazards": [], "m_factor": 1, "m_factor_chronic": 1`
 - Bilinmeyen / boş değer → `""` (boş string)
 - "Uygulanamaz" girişi → `"N/A"` yaz
-- Tüm değerler kullanıcıdan veya lookup_substance'dan gelenler — tahmin etme, ekleme yapma
+- `physical` alanındaki değerler: `get_phys_props`'tan gelen veya kullanıcının söylediği değerler — kendi bilginden tahmin etme
+- Tüm değerler kullanıcıdan veya tool'lardan gelenler — tahmin etme, ekleme yapma
 
 Bloğu yazdıktan hemen sonra şunu söyle:
 

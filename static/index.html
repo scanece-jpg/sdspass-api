@@ -1293,9 +1293,9 @@ async function agentAttachSds(input) {
     }
 
     const compLines = comps.map(c => {
-      const conc = c.conc_min != null && c.conc_max != null
-        ? `%${c.conc_min}–${c.conc_max}`
-        : c.conc_min != null ? `%${c.conc_min}` : '';
+      const conc = c.concMin != null && c.concMax != null
+        ? `%${c.concMin}–${c.concMax}`
+        : c.concMin != null ? `%${c.concMin}` : '';
       return `- ${c.name || ''}${c.cas ? ` (CAS ${c.cas})` : ''}${conc ? ': ' + conc : ''}`;
     }).join('\n');
 

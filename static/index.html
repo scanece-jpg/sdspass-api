@@ -1439,6 +1439,22 @@ function _agentShowCalcSummary(state) {
   window._pendingExportConfirm = true;
 }
 
+function _agentFillMissingPhys() {
+  const form = document.getElementById('pform')?.value || 'liquid';
+  const isLiquid = ['liquid','paste','aerosol'].includes(form);
+  const isSolid  = ['solid','powder'].includes(form);
+  const naIfEmpty = (id) => {
+    const el = document.getElementById(id);
+    if (el && !el.value?.trim()) el.value = 'N/A';
+  };
+  naIfEmpty('tf_ph');
+  naIfEmpty('tf_density');
+  naIfEmpty('tf_sol');
+  if (form !== 'gas') naIfEmpty('tf_bp');
+  if (isLiquid) { naIfEmpty('tf_fp'); naIfEmpty('tf_visc'); }
+  if (isSolid)  { naIfEmpty('tf_mp'); }
+}
+
 function _agentTryExport(text) {
   if (!window._pendingExportConfirm) return false;
   const t = text.trim().toLowerCase();
@@ -1447,6 +1463,7 @@ function _agentTryExport(text) {
   window._pendingExportConfirm = false;
   const fmt = t.includes('word') || t.includes('docx') ? 'docx' : (window._pendingExportFmt || 'pdf');
   if (fmt === 'pdf') {
+    _agentFillMissingPhys();
     _renderMsg('assistant', '⏳ PDF oluşturuluyor…');
     setTimeout(() => { if (typeof _doPdfGenerate === 'function') _doPdfGenerate(); }, 300);
   } else {

@@ -144,7 +144,7 @@ Bu üçünü tek seferde sor:
 
 "Bilmiyorum" → boş bırak. "Uygulanamaz" → `"N/A"` yaz.
 
-⛔ **Hiçbir zaman kendi bilginden değer uydurma. Sadece `get_phys_props`'tan gelen veya kullanıcının söylediği değerleri yaz.**
+⛔ **Hiçbir zaman kendi bilginden değer uydurma veya seçenek olarak sunma. Sadece `get_phys_props`'tan gelen veya kullanıcının bizzat söylediği değerleri yaz. Veritabanında olmayan bir değer için seçenek sunarken kendi tahminin olan değerleri ekleme — sadece "Bilmiyorum" ve "Değer gireceğim" seçeneklerini sun.**
 
 ---
 

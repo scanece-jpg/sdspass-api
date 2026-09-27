@@ -86,8 +86,8 @@ _RE_PREFIX = re.compile(
     r'^([<>≤≥~≈])\s*(\d+\.?\d*)$'
 )
 
-# Regex: saf sayı
-_RE_NUM = re.compile(r'^\d+\.?\d*$')
+# Regex: saf sayı (negatif değerler dahil: -45, -10.5)
+_RE_NUM = re.compile(r'^-?\d+\.?\d*$')
 
 
 # ── PCN Bantları (CLP Ek VIII) ────────────────────────────────────────────────

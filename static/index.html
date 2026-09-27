@@ -1281,7 +1281,11 @@ async function agentAttachSds(input) {
     const fd = new FormData();
     fd.append('file', file);
     const res = await fetch(`${API_BASE}/sds/parse-supplier`, { method: 'POST', body: fd });
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    if (!res.ok) {
+      let detail = `HTTP ${res.status}`;
+      try { const e = await res.json(); if (e.detail) detail = e.detail; } catch {}
+      throw new Error(detail);
+    }
     const data = await res.json();
 
     _removeTyping();

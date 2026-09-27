@@ -793,7 +793,6 @@ async def sds_review(data: dict = Body(...)):
             resp = client.messages.create(
                 model="claude-sonnet-4-6",
                 max_tokens=4096,
-                temperature=0,
                 system=system_prompt,
                 tools=_tools,
                 messages=messages,
@@ -906,7 +905,6 @@ async def sds_chat(data: dict = Body(...)):
     resp = client.messages.create(
         model="claude-sonnet-4-6",
         max_tokens=1024,
-        temperature=0,
         system=system,
         messages=messages,
     )

@@ -970,7 +970,6 @@ def _claude_turn(
         resp = client.messages.create(
             model="claude-sonnet-4-6",
             max_tokens=2048,
-            temperature=0,
             system=system,
             tools=tools or _anthropic.NOT_GIVEN,
             messages=messages,

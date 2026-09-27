@@ -1920,7 +1920,7 @@ def _cls_flam_liq(fp: float, bp: Optional[float]) -> Optional[Dict]:
     return None
 
 
-def _calc_flam_liq(comps: List[Dict], user_fp=None) -> Dict:
+def _calc_flam_liq(comps: List[Dict], user_fp=None, user_bp=None) -> Dict:
     DECLARED_FALLBACK = {
         'H224': {'fp': -20, 'bp': 25},
         'H225': {'fp':  15, 'bp': 80},
@@ -1937,7 +1937,7 @@ def _calc_flam_liq(comps: List[Dict], user_fp=None) -> Dict:
             if bp != 'MISSING' and bp is not None and w >= 1:
                 if theo_bp is None or bp < theo_bp:
                     theo_bp = bp
-        effective_bp = theo_bp if theo_bp is not None else (100 if user_fp < 23 else None)
+        effective_bp = theo_bp if theo_bp is not None else (user_bp if user_bp is not None else (100 if user_fp < 23 else None))
         return {'result': _cls_flam_liq(user_fp, effective_bp),
                 'source': f'Kullanıcı girişi ({user_fp}°C)', 'fp': user_fp}
 
@@ -2172,7 +2172,7 @@ def _calc_flam_gas(comps: List[Dict]) -> Dict:
 # ── ANA HESAP FONKSİYONU ─────────────────────────────────────────────────────
 
 def calculate(comps: List[Dict], form: str = 'liquid',
-              user_fp=None, test_data: Dict = None,
+              user_fp=None, user_bp=None, test_data: Dict = None,
               form_sub: str = '') -> Dict:
     """
     Fiziksel tehlike sınıflandırması + teorik fiziksel özellikler hesapla.
@@ -2193,7 +2193,7 @@ def calculate(comps: List[Dict], form: str = 'liquid',
 
     fl = {'result': None, 'source': None, 'fp': None}
     if form in ('liquid', 'paste'):
-        fl = _calc_flam_liq(comps, user_fp)
+        fl = _calc_flam_liq(comps, user_fp, user_bp=user_bp)
         if fl.get('water_dilution_warning'):
             warnings.append(fl['water_dilution_warning'])
         if fl['result']:

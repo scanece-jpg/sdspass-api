@@ -317,11 +317,15 @@ async def generate_pdf(data: dict = Body(...)):
                     try: _user_fp = float(_fp_raw)
                     except: pass
 
+            # Kaynama noktası — BP_DB'de CAS yoksa kullanıcı girişi fallback olarak kullanılır
+            _user_bp = _phys_calc_val(_parsed_phys, 'boiling_point')
+
             # pH — clp_service kendi parse'ını yapıyor (aralık desteği mevcut)
             # ham string geçirilir; clp_service _parse_ph_range ile lo/hi ayırır
             _ph_raw = phys_in.get('ph') or None
             _clp_res  = _clp_calc(components, mixture_ph=_ph_raw, mixture_form=_form_val)
             _phys_res = _phys_calc(components, form=_form_val, user_fp=_user_fp,
+                                   user_bp=_user_bp,
                                    form_sub=product.get('form_sub') or '')
             _stot_res = _stot_calc(components)
 
@@ -1551,10 +1555,16 @@ async def sds_calculate(body: dict = Body(...)):
         try: user_fp = float(user_fp_raw)
         except: pass
 
+    user_bp = None
+    user_bp_raw = body.get('user_bp') or body.get('boiling_point')
+    if user_bp_raw is not None:
+        try: user_bp = float(user_bp_raw)
+        except: pass
+
     try:
         # ── 1. Fiziksel tehlikeler + teorik özellikler ────────────────────────
-        phys_result = phys_calculate(comps, form=form, user_fp=user_fp, test_data=test_data,
-                                     form_sub=form_sub)
+        phys_result = phys_calculate(comps, form=form, user_fp=user_fp, user_bp=user_bp,
+                                     test_data=test_data, form_sub=form_sub)
 
         # ── 2. CLP karışım hesabı (cut-off tablosu + ATE) ────────────────────
         clp_result = classify_mixture_clp(comps, mixture_ph=mixture_ph, mixture_form=form)

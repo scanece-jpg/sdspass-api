@@ -433,16 +433,21 @@ async def generate_pdf(data: dict = Body(...)):
                         'cutoff_used': p.get('cutoff_used',''),
                     })
 
-            # CLP Ek-I §2.6.4.2: ölçülen FP varsa physical_engine kazanır
-            # py_clp_passed temizle; h_codes/all_h_codes reconciliation bloğunda güncellenir
-            if _user_fp is not None:
+            # CLP Ek-I §2.6.4.2: physical_engine'den yanıcı sıvı H kodu al.
+            # ⚠️  İKİZ KOD NOTU: Yanıcılık sınıflandırması üç yerde birlikte çalışır:
+            #   1. static/index.html  — kullanıcıya gösterilen ön görüntü (flash_point'ten direkt)
+            #   2. physical_engine.py — PDF için hem ölçülen FP hem bileşen FP toplamsal hesabı
+            #   3. main.py (burada)   — physical_engine sonucunu h_codes + transport'a aktarır
+            #   Birini değiştirince diğerlerini de kontrol et.
+            _auth_flam_h = next(
+                (r.get('h') for r in _phys_res.get('results', [])
+                 if r.get('type') == 'flam_liq'),
+                None
+            )
+            if _user_fp is not None and _auth_flam_h is not None:
+                # Ölçülen FP varsa CLP kümülatif yanıcı kodunu yoksay; phys_engine kazanır
                 _cp   = [e for e in _cp if e['h_code'] not in _FLAM_LIQ_H]
                 _seen -= _FLAM_LIQ_H
-                _auth_flam_h = next(
-                    (r.get('h') for r in _phys_res.get('results', [])
-                     if r.get('type') == 'flam_liq'),
-                    None
-                )
 
             for r in _phys_res.get('results', []):
                 hc = (r.get('h') or r.get('h_code') or '').replace('*','').strip()[:4]
@@ -536,7 +541,7 @@ async def generate_pdf(data: dict = Body(...)):
             except Exception:
                 pass
             _final_cls_h = list(dict.fromkeys(
-                list(_clp_res.get('h_codes', [])) + _eco_h_merge
+                list(_clp_res.get('h_codes', [])) + _eco_h_merge + _phys_h_tr
             ))
             py_transport = _transport_calc(
                 h_codes=_final_cls_h,

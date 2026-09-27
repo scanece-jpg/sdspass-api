@@ -408,6 +408,20 @@ def _dispatch_collection_tool(name: str, inputs: dict, session: dict) -> tuple[s
     elif name == "submit_for_calculation":
         # Faz geçiş sinyali — session'a işaretle, döngü yakalar
         session = dict(session)
+        # ⚠️  AI'a sadece düz metin döndürüldüğünden bileşenlerde hazards boş gelebilir.
+        # lookup_substance session'da _last_lookups olarak tam verileri sakladı —
+        # CAS eşleştirmesiyle zenginleştir.
+        _lookups_by_cas = {r["cas"]: r for r in session.get("_last_lookups", [])}
+        for _c in (inputs.get("components") or []):
+            _cas = (_c.get("cas") or "").strip()
+            if _cas and _cas in _lookups_by_cas:
+                _lk = _lookups_by_cas[_cas]
+                if not _c.get("hazards"):
+                    _c["hazards"] = _lk.get("hazards", [])
+                if not _c.get("m_factors"):
+                    _c["m_factors"] = _lk.get("m_factors", {})
+                if not _c.get("ate"):
+                    _c["ate"] = _lk.get("ate", {})
         session["_submit"] = inputs   # product_name, components, phys_props, product_meta
         result = {"ok": True, "message": "Hesaplama başlatılıyor..."}
     else:

@@ -832,6 +832,53 @@ async def lookup_echa_api(cas: str) -> dict | None:
 # Ana lookup
 # ---------------------------------------------------------------------------
 
+async def _supplement_sea_with_echa(cas: str, sea_result: dict) -> dict:
+    """
+    SEA Ek-6 / Annex VI kaydını ECHA C&L öz-sınıflandırması ile tamamla.
+    Harmonize olmayan tehlike sınıfları için ECHA konsensüs H-kodlarını ekler.
+    SEA Ek-6 kayıtlarına dokunulmaz — sadece fazladan kodlar eklenir.
+    Dönen sonuçta 'classification_sources' ve 'echa_supplement' alanları bulunur
+    (arayüz bilgilendirmesi için).
+    """
+    echa = lookup_archive(cas)
+    if not echa:
+        echa = await lookup_echa_api(cas)
+
+    if not echa or not echa.get('h_codes'):
+        return sea_result
+
+    sea_h_set = set(sea_result.get('h_codes', []))
+    extra_h = [h for h in echa.get('h_codes', []) if h not in sea_h_set]
+
+    if not extra_h:
+        return sea_result
+
+    classification_sources = {h: 'SEA Ek-6' for h in sea_result.get('h_codes', [])}
+    for h in extra_h:
+        classification_sources[h] = 'ECHA C&L öz-sınıflandırma'
+
+    sea_cls = sea_result.get('hazard_classes', [])
+    extra_cls = []
+    for h in extra_h:
+        cls = _H_TO_CLASS.get(h, '')
+        if cls and cls not in sea_cls and cls not in extra_cls:
+            extra_cls.append(cls)
+
+    sea_pict = sea_result.get('pictograms', [])
+    extra_pict = [p for p in echa.get('pictograms', []) if p not in sea_pict]
+
+    result = dict(sea_result)
+    result['h_codes']                = sea_result['h_codes'] + extra_h
+    result['hazard_classes']         = sea_cls + extra_cls
+    result['pictograms']             = sea_pict + extra_pict
+    result['classification_sources'] = classification_sources
+    result['echa_supplement']        = extra_h
+    result['echa_supplement_source'] = echa.get('source', 'ECHA C&L')
+
+    print(f'[sea_supplement] {cas}: ECHA\'dan {len(extra_h)} ek H-kodu: {extra_h}')
+    return result
+
+
 async def lookup_substance(cas: str) -> dict:
     """
     TR SDS Arama Hiyerarşisi:
@@ -851,13 +898,13 @@ async def lookup_substance(cas: str) -> dict:
 
     local = lookup_local(cas)
 
-    # ── Sıra 1: SEA Ek-6 — MUTLAK, tartışma biter ───────────────────────────
+    # ── Sıra 1: SEA Ek-6 — MUTLAK, harmonize H-kodlar; ECHA ile supplement edilir ──
     if local and local.get('source_priority') == 1:
-        return _enrich(local)
+        return await _supplement_sea_with_echa(cas, _enrich(local))
 
-    # ── Sıra 2: AB CLP Annex VI ───────────────────────────────────────────────
+    # ── Sıra 2: AB CLP Annex VI — aynı şekilde ECHA ile supplement edilir ──────────
     if local and local.get('source_priority') == 2:
-        return _enrich(local)
+        return await _supplement_sea_with_echa(cas, _enrich(local))
 
     # ── Sıra 3: Tedarikçi/Kullanıcı girişi (manuel onaylı) ──────────────────
     if local and local.get('source_priority') == 4:

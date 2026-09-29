@@ -692,6 +692,8 @@ def lookup_substance(cas: str, form: str = '',
                                   index_no=result.get('index_no',''))
             if db_entry and db_entry.get('ate'):
                 result['ate'] = db_entry['ate']
+        # ECHA C&L öz-sınıflandırmasından ek H-kodları (harmonize edilmemiş tehlikeler)
+        result = _supplement_from_echa_cl(cas, result)
         return result
 
     # ── Katman 2: CLP Annex VI / substance_db (ECHA ATP22) ──────────────────
@@ -848,6 +850,68 @@ def _save_api_result(directory: str, cas: str, api_result: dict, source_label: s
     except Exception as e:
         print(f'[CL CACHE] {cas} kayıt hatası ({file_path}): {e}')
         return False
+
+
+def _supplement_from_echa_cl(cas: str, sea_result: dict) -> dict:
+    """
+    SEA Ek-6 sonucunu ECHA C&L dosya önbelleğinden supplement et.
+    Harmonize edilmemiş tehlike sınıfları için ekstra H-kodları merge eder.
+    SEA Ek-6 H-kodlarına dokunmaz.
+    ECHA dosyası yoksa arka planda çekimi tetikler (bir sonraki istekte hazır olur).
+    """
+    echa_entry = _read_cl_file(_ECHA_CL_DIR, cas)
+    if not echa_entry:
+        _fetch_echa_background(cas)
+        return sea_result
+
+    echa_legacy = _cl_to_legacy(echa_entry, 3, 'ECHA C&L')
+    sea_h_set = {h['h_code'] for h in sea_result.get('hazards', []) if h.get('h_code')}
+    extra_hazards = [h for h in echa_legacy.get('hazards', [])
+                     if h.get('h_code') and h['h_code'] not in sea_h_set]
+
+    if not extra_hazards:
+        return sea_result
+
+    result = dict(sea_result)
+    result['hazards'] = sea_result.get('hazards', []) + extra_hazards
+
+    sea_pict = set(sea_result.get('pictograms', []))
+    extra_pict = [p for p in echa_legacy.get('pictograms', []) if p not in sea_pict]
+    if extra_pict:
+        result['pictograms'] = list(sea_result.get('pictograms', [])) + extra_pict
+
+    result['echa_supplement']        = [h['h_code'] for h in extra_hazards]
+    result['echa_supplement_source'] = f'ECHA C&L ({echa_entry.get("atp", "?")})'
+    result['classification_sources'] = {
+        h['h_code']: 'SEA Ek-6'
+        for h in sea_result.get('hazards', []) if h.get('h_code')
+    }
+    for h in extra_hazards:
+        result['classification_sources'][h['h_code']] = 'ECHA C&L öz-sınıflandırma'
+
+    print(f'[sea_supplement] {cas}: ECHA dosyasından {len(extra_hazards)} ek H-kodu: '
+          f'{[h["h_code"] for h in extra_hazards]}')
+    return result
+
+
+def _fetch_echa_background(cas: str):
+    """SEA'da bulunan ama ECHA dosyası olmayan maddeyi arka planda ECHA C&L'den çek."""
+    import threading
+
+    def _run():
+        import asyncio as _asyncio
+        from app.services.echa_service import lookup_echa_api as _lei
+        loop = _asyncio.new_event_loop()
+        try:
+            _asyncio.set_event_loop(loop)
+            loop.run_until_complete(_lei(cas))
+            print(f'[echa_bg] {cas}: ECHA C&L verisi çekildi ve önbelleğe kaydedildi.')
+        except Exception as e:
+            print(f'[echa_bg] {cas}: çekim hatası — {e}')
+        finally:
+            loop.close()
+
+    threading.Thread(target=_run, daemon=True).start()
 
 
 def save_echa_cl_substance(cas: str, echa_result: dict) -> bool:

@@ -132,6 +132,9 @@ _SEED_ENTRIES: dict = {
         {'min_conc': 25,  'max_conc': 100, 'un': 'UN1198', 'pg': 'III'},
         {'min_conc': 0,   'max_conc': 25,  'un': 'UN2209', 'pg': 'III'},
     ],
+
+    # ── Petrol ürünleri ───────────────────────────────────────────────────────
+    '86290-81-5': {'un': 'UN1203', 'pg': 'II'},   # Benzin (Naphtha petroleum hydrotreated light)
 }
 
 

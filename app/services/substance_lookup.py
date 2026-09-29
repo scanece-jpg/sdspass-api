@@ -693,7 +693,10 @@ def lookup_substance(cas: str, form: str = '',
             if db_entry and db_entry.get('ate'):
                 result['ate'] = db_entry['ate']
         # ECHA C&L öz-sınıflandırmasından ek H-kodları (harmonize edilmemiş tehlikeler)
-        result = _supplement_from_echa_cl(cas, result)
+        try:
+            result = _supplement_from_echa_cl(cas, result)
+        except Exception as _e:
+            print(f'[sea_supplement] {cas}: hata (atlandı) — {_e}')
         return result
 
     # ── Katman 2: CLP Annex VI / substance_db (ECHA ATP22) ──────────────────
@@ -857,12 +860,15 @@ def _supplement_from_echa_cl(cas: str, sea_result: dict) -> dict:
     SEA Ek-6 sonucunu ECHA C&L dosya önbelleğinden supplement et.
     Harmonize edilmemiş tehlike sınıfları için ekstra H-kodları merge eder.
     SEA Ek-6 H-kodlarına dokunmaz.
-    ECHA dosyası yoksa arka planda çekimi tetikler (bir sonraki istekte hazır olur).
+    ECHA dosyası yoksa PubChem önbelleğine de bakılır; o da yoksa arka planda çekim tetiklenir.
     """
     echa_entry = _read_cl_file(_ECHA_CL_DIR, cas)
     if not echa_entry:
-        _fetch_echa_background(cas)
-        return sea_result
+        # ECHA API erişilemez olduğunda PubChem'in kaydettiği GHS verisini fallback olarak kullan
+        echa_entry = _read_cl_file(_PUBCHEM_DIR, cas)
+        if not echa_entry:
+            _fetch_echa_background(cas)
+            return sea_result
 
     echa_legacy = _cl_to_legacy(echa_entry, 3, 'ECHA C&L')
     sea_h_set = {h['h_code'] for h in sea_result.get('hazards', []) if h.get('h_code')}
@@ -904,8 +910,11 @@ def _fetch_echa_background(cas: str):
         loop = _asyncio.new_event_loop()
         try:
             _asyncio.set_event_loop(loop)
-            loop.run_until_complete(_lei(cas))
-            print(f'[echa_bg] {cas}: ECHA C&L verisi çekildi ve önbelleğe kaydedildi.')
+            result = loop.run_until_complete(_lei(cas))
+            if result:
+                print(f'[echa_bg] {cas}: ECHA C&L verisi çekildi ve önbelleğe kaydedildi.')
+            else:
+                print(f'[echa_bg] {cas}: veri bulunamadı (ECHA API erişilemez, PubChem fallback denendi).')
         except Exception as e:
             print(f'[echa_bg] {cas}: çekim hatası — {e}')
         finally:

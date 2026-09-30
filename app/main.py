@@ -276,6 +276,7 @@ async def generate_pdf(data: dict = Body(...)):
         ECO_H_CODES  = {'H400', 'H410', 'H411', 'H412', 'H413'}
         _FLAM_LIQ_H  = {'H224', 'H225', 'H226'}
         _auth_flam_h = None   # physical_engine: ölçülen FP → flam_liq H kodu
+        _phys_ok     = False  # physical_engine sonucu alındı mı (yanıcılık yetkisi için)
         _clp_res     = {}     # classify_mixture_clp sonucu — try bloğunda doldurulur
         # NOT: h_codes/all_h_codes güncellemeleri TEK reconciliation bloğunda yapılır
 
@@ -342,9 +343,11 @@ async def generate_pdf(data: dict = Body(...)):
             # ham string geçirilir; clp_service _parse_ph_range ile lo/hi ayırır
             _ph_raw = phys_in.get('ph') or None
             _clp_res  = _clp_calc(components, mixture_ph=_ph_raw, mixture_form=_form_val)
+            # form_sub / fp_status ön yüzden üst düzeyde gelir (product içinde değil)
             _phys_res = _phys_calc(components, form=_form_val, user_fp=_user_fp,
                                    user_bp=_user_bp,
-                                   form_sub=product.get('form_sub') or '')
+                                   form_sub=product.get('form_sub') or data.get('form_sub') or '',
+                                   fp_status=data.get('fp_status') or '')
             _stot_res = _stot_calc(components)
 
             try:
@@ -426,12 +429,17 @@ async def generate_pdf(data: dict = Body(...)):
                         'na':      False,
                         'theo':    not _tp_measured,
                     }
-                    _phys_methods[_bk] = {
-                        'measured':  _tp_measured,
-                        'standard':  _tp_std,
-                        'method':    _tp_mth,
-                        'error_pct': None,
-                    }
+                    if _tp.get('estimate_only'):
+                        # Ölçülmemiş FP/KN: "Belirlenmemiştir" — "hesaplanmış" notu basılmaz
+                        _phys_methods[_bk] = ({'note_text': _tp['pdf_note']}
+                                              if _tp.get('pdf_note') else {})
+                    else:
+                        _phys_methods[_bk] = {
+                            'measured':  _tp_measured,
+                            'standard':  _tp_std,
+                            'method':    _tp_mth,
+                            'error_pct': None,
+                        }
             # ────────────────────────────────────────────────────────────────────
 
             _cp   = []
@@ -467,10 +475,12 @@ async def generate_pdf(data: dict = Body(...)):
                  if r.get('type') == 'flam_liq'),
                 None
             )
-            if _user_fp is not None and _auth_flam_h is not None:
-                # Ölçülen FP varsa CLP kümülatif yanıcı kodunu yoksay; phys_engine kazanır
-                _cp   = [e for e in _cp if e['h_code'] not in _FLAM_LIQ_H]
-                _seen -= _FLAM_LIQ_H
+            _phys_ok = _form_val in ('liquid', 'paste')
+            # Alevlenir sıvı sınıfının tek karar vericisi physical_engine (hesaplama uç noktasıyla
+            # aynı kural): CLP kesim tahmini her zaman silinir — "test edildi, yanıcı değil"
+            # beyanında da geri gelmemeli.
+            _cp   = [e for e in _cp if e['h_code'] not in _FLAM_LIQ_H]
+            _seen -= _FLAM_LIQ_H
 
             for r in _phys_res.get('results', []):
                 hc = (r.get('h') or r.get('h_code') or '').replace('*','').strip()[:4]
@@ -563,8 +573,11 @@ async def generate_pdf(data: dict = Body(...)):
                         _eco_h_merge.append('H400')
             except Exception:
                 pass
+            # Alevlenir sıvı: CLP kesim tahmini değil physical_engine sonucu (hesaplama uç noktasıyla
+            # aynı) — aksi halde ölçülen FP / "yanıcı değil" beyanı taşımaya yansımaz.
             _final_cls_h = list(dict.fromkeys(
-                list(_clp_res.get('h_codes', [])) + _eco_h_merge + _phys_h_tr
+                [h for h in _clp_res.get('h_codes', []) if h not in _FLAM_LIQ_H]
+                + _eco_h_merge + _phys_h_tr
             ))
             py_transport = _transport_calc(
                 h_codes=_final_cls_h,
@@ -609,9 +622,10 @@ async def generate_pdf(data: dict = Body(...)):
 
         # ── 1. Yanıcı Sıvı — ölçülen FP varsa physical_engine kazanır ────────────
         # CLP Ek-I §2.6.4.2 — py_clp_passed try bloğunda zaten temizlendi
-        if _auth_flam_h is not None:
-            h_codes     = [h for h in h_codes     if h not in _FLAM_LIQ_H] + [_auth_flam_h]
-            all_h_codes = [h for h in all_h_codes if h not in _FLAM_LIQ_H] + [_auth_flam_h]
+        if _phys_ok:   # motor çalıştıysa physical_engine sonucu yetkili (yoksa ön yüz kodları kalır)
+            _fl_add = [_auth_flam_h] if _auth_flam_h else []
+            h_codes     = [h for h in h_codes     if h not in _FLAM_LIQ_H] + _fl_add
+            all_h_codes = [h for h in all_h_codes if h not in _FLAM_LIQ_H] + _fl_add
 
         # ── 2. Sucul Eko — ecological_service tek yetkili kaynak ───────────────────
         _final_eco_h = None
@@ -1590,7 +1604,8 @@ async def sds_calculate(body: dict = Body(...)):
     try:
         # ── 1. Fiziksel tehlikeler + teorik özellikler ────────────────────────
         phys_result = phys_calculate(comps, form=form, user_fp=user_fp, user_bp=user_bp,
-                                     test_data=test_data, form_sub=form_sub)
+                                     test_data=test_data, form_sub=form_sub,
+                                     fp_status=body.get('fp_status') or '')
 
         # ── 2. CLP karışım hesabı (cut-off tablosu + ATE) ────────────────────
         clp_result = classify_mixture_clp(comps, mixture_ph=mixture_ph, mixture_form=form)
@@ -1857,6 +1872,7 @@ async def sds_calculate(body: dict = Body(...)):
                 'primary':  phys_result.get('primary', []),
                 'extra':    phys_result.get('extra', []),
                 'warnings': phys_result.get('warnings', []),
+                'fp_decision': phys_result.get('fp_decision', {}),
             },
             'stot':       stot_result,
             'eco':        eco_result,

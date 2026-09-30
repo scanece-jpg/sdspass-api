@@ -38,12 +38,17 @@ const CalculatorModule = (() => {
     const form    = document.getElementById('pform')?.value || 'liquid';
     const usage   = document.getElementById('pusage')?.value || 'industrial';
     const phRaw   = document.getElementById('tf_ph')?.value?.trim() || '';
-    const fpRaw   = document.getElementById('tf_fp')?.value?.trim() || '';
+    // Motorun doldurduğu (data-source="theo") değerler geri gönderilmez — aksi halde
+    // ikinci hesaplamada tahmin "kullanıcı ölçümü" gibi işlenir.
+    const _isTheo = id => document.getElementById(id)?.dataset?.source === 'theo';
+    const fpRaw   = _isTheo('tf_fp') ? '' : (document.getElementById('tf_fp')?.value?.trim() || '');
     const userFP  = fpRaw ? parseFloat(fpRaw) : null;
+    const fpStatus = userFP == null ? (document.getElementById('fp_status')?.value || '') : '';
 
     // Kullanıcı girdiği test verileri
     const testData = {};
     const _td = (id, key) => {
+      if (_isTheo(id)) return;
       const v = document.getElementById(id)?.value?.trim();
       if (v) testData[key] = parseFloat(v) || v;
     };
@@ -82,6 +87,7 @@ const CalculatorModule = (() => {
       form,
       form_sub:    formSub || null,
       user_fp:     isNaN(userFP) ? null : userFP,
+      fp_status:   fpStatus || null,
       mixture_ph:  phRaw || null,
       test_data:   testData,
       usage,

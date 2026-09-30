@@ -1695,6 +1695,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         pm = phys_methods.get(key, {})
         if not pm:
             return ''
+        if pm.get('note_text'):
+            return (f'<br/><font size="6" color="#888888">{pm["note_text"]}</font>'
+                    if lang == 'TR' else '')
         std = _re.sub(r'<[^>]+>', '', pm.get('standard') or '').strip()
         if std and ' / ' in std:
             std = std.split(' / ')[0].strip()
@@ -1723,6 +1726,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             raw_display = v.get('display')
             if not raw_display:
                 return na
+            if raw_display == 'Belirlenmemiştir' and lang != 'TR':
+                raw_display = na
             v_str = raw_display
         else:
             v_str = str(v)

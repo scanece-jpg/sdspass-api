@@ -1926,7 +1926,16 @@ def _cls_flam_liq(fp: float, bp: Optional[float]) -> Optional[Dict]:
     return None
 
 
-def _calc_flam_liq(comps: List[Dict], user_fp=None, user_bp=None, form_sub: str = '') -> Dict:
+def _calc_flam_liq(comps: List[Dict], user_fp=None, user_bp=None, form_sub: str = '',
+                   fp_status: str = '') -> Dict:
+    """Alevlenir sıvı sınıfı (CLP Ek-I §2.6).
+
+    fp_status — kullanıcı parlama noktası girmediğinde kararı:
+      ''               karar verilmedi → en kötü durum + karar uyarısı (needs_decision)
+      'no_measurement' ölçüm yok → en kötü durum, bilgi uyarısı
+      'not_flammable'  test edildi, parlama noktası > 60 °C → sınıf yok (kullanıcı beyanı)
+    Yanıcı bileşen varken sınıflandırma sessizce atlanmaz (SEA Md. 8: fiziksel zararda test verisi).
+    """
     DECLARED_FALLBACK = {
         'H224': {'fp': -20, 'bp': 25},
         'H225': {'fp':  15, 'bp': 80},
@@ -2002,48 +2011,44 @@ def _calc_flam_liq(comps: List[Dict], user_fp=None, user_bp=None, form_sub: str 
     sum12  = cat_sum[1] + cat_sum[2]
     sum123 = cat_sum[1] + cat_sum[2] + cat_sum[3]
 
-    # Kullanıcı FP girmediğinde bileşen-kategori toplamı tarama yöntemi olarak kullanılır.
-    # CLP Annex I §2.6.4 resmi yöntemi karışımın ölçülen/hesaplanan FP/BP'sine dayanır;
-    # bu yöntem §2.6.4.2 kapsamında muhafazakâr bir tahmini yaklaşımdır.
+    # Kullanıcı FP girmediğinde bileşen-kategori toplamı tarama (en kötü durum) yöntemidir.
+    # Karışımın gerçek FP'si ölçümle belirlenir (CLP Ek-I §2.6.4); hesap ancak sonucu
+    # kriterin ≥ 5 °C üstündeyse muafiyet için kullanılabilir (§2.6.4.2).
     _screening = True
-    _water_note = (
-        f'⚠ Su içeriği %{_water_conc:.0f} ≥ %50 — saf bileşen FP değerleri karışım FP\'sini '
-        'doğru yansıtmaz (su seyreltme etkisi). Ölçülmüş karışım FP\'si girilmesi önerilir (CLP §2.6.4.2).'
-        if _high_water else None
-    )
-    # Su bazlı karışımda saf bileşen FP'si karışım FP'sini temsil etmez (örn. etanol 13 °C,
-    # %10 sulu etanol ≈ 50 °C). Tahmini sınıf vermek yerine ölçüm istenir.
-    if _aqueous and (sum12 >= 1 or sum123 >= 10):
-        _trigs = cat_triggers[1] + cat_triggers[2] + cat_triggers[3]
-        return {'result': None, 'source': None, 'fp': None, 'screening': _screening,
-                'measurement_required': True,
-                'water_dilution_warning': (
-                    '⚠ Su bazlı karışım — alevlenir sıvı bileşen(ler): '
-                    + ' + '.join(trig_src(t) for t in _trigs)
-                    + '. Saf bileşen parlama noktası karışımınkini yansıtmadığından yanıcılık '
-                      'sınıflandırması yapılmadı. Karışımın parlama noktasını ölçüp girin '
-                      '(ISO 2719 / ISO 3679); 60 °C ve altındaysa H224/H225/H226 uygulanır (CLP Ek-I §2.6).')}
     if sum1 >= 1:
-        src = ' + '.join(trig_src(t) for t in cat_triggers[1])
-        return {'result': {'h':'H224','cat':1,'h_class':'Flam. Liq. 1','signal':'Danger'},
-                'source': src, 'fp': cat_fp[1], 'screening': _screening,
-                'water_dilution_warning': _water_note}
-    if sum12 >= 1:
-        trigs = cat_triggers[1] + cat_triggers[2]
-        fps   = [cat_fp[k] for k in (1,2) if cat_fp[k] is not None]
-        src   = ' + '.join(trig_src(t) for t in trigs)
-        return {'result': {'h':'H225','cat':2,'h_class':'Flam. Liq. 2','signal':'Danger'},
-                'source': src, 'fp': min(fps) if fps else None, 'screening': _screening,
-                'water_dilution_warning': _water_note}
-    if sum123 >= 10:
-        all_trigs = cat_triggers[1] + cat_triggers[2] + cat_triggers[3]
-        all_fps   = [cat_fp[k] for k in (1,2,3) if cat_fp[k] is not None]
-        src       = ' + '.join(trig_src(t) for t in all_trigs)
-        return {'result': {'h':'H226','cat':3,'h_class':'Flam. Liq. 3','signal':'Warning'},
-                'source': src, 'fp': min(all_fps) if all_fps else None, 'screening': _screening,
-                'water_dilution_warning': _water_note}
-    return {'result': None, 'source': None, 'fp': None, 'screening': _screening,
-            'water_dilution_warning': _water_note}
+        trigs, worst = cat_triggers[1], {'h':'H224','cat':1,'h_class':'Flam. Liq. 1','signal':'Danger'}
+        fps = [cat_fp[1]]
+    elif sum12 >= 1:
+        trigs, worst = cat_triggers[1] + cat_triggers[2], {'h':'H225','cat':2,'h_class':'Flam. Liq. 2','signal':'Danger'}
+        fps = [cat_fp[k] for k in (1, 2)]
+    elif sum123 >= 10:
+        trigs, worst = cat_triggers[1] + cat_triggers[2] + cat_triggers[3], {'h':'H226','cat':3,'h_class':'Flam. Liq. 3','signal':'Warning'}
+        fps = [cat_fp[k] for k in (1, 2, 3)]
+    else:
+        return {'result': None, 'source': None, 'fp': None, 'screening': _screening,
+                'water_dilution_warning': None, 'flam_components': False}
+
+    fps = [f for f in fps if f is not None]
+    src = ' + '.join(trig_src(t) for t in trigs)
+    if fp_status == 'not_flammable':
+        return {'result': None, 'source': 'Kullanıcı beyanı — test edildi, parlama noktası > 60 °C',
+                'fp': None, 'screening': False, 'declared_nonflam': True, 'flam_components': True,
+                'worst_h': worst['h'], 'triggers': trigs, 'water_dilution_warning': None}
+
+    _aq_note = (' Su bazlı karışımda gerçek parlama noktası bileşenlerinkinden genellikle çok daha '
+                'yüksektir; ölçüm yapılırsa sınıf hafifleyebilir veya kalkabilir.' if _aqueous else
+                ' Ölçüm yapılırsa sınıf hafifleyebilir.')
+    if fp_status == 'no_measurement':
+        _warn = (f'ℹ Parlama noktası ölçülmedi — {worst["h"]} bileşenlere göre en kötü durum '
+                 f'varsayımıyla verildi ({src}).' + _aq_note)
+    else:
+        _warn = (f'⚠ Parlama noktası girilmedi — yanıcı sıvı bileşen var ({src}). '
+                 f'Şimdilik en kötü durum uygulandı: {worst["h"]}. Ölçülen değeri girin, '
+                 '"Test edildi — yanıcı değil" beyanını seçin veya "Ölçüm yok" deyin.' + _aq_note)
+    return {'result': worst, 'source': src, 'fp': min(fps) if fps else None,
+            'screening': _screening, 'worst_case': True, 'flam_components': True,
+            'needs_decision': fp_status != 'no_measurement', 'worst_h': worst['h'],
+            'triggers': trigs, 'water_dilution_warning': _warn}
 
 
 def _calc_flam_aerosol(comps: List[Dict], user_fp=None,
@@ -2192,7 +2197,7 @@ def _calc_flam_gas(comps: List[Dict]) -> Dict:
 
 def calculate(comps: List[Dict], form: str = 'liquid',
               user_fp=None, user_bp=None, test_data: Dict = None,
-              form_sub: str = '') -> Dict:
+              form_sub: str = '', fp_status: str = '') -> Dict:
     """
     Fiziksel tehlike sınıflandırması + teorik fiziksel özellikler hesapla.
 
@@ -2212,7 +2217,8 @@ def calculate(comps: List[Dict], form: str = 'liquid',
 
     fl = {'result': None, 'source': None, 'fp': None}
     if form in ('liquid', 'paste'):
-        fl = _calc_flam_liq(comps, user_fp, user_bp=user_bp, form_sub=form_sub)
+        fl = _calc_flam_liq(comps, user_fp, user_bp=user_bp, form_sub=form_sub,
+                            fp_status=fp_status)
         if fl.get('water_dilution_warning'):
             warnings.append(fl['water_dilution_warning'])
         if fl['result']:
@@ -2652,14 +2658,47 @@ def calculate(comps: List[Dict], form: str = 'liquid',
             'value': user_fp, 'measured': True, 'method': 'Kullanıcı beyanı', 'standard': '',
             'note': f"Sınıflandırma: {fl['result']['h_class']} ({fl['result']['h']})" if fl.get('result') else '',
         }
-    elif fl['fp'] is not None:
+    elif fl.get('declared_nonflam'):
         theo_props['flash_point'] = {
-            'value': fl['fp'], 'measured': False,
-            'method': fl['source'] or 'DB sorgusu', 'standard': 'CLP Annex VI / NIST',
-            'note': f"Sınıflandırma: {fl['result']['h_class']} ({fl['result']['h']})" if fl['result'] else '',
+            'value': None, 'display': '> 60 °C', 'measured': True,
+            'method': 'Kullanıcı beyanı', 'standard': '',
+            'note': 'Test edildi — alevlenir sıvı değil (kullanıcı beyanı)',
+        }
+    elif fl['fp'] is not None:
+        # En düşük bileşen FP'si karışımın FP'si değildir → Bölüm 9'a değer yazılmaz,
+        # yalnızca bilgi amaçlı tahmin (estimate) taşınır.
+        theo_props['flash_point'] = {
+            'value': None, 'estimate': fl['fp'], 'display': 'Belirlenmemiştir',
+            'measured': False, 'estimate_only': True,
+            'method': fl['source'] or '', 'standard': '',
+            'pdf_note': 'ölçülmedi — sınıflandırma bileşenlere göre en kötü durum varsayımıyla yapılmıştır',
+            'note': (f"Tahmini en düşük (bileşen) değer ~{fl['fp']} °C — karışımın parlama noktası "
+                     f"değildir. Sınıflandırma: {fl['result']['h_class']} ({fl['result']['h']}), en kötü durum."
+                     if fl['result'] else ''),
         }
 
+    # Kaynama noktası: en düşük bileşen KN'si karışımın başlangıç KN'si değildir → ölçülmediyse
+    # Bölüm 9'a değer yazılmaz; tahmin yalnızca bilgi olarak taşınır.
+    _bp = theo_props.get('boiling_point')
+    if isinstance(_bp, dict) and not _bp.get('measured') and _bp.get('value') is not None:
+        theo_props['boiling_point'] = {
+            'value': None, 'estimate': _bp['value'], 'display': 'Belirlenmemiştir',
+            'measured': False, 'estimate_only': True, 'method': _bp.get('method', ''), 'standard': '',
+            'note': f"Tahmini (en düşük bileşen) ~{_bp['value']} °C — karışımın kaynama noktası değildir.",
+        }
+
+    fp_decision = {
+        'required':    bool(fl.get('flam_components')) and user_fp is None
+                       and test_data.get('flash_point') is None,
+        'status':      fp_status or '',
+        'worst_h':     fl.get('worst_h'),
+        'estimate_fp': fl.get('fp'),
+        'triggers':    [f"{t['name']} %{t['conc']:g}" for t in (fl.get('triggers') or [])],
+        'needs_decision': bool(fl.get('needs_decision')),
+    }
+
     return {
+        'fp_decision':         fp_decision,
         'results':             primary + extra,
         'primary':             primary,
         'extra':               extra,

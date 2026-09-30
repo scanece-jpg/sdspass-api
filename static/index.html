@@ -825,8 +825,15 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
             <label>Parlama Noktası (°C) <span class="motor-badge">● motor</span><span id="src_fp" class="src-badge"></span></label>
             <label class="na-check"><input type="checkbox" id="na_fp" onchange="toggleNA(this,'tf_fp','fp')"> N/A</label>
           </div>
-          <input type="number" id="tf_fp" placeholder="DB'den hesaplanır"
+          <input type="number" id="tf_fp" placeholder="Ölçülen değer (ISO 2719)"
                  data-source="" oninput="markUserInput(this,'fp')">
+          <!-- Yanıcı bileşen varken ölçüm girilmediyse karar zorunlu (SEA Md. 8, CLP Ek-I §2.6.4) -->
+          <select id="fp_status" style="display:none;margin-top:4px;font-size:11px" onchange="_onFpStatusChange()">
+            <option value="">— Ölçüm girilmedi: bir seçenek belirleyin —</option>
+            <option value="not_flammable">Test edildi — parlama noktası &gt; 60 °C (yanıcı değil)</option>
+            <option value="no_measurement">Ölçüm yok — en kötü durum uygulansın</option>
+          </select>
+          <div id="fp_decision_note" style="display:none;font-size:9.5px;color:var(--text3);margin-top:3px"></div>
           <div id="warn_fp" class="thresh-warn"></div>
         </div>
 
@@ -1202,7 +1209,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
 <script src="js/modules/cas-lookup.js?v=20260617"></script>
 <script src="js/modules/component-manager.js?v=20260617"></script>
 <script src="js/modules/conc-selector.js?v=20260617"></script>
-<script src="js/modules/calculator.js?v=20260617"></script>
+<script src="js/modules/calculator.js?v=20260930"></script>
 <script src="js/modules/results-renderer.js?v=20260617"></script>
 <script src="js/modules/pdf-exporter.js?v=20260617"></script>
 <script src="js/app.js?v=20260617"></script>
@@ -3554,12 +3561,19 @@ function toggleNA(cb, inputId, key) {
 
 function _autofillPhysFields(tp) {
   if (!tp) return;
+  // Parlama ve kaynama noktası motorla doldurulmaz: en düşük bileşen değeri karışımın değeri
+  // değildir — ölçüm/beyan gerekir. Eski oturumdan kalan motor dolgusu temizlenir.
+  ['tf_fp', 'tf_bp'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.dataset.source === 'theo') {
+      el.value = ''; el.dataset.source = '';
+      _updateSrcBadge(id === 'tf_fp' ? 'fp' : 'bp', '');
+    }
+  });
   const FIELDS = [
     { id: 'tf_density', key: 'density', val: tp.density?.value },
     { id: 'tf_visc',    key: 'visc',    val: tp.viscosity?.value },
     { id: 'tf_sol',     key: 'sol',     val: tp.solubility?.value },
-    { id: 'tf_bp',      key: 'bp',      val: tp.boiling_point?.value },
-    { id: 'tf_fp',      key: 'fp',      val: tp.flash_point?.value },
     { id: 'tf_vp',      key: 'vp',      val: tp.vapor_pressure?.value },
   ];
   for (const { id, key, val } of FIELDS) {
@@ -3578,6 +3592,29 @@ function _autofillPhysFields(tp) {
       _updateSrcBadge(key, '');
     }
   }
+}
+
+// Parlama noktası kararı — yanıcı sıvı bileşen var ve ölçüm girilmediyse seçim görünür
+function _updateFpDecisionUI(fd) {
+  const sel  = document.getElementById('fp_status');
+  const note = document.getElementById('fp_decision_note');
+  if (!sel || !note) return;
+  if (!fd || !fd.required) {
+    sel.style.display = 'none';
+    note.style.display = 'none';
+    return;
+  }
+  sel.style.display = '';
+  sel.style.borderColor = sel.value ? '' : 'var(--warning, #e8a838)';
+  const trig = (fd.triggers || []).join(', ');
+  const est  = fd.estimate_fp != null ? ` Bileşenlere göre en kötü durum: ${fd.worst_h} (en düşük bileşen parlama noktası ~${fd.estimate_fp} °C).` : '';
+  note.textContent = `Yanıcı sıvı bileşen: ${trig}.${est} Ölçüm yapılırsa sınıf hafifleyebilir.`;
+  note.style.display = '';
+}
+
+function _onFpStatusChange() {
+  _updateFpDecisionUI(_lastCalcState?.phys?.fp_decision);
+  if (getComps().length) _runCalculationCore();
 }
 
 function _resetPhysSourceFields() {
@@ -4041,7 +4078,8 @@ function renderAll(s) {
   const tp = phys.theoProps;
   _lastTheoProps = tp || null;   // modal için kaydet
   _autofillPhysFields(tp);       // teorik değerleri forma yaz (kullanıcı girdiyse dokunma)
-  _renderPhysWarnPanel();        // zorunlu alan durumunu göster (autofill bittikten sonra)
+  _updateFpDecisionUI(phys.fp_decision);
+  _renderPhysWarnPanel();      // zorunlu alan durumunu göster (autofill bittikten sonra)
 
   if (tp) {
     const coverageColor = tp.coverage >= 80 ? '#68d391' : tp.coverage >= 50 ? '#f6ad55' : '#fc8181';
@@ -4049,6 +4087,10 @@ function renderAll(s) {
 
     // Kompakt chip yardımcısı
     function chip(label, d, unit = '') {
+      if (d && (d.value === null || d.value === undefined) && d.display) {
+        const t = d.estimate != null ? `${d.display} (tahmini ~${d.estimate}${unit ? ' ' + unit : ''})` : d.display;
+        return `<div class="phys-chip"><div class="phys-chip-label">${label}</div><div class="phys-chip-val" style="color:var(--text3);font-size:10px">${t}</div></div>`;
+      }
       if (!d || (d.value === null || d.value === undefined)) {
         return `<div class="phys-chip"><div class="phys-chip-label">${label}</div><div class="phys-chip-val" style="color:var(--text3);font-size:10px">—</div></div>`;
       }
@@ -4444,6 +4486,9 @@ function openPhysModal() {
   const NA = '<span class="pm-na">Uygun veri yoktur</span>';
 
   function fmtVal(d, unit = '') {
+    if (d && (d.value === null || d.value === undefined) && d.display) {
+      return `<span class="pm-na">${d.display}${d.estimate != null ? ` (tahmini ~${d.estimate}${unit ? ' ' + unit : ''}; ölçüm gerekli)` : ''}</span>`;
+    }
     if (!d || d.value === null || d.value === undefined) return NA;
     const vs = `${d.value}${unit ? ' ' + unit : ''}`;
     const badge = d.measured
@@ -4601,8 +4646,9 @@ function _checkPDFMandatory() {
   if (isLiquid) {
     const fpEl = document.getElementById('tf_fp');
     const fpNA = fpEl?.dataset?.na === 'true';
-    if (!fpNA && !fpEl?.value?.trim()) {
-      missing.push({ label: 'Parlama Noktası', reason: 'Motor için gerekli — H224/H225/H226 sınıfı belirlenemez; N/A ise N/A + gerekçe yazın' });
+    const fpSt = document.getElementById('fp_status')?.value;   // beyan / "ölçüm yok" seçimi
+    if (!fpNA && !fpEl?.value?.trim() && !fpSt) {
+      missing.push({ label: 'Parlama Noktası', reason: 'Ölçülen değer girilmedi — Bölüm 9\'da "Belirlenmemiştir" yazılacak; N/A ise N/A + gerekçe yazın' });
     }
   }
 
@@ -4637,7 +4683,7 @@ function _checkPDFMandatory() {
   const bpEl = document.getElementById('tf_bp');
   const bpNA = bpEl?.dataset?.na === 'true';
   if (form !== 'gas' && !bpNA && !bpEl?.value?.trim()) {
-    missing.push({ label: 'Kaynama Noktası', reason: 'Motor için gerekli — alevlenirlik sınıfı ve buharlaşma hesabında kullanılır' });
+    missing.push({ label: 'Kaynama Noktası', reason: 'Ölçülen değer girilmedi — Bölüm 9\'da "Belirlenmemiştir" yazılacak (en düşük bileşen değeri karışımın kaynama noktası değildir)' });
   }
 
   // 10. Viskozite — H304 aspirasyon toksisitesi hesabı için
@@ -4771,11 +4817,18 @@ const _PSRC_FIELDS = [
 
 function _showPhysSrcModal(callback) {
   const tp = _lastCalcState?.theoPhys || _lastCalcState?.phys?.theoProps || {};
+  const fd = _lastCalcState?.phys?.fp_decision || {};
+  const _esc = s => String(s ?? '').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+
+  // Parlama noktası kararı gerekli mi? (yanıcı sıvı bileşen var, ölçüm girilmemiş)
+  const fpEl  = document.getElementById('tf_fp');
+  const fpReq = !!fd.required && !(fpEl?.dataset.source === 'user' && fpEl.value?.trim());
 
   // Hangi alanlar henüz kullanıcı tarafından GİRİLMEMİŞ?
   const toShow = _PSRC_FIELDS.filter(f => {
     const el = document.getElementById(f.formId);
     if (!el || el.dataset.autoHidden === 'true') return false;
+    if (f.formId === 'tf_fp' && fpReq) return true;   // karar zorunlu — N/A ile atlanamaz
     if (f.naId && document.getElementById(f.naId)?.checked) return false;
     if (el.dataset.source === 'user' && el.value?.trim()) return false; // kullanıcı zaten girdi
     return true;
@@ -4783,25 +4836,35 @@ function _showPhysSrcModal(callback) {
 
   if (toShow.length === 0) { callback(); return; }
 
+  // Motor değeri: yalnızca karışım için hesaplanabilen alanlar (yoğunluk, viskozite, çözünürlük…).
+  // Parlama/kaynama noktası tahmini (estimate_only) kutuya yazılmaz, yalnızca ipucu olur.
+  const motorOf = f => {
+    const d = f.theoKey ? tp[f.theoKey] : null;
+    if (!d || d.estimate_only) return null;
+    return d.value ?? null;
+  };
+  const solTextOf = f => f.formId === 'tf_sol' ? (tp.solubility?.text ?? null) : null;
+  const isMotorRow = f => {
+    const el = document.getElementById(f.formId);
+    return (el?.dataset?.source === 'theo') || motorOf(f) !== null || solTextOf(f) !== null;
+  };
+
   const makeRow = (f) => {
     const el       = document.getElementById(f.formId);
-    const motorVal = f.theoKey ? (tp[f.theoKey]?.value ?? null) : null;
+    const motorVal = motorOf(f);
     const measured = f.theoKey ? (tp[f.theoKey]?.measured ?? false) : false;
-    // Çözünürlük için text fallback (sayısal değer yoksa metin açıklama)
-    const solText  = f.formId === 'tf_sol' ? (tp.solubility?.text ?? null) : null;
-    // Motor dolu mu? — source=theo VEYA theoKey'den değer var VEYA solubility.text var
-    const isMotor  = (el?.dataset?.source === 'theo') || (motorVal !== null && motorVal !== undefined) || (solText !== null);
-    // Kutuda gösterilecek değer: mevcut form değeri (motor dolgusu olabilir) ya da tp'den al
+    const solText  = solTextOf(f);
+    const isMotor  = isMotorRow(f);
     const curVal   = el?.value ?? '';
     const fillVal  = (curVal !== '' && curVal !== null) ? curVal
-                     : (motorVal !== null && motorVal !== undefined ? motorVal
-                       : (solText !== null ? solText : ''));
+                     : (motorVal !== null ? motorVal : (solText !== null ? solText : ''));
+    // Çözünürlük metni sayı kutusuna sığmaz → metin kutusu olarak göster
+    const inType   = (solText !== null && curVal === '' && motorVal === null) ? 'text' : f.type;
 
-    // Rozet
     let badgeCls, badgeTxt;
     if (isMotor) {
       badgeCls = 'psrc-badge-motor';
-      badgeTxt = measured ? '✓ Ölçülen' : '✓ Motor';
+      badgeTxt = measured ? '✓ Ölçülen' : '≈ Tahmini';
     } else if (f.mandatory) {
       badgeCls = 'psrc-badge-req';
       badgeTxt = '⚠ Zorunlu';
@@ -4810,19 +4873,20 @@ function _showPhysSrcModal(callback) {
       badgeTxt = 'Boş';
     }
 
+    const est = f.theoKey ? tp[f.theoKey]?.estimate : null;
     const inputCls  = isMotor ? 'psrc-row-input motor' : 'psrc-row-input';
     const unitSpan  = f.unit ? `<span class="psrc-row-unit">${f.unit}</span>` : '';
-    const stepAttr  = f.type === 'number' ? 'step="any"' : '';
+    const stepAttr  = inType === 'number' ? 'step="any"' : '';
     const labelStar = f.mandatory ? ' <span style="color:#fc8181;font-size:9px">*</span>' : '';
-    // Placeholder: metin alanlarında em dash, sayısal alanlarda boş (unit span gösterir)
-    const ph        = f.type === 'text' ? '—' : '';
+    const ph        = est != null ? `ölçülen değer (tahmini ~${est})` : (f.type === 'text' ? '—' : '');
 
     return `<div class="psrc-row">
       <div class="psrc-row-label">${f.label}${labelStar}</div>
       <div class="psrc-row-wrap">
-        <input class="${inputCls}" type="${f.type}" ${stepAttr}
-               data-psrc-field="${f.formId}"
-               value="${fillVal}" placeholder="${ph}"
+        <input class="${inputCls}" type="${inType}" ${stepAttr}
+               data-psrc-field="${f.formId}" data-orig="${_esc(fillVal)}"
+               ${solText !== null && fillVal === solText ? `data-motortext="${_esc(solText)}"` : ''}
+               value="${_esc(fillVal)}" placeholder="${_esc(ph)}"
                title="Değeri değiştirmek için bu alana tıklayın">
         ${unitSpan}
       </div>
@@ -4830,22 +4894,52 @@ function _showPhysSrcModal(callback) {
     </div>`;
   };
 
-  // Grupla: motor olanlar / zorunlu boşlar / diğer boşlar
-  const motorRows = toShow.filter(f => {
-    const el = document.getElementById(f.formId);
-    const mv = f.theoKey ? (tp[f.theoKey]?.value ?? null) : null;
-    // solubility.text (metin açıklama) varsa da motor sayılır
-    const solText = f.formId === 'tf_sol' ? (tp.solubility?.text ?? null) : null;
-    return (el?.dataset?.source === 'theo') || (mv !== null && mv !== undefined) || (solText !== null);
-  });
-  const emptyRows = toShow.filter(f => !motorRows.includes(f));
+  // Parlama noktası karar satırı: ölçülen değer VEYA beyan VEYA "ölçüm yok"
+  const makeFpRow = () => {
+    const cur  = fpEl?.dataset.source === 'user' ? (fpEl.value || '') : '';
+    const st   = document.getElementById('fp_status')?.value || '';
+    const trig = (fd.triggers || []).join(', ');
+    const est  = fd.estimate_fp != null ? ` En düşük bileşen parlama noktası ~${fd.estimate_fp} °C → en kötü durum ${fd.worst_h}.` : '';
+    return `<div class="psrc-motor-note" style="border-color:#e8a838">Formülde yanıcı sıvı bileşen var (${_esc(trig)}).${est}
+              Karışımın parlama noktası ölçümle belirlenir (SEA Ek-1 §2.6.4); ölçüm yapılırsa sınıf hafifleyebilir.</div>
+      <div class="psrc-row">
+        <div class="psrc-row-label">Parlama Noktası <span style="color:#fc8181;font-size:9px">*</span></div>
+        <div class="psrc-row-wrap">
+          <input class="psrc-row-input" type="number" step="any" data-psrc-field="tf_fp" data-orig="${_esc(cur)}"
+                 value="${_esc(cur)}" placeholder="ölçülen değer" oninput="document.getElementById('psrc_fp_status').value=''">
+          <span class="psrc-row-unit">°C</span>
+        </div>
+        <div class="psrc-badge psrc-badge-req">⚠ Karar</div>
+      </div>
+      <div class="psrc-row">
+        <div class="psrc-row-label">veya</div>
+        <div class="psrc-row-wrap">
+          <select id="psrc_fp_status" class="psrc-row-input" style="width:100%"
+                  onchange="if(this.value){const i=document.querySelector('#physSrcBody input[data-psrc-field=&quot;tf_fp&quot;]'); if(i) i.value='';}">
+            <option value="">— seçin —</option>
+            <option value="not_flammable" ${st==='not_flammable'?'selected':''}>Test edildi — parlama noktası &gt; 60 °C (yanıcı değil)</option>
+            <option value="no_measurement" ${st==='no_measurement'?'selected':''}>Ölçüm yok — en kötü durum (${_esc(fd.worst_h || '')}) uygulansın</option>
+          </select>
+        </div>
+        <div class="psrc-badge psrc-badge-empty"></div>
+      </div>`;
+  };
+
+  const fpDecisionShown = fpReq && toShow.some(f => f.formId === 'tf_fp');
+  const rest      = toShow.filter(f => !(fpDecisionShown && f.formId === 'tf_fp'));
+  const motorRows = rest.filter(isMotorRow);
+  const emptyRows = rest.filter(f => !motorRows.includes(f));
   const mandEmptyRows = emptyRows.filter(f => f.mandatory);
   const optEmptyRows  = emptyRows.filter(f => !f.mandatory);
 
   let html = '';
+  if (fpDecisionShown) {
+    html += `<div class="psrc-section-title">🔥 Parlama noktası — karar gerekli</div>`;
+    html += makeFpRow();
+  }
   if (motorRows.length) {
-    html += `<div class="psrc-section-title">⚡ Motor hesabı var — onaylayın veya düzenleyin</div>
-             <div class="psrc-motor-note">Motor değerleri bileşen veritabanından hesaplanmıştır. Değiştirmek için kutuya tıklayın.</div>`;
+    html += `<div class="psrc-section-title">≈ Hesaplanan (tahmini) değerler — kontrol edin</div>
+             <div class="psrc-motor-note">Bu değerler bileşenlerden hesaplanmıştır; Bölüm 9'da "hesaplanmış" notuyla yazılır. Ölçüm değeriniz varsa kutuya yazın.</div>`;
     html += motorRows.map(makeRow).join('');
   }
   if (mandEmptyRows.length) {
@@ -4858,9 +4952,9 @@ function _showPhysSrcModal(callback) {
   }
 
   const totalEmpty = emptyRows.length;
-  const subtitle = motorRows.length
-    ? `${motorRows.length} alanda motor hesabı mevcut${totalEmpty ? `, ${totalEmpty} alan boş` : ''}.`
-    : `${totalEmpty} alan henüz doldurulmamış.`;
+  const subtitle = (fpDecisionShown ? 'Parlama noktası için karar gerekli. ' : '') + (motorRows.length
+    ? `${motorRows.length} alanda tahmini değer var${totalEmpty ? `, ${totalEmpty} alan boş` : ''}.`
+    : `${totalEmpty} alan henüz doldurulmamış.`);
   document.getElementById('physSrcSubtitle').textContent = subtitle;
 
   document.getElementById('physSrcBody').innerHTML = html;
@@ -4868,10 +4962,24 @@ function _showPhysSrcModal(callback) {
   document.getElementById('physSrcOverlay').classList.add('open');
 }
 
-function _physSrcConfirm() {
+async function _physSrcConfirm() {
   // ── Zorunlu alan kontrolü ─────────────────────────────────────────────────
   const mandFields = _PSRC_FIELDS.filter(f => f.mandatory);
   let hasError = false;
+  const errEl = document.getElementById('physSrcErrMsg');
+
+  // Parlama noktası kararı: ölçülen değer veya seçim zorunlu
+  const fpSel = document.getElementById('psrc_fp_status');
+  const fpInp = document.querySelector('#physSrcBody input[data-psrc-field="tf_fp"]');
+  if (fpSel) {
+    if (!fpInp?.value.trim() && !fpSel.value) {
+      fpSel.style.borderColor = 'var(--danger)';
+      fpSel.style.boxShadow   = '0 0 0 2px rgba(252,129,129,.35)';
+      if (errEl) { errEl.textContent = '⚠ Parlama noktası: ölçülen değeri girin ya da bir seçenek belirleyin.'; errEl.style.display = ''; }
+      return;
+    }
+    fpSel.style.borderColor = ''; fpSel.style.boxShadow = '';
+  }
   const tp2 = _lastCalcState?.theoPhys || _lastCalcState?.phys?.theoProps || {};
   mandFields.forEach(f => {
     const inp = document.querySelector(`#physSrcBody input[data-psrc-field="${f.formId}"]`);
@@ -4888,7 +4996,6 @@ function _physSrcConfirm() {
     }
   });
 
-  const errEl = document.getElementById('physSrcErrMsg');
   if (hasError) {
     if (errEl) { errEl.textContent = '⚠ Görünüm, Renk, Koku ve Çözünürlük alanları zorunludur — lütfen doldurun.'; errEl.style.display = ''; }
     return; // Kapatma — kullanıcı doldurmalı
@@ -4896,16 +5003,34 @@ function _physSrcConfirm() {
   if (errEl) errEl.style.display = 'none';
 
   // ── Form alanlarına aktar ─────────────────────────────────────────────────
+  let changed = false;
   document.querySelectorAll('#physSrcBody input[data-psrc-field]').forEach(inp => {
     const target = document.getElementById(inp.dataset.psrcField);
     if (!target) return;
-    const v = inp.value;  // boş string bile yazılabilir (kullanıcı silmişse)
-    target.value = v;
-    // Motor kalmışsa 'theo', kullanıcı bir şey yazdıysa 'user' olarak işaretle
-    if (v.trim()) target.dataset.source = target.dataset.source === 'theo' ? 'theo' : 'user';
+    const v = inp.value;
+    // Motorun çözünürlük metni değiştirilmediyse sayı kutusuna yazılmaz (PDF metni motordan alır)
+    if (inp.dataset.motortext !== undefined && v === inp.dataset.motortext) return;
+    if (v === (inp.dataset.orig ?? '')) return;          // değişmedi → kaynağı olduğu gibi kalsın
+    target.value = v;                                    // boş string: kullanıcı silmiş
+    target.dataset.source = v.trim() ? 'user' : '';
+    changed = true;
   });
+
+  // Parlama noktası: değer girildiyse N/A kaldırılır; seçim ana formdaki kutuya aktarılır
+  if (fpSel || fpInp) {
+    const mainSel = document.getElementById('fp_status');
+    const newSt   = fpInp?.value.trim() ? '' : (fpSel?.value || '');
+    if (mainSel && mainSel.value !== newSt) { mainSel.value = newSt; changed = true; }
+    const naFp = document.getElementById('na_fp');
+    if (fpInp?.value.trim() && naFp?.checked) { naFp.checked = false; toggleNA(naFp, 'tf_fp', 'fp'); }
+  }
   document.getElementById('physSrcOverlay').classList.remove('open');
-  if (_physSrcCallback) { _physSrcCallback(); _physSrcCallback = null; }
+
+  // Sınıflandırmayı etkileyen değişiklik varsa PDF'ten önce yeniden hesapla
+  if (changed && typeof CalculatorModule !== 'undefined') {
+    try { await CalculatorModule.run(false); } catch (e) { console.error(e); }
+  }
+  if (_physSrcCallback) { const cb = _physSrcCallback; _physSrcCallback = null; cb(); }
 }
 
 function _physSrcClose() {
@@ -5503,6 +5628,9 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
       // bireysel bileşen GCL/SCL aşımı varsa H314 zorunludur (CLP Ek-I §3.2.2).
       h314_neutralization_removed: !h314KeepOverride,
       form_sub:    document.getElementById('pform_sub')?.value || null,
+      // Parlama noktası kararı (ölçüm girilmediyse): not_flammable | no_measurement
+      fp_status:   (document.getElementById('tf_fp')?.dataset.source === 'user' && document.getElementById('tf_fp')?.value?.trim())
+                     ? null : (document.getElementById('fp_status')?.value || null),
       voc_content: (() => { const v = parseFloat(document.getElementById('tf_voc')?.value); return isNaN(v) ? null : v; })(),
     };
 

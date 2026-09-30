@@ -838,6 +838,8 @@ def _save_api_result(directory: str, cas: str, api_result: dict, source_label: s
         'atp'      : source_label,
         'fetched_at': api_result.get('fetched_at') or datetime.now(timezone.utc).isoformat(timespec='seconds'),
         'notes'    : [],
+        'ate'      : api_result.get('ate', {}),          # ECHA bildirimlerinden (kategori aralığında)
+        'echa_extras': api_result.get('echa_extras', 0),
         'classification': {
             'hazards': [
                 {'class': cls, 'h_code': code}
@@ -923,6 +925,9 @@ _echa_last_try: dict = {}
 def _is_stale(entry: dict) -> bool:
     ts = entry.get('fetched_at')
     if not ts:
+        return True
+    # M faktörü/ATE sorgusu eklenmeden önce kaydedilmiş ECHA kayıtları yeniden çekilir
+    if entry.get('atp') == 'ECHA C&L API' and not entry.get('echa_extras'):
         return True
     try:
         fetched = datetime.fromisoformat(ts)

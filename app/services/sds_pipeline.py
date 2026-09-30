@@ -98,6 +98,22 @@ async def refresh_components(components: list, form: str) -> list:
             except Exception:
                 pass
 
+    def _apply_m_ate(c: dict, comp: dict, src: dict) -> None:
+        """M faktörü ve ATE: kullanıcının formda girdiği değer önce gelir (M > 1 veya ATE girilmiş);
+        yoksa kaynak değeri (SEA Ek-6 / Annex VI resmî; liste dışı maddelerde ECHA bildirimleri).
+        Önceden veritabanı değeri kullanıcının girdiğini her durumda eziyordu."""
+        def _f(v):
+            try:
+                return float(v)
+            except (TypeError, ValueError):
+                return 0.0
+        user_m = comp.get('m_factors') or {}
+        if not any(_f(v) > 1 for v in user_m.values()):
+            c['m_factors'] = src.get('m_factors') or {}
+        user_ate = comp.get('ate') or {}
+        if not any(_f(v) > 0 for v in user_ate.values()):
+            c['ate'] = src.get('ate') or {}
+
     async def _one(comp: dict) -> dict:
         cas = (comp.get('cas_no') or comp.get('cas') or '').strip()
         if not cas:
@@ -114,8 +130,7 @@ async def refresh_components(components: list, form: str) -> list:
                     _dedup(raw)
                     c['hazards'] = [{'h_class': cls, 'h_code': code}
                                     for cls, code in zip(raw['hazard_classes'], raw['h_codes'])]
-                    c['m_factors'] = fresh.get('m_factors', {})
-                    c['ate'] = fresh.get('ate', {})
+                    _apply_m_ate(c, comp, fresh)
                 else:
                     c['hazards'] = []
                 if fresh.get('suppl_hazards'):
@@ -139,6 +154,7 @@ async def refresh_components(components: list, form: str) -> list:
                 c['hazards'] = [{'h_class': cls, 'h_code': code} for cls, code in
                                 zip(echa.get('hazard_classes', []), echa.get('h_codes', []))]
                 _mark(c, cas, 5)
+                _apply_m_ate(c, comp, echa)
                 return c
         except Exception:
             pass

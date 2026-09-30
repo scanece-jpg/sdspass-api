@@ -296,10 +296,14 @@ def calculate_aquatic(
         haz_classes = {h.get('h_class', '').replace('*', '').strip() for h in hazards}
         has_h410 = 'Aquatic Chronic 1' in haz_classes
 
-        # M=1 uyarısı: sucul tehlike var ama M faktörü verisi yok
+        # M=1 uyarısı: sucul tehlike var ama ilgili M faktörü hiçbir kaynakta yok
+        # (kaynağın açıkça M=1 bildirmesi veridir — resmî liste, ECHA bildirimleri veya kullanıcı)
         is_aquatic = bool(haz_classes & {'Aquatic Acute 1', 'Aquatic Chronic 1'})
         has_ec50_input = any(comp.get(k) for k in ('ec50_algae', 'ec50_fish', 'ec50_daphnia'))
-        if is_aquatic and not has_annex_mf and not has_ec50_input:
+        _mf_src = comp.get('m_factors') or {}
+        _m_missing = (('Aquatic Acute 1' in haz_classes and not _mf_src.get('acute'))
+                      or ('Aquatic Chronic 1' in haz_classes and not _mf_src.get('chronic')))
+        if is_aquatic and _m_missing and not has_annex_mf and not has_ec50_input:
             comp_name = comp.get('name') or comp.get('name_tr') or cas
             m_factor_warnings.append(
                 f"{comp_name} ({cas}): M-Faktör verisi bulunamadı — M=1 varsayıldı. "

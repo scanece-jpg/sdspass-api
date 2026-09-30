@@ -2613,6 +2613,50 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                     ],
                 })
 
+    # Metallere aşındırıcılık (H290) — karışımda yalnızca test (UN C.1) ile belirlenir
+    # (SEA Ek-1 §2.16); bileşen oranından hesaplanmaz. Bileşende H290 varsa karar istenir.
+    if form != 'gas' and not test_data.get('metal_corrosive'):
+        _mc_comps = [
+            f"{(c.get('name') or c.get('cas') or '')} %{float(c.get('concMax') or c.get('conc') or 0):g}"
+            for c in comps
+            if any((h.get('h_code') or '').replace('*', '').strip()[:4] == 'H290'
+                   for h in (c.get('hazards') or []))
+            and float(c.get('concMax') or c.get('conc') or 0) > 0
+        ]
+        if _mc_comps:
+            pending_decisions.append({
+                'code': 'PHYS_MET_CORR_UNTESTED',
+                'field': 'metal_corrosive',
+                'question': (
+                    f"Karışımda metallere aşındırıcı bileşen var: {'; '.join(_mc_comps)}. "
+                    'Karışımın H290 sınıfı bileşen oranından hesaplanmaz, yalnızca test '
+                    '(UN C.1) sonucuyla belirlenir (SEA Ek-1 §2.16). Test sonucunu veya '
+                    'kararınızı seçin.'
+                ),
+                'test_guidance': (
+                    'Test UN C.1 (UN El Kitabı §37.4): çelik ve alüminyum levhada 55 °C\'de '
+                    'yıllık aşınma 6,25 mm\'yi aşarsa H290 (Met. Corr. 1). '
+                    'İpucu: güçlü baz (NaOH, KOH) veya güçlü asit içeren ürünlerde — özellikle '
+                    'alüminyuma karşı — test genellikle pozitif çıkar; pH tek başına ölçüt değildir.'
+                ),
+                'options': [
+                    {'value': 'H290',
+                     'label': 'Test yapıldı — metal aşındırıcı (H290)',
+                     'effect': 'H290 → GHS05, Warning'},
+                    {'value': 'not_corrosive',
+                     'label': 'Test yapıldı — metal aşındırıcı değil',
+                     'effect': 'H290 atanmaz'},
+                    {'value': 'not_tested_precautionary',
+                     'label': 'Test yapılmadı — ihtiyatlı H290 (revizyon şartıyla)',
+                     'effect': 'H290 atanır; Bölüm 16\'ya "test bekliyor" notu düşülür'},
+                    {'value': 'not_tested_exclude',
+                     'label': 'Test yapılmadı — uzman kararıyla sınıflandırılmamış',
+                     'effect': 'H290 atanmaz; Bölüm 16\'ya gerekçe yazılır'},
+                ],
+                'legal_basis': 'SEA Ek-1 §2.16 (CLP Ek-I §2.16)',
+                'components': _mc_comps,
+            })
+
     # Özel fiziksel tehlike muafiyet/manuel giriş (kullanıcı beyanı)
     # oxidizing_solid/liquid: test sonucu gelirse burada işlenir;
     # 'not_oxidizing' ve 'not_tested_exclude' → H kodu atanmaz (h_map'te yok)
@@ -2622,7 +2666,8 @@ def calculate(comps: List[Dict], form: str = 'liquid',
         'pyrophoric':        {'H250': ('H250', 'Pyr. Liq./Sol. 1', 'Danger')},
         'self_heating':      {'H251': ('H251', 'Self-heat. 1',     'Danger'),
                               'H252': ('H252', 'Self-heat. 2',     'Warning')},
-        'metal_corrosive':   {'H290': ('H290', 'Met. Corr. 1',    'Warning')},
+        'metal_corrosive':   {'H290': ('H290', 'Met. Corr. 1',    'Warning'),
+                              'not_tested_precautionary': ('H290', 'Met. Corr. 1 (ihtiyatlı)', 'Warning')},
         'organic_peroxide':  {'H240': ('H240', 'Org. Perox. Type A', 'Danger'),
                               'H241': ('H241', 'Org. Perox. Type B', 'Danger'),
                               'H242': ('H242', 'Org. Perox. Type C/D/E/F', 'Warning')},
@@ -2639,9 +2684,37 @@ def calculate(comps: List[Dict], form: str = 'liquid',
         val = (test_data.get(field) or '').strip()
         if val and val != 'na' and val in h_map:
             h, h_class, signal = h_map[val]
+            _src = ('Test yapılmadı — ihtiyatlı sınıflandırma (kullanıcı kararı)'
+                    if val == 'not_tested_precautionary' else 'Kullanıcı beyanı — test sonucu')
             extra.append({'type': f'manual_{field}', 'h': h, 'h_class': h_class,
-                          'signal': signal, 'source': 'Kullanıcı beyanı — test sonucu',
+                          'signal': signal, 'source': _src,
                           'cutoff_used': 'Manuel giriş (CLP Ek-I muafiyet dışı)'})
+
+    # Bölüm 16 sınıflandırma notları — test yerine verilen kararların gerekçesi
+    _NOTE_NAMES = {
+        'metal_corrosive':  ('Metallere aşındırıcılık (H290)', 'Corrosive to metals (H290)', 'UN C.1'),
+        'oxidizing_liquid': ('Oksitleyici sıvı (H271/H272)', 'Oxidising liquid (H271/H272)', 'UN L.1/L.2'),
+        'oxidizing_solid':  ('Oksitleyici katı (H271/H272)', 'Oxidising solid (H271/H272)', 'UN O.1'),
+    }
+    classification_notes = []
+    for field, (tr_n, en_n, test_n) in _NOTE_NAMES.items():
+        val = (test_data.get(field) or '').strip()
+        if val == 'not_tested_precautionary':
+            classification_notes.append({
+                'TR': f'{tr_n}: karışım test edilmemiştir ({test_n}); ihtiyatlı olarak sınıflandırılmıştır. '
+                      'Test sonucuna göre revize edilecektir.',
+                'EN': f'{en_n}: the mixture has not been tested ({test_n}); classified as a precaution. '
+                      'To be revised based on test results.'})
+        elif val == 'not_tested_exclude':
+            classification_notes.append({
+                'TR': f'{tr_n}: karışım test edilmemiştir ({test_n}); uzman değerlendirmesiyle '
+                      'sınıflandırılmamıştır.',
+                'EN': f'{en_n}: the mixture has not been tested ({test_n}); not classified based on '
+                      'expert judgement.'})
+        elif val in ('not_corrosive', 'not_oxidizing'):
+            classification_notes.append({
+                'TR': f'{tr_n}: {test_n} test sonucuna göre sınıflandırılmamıştır (tedarikçi beyanı).',
+                'EN': f'{en_n}: not classified based on {test_n} test result (supplier declaration).'})
 
     # Teorik fiziksel özellikler — katı/toz için yoğunluk+çözünürlük, gaz için buhar yoğunluğu
     theo_props = calc_theo_props(comps) or {}
@@ -2702,6 +2775,7 @@ def calculate(comps: List[Dict], form: str = 'liquid',
 
     return {
         'fp_decision':         fp_decision,
+        'classification_notes': classification_notes,
         'results':             primary + extra,
         'primary':             primary,
         'extra':               extra,

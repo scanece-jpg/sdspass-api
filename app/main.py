@@ -534,6 +534,8 @@ async def generate_pdf(data: dict = Body(...)):
             'ppe': py_ppe,
             'form_sub':    data.get('form_sub'),
             'voc_content': data.get('voc_content'),
+            # Test yerine verilen fiziksel tehlike kararlarının gerekçesi (Bölüm 16)
+            'classification_notes': core.get('classification_notes', []),
         }
 
         # sds_data['clp']['pictograms'] h_codes'tan türet — V019 için gerekli

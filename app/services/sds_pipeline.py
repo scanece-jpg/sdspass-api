@@ -350,14 +350,7 @@ async def classify(inp: dict) -> dict:
     h_codes = [h for h in h_codes if h not in MANUAL_PHYS_H or h in valid_phys]
     all_h   = [h for h in all_h if h not in MANUAL_PHYS_H or h in valid_phys]
     cp      = [e for e in cp if e['h_code'] not in MANUAL_PHYS_H or e['h_code'] in valid_phys]
-    if 'H290' not in valid_phys:
-        _mc = [c.get('name') or c.get('cas') or '' for c in comps
-               if any(_h4(h.get('h_code')) == 'H290' for h in (c.get('hazards') or []))]
-        if _mc:
-            phys_res.setdefault('warnings', []).append(
-                'ℹ Metal aşındırıcı bileşen var (' + ', '.join(_mc) + '). Karışımda H290 bileşen '
-                'oranından verilmez, yalnızca test sonucuyla (UN C.1) verilir (SEA Ek-1 §2.16). '
-                'Test sonucunuz varsa "Karışım test verisi (uzman)" bölümünden girin.')
+    # (H290 bileşeni varsa physical_engine "Karar gerekli" sorusu üretir)
 
     h_codes = list(dict.fromkeys(h for h in h_codes if h))
     all_h   = list(dict.fromkeys(h for h in all_h if h))
@@ -417,6 +410,7 @@ async def classify(inp: dict) -> dict:
         'warnings':    (phys_res.get('warnings', []) + stot_res.get('warnings', [])
                         + clp_res.get('warnings', [])),
         'pending_decisions': phys_res.get('pending_decisions', []),
+        'classification_notes': phys_res.get('classification_notes', []),
     }
 
 

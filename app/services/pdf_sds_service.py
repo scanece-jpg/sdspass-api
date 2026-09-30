@@ -2944,6 +2944,17 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 story.append(Paragraph(f'• <b>{hc_base}:</b> {stmt}', styles['small']))
         story.append(Spacer(1, 4))
 
+    # Sınıflandırma notları — test yerine verilen fiziksel tehlike kararlarının gerekçesi
+    _cls_notes = [n.get(lang) or n.get('EN') for n in (sds_data.get('classification_notes') or [])
+                  if isinstance(n, dict)]
+    if _cls_notes:
+        story.append(Paragraph(
+            '<b>' + ('Sınıflandırma notları:' if lang == 'TR' else 'Classification notes:') + '</b>',
+            styles['body_bold']))
+        for _n in _cls_notes:
+            story.append(Paragraph(f'• {_n}', styles['small']))
+        story.append(Spacer(1, 4))
+
     # Revizyon geçmişi
     _rev_notes_raw = (rev.get('notes') or '').strip()
     _generic = {'güncelleme', 'update', 'güncellenmiştir', 'updated', '-', ''}

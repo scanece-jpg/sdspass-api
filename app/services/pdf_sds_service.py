@@ -1220,11 +1220,16 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     # statementNeeded bayrağı JS motorundan gelir; yoksa unknownPct≥1'den türet
     _stmt_needed = False
     _unk_pct_for_stmt = 0.0
+    _unk_by_route: dict = {}   # yol → bilinmeyen % (ibarede hangi yol için olduğu yazılır)
     if ate_mix_details:
-        for _rd in ate_mix_details.values():
+        for _rk, _rd in ate_mix_details.items():
+            if not isinstance(_rd, dict):
+                continue
             if _rd.get('statementNeeded', False):
                 _stmt_needed = True
             _upct = float(_rd.get('unknownPct', 0) or 0)
+            if _rk in ('oral', 'dermal', 'inhal') and _upct >= 1.0:
+                _unk_by_route[_rk] = round(_upct, 1)
             if _upct > _unk_pct_for_stmt:
                 _unk_pct_for_stmt = _upct
         # Fallback: statementNeeded bayrağı yoksa unknownPct≥1 kontrolü yap
@@ -1253,15 +1258,29 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     if _stmt_needed and _unk_pct_for_stmt <= 0:
         _stmt_needed = False  # Yüzde hesaplanamıyorsa ibare gösterilmez
     if _stmt_needed:
-        _unk_x = round(_unk_pct_for_stmt, 1)
-        if lang == 'TR':
-            _stmt_text = (f"Karışımın %{_unk_x}'i bilinmeyen akut toksisiteye sahip "
-                          f"bileşenlerden oluşmaktadır.")
-        else:
-            _stmt_text = (f"{_unk_x}% of the mixture consists of ingredient(s) of "
-                          f"unknown acute toxicity.")
+        _RN = {'TR': {'oral': 'ağız', 'dermal': 'cilt', 'inhal': 'solunum'},
+               'EN': {'oral': 'oral', 'dermal': 'dermal', 'inhal': 'inhalation'}}
+        _rn = _RN['TR' if lang == 'TR' else 'EN']
+        # Aynı yüzdeye sahip yollar tek cümlede: "%9.5'i … (cilt, solunum yoluyla)"
+        _groups: dict = {}
+        for _rk in ('oral', 'dermal', 'inhal'):
+            if _rk in _unk_by_route:
+                _groups.setdefault(_unk_by_route[_rk], []).append(_rn[_rk])
+        if not _groups:   # yol bilgisi yoksa (eski istemci) yolsuz ibare
+            _groups = {round(_unk_pct_for_stmt, 1): []}
+        _sentences = []
+        for _pct, _routes in _groups.items():
+            if lang == 'TR':
+                _via = f" ({', '.join(_routes)} yoluyla)" if _routes else ''
+                _sentences.append(f"Karışımın %{_pct}'i bilinmeyen akut toksisiteye{_via} sahip "
+                                  f"bileşenlerden oluşmaktadır.")
+            else:
+                _via = f" ({', '.join(_routes)})" if _routes else ''
+                _sentences.append(f"{_pct}% of the mixture consists of ingredient(s) of "
+                                  f"unknown acute toxicity{_via}.")
         story.append(Spacer(1, 4))
-        story.append(Paragraph(f"<b>{_stmt_text}</b>", styles['body']))
+        for _stmt_text in _sentences:
+            story.append(Paragraph(f"<b>{_stmt_text}</b>", styles['body']))
 
     # ─── Duyarlılaştırıcı Madde Kimliği — CLP Ek II §2.8 (ZORUNLU) ─────────────
     # §2.8 yalnızca Skin Sens. (H317) ve Resp. Sens. (H334) için zorunludur.

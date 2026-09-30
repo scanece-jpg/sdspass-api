@@ -1015,7 +1015,7 @@ def _ate_core(items: list, form: str = '') -> tuple:
       ate_h_results:         [{h_code, h_class, reason, cutoff_used, route, cat_num, mix_ate, _unk}]
       ate_b11:               {oral/dermal/inhal: {ateMix, resultCode, ...}}
       unknown_conc_per_route:{route: float (bilinmeyen konsantrasyon %)}
-      ate_annex_vi_5000:     [name, ...] — Annex VI ATE=5000 alınan bileşenler
+      ate_annex_vi_5000:     [name, ...] — akut toksik olmadığı bilindiği için formüle katılmayan bileşenler
       stmt_needed:           True ise ≥%1 bilinmiyor bileşen var → B11 ifadesi ekle
     """
     ate_routes = list(ATE_DEFAULTS.keys())
@@ -1062,8 +1062,10 @@ def _ate_core(items: list, form: str = '') -> tuple:
             if cas in _PRESUME_NOT_ACUTELY_TOXIC_CAS:
                 continue  # bu dala artık ulaşılmaz — üstte yakalanır (savunma kopyası)
             if _has_data:
-                for route in ate_routes:
-                    ate_sum[route] += conc_frac / 5000.0
+                # Akut toksik olmadığı bilinen bileşen ATEmix formülüne katılmaz (SEA Ek-1
+                # §3.1.3.6.1 — yalnızca akut toksisite kategorisine giren bileşenler dahil edilir).
+                # Önceden ATE=5000 ile ekleniyordu; bu ATEmix'i düşürüp sınırdaki karışımlara
+                # gereksiz H302/H312/H332 verebiliyordu.
                 ate_annex_vi_5000.append(item.get('name') or cas)
             else:
                 for _r in ate_routes:
@@ -1181,6 +1183,19 @@ def _ate_core(items: list, form: str = '') -> tuple:
                 }
         except Exception as _e:
             _log.warning("ate_b11 hesaplanamadı (rota=%s, mix_ate=%s): %s", route, mix_ate, _e)
+
+    # Hiçbir bileşen katkı yapmayan (ATEmix hesaplanamayan) ama verisi olmayan bileşen oranı
+    # ≥ %1 olan yollar: "karışımın %x'i bilinmeyen akut toksisiteye sahip" ibaresi yine gerekir
+    # (SEA Ek-1 §3.1.3.6.2.1) — sonuç satırı ATEmix'siz eklenir.
+    for route, _unk in unknown_conc.items():
+        b11_key = _ROUTE_TO_B11.get(route, 'inhal')
+        if _unk >= 1.0 and b11_key not in ate_b11:
+            ate_b11[b11_key] = {
+                'ateMix': None, 'resultCode': None, 'unknownPct': round(_unk, 1),
+                'revisedFormula': False, 'statementNeeded': True, 'components': [],
+            }
+        elif _unk >= 1.0 and ate_b11[b11_key].get('ateMix') is None:
+            ate_b11[b11_key]['unknownPct'] = max(ate_b11[b11_key]['unknownPct'], round(_unk, 1))
 
     return ate_h_results, ate_b11, unknown_conc, ate_annex_vi_5000, stmt_needed
 

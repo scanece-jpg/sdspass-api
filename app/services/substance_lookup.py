@@ -439,7 +439,7 @@ def _sea_ek6_to_legacy(entry: dict) -> dict:
     for c in entry.get('classification', []):
         raw_class = c.get('class', '')
         h = {
-            'h_class':    _normalize_hclass(raw_class),  # İngilizce kanonik ad
+            'h_class':    c.get('class_en') or _normalize_hclass(raw_class),  # İngilizce kanonik ad
             'h_class_tr': raw_class,                      # Türkçe orijinal (görüntü için)
             'h_code':     c.get('h_code', ''),
         }
@@ -533,7 +533,7 @@ def _scl_op_to_cmin_cmax(scl: dict) -> dict:
         c_min, c_max = vmin, vmax
     return {
         'h_code' : scl.get('h_code', ''),
-        'h_class': _normalize_hclass(scl.get('class', '')),
+        'h_class': scl.get('class_en') or _normalize_hclass(scl.get('class', '')),
         'c_min'  : c_min,
         'c_max'  : c_max,
     }
@@ -644,7 +644,7 @@ def _build_note_b_cas() -> set:
         return {
             entry['cas']
             for key, entry in _db.items()
-            if entry.get('form') == 'gas' and 'cas' in entry
+            if (entry.get('note_b_pair') or entry.get('form') == 'gas') and entry.get('cas')
         }
     except Exception:
         return {'7647-01-0'}  # fallback

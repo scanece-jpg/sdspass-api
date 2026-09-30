@@ -22,6 +22,7 @@ Chat = Form ekranı:
 """
 
 import os
+import re
 import json as _json
 import base64
 import io
@@ -37,6 +38,28 @@ PHASE_CALCULATION = "calculation"
 PHASE_REVIEW      = "review"
 PHASE_AUDIT       = "audit"
 PHASE_QA          = "qa"
+
+# İnceleme fazı onayı — tam kelime eşleşmesi (alt dize değil: "yok" içinde "ok" geçer)
+_APPROVE_WORDS = {'evet', 'tamam', 'tamamdır', 'olur', 'olsun', 'haydi', 'hadi', 'uygun',
+                  'onay', 'yes', 'ok', 'okey', 'okay'}
+# Fiil kökleri çekimleriyle kabul edilir (yapalım, oluşturun); hemen ardından -ma/-me gelirse olumsuzdur (yapma)
+_APPROVE_STEMS = ('yap', 'oluştur', 'başlat', 'hazırla', 'devam', 'onayla')
+_REJECT_WORDS  = {'yok', 'hayır', 'hayir', 'no', 'dur', 'iptal', 'bekle', 'yanlış', 'yanlis', 'hata', 'hatalı'}
+_REJECT_STEMS  = ('değiştir', 'düzelt', 'güncelle', 'etme')   # "devam etme" → olumsuz
+
+
+def _is_approval(message: str) -> bool:
+    text  = (message or '').replace('İ', 'i').replace('I', 'ı').lower()
+    words = re.findall(r'\w+', text)
+    if any(w in _REJECT_WORDS or w.startswith(_REJECT_STEMS) for w in words):
+        return False
+    for w in words:
+        if w in _APPROVE_WORDS:
+            return True
+        for stem in _APPROVE_STEMS:
+            if w.startswith(stem) and not w[len(stem):].startswith(('ma', 'me')):
+                return True
+    return False
 
 # ─────────────────────────────────────────────────────────────────────────────
 # Faz 1 — Veri Toplama System Prompt
@@ -1192,9 +1215,8 @@ async def sds_assistant(data: dict = Body(...)):
         if not calc_result:
             raise HTTPException(status_code=400, detail="calc_result session'da bulunamadı")
 
-        msg_lower = (user_message or "").strip().lower()
         # Kullanıcı onayladıysa audit'e geç
-        if any(w in msg_lower for w in ("evet", "oluştur", "devam", "tamam", "başlat", "sds", "yes", "ok")):
+        if _is_approval(user_message):
             return {
                 "reply":         "",
                 "phase":         PHASE_AUDIT,

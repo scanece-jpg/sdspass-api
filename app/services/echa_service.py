@@ -386,103 +386,130 @@ def _best_group(groups: list) -> dict | None:
 
 
 # ---------------------------------------------------------------------------
-# ECHA C&L Inventory — Doğrudan ECHA API
+# ECHA C&L Inventory — ECHA CHEM (chem.echa.europa.eu)
 # ---------------------------------------------------------------------------
+# Belgelenmemiş iç API (ECHA CHEM sitesinin kendi kullandığı); ECHA değiştirirse burası kırılır.
+_ECHA_CHEM          = 'https://chem.echa.europa.eu'
+_CL_CLASS_THRESHOLD = 50.0   # tehlike sınıfı bildirimlerin bu yüzdesini AŞARSA eklenir
+_CL_TIE_MARGIN      = 2.0    # en yüksek paya bu kadar yakın kategoriler eşit sayılır → daha ağır olan seçilir
+_CL_MAX_PARALLEL    = 5
+
+_CAT_RE   = re.compile(r'^(?P<base>.+?)\s+(?P<cat>\d[A-C]?)\.?$')
+_ROUTE_RE = re.compile(r'^(.*?)\s*(\([^)]*\))?\s*$')
+
+
+def _split_hazard_class(code: str) -> tuple:
+    """'Acute Tox. 4 (Oral)' → ('Acute Tox. (Oral)', '4', 'Acute Tox. 4')"""
+    m = _ROUTE_RE.match(code.strip())
+    main, route = m.group(1), m.group(2) or ''
+    cm = _CAT_RE.match(main)
+    base, cat = (cm.group('base'), cm.group('cat')) if cm else (main, '')
+    return f'{base} {route}'.strip(), cat, main
+
+
+def _severity_key(cat: str, h_code: str) -> tuple:
+    # Küçük = daha ağır: kategori 1 < 2, 1A < 1B; aynı kategoride H361fd > H361f > H361
+    m = re.match(r'(\d)([A-C]?)', cat or '')
+    num    = int(m.group(1)) if m else 9
+    letter = (m.group(2) if m else '') or 'Z'
+    return (num, letter, -(len(h_code) - 4))
+
 
 async def _fetch_echa_cl_direct(cas: str, client: httpx.AsyncClient) -> dict | None:
     """
-    ECHA C&L Inventory API'sinden H-kodu ve sınıflandırma verisi çek.
+    ECHA C&L Inventory öz-sınıflandırmalarından konsensüs H-kodları.
 
-    Endpoint: api.echa.europa.eu — önce CAS ile madde ara, sonra C&L bildirimlerini al.
-    ECHA C&L'de ~220.000 madde var (Annex VI'da olmayan şirket bildirimleri dahil).
+    Kural (tehlike sınıfı bazlı):
+      1. Her sınıfın (örn. Flam. Liq.) bildirim payı, kategorileri toplanarak hesaplanır.
+      2. Pay %50'yi aşmıyorsa sınıf eklenmez.
+      3. Aşıyorsa en çok bildirilen kategori seçilir; ona 2 puandan yakın olanlar
+         eşit sayılır ve aralarından daha ağır olan alınır.
+    Akut toksisite maruziyet yoluna göre, STOT SE 3 ise H335/H336'ya göre ayrı sınıf sayılır.
     """
+    headers = {'Accept': 'application/json', 'User-Agent': 'Mozilla/5.0 (SDSPass)'}
+
+    async def _get(path: str, params: dict | None = None):
+        r = await client.get(_ECHA_CHEM + path, params=params, headers=headers, timeout=15.0)
+        r.raise_for_status()
+        return r.json()
+
     try:
-        # 1. CAS ile madde ara → ECHA substance ID bul
-        r = await client.get(
-            'https://api.echa.europa.eu/api/substances/search',
-            params={'q': cas, 'number_type': 'cas'},
-            timeout=10.0,
-            headers={'Accept': 'application/json'},
-        )
-        if r.status_code != 200:
+        search = await _get('/api-substance/v1/substance',
+                            {'pageIndex': 1, 'pageSize': 10, 'searchText': cas})
+        subst = next((i['substanceIndex'] for i in search.get('items', [])
+                      if cas in (i.get('substanceIndex', {}).get('casNumber') or [])), None)
+        if not subst:
+            print(f'[ECHA CHEM] {cas}: madde bulunamadı')
             return None
-        results = r.json()
-        substances = results if isinstance(results, list) else results.get('results', [])
-        if not substances:
+
+        groups = (await _get(f"/api-cnl-inventory/industry/{subst['rmlId']}/classifications")).get('items', [])
+        if not groups:
+            print(f'[ECHA CHEM] {cas}: C&L bildirimi yok')
             return None
-        substance = substances[0]
-        echa_id  = substance.get('id') or substance.get('substanceId') or substance.get('ecNumber')
-        name     = substance.get('iupacName') or substance.get('name') or cas
-        ec_no    = substance.get('ecNumber', '')
-        # REACH kayıt numarasını yakala ve önbelleğe al (C&L ile aynı API çağrısında)
-        try:
-            from app.services.reach_cache import extract_reg_no, save_cached
-            _reg = extract_reg_no(substance)
-            if _reg:
-                save_cached(cas, _reg)
-        except Exception:
-            pass
 
-        # 2. C&L bildirimlerini çek
-        cl_r = await client.get(
-            f'https://api.echa.europa.eu/api/substances/{echa_id}/classifications',
-            timeout=10.0,
-            headers={'Accept': 'application/json'},
-        )
-        if cl_r.status_code != 200:
-            return None
-        cl_data = cl_r.json()
+        sem = asyncio.Semaphore(_CL_MAX_PARALLEL)
 
-        # 3. H-kodları ve sinyali çıkar
-        h_codes        = []
-        hazard_classes = []
-        pictograms     = []
-        signal         = ''
-        notif_count    = 0
+        async def _detail(g):
+            async with sem:
+                d = await _get(f"/api-cnl-inventory/industry/classification/{g['classificationId']}")
+                return float(g.get('substanceNotificationPercentage') or 0), d.get('items', [])
 
-        notifications = cl_data if isinstance(cl_data, list) else cl_data.get('notifications', [])
-        notif_count = len(notifications)
+        family_share: dict = {}
+        variant_share: dict = {}
+        for pct, items in await asyncio.gather(*[_detail(g) for g in groups]):
+            seen_fam, seen_var = set(), set()
+            for it in items:
+                codes = tuple(h['hazardStatementCode'].strip() for h in it.get('hazardStatements', [])
+                              if h.get('hazardStatementCode'))
+                if not codes:
+                    continue
+                family, cat, main = _split_hazard_class(it.get('hazardClassAndCategoryCode', ''))
+                if family == 'STOT SE' and cat == '3':
+                    family = f'{family} {codes[0]}'
+                if family not in seen_fam:
+                    seen_fam.add(family)
+                    family_share[family] = family_share.get(family, 0.0) + pct
+                var = (main, cat, codes)
+                if (family, var) not in seen_var:
+                    seen_var.add((family, var))
+                    fv = variant_share.setdefault(family, {})
+                    fv[var] = fv.get(var, 0.0) + pct
 
-        # En kapsamlı bildirimi seç (en çok H-kodu içeren)
-        best_notif = None
-        for notif in notifications:
-            h_list = notif.get('hazardStatements', notif.get('hStatements', []))
-            if len(h_list) > len(best_notif.get('hazardStatements', []) if best_notif else []):
-                best_notif = notif
-
-        if best_notif:
-            for hs in best_notif.get('hazardStatements', best_notif.get('hStatements', [])):
-                code = hs.get('code') or hs.get('hazardStatementCode') or ''
-                if code and code not in h_codes:
+        h_codes, hazard_classes, chosen = [], [], []
+        for family, share in sorted(family_share.items(), key=lambda t: -t[1]):
+            if share <= _CL_CLASS_THRESHOLD:
+                continue
+            variants = variant_share[family]
+            top = max(variants.values())
+            near = [v for v, s in variants.items() if top - s < _CL_TIE_MARGIN]
+            main, cat, codes = min(near, key=lambda v: _severity_key(v[1], v[2][0]))
+            chosen.append(f'{family} %{share:.0f} → {main} {"/".join(codes)}')
+            for code in codes:
+                if code not in h_codes:
                     h_codes.append(code)
-                    cls = _H_TO_CLASS.get(code.split(' ')[0], '')
-                    if cls and cls not in hazard_classes:
-                        hazard_classes.append(cls)
-            for ps in best_notif.get('pictograms', []):
-                p = ps.get('code') or ps.get('pictogramCode') or ''
-                p_mapped = _PICT_MAP.get(p.lower(), '')
-                if p_mapped and p_mapped not in pictograms:
-                    pictograms.append(p_mapped)
-            signal = best_notif.get('signalWord', best_notif.get('signal', ''))
+                    hazard_classes.append(main)
 
-        if not h_codes:
-            return None
+        from app.services.ghs_pictogram import get_ghs_codes
+        from app.services.clp_service import is_danger
+        up = {h.upper() for h in h_codes} | {h[:4].upper() for h in h_codes}
+        signal = ('Danger' if is_danger(up) else 'Warning') if h_codes else ''
 
+        print(f'[ECHA CHEM] {cas}: {len(groups)} bildirim grubu → {chosen}')
         return {
             'cas'           : cas,
-            'name'          : name,
-            'ec_no'         : ec_no,
-            'source'        : f'ECHA C&L Inventory ({notif_count} bildirim)',
+            'name'          : subst.get('rmlName') or cas,
+            'ec_no'         : subst.get('rmlEc') or '',
+            'source'        : f'ECHA C&L Inventory ({len(groups)} bildirim grubu, sınıf eşiği %{_CL_CLASS_THRESHOLD:g})',
             'signal'        : signal,
-            'pictograms'    : pictograms,
+            'pictograms'    : get_ghs_codes(sorted(up)),
             'h_codes'       : h_codes,
             'hazard_classes': hazard_classes,
             'm_factors'     : {},
-            'notif_count'   : notif_count,
+            'notif_count'   : len(groups),
         }
 
     except Exception as e:
-        print(f'[ECHA C&L direct] {cas}: {e}')
+        print(f'[ECHA CHEM] {cas}: {type(e).__name__}: {e}')
     return None
 
 
@@ -782,7 +809,7 @@ def _dedupe_h_codes(result: dict) -> dict:
 async def lookup_echa_api(cas: str) -> dict | None:
     """
     Canlı API hiyerarşisi (lokal önbellekte bulunamazsa çağrılır):
-      1. ECHA C&L Inventory API (api.echa.europa.eu) → data/echa_cl/'a kaydet
+      1. ECHA C&L Inventory (chem.echa.europa.eu) → data/echa_cl/'a kaydet
       2. PubChem GHS fallback → data/pubchem_cl/'a kaydet
 
     Sonuç ilgili önbelleğe yazılır; bir sonraki sorgu lokal dosyadan gelir.

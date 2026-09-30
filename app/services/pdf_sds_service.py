@@ -1551,8 +1551,11 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _sec7_bullets = adapt_list_for_form(sec7['bullets'], _sec_form)
     # Katı/toz forma özgü elleçleme notları
     if _b7_is_solid:
-        _solid_handling_TR = ['Toz oluşumunu önlemek için uygun ekipman kullanın; kapalı sistemlerde çalışın.']
-        _solid_handling_EN = ['Use appropriate equipment to prevent dust generation; work in closed systems.']
+        # KKDİK Ek-2 7.1.1 a) + SEA Ek-4 P261 (toz seçimi)
+        _solid_handling_TR = ['Toz oluşumunu önlemek amacıyla kontrol altına alma önlemleri uygulayın.',
+                              'Tozunu solumaktan kaçının.']
+        _solid_handling_EN = ['Apply containment measures to prevent dust generation.',
+                              'Avoid breathing dust.']
         _sec7_bullets = (_solid_handling_TR if lang == 'TR' else _solid_handling_EN) + _sec7_bullets
     # KKDİK Ek-2 7.1.2 — genel mesleki hijyen (yeme/içme/sigara, el yıkama, kirli giysi)
     if lang in ('TR', 'EN'):

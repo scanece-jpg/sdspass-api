@@ -121,10 +121,9 @@ def first_aid(h_codes: List[str], form: str, lang: str = 'TR') -> List[Dict]:
     # 4.1.2 ç) ilk yardım yapanlar için KKE
     if h & HAZARD_H_FOR_FIRST_AIDER:
         out.append({'route': 'İlk yardım yapanlar' if L == 'TR' else 'First aiders',
-                    'text': ('İlk yardım müdahalesinde bulunan kişi uygun kişisel koruyucu ekipman '
-                             'kullanmalıdır (bkz. Bölüm 8).' if L == 'TR' else
-                             'Persons giving first aid should wear suitable personal protective '
-                             'equipment (see Section 8).')})
+                    'text': ('İlk yardım müdahalesini yapanlar için kişisel koruyucu ekipman: '
+                             'Bölüm 8\'e bakınız.' if L == 'TR' else
+                             'Personal protective equipment for first-aid responders: see Section 8.')})
     return out
 
 
@@ -152,79 +151,64 @@ def split_env_and_cleanup(sentences: List[str]):
 def accidental_release(h_codes: List[str], form: str, hazard_sentences: List[str],
                        lang: str = 'TR') -> Dict[str, List[str]]:
     """{'6.1': [...], '6.2': [...], '6.3': [...]} — Ek-2 alt başlıklarına göre."""
-    from app.services.sds_sentence_service import adapt_list_for_form
     h = {str(c)[:4] for c in h_codes}
     kind = _kind(form)
     flam = bool(h & FLAMMABLE_H)
     TR = lang == 'TR'
-    hz = adapt_list_for_form(hazard_sentences, form)
-    env_h, clean_h = split_env_and_cleanup(hz)
 
-    s61 = [('Cilt, göz ve giysi ile teması önlemek için uygun kişisel koruyucu ekipman kullanın '
-            '(bkz. Bölüm 8).') if TR else
-           'Wear suitable personal protective equipment to prevent contact with skin, eyes and clothing (see Section 8).']
-    if kind == 'solid':
-        s61.append('Toz oluşumunu kontrol altında tutun; yeterli havalandırma sağlayın.' if TR else
-                   'Control dust generation; ensure adequate ventilation.')
-    elif kind == 'gas':
-        s61.append('Alanı havalandırın; gaz dağılana kadar koruyucu ekipman olmadan girmeyin.' if TR else
-                   'Ventilate the area; do not enter without protective equipment until the gas has dispersed.')
-    else:
-        s61.append('Yeterli havalandırma sağlayın.' if TR else 'Ensure adequate ventilation.')
+    # Metinler KKDİK Ek-2'nin (EN: 2020/878 Ek-II) kendi ifadeleridir — 6.1.1 a/b/c, 6.1.2,
+    # 6.2, 6.3.1, 6.3.2, 6.3.3. Ek-2'de karşılığı olmayan cümle eklenmez.
+    sfx_tr = ' (Güvenlik Bilgi Formunun 8 inci bölümünde belirtilen kişisel koruyucu ekipman dâhil).'
+    s61 = [('Cilt, göz ve kişisel giysideki bulaşmaları önlemek için uygun koruyucu ekipman giyin' + sfx_tr)
+           if TR else
+           ('Wear suitable protective equipment (including personal protective equipment referred to under '
+            'Section 8) to prevent any contamination of skin, eyes and personal clothing.')]
     if flam:
-        s61.append('Tüm tutuşturucu kaynakları uzaklaştırın.' if TR else 'Remove all sources of ignition.')
-    s61.append('Büyük dökülme veya sızıntılarda tehlike alanını boşaltın ve acil durum ekibine haber verin.'
-               if TR else 'For large spills or leaks, evacuate the danger area and alert emergency responders.')
-    s61.append('Acil durum müdahale ekibi Bölüm 8\'de belirtilen koruyucu giysi ve ekipmanı kullanmalıdır'
-               + ('; kendinden hava beslemeli solunum cihazı kullanın.' if (kind == 'gas' or h & {'H330', 'H331'}) else '.')
-               if TR else
-               'Emergency responders should wear the protective clothing and equipment specified in Section 8'
-               + ('; use self-contained breathing apparatus.' if (kind == 'gas' or h & {'H330', 'H331'}) else '.'))
-
-    if kind == 'gas':
-        _default62 = ('Gazın kanalizasyon, bodrum ve çukur gibi kapalı alanlara girmesini ve birikmesini önleyin.'
-                      if TR else 'Prevent gas from entering and accumulating in sewers, basements and pits.')
-    else:
-        _default62 = ('Ürünün kanalizasyona, yüzey ve yer altı sularına ulaşmasını önleyin.' if TR else
-                      'Prevent the product from entering drains, surface water and groundwater.')
-    s62 = list(env_h) or [_default62]
-
+        s61.append('Tutuşturucu kaynakları uzaklaştırın.' if TR else 'Remove ignition sources.')
+    s61.append('Yeterli havalandırmayı sağlayın.' if TR else 'Provide sufficient ventilation.')
     if kind == 'solid':
-        base63 = ['Dökülen ürünün yayılmasını önleyin; tahliye deliklerini kapatın.' if TR else
-                  'Prevent the spilled product from spreading; cover drains.',
-                  'Dökülen ürünü toz kaldırmadan süpürerek veya vakumla toplayın.' if TR else
-                  'Sweep or vacuum up spilled product without generating dust.',
-                  'Uygun ve etiketli atık kaplarına koyun.' if TR else 'Place in suitable, labelled waste containers.',
-                  'Basınçlı hava ile temizlik yapmayın.' if TR else 'Do not use compressed air for cleaning.']
+        s61.append('Tozu kontrol altında tutun.' if TR else 'Control dust.')
+    s61.append('Gerektiğinde tehlike alanını boşaltın veya uzmana danışın.' if TR else
+               'Where necessary, evacuate the danger area or consult an expert.')
+    s61.append('Acil durumda müdahale eden kişiler için kişisel koruyucu giysi ve uygun kumaş: '
+               'Bölüm 8\'e bakınız.' if TR else
+               'For emergency responders — personal protective clothing and suitable fabric: see Section 8.')
+    if kind == 'gas' or h & {'H330', 'H331'}:
+        s61.append('Kendiliğinden depolu solunum cihazı kullanın.' if TR else 'Use self-contained breathing apparatus.')
+
+    # 6.2 — Ek-2 örneği; sucul tehlikede resmî P273
+    s62 = ['Kanallardan, yer üstü ve yer altı sularından uzak tutun.' if TR else
+           'Keep away from drains, surface and ground water.']
+    if h & {'H400', 'H410', 'H411', 'H412', 'H413'}:
+        s62.append(_p('P273', 'TR' if TR else 'EN'))
+
+    # 6.3.1 kontrol altına alma / 6.3.2 temizleme / 6.3.3 uygunsuz teknikler
+    if kind == 'solid':
+        base63 = ['Tahliye deliklerini kapatın.' if TR else 'Cover drains.',
+                  'Vakumlama veya toz oluşturmayan temizlik teknikleriyle toplayın.' if TR else
+                  'Collect using vacuuming or cleaning techniques that do not generate dust.',
+                  'Asla basınçlı hava kullanmayın.' if TR else 'Never use compressed air.']
     elif kind == 'gas':
-        base63 = ['Güvenli ise sızıntı kaynağını kapatın (vana/valf).' if TR else
-                  'Stop the leak at source if safe to do so (close valve).',
-                  'Gaz dağılana kadar alanı havalandırın.' if TR else 'Ventilate the area until the gas has dispersed.']
+        base63 = ['Kapatma prosedürlerini uygulayın.' if TR else 'Apply capping procedures.']
     else:
-        base63 = ['Dökülmeyi set veya bariyer ile sınırlayın; tahliye deliklerini ve kanalizasyon girişlerini kapatın.'
-                  if TR else 'Contain the spill with dikes or barriers; cover drains and sewer inlets.',
-                  'Emici malzeme (kum, vermikülit, diatomit) ile toplayın.' if TR else
-                  'Absorb with inert absorbent material (sand, vermiculite, diatomaceous earth).',
-                  'Uygun ve etiketli atık kaplarına koyun.' if TR else 'Place in suitable, labelled waste containers.']
+        base63 = ['Set oluşturun, tahliye deliklerini kapatın.' if TR else 'Use bunding; cover drains.',
+                  'Emici maddeler ile toplayın.' if TR else 'Collect with absorbent materials.']
     if flam:
-        base63.append('Kıvılcım çıkarmayan alet ve ekipman kullanın.' if TR else 'Use non-sparking tools and equipment.')
-    # H koduna özgü temizleme cümleleri — genel yöntemi tekrarlayanlar atlanır
-    # 6.1'de zaten yer alan (havalandırma, toz, KKE, tutuşturucu kaynak) ve genel temizleme
-    # yöntemini tekrarlayan cümleler 6.3'e eklenmez
-    _generic = ('absorban', 'süpürerek', 'vakumla', 'sızıntıyı durdurun', 'absorbent', 'sweep',
-                'havalandırma', 'havalandırın', 'toz oluşum', 'kke', 'kişisel koruyucu',
-                'tutuşma kaynak', 'tutuşturucu', 'ventilat', 'ignition', 'protective equipment')
-    extra = [s for s in clean_h if not any(g in s.lower() for g in _generic)]
-    s63 = base63 + [s for s in extra if s not in base63]
-    return {'6.1': s61, '6.2': s62, '6.3': s63}
+        base63.append('Kıvılcım çıkarmayan aletler ve ekipman kullanın.' if TR else
+                      'Use non-sparking tools and equipment.')
+    # Yalnızca Ek-2 ifadeleri — H koduna özgü serbest cümleler (sistemin kendi metinleri)
+    # eklenmez (kullanıcı talimatı: "yönetmelikte ne yazıyorsa o"). hazard_sentences parametresi
+    # geriye dönük uyum için korunur.
+    return {'6.1': s61, '6.2': s62, '6.3': base63}
 
 
 # ── 7.1.2 — genel mesleki hijyen ───────────────────────────────────────────────
 def hygiene(lang: str = 'TR') -> List[str]:
-    L = lang if lang in ('TR', 'EN') else 'EN'
-    return [
-        _p('P270', L),
-        _p('P264', L),
-        ('Yemek alanlarına girmeden önce kirlenmiş giysi ve koruyucu ekipmanı çıkarın.' if L == 'TR' else
-         'Remove contaminated clothing and protective equipment before entering eating areas.'),
-    ]
+    """KKDİK Ek-2 7.1.2 a/b/c (EN: 2020/878 Ek-II 7.1) ifadeleri."""
+    if lang == 'TR':
+        return ['Çalışma alanlarında yiyip içmeyin ve sigara içmeyin.',
+                'Kullanımdan sonra ellerinizi yıkayın.',
+                'Yemek alanlarına girmeden önce kontamine olmuş giysi ve koruyucu ekipmanı çıkarın.']
+    return ['Do not eat, drink and smoke in work areas.',
+            'Wash hands after use.',
+            'Remove contaminated clothing and protective equipment before entering eating areas.']

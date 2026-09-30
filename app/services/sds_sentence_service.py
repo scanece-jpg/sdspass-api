@@ -794,8 +794,8 @@ def generate_section3(
 # (örn. tablet ürüne "buhar birikimini önleyin"). Kurallar sırayla uygulanır.
 import re as _re_form
 
-_SWEEP_TR = 'Dökülen ürünü toz kaldırmadan süpürerek veya vakumla toplayın'
-_SWEEP_EN = 'Sweep or vacuum up spilled product without generating dust'
+_SWEEP_TR = 'Vakumlama veya toz oluşturmayan temizlik teknikleriyle toplayın'   # KKDİK Ek-2 6.3.2 ç/d
+_SWEEP_EN = 'Collect using vacuuming or cleaning techniques that do not generate dust'
 _GAS_LEAK_TR = 'Güvenli ise sızıntıyı durdurun; alanı havalandırın ve gaz dağılana kadar girmeyin'
 
 _FORM_RULES = {

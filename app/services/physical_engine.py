@@ -2195,6 +2195,12 @@ def _calc_flam_gas(comps: List[Dict]) -> Dict:
 
 # ── ANA HESAP FONKSİYONU ─────────────────────────────────────────────────────
 
+# Fiziksel H kodları (H220-H272) — oksitleyici katı/sıvı bypass şartı 3 için kontrol seti.
+# Modül düzeyinde: önce yalnızca katı dalında tanımlıydı, sıvı oksitleyici dalı (örn. sodyum
+# hipoklorit çözeltisi) UnboundLocalError ile çöküyordu.
+_PHYS_H_SET = {f'H{n}' for n in range(220, 273)}
+
+
 def calculate(comps: List[Dict], form: str = 'liquid',
               user_fp=None, user_bp=None, test_data: Dict = None,
               form_sub: str = '', fp_status: str = '') -> Dict:
@@ -2344,9 +2350,6 @@ def calculate(comps: List[Dict], form: str = 'liquid',
         #         → SEA Madde 16(2)(b) kapsamında H kodu bileşenden devralınır.
         # Aksi: pending_decision — test sonucu veya uzman kararı istenir.
         # Test verisi test_data['oxidizing_solid'] üzerinden gelirse aşağıda _MANUAL_H_MAP işler.
-
-        # Fiziksel H kodları (H220-H272) — bypass şartı 3 için kontrol seti
-        _PHYS_H_SET = {f'H{n}' for n in range(220, 273)}
 
         def _ox_sol_cat(c) -> int:
             cas = (c.get('cas') or c.get('cas_no') or '').strip()

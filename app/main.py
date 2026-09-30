@@ -1092,6 +1092,7 @@ async def sds_calculate(body: dict = Body(...)):
                 'extra':       phys_result.get('extra', []),
                 'warnings':    phys_result.get('warnings', []),
                 'fp_decision': phys_result.get('fp_decision', {}),
+                'pending_decisions': phys_result.get('pending_decisions', []),
             },
             'stot':        core['stot_res'],
             'eco':         core['eco_panel'],

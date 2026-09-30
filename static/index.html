@@ -1209,7 +1209,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
 <script src="js/modules/cas-lookup.js?v=20260617"></script>
 <script src="js/modules/component-manager.js?v=20260617"></script>
 <script src="js/modules/conc-selector.js?v=20260617"></script>
-<script src="js/modules/calculator.js?v=20260930b"></script>
+<script src="js/modules/calculator.js?v=20260930c"></script>
 <script src="js/modules/results-renderer.js?v=20260930"></script>
 <script src="js/modules/pdf-exporter.js?v=20260617"></script>
 <script src="js/app.js?v=20260617"></script>
@@ -3612,6 +3612,20 @@ function _updateFpDecisionUI(fd) {
   note.style.display = '';
 }
 
+// "Karar gerekli" kutusundaki seçim → hesap girdisine (test_data) eklenir ve yeniden hesaplanır
+function _setPhysDecision(field, sel) {
+  window._physDecisions = window._physDecisions || {};
+  window._physDecisionLabels = window._physDecisionLabels || {};
+  if (sel && sel.value) {
+    window._physDecisions[field] = sel.value;
+    window._physDecisionLabels[field] = sel.options[sel.selectedIndex].text;
+  } else {
+    delete window._physDecisions[field];
+    delete window._physDecisionLabels[field];
+  }
+  if (getComps().length) _runCalculationCore();
+}
+
 function _onFpStatusChange() {
   _updateFpDecisionUI(_lastCalcState?.phys?.fp_decision);
   if (getComps().length) _runCalculationCore();
@@ -4072,6 +4086,28 @@ function renderAll(s) {
     phys.warnings.forEach(w => {
       h += `<div class="warn-box" style="margin-bottom:6px">ℹ ${w}</div>`;
     });
+  }
+
+  // ── Karar gerekli (test sonucu olmadan sınıflandırılamayan fiziksel tehlikeler) ──
+  const _esc = t => String(t ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+  const _pend = phys.pending_decisions || [];
+  if (_pend.length) {
+    h += `<div class="r-title">⚠ Karar gerekli — PDF bu sorular yanıtlanınca oluşturulur</div>`;
+    _pend.forEach(d => {
+      h += `<div class="warn-box" style="margin-bottom:8px">
+        <div style="margin-bottom:6px">${_esc(d.question)}</div>
+        ${d.test_guidance ? `<details style="font-size:10px;margin-bottom:6px;color:var(--text2)"><summary style="cursor:pointer">Test hakkında</summary>${_esc(d.test_guidance)}</details>` : ''}
+        <select style="width:100%;font-size:11px" onchange="_setPhysDecision('${_esc(d.field)}', this)">
+          <option value="">— seçin —</option>
+          ${(d.options || []).map(o => `<option value="${_esc(o.value)}">${_esc(o.label)}</option>`).join('')}
+        </select>
+      </div>`;
+    });
+  }
+  const _given = Object.entries(window._physDecisionLabels || {});
+  if (_given.length) {
+    h += `<div class="warn-box" style="margin-bottom:8px;opacity:.9">✓ Verilen kararlar: ${_given.map(([f, l]) =>
+      `${_esc(l)} <a href="#" onclick="_setPhysDecision('${_esc(f)}', null);return false" style="color:var(--accent)">[değiştir]</a>`).join(' · ')}</div>`;
   }
 
   // ── Bölüm 9 — Fiziksel Özellikler (kompakt özet + modal) ────────────────
@@ -5315,6 +5351,9 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
     window._h314Removed = !h314KeepOverride;
     const calcInput = await CalculatorModule.ensureFresh();
     if (!calcInput) throw new Error('Hesaplama başarısız — PDF oluşturulmadı. Sağ paneldeki hatayı kontrol edin.');
+    if ((_lastCalcState?.phys?.pending_decisions || []).length) {
+      throw new Error('Sağ paneldeki "Karar gerekli" sorusunu yanıtlayın, sonra PDF oluşturun.');
+    }
     const panelSummary = CalculatorModule.lastSummary();
 
     const { allH, combinedSignal, transport, euh, phys, clp, eco, ppe, pcodes } = _lastCalcState;

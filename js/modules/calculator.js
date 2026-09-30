@@ -90,6 +90,16 @@ const CalculatorModule = (() => {
     if (ov_mc)   testData.metal_corrosive  = ov_mc;
     if (ov_op)   testData.organic_peroxide = ov_op;
 
+    // Sağ paneldeki "Karar gerekli" yanıtları (oksitleyici test sonucu vb.).
+    // Bileşen listesi değişince sıfırlanır — eski karar başka ürüne taşınmasın.
+    const casKey = comps.map(c => (c.cas || '').trim()).sort().join('|');
+    if (window._physDecisionsKey !== casKey) {
+      window._physDecisions = {};
+      window._physDecisionLabels = {};
+      window._physDecisionsKey = casKey;
+    }
+    Object.assign(testData, window._physDecisions || {});
+
     const formSub  = document.getElementById('pform_sub')?.value || '';
     const vocRaw   = parseFloat(document.getElementById('tf_voc')?.value);
 

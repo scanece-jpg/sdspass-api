@@ -253,7 +253,9 @@ async def classify(inp: dict) -> dict:
     if aqa and getattr(aqa, 'h_code', None) == 'H400' and 'H400' not in eco_h_merge:
         eco_h_merge.append('H400')
     final_cls_h = list(dict.fromkeys(
-        [h for h in clp_res.get('h_codes', []) if h not in FLAM_LIQ_H] + eco_h_merge + phys_h))
+        [h for h in clp_res.get('h_codes', [])
+         if h not in FLAM_LIQ_H and h not in MANUAL_PHYS_H]      # bu sınıflar yalnızca fiziksel motordan
+        + eco_h_merge + phys_h))
     transport = transport_calc(h_codes=final_cls_h, form=form, phys_h_codes=phys_h,
                                viscosity=float(visc) if visc is not None else None,
                                components=tr_components)
@@ -341,10 +343,21 @@ async def classify(inp: dict) -> dict:
         if hc not in h_codes: h_codes.append(hc)
         if hc not in all_h:   all_h.append(hc)
 
-    # 9. Yalnızca fiziksel motorun/testin üretebileceği kodlar (H290, H27x, H24x…)
-    valid_phys = {e['h_code'] for e in cp} | {_h4(h) for h in phys_h if h}
+    # 9. Yalnızca fiziksel motorun / test sonucunun üretebileceği kodlar (H290, H27x, H24x…).
+    #    Karışımda bu sınıflar bileşen oranından hesaplanmaz (SEA Ek-1 §2.x — test gerekir);
+    #    CLP kesim tablosundan gelenler silinir.
+    valid_phys = {_h4(h) for h in phys_h if h}
     h_codes = [h for h in h_codes if h not in MANUAL_PHYS_H or h in valid_phys]
     all_h   = [h for h in all_h if h not in MANUAL_PHYS_H or h in valid_phys]
+    cp      = [e for e in cp if e['h_code'] not in MANUAL_PHYS_H or e['h_code'] in valid_phys]
+    if 'H290' not in valid_phys:
+        _mc = [c.get('name') or c.get('cas') or '' for c in comps
+               if any(_h4(h.get('h_code')) == 'H290' for h in (c.get('hazards') or []))]
+        if _mc:
+            phys_res.setdefault('warnings', []).append(
+                'ℹ Metal aşındırıcı bileşen var (' + ', '.join(_mc) + '). Karışımda H290 bileşen '
+                'oranından verilmez, yalnızca test sonucuyla (UN C.1) verilir (SEA Ek-1 §2.16). '
+                'Test sonucunuz varsa "Karışım test verisi (uzman)" bölümünden girin.')
 
     h_codes = list(dict.fromkeys(h for h in h_codes if h))
     all_h   = list(dict.fromkeys(h for h in all_h if h))

@@ -2684,11 +2684,16 @@ def calculate(comps: List[Dict], form: str = 'liquid',
         val = (test_data.get(field) or '').strip()
         if val and val != 'na' and val in h_map:
             h, h_class, signal = h_map[val]
-            _src = ('Test yapılmadı — ihtiyatlı sınıflandırma (kullanıcı kararı)'
-                    if val == 'not_tested_precautionary' else 'Kullanıcı beyanı — test sonucu')
+            _test_n = {'metal_corrosive': 'UN C.1', 'oxidizing_liquid': 'UN L.1/L.2',
+                       'oxidizing_solid': 'UN O.1'}.get(field, '')
+            if val == 'not_tested_precautionary':
+                _src = 'Test yapılmadı — ihtiyatlı sınıflandırma (kullanıcı kararı)'
+                _cut = 'Test yapılmadı — ihtiyatlı sınıflandırma (bkz. Bölüm 16)'
+            else:
+                _cut = f'{_test_n} test sonucu (kullanıcı beyanı)' if _test_n else 'Test sonucu (kullanıcı beyanı)'
+                _src = _cut
             extra.append({'type': f'manual_{field}', 'h': h, 'h_class': h_class,
-                          'signal': signal, 'source': _src,
-                          'cutoff_used': 'Manuel giriş (CLP Ek-I muafiyet dışı)'})
+                          'signal': signal, 'source': _src, 'cutoff_used': _cut})
 
     # Bölüm 16 sınıflandırma notları — test yerine verilen kararların gerekçesi
     _NOTE_NAMES = {

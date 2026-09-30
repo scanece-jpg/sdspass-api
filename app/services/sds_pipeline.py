@@ -129,6 +129,57 @@ async def refresh_components(components: list, form: str) -> list:
     return list(await asyncio.gather(*[_one(c) for c in components]))
 
 
+# ── Etikette adı yazılması zorunlu bileşenler (SEA/CLP Md. 18(3)(b)) ───────────
+# Karışımın şu sınıflandırmalarına katkı yapan maddeler: akut toksisite, cilt aşındırma /
+# ciddi göz hasarı, CMR, solunum/cilt hassaslaştırma, STOT, aspirasyon.
+# Karışım kodu → katkı sayılan bileşen kodları
+_LABEL_CONTRIB = {
+    'H300': {'H300', 'H301', 'H302'}, 'H301': {'H300', 'H301', 'H302'}, 'H302': {'H300', 'H301', 'H302'},
+    'H310': {'H310', 'H311', 'H312'}, 'H311': {'H310', 'H311', 'H312'}, 'H312': {'H310', 'H311', 'H312'},
+    'H330': {'H330', 'H331', 'H332'}, 'H331': {'H330', 'H331', 'H332'}, 'H332': {'H330', 'H331', 'H332'},
+    'H314': {'H314'}, 'H318': {'H314', 'H318'},
+    'H340': {'H340', 'H341'}, 'H341': {'H340', 'H341'},
+    'H350': {'H350', 'H351'}, 'H351': {'H350', 'H351'},
+    'H360': {'H360', 'H361', 'H362'}, 'H361': {'H360', 'H361', 'H362'}, 'H362': {'H360', 'H361', 'H362'},
+    'H334': {'H334'}, 'H317': {'H317'},
+    'H370': {'H370', 'H371'}, 'H371': {'H370', 'H371'},
+    'H372': {'H372', 'H373'}, 'H373': {'H372', 'H373'},
+    'H335': {'H335'}, 'H336': {'H336'}, 'H304': {'H304'},
+}
+# Bileşenin dikkate alınma eşiği (%) — SEA Ek-1 Tablo 1.1 genel eşikleri (yüksek önem → 0,1)
+_LABEL_MIN_CONC = {'H300': 0.1, 'H301': 0.1, 'H310': 0.1, 'H311': 0.1, 'H330': 0.1, 'H331': 0.1,
+                   'H340': 0.1, 'H350': 0.1, 'H360': 0.1, 'H362': 0.1, 'H334': 0.1, 'H317': 0.1}
+# Önem sırası — 4'ten fazla bileşen varsa en önemlileri seçilir
+_LABEL_RANK = {'H340': 10, 'H350': 10, 'H360': 10, 'H300': 9, 'H310': 9, 'H330': 9, 'H334': 8,
+               'H301': 7, 'H311': 7, 'H331': 7, 'H370': 7, 'H372': 7, 'H314': 6, 'H318': 6,
+               'H341': 5, 'H351': 5, 'H361': 5, 'H362': 5, 'H317': 5, 'H304': 4, 'H371': 4,
+               'H373': 4, 'H302': 3, 'H312': 3, 'H332': 3, 'H335': 2, 'H336': 2}
+
+
+def label_components(comps: list, mixture_h: list) -> list:
+    """Etikette adı yazılması zorunlu bileşenler (ad listesi, önem sırasıyla, en fazla 4 —
+    ölümcül/CMR 1 gibi en ağır olanlar sınırı aşsa da yazılır)."""
+    mix = {_h4(h) for h in mixture_h}
+    wanted = set()
+    for h in mix:
+        wanted |= _LABEL_CONTRIB.get(h, set())
+    if not wanted:
+        return []
+    found = []
+    for c in comps:
+        name = (c.get('name_tr') or c.get('name') or c.get('cas') or '').strip()
+        if not name or 'mevzuata' in name.lower():
+            continue
+        conc = float(c.get('concMax') or c.get('conc') or 0)
+        codes = {_h4(h.get('h_code')) for h in (c.get('hazards') or [])} & wanted
+        codes = {h for h in codes if conc >= _LABEL_MIN_CONC.get(h, 1.0)}
+        if codes:
+            found.append((max(_LABEL_RANK.get(h, 1) for h in codes), conc, name))
+    found.sort(key=lambda x: (-x[0], -x[1]))
+    out = [n for i, (rank, _, n) in enumerate(found) if i < 4 or rank >= 9]
+    return list(dict.fromkeys(out))
+
+
 def _normalize_conc(comps: list) -> None:
     for c in comps:
         if 'conc' not in c and 'concentration' in c:
@@ -174,6 +225,13 @@ async def classify(inp: dict) -> dict:
     tr_components = build_transport_components(comps)
 
     clp_res  = classify_mixture_clp(comps, mixture_ph=mixture_ph, mixture_form=form)
+    # "Bileşen geçişkenliğine dayanır — test önerilir" uyarısı yalnızca-test sınıfları için
+    # geçersiz: bu sınıflar artık kullanıcının test kararıyla verilir (Bölüm 16 notu ayrı).
+    clp_res['warnings'] = [
+        w for w in (clp_res.get('warnings') or [])
+        if not (isinstance(w, dict) and str(w.get('code', '')).startswith('PHYS_NO_TEST_BASIS_')
+                and _h4(w.get('h_code')) in MANUAL_PHYS_H)
+    ]
     phys_res = phys_calc(comps, form=form, user_fp=inp.get('user_fp'), user_bp=inp.get('user_bp'),
                          test_data=test_data, form_sub=form_sub, fp_status=inp.get('fp_status') or '')
     stot_res = stot_calc(comps)
@@ -199,8 +257,11 @@ async def classify(inp: dict) -> dict:
         hc = norm_sub(p.get('h_code') or '')
         if hc[:4] not in ('H360', 'H361'):
             hc = hc[:4]
-        # Sucul sınıf yalnızca ecological_service'ten; alevlenir sıvı yalnızca physical_engine'den
-        if hc and hc not in seen and hc not in ECO_H_CODES and hc not in FLAM_LIQ_H:
+        # Sucul sınıf yalnızca ecological_service'ten; alevlenir sıvı ve yalnızca-test sınıfları
+        # (H290, H27x…) yalnızca physical_engine'den — CLP kesim satırı ("bileşen varlığı")
+        # kullanıcının test kararının gerekçesini ezmesin
+        if (hc and hc not in seen and hc not in ECO_H_CODES and hc not in FLAM_LIQ_H
+                and hc not in MANUAL_PHYS_H):
             seen.add(hc)
             cp.append({
                 'h_code': hc,
@@ -411,6 +472,7 @@ async def classify(inp: dict) -> dict:
                         + clp_res.get('warnings', [])),
         'pending_decisions': phys_res.get('pending_decisions', []),
         'classification_notes': phys_res.get('classification_notes', []),
+        'label_components': label_components(comps, all_h),
     }
 
 
@@ -424,6 +486,7 @@ def summary(core: dict) -> dict:
         'pictograms': sorted(core.get('pictograms', [])),
         'euh':        sorted((core.get('euh') or {}).get('euh_codes', [])),
         'p_label':    list(((core.get('p_codes') or {}).get('label') or {}).get('selected', [])),
+        'label_components': list(core.get('label_components', [])),
         'un':         None if tr.get('not_regulated') else road.get('un'),
         'pg':         None if tr.get('not_regulated') else road.get('pg'),
     }

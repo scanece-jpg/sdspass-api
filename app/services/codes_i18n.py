@@ -887,7 +887,10 @@ def get_p(lang: str, code: str) -> str:
     result = (_official_tr()['p'].get(code) if lang == 'TR' else None) or P_STMTS.get(lang, {}).get(code)
     if not result:
         result = P_STMTS.get('EN', {}).get(code, code)
-    return result or code
+    # Resmî metindeki köşeli parantez "duruma göre kullanılabilir" işaretidir; etikete/GBF'ye
+    # parantezle basılmaz → ek bilgi normal parantez içinde yazılır
+    # (örn. "CİLT (veya saç) ÜZERİNDE İSE … Cildi su ile durulayın (veya duş alın).")
+    return (result or code).replace('[', '(').replace(']', ')')
 
 
 def get_ppe(lang: str, key: str) -> str:

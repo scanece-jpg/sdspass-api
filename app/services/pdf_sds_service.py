@@ -1205,6 +1205,16 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             story.append(Spacer(1, 2))
             story.append(Paragraph(f"<i>{_exc_note}</i>", styles['small']))
 
+    # ─── Etikette adı yazılması zorunlu bileşenler — SEA/CLP Md. 18(3)(b) ───────
+    # Akut toksisite, cilt aşındırma/ciddi göz hasarı, CMR, hassaslaştırma, STOT, aspirasyon
+    # sınıflandırmasına katkı yapan maddeler (sds_pipeline.label_components)
+    _label_comps = [str(n) for n in (sds_data.get('label_components') or []) if n]
+    if _label_comps:
+        _lc_lbl = ('Etiket üzerinde belirtilmesi zorunlu zararlı bileşenler' if lang == 'TR'
+                   else 'Hazardous components which must be listed on the label')
+        story.append(Spacer(1, 3))
+        story.append(Paragraph(f"<b>{_lc_lbl}:</b> {', '.join(_label_comps)}", styles['body']))
+
     # ─── SEA §3.1.3.6.2.2 — Zorunlu ibare: bilinmeyen akut toksisite ≥%1 ─────────
     # Trigger: herhangi bir bilinmeyen bileşen bireysel olarak ≥%1 konsantrasyonda
     # statementNeeded bayrağı JS motorundan gelir; yoksa unknownPct≥1'den türet
@@ -1261,7 +1271,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         if comp_hcodes & SENS_H:
             _cn = comp_c.get('name_tr','') if lang=='TR' else ''
             _cn = _cn or comp_c.get('name','') or comp_c.get('cas_no','')
-            if _cn:
+            if _cn and _cn not in _label_comps:   # zorunlu bileşen satırında zaten varsa tekrarlama
                 contrib_sens.append(_cn)
     if contrib_sens:
         # EUH208 zaten sensitizer adını içeriyor; burada da açık liste göster

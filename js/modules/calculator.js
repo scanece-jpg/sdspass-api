@@ -145,6 +145,12 @@ const CalculatorModule = (() => {
 
       // API yanıtını CALC_COMPLETE formatına dönüştür
       const pRes = data.p_codes || {};
+      // Panelin etiket kutusu bu alanları okur — API'de label.selected / label.mandatory / p_codes
+      // olarak gelir; eşlenmezse panelde etiket P kodları boş görünüyordu.
+      pRes.label_codes      = pRes.label?.selected  || pRes.label_codes     || [];
+      pRes.label_mandatory  = pRes.label?.mandatory || pRes.label_mandatory || [];
+      pRes.codes            = pRes.p_codes || pRes.codes || [];
+      pRes.label_components = data.label_components || [];   // etikette adı zorunlu bileşenler
       const result = {
         hCodes:     data.h_codes     || [],
         signal:     data.signal      || 'Warning',

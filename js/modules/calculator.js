@@ -22,6 +22,10 @@ const CalculatorModule = (() => {
     console.log('[Calculator] init OK — Python API modu aktif');
   }
 
+  // Son başarılı hesabın girdisi ve özeti — PDF aynı girdiyle üretilir, sonuç bununla karşılaştırılır
+  let _lastPayload = null;
+  let _lastSummary = null;
+
   async function run(showExtra) {
     EventBus.emit('CALC_STARTED', {});
 
@@ -35,6 +39,13 @@ const CalculatorModule = (() => {
     const totalConc = comps.reduce((s, c) => s + (parseFloat(c.conc) || 0), 0);
     EventBus.emit('CALC_TOTAL_CONC', { total: totalConc });
 
+    const payload = buildPayload(comps);
+    await _send(payload, showExtra, comps);
+  }
+
+  // Formdaki güncel değerlerden hesap girdisini kur (sağ panel ve PDF aynı girdiyi kullanır)
+  function buildPayload(comps) {
+    comps = comps || getComps();
     const form    = document.getElementById('pform')?.value || 'liquid';
     const usage   = document.getElementById('pusage')?.value || 'industrial';
     const phRaw   = document.getElementById('tf_ph')?.value?.trim() || '';
@@ -93,8 +104,13 @@ const CalculatorModule = (() => {
       usage,
       lang:        (typeof getSdsLang === 'function' ? getSdsLang() : null) || 'TR',
       voc_content: (!isNaN(vocRaw) && vocRaw >= 0) ? vocRaw : null,
+      // H314 nötralizasyon diyaloğunda "Kaldır" seçildiyse (PDF akışı) panel de aynı kararla hesaplar
+      h314_neutralization_removed: !!window._h314Removed,
     };
+    return payload;
+  }
 
+  async function _send(payload, showExtra, comps) {
     try {
       const resp = await fetch(`${API_BASE}/api/v1/sds/calculate`, {
         method:  'POST',
@@ -143,14 +159,34 @@ const CalculatorModule = (() => {
         _source:    'python-api',   // izleme için kaynak etiketi
       };
 
+      _lastPayload = payload;
+      _lastSummary = data.summary || null;
       StateStore.setCalcResult(result);
       EventBus.emit('CALC_COMPLETE', result);
 
     } catch(e) {
+      // Başarısız hesapta eski sonuç "güncel" sayılmasın (PDF eski girdiyle üretilmez)
+      _lastPayload = null;
+      _lastSummary = null;
       console.error('[Calculator] API hatası:', e);
       EventBus.emit('CALC_ERROR', { message: e.message });
     }
   }
+
+  // Formdaki değerler son hesaptan beri değiştiyse (veya hesap yoksa) yeniden hesapla.
+  // Dönüş: PDF'e gönderilecek girdi (sağ panelin kullandığıyla birebir aynı) — hata varsa null.
+  async function ensureFresh() {
+    const comps = getComps();
+    if (!comps.length) return null;
+    const p = buildPayload(comps);
+    if (!_lastPayload || JSON.stringify(p) !== JSON.stringify(_lastPayload)) {
+      await run(false);
+    }
+    return _lastPayload;
+  }
+
+  const lastPayload = () => _lastPayload;
+  const lastSummary = () => _lastSummary;
 
   /* ── YEDEK JS MOTORLARI ────────────────────────────────────────────────────
    * Aşağıdaki fonksiyon API erişimi olmadığında kullanılabilir.
@@ -166,5 +202,5 @@ const CalculatorModule = (() => {
   }
    * ─────────────────────────────────────────────────────────────────────────*/
 
-  return { init, run };
+  return { init, run, buildPayload, ensureFresh, lastPayload, lastSummary };
 })();

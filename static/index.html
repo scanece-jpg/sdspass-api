@@ -1209,8 +1209,8 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
 <script src="js/modules/cas-lookup.js?v=20260617"></script>
 <script src="js/modules/component-manager.js?v=20260617"></script>
 <script src="js/modules/conc-selector.js?v=20260617"></script>
-<script src="js/modules/calculator.js?v=20260930"></script>
-<script src="js/modules/results-renderer.js?v=20260617"></script>
+<script src="js/modules/calculator.js?v=20260930b"></script>
+<script src="js/modules/results-renderer.js?v=20260930"></script>
 <script src="js/modules/pdf-exporter.js?v=20260617"></script>
 <script src="js/app.js?v=20260617"></script>
 
@@ -5242,6 +5242,24 @@ async function generateLabelGuide() {
   }
 }
 
+// ── Güvenlik ağı: sağ panel ↔ PDF sınıflandırma karşılaştırması ──────────────
+// İkisi de aynı sunucu fonksiyonuyla hesaplanır; fark çıkarsa bu bir hatadır ve
+// kullanıcı PDF'i kullanmadan önce uyarılır.
+function _comparePanelPdf(panel, pdf) {
+  if (!panel || !pdf) return true;
+  const LABELS = { h_codes: 'H kodları', signal: 'Uyarı kelimesi', pictograms: 'Piktogramlar',
+                   euh: 'EUH ifadeleri', p_label: 'Etiket P kodları', un: 'UN numarası', pg: 'Ambalaj grubu' };
+  const fmt = v => Array.isArray(v) ? (v.length ? v.join(', ') : '—') : (v || '—');
+  const diffs = Object.keys(LABELS)
+    .filter(k => JSON.stringify(panel[k] ?? null) !== JSON.stringify(pdf[k] ?? null))
+    .map(k => `• ${LABELS[k]}: ekranda ${fmt(panel[k])} — PDF'te ${fmt(pdf[k])}`);
+  if (!diffs.length) return true;
+  console.error('[Panel/PDF farkı]', { panel, pdf });
+  alert('⚠ PDF ile sağ paneldeki sınıflandırma farklı çıktı:\n\n' + diffs.join('\n') +
+        '\n\nPDF\'i kullanmadan önce kontrol edin; bu bir hata olabilir.');
+  return false;
+}
+
 // ── PDF Üretim Akışı ─────────────────────────────────────────────────────────
 async function generatePDF() {
   if (!_lastCalcState) { alert('Önce Hesapla\'ya basın.'); return; }
@@ -5292,6 +5310,13 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
   if (btn) { btn.textContent = '⏳ Oluşturuluyor...'; btn.disabled = true; }
 
   try {
+    // Tek hesap: form son hesaptan beri değiştiyse sağ paneli yeniden hesapla; PDF, panelin
+    // kullandığı girdinin AYNISIYLA (calc_input) üretilir.
+    window._h314Removed = !h314KeepOverride;
+    const calcInput = await CalculatorModule.ensureFresh();
+    if (!calcInput) throw new Error('Hesaplama başarısız — PDF oluşturulmadı. Sağ paneldeki hatayı kontrol edin.');
+    const panelSummary = CalculatorModule.lastSummary();
+
     const { allH, combinedSignal, transport, euh, phys, clp, eco, ppe, pcodes } = _lastCalcState;
     // Konsantrasyon seçimi sonradan değişmiş olabilir → DOM'dan taze oku
     const comps = getComps();
@@ -5631,6 +5656,8 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
       // Parlama noktası kararı (ölçüm girilmediyse): not_flammable | no_measurement
       fp_status:   (document.getElementById('tf_fp')?.dataset.source === 'user' && document.getElementById('tf_fp')?.value?.trim())
                      ? null : (document.getElementById('fp_status')?.value || null),
+      // Sağ panelin kullandığı hesap girdisi — sunucu PDF'i birebir bununla sınıflandırır
+      calc_input:  calcInput,
       voc_content: (() => { const v = parseFloat(document.getElementById('tf_voc')?.value); return isNaN(v) ? null : v; })(),
     };
 
@@ -5646,6 +5673,9 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
     }
 
     const resJson = await res.json();
+
+    // Güvenlik ağı: PDF'in kullandığı sınıflandırma sağ panelle aynı mı?
+    _comparePanelPdf(panelSummary, resJson.classification);
 
     // PDF indir
     const pdfBytes = Uint8Array.from(atob(resJson.pdf), c => c.charCodeAt(0));
@@ -5675,6 +5705,7 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
     alert('PDF oluşturma hatası: ' + e.message);
     console.error('[PDF]', e);
   } finally {
+    window._h314Removed = false;   // nötralizasyon kararı yalnızca bu PDF için geçerli
     if (btn) { btn.innerHTML = '📄 PDF Oluştur'; btn.disabled = false; }
   }
 }

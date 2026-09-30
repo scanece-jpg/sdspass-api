@@ -48,5 +48,14 @@ const ResultsRenderer = (() => {
     );
   }
 
+  // Hesap başarısızsa önceki karışımın sonucu ekranda kalmasın (kullanıcı onu güncel sanıyordu)
+  function renderErr(message) {
+    const first = String(message || '').split('\n')[0].slice(0, 300);
+    if (typeof _lastCalcState !== 'undefined') _lastCalcState = null;
+    if (typeof showError === 'function') {
+      showError('Hesaplama yapılamadı — sonuçlar güncel değil. ' + first);
+    }
+  }
+
   return { init, render };
 })();

@@ -136,673 +136,200 @@ async def generate_pdf(data: dict = Body(...)):
         product     = data.get('product', {})
         components  = data.get('components', [])
 
-        # Bileşen H kodlarını tazele + CLP dominans uygula.
-        # Render'da lokal cache yok → lookup_echa_api ile önbellek/canlı çekim kullan.
-        import asyncio as _aio
-        from app.services.substance_lookup import (
-            lookup_substance as _lu_sub,
-            save_custom_substance as _save_custom,
-            _load_custom as _custom_db,
+        # ── Tek sınıflandırma hattı — sağ panelle (/sds/calculate) aynı fonksiyon ──
+        # Ön yüz, panelin kullandığı hesap girdisini (calc_input) aynen gönderir; böylece
+        # panel ile PDF birebir aynı girdiden, aynı kurallarla hesaplanır.
+        # calc_input yoksa (eski istemciler) girdi phys_props'tan türetilir.
+        from app.services import sds_pipeline as _pipe
+        from app.services.phys_props_parser import (
+            parse_all_phys_props as _parse_phys,
+            get_calc             as _phys_calc_val,
+            get_pcn_band         as _get_pcn_band,
         )
-        from app.services.echa_service import _dedupe_h_codes as _dedup, lookup_echa_api as _lu_echa
-
-        async def _refresh_comp(comp: dict, _prod_form: str = '') -> dict:
-            cas = (comp.get('cas_no') or comp.get('cas') or '').strip()
-            if not cas:
-                return comp
-            try:
-                # 1. Yerel DB (SEA Ek-6, CLP Annex VI, substances_custom — git'te mevcut)
-                fresh = _lu_sub(cas, form=_prod_form)
-                if fresh is not None:
-                    # DB'de kayıt var — hazards boş olsa bile (sınıflandırılmamış madde: su, glikoz vb.)
-                    # ECHA API'ye düşme; boş hazards kasıtlı "sınıflandırılmamış" anlamına gelir.
-                    if fresh.get('hazards'):
-                        raw = {
-                            'h_codes':        [h['h_code'] for h in fresh['hazards']],
-                            'hazard_classes':  [h['h_class'] for h in fresh['hazards']],
-                        }
-                        _dedup(raw)
-                        c = dict(comp)
-                        c['hazards'] = [
-                            {'h_class': cls, 'h_code': code}
-                            for cls, code in zip(raw['hazard_classes'], raw['h_codes'])
-                        ]
-                        c['m_factors'] = fresh.get('m_factors', {})
-                        c['ate'] = fresh.get('ate', {})
-                        return c
-                    else:
-                        # Sınıflandırılmamış — hazards listesini temizle, ECHA'ya gitme
-                        c = dict(comp)
-                        c['hazards'] = []
-                        return c
-                # 2. ECHA/PubChem API — önbellekten veya canlı çekim, deduplikasyon dahil
-                echa = await _lu_echa(cas)
-                if echa and echa.get('h_codes'):
-                    # substances_custom.json'a kaydet — kalıcı, git'te commit'li
-                    if cas not in _custom_db():
-                        try:
-                            _save_custom(cas, {
-                                'name':       echa.get('name', ''),
-                                'ec_no':      echa.get('ec_no', ''),
-                                'signal':     echa.get('signal', ''),
-                                'pictograms': echa.get('pictograms', []),
-                                'hazards': [
-                                    {'h_class': c2, 'h_code': h2}
-                                    for c2, h2 in zip(
-                                        echa.get('hazard_classes', []),
-                                        echa.get('h_codes', [])
-                                    )
-                                ],
-                                'm_factors': echa.get('m_factors', {}),
-                                'index_no':  '',
-                                'atp':       'pubchem-auto',
-                            })
-                        except Exception:
-                            pass
-                    c = dict(comp)
-                    c['hazards'] = [
-                        {'h_class': cls, 'h_code': code}
-                        for cls, code in zip(
-                            echa.get('hazard_classes', []),
-                            echa.get('h_codes', [])
-                        )
-                    ]
-                    return c
-            except Exception:
-                pass
-            return comp
-
-        _prod_form_for_refresh = data.get('form') or product.get('form') or 'liquid'
-        components = list(await _aio.gather(*[_refresh_comp(c, _prod_form=_prod_form_for_refresh) for c in components]))
-        # H360x/H361x sub-kodlarını kanonik büyük harfe normalize et (H361d→H361D, H360Df→H360FD)
-        def _norm_sub(h: str) -> str:
-            s = str(h).replace('*', '').strip()
-            if len(s) <= 4:
-                return s
-            base, sfx = s[:4], s[4:].upper()
-            if base in ('H360', 'H361'):
-                if 'D' in sfx and 'F' in sfx:
-                    sfx = 'FD'
-                elif 'D' in sfx:
-                    sfx = 'D'
-                elif 'F' in sfx:
-                    sfx = 'F'
-                else:
-                    sfx = ''
-                return base + sfx
-            return s
-
-        # Tüm H kodlarını str'e normalize et — int/None gelirse PDF çökmez
-        # h_codes / all_h_codes — yalnızca Python motorlarından üretilir (frontend verisi kullanılmaz).
-        # Motor başarısız olursa HTTP 500 döner; PDF oluşturulmaz (fail-closed).
-        h_codes     = []   # motor try'ında _clp_res + eco + ATE + phys birleşiminden doldurulur
-        all_h_codes = []   # motor try'ında doldurulur
-        euh_codes   = [str(h) for h in data.get('euh_codes', []) if h is not None]
-        p_codes_in  = data.get('p_codes', [])
         disc_map    = data.get('disclosure_map', {})
         supplier_in = data.get('supplier', {})
         phys_in     = data.get('phys_props', {})
         revision_in = data.get('revision', {})
         usage       = product.get('usage', 'industrial')
         form        = data.get('form', product.get('form', 'liquid'))
-
-        # Signal word — clp_service.DANGER_H kullan (H225 dahil, doğru liste)
-        # Frontend'den gelen signal_word öncelikli, fallback hesaplama
-        signal = ''   # motor try'ında h_codes tamamlandıktan sonra hesaplanır
-
-        # P kodları — eko H kodu eklendikten SONRA hesaplanacak (aşağıda)
-
-        # EUH
-        euh_details = data.get('euh_details', []) or [{'code':c,'text':''} for c in euh_codes]
-        euh_result  = {'euh_codes': euh_codes, 'euh_details': euh_details}
-
-        # Ekoloji — eco_comps hazırla
-        eco_comps = [{'cas': c.get('cas',''), 'name': c.get('name',''),
-                      'name_tr': c.get('name_tr',''),
-                      'conc': float(c.get('conc', c.get('concentration',0)) or 0),
-                      # worst_case_conc: ecological_service.calculate_aquatic() bunu okur.
-                      # concMax varsa aralığın üst sınırını kullan.
-                      'worst_case_conc': float(c.get('concMax') or c.get('conc', c.get('concentration',0)) or 0),
-                      'hazards': c.get('hazards',[]),
-                      'm_factors': c.get('m_factors', {}),
-                      'ec50_algae':   c.get('ec50_algae'),
-                      'ec50_fish':    c.get('ec50_fish'),
-                      'ec50_daphnia': c.get('ec50_daphnia'),
-                      'ec50_noec':    c.get('ec50_noec'),
-                      } for c in components]
-        eco_result = None  # try bloğunda güncellenir; hata varsa reconciliation fallback devreye girer
-
-        # Sabitler ve yetkili motor çıktıları — reconciliation bloğunda uygulanır
-        ECO_H_CODES  = {'H400', 'H410', 'H411', 'H412', 'H413'}
-        _FLAM_LIQ_H  = {'H224', 'H225', 'H226'}
-        _auth_flam_h = None   # physical_engine: ölçülen FP → flam_liq H kodu
-        _phys_ok     = False  # physical_engine sonucu alındı mı (yanıcılık yetkisi için)
-        _clp_res     = {}     # classify_mixture_clp sonucu — try bloğunda doldurulur
-        # NOT: h_codes/all_h_codes güncellemeleri TEK reconciliation bloğunda yapılır
-
-        # H314 nötralizasyon bayrağı — filtre motor try'ından SONRA uygulanır
-        _H314_COVERED = {'H314', 'H318', 'H315', 'H319'}
+        _form_val   = product.get('form') or 'liquid'
+        _prod_form_for_refresh = data.get('form') or product.get('form') or 'liquid'
+        _parsed_phys = _parse_phys(phys_in)
+        _req_methods: dict = data.get('phys_methods', {}) or {}
         _h314_removed_flag = bool(data.get('h314_neutralization_removed', False))
 
-        # ── Python motorlarıyla clp_passed, transport ve ppe'yi yeniden hesapla ──
-        # Frontend'den gelen değerler YERINE Python sonuçları kullanılır.
-        # ISO 27001: tüm sınıflandırma hesapları sunucu tarafında yapılır.
-        py_ppe = data.get('ppe', {})   # fallback değeri (hata durumu için)
+        def _num(v):
+            try:
+                return float(v) if v not in (None, '') else None
+            except (TypeError, ValueError):
+                return None
 
-        # ATE sağlık tehlikeleri — motor try'ından ÖNCE hesapla, böylece
-        # motor hatası _be_ate_h'ı sıfırlayamaz (eski satır 434 sorunu giderildi)
-        try:
-            from app.services.clp_service import calculate_ate_health_h_codes as _ate_h_calc_pre
-            _be_ate_h, _be_ate_details = _ate_h_calc_pre(
-                components, form=product.get('form', 'liquid')
-            )
-        except Exception as _ate_pre_err:
-            print(f'[ATE PRE ERROR] {_ate_pre_err}')
-            _be_ate_h, _be_ate_details = [], {}
-
-        # Taşıma bileşen listesi — motor try'ından ÖNCE kur; hata PDF üretimini durdurur.
-        # try içinde olsaydı ValueError sessizce frontend verisine (data['transport']) düşerdi.
-        from app.services.transport_engine import build_transport_components as _build_tr_comps
-        _tr_components = _build_tr_comps(components)
-
-        try:
-            from app.services.clp_service       import classify_mixture_clp as _clp_calc
-            from app.services.physical_engine   import calculate as _phys_calc
-            from app.services.stot_engine       import calculate as _stot_calc
-            from app.services.transport_engine  import classify as _transport_calc
-            from app.services.ppe_engine        import select as _ppe_calc
-            from app.services.codes_i18n        import correct_hclass as _correct_hclass
-            from app.services.phys_props_parser import (
-                parse_all_phys_props as _parse_phys,
-                get_calc             as _phys_calc_val,
-                get_pcn_band         as _get_pcn_band,
-            )
-
-            # Fiziksel özellikleri parse et → display/calc/pcn/range_notes
-            _parsed_phys = _parse_phys(phys_in)
-
-            _form_val = product.get('form') or 'liquid'
-            # Flash point — aralık girilmişse worst-case (min) alınır
-            # JS auto-fill sonucu ise measured=False gelir → _user_fp=None bırak,
-            # engine bileşenlerden hesaplamalı (B2 ile B9 tutarlı olsun).
-            _req_methods: dict = data.get('phys_methods', {})
+        _ci = data.get('calc_input') or None
+        if _ci:
+            _inp = {
+                'components': _ci.get('components') or components,
+                'form':       _ci.get('form') or _form_val,
+                'form_sub':   _ci.get('form_sub') or '',
+                'usage':      _ci.get('usage') or usage,
+                'lang':       lang,
+                'user_fp':    _num(_ci.get('user_fp')),
+                'user_bp':    _num(_ci.get('user_bp')),
+                'fp_status':  _ci.get('fp_status') or '',
+                'mixture_ph': _ci.get('mixture_ph'),
+                'test_data':  _ci.get('test_data') or {},
+                'h314_removed': _h314_removed_flag,
+            }
+        else:
             _fp_req_m = _req_methods.get('flash_point', {}) if isinstance(_req_methods, dict) else {}
             _fp_is_user = _fp_req_m.get('measured', True) if isinstance(_fp_req_m, dict) else True
             _user_fp = _phys_calc_val(_parsed_phys, 'flash_point') if _fp_is_user else None
             if _user_fp is None:
-                # Eski format fallback
-                _fp_raw = phys_in.get('user_fp')
-                if _fp_raw is not None:
-                    try: _user_fp = float(_fp_raw)
-                    except: pass
+                _user_fp = _num(phys_in.get('user_fp'))
+            _inp = {
+                'components': components,
+                'form':       _form_val,
+                'form_sub':   product.get('form_sub') or data.get('form_sub') or '',
+                'usage':      usage,
+                'lang':       lang,
+                'user_fp':    _user_fp,
+                'user_bp':    _phys_calc_val(_parsed_phys, 'boiling_point'),
+                'fp_status':  data.get('fp_status') or '',
+                'mixture_ph': phys_in.get('ph') or None,
+                'test_data':  {},
+                'h314_removed': _h314_removed_flag,
+            }
 
-            # Kaynama noktası — BP_DB'de CAS yoksa kullanıcı girişi fallback olarak kullanılır
-            _user_bp = _phys_calc_val(_parsed_phys, 'boiling_point')
+        # Motor başarısız olursa PDF üretilmez (fail-closed)
+        try:
+            core = await _pipe.classify(_inp)
+        except Exception as _eng_err:
+            import traceback as _tb
+            print(f'[PDF] Motor hatası — PDF üretilmedi: {_eng_err}\n{_tb.format_exc()}')
+            raise HTTPException(status_code=500, detail=f'SDS motor hatası: {_eng_err}')
 
-            # pH — clp_service kendi parse'ını yapıyor (aralık desteği mevcut)
-            # ham string geçirilir; clp_service _parse_ph_range ile lo/hi ayırır
-            _ph_raw = phys_in.get('ph') or None
-            _clp_res  = _clp_calc(components, mixture_ph=_ph_raw, mixture_form=_form_val)
-            # form_sub / fp_status ön yüzden üst düzeyde gelir (product içinde değil)
-            _phys_res = _phys_calc(components, form=_form_val, user_fp=_user_fp,
-                                   user_bp=_user_bp,
-                                   form_sub=product.get('form_sub') or data.get('form_sub') or '',
-                                   fp_status=data.get('fp_status') or '')
-            _stot_res = _stot_calc(components)
-
-            try:
-                eco_result = calculate_ecological(eco_comps)
-            except Exception:
-                eco_result = None
-
-            # ── B9 theo_props backfill ───────────────────────────────────────────
-            # physical_engine'in hesapladığı teorik değerleri kullanıcı boş
-            # bıraktığı alanlar için _parsed_phys'e aktar.
-            # measured: True  → kullanıcı girdi (ölçülen/beyan değer)
-            # measured: False → motor hesapladı (teorik, KKDİK Ek-2 §9 dipnotu)
-            _theo = _phys_res.get('theo_props') or {}
-            _phys_methods: dict = {}
-            # _req_methods yukarıda (_user_fp öncesinde) tanımlandı
-            _BACKFILL_FIELDS = (
-                'flash_point', 'boiling_point', 'density', 'vapor_density',
-                'vapor_pressure', 'lel', 'uel', 'viscosity', 'solubility',
-                'melting_point', 'auto_ignition', 'decomposition_temp', 'evap_rate',
+        if core['pending_decisions']:
+            raise HTTPException(
+                status_code=409,
+                detail={
+                    'error': 'pending_decisions',
+                    'message': 'PDF üretilemiyor — aşağıdaki kararlar çözümlenmeden sınıflandırma tamamlanamaz.',
+                    'pending_decisions': core['pending_decisions'],
+                },
             )
-            for _bk in _BACKFILL_FIELDS:
-                _tp = _theo.get(_bk)
-                if not _tp:
-                    continue
-                _tp_val  = _tp.get('value')
-                _tp_disp = _tp.get('display') or (str(_tp_val) if _tp_val is not None else None)
-                _tp_std  = _tp.get('standard', '')
-                _tp_mth  = _tp.get('method', '')
-                _tp_err  = (_tp.get('error') or {}).get('pct')
 
-                _existing = _parsed_phys.get(_bk)
-                _has_user_val = (
-                    isinstance(_existing, dict) and _existing.get('calc') is not None
-                ) or (
-                    _existing and not isinstance(_existing, dict)
-                    and str(_existing).strip() not in ('', '0')
-                )
+        # Bölüm 3 bileşenleri: ön yüz alanları (konsantrasyon metni, EC no…) + tazelenmiş tehlike verisi
+        _fresh_by_cas = {(c.get('cas') or c.get('cas_no') or '').strip(): c for c in core['components']}
+        def _overlay(c: dict) -> dict:
+            f = _fresh_by_cas.get((c.get('cas') or c.get('cas_no') or '').strip())
+            if not f:
+                return c
+            c = dict(c)
+            for k in ('hazards', 'm_factors', 'ate', 'suppl_hazards', 'euh_limits'):
+                if k in f:
+                    c[k] = f[k]
+            return c
+        components = [_overlay(c) for c in components]
 
-                if _has_user_val:
-                    # Kullanıcı değer girmiş — JS'den gelen measured bayrağına güven
-                    # (motor auto-fill ise JS dataset.source='theo' → measured=False gönderir)
-                    _req_m = _req_methods.get(_bk)
-                    _is_measured = bool(_req_m.get('measured', True)) if isinstance(_req_m, dict) else True
-                    # Kullanıcı girişinde standart = kullanıcının girdiği yöntem bilgisi;
-                    # teorik engine standardı (_tp_std) buraya taşınmaz — Bölüm 9'da
-                    # "hesaplanmış – CLP Annex VI" yerine doğru kaynak gösterilsin.
-                    _user_std = (_req_m.get('standard', '') or '') if isinstance(_req_m, dict) else ''
-                    _phys_methods[_bk] = {
-                        'measured': _is_measured, 'standard': _user_std,
-                        'method': (_req_m.get('method', '') or '') if isinstance(_req_m, dict) else '',
-                        'error_pct': None if _is_measured else _tp_err,
-                    }
-                elif _tp_val is not None:
-                    # Kullanıcı boş bırakmış, teorik değer var → backfill
-                    # _tp.get('measured') True ise kullanıcı test verisi girmiş (theo değil)
-                    _tp_measured = _tp.get('measured', False)
-                    _parsed_phys[_bk] = {
-                        'display': _tp_disp,
-                        'calc':    _tp_val,
-                        'pcn':     _tp_val,
-                        'nd':      False,
-                        'na':      False,
-                        'theo':    not _tp_measured,
-                    }
+        h_codes         = core['h_codes']
+        all_h_codes     = core['all_h_codes']
+        signal          = core['signal']
+        py_clp_passed   = core['clp_passed']
+        euh_result      = core['euh']
+        euh_codes       = euh_result.get('euh_codes', [])
+        p_result        = core['p_codes']
+        py_transport    = core['transport']
+        py_ppe          = core['ppe']
+        eco_result      = core['eco_obj']
+        _phys_res       = core['phys_res']
+        _clp_res        = core['clp_res']
+        _be_ate_details = core['ate_details']
+
+        # ── B9 theo_props backfill ───────────────────────────────────────────
+        # physical_engine'in hesapladığı teorik değerleri kullanıcı boş
+        # bıraktığı alanlar için _parsed_phys'e aktar.
+        # measured: True  → kullanıcı girdi (ölçülen/beyan değer)
+        # measured: False → motor hesapladı (teorik, KKDİK Ek-2 §9 dipnotu)
+        _theo = _phys_res.get('theo_props') or {}
+        _phys_methods: dict = {}
+        # _req_methods yukarıda (_user_fp öncesinde) tanımlandı
+        _BACKFILL_FIELDS = (
+            'flash_point', 'boiling_point', 'density', 'vapor_density',
+            'vapor_pressure', 'lel', 'uel', 'viscosity', 'solubility',
+            'melting_point', 'auto_ignition', 'decomposition_temp', 'evap_rate',
+        )
+        for _bk in _BACKFILL_FIELDS:
+            _tp = _theo.get(_bk)
+            if not _tp:
+                continue
+            _tp_val  = _tp.get('value')
+            _tp_disp = _tp.get('display') or (str(_tp_val) if _tp_val is not None else None)
+            _tp_std  = _tp.get('standard', '')
+            _tp_mth  = _tp.get('method', '')
+            _tp_err  = (_tp.get('error') or {}).get('pct')
+
+            _existing = _parsed_phys.get(_bk)
+            _has_user_val = (
+                isinstance(_existing, dict) and _existing.get('calc') is not None
+            ) or (
+                _existing and not isinstance(_existing, dict)
+                and str(_existing).strip() not in ('', '0')
+            )
+
+            if _has_user_val:
+                # Kullanıcı değer girmiş — JS'den gelen measured bayrağına güven
+                # (motor auto-fill ise JS dataset.source='theo' → measured=False gönderir)
+                _req_m = _req_methods.get(_bk)
+                _is_measured = bool(_req_m.get('measured', True)) if isinstance(_req_m, dict) else True
+                # Kullanıcı girişinde standart = kullanıcının girdiği yöntem bilgisi;
+                # teorik engine standardı (_tp_std) buraya taşınmaz — Bölüm 9'da
+                # "hesaplanmış – CLP Annex VI" yerine doğru kaynak gösterilsin.
+                _user_std = (_req_m.get('standard', '') or '') if isinstance(_req_m, dict) else ''
+                _phys_methods[_bk] = {
+                    'measured': _is_measured, 'standard': _user_std,
+                    'method': (_req_m.get('method', '') or '') if isinstance(_req_m, dict) else '',
+                    'error_pct': None if _is_measured else _tp_err,
+                }
+            elif _tp_val is not None:
+                # Kullanıcı boş bırakmış, teorik değer var → backfill
+                # _tp.get('measured') True ise kullanıcı test verisi girmiş (theo değil)
+                _tp_measured = _tp.get('measured', False)
+                _parsed_phys[_bk] = {
+                    'display': _tp_disp,
+                    'calc':    _tp_val,
+                    'pcn':     _tp_val,
+                    'nd':      False,
+                    'na':      False,
+                    'theo':    not _tp_measured,
+                }
+                _phys_methods[_bk] = {
+                    'measured':  _tp_measured,
+                    'standard':  _tp_std,
+                    'method':    _tp_mth,
+                    'error_pct': _tp_err,
+                }
+            elif _tp_disp:
+                # Sayısal değer yok ama metin açıklama var
+                # (örn. çözünürlük: "Su ile tam karışır", buharlaşma hızı: "Yavaş")
+                _tp_measured = _tp.get('measured', False)
+                _parsed_phys[_bk] = {
+                    'display': _tp_disp,
+                    'calc':    None,
+                    'nd':      False,
+                    'na':      False,
+                    'theo':    not _tp_measured,
+                }
+                if _tp.get('estimate_only'):
+                    # Ölçülmemiş FP/KN: "Belirlenmemiştir" — "hesaplanmış" notu basılmaz
+                    _phys_methods[_bk] = ({'note_text': _tp['pdf_note']}
+                                          if _tp.get('pdf_note') else {})
+                else:
                     _phys_methods[_bk] = {
                         'measured':  _tp_measured,
                         'standard':  _tp_std,
                         'method':    _tp_mth,
-                        'error_pct': _tp_err,
+                        'error_pct': None,
                     }
-                elif _tp_disp:
-                    # Sayısal değer yok ama metin açıklama var
-                    # (örn. çözünürlük: "Su ile tam karışır", buharlaşma hızı: "Yavaş")
-                    _tp_measured = _tp.get('measured', False)
-                    _parsed_phys[_bk] = {
-                        'display': _tp_disp,
-                        'calc':    None,
-                        'nd':      False,
-                        'na':      False,
-                        'theo':    not _tp_measured,
-                    }
-                    if _tp.get('estimate_only'):
-                        # Ölçülmemiş FP/KN: "Belirlenmemiştir" — "hesaplanmış" notu basılmaz
-                        _phys_methods[_bk] = ({'note_text': _tp['pdf_note']}
-                                              if _tp.get('pdf_note') else {})
-                    else:
-                        _phys_methods[_bk] = {
-                            'measured':  _tp_measured,
-                            'standard':  _tp_std,
-                            'method':    _tp_mth,
-                            'error_pct': None,
-                        }
-            # ────────────────────────────────────────────────────────────────────
-
-            _cp   = []
-            _seen = set()
-
-            for p in _clp_res.get('passed', []):
-                _hcf = (p.get('h_code') or '').replace('*','').strip()
-                hc   = _norm_sub(_hcf)
-                if hc[:4] not in ('H360', 'H361'):
-                    hc = hc[:4]
-                # ECO_H_CODES filtresi: aquatic sınıflandırma yalnızca ecological_service'den
-                # gelir (M-faktörlü toplamsal formül, CLP Tablo 4.1.1/4.1.2).
-                # classify_mixture_clp içindeki CLP_CUTOFFS_DICT aquatic satırları
-                # (H400/H410/H411/H412/H413) bu filtre nedeniyle asla kullanılmaz — ölü koddur.
-                if hc and hc not in _seen and hc not in ECO_H_CODES:
-                    _seen.add(hc)
-                    _fixed = _correct_hclass(hc, p.get('h_class',''))
-                    _cp.append({
-                        'h_code':      hc,
-                        'h_class':     _fixed or p.get('h_class',''),
-                        'reason':      p.get('reason',''),
-                        'cutoff_used': p.get('cutoff_used',''),
-                    })
-
-            # CLP Ek-I §2.6.4.2: physical_engine'den yanıcı sıvı H kodu al.
-            # ⚠️  İKİZ KOD NOTU: Yanıcılık sınıflandırması üç yerde birlikte çalışır:
-            #   1. static/index.html  — kullanıcıya gösterilen ön görüntü (flash_point'ten direkt)
-            #   2. physical_engine.py — PDF için hem ölçülen FP hem bileşen FP toplamsal hesabı
-            #   3. main.py (burada)   — physical_engine sonucunu h_codes + transport'a aktarır
-            #   Birini değiştirince diğerlerini de kontrol et.
-            _auth_flam_h = next(
-                (r.get('h') for r in _phys_res.get('results', [])
-                 if r.get('type') == 'flam_liq'),
-                None
-            )
-            _phys_ok = _form_val in ('liquid', 'paste')
-            # Alevlenir sıvı sınıfının tek karar vericisi physical_engine (hesaplama uç noktasıyla
-            # aynı kural): CLP kesim tahmini her zaman silinir — "test edildi, yanıcı değil"
-            # beyanında da geri gelmemeli.
-            _cp   = [e for e in _cp if e['h_code'] not in _FLAM_LIQ_H]
-            _seen -= _FLAM_LIQ_H
-
-            for r in _phys_res.get('results', []):
-                hc = (r.get('h') or r.get('h_code') or '').replace('*','').strip()[:4]
-                if hc and hc not in _seen:
-                    _seen.add(hc)
-                    _cp.append({
-                        'h_code':      hc,
-                        'h_class':     r.get('h_class',''),
-                        'reason':      r.get('source') or 'Fiziksel tehlike motoru',
-                        'cutoff_used': r.get('cutoff_used') or '—',
-                    })
-
-            for r in _stot_res.get('results', []):
-                hc = (r.get('h_code') or '').replace('*','').strip()[:4]
-                if hc and hc not in _seen:
-                    _seen.add(hc)
-                    _cp.append({
-                        'h_code':      hc,
-                        'h_class':     r.get('h_class',''),
-                        'reason':      r.get('reason','STOT RE toplamsal'),
-                        'cutoff_used': '—',
-                    })
-
-            if eco_result and hasattr(eco_result, 'aquatic') and eco_result.aquatic:
-                _aq = eco_result.aquatic
-                hc = _aq.h_code
-                if hc and hc not in _seen:
-                    _seen.add(hc)
-                    _cp.append({
-                        'h_code':      hc,
-                        'h_class':     _aq.h_class,
-                        'reason':      _aq.formula or 'Sucul ekoloji',
-                        'cutoff_used': '—',
-                    })
-
-            # ── CLP Baskınlık kuralı — Bölüm 2.1 tablosuna uygula ───────────────
-            # Fiziksel motor sonuçları CLP dominance'dan sonra eklendi;
-            # py_clp_passed kombinasyonuna da uygula.
-            # Örnek: H225 varsa H226 Bölüm 2.1'den kaldırılır.
-            _DOMINANCE_MAP = {
-                'H225': ['H226'], 'H224': ['H225', 'H226'],
-                'H271': ['H272'], 'H270': ['H271', 'H272'],
-                'H314': ['H315', 'H319'],
-                'H318': ['H319'],
-                'H300': ['H301', 'H302'], 'H310': ['H311', 'H312'],
-                'H330': ['H331', 'H332'],
-                'H340': ['H341'], 'H350': ['H351'],
-                'H360': ['H361'], 'H370': ['H371'],
-                'H372': ['H373'],
-                'H400': ['H401', 'H402'],
-                'H410': ['H411', 'H412', 'H413'],
-                'H411': ['H412', 'H413'],
-                'H412': ['H413'],
-            }
-            _present = {e['h_code'] for e in _cp}
-            _dominated = set()
-            for _dom, _subs in _DOMINANCE_MAP.items():
-                if _dom in _present:
-                    _dominated.update(_subs)
-            if _dominated:
-                _cp = [e for e in _cp if e['h_code'] not in _dominated]
-
-            py_clp_passed = _cp
-
-            # Transport — fiziksel H kodlarını da ilet
-            _phys_h_tr = [(r.get('h') or r.get('h_code') or '')
-                          for r in _phys_res.get('results', [])]
-            # ÖH 375 için viskozite: önce phys_in (kullanıcı ölçümü), yoksa motor tahmini
-            _visc_tr = None
-            _visc_raw = phys_in.get('viscosity', {})
-            if isinstance(_visc_raw, dict):
-                _visc_tr = _visc_raw.get('value')
-            elif _visc_raw:
-                try: _visc_tr = float(_visc_raw)
-                except (ValueError, TypeError): pass
-            if _visc_tr is None:
-                _visc_tr = (_phys_res.get('theo_props') or {}).get('viscosity', {}).get('value')
-            # ── Nihai sınıflandırma birleştirmesi → transport girdisi ──────────────
-            # ADR §2.2.9.1.10.3.1: Sınıf 9 kararı "nihai CLP sınıflandırmasından" türer.
-            # Mimaride bu iki motorun birleşimi: classify_mixture_clp + ecological_service.
-            # _clp_res değiştirilmez; _final_cls_h ayrı bir birleştirme nesnesidir.
-            _eco_h_merge: list = []
-            try:
-                if eco_result and hasattr(eco_result, 'aquatic') and eco_result.aquatic:
-                    _aq_m = getattr(eco_result.aquatic, 'h_code', '') or ''
-                    if _aq_m:
-                        _eco_h_merge.append(_aq_m)
-                    _aqa_m = getattr(eco_result, 'aquatic_acute', None)
-                    if _aqa_m and getattr(_aqa_m, 'h_code', None) == 'H400' and 'H400' not in _eco_h_merge:
-                        _eco_h_merge.append('H400')
-            except Exception:
-                pass
-            # Alevlenir sıvı: CLP kesim tahmini değil physical_engine sonucu (hesaplama uç noktasıyla
-            # aynı) — aksi halde ölçülen FP / "yanıcı değil" beyanı taşımaya yansımaz.
-            _final_cls_h = list(dict.fromkeys(
-                [h for h in _clp_res.get('h_codes', []) if h not in _FLAM_LIQ_H]
-                + _eco_h_merge + _phys_h_tr
-            ))
-            py_transport = _transport_calc(
-                h_codes=_final_cls_h,
-                form=_form_val,
-                phys_h_codes=_phys_h_tr,
-                viscosity=float(_visc_tr) if _visc_tr is not None else None,
-                components=_tr_components,
-            )
-
-            # h_codes / all_h_codes — yalnızca CLP motoru çıktısından kur
-            # Reconciliation bloğu eco + ATE + phys kodlarını buraya ekleyecek
-            h_codes     = list(dict.fromkeys(_norm_sub(h) for h in _clp_res.get('h_codes', [])))
-            all_h_codes = list(h_codes)
-            # H314 nötralizasyon — motor h_codes'u kesinleşince uygula
-            if _h314_removed_flag:
-                h_codes     = [h for h in h_codes     if h not in _H314_COVERED]
-                all_h_codes = [h for h in all_h_codes if h not in _H314_COVERED]
-
-            # Bekleyen kararlar — herhangi biri varsa PDF üretilmez
-            _pending = _phys_res.get('pending_decisions', [])
-            if _pending:
-                raise HTTPException(
-                    status_code=409,
-                    detail={
-                        'error': 'pending_decisions',
-                        'message': 'PDF üretilemiyor — aşağıdaki kararlar çözümlenmeden sınıflandırma tamamlanamaz.',
-                        'pending_decisions': _pending,
-                    },
-                )
-
-        except Exception as _eng_err:
-            import traceback as _tb
-            _tb_str = _tb.format_exc()
-            print(f'[PDF] Motor hatası — PDF üretilmedi: {_eng_err}\n{_tb_str}')
-            raise HTTPException(
-                status_code=500,
-                detail=f'SDS motor hatası: {_eng_err}',
-            )
-
-        # ── Motor çıktılarını birleştir ───────────────────────────────────────────
-        # h_codes motor try'ında _clp_res'ten kuruldu; burası eco/ATE/phys ekler.
-
-        # ── 1. Yanıcı Sıvı — ölçülen FP varsa physical_engine kazanır ────────────
-        # CLP Ek-I §2.6.4.2 — py_clp_passed try bloğunda zaten temizlendi
-        if _phys_ok:   # motor çalıştıysa physical_engine sonucu yetkili (yoksa ön yüz kodları kalır)
-            _fl_add = [_auth_flam_h] if _auth_flam_h else []
-            h_codes     = [h for h in h_codes     if h not in _FLAM_LIQ_H] + _fl_add
-            all_h_codes = [h for h in all_h_codes if h not in _FLAM_LIQ_H] + _fl_add
-
-        # ── 2. Sucul Eko — ecological_service tek yetkili kaynak ───────────────────
-        _final_eco_h = None
-        try:
-            if eco_result and hasattr(eco_result, 'aquatic') and eco_result.aquatic:
-                _final_eco_h = eco_result.aquatic.h_code
-        except Exception:
-            pass
-
-        # _final_eco_h hâlâ None ise → frontend eco koduna dokunma
-        if _final_eco_h:
-            # CLP §4.1.3.5.5: H410 bileşeni aynı zamanda H400 üretir → B2.1'de iki ayrı satır
-            # Ama etikette (h_codes) H410 varken H400 fazlalık sayılır (SEA Md.29(1))
-            # → all_h_codes (B2.1 sınıflandırma) her ikisini alır
-            # → h_codes (B2.2 etiket) sadece baskın kodu alır
-            _eco_add_label = [_final_eco_h]
-            _eco_add_class = [_final_eco_h]
-            # H410 → CLP §4.1.3.5.5: aynı zamanda H400 (B2.1 sınıflandırma)
-            # ecological_service baskınlık kuralıyla tek sonuç döndürüyor;
-            # H400 satırını eco_result.aquatic_acute üzerinden kontrol et
-            _h400_also = False
-            if _final_eco_h not in (None, 'H400') and eco_result is not None:
-                _aq_acute = getattr(eco_result, 'aquatic_acute', None)
-                if _aq_acute and getattr(_aq_acute, 'h_code', None) == 'H400':
-                    _h400_also = True
-            if _h400_also:
-                _eco_add_class.append('H400')  # B2.1'e H400 da gider
-                # h_codes'a H400 eklenmez — H410 zaten H400'ü kapsıyor (SEA Md.29(1))
-            h_codes     = [h for h in h_codes     if h not in ECO_H_CODES] + _eco_add_label
-            all_h_codes = [h for h in all_h_codes if h not in ECO_H_CODES] + _eco_add_class
-            # py_clp_passed'da eko yoksa ekle
-            _passed_eco_set = {e.get('h_code', '') for e in py_clp_passed}
-            if _final_eco_h not in _passed_eco_set:
-                py_clp_passed = list(py_clp_passed) + [{
-                    'h_code':      _final_eco_h,
-                    'h_class':     '',
-                    'reason':      'Sucul ekoloji (ecological_service)',
-                    'cutoff_used': '—',
-                }]
-            # H400 ayrı passed satırı — "Baskın tehlike sınıfı" notu yerine doğru gerekçe
-            if _h400_also and 'H400' not in _passed_eco_set:
-                py_clp_passed = list(py_clp_passed) + [{
-                    'h_code':      'H400',
-                    'h_class':     'Aquatic Acute 1',
-                    'reason':      'CLP §4.1.3.5.5: H410 bileşeni Sucul Akut 1 (H400) de üretir',
-                    'cutoff_used': '—',
-                }]
-            # sds_section_12['12.1'] güncelle:
-            # - high confidence → her zaman güncelle (ecological_service'i ez)
-            # - low confidence  → yalnızca boşsa güncelle
-            try:
-                _s12 = (getattr(eco_result, 'sds_section_12', None) or
-                        (eco_result.get('sds_section_12', {}) if isinstance(eco_result, dict) else {}))
-                if isinstance(_s12, dict):
-                    _s12_cur = _s12.get('12.1', '')
-                    if _s12_cur in ('Sınıflandırma yok', '', None):
-                        _s12['12.1'] = _final_eco_h
-            except Exception:
-                pass
-
-        # ── 2b. B12.1 garantisi — motor bulamasa bile h_codes'taki eco kodu yansıt ─
-        # Bu adım h_codes'u yetkili kaynak olarak kullanarak tutarlılığı sağlar.
-        _eco_h_in_hcodes = next((h for h in h_codes if h in ECO_H_CODES), None)
-        if _eco_h_in_hcodes:
-            try:
-                _s12b = (getattr(eco_result, 'sds_section_12', None) or
-                         (eco_result.get('sds_section_12', {}) if isinstance(eco_result, dict) else {}))
-                if isinstance(_s12b, dict) and _s12b.get('12.1', '') in ('Sınıflandırma yok', '', None):
-                    _s12b['12.1'] = _eco_h_in_hcodes
-            except Exception:
-                pass
-
-        # ── 3. H420 — Ozon tabakasına zararlı ────────────────────────────────────
-        _sds12_ref = (getattr(eco_result, 'sds_section_12', None) or
-                      (eco_result.get('sds_section_12', {}) if isinstance(eco_result, dict) else {}))
-        if _sds12_ref.get('H420'):
-            if 'H420' not in h_codes:     h_codes     = list(h_codes)     + ['H420']
-            if 'H420' not in all_h_codes: all_h_codes = list(all_h_codes) + ['H420']
-
-        # ── 4. Signal word — h_codes güncellenince yeniden hesapla ───────────────
-        _clean_h = {h.split()[0] for h in h_codes if isinstance(h, str)}
-        signal = 'Danger' if is_danger(_clean_h, _clp_res.get('passed', [])) else 'Warning'
-
-        # ── 4b. Skin/Eye kodları — classify_mixture_clp override ─────────────────
-        # Reconciliation sadece flam/eco/ozone h_codes'u güncelliyor; H314/H315/H318/H319
-        # frontend'den ne geldiyse kalıyordu. pH-tabanlı H314 B2.1'e yazılıyor ama
-        # h_codes (etiket/P-kodu/B11 kaynağı) güncellenmiyordu → H315/H318 etikette kalıyordu.
-        _SKIN_EYE_H = {'H314', 'H315', 'H318', 'H319'}
-        _clp_skin_new = {h for h in _clp_res.get('h_codes', []) if h in _SKIN_EYE_H}
-        if _clp_skin_new:
-            # Backend CLP motor sonucu var → frontend skin/eye kodlarını ez
-            h_codes = [h for h in h_codes if h not in _SKIN_EYE_H] + sorted(_clp_skin_new)
-            # all_h_codes: B2.1 için dominated kodları da ekle (H318 "Baskın kapsamında" notu)
-            _clp_all_skin = set(_clp_skin_new)
-            for _pe in _clp_res.get('passed', []):
-                if _pe.get('h_code', '') in _SKIN_EYE_H:
-                    _clp_all_skin.add(_pe['h_code'])
-            _exist_all = set(all_h_codes)
-            all_h_codes = list(all_h_codes) + [h for h in sorted(_clp_all_skin) if h not in _exist_all]
-            # H314 Danger getirir — signal word yeniden hesapla
-            _clean_h = {h.split()[0] for h in h_codes if isinstance(h, str)}
-            signal = 'Danger' if is_danger(_clean_h, _clp_res.get('passed', [])) else 'Warning'
-
-        # ── 5. H314 → H318 birlikteliği (CLP §3.3.1.4 / SEA Tablo 3.3.1) ────────
-        # Skin Corr. 1 (H314) varlığında Eye Dam. 1 (H318) sınıflandırma tablosuna
-        # zorunlu eklenir. Etiket (h_codes): H318 gizlenir — SEA Madde 28 dominance.
-        if 'H314' in set(h_codes):
-            if 'H318' not in set(all_h_codes):
-                all_h_codes = list(all_h_codes) + ['H318']
-            if not any(e.get('h_code') == 'H318' for e in py_clp_passed):
-                py_clp_passed = list(py_clp_passed) + [{
-                    'h_code':      'H318',
-                    'h_class':     'Eye Dam. 1',
-                    'reason':      'H314 varlığında otomatik (CLP §3.3.1.4)',
-                    'cutoff_used': '—',
-                }]
-            if 'H318' in set(h_codes):
-                h_codes = [h for h in h_codes if h != 'H318']
-
-        # ── 6. H304 — sadece sıvı/pasta formda geçerli ──────────────────────────
-        # CLP §3.10.1: aspirasyon tehlikesi katı, toz, gaz ve aerosol formda uygulanmaz
-        if form not in ('liquid', 'paste'):
-            h_codes       = [h for h in h_codes       if h != 'H304']
-            all_h_codes   = [h for h in all_h_codes   if h != 'H304']
-            py_clp_passed = [p for p in py_clp_passed if p.get('h_code') != 'H304']
-
-        # ── 7. Sağlık tehlikeleri (ATE) — classify_mixture_clp Acute Tox. atlar ─────
-        # Tam ATE async DB fonksiyonunda yapılır; bu sync sonuç h_codes'ta eksikleri tamamlar.
-        _ACUTE_TOX_H = {'H300','H301','H302','H310','H311','H312','H330','H331','H332'}
-        if _be_ate_h:
-            _be_ate_hcodes = [e['h_code'] for e in _be_ate_h]
-            _ate_hset = {e['h_code'] for e in _be_ate_h}
-            # h_codes (etiket/sinyal kelimesi): sunucu ATE sonucu kesin
-            h_codes = [h for h in h_codes if h not in _ACUTE_TOX_H] + _be_ate_hcodes
-            # all_h_codes (B2.1 tam tablo): frontend kodlarını SİLME — sunucu kodlarını EKLE
-            # Sunucu ATEmix eşiği aşarsa (örn. H331 yok ama bileşen bireysel H331 taşıyor)
-            # frontend kodları B2.1'de "Baskın tehlike sınıfı kapsamında" ile görünmeye devam eder
-            _existing_h = set(all_h_codes)
-            all_h_codes = list(all_h_codes) + [h for h in _be_ate_hcodes if h not in _existing_h]
-            # Server ATE entry'lerini py_clp_passed'a yaz — önceki boş/yanlış entry'leri ez
-            py_clp_passed = [e for e in py_clp_passed if e.get('h_code') not in _ate_hset]
-            for _ate_e in _be_ate_h:
-                py_clp_passed.append({
-                    'h_code':      _ate_e['h_code'],
-                    'h_class':     _ate_e['h_class'],
-                    'reason':      _ate_e['reason'],
-                    'cutoff_used': _ate_e['cutoff_used'],
-                })
-
-        # ── 8. Transport / eco invariant — düzeltme değil, assertion ────────────
-        # py_transport try bloğunda _final_cls_h (CLP+eco birleşimi) ile hesaplandı.
-        # Eco H kodu all_h_codes içindeyken not_regulated=True pipeline hatasıdır;
-        # sessiz fallback yerine exception → PDF üretimi durur.
-        _inv_eco = {h for h in (all_h_codes or []) if h in {'H400', 'H410', 'H411'}}
-        if _inv_eco and py_transport and py_transport.get('not_regulated'):
-            raise RuntimeError(
-                f'Transport/eco pipeline tutarsızlığı: {_inv_eco} final sınıflandırmada '
-                f'var ama transport not_regulated=True döndürdü — pipeline hatası.'
-            )
-
-        # ── eco_result fallback ───────────────────────────────────────────────────
-        if eco_result is None:
-            eco_result = {'sds_section_12': {}}
-
-        # PPE — reconciliation sonrası final h_codes ile hesapla
-        # ATE H kodları (H330/H331/H302 vb.) artık h_codes'ta → doğru KKD profili
-        try:
-            py_ppe = _ppe_calc([h for h in h_codes if h], lang=lang, form=_form_val)
-        except Exception:
-            pass  # _ppe_calc tanımsızsa (try bloğu erken exception) fallback korunur
-
-        # P kodlarını son h_codes + signal ile hesapla
-        p_result = assign_p_codes(h_codes, signal, usage=usage)
-        p_result['label'] = select_label_p_codes(p_result['p_codes'], 6, h_codes=h_codes, euh_codes=euh_codes,
-                                                 usage=usage, form=(product.get('form') or 'liquid'))
-        p_result['sds']   = classify_sds_p_codes(p_result['p_codes'], usage=usage, h_codes=h_codes, form=(product.get('form') or 'liquid'),
-                                                 label=p_result['label']['selected'])
+        # ────────────────────────────────────────────────────────────────────
 
         # ── PDF için Unicode → ASCII güvenli metin dönüşümü ──────────────────────
         # Avrupa kaynaklı DB'lerde (ECHA, CLP Annex VI) "…", "≤", "≥" karakterleri
@@ -947,50 +474,6 @@ async def generate_pdf(data: dict = Body(...)):
         except Exception:
             pass  # Hata durumunda frontend verisi korunur
 
-        # ── h_codes + all_h_codes temizle — eski/geçersiz fiziksel H kodlarını çıkar ───
-        # Senaryo 3 "manuel" fiziksel tehlike kodları yalnızca physical_engine veya
-        # test_data üretebilir. py_clp_passed'da yoklarsa h_codes (B2.2 etiketi) ve
-        # all_h_codes (B2.1 sınıflandırma tablosu) listelerinden silinir.
-        # Temizlenmezse: eski JS motor kalıntısı H241 → GHS01 (patlayıcı) üretir ve
-        # ghs_pictogram dominance kuralı GHS02 (alev) piktogramını siler (B2.2 BULGU 2).
-        _MANUAL_PHYS_H = {
-            'H240','H241','H242',           # Organik peroksit / öz-reaktif
-            'H250','H251','H252',           # Pirofor / kendiliğinden ısınan
-            'H260','H261',                  # Su-reaktif
-            'H270','H271','H272',           # Oksitleyici gaz/katı/sıvı
-            'H290',                         # Metal aşındırıcı
-        }
-        # Geçerli fiziksel H kodları: Python motorundan VEYA Senaryo 3 test_data'dan gelenler
-        # PDF uç noktası _phys_calc'ı test_data olmadan çağırdığından Senaryo 3 kodları
-        # py_clp_passed'a girmiyor; ancak calculate API'si onları physical.results'ta saklar.
-        # Eski JS motor kalıntıları ise physical.results'ta yer almaz — bu farkı kullanıyoruz.
-        _engine_h_set = {e['h_code'] for e in py_clp_passed}
-        _stored_phys_h = {
-            (r.get('h') or r.get('h_code') or '').replace('*','').strip()[:4]
-            for r in (data.get('physical') or {}).get('results', [])
-            if r.get('h') or r.get('h_code')
-        }
-        _valid_phys_h = _engine_h_set | _stored_phys_h
-        h_codes = [
-            h for h in h_codes
-            if h not in _MANUAL_PHYS_H or h in _valid_phys_h
-        ]
-        all_h_codes = [
-            h for h in all_h_codes
-            if h not in _MANUAL_PHYS_H or h in _valid_phys_h
-        ]
-        # h_codes temizlendikten sonra sinyal kelimesini yeniden hesapla
-        # (ör. H241 kalkınca Danger devam edip etmediğini doğrula)
-        _clean_after_filter = {h.split()[0] for h in h_codes if isinstance(h, str)}
-        signal = 'Danger' if is_danger(_clean_after_filter, _clp_res.get('passed', [])) else ('Warning' if _clean_after_filter else '')
-        # P kodlarını temizlenmiş h_codes ile yeniden hesapla
-        # (filtreden önce H260/H261 vb. varsa P231+P232 gibi yanlış P kodları atanmış olabilir)
-        p_result = assign_p_codes(h_codes, signal, usage=usage)
-        p_result['label'] = select_label_p_codes(p_result['p_codes'], 6, h_codes=h_codes, euh_codes=euh_codes,
-                                                 usage=usage, form=(product.get('form') or 'liquid'))
-        p_result['sds']   = classify_sds_p_codes(p_result['p_codes'], usage=usage, h_codes=h_codes, form=(product.get('form') or 'liquid'),
-                                                 label=p_result['label']['selected'])
-
         # Revizyon tarihi
         import datetime
         rev_date = revision_in.get('date', datetime.datetime.now().strftime('%d.%m.%Y'))
@@ -1121,8 +604,12 @@ async def generate_pdf(data: dict = Body(...)):
                 'info':    _val_infos,
                 'issues':  _val_issues[:5],
             },
+            # PDF'in kullandığı nihai sınıflandırma — ön yüz sağ panelle karşılaştırır
+            'classification': _pipe.summary(core),
         })
 
+    except HTTPException:
+        raise   # 409 (bekleyen karar) / 500 (motor hatası) olduğu gibi dönsün
     except Exception as e:
         import traceback
         tb = traceback.format_exc()
@@ -1562,330 +1049,62 @@ async def sds_calculate(body: dict = Body(...)):
         h_codes, all_h_codes, signal, clp_passed, euh, p_codes,
         physical, stot, eco, theo_props, warnings
     """
-    import dataclasses
-    from app.services.clp_service         import classify_mixture_clp, is_danger as _is_danger
-    from app.services.physical_engine     import calculate as phys_calculate
-    from app.services.stot_engine         import calculate as stot_calculate
-    from app.services.euh_service         import check_euh as euh_calculate
-    from app.services.ecological_service  import calculate_aquatic as eco_calculate_aquatic
-    from app.services.transport_engine    import classify as transport_classify
-    from app.services.ppe_engine          import select as ppe_select
-    from app.services.p_code_service      import assign_p_codes, select_label_p_codes, classify_sds_p_codes
-    from app.services.ghs_pictogram       import get_ghs_codes
-    from app.services.codes_i18n          import correct_hclass, translate_hclass
+    from app.services import sds_pipeline as _pipe
 
-    comps       = body.get('components', [])
-    # concentration/conc/concMax anahtar tutarsızlığını tek noktada normalize et
-    for _c in comps:
-        if 'conc' not in _c and 'concentration' in _c:
-            _c['conc'] = _c['concentration']
-        if 'concMax' not in _c:
-            _c['concMax'] = _c.get('conc') or _c.get('concentration') or 0
-    form        = body.get('form', 'liquid')
-    form_sub    = body.get('form_sub') or ''
-    user_fp_raw = body.get('user_fp') or body.get('flash_point')
-    mixture_ph  = body.get('mixture_ph')
-    test_data   = body.get('test_data') or {}
-    usage       = body.get('usage', 'industrial')
-    lang        = body.get('lang', 'TR')
-    voc_content = body.get('voc_content')  # g/L, sadece boya/vernik için
+    def _num(v):
+        try:
+            return float(v) if v not in (None, '') else None
+        except (TypeError, ValueError):
+            return None
 
-    user_fp = None
-    if user_fp_raw is not None:
-        try: user_fp = float(user_fp_raw)
-        except: pass
-
-    user_bp = None
-    user_bp_raw = body.get('user_bp') or body.get('boiling_point')
-    if user_bp_raw is not None:
-        try: user_bp = float(user_bp_raw)
-        except: pass
+    form     = body.get('form', 'liquid')
+    form_sub = body.get('form_sub') or ''
 
     try:
-        # ── 1. Fiziksel tehlikeler + teorik özellikler ────────────────────────
-        phys_result = phys_calculate(comps, form=form, user_fp=user_fp, user_bp=user_bp,
-                                     test_data=test_data, form_sub=form_sub,
-                                     fp_status=body.get('fp_status') or '')
-
-        # ── 2. CLP karışım hesabı (cut-off tablosu + ATE) ────────────────────
-        clp_result = classify_mixture_clp(comps, mixture_ph=mixture_ph, mixture_form=form)
-
-        # ── 3. STOT RE ────────────────────────────────────────────────────────
-        stot_result = stot_calculate(comps)
-
-        # ── 4. EUH kodları ────────────────────────────────────────────────────
-        # suppl_hazards injection: ATP22 / substance_db → comps (EUH071 vb.)
-        try:
-            from app.services.substance_lookup import lookup_substance as _lu_euh
-            for _c in comps:
-                _cas = (_c.get('cas') or _c.get('cas_no') or '').strip()
-                if _cas and not _c.get('suppl_hazards'):
-                    _sub = _lu_euh(_cas)
-                    if _sub and _sub.get('suppl_hazards'):
-                        _c['suppl_hazards'] = _sub['suppl_hazards']
-                        _c['euh_limits']    = _sub.get('euh_limits', [])
-        except Exception:
-            pass
-        euh_result = euh_calculate(comps,
-                                    mixture_form=form,
-                                    form_sub=form_sub)
-
-        # ── 5. Ekoloji ────────────────────────────────────────────────────────
-        _aq = eco_calculate_aquatic(comps)
-        _aq_dict = None
-        if _aq:
-            _aq_dict = {
-                'h': _aq.h_code, 'cls': _aq.h_class,
-                'formula': _aq.formula, 'note': _aq.note,
-                'm_factor_warnings': _aq.m_factor_warnings or [],
-            }
-        eco_result = {'h_codes': [_aq.h_code] if _aq else [], 'aquatic': _aq_dict}
-        # H420 — ozon tabakasına zararlı bileşen ≥ %0,1 (PDF uç noktasıyla aynı kural)
-        from app.services.ecological_service import check_ozone as _check_ozone
-        if _check_ozone(comps):
-            eco_result['h_codes'].append('H420')
-
-        # ── 5b. ATE sağlık tehlikeleri — classify_mixture_clp Acute Tox. atlar ─
-        from app.services.clp_service import calculate_ate_health_h_codes as _calc_ate
-        try:
-            _ate_h_list, _ate_b11 = _calc_ate(comps, form=form)
-        except Exception:
-            _ate_h_list, _ate_b11 = [], {}
-
-        # ── Flam.Liq. — tek karar verici physical_engine (parlama noktası) ─────
-        # CLP §2.6: alevlenir sıvı sınıfı parlama/kaynama noktasıyla belirlenir, bileşen
-        # konsantrasyon kesimiyle değil. clp_service'in kesim tahmini her zaman silinir;
-        # physical_engine "alevlenir değil" dediğinde de (örn. kullanıcı FP=70°C) geri gelmemeli.
-        clp_result['passed'] = [
-            p for p in clp_result.get('passed', [])
-            if p.get('h_code') not in ('H224', 'H225', 'H226')
-        ]
-        clp_result['h_codes'] = [
-            h for h in clp_result.get('h_codes', [])
-            if h not in ('H224', 'H225', 'H226')
-        ]
-
-        # ── 6. Taşımacılık — ADR 2023 / IMDG / IATA ──────────────────────────
-        # Fiziksel motordaki H22x/H228 kodlarını CLP'ye ilave et
-        _phys_h_transport = [
-            (r.get('h') or r.get('h_code') or '')
-            for r in phys_result.get('results', [])
-        ]
-        _visc_calc = test_data.get('viscosity')
-        try: _visc_calc = float(_visc_calc) if _visc_calc is not None else None
-        except (ValueError, TypeError): _visc_calc = None
-        if _visc_calc is None:
-            _visc_calc = (phys_result.get('theo_props') or {}).get('viscosity', {}).get('value')
-        import logging as _logging
-        # Transport: CLP + eco H kodları birleşik olarak girer.
-        # H400/H410 classify_mixture_clp'den değil ecological_service'ten gelir;
-        # tek merge noktası burada — downstream tüketiciler ayrı kaynak görmez.
-        _tr_h_merged = list(dict.fromkeys(
-            list(clp_result.get('h_codes', [])) + list(eco_result.get('h_codes') or [])
-        ))
-        from app.services.transport_engine import build_transport_components as _build_tr_comps_calc
-        _tr_components_calc = _build_tr_comps_calc(comps)
-        _logging.getLogger(__name__).info('[transport] components=%s', [(c.cas, c.conc) for c in _tr_components_calc])
-        transport_result = transport_classify(
-            h_codes=_tr_h_merged,
-            form=form,
-            phys_h_codes=_phys_h_transport,
-            viscosity=float(_visc_calc) if _visc_calc is not None else None,
-            components=_tr_components_calc,
-        )
-
-        # Transport / eco invariant — düzeltme değil, assertion.
-        _calc_eco_h = {h for h in _tr_h_merged if h in {'H400', 'H410', 'H411'}}
-        if _calc_eco_h and transport_result.get('not_regulated'):
-            _logging.getLogger(__name__).error(
-                'Transport/eco pipeline tutarsızlığı: %s merged h_codes içinde '
-                'ama transport not_regulated=True — pipeline hatası.', _calc_eco_h
-            )
-
-        # ── KKD (Bölüm 8) ────────────────────────────────────────────────────
-        # all_h_list henüz hesaplanmamış, transport sonrasında yapılıyor;
-        # şimdi mevcut h kodlarıyla PPE seç — ekoloji H'ları sonra eklenir.
-        # PPE fonksiyonu küçük set farkına toleranslı, eksik H=false negative.
-        _ppe_h_now = (
-            list(clp_result.get('h_codes', []))
-            + [r.get('h') or r.get('h_code') or '' for r in phys_result.get('results', [])]
-            + stot_result.get('h_codes', [])
-            + eco_result.get('h_codes', [])
-        )
-        ppe_result = ppe_select([h for h in _ppe_h_now if h], lang=lang, form=form)
-
-        # ── H kodlarını birleştir ─────────────────────────────────────────────
-        all_h = set(clp_result.get('h_codes', []))
-
-        # Fiziksel tehlikeler
-        for r in phys_result.get('results', []):
-            h = r.get('h') or r.get('h_code')
-            if h: all_h.add(h)
-
-        # STOT RE
-        for h in stot_result.get('h_codes', []):
-            all_h.add(h)
-
-        # Ekoloji
-        for h in eco_result.get('h_codes', []):
-            all_h.add(h)
-
-        # ATE sağlık tehlikeleri (Acute Tox.) — baskınlık uygulanmış
-        _ACUTE_TOX_H_CALC = {'H300','H301','H302','H310','H311','H312','H330','H331','H332'}
-        all_h = {h for h in all_h if h not in _ACUTE_TOX_H_CALC}
-        for _ae in _ate_h_list:
-            all_h.add(_ae['h_code'])
-
-        all_h_list = sorted(all_h)
-
-        # ── Sinyal kelimesi ───────────────────────────────────────────────────
-        signal = 'Danger' if _is_danger(all_h, clp_result.get('passed', [])) else ('Warning' if all_h else '')
-
-        # ── clp_passed listesi (PDF Bölüm 2.1 için) ──────────────────────────
-        clp_passed = []
-        seen = set()
-
-        # CLP cut-off sonuçları
-        for p in clp_result.get('passed', []):
-            hc = (p.get('h_code') or '').replace('*','').strip()[:4]
-            if hc and hc not in seen:
-                seen.add(hc)
-                fixed = correct_hclass(hc, p.get('h_class',''))
-                clp_passed.append({
-                    'h_code':        hc,
-                    'h_class':       fixed or p.get('h_class',''),
-                    'reason':        p.get('reason',''),
-                    'cutoff_used':   p.get('cutoff_used',''),
-                    'cutoff_source': p.get('cutoff_source','GCL'),
-                    'cutoff_value':  p.get('cutoff_value'),
-                })
-
-        # Fiziksel tehlikeler
-        for r in phys_result.get('results', []):
-            hc = (r.get('h') or r.get('h_code') or '').replace('*','').strip()[:4]
-            if hc and hc not in seen:
-                seen.add(hc)
-                _reason = r.get('source') or r.get('reason') or 'Fiziksel tehlike motoru'
-                _cutoff = r.get('cutoff_used') or '—'
-                clp_passed.append({
-                    'h_code':     hc,
-                    'h_class':    r.get('h_class',''),
-                    'reason':     _reason,
-                    'cutoff_used':_cutoff,
-                })
-
-        # STOT RE
-        for r in stot_result.get('results', []):
-            hc = (r.get('h') or '').replace('*','').strip()[:4]
-            if hc and hc not in seen:
-                seen.add(hc)
-                clp_passed.append({
-                    'h_code':     hc,
-                    'h_class':    r.get('h_class',''),
-                    'reason':     r.get('reason','STOT RE toplamsal'),
-                    'cutoff_used':'—',
-                })
-
-        # Ekoloji
-        if eco_result.get('aquatic'):
-            aq = eco_result['aquatic']
-            hc = aq.get('h','')
-            if hc and hc not in seen:
-                seen.add(hc)
-                clp_passed.append({
-                    'h_code':     hc,
-                    'h_class':    aq.get('h_class',''),
-                    'reason':     aq.get('formula','Sucul ekoloji'),
-                    'cutoff_used':'—',
-                })
-        if eco_result.get('aquatic_acute'):
-            aq = eco_result['aquatic_acute']
-            hc = aq.get('h','')
-            if hc and hc not in seen:
-                seen.add(hc)
-                clp_passed.append({
-                    'h_code':     hc,
-                    'h_class':    aq.get('h_class',''),
-                    'reason':     aq.get('formula','Sucul akut'),
-                    'cutoff_used':'—',
-                })
-
-        # ── ATE sağlık tehlikeleri — clp_passed'a ekle ───────────────────────
-        _ate_hset_calc = {e['h_code'] for e in _ate_h_list}
-        clp_passed = [e for e in clp_passed if e.get('h_code') not in _ate_hset_calc]
-        for _ae in _ate_h_list:
-            seen.add(_ae['h_code'])
-            clp_passed.append({
-                'h_code':     _ae['h_code'],
-                'h_class':    _ae['h_class'],
-                'reason':     _ae['reason'],
-                'cutoff_used':_ae['cutoff_used'],
-            })
-
-        # ── H314 → H318 birlikteliği (CLP §3.3.1.4) ──────────────────────────
-        # all_h_codes (B2.1 sınıflandırma tablosu): H318 göster
-        # h_codes (etiket): H314 baskın — H318 gizle (SEA Madde 28 / CLP Madde 26)
-        label_h = set(all_h)
-        if 'H314' in all_h:
-            all_h.add('H318')
-            all_h_list = sorted(all_h)
-            label_h.discard('H318')  # etikette H318 gösterilmez
-            if not any(p.get('h_code') == 'H318' for p in clp_passed):
-                clp_passed.append({
-                    'h_code':      'H318',
-                    'h_class':     'Eye Dam. 1',
-                    'reason':      'H314 varlığında otomatik (CLP §3.3.1.4)',
-                    'cutoff_used': '—',
-                })
-        else:
-            all_h_list = sorted(all_h)
-        label_h_list = sorted(label_h)
-
-        # CLP Ek-II 1.2.4: EUH066 yalnızca cilt tahriş kriterini karşılamayan ürünler içindir
-        if isinstance(euh_result, dict) and set(all_h_list) & {'H314', 'H315'}:
-            euh_result['euh_codes']   = [c for c in euh_result.get('euh_codes', []) if c != 'EUH066']
-            euh_result['euh_details'] = [d for d in euh_result.get('euh_details', []) if d.get('code') != 'EUH066']
-
-        # ── P kodları ─────────────────────────────────────────────────────────
-        _euh_list = euh_result.get('euh_codes', []) if isinstance(euh_result, dict) else []
-        p_result = assign_p_codes(all_h_list, signal, usage=usage)
-        p_result['label'] = select_label_p_codes(p_result['p_codes'], 6, h_codes=all_h_list, euh_codes=_euh_list,
-                                                 usage=usage, form=form)
-        p_result['sds']   = classify_sds_p_codes(p_result['p_codes'], usage=usage, h_codes=all_h_list, form=form,
-                                                 label=p_result['label']['selected'])
-
-        # ── Teorik özellikler ─────────────────────────────────────────────────
-        theo_props = phys_result.get('theo_props', {})
-
+        # Tek sınıflandırma hattı — PDF uç noktası da aynı fonksiyonu çağırır
+        core = await _pipe.classify({
+            'components': body.get('components', []),
+            'form':       form,
+            'form_sub':   form_sub,
+            'usage':      body.get('usage', 'industrial'),
+            'lang':       body.get('lang', 'TR'),
+            'user_fp':    _num(body.get('user_fp') if body.get('user_fp') is not None else body.get('flash_point')),
+            'user_bp':    _num(body.get('user_bp') if body.get('user_bp') is not None else body.get('boiling_point')),
+            'fp_status':  body.get('fp_status') or '',
+            'mixture_ph': body.get('mixture_ph'),
+            'test_data':  body.get('test_data') or {},
+            'h314_removed': bool(body.get('h314_neutralization_removed', False)),
+        })
+        phys_result = core['phys_res']
         return {
-            'success':    True,
-            'h_codes':    label_h_list,   # etiket: H318 H314 varken gizlenir
-            'all_h_codes':all_h_list,     # B2.1 sınıflandırma tablosu: H318 gösterilir
-            'signal':     signal,
-            'clp_passed': clp_passed,
-            'euh':        euh_result,
-            'euh_codes':  euh_result.get('euh_codes', []),
-            'euh_details':euh_result.get('euh_details', []),
-            'p_codes':    p_result,
-            'physical':   {
-                'results':  phys_result.get('results', []),
-                'primary':  phys_result.get('primary', []),
-                'extra':    phys_result.get('extra', []),
-                'warnings': phys_result.get('warnings', []),
+            'success':     True,
+            'h_codes':     core['h_codes'],       # etiket
+            'all_h_codes': core['all_h_codes'],   # Bölüm 2.1 sınıflandırma tablosu
+            'signal':      core['signal'],
+            'clp_passed':  core['clp_passed'],
+            'euh':         core['euh'],
+            'euh_codes':   core['euh'].get('euh_codes', []),
+            'euh_details': core['euh'].get('euh_details', []),
+            'p_codes':     core['p_codes'],
+            'physical': {
+                'results':     phys_result.get('results', []),
+                'primary':     phys_result.get('primary', []),
+                'extra':       phys_result.get('extra', []),
+                'warnings':    phys_result.get('warnings', []),
                 'fp_decision': phys_result.get('fp_decision', {}),
             },
-            'stot':       stot_result,
-            'eco':        eco_result,
-            'transport':  transport_result,
-            'ppe':        ppe_result,
-            'theo_props': theo_props,
-            'warnings':   (phys_result.get('warnings', []) +
-                           stot_result.get('warnings', []) +
-                           clp_result.get('warnings', [])),
-            'pictograms':  get_ghs_codes(all_h_list),
-            'ate_details': clp_result.get('ate_mix_details', {}),
+            'stot':        core['stot_res'],
+            'eco':         core['eco_panel'],
+            'transport':   core['transport'],
+            'ppe':         core['ppe'],
+            'theo_props':  phys_result.get('theo_props', {}),
+            'warnings':    core['warnings'],
+            'pictograms':  core['pictograms'],
+            'ate_details': core['ate_details'],
+            'pending_decisions': core['pending_decisions'],
+            'summary':     _pipe.summary(core),   # PDF ile karşılaştırma (güvenlik ağı)
             'form_sub':    form_sub or None,
-            'voc_content': voc_content,
+            'voc_content': body.get('voc_content'),
         }
 
     except Exception as e:

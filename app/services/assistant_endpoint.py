@@ -871,6 +871,8 @@ async def _run_calculation(submit_data: dict) -> dict:
             "ate_mix_details": calc_raw.get("ate_details", {}),
             "revision":    {},
             "h314_neutralization_removed": False,
+            # Hesaplamayla birebir aynı girdi — PDF aynı sınıflandırmayı üretir
+            "calc_input":  calc_payload,
         }
 
         # ── 3. PDF üret ───────────────────────────────────────────────────────

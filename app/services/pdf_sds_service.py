@@ -1384,10 +1384,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 styles['small']
             ))
 
-        # Gizleme notları
-        for r in sec3_rows:
-            if r.get('note'):
-                story.append(Paragraph(f"* {r['note']}", styles['small']))
+        # Gizleme notları — aynı not birden fazla bileşende olsa da bir kez yazılır
+        for _note in dict.fromkeys(r['note'] for r in sec3_rows if r.get('note')):
+            story.append(Paragraph(f"* {_note}", styles['small']))
     story.append(Spacer(1, 3))
 
     # ─────────────────────────────────────────────────────────────────────────

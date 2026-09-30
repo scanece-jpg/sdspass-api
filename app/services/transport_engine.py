@@ -723,7 +723,9 @@ def classify(h_codes: List[str], form: str = 'liquid',
         'un':                  un_entry['un'],
         'class':               primary['class'],
         'class_label':         CLASS_LABELS.get(primary['class'], primary['class']) + sub_label,
-        'pg':                  primary['pg'],
+        # Spesifik UN girişinin Tablo A PG'si, H-kodundan türetilen en-kötü-durum PG'sine üstündür
+        # (örn. H314 → PG I varsayılır ama UN1824'ün Tablo A'da PG I'i yoktur)
+        'pg':                  un_entry.get('pg') or primary['pg'],
         'label':               un_entry['label'],
         'sub_class':           sub_class,
         'note':                un_entry.get('note'),

@@ -285,7 +285,7 @@ H_SENTENCES: Dict[str, Dict[int, str]] = {
         4: [
             'CİLDE TEMAS: Kirlenmiş giysileri hemen çıkarın. Cildi en az 15-20 dakika bol suyla yıkayın. Derhal tıbbi yardım alın.',
             'GÖZLE TEMAS: Kontak lens varsa hemen çıkarın. Gözü açık tutarak en az 15-20 dakika bol akan suyla yıkayın. Derhal tıbbi yardım alın.',
-            'YUTULURSA: Ağzı suyla çalkalayın. Kusturmayın. Derhal tıbbi yardım alın veya Zehir Merkezi\'ni arayın (0800 314 6120).',
+            'YUTULURSA: Ağzı suyla çalkalayın. Kusturmayın. Derhal tıbbi yardım alın veya Ulusal Zehir Danışma Merkezini (UZEM, 114) arayın.',
         ],
         5: 'Korozif madde. Yangın söndürücü olarak CO₂, kuru kimyasal veya su sisi kullanın. Su jeti kullanmayın.',
         6: 'KKE giymeden yaklaşmayın. Asit/baz nötralizasyonu yapmayın. Döküntüyü kuru absorban malzeme ile toplayın.',
@@ -299,7 +299,7 @@ H_SENTENCES: Dict[str, Dict[int, str]] = {
     },
     'H315': {
         4: ['Ciltle temastan sonra bol su ve sabunla yıkayın. Tahriş devam ederse tıbbi yardım alın.',
-            'YUTULURSA: Ağzı suyla çalkalayın. Kusturmayın. Derhal tıbbi yardım alın veya Zehir Merkezi\'ni arayın (0800 314 6120).'],
+            'YUTULURSA: Ağzı suyla çalkalayın. Kusturmayın. Derhal tıbbi yardım alın veya Ulusal Zehir Danışma Merkezini (UZEM, 114) arayın.'],
         5: 'Tahriş edici buhar oluşabilir. Yangın ekibine solunum koruması önerilir.',
         6: 'Kirlenmiş alanı havalandırın. KKE kullanın. Absorban malzeme ile toplayın. Kanalizasyon veya su kaynaklarına karışmasını önleyin.',
         7: 'Cilt temasından kaçının; koruyucu eldiven ve giysi kullanın. '
@@ -326,11 +326,11 @@ H_SENTENCES: Dict[str, Dict[int, str]] = {
 
     # ── AKüT TOKSİSİTE ────────────────────────────────────────────────────
     'H300': {
-        4: 'YUTULURSA: Derhal Zehir Merkezi (0800 314 6120) veya doktoru arayın. Kusturmayın.',
+        4: 'YUTULURSA: Derhal Ulusal Zehir Danışma Merkezini (UZEM, 114) veya doktoru arayın. Kusturmayın.',
         8: 'Tam yüz maskesi veya solunum koruyucu, kimyasala dayanıklı eldiven ve giysi.',
     },
     'H301': {
-        4: 'YUTULURSA: Derhal Zehir Merkezi (0800 314 6120) veya acile gidin. Kusturmayın.',
+        4: 'YUTULURSA: Derhal Ulusal Zehir Danışma Merkezini (UZEM, 114) arayın veya acile gidin. Kusturmayın.',
         8: 'Kimyasala dayanıklı eldiven, gözlük.',
     },
     'H302': {

@@ -56,8 +56,26 @@ app.add_middleware(NoCacheMiddleware)
 @app.on_event("startup")
 async def _startup_tasks():
     """Sunucu başlarken arka plan hazırlık işleri."""
+    import asyncio as _aio
+    from app.services import data_store, substance_lookup, cameo_service
+    await _aio.to_thread(data_store.sync_down)
+    # İndirilen dosyalar import sırasında belleğe alınmış önbelleklerin üzerine yazıldı → yeniden yükle
+    # _load_custom kilitsiz çağrılmalı: save_custom_substance aynı (reentrant olmayan) kilidi tutarken çağırıyor
+    substance_lookup._CUSTOM_DB = None
+    substance_lookup._load_custom()
+    cameo_service._disk_cache = cameo_service._load_disk_cache()
+    from app.services import echa_service
+    echa_service._archive_mem = None
+
     from app.services.transport_adr_service import init_cas_map
     init_cas_map()  # substance_db × adr_data isim eşleşmesi → bellek-içi CAS→UN haritası
+
+
+@app.on_event("shutdown")
+async def _shutdown_tasks():
+    import asyncio as _aio
+    from app.services import data_store
+    await _aio.to_thread(data_store.flush)
 
 
 @app.get("/health")
@@ -1165,7 +1183,7 @@ async def substance_lookup(cas: str, form: str = None):
                         save_pubchem_substance(cas, echa)
                     else:
                         save_echa_cl_substance(cas, echa)
-                    # substances_custom.json'a da yaz — git'te commit'li, Render'da kalıcı.
+                    # substances_custom.json'a da yaz — kalıcılığı data_store (sdspass-data deposu) sağlar.
                     # Manuel kurasyon varsa üzerine yazma.
                     if cas not in _load_custom():
                         _h_codes = echa.get('h_codes', [])

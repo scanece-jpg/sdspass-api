@@ -1026,6 +1026,8 @@ async def add_rule(data: dict = Body(...)):
             )
         with open(_RULES_PATH, "a", encoding="utf-8") as f:
             f.write(rule + "\n")
+        from app.services.data_store import persist
+        persist(_RULES_PATH)
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Dosya yazma hatası: {e}")
 

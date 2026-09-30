@@ -26,6 +26,10 @@ CACHE_FILE = Path(__file__).parent / 'echa_cache.json'
 _DATA_DIR    = Path(__file__).parent.parent.parent / 'data'
 ARCHIVE_FILE = _DATA_DIR / 'echa_cl_archive.json'
 
+# ECHA yasal uyarısı: yeniden kullanımda kaynak gösterilmesi zorunlu
+ECHA_ATTRIBUTION = 'Kaynak: European Chemicals Agency, https://echa.europa.eu/'
+CHANGES_FILE     = _DATA_DIR / 'echa_changes.jsonl'
+
 # H kodu → hazard class mapping (CLP Annex VI / GHS)
 _H_TO_CLASS = {
     'H200':'Expl. Unst.','H201':'Expl. 1.1','H202':'Expl. 1.2','H203':'Expl. 1.3',
@@ -134,6 +138,8 @@ def _save_cache(cache: dict):
     try:
         with open(CACHE_FILE, 'w', encoding='utf-8') as f:
             json.dump(cache, f, ensure_ascii=False, indent=2)
+        from app.services.data_store import persist
+        persist(CACHE_FILE)
     except Exception:
         pass
 
@@ -173,6 +179,8 @@ def _save_to_archive(cas: str, result: dict):
     try:
         with open(ARCHIVE_FILE, 'w', encoding='utf-8') as f:
             json.dump(archive, f, ensure_ascii=False, indent=2)
+        from app.services.data_store import persist
+        persist(ARCHIVE_FILE)
         print(f'[archive] Kaydedildi: {cas} ({result.get("name","")}) '
               f'— {result.get("notif_count", 0)} bildirim')
     except Exception as ex:
@@ -499,7 +507,8 @@ async def _fetch_echa_cl_direct(cas: str, client: httpx.AsyncClient) -> dict | N
             'cas'           : cas,
             'name'          : subst.get('rmlName') or cas,
             'ec_no'         : subst.get('rmlEc') or '',
-            'source'        : f'ECHA C&L Inventory ({len(groups)} bildirim grubu, sınıf eşiği %{_CL_CLASS_THRESHOLD:g})',
+            'source'        : (f'ECHA C&L öz-sınıflandırma bildirimlerinden derlendi ({len(groups)} bildirim grubu, '
+                               f'sınıf payı >%{_CL_CLASS_THRESHOLD:g}) — {ECHA_ATTRIBUTION}'),
             'signal'        : signal,
             'pictograms'    : get_ghs_codes(sorted(up)),
             'h_codes'       : h_codes,
@@ -806,19 +815,53 @@ def _dedupe_h_codes(result: dict) -> dict:
     return result
 
 
-async def lookup_echa_api(cas: str) -> dict | None:
+def _record_change(cas: str, new: dict) -> None:
+    """Önceki ECHA kaydıyla H-kodları farklıysa data/echa_changes.jsonl'e satır ekle (SDS revizyon takibi)."""
+    from app.services.substance_lookup import _read_cl_file, _ECHA_CL_DIR
+    old = _read_cl_file(_ECHA_CL_DIR, cas)
+    if not old:
+        return
+    old_h = old.get('labelling', {}).get('h_codes', [])
+    new_h = new.get('h_codes', [])
+    added   = [h for h in new_h if h not in old_h]
+    removed = [h for h in old_h if h not in new_h]
+    if not added and not removed:
+        return
+    rec = {
+        'tarih'       : datetime.now(timezone.utc).strftime('%Y-%m-%d'),
+        'cas'         : cas,
+        'ad'          : new.get('name', ''),
+        'eklenen'     : added,
+        'cikan'       : removed,
+        'onceki'      : old_h,
+        'yeni'        : new_h,
+        'onceki_tarih': old.get('fetched_at', ''),
+    }
+    try:
+        with open(CHANGES_FILE, 'a', encoding='utf-8') as f:
+            f.write(json.dumps(rec, ensure_ascii=False) + '\n')
+        from app.services.data_store import persist
+        persist(CHANGES_FILE)
+        print(f'[ECHA değişiklik] {cas}: eklenen {added}, çıkan {removed}')
+    except Exception as e:
+        print(f'[ECHA değişiklik] {cas}: kayıt hatası — {e}')
+
+
+async def lookup_echa_api(cas: str, refresh: bool = False) -> dict | None:
     """
     Canlı API hiyerarşisi (lokal önbellekte bulunamazsa çağrılır):
       1. ECHA C&L Inventory (chem.echa.europa.eu) → data/echa_cl/'a kaydet
       2. PubChem GHS fallback → data/pubchem_cl/'a kaydet
 
+    refresh=True: eskimiş kaydı yenile — oturum önbelleği atlanır, sadece ECHA denenir;
+    başarısızsa mevcut kayıt olduğu gibi kalır.
     Sonuç ilgili önbelleğe yazılır; bir sonraki sorgu lokal dosyadan gelir.
     """
-    from app.services.substance_lookup import save_echa_cl_substance, save_pubchem_substance
+    from app.services.substance_lookup import save_echa_cl_substance, save_pubchem_substance, _is_stale
 
     cas = cas.strip()
     cache = _load_cache()
-    if cas in cache:
+    if not refresh and cas in cache and not _is_stale(cache[cas]):
         before = list(cache[cas].get('h_codes', []))
         result = _dedupe_h_codes(cache[cas])
         if list(result.get('h_codes', [])) != before:
@@ -829,22 +872,28 @@ async def lookup_echa_api(cas: str) -> dict | None:
     try:
         async with httpx.AsyncClient(timeout=12.0, follow_redirects=True) as client:
 
-            # Sıra 1: ECHA C&L API → data/echa_cl/
+            # Sıra 1: ECHA C&L → data/echa_cl/
             result = await _fetch_echa_cl_direct(cas, client)
             if result:
                 result = _dedupe_h_codes(result)
                 result['_cache_source'] = 'echa_cl'
+                result['fetched_at']    = datetime.now(timezone.utc).isoformat(timespec='seconds')
+                _record_change(cas, result)
                 save_echa_cl_substance(cas, result)
                 cache[cas] = result
                 _save_cache(cache)
                 return result
 
+            if refresh:
+                return None
+
             # Sıra 2: PubChem GHS fallback → data/pubchem_cl/
-            print(f'[ECHA C&L] {cas}: doğrudan API boş, PubChem fallback deneniyor')
+            print(f'[ECHA C&L] {cas}: ECHA sonucu yok, PubChem fallback deneniyor')
             result = await _fetch_pubchem_ghs_fallback(cas, client)
             if result:
                 result = _dedupe_h_codes(result)
                 result['_cache_source'] = 'pubchem'
+                result['fetched_at']    = datetime.now(timezone.utc).isoformat(timespec='seconds')
                 save_pubchem_substance(cas, result)
                 cache[cas] = result
                 _save_cache(cache)

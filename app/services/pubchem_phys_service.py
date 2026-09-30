@@ -373,6 +373,8 @@ async def fetch_phys(cas: str) -> dict:
             cache_file.write_text(
                 json.dumps(_to_cache, ensure_ascii=False), encoding='utf-8'
             )
+            from app.services.data_store import persist
+            persist(cache_file)
         except Exception:
             pass
 

@@ -17,7 +17,8 @@ Not B maddeleri (CAS boş): EC No ile yakalanır.
 Yardımcı veriler:
   data/substance_names.json          CAS → {en, tr} çok dilli isimler
 """
-import json, os, threading, re
+import json, os, threading, re, time
+from datetime import datetime, timezone
 from typing import Optional, Dict
 
 _BASE          = os.path.join(os.path.dirname(__file__), '..', '..', 'data')
@@ -707,13 +708,17 @@ def lookup_substance(cas: str, form: str = '',
     # ── Katman 3: ECHA C&L API önbelleği ────────────────────────────────────
     echa_entry = _read_cl_file(_ECHA_CL_DIR, cas)
     if echa_entry:
-        return _fill_tr_name(_cl_to_legacy(echa_entry, 3, f'ECHA C&L ({echa_entry.get("atp","?")})')  )
+        if _is_stale(echa_entry):
+            _fetch_echa_background(cas, refresh=True)
+        from app.services.echa_service import ECHA_ATTRIBUTION
+        return _fill_tr_name(_cl_to_legacy(echa_entry, 3, f'ECHA C&L — {ECHA_ATTRIBUTION}'))
 
     # ── Katman 3b: PubChem önbelleği ─────────────────────────────────────────
     # PubChem tehlike verisi harmonize değil (C&L bildirimi). Sadece fiziksel
     # özellikler alınır; hazards/signal temizlenir.
     pub_entry = _read_cl_file(_PUBCHEM_DIR, cas)
     if pub_entry:
+        _fetch_echa_background(cas)   # ECHA verisi henüz yok → arka planda dene
         result = _fill_tr_name(_cl_to_legacy(pub_entry, 4, f'PubChem ({pub_entry.get("atp","?")})')  )
         result['hazards'] = []
         result['signal'] = None
@@ -830,6 +835,7 @@ def _save_api_result(directory: str, cas: str, api_result: dict, source_label: s
         'ec_no'    : api_result.get('ec_no', ''),
         'index_no' : '',
         'atp'      : source_label,
+        'fetched_at': api_result.get('fetched_at') or datetime.now(timezone.utc).isoformat(timespec='seconds'),
         'notes'    : [],
         'classification': {
             'hazards': [
@@ -849,6 +855,8 @@ def _save_api_result(directory: str, cas: str, api_result: dict, source_label: s
     try:
         with open(file_path, 'w', encoding='utf-8') as f:
             json.dump(entry, f, ensure_ascii=False, indent=2)
+        from app.services.data_store import persist
+        persist(file_path)
         return True
     except Exception as e:
         print(f'[CL CACHE] {cas} kayıt hatası ({file_path}): {e}')
@@ -863,11 +871,14 @@ def _supplement_from_echa_cl(cas: str, sea_result: dict) -> dict:
     ECHA dosyası yoksa PubChem önbelleğine de bakılır; o da yoksa arka planda çekim tetiklenir.
     """
     echa_entry = _read_cl_file(_ECHA_CL_DIR, cas)
-    if not echa_entry:
-        # ECHA API erişilemez olduğunda PubChem'in kaydettiği GHS verisini fallback olarak kullan
+    if echa_entry:
+        if _is_stale(echa_entry):
+            _fetch_echa_background(cas, refresh=True)
+    else:
+        _fetch_echa_background(cas)
+        # ECHA verisi gelene kadar PubChem'in kaydettiği GHS verisini fallback olarak kullan
         echa_entry = _read_cl_file(_PUBCHEM_DIR, cas)
         if not echa_entry:
-            _fetch_echa_background(cas)
             return sea_result
 
     echa_legacy = _cl_to_legacy(echa_entry, 3, 'ECHA C&L')
@@ -887,7 +898,8 @@ def _supplement_from_echa_cl(cas: str, sea_result: dict) -> dict:
         result['pictograms'] = list(sea_result.get('pictograms', [])) + extra_pict
 
     result['echa_supplement']        = [h['h_code'] for h in extra_hazards]
-    result['echa_supplement_source'] = f'ECHA C&L ({echa_entry.get("atp", "?")})'
+    from app.services.echa_service import ECHA_ATTRIBUTION
+    result['echa_supplement_source'] = f'ECHA C&L öz-sınıflandırma bildirimlerinden derlendi — {ECHA_ATTRIBUTION}'
     result['classification_sources'] = {
         h['h_code']: 'SEA Ek-6'
         for h in sea_result.get('hazards', []) if h.get('h_code')
@@ -900,9 +912,38 @@ def _supplement_from_echa_cl(cas: str, sea_result: dict) -> dict:
     return result
 
 
-def _fetch_echa_background(cas: str):
-    """SEA'da bulunan ama ECHA dosyası olmayan maddeyi arka planda ECHA C&L'den çek."""
-    import threading
+_ECHA_TTL_DAYS  = 30          # ECHA kaydı bundan eskiyse kullanımda arka planda yenilenir
+_ECHA_RETRY_SEC = 6 * 3600    # başarısız çekimden sonra aynı CAS için bekleme
+_echa_bg_lock   = threading.Lock()
+_echa_inflight: set  = set()
+_echa_last_try: dict = {}
+
+
+def _is_stale(entry: dict) -> bool:
+    ts = entry.get('fetched_at')
+    if not ts:
+        return True
+    try:
+        fetched = datetime.fromisoformat(ts)
+    except (TypeError, ValueError):
+        return True
+    if fetched.tzinfo is None:
+        fetched = fetched.replace(tzinfo=timezone.utc)
+    return (datetime.now(timezone.utc) - fetched).days >= _ECHA_TTL_DAYS
+
+
+def _fetch_echa_background(cas: str, refresh: bool = False):
+    """
+    Maddeyi arka planda ECHA C&L'den çek (kullanıcı beklemez).
+    refresh=True: mevcut ama eski kaydı yenile — sadece ECHA denenir, başarısızsa eski kayıt kalır.
+    Aynı CAS için aynı anda tek çekim; başarısız denemeden sonra _ECHA_RETRY_SEC beklenir.
+    """
+    now = time.time()
+    with _echa_bg_lock:
+        if cas in _echa_inflight or now - _echa_last_try.get(cas, 0) < _ECHA_RETRY_SEC:
+            return
+        _echa_inflight.add(cas)
+        _echa_last_try[cas] = now
 
     def _run():
         import asyncio as _asyncio
@@ -910,15 +951,17 @@ def _fetch_echa_background(cas: str):
         loop = _asyncio.new_event_loop()
         try:
             _asyncio.set_event_loop(loop)
-            result = loop.run_until_complete(_lei(cas))
+            result = loop.run_until_complete(_lei(cas, refresh=refresh))
             if result:
-                print(f'[echa_bg] {cas}: ECHA C&L verisi çekildi ve önbelleğe kaydedildi.')
+                print(f'[echa_bg] {cas}: ECHA C&L verisi {"yenilendi" if refresh else "çekildi"} ve önbelleğe kaydedildi.')
             else:
-                print(f'[echa_bg] {cas}: veri bulunamadı (ECHA API erişilemez, PubChem fallback denendi).')
+                print(f'[echa_bg] {cas}: veri alınamadı — {_ECHA_RETRY_SEC // 3600} saat sonra tekrar denenecek.')
         except Exception as e:
             print(f'[echa_bg] {cas}: çekim hatası — {e}')
         finally:
             loop.close()
+            with _echa_bg_lock:
+                _echa_inflight.discard(cas)
 
     threading.Thread(target=_run, daemon=True).start()
 
@@ -947,6 +990,8 @@ def save_custom_substance(cas: str, entry: Dict) -> bool:
         with open(_CUSTOM_PATH, 'w', encoding='utf-8') as f:
             json.dump(custom, f, ensure_ascii=False, indent=2)
         _CUSTOM_DB = custom
+    from app.services.data_store import persist
+    persist(_CUSTOM_PATH)
     return is_new
 
 

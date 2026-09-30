@@ -39,6 +39,8 @@ def _save_disk_cache(cache: dict) -> None:
         with open(tmp, 'w', encoding='utf-8') as f:
             json.dump(cache, f, ensure_ascii=False, indent=2)
         os.replace(tmp, _CACHE_PATH)  # atomic — yarım yazma riski yok
+        from app.services.data_store import persist
+        persist(_CACHE_PATH)
     except Exception:
         pass
 

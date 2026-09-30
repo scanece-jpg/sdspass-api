@@ -1,7 +1,7 @@
 """
 REACH Kayıt Numarası Önbelleği
 Kayıt numarasını şu sırayla arar: statik DB → disk önbelleği → Claude AI + web arama.
-Bulunan numara disk önbelleğine ve reach_db.py'e kalıcı olarak kaydedilir.
+Bulunan numara disk önbelleğine (data/reach_cache/) kaydedilir; kalıcılığı data_store sağlar.
 
 Kullanım:
   load_cached(cas)              → str (disk önbelleğinden oku)
@@ -12,7 +12,6 @@ Kullanım:
 import json, os, re
 
 _BASE    = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'reach_cache')
-_DB_PATH = os.path.join(os.path.dirname(__file__), 'reach_db.py')
 _REG_PAT = re.compile(r'01-\d{10}-\d{2}-\d{4}')
 _EC_PAT  = re.compile(r'\b\d{3}-\d{3}-\d\b')
 
@@ -39,47 +38,10 @@ def save_cached(cas: str, reg_no: str) -> None:
         os.makedirs(os.path.dirname(p), exist_ok=True)
         with open(p, 'w', encoding='utf-8') as f:
             json.dump({'cas': cas, 'reg_no': reg_no}, f)
+        from app.services.data_store import persist
+        persist(p)
     except Exception as e:
         print(f'[REACH CACHE] {cas} kayıt hatası ({p}): {e}')
-
-
-# ── reach_db.py'e kalıcı kayıt ───────────────────────────────────────────────
-
-def _append_to_reach_db(cas: str, reg_no: str, ec: str = '', name: str = '') -> bool:
-    """Bulunan REACH numarasını reach_db.py'deki REACH_DB sözlüğüne ekler.
-    Sunucu yeniden başlatıldığında statik DB'den okunur."""
-    try:
-        with open(_DB_PATH, 'r', encoding='utf-8') as f:
-            content = f.read()
-
-        # Zaten mevcutsa atla
-        if f"'{cas}'" in content or f'"{cas}"' in content:
-            return False
-
-        ec_s   = (ec   or '').replace("'", '')
-        name_s = (name or cas).replace("'", '').replace('"', '')
-        new_line = (
-            f"    '{cas}':  {{'reg':['{reg_no}'],'ec':'{ec_s}',"
-            f"'name':'{name_s}'}},  # AI\n"
-        )
-
-        # REACH_DB'yi kapatan ilk tek-'}' satırını bul ve önüne ekle
-        lines = content.split('\n')
-        for i, line in enumerate(lines):
-            if line.strip() == '}':
-                lines.insert(i, new_line.rstrip('\n'))
-                break
-        else:
-            return False
-
-        with open(_DB_PATH, 'w', encoding='utf-8') as f:
-            f.write('\n'.join(lines))
-
-        print(f'[REACH DB] {cas} → reach_db.py\'e eklendi: {reg_no}')
-        return True
-    except Exception as e:
-        print(f'[REACH DB] reach_db.py güncelleme hatası: {e}')
-        return False
 
 
 # ── ECHA API yanıtından REACH no çıkarımı (geriye dönük uyum) ────────────────
@@ -201,6 +163,5 @@ async def fetch_reach_no_async(cas: str) -> str:
     reg_no, ec, name = await _fetch_via_ai(cas)
     if reg_no:
         save_cached(cas, reg_no)
-        _append_to_reach_db(cas, reg_no, ec, name)
 
     return reg_no

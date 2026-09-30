@@ -98,7 +98,8 @@ def build_transport_components(raw_components: list) -> 'list[Component]':
 CLASS_LABELS: Dict[str, str] = {
     '1'  : 'Patlayıcı Maddeler',
     '2.1': 'Yanıcı Gazlar',
-    '2.2': 'Yanıcı Olmayan, Zehirli veya Oksitleyici Gazlar',
+    '2.2': 'Yanıcı Olmayan, Zehirli Olmayan Gazlar',   # ADR 2.2.2.1 (oksitleyici gazlar da 2.2 etiketli)
+    '2.3': 'Zehirli Gazlar',
     '3'  : 'Yanıcı Sıvılar',
     '4.1': 'Yanıcı Katılar',
     '4.2': 'Kendiliğinden Alışan Maddeler',
@@ -403,10 +404,13 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
                 'note': 'ADR 2023: Sınıf 8 birincil, Sınıf 3 yan tehlike (ADR Tablo 2.1.3.10)',
             }
         if sub == '6.1':
+            # Sınıf 8 birincil + 6.1 yan tehlike → UN 2922/2923 (CT1/CT2). Önce 6.1 birincil
+            # girişine (UN 2927/2928, TC) gidiyordu — sınıf ile UN numarası çelişiyordu.
             return {
-                'un': 'UN 2928' if is_solid else 'UN 2927',
-                'label': ('Zehirli Katı, Korozif, Organik, B.N.O.' if is_solid
-                          else 'Zehirli Sıvı, Korozif, Organik, B.N.O.'),
+                'un': 'UN 2923' if is_solid else 'UN 2922',
+                'label': ('Aşındırıcı Katı, Zehirli, B.N.O.' if is_solid
+                          else 'Aşındırıcı Sıvı, Zehirli, B.N.O.'),
+                'note': 'ADR 2023: Sınıf 8 birincil, Sınıf 6.1 yan tehlike (ADR Tablo 2.1.3.10)',
             }
         # Sınıf 8, yan tehlike yok — önce CAS bazlı spesifik arama yap
         if components:
@@ -415,7 +419,8 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
             trigger8 = [c for c in components if 'H314' in c.h_codes]
             if trigger8:
                 dominant8 = max(trigger8, key=lambda c: c.conc)
-                _det = _lookup_by_cas(dominant8.cas, concentration=dominant8.conc)
+                _det = _lookup_by_cas(dominant8.cas, concentration=dominant8.conc,
+                                      physical_state=_prod_state)
                 if _det:
                     _seed_state = _det.get('physical_state')
                     if not _seed_state or _seed_state == _prod_state:
@@ -487,12 +492,12 @@ def classify(h_codes: List[str], form: str = 'liquid',
         if len(triggering) == 1 and triggering[0] is dominant:
             # §3.1.3.2: tek tetikleyici bileşen + o bileşen baskın → adlı giriş zorunlu
             _t = triggering[0]
-            _details = _lookup_by_cas(_t.cas, concentration=_t.conc)
+            _prod_state = 'solid' if is_solid else ('gas' if form == 'gas' else 'liquid')
+            _details = _lookup_by_cas(_t.cas, concentration=_t.conc, physical_state=_prod_state)
             if _details:
                 # §3.1.3.2(c): spesifik girişin fiziksel hali ürünle uyuşmalı.
                 # Uyuşmazlık (ör. katı TCCA girişi ama sıvı ürün) → B.N.O.'ya düş.
                 _seed_state = _details.get('physical_state')
-                _prod_state = 'solid' if is_solid else ('gas' if form == 'gas' else 'liquid')
                 if _seed_state and _seed_state != _prod_state:
                     pass  # hal uyumsuzluğu — aşağıya, B.N.O.'ya düş
                 else:
@@ -657,6 +662,43 @@ def classify(h_codes: List[str], form: str = 'liquid',
             'name':     _en_name,
             'name_tr':  _tr_name,
             'note': f'UN 1950 {_aero_code} — ADR 2023 Tablo A (kod hazard setinden otomatik seçildi)',
+        }
+
+    # Gaz — ADR 2.2.2.1: soluma yoluyla zehirli gaz (H330/H331) → Sınıf 2.3 birincil; aşındırıcı (8),
+    # yanıcı (2.1), yükseltgen (5.1) yan tehlike. Önce H280 → 2.2 ve H331 → 6.1 ayrı sınıflar
+    # sayılıyordu (HCl gazı UN 1956 çıkıyordu). Maddeye özgü giriş (örn. UN1050) yukarıda önceliklidir.
+    if form == 'gas' and h_set & {'H330', 'H331'}:
+        _g_flam = bool(h_set & {'H220', 'H221'})
+        _g_ox   = 'H270' in h_set
+        _g_corr = 'H314' in h_set
+        _key = (_g_flam, _g_ox, _g_corr)
+        _compressed = {(False, False, False): 'UN1955', (False, False, True): 'UN3304',
+                       (True, False, False): 'UN1953', (False, True, False): 'UN3303',
+                       (True, False, True): 'UN3305', (False, True, True): 'UN3306'}
+        _liquefied  = {(False, False, False): 'UN3162', (False, False, True): 'UN3308',
+                       (True, False, False): 'UN3160', (False, True, False): 'UN3307',
+                       (True, False, True): 'UN3309', (False, True, True): 'UN3310'}
+        _un_c = _compressed.get(_key, 'UN1955')
+        _un_l = _liquefied.get(_key, 'UN3162')
+        try:
+            from app.services.transport_adr_service import get_adr_details as _gad
+            _gd = _gad(_un_c, '')
+        except Exception:
+            _gd = {}
+        _labels = ['2.3'] + (['2.1'] if _g_flam else []) + (['5.1'] if _g_ox else []) + (['8'] if _g_corr else [])
+        primary = {'class': '2.3', 'pg': ''}
+        subs = [{'class': c, 'pg': ''} for c in _labels[1:]]
+        un_entry = {
+            'un':    _un_c[:2] + ' ' + _un_c[2:],
+            'label': _gd.get('name_tr') or 'SIKIŞTIRILMIŞ GAZ, ZEHİRLİ, B.B.B.',
+            'classification_code': _gd.get('classification_code', ''),
+            'labels': _labels,
+            'pg':    '',
+            'note':  (f'ADR 2.2.2.1: soluma yoluyla zehirli gaz (H330/H331) → Sınıf 2.3'
+                      + (f' (yan tehlike: {", ".join(_labels[1:])})' if len(_labels) > 1 else '')
+                      + f'. Sıkıştırılmış gaz varsayıldı; sıvılaştırılmış gaz ise {_un_l[:2]} {_un_l[2:]}. '
+                        'Maddeye özgü UN numarası önceliklidir (örn. UN1050 hidrojen klorür, susuz; '
+                        'UN1005 amonyak, susuz).'),
         }
 
     # ── Adım 5: Uyarılar ─────────────────────────────────────────────────────

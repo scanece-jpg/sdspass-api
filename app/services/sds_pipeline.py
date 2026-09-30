@@ -350,7 +350,10 @@ async def classify(inp: dict) -> dict:
     final_cls_h = list(dict.fromkeys(
         [h for h in clp_res.get('h_codes', [])
          if h not in FLAM_LIQ_H and h not in MANUAL_PHYS_H]      # bu sınıflar yalnızca fiziksel motordan
-        + eco_h_merge + phys_h))
+        + eco_h_merge + phys_h
+        # Akut toksisite (ATEmix) — classify_mixture_clp akut toksisiteyi atladığından taşıma
+        # motoru zehirli karışımları görmüyordu (Sınıf 6.1 / gazda 2.3 verilemiyordu)
+        + [e['h_code'] for e in (ate_h or [])]))
     transport = transport_calc(h_codes=final_cls_h, form=form, phys_h_codes=phys_h,
                                viscosity=float(visc) if visc is not None else None,
                                components=tr_components)
@@ -362,11 +365,12 @@ async def classify(inp: dict) -> dict:
         h_codes = [h for h in h_codes if h not in H314_COVERED]
         all_h   = [h for h in all_h if h not in H314_COVERED]
 
-    # 1. Alevlenir sıvı — physical_engine yetkili (sıvı/pasta)
-    if form in ('liquid', 'paste'):
-        add = [auth_flam_h] if auth_flam_h else []
-        h_codes = [h for h in h_codes if h not in FLAM_LIQ_H] + add
-        all_h   = [h for h in all_h if h not in FLAM_LIQ_H] + add
+    # 1. Alevlenir sıvı — physical_engine yetkili; H224/H225/H226 yalnızca sıvı/pasta ürüne
+    #    verilir. Katı/toz/gaz/aerosolde bileşen kesiminden gelen alevlenir SIVI kodu silinir
+    #    (bu hallerin yanıcılığı H228 / H220-H221 / H222-H223 ile değerlendirilir).
+    add = [auth_flam_h] if (auth_flam_h and form in ('liquid', 'paste')) else []
+    h_codes = [h for h in h_codes if h not in FLAM_LIQ_H] + add
+    all_h   = [h for h in all_h if h not in FLAM_LIQ_H] + add
 
     # 1b. Diğer fiziksel motor sonuçları (aerosol, oksitleyici, test verisi…)
     for r in phys_res.get('results', []):

@@ -63,9 +63,10 @@ _SEED_ENTRIES: dict = {
         {'min_conc': 65,  'max_conc': 100, 'un': 'UN2031', 'pg': 'I'},
         {'min_conc': 0,   'max_conc': 65,  'un': 'UN2031', 'pg': 'II'},
     ],
-    '7647-01-0': [  # Hidroklorik asit — ADR Tablo A
-        {'min_conc': 25,  'max_conc': 100, 'un': 'UN1789', 'pg': 'II'},
-        {'min_conc': 0,   'max_conc': 25,  'un': 'UN1789', 'pg': 'III'},
+    '7647-01-0': [  # Hidrojen klorür: gaz (susuz) / hidroklorik asit çözeltisi — ADR Tablo A
+        {'min_conc': 0,   'max_conc': 100, 'un': 'UN1050', 'pg': '', 'physical_state': 'gas'},
+        {'min_conc': 25,  'max_conc': 100, 'un': 'UN1789', 'pg': 'II', 'physical_state': 'liquid'},
+        {'min_conc': 0,   'max_conc': 25,  'un': 'UN1789', 'pg': 'III', 'physical_state': 'liquid'},
     ],
     '7664-38-2': {'un': 'UN1805', 'pg': 'III'},  # Fosforik asit
     '10035-10-6':{'un': 'UN1788', 'pg': 'II'},   # Hidrobromik asit
@@ -78,9 +79,10 @@ _SEED_ENTRIES: dict = {
     '1310-58-3': {'un': 'UN1814', 'pg': 'II'},   # Potasyum hidroksit çözelti
     '1305-78-8': {'un': 'UN1910', 'pg': 'III'},  # Kalsiyum oksit
     '7664-41-7': [  # Amonyak — gaz veya çözelti
-        {'min_conc': 50,  'max_conc': 100, 'un': 'UN1005', 'pg': 'I'},   # Anhidröz gaz
-        {'min_conc': 35,  'max_conc': 50,  'un': 'UN2073', 'pg': 'II'},  # Çözelti >35%
-        {'min_conc': 0,   'max_conc': 35,  'un': 'UN2672', 'pg': 'III'}, # Çözelti ≤35%
+        {'min_conc': 0,   'max_conc': 100, 'un': 'UN1005', 'pg': '', 'physical_state': 'gas'},      # Susuz (gaz)
+        {'min_conc': 50,  'max_conc': 100, 'un': 'UN3318', 'pg': '', 'physical_state': 'liquid'},   # Çözelti >%50 (4TC)
+        {'min_conc': 35,  'max_conc': 50,  'un': 'UN2073', 'pg': '', 'physical_state': 'liquid'},   # Çözelti %35–50 (4A)
+        {'min_conc': 0,   'max_conc': 35,  'un': 'UN2672', 'pg': 'III', 'physical_state': 'liquid'},  # Çözelti ≤%35 (Sınıf 8)
     ],
 
     # ── Oksitleyiciler ────────────────────────────────────────────────────────
@@ -210,11 +212,14 @@ def _get_cas_map() -> dict:
     return _CAS_TO_UN
 
 
-def lookup_by_cas(cas: str, concentration: Optional[float] = None) -> 'dict | None':
+def lookup_by_cas(cas: str, concentration: Optional[float] = None,
+                  physical_state: Optional[str] = None) -> 'dict | None':
     """
-    CAS + konsantrasyon → ADR Tablo A girişi.
+    CAS + konsantrasyon (+ fiziksel hal) → ADR Tablo A girişi.
 
     concentration: % ağırlık (0-100). None ise en yüksek tehlikeli giriş döner.
+    physical_state: 'gas' | 'liquid' | 'solid' — aynı CAS'ın hale göre farklı girişi varsa
+      (örn. HCl gaz UN1050 / çözelti UN1789) uygun olan seçilir.
     Eşleşme yoksa None döner → çağıran jenerik H-kodu mantığına düşer.
     Dönen dict'e 'physical_state' eklenir (seed'de tanımlıysa) — çağıran hal uyum kontrolü yapabilir.
     """
@@ -225,22 +230,27 @@ def lookup_by_cas(cas: str, concentration: Optional[float] = None) -> 'dict | No
 
     # Konsantrasyon listesi varsa uygun aralığı seç
     if isinstance(entry, list):
+        cands = entry
+        if physical_state and any(r.get('physical_state') for r in entry):
+            cands = [r for r in entry if r.get('physical_state') in (None, physical_state)]
+            if not cands:
+                return None   # bu hal için adlı giriş yok → B.N.O.
         matched = None
         if concentration is not None:
-            for rng in entry:
+            for rng in cands:
                 lo = rng.get('min_conc', 0)
                 hi = rng.get('max_conc', 100)
                 if lo <= concentration <= hi:
                     matched = rng
                     break
         if matched is None:
-            matched = entry[0]  # konsantrasyon bilinmiyor → en tehlikelisi
+            matched = cands[0]  # konsantrasyon bilinmiyor → en tehlikelisi
         un_no = matched.get('un')
-        pg    = matched.get('pg') or 'II'
+        pg    = matched['pg'] if 'pg' in matched else 'II'   # gazlarda ambalaj grubu yok ('')
         seed_physical_state: 'str | None' = matched.get('physical_state')
     else:
         un_no = entry.get('un')
-        pg    = entry.get('pg') or 'II'
+        pg    = entry['pg'] if 'pg' in entry and entry['pg'] is not None else 'II'
         seed_physical_state = entry.get('physical_state')
 
     if not un_no:
@@ -248,6 +258,8 @@ def lookup_by_cas(cas: str, concentration: Optional[float] = None) -> 'dict | No
     details = get_adr_details(un_no, pg)
     if not details.get('found'):
         return None
+    if pg == '':   # gazlar — ambalaj grubu yoktur
+        details['packing_group'] = ''
     if seed_physical_state:
         details['physical_state'] = seed_physical_state
     return details

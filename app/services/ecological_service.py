@@ -57,7 +57,9 @@ VPVB_CAS = {
     '36483-57-5', # HBCD
 }
 
-# Ozon tabakasına zararlı (EUH059 / H420)
+# Ozon tabakasına zararlı (H420) — Montreal Protokolü kapsamındaki maddeler.
+# Kloroform, trikloroetilen ve metil klorür ozon tüketici değildir (H420 almaz) → listeden çıkarıldı.
+# Bileşenin uyumlaştırılmış kaydında H420 varsa listeden bağımsız olarak dikkate alınır.
 OZONE_CAS = {
     '75-69-4',   # CFC-11
     '75-71-8',   # CFC-12
@@ -69,10 +71,8 @@ OZONE_CAS = {
     '75-63-8',   # halon-1301
     '353-59-3',  # halon-1211
     '74-83-9',   # methyl bromide
-    '74-87-3',   # methyl chloride
     '56-23-5',   # carbon tetrachloride
-    '67-66-3',   # chloroform (trichloromethane)
-    '79-01-6',   # trichloroethylene
+    '71-55-6',   # 1,1,1-trichloroethane (metil kloroform)
 }
 
 # Hızlı biyobozunur (readily biodegradable) — OECD 301 geçen
@@ -542,11 +542,13 @@ def assess_pbt(
 
 
 def check_ozone(comp_list: List[Dict]) -> List[str]:
-    """EUH059 / H420 — Ozon tabakasına zararlı CAS listesi"""
+    """H420 — ozon tabakasına zararlı bileşen ≥ %0,1 (CLP Ek-I 5.1). CAS listesi veya bileşenin H420'si."""
     found = []
     for comp in comp_list:
         cas = comp.get('cas_no', comp.get('cas', '')).strip()
-        if cas in OZONE_CAS:
+        conc = float(comp.get('worst_case_conc') or comp.get('concMax') or comp.get('conc') or 0)
+        has_h420 = any((h.get('h_code') or '').startswith('H420') for h in comp.get('hazards') or [])
+        if (cas in OZONE_CAS or has_h420) and conc >= 0.1:
             found.append(comp.get('name') or cas)
     return found
 
@@ -772,7 +774,7 @@ def calculate_ecological(
     out.ozone_hazard = check_ozone(comp_list)
     if out.ozone_hazard:
         out.warnings.append(
-            f"EUH059 / H420: Ozon tabakasına zararlı bileşen tespit edildi: "
+            f"H420: Ozon tabakasına zararlı bileşen tespit edildi (≥ %0,1): "
             f"{', '.join(out.ozone_hazard)}"
         )
 
@@ -795,7 +797,7 @@ def calculate_ecological(
         '12.3': f"{len(out.bioaccumulation['high_kow'])} bileşende yüksek log Kow" if out.bioaccumulation['high_kow'] else 'Biyobirikim potansiyeli düşük',
         '12.4': 'Manuel değerlendirme gerekli',
         '12.5': f"{len(pbt_flagged)} PBT/vPvB bileşen" if pbt_flagged else 'PBT/vPvB değil',
-        '12.6': 'EUH059 — ozon' if out.ozone_hazard else 'Endokrin bozucu: ECHA SVHC listesini kontrol edin',
+        '12.6': 'H420 — ozon tabakasına zararlı' if out.ozone_hazard else 'Endokrin bozucu: ECHA SVHC listesini kontrol edin',
     }
 
     # 12.4 Toprak hareketliliği
@@ -810,9 +812,7 @@ def calculate_ecological(
     out.sds_section_12['12.6_ed'] = ed_found
 
     # H420 — Ozon sınıflandırması (H kodu)
-    ozone_h420 = [c.get('name') or c.get('cas_no', c.get('cas',''))
-                  for c in comp_list
-                  if c.get('cas_no', c.get('cas','')) in H420_CAS]
+    ozone_h420 = check_ozone(comp_list)
     if ozone_h420:
         out.sds_section_12['H420'] = ozone_h420
 

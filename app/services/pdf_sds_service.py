@@ -2960,7 +2960,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             styles['body_bold']
         ))
         from app.services.p_code_service import P_COMBOS, P_TEXTS, P_LABEL_PRIORITY, classify_sds_p_codes
-        sds_cls = classify_sds_p_codes(p_data['p_codes'])
+        # Etiketle aynı kaynak (SEA Etiketleme Rehberi 7.3) — endpoint'in hesapladığı gruplar
+        sds_cls = p_data.get('sds') if (p_data.get('sds') or {}).get('groups') else classify_sds_p_codes(
+            p_data['p_codes'], usage=_usage_val, h_codes=h_codes, form=product.get('form', 'liquid'),
+            label=(p_data.get('label') or {}).get('selected'))
         for grp_key, icon, lbl in [
             ('mandatory','✓',S(lang,'mandatory_label')),
             ('evaluate','~',S(lang,'evaluate_label')),

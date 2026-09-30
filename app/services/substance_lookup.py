@@ -462,6 +462,7 @@ def _sea_ek6_to_legacy(entry: dict) -> dict:
         'm_factors'      : entry.get('m_factors', {}),
         'scl'            : [_scl_op_to_cmin_cmax(s) for s in entry.get('scl_limits', [])],
         'euh_codes'      : entry.get('euh_codes', []),
+        'euh_limits'     : entry.get('euh_limits', []),
         'sea_ek6'        : True,
         'annex_vi'       : False,
         'source'         : 'SEA Ek-6 (TR)',

@@ -437,7 +437,9 @@ def assign_p_codes(
     # Detay listesi
     details = []
     for code in all_codes:
-        text = P_COMBOS.get(code) or P_TEXTS.get(code, code)
+        from app.services.codes_i18n import get_p as _get_p
+        _o = _get_p('TR', code)
+        text = _o if _o != code else (P_COMBOS.get(code) or P_TEXTS.get(code, code))
         first = code.split('+')[0]
         cat_num = int(first[1]) if len(first) > 1 else 0
         category = {
@@ -629,7 +631,8 @@ H_BASED_LABEL_FORCED: Dict[str, List[str]] = {
 
 def select_label_p_codes(all_p_codes: List[str], max_codes: int = 6,
                          h_codes: List[str] = None,
-                         euh_codes: List[str] = None) -> Dict:
+                         euh_codes: List[str] = None,
+                         usage: str = 'industrial', form: str = 'liquid') -> Dict:
     """
     CLP Madde 22(4) — Etiket için maksimum 6 P kodu seçimi.
     Öncelik ağırlıklarına göre en kritik 6 kodu seç.
@@ -648,7 +651,13 @@ def select_label_p_codes(all_p_codes: List[str], max_codes: int = 6,
     h_codes   = h_codes   or []
     euh_codes = euh_codes or []
 
-    # H ve EUH kodu bazlı zorunlu P kodlarını belirle
+    # Esas yol: SEA Md. 24/30 + SEA Etiketleme Rehberi 7.3 öneri dereceleri (p_guidance)
+    from app.services import p_guidance
+    if p_guidance.known(h_codes):
+        return p_guidance.select_label(all_p_codes, h_codes, usage or 'industrial', form or 'liquid',
+                                       P_LABEL_PRIORITY, max_codes)
+
+    # Yedek: rehberde tablosu olmayan H kodları için eski öncelik mantığı
     forced_by_h = set()
     for h in h_codes:
         for p in H_BASED_LABEL_FORCED.get(h, []):
@@ -821,7 +830,9 @@ P_SDS_LABELS = {
 }
 
 
-def classify_sds_p_codes(p_codes: List[str], usage: str = 'industrial') -> Dict:
+def classify_sds_p_codes(p_codes: List[str], usage: str = 'industrial',
+                         h_codes: List[str] = None, form: str = 'liquid',
+                         label: List[str] = None) -> Dict:
     """
     P kodlarını SDS'e yazılma önceliğine göre sınıflandır.
     CLP Annex IV Not 3 — üretici/KDU seçim yapabilir.
@@ -832,6 +843,17 @@ def classify_sds_p_codes(p_codes: List[str], usage: str = 'industrial') -> Dict:
       - professional: P301+P330+P331 → evaluate, P405 → evaluate
       - industrial  : P301+P330+P331 → evaluate, P405 → optional
     """
+    from app.services import p_guidance
+    if h_codes and p_guidance.known(h_codes):
+        groups = p_guidance.sds_groups(p_codes, h_codes, usage or 'industrial', form or 'liquid', label or [])
+        for grp in groups:
+            groups[grp].sort(key=lambda p: P_LABEL_PRIORITY.get(p, 5), reverse=True)
+        n = {g: len(v) for g, v in groups.items()}
+        return {'groups': groups, 'total': len(p_codes), 'mandatory_count': n['mandatory'],
+                'evaluate_count': n['evaluate'], 'optional_count': n['optional'],
+                'note': (f"SDS Bölüm 2: {n['mandatory']} kesinlikle önerilen · {n['evaluate']} değerlendirmeli · "
+                         f"{n['optional']} opsiyonel (SEA Etiketleme Rehberi 7.3)")}
+
     # Kullanım kategorisine göre öncelik geçersizleştirme
     _OVERRIDE: Dict[str, str] = {}
     if usage in ('industrial', 'professional'):

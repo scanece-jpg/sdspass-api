@@ -785,8 +785,10 @@ async def generate_pdf(data: dict = Body(...)):
 
         # P kodlarını son h_codes + signal ile hesapla
         p_result = assign_p_codes(h_codes, signal, usage=usage)
-        p_result['label'] = select_label_p_codes(p_result['p_codes'], 6, h_codes=h_codes, euh_codes=euh_codes)
-        p_result['sds']   = classify_sds_p_codes(p_result['p_codes'], usage=usage)
+        p_result['label'] = select_label_p_codes(p_result['p_codes'], 6, h_codes=h_codes, euh_codes=euh_codes,
+                                                 usage=usage, form=(product.get('form') or 'liquid'))
+        p_result['sds']   = classify_sds_p_codes(p_result['p_codes'], usage=usage, h_codes=h_codes, form=(product.get('form') or 'liquid'),
+                                                 label=p_result['label']['selected'])
 
         # ── PDF için Unicode → ASCII güvenli metin dönüşümü ──────────────────────
         # Avrupa kaynaklı DB'lerde (ECHA, CLP Annex VI) "…", "≤", "≥" karakterleri
@@ -970,8 +972,10 @@ async def generate_pdf(data: dict = Body(...)):
         # P kodlarını temizlenmiş h_codes ile yeniden hesapla
         # (filtreden önce H260/H261 vb. varsa P231+P232 gibi yanlış P kodları atanmış olabilir)
         p_result = assign_p_codes(h_codes, signal, usage=usage)
-        p_result['label'] = select_label_p_codes(p_result['p_codes'], 6, h_codes=h_codes, euh_codes=euh_codes)
-        p_result['sds']   = classify_sds_p_codes(p_result['p_codes'], usage=usage)
+        p_result['label'] = select_label_p_codes(p_result['p_codes'], 6, h_codes=h_codes, euh_codes=euh_codes,
+                                                 usage=usage, form=(product.get('form') or 'liquid'))
+        p_result['sds']   = classify_sds_p_codes(p_result['p_codes'], usage=usage, h_codes=h_codes, form=(product.get('form') or 'liquid'),
+                                                 label=p_result['label']['selected'])
 
         # Revizyon tarihi
         import datetime
@@ -1464,8 +1468,11 @@ async def p_codes_assign(body: dict):
     max_label  = body.get("max_label", 6)
     try:
         result = assign_p_codes(h_codes, signal, usage=usage)
-        result["label"]    = select_label_p_codes(result["p_codes"], max_label, h_codes=h_codes, euh_codes=euh_codes)
-        result["sds"]      = classify_sds_p_codes(result["p_codes"], usage=usage)
+        _pform = body.get("form", "liquid")
+        result["label"]    = select_label_p_codes(result["p_codes"], max_label, h_codes=h_codes, euh_codes=euh_codes,
+                                                  usage=usage, form=_pform)
+        result["sds"]      = classify_sds_p_codes(result["p_codes"], usage=usage, h_codes=h_codes, form=_pform,
+                                                  label=result["label"]["selected"])
         result["p_texts"]  = {p: get_p(lang, p) for p in result["p_codes"]}
         return {"success": True, **result}
     except Exception as e:
@@ -1601,6 +1608,7 @@ async def sds_calculate(body: dict = Body(...)):
                     _sub = _lu_euh(_cas)
                     if _sub and _sub.get('suppl_hazards'):
                         _c['suppl_hazards'] = _sub['suppl_hazards']
+                        _c['euh_limits']    = _sub.get('euh_limits', [])
         except Exception:
             pass
         euh_result = euh_calculate(comps,
@@ -1617,6 +1625,10 @@ async def sds_calculate(body: dict = Body(...)):
                 'm_factor_warnings': _aq.m_factor_warnings or [],
             }
         eco_result = {'h_codes': [_aq.h_code] if _aq else [], 'aquatic': _aq_dict}
+        # H420 — ozon tabakasına zararlı bileşen ≥ %0,1 (PDF uç noktasıyla aynı kural)
+        from app.services.ecological_service import check_ozone as _check_ozone
+        if _check_ozone(comps):
+            eco_result['h_codes'].append('H420')
 
         # ── 5b. ATE sağlık tehlikeleri — classify_mixture_clp Acute Tox. atlar ─
         from app.services.clp_service import calculate_ate_health_h_codes as _calc_ate
@@ -1822,8 +1834,10 @@ async def sds_calculate(body: dict = Body(...)):
         # ── P kodları ─────────────────────────────────────────────────────────
         _euh_list = euh_result.get('euh_codes', []) if isinstance(euh_result, dict) else []
         p_result = assign_p_codes(all_h_list, signal, usage=usage)
-        p_result['label'] = select_label_p_codes(p_result['p_codes'], 6, h_codes=all_h_list, euh_codes=_euh_list)
-        p_result['sds']   = classify_sds_p_codes(p_result['p_codes'], usage=usage)
+        p_result['label'] = select_label_p_codes(p_result['p_codes'], 6, h_codes=all_h_list, euh_codes=_euh_list,
+                                                 usage=usage, form=form)
+        p_result['sds']   = classify_sds_p_codes(p_result['p_codes'], usage=usage, h_codes=all_h_list, form=form,
+                                                 label=p_result['label']['selected'])
 
         # ── Teorik özellikler ─────────────────────────────────────────────────
         theo_props = phys_result.get('theo_props', {})

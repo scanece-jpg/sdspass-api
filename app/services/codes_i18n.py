@@ -844,10 +844,30 @@ def get_h(lang: str, code: str) -> str:
     return result or code
 
 
+_OFFICIAL_TR = None
+
+
+def _official_tr() -> dict:
+    """SEA Yönetmeliği eklerindeki resmî Türkçe P/EUH metinleri (scripts/build_sea_official_texts.py)."""
+    global _OFFICIAL_TR
+    if _OFFICIAL_TR is None:
+        import json, os
+        path = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'sea_official_texts.json')
+        try:
+            with open(path, encoding='utf-8') as f:
+                _OFFICIAL_TR = json.load(f)
+        except Exception:
+            _OFFICIAL_TR = {'p': {}, 'euh': {}}
+    return _OFFICIAL_TR
+
+
 def get_euh(lang: str, code: str, substance: str = '') -> str:
-    """EUH kodu metnini döner. EUH208 için substance adı gerekli."""
+    """EUH kodu metnini döner. Türkçe: SEA Ek-2 resmî metni önceliklidir. EUH208 için substance adı gerekli."""
     lang = lang.upper()
-    result = EUH_STMTS.get(lang, {}).get(code)
+    result = _official_tr()['euh'].get(code) if lang == 'TR' else None
+    if result and code == 'EUH208':
+        result = result.replace('(Hassaslaştırıcı maddenin ismi)', '{substance}')
+    result = result or EUH_STMTS.get(lang, {}).get(code)
     if not result:
         result = EUH_STMTS.get('EN', {}).get(code, code)
     result = result or code
@@ -862,9 +882,9 @@ def get_euh(lang: str, code: str, substance: str = '') -> str:
 
 @lru_cache(maxsize=1000)
 def get_p(lang: str, code: str) -> str:
-    """P kodu metnini döner."""
+    """P kodu metnini döner. Türkçe: SEA Ek-4 İkinci Bölüm resmî metni önceliklidir (Md. 24(4))."""
     lang = lang.upper()
-    result = P_STMTS.get(lang, {}).get(code)
+    result = (_official_tr()['p'].get(code) if lang == 'TR' else None) or P_STMTS.get(lang, {}).get(code)
     if not result:
         result = P_STMTS.get('EN', {}).get(code, code)
     return result or code

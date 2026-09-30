@@ -53,6 +53,10 @@ def _normalize(name: str) -> str:
 # min_conc/max_conc: % ağırlık (dahil alt sınır, hariç üst sınır).
 # Konsantrasyon bilinmiyorsa ilk giriş (en yüksek tehlike) kullanılır.
 # Tek UN'lu maddeler dict olarak tanımlı.
+_HCL_PG_NOTE = ('ADR Tablo A UN 1789 için PG II ve PG III öngörür; ayrım konsantrasyona göre değil '
+                'ADR 2.2.8.1.5 aşındırıcılık ölçütlerine (deri tahribat süresi / metal korozyon hızı) '
+                'göre yapılır. %25 sınırı varsayımdır — tedarikçi SDS’i veya test verisiyle doğrulayın.')
+
 _SEED_ENTRIES: dict = {
     # ── Asitler ───────────────────────────────────────────────────────────────
     '7664-93-9': [  # Sülfürik asit — ADR Tablo A
@@ -65,8 +69,12 @@ _SEED_ENTRIES: dict = {
     ],
     '7647-01-0': [  # Hidrojen klorür: gaz (susuz) / hidroklorik asit çözeltisi — ADR Tablo A
         {'min_conc': 0,   'max_conc': 100, 'un': 'UN1050', 'pg': '', 'physical_state': 'gas'},
-        {'min_conc': 25,  'max_conc': 100, 'un': 'UN1789', 'pg': 'II', 'physical_state': 'liquid'},
-        {'min_conc': 0,   'max_conc': 25,  'un': 'UN1789', 'pg': 'III', 'physical_state': 'liquid'},
+        # Tablo A UN1789 için PG II ve PG III öngörür ama ayrımı konsantrasyonla değil
+        # 2.2.8.1.5 aşındırıcılık ölçütleriyle yapar — %25 sınırı bir varsayımdır.
+        {'min_conc': 25,  'max_conc': 100, 'un': 'UN1789', 'pg': 'II', 'physical_state': 'liquid',
+         'note': _HCL_PG_NOTE},
+        {'min_conc': 0,   'max_conc': 25,  'un': 'UN1789', 'pg': 'III', 'physical_state': 'liquid',
+         'note': _HCL_PG_NOTE},
     ],
     '7664-38-2': {'un': 'UN1805', 'pg': 'III'},  # Fosforik asit
     '10035-10-6':{'un': 'UN1788', 'pg': 'II'},   # Hidrobromik asit
@@ -80,9 +88,11 @@ _SEED_ENTRIES: dict = {
     '1305-78-8': {'un': 'UN1910', 'pg': 'III'},  # Kalsiyum oksit
     '7664-41-7': [  # Amonyak — gaz veya çözelti
         {'min_conc': 0,   'max_conc': 100, 'un': 'UN1005', 'pg': '', 'physical_state': 'gas'},      # Susuz (gaz)
-        {'min_conc': 50,  'max_conc': 100, 'un': 'UN3318', 'pg': '', 'physical_state': 'liquid'},   # Çözelti >%50 (4TC)
-        {'min_conc': 35,  'max_conc': 50,  'un': 'UN2073', 'pg': '', 'physical_state': 'liquid'},   # Çözelti %35–50 (4A)
-        {'min_conc': 0,   'max_conc': 35,  'un': 'UN2672', 'pg': 'III', 'physical_state': 'liquid'},  # Çözelti ≤%35 (Sınıf 8)
+        # Tablo A: UN3318 "%50'den fazla"; UN2073 "%35'ten fazla ama %50'den az";
+        # UN2672 "%10'dan fazla ama %35'ten az". %10 ve altı bu adlı girişlere girmez.
+        {'min_conc': 50,  'max_conc': 100, 'un': 'UN3318', 'pg': '', 'physical_state': 'liquid', 'min_exclusive': True},  # 4TC
+        {'min_conc': 35,  'max_conc': 50,  'un': 'UN2073', 'pg': '', 'physical_state': 'liquid', 'min_exclusive': True},  # 4A
+        {'min_conc': 10,  'max_conc': 35,  'un': 'UN2672', 'pg': 'III', 'physical_state': 'liquid', 'min_exclusive': True},  # C5
     ],
 
     # ── Oksitleyiciler ────────────────────────────────────────────────────────
@@ -240,15 +250,20 @@ def lookup_by_cas(cas: str, concentration: Optional[float] = None,
             for rng in cands:
                 lo = rng.get('min_conc', 0)
                 hi = rng.get('max_conc', 100)
-                if lo <= concentration <= hi:
+                lo_ok = concentration > lo if rng.get('min_exclusive') else concentration >= lo
+                if lo_ok and concentration <= hi:
                     matched = rng
                     break
+            if matched is None:
+                return None   # bu konsantrasyon için adlı giriş yok (örn. amonyak ≤ %10) → B.N.O.
         if matched is None:
             matched = cands[0]  # konsantrasyon bilinmiyor → en tehlikelisi
         un_no = matched.get('un')
         pg    = matched['pg'] if 'pg' in matched else 'II'   # gazlarda ambalaj grubu yok ('')
         seed_physical_state: 'str | None' = matched.get('physical_state')
+        seed_note = matched.get('note')
     else:
+        seed_note = entry.get('note')
         un_no = entry.get('un')
         pg    = entry['pg'] if 'pg' in entry and entry['pg'] is not None else 'II'
         seed_physical_state = entry.get('physical_state')
@@ -262,6 +277,8 @@ def lookup_by_cas(cas: str, concentration: Optional[float] = None,
         details['packing_group'] = ''
     if seed_physical_state:
         details['physical_state'] = seed_physical_state
+    if seed_note:
+        details['seed_note'] = seed_note
     return details
 
 
@@ -308,6 +325,8 @@ def get_adr_details(un_no: str, packing_group: str = 'II') -> dict:
         'kemler':              _kemler or '—',
         'tunnel_code':         _tunnel or '—',
         'label':               pg_data.get('label', entry.get('class', '—')),
+        # Etiket listesi (örn. ['2.3', '8']) — gazlarda ADR sınıfı "2", IMDG/IATA bölümü labels[0]
+        'labels':              entry.get('labels') or [x for x in str(pg_data.get('label') or '').split('+') if x],
         'packing_group':       _pg_final,
         'special_provisions':  entry.get('special_provisions', []),
         'limited_qty':         (lambda lq: lq.get(_pg_final, '—') if isinstance(lq, dict) else (lq or '—'))(entry.get('limited_qty', '—')),

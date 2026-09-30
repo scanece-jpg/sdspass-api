@@ -255,7 +255,7 @@
     "name": "AMMONIA SOLUTION",
     "name_tr": "AMONYAK ÇÖZELTİSİ",
     "class": "8",
-    "classification_code": "C7",
+    "classification_code": "C5",
     "packing_groups": {
       "III": {
         "kemler": "80",

@@ -356,7 +356,8 @@ async def classify(inp: dict) -> dict:
         + [e['h_code'] for e in (ate_h or [])]))
     transport = transport_calc(h_codes=final_cls_h, form=form, phys_h_codes=phys_h,
                                viscosity=float(visc) if visc is not None else None,
-                               components=tr_components)
+                               components=tr_components,
+                               acute_tox=ate_h or [])
 
     # ── Etiket (h_codes) ve Bölüm 2.1 (all_h_codes) ─────────────────────────
     h_codes = list(dict.fromkeys(norm_sub(h) for h in clp_res.get('h_codes', [])))

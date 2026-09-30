@@ -2765,6 +2765,18 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _road_lbl = f"Sınıf {_cls_road}" + (f" ({sub_class})" if sub_class and _cls_road != '—' else '') if lang == 'TR' else f"Class {_cls_road}" + (f" ({sub_class})" if sub_class and _cls_road != '—' else '')
     _sea_lbl  = f"Sınıf {_cls_sea}"  if _cls_sea  != '—' else '—'
     _air_lbl  = f"Sınıf {_cls_air}"  if _cls_air  != '—' else '—'
+    # ADR'de gazların sınıfı "2", 2.1/2.2/2.3 etiket numarasıdır; IMDG/IATA'da bölüm olarak yazılır
+    if str(_cls_road) == '2' and _road.get('labels'):
+        _road_lbl = (f"Sınıf 2 (etiket: {' + '.join(_road['labels'])})" if lang == 'TR'
+                     else f"Class 2 (labels: {' + '.join(_road['labels'])})")
+    for _m, _lbl_name in ((_sea, '_sea_lbl'), (_air, '_air_lbl')):
+        _sc = _m.get('sub_class')
+        if _sc and _m.get('class') and _m.get('class') != '—':
+            _v = f"{'Sınıf' if lang == 'TR' else 'Class'} {_m['class']} ({_sc})"
+            if _lbl_name == '_sea_lbl':
+                _sea_lbl = _v
+            else:
+                _air_lbl = _v
     if _cls_road == '—': _road_lbl = na
     if _cls_sea  == '—': _sea_lbl  = na
     if _cls_air  == '—': _air_lbl  = na
@@ -2791,7 +2803,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
          _road_lbl],
         ['  ↳ Denizyolu (IMDG)' if lang == 'TR' else '  ↳ Sea (IMDG)',  _sea_lbl],
         ['  ↳ Havayolu (IATA)'  if lang == 'TR' else '  ↳ Air (IATA)',  _air_lbl],
-        [sub_title(lang,'14.4'),                 pack_grp],
+        # Sınıf 2 (gazlar/aerosoller) için ambalaj grubu yoktur
+        [sub_title(lang,'14.4'),                 pack_grp or term(lang, 'not_applicable')],
         [sub_title(lang,'14.5'),                 env_haz],
         ['  ↳ Deniz Kirletici (IMDG)' if lang == 'TR' else '  ↳ Marine Pollutant (IMDG)', _imdg_env],
         [('14.6 Kullanıcı için özel önlemler' if lang == 'TR'

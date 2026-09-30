@@ -1,6 +1,6 @@
 """
 TransportEngine — ADR/IMDG/IATA — SDS Bölüm 14
-Kaynak: ADR 2023 Tablo 3.1, IMDG Kod 2022, IATA-DGR 2024
+Kaynak: ADR 2025 Tablo 3.1, IMDG Kod 42-24, IATA-DGR 2026
         ADR 2.1.3.5 — Çoklu tehlike öncelik matrisi (Tablo 2.1.3.10)
 
 JS transport_engine.js'nin Python karşılığı.
@@ -114,7 +114,7 @@ CLASS_LABELS: Dict[str, str] = {
 }
 
 # H Kodu → ADR Sınıfı + Ambalaj Grubu
-# ADR 2023 Bölüm 2: Her H kodunun birincil ADR sınıfı ve PG'si
+# ADR 2025 Bölüm 2: Her H kodunun birincil ADR sınıfı ve PG'si
 # PG: 'I' (en tehlikeli) > 'II' > 'III' (en az tehlikeli) | None (uygulanmıyor)
 H_TO_ADR: Dict[str, Dict] = {
     # Sınıf 1 — Patlayıcı
@@ -151,13 +151,20 @@ H_TO_ADR: Dict[str, Dict] = {
     # Sınıf 6.1 — Akut Toksisite
     # ÖNEMLİ: H302/H312/H332 (CLP Kat.4) H_TO_ADR'ye dahil EDİLMEZ.
     # Sebep: CLP Kat.4 oral aralığı 300–2000 mg/kg; ADR 6.1 PG III eşiği ≤300 mg/kg.
-    # ATE > 300 mg/kg olan maddeler ADR Sınıf 6.1 kriterini karşılamaz (ADR 2.6.2.2).
-    'H300': {'class': '6.1', 'pg': 'I'},   # Oral Kat.1   (LD50 ≤ 5 mg/kg)
-    'H310': {'class': '6.1', 'pg': 'I'},   # Dermal Kat.1
-    'H330': {'class': '6.1', 'pg': 'I'},   # İnhalasyon Kat.1
-    'H301': {'class': '6.1', 'pg': 'II'},  # Oral Kat.2-3
-    'H311': {'class': '6.1', 'pg': 'II'},  # Dermal Kat.2-3
-    'H331': {'class': '6.1', 'pg': 'II'},  # İnhalasyon Kat.2-3
+    # ATE > 300 mg/kg olan maddeler ADR Sınıf 6.1 kriterini karşılamaz (ADR 2.2.61.1.7).
+    # ADR 2.2.61.1.7 PG sınırları CLP kategori sınırlarıyla örtüşür:
+    #   oral  I ≤5 / II ≤50 / III ≤300 mg/kg  = Kat.1 / Kat.2 / Kat.3
+    #   dermal I ≤50 / II ≤200 / III ≤1000    = Kat.1 / Kat.2 / Kat.3
+    #   toz/sis (4 sa LC50 × 4 = 1 sa LC50): I ≤0,05 / II ≤0,5 / III ≤1,0 mg/l = Kat.1 / 2 / 3
+    # H300 Kat.1 ve Kat.2'yi birlikte kapsar → kategori bilinmiyorsa PG I (en kötü durum).
+    # Kategori biliniyorsa (ATEmix) _tox61_pg() kesin PG'yi verir.
+    'H300': {'class': '6.1', 'pg': 'I'},   # Oral Kat.1-2
+    'H310': {'class': '6.1', 'pg': 'I'},   # Dermal Kat.1-2
+    'H330': {'class': '6.1', 'pg': 'I'},   # İnhalasyon Kat.1-2
+    'H301': {'class': '6.1', 'pg': 'III'}, # Oral Kat.3 (50–300 mg/kg)
+    'H311': {'class': '6.1', 'pg': 'III'}, # Dermal Kat.3 (200–1000 mg/kg)
+    'H331': {'class': '6.1', 'pg': 'II'},  # İnhalasyon Kat.3 — buhar için uçuculuk (V) bilinmeden
+                                           # kesin PG verilemez (ADR 2.2.61.1.8); PG II en kötü durum
     # Sınıf 8 — Korozif
     # ADR §2.1.3.5.5: Test verisi yoksa en kötü senaryo → PG I varsayılan.
     'H314': {'class': '8', 'pg': 'I'},
@@ -170,12 +177,62 @@ H_TO_ADR: Dict[str, Dict] = {
     'H411': {'class': '9', 'pg': 'III'},
 }
 
-# ADR Tablo 2.1.3.10: Sınıf öncelik sırası
-CLASS_RANK: Dict[str, int] = {
-    '1': 10, '5.2': 9, '4.2': 8, '4.3': 7, '5.1': 6, '2.1': 5, '2.2': 4,
-    '3': 3, '6.1': 3, '8': 3,   # Bu üçlü için rank eşit → PG matrisi devreye girer
-    '4.1': 2, '9': 1,
+# ADR 2.1.3.5.3: tehlike önceliği tablosundan önce gelen sınıflar (büyük değer önce gelir).
+# (d) Sınıf 3 duyarlılığı azaltılmış patlayıcılar ve (e) Sınıf 4.1 kendiliğinden tepkimeye
+# girenler portföyde H koduyla ayırt edilemediğinden listede yok.
+# '4.2' yalnızca PG I (piroforik, H250) için; '6.1i' = PG I soluma zehirliliği ((h) bendi).
+_PRIORITY_2135: Dict[str, int] = {
+    '1': 9, '2.3': 8, '2.1': 8, '2.2': 8, '4.2P': 6, '5.2': 5, '6.1i': 4,
 }
+
+# ADR 2.1.3.10 Tehlike önceliği tablosu (ADR 2025 Cilt I, s.101 — birebir aktarım).
+# Satır anahtarı "sınıf,PG[,yol]"; yol: D=dermal, O=oral, I=soluma (yalnızca 6.1).
+# Sütun sırası _PT_COLS. Hücre: "sınıf,PG" veya "S:…|L:…" (katı | sıvı ayrımı);
+# "*" = karşı tarafın PG'si (tabloda PG yazmayan "KATI 4.1/4.2" hücreleri).
+_PT_COLS = ['4.1,II', '4.1,III', '4.2,II', '4.2,III', '4.3,I', '4.3,II', '4.3,III',
+            '5.1,I', '5.1,II', '5.1,III', '6.1,I,D', '6.1,I,O', '6.1,II', '6.1,III',
+            '8,I', '8,II', '8,III', '9']
+_N = None
+_PT_ROWS: Dict[str, list] = {
+    '3,I':    ['S:4.1,*|L:3,I', 'S:4.1,*|L:3,I', 'S:4.2,*|L:3,I', 'S:4.2,*|L:3,I',
+               '4.3,I', '4.3,I', '4.3,I', 'S:5.1,I|L:3,I', 'S:5.1,I|L:3,I', 'S:5.1,I|L:3,I',
+               '3,I', '3,I', '3,I', '3,I', '3,I', '3,I', '3,I', '3,I'],
+    '3,II':   ['S:4.1,*|L:3,II', 'S:4.1,*|L:3,II', 'S:4.2,*|L:3,II', 'S:4.2,*|L:3,II',
+               '4.3,I', '4.3,II', '4.3,II', 'S:5.1,I|L:3,I', 'S:5.1,II|L:3,II', 'S:5.1,II|L:3,II',
+               '3,I', '3,I', '3,II', '3,II', '8,I', '3,II', '3,II', '3,II'],
+    '3,III':  ['S:4.1,*|L:3,II', 'S:4.1,*|L:3,III', 'S:4.2,*|L:3,II', 'S:4.2,*|L:3,III',
+               '4.3,I', '4.3,II', '4.3,III', 'S:5.1,I|L:3,I', 'S:5.1,II|L:3,II', 'S:5.1,III|L:3,III',
+               '6.1,I', '6.1,I', '6.1,II', '3,III', '8,I', '8,II', '3,III', '3,III'],
+    '4.1,II': [_N, _N, '4.2,II', '4.2,II', '4.3,I', '4.3,II', '4.3,II', '5.1,I', '4.1,II', '4.1,II',
+               '6.1,I', '6.1,I', 'S:4.1,II|L:6.1,II', 'S:4.1,II|L:6.1,II',
+               '8,I', 'S:4.1,II|L:8,II', 'S:4.1,II|L:8,II', '4.1,II'],
+    '4.1,III':[_N, _N, '4.2,II', '4.2,III', '4.3,I', '4.3,II', '4.3,III', '5.1,I', '4.1,II', '4.1,III',
+               '6.1,I', '6.1,I', '6.1,II', 'S:4.1,III|L:6.1,III',
+               '8,I', '8,II', 'S:4.1,III|L:8,III', '4.1,III'],
+    '4.2,II': [_N] * 4 + ['4.3,I', '4.3,II', '4.3,II', '5.1,I', '4.2,II', '4.2,II',
+               '6.1,I', '6.1,I', '4.2,II', '4.2,II', '8,I', '4.2,II', '4.2,II', '4.2,II'],
+    '4.2,III':[_N] * 4 + ['4.3,I', '4.3,II', '4.3,III', '5.1,I', '5.1,II', '4.2,III',
+               '6.1,I', '6.1,I', '6.1,II', '4.2,III', '8,I', '8,II', '4.2,III', '4.2,III'],
+    '4.3,I':  [_N] * 7 + ['5.1,I', '4.3,I', '4.3,I', '6.1,I', '4.3,I', '4.3,I', '4.3,I',
+               '4.3,I', '4.3,I', '4.3,I', '4.3,I'],
+    '4.3,II': [_N] * 7 + ['5.1,I', '4.3,II', '4.3,II', '6.1,I', '4.3,I', '4.3,II', '4.3,II',
+               '8,I', '4.3,II', '4.3,II', '4.3,II'],
+    '4.3,III':[_N] * 7 + ['5.1,I', '5.1,II', '4.3,III', '6.1,I', '6.1,I', '6.1,II', '4.3,III',
+               '8,I', '8,II', '4.3,III', '4.3,III'],
+    '5.1,I':  [_N] * 10 + ['5.1,I'] * 8,
+    '5.1,II': [_N] * 10 + ['6.1,I', '5.1,I', '5.1,II', '5.1,II', '8,I', '5.1,II', '5.1,II', '5.1,II'],
+    '5.1,III':[_N] * 10 + ['6.1,I', '6.1,I', '6.1,II', '5.1,III', '8,I', '8,II', '5.1,III', '5.1,III'],
+    '6.1,I,D':  [_N] * 14 + ['S:6.1,I|L:8,I', '6.1,I', '6.1,I', '6.1,I'],
+    '6.1,I,O':  [_N] * 14 + ['S:6.1,I|L:8,I', '6.1,I', '6.1,I', '6.1,I'],
+    '6.1,II,I': [_N] * 14 + ['S:6.1,I|L:8,I', '6.1,II', '6.1,II', '6.1,II'],
+    '6.1,II,D': [_N] * 14 + ['S:6.1,I|L:8,I', 'S:6.1,II|L:8,II', '6.1,II', '6.1,II'],
+    '6.1,II,O': [_N] * 14 + ['8,I', 'S:6.1,II|L:8,II', '6.1,II', '6.1,II'],
+    '6.1,III':  [_N] * 14 + ['8,I', '8,II', '8,III', '6.1,III'],
+    '8,I':    [_N] * 17 + ['8,I'],
+    '8,II':   [_N] * 17 + ['8,II'],
+    '8,III':  [_N] * 17 + ['8,III'],
+}
+_PT_ORDER = ['3', '4.1', '4.2', '4.3', '5.1', '6.1', '8', '9']
 
 
 def _pg_num(pg: Optional[str]) -> int:
@@ -183,30 +240,115 @@ def _pg_num(pg: Optional[str]) -> int:
     return {'I': 1, 'II': 2, 'III': 3}.get(pg, 4)
 
 
+def _tox61_routes(h_set: set, acute_tox: Optional[List[Dict]], form: str) -> Dict[str, Dict]:
+    """Sınıf 6.1 PG'sini zehirlilik yoluna göre döndürür: {'O'|'D'|'I': {pg, dust?, vapour?}}.
+
+    ADR 2.2.61.1.7 PG sınırları CLP akut toksisite kategorileriyle örtüşür (oral, dermal ve
+    toz/sis için 4 sa LC50 × 4 = 1 sa LC50 — 2.2.61.1.7 son paragraf): Kat.1→I, Kat.2→II,
+    Kat.3→III, Kat.4→6.1 değil. Buhar için PG uçuculuğa (V) bağlıdır (2.2.61.1.8); V bilinmediği
+    için Kat.1-2→I, Kat.3→II en kötü durum alınır.
+    """
+    out: Dict[str, Dict] = {}
+
+    def _put(r, pg, **kw):
+        if pg and (r not in out or _pg_num(pg) < _pg_num(out[r]['pg'])):
+            out[r] = {'pg': pg, **kw}
+
+    if acute_tox:
+        for e in acute_tox:
+            n = e.get('cat_num')
+            route = e.get('route') or ''
+            if not n:
+                continue
+            if route == 'oral':
+                _put('O', {1: 'I', 2: 'II', 3: 'III'}.get(n))
+            elif route == 'dermal':
+                _put('D', {1: 'I', 2: 'II', 3: 'III'}.get(n))
+            elif route == 'inhalation_dust':
+                _put('I', {1: 'I', 2: 'II', 3: 'III'}.get(n), dust=True)
+            elif route.startswith('inhalation'):
+                _put('I', {1: 'I', 2: 'I', 3: 'II'}.get(n), vapour=True)
+    # ATEmix sonucu olmayan yollar için H kodu (en kötü durum)
+    _hroute = {'H300': 'O', 'H301': 'O', 'H310': 'D', 'H311': 'D', 'H330': 'I', 'H331': 'I'}
+    _solid = (form or '') in ('solid', 'powder')
+    for h, r in _hroute.items():
+        if h in h_set and r not in out:
+            pg = H_TO_ADR[h]['pg']
+            if h == 'H331' and _solid:
+                pg = 'III'   # katıda soluma = toz; Kat.3 toz → PG III (2.2.61.1.7)
+            _put(r, pg, dust=_solid)
+    return out
+
+
+def _prio_key(cls: str, pg: Optional[str], route: Optional[str]) -> str:
+    """ADR 2.1.3.5.3 öncelik anahtarı ('' = öncelik listesinde değil → 2.1.3.10 tablosu)."""
+    if cls == '4.2' and pg == 'I':
+        return '4.2P'
+    if cls == '6.1' and pg == 'I' and route == 'I':
+        return '6.1i'
+    return cls if cls in _PRIORITY_2135 else ''
+
+
+def _pt_key(cls: str, pg: Optional[str], route: Optional[str], as_row: bool) -> str:
+    if cls == '9':
+        return '9'
+    if cls == '6.1':
+        if pg == 'I':
+            return '6.1,I,' + ('O' if route == 'O' else 'D')
+        if pg == 'II':
+            return '6.1,II,' + (route if route in ('I', 'D', 'O') else 'D') if as_row else '6.1,II'
+    return f'{cls},{pg}'
+
+
 def resolve_conflict(cls_a: str, pg_a: Optional[str],
-                     cls_b: str, pg_b: Optional[str]) -> Dict:
+                     cls_b: str, pg_b: Optional[str],
+                     route_a: Optional[str] = None, route_b: Optional[str] = None,
+                     solid: bool = False) -> Dict:
     """
-    ADR Tablo 2.1.3.10 PG matrisi.
-    İki ADR sınıfını karşılaştırır; kazananı ve kaybedeni döner.
-    Returns: { winner, win_pg, loser }
+    ADR 2.1.3.5.3 öncelik listesi + 2.1.3.10 tehlike önceliği tablosu.
+    route_*: yalnızca Sınıf 6.1 için zehirliliğin yolu ('O' oral, 'D' dermal, 'I' soluma).
+    solid: tablodaki KATI/SIVI ayrımlı hücreler için ürünün fiziksel hali.
+    Returns: { winner, win_pg, loser }  — win_pg tablo gereği yükseltilmiş olabilir
+             (örn. Sınıf 3 PG II + 6.1 PG I → Sınıf 3 PG I).
     """
-    # ── ÖZEL KURAL: Sınıf 5.1 vs Sınıf 8 — rank hesabından önce ──────────────
-    # ADR §2.1.3.10: Sınıf 8 PG I, Sınıf 5.1'i (tüm PG) yener.
-    # CLASS_RANK 5.1>8 verir; bu kural rank'tan önce uygulanarak doğru sonuç sağlanır.
-    if {cls_a, cls_b} == {'5.1', '8'}:
-        pg8 = _pg_num(pg_a if cls_a == '8' else pg_b)
-        if pg8 == 1:
-            win_pg8 = pg_a if cls_a == '8' else pg_b
-            return {'winner': '8', 'win_pg': win_pg8, 'loser': '5.1'}
-        win_pg51 = pg_a if cls_a == '5.1' else pg_b
-        return {'winner': '5.1', 'win_pg': win_pg51, 'loser': '8'}
+    if cls_a == cls_b:
+        if _pg_num(pg_a) <= _pg_num(pg_b):
+            return {'winner': cls_a, 'win_pg': pg_a, 'loser': None}
+        return {'winner': cls_b, 'win_pg': pg_b, 'loser': None}
 
-    rank_a = CLASS_RANK.get(cls_a, 0)
-    rank_b = CLASS_RANK.get(cls_b, 0)
+    # ── ADR 2.1.3.5.3: öncelikli sınıflar ────────────────────────────────────
+    ka, kb = _prio_key(cls_a, pg_a, route_a), _prio_key(cls_b, pg_b, route_b)
+    pa, pb = _PRIORITY_2135.get(ka, 0), _PRIORITY_2135.get(kb, 0)
+    if pa or pb:
+        if pa >= pb:
+            return {'winner': cls_a, 'win_pg': pg_a, 'loser': cls_b}
+        return {'winner': cls_b, 'win_pg': pg_b, 'loser': cls_a}
 
-    # Üst sıralama farklıysa büyük olan kazanır
-    if rank_a > rank_b:
-        return {'winner': cls_a, 'win_pg': pg_a, 'loser': cls_b}
+    # ── ADR 2.1.3.10 tablosu ─────────────────────────────────────────────────
+    ia = _PT_ORDER.index(cls_a) if cls_a in _PT_ORDER else -1
+    ib = _PT_ORDER.index(cls_b) if cls_b in _PT_ORDER else -1
+    if ia >= 0 and ib >= 0:
+        if ia <= ib:
+            row_c, row_pg, row_r, col_c, col_pg, col_r = cls_a, pg_a, route_a, cls_b, pg_b, route_b
+        else:
+            row_c, row_pg, row_r, col_c, col_pg, col_r = cls_b, pg_b, route_b, cls_a, pg_a, route_a
+        row = _PT_ROWS.get(_pt_key(row_c, row_pg, row_r, True))
+        ck = _pt_key(col_c, col_pg, col_r, False)
+        cell = row[_PT_COLS.index(ck)] if (row and ck in _PT_COLS) else None
+        if cell:
+            if cell.startswith('S:'):
+                s_part, l_part = cell[2:].split('|L:')
+                cell = s_part if solid else l_part
+            w_cls, w_pg = cell.split(',')
+            if w_pg == '*':
+                w_pg = row_pg if w_cls == row_c else col_pg
+            loser = col_c if w_cls == row_c else row_c
+            return {'winner': w_cls, 'win_pg': w_pg, 'loser': loser}
+
+    # Tabloda olmayan çift (örn. 4.1 PG I) — daha düşük PG (daha tehlikeli) kazanır
+    if _pg_num(pg_b) < _pg_num(pg_a):
+        return {'winner': cls_b, 'win_pg': pg_b, 'loser': cls_a}
+    return {'winner': cls_a, 'win_pg': pg_a, 'loser': cls_b}
     if rank_b > rank_a:
         return {'winner': cls_b, 'win_pg': pg_b, 'loser': cls_a}
 
@@ -288,7 +430,7 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
             return {
                 'un': 'UN 2924', 'label': 'Yanıcı Sıvı, Korozif, B.N.O.',
                 'note': (
-                    'UN 2924 seçim gerekçesi (ADR 2023): '
+                    'UN 2924 seçim gerekçesi (ADR 2025): '
                     'Alevlenir sıvı (H224/H225/H226, Sınıf 3) + aşındırıcı (H314, Sınıf 8) kombinasyonu. '
                     'ADR Tablo 2.1.3.10: Sınıf 3 birincil, Sınıf 8 yan tehlike — '
                     'birincil sınıf Sınıf 3 PG ≤ II ile aşındırıcı PG II birlikteliğinde Sınıf 3 önceliği korur. '
@@ -299,7 +441,7 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
             }
         if sub == '6.1':
             return {'un': 'UN 1992', 'label': 'Yanıcı Sıvı, Toksik, B.N.O.',
-                    'note': 'ADR 2023: Sınıf 3 birincil, Sınıf 6.1 yan tehlike'}
+                    'note': 'ADR 2025: Sınıf 3 birincil, Sınıf 6.1 yan tehlike'}
         return {'un': 'UN 1993', 'label': 'Yanıcı Sıvı, B.N.O.'}
     if cls == '4.1':
         return {
@@ -362,7 +504,7 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
             lbl = ('Zehirli Katı, Yanıcı, Organik, B.N.O.' if is_solid
                    else 'Zehirli Sıvı, Yanıcı, Organik, B.N.O.')
             return {'un': 'UN 2929', 'label': lbl,
-                    'note': 'ADR 2023: Sınıf 6.1 birincil, Sınıf 3 yan tehlike (ADR Tablo 2.1.3.10)'}
+                    'note': 'ADR 2025: Sınıf 6.1 birincil, Sınıf 3 yan tehlike (ADR Tablo 2.1.3.10)'}
         if sub == '8':
             return {
                 'un': 'UN 2928' if is_solid else 'UN 2927',
@@ -401,7 +543,7 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
                 'un': 'UN 2921' if is_solid else 'UN 2920',
                 'label': ('Korozif Katı, Yanıcı, B.N.O.' if is_solid
                           else 'Korozif Sıvı, Yanıcı, B.N.O.'),
-                'note': 'ADR 2023: Sınıf 8 birincil, Sınıf 3 yan tehlike (ADR Tablo 2.1.3.10)',
+                'note': 'ADR 2025: Sınıf 8 birincil, Sınıf 3 yan tehlike (ADR Tablo 2.1.3.10)',
             }
         if sub == '6.1':
             # Sınıf 8 birincil + 6.1 yan tehlike → UN 2922/2923 (CT1/CT2). Önce 6.1 birincil
@@ -410,7 +552,7 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
                 'un': 'UN 2923' if is_solid else 'UN 2922',
                 'label': ('Aşındırıcı Katı, Zehirli, B.N.O.' if is_solid
                           else 'Aşındırıcı Sıvı, Zehirli, B.N.O.'),
-                'note': 'ADR 2023: Sınıf 8 birincil, Sınıf 6.1 yan tehlike (ADR Tablo 2.1.3.10)',
+                'note': 'ADR 2025: Sınıf 8 birincil, Sınıf 6.1 yan tehlike (ADR Tablo 2.1.3.10)',
             }
         # Sınıf 8, yan tehlike yok — önce CAS bazlı spesifik arama yap
         if components:
@@ -434,7 +576,8 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
                             'note':   (f"CAS {dominant8.cas} için spesifik ADR girişi: "
                                        f"{_det['un_no']} Sınıf {_det.get('class','8')}, "
                                        f"PG {_det.get('packing_group','')} — "
-                                       "ADR §3.1.2.8.1: mevcut spesifik giriş B.N.O.'ya tercih edilir."),
+                                       "ADR §3.1.2.8.1: mevcut spesifik giriş B.N.O.'ya tercih edilir."
+                                       + (f" {_det['seed_note']}" if _det.get('seed_note') else '')),
                         }
         return {
             'un': 'UN 1759' if is_solid else 'UN 1760',
@@ -447,7 +590,7 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
                 'un': 'UN 3077',
                 'label': 'Çevre için Tehlikeli Madde, Katı, B.N.O.',
             }
-        # UN 3082 — ÖH 375 viskozite muafiyeti (ADR 2023 Bölüm 3.3.1)
+        # UN 3082 — ÖH 375 viskozite muafiyeti (ADR 2025 Bölüm 3.3.1)
         _visc = (h_set or set())  # visc bilgisi h_set üzerinden gelemiyor;
         # viscosity değeri dışarıdan geçilecek — bkz. classify() fonksiyonu
         return {
@@ -461,7 +604,8 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
 def classify(h_codes: List[str], form: str = 'liquid',
              phys_h_codes: Optional[List[str]] = None,
              viscosity: Optional[float] = None,
-             components: 'Optional[List[Component]]' = None) -> Dict:
+             components: 'Optional[List[Component]]' = None,
+             acute_tox: Optional[List[Dict]] = None) -> Dict:
     """
     ADR/IMDG/IATA sınıflandırması.
 
@@ -471,6 +615,8 @@ def classify(h_codes: List[str], form: str = 'liquid',
         phys_h_codes : Fiziksel motordan gelen H22x/H228 kodları
         viscosity    : Kinematik viskozite (mm²/s @40°C) — UN 3082 ÖH 375 kontrolü için
         components   : Bileşen listesi — §3.1.3.2 tetikleyici sayımı + baskın madde denetimi için
+        acute_tox    : ATEmix sonuçları [{h_code, route, cat_num}] — Sınıf 6.1 PG'si kategoriden
+                       kesin belirlenir (ADR 2.2.61.1.7). None ise H kodundan (en kötü durum).
 
     Returns:
         {not_regulated, road, sea, air, conflict_warning, adr_caution}
@@ -510,14 +656,27 @@ def classify(h_codes: List[str], form: str = 'liquid',
                         'tunnel': _details.get('tunnel_code', ''),
                         'note':   (f"ADR §3.1.3.2 — Baskın madde {_t.cas}: "
                                    f"{_details['un_no']} Sınıf {_details.get('class','')}, "
-                                   f"PG {_details.get('packing_group','')}."),
+                                   f"PG {_details.get('packing_group','')}."
+                                   + (f" {_details['seed_note']}" if _details.get('seed_note') else '')),
                         'env_mark': _mixture_env_mark,
+                        'labels': _details.get('labels') or None,
+                        'classification_code': _details.get('classification_code'),
+                        'regulation': 'ADR 2025',
                     }
+                    _sea = {**_road, 'regulation': 'IMDG Kod (Değişiklik 42-24)'}
+                    _lb = _details.get('labels') or []
+                    if str(_road['class']) == '2' and _lb:
+                        # IMDG/IATA'da gaz bölümü sınıf yerine yazılır (örn. 2.3), ek etiketler yan tehlike
+                        _sea.update({'class': _lb[0], 'sub_class': '+'.join(_lb[1:]) or None})
+                    elif len(_lb) > 1:
+                        _road['sub_class'] = '+'.join(_lb[1:])
+                        _sea['sub_class'] = _road['sub_class']
+                    _air = {**_sea, 'regulation': 'IATA-DGR 2026'}
                     return {
                         'not_regulated': False,
                         'road': _road,
-                        'sea':  _road,
-                        'air':  _road,
+                        'sea':  _sea,
+                        'air':  _air,
                         'env_mark': _mixture_env_mark,
                         'conflict_warning': None,
                         'adr_caution': None,
@@ -540,11 +699,13 @@ def classify(h_codes: List[str], form: str = 'liquid',
     env_mark = bool(h_set & {'H400', 'H410', 'H411'})
 
     # ── Adım 1: Aktif ADR tehlikelerini çıkar ────────────────────────────────
-    # Aynı sınıf için en tehlikeli PG'yi (en küçük sayı) sakla
+    # Aynı sınıf için en tehlikeli PG'yi (en küçük sayı) sakla. Sınıf 6.1 ayrıca yol bazında
+    # tutulur (2.1.3.10 tablosunda oral/dermal/soluma satırları farklıdır).
     class_map: Dict[str, Dict] = {}
+    tox_routes = _tox61_routes(h_set, acute_tox, form)
     for h in all_h:
         adr = H_TO_ADR.get(h)
-        if not adr:
+        if not adr or adr['class'] == '6.1':
             continue
         cls = adr['class']
         existing = class_map.get(cls)
@@ -552,8 +713,17 @@ def classify(h_codes: List[str], form: str = 'liquid',
         if not existing or new_num < existing['pg_num']:
             class_map[cls] = {'pg': adr['pg'], 'pg_num': new_num}
 
-    detected = [{'class': cls, 'pg': v['pg']} for cls, v in class_map.items()]
+    route61 = None
+    if tox_routes:
+        # En tehlikeli PG; eşitlikte soluma > dermal > oral (6.1 lehine en ağır satır)
+        route61 = min(tox_routes, key=lambda r: (_pg_num(tox_routes[r]['pg']), 'IDO'.index(r)))
+        class_map['6.1'] = {'pg': tox_routes[route61]['pg'], 'pg_num': _pg_num(tox_routes[route61]['pg'])}
 
+    detected = [{'class': cls, 'pg': v['pg'], 'route': route61 if cls == '6.1' else None}
+                for cls, v in class_map.items()]
+
+    if not detected and form == 'aerosol':
+        detected = [{'class': '2.2', 'pg': None, 'route': None}]   # her aerosol UN 1950'dir
     if not detected:
         return {
             'not_regulated': True,
@@ -562,17 +732,27 @@ def classify(h_codes: List[str], form: str = 'liquid',
             'conflict_warning': None, 'adr_caution': None,
         }
 
-    # ── Adım 2: Birincil sınıfı ADR Tablo 2.1.3.10 matrisiyle belirle ────────
-    primary = {'class': detected[0]['class'], 'pg': detected[0]['pg']}
+    # ── Adım 2: Birincil sınıf — ADR 2.1.3.5.3 öncelik listesi + 2.1.3.10 tablosu ─
+    primary = dict(detected[0])
     for item in detected[1:]:
-        res = resolve_conflict(primary['class'], primary['pg'],
-                               item['class'], item['pg'])
-        if res['winner'] != primary['class']:
-            primary = {'class': res['winner'], 'pg': res['win_pg']}
+        res = resolve_conflict(primary['class'], primary['pg'], item['class'], item['pg'],
+                               route_a=primary.get('route'), route_b=item.get('route'),
+                               solid=is_solid)
+        w_route = primary.get('route') if res['winner'] == primary['class'] else item.get('route')
+        primary = {'class': res['winner'], 'pg': res['win_pg'], 'route': w_route}
+
+    # ADR 2.1.3.5.3 (h) istisnası: Sınıf 8 kriterini karşılayan, toz/sis solunumu PG I olan ve
+    # oral/dermal zehirliliği yalnızca PG III veya daha az olan maddeler Sınıf 8'e girer.
+    if (primary['class'] == '6.1' and route61 == 'I' and tox_routes['I'].get('dust')
+            and primary['pg'] == 'I' and '8' in class_map
+            and all(_pg_num(tox_routes[r]['pg']) >= 3 for r in ('O', 'D') if r in tox_routes)):
+        primary = {'class': '8', 'pg': class_map['8']['pg'], 'route': None}
 
     # ── Adım 3: Yan tehlikeleri belirle ──────────────────────────────────────
+    # Sınıf 9 (çevre için tehlikeli) hiçbir zaman yan tehlike olarak yazılmaz — çevre için
+    # tehlikeli madde işareti ile gösterilir (ADR 5.2.1.8 / 5.4.1.1.18).
     subs = sorted(
-        [d for d in detected if d['class'] != primary['class']],
+        [d for d in detected if d['class'] not in (primary['class'], '9')],
         key=lambda d: _pg_num(d['pg'])
     )
     sub_class = subs[0]['class'] if subs else None
@@ -602,72 +782,73 @@ def classify(h_codes: List[str], form: str = 'liquid',
             )
         del un_entry['_sp375_check']
 
-    # Aerosol formu — her zaman UN 1950 (ADR 2023 Tablo A Sınıf 2)
-    # Sınıflandırma kodu hazard setine göre seçilir (ADR 2023 Tablo A).
+    # Aerosol formu — her zaman UN 1950 (ADR 2025 Tablo A Sınıf 2)
+    # Sınıflandırma kodu hazard setine göre seçilir (ADR 2025 Tablo A).
     # CMR (H340/H350) ADR anlamında "toksik" değildir — LC50 kriterleri (Div.2.3) geçerli.
     if form == 'aerosol':
+        # ADR 2.2.2.1.6: aerosol grubu içeriğin tehlike özelliklerine göre atanır —
+        # T: içerik Sınıf 6.1 kriterini karşılar; C: Sınıf 8; O: yükseltgen; F: alevlenebilir.
+        # Etiket ve tünel kodları ADR 2025 Tablo A UN 1950 satırlarından birebir alınmıştır.
         _is_flam = bool(h_set & {'H222', 'H223'})
-        _is_adr_toxic = bool(h_set & {'H330', 'H331'})  # ADR Div.2.3 inhalasyon toksisitesi
-        _is_ox   = 'H270' in h_set                       # Oksitleyici gaz
-        _is_corr = 'H314' in h_set                       # Aşındırıcı
-
-        if   _is_toxic := (_is_adr_toxic):
-            if   _is_ox and _is_corr:           _aero_code = '5TOC'
-            elif _is_flam and _is_corr:          _aero_code = '5TFC'
-            elif _is_ox:                         _aero_code = '5TO'
-            elif _is_corr:                       _aero_code = '5TC'
-            elif _is_flam:                       _aero_code = '5TF'
-            else:                                _aero_code = '5T'
-        elif _is_flam:                           _aero_code = '5F'
-        else:                                    _aero_code = '5A'
-
-        # UN1950 varyantına göre Sınıf 2 alt etiket
-        _AERO_CLASS = {
-            '5A':  '2.2', '5F':  '2.1',
-            '5T':  '2.3', '5TF': '2.3', '5TC': '2.3',
-            '5TO': '2.3', '5TFC':'2.3', '5TOC':'2.3',
-        }
+        _is_tox  = bool(tox_routes)
+        _is_ox   = bool(h_set & {'H270', 'H271', 'H272'})
+        _is_corr = 'H314' in h_set
+        _aero_code = '5' + ('T' if _is_tox else '') + ('F' if _is_flam else '')                      + ('O' if (_is_ox and not _is_flam) else '') + ('C' if _is_corr else '')
+        if _aero_code == '5':
+            _aero_code = '5A'
+        if _aero_code not in ('5A', '5C', '5CO', '5F', '5FC', '5O', '5T', '5TC', '5TF',
+                              '5TFC', '5TO', '5TOC'):
+            _aero_code = _aero_code.replace('O', '')   # Tablo A'da F ile O birlikte yok
         _AERO_LABELS = {
-            '5A':   ['2.2'],
-            '5F':   ['2.1'],
-            '5T':   ['2.3', '2.2'],
-            '5TF':  ['2.3', '2.1'],
-            '5TC':  ['2.3', '8'],
-            '5TO':  ['2.3', '5.1'],
-            '5TFC': ['2.3', '2.1', '8'],
-            '5TOC': ['2.3', '5.1', '8'],
+            '5A': ['2.2'], '5C': ['2.2', '8'], '5CO': ['2.2', '5.1', '8'],
+            '5F': ['2.1'], '5FC': ['2.1', '8'], '5O': ['2.2', '5.1'],
+            '5T': ['2.2', '6.1'], '5TC': ['2.2', '6.1', '8'], '5TF': ['2.1', '6.1'],
+            '5TFC': ['2.1', '6.1', '8'], '5TO': ['2.2', '5.1', '6.1'],
+            '5TOC': ['2.2', '5.1', '6.1', '8'],
         }
         _AERO_TUNNEL = {
-            '5A': 'E', '5F': 'D',
-            '5T': 'C', '5TF': 'C', '5TC': 'C',
-            '5TO': 'C', '5TFC': 'C', '5TOC': 'D',
+            '5A': 'E', '5C': 'E', '5CO': 'E', '5F': 'D', '5FC': 'D', '5O': 'E',
+            '5T': 'D', '5TC': 'D', '5TF': 'D', '5TFC': 'D', '5TO': 'D', '5TOC': 'D',
         }
         _AERO_NAMES = {
-            '5A':   ('AEROSOLS, non-flammable',         'AEROSOLLER, yanmaz'),
-            '5F':   ('AEROSOLS, flammable',             'AEROSOLLER, yanıcı'),
-            '5T':   ('AEROSOLS, toxic',                 'AEROSOLLER, zehirli'),
-            '5TF':  ('AEROSOLS, toxic, flammable',      'AEROSOLLER, zehirli, yanıcı'),
-            '5TC':  ('AEROSOLS, toxic, corrosive',      'AEROSOLLER, zehirli, aşındırıcı'),
-            '5TO':  ('AEROSOLS, toxic, oxidizing',      'AEROSOLLER, zehirli, yükseltgen'),
-            '5TFC': ('AEROSOLS, toxic, flam., corr.',   'AEROSOLLER, zehirli, yanıcı, aşındırıcı'),
-            '5TOC': ('AEROSOLS, toxic, ox., corr.',     'AEROSOLLER, zehirli, yükseltgen, aşındırıcı'),
+            '5A':   ('AEROSOLS, asphyxiant',                  'AEROSOLLER, asfiksant'),
+            '5C':   ('AEROSOLS, corrosive',                   'AEROSOLLER, aşındırıcı'),
+            '5CO':  ('AEROSOLS, corrosive, oxidizing',        'AEROSOLLER, aşındırıcı, yükseltgen'),
+            '5F':   ('AEROSOLS, flammable',                   'AEROSOLLER, alevlenebilir'),
+            '5FC':  ('AEROSOLS, flammable, corrosive',        'AEROSOLLER, alevlenebilir, aşındırıcı'),
+            '5O':   ('AEROSOLS, oxidizing',                   'AEROSOLLER, yükseltgen'),
+            '5T':   ('AEROSOLS, toxic',                       'AEROSOLLER, zehirli'),
+            '5TC':  ('AEROSOLS, toxic, corrosive',            'AEROSOLLER, zehirli, aşındırıcı'),
+            '5TF':  ('AEROSOLS, toxic, flammable',            'AEROSOLLER, zehirli, alevlenebilir'),
+            '5TFC': ('AEROSOLS, toxic, flammable, corrosive', 'AEROSOLLER, zehirli, alevlenebilir, aşındırıcı'),
+            '5TO':  ('AEROSOLS, toxic, oxidizing',            'AEROSOLLER, zehirli, yükseltgen'),
+            '5TOC': ('AEROSOLS, toxic, oxidizing, corrosive', 'AEROSOLLER, zehirli, yükseltgen, aşındırıcı'),
         }
+        _al = _AERO_LABELS[_aero_code]
+        primary = {'class': _al[0], 'pg': ''}
+        subs = [{'class': c, 'pg': ''} for c in _al[1:]]
+        sub_class = '+'.join(_al[1:]) or None
         _en_name, _tr_name = _AERO_NAMES.get(_aero_code, ('AEROSOLS', 'AEROSOLLER'))
         un_entry = {
             'un':    'UN 1950',
-            'label': (_tr_name if True else _en_name) + ', B.N.O.',
+            'label': _tr_name,
             'classification_code': _aero_code,
-            'labels':   _AERO_LABELS.get(_aero_code, ['2.1']),
-            'tunnel':   _AERO_TUNNEL.get(_aero_code, 'D'),
+            'labels':   _al,
+            'tunnel':   _AERO_TUNNEL[_aero_code],
             'name':     _en_name,
             'name_tr':  _tr_name,
-            'note': f'UN 1950 {_aero_code} — ADR 2023 Tablo A (kod hazard setinden otomatik seçildi)',
+            'pg':       '',
+            'note': (f'UN 1950 {_aero_code} — ADR 2025 Tablo A / 2.2.2.1.6 (grup içeriğin tehlike '
+                     'özelliklerinden seçildi). İçeriği Sınıf 6.1 veya 8 PG I kriterini karşılayan '
+                     'aerosoller taşımaya kabul edilmez (2.2.2.1.6).'),
         }
 
-    # Gaz — ADR 2.2.2.1: soluma yoluyla zehirli gaz (H330/H331) → Sınıf 2.3 birincil; aşındırıcı (8),
-    # yanıcı (2.1), yükseltgen (5.1) yan tehlike. Önce H280 → 2.2 ve H331 → 6.1 ayrı sınıflar
-    # sayılıyordu (HCl gazı UN 1956 çıkıyordu). Maddeye özgü giriş (örn. UN1050) yukarıda önceliklidir.
-    if form == 'gas' and h_set & {'H330', 'H331'}:
+    # Gaz — ADR 2.2.2.1.5: zehirli gaz = 1 sa LC50 ≤ 5000 ml/m3 (CLP 4 sa LC50 × 2 → H330/H331
+    # sınırıyla örtüşür) VEYA aşındırıcılığı nedeniyle zehirlilik kriterini karşılayan gaz
+    # ("aşındırıcı gazlar zehirli olarak sınıflandırılır", ikincil aşındırıcı riskli) → kod T…,
+    # etiket 2.3; yanıcı (2.1), yükseltgen (5.1), aşındırıcı (8) ek etiket.
+    # Maddeye özgü giriş (örn. UN1050, UN1005) yukarıda önceliklidir.
+    if form == 'gas' and (h_set & {'H330', 'H331'} or 'H314' in h_set):
         _g_flam = bool(h_set & {'H220', 'H221'})
         _g_ox   = 'H270' in h_set
         _g_corr = 'H314' in h_set
@@ -688,17 +869,20 @@ def classify(h_codes: List[str], form: str = 'liquid',
         _labels = ['2.3'] + (['2.1'] if _g_flam else []) + (['5.1'] if _g_ox else []) + (['8'] if _g_corr else [])
         primary = {'class': '2.3', 'pg': ''}
         subs = [{'class': c, 'pg': ''} for c in _labels[1:]]
+        sub_class = '+'.join(_labels[1:]) or None
+        _why = ('soluma yoluyla zehirli gaz (H330/H331)' if h_set & {'H330', 'H331'}
+                else 'aşındırıcı gaz (H314) — ADR 2.2.2.1.5 gereği zehirli gaz sayılır')
         un_entry = {
             'un':    _un_c[:2] + ' ' + _un_c[2:],
             'label': _gd.get('name_tr') or 'SIKIŞTIRILMIŞ GAZ, ZEHİRLİ, B.B.B.',
             'classification_code': _gd.get('classification_code', ''),
+            'tunnel': _gd.get('tunnel_code'),
             'labels': _labels,
             'pg':    '',
-            'note':  (f'ADR 2.2.2.1: soluma yoluyla zehirli gaz (H330/H331) → Sınıf 2.3'
-                      + (f' (yan tehlike: {", ".join(_labels[1:])})' if len(_labels) > 1 else '')
-                      + f'. Sıkıştırılmış gaz varsayıldı; sıvılaştırılmış gaz ise {_un_l[:2]} {_un_l[2:]}. '
-                        'Maddeye özgü UN numarası önceliklidir (örn. UN1050 hidrojen klorür, susuz; '
-                        'UN1005 amonyak, susuz).'),
+            'note':  (f'ADR 2.2.2.1.5: {_why} → Sınıf 2, etiket {" + ".join(_labels)}. '
+                      f'Sıkıştırılmış gaz varsayıldı; sıvılaştırılmış gaz ise {_un_l[:2]} {_un_l[2:]}. '
+                      'Maddeye özgü UN numarası önceliklidir (örn. UN1050 hidrojen klorür, susuz; '
+                      'UN1005 amonyak, susuz).'),
         }
 
     # ── Adım 5: Uyarılar ─────────────────────────────────────────────────────
@@ -711,7 +895,7 @@ def classify(h_codes: List[str], form: str = 'liquid',
             'message': (
                 f"Alevlenirlik tehlikesi ({'/'.join(flam_present)}) tespit edildi ancak "
                 f"birincil taşımacılık sınıfı Sınıf {primary['class']}. "
-                f"Parlama noktası ≤ 60°C ise ADR 2023 kapsamında Sınıf 3 değerlendirilmelidir."
+                f"Parlama noktası ≤ 60°C ise ADR 2025 kapsamında Sınıf 3 değerlendirilmelidir."
             ),
         }
 
@@ -723,7 +907,7 @@ def classify(h_codes: List[str], form: str = 'liquid',
             'level': 'INFO',
             'message': (
                 f"{'/'.join(kat4_present)} (CLP Akut Toksisite Kat.4) mevcut. "
-                f"ADR Sınıf 6.1 PG III için LD50 ≤ 300 mg/kg gerekir (ADR 2.6.2.2). "
+                f"ADR Sınıf 6.1 PG III için LD50 ≤ 300 mg/kg gerekir (ADR 2.2.61.1.7). "
                 f"Karışımın ATE değeri bu eşiği aşıyorsa ADR Sınıf 6.1 uygulanmaz — "
                 f"taşımacılık uzmanına danışın."
             ),
@@ -735,7 +919,7 @@ def classify(h_codes: List[str], form: str = 'liquid',
             'level': 'INFO',
             'message': (
                 "H304 (Aspirasyon Tehlikesi Kat.1) mevcut. "
-                "ADR 2023: Aspirasyon tehlikesi bağımsız bir ADR sınıfı oluşturmaz — "
+                "ADR 2025: Aspirasyon tehlikesi bağımsız bir ADR sınıfı oluşturmaz — "
                 "yanıcı sıvı (Sınıf 3) kapsamında değerlendirilir. "
                 "Parlama noktası > 60°C ise taşımacılık uzmanı değerlendirmesi önerilir."
             ),
@@ -751,8 +935,8 @@ def classify(h_codes: List[str], form: str = 'liquid',
                 'message': (
                     f"{'/'.join(stot_se_present)} (STOT Tek Maruziyet) mevcut ancak "
                     f"akut toksisite kodu (H300/H301/H310/H311/H330/H331) bulunmuyor. "
-                    f"ADR 2023: STOT SE kodları doğrudan ADR Sınıf 6.1'e eşlenmez. "
-                    f"LD50/LC50 verisi mevcutsa ADR 2.6.2.2 kapsamında Sınıf 6.1 "
+                    f"ADR 2025: STOT SE kodları doğrudan ADR Sınıf 6.1'e eşlenmez. "
+                    f"LD50/LC50 verisi mevcutsa ADR 2.2.61.1.7 kapsamında Sınıf 6.1 "
                     f"uygulanabilirliği taşımacılık uzmanı tarafından değerlendirilmelidir."
                 ),
             }
@@ -761,9 +945,15 @@ def classify(h_codes: List[str], form: str = 'liquid',
     all_sub_labels = ', '.join(f"Sınıf {s['class']}" for s in subs)
     sub_label = f' (Yan Tehlike: {all_sub_labels})' if all_sub_labels else ''
 
+    # ADR/RID'de gazların sınıfı "2"dir; 2.1/2.2/2.3 etiket numarasıdır (2.2.2.1). IMDG ve
+    # IATA'da ise "2.1/2.2/2.3" bölüm (division) olarak sınıf yerine yazılır.
+    _is_gas_cls = str(primary['class']).startswith('2.')
+    _labels_out = un_entry.get('labels') or (
+        [primary['class']] + [s['class'] for s in subs] if _is_gas_cls else None)
     entry = {
         'un':                  un_entry['un'],
         'class':               primary['class'],
+        'labels':              _labels_out,
         'class_label':         CLASS_LABELS.get(primary['class'], primary['class']) + sub_label,
         # Spesifik UN girişinin Tablo A PG'si, H-kodundan türetilen en-kötü-durum PG'sine üstündür
         # (örn. H314 → PG I varsayılır ama UN1824'ün Tablo A'da PG I'i yoktur)
@@ -778,11 +968,15 @@ def classify(h_codes: List[str], form: str = 'liquid',
         'tunnel':              un_entry.get('tunnel'),
     }
 
+    _road = {**entry, 'regulation': 'ADR 2025'}
+    if _is_gas_cls:
+        _road.update({'class': '2', 'sub_class': None,
+                      'class_label': 'Gazlar — etiket ' + ' + '.join(_labels_out or [primary['class']])})
     return {
         'not_regulated':    False,
-        'road': {**entry, 'regulation': 'ADR 2023'},
-        'sea':  {**entry, 'regulation': 'IMDG Kod 2022'},
-        'air':  {**entry, 'regulation': 'IATA-DGR 2024'},
+        'road': _road,
+        'sea':  {**entry, 'regulation': 'IMDG Kod (Değişiklik 42-24)'},
+        'air':  {**entry, 'regulation': 'IATA-DGR 2026'},
         'env_mark':         env_mark,
         'conflict_warning': conflict_warning,
         'adr_caution':      adr_caution,

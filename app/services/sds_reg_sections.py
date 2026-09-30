@@ -202,6 +202,44 @@ def accidental_release(h_codes: List[str], form: str, hazard_sentences: List[str
     return {'6.1': s61, '6.2': s62, '6.3': base63}
 
 
+# ── 7.1 / 7.2 — ürünün kendi önlem ifadelerinden (SEA Ek-4 resmî metin) ──────────
+# KKE ifadeleri (P280–P285) Bölüm 8'de; bertaraf (P501–P503) Bölüm 13'te yer alır.
+_PPE_P = {'P280', 'P281', 'P282', 'P283', 'P284', 'P285'}
+_INHAL_SELECT_TR = 'Tozunu/dumanını/gazını/sisini/buharını/spreyini'
+_INHAL_SELECT_EN = 'dust/fume/gas/mist/vapours/spray'
+
+
+def _select_inhal(text: str, form: str, lang: str) -> str:
+    """P260/P261 vb.: tedarikçinin seçmesi gereken kısmı fiziksel hale göre seç (SEA Etiketleme Rehberi)."""
+    f = (form or '').lower()
+    if lang == 'TR':
+        sel = {'solid': 'Tozunu', 'powder': 'Tozunu', 'gas': 'Gazını', 'aerosol': 'Spreyini'}.get(f, 'Buharını/sisini')
+        return text.replace(_INHAL_SELECT_TR, sel)
+    sel = {'solid': 'dust', 'powder': 'dust', 'gas': 'gas', 'aerosol': 'spray'}.get(f, 'vapours/mist')
+    return text.replace(_INHAL_SELECT_EN, sel)
+
+
+def _p_list(codes: List[str], pred, form: str, lang: str) -> List[str]:
+    L = lang if lang in ('TR', 'EN') else 'EN'
+    out = []
+    for c in sorted({str(x).strip() for x in codes if x}, key=lambda s: s.split('+')[0]):
+        if pred(c):
+            t = _select_inhal(_p(c, L), form, L)
+            if t and t not in out:
+                out.append(t)
+    return out
+
+
+def handling_p(p_codes: List[str], form: str, lang: str = 'TR') -> List[str]:
+    """7.1 — önleme ifadeleri (P2xx), KKE ifadeleri hariç."""
+    return _p_list(p_codes, lambda c: c.startswith('P2') and c.split('+')[0] not in _PPE_P, form, lang)
+
+
+def storage_p(p_codes: List[str], form: str, lang: str = 'TR') -> List[str]:
+    """7.2 — depolama ifadeleri (P4xx)."""
+    return _p_list(p_codes, lambda c: c.startswith('P4'), form, lang)
+
+
 # ── 7.1.2 — genel mesleki hijyen ───────────────────────────────────────────────
 def hygiene(lang: str = 'TR') -> List[str]:
     """KKDİK Ek-2 7.1.2 a/b/c (EN: 2020/878 Ek-II 7.1) ifadeleri."""

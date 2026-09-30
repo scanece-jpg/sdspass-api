@@ -146,6 +146,7 @@ from app.services.tr_mevzuat_service import get_section15_text, get_disposal_reg
 from app.services.gbf_author_service import format_author_block, validate_certificate
 from app.services.sds_reg_sections import (
     first_aid as reg_first_aid, accidental_release as reg_accidental_release, hygiene as reg_hygiene,
+    handling_p as reg_handling_p, storage_p as reg_storage_p,
 )
 from app.services.sds_sentence_service import (
     adapt_for_form, adapt_list_for_form,
@@ -1547,28 +1548,36 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _b7_form_sub = product.get('form_sub', '') or ''
     _b7_is_solid = _b7_form in ('solid', 'powder')
 
-    sec7 = generate_section(7, h_codes)
-    _sec7_bullets = adapt_list_for_form(sec7['bullets'], _sec_form)
-    # Katı/toz forma özgü elleçleme notları
-    if _b7_is_solid:
-        # KKDİK Ek-2 7.1.1 a) + SEA Ek-4 P261 (toz seçimi)
-        _solid_handling_TR = ['Toz oluşumunu önlemek amacıyla kontrol altına alma önlemleri uygulayın.',
-                              'Tozunu solumaktan kaçının.']
-        _solid_handling_EN = ['Apply containment measures to prevent dust generation.',
-                              'Avoid breathing dust.']
-        _sec7_bullets = (_solid_handling_TR if lang == 'TR' else _solid_handling_EN) + _sec7_bullets
-    # KKDİK Ek-2 7.1.2 — genel mesleki hijyen (yeme/içme/sigara, el yıkama, kirli giysi)
+    _p_all_codes = [str(c) for c in (p_data.get('p_codes') or [])]
     if lang in ('TR', 'EN'):
-        _sec7_bullets += [x for x in reg_hygiene(lang) if x not in _sec7_bullets]
+        # 7.1 — yalnızca resmî ifadeler: Ek-2 7.1.1 a) (katı), ürünün önleme ifadeleri (SEA Ek-4
+        # P2xx; KKE Bölüm 8'de) ve Ek-2 7.1.2 hijyen (P270/P264 zaten varsa tekrarlanmaz)
+        _sec7_bullets = []
+        if _b7_is_solid:
+            _sec7_bullets.append('Toz oluşumunu önlemek amacıyla kontrol altına alma önlemleri uygulayın.'
+                                 if lang == 'TR' else 'Apply containment measures to prevent dust generation.')
+        _sec7_bullets += reg_handling_p(_p_all_codes, _sec_form, lang)
+        _hyg = reg_hygiene(lang)
+        _hyg_skip = {0} if 'P270' in _p_all_codes else set()
+        if 'P264' in _p_all_codes:
+            _hyg_skip.add(1)
+        _sec7_bullets += [x for i, x in enumerate(_hyg) if i not in _hyg_skip]
+    else:
+        sec7 = generate_section(7, h_codes)
+        _sec7_bullets = adapt_list_for_form(sec7['bullets'], _sec_form)
     story += bullet_list(list(dict.fromkeys(_sec7_bullets)), styles) or [na_text(lang, styles)]
 
     story += sub_block(f"7.2 {sub_title(lang,'7.2')}", styles)
-    # H kodu bazlı depolama metinleri (slot 72) — H224/H225/H226/H314 için özel
-    sec72 = generate_section(72, h_codes)
-    _sec72_bullets = adapt_list_for_form(sec72['bullets'], _sec_form)
+    if lang in ('TR', 'EN'):
+        # 7.2 — ürünün depolama ifadeleri (SEA Ek-4 P4xx resmî metin)
+        _sec72_bullets = reg_storage_p(_p_all_codes, _sec_form, lang)
+    else:
+        # H kodu bazlı depolama metinleri (slot 72) — H224/H225/H226/H314 için özel
+        sec72 = generate_section(72, h_codes)
+        _sec72_bullets = adapt_list_for_form(sec72['bullets'], _sec_form)
 
-    # Katı/toz forma özgü depolama notları — H228 olmasa bile gerekli
-    if _b7_is_solid:
+    # Katı/toz forma özgü depolama notları — H228 olmasa bile gerekli (yalnız diğer diller)
+    if _b7_is_solid and lang not in ('TR', 'EN'):
         _solid_storage_TR = [
             'Kuru, serin ve iyi havalandırılmış alanda depolayın.',
             'Toz oluşumundan kaçının; kapları kapalı tutun.',
@@ -2149,6 +2158,15 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                          else 'aluminium (at elevated temperatures)')
     if is_acid:
         incompat_set.add('bazlar ve aktif metaller' if lang=='TR' else 'bases and reactive metals')
+    # Asit içeren ürün + hipoklorit (çamaşır suyu) → klor gazı. KKDİK Ek-2 10.5: kaçınılması
+    # gereken maddeler sıralanır (yönetmelikte asitli ürünler için hazır ifade yok; yalnız listeye eklenir).
+    # Ürünün kendisi hipoklorit içeriyorsa EUH206/EUH031 zaten uyarır.
+    _ACID_CAS = {'77-92-9', '5329-14-6', '7664-38-2', '7647-01-0', '7664-93-9', '7697-37-2',
+                 '64-18-6', '64-19-7', '50-21-5', '79-33-4', '79-14-1', '144-62-7', '7681-38-1',
+                 '6915-15-7', '87-69-4', '75-75-2', '10043-35-3'}
+    _HYPOCHLORITE_CAS = {'7681-52-9', '7778-54-3', '10022-70-5'}
+    if (comp_cas_set & _ACID_CAS) and not (comp_cas_set & _HYPOCHLORITE_CAS):
+        incompat_set.add('hipokloritler (çamaşır suyu)' if lang == 'TR' else 'hypochlorites (bleach)')
     if is_base:
         incompat_set.add('asitler' if lang=='TR' else 'acids')
     if 'H314' in h_codes and not is_acid and not is_base:

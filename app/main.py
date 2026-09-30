@@ -158,6 +158,20 @@ async def generate_pdf(data: dict = Body(...)):
         _req_methods: dict = data.get('phys_methods', {}) or {}
         _h314_removed_flag = bool(data.get('h314_neutralization_removed', False))
 
+        # KKDİK Ek-2 1.1 ve 1.3 — ürün tanımlayıcısı ve tedarikçi kimliği olmadan GBF üretilmez
+        _id_missing = [lbl for lbl, val in (
+            ('Ürün adı',   (product.get('name') or '').strip() not in ('', 'Ürün', 'Product')),
+            ('Firma adı',  bool((supplier_in.get('name') or '').strip())),
+            ('Adres',      bool((supplier_in.get('address') or '').strip())),
+            ('Telefon',    bool((supplier_in.get('phone') or '').strip())),
+        ) if not val]
+        if _id_missing:
+            raise HTTPException(status_code=422, detail={
+                'error': 'missing_identity',
+                'message': 'GBF üretilemiyor — zorunlu alanlar eksik (KKDİK Ek-2 Bölüm 1): ' + ', '.join(_id_missing),
+                'missing': _id_missing,
+            })
+
         def _num(v):
             try:
                 return float(v) if v not in (None, '') else None

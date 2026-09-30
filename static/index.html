@@ -4414,7 +4414,7 @@ window.addEventListener('DOMContentLoaded', () => {
     <div class="pdf-block-body">
       <p class="pdf-block-desc">
         Aşağıdaki alanlar <b>zorunlu</b> olup boş bırakılamaz.<br>
-        <span style="font-size:10px;color:var(--text3)">KKDİK Ek-2 Bölüm 9 — bu veriler "bilgi yok" olarak yazılamaz.</span>
+        <span style="font-size:10px;color:var(--text3)">KKDİK Ek-2 — ürün/tedarikçi kimliği (Bölüm 1) ve temel fiziksel veriler (Bölüm 9) boş bırakılamaz.</span>
       </p>
       <div id="pdfBlockItems"></div>
     </div>
@@ -4670,6 +4670,21 @@ function _checkPDFMandatory() {
   const isLiquid = ['liquid','paste','aerosol'].includes(form);
 
   const missing = [];
+
+  // 0. Ürün ve tedarikçi kimliği — KKDİK Ek-2 1.1 ve 1.3 (atlanamaz: hard)
+  const _v = id => document.getElementById(id)?.value?.trim() || '';
+  if (!_v('productName')) {
+    missing.push({ hard: true, label: 'Ürün Adı', reason: 'Bölüm 1.1 — ürün tanımlayıcısı zorunludur (KKDİK Ek-2 1.1)' });
+  }
+  if (!_v('suppName')) {
+    missing.push({ hard: true, label: 'Firma Adı', reason: 'Bölüm 1.3 — GBF tedarikçisinin adı zorunludur (KKDİK Ek-2 1.3)' });
+  }
+  if (!_v('suppAddress')) {
+    missing.push({ hard: true, label: 'Adres', reason: 'Bölüm 1.3 — tedarikçinin tam adresi zorunludur (KKDİK Ek-2 1.3)' });
+  }
+  if (!_v('suppPhone')) {
+    missing.push({ hard: true, label: 'Telefon', reason: 'Bölüm 1.3 — tedarikçinin telefon numarası zorunludur (KKDİK Ek-2 1.3)' });
+  }
 
   // 1. Fiziksel hal — her formda zorunlu (SDS'de mutlaka yazılmalı)
   if (!document.getElementById('tf_appearance')?.value?.trim()) {
@@ -5334,9 +5349,10 @@ async function _afterPhysSrc() {
         </div>
       </div>`).join('');
 
+    // Ürün/tedarikçi kimliği eksikse (hard) "Yine de oluştur" gösterilmez
     const skipBtn = document.getElementById('pdfBlockSkipBtn');
-    if (skipBtn) skipBtn.style.display = '';
-    _pdfBlockCallback = _doPdfGenerate;
+    if (skipBtn) skipBtn.style.display = missing.some(m => m.hard) ? 'none' : '';
+    _pdfBlockCallback = missing.some(m => m.hard) ? null : _doPdfGenerate;
     document.getElementById('pdfBlockOverlay').classList.add('open');
     return;
   }

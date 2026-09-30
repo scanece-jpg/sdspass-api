@@ -144,7 +144,11 @@ from app.services.transport_adr_service import get_adr_details
 from app.services.tr_oel_service import get_oel_table, format_oel_row
 from app.services.tr_mevzuat_service import get_section15_text, get_disposal_regulation, get_disposal_content
 from app.services.gbf_author_service import format_author_block, validate_certificate
+from app.services.sds_reg_sections import (
+    first_aid as reg_first_aid, accidental_release as reg_accidental_release, hygiene as reg_hygiene,
+)
 from app.services.sds_sentence_service import (
+    adapt_for_form, adapt_list_for_form,
     generate_section3, generate_section, get_echa_range, generate_section_42
 )
 
@@ -1458,12 +1462,21 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     story += section_block(section_title(lang, 4), styles)
     story += sub_block(f"4.1 {sub_title(lang,'4.1')}", styles)
 
-    sec4 = generate_section(4, h_codes)
-    story += bullet_list(sec4['bullets'], styles) or [na_text(lang, styles)]
+    # Ürünün fiziksel hali — 4/6/7/8 metinleri buna göre uyarlanır
+    _sec_form = product.get('form', '') or 'liquid'
+    # Sınıflandırmadaki tüm H kodları (etikette baskın olmayanlar dahil) — yol bazlı ilk yardım için
+    _h_all_first_aid = list(dict.fromkeys(list(all_h_codes) + list(h_codes)))
+    if lang in ('TR', 'EN'):
+        # KKDİK Ek-2 4.1.1: maruz kalma yoluna göre; SEA Ek-4 resmî önlem ifadeleri
+        for _fa in reg_first_aid(_h_all_first_aid, _sec_form, lang):
+            story.append(Paragraph(f"• <b>{_fa['route']}:</b> {_fa['text']}", styles['bullet']))
+    else:
+        sec4 = generate_section(4, h_codes)
+        story += bullet_list(adapt_list_for_form(sec4['bullets'], _sec_form), styles) or [na_text(lang, styles)]
     story.append(Spacer(1, 3))
 
     story += sub_block(f"4.2 {sub_title(lang,'4.2')}", styles)
-    _sym_bullets = generate_section_42(h_codes)
+    _sym_bullets = adapt_list_for_form(generate_section_42(h_codes), _sec_form)
     if _sym_bullets:
         story += bullet_list(_sym_bullets, styles)
     else:
@@ -1499,21 +1512,23 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     # BÖLÜM 6 — Kaza
     # ─────────────────────────────────────────────────────────────────────────
     story += section_block(section_title(lang, 6), styles)
-    story += sub_block(f"6.1 {sub_title(lang,'6.1')}", styles)
-    story.append(Paragraph(
-        S(lang,'personal_precautions'),
-        styles['body']
-    ))
-
-    story += sub_block(f"6.2 {sub_title(lang,'6.2')}", styles)
     sec6 = generate_section(6, h_codes)
-    story += bullet_list(sec6['bullets'], styles) or [na_text(lang, styles)]
-
-    story += sub_block(f"6.3 {sub_title(lang,'6.3')}", styles)
-    story.append(Paragraph(
-        S(lang,'spill_instructions'),
-        styles['body']
-    ))
+    if lang in ('TR', 'EN'):
+        # KKDİK Ek-2 6.1 kişisel önlemler / 6.2 çevresel / 6.3 kontrol altına alma ve temizleme
+        _s6 = reg_accidental_release(_h_all_first_aid, _sec_form, sec6['bullets'], lang)
+        story += sub_block(f"6.1 {sub_title(lang,'6.1')}", styles)
+        story += bullet_list(_s6['6.1'], styles)
+        story += sub_block(f"6.2 {sub_title(lang,'6.2')}", styles)
+        story += bullet_list(_s6['6.2'], styles)
+        story += sub_block(f"6.3 {sub_title(lang,'6.3')}", styles)
+        story += bullet_list(_s6['6.3'], styles)
+    else:
+        story += sub_block(f"6.1 {sub_title(lang,'6.1')}", styles)
+        story.append(Paragraph(S(lang,'personal_precautions'), styles['body']))
+        story += sub_block(f"6.2 {sub_title(lang,'6.2')}", styles)
+        story += bullet_list(adapt_list_for_form(sec6['bullets'], _sec_form), styles) or [na_text(lang, styles)]
+        story += sub_block(f"6.3 {sub_title(lang,'6.3')}", styles)
+        story.append(Paragraph(adapt_for_form(S(lang,'spill_instructions'), _sec_form), styles['body']))
 
     story += sub_block(f"6.4 {sub_title(lang,'6.4')}", styles)
     story.append(Paragraph(
@@ -1533,18 +1548,21 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _b7_is_solid = _b7_form in ('solid', 'powder')
 
     sec7 = generate_section(7, h_codes)
-    _sec7_bullets = list(sec7['bullets'])
+    _sec7_bullets = adapt_list_for_form(sec7['bullets'], _sec_form)
     # Katı/toz forma özgü elleçleme notları
     if _b7_is_solid:
         _solid_handling_TR = ['Toz oluşumunu önlemek için uygun ekipman kullanın; kapalı sistemlerde çalışın.']
         _solid_handling_EN = ['Use appropriate equipment to prevent dust generation; work in closed systems.']
         _sec7_bullets = (_solid_handling_TR if lang == 'TR' else _solid_handling_EN) + _sec7_bullets
-    story += bullet_list(_sec7_bullets, styles) or [na_text(lang, styles)]
+    # KKDİK Ek-2 7.1.2 — genel mesleki hijyen (yeme/içme/sigara, el yıkama, kirli giysi)
+    if lang in ('TR', 'EN'):
+        _sec7_bullets += [x for x in reg_hygiene(lang) if x not in _sec7_bullets]
+    story += bullet_list(list(dict.fromkeys(_sec7_bullets)), styles) or [na_text(lang, styles)]
 
     story += sub_block(f"7.2 {sub_title(lang,'7.2')}", styles)
     # H kodu bazlı depolama metinleri (slot 72) — H224/H225/H226/H314 için özel
     sec72 = generate_section(72, h_codes)
-    _sec72_bullets = list(sec72['bullets'])
+    _sec72_bullets = adapt_list_for_form(sec72['bullets'], _sec_form)
 
     # Katı/toz forma özgü depolama notları — H228 olmasa bile gerekli
     if _b7_is_solid:
@@ -2974,7 +2992,23 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         story.append(Spacer(1,4))
 
     # H kodu tam metin listesi — EUH kodları da dahil (KKDİK Ek-2 §16(d))
-    all_h_b16 = list(dict.fromkeys(h_codes))
+    # KKDİK Ek-2 Bölüm 16: 2–15. bölümlerde geçen TÜM H/EUH ifadelerinin tam metni —
+    # yalnızca etiket kodları değil, Bölüm 2.1 sınıflandırması ve Bölüm 3 bileşen kodları da.
+    def _code_of(h) -> str:
+        s = str(h.get('h_code', '') if isinstance(h, dict) else h).replace('*', '').strip()
+        m = _re.match(r'(EUH\d{3}A?|H\d{3})([A-Za-z]{0,2})', s)
+        if not m:
+            return ''
+        base, sfx = m.group(1), m.group(2).upper()
+        if base in ('H360', 'H361') and sfx:
+            sfx = 'FD' if ('F' in sfx and 'D' in sfx) else sfx
+            return base + sfx
+        return base
+    _b16_codes = [_code_of(h) for h in list(all_h_codes) + list(h_codes)]
+    for _c3 in components:
+        _b16_codes += [_code_of(h) for h in (_c3.get('hazards') or [])]
+    _b16_codes = [c for c in dict.fromkeys(_b16_codes) if c and c.startswith('H')]
+    all_h_b16 = sorted(_b16_codes, key=lambda c: (int(c[1:4]), c))
     _euh_b16 = [c for c in (euh.get('euh_codes') or []) if c not in all_h_b16]
     all_h = all_h_b16 + _euh_b16
     if all_h:

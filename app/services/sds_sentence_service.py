@@ -788,6 +788,94 @@ def generate_section3(
     return rows
 
 
+# ─── Fiziksel hale göre metin uyarlama ─────────────────────────────────────────
+# H kodu cümleleri sıvı ürünlere göre yazılmış ("buhar/sis", "emici malzemeyle toplayın",
+# "A1 organik buhar filtresi"). Katı/toz ve gaz ürünlerde bu ifadeler yanlış olur
+# (örn. tablet ürüne "buhar birikimini önleyin"). Kurallar sırayla uygulanır.
+import re as _re_form
+
+_SWEEP_TR = 'Dökülen ürünü toz kaldırmadan süpürerek veya vakumla toplayın'
+_SWEEP_EN = 'Sweep or vacuum up spilled product without generating dust'
+_GAS_LEAK_TR = 'Güvenli ise sızıntıyı durdurun; alanı havalandırın ve gaz dağılana kadar girmeyin'
+
+_FORM_RULES = {
+    'solid': [
+        # İlk yardım / belirtiler
+        (r'Buhar/sis solunmasında', 'Toz solunmasında'),
+        (r'Buhar/gaz solunması halinde', 'Toz solunması halinde'),
+        (r'[Yy]üksek konsantrasyonda buhar solunması', 'Yüksek konsantrasyonda toz solunması'),
+        (r'Yoğun buhar solunması', 'Yoğun toz solunması'),
+        (r'Buhar solunması halinde', 'Toz solunması halinde'),
+        (r'Buhar solunmasında', 'Toz solunmasında'),
+        (r'Buhar solunursa', 'Toz solunursa'),
+        (r'Buhar solunması;', 'Toz solunması;'),
+        # Elleçleme / kaza
+        (r'Buhar ve sis solumaktan kaçının; sprey oluşturmayın\.', 'Tozunu solumaktan kaçının.'),
+        (r'Buhar solunmasından kaçının\.', 'Tozunu solumaktan kaçının.'),
+        (r'[Bb]uhar/(?:sis|aerosol) oluşumundan kaçının', 'Toz oluşumundan kaçının'),
+        (r'Buhar/sis oluşmasını önleyin', 'Toz oluşmasını önleyin'),
+        (r'Buhar birikimini önlemek için havalandırın\.', 'Toz oluşumunu önleyin.'),
+        (r'Buhar birikimini önleyin\.', 'Toz oluşumunu önleyin.'),
+        (r'Buharlanmayı önleyin\.', 'Toz oluşumunu önleyin.'),
+        (r'Kuru absorban malzeme \((?:kum, vermikülit|vermikülit, kum)(?: veya tahta talaşı)?\) ile toplayın\.?',
+         _SWEEP_TR + '.'),
+        (r'Kuru kum veya inert absorban malzemeyle toplayın', _SWEEP_TR),
+        (r'Döküntüyü (?:hemen )?(?:kuru )?absorban malzeme ile toplayın', _SWEEP_TR),
+        (r'(?:Kuru )?[Aa]bsorban (?:malzeme )?ile toplayın', _SWEEP_TR),
+        (r'Kuru absorban kullanın', _SWEEP_TR),
+        # KKD — organik buhar (A) filtresi toz için koruma sağlamaz → partikül filtresi
+        (r'Yarım yüz maskesi — A1 filtreli veya FFP2 toz maskesi \(EN 14387 / EN 149\)',
+         'Toz maskesi — FFP2 (EN 149) veya P2 partikül filtreli yarım yüz maskesi (EN 143)'),
+        (r'Yarım yüz maskesi — A1 organik buhar filtreli \(EN 14387\)',
+         'Yarım yüz maskesi — P2 partikül filtreli (EN 143)'),
+        (r'aerosol/buhar oluşursa yarım yüz maskesi — A1B1E1P2 filtreli \(EN 14387\)',
+         'toz oluşursa yarım yüz maskesi — P2 partikül filtreli (EN 143)'),
+        (r'buhar/toz varsa', 'toz varsa'),
+        (r'Organik buhar filtreli \(A tipi\) yarım yüz maskesi\.', 'P2 partikül filtreli yarım yüz maskesi (EN 143).'),
+        # EN
+        (r'Collect with dry absorbent material \(vermiculite,(?: dry)? sand\)\.', _SWEEP_EN + '.'),
+        (r'Half-face mask with A1 filter or FFP2 dust mask \(EN 14387 / EN 149\)',
+         'FFP2 dust mask (EN 149) or half-face mask with P2 particle filter (EN 143)'),
+    ],
+    'gas': [
+        (r'Buhar/sis solunmasında', 'Gaz solunmasında'),
+        (r'Buhar solunması halinde', 'Gaz solunması halinde'),
+        (r'Buhar solunmasında', 'Gaz solunmasında'),
+        (r'Buhar solunursa', 'Gaz solunursa'),
+        (r'Kuru absorban malzeme \((?:kum, vermikülit|vermikülit, kum)(?: veya tahta talaşı)?\) ile toplayın\.?(?: Uygun(?: etiketli)? atık kabına koyun\.)?',
+         _GAS_LEAK_TR + '.'),
+        (r'Döküntüyü (?:hemen )?(?:kuru )?absorban malzeme ile toplayın', _GAS_LEAK_TR),
+        (r'(?:Kuru )?[Aa]bsorban (?:malzeme )?ile toplayın', _GAS_LEAK_TR),
+        (r'Buhar birikimini önlemek için havalandırın\.', 'Gaz birikimini önlemek için havalandırın.'),
+        (r'Buhar birikimini önleyin\.', 'Gaz birikimini önleyin.'),
+    ],
+}
+
+
+def adapt_for_form(text: str, form: str) -> str:
+    """Sıvıya göre yazılmış bir cümleyi ürünün fiziksel haline uyarla (katı/toz, gaz).
+    Sıvı, pasta ve aerosolde metin değişmez."""
+    if not text or not isinstance(text, str):
+        return text
+    f = (form or '').lower()
+    key = 'solid' if f in ('solid', 'powder') else ('gas' if f == 'gas' else None)
+    if not key:
+        return text
+    for pat, rep in _FORM_RULES[key]:
+        text = _re_form.sub(pat, rep, text)
+    return text
+
+
+def adapt_list_for_form(items, form: str) -> list:
+    """Madde listesi için adapt_for_form; uyarlama sonrası aynılaşan maddeler tekrarlanmaz."""
+    out = []
+    for it in items or []:
+        t = adapt_for_form(it, form)
+        if t and t not in out:
+            out.append(t)
+    return out
+
+
 def generate_section(
     section_num: int,
     h_codes: List[str],

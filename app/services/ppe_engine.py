@@ -398,6 +398,21 @@ def select(h_codes: List[str], lang: str = 'TR', form: str = '') -> Dict[str, An
 
     result['general'] = general
 
+    # Fiziksel hale göre uyarla (KKDİK Ek-2 8.2.2.2 c: gaz/buhar/sis/toz için uygun
+    # arındırıcı element) — katı/tozda organik buhar (A) filtresi yerine partikül filtresi
+    from app.services.sds_sentence_service import adapt_for_form
+    for _k, _items in result.items():
+        if isinstance(_items, list):
+            _seen, _new = set(), []
+            for _it in _items:
+                if isinstance(_it, dict) and isinstance(_it.get('ppe'), str):
+                    _it = dict(_it, ppe=adapt_for_form(_it['ppe'], form))
+                    if _it['ppe'] in _seen:
+                        continue
+                    _seen.add(_it['ppe'])
+                _new.append(_it)
+            result[_k] = _new
+
     return result
 
 

@@ -3101,6 +3101,19 @@ function saveConc(id, lo, hi) {
 }
 
 // ── Bileşen okuyucu ───────────────────────────────────────────────────────────
+// Türkiye numarası → "(+90) 212 555 00 00"; +90 dışındaki uluslararası numara girildiği gibi kalır
+function formatEmergencyTel(input) {
+  const s = (input || '').trim();
+  if (!s) return '';
+  const compact = s.replace(/[\s\-().]/g, '');
+  if (/^(\+|00)/.test(compact) && !/^(\+|00)90/.test(compact)) return s;
+  const d = s.replace(/\D/g, '').replace(/^0*90/, '').replace(/^0/, '');
+  if (!d) return '';
+  return d.length >= 10
+    ? `(+90) ${d.slice(0,3)} ${d.slice(3,6)} ${d.slice(6,8)} ${d.slice(8,10)}`
+    : `(+90) ${d}`;
+}
+
 function getComps() {
   return [...document.querySelectorAll('.cw')].map(w => {
     const cas     = w.querySelector('.ci')?.value?.trim() || '';
@@ -5258,12 +5271,15 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
       if (!tprop || typeof tprop !== 'object') return;
       const formEl   = _formSrcMap[k] ? document.getElementById(_formSrcMap[k]) : null;
       const userEntered = formEl?.dataset?.source === 'user'; // kullanıcı bizzat girdiyse true
-      physMethods[k] = {
-        measured:  userEntered || (tprop.measured || false),
-        method:    tprop.method    || '',
-        standard:  tprop.standard  || '',
-        error_pct: tprop.error?.pct ?? null,
-      };
+      // Kullanıcının girdiği değer için motorun varsayılan standardı yazılmaz (ölçüm yöntemi bilinmiyor)
+      physMethods[k] = userEntered
+        ? { measured: true, method: 'Kullanıcı beyanı', standard: '', error_pct: null }
+        : {
+            measured:  tprop.measured || false,
+            method:    tprop.method    || '',
+            standard:  tprop.standard  || '',
+            error_pct: tprop.error?.pct ?? null,
+          };
     });
 
     // clp_passed — her H kodu için h_class + kesme değeri bilgisi
@@ -5426,12 +5442,8 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
       product: { name: productName, form, usage },
       supplier: (() => {
         const g = id => document.getElementById(id)?.value?.trim() || '';
-        const raw = g('supplierEmergencyTel').replace(/\D/g,'');
         const hours = document.querySelector('input[name="telHours"]:checked')?.value || '24_7';
-        const d = raw.replace(/^90/,'').replace(/^0/,'');
-        const fmt = d.length >= 10
-          ? `(+90) ${d.slice(0,3)} ${d.slice(3,6)} ${d.slice(6,8)} ${d.slice(8,10)}`
-          : d ? `(+90) ${d}` : '';
+        const fmt = formatEmergencyTel(g('supplierEmergencyTel'));
         const hoursLabel = hours === '24_7' ? '7 gün / 24 saat' : 'Hafta içi 09:00–18:00';
         return {
           name:          g('suppName'),

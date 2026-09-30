@@ -855,7 +855,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     # Tedarikçi acil hattı — varsa ayrı satırda
     supplier_tel = supplier.get('emergency_tel', '').strip()
     if supplier_tel:
-        story.append(Paragraph(f"Tel: {supplier_tel}", styles['body']))
+        _tel_lbl = 'Firma acil telefonu' if lang == 'TR' else 'Company emergency telephone'
+        story.append(Paragraph(f"{_tel_lbl}: {supplier_tel}", styles['body']))
 
     # ─────────────────────────────────────────────────────────────────────────
     # BÖLÜM 2 — Zararlılık
@@ -1698,7 +1699,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         if std and ' / ' in std:
             std = std.split(' / ')[0].strip()
         err = pm.get('error_pct')
-        if pm.get('measured'):
+        if pm.get('method') == 'Kullanıcı beyanı':
+            parts = ['kullanıcı beyanı' if lang == 'TR' else 'user-declared']
+        elif pm.get('measured'):
             parts = ['ölçülen']
             if std and std not in ('', '—'):
                 parts.append(std)

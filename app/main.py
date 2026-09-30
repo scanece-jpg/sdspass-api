@@ -394,6 +394,7 @@ async def generate_pdf(data: dict = Body(...)):
                     _user_std = (_req_m.get('standard', '') or '') if isinstance(_req_m, dict) else ''
                     _phys_methods[_bk] = {
                         'measured': _is_measured, 'standard': _user_std,
+                        'method': (_req_m.get('method', '') or '') if isinstance(_req_m, dict) else '',
                         'error_pct': None if _is_measured else _tp_err,
                     }
                 elif _tp_val is not None:
@@ -1624,6 +1625,19 @@ async def sds_calculate(body: dict = Body(...)):
         except Exception:
             _ate_h_list, _ate_b11 = [], {}
 
+        # ── Flam.Liq. — tek karar verici physical_engine (parlama noktası) ─────
+        # CLP §2.6: alevlenir sıvı sınıfı parlama/kaynama noktasıyla belirlenir, bileşen
+        # konsantrasyon kesimiyle değil. clp_service'in kesim tahmini her zaman silinir;
+        # physical_engine "alevlenir değil" dediğinde de (örn. kullanıcı FP=70°C) geri gelmemeli.
+        clp_result['passed'] = [
+            p for p in clp_result.get('passed', [])
+            if p.get('h_code') not in ('H224', 'H225', 'H226')
+        ]
+        clp_result['h_codes'] = [
+            h for h in clp_result.get('h_codes', [])
+            if h not in ('H224', 'H225', 'H226')
+        ]
+
         # ── 6. Taşımacılık — ADR 2023 / IMDG / IATA ──────────────────────────
         # Fiziksel motordaki H22x/H228 kodlarını CLP'ye ilave et
         _phys_h_transport = [
@@ -1672,25 +1686,6 @@ async def sds_calculate(body: dict = Body(...)):
             + eco_result.get('h_codes', [])
         )
         ppe_result = ppe_select([h for h in _ppe_h_now if h], lang=lang, form=form)
-
-        # ── Flam.Liq. öncelik — physical_engine varsa clp_service tahminini temizle ─
-        # CLP §2.6.4: ölçülmüş/hesaplanmış parlama noktası konvansiyonel kesim değerinin
-        # önüne geçer. physical_engine sonuç ürettiyse clp_service'in tahmini kaydını
-        # hem passed'tan hem all_h'tan sil; physical_engine'in doğru kaydı aşağıdaki
-        # merge döngüsünde (phys_result['results']) zaten ekleniyor.
-        _phys_flam_h = {
-            r['h'] for r in phys_result.get('primary', [])
-            if r.get('type') == 'flam_liq' and r.get('h')
-        }
-        if _phys_flam_h:
-            clp_result['passed'] = [
-                p for p in clp_result.get('passed', [])
-                if p.get('h_code') not in ('H224', 'H225', 'H226')
-            ]
-            clp_result['h_codes'] = [
-                h for h in clp_result.get('h_codes', [])
-                if h not in ('H224', 'H225', 'H226')
-            ]
 
         # ── H kodlarını birleştir ─────────────────────────────────────────────
         all_h = set(clp_result.get('h_codes', []))
@@ -1818,6 +1813,11 @@ async def sds_calculate(body: dict = Body(...)):
         else:
             all_h_list = sorted(all_h)
         label_h_list = sorted(label_h)
+
+        # CLP Ek-II 1.2.4: EUH066 yalnızca cilt tahriş kriterini karşılamayan ürünler içindir
+        if isinstance(euh_result, dict) and set(all_h_list) & {'H314', 'H315'}:
+            euh_result['euh_codes']   = [c for c in euh_result.get('euh_codes', []) if c != 'EUH066']
+            euh_result['euh_details'] = [d for d in euh_result.get('euh_details', []) if d.get('code') != 'EUH066']
 
         # ── P kodları ─────────────────────────────────────────────────────────
         _euh_list = euh_result.get('euh_codes', []) if isinstance(euh_result, dict) else []

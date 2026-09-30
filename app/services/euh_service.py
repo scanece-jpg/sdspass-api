@@ -9,7 +9,7 @@ Otomatik Tespit Edilen EUH Kodları (16 kural):
   EUH029  → Karbür/fosfür (asitle gaz)
   EUH031  → Sülfit/hipoklorit/izosiyanuratlar/klorat (asitle Cl2/SO2/NOx — toksik)
   EUH032  → Siyanür/florür/fosfür/sülfür (asitle HCN/HF/PH3/H2S — çok toksik)
-  EUH066  → Kural 1: Solvent CAS listesi | Kural 2: Skin Irrit.2 < cut-off
+  EUH066  → yalnızca SEA Ek-6/Annex VI harmonize kaydından (suppl_hazards); H314/H315'li karışımda main.py düşürür
   EUH201  → Kurşun bileşikleri
   EUH202  → Siyanoakrilat
   EUH203  → Cr(VI) bileşikleri
@@ -112,30 +112,6 @@ EUH032_CAS = {
     '16721-80-5',  # sodium hydrosulphide
     '20667-12-3',  # silver sulphide
     '20548-54-3',  # calcium sulphide
-}
-
-# ─── EUH066 — Cilt kuruluğu yapan çözücüler ─────────────────────────────────
-
-EUH066_CAS = {
-    '64-17-5',     # ethanol
-    '67-63-0',     # isopropanol (IPA)
-    '67-56-1',     # methanol
-    '71-36-3',     # n-butanol
-    '78-92-2',     # sec-butanol
-    '75-65-0',     # tert-butanol
-    '111-76-2',    # 2-butoxyethanol
-    '110-43-0',    # methyl amyl ketone
-    '108-94-1',    # cyclohexanone
-    '110-82-7',    # cyclohexane
-    '142-82-5',    # heptane
-    '110-54-3',    # hexane
-    '64-18-6',     # formic acid (dilute)
-    '107-98-2',    # PGME (1-methoxy-2-propanol)
-    '34590-94-8',  # DPGME
-    '108-87-2',    # methylcyclohexane
-    '8052-41-3',   # stoddard solvent
-    '64742-82-1',  # naphtha, light aromatic
-    '64742-89-8',  # naphtha, light aliphatic
 }
 
 # ─── EUH201 — Kurşun ─────────────────────────────────────────────────────────
@@ -331,37 +307,6 @@ def check_euh(components: List[Dict],
                 'source_name': name,
             })
             detected_codes.add('EUH029')
-
-        # ── EUH066 ──────────────────────────────────────────────────────────
-        # Kural 1: Bilinen çözücü CAS listesinde
-        skin_irrit_classes = {'Skin Irrit. 2'}
-        euh066_cutoff = 10.0
-        
-        if cas in EUH066_CAS and 'EUH066' not in detected_codes:
-            detected.append({
-                'code': 'EUH066',
-                'text': 'Tekrarlı maruz kalma cildin kurumasına veya çatlamasına yol açabilir.',
-                'source_cas': cas,
-                'source_name': name,
-            })
-            detected_codes.add('EUH066')
-
-        # Kural 2: Bileşen Skin Irrit. 2 taşıyor AMA karışım H315 almıyor
-        # (konsantrasyon cut-off altında — karışım sınıflandırması dışında kaldı)
-        # CLP Rehber Dokümanı: Bu durumda EUH066 tavsiye edilir
-        elif (hazard_classes & skin_irrit_classes
-              and 0 < comp_conc < euh066_cutoff
-              and 'EUH066' not in detected_codes):
-            detected.append({
-                'code': 'EUH066',
-                'text': 'Tekrarlı maruz kalma cildin kurumasına veya çatlamasına yol açabilir.',
-                'source_cas': cas,
-                'source_name': name,
-                'note': (f'Tavsiye: {name or cas} Skin Irrit. 2 taşıyor '
-                         f'(%{comp_conc} < %{euh066_cutoff} cut-off — '
-                         f'karışım H315 almadı, EUH066 tavsiye edilir)')
-            })
-            detected_codes.add('EUH066')
 
         # ── EUH201 — Kurşun ─────────────────────────────────────────────────
         if cas in EUH201_CAS and 'EUH201' not in detected_codes:
@@ -560,7 +505,7 @@ def check_euh(components: List[Dict],
         'EUH032': 'Asitlerle temasında çok toksik gaz çıkarır.',
         'EUH044': 'Kapalı alanda ısıtıldığında patlama riski taşır.',
         'EUH059': 'Ozon tabakasına zararlıdır.',
-        'EUH066': 'Tekrarlı maruz kalma cildin kurumasına veya çatlamasına yol açabilir.',
+        'EUH066': 'Tekrarlı maruz kalmalarda ciltte kuruluğa veya çatlaklara neden olabilir.',
         'EUH070': 'Gözle temas halinde toksiktir.',
         'EUH071': 'Solunum yoluna aşındırıcıdır.',
     }
@@ -610,7 +555,7 @@ def get_euh_text(code: str) -> str:
         'EUH032': 'Asitlerle temasında çok toksik gaz çıkarır.',
         'EUH044': 'Kapalı ortamda ısıtıldığında patlama riski.',
         'EUH059': 'Ozon tabakasına zararlı.',
-        'EUH066': 'Tekrarlı maruz kalma cildin kurumasına veya çatlamasına yol açabilir.',
+        'EUH066': 'Tekrarlı maruz kalmalarda ciltte kuruluğa veya çatlaklara neden olabilir.',
         'EUH070': 'Göze toksik.',
         'EUH071': 'Solunum yollarına aşındırıcı.',
         'EUH201': 'Kurşun içerir. Çocukların çiğneyebileceği yüzeylerde kullanılmamalıdır.',

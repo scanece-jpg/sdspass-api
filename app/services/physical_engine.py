@@ -1926,7 +1926,7 @@ def _cls_flam_liq(fp: float, bp: Optional[float]) -> Optional[Dict]:
     return None
 
 
-def _calc_flam_liq(comps: List[Dict], user_fp=None, user_bp=None) -> Dict:
+def _calc_flam_liq(comps: List[Dict], user_fp=None, user_bp=None, form_sub: str = '') -> Dict:
     DECLARED_FALLBACK = {
         'H224': {'fp': -20, 'bp': 25},
         'H225': {'fp':  15, 'bp': 80},
@@ -1957,6 +1957,7 @@ def _calc_flam_liq(comps: List[Dict], user_fp=None, user_bp=None) -> Dict:
         if (c.get('cas') or c.get('cas_no') or '').strip() == '7732-18-5'
     )
     _high_water = _water_conc >= 50.0
+    _aqueous    = _high_water or form_sub == 'waterbased'
 
     cat_sum = {1: 0.0, 2: 0.0, 3: 0.0}
     cat_triggers = {1: [], 2: [], 3: []}
@@ -2010,6 +2011,18 @@ def _calc_flam_liq(comps: List[Dict], user_fp=None, user_bp=None) -> Dict:
         'doğru yansıtmaz (su seyreltme etkisi). Ölçülmüş karışım FP\'si girilmesi önerilir (CLP §2.6.4.2).'
         if _high_water else None
     )
+    # Su bazlı karışımda saf bileşen FP'si karışım FP'sini temsil etmez (örn. etanol 13 °C,
+    # %10 sulu etanol ≈ 50 °C). Tahmini sınıf vermek yerine ölçüm istenir.
+    if _aqueous and (sum12 >= 1 or sum123 >= 10):
+        _trigs = cat_triggers[1] + cat_triggers[2] + cat_triggers[3]
+        return {'result': None, 'source': None, 'fp': None, 'screening': _screening,
+                'measurement_required': True,
+                'water_dilution_warning': (
+                    '⚠ Su bazlı karışım — alevlenir sıvı bileşen(ler): '
+                    + ' + '.join(trig_src(t) for t in _trigs)
+                    + '. Saf bileşen parlama noktası karışımınkini yansıtmadığından yanıcılık '
+                      'sınıflandırması yapılmadı. Karışımın parlama noktasını ölçüp girin '
+                      '(ISO 2719 / ISO 3679); 60 °C ve altındaysa H224/H225/H226 uygulanır (CLP Ek-I §2.6).')}
     if sum1 >= 1:
         src = ' + '.join(trig_src(t) for t in cat_triggers[1])
         return {'result': {'h':'H224','cat':1,'h_class':'Flam. Liq. 1','signal':'Danger'},
@@ -2199,7 +2212,7 @@ def calculate(comps: List[Dict], form: str = 'liquid',
 
     fl = {'result': None, 'source': None, 'fp': None}
     if form in ('liquid', 'paste'):
-        fl = _calc_flam_liq(comps, user_fp, user_bp=user_bp)
+        fl = _calc_flam_liq(comps, user_fp, user_bp=user_bp, form_sub=form_sub)
         if fl.get('water_dilution_warning'):
             warnings.append(fl['water_dilution_warning'])
         if fl['result']:
@@ -2633,6 +2646,11 @@ def calculate(comps: List[Dict], form: str = 'liquid',
         theo_props['flash_point'] = {
             'value': test_data['flash_point'], 'measured': True,
             'method': 'Kullanıcı girişi', 'standard': 'ISO 2719 / ASTM D93',
+        }
+    elif user_fp is not None:
+        theo_props['flash_point'] = {
+            'value': user_fp, 'measured': True, 'method': 'Kullanıcı beyanı', 'standard': '',
+            'note': f"Sınıflandırma: {fl['result']['h_class']} ({fl['result']['h']})" if fl.get('result') else '',
         }
     elif fl['fp'] is not None:
         theo_props['flash_point'] = {

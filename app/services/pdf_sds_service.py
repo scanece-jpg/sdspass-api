@@ -1349,7 +1349,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         # CAS No | Madde Adı | Konst. | Sınıflandırma
         # EC No / REACH Kayıt No — CAS hücresinin altına küçük font
 
-        cas_hdr  = ('CAS No\nEC / KKDİK No' if lang=='TR' else 'CAS No\nEC / REACH')
+        cas_hdr  = ('CAS No\nEC / Kayıt No' if lang=='TR' else 'CAS No\nEC / Registration No')
         name_hdr = S(lang,'ingredient_label')
         conc_hdr = term(lang,'concentration')
         clf_hdr  = term(lang,'classification')
@@ -1370,24 +1370,45 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                         'h_class': d.get('h_class', ''),
                     }
 
-        missing_reach = []
+        # Kayıt numaraları: TR (KKDİK) ve AB (REACH) ayrı satır.
+        # Kayıt numarası maddeye değil kaydettiren firmaya aittir → KKDİK numarası hammadde
+        # tedarikçisinin GBF'sinden gelir (kullanıcı girer). AB numarasında kayıt sahibine özgü
+        # son bölüm gösterilmez (REACH Ek-II 3.1 izni) → "XXXX".
+        _supplier_txt = 'tedarikçiden temin edilir' if lang == 'TR' else 'obtain from supplier'
+        _any_eu = False
+        _any_tr_missing = False
+
+        def _eu_no(v: str) -> str:
+            v = (v or '').strip()
+            if v == 'exempt':
+                return 'Muaf' if lang == 'TR' else 'Exempt'
+            if v == 'polymer':
+                return 'Polimer/muaf' if lang == 'TR' else 'Polymer/exempt'
+            return _re.sub(r'^(01-\d{10}-\d{2})-\d{4}$', r'\1-XXXX', v)
+
         for r in sec3_rows:
             cas = r['cas']
             comp_obj = next((comp for comp in components if comp.get('cas_no','')==cas), {})
             ec  = comp_obj.get('ec_no','') or get_ec_no(cas)
-            reg = comp_obj.get('reach_no','') or get_reg_no(cas)
-            if not reg:
-                missing_reach.append(cas)
-                reg = '—'
-            elif reg == 'exempt':
-                reg = 'Muaf' if lang=='TR' else 'Exempt'
-            elif reg == 'polymer':
-                reg = 'Polimer/muaf' if lang=='TR' else 'Polymer/exempt'
+            _eu_raw = (comp_obj.get('reach_no','') or get_reg_no(cas) or '').strip()
+            if get_reg_no(cas) == 'exempt':   # veritabanında muaf (örn. su) — ön yüzdeki eski değeri ezer
+                _eu_raw = 'exempt'
+            eu  = _eu_no(_eu_raw)
+            tr  = (comp_obj.get('kkdik_no') or '').strip()
+            if not tr and _eu_raw == 'exempt':   # AB'de muaf (Ek-IV/V) → KKDİK'te de muaf (Ek-4/5)
+                tr = 'Muaf' if lang == 'TR' else 'Exempt'
+            if eu and eu.startswith('01-'):
+                _any_eu = True
+            if not tr:
+                _any_tr_missing = True
 
-            # CAS + EC + REACH tek hücrede, küçük fontla
+            _lbl_tr = 'KKDİK (TR)' if lang == 'TR' else 'KKDİK (TR)'
+            _lbl_eu = 'REACH (AB)' if lang == 'TR' else 'REACH (EU)'
             cas_cell = Paragraph(
                 f"<b>{cas}</b><br/>"
-                f"<font size='6'>{ec or '—'}<br/>{reg or '—'}</font>",
+                f"<font size='6'>EC: {ec or '—'}<br/>"
+                f"{_lbl_tr}: {tr or _supplier_txt}<br/>"
+                f"{_lbl_eu}: {eu or _supplier_txt}</font>",
                 styles['small']
             )
             # Her sınıflandırma kendi satırında — uzun metinde kelime kırılmasını önle
@@ -1408,11 +1429,21 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         # Not: 18mm çok dar, 25mm de "Konsantrasyo n" bölünüyordu → 30mm'ye çıkarıldı
         story.append(data_table(tbl_data,
             [35*mm, 51*mm, 30*mm, 59*mm], styles))
-        # REACH eksik not
-        if missing_reach:
+        # Kayıt numarası notları
+        if _any_tr_missing:
             story.append(Paragraph(
-                f"* KKDİK kayıt numarası bulunamayan maddeler için tedarikçiye başvurun: {', '.join(missing_reach)}" if lang=='TR'
-                else f"* REACH/KKDİK registration numbers not found for: {', '.join(missing_reach)}. Obtain from supplier.",
+                "* KKDİK (TR) kayıt numarası, maddeyi Türkiye'de kaydettiren üretici/ithalatçıya aittir; "
+                "girilmeyen numaralar hammadde tedarikçisinden temin edilir." if lang == 'TR' else
+                "* KKDİK (TR) registration numbers belong to the Turkish registrant; "
+                "numbers not given are to be obtained from the raw material supplier.",
+                styles['small']
+            ))
+        if _any_eu:
+            story.append(Paragraph(
+                "* REACH (AB) numaralarında kayıt sahibine özgü son bölüm gösterilmemiştir (XXXX); "
+                "tam numara talep halinde tedarikçiden temin edilir." if lang == 'TR' else
+                "* The registrant-specific part of REACH (EU) numbers is omitted (XXXX); "
+                "the full number is available from the supplier on request.",
                 styles['small']
             ))
 

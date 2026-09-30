@@ -2068,10 +2068,11 @@ function addComp(pf = {}) {
     </div>
     <div class="cw-row3" style="margin-top:8px">
       <div><label>EC No</label><input type="text" class="ec-input" id="ec${id}" placeholder="231-639-5"></div>
-      <div><label>REACH No</label><input type="text" class="reach-input" id="reach${id}" placeholder="01-xxx"></div>
-      <div><label>M-Faktör (Akut)</label><input type="number" class="mf-input" id="mf${id}" placeholder="1" min="1" value="1"></div>
+      <div><label>KKDİK No (TR)</label><input type="text" class="kkdik-input" id="kkdik${id}" placeholder="hammadde tedarikçisinin GBF'sinden" title="Türkiye kayıt numarası — hammadde tedarikçinizin GBF'sindeki KKDİK numarası"></div>
+      <div><label>REACH No (AB)</label><input type="text" class="reach-input" id="reach${id}" placeholder="01-xxx"></div>
     </div>
     <div class="cw-row3" style="margin-top:4px">
+      <div><label>M-Faktör (Akut)</label><input type="number" class="mf-input" id="mf${id}" placeholder="1" min="1" value="1"></div>
       <div><label>M-Faktör (Kronik)</label><input type="number" class="mfc-input" id="mfc${id}" placeholder="1" min="1" value="1"></div>
       <div>
         <label>Bileşen Tipi</label>
@@ -2609,7 +2610,9 @@ async function onCas(id) {
     const ec = document.getElementById('ec'+id);
     if (ec && data.ec_no) ec.value = data.ec_no;
     const reach = document.getElementById('reach'+id);
-    if (reach && data.reach_no) reach.value = data.reach_no;
+    if (reach && data.reach_no) {
+      reach.value = { exempt: 'Muaf', polymer: 'Polimer/muaf' }[data.reach_no] || data.reach_no;
+    }
 
     // Bilinmeyen madde — DB'de yok ama CAS formatı geçerli; uyar ama devam et
     const isUnknown = data.found && !data.name && (!data.hazards || data.hazards.length === 0) && !data.sea_ek6 && !data.annex_vi;
@@ -3153,6 +3156,7 @@ function getComps() {
     }));
     const ec    = w.querySelector('.ec-input')?.value?.trim() || '';
     const reach = w.querySelector('.reach-input')?.value?.trim() || '';
+    const kkdik = w.querySelector('.kkdik-input')?.value?.trim() || '';
     const mf    = parseFloat(w.querySelector('.mf-input')?.value) || 1;
     const mfc   = parseFloat(w.querySelector('.mfc-input')?.value) || 1;
     // Bileşen ID'sini DOM'dan al (cw{id} → id)
@@ -3177,7 +3181,7 @@ function getComps() {
     const ec50_fish    = parseFloat(document.getElementById('ec50_fish'    + cwId)?.value) || null;
     const ec50_daphnia = parseFloat(document.getElementById('ec50_daphnia' + cwId)?.value) || null;
     const ec50_noec    = parseFloat(document.getElementById('ec50_noec'    + cwId)?.value) || null;
-    return { cas, name, name_tr, conc, concMin, concMax, concStr, hazards, ec, reach, m_factors:{ acute: mf, chronic: mfc }, scl, sclRaw, annex_vi: annexVi, ate_unknown, ate, comp_type, ec50_algae, ec50_fish, ec50_daphnia, ec50_noec };
+    return { cas, name, name_tr, conc, concMin, concMax, concStr, hazards, ec, reach, kkdik, m_factors:{ acute: mf, chronic: mfc }, scl, sclRaw, annex_vi: annexVi, ate_unknown, ate, comp_type, ec50_algae, ec50_fish, ec50_daphnia, ec50_noec };
   }).filter(c => c.cas || c.name);
 }
 
@@ -5667,6 +5671,7 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
         conc_max:    c.concMax || c.conc,
         ec_no:       c.ec || '',
         reach_no:    c.reach || '',
+        kkdik_no:    c.kkdik || '',   // Türkiye kayıt no — hammadde tedarikçisinin GBF'sinden
         hazards:     c.hazards || [],
         scl:         c.scl || {},
         sclRaw:      c.sclRaw || [],

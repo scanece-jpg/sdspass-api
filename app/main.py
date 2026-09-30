@@ -224,7 +224,8 @@ async def generate_pdf(data: dict = Body(...)):
             if not f:
                 return c
             c = dict(c)
-            for k in ('hazards', 'm_factors', 'ate', 'suppl_hazards', 'euh_limits'):
+            for k in ('hazards', 'm_factors', 'ate', 'suppl_hazards', 'euh_limits',
+                      'source_priority', 'sea_ek6', 'annex_vi'):
                 if k in f:
                     c[k] = f[k]
             return c

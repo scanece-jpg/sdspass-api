@@ -1051,11 +1051,17 @@ def _ate_core(items: list, form: str = '') -> tuple:
             for h in hazards
         )
 
+        # "Veri var" sayılır: resmî sınıflandırma (SEA Ek-6 / Annex VI, öncelik ≤ 2) VEYA
+        # REACH kayıtlı madde (01-…) — kayıtlı maddeler için akut toksisite verisi zorunludur.
+        # Bu durumda akut toksisite kodu olmaması "zehirli değil" demektir, "bilinmeyen" değil.
+        _reach_no = str(item.get('reach_no') or item.get('reach') or '').strip()
+        _has_data = (int(item.get('source_priority') or 4) <= 2
+                     or bool(_re.match(r'01-\d{10}-\d{2}', _reach_no)))
+
         if not has_acute_tox:
             if cas in _PRESUME_NOT_ACUTELY_TOXIC_CAS:
                 continue  # bu dala artık ulaşılmaz — üstte yakalanır (savunma kopyası)
-            source_priority = int(item.get('source_priority') or 4)
-            if source_priority <= 2:
+            if _has_data:
                 for route in ate_routes:
                     ate_sum[route] += conc_frac / 5000.0
                 ate_annex_vi_5000.append(item.get('name') or cas)
@@ -1101,9 +1107,9 @@ def _ate_core(items: list, form: str = '') -> tuple:
                     if not any(x.get('name') == _cn for x in ate_comps[route]):
                         ate_comps[route].append({'name': _cn, 'conc': conc, 'code': h_code_raw, 'ate': ate_val})
 
-        # Gayri-resmi kaynaklar için: katkı vermediği rotalar = bilinmiyor
-        # Resmi kaynak (≤2) → katkısız rota = test edilmiş-negatif (bilinmiyor değil)
-        if source_priority > 2:
+        # Gayri-resmi ve kayıtsız kaynaklar için: katkı vermediği rotalar = bilinmiyor
+        # Resmi kaynak (≤2) veya REACH kayıtlı → katkısız rota = test edilmiş-negatif (bilinmiyor değil)
+        if not _has_data:
             for _r in ate_routes:
                 if _r not in contributed_routes:
                     unknown_conc[_r] += conc
@@ -1228,6 +1234,7 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> tuple:
             'hazards':         _comp_hazards,
             'ate':             combined_ate,
             'source_priority': c.get('source_priority', 4),
+            'reach_no':        c.get('reach_no') or c.get('reach') or '',
             'ate_unknown':     bool(c.get('ate_unknown', False)),
             'name':            c.get('name_tr', '') or c.get('name', '') or str(c.get('cas', '')),
         })

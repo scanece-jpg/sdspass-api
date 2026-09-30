@@ -81,6 +81,22 @@ async def refresh_components(components: list, form: str) -> list:
         _load_custom as _custom_db,
     )
     from app.services.echa_service import _dedupe_h_codes as _dedup, lookup_echa_api as _lu_echa
+    from app.services.reach_db import get_reg_no as _reg_no
+
+    def _mark(c: dict, cas: str, priority, sea_ek6=False, annex_vi=False) -> None:
+        """Kaynak önceliği (1 SEA Ek-6, 2 Annex VI, ≥3 resmî olmayan) ve REACH kayıt no'su —
+        akut toksisite hesabı bunlara bakarak bileşeni "veri var" ya da "bilinmeyen" sayar.
+        Önceden bu alanlar hesaplamaya taşınmıyordu; resmî kaynaklı maddeler (örn. sitrik asit)
+        "bilinmeyen akut toksisite" sayılıyordu."""
+        if priority is not None:
+            c['source_priority'] = priority
+        c['sea_ek6'] = bool(sea_ek6)
+        c['annex_vi'] = bool(annex_vi)
+        if not (c.get('reach_no') or c.get('reach')):
+            try:
+                c['reach_no'] = _reg_no(cas) or ''
+            except Exception:
+                pass
 
     async def _one(comp: dict) -> dict:
         cas = (comp.get('cas_no') or comp.get('cas') or '').strip()
@@ -91,6 +107,7 @@ async def refresh_components(components: list, form: str) -> list:
             if fresh is not None:
                 # DB'de kayıt var — hazards boşsa "sınıflandırılmamış" (su, glikoz vb.)
                 c = dict(comp)
+                _mark(c, cas, fresh.get('source_priority'), fresh.get('sea_ek6'), fresh.get('annex_vi'))
                 if fresh.get('hazards'):
                     raw = {'h_codes':        [h['h_code'] for h in fresh['hazards']],
                            'hazard_classes': [h['h_class'] for h in fresh['hazards']]}
@@ -121,6 +138,7 @@ async def refresh_components(components: list, form: str) -> list:
                 c = dict(comp)
                 c['hazards'] = [{'h_class': cls, 'h_code': code} for cls, code in
                                 zip(echa.get('hazard_classes', []), echa.get('h_codes', []))]
+                _mark(c, cas, 5)
                 return c
         except Exception:
             pass

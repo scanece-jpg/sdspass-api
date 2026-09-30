@@ -1230,8 +1230,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         # Fallback: statementNeeded bayrağı yoksa unknownPct≥1 kontrolü yap
         if not _stmt_needed and _unk_pct_for_stmt >= 1.0:
             _stmt_needed = True
-    # Bileşen listesinden doğrudan da türet (her iki motor için güvence)
-    if not _stmt_needed:
+    # Bileşen listesinden doğrudan türet — yalnızca ATEmix hesabı hiç gelmediyse (eski istemci).
+    # Hesap geldiyse o yetkilidir: resmî kaynaklı / REACH kayıtlı maddeleri "bilinmeyen" saymaz;
+    # bu yedek kontrol onları yeniden bilinmeyen sayıp yanlış ibare ekliyordu.
+    if not _stmt_needed and not ate_mix_details:
         for _cmp in components:
             _cmp_conc = float(_cmp.get('concentration') or _cmp.get('conc') or 0)
             if _cmp_conc < 1.0:

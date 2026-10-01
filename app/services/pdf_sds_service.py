@@ -147,7 +147,7 @@ from app.services.gbf_author_service import format_author_block, validate_certif
 from app.services.sds_reg_sections import (
     first_aid as reg_first_aid, accidental_release as reg_accidental_release, hygiene as reg_hygiene,
     handling_p as reg_handling_p, storage_p as reg_storage_p,
-    _select_inhal as reg_select_inhal,
+    _select_inhal as reg_select_inhal, _p as reg_p_text,
 )
 from app.services.sds_sentence_service import (
     adapt_for_form, adapt_list_for_form,
@@ -724,6 +724,28 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
 
     # US_EN — OSHA HazCom format uyarlaması
     is_us = lang == 'US_EN'
+
+    def _p_full(code: str) -> str:
+        """P ifadesinin tam metni — tedarikçinin dolduracağı "…" kısımları tamamlanır
+        (SEA Ek-4); P260/P261 fiziksel hale göre seçilir; P370+P378 söndürücü tehlikeye göre."""
+        from app.services.p_code_service import P_COMBOS as _PC, P_TEXTS as _PT
+        txt = (reg_p_text(code, lang) if get_p(lang, code) else None) or _PC.get(code) or _PT.get(code, code)
+        txt = reg_select_inhal(txt, product.get('form') or 'liquid', lang)
+        if code == 'P370+P378':
+            _hs = {str(h)[:4] for h in list(clp.get('h_codes') or []) + list(clp.get('all_h_codes') or [])}
+            if _hs & {'H271', 'H272'}:
+                txt = ('Yangın durumunda: Söndürmek için bol su kullanın.' if lang == 'TR'
+                       else 'In case of fire: Use large amounts of water to extinguish.')
+            elif _hs & {'H260', 'H261', 'H250'}:
+                txt = ('Yangın durumunda: Söndürmek için kuru kum veya kuru kimyasal toz kullanın. Su kullanmayın.'
+                       if lang == 'TR' else
+                       'In case of fire: Use dry sand or dry chemical powder to extinguish. Do not use water.')
+            else:
+                txt = ('Yangın durumunda: Söndürmek için kuru kimyasal toz, karbondioksit veya alkole '
+                       'dayanıklı köpük kullanın.' if lang == 'TR' else
+                       'In case of fire: Use dry chemical powder, carbon dioxide or alcohol-resistant '
+                       'foam to extinguish.')
+        return txt
     product_name = product.get('name', 'Product Name' if is_us else 'Ürün Adı')
     _raw_date = rev.get('date', '')
     if not _raw_date or _raw_date.strip().lower() in ('bugün', 'bugun', 'today', ''):
@@ -920,6 +942,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     clf_rows = []
     seen_clf  = set()
     clf_notes = {}   # {h_code_4: {'flag': str, 'note': str}} — tabloda gösterilecek notlar
+    _clf_src  = {}   # {h_code: cutoff_source} — Bölüm 16(ç) yöntem ifadesi için
 
     for entry in clp.get('passed', []):
         _hc_full = (entry.get('h_code','') or '').replace('*','').strip()
@@ -971,6 +994,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             raw_hcode,
             conc_info,
         ])
+        _clf_src[raw_hcode] = entry.get('cutoff_source')
         # not bayrak bilgisini topla (passed listesinden veya bileşen haritasından)
         nf = entry.get('note_flag') or (_comp_note_map.get(hc) or {}).get('flag')
         nt = entry.get('note')      or (_comp_note_map.get(hc) or {}).get('note') or ''
@@ -1190,15 +1214,13 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             reverse=True
         )
         for code in label_codes_sorted:
-            txt = get_p(lang, code) or P_COMBOS.get(code) or P_TEXTS.get(code, code)
-            # P260/P261: tedarikçinin seçeceği kısım fiziksel hale göre (katı → "Tozunu")
-            txt = reg_select_inhal(txt, product.get('form') or 'liquid', lang)
+            txt = _p_full(code)
             story.append(Paragraph(f"• <b>{code}:</b> {txt}", styles['bullet']))
         # P501 — bertaraf kodu, 6 limitinin dışında "+1 Bertaraf Kodu" olarak her zaman basılır
         mandatory = label_p.get('mandatory', [])
         if mandatory:
             for m in mandatory:
-                txt = get_p(lang, m) or P_TEXTS.get(m, m)
+                txt = _p_full(m)
                 story.append(Paragraph(f"• <b>{m}:</b> {txt}", styles['bullet']))
 
         # Limit aşım notu — birden fazla tehlike sınıfı olan ürünlerde öncelikli seçim yapıldı
@@ -2595,13 +2617,68 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         except (ValueError, TypeError):
             pass
 
-    # 12.2 — deterjan ürününde yüzey aktif madde varsa Deterjanlar Hakkında Yönetmelik Md.6 uygunluğu
-    _biodeg_txt = bio.get('assessment') or sds12.get('12.2', na)
+    # 12.2 / 12.3 — KKDİK Ek-2 12.2 ve 12.3: karışımdaki her ilgili madde için ayrı bilgi.
+    from app.services.ecological_service import (READILY_BIODEGRADABLE_CAS as _RB_CAS,
+                                                 PERSISTENT_CAS as _PERS_CAS, LOG_KOW_DB as _KOW_DB)
+    from app.services.tr_mevzuat_service import _INORGANIC_CAS as _INORG_CAS
+    _T = lang == 'TR'
+    from app.services.detergent_service import CAS_CLASS as _DET_CLS, SURFACTANT_CLASSES as _SURF_CLS
+    _is_det = bool(product.get('is_detergent')) and not is_us
+
+    def _end(t: str) -> str:
+        t = (t or '').strip()
+        return t if not t or t[-1] in '.!?' else t + '.'
+
+    _deg_parts, _bio_parts = [], []
+    for _c in components:
+        _cas = str(_c.get('cas_no') or _c.get('cas') or '').strip()
+        if _cas == '7732-18-5':        # su — değerlendirme gerekmez
+            continue
+        _nm = ((_c.get('name_tr') if _T else '') or _c.get('name') or _cas)
+        _inorg = _cas in _INORG_CAS
+        if _inorg:
+            _d = ('uygulanamaz (inorganik madde; biyolojik bozunma yöntemleri uygulanmaz)' if _T
+                  else 'not applicable (inorganic substance)')
+        elif _cas in _RB_CAS:
+            _d = 'kolay biyobozunur' if _T else 'readily biodegradable'
+        elif _is_det and ((_c.get('det_class') or '').strip() or _DET_CLS.get(_cas)) in _SURF_CLS:
+            _d = 'yüzey aktif madde (aşağıdaki beyana bakınız)' if _T else 'surfactant (see statement below)'
+        elif _cas in _PERS_CAS:
+            _d = 'orta düzeyde biyobozunur' if _T else 'moderately biodegradable'
+        else:
+            _d = 'veri yok' if _T else 'no data available'
+        _deg_parts.append(f'{_nm}: {_d}')
+        _kow = _c.get('log_kow')
+        try:
+            _kow = float(_kow) if _kow not in (None, '') else _KOW_DB.get(_cas)
+        except (TypeError, ValueError):
+            _kow = _KOW_DB.get(_cas)
+        if _inorg:
+            _b = ('uygulanamaz (inorganik madde)' if _T else 'not applicable (inorganic substance)')
+        elif _kow is None:
+            _b = 'veri yok' if _T else 'no data available'
+        elif _kow >= 4:
+            _b = (f'log Kow = {_kow:g} — biyobirikim potansiyeli olabilir' if _T
+                  else f'log Kow = {_kow:g} — potential to bioaccumulate')
+        else:
+            _b = (f'log Kow = {_kow:g} — önemli bir biyobirikim beklenmez' if _T
+                  else f'log Kow = {_kow:g} — no significant bioaccumulation expected')
+        _bio_parts.append(f'{_nm}: {_b}')
+
+    _mix_no_test = ('Karışım için test verisi yoktur.' if _T else 'No test data available for the mixture.')
+    if _deg_parts:
+        _biodeg_txt = f"{_mix_no_test} {'Bileşenler' if _T else 'Components'}: {' | '.join(_deg_parts)}."
+    else:
+        _biodeg_txt = _end(bio.get('assessment') or sds12.get('12.2', na))
     if product.get('is_detergent') and not is_us:
         from app.services.detergent_service import has_surfactant, biodegradability_line
         if has_surfactant(components):
-            _biodeg_txt = f"{_biodeg_txt} {biodegradability_line(lang)}" if _biodeg_txt not in (None, '', na) \
-                else biodegradability_line(lang)
+            _biodeg_txt = f"{_end(_biodeg_txt)} {biodegradability_line(lang)}" \
+                if _biodeg_txt not in (None, '', na) else biodegradability_line(lang)
+    if _bio_parts:
+        _bioacc_txt = f"{_mix_no_test} {'Bileşenler' if _T else 'Components'}: {' | '.join(_bio_parts)}."
+    else:
+        _bioacc_txt = sds12.get('12.3', na)
 
     # 12.1 Toksisite — KKDİK Ek-2 12.1: balık, kabuklu, alg (akut/kronik) verileri; yoksa nedeni.
     _TR12 = lang == 'TR'
@@ -2643,7 +2720,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     eco_rows = [
         [sub_title(lang,'12.1'), ' '.join(_t121)],
         [sub_title(lang,'12.2'), _biodeg_txt],
-        [sub_title(lang,'12.3'), sds12.get('12.3', na)],
+        [sub_title(lang,'12.3'), _bioacc_txt],
         [sub_title(lang,'12.4'), _soil_txt],
         [sub_title(lang,'12.5'), pbt_summary],
         [sub_title(lang,'12.6'), (lambda v:
@@ -3200,6 +3277,69 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             story.append(Paragraph(f'• {_n}', styles['small']))
         story.append(Spacer(1, 4))
 
+    # KKDİK Ek-2 Bölüm 16 (ç): karışımın sınıflandırılmasında SEA Yönetmeliği Md.11'deki
+    # bilgi değerlendirme yöntemlerinden hangisinin kullanıldığı — her sınıf için ayrı.
+    def _clf_method(hcode: str, reason: str, src) -> str:
+        TR = lang == 'TR'
+        h4 = (hcode or '')[:4]
+        r = reason or ''
+        rl = r.lower()
+        if r == dom_note:
+            return ('Daha yüksek kategorideki sınıflandırma kapsamında değerlendirilmiştir'
+                    if TR else 'Covered by the classification in a higher category')
+        if h4.startswith('H2'):
+            if any(k in rl for k in ('kullanıcı', 'test', 'ölç', 'user', 'measured')):
+                return ('Karışımın test verisi / üretici beyanı (SEA Ek-1 Kısım 2)' if TR
+                        else 'Test data on the mixture / manufacturer statement (Annex I Part 2)')
+            return ('Bileşen verilerine dayalı değerlendirme; karışım test edilmemiştir (SEA Ek-1 Kısım 2)' if TR
+                    else 'Assessment based on component data; mixture not tested (Annex I Part 2)')
+        if h4 in ('H300', 'H301', 'H302', 'H310', 'H311', 'H312', 'H330', 'H331', 'H332'):
+            return ('Hesaplama yöntemi — ATEkarışım formülü (SEA Ek-1 3.1.3.6)' if TR
+                    else 'Calculation method — ATEmix formula (Annex I 3.1.3.6)')
+        if h4 in ('H400', 'H410', 'H411', 'H412', 'H413'):
+            return ('Toplama yöntemi (SEA Ek-1 4.1.3.5)' if TR
+                    else 'Summation method (Annex I 4.1.3.5)')
+        if h4 == 'H318' and 'H314' in r:
+            return ('Cilt aşındırıcılık (H314) sınıflandırmasından türetilmiştir' if TR
+                    else 'Derived from the skin corrosion (H314) classification')
+        if 'ph' in rl.replace('phys', ''):
+            return ('Aşırı pH değerine dayalı değerlendirme (SEA Ek-1)' if TR
+                    else 'Assessment based on extreme pH (Annex I)')
+        if 'tablo 3.2.4' in rl or 'tablo 3.3.4' in rl:
+            return ('Toplama yönteminin uygulanamadığı bileşenler yaklaşımı (SEA Ek-1 Tablo 3.2.4 / 3.3.4)' if TR
+                    else 'Approach for ingredients for which additivity does not apply (Annex I Table 3.2.4 / 3.3.4)')
+        if 'σ' in rl or 'toplam' in rl:
+            return ('Toplama yöntemi (SEA Ek-1 3.2.3.3 / 3.3.3.3)' if TR
+                    else 'Additivity (summation) method (Annex I 3.2.3.3 / 3.3.3.3)')
+        if str(src or '').upper() == 'SCL':
+            return ('Hesaplama yöntemi — özel konsantrasyon sınırı (SEA Ek-6)' if TR
+                    else 'Calculation method — specific concentration limit (Annex VI)')
+        return ('Hesaplama yöntemi — genel konsantrasyon sınırı (SEA Ek-1)' if TR
+                else 'Calculation method — generic concentration limit (Annex I)')
+
+    if clf_rows:
+        story.append(Paragraph(
+            '<b>' + ('Karışımın sınıflandırılmasında kullanılan yöntem (SEA Yönetmeliği Madde 11):'
+                     if lang == 'TR' else
+                     'Method used for the classification of the mixture (CLP Article 9):') + '</b>',
+            styles['body_bold']))
+        story.append(Paragraph(
+            ('Karışımın bütünü için sağlık ve çevre tehlikelerine ilişkin test verisi ve köprüleme ilkelerinin '
+             'uygulanabileceği benzer test edilmiş karışım verisi bulunmadığından, sınıflandırma bileşen '
+             'verileri üzerinden yapılmıştır.') if lang == 'TR' else
+            ('No test data on the mixture as a whole and no data on similar tested mixtures allowing the '
+             'bridging principles were available for health and environmental hazards; the classification '
+             'is based on the data of the ingredients.'),
+            styles['small']))
+        _m_rows = [[('Sınıflandırma' if lang == 'TR' else 'Classification'),
+                    ('H Kodu' if lang == 'TR' else 'H Code'),
+                    ('Yöntem' if lang == 'TR' else 'Method')]]
+        for _row in clf_rows:
+            _m_rows.append([_row[0], _row[1],
+                            _clf_method(str(_row[1]), str(_row[2]), _clf_src.get(_row[1]))])
+        story.append(data_table(_m_rows, [70*mm, 25*mm, 85*mm], styles))
+        story.append(Spacer(1, 4))
+
     # Revizyon geçmişi
     _rev_notes_raw = (rev.get('notes') or '').strip()
     _generic = {'güncelleme', 'update', 'güncellenmiştir', 'updated', '-', ''}
@@ -3236,19 +3376,14 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 # Grup içi şiddet sırası (yüksek önce)
                 codes_sorted = sorted(codes, key=lambda p: P_LABEL_PRIORITY.get(p, 5), reverse=True)
                 for code in codes_sorted:
-                    txt = get_p(lang, code) or P_COMBOS.get(code) or P_TEXTS.get(code, code)
-                    txt = reg_select_inhal(txt, product.get('form') or 'liquid', lang)
-                    # P370+P378: oksitleyici (H271/H272) → söndürücüyü belirt (SEA Ek-4)
-                    if code == 'P370+P378' and bool(set(h_codes) & {'H271','H272'}):
-                        txt = ('Yangın durumunda: Bol su kullanın.' if lang == 'TR'
-                               else 'IN CASE OF FIRE: Use large amounts of water.')
+                    txt = _p_full(code)
                     story.append(Paragraph(f"  {code}: {txt}", styles['small']))
 
     # Kısaltmalar
     story.append(Spacer(1, 6))
     abbrev_tr = (
         "KKDİK — Kimyasalların Kaydı, Değerlendirilmesi, İzni ve Kısıtlanması | "
-        "GBF — Güvenlik Bilgi Formu | KKE — Kişisel Koruyucu Ekipman | "
+        "GBF — Güvenlik Bilgi Formu | "
     ) if lang == 'TR' else ''
     story.append(Paragraph(
         f"<b>{S(lang,'abbreviations_label')}:</b> "
@@ -3260,6 +3395,56 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
            else "PPE — Personal Protective Equipment"),
         styles['small']
     ))
+
+    # KKDİK Ek-2 Bölüm 16 (c): ana literatür referansları ve bilgi kaynakları
+    _TR16 = lang == 'TR'
+    _echa_used = any(
+        (c.get('hazards') and (c.get('source_priority') or 4) >= 3)
+        or any(h.get('echa_supplement') for h in (c.get('hazards') or []))
+        for c in components)
+    _src = [
+        ('Bileşenlerin uyumlaştırılmış sınıflandırması: SEA Yönetmeliği Ek-6'
+         if _TR16 else 'Harmonised classification of ingredients: CLP Annex VI'),
+    ]
+    if _echa_used:
+        _src.append('Ek-6’da yer almayan maddeler / sınıflar: ECHA Sınıflandırma ve Etiketleme Envanteri bildirimleri'
+                    if _TR16 else 'Substances / classes not in Annex VI: ECHA C&amp;L Inventory notifications')
+    _src.append('Ürün formülasyonu ve fiziksel/kimyasal veriler: üretici beyanı'
+                if _TR16 else 'Product formulation and physical/chemical data: manufacturer information')
+    if _TR16:
+        _src += [
+            'Mesleki maruz kalma sınır değerleri: Kimyasal Maddelerle Çalışmalarda Sağlık ve Güvenlik '
+            'Önlemleri Hakkında Yönetmelik',
+            'Taşımacılık: ADR 2025, IMDG Kod (Değişiklik 42-24), IATA-DGR 2026',
+            'Atık kodları: Atık Yönetimi Yönetmeliği (RG 02.04.2015/29314)',
+        ]
+        if product.get('is_detergent'):
+            _src.append('Deterjan bilgileri: Deterjanlar Hakkında Yönetmelik (RG 27.01.2018/30314)')
+        _src.append('Güvenlik Bilgi Formu: KKDİK Yönetmeliği Ek-2 (RG 23.06.2017/30105)')
+    else:
+        _src += ['Transport: ADR 2025, IMDG Code (Amdt. 42-24), IATA-DGR 2026']
+    story.append(Spacer(1, 4))
+    story.append(Paragraph(
+        '<b>' + ('Ana literatür referansları ve bilgi kaynakları:' if _TR16
+                 else 'Key literature references and sources for data:') + '</b>',
+        styles['body_bold']))
+    for _sx in _src:
+        story.append(Paragraph(f'• {_sx}', styles['small']))
+
+    # KKDİK Ek-2 Bölüm 16 (e): işçiler için uygun eğitime dair tavsiyeler
+    story.append(Spacer(1, 4))
+    story.append(Paragraph(
+        '<b>' + ('Eğitim tavsiyeleri:' if _TR16 else 'Training advice:') + '</b>', styles['body_bold']))
+    story.append(Paragraph(
+        ('Bu ürünle çalışan işçilere, insan sağlığı ve çevrenin korunması amacıyla; ürünün tehlikeleri, '
+         'güvenli kullanım ve depolama, kişisel koruyucu donanım kullanımı, ilk yardım ve acil durum '
+         'önlemleri konularında bu Güvenlik Bilgi Formuna dayalı eğitim verilmelidir (6331 sayılı İş Sağlığı '
+         've Güvenliği Kanunu; Kimyasal Maddelerle Çalışmalarda Sağlık ve Güvenlik Önlemleri Hakkında '
+         'Yönetmelik).') if _TR16 else
+        ('Workers handling this product should receive training, based on this Safety Data Sheet, on its '
+         'hazards, safe handling and storage, use of personal protective equipment, first aid and emergency '
+         'measures, to protect human health and the environment.'),
+        styles['small']))
 
     # Fiziksel tehlike metodoloji notu (CLP §1.6.3.2)
     _phys_no_test = [

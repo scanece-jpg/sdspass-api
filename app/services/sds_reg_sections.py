@@ -43,10 +43,14 @@ def _p(code: str, lang: str) -> str:
         'P301+P310': ('doktoru/… arayın', 'doktoru/hekimi arayın'),
         'P301+P312': ('doktoru/… arayın', 'doktoru/hekimi arayın'),
         'P264':      ('Elleçlemeden sonra … iyice yıkayın', 'Elleçlemeden sonra ellerinizi iyice yıkayın'),
+        'P501':      ('İçeriği/kabı … bertaraf edin',
+                      'İçeriği/kabı Atık Yönetimi Yönetmeliği ve yerel mevzuata uygun olarak bertaraf edin'),
     }
     fills_en = {
         'P302+P352': ('water/…', 'water'),
         'P264':      ('Wash … thoroughly', 'Wash hands thoroughly'),
+        'P501':      ('Dispose of contents/container to …',
+                      'Dispose of contents/container in accordance with local/national regulations'),
     }
     pair = (fills_tr if lang == 'TR' else fills_en).get(code)
     if pair and pair[0] in t:

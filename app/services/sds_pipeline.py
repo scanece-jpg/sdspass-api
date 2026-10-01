@@ -522,7 +522,7 @@ async def classify(inp: dict) -> dict:
     if ek6_supp:
         _used = [e for e in ek6_supp if not e['removed']]
         _rem = [e for e in ek6_supp if e['removed']]
-        _fmt = lambda lst: '; '.join(f"{e['name'] or e['cas']} — {e['h_code']}" for e in lst)
+        _fmt = lambda lst: '; '.join(dict.fromkeys(f"{e['name'] or e['cas']} — {e['h_code']}" for e in lst))
         tr_txt = ('Ek-6 dışı sınıflar: SEA Ek-6’da yer alan maddelerin listede bulunmayan tehlike '
                   'sınıfları SEA Md.6(1)(c) gereği ECHA C&L bildirimlerine göre değerlendirilmiştir'
                   + (f' ({_fmt(_used)})' if _used else '') + '.'

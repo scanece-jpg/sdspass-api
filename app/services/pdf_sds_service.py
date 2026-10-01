@@ -2208,10 +2208,48 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         )
     decomp_str = ('; '.join(decomp_parts) + '.') if decomp_parts else S(lang,'decomp_products')
 
+    # ── 10.3 Tehlikeli tepkimelerin olasılığı — KKDİK Ek-2 10.3: ürünün basınç/sıcaklık
+    #    yayarak tepkimeye gireceği veya başka zararlı koşullar yaratabileceği durumlar ve bu
+    #    tepkimelerin oluşabileceği koşullar açıklanır (önceden yalnız "Bkz. Bölüm 7" yazılıyordu).
+    _TR10 = lang == 'TR'
+    _has_hypo = bool(comp_cas_set & _HYPOCHLORITE_CAS)
+    _has_acid_comp = bool(comp_cas_set & _ACID_CAS)
+    _react = []
+    if _has_acid_comp and not _has_hypo:
+        _react.append('Hipoklorit (çamaşır suyu) veya klor içeren ürünlerle temas ederse zehirli klor gazı açığa çıkar.'
+                      if _TR10 else 'Releases toxic chlorine gas in contact with hypochlorite (bleach) or chlorine-containing products.')
+    if _has_hypo:
+        _react.append('Asitlerle veya asidik ürünlerle temas ederse zehirli klor gazı, amonyak veya amonyum tuzları ile '
+                      'kloraminler açığa çıkar.' if _TR10 else
+                      'Releases toxic chlorine gas in contact with acids and chloramines with ammonia or ammonium salts.')
+    if is_base:
+        _react.append('Asitlerle şiddetli (ısı açığa çıkaran) tepkime verir.' if _TR10
+                      else 'Reacts violently (exothermically) with acids.')
+    if 'H290' in h_codes or ((is_acid or is_base) and 'H314' in h_codes):
+        _react.append('Alüminyum, çinko gibi metallerle temas ederse alevlenir hidrojen gazı açığa çıkabilir.' if _TR10
+                      else 'May release flammable hydrogen gas in contact with metals such as aluminium and zinc.')
+    if any(h in h_codes for h in ['H260', 'H261']):
+        _react.append('Su ile temas ederse alevlenir gaz açığa çıkarır.' if _TR10
+                      else 'Releases flammable gas in contact with water.')
+    if any(h in h_codes for h in ['H270', 'H271', 'H272']):
+        _react.append('Yanıcı maddelerle temas ederse yangına neden olabilir veya yangını şiddetlendirebilir.' if _TR10
+                      else 'May cause or intensify fire in contact with combustible materials.')
+    if any(h in h_codes for h in ['H240', 'H241', 'H242']):
+        _react.append('Isıtıldığında kendiliğinden hızlanan bozunma ile yangına veya patlamaya neden olabilir.' if _TR10
+                      else 'Heating may cause self-accelerating decomposition, fire or explosion.')
+    if 'H250' in h_codes:
+        _react.append('Hava ile temas ederse kendiliğinden tutuşur.' if _TR10 else 'Catches fire spontaneously if exposed to air.')
+    if any(h in h_codes for h in ['H224', 'H225', 'H226']):
+        _react.append('Buharları hava ile patlayıcı karışım oluşturabilir.' if _TR10
+                      else 'Vapours may form explosive mixtures with air.')
+    react_str = ' '.join(_react) if _react else (
+        'Normal kullanım ve depolama koşullarında tehlikeli tepkime beklenmez.' if _TR10
+        else 'No hazardous reactions expected under normal conditions of use and storage.')
+
     stability_data = [
         [sub_title(lang,'10.1'), phys.get('reactivity', na)],
         [sub_title(lang,'10.2'), S(lang,'stable_conditions')],
-        [sub_title(lang,'10.3'), term(lang,'see_section')+' 7'],
+        [sub_title(lang,'10.3'), react_str],
         [sub_title(lang,'10.4'), avoid_str],
         [sub_title(lang,'10.5'), incompat_str],
         [sub_title(lang,'10.6'), decomp_str],
@@ -2653,7 +2691,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     story += section_block(section_title(lang, 13), styles)
     story += sub_block(f"13.1 {sub_title(lang,'13.1')}", styles)
 
-    _disp = get_disposal_content(h_codes, lang)
+    _disp = get_disposal_content(all_h_codes or h_codes, lang, components=components)
 
     # 13.1a — Ürün bertaraf yöntemleri (dinamik bullet listesi)
     story += bullet_list(_disp['product_bullets'], styles)

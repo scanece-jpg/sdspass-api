@@ -26,6 +26,7 @@ class Component:
     name:      str = ''
     m_acute:   'int | None' = None
     m_chronic: 'int | None' = None
+    h_classes: 'list | None' = None   # örn. 'Skin Corr. 1A' — Sınıf 8 PG hesabı (ADR 2.2.8.1.6.3)
 
 
 # ADR Bölüm 2'ye göre taşıma sınıfı tetikleyen H kodları.
@@ -84,6 +85,7 @@ def build_transport_components(raw_components: list) -> 'list[Component]':
         _raw_h = c.get('h_codes')
         if not _raw_h:
             _raw_h = [h['h_code'] for h in (c.get('hazards') or []) if h.get('h_code')]
+        _raw_cls = [h.get('h_class') or '' for h in (c.get('hazards') or []) if h.get('h_code')]
         result.append(Component(
             cas=cas,
             conc=conc,
@@ -92,6 +94,7 @@ def build_transport_components(raw_components: list) -> 'list[Component]':
             name=c.get('name') or '',
             m_acute=c.get('m_acute') or None,
             m_chronic=c.get('m_chronic') or None,
+            h_classes=_raw_cls,
         ))
     return result
 
@@ -280,6 +283,104 @@ def _tox61_routes(h_set: set, acute_tox: Optional[List[Dict]], form: str) -> Dic
     return out
 
 
+# ── Sınıf 8 — ADR 2.2.8.1.6.3 hesaplama yöntemi ─────────────────────────────────
+# Bileşenin Sınıf 8 PG'si ("atanmış PG"): madde Tablo A'da adıyla varsa oradaki PG (örn. NaOH
+# UN1824 PG II, H3PO4 UN1805 PG III); yoksa CLP cilt aşındırma alt kategorisi — ADR 2.2.8.1.5.3
+# tablosunun temas/gözlem süreleri CLP ile aynıdır → 1A = PG I, 1B = PG II, 1C = PG III.
+# Alt kategorisi belirtilmemiş "Skin Corr. 1" en kötü durum PG I sayılır.
+def _comp_corr_pg(comp: 'Component') -> Optional[str]:
+    if 'H314' not in {str(h).replace('*', '').strip()[:4] for h in (comp.h_codes or [])}:
+        return None
+    try:
+        from app.services.transport_adr_service import class8_pg_for_cas
+        _ta = class8_pg_for_cas(comp.cas)
+        if _ta:
+            return _ta
+    except Exception:
+        pass
+    best = None
+    for cls in comp.h_classes or []:
+        c = str(cls).replace(' ', '').upper()
+        if not (c.startswith('SKINCORR') or c.startswith('CİLTAŞ') or c.startswith('CILTAS')):
+            continue
+        pg = 'II' if c.endswith('1B') else 'III' if c.endswith('1C') else 'I'
+        if best is None or _pg_num(pg) < _pg_num(best):
+            best = pg
+    return best or 'I'
+
+
+def corrosive_mixture_pg(components: 'List[Component]') -> Optional[str]:
+    """ADR 2.2.8.1.6.3 Şekil 2.2.8.1.6.3 (genel konsantrasyon sınırları, Tablo A'da SCL yok):
+    ΣPG I ≥ %1 → (ΣPG I ≥ %5 ise PG I, değilse PG II);
+    değilse ΣPG I + ΣPG II ≥ %5 → PG II; değilse ΣPG I+II+III ≥ %5 → PG III; değilse Sınıf 8 değil.
+    Yalnız ≥ %1 bileşenler toplanır (2.2.8.1.6.3.2)."""
+    s = {'I': 0.0, 'II': 0.0, 'III': 0.0}
+    for c in components or []:
+        pg = _comp_corr_pg(c)
+        if pg and (c.conc or 0) >= 1.0:
+            s[pg] += c.conc
+    if s['I'] >= 1:
+        return 'I' if s['I'] >= 5 else 'II'
+    if s['I'] + s['II'] >= 5:
+        return 'II'
+    if s['I'] + s['II'] + s['III'] >= 5:
+        return 'III'
+    return None
+
+
+# Sınıf 8 B.B.B. girişinin seçimi (ADR 2.1.2 — en uygun/özel B.B.B. girişi): asidik/bazik ve
+# inorganik/organik. Yalnızca bilinen maddelerden karar verilir; belirsizse C9/C10 genel giriş.
+_CORR_INORG_ACID = {'7647-01-0', '7664-93-9', '7697-37-2', '7664-38-2', '7664-39-3', '10035-10-6',
+                    '7790-93-4', '13780-03-5', '5329-14-6'}
+_CORR_INORG_BASE = {'1310-73-2', '1310-58-3', '7664-41-7', '1336-21-6', '6834-92-0', '1344-09-8',
+                    '7681-52-9', '7778-54-3', '1305-62-0'}
+_CORR_ORG_ACID   = {'64-18-6', '64-19-7', '79-14-1', '75-75-2', '27176-87-0', '68584-22-5',
+                    '79-11-8', '76-05-1', '107-92-6', '79-09-4'}
+_CORR_ORG_BASE   = {'141-43-5', '111-42-2', '124-68-5', '109-89-7', '107-15-3', '110-91-8',
+                    '102-71-6', '75-59-2'}
+_CORR_NOS = {  # (asidik?, inorganik?, katı?) → UN
+    (True, True, False): 'UN 3264',  (True, False, False): 'UN 3265',
+    (False, True, False): 'UN 3266', (False, False, False): 'UN 3267',
+    (True, True, True): 'UN 3260',   (True, False, True): 'UN 3261',
+    (False, True, True): 'UN 3262',  (False, False, True): 'UN 3263',
+}
+_CORR_NOS_NAME = {
+    'UN 3264': 'AŞINDIRICI SIVI, ASİDİK, İNORGANİK, B.B.B.', 'UN 3265': 'AŞINDIRICI SIVI, ASİDİK, ORGANİK, B.B.B.',
+    'UN 3266': 'AŞINDIRICI SIVI, BAZİK, İNORGANİK, B.B.B.',  'UN 3267': 'AŞINDIRICI SIVI, BAZİK, ORGANİK, B.B.B.',
+    'UN 3260': 'AŞINDIRICI KATI, ASİDİK, İNORGANİK, B.B.B.', 'UN 3261': 'AŞINDIRICI KATI, ASİDİK, ORGANİK, B.B.B.',
+    'UN 3262': 'AŞINDIRICI KATI, BAZİK, İNORGANİK, B.B.B.',  'UN 3263': 'AŞINDIRICI KATI, BAZİK, ORGANİK, B.B.B.',
+}
+
+
+def _corr_nos(components: 'List[Component]', is_solid: bool, mixture_ph=None) -> Optional[str]:
+    corr = [c for c in components or [] if _comp_corr_pg(c)]
+    if not corr:
+        return None
+    cas = {c.cas for c in corr}
+    acid_set = _CORR_INORG_ACID | _CORR_ORG_ACID
+    base_set = _CORR_INORG_BASE | _CORR_ORG_BASE
+    if cas <= (_CORR_INORG_ACID | _CORR_INORG_BASE):
+        inorganic = True
+    elif cas <= (_CORR_ORG_ACID | _CORR_ORG_BASE):
+        inorganic = False
+    else:
+        return None
+    acidic = None
+    try:
+        ph = float(str(mixture_ph).replace(',', '.')) if mixture_ph not in (None, '') else None
+    except ValueError:
+        ph = None
+    if ph is not None and ph != 7:
+        acidic = ph < 7
+    elif cas <= acid_set:
+        acidic = True
+    elif cas <= base_set:
+        acidic = False
+    if acidic is None:
+        return None
+    return _CORR_NOS[(acidic, inorganic, bool(is_solid))]
+
+
 def _prio_key(cls: str, pg: Optional[str], route: Optional[str]) -> str:
     """ADR 2.1.3.5.3 öncelik anahtarı ('' = öncelik listesinde değil → 2.1.3.10 tablosu)."""
     if cls == '4.2' and pg == 'I':
@@ -397,7 +498,8 @@ def resolve_conflict(cls_a: str, pg_a: Optional[str],
 
 def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: bool,
                   h_set: set = None, form: str = 'liquid',
-                  components: 'Optional[List[Component]]' = None) -> Dict:
+                  components: 'Optional[List[Component]]' = None,
+                  mixture_ph=None) -> Dict:
     """UN numarası ve etiket belirle."""
     h_set = h_set or set()
     if cls == '1':
@@ -461,9 +563,9 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
                 }
             return {'un': 'UN 2845', 'label': 'Pirofor Sıvı, Organik, B.N.O.',
                     'note': 'H250: Hava temasında kendiliğinden alışır — PG I, özel ambalaj'}
-        if pg == 'II':
-            return {'un': 'UN 3088', 'label': 'Kendiliğinden Isınan Katı, Organik, B.N.O.'}
-        return {'un': 'UN 3190', 'label': 'Kendiliğinden Isınan Katı, Organik, B.N.O.'}
+        # UN 3088 organik (PG II/III); inorganik katı UN 3190 — bileşimden ayırt edilemiyor
+        return {'un': 'UN 3088', 'label': 'KENDİLİĞİNDEN ISINAN KATI, ORGANİK, B.B.B.',
+                'note': 'İnorganik katı ise UN 3190; sıvı ise UN 3183 (organik) / UN 3186 (inorganik).'}
     if cls == '4.3':
         if is_solid:
             return {'un': 'UN 3132', 'label': 'Su ile Tepkiyen Katı, Yanıcı, B.N.O.'}
@@ -485,10 +587,10 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
                 ),
             }
         if is_solid:
-            return {'un': 'UN 1479', 'label': 'Oksitleyici Katı, B.N.O.'}
-        if pg == 'I':
-            return {'un': 'UN 2912', 'label': 'Oksitleyici Sıvı, B.N.O.'}
-        return {'un': 'UN 3139', 'label': 'Oksitleyici Sıvı, B.N.O.'}
+            return {'un': 'UN 1479', 'label': 'YÜKSELTGEN KATI, B.B.B.'}
+        # UN 3139 PG I/II/III (Tablo A). Önceden PG I'de UN 2912 veriliyordu — o numara
+        # radyoaktif madde (LSA-I) kaydıdır.
+        return {'un': 'UN 3139', 'label': 'YÜKSELTGEN SIVI, B.B.B.'}
     if cls == '5.2':
         if is_solid:
             return {
@@ -559,7 +661,9 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
             _prod_state = 'solid' if is_solid else ('gas' if form == 'gas' else 'liquid')
             # Tetikleyici (H314 taşıyan) bileşenler arasında en yüksek konsantrasyona sahip olanı al
             trigger8 = [c for c in components if 'H314' in c.h_codes]
-            if trigger8:
+            # Adlı giriş (örn. UN1824 sodyum hidroksit çözeltisi) yalnız tek aşındırıcı bileşen varsa;
+            # başka aşındırıcı bileşen de varsa karışım B.B.B. girişine gider (ADR 2.1.3.3).
+            if len(trigger8) == 1:
                 dominant8 = max(trigger8, key=lambda c: c.conc)
                 _det = _lookup_by_cas(dominant8.cas, concentration=dominant8.conc,
                                       physical_state=_prod_state)
@@ -579,10 +683,17 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
                                        "ADR §3.1.2.8.1: mevcut spesifik giriş B.N.O.'ya tercih edilir."
                                        + (f" {_det['seed_note']}" if _det.get('seed_note') else '')),
                         }
+        _nos = _corr_nos(components, is_solid, mixture_ph)
+        if _nos:
+            return {'un': _nos, 'label': _CORR_NOS_NAME[_nos],
+                    'note': 'ADR 2.1.2: aşındırıcı bileşenlerin asidik/bazik ve inorganik/organik '
+                            'yapısına göre en uygun B.B.B. girişi seçildi.'}
         return {
             'un': 'UN 1759' if is_solid else 'UN 1760',
-            'label': 'Korozif Katı, B.N.O.' if is_solid else 'Korozif Sıvı, B.N.O.',
-            'note': 'Asidik inorganik → UN 3264 | Bazik → UN 3266 | Organik → UN 1760 | PG I uzman onayı',
+            'label': 'AŞINDIRICI KATI, B.B.B.' if is_solid else 'AŞINDIRICI SIVI, B.B.B.',
+            'note': ('Aşındırıcı bileşenlerin asidik/bazik veya inorganik/organik yapısı belirlenemedi — '
+                     'genel giriş kullanıldı. Asidik inorganik → UN 3264/3260, asidik organik → 3265/3261, '
+                     'bazik inorganik → 3266/3262, bazik organik → 3267/3263.'),
         }
     if cls == '9':
         if is_solid:
@@ -605,7 +716,8 @@ def classify(h_codes: List[str], form: str = 'liquid',
              phys_h_codes: Optional[List[str]] = None,
              viscosity: Optional[float] = None,
              components: 'Optional[List[Component]]' = None,
-             acute_tox: Optional[List[Dict]] = None) -> Dict:
+             acute_tox: Optional[List[Dict]] = None,
+             mixture_ph=None) -> Dict:
     """
     ADR/IMDG/IATA sınıflandırması.
 
@@ -713,6 +825,19 @@ def classify(h_codes: List[str], form: str = 'liquid',
         if not existing or new_num < existing['pg_num']:
             class_map[cls] = {'pg': adr['pg'], 'pg_num': new_num}
 
+    # Sınıf 8 PG — ADR 2.2.8.1.6.3 hesaplama yöntemi (karışım testi yoksa). Bileşen alt
+    # kategorisi bilinmiyorsa (bileşen listesi yok) H314 → PG I en kötü durum kalır.
+    corr_note = None
+    if '8' in class_map and _comps:
+        _pg8 = corrosive_mixture_pg(_comps)
+        if _pg8:
+            class_map['8'] = {'pg': _pg8, 'pg_num': _pg_num(_pg8)}
+            corr_note = (f'Sınıf 8 PG {_pg8}: ADR 2.2.8.1.6.3 hesaplama yöntemi (bileşenlerin cilt aşındırma '
+                         'alt kategorisi 1A/1B/1C → PG I/II/III). Karışım test edilmişse test sonucu esastır.')
+        else:
+            corr_note = ('H314 bileşen toplamından değil (örn. pH kuralından) geliyor; ADR 2.2.8.1.6.3 hesabı '
+                         'Sınıf 8 vermedi. PG I en kötü durum varsayıldı — OECD 404/435/431 testi ile doğrulayın.')
+
     route61 = None
     if tox_routes:
         # En tehlikeli PG; eşitlikte soluma > dermal > oral (6.1 lehine en ağır satır)
@@ -759,7 +884,9 @@ def classify(h_codes: List[str], form: str = 'liquid',
 
     # ── Adım 4: UN ve etiket ──────────────────────────────────────────────────
     un_entry = _get_un_entry(primary['class'], primary['pg'], sub_class, is_solid, h_set, form,
-                             components=_comps)
+                             components=_comps, mixture_ph=mixture_ph)
+    if corr_note and '8' in (primary['class'], sub_class):
+        un_entry['note'] = ((un_entry.get('note') or '') + ' ' + corr_note).strip()
 
     # UN 3082 — ADR 3.3.1 Özel Hüküm 375 viskozite muafiyeti
     if un_entry.get('_sp375_check') and primary['class'] == '9':

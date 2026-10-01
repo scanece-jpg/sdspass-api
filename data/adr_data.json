@@ -272,18 +272,25 @@
     "name": "OXIDIZING LIQUID, N.O.S.",
     "name_tr": "OKSİTLEYİCİ SIVI, B.N.O.",
     "class": "5.1",
-    "classification_code": "O2",
+    "classification_code": "O1",
     "packing_groups": {
+      "I": {
+        "kemler": "",
+        "tunnel": "E",
+        "label": "5.1",
+        "classification_code": "O1"
+      },
       "II": {
         "kemler": "50",
-        "tunnel": "D/E",
+        "tunnel": "E",
         "label": "5.1",
-        "classification_code": "O2"
+        "classification_code": "O1"
       },
       "III": {
         "kemler": "50",
         "tunnel": "E",
-        "label": "5.1"
+        "label": "5.1",
+        "classification_code": "O1"
       }
     },
     "special_provisions": [
@@ -2342,18 +2349,21 @@
     "packing_groups": {
       "I": {
         "kemler": "88",
-        "tunnel": "B/E",
-        "label": "8"
+        "tunnel": "E",
+        "label": "8",
+        "classification_code": "C3"
       },
       "II": {
         "kemler": "80",
         "tunnel": "E",
-        "label": "8"
+        "label": "8",
+        "classification_code": "C3"
       },
       "III": {
         "kemler": "80",
         "tunnel": "E",
-        "label": "8"
+        "label": "8",
+        "classification_code": "C3"
       }
     },
     "special_provisions": [
@@ -2398,15 +2408,23 @@
     "class": "8",
     "classification_code": "C7",
     "packing_groups": {
+      "I": {
+        "kemler": "88",
+        "tunnel": "E",
+        "label": "8",
+        "classification_code": "C7"
+      },
       "II": {
         "kemler": "80",
         "tunnel": "E",
-        "label": "8"
+        "label": "8",
+        "classification_code": "C7"
       },
       "III": {
         "kemler": "80",
         "tunnel": "E",
-        "label": "8"
+        "label": "8",
+        "classification_code": "C7"
       }
     },
     "special_provisions": [
@@ -2602,7 +2620,7 @@
     "packing_groups": {
       "I": {
         "kemler": "336",
-        "tunnel": "B/D",
+        "tunnel": "C/E",
         "label": "3 (6.1)",
         "classification_code": "FT1"
       },
@@ -2610,6 +2628,12 @@
         "kemler": "336",
         "tunnel": "D/E",
         "label": "3 (6.1)",
+        "classification_code": "FT1"
+      },
+      "III": {
+        "kemler": "36",
+        "tunnel": "D/E",
+        "label": "3",
         "classification_code": "FT1"
       }
     },
@@ -2623,16 +2647,8 @@
   "UN2912": {
     "name": "RADIOACTIVE MATERIAL, LOW SPECIFIC ACTIVITY (LSA-I)",
     "name_tr": "OKSİTLEYİCİ SIVI, B.N.O.",
-    "class": "5.1",
-    "classification_code": "O1",
-    "packing_groups": {
-      "I": {
-        "kemler": "50",
-        "tunnel": "E",
-        "label": "5.1",
-        "classification_code": "O1"
-      }
-    },
+    "class": "7",
+    "classification_code": "",
     "special_provisions": [
       "172",
       "317",
@@ -2640,7 +2656,8 @@
     ],
     "kemler": "70",
     "tunnel": "E",
-    "transport_cat": "0"
+    "transport_cat": "0",
+    "packing_group": ""
   },
   "UN2924": {
     "name": "FLAMMABLE LIQUID, CORROSIVE, N.O.S.",
@@ -2739,17 +2756,19 @@
     "name": "SELF-HEATING SOLID, ORGANIC, N.O.S.",
     "name_tr": "KENDİLİĞİNDEN ISINAN KATI, ORGANİK, B.N.O.",
     "class": "4.2",
-    "classification_code": "S4",
+    "classification_code": "S2",
     "packing_groups": {
       "II": {
         "kemler": "40",
-        "tunnel": "E",
-        "label": "4.2"
+        "tunnel": "D/E",
+        "label": "4.2",
+        "classification_code": "S2"
       },
       "III": {
         "kemler": "40",
         "tunnel": "E",
-        "label": "4.2"
+        "label": "4.2",
+        "classification_code": "S2"
       }
     },
     "special_provisions": [
@@ -2766,10 +2785,17 @@
     "class": "4.2",
     "classification_code": "S4",
     "packing_groups": {
+      "II": {
+        "kemler": "40",
+        "tunnel": "D/E",
+        "label": "4.2",
+        "classification_code": "S4"
+      },
       "III": {
         "kemler": "40",
         "tunnel": "E",
-        "label": "4.2"
+        "label": "4.2",
+        "classification_code": "S4"
       }
     },
     "special_provisions": [
@@ -17210,7 +17236,6 @@
     "name": "CORROSIVE SOLID, N.O.S.",
     "class": "8",
     "classification_code": "C10",
-    "packing_group": "III",
     "labels": [
       "8"
     ],
@@ -17221,7 +17246,27 @@
     "kemler": "80",
     "tunnel": "E",
     "transport_cat": "3",
-    "name_tr": "AŞINDIRICI KATI, B.B.B."
+    "name_tr": "AŞINDIRICI KATI, B.B.B.",
+    "packing_groups": {
+      "I": {
+        "kemler": "88",
+        "tunnel": "E",
+        "label": "8",
+        "classification_code": "C10"
+      },
+      "II": {
+        "kemler": "80",
+        "tunnel": "E",
+        "label": "8",
+        "classification_code": "C10"
+      },
+      "III": {
+        "kemler": "80",
+        "tunnel": "E",
+        "label": "8",
+        "classification_code": "C10"
+      }
+    }
   },
   "UN1761": {
     "name": "CUPRIETHYLENEDIAMINE SOLUTION",
@@ -28735,7 +28780,6 @@
     "name": "TOXIC SOLID, ORGANIC, N.O.S.",
     "class": "6.1",
     "classification_code": "T2",
-    "packing_group": "III",
     "labels": [
       "6.1"
     ],
@@ -28747,7 +28791,27 @@
     "kemler": "60",
     "tunnel": "E",
     "transport_cat": "2",
-    "name_tr": "ZEHİRLİ KATI, ORGANİK, B.B.B."
+    "name_tr": "ZEHİRLİ KATI, ORGANİK, B.B.B.",
+    "packing_groups": {
+      "I": {
+        "kemler": "66",
+        "tunnel": "C/E",
+        "label": "6.1",
+        "classification_code": "T2"
+      },
+      "II": {
+        "kemler": "60",
+        "tunnel": "D/E",
+        "label": "6.1",
+        "classification_code": "T2"
+      },
+      "III": {
+        "kemler": "60",
+        "tunnel": "E",
+        "label": "6.1",
+        "classification_code": "T2"
+      }
+    }
   },
   "UN2812": {
     "name": "Sodium aluminate, solid",
@@ -29839,7 +29903,6 @@
     "name": "CORROSIVE LIQUID, FLAMMABLE, N.O.S.",
     "class": "8",
     "classification_code": "CF1",
-    "packing_group": "II",
     "labels": [
       "8",
       "3"
@@ -29851,13 +29914,26 @@
     "kemler": "83",
     "tunnel": "D/E",
     "transport_cat": "2",
-    "name_tr": "AŞINDIRICI SIVI, ALEVLENEBİLİR, B.B.B."
+    "name_tr": "AŞINDIRICI SIVI, ALEVLENEBİLİR, B.B.B.",
+    "packing_groups": {
+      "I": {
+        "kemler": "883",
+        "tunnel": "D/E",
+        "label": "8+3",
+        "classification_code": "CF1"
+      },
+      "II": {
+        "kemler": "83",
+        "tunnel": "D/E",
+        "label": "8+3",
+        "classification_code": "CF1"
+      }
+    }
   },
   "UN2921": {
     "name": "CORROSIVE SOLID, FLAMMABLE, N.O.S.",
     "class": "8",
     "classification_code": "CF2",
-    "packing_group": "II",
     "labels": [
       "8",
       "4.1"
@@ -29869,13 +29945,26 @@
     "kemler": "84",
     "tunnel": "E",
     "transport_cat": "2",
-    "name_tr": "AŞINDIRICI KATI, ALEVLENEBİLİR, B.B.B."
+    "name_tr": "AŞINDIRICI KATI, ALEVLENEBİLİR, B.B.B.",
+    "packing_groups": {
+      "I": {
+        "kemler": "884",
+        "tunnel": "E",
+        "label": "8+4.1",
+        "classification_code": "CF2"
+      },
+      "II": {
+        "kemler": "84",
+        "tunnel": "E",
+        "label": "8+4.1",
+        "classification_code": "CF2"
+      }
+    }
   },
   "UN2922": {
     "name": "CORROSIVE LIQUID, TOXIC, N.O.S.",
     "class": "8",
     "classification_code": "CT1",
-    "packing_group": "III",
     "labels": [
       "8",
       "6.1"
@@ -29887,13 +29976,32 @@
     "kemler": "86",
     "tunnel": "E",
     "transport_cat": "3",
-    "name_tr": "AŞINDIRICI SIVI, ZEHİRLİ, B.B.B."
+    "name_tr": "AŞINDIRICI SIVI, ZEHİRLİ, B.B.B.",
+    "packing_groups": {
+      "I": {
+        "kemler": "886",
+        "tunnel": "C/D",
+        "label": "8+6.1",
+        "classification_code": "CT1"
+      },
+      "II": {
+        "kemler": "86",
+        "tunnel": "E",
+        "label": "8+6.1",
+        "classification_code": "CT1"
+      },
+      "III": {
+        "kemler": "86",
+        "tunnel": "E",
+        "label": "8+6.1",
+        "classification_code": "CT1"
+      }
+    }
   },
   "UN2923": {
     "name": "CORROSIVE SOLID, TOXIC, N.O.S.",
     "class": "8",
     "classification_code": "CT2",
-    "packing_group": "III",
     "labels": [
       "8",
       "6.1"
@@ -29905,7 +30013,27 @@
     "kemler": "86",
     "tunnel": "E",
     "transport_cat": "3",
-    "name_tr": "AŞINDIRICI KATI, ZEHİRLİ, B.B.B."
+    "name_tr": "AŞINDIRICI KATI, ZEHİRLİ, B.B.B.",
+    "packing_groups": {
+      "I": {
+        "kemler": "886",
+        "tunnel": "E",
+        "label": "8+6.1",
+        "classification_code": "CT2"
+      },
+      "II": {
+        "kemler": "86",
+        "tunnel": "E",
+        "label": "8+6.1",
+        "classification_code": "CT2"
+      },
+      "III": {
+        "kemler": "86",
+        "tunnel": "E",
+        "label": "8+6.1",
+        "classification_code": "CT2"
+      }
+    }
   },
   "UN2925": {
     "name": "FLAMMABLE SOLID, CORROSIVE, ORGANIC, N.O.S.",
@@ -29947,7 +30075,6 @@
     "name": "TOXIC LIQUID, FLAMMABLE, ORGANIC, N.O.S.",
     "class": "6.1",
     "classification_code": "TF1",
-    "packing_group": "II",
     "labels": [
       "6.1",
       "3"
@@ -29959,7 +30086,21 @@
     "kemler": "63",
     "tunnel": "D/E",
     "transport_cat": "2",
-    "name_tr": "ZEHİRLİ SIVI, ALEVLENEBİLİR, ORGANİK, B.B.B."
+    "name_tr": "ZEHİRLİ SIVI, ALEVLENEBİLİR, ORGANİK, B.B.B.",
+    "packing_groups": {
+      "I": {
+        "kemler": "663",
+        "tunnel": "C/D",
+        "label": "6.1+3",
+        "classification_code": "TF1"
+      },
+      "II": {
+        "kemler": "63",
+        "tunnel": "D/E",
+        "label": "6.1+3",
+        "classification_code": "TF1"
+      }
+    }
   },
   "UN2930": {
     "name": "TOXIC SOLID, FLAMMABLE, ORGANIC, N.O.S.",
@@ -31347,7 +31488,6 @@
     "name": "CORROSIVE SOLID, OXIDIZING, N.O.S.",
     "class": "8",
     "classification_code": "CO2",
-    "packing_group": "II",
     "labels": [
       "8",
       "5.1"
@@ -31359,13 +31499,26 @@
     "kemler": "85",
     "tunnel": "E",
     "transport_cat": "2",
-    "name_tr": "AŞINDIRICI KATI, YÜKSELTGEN, B.B.B."
+    "name_tr": "AŞINDIRICI KATI, YÜKSELTGEN, B.B.B.",
+    "packing_groups": {
+      "I": {
+        "kemler": "885",
+        "tunnel": "E",
+        "label": "8+5.1",
+        "classification_code": "CO2"
+      },
+      "II": {
+        "kemler": "85",
+        "tunnel": "E",
+        "label": "8+5.1",
+        "classification_code": "CO2"
+      }
+    }
   },
   "UN3085": {
     "name": "OXIDIZING SOLID, CORROSIVE, N.O.S.",
     "class": "5.1",
     "classification_code": "OC2",
-    "packing_group": "III",
     "labels": [
       "5.1",
       "8"
@@ -31377,7 +31530,27 @@
     "kemler": "58",
     "tunnel": "E",
     "transport_cat": "3",
-    "name_tr": "YÜKSELTGEN KATI, AŞINDIRICI, B.B.B."
+    "name_tr": "YÜKSELTGEN KATI, AŞINDIRICI, B.B.B.",
+    "packing_groups": {
+      "I": {
+        "kemler": "",
+        "tunnel": "E",
+        "label": "5.1+8",
+        "classification_code": "OC2"
+      },
+      "II": {
+        "kemler": "58",
+        "tunnel": "E",
+        "label": "5.1+8",
+        "classification_code": "OC2"
+      },
+      "III": {
+        "kemler": "58",
+        "tunnel": "E",
+        "label": "5.1+8",
+        "classification_code": "OC2"
+      }
+    }
   },
   "UN3086": {
     "name": "TOXIC SOLID, OXIDIZING, N.O.S.",
@@ -31550,7 +31723,6 @@
     "name": "OXIDIZING LIQUID, CORROSIVE, N.O.S.",
     "class": "5.1",
     "classification_code": "OC1",
-    "packing_group": "III",
     "labels": [
       "5.1",
       "8"
@@ -31562,7 +31734,27 @@
     "kemler": "",
     "tunnel": "E",
     "transport_cat": "3",
-    "name_tr": "YÜKSELTGEN SIVI, AŞINDIRICI, B.B.B."
+    "name_tr": "YÜKSELTGEN SIVI, AŞINDIRICI, B.B.B.",
+    "packing_groups": {
+      "I": {
+        "kemler": "",
+        "tunnel": "E",
+        "label": "5.1+8",
+        "classification_code": "OC1"
+      },
+      "II": {
+        "kemler": "",
+        "tunnel": "E",
+        "label": "5.1+8",
+        "classification_code": "OC1"
+      },
+      "III": {
+        "kemler": "",
+        "tunnel": "E",
+        "label": "5.1+8",
+        "classification_code": "OC1"
+      }
+    }
   },
   "UN3099": {
     "name": "OXIDIZING LIQUID, TOXIC, N.O.S.",
@@ -32119,7 +32311,6 @@
     "name": "WATER-REACTIVE SOLID, FLAMMABLE, N.O.S.",
     "class": "4.3",
     "classification_code": "WF2",
-    "packing_group": "III",
     "labels": [
       "4.3",
       "4.1"
@@ -32131,7 +32322,27 @@
     "kemler": "423",
     "tunnel": "E",
     "transport_cat": "0",
-    "name_tr": "SU İLE TEPKİMEYE GİREN KATI, ALEVLENEBİLİR, B.B.B."
+    "name_tr": "SU İLE TEPKİMEYE GİREN KATI, ALEVLENEBİLİR, B.B.B.",
+    "packing_groups": {
+      "I": {
+        "kemler": "",
+        "tunnel": "E",
+        "label": "4.3+4.1",
+        "classification_code": "WF2"
+      },
+      "II": {
+        "kemler": "423",
+        "tunnel": "D/E",
+        "label": "4.3+4.1",
+        "classification_code": "WF2"
+      },
+      "III": {
+        "kemler": "423",
+        "tunnel": "E",
+        "label": "4.3+4.1",
+        "classification_code": "WF2"
+      }
+    }
   },
   "UN3133": {
     "name": "WATER-REACTIVE SOLID, OXIDIZING, N.O.S.",
@@ -32370,7 +32581,6 @@
     "name": "WATER-REACTIVE LIQUID, N.O.S.",
     "class": "4.3",
     "classification_code": "W1",
-    "packing_group": "III",
     "labels": [
       "4.3"
     ],
@@ -32381,7 +32591,27 @@
     "kemler": "323",
     "tunnel": "E",
     "transport_cat": "0",
-    "name_tr": "SU İLE TEPKİMEYE GİREN SIVI, B.B.B."
+    "name_tr": "SU İLE TEPKİMEYE GİREN SIVI, B.B.B.",
+    "packing_groups": {
+      "I": {
+        "kemler": "X323",
+        "tunnel": "B/E",
+        "label": "4.3",
+        "classification_code": "W1"
+      },
+      "II": {
+        "kemler": "323",
+        "tunnel": "D/E",
+        "label": "4.3",
+        "classification_code": "W1"
+      },
+      "III": {
+        "kemler": "323",
+        "tunnel": "E",
+        "label": "4.3",
+        "classification_code": "W1"
+      }
+    }
   },
   "UN3149": {
     "name": "HYDROGEN PEROXIDE AND PEROXYACETIC ACID MIXTURE with acid(s), water and not more than 5 % peroxyacetic acid, STABILIZED",
@@ -32817,7 +33047,6 @@
     "name": "SELF-HEATING LIQUID, ORGANIC, N.O.S.",
     "class": "4.2",
     "classification_code": "S1",
-    "packing_group": "III",
     "labels": [
       "4.2"
     ],
@@ -32828,7 +33057,21 @@
     "kemler": "30",
     "tunnel": "E",
     "transport_cat": "3",
-    "name_tr": "KENDİLİĞİNDEN ISINAN SIVI, ORGANİK, B.B.B."
+    "name_tr": "KENDİLİĞİNDEN ISINAN SIVI, ORGANİK, B.B.B.",
+    "packing_groups": {
+      "II": {
+        "kemler": "30",
+        "tunnel": "D/E",
+        "label": "4.2",
+        "classification_code": "S1"
+      },
+      "III": {
+        "kemler": "30",
+        "tunnel": "E",
+        "label": "4.2",
+        "classification_code": "S1"
+      }
+    }
   },
   "UN3184": {
     "name": "SELF-HEATING LIQUID, TOXIC, ORGANIC, N.O.S.",
@@ -33951,7 +34194,6 @@
     "name": "CORROSIVE SOLID, ACIDIC, INORGANIC, N.O.S.",
     "class": "8",
     "classification_code": "C2",
-    "packing_group": "III",
     "labels": [
       "8"
     ],
@@ -33962,13 +34204,32 @@
     "kemler": "80",
     "tunnel": "E",
     "transport_cat": "3",
-    "name_tr": "AŞINDIRICI KATI, ASİDİK, İNORGANİK, B.B.B."
+    "name_tr": "AŞINDIRICI KATI, ASİDİK, İNORGANİK, B.B.B.",
+    "packing_groups": {
+      "I": {
+        "kemler": "88",
+        "tunnel": "E",
+        "label": "8",
+        "classification_code": "C2"
+      },
+      "II": {
+        "kemler": "80",
+        "tunnel": "E",
+        "label": "8",
+        "classification_code": "C2"
+      },
+      "III": {
+        "kemler": "80",
+        "tunnel": "E",
+        "label": "8",
+        "classification_code": "C2"
+      }
+    }
   },
   "UN3261": {
     "name": "CORROSIVE SOLID, ACIDIC, ORGANIC, N.O.S.",
     "class": "8",
     "classification_code": "C4",
-    "packing_group": "III",
     "labels": [
       "8"
     ],
@@ -33979,13 +34240,32 @@
     "kemler": "80",
     "tunnel": "E",
     "transport_cat": "3",
-    "name_tr": "AŞINDIRICI KATI, ASİDİK, ORGANİK, B.B.B."
+    "name_tr": "AŞINDIRICI KATI, ASİDİK, ORGANİK, B.B.B.",
+    "packing_groups": {
+      "I": {
+        "kemler": "88",
+        "tunnel": "E",
+        "label": "8",
+        "classification_code": "C4"
+      },
+      "II": {
+        "kemler": "80",
+        "tunnel": "E",
+        "label": "8",
+        "classification_code": "C4"
+      },
+      "III": {
+        "kemler": "80",
+        "tunnel": "E",
+        "label": "8",
+        "classification_code": "C4"
+      }
+    }
   },
   "UN3262": {
     "name": "CORROSIVE SOLID, BASIC, INORGANIC, N.O.S.",
     "class": "8",
     "classification_code": "C6",
-    "packing_group": "III",
     "labels": [
       "8"
     ],
@@ -33996,13 +34276,32 @@
     "kemler": "80",
     "tunnel": "E",
     "transport_cat": "3",
-    "name_tr": "AŞINDIRICI KATI, BAZİK, İNORGANİK, B.B.B."
+    "name_tr": "AŞINDIRICI KATI, BAZİK, İNORGANİK, B.B.B.",
+    "packing_groups": {
+      "I": {
+        "kemler": "88",
+        "tunnel": "E",
+        "label": "8",
+        "classification_code": "C6"
+      },
+      "II": {
+        "kemler": "80",
+        "tunnel": "E",
+        "label": "8",
+        "classification_code": "C6"
+      },
+      "III": {
+        "kemler": "80",
+        "tunnel": "E",
+        "label": "8",
+        "classification_code": "C6"
+      }
+    }
   },
   "UN3263": {
     "name": "CORROSIVE SOLID, BASIC, ORGANIC, N.O.S.",
     "class": "8",
     "classification_code": "C8",
-    "packing_group": "III",
     "labels": [
       "8"
     ],
@@ -34013,7 +34312,27 @@
     "kemler": "80",
     "tunnel": "E",
     "transport_cat": "3",
-    "name_tr": "AŞINDIRICI KATI, BAZİK, ORGANİK, B.B.B."
+    "name_tr": "AŞINDIRICI KATI, BAZİK, ORGANİK, B.B.B.",
+    "packing_groups": {
+      "I": {
+        "kemler": "88",
+        "tunnel": "E",
+        "label": "8",
+        "classification_code": "C8"
+      },
+      "II": {
+        "kemler": "80",
+        "tunnel": "E",
+        "label": "8",
+        "classification_code": "C8"
+      },
+      "III": {
+        "kemler": "80",
+        "tunnel": "E",
+        "label": "8",
+        "classification_code": "C8"
+      }
+    }
   },
   "UN3268": {
     "name": "SAFETY DEVICES, electrically initiated",

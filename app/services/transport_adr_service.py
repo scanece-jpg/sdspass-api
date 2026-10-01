@@ -282,6 +282,24 @@ def lookup_by_cas(cas: str, concentration: Optional[float] = None,
     return details
 
 
+def class8_pg_for_cas(cas: str) -> Optional[str]:
+    """Tablo A'da adıyla yer alan maddenin Sınıf 8 ambalaj grubu (birden çok giriş varsa en ağırı).
+    ADR 2.2.8.1.6.3 hesabında bileşenin "atanmış" PG'si olarak kullanılır. Yoksa None."""
+    entry = _SEED_ENTRIES.get(str(cas).strip())
+    if not entry:
+        return None
+    best = None
+    for rng in (entry if isinstance(entry, list) else [entry]):
+        un, pg = rng.get('un'), rng.get('pg')
+        if not un or pg not in ('I', 'II', 'III'):
+            continue
+        if get_adr_details(un, pg).get('class') != '8':
+            continue
+        if best is None or ['I', 'II', 'III'].index(pg) < ['I', 'II', 'III'].index(best):
+            best = pg
+    return best
+
+
 def get_adr_details(un_no: str, packing_group: str = 'II') -> dict:
     """
     UN numarası ve ambalaj grubundan ADR detaylarını getir.

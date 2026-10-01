@@ -3425,6 +3425,7 @@ function updatePhysFieldsByForm() {
     ],
     solid: [
       ['', '— Alt tür seçin (opsiyonel) —'],
+      ['tablet',      'Tablet'],
       ['granule',     'Granül / Pelet'],
       ['flake',       'Pul / Flake'],
       ['powder_fine', 'Toz / Pudra'],
@@ -3627,6 +3628,9 @@ function _autofillPhysFields(tp) {
       _updateSrcBadge(key, 'theo');
       _checkPhysThreshold(key, val);
     } else {
+      // Motor artık değer vermiyorsa (örn. katı üründe yoğunluk) önceki motor dolgusu silinir —
+      // aksi hâlde eski tahmin bir sonraki hesapta "kullanıcı değeri" gibi gönderiliyordu
+      if (el.dataset.source === 'theo') el.value = '';
       el.dataset.source = '';
       _updateSrcBadge(key, '');
     }

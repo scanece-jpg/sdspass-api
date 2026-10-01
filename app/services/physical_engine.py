@@ -2724,6 +2724,17 @@ def calculate(comps: List[Dict], form: str = 'liquid',
     # Teorik fiziksel özellikler — katı/toz için yoğunluk+çözünürlük, gaz için buhar yoğunluğu
     theo_props = calc_theo_props(comps) or {}
 
+    # Katı/toz üründe bileşen yoğunluklarından karışım yoğunluğu hesaplanmaz: Σwᵢ/Σ(wᵢ/ρᵢ) sıvı
+    # karışım formülüdür (ISO 2811 sıvılar içindir); tablet/granül/tozun yoğunluğu gözenek ve
+    # sıkıştırmaya bağlıdır. Ölçüm girilmediyse Bölüm 9'a değer yazılmaz.
+    if form in ('solid', 'powder') and isinstance(theo_props.get('density'), dict):
+        _d = theo_props['density']
+        theo_props['density'] = {
+            'value': None, 'display': 'Belirlenmemiştir', 'estimate': _d.get('value'),
+            'measured': False, 'estimate_only': True, 'method': '—', 'standard': '',
+            'note': 'Katı üründe bileşenlerden hesaplanmaz — ölçüm (ör. ISO 1183 / yığın yoğunluğu) girin.',
+        }
+
     # Test verisi varsa üzerine yaz
     if test_data:
         _apply_test_data(theo_props, test_data)

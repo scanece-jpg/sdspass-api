@@ -1790,6 +1790,12 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         pm = phys_methods.get(key, {})
         if not pm:
             return ''
+        # Değer yoksa ("Belirlenmemiştir") yöntem/kaynak notu yazılmaz — "hesaplanmış" çelişkisi
+        _v = phys.get(key)
+        _vd = (_v.get('display') if isinstance(_v, dict) else _v) or ''
+        if (isinstance(_v, dict) and (_v.get('nd') or _v.get('na'))) or str(_vd).strip() in (
+                '', 'Belirlenmemiştir', 'Bilgi yok', 'Uygulanamaz', 'Not determined', 'No data'):
+            return ''
         if pm.get('note_text'):
             return (f'<br/><font size="6" color="#888888">{pm["note_text"]}</font>'
                     if lang == 'TR' else '')
@@ -1861,6 +1867,16 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             ph_str = str(raw)
         return _normalize_ph(ph_str) + _method_note('ph')
 
+    def _appearance():
+        """Görünüm — yalnız "Katı"/"Toz" yazılmışsa seçilen alt tür eklenir (örn. "Katı (tablet)")."""
+        txt = _text(f'appearance_{lang}') or _text('appearance') or na
+        _sub = {'tablet': 'tablet', 'granule': 'granül', 'flake': 'pul', 'powder_fine': 'toz',
+                'powder_coarse': 'kaba toz', 'powder_nano': 'nano toz', 'block': 'blok',
+                'polymer': 'polimer'}.get(str(sds_data.get('form_sub') or product.get('form_sub') or ''))
+        if lang == 'TR' and _sub and str(txt).strip().lower() in ('katı', 'kati', 'toz', 'solid', 'powder'):
+            return f'{str(txt).strip()} ({_sub})'
+        return txt
+
     def _text(key):
         """Birimsiz metin alanı — hem string hem dict formatını destekler.
         Bulunamadığında None döner (or-zinciri için)."""
@@ -1917,8 +1933,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         _ph_conc_lbl = f'pH Value ({_ph_conc_raw}% aqueous solution)'
 
     all_phys_rows = [
-        [phys_prop(lang,'appearance'),
-         _text(f'appearance_{lang}') or _text('appearance') or na],
+        [phys_prop(lang,'appearance'), _appearance()],
         [phys_prop(lang,'color'),         _text('color') or na],
         [phys_prop(lang,'odor'),          _text('odor')  or na],
         [(_ph_conc_lbl if _is_solid_form else phys_prop(lang,'ph')), _pv_ph()],

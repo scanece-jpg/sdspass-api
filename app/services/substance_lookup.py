@@ -886,7 +886,8 @@ def _supplement_from_echa_cl(cas: str, sea_result: dict) -> dict:
 
     echa_legacy = _cl_to_legacy(echa_entry, 3, 'ECHA C&L')
     sea_h_set = {h['h_code'] for h in sea_result.get('hazards', []) if h.get('h_code')}
-    extra_hazards = [h for h in echa_legacy.get('hazards', [])
+    # SEA Md.6(1)(c): Ek-6'da listelenmeyen sınıflar — işaretlenir ki kullanıcı görsün/kaldırabilsin
+    extra_hazards = [{**h, '_echa_supplement': True} for h in echa_legacy.get('hazards', [])
                      if h.get('h_code') and h['h_code'] not in sea_h_set]
 
     if not extra_hazards:
@@ -936,6 +937,45 @@ def _is_stale(entry: dict) -> bool:
     if fetched.tzinfo is None:
         fetched = fetched.replace(tzinfo=timezone.utc)
     return (datetime.now(timezone.utc) - fetched).days >= _ECHA_TTL_DAYS
+
+
+_ECHA_SYNC_TIMEOUT = 20   # sn — eşzamanlı ECHA çekiminde en fazla bu kadar beklenir
+
+
+async def ensure_echa_supplement(cas: str) -> None:
+    """SEA Ek-6'daki madde için ECHA C&L önbelleği yoksa/eskiyse ÖNCE çek, sonra dön.
+
+    Ek-6 dışı sınıfların (SEA Md.6(1)(c)) takviyesi önceden yalnız arka planda çekiliyordu;
+    ilk sorguda eksik (örn. NaOH H290 yok), sonrakinde tam sonuç çıkıyordu. Artık hesaplama ve
+    CAS sorgusu bu çekimi bekler. Başarısızlıkta _ECHA_RETRY_SEC boyunca yeniden denenmez;
+    ECHA'ya ulaşılamazsa mevcut (varsa eski) kayıtla devam edilir.
+    """
+    cas = (cas or '').strip()
+    if not cas or not _sea_ek6_lookup(cas=cas):
+        return
+    entry = _read_cl_file(_ECHA_CL_DIR, cas)
+    if entry and not _is_stale(entry):
+        return
+    now = time.time()
+    with _echa_bg_lock:
+        if cas in _echa_inflight or now - _echa_last_try.get(cas, 0) < _ECHA_RETRY_SEC:
+            return
+        _echa_inflight.add(cas)
+        _echa_last_try[cas] = now
+    try:
+        import asyncio as _asyncio
+        from app.services.echa_service import lookup_echa_api as _lei
+        res = await _asyncio.wait_for(_lei(cas, refresh=bool(entry)), timeout=_ECHA_SYNC_TIMEOUT)
+        if res:
+            _echa_last_try.pop(cas, None)
+            # Oturum önbelleğinden dönen sonuç dosyaya yazılmamış olabilir — takviye dosyadan okunur
+            if res.get('_cache_source') == 'echa_cl' and not _read_cl_file(_ECHA_CL_DIR, cas):
+                save_echa_cl_substance(cas, res)
+    except Exception as e:
+        print(f'[echa_sync] {cas}: çekilemedi ({type(e).__name__}) — mevcut kayıtla devam')
+    finally:
+        with _echa_bg_lock:
+            _echa_inflight.discard(cas)
 
 
 def _fetch_echa_background(cas: str, refresh: bool = False):

@@ -82,6 +82,7 @@ async def refresh_components(components: list, form: str) -> list:
     )
     from app.services.echa_service import _dedupe_h_codes as _dedup, lookup_echa_api as _lu_echa
     from app.services.reach_db import get_reg_no as _reg_no
+    from app.services.substance_lookup import ensure_echa_supplement as _ensure_echa
 
     def _mark(c: dict, cas: str, priority, sea_ek6=False, annex_vi=False) -> None:
         """Kaynak önceliği (1 SEA Ek-6, 2 Annex VI, ≥3 resmî olmayan) ve REACH kayıt no'su —
@@ -119,6 +120,9 @@ async def refresh_components(components: list, form: str) -> list:
         if not cas:
             return comp
         try:
+            # Ek-6 maddesinde Ek-6 dışı sınıfların ECHA takviyesi hesaptan önce tamamlanır —
+            # önceden arka planda çekildiği için ilk hesapta eksik, sonrakinde tam çıkıyordu
+            await _ensure_echa(cas)
             fresh = _lu_sub(cas, form=form)
             if fresh is not None:
                 # DB'de kayıt var — hazards boşsa "sınıflandırılmamış" (su, glikoz vb.)
@@ -128,8 +132,22 @@ async def refresh_components(components: list, form: str) -> list:
                     raw = {'h_codes':        [h['h_code'] for h in fresh['hazards']],
                            'hazard_classes': [h['h_class'] for h in fresh['hazards']]}
                     _dedup(raw)
-                    c['hazards'] = [{'h_class': cls, 'h_code': code}
-                                    for cls, code in zip(raw['hazard_classes'], raw['h_codes'])]
+                    # SEA Md.6(1)(c): Ek-6'da listelenmeyen, ECHA bildirimlerinden eklenen sınıflar
+                    # işaretlenir; kullanıcının kaldırdıkları (echa_removed) hesaba katılmaz.
+                    # Ek-6'nın kendi sınıfları bağlayıcıdır — kaldırma listesi onlara uygulanmaz.
+                    supp = {_h4(h['h_code']) for h in fresh['hazards'] if h.get('_echa_supplement')}
+                    removed = {_h4(x) for x in (comp.get('echa_removed') or [])} & supp
+                    c['hazards'] = []
+                    c['ek6_supplements'] = []
+                    for cls, code in zip(raw['hazard_classes'], raw['h_codes']):
+                        if _h4(code) in supp:
+                            c['ek6_supplements'].append({'h_code': _h4(code), 'h_class': cls,
+                                                         'removed': _h4(code) in removed})
+                            if _h4(code) in removed:
+                                continue
+                            c['hazards'].append({'h_class': cls, 'h_code': code, 'echa_supplement': True})
+                        else:
+                            c['hazards'].append({'h_class': cls, 'h_code': code})
                     _apply_m_ate(c, comp, fresh)
                 else:
                     c['hazards'] = []
@@ -490,8 +508,28 @@ async def classify(inp: dict) -> dict:
                     if aq else None),
     }
 
+    # ── Ek-6 dışı sınıflar (SEA Md.6(1)(c)) — panel kutusu ve Bölüm 16 notu ─────
+    ek6_supp = [{'cas': c.get('cas') or c.get('cas_no') or '',
+                 'name': c.get('name_tr') or c.get('name') or '', **e}
+                for c in comps for e in (c.get('ek6_supplements') or [])]
+    cls_notes = list(phys_res.get('classification_notes', []))
+    if ek6_supp:
+        _used = [e for e in ek6_supp if not e['removed']]
+        _rem = [e for e in ek6_supp if e['removed']]
+        _fmt = lambda lst: '; '.join(f"{e['name'] or e['cas']} — {e['h_code']}" for e in lst)
+        tr_txt = ('Ek-6 dışı sınıflar: SEA Ek-6’da yer alan maddelerin listede bulunmayan tehlike '
+                  'sınıfları SEA Md.6(1)(c) gereği ECHA C&L bildirimlerine göre değerlendirilmiştir'
+                  + (f' ({_fmt(_used)})' if _used else '') + '.'
+                  + (f' Kullanıcı kararıyla dikkate alınmayanlar: {_fmt(_rem)}.' if _rem else ''))
+        en_txt = ('Classes not listed in Annex VI: hazard classes not covered by the harmonised entry were '
+                  'assessed from ECHA C&L notifications (CLP Art. 4(3))'
+                  + (f' ({_fmt(_used)})' if _used else '') + '.'
+                  + (f' Not applied by user decision: {_fmt(_rem)}.' if _rem else ''))
+        cls_notes.append({'TR': tr_txt, 'EN': en_txt})
+
     return {
         'components':  comps,
+        'ek6_supplements': ek6_supp,
         'h_codes':     h_codes,
         'all_h_codes': all_h,
         'signal':      signal,
@@ -510,7 +548,7 @@ async def classify(inp: dict) -> dict:
         'warnings':    (phys_res.get('warnings', []) + stot_res.get('warnings', [])
                         + clp_res.get('warnings', [])),
         'pending_decisions': phys_res.get('pending_decisions', []),
-        'classification_notes': phys_res.get('classification_notes', []),
+        'classification_notes': cls_notes,
         'label_components': label_components(comps, all_h),
     }
 

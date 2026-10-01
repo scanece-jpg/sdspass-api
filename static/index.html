@@ -83,6 +83,8 @@ body::after{display:none}
 .hchip.warn{background:rgba(245,166,35,.12);border-color:rgba(245,166,35,.3);color:var(--warn)}
 .hchip.annex{border-style:dashed;opacity:.85}
 .hchip.annex::after{content:'ᴬᵛᴵ';font-size:7px;opacity:.6;margin-left:1px}
+.hchip.echa{border-style:dotted;border-width:2px}
+.hchip.echa::after{content:'ECHA';font-size:7px;opacity:.7;margin-left:2px}
 .hchip-del{background:none;border:none;color:inherit;cursor:pointer;font-size:11px;padding:0;line-height:1;opacity:.6}
 .hchip-del:hover{opacity:1}
 .add-chip-btn{background:none;border:1px dashed var(--border2);color:var(--text3);border-radius:4px;padding:2px 8px;font-size:10px;cursor:pointer}
@@ -1209,7 +1211,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
 <script src="js/modules/cas-lookup.js?v=20260617"></script>
 <script src="js/modules/component-manager.js?v=20260617"></script>
 <script src="js/modules/conc-selector.js?v=20260617"></script>
-<script src="js/modules/calculator.js?v=20260930d"></script>
+<script src="js/modules/calculator.js?v=20261001"></script>
 <script src="js/modules/results-renderer.js?v=20260930"></script>
 <script src="js/modules/pdf-exporter.js?v=20260617"></script>
 <script src="js/app.js?v=20260617"></script>
@@ -2111,7 +2113,7 @@ function addComp(pf = {}) {
       <span id="ate_summary${id}" style="font-size:10px;color:var(--accent);margin-left:6px"></span>
     </div>`;
   document.getElementById('comps').appendChild(div);
-  if (pf.hazards) pf.hazards.forEach(h => addChip(id, h.h_class, h.h_code, h._annex_supplement));
+  if (pf.hazards) pf.hazards.forEach(h => addChip(id, h.h_class, h.h_code, h._annex_supplement, h._echa_supplement || h.echa_supplement));
   return id;
 }
 
@@ -2486,7 +2488,23 @@ function _addFillerComp(cas, remaining) {
   onCas(id);
 }
 
-function addChip(id, hclass, hcode, annexSupplement) {
+// Ek-6 dışı sınıf etiketi kaldırılınca bileşen satırına kaydet — sunucu her hesapta veriyi
+// resmî kaynaktan tazelediği için bu kodu kullanıcının kararıyla dışarıda bırakır.
+function _delChip(btn) {
+  const chip = btn.parentNode;
+  if (chip.dataset.echa) {
+    const w = chip.closest('.cw');
+    if (w) {
+      const code = (chip.dataset.code || '').replace(/[*\s]/g,'').substring(0,4);
+      const list = (w.dataset.echaRemoved || '').split(',').filter(Boolean);
+      if (!list.includes(code)) list.push(code);
+      w.dataset.echaRemoved = list.join(',');
+    }
+  }
+  chip.remove();
+}
+
+function addChip(id, hclass, hcode, annexSupplement, echaSupplement) {
   const chips = document.getElementById('chips'+id);
   if (!chips) return;
   const code = (hcode||'').replace(/[*\s]/g,'').substring(0,4);
@@ -2507,8 +2525,19 @@ function addChip(id, hclass, hcode, annexSupplement) {
   span.dataset.hc = hclass;
   span.dataset.code = hcode;
   if (annexSupplement) span.dataset.annex = '1';
-  const tooltip = annexSupplement ? ' title="Annex VI takviye — TR Ek-6\'da bu sınıf yok"' : '';
-  span.innerHTML = `<span${tooltip}>${hcode||hclass}</span> <button class="hchip-del" onclick="this.parentNode.remove()">×</button>`;
+  if (echaSupplement) {
+    span.dataset.echa = '1';
+    span.classList.add('echa');
+    // Kullanıcı yeniden eklediyse "kaldırıldı" kaydını sil
+    const w = chips.closest('.cw');
+    if (w && w.dataset.echaRemoved) {
+      w.dataset.echaRemoved = w.dataset.echaRemoved.split(',').filter(c => c && c !== code).join(',');
+    }
+  }
+  const tooltip = echaSupplement
+    ? ' title="Ek-6 dışı sınıf — ECHA bildirimlerine göre eklendi (SEA Md.6(1)(c)). Madde SEA Ek-6\'da yer alır ama bu sınıf listede yok; sınıf ECHA C&amp;L bildirimlerinin çoğunluğuna dayanır. Uygun değilse × ile kaldırabilirsiniz."'
+    : (annexSupplement ? ' title="Annex VI takviye — TR Ek-6\'da bu sınıf yok"' : '');
+  span.innerHTML = `<span${tooltip}>${hcode||hclass}</span> <button class="hchip-del" onclick="_delChip(this)">×</button>`;
   chips.appendChild(span);
 }
 
@@ -2625,7 +2654,10 @@ async function onCas(id) {
       setTimeout(() => { if(casEl){ casEl.style.borderColor=''; }}, 1800);
     }
 
-    if (data.hazards) data.hazards.forEach(h => addChip(id, h.h_class, h.h_code, h._annex_supplement));
+    // Yeni madde sorgulandı — önceki maddenin "kaldırılan Ek-6 dışı sınıf" kaydı taşınmasın
+    const _cwEl = document.getElementById('cw'+id);
+    if (_cwEl && _cwEl.dataset.echaCas !== cas) { _cwEl.dataset.echaRemoved = ''; _cwEl.dataset.echaCas = cas; }
+    if (data.hazards) data.hazards.forEach(h => addChip(id, h.h_class, h.h_code, h._annex_supplement, h._echa_supplement));
 
     // ── M-Faktör — SEA Ek-6'dan otomatik doldur ─────────────────────────────────
     // m_factors: { acute: 10, chronic: 100 } — sucul toksik maddeler için
@@ -3152,8 +3184,11 @@ function getComps() {
     const hazards = [...w.querySelectorAll('.hchip')].map(c => ({
       h_class: c.dataset.hc,
       h_code: c.dataset.code,
-      ...(c.dataset.annex ? { _annex_supplement: true } : {})
+      ...(c.dataset.annex ? { _annex_supplement: true } : {}),
+      ...(c.dataset.echa ? { _echa_supplement: true } : {})
     }));
+    // Kullanıcının kaldırdığı Ek-6 dışı (ECHA) sınıflar — sunucu bunları hesaba katmaz
+    const echa_removed = (w.dataset.echaRemoved || '').split(',').filter(Boolean);
     const ec    = w.querySelector('.ec-input')?.value?.trim() || '';
     const reach = w.querySelector('.reach-input')?.value?.trim() || '';
     const kkdik = w.querySelector('.kkdik-input')?.value?.trim() || '';
@@ -3181,7 +3216,7 @@ function getComps() {
     const ec50_fish    = parseFloat(document.getElementById('ec50_fish'    + cwId)?.value) || null;
     const ec50_daphnia = parseFloat(document.getElementById('ec50_daphnia' + cwId)?.value) || null;
     const ec50_noec    = parseFloat(document.getElementById('ec50_noec'    + cwId)?.value) || null;
-    return { cas, name, name_tr, conc, concMin, concMax, concStr, hazards, ec, reach, kkdik, m_factors:{ acute: mf, chronic: mfc }, scl, sclRaw, annex_vi: annexVi, ate_unknown, ate, comp_type, ec50_algae, ec50_fish, ec50_daphnia, ec50_noec };
+    return { cas, name, name_tr, conc, concMin, concMax, concStr, hazards, ec, reach, kkdik, m_factors:{ acute: mf, chronic: mfc }, scl, sclRaw, annex_vi: annexVi, ate_unknown, ate, comp_type, ec50_algae, ec50_fish, ec50_daphnia, ec50_noec, echa_removed };
   }).filter(c => c.cas || c.name);
 }
 
@@ -4120,6 +4155,17 @@ function renderAll(s) {
         </select>
       </div>`;
     });
+  }
+  // ── Ek-6 dışı sınıflar (SEA Md.6(1)(c)) — Ek-6'daki maddeye ECHA bildirimlerinden eklenen sınıflar ──
+  const _ek6s = window._lastEk6Supp || [];
+  if (_ek6s.length) {
+    h += `<div class="r-title">ⓘ Ek-6 dışı sınıflar — ECHA bildirimlerine göre eklendi</div>
+      <div class="warn-box" style="margin-bottom:8px;font-size:11px">
+        <div style="margin-bottom:4px">Bu maddeler SEA Ek-6'da yer alır; aşağıdaki sınıflar Ek-6 listesinde olmadığı için
+        SEA Md.6(1)(c) gereği ECHA C&amp;L bildirimlerinin çoğunluğuna göre eklendi. Uygun değilse bileşen satırındaki
+        <b>ECHA</b> işaretli etiketi × ile kaldırın.</div>
+        ${_ek6s.map(e => `<div>• ${_esc(e.name || e.cas)} (${_esc(e.cas)}): <b>${_esc(e.h_code)}</b>${e.h_class ? ' — ' + _esc(e.h_class) : ''}${e.removed ? ' <span style="color:var(--text3)">(kullanıcı kaldırdı — hesaba katılmadı)</span>' : ''}</div>`).join('')}
+      </div>`;
   }
   const _given = Object.entries(window._physDecisionLabels || {});
   if (_given.length) {

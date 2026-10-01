@@ -1382,6 +1382,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         _supplier_txt = 'tedarikçiden temin edilir' if lang == 'TR' else 'obtain from supplier'
         _any_eu = False
         _any_tr_missing = False
+        _any_ek6_supp = False
 
         def _eu_no(v: str) -> str:
             v = (v or '').strip()
@@ -1418,6 +1419,12 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             )
             # Her sınıflandırma kendi satırında — uzun metinde kelime kırılmasını önle
             _clf_str = translate_hclass_list(r.get('hazards',''), lang) or term(lang,'not_classified')
+            # SEA Md.6(1)(c): Ek-6'daki maddeye ECHA bildirimlerinden eklenen (Ek-6 dışı) sınıf → †
+            for _sh in comp_obj.get('hazards') or []:
+                _shc = str(_sh.get('h_code') or '').replace('*', '').strip()[:4]
+                if _sh.get('echa_supplement') and _shc and _shc in _clf_str:
+                    _clf_str = _re.sub(rf'{_shc}(?![0-9†])', f'{_shc} †', _clf_str, count=1)
+                    _any_ek6_supp = True
             _clf_para = Paragraph(_clf_str.replace('; ', '<br/>'), styles['body'])
             # Ad ve konsantrasyon Paragraph'a sarılır — kelime kırılmasını ve
             # PDF text extraction artifaktlarını önler
@@ -1434,6 +1441,15 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         # Not: 18mm çok dar, 25mm de "Konsantrasyo n" bölünüyordu → 30mm'ye çıkarıldı
         story.append(data_table(tbl_data,
             [35*mm, 51*mm, 30*mm, 59*mm], styles))
+        if _any_ek6_supp:
+            story.append(Paragraph(
+                "† Ek-6 dışı sınıf — ECHA bildirimlerine göre eklendi: madde SEA Ek-6'da yer alır, bu "
+                "sınıf listede bulunmadığından SEA Md.6(1)(c) gereği ECHA C&amp;L bildirimlerine göre "
+                "değerlendirilmiştir." if lang == 'TR' else
+                "† Class not covered by the harmonised entry — added from ECHA C&amp;L notifications "
+                "(CLP Art. 4(3)).",
+                styles['small']
+            ))
         # Kayıt numarası notları
         if _any_tr_missing:
             story.append(Paragraph(
@@ -3082,6 +3098,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             '<b>' + ('Sınıflandırma notları:' if lang == 'TR' else 'Classification notes:') + '</b>',
             styles['body_bold']))
         for _n in _cls_notes:
+            _n = str(_n).replace('&', '&amp;').replace('<', '&lt;').replace('>', '&gt;')
             story.append(Paragraph(f'• {_n}', styles['small']))
         story.append(Spacer(1, 4))
 

@@ -453,6 +453,7 @@ async def generate_pdf(data: dict = Body(...)):
                     'note_flag': h.get('note_flag'),
                     'note':      h.get('note'),
                     'repro_sub': h.get('repro_sub'),
+                    'echa_supplement': h.get('echa_supplement') or None,   # Ek-6 dışı sınıf (Bölüm 3 †)
                 }.items() if v is not None and v != ''}
                 for h in c.get('hazards', [])
             ]
@@ -467,27 +468,10 @@ async def generate_pdf(data: dict = Body(...)):
             return result
         mapped_comps = [_map_comp(c) for c in components]
 
-        # ── Bileşen tehlike kodlarını doğrula (Bölüm 3 kalite kontrolü) ──────────
-        # SEA Ek-6'da bulunan maddeler için frontend'den gelen hatalı/fazla tehlike
-        # kodlarını yetkili DB verisiyle değiştir.
-        # Gerekçe: Kullanıcı manuel ekleme, tarayıcı önbelleği veya CAS sorgulama
-        # hatası nedeniyle yanlış H kodları ekleyebilir.
-        # Yalnızca sea_ek6=True maddeler için geçerlidir; bilinmeyen maddeler
-        # (custom / ECHA-only) için frontend verisi korunur.
-        try:
-            from app.services.substance_lookup import lookup_substance as _lu_check
-            for _mc in mapped_comps:
-                _cas = _mc.get('cas_no', '').strip()
-                if not _cas:
-                    continue
-                _sub = _lu_check(_cas, form=_prod_form_for_refresh)
-                if _sub and _sub.get('sea_ek6', False):
-                    # SEA Ek-6 yetkili veri — frontend'den gelen kodları geçersiz kıl
-                    _mc['hazards'] = _sub.get('hazards', [])
-                if _sub and _sub.get('suppl_hazards'):
-                    _mc['suppl_hazards'] = _sub['suppl_hazards']
-        except Exception:
-            pass  # Hata durumunda frontend verisi korunur
+        # Bölüm 3 tehlike kodları yukarıda _overlay ile sınıflandırma hattının tazelediği veriden
+        # gelir (SEA Ek-6 yetkili; Ek-6 dışı ECHA sınıfları işaretli, kullanıcının kaldırdıkları hariç).
+        # Önceden burada DB'den ham kodlar yeniden yazılıyordu — kullanıcının kaldırdığı Ek-6 dışı
+        # sınıf Bölüm 3'e geri geliyordu.
 
         # Revizyon tarihi
         import datetime
@@ -687,6 +671,12 @@ async def substance_lookup(cas: str, form: str = None):
 
     oel = get_oel(cas)
 
+    # SEA Ek-6 maddesinde Ek-6 dışı sınıfların ECHA takviyesi önce tamamlanır (ilk sorguda eksik kalmasın)
+    try:
+        from app.services.substance_lookup import ensure_echa_supplement
+        await ensure_echa_supplement(cas)
+    except Exception:
+        pass
     # Sıra 1-2-3: Lokal dosyalar
     result = lookup_substance(cas, form=form)
 
@@ -1123,6 +1113,7 @@ async def sds_calculate(body: dict = Body(...)):
             'ate_details': core['ate_details'],
             'pending_decisions': core['pending_decisions'],
             'label_components':  core['label_components'],   # etikette adı zorunlu bileşenler
+            'ek6_supplements':   core.get('ek6_supplements', []),   # Ek-6 dışı (ECHA) sınıflar
             'summary':     _pipe.summary(core),   # PDF ile karşılaştırma (güvenlik ağı)
             'form_sub':    form_sub or None,
             'voc_content': body.get('voc_content'),

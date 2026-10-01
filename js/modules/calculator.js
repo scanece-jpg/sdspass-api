@@ -175,6 +175,8 @@ const CalculatorModule = (() => {
         _source:    'python-api',   // izleme için kaynak etiketi
       };
 
+      // Ek-6'daki maddelere ECHA bildirimlerinden eklenen (Ek-6 dışı) sınıflar — sağ panelde gösterilir
+      window._lastEk6Supp = data.ek6_supplements || [];
       _lastPayload = payload;
       _lastSummary = data.summary || null;
       StateStore.setCalcResult(result);

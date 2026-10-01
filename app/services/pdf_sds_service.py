@@ -1890,219 +1890,192 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         s = str(v).strip()
         return s if s else None
 
-    if _is_polymer:
-        _mp_lbl = 'Yumuşama Noktası (Vicat/VST)' if lang=='TR' else 'Softening Point (Vicat/VST)'
+    # ── KKDİK Ek-2 9.1 (a)–(p): 20 özelliğin hepsi, yönetmelikteki sırayla yazılır ──────────
+    # "Belirli bir özelliğin geçerli olmadığı veya … bilgilerin mevcut olmadığı belirtilmiş ise,
+    #  nedenleri belirtilir." → boş satır gizlenmez; ürünün fiziksel haline göre gerekçe yazılır.
+    # Kullanıcının girdiği / ölçülen değer her zaman önce gelir.
+    _TR = lang == 'TR'
+    _is_aerosol_form = _prod_form == 'aerosol'
+    _is_liq_form = not (_is_solid_form or _is_gas_form or _is_aerosol_form)
+    _hs = {str(h)[:4] for h in (list(h_codes) + list(clp.get('all_h_codes') or []))}
+    _NO_DATA_VALS = {na, '', 'Veri yok', 'Veri Yok', 'Bilgi yok', 'Bilgi Yok',
+                     'No data available', 'No data', 'N/A', '-', 'Belirlenmemiştir'}
+    _ND    = ('Belirlenmemiştir (karışım için test yapılmamıştır)' if _TR
+              else 'Not determined (no test performed on the mixture)')
+    _NA_S  = 'Uygulanamaz (katı)' if _TR else 'Not applicable (solid)'
+    _NA_G  = 'Uygulanamaz (gaz)' if _TR else 'Not applicable (gas)'
+
+    def _have(v):
+        return v not in (None, '') and _re.sub(r'<[^>]+>', '', str(v)).strip() not in _NO_DATA_VALS
+
+    def _or(v, solid=None, gas=None, aerosol=None, default=None):
+        """Değer varsa değer; yoksa fiziksel hale göre gerekçe."""
+        if _have(v):
+            return v
+        if _is_solid_form and solid:
+            return solid
+        if _is_gas_form and gas:
+            return gas
+        if _is_aerosol_form and aerosol:
+            return aerosol
+        return default or _ND
+
+    def _hlist(codes):
+        return ', '.join(sorted(_hs & codes))
+
+    def _L(tr, en):
+        return tr if _TR else en
+
+    # (a) Görünüm — fiziksel hal ve renk (katıda tane boyutu varsa)
+    _state_txt = ({'solid': 'Katı', 'powder': 'Toz', 'gas': 'Gaz', 'aerosol': 'Aerosol', 'paste': 'Pasta',
+                   'liquid': 'Sıvı'} if _TR else
+                  {'solid': 'Solid', 'powder': 'Powder', 'gas': 'Gas', 'aerosol': 'Aerosol', 'paste': 'Paste',
+                   'liquid': 'Liquid'})
+    _app = _appearance()
+    if not _have(_app):
+        _app = _state_txt.get(_prod_form or 'liquid', _state_txt['liquid'])
+    _col = _text('color')
+    if _have(_col):
+        _app = f"{_app}; {_L('renk', 'colour')}: {_col}"
+    _ps = phys.get('particle_size')
+    _ps = _ps.get('display') if isinstance(_ps, dict) else _ps
+    if _is_solid_form and _have(_ps):
+        _app = f"{_app}; {_L('tane boyutu', 'particle size')}: {_ps}"
+
+    # (ç) pH — katıda sulu çözeltinin konsantrasyonu belirtilir (Ek-2 9.1(ç))
+    _ph_conc_raw = phys.get('ph_conc') or '1'
+    _ph_conc_lbl = _L(f'pH (%{_ph_conc_raw} sulu çözeltide)', f'pH ({_ph_conc_raw}% aqueous solution)')
+    _ph_val = _pv_ph()
+    _ph_lbl_row = _ph_conc_lbl if (_is_solid_form and _have(_ph_val)) else phys_prop(lang, 'ph')
+
+    # (d) Erime/donma noktası (polimerde yumuşama noktası)
+    _mp_lbl = (_L('Yumuşama noktası (Vicat/VST)', 'Softening point (Vicat/VST)') if _is_polymer
+               else _L('Erime noktası/donma noktası', 'Melting point/freezing point'))
+
+    # (f) Parlama noktası
+    _fp_na = None
+    if _is_aerosol_form:
+        _aer_h = 'H222' if 'H222' in _hs else ('H223' if 'H223' in _hs else '')
+        _fp_na = _L(f'Uygulanamaz — aerosol (bkz. Bölüm 2{", " + _aer_h if _aer_h else ""}; SEA Ek-1 2.3)',
+                    'Not applicable — aerosol (see Section 2)')
+    _fp_default = _ND
+    if _is_liq_form and not (_hs & {'H224', 'H225', 'H226'}):
+        _fp_default = _ND + _L('; alevlenir sıvı olarak sınıflandırılmamıştır',
+                               '; not classified as flammable liquid')
+    _fp_val = _or(_pv('flash_point', '°C'), solid=_NA_S, gas=_NA_G, aerosol=_fp_na, default=_fp_default)
+
+    # (e) İlk kaynama noktası
+    _bp_solid = (_L('Uygulanamaz (polimer — belirli kaynama noktası yok)',
+                    'Not applicable (polymer — no defined boiling point)') if _is_polymer else _NA_S)
+    _bp_val = _or(_pv('boiling_point', '°C'), solid=_bp_solid)
+
+    # (ğ) Alevlenirlik (katı, gaz)
+    if _is_solid_form:
+        _fl_val = (_L(f'Alevlenir katı ({_hlist({"H228"})})', f'Flammable solid ({_hlist({"H228"})})')
+                   if 'H228' in _hs else
+                   _L('Alevlenir katı olarak sınıflandırılmamıştır', 'Not classified as flammable solid'))
+    elif _is_gas_form:
+        _fl_val = (_L(f'Alevlenir gaz ({_hlist({"H220", "H221"})})', f'Flammable gas ({_hlist({"H220", "H221"})})')
+                   if _hs & {'H220', 'H221'} else
+                   _L('Alevlenir gaz olarak sınıflandırılmamıştır', 'Not classified as flammable gas'))
+    elif _is_aerosol_form:
+        _fl_val = (_L(f'Alevlenir aerosol ({_hlist({"H222", "H223"})})',
+                      f'Flammable aerosol ({_hlist({"H222", "H223"})})')
+                   if _hs & {'H222', 'H223'} else
+                   _L('Alevlenir aerosol olarak sınıflandırılmamıştır', 'Not classified as flammable aerosol'))
     else:
-        _mp_lbl = 'Donma/Erime Noktası' if lang=='TR' else 'Melting/Freezing Point'
-    _rd_lbl  = 'Bağıl Yoğunluk (su=1)' if lang=='TR' else 'Relative Density (water=1)'
-    _vd_lbl  = 'Buhar Yoğunluğu (hava=1)' if lang=='TR' else 'Vapor Density (air=1)'
-    _ai_lbl  = 'Kendiliğinden Tutuşma' if lang=='TR' else 'Auto-ignition Temp.'
-    _ex_lbl  = 'Patlama Sınırları (LEL/UEL)' if lang=='TR' else 'Explosive Limits (LEL/UEL)'
+        _fl_val = _L('Uygulanamaz (sıvı — bkz. parlama noktası)', 'Not applicable (liquid — see flash point)')
 
-    _ex_val = na
-    _lel_raw = phys.get('lel')
-    _uel_raw = phys.get('uel')
+    # (h) Alevlenirlik / patlama limitleri
+    _ex_val = None
+    _lel_raw, _uel_raw = phys.get('lel'), phys.get('uel')
     if _lel_raw or _uel_raw:
-        _lel_str = (_lel_raw.get('display') if isinstance(_lel_raw, dict)
-                    else str(_lel_raw) if _lel_raw else '?')
-        _uel_str = (_uel_raw.get('display') if isinstance(_uel_raw, dict)
-                    else str(_uel_raw) if _uel_raw else '?')
-        _ex_val = f"%{_lel_str} – %{_uel_str}"
-        _ex_val += _method_note('lel')   # LEL yöntemi (UEL aynı kaynaktan)
+        _lel_str = _lel_raw.get('display') if isinstance(_lel_raw, dict) else (str(_lel_raw) if _lel_raw else '?')
+        _uel_str = _uel_raw.get('display') if isinstance(_uel_raw, dict) else (str(_uel_raw) if _uel_raw else '?')
+        _ex_val = f"%{_lel_str} – %{_uel_str}" + _method_note('lel')
 
+    # (ı) Buhar basıncı
     _vp_raw = phys.get('vapor_pressure')
     _vp_display = (_vp_raw.get('display') if isinstance(_vp_raw, dict)
                    else (str(_vp_raw) if _vp_raw not in (None, '') else None))
-    if _vp_display:
-        # Birim zaten içeriyorsa dokunma, sadece sayısal değere hPa ekle
-        _vp_val = (_vp_display if any(u in _vp_display for u in ('hPa','kPa','mmHg','bar','Pa'))
-                   else f"{_vp_display} hPa")
-        _vp_val += _method_note('vapor_pressure')
+    _vp_val = None
+    if _have(_vp_display):
+        _vp_val = (_vp_display if any(u in _vp_display for u in ('hPa', 'kPa', 'mmHg', 'bar', 'Pa'))
+                   else f"{_vp_display} hPa") + _method_note('vapor_pressure')
     elif phys.get('vapor_pressure_num'):
         _vp_val = f"{phys.get('vapor_pressure_num')} hPa"
-    else:
-        _vp_val = na
 
-    _er_lbl  = 'Buharlaşma Hızı' if lang=='TR' else 'Evaporation Rate'
-    _kow_lbl = 'Dağılım Katsayısı (log Kow)' if lang=='TR' else 'Partition Coeff. (log Kow)'
+    # (j) Bağıl yoğunluk — yoksa yoğunluk
+    _rd_val = _pv('rel_density')
+    _rd_lbl = _L('j) Bağıl yoğunluk', 'm) Relative density')
+    if not _have(_rd_val):
+        _d = _pv('density', 'g/cm³')
+        if _have(_d):
+            _rd_val = _d
+            _rd_lbl = _L('j) Bağıl yoğunluk (yoğunluk)', 'm) Relative density (density)')
 
-    _ph_conc_raw   = phys.get('ph_conc') or '1'
-    if lang == 'TR':
-        _ph_conc_lbl = f'pH Değeri (%{_ph_conc_raw} sulu çözeltide)'
-    else:
-        _ph_conc_lbl = f'pH Value ({_ph_conc_raw}% aqueous solution)'
+    # (l) Dağılım katsayısı
+    _kow_default = _L('Karışım için belirlenmemiştir (bileşen verileri için bkz. Bölüm 12)',
+                      'Not determined for the mixture (see Section 12 for components)')
 
-    all_phys_rows = [
-        [phys_prop(lang,'appearance'), _appearance()],
-        [phys_prop(lang,'color'),         _text('color') or na],
-        [phys_prop(lang,'odor'),          _text('odor')  or na],
-        [(_ph_conc_lbl if _is_solid_form else phys_prop(lang,'ph')), _pv_ph()],
-        [phys_prop(lang,'flash_point'),   _pv('flash_point','°C')],
-        [phys_prop(lang,'boiling_point'), _pv('boiling_point','°C')],
-        [_mp_lbl,                         _pv('melting_point','°C')],
-        [_er_lbl,                         _text('evap_rate') or na],
-        [phys_prop(lang,'density'),       _pv('density','g/cm³')],
-        [_rd_lbl,                         _pv('rel_density')],
-        [phys_prop(lang,'viscosity'),     _pv('viscosity','cSt @40°C')],
-        [phys_prop(lang,'solubility'),    _pv('solubility', 'mg/L')],
-        [phys_prop(lang,'vapor_pressure'),_vp_val],
-        [_vd_lbl,                         ('Uygulanamaz' if lang=='TR' else 'Not applicable') if _is_solid_form else _pv('vapor_density')],
-        [_kow_lbl,                        _pv('log_kow')],
-        [_ai_lbl,                         _pv('auto_ignition','°C')],
-        [_ex_lbl,                         _ex_val],
-        [('Henry Sabiti' if lang=='TR' else 'Henry\'s Law Constant'),
-         phys.get('henry_constant', {}).get('display', na) if phys.get('henry_constant') else na],
+    # (ö) / (p) Patlayıcı ve oksitleyici özellikler — sınıflandırmadan
+    _EXP = {'H200', 'H201', 'H202', 'H203', 'H204', 'H205', 'H240', 'H241'}
+    _OX = {'H270', 'H271', 'H272'}
+    _expl_val = (_L(f'Patlayıcı özellik ({_hlist(_EXP)})', f'Explosive properties ({_hlist(_EXP)})')
+                 if (_hs & _EXP or phys.get('is_explosive')) else
+                 _L('Patlayıcı olarak sınıflandırılmamıştır', 'Not classified as explosive'))
+    _ox_val = (_L(f'Oksitleyici özellik ({_hlist(_OX)})', f'Oxidising properties ({_hlist(_OX)})')
+               if (_hs & _OX or phys.get('is_oxidising')) else
+               _L('Oksitleyici olarak sınıflandırılmamıştır', 'Not classified as oxidising'))
+
+    phys_rows = [
+        [_L('a) Görünüm', 'a) Appearance'), _app],
+        [_L('b) Koku', 'b) Odour'), _text('odor') or _L('Belirlenmemiştir', 'Not determined')],
+        [_L('c) Koku eşiği', 'c) Odour threshold'), _or(_pv('odour_threshold'))],
+        [_L('ç) ', 'd) ') + _ph_lbl_row, _or(_ph_val, gas=_NA_G)],
+        [_L('d) ', 'e) ') + _mp_lbl, _or(_pv('melting_point', '°C'))],
+        [_L('e) İlk kaynama noktası ve kaynama aralığı', 'f) Initial boiling point and boiling range'), _bp_val],
+        [_L('f) Parlama noktası', 'g) Flash point'), _fp_val],
+        [_L('g) Buharlaşma hızı', 'h) Evaporation rate'), _or(_text('evap_rate'), solid=_NA_S, gas=_NA_G)],
+        [_L('ğ) Alevlenirlik (katı, gaz)', 'i) Flammability (solid, gas)'), _fl_val],
+        [_L('h) Üst/alt alevlenirlik veya patlayıcı limitleri', 'j) Upper/lower flammability or explosive limits'),
+         _or(_ex_val)],
+        [_L('ı) Buhar basıncı', 'k) Vapour pressure'), _or(_vp_val, solid=_NA_S)],
+        # Katıda bileşen MW'sinden ideal gaz hesabı anlamsız → her durumda "Uygulanamaz (katı)"
+        [_L('i) Buhar yoğunluğu', 'l) Vapour density'), _NA_S if _is_solid_form else _or(_pv('vapor_density'))],
+        [_rd_lbl, _or(_rd_val)],
+        [_L('k) Çözünürlük', 'n) Solubility'), _or(_pv('solubility', 'mg/L'))],
+        [_L('l) Dağılım katsayısı: n-oktanol/su', 'o) Partition coefficient: n-octanol/water'),
+         _or(_pv('log_kow'), default=_kow_default)],
+        [_L('m) Kendiliğinden tutuşma sıcaklığı', 'p) Auto-ignition temperature'), _or(_pv('auto_ignition', '°C'))],
+        [_L('n) Bozunma sıcaklığı', 'q) Decomposition temperature'), _or(_pv('decomposition_temp', '°C'))],
+        [_L('o) Akışkanlık (viskozite)', 'r) Viscosity'), _or(_pv('viscosity', 'cSt @40°C'), solid=_NA_S, gas=_NA_G)],
+        [_L('ö) Patlayıcı özellikler', 's) Explosive properties'), _expl_val],
+        [_L('p) Oksitleyici özellikler', 't) Oxidising properties'), _ox_val],
     ]
-    # Koku eşiği
-    _ot_lbl = 'Koku Eşiği' if lang=='TR' else 'Odour Threshold'
-    _ot_val = _pv('odour_threshold')
-
-    # Ayrışma sıcaklığı
-    _dc_lbl = 'Ayrışma Sıcaklığı' if lang=='TR' else 'Decomposition Temp.'
-    _dc_val = _pv('decomposition_temp','°C')
-
-    # Patlayıcı / oksitleyici — phys alanı yoksa H kodlarından türet
-    _prop_lbl = 'Patlayıcı/Oksitleyici Özellikler' if lang=='TR' else 'Explosive/Oxidising Properties'
-    _h_set = set(h_codes)
-    _props = []
-    _is_expl = phys.get('is_explosive') or bool(_h_set & {'H200','H201','H202','H203','H204','H205','H240','H241'})
-    _is_oxid = phys.get('is_oxidising') or bool(_h_set & {'H270','H271','H272'})
-    _is_flam = phys.get('is_flammable') or bool(_h_set & {'H220','H221','H222','H223','H228','H232','H250','H251','H252'})
-    if _is_expl:
-        _props.append('Patlayıcı özellik' if lang=='TR' else 'Explosive')
-    if _is_oxid:
-        _props.append('Oksitleyici özellik' if lang=='TR' else 'Oxidising')
-    if _is_flam:
-        _props.append('Yanıcı (katı/gaz)' if lang=='TR' else 'Flammable solid/gas')
-    _prop_val = '; '.join(_props) if _props else ('Yok' if lang=='TR' else 'None')
-
-    # VOC içeriği — sadece boya/vernik alt kategorisinde ve değer varsa göster
-    _voc_content = sds_data.get('voc_content')
-    _voc_lbl = 'VOC İçeriği (2004/42/EC)' if lang == 'TR' else 'VOC Content (2004/42/EC)'
-    _voc_val = f"{_voc_content} g/L" if _voc_content is not None else None
-
-    # Tane boyutu ve dökme yoğunluğu — sadece katı/toz form
-    _ps_lbl = 'Tane/Partikül Boyutu' if lang == 'TR' else 'Particle Size'
-    _ps_val = phys.get('particle_size') or na
-    if isinstance(_ps_val, dict):
-        _ps_val = _ps_val.get('display') or na
-
-    _bd_lbl = 'Dökme Yoğunluğu (kg/m³)' if lang == 'TR' else 'Bulk Density (kg/m³)'
-    _bd_val = _pv('bulk_density', 'kg/m³')
-
-    all_phys_rows += [
-        [_ot_lbl,   _ot_val],
-        [_dc_lbl,   _dc_val],
-        [_prop_lbl, _prop_val],
-    ]
-    _disp_lbl = 'Dispersibilite / Dağılabilirlik' if lang == 'TR' else 'Dispersibility'
-    _disp_val = phys.get('dispersibility') or na
-    _hygr_lbl = 'Higroskopiklik' if lang == 'TR' else 'Hygroscopicity'
-    _hygr_val = phys.get('hygroscopicity') or na
-
-    if _is_solid_form:
-        all_phys_rows.append([_ps_lbl, _ps_val])
-        all_phys_rows.append([_bd_lbl, _bd_val])
-        all_phys_rows.append([_disp_lbl, _disp_val])
-        all_phys_rows.append([_hygr_lbl, _hygr_val])
-    if _voc_val:
-        all_phys_rows.append([_voc_lbl, _voc_val])
-
-    # Opsiyonel satırları — sadece değer varsa göster
-    # Katı/toz formlar için erime noktası zorunlu (KKDİK Ek-2 §9)
-    _fp_lbl  = phys_prop(lang, 'flash_point')
-    _bp_lbl  = phys_prop(lang, 'boiling_point')
-    _ph_lbl  = phys_prop(lang, 'ph')
-    _vis_lbl = phys_prop(lang, 'viscosity')
-    _henry_lbl = 'Henry Sabiti' if lang=='TR' else "Henry's Law Constant"
-    _optional = {_rd_lbl, _vd_lbl, _ai_lbl, _ex_lbl, _ot_lbl, _dc_lbl, _er_lbl, _kow_lbl, _henry_lbl,
-                 _ps_lbl, _bd_lbl, _disp_lbl, _hygr_lbl}
-    if not _is_solid_form:
-        _optional.add(_mp_lbl)
-    # Katı/toz formda viskozite uygulanamaz — değer girilmemişse gizle
-    # pH: "Uygulanamaz" olarak yazılır (gizlenmez)
-    if _is_solid_form:
-        _optional.add(_vis_lbl)
-
-    # ECHA Kılavuz v4 §9.1(h)(e): Gaz/katı formda parlama/kaynama noktası "uygulanamaz"
-    # olarak açıkça belirtilmeli — gizlemek yerine "Uygulanamaz (gaz)" göster.
-    _na_gas = (
-        term(lang, 'not_applicable') +
-        (' (gaz form)' if lang == 'TR' else ' (gas form)')
-    )
-    _na_solid = (
-        term(lang, 'not_applicable') +
-        (' (katı/toz form)' if lang == 'TR' else ' (solid/powder form)')
-    )
-    # "Veri yok" (frontend display) veya "Bilgi yok" (i18n) — her ikisini de yakala
-    _NO_DATA_VALS = {na, '', 'Veri yok', 'Veri Yok', 'Bilgi yok', 'Bilgi Yok',
-                     'No data available', 'No data', 'N/A', '-'}
-    _WATER_CAS = {'7732-18-5', '7647-01-0', '1310-73-2', '1310-58-3'}
-    _comp_cas_set_fp = {(c.get('cas_no') or c.get('cas') or '').strip() for c in components}
-    _has_aqueous = any(
-        (c.get('cas_no') or c.get('cas') or '').strip() == '7732-18-5'
-        and float(c.get('concMax') or c.get('concentration') or c.get('conc') or 0) >= 50
-        for c in components
-    )
-    _na_aqueous = (
-        term(lang, 'not_applicable') +
-        (' (sulu karışım — su içeriyor)' if lang == 'TR' else ' (aqueous mixture — contains water)')
-    )
-    # Aerosol form: CLP Ek-I §2.3 Not 2 — alevlenirlik H222/H223 üzerinden iletilir,
-    # bileşen parlama noktası aerosol için uygulanamaz.
-    _is_aerosol_form = _prod_form == 'aerosol'
-    if _is_aerosol_form:
-        _h_codes_all = clp.get('h_codes', []) + clp.get('all_h_codes', [])
-        _aerosol_h_ref = 'H222' if 'H222' in _h_codes_all else ('H223' if 'H223' in _h_codes_all else 'H222')
-        _na_aerosol_tr = (
-            f"Uygulanamaz — Ürün aerosol dispenser olarak sınıflandırılmıştır "
-            f"(bkz. Bölüm 2, {_aerosol_h_ref}). CLP Ek-I §2.3 Not 2 uyarınca aerosoller "
-            f"ayrıca alevlenebilir sıvı (§2.6) kriterine göre sınıflandırılmaz; "
-            f"alevlenirlik ısı yanma değeri ve/veya beyan edilen yanıcı içerik yüzdesi "
-            f"üzerinden değerlendirilir."
-        )
-        _na_aerosol_en = (
-            f"Not applicable — Product is classified as an aerosol dispenser "
-            f"(see Section 2, {_aerosol_h_ref}). Per CLP Annex I §2.3 Note 2, aerosols are "
-            f"not additionally classified under flammable liquids (§2.6); flammability is "
-            f"assessed via heat of combustion and/or declared flammable content percentage."
-        )
-        _na_aerosol = _na_aerosol_tr if lang == 'TR' else _na_aerosol_en
-        for row in all_phys_rows:
-            if row[0] == _fp_lbl:
-                row[1] = _na_aerosol
-    elif _is_gas_form:
-        for row in all_phys_rows:
-            if row[0] in (_fp_lbl, _bp_lbl) and row[1] in _NO_DATA_VALS:
-                row[1] = _na_gas
-    elif _is_solid_form:
-        _na_polymer_bp = (
-            ('Uygulanamaz (polimer/plastik — keskin kaynama noktası yok)' if lang == 'TR'
-             else 'Not applicable (polymer/plastic — no defined boiling point)')
-        )
-        _na_solid_ph = (
-            ('Uygulanamaz — katı form (sulu çözelti pH\'ı için bkz. §3.2 bileşen verileri)'
-             if lang == 'TR' else
-             'Not applicable — solid form (for aqueous solution pH see §3.2 component data)')
-        )
-        for row in all_phys_rows:
-            if row[0] in (_fp_lbl, _bp_lbl) and row[1] in _NO_DATA_VALS:
-                if _is_polymer and row[0] == _bp_lbl:
-                    row[1] = _na_polymer_bp
-                else:
-                    row[1] = _na_solid
-            # pH: katı formda değer girilmemişse "Uygulanamaz" yaz (gizleme değil)
-            elif row[0] in (_ph_lbl, _ph_conc_lbl) and row[1] in _NO_DATA_VALS:
-                row[1] = _na_solid_ph
-    elif _has_aqueous:
-        # KKDİK Ek-2 §9.1: "Bilgi yok" için neden belirtilmeli; sulu karışımda FP uygulanamaz
-        for row in all_phys_rows:
-            if row[0] == _fp_lbl and row[1] in _NO_DATA_VALS:
-                row[1] = _na_aqueous
-
-    phys_rows = [r for r in all_phys_rows if r[1] != na or r[0] not in _optional]
-
     story.append(data_table(phys_rows, [75*mm, 105*mm], styles, header=False))
+
+    # 9.2 Diğer bilgiler — değeri olan ek parametreler; yoksa açıkça belirtilir
+    _other = []
+    _voc_content = sds_data.get('voc_content')
+    if _voc_content is not None:
+        _other.append([_L('VOC içeriği (2004/42/EC)', 'VOC content (2004/42/EC)'), f"{_voc_content} g/L"])
+    _hc = phys.get('henry_constant')
+    if isinstance(_hc, dict) and _have(_hc.get('display')):
+        _other.append([_L('Henry sabiti', "Henry's law constant"), _hc['display']])
+    if _is_solid_form:
+        for _k, _lt, _le, _u in (('bulk_density', 'Dökme yoğunluğu', 'Bulk density', 'kg/m³'),
+                                 ('dispersibility', 'Dağılabilirlik', 'Dispersibility', ''),
+                                 ('hygroscopicity', 'Higroskopiklik', 'Hygroscopicity', '')):
+            _v = _pv(_k, _u) if _u else (phys.get(_k) or None)
+            if _have(_v):
+                _other.append([_L(_lt, _le), _v])
+    story += sub_block(f"9.2 {sub_title(lang,'9.2')}", styles)
+    if _other:
+        story.append(data_table(_other, [75*mm, 105*mm], styles, header=False))
+    else:
+        story.append(Paragraph(_L('Ek bilgi bulunmamaktadır.', 'No additional information available.'),
+                               styles['body']))
 
     # ─────────────────────────────────────────────────────────────────────────
     # BÖLÜM 10 — Kararlılık

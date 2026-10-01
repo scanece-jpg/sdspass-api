@@ -2619,7 +2619,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
 
     # 12.2 / 12.3 — KKDİK Ek-2 12.2 ve 12.3: karışımdaki her ilgili madde için ayrı bilgi.
     from app.services.ecological_service import (READILY_BIODEGRADABLE_CAS as _RB_CAS,
-                                                 PERSISTENT_CAS as _PERS_CAS, LOG_KOW_DB as _KOW_DB)
+                                                 PERSISTENT_CAS as _PERS_CAS, LOG_KOW_DB as _KOW_DB,
+                                                 INHERENT_BIODEGRADABLE_CAS as _INH_CAS)
     from app.services.tr_mevzuat_service import _INORGANIC_CAS as _INORG_CAS
     _T = lang == 'TR'
     from app.services.detergent_service import CAS_CLASS as _DET_CLS, SURFACTANT_CLASSES as _SURF_CLS
@@ -2643,8 +2644,11 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             _d = 'kolay biyobozunur' if _T else 'readily biodegradable'
         elif _is_det and ((_c.get('det_class') or '').strip() or _DET_CLS.get(_cas)) in _SURF_CLS:
             _d = 'yüzey aktif madde (aşağıdaki beyana bakınız)' if _T else 'surfactant (see statement below)'
+        elif _cas in _INH_CAS:
+            _d = ('kolay biyobozunur değil; özünde biyobozunur' if _T
+                  else 'not readily biodegradable; inherently biodegradable')
         elif _cas in _PERS_CAS:
-            _d = 'orta düzeyde biyobozunur' if _T else 'moderately biodegradable'
+            _d = 'kalıcı (zor biyobozunur)' if _T else 'persistent'
         else:
             _d = 'veri yok' if _T else 'no data available'
         _deg_parts.append(f'{_nm}: {_d}')

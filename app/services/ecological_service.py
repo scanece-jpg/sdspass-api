@@ -90,6 +90,20 @@ READILY_BIODEGRADABLE_CAS = {
     '77-92-9',   # citric acid
     '64-19-7',   # acetic acid
     '79-09-4',   # propionic acid
+    # Kaynak: OECD SIDS SIAP Xylenes (SIAM 16, 2003) — m-, p- ve karışık ksilen kolay biyobozunur
+    '1330-20-7', # xylene (mixed isomers)
+    '108-38-3',  # m-xylene
+    '106-42-3',  # p-xylene
+    # Kaynak: AB Risk Değerlendirme Raporu Toluen (2003) — suda kolay biyobozunur
+    '108-88-3',  # toluene
+    # Kaynak: CSTEE görüşü, AB Risk Değerlendirmesi Benzen (2003) — aerobik koşulda kolay biyobozunur
+    '71-43-2',   # benzene
+}
+
+# Kolay biyobozunur değil, özünde (inherent) biyobozunur — OECD 302 türü testler
+INHERENT_BIODEGRADABLE_CAS = {
+    '95-47-6',   # o-xylene — OECD SIDS SIAP Xylenes (SIAM 16, 2003)
+    '100-41-4',  # ethylbenzene — OECD SIDS SIAP Ethylbenzene (SIAM 14, 2002)
 }
 
 # Toprak hareketliliği değerlendirmesinden hariç tutulan taşıyıcı/çözücü maddeler
@@ -107,14 +121,10 @@ SOIL_MOBILITY_SKIP_CAS = {
     '79-09-4',    # propionic acid
 }
 
-# Zor biyobozunur (persistent)
-PERSISTENT_CAS = {
-    '1330-20-7', # xylene (moderate)
-    '108-88-3',  # toluene (moderate)
-    '110-54-3',  # n-hexane (moderate)
-    '71-43-2',   # benzene
-    '100-41-4',  # ethylbenzene
-}
+# Zor biyobozunur (persistent) — resmî kaynakla doğrulanmış madde yok.
+# Eski listedeki ksilen/toluen/benzen kolay, etilbenzen özünde biyobozunur olarak taşındı;
+# n-hekzan için kaynaklar çelişkili olduğundan listeden çıkarıldı (veri yok).
+PERSISTENT_CAS: set = set()
 
 # log Kow veritabanı (tahmini)
 LOG_KOW_DB: Dict[str, float] = {
@@ -485,6 +495,9 @@ def assess_pbt(
         elif cas in PERSISTENT_CAS:
             p_result = "Olası (orta kalıcılık)"
             notes.append("Orta kalıcı madde — yarı ömür testi önerilir")
+        elif cas in INHERENT_BIODEGRADABLE_CAS:
+            p_result = "Olası (kolay biyobozunur değil)"
+            notes.append("Özünde biyobozunur — yarı ömür testi önerilir")
 
         if td:
             if td.half_life_water is not None:
@@ -585,7 +598,7 @@ def assess_biodegradability(
                 persistent_pct += conc
         elif cas in READILY_BIODEGRADABLE_CAS:
             readily_pct += conc
-        elif cas in PERSISTENT_CAS:
+        elif cas in PERSISTENT_CAS or cas in INHERENT_BIODEGRADABLE_CAS:
             persistent_pct += conc
         else:
             unknown_pct += conc
@@ -599,7 +612,7 @@ def assess_biodegradability(
     if r_ratio > 70:
         assessment = 'Büyük ölçüde biyobozunur (>%70 hızlı bozunan bileşen)'
     elif p_ratio > 30:
-        assessment = 'Kalıcılık endişesi (>%30 zor bozunan bileşen)'
+        assessment = 'Kalıcılık endişesi (>%30 kolay biyobozunur olmayan bileşen)'
     else:
         assessment = f'Karışık — hızlı bozunan %{r_ratio:.0f}, kalıcı %{p_ratio:.0f}, bilinmeyen %{unknown_pct/total*100:.0f}'
 

@@ -484,6 +484,7 @@ async def generate_pdf(data: dict = Body(...)):
                 'form':       product.get('form', 'liquid'),
                 'usage':      _safe(usage),
                 'usage_desc': _safe(product.get('usage_desc') or ''),
+                'is_detergent': bool(product.get('is_detergent')),   # Deterjanlar Hakkında Yönetmelik
             },
             'supplier': {
                 'name':          _safe(supplier_in.get('name', '')),

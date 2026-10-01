@@ -2974,6 +2974,14 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     for line in (regulatory_text or '').split('\n'):
         story.append(Paragraph(line, styles['body']))
 
+    # ── Deterjanlar Hakkında Yönetmelik — Ek-7 A içerik beyanı (KKDİK Ek-2 15.1: ürünün tabi
+    #    olduğu mevzuat). Halka sunulmayan endüstriyel/kurumsal deterjanda bu bilgi GBF ile verilir.
+    if product.get('is_detergent') and not is_us:
+        from app.services.detergent_service import ek7a_lines
+        story.append(Spacer(1, 4))
+        for _dl in ek7a_lines(components, _usage_val, lang):
+            story.append(Paragraph(_dl, styles['body']))
+
     # ── Kullanım tipine göre ek mevzuat notu ─────────────────────────────────
     if _usage_val == 'consumer' and lang == 'TR':
         story.append(Spacer(1, 4))

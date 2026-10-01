@@ -615,6 +615,10 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
               <option value="industrial">Endüstriyel / Profesyonel</option>
               <option value="consumer">Tüketici</option>
             </select>
+            <label style="display:flex;align-items:center;gap:6px;margin-top:6px;font-size:11px;color:var(--text2);cursor:pointer"
+                   title="Deterjanlar Hakkında Yönetmelik (RG 27.01.2018/30314) kapsamındaysa GBF 15.1'e Ek-7 A içerik beyanı eklenir. Bileşenlerin sınıfı bileşen satırındaki 'Deterjan Sınıfı (Ek-7 A)' alanından alınır.">
+              <input type="checkbox" id="p_detergent" onchange="_toggleDetClass()"> Deterjan ürünü (Deterjanlar Hakkında Yönetmelik)
+            </label>
           </div>
         </div>
       </div>
@@ -2087,6 +2091,10 @@ function addComp(pf = {}) {
       </div>
       <div id="comp_type_note${id}" style="display:none;padding-top:18px;font-size:10px;color:var(--accent);line-height:1.4"></div>
     </div>
+    <div class="det-class-wrap" style="margin-top:4px;display:${document.getElementById('p_detergent')?.checked ? '' : 'none'}">
+      <label title="Deterjanlar Hakkında Yönetmelik Ek-7 A içerik sınıfı. 'Otomatik' seçiliyse bilinen hammaddeler CAS'tan tanınır; tanınmayan bileşen beyana girmez.">Deterjan Sınıfı (Ek-7 A)</label>
+      <select class="det-class" id="det_class${id}" style="width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--text);border-radius:6px;padding:6px 9px;font-size:11px;font-family:var(--mono)"><option value="">Otomatik (CAS'tan)</option><option value="none">Beyan dışı</option><option value="anionic">Anyonik yüzey aktif</option><option value="nonionic">Noniyonik yüzey aktif</option><option value="cationic">Katyonik yüzey aktif</option><option value="amphoteric">Amfoterik yüzey aktif</option><option value="soap">Sabun</option><option value="phosphate">Fosfat</option><option value="phosphonate">Fosfonat</option><option value="oxygen_bleach">Oksijen bazlı ağartıcı</option><option value="chlorine_bleach">Klor bazlı ağartıcı</option><option value="edta">EDTA ve tuzları</option><option value="zeolite">Zeolit</option><option value="polycarboxylate">Polikarboksilat</option><option value="phenol">Fenol / halojenli fenol</option><option value="pdcb">para-Diklorobenzen</option><option value="aromatic_hc">Aromatik hidrokarbon</option><option value="aliphatic_hc">Alifatik hidrokarbon</option><option value="halogenated_hc">Halojenli hidrokarbon</option><option value="enzyme">Enzim</option><option value="disinfectant">Dezenfektan</option><option value="optical_brightener">Optik parlatıcı</option><option value="perfume">Parfüm</option><option value="preservative">Koruyucu</option></select>
+    </div>
     <details style="margin-top:6px">
       <summary style="font-size:11px;color:var(--text3);cursor:pointer;user-select:none;list-style:none;display:flex;align-items:center;gap:4px">▸ Sucul Toksisite (EC50/LC50) — M-Faktör Hesabı</summary>
       <div style="margin-top:6px;padding:8px;background:var(--bg2);border-radius:6px;border:1px solid var(--border2)">
@@ -2115,6 +2123,12 @@ function addComp(pf = {}) {
   document.getElementById('comps').appendChild(div);
   if (pf.hazards) pf.hazards.forEach(h => addChip(id, h.h_class, h.h_code, h._annex_supplement, h._echa_supplement || h.echa_supplement));
   return id;
+}
+
+// Deterjan ürünü işaretlenince bileşen satırlarında Ek-7 A sınıfı alanı görünür
+function _toggleDetClass() {
+  const on = !!document.getElementById('p_detergent')?.checked;
+  document.querySelectorAll('.det-class-wrap').forEach(el => { el.style.display = on ? '' : 'none'; });
 }
 
 function delComp(id) { document.getElementById('cw'+id)?.remove(); updateConcTotal(); }
@@ -3211,12 +3225,13 @@ function getComps() {
       ? { oral: ate_oral_v, dermal: ate_dermal_v, inhal: ate_inhal_v }
       : null;
     const comp_type = document.getElementById('comp_type' + cwId)?.value || 'normal';
+    const det_class = w.querySelector('.det-class')?.value || '';   // Deterjan Ek-7 A sınıfı
     const sclRaw = _sclRaw[cwId] || [];  // SCL ham liste — engine'de 1A/1B ayrımı için
     const ec50_algae   = parseFloat(document.getElementById('ec50_algae'   + cwId)?.value) || null;
     const ec50_fish    = parseFloat(document.getElementById('ec50_fish'    + cwId)?.value) || null;
     const ec50_daphnia = parseFloat(document.getElementById('ec50_daphnia' + cwId)?.value) || null;
     const ec50_noec    = parseFloat(document.getElementById('ec50_noec'    + cwId)?.value) || null;
-    return { cas, name, name_tr, conc, concMin, concMax, concStr, hazards, ec, reach, kkdik, m_factors:{ acute: mf, chronic: mfc }, scl, sclRaw, annex_vi: annexVi, ate_unknown, ate, comp_type, ec50_algae, ec50_fish, ec50_daphnia, ec50_noec, echa_removed };
+    return { cas, name, name_tr, conc, concMin, concMax, concStr, hazards, ec, reach, kkdik, m_factors:{ acute: mf, chronic: mfc }, scl, sclRaw, annex_vi: annexVi, ate_unknown, ate, comp_type, ec50_algae, ec50_fish, ec50_daphnia, ec50_noec, echa_removed, det_class };
   }).filter(c => c.cas || c.name);
 }
 
@@ -5711,7 +5726,8 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
 
     const payload = {
       lang: 'TR',
-      product: { name: productName, form, usage },
+      product: { name: productName, form, usage,
+                 is_detergent: !!document.getElementById('p_detergent')?.checked },
       supplier: (() => {
         const g = id => document.getElementById(id)?.value?.trim() || '';
         const hours = document.querySelector('input[name="telHours"]:checked')?.value || '24_7';

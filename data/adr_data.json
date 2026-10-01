@@ -945,7 +945,7 @@
     "name": "CARBON DIOXIDE",
     "name_tr": "KARBONDİOKSİT",
     "class": "2",
-    "classification_code": "A",
+    "classification_code": "2A",
     "packing_groups": {
       "-": {
         "kemler": "20",
@@ -2693,9 +2693,9 @@
   },
   "UN1954": {
     "name": "COMPRESSED GAS, FLAMMABLE, N.O.S.",
-    "name_tr": "SIKIŞTIRIŞMIŞ GAZ, YANICI, B.N.O.",
+    "name_tr": "SIKIŞTIRILMIŞ GAZ, YANICI, B.N.O.",
     "class": "2.1",
-    "classification_code": "F",
+    "classification_code": "1F",
     "packing_groups": {
       "-": {
         "kemler": "23",
@@ -2714,9 +2714,9 @@
   },
   "UN3156": {
     "name": "COMPRESSED GAS, OXIDIZING, N.O.S.",
-    "name_tr": "SIKIŞTIRIŞMIŞ GAZ, OKSİTLEYİCİ, B.N.O.",
+    "name_tr": "SIKIŞTIRILMIŞ GAZ, OKSİTLEYİCİ, B.N.O.",
     "class": "2.2",
-    "classification_code": "O",
+    "classification_code": "1O",
     "packing_groups": {
       "-": {
         "kemler": "25",

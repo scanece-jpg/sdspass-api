@@ -2735,6 +2735,16 @@ def calculate(comps: List[Dict], form: str = 'liquid',
             'note': 'Katı üründe bileşenlerden hesaplanmaz — ölçüm (ör. ISO 1183 / yığın yoğunluğu) girin.',
         }
 
+    # Pastada bileşen viskozitelerinden hesap (çoğunlukla su/çözücü) ürünün gerçek kıvamını
+    # yansıtmaz (koyulaştırıcı, katı dolgu) → ölçüm girilmediyse Bölüm 9'a değer yazılmaz.
+    if form == 'paste' and isinstance(theo_props.get('viscosity'), dict):
+        _v = theo_props['viscosity']
+        theo_props['viscosity'] = {
+            'value': None, 'display': 'Belirlenmemiştir', 'estimate': _v.get('value'),
+            'measured': False, 'estimate_only': True, 'method': '—', 'standard': '',
+            'note': 'Pastada bileşenlerden hesaplanmaz — ölçüm (ör. ISO 3219) girin.',
+        }
+
     # Test verisi varsa üzerine yaz
     if test_data:
         _apply_test_data(theo_props, test_data)

@@ -38,7 +38,9 @@ ICONS_DIR = Path(__file__).parent.parent.parent / 'data' / 'ghs_icons'
 # H kodu → GHS eşlemesi
 H_TO_GHS = {
     'GHS01': {'H200','H201','H202','H203','H204','H205','H240','H241'},
-    'GHS02': {'H224','H225','H226','H228','H242','H250','H251','H252','H260','H261','H222','H223'},
+    # H220 (Alev. Gaz 1A/1B) ve H232 (pirofor gaz) → GHS02 (SEA Ek-1 Tablo 2.2.2). H221 eklenmez:
+    # Alev. Gaz 2 piktogram almaz; motor H221 üretmiyor.
+    'GHS02': {'H220','H232','H224','H225','H226','H228','H242','H250','H251','H252','H260','H261','H222','H223'},
     'GHS03': {'H270','H271','H272'},
     'GHS04': {'H280','H281'},
     'GHS05': {'H290','H314','H318'},

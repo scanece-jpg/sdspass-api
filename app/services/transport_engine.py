@@ -876,8 +876,13 @@ def classify(h_codes: List[str], form: str = 'liquid',
     # ── Adım 3: Yan tehlikeleri belirle ──────────────────────────────────────
     # Sınıf 9 (çevre için tehlikeli) hiçbir zaman yan tehlike olarak yazılmaz — çevre için
     # tehlikeli madde işareti ile gösterilir (ADR 5.2.1.8 / 5.4.1.1.18).
+    # Gazda 2.2 (yanıcı olmayan, zehirli olmayan gaz) yalnızca gaz yanıcı/zehirli değilse etikettir;
+    # alevlenir (2.1) veya zehirli (2.3) gazda H280 basınç özelliği ayrıca 2.2 etiketi getirmez
+    # (ADR 2.2.2.1.5 / Tablo A, örn. UN1954 etiket 2.1).
+    _gas_primary = str(primary['class']) in ('2.1', '2.3')
     subs = sorted(
-        [d for d in detected if d['class'] not in (primary['class'], '9')],
+        [d for d in detected if d['class'] not in (primary['class'], '9')
+         and not (_gas_primary and d['class'] == '2.2')],
         key=lambda d: _pg_num(d['pg'])
     )
     sub_class = subs[0]['class'] if subs else None

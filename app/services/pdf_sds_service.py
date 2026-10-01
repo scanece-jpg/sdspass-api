@@ -501,6 +501,36 @@ _NOS_HAZARD_GROUPS: dict[str, list] = {
 }
 
 
+_EK6_CACHE: dict | None = None
+
+
+def _ek6_own_name(cas: str, raw: str) -> str:
+    """Ek-6'da birden fazla CAS'ı kapsayan girişlerde ("o-ksilen [1]; … ksilen [4]") bileşenin
+    kendi CAS'ına karşılık gelen adı döndürür; [n] sırası girişin CAS listesindeki sıradır."""
+    global _EK6_CACHE
+    if not cas or '[' not in (raw or ''):
+        return ''
+    if _EK6_CACHE is None:
+        try:
+            import json as _json
+            _p = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'sea_ek6_tr.json')
+            with open(_p, encoding='utf-8') as _f:
+                _EK6_CACHE = _json.load(_f)
+        except Exception:
+            _EK6_CACHE = {}
+    ent = _EK6_CACHE.get(cas) or {}
+    if '_alias' in ent:
+        ent = _EK6_CACHE.get(ent['_alias']) or {}
+    cas_list = [ent.get('cas')] + list(ent.get('synonyms') or [])
+    if cas not in cas_list:
+        return ''
+    tag = f'[{cas_list.index(cas) + 1}]'
+    for seg in _re.split(r'[;\n]', raw):
+        if tag in seg:
+            return seg
+    return ''
+
+
 def _nos_technical_names(un_no: str, components: list, lang: str = 'TR') -> str:
     """ADR 3.1.2.8 — B.N.O. sevkiyat adına eklenecek teknik isimler.
 
@@ -532,7 +562,8 @@ def _nos_technical_names(un_no: str, components: list, lang: str = 'TR') -> str:
             # listelerinden ("heptan; n-heptan [1]\n2,4-dimetilpentan [2]…")
             # yalnızca ilk ismi al; satır ve noktalı virgül ayıraçlarını
             # temizle; "[1]" gibi numara eklerini kaldır.
-            primary = raw.split('\n')[0].split(';')[0]
+            primary = _ek6_own_name(c.get('cas_no') or c.get('cas') or '', raw) or \
+                raw.split('\n')[0].split(';')[0]
             primary = _re.sub(r'\s*\[\d+\]', '', primary).strip()
             name = primary
             if not name or name in seen:

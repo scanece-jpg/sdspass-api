@@ -491,6 +491,11 @@ async def classify(inp: dict) -> dict:
     euh_codes = euh.get('euh_codes', [])
 
     p_result = assign_p_codes(h_codes, signal, usage=usage)
+    # P260/P261: "Tozunu/…/spreyini" — tedarikçinin seçeceği kısım fiziksel hale göre (panel ve PDF aynı)
+    from app.services.sds_reg_sections import _select_inhal
+    for _d in p_result.get('p_details') or []:
+        if _d.get('text'):
+            _d['text'] = _select_inhal(_d['text'], form, 'TR' if lang == 'TR' else 'EN')
     p_result['label'] = select_label_p_codes(p_result['p_codes'], 6, h_codes=h_codes, euh_codes=euh_codes,
                                              usage=usage, form=form)
     p_result['sds'] = classify_sds_p_codes(p_result['p_codes'], usage=usage, h_codes=h_codes, form=form,

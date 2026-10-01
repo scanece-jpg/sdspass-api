@@ -911,7 +911,7 @@ async def clp_calculate(body: dict):
         signal = "Danger" if is_danger(set(result["h_codes"]), result.get("passed", [])) else (
                   "Warning" if result["h_codes"] else "")
         result["signal_word"] = signal
-        result["signal_word_tr"] = {"Danger":"Tehlike","Warning":"Uyarı","":""}.get(signal,"")
+        result["signal_word_tr"] = {"Danger":"Tehlike","Warning":"Dikkat","":""}.get(signal,"")   # SEA Md.4(1)(ff)
         result["h_codes"] = sorted(result["h_codes"])
 
         return {"success": True, "result": result, "lang": lang}
@@ -936,7 +936,7 @@ async def clp_classify_single(body: dict):
         "success": True,
         "h_codes": h_codes,
         "signal_word": ("Tehlike" if lang=="TR" else "Danger") if signal=="Danger" else (
-                        "Uyarı" if lang=="TR" else "Warning") if signal=="Warning" else "",
+                        "Dikkat" if lang=="TR" else "Warning") if signal=="Warning" else "",
         "signal_word_en": signal,
         "ghs_pictograms": ghs,
         "h_texts": {h: get_h(lang, h) for h in h_codes},

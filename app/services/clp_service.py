@@ -783,7 +783,7 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
 
     h_codes = sorted(seen_h)
     signal  = "Danger" if any(h in DANGER_H for h in h_codes) else ("Warning" if h_codes else "")
-    signal_tr = {"Danger":"Tehlike","Warning":"Uyarı","":""}.get(signal,"")
+    signal_tr = {"Danger":"Tehlike","Warning":"Dikkat","":""}.get(signal,"")   # SEA Md.4(1)(ff)
 
     return {
         "h_codes":     h_codes,

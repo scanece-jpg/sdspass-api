@@ -355,7 +355,8 @@ CONTEXT_SUPERSEDES: Dict[Tuple[str, str], List[str]] = {
 
     # ── Kaynak bağımsız kurallar ───────────────────────────────────────────────
     ('P260',           '__any__'): ['P261'],
-    ('P271',           '__any__'): ['P261'],
+    # P271 (havalandırma) ile P261 (solumaktan kaçının) ayrı önlemlerdir — rehberde P261 yalnız
+    # "P260 yoksa" koşuluna bağlı (SEA Etiketleme Rehberi 7.3.3.8). Önceden P271, P261'i siliyordu.
     ('P304+P340',      '__any__'): ['P304+P341'],
     ('P305+P351+P338', '__any__'): ['P338', 'P351'],  # P337+P313 ayrı senaryo (kalıcı tahriş → doktor)
     ('P303+P361+P353', '__any__'): ['P302+P352', 'P361', 'P353'],

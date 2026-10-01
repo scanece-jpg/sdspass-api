@@ -21,8 +21,11 @@ Dereceler (her giriş: (P kodu, halka satış, endüstriyel/profesyonel)):
 """
 from typing import Dict, List, Tuple
 
-# Soluma koşuluna bağlı ifadeler: gaz/aerosol/toz üründe koşul sağlanmış kabul edilir
-INHAL = {'P260', 'P261', 'P284', 'P403+P233'}
+# Soluma koşuluna bağlı ifadeler. Rehber: P260/P261/P284 "çok uçucu, gaz, sprey veya solunabilir
+# toz" ise → gaz/aerosol ve katı/toz ürünlerde koşul sağlanmış sayılır (katıda toz oluşumu).
+# P403+P233 ise "ürün uçucu ve zararlı atmosfer yaratması olasıysa" → yalnız gaz/aerosol.
+INHAL = {'P260', 'P261', 'P284'}
+VOLATILE = {'P403+P233'}
 
 # Rehberdeki eski kodlar → sistemin ürettiği güncel CLP kodları
 ALIAS = {
@@ -158,14 +161,16 @@ def _canon(p: str) -> str:
 def levels(h_codes: List[str], usage: str = 'industrial', form: str = 'liquid') -> Dict[str, str]:
     """Her P kodu için, sınıflandırmadaki H kodları arasında en güçlü öneri derecesi."""
     col = 1 if usage == 'consumer' else 2
-    inhal_ok = form in ('gas', 'aerosol', 'powder')
+    inhal_ok = form in ('gas', 'aerosol', 'powder', 'solid')
+    volatile_ok = form in ('gas', 'aerosol')
     out: Dict[str, str] = {}
     for h in h_codes:
         rows = GUIDANCE.get(h) or GUIDANCE.get(h[:4]) or []
         for row in rows:
             p, lvl = row[0], row[col]
             if lvl in ('CK', 'CO'):
-                lvl = lvl[1] if (p in INHAL and inhal_ok) else 'C'
+                met = (p in INHAL and inhal_ok) or (p in VOLATILE and volatile_ok)
+                lvl = lvl[1] if met else 'C'
             if RANK[lvl] > RANK.get(out.get(p, '-'), 0):
                 out[p] = lvl
     return out

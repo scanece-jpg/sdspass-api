@@ -147,6 +147,7 @@ from app.services.gbf_author_service import format_author_block, validate_certif
 from app.services.sds_reg_sections import (
     first_aid as reg_first_aid, accidental_release as reg_accidental_release, hygiene as reg_hygiene,
     handling_p as reg_handling_p, storage_p as reg_storage_p,
+    _select_inhal as reg_select_inhal,
 )
 from app.services.sds_sentence_service import (
     adapt_for_form, adapt_list_for_form,
@@ -1190,6 +1191,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         )
         for code in label_codes_sorted:
             txt = get_p(lang, code) or P_COMBOS.get(code) or P_TEXTS.get(code, code)
+            # P260/P261: tedarikçinin seçeceği kısım fiziksel hale göre (katı → "Tozunu")
+            txt = reg_select_inhal(txt, product.get('form') or 'liquid', lang)
             story.append(Paragraph(f"• <b>{code}:</b> {txt}", styles['bullet']))
         # P501 — bertaraf kodu, 6 limitinin dışında "+1 Bertaraf Kodu" olarak her zaman basılır
         mandatory = label_p.get('mandatory', [])
@@ -3123,6 +3126,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 codes_sorted = sorted(codes, key=lambda p: P_LABEL_PRIORITY.get(p, 5), reverse=True)
                 for code in codes_sorted:
                     txt = get_p(lang, code) or P_COMBOS.get(code) or P_TEXTS.get(code, code)
+                    txt = reg_select_inhal(txt, product.get('form') or 'liquid', lang)
                     # P370+P378: oksitleyici (H271/H272) → söndürücüyü belirt (SEA Ek-4)
                     if code == 'P370+P378' and bool(set(h_codes) & {'H271','H272'}):
                         txt = ('Yangın durumunda: Bol su kullanın.' if lang == 'TR'

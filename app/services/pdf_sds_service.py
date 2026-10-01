@@ -2563,9 +2563,17 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         except (ValueError, TypeError):
             pass
 
+    # 12.2 — deterjan ürününde yüzey aktif madde varsa Deterjanlar Hakkında Yönetmelik Md.6 uygunluğu
+    _biodeg_txt = bio.get('assessment') or sds12.get('12.2', na)
+    if product.get('is_detergent') and not is_us:
+        from app.services.detergent_service import has_surfactant, biodegradability_line
+        if has_surfactant(components):
+            _biodeg_txt = f"{_biodeg_txt} {biodegradability_line(lang)}" if _biodeg_txt not in (None, '', na) \
+                else biodegradability_line(lang)
+
     eco_rows = [
         [sub_title(lang,'12.1'), sds12.get('12.1', na)],
-        [sub_title(lang,'12.2'), bio.get('assessment') or sds12.get('12.2', na)],
+        [sub_title(lang,'12.2'), _biodeg_txt],
         [sub_title(lang,'12.3'), sds12.get('12.3', na)],
         [sub_title(lang,'12.4'), _soil_txt],
         [sub_title(lang,'12.5'), pbt_summary],

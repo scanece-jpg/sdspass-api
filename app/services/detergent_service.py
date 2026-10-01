@@ -9,7 +9,10 @@ Ek-7 A "İçeriğin etikette belirtilmesi" (resmî ek metninden):
     halojenli hidrokarbonlar, sabun, zeolitler, polikarboksilatlar.
   * Enzimler, dezenfektanlar, optik parlatıcılar, parfümler konsantrasyondan bağımsız listelenir.
   * Koruyucu maddeler konsantrasyondan bağımsız (Kozmetik Yönetmeliği ortak terminolojisiyle).
-  * Kozmetik Yönetmeliği Ek-III'teki koku alerjenleri ağırlıkça %0,01'i geçerse listelenir.
+  * Kozmetik Yönetmeliği Ek-III'teki koku alerjenleri ağırlıkça %0,01'i geçerse listelenir. Ek-7 A
+    23/5/2005 tarihli ve 25823 sayılı Kozmetik Yönetmeliği'ne atıf yapar; bu yönetmelik, 8/5/2023
+    tarihli ve 32184 (mükerrer) sayılı RG'de yayımlanan Kozmetik Ürünler Yönetmeliği (TİTCK) Md.38 ile
+    yürürlükten kalkmıştır — güncel liste bu yönetmeliğin Ek-III'üdür.
   * Son paragraf: "Endüstriyel ve kurumsal sektörde kullanılması amaçlanan ve halkın kullanımına
     sunulmayan deterjanlar için; teknik veri belgesi, malzeme güvenlik veri belgesi veya benzer
     şekildeki belgeler aracılığı ile eş değer bilgilerin temin edilmesi halinde, yukarıda bahsi
@@ -162,6 +165,29 @@ def ek7a_declaration(components: List[dict]) -> Dict:
         if keys:
             bands.append((tr, en, sorted(keys, key=lambda k: list(CLASSES).index(k))))
     return {'bands': bands, 'always': always, 'allergens': allergens}
+
+
+SURFACTANT_CLASSES = {'anionic', 'cationic', 'amphoteric', 'nonionic', 'soap'}
+
+
+def has_surfactant(components: List[dict]) -> bool:
+    for c in components or []:
+        cas = str(c.get('cas_no') or c.get('cas') or '').strip()
+        cls = (c.get('det_class') or '').strip() or CAS_CLASS.get(cas)
+        if cls in SURFACTANT_CLASSES:
+            return True
+    return False
+
+
+def biodegradability_line(lang: str = 'TR') -> str:
+    """12.2 — Deterjanlar Hakkında Yönetmelik Md.6(1): Ek-3'teki nihai aerobik biyolojik
+    parçalanabilirlik kriterlerine uyan yüzey aktif maddeler kısıtlamasız piyasaya arz edilir
+    (Md.6(2): endüstriyel/kurumsal üründe istisna talep edilebilir — istisnalı üründe kullanılmamalı)."""
+    return ('Üründe bulunan yüzey aktif maddeler, Deterjanlar Hakkında Yönetmelik (RG: 27.01.2018, Sayı: 30314) '
+            'Md.6 ve Ek-3\'te belirtilen nihai aerobik biyolojik parçalanabilirlik kriterlerine uygundur.'
+            if lang == 'TR' else
+            'The surfactant(s) contained in this product comply with the ultimate aerobic biodegradability '
+            'criteria of the Detergents Regulation (TR Official Gazette 30314; EU 648/2004).')
 
 
 def ek7a_lines(components: List[dict], usage: str = 'industrial', lang: str = 'TR') -> List[str]:

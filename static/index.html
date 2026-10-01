@@ -200,6 +200,9 @@ body::after{display:none}
 .pdf-block-btn-fix:hover{background:var(--accent2)}
 .pdf-block-btn-skip{padding:9px 14px;border-radius:6px;border:1px dashed var(--border2);background:none;color:var(--text3);cursor:pointer;font-size:10px}
 .pdf-block-btn-skip:hover{color:var(--text)}
+.pdf-block-box.soft{border-color:rgba(245,166,35,.4)}
+.pdf-block-box.soft .pdf-block-head{background:rgba(245,166,35,.1);border-bottom-color:rgba(245,166,35,.25);color:#f5a623}
+.pdf-block-box.soft .pdf-block-item{border-left-color:#f5a623}
 
 /* H314 Nötralizasyon Uyarı Modalı */
 .h314-overlay{position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:1300;display:none;align-items:center;justify-content:center}
@@ -4475,12 +4478,9 @@ window.addEventListener('DOMContentLoaded', () => {
 <!-- ══ PDF ZORUNLU ALAN ENGEL MODALI ════════════════════════════════════════ -->
 <div class="pdf-block-overlay" id="pdfBlockOverlay">
   <div class="pdf-block-box">
-    <div class="pdf-block-head">🚫 PDF Oluşturulamıyor</div>
+    <div class="pdf-block-head" id="pdfBlockHead">🚫 PDF Oluşturulamıyor</div>
     <div class="pdf-block-body">
-      <p class="pdf-block-desc">
-        Aşağıdaki alanlar <b>zorunlu</b> olup boş bırakılamaz.<br>
-        <span style="font-size:10px;color:var(--text3)">KKDİK Ek-2 — ürün/tedarikçi kimliği (Bölüm 1) ve temel fiziksel veriler (Bölüm 9) boş bırakılamaz.</span>
-      </p>
+      <p class="pdf-block-desc" id="pdfBlockDesc"></p>
       <div id="pdfBlockItems"></div>
     </div>
     <div class="pdf-block-footer">
@@ -4751,80 +4751,45 @@ function _checkPDFMandatory() {
     missing.push({ hard: true, label: 'Telefon', reason: 'Bölüm 1.3 — tedarikçinin telefon numarası zorunludur (KKDİK Ek-2 1.3)' });
   }
 
-  // 1. Fiziksel hal — her formda zorunlu (SDS'de mutlaka yazılmalı)
+  // Bölüm 9 fiziksel özellikleri PDF'i durdurmaz: KKDİK Ek-2 9.1'e göre bilgi yoksa nedeni yazılır,
+  // PDF de bunu kendisi yapar. Burada yalnızca boş alanın Bölüm 9'a nasıl yazılacağı bildirilir.
+  // Erime noktası, yoğunluk, kaynama noktası ve çözünürlük sınıflandırmayı etkilemediği için listelenmez.
+  const _ND = '"Belirlenmemiştir (karışım için test yapılmamıştır)"';
+  const _formTxt = {solid:'Katı', powder:'Toz', gas:'Gaz', aerosol:'Aerosol', paste:'Pasta', liquid:'Sıvı'}[form] || 'Sıvı';
+
+  // 1. Görünüm
   if (!document.getElementById('tf_appearance')?.value?.trim()) {
-    missing.push({ label: 'Görünüm (Fiziksel hal)', reason: 'SDS Bölüm 9 — ürünün fiziksel hali belirtilmeli (KKDİK Ek-2 §9.1)' });
+    missing.push({ label: 'Görünüm (Fiziksel hal)', reason: `Bölüm 9(a)'ya fiziksel hal "${_formTxt}" yazılacak` });
   }
-
-  // 2. Renk — her formda zorunlu
+  // 2. Renk
   if (!document.getElementById('tf_color')?.value?.trim()) {
-    missing.push({ label: 'Renk', reason: 'SDS Bölüm 9 — renk bilgisi belirtilmeli; bilinmiyorsa gerekçe yazın (KKDİK Ek-2 §9.1)' });
+    missing.push({ label: 'Renk', reason: "Bölüm 9(a)'da renk belirtilmeyecek — bilinen rengi yazmanız önerilir" });
   }
-
-  // 3. Koku — her formda zorunlu
+  // 3. Koku
   if (!document.getElementById('tf_odor')?.value?.trim()) {
-    missing.push({ label: 'Koku', reason: 'SDS Bölüm 9 — koku bilgisi belirtilmeli; bilinmiyorsa gerekçe yazın (KKDİK Ek-2 §9.1)' });
+    missing.push({ label: 'Koku', reason: `Bölüm 9(b)'ye "Belirlenmemiştir" yazılacak` });
   }
-
-  // 4. pH Değeri — motor hesabı + KKDİK Ek-2 §9.1
+  // 4. pH — aşırı pH (≤2 / ≥11,5) cilt/göz sınıflandırmasını etkileyebilir
   const phNA = document.getElementById('na_ph')?.checked;
-  if (!phNA && !document.getElementById('tf_ph')?.value?.trim()) {
-    const phReason = ['solid','powder'].includes(form)
-      ? 'Motor için gerekli — katı/toz için %1 sulu çözeltide pH ölçün; uygulanamıyorsa N/A + gerekçe'
-      : 'Motor için gerekli — ölçülemeyen/uygulanamayan durumlarda N/A + gerekçe yazın';
-    missing.push({ label: 'pH Değeri', reason: phReason });
+  if (form !== 'gas' && !phNA && !document.getElementById('tf_ph')?.value?.trim()) {
+    const phHint = ['solid','powder'].includes(form) ? ' Katı/tozda %1 sulu çözeltide ölçülür.' : '';
+    missing.push({ label: 'pH Değeri', reason: `Bölüm 9(ç)'ye ${_ND} yazılacak. pH ≤2 veya ≥11,5 ise cilt/göz sınıflandırmasını etkiler.${phHint}` });
   }
-
-  // 5. Parlama Noktası — alevlenirlik motoru için gerekli
-  if (isLiquid) {
+  // 5. Parlama noktası — sıvıda alevlenirlik sınıfını etkiler
+  if (isLiquid && form !== 'aerosol') {
     const fpEl = document.getElementById('tf_fp');
     const fpNA = fpEl?.dataset?.na === 'true';
     const fpSt = document.getElementById('fp_status')?.value;   // beyan / "ölçüm yok" seçimi
     if (!fpNA && !fpEl?.value?.trim() && !fpSt) {
-      missing.push({ label: 'Parlama Noktası', reason: 'Ölçülen değer girilmedi — Bölüm 9\'da "Belirlenmemiştir" yazılacak; N/A ise N/A + gerekçe yazın' });
+      missing.push({ label: 'Parlama Noktası', reason: `Bölüm 9(f)'ye ${_ND} yazılacak; alevlenirlik bileşen verilerinden değerlendirilir` });
     }
   }
-
-  // 6. Erime/Donma Noktası — katı/toz için motor + SDS
-  const isSolid = ['solid', 'powder'].includes(form);
-  if (isSolid) {
-    const mpEl = document.getElementById('tf_mp');
-    const mpNA = document.getElementById('na_mp')?.checked;
-    if (!mpNA && !mpEl?.value?.trim()) {
-      missing.push({ label: 'Erime/Donma Noktası', reason: 'Motor için gerekli — katı/toz SDS\'de beklenir; bilinmiyorsa N/A + gerekçe' });
-    }
-  }
-
-  // 7. Yoğunluk — konsantrasyon ve karışım hesabı için gerekli
-  const densEl = document.getElementById('tf_density');
-  const densNA = densEl?.dataset?.na === 'true';
-  if (!densNA && !densEl?.value?.trim()) {
-    missing.push({ label: 'Yoğunluk (g/mL)', reason: 'Motor için gerekli — konsantrasyon ve karışım hesabında kullanılır' });
-  }
-
-  // 8. Çözünürlük — çevre tehlike ve maruz kalma hesabı için
-  const solEl = document.getElementById('tf_sol');
-  const solNA = solEl?.dataset?.na === 'true';
-  const _solTp = _lastTheoProps || _lastCalcState?.theoPhys || _lastCalcState?.phys?.theoProps || {};
-  const solHasMotorText = solEl?.dataset?.source === 'theo' || !!solEl?.value?.trim()
-                        || !!_solTp?.solubility?.text || !!_solTp?.solubility?.value;
-  if (!solNA && !solEl?.value?.trim() && !solHasMotorText) {
-    missing.push({ label: 'Çözünürlük (mg/L)', reason: 'Motor için gerekli — çevre tehlike ve maruz kalma hesabında kullanılır' });
-  }
-
-  // 9. Kaynama Noktası — alevlenirlik ve buharlaşma hesabı için
-  const bpEl = document.getElementById('tf_bp');
-  const bpNA = bpEl?.dataset?.na === 'true';
-  if (form !== 'gas' && !bpNA && !bpEl?.value?.trim()) {
-    missing.push({ label: 'Kaynama Noktası', reason: 'Ölçülen değer girilmedi — Bölüm 9\'da "Belirlenmemiştir" yazılacak (en düşük bileşen değeri karışımın kaynama noktası değildir)' });
-  }
-
-  // 10. Viskozite — H304 aspirasyon toksisitesi hesabı için
-  if (isLiquid) {
+  // 6. Viskozite — sıvıda H304 (aspirasyon) kararını etkiler
+  if (isLiquid && form !== 'aerosol') {
     const viscEl = document.getElementById('tf_visc');
     const viscNA = viscEl?.dataset?.na === 'true';
     if (!viscNA && !viscEl?.value?.trim()) {
-      missing.push({ label: 'Viskozite @40°C', reason: 'Motor için gerekli — H304 aspirasyon toksisitesi eşiği (≤20,5 mm²/s) hesabında kullanılır' });
+      missing.push({ label: 'Viskozite @40°C', reason: `Bölüm 9(o)'ya ${_ND} yazılacak; H304 eşiği (≤20,5 mm²/s) kontrol edilemez` });
     }
   }
 
@@ -5404,8 +5369,6 @@ async function _afterPhysSrc() {
   // Zorunlu alan kontrolü
   const missing = _checkPDFMandatory();
   if (missing.length) {
-    // Görünüm / Renk / Koku eksikse → kesinlikle engelle (bypass yok)
-    // Diğer alanlar (Parlama Noktası, Yoğunluk vb.) → uyarı ama "Yine de oluştur" görünür
     document.getElementById('pdfBlockItems').innerHTML = missing.map(m => `
       <div class="pdf-block-item">
         <div>
@@ -5414,10 +5377,20 @@ async function _afterPhysSrc() {
         </div>
       </div>`).join('');
 
-    // Ürün/tedarikçi kimliği eksikse (hard) "Yine de oluştur" gösterilmez
+    // Ürün/tedarikçi kimliği eksikse (hard) PDF üretilmez; yalnız fiziksel veri eksikse bilgi verilir
+    const _hard = missing.some(m => m.hard);
+    document.getElementById('pdfBlockHead').textContent = _hard ? '🚫 PDF Oluşturulamıyor' : 'ℹ️ Eksik ölçüm verileri';
+    document.getElementById('pdfBlockDesc').innerHTML = _hard
+      ? 'Aşağıdaki alanlar <b>zorunlu</b> olup boş bırakılamaz.<br><span style="font-size:10px;color:var(--text3)">KKDİK Ek-2 Bölüm 1 — ürün tanımlayıcısı ve tedarikçi bilgileri olmadan GBF düzenlenemez.</span>'
+      : "Aşağıdaki alanlar boş. PDF oluşturulabilir; KKDİK Ek-2 9.1 gereği Bölüm 9'a nedeniyle birlikte belirtilen ifade yazılır.<br><span style=\"font-size:10px;color:var(--text3)\">Ölçüm değeriniz varsa geri dönüp girmeniz önerilir.</span>";
+    document.querySelector('#pdfBlockOverlay .pdf-block-box').classList.toggle('soft', !_hard);
     const skipBtn = document.getElementById('pdfBlockSkipBtn');
-    if (skipBtn) skipBtn.style.display = missing.some(m => m.hard) ? 'none' : '';
-    _pdfBlockCallback = missing.some(m => m.hard) ? null : _doPdfGenerate;
+    if (skipBtn) {
+      skipBtn.style.display = _hard ? 'none' : '';
+      skipBtn.textContent = 'Devam et ve oluştur';
+    }
+    document.querySelector('#pdfBlockOverlay .pdf-block-btn-fix').textContent = _hard ? '✏️ Geri Dön ve Düzelt' : '✏️ Geri Dön ve Doldur';
+    _pdfBlockCallback = _hard ? null : _doPdfGenerate;
     document.getElementById('pdfBlockOverlay').classList.add('open');
     return;
   }

@@ -129,13 +129,17 @@ def get_section15_text(
 # istemez; GBF'de yalnız kullanılmamış/standart dışı ürün için gösterge verilir:
 #   16 03 "Standart dışı ürün grupları ve kullanılmamış ürünler" — (M) ayna kayıtlar:
 #   16 03 03* / 16 03 04 (inorganik), 16 03 05* / 16 03 06 (organik).
-# Tehlikelilik: Ek-3/B eşik konsantrasyonları. Yönetmelik eşikleri R ifadeleriyle verir;
-# SEA H kodu karşılıkları SEA/CLP Ek-VII dönüşüm tablosuna göredir. Ek-3/B Açıklama (5):
+# Tehlikelilik: Ek-3/B eşik konsantrasyonları. Yönetmelik eşikleri R ifadeleriyle verir. SEA'nın
+# çevrim tablosu (Ek-7) RG 10.12.2020/31330 ile yürürlükten kalktığından R → H karşılıkları AB CLP
+# (EC 1272/2008) Ek-VII çevrim tablosundan alınmıştır. Tablo tek yönlüdür (R → H); bir H kodu
+# birden çok R ifadesine karşılık geliyorsa en sıkı eşik uygulanır (örn. H370: T+;R39/26-28 veya
+# T;R39/23-25 → T+). Kat. 1C cilt aşındırıcı Ek-VII'de yoktur (eski sistemde 1C yoktu); R34
+# grubunda değerlendirilir. Duyarlılaştırıcılar (H317/H334) için Ek-3/B'de eşik yoktur. Ek-3/B Açıklama (5):
 # atık yalnız ekotoksik (H14) olduğu için tehlikeli sayılmaz → sucul H kodları listede yok.
 _EK3B = [
     # (H kodları, alt kategori filtresi, eşik %, Ek-3/B bendi, açıklama)
-    ({'H300', 'H310', 'H330'}, None, 0.1, 'b', 'yüksek seviyede zehirli (H300/H310/H330)'),
-    ({'H301', 'H311', 'H331', 'H370', 'H372'}, None, 3.0, 'c', 'zehirli (H301/H311/H331/H370/H372)'),
+    ({'H300', 'H310', 'H330', 'H370'}, None, 0.1, 'b', 'yüksek seviyede zehirli (H300/H310/H330/H370)'),
+    ({'H301', 'H311', 'H331', 'H372'}, None, 3.0, 'c', 'zehirli (H301/H311/H331/H372)'),
     ({'H302', 'H312', 'H332', 'H371', 'H373', 'H304'}, None, 25.0, 'ç', 'zararlı (H302/H312/H332/H371/H373/H304)'),
     ({'H314'}, 'R35', 1.0, 'd', 'R35 aşındırıcı (H314 Kat. 1A)'),
     ({'H314'}, 'R34', 5.0, 'e', 'R34 aşındırıcı (H314 Kat. 1B/1C)'),
@@ -192,7 +196,10 @@ def waste_assessment(components: list, mixture_h: list = None) -> dict:
             met.append({'item': item, 'label': label, 'total': round(total, 2), 'limit': limit})
     mix = {str(h)[:4] for h in (mixture_h or [])}
     if mix & {'H224', 'H225', 'H226'}:
-        met.insert(0, {'item': 'a', 'label': 'parlama noktası ≤ 55 °C (alevlenir sıvı)', 'total': None, 'limit': None})
+        met.insert(0, {'item': 'a', 'label': ('parlama noktası ≤ 55 °C (alevlenir sıvı' +
+                                             ('; H226 için parlama noktası 55–60 °C ise bu bent uygulanmaz)'
+                                              if not (mix & {'H224', 'H225'}) else ')')),
+                       'total': None, 'limit': None})
     hazardous = bool(met)
 
     w_inorg = sum(_comp_conc(c) for c in comps
@@ -201,8 +208,8 @@ def waste_assessment(components: list, mixture_h: list = None) -> dict:
                 if (c.get('cas_no') or c.get('cas') or '').strip() not in ('', _WATER))
     inorganic = w_all > 0 and w_inorg / w_all > 0.5
     if inorganic:
-        code, desc = (('16 03 03*', 'Tehlikeli maddeler içeren inorganik atıklar') if hazardous
-                      else ('16 03 04', '16 03 03 dışındaki inorganik atıklar'))
+        code, desc = (('16 03 03*', 'Tehlikeli maddeler içeren anorganik atıklar') if hazardous
+                      else ('16 03 04', '16 03 03 dışındaki anorganik atıklar'))
     else:
         code, desc = (('16 03 05*', 'Tehlikeli maddeler içeren organik atıklar') if hazardous
                       else ('16 03 06', '16 03 05 dışındaki organik atıklar'))
@@ -218,7 +225,7 @@ def _ewc_code_bullet(wa: dict, lang: str = 'TR') -> str:
         else:
             why = 'Ek-3/B eşik konsantrasyonlarının hiçbiri aşılmıyor'
         return (f"Kullanılmamış / standart dışı ürün için gösterge atık kodu: {wa['code']} — {wa['desc']} "
-                f"(Atık Yönetimi Yönetmeliği Ek-4, 16 03). Gerekçe: {why}. Kullanım sonrası oluşan atığın "
+                f"(Atık Yönetimi Yönetmeliği Ek-4, 16 03 Standart Dışı Gruplar ve Kullanılmamış Ürünler). Gerekçe: {why}. Kullanım sonrası oluşan atığın "
                 f"kodunu, atığın kaynağına göre Ek-1 atık kodu belirleme hiyerarşisini uygulayarak atık sahibi "
                 f"belirler (Md.12).")
     return (f"Indicative waste code for unused / off-specification product: {wa['code']} "
@@ -334,10 +341,10 @@ def get_disposal_content(h_codes: list = None, lang: str = 'TR', components: lis
             ' Packaging containing residues: 15 01 10* (Annex 4).')
     else:
         packaging_text = ('KONTAMİNE AMBALAJ: Ambalajları mümkün olduğunca tamamen boşaltın. Ürün tehlikeli atık '
-                          'sayılmadığından boş ambalajlar malzeme türüne göre ambalaj atığı (15 01 01 – 15 01 07) '
+                          'sayılmadığından boş ambalajlar malzeme türüne göre ambalaj atığı (15 01 01 – 15 01 09) '
                           'olarak geri kazanıma verilebilir.' if lang == 'TR' else
                           'CONTAMINATED PACKAGING: Empty containers completely; as the product is not hazardous '
-                          'waste, empty packaging may be recycled as packaging waste (15 01 01 – 15 01 07).')
+                          'waste, empty packaging may be recycled as packaging waste (15 01 01 – 15 01 09).')
 
     return {
         'product_bullets': product_bullets,

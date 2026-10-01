@@ -1887,7 +1887,7 @@ const WARNING_H = new Set([
 const _H_TO_GHS = {
   'H200':'GHS01','H201':'GHS01','H202':'GHS01','H203':'GHS01','H204':'GHS01','H205':'GHS01',
   'H220':'GHS02','H221':'GHS02','H222':'GHS02','H223':'GHS02',
-  'H224':'GHS02','H225':'GHS02','H226':'GHS02','H228':'GHS02','H229':'GHS02','H232':'GHS02',
+  'H224':'GHS02','H225':'GHS02','H226':'GHS02','H228':'GHS02','H232':'GHS02',   // H229 (Aerosol 3) piktogram almaz
   'H240':'GHS01','H241':'GHS01','H242':'GHS02',
   'H250':'GHS02','H251':'GHS02','H252':'GHS02','H260':'GHS02','H261':'GHS02',
   'H270':'GHS03','H271':'GHS03','H272':'GHS03',
@@ -4793,8 +4793,8 @@ function _checkPDFMandatory() {
   if (form === 'gas' && !document.getElementById('sel_gas_type')?.value) {
     missing.push({ label: 'Basınçlı Gaz Türü', reason: "Seçilmedi — Bölüm 2.1'de alt kategori yazılmayacak; Bölüm 14'te sıkıştırılmış gaz varsayılacak (sıvılaştırılmış gazda UN numarası farklıdır)" });
   }
-  // 7. Viskozite — sıvıda H304 (aspirasyon) kararını etkiler
-  if (isLiquid && form !== 'aerosol') {
+  // 7. Viskozite — yalnız sıvıda; H304 (aspirasyon) kararını etkiler (pastada hesaplanmaz/uyarılmaz)
+  if (form === 'liquid') {
     const viscEl = document.getElementById('tf_visc');
     const viscNA = viscEl?.dataset?.na === 'true';
     if (!viscNA && !viscEl?.value?.trim()) {

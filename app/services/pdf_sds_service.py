@@ -516,6 +516,19 @@ _NOS_HAZARD_GROUPS: dict[str, list] = {
 
 _EK6_CACHE: dict | None = None
 
+# SEA Ek-6'da yer almayan (Türkçe adı veritabanında bulunmayan) yaygın gazlar — B.B.B. teknik adı
+_GAS_NAMES_TR = {
+    '7727-37-9':  'azot',
+    '124-38-9':   'karbondioksit',
+    '7440-37-1':  'argon',
+    '7440-59-7':  'helyum',
+    '7440-01-9':  'neon',
+    '7439-90-9':  'kripton',
+    '7440-63-3':  'ksenon',
+    '2551-62-4':  'kükürt hekzaflorür',
+    '10024-97-2': 'diazot monoksit',
+}
+
 
 def _ek6_own_name(cas: str, raw: str) -> str:
     """Ek-6'da birden fazla CAS'ı kapsayan girişlerde ("o-ksilen [1]; … ksilen [4]") bileşenin
@@ -569,7 +582,8 @@ def _nos_technical_names(un_no: str, components: list, lang: str = 'TR') -> str:
             if not (comp_hcodes & group_hcodes):
                 continue
             # Türkçe ise name_tr, değilse name, yoksa CAS
-            raw = (c.get('name_tr', '') if lang == 'TR' else '') or \
+            _cas_c = str(c.get('cas_no') or c.get('cas') or '').strip()
+            raw = ((c.get('name_tr', '') or _GAS_NAMES_TR.get(_cas_c, '')) if lang == 'TR' else '') or \
                   c.get('name', '') or c.get('cas_no', '')
             # ADR teknik isim: sadece birincil ad — çoklu izomer/eşanlamlı
             # listelerinden ("heptan; n-heptan [1]\n2,4-dimetilpentan [2]…")

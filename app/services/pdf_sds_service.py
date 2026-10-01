@@ -2246,8 +2246,23 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         'Normal kullanım ve depolama koşullarında tehlikeli tepkime beklenmez.' if _TR10
         else 'No hazardous reactions expected under normal conditions of use and storage.')
 
+    # 10.1 Tepkime (KKDİK Ek-2 10.1.1 reaktiflik zararları; 10.1.2 karışım verisi yoksa bileşenlere göre)
+    _react_user = phys.get('reactivity')
+    if _react_user not in (None, '', na, 'Bilgi yok', 'Veri yok'):
+        _react101 = _react_user
+    elif _react:
+        _react101 = ('Karışım için tepkime test verisi yoktur. Bileşenlere göre bilinen reaktif zararlar ve '
+                     'oluştukları koşullar 10.3\'te verilmiştir.' if _TR10 else
+                     'No reactivity test data for the mixture. Known reactive hazards based on the components and '
+                     'the conditions under which they occur are given in 10.3.')
+    else:
+        _react101 = ('Karışım için tepkime test verisi yoktur. Bileşenlere göre normal kullanım ve depolama '
+                     'koşullarında tepkimeye girmesi beklenmez.' if _TR10 else
+                     'No reactivity test data for the mixture. Based on the components, not reactive under '
+                     'normal conditions of use and storage.')
+
     stability_data = [
-        [sub_title(lang,'10.1'), phys.get('reactivity', na)],
+        [sub_title(lang,'10.1'), _react101],
         [sub_title(lang,'10.2'), S(lang,'stable_conditions')],
         [sub_title(lang,'10.3'), react_str],
         [sub_title(lang,'10.4'), avoid_str],
@@ -2264,9 +2279,78 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     story += section_block(section_title(lang, 11), styles)
     story += sub_block(f"11.1 {sub_title(lang,'11.1')}", styles)
 
-    tox_rows = [[S(lang,'route_label'), term(lang,'information')]]
+    # ── KKDİK Ek-2 11.1: (a)–(h) zararlılık sınıflarının HER BİRİ için bilgi (11.1.1) ─────────
+    # Sınıflandırılmışsa sınıf + gerekçe (hesaplama yöntemi ve katkı veren bileşenler, 11.1.10);
+    # sınıflandırılmamışsa Ek-2 11.1.1'in öngördüğü ifade: "Mevcut bilgilere göre, sınıflandırma
+    # kriterlerini karşılamamaktadır."
+    _TR11 = lang == 'TR'
+    _h11 = list(dict.fromkeys(list(all_h_codes or []) + list(h_codes or [])))
+    _h11_base = {str(h).split('(')[0].split()[0]: h for h in _h11}
+    _NOT_MET = ('Mevcut bilgilere göre, sınıflandırma kriterlerini karşılamamaktadır.' if _TR11
+                else 'Based on available data, the classification criteria are not met.')
+    _TOX_CLASSES = [
+        ('a', 'Akut toksisite', 'Acute toxicity',
+         ['H300', 'H301', 'H302', 'H310', 'H311', 'H312', 'H330', 'H331', 'H332']),
+        ('b', 'Cilt aşınması/tahrişi', 'Skin corrosion/irritation', ['H314', 'H315']),
+        ('c', 'Ciddi göz hasarı/tahrişi', 'Serious eye damage/irritation', ['H318', 'H319']),
+        ('ç', 'Solunum yolları veya cilt hassaslaşması', 'Respiratory or skin sensitisation', ['H334', 'H317']),
+        ('d', 'Eşey hücre mutajenitesi', 'Germ cell mutagenicity', ['H340', 'H341']),
+        ('e', 'Kanserojenite', 'Carcinogenicity', ['H350', 'H351']),
+        ('f', 'Üreme sistemi toksisitesi', 'Reproductive toxicity',
+         ['H360', 'H360F', 'H360D', 'H360FD', 'H360Fd', 'H360Df', 'H361', 'H361F', 'H361D', 'H361FD', 'H362']),
+        ('g', 'BHOT — tek maruz kalma', 'STOT — single exposure', ['H370', 'H371', 'H335', 'H336']),
+        ('ğ', 'BHOT — tekrarlı maruz kalma', 'STOT — repeated exposure', ['H372', 'H373']),
+        ('h', 'Aspirasyon zararı', 'Aspiration hazard', ['H304']),
+    ]
+    _comps11 = sds_data.get('components') or components or []
 
-    # Test verilerinden LD50/LC50
+    def _contrib(codes):
+        """Bu sınıfa katkı veren bileşenler (bileşen sınıflandırması — SEA Ek-1 hesaplama yöntemi)."""
+        out = []
+        for _c in _comps11:
+            _ch = {str(x.get('h_code') or '').replace('*', '').strip().split('(')[0].split()[0][:4]
+                   for x in (_c.get('hazards') or []) if x.get('h_code')}
+            if _ch & {c[:4] for c in codes}:
+                _nm = (_c.get('name_tr') if _TR11 else '') or _c.get('name') or _c.get('cas_no') or _c.get('cas') or ''
+                if _nm and _nm not in out:
+                    out.append(_nm)
+        return out
+
+    tox_rows = [[('Zararlılık sınıfı (KKDİK Ek-2 11.1)' if _TR11 else 'Hazard class'),
+                 ('Değerlendirme' if _TR11 else 'Assessment')]]
+    for _k, _ltr, _len, _codes in _TOX_CLASSES:
+        _hit = list(dict.fromkeys(_h11_base.get(h, h) for h in _codes if h in _h11_base))
+        if _hit:
+            _parts = []
+            for _h in _hit:
+                _hb = str(_h).split('(')[0].split()[0]
+                if _hb in ('H370', 'H371', 'H372', 'H373') and _hb in _stot_organ_map:
+                    _st = get_stot_stmt(_hb, lang, _stot_organ_map[_hb])
+                else:
+                    _st = get_h_stmt(_hb, lang)
+                _parts.append(f'{_hb}: {_st}')
+            _src = _contrib(_codes)
+            _basis = ((' Karışım test edilmemiştir; sınıflandırma bileşenlere göre hesaplama yöntemiyle yapılmıştır'
+                       if _TR11 else ' Mixture not tested; classified by the calculation method from its components')
+                      + (f" ({', '.join(_src)})." if _src else '.'))
+            if _k == 'a':
+                _basis = (' Karışım test edilmemiştir; sınıflandırma ATEmix hesabıyla yapılmıştır (aşağıda).' if _TR11
+                          else ' Mixture not tested; classified by ATEmix calculation (below).')
+            tox_rows.append([f'({_k}) {_ltr if _TR11 else _len}', ' '.join(_parts) + _basis])
+        else:
+            _src = _contrib(_codes)
+            _txt = _NOT_MET
+            if _src and _k == 'a':
+                _txt += (f" Bu sınıfta sınıflandırılmış bileşenler ({', '.join(_src)}) ile hesaplanan ATEmix "
+                         "sınıflandırma eşiğini aşmamaktadır (aşağıda)." if _TR11 else
+                         f" ATEmix calculated with the classified components ({', '.join(_src)}) does not reach "
+                         "the classification threshold (below).")
+            elif _src:
+                _txt += (f" Bu sınıfta sınıflandırılmış bileşenler ({', '.join(_src)}) kesme değerlerinin altındadır."
+                         if _TR11 else f" Components classified in this class ({', '.join(_src)}) are below the cut-off values.")
+            tox_rows.append([f'({_k}) {_ltr if _TR11 else _len}', _txt])
+
+    # Karışımın kendisine ait test verisi (girildiyse) — Ek-2 11.1.2
     phys_tox = sds_data.get('phys_props', {})
     if phys_tox.get('ld50_oral'):
         tox_rows.append([f"LD50 Oral ({term(lang,'rat')})", f"{phys_tox['ld50_oral']} mg/kg"])
@@ -2275,71 +2359,19 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     if phys_tox.get('lc50_inhal'):
         tox_rows.append([f"LC50 Inhalation ({term(lang,'rat')}, 4h)", f"{phys_tox['lc50_inhal']} mg/L"])
 
-    # Maruziyet yolları — yalnızca sağlık tehlikesi H kodları (CLP Bölüm 3-5)
-    # H224/H225/H226 fiziksel tehlikedir, Section 11'e dahil edilmez
-    if lang == 'TR':
-        exposure_map = {
-            'H300':'Akut oral toksisite','H301':'Akut oral toksisite','H302':'Akut oral toksisite',
-            'H310':'Akut dermal toksisite','H311':'Akut dermal toksisite','H312':'Akut dermal toksisite',
-            'H330':'Akut inhalasyon toksisitesi','H331':'Akut inhalasyon toksisitesi','H332':'Akut inhalasyon toksisitesi',
-            'H314':'Cilt/mukoza aşındırıcısı','H315':'Cilt tahrişi',
-            'H317':'Cilt duyarlılaştırması','H318':'Ciddi göz hasarı','H319':'Göz tahrişi',
-            'H334':'Solunum duyarlılaştırması',
-            'H335':'Solunum yolu tahrişi',
-            'H336':'Narkotik etki — Merkezi sinir sistemi (baş dönmesi, uyuşukluk)',
-            'H340':'Genetik hasar (in vivo)',
-            'H341':'Genetik hasar (şüpheli)',
-            'H350':'Kanserojen (kategori 1)','H351':'Kanserojen (kategori 2)',
-            'H360':'Üreme toksisitesi (kategori 1)','H361':'Üreme toksisitesi (kategori 2)',
-            'H360D':'Üreme toksisitesi — gelişimsel (kategori 1)',
-            'H360F':'Üreme toksisitesi — fertilite (kategori 1)',
-            'H360FD':'Üreme toksisitesi — gelişimsel + fertilite (kategori 1)',
-            'H361D':'Üreme toksisitesi — gelişimsel (kategori 2)',
-            'H361F':'Üreme toksisitesi — fertilite (kategori 2)',
-            'H361FD':'Üreme toksisitesi — gelişimsel + fertilite (kategori 2)',
-            'H362':'Emzirilen çocuklara zarar',
-            'H370':'STOT-TE (tek maruziyet)','H371':'STOT-TE (tek maruziyet)',
-            'H372':'STOT-TM (tekrarlanan maruziyet)','H373':'STOT-TM (tekrarlanan maruziyet)',
-            'H304':'Aspirasyon tehlikesi',
-        }
-    else:
-        exposure_map = {
-            'H300':'Acute oral toxicity','H301':'Acute oral toxicity','H302':'Acute oral toxicity',
-            'H310':'Acute dermal toxicity','H311':'Acute dermal toxicity','H312':'Acute dermal toxicity',
-            'H330':'Acute inhalation toxicity','H331':'Acute inhalation toxicity','H332':'Acute inhalation toxicity',
-            'H314':'Corrosive to skin/mucous membranes','H315':'Skin irritation',
-            'H317':'Skin sensitisation','H318':'Serious eye damage','H319':'Eye irritation',
-            'H334':'Respiratory sensitisation',
-            'H335':'Respiratory tract irritation',
-            'H336':'Narcotic effects — CNS (dizziness, drowsiness)',
-            'H340':'Germ cell mutagenicity (cat.1)','H341':'Germ cell mutagenicity (cat.2)',
-            'H350':'Carcinogenicity (cat.1)','H351':'Carcinogenicity (cat.2)',
-            'H360':'Reproductive toxicity (cat.1)','H361':'Reproductive toxicity (cat.2)',
-            'H360D':'Reproductive toxicity — developmental (cat.1)',
-            'H360F':'Reproductive toxicity — fertility (cat.1)',
-            'H360FD':'Reproductive toxicity — developmental + fertility (cat.1)',
-            'H361D':'Reproductive toxicity — developmental (cat.2)',
-            'H361F':'Reproductive toxicity — fertility (cat.2)',
-            'H361FD':'Reproductive toxicity — developmental + fertility (cat.2)',
-            'H362':'Effects on/via lactation',
-            'H370':'STOT-SE (single exposure)','H371':'STOT-SE (single exposure)',
-            'H372':'STOT-RE (repeated exposure)','H373':'STOT-RE (repeated exposure)',
-            'H304':'Aspiration hazard',
-        }
-    added_routes = set()
-    for h in h_codes:
-        h_base = h.split('(')[0].split()[0]
-        route = exposure_map.get(h_base)
-        if route and route not in added_routes:
-            if h_base in ('H370', 'H371', 'H372', 'H373') and h_base in _stot_organ_map:
-                stmt = get_stot_stmt(h_base, lang, _stot_organ_map[h_base])
-            else:
-                stmt = get_h_stmt(h_base, lang)
-            tox_rows.append([h_base + f' — {route}', stmt])
-            added_routes.add(route)
+    # 11.1.5 Olası maruz kalma yolları (fiziksel hale göre)
+    _pf11 = (product.get('form') or 'liquid')
+    _routes11 = {
+        'solid': ('Soluma (toz), cilt ve göz teması, yutma', 'Inhalation (dust), skin and eye contact, ingestion'),
+        'powder': ('Soluma (toz), cilt ve göz teması, yutma', 'Inhalation (dust), skin and eye contact, ingestion'),
+        'gas': ('Soluma; sıvılaştırılmış gazla cilt ve göz teması', 'Inhalation; skin and eye contact with liquefied gas'),
+        'aerosol': ('Soluma (sprey), cilt ve göz teması', 'Inhalation (spray), skin and eye contact'),
+    }.get(_pf11, ('Cilt ve göz teması, yutma, buhar/sis soluma', 'Skin and eye contact, ingestion, inhalation of vapour/mist'))
+    tox_rows.append([('Olası maruz kalma yolları (11.1.5)' if _TR11 else 'Likely routes of exposure'),
+                     _routes11[0 if _TR11 else 1]])
 
     if len(tox_rows) > 1:
-        story.append(data_table(tox_rows, [75*mm, 105*mm], styles))
+        story.append(data_table(tox_rows, [65*mm, 115*mm], styles))
         # ── CLP Ek-VI ** notları: hedef organ/maruziyet yolu belirtme zorunluluğu ──
         # Bileşenlerden ** bayraklı STOT veya diğer H kodlarını topla
         _sec11_notes_shown = set()
@@ -2571,8 +2603,45 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             _biodeg_txt = f"{_biodeg_txt} {biodegradability_line(lang)}" if _biodeg_txt not in (None, '', na) \
                 else biodegradability_line(lang)
 
+    # 12.1 Toksisite — KKDİK Ek-2 12.1: balık, kabuklu, alg (akut/kronik) verileri; yoksa nedeni.
+    _TR12 = lang == 'TR'
+    _AQ_H = ['H400', 'H410', 'H411', 'H412', 'H413']
+    _mix_aq = [h for h in _AQ_H if h in set(all_h_codes or []) | set(h_codes or [])]
+    if _mix_aq:
+        _mix_txt = ', '.join(f"{translate_hclass(correct_hclass(h, ''), lang)} ({h})" for h in _mix_aq)
+    else:
+        _mix_txt = ('sucul ortam için zararlı olarak sınıflandırılmamıştır' if _TR12
+                    else 'not classified as hazardous to the aquatic environment')
+    _t121 = [('Karışım için ekotoksisite test verisi yoktur; sucul sınıflandırma bileşenlerden toplama '
+              f'yöntemiyle yapılmıştır (SEA Ek-1 4.1.3): {_mix_txt}.') if _TR12 else
+             ('No ecotoxicity test data for the mixture; aquatic classification by the summation method '
+              f'from its components: {_mix_txt}.')]
+    _comp_aq = []
+    for _c in (sds_data.get('components') or components or []):
+        _nm = (_c.get('name_tr') if _TR12 else '') or _c.get('name') or _c.get('cas_no') or _c.get('cas') or ''
+        _cls = []
+        for _hz in (_c.get('hazards') or []):
+            _hc = str(_hz.get('h_code') or '').replace('*', '').strip()[:4]
+            if _hc in _AQ_H:
+                _cls.append(f"{translate_hclass(correct_hclass(_hc, _hz.get('h_class', '')), lang)} ({_hc})")
+        _data = []
+        for _key, _ltr, _len in (('ec50_fish', 'LC50 balık (96 sa)', 'LC50 fish (96 h)'),
+                                 ('ec50_daphnia', 'EC50 Daphnia (48 sa)', 'EC50 Daphnia (48 h)'),
+                                 ('ec50_algae', 'ErC50 alg (72 sa)', 'ErC50 algae (72 h)'),
+                                 ('ec50_noec', 'NOEC (kronik)', 'NOEC (chronic)')):
+            _v = _c.get(_key)
+            if _v not in (None, '', 0):
+                _data.append(f"{_ltr if _TR12 else _len}: {_v} mg/L")
+        if _cls or _data:
+            _comp_aq.append(f"{_nm}: " + '; '.join(_cls + _data))
+    if _comp_aq:
+        _t121.append(('Bileşenler: ' if _TR12 else 'Components: ') + ' | '.join(_comp_aq) + '.')
+    else:
+        _t121.append('Bileşenler için sucul toksisite sınıflandırması veya test verisi bulunmamaktadır.' if _TR12
+                     else 'No aquatic toxicity classification or test data available for the components.')
+
     eco_rows = [
-        [sub_title(lang,'12.1'), sds12.get('12.1', na)],
+        [sub_title(lang,'12.1'), ' '.join(_t121)],
         [sub_title(lang,'12.2'), _biodeg_txt],
         [sub_title(lang,'12.3'), sds12.get('12.3', na)],
         [sub_title(lang,'12.4'), _soil_txt],

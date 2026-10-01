@@ -496,6 +496,30 @@ def resolve_conflict(cls_a: str, pg_a: Optional[str],
 
 
 
+# ADR 2.2.2.3 — zehirli olmayan gazlar için B.B.B. girişleri (grup → fiziksel durum → UN)
+_GAS_NOS = {
+    'F': {'compressed': 'UN1954', 'liquefied': 'UN3161', 'refrigerated': 'UN3312'},
+    'A': {'compressed': 'UN1956', 'liquefied': 'UN3163', 'refrigerated': 'UN3158'},
+    'O': {'compressed': 'UN3156', 'liquefied': 'UN3157', 'refrigerated': 'UN3311'},
+}
+_GAS_NOS_ALL = {u for g in _GAS_NOS.values() for u in g.values()}
+# UN1965 "HİDROKARBON GAZ KARIŞIMI, SIVILAŞTIRILMIŞ" — C1–C4 hidrokarbon gazları
+_HC_GAS_CAS = {
+    '74-82-8',   # metan
+    '74-84-0',   # etan
+    '74-85-1',   # etilen
+    '74-98-6',   # propan
+    '115-07-1',  # propilen
+    '106-97-8',  # bütan
+    '75-28-5',   # izobütan
+    '106-98-9',  # 1-büten
+    '107-01-7',  # 2-büten
+    '115-11-7',  # izobütilen
+    '68476-85-7',  # petrol gazları, sıvılaştırılmış
+    '68476-86-8',  # petrol gazları, sıvılaştırılmış, tatlandırılmış
+}
+
+
 def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: bool,
                   h_set: set = None, form: str = 'liquid',
                   components: 'Optional[List[Component]]' = None,
@@ -717,7 +741,8 @@ def classify(h_codes: List[str], form: str = 'liquid',
              viscosity: Optional[float] = None,
              components: 'Optional[List[Component]]' = None,
              acute_tox: Optional[List[Dict]] = None,
-             mixture_ph=None) -> Dict:
+             mixture_ph=None,
+             gas_type: Optional[str] = None) -> Dict:
     """
     ADR/IMDG/IATA sınıflandırması.
 
@@ -729,6 +754,8 @@ def classify(h_codes: List[str], form: str = 'liquid',
         components   : Bileşen listesi — §3.1.3.2 tetikleyici sayımı + baskın madde denetimi için
         acute_tox    : ATEmix sonuçları [{h_code, route, cat_num}] — Sınıf 6.1 PG'si kategoriden
                        kesin belirlenir (ADR 2.2.61.1.7). None ise H kodundan (en kötü durum).
+        gas_type     : Gazda 'compressed' | 'liquefied' | 'refrigerated' | 'dissolved' (ADR 2.2.2.1.2)
+                       — B.B.B. girişinin seçimi (1… sıkıştırılmış / 2… sıvılaştırılmış / 3… soğutulmuş).
 
     Returns:
         {not_regulated, road, sea, air, conflict_warning, adr_caution}
@@ -993,9 +1020,11 @@ def classify(h_codes: List[str], form: str = 'liquid',
                        (True, False, True): 'UN3309', (False, True, True): 'UN3310'}
         _un_c = _compressed.get(_key, 'UN1955')
         _un_l = _liquefied.get(_key, 'UN3162')
+        _tox_liq = gas_type in ('liquefied', 'refrigerated')
+        _un_sel = _un_l if _tox_liq else _un_c
         try:
             from app.services.transport_adr_service import get_adr_details as _gad
-            _gd = _gad(_un_c, '')
+            _gd = _gad(_un_sel, '')
         except Exception:
             _gd = {}
         _labels = ['2.3'] + (['2.1'] if _g_flam else []) + (['5.1'] if _g_ox else []) + (['8'] if _g_corr else [])
@@ -1005,17 +1034,58 @@ def classify(h_codes: List[str], form: str = 'liquid',
         _why = ('soluma yoluyla zehirli gaz (H330/H331)' if h_set & {'H330', 'H331'}
                 else 'aşındırıcı gaz (H314) — ADR 2.2.2.1.5 gereği zehirli gaz sayılır')
         un_entry = {
-            'un':    _un_c[:2] + ' ' + _un_c[2:],
+            'un':    _un_sel[:2] + ' ' + _un_sel[2:],
             'label': _gd.get('name_tr') or 'SIKIŞTIRILMIŞ GAZ, ZEHİRLİ, B.B.B.',
             'classification_code': _gd.get('classification_code', ''),
             'tunnel': _gd.get('tunnel_code'),
             'labels': _labels,
             'pg':    '',
             'note':  (f'ADR 2.2.2.1.5: {_why} → Sınıf 2, etiket {" + ".join(_labels)}. '
-                      f'Sıkıştırılmış gaz varsayıldı; sıvılaştırılmış gaz ise {_un_l[:2]} {_un_l[2:]}. '
+                      + (f'Sıvılaştırılmış gaz → {_un_l[:2]} {_un_l[2:]}. ' if _tox_liq else
+                         f'Sıkıştırılmış gaz{"" if gas_type else " varsayıldı (gaz türü seçilmedi)"}; '
+                         f'sıvılaştırılmış gaz ise {_un_l[:2]} {_un_l[2:]}. ') +
                       'Maddeye özgü UN numarası önceliklidir (örn. UN1050 hidrojen klorür, susuz; '
                       'UN1005 amonyak, susuz).'),
         }
+
+    # Gaz (zehirli olmayan) — ADR 2.2.2.1.2/2.2.2.3: B.B.B. girişi gazın fiziksel durumuna göre
+    # seçilir: 1… sıkıştırılmış, 2… sıvılaştırılmış, 3… soğutulmuş sıvılaştırılmış.
+    # Yalnız hidrokarbon gazlardan oluşan sıvılaştırılmış yanıcı karışım → UN1965 (2F grubunda
+    # UN3161'den önce gelir). Çözünmüş gazlar için B.B.B. girişi yoktur (örn. UN1001 asetilen).
+    if form == 'gas' and str(un_entry.get('un', '')).replace(' ', '') in _GAS_NOS_ALL:
+        _grp = ('F' if primary['class'] == '2.1' else
+                'O' if (primary['class'] == '2.2' and 'H270' in h_set) else
+                'A' if primary['class'] == '2.2' else None)
+        _gt = 'refrigerated' if 'H281' in h_set else (gas_type or '')
+        if _grp:
+            _un_g = _GAS_NOS[_grp].get(_gt) or _GAS_NOS[_grp]['compressed']
+            if (_grp == 'F' and _gt == 'liquefied' and _comps
+                    and all(c.cas in _HC_GAS_CAS for c in _comps if c.conc > 0)):
+                _un_g = 'UN1965'
+            try:
+                from app.services.transport_adr_service import get_adr_details as _gad2
+                _gd2 = _gad2(_un_g, '') or {}
+            except Exception:
+                _gd2 = {}
+            _gt_tr = {'compressed': 'sıkıştırılmış', 'liquefied': 'sıvılaştırılmış',
+                      'refrigerated': 'soğutulmuş sıvılaştırılmış', 'dissolved': 'çözünmüş'}.get(_gt)
+            if not _gt_tr:
+                _gnote = 'Gaz türü seçilmedi — sıkıştırılmış gaz varsayıldı. '
+            elif _gt == 'dissolved':
+                _gnote = ('Çözünmüş gazlar için B.B.B. girişi yoktur — maddeye özgü UN numarası '
+                          'kullanılmalıdır (örn. UN1001 asetilen, çözünmüş). ')
+            else:
+                _gnote = f'Gaz türü: {_gt_tr} (ADR 2.2.2.1.2). '
+            un_entry = {
+                **un_entry,
+                'un': _un_g[:2] + ' ' + _un_g[2:],
+                'label': _gd2.get('name_tr') or un_entry.get('label'),
+                'classification_code': _gd2.get('classification_code') or un_entry.get('classification_code'),
+                'tunnel': _gd2.get('tunnel_code') or un_entry.get('tunnel'),
+                'pg': '',
+                'note': (_gnote + 'Maddeye özgü UN numarası önceliklidir (örn. UN1978 propan, '
+                         'UN1075 LPG, UN1066 azot).'),
+            }
 
     # ── Adım 5: Uyarılar ─────────────────────────────────────────────────────
     # (a) H22x çelişki kontrolü

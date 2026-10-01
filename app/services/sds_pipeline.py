@@ -312,8 +312,11 @@ async def classify(inp: dict) -> dict:
         # Sucul sınıf yalnızca ecological_service'ten; alevlenir sıvı ve yalnızca-test sınıfları
         # (H290, H27x…) yalnızca physical_engine'den — CLP kesim satırı ("bileşen varlığı")
         # kullanıcının test kararının gerekçesini ezmesin
+        # Gaz ürününde basınçlı gaz satırı (H280/H281) yalnızca fiziksel motordan gelir — alt
+        # kategori (sıkıştırılmış/sıvılaştırılmış…) SEA Ek-1 Tablo 2.5.1 gereği orada belirlenir
         if (hc and hc not in seen and hc not in ECO_H_CODES and hc not in FLAM_LIQ_H
-                and hc not in MANUAL_PHYS_H):
+                and hc not in MANUAL_PHYS_H
+                and not (form == 'gas' and hc in ('H280', 'H281'))):
             seen.add(hc)
             cp.append({
                 'h_code': hc,
@@ -376,7 +379,9 @@ async def classify(inp: dict) -> dict:
                                viscosity=float(visc) if visc is not None else None,
                                components=tr_components,
                                acute_tox=ate_h or [],
-                               mixture_ph=mixture_ph)
+                               mixture_ph=mixture_ph,
+                               gas_type=(test_data.get('gas_type')
+                                         or ('refrigerated' if test_data.get('cryo_gas') else None)))
 
     # ── Etiket (h_codes) ve Bölüm 2.1 (all_h_codes) ─────────────────────────
     h_codes = list(dict.fromkeys(norm_sub(h) for h in clp_res.get('h_codes', [])))

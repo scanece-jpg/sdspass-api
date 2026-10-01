@@ -72,7 +72,9 @@ const CalculatorModule = (() => {
     _td('tf_decomp',      'decomp_temp');
     _td('tf_vp',          'vapor_pressure');
     _td('tf_aerosol_flam_pct', 'aerosol_flam_pct');
-    if (document.getElementById('cb_cryo_gas')?.checked) testData.cryo_gas = true;
+    const _gasType = document.getElementById('sel_gas_type')?.value;
+    if (_gasType) testData.gas_type = _gasType;            // SEA Ek-1 Tablo 2.5.1 alt kategorisi
+    if (_gasType === 'refrigerated') testData.cryo_gas = true;   // H281
     if (phRaw) testData.ph = phRaw;
     const _evapRaw = document.getElementById('tf_evap')?.value?.trim();
     if (_evapRaw) testData.evap_rate = _evapRaw;

@@ -50,7 +50,10 @@ FP_DB: Dict[str, Optional[float]] = {
     '109-89-7': -26, '75-04-7':  -17, '124-40-3':None, '7664-41-7':None,
     '872-50-4': 91,  '68-12-2':  58,  '67-68-5':  95,
     '75-09-2':  None,'67-66-3':  None,
-    '64742-47-8':21, '64742-48-9':-20,'64742-82-1':61, '64742-54-7':220,
+    # Petrol UVCB'leri — aralık verilen maddelerde alt sınır (en kötü durum) alınır:
+    # 64742-47-8 ICSC 1379 (2013) 66–67 °C c.c.; 64742-48-9 ICSC 1380 (2023) 40–62 °C c.c.;
+    # 8052-41-3 ICSC 0361: 38–55 °C
+    '64742-47-8':66, '64742-48-9':40, '64742-82-1':61, '64742-54-7':220,
     '8052-41-3': 38,
     '7732-18-5':None,'1310-73-2':None,'1310-58-3':None,'7681-52-9':None,
     '7722-84-1':None,'497-19-8': None,'10043-52-4':None,'7647-14-5':None,
@@ -2288,14 +2291,20 @@ def calculate(comps: List[Dict], form: str = 'liquid',
 
         # H280/H281 — Basınçlı kap (CLP Ek-I §2.5, Tablo 2.5.1)
         # Gaz formu = ≥200 kPa gauge ambalaj → H280 zorunlu (ambalaj özelliği, içerikten bağımsız)
-        is_cryo = bool(test_data.get('cryo_gas'))
+        # Alt kategori (SEA Ek-1 Tablo 2.5.1): sıkıştırılmış / sıvılaştırılmış / soğutulmuş
+        # sıvılaştırılmış / çözünmüş — GBF 2.1'de belirtilir, taşımada B.B.B. girişini belirler.
+        gas_type = test_data.get('gas_type') or ('refrigerated' if test_data.get('cryo_gas') else None)
+        is_cryo = gas_type == 'refrigerated'
+        _pg_cls = {'compressed': 'Press. Gas (Comp.)', 'liquefied': 'Press. Gas (Liq.)',
+                   'refrigerated': 'Press. Gas (Ref. Liq.)', 'dissolved': 'Press. Gas (Diss.)'}
         extra.append({
             'type':        'press_gas',
             'h':           'H281' if is_cryo else 'H280',
-            'h_class':     'Press. Gas (Refrigerated liq.)' if is_cryo else 'Press. Gas (Compressed/Liquefied/Dissolved)',
+            'h_class':     _pg_cls.get(gas_type, 'Press. Gas'),
             'signal':      'Warning',
             'source':      'Gaz formu — CLP Ek-I §2.5 Tablo 2.5.1',
-            'cutoff_used': 'Gaz formundaki tüm ürünlere uygulanır (≥200 kPa gauge @20°C)',
+            'cutoff_used': ('Gaz formundaki tüm ürünlere uygulanır (≥200 kPa gauge @20°C)'
+                            + ('' if gas_type else ' — gaz türü seçilmedi')),
         })
 
     if form in ('solid', 'powder'):

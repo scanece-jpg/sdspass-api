@@ -941,6 +941,11 @@ CLP_CLASS_TR = {
     'Aerosol 2':      'Aerosol 2',
     'Aerosol 3':      'Aerosol 3',
     'Press. Gas':     'Basınçlı Gaz',
+    # SEA Ek-1 Tablo 2.5.1 alt kategorileri
+    'Press. Gas (Comp.)':     'Basınçlı Gaz (Sıkıştırılmış gaz)',
+    'Press. Gas (Liq.)':      'Basınçlı Gaz (Sıvılaştırılmış gaz)',
+    'Press. Gas (Ref. Liq.)': 'Basınçlı Gaz (Soğutulmuş sıvılaştırılmış gaz)',
+    'Press. Gas (Diss.)':     'Basınçlı Gaz (Çözünmüş gaz)',
     'Flam. Liq. 1':   'Alev. Sıv. 1',
     'Flam. Liq. 2':   'Alev. Sıv. 2',
     'Flam. Liq. 3':   'Alev. Sıv. 3',
@@ -1182,6 +1187,9 @@ def correct_hclass(h_code: str, h_class: str) -> str:
     # Önce canonical single-class map'e bak
     canonical = H_CODE_TO_CANONICAL_CLASS.get(code4)
     if canonical:
+        # Aynı sınıfın alt kategorisi korunur (örn. "Press. Gas (Liq.)" — SEA Ek-1 Tablo 2.5.1)
+        if h_class and h_class.strip().startswith(canonical + ' ('):
+            return h_class.strip()
         return canonical  # Bu H kodunun tek canonical sınıfı var, her zaman kullan
 
     # Çok alt-kategorili H kodlar: kategori yanlışsa düzelt, doğruysa koru

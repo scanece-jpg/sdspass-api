@@ -468,6 +468,19 @@ def _auto_un(h_codes: list, state: str = 'liquid') -> dict | None:
 # ─── ADR 3.1.2.8: B.N.O. GİRİŞLERİ İÇİN TEKNİK İSİM SEÇİCİ ────────────────
 # Her UN numarası için tehlike grupları — sıralama önemli (önce birincil tehlike)
 _NOS_HAZARD_GROUPS: dict[str, list] = {
+    # Gaz B.B.B. girişleri (ADR 3.3.1 ÖH 274 — teknik ad zorunlu). Basınçlı gaz (H280/H281)
+    # tüm gaz bileşenlerinde ortak olduğundan grup olarak en yüksek konsantrasyonlu iki gaz seçilir.
+    'UN1956': [{'H280', 'H281'}, {'H280', 'H281'}],
+    'UN3163': [{'H280', 'H281'}, {'H280', 'H281'}],
+    'UN3158': [{'H280', 'H281'}, {'H280', 'H281'}],
+    'UN3161': [{'H220', 'H221'}],
+    'UN3312': [{'H220', 'H221'}],
+    'UN3157': [{'H270'}],
+    'UN3311': [{'H270'}],
+    'UN1953': [{'H330', 'H331'}, {'H220', 'H221'}],
+    'UN3160': [{'H330', 'H331'}, {'H220', 'H221'}],
+    'UN1955': [{'H330', 'H331'}],
+    'UN3162': [{'H330', 'H331'}],
     # Yanıcı + Korozif
     'UN2924': [{'H224','H225','H226'}, {'H314'}],
     # Zehirli + Korozif
@@ -2913,7 +2926,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     un_no = t_src.get('un_no', '—')
     ship_name = t_src.get('shipping_name', na)
     # ADR 3.1.2.8 — B.N.O. girişlerinde teknik isim zorunlu
-    if 'B.N.O.' in ship_name and components:
+    if any(k in ship_name for k in ('B.N.O.', 'B.B.B.', 'N.O.S.')) and components:
         tech = _nos_technical_names(un_no, components, lang)
         if tech:
             ship_name = f"{ship_name} ({tech})"

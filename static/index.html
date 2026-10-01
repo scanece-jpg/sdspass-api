@@ -949,15 +949,20 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
           <div style="font-size:9px;color:var(--text3);margin-top:3px">Boya/vernik için yasal sınır: 30–840 g/L (ürün tipine bağlı)</div>
         </div>
 
-        <!-- Kriyojenik: sadece gaz, zorunlu -->
+        <!-- Basınçlı gaz türü: sadece gaz, zorunlu — SEA Ek-1 Tablo 2.5.1 alt kategorisi (GBF 2.1)
+             ve ADR B.B.B. girişi (1… sıkıştırılmış / 2… sıvılaştırılmış / 3… soğutulmuş) buna göre -->
         <div class="phys-fw" data-forms="gas" data-mandatory="gas">
           <div class="phys-fh">
-            <label>Kriyojenik / Soğutulmuş</label>
+            <label>Basınçlı Gaz Türü</label>
           </div>
-          <label style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:12px;cursor:pointer">
-            <input type="checkbox" id="cb_cryo_gas" style="width:14px;height:14px">
-            H281 — Soğutulmuş sıvılaştırılmış gaz (CLP §2.5)
-          </label>
+          <select id="sel_gas_type">
+            <option value="">— Seçin —</option>
+            <option value="compressed">Sıkıştırılmış gaz (ör. azot, oksijen, metan)</option>
+            <option value="liquefied">Sıvılaştırılmış gaz (ör. LPG, propan, CO₂)</option>
+            <option value="refrigerated">Soğutulmuş sıvılaştırılmış gaz — H281 (ör. sıvı azot)</option>
+            <option value="dissolved">Çözünmüş gaz (ör. asetilen)</option>
+          </select>
+          <div style="font-size:9px;color:var(--text3);margin-top:3px">SEA Ek-1 Tablo 2.5.1 — Bölüm 2.1 alt kategorisi ve Bölüm 14 UN numarası buna göre belirlenir</div>
         </div>
 
         <!-- Yanıcı İçerik: sadece aerosol, zorunlu -->
@@ -1218,7 +1223,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
 <script src="js/modules/cas-lookup.js?v=20260617"></script>
 <script src="js/modules/component-manager.js?v=20260617"></script>
 <script src="js/modules/conc-selector.js?v=20260617"></script>
-<script src="js/modules/calculator.js?v=20261001"></script>
+<script src="js/modules/calculator.js?v=20261002"></script>
 <script src="js/modules/results-renderer.js?v=20260930"></script>
 <script src="js/modules/pdf-exporter.js?v=20260617"></script>
 <script src="js/app.js?v=20260617"></script>
@@ -4784,7 +4789,11 @@ function _checkPDFMandatory() {
       missing.push({ label: 'Parlama Noktası', reason: `Bölüm 9(f)'ye ${_ND} yazılacak; alevlenirlik bileşen verilerinden değerlendirilir` });
     }
   }
-  // 6. Viskozite — sıvıda H304 (aspirasyon) kararını etkiler
+  // 6. Basınçlı gaz türü — Bölüm 2.1 alt kategorisi ve Bölüm 14 UN numarası
+  if (form === 'gas' && !document.getElementById('sel_gas_type')?.value) {
+    missing.push({ label: 'Basınçlı Gaz Türü', reason: "Seçilmedi — Bölüm 2.1'de alt kategori yazılmayacak; Bölüm 14'te sıkıştırılmış gaz varsayılacak (sıvılaştırılmış gazda UN numarası farklıdır)" });
+  }
+  // 7. Viskozite — sıvıda H304 (aspirasyon) kararını etkiler
   if (isLiquid && form !== 'aerosol') {
     const viscEl = document.getElementById('tf_visc');
     const viscNA = viscEl?.dataset?.na === 'true';

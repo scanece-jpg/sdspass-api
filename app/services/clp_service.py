@@ -349,6 +349,14 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
                 comp['hazards'] = aq['hazards']
                 # sclRaw da AQ kaydından gelsin
                 comp['sclRaw'] = aq.get('scl', [])
+        elif cas and not (comp.get('sclRaw') or comp.get('scl')):
+            # İstemci SCL göndermediyse (API/asistan/eski kayıt) SEA Ek-6'daki özel konsantrasyon
+            # sınırları yerelden tamamlanır — aksi halde örn. %15 nitrik asit 1B yerine 1A çıkar.
+            from app.services.substance_lookup import _sea_ek6_lookup, _scl_op_to_cmin_cmax
+            ek6 = _sea_ek6_lookup(cas)
+            if ek6 and ek6.get('scl_limits'):
+                comp = dict(comp)
+                comp['sclRaw'] = [_scl_op_to_cmin_cmax(s) for s in ek6['scl_limits']]
         return comp
 
     components = [_maybe_override_comp(c) for c in components]

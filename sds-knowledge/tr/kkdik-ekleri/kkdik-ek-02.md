@@ -6,14 +6,14 @@
 
 **BÖLÜM A**
 
-- 1.1. **Giriş**
+- 0.1. **Giriş**
 
 0.1.1.	Bu Ek, 27 nci maddeye göre tedarikçinin madde ya da karışım için verilen Güvenlik Bilgi Formunun hazırlanması için yerine getirmesi gereken gereklilikleri ortaya koyar.
 
-- 1.1.2. Güvenlik Bilgi Formunda verilen bilgiler Kimyasal Güvenlik Raporunda verilen bilgilerle tutarlılık içinde olur. Kimyasal Güvenlik Raporunun tamamlanmış olduğu durumlarda, ilgili maruz kalma senaryosu, Güvenlik Bilgi Formunun ekine konulur.
+- 0.1.2. Güvenlik Bilgi Formunda verilen bilgiler Kimyasal Güvenlik Raporunda verilen bilgilerle tutarlılık içinde olur. Kimyasal Güvenlik Raporunun tamamlanmış olduğu durumlarda, ilgili maruz kalma senaryosu, Güvenlik Bilgi Formunun ekine konulur.
 
-- 1.2. **Güvenlik Bilgi Formunun hazırlanması için genel gereklilikler**
-    - 1.2.1. Güvenlik Bilgi Formu kullanıcıların işyerlerinde insan sağlığı ve güvenliğinin korunması ve çevrenin korunması için gerekli önlemleri almalarını sağlar. Güvenlik Bilgi Formu hazırlayıcısı, Güvenlik Bilgi Formunun kullanıcılarını maddenin veya karışımın zararları hakkında bilgilendirmesi ve maddenin veya karışımın güvenli depolama, elleçleme ve bertarafı hakkında bilgileri sağlaması gerektiğini dikkate alır.
+- 0.2. **Güvenlik Bilgi Formunun hazırlanması için genel gereklilikler**
+    - 0.2.1. Güvenlik Bilgi Formu kullanıcıların işyerlerinde insan sağlığı ve güvenliğinin korunması ve çevrenin korunması için gerekli önlemleri almalarını sağlar. Güvenlik Bilgi Formu hazırlayıcısı, Güvenlik Bilgi Formunun kullanıcılarını maddenin veya karışımın zararları hakkında bilgilendirmesi ve maddenin veya karışımın güvenli depolama, elleçleme ve bertarafı hakkında bilgileri sağlaması gerektiğini dikkate alır.
 
 0.2.2. Güvenlik Bilgi Formu ile sağlanan bilgiler Kimyasal Maddelerle Çalışmalarda Sağlık ve Güvenlik Önlemleri Hakkında Yönetmelikte ortaya konulan gereklilikleri de karşılar. Güvenlik Bilgi Formu özellikle işverenin, işyerinde herhangi bir zararlı kimyasal bulunup bulunmadığını belirlemesini ve bunların kullanımından kaynaklanan işçilerin sağlık ve güvenliğine yönelik riskleri değerlendirmesini sağlar.
 
@@ -23,22 +23,22 @@
 
 0.2.5. Güvenlik Bilgi Formunun hazırlanma tarihi ilk sayfada verilir. Güvenlik Bilgi Formu güncellendiğinde ve güncellenen versiyon alıcılara sunulduğunda, değişiklikler başka bir yerde belirtilmemişse alıcının dikkatine Güvenlik Bilgi Formunun onaltıncı bölümünde sunulur. Bu durumda, ‘Revizyon: (tarih)’ olarak tanımlanan hazırlanma tarihi ayrıca versiyon numarası, revizyon numarası, değiştirme tarihi ve hangi versiyonun değiştirildiğine ilişkin diğer veriler ilk sayfada yer alır.
 
-- 1.2. **Güvenlik Bilgi Formu formatı**
-    - 1.2.1. Güvenlik Bilgi Formu formatı sabit uzunlukta bir doküman değildir. Güvenlik bilgi formunun uzunluğu madde veya karışımın zararlılığı ve mevcut bilgilere göre değişir.
-    - 1.2.2. Güvenlik Bilgi Formunun ekler de dâhil olmak üzere bütün sayfaları numaralandırılır ve Güvenlik Bilgi Formunun sayfa sayısını gösteren (örneğin ‘sayfa 1/formun toplam sayfa sayısı’) veya devam eden bir sayfa olup olmadığına dair gösterge (örneğin ‘Devamı bir sonraki sayfada’ veya ‘Güvenlik bilgi formunun sonu’) içerir.
-- 1.3. **Güvenlik Bilgi Formu içeriği**
+- 0.3. **Güvenlik Bilgi Formu formatı**
+    - 0.3.1. Güvenlik Bilgi Formu formatı sabit uzunlukta bir doküman değildir. Güvenlik bilgi formunun uzunluğu madde veya karışımın zararlılığı ve mevcut bilgilere göre değişir.
+    - 0.3.2. Güvenlik Bilgi Formunun ekler de dâhil olmak üzere bütün sayfaları numaralandırılır ve Güvenlik Bilgi Formunun sayfa sayısını gösteren (örneğin ‘sayfa 1/formun toplam sayfa sayısı’) veya devam eden bir sayfa olup olmadığına dair gösterge (örneğin ‘Devamı bir sonraki sayfada’ veya ‘Güvenlik bilgi formunun sonu’) içerir.
+- 0.4. **Güvenlik Bilgi Formu içeriği**
 
 Bu ekte istenilen bilgiler, varsa ve uygulanabilirse, Güvenlik Bilgi Formu Bölüm B’de belirtilen ilgili alt bölümlerde yer alır. Güvenlik Bilgi Formu alt bölümleri boş bırakılmaz.
 
-- 1.4. **Diğer bilgi gerekleri**
+- 0.5. **Diğer bilgi gerekleri**
 
 Maddeler ve karışımların çok çeşitli özelliklere sahip olduğu göz önüne alındığında, bazı durumlarda ilgili alt bölümlerde ilave ilgili ve mevcut bilgilerin verilmesi gerekebilir.
 
-- 1.5. **Birimler**
+- 0.6. **Birimler**
 
 21/6/2002 tarihli ve 24792 sayılı Resmî Gazete’de yayımlanan Uluslararası Birimler Sistemine Dair Yönetmelikte belirtilen ölçü birimleri kullanılır.
 
-- 1.6. **Özel durumlar**
+- 0.7. **Özel durumlar**
 
 Güvenlik Bilgi Formları, Maddelerin ve Karışımların Sınıflandırılması, Etiketlenmesi ve Ambalajlanması Hakkında Yönetmeliğin Ek-1’inin 1.3 numaralı alt bölümünde yer alan etiketleme istisnalarının olduğu özel durumlar için de gerekebilir.
 
@@ -77,11 +77,11 @@ Tedarikçisi ve/veya tek temsilcisi mutlaka belirtilir. Tedarikçinin ve/veya te
 
 Acil durum bilgi hizmetleri hakkında bilgi sunulur. Sağlık Bakanlığı Ulusal Zehir Merkezinin acil durum telefon numaraları verilir. Çalışma saatleri gibi herhangi bir nedenden dolayı hizmette kısıtlama söz konusu ise veya sağlanan özel bilgilere dair kısıtlamalar var ise, bu durum açık bir şekilde belirtilir.
 
-1. **BÖLÜM: ZARARLILIK TANIMLANMASI**
+2. **BÖLÜM: ZARARLILIK TANIMLANMASI**
 
 Güvenlik bilgi formunun bu bölümü madde veya karışımın zararlarını ve zararlarla ilgili uygun uyarı bilgilerini tanımlar.
 
-- 1.1. **Madde veya karışımın sınıflandırılması**
+- 2.1. **Madde veya karışımın sınıflandırılması**
 
 Maddeler için, Maddelerin ve Karışımların Sınıflandırılması, Etiketlenmesi ve Ambalajlanması Hakkında Yönetmeliğin sınıflandırma kurallarının uygulanmasından doğan sınıflandırma verilir. Tedarikçinin, aynı Yönetmeliğin 41 inci maddesine uygun olarak maddeyle ilgili bilgileri sınıflandırma ve etiketleme envanterine bildirdiği durumlarda, Güvenlik Bilgi Formunda verilen sınıflandırma, bildirimde verilen sınıflandırma ile aynı olur.
 
@@ -91,23 +91,23 @@ Sınıflandırmanın zararlılık ifadeleri kod olarak yazılmışsa, bu kodlar�
 
 En önemli olumsuz fiziko-kimyasal, insan sağlığı ve çevresel etkiler, uzman olmayan kişilerin madde veya karışımın tehlikelerini tanımlayabilmelerini sağlayacak şekilde Güvenlik Bilgi Formunun 9 ila 12 nci bölümlerine uygun şekilde listelenir.
 
-- 1.2. **Etiket unsurları**
+- 2.2. **Etiket unsurları**
 
 Madde ve karışımlar için, sınıflandırmaya dayanılarak, Maddelerin ve Karışımların Sınıflandırılması, Etiketlenmesi ve Ambalajlanması Hakkında Yönetmeliğe göre etikette yer alan bilgilerden en az zararlılık işaretleri, uyarı kelimesi, zararlılık ifadeleri ve önlem ifadeleri verilir. Zararlılık işaretlerinin siyah ve beyaz olarak tam grafik kopyası veya sadece sembolün grafik kopyası, aynı Yönetmelikte verilen renkli işaretlerin yerine kullanılabilir.
 
 Madde ve karışımlar için, aynı Yönetmeliğin geçerli etiket unsurları sağlanır.
 
-- 1.3. **Diğer zararlar**
+- 2.3. **Diğer zararlar**
 
 Maddenin veya karışımın Ek-13’e göre PBT veya vPvB kriterlerini karşılayıp karşılamadığına dair bilgiler sağlanır.
 
 Sınıflandırmayla sonuçlanmayan ancak madde ve karışımın genel zararlılığına katkıda bulunabilecek diğer zararlar da verilir (Örneğin; sertleşme veya işleme sırasında hava kirleticilerinin oluşumu, tozluluk, toz patlaması zararları, çapraz hassaslaştırma, boğulma, donma, koku veya tat için yüksek potansiyel veya toprakta yaşayan organizmalar üzerindeki tehlikeler gibi çevresel etkiler veya fotokimyasal ozon oluşumu potansiyeli). Toz patlaması zararlılığının olduğu durumda “Eğer yayılırsa, patlayabilen toz-hava karışımı oluşabilir.” ifadesinin eklenmesi uygundur.
 
-2. **BÖLÜM: BİLEŞİM/İÇİNDEKİLER HAKKINDA BİLGİ**
+3. **BÖLÜM: BİLEŞİM/İÇİNDEKİLER HAKKINDA BİLGİ**
 
 Güvenlik Bilgi Formunun bu bölümü, aşağıda belirtildiği üzere safsızlıklar ve stabilize edici katkı maddeleri dâhil madde veya karışımın içeriğinin kimyasal niteliğini tanımlar. Yüzey kimyasına dair uygun ve mevcut güvenlik bilgileri belirtilir.
 
-- 2.1. **Maddeler**
+- 3.1. **Maddeler**
 
 Maddenin ana bileşeninin kimyasal kimliği, en azından ürün tanıtımı veya bu Ekin 1.1 numaralı alt bölümünde verilen diğer tanımlama araçlarından birisinin belirtilmesi ile sağlanır.
 
@@ -119,7 +119,7 @@ b) Madde kimliği mevcut değil ise diğer adlardan birisi (yaygın adı, ticari
 
 Maddenin tedarikçileri, sınıflandırılmamış olanlar dâhil tüm bileşenleri listelemeyi tercih edebilir. Bu başlık, birden fazla bileşen içeren maddelere dair bilgi sağlamak için de kullanılabilir.
 
-- 2.2. **Karışımlar**
+- 3.2. **Karışımlar**
 
 Karışımın bileşimi, konsantrasyon ve konsantrasyon aralıkları ve sınıflandırmaları, en azından bu Ekin 3.2.1 veya 3.2.2 numaralı alt bölümlerinde belirtilen tüm maddeler için sağlanır. Karışımın tedarikçileri, ek olarak sınıflandırma kriterlerini karşılamayan maddeler dâhil karışımdaki tüm maddeleri listelemeyi tercih edebilir. Bu bilgi, alıcının karışımdaki maddelerin zararlarını kolaylıkla tanımlamasını sağlar. Karışımın kendisine ait zararlar, ikinci bölümde verilir.
 
@@ -135,7 +135,7 @@ Karışımın etkileri bir bütün olarak mevcut ise, bu bilgiler Bölüm 2’ye
 
 Maddelerin ve Karışımların Sınıflandırılması, Etiketlenmesi ve Ambalajlanması Hakkında Yönetmeliğin 26 ncı maddesine göre, alternatif kimyasal adın kullanımına izin verildiği durumlarda, bu ad kullanılabilir.
 
-- 2.2.1. Maddelerin ve Karışımların Sınıflandırılması, Etiketlenmesi ve Ambalajlanması Hakkında Yönetmeliğe göre sınıflandırma kriterlerini taşıyan karışım için, karışımdaki konsantrasyon veya konsantrasyon aralığıyla birlikte, aşağıdaki maddeler belirtilir:
+- 3.2.1. Maddelerin ve Karışımların Sınıflandırılması, Etiketlenmesi ve Ambalajlanması Hakkında Yönetmeliğe göre sınıflandırma kriterlerini taşıyan karışım için, karışımdaki konsantrasyon veya konsantrasyon aralığıyla birlikte, aşağıdaki maddeler belirtilir:
 
 a) Maddelerin ve Karışımların Sınıflandırılması, Etiketlenmesi ve Ambalajlanması Hakkında Yönetmeliğe göre sınıflandırma kriterlerine uyan bilgilerin karışımın tedarikçisine sağlanmış olması şartıyla, insan sağlığına veya çevre zararlı olarak sınıflandırılan maddelerin aşağıda yer alan herhangi bir en düşük konsantrasyona eşit veya daha fazla miktarlarda bulunması durumunda:
 
@@ -178,7 +178,7 @@ b) İşyeri maruz kalma limitlerinin bulunduğu (a) bendine dâhil edilmemiş ma
 
 - c) Bir maddenin konsantrasyonunun % 0,1’e eşit veya daha fazla olması halinde; Ek-13’te belirtilen kriterlere göre kalıcı, biyobirikimli ve toksik veya çok kalıcı ve çok biyobirikimli olan maddeler veya (a) bendinde belirtilen zararların dışındaki nedenlerle 49 uncu maddenin birinci fıkrasına göre oluşturulan listeye dâhil edilen maddeler.
 
-- 2.2.2. Maddelerin ve Karışımların Sınıflandırılması, Etiketlenmesi ve Ambalajlanması Hakkında Yönetmeliğe göre sınıflandırma kriterlerini taşımayan karışım için, konsantrasyonu tek başına aşağıdakilere eşit veya daha fazla olan maddeler konsantrasyonları veya konsantrasyon aralıkları ile birlikte belirtilir:
+- 3.2.2. Maddelerin ve Karışımların Sınıflandırılması, Etiketlenmesi ve Ambalajlanması Hakkında Yönetmeliğe göre sınıflandırma kriterlerini taşımayan karışım için, konsantrasyonu tek başına aşağıdakilere eşit veya daha fazla olan maddeler konsantrasyonları veya konsantrasyon aralıkları ile birlikte belirtilir:
 
 - (a) Aşağıdaki gaz halinde olmayan karışımlar için ağırlıkça % ≥ 1, gaz halindeki karışımlar için hacimce % ≥ 0,2:
 
@@ -201,7 +201,7 @@ Maddelerin ve Karışımların Sınıflandırılması, Etiketlenmesi ve Ambalajl
 
 Bu alt bölümde, Maddelerin ve Karışımların Sınıflandırılması, Etiketlenmesi ve Ambalajlanması Hakkında Yönetmeliğin 26 ncı maddesi kapsamında alternatif kimyasal ad ile yer alan bir madde için, kayıt numarası, EC numarası ve diğer kimyasal belirteçler gerekli değildir.
 
-3. **BÖLÜM: İLK YARDIM ÖNLEMLERİ**
+4. **BÖLÜM: İLK YARDIM ÖNLEMLERİ**
 
 Güvenlik Bilgi Formunun bu bölümü, eğitim almamış müdahale eden kişi tarafından anlaşılabilecek ve karmaşık ekipman kullanımı ve çok fazla ilaç tedavisi olmaksızın yapılabilecek şekilde ön tedaviyi tanımlar. Tıbbi yardım gerekliyse, bilgiler bunun aciliyetini de içerecek şekilde verilir.
 
@@ -229,7 +229,7 @@ Uygun olan durumlarda, sonradan görülen etkiler için klinik test ve tıbbi iz
 
 Bazı maddeler ve karışımlar için, özel ve acil tedavi sağlamak amacıyla özel yöntemlerin işyerinde bulunmasının vurgulanması önemli olabilir.
 
-4. **BÖLÜM: YANGINLA MÜCADELE ÖNLEMLERİ**
+5. **BÖLÜM: YANGINLA MÜCADELE ÖNLEMLERİ**
 
 Güvenlik Bilgi Formunun bu bölümü madde ya da karışımın neden olduğu ya da bir madde ya da karışımın etrafında çıkan bir yangını söndürmeye yönelik şartları belirtir.
 
@@ -251,7 +251,7 @@ Madde veya karışımdan kaynaklanan zararlara dair bilgiler sağlanır (Örneğ
 
 **Yangın söndürme sırasında alınması gereken koruyucu önlemler (Örneğin “konteynerler su püskürtülerek soğuk tutulmalıdır”) ve yangın söndürme ekipleri için bot, tulum, eldiven, göz ve yüz koruma ve solunum ekipmanı gibi özel koruyucu ekipmanlara dair  tavsiyeler verilir.**
 
-5. **BÖLÜM: KAZA SONUCU YAYILMAYA KARŞI ÖNLEMLERİ**
+6. **BÖLÜM: KAZA SONUCU YAYILMAYA KARŞI ÖNLEMLERİ**
 
 Güvenlik Bilgi Formunun bu bölümü, insanlar, eşyalar ve çevre üzerindeki olumsuz etkilerini önlemek veya minimize etmek için dökülme, sızıntılar ve yayılmaya karşı yapılması gereken uygun müdahaleleri kapsar. Dökülme hacminin zarar üzerinde önemli etkiye sahip olduğu durumlarda, büyük ve küçük dökülmelere karşı yapılacaklar ayrılır. Kontrol altında tutma ve kurtarma prosedürleri farklı uygulamaların gerekli olduğunu gösteriyorsa bunlar güvenlik bilgi formlarında belirtilir.
 
@@ -302,7 +302,7 @@ e) Kontrol altına alma / temizlik için gerekli ekipman (uygulanabilir olduğu 
 
 Uygunsa Bölüm 8 ve 13’e atıflarda bulunulur.
 
-6. **BÖLÜM: ELLEÇLEME VE DEPOLAMA**
+7. **BÖLÜM: ELLEÇLEME VE DEPOLAMA**
 
 Güvenlik bilgi formunun bu bölümü, güvenli elleçleme uygulamaları hakkında tavsiyeler içerir. 1.2 numaralı alt bölüme göre belirtilen tanımlanmış kullanımlar ve madde veya karışımın özelliklerine uygun önlemler vurgulanır.
 
@@ -813,9 +813,9 @@ BÖLÜM 6: Kaza sonucu yayılma önlemleri
 
 BÖLÜM 7: Elleçleme ve depolama
 
-- 6.1. Güvenli elleçleme için önlemler
-- 6.2. Birlikte bulunmaması gereken maddeleri de içeren güvenli depolama koşulları
-- 6.3. Belirli son kullanımlar
+- 7.1. Güvenli elleçleme için önlemler
+- 7.2. Birlikte bulunmaması gereken maddeleri de içeren güvenli depolama koşulları
+- 7.3. Belirli son kullanımlar
 
 BÖLÜM 8: Maruz kalma kontrolü/kişisel korunma
 

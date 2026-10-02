@@ -6,11 +6,11 @@
 
 **0. GİRİŞ**
 
-- 1.1. Bu Ekin amacı, imalatçıların ve ithalatçıların imal ettikleri ya da ithal ettikleri maddelerden kaynaklanan risklerin imalat veya kendi kullanımları sırasında yeterli bir biçimde kontrol edilmesi ve tedarik zinciri altındaki diğer kişilerin söz konusu riskleri yeterli biçimde kontrol etmeleri hususlarını nasıl değerlendireceklerini ve belgeleyeceklerini ortaya koymaktır. Bu ek, gerekli görüldüğü biçimde uyarlanarak, kaydın parçası olarak kimyasal güvenlik değerlendirmesi hazırlaması gereken eşya üreticileri ve ithalatçılarına da uygulanır.
-- 1.2. Kimyasal güvenlik değerlendirmesi kimyasal değerlendirme uzmanı tarafından yapılır.
-- 1.3. İmalatçının kimyasal güvenlik değerlendirmesi, maddenin imalatını ve tüm tanımlanan kullanımlarını, ithalatçının kimyasal güvenlik değerlendirmesi, maddenin tanımlanan tüm kullanımlarını ele alır. Kimyasal güvenlik değerlendirmesi, tanımlanan kullanımlarda belirtildiği şekilde, maddenin kendi halinde (tüm ana safsızlıkları ve katkıları içermek üzere), karışımda ve eşyadaki kullanımını göz önünde bulundurur. Değerlendirme, maddenin imalat ve tanımlanan kullanımlardan kaynaklanan yaşam döngüsünün tüm aşamalarını dikkate alır. Kimyasal güvenlik değerlendirmesi, uygulanan ve önerilen risk yönetimi önlemlerini ve çalışma koşullarını dikkate alarak, maddenin potansiyel olumsuz etkilerinin insan ve/veya çevrenin söz konusu maddeye bilinen veya öngörülebilen maruz kalması ile karşılaştırılmasını esas alır.
-- 1.4. Fiziko-kimyasal, toksikolojik ve ekotoksikolojik özelliklerinin benzer olması ya da yapısal benzerlik nedeniyle düzenli bir davranış göstermesi olası maddeler grup ya da madde kategorisi olarak ele alınabilir. İmalatçı ya da ithalatçı, madde için gerçekleştirilen kimyasal güvenlik değerlendirmesinin, başka maddeden veya gruptan veya maddeler kategorisinden kaynaklanan risklerin yeterli bir şekilde kontrol edildiğini değerlendirmek ve belgelemek için yeterli olduğu görüşünde ise, söz konusu kimyasal güvenlik değerlendirmesini diğer madde veya grup veya maddeler kategorisi için kullanabilir. İmalatçı ya da ithalatçı bunun için gerekçelendirme sağlar.
-- 1.5. Kimyasal güvenlik değerlendirmesi, maddeye ilişkin teknik dosyada bulunan bilgilere ve elde edilebilir ve ilgili diğer bilgilere dayanır. Ek-9 ve Ek-10’a göre test için teklif sunan imalatçılar ya da ithalatçılar, bunu, Kimyasal Güvenlik Raporunun ilgili başlığı altında verir. Diğer uluslararası ve ulusal programlar çerçevesinde yürütülen değerlendirmelerden gelen mevcut bilgiler dâhil edilir. Erişilebilir ve uygun olan durumlarda, mevzuat kapsamında gerçekleştirilen bir değerlendirme, Kimyasal Güvenlik Raporunun oluşturulması için dikkate alınır ve söz konusu rapora yansıtılır. Bu tür değerlendirmeler ile ilgili olarak yapılan sapmalar gerekçelendirilir.
+- 0.1. Bu Ekin amacı, imalatçıların ve ithalatçıların imal ettikleri ya da ithal ettikleri maddelerden kaynaklanan risklerin imalat veya kendi kullanımları sırasında yeterli bir biçimde kontrol edilmesi ve tedarik zinciri altındaki diğer kişilerin söz konusu riskleri yeterli biçimde kontrol etmeleri hususlarını nasıl değerlendireceklerini ve belgeleyeceklerini ortaya koymaktır. Bu ek, gerekli görüldüğü biçimde uyarlanarak, kaydın parçası olarak kimyasal güvenlik değerlendirmesi hazırlaması gereken eşya üreticileri ve ithalatçılarına da uygulanır.
+- 0.2. Kimyasal güvenlik değerlendirmesi kimyasal değerlendirme uzmanı tarafından yapılır.
+- 0.3. İmalatçının kimyasal güvenlik değerlendirmesi, maddenin imalatını ve tüm tanımlanan kullanımlarını, ithalatçının kimyasal güvenlik değerlendirmesi, maddenin tanımlanan tüm kullanımlarını ele alır. Kimyasal güvenlik değerlendirmesi, tanımlanan kullanımlarda belirtildiği şekilde, maddenin kendi halinde (tüm ana safsızlıkları ve katkıları içermek üzere), karışımda ve eşyadaki kullanımını göz önünde bulundurur. Değerlendirme, maddenin imalat ve tanımlanan kullanımlardan kaynaklanan yaşam döngüsünün tüm aşamalarını dikkate alır. Kimyasal güvenlik değerlendirmesi, uygulanan ve önerilen risk yönetimi önlemlerini ve çalışma koşullarını dikkate alarak, maddenin potansiyel olumsuz etkilerinin insan ve/veya çevrenin söz konusu maddeye bilinen veya öngörülebilen maruz kalması ile karşılaştırılmasını esas alır.
+- 0.4. Fiziko-kimyasal, toksikolojik ve ekotoksikolojik özelliklerinin benzer olması ya da yapısal benzerlik nedeniyle düzenli bir davranış göstermesi olası maddeler grup ya da madde kategorisi olarak ele alınabilir. İmalatçı ya da ithalatçı, madde için gerçekleştirilen kimyasal güvenlik değerlendirmesinin, başka maddeden veya gruptan veya maddeler kategorisinden kaynaklanan risklerin yeterli bir şekilde kontrol edildiğini değerlendirmek ve belgelemek için yeterli olduğu görüşünde ise, söz konusu kimyasal güvenlik değerlendirmesini diğer madde veya grup veya maddeler kategorisi için kullanabilir. İmalatçı ya da ithalatçı bunun için gerekçelendirme sağlar.
+- 0.5. Kimyasal güvenlik değerlendirmesi, maddeye ilişkin teknik dosyada bulunan bilgilere ve elde edilebilir ve ilgili diğer bilgilere dayanır. Ek-9 ve Ek-10’a göre test için teklif sunan imalatçılar ya da ithalatçılar, bunu, Kimyasal Güvenlik Raporunun ilgili başlığı altında verir. Diğer uluslararası ve ulusal programlar çerçevesinde yürütülen değerlendirmelerden gelen mevcut bilgiler dâhil edilir. Erişilebilir ve uygun olan durumlarda, mevzuat kapsamında gerçekleştirilen bir değerlendirme, Kimyasal Güvenlik Raporunun oluşturulması için dikkate alınır ve söz konusu rapora yansıtılır. Bu tür değerlendirmeler ile ilgili olarak yapılan sapmalar gerekçelendirilir.
 
 Ele alınacak bilgiler; maddenin zararları, imalat ya da ithalattan kaynaklanan maruz kalma, maddenin tanımlanan kullanımları, uygulanan ya da dikkate alınacak alt kullanıcılara önerilen çalışma koşulları ile risk yönetim önlemleri ile ilgili bilgileri içerir.
 
@@ -18,8 +18,8 @@ Ek-11’in üçüncü bölümüne göre bazı durumlarda eksik bilgiyi tamamlama
 
 İmalatçı ya da ithalatçı, Kimyasal Güvenlik Raporunu oluşturmak için daha fazla bilginin gerekli olduğu ve bu bilgilerin yalnızca Ek-9 ve Ek-10’a göre testler yaparak elde edilebileceği görüşünde ise, söz konusu imalatçı ya da ithalatçı, ilave bilgileri gerekli görme sebeplerini açıklayarak test stratejisine yönelik teklif sunar ve bunu Kimyasal Güvenlik Raporunda ilgili başlık altında belirtir. İlave deney sonuçlarını beklerken, bu imalatçı ya da ithalatçı, yürürlüğe koyduğu ve araştırılan riskleri yönetmesi hedeflenen alt kullanıcılara önerdiği geçici risk yönetim önlemlerini kimyasal değerlendirme raporunda belirtir ve geliştirilen maruz kalma senaryosuna dâhil eder.
 
-- 1.6. Kimyasal güvenlik değerlendirmesi adımları:
-- 1.6.1. İmalatçı ya da ithalatçı tarafından maddeye yönelik olarak gerçekleştirilen güvenlik değerlendirmesi, bu Ekin ilgili bölümleri uyarınca aşağıda yer alan 1 ila 4 üncü adımları içerir:
+- 0.6. Kimyasal güvenlik değerlendirmesi adımları:
+- 0.6.1. İmalatçı ya da ithalatçı tarafından maddeye yönelik olarak gerçekleştirilen güvenlik değerlendirmesi, bu Ekin ilgili bölümleri uyarınca aşağıda yer alan 1 ila 4 üncü adımları içerir:
 
 1. İnsan sağlığı zararlılık değerlendirmesi,
 
@@ -29,7 +29,7 @@ Ek-11’in üçüncü bölümüne göre bazı durumlarda eksik bilgiyi tamamlama
 
 4. PBT ve vPvB değerlendirmesi.
 
-- 1.6.2. Kimyasal güvenlik değerlendirmesi, 0.6.3 numaralı bölümde belirtilen durumlarda bu Ekin beşinci ve altıncı bölümlerine göre aşağıdaki beşinci ve altıncı adımları da içerir.
+- 0.6.2. Kimyasal güvenlik değerlendirmesi, 0.6.3 numaralı bölümde belirtilen durumlarda bu Ekin beşinci ve altıncı bölümlerine göre aşağıdaki beşinci ve altıncı adımları da içerir.
 
 5. Maruz kalma değerlendirmesi:
 
@@ -39,7 +39,7 @@ Ek-11’in üçüncü bölümüne göre bazı durumlarda eksik bilgiyi tamamlama
 
 6. Risk karakterizasyonu.
 
-- 1.6.3. 0.6.1 numaralı bölümde yer alan 1 ila 4 nolu adımlar sonucu imalatçı ya da ithalatçı, madde veya karışımın Maddelerin ve Karışımların Sınıflandırılması, Etiketlenmesi ve Ambalajlanması Hakkında Yönetmeliğin Ek-1’ine göre aşağıdaki zararlılık sınıfları veya kategorilerinden herhangi biri için gereken kriterleri karşıladığı ya da PBT veya vPvB olarak değerlendirildiği sonucuna varırsa, kimyasal güvenlik değerlendirmesi bu Ekin beşinci ve altıncı bölümlerine göre beşinci ve altıncı adımları da içerir.
+- 0.6.3. 0.6.1 numaralı bölümde yer alan 1 ila 4 nolu adımlar sonucu imalatçı ya da ithalatçı, madde veya karışımın Maddelerin ve Karışımların Sınıflandırılması, Etiketlenmesi ve Ambalajlanması Hakkında Yönetmeliğin Ek-1’ine göre aşağıdaki zararlılık sınıfları veya kategorilerinden herhangi biri için gereken kriterleri karşıladığı ya da PBT veya vPvB olarak değerlendirildiği sonucuna varırsa, kimyasal güvenlik değerlendirmesi bu Ekin beşinci ve altıncı bölümlerine göre beşinci ve altıncı adımları da içerir.
 
 - (a) 2.1 ila 2.4, 2.6 ve 2.7, 2.8 A ve B tipi, 2.9, 2.10, 2.12 başlıklarında yer alan zararlılık sınıfları 2.13  (kategori 1 ve kategori 2) , 2.14 (kategori 1 ve kategori 2) başlıklarında yer alan zararlılık sınıfları ve 2.15  (A ila F tipleri) başlığında yer alan zararlılık sınıfı,
 - (b) 3.1 ila 3.6 başlıklarında yer alan zararlılık sınıfları 3.7 başlığında yer alan üreme fonksiyonları ve doğurganlık veya gelişim üzerine olumsuz etki,  narkotik etkiler dışında 3.8 başlığındaki etkiler, 3.9 ve 3.10 başlıklarında yer alan zararlılık sınıfları,
@@ -160,7 +160,7 @@ Mevcut bilgiler, maddenin belirli bir zararlılık sınıfı veya kategorisi iç
 2.5. 	Maddelerin ve Karışımların Sınıflandırılması, Etiketlenmesi ve Ambalajlanması Hakkında Yönetmelikte yer alan kriterlere göre yapılan uygun sınıflandırma sunulur ve gerekçelendirilir.
 
 3. **ÇEVRESEL ZARARLILIK DEĞERLENDİRMESİ**
-- 3.1. **Giriş**
+- 3.0. **Giriş**
 
 3.0.1. 	Çevresel zararlılık değerlendirmesinin amacı, Maddelerin ve Karışımların Sınıflandırılması, Etiketlenmesi ve Ambalajlanması Hakkında Yönetmeliğe göre maddenin sınıflandırmasını belirlemek ve altında kalındığında çevrenin ilgilenilen kısımlarında olumsuz etkilerin gözlenmesinin beklenmediği madde konsantrasyonunu tanımlamaktır. Bu konsantrasyon Öngörülen Etki Gözlemlenmeyen Konsantrasyon (PNEC) olarak bilinir.
 

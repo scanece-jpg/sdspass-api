@@ -1,0 +1,2810 @@
+{
+ "kaynak": "KKDİK Ek-2 Bölüm A (RG 23.06.2017/30105 Mükerrer) — her satır bir zorunluluk; sorular: data/sds_audit_checklist.json",
+ "satirlar": [
+  {
+   "no": 1,
+   "bolum": "0",
+   "hukum": "A 0.2.4 Belirsiz/zararsız gösteren ifadeler kullanılmaz",
+   "sorular": [
+    "G-yasak-ifade"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 2,
+   "bolum": "0",
+   "hukum": "A 0.2.4 Akronim ve kısaltma içermez (16(b) anahtarı ile)",
+   "sorular": [
+    "16-kisaltma"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 3,
+   "bolum": "0",
+   "hukum": "A 0.2.5 Hazırlanma tarihi ilk sayfada",
+   "sorular": [
+    "G-tarih"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 4,
+   "bolum": "0",
+   "hukum": "A 0.2.5 Revizyonda sürüm/revizyon no ve değiştirme tarihi ilk sayfada",
+   "sorular": [
+    "G-surum"
+   ],
+   "kosul": "revizyon",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 5,
+   "bolum": "0",
+   "hukum": "A 0.3.2 Sayfa numarası ve toplam sayfa / devam göstergesi",
+   "sorular": [
+    "G-sayfa"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 6,
+   "bolum": "0",
+   "hukum": "A 0.4 Alt bölümler boş bırakılmaz",
+   "sorular": [
+    "G-bos-alt"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 7,
+   "bolum": "0",
+   "hukum": "A 0.6 SI birimleri",
+   "sorular": [
+    "G-birim"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 8,
+   "bolum": "0",
+   "hukum": "B / Md.27(5) 16 başlık ve alt başlıklar",
+   "sorular": [
+    "G-basliklar"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 9,
+   "bolum": "0",
+   "hukum": "A 1.1 Türkçe sağlanır",
+   "sorular": [
+    "G-dil"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 10,
+   "bolum": "1.1",
+   "hukum": "Ürün tanıtıcısı / karışım ticari adı",
+   "sorular": [
+    "1.1-ad"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 11,
+   "bolum": "1.1",
+   "hukum": "Madde kimliği ve kayıt numarası",
+   "sorular": [
+    "1.1-madde-kimlik"
+   ],
+   "kosul": "madde",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 12,
+   "bolum": "1.2",
+   "hukum": "Tanımlanmış kullanımlar ve kısa açıklama",
+   "sorular": [
+    "1.2-kullanim"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 13,
+   "bolum": "1.2",
+   "hukum": "Tavsiye edilmeyen kullanımlar ve nedenleri (uygulanabilirse)",
+   "sorular": [
+    "1.2-tavsiye-edilmeyen"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 14,
+   "bolum": "1.3",
+   "hukum": "Tedarikçinin adı",
+   "sorular": [
+    "1.3-tedarikci"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 15,
+   "bolum": "1.3",
+   "hukum": "Tedarikçinin tam adresi",
+   "sorular": [
+    "1.3-tedarikci"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 16,
+   "bolum": "1.3",
+   "hukum": "Telefon numarası",
+   "sorular": [
+    "1.3-tedarikci"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 17,
+   "bolum": "1.3",
+   "hukum": "GBF'den sorumlu yetkili kişinin e-postası",
+   "sorular": [
+    "1.3-eposta"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 18,
+   "bolum": "1.4",
+   "hukum": "Acil durum bilgi hizmetleri hakkında bilgi",
+   "sorular": [
+    "1.4-zehir"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 19,
+   "bolum": "1.4",
+   "hukum": "Ulusal Zehir Merkezi telefon numarası",
+   "sorular": [
+    "1.4-zehir"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 20,
+   "bolum": "1.4",
+   "hukum": "Hizmette kısıtlama varsa açıkça belirtilir",
+   "sorular": [
+    "1.4-kisit"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 21,
+   "bolum": "2.1",
+   "hukum": "Sınıflandırma verilir / kriterleri karşılamadığı belirtilir",
+   "sorular": [
+    "2.1-sinif"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 22,
+   "bolum": "2.1",
+   "hukum": "Madde: C&L bildirimiyle aynı sınıflandırma",
+   "sorular": [
+    "2.1-cl-bildirim"
+   ],
+   "kosul": "madde",
+   "onem": "zorunlu",
+   "yontem": [
+    "kdu"
+   ]
+  },
+  {
+   "no": 23,
+   "bolum": "2.1",
+   "hukum": "H ifadeleri kodla yazıldıysa 16'ya atıf",
+   "sorular": [
+    "2.1-h-atif"
+   ],
+   "kosul": "siniflandirilmis",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 24,
+   "bolum": "2.1",
+   "hukum": "En önemli olumsuz etkiler listelenir",
+   "sorular": [
+    "2.1-etkiler"
+   ],
+   "kosul": "siniflandirilmis",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 25,
+   "bolum": "2.2",
+   "hukum": "Zararlılık işaretleri",
+   "sorular": [
+    "2.2-piktogram"
+   ],
+   "kosul": "siniflandirilmis",
+   "onem": "zorunlu",
+   "yontem": [
+    "gorsel"
+   ]
+  },
+  {
+   "no": 26,
+   "bolum": "2.2",
+   "hukum": "Uyarı kelimesi",
+   "sorular": [
+    "2.2-uyari"
+   ],
+   "kosul": "siniflandirilmis",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 27,
+   "bolum": "2.2",
+   "hukum": "Zararlılık ifadeleri",
+   "sorular": [
+    "2.2-h"
+   ],
+   "kosul": "siniflandirilmis",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 28,
+   "bolum": "2.2",
+   "hukum": "Önlem ifadeleri",
+   "sorular": [
+    "2.2-p"
+   ],
+   "kosul": "siniflandirilmis",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 29,
+   "bolum": "2.2",
+   "hukum": "Geçerli diğer etiket unsurları (zararlı bileşenler, EUH vb.)",
+   "sorular": [
+    "2.2-bilesen",
+    "2.2-ek-unsur"
+   ],
+   "kosul": "karisim,siniflandirilmis",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 30,
+   "bolum": "2.3",
+   "hukum": "PBT/vPvB kriterleri karşılanıp karşılanmadığı",
+   "sorular": [
+    "2.3-pbt"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 31,
+   "bolum": "2.3",
+   "hukum": "Sınıflandırmaya yol açmayan diğer zararlar",
+   "sorular": [
+    "2.3-diger"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 32,
+   "bolum": "2.3",
+   "hukum": "Toz patlaması ifadesi (eklenmesi uygundur)",
+   "sorular": [
+    "2.3-toz"
+   ],
+   "kosul": "toz_patlamasi",
+   "onem": "tavsiye",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 33,
+   "bolum": "3",
+   "hukum": "Yüzey kimyasına dair güvenlik bilgisi",
+   "sorular": [
+    "3-yuzey"
+   ],
+   "kosul": "form:kati",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 34,
+   "bolum": "3.1",
+   "hukum": "Maddenin ana bileşeninin kimliği",
+   "sorular": [
+    "3.1-madde"
+   ],
+   "kosul": "madde",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 35,
+   "bolum": "3.1",
+   "hukum": "Sınıflandırmaya katkıda bulunan safsızlık/katkıların kimliği",
+   "sorular": [
+    "3.1-madde"
+   ],
+   "kosul": "madde",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 36,
+   "bolum": "3.2",
+   "hukum": "3.2.1(a) Eşik üstü zararlı maddeler",
+   "sorular": [
+    "3.2-liste"
+   ],
+   "kosul": "karisim",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 37,
+   "bolum": "3.2",
+   "hukum": "3.2.1(b) Mesleki maruz kalma sınırı olan maddeler",
+   "sorular": [
+    "3.2-liste"
+   ],
+   "kosul": "karisim",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 38,
+   "bolum": "3.2",
+   "hukum": "3.2.1(c)/3.2.2(b) ≥ %0,1 PBT/vPvB/Aday Liste maddeleri",
+   "sorular": [
+    "3.2-svhc"
+   ],
+   "kosul": "karisim",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 39,
+   "bolum": "3.2",
+   "hukum": "3.2.2 Sınıflandırılmamış karışımda eşik üstü maddeler",
+   "sorular": [
+    "3.2-liste"
+   ],
+   "kosul": "karisim",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 40,
+   "bolum": "3.2",
+   "hukum": "Konsantrasyon veya konsantrasyon aralığı",
+   "sorular": [
+    "3.2-konsantrasyon"
+   ],
+   "kosul": "karisim",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 41,
+   "bolum": "3.2",
+   "hukum": "Azalan sırada",
+   "sorular": [
+    "3.2-sira"
+   ],
+   "kosul": "karisim",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 42,
+   "bolum": "3.2",
+   "hukum": "3.2.3 Maddenin sınıflandırması (sınıf, kategori, H)",
+   "sorular": [
+    "3.2-sinif"
+   ],
+   "kosul": "karisim",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 43,
+   "bolum": "3.2",
+   "hukum": "3.2.3 Sınıflandırılmamış maddenin listelenme nedeni",
+   "sorular": [
+    "3.2-neden"
+   ],
+   "kosul": "karisim",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 44,
+   "bolum": "3.2",
+   "hukum": "3.2.4 Madde adı",
+   "sorular": [
+    "3.2-liste"
+   ],
+   "kosul": "karisim",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 45,
+   "bolum": "3.2",
+   "hukum": "3.2.4 Kayıt numarası (varsa)",
+   "sorular": [
+    "3.2-kayit"
+   ],
+   "kosul": "karisim",
+   "onem": "kosullu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 46,
+   "bolum": "3.2",
+   "hukum": "EC numarası (varsa)",
+   "sorular": [
+    "3.2-ec"
+   ],
+   "kosul": "karisim",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 47,
+   "bolum": "3.2",
+   "hukum": "Gaz karışımında hacimce konsantrasyon",
+   "sorular": [
+    "3.2-gaz"
+   ],
+   "kosul": "form:gaz",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 48,
+   "bolum": "4.1",
+   "hukum": "4.1.1 Soluma için talimat",
+   "sorular": [
+    "4.1-soluma"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 49,
+   "bolum": "4.1",
+   "hukum": "4.1.1 Cilt teması için talimat",
+   "sorular": [
+    "4.1-cilt"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 50,
+   "bolum": "4.1",
+   "hukum": "4.1.1 Göz teması için talimat",
+   "sorular": [
+    "4.1-goz"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 51,
+   "bolum": "4.1",
+   "hukum": "4.1.1 Yutma için talimat",
+   "sorular": [
+    "4.1-yutma"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 52,
+   "bolum": "4.1",
+   "hukum": "4.1.2(a) Acil tıbbi yardım gerekliliği",
+   "sorular": [
+    "4.1-tibbi"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 53,
+   "bolum": "4.1",
+   "hukum": "4.1.2(a) Gecikmiş etkilerin beklenip beklenmediği",
+   "sorular": [
+    "4.1-gecikmeli"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 54,
+   "bolum": "4.1",
+   "hukum": "4.1.2(b) Temiz havaya çıkarma",
+   "sorular": [
+    "4.1-temiz-hava"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 55,
+   "bolum": "4.1",
+   "hukum": "4.1.2(c) Giysi ve ayakkabıların çıkarılması",
+   "sorular": [
+    "4.1-giysi"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 56,
+   "bolum": "4.1",
+   "hukum": "4.1.2(ç) İlk yardımcı için KKD",
+   "sorular": [
+    "4.1-kke"
+   ],
+   "kosul": "siniflandirilmis",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 57,
+   "bolum": "4.2",
+   "hukum": "Akut ve gecikmeli en önemli belirti ve etkiler",
+   "sorular": [
+    "4.2-belirtiler"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 58,
+   "bolum": "4.3",
+   "hukum": "Klinik test, tıbbi izleme, antidot, tedavi bilgisi",
+   "sorular": [
+    "4.3-tibbi-not"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 59,
+   "bolum": "4.3",
+   "hukum": "İşyerinde özel tedavi araçlarının vurgulanması (önemli olabilir)",
+   "sorular": [
+    "4.3-isyeri"
+   ],
+   "kosul": "siniflandirilmis",
+   "onem": "tavsiye",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 60,
+   "bolum": "5.1",
+   "hukum": "Uygun söndürücü maddeler",
+   "sorular": [
+    "5.1-uygun"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 61,
+   "bolum": "5.1",
+   "hukum": "Uygun olmayan söndürücü maddeler",
+   "sorular": [
+    "5.1-uygunsuz"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 62,
+   "bolum": "5.2",
+   "hukum": "Ürünün özel zararları / zararlı yanma ürünleri",
+   "sorular": [
+    "5.2-yanma"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 63,
+   "bolum": "5.3",
+   "hukum": "Yangın söndürme sırasında koruyucu önlemler",
+   "sorular": [
+    "5.3-ekip"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 64,
+   "bolum": "5.3",
+   "hukum": "İtfaiye için özel koruyucu ekipman",
+   "sorular": [
+    "5.3-ekip"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 65,
+   "bolum": "6",
+   "hukum": "Büyük ve küçük dökülmelerin ayrılması (önemliyse)",
+   "sorular": [
+    "6-buyuk-kucuk"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 66,
+   "bolum": "6.1",
+   "hukum": "6.1.1(a) Koruyucu ekipman",
+   "sorular": [
+    "6.1.1-personel"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 67,
+   "bolum": "6.1",
+   "hukum": "6.1.1(b) Tutuşturucu kaynak, havalandırma, toz kontrolü",
+   "sorular": [
+    "6.1.1-personel"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 68,
+   "bolum": "6.1",
+   "hukum": "6.1.1(c) Tahliye / uzmana danışma",
+   "sorular": [
+    "6.1.1-personel"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 69,
+   "bolum": "6.1",
+   "hukum": "6.1.2 Acil müdahale personeli için uygun kumaş",
+   "sorular": [
+    "6.1.2-mudahale"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 70,
+   "bolum": "6.2",
+   "hukum": "Çevresel önlemler",
+   "sorular": [
+    "6.2-cevre"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 71,
+   "bolum": "6.3",
+   "hukum": "6.3.1 Kontrol altına alma",
+   "sorular": [
+    "6.3.1-kontrol"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 72,
+   "bolum": "6.3",
+   "hukum": "6.3.2 Temizleme",
+   "sorular": [
+    "6.3.2-temizlik"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 73,
+   "bolum": "6.3",
+   "hukum": "6.3.2(e) Kıvılcım çıkarmayan alet/ekipman (uygulanabilirse)",
+   "sorular": [
+    "6.3-kivilcim"
+   ],
+   "kosul": "h:H220|H221|H222|H223|H224|H225|H226|H228|H242",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 74,
+   "bolum": "6.3",
+   "hukum": "6.3.3 Uygunsuz teknikler ve diğer bilgiler",
+   "sorular": [
+    "6.3.3-uygunsuz"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 75,
+   "bolum": "6.4",
+   "hukum": "Bölüm 8 ve 13'e atıf (uygunsa)",
+   "sorular": [
+    "6.4-atif"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 76,
+   "bolum": "7.1",
+   "hukum": "7.1.1(a) Güvenli elleçleme önlemleri",
+   "sorular": [
+    "7.1-elleçleme"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 77,
+   "bolum": "7.1",
+   "hukum": "7.1.1(b) Uyuşmayan maddelerin elleçlenmesini önleme",
+   "sorular": [
+    "7.1-uyumsuz"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 78,
+   "bolum": "7.1",
+   "hukum": "7.1.1(c) Özellik değiştiren işlemlerden doğan yeni riskler",
+   "sorular": [
+    "7.1-islem"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 79,
+   "bolum": "7.1",
+   "hukum": "7.1.1(ç) Çevreye yayılmayı azaltma",
+   "sorular": [
+    "7.1-cevre"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 80,
+   "bolum": "7.1",
+   "hukum": "7.1.2(a) Çalışma alanında yememe/içmeme/sigara içmeme",
+   "sorular": [
+    "7.1-hijyen"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 81,
+   "bolum": "7.1",
+   "hukum": "7.1.2(b) Kullanımdan sonra el yıkama",
+   "sorular": [
+    "7.1-hijyen"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 82,
+   "bolum": "7.1",
+   "hukum": "7.1.2(c) Yemek alanına girmeden kirli giysiyi çıkarma",
+   "sorular": [
+    "7.1-hijyen"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 83,
+   "bolum": "7.2",
+   "hukum": "Tavsiyeler 9. bölümle tutarlı",
+   "sorular": [
+    "T-7-9"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 84,
+   "bolum": "7.2",
+   "hukum": "(a)(i)(iii)(vi) Patlayıcı atmosfer, alevlenirlik, tutuşturucu kaynaklar",
+   "sorular": [
+    "7.2-alev"
+   ],
+   "kosul": "h:H220|H221|H222|H223|H224|H225|H226|H228|H242",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 85,
+   "bolum": "7.2",
+   "hukum": "(a)(ii) Aşındırıcı koşullar",
+   "sorular": [
+    "7.2-ambalaj"
+   ],
+   "kosul": "h:H290|H314",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 86,
+   "bolum": "7.2",
+   "hukum": "(a)(iv) Uyuşmayan maddeler",
+   "sorular": [
+    "7.2-uyumsuz"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 87,
+   "bolum": "7.2",
+   "hukum": "(a)(v) Buharlaşma koşulları",
+   "sorular": [
+    "7.2-kosullar"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 88,
+   "bolum": "7.2",
+   "hukum": "(b) Hava, basınç, sıcaklık, güneş, nem, titreşim",
+   "sorular": [
+    "7.2-kosullar"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 89,
+   "bolum": "7.2",
+   "hukum": "(c) Kararlaştırıcı / antioksidan",
+   "sorular": [
+    "7.2-kararlastirici"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "kdu"
+   ]
+  },
+  {
+   "no": 90,
+   "bolum": "7.2",
+   "hukum": "(d)(i)(ii) Havalandırma, depo/tank tasarımı",
+   "sorular": [
+    "7.2-tesis"
+   ],
+   "kosul": "siniflandirilmis",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 91,
+   "bolum": "7.2",
+   "hukum": "(d)(iii) Miktar sınırı ve ambalaj uygunluğu",
+   "sorular": [
+    "7.2-ambalaj"
+   ],
+   "kosul": "h:H290|H314",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 92,
+   "bolum": "7.3",
+   "hukum": "Belirli son kullanımlar",
+   "sorular": [
+    "7.3-son-kullanim"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 93,
+   "bolum": "8.1",
+   "hukum": "8.1.1.1 TR mesleki maruz kalma sınır değerleri",
+   "sorular": [
+    "8.1-oel"
+   ],
+   "kosul": "oel",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 94,
+   "bolum": "8.1",
+   "hukum": "8.1.1.2 Kanserojen/mutajen yönetmeliği sınır değerleri",
+   "sorular": [
+    "8.1-oel-kanserojen"
+   ],
+   "kosul": "h:H340|H350|H350i",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 95,
+   "bolum": "8.1",
+   "hukum": "8.1.1.3 Diğer sınır değerler (varsa)",
+   "sorular": [
+    "8.1-oel"
+   ],
+   "kosul": "oel",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 96,
+   "bolum": "8.1",
+   "hukum": "8.1.1.4 TR biyolojik sınır değerleri",
+   "sorular": [
+    "8.1-bld"
+   ],
+   "kosul": "oel",
+   "onem": "kosullu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 97,
+   "bolum": "8.1",
+   "hukum": "8.1.1.5 Diğer biyolojik sınır değerleri (varsa)",
+   "sorular": [
+    "8.1-bld"
+   ],
+   "kosul": "oel",
+   "onem": "kosullu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 98,
+   "bolum": "8.1",
+   "hukum": "8.1.1 Sınır değerlerin yasal dayanağı",
+   "sorular": [
+    "8.1-oel-dayanak"
+   ],
+   "kosul": "oel",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 99,
+   "bolum": "8.1",
+   "hukum": "8.1.2 İzleme usulleri",
+   "sorular": [
+    "8.1-izleme"
+   ],
+   "kosul": "oel",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 100,
+   "bolum": "8.1",
+   "hukum": "8.1.3 Kullanımda oluşan hava kirleticileri",
+   "sorular": [
+    "8.1-hava-kirletici"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 101,
+   "bolum": "8.1",
+   "hukum": "8.1.4 DNEL / PNEC",
+   "sorular": [
+    "8.1-dnel"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 102,
+   "bolum": "8.1",
+   "hukum": "8.1.5 Kontrol bandı yaklaşımı",
+   "sorular": [
+    "8.1-kontrol-bandi"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "kdu"
+   ]
+  },
+  {
+   "no": 103,
+   "bolum": "8.2",
+   "hukum": "8.2.1 Uygun mühendislik kontrolleri",
+   "sorular": [
+    "8.2.1-muhendislik"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 104,
+   "bolum": "8.2",
+   "hukum": "8.2.2.1 Yangına özgü KKD için 5. bölüme atıf",
+   "sorular": [
+    "8.2.2-atif5"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 105,
+   "bolum": "8.2",
+   "hukum": "8.2.2.2 CEN standartlarına atıf",
+   "sorular": [
+    "8.2.2-standart"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 106,
+   "bolum": "8.2",
+   "hukum": "(a) Göz/yüz koruma tipi",
+   "sorular": [
+    "8.2.2-goz"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 107,
+   "bolum": "8.2",
+   "hukum": "(b)(i) Eldiven malzemesi",
+   "sorular": [
+    "8.2.2-eldiven-malzeme"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 108,
+   "bolum": "8.2",
+   "hukum": "(b)(i) Eldiven kalınlığı",
+   "sorular": [
+    "8.2.2-eldiven-kalinlik"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 109,
+   "bolum": "8.2",
+   "hukum": "(b)(i) Eldiven delinme süresi",
+   "sorular": [
+    "8.2.2-eldiven-sure"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 110,
+   "bolum": "8.2",
+   "hukum": "(b)(i) Ek el koruma önlemleri (gerekirse)",
+   "sorular": [
+    "8.2.2-ek-el"
+   ],
+   "kosul": "siniflandirilmis",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 111,
+   "bolum": "8.2",
+   "hukum": "(b)(ii) Diğer vücut koruması",
+   "sorular": [
+    "8.2.2-vucut"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 112,
+   "bolum": "8.2",
+   "hukum": "(c) Solunum koruma ekipmanı tipi",
+   "sorular": [
+    "8.2.2-solunum"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 113,
+   "bolum": "8.2",
+   "hukum": "(c) Arındırıcı element (filtre/kartuş)",
+   "sorular": [
+    "8.2.2-solunum"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 114,
+   "bolum": "8.2",
+   "hukum": "(d) Isıl zararlar",
+   "sorular": [
+    "8.2.2-isil"
+   ],
+   "kosul": "form:gaz",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 115,
+   "bolum": "8.2",
+   "hukum": "8.2.3 Çevresel maruz kalma kontrolleri",
+   "sorular": [
+    "8.2.3-cevre"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 116,
+   "bolum": "9.1",
+   "hukum": "(a) Görünüm (fiziksel hal, renk)",
+   "sorular": [
+    "9.1-ozellikler",
+    "9.1-gorunum"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev",
+    "kod"
+   ]
+  },
+  {
+   "no": 117,
+   "bolum": "9.1",
+   "hukum": "(b) Koku",
+   "sorular": [
+    "9.1-ozellikler"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 118,
+   "bolum": "9.1",
+   "hukum": "(c) Koku eşiği",
+   "sorular": [
+    "9.1-ozellikler"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 119,
+   "bolum": "9.1",
+   "hukum": "(ç) pH",
+   "sorular": [
+    "9.1-ozellikler",
+    "9.1-ph"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev",
+    "kod"
+   ]
+  },
+  {
+   "no": 120,
+   "bolum": "9.1",
+   "hukum": "(d) Erime/donma noktası",
+   "sorular": [
+    "9.1-ozellikler"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 121,
+   "bolum": "9.1",
+   "hukum": "(e) İlk kaynama noktası/aralığı",
+   "sorular": [
+    "9.1-ozellikler"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 122,
+   "bolum": "9.1",
+   "hukum": "(f) Parlama noktası",
+   "sorular": [
+    "9.1-ozellikler"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 123,
+   "bolum": "9.1",
+   "hukum": "(g) Buharlaşma hızı",
+   "sorular": [
+    "9.1-ozellikler"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 124,
+   "bolum": "9.1",
+   "hukum": "(ğ) Alevlenirlik (katı, gaz)",
+   "sorular": [
+    "9.1-ozellikler"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 125,
+   "bolum": "9.1",
+   "hukum": "(h) Üst/alt alevlenirlik veya patlama limitleri",
+   "sorular": [
+    "9.1-ozellikler"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 126,
+   "bolum": "9.1",
+   "hukum": "(ı) Buhar basıncı",
+   "sorular": [
+    "9.1-ozellikler"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 127,
+   "bolum": "9.1",
+   "hukum": "(i) Buhar yoğunluğu",
+   "sorular": [
+    "9.1-ozellikler"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 128,
+   "bolum": "9.1",
+   "hukum": "(j) Bağıl yoğunluk",
+   "sorular": [
+    "9.1-ozellikler"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 129,
+   "bolum": "9.1",
+   "hukum": "(k) Çözünürlük",
+   "sorular": [
+    "9.1-ozellikler"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 130,
+   "bolum": "9.1",
+   "hukum": "(l) Dağılım katsayısı n-oktanol/su",
+   "sorular": [
+    "9.1-ozellikler"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 131,
+   "bolum": "9.1",
+   "hukum": "(m) Kendiliğinden tutuşma sıcaklığı",
+   "sorular": [
+    "9.1-ozellikler"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 132,
+   "bolum": "9.1",
+   "hukum": "(n) Bozunma sıcaklığı",
+   "sorular": [
+    "9.1-ozellikler"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 133,
+   "bolum": "9.1",
+   "hukum": "(o) Akışkanlık",
+   "sorular": [
+    "9.1-ozellikler"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 134,
+   "bolum": "9.1",
+   "hukum": "(ö) Patlayıcı özellikler",
+   "sorular": [
+    "9.1-ozellikler"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 135,
+   "bolum": "9.1",
+   "hukum": "(p) Oksitleyici özellikler",
+   "sorular": [
+    "9.1-ozellikler"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 136,
+   "bolum": "9.1",
+   "hukum": "Test yöntemi / referans koşulları",
+   "sorular": [
+    "9.1-yontem"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 137,
+   "bolum": "9.1",
+   "hukum": "Parlama noktası belirleme yöntemi",
+   "sorular": [
+    "9.1-parlama-yontem"
+   ],
+   "kosul": "form:sivi",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 138,
+   "bolum": "9.1",
+   "hukum": "Katıda granülometri ve spesifik yüzey alanı",
+   "sorular": [
+    "9.1-granulometri"
+   ],
+   "kosul": "form:kati",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 139,
+   "bolum": "9.1",
+   "hukum": "pH sulu çözeltiye aitse konsantrasyonu",
+   "sorular": [
+    "9.1-ph-cozelti"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 140,
+   "bolum": "9.1",
+   "hukum": "Değer verilmeyen özellik için neden",
+   "sorular": [
+    "9.1-neden"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 141,
+   "bolum": "9.1",
+   "hukum": "Verinin hangi maddeye ait olduğu (karışımda)",
+   "sorular": [
+    "9.1-karisim-veri"
+   ],
+   "kosul": "karisim",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 142,
+   "bolum": "9",
+   "hukum": "Bilgiler sınıflandırmayla tutarlı",
+   "sorular": [
+    "T-9-2"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 143,
+   "bolum": "9.2",
+   "hukum": "Diğer fiziksel/kimyasal parametreler",
+   "sorular": [
+    "9.2-diger"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 144,
+   "bolum": "10.1",
+   "hukum": "Tepkime zararları",
+   "sorular": [
+    "10.1-tepkime"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 145,
+   "bolum": "10.2",
+   "hukum": "Kararlı/kararsız olduğu",
+   "sorular": [
+    "10.2-kararlilik"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 146,
+   "bolum": "10.2",
+   "hukum": "Kullanılan/gereken kararlaştırıcı",
+   "sorular": [
+    "10.2-kararlastirici"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "kdu"
+   ]
+  },
+  {
+   "no": 147,
+   "bolum": "10.2",
+   "hukum": "Fiziksel görünüm değişikliğinin güvenlik önemi",
+   "sorular": [
+    "10.2-gorunum"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 148,
+   "bolum": "10.3",
+   "hukum": "Zararlı reaksiyon olasılığı ve koşulları",
+   "sorular": [
+    "10.3-reaksiyon"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 149,
+   "bolum": "10.4",
+   "hukum": "Kaçınılması gereken durumlar",
+   "sorular": [
+    "10.4-kosullar"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 150,
+   "bolum": "10.5",
+   "hukum": "Kaçınılması gereken maddeler",
+   "sorular": [
+    "10.5-maddeler"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 151,
+   "bolum": "10.6",
+   "hukum": "Zararlı bozunma ürünleri",
+   "sorular": [
+    "10.6-bozunma"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 152,
+   "bolum": "11.1",
+   "hukum": "(a) Akut toksisite",
+   "sorular": [
+    "11.1-siniflar"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 153,
+   "bolum": "11.1",
+   "hukum": "(b) Cilt aşınması/tahrişi",
+   "sorular": [
+    "11.1-siniflar"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 154,
+   "bolum": "11.1",
+   "hukum": "(c) Ciddi göz hasarı/tahrişi",
+   "sorular": [
+    "11.1-siniflar"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 155,
+   "bolum": "11.1",
+   "hukum": "(ç) Solunum yolu/cilt hassaslaşması",
+   "sorular": [
+    "11.1-siniflar"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 156,
+   "bolum": "11.1",
+   "hukum": "(d) Eşey hücre mutajenitesi",
+   "sorular": [
+    "11.1-siniflar"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 157,
+   "bolum": "11.1",
+   "hukum": "(e) Kanserojenite",
+   "sorular": [
+    "11.1-siniflar"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 158,
+   "bolum": "11.1",
+   "hukum": "(f) Üreme sistemi toksisitesi",
+   "sorular": [
+    "11.1-siniflar"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 159,
+   "bolum": "11.1",
+   "hukum": "(g) BHOT tek maruz kalma",
+   "sorular": [
+    "11.1-siniflar"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 160,
+   "bolum": "11.1",
+   "hukum": "(ğ) BHOT tekrarlı maruz kalma",
+   "sorular": [
+    "11.1-siniflar"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 161,
+   "bolum": "11.1",
+   "hukum": "(h) Aspirasyon zararı",
+   "sorular": [
+    "11.1-siniflar"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 162,
+   "bolum": "11",
+   "hukum": "Bilgiler sınıflandırmayla tutarlı",
+   "sorular": [
+    "T-11-2"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 163,
+   "bolum": "11.1",
+   "hukum": "Madde: Ek-7–11 bilgi özetleri ve test yöntemleri",
+   "sorular": [
+    "11.1-madde-ozet"
+   ],
+   "kosul": "madde",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 164,
+   "bolum": "11.1",
+   "hukum": "Madde: CMR 1A/1B kriterleriyle karşılaştırma",
+   "sorular": [
+    "11.1-cmr-karsilastirma"
+   ],
+   "kosul": "madde",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 165,
+   "bolum": "11.1",
+   "hukum": "11.1.1 Sınıflandırılmayan sınıfın nedeni / standart ifade",
+   "sorular": [
+    "11.1-ifade"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 166,
+   "bolum": "11.1",
+   "hukum": "11.1.2 Bileşenlerin toksikolojik verileri (LD50, ATE, LC50)",
+   "sorular": [
+    "11.1-bilesen-veri"
+   ],
+   "kosul": "karisim,siniflandirilmis",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 167,
+   "bolum": "11.1",
+   "hukum": "11.1.4 Kriterlerin karşılanmadığını destekleyen bilgi",
+   "sorular": [
+    "11.1-ifade"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 168,
+   "bolum": "11.1",
+   "hukum": "11.1.5 Olası maruz kalma yolları",
+   "sorular": [
+    "11.1.5-yollar"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 169,
+   "bolum": "11.1",
+   "hukum": "11.1.6 Belirtiler",
+   "sorular": [
+    "11.1.6-belirtiler"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 170,
+   "bolum": "11.1",
+   "hukum": "11.1.7 Gecikmeli/anlık/kronik etkiler",
+   "sorular": [
+    "11.1.7-gecikmeli"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 171,
+   "bolum": "11.1",
+   "hukum": "11.1.7 İnsan/hayvan verisine dayandığı",
+   "sorular": [
+    "11.1.7-veri-kaynagi"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 172,
+   "bolum": "11.1",
+   "hukum": "11.1.8 Etkileşimli etkiler",
+   "sorular": [
+    "11.1.8-etkilesim"
+   ],
+   "kosul": "karisim",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 173,
+   "bolum": "11.1",
+   "hukum": "11.1.9 Özel veri yoksa açıkça belirtilir",
+   "sorular": [
+    "11.1-ifade"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 174,
+   "bolum": "11.1",
+   "hukum": "11.1.10 Karışım test edilmemişse bileşen bilgileri",
+   "sorular": [
+    "11.1-bilesen-veri"
+   ],
+   "kosul": "karisim,siniflandirilmis",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 175,
+   "bolum": "11.1",
+   "hukum": "11.1.11 Karışımda her madde için toksik etkiler",
+   "sorular": [
+    "11.1-bilesen-veri"
+   ],
+   "kosul": "karisim,siniflandirilmis",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 176,
+   "bolum": "11.1",
+   "hukum": "11.1.12 Diğer olumsuz sağlık etkileri",
+   "sorular": [
+    "11.1.12-diger"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 177,
+   "bolum": "12",
+   "hukum": "Test verisinde tür, ortam, birim, süre, koşul",
+   "sorular": [
+    "12-test-detay"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 178,
+   "bolum": "12",
+   "hukum": "Bilgi yoksa/geçerli değilse nedeni",
+   "sorular": [
+    "12.1-toksisite",
+    "12.2-bozunma",
+    "12.3-biyobirikim",
+    "12.4-hareketlilik"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 179,
+   "bolum": "12",
+   "hukum": "Karışımdaki her ilgili madde için biyobirikim/kalıcılık",
+   "sorular": [
+    "12.2-bozunma",
+    "12.3-biyobirikim"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 180,
+   "bolum": "12",
+   "hukum": "Zararlı dönüşüm ürünleri",
+   "sorular": [
+    "12-donusum"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 181,
+   "bolum": "12",
+   "hukum": "Bilgiler sınıflandırmayla tutarlı",
+   "sorular": [
+    "T-12-2"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 182,
+   "bolum": "12.1",
+   "hukum": "Sucul toksisite (balık, kabuklu, alg)",
+   "sorular": [
+    "12.1-toksisite"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 183,
+   "bolum": "12.1",
+   "hukum": "Diğer organizmalar (toprak, kuş, arı, bitki)",
+   "sorular": [
+    "12.1-diger-organizma"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 184,
+   "bolum": "12.1",
+   "hukum": "Atıksu arıtma tesisine olası etki",
+   "sorular": [
+    "12.1-aritma"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 185,
+   "bolum": "12.2",
+   "hukum": "Kalıcılık ve bozunabilirlik",
+   "sorular": [
+    "12.2-bozunma"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 186,
+   "bolum": "12.3",
+   "hukum": "Biyobirikim potansiyeli (Kow, BCF)",
+   "sorular": [
+    "12.3-biyobirikim"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 187,
+   "bolum": "12.4",
+   "hukum": "Toprakta hareketlilik",
+   "sorular": [
+    "12.4-hareketlilik"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 188,
+   "bolum": "12.5",
+   "hukum": "PBT ve vPvB değerlendirmesi sonuçları",
+   "sorular": [
+    "12.5-pbt"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 189,
+   "bolum": "12.6",
+   "hukum": "Diğer olumsuz etkiler",
+   "sorular": [
+    "12.6-diger"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 190,
+   "bolum": "13.1",
+   "hukum": "(a) Ürün için atık işleme yöntemleri",
+   "sorular": [
+    "13.1-yontem"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 191,
+   "bolum": "13.1",
+   "hukum": "(a) Kirlenmiş ambalaj için atık işleme",
+   "sorular": [
+    "13.1-yontem"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 192,
+   "bolum": "13.1",
+   "hukum": "(b) Atık işlemeyi etkileyen özellikler",
+   "sorular": [
+    "13.1-ozellik"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 193,
+   "bolum": "13.1",
+   "hukum": "(c) Kanalizasyona verilmez",
+   "sorular": [
+    "13.1-kanalizasyon"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 194,
+   "bolum": "13.1",
+   "hukum": "(ç) Atık işleme için özel önlemler",
+   "sorular": [
+    "13.1-ozel-onlem"
+   ],
+   "kosul": "siniflandirilmis",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 195,
+   "bolum": "13.1",
+   "hukum": "Atık mevzuatına atıf",
+   "sorular": [
+    "13.1-mevzuat"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 196,
+   "bolum": "14",
+   "hukum": "Bilgi mevcut/uygun değilse belirtilir (tehlikesiz)",
+   "sorular": [
+    "14-tehlikesiz"
+   ],
+   "kosul": "tehlikeli_mal_degil",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 197,
+   "bolum": "14",
+   "hukum": "Her taşıma mevzuatı için bilgi (ADR/RID/ADN/IMDG/ICAO)",
+   "sorular": [
+    "14-modlar"
+   ],
+   "kosul": "tehlikeli_mal",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 198,
+   "bolum": "14.1",
+   "hukum": "UN numarası",
+   "sorular": [
+    "14.1-un"
+   ],
+   "kosul": "tehlikeli_mal",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 199,
+   "bolum": "14.2",
+   "hukum": "Uygun UN taşımacılık adı",
+   "sorular": [
+    "14.2-ad"
+   ],
+   "kosul": "tehlikeli_mal",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 200,
+   "bolum": "14.3",
+   "hukum": "Taşımacılık zararlılık sınıfı ve yan riskler",
+   "sorular": [
+    "14.3-sinif"
+   ],
+   "kosul": "tehlikeli_mal",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 201,
+   "bolum": "14.4",
+   "hukum": "Ambalajlama grubu",
+   "sorular": [
+    "14.4-pg"
+   ],
+   "kosul": "tehlikeli_mal",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 202,
+   "bolum": "14.5",
+   "hukum": "Çevre için zararlı / deniz kirletici",
+   "sorular": [
+    "14.5-cevre"
+   ],
+   "kosul": "tehlikeli_mal",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 203,
+   "bolum": "14.6",
+   "hukum": "Kullanıcı için özel önlemler",
+   "sorular": [
+    "14.6-onlem"
+   ],
+   "kosul": "tehlikeli_mal",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 204,
+   "bolum": "14.7",
+   "hukum": "MARPOL Ek II / IBC toplu taşımacılık",
+   "sorular": [
+    "14.7-marpol"
+   ],
+   "kosul": "tehlikeli_mal",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 205,
+   "bolum": "15",
+   "hukum": "Diğer mevzuat (ozon, KOK, ithalat/ihracat)",
+   "sorular": [
+    "15-diger-mevzuat"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 206,
+   "bolum": "15.1",
+   "hukum": "İlgili güvenlik, sağlık ve çevre hükümleri (örn. BEKRA)",
+   "sorular": [
+    "15.1-mevzuat",
+    "15.1-bekra"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 207,
+   "bolum": "15.1",
+   "hukum": "Alıcının yapması gereken faaliyetlere tavsiye",
+   "sorular": [
+    "15.1-alici-tavsiye"
+   ],
+   "kosul": "siniflandirilmis",
+   "onem": "kosullu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 208,
+   "bolum": "15.1",
+   "hukum": "İzne tabi / kısıtlanmış olma durumu",
+   "sorular": [
+    "15.1-izin-kisit"
+   ],
+   "kosul": "her",
+   "onem": "kosullu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 209,
+   "bolum": "15.2",
+   "hukum": "Kimyasal güvenlik değerlendirmesi yapılıp yapılmadığı",
+   "sorular": [
+    "15.2-kgd"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 210,
+   "bolum": "16",
+   "hukum": "(a) Önceki sürüme göre değişiklikler",
+   "sorular": [
+    "16-revizyon"
+   ],
+   "kosul": "revizyon",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 211,
+   "bolum": "16",
+   "hukum": "(b) Kısaltma ve akronim anahtarı",
+   "sorular": [
+    "16-kisaltma"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 212,
+   "bolum": "16",
+   "hukum": "(c) Literatür ve veri kaynakları",
+   "sorular": [
+    "16-kaynak"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 213,
+   "bolum": "16",
+   "hukum": "(ç) Karışımın sınıflandırma yöntemi",
+   "sorular": [
+    "16-yontem"
+   ],
+   "kosul": "karisim",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  },
+  {
+   "no": 214,
+   "bolum": "16",
+   "hukum": "(d) H/P ifadelerinin tam metni",
+   "sorular": [
+    "16-tam-metin"
+   ],
+   "kosul": "siniflandirilmis",
+   "onem": "zorunlu",
+   "yontem": [
+    "kod"
+   ]
+  },
+  {
+   "no": 215,
+   "bolum": "16",
+   "hukum": "(e) İşçi eğitimi tavsiyesi",
+   "sorular": [
+    "16-egitim"
+   ],
+   "kosul": "her",
+   "onem": "zorunlu",
+   "yontem": [
+    "jev"
+   ]
+  }
+ ]
+}

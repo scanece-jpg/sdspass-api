@@ -1,0 +1,2357 @@
+{
+ "surum": "taslak-3 (2026-10-02) — Ek-2 kapsam tablosuyla tamamlandı",
+ "aciklama": "GBF denetim soru listesi. Her soru bir yönetmelik hükmüne dayanır. Ana kaynak KKDİK Ek-2 Bölüm A (alt bölüm numaraları resmî docx numaralandırmasından doğrulandı); etiket unsurları SEA Yönetmeliği; KDU bilgisi KKDİK Usul ve Esaslar.",
+ "alanlar": {
+  "id": "benzersiz kimlik",
+  "bolum": "GBF bölüm/alt bölüm numarası (0 = genel kurallar, T = bölümler arası tutarlılık)",
+  "dayanak": "yönetmelik hükmü",
+  "soru_tr": "Türkçe soru",
+  "soru_en": "Jev'e gönderilecek İngilizce talimat (Türkçe metin üzerinde)",
+  "yontem": "kod = kesin kural, programla | jev = metni anlamayı gerektirir | gorsel = PDF'teki resim (piktogram) | kdu = metinden otomatik doğrulanamaz (dış belge/ürün bilgisi), KDU kontrol eder",
+  "kosul": "sorunun hangi GBF'te sorulacağı (aşağıdaki kosullar sözlüğü)",
+  "bolumler": "jev sorusunda modele verilecek bölüm(ler)",
+  "onem": "zorunlu = yönetmelik açıkça istiyor, eksikse HATA | kosullu = 'ilgili ise/uygunsa' hükmü, eksikse UYARI (KDU değerlendirir) | tavsiye = iyi uygulama, yönetmelik zorunlu tutmuyor",
+  "not": "açıklama",
+  "tur": "noul (varsayılan) = evet/hayır olasılığı | choice = seçenekli; 'secenekler' anahtarları, 'kabul' (uygun sayılanlar) ve 'kdu' (KDU baksın) listeleriyle; diğer seçenekler = eksik",
+  "karar": "noul: p ≥ 0,65 uygun, 0,35–0,65 KDU baksın, < 0,35 eksik (yasak ifade gibi 'EVET = hata' sorularında tersi)"
+ },
+ "kosullar": {
+  "her": "tüm GBF'ler",
+  "karisim": "karışım GBF'si",
+  "madde": "madde GBF'si",
+  "siniflandirilmis": "SEA'ya göre en az bir zararlılık sınıfı var",
+  "siniflandirilmamis": "hiçbir zararlılık sınıfı yok",
+  "revizyon": "ilk sürüm değil",
+  "form:gaz / form:sivi / form:kati / form:aerosol": "fiziksel hal",
+  "toz_patlamasi": "toz patlaması riski var",
+  "oel": "en az bir bileşenin mesleki maruz kalma sınır değeri var",
+  "tehlikeli_mal": "taşımacılıkta tehlikeli (UN numarası var)",
+  "tehlikeli_mal_degil": "taşımacılıkta tehlikeli değil",
+  "bbb": "UN girişi B.B.B. (N.O.S.) — ÖH 274 teknik ad gerektirir",
+  "h:KODLAR": "belirtilen H kodlarından en az biri var (örn. h:H314|H318); virgül = VE (örn. karisim,siniflandirilmis)",
+  "deterjan": "Deterjanlar Hakkında Yönetmelik kapsamında",
+  "halka_arz": "tüketiciye (halka) arz edilen ürün",
+  "svhc": "≥ %0,1 Aday Liste maddesi içeriyor"
+ },
+ "sorular": [
+  {
+   "id": "G-tarih",
+   "bolum": "0",
+   "dayanak": "KKDİK Ek-2 A 0.2.5",
+   "soru_tr": "GBF'nin hazırlanma tarihi ilk sayfada verilmiş mi?",
+   "soru_en": "The preparation (or revision) date of the SDS is stated on the first page.",
+   "yontem": "kod",
+   "kosul": "her",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "G-surum",
+   "bolum": "0",
+   "dayanak": "KKDİK Ek-2 A 0.2.5",
+   "soru_tr": "Revizyonda sürüm/revizyon numarası ve değiştirme tarihi ilk sayfada var mı?",
+   "soru_en": "The first page states a version or revision number and the revision date.",
+   "yontem": "kod",
+   "kosul": "revizyon",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "G-sayfa",
+   "bolum": "0",
+   "dayanak": "KKDİK Ek-2 A 0.3.2",
+   "soru_tr": "Tüm sayfalar numaralı ve toplam sayfa sayısı (örn. 'sayfa 1/8') veya devam göstergesi var mı?",
+   "soru_en": "Every page is numbered and shows the total page count (e.g. 'page 1/8') or a continuation indicator.",
+   "yontem": "kod",
+   "kosul": "her",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "G-basliklar",
+   "bolum": "0",
+   "dayanak": "KKDİK Ek-2 B; KKDİK Md.27(5)",
+   "soru_tr": "16 başlık ve Bölüm B'deki tüm alt başlıklar sırasıyla var mı?",
+   "soru_en": "All 16 sections and their prescribed subsections are present in order.",
+   "yontem": "kod",
+   "kosul": "her",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "G-bos-alt",
+   "bolum": "0",
+   "dayanak": "KKDİK Ek-2 A 0.4",
+   "soru_tr": "Boş bırakılmış alt bölüm var mı? (Bilgi yoksa nedeni yazılmalı)",
+   "soru_en": "No subsection is left empty; where information is not available this is stated.",
+   "yontem": "kod",
+   "kosul": "her",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "G-dil",
+   "bolum": "0",
+   "dayanak": "KKDİK Ek-2 A 1.1; KKDİK Md.27",
+   "soru_tr": "GBF Türkçe mi?",
+   "soru_en": "The SDS text is written in Turkish.",
+   "yontem": "kod",
+   "kosul": "her",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "G-yasak-ifade",
+   "bolum": "0",
+   "dayanak": "KKDİK Ek-2 A 0.2.4; SEA Md.27(4)",
+   "soru_tr": "'Zararlı olabilir', 'sağlığa etkisi yok', 'çoğu kullanım koşullarında güvenli', 'zararsız' gibi ifadeler veya sınıflandırmayla uyuşmayan ifadeler var mı?",
+   "soru_en": "The text contains vague or reassuring statements such as 'may be dangerous', 'no health effects', 'safe under most conditions of use', 'harmless', or statements inconsistent with the classification.",
+   "yontem": "kod",
+   "kosul": "her",
+   "onem": "zorunlu",
+   "not": "Önce kelime listesiyle kod taraması; şüpheli cümleler Jev'e sorulabilir. Bu soruda EVET = hata."
+  },
+  {
+   "id": "G-birim",
+   "bolum": "0",
+   "dayanak": "KKDİK Ek-2 A 0.6",
+   "soru_tr": "SI dışı birim (°F, psi, mmHg vb.) kullanılmış mı?",
+   "soru_en": "The text uses non-SI units such as °F, psi, mmHg, inch or gallon.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "8",
+    "9"
+   ],
+   "onem": "zorunlu",
+   "ters": true,
+   "not": "EVET = hata."
+  },
+  {
+   "id": "1.1-ad",
+   "bolum": "1.1",
+   "dayanak": "KKDİK Ek-2 A 1.1; SEA Md.20(3)(a)",
+   "soru_tr": "Ürün tanıtıcısı (ticari ad / madde adı) verilmiş mi?",
+   "soru_en": "A product identifier (trade name or substance name) is given.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "1"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "1.1-madde-kimlik",
+   "bolum": "1.1",
+   "dayanak": "KKDİK Ek-2 A 1.1; SEA Md.20(2)",
+   "soru_tr": "Madde için kimlik (ad + EC/CAS) ve kayda tabi ise KKDİK kayıt numarası verilmiş mi?",
+   "soru_en": "For a substance, the identity (name with EC or CAS number) and, where subject to registration, the registration number are given.",
+   "yontem": "jev",
+   "kosul": "madde",
+   "bolumler": [
+    "1"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "1.2-kullanim",
+   "bolum": "1.2",
+   "dayanak": "KKDİK Ek-2 A 1.2",
+   "soru_tr": "Tanımlanmış kullanımlar kısa açıklamayla (örn. 'kireç sökücü') belirtilmiş mi?",
+   "soru_en": "The identified uses of the product are stated, with a short description of what it is used for.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "1"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "1.2-tavsiye-edilmeyen",
+   "bolum": "1.2",
+   "dayanak": "KKDİK Ek-2 A 1.2",
+   "soru_tr": "Tavsiye edilmeyen kullanımlar ve nedenleri (veya bulunmadığı) belirtilmiş mi?",
+   "soru_en": "Uses advised against are stated (with reasons), or a restriction of use is given (e.g. 'for professional use only'), or it is stated that there are none.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "1"
+   ],
+   "onem": "kosullu"
+  },
+  {
+   "id": "1.3-tedarikci",
+   "bolum": "1.3",
+   "dayanak": "KKDİK Ek-2 A 1.3",
+   "soru_tr": "Tedarikçinin adı, tam adresi ve telefon numarası verilmiş mi?",
+   "soru_en": "The supplier's name, full postal address and telephone number are given.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "1"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "1.3-eposta",
+   "bolum": "1.3",
+   "dayanak": "KKDİK Ek-2 A 1.3",
+   "soru_tr": "GBF'den sorumlu yetkili kişinin e-posta adresi var mı?",
+   "soru_en": "An e-mail address of the competent person responsible for the SDS is given.",
+   "yontem": "kod",
+   "kosul": "her",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "1.4-zehir",
+   "bolum": "1.4",
+   "dayanak": "KKDİK Ek-2 A 1.4",
+   "soru_tr": "Sağlık Bakanlığı Ulusal Zehir Danışma Merkezi telefonu (114) verilmiş mi?",
+   "soru_en": "The emergency telephone number of the Ministry of Health National Poison Information Centre (114) is given.",
+   "yontem": "kod",
+   "kosul": "her",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "1.4-kisit",
+   "bolum": "1.4",
+   "dayanak": "KKDİK Ek-2 A 1.4",
+   "soru_tr": "Acil durum hattında çalışma saati gibi kısıtlama varsa açıkça belirtilmiş mi?",
+   "soru_en": "What does section 1.4 say about the availability of the emergency telephone service?",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "1"
+   ],
+   "onem": "kosullu",
+   "tur": "choice",
+   "secenekler": {
+    "kisit_belirtilmis": "A limitation of the service (e.g. office hours only) is stated.",
+    "surekli": "The service is stated to be available 24 hours / 7 days.",
+    "belirtilmemis": "Nothing is said about the hours or availability of the service."
+   },
+   "kabul": [
+    "kisit_belirtilmis",
+    "surekli"
+   ],
+   "kdu": [
+    "belirtilmemis"
+   ]
+  },
+  {
+   "id": "2.1-sinif",
+   "bolum": "2.1",
+   "dayanak": "KKDİK Ek-2 A 2.1",
+   "soru_tr": "SEA'ya göre sınıflandırma verilmiş mi, ya da sınıflandırma kriterlerini karşılamadığı açıkça belirtilmiş mi?",
+   "soru_en": "The classification according to the CLP/SEA regulation is given, or it is explicitly stated that the product does not meet the classification criteria.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "2"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "2.1-h-atif",
+   "bolum": "2.1",
+   "dayanak": "KKDİK Ek-2 A 2.1, 16(d)",
+   "soru_tr": "Zararlılık ifadeleri yalnız kodla verilmişse tam metinleri 16. bölümde var mı?",
+   "soru_en": "If hazard statements are given only as codes, their full text is listed in section 16.",
+   "yontem": "kod",
+   "kosul": "siniflandirilmis",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "2.1-etkiler",
+   "bolum": "2.1",
+   "dayanak": "KKDİK Ek-2 A 2.1",
+   "soru_tr": "H ifadelerine ek olarak, en önemli olumsuz etkiler (fizikokimyasal, sağlık, çevre) uzman olmayanların anlayacağı sözlerle açıklanmış mı?",
+   "soru_en": "In addition to the hazard statements, section 2 describes the most important adverse physicochemical, health and environmental effects in plain words.",
+   "yontem": "jev",
+   "kosul": "siniflandirilmis",
+   "bolumler": [
+    "2"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "2.2-piktogram",
+   "bolum": "2.2",
+   "dayanak": "KKDİK Ek-2 A 2.2; SEA Md.21, Md.28",
+   "soru_tr": "Zararlılık işaretleri (piktogramlar) var ve sınıflandırmaya/öncelik ilkelerine uygun mu?",
+   "soru_en": "Hazard pictograms are shown and match the classification and precedence rules.",
+   "yontem": "gorsel",
+   "kosul": "siniflandirilmis",
+   "onem": "zorunlu",
+   "not": "Bizim GBF'de kodla; kullanıcı PDF'inde piktogram resimdir, metin çıkarımıyla görülmez — görüntü okuma gerekir."
+  },
+  {
+   "id": "2.2-uyari",
+   "bolum": "2.2",
+   "dayanak": "KKDİK Ek-2 A 2.2; SEA Md.22",
+   "soru_tr": "Uyarı kelimesi ('Tehlike' veya 'Dikkat') var mı?",
+   "soru_en": "The label elements state a signal word ('Tehlike' or 'Dikkat').",
+   "yontem": "jev",
+   "kosul": "siniflandirilmis",
+   "bolumler": [
+    "2"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "2.2-uyari-tek",
+   "bolum": "2.2",
+   "dayanak": "SEA Md.22(3)",
+   "soru_tr": "'Tehlike' kullanılmışsa 'Dikkat' de kullanılmış mı?",
+   "soru_en": "Both 'Tehlike' and 'Dikkat' are used as signal words.",
+   "yontem": "kod",
+   "kosul": "siniflandirilmis",
+   "onem": "zorunlu",
+   "not": "EVET = hata."
+  },
+  {
+   "id": "2.2-h",
+   "bolum": "2.2",
+   "dayanak": "KKDİK Ek-2 A 2.2; SEA Md.23, Md.29",
+   "soru_tr": "Sınıflandırmaya uygun tüm zararlılık ifadeleri var mı?",
+   "soru_en": "The label elements list hazard statements (H statements).",
+   "yontem": "kod",
+   "kosul": "siniflandirilmis",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "2.2-p",
+   "bolum": "2.2",
+   "dayanak": "KKDİK Ek-2 A 2.2; SEA Md.24",
+   "soru_tr": "Önlem ifadeleri var mı?",
+   "soru_en": "The label elements list precautionary statements (P statements).",
+   "yontem": "kod",
+   "kosul": "siniflandirilmis",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "2.2-p-sayi",
+   "bolum": "2.2",
+   "dayanak": "SEA Md.30(3)",
+   "soru_tr": "Etikette altıdan fazla önlem ifadesi var mı? (Zararın niteliği gerektirmedikçe olmamalı)",
+   "soru_en": "More than six precautionary statements are listed for the label.",
+   "yontem": "kod",
+   "kosul": "siniflandirilmis",
+   "onem": "kosullu",
+   "not": "EVET = uyarı; KDU gerekçesini değerlendirir."
+  },
+  {
+   "id": "2.2-bertaraf-p",
+   "bolum": "2.2",
+   "dayanak": "SEA Md.30(2)",
+   "soru_tr": "Halka arz edilen üründe bertarafa ilişkin önlem ifadesi (P501) var mı?",
+   "soru_en": "A disposal precautionary statement (P501) is included.",
+   "yontem": "kod",
+   "kosul": "halka_arz",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "2.2-bilesen",
+   "bolum": "2.2",
+   "dayanak": "SEA Md.20(3)(b), Md.20(4)",
+   "soru_tr": "Sağlık sınıflandırmasına katkıda bulunan maddeler 'etikette belirtilmesi zorunlu zararlı bileşenler' olarak yazılmış mı?",
+   "soru_en": "The hazardous components that must appear on the label (substances contributing to the health hazard classification) are named.",
+   "yontem": "kod",
+   "kosul": "karisim,siniflandirilmis",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "2.2-tutarlilik",
+   "bolum": "2.2",
+   "dayanak": "SEA Md.21–23; KKDİK Ek-2 A 2.2",
+   "soru_tr": "Etiket unsurları (işaret, uyarı kelimesi, H ifadeleri) 2.1'deki sınıflandırmayla tutarlı mı?",
+   "soru_en": "The label elements are consistent with the classification in 2.1.",
+   "yontem": "kod",
+   "kosul": "siniflandirilmis",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "2.3-pbt",
+   "bolum": "2.3",
+   "dayanak": "KKDİK Ek-2 A 2.3",
+   "soru_tr": "Ürünün PBT/vPvB kriterlerini karşılayıp karşılamadığı belirtilmiş mi?",
+   "soru_en": "Subsection 2.3 explicitly states whether the product meets the PBT or vPvB criteria.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "2"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "2.3-diger",
+   "bolum": "2.3",
+   "dayanak": "KKDİK Ek-2 A 2.3",
+   "soru_tr": "Sınıflandırmaya yol açmayan diğer zararlar (varsa) verilmiş mi?",
+   "soru_en": "Other hazards that do not result in classification are described, or it is stated that none are known.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "2"
+   ],
+   "onem": "kosullu"
+  },
+  {
+   "id": "2.3-toz",
+   "bolum": "2.3",
+   "dayanak": "KKDİK Ek-2 A 2.3",
+   "soru_tr": "Toz patlaması riski varsa 'Eğer yayılırsa, patlayabilen toz-hava karışımı oluşabilir.' ifadesi var mı?",
+   "soru_en": "The statement that a dispersed dust may form an explosive dust-air mixture is included.",
+   "yontem": "jev",
+   "kosul": "toz_patlamasi",
+   "bolumler": [
+    "2"
+   ],
+   "onem": "tavsiye",
+   "not": "Yönetmelik 'eklenmesi uygundur' diyor."
+  },
+  {
+   "id": "2.1-cl-bildirim",
+   "bolum": "2.1",
+   "dayanak": "KKDİK Ek-2 A 2.1",
+   "yontem": "kdu",
+   "kosul": "madde",
+   "onem": "zorunlu",
+   "soru_tr": "Maddenin GBF'deki sınıflandırması, tedarikçinin C&L envanterine yaptığı bildirimle aynı mı?",
+   "soru_en": "",
+   "not": "Dış belge (C&L bildirimi) gerekir; KDU kontrol eder."
+  },
+  {
+   "id": "2.2-ek-unsur",
+   "bolum": "2.2",
+   "dayanak": "KKDİK Ek-2 A 2.2; SEA Md.25, Md.27",
+   "yontem": "kod",
+   "kosul": "siniflandirilmis",
+   "onem": "kosullu",
+   "soru_tr": "Geçerli ek etiket unsurları (EUH ifadeleri, özel hükümler) verilmiş mi?",
+   "soru_en": "Applicable supplemental label elements (EUH statements, special provisions) are given."
+  },
+  {
+   "id": "3.1-madde",
+   "bolum": "3.1",
+   "dayanak": "KKDİK Ek-2 A 3.1",
+   "soru_tr": "Maddenin ana bileşeni ve sınıflandırmaya katkıda bulunan safsızlık/katkılar belirtilmiş mi?",
+   "soru_en": "For a substance, the main constituent and any impurities or additives contributing to its classification are identified.",
+   "yontem": "jev",
+   "kosul": "madde",
+   "bolumler": [
+    "3"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "3.2-liste",
+   "bolum": "3.2",
+   "dayanak": "KKDİK Ek-2 A 3.2.1, 3.2.2",
+   "soru_tr": "Eşik değerlerin üzerindeki tüm zararlı maddeler ve mesleki maruz kalma sınırı olan maddeler listelenmiş mi?",
+   "soru_en": "All substances above the listing thresholds (hazardous substances and substances with occupational exposure limits) are listed.",
+   "yontem": "kod",
+   "kosul": "karisim",
+   "onem": "zorunlu",
+   "not": "Eşikler: Ek-2 3.2.1 tablosu ve özel konsantrasyon sınırları."
+  },
+  {
+   "id": "3.2-konsantrasyon",
+   "bolum": "3.2",
+   "dayanak": "KKDİK Ek-2 A 3.2",
+   "soru_tr": "Her madde için konsantrasyon veya aralık verilmiş mi?",
+   "soru_en": "A concentration or concentration range is given for each listed substance.",
+   "yontem": "kod",
+   "kosul": "karisim",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "3.2-sira",
+   "bolum": "3.2",
+   "dayanak": "KKDİK Ek-2 A 3.2 (a), (b)",
+   "soru_tr": "Maddeler kütle/hacme göre azalan sırada mı?",
+   "soru_en": "Substances are listed in descending order of concentration.",
+   "yontem": "kod",
+   "kosul": "karisim",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "3.2-sinif",
+   "bolum": "3.2",
+   "dayanak": "KKDİK Ek-2 A 3.2.3",
+   "soru_tr": "Her maddenin sınıflandırması (zararlılık sınıfı/kategori ve H kodu) verilmiş mi?",
+   "soru_en": "The classification (hazard class, category and H statement codes) of each listed substance is given.",
+   "yontem": "kod",
+   "kosul": "karisim",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "3.2-neden",
+   "bolum": "3.2",
+   "dayanak": "KKDİK Ek-2 A 3.2.3",
+   "soru_tr": "Sınıflandırılmamış ama listelenen madde için listelenme nedeni (örn. 'işyeri maruz kalma limiti', 'sınıflandırılmamış vPvB') yazılmış mı?",
+   "soru_en": "For listed substances that are not classified, the reason for listing is stated.",
+   "yontem": "kod",
+   "kosul": "karisim",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "3.2-ec",
+   "bolum": "3.2",
+   "dayanak": "KKDİK Ek-2 A 3.2.4",
+   "soru_tr": "Varsa EC numaraları verilmiş mi?",
+   "soru_en": "EC numbers are given where available.",
+   "yontem": "kod",
+   "kosul": "karisim",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "3.2-kayit",
+   "bolum": "3.2",
+   "dayanak": "KKDİK Ek-2 A 3.2.4",
+   "soru_tr": "Varsa KKDİK kayıt numaraları verilmiş mi?",
+   "soru_en": "Registration numbers are given where available.",
+   "yontem": "kod",
+   "kosul": "karisim",
+   "onem": "kosullu"
+  },
+  {
+   "id": "3.2-svhc",
+   "bolum": "3.2",
+   "dayanak": "KKDİK Ek-2 A 3.2.1(c), 3.2.2(b); KKDİK Md.49",
+   "soru_tr": "≥ %0,1 PBT/vPvB veya Aday Liste maddesi listelenmiş mi?",
+   "soru_en": "Substances at or above 0.1 % that are PBT, vPvB or on the Candidate List are listed.",
+   "yontem": "kod",
+   "kosul": "karisim",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "3.2-gaz",
+   "bolum": "3.2",
+   "dayanak": "KKDİK Ek-2 A 3.2.2(a); SEA Ek-1",
+   "soru_tr": "Gaz karışımında konsantrasyonlar hacimce verilmiş mi?",
+   "soru_en": "For a gas mixture, concentrations are given by volume.",
+   "yontem": "kod",
+   "kosul": "form:gaz",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "3-yuzey",
+   "bolum": "3",
+   "dayanak": "KKDİK Ek-2 A 3 (giriş)",
+   "yontem": "jev",
+   "kosul": "form:kati",
+   "bolumler": [
+    "3",
+    "9"
+   ],
+   "onem": "kosullu",
+   "soru_tr": "Yüzey kimyasına dair güvenlik bilgisi (nanoform vb.) verilmiş mi?",
+   "soru_en": "Relevant safety information on surface chemistry (e.g. nanoforms, surface treatment) is given, or it is clear that this is not relevant."
+  },
+  {
+   "id": "4.1-soluma",
+   "bolum": "4.1",
+   "dayanak": "KKDİK Ek-2 A 4.1.1",
+   "soru_tr": "Soluma yoluyla maruz kalmada ilk yardım talimatı var mı?",
+   "soru_en": "First aid instructions are given for inhalation.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "4"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "4.1-cilt",
+   "bolum": "4.1",
+   "dayanak": "KKDİK Ek-2 A 4.1.1",
+   "soru_tr": "Cilt teması için ilk yardım talimatı var mı?",
+   "soru_en": "First aid instructions are given for skin contact.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "4"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "4.1-goz",
+   "bolum": "4.1",
+   "dayanak": "KKDİK Ek-2 A 4.1.1",
+   "soru_tr": "Göz teması için ilk yardım talimatı var mı?",
+   "soru_en": "First aid instructions are given for eye contact.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "4"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "4.1-yutma",
+   "bolum": "4.1",
+   "dayanak": "KKDİK Ek-2 A 4.1.1",
+   "soru_tr": "Yutma için ilk yardım talimatı var mı?",
+   "soru_en": "First aid instructions are given for ingestion.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "4"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "4.1-tibbi",
+   "bolum": "4.1",
+   "dayanak": "KKDİK Ek-2 A 4.1.2(a)",
+   "soru_tr": "Acil tıbbi yardım gerekip gerekmediği belirtilmiş mi?",
+   "soru_en": "It is stated whether immediate medical attention is required.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "4"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "4.1-gecikmeli",
+   "bolum": "4.1",
+   "dayanak": "KKDİK Ek-2 A 4.1.2(a)",
+   "soru_tr": "Maruz kalmadan sonra gecikmiş etkilerin beklenip beklenmediği belirtilmiş mi?",
+   "soru_en": "It is stated whether delayed effects are to be expected after exposure.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "4"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "4.1-temiz-hava",
+   "bolum": "4.1",
+   "dayanak": "KKDİK Ek-2 A 4.1.2(b)",
+   "soru_tr": "Maruz kalan kişinin temiz havaya çıkarılması tavsiyesi var mı?",
+   "soru_en": "Advice is given to move the exposed person to fresh air.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "4"
+   ],
+   "onem": "kosullu"
+  },
+  {
+   "id": "4.1-giysi",
+   "bolum": "4.1",
+   "dayanak": "KKDİK Ek-2 A 4.1.2(c)",
+   "soru_tr": "Kirlenmiş giysilerin çıkarılması tavsiyesi var mı?",
+   "soru_en": "Advice is given to remove contaminated clothing.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "4"
+   ],
+   "onem": "kosullu"
+  },
+  {
+   "id": "4.1-kke",
+   "bolum": "4.1",
+   "dayanak": "KKDİK Ek-2 A 4.1.2(ç)",
+   "soru_tr": "İlk yardım yapanlar için kişisel koruyucu ekipman tavsiyesi var mı?",
+   "soru_en": "Personal protective equipment advice for first aiders is given.",
+   "yontem": "jev",
+   "kosul": "siniflandirilmis",
+   "bolumler": [
+    "4"
+   ],
+   "onem": "kosullu"
+  },
+  {
+   "id": "4.1-goz-sure",
+   "bolum": "4.1",
+   "dayanak": "İyi uygulama (KKDİK Ek-2 A 4.1 kapsamında)",
+   "soru_tr": "Göz teması ilk yardımında dakika cinsinden yıkama süresi (örn. en az 15 dakika) var mı?",
+   "soru_en": "First aid for eye contact specifies a minimum rinsing duration in minutes.",
+   "yontem": "jev",
+   "kosul": "h:H314|H318|H319",
+   "bolumler": [
+    "4"
+   ],
+   "onem": "tavsiye"
+  },
+  {
+   "id": "4.2-belirtiler",
+   "bolum": "4.2",
+   "dayanak": "KKDİK Ek-2 A 4.2",
+   "soru_tr": "Akut ve gecikmeli en önemli belirti ve etkilerin özeti var mı?",
+   "soru_en": "A summary of the most important acute and delayed symptoms and effects is given.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "4"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "4.3-tibbi-not",
+   "bolum": "4.3",
+   "dayanak": "KKDİK Ek-2 A 4.3",
+   "soru_tr": "Hekim için notlar / özel tedavi (veya gerek olmadığı) belirtilmiş mi?",
+   "soru_en": "Advice for medical treatment is given (e.g. 'treat symptomatically', special treatment, antidotes), or it is stated that no special treatment is required.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "4"
+   ],
+   "onem": "kosullu"
+  },
+  {
+   "id": "4.3-isyeri",
+   "bolum": "4.3",
+   "dayanak": "KKDİK Ek-2 A 4.3",
+   "yontem": "jev",
+   "kosul": "siniflandirilmis",
+   "bolumler": [
+    "4"
+   ],
+   "onem": "tavsiye",
+   "soru_tr": "Özel/acil tedavi için işyerinde bulunması gereken araçlar (örn. göz duşu, antidot) belirtilmiş mi?",
+   "soru_en": "Specific means needed at the workplace for special and immediate treatment (e.g. eye wash, antidote kit) are mentioned."
+  },
+  {
+   "id": "5.1-uygun",
+   "bolum": "5.1",
+   "dayanak": "KKDİK Ek-2 A 5.1",
+   "soru_tr": "Uygun söndürücü maddeler belirtilmiş mi?",
+   "soru_en": "Suitable extinguishing media are stated.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "5"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "5.1-uygunsuz",
+   "bolum": "5.1",
+   "dayanak": "KKDİK Ek-2 A 5.1",
+   "soru_tr": "Uygun olmayan söndürücüler (varsa) belirtilmiş mi?",
+   "soru_en": "Unsuitable extinguishing media are stated, or it is stated that none are known.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "5"
+   ],
+   "onem": "kosullu"
+  },
+  {
+   "id": "5.2-yanma",
+   "bolum": "5.2",
+   "dayanak": "KKDİK Ek-2 A 5.2",
+   "soru_tr": "Yangında oluşabilecek zararlı yanma ürünleri belirtilmiş mi?",
+   "soru_en": "Hazardous combustion products formed in a fire are named, or it is stated that none are expected.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "5"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "5.3-ekip",
+   "bolum": "5.3",
+   "dayanak": "KKDİK Ek-2 A 5.3",
+   "soru_tr": "Yangın söndürme ekipleri için koruyucu önlem ve özel koruyucu ekipman (örn. bağımsız solunum cihazı) tavsiyesi var mı?",
+   "soru_en": "Protective actions and special protective equipment for firefighters (e.g. self-contained breathing apparatus) are described.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "5"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "6.1.1-personel",
+   "bolum": "6.1",
+   "dayanak": "KKDİK Ek-2 A 6.1.1",
+   "soru_tr": "Acil durum personeli olmayanlar için koruyucu ekipman, havalandırma/tutuşturucu kaynaklar ve tahliye gibi tavsiyeler var mı?",
+   "soru_en": "Advice for non-emergency personnel is given (protective equipment, ventilation or ignition sources, evacuation or consulting an expert).",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "6"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "6.1.2-mudahale",
+   "bolum": "6.1",
+   "dayanak": "KKDİK Ek-2 A 6.1.2",
+   "soru_tr": "Acil müdahale personeli için koruyucu giysinin uygun kumaşı/malzemesi belirtilmiş mi?",
+   "soru_en": "For emergency responders, suitable materials for protective clothing are specified, either directly or by an explicit reference to section 8.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "6"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "6.2-cevre",
+   "bolum": "6.2",
+   "dayanak": "KKDİK Ek-2 A 6.2",
+   "soru_tr": "Çevresel önlemler (kanalizasyon, yüzey ve yeraltı sularından uzak tutma) var mı?",
+   "soru_en": "Environmental precautions are given (e.g. keep away from drains, surface water and groundwater).",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "6"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "6.3.1-kontrol",
+   "bolum": "6.3",
+   "dayanak": "KKDİK Ek-2 A 6.3.1",
+   "soru_tr": "Dökülmenin nasıl kontrol altına alınacağı (set, gider kapatma vb.) belirtilmiş mi?",
+   "soru_en": "Advice on how to contain a spill is given (e.g. bunding, covering drains).",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "6"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "6.3.2-temizlik",
+   "bolum": "6.3",
+   "dayanak": "KKDİK Ek-2 A 6.3.2",
+   "soru_tr": "Dökülmenin nasıl temizleneceği (nötralizasyon, emici, vakum vb.) belirtilmiş mi?",
+   "soru_en": "Advice on how to clean up a spill is given (e.g. neutralisation, absorbent material, vacuuming).",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "6"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "6.3.3-uygunsuz",
+   "bolum": "6.3",
+   "dayanak": "KKDİK Ek-2 A 6.3.3",
+   "soru_tr": "Uygun olmayan temizleme teknikleri ve diğer bilgiler verilmiş mi?",
+   "soru_en": "Inappropriate containment or clean-up techniques are mentioned (e.g. 'never use ...').",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "6"
+   ],
+   "onem": "kosullu"
+  },
+  {
+   "id": "6.3-form",
+   "bolum": "6.3",
+   "dayanak": "KKDİK Ek-2 A 0.2.4, 6.3.2",
+   "soru_tr": "Temizleme yöntemi ürünün fiziksel haline uygun mu? (Örn. toz/katı üründe sıvı emici yerine toz oluşturmadan süpürme/vakum)",
+   "soru_en": "The clean-up method suits the physical form of the product (for a solid or powder: sweeping or vacuuming without raising dust, not absorbing a liquid).",
+   "yontem": "jev",
+   "kosul": "form:kati",
+   "bolumler": [
+    "6",
+    "9"
+   ],
+   "onem": "tavsiye"
+  },
+  {
+   "id": "6.4-atif",
+   "bolum": "6.4",
+   "dayanak": "KKDİK Ek-2 A 6.4",
+   "soru_tr": "Bölüm 8 ve 13'e atıf yapılmış mı?",
+   "soru_en": "Reference is made to sections 8 and 13.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "6"
+   ],
+   "onem": "kosullu"
+  },
+  {
+   "id": "6-buyuk-kucuk",
+   "bolum": "6",
+   "dayanak": "KKDİK Ek-2 A 6 (giriş)",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "6"
+   ],
+   "onem": "kosullu",
+   "soru_tr": "Dökülme miktarı önemliyse büyük ve küçük dökülmeler için yapılacaklar ayrılmış mı?",
+   "soru_en": "Where the spill volume matters, separate advice is given for small and large spills."
+  },
+  {
+   "id": "6.3-kivilcim",
+   "bolum": "6.3",
+   "dayanak": "KKDİK Ek-2 A 6.3.2(e)",
+   "yontem": "jev",
+   "kosul": "h:H220|H221|H222|H223|H224|H225|H226|H228|H242",
+   "bolumler": [
+    "6"
+   ],
+   "onem": "kosullu",
+   "soru_tr": "Alevlenir üründe kıvılcım çıkarmayan alet ve ekipman kullanımı belirtilmiş mi?",
+   "soru_en": "The use of non-sparking tools and equipment for clean-up is specified."
+  },
+  {
+   "id": "7.1-elleçleme",
+   "bolum": "7.1",
+   "dayanak": "KKDİK Ek-2 A 7.1.1(a)",
+   "soru_tr": "Güvenli elleçleme önlemleri (aerosol/toz/yangın önleme vb.) var mı?",
+   "soru_en": "Measures for safe handling are given (e.g. preventing fire, aerosol or dust formation).",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "7"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "7.1-cevre",
+   "bolum": "7.1",
+   "dayanak": "KKDİK Ek-2 A 7.1.1(ç)",
+   "soru_tr": "Çevreye yayılmayı azaltma önlemleri var mı?",
+   "soru_en": "Measures to limit release to the environment during handling are given.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "7"
+   ],
+   "onem": "kosullu"
+  },
+  {
+   "id": "7.1-hijyen",
+   "bolum": "7.1",
+   "dayanak": "KKDİK Ek-2 A 7.1.2",
+   "soru_tr": "Genel hijyen tavsiyeleri (çalışma alanında yememe/içmeme/sigara içmeme, el yıkama, kirli giysiyi çıkarma) var mı?",
+   "soru_en": "General occupational hygiene advice is given: no eating, drinking or smoking in work areas, washing hands after use, removing contaminated clothing before entering eating areas.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "7"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "7.2-uyumsuz",
+   "bolum": "7.2",
+   "dayanak": "KKDİK Ek-2 A 7.2 (a)(iv); Ek-2 B 7.2 başlığı",
+   "soru_tr": "Birlikte depolanmaması gereken uyumsuz maddeler adıyla belirtilmiş mi?",
+   "soru_en": "Subsection 7.2 names specific incompatible materials or substances the product must be stored away from.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "7"
+   ],
+   "onem": "zorunlu",
+   "not": "Pilot: Rev281 ve Lime-A-Way'de doğru ayırt edildi."
+  },
+  {
+   "id": "7.2-kosullar",
+   "bolum": "7.2",
+   "dayanak": "KKDİK Ek-2 A 7.2 (b)",
+   "soru_tr": "Depolama koşulları (sıcaklık, güneş ışığı, nem vb.) belirtilmiş mi?",
+   "soru_en": "Storage conditions such as temperature, sunlight or humidity are specified.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "7"
+   ],
+   "onem": "kosullu"
+  },
+  {
+   "id": "7.2-ambalaj",
+   "bolum": "7.2",
+   "dayanak": "KKDİK Ek-2 A 7.2 (a)(ii), (d)(iii)",
+   "soru_tr": "Aşındırıcı üründe aşınmaya dayanıklı kap / ambalaj uygunluğu belirtilmiş mi?",
+   "soru_en": "Requirements for suitable (corrosion-resistant) containers or packaging are stated.",
+   "yontem": "jev",
+   "kosul": "h:H290|H314",
+   "bolumler": [
+    "7"
+   ],
+   "onem": "kosullu"
+  },
+  {
+   "id": "7.3-son-kullanim",
+   "bolum": "7.3",
+   "dayanak": "KKDİK Ek-2 A 7.3",
+   "soru_tr": "Belirli son kullanımlar (veya bulunmadığı) belirtilmiş mi?",
+   "soru_en": "Subsection 7.3 describes specific end uses, or states that there are none / none beyond the uses in 1.2.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "7"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "7.1-uyumsuz",
+   "bolum": "7.1",
+   "dayanak": "KKDİK Ek-2 A 7.1.1(b)",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "7"
+   ],
+   "onem": "kosullu",
+   "soru_tr": "Uyuşmayan maddelerle birlikte elleçlemeyi önleme tavsiyesi var mı?",
+   "soru_en": "Advice is given to prevent handling the product together with incompatible substances or mixtures."
+  },
+  {
+   "id": "7.1-islem",
+   "bolum": "7.1",
+   "dayanak": "KKDİK Ek-2 A 7.1.1(c)",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "7"
+   ],
+   "onem": "kosullu",
+   "soru_tr": "Ürünün özelliklerini değiştiren işlem/koşullardan doğan yeni risklere dikkat çekilmiş mi? (örn. seyreltme, ısıtma)",
+   "soru_en": "Attention is drawn to operations and conditions that change the properties of the product (e.g. dilution, heating) and the resulting new risks."
+  },
+  {
+   "id": "7.2-alev",
+   "bolum": "7.2",
+   "dayanak": "KKDİK Ek-2 A 7.2(a)(i),(iii),(vi)",
+   "yontem": "jev",
+   "kosul": "h:H220|H221|H222|H223|H224|H225|H226|H228|H242",
+   "bolumler": [
+    "7"
+   ],
+   "onem": "kosullu",
+   "soru_tr": "Patlayıcı atmosfer, alevlenirlik ve tutuşturucu kaynaklarla (elektrikli ekipman dâhil) ilgili depolama önlemleri var mı?",
+   "soru_en": "Storage advice addresses explosive atmospheres, flammability and ignition sources (including electrical equipment)."
+  },
+  {
+   "id": "7.2-kararlastirici",
+   "bolum": "7.2",
+   "dayanak": "KKDİK Ek-2 A 7.2(c)",
+   "yontem": "kdu",
+   "kosul": "her",
+   "onem": "kosullu",
+   "soru_tr": "Ürün bütünlüğü için kararlaştırıcı/antioksidan gerekiyorsa belirtilmiş mi?",
+   "soru_en": "",
+   "not": "Gereklilik ürün bilgisine bağlı; KDU kontrol eder."
+  },
+  {
+   "id": "7.2-tesis",
+   "bolum": "7.2",
+   "dayanak": "KKDİK Ek-2 A 7.2(d)(i),(ii)",
+   "yontem": "jev",
+   "kosul": "siniflandirilmis",
+   "bolumler": [
+    "7"
+   ],
+   "onem": "kosullu",
+   "soru_tr": "Depo havalandırması veya depo/tank tasarımı (tutma duvarı vb.) gereklilikleri belirtilmiş mi?",
+   "soru_en": "Requirements for ventilation of storage areas or specific design of storage rooms or tanks (e.g. retention walls) are given."
+  },
+  {
+   "id": "8.1-oel",
+   "bolum": "8.1",
+   "dayanak": "KKDİK Ek-2 A 8.1.1",
+   "soru_tr": "Mesleki maruz kalma sınır değeri olan bileşenlerin sınır değerleri listelenmiş mi?",
+   "soru_en": "Occupational exposure limit values are listed for the components that have them.",
+   "yontem": "kod",
+   "kosul": "oel",
+   "onem": "zorunlu",
+   "not": "TR sınır değerleri: Kimyasal Maddelerle Çalışmalarda Sağlık ve Güvenlik Önlemleri Hakkında Yönetmelik Ek-1."
+  },
+  {
+   "id": "8.1-oel-dayanak",
+   "bolum": "8.1",
+   "dayanak": "KKDİK Ek-2 A 8.1.1",
+   "soru_tr": "Sınır değerlerin yasal dayanağı (yönetmelik adı) belirtilmiş mi?",
+   "soru_en": "The legal basis (source regulation) of each occupational exposure limit value is stated.",
+   "yontem": "jev",
+   "kosul": "oel",
+   "bolumler": [
+    "8"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "8.1-izleme",
+   "bolum": "8.1",
+   "dayanak": "KKDİK Ek-2 A 8.1.2",
+   "soru_tr": "Tavsiye edilen izleme usulleri belirtilmiş mi?",
+   "soru_en": "Recommended monitoring procedures are given.",
+   "yontem": "jev",
+   "kosul": "oel",
+   "bolumler": [
+    "8"
+   ],
+   "onem": "kosullu"
+  },
+  {
+   "id": "8.1-dnel",
+   "bolum": "8.1",
+   "dayanak": "KKDİK Ek-2 A 8.1.4",
+   "soru_tr": "Mevcutsa DNEL/PNEC değerleri verilmiş mi?",
+   "soru_en": "DNEL and PNEC values are given where available.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "8"
+   ],
+   "onem": "kosullu"
+  },
+  {
+   "id": "8.2.1-muhendislik",
+   "bolum": "8.2",
+   "dayanak": "KKDİK Ek-2 A 8.2.1",
+   "soru_tr": "Uygun mühendislik kontrolleri (havalandırma, lokal egzoz vb.) belirtilmiş mi?",
+   "soru_en": "Appropriate engineering controls (e.g. general or local exhaust ventilation) are described.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "8"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "8.2.2-goz",
+   "bolum": "8.2",
+   "dayanak": "KKDİK Ek-2 A 8.2.2.2(a)",
+   "soru_tr": "Göz/yüz koruma ekipmanının tipi belirtilmiş mi?",
+   "soru_en": "The type of eye or face protection is specified.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "8"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "8.2.2-eldiven-malzeme",
+   "bolum": "8.2",
+   "dayanak": "KKDİK Ek-2 A 8.2.2.2(b)(i)",
+   "soru_tr": "Eldiven malzemesi belirtilmiş mi?",
+   "soru_en": "The glove material is specified.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "8"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "8.2.2-eldiven-kalinlik",
+   "bolum": "8.2",
+   "dayanak": "KKDİK Ek-2 A 8.2.2.2(b)(i)",
+   "soru_tr": "Eldiven kalınlığı belirtilmiş mi?",
+   "soru_en": "The glove thickness is specified.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "8"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "8.2.2-eldiven-sure",
+   "bolum": "8.2",
+   "dayanak": "KKDİK Ek-2 A 8.2.2.2(b)(i)",
+   "soru_tr": "Eldivenin tipik veya en az delinme (aşınma) süresi belirtilmiş mi?",
+   "soru_en": "The typical or minimum breakthrough time of the glove material is specified.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "8"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "8.2.2-vucut",
+   "bolum": "8.2",
+   "dayanak": "KKDİK Ek-2 A 8.2.2.2(b)(ii)",
+   "soru_tr": "Eller dışındaki vücut koruması (iş giysisi, bot vb.) belirtilmiş mi?",
+   "soru_en": "Body protection other than hands (e.g. protective clothing, boots) is specified.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "8"
+   ],
+   "onem": "kosullu"
+  },
+  {
+   "id": "8.2.2-solunum",
+   "bolum": "8.2",
+   "dayanak": "KKDİK Ek-2 A 8.2.2.2(c)",
+   "soru_tr": "Solunum koruma ekipmanının tipi ve filtre türü belirtilmiş mi?",
+   "soru_en": "The type of respiratory protection and the filter type are specified.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "8"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "8.2.2-standart",
+   "bolum": "8.2",
+   "dayanak": "KKDİK Ek-2 A 8.2.2.2",
+   "soru_tr": "KKD için ilgili CEN/EN standartlarına atıf var mı?",
+   "soru_en": "Relevant CEN/EN standards are referenced for the personal protective equipment.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "8"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "8.2.2-isil",
+   "bolum": "8.2",
+   "dayanak": "KKDİK Ek-2 A 8.2.2.2(d)",
+   "soru_tr": "Isıl zarar varsa uygun koruyucu ekipman belirtilmiş mi?",
+   "soru_en": "Protection against thermal hazards is specified.",
+   "yontem": "jev",
+   "kosul": "form:gaz",
+   "bolumler": [
+    "8"
+   ],
+   "onem": "kosullu",
+   "not": "Örn. soğutulmuş sıvılaştırılmış gazlar (H281)."
+  },
+  {
+   "id": "8.2.3-cevre",
+   "bolum": "8.2",
+   "dayanak": "KKDİK Ek-2 A 8.2.3",
+   "soru_tr": "Çevresel maruz kalma kontrolleri belirtilmiş mi?",
+   "soru_en": "Environmental exposure controls are described.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "8"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "8.1-oel-kanserojen",
+   "bolum": "8.1",
+   "dayanak": "KKDİK Ek-2 A 8.1.1.2",
+   "yontem": "kod",
+   "kosul": "h:H340|H350|H350i",
+   "onem": "zorunlu",
+   "soru_tr": "Kanserojen/mutajen bileşen için Kanserojen veya Mutajen Maddeler Yönetmeliği sınır değeri (varsa) verilmiş mi?",
+   "soru_en": ""
+  },
+  {
+   "id": "8.1-bld",
+   "bolum": "8.1",
+   "dayanak": "KKDİK Ek-2 A 8.1.1.4, 8.1.1.5",
+   "yontem": "kod",
+   "kosul": "oel",
+   "onem": "kosullu",
+   "soru_tr": "Varsa biyolojik sınır değerleri verilmiş mi?",
+   "soru_en": "",
+   "not": "TR biyolojik sınır değer verisi programda henüz yok."
+  },
+  {
+   "id": "8.1-hava-kirletici",
+   "bolum": "8.1",
+   "dayanak": "KKDİK Ek-2 A 8.1.3",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "8"
+   ],
+   "onem": "kosullu",
+   "soru_tr": "Kullanımda oluşan hava kirleticileri için sınır değerler verilmiş mi (veya oluşmadığı)?",
+   "soru_en": "Where air contaminants are formed during intended use, their exposure limit values are listed, or it is clear none are formed."
+  },
+  {
+   "id": "8.1-kontrol-bandi",
+   "bolum": "8.1",
+   "dayanak": "KKDİK Ek-2 A 8.1.5",
+   "yontem": "kdu",
+   "kosul": "her",
+   "onem": "kosullu",
+   "soru_tr": "Kontrol bandı yaklaşımı kullanıldıysa bağlamı ve sınırlamaları açıklanmış mı?",
+   "soru_en": "",
+   "not": "Yalnız kontrol bandı kullanılan GBF'lerde."
+  },
+  {
+   "id": "8.2.2-atif5",
+   "bolum": "8.2",
+   "dayanak": "KKDİK Ek-2 A 8.2.2.1",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "8"
+   ],
+   "onem": "kosullu",
+   "soru_tr": "Yangına özgü KKD için Bölüm 5'e atıf yapılmış mı?",
+   "soru_en": "Reference is made to section 5 for specific fire-fighting or chemical protective equipment."
+  },
+  {
+   "id": "8.2.2-ek-el",
+   "bolum": "8.2",
+   "dayanak": "KKDİK Ek-2 A 8.2.2.2(b)(i)",
+   "yontem": "jev",
+   "kosul": "siniflandirilmis",
+   "bolumler": [
+    "8"
+   ],
+   "onem": "kosullu",
+   "soru_tr": "Gerekirse ek el koruma önlemleri (koruyucu krem, eldiven değişimi vb.) belirtilmiş mi?",
+   "soru_en": "Additional hand protection measures are given where needed (e.g. barrier cream, glove replacement)."
+  },
+  {
+   "id": "9.1-ozellikler",
+   "bolum": "9.1",
+   "dayanak": "KKDİK Ek-2 A 9.1 (a)–(p)",
+   "soru_tr": "18 temel özelliğin her biri (görünüm, koku, koku eşiği, pH, erime/donma, kaynama, parlama, buharlaşma hızı, alevlenirlik, patlama limitleri, buhar basıncı, buhar yoğunluğu, bağıl yoğunluk, çözünürlük, Kow, kendiliğinden tutuşma, bozunma sıcaklığı, akışkanlık, patlayıcı ve oksitleyici özellikler) için değer ya da 'mevcut değil/uygulanamaz' var mı?",
+   "soru_en": "Each of the basic physical and chemical properties listed in 9.1 (a)–(p) is given a value or a statement that it is not available or not applicable.",
+   "yontem": "kod",
+   "kosul": "her",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "9.1-neden",
+   "bolum": "9.1",
+   "dayanak": "KKDİK Ek-2 A 9.1",
+   "soru_tr": "Değer verilmeyen özellikler için neden belirtilmiş mi?",
+   "soru_en": "Where a property is stated as not applicable or not available, a reason is given.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "9"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "9.1-gorunum",
+   "bolum": "9.1",
+   "dayanak": "KKDİK Ek-2 A 9.1(a)",
+   "soru_tr": "Fiziksel hal (katı/sıvı/gaz) ve renk belirtilmiş mi?",
+   "soru_en": "The physical state (solid, liquid or gas) and the colour are stated.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "9"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "9.1-ph",
+   "bolum": "9.1",
+   "dayanak": "KKDİK Ek-2 A 9.1(ç)",
+   "soru_tr": "pH değeri (veya neden verilmediği) belirtilmiş mi?",
+   "soru_en": "A pH value is given, or the reason why no pH value is given is stated.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "9"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "9.1-ph-cozelti",
+   "bolum": "9.1",
+   "dayanak": "KKDİK Ek-2 A 9.1(ç)",
+   "tur": "choice",
+   "soru_tr": "pH seyreltik bir sulu çözeltiye aitse çözeltinin konsantrasyonu belirtilmiş mi?",
+   "soru_en": "Which situation applies to the pH value in section 9?",
+   "secenekler": {
+    "urun": "The pH refers to the product as supplied (or no dilution is mentioned).",
+    "cozelti_konsantrasyonlu": "The pH refers to a diluted aqueous solution and its concentration is stated.",
+    "cozelti_konsantrasyonsuz": "The pH refers to a diluted aqueous solution but its concentration is not stated.",
+    "ph_yok": "No pH value is given."
+   },
+   "kabul": [
+    "urun",
+    "cozelti_konsantrasyonlu",
+    "ph_yok"
+   ],
+   "kdu": [],
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "9"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "9.1-parlama-yontem",
+   "bolum": "9.1",
+   "dayanak": "KKDİK Ek-2 A 9.1 (giriş), (f)",
+   "soru_tr": "Parlama noktası için belirleme yöntemi (açık/kapalı kap) belirtilmiş mi?",
+   "soru_en": "Which situation applies to the flash point in section 9?",
+   "yontem": "jev",
+   "kosul": "form:sivi",
+   "bolumler": [
+    "9"
+   ],
+   "onem": "kosullu",
+   "tur": "choice",
+   "secenekler": {
+    "yontemli": "A flash point value is given together with the method (open cup or closed cup).",
+    "yontemsiz": "A flash point value is given without stating the method.",
+    "deger_yok": "No flash point value is given (not applicable, not determined or not available)."
+   },
+   "kabul": [
+    "yontemli",
+    "deger_yok"
+   ],
+   "kdu": [
+    "yontemsiz"
+   ]
+  },
+  {
+   "id": "9.1-granulometri",
+   "bolum": "9.1",
+   "dayanak": "KKDİK Ek-2 A 9.1(a)",
+   "soru_tr": "Katı üründe granülometri ve spesifik yüzey alanı hakkında bilgi var mı?",
+   "soru_en": "For a solid, information on particle size (granulometry) and specific surface area is given.",
+   "yontem": "jev",
+   "kosul": "form:kati",
+   "bolumler": [
+    "9"
+   ],
+   "onem": "kosullu"
+  },
+  {
+   "id": "9.1-karisim-veri",
+   "bolum": "9.1",
+   "dayanak": "KKDİK Ek-2 A 9.1",
+   "soru_tr": "Veri karışımın tamamına ait değilse hangi maddeye ait olduğu belirtilmiş mi?",
+   "soru_en": "Do the values in section 9 apply to the whole mixture?",
+   "yontem": "jev",
+   "kosul": "karisim",
+   "bolumler": [
+    "9"
+   ],
+   "onem": "kosullu",
+   "tur": "choice",
+   "secenekler": {
+    "karisim": "The values given refer to the mixture as a whole (or no values are given).",
+    "madde_belirtilmis": "Some values refer to individual ingredients and the ingredient is identified.",
+    "madde_belirtilmemis": "Some values clearly refer to individual ingredients but the ingredient is not identified."
+   },
+   "kabul": [
+    "karisim",
+    "madde_belirtilmis"
+   ],
+   "kdu": [
+    "madde_belirtilmemis"
+   ]
+  },
+  {
+   "id": "9.2-diger",
+   "bolum": "9.2",
+   "dayanak": "KKDİK Ek-2 A 9.2",
+   "soru_tr": "Diğer fiziksel/kimyasal parametreler (karışabilirlik, iletkenlik vb.) veya bulunmadığı belirtilmiş mi?",
+   "soru_en": "Other physical and chemical parameters (e.g. miscibility, conductivity) are given, or it is stated that there is no further information.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "9"
+   ],
+   "onem": "kosullu"
+  },
+  {
+   "id": "9.1-yontem",
+   "bolum": "9.1",
+   "dayanak": "KKDİK Ek-2 A 9.1 (giriş)",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "9"
+   ],
+   "onem": "kosullu",
+   "soru_tr": "Verilen değerler için test yöntemi ve/veya referans koşulları belirtilmiş mi?",
+   "soru_en": "For the values given, the test method and/or reference conditions (e.g. temperature, method standard) are indicated, or the values are stated as calculated or estimated."
+  },
+  {
+   "id": "10.1-tepkime",
+   "bolum": "10.1",
+   "dayanak": "KKDİK Ek-2 A 10.1",
+   "soru_tr": "Tepkime (reaktiflik) zararları açıklanmış mı?",
+   "soru_en": "The reactivity hazards are described, or it is stated that there are none.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "10"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "10.2-kararlilik",
+   "bolum": "10.2",
+   "dayanak": "KKDİK Ek-2 A 10.2",
+   "soru_tr": "Normal koşullarda kararlı/kararsız olduğu belirtilmiş mi?",
+   "soru_en": "It is stated whether the product is stable or unstable under normal ambient and storage conditions.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "10"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "10.3-reaksiyon",
+   "bolum": "10.3",
+   "dayanak": "KKDİK Ek-2 A 10.3",
+   "soru_tr": "Zararlı reaksiyon olasılığı ve koşulları belirtilmiş mi?",
+   "soru_en": "The possibility of hazardous reactions and the conditions under which they occur are described, or it is stated that none are known.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "10"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "10.4-kosullar",
+   "bolum": "10.4",
+   "dayanak": "KKDİK Ek-2 A 10.4",
+   "soru_tr": "Kaçınılması gereken durumlar (sıcaklık, ışık, statik boşalma vb.) sıralanmış mı?",
+   "soru_en": "Conditions to avoid (e.g. heat, light, static discharge, shock) are listed, or it is stated that none are known.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "10"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "10.5-maddeler",
+   "bolum": "10.5",
+   "dayanak": "KKDİK Ek-2 A 10.5",
+   "soru_tr": "Kaçınılması gereken (uyumsuz) maddeler adıyla sıralanmış mı?",
+   "soru_en": "Incompatible materials (e.g. acids, bases, oxidising agents, water) are listed by name.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "10"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "10.6-bozunma",
+   "bolum": "10.6",
+   "dayanak": "KKDİK Ek-2 A 10.6",
+   "soru_tr": "Zararlı bozunma ürünleri sıralanmış mı (veya beklenmediği belirtilmiş mi)?",
+   "soru_en": "Hazardous decomposition products are listed, or it is stated that none are expected.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "10"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "10.2-kararlastirici",
+   "bolum": "10.2",
+   "dayanak": "KKDİK Ek-2 A 10.2",
+   "yontem": "kdu",
+   "kosul": "her",
+   "onem": "kosullu",
+   "soru_tr": "Kimyasal kararlılık için kullanılan/gereken kararlaştırıcı belirtilmiş mi?",
+   "soru_en": "",
+   "not": "Gereklilik ürün bilgisine bağlı; KDU kontrol eder."
+  },
+  {
+   "id": "10.2-gorunum",
+   "bolum": "10.2",
+   "dayanak": "KKDİK Ek-2 A 10.2",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "10"
+   ],
+   "onem": "kosullu",
+   "soru_tr": "Fiziksel görünümdeki değişikliğin güvenlik açısından önemi (varsa) belirtilmiş mi?",
+   "soru_en": "The safety significance of any change in the physical appearance of the product is indicated, or it is clear that this is not relevant."
+  },
+  {
+   "id": "11.1-siniflar",
+   "bolum": "11.1",
+   "dayanak": "KKDİK Ek-2 A 11.1 (a)–(h)",
+   "soru_tr": "10 zararlılık sınıfının (akut toksisite, cilt aşınması/tahrişi, göz hasarı/tahrişi, solunum/cilt hassaslaşması, mutajenite, kanserojenite, üreme toksisitesi, BHOT tek, BHOT tekrarlı, aspirasyon) her biri için bilgi var mı?",
+   "soru_en": "Information is given for each of the ten hazard classes listed in 11.1 (a)–(h).",
+   "yontem": "kod",
+   "kosul": "her",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "11.1-ifade",
+   "bolum": "11.1",
+   "dayanak": "KKDİK Ek-2 A 11.1.1, 11.1.4",
+   "soru_tr": "Sınıflandırılmayan sınıflar için nedeni (veri eksikliği vb.) veya 'Mevcut bilgilere göre, sınıflandırma kriterlerini karşılamamaktadır.' ifadesi var mı?",
+   "soru_en": "For hazard classes that are not classified, the reason is stated (lack of data, inconclusive data, or 'based on available data, the classification criteria are not met').",
+   "yontem": "kod",
+   "kosul": "her",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "11.1-bilesen-veri",
+   "bolum": "11.1",
+   "dayanak": "KKDİK Ek-2 A 11.1.2, 11.1.10",
+   "soru_tr": "Karışım test edilmemişse bileşenlerin toksikolojik verileri (LD50, LC50, ATE) verilmiş mi?",
+   "soru_en": "Where the mixture itself has not been tested, toxicological data of the relevant components (e.g. LD50, LC50, ATE) are given.",
+   "yontem": "jev",
+   "kosul": "karisim,siniflandirilmis",
+   "bolumler": [
+    "11"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "11.1.5-yollar",
+   "bolum": "11.1",
+   "dayanak": "KKDİK Ek-2 A 11.1.5",
+   "soru_tr": "Olası maruz kalma yolları (yutma, soluma, cilt/göz) ve etkileri belirtilmiş mi?",
+   "soru_en": "The likely routes of exposure (ingestion, inhalation, skin or eye contact) and their effects are described.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "11"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "11.1.6-belirtiler",
+   "bolum": "11.1",
+   "dayanak": "KKDİK Ek-2 A 11.1.6",
+   "soru_tr": "Maruz kalma ile ilişkili belirtiler (hafiften ağıra) tanımlanmış mı?",
+   "soru_en": "Symptoms related to the physical, chemical and toxicological characteristics are described, from low to severe exposure.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "11"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "11.1.7-gecikmeli",
+   "bolum": "11.1",
+   "dayanak": "KKDİK Ek-2 A 11.1.7",
+   "soru_tr": "Gecikmeli/anlık etkiler ve kısa/uzun süreli maruz kalmada kronik etkiler belirtilmiş mi?",
+   "soru_en": "Delayed and immediate effects, and chronic effects from short- and long-term exposure, are described.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "11"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "11.1-madde-ozet",
+   "bolum": "11.1",
+   "dayanak": "KKDİK Ek-2 A 11.1",
+   "yontem": "jev",
+   "kosul": "madde",
+   "bolumler": [
+    "11"
+   ],
+   "onem": "zorunlu",
+   "soru_tr": "Kayda tabi madde için Ek-7–11 bilgilerinin özetleri test yöntemleriyle verilmiş mi?",
+   "soru_en": "Summaries of the registration test data are given, with references to the test methods used."
+  },
+  {
+   "id": "11.1-cmr-karsilastirma",
+   "bolum": "11.1",
+   "dayanak": "KKDİK Ek-2 A 11.1",
+   "yontem": "jev",
+   "kosul": "madde",
+   "bolumler": [
+    "11"
+   ],
+   "onem": "zorunlu",
+   "soru_tr": "Kayda tabi madde için mevcut bilgilerin CMR 1A/1B kriterleriyle karşılaştırma sonucu verilmiş mi?",
+   "soru_en": "The result of comparing the available data with the criteria for carcinogenicity, mutagenicity and reproductive toxicity category 1A/1B is given."
+  },
+  {
+   "id": "11.1.7-veri-kaynagi",
+   "bolum": "11.1",
+   "dayanak": "KKDİK Ek-2 A 11.1.7",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "11"
+   ],
+   "onem": "zorunlu",
+   "soru_tr": "Toksikolojik bilginin insan mı hayvan verisine mi dayandığı belirtilmiş mi?",
+   "soru_en": "It is stated whether the toxicological information is based on human data, animal data, or calculation from components."
+  },
+  {
+   "id": "11.1.8-etkilesim",
+   "bolum": "11.1",
+   "dayanak": "KKDİK Ek-2 A 11.1.8",
+   "yontem": "jev",
+   "kosul": "karisim",
+   "bolumler": [
+    "11"
+   ],
+   "onem": "kosullu",
+   "soru_tr": "Etkileşimli etkiler hakkında bilgi (mevcutsa) verilmiş mi?",
+   "soru_en": "Information on interactive effects is given, or it is stated that none are known."
+  },
+  {
+   "id": "11.1.12-diger",
+   "bolum": "11.1",
+   "dayanak": "KKDİK Ek-2 A 11.1.12",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "11"
+   ],
+   "onem": "kosullu",
+   "soru_tr": "Sınıflandırmaya girmeyen diğer olumsuz sağlık etkileri (varsa) verilmiş mi?",
+   "soru_en": "Other adverse health effects not required by the classification criteria are described, or it is stated that none are known."
+  },
+  {
+   "id": "12.1-toksisite",
+   "bolum": "12.1",
+   "dayanak": "KKDİK Ek-2 A 12.1",
+   "soru_tr": "Sucul toksisite verileri (balık, kabuklu, alg) veya bulunmama nedeni verilmiş mi?",
+   "soru_en": "Aquatic toxicity data (fish, crustaceans, algae) are given, or the reason for their absence is stated.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "12"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "12.2-bozunma",
+   "bolum": "12.2",
+   "dayanak": "KKDİK Ek-2 A 12.2",
+   "soru_tr": "Kalıcılık ve bozunabilirlik bilgisi var mı?",
+   "soru_en": "Information on persistence and degradability is given, or the reason for its absence is stated.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "12"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "12.3-biyobirikim",
+   "bolum": "12.3",
+   "dayanak": "KKDİK Ek-2 A 12.3",
+   "soru_tr": "Biyobirikim potansiyeli (log Kow, BCF) verilmiş mi?",
+   "soru_en": "The bioaccumulative potential is given (e.g. log Kow or BCF), or the reason for its absence is stated.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "12"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "12.4-hareketlilik",
+   "bolum": "12.4",
+   "dayanak": "KKDİK Ek-2 A 12.4",
+   "soru_tr": "Toprakta hareketlilik bilgisi verilmiş mi?",
+   "soru_en": "Information on mobility in soil is given, or the reason for its absence is stated.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "12"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "12.5-pbt",
+   "bolum": "12.5",
+   "dayanak": "KKDİK Ek-2 A 12.5",
+   "soru_tr": "PBT ve vPvB değerlendirmesinin sonucu verilmiş mi?",
+   "soru_en": "The result of the PBT and vPvB assessment is given.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "12"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "12.6-diger",
+   "bolum": "12.6",
+   "dayanak": "KKDİK Ek-2 A 12.6",
+   "soru_tr": "Diğer olumsuz etkiler (ozon, endokrin bozucu, küresel ısınma vb.) veya bilinmediği belirtilmiş mi?",
+   "soru_en": "Other adverse effects (e.g. ozone depletion, endocrine disruption, global warming potential) are described, or it is stated that none are known.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "12"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "12-test-detay",
+   "bolum": "12",
+   "dayanak": "KKDİK Ek-2 A 12 (giriş)",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "12"
+   ],
+   "onem": "kosullu",
+   "soru_tr": "Verilen ekotoksisite verilerinde tür, birim, test süresi ve koşulları belirtilmiş mi?",
+   "soru_en": "Where ecological test data are given, the species, units, test duration and test conditions are stated, or no test data are given."
+  },
+  {
+   "id": "12-donusum",
+   "bolum": "12",
+   "dayanak": "KKDİK Ek-2 A 12 (giriş)",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "12"
+   ],
+   "onem": "kosullu",
+   "soru_tr": "Bozunmadan doğan zararlı dönüşüm ürünleri hakkında bilgi (varsa) verilmiş mi?",
+   "soru_en": "Information on hazardous transformation products arising from degradation is given, or it is clear none are expected."
+  },
+  {
+   "id": "12.1-diger-organizma",
+   "bolum": "12.1",
+   "dayanak": "KKDİK Ek-2 A 12.1",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "12"
+   ],
+   "onem": "kosullu",
+   "soru_tr": "Toprak organizmaları, kuşlar, arılar, bitkiler gibi diğer organizmalar için veriler (mevcutsa) verilmiş mi?",
+   "soru_en": "Toxicity data for other organisms (soil organisms, birds, bees, plants) are given where available, or it is stated they are not available."
+  },
+  {
+   "id": "12.1-aritma",
+   "bolum": "12.1",
+   "dayanak": "KKDİK Ek-2 A 12.1",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "12"
+   ],
+   "onem": "kosullu",
+   "soru_tr": "Mikroorganizmalar üzerinde engelleyici etki varsa atıksu arıtma tesisine olası etkiye değinilmiş mi?",
+   "soru_en": "Possible effects on sewage treatment plants (inhibition of microbial activity) are addressed, or it is clear this is not relevant."
+  },
+  {
+   "id": "13.1-yontem",
+   "bolum": "13.1",
+   "dayanak": "KKDİK Ek-2 A 13.1(a)",
+   "soru_tr": "Ürün ve kirlenmiş ambalaj için atık işleme yöntemleri belirtilmiş mi?",
+   "soru_en": "Waste treatment methods are given for the product and for contaminated packaging.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "13"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "13.1-ozellik",
+   "bolum": "13.1",
+   "dayanak": "KKDİK Ek-2 A 13.1(b)",
+   "soru_tr": "Atık işlemeyi etkileyebilecek fiziksel/kimyasal özellikler belirtilmiş mi?",
+   "soru_en": "Physical or chemical properties that may affect waste treatment options are mentioned.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "13"
+   ],
+   "onem": "kosullu"
+  },
+  {
+   "id": "13.1-kanalizasyon",
+   "bolum": "13.1",
+   "dayanak": "KKDİK Ek-2 A 13.1(c)",
+   "soru_tr": "Kanalizasyona verilmemesi gerektiği belirtilmiş mi?",
+   "soru_en": "It is stated that the product must not be discharged into the sewer.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "13"
+   ],
+   "onem": "zorunlu",
+   "not": "TR metni '(c) Kanalizasyona verilmez.' — AB karşılığı 'kanalizasyona deşarj bilgisi'. Önem derecesini KDU ile netleştirin."
+  },
+  {
+   "id": "13.1-mevzuat",
+   "bolum": "13.1",
+   "dayanak": "KKDİK Ek-2 A 13.1",
+   "soru_tr": "Atık mevzuatına (Atık Yönetimi Yönetmeliği) atıf var mı?",
+   "soru_en": "Reference is made to the applicable waste legislation.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "13"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "13.1-atik-kodu",
+   "bolum": "13.1",
+   "dayanak": "Atık Yönetimi Yönetmeliği Ek-4 (iyi uygulama)",
+   "soru_tr": "Atık kodu (Ek-4 atık listesi) önerilmiş mi?",
+   "soru_en": "A waste code from the national waste list is suggested.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "13"
+   ],
+   "onem": "tavsiye"
+  },
+  {
+   "id": "13.1-ozel-onlem",
+   "bolum": "13.1",
+   "dayanak": "KKDİK Ek-2 A 13.1(ç)",
+   "yontem": "jev",
+   "kosul": "siniflandirilmis",
+   "bolumler": [
+    "13"
+   ],
+   "onem": "kosullu",
+   "soru_tr": "Tavsiye edilen atık işleme için özel önlemler belirtilmiş mi?",
+   "soru_en": "Special precautions for the recommended waste treatment are described (e.g. neutralise before treatment, use licensed facility)."
+  },
+  {
+   "id": "14-tehlikesiz",
+   "bolum": "14",
+   "dayanak": "KKDİK Ek-2 A 14",
+   "soru_tr": "Taşımacılıkta tehlikeli değilse bu açıkça belirtilmiş mi?",
+   "soru_en": "It is clearly stated that the product is not classified as dangerous goods for transport.",
+   "yontem": "jev",
+   "kosul": "tehlikeli_mal_degil",
+   "bolumler": [
+    "14"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "14.1-un",
+   "bolum": "14.1",
+   "dayanak": "KKDİK Ek-2 A 14.1",
+   "soru_tr": "UN numarası verilmiş mi?",
+   "soru_en": "A UN number is given.",
+   "yontem": "kod",
+   "kosul": "tehlikeli_mal",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "14.2-ad",
+   "bolum": "14.2",
+   "dayanak": "KKDİK Ek-2 A 14.2",
+   "soru_tr": "Uygun UN taşımacılık adı verilmiş mi?",
+   "soru_en": "The UN proper shipping name is given.",
+   "yontem": "jev",
+   "kosul": "tehlikeli_mal",
+   "bolumler": [
+    "14"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "14.2-teknik-ad",
+   "bolum": "14.2",
+   "dayanak": "ADR 3.1.2.8.1; ADR Tablo A Özel Hüküm 274",
+   "soru_tr": "B.B.B. girişte tehlikeli bileşenlerin teknik adları parantez içinde verilmiş mi?",
+   "soru_en": "The proper shipping name is a generic N.O.S. ('B.B.B.') entry AND it is followed by the technical names of the hazardous constituents in parentheses.",
+   "yontem": "jev",
+   "kosul": "bbb",
+   "bolumler": [
+    "14"
+   ],
+   "onem": "zorunlu",
+   "not": "Pilot: doğru ayırt edildi."
+  },
+  {
+   "id": "14.3-sinif",
+   "bolum": "14.3",
+   "dayanak": "KKDİK Ek-2 A 14.3",
+   "soru_tr": "Taşımacılık zararlılık sınıfı (ve yan riskler) verilmiş mi?",
+   "soru_en": "The transport hazard class (and subsidiary risks) is given.",
+   "yontem": "kod",
+   "kosul": "tehlikeli_mal",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "14.4-pg",
+   "bolum": "14.4",
+   "dayanak": "KKDİK Ek-2 A 14.4",
+   "soru_tr": "Ambalaj grubu verilmiş mi?",
+   "soru_en": "Which packing group is stated?",
+   "yontem": "kod",
+   "kosul": "tehlikeli_mal",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "14.5-cevre",
+   "bolum": "14.5",
+   "dayanak": "KKDİK Ek-2 A 14.5",
+   "soru_tr": "Çevre için zararlı / deniz kirletici olup olmadığı belirtilmiş mi?",
+   "soru_en": "It is stated whether the product is environmentally hazardous and whether it is a marine pollutant.",
+   "yontem": "jev",
+   "kosul": "tehlikeli_mal",
+   "bolumler": [
+    "14"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "14.6-onlem",
+   "bolum": "14.6",
+   "dayanak": "KKDİK Ek-2 A 14.6",
+   "soru_tr": "Kullanıcı için özel önlemler (veya bulunmadığı) belirtilmiş mi?",
+   "soru_en": "Special precautions for the user are given, or it is stated that there are none.",
+   "yontem": "jev",
+   "kosul": "tehlikeli_mal",
+   "bolumler": [
+    "14"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "14.7-marpol",
+   "bolum": "14.7",
+   "dayanak": "KKDİK Ek-2 A 14.7",
+   "soru_tr": "MARPOL Ek II / IBC toplu taşımacılık durumu (veya uygulanamadığı) belirtilmiş mi?",
+   "soru_en": "Bulk transport according to MARPOL Annex II and the IBC Code is addressed, or stated as not applicable.",
+   "yontem": "jev",
+   "kosul": "tehlikeli_mal",
+   "bolumler": [
+    "14"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "14-modlar",
+   "bolum": "14",
+   "dayanak": "KKDİK Ek-2 A 14",
+   "soru_tr": "Karayolu/demiryolu (ADR/RID), deniz (IMDG) ve hava (IATA/ICAO) için bilgiler verilmiş mi?",
+   "soru_en": "Transport information is given for road/rail (ADR/RID), sea (IMDG) and air (ICAO/IATA).",
+   "yontem": "jev",
+   "kosul": "tehlikeli_mal",
+   "bolumler": [
+    "14"
+   ],
+   "onem": "kosullu"
+  },
+  {
+   "id": "15.1-mevzuat",
+   "bolum": "15.1",
+   "dayanak": "KKDİK Ek-2 A 15.1",
+   "soru_tr": "Ürüne ilişkin güvenlik, sağlık ve çevre mevzuatı belirtilmiş mi?",
+   "soru_en": "Relevant national safety, health and environmental regulations for the product are listed.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "15"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "15.1-izin-kisit",
+   "bolum": "15.1",
+   "dayanak": "KKDİK Ek-2 A 15.1; KKDİK Ek-14, Ek-17",
+   "soru_tr": "İzne tabi (Ek-14) veya kısıtlanmış (Ek-17) madde durumu belirtilmiş mi?",
+   "soru_en": "It is stated whether the product or its components are subject to authorisation or restriction.",
+   "yontem": "kod",
+   "kosul": "her",
+   "onem": "kosullu",
+   "not": "Ek-14/Ek-17 maddesi varsa zorunlu. Ek-17 kontrolü henüz programda yok."
+  },
+  {
+   "id": "15.1-svhc",
+   "bolum": "15.1",
+   "dayanak": "KKDİK Ek-2 A 15.1; KKDİK Md.49",
+   "soru_tr": "Aday Liste (SVHC) durumu belirtilmiş mi?",
+   "soru_en": "Subsection 15.1 states whether the product contains substances on the SVHC Candidate List (Aday Liste).",
+   "yontem": "kod",
+   "kosul": "her",
+   "onem": "kosullu",
+   "not": "Aday Liste maddesi varsa zorunlu; yoksa beyan iyi uygulama."
+  },
+  {
+   "id": "15.1-bekra",
+   "bolum": "15.1",
+   "dayanak": "KKDİK Ek-2 A 15.1 (örnek: BEKRA Yönetmeliği)",
+   "soru_tr": "Büyük Endüstriyel Kazalar (BEKRA/Seveso) durumu belirtilmiş mi?",
+   "soru_en": "The status under the major accident hazards (Seveso) regulation is stated.",
+   "yontem": "jev",
+   "kosul": "siniflandirilmis",
+   "bolumler": [
+    "15"
+   ],
+   "onem": "tavsiye"
+  },
+  {
+   "id": "15.1-deterjan",
+   "bolum": "15.1",
+   "dayanak": "Deterjanlar Hakkında Yönetmelik Ek-7 A",
+   "soru_tr": "Deterjan içerik beyanı (yüzey aktif madde aralıkları, alerjenler vb.) verilmiş mi?",
+   "soru_en": "The detergent ingredient declaration (e.g. surfactant ranges, fragrance allergens) is given.",
+   "yontem": "kod",
+   "kosul": "deterjan",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "15.2-kgd",
+   "bolum": "15.2",
+   "dayanak": "KKDİK Ek-2 A 15.2",
+   "soru_tr": "Kimyasal güvenlik değerlendirmesinin yapılıp yapılmadığı belirtilmiş mi?",
+   "soru_en": "It is stated whether a chemical safety assessment has been carried out.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "15"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "15-diger-mevzuat",
+   "bolum": "15",
+   "dayanak": "KKDİK Ek-2 A 15 (giriş)",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "15"
+   ],
+   "onem": "kosullu",
+   "soru_tr": "Ozon tabakasını incelten maddeler, kalıcı organik kirleticiler, tehlikeli kimyasalların ithalat/ihracatı mevzuatı kapsamı (varsa) belirtilmiş mi?",
+   "soru_en": "It is stated whether the product is subject to regulations on ozone-depleting substances, persistent organic pollutants or export/import of hazardous chemicals, where relevant."
+  },
+  {
+   "id": "15.1-alici-tavsiye",
+   "bolum": "15.1",
+   "dayanak": "KKDİK Ek-2 A 15.1",
+   "yontem": "jev",
+   "kosul": "siniflandirilmis",
+   "bolumler": [
+    "15"
+   ],
+   "onem": "kosullu",
+   "soru_tr": "İlgili hükümler sonucu alıcının yapması gereken işlemlere dair tavsiye verilmiş mi?",
+   "soru_en": "Advice is given on actions the recipient should take as a result of the listed regulations."
+  },
+  {
+   "id": "16-revizyon",
+   "bolum": "16",
+   "dayanak": "KKDİK Ek-2 A 16(a), 0.2.5",
+   "soru_tr": "Önceki sürüme göre yapılan değişiklikler belirtilmiş mi?",
+   "soru_en": "The changes made compared with the previous version are indicated.",
+   "yontem": "jev",
+   "kosul": "revizyon",
+   "bolumler": [
+    "16"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "16-kisaltma",
+   "bolum": "16",
+   "dayanak": "KKDİK Ek-2 A 16(b)",
+   "soru_tr": "Kullanılan kısaltma ve akronimlerin açıklaması var mı?",
+   "soru_en": "A key or legend to the abbreviations and acronyms used is given.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "16"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "16-kaynak",
+   "bolum": "16",
+   "dayanak": "KKDİK Ek-2 A 16(c)",
+   "soru_tr": "Ana literatür referansları ve veri kaynakları verilmiş mi?",
+   "soru_en": "Key literature references and sources for data are given.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "16"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "16-yontem",
+   "bolum": "16",
+   "dayanak": "KKDİK Ek-2 A 16(ç); SEA Md.11",
+   "soru_tr": "Karışımın sınıflandırılmasında kullanılan yöntem (hesaplama, test verisi, köprüleme) belirtilmiş mi?",
+   "soru_en": "The method used to classify the mixture (calculation, test data, bridging principles) is stated.",
+   "yontem": "jev",
+   "kosul": "karisim",
+   "bolumler": [
+    "16"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "16-tam-metin",
+   "bolum": "16",
+   "dayanak": "KKDİK Ek-2 A 16(d)",
+   "soru_tr": "2–15. bölümlerde tam yazılmamış H/EUH/P ifadelerinin tam metinleri var mı?",
+   "soru_en": "The full text of all hazard and precautionary statements not written out in full in sections 2 to 15 is given.",
+   "yontem": "kod",
+   "kosul": "siniflandirilmis",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "16-egitim",
+   "bolum": "16",
+   "dayanak": "KKDİK Ek-2 A 16(e)",
+   "soru_tr": "İşçiler için eğitim tavsiyesi var mı?",
+   "soru_en": "Advice on appropriate training for workers is given.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "16"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "16-kdu",
+   "bolum": "16",
+   "dayanak": "KKDİK Usul ve Esaslar (05.08.2025) Md.16(2)",
+   "soru_tr": "GBF'yi hazırlayan KDU'nun iletişim bilgileri ile yeterlilik belgesinin tarihi ve numarası yazılmış mı?",
+   "soru_en": "Section 16 names the person who prepared the SDS together with their contact details and the date and number of their certificate.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "16"
+   ],
+   "onem": "zorunlu",
+   "not": "Pilot: Lime-A-Way (var) / Rev281 (yok) doğru ayırt edildi."
+  },
+  {
+   "id": "T-4-2",
+   "bolum": "T",
+   "dayanak": "KKDİK Ek-2 A 0.2.4, 4",
+   "soru_tr": "İlk yardım önerileri ürünün tehlikeleriyle tutarlı mı? (Örn. aşındırıcıda kusturmama)",
+   "soru_en": "The first aid advice in section 4 is consistent with the hazards in section 2 (e.g. no induced vomiting for corrosive products).",
+   "yontem": "jev",
+   "kosul": "siniflandirilmis",
+   "bolumler": [
+    "2",
+    "4"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "T-7-9",
+   "bolum": "T",
+   "dayanak": "KKDİK Ek-2 A 7.2",
+   "soru_tr": "7.2 depolama tavsiyeleri 9. bölümdeki fiziksel/kimyasal özelliklerle tutarlı mı?",
+   "soru_en": "The storage advice in 7.2 is consistent with the physical and chemical properties in section 9.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "7",
+    "9"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "T-7-10",
+   "bolum": "T",
+   "dayanak": "KKDİK Ek-2 A 7.2, 10.5",
+   "soru_tr": "7.2'deki uyumsuz maddeler 10.5 ile tutarlı mı?",
+   "soru_en": "The incompatible materials named in 7.2 are consistent with those in 10.5.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "7",
+    "10"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "T-8-2",
+   "bolum": "T",
+   "dayanak": "KKDİK Ek-2 A 8.2.2",
+   "soru_tr": "8. bölümdeki koruyucu ekipman tehlikelerle (ve P280'deki ekipmanla) tutarlı mı?",
+   "soru_en": "The personal protective equipment in section 8 is consistent with the hazards and the P280 equipment in section 2.",
+   "yontem": "jev",
+   "kosul": "siniflandirilmis",
+   "bolumler": [
+    "2",
+    "8"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "T-9-2",
+   "bolum": "T",
+   "dayanak": "KKDİK Ek-2 A 9 (giriş)",
+   "soru_tr": "9. bölüm sınıflandırmayla tutarlı mı? (Örn. parlama noktası ↔ alevlenirlik; pH ↔ aşındırıcılık)",
+   "soru_en": "The physical and chemical properties in section 9 are consistent with the classification in section 2 (e.g. flash point vs flammability, pH vs corrosivity).",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "2",
+    "9"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "T-11-2",
+   "bolum": "T",
+   "dayanak": "KKDİK Ek-2 A 11 (giriş)",
+   "soru_tr": "11. bölüm 2. bölümdeki sağlık sınıflandırmasıyla tutarlı mı?",
+   "soru_en": "The toxicological information in section 11 is consistent with the health hazard classification in section 2.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "2",
+    "11"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "T-12-2",
+   "bolum": "T",
+   "dayanak": "KKDİK Ek-2 A 12 (giriş)",
+   "soru_tr": "12. bölüm çevre sınıflandırmasıyla (H400/H410–H413) tutarlı mı?",
+   "soru_en": "The ecological information in section 12 is consistent with the environmental classification in section 2.",
+   "yontem": "jev",
+   "kosul": "her",
+   "bolumler": [
+    "2",
+    "12"
+   ],
+   "onem": "zorunlu"
+  },
+  {
+   "id": "T-14-2",
+   "bolum": "T",
+   "dayanak": "KKDİK Ek-2 A 14; ADR 2.2",
+   "soru_tr": "UN numarası, sınıf ve ambalaj grubu 2. bölümdeki sınıflandırma ve ADR Tablo A ile tutarlı mı?",
+   "soru_en": "The UN number, transport class and packing group are consistent with the classification in section 2.",
+   "yontem": "kod",
+   "kosul": "tehlikeli_mal",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "T-3-2",
+   "bolum": "T",
+   "dayanak": "SEA Md.20(3)(b); KKDİK Ek-2 A 3.2",
+   "soru_tr": "2.2'deki zararlı bileşenler 3. bölümde listelenmiş mi?",
+   "soru_en": "The hazardous components named on the label in 2.2 are listed in section 3.",
+   "yontem": "kod",
+   "kosul": "karisim,siniflandirilmis",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "T-hesap",
+   "bolum": "T",
+   "dayanak": "SEA Md.11, Ek-1",
+   "soru_tr": "3. bölümdeki bileşim ve sınıflandırmalardan yeniden hesaplanan karışım sınıflandırması 2.1 ile aynı mı?",
+   "soru_en": "Re-calculating the mixture classification from the composition in section 3 gives the same result as 2.1.",
+   "yontem": "kod",
+   "kosul": "karisim",
+   "onem": "zorunlu",
+   "not": "SDSPass sınıflandırma hattı ile; aralık verilen bileşenlerde üst değer."
+  }
+ ]
+}

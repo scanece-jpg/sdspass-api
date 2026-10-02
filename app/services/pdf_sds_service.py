@@ -699,6 +699,35 @@ def bullet_list(items: list, styles: dict) -> list:
     return result
 
 
+# 7.2'de uyumsuz madde satırının yer tutucusu — liste Bölüm 10.5'te hesaplanınca doldurulur
+_INCOMPAT_SLOT = '@@UYUMSUZ_MADDELER@@'
+
+
+def _delayed_effects_text(h_set: set, tr: bool) -> str:
+    """Hemen/gecikmeli ve kronik etkiler — sınıflandırmadaki H kodlarından (KKDİK Ek-2 A 4.1.2(a), 11.1.7)."""
+    imm = sorted(h_set & {'H300', 'H301', 'H302', 'H310', 'H311', 'H312', 'H330', 'H331', 'H332',
+                          'H314', 'H315', 'H318', 'H319', 'H335', 'H336', 'H370', 'H371', 'H304'})
+    chron = sorted(h for h in h_set if h[:4] in {'H340', 'H341', 'H350', 'H351', 'H360', 'H361', 'H362',
+                                                  'H372', 'H373'})
+    sens = sorted(h_set & {'H317', 'H334'})
+    out = []
+    if imm:
+        out.append(('Kısa süreli maruz kalmada etkiler genellikle hemen ortaya çıkar (' + ', '.join(imm) + ').')
+                   if tr else ('Effects of short-term exposure generally appear immediately (' + ', '.join(imm) + ').'))
+    if sens:
+        out.append(('Hassaslaştırıcı etki (' + ', '.join(sens) + ') tekrarlanan temasla gecikmeli (alerjik) '
+                    'reaksiyon olarak ortaya çıkabilir.') if tr else
+                   ('Sensitising effects (' + ', '.join(sens) + ') may appear as delayed (allergic) reactions '
+                    'after repeated contact.'))
+    if chron:
+        out.append(('Uzun süreli/tekrarlı maruz kalmada kronik etkiler: ' + ', '.join(chron) + '.') if tr
+                   else ('Chronic effects on long-term/repeated exposure: ' + ', '.join(chron) + '.'))
+    else:
+        out.append('Uzun süreli/tekrarlı maruz kalmaya bağlı kronik etki sınıflandırması yoktur.' if tr
+                   else 'No classification for chronic effects of long-term/repeated exposure.')
+    return ' '.join(out)
+
+
 def na_text(lang: str, styles: dict) -> Paragraph:
     return Paragraph(term(lang, 'not_available'), styles['small'])
 
@@ -845,8 +874,32 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         canvas.setFont(_F_NORMAL, 6.5)
         footer_lbl = 'Bu GBF KKDİK Ek-2 formatına uygundur.' if lang=='TR' else 'This SDS complies with CLP/REACH format.'
         canvas.drawString(15*mm, 10*mm, footer_lbl)
-        canvas.drawRightString(w - 15*mm, 10*mm, f"Sayfa {canvas.getPageNumber()}" if lang=='TR' else f"Page {canvas.getPageNumber()}")
+        # Sayfa numarası "x / toplam" olarak _TotalPagesCanvas.save() içinde yazılır (KKDİK Ek-2 A 0.3.2)
         canvas.restoreState()
+
+    from reportlab.pdfgen.canvas import Canvas as _RLCanvas
+
+    class _TotalPagesCanvas(_RLCanvas):
+        """Toplam sayfa sayısı ancak belge bitince bilinir: sayfalar biriktirilir, kayıtta numaralanır."""
+        def __init__(self, *a, **kw):
+            super().__init__(*a, **kw)
+            self._saved_pages = []
+
+        def showPage(self):
+            self._saved_pages.append(dict(self.__dict__))
+            self._startPage()
+
+        def save(self):
+            total = len(self._saved_pages)
+            for state in self._saved_pages:
+                self.__dict__.update(state)
+                self.setFont(_F_NORMAL, 6.5)
+                self.setFillColor(HexColor('#64748b'))
+                self.drawRightString(A4[0] - 15*mm, 10*mm,
+                                     (f"Sayfa {self._pageNumber} / {total}" if lang == 'TR'
+                                      else f"Page {self._pageNumber} / {total}"))
+                super().showPage()
+            super().save()
 
     # Document
     doc = SimpleDocTemplate(
@@ -1596,6 +1649,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         # KKDİK Ek-2 4.1.1: maruz kalma yoluna göre; SEA Ek-4 resmî önlem ifadeleri
         for _fa in reg_first_aid(_h_all_first_aid, _sec_form, lang):
             story.append(Paragraph(f"• <b>{_fa['route']}:</b> {_fa['text']}", styles['bullet']))
+        # KKDİK Ek-2 A 4.1.2(a): gecikmiş etkilerin beklenip beklenmediği (11.1.7 ile aynı metin)
+        story.append(Paragraph(
+            f"• <b>{'Gecikmiş etkiler' if lang == 'TR' else 'Delayed effects'}:</b> "
+            f"{_delayed_effects_text(set(_h_all_first_aid), lang == 'TR')}", styles['bullet']))
     else:
         sec4 = generate_section(4, h_codes)
         story += bullet_list(adapt_list_for_form(sec4['bullets'], _sec_form), styles) or [na_text(lang, styles)]
@@ -1609,6 +1666,13 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         story.append(Paragraph(S(lang, 'symptoms_general'), styles['body']))
 
     story += sub_block(f"4.3 {sub_title(lang,'4.3')}", styles)
+    # KKDİK Ek-2 A 4.3: hekime yönelik bilgi (özel antidot verisi yoksa semptomatik tedavi)
+    if lang in ('TR', 'EN'):
+        story.append(Paragraph(
+            'Semptomatik tedavi uygulayın. Hekime bu Güvenlik Bilgi Formunu veya ürün etiketini gösterin.'
+            if lang == 'TR' else
+            'Treat symptomatically. Show this Safety Data Sheet or the product label to the physician.',
+            styles['body']))
     story.append(Paragraph(
         term(lang,'poison_center'), styles['body']
     ))
@@ -1708,6 +1772,13 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         story += bullet_list(_s6['6.2'], styles)
         story += sub_block(f"6.3 {sub_title(lang,'6.3')}", styles)
         story += bullet_list(_s6['6.3'], styles)
+        # KKDİK Ek-2 A 6.3.3: uygunsuz kontrol altına alma / temizlik teknikleri
+        _s633 = ['Dökülen ürünü su ile seyrelterek kanalizasyona yıkamayın.' if lang == 'TR'
+                 else 'Do not flush spilled product into the sewer with water.']
+        if 'H290' in _h_all_first_aid:
+            _s633.append('Toplama ve depolama için metal kap veya ekipman kullanmayın.' if lang == 'TR'
+                         else 'Do not use metal containers or equipment for collection and storage.')
+        story += bullet_list(_s633, styles)
     else:
         story += sub_block(f"6.1 {sub_title(lang,'6.1')}", styles)
         story.append(Paragraph(S(lang,'personal_precautions'), styles['body']))
@@ -1747,12 +1818,18 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         if 'P264' in _p_all_codes:
             _hyg_skip.add(1)
         _sec7_bullets += [x for i, x in enumerate(_hyg) if i not in _hyg_skip]
+        # KKDİK Ek-2 A 7.1.1(ç): çevreye yayılmayı azaltma
+        _sec7_bullets.append('Çevreye yayılmasını önleyin; dökülmelerin önüne geçin ve kanalizasyondan, su '
+                             'yollarından uzak tutun.' if lang == 'TR' else
+                             'Prevent release to the environment; avoid spills and keep away from drains and '
+                             'watercourses.')
     else:
         sec7 = generate_section(7, h_codes)
         _sec7_bullets = adapt_list_for_form(sec7['bullets'], _sec_form)
     story += bullet_list(list(dict.fromkeys(_sec7_bullets)), styles) or [na_text(lang, styles)]
 
     story += sub_block(f"7.2 {sub_title(lang,'7.2')}", styles)
+    _incompat_idx = None
     if lang in ('TR', 'EN'):
         # 7.2 — ürünün depolama ifadeleri (SEA Ek-4 P4xx resmî metin)
         _sec72_bullets = reg_storage_p(_p_all_codes, _sec_form, lang)
@@ -1763,9 +1840,16 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 'Aşınmaya dayanıklı, iç kaplaması uygun orijinal kabında, kapalı olarak saklayın.'
                 if lang == 'TR' else
                 'Keep only in original corrosion-resistant container with a resistant inner liner, tightly closed.']
-        _sec72_bullets = list(_sec72_bullets) + [
-            'Uyumsuz malzemelerden uzak depolayın (bkz. Bölüm 10.5).' if lang == 'TR'
-            else 'Store away from incompatible materials (see Section 10.5).']
+        # KKDİK Ek-2 A 7.2(b): sıcaklık/güneş ışığı/havalandırma — ürünün P4xx ifadeleri bunu karşılamıyorsa
+        if not ({'P403', 'P235', 'P403+P235', 'P403+P233', 'P410', 'P410+P403', 'P411', 'P412'}
+                & set(_p_all_codes)):
+            _sec72_bullets = list(_sec72_bullets) + [
+                'Serin ve iyi havalandırılan bir yerde, doğrudan güneş ışığından ve ısı kaynaklarından uzakta '
+                'saklayın.' if lang == 'TR' else
+                'Store in a cool, well-ventilated place away from direct sunlight and sources of heat.']
+        # KKDİK Ek-2 A 7.2(a)(iv) ve B 7.2 başlığı: birlikte bulunmaması gereken maddeler adıyla.
+        # Liste Bölüm 10.5'te hesaplanır; yer tutucu o zaman doldurulur (bkz. _INCOMPAT_SLOT).
+        _sec72_bullets = list(_sec72_bullets) + [_INCOMPAT_SLOT]
         if _effervescent:
             _sec72_bullets = list(_sec72_bullets) + [
                 'Kuru yerde, nemden koruyarak, orijinal ambalajında depolayın (nemle karbondioksit açığa çıkar).'
@@ -1799,6 +1883,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
 
     if _sec72_bullets:
         story += bullet_list(_sec72_bullets, styles)
+        _incompat_idx = next((i for i in range(len(story) - 1, -1, -1)
+                              if _INCOMPAT_SLOT in str(getattr(story[i], 'text', ''))), None)
     else:
         story.append(Paragraph(
             get_sentence(lang,'storage_default') or S(lang,'storage_default'),
@@ -2407,6 +2493,12 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         incompat_set = {tr_en.get(i, i) for i in incompat_set}
 
     incompat_str = (', '.join(sorted(incompat_set)) + '.').capitalize()
+    # 7.2'deki yer tutucuyu 10.5 listesiyle doldur (iki bölüm aynı maddeleri adıyla söyler)
+    if _incompat_idx is not None:
+        _inc_low = ', '.join(sorted(incompat_set))
+        story[_incompat_idx] = Paragraph(
+            f"• {'Şu maddelerden uzak depolayın' if lang == 'TR' else 'Store away from'}: {_inc_low} "
+            f"({'bkz. Bölüm 10.5' if lang == 'TR' else 'see Section 10.5'}).", styles['bullet'])
 
     # ── 10.6 Bozunma ürünleri — 5.2 ile aynı kaynak (_decomp_str) ─────────────
     decomp_str = _decomp_str
@@ -2590,31 +2682,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                   else 'No specific symptoms expected as no health hazard classification applies.')
     tox_rows.append([('Belirtiler (11.1.6)' if _TR11 else 'Symptoms (11.1.6)'), _sym11])
 
-    # 11.1.7 Gecikmeli / hemen ortaya çıkan etkiler ve kronik etkiler
-    _h11 = set(all_h_codes or []) | set(h_codes or [])
-    _imm = sorted(_h11 & {'H300', 'H301', 'H302', 'H310', 'H311', 'H312', 'H330', 'H331', 'H332',
-                          'H314', 'H315', 'H318', 'H319', 'H335', 'H336', 'H370', 'H371', 'H304'})
-    _chron = sorted(h for h in _h11 if h[:4] in {'H340', 'H341', 'H350', 'H351', 'H360', 'H361', 'H362',
-                                                    'H372', 'H373'})
-    _sens = sorted(_h11 & {'H317', 'H334'})
-    _p117 = []
-    if _imm:
-        _p117.append(('Kısa süreli maruz kalmada etkiler genellikle hemen ortaya çıkar (' + ', '.join(_imm) + ').')
-                     if _TR11 else ('Effects of short-term exposure generally appear immediately ('
-                                    + ', '.join(_imm) + ').'))
-    if _sens:
-        _p117.append(('Hassaslaştırıcı etki (' + ', '.join(_sens) + ') tekrarlanan temasla gecikmeli (alerjik) '
-                      'reaksiyon olarak ortaya çıkabilir.') if _TR11 else
-                     ('Sensitising effects (' + ', '.join(_sens) + ') may appear as delayed (allergic) reactions '
-                      'after repeated contact.'))
-    if _chron:
-        _p117.append(('Uzun süreli/tekrarlı maruz kalmada kronik etkiler: ' + ', '.join(_chron) + '.') if _TR11
-                     else ('Chronic effects on long-term/repeated exposure: ' + ', '.join(_chron) + '.'))
-    else:
-        _p117.append('Uzun süreli/tekrarlı maruz kalmaya bağlı kronik etki sınıflandırması yoktur.' if _TR11
-                     else 'No classification for chronic effects of long-term/repeated exposure.')
+    # 11.1.7 Gecikmeli / hemen ortaya çıkan etkiler ve kronik etkiler (4.1 ile aynı metin)
     tox_rows.append([('Gecikmeli/hemen ortaya çıkan ve kronik etkiler (11.1.7)' if _TR11
-                      else 'Delayed/immediate and chronic effects (11.1.7)'), ' '.join(_p117)])
+                      else 'Delayed/immediate and chronic effects (11.1.7)'),
+                     _delayed_effects_text(set(all_h_codes or []) | set(h_codes or []), _TR11)])
 
     if len(tox_rows) > 1:
         story.append(data_table(tox_rows, [65*mm, 115*mm], styles))
@@ -3083,6 +3154,13 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     # 13.1b — Kanalizasyon yasağı (sucul tehlike H kodları varsa)
     if _disp.get('drain_note'):
         story.append(Paragraph(_disp['drain_note'], styles['body']))
+    elif lang in ('TR', 'EN'):
+        # KKDİK Ek-2 A 13.1(c): "Kanalizasyona verilmez."
+        story.append(Paragraph(
+            'Kanalizasyona verilmez; ürün ve kalıntıları kanalizasyona, yüzey sularına veya toprağa '
+            'boşaltılmamalıdır.' if lang == 'TR' else
+            'Do not discharge into the sewer; product and residues must not be released to drains, surface '
+            'water or soil.', styles['body']))
 
     # 13.1c — Kontamine ambalaj yönetimi (her zaman — KKDİK Ek-2 §13.1 zorunlu)
     story.append(Spacer(1, 3))
@@ -3207,8 +3285,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                else 'See Section 6 (accidental release), 7 (handling/storage) and 8 (PPE).'
 
     transport_rows = [
-        [sub_title(lang,'14.1') + ' (UN No)',   un_no + auto_note],
-        [sub_title(lang,'14.2'),                 ship_name],
+        # KKDİK Ek-2 Bölüm B: alt başlıklar numaralarıyla
+        ['14.1 ' + sub_title(lang,'14.1') + ' (UN No)',   un_no + auto_note],
+        ['14.2 ' + sub_title(lang,'14.2'),                 ship_name],
         # 14.3 — Her mod için ayrı satır
         [('14.3 ' + sub_title(lang,'14.3') + '\n  ↳ Karayolu / Demiryolu (ADR/RID)'
           if lang == 'TR' else
@@ -3217,8 +3296,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         ['  ↳ Denizyolu (IMDG)' if lang == 'TR' else '  ↳ Sea (IMDG)',  _sea_lbl],
         ['  ↳ Havayolu (IATA)'  if lang == 'TR' else '  ↳ Air (IATA)',  _air_lbl],
         # Sınıf 2 (gazlar/aerosoller) için ambalaj grubu yoktur
-        [sub_title(lang,'14.4'),                 pack_grp or term(lang, 'not_applicable')],
-        [sub_title(lang,'14.5'),                 env_haz],
+        ['14.4 ' + sub_title(lang,'14.4'),                 pack_grp or term(lang, 'not_applicable')],
+        ['14.5 ' + sub_title(lang,'14.5'),                 env_haz],
         ['  ↳ Deniz Kirletici (IMDG)' if lang == 'TR' else '  ↳ Marine Pollutant (IMDG)', _imdg_env],
         [('14.6 Kullanıcı için özel önlemler' if lang == 'TR'
           else '14.6 Special precautions for user'),  _sec14_6],
@@ -3238,6 +3317,13 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             'must appear on packages and transport documents.'
         )
         transport_rows.append([_ctm_label, _ctm_value])
+    # 14.7 — KKDİK Ek-2 A 14.7: yalnız MARPOL Ek II / IBC'ye göre dökme taşınması amaçlanan yükler için
+    transport_rows.append([
+        '14.7 ' + sub_title(lang, '14.7'),
+        'Uygulanamaz — ürün ambalajlı olarak taşınır; MARPOL 73/78 Ek II ve IBC Koduna göre dökme '
+        'taşımacılık amaçlanmamıştır.' if lang == 'TR' else
+        'Not applicable — the product is transported in packages; bulk transport according to '
+        'MARPOL 73/78 Annex II and the IBC Code is not intended.'])
     if _not_regulated:
         story.append(Paragraph(_not_reg_text, styles['body']))
         story.append(Spacer(1, 4))
@@ -3747,6 +3833,6 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         story.append(Paragraph(line, style))
 
     # ── PDF oluştur ──────────────────────────────────────────────────────────
-    doc.build(story, onFirstPage=_draw_page, onLaterPages=_draw_page)
+    doc.build(story, onFirstPage=_draw_page, onLaterPages=_draw_page, canvasmaker=_TotalPagesCanvas)
 
     return buf.getvalue()

@@ -623,6 +623,12 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
               <input type="checkbox" id="p_detergent" onchange="_toggleDetClass()"> Deterjan ürünü (Deterjanlar Hakkında Yönetmelik)
             </label>
           </div>
+          <div class="v0-field" style="grid-column:1/-1">
+            <label class="v0-label">Belirlenmiş Kullanım <span style="font-size:9px;color:var(--text3)">GBF 1.2 — KKDİK Ek-2</span></label>
+            <input class="v0-inp" type="text" id="pusage_desc" maxlength="300"
+                   placeholder="Ör: Endüstriyel bulaşık makinesi tableti">
+            <div style="font-size:9px;color:var(--text3);margin-top:3px">Ürünün ne için kullanıldığının kısa açıklaması. Boş bırakılırsa 1.2'ye "Sanayi ve mesleki kullanım." yazılır.</div>
+          </div>
         </div>
       </div>
     </div>
@@ -5739,6 +5745,7 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
     const payload = {
       lang: 'TR',
       product: { name: productName, form, usage,
+                 usage_desc: document.getElementById('pusage_desc')?.value?.trim() || '',   // GBF 1.2
                  is_detergent: !!document.getElementById('p_detergent')?.checked },
       supplier: (() => {
         const g = id => document.getElementById(id)?.value?.trim() || '';

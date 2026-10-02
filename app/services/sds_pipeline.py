@@ -219,7 +219,8 @@ def label_components(comps: list, mixture_h: list) -> list:
         return []
     found = []
     for c in comps:
-        name = (c.get('name_tr') or c.get('name') or c.get('cas') or '').strip()
+        from app.services.substance_lookup import clean_tr_name as _clean_tr
+        name = _clean_tr((c.get('name_tr') or c.get('name') or c.get('cas') or '').strip())
         if not name or 'mevzuata' in name.lower():
             continue
         conc = float(c.get('concMax') or c.get('conc') or 0)

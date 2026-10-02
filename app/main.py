@@ -412,9 +412,10 @@ async def generate_pdf(data: dict = Body(...)):
                 name = 'Mevzuata göre sınıflandırılmamıştır'
             if name_tr and 'mevzuata' in name_tr.lower():
                 name_tr = 'Mevzuata göre sınıflandırılmamıştır'
+            from app.services.substance_lookup import COMMON_NAMES_TR as _CN_TR, clean_tr_name as _clean_tr
             if not name_tr:   # Ek-6 dışı yaygın maddeler — Türkçe ad (eski kayıtlarda boş kalmasın)
-                from app.services.substance_lookup import COMMON_NAMES_TR as _CN_TR
                 name_tr = _CN_TR.get(str(c.get('cas_no') or c.get('cas') or '').strip(), '')
+            name_tr = _clean_tr(name_tr)   # Ek-6 Not B "nitrik asit ... %" → "nitrik asit"
             result['name']    = name
             result['name_tr'] = name_tr
 
@@ -531,7 +532,10 @@ async def generate_pdf(data: dict = Body(...)):
                 'version': revision_in.get('version', '1.0'),
                 'notes':   revision_in.get('notes', 'İlk yayın'),
             },
-            'ate_mix_details': {**data.get('ate_mix_details', {}), **_be_ate_details},
+            # ATEmix ve "bilinmeyen akut toksisite" ifadesi yalnız sınıflandırma hattından (tek kaynak);
+            # önceden arayüzün eski hesabı birleştiriliyordu — verisi olan bileşenler "bilinmeyen" sayılıyordu
+            'ate_mix_details': dict(_be_ate_details or {}),
+            'ate_from_pipeline': True,   # boş ATE ayrıntısı = bilinmeyen bileşen yok (yedek kontrol yapılmaz)
             'h314_neutralization_removed': bool(data.get('h314_neutralization_removed', False)),
             'clp_note_overrides': data.get('clp_note_overrides', {}),
             'ppe': py_ppe,
@@ -762,8 +766,9 @@ async def substance_lookup(cas: str, form: str = None):
             "found"     : True,
             "cas"       : cas,
             "name"      : result.get("name", ""),
-            "name_tr"   : (result.get("name_tr") or __import__('app.services.substance_lookup', fromlist=['x'])
-                           .COMMON_NAMES_TR.get(cas.strip(), "")),   # Türkçe SDS Bölüm 3 için
+            "name_tr"   : __import__('app.services.substance_lookup', fromlist=['x']).clean_tr_name(
+                              result.get("name_tr") or __import__('app.services.substance_lookup', fromlist=['x'])
+                              .COMMON_NAMES_TR.get(cas.strip(), "")),   # Türkçe SDS Bölüm 3 için
             "ec_no"     : result.get("ec_no", "") or get_ec_no(cas),
             "reach_no"  : _reach,
             "sea_ek6"   : result.get("sea_ek6", False),

@@ -504,8 +504,18 @@ _NOS_HAZARD_GROUPS: dict[str, list] = {
     'UN1954': [{'H220','H221'}],
     # Yanıcı sıvı (tekil)
     'UN1993': [{'H224','H225','H226'}],
-    # Korozif sıvı (tekil)
-    'UN1760': [{'H314'}],
+    # Aşındırıcı B.B.B. girişleri (ÖH 274) — tehlikeye en çok katkı veren en fazla iki aşındırıcı bileşen
+    'UN1760': [{'H314'}, {'H314'}],
+    'UN1759': [{'H314'}, {'H314'}],
+    'UN3264': [{'H314'}, {'H314'}],
+    'UN3265': [{'H314'}, {'H314'}],
+    'UN3266': [{'H314'}, {'H314'}],
+    'UN3267': [{'H314'}, {'H314'}],
+    'UN3260': [{'H314'}, {'H314'}],
+    'UN3261': [{'H314'}, {'H314'}],
+    'UN3262': [{'H314'}, {'H314'}],
+    'UN3263': [{'H314'}, {'H314'}],
+    'UN3244': [{'H314'}, {'H314'}],
     # Zehirli sıvı (tekil)
     'UN2810': [{'H300','H301','H310','H311','H330','H331'}],
     # Çevre için tehlikeli
@@ -585,7 +595,10 @@ def _nos_technical_names(un_no: str, components: list, lang: str = 'TR') -> str:
             name = primary
             if not name or name in seen:
                 continue
-            conc = float(c.get('concentration', 0) or 0)
+            conc = float(c.get('concentration', 0) or c.get('conc', 0) or 0)
+            # ADR 3.1.2.8.1.3: tehlikeye belirgin katkı — ilk ad seçildikten sonra %1'in altındakiler eklenmez
+            if selected and conc < 1.0:
+                continue
             candidates.append((conc, name))
 
         if candidates:
@@ -1325,7 +1338,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     # Bileşen listesinden doğrudan türet — yalnızca ATEmix hesabı hiç gelmediyse (eski istemci).
     # Hesap geldiyse o yetkilidir: resmî kaynaklı / REACH kayıtlı maddeleri "bilinmeyen" saymaz;
     # bu yedek kontrol onları yeniden bilinmeyen sayıp yanlış ibare ekliyordu.
-    if not _stmt_needed and not ate_mix_details:
+    if not _stmt_needed and not ate_mix_details and not sds_data.get('ate_from_pipeline'):
         for _cmp in components:
             _cmp_conc = float(_cmp.get('concentration') or _cmp.get('conc') or 0)
             if _cmp_conc < 1.0:
@@ -1604,8 +1617,25 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _CHLOR_CAS = {'75-09-2', '67-66-3', '71-55-6', '79-01-6', '127-18-4', '7647-01-0', '75-00-3',
                   '79-00-5', '106-93-4'}
     _dec = []
-    if any(h in h_codes for h in ['H224', 'H225', 'H226', 'H228', 'H242']):
+    # Karbon oksitler: alevlenir ürün veya organik bileşen (inorganik listesinde olmayan, su dışı) varsa
+    from app.services.tr_mevzuat_service import _INORGANIC_CAS as _INORG_DEC
+    _has_organic = any(c and c not in _INORG_DEC and c != '7732-18-5' for c in _cas_dec)
+    if any(h in h_codes for h in ['H224', 'H225', 'H226', 'H228', 'H242']) or _has_organic:
         _dec.append('Karbon oksitler (CO, CO₂)' if lang == 'TR' else 'Carbon oxides (CO, CO₂)')
+    # Azot / fosfor / kükürt içeren bileşenler — yanma/bozunmada oksitleri oluşur
+    _N_CAS = {'7697-37-2', '7631-99-4', '7757-79-1', '6484-52-2', '10124-37-5', '7632-00-0',
+              '141-43-5', '111-42-2', '102-71-6', '57-13-6', '60-00-4', '64-02-8', '6381-92-6',
+              '139-13-9', '5064-31-3', '1643-20-5', '68424-85-1', '7173-51-5', '12125-02-9'}
+    _P_CAS = {'7664-38-2', '7758-29-4', '7722-88-5', '7601-54-9', '7558-80-7', '7558-79-4',
+              '7778-77-0', '2809-21-4', '6419-19-8', '15827-60-8', '10213-79-3'}
+    _S_CAS = {'7664-93-9', '5329-14-6', '7681-38-1', '68584-22-5', '25155-30-0', '68891-38-3',
+              '151-21-3', '9004-82-4', '85536-14-7'}
+    if _cas_dec & _N_CAS:
+        _dec.append('Azot oksitler (NOx)' if lang == 'TR' else 'Nitrogen oxides (NOx)')
+    if _cas_dec & _P_CAS:
+        _dec.append('Fosfor oksitler' if lang == 'TR' else 'Phosphorus oxides')
+    if _cas_dec & _S_CAS:
+        _dec.append('Kükürt oksitler (SOx)' if lang == 'TR' else 'Sulphur oxides (SOx)')
     if _cas_dec & _CHLOR_CAS:
         _dec.append('Klorür bileşikleri (HCl, Cl₂)' if lang == 'TR' else 'Chloride compounds (HCl, Cl₂)')
     # NH₃ yalnızca bileşende amonyak/amonyak çözeltisi varsa
@@ -1614,7 +1644,14 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     if 'H400' in h_codes or 'H411' in h_codes:
         _dec.append('Sucul ortama zararlı organik fragmentler' if lang == 'TR'
                     else 'Harmful organic fragments to aquatic environment')
-    _decomp_str = ('; '.join(_dec) + '.') if _dec else S(lang, 'decomp_products')
+    if _dec:
+        _decomp_str = '; '.join(_dec) + '.'
+    elif _cas_dec and not _has_organic:
+        # Yalnız inorganik bileşenler (su dahil) — karbon oksit beklenmez
+        _decomp_str = ('Normal koşullarda tehlikeli bozunma ürünü oluşması beklenmez.' if lang == 'TR'
+                       else 'No hazardous decomposition products expected under normal conditions.')
+    else:
+        _decomp_str = S(lang, 'decomp_products')
 
     # Efervesan katı (asit + karbonat/bikarbonat) — 7.2, 10.3 ve 10.4 için
     _SOLID_ACID_CAS = {'77-92-9', '5949-29-1', '5329-14-6', '6915-15-7', '87-69-4', '124-04-9',
@@ -1627,10 +1664,14 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     story += sub_block(f"5.2 {sub_title(lang,'5.2')}", styles)
     _GENERIC_52 = {'Yangın gazlarından kaçınınız. Uygun solunum koruması.', 'Yangın gazlarından kaçının. Uygun solunum koruması.'}
     _b52 = [b for b in (sec5.get('bullets') or []) if str(b).strip() not in _GENERIC_52]
-    _b52.append(('Yanma sırasında tehlikeli ürünler oluşabilir: ' + _decomp_str
-                 + ' Yanma gazlarını solumayın.') if lang == 'TR' else
-                ('Hazardous combustion products may be formed: ' + _decomp_str
-                 + ' Do not breathe combustion gases.'))
+    if _dec:
+        _b52.append(('Yanma sırasında tehlikeli ürünler oluşabilir: ' + _decomp_str
+                     + ' Yanma gazlarını solumayın.') if lang == 'TR' else
+                    ('Hazardous combustion products may be formed: ' + _decomp_str
+                     + ' Do not breathe combustion gases.'))
+    else:
+        _b52.append('Ürün yanıcı değildir; çevredeki yangının duman ve gazlarını solumayın.' if lang == 'TR'
+                    else 'The product is not combustible; do not breathe smoke and gases from the surrounding fire.')
     story += bullet_list(_b52, styles)
 
     story += sub_block(f"5.3 {sub_title(lang,'5.3')}", styles)
@@ -1703,6 +1744,16 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     if lang in ('TR', 'EN'):
         # 7.2 — ürünün depolama ifadeleri (SEA Ek-4 P4xx resmî metin)
         _sec72_bullets = reg_storage_p(_p_all_codes, _sec_form, lang)
+        # KKDİK Ek-2 7.2: birlikte bulunmaması gereken maddeler + aşındırıcı üründe kap malzemesi
+        _h72 = set(all_h_codes or []) | set(h_codes or [])
+        if _h72 & {'H314', 'H290'} and 'P406' not in _p_all_codes:   # P406 varsa zaten yazılır
+            _sec72_bullets = list(_sec72_bullets) + [
+                'Aşınmaya dayanıklı, iç kaplaması uygun orijinal kabında, kapalı olarak saklayın.'
+                if lang == 'TR' else
+                'Keep only in original corrosion-resistant container with a resistant inner liner, tightly closed.']
+        _sec72_bullets = list(_sec72_bullets) + [
+            'Uyumsuz malzemelerden uzak depolayın (bkz. Bölüm 10.5).' if lang == 'TR'
+            else 'Store away from incompatible materials (see Section 10.5).']
         if _effervescent:
             _sec72_bullets = list(_sec72_bullets) + [
                 'Kuru yerde, nemden koruyarak, orijinal ambalajında depolayın (nemle karbondioksit açığa çıkar).'
@@ -1800,6 +1851,12 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 if lang == 'TR' else 'Provide adequate general and local exhaust ventilation where vapour/mist is formed.')
     else:
         _eng = ('Yeterli genel havalandırma sağlayın.' if lang == 'TR' else 'Provide adequate general ventilation.')
+    # Mesleki maruz kalma sınır değeri olan bileşen varsa (8.1) — sınır değerin altında tutma
+    if any(r.get('tw_ppm') or r.get('tw_mgm3') or r.get('stel_ppm') or r.get('stel_mgm3') for r in (oel_rows or [])):
+        _eng += (' Ortam konsantrasyonunu 8.1\'deki mesleki maruz kalma sınır değerlerinin altında tutmak için '
+                 'gerektiğinde lokal egzoz havalandırması kullanın.' if lang == 'TR' else
+                 ' Where necessary use local exhaust ventilation to keep airborne concentrations below the '
+                 'occupational exposure limits in 8.1.')
     story.append(Paragraph(
         f"<b>8.2.1 {'Uygun mühendislik kontrolleri' if lang == 'TR' else 'Appropriate engineering controls'}:</b> "
         f"{_eng}", styles['body']))
@@ -1926,27 +1983,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     pcn_required = _pcn_base
     pcn_missing = [k for k in pcn_required if not phys.get(k)]
 
-    # Sıvı ürün + yanıcı sıvı bileşen girilmemişse parlama noktası hesaplanamaz uyarısı
-    _FLAM_LIQ_H = {'H224', 'H225', 'H226', 'H227'}
-    # Su (7732-18-5) veya seyreltici CAS'lar girilmişse parlama noktası hesabı zaten anlamsız
-    # (su için uyarı bastırılır — yanıcı değil ama sıvı karışım oluşturur).
-    _DILUENT_CAS = {'7732-18-5', '7664-41-7', '124-38-9', '7727-37-9'}
-    _comp_cas_all = {(c.get('cas_no') or c.get('cas') or '').strip() for c in components}
-    if (lang == 'TR'
-            and product.get('form', '') == 'liquid'
-            and not phys.get('flash_point')
-            and not (_comp_cas_all & _DILUENT_CAS)):
-        _comp_h_all = set()
-        for _c in components:
-            for _h in (_c.get('h_codes') or _c.get('hazard_statements') or []):
-                _comp_h_all.add(_h if isinstance(_h, str) else _h.get('code', ''))
-        if not (_comp_h_all & _FLAM_LIQ_H):
-            story.append(Paragraph(
-                "<font color='orange'>⚠ Ürün formu sıvı ancak hiçbir bileşende yanıcı sıvı "
-                "(H224/H225/H226) bulunmuyor. Parlama noktası hesaplanamaz — "
-                "bileşen listesini kontrol edin.</font>",
-                styles['small']
-            ))
+    # Not: "⚠ Ürün formu sıvı ancak … bileşen listesini kontrol edin" program uyarısı GBF'ye
+    # basılmıyor (resmî belgeye iç teknik mesaj girmez; Bölüm 9(f) zaten gerekçeyi yazar).
 
     # Sıvı ürün için viskozite ve çözünürlük eksikliği uyarısı
     # KKDİK Ek-2 Bölüm 9: Sıvı karışımlarda bu parametreler "Bilgi yok" bırakılamaz
@@ -2495,6 +2533,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             if _k == 'a':
                 _basis = (' Karışım test edilmemiştir; sınıflandırma ATEmix hesabıyla yapılmıştır (aşağıda).' if _TR11
                           else ' Mixture not tested; classified by ATEmix calculation (below).')
+            # H318 yalnız H314'ten türetilmişse gerekçe bileşen listesi değil, H314'tür
+            if _k == 'c' and set(_hit) == {'H318'} and 'H314' in _h11_base:
+                _basis = (' Cilt aşındırıcılık (H314) sınıflandırmasından türetilmiştir.' if _TR11 else
+                          ' Derived from the skin corrosion (H314) classification.')
             tox_rows.append([f'({_k}) {_ltr if _TR11 else _len}', ' '.join(_parts) + _basis])
         else:
             _src = _contrib(_codes)

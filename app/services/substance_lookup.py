@@ -388,6 +388,24 @@ def _load_sea_ek6() -> Dict:
 
 # SEA Ek-6'da yer almayan (Türkçe adı resmî listede bulunmayan) yaygın maddeler — GBF Türkçe
 # yazılır; Ek-6 adı varsa her zaman o kullanılır, bu liste yalnızca boşluğu doldurur.
+import re as _re_clean
+
+
+def clean_tr_name(name: str) -> str:
+    """SEA Ek-6 Not B adlarındaki doldurulacak konsantrasyon kalıbını temizler:
+    "nitrik asit ... %" → "nitrik asit"; "fosforik asit ... %, ortofosforik asit ... %" → "fosforik asit"
+    (eşanlamlı tekrar atılır); "…, aktif Cl % ..... çözeltisi" → "…, aktif Cl çözeltisi"."""
+    if not name:
+        return name
+    s = str(name)
+    if _re_clean.search(r'(\.{3}|…)\s*%', s):
+        parts = [p.strip(' ,;') for p in _re_clean.split(r'(?:\.{3}|…)\s*%', s)]
+        parts = [p for p in parts if p]
+        return parts[0] if parts else s.strip()
+    s = _re_clean.sub(r'\s*%\s*(?:\.{2,}|…)\s*', ' ', s)
+    return _re_clean.sub(r'\s{2,}', ' ', s).strip()
+
+
 COMMON_NAMES_TR = {
     '7732-18-5':  'su',
     '77-92-9':    'sitrik asit',

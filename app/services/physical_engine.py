@@ -2507,12 +2507,30 @@ def calculate(comps: List[Dict], form: str = 'liquid',
             if 'H272' in h_codes: return 2
             return 0
 
+        def _ek6_ox_min(cas: str):
+            """SEA Ek-6'da maddenin oksitleyici sınıfı için özel konsantrasyon sınırı varsa en düşüğü
+            (örn. nitrik asit: Ox. Liq. 3 ≥ %65). Bu sınırın altında madde oksitleyici sayılmaz."""
+            try:
+                from app.services.substance_lookup import _load_sea_ek6
+                _db = _load_sea_ek6() or {}
+                _e = _db.get(cas) or {}
+                if '_alias' in _e:
+                    _e = _db.get(_e['_alias']) or {}
+                _mins = [float(s['min']) for s in (_e.get('scl_limits') or [])
+                         if s.get('h_code') in ('H271', 'H272') and s.get('min') is not None]
+                return min(_mins) if _mins else None
+            except Exception:
+                return None
+
         ox_liq_triggers: list = []
         for c in comps:
             cat = _ox_liq_cat(c)
             if not cat:
                 continue
             conc = float(c.get('concMax') or c.get('conc') or 0)
+            _ox_min = _ek6_ox_min((c.get('cas') or c.get('cas_no') or '').strip())
+            if _ox_min is not None and conc < _ox_min:
+                continue   # Ek-6 SCL'nin altında — oksitleyici katkısı yok, test kararı sorulmaz
             if conc > 0:
                 ox_liq_triggers.append({
                     'cas':      c.get('cas') or c.get('cas_no') or '',
@@ -2743,6 +2761,23 @@ def calculate(comps: List[Dict], form: str = 'liquid',
             'measured': False, 'estimate_only': True, 'method': '—', 'standard': '',
             'note': 'Katı üründe bileşenlerden hesaplanmaz — ölçüm (ör. ISO 1183 / yığın yoğunluğu) girin.',
         }
+
+    # Bileşim %100'e tamamlanmamışsa (örn. su girilmemiş) karışım özellikleri yalnız girilen
+    # bileşenlerden hesaplanır ve yanıltıcı olur (örn. %15 nitrik asitli sulu üründe 1,9 g/cm³) →
+    # ölçüm girilmediyse Bölüm 9'a değer yazılmaz.
+    _tot_conc = sum(float(c.get('concMax') or c.get('conc') or 0) for c in comps)
+    if 0 < _tot_conc < 95:
+        for _k, _v in list(theo_props.items()):
+            if isinstance(_v, dict) and _v.get('value') is not None and not _v.get('measured'):
+                theo_props[_k] = {
+                    'value': None, 'display': 'Belirlenmemiştir', 'estimate': _v.get('value'),
+                    'measured': False, 'estimate_only': True, 'method': '—', 'standard': '',
+                    'note': (f'Bileşim toplamı %{_tot_conc:.0f} — %100\'e tamamlanmadığı için karışım '
+                             'değeri hesaplanmaz (eksik bileşeni, örn. suyu ekleyin veya ölçüm girin).'),
+                }
+            elif isinstance(_v, dict) and _v.get('text') and not _v.get('measured'):
+                theo_props[_k] = {**_v, 'text': None, 'value': None, 'display': 'Belirlenmemiştir',
+                                  'estimate_only': True}
 
     # Pastada bileşen viskozitelerinden hesap (çoğunlukla su/çözücü) ürünün gerçek kıvamını
     # yansıtmaz (koyulaştırıcı, katı dolgu) → ölçüm girilmediyse Bölüm 9'a değer yazılmaz.

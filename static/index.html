@@ -912,6 +912,26 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
           <div style="font-size:9px;color:var(--text3);margin-top:3px">Nano toz: &lt;1 µm · İnce toz: &lt;100 µm · Kaba toz: &gt;100 µm</div>
         </div>
 
+        <!-- Özgül yüzey alanı: katı/toz için (KKDİK Ek-2 9.1(a)) -->
+        <div class="phys-fw" data-forms="solid powder" data-mandatory="">
+          <div class="phys-fh">
+            <label>Özgül Yüzey Alanı <span style="font-size:9px;color:var(--text3)">KKDİK Ek-2 §9.1(a)</span></label>
+          </div>
+          <input type="text" id="tf_specific_surface" placeholder="Ör: 1,5 m²/g (BET)">
+        </div>
+
+        <!-- Toz patlaması: katı/toz için (KKDİK Ek-2 2.3) -->
+        <div class="phys-fw" data-forms="solid powder" data-mandatory="">
+          <div class="phys-fh">
+            <label>Toz Patlaması</label>
+          </div>
+          <label style="display:flex;align-items:center;gap:8px;padding:6px 0;font-size:12px;cursor:pointer">
+            <input type="checkbox" id="cb_dust_expl" style="width:14px;height:14px">
+            Toz patlaması riski var (yanıcı ince toz)
+          </label>
+          <div style="font-size:9px;color:var(--text3);margin-top:3px">İşaretlenirse Bölüm 2.3'e KKDİK Ek-2'deki ifade yazılır: "Eğer yayılırsa, patlayabilen toz-hava karışımı oluşabilir."</div>
+        </div>
+
         <!-- Dökme Yoğunluğu: katı/toz için -->
         <div class="phys-fw" data-forms="solid powder" data-mandatory="">
           <div class="phys-fh">
@@ -5522,6 +5542,9 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
     if (!flatPhys.decomposition_temp && _val(tp.decomp_temp)) flatPhys.decomposition_temp = _val(tp.decomp_temp);
     const _psEl = document.getElementById('tf_particle_size');
     if (_psEl && _psEl.value.trim() && !_psEl.disabled) flatPhys.particle_size = _psEl.value.trim();
+    const _ssaEl = document.getElementById('tf_specific_surface');
+    if (_ssaEl && _ssaEl.value.trim()) flatPhys.specific_surface = _ssaEl.value.trim();
+    if (document.getElementById('cb_dust_expl')?.checked) flatPhys.dust_explosion = true;
     const _dispEl = document.getElementById('tf_dispersibility');
     if (_dispEl && _dispEl.value.trim() && !_dispEl.disabled) flatPhys.dispersibility = _dispEl.value.trim();
     const _hygrEl = document.getElementById('tf_hygroscopicity');

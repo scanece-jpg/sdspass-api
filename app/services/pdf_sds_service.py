@@ -1411,6 +1411,11 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     story.append(Paragraph(
         f"Endokrin Bozucu Özellikler: {ed_text}", styles['small']
     ))
+    # KKDİK Ek-2 2.3: toz patlaması zararlılığı varsa yönetmelikteki ifade
+    if phys.get('dust_explosion') in (True, 'true', '1', 1) and (product.get('form') in ('solid', 'powder')):
+        story.append(Paragraph(
+            'Eğer yayılırsa, patlayabilen toz-hava karışımı oluşabilir.' if lang == 'TR'
+            else 'May form explosible dust-air mixture if dispersed.', styles['small']))
 
     # ─────────────────────────────────────────────────────────────────────────
     # BÖLÜM 3 — Bileşimler
@@ -2088,6 +2093,11 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _ps = _ps.get('display') if isinstance(_ps, dict) else _ps
     if _is_solid_form and _have(_ps):
         _app = f"{_app}; {_L('tane boyutu', 'particle size')}: {_ps}"
+    # KKDİK Ek-2 9.1(a): katıda granülometri ve özgül yüzey alanı
+    _ssa = phys.get('specific_surface')
+    _ssa = _ssa.get('display') if isinstance(_ssa, dict) else _ssa
+    if _is_solid_form and _have(_ssa):
+        _app = f"{_app}; {_L('özgül yüzey alanı', 'specific surface area')}: {_ssa}"
 
     # (ç) pH — katıda sulu çözeltinin konsantrasyonu belirtilir (Ek-2 9.1(ç))
     _ph_conc_raw = phys.get('ph_conc') or '1'

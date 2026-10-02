@@ -386,10 +386,42 @@ def _load_sea_ek6() -> Dict:
     return _SEA_EK6_DB
 
 
+# SEA Ek-6'da yer almayan (Türkçe adı resmî listede bulunmayan) yaygın maddeler — GBF Türkçe
+# yazılır; Ek-6 adı varsa her zaman o kullanılır, bu liste yalnızca boşluğu doldurur.
+COMMON_NAMES_TR = {
+    '7732-18-5':  'su',
+    '77-92-9':    'sitrik asit',
+    '5949-29-1':  'sitrik asit monohidrat',
+    '6915-15-7':  'malik asit',
+    '87-69-4':    'tartarik asit',
+    '124-04-9':   'adipik asit',
+    '110-17-8':   'fumarik asit',
+    '144-55-8':   'sodyum hidrojen karbonat',
+    '7757-82-6':  'sodyum sülfat',
+    '56-81-5':    'gliserol',
+    '57-55-6':    'propilen glikol',
+    '68213-23-0': 'alkoller, C12-18, etoksillenmiş',
+    '68439-46-3': 'alkoller, C9-11, etoksillenmiş',
+    '68131-39-5': 'alkoller, C12-15, etoksillenmiş',
+    # gazlar
+    '7727-37-9':  'azot',
+    '124-38-9':   'karbondioksit',
+    '7440-37-1':  'argon',
+    '7440-59-7':  'helyum',
+    '7440-01-9':  'neon',
+    '7439-90-9':  'kripton',
+    '7440-63-3':  'ksenon',
+    '2551-62-4':  'kükürt hekzaflorür',
+    '10024-97-2': 'diazot monoksit',
+}
+
+
 def _fill_tr_name(result: dict) -> dict:
-    """Katman 2/3 sonucunda name_tr boşsa SEA Ek-6 sözlüğünden tamamla."""
+    """Katman 2/3 sonucunda name_tr boşsa SEA Ek-6 sözlüğünden, o da yoksa yaygın adlar
+    listesinden tamamla."""
     if result.get('name_tr'):
         return result
+    _common = COMMON_NAMES_TR.get(str(result.get('cas') or result.get('cas_no') or '').strip())
     _load_sea_ek6()  # indeksler yüklü olsun
     ec  = result.get('ec_no', '').strip()
     idx = result.get('index_no', '').strip()
@@ -398,8 +430,8 @@ def _fill_tr_name(result: dict) -> dict:
         tr = _TR_NAME_BY_EC.get(ec, '')
     if not tr and idx and _TR_NAME_BY_IDX:
         tr = _TR_NAME_BY_IDX.get(idx, '')
-    if tr:
-        result['name_tr'] = tr
+    if tr or _common:
+        result['name_tr'] = tr or _common
     return result
 
 

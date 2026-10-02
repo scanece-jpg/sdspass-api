@@ -412,6 +412,9 @@ async def generate_pdf(data: dict = Body(...)):
                 name = 'Mevzuata göre sınıflandırılmamıştır'
             if name_tr and 'mevzuata' in name_tr.lower():
                 name_tr = 'Mevzuata göre sınıflandırılmamıştır'
+            if not name_tr:   # Ek-6 dışı yaygın maddeler — Türkçe ad (eski kayıtlarda boş kalmasın)
+                from app.services.substance_lookup import COMMON_NAMES_TR as _CN_TR
+                name_tr = _CN_TR.get(str(c.get('cas_no') or c.get('cas') or '').strip(), '')
             result['name']    = name
             result['name_tr'] = name_tr
 
@@ -723,6 +726,8 @@ async def substance_lookup(cas: str, form: str = None):
                     "found"     : True,
                     "cas"       : cas,
                     "name"      : echa.get("name", ""),
+                    "name_tr"   : __import__('app.services.substance_lookup', fromlist=['x'])
+                                  .COMMON_NAMES_TR.get(cas.strip(), ""),
                     "ec_no"     : echa.get("ec_no", "") or get_ec_no(cas),
                     "reach_no"       : get_reg_no(cas),
                     "sea_ek6"        : False,
@@ -757,7 +762,8 @@ async def substance_lookup(cas: str, form: str = None):
             "found"     : True,
             "cas"       : cas,
             "name"      : result.get("name", ""),
-            "name_tr"   : result.get("name_tr", ""),   # Türkçe SDS Bölüm 3 için
+            "name_tr"   : (result.get("name_tr") or __import__('app.services.substance_lookup', fromlist=['x'])
+                           .COMMON_NAMES_TR.get(cas.strip(), "")),   # Türkçe SDS Bölüm 3 için
             "ec_no"     : result.get("ec_no", "") or get_ec_no(cas),
             "reach_no"  : _reach,
             "sea_ek6"   : result.get("sea_ek6", False),
@@ -978,8 +984,8 @@ async def p_codes_assign(body: dict):
     lang       = body.get("lang", "TR")
     max_label  = body.get("max_label", 6)
     try:
-        result = assign_p_codes(h_codes, signal, usage=usage)
         _pform = body.get("form", "liquid")
+        result = assign_p_codes(h_codes, signal, mixture_form=_pform, usage=usage)
         result["label"]    = select_label_p_codes(result["p_codes"], max_label, h_codes=h_codes, euh_codes=euh_codes,
                                                   usage=usage, form=_pform)
         result["sds"]      = classify_sds_p_codes(result["p_codes"], usage=usage, h_codes=h_codes, form=_pform,

@@ -24,7 +24,7 @@ from reportlab.lib.styles import ParagraphStyle, getSampleStyleSheet
 from reportlab.lib.enums import TA_LEFT, TA_CENTER, TA_RIGHT
 from reportlab.platypus import (
     SimpleDocTemplate, Paragraph, Spacer, Table, TableStyle,
-    PageBreak, HRFlowable, KeepTogether
+    PageBreak, HRFlowable, KeepTogether, CondPageBreak
 )
 from reportlab.pdfbase import pdfmetrics
 from reportlab.pdfbase.ttfonts import TTFont
@@ -516,18 +516,8 @@ _NOS_HAZARD_GROUPS: dict[str, list] = {
 
 _EK6_CACHE: dict | None = None
 
-# SEA Ek-6'da yer almayan (Türkçe adı veritabanında bulunmayan) yaygın gazlar — B.B.B. teknik adı
-_GAS_NAMES_TR = {
-    '7727-37-9':  'azot',
-    '124-38-9':   'karbondioksit',
-    '7440-37-1':  'argon',
-    '7440-59-7':  'helyum',
-    '7440-01-9':  'neon',
-    '7439-90-9':  'kripton',
-    '7440-63-3':  'ksenon',
-    '2551-62-4':  'kükürt hekzaflorür',
-    '10024-97-2': 'diazot monoksit',
-}
+# Ek-6 dışı yaygın maddelerin Türkçe adları — tek kaynak substance_lookup
+from app.services.substance_lookup import COMMON_NAMES_TR as _GAS_NAMES_TR
 
 
 def _ek6_own_name(cas: str, raw: str) -> str:
@@ -814,7 +804,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     version = rev.get('version', '1.0')
 
     # Header/Footer için callback fonksiyonları
-    header_text = product_name
+    # Sayfa başlığı kapaktaki ürün adıyla aynı yazılır (fazla boşluklar tekleşir)
+    header_text = ' '.join(str(product_name).split()).upper()
     footer_text = f"Rev.{rev_no} | {rev_date}"
 
     # Font güvenlik kontrolü — DejaVuSans yoksa Helvetica fallback
@@ -873,7 +864,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         [term(lang,'product_name'), Paragraph(f"<b>{product_name.upper()}</b>", styles['body'])],
         [term(lang,'product_code'), product.get('code','—')],
         [term(lang,'revision_date'), rev_date],
-        ['Version', version],
+        [term(lang,'version'), version],
         [term(lang,'regulation'), L.get('regulation','')],
     ], [45*mm, 135*mm], styles, header=False))
     story.append(Spacer(1, 8))
@@ -997,6 +988,28 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     }
     _route_sfx = _ROUTE_SUFFIX_TR if lang == 'TR' else _ROUTE_SUFFIX_EN
 
+    def _mask_concs(text: str) -> str:
+        """Metindeki "CAS %49.0" / "ad (%20.0" gibi kesin bileşen konsantrasyonlarını, Bölüm 3'te
+        aralıkla verilen (ticari sır) bileşenler için aynı ECHA aralığına çevirir."""
+        if not text:
+            return text
+        for _c in components:
+            _cas = str(_c.get('cas_no') or _c.get('cas') or '').strip()
+            if not _cas or disclosure.get(_cas, 'range') == 'show':
+                continue
+            try:
+                _cv = float(_c.get('conc_max') or _c.get('concentration') or _c.get('conc') or 0)
+            except (TypeError, ValueError):
+                _cv = 0.0
+            if _cv <= 0:
+                continue
+            _rng = get_echa_range(_cv)
+            for _key in {_cas, _c.get('name') or '', _c.get('name_tr') or ''}:
+                if _key:
+                    text = _re.sub(_re.escape(_key) + r'(\s*\(?)\s*%\s*\d+(?:[.,]\d+)?',
+                                   lambda m, k=_key, r=_rng: k + m.group(1) + r, text)
+        return text
+
     clf_rows = []
     seen_clf  = set()
     clf_notes = {}   # {h_code_4: {'flag': str, 'note': str}} — tabloda gösterilecek notlar
@@ -1017,23 +1030,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                         row[1] = row[1] + ' + H229'
             continue  # ayrı satır ekleme
         reason = entry.get('reason','')
-        # Gerekçe metnindeki açık konsantrasyon değerlerini disclosure_map'e göre maskele.
-        # Format: "CAS %99.0 ≥ kesme %X" → CAS disclosure'ı 'show' değilse %99.0 → aralığa çevir.
-        _entry_conc = entry.get('conc')
-        if reason and _entry_conc is not None and disclosure:
-            import re as _re_clf
-            # CAS numarasını reason'dan çıkar (format: "CAS_NO %...")
-            _cas_m = _re_clf.match(r'^(\S+)\s+%', reason)
-            if _cas_m:
-                _r_cas = _cas_m.group(1)
-                _r_lvl = disclosure.get(str(_r_cas).strip(), 'range')
-                if _r_lvl != 'show':
-                    _r_range = get_echa_range(float(_entry_conc))
-                    reason = _re_clf.sub(
-                        rf'%{float(_entry_conc):.1f}',
-                        f'≥{_r_range.replace("≥","").strip()}',
-                        reason, count=1
-                    )
+        # Gerekçe metnindeki kesin konsantrasyonlar Bölüm 3 ile aynı gizlilikte verilir
+        # (önceden satırlarda 'conc' alanı taşınmadığı için maskeleme hiç çalışmıyordu)
+        reason = _mask_concs(reason)
         conc_info = reason or entry.get('cutoff_used','') or '—'
         # h_code'dan yetkili h_class türet (DB bozukluğuna karşı düzelt)
         raw_hclass  = entry.get('h_class', '')
@@ -1581,8 +1580,40 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     extinguisher = sec5.get('extinguisher') or term(lang,'not_available')
     story.append(Paragraph(extinguisher, styles['body']))
 
+    # Tehlikeli bozunma/yanma ürünleri — 5.2 ve 10.6 aynı metni kullanır (KKDİK Ek-2 5.2: yanma
+    # sırasında oluşan tehlikeli ürünler belirtilir)
+    _cas_dec = {str(c.get('cas_no') or c.get('cas') or '').strip() for c in components}
+    _CHLOR_CAS = {'75-09-2', '67-66-3', '71-55-6', '79-01-6', '127-18-4', '7647-01-0', '75-00-3',
+                  '79-00-5', '106-93-4'}
+    _dec = []
+    if any(h in h_codes for h in ['H224', 'H225', 'H226', 'H228', 'H242']):
+        _dec.append('Karbon oksitler (CO, CO₂)' if lang == 'TR' else 'Carbon oxides (CO, CO₂)')
+    if _cas_dec & _CHLOR_CAS:
+        _dec.append('Klorür bileşikleri (HCl, Cl₂)' if lang == 'TR' else 'Chloride compounds (HCl, Cl₂)')
+    # NH₃ yalnızca bileşende amonyak/amonyak çözeltisi varsa
+    if _cas_dec & {'1336-21-6', '7664-41-7'}:
+        _dec.append('NH₃' if lang == 'TR' else 'NH₃ (ammonia)')
+    if 'H400' in h_codes or 'H411' in h_codes:
+        _dec.append('Sucul ortama zararlı organik fragmentler' if lang == 'TR'
+                    else 'Harmful organic fragments to aquatic environment')
+    _decomp_str = ('; '.join(_dec) + '.') if _dec else S(lang, 'decomp_products')
+
+    # Efervesan katı (asit + karbonat/bikarbonat) — 7.2, 10.3 ve 10.4 için
+    _SOLID_ACID_CAS = {'77-92-9', '5949-29-1', '5329-14-6', '6915-15-7', '87-69-4', '124-04-9',
+                       '110-17-8', '7681-38-1'}
+    _CARBONATE_CAS = {'497-19-8', '5968-11-6', '6132-02-1', '144-55-8', '15630-89-4', '584-08-7',
+                      '298-14-6'}
+    _effervescent = ((product.get('form') or '') in ('solid', 'powder')
+                     and bool(_cas_dec & _SOLID_ACID_CAS) and bool(_cas_dec & _CARBONATE_CAS))
+
     story += sub_block(f"5.2 {sub_title(lang,'5.2')}", styles)
-    story += bullet_list(sec5['bullets'], styles) or [na_text(lang, styles)]
+    _GENERIC_52 = {'Yangın gazlarından kaçınınız. Uygun solunum koruması.', 'Yangın gazlarından kaçının. Uygun solunum koruması.'}
+    _b52 = [b for b in (sec5.get('bullets') or []) if str(b).strip() not in _GENERIC_52]
+    _b52.append(('Yanma sırasında tehlikeli ürünler oluşabilir: ' + _decomp_str
+                 + ' Yanma gazlarını solumayın.') if lang == 'TR' else
+                ('Hazardous combustion products may be formed: ' + _decomp_str
+                 + ' Do not breathe combustion gases.'))
+    story += bullet_list(_b52, styles)
 
     story += sub_block(f"5.3 {sub_title(lang,'5.3')}", styles)
     story.append(Paragraph(
@@ -1590,7 +1621,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         styles['body']
     ))
 
-    story.append(PageBreak())
+    story.append(CondPageBreak(60*mm))   # yalnız sayfa sonunda yer yoksa yeni sayfa (boş sayfa kalmasın)
 
     # ─────────────────────────────────────────────────────────────────────────
     # BÖLÜM 6 — Kaza
@@ -1654,6 +1685,12 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     if lang in ('TR', 'EN'):
         # 7.2 — ürünün depolama ifadeleri (SEA Ek-4 P4xx resmî metin)
         _sec72_bullets = reg_storage_p(_p_all_codes, _sec_form, lang)
+        if _effervescent:
+            _sec72_bullets = list(_sec72_bullets) + [
+                'Kuru yerde, nemden koruyarak, orijinal ambalajında depolayın (nemle karbondioksit açığa çıkar).'
+                if lang == 'TR' else
+                'Store in a dry place, protected from moisture, in the original packaging (releases carbon '
+                'dioxide with moisture).']
     else:
         # H kodu bazlı depolama metinleri (slot 72) — H224/H225/H226/H314 için özel
         sec72 = generate_section(72, h_codes)
@@ -1725,22 +1762,32 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     else:
         story.append(Paragraph(S(lang,'oel_reference'), styles['body']))
 
-    # PNOC genel toz limiti — katı/toz formda her zaman göster
-    if _b7_is_solid:
-        _pnoc_tr = (
-            '<b>Genel Toz Limiti (PNOC):</b> Bileşene özgü mesleki maruziyet sınırı '
-            'bulunmayan tozlar için: İnhalable (solunabilir) toz — TWA 10 mg/m³; '
-            'Solunum fraksiyonu (respirable) — TWA 4 mg/m³. '
-            'Kaynak: 12.08.2013/28733 sayılı Yönetmelik Ek-1.'
-        )
-        _pnoc_en = (
-            '<b>Generic Dust Limit (PNOC):</b> For dusts without a substance-specific OEL: '
-            'Inhalable fraction — TWA 10 mg/m³; Respirable fraction — TWA 4 mg/m³. '
-            'Source: Turkish Chemical Agents Regulation (OG No. 28733, 12.08.2013) Annex-1.'
-        )
-        story.append(Paragraph(_pnoc_tr if lang == 'TR' else _pnoc_en, styles['small']))
+    # Not: "Genel toz limiti (PNOC) 10/4 mg/m³ — 28733 Ek-1" satırı kaldırıldı: resmî yönetmelik
+    # metninde (Ek-1) böyle bir değer yoktur.
 
     story += sub_block(f"8.2 {sub_title(lang,'8.2')}", styles)
+
+    # 8.2.1 Uygun mühendislik kontrolleri (KKDİK Ek-2 8.2.1)
+    _f82 = (product.get('form') or 'liquid')
+    _h82 = set(all_h_codes or []) | set(h_codes or [])
+    if _f82 in ('solid', 'powder'):
+        _eng = ('Toz oluşumunu en aza indirin; toz oluşan işlemlerde lokal egzoz havalandırması kullanın.'
+                if lang == 'TR' else 'Minimise dust generation; use local exhaust ventilation where dust is formed.')
+    elif _f82 in ('gas', 'aerosol'):
+        _eng = ('Yeterli genel ve lokal egzoz havalandırması sağlayın; kapalı alanlarda gaz/buhar birikmesini önleyin.'
+                if lang == 'TR' else 'Provide adequate general and local exhaust ventilation; prevent accumulation of '
+                'gas/vapour in enclosed spaces.')
+    elif _h82 & {'H224', 'H225', 'H226', 'H330', 'H331', 'H332', 'H335', 'H336', 'H334'}:
+        _eng = ('Buhar/sis oluşan işlemlerde yeterli genel ve lokal egzoz havalandırması sağlayın.'
+                if lang == 'TR' else 'Provide adequate general and local exhaust ventilation where vapour/mist is formed.')
+    else:
+        _eng = ('Yeterli genel havalandırma sağlayın.' if lang == 'TR' else 'Provide adequate general ventilation.')
+    story.append(Paragraph(
+        f"<b>8.2.1 {'Uygun mühendislik kontrolleri' if lang == 'TR' else 'Appropriate engineering controls'}:</b> "
+        f"{_eng}", styles['body']))
+    story.append(Paragraph(
+        f"<b>8.2.2 {'Bireysel koruyucu önlemler, örneğin kişisel koruyucu ekipman' if lang == 'TR' else 'Individual protection measures, such as personal protective equipment'}:</b>",
+        styles['body']))
 
     # Python PPE motoru çıktısı (sds_data['ppe']) tercih edilir;
     # yoksa generate_section fallback kullanılır.
@@ -1802,6 +1849,26 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             ppe_rows.append([label, val])
         story.append(data_table(ppe_rows, [50*mm, 130*mm], styles, header=False))
 
+    # 8.2.2.2(b) — eldiven: malzeme türü ve delinme süresi
+    story.append(Paragraph(
+        ('Eldiven malzemesi ve kalınlığı yukarıda belirtilmiştir; delinme süresi kullanım koşullarına göre '
+         'eldiven üreticisinin EN ISO 374-1 test verilerinden seçilmeli, eldivenler hasar ve kirlenme '
+         'durumunda değiştirilmelidir.') if lang == 'TR' else
+        ('Glove material and thickness are given above; the breakthrough time should be selected from the '
+         'glove manufacturer’s EN ISO 374-1 data for the conditions of use; replace gloves when damaged or '
+         'contaminated.'), styles['small']))
+
+    # 8.2.3 Çevresel maruz kalma kontrolleri (KKDİK Ek-2 8.2.3)
+    _env = ('Ürünün kanalizasyona, yüzey ve yeraltı sularına ve toprağa karışmasını önleyin '
+            '(bkz. Bölüm 6.2 ve 13).' if lang == 'TR' else
+            'Prevent the product from entering drains, surface water, groundwater and soil (see Sections 6.2 and 13).')
+    if _h82 & {'H400', 'H410', 'H411', 'H412', 'H413'}:
+        _env += (' Ürün sucul ortam için zararlı olarak sınıflandırılmıştır.' if lang == 'TR'
+                 else ' The product is classified as hazardous to the aquatic environment.')
+    story.append(Paragraph(
+        f"<b>8.2.3 {'Çevresel maruz kalma kontrolleri' if lang == 'TR' else 'Environmental exposure controls'}:</b> "
+        f"{_env}", styles['body']))
+
     # EUH212 nano toz uyarısı — B8 özel notu (CLP (AB) 2021/2030)
     _euh_codes = euh.get('euh_codes', [])
     if 'EUH212' in _euh_codes:
@@ -1816,7 +1883,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         )
         story.append(Paragraph(_euh212_note, styles['body']))
 
-    story.append(PageBreak())
+    story.append(CondPageBreak(60*mm))   # yalnız sayfa sonunda yer yoksa yeni sayfa (boş sayfa kalmasın)
 
     # ─────────────────────────────────────────────────────────────────────────
     # BÖLÜM 9 — Fiziksel Özellikler
@@ -2202,8 +2269,12 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         avoid_parts.append('Su ve nem' if lang=='TR' else 'Water and moisture')
     if any(h in h_codes for h in ['H240','H241','H242']):
         avoid_parts.append('Isıtma ve sürtünme' if lang=='TR' else 'Heating and friction')
+    if _effervescent and not any(h in h_codes for h in ['H260', 'H261']):
+        avoid_parts.append('Nem ve su ile temas (kullanım dışında)' if lang == 'TR'
+                           else 'Contact with moisture and water (outside use)')
     avoid_str = ('; '.join(avoid_parts) + '.') if avoid_parts else (
-        'Uygunsuz depolama koşulları' if lang=='TR' else 'Inappropriate storage conditions'
+        'Normal kullanım ve depolama koşullarında kaçınılması gereken özel bir durum bilinmemektedir.'
+        if lang == 'TR' else 'No specific conditions to avoid are known under normal conditions of use and storage.'
     )
 
     # ── 10.5 Bağdaşmayan maddeler ────────────────────────────────────────────
@@ -2264,29 +2335,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
 
     incompat_str = (', '.join(sorted(incompat_set)) + '.').capitalize()
 
-    # ── 10.6 Bozunma ürünleri — sadece gerçek bileşenlere göre ──────────────
-    decomp_parts = []
-    if is_flammable or any(h in h_codes for h in ['H228','H242']):
-        decomp_parts.append(
-            'Karbon oksitler (CO, CO\u2082)' if lang=='TR'
-            else 'Carbon oxides (CO, CO\u2082)'
-        )
-    if has_chlorinated:
-        decomp_parts.append(
-            'Klorür bileşikleri (HCl, Cl\u2082)' if lang=='TR'
-            else 'Chloride compounds (HCl, Cl\u2082)'
-        )
-    # NH\u2083 yaln\u0131zca bile\u015fende amonyak veya amonyak \u00e7\u00f6zeltisi varsa olu\u015fur
-    # (CAS 1336-21-6 = amonyak \u00e7\u00f6zeltisi, 7664-41-7 = susuz amonyak)
-    if any(comp.get('cas_no', comp.get('cas','')) in {'1336-21-6','7664-41-7'}
-           for comp in components):
-        decomp_parts.append('NH\u2083' if lang=='TR' else 'NH\u2083 (ammonia)')
-    if 'H400' in h_codes or 'H411' in h_codes:
-        decomp_parts.append(
-            'Sucul ortama zararlı organik fragmentler' if lang=='TR'
-            else 'Harmful organic fragments to aquatic environment'
-        )
-    decomp_str = ('; '.join(decomp_parts) + '.') if decomp_parts else S(lang,'decomp_products')
+    # ── 10.6 Bozunma ürünleri — 5.2 ile aynı kaynak (_decomp_str) ─────────────
+    decomp_str = _decomp_str
 
     # ── 10.3 Tehlikeli tepkimelerin olasılığı — KKDİK Ek-2 10.3: ürünün basınç/sıcaklık
     #    yayarak tepkimeye gireceği veya başka zararlı koşullar yaratabileceği durumlar ve bu
@@ -2322,6 +2372,12 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     if any(h in h_codes for h in ['H224', 'H225', 'H226']):
         _react.append('Buharları hava ile patlayıcı karışım oluşturabilir.' if _TR10
                       else 'Vapours may form explosive mixtures with air.')
+    # Efervesan katı: asit + karbonat/bikarbonat — nem/su ile CO₂ açığa çıkar, kapalı kapta basınç
+    if _effervescent:
+        _react.append('Nem veya su ile temas ederse asit ve karbonat bileşenleri tepkimeye girerek karbondioksit '
+                      'gazı açığa çıkarır; kapalı kaplarda basınç artışına neden olabilir.' if _TR10 else
+                      'In contact with moisture or water the acid and carbonate components react and release carbon '
+                      'dioxide; may cause pressure build-up in closed containers.')
     react_str = ' '.join(_react) if _react else (
         'Normal kullanım ve depolama koşullarında tehlikeli tepkime beklenmez.' if _TR10
         else 'No hazardous reactions expected under normal conditions of use and storage.')
@@ -2342,16 +2398,16 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                      'normal conditions of use and storage.')
 
     stability_data = [
-        [sub_title(lang,'10.1'), _react101],
-        [sub_title(lang,'10.2'), S(lang,'stable_conditions')],
-        [sub_title(lang,'10.3'), react_str],
-        [sub_title(lang,'10.4'), avoid_str],
-        [sub_title(lang,'10.5'), incompat_str],
-        [sub_title(lang,'10.6'), decomp_str],
+        [f"10.1 {sub_title(lang,'10.1')}", _react101],
+        [f"10.2 {sub_title(lang,'10.2')}", S(lang,'stable_conditions')],
+        [f"10.3 {sub_title(lang,'10.3')}", react_str],
+        [f"10.4 {sub_title(lang,'10.4')}", avoid_str],
+        [f"10.5 {sub_title(lang,'10.5')}", incompat_str],
+        [f"10.6 {sub_title(lang,'10.6')}", decomp_str],
     ]
     story.append(data_table(stability_data, [65*mm, 115*mm], styles, header=False))
 
-    story.append(PageBreak())
+    story.append(CondPageBreak(60*mm))   # yalnız sayfa sonunda yer yoksa yeni sayfa (boş sayfa kalmasın)
 
     # ─────────────────────────────────────────────────────────────────────────
     # BÖLÜM 11 — Toksikoloji
@@ -2449,6 +2505,39 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     }.get(_pf11, ('Cilt ve göz teması, yutma, buhar/sis soluma', 'Skin and eye contact, ingestion, inhalation of vapour/mist'))
     tox_rows.append([('Olası maruz kalma yolları (11.1.5)' if _TR11 else 'Likely routes of exposure'),
                      _routes11[0 if _TR11 else 1]])
+
+    # 11.1.6 Fiziksel, kimyasal ve toksikolojik özellikler ile ilgili belirtiler — 4.2 ile aynı kaynak
+    _sym11 = ' '.join(_re.sub(r'<[^>]+>', '', str(b)).strip() for b in (_sym_bullets or []))
+    if not _sym11:
+        _sym11 = ('Sınıflandırılmış bir sağlık etkisi bulunmadığından belirgin belirti beklenmez.' if _TR11
+                  else 'No specific symptoms expected as no health hazard classification applies.')
+    tox_rows.append([('Belirtiler (11.1.6)' if _TR11 else 'Symptoms (11.1.6)'), _sym11])
+
+    # 11.1.7 Gecikmeli / hemen ortaya çıkan etkiler ve kronik etkiler
+    _h11 = set(all_h_codes or []) | set(h_codes or [])
+    _imm = sorted(_h11 & {'H300', 'H301', 'H302', 'H310', 'H311', 'H312', 'H330', 'H331', 'H332',
+                          'H314', 'H315', 'H318', 'H319', 'H335', 'H336', 'H370', 'H371', 'H304'})
+    _chron = sorted(h for h in _h11 if h[:4] in {'H340', 'H341', 'H350', 'H351', 'H360', 'H361', 'H362',
+                                                    'H372', 'H373'})
+    _sens = sorted(_h11 & {'H317', 'H334'})
+    _p117 = []
+    if _imm:
+        _p117.append(('Kısa süreli maruz kalmada etkiler genellikle hemen ortaya çıkar (' + ', '.join(_imm) + ').')
+                     if _TR11 else ('Effects of short-term exposure generally appear immediately ('
+                                    + ', '.join(_imm) + ').'))
+    if _sens:
+        _p117.append(('Hassaslaştırıcı etki (' + ', '.join(_sens) + ') tekrarlanan temasla gecikmeli (alerjik) '
+                      'reaksiyon olarak ortaya çıkabilir.') if _TR11 else
+                     ('Sensitising effects (' + ', '.join(_sens) + ') may appear as delayed (allergic) reactions '
+                      'after repeated contact.'))
+    if _chron:
+        _p117.append(('Uzun süreli/tekrarlı maruz kalmada kronik etkiler: ' + ', '.join(_chron) + '.') if _TR11
+                     else ('Chronic effects on long-term/repeated exposure: ' + ', '.join(_chron) + '.'))
+    else:
+        _p117.append('Uzun süreli/tekrarlı maruz kalmaya bağlı kronik etki sınıflandırması yoktur.' if _TR11
+                     else 'No classification for chronic effects of long-term/repeated exposure.')
+    tox_rows.append([('Gecikmeli/hemen ortaya çıkan ve kronik etkiler (11.1.7)' if _TR11
+                      else 'Delayed/immediate and chronic effects (11.1.7)'), ' '.join(_p117)])
 
     if len(tox_rows) > 1:
         story.append(data_table(tox_rows, [65*mm, 115*mm], styles))
@@ -2779,16 +2868,18 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         _t121.append('Bileşenler için sucul toksisite sınıflandırması veya test verisi bulunmamaktadır.' if _TR12
                      else 'No aquatic toxicity classification or test data available for the components.')
 
+    # 12.6 Diğer olumsuz etkiler (KKDİK Ek-2 12.6) — endokrin bozucu / ozon tabakası bilgisi burada
+    _v126 = sds12.get('12.6', na)
+    if 'ECHA SVHC' in _v126 or 'kontrol edin' in _v126:
+        _v126 = ('Endokrin bozucu özellik tespit edilmemiştir. Bilinen başka bir olumsuz etki yoktur.'
+                 if lang == 'TR' else 'No endocrine disrupting properties identified. No other adverse effects known.')
     eco_rows = [
-        [sub_title(lang,'12.1'), ' '.join(_t121)],
-        [sub_title(lang,'12.2'), _biodeg_txt],
-        [sub_title(lang,'12.3'), _bioacc_txt],
-        [sub_title(lang,'12.4'), _soil_txt],
-        [sub_title(lang,'12.5'), pbt_summary],
-        [sub_title(lang,'12.6'), (lambda v:
-            ('Endokrin bozucu özellik tespit edilmemiştir.' if lang=='TR' else 'No endocrine disrupting properties identified.')
-            if 'ECHA SVHC' in v or 'kontrol edin' in v else v
-        )(sds12.get('12.6', na))],
+        [f"12.1 {sub_title(lang,'12.1')}", ' '.join(_t121)],
+        [f"12.2 {sub_title(lang,'12.2')}", _biodeg_txt],
+        [f"12.3 {sub_title(lang,'12.3')}", _bioacc_txt],
+        [f"12.4 {sub_title(lang,'12.4')}", _soil_txt],
+        [f"12.5 {sub_title(lang,'12.5')}", pbt_summary],
+        [f"12.6 {sub_title(lang,'12.6')}", _v126],
     ]
     story.append(data_table(eco_rows, [65*mm, 115*mm], styles, header=False))
 
@@ -3256,7 +3347,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     else:
         story.append(Paragraph(S(lang,'no_csa'), styles['small']))
 
-    story.append(PageBreak())
+    story.append(CondPageBreak(60*mm))   # yalnız sayfa sonunda yer yoksa yeni sayfa (boş sayfa kalmasın)
 
     # ─────────────────────────────────────────────────────────────────────────
     # BÖLÜM 16 — Diğer

@@ -158,8 +158,9 @@ RULES: Dict[str, List[Dict[str, Any]]] = {
         {
             'h_codes': ['H318', 'H319'],
             'ppe': {
-                'TR': 'Koruyucu eldiven (EN ISO 374-1)',
-                'EN': 'Protective gloves (EN ISO 374-1)',
+                # KKDİK Ek-2 8.2.2.2(b): eldiven malzemesinin türü belirtilir
+                'TR': 'Nitril kauçuk koruyucu eldiven ≥0,1 mm (EN ISO 374-1)',
+                'EN': 'Nitrile rubber protective gloves ≥0.1 mm (EN ISO 374-1)',
             },
             'level': 2,
         },

@@ -221,7 +221,9 @@ def _ewc_code_bullet(wa: dict, lang: str = 'TR') -> str:
         if wa['criteria']:
             c0 = wa['criteria'][0]
             why = (f"Ek-3/B ({c0['item']}) {c0['label']}"
-                   + (f": bileşen toplamı %{c0['total']:g} ≥ %{c0['limit']:g}" if c0['total'] is not None else ''))
+                   # Kesin toplam yazılmaz — Bölüm 3'te aralıkla verilen konsantrasyonları açığa çıkarır
+                   + (f": ilgili bileşenlerin toplamı eşik değeri (%{c0['limit']:g}) aşmaktadır"
+                      if c0['total'] is not None else ''))
         else:
             why = 'Ek-3/B eşik konsantrasyonlarının hiçbiri aşılmıyor'
         return (f"Kullanılmamış / standart dışı ürün için gösterge atık kodu: {wa['code']} — {wa['desc']} "

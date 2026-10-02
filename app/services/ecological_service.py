@@ -143,6 +143,8 @@ LOG_KOW_DB: Dict[str, float] = {
     '7681-52-9': -3.4, # NaOCl
     '7732-18-5': -1.38,# water
     '64742-54-7': 7.0, # base oil (tahmini)
+    '77-92-9':  -1.7,  # sitrik asit — ICSC 0855 (log Pow)
+    '120-51-4':  3.97, # benzil benzoat — ICSC 0390 (log Pow)
     '64742-47-8': 4.5, # naphtha (tahmini)
 }
 
@@ -695,6 +697,7 @@ def assess_soil_mobility(
         td = (eco_test_data or {}).get(cas)
 
         log_koc = LOG_KOC_DB.get(cas)
+        _est = False
         if td and hasattr(td, 'log_koc') and td.log_koc is not None:
             log_koc = td.log_koc
         elif log_koc is None:
@@ -703,18 +706,20 @@ def assess_soil_mobility(
                 kow = td.log_kow
             if kow is not None:
                 log_koc = estimate_log_koc(kow)
+                _est = True   # log Kow'dan Karickhoff korelasyonuyla tahmin
 
         if log_koc is None:
             results.append({'cas': cas, 'name': name, 'name_tr': name_tr,
                             'conc': conc, 'log_koc': None, 'mobility': 'Bilinmiyor'})
             continue
 
+        _k = f"log Koc={log_koc:.2f}" + (", log Kow'dan tahmini" if _est else '')
         if log_koc < 2.0:
-            mobility = f"Yüksek (log Koc={log_koc:.2f} < 2 — yeraltı suyu riski)"
+            mobility = f"Yüksek ({_k}; < 2 — yeraltı suyu riski)"
         elif log_koc < 4.0:
-            mobility = f"Orta (log Koc={log_koc:.2f})"
+            mobility = f"Orta ({_k})"
         else:
-            mobility = f"Düşük (log Koc={log_koc:.2f} > 4 — toprakta tutunur)"
+            mobility = f"Düşük ({_k}; > 4 — toprakta tutunur)"
 
         # Toprak toksisitesi
         soil_ec50 = SOIL_EC50_DB.get(cas)

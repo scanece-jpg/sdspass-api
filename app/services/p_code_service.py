@@ -415,6 +415,11 @@ def assign_p_codes(
 
     final = set(p_to_sources.keys()) - suppressed
 
+    # SEA Etiketleme Rehberi 7.3: P403+P233 yalnızca tehlikeli atmosfer oluşturabilecek uçucu ürün
+    # içindir — katı/toz üründe koşul sağlanmaz (etiket, Bölüm 7.2 ve Bölüm 16 listesine girmez)
+    if (mixture_form or '').lower() in ('solid', 'powder'):
+        final.discard('P403+P233')
+
     # Kullanım kategorisine göre ek bastırma
     # P405 ve P301+P330+P331 sadece tüketici ürünlerinde H_TO_P'den zorunlu gelir;
     # endüstriyel/profesyonel kullanımda SDS'e yazılır ama etiket forced listesinden düşer.

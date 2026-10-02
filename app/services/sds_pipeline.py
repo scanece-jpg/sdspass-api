@@ -495,7 +495,7 @@ async def classify(inp: dict) -> dict:
         euh['euh_details'] = [d for d in euh.get('euh_details', []) if d.get('code') != 'EUH066']
     euh_codes = euh.get('euh_codes', [])
 
-    p_result = assign_p_codes(h_codes, signal, usage=usage)
+    p_result = assign_p_codes(h_codes, signal, mixture_form=form, usage=usage)
     # P260/P261: "Tozunu/…/spreyini" — tedarikçinin seçeceği kısım fiziksel hale göre (panel ve PDF aynı)
     from app.services.sds_reg_sections import _select_inhal
     for _d in p_result.get('p_details') or []:

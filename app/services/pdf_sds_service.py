@@ -792,6 +792,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         from app.services.p_code_service import P_COMBOS as _PC, P_TEXTS as _PT
         txt = (reg_p_text(code, lang) if get_p(lang, code) else None) or _PC.get(code) or _PT.get(code, code)
         txt = reg_select_inhal(txt, product.get('form') or 'liquid', lang)
+        if code == 'P280':
+            from app.services.sds_reg_sections import p280_text as _p280
+            txt = _p280(list(clp.get('all_h_codes') or []) + list(clp.get('h_codes') or []), lang)
         if code == 'P370+P378':
             _hs = {str(h)[:4] for h in list(clp.get('h_codes') or []) + list(clp.get('all_h_codes') or [])}
             if _hs & {'H271', 'H272'}:
@@ -1278,10 +1281,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                                styles['body_bold']))
         from app.services.p_code_service import P_COMBOS, P_TEXTS, P_LABEL_PRIORITY
         # Etiket kodları şiddet sırasına göre göster (en kritik önce)
+        # Tür sırası (P1 genel → P2 önleme → P3 müdahale → P4 depolama → P5 bertaraf), tür içinde şiddet
         label_codes_sorted = sorted(
             label_p['selected'],
-            key=lambda p: P_LABEL_PRIORITY.get(p, 5),
-            reverse=True
+            key=lambda p: (str(p)[1:2], -P_LABEL_PRIORITY.get(p, 5))
         )
         for code in label_codes_sorted:
             txt = _p_full(code)
@@ -3592,7 +3595,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             if codes:
                 story.append(Paragraph(f"<b>{icon} {lbl}:</b>", styles['small']))
                 # Grup içi şiddet sırası (yüksek önce)
-                codes_sorted = sorted(codes, key=lambda p: P_LABEL_PRIORITY.get(p, 5), reverse=True)
+                codes_sorted = sorted(codes, key=lambda p: (str(p)[1:2], -P_LABEL_PRIORITY.get(p, 5)))
                 for code in codes_sorted:
                     txt = _p_full(code)
                     story.append(Paragraph(f"  {code}: {txt}", styles['small']))

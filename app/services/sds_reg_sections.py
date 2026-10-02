@@ -58,6 +58,40 @@ def _p(code: str, lang: str) -> str:
     return t.replace('…', '').replace('  ', ' ').strip()
 
 
+# P280 — SEA Ek-4: "İmalatçı/tedarikçi uygun ekipman türünü belirtecektir." Ekipman, SEA Etiketleme
+# Rehberi 7.3'teki her tehlike sınıfı notuna göre seçilir:
+#   H315/H317: eldiven · H310–H312: eldiven/giysi · H314: eldiven/giysi/göz/yüz · H318/H319: göz/yüz ·
+#   fiziksel tehlikeler (alevlenir, oksitleyici, kendiliğinden tepkimeye giren…): eldiven ve göz/yüz.
+# CMR vb. rehberin ekipman belirtmediği sınıflarda resmî metnin tamamı kullanılır.
+_P280_PHYS = {'H224', 'H225', 'H226', 'H228', 'H240', 'H241', 'H242', 'H250', 'H251', 'H252',
+              'H260', 'H261', 'H270', 'H271', 'H272'}
+_P280_GLOVES = {'H315', 'H317', 'H310', 'H311', 'H312', 'H314'} | _P280_PHYS
+_P280_CLOTH = {'H310', 'H311', 'H312', 'H314'}
+_P280_EYE = {'H314', 'H318', 'H319'} | _P280_PHYS
+_P280_FULL = {'H200', 'H201', 'H202', 'H203', 'H204', 'H205', 'H340', 'H341', 'H350', 'H351',
+              'H360', 'H361', 'H362'}
+
+
+def p280_text(h_codes, lang: str = 'TR') -> str:
+    """P280 metni — ürünün tehlike sınıflarına göre belirtilmiş ekipman (SEA Ek-4 / Etiketleme Rehberi 7.3)."""
+    full = _p('P280', lang)
+    h = {str(x).replace('*', '').strip()[:4] for x in (h_codes or [])}
+    if h & _P280_FULL or not (h & (_P280_GLOVES | _P280_EYE)):
+        return full
+    TR = lang == 'TR'
+    parts = []
+    if h & _P280_GLOVES:
+        parts.append('koruyucu eldiven' if TR else 'protective gloves')
+    if h & _P280_CLOTH:
+        parts.append('koruyucu kıyafet' if TR else 'protective clothing')
+    if h & _P280_EYE:
+        parts += (['göz koruyucu', 'yüz koruyucu'] if TR else ['eye protection', 'face protection'])
+    if TR:
+        s = '/'.join(parts)
+        return s[0].upper() + s[1:] + ' kullanın.'
+    return 'Wear ' + '/'.join(parts) + '.'
+
+
 def _join(*texts: str) -> str:
     return ' '.join(t.strip() for t in texts if t and t.strip())
 

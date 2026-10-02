@@ -32,12 +32,12 @@ LANG_DATA: Dict[str, Dict] = {
     'TR': {
         'name': 'Türkçe',
         'code': 'TR',
-        'regulation': 'KKDİK (30105/2017)',
+        'regulation': 'KKDİK Ek-2 (RG 23.06.2017/30105 Mükerrer)',
         'date_format': '%d.%m.%Y',
         'decimal_sep': ',',
 
         # Bölüm başlıkları
-        # Bölüm ve alt başlıklar KKDİK Ek-2 Bölüm B'deki metinle birebir (RG 23.06.2017/30105)
+        # Bölüm ve alt başlıklar KKDİK Ek-2 Bölüm B'deki metinle birebir (RG 23.06.2017/30105 Mükerrer)
         'sections': {
             1:  'BÖLÜM 1: Maddenin/karışımın ve şirketin/dağıtıcının tanımı',
             2:  'BÖLÜM 2: Zararların tanımı',

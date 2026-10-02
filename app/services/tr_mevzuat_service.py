@@ -5,7 +5,7 @@ SDS Bölüm 15 için KKDİK ve ilgili Türk yönetmelikleri
 tam metinleri ve referansları.
 
 Kaynak:
-  - KKDİK: 23.06.2017 tarihli ve 30105 sayılı Resmî Gazete
+  - KKDİK: 23.06.2017 tarihli ve 30105 mükerrer sayılı Resmî Gazete
   - BKK: 31.12.2008 tarihli ve 27097 sayılı Resmî Gazete
   - KKDIK güncellemeleri: 2019, 2021, 2023
 """
@@ -16,7 +16,7 @@ TR_REGULATIONS = {
     'kkdik': {
         'name': 'KKDİK',
         'full': 'Kimyasalların Kaydı, Değerlendirilmesi, İzni ve Kısıtlanması Hakkında Yönetmelik',
-        'rg_no': '30105',
+        'rg_no': '30105 (Mükerrer)',
         'rg_date': '23.06.2017',
         'eu_equivalent': 'REACH (EC) No 1907/2006',
     },
@@ -30,14 +30,14 @@ TR_REGULATIONS = {
     'kkdik_ek2': {
         'name': 'KKDİK Ek-2',
         'full': 'KKDİK Yönetmeliği Ek-2 — Güvenlik Bilgi Formu Hazırlama Rehberi',
-        'rg_no': '30105',
+        'rg_no': '30105 (Mükerrer)',
         'rg_date': '23.06.2017',
         'eu_equivalent': 'EU CLP 2020/878 (SDS Annex)',
     },
     'sea': {
         'name': 'SEA Yönetmeliği',
         'full': 'Maddelerin ve Karışımların Sınıflandırılması, Etiketlenmesi ve Ambalajlanması Hakkında Yönetmelik',
-        'rg_no': '28848',
+        'rg_no': '28848 (Mükerrer)',
         'rg_date': '11.12.2013',
         'eu_equivalent': 'CLP (EC) No 1272/2008',
     },

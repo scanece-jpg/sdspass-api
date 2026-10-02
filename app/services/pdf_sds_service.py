@@ -1180,7 +1180,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         if lang == 'TR':
             story.append(Spacer(1, 4))
             story.append(Paragraph(
-                '<i>H-kodları, 11 Aralık 2013 tarihli ve 28848 sayılı Resmî Gazete\'de yayımlanan '
+                '<i>H-kodları, 11 Aralık 2013 tarihli ve 28848 mükerrer sayılı Resmî Gazete\'de yayımlanan '
                 'Maddelerin ve Karışımların Sınıflandırılması, Etiketlenmesi ve Ambalajlanması '
                 'Hakkında Yönetmelik (SEA) esaslarına göre belirlenmiştir.</i>',
                 styles['small']
@@ -1452,6 +1452,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         return get_echa_range(c)  # 'range' veya 'hide' → ECHA aralığı
 
     sec3_rows = generate_section3(components, disclosure, lang=lang)
+    from app.services.svhc_service import svhc_section3_reason
     if sec3_rows:
         # B3.2 Tablo — 4 sütun, A4'e sığacak şekilde
         # CAS No | Madde Adı | Konst. | Sınıflandırma
@@ -1526,7 +1527,15 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 styles['small']
             )
             # Her sınıflandırma kendi satırında — uzun metinde kelime kırılmasını önle
-            _clf_str = translate_hclass_list(r.get('hazards',''), lang) or term(lang,'not_classified')
+            _clf_str = translate_hclass_list(r.get('hazards',''), lang)
+            if not _clf_str:
+                _clf_str = term(lang,'not_classified')
+                # Ek-2 3.2.3: sınıflandırılmamış madde listede yer alıyorsa nedeni belirtilir
+                _svhc_why = svhc_section3_reason(
+                    cas, comp_obj.get('concMax') or comp_obj.get('conc_max') or comp_obj.get('concentration')
+                    or comp_obj.get('conc'), lang)
+                if _svhc_why:
+                    _clf_str += f'; {_svhc_why}'
             _clf_para = Paragraph(_clf_str.replace('; ', '<br/>'), styles['body'])
             # Ad ve konsantrasyon Paragraph'a sarılır — kelime kırılmasını ve
             # PDF text extraction artifaktlarını önler
@@ -3374,7 +3383,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             styles['body']
         ))
 
-    # ── SVHC Kontrolü — REACH Madde 33 / KKDİK Madde 35 ────────────────────
+    # ── Aday Liste (SVHC) — KKDİK Md.49(1); Ek-2 15.1 ──────────────────────
     try:
         from app.services.svhc_service import check_svhc_mixture, svhc_section15_text
         svhc_result = check_svhc_mixture(components)
@@ -3384,8 +3393,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             if line.startswith('⚠') or line.startswith('  •'):
                 st = styles.get('body_bold', styles['body']) if line.startswith('⚠') else styles['body']
                 color = '#cc0000' if line.startswith('⚠') else '#333333'
+                # ⚠ yedek yazı tipinde (Arial) kutu olarak basılıyor — PDF'te renk/kalınlık yeterli
                 story.append(Paragraph(
-                    f'<font color="{color}">{line}</font>', st
+                    f'<font color="{color}">{line.lstrip("⚠ ")}</font>', st
                 ))
             else:
                 story.append(Paragraph(line, styles['small']))
@@ -3639,9 +3649,15 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             'Taşımacılık: ADR 2025, IMDG Kod (Değişiklik 42-24), IATA-DGR 2026',
             'Atık kodları: Atık Yönetimi Yönetmeliği (RG 02.04.2015/29314)',
         ]
+        try:
+            from app.services.svhc_service import _load_svhc_list, _list_date
+            _src.append('Aday Liste (SVHC, KKDİK Md.49): AB (ECHA) Aday Listesi, '
+                        f"{_list_date(_load_svhc_list()['meta'])} tarihli liste")
+        except Exception:
+            pass
         if product.get('is_detergent'):
             _src.append('Deterjan bilgileri: Deterjanlar Hakkında Yönetmelik (RG 27.01.2018/30314)')
-        _src.append('Güvenlik Bilgi Formu: KKDİK Yönetmeliği Ek-2 (RG 23.06.2017/30105)')
+        _src.append('Güvenlik Bilgi Formu: KKDİK Yönetmeliği Ek-2 (RG 23.06.2017/30105 Mükerrer)')
     else:
         _src += ['Transport: ADR 2025, IMDG Code (Amdt. 42-24), IATA-DGR 2026']
     story.append(Spacer(1, 4))

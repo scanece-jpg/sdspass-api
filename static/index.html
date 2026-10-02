@@ -1978,7 +1978,7 @@ function addComp(pf = {}) {
       </div>
     </div>
     <div>
-      <label>Konsantrasyon (%) <span style="font-size:9px;color:var(--text3)">— kesin değer girin; B3'te standart bant olarak gösterilir</span></label>
+      <label>Konsantrasyon (<span class="conc-unit">${(document.getElementById('pform')?.value === 'gas') ? '% hacimce' : '% ağırlıkça'}</span>) <span style="font-size:9px;color:var(--text3)">— kesin değer girin; B3'te standart bant olarak gösterilir</span></label>
       <input type="text" class="conc-manual" id="cmanual${id}"
              placeholder="örn: 30"
              oninput="onManualConc(${id});updateConcTotal()"
@@ -4751,6 +4751,13 @@ function normalizePh(el) {
   const [lo, hi] = parsed;
   el.value = (lo === hi) ? `${+lo.toFixed(2).replace(/\.?0+$/,'')}` : `${+lo.toFixed(2).replace(/\.?0+$/,'')} - ${+hi.toFixed(2).replace(/\.?0+$/,'')}`;
 }
+
+// ── Konsantrasyon birimi — SEA Ek-1: gazlarda hacimce (v/v), diğerlerinde ağırlıkça (w/w) ──
+function _updConcUnit() {
+  const gas = document.getElementById('pform')?.value === 'gas';
+  document.querySelectorAll('.conc-unit').forEach(el => { el.textContent = gas ? '% hacimce' : '% ağırlıkça'; });
+}
+document.addEventListener('change', e => { if (e.target && e.target.id === 'pform') _updConcUnit(); });
 
 // ── PDF öncesi zorunlu alan kontrolü ─────────────────────────────────────────
 let _pdfBlockCallback = null;

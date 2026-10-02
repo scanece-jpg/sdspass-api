@@ -875,6 +875,8 @@ ATE_DEFAULTS = {
     'inhalation_dust':  {'Acute Tox. 1': 0.005, 'Acute Tox. 2': 0.05, 'Acute Tox. 3': 0.5,  'Acute Tox. 4': 1.5},
     'inhalation_vapour':{'Acute Tox. 1': 0.05,  'Acute Tox. 2': 0.5,  'Acute Tox. 3': 3.0,  'Acute Tox. 4': 11.0},
     'inhalation':       {'Acute Tox. 1': 0.05,  'Acute Tox. 2': 0.5,  'Acute Tox. 3': 3.0,  'Acute Tox. 4': 11.0},
+    # Gazlar (ppmV) — SEA Ek-1 Tablo 3.1.2 dönüştürülmüş nokta tahminleri; yalnız gaz üründe kullanılır
+    'inhalation_gas':   {'Acute Tox. 1': 10,    'Acute Tox. 2': 100,  'Acute Tox. 3': 700,  'Acute Tox. 4': 4500},
 }
 
 # ATE sınıflandırma eşikleri — CLP Annex I Tablo 3.1.1 (kategori üst sınırları)
@@ -886,6 +888,7 @@ ATE_THRESHOLDS = {
     'inhalation_dust':  {1: 0.05,  2: 0.5,   3: 1.0,   4: 5.0},
     'inhalation_vapour':{1: 0.5,   2: 2.0,   3: 10.0,  4: 20.0},
     'inhalation':       {1: 0.5,   2: 2.0,   3: 10.0,  4: 20.0},
+    'inhalation_gas':   {1: 100,   2: 500,   3: 2500,  4: 20000},   # ppmV — SEA Ek-1 Tablo 3.1.1
 }
 
 ATE_HCODES = {
@@ -894,6 +897,7 @@ ATE_HCODES = {
     'inhalation_dust':  {1: 'H330', 2: 'H330', 3: 'H331', 4: 'H332'},
     'inhalation_vapour':{1: 'H330', 2: 'H330', 3: 'H331', 4: 'H332'},
     'inhalation':       {1: 'H330', 2: 'H330', 3: 'H331', 4: 'H332'},
+    'inhalation_gas':   {1: 'H330', 2: 'H330', 3: 'H331', 4: 'H332'},
 }
 ATE_PICS = {1: 'GHS06', 2: 'GHS06', 3: 'GHS06', 4: 'GHS07'}
 ATE_SIGS = {1: 'Danger', 2: 'Danger', 3: 'Danger', 4: 'Warning'}
@@ -941,6 +945,16 @@ def _get_ate_value(ate_data: dict, route: str, h_class: str) -> Optional[float]:
             return val if val > 0 else None
         except (TypeError, ValueError):
             return None
+
+    # Gaz yolu (ppmV): yalnızca ppmV birimli spesifik veri kullanılır; mg/L değerleri karışmaz
+    if route == 'inhalation_gas':
+        for _k in ('inhalation_gas', 'inhalation'):
+            _raw = ate_data.get(_k)
+            if _k == 'inhalation_gas' or (isinstance(_raw, dict) and 'ppm' in str(_raw.get('unit', '')).lower()):
+                val = _to_float(_raw)
+                if val is not None:
+                    return val
+        return ATE_DEFAULTS['inhalation_gas'].get(h_class)
 
     # Spesifik ATE varsa kullan
     val = _to_float(ate_data.get(route))
@@ -1002,6 +1016,16 @@ _PRESUME_NOT_ACUTELY_TOXIC_CAS: frozenset = frozenset({
     '7647-14-5',  # NaCl
     '10043-52-4', # CaCl₂
     '497-19-8',   # Na₂CO₃
+    # KKDİK Ek-4 (asgari risk — kayıttan muaf) inert/basit boğucu gazlar: gaz karışımlarında
+    # "bilinmeyen akut toksisite" sayılmaz (önceden azot dengeli karışımlar revize formülle
+    # gereğinden ağır sınıflandırılıyordu, örn. %0,5 H₂S/N₂ → H330)
+    '7727-37-9',  # azot
+    '7440-37-1',  # argon
+    '7440-59-7',  # helyum
+    '7440-01-9',  # neon
+    '7439-90-9',  # kripton
+    '7440-63-3',  # ksenon
+    '124-38-9',   # karbondioksit
 })
 
 
@@ -1088,6 +1112,9 @@ def _ate_core(items: list, form: str = '') -> tuple:
             base_route = _H_CODE_TO_ROUTE.get(h_code_raw)
             if not base_route:
                 routes_to_process = ate_routes
+            elif base_route == 'inhalation' and (form or '').lower() == 'gas':
+                # SEA Ek-1 Tablo 3.1.1: gazlar ppmV, karışımda Ci hacimce (v/v %)
+                routes_to_process = ['inhalation_gas']
             elif base_route == 'inhalation':
                 if combined_ate.get('inhalation_vapour'):
                     routes_to_process = ['inhalation_vapour', 'inhalation']
@@ -1122,11 +1149,12 @@ def _ate_core(items: list, form: str = '') -> tuple:
     _route_labels = {
         'oral': 'oral', 'dermal': 'dermal',
         'inhalation': 'inhalasyon', 'inhalation_vapour': 'inhalasyon (buhar)',
-        'inhalation_dust': 'inhalasyon (toz)',
+        'inhalation_dust': 'inhalasyon (toz)', 'inhalation_gas': 'inhalasyon (gaz)',
     }
     _ROUTE_TO_B11 = {
         'oral': 'oral', 'dermal': 'dermal',
         'inhalation': 'inhal', 'inhalation_vapour': 'inhal', 'inhalation_dust': 'inhal',
+        'inhalation_gas': 'inhal',
     }
     _CLASSIFY_B11 = {
         'oral':   [(5,'H300'),(50,'H300'),(300,'H301'),(2000,'H302')],
@@ -1169,7 +1197,9 @@ def _ate_core(items: list, form: str = '') -> tuple:
             mix_ate_r = round(mix_ate, 2)
             if b11_key not in ate_b11 or mix_ate_r < ate_b11[b11_key]['ateMix']:
                 result_code_b11 = None
-                for threshold_b11, hcode_b11 in _CLASSIFY_B11.get(b11_key, []):
+                _cls_tbl = ([(100, 'H330'), (500, 'H330'), (2500, 'H331'), (20000, 'H332')]
+                            if route == 'inhalation_gas' else _CLASSIFY_B11.get(b11_key, []))
+                for threshold_b11, hcode_b11 in _cls_tbl:
                     if mix_ate_r <= threshold_b11:
                         result_code_b11 = hcode_b11
                         break
@@ -1180,6 +1210,7 @@ def _ate_core(items: list, form: str = '') -> tuple:
                     'revisedFormula':  _unk > 10.0,
                     'statementNeeded': stmt_needed,
                     'components':      ate_comps.get(route, []),
+                    'unit':            'ppmV' if route == 'inhalation_gas' else None,
                 }
         except Exception as _e:
             _log.warning("ate_b11 hesaplanamadı (rota=%s, mix_ate=%s): %s", route, mix_ate, _e)

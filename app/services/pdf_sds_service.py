@@ -1444,6 +1444,12 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         cas_hdr  = ('CAS No\nEC / Kayıt No' if lang=='TR' else 'CAS No\nEC / Registration No')
         name_hdr = S(lang,'ingredient_label')
         conc_hdr = term(lang,'concentration')
+        # SEA Ek-1: konsantrasyonlar gazlarda hacimce (v/v), diğerlerinde ağırlıkça (w/w)
+        _is_gas3 = (product.get('form') or '') == 'gas'
+        if lang == 'TR':
+            conc_hdr = f"{conc_hdr} ({'% h/h' if _is_gas3 else '% a/a'})"
+        else:
+            conc_hdr = f"{conc_hdr} ({'% v/v' if _is_gas3 else '% w/w'})"
         clf_hdr  = term(lang,'classification')
 
         # Başlık hücrelerini Paragraph olarak sarıyoruz — header style data_table içinde uygulanacak
@@ -1521,6 +1527,13 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         # Not: 18mm çok dar, 25mm de "Konsantrasyo n" bölünüyordu → 30mm'ye çıkarıldı
         story.append(data_table(tbl_data,
             [35*mm, 51*mm, 30*mm, 59*mm], styles))
+        # Gaz karışımı: birim notu (SEA Ek-1 — gazlarda v/v; KKDİK Ek-2 3.2.1 — gazda hacimce %0,2)
+        if _is_gas3:
+            story.append(Paragraph(
+                '* Gaz karışımı: konsantrasyonlar hacimce (h/h) verilmiştir; akut toksisite tahminleri '
+                'ppmV cinsindendir (SEA Ek-1 Tablo 3.1.1).' if lang == 'TR' else
+                '* Gas mixture: concentrations are given by volume (v/v); acute toxicity estimates in ppmV.',
+                styles['small']))
         # Kayıt numarası notları
         if _any_tr_missing:
             story.append(Paragraph(
@@ -2631,7 +2644,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         from app.services.clp_service import calculate_ate_health_h_codes as _calc_ate
         _, ate_mix_details = _calc_ate(
             sds_data.get('components', []),
-            form=sds_data.get('form', ''),
+            form=(product.get('form') or sds_data.get('form', '')),
         )
 
     _ROUTE_LABEL_TR = {'oral': 'Oral (Ağız)', 'dermal': 'Dermal (Deri)', 'inhal': 'İnhalasyon (Solunum)'}
@@ -2641,7 +2654,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     if ate_mix_details:
         story.append(Spacer(1, 4))
         # Başlık
-        ate_header = ('ATE Karışım Hesabı — CLP Ek I §3.1.3' if lang == 'TR'
+        ate_header = ('ATE Karışım Hesabı — SEA Ek-1 3.1.3' if lang == 'TR'
                       else 'ATEmix Calculation — CLP Annex I §3.1.3')
         story.append(Paragraph(ate_header, styles['sub_title']))
         story.append(Spacer(1, 3))
@@ -2657,7 +2670,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             res_code  = detail.get('resultCode') or ('—' if lang == 'TR' else '—')
             unk_pct   = detail.get('unknownPct', 0)
             r_lbl = (_ROUTE_LABEL_TR if lang == 'TR' else _ROUTE_LABEL_EN).get(route, route)
-            unit  = _ROUTE_UNIT.get(route, 'mg/kg')
+            unit  = detail.get('unit') or _ROUTE_UNIT.get(route, 'mg/kg')   # gaz: ppmV
             unk_note = (f' (bilinmeyen %{unk_pct} — revize formül)' if unk_pct > 10 else '')
             result_rows.append([
                 r_lbl,
@@ -2677,7 +2690,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             ('ATE (nokta tahmini)' if lang == 'TR' else 'ATE (point estimate)'),
         ]]
         for route, detail in ate_mix_details.items():
-            unit = _ROUTE_UNIT.get(route, 'mg/kg')
+            unit = detail.get('unit') or _ROUTE_UNIT.get(route, 'mg/kg')
             for c in detail.get('components', []):
                 comp_rows.append([
                     str((c.get('name_tr','') if lang=='TR' else '') or c.get('name', c.get('cas', '—'))),

@@ -1187,8 +1187,11 @@ def correct_hclass(h_code: str, h_class: str) -> str:
     # Önce canonical single-class map'e bak
     canonical = H_CODE_TO_CANONICAL_CLASS.get(code4)
     if canonical:
-        # Aynı sınıfın alt kategorisi korunur (örn. "Press. Gas (Liq.)" — SEA Ek-1 Tablo 2.5.1)
-        if h_class and h_class.strip().startswith(canonical + ' ('):
+        # Aynı sınıfın tanımlı alt kategorisi korunur (örn. "Press. Gas (Liq.)" — SEA Ek-1 Tablo
+        # 2.5.1). Yalnız sözlükte karşılığı olanlar: "Acute Tox. 3 (inhalasyon …)" gibi yol ekleri
+        # kanonik ada indirgenir (yol eki PDF'te ayrıca eklenir).
+        if (h_class and h_class.strip().startswith(canonical + ' (')
+                and h_class.strip() in CLP_CLASS_TR):
             return h_class.strip()
         return canonical  # Bu H kodunun tek canonical sınıfı var, her zaman kullan
 

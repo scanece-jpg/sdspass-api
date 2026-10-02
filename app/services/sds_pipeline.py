@@ -112,8 +112,11 @@ async def refresh_components(components: list, form: str) -> list:
         if not any(_f(v) > 1 for v in user_m.values()):
             c['m_factors'] = src.get('m_factors') or {}
         user_ate = comp.get('ate') or {}
-        if not any(_f(v) > 0 for v in user_ate.values()):
+        if any(_f(v) > 0 for v in user_ate.values()):
+            c['ate_source'] = 'user'   # GBF 11.1.2 tablosunda kaynak olarak gösterilir
+        else:
             c['ate'] = src.get('ate') or {}
+            c['ate_source'] = (src.get('source') or '') if c['ate'] else ''
 
     async def _one(comp: dict) -> dict:
         cas = (comp.get('cas_no') or comp.get('cas') or '').strip()

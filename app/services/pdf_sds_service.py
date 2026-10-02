@@ -2868,6 +2868,60 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         story.append(Spacer(1, 3))
         story.append(Paragraph(ate_note, styles['small']))
 
+    # ─── Bileşenlerin akut toksisite verileri — KKDİK Ek-2 A 11.1.2 ──────────
+    # "Varsa, karışımdaki zararlı maddelerin ilgili toksikolojik özellikleri de sağlanır; örneğin: LD50,
+    # akut toksisite tahminleri veya LC50." Kaynak: kullanıcının girdiği değer (hammadde GBF'si) veya
+    # SEA Ek-6 ATE. Konsantrasyon yazılmaz (Bölüm 3 gizliliği). ATEmix tablosunda aynı değer varsa tekrarlanmaz.
+    # ATEmix bileşen kayıtlarında CAS yok — ad + yol + değer ile eşleştirilir
+    _shown = set()
+    for _rt, _det in (ate_mix_details or {}).items():
+        for _c in _det.get('components', []):
+            for _n in {_c.get('name'), _c.get('name_tr')} - {None, ''}:
+                try:
+                    _shown.add((str(_n).strip().lower(), _rt[:5], float(_c.get('ate'))))
+                except (TypeError, ValueError):
+                    pass
+    _is_gas11 = (product.get('form') or '') == 'gas'
+    _RT = {'oral': ('oral', 'Ağız yoluyla (LD50/ATE)', 'Oral (LD50/ATE)', 'mg/kg'),
+           'dermal': ('dermal', 'Deri yoluyla (LD50/ATE)', 'Dermal (LD50/ATE)', 'mg/kg'),
+           'inhal': ('inhal', 'Soluma yoluyla (LC50/ATE)', 'Inhalation (LC50/ATE)', 'ppmV' if _is_gas11 else 'mg/L (4 sa)'),
+           'inhalation': ('inhal', 'Soluma yoluyla (LC50/ATE)', 'Inhalation (LC50/ATE)', 'ppmV' if _is_gas11 else 'mg/L (4 sa)')}
+    _src_lbl = lambda s: ((('Kullanıcı girişi (hammadde GBF\'si)' if lang == 'TR' else 'User input (raw material SDS)')
+                           if s == 'user' else
+                           ('SEA Ek-6 (resmî ATE)' if lang == 'TR' else 'Harmonised ATE (Annex VI)')
+                           if 'Ek-6' in (s or '') or 'Annex' in (s or '') else (s or '—')))
+    _tox_rows = []
+    for _c in sds_data.get('components', []):
+        _cas = str(_c.get('cas_no') or _c.get('cas') or '').strip()
+        _ate = _c.get('ate') or {}
+        if _cas == '7732-18-5' or not isinstance(_ate, dict):
+            continue
+        for _k, _v in _ate.items():
+            if _k not in _RT:
+                continue
+            _val, _unit = (_v.get('value'), _v.get('unit')) if isinstance(_v, dict) else (_v, None)
+            try:
+                _val = float(_val)
+            except (TypeError, ValueError):
+                continue
+            if _val <= 0:
+                continue
+            _key, _lt, _le, _u = _RT[_k]
+            if any((str(_n).strip().lower(), _key[:5], _val) in _shown
+                   for _n in (_c.get('name'), _c.get('name_tr')) if _n):
+                continue
+            _nm = (_c.get('name_tr') if lang == 'TR' else '') or _c.get('name') or _cas
+            _tox_rows.append([_nm, _lt if lang == 'TR' else _le,
+                              f"{_val:g} {_unit or _u}", _src_lbl(_c.get('ate_source'))])
+    if _tox_rows:
+        story.append(Spacer(1, 4))
+        story.append(Paragraph(('Bileşenlerin akut toksisite verileri (11.1.2)' if lang == 'TR'
+                                else 'Acute toxicity data of components (11.1.2)'), styles['sub_title']))
+        story.append(data_table(
+            [[('Madde' if lang == 'TR' else 'Substance'), ('Maruz kalma yolu' if lang == 'TR' else 'Route'),
+              ('Değer' if lang == 'TR' else 'Value'), ('Kaynak' if lang == 'TR' else 'Source')]] + _tox_rows,
+            [55*mm, 50*mm, 30*mm, 45*mm], styles))
+
     # ─────────────────────────────────────────────────────────────────────────
     # BÖLÜM 12 — Ekoloji
     # ─────────────────────────────────────────────────────────────────────────

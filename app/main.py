@@ -193,6 +193,9 @@ async def generate_pdf(data: dict = Body(...)):
                 'test_data':  _ci.get('test_data') or {},
                 'h314_removed': _h314_removed_flag,
             }
+            # Eldiven malzeme/kalınlık seçimi (KKDİK Ek-2 8.2.2.2(b)) — ürün kartından
+            _inp['glove_material']  = product.get('glove_material') or _ci.get('glove_material')
+            _inp['glove_thickness'] = product.get('glove_thickness') or _ci.get('glove_thickness')
         else:
             _fp_req_m = _req_methods.get('flash_point', {}) if isinstance(_req_methods, dict) else {}
             _fp_is_user = _fp_req_m.get('measured', True) if isinstance(_fp_req_m, dict) else True
@@ -211,6 +214,8 @@ async def generate_pdf(data: dict = Body(...)):
                 'mixture_ph': phys_in.get('ph') or None,
                 'test_data':  {},
                 'h314_removed': _h314_removed_flag,
+                'glove_material':  product.get('glove_material'),
+                'glove_thickness': product.get('glove_thickness'),
             }
 
         # Motor başarısız olursa PDF üretilmez (fail-closed)
@@ -539,6 +544,7 @@ async def generate_pdf(data: dict = Body(...)):
             'h314_neutralization_removed': bool(data.get('h314_neutralization_removed', False)),
             'clp_note_overrides': data.get('clp_note_overrides', {}),
             'ppe': py_ppe,
+            'glove': core.get('glove') or {},
             'form_sub':    data.get('form_sub'),
             'voc_content': data.get('voc_content'),
             # Test yerine verilen fiziksel tehlike kararlarının gerekçesi (Bölüm 16)
@@ -1095,6 +1101,8 @@ async def sds_calculate(body: dict = Body(...)):
             'mixture_ph': body.get('mixture_ph'),
             'test_data':  body.get('test_data') or {},
             'h314_removed': bool(body.get('h314_neutralization_removed', False)),
+            'glove_material':  body.get('glove_material'),
+            'glove_thickness': body.get('glove_thickness'),
         })
         phys_result = core['phys_res']
         return {
@@ -1119,6 +1127,7 @@ async def sds_calculate(body: dict = Body(...)):
             'eco':         core['eco_panel'],
             'transport':   core['transport'],
             'ppe':         core['ppe'],
+            'glove':       core.get('glove') or {},
             'theo_props':  phys_result.get('theo_props', {}),
             'warnings':    core['warnings'],
             'pictograms':  core['pictograms'],

@@ -1976,27 +1976,33 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             parts += [f"({rec_label}: {p})" for p in recommended]
         return '; '.join(parts) if parts else term(lang, 'not_applicable')
 
+    # KKDİK Ek-2 A 8.2.2.2 sırası ve adları: (a) göz/yüz, (b) cilt — (i) eller, (ii) diğerleri,
+    # (c) solunum sistemi, (d) ısıl zararlar (yalnız ısıl zarar arz eden üründe)
+    _TR822 = lang == 'TR'
+    _lbl822 = {
+        'eyes':  'a) Göz/yüz korunması' if _TR822 else 'a) Eye/face protection',
+        'hands': ('b) Cildin korunması — i) Ellerin korunması' if _TR822
+                  else 'b) Skin protection — i) Hand protection'),
+        'body':  'b) Cildin korunması — ii) Diğerleri' if _TR822 else 'b) Skin protection — ii) Other',
+        'resp':  'c) Solunum sisteminin korunması' if _TR822 else 'c) Respiratory protection',
+        'heat':  'd) Isıl zararlar' if _TR822 else 'd) Thermal hazards',
+    }
+    _thermal = None
+    if 'H281' in _h82:   # soğutulmuş sıvılaştırılmış gaz — soğuk yanığı
+        _thermal = ('Soğuğa karşı yalıtımlı koruyucu eldiven (EN 511) ve yüz siperi (EN 166) kullanın.' if _TR822
+                    else 'Wear cold-insulating gloves (EN 511) and a face shield (EN 166).')
+
     if _ppe_engine_data:
         # Yeni PPE motoru verisi mevcut — detaylı tablo
         _na = term(lang, 'not_applicable')
         ppe_rows = [
-            [
-                term(lang, 'ppe_resp'),
-                _ppe_items_text(_ppe_engine_data.get('respiratory', [])) or _na,
-            ],
-            [
-                term(lang, 'ppe_gloves'),
-                _ppe_items_text(_ppe_engine_data.get('hands', [])) or _na,
-            ],
-            [
-                term(lang, 'ppe_eyes'),
-                _ppe_items_text(_ppe_engine_data.get('eyes', [])) or _na,
-            ],
-            [
-                term(lang, 'ppe_body'),
-                _ppe_items_text(_ppe_engine_data.get('body', [])) or _na,
-            ],
+            [_lbl822['eyes'],  _ppe_items_text(_ppe_engine_data.get('eyes', [])) or _na],
+            [_lbl822['hands'], _ppe_items_text(_ppe_engine_data.get('hands', [])) or _na],
+            [_lbl822['body'],  _ppe_items_text(_ppe_engine_data.get('body', [])) or _na],
+            [_lbl822['resp'],  _ppe_items_text(_ppe_engine_data.get('respiratory', [])) or _na],
         ]
+        if _thermal:
+            ppe_rows.append([_lbl822['heat'], _thermal])
         story.append(data_table(ppe_rows, [50*mm, 130*mm], styles, header=False))
 
         # Genel hijyen önlemleri
@@ -2011,25 +2017,31 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         sec8 = generate_section(8, h_codes)
         ppe_old = sec8.get('ppe', {})
         ppe_map = {
-            'gloves': term(lang, 'ppe_gloves'),
-            'eyes':   term(lang, 'ppe_eyes'),
-            'resp':   term(lang, 'ppe_resp'),
-            'body':   term(lang, 'ppe_body'),
+            'eyes':   _lbl822['eyes'],
+            'gloves': _lbl822['hands'],
+            'body':   _lbl822['body'],
+            'resp':   _lbl822['resp'],
         }
         ppe_rows = []
         for key, label in ppe_map.items():
             val = ppe_old.get(key, term(lang, 'not_applicable'))
             ppe_rows.append([label, val])
+        if _thermal:
+            ppe_rows.append([_lbl822['heat'], _thermal])
         story.append(data_table(ppe_rows, [50*mm, 130*mm], styles, header=False))
 
-    # 8.2.2.2(b) — eldiven: malzeme türü ve delinme süresi
-    story.append(Paragraph(
-        ('Eldiven malzemesi ve kalınlığı yukarıda belirtilmiştir; delinme süresi kullanım koşullarına göre '
-         'eldiven üreticisinin EN ISO 374-1 test verilerinden seçilmeli, eldivenler hasar ve kirlenme '
-         'durumunda değiştirilmelidir.') if lang == 'TR' else
-        ('Glove material and thickness are given above; the breakthrough time should be selected from the '
-         'glove manufacturer’s EN ISO 374-1 data for the conditions of use; replace gloves when damaged or '
-         'contaminated.'), styles['small']))
+    # 8.2.2.2(b) — eldiven: malzeme, kalınlık ve minimum delinme süresi (glove_service, EN ISO 374-1)
+    _glove = sds_data.get('glove') or {}
+    if _glove.get('note'):
+        story.append(Paragraph(_glove['note'], styles['small']))
+    else:
+        story.append(Paragraph(
+            ('Eldiven malzemesi ve kalınlığı yukarıda belirtilmiştir; delinme süresi kullanım koşullarına göre '
+             'eldiven üreticisinin EN ISO 374-1 test verilerinden seçilmeli, eldivenler hasar ve kirlenme '
+             'durumunda değiştirilmelidir.') if lang == 'TR' else
+            ('Glove material and thickness are given above; the breakthrough time should be selected from the '
+             'glove manufacturer’s EN ISO 374-1 data for the conditions of use; replace gloves when damaged or '
+             'contaminated.'), styles['small']))
 
     # 8.2.3 Çevresel maruz kalma kontrolleri (KKDİK Ek-2 8.2.3)
     _env = ('Ürünün kanalizasyona, yüzey ve yeraltı sularına ve toprağa karışmasını önleyin '
@@ -3299,8 +3311,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         ['14.4 ' + sub_title(lang,'14.4'),                 pack_grp or term(lang, 'not_applicable')],
         ['14.5 ' + sub_title(lang,'14.5'),                 env_haz],
         ['  ↳ Deniz Kirletici (IMDG)' if lang == 'TR' else '  ↳ Marine Pollutant (IMDG)', _imdg_env],
-        [('14.6 Kullanıcı için özel önlemler' if lang == 'TR'
-          else '14.6 Special precautions for user'),  _sec14_6],
+        ['14.6 ' + sub_title(lang, '14.6'),  _sec14_6],   # Ek-2 B: "Kullanıcılar için özel önlemler"
         # ADR'ye özgü teknik bilgiler
         ['— Sınıflandırma Kodu (ADR)' if lang == 'TR' else '— Classification Code (ADR)', cl_code],
         ['— Kemler Kodu / Tehlike No'  if lang == 'TR' else '— Hazard ID No (Kemler)',     kemler],

@@ -514,6 +514,16 @@ async def classify(inp: dict) -> dict:
     except Exception as e:
         print(f'[PPE ERROR] {e}')
         ppe = {}
+    # Eldiven — EN ISO 374-1 sınıf harfi/tip/minimum süre + malzeme önerisi (kullanıcı seçimi varsa o)
+    glove = {'applies': False}
+    try:
+        from app.services.glove_service import select as _glove_select
+        glove = _glove_select(comps, list(all_h) + list(h_codes), lang=lang,
+                              material=inp.get('glove_material'), thickness=inp.get('glove_thickness'))
+        if glove.get('applies') and isinstance(ppe, dict):
+            ppe['hands'] = [{'ppe': glove['text'], 'level': glove['level']}]
+    except Exception as e:
+        print(f'[GLOVE ERROR] {e}')
 
     eco_panel = {
         'h_codes': [h for h in h_codes if h in ECO_H_CODES or h == 'H420'],
@@ -554,6 +564,7 @@ async def classify(inp: dict) -> dict:
         'p_codes':     p_result,
         'transport':   transport,
         'ppe':         ppe,
+        'glove':       glove,
         'phys_res':    phys_res,
         'stot_res':    stot_res,
         'clp_res':     clp_res,

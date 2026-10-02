@@ -72,7 +72,8 @@
    "soru_en": "All 16 sections and their prescribed subsections are present in order.",
    "yontem": "kod",
    "kosul": "her",
-   "onem": "zorunlu"
+   "onem": "zorunlu",
+   "not": "Uygulandı: scripts/check_headings.py — Ek-2 Bölüm B'deki 65 başlığı (16 bölüm + alt başlıklar) sıra ve metin olarak karşılaştırır; 3.1/3.2'den biri yeterli; büyük I/İ ve boşluk farkı yok sayılır."
   },
   {
    "id": "G-bos-alt",

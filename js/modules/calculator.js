@@ -99,6 +99,7 @@ const CalculatorModule = (() => {
       window._physDecisions = {};
       window._physDecisionLabels = {};
       window._physDecisionsKey = casKey;
+      window._gloveSel = null;   // eldiven seçimi de başka ürüne taşınmasın
     }
     Object.assign(testData, window._physDecisions || {});
 
@@ -118,6 +119,9 @@ const CalculatorModule = (() => {
       voc_content: (!isNaN(vocRaw) && vocRaw >= 0) ? vocRaw : null,
       // H314 nötralizasyon diyaloğunda "Kaldır" seçildiyse (PDF akışı) panel de aynı kararla hesaplar
       h314_neutralization_removed: !!window._h314Removed,
+      // Eldiven malzeme/kalınlık seçimi (KKD panelindeki eldiven kartı) — panel ve PDF aynı metni üretir
+      glove_material:  (window._gloveSel && window._gloveSel.material)  || null,
+      glove_thickness: (window._gloveSel && window._gloveSel.thickness) || null,
     };
     return payload;
   }
@@ -179,6 +183,8 @@ const CalculatorModule = (() => {
 
       // Ek-6'daki maddelere ECHA bildirimlerinden eklenen (Ek-6 dışı) sınıflar — sağ panelde gösterilir
       window._lastEk6Supp = data.ek6_supplements || [];
+      // Eldiven önerisi (EN ISO 374-1 harf/tip + malzeme seçenekleri + uyarılar) — KKD panelinde kart
+      window._lastGlove = data.glove || {};
       _lastPayload = payload;
       _lastSummary = data.summary || null;
       StateStore.setCalcResult(result);

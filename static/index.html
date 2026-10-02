@@ -1249,7 +1249,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
 <script src="js/modules/cas-lookup.js?v=20260617"></script>
 <script src="js/modules/component-manager.js?v=20260617"></script>
 <script src="js/modules/conc-selector.js?v=20260617"></script>
-<script src="js/modules/calculator.js?v=20261002"></script>
+<script src="js/modules/calculator.js?v=20261002b"></script>
 <script src="js/modules/results-renderer.js?v=20260930"></script>
 <script src="js/modules/pdf-exporter.js?v=20260617"></script>
 <script src="js/app.js?v=20260617"></script>
@@ -4355,6 +4355,10 @@ function renderAll(s) {
       ['eyes','👓 Göz/Yüz'], ['body','🦺 Vücut'],
     ];
     cats.forEach(([key, label]) => {
+      if (key === 'hands' && window._lastGlove && window._lastGlove.applies) {
+        h += _renderGloveCard(window._lastGlove);   // EN ISO 374-1 harf/tip + malzeme/kalınlık seçimi
+        return;
+      }
       if (!(ppe[key]||[]).length) return;
       h += `<div class="ppe-category"><div class="ppe-cat-title">${label}</div>`;
       ppe[key].forEach(item => { h += `<div class="ppe-item">${item.ppe}</div>`; });
@@ -4394,6 +4398,43 @@ function renderAll(s) {
     eco: s.eco,
     comps: getComps(),
   };
+}
+
+// ── Eldiven kartı — KKDİK Ek-2 8.2.2.2(b): malzeme, kalınlık, minimum delinme süresi ──────────
+// Harf/tip/minimum süre EN ISO 374-1'den otomatik; malzeme ve kalınlık öneridir, kullanıcı onaylar/değiştirir.
+// Uyarılar yalnız burada görünür (GBF'ye basılmaz).
+function _renderGloveCard(g) {
+  const names = g.malzeme_adlari || {};
+  const suggested = g.malzeme_secenekleri || [];
+  const all = Object.keys(names);
+  const opt = m => `<option value="${m}" ${m === g.malzeme ? 'selected' : ''}>${names[m] || m}${
+    suggested.includes(m) ? (m === suggested[0] ? ' — önerilen' : '') : ' — sınıfa uygunluğu doğrulanmadı'}</option>`;
+  const letters = (g.letters || []).map(x =>
+    `<span style="background:rgba(56,189,248,.12);border-radius:4px;padding:1px 6px;font-size:10px;margin-right:3px">${x.letter} · ${x.sinif}</span>`).join('');
+  let h = `<div class="ppe-category"><div class="ppe-cat-title">🧤 El — EN ISO 374-1</div>
+    <div class="ppe-item">${g.text}</div>
+    ${letters ? `<div style="margin:3px 0 4px">${letters}</div>` : ''}
+    <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:10px;color:var(--text3);margin:4px 0">
+      <label for="glove_mat">Malzeme</label>
+      <select id="glove_mat" class="v0-inp" style="width:auto;font-size:11px;padding:2px 6px" onchange="_onGloveChange('mat')">
+        ${suggested.map(opt).join('')}${all.filter(m => !suggested.includes(m)).map(opt).join('')}
+      </select>
+      <label for="glove_thk">Kalınlık (mm)</label>
+      <input id="glove_thk" class="v0-inp" type="number" min="0.02" step="0.01" value="${g.kalinlik_mm}"
+             style="width:70px;font-size:11px;padding:2px 6px" onchange="_onGloveChange('thk')">
+    </div>`;
+  (g.uyarilar || []).forEach(w => { h += `<div class="warn-box" style="margin-top:4px">⚠ ${w}</div>`; });
+  return h + `</div>`;
+}
+
+function _onGloveChange(what) {
+  const g = window._lastGlove || {};
+  const mat = document.getElementById('glove_mat')?.value || g.malzeme;
+  let thk = document.getElementById('glove_thk')?.value || '';
+  // Malzeme değişince kalınlık o malzemenin tipik değerine geçer (kullanıcı sonra değiştirebilir)
+  if (what === 'mat') thk = String((g.varsayilan_kalinlik || {})[mat] ?? thk);
+  window._gloveSel = { material: mat, thickness: thk ? parseFloat(thk) : null };
+  if (typeof doCalculate === 'function') doCalculate();   // panel ve PDF metni aynı kaynaktan yenilenir
 }
 
 async function _checkSVHC(comps) {
@@ -5746,7 +5787,9 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
       lang: 'TR',
       product: { name: productName, form, usage,
                  usage_desc: document.getElementById('pusage_desc')?.value?.trim() || '',   // GBF 1.2
-                 is_detergent: !!document.getElementById('p_detergent')?.checked },
+                 is_detergent: !!document.getElementById('p_detergent')?.checked,
+                 glove_material:  window._gloveSel?.material  || null,    // GBF 8.2.2.2(b)
+                 glove_thickness: window._gloveSel?.thickness || null },
       supplier: (() => {
         const g = id => document.getElementById(id)?.value?.trim() || '';
         const hours = document.querySelector('input[name="telHours"]:checked')?.value || '24_7';

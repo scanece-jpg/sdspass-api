@@ -1,0 +1,671 @@
+{
+ "kaynak": "Kozmetik Ürünler Yönetmeliği Ek III; RG 05.03.2024/32480 değişikliği; yürürlük 31.07.2026",
+ "dogrulama": "Resmî Gazete taranmış ek sayfalarından okundu; tüm CAS kontrol haneleri geçerli",
+ "deterjan_ek7a_esik_yuzde": 0.01,
+ "kozmetik_esik_yuzde": {
+  "durulanmayan": 0.001,
+  "durulanan": 0.01,
+  "dayanak": "Ek III h sütunu; KÜD-KLVZ-57 Madde 8(1)"
+ },
+ "grup_kurali": "Grup üyelerinin toplamı sınırı aşarsa grup adı yazılır (KÜD-KLVZ-57 Ek-2 madde 2)",
+ "not": "ek3_2024 yalnızca RG 32480 ile eklenen/değiştirilen sıraları içerir; klasik_26 Ek IIIte kalır",
+ "ek3_2024": [
+  {
+   "sira_no": 45,
+   "ad": "BENZYL ALCOHOL",
+   "cas": [
+    "100-51-6"
+   ]
+  },
+  {
+   "sira_no": 46,
+   "ad": "6-METHYL COUMARIN",
+   "cas": [
+    "92-48-8"
+   ]
+  },
+  {
+   "sira_no": 70,
+   "ad": "CITRAL",
+   "cas": [
+    "5392-40-5",
+    "141-27-5",
+    "106-26-3"
+   ]
+  },
+  {
+   "sira_no": 73,
+   "ad": "ISOEUGENOL",
+   "cas": [
+    "97-54-1",
+    "5932-68-3",
+    "5912-86-7"
+   ]
+  },
+  {
+   "sira_no": 86,
+   "ad": "CITRONELLOL",
+   "cas": [
+    "106-22-9",
+    "26489-01-0",
+    "1117-61-9",
+    "7540-51-4"
+   ]
+  },
+  {
+   "sira_no": 88,
+   "ad": "LIMONENE",
+   "cas": [
+    "138-86-3",
+    "7705-14-8",
+    "5989-27-5",
+    "5989-54-8"
+   ]
+  },
+  {
+   "sira_no": 109,
+   "ad": "PINUS MUGO",
+   "cas": [
+    "90082-72-7"
+   ]
+  },
+  {
+   "sira_no": 114,
+   "ad": "PINUS PUMILA",
+   "cas": [
+    "97676-05-6"
+   ]
+  },
+  {
+   "sira_no": 122,
+   "ad": "CEDRUS ATLANTICA OIL/EXTRACT",
+   "cas": [
+    "92201-55-3",
+    "8023-85-6"
+   ]
+  },
+  {
+   "sira_no": 124,
+   "ad": "TURPENTINE",
+   "cas": [
+    "9005-90-7",
+    "8006-64-2",
+    "8052-14-0"
+   ]
+  },
+  {
+   "sira_no": 131,
+   "ad": "ALPHA-TERPINENE",
+   "cas": [
+    "99-86-5"
+   ]
+  },
+  {
+   "sira_no": 133,
+   "ad": "TERPINOLENE",
+   "cas": [
+    "586-62-9"
+   ]
+  },
+  {
+   "sira_no": 154,
+   "ad": "MYROXYLON PEREIRAE OIL/EXTRACT",
+   "cas": [
+    "8007-00-9"
+   ]
+  },
+  {
+   "sira_no": 157,
+   "ad": "ROSE KETONES",
+   "cas": [
+    "43052-87-5",
+    "23726-94-5",
+    "24720-09-0",
+    "23696-85-7",
+    "57378-68-4",
+    "71048-82-3",
+    "23726-92-3",
+    "23726-91-2"
+   ]
+  },
+  {
+   "sira_no": 175,
+   "ad": "3-PROPYLIDENEPHTHALIDE",
+   "cas": [
+    "17369-59-4"
+   ]
+  },
+  {
+   "sira_no": 196,
+   "ad": "LIPPIA CITRIODORA ABSOLUTE",
+   "cas": [
+    "8024-12-2",
+    "85116-63-8"
+   ]
+  },
+  {
+   "sira_no": 324,
+   "ad": "METHYL SALICYLATE",
+   "cas": [
+    "119-36-8"
+   ]
+  },
+  {
+   "sira_no": 327,
+   "ad": "ACETYL CEDRENE",
+   "cas": [
+    "32388-55-9"
+   ]
+  },
+  {
+   "sira_no": 328,
+   "ad": "AMYL SALICYLATE",
+   "cas": [
+    "2050-08-0"
+   ]
+  },
+  {
+   "sira_no": 329,
+   "ad": "ANETHOLE",
+   "cas": [
+    "104-46-1",
+    "4180-23-8"
+   ]
+  },
+  {
+   "sira_no": 330,
+   "ad": "BENZALDEHYDE",
+   "cas": [
+    "100-52-7"
+   ]
+  },
+  {
+   "sira_no": 331,
+   "ad": "CAMPHOR",
+   "cas": [
+    "76-22-2",
+    "21368-68-3",
+    "464-49-3",
+    "464-48-2"
+   ]
+  },
+  {
+   "sira_no": 332,
+   "ad": "BETA-CARYOPHYLLENE",
+   "cas": [
+    "87-44-5"
+   ]
+  },
+  {
+   "sira_no": 333,
+   "ad": "CARVONE",
+   "cas": [
+    "99-49-0",
+    "6485-40-1",
+    "2244-16-8"
+   ]
+  },
+  {
+   "sira_no": 334,
+   "ad": "DIMETHYL PHENETHYL ACETATE",
+   "cas": [
+    "151-05-3"
+   ]
+  },
+  {
+   "sira_no": 335,
+   "ad": "HEXADECANOLACTONE",
+   "cas": [
+    "109-29-5"
+   ]
+  },
+  {
+   "sira_no": 336,
+   "ad": "HEXAMETHYLINDANOPYRAN",
+   "cas": [
+    "1222-05-5"
+   ]
+  },
+  {
+   "sira_no": 337,
+   "ad": "LINALYL ACETATE",
+   "cas": [
+    "115-95-7"
+   ]
+  },
+  {
+   "sira_no": 338,
+   "ad": "MENTHOL",
+   "cas": [
+    "89-78-1",
+    "1490-04-6",
+    "2216-51-5",
+    "15356-60-2"
+   ]
+  },
+  {
+   "sira_no": 339,
+   "ad": "TRIMETHYLCYCLOPENTENYL METHYLISOPENTENOL",
+   "cas": [
+    "67801-20-1"
+   ]
+  },
+  {
+   "sira_no": 340,
+   "ad": "SALICYLALDEHYDE",
+   "cas": [
+    "90-02-8"
+   ]
+  },
+  {
+   "sira_no": 341,
+   "ad": "SANTALOL",
+   "cas": [
+    "11031-45-1",
+    "115-71-9",
+    "77-42-9"
+   ]
+  },
+  {
+   "sira_no": 342,
+   "ad": "SCLAREOL",
+   "cas": [
+    "515-03-7"
+   ]
+  },
+  {
+   "sira_no": 343,
+   "ad": "TERPINEOL",
+   "cas": [
+    "8000-41-7",
+    "98-55-5",
+    "138-87-4",
+    "586-81-2"
+   ]
+  },
+  {
+   "sira_no": 344,
+   "ad": "TETRAMETHYL ACETYLOCTAHYDRONAPHTHALENES",
+   "cas": [
+    "54464-57-2",
+    "54464-59-4",
+    "68155-66-8",
+    "68155-67-9"
+   ]
+  },
+  {
+   "sira_no": 345,
+   "ad": "TRIMETHYLBENZENEPROPANOL",
+   "cas": [
+    "103694-68-4"
+   ]
+  },
+  {
+   "sira_no": 346,
+   "ad": "VANILLIN",
+   "cas": [
+    "121-33-5"
+   ]
+  },
+  {
+   "sira_no": 347,
+   "ad": "CANANGA ODORATA OIL/EXTRACT",
+   "cas": [
+    "83863-30-3",
+    "8006-81-3",
+    "68606-83-7",
+    "93686-30-7"
+   ]
+  },
+  {
+   "sira_no": 348,
+   "ad": "CINNAMOMUM CASSIA LEAF OIL",
+   "cas": [
+    "8007-80-5",
+    "84961-46-6"
+   ]
+  },
+  {
+   "sira_no": 349,
+   "ad": "CINNAMOMUM ZEYLANICUM BARK OIL",
+   "cas": [
+    "8015-91-6",
+    "84649-98-9"
+   ]
+  },
+  {
+   "sira_no": 350,
+   "ad": "CITRUS AURANTIUM FLOWER OIL",
+   "cas": [
+    "72968-50-4",
+    "8028-48-6",
+    "8016-38-4"
+   ]
+  },
+  {
+   "sira_no": 351,
+   "ad": "CITRUS AURANTIUM PEEL OIL",
+   "cas": [
+    "68916-04-1",
+    "97766-30-8",
+    "8008-57-9"
+   ]
+  },
+  {
+   "sira_no": 352,
+   "ad": "CITRUS AURANTIUM BERGAMIA PEEL OIL",
+   "cas": [
+    "8007-75-8",
+    "89957-91-5",
+    "68648-33-9",
+    "85049-52-1"
+   ]
+  },
+  {
+   "sira_no": 353,
+   "ad": "CITRUS LIMON PEEL OIL",
+   "cas": [
+    "84929-31-7",
+    "8008-56-8"
+   ]
+  },
+  {
+   "sira_no": 354,
+   "ad": "LEMONGRASS OIL",
+   "cas": [
+    "8007-02-1",
+    "89998-16-3",
+    "91844-92-7"
+   ]
+  },
+  {
+   "sira_no": 355,
+   "ad": "EUCALYPTUS GLOBULUS OIL",
+   "cas": [
+    "97926-40-4",
+    "8000-48-4"
+   ]
+  },
+  {
+   "sira_no": 356,
+   "ad": "EUGENIA CARYOPHYLLUS OIL",
+   "cas": [
+    "8000-34-8",
+    "8015-97-2",
+    "84961-50-2"
+   ]
+  },
+  {
+   "sira_no": 357,
+   "ad": "JASMINE OIL/EXTRACT",
+   "cas": [
+    "84776-64-7",
+    "90045-94-6",
+    "8022-96-6",
+    "8024-43-9"
+   ]
+  },
+  {
+   "sira_no": 358,
+   "ad": "JUNIPERUS VIRGINIANA OIL",
+   "cas": [
+    "8000-27-9",
+    "85085-41-2"
+   ]
+  },
+  {
+   "sira_no": 359,
+   "ad": "LAURUS NOBILIS LEAF OIL",
+   "cas": [
+    "8002-41-3",
+    "8007-48-5",
+    "84603-73-6"
+   ]
+  },
+  {
+   "sira_no": 360,
+   "ad": "LAVANDULA OIL/EXTRACT",
+   "cas": [
+    "91722-69-9",
+    "8022-15-9",
+    "93455-96-0",
+    "93455-97-1",
+    "92623-76-2",
+    "84776-65-8",
+    "8000-28-0",
+    "90063-37-9"
+   ]
+  },
+  {
+   "sira_no": 361,
+   "ad": "MENTHA PIPERITA OIL",
+   "cas": [
+    "8006-90-4",
+    "84082-70-2"
+   ]
+  },
+  {
+   "sira_no": 362,
+   "ad": "MENTHA VIRIDIS LEAF OIL",
+   "cas": [
+    "8008-79-5",
+    "84696-51-5"
+   ]
+  },
+  {
+   "sira_no": 363,
+   "ad": "NARCISSUS EXTRACT",
+   "cas": [
+    "90064-26-9",
+    "68917-12-4",
+    "90064-27-0",
+    "90064-25-8"
+   ]
+  },
+  {
+   "sira_no": 364,
+   "ad": "PELARGONIUM GRAVEOLENS FLOWER OIL",
+   "cas": [
+    "90082-51-2",
+    "8000-46-2"
+   ]
+  },
+  {
+   "sira_no": 365,
+   "ad": "POGOSTEMON CABLIN OIL",
+   "cas": [
+    "8014-09-3",
+    "84238-39-1"
+   ]
+  },
+  {
+   "sira_no": 366,
+   "ad": "ROSE FLOWER OIL/EXTRACT",
+   "cas": [
+    "8007-01-0",
+    "90106-38-0",
+    "93334-48-6",
+    "84696-47-9",
+    "84604-12-6",
+    "84604-13-7",
+    "92347-25-6"
+   ]
+  },
+  {
+   "sira_no": 367,
+   "ad": "SANTALUM ALBUM OIL",
+   "cas": [
+    "8006-87-9",
+    "84787-70-2"
+   ]
+  },
+  {
+   "sira_no": 368,
+   "ad": "EUGENYL ACETATE",
+   "cas": [
+    "93-28-7"
+   ]
+  },
+  {
+   "sira_no": 369,
+   "ad": "GERANYL ACETATE",
+   "cas": [
+    "105-87-3"
+   ]
+  },
+  {
+   "sira_no": 370,
+   "ad": "ISOEUGENYL ACETATE",
+   "cas": [
+    "93-29-8"
+   ]
+  },
+  {
+   "sira_no": 371,
+   "ad": "PINENE",
+   "cas": [
+    "80-56-8",
+    "7785-70-8",
+    "127-91-3",
+    "18172-67-3"
+   ]
+  }
+ ],
+ "klasik_26": [
+  {
+   "cas": "122-40-7",
+   "ad": "AMYL CINNAMAL",
+   "sira_no_2024": null
+  },
+  {
+   "cas": "100-51-6",
+   "ad": "BENZYL ALCOHOL",
+   "sira_no_2024": 45
+  },
+  {
+   "cas": "104-54-1",
+   "ad": "CINNAMYL ALCOHOL",
+   "sira_no_2024": null
+  },
+  {
+   "cas": "5392-40-5",
+   "ad": "CITRAL",
+   "sira_no_2024": 70
+  },
+  {
+   "cas": "97-53-0",
+   "ad": "EUGENOL",
+   "sira_no_2024": null
+  },
+  {
+   "cas": "107-75-5",
+   "ad": "HYDROXYCITRONELLAL",
+   "sira_no_2024": null
+  },
+  {
+   "cas": "97-54-1",
+   "ad": "ISOEUGENOL",
+   "sira_no_2024": 73
+  },
+  {
+   "cas": "101-85-9",
+   "ad": "AMYLCINNAMYL ALCOHOL",
+   "sira_no_2024": null
+  },
+  {
+   "cas": "118-58-1",
+   "ad": "BENZYL SALICYLATE",
+   "sira_no_2024": null
+  },
+  {
+   "cas": "104-55-2",
+   "ad": "CINNAMAL",
+   "sira_no_2024": null
+  },
+  {
+   "cas": "91-64-5",
+   "ad": "COUMARIN",
+   "sira_no_2024": null
+  },
+  {
+   "cas": "106-24-1",
+   "ad": "GERANIOL",
+   "sira_no_2024": null
+  },
+  {
+   "cas": "31906-04-4",
+   "ad": "HYDROXYISOHEXYL 3-CYCLOHEXENE CARBOXALDEHYDE",
+   "sira_no_2024": null
+  },
+  {
+   "cas": "105-13-5",
+   "ad": "ANISE ALCOHOL",
+   "sira_no_2024": null
+  },
+  {
+   "cas": "103-41-3",
+   "ad": "BENZYL CINNAMATE",
+   "sira_no_2024": null
+  },
+  {
+   "cas": "4602-84-0",
+   "ad": "FARNESOL",
+   "sira_no_2024": null
+  },
+  {
+   "cas": "80-54-6",
+   "ad": "BUTYLPHENYL METHYLPROPIONAL",
+   "sira_no_2024": null
+  },
+  {
+   "cas": "78-70-6",
+   "ad": "LINALOOL",
+   "sira_no_2024": null
+  },
+  {
+   "cas": "120-51-4",
+   "ad": "BENZYL BENZOATE",
+   "sira_no_2024": null
+  },
+  {
+   "cas": "106-22-9",
+   "ad": "CITRONELLOL",
+   "sira_no_2024": 86
+  },
+  {
+   "cas": "101-86-0",
+   "ad": "HEXYL CINNAMAL",
+   "sira_no_2024": null
+  },
+  {
+   "cas": "5989-27-5",
+   "ad": "LIMONENE",
+   "sira_no_2024": 88
+  },
+  {
+   "cas": "138-86-3",
+   "ad": "LIMONENE",
+   "sira_no_2024": 88
+  },
+  {
+   "cas": "111-12-6",
+   "ad": "METHYL 2-OCTYNOATE",
+   "sira_no_2024": null
+  },
+  {
+   "cas": "127-51-5",
+   "ad": "ALPHA-ISOMETHYL IONONE",
+   "sira_no_2024": null
+  },
+  {
+   "cas": "90028-68-5",
+   "ad": "EVERNIA PRUNASTRI EXTRACT",
+   "sira_no_2024": null
+  },
+  {
+   "cas": "90028-67-4",
+   "ad": "EVERNIA FURFURACEA EXTRACT",
+   "sira_no_2024": null
+  }
+ ]
+}

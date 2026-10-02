@@ -1092,8 +1092,8 @@
    "id": "8.1-dnel",
    "bolum": "8.1",
    "dayanak": "KKDİK Ek-2 A 8.1.4",
-   "soru_tr": "Mevcutsa DNEL/PNEC değerleri verilmiş mi?",
-   "soru_en": "DNEL and PNEC values are given where available.",
+   "soru_tr": "DNEL/PNEC değerleri (mevcutsa) verilmiş ya da belirlenmediği/mevcut olmadığı belirtilmiş mi?",
+   "soru_en": "DNEL and PNEC values are given, or it is stated that they are not established or not available.",
    "yontem": "jev",
    "kosul": "her",
    "bolumler": [
@@ -1809,8 +1809,8 @@
     "12"
    ],
    "onem": "kosullu",
-   "soru_tr": "Bozunmadan doğan zararlı dönüşüm ürünleri hakkında bilgi (varsa) verilmiş mi?",
-   "soru_en": "Information on hazardous transformation products arising from degradation is given, or it is clear none are expected."
+   "soru_tr": "Zararlı dönüşüm ürünleri hakkında bilgi verilmiş ya da bilgi bulunmadığı belirtilmiş mi?",
+   "soru_en": "Information on hazardous transformation products from degradation is given, or it is stated that none are expected or that no information is available."
   },
   {
    "id": "12.1-diger-organizma",

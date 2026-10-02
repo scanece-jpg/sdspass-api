@@ -1238,6 +1238,32 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 'Hakkında Yönetmelik (SEA) esaslarına göre belirlenmiştir.</i>',
                 styles['small']
             ))
+        # KKDİK Ek-2 A 2.1: en önemli olumsuz fizikokimyasal, insan sağlığı ve çevresel etkiler, uzman
+        # olmayanların anlayacağı şekilde listelenir — sınıflandırmadaki zararlılık ifadeleri gruplanır
+        if lang in ('TR', 'EN'):
+            _h21 = [h for h in dict.fromkeys(list(all_h_codes or []) + list(h_codes or [])) if h]
+            if 'H314' in _h21:
+                _h21 = [h for h in _h21 if h != 'H318']   # H314 göz hasarını zaten kapsar
+            _grp = {'fiz': [h for h in _h21 if h.startswith('H2')],
+                    'sag': [h for h in _h21 if h.startswith('H3')],
+                    'cev': [h for h in _h21 if h.startswith('H4')]}
+            _TR21 = lang == 'TR'
+            _none = {'fiz': 'fizikokimyasal tehlike sınıflandırması yoktur.' if _TR21
+                     else 'not classified for physicochemical hazards.',
+                     'sag': 'insan sağlığı tehlike sınıflandırması yoktur.' if _TR21
+                     else 'not classified for health hazards.',
+                     'cev': 'çevre için zararlı olarak sınıflandırılmamıştır.' if _TR21
+                     else 'not classified as hazardous to the environment.'}
+            _lab = {'fiz': 'Fizikokimyasal etkiler' if _TR21 else 'Physicochemical effects',
+                    'sag': 'İnsan sağlığı üzerindeki etkiler' if _TR21 else 'Human health effects',
+                    'cev': 'Çevresel etkiler' if _TR21 else 'Environmental effects'}
+            story.append(Spacer(1, 3))
+            story.append(Paragraph(f"<b>{'En önemli olumsuz etkiler' if _TR21 else 'Most important adverse effects'}:</b>",
+                                   styles['body']))
+            for _g in ('fiz', 'sag', 'cev'):
+                _txt21 = (' '.join(get_h(lang, h).rstrip('.') + '.' for h in _grp[_g]) if _grp[_g]
+                          else ('Ürün ' if _TR21 else 'The product is ') + _none[_g])
+                story.append(Paragraph(f"• {_lab[_g]}: {_txt21}", styles['bullet']))
     else:
         story.append(Paragraph(term(lang,'not_classified'), styles['body']))
 
@@ -1647,8 +1673,14 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _h_all_first_aid = list(dict.fromkeys(list(all_h_codes) + list(h_codes)))
     if lang in ('TR', 'EN'):
         # KKDİK Ek-2 4.1.1: maruz kalma yoluna göre; SEA Ek-4 resmî önlem ifadeleri
+        _eye_dmg = bool(set(_h_all_first_aid) & {'H314', 'H318'})
         for _fa in reg_first_aid(_h_all_first_aid, _sec_form, lang):
-            story.append(Paragraph(f"• <b>{_fa['route']}:</b> {_fa['text']}", styles['bullet']))
+            _fa_txt = _fa['text']
+            # Aşındırıcı/göz hasarı: P305+P351+P338 "birkaç dakika" der; iyi uygulama olarak süre eklenir
+            if _eye_dmg and _fa['route'] in ('Göz', 'Eyes', 'Eye') and '15' not in _fa_txt:
+                _fa_txt += (' Yıkamaya en az 15 dakika devam edin.' if lang == 'TR'
+                            else ' Continue rinsing for at least 15 minutes.')
+            story.append(Paragraph(f"• <b>{_fa['route']}:</b> {_fa_txt}", styles['bullet']))
         # KKDİK Ek-2 A 4.1.2(a): gecikmiş etkilerin beklenip beklenmediği (11.1.7 ile aynı metin)
         story.append(Paragraph(
             f"• <b>{'Gecikmiş etkiler' if lang == 'TR' else 'Delayed effects'}:</b> "
@@ -1673,6 +1705,12 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             if lang == 'TR' else
             'Treat symptomatically. Show this Safety Data Sheet or the product label to the physician.',
             styles['body']))
+        # Ek-2 A 4.3: özel/acil tedavi için işyerinde bulunması gereken araçlar
+        if set(_h_all_first_aid) & {'H314', 'H318'}:
+            story.append(Paragraph(
+                'Çalışma alanında göz duşu ve acil durum duşu bulundurulmalıdır.' if lang == 'TR'
+                else 'An eye wash station and an emergency shower should be available in the work area.',
+                styles['body']))
     story.append(Paragraph(
         term(lang,'poison_center'), styles['body']
     ))
@@ -1772,6 +1810,15 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         story += bullet_list(_s6['6.2'], styles)
         story += sub_block(f"6.3 {sub_title(lang,'6.3')}", styles)
         story += bullet_list(_s6['6.3'], styles)
+        # KKDİK Ek-2 A 6 (giriş): dökülme hacmi zarar üzerinde önemliyse büyük ve küçük dökülmeler ayrılır
+        if _sec_form not in ('solid', 'powder', 'gas') and _h_all_first_aid:
+            story += bullet_list([
+                ('Küçük dökülmeler: emici malzemeyle toplayıp uygun, etiketli kaplara alın.' if lang == 'TR'
+                 else 'Small spills: absorb with absorbent material and place in suitable, labelled containers.'),
+                ('Büyük dökülmeler: dökülen ürünü set ile çevreleyin, uygun ekipmanla etiketli kaplara aktarın; '
+                 'kanalizasyona veya su kaynaklarına ulaşma riski varsa yetkili makamları bilgilendirin.' if lang == 'TR'
+                 else 'Large spills: dike the spilled product, transfer it with suitable equipment into labelled '
+                      'containers; notify the authorities if it may reach drains or watercourses.')], styles)
         # KKDİK Ek-2 A 6.3.3: uygunsuz kontrol altına alma / temizlik teknikleri
         _s633 = ['Dökülen ürünü su ile seyrelterek kanalizasyona yıkamayın.' if lang == 'TR'
                  else 'Do not flush spilled product into the sewer with water.']
@@ -1823,6 +1870,22 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                              'yollarından uzak tutun.' if lang == 'TR' else
                              'Prevent release to the environment; avoid spills and keep away from drains and '
                              'watercourses.')
+        # KKDİK Ek-2 A 7.1.1(c): özellikleri değiştiren işlemlerden doğan yeni riskler
+        _h71 = set(all_h_codes or []) | set(h_codes or [])
+        if 'H314' in _h71 and not _b7_is_solid:
+            _sec7_bullets.append('Seyreltme ısı açığa çıkarabilir: ürünü suya yavaşça ve karıştırarak ekleyin; '
+                                 'ürünün üzerine su eklemeyin.' if lang == 'TR' else
+                                 'Dilution may release heat: add the product slowly to water while stirring; '
+                                 'never add water to the product.')
+        if _h71 & {'H224', 'H225', 'H226', 'H228'}:
+            _sec7_bullets.append('Isıtma, püskürtme veya sisleme buhar oluşumunu ve alevlenme riskini artırır.'
+                                 if lang == 'TR' else
+                                 'Heating, spraying or misting increases vapour formation and the risk of ignition.')
+        if not (_h71 & {'H314', 'H224', 'H225', 'H226', 'H228'}):
+            _sec7_bullets.append('Isıtma, seyreltme veya başka maddelerle karıştırma ürünün özelliklerini '
+                                 'değiştirebilir; bu işlemlerden önce risk değerlendirmesi yapın.' if lang == 'TR'
+                                 else 'Heating, dilution or mixing with other substances may change the properties '
+                                      'of the product; assess the risks before such operations.')
     else:
         sec7 = generate_section(7, h_codes)
         _sec7_bullets = adapt_list_for_form(sec7['bullets'], _sec_form)
@@ -1847,6 +1910,13 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 'Serin ve iyi havalandırılan bir yerde, doğrudan güneş ışığından ve ısı kaynaklarından uzakta '
                 'saklayın.' if lang == 'TR' else
                 'Store in a cool, well-ventilated place away from direct sunlight and sources of heat.']
+        # KKDİK Ek-2 A 7.2(d)(i)(ii): havalandırma ve depo tasarımı (tutma)
+        if _h72 and _sec_form not in ('solid', 'powder', 'gas'):
+            _sec72_bullets = list(_sec72_bullets) + [
+                'Depolama alanında dökülmeye karşı sızdırmaz zemin veya tutma havuzu sağlayın; depo iyi '
+                'havalandırılmalıdır.' if lang == 'TR' else
+                'Provide an impermeable floor or a retention basin against spills in the storage area; the store '
+                'must be well ventilated.']
         # KKDİK Ek-2 A 7.2(a)(iv) ve B 7.2 başlığı: birlikte bulunmaması gereken maddeler adıyla.
         # Liste Bölüm 10.5'te hesaplanır; yer tutucu o zaman doldurulur (bkz. _INCOMPAT_SLOT).
         _sec72_bullets = list(_sec72_bullets) + [_INCOMPAT_SLOT]
@@ -1926,8 +1996,24 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             else 'Source: Turkish Chemical Agents Regulation (OG No. 28733, 12.08.2013) Annex-1',
             styles['small']
         ))
+        # KKDİK Ek-2 A 8.1.2: tavsiye edilen izleme usulleri
+        if lang in ('TR', 'EN'):
+            story.append(Paragraph(
+                'İzleme: işyeri havasındaki konsantrasyon ölçümleri TS EN 689 (İşyeri maruziyeti — kimyasal '
+                'maddelerin solunum yoluyla maruziyetinin ölçülmesi — sınır değerlere uygunluğun test edilmesi '
+                'için strateji) esas alınarak yapılmalıdır.' if lang == 'TR' else
+                'Monitoring: workplace air measurements should follow EN 689 (Workplace exposure — measurement of '
+                'exposure by inhalation to chemical agents — strategy for testing compliance with occupational '
+                'exposure limit values).', styles['small']))
     else:
         story.append(Paragraph(S(lang,'oel_reference'), styles['body']))
+    # KKDİK Ek-2 A 8.1.4: DNEL/PNEC — karışım için değer verilmiyorsa bu belirtilir
+    if lang in ('TR', 'EN') and len(sds_data.get('components') or []) > 1:
+        story.append(Paragraph(
+            'DNEL/PNEC: karışım için belirlenmemiştir; bileşenlere ait değerler için hammadde tedarikçisinin '
+            'GBF\'sine bakınız.' if lang == 'TR' else
+            'DNEL/PNEC: not established for the mixture; for component values refer to the raw material '
+            'supplier\'s SDS.', styles['small']))
 
     # Not: "Genel toz limiti (PNOC) 10/4 mg/m³ — 28733 Ek-1" satırı kaldırıldı: resmî yönetmelik
     # metninde (Ek-1) böyle bir değer yoktur.
@@ -2032,6 +2118,11 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
 
     # 8.2.2.2(b) — eldiven: malzeme, kalınlık ve minimum delinme süresi (glove_service, EN ISO 374-1)
     _glove = sds_data.get('glove') or {}
+    # KKDİK Ek-2 A 8.2.2.1: yangına özgü KKD için Bölüm 5'e atıf
+    if lang in ('TR', 'EN'):
+        story.append(Paragraph('Yangın sırasında kullanılacak koruyucu ekipman için Bölüm 5.3\'e bakınız.'
+                               if lang == 'TR' else
+                               'For protective equipment during fire-fighting, see Section 5.3.', styles['small']))
     if _glove.get('note'):
         story.append(Paragraph(_glove['note'], styles['small']))
     else:
@@ -2576,7 +2667,13 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
 
     stability_data = [
         [f"10.1 {sub_title(lang,'10.1')}", _react101],
-        [f"10.2 {sub_title(lang,'10.2')}", S(lang,'stable_conditions')],
+        # KKDİK Ek-2 A 10.2: kararlılık + fiziksel görünüm değişikliğinin güvenlik açısından önemi
+        [f"10.2 {sub_title(lang,'10.2')}", S(lang,'stable_conditions') + (
+            ' Görünümde beklenmeyen değişiklik (renk değişimi, bulanıklık, çökelti) bozulma belirtisi olabilir; '
+            'bu durumda ürünü kullanmayın ve tedarikçiye danışın.' if lang == 'TR' else
+            ' An unexpected change in appearance (colour change, turbidity, precipitate) may indicate '
+            'deterioration; in that case do not use the product and consult the supplier.'
+            if lang == 'EN' else '')],
         [f"10.3 {sub_title(lang,'10.3')}", react_str],
         [f"10.4 {sub_title(lang,'10.4')}", avoid_str],
         [f"10.5 {sub_title(lang,'10.5')}", incompat_str],
@@ -2698,6 +2795,18 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     tox_rows.append([('Gecikmeli/hemen ortaya çıkan ve kronik etkiler (11.1.7)' if _TR11
                       else 'Delayed/immediate and chronic effects (11.1.7)'),
                      _delayed_effects_text(set(all_h_codes or []) | set(h_codes or []), _TR11)])
+    if lang in ('TR', 'EN'):
+        # KKDİK Ek-2 A 11.1.8 / 11.1.11.2(c): etkileşim verisi yoksa varsayım yapılmaz, belirtilir
+        tox_rows.append([('Etkileşimli etkiler (11.1.8)' if _TR11 else 'Interactive effects (11.1.8)'),
+                         ('Bileşenler arasındaki etkileşimli etkiler hakkında bilgi bulunmamaktadır; bileşenlerin '
+                          'etkileri ayrı ayrı değerlendirilmiştir.' if _TR11 else
+                          'No information on interactive effects between the components; the effects of each '
+                          'component have been assessed separately.')])
+        # KKDİK Ek-2 A 11.1.12: sınıflandırma kriterlerince gerekli olmayan diğer olumsuz sağlık etkileri
+        tox_rows.append([('Diğer bilgiler (11.1.12)' if _TR11 else 'Other information (11.1.12)'),
+                         ('Sınıflandırma kriterleri dışında kalan başka olumsuz sağlık etkisine dair bilgi '
+                          'bulunmamaktadır.' if _TR11 else
+                          'No information on other adverse health effects beyond the classification criteria.')])
 
     if len(tox_rows) > 1:
         story.append(data_table(tox_rows, [65*mm, 115*mm], styles))
@@ -2956,8 +3065,11 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 for c in _known
             )
         else:
-            _soil_txt = ('Toprak adsorpsiyon verisi mevcut değil.' if lang=='TR'
-                         else 'No soil adsorption data available.')
+            # KKDİK Ek-2 A 12: bilgi yoksa nedeni belirtilir
+            _soil_txt = ('Toprak adsorpsiyon verisi mevcut değil: karışım ve bileşenleri için deneysel veya '
+                         'tahmini Koc değeri bulunamamıştır.' if lang=='TR'
+                         else 'No soil adsorption data available: no experimental or estimated Koc value was '
+                              'found for the mixture or its components.')
     else:
         _soil_txt = na
 
@@ -3081,6 +3193,18 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     else:
         _t121.append('Bileşenler için sucul toksisite sınıflandırması veya test verisi bulunmamaktadır.' if _TR12
                      else 'No aquatic toxicity classification or test data available for the components.')
+    if lang in ('TR', 'EN'):
+        # KKDİK Ek-2 A 12.1: diğer organizmalar ve atıksu arıtma tesisine olası etki
+        _t121.append('Diğer organizmalar (toprak organizmaları, arılar, kuşlar, bitkiler) için veri bulunmamaktadır.'
+                     if _TR12 else 'No data available for other organisms (soil organisms, bees, birds, plants).')
+        if 'H314' in (set(all_h_codes or []) | set(h_codes or [])):
+            _t121.append('Nötralize edilmemiş ürün, pH etkisiyle atıksu arıtma tesislerindeki mikroorganizmaların '
+                         'faaliyetini olumsuz etkileyebilir.' if _TR12 else
+                         'Unneutralised product may adversely affect the activity of micro-organisms in sewage '
+                         'treatment plants due to its pH.')
+        else:
+            _t121.append('Atıksu arıtma tesislerine etkisine dair veri bulunmamaktadır.' if _TR12
+                         else 'No data available on effects on sewage treatment plants.')
 
     # 12.6 Diğer olumsuz etkiler (KKDİK Ek-2 12.6) — endokrin bozucu / ozon tabakası bilgisi burada
     _v126 = sds12.get('12.6', na)
@@ -3089,7 +3213,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                  if lang == 'TR' else 'No endocrine disrupting properties identified. No other adverse effects known.')
     eco_rows = [
         [f"12.1 {sub_title(lang,'12.1')}", ' '.join(_t121)],
-        [f"12.2 {sub_title(lang,'12.2')}", _biodeg_txt],
+        # KKDİK Ek-2 A 12 (giriş): bozunmadan doğan zararlı dönüşüm ürünleri
+        [f"12.2 {sub_title(lang,'12.2')}", _biodeg_txt + (
+            ' Zararlı dönüşüm ürünleri hakkında bilgi bulunmamaktadır.' if lang == 'TR' else
+            ' No information on hazardous transformation products.' if lang == 'EN' else '')],
         [f"12.3 {sub_title(lang,'12.3')}", _bioacc_txt],
         [f"12.4 {sub_title(lang,'12.4')}", _soil_txt],
         [f"12.5 {sub_title(lang,'12.5')}", pbt_summary],
@@ -3552,6 +3679,18 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 story.append(Paragraph(line, styles['small']))
     except Exception:
         pass
+
+    # KKDİK Ek-2 A 15.1: hükümler sonucu alıcının yapması gereken faaliyetlere dair tavsiye
+    if lang in ('TR', 'EN') and h_codes:
+        story.append(Spacer(1, 3))
+        story.append(Paragraph(
+            'Alıcı için tavsiye: işveren, yukarıdaki mevzuat kapsamında işyerinde bu ürün için risk '
+            'değerlendirmesi yapmalı (6331 sayılı İş Sağlığı ve Güvenliği Kanunu; Kimyasal Maddelerle '
+            'Çalışmalarda Sağlık ve Güvenlik Önlemleri Hakkında Yönetmelik), çalışanları bilgilendirmeli ve '
+            'atıkları Atık Yönetimi Yönetmeliğine göre yönetmelidir.' if lang == 'TR' else
+            'Advice for the recipient: the employer should carry out a workplace risk assessment for this '
+            'product under the legislation above, inform workers, and manage waste according to the waste '
+            'legislation.', styles['small']))
 
     story += sub_block(f"15.2 {sub_title(lang,'15.2') if '15.2' in L.get('sub',{}) else 'Kimyasal güvenlik değerlendirmesi'}", styles)
 

@@ -727,33 +727,49 @@ H_SENTENCES: Dict[str, Dict[int, str]] = {
 }
 
 
-# Bölüm 5 — H kodundan yangın söndürücü önerisi (sadece düz string — Bölüm 5 metni)
-H_TO_EXTINGUISHER: Dict[str, str] = {
-    'H224': 'Kuru kimyasal toz, CO₂, alkolle uyumlu köpük. Su spreyi soğutmak için kullanılabilir.',
-    'H225': 'Kuru kimyasal, CO₂ veya köpük. Büyük yangın: su sisi.',
-    'H226': 'Kuru kimyasal toz, CO₂ veya alkole dayanıklı köpük. Su kullanmayın.',
-    'H228': 'Kuru kimyasal veya su spreyi. Toz halindeyse patlama riski — uzaktan müdahale.',
-    'H229': 'Basınçlı kap. Isınırsa patlayabilir. Açık alev veya ısı kaynağından uzak tutun.',
-    'H240': 'Patlama riski! Uzaktan söndürün. Ateş ekibini haberdar edin.',
-    'H241': 'Kuru kimyasal veya CO₂ kullanın. Büyük yangınlarda uzak durun.',
-    'H242': 'Kuru kimyasal veya CO₂ ile söndürün.',
-    'H250': 'HAVA İLE TEMAS ETMEYİN. Kuru kum veya özel söndürücü kullanın. Su kullanmayın.',
-    'H251': 'Büyük miktarlarda yangın riski. CO₂ veya kuru toz kullanın.',
-    'H252': 'Büyük miktarlarda depolama yangın riski. Dikkatli yaklaşın.',
-    'H260': 'SUYLA SÖNDÜRMEYIN. Kuru toz veya kum kullanın.',
-    'H261': 'SUYLA SÖNDÜRMEYIN. Kuru kimyasal kullanın.',
-    'H270': 'Oksitleyici gaz yangını — yanıcı maddeleri uzaklaştırın. Suyla soğutun.',
-    'H271': 'CO₂ veya kum. Su KULLANILMAZ.',
-    'H272': 'Bol su (oksitleyici). Yanıcı maddelerle temastan uzak tutun.',
-    'H280': 'Tüpleri serin tutun. Patlama riski. Su spreyi ile soğutun.',
-    'H281': 'Sıvılaşmış gaz yangını: soğuk tüp — uzaktan müdahale.',
-    'H290': 'Metal ekipmanla temas — kimyasal reaksiyon riski. CO₂ veya kuru toz.',
-    'H304': 'CO₂ veya kuru toz. Su yayılmaya neden olabilir.',
-    'H305': 'Aspirasyon riski — yangın söndürme suyunun yayılmasını önleyin.',
-    'H314': 'CO₂, kuru kimyasal veya su sisi. Su jeti kullanmayın.',
-    'H315': 'Su spreyi kullanın. Kuru kimyasal veya CO₂ de uygulanabilir.',
-    'H335': 'Su spreyi kullanın. Kuru kimyasal veya CO₂ de uygulanabilir.',
-}
+# Bölüm 5.1 — uygun / uygun olmayan söndürücüler (KKDİK Ek-2 A 5.1). Tehlike sınıfına göre öncelik sırasıyla
+# tek bir kural seçilir. Önceki H_TO_EXTINGUISHER tablosu yalnız "uygun"u veriyordu, alevlenir olmayan üründe
+# "Uygun yangın söndürücü kullanın" diye belirsiz kalıyordu ve hatalı ifadeler içeriyordu (oksitleyicide "su
+# kullanılmaz", H226'da "su kullanmayın").
+def extinguishing_media(h_codes, euh_codes=(), lang: str = 'TR') -> tuple:
+    """(uygun, uygun_olmayan) metinleri."""
+    tr = lang == 'TR'
+    hs = {str(h).split()[0][:4].upper() for h in (h_codes or [])}
+    eu = {str(e).upper() for e in (euh_codes or [])}
+    if hs & {'H260', 'H261'} or 'EUH014' in eu:
+        return (('Kuru kum, kuru kimyevi toz (metal yangınlarına uygun özel toz) veya CO₂.' if tr else
+                 'Dry sand, dry chemical powder (special powder for metal fires) or CO₂.'),
+                ('Su ve su içeren söndürücüler (köpük dahil) — ürün su ile tepkimeye girer.' if tr else
+                 'Water and water-based media (including foam) — the product reacts with water.'))
+    if hs & {'H270', 'H271', 'H272'}:
+        return (('Bol su veya su spreyi (soğutma ve seyreltme için).' if tr else
+                 'Plenty of water or water spray (for cooling and dilution).'),
+                ('Boğma etkisiyle söndüren maddeler (CO₂, kuru kimyevi toz, köpük) oksitleyici yangınında etkisizdir.'
+                 if tr else 'Smothering agents (CO₂, dry chemical powder, foam) are ineffective on oxidiser fires.'))
+    if hs & {'H220', 'H221', 'H222', 'H223', 'H229', 'H230', 'H231', 'H232'}:
+        return (('Kuru kimyevi toz veya CO₂; kapları su spreyi ile soğutun. Gaz akışı güvenle kesilemiyorsa alevi '
+                 'söndürmeyin.' if tr else
+                 'Dry chemical powder or CO₂; cool containers with water spray. Do not extinguish a gas flame '
+                 'unless the leak can be stopped safely.'),
+                ('Doğrudan su jeti.' if tr else 'Direct water jet.'))
+    if hs & {'H224', 'H225', 'H226'}:
+        return (('Alkole dayanıklı köpük, kuru kimyevi toz veya CO₂; kapları soğutmak için su spreyi.' if tr else
+                 'Alcohol-resistant foam, dry chemical powder or CO₂; water spray to cool containers.'),
+                ('Doğrudan su jeti — yanan sıvıyı yayabilir.' if tr else
+                 'Direct water jet — may spread the burning liquid.'))
+    if hs & {'H228', 'H250', 'H251', 'H252'}:
+        return (('Su spreyi, köpük, kuru kimyevi toz veya CO₂.' if tr else
+                 'Water spray, foam, dry chemical powder or CO₂.'),
+                ('Doğrudan su jeti — toz bulutu oluşturabilir ve yangını yayabilir.' if tr else
+                 'Direct water jet — may raise dust and spread the fire.'))
+    suit = ('Ürün alevlenir olarak sınıflandırılmamıştır. Çevredeki yangına uygun söndürücü kullanın: su spreyi, '
+            'köpük, kuru kimyevi toz veya CO₂.' if tr else
+            'The product is not classified as flammable. Use extinguishing media appropriate to the surrounding '
+            'fire: water spray, foam, dry chemical powder or CO₂.')
+    if hs & {'H314', 'H318', 'H290'}:
+        return suit, ('Doğrudan su jeti — ürünün sıçramasına ve yayılmasına yol açabilir.' if tr else
+                      'Direct water jet — may cause splashing and spreading of the product.')
+    return suit, ('Bilinen uygun olmayan söndürücü yoktur.' if tr else 'No unsuitable extinguishing media known.')
 
 
 # ─── ANA BÖLÜM ÜRETME FONKSİYONLARI ─────────────────────────────────────────
@@ -918,16 +934,9 @@ def generate_section(
                 seen.add(item)
 
     # Bölüm 5 için yangın söndürücü ekle
-    extinguisher = None
+    extinguisher = extinguisher_unsuitable = None
     if section_num == 5:
-        for h in (ordered + rest):
-            if h in H_TO_EXTINGUISHER:
-                _ext = H_TO_EXTINGUISHER[h]
-                extinguisher = _ext.get(5, '') if isinstance(_ext, dict) else _ext
-                if extinguisher:
-                    break
-        if not extinguisher:
-            extinguisher = 'Uygun yangın söndürücü kullanın. Büyük yangınlarda uzmanlaşmış ekip çağırın.'
+        extinguisher, extinguisher_unsuitable = extinguishing_media(h_codes, lang='TR')
 
     # Bölüm 8 için KKE — tek kaynak: ppe_engine
     ppe = {}
@@ -946,6 +955,7 @@ def generate_section(
         'combined_text': ' '.join(s['text'] for s in sentences),
         'bullets': [s['text'] for s in sentences],
         'extinguisher': extinguisher,
+        'extinguisher_unsuitable': extinguisher_unsuitable,
         'ppe': ppe,
         'env_note': env_note,
     }

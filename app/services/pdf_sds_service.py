@@ -1708,8 +1708,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     if lang in ('TR', 'EN'):
         # KKDİK Ek-2 4.1.1: maruz kalma yoluna göre; SEA Ek-4 resmî önlem ifadeleri
         _eye_dmg = bool(set(_h_all_first_aid) & {'H314', 'H318'})
+        _fa_seen_txt = []
         for _fa in reg_first_aid(_h_all_first_aid, _sec_form, lang):
             _fa_txt = _fa['text']
+            _fa_seen_txt.append(_fa_txt)
             # Aşındırıcı/göz hasarı: P305+P351+P338 "birkaç dakika" der; iyi uygulama olarak süre eklenir
             if _eye_dmg and _fa['route'] in ('Göz', 'Eyes', 'Eye') and '15' not in _fa_txt:
                 _fa_txt += (' Yıkamaya en az 15 dakika devam edin.' if lang == 'TR'
@@ -1719,6 +1721,20 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         story.append(Paragraph(
             f"• <b>{'Gecikmiş etkiler' if lang == 'TR' else 'Delayed effects'}:</b> "
             f"{_delayed_effects_text(set(_h_all_first_aid), lang == 'TR')}", styles['bullet']))
+        if any(str(h).startswith('H3') for h in _h_all_first_aid):
+            # KKDİK Ek-2 A 4.1.2(c): kirlenmiş giysilerin çıkarılması (önlem ifadesinde yoksa)
+            if not any('giysi' in t.lower() or 'clothing' in t.lower() for t in _fa_seen_txt):
+                story.append(Paragraph(
+                    f"• <b>{'Kirlenmiş giysiler' if lang == 'TR' else 'Contaminated clothing'}:</b> "
+                    + ('Kirlenmiş giysi ve ayakkabıları çıkarın; tekrar kullanmadan önce yıkayın.' if lang == 'TR'
+                       else 'Remove contaminated clothing and shoes; wash before reuse.'), styles['bullet']))
+            # KKDİK Ek-2 A 4.1.2(ç): ilk yardım yapanlar için kişisel koruyucu ekipman
+            story.append(Paragraph(
+                f"• <b>{'İlk yardım yapanlar' if lang == 'TR' else 'First aiders'}:</b> "
+                + ('Ürünle temastan kaçının; Bölüm 8.2\'de belirtilen koruyucu ekipmanı (eldiven, göz koruyucu) '
+                   'kullanın.' if lang == 'TR' else
+                   'Avoid contact with the product; wear the protective equipment given in Section 8.2 '
+                   '(gloves, eye protection).'), styles['bullet']))
     else:
         sec4 = generate_section(4, h_codes)
         story += bullet_list(adapt_list_for_form(sec4['bullets'], _sec_form), styles) or [na_text(lang, styles)]
@@ -1756,8 +1772,16 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     story += sub_block(f"5.1 {sub_title(lang,'5.1')}", styles)
 
     sec5 = generate_section(5, h_codes)
-    extinguisher = sec5.get('extinguisher') or term(lang,'not_available')
-    story.append(Paragraph(extinguisher, styles['body']))
+    # KKDİK Ek-2 A 5.1: uygun ve uygun olmayan söndürücüler ayrı ayrı
+    from app.services.sds_sentence_service import extinguishing_media as _ext_media
+    _ext_ok, _ext_no = _ext_media(list(dict.fromkeys(list(all_h_codes or []) + list(h_codes or []))),
+                                  (euh or {}).get('euh_codes') or [], lang=lang if lang in ('TR', 'EN') else 'EN')
+    # Unicode alt simge (₂) PDF yazı tipinde yok — ReportLab <sub> etiketi kullanılır
+    _ext_ok, _ext_no = (x.replace('CO₂', 'CO<sub>2</sub>') for x in (_ext_ok, _ext_no))
+    story.append(Paragraph(f"<b>{'Uygun söndürücüler' if lang == 'TR' else 'Suitable extinguishing media'}:</b> "
+                           f"{_ext_ok}", styles['body']))
+    story.append(Paragraph(f"<b>{'Uygun olmayan söndürücüler' if lang == 'TR' else 'Unsuitable extinguishing media'}:"
+                           f"</b> {_ext_no}", styles['body']))
 
     # Tehlikeli bozunma/yanma ürünleri — 5.2 ve 10.6 aynı metni kullanır (KKDİK Ek-2 5.2: yanma
     # sırasında oluşan tehlikeli ürünler belirtilir)
@@ -2180,13 +2204,17 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     if _glove.get('note'):
         story.append(Paragraph(_glove['note'], styles['small']))
     else:
+        # KKDİK Ek-2 A 8.2.2.2(b)(i): eldiven kartı uygulanmadığında (ürün cilt için sınıflandırılmamış) da
+        # delinme süresi belirtilir — EN ISO 374-1 Tip C asgari performans (≥10 dk, EN 16523-1 seviye 1)
         story.append(Paragraph(
-            ('Eldiven malzemesi ve kalınlığı yukarıda belirtilmiştir; delinme süresi kullanım koşullarına göre '
-             'eldiven üreticisinin EN ISO 374-1 test verilerinden seçilmeli, eldivenler hasar ve kirlenme '
-             'durumunda değiştirilmelidir.') if lang == 'TR' else
-            ('Glove material and thickness are given above; the breakthrough time should be selected from the '
-             'glove manufacturer’s EN ISO 374-1 data for the conditions of use; replace gloves when damaged or '
-             'contaminated.'), styles['small']))
+            ('Ürün cilt için sınıflandırılmamıştır; eldiven tavsiye niteliğindedir. Sıçrama temasında en az '
+             'EN ISO 374-1 Tip C (delinme süresi ≥ 10 dk, seviye 1); uzun süreli/sürekli temasta delinme süresi '
+             '≥ 480 dk (seviye 6) olan eldiven seçin. Eldivenler hasar ve kirlenme durumunda değiştirilmelidir.')
+            if lang == 'TR' else
+            ('The product is not classified for skin effects; gloves are recommended. For splash contact use at '
+             'least EN ISO 374-1 Type C (breakthrough time ≥ 10 min, level 1); for prolonged contact choose gloves '
+             'with breakthrough time ≥ 480 min (level 6). Replace gloves when damaged or contaminated.'),
+            styles['small']))
 
     # 8.2.3 Çevresel maruz kalma kontrolleri (KKDİK Ek-2 8.2.3)
     _env = ('Ürünün kanalizasyona, yüzey ve yeraltı sularına ve toprağa karışmasını önleyin '
@@ -2452,7 +2480,19 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     # (h) Alevlenirlik / patlama limitleri
     _ex_val = None
     _lel_raw, _uel_raw = phys.get('lel'), phys.get('uel')
-    if _lel_raw or _uel_raw:
+    # Hesaplanan LEL/UEL yalnız alevlenir bileşenlerin buharından çıkar (su yok sayılır); alevlenir olarak
+    # sınıflandırılmamış sulu üründe (su > %50) bileşenin kendi limitleri ürününmüş gibi basılıyordu
+    # (örn. %0,2 etanolamin → %3,0–23,5). Ölçülen / kullanıcı beyanı değerler etkilenmez.
+    _lel_pm = phys_methods.get('lel', {}) or {}
+    _lel_calc = bool(_lel_pm) and not _lel_pm.get('measured') and _lel_pm.get('method') != 'Kullanıcı beyanı'
+    _water_pct = sum(float(c.get('concMax') or c.get('conc') or c.get('concentration') or 0)
+                     for c in components if str(c.get('cas_no') or c.get('cas') or '').strip() == '7732-18-5')
+    _flam_cls = bool((set(h_codes) | set(all_h_codes or [])) & {'H220', 'H221', 'H222', 'H223', 'H224', 'H225',
+                                                                 'H226', 'H228'})
+    if (_lel_raw or _uel_raw) and _lel_calc and _water_pct > 50 and not _flam_cls:
+        _ex_val = _L('Uygulanamaz — sulu, alevlenir olarak sınıflandırılmamış ürün',
+                     'Not applicable — aqueous product not classified as flammable')
+    elif _lel_raw or _uel_raw:
         _lel_str = _lel_raw.get('display') if isinstance(_lel_raw, dict) else (str(_lel_raw) if _lel_raw else '?')
         _uel_str = _uel_raw.get('display') if isinstance(_uel_raw, dict) else (str(_uel_raw) if _uel_raw else '?')
         _ex_val = f"%{_lel_str} – %{_uel_str}" + _method_note('lel')
@@ -3197,8 +3237,17 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         _bio_parts.append(f'{_nm}: {_b}')
 
     _mix_no_test = ('Karışım için test verisi yoktur.' if _T else 'No test data available for the mixture.')
+    # KKDİK Ek-2 A 12 (giriş): bilgi mevcut değilse nedeni belirtilir
+    _nd_reason = (' "Veri yok": karışım test edilmemiştir ve bileşen için kullanılan kaynaklarda (SEA Ek-6, '
+                  'ECHA, program veritabanı) bu bilgi bulunmamaktadır; hammadde tedarikçisinin GBF\'sine bakınız.'
+                  if _T else
+                  ' "No data available": the mixture has not been tested and the sources used for the component '
+                  '(CLP Annex VI, ECHA, programme database) do not contain this information; see the raw material '
+                  "supplier's SDS.")
     if _deg_parts:
         _biodeg_txt = f"{_mix_no_test} {'Bileşenler' if _T else 'Components'}: {' | '.join(_deg_parts)}."
+        if any(p.endswith(('veri yok', 'no data available')) for p in _deg_parts):
+            _biodeg_txt += _nd_reason
     else:
         _biodeg_txt = _end(bio.get('assessment') or sds12.get('12.2', na))
     if product.get('is_detergent') and not is_us:
@@ -3208,6 +3257,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 if _biodeg_txt not in (None, '', na) else biodegradability_line(lang)
     if _bio_parts:
         _bioacc_txt = f"{_mix_no_test} {'Bileşenler' if _T else 'Components'}: {' | '.join(_bio_parts)}."
+        if any(p.endswith(('veri yok', 'no data available')) for p in _bio_parts):
+            _bioacc_txt += _nd_reason
     else:
         _bioacc_txt = sds12.get('12.3', na)
 
@@ -3428,6 +3479,44 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             'boşaltılmamalıdır.' if lang == 'TR' else
             'Do not discharge into the sewer; product and residues must not be released to drains, surface '
             'water or soil.', styles['body']))
+
+    # KKDİK Ek-2 A 13.1(b): atık işleme seçeneklerini etkileyebilecek fiziksel/kimyasal özellikler
+    if lang in ('TR', 'EN'):
+        _h13 = {str(h)[:4] for h in (list(all_h_codes or []) + list(h_codes or []))}
+        _eu13 = set((euh or {}).get('euh_codes') or [])
+        _p13 = []
+        if _h13 & {'H314', 'H290'}:
+            _p13.append('aşındırıcıdır — atık, aşınmaya dayanıklı kaplarda toplanmalı; asidik ve bazik atıklar '
+                        'birbirine karıştırılmamalıdır' if lang == 'TR' else
+                        'corrosive — collect waste in corrosion-resistant containers; do not mix acidic and alkaline waste')
+        if _h13 & {'H220', 'H221', 'H222', 'H223', 'H224', 'H225', 'H226', 'H228'}:
+            _p13.append('alevlenirdir — atık kapları tutuşturma kaynaklarından uzak tutulmalıdır' if lang == 'TR'
+                        else 'flammable — keep waste containers away from ignition sources')
+        if _h13 & {'H270', 'H271', 'H272'}:
+            _p13.append('oksitleyicidir — yanıcı atıklarla karıştırılmamalıdır' if lang == 'TR'
+                        else 'oxidising — do not mix with combustible waste')
+        if _h13 & {'H260', 'H261'} or 'EUH014' in _eu13:
+            _p13.append('su ile tepkimeye girer — atık kuru tutulmalıdır' if lang == 'TR'
+                        else 'reacts with water — keep waste dry')
+        if _h13 & {'H400', 'H410', 'H411', 'H412', 'H413'}:
+            _p13.append('sucul ortam için zararlıdır — atıksu arıtma tesisine verilmemelidir' if lang == 'TR'
+                        else 'harmful to the aquatic environment — do not send to wastewater treatment')
+        _w13 = sum(float(c.get('concMax') or c.get('conc') or c.get('concentration') or 0) for c in components
+                   if str(c.get('cas_no') or c.get('cas') or '').strip() == '7732-18-5')
+        if _w13 > 50:
+            _p13.append(f'su bazlıdır (su ~%{_w13:g}; ısıl değeri düşüktür — yakma yerine fizikokimyasal arıtma '
+                        f'uygun olabilir)' if lang == 'TR' else
+                        f'water-based (water ~{_w13:g}%; low calorific value — physico-chemical treatment may be '
+                        f'more suitable than incineration)')
+        if not _h13 & {'H220', 'H221', 'H222', 'H223', 'H224', 'H225', 'H226', 'H228'}:
+            _p13.append('alevlenir olarak sınıflandırılmamıştır' if lang == 'TR' else 'not classified as flammable')
+        story.append(Paragraph(
+            (('Atık işlemeyi etkileyen özellikler: ürün ' + '; '.join(_p13) + '.') if _p13 else
+             'Atık işleme seçeneklerini etkileyen özel bir fiziksel/kimyasal özellik bilinmemektedir '
+             '(bkz. Bölüm 9 ve 10).') if lang == 'TR' else
+            (('Properties affecting waste treatment: the product is ' + '; '.join(_p13) + '.') if _p13 else
+             'No specific physical/chemical properties affecting waste treatment options are known '
+             '(see Sections 9 and 10).'), styles['body']))
 
     # 13.1c — Kontamine ambalaj yönetimi (her zaman — KKDİK Ek-2 §13.1 zorunlu)
     story.append(Spacer(1, 3))

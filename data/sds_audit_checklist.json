@@ -1835,8 +1835,8 @@
     "12"
    ],
    "onem": "kosullu",
-   "soru_tr": "Mikroorganizmalar üzerinde engelleyici etki varsa atıksu arıtma tesisine olası etkiye değinilmiş mi?",
-   "soru_en": "Possible effects on sewage treatment plants (inhibition of microbial activity) are addressed, or it is clear this is not relevant."
+   "soru_tr": "Atıksu arıtma tesislerine olası etki (mikroorganizma inhibisyonu) belirtilmiş mi — etki, verinin bulunmadığı veya konunun ilgili olmadığı?",
+   "soru_en": "Possible effects on sewage treatment plants (inhibition of microbial activity) are addressed: the effect is described, OR it is stated that no data are available on effects on sewage treatment plants, OR it is clear that this is not relevant."
   },
   {
    "id": "13.1-yontem",
@@ -1856,7 +1856,7 @@
    "bolum": "13.1",
    "dayanak": "KKDİK Ek-2 A 13.1(b)",
    "soru_tr": "Atık işlemeyi etkileyebilecek fiziksel/kimyasal özellikler belirtilmiş mi?",
-   "soru_en": "Physical or chemical properties that may affect waste treatment options are mentioned.",
+   "soru_en": "Physical or chemical properties that may affect waste treatment options are mentioned (e.g. water content, flammability, corrosivity, reactivity), or it is stated that no such properties are known.",
    "yontem": "jev",
    "kosul": "her",
    "bolumler": [

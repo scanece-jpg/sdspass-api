@@ -628,8 +628,12 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
           <div class="v0-field" style="grid-column:1/-1">
             <label class="v0-label">Belirlenmiş Kullanım <span style="font-size:9px;color:var(--text3)">GBF 1.2 — KKDİK Ek-2</span></label>
             <input class="v0-inp" type="text" id="pusage_desc" maxlength="300"
-                   placeholder="Ör: Endüstriyel bulaşık makinesi tableti">
+                   placeholder="Ör: Endüstriyel bulaşık makinesi tableti" oninput="_checkDetergentHint()">
             <div style="font-size:9px;color:var(--text3);margin-top:3px">Ürünün ne için kullanıldığının kısa açıklaması. Boş bırakılırsa 1.2'ye "Sanayi ve mesleki kullanım." yazılır.</div>
+            <div id="det_hint" style="display:none;font-size:10px;color:var(--warn,#b7791f);margin-top:4px">
+              ⚠ Kullanım tanımı bir temizlik/deterjan ürününe işaret ediyor. Deterjanlar Hakkında Yönetmelik kapsamındaysa
+              yukarıdaki "Deterjan ürünü" kutusunu işaretleyin — GBF 15.1'e Ek-7 A içerik beyanı eklenir.
+            </div>
           </div>
         </div>
       </div>
@@ -2173,6 +2177,17 @@ function addComp(pf = {}) {
 function _toggleDetClass() {
   const on = !!document.getElementById('p_detergent')?.checked;
   document.querySelectorAll('.det-class-wrap').forEach(el => { el.style.display = on ? '' : 'none'; });
+  _checkDetergentHint();
+}
+
+// Kullanım tanımı temizlik/deterjan ürününe işaret ediyor ama "Deterjan ürünü" işaretli değilse uyar
+// (denetim: Deterjanlar Hakkında Yönetmelik Ek-7 A içerik beyanı GBF 15.1'de eksik çıkıyordu)
+function _checkDetergentHint() {
+  const desc = (document.getElementById('pusage_desc')?.value || '').toLocaleLowerCase('tr-TR');
+  const det  = !!document.getElementById('p_detergent')?.checked;
+  const hit  = /temizl|deterjan|yıkama|bulaşık|çamaşır|leke|yağ çözücü|cleaner|cleaning|detergent|dishwash|laundry/.test(desc);
+  const el = document.getElementById('det_hint');
+  if (el) el.style.display = (hit && !det) ? '' : 'none';
 }
 
 function delComp(id) { document.getElementById('cw'+id)?.remove(); updateConcTotal(); }

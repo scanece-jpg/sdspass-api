@@ -359,9 +359,15 @@ def select(h_codes: List[str], lang: str = 'TR', form: str = '') -> Dict[str, An
     # Varsayılan KKD — eşleşme yoksa minimum öneri
     if not result['respiratory']:
         result['respiratory'].append({
-            'ppe': ('İyi havalandırma sağlayın'
+            # KKDİK Ek-2 A 8.2.2.2(c): solunum koruma ekipmanının tipi ve filtre türü (yalnız "havalandırma"
+            # yazmak yetmez — önceden yalnız "İyi havalandırma sağlayın" basılıyordu)
+            'ppe': ('Normal kullanım koşullarında ve yeterli havalandırmada gerekli değildir. Sis/sprey oluşursa '
+                    'veya havalandırma yetersizse kombine filtreli yarım maske kullanın (EN 140 + EN 14387 / '
+                    'EN 143, örn. ABEK-P2).'
                     if lang == 'TR'
-                    else 'Ensure good ventilation'),
+                    else 'Not required under normal conditions of use with adequate ventilation. If mist/spray is '
+                         'generated or ventilation is insufficient, use a half mask with combination filter '
+                         '(EN 140 + EN 14387 / EN 143, e.g. ABEK-P2).'),
             'level': 2,
         })
     if not result['hands']:

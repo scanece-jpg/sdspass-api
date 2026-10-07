@@ -4054,10 +4054,22 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     # Revizyon geçmişi
     _rev_notes_raw = (rev.get('notes') or '').strip()
     _generic = {'güncelleme', 'update', 'güncellenmiştir', 'updated', '-', ''}
-    rev_notes = _rev_notes_raw if _rev_notes_raw.lower() not in _generic else (
-        'Sınıflandırma ve etiketleme bilgileri güncellenmiştir.' if lang == 'TR'
-        else 'Classification and labelling information updated.'
-    )
+    # KKDİK Ek-2 0.2.5 / 16(a): değişiklikler GBF'yi hazırlayan tarafından belirtilir. Not girilmemişse program
+    # değişiklik uydurmaz (önceden "Sınıflandırma ve etiketleme bilgileri güncellenmiştir" yazılıyordu).
+    try:
+        _first_issue = int(str(rev_no).strip() or '1') <= 1
+    except ValueError:
+        _first_issue = False
+    # 'İ'.lower() Python'da 'i̇' (noktalı birleşik) verir — karşılaştırmadan önce düz 'i' yapılır
+    if not _first_issue and _rev_notes_raw.replace('İ', 'i').lower() in ('ilk yayın', 'ilk yayin', 'first issue'):
+        _rev_notes_raw = ''   # varsayılan not sonraki revizyonlarda kalmış — ilk yayın değildir
+    if _rev_notes_raw.lower() not in _generic:
+        rev_notes = _rev_notes_raw
+    elif _first_issue:
+        rev_notes = 'İlk yayın.' if lang == 'TR' else 'First issue.'
+    else:
+        rev_notes = ('Önceki sürüme göre yapılan değişiklikler belirtilmemiştir.' if lang == 'TR'
+                     else 'Changes from the previous version have not been specified.')
     story.append(Paragraph(
         f"<b>{S(lang,'revision_history')}:</b> "
         f"Rev.{rev_no} — {rev_date}: {rev_notes}",

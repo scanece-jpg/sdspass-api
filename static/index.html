@@ -659,6 +659,10 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
           <label class="v0-label">Değişiklik Notu</label>
           <input class="v0-inp" type="text" id="revNotes" placeholder="İlk yayın" oninput="_saveRevision()">
         </div>
+        <div id="rev_hint" style="display:none;grid-column:1/-1;font-size:10px;color:var(--warn,#b7791f)">
+          ⚠ Revizyon 1'den büyük ama değişiklik notu yok. KKDİK Ek-2 0.2.5: önceki sürüme göre değişen bölümleri
+          yazın (örn. "Bölüm 2, 3 ve 12 güncellendi"). Boş bırakılırsa GBF'ye "değişiklikler belirtilmemiştir" yazılır.
+        </div>
       </div>
     </div>
 
@@ -5051,10 +5055,21 @@ function _loadRevision() {
   document.getElementById('revNo').value      = saved?.no      ?? '1';
   document.getElementById('revDate').value    = saved?.date    ?? today;
   document.getElementById('revNotes').value   = saved?.notes   ?? 'İlk yayın';
+  _checkRevisionHint();
 }
 
 function _saveRevision() {
   localStorage.setItem(_REV_KEY, JSON.stringify(_getRevision()));
+  _checkRevisionHint();
+}
+
+// Revizyon > 1 ve değişiklik notu boş/genel ise uyar (KKDİK Ek-2 0.2.5 — değişiklikler belirtilmeli)
+function _checkRevisionHint() {
+  const no    = parseInt(document.getElementById('revNo')?.value || '1', 10) || 1;
+  const notes = (document.getElementById('revNotes')?.value || '').trim().toLocaleLowerCase('tr-TR');
+  const generic = ['', '-', 'güncelleme', 'güncellenmiştir', 'update', 'updated', 'ilk yayın', 'first issue'].includes(notes);
+  const el = document.getElementById('rev_hint');
+  if (el) el.style.display = (no > 1 && generic) ? '' : 'none';
 }
 
 function _getRevision() {

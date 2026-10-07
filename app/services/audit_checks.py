@@ -401,31 +401,73 @@ _CONC_NEAR = re.compile(r'(?:[<>≤≥]=?\s*)?(\d+(?:[.,]\d+)?)\s*(?:%)?\s*(?:-|
                         r'|(?:[<>≤≥]=?\s*)?(\d+(?:[.,]\d+)?)\s*%|%\s*[<>≤≥]?\s*(\d+(?:[.,]\d+)?)')
 
 
+_RANGE_GE = re.compile(r'(?:[>≥]=?|&gt;=?)\s*(\d+(?:[.,]\d+)?)\s*%?\s*[-–]\s*(?:[<≤]=?|&lt;=?)\s*(\d+(?:[.,]\d+)?)')
+
+
+def _segments3(ctx):
+    """Bölüm 3 satırları: her CAS'tan bir sonraki CAS'a kadar olan metin (tablo satırı yaklaşımı)."""
+    cas, s3 = _rows3(ctx)
+    pos = [(c, s3.find(c)) for c in cas]
+    pos = sorted([p for p in pos if p[1] >= 0], key=lambda x: x[1])
+    return [(c, s3[i:(pos[k + 1][1] if k + 1 < len(pos) else len(s3))]) for k, (c, i) in enumerate(pos)], s3
+
+
+def _comps3(ctx):
+    """Bölüm 3'ten bileşenler: CAS, konsantrasyon üst değeri, veritabanı tehlikeleri. (comps, okunamayanlar)"""
+    if '_comps3' in ctx:
+        return ctx['_comps3']
+    from app.services.substance_lookup import lookup_substance
+    segs, s3 = _segments3(ctx)
+    comps, unknown = [], []
+    for c, seg in segs:
+        i = s3.find(c)
+        # Önce "≥ x - < y" aralığı (konsantrasyon sütunu; % işareti olmayabilir). Bazı GBF'ler satırda önce
+        # özel konsantrasyon sınırlarını "20 - 100 %" biçiminde yazar — onlar konsantrasyon değildir.
+        r = _RANGE_GE.search(seg)
+        if r:
+            conc = float(r.group(2).replace(',', '.'))
+        else:
+            m = _CONC_NEAR.search(seg[:260]) or _CONC_NEAR.search(s3[max(0, i - 120):i])
+            if not m:
+                unknown.append(c); continue
+            conc = max(float(v.replace(',', '.')) for v in m.groups() if v)
+        lk = lookup_substance(c, form='liquid' if 'form:sivi' in ctx['facts'] else '') or {}
+        if not lk.get('hazards') and not lk.get('found') and c != '7732-18-5':
+            unknown.append(c)
+        comps.append({'cas_no': c, 'cas': c, 'name': lk.get('name') or c, 'name_tr': lk.get('name_tr') or '',
+                      'concentration': conc, 'conc': conc, 'hazards': lk.get('hazards') or [],
+                      'sclRaw': lk.get('scl') or [], 'euh_limits': lk.get('euh_limits') or [],
+                      'suppl_hazards': lk.get('suppl_hazards') or [], 'segment': seg})
+    ctx['_comps3'] = (comps, unknown)
+    return comps, unknown
+
+
 def c_hesap(ctx):
     """Bölüm 3'teki CAS + konsantrasyon üst değeriyle karışım sınıflandırmasını yeniden hesaplar."""
     from app.services.clp_service import classify_mixture_clp
-    from app.services.substance_lookup import lookup_substance
     cas, s3 = _rows3(ctx)
     if not cas:
         return 'kdu', 'Bölüm 3 okunamadı.'
-    comps, unknown = [], []
-    for c in cas:
-        i = s3.find(c)
-        m = _CONC_NEAR.search(s3[i:i + 260]) or _CONC_NEAR.search(s3[max(0, i - 120):i])
-        if not m:
-            unknown.append(c); continue
-        vals = [float(v.replace(',', '.')) for v in m.groups() if v]
-        conc = max(vals)
-        lk = lookup_substance(c, form='liquid' if 'form:sivi' in ctx['facts'] else '') or {}
-        if not lk.get('hazards') and not lk.get('found'):
-            unknown.append(c)
-        comps.append({'cas_no': c, 'name': lk.get('name') or c, 'concentration': conc,
-                      'hazards': lk.get('hazards') or [], 'sclRaw': lk.get('scl') or []})
+    comps, unknown = _comps3(ctx)
     try:
         res = classify_mixture_clp(comps, mixture_form='liquid' if 'form:sivi' in ctx['facts'] else '')
     except Exception as e:
         return 'kdu', f'Yeniden hesap yapılamadı: {e}'
     calc = {p['h_code'][:4] for p in res.get('passed', []) if p.get('h_code')}
+    # Programın hattındaki gibi: STOT RE toplamsal (H372/H373) ve ATE ile akut toksisite ayrı motorlardan
+    try:
+        from app.services.stot_engine import calculate as stot_calc
+        calc |= {str(h)[:4] for h in stot_calc(comps).get('h_codes', [])}
+    except Exception:
+        pass
+    try:
+        from app.services.clp_service import calculate_ate_health_h_codes
+        calc |= {e['h_code'][:4] for e in calculate_ate_health_h_codes(
+            comps, form='liquid' if 'form:sivi' in ctx['facts'] else 'solid')[0]}
+    except Exception:
+        pass
+    if 'H372' in calc:
+        calc.discard('H373')
     calc = {h for h in calc if h[:2] == 'H3' or h[:2] == 'H4'}
     given = {h for h in _h(_sub(ctx['secs'].get('2', ''), '2.1', '2.2')) if h[:2] in ('H3', 'H4')}
     if 'H314' in calc | given:
@@ -437,7 +479,120 @@ def c_hesap(ctx):
                    f'konsantrasyon okumasından olabilir; KDU doğrulasın.{note}')
 
 
+def c_32_sira(ctx):
+    """Ek-2 A 3.2 (a)/(b): azalan sırada — konsantrasyon üst değerleri artmamalı."""
+    comps, unknown = _comps3(ctx)
+    if len(comps) < 2:
+        return 'uygun', 'Sıralanacak birden fazla madde yok.'
+    seq = [(c['cas_no'], c['conc']) for c in comps]
+    bad = [(seq[i][0], seq[i][1], seq[i + 1][0], seq[i + 1][1]) for i in range(len(seq) - 1)
+           if seq[i + 1][1] > seq[i][1]]
+    if not bad:
+        return 'uygun', 'Maddeler konsantrasyona göre azalan sırada: ' + ', '.join(f'{c} %{v:g}' for c, v in seq)
+    det = '; '.join(f'{a} (%{x:g}) → {b} (%{y:g})' for a, x, b, y in bad[:4])
+    return ('eksik' if not unknown else 'kdu'), f'Azalan sıraya uymayan geçişler: {det}'
+
+
+_REASON = re.compile(r'(?i)maruz kalma|sınır değer|\bOEL\b|PBT|vPvB|Aday Liste|SVHC|gönüllü|bilgi amaçlı|'
+                     r'listelenme nedeni|nedeni\s*:')
+
+
+def c_32_neden(ctx):
+    """Ek-2 A 3.2.3: sınıflandırılmamış listelenen maddenin listelenme nedeni."""
+    segs, _ = _segments3(ctx)
+    miss = []
+    for c, seg in segs:
+        if c == '7732-18-5':   # su — yaygın olarak gönüllü listelenir
+            continue
+        if not H_RE.search(seg) and not _REASON.search(seg):
+            miss.append(c)
+    return ('uygun', 'Sınıflandırılmamış listelenen maddeler için neden belirtilmiş (veya yok).') if not miss else \
+           ('kdu', f'Sınıflandırması görünmeyen ve listelenme nedeni yazılmamış maddeler (CAS): {miss} '
+                   f'— Ek-2 A 3.2.3 "işyeri maruz kalma limiti", "sınıflandırılmamış vPvB" gibi nedeni ister.')
+
+
+def c_32_kayit(ctx):
+    """Ek-2 A 3.2.4: varsa kayıt numarası."""
+    s3 = ctx['secs'].get('3', '')
+    if re.search(r'\b01-\d{10}-\d{2}', s3):
+        return 'uygun', 'Kayıt numaraları verilmiş.'
+    if re.search(r'(?i)tedarikçiden|muaf|kayıt numarası|registration', s3):
+        return 'uygun', 'Kayıt numarası durumu belirtilmiş (muaf / tedarikçiden temin).'
+    return 'kdu', 'Bölüm 3\'te kayıt numarası veya durumu bulunamadı — varsa verilmeli.'
+
+
+# Kimyasal Maddelerle Çalışmalarda Sağlık ve Güvenlik Önlemleri Hakkında Yönetmelik (RG 12.08.2013/28733)
+# Ek-2: zorunlu biyolojik sınır değer — kurşun ve iyonik bileşikleri (70 µg Pb/100 ml kan)
+_LEAD_CAS = {'7439-92-1', '1317-36-8', '1314-41-6', '7446-14-2', '598-63-0', '301-04-2', '10099-74-8',
+             '7758-97-6', '1344-37-2', '12656-85-8', '1335-32-6', '7758-95-4', '13424-46-9', '1309-60-0'}
+
+
+def c_bld(ctx):
+    cas, _ = _rows3(ctx)
+    lead = [c for c in cas if c in _LEAD_CAS]
+    if not lead:
+        return 'uygun', 'Biyolojik sınır değeri olan bileşen (kurşun ve iyonik bileşikleri) yok.'
+    return ('uygun', 'Kurşun bileşeni için biyolojik sınır değer verilmiş.') if re.search(
+        r'(?i)biyolojik', ctx['secs'].get('8', '')) else \
+           ('eksik', f'Kurşun bileşeni {lead} var; 8.1\'de biyolojik sınır değer (70 µg Pb/100 ml kan, '
+                     f'28733 sayılı Yönetmelik Ek-2) yok.')
+
+
+_EK17 = None
+
+
+def _ek17():
+    global _EK17
+    if _EK17 is None:
+        import json
+        p = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'kkdik_ek17_cas.json')
+        try:
+            _EK17 = json.load(open(p, encoding='utf-8'))['cas']
+        except Exception:
+            _EK17 = {}
+    return _EK17
+
+
+def c_izin_kisit(ctx):
+    """Ek-2 A 15.1: izne tabi / kısıtlanmış madde durumu. TR Ek-14 listesi boştur (Bakanlık sitesinde yayımlanır);
+    kontrol Ek-17 kısıtlamalarına göre yapılır."""
+    cas, _ = _rows3(ctx)
+    db = _ek17()
+    hits = {c: db[c] for c in cas if c in db}
+    if not hits:
+        return 'uygun', 'Bölüm 3\'te KKDİK Ek-17 kapsamında madde yok (TR Ek-14 listesi henüz yayımlanmadı).'
+    det = '; '.join(f'{c}: ' + ', '.join(r['kaynak'] for r in v[:2]) for c, v in hits.items())
+    # Yönetmelik adındaki "İzni ve Kısıtlanması Hakkında" ifadesi kısıtlama beyanı sayılmaz
+    s15 = re.sub(r'(?i)izni\s+ve\s+kısıtlanması|authorisation\s+and\s+restriction', '', ctx['secs'].get('15', ''))
+    stated = re.search(r'(?i)ek[- ]?17\b|ek[- ]?xvii|annex\s+xvii|kısıtlama(?:ya|lar|sı)?\b|kısıtlanmış', s15)
+    return ('uygun', f'Ek-17 durumu 15.1\'de belirtilmiş ({det}).') if stated else \
+           ('eksik', f'Ek-17 kapsamındaki maddeler 15.1\'de belirtilmemiş: {det}')
+
+
+def c_ek_unsur(ctx):
+    """SEA Md.25/27: bileşenlere göre gereken EUH ifadeleri 2. bölümde var mı (programın EUH motoruyla)."""
+    from app.services.euh_service import check_euh
+    comps, unknown = _comps3(ctx)
+    if not comps:
+        return 'kdu', 'Bölüm 3 okunamadı.'
+    form = 'liquid' if 'form:sivi' in ctx['facts'] else 'solid' if 'form:kati' in ctx['facts'] else ''
+    try:
+        exp = set(check_euh(comps, mixture_form=form).get('euh_codes', []))
+    except Exception as e:
+        return 'kdu', f'EUH hesaplanamadı: {e}'
+    found = set(EUH_RE.findall(ctx['secs'].get('2', '')))
+    miss = sorted(exp - found)
+    if not exp:
+        return 'uygun', 'Bileşenlere göre gereken ek etiket unsuru (EUH) yok.' + (
+            f' Not: 2. bölümde {sorted(found)} var.' if found else '')
+    return ('uygun', f'Gereken EUH ifadeleri 2. bölümde: {sorted(exp)}') if not miss else \
+           ('kdu', f'Programın hesabına göre gereken ama 2. bölümde bulunamayan EUH ifadeleri: {miss} '
+                   f'(kaynak verisi farklı olabilir; KDU doğrulasın).')
+
+
 CHECKS: Dict[str, Callable] = {
+    '3.2-sira': c_32_sira, '3.2-neden': c_32_neden, '3.2-kayit': c_32_kayit, '8.1-bld': c_bld,
+    '15.1-izin-kisit': c_izin_kisit, '2.2-ek-unsur': c_ek_unsur,
     'G-basliklar': c_basliklar, 'G-tarih': c_tarih, 'G-surum': c_surum, 'G-sayfa': c_sayfa,
     'G-bos-alt': c_bos_alt, 'G-dil': c_dil, 'G-yasak-ifade': c_yasak, '1.3-eposta': c_eposta,
     '1.4-zehir': c_zehir, '2.1-h-atif': c_h_atif, '2.2-uyari-tek': c_uyari_tek, '2.2-h': c_22_h,

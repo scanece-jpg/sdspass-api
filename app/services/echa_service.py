@@ -403,8 +403,8 @@ _CL_CLASS_THRESHOLD = 50.0   # tehlike sınıfı bildirimlerin bu yüzdesini AŞ
 _CL_TIE_MARGIN      = 2.0    # en yüksek paya bu kadar yakın kategoriler eşit sayılır → daha ağır olan seçilir
 _CL_MAX_PARALLEL    = 5
 # M/ATE seçim yönteminin sürümü. 2: M yazmayan bildirimler M=1 sayılır; M ve ATE yalnız ilgili tehlikeyi
-# bildiren gruplardan. Daha düşük sürümle kaydedilmiş ECHA kayıtları yeniden çekilir (substance_lookup._is_stale).
-ECHA_EXTRAS_VER     = 2
+# bildiren gruplardan. 3: bildirim ATE'si yalnız SEA Ek-1 Tablo 3.1.2 dönüşüm değerinden düşükse kullanılır. Daha düşük sürümle kaydedilmiş ECHA kayıtları yeniden çekilir (substance_lookup._is_stale).
+ECHA_EXTRAS_VER     = 3
 
 _CAT_RE   = re.compile(r'^(?P<base>.+?)\s+(?P<cat>\d[A-C]?)\.?$')
 _ROUTE_RE = re.compile(r'^(.*?)\s*(\([^)]*\))?\s*$')
@@ -579,7 +579,10 @@ async def _fetch_echa_m_ate(groups: list, h_up: set, _get, sem, group_pairs: dic
        sayılıyordu; azınlıktaki yüksek M seçilebiliyordu. Ağırlığı en yüksek değer; 2 puandan yakınlar → yüksek M.
     ATE: yalnız sayısal değer bildirenler arasında (seçilen kategorinin aralığında) ağırlığı en yüksek değer; yakınlar
        → düşük ATE (ihtiyatlı). ATE bir deney verisidir (SEA Ek-1 3.1.3.6: veri varsa kullanılır); bildirimde
-       yazılmaması dönüşüm değerinin seçildiği anlamına gelmez — değer yoksa hesap Tablo 3.1.2 dönüşüm değerini kullanır."""
+       yazılmaması dönüşüm değerinin seçildiği anlamına gelmez — değer yoksa hesap Tablo 3.1.2 dönüşüm değerini kullanır.
+       ATE'yi çoğu zaman bildirimlerin binde birkaçı yazdığından, bildirimden gelen değer yalnız Tablo 3.1.2 dönüşüm
+       değerinden DÜŞÜKSE (daha ihtiyatlıysa) kullanılır; değilse yazılmaz ve hesap dönüşüm değerini kullanır."""
+    from app.services.clp_service import ATE_DEFAULTS
     group_pairs, chosen = group_pairs or {}, chosen or {}
     need_m = bool(h_up & {'H400', 'H410'})
     ate_codes = {'oral': ('H300', 'H301', 'H302'), 'dermal': ('H310', 'H311', 'H312'),
@@ -650,7 +653,13 @@ async def _fetch_echa_m_ate(groups: list, h_up: set, _get, sem, group_pairs: dic
         fit = {v: w for v, w in vals.items() if lo < v <= hi}
         if fit:
             topw = max(fit.values())
-            ate[route] = min(v for v, w in fit.items() if topw - w < _CL_TIE_MARGIN)   # yakınsa ihtiyatlı (düşük)
+            best = min(v for v, w in fit.items() if topw - w < _CL_TIE_MARGIN)   # yakınsa ihtiyatlı (düşük)
+            fam = 'inhal' if route.startswith('inhal') else route
+            main = ate_need.get(fam, ('', ''))[1]
+            conv = ATE_DEFAULTS.get('inhalation_gas' if route == 'inhalation' else route, {}).get(main)
+            if conv is not None and best >= float(conv):
+                continue     # dönüşüm değerinden yüksek/eşit → yazılmaz, hesap dönüşüm değerini kullanır
+            ate[route] = best
     return m_factors, ate
 
 

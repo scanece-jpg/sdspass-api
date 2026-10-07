@@ -3553,7 +3553,21 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         'Not applicable — the product is transported in packages; bulk transport according to '
         'MARPOL 73/78 Annex II and the IBC Code is not intended.'])
     if _not_regulated:
+        # KKDİK Ek-2 B: 14.1–14.7 alt başlıkları tehlikeli madde olmayan üründe de bulunur
+        # (önceden yalnız açıklama cümlesi basılıyordu; denetimde G-basliklar eksik çıkıyordu)
         story.append(Paragraph(_not_reg_text, styles['body']))
+        story.append(Spacer(1, 3))
+        _na = term(lang, 'not_applicable')
+        _na_dg = (f'{_na} — tehlikeli madde değildir' if lang == 'TR' else f'{_na} — not dangerous goods')
+        story.append(data_table([
+            ['14.1 ' + sub_title(lang, '14.1') + ' (UN No)', _na_dg],
+            ['14.2 ' + sub_title(lang, '14.2'), _na_dg],
+            ['14.3 ' + sub_title(lang, '14.3'), _na_dg],
+            ['14.4 ' + sub_title(lang, '14.4'), _na_dg],
+            ['14.5 ' + sub_title(lang, '14.5'), _na],
+            ['14.6 ' + sub_title(lang, '14.6'), _na],
+            transport_rows[-1],   # 14.7 — MARPOL Ek II / IBC
+        ], [75*mm, 105*mm], styles, header=False))
         story.append(Spacer(1, 4))
     else:
         story.append(data_table(transport_rows, [75*mm, 105*mm], styles, header=False))

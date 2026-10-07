@@ -384,6 +384,11 @@ def c_15_svhc(ctx):
 
 def c_deterjan(ctx):
     s15 = ctx['secs'].get('15', '')
+    if re.search(r'(?i)sınıfı belirlenmemiş|class to be determined', s15):
+        return 'eksik', 'Ek-7 A beyanında sınıfı belirlenmemiş (yüzey aktif madde olabilecek) bileşen var.'
+    if re.search(r'(?i)beyan edilecek bileşen sınıfı bulunmamaktadır|no ingredient classes subject', s15):
+        return 'kdu', ('15.1\'de "Ek-7 A kapsamında beyan edilecek bileşen sınıfı bulunmamaktadır" yazıyor — ürün yüzey '
+                       'aktif madde vb. içeriyorsa beyan gerekir; KDU doğrulasın.')
     return ('uygun', 'Deterjan içerik beyanı var.') if re.search(r'(?i)%\s*5.?ten az|yüzey aktif|surfaktan|parfüm', s15) \
         else ('eksik', 'Deterjan Ek-7 A içerik beyanı bulunamadı.')
 

@@ -21,7 +21,13 @@ Ek-7 A "İçeriğin etikette belirtilmesi" (resmî ek metninden):
 Bileşenin sınıfı: kullanıcının bileşen satırında seçtiği sınıf (det_class) önce gelir; seçilmemişse
 aşağıdaki CAS tablosundan. Tabloda olmayan bileşen beyana girmez (tahmin yapılmaz).
 """
+import re
 from typing import Dict, List
+
+# Adı yüzey aktif maddeye işaret eden bileşenler (yalnız uyarı için — sınıf tahmini YAPILMAZ)
+_SURF_NAME = re.compile(r'(?i)ethoxyl|etoksil|propoxyl|sulfat|sulphat|sülfat|sulfonat|sulphonat|sülfonat|'
+                        r'betain|glucosid|glukozit|glikozit|amine oxide|amin oksit|quaternary|kuaterner|'
+                        r'alkyl ?poly|sarcosin|isethion|taurat|sabun|soap')
 
 # Ek-7 A sınıfları — anahtar: (TR adı, EN adı, bant mı?)
 CLASSES: Dict[str, tuple] = {
@@ -77,6 +83,10 @@ CAS_CLASS: Dict[str, str] = {
     '9043-30-5': 'nonionic', '68551-12-2': 'nonionic', '84133-50-6': 'nonionic', '68002-97-1': 'nonionic',
     '9016-45-9': 'nonionic', '127087-87-0': 'nonionic', '9036-19-5': 'nonionic', '26183-52-8': 'nonionic',
     '68154-97-2': 'nonionic', '9003-11-6': 'nonionic', '61791-12-6': 'nonionic',
+    # yağ alkolü etoksilatları (alkol etoksilatlar) — noniyonik
+    '68439-50-9': 'nonionic', '68439-49-6': 'nonionic', '68131-40-8': 'nonionic', '66455-14-9': 'nonionic',
+    '68951-67-7': 'nonionic', '34398-01-1': 'nonionic', '24938-91-8': 'nonionic', '9004-98-2': 'nonionic',
+    '68920-66-1': 'nonionic',
     # ağartıcılar
     '15630-89-4': 'oxygen_bleach', '7632-04-4': 'oxygen_bleach', '10486-00-7': 'oxygen_bleach',
     '11138-47-9': 'oxygen_bleach', '7722-84-1': 'oxygen_bleach', '79-21-0': 'oxygen_bleach',
@@ -233,13 +243,22 @@ def ek7a_declaration(components: List[dict]) -> Dict:
         if cas in ALLERGENS:
             al_sum[ALLERGENS[cas]] = al_sum.get(ALLERGENS[cas], 0.0) + conc
     allergens = [n for n, v in al_sum.items() if v > 0.01]   # Ek-7 A: ağırlıkça %0,01'i geçen
+    # Sınıfı belirlenmemiş ama adı yüzey aktif maddeye işaret eden bileşenler — sınıf tahmin edilmez,
+    # yalnız "beyan edilecek sınıf yok" gibi yanlış bir kesin ifade basılmasın diye ayrıca bildirilir
+    unassigned = []
+    for c in components or []:
+        cas = str(c.get('cas_no') or c.get('cas') or '').strip()
+        cls = (c.get('det_class') or '').strip() or CAS_CLASS.get(cas)
+        nm = str(c.get('name_tr') or c.get('name') or cas)
+        if not cls and cas != '7732-18-5' and _SURF_NAME.search(nm):
+            unassigned.append(nm)
     bands = []
     for i, (lo, tr, en) in enumerate(_BANDS):
         hi = _BANDS[i - 1][0] if i > 0 else None
         keys = [k for k, v in sums.items() if v > 0.2 and v >= lo and (hi is None or v < hi)]
         if keys:
             bands.append((tr, en, sorted(keys, key=lambda k: list(CLASSES).index(k))))
-    return {'bands': bands, 'always': always, 'allergens': allergens}
+    return {'bands': bands, 'always': always, 'allergens': allergens, 'unassigned': unassigned}
 
 
 SURFACTANT_CLASSES = {'anionic', 'cationic', 'amphoteric', 'nonionic', 'soap'}
@@ -280,7 +299,12 @@ def ek7a_lines(components: List[dict], usage: str = 'industrial', lang: str = 'T
     if d['allergens']:
         out.append(('• Koku alerjenleri (%0,01 üzeri): ' if tr else '• Fragrance allergens (> 0.01%): ')
                    + ', '.join(d['allergens']))
-    if len(out) == 1:
+    if d.get('unassigned'):
+        out.append(('• Ek-7 A sınıfı belirlenmemiş (yüzey aktif madde olabilecek) bileşen: ' if tr else
+                    '• Component(s) without an Annex VII A class (possibly surfactant): ')
+                   + ', '.join(d['unassigned'])
+                   + (' — sınıfı KDU tarafından belirlenmelidir.' if tr else ' — class to be determined.'))
+    elif len(out) == 1:
         out.append('• Ek-7 A kapsamında beyan edilecek bileşen sınıfı bulunmamaktadır.' if tr else
                    '• No ingredient classes subject to Annex VII A declaration.')
     if usage != 'consumer':

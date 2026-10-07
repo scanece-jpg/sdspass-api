@@ -421,6 +421,7 @@ COMMON_NAMES_TR = {
     '68213-23-0': 'alkoller, C12-18, etoksillenmiş',
     '68439-46-3': 'alkoller, C9-11, etoksillenmiş',
     '68131-39-5': 'alkoller, C12-15, etoksillenmiş',
+    '68439-50-9': 'alkoller, C12-14, etoksillenmiş',
     # gazlar
     '7727-37-9':  'azot',
     '124-38-9':   'karbondioksit',

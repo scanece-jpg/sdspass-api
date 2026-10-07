@@ -13,7 +13,7 @@ Girdi (normalize):
 """
 import asyncio
 
-from app.services.clp_service import is_danger
+from app.services.clp_service import signal_word_for
 from app.services.p_code_service import (
     assign_p_codes, select_label_p_codes, classify_sds_p_codes,
 )
@@ -499,7 +499,7 @@ async def classify(inp: dict) -> dict:
 
     # ── Uyarı kelimesi, EUH, P kodları, piktogram, KKD ───────────────────────
     clean = {h.split()[0] for h in h_codes}
-    signal = ('Danger' if is_danger(clean, clp_res.get('passed', [])) else 'Warning') if clean else ''
+    signal = signal_word_for(clean, clp_res.get('passed', []))   # H411/H412/H413/H362 tek başına → ''
 
     euh = check_euh(comps, mixture_form=form, form_sub=form_sub)
     if set(all_h) & {'H314', 'H315'}:   # SEA Ek-2 1.2.4: EUH066 cilt tahrişi yoksa

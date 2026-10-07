@@ -49,7 +49,7 @@ H_TO_GHS = {
     'GHS08': {'H304','H334','H340','H341','H350','H351',
               'H360','H360D','H360F','H360FD',
               'H361','H361D','H361F','H361FD',
-              'H362','H370','H371','H372','H373'},
+              'H370','H371','H372','H373'},   # H362 (laktasyon): piktogram yok — SEA Ek-1 Tablo 3.7.3
     # SEA Ek-5 §3.1: Yalnızca H400, H410, H411 GHS09 piktogramı alır.
     # H412 (Aquatic Chronic 3) ve H413 (Aquatic Chronic 4) piktogram ALMAZ.
     'GHS09': {'H400','H401','H410','H411'},

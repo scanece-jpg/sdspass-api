@@ -119,7 +119,7 @@ if os.path.exists(_JS_DIR):
 # ─── PDF ENDPOINT ─────────────────────────────────────────────────────────────
 
 from app.services.pdf_sds_service import generate_sds_pdf
-from app.services.clp_service import DANGER_H, is_danger
+from app.services.clp_service import DANGER_H, is_danger, signal_word_for
 from app.services.p_code_service import (
     assign_p_codes, select_label_p_codes, classify_sds_p_codes
 )
@@ -644,7 +644,7 @@ async def debug_signal(data: dict = Body(...)):
     h_codes = data.get('h_codes', [])
     signal_from_fe = data.get('signal_word', '')
     clean = {h.split()[0] for h in h_codes}
-    computed = 'Danger' if is_danger(clean) else 'Warning'
+    computed = signal_word_for(clean) or 'None'
     final = signal_from_fe if signal_from_fe in ('Danger', 'Warning') else computed
     return {
         "api_version": "1.2.0-DANGER_H_FIX",
@@ -931,8 +931,7 @@ async def clp_calculate(body: dict):
                 })
 
         # 4. Sinyal kelimesi güncelle
-        signal = "Danger" if is_danger(set(result["h_codes"]), result.get("passed", [])) else (
-                  "Warning" if result["h_codes"] else "")
+        signal = signal_word_for(result["h_codes"], result.get("passed", []))
         result["signal_word"] = signal
         result["signal_word_tr"] = {"Danger":"Tehlike","Warning":"Dikkat","":""}.get(signal,"")   # SEA Md.4(1)(ff)
         result["h_codes"] = sorted(result["h_codes"])
@@ -954,7 +953,7 @@ async def clp_classify_single(body: dict):
     h_codes = body.get("h_codes", [])
     lang = body.get("lang", "TR")
     ghs = get_ghs_codes(h_codes)
-    signal = "Danger" if is_danger(set(h_codes)) else ("Warning" if h_codes else "")
+    signal = signal_word_for(h_codes)
     return {
         "success": True,
         "h_codes": h_codes,

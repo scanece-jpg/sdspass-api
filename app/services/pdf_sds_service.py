@@ -798,7 +798,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                      'H300','H301','H310','H311','H330','H331',
                      'H334','H340','H350','H360','H370','H372'}
         if not any(h in _danger_h for h in clp['h_codes']):
-            clp['signal_word'] = 'Warning'
+            from app.services.clp_service import signal_word_for as _swf
+            clp['signal_word'] = _swf(clp['h_codes'])
 
     # Validator devre dışı
     _validation_issues = []
@@ -1026,7 +1027,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _hc_set = {h.split()[0] for h in h_codes}
     # EUH059 (ozon tabakası) sinyal kelimesi CLP Tablo 5.2 gereği "Danger"
     _has_euh059 = 'EUH059' in (euh.get('euh_codes') or [])
-    signal = 'Danger' if (_hc_set & _DANGER_H) or _has_euh059 else 'Warning'
+    from app.services.clp_service import signal_word_for as _swf
+    # SEA Ek-1 Tablo 4.1.4 / 3.7.3: yalnız H411/H412/H413/H362 varsa uyarı kelimesi yok ('None')
+    signal = 'Danger' if (_hc_set & _DANGER_H) or _has_euh059 else (_swf(_hc_set) or 'None')
     sig_color = C_DANGER if signal=='Danger' else (C_WARNING if signal=='Warning' else black)
 
     # ── Bileşen bazlı not bayrak haritası (note_flag / note) ─────────────────
@@ -1305,7 +1308,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     # Sinyal kelimesi
     story.append(data_table([
         [label_term(lang,'signal_word'),
-         Paragraph(f"<b><font color='{'red' if signal=='Danger' else 'orange'}'>"
+         Paragraph(f"<b><font color='{'red' if signal=='Danger' else 'orange' if signal=='Warning' else 'black'}'>"
                   f"{sig_word(lang, signal)}</font></b>", styles['body'])],
     ], [55*mm, 125*mm], styles, header=False))
     story.append(Spacer(1, 3))

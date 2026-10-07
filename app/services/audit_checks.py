@@ -29,8 +29,21 @@ DANGER_H = {'H200', 'H201', 'H202', 'H203', 'H205', 'H220', 'H222', 'H224', 'H22
             'H304', 'H310', 'H311', 'H314', 'H318', 'H330', 'H331', 'H334', 'H340', 'H350', 'H360', 'H370',
             'H372'}
 WARNING_H = {'H204', 'H221', 'H223', 'H226', 'H252', 'H280', 'H281', 'H290', 'H302', 'H312', 'H315', 'H317',
-             'H319', 'H332', 'H335', 'H336', 'H341', 'H351', 'H361', 'H371', 'H373', 'H400', 'H410', 'H411'}
+             'H319', 'H332', 'H335', 'H336', 'H341', 'H351', 'H361', 'H371', 'H373', 'H400', 'H410'}
 # Not: H225/H228/H242/H272 kategoriye göre Dikkat da olabilir — yalnız "Tehlike hiç yoksa" kontrol edilir
+# SEA Ek-1 Tablo 4.1.4 / 3.7.3: uyarı kelimesi kullanılmayan sınıflar
+NO_SIGNAL_H = {'H411', 'H412', 'H413', 'H362'}
+# SEA Md.20(3)(b) (CLP 18(3)(b)): etikette adı yazılacak bileşen gerektiren karışım sınıfları (sağlık tehlikeleri)
+LABEL_COMP_H = {'H300', 'H301', 'H302', 'H310', 'H311', 'H312', 'H330', 'H331', 'H332', 'H314', 'H318',
+                'H340', 'H341', 'H350', 'H351', 'H360', 'H361', 'H362', 'H334', 'H317', 'H370', 'H371',
+                'H372', 'H373', 'H335', 'H336', 'H304'}
+# "Tehlike İfadeleri", "Tehlike Kodları" gibi başlıklar uyarı kelimesi sayılmaz
+_SIG_HEAD = re.compile(r'(?i)tehlike\s+(?:ifade|İfade|i̇fade)\w*|tehlike\s+kod\w*|tehlike\s+sınıf\w*|'
+                       r'tehlike\s+işaret\w*|tehlike\s+bilgi\w*')
+
+
+def _signal_text(s22: str) -> str:
+    return _SIG_HEAD.sub(' ', s22 or '')
 
 
 def _cas_ok(cas: str) -> bool:
@@ -185,7 +198,7 @@ def c_h_atif(ctx):
 
 
 def c_uyari_tek(ctx):
-    s22 = _sub(ctx['secs'].get('2', ''), '2.2', '2.3')
+    s22 = _signal_text(_sub(ctx['secs'].get('2', ''), '2.2', '2.3'))
     both = re.search(r'\bTehlike\b', s22) and re.search(r'\bDikkat\b', s22)
     return ('eksik', '2.2\'de hem "Tehlike" hem "Dikkat" geçiyor.') if both else ('uygun', 'Tek uyarı kelimesi.')
 
@@ -209,6 +222,9 @@ def c_p_sayi(ctx):
 
 def c_bilesen(ctx):
     s2 = ctx['secs'].get('2', '')
+    if not ({h[:4] for h in _h(s2)} & LABEL_COMP_H):
+        return 'uygun', ('Etikette bileşen adı gerektiren sağlık sınıflandırması yok (SEA Md.20(3)(b): akut '
+                         'toksisite, aşındırıcılık/ciddi göz hasarı, CMR, hassaslaştırma, BHOT, aspirasyon).')
     return ('uygun', 'Etikette belirtilecek zararlı bileşenler yazılmış.') if re.search(
         r'(?i)zararlı bileşen|içerir\s*:|tehlikeli bileşen', s2) else \
            ('eksik', '2.2\'de "etikette belirtilmesi zorunlu zararlı bileşenler" bulunamadı (SEA Md.20(3)(b)).')
@@ -219,12 +235,17 @@ def c_22_tutarlilik(ctx):
     s21, s22 = _sub(s2, '2.1', '2.2'), _sub(s2, '2.2', '2.3')
     notes = []
     h21, h22 = _h(s21), _h(s22)
+    s22 = _signal_text(s22)
     if h22 - h21 and h21:
         notes.append(f'2.2\'de olup 2.1\'de olmayan H kodları: {sorted(h22 - h21)}')
     if (h21 | h22) & DANGER_H and not re.search(r'\bTehlike\b', s22):
         notes.append('"Tehlike" gerektiren sınıflandırma var ama 2.2\'de "Tehlike" yok')
     if not ((h21 | h22) & DANGER_H) and (h21 | h22) & WARNING_H and not re.search(r'\bDikkat\b', s22):
         notes.append('"Dikkat" gerektiren sınıflandırma var ama 2.2\'de "Dikkat" yok')
+    _all = {h[:4] for h in (h21 | h22)}
+    if _all and _all <= NO_SIGNAL_H and re.search(r'\b(?:Dikkat|Tehlike)\b', s22):
+        notes.append(f'Yalnız {sorted(_all)} var — uyarı kelimesi kullanılmaz (SEA Ek-1 Tablo 4.1.4 / 3.7.3) '
+                     f'ama 2.2\'de uyarı kelimesi basılmış')
     return ('uygun', 'Etiket unsurları 2.1 ile tutarlı.') if not notes else ('eksik', '; '.join(notes))
 
 

@@ -161,7 +161,7 @@ const CalculatorModule = (() => {
       pRes.label_components = data.label_components || [];   // etikette adı zorunlu bileşenler
       const result = {
         hCodes:     data.h_codes     || [],
-        signal:     data.signal      || 'Warning',
+        signal:     data.signal      || 'None',   // '' = uyarı kelimesi yok (H411/H412/H413/H362 tek başına)
         pictograms: data.pictograms  || [],
         stot:       data.stot        || {},
         euh:        data.euh         || {},

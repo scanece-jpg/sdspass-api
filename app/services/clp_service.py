@@ -178,6 +178,22 @@ def is_danger(h_codes_set: set, clp_passed=None) -> bool:
         return True  # bilgi yoksa muhafazakâr: Danger
     return False
 
+# SEA Ek-1: uyarı kelimesi KULLANILMAYAN sınıflar — Tablo 4.1.4 (Sucul Kronik 2, 3, 4) ve Tablo 3.7.3
+# (laktasyon ek kategorisi). Yalnız bu kodları taşıyan madde/karışımda uyarı kelimesi basılmaz.
+NO_SIGNAL_H = {'H411', 'H412', 'H413', 'H362'}
+
+
+def signal_word_for(h_codes, clp_passed=None) -> str:
+    """H kodlarından uyarı kelimesi: 'Danger' / 'Warning' / '' (uyarı kelimesi yok).
+    Önceden H kodu olan her üründe en az 'Warning' veriliyordu; H411/H412/H413/H362 tek başına uyarı kelimesi
+    gerektirmez (SEA Ek-1 Tablo 4.1.4, 3.7.3)."""
+    clean = {str(h).split()[0] for h in (h_codes or []) if h}
+    rel = {h for h in clean if not h.upper().startswith('EUH') and h[:4].upper() not in NO_SIGNAL_H}
+    if not rel:
+        return ''
+    return 'Danger' if is_danger(rel, clp_passed) else 'Warning'
+
+
 # CLP Annex I üstünlük (dominance) kuralları — alt kategori H kodlarını sil
 DOMINANCE: dict = {
     'H314': ['H318', 'H315', 'H319'],  # SEA Md.29: H314 "deri yanığı VE göz hasarı" — H318 fazlalık
@@ -803,7 +819,7 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
                 _p['h_code'] = _resolved
 
     h_codes = sorted(seen_h)
-    signal  = "Danger" if any(h in DANGER_H for h in h_codes) else ("Warning" if h_codes else "")
+    signal  = signal_word_for(h_codes, passed)
     signal_tr = {"Danger":"Tehlike","Warning":"Dikkat","":""}.get(signal,"")   # SEA Md.4(1)(ff)
 
     return {
@@ -864,7 +880,7 @@ _PICTOGRAM_MAP = {
     'H317':'GHS07','H334':'GHS08',
     'H340':'GHS08','H341':'GHS08',
     'H350':'GHS08','H351':'GHS08',
-    'H360':'GHS08','H361':'GHS08','H362':'GHS08',
+    'H360':'GHS08','H361':'GHS08',   # H362: piktogram yok (SEA Ek-1 Tablo 3.7.3)
     'H370':'GHS08','H371':'GHS08','H372':'GHS08','H373':'GHS08',
     'H335':'GHS07','H336':'GHS07',
     'H304':'GHS08',

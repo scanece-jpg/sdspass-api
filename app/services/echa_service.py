@@ -504,9 +504,9 @@ async def _fetch_echa_cl_direct(cas: str, client: httpx.AsyncClient) -> dict | N
                     hazard_classes.append(main)
 
         from app.services.ghs_pictogram import get_ghs_codes
-        from app.services.clp_service import is_danger
+        from app.services.clp_service import signal_word_for
         up = {h.upper() for h in h_codes} | {h[:4].upper() for h in h_codes}
-        signal = ('Danger' if is_danger(up) else 'Warning') if h_codes else ''
+        signal = signal_word_for(h_codes)   # H411/H412/H413/H362 tek başına → uyarı kelimesi yok
 
         # M faktörü ve ATE — bildirimlerden (yalnız Ek-6/Annex VI dışı maddeler bu yola gelir)
         m_factors, ate = {}, {}

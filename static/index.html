@@ -1259,7 +1259,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
 <script src="js/modules/cas-lookup.js?v=20260617"></script>
 <script src="js/modules/component-manager.js?v=20260617"></script>
 <script src="js/modules/conc-selector.js?v=20260617"></script>
-<script src="js/modules/calculator.js?v=20261007a"></script>
+<script src="js/modules/calculator.js?v=20261007b"></script>
 <script src="js/modules/results-renderer.js?v=20260930"></script>
 <script src="js/modules/pdf-exporter.js?v=20260617"></script>
 <script src="js/app.js?v=20260617"></script>
@@ -1914,9 +1914,9 @@ const WARNING_H = new Set([
   'H302','H303','H312','H313','H332','H333',
   'H315','H316','H317','H319','H320',
   'H335','H336',
-  'H341','H351','H361','H361D','H361F','H361FD','H362',
+  'H341','H351','H361','H361D','H361F','H361FD',   // H362: uyarı kelimesi yok (SEA Ek-1 Tablo 3.7.3)
   'H371','H373',
-  'H400','H410','H411','H420',
+  'H400','H410','H420',   // H411/H412/H413: uyarı kelimesi yok (SEA Ek-1 Tablo 4.1.4)
 ]);
 
 // H kodu → GHS piktogram (CLP Annex V / KKDİK Ek-5)
@@ -1934,7 +1934,7 @@ const _H_TO_GHS = {
   'H315':'GHS07','H317':'GHS07','H319':'GHS07','H335':'GHS07','H336':'GHS07','H420':'GHS07',
   'H304':'GHS08','H334':'GHS08',
   'H340':'GHS08','H341':'GHS08','H350':'GHS08','H351':'GHS08',
-  'H360':'GHS08','H361':'GHS08','H362':'GHS08',
+  'H360':'GHS08','H361':'GHS08',   // H362: piktogram yok (SEA Ek-1 Tablo 3.7.3)
   'H360D':'GHS08','H360F':'GHS08','H360FD':'GHS08',
   'H361D':'GHS08','H361F':'GHS08','H361FD':'GHS08',
   'H370':'GHS08','H371':'GHS08','H372':'GHS08','H373':'GHS08',
@@ -4217,7 +4217,7 @@ function renderAll(s) {
       <div class="${sigClass}" style="margin-bottom:8px">${sigLabel}</div>
       <div class="hcode-pills">${allH.map(c => `<span class="hpill ${pillClass(c)}" style="${annexH.has(c) ? 'border-style:dashed;opacity:.85' : ''}" title="${annexH.has(c) ? 'Annex VI takviye' : ''}">${c}</span>`).join('')}</div>
       <div class="pictogram-row">${combinedPics.map(g => `<div class="ghs-icon"><div class="sym">${GHS_DATA[g]?.sym||'?'}</div><div class="lbl">${g}</div></div>`).join('')}</div>
-      ${combinedSignal === 'None' ? `<div style="font-size:10px;color:var(--text3);margin-top:6px">ℹ H412/H413 gibi kodlar etiket üzerinde piktogram ve uyarı kelimesi gerektirmez.</div>` : ''}
+      ${combinedSignal === 'None' ? `<div style="font-size:10px;color:var(--text3);margin-top:6px">ℹ H411/H412/H413 ve H362 tek başına uyarı kelimesi gerektirmez (SEA Ek-1 Tablo 4.1.4, 3.7.3); H412/H413/H362 piktogram da gerektirmez.</div>` : ''}
     </div>`;
   }
 

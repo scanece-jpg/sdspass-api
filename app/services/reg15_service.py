@@ -1,5 +1,5 @@
-"""GBF 15 — BEKRA, ozon tabakasını incelten maddeler ve kalıcı organik kirleticiler (KKDİK Ek-2 Bölüm 15 girişi
-ve 15.1: ürünün bu mevzuata "tabi olup olmadığı"). Veri: data/tr_reg15_lists.json (scripts/build_reg15_lists.py).
+"""GBF 15 — BEKRA, ozon tabakasını incelten maddeler, kalıcı organik kirleticiler ve tehlikeli kimyasalların
+ithalat/ihracatı (Rotterdam/ÖBK) (KKDİK Ek-2 Bölüm 15 girişi ve 15.1: ürünün bu mevzuata "tabi olup olmadığı"). Veri: data/tr_reg15_lists.json (scripts/build_reg15_lists.py).
 
 Karar kuralları:
 - Ozon / KOK: bileşen CAS'ı listede ise "içerir" (kesin). Listede CAS'ı verilmeyen aileler (izomerler, "ve
@@ -23,7 +23,7 @@ def _db() -> dict:
         try:
             _DB = json.load(open(p, encoding='utf-8'))
         except Exception:
-            _DB = {'kok': {}, 'ozon': {}, 'bekra2': {}, 'kaynak': {}}
+            _DB = {'kok': {}, 'ozon': {}, 'bekra2': {}, 'pic': {}, 'kaynak': {}}
     return _DB
 
 
@@ -39,6 +39,13 @@ _KOK_FAM = re.compile(
     r'polychlorinated\s*naphthalen|klorlu\s*parafin|chlorinated\s*paraffin|alkanes,?\s*c10-13,?\s*chloro|'
     r'pentaklorofenol|pentachlorophenol|hekzabromosiklododekan|hexabromocyclododecan|\bhbcdd?\b|'
     r'dibenzo-?p?-?dioks|dibenzo-?p?-?diox|dibenzofuran')
+# ÖBK/PIC (Bazı Zararlı Kimyasalların İhracatı ve İthalatı) Ek-1/Ek-2'de bileşik grubu olarak verilenler — ad ile.
+# "Bitki özleri" girişi bitki koruma ürünlerine aittir; ad eşleşmesi yanıltıcı olacağından alınmadı.
+_PIC_FAM = re.compile(
+    r'(?i)kurşun|\blead\b|kadmiyum|cadmium|arsenik|arsenic|cıva|mercury|mercuric|mercurous|organotin|organokalay|'
+    r'tribut\w*\s*tin|tribütil\s*kalay|dibut\w*\s*tin|dibütil\s*kalay|dioct\w*\s*tin|dioktil\s*kalay|'
+    r'nonilfenol|nonylphenol|perfl[uo]+ro-?\s*okta?n|perfluorooctan|\bpfos\b|\bpfoa\b|benzidin|naftilamin|'
+    r'naphthylamin|aminobifenil|aminobiphenyl|hexabromocyclododec|hekzabromosiklododek|\b2,4,5-t\b|dinoseb')
 # BEKRA Ek-1 Bölüm 2 — CAS'ı verilmeyen adlandırılmış maddeler
 _BEKRA2_NAMES = [
     (re.compile(r'(?i)amonyum\s*nitrat|ammonium\s*nitrate'), 'Amonyum nitrat (Ek-1 Bölüm 2, Not 13–16)'),
@@ -76,7 +83,7 @@ def _hz(c) -> set:
 
 def ozone_kok(components: list) -> dict:
     db = _db()
-    out = {'ozon': [], 'ozon_olasi': [], 'kok': [], 'kok_olasi': []}
+    out = {'ozon': [], 'ozon_olasi': [], 'kok': [], 'kok_olasi': [], 'pic': [], 'pic_olasi': []}
     for c in components or []:
         cas, nm = _cas(c), _names(c) or _cas(c)
         if cas in db['ozon']:
@@ -89,6 +96,10 @@ def ozone_kok(components: list) -> dict:
             out['kok'].append(f"{nm} ({cas}; {db['kok'][cas]['ek']})")
         elif _KOK_FAM.search(nm):
             out['kok_olasi'].append(f'{nm} ({cas})')
+        if cas in db.get('pic', {}):
+            out['pic'].append(f"{nm} ({cas}; {db['pic'][cas]['ek']})")
+        elif _PIC_FAM.search(nm):
+            out['pic_olasi'].append(f'{nm} ({cas})')
     return out
 
 
@@ -200,4 +211,14 @@ def section15_lines(h_codes, passed, euh_codes, components, lang: str = 'TR') ->
                    'girebilir — KDU tarafından doğrulanmalıdır.')
     else:
         out.append(f"{src.get('kok')}: ürün, bu eklerde listelenen maddeleri içermez.")
+    # ÖBK / PIC (Rotterdam Sözleşmesi)
+    if src.get('pic'):
+        if oz['pic']:
+            out.append(f"{src['pic']}: ürün listelenen maddeleri içerir — {', '.join(oz['pic'])}. İhracatta Md.8 "
+                       'ihracat bildirimi ve Md.10 yıllık miktar bildirimi (31 Mart) yükümlülükleri uygulanır.')
+        elif oz['pic_olasi']:
+            out.append(f"{src['pic']}: {', '.join(oz['pic_olasi'])} bileşeni listedeki bileşik gruplarından birine "
+                       'girebilir — KDU tarafından doğrulanmalıdır.')
+        else:
+            out.append(f"{src['pic']}: ürün, bu eklerde listelenen maddeleri içermez.")
     return out

@@ -4161,10 +4161,11 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             pass
         if product.get('is_detergent'):
             _src.append('Deterjan bilgileri: Deterjanlar Hakkında Yönetmelik (RG 27.01.2018/30314)')
-        _src.append('BEKRA, ozon ve KOK durumu (Bölüm 15): Büyük Endüstriyel Kazaların Önlenmesi ve Etkilerinin '
+        _src.append('BEKRA, ozon, KOK ve ÖBK durumu (Bölüm 15): Büyük Endüstriyel Kazaların Önlenmesi ve Etkilerinin '
                     'Azaltılması Hakkında Yönetmelik Ek-1 (RG 02.03.2019/30702); Ozon Tabakasını İncelten Maddelere '
                     'İlişkin Yönetmelik Ek-5, Ek-8 (RG 07.04.2017/30031); Kalıcı Organik Kirleticiler Hakkında '
-                    'Yönetmelik Ek-1, Ek-2 (RG 14.11.2018/30595)')
+                    'Yönetmelik Ek-1, Ek-2 (RG 14.11.2018/30595); Bazı Zararlı Kimyasalların İhracatı ve İthalatı '
+                    'Hakkında Yönetmelik Ek-1, Ek-2 (RG 28.01.2023/32087)')
         _src.append('Güvenlik Bilgi Formu: KKDİK Yönetmeliği Ek-2 (RG 23.06.2017/30105 Mükerrer)')
     else:
         _src += ['Transport: ADR 2025, IMDG Code (Amdt. 42-24), IATA-DGR 2026']

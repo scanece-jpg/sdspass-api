@@ -1133,6 +1133,7 @@ async def sds_calculate(body: dict = Body(...)):
             'transport':   core['transport'],
             'ppe':         core['ppe'],
             'glove':       core.get('glove') or {},
+            'ek17':        core.get('ek17') or [],
             'theo_props':  phys_result.get('theo_props', {}),
             'warnings':    core['warnings'],
             'pictograms':  core['pictograms'],

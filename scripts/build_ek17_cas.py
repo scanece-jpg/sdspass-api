@@ -57,6 +57,22 @@ for f in sorted(glob.glob(os.path.join(KD, 'kkdik-ek-17-ek-*.md'))):
             add(c, {'giris': giris, 'ad': re.sub(r'\s+', ' ', cells[0])[:120],
                     'kaynak': f'KKDİK Ek-17 Ek-{ek} (Giriş {giris}{" — " + baslik if baslik else ""})'})
 
+# Ek-17 madde 46 — metin nonilfenol için yalnız 25154-52-3 verir, nonilfenol etoksilatlar için CAS vermez (yalnız
+# formül). Kapsamdaki diğer CAS'lar, aynı maddeleri tanımlayan Bazı Zararlı Kimyasalların İhracatı ve İthalatı Hakkında
+# Yönetmelik (RG 28.01.2023/32087) Ek-1 satırlarından alınır.
+_pic = os.path.join(ROOT, 'sds-knowledge', 'tr', 'pic-32087-ekler.md')
+if os.path.exists(_pic):
+    for line in open(_pic, encoding='utf-8'):
+        cells = [c.strip() for c in line.strip().strip('|').split('|')]
+        if len(cells) < 3 or not cells[1].lower().startswith('nonilfenol'):
+            continue
+        is_npe = 'etoksilat' in cells[1].lower()
+        for c in CAS_RE.findall(cells[2]):
+            if any(r['giris'] == '46' for r in out.get(c, [])):
+                continue   # ana tabloda zaten madde 46 (25154-52-3)
+            add(c, {'giris': '46', 'ad': 'Nonilfenol etoksilatlar' if is_npe else 'Nonilfenol',
+                    'kaynak': 'KKDİK Ek-17 madde 46'})
+
 json.dump({'kaynak': 'KKDİK Ek-17 (RG 23.06.2017/30105 Mükerrer; RG 29.11.2019/30963 ile güncel) — bilgi tabanı md',
            'not': 'Ek-14 (izne tabi maddeler) yönetmelik metninde boş; Bakanlık sitesinde yayımlanır.',
            'cas': out}, open(OUT, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)

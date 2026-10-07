@@ -2,7 +2,8 @@
  "kaynak": {
   "kok": "Kalıcı Organik Kirleticiler Hakkında Yönetmelik (RG 14.11.2018/30595; Değişik RG 25.03.2021/31434) Ek-1, Ek-2",
   "ozon": "Ozon Tabakasını İncelten Maddelere İlişkin Yönetmelik (RG 07.04.2017/30031) Ek-5, Ek-8",
-  "bekra": "Büyük Endüstriyel Kazaların Önlenmesi ve Etkilerinin Azaltılması Hakkında Yönetmelik (RG 02.03.2019/30702) Ek-1"
+  "bekra": "Büyük Endüstriyel Kazaların Önlenmesi ve Etkilerinin Azaltılması Hakkında Yönetmelik (RG 02.03.2019/30702) Ek-1",
+  "pic": "Bazı Zararlı Kimyasalların İhracatı ve İthalatı Hakkında Yönetmelik (RG 28.01.2023/32087) Ek-1, Ek-2"
  },
  "kok": {
   "50-29-3": {
@@ -361,5 +362,1707 @@
   "96-33-3": "Metil akrilat (Bakınız Not 21)",
   "108-99-6": "3-Metilpiridin (Bakınız Not 21)",
   "109-70-6": "1-Brom-3-kloropropan (Bakınız not 21)"
+ },
+ "pic": {
+  "75-35-4": {
+   "ad": "1,1-dikloroetilen",
+   "ek": "Ek-1"
+  },
+  "79-00-5": {
+   "ad": "1,1,2-trikloroetan",
+   "ek": "Ek-1"
+  },
+  "630-20-6": {
+   "ad": "1,1,1,2-tetrakloroetan",
+   "ek": "Ek-1"
+  },
+  "79-34-5": {
+   "ad": "1,1,2,2-tetrakloroetan",
+   "ek": "Ek-1"
+  },
+  "542-75-6": {
+   "ad": "1,3-dikloropropen",
+   "ek": "Ek-1"
+  },
+  "10061-01-5": {
+   "ad": "1,3- dikloropropen (CIS) (1Z)-1,3-dikloroprop-1-ene",
+   "ek": "Ek-1"
+  },
+  "13952-84-6": {
+   "ad": "2-aminobütan",
+   "ek": "Ek-1"
+  },
+  "91-59-8": {
+   "ad": "2-naftilamin ve tuzları",
+   "ek": "Ek-1"
+  },
+  "553-00-4": {
+   "ad": "2-naftilamin ve tuzları",
+   "ek": "Ek-1"
+  },
+  "612-52-2": {
+   "ad": "2-naftilamin ve tuzları",
+   "ek": "Ek-1"
+  },
+  "120-23-0": {
+   "ad": "2-Naftiloksiasetik asit BNOA (Beta Naftoksi Asetik Asit)",
+   "ek": "Ek-1"
+  },
+  "10519-33-2": {
+   "ad": "3-decen-2-one",
+   "ek": "Ek-1"
+  },
+  "92-67-1": {
+   "ad": "4-aminobifenil (ksenilamin, bifenil-4-ilamin) ve tuzları",
+   "ek": "Ek-1"
+  },
+  "2113-61-3": {
+   "ad": "4-aminobifenil (ksenilamin, bifenil-4-ilamin) ve tuzları",
+   "ek": "Ek-1"
+  },
+  "122-88-3": {
+   "ad": "4-CPA (4- Klorofenoksi Asetik Asit)",
+   "ek": "Ek-1"
+  },
+  "92-93-3": {
+   "ad": "4-nitrobifenil",
+   "ek": "Ek-1"
+  },
+  "30560-19-1": {
+   "ad": "Asefat",
+   "ek": "Ek-1"
+  },
+  "34256-82-1": {
+   "ad": "Asetoklor",
+   "ek": "Ek-1"
+  },
+  "50594-66-6": {
+   "ad": "Asiflorfen",
+   "ek": "Ek-1"
+  },
+  "834-12-8": {
+   "ad": "Ametrin",
+   "ek": "Ek-1"
+  },
+  "8047-15-2": {
+   "ad": "Amino Asit (Saponin)",
+   "ek": "Ek-1"
+  },
+  "632-20-2": {
+   "ad": "Amino Asit: Karışım",
+   "ek": "Ek-1"
+  },
+  "33089-61-1": {
+   "ad": "Amitraz",
+   "ek": "Ek-1"
+  },
+  "61-82-5": {
+   "ad": "Amitrol (Aminotriyazol)",
+   "ek": "Ek-1"
+  },
+  "1762-95-4": {
+   "ad": "Amonyum Tiyosiyanat",
+   "ek": "Ek-1"
+  },
+  "64249-01-0": {
+   "ad": "Anilofos",
+   "ek": "Ek-1"
+  },
+  "84-65-1": {
+   "ad": "Antrakinon",
+   "ek": "Ek-1"
+  },
+  "12001-29-5": {
+   "ad": "Asbest lifi: Krizotil",
+   "ek": "Ek-1"
+  },
+  "132207-32-0": {
+   "ad": "Asbest lifi: Krizotil",
+   "ek": "Ek-1"
+  },
+  "3337-71-1": {
+   "ad": "Asulam",
+   "ek": "Ek-1"
+  },
+  "2302-17-2": {
+   "ad": "Asulam",
+   "ek": "Ek-1"
+  },
+  "155723-02-7": {
+   "ad": "ATCA",
+   "ek": "Ek-1"
+  },
+  "1912-24-9": {
+   "ad": "Atrazin",
+   "ek": "Ek-1"
+  },
+  "2642-71-9": {
+   "ad": "Azinfos-etil",
+   "ek": "Ek-1"
+  },
+  "41083-11-8": {
+   "ad": "Azosiklotin",
+   "ek": "Ek-1"
+  },
+  "82560-54-1": {
+   "ad": "Benfürakarb",
+   "ek": "Ek-1"
+  },
+  "17804-35-2": {
+   "ad": "Benomil (ISO); metil-1-(bütilkarbamoil)benzimidazol-2-ilkarbamat",
+   "ek": "Ek-1"
+  },
+  "17606-31-4": {
+   "ad": "Bensultap",
+   "ek": "Ek-1"
+  },
+  "71-43-2": {
+   "ad": "Benzen",
+   "ek": "Ek-1"
+  },
+  "92-87-5": {
+   "ad": "Benzidin ve tuzları/türevleri",
+   "ek": "Ek-1"
+  },
+  "36341-27-2": {
+   "ad": "Benzidin ve tuzları/türevleri",
+   "ek": "Ek-1"
+  },
+  "85-68-7": {
+   "ad": "Benzilbütilfitalat (BBP)",
+   "ek": "Ek-1"
+  },
+  "65731-84-2": {
+   "ad": "Beta-sipermetrin",
+   "ek": "Ek-1"
+  },
+  "82657-04-3": {
+   "ad": "Bifentrin",
+   "ek": "Ek-1"
+  },
+  "55179-31-2": {
+   "ad": "Bitertanol",
+   "ek": "Ek-1"
+  },
+  "56073-10-0": {
+   "ad": "Brodifakum",
+   "ek": "Ek-1"
+  },
+  "314-40-9": {
+   "ad": "Bromasil",
+   "ek": "Ek-1"
+  },
+  "2104-96-3": {
+   "ad": "Bromofos",
+   "ek": "Ek-1"
+  },
+  "4824-78-6": {
+   "ad": "Bromofos etil",
+   "ek": "Ek-1"
+  },
+  "18181-80-1": {
+   "ad": "Bromopropilat",
+   "ek": "Ek-1"
+  },
+  "52-51-7": {
+   "ad": "Bronopol",
+   "ek": "Ek-1"
+  },
+  "33629-47-9": {
+   "ad": "Butralin",
+   "ek": "Ek-1"
+  },
+  "7440-43-9": {
+   "ad": "Kadmiyum ve bileşikleri",
+   "ek": "Ek-1"
+  },
+  "95465-99-9": {
+   "ad": "Kadusafos (Aka Ebufos)",
+   "ek": "Ek-1"
+  },
+  "50-14-6": {
+   "ad": "Kalsiferol",
+   "ek": "Ek-1"
+  },
+  "63-25-2": {
+   "ad": "Karbaril",
+   "ek": "Ek-1"
+  },
+  "10605-21-7": {
+   "ad": "Karbendazim",
+   "ek": "Ek-1"
+  },
+  "55285-14-8": {
+   "ad": "Karbosülfan",
+   "ek": "Ek-1"
+  },
+  "15263-53-3": {
+   "ad": "Kartap",
+   "ek": "Ek-1"
+  },
+  "2439-01-2": {
+   "ad": "Kinometiyonat (Aka Kinometiyonat)",
+   "ek": "Ek-1"
+  },
+  "122453-73-0": {
+   "ad": "Klorfenapir",
+   "ek": "Ek-1"
+  },
+  "470-90-6": {
+   "ad": "Klorfenvinfos",
+   "ek": "Ek-1"
+  },
+  "71422-67-8": {
+   "ad": "Klorfluazuron",
+   "ek": "Ek-1"
+  },
+  "1698-60-8": {
+   "ad": "Kloridazon",
+   "ek": "Ek-1"
+  },
+  "24934-91-6": {
+   "ad": "Klormefos",
+   "ek": "Ek-1"
+  },
+  "67-66-3": {
+   "ad": "Kloroform",
+   "ek": "Ek-1"
+  },
+  "2675-77-6": {
+   "ad": "Kloroneb",
+   "ek": "Ek-1"
+  },
+  "76-06-2": {
+   "ad": "Kloropikrin",
+   "ek": "Ek-1"
+  },
+  "1897-45-6": {
+   "ad": "Klorotalonil",
+   "ek": "Ek-1"
+  },
+  "101-21-3": {
+   "ad": "Klorprofam",
+   "ek": "Ek-1"
+  },
+  "2921-88-2": {
+   "ad": "Klorpirifos-etil (Klorpirifos)",
+   "ek": "Ek-1"
+  },
+  "5598-13-0": {
+   "ad": "Klorpirifos-metil",
+   "ek": "Ek-1"
+  },
+  "1861-32-1": {
+   "ad": "Klortal-dimetil",
+   "ek": "Ek-1"
+  },
+  "84332-86-5": {
+   "ad": "Klozolinat",
+   "ek": "Ek-1"
+  },
+  "67-97-0": {
+   "ad": "Kolekalsiferol",
+   "ek": "Ek-1"
+  },
+  "142891-20-1": {
+   "ad": "Sinidon-etil",
+   "ek": "Ek-1"
+  },
+  "32771-64-5": {
+   "ad": "Cis-Zeatin",
+   "ek": "Ek-1"
+  },
+  "210880-92-5": {
+   "ad": "Klotiyanidin",
+   "ek": "Ek-1"
+  },
+  "81-82-3": {
+   "ad": "Koumaklor",
+   "ek": "Ek-1"
+  },
+  "117-52-2": {
+   "ad": "Koumafuril",
+   "ek": "Ek-1"
+  },
+  "8001-58-9": {
+   "ad": "Kreosot ve Kreosotla ilgili maddeler",
+   "ek": "Ek-1"
+  },
+  "61789-28-4": {
+   "ad": "Kreosot ve Kreosotla ilgili maddeler",
+   "ek": "Ek-1"
+  },
+  "84650-04-4": {
+   "ad": "Kreosot ve Kreosotla ilgili maddeler",
+   "ek": "Ek-1"
+  },
+  "90640-84-9": {
+   "ad": "Kreosot ve Kreosotla ilgili maddeler",
+   "ek": "Ek-1"
+  },
+  "65996-91-0": {
+   "ad": "Kreosot ve Kreosotla ilgili maddeler",
+   "ek": "Ek-1"
+  },
+  "90640-80-5": {
+   "ad": "Kreosot ve Kreosotla ilgili maddeler",
+   "ek": "Ek-1"
+  },
+  "65996-85-2": {
+   "ad": "Kreosot ve Kreosotla ilgili maddeler",
+   "ek": "Ek-1"
+  },
+  "8021-39-4": {
+   "ad": "Kreosot ve Kreosotla ilgili maddeler",
+   "ek": "Ek-1"
+  },
+  "122384-78-5": {
+   "ad": "Kreosot ve Kreosotla ilgili maddeler",
+   "ek": "Ek-1"
+  },
+  "535-89-7": {
+   "ad": "Krimidin",
+   "ek": "Ek-1"
+  },
+  "21725-46-2": {
+   "ad": "Siyanazin",
+   "ek": "Ek-1"
+  },
+  "592-01-8": {
+   "ad": "Siyanür: Kalsiyum, Hidrojen, Sodyum",
+   "ek": "Ek-1"
+  },
+  "74-90-8": {
+   "ad": "Siyanür: Kalsiyum, Hidrojen, Sodyum",
+   "ek": "Ek-1"
+  },
+  "143-33-9": {
+   "ad": "Siyanür: Kalsiyum, Hidrojen, Sodyum",
+   "ek": "Ek-1"
+  },
+  "28159-98-0": {
+   "ad": "Sibutrin",
+   "ek": "Ek-1"
+  },
+  "1134-23-2": {
+   "ad": "Sikloat",
+   "ek": "Ek-1"
+  },
+  "136849-15-5": {
+   "ad": "Siklosulfamuron",
+   "ek": "Ek-1"
+  },
+  "68359-37-5": {
+   "ad": "Siflutrin",
+   "ek": "Ek-1"
+  },
+  "68085-85-8": {
+   "ad": "Sihalotrin",
+   "ek": "Ek-1"
+  },
+  "13121-70-5": {
+   "ad": "Sihekzatin",
+   "ek": "Ek-1"
+  },
+  "75113-37-0": {
+   "ad": "DBB (Di-μ-okzo-di-n-bütilkalay hidroksiboran/dibütilkalayhidrojen borat)",
+   "ek": "Ek-1"
+  },
+  "13684-56-5": {
+   "ad": "Desmedifam",
+   "ek": "Ek-1"
+  },
+  "80060-09-9": {
+   "ad": "Diafentiyuron",
+   "ek": "Ek-1"
+  },
+  "1303-28-2": {
+   "ad": "Diarsenik pentaoksit",
+   "ek": "Ek-1"
+  },
+  "333-41-5": {
+   "ad": "Diazinon",
+   "ek": "Ek-1"
+  },
+  "683-18-1": {
+   "ad": "Dibütilkalay (DBK) bileşikleri",
+   "ek": "Ek-1"
+  },
+  "1194-65-6": {
+   "ad": "Diklobenil",
+   "ek": "Ek-1"
+  },
+  "1085-98-9": {
+   "ad": "Diklofluanid",
+   "ek": "Ek-1"
+  },
+  "62-73-7": {
+   "ad": "Diklorvos",
+   "ek": "Ek-1"
+  },
+  "99-30-9": {
+   "ad": "Dikloran",
+   "ek": "Ek-1"
+  },
+  "7173-51-5": {
+   "ad": "Didesildimetilamonyumklorür (DDAC)",
+   "ek": "Ek-1"
+  },
+  "56073-07-5": {
+   "ad": "Difenakum",
+   "ek": "Ek-1"
+  },
+  "49866-87-7": {
+   "ad": "Difenzokuat",
+   "ek": "Ek-1"
+  },
+  "84-69-5": {
+   "ad": "Diizobutil fitalat",
+   "ek": "Ek-1"
+  },
+  "87674-68-8": {
+   "ad": "Dimetenamid",
+   "ek": "Ek-1"
+  },
+  "55290-64-7": {
+   "ad": "Dimetipin",
+   "ek": "Ek-1"
+  },
+  "60-51-5": {
+   "ad": "Dimetoat",
+   "ek": "Ek-1"
+  },
+  "83657-18-5": {
+   "ad": "Dinikonazol-M",
+   "ek": "Ek-1"
+  },
+  "973-21-7": {
+   "ad": "Dinobuton",
+   "ek": "Ek-1"
+  },
+  "39300-45-3": {
+   "ad": "Dinokap",
+   "ek": "Ek-1"
+  },
+  "1420-07-1": {
+   "ad": "Dinoterb",
+   "ek": "Ek-1"
+  },
+  "3542-36-7": {
+   "ad": "Dioktilkalay Bileşikleri",
+   "ek": "Ek-1"
+  },
+  "870-08-6": {
+   "ad": "Dioktilkalay Bileşikleri",
+   "ek": "Ek-1"
+  },
+  "16091-18-2": {
+   "ad": "Dioktilkalay Bileşikleri",
+   "ek": "Ek-1"
+  },
+  "6988-21-2": {
+   "ad": "Dioksakarb",
+   "ek": "Ek-1"
+  },
+  "78-34-2": {
+   "ad": "Dioksatiyon",
+   "ek": "Ek-1"
+  },
+  "957-51-7": {
+   "ad": "Difenamid",
+   "ek": "Ek-1"
+  },
+  "122-39-4": {
+   "ad": "Difenilamin",
+   "ek": "Ek-1"
+  },
+  "150315-10-9": {
+   "ad": "DPX KE 459 (flupirsulfuron-metil)",
+   "ek": "Ek-1"
+  },
+  "144740-54-5": {
+   "ad": "DPX KE 459 (flupirsulfuron-metil)",
+   "ek": "Ek-1"
+  },
+  "145-73-3": {
+   "ad": "Endotal",
+   "ek": "Ek-1"
+  },
+  "2104-64-5": {
+   "ad": "EPN (O-etil O-4-nitrofenil fenilfosfonotiyonat)",
+   "ek": "Ek-1"
+  },
+  "759-94-4": {
+   "ad": "EPTC (Etil Dipropiltiyokarbamat)",
+   "ek": "Ek-1"
+  },
+  "260359-57-7": {
+   "ad": "Esbiyotrin (Bioalletrin)",
+   "ek": "Ek-1"
+  },
+  "55283-68-6": {
+   "ad": "Etalfluralin",
+   "ek": "Ek-1"
+  },
+  "29973-13-5": {
+   "ad": "Etiyofenkarb",
+   "ek": "Ek-1"
+  },
+  "563-12-2": {
+   "ad": "Etiyon (Aka Dietiyon)",
+   "ek": "Ek-1"
+  },
+  "23947-60-6": {
+   "ad": "Ethirimol",
+   "ek": "Ek-1"
+  },
+  "116-01-8": {
+   "ad": "Etoat-metil",
+   "ek": "Ek-1"
+  },
+  "13194-48-4": {
+   "ad": "Etoprofos",
+   "ek": "Ek-1"
+  },
+  "91-53-2": {
+   "ad": "Etoksikuin",
+   "ek": "Ek-1"
+  },
+  "126801-58-9": {
+   "ad": "Etoksisulfuron",
+   "ek": "Ek-1"
+  },
+  "161326-34-7": {
+   "ad": "Fenamidon",
+   "ek": "Ek-1"
+  },
+  "60168-88-9": {
+   "ad": "Fenarimol",
+   "ek": "Ek-1"
+  },
+  "13356-08-6": {
+   "ad": "Fenbutatin Oksit",
+   "ek": "Ek-1"
+  },
+  "122-14-5": {
+   "ad": "Fenitrotiyon",
+   "ek": "Ek-1"
+  },
+  "74738-17-3": {
+   "ad": "Fenpiklonil",
+   "ek": "Ek-1"
+  },
+  "39515-41-8": {
+   "ad": "Fenpropatrin",
+   "ek": "Ek-1"
+  },
+  "67564-91-4": {
+   "ad": "Fenpropimorf",
+   "ek": "Ek-1"
+  },
+  "55-38-9": {
+   "ad": "Fentiyon",
+   "ek": "Ek-1"
+  },
+  "900-95-8": {
+   "ad": "Fentin asetat",
+   "ek": "Ek-1"
+  },
+  "76-87-9": {
+   "ad": "Fentin hidroksit",
+   "ek": "Ek-1"
+  },
+  "51630-58-1": {
+   "ad": "Fenvalerat",
+   "ek": "Ek-1"
+  },
+  "14484-64-1": {
+   "ad": "Ferbam",
+   "ek": "Ek-1"
+  },
+  "120068-37-3": {
+   "ad": "Fipronil",
+   "ek": "Ek-1"
+  },
+  "90134-59-1": {
+   "ad": "Flamprop-M",
+   "ek": "Ek-1"
+  },
+  "90035-08-8": {
+   "ad": "Flokumafen",
+   "ek": "Ek-1"
+  },
+  "69335-91-7": {
+   "ad": "Fluazifop",
+   "ek": "Ek-1"
+  },
+  "37893-02-0": {
+   "ad": "Flubenzimin",
+   "ek": "Ek-1"
+  },
+  "70124-77-5": {
+   "ad": "Flusitrinat",
+   "ek": "Ek-1"
+  },
+  "101463-69-8": {
+   "ad": "Flufenoksuron",
+   "ek": "Ek-1"
+  },
+  "98967-40-9": {
+   "ad": "Flumetsulam",
+   "ek": "Ek-1"
+  },
+  "467-69-6": {
+   "ad": "Flurenol",
+   "ek": "Ek-1"
+  },
+  "59756-60-4": {
+   "ad": "Fluridon",
+   "ek": "Ek-1"
+  },
+  "56425-91-3": {
+   "ad": "Flurprimidol",
+   "ek": "Ek-1"
+  },
+  "85509-19-9": {
+   "ad": "Flusilazol",
+   "ek": "Ek-1"
+  },
+  "117337-19-6": {
+   "ad": "Flutiyaset-metil",
+   "ek": "Ek-1"
+  },
+  "59-30-3": {
+   "ad": "Folik asit",
+   "ek": "Ek-1"
+  },
+  "72178-02-0": {
+   "ad": "Fomesafen",
+   "ek": "Ek-1"
+  },
+  "2540-82-1": {
+   "ad": "Formotiyon",
+   "ek": "Ek-1"
+  },
+  "65907-30-4": {
+   "ad": "Furatiyokarb",
+   "ek": "Ek-1"
+  },
+  "108173-90-6": {
+   "ad": "Guazatin",
+   "ek": "Ek-1"
+  },
+  "115044-19-4": {
+   "ad": "Guazatin",
+   "ek": "Ek-1"
+  },
+  "111872-58-3": {
+   "ad": "Halfenproks (Aka Brofenproks)",
+   "ek": "Ek-1"
+  },
+  "69806-34-4": {
+   "ad": "Haloksifop",
+   "ek": "Ek-1"
+  },
+  "87237-48-7": {
+   "ad": "Haloksifop etoksietilester",
+   "ek": "Ek-1"
+  },
+  "67-72-1": {
+   "ad": "Hekzakloroetan",
+   "ek": "Ek-1"
+  },
+  "79983-71-4": {
+   "ad": "Hekzakonazol",
+   "ek": "Ek-1"
+  },
+  "86479-06-3": {
+   "ad": "Hekzaflumuron",
+   "ek": "Ek-1"
+  },
+  "51235-04-2": {
+   "ad": "Hekzazinon",
+   "ek": "Ek-1"
+  },
+  "420-04-2": {
+   "ad": "Hidrojen siyanamid",
+   "ek": "Ek-1"
+  },
+  "7722-84-1": {
+   "ad": "Hidrojen Peroksit",
+   "ek": "Ek-1"
+  },
+  "7417-89-2": {
+   "ad": "Hidroksi MCPA",
+   "ek": "Ek-1"
+  },
+  "35554-44-0": {
+   "ad": "Imazalil",
+   "ek": "Ek-1"
+  },
+  "81405-85-8": {
+   "ad": "Imazametabenz-metil",
+   "ek": "Ek-1"
+  },
+  "104098-48-8": {
+   "ad": "Imazapik",
+   "ek": "Ek-1"
+  },
+  "81334-34-1": {
+   "ad": "Imazapir",
+   "ek": "Ek-1"
+  },
+  "81335-77-5": {
+   "ad": "Imazetapir",
+   "ek": "Ek-1"
+  },
+  "138261-41-3": {
+   "ad": "Imidakloprit",
+   "ek": "Ek-1"
+  },
+  "13516-27-3": {
+   "ad": "Iminoktadin",
+   "ek": "Ek-1"
+  },
+  "87-51-4": {
+   "ad": "Indolilasetik asit (Aka Auksins)",
+   "ek": "Ek-1"
+  },
+  "1689-83-4": {
+   "ad": "Ayoksinil",
+   "ek": "Ek-1"
+  },
+  "36734-19-7": {
+   "ad": "Iprodiyon",
+   "ek": "Ek-1"
+  },
+  "25311-71-1": {
+   "ad": "Izofenfos",
+   "ek": "Ek-1"
+  },
+  "34123-59-6": {
+   "ad": "Izoproturon",
+   "ek": "Ek-1"
+  },
+  "18854-01-8": {
+   "ad": "Izoksatiyon",
+   "ek": "Ek-1"
+  },
+  "525-79-1": {
+   "ad": "Kinetin",
+   "ek": "Ek-1"
+  },
+  "7439-92-1": {
+   "ad": "Kurşun ve Bileşikleri",
+   "ek": "Ek-1"
+  },
+  "598-63-0": {
+   "ad": "Kurşun ve Bileşikleri",
+   "ek": "Ek-1"
+  },
+  "1319-46-6": {
+   "ad": "Kurşun ve Bileşikleri",
+   "ek": "Ek-1"
+  },
+  "7446-14-2": {
+   "ad": "Kurşun ve Bileşikleri",
+   "ek": "Ek-1"
+  },
+  "7784-40-9": {
+   "ad": "Kurşun ve Bileşikleri",
+   "ek": "Ek-1"
+  },
+  "7758-97-6": {
+   "ad": "Kurşun ve Bileşikleri",
+   "ek": "Ek-1"
+  },
+  "1344-37-2": {
+   "ad": "Kurşun ve Bileşikleri",
+   "ek": "Ek-1"
+  },
+  "25808-74-6": {
+   "ad": "Kurşun ve Bileşikleri",
+   "ek": "Ek-1"
+  },
+  "13424-46-9": {
+   "ad": "Kurşun ve Bileşikleri",
+   "ek": "Ek-1"
+  },
+  "301-04-2": {
+   "ad": "Kurşun ve Bileşikleri",
+   "ek": "Ek-1"
+  },
+  "7446-27-7": {
+   "ad": "Kurşun ve Bileşikleri",
+   "ek": "Ek-1"
+  },
+  "15245-44-0": {
+   "ad": "Kurşun ve Bileşikleri",
+   "ek": "Ek-1"
+  },
+  "15739-80-7": {
+   "ad": "Kurşun ve Bileşikleri",
+   "ek": "Ek-1"
+  },
+  "330-55-2": {
+   "ad": "Linuron",
+   "ek": "Ek-1"
+  },
+  "121-75-5": {
+   "ad": "Malatiyon",
+   "ek": "Ek-1"
+  },
+  "8018-01-7": {
+   "ad": "Mankozep",
+   "ek": "Ek-1"
+  },
+  "12427-38-2": {
+   "ad": "Maneb",
+   "ek": "Ek-1"
+  },
+  "950-10-7": {
+   "ad": "Mefosfolan",
+   "ek": "Ek-1"
+  },
+  "137-42-8": {
+   "ad": "Metam-sodyum",
+   "ek": "Ek-1"
+  },
+  "18691-97-9": {
+   "ad": "Metabentiyazuron",
+   "ek": "Ek-1"
+  },
+  "950-37-8": {
+   "ad": "Metidatiyon",
+   "ek": "Ek-1"
+  },
+  "2032-65-7": {
+   "ad": "Metiyokarb",
+   "ek": "Ek-1"
+  },
+  "16752-77-5": {
+   "ad": "Metomil",
+   "ek": "Ek-1"
+  },
+  "40596-69-8": {
+   "ad": "Metopren",
+   "ek": "Ek-1"
+  },
+  "74-83-9": {
+   "ad": "Metil bromür",
+   "ek": "Ek-1"
+  },
+  "51218-45-2": {
+   "ad": "Metolaklor",
+   "ek": "Ek-1"
+  },
+  "133408-50-1": {
+   "ad": "Metominositrobin",
+   "ek": "Ek-1"
+  },
+  "139528-85-1": {
+   "ad": "Metosulam",
+   "ek": "Ek-1"
+  },
+  "19937-59-8": {
+   "ad": "Metoksuron",
+   "ek": "Ek-1"
+  },
+  "7786-34-7": {
+   "ad": "Mevinfos",
+   "ek": "Ek-1"
+  },
+  "2212-67-1": {
+   "ad": "Molinat",
+   "ek": "Ek-1"
+  },
+  "1746-81-2": {
+   "ad": "Monolinuron",
+   "ek": "Ek-1"
+  },
+  "99688-47-8": {
+   "ad": "Monometil-dibromo-difenil metan bromobenzilbromotoluen izomerleri karışımı, Ticari adı: DBBT",
+   "ek": "Ek-1"
+  },
+  "85705-05-1": {
+   "ad": "Monometil-diklor-difenilmetan Ticari adı. Ugilec 121 veya Ugilec 21",
+   "ek": "Ek-1"
+  },
+  "76253-60-6": {
+   "ad": "Monometil-tetraklordifenil metan Ticari adı: Ugilec 141",
+   "ek": "Ek-1"
+  },
+  "150-68-5": {
+   "ad": "Monuron",
+   "ek": "Ek-1"
+  },
+  "300-76-5": {
+   "ad": "Naled",
+   "ek": "Ek-1"
+  },
+  "54-11-5": {
+   "ad": "Nikotin",
+   "ek": "Ek-1"
+  },
+  "1836-75-5": {
+   "ad": "Nitrofen",
+   "ek": "Ek-1"
+  },
+  "25154-52-3": {
+   "ad": "Nonilfenoller C6H4(OH)C9H19",
+   "ek": "Ek-1"
+  },
+  "84852-15-3": {
+   "ad": "Nonilfenoller C6H4(OH)C9H19",
+   "ek": "Ek-1"
+  },
+  "11066-49-2": {
+   "ad": "Nonilfenoller C6H4(OH)C9H19",
+   "ek": "Ek-1"
+  },
+  "90481-04-2": {
+   "ad": "Nonilfenoller C6H4(OH)C9H19",
+   "ek": "Ek-1"
+  },
+  "104-40-5": {
+   "ad": "Nonilfenoller C6H4(OH)C9H19",
+   "ek": "Ek-1"
+  },
+  "9016-45-9": {
+   "ad": "Nonilfenol etoksilatlar (C2H4O)nc15H24o",
+   "ek": "Ek-1"
+  },
+  "26027-38-3": {
+   "ad": "Nonilfenol etoksilatlar (C2H4O)nc15H24o",
+   "ek": "Ek-1"
+  },
+  "68412-54-4": {
+   "ad": "Nonilfenol etoksilatlar (C2H4O)nc15H24o",
+   "ek": "Ek-1"
+  },
+  "37205-87-1": {
+   "ad": "Nonilfenol etoksilatlar (C2H4O)nc15H24o",
+   "ek": "Ek-1"
+  },
+  "127087-87-0": {
+   "ad": "Nonilfenol etoksilatlar (C2H4O)nc15H24o",
+   "ek": "Ek-1"
+  },
+  "27314-13-2": {
+   "ad": "Norflurazon",
+   "ek": "Ek-1"
+  },
+  "116714-46-6": {
+   "ad": "Novaluron",
+   "ek": "Ek-1"
+  },
+  "63284-71-9": {
+   "ad": "Nuarimol",
+   "ek": "Ek-1"
+  },
+  "58810-48-3": {
+   "ad": "Ofuras",
+   "ek": "Ek-1"
+  },
+  "1113-02-6": {
+   "ad": "Ometoat",
+   "ek": "Ek-1"
+  },
+  "213464-77-8": {
+   "ad": "Ortosulfamuron",
+   "ek": "Ek-1"
+  },
+  "39807-15-3": {
+   "ad": "Oksadiyargil",
+   "ek": "Ek-1"
+  },
+  "19666-30-9": {
+   "ad": "Oksadiyazon",
+   "ek": "Ek-1"
+  },
+  "77732-09-3": {
+   "ad": "Oksadiksil",
+   "ek": "Ek-1"
+  },
+  "23135-22-0": {
+   "ad": "Oksamil",
+   "ek": "Ek-1"
+  },
+  "10380-28-6": {
+   "ad": "Oksin Bakır",
+   "ek": "Ek-1"
+  },
+  "5259-88-1": {
+   "ad": "Oksikarboksin",
+   "ek": "Ek-1"
+  },
+  "301-12-2": {
+   "ad": "Oksidemeton-metil",
+   "ek": "Ek-1"
+  },
+  "4685-14-7": {
+   "ad": "Parakuat",
+   "ek": "Ek-1"
+  },
+  "1910-42-5": {
+   "ad": "Parakuat",
+   "ek": "Ek-1"
+  },
+  "2074-50-2": {
+   "ad": "Parakuat",
+   "ek": "Ek-1"
+  },
+  "1114-71-2": {
+   "ad": "Pebulat",
+   "ek": "Ek-1"
+  },
+  "76-01-7": {
+   "ad": "Pentakloroetan",
+   "ek": "Ek-1"
+  },
+  "52645-53-1": {
+   "ad": "Permetrin",
+   "ek": "Ek-1"
+  },
+  "2597-03-7": {
+   "ad": "Fentoat",
+   "ek": "Ek-1"
+  },
+  "2310-17-0": {
+   "ad": "Fosalon",
+   "ek": "Ek-1"
+  },
+  "7664-38-2": {
+   "ad": "Fosforik asit",
+   "ek": "Ek-1"
+  },
+  "83648-84-4": {
+   "ad": "Pinolen (di-L-para-menten)",
+   "ek": "Ek-1"
+  },
+  "113036-87-6": {
+   "ad": "Primisulfuron",
+   "ek": "Ek-1"
+  },
+  "86209-51-0": {
+   "ad": "Primisulfuron-metil",
+   "ek": "Ek-1"
+  },
+  "32809-16-8": {
+   "ad": "Prosimidon",
+   "ek": "Ek-1"
+  },
+  "41198-08-7": {
+   "ad": "Profenofos",
+   "ek": "Ek-1"
+  },
+  "7287-19-6": {
+   "ad": "Prometrin",
+   "ek": "Ek-1"
+  },
+  "1918-16-7": {
+   "ad": "Propaklor",
+   "ek": "Ek-1"
+  },
+  "709-98-8": {
+   "ad": "Propanil",
+   "ek": "Ek-1"
+  },
+  "2312-35-8": {
+   "ad": "Proparjit",
+   "ek": "Ek-1"
+  },
+  "122-42-9": {
+   "ad": "Profam",
+   "ek": "Ek-1"
+  },
+  "60207-90-1": {
+   "ad": "Propikonazol",
+   "ek": "Ek-1"
+  },
+  "12071-83-9": {
+   "ad": "Propineb",
+   "ek": "Ek-1"
+  },
+  "9016-72-2": {
+   "ad": "Propineb",
+   "ek": "Ek-1"
+  },
+  "86763-47-5": {
+   "ad": "Propizoklor",
+   "ek": "Ek-1"
+  },
+  "114-26-1": {
+   "ad": "Propoksur",
+   "ek": "Ek-1"
+  },
+  "34643-46-4": {
+   "ad": "Protiyofos",
+   "ek": "Ek-1"
+  },
+  "2275-18-5": {
+   "ad": "Protoat",
+   "ek": "Ek-1"
+  },
+  "123312-89-0": {
+   "ad": "Pimetrozin",
+   "ek": "Ek-1"
+  },
+  "13457-18-6": {
+   "ad": "Pirazofos",
+   "ek": "Ek-1"
+  },
+  "119-12-0": {
+   "ad": "Piridafentiyon",
+   "ek": "Ek-1"
+  },
+  "105779-78-0": {
+   "ad": "Pirimidifen",
+   "ek": "Ek-1"
+  },
+  "123343-16-8": {
+   "ad": "Piritiyobak Sodyum",
+   "ek": "Ek-1"
+  },
+  "13593-03-8": {
+   "ad": "Kinalfos",
+   "ek": "Ek-1"
+  },
+  "124495-18-7": {
+   "ad": "Kinoksifen",
+   "ek": "Ek-1"
+  },
+  "82-68-8": {
+   "ad": "Kintozen (PCNB)",
+   "ek": "Ek-1"
+  },
+  "76578-12-6": {
+   "ad": "Kizalofop",
+   "ek": "Ek-1"
+  },
+  "10453-86-8": {
+   "ad": "Resmetrin",
+   "ek": "Ek-1"
+  },
+  "83-79-4": {
+   "ad": "Rotenon",
+   "ek": "Ek-1"
+  },
+  "507-60-8": {
+   "ad": "Skillirosit",
+   "ek": "Ek-1"
+  },
+  "74051-80-2": {
+   "ad": "Setoksidim",
+   "ek": "Ek-1"
+  },
+  "122-34-9": {
+   "ad": "Simazin",
+   "ek": "Ek-1"
+  },
+  "4390-16-3": {
+   "ad": "Sodyum Türevleri",
+   "ek": "Ek-1"
+  },
+  "57-24-9": {
+   "ad": "Sitrisin",
+   "ek": "Ek-1"
+  },
+  "21564-17-0": {
+   "ad": "TCMTB (benzotiyazol-2-iltiyon)metil tiyosiyanat",
+   "ek": "Ek-1"
+  },
+  "34014-18-1": {
+   "ad": "Tebutiyuron",
+   "ek": "Ek-1"
+  },
+  "117-18-0": {
+   "ad": "Teknazen",
+   "ek": "Ek-1"
+  },
+  "149979-41-9": {
+   "ad": "Tekraloksidim",
+   "ek": "Ek-1"
+  },
+  "13071-79-9": {
+   "ad": "Terbufos",
+   "ek": "Ek-1"
+  },
+  "886-50-0": {
+   "ad": "Terbutrin",
+   "ek": "Ek-1"
+  },
+  "116-29-0": {
+   "ad": "Tetradifon",
+   "ek": "Ek-1"
+  },
+  "7446-18-6": {
+   "ad": "Talyum sülfat",
+   "ek": "Ek-1"
+  },
+  "111988-49-9": {
+   "ad": "Tiyakloprid",
+   "ek": "Ek-1"
+  },
+  "25366-23-8": {
+   "ad": "Tiyazafluron",
+   "ek": "Ek-1"
+  },
+  "117718-60-2": {
+   "ad": "Tiyazopir",
+   "ek": "Ek-1"
+  },
+  "51707-55-2": {
+   "ad": "Tidiyazuron",
+   "ek": "Ek-1"
+  },
+  "28249-77-6": {
+   "ad": "Tiyobenkarb",
+   "ek": "Ek-1"
+  },
+  "31895-22-4": {
+   "ad": "Tiyosiklam (Hidrojen Oksalat)",
+   "ek": "Ek-1"
+  },
+  "59669-26-0": {
+   "ad": "Tiyodikarb",
+   "ek": "Ek-1"
+  },
+  "640-15-3": {
+   "ad": "Tiyometon",
+   "ek": "Ek-1"
+  },
+  "129558-76-5": {
+   "ad": "Tolfenpirad",
+   "ek": "Ek-1"
+  },
+  "731-27-1": {
+   "ad": "Tolilfluyanid",
+   "ek": "Ek-1"
+  },
+  "87820-88-0": {
+   "ad": "Tralkoksidim",
+   "ek": "Ek-1"
+  },
+  "66841-25-6": {
+   "ad": "Tralometrin",
+   "ek": "Ek-1"
+  },
+  "43121-43-3": {
+   "ad": "Triyadimefon",
+   "ek": "Ek-1"
+  },
+  "55219-65-3": {
+   "ad": "Triyadimenol",
+   "ek": "Ek-1"
+  },
+  "82097-50-5": {
+   "ad": "Triyasulfuron",
+   "ek": "Ek-1"
+  },
+  "112143-82-5": {
+   "ad": "Triyazamat",
+   "ek": "Ek-1"
+  },
+  "24017-47-8": {
+   "ad": "Triyazofos",
+   "ek": "Ek-1"
+  },
+  "120-82-1": {
+   "ad": "Triklorobenzen",
+   "ek": "Ek-1"
+  },
+  "3380-34-5": {
+   "ad": "Triklosan",
+   "ek": "Ek-1"
+  },
+  "41814-78-2": {
+   "ad": "Trisiklazol",
+   "ek": "Ek-1"
+  },
+  "24602-86-6": {
+   "ad": "Tridemorf",
+   "ek": "Ek-1"
+  },
+  "199119-58-9": {
+   "ad": "Trifloksisülfüron-sodyum",
+   "ek": "Ek-1"
+  },
+  "64628-44-0": {
+   "ad": "Triflumuron",
+   "ek": "Ek-1"
+  },
+  "1582-09-8": {
+   "ad": "Trifluralin",
+   "ek": "Ek-1"
+  },
+  "26644-46-2": {
+   "ad": "Triforin",
+   "ek": "Ek-1"
+  },
+  "122-20-3": {
+   "ad": "Triizopropanolamin",
+   "ek": "Ek-1"
+  },
+  "12002-53-8": {
+   "ad": "Trimedlure",
+   "ek": "Ek-1"
+  },
+  "115-96-8": {
+   "ad": "Tris (2-kloroetil) fosfat",
+   "ek": "Ek-1"
+  },
+  "545-55-1": {
+   "ad": "Tris-aziridinil-fosfinoksit (1,1′,1′-fosforiltriaziridin)",
+   "ek": "Ek-1"
+  },
+  "2275-23-2": {
+   "ad": "Vamidotiyon",
+   "ek": "Ek-1"
+  },
+  "50471-44-8": {
+   "ad": "Vinklozolin",
+   "ek": "Ek-1"
+  },
+  "81-81-2": {
+   "ad": "Varfarin",
+   "ek": "Ek-1"
+  },
+  "12122-67-7": {
+   "ad": "Zineb",
+   "ek": "Ek-1"
+  },
+  "106-93-4": {
+   "ad": "1,2-dibromoetan (EDB)",
+   "ek": "Ek-2"
+  },
+  "107-06-2": {
+   "ad": "1,2-dikloroetan (Etilen diklorür)",
+   "ek": "Ek-2"
+  },
+  "93-76-5": {
+   "ad": "2,4,5-T ve tuzları ve esterleri",
+   "ek": "Ek-2"
+  },
+  "15972-60-8": {
+   "ad": "Alaklor",
+   "ek": "Ek-2"
+  },
+  "116-06-3": {
+   "ad": "Aldikarb",
+   "ek": "Ek-2"
+  },
+  "309-00-2": {
+   "ad": "Aldrin",
+   "ek": "Ek-2"
+  },
+  "77536-66-4": {
+   "ad": "Asbest lifleri: Aktinolit Amosit Antofilit Krosidolit Tremolit",
+   "ek": "Ek-2"
+  },
+  "12172-73-5": {
+   "ad": "Asbest lifleri: Aktinolit Amosit Antofilit Krosidolit Tremolit",
+   "ek": "Ek-2"
+  },
+  "77536-67-5": {
+   "ad": "Asbest lifleri: Aktinolit Amosit Antofilit Krosidolit Tremolit",
+   "ek": "Ek-2"
+  },
+  "12001-28-4": {
+   "ad": "Asbest lifleri: Aktinolit Amosit Antofilit Krosidolit Tremolit",
+   "ek": "Ek-2"
+  },
+  "77536-68-6": {
+   "ad": "Asbest lifleri: Aktinolit Amosit Antofilit Krosidolit Tremolit",
+   "ek": "Ek-2"
+  },
+  "86-50-0": {
+   "ad": "Azinfos-metil",
+   "ek": "Ek-2"
+  },
+  "485-31-4": {
+   "ad": "Binapakril",
+   "ek": "Ek-2"
+  },
+  "2425-06-1": {
+   "ad": "Kaptafol",
+   "ek": "Ek-2"
+  },
+  "1563-66-2": {
+   "ad": "Karbofuran",
+   "ek": "Ek-2"
+  },
+  "57-74-9": {
+   "ad": "Klordan",
+   "ek": "Ek-2"
+  },
+  "6164-98-3": {
+   "ad": "Klorodimeform",
+   "ek": "Ek-2"
+  },
+  "510-15-6": {
+   "ad": "Klorobenzilat",
+   "ek": "Ek-2"
+  },
+  "68928-80-3": {
+   "ad": "Ticari oktabromodifenil eter, aşağıdakiler dahil: Heptabromodifenil eter Hekzabromodifenil eter",
+   "ek": "Ek-2"
+  },
+  "36483-60-0": {
+   "ad": "Ticari oktabromodifenil eter, aşağıdakiler dahil: Heptabromodifenil eter Hekzabromodifenil eter",
+   "ek": "Ek-2"
+  },
+  "32534-81-9": {
+   "ad": "Ticari pentabromodifenil eter, aşağıdakiler dahil: Pentabromodifenil eter Tetrabromodifenil eter",
+   "ek": "Ek-2"
+  },
+  "40088-47-9": {
+   "ad": "Ticari pentabromodifenil eter, aşağıdakiler dahil: Pentabromodifenil eter Tetrabromodifenil eter",
+   "ek": "Ek-2"
+  },
+  "50-29-3": {
+   "ad": "DDT (1,1,1-trikloro-2,2-bis (4-klorofenil) etan)",
+   "ek": "Ek-2"
+  },
+  "1163-19-5": {
+   "ad": "Dekabromodifenil eter; dekaBDE Bis(pentabromofenil) ether",
+   "ek": "Ek-2"
+  },
+  "60-57-1": {
+   "ad": "Dieldrin",
+   "ek": "Ek-2"
+  },
+  "534-52-1": {
+   "ad": "Dinitro-orto-kresol (DNOC) ve tuzları (amonyum tuzu, potasyum tuzu ve sodyum tuzu vb.)",
+   "ek": "Ek-2"
+  },
+  "2980-64-5": {
+   "ad": "Dinitro-orto-kresol (DNOC) ve tuzları (amonyum tuzu, potasyum tuzu ve sodyum tuzu vb.)",
+   "ek": "Ek-2"
+  },
+  "5787-96-2": {
+   "ad": "Dinitro-orto-kresol (DNOC) ve tuzları (amonyum tuzu, potasyum tuzu ve sodyum tuzu vb.)",
+   "ek": "Ek-2"
+  },
+  "2312-76-7": {
+   "ad": "Dinitro-orto-kresol (DNOC) ve tuzları (amonyum tuzu, potasyum tuzu ve sodyum tuzu vb.)",
+   "ek": "Ek-2"
+  },
+  "88-85-7": {
+   "ad": "Dinoseb ve tuzları ve esterleri",
+   "ek": "Ek-2"
+  },
+  "137-26-8": {
+   "ad": "Aşağıdaki maddeleri içeren toz formülasyonları: %7 veya daha fazla Benomil, %10 veya daha fazla Karbofuran %15 veya daha",
+   "ek": "Ek-2"
+  },
+  "115-29-7": {
+   "ad": "Endosulfan",
+   "ek": "Ek-2"
+  },
+  "75-21-8": {
+   "ad": "Etilenoksit (Oksiran)",
+   "ek": "Ek-2"
+  },
+  "640-19-7": {
+   "ad": "Floroasetamid",
+   "ek": "Ek-2"
+  },
+  "608-73-1": {
+   "ad": "HCH (karışık izomerleri)",
+   "ek": "Ek-2"
+  },
+  "76-44-8": {
+   "ad": "Heptaklor",
+   "ek": "Ek-2"
+  },
+  "134237-50-6": {
+   "ad": "Hekzabromosiklododekan (HBCDD)",
+   "ek": "Ek-2"
+  },
+  "134237-51-7": {
+   "ad": "Hekzabromosiklododekan (HBCDD)",
+   "ek": "Ek-2"
+  },
+  "134237-52-8": {
+   "ad": "Hekzabromosiklododekan (HBCDD)",
+   "ek": "Ek-2"
+  },
+  "25637-99-4": {
+   "ad": "Hekzabromosiklododekan (HBCDD)",
+   "ek": "Ek-2"
+  },
+  "3194-55-6": {
+   "ad": "Hekzabromosiklododekan (HBCDD)",
+   "ek": "Ek-2"
+  },
+  "118-74-1": {
+   "ad": "Hekzaklorobenzen (HCB)",
+   "ek": "Ek-2"
+  },
+  "58-89-9": {
+   "ad": "Lindan",
+   "ek": "Ek-2"
+  },
+  "10112-91-1": {
+   "ad": "Cıva Bileşikleri, inorganik cıva bileşikleri, alkil cıva bileşikleri ve alkiloksialkil ve aril cıva bileşikleri dahil",
+   "ek": "Ek-2"
+  },
+  "21908-53-2": {
+   "ad": "Cıva Bileşikleri, inorganik cıva bileşikleri, alkil cıva bileşikleri ve alkiloksialkil ve aril cıva bileşikleri dahil",
+   "ek": "Ek-2"
+  },
+  "10265-92-6": {
+   "ad": "Metamidofos",
+   "ek": "Ek-2"
+  },
+  "6923-22-4": {
+   "ad": "Monokrotofos",
+   "ek": "Ek-2"
+  },
+  "56-38-2": {
+   "ad": "Paratiyon",
+   "ek": "Ek-2"
+  },
+  "298-00-0": {
+   "ad": "Paratiyon-metil (19.5% veya daha fazla aktif madde içeren emülsifiye edilebilir konsantreler ve 1.5% veya daha fazla akt",
+   "ek": "Ek-2"
+  },
+  "87-86-5": {
+   "ad": "Pentaklorofenol ve tuzları ve esterleri",
+   "ek": "Ek-2"
+  },
+  "1691-99-2": {
+   "ad": "Perflorooktan sülfonik asit (PFOS), perflorooktan sülfonatlar, perflorooktan sülfonamidler ve perflorooktan sülfoniller",
+   "ek": "Ek-2"
+  },
+  "1763-23-1": {
+   "ad": "Perflorooktan sülfonik asit (PFOS), perflorooktan sülfonatlar, perflorooktan sülfonamidler ve perflorooktan sülfoniller",
+   "ek": "Ek-2"
+  },
+  "24448-09-7": {
+   "ad": "Perflorooktan sülfonik asit (PFOS), perflorooktan sülfonatlar, perflorooktan sülfonamidler ve perflorooktan sülfoniller",
+   "ek": "Ek-2"
+  },
+  "251099-16-8": {
+   "ad": "Perflorooktan sülfonik asit (PFOS), perflorooktan sülfonatlar, perflorooktan sülfonamidler ve perflorooktan sülfoniller",
+   "ek": "Ek-2"
+  },
+  "2795-39-3": {
+   "ad": "Perflorooktan sülfonik asit (PFOS), perflorooktan sülfonatlar, perflorooktan sülfonamidler ve perflorooktan sülfoniller",
+   "ek": "Ek-2"
+  },
+  "29081-56-9": {
+   "ad": "Perflorooktan sülfonik asit (PFOS), perflorooktan sülfonatlar, perflorooktan sülfonamidler ve perflorooktan sülfoniller",
+   "ek": "Ek-2"
+  },
+  "29457-72-5": {
+   "ad": "Perflorooktan sülfonik asit (PFOS), perflorooktan sülfonatlar, perflorooktan sülfonamidler ve perflorooktan sülfoniller",
+   "ek": "Ek-2"
+  },
+  "307-35-7": {
+   "ad": "Perflorooktan sülfonik asit (PFOS), perflorooktan sülfonatlar, perflorooktan sülfonamidler ve perflorooktan sülfoniller",
+   "ek": "Ek-2"
+  },
+  "31506-32-8": {
+   "ad": "Perflorooktan sülfonik asit (PFOS), perflorooktan sülfonatlar, perflorooktan sülfonamidler ve perflorooktan sülfoniller",
+   "ek": "Ek-2"
+  },
+  "4151-50-2": {
+   "ad": "Perflorooktan sülfonik asit (PFOS), perflorooktan sülfonatlar, perflorooktan sülfonamidler ve perflorooktan sülfoniller",
+   "ek": "Ek-2"
+  },
+  "56773-42-3": {
+   "ad": "Perflorooktan sülfonik asit (PFOS), perflorooktan sülfonatlar, perflorooktan sülfonamidler ve perflorooktan sülfoniller",
+   "ek": "Ek-2"
+  },
+  "70225-14-8": {
+   "ad": "Perflorooktan sülfonik asit (PFOS), perflorooktan sülfonatlar, perflorooktan sülfonamidler ve perflorooktan sülfoniller",
+   "ek": "Ek-2"
+  },
+  "335-67-1": {
+   "ad": "Perflorooktanoik asit (PFOA), tuzları ve PFOA ile ilişkili bileşikler",
+   "ek": "Ek-2"
+  },
+  "298-02-2": {
+   "ad": "Forat",
+   "ek": "Ek-2"
+  },
+  "13171-21-6": {
+   "ad": "Posfamidon (maddenin 1000 g/l aktif bileşeni aşan çözünür sıvı formülasyonları)",
+   "ek": "Ek-2"
+  },
+  "36355-01-8": {
+   "ad": "Polibromlu bifeniller (PBB)",
+   "ek": "Ek-2"
+  },
+  "13654-09-6": {
+   "ad": "Polibromlu bifeniller (PBB)",
+   "ek": "Ek-2"
+  },
+  "27858-07-7": {
+   "ad": "Polibromlu bifeniller (PBB)",
+   "ek": "Ek-2"
+  },
+  "1336-36-3": {
+   "ad": "Poliklorlu bifeniller (PCB)",
+   "ek": "Ek-2"
+  },
+  "61788-33-8": {
+   "ad": "Poliklorlu terfeniller (PCT)",
+   "ek": "Ek-2"
+  },
+  "85535-84-8": {
+   "ad": "Kısa zincirli klorlu parafinler (SCCP)",
+   "ek": "Ek-2"
+  },
+  "78-00-2": {
+   "ad": "Tetraetil kurşun",
+   "ek": "Ek-2"
+  },
+  "75-74-1": {
+   "ad": "Tetrametil kurşun",
+   "ek": "Ek-2"
+  },
+  "8001-35-2": {
+   "ad": "Toksafen (Kampeklor)",
+   "ek": "Ek-2"
+  },
+  "1461-22-9": {
+   "ad": "Tüm Tribütilkalay bileşikleri, aşağıdakiler dahil: Tribütilkalay benzoat Tribütilkalay klorür Tribütilkalay florür Tribü",
+   "ek": "Ek-2"
+  },
+  "1983-10-4": {
+   "ad": "Tüm Tribütilkalay bileşikleri, aşağıdakiler dahil: Tribütilkalay benzoat Tribütilkalay klorür Tribütilkalay florür Tribü",
+   "ek": "Ek-2"
+  },
+  "2155-70-6": {
+   "ad": "Tüm Tribütilkalay bileşikleri, aşağıdakiler dahil: Tribütilkalay benzoat Tribütilkalay klorür Tribütilkalay florür Tribü",
+   "ek": "Ek-2"
+  },
+  "24124-25-2": {
+   "ad": "Tüm Tribütilkalay bileşikleri, aşağıdakiler dahil: Tribütilkalay benzoat Tribütilkalay klorür Tribütilkalay florür Tribü",
+   "ek": "Ek-2"
+  },
+  "4342-36-3": {
+   "ad": "Tüm Tribütilkalay bileşikleri, aşağıdakiler dahil: Tribütilkalay benzoat Tribütilkalay klorür Tribütilkalay florür Tribü",
+   "ek": "Ek-2"
+  },
+  "56-35-9": {
+   "ad": "Tüm Tribütilkalay bileşikleri, aşağıdakiler dahil: Tribütilkalay benzoat Tribütilkalay klorür Tribütilkalay florür Tribü",
+   "ek": "Ek-2"
+  },
+  "85409-17-2": {
+   "ad": "Tüm Tribütilkalay bileşikleri, aşağıdakiler dahil: Tribütilkalay benzoat Tribütilkalay klorür Tribütilkalay florür Tribü",
+   "ek": "Ek-2"
+  },
+  "52-68-6": {
+   "ad": "Triklorfon",
+   "ek": "Ek-2"
+  },
+  "126-72-7": {
+   "ad": "Tris (2,3-dibromopropil) fosfat",
+   "ek": "Ek-2"
+  }
  }
 }

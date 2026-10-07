@@ -8,6 +8,8 @@ Kaynaklar (mevzuat.gov.tr ek dosyaları; sds-knowledge/tr/*-ekler.docx → .md, 
   aşağıdaki CAS eşlemesi ekteki tekil adlandırılmış maddeler içindir, izomer aileleri ad/formülle yakalanır.
 - Büyük Endüstriyel Kazaların Önlenmesi ve Etkilerinin Azaltılması Hakkında Yönetmelik (RG 02.03.2019/30702)
   Ek-1 Bölüm 2 (adlandırılmış tehlikeli maddeler) — bekra-2019-ekler.md (CAS'lar ekte "gösterge amaçlı")
+- Bazı Zararlı Kimyasalların İhracatı ve İthalatı Hakkında Yönetmelik (RG 28.01.2023/32087; Rotterdam Sözleşmesi)
+  Ek-1 (ihracat bildirimine tabi) ve Ek-2 (ÖBK usulüne tabi) — pic-32087-ekler.md
 Kullanım: python scripts/build_reg15_lists.py
 """
 import json
@@ -96,6 +98,18 @@ OZON = {
     '74-87-3': ('Klorometan (metil klorür)', 'Ek-8'),
 }
 ozon = {c: {'ad': a, 'ek': e} for c, (a, e) in OZON.items() if cas_ok(c)}
+
+# ── Bazı Zararlı Kimyasalların İhracatı ve İthalatı (Rotterdam/ÖBK) Ek-1 / Ek-2 ─────
+# Sütunlar: Kimyasal (En) | Kimyasal (Tr) | CAS No | CN/GTİP | Kategori | Kullanım Kısıtı
+pic = {}
+for ek, start, stop in (('Ek-1', 'EK 1', 'EK 2'), ('Ek-2', 'EK 2', 'EK 3')):
+    for r in rows('pic-32087-ekler.md', start, stop):
+        if len(r) < 3 or r[0].startswith('Kimyasal'):
+            continue
+        name = re.sub(r'\s+', ' ', r[1] or r[0])[:120]
+        for c in CAS_RE.findall(r[2]):
+            if cas_ok(c):
+                pic.setdefault(c, {'ad': name, 'ek': ek})
 bad = [c for c in OZON if not cas_ok(c)]
 
 json.dump({
@@ -103,7 +117,9 @@ json.dump({
         'kok': 'Kalıcı Organik Kirleticiler Hakkında Yönetmelik (RG 14.11.2018/30595; Değişik RG 25.03.2021/31434) Ek-1, Ek-2',
         'ozon': 'Ozon Tabakasını İncelten Maddelere İlişkin Yönetmelik (RG 07.04.2017/30031) Ek-5, Ek-8',
         'bekra': 'Büyük Endüstriyel Kazaların Önlenmesi ve Etkilerinin Azaltılması Hakkında Yönetmelik (RG 02.03.2019/30702) Ek-1',
+        'pic': 'Bazı Zararlı Kimyasalların İhracatı ve İthalatı Hakkında Yönetmelik (RG 28.01.2023/32087) Ek-1, Ek-2',
     },
-    'kok': kok, 'ozon': ozon, 'bekra2': bekra2,
+    'kok': kok, 'ozon': ozon, 'bekra2': bekra2, 'pic': pic,
 }, open(OUT, 'w', encoding='utf-8'), ensure_ascii=False, indent=1)
-print(f'KOK: {len(kok)} CAS | ozon: {len(ozon)} CAS (geçersiz: {bad}) | BEKRA Bölüm 2: {len(bekra2)} CAS')
+print(f'KOK: {len(kok)} CAS | ozon: {len(ozon)} CAS (geçersiz: {bad}) | BEKRA Bölüm 2: {len(bekra2)} CAS | '
+      f'ÖBK/PIC: {len(pic)} CAS')

@@ -187,6 +187,8 @@ const CalculatorModule = (() => {
       window._lastEk6Supp = data.ek6_supplements || [];
       // Eldiven önerisi (EN ISO 374-1 harf/tip + malzeme seçenekleri + uyarılar) — KKD panelinde kart
       window._lastGlove = data.glove || {};
+      // KKDİK Ek-17 kısıtlama eşleşmeleri — temizlik ürününde madde 46 (nonilfenol/etoksilatlar) uyarısı
+      window._lastEk17 = data.ek17 || [];
       _lastPayload = payload;
       _lastSummary = data.summary || null;
       StateStore.setCalcResult(result);

@@ -1267,7 +1267,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
 <script src="js/modules/cas-lookup.js?v=20260617"></script>
 <script src="js/modules/component-manager.js?v=20260617"></script>
 <script src="js/modules/conc-selector.js?v=20260617"></script>
-<script src="js/modules/calculator.js?v=20261007b"></script>
+<script src="js/modules/calculator.js?v=20261007c"></script>
 <script src="js/modules/results-renderer.js?v=20260930"></script>
 <script src="js/modules/pdf-exporter.js?v=20260617"></script>
 <script src="js/app.js?v=20260617"></script>
@@ -4232,6 +4232,7 @@ function renderAll(s) {
     const pillClass = c => (_dH && _dH.has(c)) ? 'hp-danger'
                          : (_wH && _wH.has(c)) ? 'hp-warn' : 'hp-info';
 
+    h += _renderEk17Warning();
     h += `<div class="result-banner">
       <div class="${sigClass}" style="margin-bottom:8px">${sigLabel}</div>
       <div class="hcode-pills">${allH.map(c => `<span class="hpill ${pillClass(c)}" style="${annexH.has(c) ? 'border-style:dashed;opacity:.85' : ''}" title="${annexH.has(c) ? 'Annex VI takviye' : ''}">${c}</span>`).join('')}</div>
@@ -4508,6 +4509,23 @@ function renderAll(s) {
 // ── Eldiven kartı — KKDİK Ek-2 8.2.2.2(b): malzeme, kalınlık, minimum delinme süresi ──────────
 // Harf/tip/minimum süre EN ISO 374-1'den otomatik; malzeme ve kalınlık öneridir, kullanıcı onaylar/değiştirir.
 // Uyarılar yalnız burada görünür (GBF'ye basılmaz).
+// KKDİK Ek-17 madde 46: nonilfenol ve nonilfenol etoksilatlar endüstriyel/kurumsal ve evsel temizlik ürünlerinde
+// ağırlıkça %0,1 ve üzerinde piyasaya arz edilemez. Ürün deterjan işaretliyse veya kullanım tanımı temizliğe işaret
+// ediyorsa KDU'ya uyarı (PDF engellenmez; GBF 15.1'de Ek-17 satırı ayrıca basılır).
+function _renderEk17Warning() {
+  const hits = (window._lastEk17 || []).filter(r => String(r.giris) === '46' && Number(r.conc) >= 0.1);
+  if (!hits.length) return '';
+  const desc = (document.getElementById('pusage_desc')?.value || '').toLocaleLowerCase('tr-TR');
+  const cleaning = !!document.getElementById('p_detergent')?.checked ||
+    /temizl|deterjan|yıkama|bulaşık|çamaşır|leke|cleaner|cleaning|detergent|dishwash|laundry/.test(desc);
+  if (!cleaning) return '';
+  const names = [...new Set(hits.map(r => `${_esc(r.name)} (${_esc(r.cas)}, %${r.conc})`))].join(', ');
+  return `<div style="border:1px solid #c53030;background:rgba(197,48,48,.12);color:#c53030;border-radius:6px;padding:8px 10px;margin-bottom:8px;font-size:11px;line-height:1.4">
+    <b>⛔ KKDİK Ek-17 madde 46:</b> ${names} — nonilfenol ve nonilfenol etoksilatlar, endüstriyel/kurumsal ve evsel
+    temizlik ürünlerinde ağırlıkça %0,1 ve üzerinde piyasaya arz edilemez. Formül KDU tarafından değerlendirilmelidir.
+  </div>`;
+}
+
 function _renderGloveCard(g) {
   const names = g.malzeme_adlari || {};
   const suggested = g.malzeme_secenekleri || [];

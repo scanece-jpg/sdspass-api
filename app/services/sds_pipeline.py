@@ -563,8 +563,23 @@ async def classify(inp: dict) -> dict:
                   + (f' Not applied by user decision: {_fmt(_rem)}.' if _rem else ''))
         cls_notes.append({'TR': tr_txt, 'EN': en_txt})
 
+    # KKDİK Ek-17 kısıtlamaları — panelde KDU uyarısı için (örn. madde 46: nonilfenol/etoksilatlar temizlik
+    # ürünlerinde ≥%0,1 piyasaya arz edilemez). GBF 15.1 satırları ek17_service ile ayrıca basılır.
+    ek17_hits = []
+    try:
+        from app.services.ek17_service import lookup as _ek17_lookup
+        for _c in comps:
+            _cas = str(_c.get('cas_no') or _c.get('cas') or '').strip()
+            for _r in _ek17_lookup(_cas):
+                ek17_hits.append({'cas': _cas, 'name': _c.get('name_tr') or _c.get('name') or _cas,
+                                  'conc': float(_c.get('concMax') or _c.get('conc') or _c.get('concentration') or 0),
+                                  'giris': _r.get('giris'), 'kaynak': _r.get('kaynak')})
+    except Exception as _e:
+        print(f'[EK17] {_e}')
+
     return {
         'components':  comps,
+        'ek17':        ek17_hits,
         'ek6_supplements': ek6_supp,
         'h_codes':     h_codes,
         'all_h_codes': all_h,

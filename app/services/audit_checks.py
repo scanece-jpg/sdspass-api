@@ -630,6 +630,15 @@ def c_izin_kisit(ctx):
     # Yönetmelik adındaki "İzni ve Kısıtlanması Hakkında" ifadesi kısıtlama beyanı sayılmaz
     s15 = re.sub(r'(?i)izni\s+ve\s+kısıtlanması|authorisation\s+and\s+restriction', '', ctx['secs'].get('15', ''))
     stated = re.search(r'(?i)ek[- ]?17\b|ek[- ]?xvii|annex\s+xvii|kısıtlama(?:ya|lar|sı)?\b|kısıtlanmış', s15)
+    # Ek-17 madde 46: nonilfenol / nonilfenol etoksilatlar temizlik ürünlerinde ≥%0,1 piyasaya arz edilemez
+    np46 = [c for c, v in hits.items() if any(str(r.get('giris')) == '46' for r in v)]
+    s1 = ctx['secs'].get('1', '')
+    cleaning = 'deterjan' in ctx['facts'] or re.search(
+        r'(?i)temizl|deterjan|yıkama|bulaşık|çamaşır|cleaner|cleaning|detergent|dishwash|laundry', s1)
+    if np46 and cleaning:
+        return 'kdu', (f'Temizlik ürünü ve nonilfenol/nonilfenol etoksilat içeriyor ({", ".join(np46)}): KKDİK Ek-17 '
+                       f'madde 46 gereği endüstriyel/kurumsal ve evsel temizlikte ağırlıkça %0,1 ve üzerinde piyasaya '
+                       f'arz edilemez — konsantrasyonu KDU doğrulamalı.')
     return ('uygun', f'Ek-17 durumu 15.1\'de belirtilmiş ({det}).') if stated else \
            ('eksik', f'Ek-17 kapsamındaki maddeler 15.1\'de belirtilmemiş: {det}')
 

@@ -51,6 +51,8 @@ def get_oel_table(components: list) -> list:
                 'tw_mgm3':    oel.get('tw_mgm3'),
                 'stel_ppm':   oel.get('stel_ppm'),
                 'stel_mgm3':  oel.get('stel_mgm3'),
+                'ceil_ppm':   oel.get('ceil_ppm'),     # tavan değer (28733 Ek-1 CEILING sütunu)
+                'ceil_mgm3':  oel.get('ceil_mgm3'),
                 'skin':       oel.get('skin', False),
                 'carcinogen': oel.get('carcinogen', False),
                 'regulation': oel.get('regulation', 'EK-1'),
@@ -85,6 +87,10 @@ def format_oel_row(row: dict, lang: str = 'TR') -> list:
 
     tw   = fmt(row.get('tw_ppm'),   row.get('tw_mgm3'))
     stel = fmt(row.get('stel_ppm'), row.get('stel_mgm3'))
+    ceil = fmt(row.get('ceil_ppm'), row.get('ceil_mgm3'))
+    if ceil != '—':
+        ceil = ('Tavan değer: ' if lang == 'TR' else 'Ceiling: ') + ceil
+        stel = ceil if stel == '—' else f'{stel}; {ceil}'
 
     flags = []
     if row.get('skin'):       flags.append('Deri' if lang=='TR' else 'Skin')

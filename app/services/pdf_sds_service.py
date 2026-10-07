@@ -1533,8 +1533,36 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             return f'{c:g}' if c else '—'
         return get_echa_range(c)  # 'range' veya 'hide' → ECHA aralığı
 
-    sec3_rows = generate_section3(components, disclosure, lang=lang)
     from app.services.svhc_service import svhc_section3_reason
+    from app.services.tr_oel_service import get_oel as _tr_oel
+
+    def _c3max(c) -> float:
+        for k in ('concMax', 'conc_max', 'concentration', 'conc'):
+            try:
+                if c.get(k) not in (None, ''):
+                    return float(c.get(k))
+            except (TypeError, ValueError):
+                pass
+        return 0.0
+
+    def _sec3_needed(c) -> bool:
+        """KKDİK Ek-2 3.2.1 / 3.2.2: sınıflandırılmış maddeler; sınıflandırılmamışlardan yalnız TR işyeri maruz
+        kalma limiti olanlar veya PBT/vPvB/Aday Liste (≥%0,1). Diğerleri (su vb.) listelenmez — Ek-2 bunları
+        isteğe bağlı bırakır ("listelemeyi tercih edebilir"); kullanıcı tercihi: listelenmesin."""
+        if any((h.get('h_code') or h.get('h_class')) for h in (c.get('hazards') or [])):
+            return True
+        cas = str(c.get('cas_no') or c.get('cas') or '').strip()
+        return bool(cas and (_tr_oel(cas) or svhc_section3_reason(cas, _c3max(c), lang)))
+
+    # KKDİK Ek-2 A 3.2 (a)/(b): kütle veya hacme göre azalan sırada (önceden girildiği sırayla basılıyordu)
+    _sec3_comps = sorted((c for c in components if _sec3_needed(c)), key=lambda c: -_c3max(c))
+    sec3_rows = generate_section3(_sec3_comps, disclosure, lang=lang)
+    if not sec3_rows:
+        story.append(Paragraph(
+            'KKDİK Ek-2 3.2.1 / 3.2.2 uyarınca bu bölümde belirtilmesi gereken madde bulunmamaktadır.'
+            if lang == 'TR' else
+            'There are no substances that need to be listed in this section (Annex II 3.2.1 / 3.2.2).',
+            styles['body']))
     if sec3_rows:
         # B3.2 Tablo — 4 sütun, A4'e sığacak şekilde
         # CAS No | Madde Adı | Konst. | Sınıflandırma
@@ -1585,7 +1613,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
 
         for r in sec3_rows:
             cas = r['cas']
-            comp_obj = next((comp for comp in components if comp.get('cas_no','')==cas), {})
+            comp_obj = next((comp for comp in components if (comp.get('cas_no') or comp.get('cas') or '').strip() == cas), {})
             ec  = comp_obj.get('ec_no','') or get_ec_no(cas)
             _eu_raw = (comp_obj.get('reach_no','') or get_reg_no(cas) or '').strip()
             if get_reg_no(cas) == 'exempt':   # veritabanında muaf (örn. su) — ön yüzdeki eski değeri ezer
@@ -1618,6 +1646,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                     or comp_obj.get('conc'), lang)
                 if _svhc_why:
                     _clf_str += f'; {_svhc_why}'
+                elif _tr_oel(cas):
+                    _clf_str += ('; Listelenme nedeni: işyeri maruz kalma limiti (bkz. 8.1)' if lang == 'TR'
+                                 else '; Reason for listing: workplace exposure limit (see 8.1)')
             _clf_para = Paragraph(_clf_str.replace('; ', '<br/>'), styles['body'])
             # Ad ve konsantrasyon Paragraph'a sarılır — kelime kırılmasını ve
             # PDF text extraction artifaktlarını önler
@@ -1982,7 +2013,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     story.append(CondPageBreak(45*mm))   # 8 başlığı + 8.1 tablo başlığı sayfa sonunda tek kalmasın
     story += section_block(section_title(lang, 8), styles)
     story += sub_block(f"8.1 {sub_title(lang,'8.1')}", styles)
-    oel_rows = get_oel_table(components)
+    # Sınır değeri olmayan ve sınıflandırılmamış bileşenler (su vb.) 8.1 tablosuna girmez — Bölüm 3 ile aynı ilke
+    oel_rows = get_oel_table([c for c in components if _sec3_needed(c)])
     if oel_rows:
         oel_header = 'CAS No / Madde' if lang=='TR' else 'CAS No / Substance'
         tbl_data = [[
@@ -2025,7 +2057,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 'exposure by inhalation to chemical agents — strategy for testing compliance with occupational '
                 'exposure limit values).', styles['small']))
     else:
-        story.append(Paragraph(S(lang,'oel_reference'), styles['body']))
+        story.append(Paragraph(
+            'Ürünün bileşenleri için Türkiye mevzuatında (28733 sayılı Yönetmelik Ek-1; 28730 sayılı Yönetmelik '
+            'Ek-2) mesleki maruziyet sınır değeri bulunmamaktadır.' if lang == 'TR' and components else
+            S(lang, 'oel_reference'), styles['body']))
     # KKDİK Ek-2 A 8.1.4: DNEL/PNEC — karışım için değer verilmiyorsa bu belirtilir
     if lang in ('TR', 'EN') and len(sds_data.get('components') or []) > 1:
         story.append(Paragraph(

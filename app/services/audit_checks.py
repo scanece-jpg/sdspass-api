@@ -255,14 +255,22 @@ def _rows3(ctx):
     return [c for c in dict.fromkeys(CAS_RE.findall(s3)) if _cas_ok(c)], s3
 
 
+_NOTHING_TO_LIST = re.compile(r'(?i)(belirtilmesi|listelenmesi) gereken (bir )?madde bulunmamaktad|'
+                              r'no substances that need to be listed')
+
+
 def c_32_liste(ctx):
-    cas, _ = _rows3(ctx)
+    cas, s3 = _rows3(ctx)
+    if not cas and _NOTHING_TO_LIST.search(s3):
+        return 'uygun', 'Bölüm 3: Ek-2 3.2.1/3.2.2 uyarınca listelenmesi gereken madde olmadığı belirtilmiş.'
     return ('uygun', f'Bölüm 3\'te {len(cas)} madde CAS ile listelenmiş.') if cas else \
            ('eksik', 'Bölüm 3\'te CAS numaralı madde bulunamadı.')
 
 
 def c_32_konsantrasyon(ctx):
     cas, s3 = _rows3(ctx)
+    if not cas and _NOTHING_TO_LIST.search(s3):
+        return 'uygun', 'Listelenmesi gereken madde yok.'
     n = len(CONC_RE.findall(s3))
     return ('uygun', f'{n} konsantrasyon değeri / {len(cas)} madde.') if cas and n >= len(cas) else \
            ('kdu', f'Konsantrasyon değeri sayısı ({n}) madde sayısından ({len(cas)}) az görünüyor.')
@@ -270,6 +278,8 @@ def c_32_konsantrasyon(ctx):
 
 def c_32_sinif(ctx):
     cas, s3 = _rows3(ctx)
+    if not cas and _NOTHING_TO_LIST.search(s3):
+        return 'uygun', 'Listelenmesi gereken madde yok.'
     n = len(re.findall(r'\bH\d{3}|sınıflandırılmamış|sınıflandırma kriterlerini karşılamamaktadır|not classified',
                        s3, re.I))
     return ('uygun', 'Maddelerin sınıflandırması verilmiş.') if cas and n >= 1 else \

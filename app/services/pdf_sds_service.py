@@ -3680,6 +3680,19 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     except Exception:
         pass
 
+    # ── KKDİK Ek-17 kısıtlamaları — Ek-2 A 15.1 (TR Ek-14 izin listesi yönetmelikte boş) ──
+    if not is_us:
+        try:
+            from app.services.ek17_service import section15_lines
+            _ek17_lines = section15_lines(components, lang=lang)
+            if _ek17_lines:
+                story.append(Spacer(1, 4))
+                for line in _ek17_lines:
+                    st = styles['body'] if line.startswith('•') else styles['small']
+                    story.append(Paragraph(line, st))
+        except Exception:
+            pass
+
     # KKDİK Ek-2 A 15.1: hükümler sonucu alıcının yapması gereken faaliyetlere dair tavsiye
     if lang in ('TR', 'EN') and h_codes:
         story.append(Spacer(1, 3))

@@ -538,19 +538,45 @@ def c_bld(ctx):
                      f'28733 sayılı Yönetmelik Ek-2) yok.')
 
 
-_EK17 = None
+# Kanserojen veya Mutajen Maddelerle Çalışmalarda Sağlık ve Güvenlik Önlemleri Hakkında Yönetmelik
+# (RG 06.08.2013/28730) Ek-2 "Mesleki maruziyet sınır değerleri" — mevzuat.gov.tr MevzuatNo=18695,
+# değişiklik işlenmemiş (2026-10-07 kontrol). Sert ağaç tozları (5,0 mg/m³) CAS'sız olduğundan ada göre aranır.
+_KANS_OEL = {
+    '71-43-2': ('Benzen', ('3,25', '3.25'), ('1',)),
+    '75-01-4': ('Vinilklorür monomeri', ('7,77', '7.77'), ('3',)),
+}
+
+
+def c_oel_kanserojen(ctx):
+    """Ek-2 A 8.1.1.2: kanserojen/mutajen bileşen için Kanserojen Yönetmeliği Ek-2 sınır değeri."""
+    cas, _ = _rows3(ctx)
+    s8 = _sub(ctx['secs'].get('8', ''), '8.1', '8.2') or ctx['secs'].get('8', '')
+    hits = [c for c in cas if c in _KANS_OEL]
+    wood = re.search(r'(?i)(sert\s+)?ağaç\s+toz|hardwood\s+dust', ctx['secs'].get('3', ''))
+    if not hits and not wood:
+        return 'uygun', ('Kanserojen Yönetmeliği Ek-2\'de sınır değeri olan bileşen yok (Ek-2 yalnız benzen, '
+                         'vinil klorür monomeri ve sert ağaç tozlarını içerir).')
+    miss = []
+    for c in hits:
+        name, mg, ppm = _KANS_OEL[c]
+        if c not in s8 or not any(re.search(rf'(?<![\d.,]){re.escape(v)}(?![\d.,])\s*mg', s8) for v in mg):
+            miss.append(f'{name} ({c}): {mg[0]} mg/m³ / {ppm[0]} ppm')
+    if wood and not re.search(r'(?<![\d.,])5([.,]0)?\s*mg', s8):
+        miss.append('Sert ağaç tozları: 5,0 mg/m³')
+    if not miss:
+        if not re.search(r'(?i)28730|kanserojen\s+veya\s+mutajen', s8):
+            return 'kdu', ('Kanserojen Yönetmeliği Ek-2 sınır değeri 8.1\'de var ama dayanağı bu yönetmelik olarak '
+                           'gösterilmemiş (RG 06.08.2013/28730, Ek-2); KDU kaynak satırını kontrol etmeli.')
+        return 'uygun', 'Kanserojen Yönetmeliği Ek-2 sınır değerleri 8.1\'de dayanağıyla verilmiş.'
+    return 'eksik', ('8.1\'de Kanserojen veya Mutajen Maddelerle Çalışmalarda Sağlık ve Güvenlik Önlemleri '
+                     'Hakkında Yönetmelik (RG 06.08.2013/28730) Ek-2 sınır değeri bulunamadı: ' + '; '.join(miss))
+
+
 
 
 def _ek17():
-    global _EK17
-    if _EK17 is None:
-        import json
-        p = os.path.join(os.path.dirname(__file__), '..', '..', 'data', 'kkdik_ek17_cas.json')
-        try:
-            _EK17 = json.load(open(p, encoding='utf-8'))['cas']
-        except Exception:
-            _EK17 = {}
-    return _EK17
+    from app.services.ek17_service import db
+    return db()
 
 
 def c_izin_kisit(ctx):
@@ -592,7 +618,7 @@ def c_ek_unsur(ctx):
 
 CHECKS: Dict[str, Callable] = {
     '3.2-sira': c_32_sira, '3.2-neden': c_32_neden, '3.2-kayit': c_32_kayit, '8.1-bld': c_bld,
-    '15.1-izin-kisit': c_izin_kisit, '2.2-ek-unsur': c_ek_unsur,
+    '15.1-izin-kisit': c_izin_kisit, '2.2-ek-unsur': c_ek_unsur, '8.1-oel-kanserojen': c_oel_kanserojen,
     'G-basliklar': c_basliklar, 'G-tarih': c_tarih, 'G-surum': c_surum, 'G-sayfa': c_sayfa,
     'G-bos-alt': c_bos_alt, 'G-dil': c_dil, 'G-yasak-ifade': c_yasak, '1.3-eposta': c_eposta,
     '1.4-zehir': c_zehir, '2.1-h-atif': c_h_atif, '2.2-uyari-tek': c_uyari_tek, '2.2-h': c_22_h,

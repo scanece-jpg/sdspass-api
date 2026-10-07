@@ -1,0 +1,226 @@
+{
+  "not": "Bu değerler Türkiye mevzuatında (28733 Ek-1, 28730 Ek-2) yer almaz; GBF'de TR sınır değeri olarak kullanılmaz. Yalnız başvuru amaçlı saklanır.",
+  "kayitlar": {
+    "79-01-6": {
+      "name_tr": "Trikloroetilen",
+      "tw_ppm": 10,
+      "tw_mgm3": 54.7,
+      "stel_ppm": 30,
+      "stel_mgm3": 164.1,
+      "skin": true,
+      "carcinogen": true,
+      "regulation": "Kanserojen Yönetmeliği Ek-1"
+    },
+    "13463-67-7": {
+      "name_tr": "Titanyum dioksit (solunabilir toz)",
+      "tw_ppm": null,
+      "tw_mgm3": 10,
+      "stel_ppm": null,
+      "stel_mgm3": null,
+      "skin": false,
+      "carcinogen": false,
+      "notes": "Solunabilir fraksiyonu için",
+      "regulation": "EK-1"
+    },
+    "14808-60-7": {
+      "name_tr": "Kristalize silika (kuvars - solunabilir)",
+      "tw_ppm": null,
+      "tw_mgm3": 0.1,
+      "stel_ppm": null,
+      "stel_mgm3": null,
+      "skin": false,
+      "carcinogen": true,
+      "regulation": "Kanserojen Yönetmeliği Ek-1"
+    },
+    "2682-20-4": {
+      "name_tr": "Metilizotiyazolinon (MIT)",
+      "tw_ppm": null,
+      "tw_mgm3": 0.0002,
+      "stel_ppm": null,
+      "stel_mgm3": null,
+      "skin": true,
+      "carcinogen": false,
+      "regulation": "EK-1"
+    },
+    "111-30-8": {
+      "name_tr": "Glutaraldehit",
+      "tw_ppm": 0.05,
+      "tw_mgm3": 0.2,
+      "stel_ppm": null,
+      "stel_mgm3": null,
+      "skin": true,
+      "carcinogen": false,
+      "regulation": "EK-1"
+    },
+    "7440-02-0": {
+      "name_tr": "Nikel ve bileşikleri (solunum fraksiyonu)",
+      "tw_ppm": null,
+      "tw_mgm3": 0.01,
+      "stel_ppm": null,
+      "stel_mgm3": null,
+      "skin": true,
+      "carcinogen": true,
+      "regulation": "Kanserojen Yönetmeliği Ek-1"
+    },
+    "7440-43-9": {
+      "name_tr": "Kadmiyum ve bileşikleri",
+      "tw_ppm": null,
+      "tw_mgm3": 0.004,
+      "stel_ppm": null,
+      "stel_mgm3": null,
+      "skin": false,
+      "carcinogen": true,
+      "regulation": "Kanserojen Yönetmeliği Ek-1"
+    },
+    "630-08-0": {
+      "name_tr": "Karbonmonoksit (CO)",
+      "tw_ppm": 20,
+      "tw_mgm3": 23,
+      "stel_ppm": 100,
+      "stel_mgm3": 117,
+      "skin": false,
+      "carcinogen": false,
+      "regulation": "EK-1"
+    },
+    "50-00-0": {
+      "name_tr": "Formaldehit",
+      "tw_ppm": 0.3,
+      "tw_mgm3": 0.37,
+      "stel_ppm": 0.6,
+      "stel_mgm3": 0.74,
+      "skin": true,
+      "carcinogen": true,
+      "regulation": "Kanserojen Yönetmeliği Ek-1"
+    },
+    "60-35-5": {
+      "name_tr": "Asetamit",
+      "tw_ppm": 10,
+      "tw_mgm3": 30,
+      "stel_ppm": null,
+      "stel_mgm3": null,
+      "skin": false,
+      "carcinogen": true,
+      "regulation": "Kanserojen Yönetmeliği"
+    },
+    "106-97-8": {
+      "name_tr": "Bütan",
+      "tw_ppm": 1000,
+      "tw_mgm3": 2350,
+      "stel_ppm": null,
+      "stel_mgm3": null,
+      "skin": false,
+      "carcinogen": false,
+      "regulation": "EK-1"
+    },
+    "7440-66-6": {
+      "name_tr": "Çinko oksit (duman)",
+      "tw_ppm": null,
+      "tw_mgm3": 2,
+      "stel_ppm": null,
+      "stel_mgm3": 6,
+      "skin": false,
+      "carcinogen": false,
+      "regulation": "EK-1"
+    },
+    "7440-21-3": {
+      "name_tr": "Silisyum (kristalize, amorf)",
+      "tw_ppm": null,
+      "tw_mgm3": 4,
+      "stel_ppm": null,
+      "stel_mgm3": null,
+      "skin": false,
+      "carcinogen": false,
+      "regulation": "EK-1"
+    },
+    "1345-16-0": {
+      "name_tr": "Kobalt oksit",
+      "tw_ppm": null,
+      "tw_mgm3": 0.02,
+      "stel_ppm": null,
+      "stel_mgm3": null,
+      "skin": true,
+      "carcinogen": true,
+      "regulation": "Kanserojen Yönetmeliği"
+    },
+    "INERT_DUST": {
+      "name_tr": "İnert toz (solunabilir fraksiyonu)",
+      "tw_ppm": null,
+      "tw_mgm3": 5,
+      "stel_ppm": null,
+      "stel_mgm3": null,
+      "skin": false,
+      "carcinogen": false,
+      "regulation": "EK-2"
+    },
+    "INERT_DUST_TOTAL": {
+      "name_tr": "İnert toz (toplam)",
+      "tw_ppm": null,
+      "tw_mgm3": 10,
+      "stel_ppm": null,
+      "stel_mgm3": null,
+      "skin": false,
+      "carcinogen": false,
+      "regulation": "EK-2"
+    },
+    "9005-64-5": {
+      "name_tr": "Polisorbat 80 (Tween 80)",
+      "tw_ppm": null,
+      "tw_mgm3": 5,
+      "stel_ppm": null,
+      "stel_mgm3": 10,
+      "skin": false,
+      "carcinogen": false,
+      "regulation": "EK-2"
+    },
+    "127-18-4": {
+      "name_tr": "Tetrakloroetilen (PERC)",
+      "tw_ppm": 20,
+      "tw_mgm3": 138,
+      "stel_ppm": 40,
+      "stel_mgm3": 275,
+      "skin": false,
+      "carcinogen": true,
+      "regulation": "Kanserojen Yönetmeliği"
+    },
+    "822-06-0": {
+      "name_tr": "Heksametilen diizosiyant (HDI)",
+      "tw_ppm": 0.02,
+      "tw_mgm3": 0.14,
+      "stel_ppm": null,
+      "stel_mgm3": null,
+      "skin": true,
+      "carcinogen": false,
+      "regulation": "EK-1"
+    },
+    "584-84-9": {
+      "name_tr": "TDI (Toluen diizosiyant)",
+      "tw_ppm": 0.005,
+      "tw_mgm3": 0.04,
+      "stel_ppm": 0.02,
+      "stel_mgm3": 0.14,
+      "skin": true,
+      "carcinogen": true,
+      "regulation": "Kanserojen Yönetmeliği"
+    },
+    "79-06-1": {
+      "name_tr": "Akrilamit",
+      "tw_ppm": 0.03,
+      "tw_mgm3": 0.1,
+      "stel_ppm": null,
+      "stel_mgm3": null,
+      "skin": true,
+      "carcinogen": true,
+      "regulation": "Kanserojen Yönetmeliği Ek-1"
+    },
+    "140-88-5": {
+      "name_tr": "Etil akrilat",
+      "tw_ppm": 5,
+      "tw_mgm3": 21,
+      "stel_ppm": 15,
+      "stel_mgm3": 61,
+      "skin": false,
+      "carcinogen": true,
+      "regulation": "Kanserojen Yönetmeliği"
+    }
+  }
+}

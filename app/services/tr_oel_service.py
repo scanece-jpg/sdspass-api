@@ -1,8 +1,8 @@
 """
 Türkiye OEL (Mesleki Maruziyet Limitleri) Servisi
 ===================================================
-ÇSGB Yönetmeliği Ek-1 ve Kanserojen/Mutajen Maddeler
-Yönetmeliği kapsamında Türkiye'ye özgü limit değerleri.
+28733 sayılı Kimyasal Maddeler Yönetmeliği Ek-1 ve 28730 sayılı Kanserojen/Mutajen
+Maddeler Yönetmeliği Ek-2 sınır değerleri (doğrulama: scripts/verify_tr_oel.py).
 """
 
 import json
@@ -15,7 +15,7 @@ def _load():
     if _OEL_DATA is None:
         p = Path(__file__).parent.parent.parent / 'data' / 'tr_oel_limits.json'
         if p.exists():
-            with open(p) as f:
+            with open(p, encoding='utf-8') as f:
                 _OEL_DATA = json.load(f)
         else:
             _OEL_DATA = {}
@@ -70,7 +70,7 @@ def get_oel_table(components: list) -> list:
                 'skin':       False,
                 'carcinogen': False,
                 'regulation': '—',
-                'notes':      'OEL belirlenmemiş — Türkiye ÇSGB Ek-1/Ek-2 kapsamında kayıtlı değil',
+                'notes':      'OEL belirlenmemiş — 28733 Ek-1 / 28730 Ek-2 kapsamında kayıtlı değil',
             })
     return rows
 
@@ -89,6 +89,8 @@ def format_oel_row(row: dict, lang: str = 'TR') -> list:
     flags = []
     if row.get('skin'):       flags.append('Deri' if lang=='TR' else 'Skin')
     if row.get('carcinogen'): flags.append('Kans.' if lang=='TR' else 'Carc.')
+    if row.get('regulation') == '—':
+        flags.append('TR sınır değeri yok' if lang == 'TR' else 'No TR limit')
 
     return [
         row.get('cas', ''),

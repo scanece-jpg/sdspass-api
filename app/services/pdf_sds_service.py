@@ -1976,6 +1976,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     # ─────────────────────────────────────────────────────────────────────────
     # BÖLÜM 8 — Maruziyet / KKE
     # ─────────────────────────────────────────────────────────────────────────
+    story.append(CondPageBreak(45*mm))   # 8 başlığı + 8.1 tablo başlığı sayfa sonunda tek kalmasın
     story += section_block(section_title(lang, 8), styles)
     story += sub_block(f"8.1 {sub_title(lang,'8.1')}", styles)
     oel_rows = get_oel_table(components)
@@ -1991,11 +1992,26 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         for row in oel_rows:
             tbl_data.append(format_oel_row(row, lang))
         story.append(data_table(tbl_data, [22*mm, 45*mm, 35*mm, 35*mm, 25*mm], styles))
-        story.append(Paragraph(
-            'Kaynak: 12.08.2013 tarihli ve 28733 sayılı Kimyasal Maddelerle Çalışmalarda Sağlık ve Güvenlik Önlemleri Hakkında Yönetmelik Ek-1' if lang=='TR'
-            else 'Source: Turkish Chemical Agents Regulation (OG No. 28733, 12.08.2013) Annex-1',
-            styles['small']
-        ))
+        # Kaynak: her satırın yasal dayanağı (data/tr_oel_limits.json 'regulation'; scripts/verify_tr_oel.py)
+        _regs = {r.get('regulation') for r in oel_rows}
+        if '28733 Ek-1' in _regs:
+            story.append(Paragraph(
+                'Kaynak: 12.08.2013 tarihli ve 28733 sayılı Kimyasal Maddelerle Çalışmalarda Sağlık ve Güvenlik '
+                'Önlemleri Hakkında Yönetmelik Ek-1 (Değişik: RG 20.10.2023/32345)' if lang == 'TR' else
+                'Source: Turkish Regulation on Health and Safety Measures for Work with Chemical Agents '
+                '(OG No. 28733, 12.08.2013) Annex-1 (amended OG 20.10.2023/32345)', styles['small']))
+        if '28730 Ek-2' in _regs:
+            story.append(Paragraph(
+                'Kaynak: 06.08.2013 tarihli ve 28730 sayılı Kanserojen veya Mutajen Maddelerle Çalışmalarda Sağlık '
+                've Güvenlik Önlemleri Hakkında Yönetmelik Ek-2' if lang == 'TR' else
+                'Source: Turkish Regulation on Health and Safety Measures for Work with Carcinogens or Mutagens '
+                '(OG No. 28730, 06.08.2013) Annex-2', styles['small']))
+        if any(r.get('regulation') == '—' for r in oel_rows):
+            story.append(Paragraph(
+                'TR sınır değeri yok: bu bileşen için Türkiye mevzuatında (28733 sayılı Yönetmelik Ek-1; 28730 '
+                'sayılı Yönetmelik Ek-2) mesleki maruziyet sınır değeri belirlenmemiştir.' if lang == 'TR' else
+                'No TR limit: no occupational exposure limit value is set for this component in Turkish '
+                'legislation (OG 28733 Annex-1; OG 28730 Annex-2).', styles['small']))
         # KKDİK Ek-2 A 8.1.2: tavsiye edilen izleme usulleri
         if lang in ('TR', 'EN'):
             story.append(Paragraph(

@@ -113,6 +113,8 @@ const CalculatorModule = (() => {
       user_fp:     isNaN(userFP) ? null : userFP,
       fp_status:   fpStatus || null,
       mixture_ph:  phRaw || null,
+      // SEA Ek-1 Tablo 3.2.4 / 3.3.4 — KDU "toplama yöntemi uygulanamaz" dediyse (varsayılan Tablo 3.2.3 / 3.3.3)
+      additivity_na: !!document.getElementById('cb_additivity_na')?.checked,
       test_data:   testData,
       usage,
       lang:        (typeof getSdsLang === 'function' ? getSdsLang() : null) || 'TR',

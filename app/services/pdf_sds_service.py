@@ -3339,14 +3339,34 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                             '* M-factor not determined; M=1 assumed per CLP Annex I §4.1.3.5.5. '
                             'Verify with EC50/LC50 data from supplier.')
                 story.append(Paragraph(_mf_note, styles['small']))
-            # Kaynaktan gelen M değerleri varsa kaynak dipnotu
-            if any(not _d.get('_m_default') for _d in _aquatic_comps):
-                _mf_src = ('M-faktörü değerleri SEA Ek-6 (TR) harmonik sınıflandırması '
-                           've/veya ECHA CLP Ek-VI (ATP22) esas alınarak belirlenmiştir.'
-                           if lang == 'TR' else
-                           'M-factor values are based on TR SEA Annex VI harmonised '
-                           'classification and/or ECHA CLP Annex VI (ATP22).')
-                story.append(Paragraph(_mf_src, styles['small']))
+            # Kaynaktan gelen M değerleri varsa kaynak dipnotu — her bileşenin gerçek kaynağı
+            # (önceden tüm değerler "SEA Ek-6 ve/veya CLP Ek-VI" diye yazılıyordu; ECHA bildirimi olanlar da)
+            _msrc_by_cas = {str(c.get('cas_no') or c.get('cas') or '').strip(): c.get('m_source', '')
+                            for c in sds_data.get('components', [])}
+            _MSRC_TXT = {
+                'sea_ek6':  ('SEA Ek-6 (uyumlaştırılmış sınıflandırma)', 'TR SEA Annex 6 (harmonised classification)'),
+                'annex_vi': ('AB CLP Ek-VI (uyumlaştırılmış sınıflandırma)', 'EU CLP Annex VI (harmonised classification)'),
+                'echa_cl':  ('ECHA C&amp;L Envanteri öz-sınıflandırma bildirimleri (bildirim çoğunluğu; M yazmayan '
+                             'bildirimler M=1 sayılır) — tedarikçi verisiyle doğrulanmalıdır',
+                             'ECHA C&amp;L Inventory self-classification notifications (majority; notifications '
+                             'without an M-factor count as M=1) — verify with supplier data'),
+                'user':     ('kullanıcı tarafından girilen değer (tedarikçi verisi)', 'user-entered value (supplier data)'),
+            }
+            _src_groups: dict = {}
+            for _d in _aquatic_comps:
+                if _d.get('_m_default'):
+                    continue
+                _k = _msrc_by_cas.get(_d.get('cas', ''), '') or 'sea_ek6_or_annex'
+                _src_groups.setdefault(_k, []).append(_d.get('cas', ''))
+            for _k, _cases in _src_groups.items():
+                if _k in _MSRC_TXT:
+                    _t = _MSRC_TXT[_k][0 if lang == 'TR' else 1]
+                else:
+                    _t = ('SEA Ek-6 / AB CLP Ek-VI veya veritabanı kaydı' if lang == 'TR'
+                          else 'TR SEA Annex 6 / EU CLP Annex VI or database record')
+                story.append(Paragraph(
+                    (f'M-faktörü kaynağı ({", ".join(_cases)}): {_t}.' if lang == 'TR'
+                     else f'M-factor source ({", ".join(_cases)}): {_t}.'), styles['small']))
             story.append(Spacer(1, 3))
 
     # ─────────────────────────────────────────────────────────────────────────

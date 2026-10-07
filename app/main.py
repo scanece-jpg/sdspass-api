@@ -192,6 +192,7 @@ async def generate_pdf(data: dict = Body(...)):
                 'user_bp':    _num(_ci.get('user_bp')),
                 'fp_status':  _ci.get('fp_status') or '',
                 'mixture_ph': _ci.get('mixture_ph'),
+                'additivity_na': bool(_ci.get('additivity_na')),
                 'test_data':  _ci.get('test_data') or {},
                 'h314_removed': _h314_removed_flag,
             }
@@ -214,6 +215,7 @@ async def generate_pdf(data: dict = Body(...)):
                 'user_bp':    _phys_calc_val(_parsed_phys, 'boiling_point'),
                 'fp_status':  data.get('fp_status') or '',
                 'mixture_ph': phys_in.get('ph') or None,
+                'additivity_na': bool(product.get('additivity_na') or data.get('additivity_na')),
                 'test_data':  {},
                 'h314_removed': _h314_removed_flag,
                 'glove_material':  product.get('glove_material'),
@@ -245,7 +247,7 @@ async def generate_pdf(data: dict = Body(...)):
             if not f:
                 return c
             c = dict(c)
-            for k in ('hazards', 'm_factors', 'ate', 'ate_source', 'suppl_hazards', 'euh_limits',
+            for k in ('hazards', 'm_factors', 'm_source', 'ate', 'ate_source', 'suppl_hazards', 'euh_limits',
                       'source_priority', 'sea_ek6', 'annex_vi'):
                 if k in f:
                     c[k] = f[k]
@@ -891,7 +893,8 @@ async def clp_calculate(body: dict):
 
     try:
         # 1. Ana CLP (cut-off tablosu) — pH uç değer varsa doğrudan H314+H318 atanır
-        result = classify_mixture_clp(components, mixture_ph=mixture_ph, mixture_form=mixture_form)
+        result = classify_mixture_clp(components, mixture_ph=mixture_ph, mixture_form=mixture_form,
+                                      additivity_na=bool(body.get("additivity_na")))
 
         # 2. STOT RE (hedef organ bazlı) — stot_engine doğru iki kademeli eşik uygular
         stot = calculate_stot_re(components)
@@ -1101,6 +1104,7 @@ async def sds_calculate(body: dict = Body(...)):
             'user_bp':    _num(body.get('user_bp') if body.get('user_bp') is not None else body.get('boiling_point')),
             'fp_status':  body.get('fp_status') or '',
             'mixture_ph': body.get('mixture_ph'),
+            'additivity_na': bool(body.get('additivity_na')),
             'test_data':  body.get('test_data') or {},
             'h314_removed': bool(body.get('h314_neutralization_removed', False)),
             'glove_material':  body.get('glove_material'),

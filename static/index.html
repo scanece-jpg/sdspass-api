@@ -801,6 +801,14 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
           </div>
           <input type="text" id="tf_ph" placeholder="Ör: 7.0 veya 2-4 (aralık)"
                  onblur="normalizePh(this)">
+          <!-- SEA Ek-1 3.2.3.3.4 / 3.3.3.3.4: toplama yöntemi (Tablo 3.2.3 / 3.3.3) varsayılandır; KDU
+               uygulanamaz derse Tablo 3.2.4 / 3.3.4 bileşen eşikleri (%1 aşındırıcı, %3 tahriş edici) kullanılır -->
+          <label class="na-check" style="display:flex;align-items:flex-start;gap:6px;margin-top:6px;font-size:11px;line-height:1.35;color:var(--text2)"
+                 title="SEA Ek-1 3.2.3.3.4 ve 3.3.3.3.4: asit/baz, inorganik tuz, aldehit, fenol, yüzey aktif madde gibi bileşenlerde toplama yöntemi geçerli olmayabilir. İşaretlenirse Tablo 3.2.4 / 3.3.4 uygulanır: aşındırıcı bileşen ≥%1 → H314, ciddi göz hasarı bileşeni ≥%1 → H318, tahriş edici bileşen ≥%3 → H315/H319. pH ≤2 veya ≥11,5 ise pH kuralı ayrıca uygulanır.">
+            <input type="checkbox" id="cb_additivity_na" style="margin-top:2px"
+                   onchange="if (typeof CalculatorModule !== 'undefined') CalculatorModule.run(false)">
+            <span>Cilt/göz için toplama yöntemi uygulanamaz (SEA Ek-1 Tablo 3.2.4 / 3.3.4 — KDU kararı)</span>
+          </label>
         </div>
 
         <!-- Yoğunluk: tüm formlar -->
@@ -1251,7 +1259,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
 <script src="js/modules/cas-lookup.js?v=20260617"></script>
 <script src="js/modules/component-manager.js?v=20260617"></script>
 <script src="js/modules/conc-selector.js?v=20260617"></script>
-<script src="js/modules/calculator.js?v=20261002b"></script>
+<script src="js/modules/calculator.js?v=20261007a"></script>
 <script src="js/modules/results-renderer.js?v=20260930"></script>
 <script src="js/modules/pdf-exporter.js?v=20260617"></script>
 <script src="js/app.js?v=20260617"></script>

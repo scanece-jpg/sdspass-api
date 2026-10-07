@@ -5,7 +5,7 @@ kuralları kullanıyordu; panel ile PDF farklı H kodu / P kodu / taşıma göst
 
 Girdi (normalize):
     components, form, form_sub, usage, lang, user_fp, user_bp, fp_status,
-    mixture_ph, test_data, h314_removed
+    mixture_ph, additivity_na, test_data, h314_removed
 
 Çıktı: h_codes (etiket), all_h_codes (Bölüm 2.1), signal, pictograms, clp_passed,
        euh, p_codes, transport, ppe, phys_res, stot_res, eco_obj, eco_panel,
@@ -111,6 +111,12 @@ async def refresh_components(components: list, form: str) -> list:
         user_m = comp.get('m_factors') or {}
         if not any(_f(v) > 1 for v in user_m.values()):
             c['m_factors'] = src.get('m_factors') or {}
+            # GBF 12. bölüm M tablosunun kaynak notu: resmî liste mi, ECHA bildirimleri mi
+            _echa = 'ECHA C&L' in str(src.get('source') or '') or src.get('atp') == 'ECHA C&L API'
+            c['m_source'] = ('sea_ek6' if src.get('sea_ek6') else 'annex_vi' if src.get('annex_vi')
+                             else 'echa_cl' if _echa else 'db') if c['m_factors'] else ''
+        else:
+            c['m_source'] = 'user'
         user_ate = comp.get('ate') or {}
         if any(_f(v) > 0 for v in user_ate.values()):
             c['ate_source'] = 'user'   # GBF 11.1.2 tablosunda kaynak olarak gösterilir
@@ -266,6 +272,7 @@ async def classify(inp: dict) -> dict:
     lang      = inp.get('lang') or 'TR'
     test_data = dict(inp.get('test_data') or {})
     mixture_ph = inp.get('mixture_ph') or None
+    additivity_na = bool(inp.get('additivity_na'))   # SEA Ek-1 Tablo 3.2.4 / 3.3.4 (KDU kararı)
 
     comps = [dict(c) for c in (inp.get('components') or [])]
     _normalize_conc(comps)
@@ -280,7 +287,8 @@ async def classify(inp: dict) -> dict:
 
     tr_components = build_transport_components(comps)
 
-    clp_res  = classify_mixture_clp(comps, mixture_ph=mixture_ph, mixture_form=form)
+    clp_res  = classify_mixture_clp(comps, mixture_ph=mixture_ph, mixture_form=form,
+                                    additivity_na=additivity_na)
     # "Bileşen geçişkenliğine dayanır — test önerilir" uyarısı yalnızca-test sınıfları için
     # geçersiz: bu sınıflar artık kullanıcının test kararıyla verilir (Bölüm 16 notu ayrı).
     clp_res['warnings'] = [

@@ -402,6 +402,9 @@ _ECHA_CHEM          = 'https://chem.echa.europa.eu'
 _CL_CLASS_THRESHOLD = 50.0   # tehlike sınıfı bildirimlerin bu yüzdesini AŞARSA eklenir
 _CL_TIE_MARGIN      = 2.0    # en yüksek paya bu kadar yakın kategoriler eşit sayılır → daha ağır olan seçilir
 _CL_MAX_PARALLEL    = 5
+# M/ATE seçim yönteminin sürümü. 2: M yazmayan bildirimler M=1 sayılır; M ve ATE yalnız ilgili tehlikeyi
+# bildiren gruplardan. Daha düşük sürümle kaydedilmiş ECHA kayıtları yeniden çekilir (substance_lookup._is_stale).
+ECHA_EXTRAS_VER     = 2
 
 _CAT_RE   = re.compile(r'^(?P<base>.+?)\s+(?P<cat>\d[A-C]?)\.?$')
 _ROUTE_RE = re.compile(r'^(.*?)\s*(\([^)]*\))?\s*$')
@@ -461,11 +464,12 @@ async def _fetch_echa_cl_direct(cas: str, client: httpx.AsyncClient) -> dict | N
         async def _detail(g):
             async with sem:
                 d = await _get(f"/api-cnl-inventory/industry/classification/{g['classificationId']}")
-                return float(g.get('substanceNotificationPercentage') or 0), d.get('items', [])
+                return g['classificationId'], float(g.get('substanceNotificationPercentage') or 0), d.get('items', [])
 
         family_share: dict = {}
         variant_share: dict = {}
-        for pct, items in await asyncio.gather(*[_detail(g) for g in groups]):
+        group_pairs: dict = {}    # classificationId → {(ana sınıf, H kodu)} — M/ATE için ilgili grup seçimi
+        for gid, pct, items in await asyncio.gather(*[_detail(g) for g in groups]):
             seen_fam, seen_var = set(), set()
             for it in items:
                 codes = tuple(h['hazardStatementCode'].strip() for h in it.get('hazardStatements', [])
@@ -473,6 +477,7 @@ async def _fetch_echa_cl_direct(cas: str, client: httpx.AsyncClient) -> dict | N
                 if not codes:
                     continue
                 family, cat, main = _split_hazard_class(it.get('hazardClassAndCategoryCode', ''))
+                group_pairs.setdefault(gid, set()).update((main, c.upper()) for c in codes)
                 if family == 'STOT SE' and cat == '3':
                     family = f'{family} {codes[0]}'
                 if family not in seen_fam:
@@ -506,7 +511,8 @@ async def _fetch_echa_cl_direct(cas: str, client: httpx.AsyncClient) -> dict | N
         # M faktörü ve ATE — bildirimlerden (yalnız Ek-6/Annex VI dışı maddeler bu yola gelir)
         m_factors, ate = {}, {}
         try:
-            m_factors, ate = await _fetch_echa_m_ate(groups, up, _get, sem)
+            m_factors, ate = await _fetch_echa_m_ate(groups, up, _get, sem, group_pairs,
+                                                     dict(zip((h.upper() for h in h_codes), hazard_classes)))
         except Exception as ex:
             print(f'[ECHA CHEM] {cas}: M/ATE alınamadı ({type(ex).__name__}: {ex})')
 
@@ -523,7 +529,7 @@ async def _fetch_echa_cl_direct(cas: str, client: httpx.AsyncClient) -> dict | N
             'hazard_classes': hazard_classes,
             'm_factors'     : m_factors,
             'ate'           : ate,
-            'echa_extras'   : 1,          # M/ATE sorgulandı (eski arşiv kayıtları yeniden çekilir)
+            'echa_extras'   : ECHA_EXTRAS_VER,   # M/ATE yöntem sürümü (eski kayıtlar yeniden çekilir)
             'notif_count'   : len(groups),
         }
 
@@ -534,7 +540,7 @@ async def _fetch_echa_cl_direct(cas: str, client: httpx.AsyncClient) -> dict | N
 
 # ── Bildirimlerden M faktörü ve ATE ────────────────────────────────────────────
 # ECHA CHEM C&L: /industry/m-factors/{id}, /industry/acute-toxicity-estimates/{id}
-_CL_EXTRA_GROUPS = 5   # en yüksek paylı bildirim grupları (sorgu sayısını sınırlar)
+_CL_EXTRA_GROUPS = 8   # ilgili tehlikeyi bildiren en yüksek paylı gruplar (sorgu sayısını sınırlar)
 
 # Seçilen kategoriye uyan ATE aralıkları (SEA Ek-1 Tablo 3.1.1) — (alt, üst]
 _ATE_RANGE = {
@@ -563,32 +569,58 @@ def _ate_route(route_text: str, unit: str) -> str | None:
     return None
 
 
-async def _fetch_echa_m_ate(groups: list, h_up: set, _get, sem) -> tuple:
+async def _fetch_echa_m_ate(groups: list, h_up: set, _get, sem, group_pairs: dict | None = None,
+                            chosen: dict | None = None) -> tuple:
     """Seçilen sınıflandırmaya göre M faktörü (H400/H410 varsa) ve ATE (akut toksisite varsa).
-    M: bildirim ağırlığı en yüksek değer; 2 puandan yakınlar eşit → yüksek M (ihtiyatlı).
-    ATE: sayısal bildirimlerde ağırlığı en yüksek değer, yalnız seçilen kategorinin aralığındaysa."""
-    top = sorted(groups, key=lambda g: -float(g.get('substanceNotificationPercentage') or 0))[:_CL_EXTRA_GROUPS]
+
+    Yalnız ilgili tehlikeyi bildiren gruplar sayılır (M: H400/H410; ATE: seçilen kategori ve yol).
+    M: M yazmayan bildirimler M=1 sayılır (Akut/Kronik 1 için SEA Ek-1 4.1.3.5.5.5 Tablo 4.1.3'ün en düşük M'si; M>1
+       yalnız daha yüksek toksisitede verilir). Önceden yalnız M yazanlar
+       sayılıyordu; azınlıktaki yüksek M seçilebiliyordu. Ağırlığı en yüksek değer; 2 puandan yakınlar → yüksek M.
+    ATE: yalnız sayısal değer bildirenler arasında (seçilen kategorinin aralığında) ağırlığı en yüksek değer; yakınlar
+       → düşük ATE (ihtiyatlı). ATE bir deney verisidir (SEA Ek-1 3.1.3.6: veri varsa kullanılır); bildirimde
+       yazılmaması dönüşüm değerinin seçildiği anlamına gelmez — değer yoksa hesap Tablo 3.1.2 dönüşüm değerini kullanır."""
+    group_pairs, chosen = group_pairs or {}, chosen or {}
     need_m = bool(h_up & {'H400', 'H410'})
-    need_ate = bool(h_up & {'H300', 'H301', 'H302', 'H310', 'H311', 'H312', 'H330', 'H331', 'H332'})
-    if not (need_m or need_ate):
+    ate_codes = {'oral': ('H300', 'H301', 'H302'), 'dermal': ('H310', 'H311', 'H312'),
+                 'inhal': ('H330', 'H331', 'H332')}
+    # yol → (seçilen H kodu, ana sınıf "Acute Tox. N")
+    ate_need = {r: (c, chosen.get(c, '')) for r, cs in ate_codes.items() for c in cs if c in h_up}
+    if not (need_m or ate_need):
         return {}, {}
+
+    def _has(gid, code, main=''):
+        return any(c == code and (not main or m == main) for m, c in group_pairs.get(gid, ()))
+
+    def _relevant(g):
+        gid = g['classificationId']
+        if not group_pairs:      # eski çağrı biçimi: grup ayrıntısı yok → tüm gruplar
+            return True
+        return (need_m and (_has(gid, 'H400') or _has(gid, 'H410'))) or                any(_has(gid, c, m) for c, m in ate_need.values())
+
+    top = sorted([g for g in groups if _relevant(g)],
+                 key=lambda g: -float(g.get('substanceNotificationPercentage') or 0))[:_CL_EXTRA_GROUPS]
 
     async def _one(g):
         async with sem:
             cid = g['classificationId']
             m = (await _get(f'/api-cnl-inventory/industry/m-factors/{cid}')).get('items', []) if need_m else []
-            a = (await _get(f'/api-cnl-inventory/industry/acute-toxicity-estimates/{cid}')).get('items', []) if need_ate else []
-            return float(g.get('substanceNotificationPercentage') or 0), m, a
+            a = (await _get(f'/api-cnl-inventory/industry/acute-toxicity-estimates/{cid}')).get('items', [])                 if ate_need else []
+            return cid, float(g.get('substanceNotificationPercentage') or 0), m, a
 
     m_w = {'acute': {}, 'chronic': {}}
-    ate_w: dict = {}
-    for gpct, m_items, a_items in await asyncio.gather(*[_one(g) for g in top]):
-        for it in m_items:
-            w = gpct * float(it.get('percentage') or 0) / 100.0
-            for k, key in (('acute', 'mfactorAcute'), ('chronic', 'mfactorChronic')):
-                v = it.get(key)
+    ate_w: dict = {}            # alt yol → {değer: ağırlık}
+    for cid, gpct, m_items, a_items in await asyncio.gather(*[_one(g) for g in top]):
+        for k, key, code in (('acute', 'mfactorAcute', 'H400'), ('chronic', 'mfactorChronic', 'H410')):
+            if code not in h_up or (group_pairs and not _has(cid, code)):
+                continue
+            given = 0.0
+            for it in m_items:
+                v, p = it.get(key), float(it.get('percentage') or 0)
                 if v:
-                    m_w[k][int(v)] = m_w[k].get(int(v), 0.0) + w
+                    m_w[k][int(v)] = m_w[k].get(int(v), 0.0) + gpct * p / 100.0
+                    given += p
+            m_w[k][1] = m_w[k].get(1, 0.0) + gpct * max(0.0, 100.0 - given) / 100.0
         for it in a_items:
             route_text = (it.get('routeExposure') or {}).get('routeOfExposure', '')
             for est in it.get('acuteToxicities') or []:
@@ -596,9 +628,11 @@ async def _fetch_echa_m_ate(groups: list, h_up: set, _get, sem) -> tuple:
                 route = _ate_route(route_text, est.get('unit', ''))
                 if val is None or not route:
                     continue
-                w = gpct * float(est.get('percentage') or 0) / 100.0
+                fam = 'inhal' if route.startswith('inhal') else route
+                if group_pairs and fam in ate_need and not _has(cid, *ate_need[fam]):
+                    continue     # bu grup o yolda seçilen kategoriyi bildirmemiş
                 ate_w.setdefault(route, {})
-                ate_w[route][float(val)] = ate_w[route].get(float(val), 0.0) + w
+                ate_w[route][float(val)] = ate_w[route].get(float(val), 0.0) +                     gpct * float(est.get('percentage') or 0) / 100.0
 
     m_factors = {}
     for k, need_h in (('acute', 'H400'), ('chronic', 'H410')):

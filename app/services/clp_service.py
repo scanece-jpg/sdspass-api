@@ -71,13 +71,15 @@ def normalize_ph_display(ph_raw) -> str:
 # içindeki GCL tablosuna da AYNI değişiklik uygulanmalıdır.
 CLP_CUTOFFS_DICT = {
     # 3.1 Akut Toksisite — ate_engine.py (ATE yöntemi, CLP §3.1.3.6)
-    # 3.2 Cilt — CLP Tablo 3.2.3 bireysel GCL
+    # 3.2 Cilt — SEA Ek-1 Tablo 3.2.3 (toplama yöntemi) bireysel GCL
     # H314 için tek bileşen eşiği = %5 (toplamsal kural da %5'i kullanır)
     # %1-5 arası SC1 → 10×[SC1]+[SI2] ≥ %10 formülüyle H315 yakalanır
-    "Skin Corr. 1":  {"h":"H314","cutoff":1.0, "signal":"Danger"},
-    "Skin Corr. 1A": {"h":"H314","cutoff":1.0, "signal":"Danger"},
-    "Skin Corr. 1B": {"h":"H314","cutoff":1.0, "signal":"Danger"},
-    "Skin Corr. 1C": {"h":"H314","cutoff":1.0, "signal":"Danger"},
+    # Not: %1 eşiği Tablo 3.2.4'tür — yalnız toplama yöntemi uygulanamadığında (additivity_na=True,
+    # KDU kararı; SEA Ek-1 3.2.3.3.4). Önceki %1 varsayılanı (6a4daed0) Tablo 3.2.3 ile çelişiyordu.
+    "Skin Corr. 1":  {"h":"H314","cutoff":5.0, "signal":"Danger"},
+    "Skin Corr. 1A": {"h":"H314","cutoff":5.0, "signal":"Danger"},
+    "Skin Corr. 1B": {"h":"H314","cutoff":5.0, "signal":"Danger"},
+    "Skin Corr. 1C": {"h":"H314","cutoff":5.0, "signal":"Danger"},
     "Skin Irrit. 2": {"h":"H315","cutoff":10.0,"signal":"Warning"},
     # 3.3 Göz — CLP Tablo 3.3.3 bireysel GCL
     # H318 için tek bileşen eşiği = %3 (toplamsal kural da %3'ü kullanır)
@@ -321,12 +323,18 @@ def _get_scl_entry_for_conc(scl_list: list, h_code4: str, conc: float) -> dict |
     return max(matches, key=lambda s: float(s.get("c_min", 0)))
 
 
+# SEA Ek-1 Tablo 3.2.4 / 3.3.4 — toplama yöntemi uygulanamadığında bileşen başına eşikler
+# (3.2.3.3.4 / 3.3.3.3.4: asit/baz, inorganik tuz, aldehit, fenol, yüzey aktif madde vb. — KDU kararı)
+_NA_CUTOFFS = {'H314': 1.0, 'H315': 3.0, 'H318': 1.0, 'H319': 3.0}
+
+
 def classify_mixture_clp(components: list, mixture_ph: float = None,
-                         mixture_form: str = '') -> dict:
+                         mixture_form: str = '', additivity_na: bool = False) -> dict:
     """
     CLP Annex I karışım sınıflandırması.
     Giriş: [{cas_no, name, concentration, hazards:[{h_class, h_code}]}]
            mixture_ph:   ölçülen karışım pH değeri (opsiyonel)
+           additivity_na: KDU kararı — cilt/göz için toplama yöntemi uygulanamaz (Tablo 3.2.4 / 3.3.4)
            mixture_form: ürün fiziksel formu ('liquid','sıvı','solid' vb.)
                          Not B maddeleri için sıvı formda sulu SCL verisi kullanılır.
     Çıkış: {h_codes, signal_word, passed:[{h_class,h_code,conc,reason}], warnings}
@@ -445,6 +453,9 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
 
             cutoff = rule["cutoff"]
             h = rule["h"]
+            _na_used = additivity_na and h in _NA_CUTOFFS
+            if _na_used:
+                cutoff = _NA_CUTOFFS[h]
 
             # STOT SE 3 etki ayrımı — CLP §3.8.3.4.5:
             # H335 (solunum tahrişi) ve H336 (narkotik) aynı kategoride farklı etkilerdir.
@@ -639,6 +650,8 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
                 else:
                     _cutoff_str = f'%{conc:.1f} ≥ kesme %{cutoff}'
                 _scl_used = bool(_scl_matched_mins)
+                if _na_used and not _scl_used:
+                    _cutoff_str += (' (SEA Ek-1 Tablo 3.2.4' if h in ('H314', 'H315') else ' (SEA Ek-1 Tablo 3.3.4') +                                    ' — toplama yöntemi uygulanamaz, KDU kararı)'
                 _cutoff_display = float(scl_entry_conc["c_min"]) if scl_entry_conc and scl_entry_conc.get("c_min") is not None else cutoff
                 passed.append({
                     "h_class":       effective_hclass,
@@ -682,7 +695,7 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
                     _ph_basis = _ph_display
                 ph_reason = (
                     f"Karışım pH = {_ph_basis} ({direction}) → "
-                    f"SEA Tablo 3.2.3 notu: pH uç değeri → doğrudan sınıflandırma"
+                    f"SEA Ek-1 3.2.3.1.2 / 3.3.3.1.2: pH uç değeri → doğrudan sınıflandırma"
                 )
                 if "H314" not in seen_h:
                     seen_h.add("H314")

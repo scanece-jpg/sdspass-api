@@ -196,14 +196,21 @@ GCL: dict[str, list[tuple]] = {
                        (10.,'Acute Tox. 4','H302/H312/H332')],
     'acute tox. 4':   [(1.0,'Acute Tox. 4','H302/H312/H332')],
 
-    # Deri — çapraz sınıf: Skin Corr. bileşeni aynı zamanda Eye Dam. tetikler (CLP Tablo 3.2.3)
-    'skin corr. 1a':  [(1.0,'Skin Corr. 1B','H314'),
+    # Deri — çapraz sınıf (SEA Ek-1 Tablo 3.2.3 + 3.3.3, toplama yöntemi):
+    # %1–5 cilt tahrişi (H315), ≥%3 ciddi göz hasarı (H318), ≥%5 cilt aşındırıcı (H314).
+    # (Tablo 3.2.4'ün %1 → H314 eşiği yalnız KDU "toplama yöntemi uygulanamaz" derse geçerlidir.)
+    'skin corr. 1a':  [(1.0,'Skin Irrit. 2','H315'),
                        (3.0,'Eye Dam. 1',   'H318'),
                        (5.0,'Skin Corr. 1A','H314')],
-    'skin corr. 1b':  [(1.0,'Skin Corr. 1B','H314'),
-                       (3.0,'Eye Dam. 1',   'H318')],
-    'skin corr. 1':   [(1.0,'Skin Corr. 1B','H314'),
-                       (5.0,'Skin Corr. 1A','H314')],
+    'skin corr. 1b':  [(1.0,'Skin Irrit. 2','H315'),
+                       (3.0,'Eye Dam. 1',   'H318'),
+                       (5.0,'Skin Corr. 1B','H314')],
+    'skin corr. 1c':  [(1.0,'Skin Irrit. 2','H315'),
+                       (3.0,'Eye Dam. 1',   'H318'),
+                       (5.0,'Skin Corr. 1C','H314')],
+    'skin corr. 1':   [(1.0,'Skin Irrit. 2','H315'),
+                       (3.0,'Eye Dam. 1',   'H318'),
+                       (5.0,'Skin Corr. 1', 'H314')],
 
     # STOT SE — geçiş kuralı: SE1 bileşen düşük konsantrasyonda SE2 tetikler (CLP Tablo 3.8.3)
     'stot se 1':  [(1.0,'STOT SE 2','H371'),

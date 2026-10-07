@@ -977,9 +977,12 @@ def _is_stale(entry: dict) -> bool:
     ts = entry.get('fetched_at')
     if not ts:
         return True
-    # M faktörü/ATE sorgusu eklenmeden önce kaydedilmiş ECHA kayıtları yeniden çekilir
-    if entry.get('atp') == 'ECHA C&L API' and not entry.get('echa_extras'):
-        return True
+    # M faktörü/ATE yöntemi değişmeden önce kaydedilmiş ECHA kayıtları yeniden çekilir
+    # (arşiv kaydında 'atp', ham önbellek kaydında yalnız 'echa_extras' bulunur)
+    if entry.get('atp') == 'ECHA C&L API' or 'echa_extras' in entry:
+        from app.services.echa_service import ECHA_EXTRAS_VER
+        if (entry.get('echa_extras') or 0) < ECHA_EXTRAS_VER:
+            return True
     try:
         fetched = datetime.fromisoformat(ts)
     except (TypeError, ValueError):

@@ -450,7 +450,10 @@ def c_hesap(ctx):
         return 'kdu', 'Bölüm 3 okunamadı.'
     comps, unknown = _comps3(ctx)
     try:
-        res = classify_mixture_clp(comps, mixture_form='liquid' if 'form:sivi' in ctx['facts'] else '')
+        # GBF 2.1 gerekçesinde Tablo 3.2.4 / 3.3.4 (toplama yöntemi uygulanamaz) yazıyorsa aynı kural kullanılır
+        _na = bool(re.search(r'Tablo\s*3\.[23]\.4', ctx['secs'].get('2', '')))
+        res = classify_mixture_clp(comps, mixture_form='liquid' if 'form:sivi' in ctx['facts'] else '',
+                                   additivity_na=_na)
     except Exception as e:
         return 'kdu', f'Yeniden hesap yapılamadı: {e}'
     calc = {p['h_code'][:4] for p in res.get('passed', []) if p.get('h_code')}

@@ -1,0 +1,365 @@
+{
+ "kaynak": {
+  "kok": "Kalıcı Organik Kirleticiler Hakkında Yönetmelik (RG 14.11.2018/30595; Değişik RG 25.03.2021/31434) Ek-1, Ek-2",
+  "ozon": "Ozon Tabakasını İncelten Maddelere İlişkin Yönetmelik (RG 07.04.2017/30031) Ek-5, Ek-8",
+  "bekra": "Büyük Endüstriyel Kazaların Önlenmesi ve Etkilerinin Azaltılması Hakkında Yönetmelik (RG 02.03.2019/30702) Ek-1"
+ },
+ "kok": {
+  "50-29-3": {
+   "ad": "DDT (1,1,1-triklor-2,2-bis (4-klorofenil) etan))",
+   "ek": "Ek-1"
+  },
+  "57-74-9": {
+   "ad": "Klordan",
+   "ek": "Ek-1"
+  },
+  "58-89-9": {
+   "ad": "Lindan dâhil Hekzaklorosiklohekzanlar",
+   "ek": "Ek-1"
+  },
+  "319-84-6": {
+   "ad": "Lindan dâhil Hekzaklorosiklohekzanlar",
+   "ek": "Ek-1"
+  },
+  "319-85-7": {
+   "ad": "Lindan dâhil Hekzaklorosiklohekzanlar",
+   "ek": "Ek-1"
+  },
+  "608-73-1": {
+   "ad": "Lindan dâhil Hekzaklorosiklohekzanlar",
+   "ek": "Ek-1"
+  },
+  "60-57-1": {
+   "ad": "Dieldrin",
+   "ek": "Ek-1"
+  },
+  "72-20-8": {
+   "ad": "Endrin",
+   "ek": "Ek-1"
+  },
+  "76-44-8": {
+   "ad": "Heptaklor",
+   "ek": "Ek-1"
+  },
+  "115-29-7": {
+   "ad": "Endosulfan",
+   "ek": "Ek-1"
+  },
+  "959-98-8": {
+   "ad": "Endosulfan",
+   "ek": "Ek-1"
+  },
+  "33213-65-9": {
+   "ad": "Endosulfan",
+   "ek": "Ek-1"
+  },
+  "118-74-1": {
+   "ad": "Hekzaklorobenzen",
+   "ek": "Ek-1"
+  },
+  "143-50-0": {
+   "ad": "Klordekon",
+   "ek": "Ek-1"
+  },
+  "309-00-2": {
+   "ad": "Aldrin",
+   "ek": "Ek-1"
+  },
+  "608-93-5": {
+   "ad": "Pentaklorobenzen",
+   "ek": "Ek-1"
+  },
+  "2385-85-5": {
+   "ad": "Mireks",
+   "ek": "Ek-1"
+  },
+  "8001-35-2": {
+   "ad": "Toksafen",
+   "ek": "Ek-1"
+  },
+  "36355-01-8": {
+   "ad": "Hekzabromobifenil",
+   "ek": "Ek-1"
+  },
+  "115-32-2": {
+   "ad": "Dikofol",
+   "ek": "Ek-1"
+  },
+  "87-86-5": {
+   "ad": "Pentaklorofenol, tuzları ve esterleri",
+   "ek": "Ek-1"
+  },
+  "40088-47-9": {
+   "ad": "Tetrabromodifenil eter C12H6Br4O",
+   "ek": "Ek-2"
+  },
+  "32534-81-9": {
+   "ad": "Pentabromodifenil eter C12H5Br5O",
+   "ek": "Ek-2"
+  },
+  "36483-60-0": {
+   "ad": "Hekzabromodifenil eter C12H4Br6O",
+   "ek": "Ek-2"
+  },
+  "68928-80-3": {
+   "ad": "Heptabromodifenil eter C12H3Br7O",
+   "ek": "Ek-2"
+  },
+  "1163-19-5": {
+   "ad": "Bis(pentabromofenil) eter (dekabromodifenil eter; dekaBDE)",
+   "ek": "Ek-2"
+  },
+  "1763-23-1": {
+   "ad": "Perflorooktan sülfonik asit ve türevleri (PFOS) C8F17SO2X (X = OH, Metal tuzu, (O-M +), halid, amid ve polimerler dâhil ",
+   "ek": "Ek-2"
+  },
+  "2795-39-3": {
+   "ad": "Perflorooktan sülfonik asit ve türevleri (PFOS) C8F17SO2X (X = OH, Metal tuzu, (O-M +), halid, amid ve polimerler dâhil ",
+   "ek": "Ek-2"
+  },
+  "29457-72-5": {
+   "ad": "Perflorooktan sülfonik asit ve türevleri (PFOS) C8F17SO2X (X = OH, Metal tuzu, (O-M +), halid, amid ve polimerler dâhil ",
+   "ek": "Ek-2"
+  },
+  "29081-56-9": {
+   "ad": "Perflorooktan sülfonik asit ve türevleri (PFOS) C8F17SO2X (X = OH, Metal tuzu, (O-M +), halid, amid ve polimerler dâhil ",
+   "ek": "Ek-2"
+  },
+  "70225-14-8": {
+   "ad": "Perflorooktan sülfonik asit ve türevleri (PFOS) C8F17SO2X (X = OH, Metal tuzu, (O-M +), halid, amid ve polimerler dâhil ",
+   "ek": "Ek-2"
+  },
+  "56773-42-3": {
+   "ad": "Perflorooktan sülfonik asit ve türevleri (PFOS) C8F17SO2X (X = OH, Metal tuzu, (O-M +), halid, amid ve polimerler dâhil ",
+   "ek": "Ek-2"
+  },
+  "251099-16-8": {
+   "ad": "Perflorooktan sülfonik asit ve türevleri (PFOS) C8F17SO2X (X = OH, Metal tuzu, (O-M +), halid, amid ve polimerler dâhil ",
+   "ek": "Ek-2"
+  },
+  "4151-50-2": {
+   "ad": "Perflorooktan sülfonik asit ve türevleri (PFOS) C8F17SO2X (X = OH, Metal tuzu, (O-M +), halid, amid ve polimerler dâhil ",
+   "ek": "Ek-2"
+  },
+  "31506-32-8": {
+   "ad": "Perflorooktan sülfonik asit ve türevleri (PFOS) C8F17SO2X (X = OH, Metal tuzu, (O-M +), halid, amid ve polimerler dâhil ",
+   "ek": "Ek-2"
+  },
+  "1691-99-2": {
+   "ad": "Perflorooktan sülfonik asit ve türevleri (PFOS) C8F17SO2X (X = OH, Metal tuzu, (O-M +), halid, amid ve polimerler dâhil ",
+   "ek": "Ek-2"
+  },
+  "24448-09-7": {
+   "ad": "Perflorooktan sülfonik asit ve türevleri (PFOS) C8F17SO2X (X = OH, Metal tuzu, (O-M +), halid, amid ve polimerler dâhil ",
+   "ek": "Ek-2"
+  },
+  "307-35-7": {
+   "ad": "Perflorooktan sülfonik asit ve türevleri (PFOS) C8F17SO2X (X = OH, Metal tuzu, (O-M +), halid, amid ve polimerler dâhil ",
+   "ek": "Ek-2"
+  },
+  "1336-36-3": {
+   "ad": "Poliklorlu Bifeniller (PCB)",
+   "ek": "Ek-2"
+  },
+  "25637-99-4": {
+   "ad": "Hekzabromosiklododekan (HBCDD) “Hekzabromosiklododekan” hekzabromosiklododekan, 1,2,5,6,9,10-hekzabromosiklododekan ve a",
+   "ek": "Ek-2"
+  },
+  "3194-55-6": {
+   "ad": "Hekzabromosiklododekan (HBCDD) “Hekzabromosiklododekan” hekzabromosiklododekan, 1,2,5,6,9,10-hekzabromosiklododekan ve a",
+   "ek": "Ek-2"
+  },
+  "134237-50-6": {
+   "ad": "Hekzabromosiklododekan (HBCDD) “Hekzabromosiklododekan” hekzabromosiklododekan, 1,2,5,6,9,10-hekzabromosiklododekan ve a",
+   "ek": "Ek-2"
+  },
+  "134237-51-7": {
+   "ad": "Hekzabromosiklododekan (HBCDD) “Hekzabromosiklododekan” hekzabromosiklododekan, 1,2,5,6,9,10-hekzabromosiklododekan ve a",
+   "ek": "Ek-2"
+  },
+  "134237-52-8": {
+   "ad": "Hekzabromosiklododekan (HBCDD) “Hekzabromosiklododekan” hekzabromosiklododekan, 1,2,5,6,9,10-hekzabromosiklododekan ve a",
+   "ek": "Ek-2"
+  },
+  "87-68-3": {
+   "ad": "Hekzaklorobutadin",
+   "ek": "Ek-2"
+  },
+  "70776-03-3": {
+   "ad": "Poliklorlu naftalinler (Poliklorlu naftalinler, bir veya daha fazla hidrojen atomunun klor atomu ile değiştirilmiş olduğ",
+   "ek": "Ek-2"
+  },
+  "85535-84-8": {
+   "ad": "Alkanlar C10-C13, kloro (kısa zincirli klorlu parafinler) (KZKP)",
+   "ek": "Ek-2"
+  },
+  "335-67-1": {
+   "ad": "Perflorooktanoikasit (PFOA), tuzları ve PFOA ile ilişkili bileşikler Perflorooktanoikasit (PFOA), tuzları ve PFOA ile il",
+   "ek": "Ek-2"
+  }
+ },
+ "ozon": {
+  "75-45-6": {
+   "ad": "HCFC-22 Klorodiflorometan",
+   "ek": "Ek-5 Grup I"
+  },
+  "75-43-4": {
+   "ad": "HCFC-21 Flordiklormetan",
+   "ek": "Ek-5 Grup IX"
+  },
+  "593-70-4": {
+   "ad": "HCFC-31 Klorflormetan",
+   "ek": "Ek-5 Grup IX"
+  },
+  "306-83-2": {
+   "ad": "HCFC-123 Diklortrifloretan",
+   "ek": "Ek-5 Grup IX"
+  },
+  "2837-89-0": {
+   "ad": "HCFC-124 Klortetrafloretan",
+   "ek": "Ek-5 Grup IX"
+  },
+  "1717-00-6": {
+   "ad": "HCFC-141b 1,1-Dikloro-1-floretan",
+   "ek": "Ek-5 Grup IX"
+  },
+  "75-68-3": {
+   "ad": "HCFC-142b 1-Kloro-1,1-difloroetan",
+   "ek": "Ek-5 Grup IX"
+  },
+  "422-56-0": {
+   "ad": "HCFC-225ca 3,3-Diklor-1,1,1,2,2-pentaflorpropan",
+   "ek": "Ek-5 Grup IX"
+  },
+  "507-55-1": {
+   "ad": "HCFC-225cb 1,3-Diklor-1,1,2,2,3-pentaflorpropan",
+   "ek": "Ek-5 Grup IX"
+  },
+  "75-69-4": {
+   "ad": "CFC-11 Triklorflorometan",
+   "ek": "Ek-5 Grup II"
+  },
+  "75-71-8": {
+   "ad": "CFC-12 Diklordiflormetan",
+   "ek": "Ek-5 Grup II"
+  },
+  "76-13-1": {
+   "ad": "CFC-113 Triklortrifloretan",
+   "ek": "Ek-5 Grup II"
+  },
+  "76-14-2": {
+   "ad": "CFC-114 Diklortetrafloretan",
+   "ek": "Ek-5 Grup II"
+  },
+  "76-15-3": {
+   "ad": "CFC-115 Klorpentafloretan",
+   "ek": "Ek-5 Grup II"
+  },
+  "75-72-9": {
+   "ad": "CFC-13 Klortriflorometan",
+   "ek": "Ek-5 Grup III"
+  },
+  "354-56-3": {
+   "ad": "CFC-111 Pentaklorofloroetan",
+   "ek": "Ek-5 Grup III"
+  },
+  "76-12-0": {
+   "ad": "CFC-112 Tetraklorodifloroetan",
+   "ek": "Ek-5 Grup III"
+  },
+  "76-11-9": {
+   "ad": "CFC-112a Tetraklorodifloroetan",
+   "ek": "Ek-5 Grup III"
+  },
+  "353-59-3": {
+   "ad": "halon-1211 Bromoklorodiflorometan",
+   "ek": "Ek-5 Grup IV"
+  },
+  "75-63-8": {
+   "ad": "halon-1301 Bromotriflorometan",
+   "ek": "Ek-5 Grup IV"
+  },
+  "124-73-2": {
+   "ad": "halon-2402 Dibromotetrafloroetan",
+   "ek": "Ek-5 Grup IV"
+  },
+  "56-23-5": {
+   "ad": "Karbontetraklorür",
+   "ek": "Ek-5 Grup V"
+  },
+  "71-55-6": {
+   "ad": "1,1,1-trikloretan (metil kloroform)",
+   "ek": "Ek-5 Grup VI"
+  },
+  "74-83-9": {
+   "ad": "Metil bromür (bromometan)",
+   "ek": "Ek-5 Grup VII"
+  },
+  "1511-62-2": {
+   "ad": "HBFC-22 B1 Bromodiflorometan",
+   "ek": "Ek-5 Grup VIII"
+  },
+  "74-97-5": {
+   "ad": "Bromoklorometan",
+   "ek": "Ek-5 Grup X"
+  },
+  "75-61-6": {
+   "ad": "Dibromodiflorometan (halon-1202)",
+   "ek": "Ek-8"
+  },
+  "106-94-5": {
+   "ad": "1-Bromopropan (n-propil bromür)",
+   "ek": "Ek-8"
+  },
+  "74-96-4": {
+   "ad": "Bromoetan (etil bromür)",
+   "ek": "Ek-8"
+  },
+  "2314-97-8": {
+   "ad": "Trifloroiodometan",
+   "ek": "Ek-8"
+  },
+  "74-87-3": {
+   "ad": "Klorometan (metil klorür)",
+   "ek": "Ek-8"
+  }
+ },
+ "bekra2": {
+  "1303-28-2": "Arsenik pentaoksit, arsenik (V) asit ve/veya tuzları",
+  "1327-53-3": "Arsenik trioksit, arsenik (III) asit ve/veya tuzları",
+  "7726-95-6": "Brom",
+  "7782-50-5": "Klor",
+  "151-56-4": "Etilenimin",
+  "7782-41-4": "Flor",
+  "50-00-0": "Formaldehit (Konsantrasyon ≥ % 90)",
+  "1333-74-0": "Hidrojen",
+  "7647-01-0": "Hidrojen klorür (Sıvılaştırılmış gaz)",
+  "74-86-2": "Asetilen",
+  "75-21-8": "Etilen oksit",
+  "75-56-9": "Propilen oksit",
+  "67-56-1": "Metanol",
+  "101-14-4": "4,4-metilenbis(2-kloranilin) ve/veya tuzları, toz halinde",
+  "624-83-9": "Metil izosiyanat",
+  "7782-44-7": "Oksijen",
+  "584-84-9": "2,4-Toluen diizosiyanat 2,6-Toluen diizosiyanat",
+  "91-08-7": "2,4-Toluen diizosiyanat 2,6-Toluen diizosiyanat",
+  "75-44-5": "Karbonil diklorür (Fosgen)",
+  "7784-42-1": "Arsenik trihidrür (Arsin)",
+  "7803-51-2": "Fosfor trihidrür (Fosfin)",
+  "10545-99-0": "Sülfür (kükürt) diklorür",
+  "7446-11-9": "Sülfür (kükürt) trioksit",
+  "7664-41-7": "Susuz amonyak",
+  "7637-07-2": "Bor triflorür",
+  "7783-06-4": "Hidrojen sülfür",
+  "110-89-4": "Piperidin",
+  "3030-47-5": "Bis(2-dimetilaminoetil) (metil)amin",
+  "5397-31-9": "3-(2-Etilheksiloksi)propilamin",
+  "107-10-8": "Propilamin (Bakınız Not 21)",
+  "1663-39-4": "Ter-bütil akrilat (Bakınız Not 21)",
+  "16529-56-9": "2-Metil-3-bütennitril (Bakınız Not 21)",
+  "533-74-4": "Tetrahidro-3,5-dimetil-1,3,5,-tiadiazin-2-tion (Dazomet) (Bakınız Not 21)",
+  "96-33-3": "Metil akrilat (Bakınız Not 21)",
+  "108-99-6": "3-Metilpiridin (Bakınız Not 21)",
+  "109-70-6": "1-Brom-3-kloropropan (Bakınız not 21)"
+ }
+}

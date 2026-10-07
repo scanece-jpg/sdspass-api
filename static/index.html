@@ -557,6 +557,8 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
   <div class="hdr">
     <img src="logo.png" alt="SDSPass" class="hdr-logo-img">
     <div style="flex:1"></div>
+    <button type="button" onclick="openAuditModal()" title="GBF Denetimi — KKDİK Ek-2"
+      style="font-size:11px;padding:3px 10px;border-radius:6px;border:1px solid var(--border2);background:var(--bg2);color:var(--text2);cursor:pointer;margin-right:6px">🔍 Denetim</button>
     <span class="version-badge">v2.0</span>
     <span id="atp-badge" title="CLP Annex VI veri seti yükleniyor..."
           style="font-size:9px;background:rgba(52,211,153,.1);color:var(--safe);padding:2px 8px;border-radius:10px;font-family:var(--mono);cursor:default;display:none;border:1px solid rgba(52,211,153,.2)"></span>
@@ -2190,6 +2192,82 @@ function onCompType(id) {
 function toggleAteFields(id) {} // artık modal kullanılıyor
 
 let _ateCurrentId = null;
+
+// ── GBF Denetimi ────────────────────────────────────────────────────────────────
+function _esc(s) { return String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+function openAuditModal() {
+  const has = !!window._lastPdfB64;
+  const last = document.getElementById('auditSrcLast');
+  last.disabled = !has;
+  document.getElementById('auditLastName').textContent = has ? `(${window._lastPdfName || 'GBF.pdf'})` : '(henüz PDF oluşturulmadı)';
+  (has ? last : document.getElementById('auditSrcFile')).checked = true;
+  document.getElementById('audit-modal').style.display = 'flex';
+}
+function closeAuditModal() { document.getElementById('audit-modal').style.display = 'none'; }
+
+async function runAudit() {
+  const out = document.getElementById('auditResult');
+  const btn = document.getElementById('auditRunBtn');
+  let b64 = null, name = 'GBF.pdf';
+  if (document.getElementById('auditSrcLast').checked && window._lastPdfB64) {
+    b64 = window._lastPdfB64; name = window._lastPdfName || name;
+  } else {
+    const f = document.getElementById('auditFile').files[0];
+    if (!f) { out.innerHTML = '<div class="warn-box">⚠ Denetlenecek PDF dosyasını seçin.</div>'; return; }
+    name = f.name;
+    b64 = await new Promise((res, rej) => { const r = new FileReader(); r.onload = () => res(r.result); r.onerror = rej; r.readAsDataURL(f); });
+  }
+  btn.disabled = true; btn.textContent = 'Denetleniyor…';
+  out.innerHTML = '<div style="color:var(--text3)">Denetleniyor… (yapay zekâ kontrolü açıksa 1–2 dakika sürebilir)</div>';
+  try {
+    const res = await fetch(`/api/v1/audit`, {
+      method: 'POST', headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pdf_base64: b64, dosya_adi: name, jev_onay: document.getElementById('auditJevConsent').checked }),
+    });
+    const j = await res.json();
+    if (!res.ok) throw new Error(j.detail || `HTTP ${res.status}`);
+    out.innerHTML = _renderAuditReport(j);
+  } catch (e) {
+    out.innerHTML = `<div class="warn-box">⚠ Denetim yapılamadı: ${_esc(e.message)}</div>`;
+  } finally {
+    btn.disabled = false; btn.textContent = 'Denetle';
+  }
+}
+
+function _renderAuditReport(j) {
+  const o = j.ozet || {};
+  const groups = [
+    ['eksik', '❌ Eksik', '#fc8181', true], ['kdu', '⚠ KDU baksın', '#f6ad55', true],
+    ['uygun', '✓ Uygun', 'var(--safe)', false], ['kontrol_yok', '— Kontrol edilmedi', 'var(--text3)', false],
+  ];
+  const onemLbl = { zorunlu: 'zorunlu', kosullu: 'koşullu', tavsiye: 'tavsiye' };
+  const yLbl = { kod: 'program', jev: 'yapay zekâ', gorsel: 'görsel', kdu: 'KDU' };
+  let h = `<div style="margin-bottom:10px"><b>${_esc(j.dosya)}</b> · ${j.sayfa} sayfa ·
+    <span style="color:#fc8181">${o.eksik || 0} eksik</span> (${o.zorunlu_eksik || 0} zorunlu) ·
+    <span style="color:#f6ad55">${o.kdu || 0} KDU baksın</span> ·
+    <span style="color:var(--safe)">${o.uygun || 0} uygun</span> · ${o.kontrol_yok || 0} kontrol edilmedi</div>`;
+  if (j.jev && !j.jev.calisti) h += `<div class="warn-box" style="margin-bottom:8px">ℹ ${_esc(j.jev.neden)}</div>`;
+  groups.forEach(([k, title, color, open]) => {
+    let rows = (j.sonuclar || []).filter(r => r.karar === k);
+    if (k === 'eksik') rows = rows.sort((a, b) => (a.onem === 'zorunlu' ? 0 : 1) - (b.onem === 'zorunlu' ? 0 : 1));
+    if (!rows.length) return;
+    h += `<details ${open ? 'open' : ''} style="margin:8px 0"><summary style="cursor:pointer;font-weight:700;color:${color}">${title} (${rows.length})</summary>
+      <table style="width:100%;border-collapse:collapse;margin-top:6px;font-size:11px">`;
+    rows.forEach(r => {
+      h += `<tr style="border-top:1px solid var(--border);vertical-align:top">
+        <td style="padding:5px 6px;white-space:nowrap;color:var(--text3)">${_esc(r.bolum === '0' ? 'Genel' : r.bolum === 'T' ? 'Tutarlılık' : r.bolum)}</td>
+        <td style="padding:5px 6px">${_esc(r.soru)}
+          <div style="font-size:10px;color:var(--text3);margin-top:2px">${_esc(r.aciklama || '')}</div></td>
+        <td style="padding:5px 6px;font-size:10px;color:var(--text3);white-space:nowrap">${_esc(r.dayanak)}<br>${onemLbl[r.onem] || ''} · ${yLbl[r.yontem] || ''}</td>
+      </tr>`;
+    });
+    h += `</table></details>`;
+  });
+  h += `<div style="margin-top:10px;font-size:10px;color:var(--text3)">Dayanak: ${_esc(j.dayanak)}. Rapor yardımcı bir kontroldür;
+    GBF'nin son değerlendirmesi ve onayı KDU'ya aittir.</div>`;
+  return h;
+}
 
 function openAteModal(id) {
   _ateCurrentId = id;
@@ -4578,6 +4656,41 @@ window.addEventListener('DOMContentLoaded', () => {
   </div>
 </div>
 
+<!-- ══ GBF DENETİMİ MODAL — KKDİK Ek-2 soru listesi (kod kontrolleri + Jev + KDU) ══════════ -->
+<div id="audit-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:1400;align-items:center;justify-content:center">
+  <div style="background:var(--bg2);border:1px solid var(--border2);border-radius:12px;width:min(820px,96vw);max-height:92vh;display:flex;flex-direction:column;box-shadow:0 24px 64px rgba(0,0,0,.7);overflow:hidden">
+    <div style="padding:14px 18px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between">
+      <span style="font-size:13px;font-weight:700;color:var(--text)">🔍 GBF Denetimi <span style="font-size:10px;color:var(--text3);font-weight:400">(KKDİK Ek-2 · SEA · Usul ve Esaslar)</span></span>
+      <button onclick="closeAuditModal()" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:18px;line-height:1">✕</button>
+    </div>
+    <div style="padding:14px 18px;border-bottom:1px solid var(--border);display:grid;gap:10px;font-size:12px;color:var(--text2)">
+      <div style="display:flex;gap:10px;flex-wrap:wrap;align-items:center">
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer">
+          <input type="radio" name="auditSrc" value="last" id="auditSrcLast"> Son oluşturulan GBF
+          <span id="auditLastName" style="font-size:10px;color:var(--text3)"></span>
+        </label>
+        <label style="display:flex;align-items:center;gap:6px;cursor:pointer">
+          <input type="radio" name="auditSrc" value="file" id="auditSrcFile" checked> PDF yükle
+        </label>
+        <input type="file" id="auditFile" accept="application/pdf" style="font-size:11px" onchange="document.getElementById('auditSrcFile').checked=true">
+      </div>
+      <label style="display:flex;align-items:flex-start;gap:8px;cursor:pointer;padding:8px 10px;background:rgba(255,170,0,.07);border-radius:6px;border:1px solid rgba(255,170,0,.2);line-height:1.5">
+        <input type="checkbox" id="auditJevConsent" style="margin-top:2px">
+        <span><b>Yapay zekâ kontrolüne onay (KVKK):</b> Metin anlamı gerektiren sorular için GBF metni üçüncü taraf bir
+        yapay zekâ servisine (TypeSafe Jev) gönderilir; ad, telefon ve e-posta gönderilmeden önce maskelenir.
+        Onay verilmezse yalnız kesin kural kontrolleri yapılır.</span>
+      </label>
+      <div style="display:flex;justify-content:flex-end">
+        <button onclick="runAudit()" id="auditRunBtn" style="padding:7px 18px;border-radius:6px;border:none;background:var(--accent);color:#fff;cursor:pointer;font-size:12px;font-weight:600">Denetle</button>
+      </div>
+    </div>
+    <div id="auditResult" style="padding:14px 18px;overflow:auto;font-size:12px;color:var(--text2)">
+      <div style="color:var(--text3)">Bir GBF seçip "Denetle"ye basın. Rapor, her maddeyi yönetmelik dayanağıyla
+      <b>eksik</b> / <b>KDU baksın</b> / <b>uygun</b> olarak gösterir.</div>
+    </div>
+  </div>
+</div>
+
 <!-- ══ ATE MODAL ══════════════════════════════════════════════════════════ -->
 <div id="ate-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.72);z-index:1400;align-items:center;justify-content:center">
   <div style="background:var(--bg2);border:1px solid var(--border2);border-radius:12px;width:min(440px,95vw);box-shadow:0 24px 64px rgba(0,0,0,.7);overflow:hidden">
@@ -5895,6 +6008,9 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
 
     // Temiz sds_data'yı sakla — denetim butonu kullanacak
     window._lastSdsJson = resJson.sds_data || null;
+    // Son oluşturulan GBF PDF'i — "GBF Denetimi" penceresi bunu denetleyebilir
+    window._lastPdfB64  = resJson.pdf || null;
+    window._lastPdfName = resJson.filename || `${productName.replace(/\s+/g,'_')}_SDS.pdf`;
     window._lastSdsXml  = resJson.sds_xml  || null;
 
     // Validator sonuçları (eski header mantığı yerine JSON'dan)

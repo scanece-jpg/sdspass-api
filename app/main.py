@@ -86,6 +86,8 @@ async def health():
 # ─── SDS DENETIM ENDPOINT ─────────────────────────────────────────────────────
 from app.services.review_endpoint import router as review_router
 app.include_router(review_router)
+from app.services.audit_endpoint import router as audit_router   # GBF denetimi (Ek-2 soru listesi)
+app.include_router(audit_router)
 
 # ─── SDS ASİSTAN ENDPOINT ─────────────────────────────────────────────────────
 from app.services.assistant_endpoint import router as assistant_router

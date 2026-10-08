@@ -151,7 +151,7 @@ from app.services.sds_reg_sections import (
 )
 from app.services.sds_sentence_service import (
     adapt_for_form, adapt_list_for_form,
-    generate_section3, generate_section, get_echa_range, generate_section_42
+    generate_section3, generate_section, generate_section_42
 )
 
 
@@ -839,6 +839,29 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     # Validator devre dışı
     _validation_issues = []
     disclosure = sds_data.get('disclosure_map', {})
+    # Bölüm 3 konsantrasyon metinleri (sds_pipeline.section3_display — KKDİK Ek-2 A 3.2)
+    _sec3_disp = sds_data.get('section3_display') or {}
+    _sec3_ranged = any(v.get('kind') != 'exact' for v in _sec3_disp.values())
+    # Bileşen adına göre de aynı metin (ATE ayrıntılarında CAS yoktur — kesin değer sızmasın)
+    _sec3_by_name = {}
+    # SEA Md.26 onaylı alternatif ad: gerçek ad/CAS hiçbir bölümde basılmaz
+    _hidden_names, _hidden_cas = {}, set()
+    for _c0 in components:
+        _cas0 = str(_c0.get('cas_no') or _c0.get('cas') or '').strip()
+        _d0 = _sec3_disp.get(_cas0)
+        _nms0 = [_c0.get('name'), _c0.get('name_tr')] + list(_c0.get('_orig_names') or [])
+        if _d0:
+            for _n0 in _nms0:
+                if _n0:
+                    _sec3_by_name[str(_n0).strip().lower()] = _d0
+        if _c0.get('disclosure') == 'hide':
+            _hidden_cas.add(_cas0)
+            for _n0 in _c0.get('_orig_names') or []:
+                _hidden_names[str(_n0).strip()] = _c0.get('alt_name') or _c0.get('name')
+
+    def _pub(name):
+        """Yayımlanacak ad — alternatif ad onaylıysa gerçek ad yerine alternatif ad."""
+        return _hidden_names.get(str(name or '').strip(), name)
     phys = sds_data.get('phys_props', {})
     phys_methods = sds_data.get('phys_methods', {})
     rev = sds_data.get('revision', {})
@@ -1096,21 +1119,16 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _route_sfx = _ROUTE_SUFFIX_TR if lang == 'TR' else _ROUTE_SUFFIX_EN
 
     def _mask_concs(text: str) -> str:
-        """Metindeki "CAS %49.0" / "ad (%20.0" gibi kesin bileşen konsantrasyonlarını, Bölüm 3'te
-        aralıkla verilen (ticari sır) bileşenler için aynı ECHA aralığına çevirir."""
+        """Metindeki "CAS %49.0" / "ad (%20.0" gibi kesin bileşen konsantrasyonlarını, Bölüm 3'te aralıkla
+        verilen bileşenler için Bölüm 3'teki aynı metne çevirir (KKDİK Ek-2 A 3.2 — tutarlı gösterim)."""
         if not text:
             return text
         for _c in components:
             _cas = str(_c.get('cas_no') or _c.get('cas') or '').strip()
-            if not _cas or disclosure.get(_cas, 'range') == 'show':
+            _d = _sec3_disp.get(_cas) or {}
+            if not _cas or _d.get('kind', 'exact') == 'exact':
                 continue
-            try:
-                _cv = float(_c.get('conc_max') or _c.get('concentration') or _c.get('conc') or 0)
-            except (TypeError, ValueError):
-                _cv = 0.0
-            if _cv <= 0:
-                continue
-            _rng = get_echa_range(_cv)
+            _rng = _d['text']
             for _key in {_cas, _c.get('name') or '', _c.get('name_tr') or ''}:
                 if _key:
                     text = _re.sub(_re.escape(_key) + r'(\s*\(?)\s*%\s*\d+(?:[.,]\d+)?',
@@ -1140,6 +1158,18 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         # Gerekçe metnindeki kesin konsantrasyonlar Bölüm 3 ile aynı gizlilikte verilir
         # (önceden satırlarda 'conc' alanı taşınmadığı için maskeleme hiç çalışmıyordu)
         reason = _mask_concs(reason)
+        # Bölüm 3'te aralık kullanılıyorsa hesap formülü ("10x2.0=20.0", "= %99.5", "Σ…=%3.1") kesin değeri
+        # ortaya çıkarır ve aralıkla çelişir: yöntem + eşik + dayanak yazılır (KKDİK Ek-2 A 3.2 — zararlar
+        # aralığın en yüksek değerine göre; sds_pipeline.section3_display üst uçta aynı sonucu doğrular).
+        if (_sec3_ranged and str(entry.get('h_code') or '')[:2] in ('H3', 'H4')
+                and _re.search(r'(?<![<>])=\s*\[?%?\s*\d|\d\s*x\s*\d|Σ', reason or '')):
+            # Eşik yalnız yüzde olarak yazılmışsa alınır (oran biçimindeki "≥ 0.25" yüzde değildir)
+            _thr = _re.findall(r'>=\s*%\s*(\d+(?:[.,]\d+)?)', reason)
+            _ref = _re.findall(r'\(([^()]*(?:Tablo|Ek-1|CLP|SEA)[^()]*)\)', reason)
+            reason = ((('Hesaplama yöntemi (bileşenlerin Bölüm 3\'teki konsantrasyon aralıklarıyla)' if lang == 'TR'
+                        else 'Calculation method (with the concentration ranges in Section 3)')
+                       + (f" — {'eşik' if lang == 'TR' else 'threshold'} %{_thr[-1].replace('.', ',')}" if _thr else '')
+                       + (f' ({_ref[-1]})' if _ref else '')))
         conc_info = reason or entry.get('cutoff_used','') or '—'
         # h_code'dan yetkili h_class türet (DB bozukluğuna karşı düzelt)
         raw_hclass  = entry.get('h_class', '')
@@ -1552,17 +1582,16 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     story += section_block(section_title(lang, 3), styles)
     story += sub_block(f"3.2 {sub_title(lang,'3.2')}", styles)
 
-    def _disp_conc(cas: str, conc_val) -> str:
-        """Gizlilik seviyesine göre konsantrasyon gösterimi."""
-        # generate_section3 ile tutarlı: disclosure_map'te yoksa varsayılan 'range'
-        level = disclosure.get(str(cas).strip(), 'range')
+    def _disp_conc(cas: str, conc_val, name: str = '') -> str:
+        """Konsantrasyon gösterimi — Bölüm 3 ile aynı metin (KKDİK Ek-2 A 3.2); CAS yoksa ada göre."""
+        _d = _sec3_disp.get(str(cas).strip()) or _sec3_by_name.get(str(name or '').strip().lower())
+        if _d:
+            return _d['text']
         try:
             c = float(conc_val or 0)
         except (TypeError, ValueError):
             c = 0.0
-        if level == 'show' or c == 0:
-            return f'{c:g}' if c else '—'
-        return get_echa_range(c)  # 'range' veya 'hide' → ECHA aralığı
+        return f'{c:g}' if c else '—'
 
     from app.services.svhc_service import svhc_section3_reason
     from app.services.tr_oel_service import get_oel as _tr_oel
@@ -1587,7 +1616,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
 
     # KKDİK Ek-2 A 3.2 (a)/(b): kütle veya hacme göre azalan sırada (önceden girildiği sırayla basılıyordu)
     _sec3_comps = sorted((c for c in components if _sec3_needed(c)), key=lambda c: -_c3max(c))
-    sec3_rows = generate_section3(_sec3_comps, disclosure, lang=lang)
+    sec3_rows = generate_section3(_sec3_comps, disclosure, lang=lang, conc_display=_sec3_disp)
     _sec3_names = {str(r.get('cas') or '').strip(): r.get('name') for r in (sec3_rows or [])}
     if not sec3_rows:
         story.append(Paragraph(
@@ -1722,6 +1751,14 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 styles['small']
             ))
 
+        # KKDİK Ek-2 A 3.2: aralık kullanılırsa zararlar en yüksek konsantrasyona göre tanımlanır
+        if any(r.get('conc_kind') in ('band', 'narrowed', 'user_range') for r in sec3_rows):
+            story.append(Paragraph(
+                '* Konsantrasyonlar KKDİK Ek-2 A 3.2(b) uyarınca yüzde aralığı olarak verilmiştir; sağlık ve '
+                'çevre zararları her bileşenin aralıktaki en yüksek konsantrasyonuna göre tanımlanmıştır.'
+                if lang == 'TR' else
+                '* Concentrations are given as percentage ranges; the health and environmental hazards describe '
+                'the effects of the highest concentration of each ingredient.', styles['small']))
         # Gizleme notları — aynı not birden fazla bileşende olsa da bir kez yazılır
         for _note in dict.fromkeys(r['note'] for r in sec3_rows if r.get('note')):
             story.append(Paragraph(f"* {_note}", styles['small']))
@@ -2097,7 +2134,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             'Not' if lang=='TR' else 'Note',
         ]]
         for row in oel_rows:
-            tbl_data.append(format_oel_row(row, lang))
+            _orow = format_oel_row(row, lang)
+            if _orow and str(_orow[0]).strip() in _hidden_cas:   # SEA Md.26 — CAS gösterilmez
+                _orow = ['Gizli*' if lang == 'TR' else 'Confidential*'] + list(_orow[1:])
+            tbl_data.append(_orow)
         story.append(data_table(tbl_data, [22*mm, 45*mm, 35*mm, 35*mm, 25*mm], styles))
         # Kaynak: her satırın yasal dayanağı (data/tr_oel_limits.json 'regulation'; scripts/verify_tr_oel.py)
         _regs = {r.get('regulation') for r in oel_rows}
@@ -3076,9 +3116,28 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             r_lbl = (_ROUTE_LABEL_TR if lang == 'TR' else _ROUTE_LABEL_EN).get(route, route)
             unit  = detail.get('unit') or _ROUTE_UNIT.get(route, 'mg/kg')   # gaz: ppmV
             unk_note = (f' (bilinmeyen %{unk_pct} — revize formül)' if unk_pct > 10 else '')
+            _ate_txt = f'{ate_val} {unit}'
+            if _sec3_ranged and ate_val is not None:
+                # Bölüm 3 aralıklıysa kesin ATEmix değeri bileşen konsantrasyonunu geri hesaplatır: SEA Ek-1
+                # Tablo 3.1.1 kategori sınırlarına göre aralık olarak verilir (sınıflandırma bilgisi korunur)
+                _pf_ate = (product.get('form') or '')
+                _lims = ({'oral': (5, 50, 300, 2000), 'dermal': (50, 200, 1000, 2000)}.get(route)
+                         or ((100, 500, 2500, 20000) if 'ppm' in str(unit).lower() else
+                             (0.05, 0.5, 1, 5) if _pf_ate in ('solid', 'powder') else (0.5, 2, 10, 20)))
+                try:
+                    _av = float(ate_val)
+                    _f = lambda v: f'{v:g}'.replace('.', ',')
+                    if _av > _lims[-1]:
+                        _ate_txt = f'> {_f(_lims[-1])} {unit}'
+                    else:
+                        _lo_l = max([0] + [l for l in _lims if l < _av])
+                        _hi_l = min(l for l in _lims if l >= _av)
+                        _ate_txt = (f'≤ {_f(_hi_l)} {unit}' if not _lo_l else f'> {_f(_lo_l)} – ≤ {_f(_hi_l)} {unit}')
+                except (TypeError, ValueError):
+                    pass
             result_rows.append([
                 r_lbl,
-                f'{ate_val} {unit}{unk_note}' if ate_val is not None else '—',
+                f'{_ate_txt}{unk_note}' if ate_val is not None else '—',
                 res_code,
             ])
 
@@ -3096,9 +3155,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         for route, detail in ate_mix_details.items():
             unit = detail.get('unit') or _ROUTE_UNIT.get(route, 'mg/kg')
             for c in detail.get('components', []):
+                _nm_ate = str((c.get('name_tr','') if lang=='TR' else '') or c.get('name', c.get('cas', '—')))
                 comp_rows.append([
-                    str((c.get('name_tr','') if lang=='TR' else '') or c.get('name', c.get('cas', '—'))),
-                    _disp_conc(c.get('cas_no') or c.get('cas',''), c.get('conc')),
+                    _pub(_nm_ate),
+                    _disp_conc(c.get('cas_no') or c.get('cas',''), c.get('conc'), _nm_ate),
                     str(c.get('code', '—')),
                     f"{c.get('ate', '—')} {unit}",
                 ])
@@ -3235,7 +3295,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     # 12.5 PBT — pbt_results'tan özet
     pbt_summary = na
     if pbt_list:
-        pbt_cas = [f"{p['name']}: P={p.get('P','?')} B={p.get('B','?')} T={p.get('T','?')}"
+        pbt_cas = [f"{_pub(p['name'])}: P={p.get('P','?')} B={p.get('B','?')} T={p.get('T','?')}"
                    for p in pbt_list if p.get('is_pbt') or p.get('is_vpvb')]
         pbt_summary = '; '.join(pbt_cas) if pbt_cas else sds12.get('12.5', term(lang,'pbt_not'))
 
@@ -3246,7 +3306,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         _known = [c for c in _soil_comps if c.get('log_koc') is not None]
         if _known:
             _soil_txt = '; '.join(
-                f"{(c.get('name_tr') or c['name']) if lang == 'TR' else c['name']}: {c['mobility']}"
+                f"{_pub((c.get('name_tr') or c['name']) if lang == 'TR' else c['name'])}: {c['mobility']}"
                 for c in _known
             )
         else:
@@ -3850,8 +3910,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         _mp_rows = [[_col1, _col2, _col3, _col4, _col5, _col6]]
         for _mp in _mp_comps:
             _mp_rows.append([
-                _mp['cas'],
-                Paragraph(_mp['name'], styles['small']),
+                ('Gizli*' if lang == 'TR' else 'Confidential*') if str(_mp['cas']).strip() in _hidden_cas
+                else _mp['cas'],
+                Paragraph(_pub(_mp['name']), styles['small']),
                 _disp_conc(_mp['cas'], _mp['conc']),
                 f"{int(_mp['m_a'])}",
                 f"{int(_mp['m_c'])}",

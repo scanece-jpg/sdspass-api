@@ -8,38 +8,14 @@ Bölüm 4-8: H kodu → otomatik cümle veritabanı
 Bölüm 11-12: CLP/Ekoloji sonuçlarından metin
 Bölüm 14: ADR/IMDG/IATA UN numarası veritabanı
 
-Gizleme Seviyeleri (Bölüm 3):
-  'show'   → Tam konsantrasyon göster (%20.0)
-  'range'  → Standart bant ver (≥ 10 - < 20%)
-  'hide'   → CAS gizle, kimyasal grup adı + bant
-
-Kaynak: CLP Madde 24(2), REACH Madde 119, KKDİK Madde 15
+Bölüm 3 konsantrasyon gösterimi: KKDİK Ek-2 A 3.2 (tam yüzde veya yüzde aralığı; aralıkta zararlar en
+yüksek konsantrasyona göre) — metin sds_pipeline.section3_display'de üretilir. Alternatif kimyasal ad yalnız
+SEA Yönetmeliği Md.26 onayıyla.
 """
 
 from typing import List, Dict, Optional, Any
 from app.services.codes_i18n import correct_hclass
 
-
-# ─── BÖLÜM 3: KONSANTRASYON GİZLEME BANTLARI ────────────────────────────────
-#
-# Bant kenarları CLP kesme değerleriyle hizalıdır:
-#   0,1 / 1 / 2,5 / 5 / 10 / 20 / 25 / 50 / 75
-# Kesin konsantrasyon gizlenmek istendiğinde veya CAS gizlendiğinde kullanılır.
-# Kullanıcının girdiği aralık (conc_str / conc_min+conc_max) bu bantlara dönüştürülmez —
-# aralıklar B3'e aynen yansıtılır.
-# Semboller: ≥ (büyük eşit), < (küçük)
-ECHA_RANGES = [
-    (75.0, 100.01, '≥ 75%'),
-    (50.0,  75.0,  '≥ 50 - < 75%'),
-    (25.0,  50.0,  '≥ 25 - < 50%'),
-    (20.0,  25.0,  '≥ 20 - < 25%'),
-    (10.0,  20.0,  '≥ 10 - < 20%'),
-    ( 5.0,  10.0,  '≥ 5 - < 10%'),
-    ( 2.5,   5.0,  '≥ 2,5 - < 5%'),
-    ( 1.0,   2.5,  '≥ 1 - < 2,5%'),
-    ( 0.1,   1.0,  '≥ 0,1 - < 1%'),
-    ( 0.0,   0.1,  '< 0,1%'),
-]
 
 # ─── BÖLÜM 1.1.3.6: FORMÜLASYONDEĞİŞİM TOLERANSI ───────────────────────────
 # CLP Kılavuzu Bölüm 1, v5.0 (Kasım 2024) Tablo 1.2 — SEA Ek-1 §1.1.3.6
@@ -102,19 +78,6 @@ CAS_TO_GROUP: Dict[str, str] = {
 }
 
 
-def get_echa_range(concentration: float) -> str:
-    """
-    Konsantrasyonu standart gizleme bandına çevir.
-    Bant kenarları CLP kesme değerleriyle hizalıdır (KKDİK Madde 15 / CLP Madde 24(2)).
-    """
-    if concentration >= 100:
-        return '100%'
-    for lo, hi, label in ECHA_RANGES:
-        if lo <= concentration < hi:
-            return label
-    return f'%{concentration:.1f}'
-
-
 # Akut toksisite maruziyet yolları — CLP Tablo 3.1.1 (oral / dermal / inhal)
 _ACUTE_TOX_ROUTE: Dict[str, str] = {}
 for _c in ('H300', 'H301', 'H302', 'H303'):
@@ -127,8 +90,9 @@ for _c in ('H330', 'H331', 'H332', 'H333'):
 
 def format_section3_component(
     comp: Dict,
-    disclosure_level: str = 'show',  # 'show' | 'range' | 'hide'
+    disclosure_level: str = 'show',  # 'show' | 'hide' (yalnız SEA Md.26 onayıyla)
     lang: str = 'TR',
+    conc_text: str = '',
 ) -> Dict:
     """
     Bölüm 3 bileşen satırı formatla.
@@ -190,50 +154,35 @@ def format_section3_component(
     if _has_annex_supplement:
         haz_str += '  († CLP Ek VI tamamlayıcı sınıflandırma)'
 
-    # Kullanıcının girdiği orijinal konsantrasyon metni (ör: "25-50")
-    conc_str = comp.get('conc_str', '').strip()
-    conc_min = comp.get('conc_min')
-    conc_max = comp.get('conc_max')
-    if conc_str:
-        # Tire ile ayrılmış aralık girilmişse (ör: "1-3" ya da "1–3") → standart formata çevir
-        import re as _rc
-        _m = _rc.match(r'^(\d[\d,.]*)[\-–](\d[\d,.]*)$', conc_str)
-        if _m:
-            _lo, _hi = _m.group(1).replace(',', '.'), _m.group(2).replace(',', '.')
-            conc_display = f'%{_lo}–<%{_hi}'
-        else:
-            conc_display = f'%{conc_str}'
-    elif conc_min is not None and conc_max is not None and conc_min != conc_max:
-        # CLP Annex I §3 notasyonu: üst sınır önünde '<' zorunlu — örn. %1–<%5
-        conc_display = f'%{conc_min}–<%{conc_max}'
-    else:
-        # Seçenek B: girilen tam değer worst-case, B3'te ≥%X formatı (CLP Annex II §3.2.3.1)
-        conc_display = f'≥%{conc:g}'
+    # Konsantrasyon metni — KKDİK Ek-2 A 3.2: tam yüzde veya yüzde aralığı. Metin sds_pipeline.section3_display
+    # tarafından üretilir (aralığın üst ucunda sınıflandırma değişmiyorsa aralık; değişiyorsa daraltılmış
+    # aralık veya tam değer). Verilmemişse: kullanıcı aralığı aynen, yoksa tam değer.
+    if not conc_text:
+        try:
+            _lo = float(comp.get('conc_min') or 0)
+        except (TypeError, ValueError):
+            _lo = 0.0
+        _f = lambda v: f'{round(v, 4):g}'.replace('.', ',')
+        conc_text = (f'≥ {_f(_lo)} - ≤ {_f(conc)}%' if 0 < _lo < conc else f'{_f(conc)}%' if conc > 0 else '—')
 
-    if disclosure_level == 'show':
+    # SEA Yönetmeliği Md.26: alternatif kimyasal ad yalnız İlgili Kurumun onayıyla kullanılır (Ek-1 1.4.1
+    # koşulları). Onay bilgisi girilmemişse maddenin kimliği gösterilir — onay uydurulmaz.
+    alt_name = (comp.get('alt_name') or '').strip()
+    alt_ok = (comp.get('alt_name_approval') or '').strip()
+    if disclosure_level == 'hide' and alt_name and alt_ok:
         return {
-            'cas': cas, 'name': name,
-            'concentration': conc_display,
-            'hazards': haz_str, 'is_hidden': False, 'note': '',
-        }
-
-    elif disclosure_level == 'range':
-        return {
-            'cas': cas, 'name': name,
-            'concentration': get_echa_range(conc),
-            'hazards': haz_str, 'is_hidden': False,
-            'note': 'Konsantrasyon ticari sır — ECHA aralığı verilmiştir (CLP Madde 24(2))',
-        }
-
-    else:  # hide
-        group = CAS_TO_GROUP.get(cas, 'unknown')
-        group_name = CHEM_GROUP_NAMES.get(group, 'Kimyasal Madde')
-        return {
-            'cas': 'Gizli*', 'name': group_name,
-            'concentration': get_echa_range(conc),
+            'cas': 'Gizli*' if lang == 'TR' else 'Confidential*', 'name': alt_name,
+            'concentration': conc_text,
             'hazards': haz_str, 'is_hidden': True,
-            'note': '* CAS numarası gizlidir — ÇSGB bildirimi yapılmıştır (KKDİK Madde 15)',
+            'note': (f'Alternatif kimyasal ad SEA Yönetmeliği Madde 26 uyarınca kullanılmıştır '
+                     f'(İlgili Kurum onayı: {alt_ok}).' if lang == 'TR' else
+                     f'Alternative chemical name used with the approval of the competent authority ({alt_ok}).'),
         }
+    return {
+        'cas': cas, 'name': name,
+        'concentration': conc_text,
+        'hazards': haz_str, 'is_hidden': False, 'note': '',
+    }
 
 
 # ─── BÖLÜM 4-8 OTOMATIK CÜMLE VERİTABANI ────────────────────────────────────
@@ -778,28 +727,25 @@ def generate_section3(
     components: List[Dict],
     disclosure_map: Optional[Dict[str, str]] = None,
     lang: str = 'TR',
+    conc_display: Optional[Dict[str, Dict]] = None,
 ) -> List[Dict]:
     """
     SDS Bölüm 3 — Bileşenler tablosu
     disclosure_map: {cas: 'show'|'range'|'hide'} — varsayılan 'show'
     lang: 'TR' | 'EN' — Türkçe SDS için name_tr kullanılır
     """
-    # Su, hava gibi CAS numaraları için ticari sır koruması anlamsız — her zaman 'show'.
-    _ALWAYS_SHOW_CAS = {'7732-18-5', '7664-41-7', '124-38-9', '7727-37-9', '7782-44-7'}
-
+    # disclosure_map: {cas: 'hide'} — alternatif kimyasal ad (SEA Md.26, onay bilgisiyle). Aralık/tam değer
+    # seçimi tüm GBF için conc_display ile gelir (sds_pipeline.section3_display).
     disclosure_map = disclosure_map or {}
+    conc_display = conc_display or {}
     rows = []
     for comp in components:
         cas = comp.get('cas_no', comp.get('cas', '')).strip()
-        if cas in _ALWAYS_SHOW_CAS:
-            level = 'show'
-        else:
-            # Varsayılan 'range': ticari sır koruması (CLP Madde 24(2) / KKDİK Ek-2 B3.2).
-            level = disclosure_map.get(cas, 'range')
-        # Esans/gizli karışım → disclosure_map'te 'show' bırakılmışsa min. 'range'e zorla
-        if comp.get('comp_type') == 'fragrance' and level == 'show':
-            level = 'range'
-        row = format_section3_component(comp, level, lang=lang)
+        key = cas or str(comp.get('name') or '').strip()
+        level = 'hide' if disclosure_map.get(cas) == 'hide' or comp.get('disclosure') == 'hide' else 'show'
+        row = format_section3_component(comp, level, lang=lang,
+                                        conc_text=(conc_display.get(key) or {}).get('text', ''))
+        row['conc_kind'] = (conc_display.get(key) or {}).get('kind', 'exact')
         rows.append(row)
     return rows
 

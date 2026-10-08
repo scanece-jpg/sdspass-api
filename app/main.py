@@ -254,6 +254,35 @@ async def generate_pdf(data: dict = Body(...)):
             return c
         components = [_overlay(c) for c in components]
 
+        # SEA Yönetmeliği Md.26: alternatif kimyasal ad yalnız İlgili Kurum onayıyla (onay bilgisi girilmişse)
+        # ve Ek-1 1.4.1(I) gereği işyeri maruz kalma sınırı olmayan maddede kullanılır. Ad tüm GBF'de değişir.
+        from app.services.tr_oel_service import get_oel as _alt_oel
+        _alt_names = {}
+        for _c in components:
+            _cas_a = str(_c.get('cas') or _c.get('cas_no') or '').strip()
+            _an, _ap = (_c.get('alt_name') or '').strip(), (_c.get('alt_name_approval') or '').strip()
+            if _an and _ap and not (_cas_a and _alt_oel(_cas_a)):
+                _alt_names[(_c.get('name_tr') or _c.get('name') or '').strip()] = _an
+                _alt_names[(_c.get('name') or '').strip()] = _an
+                from app.services.substance_lookup import clean_tr_name as _ctn
+                _alt_names[_ctn((_c.get('name_tr') or _c.get('name') or '').strip())] = _an   # etiket listesi adı
+                _c['disclosure'] = 'hide'
+            else:
+                _c.pop('disclosure', None)
+        _alt_names.pop('', None)
+
+        # Bölüm 3 konsantrasyon gösterimi (KKDİK Ek-2 A 3.2): varsayılan aralık; panelde "tam değer" seçilebilir.
+        # Aralığın üst ucunda sağlık/çevre sınıflandırması değişiyorsa aralık daraltılır.
+        _conc_mode = (data.get('conc_display') or product.get('conc_display') or 'range')
+        try:
+            _sec3_display = _pipe.section3_display(
+                core['components'], mode='exact' if _conc_mode == 'exact' else 'range', form=_inp['form'],
+                mixture_ph=_inp.get('mixture_ph'), additivity_na=bool(_inp.get('additivity_na')))
+        except Exception as _s3e:
+            # Boş sözlük → Bölüm 3 tam değer / kullanıcı aralığı yazar (tutarsız aralık basılmaz)
+            print(f'[SEC3] aralık hesabı başarısız — tam değer kullanılacak: {_s3e}')
+            _sec3_display = {}
+
         h_codes         = core['h_codes']
         all_h_codes     = core['all_h_codes']
         signal          = core['signal']
@@ -427,6 +456,10 @@ async def generate_pdf(data: dict = Body(...)):
             name_tr = _clean_tr(name_tr)   # Ek-6 Not B "nitrik asit ... %" → "nitrik asit"
             result['name']    = name
             result['name_tr'] = name_tr
+            if c.get('disclosure') == 'hide':   # SEA Md.26 onaylı alternatif ad — tüm bölümlerde
+                # Gerçek adlar PDF'de başka kaynaklardan (ATE, Bölüm 12) gelen satırları değiştirmek için saklanır
+                result['_orig_names'] = [n for n in (name, name_tr, c.get('name'), c.get('name_tr')) if n]
+                result['name'] = result['name_tr'] = _safe(c.get('alt_name', ''))
 
             # ── CAS no normalizasyonu ─────────────────────────────────────────
             result['cas_no'] = c.get('cas', c.get('cas_no', ''))
@@ -530,6 +563,7 @@ async def generate_pdf(data: dict = Body(...)):
             'p_codes':      p_result,
             'components':   mapped_comps,
             'disclosure_map': disc_map,
+            'section3_display': _sec3_display,
             'phys_props':   _parsed_phys,
             'phys_methods': _phys_methods,   # ölçülen/hesaplanmış etiket (KKDİK Ek-2 §9)
             'eco':          eco_result,
@@ -554,7 +588,7 @@ async def generate_pdf(data: dict = Body(...)):
             # Test yerine verilen fiziksel tehlike kararlarının gerekçesi (Bölüm 16)
             'classification_notes': core.get('classification_notes', []),
             # Etikette adı yazılması zorunlu bileşenler (SEA/CLP Md. 18(3)(b)) — Bölüm 2.2
-            'label_components': core.get('label_components', []),
+            'label_components': [_alt_names.get(str(n).strip(), n) for n in core.get('label_components', [])],
             # SEA Ek-1 4.1.3.6.1 — "% x oranda sucul çevreye zararı bilinmeyen bileşenler içerir"
             'aquatic_unknown': core.get('aquatic_unknown') or {},
         }

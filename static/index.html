@@ -625,6 +625,15 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
               <input type="checkbox" id="p_detergent" onchange="_toggleDetClass()"> Deterjan ürünü (Deterjanlar Hakkında Yönetmelik)
             </label>
           </div>
+          <div class="v0-field">
+            <label class="v0-label">GBF Bölüm 3 konsantrasyon gösterimi <span style="font-size:9px;color:var(--text3)">KKDİK Ek-2 A 3.2</span></label>
+            <select class="v0-inp" id="p_conc_display" onchange="_refreshSec3Previews()"
+                    title="KKDİK Ek-2 A 3.2: konsantrasyon tam yüzde veya yüzde aralığı olarak verilir. Aralıkta zararlar en yüksek konsantrasyona göre tanımlanır; aralığın üst ucunda sınıflandırma değişirse program aralığı daraltır.">
+              <option value="range" selected>Yüzde aralığı (varsayılan)</option>
+              <option value="exact">Tam değer</option>
+            </select>
+            <div style="font-size:9px;color:var(--text3);margin-top:3px">Aralık girdiğiniz bileşenler (örn. 10-30) her iki seçimde de girdiğiniz aralıkla yazılır.</div>
+          </div>
           <div class="v0-field" style="grid-column:1/-1">
             <label class="v0-label">Belirlenmiş Kullanım <span style="font-size:9px;color:var(--text3)">GBF 1.2 — KKDİK Ek-2</span></label>
             <input class="v0-inp" type="text" id="pusage_desc" maxlength="300"
@@ -2146,6 +2155,14 @@ function addComp(pf = {}) {
       </div>
       <div id="comp_type_note${id}" style="display:none;padding-top:18px;font-size:10px;color:var(--accent);line-height:1.4"></div>
     </div>
+    <details style="margin-top:4px">
+      <summary style="font-size:11px;color:var(--text3);cursor:pointer">Alternatif kimyasal ad (SEA Yönetmeliği Md.26 — yalnız onaylıysa)</summary>
+      <div class="cw-row3" style="margin-top:6px">
+        <div><label>Alternatif ad</label><input type="text" class="altname-input" id="altname${id}" placeholder="örn. aromatik amin"></div>
+        <div><label>İlgili Kurum onayı (tarih/sayı)</label><input type="text" class="altok-input" id="altok${id}" placeholder="onay yazısı tarihi ve sayısı"></div>
+        <div style="font-size:10px;color:var(--text3);line-height:1.4;padding-top:4px">İkisi de doluysa GBF'de maddenin adı ve CAS'ı yerine bu ad yazılır. İşyeri maruz kalma sınırı olan maddede kullanılamaz (SEA Ek-1 1.4.1).</div>
+      </div>
+    </details>
     <div class="det-class-wrap" style="margin-top:4px;display:${document.getElementById('p_detergent')?.checked ? '' : 'none'}">
       <label title="Deterjanlar Hakkında Yönetmelik Ek-7 A içerik sınıfı. 'Otomatik' seçiliyse bilinen hammaddeler CAS'tan tanınır; tanınmayan bileşen beyana girmez.">Deterjan Sınıfı (Ek-7 A)</label>
       <select class="det-class" id="det_class${id}" style="width:100%;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.1);color:var(--text);border-radius:6px;padding:6px 9px;font-size:11px;font-family:var(--mono)"><option value="">Otomatik (CAS'tan)</option><option value="none">Beyan dışı</option><option value="anionic">Anyonik yüzey aktif</option><option value="nonionic">Noniyonik yüzey aktif</option><option value="cationic">Katyonik yüzey aktif</option><option value="amphoteric">Amfoterik yüzey aktif</option><option value="soap">Sabun</option><option value="phosphate">Fosfat</option><option value="phosphonate">Fosfonat</option><option value="oxygen_bleach">Oksijen bazlı ağartıcı</option><option value="chlorine_bleach">Klor bazlı ağartıcı</option><option value="edta">EDTA ve tuzları</option><option value="zeolite">Zeolit</option><option value="polycarboxylate">Polikarboksilat</option><option value="phenol">Fenol / halojenli fenol</option><option value="pdcb">para-Diklorobenzen</option><option value="aromatic_hc">Aromatik hidrokarbon</option><option value="aliphatic_hc">Alifatik hidrokarbon</option><option value="halogenated_hc">Halojenli hidrokarbon</option><option value="enzyme">Enzim</option><option value="disinfectant">Dezenfektan</option><option value="optical_brightener">Optik parlatıcı</option><option value="perfume">Parfüm</option><option value="preservative">Koruyucu</option></select>
@@ -2917,7 +2934,27 @@ function parseManualConc(val) {
   return null;
 }
 
-// REACH Annex II Tablo 1.1 — kesin değeri standart aralığa çevirir
+// GBF Bölüm 3 önizlemesi (KKDİK Ek-2 A 3.2) — kullanıcı aralığı aynen; tek değer: seçime göre aralık veya tam
+// değer. Aralığın üst ucunda sınıflandırma değişirse PDF'de aralık daraltılır (sds_pipeline.section3_display).
+function sec3Preview(lo, hi) {
+  const f = v => String(Math.round(v * 10000) / 10000).replace('.', ',');
+  if (lo > 0 && hi > lo) return `≥ ${f(lo)} - ≤ ${f(hi)}%`;
+  const v = hi || lo;
+  if (!v) return '';
+  if (document.getElementById('p_conc_display')?.value === 'exact' || v >= 100) return `${f(v)}%`;
+  return concToRange(v) + " (üst uçta sınıflandırma değişirse PDF'de daraltılır)";
+}
+function _refreshSec3Previews() {
+  document.querySelectorAll('[id^="crangeVal"]').forEach(el => {
+    const id = el.id.replace('crangeVal', '');
+    const lo = parseFloat(document.getElementById('cmin' + id)?.value) || 0;
+    const hi = parseFloat(document.getElementById('cmax' + id)?.value) || 0;
+    const t = sec3Preview(lo, hi);
+    if (t) el.textContent = t;
+  });
+}
+
+// Program aralık bantları (TR'de zorunlu bant tablosu yoktur — KKDİK Ek-2 A 3.2)
 function concToRange(v) {
   if (!v || isNaN(v) || v <= 0) return '';
   if (v >= 75)  return '≥ 75%';
@@ -2954,7 +2991,7 @@ function onManualConc(id) {
     const _rangeDiv = document.getElementById('crange'+id);
     const _rangeVal = document.getElementById('crangeVal'+id);
     if (_rangeDiv && _rangeVal) {
-      const _rs = concToRange(parsed.lo);
+      const _rs = sec3Preview(parsed.lo, parsed.hi);
       if (_rs) { _rangeVal.textContent = _rs; _rangeDiv.style.display = ''; }
       else { _rangeDiv.style.display = 'none'; }
     }
@@ -3354,7 +3391,9 @@ function getComps() {
     const cwId  = parseInt((w.id || '').replace('cw','')) || 0;
     // SCL: maddeye özel kesme değerleri — Öncelik 1 (GCL'yi ezer)
     const scl   = _sclMap[cwId] || {};
-    const concStr = concToRange(concMin || (concMax ?? 0));  // REACH Annex II Tablo 1.1 aralığı
+    const concStr = concToRange(concMin || (concMax ?? 0));  // program bandı (Bölüm 3 metni sunucuda üretilir)
+    const alt_name = w.querySelector('.altname-input')?.value?.trim() || '';
+    const alt_name_approval = w.querySelector('.altok-input')?.value?.trim() || '';
     // Annex VI bayrağı — component-manager tarafından CAS sorgusunda kaydedilir
     // CLP 3.1.3.6.2.3 revize formül hesabı için clp_engine.js okur
     const annexVi = w.querySelector('.cc')?.dataset?.annexVi === '1';
@@ -3373,7 +3412,7 @@ function getComps() {
     const ec50_fish    = parseFloat(document.getElementById('ec50_fish'    + cwId)?.value) || null;
     const ec50_daphnia = parseFloat(document.getElementById('ec50_daphnia' + cwId)?.value) || null;
     const ec50_noec    = parseFloat(document.getElementById('ec50_noec'    + cwId)?.value) || null;
-    return { cas, name, name_tr, conc, concMin, concMax, concStr, hazards, ec, reach, kkdik, m_factors:{ acute: mf, chronic: mfc }, scl, sclRaw, annex_vi: annexVi, ate_unknown, ate, comp_type, ec50_algae, ec50_fish, ec50_daphnia, ec50_noec, echa_removed, det_class };
+    return { cas, name, name_tr, conc, concMin, concMax, concStr, hazards, ec, reach, kkdik, m_factors:{ acute: mf, chronic: mfc }, scl, sclRaw, annex_vi: annexVi, ate_unknown, ate, comp_type, ec50_algae, ec50_fish, ec50_daphnia, ec50_noec, echa_removed, det_class, alt_name, alt_name_approval };
   }).filter(c => c.cas || c.name);
 }
 
@@ -5969,6 +6008,8 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
                  is_detergent: !!document.getElementById('p_detergent')?.checked,
                  glove_material:  window._gloveSel?.material  || null,    // GBF 8.2.2.2(b)
                  glove_thickness: window._gloveSel?.thickness || null },
+      // GBF Bölüm 3: 'range' (varsayılan) | 'exact' — KKDİK Ek-2 A 3.2
+      conc_display: document.getElementById('p_conc_display')?.value || 'range',
       supplier: (() => {
         const g = id => document.getElementById(id)?.value?.trim() || '';
         const hours = document.querySelector('input[name="telHours"]:checked')?.value || '24_7';
@@ -5990,6 +6031,8 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
         conc:        c.conc,
         concMax:     c.concMax || c.conc,
         conc_str:    c.concStr || '',
+        alt_name:    c.alt_name || '',            // SEA Md.26 — yalnız onay bilgisiyle kullanılır
+        alt_name_approval: c.alt_name_approval || '',
         conc_min:    c.concMin || 0,
         conc_max:    c.concMax || c.conc,
         ec_no:       c.ec || '',

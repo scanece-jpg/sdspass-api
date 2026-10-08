@@ -245,6 +245,161 @@ def label_components(comps: list, mixture_h: list) -> list:
     return list(dict.fromkeys(out))
 
 
+# ── Bölüm 3 konsantrasyon gösterimi (KKDİK Ek-2 A 3.2) ───────────────────────────
+# Ek-2 A 3.2: konsantrasyon (a) tam yüzde veya (b) yüzde aralığı olarak verilir; aralık kullanılırsa
+# "sağlık ve çevresel zararlar, bileşenlerin en yüksek konsantrasyonunun etkilerini tanımlar".
+# TR'de zorunlu bir aralık tablosu yoktur (AB 2020/878 tablosu KKDİK Ek-2'ye alınmamıştır); aşağıdaki
+# bantlar programın seçimidir ve her GBF'de üst uçta sınıflandırma değişmiyorsa kullanılır.
+_SEC3_BANDS = [(0.0, 0.1), (0.1, 1.0), (1.0, 2.5), (2.5, 5.0), (5.0, 10.0), (10.0, 20.0), (20.0, 25.0),
+               (25.0, 50.0), (50.0, 75.0), (75.0, 100.0)]
+# Bölüm 3'te her zaman kesin değer (gizlenecek bir şey yok)
+_SEC3_ALWAYS_EXACT = {'7732-18-5', '7664-41-7', '124-38-9', '7727-37-9', '7782-44-7'}
+
+
+def _with_conc(c: dict, v: float) -> dict:
+    c = dict(c)
+    for k in ('conc', 'concentration', 'concMax', 'conc_max', 'worst_case_conc'):
+        c[k] = v
+    return c
+
+
+def health_env_codes(comps: list, form: str = 'liquid', mixture_ph=None, additivity_na: bool = False) -> set:
+    """Karışımın sağlık/çevre sınıflandırması (H3xx/H4xx, baskınlık uygulanmış) — classify() ile aynı
+    motorlar. Bölüm 3 aralıklarının üst ucunda sınıflandırmanın değişip değişmediğini sınamak için."""
+    from app.services.clp_service import classify_mixture_clp, calculate_ate_health_h_codes
+    from app.services.stot_engine import calculate as stot_calc
+    from app.services.ecological_service import calculate_ecological
+    out = set()
+    res = classify_mixture_clp(comps, mixture_ph=mixture_ph, mixture_form=form, additivity_na=additivity_na)
+    out |= {norm_sub(h) for h in res.get('h_codes', []) if str(h)[:2] == 'H3'}
+    try:
+        out |= {norm_sub(e['h_code']) for e in calculate_ate_health_h_codes(comps, form=form)[0]}
+    except Exception:
+        pass
+    try:
+        out |= {norm_sub(r.get('h_code') or r.get('h')) for r in stot_calc(comps).get('results', [])}
+    except Exception:
+        pass
+    try:
+        eco = calculate_ecological([{
+            'cas': c.get('cas') or c.get('cas_no') or '', 'name': c.get('name', ''),
+            'conc': float(c.get('conc') or 0), 'worst_case_conc': float(c.get('conc') or 0),
+            'hazards': c.get('hazards', []), 'm_factors': c.get('m_factors', {}),
+            'ec50_algae': c.get('ec50_algae'), 'ec50_fish': c.get('ec50_fish'),
+            'ec50_daphnia': c.get('ec50_daphnia'), 'ec50_noec': c.get('ec50_noec'),
+        } for c in comps])
+        for a in (getattr(eco, 'aquatic', None), getattr(eco, 'aquatic_acute', None)):
+            if a is not None and getattr(a, 'h_code', None):
+                out.add(a.h_code)
+    except Exception:
+        pass
+    out.discard('')
+    for dom, subs in DOMINANCE_MAP.items():
+        if dom in out:
+            out -= set(subs)
+    return out
+
+
+def _pct(v: float) -> str:
+    return f'{round(v, 4):g}'.replace('.', ',')
+
+
+def _band_text(lo: float, hi: float) -> str:
+    return f'< {_pct(hi)}%' if lo <= 0 else f'≥ {_pct(lo)} - < {_pct(hi)}%'
+
+
+def _narrow_levels(v: float, lo: float, hi: float) -> list:
+    """Bandın daraltma basamakları (geniş → dar); her biri lo ≤ v < hi. Son çare tam değer (None)."""
+    import math
+    out, prev = [(lo, hi)], hi - lo
+    for step in (5.0, 1.0, 0.5, 0.1, 0.01):
+        a = round(math.floor(v / step + 1e-9) * step, 4)
+        b = round(a + step, 4)
+        if a < lo or b > hi or b - a >= prev or not (a <= v < b):
+            continue
+        out.append((a, b))
+        prev = b - a
+    out.append(None)
+    return out
+
+
+def section3_display(comps: list, mode: str = 'range', form: str = 'liquid', mixture_ph=None,
+                     additivity_na: bool = False) -> dict:
+    """Bölüm 3 konsantrasyon metinleri. Döner: {anahtar (CAS veya ad): {'text', 'kind', 'upper'}}.
+    kind: 'exact' (tam yüzde) | 'user_range' (kullanıcının girdiği aralık; sınıflandırma üst değerle) |
+          'band' (program aralığı) | 'narrowed' (üst uçta sınıflandırma değiştiği için daraltılmış aralık).
+    mode: 'range' (varsayılan) | 'exact' — kullanıcının panel seçimi."""
+    rows, test = {}, []
+    for c in comps:
+        key = str(c.get('cas') or c.get('cas_no') or '').strip() or str(c.get('name') or '').strip()
+        try:
+            v = float(c.get('concMax') or c.get('conc_max') or c.get('conc') or c.get('concentration') or 0)
+        except (TypeError, ValueError):
+            v = 0.0
+        try:
+            lo_u = float(c.get('conc_min') or c.get('concMin') or 0)
+        except (TypeError, ValueError):
+            lo_u = 0.0
+        if 0 < lo_u < v:
+            # Kullanıcının girdiği aralık aynen yazılır; sınıflandırma zaten üst değerle yapılır
+            rows[key] = {'text': f'≥ {_pct(lo_u)} - ≤ {_pct(v)}%', 'kind': 'user_range', 'upper': v}
+        elif v >= 100 or key in _SEC3_ALWAYS_EXACT or v <= 0 or (
+                mode == 'exact' and c.get('comp_type') != 'fragrance'):
+            rows[key] = {'text': f'{_pct(v)}%' if v > 0 else '—', 'kind': 'exact', 'upper': v}
+        else:
+            lo, hi = next(b for b in _SEC3_BANDS if b[0] <= v < b[1])
+            rows[key] = {'text': _band_text(lo, hi), 'kind': 'band', 'upper': hi,
+                         '_v': v, '_levels': _narrow_levels(v, lo, hi), '_i': 0}
+        test.append((key, c, v))
+
+    banded = [k for k, r in rows.items() if r['kind'] == 'band']
+    if banded:
+        def _codes(at_upper: bool) -> set:
+            cs = []
+            for key, c, v in test:
+                r = rows[key]
+                if at_upper and r['kind'] in ('band', 'narrowed'):
+                    cs.append(_with_conc(c, r['upper'] * (1 - 1e-6)))   # "< üst" → eşiğin hemen altı
+                else:
+                    cs.append(_with_conc(c, v))
+            return health_env_codes(cs, form=form, mixture_ph=mixture_ph, additivity_na=additivity_na)
+
+        base = _codes(False)
+
+        def _apply(k, i):
+            r = rows[k]
+            lvl = r['_levels'][i]
+            r['_i'] = i
+            if lvl is None:
+                r.update(text=f"{_pct(r['_v'])}%", kind='exact', upper=r['_v'])
+            else:
+                r.update(text=_band_text(*lvl), upper=lvl[1], kind='band' if i == 0 else 'narrowed')
+
+        guard = 0
+        while _codes(True) != base and guard < 60:
+            guard += 1
+            open_ = [k for k in banded if rows[k]['kind'] != 'exact']
+            if not open_:
+                break
+            # Tek bileşeni bir basamak daraltmak yetiyorsa onu seç; yoksa üst ucu en uzak olanı daralt
+            pick = None
+            for k in sorted(open_, key=lambda k: -(rows[k]['upper'] - rows[k]['_v'])):
+                saved = {kk: dict(rows[kk]) for kk in open_}
+                _apply(k, rows[k]['_i'] + 1)
+                ok = _codes(True) == base
+                rows.update({kk: saved[kk] for kk in open_})
+                if ok:
+                    pick = k
+                    break
+            if pick is None:
+                pick = max(open_, key=lambda k: rows[k]['upper'] - rows[k]['_v'])
+            _apply(pick, rows[pick]['_i'] + 1)
+    for r in rows.values():
+        for k in ('_v', '_levels', '_i'):
+            r.pop(k, None)
+    return rows
+
+
 def _normalize_conc(comps: list) -> None:
     for c in comps:
         if 'conc' not in c and 'concentration' in c:

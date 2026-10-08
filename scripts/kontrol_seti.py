@@ -34,7 +34,9 @@ _UYDURMA = ['Uygun yangın söndürücü kullanın.', 'Sınıflandırma ve etike
             '(Tavsiye: İyi havalandırma sağlayın)', 'beyan edilecek bileşen sınıfı bulunmamaktadır',
             # 2026-10-08 Ek-2 denetimi (madde 3): içi boş 4.2 cümlesi, yanlış KGD hükmü, nedensiz 12.4, kalınlıksız eldiven
             'Başlıca semptomlar maruziyet tipine göre değişir', 'KKDİK Madde 14', 'Toprakta hareketlilik Bilgi yok',
-            'Nitril veya lateks', 'Görünüm Sıvı b) Koku']
+            'Nitril veya lateks', 'Görünüm Sıvı b) Koku',
+            # 2026-10-08 aralık denetimi: AB atıflı / uydurma Bölüm 3 notları
+            'ECHA aralığı', 'CLP Madde 24(2)', 'ÇSGB bildirimi']
 URUNLER = [
     {'ad': 'Nitrik asit %15 (aşındırıcı, ADR)', 'bil': [('7697-37-2', 15), ('7732-18-5', 85)],
      'h': ['H314'], 'signal': 'Danger',
@@ -59,7 +61,9 @@ URUNLER = [
     {'ad': 'Benzil benzoat %20 (yalnız H412)', 'bil': [('120-51-4', 20), ('7732-18-5', 80)],
      'h': ['H412'], 'signal': '',
      'var': ['Uyarı Kelimesi Yok', 'Kirlenmiş giysiler', 'İlk yardım yapanlar', 'Bileşenlerden benzil benzoat (H302)',
-             'Nitril kauçuk eldiven ≥0,1 mm', 'Sıvı; renk: belirtilmemiştir', 'Veri kaynağı Karışımın kendisine ait'],
+             'Nitril kauçuk eldiven ≥0,1 mm', 'Sıvı; renk: belirtilmemiştir', 'Veri kaynağı Karışımın kendisine ait',
+             # Ek-2 A 3.2: aralıklı Bölüm 3'te ATEmix ve ATE tablosu kesin değer vermez
+             'Oral (Ağız) > 2000 mg/kg', 'benzil benzoat ≥ 20 - < 25% H302'],
      'yok': _UYDURMA + ['Uyarı Kelimesi Dikkat'], 's3_yok': ['7732-18-5']},
     {'ad': 'Gliserin %5 (tehlikesiz)', 'bil': [('56-81-5', 5), ('7732-18-5', 95)],
      'h': [], 'signal': '', 'var': ['belirtilmesi gereken madde bulunmamaktadır', 'İlk yayın.',
@@ -77,7 +81,9 @@ URUNLER = [
      'kdu_ok': ['15.1-izin-kisit']},
     {'ad': 'Etanolamin %2 (SEA Tablo 3.2.3 eşiği)', 'bil': [('141-43-5', 2), ('7732-18-5', 98)],
      'h': ['H315', 'H319'], 'signal': 'Warning',
-     'var': ['Ağırlıklı: 10x2.0', '(CLP Tablo 3.2.3)', 'Yıkamaya en az 15 dakika devam edin'], 'yok': _UYDURMA,
+     'var': ["Hesaplama yöntemi (bileşenlerin Bölüm 3'teki konsantrasyon aralıklarıyla) — eşik %10 (CLP Tablo 3.2.3)",
+             'Yıkamaya en az 15 dakika devam edin', '≥ 1 - < 2,5%', 'KKDİK Ek-2 A 3.2(b) uyarınca yüzde aralığı'],
+     'yok': _UYDURMA + ['10x2.0'],
      's3_yok': ['7732-18-5']},
 ]
 
@@ -93,6 +99,8 @@ def kural_testleri(c) -> int:
     from app.services.p_code_service import assign_p_codes, select_label_p_codes
     from app.services.sds_pipeline import label_components
     from app.services.audit_jev import derive_facts
+    from app.services.sds_pipeline import section3_display
+    from app.services.sds_sentence_service import generate_section3
 
     def p_label(usage, h):
         allp = assign_p_codes(h, usage=usage)['p_codes']
@@ -177,6 +185,23 @@ def kural_testleri(c) -> int:
         ('Denetim: yalnız H412 → uyarı kelimesi sorusu sorulmaz; H318 → sorulur (SEA Ek-1 Tablo 4.1.4)',
          lambda: 'uyari_kelimesi' not in derive_facts({'2': '2.1 H412 2.2 Uyarı Kelimesi Yok'})
          and 'uyari_kelimesi' in derive_facts({'2': '2.1 H318 2.2 Tehlike'})),
+        # ── Bölüm 3 konsantrasyon gösterimi (KKDİK Ek-2 A 3.2, 2026-10-08) ──
+        ('Ek-2 A 3.2: %6 + %3 cilt tahriş edici — bant üst uçları (<10, <5) H315 verirdi → aralıklar daraltılır',
+         lambda: (lambda d: all(d[k]['kind'] == 'narrowed' for k in ('a', 'b'))
+                  and d['a']['upper'] + d['b']['upper'] < 10.0001)(
+             section3_display([C('a', 6, ('Skin Irrit. 2', 'H315')), C('b', 3, ('Skin Irrit. 2', 'H315'))]))),
+        ('Ek-2 A 3.2: kullanıcı aralığı 10–30 aynen yazılır',
+         lambda: section3_display([C('x', 30, ('Skin Irrit. 2', 'H315'), conc_min=10)])['x']['text'] == '≥ 10 - ≤ 30%'),
+        ('Ek-2 A 3.2: "tam değer" seçimi → 20%; varsayılan → ≥ 20 - < 25%',
+         lambda: section3_display([C('x', 20, ('Aquatic Chronic 2', 'H411'))], mode='exact')['x']['text'] == '20%'
+         and section3_display([C('x', 20, ('Aquatic Chronic 2', 'H411'))])['x']['text'] == '≥ 20 - < 25%'),
+        ('SEA Md.26: onay bilgisi yoksa alternatif ad kullanılmaz; onay varsa ad ve CAS gizlenir',
+         lambda: generate_section3([C('71-43-2', 1, name='benzen', alt_name='aromatik', disclosure='hide')])[0]['name']
+         == 'benzen' and generate_section3([C('9-9-9', 1, name='x', alt_name='aromatik', alt_name_approval='01.01.2026/1',
+                                               disclosure='hide')])[0]['name'] == 'aromatik'),
+        ("Ek-2 A 3.2 uçtan uca: panelde 'tam değer' → Bölüm 3'te 20%, aralık notu yok",
+         lambda: (lambda t: '≥ 20 - < 25%' not in t and ' 20% ' in t and 'yüzde aralığı olarak' not in t)(
+             _pdf_text(c, [('120-51-4', 20), ('7732-18-5', 80)], conc_display='exact'))),
     ]
     hata = 0
     for ad, f in testler:
@@ -190,6 +215,25 @@ def kural_testleri(c) -> int:
     if not hata:
         print(f'✓ {len(testler)} SEA kural testi')
     return hata
+
+
+def _pdf_text(c, bil, **extra) -> str:
+    """Kısa uçtan uca GBF: bileşen listesiyle PDF üretip metnini (boşluklar tek) döndürür."""
+    import fitz
+    comps = []
+    for cas, conc in bil:
+        r = c.get('/api/v1/sds/substance/lookup', params={'cas': cas, 'form': 'liquid'}).json()
+        comps.append({'cas': cas, 'name': r.get('name') or cas, 'name_tr': r.get('name_tr', ''), 'conc': conc,
+                      'concMax': conc, 'hazards': r.get('hazards', []), 'sclRaw': r.get('scl', []), 'm_factors': {}})
+    calc = {'components': comps, 'form': 'liquid', 'usage': 'industrial', 'lang': 'TR'}
+    body = {'lang': 'TR', 'product': {'name': 'Kural testi', 'form': 'liquid', 'usage': 'industrial'},
+            'supplier': {'name': 'Kontrol Seti A.Ş.', 'address': 'Örnek Mah. No:1 İstanbul', 'phone': '0212 000 00 00',
+                         'email': 'kontrol@ornek.com'},
+            'components': comps, 'calc_input': calc, 'phys_props': {}, 'phys_methods': {},
+            'revision': {'no': '1', 'date': '08.10.2026', 'notes': ''}, **extra}
+    j = c.post('/api/v1/sds/pdf', json=body).json()
+    b64 = next(v for v in j.values() if isinstance(v, str) and len(v) > 5000)
+    return _norm('\n'.join(p.get_text() for p in fitz.open(stream=base64.b64decode(b64), filetype='pdf')))
 
 
 def _norm(t: str) -> str:

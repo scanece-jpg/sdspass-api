@@ -447,7 +447,9 @@ _CONC_NEAR = re.compile(r'(?:[<>≤≥]=?\s*)?(\d+(?:[.,]\d+)?)\s*(?:%)?\s*(?:-|
                         r'|(?:[<>≤≥]=?\s*)?(\d+(?:[.,]\d+)?)\s*%|%\s*[<>≤≥]?\s*(\d+(?:[.,]\d+)?)')
 
 
-_RANGE_GE = re.compile(r'(?:[>≥]=?|&gt;=?)\s*(\d+(?:[.,]\d+)?)\s*%?\s*[-–]\s*(?:[<≤]=?|&lt;=?)\s*(\d+(?:[.,]\d+)?)')
+_RANGE_GE = re.compile(r'(?:[>≥]=?|&gt;=?)\s*(\d+(?:[.,]\d+)?)\s*%?\s*[-–]\s*([<≤]=?|&lt;=?)\s*(\d+(?:[.,]\d+)?)')
+# Yalnız üst sınır: "< 0,1%" (alt sınırsız aralık)
+_RANGE_LT = re.compile(r'(?<![\d.,])(?:<|&lt;)\s*(\d+(?:[.,]\d+)?)\s*%')
 
 
 def _segments3(ctx):
@@ -469,11 +471,16 @@ def _comps3(ctx):
         i = s3.find(c)
         # Önce "≥ x - < y" aralığı (konsantrasyon sütunu; % işareti olmayabilir). Bazı GBF'ler satırda önce
         # özel konsantrasyon sınırlarını "20 - 100 %" biçiminde yazar — onlar konsantrasyon değildir.
+        # KKDİK Ek-2 A 3.2: aralıkta zararlar en yüksek konsantrasyona göre tanımlanır → hesap üst uçta;
+        # "< y" üst sınırı dahil değildir → eşiğin hemen altı (y × (1 − 10⁻⁶)); "≤ y" → y.
         r = _RANGE_GE.search(seg)
-        conc_low = None
+        lt = _RANGE_LT.search(seg[:260]) if not r else None
         if r:
-            conc = float(r.group(2).replace(',', '.'))
-            conc_low = float(r.group(1).replace(',', '.'))
+            conc = float(r.group(3).replace(',', '.'))
+            if r.group(2) in ('<', '&lt;'):
+                conc *= (1 - 1e-6)
+        elif lt:
+            conc = float(lt.group(1).replace(',', '.')) * (1 - 1e-6)
         else:
             m = _CONC_NEAR.search(seg[:260]) or _CONC_NEAR.search(s3[max(0, i - 120):i])
             if not m:
@@ -484,7 +491,7 @@ def _comps3(ctx):
             unknown.append(c)
         comps.append({'cas_no': c, 'cas': c, 'name': lk.get('name') or c, 'name_tr': lk.get('name_tr') or '',
                       'concentration': conc, 'conc': conc,
-                      'conc_low': conc if conc_low is None else conc_low, 'hazards': lk.get('hazards') or [],
+                      'hazards': lk.get('hazards') or [],
                       'sclRaw': lk.get('scl') or [], 'euh_limits': lk.get('euh_limits') or [],
                       'm_factors': lk.get('m_factors') or {},
                       'suppl_hazards': lk.get('suppl_hazards') or [], 'segment': seg})
@@ -548,24 +555,13 @@ def c_hesap(ctx):
     try:
         calc = _calc(comps)
         if calc == given:
-            return 'uygun', f'Yeniden hesaplanan sağlık/çevre sınıflandırması 2.1 ile aynı: {sorted(calc)}{note}'
-        # Bölüm 3 aralık veriyorsa (Ek-2 A 3.2 / gizlilik) gerçek değer aralığın içindedir: her bileşen için
-        # alt ve üst uç denenir; 2.1'i veren bir birleşim varsa sınıflandırma aralıklarla tutarlıdır.
-        import itertools
-        rng = [i for i, c in enumerate(comps) if c.get('conc_low') not in (None, c['conc'])]
-        if rng and len(rng) <= 6:
-            for combo in itertools.product((0, 1), repeat=len(rng)):
-                cs = [dict(c) for c in comps]
-                for i, lo in zip(rng, combo):
-                    if lo:
-                        cs[i]['conc'] = cs[i]['concentration'] = cs[i]['conc_low']
-                if _calc(cs) == given:
-                    return 'uygun', (f'2.1 sınıflandırması {sorted(given)}, Bölüm 3\'teki konsantrasyon aralıkları '
-                                     f'içinde yeniden hesapla elde ediliyor (üst uçlarda {sorted(calc)}).{note}')
+            return 'uygun', (f'Bölüm 3 konsantrasyonlarının üst değeriyle yeniden hesaplanan sağlık/çevre '
+                             f'sınıflandırması 2.1 ile aynı: {sorted(calc)}{note}')
     except Exception as e:
         return 'kdu', f'Yeniden hesap yapılamadı: {e}'
-    return 'kdu', (f'Yeniden hesap {sorted(calc)} — 2.1 {sorted(given)}. Fark kaynak verisinden veya '
-                   f'konsantrasyon okumasından olabilir; KDU doğrulasın.{note}')
+    return 'kdu', (f'Bölüm 3 üst değerleriyle yeniden hesap {sorted(calc)} — 2.1 {sorted(given)}. KKDİK Ek-2 A 3.2: '
+                   f'aralık kullanılırsa zararlar en yüksek konsantrasyona göre tanımlanır — aralık çok geniş olabilir '
+                   f'ya da fark kaynak verisinden/okumadan kaynaklanabilir; KDU doğrulasın.{note}')
 
 
 def c_32_sira(ctx):

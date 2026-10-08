@@ -27,6 +27,7 @@ Teorik özellikler:
 """
 
 import math
+from app.services import iso10156
 from typing import List, Dict, Any, Optional
 
 # ── PARLAMA NOKTASI VERİTABANI (°C) ─────────────────────────────────────────
@@ -2231,6 +2232,8 @@ def calculate(comps: List[Dict], form: str = 'liquid',
         test_data = {}
 
     primary, extra, warnings, pending_decisions = [], [], [], []
+    _iso_gas = None   # ISO 10156 gaz karışımı hesabı sonucu (Bölüm 9 / 16 için)
+    _iso_ox = None    # ISO 10156 5.3 oksitleme gücü hesabı sonucu (Bölüm 16 için)
 
     fl = {'result': None, 'source': None, 'fp': None}
     if form in ('liquid', 'paste'):
@@ -2287,19 +2290,28 @@ def calculate(comps: List[Dict], form: str = 'liquid',
         else:
             # Alevlenir gaz karışımı — SEA Ek-1 2.2 / Tablo 2.2.1 (TR: Kategori 1 ve 2). Karışımın alevlenirliği
             # test (EN 1839) veya ISO 10156 hesabıyla belirlenir; bileşenin varlığı yetmez (örn. azotta %1 CO
-            # alevlenmez). ISO 10156 için bileşen alevlenme sınırı verisi henüz yok → ara çözüm:
-            #  - bütün bileşenler Kat.1 alevlenir gaz ise karışımın alt alevlenme sınırı da ≤ %13 → Kat.1;
-            #  - alevlenmeyen bileşen varsa kullanıcıdan test / ISO 10156 sonucu istenir (karar sorusu).
+            # alevlenmez). Sıra: kullanıcının test sonucu → ISO 10156:2017 hesabı (iso10156.py, parametreler
+            # data/iso10156_gas_data.json) → hesap yapılamıyorsa (tabloda olmayan bileşen, oksitleyici gaz,
+            # kısmen halojenli hidrokarbon) bütün bileşenler Kat.1 ise Kat.1, değilse karar sorusu.
             def _gas_cat(c):
                 hs = {(h.get('h_code') or '').replace('*', '').strip()[:4] for h in (c.get('hazards') or [])}
                 return 1 if 'H220' in hs else 2 if 'H221' in hs else 0
             _gas_comps = [c for c in comps if float(c.get('concMax') or c.get('conc') or 0) > 0]
             _flam = [c for c in _gas_comps if _gas_cat(c)]
             _fg_dec = (test_data.get('flammable_gas') or '').strip()
-            if _flam and not _fg_dec:
+            _iso = iso10156.evaluate(comps) if not _fg_dec else {'status': 'skipped'}
+            if _iso['status'] == 'calculated':
+                _iso_gas = _iso
+                if _iso['flammable']:
+                    primary.append({'type': 'flam_gas', 'h': _iso['h'], 'h_class': _iso['h_class'],
+                                    'signal': 'Danger' if _iso['h'] == 'H220' else 'Warning',
+                                    'source': f"{_iso['text']} — parametreler: {_iso['source']}",
+                                    'cutoff_used': _iso['text']})
+            elif (_flam or _iso['status'] == 'not_applicable') and not _fg_dec:
                 _nm = lambda c: (c.get('name_tr') or c.get('name') or c.get('cas') or c.get('cas_no') or '')
                 _fsrc = ', '.join(f"{_nm(c)} (%{float(c.get('concMax') or c.get('conc') or 0):g})" for c in _flam)
-                if len(_flam) == len(_gas_comps) and all(_gas_cat(c) == 1 for c in _flam):
+                _iso_why = _iso.get('reason') or ''
+                if _flam and len(_flam) == len(_gas_comps) and all(_gas_cat(c) == 1 for c in _flam):
                     primary.append({
                         'type': 'flam_gas', 'h': 'H220', 'h_class': 'Flam. Gas 1', 'signal': 'Danger',
                         'source': _fsrc,
@@ -2311,10 +2323,11 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                         'code': 'PHYS_FLAM_GAS_UNTESTED',
                         'field': 'flammable_gas',
                         'question': (
-                            f'Gaz karışımında alevlenir gaz bileşeni var: {_fsrc}; ancak karışımda alevlenmeyen '
-                            'bileşen(ler) de bulunuyor. SEA Ek-1 2.2 gereği karışımın alevlenirliği test (EN 1839) '
-                            'veya ISO 10156 hesabıyla belirlenir — bileşenin varlığı yeterli değildir. '
-                            'Sonucu seçin.'),
+                            (f'Gaz karışımında alevlenir gaz bileşeni var: {_fsrc}. ' if _fsrc else
+                             'Gaz karışımında alevlenir olabilecek bileşen var. ')
+                            + 'SEA Ek-1 2.2 gereği karışımın alevlenirliği test (EN 1839) veya ISO 10156 hesabıyla '
+                            'belirlenir — bileşenin varlığı yeterli değildir. Program hesabı yapamadı: '
+                            + (_iso_why or 'bileşen verisi eksik') + '. Sonucu seçin.'),
                         'test_guidance': (
                             'Kategori 1: havada hacimce %13 veya daha az bir karışımda tutuşuyor ya da alevlenme '
                             'aralığı en az 12 puan; Kategori 2: diğer alevlenir gazlar (SEA Ek-1 Tablo 2.2.1). '
@@ -2336,18 +2349,38 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                         'components': [f"{c.get('cas') or c.get('cas_no') or ''} — {_nm(c)}" for c in _flam],
                     })
 
-        ox_gas = [c for c in comps
-                  if ((c.get('cas') or c.get('cas_no') or '').strip() in OXIDIZING_GAS_CAS
-                      or any((h.get('h_code') or '').replace('*','').strip()[:4] == 'H270'
-                             for h in (c.get('hazards') or [])))
-                  and float(c.get('concMax') or c.get('conc') or 0) >= 1]
-        if ox_gas:
-            _ox_src = ', '.join(
-                f"{c.get('name') or (c.get('cas') or c.get('cas_no') or '')} "
-                f"(%{float(c.get('concMax') or c.get('conc') or 0):.0f})" for c in ox_gas)
-            extra.append({'type': 'ox_gas', 'h': 'H270', 'h_class': 'Ox. Gas 1',
-                          'signal': 'Danger', 'source': _ox_src,
-                          'cutoff_used': '≥ %1 oksitleyici gaz bileşen (CLP Ek-I §2.4)'})
+        # Oksitleyici gaz (H270) — SEA Ek-1 2.4: karışım havadan daha oksitleyiciyse (ISO 10156 5.3 oksitleme gücü
+        # > %23,5). Önceki "≥ %1 oksitleyici bileşen" kuralı sentetik havaya (%21 O2) bile H270 veriyordu.
+        # Sıra: kullanıcının test/hesap sonucu → ISO 10156 hesabı → hesap yapılamıyorsa karar sorusu.
+        if not (test_data.get('oxidizing_gas') or '').strip():
+            _ox = iso10156.evaluate_oxidizing(comps)
+            if _ox['status'] == 'calculated':
+                _iso_ox = _ox
+                if _ox['oxidizing']:
+                    extra.append({'type': 'ox_gas', 'h': 'H270', 'h_class': 'Ox. Gas 1', 'signal': 'Danger',
+                                  'source': f"{_ox['text']} — parametreler: {_ox['source']}",
+                                  'cutoff_used': _ox['text']})
+            elif _ox['status'] == 'not_applicable':
+                pending_decisions.append({
+                    'code': 'PHYS_OX_GAS_UNTESTED',
+                    'field': 'oxidizing_gas',
+                    'question': ('Gaz karışımında oksitleyici gaz bileşeni var. SEA Ek-1 2.4 gereği karışımın '
+                                 'havadan daha oksitleyici olup olmadığı test veya ISO 10156 hesabıyla belirlenir — '
+                                 f"bileşenin varlığı yeterli değildir. Program hesabı yapamadı: {_ox['reason']}. "
+                                 'Sonucu seçin.'),
+                    'test_guidance': ('ISO 10156: oksitleme gücü OP = Σ xᵢCᵢ / (Σ xᵢ + Σ KₖBₖ) > %23,5 ise '
+                                      'oksitleyici gaz (Kategori 1). Gaz tedarikçisinin GBF\'sinde genellikle yer alır.'),
+                    'options': [
+                        {'value': 'H270', 'label': 'Test / ISO 10156 sonucu — oksitleyici gaz (H270)',
+                         'effect': 'H270 → GHS03, Tehlike'},
+                        {'value': 'not_oxidizing', 'label': 'Test / ISO 10156 sonucu — oksitleyici değil',
+                         'effect': 'H270 atanmaz; Bölüm 16\'ya gerekçe yazılır'},
+                        {'value': 'not_tested_precautionary',
+                         'label': 'Test/hesap yapılmadı — geçici ihtiyatlı H270 (revizyon şartıyla)',
+                         'effect': 'H270 atanır; Bölüm 16\'ya "test bekliyor" notu düşülür'},
+                    ],
+                    'legal_basis': 'SEA Ek-1 2.4 (Tablo 2.4.1)',
+                })
 
         # H280/H281 — Basınçlı kap (CLP Ek-I §2.5, Tablo 2.5.1)
         # Gaz formu = ≥200 kPa gauge ambalaj → H280 zorunlu (ambalaj özelliği, içerikten bağımsız)
@@ -2777,13 +2810,16 @@ def calculate(comps: List[Dict], form: str = 'liquid',
         'flammable_gas':     {'H220':                    ('H220', 'Flam. Gas 1',         'Danger'),
                               'H221':                    ('H221', 'Flam. Gas 2',         'Warning'),
                               'not_tested_precautionary':('H220', 'Flam. Gas 1',         'Danger')},
+        'oxidizing_gas':     {'H270':                    ('H270', 'Ox. Gas 1',           'Danger'),
+                              'not_tested_precautionary':('H270', 'Ox. Gas 1',           'Danger')},
     }
     for field, h_map in _MANUAL_H_MAP.items():
         val = (test_data.get(field) or '').strip()
         if val and val != 'na' and val in h_map:
             h, h_class, signal = h_map[val]
             _test_n = {'metal_corrosive': 'UN C.1', 'oxidizing_liquid': 'UN L.1/L.2',
-                       'oxidizing_solid': 'UN O.1', 'flammable_gas': 'EN 1839 / ISO 10156'}.get(field, '')
+                       'oxidizing_solid': 'UN O.1', 'flammable_gas': 'EN 1839 / ISO 10156',
+                       'oxidizing_gas': 'ISO 10156'}.get(field, '')
             if val == 'not_tested_precautionary':
                 _src = 'Test yapılmadı — ihtiyatlı sınıflandırma (kullanıcı kararı)'
                 _cut = 'Test yapılmadı — ihtiyatlı sınıflandırma (bkz. Bölüm 16)'
@@ -2799,6 +2835,7 @@ def calculate(comps: List[Dict], form: str = 'liquid',
         'oxidizing_liquid': ('Oksitleyici sıvı (H271/H272)', 'Oxidising liquid (H271/H272)', 'UN L.1/L.2'),
         'oxidizing_solid':  ('Oksitleyici katı (H271/H272)', 'Oxidising solid (H271/H272)', 'UN O.1'),
         'flammable_gas':    ('Alevlenir gaz (H220/H221)', 'Flammable gas (H220/H221)', 'EN 1839 / ISO 10156'),
+        'oxidizing_gas':    ('Oksitleyici gaz (H270)', 'Oxidising gas (H270)', 'ISO 10156'),
     }
     classification_notes = []
     for field, (tr_n, en_n, test_n) in _NOTE_NAMES.items():
@@ -2826,8 +2863,46 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                 'TR': f'{tr_n}: {test_n} test sonucuna göre sınıflandırılmamıştır (tedarikçi beyanı).',
                 'EN': f'{en_n}: not classified based on {test_n} test result (supplier declaration).'})
 
+    # Gaz karışımı ISO 10156 hesabıyla değerlendirildiyse yöntem ve sonuç Bölüm 16'ya yazılır (Ek-2 16(ç))
+    if _iso_gas:
+        _sum_s = f"{_iso_gas['sum']:.2f}".replace('.', ',')
+        if _iso_gas['flammable']:
+            classification_notes.append({
+                'TR': (f"Alevlenir gaz ({_iso_gas['h']}): ISO 10156:2017 hesap yöntemiyle sınıflandırılmıştır "
+                       f"(Σ A'ᵢ/Tcᵢ = {_sum_s} > 1; parametreler: {_iso_gas['source']}). "
+                       'Test (EN 1839) sonucu varsa test esastır.'),
+                'EN': (f"Flammable gas ({_iso_gas['h']}): classified by the ISO 10156:2017 calculation method "
+                       f"(Σ A'i/Tci = {_sum_s.replace(',', '.')} > 1). A test result (EN 1839) takes precedence.")})
+        else:
+            classification_notes.append({
+                'TR': (f"Alevlenir gaz: ISO 10156:2017 hesabına göre karışım havada alevlenir değildir "
+                       f"(Σ A'ᵢ/Tcᵢ = {_sum_s} ≤ 1; parametreler: {_iso_gas['source']}); sınıflandırılmamıştır. "
+                       'Test (EN 1839) sonucu varsa test esastır.'),
+                'EN': (f"Flammable gas: according to the ISO 10156:2017 calculation the mixture is not flammable "
+                       f"in air (Σ A'i/Tci = {_sum_s.replace(',', '.')} ≤ 1); not classified. "
+                       'A test result (EN 1839) takes precedence.')})
+
+    if _iso_ox:
+        _op_s = f"{_iso_ox['op']:g}".replace('.', ',')
+        classification_notes.append({
+            'TR': (f"Oksitleyici gaz: ISO 10156:2017 5.3 hesabına göre oksitleme gücü %{_op_s} "
+                   + ('> %23,5 — Oks. Gaz 1 (H270) olarak sınıflandırılmıştır'
+                      if _iso_ox['oxidizing'] else '≤ %23,5 — havadan daha oksitleyici değildir, sınıflandırılmamıştır')
+                   + f" (parametreler: {_iso_ox['source']}). Test sonucu varsa test esastır."),
+            'EN': (f"Oxidising gas: oxidising power per ISO 10156:2017 5.3 = {_iso_ox['op']:g} % "
+                   + ('> 23.5 % — classified as Ox. Gas 1 (H270)' if _iso_ox['oxidizing']
+                      else '≤ 23.5 % — not more oxidising than air, not classified')
+                   + '. A test result takes precedence.')})
+
     # Teorik fiziksel özellikler — katı/toz için yoğunluk+çözünürlük, gaz için buhar yoğunluğu
     theo_props = calc_theo_props(comps) or {}
+
+    # Alevlenir gaz karışımının alt alevlenme sınırı — Le Chatelier (ISO 10156:2017 4.5); üst sınır bu yöntemle
+    # hesaplanamaz (ISO 10156 4.5.1) → yalnız alt sınır yazılır
+    if _iso_gas and _iso_gas.get('lm') is not None:
+        theo_props['lel'] = {'value': _iso_gas['lm'], 'error': None, 'measured': False,
+                             'method': 'Le Chatelier (ISO 10156:2017 4.5)', 'standard': 'ISO 10156:2017'}
+        theo_props.pop('uel', None)
 
     # Katı/toz üründe bileşen yoğunluklarından karışım yoğunluğu hesaplanmaz: Σwᵢ/Σ(wᵢ/ρᵢ) sıvı
     # karışım formülüdür (ISO 2811 sıvılar içindir); tablet/granül/tozun yoğunluğu gözenek ve

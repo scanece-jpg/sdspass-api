@@ -103,18 +103,44 @@ URUNLER = [
     {'ad': 'LPG (propan/bütan, sıvılaştırılmış)', 'form': 'gas', 'bil': [('74-98-6', 60), ('106-97-8', 40)],
      'test_data': {'gas_type': 'liquefied'}, 'phys': {'appearance': 'Gaz', 'color': 'renksiz', 'odor': 'karakteristik'},
      'h': ['H220', 'H280'], 'signal': 'Danger',
-     'var': ['Alev. Gaz 1 H220 propan', 'Basınçlı Gaz (Sıvılaştırılmış gaz)', 'UN 1965',
+     'var': ['Alev. Gaz 1 H220 ISO 10156:2017 4.3 hesabı', '= 27,33 > 1', 'Basınçlı Gaz (Sıvılaştırılmış gaz)', 'UN 1965',
              'HİDROKARBON GAZ KARIŞIMI, SIVILAŞTIRILMIŞ'],
      'yok': _UYDURMA + ['Alev. Gaz 1A', 'H232', 'UN 3163', 'bileşen varlığı']},
-    {'ad': 'Azot içinde %1 karbon monoksit (alevlenir değil)', 'form': 'gas',
+    {'ad': 'Azot içinde %1 karbon monoksit (ISO 10156 hesabı: alevlenir değil)', 'form': 'gas',
      'bil': [('630-08-0', 1), ('7727-37-9', 99)],
-     'test_data': {'gas_type': 'compressed', 'flammable_gas': 'not_flammable'},
-     'soru': ('PHYS_FLAM_GAS_UNTESTED', 'flammable_gas'),
+     'test_data': {'gas_type': 'compressed'},
      'phys': {'appearance': 'Gaz', 'color': 'renksiz', 'odor': 'kokusuz'},
      'h': ['H280', 'H360D', 'H373'], 'signal': 'Danger',
      'var': ['UN 1956', 'SIKIŞTIRILMIŞ GAZ, B.N.O.', 'Alevlenir gaz olarak sınıflandırılmamıştır',
-             'ISO 10156 hesabı sonucuna göre karışım alevlenir değildir', 'hacimce (h/h)'],
+             'ISO 10156:2017 hesabına göre karışım havada alevlenir değildir', '= 0,07 ≤ 1', 'EIGA Doc 169',
+             'hacimce (h/h)'],
      'yok': _UYDURMA + ['Alevlenir gaz (H220)', 'UN 1954', 'P377']},
+    {'ad': 'Formlama gazı (%5 hidrojen / azot) — ISO 10156: 5/5,5 = 0,91 ≤ 1', 'form': 'gas',
+     'bil': [('1333-74-0', 5), ('7727-37-9', 95)], 'test_data': {'gas_type': 'compressed'},
+     'phys': {'appearance': 'Gaz', 'color': 'renksiz', 'odor': 'kokusuz'},
+     'h': ['H280'], 'signal': 'Warning',
+     'var': ['UN 1956', 'Alevlenir gaz olarak sınıflandırılmamıştır', '= 0,91 ≤ 1'],
+     'yok': _UYDURMA + ['Alevlenir gaz (H220)', 'UN 1954', 'P210']},
+    {'ad': 'ISO 10156 Örnek 2 (%2 H2, %8 CH4, %25 Ar, %65 He) — alevlenir', 'form': 'gas',
+     'bil': [('1333-74-0', 2), ('74-82-8', 8), ('7440-37-1', 25), ('7440-59-7', 65)],
+     'test_data': {'gas_type': 'compressed'}, 'phys': {'appearance': 'Gaz', 'color': 'renksiz', 'odor': 'kokusuz'},
+     'h': ['H220', 'H280'], 'signal': 'Danger',
+     'var': ['Alev. Gaz 1 H220', '= 1,56 > 1', 'Kategori 1 (ISO 10156 4.7)', 'Alt: %39.7; üst: belirlenmemiştir',
+             'UN 1954', 'P210'],
+     'yok': _UYDURMA + ['%?', 'UN 1956']},
+    {'ad': 'Sentetik hava (%21 oksijen / azot) — ISO 10156 OP %21 ≤ %23,5', 'form': 'gas',
+     'bil': [('7782-44-7', 21), ('7727-37-9', 79)], 'test_data': {'gas_type': 'compressed'},
+     'phys': {'appearance': 'Gaz', 'color': 'renksiz', 'odor': 'kokusuz'},
+     'h': ['H280'], 'signal': 'Warning',
+     'var': ['oksitleme gücü %21 ≤ %23,5', 'P410+P403', 'Güneş ışığından koruyun'],
+     'yok': _UYDURMA + ['Oksitleyici gaz (H270)', 'UN 3156', 'Sınıf 2.2 (5.1)']},
+    {'ad': 'Oksijen %30 / azot — ISO 10156 OP %30 > %23,5', 'form': 'gas',
+     'bil': [('7782-44-7', 30), ('7727-37-9', 70)], 'test_data': {'gas_type': 'compressed'},
+     'phys': {'appearance': 'Gaz', 'color': 'renksiz', 'odor': 'kokusuz'},
+     'h': ['H270', 'H280'], 'signal': 'Danger',
+     'var': ['Oks. Gaz 1 H270 ISO 10156:2017 5.3 hesabı', 'P220', 'P410+P403', 'UN 3156',
+             'etiket: 2.2 + 5.1', 'Sınıf 2.2 (5.1)'],
+     'yok': _UYDURMA + ['≥ %1 oksitleyici']},
 ]
 
 
@@ -133,6 +159,9 @@ def kural_testleri(c) -> int:
     from app.services.codes_i18n import correct_hclass
     from app.services.sds_pipeline import section3_display
     from app.services.sds_sentence_service import generate_section3
+    from app.services import iso10156
+    from app.services.physical_engine import calculate as phys_calc
+    import datetime
 
     def p_label(usage, h):
         allp = assign_p_codes(h, usage=usage)['p_codes']
@@ -243,6 +272,38 @@ def kural_testleri(c) -> int:
          lambda: (lambda p: {'P210', 'P220', 'P280'} <= set(p) and 'P221' not in p)(assign_p_codes(['H272'])['p_codes'])),
         ('SEA Ek-1 Tablo 2.2.1 (TR): alevlenir gaz Kategori 1 — "1A" alt kategorisi yok',
          lambda: correct_hclass('H220', 'Flam. Gas 1A') == 'Flam. Gas 1'),
+        # ── Gaz karışımı alevlenirliği — ISO 10156:2017 (2026-10-08); beklenenler standardın 4.4 / 4.6 örnekleri ──
+        ('ISO 10156 4.4 Örnek 1: %7 H2 + %93 CO2 → Σ = 0,869, alevlenir değil',
+         lambda: (lambda r: not r['flammable'] and abs(r['sum'] - 0.869) < 0.001)(
+             iso10156.evaluate([C('1333-74-0', 7), C('124-38-9', 93)]))),
+        ('ISO 10156 4.4 Örnek 2: %2 H2 + %8 CH4 + %25 Ar + %65 He → Σ = 1,56, alevlenir (Kat.1)',
+         lambda: (lambda r: r['flammable'] and abs(r['sum'] - 1.56) < 0.01 and r['h'] == 'H220')(
+             iso10156.evaluate([C('1333-74-0', 2), C('74-82-8', 8), C('7440-37-1', 25), C('7440-59-7', 65)]))),
+        ('ISO 10156 4.6 Örnek 3 ve 4: alt alevlenme sınırı %11,4 ve %14,3',
+         lambda: iso10156.evaluate([C('74-82-8', 40), C('124-38-9', 60)])['lm'] == 11.4
+         and iso10156.evaluate([C('1333-74-0', 15), C('74-82-8', 15), C('124-38-9', 30),
+                                C('7727-37-9', 40)])['lm'] == 14.3),
+        ('EIGA Doc 169 2.2.2.1: yalnız amonyak içeren alevlenir karışım → Kategori 2 (H221)',
+         lambda: iso10156.evaluate([C('7664-41-7', 50), C('7727-37-9', 50)])['h'] == 'H221'),
+        ('Tabloda olmayan alevlenir gaz veya oksijen → hesap yok, karar sorusu',
+         lambda: all('PHYS_FLAM_GAS_UNTESTED' in [d['code'] for d in phys_calc(b, form='gas')['pending_decisions']]
+                     for b in ([C('9999-99-9', 5, ('Flam. Gas 1', 'H220')), C('7727-37-9', 95)],
+                               [C('74-82-8', 5, ('Flam. Gas 1', 'H220')), C('7782-44-7', 95)]))),
+        ('ISO 10156 5.3 Örnek 1 ve 2: OP %13 (oksitleyici değil), %29 (oksitleyici)',
+         lambda: (lambda a, b: a['op'] == 13.0 and not a['oxidizing'] and b['oxidizing'] and abs(b['op'] - 29.1) < 0.1)(
+             iso10156.evaluate_oxidizing([C('10024-97-2', 5), C('7782-44-7', 10), C('7727-37-9', 85)]),
+             iso10156.evaluate_oxidizing([C('10024-97-2', 20), C('7782-44-7', 20), C('7727-37-9', 40),
+                                          C('124-38-9', 20)]))),
+        ('Oksijen + alevlenir gaz → oksitleyici hesabı yok, karar sorusu (ISO 10156 bölüm 6)',
+         lambda: 'PHYS_OX_GAS_UNTESTED' in [d['code'] for d in phys_calc(
+             [C('7782-44-7', 30), C('74-82-8', 2, ('Flam. Gas 1', 'H220')), C('7727-37-9', 68)],
+             form='gas')['pending_decisions']]),
+        ('SEA Ek-1 Tablo 2.5: H280 → etikette P410+P403 (ayrık P410/P403 değil); H220 ile P403 tekrar etmez',
+         lambda: p_label('industrial', ['H280']) == ['P410+P403']
+         and (lambda p: 'P410+P403' in p and 'P403' not in p)(p_label('industrial', ['H220', 'H280']))),
+        ('ISO 10156 / EIGA Doc 169 parametre tablosu 13 aydan eski değil (EIGA her Nisan yeni revizyon; '
+         'data/iso10156_gas_data.json — kaynakları kontrol edip dogrulama_tarihi güncellenir)',
+         lambda: (datetime.date.today() - datetime.date.fromisoformat(iso10156.data()['dogrulama_tarihi'])).days < 395),
         ("Ek-2 A 3.2 uçtan uca: panelde 'tam değer' → Bölüm 3'te 20%, aralık notu yok",
          lambda: (lambda t: '≥ 20 - < 25%' not in t and ' 20% ' in t and 'yüzde aralığı olarak' not in t)(
              _pdf_text(c, [('120-51-4', 20), ('7732-18-5', 80)], conc_display='exact'))),

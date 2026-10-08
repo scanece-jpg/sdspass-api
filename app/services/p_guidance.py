@@ -64,7 +64,9 @@ GUIDANCE: Dict[str, List[Tuple[str, str, str]]] = {
     'H223': [('P210', 'K', 'K'), ('P211', 'K', 'K'), ('P251', 'K', 'K'), ('P410+P412', 'K', 'K')],
     'H229': [('P210', 'K', 'K'), ('P251', 'K', 'K'), ('P410+P412', 'K', 'K')],
     'H270': [('P220', 'K', 'K'), ('P244', 'K', 'K'), ('P370+P376', 'S', 'S'), ('P403', 'K', 'K')],
-    'H280': [('P410+P403', 'X', 'X')],
+    # SEA Ek-1 Tablo 2.5 / Ek-4: P410+P403 yalnız UN RTDG P200 taşınabilir gaz silindirlerinde yazılmayabilir.
+    # Ambalaj türü (silindir / tank) programda bilinmediğinden her zaman yazılır (kullanıcı kararı 2026-10-08).
+    'H280': [('P410+P403', 'K', 'K')],
     'H281': [('P282', 'C', 'C'), ('P336+P315', 'K', 'K'), ('P403', 'X', 'X')],
     'H224': [('P210', 'K', 'K'), ('P233', 'K', 'K'), ('P403+P235', 'K', 'K')] + _FLAM_LIQ,
     'H225': [('P210', 'K', 'K'), ('P233', 'O', 'O'), ('P403+P235', 'C', 'C')] + _FLAM_LIQ,
@@ -151,6 +153,7 @@ REDUNDANT: Dict[str, List[str]] = {
     'P305+P351+P338': ['P337+P313'],
     'P310': ['P311', 'P312', 'P313', 'P314'], 'P311': ['P312', 'P313', 'P314'],
     'P308+P311': ['P308+P313', 'P312'], 'P333+P313': ['P332+P313'], 'P280': ['P262'],
+    'P410+P403': ['P403'],
 }
 
 RANK = {'K': 5, 'O': 4, 'C': 3, 'S': 2, 'X': 1, '-': 0}
@@ -205,7 +208,8 @@ def select_label(all_p: List[str], h_codes: List[str], usage: str, form: str,
     must = _gen + by_prio([p for p, l in cand.items() if l == 'K' and p not in _gen])
     opt = by_prio([p for p, l in cand.items() if l == 'O'])
 
-    chosen, dropped = [], set()
+    # Kesinlikle önerilen bir ifadenin kapsadıkları sıradan bağımsız düşer (örn. H220 P403 + H280 P410+P403)
+    chosen, dropped = [], {q for p in must for q in REDUNDANT.get(_canon(p), [])}
     for p in must + opt:
         if p in dropped or p in chosen:
             continue

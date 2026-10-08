@@ -1084,6 +1084,8 @@ def classify(h_codes: List[str], form: str = 'liquid',
                 'label': _gd2.get('name_tr') or un_entry.get('label'),
                 'classification_code': _gd2.get('classification_code') or un_entry.get('classification_code'),
                 'tunnel': _gd2.get('tunnel_code') or un_entry.get('tunnel'),
+                # ADR Tablo A sütun 5 — oksitleyici gaz (1O/2O/3O) etiketi 2.2 + 5.1
+                'labels': _gd2.get('labels') or un_entry.get('labels'),
                 'pg': '',
                 'note': (_gnote + 'Maddeye özgü UN numarası önceliklidir (örn. UN1978 propan, '
                          'UN1075 LPG, UN1066 azot).'),
@@ -1163,7 +1165,9 @@ def classify(h_codes: List[str], form: str = 'liquid',
         # (örn. H314 → PG I varsayılır ama UN1824'ün Tablo A'da PG I'i yoktur)
         'pg':                  un_entry.get('pg') or primary['pg'],
         'label':               un_entry['label'],
-        'sub_class':           sub_class,
+        # Gaz B.B.B. girişinin Tablo A yan etiketi (örn. UN 3156 → 5.1) IMDG/IATA'da yan tehlike olarak yazılır
+        'sub_class':           sub_class or ('+'.join(_labels_out[1:]) if _is_gas_cls and _labels_out
+                                             and len(_labels_out) > 1 else None),
         'note':                un_entry.get('note'),
         'env_mark':            env_mark,
         'conflict_warning':    conflict_warning,

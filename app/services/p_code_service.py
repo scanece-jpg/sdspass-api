@@ -295,8 +295,9 @@ H_TO_P: Dict[str, List[str]] = {
     'H228': ['P210','P240','P241','P280','P370+P378','P501'],
 
     # ── Basınçlı Gaz ─────────────────────────────────────────────────────────
-    'H280': ['P410','P403'],
-    'H281': ['P282','P336','P315','P403'],   # CLP Annex IV Tablo 6.3/6.5: P410 yalnızca H280
+    # SEA Ek-1 Tablo 2.5: birleşik ifadeler (p_guidance dereceleri birleşik koda bağlı — ayrık yazılınca seçilmiyordu)
+    'H280': ['P410+P403'],
+    'H281': ['P282','P336+P315','P403'],   # P410 yalnızca H280
     'H229': ['P210','P251','P410+P412'],
 
     # ── Oksitleyici Gaz ──────────────────────────────────────────────────────

@@ -2587,7 +2587,11 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         _lel_str = _lel_raw.get('display') if isinstance(_lel_raw, dict) else (str(_lel_raw) if _lel_raw else '?')
         _uel_str = _uel_raw.get('display') if isinstance(_uel_raw, dict) else (str(_uel_raw) if _uel_raw else '?')
         _num = lambda x: bool(_re.match(r'^\s*[<>≤≥~]?\s*\d', str(x or '')))
-        if _num(_lel_str) or _num(_uel_str):
+        if _num(_lel_str) and not _num(_uel_str):
+            # Gaz karışımında Le Chatelier yalnız alt sınırı verir (ISO 10156 4.5.1) — "%x – %?" basılmaz
+            _ex_val = _L(f"Alt: %{_lel_str}; üst: belirlenmemiştir", f"Lower: {_lel_str} %; upper: not determined") \
+                + _method_note('lel')
+        elif _num(_lel_str) or _num(_uel_str):
             _ex_val = f"%{_lel_str} – %{_uel_str}" + _method_note('lel')
         # Sayısal değer yoksa (örn. aerosolde hesap yazılmadı) "%Belirlenmemiştir – %…" basılmaz; aşağıdaki
         # genel "Belirlenmemiştir" ifadesi kullanılır

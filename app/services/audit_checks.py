@@ -418,6 +418,8 @@ def c_t14(ctx):
                 ('eksik', '2. bölümde aerosol sınıflandırması var; 14\'te UN 1950 bulunamadı.'))
     if h & {'H220', 'H221'}:
         exp.append('2.1')
+    elif 'H270' in h and h & {'H280', 'H281'} and not h & {'H330', 'H331', 'H314'}:
+        exp += ['2.2', '5.1']                     # oksitleyici gaz: ADR 1O/2O/3O → etiket 2.2 + 5.1
     elif h & {'H280', 'H281'} and not h & {'H330', 'H331', 'H314', 'H270'}:
         exp.append('2.2')
     if h & {'H271', 'H272'} and not exp:

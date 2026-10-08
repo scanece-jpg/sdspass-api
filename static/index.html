@@ -6201,8 +6201,6 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
     a.click();
     URL.revokeObjectURL(url);
 
-    // Temiz sds_data'yı sakla — denetim butonu kullanacak
-    window._lastSdsJson = resJson.sds_data || null;
     // Son oluşturulan GBF PDF'i — "GBF Denetimi" penceresi bunu denetleyebilir
     window._lastPdfB64  = resJson.pdf || null;
     window._lastPdfName = resJson.filename || `${productName.replace(/\s+/g,'_')}_SDS.pdf`;

@@ -2685,7 +2685,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     )
 
     # ── 10.5 Bağdaşmayan maddeler ────────────────────────────────────────────
-    # pre-fetch varsa (main.py/review_endpoint'in async handler'ında önceden çekildi):
+    # pre-fetch varsa (main.py'nin async handler'ında önceden çekildi):
     #   None  → fetch başarısız/timeout → senkron fallback dene
     #   list  → kullan (boş liste bile olsa gerçek sonuç, tekrar sorgu yapma)
     _pre = sds_data.get('_cameo_incompat')

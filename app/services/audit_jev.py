@@ -58,6 +58,9 @@ def derive_facts(secs: Dict[str, str], full_text: str = '') -> set:
     f |= {h[:4] if h.startswith('H') and not h.startswith('EUH') else h for h in hs}
     if any(h.startswith('H') and not h.startswith('EUH') for h in hs):
         f.add('siniflandirilmis')
+        # SEA Ek-1 Tablo 4.1.4 / 3.7.3: yalnız bu sınıflarda uyarı kelimesi kullanılmaz
+        if {h[:4] for h in hs if not h.startswith('EUH')} - {'H411', 'H412', 'H413', 'H362'}:
+            f.add('uyari_kelimesi')
     else:
         f.add('siniflandirilmamis')
     low3 = s3.lower()

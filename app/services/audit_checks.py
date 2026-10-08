@@ -288,6 +288,8 @@ def c_32_sinif(ctx):
 
 def c_32_ec(ctx):
     cas, s3 = _rows3(ctx)
+    if not cas and _NOTHING_TO_LIST.search(s3):
+        return 'uygun', 'Listelenmesi gereken madde yok.'
     ecs = set(EC_RE.findall(s3))
     return ('uygun', f'{len(ecs)} EC numarası.') if len(ecs) >= max(1, len(cas) - 1) else \
            ('kdu', f'EC numarası sayısı ({len(ecs)}) madde sayısından ({len(cas)}) az — mevcutsa verilmeli.')
@@ -409,6 +411,12 @@ def c_t14(ctx):
         exp.append('8')
     if h & {'H224', 'H225', 'H226'}:
         exp.append('3')
+    # ADR 2.2.9.1.10: Sucul Akut 1 / Kronik 1 / Kronik 2 → başka sınıf yoksa Sınıf 9 (UN 3082 sıvı, UN 3077 katı)
+    if not exp and h & {'H400', 'H410', 'H411'}:
+        un9 = re.search(r'(?i)\bUN\s*(3082|3077)\b', s14)
+        return ('uygun', f'Çevre için tehlikeli madde: Sınıf 9, UN {un9.group(1)} 14\'te var.') if un9 else \
+               ('kdu', '2. bölümde H400/H410/H411 var; 14\'te Sınıf 9 (UN 3082 / UN 3077) bulunamadı '
+                       '(ADR 2.2.9.1.10) — KDU doğrulasın.')
     miss = [e for e in exp if not re.search(rf'(?<![\d.]){e}(?![\d])', s14)]
     if not exp:
         return 'kdu', 'Bu sınıflandırma için basit eşleme yok; KDU doğrulasın.'
@@ -418,6 +426,8 @@ def c_t14(ctx):
 
 def c_t32(ctx):
     s2, s3 = ctx['secs'].get('2', ''), ctx['secs'].get('3', '').lower()
+    if not ({h[:4] for h in _h(s2)} & LABEL_COMP_H):
+        return 'uygun', '2.2\'de etikette adı yazılacak bileşen gerektiren sınıflandırma yok (SEA Md.20(3)(b)).'
     m = re.search(r'(?is)(?:zararlı bileşen\w*|tehlikeli bileşen\w*|içerir)\s*:?\s*(.{0,250})', s2)
     if not m:
         return 'kdu', '2.2\'de zararlı bileşen adı bulunamadı.'
@@ -460,8 +470,10 @@ def _comps3(ctx):
         # Önce "≥ x - < y" aralığı (konsantrasyon sütunu; % işareti olmayabilir). Bazı GBF'ler satırda önce
         # özel konsantrasyon sınırlarını "20 - 100 %" biçiminde yazar — onlar konsantrasyon değildir.
         r = _RANGE_GE.search(seg)
+        conc_low = None
         if r:
             conc = float(r.group(2).replace(',', '.'))
+            conc_low = float(r.group(1).replace(',', '.'))
         else:
             m = _CONC_NEAR.search(seg[:260]) or _CONC_NEAR.search(s3[max(0, i - 120):i])
             if not m:
@@ -471,8 +483,10 @@ def _comps3(ctx):
         if not lk.get('hazards') and not lk.get('found') and c != '7732-18-5':
             unknown.append(c)
         comps.append({'cas_no': c, 'cas': c, 'name': lk.get('name') or c, 'name_tr': lk.get('name_tr') or '',
-                      'concentration': conc, 'conc': conc, 'hazards': lk.get('hazards') or [],
+                      'concentration': conc, 'conc': conc,
+                      'conc_low': conc if conc_low is None else conc_low, 'hazards': lk.get('hazards') or [],
                       'sclRaw': lk.get('scl') or [], 'euh_limits': lk.get('euh_limits') or [],
+                      'm_factors': lk.get('m_factors') or {},
                       'suppl_hazards': lk.get('suppl_hazards') or [], 'segment': seg})
     ctx['_comps3'] = (comps, unknown)
     return comps, unknown
@@ -482,38 +496,74 @@ def c_hesap(ctx):
     """Bölüm 3'teki CAS + konsantrasyon üst değeriyle karışım sınıflandırmasını yeniden hesaplar."""
     from app.services.clp_service import classify_mixture_clp
     cas, s3 = _rows3(ctx)
+    given0 = {h for h in _h(_sub(ctx['secs'].get('2', ''), '2.1', '2.2')) if h[:2] in ('H3', 'H4')}
+    if not cas and _NOTHING_TO_LIST.search(s3):
+        return (('uygun', 'Bölüm 3\'te listelenecek madde yok ve 2.1\'de sağlık/çevre sınıflandırması yok — tutarlı.')
+                if not given0 else
+                ('eksik', f'2.1\'de {sorted(given0)} var ama Bölüm 3\'te listelenen madde yok (Ek-2 A 3.2.1).'))
     if not cas:
         return 'kdu', 'Bölüm 3 okunamadı.'
     comps, unknown = _comps3(ctx)
+    # GBF 2.1 gerekçesinde Tablo 3.2.4 / 3.3.4 (toplama yöntemi uygulanamaz) yazıyorsa aynı kural kullanılır
+    _na = bool(re.search(r'Tablo\s*3\.[23]\.4', ctx['secs'].get('2', '')))
+    _liq = 'form:sivi' in ctx['facts']
+
+    def _calc(cs):
+        res = classify_mixture_clp(cs, mixture_form='liquid' if _liq else '', additivity_na=_na)
+        # Sucul sınıf programın hattındaki gibi yalnız ecological_service'ten (SEA Ek-1 4.1.3.5 toplama)
+        out = {p['h_code'][:4] for p in res.get('passed', []) if p.get('h_code') and p['h_code'][:2] != 'H4'}
+        try:
+            from app.services.ecological_service import calculate_ecological
+            eco = calculate_ecological([{'cas': c['cas'], 'name': c['name'], 'conc': c['conc'],
+                                         'worst_case_conc': c['conc'], 'hazards': c['hazards'],
+                                         'm_factors': c.get('m_factors') or {}} for c in cs])
+            for _a in (getattr(eco, 'aquatic', None), getattr(eco, 'aquatic_acute', None)):
+                if _a is not None and getattr(_a, 'h_code', None):
+                    out.add(_a.h_code[:4])
+        except Exception:
+            pass
+        # Programın hattındaki gibi: STOT RE toplamsal (H372/H373) ve ATE ile akut toksisite ayrı motorlardan
+        try:
+            from app.services.stot_engine import calculate as stot_calc
+            out |= {str(h)[:4] for h in stot_calc(cs).get('h_codes', [])}
+        except Exception:
+            pass
+        try:
+            from app.services.clp_service import calculate_ate_health_h_codes
+            out |= {e['h_code'][:4] for e in calculate_ate_health_h_codes(
+                cs, form='liquid' if _liq else 'solid')[0]}
+        except Exception:
+            pass
+        if 'H372' in out:
+            out.discard('H373')
+        out = {h for h in out if h[:2] in ('H3', 'H4')}
+        if 'H314' in out:
+            out.discard('H318')
+        return out
+
+    given = set(given0)
+    if 'H314' in given:
+        given.discard('H318')
+    note = f' (verisi/konsantrasyonu okunamayan: {unknown})' if unknown else ''
     try:
-        # GBF 2.1 gerekçesinde Tablo 3.2.4 / 3.3.4 (toplama yöntemi uygulanamaz) yazıyorsa aynı kural kullanılır
-        _na = bool(re.search(r'Tablo\s*3\.[23]\.4', ctx['secs'].get('2', '')))
-        res = classify_mixture_clp(comps, mixture_form='liquid' if 'form:sivi' in ctx['facts'] else '',
-                                   additivity_na=_na)
+        calc = _calc(comps)
+        if calc == given:
+            return 'uygun', f'Yeniden hesaplanan sağlık/çevre sınıflandırması 2.1 ile aynı: {sorted(calc)}{note}'
+        # Bölüm 3 aralık veriyorsa (Ek-2 A 3.2 / gizlilik) gerçek değer aralığın içindedir: her bileşen için
+        # alt ve üst uç denenir; 2.1'i veren bir birleşim varsa sınıflandırma aralıklarla tutarlıdır.
+        import itertools
+        rng = [i for i, c in enumerate(comps) if c.get('conc_low') not in (None, c['conc'])]
+        if rng and len(rng) <= 6:
+            for combo in itertools.product((0, 1), repeat=len(rng)):
+                cs = [dict(c) for c in comps]
+                for i, lo in zip(rng, combo):
+                    if lo:
+                        cs[i]['conc'] = cs[i]['concentration'] = cs[i]['conc_low']
+                if _calc(cs) == given:
+                    return 'uygun', (f'2.1 sınıflandırması {sorted(given)}, Bölüm 3\'teki konsantrasyon aralıkları '
+                                     f'içinde yeniden hesapla elde ediliyor (üst uçlarda {sorted(calc)}).{note}')
     except Exception as e:
         return 'kdu', f'Yeniden hesap yapılamadı: {e}'
-    calc = {p['h_code'][:4] for p in res.get('passed', []) if p.get('h_code')}
-    # Programın hattındaki gibi: STOT RE toplamsal (H372/H373) ve ATE ile akut toksisite ayrı motorlardan
-    try:
-        from app.services.stot_engine import calculate as stot_calc
-        calc |= {str(h)[:4] for h in stot_calc(comps).get('h_codes', [])}
-    except Exception:
-        pass
-    try:
-        from app.services.clp_service import calculate_ate_health_h_codes
-        calc |= {e['h_code'][:4] for e in calculate_ate_health_h_codes(
-            comps, form='liquid' if 'form:sivi' in ctx['facts'] else 'solid')[0]}
-    except Exception:
-        pass
-    if 'H372' in calc:
-        calc.discard('H373')
-    calc = {h for h in calc if h[:2] == 'H3' or h[:2] == 'H4'}
-    given = {h for h in _h(_sub(ctx['secs'].get('2', ''), '2.1', '2.2')) if h[:2] in ('H3', 'H4')}
-    if 'H314' in calc | given:
-        calc.discard('H318'); given.discard('H318')
-    note = f' (verisi/konsantrasyonu okunamayan: {unknown})' if unknown else ''
-    if calc == given:
-        return 'uygun', f'Yeniden hesaplanan sağlık/çevre sınıflandırması 2.1 ile aynı: {sorted(calc)}{note}'
     return 'kdu', (f'Yeniden hesap {sorted(calc)} — 2.1 {sorted(given)}. Fark kaynak verisinden veya '
                    f'konsantrasyon okumasından olabilir; KDU doğrulasın.{note}')
 
@@ -553,6 +603,8 @@ def c_32_neden(ctx):
 def c_32_kayit(ctx):
     """Ek-2 A 3.2.4: varsa kayıt numarası."""
     s3 = ctx['secs'].get('3', '')
+    if not _rows3(ctx)[0] and _NOTHING_TO_LIST.search(s3):
+        return 'uygun', 'Listelenmesi gereken madde yok.'
     if re.search(r'\b01-\d{10}-\d{2}', s3):
         return 'uygun', 'Kayıt numaraları verilmiş.'
     if re.search(r'(?i)tedarikçiden|muaf|kayıt numarası|registration', s3):

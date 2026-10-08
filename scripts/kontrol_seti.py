@@ -31,11 +31,15 @@ CUSTOM = os.path.join(ROOT, 'data', 'substances_custom.json')
 # s3_yok: Bölüm 3'te listelenmemesi gereken CAS'lar; kdu_ok: "eksik" yerine beklenen KDU maddeleri
 # Not: bileşen H kodları Bölüm 3/16'da geçtiği için karışımın H kodları metinle değil 'h' ile kontrol edilir.
 _UYDURMA = ['Uygun yangın söndürücü kullanın.', 'Sınıflandırma ve etiketleme bilgileri güncellenmiştir',
-            '(Tavsiye: İyi havalandırma sağlayın)', 'beyan edilecek bileşen sınıfı bulunmamaktadır']
+            '(Tavsiye: İyi havalandırma sağlayın)', 'beyan edilecek bileşen sınıfı bulunmamaktadır',
+            # 2026-10-08 Ek-2 denetimi (madde 3): içi boş 4.2 cümlesi, yanlış KGD hükmü, nedensiz 12.4, kalınlıksız eldiven
+            'Başlıca semptomlar maruziyet tipine göre değişir', 'KKDİK Madde 14', 'Toprakta hareketlilik Bilgi yok',
+            'Nitril veya lateks', 'Görünüm Sıvı b) Koku']
 URUNLER = [
     {'ad': 'Nitrik asit %15 (aşındırıcı, ADR)', 'bil': [('7697-37-2', 15), ('7732-18-5', 85)],
      'h': ['H314'], 'signal': 'Danger',
-     'var': ['UN2031', '14.1 UN Numarası', 'Uygun olmayan söndürücüler', 'Doğrudan su jeti'],
+     'var': ['UN2031', '14.1 UN Numarası', 'Uygun olmayan söndürücüler', 'Doğrudan su jeti',
+             "nitrik asit: sayısal akut toksisite verisi (LD50, LC50 veya ATE) bu GBF'de bulunmamaktadır"],
      'yok': _UYDURMA, 's3_yok': ['7732-18-5']},
     {'ad': 'DIPOL 369 (su bazlı deterjan, H318)', 'det': True, 'kullanim': 'mutfak temizleme ürünü',
      'bil': [('68439-50-9', 2.9), ('141-43-5', 0.2), ('7732-18-5', 96.9)],
@@ -44,18 +48,25 @@ URUNLER = [
              'Uygulanamaz — sulu, alevlenir olarak sınıflandırılmamış ürün',
              'Bölüm 1 zararlılık kategorilerinin hiçbirinde', 'Kirlenmiş giysiler', 'İlk yardım yapanlar',
              'Tip C (delinme süresi ≥ 10 dk', 'ABEK-P2', 'Atık işlemeyi etkileyen özellikler'],
-     'yok': _UYDURMA + ['Tavsiye: İyi havalandırma'], 's3_yok': ['7732-18-5'], 'kdu_ok': ['T-hesap']},
+     'yok': _UYDURMA + ['Tavsiye: İyi havalandırma'], 's3_yok': ['7732-18-5']},
     {'ad': 'Toluen + %0,5 benzen (alevlenir, CMR)', 'bil': [('108-88-3', 99.5), ('71-43-2', 0.5)],
      'h': ['H225', 'H304', 'H315', 'H336', 'H340', 'H350', 'H361D', 'H373'], 'signal': 'Danger',
      'var': ['28730 sayılı Kanserojen', 'Ek-17 madde 48', 'Ek-17 madde 5', 'Alkole dayanıklı köpük',
-             'P5c (Alevlenir sıvılar', '%1.1 – %', 'hesaplanmış – ISO 10156'],
+             'P5c (Alevlenir sıvılar', '%1.1 – %', 'hesaplanmış – ISO 10156',
+             'Aspirasyon zararı (H304): kusturmayın', 'Bu karışım için kimyasal güvenlik değerlendirmesi yapılmamıştır',
+             'toluen, benzen: sayısal akut toksisite verisi'],
      'yok': _UYDURMA},
     {'ad': 'Benzil benzoat %20 (yalnız H412)', 'bil': [('120-51-4', 20), ('7732-18-5', 80)],
-     'h': ['H412'], 'signal': '', 'var': ['Uyarı Kelimesi Yok'], 'yok': _UYDURMA + ['Uyarı Kelimesi Dikkat'],
-     's3_yok': ['7732-18-5'], 'kdu_ok': ['T-hesap']},
+     'h': ['H412'], 'signal': '',
+     'var': ['Uyarı Kelimesi Yok', 'Kirlenmiş giysiler', 'İlk yardım yapanlar', 'Bileşenlerden benzil benzoat (H302)',
+             'Nitril kauçuk eldiven ≥0,1 mm', 'Sıvı; renk: belirtilmemiştir', 'Veri kaynağı Karışımın kendisine ait'],
+     'yok': _UYDURMA + ['Uyarı Kelimesi Dikkat'], 's3_yok': ['7732-18-5']},
     {'ad': 'Gliserin %5 (tehlikesiz)', 'bil': [('56-81-5', 5), ('7732-18-5', 95)],
-     'h': [], 'signal': '', 'var': ['belirtilmesi gereken madde bulunmamaktadır', 'İlk yayın.'],
-     'yok': _UYDURMA, 's3_yok': ['7732-18-5', '56-81-5'], 'kdu_ok': ['T-hesap']},
+     'h': [], 'signal': '', 'var': ['belirtilmesi gereken madde bulunmamaktadır', 'İlk yayın.',
+                                    'Toprakta hareketlilik verisi mevcut değil', 'Küçük dökülmeler',
+                                    'hiçbir zararlılık sınıfı için sınıflandırma kriterlerini karşılamamıştır',
+                                    'bilinen önemli akut veya gecikmiş belirti ve etki yoktur'],
+     'yok': _UYDURMA, 's3_yok': ['7732-18-5', '56-81-5']},
     {'ad': 'Metanol %60 (akut toksik, BEKRA Bölüm 2)', 'bil': [('67-56-1', 60), ('7732-18-5', 40)],
      'h': ['H225', 'H301', 'H311', 'H331', 'H370'], 'signal': 'Danger',
      'var': ['Bölüm 2 adlandırılmış madde: Metanol', '28733 sayılı Kimyasal Maddelerle'],
@@ -63,9 +74,10 @@ URUNLER = [
     {'ad': 'NPE %5 deterjan (Ek-17 madde 46, ÖBK)', 'det': True, 'kullanim': 'endüstriyel temizleme ürünü',
      'bil': [('9016-45-9', 5), ('7732-18-5', 95)], 'h': ['H410'], 'signal': 'Warning',
      'var': ['Ek-17 madde 46', 'İhracatta Md.8'], 'yok': _UYDURMA, 's3_yok': ['7732-18-5'],
-     'kdu_ok': ['15.1-izin-kisit', 'T-hesap']},
+     'kdu_ok': ['15.1-izin-kisit']},
     {'ad': 'Etanolamin %2 (SEA Tablo 3.2.3 eşiği)', 'bil': [('141-43-5', 2), ('7732-18-5', 98)],
-     'h': ['H315', 'H319'], 'signal': 'Warning', 'var': ['Ağırlıklı: 10x2.0', '(CLP Tablo 3.2.3)'], 'yok': _UYDURMA,
+     'h': ['H315', 'H319'], 'signal': 'Warning',
+     'var': ['Ağırlıklı: 10x2.0', '(CLP Tablo 3.2.3)', 'Yıkamaya en az 15 dakika devam edin'], 'yok': _UYDURMA,
      's3_yok': ['7732-18-5']},
 ]
 
@@ -80,6 +92,7 @@ def kural_testleri(c) -> int:
     from app.services.codes_i18n import get_h, _official_tr
     from app.services.p_code_service import assign_p_codes, select_label_p_codes
     from app.services.sds_pipeline import label_components
+    from app.services.audit_jev import derive_facts
 
     def p_label(usage, h):
         allp = assign_p_codes(h, usage=usage)['p_codes']
@@ -160,6 +173,10 @@ def kural_testleri(c) -> int:
         ('Md.20(2)(a) Ek-6 grup üyesi adı: 5989-27-5 → d-limonen (grubun tüm adları değil)',
          lambda: c.get('/api/v1/sds/substance/lookup', params={'cas': '5989-27-5'}).json().get('name_tr')
          == '(R)-p-menta-1,8-dien; d-limonen'),
+        # ── Denetim aracı (2026-10-08 Ek-2 denetimi) ──
+        ('Denetim: yalnız H412 → uyarı kelimesi sorusu sorulmaz; H318 → sorulur (SEA Ek-1 Tablo 4.1.4)',
+         lambda: 'uyari_kelimesi' not in derive_facts({'2': '2.1 H412 2.2 Uyarı Kelimesi Yok'})
+         and 'uyari_kelimesi' in derive_facts({'2': '2.1 H318 2.2 Tehlike'})),
     ]
     hata = 0
     for ad, f in testler:
@@ -242,7 +259,12 @@ def main(run_jev: bool) -> int:
             if x['id'] in ('15.1-izin-kisit', '15.1-deterjan', '2.2-tutarlilik') and x['karar'] == 'kdu' \
                     and x['id'] not in kdu_beklenen:
                 sorun.append(f"beklenmeyen KDU: {x['id']} — {x['aciklama'][:90]}")
-        for k in kdu_beklenen - {'T-hesap'}:
+        # Denetimin kendi yanlış alarmları (2026-10-08 düzeltildi): bu kontroller artık KDU'ya düşmemeli
+        for x in au:
+            if x['id'] in ('T-hesap', 'T-3-2', '3.2-ec', '3.2-kayit', 'T-14-2') and x['karar'] == 'kdu' \
+                    and x['id'] not in kdu_beklenen:
+                sorun.append(f"beklenmeyen KDU: {x['id']} — {x['aciklama'][:90]}")
+        for k in kdu_beklenen:
             if not any(x['id'] == k and x['karar'] == 'kdu' for x in au):
                 sorun.append(f'beklenen KDU uyarısı çıkmadı: {k}')
         if sorun:

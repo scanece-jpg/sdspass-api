@@ -722,10 +722,45 @@ def _delayed_effects_text(h_set: set, tr: bool) -> str:
     if chron:
         out.append(('Uzun süreli/tekrarlı maruz kalmada kronik etkiler: ' + ', '.join(chron) + '.') if tr
                    else ('Chronic effects on long-term/repeated exposure: ' + ', '.join(chron) + '.'))
+    elif not out:
+        # Sağlık sınıflandırması yok: Ek-2 A 11.1.7 etkilerin "beklenip beklenmediğini" ister — kısa
+        # (ani/gecikmeli) ve uzun süreli maruz kalma birlikte belirtilir
+        out.append('Karışım sağlık zararları yönünden sınıflandırılmamıştır; mevcut bilgilere göre kısa veya uzun '
+                   'süreli maruz kalmada sınıflandırma gerektiren ani, gecikmeli ya da kronik etki beklenmemektedir.'
+                   if tr else
+                   'The mixture is not classified for health hazards; based on available data, no immediate, delayed '
+                   'or chronic effects requiring classification are expected from short- or long-term exposure.')
     else:
         out.append('Uzun süreli/tekrarlı maruz kalmaya bağlı kronik etki sınıflandırması yoktur.' if tr
                    else 'No classification for chronic effects of long-term/repeated exposure.')
     return ' '.join(out)
+
+
+def _unclassified_health_text(components, tr: bool, names: dict = None) -> str:
+    """Karışım sağlık yönünden sınıflandırılmamışsa 4.2 / 11.1.6 metni (KKDİK Ek-2 A 4.2, 11.1.6).
+    Belirti uydurulmaz; sağlık sınıfı olan bileşen varsa eşik altında kaldığı belirtilir.
+    names: CAS → Bölüm 3'te basılan ad (gizlilik talebinde genel ad)."""
+    parts = []
+    for c in components or []:
+        hs = sorted({str(x.get('h_code') or '').replace('*', '').strip()[:4] for x in (c.get('hazards') or [])
+                     if str(x.get('h_code') or '').strip().startswith('H3')})
+        cas = str(c.get('cas_no') or c.get('cas') or '').strip()
+        if names is not None:
+            nm = _re.sub(r'<[^>]+>', '', str(names.get(cas) or '')).strip()
+        else:
+            nm = (c.get('name_tr') if tr else '') or c.get('name') or cas
+        if hs and nm:
+            parts.append(f"{nm} ({', '.join(hs)})")
+    txt = ('Karışım sağlık zararları yönünden sınıflandırılmamıştır; mevcut bilgilere göre bilinen önemli akut '
+           'veya gecikmiş belirti ve etki yoktur.' if tr else
+           'The mixture is not classified for health hazards; based on available data no significant acute or '
+           'delayed symptoms and effects are known.')
+    if parts:
+        txt += ((' Bileşenlerden ' + ', '.join(parts) + ' sağlık zararı yönünden sınıflandırılmıştır; karışımda, '
+                 'karışımın sınıflandırılmasına yol açmayan konsantrasyonda bulunmaktadır.') if tr else
+                (' Components classified for health hazards (' + ', '.join(parts) + ') are present at '
+                 'concentrations that do not lead to classification of the mixture.'))
+    return txt
 
 
 def na_text(lang: str, styles: dict) -> Paragraph:
@@ -1553,6 +1588,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     # KKDİK Ek-2 A 3.2 (a)/(b): kütle veya hacme göre azalan sırada (önceden girildiği sırayla basılıyordu)
     _sec3_comps = sorted((c for c in components if _sec3_needed(c)), key=lambda c: -_c3max(c))
     sec3_rows = generate_section3(_sec3_comps, disclosure, lang=lang)
+    _sec3_names = {str(r.get('cas') or '').strip(): r.get('name') for r in (sec3_rows or [])}
     if not sec3_rows:
         story.append(Paragraph(
             'KKDİK Ek-2 3.2.1 / 3.2.2 uyarınca bu bölümde belirtilmesi gereken madde bulunmamaktadır.'
@@ -1703,7 +1739,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _h_all_first_aid = list(dict.fromkeys(list(all_h_codes) + list(h_codes)))
     if lang in ('TR', 'EN'):
         # KKDİK Ek-2 4.1.1: maruz kalma yoluna göre; SEA Ek-4 resmî önlem ifadeleri
-        _eye_dmg = bool(set(_h_all_first_aid) & {'H314', 'H318'})
+        # İyi uygulama: göz hasarı/tahrişinde (H314/H318/H319) yıkama süresi dakika olarak verilir
+        _eye_dmg = bool({str(h)[:4] for h in _h_all_first_aid} & {'H314', 'H318', 'H319'})
         _fa_seen_txt = []
         for _fa in reg_first_aid(_h_all_first_aid, _sec_form, lang):
             _fa_txt = _fa['text']
@@ -1717,20 +1754,20 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         story.append(Paragraph(
             f"• <b>{'Gecikmiş etkiler' if lang == 'TR' else 'Delayed effects'}:</b> "
             f"{_delayed_effects_text(set(_h_all_first_aid), lang == 'TR')}", styles['bullet']))
-        if any(str(h).startswith('H3') for h in _h_all_first_aid):
-            # KKDİK Ek-2 A 4.1.2(c): kirlenmiş giysilerin çıkarılması (önlem ifadesinde yoksa)
-            if not any('giysi' in t.lower() or 'clothing' in t.lower() for t in _fa_seen_txt):
-                story.append(Paragraph(
-                    f"• <b>{'Kirlenmiş giysiler' if lang == 'TR' else 'Contaminated clothing'}:</b> "
-                    + ('Kirlenmiş giysi ve ayakkabıları çıkarın; tekrar kullanmadan önce yıkayın.' if lang == 'TR'
-                       else 'Remove contaminated clothing and shoes; wash before reuse.'), styles['bullet']))
-            # KKDİK Ek-2 A 4.1.2(ç): ilk yardım yapanlar için kişisel koruyucu ekipman
+        # KKDİK Ek-2 A 4.1.2(c): kirlenmiş giysilerin çıkarılması (önlem ifadesinde yoksa) — sağlık
+        # sınıflandırması olmayan ürünlerde de verilir
+        if not any('giysi' in t.lower() or 'clothing' in t.lower() for t in _fa_seen_txt):
             story.append(Paragraph(
-                f"• <b>{'İlk yardım yapanlar' if lang == 'TR' else 'First aiders'}:</b> "
-                + ('Ürünle temastan kaçının; Bölüm 8.2\'de belirtilen koruyucu ekipmanı (eldiven, göz koruyucu) '
-                   'kullanın.' if lang == 'TR' else
-                   'Avoid contact with the product; wear the protective equipment given in Section 8.2 '
-                   '(gloves, eye protection).'), styles['bullet']))
+                f"• <b>{'Kirlenmiş giysiler' if lang == 'TR' else 'Contaminated clothing'}:</b> "
+                + ('Kirlenmiş giysi ve ayakkabıları çıkarın; tekrar kullanmadan önce yıkayın.' if lang == 'TR'
+                   else 'Remove contaminated clothing and shoes; wash before reuse.'), styles['bullet']))
+        # KKDİK Ek-2 A 4.1.2(ç): ilk yardım yapanlar için kişisel koruyucu ekipman
+        story.append(Paragraph(
+            f"• <b>{'İlk yardım yapanlar' if lang == 'TR' else 'First aiders'}:</b> "
+            + ('Ürünle temastan kaçının; Bölüm 8.2\'de belirtilen koruyucu ekipmanı (eldiven, göz koruyucu) '
+               'kullanın.' if lang == 'TR' else
+               'Avoid contact with the product; wear the protective equipment given in Section 8.2 '
+               '(gloves, eye protection).'), styles['bullet']))
     else:
         sec4 = generate_section(4, h_codes)
         story += bullet_list(adapt_list_for_form(sec4['bullets'], _sec_form), styles) or [na_text(lang, styles)]
@@ -1738,8 +1775,15 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
 
     story += sub_block(f"4.2 {sub_title(lang,'4.2')}", styles)
     _sym_bullets = adapt_list_for_form(generate_section_42(h_codes), _sec_form)
+    _health_h = [h for h in _h_all_first_aid if str(h).startswith('H3')]
+    if not _sym_bullets and _health_h and lang in ('TR', 'EN'):
+        # Belirti cümlesi tanımlı olmayan sağlık sınıfı: genel cümle yerine resmî H ifadesi
+        _sym_bullets = [f"{str(h).split()[0]}: {get_h_stmt(str(h).split()[0], lang)}" for h in _health_h]
     if _sym_bullets:
         story += bullet_list(_sym_bullets, styles)
+    elif lang in ('TR', 'EN'):
+        # KKDİK Ek-2 A 4.2 — sağlık sınıflandırması yok: "maruziyete göre değişir" gibi içi boş cümle basılmaz
+        story.append(Paragraph(_unclassified_health_text(components, lang == 'TR', _sec3_names), styles['body']))
     else:
         story.append(Paragraph(S(lang, 'symptoms_general'), styles['body']))
 
@@ -1756,6 +1800,14 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             story.append(Paragraph(
                 'Çalışma alanında göz duşu ve acil durum duşu bulundurulmalıdır.' if lang == 'TR'
                 else 'An eye wash station and an emergency shower should be available in the work area.',
+                styles['body']))
+        # İyi uygulama — aspirasyon zararı (H304): kusturma yok (P331), solunum yönünden gözlem
+        if 'H304' in {str(h)[:4] for h in _h_all_first_aid}:
+            story.append(Paragraph(
+                'Aspirasyon zararı (H304): kusturmayın. Yutulduktan sonra öksürük veya nefes darlığı görülürse '
+                'kimyasal pnömoni olasılığı açısından kişi tıbbi gözlem altında tutulmalıdır.' if lang == 'TR'
+                else 'Aspiration hazard (H304): do not induce vomiting. If coughing or shortness of breath occurs '
+                     'after swallowing, keep the person under medical observation for possible chemical pneumonitis.',
                 styles['body']))
     story.append(Paragraph(
         term(lang,'poison_center'), styles['body']
@@ -1865,7 +1917,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         story += sub_block(f"6.3 {sub_title(lang,'6.3')}", styles)
         story += bullet_list(_s6['6.3'], styles)
         # KKDİK Ek-2 A 6 (giriş): dökülme hacmi zarar üzerinde önemliyse büyük ve küçük dökülmeler ayrılır
-        if _sec_form not in ('solid', 'powder', 'gas') and _h_all_first_aid:
+        if _sec_form not in ('solid', 'powder', 'gas'):
             story += bullet_list([
                 ('Küçük dökülmeler: emici malzemeyle toplayıp uygun, etiketli kaplara alın.' if lang == 'TR'
                  else 'Small spills: absorb with absorbent material and place in suitable, labelled containers.'),
@@ -2419,6 +2471,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _col = _text('color')
     if _have(_col):
         _app = f"{_app}; {_L('renk', 'colour')}: {_col}"
+    elif str(_app).strip().lower() in {v.lower() for v in _state_txt.values()}:
+        # KKDİK Ek-2 9.1(a) renk ister; girilmemişse renk uydurulmaz, eksik olduğu açıkça yazılır
+        _app = f"{_app}; {_L('renk: belirtilmemiştir', 'colour: not specified')}"
     _ps = phys.get('particle_size')
     _ps = _ps.get('display') if isinstance(_ps, dict) else _ps
     if _is_solid_form and _have(_ps):
@@ -2877,8 +2932,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     # 11.1.6 Fiziksel, kimyasal ve toksikolojik özellikler ile ilgili belirtiler — 4.2 ile aynı kaynak
     _sym11 = ' '.join(_re.sub(r'<[^>]+>', '', str(b)).strip() for b in (_sym_bullets or []))
     if not _sym11:
-        _sym11 = ('Sınıflandırılmış bir sağlık etkisi bulunmadığından belirgin belirti beklenmez.' if _TR11
-                  else 'No specific symptoms expected as no health hazard classification applies.')
+        _sym11 = (_unclassified_health_text(_comps11, _TR11, _sec3_names) if lang in ('TR', 'EN') else
+                  'No specific symptoms expected as no health hazard classification applies.')
     tox_rows.append([('Belirtiler (11.1.6)' if _TR11 else 'Symptoms (11.1.6)'), _sym11])
 
     # 11.1.7 Gecikmeli / hemen ortaya çıkan etkiler ve kronik etkiler (4.1 ile aynı metin)
@@ -2886,6 +2941,19 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                       else 'Delayed/immediate and chronic effects (11.1.7)'),
                      _delayed_effects_text(set(all_h_codes or []) | set(h_codes or []), _TR11)])
     if lang in ('TR', 'EN'):
+        # KKDİK Ek-2 A 11.1: bilginin kaynağı (insan/hayvan verisi ya da bileşenlere dayalı hesaplama)
+        _mix_tested = any(phys_tox.get(k) for k in ('ld50_oral', 'ld50_dermal', 'lc50_inhal'))
+        tox_rows.append([('Veri kaynağı' if _TR11 else 'Source of data'),
+                         (('Akut toksisite için karışıma ait test verisi yukarıda verilmiştir; diğer zararlılık '
+                           'sınıfları ' if _mix_tested else
+                           'Karışımın kendisine ait insan veya hayvan test verisi bulunmamaktadır; değerlendirme ')
+                          + 'bileşenlerin sınıflandırmalarına (kaynaklar: Bölüm 16) ve SEA Yönetmeliği Ek-1 '
+                            'hesaplama yöntemine dayanır.') if _TR11 else
+                         (('Test data on the mixture for acute toxicity are given above; the other hazard classes '
+                           if _mix_tested else
+                           'No human or animal test data are available for the mixture itself; the assessment ')
+                          + 'is based on the classifications of the components (sources: Section 16) and the '
+                            'calculation method of the CLP Annex I.')])
         # KKDİK Ek-2 A 11.1.8 / 11.1.11.2(c): etkileşim verisi yoksa varsayım yapılmaz, belirtilir
         tox_rows.append([('Etkileşimli etkiler (11.1.8)' if _TR11 else 'Interactive effects (11.1.8)'),
                          ('Bileşenler arasındaki etkileşimli etkiler hakkında bilgi bulunmamaktadır; bileşenlerin '
@@ -3120,6 +3188,33 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             [[('Madde' if lang == 'TR' else 'Substance'), ('Maruz kalma yolu' if lang == 'TR' else 'Route'),
               ('Değer' if lang == 'TR' else 'Value'), ('Kaynak' if lang == 'TR' else 'Source')]] + _tox_rows,
             [55*mm, 50*mm, 30*mm, 45*mm], styles))
+    elif lang in ('TR', 'EN') and not any((_d or {}).get('components') for _d in (ate_mix_details or {}).values()):
+        # KKDİK Ek-2 A 11.1.2 / 11.1.10: sayısal veri yoksa bu durum zararlı bileşen bazında belirtilir
+        # Ad Bölüm 3'te basılan addan alınır (gizlilik talebiyle genel ad verilmişse o kullanılır)
+        _s3_name = {str(r.get('cas') or '').strip(): r.get('name') for r in (sec3_rows or [])}
+        _hz_names = []
+        for _c in sds_data.get('components', []):
+            _cas = str(_c.get('cas_no') or _c.get('cas') or '').strip()
+            if _cas == '7732-18-5' or not _c.get('hazards') or not _s3_name.get(_cas):
+                continue
+            _nm = _re.sub(r'<[^>]+>', '', str(_s3_name[_cas])).strip()
+            if _nm and _nm not in _hz_names:
+                _hz_names.append(_nm)
+        if _hz_names:
+            story.append(Spacer(1, 4))
+            story.append(Paragraph(('Bileşenlerin akut toksisite verileri (11.1.2)' if lang == 'TR'
+                                    else 'Acute toxicity data of components (11.1.2)'), styles['sub_title']))
+            story.append(Paragraph(
+                (f"{', '.join(_hz_names)}: sayısal akut toksisite verisi (LD50, LC50 veya ATE) bu GBF'de "
+                 "bulunmamaktadır."
+                 + ('' if comp_has_acute else
+                    ' Bileşen sınıflandırmalarında (Bölüm 3) akut toksisite sınıfı yoktur.'))
+                if lang == 'TR' else
+                (f"{', '.join(_hz_names)}: no numerical acute toxicity data (LD50, LC50 or ATE) are available "
+                 "in this SDS."
+                 + ('' if comp_has_acute else
+                    ' The component classifications in Section 3 include no acute toxicity class.')),
+                styles['body']))
 
     # ─────────────────────────────────────────────────────────────────────────
     # BÖLÜM 12 — Ekoloji
@@ -3179,6 +3274,12 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                              else f'Low mobility, soil adsorption expected (log Kow={_lk})')
         except (ValueError, TypeError):
             pass
+    if _soil_txt == na:
+        # KKDİK Ek-2 A 12: bilgi yoksa nedeni belirtilir — çıplak "Bilgi yok" basılmaz
+        _soil_txt = ('Toprakta hareketlilik verisi mevcut değil: karışım için test yapılmamıştır ve '
+                     'bileşenler için Koc veya log Kow değeri bulunmamaktadır.' if lang == 'TR'
+                     else 'No data on mobility in soil: the mixture has not been tested and no Koc or '
+                          'log Kow value is available for the components.')
 
     # 12.2 / 12.3 — KKDİK Ek-2 12.2 ve 12.3: karışımdaki her ilgili madde için ayrı bilgi.
     from app.services.ecological_service import (READILY_BIODEGRADABLE_CAS as _RB_CAS,
@@ -3892,26 +3993,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
 
     story += sub_block(f"15.2 {sub_title(lang,'15.2') if '15.2' in L.get('sub',{}) else 'Kimyasal güvenlik değerlendirmesi'}", styles)
 
-    # CSA zorunluluğu kontrolü — KKDİK Madde 14: yıllık ≥1 ton üretim/ithalat +
-    # SVHC/kanserojen/mutajen/üreme toksik ise KGA (Kimyasal Güvenlik Değerlendirmesi) zorunlu
-    _cmr_h = {'H340','H341','H350','H350i','H351',
-              'H360','H360D','H360F','H360FD',
-              'H361','H361d','H361f','H361fd','H361D','H361F','H361FD',
-              'H334'}
-    _has_cmr = bool(set(h_codes) & _cmr_h)
-    if _has_cmr:
-        story.append(Paragraph(
-            '<font color="#cc0000"><b>⚠ KKDİK Uyarısı:</b></font> Bu karışım kanserojen/mutajen/üreme toksik veya '
-            'solunum duyarlılaştırıcı madde içermektedir. Yıllık ≥1 ton üretim veya ithalat durumunda '
-            'KKDİK Madde 14 kapsamında Kimyasal Güvenlik Değerlendirmesi (KGA) zorunludur.'
-            if lang == 'TR' else
-            '<font color="#cc0000"><b>⚠ Regulatory Note:</b></font> This mixture contains CMR or respiratory sensitizer '
-            'substances. A Chemical Safety Assessment (CSA) is mandatory under REACH Art.14 / KKDİK '
-            'when annual production or import volume is ≥1 tonne.',
-            styles['small']
-        ))
-    else:
-        story.append(Paragraph(S(lang,'no_csa'), styles['small']))
+    # KKDİK Ek-2 A 15.2: tedarikçi bu karışım için kimyasal güvenlik değerlendirmesi yapılıp
+    # yapılmadığını belirtir. (KGD yükümlülüğü KKDİK Md.15'e göre ≥10 ton/yıl kayıt ettirene aittir;
+    # karışım GBF'sinde CMR içeriğine bağlı "zorunludur" uyarısı basılmaz.)
+    story.append(Paragraph(S(lang,'no_csa'), styles['small']))
 
     story.append(CondPageBreak(60*mm))   # yalnız sayfa sonunda yer yoksa yeni sayfa (boş sayfa kalmasın)
 
@@ -4057,6 +4142,23 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             _m_rows.append([_row[0], _row[1],
                             _clf_method(str(_row[1]), str(_row[2]), _clf_src.get(_row[1]))])
         story.append(data_table(_m_rows, [70*mm, 25*mm, 85*mm], styles))
+        story.append(Spacer(1, 4))
+    elif lang in ('TR', 'EN'):
+        # KKDİK Ek-2 16(ç): sınıflandırılmamış karışımda da kullanılan değerlendirme yöntemi belirtilir
+        story.append(Paragraph(
+            '<b>' + ('Karışımın sınıflandırılmasında kullanılan yöntem (SEA Yönetmeliği Madde 11):'
+                     if lang == 'TR' else
+                     'Method used for the classification of the mixture (CLP Article 9):') + '</b>',
+            styles['body_bold']))
+        story.append(Paragraph(
+            ('Karışımın bütünü için test verisi ve köprüleme ilkelerinin uygulanabileceği benzer test edilmiş '
+             'karışım verisi bulunmadığından, karışım bileşen verilerine dayalı hesaplama yöntemiyle (SEA '
+             'Yönetmeliği Ek-1) değerlendirilmiş ve hiçbir zararlılık sınıfı için sınıflandırma kriterlerini '
+             'karşılamamıştır.') if lang == 'TR' else
+            ('No test data on the mixture as a whole and no data on similar tested mixtures allowing the '
+             'bridging principles were available; the mixture was assessed by the calculation method based on '
+             'its ingredients (CLP Annex I) and does not meet the criteria for classification in any hazard class.'),
+            styles['small']))
         story.append(Spacer(1, 4))
 
     # Revizyon geçmişi

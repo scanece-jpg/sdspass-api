@@ -21,6 +21,7 @@
   "madde": "madde GBF'si",
   "siniflandirilmis": "SEA'ya göre en az bir zararlılık sınıfı var",
   "siniflandirilmamis": "hiçbir zararlılık sınıfı yok",
+  "uyari_kelimesi": "uyarı kelimesi gerektiren sınıflandırma var (yalnız H411/H412/H413/H362 ise uyarı kelimesi kullanılmaz — SEA Ek-1 Tablo 4.1.4 / 3.7.3)",
   "revizyon": "ilk sürüm değil",
   "form:gaz / form:sivi / form:kati / form:aerosol": "fiziksel hal",
   "toz_patlamasi": "toz patlaması riski var",
@@ -287,7 +288,7 @@
    "soru_tr": "Uyarı kelimesi ('Tehlike' veya 'Dikkat') var mı?",
    "soru_en": "The label elements state a signal word ('Tehlike' or 'Dikkat').",
    "yontem": "jev",
-   "kosul": "siniflandirilmis",
+   "kosul": "uyari_kelimesi",
    "bolumler": [
     "2"
    ],
@@ -1594,9 +1595,9 @@
   {
    "id": "11.1-bilesen-veri",
    "bolum": "11.1",
-   "dayanak": "KKDİK Ek-2 A 11.1.2, 11.1.10",
-   "soru_tr": "Karışım test edilmemişse bileşenlerin toksikolojik verileri (LD50, LC50, ATE) verilmiş mi?",
-   "soru_en": "Where the mixture itself has not been tested, toxicological data of the relevant components (e.g. LD50, LC50, ATE) are given.",
+   "dayanak": "KKDİK Ek-2 A 11.1.2, 11.1.9, 11.1.10",
+   "soru_tr": "Karışım test edilmemişse bileşenlerin toksikolojik verileri (LD50, LC50, ATE) verilmiş mi ya da mevcut olmadığı açıkça belirtilmiş mi?",
+   "soru_en": "Where the mixture itself has not been tested, toxicological data of the relevant components (e.g. LD50, LC50, ATE) are given, or it is clearly stated that such data are not available (Annex II 11.1.2 'where available', 11.1.9).",
    "yontem": "jev",
    "kosul": "karisim,siniflandirilmis",
    "bolumler": [
@@ -1620,9 +1621,9 @@
   {
    "id": "11.1.6-belirtiler",
    "bolum": "11.1",
-   "dayanak": "KKDİK Ek-2 A 11.1.6",
-   "soru_tr": "Maruz kalma ile ilişkili belirtiler (hafiften ağıra) tanımlanmış mı?",
-   "soru_en": "Symptoms related to the physical, chemical and toxicological characteristics are described, from low to severe exposure.",
+   "dayanak": "KKDİK Ek-2 A 11.1.6, 11.1.9, 11.1.11.2(b)",
+   "soru_tr": "Maruz kalma ile ilişkili belirtiler (hafiften ağıra) tanımlanmış mı ya da sınıflandırılmamış karışımda belirti beklenmediği/verinin olmadığı açıkça belirtilmiş mi?",
+   "soru_en": "Symptoms related to the physical, chemical and toxicological characteristics are described from low to severe exposure; or, for a mixture not classified for health hazards, it is clearly stated that no significant symptoms are known or that components are present at concentrations where their effects do not occur (Annex II 11.1.9, 11.1.11.2(b)).",
    "yontem": "jev",
    "kosul": "her",
    "bolumler": [
@@ -1634,8 +1635,8 @@
    "id": "11.1.7-gecikmeli",
    "bolum": "11.1",
    "dayanak": "KKDİK Ek-2 A 11.1.7",
-   "soru_tr": "Gecikmeli/anlık etkiler ve kısa/uzun süreli maruz kalmada kronik etkiler belirtilmiş mi?",
-   "soru_en": "Delayed and immediate effects, and chronic effects from short- and long-term exposure, are described.",
+   "soru_tr": "Gecikmeli/anlık etkiler ve kısa/uzun süreli maruz kalmada kronik etkilerin beklenip beklenmediği belirtilmiş mi?",
+   "soru_en": "It is stated whether delayed or immediate effects, and chronic effects from short- and long-term exposure, are expected (a clear statement that none are expected for a mixture not classified for health hazards is acceptable).",
    "yontem": "jev",
    "kosul": "her",
    "bolumler": [
@@ -2272,7 +2273,7 @@
    "bolum": "T",
    "dayanak": "KKDİK Ek-2 A 8.2.2",
    "soru_tr": "8. bölümdeki koruyucu ekipman tehlikelerle (ve P280'deki ekipmanla) tutarlı mı?",
-   "soru_en": "The personal protective equipment in section 8 is consistent with the hazards and the P280 equipment in section 2.",
+   "soru_en": "The personal protective equipment in section 8 is consistent with the hazards and with the P280 equipment in section 2. General PPE given as a recommendation ('Tavsiye') for a product without a health classification is not an inconsistency; only missing or contradicting protection counts.",
    "yontem": "jev",
    "kosul": "siniflandirilmis",
    "bolumler": [

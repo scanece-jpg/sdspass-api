@@ -372,9 +372,11 @@ def select(h_codes: List[str], lang: str = 'TR', form: str = '') -> Dict[str, An
         })
     if not result['hands']:
         result['hands'].append({
-            'ppe': ('Nitril veya lateks eldiven (EN ISO 374-1)'
+            # KKDİK Ek-2 A 8.2.2(b)(i): malzeme ve kalınlık belirtilir (sıçrama teması; delinme süresi notu
+            # 8.2.2 altında). Lateks çıkarıldı: organik bileşenlere direnci düşük, alerji riski var.
+            'ppe': ('Nitril kauçuk eldiven ≥0,1 mm (EN ISO 374-1, sıçrama teması)'
                     if lang == 'TR'
-                    else 'Nitrile or latex gloves (EN ISO 374-1)'),
+                    else 'Nitrile rubber gloves ≥0.1 mm (EN ISO 374-1, splash contact)'),
             'level': 2,
         })
     if not result['eyes']:

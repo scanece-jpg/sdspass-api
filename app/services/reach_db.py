@@ -127,10 +127,35 @@ def exemption(cas: str) -> str:
     return regs[0] if regs and regs[0] in ('exempt', 'polymer') else ''
 
 
+_EK6_EC: dict | None = None
+
+
+def _ek6_ec(cas: str) -> str:
+    """SEA Ek-6 / Annex VI kaydındaki EC no — yalnız kayıt tek EC numaralıysa (grup kayıtlarında, örn. ksilen
+    izomerleri, ilk EC başka bir üyeye ait olabilir)."""
+    global _EK6_EC
+    if _EK6_EC is None:
+        _EK6_EC = {}
+        try:
+            import json
+            from pathlib import Path
+            db = json.loads((Path(__file__).resolve().parents[2] / 'data' / 'substance_db.json')
+                            .read_text(encoding='utf-8'))
+            for k, v in db.items():
+                if isinstance(v, dict) and '_alias' not in v and v.get('ec_no') \
+                        and len(v.get('ec_no_list') or [v['ec_no']]) == 1:
+                    _EK6_EC[k] = v['ec_no']
+        except Exception as e:
+            print(f'[REACH_DB] Ek-6 EC tablosu okunamadı: {e}')
+    return _EK6_EC.get(cas, '')
+
+
 def get_ec_no(cas: str) -> str:
-    """EC numarasını döndür."""
-    d = REACH_DB.get(cas.strip())
-    return d.get('ec', '') if d else ''
+    """EC numarasını döndür: bu dosyadaki tablo → SEA Ek-6 / Annex VI kaydı (tek EC'li). Kullanıcı panelde
+    girmediyse GBF Bölüm 3 bu değeri kullanır (KKDİK Ek-2 A 3.2.4: mevcutsa EC no)."""
+    cas = cas.strip()
+    d = REACH_DB.get(cas)
+    return (d.get('ec', '') if d else '') or _ek6_ec(cas)
 
 
 if __name__ == '__main__':

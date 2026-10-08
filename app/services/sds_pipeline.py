@@ -296,7 +296,14 @@ async def classify(inp: dict) -> dict:
         if not (isinstance(w, dict) and str(w.get('code', '')).startswith('PHYS_NO_TEST_BASIS_')
                 and _h4(w.get('h_code')) in MANUAL_PHYS_H)
     ]
-    phys_res = phys_calc(comps, form=form, user_fp=inp.get('user_fp'), user_bp=inp.get('user_bp'),
+    # Ölçülen kaynama başlangıç noktası: panel bunu test_data.boiling_point olarak gönderir
+    _user_bp = inp.get('user_bp')
+    if _user_bp is None and test_data.get('boiling_point') not in (None, ''):
+        try:
+            _user_bp = float(str(test_data.get('boiling_point')).replace(',', '.'))
+        except (TypeError, ValueError):
+            _user_bp = None
+    phys_res = phys_calc(comps, form=form, user_fp=inp.get('user_fp'), user_bp=_user_bp,
                          test_data=test_data, form_sub=form_sub, fp_status=inp.get('fp_status') or '')
     stot_res = stot_calc(comps)
 
@@ -452,8 +459,11 @@ async def classify(inp: dict) -> dict:
                        'reason': 'H314 varlığında otomatik (CLP §3.3.1.4)', 'cutoff_used': '—'})
         h_codes = [h for h in h_codes if h != 'H318']
 
-    # 6. H304 — yalnızca sıvı/pasta
-    if form not in ('liquid', 'paste'):
+    # 6. H304 — yalnızca sıvı/pasta; sıvı/pastada fiziksel motor yetkili (SEA Ek-1 3.10.3.3.1: toplam ≥ %10
+    #    VE 40 °C kinematik viskozite ≤ 20,5 mm²/s). Viskozite koşulu sağlanmıyorsa bileşen toplamından
+    #    gelen H304 silinir — önceden viskozite girilse de H304 kalıyordu.
+    _asp_ok = any((r.get('type') == 'asp_tox') for r in phys_res.get('results', []) + phys_res.get('primary', []))
+    if form not in ('liquid', 'paste') or not _asp_ok:
         h_codes = [h for h in h_codes if h != 'H304']
         all_h   = [h for h in all_h if h != 'H304']
         cp      = [p for p in cp if p.get('h_code') != 'H304']
@@ -501,10 +511,30 @@ async def classify(inp: dict) -> dict:
     clean = {h.split()[0] for h in h_codes}
     signal = signal_word_for(clean, clp_res.get('passed', []))   # H411/H412/H413/H362 tek başına → ''
 
-    euh = check_euh(comps, mixture_form=form, form_sub=form_sub)
+    euh = check_euh(comps, mixture_form=form, form_sub=form_sub, usage=usage)
+
+    def _drop_euh(code):
+        euh['euh_codes']   = [c for c in euh.get('euh_codes', []) if c != code]
+        euh['euh_details'] = [d for d in euh.get('euh_details', []) if d.get('code') != code]
     if set(all_h) & {'H314', 'H315'}:   # SEA Ek-2 1.2.4: EUH066 cilt tahrişi yoksa
-        euh['euh_codes']   = [c for c in euh.get('euh_codes', []) if c != 'EUH066']
-        euh['euh_details'] = [d for d in euh.get('euh_details', []) if d.get('code') != 'EUH066']
+        _drop_euh('EUH066')
+    if 'H317' in {_h4(h) for h in all_h}:   # SEA Ek-2 2.3: EUH203 yalnız H317 taşımayan çimentoda
+        _drop_euh('EUH203')
+    # SEA Ek-2 2.10 — EUH210: zararlı olarak sınıflandırılmayan, halkın kullanımı için tasarlanmamış karışım
+    if not all_h and usage != 'consumer':
+        from app.services.euh_service import euh210_triggers
+        from app.services.codes_i18n import get_euh as _get_euh
+        _t210 = euh210_triggers(comps, mixture_form=form)
+        if _t210 and 'EUH210' not in euh.get('euh_codes', []):
+            euh.setdefault('euh_codes', []).append('EUH210')
+            euh.setdefault('euh_details', []).append({
+                'code': 'EUH210', 'text': _get_euh('TR', 'EUH210'),
+                'source_cas': '; '.join(t['cas'] for t in _t210),
+                'source_name': '; '.join(t['name'] for t in _t210),
+                'note': 'SEA Ek-2 2.10 — ' + '; '.join(f"{t['name']}: {t['reason']}" for t in _t210),
+            })
+            euh['euh_codes'] = sorted(euh['euh_codes'])
+            euh['euh_details'] = sorted(euh['euh_details'], key=lambda x: x['code'])
     euh_codes = euh.get('euh_codes', [])
 
     p_result = assign_p_codes(h_codes, signal, mixture_form=form, usage=usage)
@@ -577,9 +607,18 @@ async def classify(inp: dict) -> dict:
     except Exception as _e:
         print(f'[EK17] {_e}')
 
+    # SEA Ek-1 4.1.3.6.1 — sucul zararı bilinmeyen bileşen ifadesi (etiket + GBF 2.2)
+    try:
+        from app.services.ecological_service import aquatic_unknown as _aq_unk
+        aq_unknown = _aq_unk(comps)
+    except Exception as _e:
+        print(f'[AQ UNKNOWN] {_e}')
+        aq_unknown = {'needed': False, 'pct': 0.0, 'components': []}
+
     return {
         'components':  comps,
         'ek17':        ek17_hits,
+        'aquatic_unknown': aq_unknown,
         'ek6_supplements': ek6_supp,
         'h_codes':     h_codes,
         'all_h_codes': all_h,

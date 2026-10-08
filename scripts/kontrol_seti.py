@@ -70,6 +70,77 @@ URUNLER = [
 ]
 
 
+def kural_testleri(c) -> int:
+    """SEA Ek-1 / Ek-2 kural testleri (2026-10-08 kural denetimi): her satır, resmî metinle satır satır
+    karşılaştırılarak bulunan bir hatanın düzeltilmiş hâlini korur. Döner: hatalı test sayısı."""
+    from app.services.clp_service import classify_mixture_clp
+    from app.services.ecological_service import calculate_aquatic, _compute_sum_acute_m
+    from app.services.euh_service import check_euh, euh210_triggers
+
+    def C(cas, conc, *hz, **kw):
+        d = {'cas': cas, 'conc': conc, 'concMax': conc, 'name': cas,
+             'hazards': [{'h_class': a, 'h_code': b} for a, b in hz]}
+        d.update(kw)
+        return d
+
+    def calc(bil, **kw):
+        comps = []
+        for cas, conc in bil:
+            r = c.get('/api/v1/sds/substance/lookup', params={'cas': cas, 'form': 'liquid'}).json()
+            comps.append({'cas': cas, 'name': r.get('name') or cas, 'conc': conc, 'concMax': conc,
+                          'hazards': r.get('hazards', []), 'sclRaw': r.get('scl', []), 'm_factors': {}, 'ate': None})
+        p = {'components': comps, 'form': 'liquid', 'usage': 'industrial', 'lang': 'TR'}
+        p.update(kw)
+        return set(c.post('/api/v1/sds/calculate', json=p).json().get('h_codes') or [])
+
+    sens_scl = C('f', 0.5, ('Skin Sens. 1', 'H317'), sclRaw=[{'h_code': 'H317', 'c_min': 0.1}])
+    aq4 = calculate_aquatic([C('c', 30, ('Aquatic Chronic 4', 'H413'))])
+    testler = [
+        ('Tablo 3.4.5 solunum hassaslaştırıcı Kat.1 %0,5 → sınıf yok',
+         lambda: 'H334' not in classify_mixture_clp([C('x', 0.5, ('Resp. Sens. 1', 'H334'))], mixture_form='liquid')['h_codes']),
+        ('3.8.3.4.5 STOT SE 3 toplamı %12+%12 → H336',
+         lambda: 'H336' in classify_mixture_clp([C('a', 12, ('STOT SE 3', 'H336')), C('b', 12, ('STOT SE 3', 'H336'))])['h_codes']),
+        ('3.8.3.4.5 aseton %12 + etil asetat %12 (uçtan uca) → H336',
+         lambda: 'H336' in calc([('67-64-1', 12), ('141-78-6', 12), ('7732-18-5', 76)], user_fp=40)),
+        ('Tablo 4.1.2 Kronik 4 %30 → H413 (H412 değil)', lambda: aq4 is not None and aq4.h_code == 'H413'),
+        ('Tablo 4.1.1 yalnız Kronik 1 bileşen akut toplama girmez',
+         lambda: _compute_sum_acute_m([C('d', 30, ('Aquatic Chronic 1', 'H410'))]) == 0),
+        ('3.10.3.3.1 viskozite 50 mm²/s → H304 yok (toluen %15)',
+         lambda: 'H304' not in calc([('108-88-3', 15), ('56-81-5', 85)], test_data={'viscosity': 50}, user_fp=40)),
+        ('Tablo 2.6.1 ölçülen kaynama başlangıcı 60 °C, FP 0 °C → H225 (H224 değil)',
+         lambda: (lambda h: 'H225' in h and 'H224' not in h)(
+             calc([('60-29-7', 5), ('108-88-3', 95)], user_fp=0, test_data={'boiling_point': 60}))),
+        ('Tablo 3.4.6 cilt hassaslaştırıcı 1A %0,05 → EUH208',
+         lambda: 'EUH208' in check_euh([C('e', 0.05, ('Skin Sens. 1A', 'H317'))])['euh_codes']),
+        ('EUH208: özel sınırla H317 veren madde EUH208\'e yazılmaz',
+         lambda: 'H317' in classify_mixture_clp([sens_scl])['h_codes'] and 'EUH208' not in check_euh([sens_scl])['euh_codes']),
+        ('Ek-2 2.6 hipoklorit %0,5 (aktif klor < %1) → EUH206 yok',
+         lambda: 'EUH206' not in check_euh([C('7681-52-9', 0.5, ('Skin Corr. 1B', 'H314'))], usage='consumer')['euh_codes']),
+        ('Ek-2 2.6 hipoklorit %5 tüketici → EUH206',
+         lambda: 'EUH206' in check_euh([C('7681-52-9', 5, ('Skin Corr. 1B', 'H314'))], usage='consumer')['euh_codes']),
+        ('Ek-2 1.2.5 EUH070 madde %0,05 → EUH070 yok',
+         lambda: 'EUH070' not in check_euh([C('g', 0.05, suppl_hazards=['EUH070'])])['euh_codes']),
+        ('Ek-2 2.1 kurşunlu boya %0,1 (≤ %0,15) → EUH201 yok',
+         lambda: 'EUH201' not in check_euh([C('1317-36-8', 0.1)], form_sub='paint')['euh_codes']),
+        ('Ek-2 2.3 krom(VI) çimento dışı → EUH203 yok',
+         lambda: 'EUH203' not in check_euh([C('7789-00-6', 0.01)])['euh_codes']),
+        ('Ek-2 2.10 cilt hassaslaştırıcı %0,2 → EUH210 tetikleyicisi',
+         lambda: bool(euh210_triggers([C('h', 0.2, ('Skin Sens. 1', 'H317'))]))),
+    ]
+    hata = 0
+    for ad, f in testler:
+        try:
+            ok = bool(f())
+        except Exception as e:
+            ok, ad = False, f'{ad} — HATA: {e}'
+        if not ok:
+            hata += 1
+            print(f'✗ Kural: {ad}')
+    if not hata:
+        print(f'✓ {len(testler)} SEA kural testi')
+    return hata
+
+
 def _norm(t: str) -> str:
     t = re.sub(r'Sayfa \d+ / \d+\s.*?formatına uygundur\.\s', ' ', t, flags=re.S)
     return re.sub(r'\s+', ' ', t)
@@ -147,6 +218,8 @@ def main(run_jev: bool) -> int:
                 print(f'    - {s}')
         else:
             print(f"✓ {u['ad']}")
+
+    hatalar += kural_testleri(c)
 
     if run_jev and dipol_pages:
         from app.services.audit_jev import run_jev_audit

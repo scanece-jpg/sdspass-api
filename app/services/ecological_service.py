@@ -26,6 +26,7 @@ Veri Kaynağı:
 
 from typing import List, Dict, Optional, Any
 from dataclasses import dataclass, field
+import re
 import math
 
 
@@ -239,7 +240,9 @@ def _compute_sum_acute_m(
             if td.lc50_fish:    m_acute = max(m_acute, _ec50_to_m_factor(td.lc50_fish))
             if td.ec50_daphnia: m_acute = max(m_acute, _ec50_to_m_factor(td.ec50_daphnia))
         haz_classes = {h.get('h_class', '').replace('*', '').strip() for h in comp.get('hazards', [])}
-        if 'Aquatic Acute 1' in haz_classes or 'Aquatic Chronic 1' in haz_classes:
+        # SEA Ek-1 Tablo 4.1.1: akut toplamına yalnız "Akut 1" sınıflı bileşenler girer —
+        # yalnız "Kronik 1" olan bileşen akut sınıflandırmaya katkı yapmaz (önceden yapıyordu → gereksiz H400)
+        if 'Aquatic Acute 1' in haz_classes:
             cutoff = 0.1 / max(m_acute, 1)
             if conc >= cutoff:
                 total += (conc * m_acute) / 100
@@ -341,10 +344,13 @@ def calculate_aquatic(
                     })
 
             elif hc == 'Aquatic Chronic 1':
+                # Bileşen aynı zamanda Akut 1 ise akut toplamına da girer (Akut 1 satırı bu durumda
+                # yukarıda atlanır — tek tablo satırı). Yalnız Kronik 1 olan bileşen akut toplama
+                # GİRMEZ (SEA Ek-1 Tablo 4.1.1). Dahil etme eşikleri ayrı: akut %0,1/M_akut.
+                if 'Aquatic Acute 1' in haz_classes and conc >= (0.1 / max(m_acute, 1)):
+                    sum_acute_m += (conc * m_acute) / 100
                 # Dahil etme eşiği: ≥ %0.1 / M_kronik  (SEA Ek-1 §4.1.3.5.5)
                 if conc >= (0.1 / max(m_chronic, 1)):
-                    # Kronik 1 hem akut hem kronik hesaba girer (H410 = Kronik 1 + Akut 1)
-                    sum_acute_m    += (conc * m_acute)   / 100
                     sum_chronic1_m += (conc * m_chronic) / 100
                     sum_chronic_plain += conc / 100
                     detail_parts.append(f"{cas} Chronic1 M_akut={m_acute} M_kronik={m_chronic}")
@@ -371,8 +377,11 @@ def calculate_aquatic(
 
             elif hc in ('Aquatic Chronic 3', 'Aquatic Chronic 4'):
                 # Dahil etme eşiği: ≥ %1.0 (düz)  (SEA Ek-1 §4.1.3.5.5)
+                # Kronik 4 yalnız H413 toplamına girer; H412 formülü (Tablo 4.1.2) Kronik 4'ü içermez —
+                # önceden %30 Kronik 4 bileşen H412 veriyordu (doğrusu H413).
                 if conc >= 1.0:
-                    sum_chronic3 += conc / 100
+                    if hc == 'Aquatic Chronic 3':
+                        sum_chronic3 += conc / 100
                     sum_chronic_plain += conc / 100
                     comp_m_details.append({
                         'cas': cas, 'name': comp.get('name',''),
@@ -744,6 +753,38 @@ def check_endocrine_disruptors(comp_list: List[Dict]) -> List[str]:
 
 
 # ─── ANA ENTRY POINT ─────────────────────────────────────────────────────────
+
+def aquatic_unknown(comp_list: List[Dict]) -> Dict:
+    """SEA Ek-1 4.1.3.6.1 — sucul zarar için kullanılabilir bilgisi olmayan bileşenler.
+    Böyle bir ilgili bileşen varsa karışım bilinen bileşenlere göre sınıflandırılır ve etikette / GBF'de
+    "% x oranda sucul çevreye zararı bilinmeyen bileşenler içerir" ifadesi yer alır.
+    "Veri var" sayılan bileşen (akut toksisite hesabıyla aynı ölçüt, clp_service._ate_core): sucul sınıfı
+    olan, resmî sınıflandırması olan (SEA Ek-6 / Annex VI, öncelik ≤ 2), REACH kayıtlı (kayıtta ekotoksisite
+    verisi zorunlu), kullanıcının EC50/NOEC girdiği veya bilinen zararsız (su, şeker…) bileşen.
+    İfade: münferit ≥ %1 (ilgili bileşen eşiği, Tablo 1.1 / 4.1.3.1) bilinmeyen bileşen varsa; yüzde toplamdır.
+    Döner: {'needed': bool, 'pct': float, 'components': [ad, …]}"""
+    from app.services.clp_service import _PRESUME_NOT_ACUTELY_TOXIC_CAS
+    total, needed, names = 0.0, False, []
+    for c in comp_list:
+        cas = str(c.get('cas') or c.get('cas_no') or '').strip()
+        conc = float(c.get('concMax') or c.get('conc') or c.get('concentration') or 0)
+        if conc <= 0 or cas in _PRESUME_NOT_ACUTELY_TOXIC_CAS:
+            continue
+        hz = c.get('hazards') or []
+        has_aq = any((h.get('h_code') or '').replace('*', '').strip()[:3] == 'H41'
+                     or (h.get('h_code') or '').replace('*', '').strip()[:4] == 'H400' for h in hz)
+        reach = str(c.get('reach_no') or c.get('reach') or '').strip()
+        has_data = (has_aq or int(c.get('source_priority') or 4) <= 2
+                    or bool(re.match(r'01-\d{10}-\d{2}', reach))
+                    or any(c.get(k) for k in ('ec50_algae', 'ec50_fish', 'ec50_daphnia', 'ec50_noec')))
+        if has_data:
+            continue
+        total += conc
+        names.append(c.get('name_tr') or c.get('name') or cas)
+        if conc >= 1.0:
+            needed = True
+    return {'needed': needed, 'pct': round(total, 1), 'components': names}
+
 
 def calculate_ecological(
     comp_list: List[Dict],

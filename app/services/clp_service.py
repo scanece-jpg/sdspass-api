@@ -90,9 +90,10 @@ CLP_CUTOFFS_DICT = {
     "Skin Sens. 1":  {"h":"H317","cutoff":1.0, "signal":"Warning"},
     "Skin Sens. 1A": {"h":"H317","cutoff":0.1, "signal":"Warning"},
     "Skin Sens. 1B": {"h":"H317","cutoff":1.0, "signal":"Warning"},
-    "Resp. Sens. 1": {"h":"H334","cutoff":0.1, "signal":"Danger"},
+    # SEA Ek-1 Tablo 3.4.5: Kat.1 / 1B katı-sıvı %1,0, gaz %0,2; 1A %0,1 (gaz eşiği döngüde uygulanır)
+    "Resp. Sens. 1": {"h":"H334","cutoff":1.0, "signal":"Danger"},
     "Resp. Sens. 1A":{"h":"H334","cutoff":0.1, "signal":"Danger"},
-    "Resp. Sens. 1B":{"h":"H334","cutoff":0.1, "signal":"Danger"},
+    "Resp. Sens. 1B":{"h":"H334","cutoff":1.0, "signal":"Danger"},
     # 3.5 Mutajenez
     "Muta. 1A": {"h":"H340","cutoff":0.1,"signal":"Danger"},
     "Muta. 1B": {"h":"H340","cutoff":0.1,"signal":"Danger"},
@@ -220,8 +221,8 @@ DOMINANCE: dict = {
 # eşleşmediğinde kullanılır. Acute tox, fiziksel tehlike ve özel döngüyle işlenen
 # H314/H315/H318/H319 buraya dahil edilmez.
 _H_CODE_FALLBACK: dict = {
-    'H317': {"h": "H317", "cutoff": 1.0,  "signal": "Warning"},
-    'H334': {"h": "H334", "cutoff": 0.1,  "signal": "Danger"},
+    'H317': {"h": "H317", "cutoff": 1.0,  "signal": "Warning"},   # 1A → %0,1 döngüde (Tablo 3.4.5)
+    'H334': {"h": "H334", "cutoff": 1.0,  "signal": "Danger"},    # 1A → %0,1, gaz → %0,2 döngüde
     'H340': {"h": "H340", "cutoff": 0.1,  "signal": "Danger"},
     'H341': {"h": "H341", "cutoff": 1.0,  "signal": "Warning"},
     'H350': {"h": "H350", "cutoff": 0.1,  "signal": "Danger"},
@@ -343,6 +344,13 @@ def _get_scl_entry_for_conc(scl_list: list, h_code4: str, conc: float) -> dict |
 # (3.2.3.3.4 / 3.3.3.3.4: asit/baz, inorganik tuz, aldehit, fenol, yüzey aktif madde vb. — KDU kararı)
 _NA_CUTOFFS = {'H314': 1.0, 'H315': 3.0, 'H318': 1.0, 'H319': 3.0}
 
+# Bileşen katkılarının toplandığı sınıflar (tek tek eşik değil, toplam eşik)
+_ADDITIVE_H = {
+    'H335': {'cutoff': 20.0, 'h_class': 'STOT SE 3', 'signal': 'Warning', 'ref': '3.8.3.4.5'},
+    'H336': {'cutoff': 20.0, 'h_class': 'STOT SE 3', 'signal': 'Warning', 'ref': '3.8.3.4.5'},
+    'H304': {'cutoff': 10.0, 'h_class': 'Asp. Tox. 1', 'signal': 'Danger', 'ref': '3.10.3.3.1'},
+}
+
 
 def classify_mixture_clp(components: list, mixture_ph: float = None,
                          mixture_form: str = '', additivity_na: bool = False) -> dict:
@@ -436,6 +444,10 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
     }
     _AEROSOL_EXCLUDED_H = {'H220','H221','H222','H223','H224','H225','H226','H228','H280','H281'}
 
+    # Toplamalı sınıflar (STOT SE 3, aspirasyon) — bileşen katkıları burada toplanır
+    _add_sum: dict = {}
+    _add_src: dict = {}
+
     # Her bileşen × her tehlike sınıfı
     for comp in components:
         cas = comp.get("cas_no", comp.get("cas", ""))
@@ -469,6 +481,13 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
 
             cutoff = rule["cutoff"]
             h = rule["h"]
+            # SEA Ek-1 Tablo 3.4.5 — alt kategori 1A %0,1; solunum hassaslaştırıcı Kat.1/1B gaz karışımında %0,2.
+            # TR sınıf adıyla (fallback) gelen bileşende alt kategori sınıf adından okunur.
+            if h in ('H317', 'H334'):
+                if '1A' in h_class:
+                    cutoff = 0.1
+                elif h == 'H334' and (mixture_form or '').lower() == 'gas':
+                    cutoff = 0.2
             _na_used = additivity_na and h in _NA_CUTOFFS
             if _na_used:
                 cutoff = _NA_CUTOFFS[h]
@@ -503,6 +522,16 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
             # hesaplanır; burada sadece B2.1 tablosu için ek kayıt tutulur.
             # Konsantrasyon eşiği 0.0 → görsel olarak anlamlı bir minimum (%1) kullan.
             _orig_cutoff = rule["cutoff"]   # SCL öncesi orijinal kesme değeri
+
+            # Toplamalı sınıflar — bileşenler tek tek değil, toplam olarak değerlendirilir:
+            #   STOT SE 3 (H335 / H336 ayrı ayrı): SEA Ek-1 3.8.3.4.5 — Σ ≥ %20
+            #   Aspirasyon Kat.1 (H304): SEA Ek-1 3.10.3.3.1 — Σ ≥ %10 (viskozite koşulu sds_pipeline'da
+            #   fiziksel motorla uygulanır; bu fonksiyon viskoziteyi bilmez)
+            # Maddeye özel sınır (SCL) varsa bileşen kendi sınırıyla ayrıca değerlendirilir.
+            if h in _ADDITIVE_H and not _scl_matched_mins:
+                _add_sum[h] = _add_sum.get(h, 0.0) + conc
+                _add_src.setdefault(h, []).append(f"{cas} %{conc:g}")
+                continue
 
             if conc < cutoff:
                 # ── STOT SE 1→2 geçiş kuralı — CLP Tablo 3.8.3 ──────────────────
@@ -678,6 +707,20 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
                     "cutoff_value":  _cutoff_display,
                     "signal":        rule.get("signal", "Warning"),
                 })
+
+    # ── Toplamalı sınıflar: STOT SE 3 (Σ ≥ %20) ve aspirasyon (Σ ≥ %10) ─────────
+    for _ah, _asum in _add_sum.items():
+        _alim = _ADDITIVE_H[_ah]
+        if _ah in seen_h or _asum < _alim['cutoff']:
+            continue
+        seen_h.add(_ah)
+        passed.append({
+            "h_class": _alim['h_class'], "h_code": _ah, "conc": _asum,
+            "reason": (f"Toplama: {' + '.join(_add_src[_ah])} = %{_asum:g} ≥ %{_alim['cutoff']:g} "
+                       f"(SEA Ek-1 {_alim['ref']})"),
+            "cutoff_source": "GCL", "cutoff_value": _alim['cutoff'],
+            "signal": _alim['signal'],
+        })
 
     # ── pH Uç Değer Kontrolü — SEA/CLP Annex I Tablo 3.2.3 notu ─────────────────
     # Ölçülen karışım pH ≤ 2 VEYA ≥ 11.5 ise H314+H318 atanır.

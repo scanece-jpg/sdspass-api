@@ -1955,9 +1955,15 @@ def _calc_flam_liq(comps: List[Dict], user_fp=None, user_bp=None, form_sub: str 
             if bp != 'MISSING' and bp is not None and w >= 1:
                 if theo_bp is None or bp < theo_bp:
                     theo_bp = bp
-        effective_bp = theo_bp if theo_bp is not None else (user_bp if user_bp is not None else (100 if user_fp < 23 else None))
+        # SEA Ek-1 Tablo 2.6.1: Kat.1/Kat.2 ayrımı karışımın başlangıç kaynama noktasıyla yapılır —
+        # ölçülen değer varsa o kullanılır; yoksa en düşük bileşen kaynama noktası (temkinli tahmin).
+        # Önceden ölçülen değer bileşen tahmininin gerisinde kalıyordu (ölçüm 60 °C iken H224).
+        effective_bp = user_bp if user_bp is not None else (theo_bp if theo_bp is not None else (100 if user_fp < 23 else None))
+        _bp_src = (f', kaynama başlangıcı {user_bp}°C ölçülen' if user_bp is not None else
+                   (f', kaynama başlangıcı ≤ {theo_bp}°C (en düşük bileşen — tahmini)'
+                    if theo_bp is not None and user_fp < 23 else ''))
         return {'result': _cls_flam_liq(user_fp, effective_bp),
-                'source': f'Kullanıcı girişi ({user_fp}°C)', 'fp': user_fp}
+                'source': f'Kullanıcı girişi ({user_fp}°C{_bp_src})', 'fp': user_fp}
 
     # CLP §2.6.4.2 — su seyreltme etkisi:
     # Su (CAS 7732-18-5) >= %50 olan karışımlarda yanıcı bileşenin FP'si
@@ -2162,7 +2168,9 @@ def _calc_asp_tox(comps: List[Dict], test_data: Dict = None) -> Dict:
         cas  = (c.get('cas') or c.get('cas_no') or '').strip()
         conc = float(c.get('concMax') or c.get('conc') or 0)
         in_list   = cas in ASP_CAS
+        # Sınıf adı TR ("Asp. Tok. 1") gelebilir — H304 kodu da kabul edilir
         has_class = any((h.get('h_class') or '') == 'Asp. Tox. 1'
+                        or (h.get('h_code') or '').replace('*', '').strip()[:4] == 'H304'
                         for h in (c.get('hazards') or []))
         if (in_list or has_class) and conc > 0:
             triggers.append({'cas': cas, 'name': c.get('name') or cas, 'conc': conc})

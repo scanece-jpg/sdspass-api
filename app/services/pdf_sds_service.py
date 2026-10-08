@@ -1467,6 +1467,14 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         for _stmt_text in _sentences:
             story.append(Paragraph(f"<b>{_stmt_text}</b>", styles['body']))
 
+    # ─── SEA Ek-1 4.1.3.6.1 — Zorunlu ibare: sucul zararı bilinmeyen bileşenler ─────────
+    _aqu = sds_data.get('aquatic_unknown') or {}
+    if _aqu.get('needed') and float(_aqu.get('pct') or 0) > 0:
+        _aq_txt = (f"%{_aqu['pct']:g} oranda sucul çevreye zararı bilinmeyen bileşenler içerir." if lang == 'TR'
+                   else f"Contains {_aqu['pct']:g} % of components with unknown hazards to the aquatic environment.")
+        story.append(Spacer(1, 3))
+        story.append(Paragraph(f"<b>{_aq_txt}</b>", styles['body']))
+
     # ─── Duyarlılaştırıcı Madde Kimliği — CLP Ek II §2.8 (ZORUNLU) ─────────────
     # §2.8 yalnızca Skin Sens. (H317) ve Resp. Sens. (H334) için zorunludur.
     # H319, H411 vb. için madde adı etikette ZORUNLU DEĞİL (denetim hatası).

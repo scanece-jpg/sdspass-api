@@ -36,6 +36,8 @@ EUH202_CAS = {'1309-14-4', '137-05-3', '6606-65-1', '7085-85-0'}
 EUH203_CAS = {'10588-01-9', '1333-82-0', '13530-65-9', '7738-94-5', '7778-50-9', '7789-00-6'}
 EUH206_CAS = {'10022-70-5', '7681-52-9', '7778-54-3'}
 EUH207_CAS = {'10108-64-2', '10124-36-4', '1306-23-6', '7440-43-9'}
+# Aktif klor payı (Cl2 eşdeğeri / mol kütlesi): NaOCl 70,9/74,44; Ca(OCl)2 141,8/142,98; NaOCl·5H2O 70,9/164,5
+_ACTIVE_CL_FACTOR = {'7681-52-9': 0.952, '7778-54-3': 0.992, '10022-70-5': 0.431}
 
 _ISOCYANATE = re.compile(r'isocyanat|izosiyanat|\b(?:p?mdi|tdi|hdi|ipdi|xdi|ndi)\b', re.I)
 _EPOXY      = re.compile(r'\bepox|epoksi|glycidyl|glisidil|\boxiran|\boksiran', re.I)
@@ -59,7 +61,8 @@ def _add(detected: list, codes: set, code: str, cas: str, name: str, **extra) ->
 
 def check_euh(components: List[Dict],
               mixture_form: str = 'liquid',
-              form_sub: str = '') -> Dict:
+              form_sub: str = '',
+              usage: str = '') -> Dict:
     """
     Formüldeki bileşenlere göre EUH ifadelerini tespit eder.
     Döner: {'euh_codes': [...], 'euh_details': [{code, text, source_cas, source_name, ...}], 'manual_check': [...]}
@@ -79,18 +82,27 @@ def check_euh(components: List[Dict],
 
         if cas in EUH032_GROUP_CAS:
             _add(detected, detected_codes, 'EUH032', cas, name, source='SEA Ek-6 006-007-00-5 (grup kaydı)')
-        if cas in EUH201_CAS and form_sub == 'paint' and comp_conc > 0.009:
-            _add(detected, detected_codes, 'EUH201', cas, name, note='Kurşunlu boya/vernik, kurşun > %0,009 (SEA Ek-2)')
+        # SEA Ek-2 2.1: boya/vernikte kurşun > %0,15 (TR metni; AB'nin sonraki %0,009 değeri TR'de yok).
+        # Bileşen yüzdesi kurşun bileşiğinin yüzdesidir — metal olarak kurşun bundan azdır (temkinli).
+        if cas in EUH201_CAS and form_sub == 'paint' and comp_conc > 0.15:
+            _add(detected, detected_codes, 'EUH201', cas, name, note='Kurşunlu boya/vernik, kurşun > %0,15 (SEA Ek-2 2.1)')
         if cas in EUH202_CAS:
             _add(detected, detected_codes, 'EUH202', cas, name)
-        if cas in EUH203_CAS:
-            _add(detected, detected_codes, 'EUH203', cas, name)
+        # SEA Ek-2 2.3: yalnız çimento ve çimento karışımları — çözünebilir krom (VI) > %0,0002;
+        # karışım H317 taşıyorsa basılmaz (aşağıda, sınıflandırma sonrası sds_pipeline'da elenir)
+        if cas in EUH203_CAS and form_sub == 'cement' and comp_conc > 0.0002:
+            _add(detected, detected_codes, 'EUH203', cas, name, note='Çimento, çözünebilir Cr(VI) > %0,0002 (SEA Ek-2 2.3)')
         if _ISOCYANATE.search(name_all):
             _add(detected, detected_codes, 'EUH204', cas, name)
         if _EPOXY.search(name_all):
             _add(detected, detected_codes, 'EUH205', cas, name)
-        if cas in EUH206_CAS:
-            _add(detected, detected_codes, 'EUH206', cas, name)
+        # SEA Ek-2 2.6 "Halka satılan ve aktif klor içeren karışımlar": aktif klor > %1.
+        # Aktif klor = bileşen % × (klor payı): NaOCl 0,952; Ca(OCl)2 0,992; NaOCl·5H2O 0,431
+        if cas in EUH206_CAS and usage == 'consumer':
+            _cl = comp_conc * _ACTIVE_CL_FACTOR.get(cas, 1.0)
+            if _cl > 1.0:
+                _add(detected, detected_codes, 'EUH206', cas, name,
+                     note=f'Aktif klor ≈ %{_cl:.2f} > %1 (SEA Ek-2 2.6)')
         if cas in EUH207_CAS:
             _add(detected, detected_codes, 'EUH207', cas, name)
 
@@ -104,42 +116,55 @@ def check_euh(components: List[Dict],
         is_resp_sens = bool(hazard_classes & resp_sens_classes)
 
         if is_skin_sens or is_resp_sens:
-            # Skin Sens. sınıflandırma eşiği: SCL varsa kullan, yoksa kategori bazlı GCL
-            # CLP Ek I Tablo 3.4.3: Skin Sens. 1A → GCL=%0.1 | Skin Sens. 1B / 1 → GCL=%1.0
-            is_skin_sens_1a = 'Skin Sens. 1A' in hazard_classes
-            skin_class_threshold = 0.1 if is_skin_sens_1a else 1.0
+            # Sınıflandırma eşiği (SEA Ek-1 Tablo 3.4.5) ve sonuca vardırıcı eşik (Tablo 3.4.6):
+            #   cilt 1 / 1B: %1 / %0,1      cilt 1A: %0,1 / %0,01
+            #   solunum 1 / 1B: %1 (gaz %0,2) / %0,1      solunum 1A: %0,1 / %0,01
+            #   özel sınır (SCL) varsa sınıflandırma eşiği SCL; SCL < %0,1 ise sonuca vardırıcı eşik SCL/10
+            # SCL bileşende 'sclRaw' (bant listesi) veya 'scl' (liste/dict) olarak gelir — önceden yalnız
+            # 'scl' okunuyordu; sds_pipeline 'sclRaw' gönderdiği için özel sınır yok sayılıyor ve karışımı
+            # zaten H317 yapan madde EUH208'e de yazılıyordu.
+            from app.services.clp_service import _normalize_scl_list
+            _scl_src = comp.get('sclRaw') or comp.get('scl') or []
+            if isinstance(_scl_src, dict):
+                _scl_src = [{'h_code': k, 'c_min': v} for k, v in _scl_src.items()]
+            _scl = {}
+            for _e in _normalize_scl_list(_scl_src):
+                _hc = (_e.get('h_code') or '').replace('*', '').strip()[:4]
+                if _hc in ('H317', 'H334') and _e.get('c_min') is not None:
+                    _v = float(_e['c_min'])
+                    _scl[_hc] = min(_v, _scl.get(_hc, _v))
+            _gas = (mixture_form or '').lower() == 'gas'
+
+            def _thresholds(is_1a: bool, hc: str):
+                cls_thr = _scl.get(hc, 0.1 if is_1a else (0.2 if (hc == 'H334' and _gas) else 1.0))
+                if hc in _scl and _scl[hc] < 0.1:
+                    elic = _scl[hc] / 10
+                else:
+                    elic = 0.01 if is_1a else 0.1
+                return cls_thr, elic
+
+            causes, elic_thr = False, None
             if is_skin_sens:
-                # SCL varsa GCL'yi geçersiz kılar
-                # scl iki formatta gelebilir:
-                #   list: [{h_code:'H317', c_min:0.5}, ...]  (API / backend)
-                #   dict: {'H317': 0.5, 'H314': 2.0}         (frontend _sclMap)
-                scl_data = comp.get('scl', [])
-                if isinstance(scl_data, list):
-                    for scl_entry in scl_data:
-                        if not isinstance(scl_entry, dict):
-                            continue
-                        scl_h = (scl_entry.get('h_code', '') or '').replace('*', '').strip()[:4]
-                        if scl_h == 'H317' and scl_entry.get('c_min') is not None:
-                            skin_class_threshold = float(scl_entry['c_min'])
-                            break
-                elif isinstance(scl_data, dict) and scl_data.get('H317') is not None:
-                    skin_class_threshold = float(scl_data['H317'])
+                _c, _e = _thresholds('Skin Sens. 1A' in hazard_classes, 'H317')
+                causes = causes or comp_conc >= _c
+                elic_thr = _e if elic_thr is None else min(elic_thr, _e)
+            if is_resp_sens:
+                _c, _e = _thresholds('Resp. Sens. 1A' in hazard_classes, 'H334')
+                causes = causes or comp_conc >= _c
+                elic_thr = _e if elic_thr is None else min(elic_thr, _e)
+            # ATP listesindeki resmî SCL/10 değeri (yerel SCL verisi yoksa) önceliklidir
+            if cas in SKIN_SENS_SCL_EUH208_THRESHOLD and 'H317' not in _scl:
+                elic_thr = SKIN_SENS_SCL_EUH208_THRESHOLD[cas]
 
-            # Madde H317 sınıflandırmasına neden oluyor mu?
-            causes_skin_class = is_skin_sens and comp_conc >= skin_class_threshold
-
-            # EUH208'e dahil: sınıflandırmaya neden olmayan sensitizerlar
-            # Eşik: SKIN_SENS_SCL_EUH208_THRESHOLD'dan CAS'a özel SCL/10 değeri;
-            # listede yoksa genel GCL %0.1 uygulanır (CLP Annex II §1.2).
-            euh208_threshold = SKIN_SENS_SCL_EUH208_THRESHOLD.get(cas, 0.1)
-            if not causes_skin_class and comp_conc >= euh208_threshold:
+            # EUH208'e dahil: karışımın sınıflandırılmasına yol açmayan, ama sonuca vardırıcı eşiği aşan
+            if not causes and comp_conc >= elic_thr:
                 skin_sens_substances.append({
                     'name': name or cas,
                     'name_tr': name_tr or name or cas,
                     'cas': cas,
                     'conc': comp_conc,
-                    'threshold': euh208_threshold,
-                    'has_scl': cas in SKIN_SENS_SCL_EUH208_THRESHOLD,
+                    'threshold': elic_thr,
+                    'has_scl': cas in SKIN_SENS_SCL_EUH208_THRESHOLD or bool(_scl),
                 })
 
     # EUH208: Deri sensitizeri varsa + SCL/10 eşiği kontrolü
@@ -178,6 +203,9 @@ def check_euh(components: List[Dict],
             lim = limits.get(code)
             if lim and lim.get('min') is not None and conc < float(lim['min']):
                 continue
+            # SEA Ek-2 1.2.5: karışımda EUH070 — kayıtta aksi belirtilmedikçe madde ≥ %0,1
+            if code == 'EUH070' and not (lim and lim.get('min') is not None) and conc < 0.1:
+                continue
             extra = {'source': 'SEA Ek-6 / Annex VI'}
             if lim and lim.get('min') is not None:
                 extra['note'] = f"Uyumlaştırılmış kayıt eşiği: C ≥ %{lim['min']:g}"
@@ -191,6 +219,61 @@ def check_euh(components: List[Dict],
         'euh_details': sorted(detected, key=lambda x: x['code']),
         'manual_check': manual_check,
     }
+
+
+def euh210_triggers(components: List[Dict], mixture_form: str = 'liquid') -> List[Dict]:
+    """SEA Ek-2 2.10 (EUH210 "Talep halinde güvenlik bilgi formu sağlanabilir.") — karışımı bu ifadeye
+    götüren bileşenler. Yalnız zararlı olarak SINIFLANDIRILMAYAN ve halkın kullanımı için TASARLANMAYAN
+    karışımlarda uygulanır (bu iki koşul çağıran tarafta — sds_pipeline — kontrol edilir).
+      - ≥ %0,1: cilt hassaslaştırıcı 1 / 1B, solunum hassaslaştırıcı 1 / 1B, kanserojen Kat.2
+      - ≥ %0,01: cilt / solunum hassaslaştırıcı 1A
+      - cilt hassaslaştırıcıda özel sınırın 1/10'u; özel sınırı < %0,1 olan solunum hassaslaştırıcıda da
+      - ≥ %0,1: üreme sistemine toksik 1A / 1B / 2 veya anne sütü (laktasyon)
+      - münferit ≥ %1 (gaz karışımında ≥ %0,2): başka bir sağlık / çevre zararı sınıfı veya TR işyeri
+        maruz kalma sınır değeri (28733 Ek-1 / 28730 Ek-2) olan madde
+    Döner: [{'cas', 'name', 'conc', 'reason'}]"""
+    from app.services.clp_service import _normalize_scl_list
+    from app.services.tr_oel_service import get_oel
+    gas = (mixture_form or '').lower() == 'gas'
+    out = []
+    for comp in components:
+        cas = str(comp.get('cas', '') or comp.get('cas_no', '')).strip()
+        name = comp.get('name_tr') or comp.get('name') or cas
+        conc = float(comp.get('concMax') or comp.get('conc') or comp.get('concentration') or 0)
+        if conc <= 0:
+            continue
+        hz = comp.get('hazards') or []
+        classes = {(h.get('h_class') or '').replace('*', '').strip() for h in hz}
+        codes = {(h.get('h_code') or '').replace('*', '').strip()[:4].upper() for h in hz}
+        scl = {}
+        for e in _normalize_scl_list(comp.get('sclRaw') or comp.get('scl') or []):
+            hc = (e.get('h_code') or '').replace('*', '').strip()[:4]
+            if hc in ('H317', 'H334') and e.get('c_min') is not None:
+                scl[hc] = min(float(e['c_min']), scl.get(hc, float(e['c_min'])))
+        reason = None
+        skin1a = any('Skin Sens. 1A' in c or 'Cilt Hassas. 1A' in c for c in classes)
+        resp1a = any('Resp. Sens. 1A' in c or 'Solunum Hassas. 1A' in c for c in classes)
+        if 'H317' in codes:
+            thr = scl['H317'] / 10 if 'H317' in scl else (0.01 if skin1a else 0.1)
+            if conc >= thr:
+                reason = f'cilt hassaslaştırıcı ≥ %{thr:g}'
+        if not reason and 'H334' in codes:
+            thr = scl['H334'] / 10 if scl.get('H334', 1) < 0.1 else (0.01 if resp1a else 0.1)
+            if conc >= thr:
+                reason = f'solunum hassaslaştırıcı ≥ %{thr:g}'
+        if not reason and 'H351' in codes and conc >= 0.1:
+            reason = 'kanserojen Kat.2 ≥ %0,1'
+        if not reason and codes & {'H360', 'H361', 'H362'} and conc >= 0.1:
+            reason = 'üreme sistemine toksik / laktasyon ≥ %0,1'
+        if not reason and conc >= (0.2 if gas else 1.0):
+            health_env = {c for c in codes if c[:2] in ('H3', 'H4')}
+            if health_env:
+                reason = f'sağlık/çevre zararı sınıfı ({", ".join(sorted(health_env))}) ≥ %{0.2 if gas else 1:g}'
+            elif cas and get_oel(cas):
+                reason = f'TR işyeri maruz kalma sınır değeri var, ≥ %{0.2 if gas else 1:g}'
+        if reason:
+            out.append({'cas': cas, 'name': name, 'conc': conc, 'reason': reason})
+    return out
 
 
 def get_euh_text(code: str) -> str:

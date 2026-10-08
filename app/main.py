@@ -555,6 +555,8 @@ async def generate_pdf(data: dict = Body(...)):
             'classification_notes': core.get('classification_notes', []),
             # Etikette adı yazılması zorunlu bileşenler (SEA/CLP Md. 18(3)(b)) — Bölüm 2.2
             'label_components': core.get('label_components', []),
+            # SEA Ek-1 4.1.3.6.1 — "% x oranda sucul çevreye zararı bilinmeyen bileşenler içerir"
+            'aquatic_unknown': core.get('aquatic_unknown') or {},
         }
 
         # sds_data['clp']['pictograms'] h_codes'tan türet — V019 için gerekli
@@ -1134,6 +1136,7 @@ async def sds_calculate(body: dict = Body(...)):
             'ppe':         core['ppe'],
             'glove':       core.get('glove') or {},
             'ek17':        core.get('ek17') or [],
+            'aquatic_unknown': core.get('aquatic_unknown') or {},
             'theo_props':  phys_result.get('theo_props', {}),
             'warnings':    core['warnings'],
             'pictograms':  core['pictograms'],

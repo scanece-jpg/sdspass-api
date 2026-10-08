@@ -165,7 +165,17 @@ def kural_testleri(c) -> int:
     from app.services import iso10156
     from app.services.physical_engine import calculate as phys_calc
     from app.services.transport_engine import classify as tr_classify
+    from app.services.transport_engine import Component as TC, build_transport_components as build_tc
+    from app.services.stot_engine import calculate as _stot
+    from app.services.clp_service import _ate_core
     import datetime
+
+    def _raises(fn):
+        try:
+            fn()
+        except ValueError:
+            return True
+        return False
 
     def p_label(usage, h):
         allp = assign_p_codes(h, usage=usage)['p_codes']
@@ -376,6 +386,49 @@ def kural_testleri(c) -> int:
         ("Ek-2 A 3.2 uçtan uca: panelde 'tam değer' → Bölüm 3'te 20%, aralık notu yok",
          lambda: (lambda t: '≥ 20 - < 25%' not in t and ' 20% ' in t and 'yüzde aralığı olarak' not in t)(
              _pdf_text(c, [('120-51-4', 20), ('7732-18-5', 80)], conc_display='exact'))),
+        # ── tests/ klasöründen taşınanlar (2026-10-08; klasör silindi) ──────────────────────────────────
+        ('SEA Ek-1 Tablo 3.9.4: STOT RE 2 toplanmaz — %8 + %8 → H373 yok; tek bileşen %10 → H373',
+         lambda: _stot([C('110-54-3', 8, ('STOT RE 2', 'H373')), C('71-43-2', 8, ('STOT RE 2', 'H373')),
+                        C('7732-18-5', 84)])['h_codes'] == []
+         and 'H373' in _stot([C('110-54-3', 10, ('STOT RE 2', 'H373')), C('7732-18-5', 90)])['h_codes']),
+        ('SEA Ek-1 4.1 kronik toplama M faktörüyle: Kronik 1 M=10 %3 → H410; %2 → H411',
+         lambda: all(calculate_aquatic([C('x', k, ('Aquatic Chronic 1', 'H410'), m_factors={'acute': 1, 'chronic': 10}),
+                                        C('7732-18-5', 100 - k)]).h_code == h for k, h in ((3, 'H410'), (2, 'H411')))),
+        ('SEA Ek-1 3.2 baskınlık: %5 NaOH (Kat.1A) → H314 var, H315 yok',
+         lambda: (lambda h: 'H314' in h and 'H315' not in h)(classify_mixture_clp(
+             [C('1310-73-2', 5, ('Skin Corr. 1A', 'H314')), C('7732-18-5', 95)])['h_codes'])),
+        ('SEA Ek-1 3.1.3.6.1: su ATEmix\'te bilinmeyen sayılmaz (ate_unknown True/False) — %4 ATE 500 → sınıf yok',
+         lambda: all((lambda r: abs(r[2].get('oral', 0)) < 1e-9 and not any(
+             x['h_code'] in ('H300', 'H301', 'H302') for x in r[0]))(_ate_core([
+                 {'cas': '7732-18-5', 'name': 'Su', 'conc': 96, 'ate_unknown': u, 'hazards': [], 'ate': {}},
+                 {'cas': '108-88-3', 'name': 'B', 'conc': 4, 'ate_unknown': False,
+                  'hazards': [{'h_code': 'H302', 'h_class': 'Acute Tox. 4'}], 'ate': {'oral': 500}}], form='liquid'))
+             for u in (True, False))),
+        ('ADR 3.1.3.2 baskın madde: %90 TCCA katı → UN2468 Sınıf 5.1; sıvı üründe "KURU" girişi verilmez',
+         lambda: (lambda r: '2468' in r['un'] and r['class'] == '5.1')(tr_classify(
+             ['H272', 'H302', 'H410'], form='solid',
+             components=[TC(cas='87-90-1', conc=90.0, h_codes=['H272', 'H302', 'H410']),
+                         TC(cas='7647-14-5', conc=8.0, h_codes=[])])['road'])
+         and '2468' not in (tr_classify(['H272', 'H302', 'H410'], form='liquid',
+             components=[TC(cas='87-90-1', conc=95.0, h_codes=['H272', 'H302', 'H410']),
+                         TC(cas='7647-14-5', conc=5.0, h_codes=[])])['road'].get('un') or '')),
+        ('ADR SP 135: troklosen sodyum dihidrat (DIPOL 306) adlı girişe girmez → çevre için UN3077 Sınıf 9; '
+         'yalnız H319 → taşımada tehlikesiz',
+         lambda: (lambda r: not r.get('not_regulated') and r['road']['class'] == '9' and '3077' in r['road']['un']
+                  and r.get('env_mark') is True)(tr_classify(
+             ['H302', 'H319', 'H335', 'H410'], form='solid', components=build_tc([
+                 {'cas_no': '51580-86-0', 'conc': 92.0, 'hazards': [
+                     {'h_class': 'Acute Tox. 4', 'h_code': 'H302'}, {'h_class': 'Eye Irrit. 2', 'h_code': 'H319'},
+                     {'h_class': 'STOT SE 3', 'h_code': 'H335'}, {'h_class': 'Aquatic Acute 1', 'h_code': 'H400'},
+                     {'h_class': 'Aquatic Chronic 1', 'h_code': 'H410'}]},
+                 {'cas_no': '7647-14-5', 'conc': 8.0, 'hazards': []}])))
+         and tr_classify(['H319'], form='liquid', components=[TC(cas='1234-56-7', conc=90.0, h_codes=['H319']),
+                                                             TC(cas='7647-14-5', conc=10.0, h_codes=[])])
+         .get('not_regulated')),
+        ('Taşıma: okunamayan / eksik konsantrasyon sessizce 0 sayılmaz — hata verir',
+         lambda: all(_raises(lambda r=r: build_tc(r)) for r in (
+             [{'cas_no': '87-90-1', 'conc': 'GIZLI', 'h_codes': ['H272']}],
+             [{'cas_no': '87-90-1', 'h_codes': ['H272']}]))),
     ]
     hata = 0
     for ad, f in testler:

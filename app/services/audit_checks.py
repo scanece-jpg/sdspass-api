@@ -407,8 +407,8 @@ def c_t14(ctx):
     h = _h(ctx['secs'].get('2', ''))
     s14 = ctx['secs'].get('14', '')
     exp = []
-    if 'H314' in h:
-        exp.append('8')
+    if h & {'H314', 'H290'}:
+        exp.append('8')                           # H290 → ADR 2.2.8.1.5.3 (c)(ii) Sınıf 8 PG III
     if h & {'H224', 'H225', 'H226'}:
         exp.append('3')
     # Aerosol → UN 1950 (Sınıf 2); gaz: alevlenir → 2.1, yalnız basınçlı gaz → 2.2 (ADR 2.2.2.1.5);

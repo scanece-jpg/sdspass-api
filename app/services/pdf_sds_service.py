@@ -2524,11 +2524,18 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     if _is_solid_form and _have(_ssa):
         _app = f"{_app}; {_L('özgül yüzey alanı', 'specific surface area')}: {_ssa}"
 
-    # (ç) pH — katıda sulu çözeltinin konsantrasyonu belirtilir (Ek-2 9.1(ç))
-    _ph_conc_raw = phys.get('ph_conc') or '1'
-    _ph_conc_lbl = _L(f'pH (%{_ph_conc_raw} sulu çözeltide)', f'pH ({_ph_conc_raw}% aqueous solution)')
+    # (ç) pH — Ek-2 9.1(ç): ürünün kendisinin ya da sulu çözeltisinin pH'ı; çözeltiyse konsantrasyonu da
+    # belirtilir. Konsantrasyon yalnız kullanıcı girdiyse yazılır (önceden katıda girilmese de "%1" basılıyordu).
+    _ph_conc_raw = str(phys.get('ph_conc') or '').strip()
     _ph_val = _pv_ph()
-    _ph_lbl_row = _ph_conc_lbl if (_is_solid_form and _have(_ph_val)) else phys_prop(lang, 'ph')
+    _ph_numeric = bool(_re.match(r'^\s*[<>≤≥~]?\s*\d', str(_ph_val or '')))
+    if _ph_conc_raw and _have(_ph_val) and _ph_numeric:
+        _ph_lbl_row = _L(f'pH (%{_ph_conc_raw} sulu çözeltide)', f'pH ({_ph_conc_raw}% aqueous solution)')
+    elif _is_solid_form and _have(_ph_val) and _ph_numeric:
+        _ph_lbl_row = _L('pH (sulu çözeltide — konsantrasyon belirtilmemiştir)',
+                         'pH (aqueous solution — concentration not stated)')
+    else:
+        _ph_lbl_row = phys_prop(lang, 'ph')
 
     # (d) Erime/donma noktası (polimerde yumuşama noktası)
     _mp_lbl = (_L('Yumuşama noktası (Vicat/VST)', 'Softening point (Vicat/VST)') if _is_polymer

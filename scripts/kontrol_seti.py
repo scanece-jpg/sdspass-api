@@ -96,6 +96,7 @@ URUNLER = [
      'yok': _UYDURMA + ['P221', 'Ox. Sol. (ihtiyatlı)']},
     {'ad': 'Aerosol sprey (etanol, propan/bütan itici)', 'form': 'aerosol',
      'bil': [('64-17-5', 40), ('74-98-6', 30), ('106-97-8', 20), ('7732-18-5', 10)],
+     'test_data': {'flammable_aerosol': 'not_tested'}, 'soru': ('PHYS_AEROSOL_UNTESTED', 'flammable_aerosol'),
      'phys': {'appearance': 'Aerosol', 'color': 'renksiz', 'odor': 'alkol'},
      'h': ['H222', 'H229'], 'signal': 'Danger',
      'var': ['Aerosol 1 H222 + H229', 'P211', 'P251', 'P410+P412', 'UN 1950', 'AEROSOLLER, alevlenebilir'],
@@ -161,6 +162,7 @@ def kural_testleri(c) -> int:
     from app.services.sds_sentence_service import generate_section3
     from app.services import iso10156
     from app.services.physical_engine import calculate as phys_calc
+    from app.services.transport_engine import classify as tr_classify
     import datetime
 
     def p_label(usage, h):
@@ -301,6 +303,24 @@ def kural_testleri(c) -> int:
         ('SEA Ek-1 Tablo 2.5: H280 → etikette P410+P403 (ayrık P410/P403 değil); H220 ile P403 tekrar etmez',
          lambda: p_label('industrial', ['H280']) == ['P410+P403']
          and (lambda p: 'P410+P403' in p and 'P403' not in p)(p_label('industrial', ['H220', 'H280']))),
+        # ── Fiziksel / ADR denetimi (2026-10-08) ──
+        ('SEA Ek-1 2.3: su + %30 propan aerosol, test yok → Aerosol 1 (H222) + test sorusu',
+         lambda: (lambda r: 'H222' in [x['h'] for x in r['results']]
+                  and 'PHYS_AEROSOL_UNTESTED' in [d['code'] for d in r['pending_decisions']])(
+             phys_calc([C('7732-18-5', 70), C('74-98-6', 30, ('Flam. Gas 1', 'H220'))], form='aerosol'))),
+        ('SEA Ek-1 2.3: parlama noktası 78 °C (≤ 93 °C) sıvı alevlenir bileşen sayılır; ≤ %1 → yalnız H229',
+         lambda: 'H222' in [x['h'] for x in phys_calc([C('8042-47-5', 60), C('112-34-5', 30), C('124-38-9', 10)],
+                                                     form='aerosol')['results']]
+         and [x['h'] for x in phys_calc([C('7732-18-5', 98), C('7727-37-9', 2)], form='aerosol')['results']] == ['H229']),
+        ('SEA Ek-1 2.7: %2 karbon siyahı tozda H228 otomatik verilmez, test (N.1) sorusu sorulur',
+         lambda: (lambda r: not r['results'] and 'PHYS_FLAM_SOL_UNTESTED' in [d['code'] for d in r['pending_decisions']])(
+             phys_calc([C('1333-86-4', 2), C('471-34-1', 98)], form='powder'))),
+        ('ADR 2.2.8.1.5.3 (c)(ii): yalnız H290 → Sınıf 8 PG III (UN 1760)',
+         lambda: (lambda d: d['class'] == '8' and d['pg'] == 'III' and d['un'] == 'UN 1760')(
+             tr_classify(['H290'], form='liquid')['road'])),
+        ('ADR Tablo A: su ile tepkimeye giren katı (alevlenir değil) UN 2813; organik peroksit Tip B UN 3101',
+         lambda: tr_classify(['H261'], form='solid')['road']['un'] == 'UN 2813'
+         and tr_classify(['H241'], form='liquid')['road']['un'] == 'UN 3101'),
         ('ISO 10156 / EIGA Doc 169 parametre tablosu 13 aydan eski değil (EIGA her Nisan yeni revizyon; '
          'data/iso10156_gas_data.json — kaynakları kontrol edip dogrulama_tarihi güncellenir)',
          lambda: (datetime.date.today() - datetime.date.fromisoformat(iso10156.data()['dogrulama_tarihi'])).days < 395),

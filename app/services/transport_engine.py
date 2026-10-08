@@ -171,6 +171,9 @@ H_TO_ADR: Dict[str, Dict] = {
     # Sınıf 8 — Korozif
     # ADR §2.1.3.5.5: Test verisi yoksa en kötü senaryo → PG I varsayılan.
     'H314': {'class': '8', 'pg': 'I'},
+    # ADR 2.2.8.1.5.3 (c)(ii): cilde aşındırıcı olmayan ama çelik/alüminyumda 55 °C'de yılda > 6,25 mm aşındıran
+    # maddeler Sınıf 8 PG III — SEA Ek-1 2.16 (H290, UN Test C.1) ile aynı ölçüt
+    'H290': {'class': '8', 'pg': 'III'},
     # Sınıf 9 — Çevre Tehlikesi
     # ADR 2.2.9.1.10: H412/H413 ADR Sınıf 9 kriterini karşılamaz
     # H304 (Aspirasyon Tehlikesi): ADR'de bağımsız Sınıf 9 oluşturmaz;
@@ -593,8 +596,12 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
         return {'un': 'UN 3088', 'label': 'KENDİLİĞİNDEN ISINAN KATI, ORGANİK, B.B.B.',
                 'note': 'İnorganik katı ise UN 3190; sıvı ise UN 3183 (organik) / UN 3186 (inorganik).'}
     if cls == '4.3':
+        # ADR Tablo A: UN 3132 (WF2) alevlenir yan tehlikeli katıdır (etiket 4.3 + 4.1); yalnız su ile
+        # tepkimeye giren katı UN 2813 (W2). Önceden her katıya UN 3132 veriliyordu.
         if is_solid:
-            return {'un': 'UN 3132', 'label': 'Su ile Tepkiyen Katı, Yanıcı, B.N.O.'}
+            if 'H228' in h_set:
+                return {'un': 'UN 3132', 'label': 'SU İLE TEPKİMEYE GİREN KATI, ALEVLENEBİLİR, B.B.B.'}
+            return {'un': 'UN 2813', 'label': 'SU İLE TEPKİMEYE GİREN, KATI, B.B.B.'}
         return {'un': 'UN 3148', 'label': 'Su ile Tepkiyen Sıvı, B.N.O.'}
     if cls == '5.1':
         if sub == '8':
@@ -618,14 +625,23 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
         # radyoaktif madde (LSA-I) kaydıdır.
         return {'un': 'UN 3139', 'label': 'YÜKSELTGEN SIVI, B.B.B.'}
     if cls == '5.2':
+        # H241 = Organik peroksit Tip B (SEA Ek-1 Tablo 2.15) → ADR UN 3101 (sıvı) / UN 3102 (katı), etiket 5.2 + 1
+        if 'H241' in h_set:
+            return ({'un': 'UN 3102', 'label': 'ORGANİK PEROKSİT TİP B, KATI',
+                     'labels': ['5.2', '1'], 'note': 'Tip B — ADR Tablo A: etiket 5.2 + 1; sıcaklık kontrolü gerekiyorsa UN 3112'}
+                    if is_solid else
+                    {'un': 'UN 3101', 'label': 'ORGANİK PEROKSİT TİP B, SIVI',
+                     'labels': ['5.2', '1'], 'note': 'Tip B — ADR Tablo A: etiket 5.2 + 1; sıcaklık kontrolü gerekiyorsa UN 3111'})
         if is_solid:
             return {
-                'un': 'UN 3106', 'label': 'Organik Peroksit, Tip D, E, F, Katı',
-                'note': 'Tip belirlenmesi (A-G) gereklidir; UN3106 Tip D/E/F katı varsayılan',
+                'un': 'UN 3106', 'label': 'ORGANİK PEROKSİT TİP D, KATI',
+                'note': ('H242 Tip C–F kapsar; Tip D varsayıldı — tip belirlenmeli (katı: C → UN 3104, '
+                         'E → UN 3108, F → UN 3110; sıcaklık kontrollüler UN 3113–3120)'),
             }
         return {
-            'un': 'UN 3105', 'label': 'Organik Peroksit, Tip D, E, F, Sıvı',
-            'note': 'Tip belirlenmesi (A-G) gereklidir; UN3105 Tip D/E/F varsayılan',
+            'un': 'UN 3105', 'label': 'ORGANİK PEROKSİT, TİP D, SIVI',
+            'note': ('H242 Tip C–F kapsar; Tip D varsayıldı — tip belirlenmeli (sıvı: C → UN 3103, '
+                     'E → UN 3107, F → UN 3109; sıcaklık kontrollüler UN 3113–3120)'),
         }
     if cls == '6.1':
         if sub == '3':
@@ -857,7 +873,10 @@ def classify(h_codes: List[str], form: str = 'liquid',
     # Sınıf 8 PG — ADR 2.2.8.1.6.3 hesaplama yöntemi (karışım testi yoksa). Bileşen alt
     # kategorisi bilinmiyorsa (bileşen listesi yok) H314 → PG I en kötü durum kalır.
     corr_note = None
-    if '8' in class_map and _comps:
+    if '8' in class_map and 'H314' not in h_set:
+        corr_note = ('Sınıf 8 PG III: metallere aşındırıcı (H290) — ADR 2.2.8.1.5.3 (c)(ii) (çelik/alüminyum '
+                     'aşınma hızı > 6,25 mm/yıl, UN Test C.1).')
+    elif '8' in class_map and _comps:
         _pg8 = corrosive_mixture_pg(_comps)
         if _pg8:
             class_map['8'] = {'pg': _pg8, 'pg_num': _pg_num(_pg8)}
@@ -1166,7 +1185,7 @@ def classify(h_codes: List[str], form: str = 'liquid',
         'pg':                  un_entry.get('pg') or primary['pg'],
         'label':               un_entry['label'],
         # Gaz B.B.B. girişinin Tablo A yan etiketi (örn. UN 3156 → 5.1) IMDG/IATA'da yan tehlike olarak yazılır
-        'sub_class':           sub_class or ('+'.join(_labels_out[1:]) if _is_gas_cls and _labels_out
+        'sub_class':           sub_class or ('+'.join(_labels_out[1:]) if _labels_out
                                              and len(_labels_out) > 1 else None),
         'note':                un_entry.get('note'),
         'env_mark':            env_mark,

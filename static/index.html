@@ -801,6 +801,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
     <!-- ADIM 2: Forma göre zorunlu alanlar -->
     <div style="margin-top:12px">
       <div class="phys-section-hdr" id="phys-section-hdr">Sıvı Ürün — Zorunlu Alanlar</div>
+      <div id="phys-required-note" style="font-size:10.5px;line-height:1.45;color:var(--text2);margin:-2px 0 8px;padding:6px 8px;border:1px solid rgba(252,129,129,.35);border-radius:5px;background:rgba(252,129,129,.06)"></div>
       <div class="phys-grid">
 
         <!-- pH: tüm formlar (katı/toz için sulu çözelti) -->
@@ -809,12 +810,13 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
             <label id="ph_label">pH Değeri <span class="motor-badge">● motor</span></label>
             <label class="na-check"><input type="checkbox" id="na_ph" onchange="toggleNA(this,'tf_ph','ph')"> N/A</label>
           </div>
+          <!-- KKDİK Ek-2 9.1(ç): ürünün kendisinin veya sulu çözeltisinin pH'ı; çözeltiyse konsantrasyonu yazılır -->
           <div id="ph_conc_row" style="display:none;align-items:center;gap:6px;margin-bottom:4px;font-size:11px;color:var(--text2)">
             <span>%</span>
-            <input type="number" id="tf_ph_conc" value="1" min="0.01" max="100" step="0.1"
+            <input type="number" id="tf_ph_conc" min="0.01" max="100" step="0.1"
                    style="width:60px;padding:3px 6px;border-radius:4px;border:1px solid var(--border2);background:var(--bg);color:var(--text);font-size:11px;font-family:var(--mono)"
-                   oninput="updatePhLabel()">
-            <span>sulu çözeltide</span>
+                   oninput="this.dataset.user='1'; updatePhLabel()">
+            <span id="ph_conc_hint">sulu çözeltide</span>
           </div>
           <input type="text" id="tf_ph" placeholder="Ör: 7.0 veya 2-4 (aralık)"
                  onblur="normalizePh(this)">
@@ -853,11 +855,21 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
         <!-- Çözünürlük: sıvı, katı, pasta, toz, aerosol, gaz -->
         <div class="phys-fw" data-forms="liquid solid paste powder aerosol gas" data-mandatory="liquid solid gas paste powder aerosol">
           <div class="phys-fh">
-            <label>Su Çözünürlüğü (mg/L) <span style="color:var(--danger);font-size:10px">*</span> <span class="motor-badge">● motor</span><span id="src_sol" class="src-badge"></span></label>
+            <label>Su Çözünürlüğü (mg/L) <span class="motor-badge">● motor</span><span id="src_sol" class="src-badge"></span></label>
             <label class="na-check"><input type="checkbox" id="na_sol" onchange="toggleNA(this,'tf_sol','sol')"> N/A</label>
           </div>
-          <input type="number" id="tf_sol" min="0" placeholder="OECD 105"
+          <!-- Sayı (mg/L) veya metin: "Çözünmez", "Suyla karışır", "Veri yok (test yapılmamıştır)" -->
+          <input type="text" id="tf_sol" list="dl_sol" placeholder="mg/L değeri veya: Çözünür, Çözünmez, Veri yok"
                  data-source="" oninput="markUserInput(this,'sol')">
+          <datalist id="dl_sol">
+            <option value="Suda çözünür"></option>
+            <option value="Suyla her oranda karışır"></option>
+            <option value="Suda kısmen çözünür"></option>
+            <option value="Suda az çözünür"></option>
+            <option value="Suda çözünmez"></option>
+            <option value="Suda dağılır (dispersiyon)"></option>
+            <option value="Veri yok (test yapılmamıştır)"></option>
+          </datalist>
           <div id="warn_sol" class="thresh-warn"></div>
         </div>
 
@@ -3718,11 +3730,20 @@ function updatePhysFieldsByForm() {
   const phConcRow = document.getElementById('ph_conc_row');
   const phInp     = document.getElementById('tf_ph');
   if (phConcRow) {
+    // KKDİK Ek-2 9.1(ç): katıda pH sulu çözeltide ölçülür (konsantrasyon zorunlu, varsayılan %1 gösterilir);
+    // sıvı/pastada ürünün kendisi ya da seyreltik sulu çözeltisi — çözeltiyse konsantrasyon yazılır.
     const isSolidForm = ['solid','powder'].includes(form);
-    phConcRow.style.display = isSolidForm ? 'flex' : 'none';
+    const concEl = document.getElementById('tf_ph_conc');
+    const hint   = document.getElementById('ph_conc_hint');
+    phConcRow.style.display = form === 'gas' ? 'none' : 'flex';
+    if (concEl && !concEl.dataset.user) concEl.value = isSolidForm ? '1' : '';
+    if (concEl) concEl.placeholder = isSolidForm ? '' : '—';
+    if (hint) hint.textContent = isSolidForm ? 'sulu çözeltide'
+                                             : 'sulu çözeltide (boş = ürünün kendisi, seyreltilmemiş)';
     if (phInp) phInp.placeholder = isSolidForm ? 'Ör: 9,5 veya 8-10 (aralık)' : 'Ör: 7.0 veya 2-4 (aralık)';
   }
   updatePhLabel();
+  _renderPhysRequiredNote();
 
   // B9 Görünüm alanını yönetmeliğe göre otomatik doldur (sadece boşsa)
   const appearMap = {
@@ -3747,14 +3768,60 @@ function updatePhLabel() {
   const label = document.getElementById('ph_label');
   if (!label) return;
   const motorBadge = label.querySelector('.motor-badge');
-  if (['solid','powder'].includes(form)) {
-    const conc = document.getElementById('tf_ph_conc')?.value || '1';
-    label.childNodes[0].textContent = 'pH Değeri (%' + conc + ' sulu çözeltide) ';
-  } else {
-    label.childNodes[0].textContent = 'pH Değeri ';
-  }
+  const conc = form === 'gas' ? '' : (document.getElementById('tf_ph_conc')?.value || '').trim();
+  label.childNodes[0].textContent = conc ? 'pH Değeri (%' + conc + ' sulu çözeltide) ' : 'pH Değeri ';
   if (motorBadge && !label.contains(motorBadge)) label.appendChild(motorBadge);
 }
+
+// ── Forma göre PDF için zorunlu fiziksel alanlar ─────────────────────────────
+// KKDİK Ek-2 9.1: özellik ya değeriyle ya da "uygulanamaz / bilgi yok" nedeniyle yazılır. Programın
+// hesaplayamadığı ve kullanıcının bildiği alanlar zorunludur; değer yoksa N/A işaretlenip gerekçe yazılır.
+function _physRequired(form) {
+  const ph  = { id:'tf_ph',  label:'pH',             na:'na_ph',  key:'ph'  };
+  const sol = { id:'tf_sol', label:'Su çözünürlüğü', na:'na_sol', key:'sol' };
+  const fp  = { id:'tf_fp',  label:'Parlama noktası', na:'na_fp', key:'fp', fp:true };
+  const gas = { id:'sel_gas_type', label:'Basınçlı gaz türü' };
+  return [
+    { id:'tf_appearance', label:'Görünüm (fiziksel hal)' },
+    { id:'tf_color',      label:'Renk' },
+    { id:'tf_odor',       label:'Koku' },
+  ].concat({ liquid:[ph, sol, fp], paste:[ph, sol], solid:[ph, sol], powder:[ph, sol],
+             gas:[gas], aerosol:[] }[form] || []);
+}
+
+function _physReqMissing(form) {
+  return _physRequired(form || document.getElementById('pform')?.value || 'liquid').map(r => {
+    const el = document.getElementById(r.id);
+    if (!el) return null;
+    if (r.na && document.getElementById(r.na)?.checked) {
+      return document.getElementById('na_reason_' + r.key)?.value?.trim()
+        ? null : { ...r, why:'"N/A" işaretli ama gerekçe yazılmamış' };
+    }
+    if ((el.value || '').trim()) return null;
+    if (r.fp && document.getElementById('fp_status')?.value) return null;
+    return { ...r, why:'boş' };
+  }).filter(Boolean);
+}
+
+function _renderPhysRequiredNote() {
+  const box = document.getElementById('phys-required-note');
+  if (!box) return;
+  const form = document.getElementById('pform')?.value || 'liquid';
+  const req  = _physRequired(form);
+  const miss = new Set(_physReqMissing(form).map(m => m.id));
+  box.innerHTML = '<b>Bu form için zorunlu:</b> ' + req.map(r =>
+      miss.has(r.id) ? `<span style="color:var(--danger)">${r.label}</span>` : `<span style="color:var(--text3)">✓ ${r.label}</span>`
+    ).join(' · ')
+    + '<div style="font-size:9.5px;color:var(--text3);margin-top:2px">Değer yoksa alanın "N/A" kutusunu işaretleyip nedenini yazın '
+    + '(ör. "Veri yok — test yapılmamıştır", "Uygulanamaz — sulu olmayan ürün"); neden GBF Bölüm 9\'a aynen yazılır. '
+    + 'Zorunlu alanlar tamamlanmadan PDF oluşturulmaz.</div>';
+  req.forEach(r => {
+    const el = document.getElementById(r.id);
+    if (el && !el.disabled) el.style.borderColor = miss.has(r.id) ? 'var(--danger)' : '';
+  });
+}
+document.addEventListener('input',  e => { if (e.target.closest && e.target.closest('#wz-slide-3')) _renderPhysRequiredNote(); });
+document.addEventListener('change', e => { if (e.target.closest && e.target.closest('#wz-slide-3')) _renderPhysRequiredNote(); });
 
 // ── Fiziksel alan daha fazla toggle ──────────────────────────────────────────
 function togglePhysMore() {
@@ -5036,33 +5103,41 @@ function _checkPDFMandatory() {
   if (!_v('suppPhone')) {
     missing.push({ hard: true, label: 'Telefon', reason: 'Bölüm 1.3 — tedarikçinin telefon numarası zorunludur (KKDİK Ek-2 1.3)' });
   }
+  // Forma göre zorunlu fiziksel alanlar (KKDİK Ek-2 9.1) — boşsa PDF oluşturulmaz
+  _physReqMissing(form).forEach(m => missing.push({
+    hard: true, label: m.label + ' (Bölüm 9)',
+    reason: m.why === 'boş'
+      ? 'Bu form için zorunlu — değeri girin ya da "N/A" işaretleyip nedenini yazın (KKDİK Ek-2 9.1)'
+      : '"N/A" işaretli ama gerekçe yazılmamış — Ek-2 9.1 nedenin belirtilmesini ister'
+  }));
 
   // Bölüm 9 fiziksel özellikleri PDF'i durdurmaz: KKDİK Ek-2 9.1'e göre bilgi yoksa nedeni yazılır,
   // PDF de bunu kendisi yapar. Burada yalnızca boş alanın Bölüm 9'a nasıl yazılacağı bildirilir.
   // Erime noktası, yoğunluk, kaynama noktası ve çözünürlük sınıflandırmayı etkilemediği için listelenmez.
   const _ND = '"Belirlenmemiştir (karışım için test yapılmamıştır)"';
   const _formTxt = {solid:'Katı', powder:'Toz', gas:'Gaz', aerosol:'Aerosol', paste:'Pasta', liquid:'Sıvı'}[form] || 'Sıvı';
+  const _reqIds = new Set(_physRequired(form).map(r => r.id));   // zorunlular yukarıda (hard) listelendi
 
   // 1. Görünüm
-  if (!document.getElementById('tf_appearance')?.value?.trim()) {
+  if (!_reqIds.has('tf_appearance') && !document.getElementById('tf_appearance')?.value?.trim()) {
     missing.push({ label: 'Görünüm (Fiziksel hal)', reason: `Bölüm 9(a)'ya fiziksel hal "${_formTxt}" yazılacak` });
   }
   // 2. Renk
-  if (!document.getElementById('tf_color')?.value?.trim()) {
+  if (!_reqIds.has('tf_color') && !document.getElementById('tf_color')?.value?.trim()) {
     missing.push({ label: 'Renk', reason: "Bölüm 9(a)'da renk belirtilmeyecek — bilinen rengi yazmanız önerilir" });
   }
   // 3. Koku
-  if (!document.getElementById('tf_odor')?.value?.trim()) {
+  if (!_reqIds.has('tf_odor') && !document.getElementById('tf_odor')?.value?.trim()) {
     missing.push({ label: 'Koku', reason: `Bölüm 9(b)'ye "Belirlenmemiştir" yazılacak` });
   }
   // 4. pH — aşırı pH (≤2 / ≥11,5) cilt/göz sınıflandırmasını etkileyebilir
   const phNA = document.getElementById('na_ph')?.checked;
-  if (form !== 'gas' && !phNA && !document.getElementById('tf_ph')?.value?.trim()) {
+  if (form !== 'gas' && !_reqIds.has('tf_ph') && !phNA && !document.getElementById('tf_ph')?.value?.trim()) {
     const phHint = ['solid','powder'].includes(form) ? ' Katı/tozda %1 sulu çözeltide ölçülür.' : '';
     missing.push({ label: 'pH Değeri', reason: `Bölüm 9(ç)'ye ${_ND} yazılacak. pH ≤2 veya ≥11,5 ise cilt/göz sınıflandırmasını etkiler.${phHint}` });
   }
   // 5. Parlama noktası — sıvıda alevlenirlik sınıfını etkiler
-  if (isLiquid && form !== 'aerosol') {
+  if (isLiquid && form !== 'aerosol' && !_reqIds.has('tf_fp')) {
     const fpEl = document.getElementById('tf_fp');
     const fpNA = fpEl?.dataset?.na === 'true';
     const fpSt = document.getElementById('fp_status')?.value;   // beyan / "ölçüm yok" seçimi
@@ -5071,7 +5146,7 @@ function _checkPDFMandatory() {
     }
   }
   // 6. Basınçlı gaz türü — Bölüm 2.1 alt kategorisi ve Bölüm 14 UN numarası
-  if (form === 'gas' && !document.getElementById('sel_gas_type')?.value) {
+  if (form === 'gas' && !_reqIds.has('sel_gas_type') && !document.getElementById('sel_gas_type')?.value) {
     missing.push({ label: 'Basınçlı Gaz Türü', reason: "Seçilmedi — Bölüm 2.1'de alt kategori yazılmayacak; Bölüm 14'te sıkıştırılmış gaz varsayılacak (sıvılaştırılmış gazda UN numarası farklıdır)" });
   }
   // 7. Viskozite — yalnız sıvıda; H304 (aspirasyon) kararını etkiler (pastada hesaplanmaz/uyarılmaz)
@@ -5205,7 +5280,7 @@ const _PSRC_FIELDS = [
   { formId:'tf_bp',         label:'Kaynama Noktası',       type:'number', unit:'°C',   theoKey:'boiling_point',  naId:'na_bp',      mandatory:false },
   { formId:'tf_density',    label:'Yoğunluk',             type:'number', unit:'g/mL', theoKey:'density',        naId:'na_density', mandatory:false },
   { formId:'tf_visc',       label:'Viskozite @40°C',      type:'number', unit:'cSt',  theoKey:'viscosity',      naId:'na_visc',    mandatory:false },
-  { formId:'tf_sol',        label:'Çözünürlük',           type:'number', unit:'mg/L', theoKey:'solubility',     naId:'na_sol',     mandatory:true  },
+  { formId:'tf_sol',        label:'Çözünürlük',           type:'text',   unit:'mg/L', theoKey:'solubility',     naId:'na_sol',     mandatory:true  },
   { formId:'tf_mp',         label:'Erime Noktası',         type:'number', unit:'°C',   theoKey:null,             naId:'na_mp',      mandatory:false },
   { formId:'tf_evap',       label:'Buharlaşma Hızı',      type:'text',   unit:'',     theoKey:null,             naId:null,         mandatory:false },
   { formId:'tf_ait',        label:'Ototutuşma Sıcaklığı', type:'number', unit:'°C',   theoKey:null,             naId:null,         mandatory:false },
@@ -5213,6 +5288,9 @@ const _PSRC_FIELDS = [
   { formId:'tf_decomp',     label:'Ayrışma Sıcaklığı',    type:'number', unit:'°C',   theoKey:null,             naId:null,         mandatory:false },
   { formId:'tf_odor_thresh',label:'Koku Eşiği',           type:'number', unit:'',     theoKey:'odor_threshold', naId:null,         mandatory:false },
 ];
+
+// Modalda "zorunlu" işareti forma göre (_physRequired); _PSRC_FIELDS.mandatory yalnız varsayılan
+const _psrcReq = f => _physRequired(document.getElementById('pform')?.value || 'liquid').some(r => r.id === f.formId);
 
 function _showPhysSrcModal(callback) {
   const tp = _lastCalcState?.theoPhys || _lastCalcState?.phys?.theoProps || {};
@@ -5264,7 +5342,7 @@ function _showPhysSrcModal(callback) {
     if (isMotor) {
       badgeCls = 'psrc-badge-motor';
       badgeTxt = measured ? '✓ Ölçülen' : '≈ Tahmini';
-    } else if (f.mandatory) {
+    } else if (_psrcReq(f)) {
       badgeCls = 'psrc-badge-req';
       badgeTxt = '⚠ Zorunlu';
     } else {
@@ -5276,7 +5354,7 @@ function _showPhysSrcModal(callback) {
     const inputCls  = isMotor ? 'psrc-row-input motor' : 'psrc-row-input';
     const unitSpan  = f.unit ? `<span class="psrc-row-unit">${f.unit}</span>` : '';
     const stepAttr  = inType === 'number' ? 'step="any"' : '';
-    const labelStar = f.mandatory ? ' <span style="color:#fc8181;font-size:9px">*</span>' : '';
+    const labelStar = _psrcReq(f) ? ' <span style="color:#fc8181;font-size:9px">*</span>' : '';
     const ph        = est != null ? `ölçülen değer (tahmini ~${est})` : (f.type === 'text' ? '—' : '');
 
     return `<div class="psrc-row">
@@ -5328,8 +5406,8 @@ function _showPhysSrcModal(callback) {
   const rest      = toShow.filter(f => !(fpDecisionShown && f.formId === 'tf_fp'));
   const motorRows = rest.filter(isMotorRow);
   const emptyRows = rest.filter(f => !motorRows.includes(f));
-  const mandEmptyRows = emptyRows.filter(f => f.mandatory);
-  const optEmptyRows  = emptyRows.filter(f => !f.mandatory);
+  const mandEmptyRows = emptyRows.filter(f => _psrcReq(f));
+  const optEmptyRows  = emptyRows.filter(f => !_psrcReq(f));
 
   let html = '';
   if (fpDecisionShown) {
@@ -5363,7 +5441,7 @@ function _showPhysSrcModal(callback) {
 
 async function _physSrcConfirm() {
   // ── Zorunlu alan kontrolü ─────────────────────────────────────────────────
-  const mandFields = _PSRC_FIELDS.filter(f => f.mandatory);
+  const mandFields = _PSRC_FIELDS.filter(f => _psrcReq(f));
   let hasError = false;
   const errEl = document.getElementById('physSrcErrMsg');
 
@@ -5396,7 +5474,7 @@ async function _physSrcConfirm() {
   });
 
   if (hasError) {
-    if (errEl) { errEl.textContent = '⚠ Görünüm, Renk, Koku ve Çözünürlük alanları zorunludur — lütfen doldurun.'; errEl.style.display = ''; }
+    if (errEl) { errEl.textContent = '⚠ Kırmızı alanlar bu form için zorunludur — doldurun. Değer yoksa pencereyi kapatıp formda "N/A" işaretleyin ve nedenini yazın (ör. "Veri yok — test yapılmamıştır").'; errEl.style.display = ''; }
     return; // Kapatma — kullanıcı doldurmalı
   }
   if (errEl) errEl.style.display = 'none';
@@ -5682,7 +5760,7 @@ async function _afterPhysSrc() {
     const _hard = missing.some(m => m.hard);
     document.getElementById('pdfBlockHead').textContent = _hard ? '🚫 PDF Oluşturulamıyor' : 'ℹ️ Eksik ölçüm verileri';
     document.getElementById('pdfBlockDesc').innerHTML = _hard
-      ? 'Aşağıdaki alanlar <b>zorunlu</b> olup boş bırakılamaz.<br><span style="font-size:10px;color:var(--text3)">KKDİK Ek-2 Bölüm 1 — ürün tanımlayıcısı ve tedarikçi bilgileri olmadan GBF düzenlenemez.</span>'
+      ? 'Aşağıdaki alanlar <b>zorunlu</b> olup boş bırakılamaz.<br><span style="font-size:10px;color:var(--text3)">KKDİK Ek-2 — ürün/tedarikçi bilgileri (Bölüm 1) ve seçilen forma göre zorunlu fiziksel özellikler (Bölüm 9) olmadan GBF düzenlenemez.</span>'
       : "Aşağıdaki alanlar boş. PDF oluşturulabilir; KKDİK Ek-2 9.1 gereği Bölüm 9'a nedeniyle birlikte belirtilen ifade yazılır.<br><span style=\"font-size:10px;color:var(--text3)\">Ölçüm değeriniz varsa geri dönüp girmeniz önerilir.</span>";
     document.querySelector('#pdfBlockOverlay .pdf-block-box').classList.toggle('soft', !_hard);
     const skipBtn = document.getElementById('pdfBlockSkipBtn');
@@ -5780,8 +5858,9 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
     // pH: metin olarak oku (aralık değeri "2-4" gibi girişlere izin verir)
     const phVal = _g('tf_ph');
     if (phVal) flatPhys.ph = phVal;
-    const phConc = document.getElementById('tf_ph_conc')?.value;
-    if (phConc) flatPhys.ph_conc = phConc;
+    // Çözelti konsantrasyonu yalnız girildiyse gönderilir (boş = ürünün kendisi); gazda pH satırı yok
+    const phConc = (document.getElementById('tf_ph_conc')?.value || '').trim();
+    if (phConc && form !== 'gas') flatPhys.ph_conc = phConc;
 
     // 3. theoProps'tan kalan alanlar (kullanıcı girmemişse motor değeri kullan)
     const _theoExtra = ['ph','viscosity','melting_point','auto_ignition','log_kow'];
@@ -5796,11 +5875,24 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
     // kullanıcı manuel girmediyse motor text'i daha bilgilendirici — onu tercih et.
     const _solEl = document.getElementById('tf_sol');
     const _solUserOverride = _solEl?.dataset?.source === 'user';
-    if (!_solUserOverride && tp?.solubility?.text) {
+    const _solTxt = (_solEl?.value || '').trim();
+    if (_solUserOverride && _solTxt && isNaN(parseFloat(_solTxt))) {
+      flatPhys.solubility = _solTxt;             // kullanıcı metni: "Suda çözünmez", "Veri yok (…)" vb.
+    } else if (!_solUserOverride && tp?.solubility?.text) {
       flatPhys.solubility = tp.solubility.text;  // açıklama metni (sınıf + değer)
     } else if (flatPhys.solubility === undefined && tp?.solubility?.value != null) {
       flatPhys.solubility = tp.solubility.value; // sadece sayısal mg/L
     }
+
+    // "N/A" işaretli alanlar: kullanıcının yazdığı gerekçe Bölüm 9'a aynen yazılır (KKDİK Ek-2 9.1 — bilgi
+    // yoksa / uygulanamıyorsa nedeni belirtilir). Gerekçesiz N/A'da PDF kendi ifadesini kullanır.
+    [['ph','ph'], ['sol','solubility'], ['fp','flash_point'], ['bp','boiling_point'], ['density','density'],
+     ['visc','viscosity'], ['mp','melting_point'], ['vp','vapor_pressure'], ['evap','evap_rate'],
+     ['ait','auto_ignition'], ['decomp','decomposition_temp']].forEach(([k, pk]) => {
+      if (!document.getElementById('na_' + k)?.checked) return;
+      const why = document.getElementById('na_reason_' + k)?.value?.trim();
+      if (why) flatPhys[pk] = why;
+    });
 
     // 4. theoProps metin alanları (kullanıcı girmemişse motor değeri)
     if (!flatPhys.appearance && _val(tp.appearance))  flatPhys.appearance   = _val(tp.appearance);

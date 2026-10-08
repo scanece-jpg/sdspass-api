@@ -321,8 +321,11 @@ async def generate_pdf(data: dict = Body(...)):
             _tp_err  = (_tp.get('error') or {}).get('pct')
 
             _existing = _parsed_phys.get(_bk)
+            # Kullanıcının metin girişi de değerdir ("Suda çözünmez", "Veri yok — …", N/A gerekçesi) —
+            # önceden yalnız sayısal girişler korunuyor, metin motor tahminiyle eziliyordu
             _has_user_val = (
-                isinstance(_existing, dict) and _existing.get('calc') is not None
+                isinstance(_existing, dict) and (_existing.get('calc') is not None
+                                                 or str(_existing.get('display') or '').strip() != '')
             ) or (
                 _existing and not isinstance(_existing, dict)
                 and str(_existing).strip() not in ('', '0')

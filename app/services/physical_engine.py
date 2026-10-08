@@ -2061,92 +2061,106 @@ def _calc_flam_liq(comps: List[Dict], user_fp=None, user_bp=None, form_sub: str 
             'triggers': trigs, 'water_dilution_warning': _warn}
 
 
-def _calc_flam_aerosol(comps: List[Dict], user_fp=None,
-                        aerosol_flam_pct=None, aerosol_hoc=None) -> Optional[Dict]:
-    """
-    CLP Ek-I §2.3 — Aerosol yanıcılık sınıflandırması.
-    aerosol_flam_pct: Kullanıcı beyanı — yanıcı içerik % (w/w).
-      ≥ 85% VE yanma ısısı ≥30 kJ/g → H222 Kat.1
-      ≥ 85% ama yanma ısısı <30 kJ/g → H223 Kat.2
-      1–85% → H223 Kat.2
-      <  1% → None (sadece H229)
-    Girilmemişse parlama noktası tabanlı yöntem kullanılır:
-      H222 Kat.1: FP < 23°C bileşen ≥ %1
-      H223 Kat.2: FP 23-60°C bileşen ≥ %1
-    """
-    if aerosol_flam_pct is not None:
-        pct = float(aerosol_flam_pct)
-        if pct >= 85:
-            hoc = float(aerosol_hoc) if aerosol_hoc is not None else None
-            if hoc is not None and hoc >= 30:
-                return {'h': 'H222', 'h_class': 'Flam. Aerosol 1', 'signal': 'Danger',
-                        'source': (f'Kullanıcı beyanı: yanıcı içerik %{pct:.0f}, '
-                                   f'yanma ısısı {hoc} kJ/g (CLP Ek-I §2.3.3.1)')}
-            elif hoc is None:
-                return {'h': 'H222', 'h_class': 'Flam. Aerosol 1', 'signal': 'Danger',
-                        'source': (f'Kullanıcı beyanı: yanıcı içerik %{pct:.0f} — '
-                                   'H222 Cat.1; yanma ısısı ≥30 kJ/g doğrulanmalı (CLP Ek-I §2.3.3.1)')}
-            else:
-                return {'h': 'H223', 'h_class': 'Flam. Aerosol 2', 'signal': 'Warning',
-                        'source': (f'Kullanıcı beyanı: yanıcı içerik %{pct:.0f}, '
-                                   f'yanma ısısı {hoc} kJ/g <30 → Kat.2 (CLP Ek-I §2.3.3.1)')}
-        if pct >= 1:
-            return {'h': 'H223', 'h_class': 'Flam. Aerosol 2', 'signal': 'Warning',
-                    'source': f'Kullanıcı beyanı: yanıcı içerik %{pct:.0f} (CLP Ek-I §2.3.3.1)'}
-        return None
-    DECLARED_FALLBACK = {
-        'H224': -20, 'H225': 15, 'H226': 40,
-    }
-    sum_cat1, sum_cat2 = 0.0, 0.0
-    triggers_cat1: list = []
-    triggers_cat2: list = []
-
+def _aerosol_flam_components(comps: List[Dict]) -> Dict:
+    """SEA Ek-1 2.3 (2.1.4.1) alevlenir bileşenler: alevlenir gazlar, parlama noktası ≤ 93 °C sıvılar (alevlenir
+    sıvılar dahil), alevlenir katılar. Piroforik / kendiliğinden ısınan / su ile tepkimeye girenler sayılmaz (Not 1).
+    Dönüş: {'pct': toplam % (kütlece), 'items': [...], 'unknown': [verisi olmayan bileşen adları]}"""
+    try:
+        _iso_flam = iso10156.data()['alevlenir']
+    except Exception:
+        _iso_flam = {}
+    _non_flam = {'7732-18-5', '124-38-9', '7727-37-9', '7440-37-1', '7440-59-7', '10024-97-2', '7782-44-7'}
+    items, unknown, pct = [], [], 0.0
     for c in comps:
-        cas  = (c.get('cas') or c.get('cas_no') or '').strip()
+        cas = (c.get('cas') or c.get('cas_no') or '').strip()
         conc = float(c.get('concMax') or c.get('conc') or 0)
         if conc <= 0:
             continue
+        name = c.get('name_tr') or c.get('name') or cas
+        hs = {(h.get('h_code') or '').replace('*', '').strip()[:4] for h in (c.get('hazards') or [])}
+        fp = FP_DB.get(cas)
+        why = None
+        if hs & {'H220', 'H221'} or (_iso_flam.get(cas, {}).get('tablo') == 'Tablo 2'):
+            why = 'alevlenir gaz'
+        elif fp is not None and fp <= 93:
+            why = f'parlama noktası {fp:g} °C ≤ 93 °C'
+        elif hs & {'H224', 'H225', 'H226'}:
+            why = 'alevlenir sıvı'
+        elif 'H228' in hs:
+            why = 'alevlenir katı'
+        if why:
+            pct += conc
+            items.append(f'{name} (%{conc:g}, {why})')
+        elif fp is None and cas not in _non_flam and not (hs & {'H280', 'H281', 'H270'}):
+            unknown.append(name)
+    return {'pct': pct, 'items': items, 'unknown': unknown}
 
-        fp = user_fp if user_fp is not None else FP_DB.get(cas, 'MISSING')
 
-        if fp == 'MISSING':
-            hazard_codes = [(h.get('h_code') or '').replace('*','').strip()[:4]
-                            for h in (c.get('hazards') or [])]
-            decl_h = next((h for h in hazard_codes if h in DECLARED_FALLBACK), None)
-            if decl_h:
-                fp = DECLARED_FALLBACK[decl_h]
+def _calc_flam_aerosol(comps: List[Dict], user_fp=None,
+                       aerosol_flam_pct=None, aerosol_hoc=None, decision: str = '') -> Dict:
+    """
+    Aerosol alevlenirliği — SEA Ek-1 2.3 (2.1.4.1–2.1.4.2, Şekil 2.3.1):
+      ≤ %1 alevlenir bileşen ve yanma ısısı < 20 kJ/g        → Kategori 3 (yalnız H229)
+      ≥ %85 alevlenir bileşen ve yanma ısısı ≥ 30 kJ/g       → Kategori 1 (H222)
+      diğerleri: tutuşma mesafesi / kapalı ortam / köpük testi → Kategori 1, 2 veya 3
+      Not: bu testlere tâbi tutulmamış, %1'den fazla alevlenir bileşen içeren aerosol → Kategori 1.
+    aerosol_flam_pct / aerosol_hoc: kullanıcı beyanı (kütlece %, kJ/g); yoksa bileşenlerden hesaplanır.
+    decision (test_data['flammable_aerosol']): test sonucu — 'H222' | 'H223' | 'not_flammable'.
+    Dönüş: {'result': {...}|None, 'pending': {...}|None, 'warning': str|None}
+    """
+    _cat1 = {'h': 'H222', 'h_class': 'Aerosol 1', 'signal': 'Danger'}
+    _cat2 = {'h': 'H223', 'h_class': 'Aerosol 2', 'signal': 'Warning'}
+    _test_src = 'Aerosol testi sonucu (UN Test ve Kriterler El Kitabı 31.4–31.6) — kullanıcı beyanı'
+    if decision == 'H222':
+        return {'result': {**_cat1, 'source': _test_src}, 'pending': None, 'warning': None}
+    if decision == 'H223':
+        return {'result': {**_cat2, 'source': _test_src}, 'pending': None, 'warning': None}
+    if decision == 'not_flammable':
+        return {'result': None, 'pending': None, 'warning': None}
 
-        if fp is None or fp == 'MISSING' or fp >= 60:
-            continue
+    fc = _aerosol_flam_components(comps)
+    if decision == 'not_tested':
+        return {'result': {**_cat1, 'source': ("Aerosol testi yapılmadı — %1'den fazla alevlenir bileşen içerdiğinden "
+                                                'Kategori 1 (SEA Ek-1 2.3, 2.1.4.2 Not)')},
+                'pending': None, 'warning': None, 'untested_cat1': True}
+    declared = aerosol_flam_pct is not None
+    pct = float(aerosol_flam_pct) if declared else fc['pct']
+    hoc = float(aerosol_hoc) if aerosol_hoc is not None else None
+    _src_pct = (f'beyan edilen alevlenir içerik %{pct:g}' if declared else
+                f"alevlenir bileşenler %{pct:g}: {', '.join(fc['items']) or 'yok'}")
+    _unk = ('' if declared or not fc['unknown'] else
+            f" Parlama noktası verisi olmayan bileşen(ler): {', '.join(fc['unknown'])} — parlama noktası ≤ 93 °C ise "
+            'alevlenir bileşen sayılır, doğrulayın.')
 
-        label = f"{c.get('name') or cas} (%{conc:.0f}, FP={fp}°C)"
-        if fp < 23:
-            sum_cat1 += conc
-            triggers_cat1.append(label)
-        else:
-            sum_cat2 += conc
-            triggers_cat2.append(label)
+    if pct <= 1 and (hoc is None or hoc < 20):
+        _w = ('Aerosol Kategori 3: alevlenir bileşen ≤ %1'
+              + ('' if hoc is not None else ' — yanma ısısının < 20 kJ/g olduğu doğrulanmalı (SEA Ek-1 Şekil 2.3.1(a))')
+              + '.' + _unk)
+        return {'result': None, 'pending': None, 'warning': _w if (hoc is None or _unk) else None}
+    if pct >= 85 and hoc is not None and hoc >= 30:
+        return {'result': {**_cat1, 'source': f'{_src_pct}, yanma ısısı {hoc:g} kJ/g (SEA Ek-1 Şekil 2.3.1(a))'},
+                'pending': None, 'warning': None}
 
-    _warn = {
-        'code': 'AEROSOL_FP_FALLBACK',
-        'message': (
-            'Aerosol yanıcılık sınıflandırması onaylı aerosol testi veya beyan edilen '
-            'yanıcı içerik yüzdesi (aerosol_flam_pct) yerine bileşen parlama noktaları '
-            'üzerinden tahmin edilmiştir. CLP Ek-I §2.3 uyarınca doğrulama gerekir.'
-        ),
-        'message_en': (
-            'Aerosol flammability classification is estimated from component flash points '
-            'rather than an approved aerosol test or declared flammable content percentage. '
-            'Verification per CLP Annex I §2.3 is required.'
-        ),
+    pending = {
+        'code': 'PHYS_AEROSOL_UNTESTED', 'field': 'flammable_aerosol',
+        'question': (f"Aerosol %1'den fazla alevlenir bileşen içeriyor ({_src_pct}). SEA Ek-1 2.3 gereği kategori "
+                     'tutuşma mesafesi / kapalı ortam testi (sprey) veya köpük testiyle belirlenir; bu testlere tâbi '
+                     'tutulmamış aerosol Kategori 1 sayılır. Test sonucunu seçin.' + _unk),
+        'test_guidance': ('UN Test ve Kriterler El Kitabı Kısım III 31.4 (kapalı ortam), 31.5 (tutuşma mesafesi), '
+                          '31.6 (köpük); kategori ölçütleri SEA Ek-1 Şekil 2.3.1(b)/(c).'),
+        'options': [
+            {'value': 'H222', 'label': 'Test sonucu — Kategori 1 (H222)', 'effect': 'H222 + H229, GHS02, Tehlike'},
+            {'value': 'H223', 'label': 'Test sonucu — Kategori 2 (H223)', 'effect': 'H223 + H229, GHS02, Dikkat'},
+            {'value': 'not_flammable', 'label': 'Test sonucu — Kategori 3 (yalnız H229)',
+             'effect': 'H222/H223 atanmaz; H229, Dikkat'},
+            {'value': 'not_tested', 'label': 'Test yapılmadı — Kategori 1 (SEA Ek-1 2.3 notu)',
+             'effect': "H222 + H229, Tehlike; Bölüm 16'ya \"test yapılmadı\" notu düşülür"},
+        ],
+        'legal_basis': 'SEA Ek-1 2.3 (2.1.4.2 Not)',
     }
-    if sum_cat1 >= 1:
-        return {'h': 'H222', 'h_class': 'Flam. Aerosol 1', 'signal': 'Danger',
-                'source': ', '.join(triggers_cat1), 'warning': _warn}
-    if sum_cat2 >= 1:
-        return {'h': 'H223', 'h_class': 'Flam. Aerosol 2', 'signal': 'Warning',
-                'source': ', '.join(triggers_cat2), 'warning': _warn}
-    return None
+    return {'result': {**_cat1, 'source': (f'{_src_pct} — aerosol testi yapılmadığından Kategori 1 '
+                                            '(SEA Ek-1 2.3, 2.1.4.2 Not)')},
+            'pending': pending, 'warning': None}
 
 
 def _calc_asp_tox(comps: List[Dict], test_data: Dict = None) -> Dict:
@@ -2234,6 +2248,7 @@ def calculate(comps: List[Dict], form: str = 'liquid',
     primary, extra, warnings, pending_decisions = [], [], [], []
     _iso_gas = None   # ISO 10156 gaz karışımı hesabı sonucu (Bölüm 9 / 16 için)
     _iso_ox = None    # ISO 10156 5.3 oksitleme gücü hesabı sonucu (Bölüm 16 için)
+    _aerosol_untested = False   # aerosol testi yapılmadan Kat.1 (Bölüm 16 notu için)
 
     fl = {'result': None, 'source': None, 'fp': None}
     if form in ('liquid', 'paste'):
@@ -2254,12 +2269,15 @@ def calculate(comps: List[Dict], form: str = 'liquid',
     if form == 'aerosol':
         fa = _calc_flam_aerosol(comps, user_fp,
                                 aerosol_flam_pct=test_data.get('aerosol_flam_pct'),
-                                aerosol_hoc=test_data.get('aerosol_hoc'))
-        if fa:
-            if fa.get('warning'):
-                warnings.append(fa.pop('warning'))
-            primary.append({'type': 'flam_aerosol', **fa,
-                            'cutoff_used': 'CLP Ek-I §2.3 — Aerosol yanıcılık sınıflandırması'})
+                                aerosol_hoc=test_data.get('aerosol_hoc'),
+                                decision=(test_data.get('flammable_aerosol') or '').strip())
+        if fa.get('warning'):
+            warnings.append(fa['warning'])
+        if fa.get('pending'):
+            pending_decisions.append(fa['pending'])
+        if fa.get('result'):
+            primary.append({'type': 'flam_aerosol', **fa['result'], 'cutoff_used': fa['result']['source']})
+        _aerosol_untested = bool(fa.get('pending') or fa.get('untested_cat1'))
         extra.append({'type': 'aerosol_press', 'h': 'H229', 'h_class': 'Aerosol 3',
                       'signal': 'Warning', 'source': 'Aerosol ürün — basınçlı kap',
                       'cutoff_used': 'CLP Ek-I §2.3 — tüm aerosollere uygulanır'})
@@ -2401,32 +2419,52 @@ def calculate(comps: List[Dict], form: str = 'liquid',
         })
 
     if form in ('solid', 'powder'):
-        # H228 — CAS listesi + bileşen H228 chip'i (CLP §2.7.4.3 bridging)
+        # H228 — alevlenir katı. SEA Ek-1 2.7 (Tablo 2.7.1): yalnız yanma hızı testiyle (UN N.1) belirlenir;
+        # bileşen oranından hesaplama / köprüleme yöntemi yoktur. Önceden ≥ %1 H228 bileşen → otomatik H228
+        # veriliyordu (örn. %2 karbon siyahı → H228 + ADR 4.1). Artık karar sorusu; alevlenir bileşen yoksa
+        # sınıflandırma gerekmez (SEA Md.16(2)(a)).
         fs = []
         for c in comps:
             cas  = (c.get('cas') or c.get('cas_no') or '').strip()
             conc = float(c.get('concMax') or c.get('conc') or 0)
-            if conc < 1.0:
+            if conc <= 0:
                 continue
             _chip_h = {(h.get('h_code') or '').replace('*', '').strip()[:4]
                        for h in (c.get('hazards') or [])}
             if cas in FLAM_SOL_CAS or 'H228' in _chip_h:
                 fs.append(c)
-        if fs:
+        if fs and not (test_data.get('flammable_solid') or '').strip():
             _fs_src = ', '.join(
-                f"{c.get('name') or c.get('cas','')} (%{float(c.get('concMax') or c.get('conc') or 0):.0f})"
+                f"{c.get('name') or c.get('cas','')} (%{float(c.get('concMax') or c.get('conc') or 0):g})"
                 for c in fs
             )
-            extra.append({'type': 'flam_sol', 'h': 'H228', 'h_class': 'Flam. Sol. 2',
-                          'signal': 'Warning', 'source': _fs_src,
-                          'cutoff_used': '≥ %1 H228 bileşen — CAS listesi veya Ek-VI chip (CLP §2.7.4.3 bridging)'})
-
-        # H228 validator uyarısı — test verisi yoksa bridging prensibi uygulandı
-        warnings.append(
-            'Katı/toz form: H228 ataması CAS listesi ve/veya bileşen Ek-VI H228 chip\'ine '
-            'dayanır (CLP §2.7.4.3 bridging). Kesin sınıflandırma için UN Test N.1 (CLP Ek-I §2.7) '
-            'zorunludur — test sonucu varsa manuel giriş yapın.'
-        )
+            pending_decisions.append({
+                'code': 'PHYS_FLAM_SOL_UNTESTED',
+                'field': 'flammable_solid',
+                'question': (
+                    f'Karışımda alevlenir katı bileşen var: {_fs_src}. SEA Ek-1 2.7 gereği alevlenir katı '
+                    'sınıflandırması yalnız yanma hızı testi (UN N.1) sonucuna dayanır — bileşen oranından '
+                    'hesaplanmaz. Test sonucunu veya kararınızı seçin.'),
+                'test_guidance': (
+                    'UN Test ve Kriterler El Kitabı 33.2.1 (N.1): yanma süresi < 45 s veya yanma hızı > 2,2 mm/s; '
+                    'ıslak bölge alevi söndüremiyorsa Kategori 1, en az 4 dakika durduruyorsa Kategori 2 '
+                    '(metal tozları: tüm numuneye yayılma ≤ 5 dk Kat.1, 5–10 dk Kat.2) — SEA Ek-1 Tablo 2.7.1.'),
+                'options': [
+                    {'value': 'H228_cat1', 'label': 'Test yapıldı — Kategori 1 (Alev. Katı 1)',
+                     'effect': 'H228 → GHS02, Tehlike, Bölüm 14: Sınıf 4.1'},
+                    {'value': 'H228_cat2', 'label': 'Test yapıldı — Kategori 2 (Alev. Katı 2)',
+                     'effect': 'H228 → GHS02, Dikkat, Bölüm 14: Sınıf 4.1'},
+                    {'value': 'not_flammable_sol', 'label': 'Test yapıldı — alevlenir katı değil',
+                     'effect': 'H228 atanmaz'},
+                    {'value': 'not_tested_exclude', 'label': 'Test yapılmadı — uzman kararıyla sınıflandırılmamış',
+                     'effect': "H228 atanmaz; Bölüm 16'ya gerekçe yazılır"},
+                    {'value': 'not_tested_precautionary',
+                     'label': 'Test yapılmadı — geçici ihtiyatlı H228, Kategori 1 (revizyon şartıyla)',
+                     'effect': 'H228 atanır; Bölüm 16\'ya "test bekliyor" notu düşülür'},
+                ],
+                'legal_basis': 'SEA Ek-1 2.7 (Tablo 2.7.1) + SEA Md.16(2)',
+                'components': [f"{c.get('cas') or c.get('cas_no') or ''} — {c.get('name') or ''}" for c in fs],
+            })
 
         # Toz patlama uyarısı — powder formu veya powder_fine/powder_nano alt kategorisi
         if form == 'powder' or form_sub in ('powder_fine', 'powder_nano'):
@@ -2810,6 +2848,9 @@ def calculate(comps: List[Dict], form: str = 'liquid',
         'flammable_gas':     {'H220':                    ('H220', 'Flam. Gas 1',         'Danger'),
                               'H221':                    ('H221', 'Flam. Gas 2',         'Warning'),
                               'not_tested_precautionary':('H220', 'Flam. Gas 1',         'Danger')},
+        'flammable_solid':   {'H228_cat1':               ('H228', 'Flam. Sol. 1',        'Danger'),
+                              'H228_cat2':               ('H228', 'Flam. Sol. 2',        'Warning'),
+                              'not_tested_precautionary':('H228', 'Flam. Sol. 1',        'Danger')},
         'oxidizing_gas':     {'H270':                    ('H270', 'Ox. Gas 1',           'Danger'),
                               'not_tested_precautionary':('H270', 'Ox. Gas 1',           'Danger')},
     }
@@ -2819,7 +2860,7 @@ def calculate(comps: List[Dict], form: str = 'liquid',
             h, h_class, signal = h_map[val]
             _test_n = {'metal_corrosive': 'UN C.1', 'oxidizing_liquid': 'UN L.1/L.2',
                        'oxidizing_solid': 'UN O.1', 'flammable_gas': 'EN 1839 / ISO 10156',
-                       'oxidizing_gas': 'ISO 10156'}.get(field, '')
+                       'oxidizing_gas': 'ISO 10156', 'flammable_solid': 'UN N.1'}.get(field, '')
             if val == 'not_tested_precautionary':
                 _src = 'Test yapılmadı — ihtiyatlı sınıflandırma (kullanıcı kararı)'
                 _cut = 'Test yapılmadı — ihtiyatlı sınıflandırma (bkz. Bölüm 16)'
@@ -2836,6 +2877,7 @@ def calculate(comps: List[Dict], form: str = 'liquid',
         'oxidizing_solid':  ('Oksitleyici katı (H271/H272)', 'Oxidising solid (H271/H272)', 'UN O.1'),
         'flammable_gas':    ('Alevlenir gaz (H220/H221)', 'Flammable gas (H220/H221)', 'EN 1839 / ISO 10156'),
         'oxidizing_gas':    ('Oksitleyici gaz (H270)', 'Oxidising gas (H270)', 'ISO 10156'),
+        'flammable_solid':  ('Alevlenir katı (H228)', 'Flammable solid (H228)', 'UN N.1'),
     }
     classification_notes = []
     for field, (tr_n, en_n, test_n) in _NOTE_NAMES.items():
@@ -2858,10 +2900,18 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                       '(tedarikçi beyanı).',
                 'EN': f'{en_n}: the mixture is not flammable based on a test (EN 1839) or an ISO 10156 calculation '
                       '(supplier declaration).'})
-        elif val in ('not_corrosive', 'not_oxidizing'):
+        elif val in ('not_corrosive', 'not_oxidizing', 'not_flammable_sol'):
             classification_notes.append({
                 'TR': f'{tr_n}: {test_n} test sonucuna göre sınıflandırılmamıştır (tedarikçi beyanı).',
                 'EN': f'{en_n}: not classified based on {test_n} test result (supplier declaration).'})
+
+    if _aerosol_untested:
+        classification_notes.append({
+            'TR': ('Alevlenir aerosol: aerosol alevlenirlik testleri (tutuşma mesafesi / kapalı ortam / köpük) '
+                   "yapılmamıştır; %1'den fazla alevlenir bileşen içerdiğinden SEA Ek-1 2.3 notu gereği Kategori 1 "
+                   'olarak sınıflandırılmıştır. Test sonucuna göre revize edilecektir.'),
+            'EN': ('Flammable aerosol: aerosol flammability tests have not been performed; classified as Category 1 '
+                   'as it contains more than 1 % flammable components. To be revised based on test results.')})
 
     # Gaz karışımı ISO 10156 hesabıyla değerlendirildiyse yöntem ve sonuç Bölüm 16'ya yazılır (Ek-2 16(ç))
     if _iso_gas:

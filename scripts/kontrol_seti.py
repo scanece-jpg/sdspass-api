@@ -147,6 +147,42 @@ URUNLER = [
 ]
 
 
+_GCL = [  # (konsantrasyon, bileşen sınıfı, H kodu, aranan karışım kodu, olmalı mı) — SEA Ek-1 Bölüm 3
+    (5, 'Skin Corr. 1A', 'H314', 'H314', True), (4.9, 'Skin Corr. 1A', 'H314', 'H314', False),
+    (1, 'Skin Corr. 1A', 'H314', 'H315', True), (0.9, 'Skin Corr. 1A', 'H314', 'H315', False),
+    (10, 'Skin Irrit. 2', 'H315', 'H315', True), (9.9, 'Skin Irrit. 2', 'H315', 'H315', False),
+    (3, 'Eye Dam. 1', 'H318', 'H318', True), (2.9, 'Eye Dam. 1', 'H318', 'H318', False),
+    (1, 'Eye Dam. 1', 'H318', 'H319', True), (3, 'Skin Corr. 1B', 'H314', 'H318', True),
+    (10, 'Eye Irrit. 2', 'H319', 'H319', True),
+    (1, 'Skin Sens. 1', 'H317', 'H317', True), (0.9, 'Skin Sens. 1', 'H317', 'H317', False),
+    (0.1, 'Skin Sens. 1A', 'H317', 'H317', True),
+    (0.1, 'Muta. 1B', 'H340', 'H340', True), (1, 'Muta. 2', 'H341', 'H341', True),
+    (0.9, 'Muta. 2', 'H341', 'H341', False),
+    (0.1, 'Carc. 1B', 'H350', 'H350', True), (1, 'Carc. 2', 'H351', 'H351', True),
+    (0.3, 'Repr. 1B', 'H360D', 'H360', True), (0.29, 'Repr. 1B', 'H360D', 'H360', False),
+    (3, 'Repr. 2', 'H361d', 'H361', True), (0.3, 'Lact.', 'H362', 'H362', True),
+    (10, 'STOT SE 1', 'H370', 'H370', True), (1, 'STOT SE 1', 'H370', 'H371', True),
+    (0.9, 'STOT SE 1', 'H370', 'H371', False), (10, 'STOT SE 2', 'H371', 'H371', True),
+    (20, 'STOT SE 3', 'H335', 'H335', True), (19, 'STOT SE 3', 'H335', 'H335', False),
+    (10, 'Asp. Tox. 1', 'H304', 'H304', True),
+]
+_GCL_RE = [(10, 'STOT RE 1', 'H372', 'H372', True), (1, 'STOT RE 1', 'H372', 'H373', True),
+           (0.9, 'STOT RE 1', 'H372', 'H373', False), (10, 'STOT RE 2', 'H373', 'H373', True),
+           (9.9, 'STOT RE 2', 'H373', 'H373', False)]
+
+
+def _gcl_sinirlari(clp, stot, C) -> list:
+    """SEA Ek-1 Bölüm 3 genel konsantrasyon sınırlarını eşikte ve hemen altında dener; uymayanları döndürür."""
+    hata = []
+    for satirlar, f in ((_GCL, lambda cs: clp(cs, mixture_form='liquid')['h_codes']),
+                        (_GCL_RE, lambda cs: stot(cs)['h_codes'])):
+        for k, sinif, h, aranan, olmali in satirlar:
+            hs = f([C('x', k, (sinif, h)), C('7732-18-5', 100 - k)])
+            if any(str(x).startswith(aranan) for x in hs) != olmali:
+                hata.append((k, sinif, aranan, olmali, hs))
+    return hata
+
+
 def kural_testleri(c) -> int:
     """SEA Ek-1 / Ek-2 kural testleri (2026-10-08 kural denetimi): her satır, resmî metinle satır satır
     karşılaştırılarak bulunan bir hatanın düzeltilmiş hâlini korur. Döner: hatalı test sayısı."""
@@ -386,6 +422,9 @@ def kural_testleri(c) -> int:
         ("Ek-2 A 3.2 uçtan uca: panelde 'tam değer' → Bölüm 3'te 20%, aralık notu yok",
          lambda: (lambda t: '≥ 20 - < 25%' not in t and ' 20% ' in t and 'yüzde aralığı olarak' not in t)(
              _pdf_text(c, [('120-51-4', 20), ('7732-18-5', 80)], conc_display='exact'))),
+        ('SEA Ek-1 Bölüm 3 genel konsantrasyon sınırları — 35 sınır noktası (Tablo 3.2.3, 3.3.3, 3.4.5, 3.5.2, '
+         '3.6.2, 3.7.2, 3.8.3, 3.8.3.4.5, 3.9.4, 3.10): eşikte sınıf var, hemen altında yok',
+         lambda: _gcl_sinirlari(classify_mixture_clp, _stot, C) == []),
         # ── tests/ klasöründen taşınanlar (2026-10-08; klasör silindi) ──────────────────────────────────
         ('SEA Ek-1 Tablo 3.9.4: STOT RE 2 toplanmaz — %8 + %8 → H373 yok; tek bileşen %10 → H373',
          lambda: _stot([C('110-54-3', 8, ('STOT RE 2', 'H373')), C('71-43-2', 8, ('STOT RE 2', 'H373')),

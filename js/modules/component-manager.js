@@ -33,12 +33,6 @@ const ComponentManager = (() => {
       ecInput.style.borderColor = 'var(--accent)';
     }
 
-    // REACH No
-    const reachInput = document.getElementById('reach' + compId);
-    if (reachInput && reach_no && !reachInput.value) {
-      reachInput.value = reach_no;
-    }
-
     // Bayrak rengi + Annex VI bayrağı (ATE revize formülü için DOM'da sakla)
     const card = document.getElementById('cc' + compId);
     if (card) {

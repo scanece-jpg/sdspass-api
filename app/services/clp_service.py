@@ -1139,7 +1139,7 @@ def _ate_core(items: list, form: str = '') -> tuple:
         # REACH kayıtlı madde (01-…) — kayıtlı maddeler için akut toksisite verisi zorunludur.
         # Bu durumda akut toksisite kodu olmaması "zehirli değil" demektir, "bilinmeyen" değil.
         _reach_no = str(item.get('reach_no') or item.get('reach') or '').strip()
-        _has_data = (int(item.get('source_priority') or 4) <= 2
+        _has_data = (int(item.get('source_priority') or 4) <= 2 or bool(item.get('_kayitli'))
                      or bool(_re.match(r'01-\d{10}-\d{2}', _reach_no)))
 
         if not has_acute_tox:

@@ -71,7 +71,7 @@ async def refresh_components(components: list, form: str) -> list:
         _load_custom as _custom_db,
     )
     from app.services.echa_service import _dedupe_h_codes as _dedup, lookup_echa_api as _lu_echa
-    from app.services.reach_db import get_reg_no as _reg_no
+    from app.services.reach_db import is_registered as _registered
     from app.services.substance_lookup import ensure_echa_supplement as _ensure_echa
 
     def _mark(c: dict, cas: str, priority, sea_ek6=False, annex_vi=False) -> None:
@@ -83,11 +83,11 @@ async def refresh_components(components: list, form: str) -> list:
             c['source_priority'] = priority
         c['sea_ek6'] = bool(sea_ek6)
         c['annex_vi'] = bool(annex_vi)
-        if not (c.get('reach_no') or c.get('reach')):
-            try:
-                c['reach_no'] = _reg_no(cas) or ''
-            except Exception:
-                pass
+        try:
+            if _registered(cas):
+                c['_kayitli'] = True   # yalnız "veri var" işareti — numara GBF'ye basılmaz
+        except Exception:
+            pass
 
     def _apply_m_ate(c: dict, comp: dict, src: dict) -> None:
         """M faktörü ve ATE: kullanıcının formda girdiği değer önce gelir (M > 1 veya ATE girilmiş);

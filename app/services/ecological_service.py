@@ -800,7 +800,7 @@ def aquatic_unknown(comp_list: List[Dict]) -> Dict:
         has_aq = any((h.get('h_code') or '').replace('*', '').strip()[:3] == 'H41'
                      or (h.get('h_code') or '').replace('*', '').strip()[:4] == 'H400' for h in hz)
         reach = str(c.get('reach_no') or c.get('reach') or '').strip()
-        has_data = (has_aq or int(c.get('source_priority') or 4) <= 2
+        has_data = (has_aq or int(c.get('source_priority') or 4) <= 2 or bool(c.get('_kayitli'))
                     or bool(re.match(r'01-\d{10}-\d{2}', reach))
                     or any(c.get(k) for k in ('ec50_algae', 'ec50_fish', 'ec50_daphnia', 'ec50_noec')))
         if has_data:

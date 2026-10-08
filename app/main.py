@@ -707,7 +707,7 @@ async def substance_lookup(cas: str, form: str = None):
       4. ECHA C&L Inventory API (canlı, arşive kaydedilir)
     """
     from app.services.substance_lookup import lookup_substance, get_oel
-    from app.services.reach_db import get_ec_no, get_reg_no
+    from app.services.reach_db import get_ec_no, exemption, is_registered
 
     oel = get_oel(cas)
 
@@ -765,7 +765,7 @@ async def substance_lookup(cas: str, form: str = None):
                     "name_tr"   : __import__('app.services.substance_lookup', fromlist=['x'])
                                   .COMMON_NAMES_TR.get(cas.strip(), ""),
                     "ec_no"     : echa.get("ec_no", "") or get_ec_no(cas),
-                    "reach_no"       : get_reg_no(cas),
+                    "reach_no"       : exemption(cas),   # yalnız muafiyet; kayıt no tedarikçiden
                     "sea_ek6"        : False,
                     "annex_vi"       : False,
                     "source_priority": 5,   # ECHA C&L API / PubChem — güvenilirlik düşük
@@ -787,9 +787,9 @@ async def substance_lookup(cas: str, form: str = None):
             pass
 
     if result:
-        # Kayıt numarası yalnız elle doğrulanmış tablodan (reach_db). Bilinmiyorsa boş → GBF'de "tedarikçiden".
-        # Önceden AI + web aramasıyla bulunan ilk "01-…" numarası doğrulamasız basılıyordu — kaldırıldı (2026-10-09).
-        _reach = get_reg_no(cas)
+        # Kayıt numarası programdan verilmez — kaydettiren firmaya aittir, tedarikçinin GBF'sinden gelir.
+        # Yalnız muafiyet (su vb.) bilgisi döner (2026-10-09).
+        _reach = exemption(cas)
         return {
             "found"     : True,
             "cas"       : cas,
@@ -810,10 +810,10 @@ async def substance_lookup(cas: str, form: str = None):
             "source"    : result.get("source", ""),
         }
 
-    # REACH DB'de EC/REACH no var mı?
+    # Tabloda EC no / kayıt bilgisi var mı?
     ec  = get_ec_no(cas)
-    reg = get_reg_no(cas)
-    if ec or reg:
+    reg = exemption(cas)
+    if ec or reg or is_registered(cas):
         return {"found": True, "cas": cas, "name": "", "ec_no": ec,
                 "reach_no": reg, "annex_vi": False, "hazards": [], "oel": oel}
 

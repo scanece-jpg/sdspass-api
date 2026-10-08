@@ -1020,11 +1020,11 @@ async def lookup_substance(cas: str) -> dict:
       Sıra 5 — ECHA C&L Canlı API      (PubChem → arşive kaydet)
     """
     cas = cas.strip()
-    from app.services.reach_db import get_ec_no, get_reg_no
+    from app.services.reach_db import get_ec_no, exemption
 
     def _enrich(d: dict) -> dict:
         d['ec_no']    = d.get('ec_no')    or get_ec_no(cas)    or ''
-        d['reach_no'] = d.get('reach_no') or get_reg_no(cas)   or ''
+        d['reach_no'] = exemption(cas)   # kayıt no programdan verilmez — tedarikçiden
         return d
 
     local = lookup_local(cas)
@@ -1057,7 +1057,7 @@ async def lookup_substance(cas: str) -> dict:
     # ── Bulunamadı ────────────────────────────────────────────────────────────
     return {
         'cas': cas, 'name': '', 'ec_no': get_ec_no(cas) or '',
-        'reach_no': get_reg_no(cas) or '', 'source': 'not_found',
+        'reach_no': exemption(cas), 'source': 'not_found',
         'h_codes': [], 'hazard_classes': [],
     }
 

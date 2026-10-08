@@ -113,16 +113,18 @@ REACH_DB: dict = {
 
 
 
-def get_reg_no(cas: str) -> str:
-    """İlk kayıt numarasını döndür: yalnız bu dosyadaki tablo; yoksa boş string (GBF'de "tedarikçiden")."""
-    cas = cas.strip()
-    d = REACH_DB.get(cas)
-    if d:
-        regs = d.get('reg', [])
-        if regs and regs[0] not in ('exempt', 'polymer'):
-            return regs[0]
-        return regs[0] if regs else ''
-    return ''
+def is_registered(cas: str) -> bool:
+    """Madde AB'de kayıtlı mı (tabloda 01-… numarası var mı). Yalnız "veri mevcut" işareti olarak kullanılır —
+    kayıtlı maddede akut toksisite / sucul veri zorunludur. Numara GBF'ye basılmaz: kayıt numarası kaydettiren
+    firmaya aittir, kullanıcının tedarikçisininkinden farklı olabilir (2026-10-09 kullanıcı kararı)."""
+    regs = (REACH_DB.get(cas.strip()) or {}).get('reg') or []
+    return bool(regs) and str(regs[0]).startswith('01-')
+
+
+def exemption(cas: str) -> str:
+    """Kayıttan muafiyet: 'exempt' (KKDİK Ek-4/5, örn. su) | 'polymer' | ''."""
+    regs = (REACH_DB.get(cas.strip()) or {}).get('reg') or []
+    return regs[0] if regs and regs[0] in ('exempt', 'polymer') else ''
 
 
 def get_ec_no(cas: str) -> str:
@@ -134,4 +136,4 @@ def get_ec_no(cas: str) -> str:
 if __name__ == '__main__':
     print(f"REACH DB: {len(REACH_DB)} madde")
     for cas in ['1330-20-7', '7732-18-5', '2682-20-4']:
-        print(f"  {cas}: EC={get_ec_no(cas)}, Reg={get_reg_no(cas)}")
+        print(f"  {cas}: EC={get_ec_no(cas)}, kayıtlı={is_registered(cas)}, muaf={exemption(cas)}")

@@ -1,7 +1,7 @@
 {
   "UN1993": {
     "name": "FLAMMABLE LIQUID, N.O.S.",
-    "name_tr": "ALEVLENİR SIVI, B.N.O.",
+    "name_tr": "ALEVLENEBİLİR SIVI, B.B.B.",
     "class": "3",
     "classification_code": "F1",
     "packing_groups": {
@@ -37,7 +37,7 @@
   },
   "UN1224": {
     "name": "KETONES, LIQUID, N.O.S.",
-    "name_tr": "KETON SIVILAR, B.N.O.",
+    "name_tr": "KETONLAR, SIVI, B.B.B.",
     "class": "3",
     "classification_code": "F1",
     "packing_groups": {
@@ -166,7 +166,7 @@
   },
   "UN2810": {
     "name": "TOXIC LIQUID, ORGANIC, N.O.S.",
-    "name_tr": "ZEHİRLİ SIVI, ORGANİK, B.N.O.",
+    "name_tr": "ZEHİRLİ SIVI, ORGANİK, B.B.B.",
     "class": "6.1",
     "classification_code": "T1",
     "packing_groups": {
@@ -199,7 +199,7 @@
   },
   "UN1760": {
     "name": "CORROSIVE LIQUID, N.O.S.",
-    "name_tr": "KOROZİF SIVI, B.N.O.",
+    "name_tr": "AŞINDIRICI SIVI, B.B.B.",
     "class": "8",
     "classification_code": "C9",
     "packing_groups": {
@@ -270,7 +270,7 @@
   },
   "UN3139": {
     "name": "OXIDIZING LIQUID, N.O.S.",
-    "name_tr": "OKSİTLEYİCİ SIVI, B.N.O.",
+    "name_tr": "YÜKSELTGEN SIVI, B.B.B.",
     "class": "5.1",
     "classification_code": "O1",
     "packing_groups": {
@@ -301,7 +301,7 @@
   },
   "UN3077": {
     "name": "ENVIRONMENTALLY HAZARDOUS SUBSTANCE, SOLID, N.O.S.",
-    "name_tr": "ÇEVREYE ZARARLI MADDE, KATI, B.N.O.",
+    "name_tr": "ÇEVREYE ZARARLI MADDE, KATI, B.B.B.",
     "class": "9",
     "classification_code": "M7",
     "packing_groups": {
@@ -322,7 +322,7 @@
   },
   "UN3082": {
     "name": "ENVIRONMENTALLY HAZARDOUS SUBSTANCE, LIQUID, N.O.S.",
-    "name_tr": "ÇEVREYE ZARARLI MADDE, SIVI, B.N.O.",
+    "name_tr": "ÇEVREYE ZARARLI MADDE, SIVI, B.B.B.",
     "class": "9",
     "classification_code": "M6",
     "packing_groups": {
@@ -345,7 +345,7 @@
   },
   "UN1325": {
     "name": "FLAMMABLE SOLID, ORGANIC, N.O.S.",
-    "name_tr": "YANICI KATI, ORGANİK, B.N.O.",
+    "name_tr": "ALEVLENEBİLİR KATI, ORGANİK, B.B.B.",
     "class": "4.1",
     "classification_code": "F3",
     "packing_groups": {
@@ -657,7 +657,7 @@
   },
   "UN2927": {
     "name": "TOXIC LIQUID, CORROSIVE, ORGANIC, N.O.S.",
-    "name_tr": "ZEHİRLİ SIVI, KOROZİF, ORGANİK, B.N.O.",
+    "name_tr": "ZEHİRLİ SIVI, AŞINDIRICI, ORGANİK, B.B.B.",
     "class": "6.1",
     "classification_code": "TC1",
     "packing_groups": {
@@ -833,7 +833,7 @@
   },
   "UN1461": {
     "name": "CHLORATES, INORGANIC, N.O.S.",
-    "name_tr": "KLORATLAR, ANORGANİK, B.N.O.",
+    "name_tr": "KLORATLAR, İNORGANİK, B.B.B.",
     "class": "5.1",
     "classification_code": "O1",
     "packing_groups": {
@@ -858,7 +858,7 @@
   },
   "UN1479": {
     "name": "OXIDIZING SOLID, N.O.S.",
-    "name_tr": "OKSİTLEYİCİ KATI, B.N.O.",
+    "name_tr": "YÜKSELTGEN KATI, B.B.B.",
     "class": "5.1",
     "classification_code": "O2",
     "packing_groups": {
@@ -1792,7 +1792,7 @@
   },
   "UN1719": {
     "name": "CAUSTIC ALKALI LIQUID, N.O.S.",
-    "name_tr": "KOSTİK ALKALİ SIVI, B.N.O.",
+    "name_tr": "KOSTİK ALKALİ SIVI, B.B.B.",
     "class": "8",
     "classification_code": "C5",
     "packing_groups": {
@@ -1965,7 +1965,7 @@
   },
   "UN3175": {
     "name": "SOLIDS OR MIXTURES CONTAINING FLAMMABLE LIQUID",
-    "name_tr": "YANICI SIVI İÇEREN KATI VEYA KARIŞIMLAR",
+    "name_tr": "KATILAR, ALEVLENEBİLİR SIVI, B.B.B. İÇEREN",
     "class": "4.1",
     "classification_code": "F1",
     "packing_groups": {
@@ -2136,7 +2136,7 @@
   },
   "UN1956": {
     "name": "COMPRESSED GAS, N.O.S.",
-    "name_tr": "SIKIŞTIRILMIŞ GAZ, B.N.O.",
+    "name_tr": "SIKIŞTIRILMIŞ GAZ, B.B.B.",
     "class": "2",
     "classification_code": "1A",
     "packing_groups": {
@@ -2178,7 +2178,7 @@
   },
   "UN3161": {
     "name": "LIQUEFIED GAS, FLAMMABLE, N.O.S.",
-    "name_tr": "SIVILAŞTIRILMIŞ GAZ, YANICI, B.N.O.",
+    "name_tr": "SIVILAŞTIRILMIŞ GAZ, ALEVLENEBİLİR, B.B.B.",
     "class": "2",
     "classification_code": "2F",
     "packing_groups": {
@@ -2198,7 +2198,7 @@
   },
   "UN3163": {
     "name": "LIQUEFIED GAS, N.O.S.",
-    "name_tr": "SIVILAŞTIRILMIŞ GAZ, B.N.O.",
+    "name_tr": "SIVILAŞTIRILMIŞ GAZ, B.B.B.",
     "class": "2",
     "classification_code": "2A",
     "packing_groups": {
@@ -2274,7 +2274,7 @@
   },
   "UN3166": {
     "name": "VEHICLE, FLAMMABLE GAS POWERED",
-    "name_tr": "ARAÇ, YANICI GAZLA ÇALIŞAN",
+    "name_tr": "ARAÇ, ALEVLENEBİLİR GAZLA ÇALIŞAN",
     "class": "9",
     "classification_code": "M3",
     "packing_groups": {
@@ -2314,7 +2314,7 @@
   },
   "UN3264": {
     "name": "CORROSIVE LIQUID, ACIDIC, INORGANIC, N.O.S.",
-    "name_tr": "KOROZİF SIVI, ASİDİK, İNORGANİK, B.N.O.",
+    "name_tr": "AŞINDIRICI SIVI, ASİDİK, İNORGANİK, B.B.B.",
     "class": "8",
     "classification_code": "C1",
     "packing_groups": {
@@ -2343,7 +2343,7 @@
   },
   "UN3265": {
     "name": "CORROSIVE LIQUID, ACIDIC, ORGANIC, N.O.S.",
-    "name_tr": "KOROZİF SIVI, ASİDİK, ORGANİK, B.N.O.",
+    "name_tr": "AŞINDIRICI SIVI, ASİDİK, ORGANİK, B.B.B.",
     "class": "8",
     "classification_code": "C3",
     "packing_groups": {
@@ -2375,7 +2375,7 @@
   },
   "UN3266": {
     "name": "CORROSIVE LIQUID, BASIC, INORGANIC, N.O.S.",
-    "name_tr": "KOROZİF SIVI, BAZİK, İNORGANİK, B.N.O.",
+    "name_tr": "AŞINDIRICI SIVI, BAZİK, İNORGANİK, B.B.B.",
     "class": "8",
     "classification_code": "C5",
     "packing_groups": {
@@ -2404,7 +2404,7 @@
   },
   "UN3267": {
     "name": "CORROSIVE LIQUID, BASIC, ORGANIC, N.O.S.",
-    "name_tr": "KOROZİF SIVI, BAZİK, ORGANİK, B.N.O.",
+    "name_tr": "AŞINDIRICI SIVI, BAZİK, ORGANİK, B.B.B.",
     "class": "8",
     "classification_code": "C7",
     "packing_groups": {
@@ -2436,7 +2436,7 @@
   },
   "UN3295": {
     "name": "HYDROCARBONS, LIQUID, N.O.S.",
-    "name_tr": "HİDROKARBONLAR, SIVI, B.N.O.",
+    "name_tr": "HİDROKARBONLAR, SIVI, B.B.B.",
     "class": "3",
     "classification_code": "F1",
     "packing_groups": {
@@ -2487,7 +2487,7 @@
   },
   "UN3093": {
     "name": "CORROSIVE LIQUID, OXIDIZING, N.O.S.",
-    "name_tr": "KOROZİF SIVI, OKSİTLEYİCİ, B.N.O.",
+    "name_tr": "AŞINDIRICI SIVI, YÜKSELTGEN, B.B.B.",
     "class": "8",
     "classification_code": "CO1",
     "packing_groups": {
@@ -2513,7 +2513,7 @@
   },
   "UN3094": {
     "name": "CORROSIVE LIQUID, WATER-REACTIVE, N.O.S.",
-    "name_tr": "KOROZİF SIVI, SU İLE TEPKİYEN, B.N.O.",
+    "name_tr": "AŞINDIRICI SIVI, SU İLE TEPKİMEYE GİREN, B.B.B.",
     "class": "8",
     "classification_code": "CW1",
     "packing_groups": {
@@ -2537,7 +2537,7 @@
   },
   "UN2928": {
     "name": "TOXIC SOLID, CORROSIVE, ORGANIC, N.O.S.",
-    "name_tr": "ZEHİRLİ KATI, KOROZİF, ORGANİK, B.N.O.",
+    "name_tr": "ZEHİRLİ KATI, AŞINDIRICI, ORGANİK, B.B.B.",
     "class": "6.1",
     "classification_code": "TC2",
     "packing_groups": {
@@ -2561,7 +2561,7 @@
   },
   "UN3289": {
     "name": "TOXIC LIQUID, CORROSIVE, INORGANIC, N.O.S.",
-    "name_tr": "ZEHİRLİ SIVI, KOROZİF, İNORGANİK, B.N.O.",
+    "name_tr": "ZEHİRLİ SIVI, AŞINDIRICI, İNORGANİK, B.B.B.",
     "class": "6.1",
     "classification_code": "TC1",
     "packing_groups": {
@@ -2585,7 +2585,7 @@
   },
   "UN3287": {
     "name": "TOXIC LIQUID, INORGANIC, N.O.S.",
-    "name_tr": "ZEHİRLİ SIVI, İNORGANİK, B.N.O.",
+    "name_tr": "ZEHİRLİ SIVI, İNORGANİK, B.B.B.",
     "class": "6.1",
     "classification_code": "T4",
     "packing_groups": {
@@ -2614,7 +2614,7 @@
   },
   "UN1992": {
     "name": "FLAMMABLE LIQUID, TOXIC, N.O.S.",
-    "name_tr": "YANICI SIVI, TOKSİK, B.N.O.",
+    "name_tr": "ALEVLENEBİLİR SIVI, ZEHİRLİ, B.B.B.",
     "class": "3",
     "classification_code": "FT1",
     "packing_groups": {
@@ -2646,7 +2646,7 @@
   },
   "UN2912": {
     "name": "RADIOACTIVE MATERIAL, LOW SPECIFIC ACTIVITY (LSA-I)",
-    "name_tr": "OKSİTLEYİCİ SIVI, B.N.O.",
+    "name_tr": "RADYOAKTİF MALZEME, DÜŞÜK ÖZGÜL AKTİVİTE (LSA-I)",
     "class": "7",
     "classification_code": "",
     "special_provisions": [
@@ -2661,7 +2661,7 @@
   },
   "UN2924": {
     "name": "FLAMMABLE LIQUID, CORROSIVE, N.O.S.",
-    "name_tr": "YANICI SIVI, KOROZİF, B.N.O.",
+    "name_tr": "ALEVLENEBİLİR SIVI, AŞINDIRICI, B.B.B.",
     "class": "3",
     "classification_code": "FC",
     "packing_groups": {
@@ -2693,7 +2693,7 @@
   },
   "UN1954": {
     "name": "COMPRESSED GAS, FLAMMABLE, N.O.S.",
-    "name_tr": "SIKIŞTIRILMIŞ GAZ, YANICI, B.N.O.",
+    "name_tr": "SIKIŞTIRILMIŞ GAZ, ALEVLENEBİLİR, B.B.B.",
     "class": "2.1",
     "classification_code": "1F",
     "packing_groups": {
@@ -2714,7 +2714,7 @@
   },
   "UN3156": {
     "name": "COMPRESSED GAS, OXIDIZING, N.O.S.",
-    "name_tr": "SIKIŞTIRILMIŞ GAZ, OKSİTLEYİCİ, B.N.O.",
+    "name_tr": "SIKIŞTIRILMIŞ GAZ, YÜKSELTGEN, B.B.B.",
     "class": "2.2",
     "classification_code": "1O",
     "packing_groups": {
@@ -2735,7 +2735,7 @@
   },
   "UN2845": {
     "name": "PYROPHORIC LIQUID, ORGANIC, N.O.S.",
-    "name_tr": "PİROFOR SIVI, ORGANİK, B.N.O.",
+    "name_tr": "PİROFORİK SIVI, ORGANİK, B.B.B.",
     "class": "4.2",
     "classification_code": "S2",
     "packing_groups": {
@@ -2754,7 +2754,7 @@
   },
   "UN3088": {
     "name": "SELF-HEATING SOLID, ORGANIC, N.O.S.",
-    "name_tr": "KENDİLİĞİNDEN ISINAN KATI, ORGANİK, B.N.O.",
+    "name_tr": "KENDİLİĞİNDEN ISINAN KATI, ORGANİK, B.B.B.",
     "class": "4.2",
     "classification_code": "S2",
     "packing_groups": {
@@ -2781,7 +2781,7 @@
   },
   "UN3190": {
     "name": "SELF-HEATING SOLID, INORGANIC, N.O.S.",
-    "name_tr": "KENDİLİĞİNDEN ISINAN KATI, İNORGANİK, B.N.O.",
+    "name_tr": "KENDİLİĞİNDEN ISINAN KATI, İNORGANİK, B.B.B.",
     "class": "4.2",
     "classification_code": "S4",
     "packing_groups": {

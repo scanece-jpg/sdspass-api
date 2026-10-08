@@ -99,21 +99,22 @@ def build_transport_components(raw_components: list) -> 'list[Component]':
     return result
 
 CLASS_LABELS: Dict[str, str] = {
-    '1'  : 'Patlayıcı Maddeler',
-    '2.1': 'Yanıcı Gazlar',
-    '2.2': 'Yanıcı Olmayan, Zehirli Olmayan Gazlar',   # ADR 2.2.2.1 (oksitleyici gazlar da 2.2 etiketli)
-    '2.3': 'Zehirli Gazlar',
-    '3'  : 'Yanıcı Sıvılar',
-    '4.1': 'Yanıcı Katılar',
-    '4.2': 'Kendiliğinden Alışan Maddeler',
-    '4.3': 'Su ile Tepkiyen Maddeler',
-    '5.1': 'Oksitleyici Maddeler',
-    '5.2': 'Organik Peroksitler',
-    '6.1': 'Zehirli Maddeler',
-    '6.2': 'Bulaşıcı Maddeler',
-    '7'  : 'Radyoaktif Maddeler',
-    '8'  : 'Aşındırıcı Maddeler',
-    '9'  : 'Çeşitli Tehlikeli Maddeler ve Nesneler',
+    # ADR 2025 (TR) 2.1.1.1 sınıf başlıkları; 2.1/2.2/2.3 için 2.2.2.1.3 grupları
+    '1'  : 'Patlayıcı maddeler ve nesneler',
+    '2.1': 'Gazlar — alevlenebilir',
+    '2.2': 'Gazlar — alevlenebilir olmayan, zehirli olmayan',   # ADR 2.2.2.1 (yükseltgen gazlar da 2.2 etiketli)
+    '2.3': 'Gazlar — zehirli',
+    '3'  : 'Alevlenebilir sıvılar',
+    '4.1': 'Alevlenebilir katılar, kendiliğinden tepkimeye giren maddeler, polimerleştirici maddeler ve duyarlılığı azaltılmış katı patlayıcılar',
+    '4.2': 'Kendiliğinden yanmaya yatkın maddeler',
+    '4.3': 'Su ile temas ettiğinde alevlenebilir gazlar açığa çıkartan maddeler',
+    '5.1': 'Yükseltgen (Oksitleyici) maddeler',
+    '5.2': 'Organik peroksitler',
+    '6.1': 'Zehirli maddeler',
+    '6.2': 'Bulaşıcı maddeler',
+    '7'  : 'Radyoaktif malzemeler',
+    '8'  : 'Aşındırıcı maddeler',
+    '9'  : 'Muhtelif tehlikeli maddeler ve nesneler',
 }
 
 # H Kodu → ADR Sınıfı + Ambalaj Grubu
@@ -538,60 +539,65 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
         }
     if cls == '2.1':
         return {
-            'un': 'UN 1954', 'label': 'Yanıcı Gaz, B.N.O.',
+            'un': 'UN 1954', 'label': 'SIKIŞTIRILMIŞ GAZ, ALEVLENEBİLİR, B.B.B.',
             'note': 'Maddeye özgü UN numarası önceliklidir (ör. UN1978 propan, UN1001 asetilen)',
         }
     if cls == '2.2':
         if 'H270' in h_set:
             return {
-                'un': 'UN 3156', 'label': 'Sıkıştırılmış Gaz, Oksitleyici, B.N.O.',
+                'un': 'UN 3156', 'label': 'SIKIŞTIRILMIŞ GAZ, YÜKSELTGEN, B.B.B.',
                 'note': 'ADR Sınıf 2.2 oksitleyici — tüp/tank özel kuralları geçerlidir',
             }
         if 'H281' in h_set:
             return {
-                'un': 'UN 3158', 'label': 'Basınç Altında Soğutulmuş Gaz, Yanıcı Olmayan, B.N.O.',
+                'un': 'UN 3158', 'label': 'GAZ, SOĞUTULMUŞ SIVI, B.B.B.',
                 'note': 'Kriyojenik gaz — özel yalıtımlı tank gerektirir (ADR P203)',
             }
         return {
-            'un': 'UN 1956', 'label': 'Sıkıştırılmış Gaz, Yanıcı Olmayan, B.N.O.',
+            'un': 'UN 1956', 'label': 'SIKIŞTIRILMIŞ GAZ, B.B.B.',
             'note': 'Maddeye özgü UN numarası önceliklidir (ör. UN1066 azot, UN1046 helyum)',
         }
     if cls == '3':
         if sub == '8':
             return {
-                'un': 'UN 2924', 'label': 'Yanıcı Sıvı, Korozif, B.N.O.',
+                'un': 'UN 2924', 'label': 'ALEVLENEBİLİR SIVI, AŞINDIRICI, B.B.B.',
                 'note': (
                     'UN 2924 seçim gerekçesi (ADR 2025): '
                     'Alevlenir sıvı (H224/H225/H226, Sınıf 3) + aşındırıcı (H314, Sınıf 8) kombinasyonu. '
                     'ADR Tablo 2.1.3.10: Sınıf 3 birincil, Sınıf 8 yan tehlike — '
                     'birincil sınıf Sınıf 3 PG ≤ II ile aşındırıcı PG II birlikteliğinde Sınıf 3 önceliği korur. '
-                    'ADR 3.1.2.8.1: Ürüne özgü UN girişi yoksa UN 2924 N.O.S. uygulanır. '
+                    'ADR 3.1.2.8.1: Ürüne özgü UN girişi yoksa UN 2924 B.B.B. girişi uygulanır. '
                     'Ambalaj grubu birincil sınıfın PG değerinden belirlenir. '
                     'Taşımacılık uzmanı onayı önerilir.'
                 ),
             }
         if sub == '6.1':
-            return {'un': 'UN 1992', 'label': 'Yanıcı Sıvı, Toksik, B.N.O.',
+            return {'un': 'UN 1992', 'label': 'ALEVLENEBİLİR SIVI, ZEHİRLİ, B.B.B.',
                     'note': 'ADR 2025: Sınıf 3 birincil, Sınıf 6.1 yan tehlike'}
-        return {'un': 'UN 1993', 'label': 'Yanıcı Sıvı, B.N.O.'}
+        return {'un': 'UN 1993', 'label': 'ALEVLENEBİLİR SIVI, B.B.B.'}
     if cls == '4.1':
         return {
-            'un': 'UN 1325', 'label': 'Yanıcı Katı, Organik, B.N.O.',
+            'un': 'UN 1325', 'label': 'ALEVLENEBİLİR KATI, ORGANİK, B.B.B.',
             'note': 'Maddeye özgü UN önceliklidir; PG I/III uzman onayı gerekir',
         }
     if cls == '4.2':
         if pg == 'I':
             if form == 'gas':
+                # Piroforik gazlar ADR'de Sınıf 2'dir (2.2.2.1.3 F grubu); 4.2'de gaz B.B.B. girişi yoktur.
+                # UN 2188 ARSİN'dir — B.B.B. girişi olarak kullanılamaz.
                 return {
-                    'un': 'UN 2188', 'label': 'Pirofor Gaz, B.N.O.',
+                    'un': 'UN 1954', 'label': 'SIKIŞTIRILMIŞ GAZ, ALEVLENEBİLİR, B.B.B.',
                     'note': (
-                        'H232: Hava temasında kendiliğinden alışan gaz — ADR Sınıf 2.1. '
-                        'Maddeye özgü UN numarası önceliklidir (ör. UN2188 Arsin, UN2199 Fosfin). '
+                        'H232: Hava ile temasında kendiliğinden tutuşabilen gaz — ADR Sınıf 2 (F grubu). '
+                        'Maddeye özgü UN numarası önceliklidir (ör. UN 2203 SİLAN, UN 2199 FOSFİN). '
                         'Taşımacılık uzmanı onayı zorunludur.'
                     ),
                 }
-            return {'un': 'UN 2845', 'label': 'Pirofor Sıvı, Organik, B.N.O.',
-                    'note': 'H250: Hava temasında kendiliğinden alışır — PG I, özel ambalaj'}
+            if is_solid:
+                return {'un': 'UN 2846', 'label': 'PİROFORİK KATI, ORGANİK, B.B.B.',
+                        'note': 'H250: Hava ile temasında kendiliğinden tutuşur — PG I. İnorganik katı ise UN 3200.'}
+            return {'un': 'UN 2845', 'label': 'PİROFORİK SIVI, ORGANİK, B.B.B.',
+                    'note': 'H250: Hava ile temasında kendiliğinden tutuşur — PG I. İnorganik sıvı ise UN 3194.'}
         # UN 3088 organik (PG II/III); inorganik katı UN 3190 — bileşimden ayırt edilemiyor
         return {'un': 'UN 3088', 'label': 'KENDİLİĞİNDEN ISINAN KATI, ORGANİK, B.B.B.',
                 'note': 'İnorganik katı ise UN 3190; sıvı ise UN 3183 (organik) / UN 3186 (inorganik).'}
@@ -602,16 +608,16 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
             if 'H228' in h_set:
                 return {'un': 'UN 3132', 'label': 'SU İLE TEPKİMEYE GİREN KATI, ALEVLENEBİLİR, B.B.B.'}
             return {'un': 'UN 2813', 'label': 'SU İLE TEPKİMEYE GİREN, KATI, B.B.B.'}
-        return {'un': 'UN 3148', 'label': 'Su ile Tepkiyen Sıvı, B.N.O.'}
+        return {'un': 'UN 3148', 'label': 'SU İLE TEPKİMEYE GİREN SIVI, B.B.B.'}
     if cls == '5.1':
         if sub == '8':
             if is_solid:
                 return {
-                    'un': 'UN 3085', 'label': 'Oksitleyici Katı, Aşındırıcı, B.N.O.',
+                    'un': 'UN 3085', 'label': 'YÜKSELTGEN KATI, AŞINDIRICI, B.B.B.',
                     'note': 'ADR 2025: Oksitleyici katı (Sınıf 5.1) + aşındırıcı (Sınıf 8) → UN 3085.',
                 }
             return {
-                'un': 'UN 3098', 'label': 'Oksitleyici Sıvı, Aşındırıcı, B.N.O.',
+                'un': 'UN 3098', 'label': 'YÜKSELTGEN SIVI, AŞINDIRICI, B.B.B.',
                 'note': (
                     'UN 3098 (OC1) seçim gerekçesi (ADR 2025): '
                     'Oksitleyici sıvı (Sınıf 5.1) + aşındırıcı (H314, Sınıf 8) kombinasyonu. '
@@ -639,27 +645,28 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
                          'E → UN 3108, F → UN 3110; sıcaklık kontrollüler UN 3113–3120)'),
             }
         return {
-            'un': 'UN 3105', 'label': 'ORGANİK PEROKSİT, TİP D, SIVI',
+            'un': 'UN 3105', 'label': 'ORGANİK PEROKSİT TİP D, SIVI',
             'note': ('H242 Tip C–F kapsar; Tip D varsayıldı — tip belirlenmeli (sıvı: C → UN 3103, '
                      'E → UN 3107, F → UN 3109; sıcaklık kontrollüler UN 3113–3120)'),
         }
     if cls == '6.1':
         if sub == '3':
-            lbl = ('Zehirli Katı, Yanıcı, Organik, B.N.O.' if is_solid
-                   else 'Zehirli Sıvı, Yanıcı, Organik, B.N.O.')
-            return {'un': 'UN 2929', 'label': lbl,
+            # UN 2929 sıvıdır; katı karşılığı UN 2930 (ADR Tablo A). Önceden katıya da 2929 veriliyordu.
+            return {'un': 'UN 2930' if is_solid else 'UN 2929',
+                    'label': ('ZEHİRLİ KATI, ALEVLENEBİLİR, ORGANİK, B.B.B.' if is_solid
+                              else 'ZEHİRLİ SIVI, ALEVLENEBİLİR, ORGANİK, B.B.B.'),
                     'note': 'ADR 2025: Sınıf 6.1 birincil, Sınıf 3 yan tehlike (ADR Tablo 2.1.3.10)'}
         if sub == '8':
             return {
                 'un': 'UN 2928' if is_solid else 'UN 2927',
-                'label': ('Zehirli Katı, Korozif, Organik, B.N.O.' if is_solid
-                          else 'Zehirli Sıvı, Korozif, Organik, B.N.O.'),
+                'label': ('ZEHİRLİ KATI, AŞINDIRICI, ORGANİK, B.B.B.' if is_solid
+                          else 'ZEHİRLİ SIVI, AŞINDIRICI, ORGANİK, B.B.B.'),
                 'note': 'Organik yapı için UN 2927/2928; inorganik → UN 3289/3290',
             }
         return {
             'un': 'UN 2811' if is_solid else 'UN 2810',
-            'label': ('Zehirli Katı, Organik, B.N.O.' if is_solid
-                      else 'Zehirli Sıvı, Organik, B.N.O.'),
+            'label': ('ZEHİRLİ KATI, ORGANİK, B.B.B.' if is_solid
+                      else 'ZEHİRLİ SIVI, ORGANİK, B.B.B.'),
             'note': 'UN 2810/2811 organik bileşikler için; inorganik → UN 3287/3288',
         }
     if cls == '8':
@@ -667,12 +674,12 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
             if is_solid:
                 return {
                     'un': 'UN 3084',
-                    'label': 'Korozif Katı, Oksitleyici, B.N.O.',
+                    'label': 'AŞINDIRICI KATI, YÜKSELTGEN, B.B.B.',
                     'note': 'ADR 2025: Aşındırıcı katı (Sınıf 8) + oksitleyici (Sınıf 5.1) → UN 3084.',
                 }
             return {
                 'un': 'UN 3093',
-                'label': 'Korozif Sıvı, Oksitleyici, B.N.O.',
+                'label': 'AŞINDIRICI SIVI, YÜKSELTGEN, B.B.B.',
                 'note': (
                     'UN 3093 (CO1) seçim gerekçesi (ADR 2025): '
                     'Aşındırıcı sıvı (H314, Sınıf 8 PG I) + oksitleyici (H271/H272, Sınıf 5.1) kombinasyonu. '
@@ -685,8 +692,8 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
         if sub == '3':
             return {
                 'un': 'UN 2921' if is_solid else 'UN 2920',
-                'label': ('Korozif Katı, Yanıcı, B.N.O.' if is_solid
-                          else 'Korozif Sıvı, Yanıcı, B.N.O.'),
+                'label': ('AŞINDIRICI KATI, ALEVLENEBİLİR, B.B.B.' if is_solid
+                          else 'AŞINDIRICI SIVI, ALEVLENEBİLİR, B.B.B.'),
                 'note': 'ADR 2025: Sınıf 8 birincil, Sınıf 3 yan tehlike (ADR Tablo 2.1.3.10)',
             }
         if sub == '6.1':
@@ -694,8 +701,8 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
             # girişine (UN 2927/2928, TC) gidiyordu — sınıf ile UN numarası çelişiyordu.
             return {
                 'un': 'UN 2923' if is_solid else 'UN 2922',
-                'label': ('Aşındırıcı Katı, Zehirli, B.N.O.' if is_solid
-                          else 'Aşındırıcı Sıvı, Zehirli, B.N.O.'),
+                'label': ('AŞINDIRICI KATI, ZEHİRLİ, B.B.B.' if is_solid
+                          else 'AŞINDIRICI SIVI, ZEHİRLİ, B.B.B.'),
                 'note': 'ADR 2025: Sınıf 8 birincil, Sınıf 6.1 yan tehlike (ADR Tablo 2.1.3.10)',
             }
         # Sınıf 8, yan tehlike yok — önce CAS bazlı spesifik arama yap
@@ -722,7 +729,7 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
                             'note':   (f"CAS {dominant8.cas} için spesifik ADR girişi: "
                                        f"{_det['un_no']} Sınıf {_det.get('class','8')}, "
                                        f"PG {_det.get('packing_group','')} — "
-                                       "ADR §3.1.2.8.1: mevcut spesifik giriş B.N.O.'ya tercih edilir."
+                                       "ADR §3.1.2.8.1: mevcut spesifik giriş B.B.B. girişine tercih edilir."
                                        + (f" {_det['seed_note']}" if _det.get('seed_note') else '')),
                         }
         _nos = _corr_nos(components, is_solid, mixture_ph)
@@ -741,14 +748,14 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
         if is_solid:
             return {
                 'un': 'UN 3077',
-                'label': 'Çevre için Tehlikeli Madde, Katı, B.N.O.',
+                'label': 'ÇEVREYE ZARARLI MADDE, KATI, B.B.B.',
             }
         # UN 3082 — ÖH 375 viskozite muafiyeti (ADR 2025 Bölüm 3.3.1)
         _visc = (h_set or set())  # visc bilgisi h_set üzerinden gelemiyor;
         # viscosity değeri dışarıdan geçilecek — bkz. classify() fonksiyonu
         return {
             'un': 'UN 3082',
-            'label': 'Çevre için Tehlikeli Madde, Sıvı, B.N.O.',
+            'label': 'ÇEVREYE ZARARLI MADDE, SIVI, B.B.B.',
             '_sp375_check': True,  # classify() içinde viskozite kontrolü yapılacak
         }
     return {'un': '—', 'label': 'Bilinmiyor'}

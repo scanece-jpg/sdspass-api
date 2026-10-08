@@ -1613,15 +1613,16 @@ ASP_CAS = {
     '64741-41-9','64741-42-0','64741-44-2','64741-45-3',
     '64741-47-5','64741-48-6','64742-54-7','8052-41-3',
 }
-# CLP Ek-I Tablo 2.13.1 — oksitleyici sıvı CAS → kategori (1=H271, 2=H272, 3=H272)
+# Oksitleyici bileşen CAS → maddenin kendi kategorisi (1=H271, 2/3=H272). YALNIZ YEDEK: bileşen
+# kaydında H271/H272 yoksa kullanılır; önce SEA Ek-6 konsantrasyon aralığı, sonra bileşen kaydı
+# (SEA Md.6(1)(c)). Ek-6'da olanlar Ek-6 değerine göre düzeltildi (2026-10-08); sodyum tiyosülfat
+# (indirgen, oksitleyici değil) ve sodyum hipoklorit çözeltisi (Ek-6'da oksitleyici sınıfı yok) çıkarıldı.
 OXIDIZING_LIQ_CAS: Dict[str, int] = {
-    '7722-84-1': 1,   # H₂O₂   %≥50 hidrojen peroksit    Ox. Liq. 1
-    '7790-98-9': 1,   # NH₄ClO₄ amonyum perklorat         Ox. Liq. 1
-    '7775-09-9': 2,   # NaClO₃  sodyum klorat             Ox. Liq. 2
-    '7727-54-0': 2,   # (NH₄)₂S₂O₈ amonyum persülfat     Ox. Liq. 2
-    '7722-64-7': 2,   # KMnO₄   potasyum permanganat çöz. Ox. Liq. 2
-    '7681-52-9': 3,   # NaClO   sodyum hipoklorit          Ox. Liq. 3
-    '10102-17-7':3,   # Na₂S₂O₃ sodyum tiyosülfat         Ox. Liq. 3
+    '7722-84-1': 1,   # H₂O₂ — Ek-6: ≥%70 Ox. Liq. 1, %50–70 Ox. Liq. 2 (aralık _ox_cat'te)
+    '7790-98-9': 1,   # NH₄ClO₄ amonyum perklorat — Ek-6 Ox. Sol. 1
+    '7775-09-9': 1,   # NaClO₃  sodyum klorat     — Ek-6 Ox. Sol. 1
+    '7727-54-0': 3,   # (NH₄)₂S₂O₈ amonyum persülfat — Ek-6 Ox. Sol. 3
+    '7722-64-7': 2,   # KMnO₄   potasyum permanganat — Ek-6 Ox. Sol. 2
 }
 OXIDIZING_CAS = set(OXIDIZING_LIQ_CAS.keys())  # geriye dönük uyumluluk
 FLAM_SOL_CAS  = {'7704-34-9','1333-86-4','12185-10-3'}
@@ -1636,15 +1637,58 @@ OXIDIZING_GAS_CAS = {
     '7790-91-2',   # ClF₃ klortriflorür
 }
 
-# CLP Ek-I Tablo 2.13.4 — oksitleyici katı karışım sınıflandırması
-# CAS → kategori (1, 2 veya 3)
+def _ox_cat(c, table: Dict[str, int]) -> int:
+    """Oksitleyici bileşenin kategorisi — öncelik SEA Md.6(1)(c):
+    1) SEA Ek-6 özel konsantrasyon aralığı (örn. H₂O₂ %50–70 → Kategori 2),
+    2) bileşen kaydı ("Ox. Sol. 3" / "Ox. Liq. 2"; H272 hem Kat.2 hem Kat.3'ü kapsar —
+       SEA Ek-1 Tablo 2.13.2 / 2.14.2 — kategori sınıf adından okunur, okunamazsa daha ağır olan 2),
+    3) yedek tablo. 0 → oksitleyici değil."""
+    import re as _re
+    cas = (c.get('cas') or c.get('cas_no') or '').strip()
+    try:
+        conc = float(c.get('concMax') or c.get('conc') or 0)
+    except (TypeError, ValueError):
+        conc = 0.0
+    try:
+        from app.services.substance_lookup import _load_sea_ek6
+        _db = _load_sea_ek6() or {}
+        _e = _db.get(cas) or {}
+        if '_alias' in _e:
+            _e = _db.get(_e['_alias']) or {}
+        for _s in (_e.get('scl_limits') or []):
+            if _s.get('h_code') not in ('H271', 'H272') or _s.get('min') is None:
+                continue
+            _lo, _hi = float(_s['min']), _s.get('max')
+            if conc >= _lo and (_hi is None or conc < float(_hi)):
+                _m = _re.search(r'(\d)\s*$', str(_s.get('class_en') or _s.get('class') or ''))
+                if _m:
+                    return int(_m.group(1))
+    except Exception:
+        pass
+    best = 0
+    for h in (c.get('hazards') or []):
+        hc = (h.get('h_code') or '').replace('*', '').strip()[:4]
+        if hc not in ('H271', 'H272'):
+            continue
+        m = _re.search(r'(\d)\s*$', str(h.get('h_class') or h.get('class') or '').strip())
+        cat = int(m.group(1)) if m else (1 if hc == 'H271' else 2)
+        best = cat if not best else min(best, cat)
+    return best or table.get(cas, 0)
+
+
+def _ox_signal(cat: int) -> str:
+    """SEA Ek-1 Tablo 2.13.2 / 2.14.2: Kategori 1 ve 2 → Tehlike, Kategori 3 → Dikkat."""
+    return 'Warning' if cat == 3 else 'Danger'
+
+
+# Oksitleyici katı CAS → kategori. YALNIZ YEDEK (bkz. _ox_cat). Ek-6'dakiler Ek-6'ya göre düzeltildi.
 OXIDIZING_SOLID_CAS: Dict[str, int] = {
-    '7778-54-3': 1,   # Ca(ClO)₂  kalsiyum hipoklorit     Ox. Sol. 1
-    '7722-64-7': 2,   # KMnO₄     potasyum permanganat   Ox. Sol. 2
-    '7778-74-7': 2,   # KClO₄     potasyum perklorat      Ox. Sol. 2
+    '7778-54-3': 2,   # Ca(ClO)₂  kalsiyum hipoklorit     Ek-6 Ox. Sol. 2
+    '7722-64-7': 2,   # KMnO₄     potasyum permanganat   Ek-6 Ox. Sol. 2
+    '7778-74-7': 1,   # KClO₄     potasyum perklorat      Ek-6 Ox. Sol. 1
     '7789-38-0': 2,   # NaBrO₃    sodyum bromat           Ox. Sol. 2
-    '7776-28-5': 2,   # Na₂S₂O₈   sodyum persülfat        Ox. Sol. 2
-    '7727-21-1': 2,   # K₂S₂O₈    potasyum persülfat      Ox. Sol. 2
+    '7776-28-5': 3,   # Na₂S₂O₈   sodyum persülfat        Ox. Sol. 3 (K₂S₂O₈ / (NH₄)₂S₂O₈ Ek-6 Kat.3)
+    '7727-21-1': 3,   # K₂S₂O₈    potasyum persülfat      Ek-6 Ox. Sol. 3
     '6484-52-2': 3,   # NH₄NO₃    amonyum nitrat          Ox. Sol. 3
     '7757-79-1': 3,   # KNO₃      potasyum nitrat         Ox. Sol. 3
     '7631-99-4': 3,   # NaNO₃     sodyum nitrat           Ox. Sol. 3
@@ -1659,7 +1703,7 @@ PYRO_GAS_CAS  = {
 ERROR_META = {
     'density':        {'base':0.03, 'polar':0.06,  'method':'ρ_mix = Σwᵢ / Σ(wᵢ/ρᵢ)', 'standard':'ISO 2811'},
     'vapor_pressure': {'base':0.20,               'method':'Raoult Yasası',             'standard':'—'},
-    'lel':            {'base':0.15,               'method':'Le Chatelier (ISO 10156)',   'standard':'ISO 10156 / EN 1839'},
+    'lel':            {'base':0.15,               'method':'Raoult + Le Chatelier (buhar fazı, hesap)', 'standard':'Le Chatelier (alt sınır)'},
     'uel':            {'base':0.20,               'method':'Le Chatelier',               'standard':'ISO 10156 / EN 1839'},
     'vapor_density':  {'base':0.02,               'method':'VD = MW_mix / 29',           'standard':'İdeal gaz'},
     'boiling_point':  {'base':None,               'method':'IBP = min(KNᵢ)',             'standard':'ASTM D86 / ISO 3924'},
@@ -1704,7 +1748,6 @@ def calc_theo_props(comps: List[Dict]) -> Optional[Dict]:
         rho = DENSITY_DB.get(cas)
         mw  = MW_DB.get(cas)
         lel = LEL_DB.get(cas)
-        uel = UEL_DB.get(cas)
         vp  = VP_DB.get(cas)
         bp  = BP_DB.get(cas, 'MISSING')
 
@@ -1724,8 +1767,8 @@ def calc_theo_props(comps: List[Dict]) -> Optional[Dict]:
             if min_bp is None or bp < min_bp:
                 min_bp = bp
 
-        if mw is not None and vp is not None and lel is not None and uel is not None and w > 0:
-            flam_rows.append({'n': w / mw, 'vp': vp, 'lel': lel, 'uel': uel})
+        if mw is not None and vp is not None and lel is not None and w > 0:
+            flam_rows.append({'n': w / mw, 'vp': vp, 'lel': lel})
 
     total_w_all = sum(r['w'] for r in rows)
     coverage = round((covered_w / total_w_all) * 100) if total_w_all > 0 else 0
@@ -1750,22 +1793,19 @@ def calc_theo_props(comps: List[Dict]) -> Optional[Dict]:
             res['vapor_pressure'] = {'value': vp_val, 'error': _calc_error('vapor_pressure', vp_val, coverage),
                                       **{k: ERROR_META['vapor_pressure'][k] for k in ('method','standard')}}
 
-    # LEL / UEL — Raoult + Le Chatelier (ISO 10156)
+    # Alt patlama sınırı — buhar bileşimi (Raoult) + Le Chatelier. Üst sınır bu yöntemle hesaplanmaz
+    # (ISO 10156:2017 4.5.1 — Le Chatelier yalnız alt sınır için geçerlidir); önceden üst sınır da
+    # hesaplanıp "ISO 10156" diye basılıyordu. Üst sınır yalnız ölçüm / kullanıcı beyanıyla yazılır.
     if flam_rows:
         tot_n = sum(e['n'] for e in flam_rows)
-        with_p = [{'lel': e['lel'], 'uel': e['uel'], 'p': (e['n'] / tot_n) * e['vp']} for e in flam_rows]
+        with_p = [{'lel': e['lel'], 'p': (e['n'] / tot_n) * e['vp']} for e in flam_rows]
         p_tot = sum(e['p'] for e in with_p)
         if p_tot > 0:
-            vy     = [{'lel': e['lel'], 'uel': e['uel'], 'y': e['p'] / p_tot} for e in with_p]
-            lel_inv = sum(e['y'] / e['lel'] for e in vy)
-            uel_inv = sum(e['y'] / e['uel'] for e in vy)
+            lel_inv = sum((e['p'] / p_tot) / e['lel'] for e in with_p)
             if lel_inv > 0:
                 lel_val = round(1 / lel_inv, 1)
-                uel_val = round(1 / uel_inv, 1)
                 res['lel'] = {'value': lel_val, 'error': _calc_error('lel', lel_val, coverage),
                                **{k: ERROR_META['lel'][k] for k in ('method','standard')}}
-                res['uel'] = {'value': uel_val, 'error': _calc_error('uel', uel_val, coverage),
-                               **{k: ERROR_META['uel'][k] for k in ('method','standard')}}
 
     # Kaynama noktası
     if min_bp is not None:
@@ -2035,8 +2075,20 @@ def _calc_flam_liq(comps: List[Dict], user_fp=None, user_bp=None, form_sub: str 
         trigs, worst = cat_triggers[1] + cat_triggers[2] + cat_triggers[3], {'h':'H226','cat':3,'h_class':'Flam. Liq. 3','signal':'Warning'}
         fps = [cat_fp[k] for k in (1, 2, 3)]
     else:
+        # Alevlenir sıvı bileşen var ama toplamı programın tarama eşiğinin (%1 / %10) altında. Bu
+        # eşikler SEA Ek-1'de yoktur (karışımın parlama noktası ölçümle belirlenir — Ek-1 2.6.4);
+        # sınıf verilmez ama kullanıcı sessiz bırakılmaz.
+        _low = cat_triggers[1] + cat_triggers[2] + cat_triggers[3]
+        _low_warn = None
+        if _low and fp_status != 'not_flammable':
+            _low_warn = (
+                f'ℹ Parlama noktası girilmedi — ürün az miktarda alevlenir sıvı bileşen içeriyor '
+                f'({" + ".join(trig_src(t) for t in _low)}). Toplam miktar programın tarama eşiğinin '
+                '(Kat.1–2 için %1, Kat.3 için %10) altında olduğundan alevlenir sıvı sınıfı verilmedi. '
+                'Bu eşikler yönetmelikte yer almaz; karışımın parlama noktası ölçümle belirlenir '
+                '(SEA Ek-1 2.6.4). Ölçülen değer varsa girin.')
         return {'result': None, 'source': None, 'fp': None, 'screening': _screening,
-                'water_dilution_warning': None, 'flam_components': False}
+                'water_dilution_warning': _low_warn, 'flam_components': False}
 
     fps = [f for f in fps if f is not None]
     src = ' + '.join(trig_src(t) for t in trigs)
@@ -2229,7 +2281,8 @@ _PHYS_H_SET = {f'H{n}' for n in range(220, 273)}
 
 def calculate(comps: List[Dict], form: str = 'liquid',
               user_fp=None, user_bp=None, test_data: Dict = None,
-              form_sub: str = '', fp_status: str = '') -> Dict:
+              form_sub: str = '', fp_status: str = '', mixture_ph=None,
+              mixture_skin_corr: bool = False) -> Dict:
     """
     Fiziksel tehlike sınıflandırması + teorik fiziksel özellikler hesapla.
 
@@ -2257,11 +2310,13 @@ def calculate(comps: List[Dict], form: str = 'liquid',
         if fl.get('water_dilution_warning'):
             warnings.append(fl['water_dilution_warning'])
         if fl['result']:
-            _flam_cutoff = {
-                'H224': '≥ %1 Cat.1 yanıcı sıvı bileşen (CLP Ek-I Tablo 2.6)',
-                'H225': '≥ %1 Cat.1+2 yanıcı sıvı bileşen (CLP Ek-I Tablo 2.6)',
-                'H226': '≥ %10 yanıcı sıvı bileşen (CLP Ek-I Tablo 2.6)',
-            }.get(fl['result']['h'], 'Yanıcı sıvı — CLP Ek-I Tablo 2.6')
+            # Ölçüm yoksa %1 / %10 bileşen toplamı programın tarama (en kötü durum) kuralıdır —
+            # yönetmelikte yer almaz; kriter karışımın parlama noktasıdır (SEA Ek-1 Tablo 2.6.1).
+            _flam_cutoff = ('Ölçülen parlama noktası — SEA Ek-1 Tablo 2.6.1' if user_fp is not None else {
+                'H224': 'Ölçüm yok — tarama: ≥ %1 Kat.1 alevlenir sıvı bileşen (en kötü durum; SEA Ek-1 Tablo 2.6.1 ölçümle)',
+                'H225': 'Ölçüm yok — tarama: ≥ %1 Kat.1+2 alevlenir sıvı bileşen (en kötü durum; SEA Ek-1 Tablo 2.6.1 ölçümle)',
+                'H226': 'Ölçüm yok — tarama: ≥ %10 alevlenir sıvı bileşen (en kötü durum; SEA Ek-1 Tablo 2.6.1 ölçümle)',
+            }.get(fl['result']['h'], 'Alevlenir sıvı — SEA Ek-1 Tablo 2.6.1'))
             primary.append({'type': 'flam_liq', **fl['result'],
                             'source': fl['source'], 'fp': fl['fp'],
                             'cutoff_used': _flam_cutoff})
@@ -2462,7 +2517,7 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                      'label': 'Test yapılmadı — geçici ihtiyatlı H228, Kategori 1 (revizyon şartıyla)',
                      'effect': 'H228 atanır; Bölüm 16\'ya "test bekliyor" notu düşülür'},
                 ],
-                'legal_basis': 'SEA Ek-1 2.7 (Tablo 2.7.1) + SEA Md.16(2)',
+                'legal_basis': 'SEA Ek-1 2.7 (Tablo 2.7.1) + SEA Md.10(2), Md.11(3)',
                 'components': [f"{c.get('cas') or c.get('cas_no') or ''} — {c.get('name') or ''}" for c in fs],
             })
 
@@ -2487,19 +2542,13 @@ def calculate(comps: List[Dict], form: str = 'liquid',
 
         # Oksitleyici katı — CLP Ek-I §2.14 gereği TEST (O.1) zorunlu; toplama yöntemi yok.
         # Bypass: bileşen ≥%90 + Ek-6 harmonize + diğer bileşenlerde fiziksel H kodu yok
-        #         → SEA Madde 16(2)(b) kapsamında H kodu bileşenden devralınır.
+        #         → uzman kararı ve delil ağırlığı (SEA Md.11(3), Ek-1 1.1.1) ile H kodu
+        #           bileşenden devralınır. (Md.16(2)(b) içerik değişikliğine ilişkindir — dayanak değildir.)
         # Aksi: pending_decision — test sonucu veya uzman kararı istenir.
         # Test verisi test_data['oxidizing_solid'] üzerinden gelirse aşağıda _MANUAL_H_MAP işler.
 
         def _ox_sol_cat(c) -> int:
-            cas = (c.get('cas') or c.get('cas_no') or '').strip()
-            if cas in OXIDIZING_SOLID_CAS:
-                return OXIDIZING_SOLID_CAS[cas]
-            hh = {(h.get('h_code') or '').replace('*', '').strip()[:4]
-                  for h in (c.get('hazards') or [])}
-            if 'H271' in hh: return 1
-            if 'H272' in hh: return 2
-            return 0
+            return _ox_cat(c, OXIDIZING_SOLID_CAS)
 
         ox_sol_comps: list = []
         for c in comps:
@@ -2546,7 +2595,7 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                 # Bypass: H kodu bileşenden devral, B16 notu üret
                 _h_bypass = 'H271' if _bypass_comp['cat'] == 1 else 'H272'
                 _cls_bypass = f"Ox. Sol. {_bypass_comp['cat']}"
-                _sig_bypass = 'Danger' if _h_bypass == 'H271' else 'Warning'
+                _sig_bypass = _ox_signal(_bypass_comp['cat'])
                 _idx = _bypass_comp['index_no']
                 extra.append({
                     'type':        'oxidizing_solid_bypass',
@@ -2555,18 +2604,18 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                     'signal':      _sig_bypass,
                     'source':      f"{_bypass_comp['name']} %{_bypass_comp['conc']:.1f} (Ek-6 harmonize)",
                     'cutoff_used': (
-                        f"SEA Madde 16(2)(b) bypass: bileşen ≥%90 + Ek-6 harmonize"
+                        f"Uzman kararı ve delil ağırlığı (SEA Md.11(3), Ek-1 1.1.1): bileşen ≥%90 + Ek-6 harmonize"
                         + (f" (İndeks No: {_idx})" if _idx else '')
                         + " + diğer bileşenler inert → H kodu bileşenden devralındı"
                     ),
                 })
                 warnings.append(
-                    f'Oksitleyici katı ({_h_bypass}): SEA Madde 16(2)(b) — '
+                    f'Oksitleyici katı ({_h_bypass}, Kategori {_bypass_comp["cat"]}): uzman kararı (SEA Md.11(3)) — '
                     f'{_bypass_comp["name"]} ≥%90, Ek-6 harmonize kayıt'
                     + (f' (İndeks No: {_idx})' if _idx else '')
                     + ', kalan bileşenler inert. '
-                    'B16 notu: Karışım test edilmemiştir; bileşen ≥%90 ve Ek-6 harmonize '
-                    'sınıflandırması temelinde SEA Madde 16(2)(b) uygulanmıştır.'
+                    'B16 notu: Karışım test edilmemiştir; bileşen ≥%90 ve Ek-6 uyumlaştırılmış '
+                    'sınıflandırması temelinde uzman kararı ve delil ağırlığı (SEA Md.11(3), Ek-1 1.1.1) uygulanmıştır.'
                 )
             else:
                 # Bypass koşulları sağlanmadı → pending_decision
@@ -2608,12 +2657,12 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                          'effect': 'H271/H272 atanmaz; B14 oksitleyici tehlike yok'},
                         {'value': 'not_tested_exclude',
                          'label': 'Test yapılmadı — uzman kararıyla sınıflandırılmamış',
-                         'effect': 'H271/H272 atanmaz; B16\'ya gerekçe yazılır (SEA Md.16(2))'},
+                         'effect': 'H271/H272 atanmaz; B16\'ya gerekçe yazılır (uzman kararı — SEA Md.11(3))'},
                         {'value': 'not_tested_precautionary',
                          'label': 'Test yapılmadı — geçici ihtiyatlı H272, Kategori 2 (revizyon şartıyla)',
                          'effect': 'H272 atanır; B16\'ya "test bekliyor" notu düşülür'},
                     ],
-                    'legal_basis': 'CLP Ek-I §2.14 + SEA Madde 16(2)',
+                    'legal_basis': 'SEA Ek-1 2.14 (test O.1) + SEA Md.10(2), Md.11(3)',
                     'b16_note': (
                         'Oksitleyici katı sınıflandırması değerlendirilmemiştir '
                         '(UN O.1 testi mevcut değil; CLP Ek-I §1.6.3.2 gereği fiziksel tehlikeler '
@@ -2629,14 +2678,7 @@ def calculate(comps: List[Dict], form: str = 'liquid',
         # Bileşende H271/H272 varsa kullanıcıya test sonucu sorulur (pending_decision).
         # Test verisi test_data['oxidizing_liquid'] üzerinden gelirse aşağıda _MANUAL_H_MAP işler.
         def _ox_liq_cat(c) -> int:
-            cas = (c.get('cas') or c.get('cas_no') or '').strip()
-            if cas in OXIDIZING_LIQ_CAS:
-                return OXIDIZING_LIQ_CAS[cas]
-            h_codes = {(h.get('h_code') or '').replace('*','').strip()[:4]
-                       for h in (c.get('hazards') or [])}
-            if 'H271' in h_codes: return 1
-            if 'H272' in h_codes: return 2
-            return 0
+            return _ox_cat(c, OXIDIZING_LIQ_CAS)
 
         def _ek6_ox_min(cas: str):
             """SEA Ek-6'da maddenin oksitleyici sınıfı için özel konsantrasyon sınırı varsa en düşüğü
@@ -2695,7 +2737,7 @@ def calculate(comps: List[Dict], form: str = 'liquid',
             if _bypass_liq and _bypass_liq_comp:
                 _h_bl = 'H271' if _bypass_liq_comp['cat'] == 1 else 'H272'
                 _cls_bl = f"Ox. Liq. {_bypass_liq_comp['cat']}"
-                _sig_bl = 'Danger' if _h_bl == 'H271' else 'Warning'
+                _sig_bl = _ox_signal(_bypass_liq_comp['cat'])
                 _idx_l = _bypass_liq_comp.get('index_no', '')
                 extra.append({
                     'type':        'oxidizing_liquid_bypass',
@@ -2704,13 +2746,13 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                     'signal':      _sig_bl,
                     'source':      f"{_bypass_liq_comp['name']} %{_bypass_liq_comp['conc']:.1f} (Ek-6 harmonize)",
                     'cutoff_used': (
-                        'SEA Madde 16(2)(b) bypass: bileşen ≥%90 + Ek-6 harmonize'
+                        'Uzman kararı ve delil ağırlığı (SEA Md.11(3), Ek-1 1.1.1): bileşen ≥%90 + Ek-6 harmonize'
                         + (f' (İndeks No: {_idx_l})' if _idx_l else '')
                         + ' + diğer bileşenler inert → H kodu bileşenden devralındı'
                     ),
                 })
                 warnings.append(
-                    f'Oksitleyici sıvı ({_h_bl}): SEA Madde 16(2)(b) bypass — '
+                    f'Oksitleyici sıvı ({_h_bl}, Kategori {_bypass_liq_comp["cat"]}): uzman kararı (SEA Md.11(3)) — '
                     f'{_bypass_liq_comp["name"]} ≥%90, Ek-6 harmonize kayıt'
                     + (f' (İndeks No: {_idx_l})' if _idx_l else '')
                     + ', kalan bileşenler inert.'
@@ -2755,12 +2797,12 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                          'effect': 'H271/H272 atanmaz; B14 oksitleyici tehlike yok'},
                         {'value': 'not_tested_exclude',
                          'label': 'Test yapılmadı — uzman kararıyla sınıflandırılmamış',
-                         'effect': 'H271/H272 atanmaz; B16\'ya gerekçe yazılır (SEA Md.16(2))'},
+                         'effect': 'H271/H272 atanmaz; B16\'ya gerekçe yazılır (uzman kararı — SEA Md.11(3))'},
                         {'value': 'not_tested_precautionary',
                          'label': 'Test yapılmadı — geçici ihtiyatlı H272, Kategori 2 (revizyon şartıyla)',
                          'effect': 'H272 atanır; B16\'ya "test bekliyor" notu düşülür'},
                     ],
-                    'legal_basis': 'CLP Ek-I §2.13 + SEA Madde 16(2)',
+                    'legal_basis': 'SEA Ek-1 2.13 (test O.2) + SEA Md.10(2), Md.11(3)',
                     'b16_note': (
                         'Oksitleyici sıvı sınıflandırması değerlendirilmemiştir '
                         '(UN L.1/L.2 testi mevcut değil; CLP Ek-I §1.6.3.2 gereği fiziksel '
@@ -2772,21 +2814,36 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                 })
 
     # Metallere aşındırıcılık (H290) — karışımda yalnızca test (UN C.1) ile belirlenir
-    # (SEA Ek-1 §2.16); bileşen oranından hesaplanmaz. Bileşende H290 varsa karar istenir.
+    # (SEA Ek-1 §2.16); bileşen oranından hesaplanmaz. Karar sorusu: bileşende H290 varsa, ürünün
+    # kendisi cilt aşındırıcı (H314) sınıflandırıldıysa ya da ürün pH'ı ≤ 2 / ≥ 11,5 ise. (Örn. sodyum
+    # hidroksitin Ek-6 kaydında H290 yoktur; yalnız bileşen H290'ına bakıldığında soru çıkmıyordu.)
     if form != 'gas' and not test_data.get('metal_corrosive'):
+        def _mc_h(c):
+            return {(h.get('h_code') or '').replace('*', '').strip()[:4] for h in (c.get('hazards') or [])}
         _mc_comps = [
             f"{(c.get('name') or c.get('cas') or '')} %{float(c.get('concMax') or c.get('conc') or 0):g}"
             for c in comps
-            if any((h.get('h_code') or '').replace('*', '').strip()[:4] == 'H290'
-                   for h in (c.get('hazards') or []))
+            if 'H290' in _mc_h(c)
             and float(c.get('concMax') or c.get('conc') or 0) > 0
         ]
-        if _mc_comps:
+        try:
+            _mc_ph = float(str(mixture_ph).replace(',', '.')) if mixture_ph not in (None, '') else None
+        except (TypeError, ValueError):
+            _mc_ph = None
+        _mc_ph_ext = _mc_ph is not None and (_mc_ph <= 2 or _mc_ph >= 11.5)
+        if _mc_comps or _mc_ph_ext or mixture_skin_corr:
+            _mc_why = []
+            if _mc_comps:
+                _mc_why.append(f"metallere aşındırıcı (H290) bileşen: {'; '.join(_mc_comps)}")
+            if mixture_skin_corr:
+                _mc_why.append('ürün cilt aşındırıcı (H314) olarak sınıflandırıldı')
+            if _mc_ph_ext:
+                _mc_why.append(f'ürün pH değeri {_mc_ph:g}')
             pending_decisions.append({
                 'code': 'PHYS_MET_CORR_UNTESTED',
                 'field': 'metal_corrosive',
                 'question': (
-                    f"Karışımda metallere aşındırıcı bileşen var: {'; '.join(_mc_comps)}. "
+                    f"Karışım metallere aşındırıcı olabilir — {' / '.join(_mc_why)}. "
                     'Karışımın H290 sınıfı bileşen oranından hesaplanmaz, yalnızca test '
                     '(UN C.1) sonucuyla belirlenir (SEA Ek-1 §2.16). Test sonucunu veya '
                     'kararınızı seçin.'

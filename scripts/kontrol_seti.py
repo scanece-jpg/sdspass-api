@@ -38,8 +38,10 @@ _UYDURMA = ['Uygun yangın söndürücü kullanın.', 'Sınıflandırma ve etike
             # 2026-10-08 aralık denetimi: AB atıflı / uydurma Bölüm 3 notları
             'ECHA aralığı', 'CLP Madde 24(2)', 'ÇSGB bildirimi']
 URUNLER = [
-    {'ad': 'Nitrik asit %15 (aşındırıcı, ADR)', 'bil': [('7697-37-2', 15), ('7732-18-5', 85)],
-     'h': ['H314'], 'signal': 'Danger',
+    {'ad': 'Nitrik asit %15 (aşındırıcı, ADR; metal aşındırıcılık kararı: ihtiyatlı)',
+     'bil': [('7697-37-2', 15), ('7732-18-5', 85)],
+     'test_data': {'metal_corrosive': 'not_tested_precautionary'}, 'soru': ('PHYS_MET_CORR_UNTESTED', 'metal_corrosive'),
+     'h': ['H290', 'H314'], 'signal': 'Danger',
      'var': ['UN2031', '14.1 UN Numarası', 'Uygun olmayan söndürücüler', 'Doğrudan su jeti',
              "nitrik asit: sayısal akut toksisite verisi (LD50, LC50 veya ATE) bu GBF'de bulunmamaktadır"],
      'yok': _UYDURMA, 's3_yok': ['7732-18-5']},
@@ -54,7 +56,7 @@ URUNLER = [
     {'ad': 'Toluen + %0,5 benzen (alevlenir, CMR)', 'bil': [('108-88-3', 99.5), ('71-43-2', 0.5)],
      'h': ['H225', 'H304', 'H315', 'H336', 'H340', 'H350', 'H361D', 'H373'], 'signal': 'Danger',
      'var': ['28730 sayılı Kanserojen', 'Ek-17 madde 48', 'Ek-17 madde 5', 'Alkole dayanıklı köpük',
-             'P5c (Alevlenir sıvılar', '%1.1 – %', 'hesaplanmış – ISO 10156',
+             'P5c (Alevlenir sıvılar', 'Alt: %1.1; üst: belirlenmemiştir', 'hesaplanmış – Le Chatelier (alt sınır)',
              'Aspirasyon zararı (H304): kusturmayın', 'Bu karışım için kimyasal güvenlik değerlendirmesi yapılmamıştır',
              'toluen, benzen: sayısal akut toksisite verisi'],
      'yok': _UYDURMA},
@@ -112,7 +114,7 @@ URUNLER = [
      'test_data': {'gas_type': 'compressed'},
      'phys': {'appearance': 'Gaz', 'color': 'renksiz', 'odor': 'kokusuz'},
      'h': ['H280', 'H360D', 'H373'], 'signal': 'Danger',
-     'var': ['UN 1956', 'SIKIŞTIRILMIŞ GAZ, B.N.O.', 'Alevlenir gaz olarak sınıflandırılmamıştır',
+     'var': ['UN 1956', 'SIKIŞTIRILMIŞ GAZ, B.B.B.', 'Alevlenir gaz olarak sınıflandırılmamıştır',
              'ISO 10156:2017 hesabına göre karışım havada alevlenir değildir', '= 0,07 ≤ 1', 'EIGA Doc 169',
              'hacimce (h/h)'],
      'yok': _UYDURMA + ['Alevlenir gaz (H220)', 'UN 1954', 'P377']},
@@ -321,6 +323,34 @@ def kural_testleri(c) -> int:
         ('ADR Tablo A: su ile tepkimeye giren katı (alevlenir değil) UN 2813; organik peroksit Tip B UN 3101',
          lambda: tr_classify(['H261'], form='solid')['road']['un'] == 'UN 2813'
          and tr_classify(['H241'], form='liquid')['road']['un'] == 'UN 3101'),
+        ('ADR 2025 (TR) 3.1.2.1: 14.2 resmî ad — "ALEVLENEBİLİR SIVI, B.B.B." / "AŞINDIRICI SIVI, B.B.B."; '
+         'veritabanında da B.N.O. kalmadı; katı pirofor UN 2846',
+         lambda: tr_classify(['H225'], form='liquid')['road']['label'] == 'ALEVLENEBİLİR SIVI, B.B.B.'
+         and tr_classify(['H314'], form='liquid')['road']['label'] == 'AŞINDIRICI SIVI, B.B.B.'
+         and tr_classify(['H250'], form='solid')['road']['un'] == 'UN 2846'
+         and not any('B.N.O' in (v.get('name_tr') or '') for v in __import__('json').load(
+             open('data/adr_data.json', encoding='utf-8')).values())),
+        ('SEA Ek-1 Tablo 2.14.2: ≥%90 Ek-6 oksitleyici — Kat.2 (Ca hipoklorit) Tehlike, Kat.3 (persülfat) Dikkat; '
+         'gerekçe Md.11(3)',
+         lambda: (lambda f: f('7778-54-3', 'Ox. Sol. 2') == ('H272', 'Ox. Sol. 2', 'Danger', True)
+                  and f('7775-27-1', 'Ox. Sol. 3') == ('H272', 'Ox. Sol. 3', 'Warning', True))(
+             lambda cas, cl: next((x['h'], x['h_class'], x['signal'], 'Md.11(3)' in x['cutoff_used'])
+                                  for x in phys_calc([C(cas, 95, (cl, 'H272'), annex_vi=True), C('7732-18-5', 5)],
+                                                     form='solid')['extra'] if 'oxidiz' in x['type']))),
+        ('ISO 10156 4.5.1: sıvıda üst patlama sınırı Le Chatelier ile hesaplanmaz (yalnız alt sınır)',
+         lambda: (lambda t: 'lel' in t and 'uel' not in t)(
+             phys_calc([C('64-17-5', 50, ('Flam. Liq. 2', 'H225')), C('67-64-1', 50, ('Flam. Liq. 2', 'H225'))],
+                       form='liquid')['theo_props'])),
+        ('SEA Ek-1 2.16: bileşende H290 yok ama pH 13,5 → metal aşındırıcılık sorusu',
+         lambda: 'PHYS_MET_CORR_UNTESTED' in [d['code'] for d in phys_calc(
+             [C('1310-73-2', 5, ('Skin Corr. 1A', 'H314')), C('7732-18-5', 95)], form='liquid',
+             mixture_ph=13.5)['pending_decisions']]),
+        ('Alevlenir sıvı bileşen tarama eşiğinin altında (%0,5 etanol), parlama noktası yok → bilgi uyarısı',
+         lambda: any('tarama eşiğinin' in w for w in phys_calc(
+             [C('64-17-5', 0.5, ('Flam. Liq. 2', 'H225')), C('7732-18-5', 99.5)], form='liquid')['warnings'])),
+        ('Ek-2 9.1: koku girilmemişse nedenli ifade; hesaplanan buhar basıncında referans sıcaklık',
+         lambda: (lambda t: 'koku değerlendirmesi yapılmamıştır' in t and '20–25 °C' in t)(
+             _pdf_text(c, [('67-64-1', 20), ('64-17-5', 20), ('7732-18-5', 60)]))),
         ('ISO 10156 / EIGA Doc 169 parametre tablosu 13 aydan eski değil (EIGA her Nisan yeni revizyon; '
          'data/iso10156_gas_data.json — kaynakları kontrol edip dogrulama_tarihi güncellenir)',
          lambda: (datetime.date.today() - datetime.date.fromisoformat(iso10156.data()['dogrulama_tarihi'])).days < 395),

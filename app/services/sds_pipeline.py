@@ -464,7 +464,9 @@ async def classify(inp: dict) -> dict:
         except (TypeError, ValueError):
             _user_bp = None
     phys_res = phys_calc(comps, form=form, user_fp=inp.get('user_fp'), user_bp=_user_bp,
-                         test_data=test_data, form_sub=form_sub, fp_status=inp.get('fp_status') or '')
+                         test_data=test_data, form_sub=form_sub, fp_status=inp.get('fp_status') or '',
+                         mixture_ph=mixture_ph,
+                         mixture_skin_corr='H314' in {_h4(h) for h in (clp_res.get('h_codes') or [])})
     stot_res = stot_calc(comps)
 
     eco_comps = [{

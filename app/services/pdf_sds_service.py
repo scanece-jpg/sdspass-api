@@ -2385,6 +2385,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 parts.append(std)
         else:
             parts = ['hesaplanmış']
+            # Referans koşulu: bileşen verileri 20 °C (iç tablo) / 15–30 °C (PubChem, aralık dışı alınmaz)
+            if key in ('vapor_pressure', 'density', 'rel_density'):
+                parts.append('20–25 °C' if lang == 'TR' else '20–25 °C')
             if std and std not in ('', '—'):
                 parts.append(std)
             if err:
@@ -2595,8 +2598,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         _uel_str = _uel_raw.get('display') if isinstance(_uel_raw, dict) else (str(_uel_raw) if _uel_raw else '?')
         _num = lambda x: bool(_re.match(r'^\s*[<>≤≥~]?\s*\d', str(x or '')))
         if _num(_lel_str) and not _num(_uel_str):
-            # Gaz karışımında Le Chatelier yalnız alt sınırı verir (ISO 10156 4.5.1) — "%x – %?" basılmaz
-            _ex_val = _L(f"Alt: %{_lel_str}; üst: belirlenmemiştir", f"Lower: {_lel_str} %; upper: not determined") \
+            # Le Chatelier yalnız alt sınırı verir (ISO 10156 4.5.1; gaz ve sıvı buharı) — "%x – %?" basılmaz
+            _ex_val = _L(f"Alt: %{_lel_str}; üst: belirlenmemiştir (hesapla belirlenemez — ISO 10156:2017 4.5.1; ölçülmemiştir)",
+                         f"Lower: {_lel_str} %; upper: not determined (cannot be calculated; not measured)") \
                 + _method_note('lel')
         elif _num(_lel_str) or _num(_uel_str):
             _ex_val = f"%{_lel_str} – %{_uel_str}" + _method_note('lel')
@@ -2613,6 +2617,13 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                    else f"{_vp_display} hPa") + _method_note('vapor_pressure')
     elif phys.get('vapor_pressure_num'):
         _vp_val = f"{phys.get('vapor_pressure_num')} hPa"
+
+    # (i) Buhar yoğunluğu — bağıl değer, referans hava = 1 (birimsiz sayı tek başına anlamsız)
+    _vd_val = _pv('vapor_density')
+    if (_have(_vd_val) and _re.match(r'^\s*[<>≤≥~]?\s*\d', str(_vd_val))
+            and 'hava' not in str(_vd_val).lower() and 'air' not in str(_vd_val).lower()):
+        _vd_parts = str(_vd_val).split('<br/>', 1)
+        _vd_val = _vd_parts[0] + _L(' (hava = 1)', ' (air = 1)') + ('<br/>' + _vd_parts[1] if len(_vd_parts) > 1 else '')
 
     # (j) Bağıl yoğunluk — yoksa yoğunluk
     _rd_val = _pv('rel_density')
@@ -2639,7 +2650,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
 
     phys_rows = [
         [_L('a) Görünüm', 'a) Appearance'), _app],
-        [_L('b) Koku', 'b) Odour'), _text('odor') or _L('Belirlenmemiştir', 'Not determined')],
+        # Ek-2 9.1: bilgi yoksa nedeni belirtilir — çıplak "Belirlenmemiştir" basılmaz
+        [_L('b) Koku', 'b) Odour'), _or(_text('odor'), default=_L('Belirlenmemiştir (koku değerlendirmesi yapılmamıştır)',
+                                                                 'Not determined (odour not assessed)'))],
         [_L('c) Koku eşiği', 'c) Odour threshold'), _or(_pv('odour_threshold'))],
         [_L('ç) ', 'd) ') + _ph_lbl_row, _or(_ph_val, gas=_NA_G)],
         [_L('d) ', 'e) ') + _mp_lbl, _or(_pv('melting_point', '°C'))],
@@ -2651,7 +2664,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
          _or(_ex_val)],
         [_L('ı) Buhar basıncı', 'k) Vapour pressure'), _or(_vp_val, solid=_NA_S)],
         # Katıda bileşen MW'sinden ideal gaz hesabı anlamsız → her durumda "Uygulanamaz (katı)"
-        [_L('i) Buhar yoğunluğu', 'l) Vapour density'), _NA_S if _is_solid_form else _or(_pv('vapor_density'))],
+        [_L('i) Buhar yoğunluğu', 'l) Vapour density'), _NA_S if _is_solid_form else _or(_vd_val)],
         [_rd_lbl, _or(_rd_val)],
         [_L('k) Çözünürlük', 'n) Solubility'), _or(_pv('solubility', 'mg/L'))],
         [_L('l) Dağılım katsayısı: n-oktanol/su', 'o) Partition coefficient: n-octanol/water'),

@@ -72,6 +72,18 @@ def _to_celsius(val: float, text: str) -> float:
     return round(val, 1)
 
 
+def _temp_ok(text: str) -> bool:
+    """Değerin ölçüm sıcaklığı 15–30 °C aralığında mı (yoğunluk / buhar basıncı tabloları 20 °C
+    referanslıdır). Sıcaklık yazmıyorsa kabul edilir."""
+    m = re.search(r'(?:at|@)\s*(-?\d+(?:\.\d+)?)\s*(?:°|deg\.?\s*)?\s*([CF])\b', text or '', re.I)
+    if not m:
+        return True
+    t = float(m.group(1))
+    if m.group(2).upper() == 'F':
+        t = (t - 32) * 5 / 9
+    return 15.0 <= t <= 30.0
+
+
 def _to_hpa(val: float, text: str) -> float:
     """Farklı basınç birimlerini hPa'ya çevir."""
     tl = text.lower()
@@ -263,7 +275,7 @@ async def fetch_phys(cas: str) -> dict:
                     s = _first_string(sec)
                     if s:
                         v = _num(s)
-                        if v is not None and 0.3 < v < 6.0:
+                        if v is not None and 0.3 < v < 6.0 and _temp_ok(s):
                             props['density'] = round(v, 4)
                     break
 
@@ -272,7 +284,7 @@ async def fetch_phys(cas: str) -> dict:
                     s = _first_string(sec)
                     if s:
                         v = _num(s)
-                        if v is not None and v >= 0:
+                        if v is not None and v >= 0 and _temp_ok(s):
                             props['vapor_pressure'] = _to_hpa(v, s)
                     break
 

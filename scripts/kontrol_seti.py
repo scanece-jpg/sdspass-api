@@ -85,6 +85,36 @@ URUNLER = [
              'Yıkamaya en az 15 dakika devam edin', '≥ 1 - < 2,5%', 'KKDİK Ek-2 A 3.2(b) uyarınca yüzde aralığı'],
      'yok': _UYDURMA + ['10x2.0'],
      's3_yok': ['7732-18-5']},
+    # ── Toz / aerosol / gaz (madde 4, 2026-10-08) — beklenenler SEA Ek-1 tablolarından elle çıkarıldı ──
+    {'ad': 'Toz oksijenli deterjan (oksitleyici kararı: ihtiyatlı)', 'form': 'powder',
+     'bil': [('15630-89-4', 30), ('497-19-8', 50), ('7757-82-6', 15), ('68439-46-3', 5)],
+     'test_data': {'oxidizing_solid': 'not_tested_precautionary'}, 'soru': ('PHYS_OX_SOL_UNTESTED', 'oxidizing_solid'),
+     'phys': {'appearance': 'Toz', 'color': 'beyaz', 'odor': 'kokusuz', 'ph': '10.5'},
+     'h': ['H272', 'H318', 'H302'], 'signal': 'Danger',
+     'var': ['Oks. Kat. 2 H272', 'P220', 'UN 1479', 'Ambalaj grubu II', 'ihtiyatlı olarak sınıflandırılmıştır',
+             'Buhar basıncı Uygulanamaz (katı)'],
+     'yok': _UYDURMA + ['P221', 'Ox. Sol. (ihtiyatlı)']},
+    {'ad': 'Aerosol sprey (etanol, propan/bütan itici)', 'form': 'aerosol',
+     'bil': [('64-17-5', 40), ('74-98-6', 30), ('106-97-8', 20), ('7732-18-5', 10)],
+     'phys': {'appearance': 'Aerosol', 'color': 'renksiz', 'odor': 'alkol'},
+     'h': ['H222', 'H229'], 'signal': 'Danger',
+     'var': ['Aerosol 1 H222 + H229', 'P211', 'P251', 'P410+P412', 'UN 1950', 'AEROSOLLER, alevlenebilir'],
+     'yok': _UYDURMA + ['hPa hesaplanmış', '%Belirlenmemiştir', 'Alevlenir gaz (H220)'], 's3_yok': ['7732-18-5']},
+    {'ad': 'LPG (propan/bütan, sıvılaştırılmış)', 'form': 'gas', 'bil': [('74-98-6', 60), ('106-97-8', 40)],
+     'test_data': {'gas_type': 'liquefied'}, 'phys': {'appearance': 'Gaz', 'color': 'renksiz', 'odor': 'karakteristik'},
+     'h': ['H220', 'H280'], 'signal': 'Danger',
+     'var': ['Alev. Gaz 1 H220 propan', 'Basınçlı Gaz (Sıvılaştırılmış gaz)', 'UN 1965',
+             'HİDROKARBON GAZ KARIŞIMI, SIVILAŞTIRILMIŞ'],
+     'yok': _UYDURMA + ['Alev. Gaz 1A', 'H232', 'UN 3163', 'bileşen varlığı']},
+    {'ad': 'Azot içinde %1 karbon monoksit (alevlenir değil)', 'form': 'gas',
+     'bil': [('630-08-0', 1), ('7727-37-9', 99)],
+     'test_data': {'gas_type': 'compressed', 'flammable_gas': 'not_flammable'},
+     'soru': ('PHYS_FLAM_GAS_UNTESTED', 'flammable_gas'),
+     'phys': {'appearance': 'Gaz', 'color': 'renksiz', 'odor': 'kokusuz'},
+     'h': ['H280', 'H360D', 'H373'], 'signal': 'Danger',
+     'var': ['UN 1956', 'SIKIŞTIRILMIŞ GAZ, B.N.O.', 'Alevlenir gaz olarak sınıflandırılmamıştır',
+             'ISO 10156 hesabı sonucuna göre karışım alevlenir değildir', 'hacimce (h/h)'],
+     'yok': _UYDURMA + ['Alevlenir gaz (H220)', 'UN 1954', 'P377']},
 ]
 
 
@@ -99,6 +129,8 @@ def kural_testleri(c) -> int:
     from app.services.p_code_service import assign_p_codes, select_label_p_codes
     from app.services.sds_pipeline import label_components
     from app.services.audit_jev import derive_facts
+    from app.services.clp_service import signal_word_for, class_signal
+    from app.services.codes_i18n import correct_hclass
     from app.services.sds_pipeline import section3_display
     from app.services.sds_sentence_service import generate_section3
 
@@ -199,6 +231,18 @@ def kural_testleri(c) -> int:
          lambda: generate_section3([C('71-43-2', 1, name='benzen', alt_name='aromatik', disclosure='hide')])[0]['name']
          == 'benzen' and generate_section3([C('9-9-9', 1, name='x', alt_name='aromatik', alt_name_approval='01.01.2026/1',
                                                disclosure='hide')])[0]['name'] == 'aromatik'),
+        # ── Fiziksel sınıflar (madde 4, 2026-10-08) ──
+        ('SEA Ek-1 Tablo 2.14.2: Oks. Kat. 2 (H272) → Tehlike, Kat. 3 → Dikkat',
+         lambda: signal_word_for({'H272'}, [{'h_code': 'H272', 'signal': 'Danger'}]) == 'Danger'
+         and signal_word_for({'H272'}, [{'h_code': 'H272', 'signal': 'Warning'}]) == 'Warning'
+         and class_signal('Ox. Sol. 2') == 'Danger' and class_signal('Ox. Liq. 3') == 'Warning'),
+        ('SEA Ek-1 Tablo 2.12.2 / 2.15: Su ile temas Kat.2 Tehlike; Org. peroksit Tip E Dikkat; Alev. Katı 2 Dikkat',
+         lambda: class_signal('Water-react. 2') == 'Danger' and class_signal('Org. Perox. Type E') == 'Warning'
+         and class_signal('Flam. Sol. 2') == 'Warning'),
+        ('SEA Ek-1 Tablo 2.14.2 (2020): H272 → P210, P220, P280; P221 yok',
+         lambda: (lambda p: {'P210', 'P220', 'P280'} <= set(p) and 'P221' not in p)(assign_p_codes(['H272'])['p_codes'])),
+        ('SEA Ek-1 Tablo 2.2.1 (TR): alevlenir gaz Kategori 1 — "1A" alt kategorisi yok',
+         lambda: correct_hclass('H220', 'Flam. Gas 1A') == 'Flam. Gas 1'),
         ("Ek-2 A 3.2 uçtan uca: panelde 'tam değer' → Bölüm 3'te 20%, aralık notu yok",
          lambda: (lambda t: '≥ 20 - < 25%' not in t and ' 20% ' in t and 'yüzde aralığı olarak' not in t)(
              _pdf_text(c, [('120-51-4', 20), ('7732-18-5', 80)], conc_display='exact'))),
@@ -249,8 +293,8 @@ def main(run_jev: bool) -> int:
 
     c = TestClient(app)
 
-    def comp(cas, conc):
-        r = c.get('/api/v1/sds/substance/lookup', params={'cas': cas, 'form': 'liquid'}).json()
+    def comp(cas, conc, form='liquid'):
+        r = c.get('/api/v1/sds/substance/lookup', params={'cas': cas, 'form': form}).json()
         return {'cas': cas, 'name': r.get('name') or cas, 'name_tr': r.get('name_tr', ''), 'ec_no': r.get('ec_no', ''),
                 'conc': conc, 'concMax': conc, 'hazards': r.get('hazards', []), 'sclRaw': r.get('scl', []),
                 'm_factors': {}, 'ate': None}
@@ -259,19 +303,27 @@ def main(run_jev: bool) -> int:
     dipol_pages = None
     for u in URUNLER:
         sorun = []
-        comps = [comp(a, b) for a, b in u['bil']]
-        calc = {'components': comps, 'form': 'liquid', 'usage': 'industrial', 'lang': 'TR'}
+        form = u.get('form', 'liquid')
+        comps = [comp(a, b, form) for a, b in u['bil']]
+        calc = {'components': comps, 'form': form, 'usage': 'industrial', 'lang': 'TR',
+                'test_data': dict(u.get('test_data') or {})}
+        # Karar sorusu beklenen ürün: karar verilmeden önce soru çıkmalı (bileşen varlığından H kodu verilmemeli)
+        if u.get('soru'):
+            _td0 = {k: v for k, v in calc['test_data'].items() if k != u['soru'][1]}
+            r0 = c.post('/api/v1/sds/calculate', json={**calc, 'test_data': _td0}).json()
+            if u['soru'][0] not in [d.get('code') for d in r0.get('pending_decisions') or []]:
+                sorun.append(f"karar sorusu çıkmadı: {u['soru'][0]}")
         r = c.post('/api/v1/sds/calculate', json=calc).json()
         h = sorted(str(x).split()[0].upper() for x in (r.get('h_codes') or []))
         if h != sorted(x.upper() for x in u['h']):
             sorun.append(f"H kodları {h} — beklenen {sorted(u['h'])}")
         if (r.get('signal') or '') != u['signal']:
             sorun.append(f"uyarı kelimesi {r.get('signal')!r} — beklenen {u['signal']!r}")
-        body = {'lang': 'TR', 'product': {'name': u['ad'][:40], 'form': 'liquid', 'usage': 'industrial',
+        body = {'lang': 'TR', 'product': {'name': u['ad'][:40], 'form': form, 'usage': 'industrial',
                                           'is_detergent': bool(u.get('det')), 'usage_desc': u.get('kullanim', '')},
                 'supplier': {'name': 'Kontrol Seti A.Ş.', 'address': 'Örnek Mah. No:1 İstanbul', 'phone': '0212 000 00 00',
                              'email': 'kontrol@ornek.com'},
-                'components': comps, 'calc_input': calc, 'phys_props': {}, 'phys_methods': {},
+                'components': comps, 'calc_input': calc, 'phys_props': dict(u.get('phys') or {}), 'phys_methods': {},
                 'revision': {'no': '1', 'date': '07.10.2026', 'notes': ''}}
         j = c.post('/api/v1/sds/pdf', json=body).json()
         b64 = next((v for v in j.values() if isinstance(v, str) and len(v) > 5000), None)

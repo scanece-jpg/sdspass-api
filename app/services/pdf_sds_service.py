@@ -2586,7 +2586,11 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     elif _lel_raw or _uel_raw:
         _lel_str = _lel_raw.get('display') if isinstance(_lel_raw, dict) else (str(_lel_raw) if _lel_raw else '?')
         _uel_str = _uel_raw.get('display') if isinstance(_uel_raw, dict) else (str(_uel_raw) if _uel_raw else '?')
-        _ex_val = f"%{_lel_str} – %{_uel_str}" + _method_note('lel')
+        _num = lambda x: bool(_re.match(r'^\s*[<>≤≥~]?\s*\d', str(x or '')))
+        if _num(_lel_str) or _num(_uel_str):
+            _ex_val = f"%{_lel_str} – %{_uel_str}" + _method_note('lel')
+        # Sayısal değer yoksa (örn. aerosolde hesap yazılmadı) "%Belirlenmemiştir – %…" basılmaz; aşağıdaki
+        # genel "Belirlenmemiştir" ifadesi kullanılır
 
     # (ı) Buhar basıncı
     _vp_raw = phys.get('vapor_pressure')

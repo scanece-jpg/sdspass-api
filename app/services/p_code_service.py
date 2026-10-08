@@ -286,9 +286,10 @@ H_TO_P: Dict[str, List[str]] = {
     'H208': ['P210','P212','P230','P233','P280','P371+P380+P375','P401','P501'],
 
     # ── Oksitleyici ───────────────────────────────────────────────────────────
-    'H271': ['P210','P220','P221','P280','P283',
+    # SEA Ek-1 Tablo 2.13.2 / 2.14.2 (RG 10.12.2020/31330): P221 yürürlükte değil; Kat.2-3'te depolama ifadesi yok
+    'H271': ['P210','P220','P280','P283',
              'P306+P360','P371+P380+P375','P370+P378','P420','P501'],
-    'H272': ['P210','P220','P221','P280','P370+P378','P420','P501'],   # P221 zorunlu (CLP Annex III)
+    'H272': ['P210','P220','P280','P370+P378','P501'],
 
     # ── Yanıcı Katı ───────────────────────────────────────────────────────────
     'H228': ['P210','P240','P241','P280','P370+P378','P501'],
@@ -617,8 +618,8 @@ H_BASED_LABEL_FORCED: Dict[str, List[str]] = {
     'H361F':  ['P201', 'P202', 'P263', 'P308+P313'],
     'H361FD': ['P201', 'P202', 'P263', 'P308+P313'],
     # ── Oksitleyici — CLP Annex IV §2.13–§2.14 ───────────────────────────────
-    'H271': ['P210', 'P220', 'P221', 'P280'],
-    'H272': ['P210', 'P220', 'P221', 'P280'],
+    'H271': ['P210', 'P220', 'P280'],
+    'H272': ['P210', 'P220', 'P280'],
     # ── Aspirasyon — KUSMayı UYARMAYIN hayati önem ───────────────────────────
     'H304': ['P301+P310', 'P331', 'P405'],
     # ── Solunum Duyarlılaştırıcı — CLP Annex IV §3.4 ─────────────────────────
@@ -789,7 +790,6 @@ P_SDS_PRIORITY: Dict[str, str] = {
     'P251':           'mandatory',   # Aerosol — delme/yakma (CLP Tablo 2.3.2 zorunlu)
     'P410+P412':      'mandatory',   # Aerosol depolama — güneş/sıcaklık (CLP Tablo 2.3.2 zorunlu)
     'P220':           'mandatory',   # Oksitleyici — yanıcılardan uzak tut (CLP Annex III H271/H272)
-    'P221':           'mandatory',   # Oksitleyici — yanıcılarla karışımı kesinlikle önle (CLP Annex III)
     'P260':           'mandatory',   # Solunum koruma
     'P273':           'mandatory',   # Çevre — salınım
     'P280':           'mandatory',   # KKE

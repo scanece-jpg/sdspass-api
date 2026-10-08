@@ -30,9 +30,11 @@ MANUAL_PHYS_H = {
     'H260', 'H261',                  # Su-reaktif
     'H270', 'H271', 'H272',          # Oksitleyici gaz/katı/sıvı
     'H290',                          # Metal aşındırıcı
+    'H220', 'H221',                  # Alevlenir gaz — karışımda test/ISO 10156 (SEA Ek-1 2.2); bileşen varlığı yetmez
+    'H232',                          # Pirofor gaz — TR SEA'da yok (Tablo 2.2.1 yalnız Kat.1/2); hiçbir yoldan verilmez
 }
 DOMINANCE_MAP = {
-    'H225': ['H226'], 'H224': ['H225', 'H226'],
+    'H225': ['H226'], 'H224': ['H225', 'H226'], 'H220': ['H221'],
     'H271': ['H272'], 'H270': ['H271', 'H272'],
     'H314': ['H315', 'H319'],
     'H318': ['H319'],
@@ -667,7 +669,10 @@ async def classify(inp: dict) -> dict:
 
     # ── Uyarı kelimesi, EUH, P kodları, piktogram, KKD ───────────────────────
     clean = {h.split()[0] for h in h_codes}
-    signal = signal_word_for(clean, clp_res.get('passed', []))   # H411/H412/H413/H362 tek başına → ''
+    # Kategoriye bağlı kodlar (H228, H272, H261, H242) için fiziksel motor/karar sonucunun uyarı kelimesi de verilir
+    _sig_src = list(clp_res.get('passed', [])) + [
+        {'h_code': _h4(r.get('h') or r.get('h_code')), 'signal': r.get('signal')} for r in phys_res.get('results', [])]
+    signal = signal_word_for(clean, _sig_src)   # H411/H412/H413/H362 tek başına → ''
 
     euh = check_euh(comps, mixture_form=form, form_sub=form_sub, usage=usage)
 

@@ -184,8 +184,10 @@ H_TO_ADR: Dict[str, Dict] = {
 # (d) Sınıf 3 duyarlılığı azaltılmış patlayıcılar ve (e) Sınıf 4.1 kendiliğinden tepkimeye
 # girenler portföyde H koduyla ayırt edilemediğinden listede yok.
 # '4.2' yalnızca PG I (piroforik, H250) için; '6.1i' = PG I soluma zehirliliği ((h) bendi).
-_PRIORITY_2135: Dict[str, int] = {
-    '1': 9, '2.3': 8, '2.1': 8, '2.2': 8, '4.2P': 6, '5.2': 5, '6.1i': 4,
+# Sınıf 2 kendi içinde: zehirli (2.3) > alevlenir (2.1) > yanıcı olmayan (2.2) — ADR 2.2.2.1.5 grup sırası
+# (T… > F > A). Önceden üçü eşitti; bileşim sırasına göre 2.2 kazanabiliyordu (LPG → UN 3163).
+_PRIORITY_2135: Dict[str, float] = {
+    '1': 9, '2.3': 8.3, '2.1': 8.2, '2.2': 8.1, '4.2P': 6, '5.2': 5, '6.1i': 4,
 }
 
 # ADR 2.1.3.10 Tehlike önceliği tablosu (ADR 2025 Cilt I, s.101 — birebir aktarım).

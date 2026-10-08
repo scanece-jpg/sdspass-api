@@ -2198,8 +2198,8 @@ def _calc_flam_gas(comps: List[Dict]) -> Dict:
 
     if triggers:
         src = ', '.join(f"{t['name']} (%{t['conc']})" for t in triggers)
-        return {'result_h220': {'h':'H220','h_class':'Flam. Gas 1A','signal':'Danger'},
-                'result_h232': {'h':'H232','h_class':'Flam. Gas 1A — Pirofor','signal':'Danger'},
+        return {'result_h220': {'h':'H220','h_class':'Flam. Gas 1','signal':'Danger'},
+                'result_h232': {'h':'H232','h_class':'Flam. Gas 1 — Pirofor','signal':'Danger'},
                 'source': src}
     return {'result_h220': None, 'result_h232': None, 'source': None}
 
@@ -2280,9 +2280,61 @@ def calculate(comps: List[Dict], form: str = 'liquid',
     if form == 'gas':
         fg = _calc_flam_gas(comps)
         if fg['result_h232']:
+            # TR SEA Ek-1 Tablo 2.2.1'de pirofor gaz alt kategorisi ve H232 ifadesi yoktur (resmî Ek-3'te de
+            # yok) → yalnız Kategori 1 (H220) verilir.
             _pyro_cutoff = '≥ %1 pirofor gaz bileşen'
             primary.append({'type': 'flam_gas',      **fg['result_h220'], 'source': fg['source'], 'cutoff_used': _pyro_cutoff})
-            primary.append({'type': 'flam_gas_pyro', **fg['result_h232'], 'source': fg['source'], 'cutoff_used': _pyro_cutoff})
+        else:
+            # Alevlenir gaz karışımı — SEA Ek-1 2.2 / Tablo 2.2.1 (TR: Kategori 1 ve 2). Karışımın alevlenirliği
+            # test (EN 1839) veya ISO 10156 hesabıyla belirlenir; bileşenin varlığı yetmez (örn. azotta %1 CO
+            # alevlenmez). ISO 10156 için bileşen alevlenme sınırı verisi henüz yok → ara çözüm:
+            #  - bütün bileşenler Kat.1 alevlenir gaz ise karışımın alt alevlenme sınırı da ≤ %13 → Kat.1;
+            #  - alevlenmeyen bileşen varsa kullanıcıdan test / ISO 10156 sonucu istenir (karar sorusu).
+            def _gas_cat(c):
+                hs = {(h.get('h_code') or '').replace('*', '').strip()[:4] for h in (c.get('hazards') or [])}
+                return 1 if 'H220' in hs else 2 if 'H221' in hs else 0
+            _gas_comps = [c for c in comps if float(c.get('concMax') or c.get('conc') or 0) > 0]
+            _flam = [c for c in _gas_comps if _gas_cat(c)]
+            _fg_dec = (test_data.get('flammable_gas') or '').strip()
+            if _flam and not _fg_dec:
+                _nm = lambda c: (c.get('name_tr') or c.get('name') or c.get('cas') or c.get('cas_no') or '')
+                _fsrc = ', '.join(f"{_nm(c)} (%{float(c.get('concMax') or c.get('conc') or 0):g})" for c in _flam)
+                if len(_flam) == len(_gas_comps) and all(_gas_cat(c) == 1 for c in _flam):
+                    primary.append({
+                        'type': 'flam_gas', 'h': 'H220', 'h_class': 'Flam. Gas 1', 'signal': 'Danger',
+                        'source': _fsrc,
+                        'cutoff_used': ('Tüm bileşenler Kategori 1 alevlenir gaz — karışımın alt alevlenme sınırı '
+                                        'de ≤ %13 (SEA Ek-1 Tablo 2.2.1(a))'),
+                    })
+                else:
+                    pending_decisions.append({
+                        'code': 'PHYS_FLAM_GAS_UNTESTED',
+                        'field': 'flammable_gas',
+                        'question': (
+                            f'Gaz karışımında alevlenir gaz bileşeni var: {_fsrc}; ancak karışımda alevlenmeyen '
+                            'bileşen(ler) de bulunuyor. SEA Ek-1 2.2 gereği karışımın alevlenirliği test (EN 1839) '
+                            'veya ISO 10156 hesabıyla belirlenir — bileşenin varlığı yeterli değildir. '
+                            'Sonucu seçin.'),
+                        'test_guidance': (
+                            'Kategori 1: havada hacimce %13 veya daha az bir karışımda tutuşuyor ya da alevlenme '
+                            'aralığı en az 12 puan; Kategori 2: diğer alevlenir gazlar (SEA Ek-1 Tablo 2.2.1). '
+                            'ISO 10156: alevlenir bileşenlerin oranı ve alevlenme sınırları ile inert gazların '
+                            'eşdeğerlik katsayılarından hesaplanır; gaz tedarikçisinin GBF\'sinde veya sertifikasında '
+                            'genellikle yer alır.'),
+                        'options': [
+                            {'value': 'H220', 'label': 'Test / ISO 10156 sonucu — Kategori 1 (H220)',
+                             'effect': 'H220 → GHS02, Tehlike'},
+                            {'value': 'H221', 'label': 'Test / ISO 10156 sonucu — Kategori 2 (H221)',
+                             'effect': 'H221 → piktogram yok, Dikkat'},
+                            {'value': 'not_flammable', 'label': 'Test / ISO 10156 sonucu — alevlenir değil',
+                             'effect': 'H220/H221 atanmaz; Bölüm 16\'ya gerekçe yazılır'},
+                            {'value': 'not_tested_precautionary',
+                             'label': 'Test/hesap yapılmadı — geçici ihtiyatlı H220 (revizyon şartıyla)',
+                             'effect': 'H220 atanır; Bölüm 16\'ya "test bekliyor" notu düşülür'},
+                        ],
+                        'legal_basis': 'SEA Ek-1 2.2 (Tablo 2.2.1)',
+                        'components': [f"{c.get('cas') or c.get('cas_no') or ''} — {_nm(c)}" for c in _flam],
+                    })
 
         ox_gas = [c for c in comps
                   if ((c.get('cas') or c.get('cas_no') or '').strip() in OXIDIZING_GAS_CAS
@@ -2476,7 +2528,7 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                          'effect': 'H271 → GHS03, Danger, B14: UN 1479 PG I'},
                         {'value': 'H272_cat2',
                          'label': 'Test yapıldı — Kategori 2 (Ox. Sol. 2)',
-                         'effect': 'H272 → GHS03, Warning, B14: UN 1479 PG II'},
+                         'effect': 'H272 → GHS03, Danger, B14: UN 1479 PG II'},
                         {'value': 'H272_cat3',
                          'label': 'Test yapıldı — Kategori 3 (Ox. Sol. 3)',
                          'effect': 'H272 → GHS03, Warning, B14: UN 1479 PG III'},
@@ -2487,7 +2539,7 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                          'label': 'Test yapılmadı — uzman kararıyla sınıflandırılmamış',
                          'effect': 'H271/H272 atanmaz; B16\'ya gerekçe yazılır (SEA Md.16(2))'},
                         {'value': 'not_tested_precautionary',
-                         'label': 'Test yapılmadı — geçici ihtiyatlı H272 (revizyon şartıyla)',
+                         'label': 'Test yapılmadı — geçici ihtiyatlı H272, Kategori 2 (revizyon şartıyla)',
                          'effect': 'H272 atanır; B16\'ya "test bekliyor" notu düşülür'},
                     ],
                     'legal_basis': 'CLP Ek-I §2.14 + SEA Madde 16(2)',
@@ -2623,7 +2675,7 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                          'effect': 'H271 → GHS03, Danger, B14: UN 3139 PG I'},
                         {'value': 'H272_cat2',
                          'label': 'Test yapıldı — Kategori 2 (Ox. Liq. 2)',
-                         'effect': 'H272 → GHS03, Warning, B14: UN 3139 PG II'},
+                         'effect': 'H272 → GHS03, Danger, B14: UN 3139 PG II'},
                         {'value': 'H272_cat3',
                          'label': 'Test yapıldı — Kategori 3 (Ox. Liq. 3)',
                          'effect': 'H272 → GHS03, Warning, B14: UN 3139 PG III'},
@@ -2634,7 +2686,7 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                          'label': 'Test yapılmadı — uzman kararıyla sınıflandırılmamış',
                          'effect': 'H271/H272 atanmaz; B16\'ya gerekçe yazılır (SEA Md.16(2))'},
                         {'value': 'not_tested_precautionary',
-                         'label': 'Test yapılmadı — geçici ihtiyatlı H272 (revizyon şartıyla)',
+                         'label': 'Test yapılmadı — geçici ihtiyatlı H272, Kategori 2 (revizyon şartıyla)',
                          'effect': 'H272 atanır; B16\'ya "test bekliyor" notu düşülür'},
                     ],
                     'legal_basis': 'CLP Ek-I §2.13 + SEA Madde 16(2)',
@@ -2695,9 +2747,15 @@ def calculate(comps: List[Dict], form: str = 'liquid',
     # Özel fiziksel tehlike muafiyet/manuel giriş (kullanıcı beyanı)
     # oxidizing_solid/liquid: test sonucu gelirse burada işlenir;
     # 'not_oxidizing' ve 'not_tested_exclude' → H kodu atanmaz (h_map'te yok)
+    # Uyarı kelimeleri SEA Ek-1 etiket tablolarından: Tablo 2.12.2 (su ile temas: Kat.1-2 Tehlike, Kat.3 Dikkat),
+    # 2.13.2 / 2.14.2 (oksitleyici sıvı/katı: Kat.1-2 Tehlike, Kat.3 Dikkat), 2.15 (org. peroksit: A-D Tehlike,
+    # E-F Dikkat), 2.11.2 (kendiliğinden ısınan), 2.2.3 (alevlenir gaz: Kat.1 Tehlike, Kat.2 Dikkat).
+    # İhtiyatlı karar, aynı H kodunu veren en ağır kategoriyle verilir (H272 → Kat.2).
     _MANUAL_H_MAP = {
         'water_reactive':    {'H260': ('H260', 'Water React. 1',   'Danger'),
-                              'H261': ('H261', 'Water React. 2/3', 'Warning')},
+                              'H261_cat2': ('H261', 'Water React. 2', 'Danger'),
+                              'H261_cat3': ('H261', 'Water React. 3', 'Warning'),
+                              'H261': ('H261', 'Water React. 2',   'Danger')},   # kategorisiz eski değer → ağır olan
         'pyrophoric':        {'H250': ('H250', 'Pyr. Liq./Sol. 1', 'Danger')},
         'self_heating':      {'H251': ('H251', 'Self-heat. 1',     'Danger'),
                               'H252': ('H252', 'Self-heat. 2',     'Warning')},
@@ -2705,22 +2763,27 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                               'not_tested_precautionary': ('H290', 'Met. Corr. 1 (ihtiyatlı)', 'Warning')},
         'organic_peroxide':  {'H240': ('H240', 'Org. Perox. Type A', 'Danger'),
                               'H241': ('H241', 'Org. Perox. Type B', 'Danger'),
-                              'H242': ('H242', 'Org. Perox. Type C/D/E/F', 'Warning')},
+                              'H242_CD': ('H242', 'Org. Perox. Type C/D', 'Danger'),
+                              'H242_EF': ('H242', 'Org. Perox. Type E/F', 'Warning'),
+                              'H242': ('H242', 'Org. Perox. Type C/D', 'Danger')},   # kategorisiz eski değer
         'oxidizing_solid':   {'H271':                    ('H271', 'Ox. Sol. 1',          'Danger'),
-                              'H272_cat2':               ('H272', 'Ox. Sol. 2',          'Warning'),
+                              'H272_cat2':               ('H272', 'Ox. Sol. 2',          'Danger'),
                               'H272_cat3':               ('H272', 'Ox. Sol. 3',          'Warning'),
-                              'not_tested_precautionary':('H272', 'Ox. Sol. (ihtiyatlı)','Warning')},
+                              'not_tested_precautionary':('H272', 'Ox. Sol. 2',          'Danger')},
         'oxidizing_liquid':  {'H271':                    ('H271', 'Ox. Liq. 1',          'Danger'),
-                              'H272_cat2':               ('H272', 'Ox. Liq. 2',          'Warning'),
+                              'H272_cat2':               ('H272', 'Ox. Liq. 2',          'Danger'),
                               'H272_cat3':               ('H272', 'Ox. Liq. 3',          'Warning'),
-                              'not_tested_precautionary':('H272', 'Ox. Liq. (ihtiyatlı)','Warning')},
+                              'not_tested_precautionary':('H272', 'Ox. Liq. 2',          'Danger')},
+        'flammable_gas':     {'H220':                    ('H220', 'Flam. Gas 1',         'Danger'),
+                              'H221':                    ('H221', 'Flam. Gas 2',         'Warning'),
+                              'not_tested_precautionary':('H220', 'Flam. Gas 1',         'Danger')},
     }
     for field, h_map in _MANUAL_H_MAP.items():
         val = (test_data.get(field) or '').strip()
         if val and val != 'na' and val in h_map:
             h, h_class, signal = h_map[val]
             _test_n = {'metal_corrosive': 'UN C.1', 'oxidizing_liquid': 'UN L.1/L.2',
-                       'oxidizing_solid': 'UN O.1'}.get(field, '')
+                       'oxidizing_solid': 'UN O.1', 'flammable_gas': 'EN 1839 / ISO 10156'}.get(field, '')
             if val == 'not_tested_precautionary':
                 _src = 'Test yapılmadı — ihtiyatlı sınıflandırma (kullanıcı kararı)'
                 _cut = 'Test yapılmadı — ihtiyatlı sınıflandırma (bkz. Bölüm 16)'
@@ -2735,6 +2798,7 @@ def calculate(comps: List[Dict], form: str = 'liquid',
         'metal_corrosive':  ('Metallere aşındırıcılık (H290)', 'Corrosive to metals (H290)', 'UN C.1'),
         'oxidizing_liquid': ('Oksitleyici sıvı (H271/H272)', 'Oxidising liquid (H271/H272)', 'UN L.1/L.2'),
         'oxidizing_solid':  ('Oksitleyici katı (H271/H272)', 'Oxidising solid (H271/H272)', 'UN O.1'),
+        'flammable_gas':    ('Alevlenir gaz (H220/H221)', 'Flammable gas (H220/H221)', 'EN 1839 / ISO 10156'),
     }
     classification_notes = []
     for field, (tr_n, en_n, test_n) in _NOTE_NAMES.items():
@@ -2751,6 +2815,12 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                       'sınıflandırılmamıştır.',
                 'EN': f'{en_n}: the mixture has not been tested ({test_n}); not classified based on '
                       'expert judgement.'})
+        elif val == 'not_flammable':
+            classification_notes.append({
+                'TR': f'{tr_n}: test (EN 1839) veya ISO 10156 hesabı sonucuna göre karışım alevlenir değildir '
+                      '(tedarikçi beyanı).',
+                'EN': f'{en_n}: the mixture is not flammable based on a test (EN 1839) or an ISO 10156 calculation '
+                      '(supplier declaration).'})
         elif val in ('not_corrosive', 'not_oxidizing'):
             classification_notes.append({
                 'TR': f'{tr_n}: {test_n} test sonucuna göre sınıflandırılmamıştır (tedarikçi beyanı).',
@@ -2786,6 +2856,20 @@ def calculate(comps: List[Dict], form: str = 'liquid',
             elif isinstance(_v, dict) and _v.get('text') and not _v.get('measured'):
                 theo_props[_k] = {**_v, 'text': None, 'value': None, 'display': 'Belirlenmemiştir',
                                   'estimate_only': True}
+
+    # Aerosolde bileşen hesabı itici gazı (sıvılaştırılmış propan/bütan vb.) içermeyen sıvı karışım
+    # formülleridir: buhar basıncı (kap içi basınç bar düzeyindeyken birkaç hPa), alevlenme sınırları (yalnız
+    # çözücü), yoğunluk/viskozite/çözünürlük yanıltıcı olur → ölçüm girilmediyse Bölüm 9'a değer yazılmaz.
+    if form == 'aerosol':
+        for _k, _v in list(theo_props.items()):
+            if not isinstance(_v, dict) or _v.get('measured'):
+                continue
+            if _v.get('value') is not None or _v.get('text'):
+                theo_props[_k] = {**_v, 'text': None, 'value': None, 'display': 'Belirlenmemiştir',
+                                  'estimate': _v.get('value'), 'measured': False, 'estimate_only': True,
+                                  'method': '—', 'standard': '',
+                                  'note': 'Aerosol: bileşen hesabı itici gazı kapsamadığından değer yazılmaz — '
+                                          'kap içeriği için ölçüm girin.'}
 
     # Pastada bileşen viskozitelerinden hesap (çoğunlukla su/çözücü) ürünün gerçek kıvamını
     # yansıtmaz (koyulaştırıcı, katı dolgu) → ölçüm girilmediyse Bölüm 9'a değer yazılmaz.

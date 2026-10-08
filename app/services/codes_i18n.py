@@ -1134,14 +1134,14 @@ H_CODE_TO_CANONICAL_CLASS: dict = {
     # ── Fiziksel tehlikeler — physical_hazard_service.py / PhysicalEngine ────────
     # Bu kodların h_class'ı component hazards listesinde yoksa (fiziksel motor sonucu)
     # boş kalır; buradaki canonical değer PDF sınıflandırma tablosunu düzeltir.
-    'H220': 'Flam. Gas 1A',
+    'H220': 'Flam. Gas 1',    # SEA Ek-1 Tablo 2.2.1 (TR): yalnız Kategori 1 ve 2 — AB'deki 1A/1B alt kategorisi yok
     'H221': 'Flam. Gas 2',
     'H222': 'Aerosol 1',
     'H223': 'Aerosol 3',
     'H224': 'Flam. Liq. 1',
     'H225': 'Flam. Liq. 2',
     'H226': 'Flam. Liq. 3',   # ← fiziksel motor / kullanıcı FP girişi için kritik
-    'H232': 'Flam. Gas 1A',   # Pirofor gaz
+    'H232': 'Flam. Gas 1',    # Pirofor gaz (SEA Ek-1 Tablo 2.2.1 Kategori 1)
     'H270': 'Ox. Gas 1',
     # H271 ve H272 burada YOK — form bağımlı: Ox. Sol. 1/2/3 (katı) veya Ox. Liq. 1/2/3 (sıvı)
     # Fiziksel motor ve DB verisindeki h_class korunur; overwrite yapılmaz.

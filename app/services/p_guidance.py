@@ -46,7 +46,9 @@ _FLAM_LIQ = [('P240', 'S', 'S'), ('P241', 'S', 'S'), ('P242', 'S', 'S'), ('P243'
 _SELF_REACT = [('P210', 'K', 'K'), ('P220', 'O', 'O'), ('P234', 'K', 'K'), ('P280', 'K', 'K'),
                ('P370+P378', 'C', 'C'), ('P403+P235', 'K', 'K'), ('P411', 'C', 'C'),
                ('P420', 'C', 'C'), _P501]
-_OXID = [('P210', 'K', 'K'), ('P220', 'S', 'S'), ('P221', 'K', 'K'), ('P280', 'O', 'O'),
+# SEA Ek-1 Tablo 2.13.2 / 2.14.2 (2020 değişikliği): tedbir ifadeleri P210, P220, P280 — P221 kaldırıldı
+# (2013 tarihli Rehber hâlâ P221'i gösterir; yönetmelik tablosu esas alınır)
+_OXID = [('P210', 'K', 'K'), ('P220', 'K', 'K'), ('P280', 'O', 'O'),
          ('P370+P378', 'C', 'C'), _P501]
 _AQ = [('P273', 'O', 'O'), ('P391', 'O', 'O'), _P501]
 
@@ -142,7 +144,7 @@ GUIDANCE: Dict[str, List[Tuple[str, str, str]]] = {
 
 # Md. 30(1) — biri varken diğeri gereksiz (rehberdeki "…zaten varsa kullanmayın/yoksa" notları)
 REDUNDANT: Dict[str, List[str]] = {
-    'P260': ['P261'], 'P284': ['P285'], 'P201': ['P202'], 'P234': ['P406'], 'P221': ['P220'],
+    'P260': ['P261'], 'P284': ['P285'], 'P201': ['P202'], 'P234': ['P406'],
     'P301+P310': ['P301+P312'],
     'P301+P330+P331': ['P330'],
     'P303+P361+P353': ['P302+P352', 'P361+P364'],

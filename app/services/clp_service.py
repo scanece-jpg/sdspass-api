@@ -170,18 +170,37 @@ def is_danger(h_codes_set: set, clp_passed=None) -> bool:
     """
     if h_codes_set & DANGER_H:
         return True
-    if 'H228' in h_codes_set:
-        if clp_passed:
-            return any(
-                p.get('h_code') == 'H228' and p.get('signal') == 'Danger'
-                for p in clp_passed
-            )
-        return True  # bilgi yoksa muhafazakâr: Danger
+    # Kategoriye bağlı uyarı kelimesi (SEA Ek-1 Tablo 2.7.2, 2.12.2, 2.13.2/2.14.2, 2.15): H228 Kat.1, H261 Kat.2,
+    # H272 Kat.2, H242 Tip C/D → Tehlike; diğer kategoriler Dikkat. Kategori, sınıflandırma satırının (clp_passed /
+    # fiziksel motor sonucu) uyarı kelimesinden okunur.
+    for _code in ('H228', 'H261', 'H272', 'H242'):
+        if _code in h_codes_set:
+            if not clp_passed:
+                return True  # bilgi yoksa muhafazakâr: Danger
+            if any(p.get('h_code') == _code and p.get('signal') == 'Danger' for p in clp_passed):
+                return True
     return False
 
 # SEA Ek-1: uyarı kelimesi KULLANILMAYAN sınıflar — Tablo 4.1.4 (Sucul Kronik 2, 3, 4) ve Tablo 3.7.3
 # (laktasyon ek kategorisi). Yalnız bu kodları taşıyan madde/karışımda uyarı kelimesi basılmaz.
 NO_SIGNAL_H = {'H411', 'H412', 'H413', 'H362'}
+
+
+def class_signal(h_class: str) -> str:
+    """Kategoriye bağlı fiziksel sınıfların uyarı kelimesi (SEA Ek-1 Tablo 2.7.2, 2.12.2, 2.13.2/2.14.2, 2.15):
+    Alev. Katı 1, Su ile temas 1-2, Oksitleyici 1-2, Org. peroksit / öz-reaktif A-D → 'Danger'; diğerleri 'Warning'."""
+    import re as _r
+    c = str(h_class or '').replace('*', '').strip()
+    m = _r.search(r'(?i)\b(?:type|tip)\s*([A-G])\b', c)
+    if m:
+        return 'Danger' if m.group(1).upper() in 'ABCD' else 'Warning'
+    m = _r.search(r'(\d)\s*$', c)
+    if not m:
+        return 'Danger'
+    n = int(m.group(1))
+    if _r.search(r'(?i)flam\.?\s*sol|alev\.?\s*kat', c):
+        return 'Danger' if n == 1 else 'Warning'
+    return 'Danger' if n <= 2 else 'Warning'
 
 
 def signal_word_for(h_codes, clp_passed=None) -> str:

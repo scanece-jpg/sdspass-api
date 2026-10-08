@@ -411,6 +411,17 @@ def c_t14(ctx):
         exp.append('8')
     if h & {'H224', 'H225', 'H226'}:
         exp.append('3')
+    # Aerosol → UN 1950 (Sınıf 2); gaz: alevlenir → 2.1, yalnız basınçlı gaz → 2.2 (ADR 2.2.2.1.5);
+    # oksitleyici katı/sıvı → 5.1 (ADR 2.2.51)
+    if h & {'H222', 'H223', 'H229'}:
+        return (('uygun', 'Aerosol: UN 1950 14\'te var.') if re.search(r'(?i)\bUN\s*1950\b', s14) else
+                ('eksik', '2. bölümde aerosol sınıflandırması var; 14\'te UN 1950 bulunamadı.'))
+    if h & {'H220', 'H221'}:
+        exp.append('2.1')
+    elif h & {'H280', 'H281'} and not h & {'H330', 'H331', 'H314', 'H270'}:
+        exp.append('2.2')
+    if h & {'H271', 'H272'} and not exp:
+        exp.append('5.1')
     # ADR 2.2.9.1.10: Sucul Akut 1 / Kronik 1 / Kronik 2 → başka sınıf yoksa Sınıf 9 (UN 3082 sıvı, UN 3077 katı)
     if not exp and h & {'H400', 'H410', 'H411'}:
         un9 = re.search(r'(?i)\bUN\s*(3082|3077)\b', s14)
@@ -428,7 +439,8 @@ def c_t32(ctx):
     s2, s3 = ctx['secs'].get('2', ''), ctx['secs'].get('3', '').lower()
     if not ({h[:4] for h in _h(s2)} & LABEL_COMP_H):
         return 'uygun', '2.2\'de etikette adı yazılacak bileşen gerektiren sınıflandırma yok (SEA Md.20(3)(b)).'
-    m = re.search(r'(?is)(?:zararlı bileşen\w*|tehlikeli bileşen\w*|içerir)\s*:?\s*(.{0,250})', s2)
+    # "içerir" yalnız iki noktayla ("… içerir:") — H280 metnindeki "Basınçlı gaz içerir;" bileşen listesi değildir
+    m = re.search(r'(?is)(?:zararlı bileşen\w*\s*:?|tehlikeli bileşen\w*\s*:?|içerir\s*:)\s*(.{0,250})', s2)
     if not m:
         return 'kdu', '2.2\'de zararlı bileşen adı bulunamadı.'
     # Yalnız ilk dolu satır: sonrası 2.3 veya başka bir cümle

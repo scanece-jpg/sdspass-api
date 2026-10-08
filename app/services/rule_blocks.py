@@ -188,31 +188,3 @@ _ALWAYS_BLOCKS: list[tuple[str, str]] = [
 ]
 
 
-def get_blocks_for_hcodes(h_codes: list[str]) -> list[dict]:
-    """
-    H kodlarına göre ilgili kural bloklarını döner.
-    Her zaman dahil edilen SDS gereklilikleri + H koduna özgü kurallar.
-    """
-    blocks: list[dict] = []
-
-    # 1. Her zaman dahil (SDS bölüm gereklilikleri)
-    for title, text in _ALWAYS_BLOCKS:
-        blocks.append({
-            "type": "text",
-            "text": f"[{title}]\n{text}",
-        })
-
-    # 2. H koduna özgü kurallar
-    seen: set[str] = set()
-    for hcode in h_codes:
-        key = hcode[:4]  # H314 1A → H314
-        if key in seen or key not in _H_RULES:
-            continue
-        seen.add(key)
-        title, text = _H_RULES[key]
-        blocks.append({
-            "type": "text",
-            "text": f"[{key} — {title}]\n{text}",
-        })
-
-    return blocks

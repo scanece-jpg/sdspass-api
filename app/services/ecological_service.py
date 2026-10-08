@@ -30,35 +30,54 @@ import re
 import math
 
 
-# ─── PBT/vPvB BİLİNEN MADDELER ──────────────────────────────────────────────
-# ECHA SVHC listesinden seçilmiş PBT maddeler
-PBT_CAS = {
-    '57-74-9',   # chlordane
-    '319-84-6',  # alpha-HCH
-    '319-85-7',  # beta-HCH
-    '58-89-9',   # lindane (gamma-HCH)
-    '72-54-8',   # DDD
-    '50-29-3',   # DDT
-    '76-44-8',   # heptachlor
-    '118-74-1',  # hexachlorobenzene
-    '87-68-3',   # hexachlorobutadiene
-    '757-58-4',  # hexaethyl tetraphosphate
-    '36355-01-8',# hexabromobiphenyl
-    '67774-32-7',# polychlorinated biphenyls (PCB)
-    # ECHA SVHC PBT — KKDİK Ek-17 uyarınca ek maddeler
-    '85535-84-8',# SCCP (kısa zincirli klorlu parafinler) — PBT/vPvB
-    '68920-70-7',# MCCP (orta zincirli klorlu parafinler, CAS aralığı)
-    '72629-94-8',# decabromodiphenyl ether (deca-BDE)
-    '1163-19-5', # decabromodiphenyl oxide
+# ─── PBT/vPvB / ENDOKRİN BOZUCU — RESMÎ LİSTELERDEN ───────────────────────────
+# Kaynak: data/svhc_candidate_list.json (ECHA Aday Liste dışa aktarımı; KKDİK Md.47 gerekçeleri).
+# Önceden elle yazılmış listeler kullanılıyordu: 16 "PBT" maddesinin 13'ü SVHC'de yoktu (KOK maddeleri),
+# 757-58-4 / 72-54-8 / 67774-32-7 hiçbir resmî listede yoktu, HBCD vPvB yazılmıştı (SVHC: PBT).
+def _load_svhc_sets():
+    import json as _json
+    from pathlib import Path as _Path
+    pbt, vpvb, ed_env, why = set(), set(), set(), {}
+    try:
+        _d = _json.loads((_Path(__file__).resolve().parent.parent.parent / 'data' / 'svhc_candidate_list.json')
+                         .read_text(encoding='utf-8'))
+        for _x in _d.get('substances') or []:
+            _c = _x.get('concern') or ''
+            for _cas in re.split(r'[,;\s]+', _x.get('cas') or ''):
+                if not re.fullmatch(r'\d{2,7}-\d\d-\d', _cas):
+                    continue
+                if 'PBT' in _c:
+                    pbt.add(_cas)
+                if 'vPvB' in _c:
+                    vpvb.add(_cas)
+                if 'Endocrine disrupting properties (Article 57(f) - environment)' in _c:
+                    ed_env.add(_cas)
+                why[_cas] = _x.get('concern_tr') or _c
+    except Exception as _e:
+        print(f'[ECO] SVHC listesi okunamadı: {_e}')
+    return pbt, vpvb, ed_env, why
+
+
+PBT_CAS, VPVB_CAS, ENDOCRINE_CAS, SVHC_REASON = _load_svhc_sets()
+
+# KOK Yönetmeliği (RG 30595) Ek-1 — kalıcı organik kirleticiler (Stockholm Sözleşmesi). CAS'lar resmî ekten
+# (sds-knowledge/tr/kok-30595-ekler.md). SVHC'de PBT olarak listelenmeyenler için Bölüm 12.5 notu bu kaynağa dayanır.
+POP_CAS = {
+    '50-29-3',    # DDT
+    '57-74-9',    # klordan
+    '58-89-9', '319-84-6', '319-85-7', '608-73-1',   # lindan dâhil hekzaklorosiklohekzanlar
+    '76-44-8',    # heptaklor
+    '118-74-1',   # hekzaklorobenzen
+    '36355-01-8', # hekzabromobifenil
+    '87-68-3',    # hekzaklorobütadien
+    '608-93-5',   # pentaklorobenzen
+    '70776-03-3', # poliklorlu naftalinler
+    '1336-36-3',  # poliklorlu bifeniller (PCB)
+    '1163-19-5',  # dekabromodifenil eter
+    '40088-47-9', '32534-81-9', '36483-60-0', '68928-80-3',   # tetra/penta/hekza/heptaBDE
 }
 
-VPVB_CAS = {
-    '25637-99-4', # hexabromocyclododecane (HBCD)
-    '3194-55-6',  # HBCD isomers
-    '36483-57-5', # HBCD
-}
-
-# Ozon tabakasına zararlı (H420) — Montreal Protokolü kapsamındaki maddeler.
+# Ozon tabakasına zararlı (H420) — Ozon Yönetmeliği Ek-5 / Montreal Protokolü kapsamındaki maddeler.
 # Kloroform, trikloroetilen ve metil klorür ozon tüketici değildir (H420 almaz) → listeden çıkarıldı.
 # Bileşenin uyumlaştırılmış kaydında H420 varsa listeden bağımsız olarak dikkate alınır.
 OZONE_CAS = {
@@ -68,12 +87,29 @@ OZONE_CAS = {
     '76-14-2',   # CFC-114
     '76-15-3',   # CFC-115
     '75-72-9',   # CFC-13
-    '354-23-4',  # CFC-123
+    '354-23-4',  # HCFC-123a (C2HF3Cl2 — Grup IX HCFC-123)
     '75-63-8',   # halon-1301
     '353-59-3',  # halon-1211
     '74-83-9',   # methyl bromide
     '56-23-5',   # carbon tetrachloride
     '71-55-6',   # 1,1,1-trichloroethane (metil kloroform)
+    # Ozon Yönetmeliği (RG 30031) Ek-5 — formülle listelenen maddelerin yaygın olanları; CAS ↔ formül
+    # PubChem ile doğrulandı (2026-10-08)
+    '354-56-3',  # CFC-111 (C2FCl5)
+    '76-12-0',   # CFC-112 (C2F2Cl4)
+    '124-73-2',  # halon-2402 (C2F4Br2)
+    '1511-62-2', # HBFC-22 B1 (CHF2Br)
+    '75-43-4',   # HCFC-21 (CHFCl2)
+    '75-45-6',   # HCFC-22 (CHF2Cl)
+    '593-70-4',  # HCFC-31 (CH2FCl)
+    '306-83-2',  # HCFC-123 (C2HF3Cl2)
+    '2837-89-0', # HCFC-124 (C2HF4Cl)
+    '75-88-7',   # HCFC-133a (C2H2F3Cl)
+    '1717-00-6', # HCFC-141b (CH3CFCl2)
+    '75-68-3',   # HCFC-142b (CH3CF2Cl)
+    '422-56-0',  # HCFC-225ca
+    '507-55-1',  # HCFC-225cb
+    '74-97-5',   # bromoklorometan (Grup X)
 }
 
 # Hızlı biyobozunur (readily biodegradable) — OECD 301 geçen
@@ -495,10 +531,13 @@ def assess_pbt(
         # Bilinen PBT/vPvB listesi
         if cas in PBT_CAS:
             p_result = b_result = t_result = "Evet"
-            notes.append("ECHA SVHC listesinde PBT olarak tanımlanmış")
+            notes.append("SVHC Aday Listesinde PBT olarak yer alır")
+        elif cas in POP_CAS:
+            p_result = b_result = t_result = "Evet"
+            notes.append("KOK Yönetmeliği Ek-1 kalıcı organik kirletici (Stockholm Sözleşmesi)")
         if cas in VPVB_CAS:
             p_result = b_result = "Evet (vPvB)"
-            notes.append("ECHA SVHC listesinde vPvB olarak tanımlanmış")
+            notes.append("SVHC Aday Listesinde vPvB olarak yer alır")
 
         # P — Kalıcılık
         if cas in READILY_BIODEGRADABLE_CAS:
@@ -638,21 +677,8 @@ def assess_biodegradability(
 
 # ─── EK VERİTABANLARI ────────────────────────────────────────────────────────
 
-# H420 — Ozon tabakasına zararlı (CLP Annex VI 2023)
-H420_CAS = OZONE_CAS  # Aynı liste, farklı H kodu
 
-# Endokrin bozucu (ECHA ED Assessment 2023)
-ENDOCRINE_CAS = {
-    '80-05-7',   # bisphenol A (BPA)
-    '84-66-2',   # diethyl phthalate (DEP)
-    '117-81-7',  # DEHP
-    '85-68-7',   # BBP
-    '84-74-2',   # DBP
-    '57-63-6',   # ethinyl estradiol
-    '50-28-2',   # estradiol
-    '8007-45-2', # coal tar
-    '1336-36-3', # PCB (total)
-}
+# Endokrin bozucu — ENDOCRINE_CAS yukarıda SVHC listesinden (KKDİK Md.47/1-e, çevre) yüklenir.
 
 # Toprak/sediment toksisitesi — bilinen EC50 (mg/kg kuru ağırlık)
 SOIL_EC50_DB: Dict[str, float] = {
@@ -742,7 +768,7 @@ def assess_soil_mobility(
 def check_endocrine_disruptors(comp_list: List[Dict]) -> List[str]:
     """
     SDS 12.6 — Endokrin bozucu madde tespiti
-    ECHA ED Assessment listesi (2023)
+    SVHC Aday Listesi — çevre için endokrin bozucu (KKDİK Md.47/1-e)
     """
     found = []
     for comp in comp_list:

@@ -314,9 +314,28 @@ def kural_testleri(c) -> int:
          lambda: 'H222' in [x['h'] for x in phys_calc([C('8042-47-5', 60), C('112-34-5', 30), C('124-38-9', 10)],
                                                      form='aerosol')['results']]
          and [x['h'] for x in phys_calc([C('7732-18-5', 98), C('7727-37-9', 2)], form='aerosol')['results']] == ['H229']),
-        ('SEA Ek-1 2.7: %2 karbon siyahı tozda H228 otomatik verilmez, test (N.1) sorusu sorulur',
+        ('SEA Ek-1 2.7: H228 kayıtlı bileşen (%2 kükürt) tozda H228 otomatik verilmez, test (N.1) sorusu sorulur; '
+         'kaydında H228 olmayan karbon siyahı için elle liste yok — soru da sınıf da çıkmaz',
          lambda: (lambda r: not r['results'] and 'PHYS_FLAM_SOL_UNTESTED' in [d['code'] for d in r['pending_decisions']])(
+             phys_calc([C('7704-34-9', 2, ('Flam. Sol. 2', 'H228')), C('471-34-1', 98)], form='powder'))
+         and (lambda r: not r['results'] and 'PHYS_FLAM_SOL_UNTESTED' not in [d['code'] for d in r['pending_decisions']])(
              phys_calc([C('1333-86-4', 2), C('471-34-1', 98)], form='powder'))),
+        ('Tablo denetimi 2026-10-08: alevlenir sıvı bileşen kategorisi önce bileşen kaydından (SEA Md.6(1)(c)) — '
+         'o-ksilen Ek-6 H226 (tablodaki 17 °C ile H225 olmaz); diglyme H226 atlanmaz',
+         lambda: [x['h'] for x in phys_calc([C('95-47-6', 20, ('Flam. Liq. 3', 'H226')), C('7732-18-5', 80)],
+                                           form='liquid', fp_status='no_measurement')['results']] == ['H226']
+         and [x['h'] for x in phys_calc([C('111-96-6', 30, ('Flam. Liq. 3', 'H226')), C('7732-18-5', 70)],
+                                       form='liquid', fp_status='no_measurement')['results']] == ['H226']),
+        ('Tablo denetimi 2026-10-08: ADR Tablo A adlı girişler — n-heptan UN1206 (1-kloropropan değil), '
+         'NaOH katı UN1823, kalsiyum oksit ADR\'ye tabi değil, %10 H2O2 UN2984, %37 formaldehit UN2209',
+         lambda: (lambda L: L('142-82-5', 100, 'liquid')['un_no'] == 'UN1206'
+                  and L('1310-73-2', 99, 'solid')['un_no'] == 'UN1823'
+                  and L('1310-73-2', 30, 'liquid')['un_no'] == 'UN1824'
+                  and L('1305-78-8', 95, 'solid') is None
+                  and L('7722-84-1', 10, 'liquid')['un_no'] == 'UN2984'
+                  and L('50-00-0', 37, 'liquid')['un_no'] == 'UN2209')(
+             lambda cas, conc, st: __import__('app.services.transport_adr_service', fromlist=['x'])
+             .lookup_by_cas(cas, concentration=conc, physical_state=st))),
         ('ADR 2.2.8.1.5.3 (c)(ii): yalnız H290 → Sınıf 8 PG III (UN 1760)',
          lambda: (lambda d: d['class'] == '8' and d['pg'] == 'III' and d['un'] == 'UN 1760')(
              tr_classify(['H290'], form='liquid')['road'])),

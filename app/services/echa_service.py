@@ -203,29 +203,6 @@ def lookup_archive(cas: str) -> dict | None:
 # PubChem → ECHA C&L parser
 # ---------------------------------------------------------------------------
 
-def _extract_notif_count(summary_text: str) -> int:
-    """
-    'Aggregated GHS information provided per 13886 reports by companies
-     from 79 notifications ...'
-    → 79
-    'The GHS information provided by 1 company from 1 notification ...'
-    → 1
-    'Joint Notification' → 9999 (en yüksek öncelik)
-    """
-    if not summary_text:
-        return 0
-    t = summary_text.lower()
-    if 'joint notification' in t:
-        return 9999
-    # "from N notifications"
-    m = re.search(r'from\s+(\d+)\s+notification', t)
-    if m:
-        return int(m.group(1))
-    # "N notification"
-    m = re.search(r'(\d+)\s+notification', t)
-    if m:
-        return int(m.group(1))
-    return 1
 
 
 def _parse_ghs_groups(info_list: list) -> list:
@@ -684,71 +661,6 @@ async def _get_pubchem_cid(cas: str, client: httpx.AsyncClient) -> int | None:
     return None
 
 
-async def fetch_pubchem_properties(cas: str) -> dict:
-    """
-    PubChem'den fiziksel/kimyasal özellikler çek.
-    SDS Bölüm 9 (fiziksel/kimyasal özellikler) ve Bölüm 11 (toksikoloji) için.
-
-    Döndürülen alanlar:
-      iupac_name, molecular_formula, molecular_weight,
-      boiling_point, melting_point, flash_point, vapor_pressure,
-      water_solubility, log_kow (XLogP), ld50
-    """
-    cas = cas.strip()
-    try:
-        async with httpx.AsyncClient(timeout=12.0, follow_redirects=True) as client:
-            cid = await _get_pubchem_cid(cas, client)
-            if not cid:
-                return {}
-
-            # Temel özellikler
-            props_r = await client.get(
-                f'https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/{cid}/property/'
-                'IUPACName,MolecularFormula,MolecularWeight,XLogP,'
-                'HBondDonorCount,HBondAcceptorCount/JSON',
-                timeout=8.0
-            )
-            props = {}
-            if props_r.status_code == 200:
-                p = props_r.json().get('PropertyTable', {}).get('Properties', [])
-                props = p[0] if p else {}
-
-            # GHS view'dan fiziksel veriler (BP, MP, FP, buhar basıncı, çözünürlük, LD50)
-            view_r = await client.get(
-                f'https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/{cid}/JSON/'
-                '?heading=Physical+and+Chemical+Properties',
-                timeout=12.0
-            )
-            physical = {}
-            if view_r.status_code == 200:
-                physical = _parse_pubchem_physical(view_r.json())
-
-            # LD50 verisi
-            tox_r = await client.get(
-                f'https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/{cid}/JSON/'
-                '?heading=Acute+Effects',
-                timeout=12.0
-            )
-            ld50 = {}
-            if tox_r.status_code == 200:
-                ld50 = _parse_pubchem_ld50(tox_r.json())
-
-            return {
-                'cid'               : cid,
-                'iupac_name'        : props.get('IUPACName', ''),
-                'molecular_formula' : props.get('MolecularFormula', ''),
-                'molecular_weight'  : props.get('MolecularWeight'),
-                'log_kow'           : props.get('XLogP'),
-                'hbond_donors'      : props.get('HBondDonorCount'),
-                'hbond_acceptors'   : props.get('HBondAcceptorCount'),
-                **physical,
-                **ld50,
-                'source'            : 'PubChem',
-            }
-
-    except Exception as e:
-        print(f'[PubChem properties] {cas}: {e}')
-    return {}
 
 
 def _parse_pubchem_physical(data: dict) -> dict:
@@ -1183,18 +1095,3 @@ def _auto_save_custom(cas: str, echa_result: dict):
         print(f'[auto_save_custom] {ex}')
 
 
-# Sync wrapper (non-async ortamlar için)
-def lookup_substance_sync(cas: str) -> dict:
-    try:
-        loop = asyncio.get_event_loop()
-        if loop.is_running():
-            return lookup_local(cas) or {
-                'cas': cas, 'name': '', 'ec_no': '', 'reach_no': '',
-                'source': 'not_found', 'h_codes': [], 'hazard_classes': []
-            }
-        return loop.run_until_complete(lookup_substance(cas))
-    except Exception:
-        return lookup_local(cas) or {
-            'cas': cas, 'name': '', 'ec_no': '', 'reach_no': '',
-            'source': 'not_found', 'h_codes': [], 'hazard_classes': []
-        }

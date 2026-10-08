@@ -104,7 +104,7 @@ CAS_CLASS: Dict[str, str] = {
     '64771-72-8': 'aliphatic_hc', '8042-47-5': 'aliphatic_hc', '64741-65-7': 'aliphatic_hc',
     '127-18-4': 'halogenated_hc', '75-09-2': 'halogenated_hc', '79-01-6': 'halogenated_hc',
     # sabun
-    '61790-79-7': 'soap', '61789-30-8': 'soap', '61790-44-6': 'soap', '822-16-2': 'soap',
+    '61789-30-8': 'soap', '822-16-2': 'soap',   # 61790-79-7 / 61790-44-6 geçersiz CAS'tı — çıkarıldı
     '143-18-0': 'soap', '61789-31-9': 'soap', '67701-10-4': 'soap',
     # zeolit / polikarboksilat
     '1318-02-1': 'zeolite', '1344-00-9': 'zeolite',

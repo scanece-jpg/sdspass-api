@@ -101,16 +101,16 @@ REACH_DB: dict = {
     '22042-96-2': {'reg':['01-2119520432-46-0000'],'ec':'244-759-8','name':'DTPMPA.Na5'},
     '1429-50-1':  {'reg':['01-2119976027-28-0000'],'ec':'215-851-3','name':'EDTMPA'},
     '51274-37-4': {'reg':['polymer'],'ec':'257-098-5','name':'PESA (Polyepoxysuccinic acid Na)'},
-    '23783-26-8': {'reg':['01-2119973903-31-0000'],'ec':'245-910-6','name':'HPAA (Hydroxyphosphonoacetic acid)'},
-    '70715-06-9': {'reg':['01-2119973903-31-0001'],'ec':'274-877-8','name':'HPCA (2-Hydroxyphosphonocarboxylic acid)'},
+    # HPAA / HPCA: iki farklı maddeye aynı kayıt kökü (01-2119973903-31) yazılmıştı — kayıt numarası tek maddeye
+    # aittir, hangisinin doğru olduğu resmî kaynaktan doğrulanamadı → kaldırıldı (Bölüm 3'te "tedarikçiden").
+    # HPAA EC numarası SEA Ek-6'dan (015-159-00-1): 405-710-8 (önceden 245-910-6 yazılmıştı).
+    '23783-26-8': {'reg':[],'ec':'405-710-8','name':'HPAA (Hydroxyphosphonoacetic acid)'},
+    '70715-06-9': {'reg':[],'ec':'274-877-8','name':'HPCA (2-Hydroxyphosphonocarboxylic acid)'},
     # ── İnorganik tuzlar ─────────────────────────────────────────────────────
     '7786-30-3':  {'reg':['01-2119485597-19-0000'],'ec':'232-094-6','name':'Magnesium chloride'},
 }
 
 
-def get_reach(cas: str) -> dict | None:
-    """CAS numarasından REACH bilgilerini getir."""
-    return REACH_DB.get(cas.strip())
 
 
 def get_reg_no(cas: str) -> str:

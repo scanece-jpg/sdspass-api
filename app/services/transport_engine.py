@@ -132,7 +132,8 @@ H_TO_ADR: Dict[str, Dict] = {
     'H270': {'class': '2.2', 'pg': None},
     'H280': {'class': '2.2', 'pg': None},   # Sıkıştırılmış/sıvılaştırılmış gaz (CLP §2.5)
     'H281': {'class': '2.2', 'pg': None},   # Soğutulmuş sıvılaştırılmış gaz (kriyojenik)
-    'H232': {'class': '4.2', 'pg': 'I'},    # Pirofor Gaz 1 — ADR Sınıf 4.2 PG I
+    # H232 (pirofor gaz) TR SEA'da yok; AB kaynaklı bileşen kaydında gelirse gaz olarak Sınıf 2 (F) — 4.2 değil
+    'H232': {'class': '2.1', 'pg': None},
     # Sınıf 3 — Yanıcı Sıvı (parlama noktasına göre PG)
     'H224': {'class': '3', 'pg': 'I'},    # FP < 23°C, BP ≤ 35°C
     'H225': {'class': '3', 'pg': 'II'},   # FP < 23°C, BP > 35°C
@@ -456,48 +457,6 @@ def resolve_conflict(cls_a: str, pg_a: Optional[str],
     if _pg_num(pg_b) < _pg_num(pg_a):
         return {'winner': cls_b, 'win_pg': pg_b, 'loser': cls_a}
     return {'winner': cls_a, 'win_pg': pg_a, 'loser': cls_b}
-    if rank_b > rank_a:
-        return {'winner': cls_b, 'win_pg': pg_b, 'loser': cls_a}
-
-    # Rank eşit → Sınıf 3 / 6.1 / 8 üçgeni: PG matrisi uygula
-    p_a = _pg_num(pg_a)
-    p_b = _pg_num(pg_b)
-
-    # ── Sınıf 3 vs Sınıf 6.1 ──────────────────────────────────────────────────
-    if {cls_a, cls_b} == {'3', '6.1'}:
-        pg3  = p_a if cls_a == '3'   else p_b
-        pg61 = p_a if cls_a == '6.1' else p_b
-        wins_61 = (pg61 <= 2) and (pg3 == 3 or pg61 < pg3)
-        w = '6.1' if wins_61 else '3'
-        win_pg = (pg_a if cls_a == '6.1' else pg_b) if w == '6.1' else (pg_a if cls_a == '3' else pg_b)
-        return {'winner': w, 'win_pg': win_pg, 'loser': '3' if w == '6.1' else '6.1'}
-
-    # ── Sınıf 3 vs Sınıf 8 ────────────────────────────────────────────────────
-    if {cls_a, cls_b} == {'3', '8'}:
-        pg3 = p_a if cls_a == '3' else p_b
-        pg8 = p_a if cls_a == '8' else p_b
-        wins_8 = (pg8 == 1) or (pg8 == 2 and pg3 == 3)
-        w = '8' if wins_8 else '3'
-        win_pg = (pg_a if cls_a == '8' else pg_b) if w == '8' else (pg_a if cls_a == '3' else pg_b)
-        return {'winner': w, 'win_pg': win_pg, 'loser': '3' if w == '8' else '8'}
-
-    # ── Sınıf 6.1 vs Sınıf 8 ──────────────────────────────────────────────────
-    if {cls_a, cls_b} == {'6.1', '8'}:
-        pg61 = p_a if cls_a == '6.1' else p_b
-        pg8  = p_a if cls_a == '8'   else p_b
-        wins_8 = (pg61 >= 2 and pg8 == 1) or (pg61 == 3 and pg8 == 2)
-        w = '8' if wins_8 else '6.1'
-        win_pg = (pg_a if cls_a == '8' else pg_b) if w == '8' else (pg_a if cls_a == '6.1' else pg_b)
-        return {'winner': w, 'win_pg': win_pg, 'loser': '6.1' if w == '8' else '8'}
-
-    # Aynı sınıf: en düşük PG (en tehlikeli) kazanır
-    if cls_a == cls_b:
-        if p_a <= p_b:
-            return {'winner': cls_a, 'win_pg': pg_a, 'loser': None}
-        return {'winner': cls_b, 'win_pg': pg_b, 'loser': None}
-
-    # Bilinmeyen çift — A kazanır (muhafazakâr)
-    return {'winner': cls_a, 'win_pg': pg_a, 'loser': cls_b}
 
 
 
@@ -582,17 +541,6 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
         }
     if cls == '4.2':
         if pg == 'I':
-            if form == 'gas':
-                # Piroforik gazlar ADR'de Sınıf 2'dir (2.2.2.1.3 F grubu); 4.2'de gaz B.B.B. girişi yoktur.
-                # UN 2188 ARSİN'dir — B.B.B. girişi olarak kullanılamaz.
-                return {
-                    'un': 'UN 1954', 'label': 'SIKIŞTIRILMIŞ GAZ, ALEVLENEBİLİR, B.B.B.',
-                    'note': (
-                        'H232: Hava ile temasında kendiliğinden tutuşabilen gaz — ADR Sınıf 2 (F grubu). '
-                        'Maddeye özgü UN numarası önceliklidir (ör. UN 2203 SİLAN, UN 2199 FOSFİN). '
-                        'Taşımacılık uzmanı onayı zorunludur.'
-                    ),
-                }
             if is_solid:
                 return {'un': 'UN 2846', 'label': 'PİROFORİK KATI, ORGANİK, B.B.B.',
                         'note': 'H250: Hava ile temasında kendiliğinden tutuşur — PG I. İnorganik katı ise UN 3200.'}

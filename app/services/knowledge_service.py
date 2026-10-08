@@ -313,14 +313,3 @@ def build_context_blocks(query: str) -> list[dict]:
     return blocks
 
 
-def list_available() -> list[dict]:
-    """Arayüz için katalog özeti döner."""
-    return [
-        {
-            "key": k,
-            "description": desc,
-            "exists": path.exists(),
-            "suffix": path.suffix,
-        }
-        for k, (path, desc, _) in _CATALOGUE.items()
-    ]

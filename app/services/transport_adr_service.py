@@ -61,7 +61,7 @@ _SEED_ENTRIES: dict = {
     # ── Asitler ───────────────────────────────────────────────────────────────
     '7664-93-9': [  # Sülfürik asit — ADR Tablo A
         {'min_conc': 51,  'max_conc': 100, 'un': 'UN1830', 'pg': 'II'},
-        {'min_conc': 0,   'max_conc': 51,  'un': 'UN2796', 'pg': 'III'},
+        {'min_conc': 0,   'max_conc': 51,  'un': 'UN2796', 'pg': 'II'},   # Tablo A: yalnız PG II
     ],
     '7697-37-2': [  # Nitrik asit — ADR Tablo A
         {'min_conc': 65,  'max_conc': 100, 'un': 'UN2031', 'pg': 'I'},
@@ -81,11 +81,16 @@ _SEED_ENTRIES: dict = {
     '7789-21-1': {'un': 'UN1777', 'pg': 'II'},   # Florosülfürik asit
 
     # ── Bazlar ────────────────────────────────────────────────────────────────
-    '1310-73-2': [  # Sodyum hidroksit çözelti — ADR Tablo A
-        {'min_conc': 0,   'max_conc': 100, 'un': 'UN1824', 'pg': 'II'},
+    '1310-73-2': [  # Sodyum hidroksit — ADR Tablo A: katı UN1823, çözelti UN1824
+        {'min_conc': 0,   'max_conc': 100, 'un': 'UN1824', 'pg': 'II', 'physical_state': 'liquid'},
+        {'min_conc': 0,   'max_conc': 100, 'un': 'UN1823', 'pg': 'II', 'physical_state': 'solid'},
     ],
-    '1310-58-3': {'un': 'UN1814', 'pg': 'II'},   # Potasyum hidroksit çözelti
-    '1305-78-8': {'un': 'UN1910', 'pg': 'III'},  # Kalsiyum oksit
+    '1310-58-3': [  # Potasyum hidroksit — ADR Tablo A: katı UN1813, çözelti UN1814
+        {'min_conc': 0,   'max_conc': 100, 'un': 'UN1814', 'pg': 'II', 'physical_state': 'liquid'},
+        {'min_conc': 0,   'max_conc': 100, 'un': 'UN1813', 'pg': 'II', 'physical_state': 'solid'},
+    ],
+    # Kalsiyum oksit: Tablo A UN1910 "ADR'ye tabi değildir" — önceden Sınıf 8 PG III veriliyordu.
+    '1305-78-8': {'un': None, 'pg': None, 'sp_note': "UN1910 — ADR'ye tabi değildir (Tablo A)"},
     '7664-41-7': [  # Amonyak — gaz veya çözelti
         {'min_conc': 0,   'max_conc': 100, 'un': 'UN1005', 'pg': '', 'physical_state': 'gas'},      # Susuz (gaz)
         # Tablo A: UN3318 "%50'den fazla"; UN2073 "%35'ten fazla ama %50'den az";
@@ -98,32 +103,36 @@ _SEED_ENTRIES: dict = {
     # ── Oksitleyiciler ────────────────────────────────────────────────────────
     '7722-84-1': [  # Hidrojen peroksit — ADR Tablo A
         {'min_conc': 60,  'max_conc': 100, 'un': 'UN2015', 'pg': 'I'},
-        {'min_conc': 8,   'max_conc': 60,  'un': 'UN2014', 'pg': 'II'},
+        {'min_conc': 20,  'max_conc': 60,  'un': 'UN2014', 'pg': 'II'},
+        {'min_conc': 8,   'max_conc': 20,  'un': 'UN2984', 'pg': 'III'},   # Tablo A: %8–20 ayrı giriş
         # <8% taşıma yönetmeliği kapsamı dışı
     ],
     '7681-52-9': {'un': 'UN1791', 'pg': 'II', 'physical_state': 'liquid'},  # Sodyum hipoklorit çözelti
-    '7778-54-3': {'un': 'UN2208', 'pg': 'II', 'physical_state': 'solid'},  # Kalsiyum hipoklorit karışım
+    '7778-54-3': [  # Kalsiyum hipoklorit — Tablo A: >%39 hazır klor UN1748 PG II; %10–39 karışım UN2208 PG III
+        # (saf Ca(OCl)2'nin hazır kloru ≈ %99 → hazır klor ≈ madde yüzdesi)
+        {'min_conc': 39,  'max_conc': 100, 'un': 'UN1748', 'pg': 'II',  'physical_state': 'solid', 'min_exclusive': True},
+        {'min_conc': 10,  'max_conc': 39,  'un': 'UN2208', 'pg': 'III', 'physical_state': 'solid', 'min_exclusive': True},
+    ],
     '87-90-1':   {'un': 'UN2468', 'pg': 'II', 'physical_state': 'solid'},  # TCCA (ADR: "TRİKLOROİZOSİYANÜRİK ASİT, KURU")
-    '2893-78-9': {'un': 'UN2468', 'pg': 'II', 'physical_state': 'solid'},  # Sodyum dikloroizosiyanurik asit, kuru
+    '2893-78-9': {'un': 'UN2465', 'pg': 'II', 'physical_state': 'solid'},  # Sodyum dikloroizosiyanürat, kuru (önceden yanlışlıkla UN2468)
     # ADR SP 135 (Tablo A Satır 836): troklosen sodyum dihidrat Sınıf 5.1 kriterini KARŞILAMAZ.
     # un=None sentinel: kayıt var ama adlı girdi yok → lookup_by_cas None döner → B.N.O. yolu.
     # İsim-eşleştirmesinin yanlış giriş bulmasını engeller.
     '51580-86-0': {'un': None, 'pg': None, 'sp_note': 'SP 135 — Sınıf 5.1 kriterleri karşılanmaz'},
-    '10049-04-4':{'un': 'UN2548', 'pg': 'I',  'physical_state': 'gas'},    # Klor dioksit
 
     # ── Halojenler / Gazlar ───────────────────────────────────────────────────
     '7726-95-6': {'un': 'UN1744', 'pg': 'I'},    # Brom
-    '7782-50-5': {'un': 'UN1017', 'pg': None},   # Klor gazı
-    '7803-51-2': {'un': 'UN2199', 'pg': 'I'},    # Fosfin
+    # Gazlarda (Sınıf 2) ambalaj grubu yoktur → pg ''.
+    '7782-50-5': {'un': 'UN1017', 'pg': ''},     # Klor gazı
+    '7803-51-2': {'un': 'UN2199', 'pg': ''},     # Fosfin
     '74-90-8':   {'un': 'UN1051', 'pg': 'I'},    # Hidrojen siyanür
-    '7783-06-4': {'un': 'UN1053', 'pg': 'I'},    # Hidrojen sülfür
-    '75-44-5':   {'un': 'UN1076', 'pg': 'I'},    # Fosgen
-    '7782-79-8': {'un': 'UN3123', 'pg': 'I'},    # Hidrazoik asit
-    '7647-19-0': {'un': 'UN1826', 'pg': 'I'},    # Fosfor pentaflorür
-    '10025-87-3':{'un': 'UN1810', 'pg': 'I'},    # Fosfor oksikorür
+    '7783-06-4': {'un': 'UN1053', 'pg': ''},     # Hidrojen sülfür
+    '75-44-5':   {'un': 'UN1076', 'pg': ''},     # Fosgen
+    '7647-19-0': {'un': 'UN2198', 'pg': ''},     # Fosfor pentaflorür (önceden yanlışlıkla UN1826)
+    '10025-87-3':{'un': 'UN1810', 'pg': 'I'},    # Fosfor oksiklorür
 
     # ── Ağır metaller / Toksikler ─────────────────────────────────────────────
-    '7784-34-1': {'un': 'UN1556', 'pg': 'I'},    # Arsenik triklorür
+    '7784-34-1': {'un': 'UN1560', 'pg': 'I'},    # Arsenik triklorür (önceden B.B.B. UN1556)
     '26628-22-8':{'un': 'UN1687', 'pg': 'II'},   # Sodyum azit
 
     # ── Yanıcı organikler ─────────────────────────────────────────────────────
@@ -135,14 +144,14 @@ _SEED_ENTRIES: dict = {
     '108-88-3':  {'un': 'UN1294', 'pg': 'II'},   # Toluen
     '71-43-2':   {'un': 'UN1114', 'pg': 'II'},   # Benzen
     '110-54-3':  {'un': 'UN1208', 'pg': 'II'},   # n-Hekzan
-    '142-82-5':  {'un': 'UN1278', 'pg': 'II'},   # n-Heptan
+    '142-82-5':  {'un': 'UN1206', 'pg': 'II'},   # n-Heptan — HEPTANLAR (önceden yanlışlıkla UN1278 1-kloropropan)
     '108-05-4':  {'un': 'UN1301', 'pg': 'II'},   # Vinil asetat
     '75-05-8':   {'un': 'UN1648', 'pg': 'II'},   # Asetonitril
     '79-01-6':   {'un': 'UN1710', 'pg': 'III'},  # Trikloretilen
-    '127-19-5':  {'un': 'UN2810', 'pg': 'III'},  # DMAc
-    '50-00-0': [  # Formaldehit çözelti
-        {'min_conc': 25,  'max_conc': 100, 'un': 'UN1198', 'pg': 'III'},
-        {'min_conc': 0,   'max_conc': 25,  'un': 'UN2209', 'pg': 'III'},
+    # Formaldehit: Tablo A UN2209 "en az %25 formaldehit içeren" (Sınıf 8). UN1198 alevlenir çözelti içindir
+    # (parlama noktasına göre) — önceden ≥%25 → UN1198, <%25 → UN2209 diye ters yazılmıştı.
+    '50-00-0': [
+        {'min_conc': 25,  'max_conc': 100, 'un': 'UN2209', 'pg': 'III', 'physical_state': 'liquid'},
     ],
 
     # ── Petrol ürünleri ───────────────────────────────────────────────────────

@@ -119,7 +119,6 @@ CLP_CUTOFFS_DICT = {
     # 2.x Fiziksel — physical_engine.py
     "Flam. Gas 1":       {"h":"H220","cutoff":0.0,"signal":"Danger"},
     "Flam. Gas 2":       {"h":"H221","cutoff":0.0,"signal":"Warning"},
-    "Pyrophoric Gas 1":  {"h":"H232","cutoff":0.0,"signal":"Danger"},
     "Aerosol 1":    {"h":"H222","cutoff":0.0,"signal":"Danger"},
     "Aerosol 2":    {"h":"H223","cutoff":0.0,"signal":"Warning"},
     "Flam. Liq. 1": {"h":"H224","cutoff":1.0, "signal":"Danger"},
@@ -151,7 +150,6 @@ DANGER_H = {
     'H220','H222','H224','H225',
     # H228 buraya dahil DEĞİL: Flam. Sol. 1 = Danger, Flam. Sol. 2 = Warning;
     # aynı H kodu iki farklı sinyal verir → is_danger() fonksiyonu clp_passed ile çözer.
-    'H232',                          # H232: pirofor gaz → Danger (CLP Annex III)
     'H240','H241','H250','H251',     # H251: kendiliğinden ısınan Kat.1 → Danger
     'H260','H270','H271',
     # H272 — Ox. Liq. 2 (Danger) veya Ox. Liq. 3 (Warning) için aynı kod kullanılır.
@@ -486,7 +484,7 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
     # yalnızca Aerosol sınıfı (H222/H223/H229) üzerinden iletilir.
     _is_aerosol = (mixture_form or '').lower() == 'aerosol'
     _AEROSOL_EXCLUDED_CLASSES = {
-        'Flam. Gas 1', 'Flam. Gas 2', 'Pyrophoric Gas 1',
+        'Flam. Gas 1', 'Flam. Gas 2',
         'Press. Gas', 'Ref. Gas',
         'Flam. Liq. 1', 'Flam. Liq. 2', 'Flam. Liq. 3',
         'Flam. Sol. 1', 'Flam. Sol. 2',
@@ -928,39 +926,9 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
     }
 
 
-"""
-CLP Hesaplama Servisi — v3
-==========================
-CLP Regulation (EC) No 1272/2008 — Annex I
-
-Modül Akışı:
-  calculate_clp()                     → Temel hesap (ATE + Cut-off + Aquatic)
-  calculate_clp_full()                → CLP + EUH birleşik
-  calculate_clp_with_non_additivity() → Tam hesap (CLP + Non-additivity + STOT RE + Fiziksel + EUH)
-
-Uygulanan Kurallar:
-  ├─ ATE Toplamı          → Acute Tox. 1-4 (oral/dermal/inhalation) — Annex I Bölüm 3.1
-  ├─ Cut-off / SCL        → Bileşen konsantrasyon eşikleri — Annex I Tablo 3.x.4
-  ├─ Aquatic              → H400/H410/H411/H412/H413 — Annex I Tablo 4.1.3
-  ├─ NOTE 1               → Form bağımlı Carc/Muta/Repr — sıvıda uygulanmaz
-  ├─ Non-additivity       → Fenol/aldehit/asit/baz → Skin/Eye override — Tablo 3.2.4
-  ├─ STOT RE              → Hedef organ toplamı — stot_re_service.py
-  ├─ Fiziksel Tehlike     → Flam.Liq / Asp.Tox — physical_hazard_service.py
-  └─ EUH                  → euh_service.py
-
-Öncelik Kuralları:
-  - Worst case konsantrasyon (aralık verildiğinde üst sınır)
-  - Kullanıcı ATE/LD50 > Annex VI varsayılan
-  - SCL > Generic cut-off
-  - pH ≤2 / ≥11.5 → Skin Corr. 1 direkt (Tablo 3.2.3)
-
-Bağımlılıklar:
-  app.services.echa_service          → CLP verisi çekme
-  app.services.non_additivity_service
-  app.services.stot_re_service
-  app.services.physical_hazard_service
-  app.services.euh_service
-"""
+# ─── ATE (akut toksisite karışım hesabı) — SEA Ek-1 3.1.3.6 ──────────────────────
+# (Eski "v3 modül akışı" açıklaması kaldırıldı: anlattığı fonksiyonlar ve modüller artık yok.
+#  Toplama yöntemi uygulanamayan karışımlar: classify_mixture_clp(additivity_na=True) — Tablo 3.2.4/3.3.4.)
 from typing import Optional
 
 try:
@@ -1033,25 +1001,6 @@ ATE_HCODES = {
     'inhalation':       {1: 'H330', 2: 'H330', 3: 'H331', 4: 'H332'},
     'inhalation_gas':   {1: 'H330', 2: 'H330', 3: 'H331', 4: 'H332'},
 }
-ATE_PICS = {1: 'GHS06', 2: 'GHS06', 3: 'GHS06', 4: 'GHS07'}
-ATE_SIGS = {1: 'Danger', 2: 'Danger', 3: 'Danger', 4: 'Warning'}
-
-# Fiziksel tehlike sınıfları — hesaplanamaz
-PHYSICAL = ['Ox.', 'Flam.', 'Expl.', 'Press. Gas', 'Water-react.',
-            'Self-react.', 'Pyr.', 'Self-heat.', 'Org. Perox.', 'Corr. Met.']
-
-# NOTE 1: Sadece toz/çözünebilir toz formunda geçerli sınıflandırmalar
-# Sıvı/çözelti formunda bu hazard sınıfları uygulanmaz
-NOTE1_HAZARDS = {'Carc. 1B', 'Carc. 1A', 'Muta. 1B', 'Muta. 1A', 'Repr. 1B', 'Repr. 1A'}
-
-# Note 1 uygulanan maddeler (Annex VI)
-NOTE1_CAS = {
-    '10124-43-3',  # cobalt sulfate
-    '10026-24-1',  # cobalt sulfate heptahydrate
-    '7791-13-1',   # cobalt chloride
-    '513-79-1',    # cobalt carbonate
-    '71-48-7',     # cobalt acetate
-}
 
 
 # H kodu → maruziyet rotası eşleştirmesi (CLP Annex I Bölüm 3.1)
@@ -1106,29 +1055,6 @@ def _get_ate_value(ate_data: dict, route: str, h_class: str) -> Optional[float]:
                 return val
     # Kategori varsayılanı
     return ATE_DEFAULTS.get(route, {}).get(h_class)
-
-
-def _is_note1_applicable(cas: str, h_class: str, form: Optional[str]) -> bool:
-    """
-    NOTE 1 kontrolü: Madde NOTE 1 kapsamındaysa ve sıvı/çözelti formundaysa
-    ilgili hazard sınıfı uygulanmaz.
-    """
-    if cas not in NOTE1_CAS:
-        return True  # Note 1 yok, normal uygula
-    if h_class not in NOTE1_HAZARDS:
-        return True  # Bu hazard için Note 1 yok
-
-    # Form belirtilmişse kontrol et
-    if form:
-        liquid_forms = {'liquid', 'solution', 'aqueous', 'sıvı', 'çözelti'}
-        solid_forms = {'solid', 'powder', 'dust', 'toz', 'katı'}
-        form_lower = form.lower()
-        if any(f in form_lower for f in liquid_forms):
-            return False  # Sıvı form → Note 1 → uygulanmaz
-        if any(f in form_lower for f in solid_forms):
-            return True   # Toz form → uygula
-    # Form belirtilmemişse güvenli tarafta kal — uyarı ver, hesapla
-    return True
 
 
 _LIQUID_FORMS = frozenset({

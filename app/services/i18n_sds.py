@@ -1325,7 +1325,6 @@ LANG_DATA: Dict[str, Dict] = {
     },
 }
 
-SUPPORTED_LANGUAGES = list(LANG_DATA.keys())
 
 
 # ─── ÇEVIRI FONKSİYONLARI ────────────────────────────────────────────────────
@@ -1358,16 +1357,6 @@ def sub_title(lang: str, key: str) -> str:
     return result
 
 
-# Teknik terimler — tüm dillerde aynı veya EN varsayılan
-_COMMON_TERMS = {
-    'product_code': 'Code / Kód / Kod',
-    'version': 'Version',
-    'sds_date': 'SDS Date',
-    'regulation': 'Regulation',
-    'see_section': 'See Section / Bkz. Bölüm',
-    'continued': '...',
-    'of': '/',
-}
 # Dil bazlı product_code çevirileri
 _PRODUCT_CODE_TRANS = {
     'TR':'Ürün Kodu','EN':'Product Code','DE':'Produktcode','PL':'Kod produktu',

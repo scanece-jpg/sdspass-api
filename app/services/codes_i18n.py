@@ -829,9 +829,6 @@ SDS_SENTENCES['US_EN'] = SDS_SENTENCES['EN']
 # YARDIMCI FONKSİYONLAR
 # ══════════════════════════════════════════════════════════════════════════════
 
-def _fallback(lang: str) -> str:
-    """EN fallback dili"""
-    return 'EN' if lang not in ('TR',) else 'TR'
 
 
 @lru_cache(maxsize=2000)

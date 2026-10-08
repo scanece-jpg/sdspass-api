@@ -247,21 +247,6 @@ def parse_all_phys_props(phys_in: dict) -> dict:
 
 # ── Yardımcı erişimciler ──────────────────────────────────────────────────────
 
-def get_display(phys: dict, key: str) -> Optional[str]:
-    """
-    phys_props dict'inden display değerini döndür.
-    Hem yeni dict formatını hem eski string formatını destekler.
-    """
-    val = phys.get(key)
-    if val is None:
-        return None
-    if isinstance(val, dict):
-        if val.get('nd'):
-            return 'Belirlenmemiştir'
-        if val.get('na'):
-            return 'Uygulanamaz'
-        return val.get('display') or None
-    return str(val) if str(val).strip() != '' else None
 
 
 def get_calc(phys: dict, key: str) -> Optional[float]:

@@ -36,7 +36,6 @@ from typing import Dict, List, Optional
 # ─── SAYFA DÜZENİ SABİTLERİ ─────────────────────────────────────────────────
 PAGE_W   = 180 * mm   # A4 kullanılabilir genişlik (210 - 15 - 15)
 COL_L    = 55  * mm   # Sol etiket sütunu
-COL_R    = PAGE_W - COL_L  # Sağ değer sütunu, Any
 
 # ─── FONT KAYDI — Unicode desteği (TR/PL/RO/BG/CZ/HR/LT vs.) ──────────────
 from reportlab.pdfbase import pdfmetrics
@@ -169,12 +168,6 @@ C_TABLE_HDR_TXT = HexColor('#ffffff')
 C_TABLE_ALT     = HexColor('#f7f9fc')
 C_ACCENT        = HexColor('#003087')   # Koyu mavi — resmi görünüm
 
-# GHS Piktogram metinleri (unicode emoji — PDF'te görüntülenir)
-GHS_SYMBOLS = {
-    'GHS01': '💥', 'GHS02': '🔥', 'GHS03': '🔆',
-    'GHS04': '🔵', 'GHS05': '⚗',  'GHS06': '☠',
-    'GHS07': '⚠',  'GHS08': '⚕',  'GHS09': '🌿',
-}
 
 
 # ─── STİLLER ─────────────────────────────────────────────────────────────────
@@ -322,62 +315,6 @@ H_STMTS = {
 }
 
 
-H_STMTS_TR = {
-    'H220':'Son derece alevlenir gaz.',
-    'H221':'Alevlenir gaz.',
-    'H222':'Son derece alevlenir aerosol.',
-    'H223':'Alevlenir aerosol.',
-    'H224':'Son derece alevlenir sıvı ve buhar.',
-    'H225':'Yüksek alevlenir sıvı ve buhar.',
-    'H226':'Alevlenir sıvı ve buhar.',
-    'H228':'Alevlenir katı.',
-    'H240':'Isındığında patlayabilir.',
-    'H242':'Isındığında yangına yol açabilir.',
-    'H250':'Havaya maruz kaldığında kendiliğinden tutuşabilir.',
-    'H260':'Su ile temas halinde kendiliğinden tutuşabilen alevlenir gazlar açığa çıkar.',
-    'H261':'Su ile temas halinde alevlenir gaz açığa çıkar.',
-    'H270':'Yangına yol açabilir veya şiddetlendirebilir; yükseltgen.',
-    'H271':'Yangına veya patlamaya yol açabilir; güçlü yükseltgen.',
-    'H272':'Yangını şiddetlendirebilir; yükseltgen.',
-    'H280':'Basınç altında gaz içerir; ısındığında patlayabilir.',
-    'H290':'Metallere karşı aşındırıcı olabilir.',
-    'H300':'Yutulması halinde öldürücüdür.',
-    'H301':'Yutulması halinde toksiktir.',
-    'H302':'Yutulması halinde zararlıdır.',
-    'H304':'Yutulması ve soluk yoluna girmesi halinde öldürücü olabilir.',
-    'H310':'Cilt ile teması halinde öldürücüdür.',
-    'H311':'Cilt ile teması halinde toksiktir.',
-    'H312':'Cilt ile teması halinde zararlıdır.',
-    'H314':'Ciddi cilt yanıklarına ve göz hasarına yol açar.',
-    'H315':'Cilt tahrişine yol açar.',
-    'H317':'Alerjik cilt reaksiyonuna yol açabilir.',
-    'H318':'Ciddi göz hasarına yol açar.',
-    'H319':'Ciddi göz tahrişine yol açar.',
-    'H330':'Solunması halinde öldürücüdür.',
-    'H331':'Solunması halinde toksiktir.',
-    'H332':'Solunması halinde zararlıdır.',
-    'H334':'Solunması halinde alerji veya astım belirtilerine ya da solunum güçlüklerine yol açabilir.',
-    'H335':'Solunum yolu tahrişine yol açabilir.',
-    'H336':'Uyuşukluğa veya baş dönmesine yol açabilir.',
-    'H340':'Genetik hasara yol açabilir.',
-    'H341':'Genetik hasara yol açtığından şüphelenilmektedir.',
-    'H350':'Kansere yol açabilir.',
-    'H351':'Kansere yol açtığından şüphelenilmektedir.',
-    'H360':'Doğurganlığa veya doğmamış çocuğa zarar verebilir.',
-    'H361':'Doğurganlığa veya doğmamış çocuğa zarar verebileceğinden şüphelenilmektedir.',
-    'H370':'Organlara hasar verir.',
-    'H371':'Organlara hasar verebilir.',
-    'H372':'Uzun süreli veya tekrarlı maruz kalma sonucu organlarda hasara yol açar.',
-    'H373':'Uzun süreli veya tekrarlanan maruziyetle organlara hasar verebilir.',
-    'H400':'Sucul organizmalar için çok toksiktir.',
-    'H401':'Sucul organizmalar için toksiktir.',
-    'H402':'Sucul organizmalar için zararlıdır.',
-    'H410':'Uzun süre kalıcı etkiyle sucul organizmalar için çok toksiktir.',
-    'H411':'Uzun süre kalıcı etkiyle sucul organizmalar için toksiktir.',
-    'H412':'Uzun süre kalıcı etkiyle sucul organizmalar için zararlıdır.',
-    'H413':'Sucul organizmalar üzerinde uzun süre kalıcı zararlı etkilere yol açabilir.',
-    'H420':'Üst atmosferdeki ozonu tahrip ederek halk sağlığına ve çevreye zarar verir.',
-}
 
 def get_h_stmt(code: str, lang: str) -> str:
     return get_h(lang, code)
@@ -645,11 +582,6 @@ def sub_block(title: str, styles: dict) -> list:
     return [tbl, Spacer(1, 2)]
 
 
-def _wrap(val, styles):
-    """String değerleri Paragraph'a çevir — Unicode font için zorunlu"""
-    if isinstance(val, str):
-        return Paragraph(val, styles['body'])
-    return val
 
 def data_table(rows: list, col_widths: list, styles: dict,
                header: bool = True) -> Table:
@@ -3789,11 +3721,6 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _cls_road = _road.get('class') or haz_class
     _cls_sea  = _sea.get('class')  or haz_class
     _cls_air  = _air.get('class')  or haz_class
-    # Sınıf etiket (sayı + yan tehlike)
-    def _cls_str(cls_val, sub):
-        if not cls_val or cls_val == '—': return '—'
-        lbl = CLASS_LABELS.get(str(cls_val), str(cls_val))
-        return f"Sınıf {cls_val} — {lbl}" if lang == 'TR' else f"Class {cls_val} — {CLASS_LABELS.get(str(cls_val), str(cls_val))}"
     _road_lbl = f"Sınıf {_cls_road}" + (f" ({sub_class})" if sub_class and _cls_road != '—' else '') if lang == 'TR' else f"Class {_cls_road}" + (f" ({sub_class})" if sub_class and _cls_road != '—' else '')
     _sea_lbl  = f"Sınıf {_cls_sea}"  if _cls_sea  != '—' else '—'
     _air_lbl  = f"Sınıf {_cls_air}"  if _cls_air  != '—' else '—'

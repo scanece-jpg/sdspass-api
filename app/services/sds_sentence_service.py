@@ -18,17 +18,6 @@ from app.services.codes_i18n import correct_hclass
 
 
 # ─── BÖLÜM 1.1.3.6: FORMÜLASYONDEĞİŞİM TOLERANSI ───────────────────────────
-# CLP Kılavuzu Bölüm 1, v5.0 (Kasım 2024) Tablo 1.2 — SEA Ek-1 §1.1.3.6
-# "Karışımın bileşimi değiştiğinde sınıflandırma ne zaman yeniden yapılmalıdır?"
-# Bir bileşenin konsantrasyonu bu tolerans içinde kalıyorsa mevcut test/karar
-# verisi geçerliliğini korur; dışına çıkınca yeniden değerlendirme gerekir.
-COMPOSITION_VARIATION_TABLE = [
-    # (üst_sınır_dahil, izin_verilen_değişim_yüzdesi)
-    (  2.5, 30.0),   # C ≤ 2,5%    → ± %30
-    ( 10.0, 20.0),   # 2,5 < C ≤ 10%  → ± %20
-    ( 25.0, 10.0),   # 10 < C ≤ 25%   → ± %10
-    (100.0,  5.0),   # 25 < C ≤ 100%  → ± %5
-]
 
 # Kimyasal grup adları (CAS gizlendiğinde kullanılır)
 CHEM_GROUP_NAMES: Dict[str, str] = {

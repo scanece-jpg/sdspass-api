@@ -32,7 +32,9 @@ EUH032_GROUP_CAS = {'143-33-9', '151-50-8'}   # sodyum siyanür, potasyum siyan�
 
 EUH201_CAS = {'10099-74-8', '1314-87-0', '1317-36-8', '1344-37-2', '301-04-2', '7439-92-1',
               '7446-14-2', '75-74-1', '7758-95-4', '78-00-2'}
-EUH202_CAS = {'1309-14-4', '137-05-3', '6606-65-1', '7085-85-0'}
+# Siyanoakrilatlar (SEA Ek-2 2.2). 1309-14-4 geçersiz CAS'tı (hiçbir maddeye karşılık gelmiyor) — çıkarıldı;
+# izobütil ve 2-oktil eklendi (PubChem ile doğrulandı). Adında 'cyanoacrylate' geçen bileşen de yakalanır.
+EUH202_CAS = {'137-05-3', '7085-85-0', '6606-65-1', '1069-55-2', '133978-15-1'}
 EUH203_CAS = {'10588-01-9', '1333-82-0', '13530-65-9', '7738-94-5', '7778-50-9', '7789-00-6'}
 EUH206_CAS = {'10022-70-5', '7681-52-9', '7778-54-3'}
 EUH207_CAS = {'10108-64-2', '10124-36-4', '1306-23-6', '7440-43-9'}
@@ -40,6 +42,7 @@ EUH207_CAS = {'10108-64-2', '10124-36-4', '1306-23-6', '7440-43-9'}
 _ACTIVE_CL_FACTOR = {'7681-52-9': 0.952, '7778-54-3': 0.992, '10022-70-5': 0.431}
 
 _ISOCYANATE = re.compile(r'isocyanat|izosiyanat|\b(?:p?mdi|tdi|hdi|ipdi|xdi|ndi)\b', re.I)
+_CYANOACRYL = re.compile(r'cyano\s*-?\s*acryl|siyano\s*-?\s*akril', re.I)
 _EPOXY      = re.compile(r'\bepox|epoksi|glycidyl|glisidil|\boxiran|\boksiran', re.I)
 
 # ─── EUH208 — SCL/10 Kuralı (CLP Annex I 3.4.4.1) ──────────────────────────
@@ -86,7 +89,7 @@ def check_euh(components: List[Dict],
         # Bileşen yüzdesi kurşun bileşiğinin yüzdesidir — metal olarak kurşun bundan azdır (temkinli).
         if cas in EUH201_CAS and form_sub == 'paint' and comp_conc > 0.15:
             _add(detected, detected_codes, 'EUH201', cas, name, note='Kurşunlu boya/vernik, kurşun > %0,15 (SEA Ek-2 2.1)')
-        if cas in EUH202_CAS:
+        if cas in EUH202_CAS or _CYANOACRYL.search(name_all):
             _add(detected, detected_codes, 'EUH202', cas, name)
         # SEA Ek-2 2.3: yalnız çimento ve çimento karışımları — çözünebilir krom (VI) > %0,0002;
         # karışım H317 taşıyorsa basılmaz (aşağıda, sınıflandırma sonrası sds_pipeline'da elenir)
@@ -276,6 +279,3 @@ def euh210_triggers(components: List[Dict], mixture_form: str = 'liquid') -> Lis
     return out
 
 
-def get_euh_text(code: str) -> str:
-    """EUH kodu için Türkçe metin (SEA Ek-2 resmî metni)."""
-    return get_euh('TR', code)

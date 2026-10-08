@@ -833,11 +833,6 @@ P_SDS_PRIORITY: Dict[str, str] = {
     'P420':           'optional',
 }
 
-P_SDS_LABELS = {
-    'mandatory': ('✅ Mutlaka Yaz', 'var(--green)'),
-    'evaluate':  ('⚠ KDU Değerlendirmeli', 'var(--warn)'),
-    'optional':  ('ℹ Opsiyonel', 'var(--text3)'),
-}
 
 
 def classify_sds_p_codes(p_codes: List[str], usage: str = 'industrial',

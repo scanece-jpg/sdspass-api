@@ -10,7 +10,7 @@ Kapsanan tehlikeler:
   Flam. Aerosol 1/2  (H222/H223)      — CLP Annex I §2.3
   Aerosol basınç     (H229)           — CLP Annex I §2.3 (tüm aerosoller)
   Asp. Tox. 1        (H304)           — CLP Annex I Tablo 3.10
-  Flam. Gas 1A+H232  (H220/H232)      — CLP Annex I §2.2.3
+  Flam. Gas 1 (H220) / 2 (H221)       — SEA Ek-1 2.2 (ISO 10156); TR SEA'da pirofor gaz/H232 yok
   Ox. Gas 1          (H270)           — CLP Annex I §2.4
   Flam. Sol. 2       (H228)           — CLP Annex I Tablo 2.7
   Ox. Liq. 3         (H272)           — CLP Annex I Tablo 2.13
@@ -1606,13 +1606,6 @@ VP_DB: Dict[str, float] = {
     '111-84-2':   6,   '124-18-5': 1.7,  '100-42-5':   7,
 }
 
-# ── ASPİRASYON TOKSİSİTESİ VE DİĞER CAS LİSTELERİ ──────────────────────────
-ASP_CAS = {
-    '110-54-3','110-82-7','142-82-5','111-65-9','71-43-2',
-    '1330-20-7','64742-47-8','64742-48-9','64742-82-1',
-    '64741-41-9','64741-42-0','64741-44-2','64741-45-3',
-    '64741-47-5','64741-48-6','64742-54-7','8052-41-3',
-}
 # Oksitleyici bileşen CAS → maddenin kendi kategorisi (1=H271, 2/3=H272). YALNIZ YEDEK: bileşen
 # kaydında H271/H272 yoksa kullanılır; önce SEA Ek-6 konsantrasyon aralığı, sonra bileşen kaydı
 # (SEA Md.6(1)(c)). Ek-6'da olanlar Ek-6 değerine göre düzeltildi (2026-10-08); sodyum tiyosülfat
@@ -1624,18 +1617,7 @@ OXIDIZING_LIQ_CAS: Dict[str, int] = {
     '7727-54-0': 3,   # (NH₄)₂S₂O₈ amonyum persülfat — Ek-6 Ox. Sol. 3
     '7722-64-7': 2,   # KMnO₄   potasyum permanganat — Ek-6 Ox. Sol. 2
 }
-OXIDIZING_CAS = set(OXIDIZING_LIQ_CAS.keys())  # geriye dönük uyumluluk
-FLAM_SOL_CAS  = {'7704-34-9','1333-86-4','12185-10-3'}
 
-OXIDIZING_GAS_CAS = {
-    '7782-44-7',   # O₂  oksijen
-    '10028-15-6',  # O₃  ozon
-    '7782-50-5',   # Cl₂ klor
-    '7782-41-4',   # F₂  flor
-    '10024-97-2',  # N₂O diazot monoksit
-    '10102-44-0',  # NO₂ azot dioksit
-    '7790-91-2',   # ClF₃ klortriflorür
-}
 
 def _ox_cat(c, table: Dict[str, int]) -> int:
     """Oksitleyici bileşenin kategorisi — öncelik SEA Md.6(1)(c):
@@ -1693,10 +1675,6 @@ OXIDIZING_SOLID_CAS: Dict[str, int] = {
     '7757-79-1': 3,   # KNO₃      potasyum nitrat         Ox. Sol. 3
     '7631-99-4': 3,   # NaNO₃     sodyum nitrat           Ox. Sol. 3
     '10124-37-5': 3,  # Ca(NO₃)₂  kalsiyum nitrat         Ox. Sol. 3
-}
-PYRO_GAS_CAS  = {
-    '7803-62-5','19287-45-7','7782-65-2','7803-52-3',
-    '13765-25-8','992-94-9','7784-42-1',
 }
 
 # ── HATA PAYI METAVERİSİ ─────────────────────────────────────────────────────
@@ -2028,19 +2006,29 @@ def _calc_flam_liq(comps: List[Dict], user_fp=None, user_bp=None, form_sub: str 
         fp   = FP_DB.get(cas, 'MISSING')
         bp   = None
         estimated = False
+        decl_h = None
 
-        if fp == 'MISSING' and conc > 0:
-            hazard_codes = [(h.get('h_code') or '').replace('*','').strip()[:4]
-                            for h in (c.get('hazards') or [])]
-            decl_h = next((h for h in hazard_codes if h in DECLARED_FALLBACK), None)
-            if decl_h:
+        # SEA Md.6(1)(c): bileşenin kendi kaydındaki sınıf (Ek-6 → ECHA bildirimi) programın parlama/kaynama
+        # noktası tablosundan önce gelir. Önceden tablo öndeydi: o-ksilen (Ek-6 Kat.3) tablodaki 17 °C ile
+        # Kat.2, n-propanol (Ek-6 Kat.2) Kat.3 sayılıyor; diglyme (Ek-6 H226) tabloda 70 °C diye atlanıyordu.
+        if conc > 0:
+            hazard_codes = {(h.get('h_code') or '').replace('*','').strip()[:4]
+                            for h in (c.get('hazards') or [])}
+            decl_h = next((h for h in ('H224', 'H225', 'H226') if h in hazard_codes), None)
+        if decl_h:
+            _bp_db = BP_DB.get(cas)
+            _db_cls = (_cls_flam_liq(fp, _bp_db)
+                       if fp not in (None, 'MISSING') and fp < 60 else None)
+            if _db_cls and _db_cls['h'] == decl_h:
+                bp = _bp_db            # tablo değeri kayıtla uyumlu — gösterimde kullanılabilir
+            else:
                 fp        = DECLARED_FALLBACK[decl_h]['fp']
                 bp        = DECLARED_FALLBACK[decl_h]['bp']
                 estimated = True
 
         if fp is None or fp == 'MISSING' or fp >= 60:
             continue
-        if not estimated:
+        if not estimated and not decl_h:
             bp_val = BP_DB.get(cas, 'MISSING')
             bp = None if bp_val == 'MISSING' else bp_val
 
@@ -2049,13 +2037,16 @@ def _calc_flam_liq(comps: List[Dict], user_fp=None, user_bp=None, form_sub: str 
             continue
         cat = cls['cat']
         cat_sum[cat] += conc
-        if cat_fp[cat] is None or fp < cat_fp[cat]:
+        # Kayıttan gelen sınıf için konan temsilî değer gerçek parlama noktası değildir → tahmine katılmaz
+        if not estimated and (cat_fp[cat] is None or fp < cat_fp[cat]):
             cat_fp[cat] = fp
         cat_triggers[cat].append({'cas': cas, 'name': c.get('name') or cas,
-                                   'conc': conc, 'fp': fp, 'estimated': estimated})
+                                   'conc': conc, 'fp': fp, 'estimated': estimated, 'h': cls['h']})
 
     def trig_src(t):
-        return f"{t['name']} (%{t['conc']}, FP={t['fp']}°C{'  tahmini' if t['estimated'] else ''})"
+        if t['estimated']:
+            return f"{t['name']} (%{t['conc']}, bileşen sınıflandırması {t['h']})"
+        return f"{t['name']} (%{t['conc']}, FP={t['fp']}°C)"
 
     sum1   = cat_sum[1]
     sum12  = cat_sum[1] + cat_sum[2]
@@ -2234,12 +2225,13 @@ def _calc_asp_tox(comps: List[Dict], test_data: Dict = None) -> Dict:
     for c in comps:
         cas  = (c.get('cas') or c.get('cas_no') or '').strip()
         conc = float(c.get('concMax') or c.get('conc') or 0)
-        in_list   = cas in ASP_CAS
+        # Yalnız bileşen kaydı (SEA Ek-6 → ECHA bildirimleri). Elle tutulan CAS listesi kaldırıldı: ağır fuel oil,
+        # baz yağ ve ksilen için Ek-6'da H304 yokken listeden H304 veriliyordu (2026-10-08 tablo denetimi).
         # Sınıf adı TR ("Asp. Tok. 1") gelebilir — H304 kodu da kabul edilir
         has_class = any((h.get('h_class') or '') == 'Asp. Tox. 1'
                         or (h.get('h_code') or '').replace('*', '').strip()[:4] == 'H304'
                         for h in (c.get('hazards') or []))
-        if (in_list or has_class) and conc > 0:
+        if has_class and conc > 0:
             triggers.append({'cas': cas, 'name': c.get('name') or cas, 'conc': conc})
             total += conc
 
@@ -2249,26 +2241,6 @@ def _calc_asp_tox(comps: List[Dict], test_data: Dict = None) -> Dict:
         return {'result': {'h':'H304','h_class':'Asp. Tox. 1','signal':'Danger'},
                 'source': src, 'total': total}
     return {'result': None, 'source': None, 'total': total}
-
-
-def _calc_flam_gas(comps: List[Dict]) -> Dict:
-    triggers = []
-    for c in comps:
-        cas  = (c.get('cas') or c.get('cas_no') or '').strip()
-        conc = float(c.get('concMax') or c.get('conc') or 0)
-        if conc < 1.0:
-            continue
-        has_h232 = any((h.get('h_code') or '').replace('*','').strip()[:4] == 'H232'
-                       for h in (c.get('hazards') or []))
-        if has_h232 or cas in PYRO_GAS_CAS:
-            triggers.append({'cas': cas, 'name': c.get('name') or cas, 'conc': conc})
-
-    if triggers:
-        src = ', '.join(f"{t['name']} (%{t['conc']})" for t in triggers)
-        return {'result_h220': {'h':'H220','h_class':'Flam. Gas 1','signal':'Danger'},
-                'result_h232': {'h':'H232','h_class':'Flam. Gas 1 — Pirofor','signal':'Danger'},
-                'source': src}
-    return {'result_h220': None, 'result_h232': None, 'source': None}
 
 
 # ── ANA HESAP FONKSİYONU ─────────────────────────────────────────────────────
@@ -2354,73 +2326,69 @@ def calculate(comps: List[Dict], form: str = 'liquid',
             warnings.append('H304: ' + asp['source'])
 
     if form == 'gas':
-        fg = _calc_flam_gas(comps)
-        if fg['result_h232']:
-            # TR SEA Ek-1 Tablo 2.2.1'de pirofor gaz alt kategorisi ve H232 ifadesi yoktur (resmî Ek-3'te de
-            # yok) → yalnız Kategori 1 (H220) verilir.
-            _pyro_cutoff = '≥ %1 pirofor gaz bileşen'
-            primary.append({'type': 'flam_gas',      **fg['result_h220'], 'source': fg['source'], 'cutoff_used': _pyro_cutoff})
-        else:
-            # Alevlenir gaz karışımı — SEA Ek-1 2.2 / Tablo 2.2.1 (TR: Kategori 1 ve 2). Karışımın alevlenirliği
-            # test (EN 1839) veya ISO 10156 hesabıyla belirlenir; bileşenin varlığı yetmez (örn. azotta %1 CO
-            # alevlenmez). Sıra: kullanıcının test sonucu → ISO 10156:2017 hesabı (iso10156.py, parametreler
-            # data/iso10156_gas_data.json) → hesap yapılamıyorsa (tabloda olmayan bileşen, oksitleyici gaz,
-            # kısmen halojenli hidrokarbon) bütün bileşenler Kat.1 ise Kat.1, değilse karar sorusu.
-            def _gas_cat(c):
-                hs = {(h.get('h_code') or '').replace('*', '').strip()[:4] for h in (c.get('hazards') or [])}
-                return 1 if 'H220' in hs else 2 if 'H221' in hs else 0
-            _gas_comps = [c for c in comps if float(c.get('concMax') or c.get('conc') or 0) > 0]
-            _flam = [c for c in _gas_comps if _gas_cat(c)]
-            _fg_dec = (test_data.get('flammable_gas') or '').strip()
-            _iso = iso10156.evaluate(comps) if not _fg_dec else {'status': 'skipped'}
-            if _iso['status'] == 'calculated':
-                _iso_gas = _iso
-                if _iso['flammable']:
-                    primary.append({'type': 'flam_gas', 'h': _iso['h'], 'h_class': _iso['h_class'],
-                                    'signal': 'Danger' if _iso['h'] == 'H220' else 'Warning',
-                                    'source': f"{_iso['text']} — parametreler: {_iso['source']}",
-                                    'cutoff_used': _iso['text']})
-            elif (_flam or _iso['status'] == 'not_applicable') and not _fg_dec:
-                _nm = lambda c: (c.get('name_tr') or c.get('name') or c.get('cas') or c.get('cas_no') or '')
-                _fsrc = ', '.join(f"{_nm(c)} (%{float(c.get('concMax') or c.get('conc') or 0):g})" for c in _flam)
-                _iso_why = _iso.get('reason') or ''
-                if _flam and len(_flam) == len(_gas_comps) and all(_gas_cat(c) == 1 for c in _flam):
-                    primary.append({
-                        'type': 'flam_gas', 'h': 'H220', 'h_class': 'Flam. Gas 1', 'signal': 'Danger',
-                        'source': _fsrc,
-                        'cutoff_used': ('Tüm bileşenler Kategori 1 alevlenir gaz — karışımın alt alevlenme sınırı '
-                                        'de ≤ %13 (SEA Ek-1 Tablo 2.2.1(a))'),
-                    })
-                else:
-                    pending_decisions.append({
-                        'code': 'PHYS_FLAM_GAS_UNTESTED',
-                        'field': 'flammable_gas',
-                        'question': (
-                            (f'Gaz karışımında alevlenir gaz bileşeni var: {_fsrc}. ' if _fsrc else
-                             'Gaz karışımında alevlenir olabilecek bileşen var. ')
-                            + 'SEA Ek-1 2.2 gereği karışımın alevlenirliği test (EN 1839) veya ISO 10156 hesabıyla '
-                            'belirlenir — bileşenin varlığı yeterli değildir. Program hesabı yapamadı: '
-                            + (_iso_why or 'bileşen verisi eksik') + '. Sonucu seçin.'),
-                        'test_guidance': (
-                            'Kategori 1: havada hacimce %13 veya daha az bir karışımda tutuşuyor ya da alevlenme '
-                            'aralığı en az 12 puan; Kategori 2: diğer alevlenir gazlar (SEA Ek-1 Tablo 2.2.1). '
-                            'ISO 10156: alevlenir bileşenlerin oranı ve alevlenme sınırları ile inert gazların '
-                            'eşdeğerlik katsayılarından hesaplanır; gaz tedarikçisinin GBF\'sinde veya sertifikasında '
-                            'genellikle yer alır.'),
-                        'options': [
-                            {'value': 'H220', 'label': 'Test / ISO 10156 sonucu — Kategori 1 (H220)',
-                             'effect': 'H220 → GHS02, Tehlike'},
-                            {'value': 'H221', 'label': 'Test / ISO 10156 sonucu — Kategori 2 (H221)',
-                             'effect': 'H221 → piktogram yok, Dikkat'},
-                            {'value': 'not_flammable', 'label': 'Test / ISO 10156 sonucu — alevlenir değil',
-                             'effect': 'H220/H221 atanmaz; Bölüm 16\'ya gerekçe yazılır'},
-                            {'value': 'not_tested_precautionary',
-                             'label': 'Test/hesap yapılmadı — geçici ihtiyatlı H220 (revizyon şartıyla)',
-                             'effect': 'H220 atanır; Bölüm 16\'ya "test bekliyor" notu düşülür'},
-                        ],
-                        'legal_basis': 'SEA Ek-1 2.2 (Tablo 2.2.1)',
-                        'components': [f"{c.get('cas') or c.get('cas_no') or ''} — {_nm(c)}" for c in _flam],
-                    })
+        # Pirofor gazlar (silan, fosfin, arsin…) ISO 10156 Tablo 2'de — karışım hesabına girer. TR SEA'da
+        # pirofor gaz kategorisi / H232 yoktur. Önceden "≥ %1 pirofor gaz → H220" kısa yolu vardı; yönetmelikte
+        # böyle bir eşik yok (örn. %1 arsin ISO 10156'ya göre alevlenir değildir) — kaldırıldı.
+        # Alevlenir gaz karışımı — SEA Ek-1 2.2 / Tablo 2.2.1 (TR: Kategori 1 ve 2). Karışımın alevlenirliği
+        # test (EN 1839) veya ISO 10156 hesabıyla belirlenir; bileşenin varlığı yetmez (örn. azotta %1 CO
+        # alevlenmez). Sıra: kullanıcının test sonucu → ISO 10156:2017 hesabı (iso10156.py, parametreler
+        # data/iso10156_gas_data.json) → hesap yapılamıyorsa (tabloda olmayan bileşen, oksitleyici gaz,
+        # kısmen halojenli hidrokarbon) bütün bileşenler Kat.1 ise Kat.1, değilse karar sorusu.
+        def _gas_cat(c):
+            hs = {(h.get('h_code') or '').replace('*', '').strip()[:4] for h in (c.get('hazards') or [])}
+            return 1 if 'H220' in hs else 2 if 'H221' in hs else 0
+        _gas_comps = [c for c in comps if float(c.get('concMax') or c.get('conc') or 0) > 0]
+        _flam = [c for c in _gas_comps if _gas_cat(c)]
+        _fg_dec = (test_data.get('flammable_gas') or '').strip()
+        _iso = iso10156.evaluate(comps) if not _fg_dec else {'status': 'skipped'}
+        if _iso['status'] == 'calculated':
+            _iso_gas = _iso
+            if _iso['flammable']:
+                primary.append({'type': 'flam_gas', 'h': _iso['h'], 'h_class': _iso['h_class'],
+                                'signal': 'Danger' if _iso['h'] == 'H220' else 'Warning',
+                                'source': f"{_iso['text']} — parametreler: {_iso['source']}",
+                                'cutoff_used': _iso['text']})
+        elif (_flam or _iso['status'] == 'not_applicable') and not _fg_dec:
+            _nm = lambda c: (c.get('name_tr') or c.get('name') or c.get('cas') or c.get('cas_no') or '')
+            _fsrc = ', '.join(f"{_nm(c)} (%{float(c.get('concMax') or c.get('conc') or 0):g})" for c in _flam)
+            _iso_why = _iso.get('reason') or ''
+            if _flam and len(_flam) == len(_gas_comps) and all(_gas_cat(c) == 1 for c in _flam):
+                primary.append({
+                    'type': 'flam_gas', 'h': 'H220', 'h_class': 'Flam. Gas 1', 'signal': 'Danger',
+                    'source': _fsrc,
+                    'cutoff_used': ('Tüm bileşenler Kategori 1 alevlenir gaz — karışımın alt alevlenme sınırı '
+                                    'de ≤ %13 (SEA Ek-1 Tablo 2.2.1(a))'),
+                })
+            else:
+                pending_decisions.append({
+                    'code': 'PHYS_FLAM_GAS_UNTESTED',
+                    'field': 'flammable_gas',
+                    'question': (
+                        (f'Gaz karışımında alevlenir gaz bileşeni var: {_fsrc}. ' if _fsrc else
+                         'Gaz karışımında alevlenir olabilecek bileşen var. ')
+                        + 'SEA Ek-1 2.2 gereği karışımın alevlenirliği test (EN 1839) veya ISO 10156 hesabıyla '
+                        'belirlenir — bileşenin varlığı yeterli değildir. Program hesabı yapamadı: '
+                        + (_iso_why or 'bileşen verisi eksik') + '. Sonucu seçin.'),
+                    'test_guidance': (
+                        'Kategori 1: havada hacimce %13 veya daha az bir karışımda tutuşuyor ya da alevlenme '
+                        'aralığı en az 12 puan; Kategori 2: diğer alevlenir gazlar (SEA Ek-1 Tablo 2.2.1). '
+                        'ISO 10156: alevlenir bileşenlerin oranı ve alevlenme sınırları ile inert gazların '
+                        'eşdeğerlik katsayılarından hesaplanır; gaz tedarikçisinin GBF\'sinde veya sertifikasında '
+                        'genellikle yer alır.'),
+                    'options': [
+                        {'value': 'H220', 'label': 'Test / ISO 10156 sonucu — Kategori 1 (H220)',
+                         'effect': 'H220 → GHS02, Tehlike'},
+                        {'value': 'H221', 'label': 'Test / ISO 10156 sonucu — Kategori 2 (H221)',
+                         'effect': 'H221 → piktogram yok, Dikkat'},
+                        {'value': 'not_flammable', 'label': 'Test / ISO 10156 sonucu — alevlenir değil',
+                         'effect': 'H220/H221 atanmaz; Bölüm 16\'ya gerekçe yazılır'},
+                        {'value': 'not_tested_precautionary',
+                         'label': 'Test/hesap yapılmadı — geçici ihtiyatlı H220 (revizyon şartıyla)',
+                         'effect': 'H220 atanır; Bölüm 16\'ya "test bekliyor" notu düşülür'},
+                    ],
+                    'legal_basis': 'SEA Ek-1 2.2 (Tablo 2.2.1)',
+                    'components': [f"{c.get('cas') or c.get('cas_no') or ''} — {_nm(c)}" for c in _flam],
+                })
 
         # Oksitleyici gaz (H270) — SEA Ek-1 2.4: karışım havadan daha oksitleyiciyse (ISO 10156 5.3 oksitleme gücü
         # > %23,5). Önceki "≥ %1 oksitleyici bileşen" kuralı sentetik havaya (%21 O2) bile H270 veriyordu.
@@ -2486,7 +2454,9 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                 continue
             _chip_h = {(h.get('h_code') or '').replace('*', '').strip()[:4]
                        for h in (c.get('hazards') or [])}
-            if cas in FLAM_SOL_CAS or 'H228' in _chip_h:
+            # Yalnız bileşen kaydındaki H228. Elle liste kaldırıldı: karbon siyahı Ek-6'da yok, beyaz fosfor
+            # Ek-6'da piroforik katı (H250) — alevlenir katı değil (2026-10-08 tablo denetimi).
+            if 'H228' in _chip_h:
                 fs.append(c)
         if fs and not (test_data.get('flammable_solid') or '').strip():
             _fs_src = ', '.join(
@@ -3163,28 +3133,3 @@ def _apply_test_data(props: Dict, test_data: Dict) -> None:
             props[prop_key] = meas(test_data[test_key], std)
 
 
-def update_db(cas: str, props: Dict) -> None:
-    """Çalışma zamanında veritabanını güncelle (PubChem verisi vb.)."""
-    c = cas.strip()
-    if not c:
-        return
-    if props.get('density') is not None:
-        DENSITY_DB[c] = props['density']
-    # BP: önceden tanımlı null dahil mevcut değerlerin üzerine yazma
-    if props.get('boiling_point') is not None and c not in BP_DB:
-        BP_DB[c] = props['boiling_point']
-    # FP: aynı kural
-    if 'flash_point' in props and c not in FP_DB:
-        FP_DB[c] = props['flash_point']
-    if props.get('vapor_pressure') is not None:
-        VP_DB[c] = props['vapor_pressure']
-    if props.get('viscosity') is not None:
-        VISC_DB[c] = props['viscosity']
-    if props.get('solubility') is not None:
-        SOL_DB[c] = props['solubility']
-    if props.get('mw') is not None:
-        MW_DB[c] = props['mw']
-    if props.get('lel') is not None:
-        LEL_DB[c] = props['lel']
-    if props.get('uel') is not None:
-        UEL_DB[c] = props['uel']

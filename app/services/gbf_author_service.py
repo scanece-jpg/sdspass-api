@@ -114,17 +114,6 @@ def format_author_block(cert_data: dict, lang: str = 'TR') -> str:
     return '\n'.join(lines)
 
 
-def get_default_author() -> dict:
-    """
-    Kullanıcı sertifika girmemişse gösterilecek varsayılan uyarı bloğu.
-    """
-    return {
-        'name':        '',
-        'cert_no':     '',
-        'cert_body':   '',
-        'valid_until': '',
-        '_missing':    True,
-    }
 
 
 if __name__ == '__main__':

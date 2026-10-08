@@ -14,27 +14,6 @@ from typing import List, Dict
 
 GENERAL_ORGAN = 'Genel (organ belirsiz)'  # Organ belirtilmemiş sentinel
 
-ORGAN_ALIASES = {
-    'blood system': 'blood',
-    'haematopoietic system': 'blood',
-    'haematopoietic': 'blood',
-    'cns': 'nervous system',
-    'central nervous system': 'nervous system',
-    'peripheral nervous system': 'nervous system',
-    'kidney': 'kidneys',
-    'renal': 'kidneys',
-    'hepatic': 'liver',
-    'lung': 'lungs',
-    'respiratory tract': 'respiratory tract',
-    'respiratory system': 'respiratory system',
-    'eye': 'eyes',
-    'gi tract': 'gastro-intestinal tract',
-    'gastrointestinal tract': 'gastro-intestinal tract',
-    'gi': 'gastro-intestinal tract',
-    'bone marrow': 'bone',
-    'thymus': 'immune system',
-    'spleen': 'immune system',
-}
 
 ORGAN_TR = {
     'blood':                    'kan',

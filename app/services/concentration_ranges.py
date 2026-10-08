@@ -642,23 +642,3 @@ def _btn_label(lo: float, hi: float, lang: str, side: str) -> str:
 # HTML <select> Oluşturucu
 # ---------------------------------------------------------------------------
 
-def build_select_html(ranges: list[dict], selected_value: str = '') -> str:
-    """
-    Dropdown için hazır <option> HTML listesi döndür.
-    Her option'a renk ve data-signal attribute'u eklenir.
-    """
-    parts = ['<option value="">-- Konsantrasyon Aralığı Seçin --</option>']
-    for r in ranges:
-        val  = f"{r['lower']}-{r['upper']}"
-        sel  = ' selected' if val == selected_value else ''
-        pict = ','.join(r['pictograms'])
-        parts.append(
-            f'<option value="{val}" '
-            f'data-signal="{r["signal"]}" '
-            f'data-pictograms="{pict}" '
-            f'data-color="{r["color"]}" '
-            f'data-h-codes="{",".join(r["h_codes"])}"{sel}>'
-            f'{r["select_option"]}'
-            f'</option>'
-        )
-    return '\n'.join(parts)

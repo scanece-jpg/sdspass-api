@@ -247,33 +247,6 @@ _H_CLASS_GROUP: dict[str, str] = {
 }
 
 
-def _merge_annex_supplements(tr_hazards: list, annex_hazards: list) -> list:
-    """
-    TR Ek-6 tehlike listesine Annex VI'dan eksik tehlike SINIFLARINI ekle.
-    Aynı sınıftan (örn. cilt korozif/tahriş) TR Ek-6'da zaten varsa Annex VI'dakini ekleme.
-    Döndürür: ek tehlikeler listesi (her biri '_annex_supplement': True ile işaretli)
-    """
-    # TR'deki mevcut tehlike sınıf grupları
-    tr_groups: set[str] = set()
-    for h in tr_hazards:
-        code = (h.get('h_code') or '').replace('*', '').replace(' ', '')[:4]
-        g = _H_CLASS_GROUP.get(code)
-        if g:
-            tr_groups.add(g)
-
-    supplements = []
-    seen_groups: set[str] = set()
-    for h in annex_hazards:
-        code = (h.get('h_code') or '').replace('*', '').replace(' ', '')[:4]
-        g = _H_CLASS_GROUP.get(code)
-        if not g:
-            continue  # tanınmayan kod — atla
-        if g in tr_groups or g in seen_groups:
-            continue  # bu sınıf zaten var
-        supplements.append({**h, '_annex_supplement': True})
-        seen_groups.add(g)
-
-    return supplements
 
 
 # ---------------------------------------------------------------------------
@@ -572,9 +545,6 @@ def _load_names() -> Dict:
     return _NAMES_DB
 
 
-def get_name(cas: str, lang: str = 'en') -> Optional[str]:
-    """CAS için istenen dilde isim döndür. Bulamazsa None."""
-    return _load_names().get(cas.strip(), {}).get(lang)
 
 
 def _load_substance_db() -> Dict:
@@ -1141,10 +1111,6 @@ def is_annex_vi(cas: str, ec_no: str = '', index_no: str = '') -> bool:
     return _db_lookup(cas=cas, ec_no=ec_no, index_no=index_no) is not None
 
 
-def is_sea_ek6(cas: str, ec_no: str = '', index_no: str = '') -> bool:
-    """Madde SEA Ek-6'da mı?"""
-    cas = cas.strip()
-    return _sea_ek6_lookup(cas=cas, ec_no=ec_no, index_no=index_no) is not None
 
 
 def get_oel(cas: str) -> Optional[Dict]:

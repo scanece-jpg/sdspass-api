@@ -170,20 +170,6 @@ _ENV_KEYS = ('kanalizasyon', 'su kaynak', 'su kanal', 'drenaj', 'toprağa', 'zem
              'yüzey suyu', 'su ortamına', 'dere', 'göle', 'drains', 'watercourse', 'sewer')
 
 
-def split_env_and_cleanup(sentences: List[str]):
-    """H kodu cümlelerini 6.2 (çevresel) ve 6.3 (temizleme) olarak ayırır.
-    Birden çok cümle içeren maddeler önce cümlelere bölünür (her cümle kendi alt başlığına)."""
-    import re as _re
-    env, clean = [], []
-    for s in sentences or []:
-        for part in _re.split(r'(?<=\.)\s+', s.strip()):
-            part = part.strip()
-            if not part:
-                continue
-            target = env if any(k in part.lower() for k in _ENV_KEYS) else clean
-            if part not in target:
-                target.append(part)
-    return env, clean
 
 
 def accidental_release(h_codes: List[str], form: str, hazard_sentences: List[str],

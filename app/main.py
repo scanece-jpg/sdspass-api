@@ -787,13 +787,9 @@ async def substance_lookup(cas: str, form: str = None):
             pass
 
     if result:
+        # Kayıt numarası yalnız elle doğrulanmış tablodan (reach_db). Bilinmiyorsa boş → GBF'de "tedarikçiden".
+        # Önceden AI + web aramasıyla bulunan ilk "01-…" numarası doğrulamasız basılıyordu — kaldırıldı (2026-10-09).
         _reach = get_reg_no(cas)
-        if not _reach:
-            try:
-                from app.services.reach_cache import fetch_reach_no_async
-                _reach = await fetch_reach_no_async(cas)
-            except Exception:
-                pass
         return {
             "found"     : True,
             "cas"       : cas,
@@ -817,12 +813,6 @@ async def substance_lookup(cas: str, form: str = None):
     # REACH DB'de EC/REACH no var mı?
     ec  = get_ec_no(cas)
     reg = get_reg_no(cas)
-    if not reg:
-        try:
-            from app.services.reach_cache import fetch_reach_no_async
-            reg = await fetch_reach_no_async(cas)
-        except Exception:
-            pass
     if ec or reg:
         return {"found": True, "cas": cas, "name": "", "ec_no": ec,
                 "reach_no": reg, "annex_vi": False, "hazards": [], "oel": oel}

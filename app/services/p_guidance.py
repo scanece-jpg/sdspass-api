@@ -190,8 +190,17 @@ def select_label(all_p: List[str], h_codes: List[str], usage: str, form: str,
             cand[p] = l
     if usage == 'consumer' and 'P501' in all_p:
         cand['P501'] = 'K'                                   # Md. 30(2)
+    # Rehber 7.3.1 Genel önlem ifadeleri (halka satılan ürün): P101 sağlık zararı sınıflı her üründe,
+    # P102 yalnız çevre zararı sınıflı olanlar dışında her üründe "kesinlikle önerilir"; P103 opsiyonel.
+    if usage == 'consumer':
+        _hs = [str(h)[:4].upper() for h in h_codes if h]
+        if 'P101' in all_p and any(h.startswith('H3') for h in _hs):
+            cand['P101'] = 'K'
+        if 'P102' in all_p and _hs and not all(h.startswith('H4') for h in _hs):
+            cand['P102'] = 'K'
     by_prio = lambda ps: sorted(ps, key=lambda p: priority.get(p, 5), reverse=True)
-    must = by_prio([p for p, l in cand.items() if l == 'K'])
+    _gen = [p for p in ('P101', 'P102') if cand.get(p) == 'K']    # genel ifadeler başta
+    must = _gen + by_prio([p for p, l in cand.items() if l == 'K' and p not in _gen])
     opt = by_prio([p for p, l in cand.items() if l == 'O'])
 
     chosen, dropped = [], set()

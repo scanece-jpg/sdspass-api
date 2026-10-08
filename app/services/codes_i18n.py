@@ -835,9 +835,31 @@ def _fallback(lang: str) -> str:
 
 
 @lru_cache(maxsize=2000)
+def h_map(lang: str) -> dict:
+    """Tüm H metinleri (kod → metin); Türkçede SEA Ek-3 resmî metinleri eski çevirinin üzerine yazılır."""
+    lang = lang.upper()
+    out = dict(H_STMTS.get(lang, {}))
+    if lang == 'TR':
+        _off = _official_tr().get('h') or {}
+        out.update(_off)
+        for k in list(out):                      # H361D gibi eski büyük harfli anahtarlar da resmî metni alır
+            if k[:4] in ('H360', 'H361') and k not in _off:
+                from app.services.clp_service import canon_repro
+                out[k] = _off.get(canon_repro(k), out[k])
+    return out
+
+
 def get_h(lang: str, code: str) -> str:
     """H kodu metnini dönür. Yoksa EN, yoksa kodu döner."""
     lang = lang.upper()
+    # Türkçe: SEA Md.23(4) gereği Ek-3 resmî metni (alt kodlar Ek-6 Tablo 1.2) önceliklidir — önceden eski bir
+    # çeviri kullanılıyordu (örn. H304 "öldürücüdür" ↔ resmî "öldürücü olabilir", H317 "yol açar" ↔ "yol açabilir")
+    if lang == 'TR':
+        _off = _official_tr().get('h') or {}
+        from app.services.clp_service import canon_repro
+        result = _off.get(code) or _off.get(canon_repro(code))
+        if result:
+            return result
     result = H_STMTS.get(lang, {}).get(code)
     if not result:
         result = H_STMTS.get('EN', {}).get(code, code)

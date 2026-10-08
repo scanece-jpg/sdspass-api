@@ -76,6 +76,14 @@ def kural_testleri(c) -> int:
     from app.services.clp_service import classify_mixture_clp
     from app.services.ecological_service import calculate_aquatic, _compute_sum_acute_m
     from app.services.euh_service import check_euh, euh210_triggers
+    from app.services.ghs_pictogram import get_ghs_codes
+    from app.services.codes_i18n import get_h, _official_tr
+    from app.services.p_code_service import assign_p_codes, select_label_p_codes
+    from app.services.sds_pipeline import label_components
+
+    def p_label(usage, h):
+        allp = assign_p_codes(h, usage=usage)['p_codes']
+        return select_label_p_codes(allp, 6, h_codes=h, usage=usage)['selected']
 
     def C(cas, conc, *hz, **kw):
         d = {'cas': cas, 'conc': conc, 'concMax': conc, 'name': cas,
@@ -126,6 +134,32 @@ def kural_testleri(c) -> int:
          lambda: 'EUH203' not in check_euh([C('7789-00-6', 0.01)])['euh_codes']),
         ('Ek-2 2.10 cilt hassaslaştırıcı %0,2 → EUH210 tetikleyicisi',
          lambda: bool(euh210_triggers([C('h', 0.2, ('Skin Sens. 1', 'H317'))]))),
+        # ── Etiket / 2.2 (SEA Md.19–30) ──
+        ('Tablo 2.8.1 H241 (Tip B) → GHS01 + GHS02', lambda: get_ghs_codes(['H241']) == ['GHS01', 'GHS02']),
+        ('Tablo 5.2 H420 → GHS07', lambda: get_ghs_codes(['H420']) == ['GHS07']),
+        ('H360Df alt kodu → GHS08', lambda: get_ghs_codes(['H360Df']) == ['GHS08']),
+        ('Ek-3 resmî alt kod: Repr.1B H360Df %5 → H360Df (H360FD değil)',
+         lambda: classify_mixture_clp([C('r', 5, ('Repr. 1B', 'H360Df'))])['h_codes'] == ['H360Df']),
+        ('Ek-3 resmî alt kod: H360Df %1 (f için < %3) → H360D',
+         lambda: classify_mixture_clp([C('r', 1, ('Repr. 1B', 'H360Df'))])['h_codes'] == ['H360D']),
+        ('Md.29 / 3.8: H370 varken başka bileşenin H336\'sı silinmez',
+         lambda: 'H336' in classify_mixture_clp([C('a', 50, ('STOT SE 1', 'H370')), C('b', 30, ('STOT SE 3', 'H336'))])['h_codes']),
+        ('Rehber 7.3.1 tüketici, H314 → etikette P101 ve P102',
+         lambda: {'P101', 'P102'} <= set(p_label('consumer', ['H314']))),
+        ('Rehber 7.3.1 tüketici, yalnız H412 → P101/P102 yok',
+         lambda: not {'P101', 'P102'} & set(p_label('consumer', ['H412']))),
+        ('Md.19 tehlikesiz tüketici ürünü → P ifadesi yok', lambda: assign_p_codes([], usage='consumer')['p_codes'] == []),
+        ('Md.20(3)(b) %0,5 linalool (H317 eşiği altı) etiket bileşeni değil, %2 limonen öyle',
+         lambda: label_components([C('l', 0.5, ('Skin Sens. 1', 'H317'), name='linalool'),
+                                   C('d', 2, ('Skin Sens. 1', 'H317'), name='limonen')], ['H317']) == ['limonen']),
+        ('Md.23(4) tüm Türkçe H metinleri SEA Ek-3 / Ek-6 Tablo 1.2 resmî metniyle aynı',
+         lambda: (lambda off: len(off) >= 70 and all(get_h('TR', k) == v for k, v in off.items())
+                  and get_h('TR', 'H361D') == off['H361d'])(_official_tr()['h'])),
+        ('Md.23(4) H304 resmî: "…öldürücü olabilir." / H317 "…yol açabilir."',
+         lambda: get_h('TR', 'H304').endswith('öldürücü olabilir.') and get_h('TR', 'H317').endswith('yol açabilir.')),
+        ('Md.20(2)(a) Ek-6 grup üyesi adı: 5989-27-5 → d-limonen (grubun tüm adları değil)',
+         lambda: c.get('/api/v1/sds/substance/lookup', params={'cas': '5989-27-5'}).json().get('name_tr')
+         == '(R)-p-menta-1,8-dien; d-limonen'),
     ]
     hata = 0
     for ad, f in testler:

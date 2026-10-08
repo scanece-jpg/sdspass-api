@@ -202,7 +202,8 @@ DOMINANCE: dict = {
     'H300': ['H301', 'H302'], 'H301': ['H302'],
     'H310': ['H311', 'H312'], 'H311': ['H312'],
     'H330': ['H331', 'H332'], 'H331': ['H332'],
-    'H370': ['H371', 'H335', 'H336'], 'H371': ['H335', 'H336'],
+    # H335/H336 (Kat.3) farklı etkilerdir — Kat.1/2 varken silinmez (SEA Ek-1 3.8.2.1 Tablo 3.8.1, Md.29)
+    'H370': ['H371'],
     # H372 → H373 kuralı KALDIRILDI: stot_re_service organ başına öncelik uygular;
     # farklı hedef organlar (örn. H372 sinir + H373 işitme) her ikisi de etikette görünmeli.
     'H340': ['H341'], 'H350': ['H351'], 'H360': ['H361'],
@@ -342,6 +343,36 @@ def _get_scl_entry_for_conc(scl_list: list, h_code4: str, conc: float) -> dict |
 
 # SEA Ek-1 Tablo 3.2.4 / 3.3.4 — toplama yöntemi uygulanamadığında bileşen başına eşikler
 # (3.2.3.3.4 / 3.3.3.3.4: asit/baz, inorganik tuz, aldehit, fenol, yüzey aktif madde vb. — KDU kararı)
+def repro_code(base: str, cat1: set, cat2: set) -> str:
+    """Üreme toksisitesi resmî alt kodu (SEA Ek-3): cat1 = Kat.1 etkileri {'F','D'}, cat2 = Kat.2 şüpheleri."""
+    if base == 'H360':
+        F, D = 'F' in cat1, 'D' in cat1
+        if F and D:
+            return 'H360FD'
+        if F:
+            return 'H360Fd' if 'D' in cat2 else 'H360F'
+        if D:
+            return 'H360Df' if 'F' in cat2 else 'H360D'
+        return 'H360'
+    f, d = 'F' in cat2 or 'F' in cat1, 'D' in cat2 or 'D' in cat1
+    return 'H361' + ('f' if f else '') + ('d' if d else '')
+
+
+def canon_repro(code: str) -> str:
+    """Herhangi bir yazımdaki H360x/H361x kodunu resmî yazıma çevirir (H361D → H361d, H360fd → H360FD).
+    H360'ta büyük harf Kat.1, küçük harf Kat.2 sayılır; H361'de tüm harfler şüphedir."""
+    s = str(code or '').replace('*', '').strip()
+    base = s[:4].upper()
+    if base not in ('H360', 'H361') or len(s) <= 4:
+        return s
+    sfx = s[4:]
+    if base == 'H360':
+        if sfx.upper() == sfx:   # hepsi büyük → Kat.1
+            return repro_code('H360', set(sfx.upper()), set())
+        return repro_code('H360', {c for c in sfx if c.isupper()}, {c.upper() for c in sfx if c.islower()})
+    return repro_code('H361', set(), set(sfx.upper()))
+
+
 _NA_CUTOFFS = {'H314': 1.0, 'H315': 3.0, 'H318': 1.0, 'H319': 3.0}
 
 # Bileşen katkılarının toplandığı sınıflar (tek tek eşik değil, toplam eşik)
@@ -835,26 +866,30 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
                 seen_h.discard(_h)
                 passed = [p for p in passed if not p.get('h_code','').startswith('H361')]
 
-    # Sub-kod çözümleme: H360/H361 → H360D/H361D vb. (bileşen h_code'larından)
-    for _base, _classes in (('H360', ('Repr. 1A', 'Repr. 1B')), ('H361', ('Repr. 2',))):
+    # Sub-kod çözümleme — SEA Ek-1 Tablo 3.7.3 / Ek-3 resmî kodları: H360F, H360D, H360FD, H360Fd, H360Df,
+    # H361f, H361d, H361fd. Büyük harf = Kat.1 etkisi (≥ %0,3), küçük harf = Kat.2 şüphesi (≥ %3).
+    # Önceden hepsi büyük harfe çevriliyordu: H360Df ("doğmamış çocuğa zarar verebilir; doğurganlığa zarar
+    # verme şüphesi") H360FD'ye ("ikisine de zarar verebilir") dönüşüyordu.
+    _c1 = CLP_CUTOFFS_DICT['Repr. 1B']['cutoff']
+    _c2 = CLP_CUTOFFS_DICT['Repr. 2']['cutoff']
+    _cat1, _cat2 = set(), set()
+    for _comp in components:
+        _conc = float(_comp.get('concentration', _comp.get('conc', 0)) or 0)
+        for _haz in _comp.get('hazards', []):
+            _hc = (_haz.get('h_code') or '').replace('*', '').strip()
+            if _hc[:4].upper() not in ('H360', 'H361'):
+                continue
+            for _ch in _hc[4:]:
+                if _hc[:4].upper() == 'H360' and _ch.isupper() and _conc >= _c1:
+                    _cat1.add(_ch.upper())
+                elif _conc >= _c2:
+                    _cat2.add(_ch.upper())
+    for _base in ('H360', 'H361'):
         if _base not in seen_h:
             continue
-        _cutoff = CLP_CUTOFFS_DICT[_classes[0]]['cutoff']
-        _has_d = _has_f = False
-        for _comp in components:
-            _conc = float(_comp.get('concentration', _comp.get('conc', 0)) or 0)
-            if _conc < _cutoff:
-                continue
-            for _haz in _comp.get('hazards', []):
-                _hc   = (_haz.get('h_code')  or '').replace('*', '').strip()
-                _hcls = (_haz.get('h_class') or '').replace('*', '').strip()
-                if any(c in _hcls for c in _classes) and _hc.upper().startswith(_base) and len(_hc) > 4:
-                    _sfx = _hc[4:].upper()
-                    if 'D' in _sfx: _has_d = True
-                    if 'F' in _sfx: _has_f = True
-        if not (_has_d or _has_f):
+        _resolved = repro_code(_base, _cat1 if _base == 'H360' else set(), _cat2)
+        if _resolved == _base:
             continue
-        _resolved = _base + ('FD' if _has_d and _has_f else ('D' if _has_d else 'F'))
         seen_h.discard(_base)
         seen_h.add(_resolved)
         for _p in passed:

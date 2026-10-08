@@ -396,11 +396,14 @@ def assign_p_codes(
     # Her H kodu için P kodlarını topla
     for h in h_codes:
         h_clean = h.replace('*', '').replace(' ', '').strip()
-        for p in H_TO_P.get(h_clean, []):
+        # Alt kod tabloda yoksa (H360Df, H361fd …) 4 haneli taban kodun P ifadeleri kullanılır
+        for p in H_TO_P.get(h_clean) or H_TO_P.get(h_clean.upper()) or H_TO_P.get(h_clean[:4], []):
             p_to_sources.setdefault(p, set()).add(h_clean)
 
     # Zorunlu P kodları — çakışma sonrası eklenecek
-    if usage == 'consumer':
+    # Genel ifadeler yalnız SINIFLANDIRILMIŞ tüketici ürününde (SEA Md.19; Rehber 7.3.1) — önceden
+    # tehlikesiz tüketici ürününün GBF 2.2'sine de P101/P102/P103 basılıyordu
+    if usage == 'consumer' and any(str(h).strip() for h in h_codes):
         mandatory = ['P101', 'P102', 'P103']
     else:  # industrial / professional
         mandatory = []

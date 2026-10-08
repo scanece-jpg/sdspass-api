@@ -482,6 +482,43 @@ def _sea_ek6_lookup(cas: str = '', ec_no: str = '', index_no: str = '') -> Optio
     return None
 
 
+def _ek6_split_members(name: str) -> dict:
+    """Ek-6 grup girişi adını üyelerine ayırır: "a; b; [1] c; d; [2]" → {1: "a; b", 2: "c; d"}."""
+    parts = _re_clean.split(r'\[(\d+)\]', str(name or ''))
+    out = {}
+    for i in range(1, len(parts), 2):
+        txt = parts[i - 1].strip(' ;,')
+        if txt:
+            out[int(parts[i])] = txt
+    return out
+
+
+def _ek6_member(result: dict, entry: dict, cas: str) -> None:
+    """SEA Md.20(2)(a): Ek-6'da birden çok maddeyi kapsayan grup girişlerinde ([1], [2] … işaretli) etikette ve
+    GBF'de o maddenin kendi adı kullanılır — önceden grubun tüm adları basılıyordu (örn. d-limonen için 5 ad).
+    Üye sırası: girişteki CAS listesi (cas + synonyms) Ek-6'daki [n] sırasıyla aynıdır; sayılar tutmazsa
+    hiçbir şey değiştirilmez."""
+    try:
+        cas_list = [entry.get('cas', '')] + [x for x in (entry.get('synonyms') or [])
+                                             if _re_clean.fullmatch(r'\d{2,7}-\d{2}-\d', str(x))]
+        if cas not in cas_list:
+            return
+        n = cas_list.index(cas) + 1
+        tr = _ek6_split_members((entry.get('names') or [''])[0])
+        en = _ek6_split_members(entry.get('name_en', ''))
+        if len(tr) != len(cas_list) or n not in tr:
+            return
+        result['name_tr'] = tr[n]
+        if len(en) == len(cas_list) and n in en:
+            result['name'] = en[n]
+        ecs = entry.get('ec_list') or []
+        if len(ecs) == len(cas_list):
+            result['ec_no'] = ecs[n - 1]
+        result['ek6_group_member'] = n
+    except Exception:
+        pass
+
+
 def _sea_ek6_to_legacy(entry: dict) -> dict:
     """sea_ek6_tr.json formatını API formatına çevirir (Sıra 1 — TR yasal zemin)."""
     cas   = entry.get('cas', '')
@@ -739,6 +776,7 @@ def lookup_substance(cas: str, form: str = '',
     tr_entry = _sea_ek6_lookup(cas=cas, ec_no=ec_no, index_no=index_no)
     if tr_entry:
         result = _sea_ek6_to_legacy(tr_entry)
+        _ek6_member(result, tr_entry, cas)
         # Sınıflandırma karışmaz; sadece boş ATE ve asterisk Katman 2'den tamamlanır
         if not result.get('ate'):
             db_entry = _db_lookup(cas=result.get('cas',''), ec_no=result.get('ec_no',''),

@@ -1144,6 +1144,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _h_to_class.update({
         'H360D':  'Repr. 1A/1B', 'H360F':  'Repr. 1A/1B', 'H360FD': 'Repr. 1A/1B',
         'H361D':  'Repr. 2',     'H361F':  'Repr. 2',     'H361FD': 'Repr. 2',
+        'H360Df': 'Repr. 1A/1B', 'H360Fd': 'Repr. 1A/1B',
+        'H361d':  'Repr. 2',     'H361f':  'Repr. 2',     'H361fd': 'Repr. 2',
     })
     # Fiziksel / eko H kodları — CLP_CUTOFFS_DICT'te yok, canonical dict'ten ekle
     # (H224/H225/H226/H304/H410 vb. — passed loop H_CODE_TO_CANONICAL_CLASS üzerinden
@@ -1155,7 +1157,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     for hc_raw in all_h_codes:
         hc = (hc_raw or '').replace('*','').strip()
         # Preserve sub-codes (H360D/F/FD, H361D/F/FD); truncate others to 4 chars
-        if hc and not hc[4:].replace('D','').replace('F','') == '':
+        if hc and not hc[4:].upper().replace('D','').replace('F','') == '':
             hc = hc[:4]
         if not hc or hc in seen_clf:
             continue
@@ -1375,17 +1377,20 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         mandatory = label_p.get('mandatory', [])
         if mandatory:
             for m in mandatory:
+                if m in label_p['selected']:
+                    continue   # seçilenlerde zaten var — önceden P103 iki kez basılıyordu
                 txt = _p_full(m)
                 story.append(Paragraph(f"• <b>{m}:</b> {txt}", styles['bullet']))
 
         # Limit aşım notu — birden fazla tehlike sınıfı olan ürünlerde öncelikli seçim yapıldı
         if label_p.get('limit_exceeded'):
+            # SEA Md.30(3): zararın ciddiyeti gerektirdiğinde altıdan fazla önlem ifadesi etikette yer alabilir
             _exc_note = (
-                'Birden fazla tehlike sınıfı bulunduğundan öncelikli P kodları seçilmiştir. '
-                'Tam liste SDS Bölüm 2\'de yer almaktadır (CLP Madde 28(3)).'
+                'SEA Yönetmeliği Md.30(3): zararın ciddiyeti ve niteliği nedeniyle kesinlikle önerilen '
+                'önlem ifadelerinin tamamı etikete alınmıştır (altıdan fazla).'
                 if lang == 'TR' else
-                'Due to multiple hazard classes, priority P-codes have been selected. '
-                'Full list is provided in SDS Section 2 (CLP Article 28(3)).'
+                'Owing to the severity and nature of the hazards, all strongly recommended precautionary '
+                'statements are included on the label (more than six).'
             )
             story.append(Spacer(1, 2))
             story.append(Paragraph(f"<i>{_exc_note}</i>", styles['small']))
@@ -1475,26 +1480,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         story.append(Spacer(1, 3))
         story.append(Paragraph(f"<b>{_aq_txt}</b>", styles['body']))
 
-    # ─── Duyarlılaştırıcı Madde Kimliği — CLP Ek II §2.8 (ZORUNLU) ─────────────
-    # §2.8 yalnızca Skin Sens. (H317) ve Resp. Sens. (H334) için zorunludur.
-    # H319, H411 vb. için madde adı etikette ZORUNLU DEĞİL (denetim hatası).
-    SENS_H = {'H317','H334'}
-    contrib_sens = []
-    for comp_c in components:
-        comp_hcodes = {h.get('h_code','').replace('*','').strip() for h in comp_c.get('hazards',[])}
-        if comp_hcodes & SENS_H:
-            _cn = comp_c.get('name_tr','') if lang=='TR' else ''
-            _cn = _cn or comp_c.get('name','') or comp_c.get('cas_no','')
-            if _cn and _cn not in _label_comps:   # zorunlu bileşen satırında zaten varsa tekrarlama
-                contrib_sens.append(_cn)
-    if contrib_sens:
-        # EUH208 zaten sensitizer adını içeriyor; burada da açık liste göster
-        lbl_s = 'Duyarlılaştırıcı içerir' if lang=='TR' else 'Contains sensitiser'
-        story.append(Spacer(1, 3))
-        story.append(Paragraph(
-            f"<b>{lbl_s} (CLP Ek II §2.8 / SEA Madde 20):</b> {', '.join(set(contrib_sens))}",
-            styles['body']
-        ))
+    # "Duyarlılaştırıcı içerir" satırı kaldırıldı (2026-10-08): hassaslaştırıcı adları SEA Md.20(3)(b) bileşen
+    # satırında (sınıflandırmaya katkı yapanlar) ve EUH208'de (Ek-2 2.8 — eşiğin altındakiler) zaten yer alıyor;
+    # bu satır konsantrasyona bakmadan her hassaslaştırıcıyı tekrar yazıyordu.
 
     story += sub_block(f"2.3 {sub_title(lang,'2.3')}", styles)
     # PBT/vPvB

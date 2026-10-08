@@ -49,22 +49,10 @@ DOMINANCE_MAP = {
 
 
 def norm_sub(h) -> str:
-    """H360x/H361x alt kodlarını kanonik büyük harfe normalize et (H361d→H361D, H360Df→H360FD)."""
-    s = str(h).replace('*', '').strip()
-    if len(s) <= 4:
-        return s
-    base, sfx = s[:4], s[4:].upper()
-    if base in ('H360', 'H361'):
-        if 'D' in sfx and 'F' in sfx:
-            sfx = 'FD'
-        elif 'D' in sfx:
-            sfx = 'D'
-        elif 'F' in sfx:
-            sfx = 'F'
-        else:
-            sfx = ''
-        return base + sfx
-    return s
+    """H360x/H361x alt kodlarını SEA Ek-3 resmî yazımına çevirir (H361D → H361d; H360Df korunur).
+    Önceden büyük harfe çevriliyordu — H360Df → H360FD anlam değiştiriyordu."""
+    from app.services.clp_service import canon_repro
+    return canon_repro(h)
 
 
 def _h4(h) -> str:
@@ -209,12 +197,27 @@ _LABEL_CONTRIB = {
 }
 # Bileşenin dikkate alınma eşiği (%) — SEA Ek-1 Tablo 1.1 genel eşikleri (yüksek önem → 0,1)
 _LABEL_MIN_CONC = {'H300': 0.1, 'H301': 0.1, 'H310': 0.1, 'H311': 0.1, 'H330': 0.1, 'H331': 0.1,
-                   'H340': 0.1, 'H350': 0.1, 'H360': 0.1, 'H362': 0.1, 'H334': 0.1, 'H317': 0.1}
+                   'H340': 0.1, 'H350': 0.1, 'H360': 0.3, 'H362': 0.3, 'H361': 3.0}   # Tablo 3.7.2 %0,3; H317/H334: _label_min
 # Önem sırası — 4'ten fazla bileşen varsa en önemlileri seçilir
 _LABEL_RANK = {'H340': 10, 'H350': 10, 'H360': 10, 'H300': 9, 'H310': 9, 'H330': 9, 'H334': 8,
                'H301': 7, 'H311': 7, 'H331': 7, 'H370': 7, 'H372': 7, 'H314': 6, 'H318': 6,
                'H341': 5, 'H351': 5, 'H361': 5, 'H362': 5, 'H317': 5, 'H304': 4, 'H371': 4,
                'H373': 4, 'H302': 3, 'H312': 3, 'H332': 3, 'H335': 2, 'H336': 2}
+
+
+def _label_min(c: dict, h: str) -> float:
+    """Bileşenin karışım sınıflandırmasına katkı eşiği. Hassaslaştırıcılar toplanmaz (SEA Ek-1 3.4.3.3.1):
+    katkı = kendi sınıflandırma eşiğini aşması (Tablo 3.4.5 — Kat.1/1B %1, 1A %0,1, özel sınır varsa o).
+    Eşiğin altındaki hassaslaştırıcı EUH208 satırında adlandırılır (Ek-2 2.8) — Md.20(3)(b) listesine girmez."""
+    if h in ('H317', 'H334'):
+        from app.services.clp_service import _normalize_scl_list
+        for e in _normalize_scl_list(c.get('sclRaw') or c.get('scl') or []):
+            if _h4(e.get('h_code')) == h and e.get('c_min') is not None:
+                return float(e['c_min'])
+        if any('1A' in str(x.get('h_class') or '') and _h4(x.get('h_code')) == h for x in (c.get('hazards') or [])):
+            return 0.1
+        return 1.0
+    return _LABEL_MIN_CONC.get(h, 1.0)
 
 
 def label_components(comps: list, mixture_h: list) -> list:
@@ -234,7 +237,7 @@ def label_components(comps: list, mixture_h: list) -> list:
             continue
         conc = float(c.get('concMax') or c.get('conc') or 0)
         codes = {_h4(h.get('h_code')) for h in (c.get('hazards') or [])} & wanted
-        codes = {h for h in codes if conc >= _LABEL_MIN_CONC.get(h, 1.0)}
+        codes = {h for h in codes if conc >= _label_min(c, h)}
         if codes:
             found.append((max(_LABEL_RANK.get(h, 1) for h in codes), conc, name))
     found.sort(key=lambda x: (-x[0], -x[1]))

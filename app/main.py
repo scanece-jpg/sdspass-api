@@ -1274,11 +1274,11 @@ async def ghs_for_h_code(h_code: str, lang: str = "TR"):
 @app.get("/api/v1/codes/all")
 async def all_codes(lang: str = "TR"):
     """Tüm H ve P kodlarını döndür."""
-    from app.services.codes_i18n import H_STMTS, P_STMTS, EUH_STMTS
+    from app.services.codes_i18n import H_STMTS, P_STMTS, EUH_STMTS, h_map
     l = lang.upper()
     return {
         "lang": l,
-        "h_codes": H_STMTS.get(l, {}),
+        "h_codes": h_map(l),   # TR: SEA Ek-3 resmî metinleri
         "p_codes": P_STMTS.get(l, {}),
         "euh_codes": EUH_STMTS.get(l, {}),
     }
@@ -1542,7 +1542,8 @@ async def ai_chat(body: dict = Body(...)):
 
             _entry = lookup_substance(_rcas) if _rcas else None
             if _entry:
-                _hmap  = H_STMTS.get("TR", {})
+                from app.services.codes_i18n import h_map as _h_map
+                _hmap  = _h_map("TR")   # SEA Ek-3 resmî metinleri
                 _emap  = EUH_STMTS.get("TR", {})
                 _seen2: set = set()
                 _rows2: list[str] = []

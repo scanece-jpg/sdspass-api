@@ -40,12 +40,14 @@ H_TO_GHS = {
     'GHS01': {'H200','H201','H202','H203','H204','H205','H240','H241'},
     # H220 (Alev. Gaz 1A/1B) ve H232 (pirofor gaz) → GHS02 (SEA Ek-1 Tablo 2.2.2). H221 eklenmez:
     # Alev. Gaz 2 piktogram almaz; motor H221 üretmiyor.
-    'GHS02': {'H220','H232','H224','H225','H226','H228','H242','H250','H251','H252','H260','H261','H222','H223'},
+    # H241 (kendiliğinden tepkimeli / organik peroksit Tip B): GHS01 + GHS02 birlikte (Tablo 2.8.1 / 2.15.1)
+    'GHS02': {'H220','H232','H224','H225','H226','H228','H241','H242','H250','H251','H252','H260','H261','H222','H223'},
     'GHS03': {'H270','H271','H272'},
     'GHS04': {'H280','H281'},
     'GHS05': {'H290','H314','H318'},
     'GHS06': {'H300','H301','H310','H311','H330','H331'},
-    'GHS07': {'H302','H312','H315','H316','H317','H319','H320','H332','H335','H336'},
+    # H420 (ozon tabakası): SEA Ek-1 Tablo 5.2 — ünlem işareti (resmî ek dosyasındaki çizimden doğrulandı)
+    'GHS07': {'H302','H312','H315','H316','H317','H319','H320','H332','H335','H336','H420'},
     'GHS08': {'H304','H334','H340','H341','H350','H351',
               'H360','H360D','H360F','H360FD',
               'H361','H361D','H361F','H361FD',
@@ -76,18 +78,22 @@ def get_ghs_codes(h_codes: list) -> list:
     """H kodlarından ilgili GHS piktogram kodlarını döndür.
     SEA Madde 28 öncelik kuralları uygulanır.
     """
-    h_codes = [h.upper() for h in h_codes]
+    # Alt kodlar (H360Df, H361fd …) büyük/küçük harf farkıyla eşleşmiyordu → 4 haneli taban kod da denenir
+    h_codes = [str(h).replace('*', '').strip().upper() for h in h_codes]
     pics = set()
     for ghs, h_set in H_TO_GHS.items():
-        if any(h in h_set for h in h_codes):
+        if any(h in h_set or h[:4] in h_set for h in h_codes):
             pics.add(ghs)
 
     # ── SEA Madde 28 / CLP Ek-I §1.2.1.2 — Piktogram Öncelik İlkeleri ─────────
     h_set = set(h_codes)
 
     # (a) GHS01 varsa GHS02 ve GHS03 isteğe bağlı
+    #     İstisna — iki işaretin birlikte zorunlu olduğu durum: kendiliğinden tepkimeli / organik peroksit
+    #     Tip B (H241) etiketinde GHS01 + GHS02 birlikte yer alır (Ek-1 Tablo 2.8.1 / 2.15.1)
     if 'GHS01' in pics:
-        pics.discard('GHS02')
+        if 'H241' not in h_set:
+            pics.discard('GHS02')
         pics.discard('GHS03')
 
     # (b) GHS06 (kurukafa) varsa GHS07 tamamen kaldırılır

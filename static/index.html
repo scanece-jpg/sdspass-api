@@ -1891,7 +1891,7 @@ const DOMINANCE = {
   'H300':['H301','H302'], 'H301':['H302'],
   'H310':['H311','H312'], 'H311':['H312'],
   'H330':['H331','H332'], 'H331':['H332'],
-  'H370':['H371','H335','H336'], 'H371':['H335','H336'],
+  'H370':['H371'],   // H335/H336 (Kat.3) farklı etki — Kat.1/2 varken silinmez (SEA Ek-1 3.8, Md.29)
   'H372':['H373'],
   'H340':['H341'], 'H350':['H351'],
   'H360':['H361','H361D','H361F','H361FD'],
@@ -1969,7 +1969,10 @@ function getGhsCodes(hCodes) {
     if (ghs) pics.add(ghs);
   });
   // CLP §1.2.1.2 Piktogram Önceliği
-  if (pics.has('GHS01')) { pics.delete('GHS02'); pics.delete('GHS03'); }
+  // H241 (Tip B): GHS01 + GHS02 birlikte zorunlu (SEA Ek-1 Tablo 2.8.1 / 2.15.1)
+  const _hasH241 = hCodes.some(h => _normH(h) === 'H241');
+  if (_hasH241) pics.add('GHS02');
+  if (pics.has('GHS01')) { if (!_hasH241) pics.delete('GHS02'); pics.delete('GHS03'); }
   if (pics.has('GHS06')) pics.delete('GHS07');
   if (pics.has('GHS05') && !pics.has('GHS06')) {
     const _ghs07Keep = ['H302','H312','H332','H317','H335','H336'];
@@ -4192,7 +4195,7 @@ function renderAll(s) {
     ...(stot.h_codes || []),
     ...(eco.h_codes || []),
     ...(phys.results||[]).map(r => r.h || r.h_code),
-  ])].filter(Boolean).map(c => { const n = c.replace(/[*\s]/g,''); return /^H36[01]/i.test(n) ? n.toUpperCase() : n.substring(0,4); });
+  ])].filter(Boolean).map(c => { const n = c.replace(/[*\s]/g,''); return /^H36[01]/i.test(n) ? n : n.substring(0,4); });   // H360Df / H361d resmî yazım korunur (API kanonik verir)
 
   // Motorlar arası dominance — CLP Annex I dominance tablosu
   const allH = [...allHRaw];
@@ -6208,6 +6211,17 @@ document.addEventListener('keydown', e => { if (e.key === 'Escape') closePhysMod
 
   // Init
   _updateBar();
+})();
+</script>
+<script>
+// SEA Md.23(4): panelde de H ifadeleri SEA Ek-3 resmî metniyle gösterilir (PDF ile aynı kaynak).
+// hp_texts.js eski çeviriyi içerir; sunucudaki resmî metin yüklenince onun üzerine yazılır.
+(function () {
+  try {
+    fetch(API_BASE + '/codes/all?lang=TR').then(r => r.ok ? r.json() : null).then(d => {
+      if (d && d.h_codes && typeof HP_TEXTS !== 'undefined') Object.assign(HP_TEXTS.H, d.h_codes);
+    }).catch(() => {});
+  } catch (e) {}
 })();
 </script>
 </body>

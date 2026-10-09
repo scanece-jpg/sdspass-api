@@ -783,7 +783,12 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                 'question': (
                     f'Karışımda alevlenir katı bileşen var: {_fs_src}. SEA Ek-1 2.7 gereği alevlenir katı '
                     'sınıflandırması yalnız yanma hızı testi (UN N.1) sonucuna dayanır — bileşen oranından '
-                    'hesaplanmaz. Test sonucunu veya kararınızı seçin.'),
+                    'hesaplanmaz. Test sonucunu veya kararınızı seçin.'
+                    # SEA Ek-1 2.7.1: "kolay yanabilen katılar ... toz halinde, granüler halde veya macun kıvamındaki"
+                    + (' Not: SEA Ek-1 2.7.1 tanımındaki kolay yanabilen katılar toz, granül veya macun hâlindeki '
+                       'ürünlerdir; ürün tablet / blok hâlinde piyasaya arz ediliyorsa testin uygulanabilirliğini '
+                       'değerlendirin (sürtünmeyle yangına neden olma ayrıca değerlendirilir).'
+                       if form_sub in ('tablet', 'block') else '')),
                 'test_guidance': (
                     'UN Test ve Kriterler El Kitabı 33.2.1 (N.1): yanma süresi < 45 s veya yanma hızı > 2,2 mm/s; '
                     'ıslak bölge alevi söndüremiyorsa Kategori 1, en az 4 dakika durduruyorsa Kategori 2 '
@@ -805,24 +810,22 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                 'components': [f"{c.get('cas') or c.get('cas_no') or ''} — {c.get('name') or ''}" for c in fs],
             })
 
-        # Toz patlama uyarısı — powder formu veya powder_fine/powder_nano alt kategorisi
+        # Toz patlaması — SEA'da zararlılık sınıfı değildir; KKDİK Ek-2 2.3 "diğer zararlar": toz patlaması
+        # zararlılığı varsa "Eğer yayılırsa, patlayabilen toz-hava karışımı oluşabilir." Yanıcılık (organik / metal
+        # toz) bileşimden otomatik bilinemez → KDU "Toz patlaması riski var" kutusuyla karar verir (2.3 ve 7.2).
+        # Önceki uyarı AB ATEX direktifine atıf yapıyor ve yanmaz inorganik tozda da 7.2'ye patlama cümlesi
+        # yazdırıyordu (2026-10-09).
         if form == 'powder' or form_sub in ('powder_fine', 'powder_nano'):
             warnings.append(
-                'Toz patlama riski: İnce toz (<500 µm) organik veya metal tozları için '
-                'toz-hava bulutu patlama riski değerlendirilmeli (ATEX 2014/34/AB; '
-                'EN 14034 Kst/Pmax testi önerilir). CLP toz patlamasını ayrı bir tehlike '
-                'sınıfı olarak sınıflandırmaz; SDS Bölüm 7 ve 8\'de belirtilmesi zorunludur.'
-            )
+                'ℹ Toz ürün: yanıcı (organik veya metal) toz içeriyorsa havada dağıldığında patlayabilir. Bu durumda '
+                'fiziksel özelliklerde "Toz patlaması riski var" kutusunu işaretleyin — GBF Bölüm 2.3\'e KKDİK Ek-2\'deki '
+                'ifade ve Bölüm 7\'ye önlem yazılır. Toz patlaması SEA\'da ayrı bir zararlılık sınıfı değildir.')
 
-        # Nano malzeme genel uyarısı — TiO2 dışı nano boyutlu bileşenler
+        # Nano boyutlu toz — TR SEA ve KKDİK Ek-2'de nanoforma özel hüküm (ör. EUH212) yoktur
         if form_sub == 'powder_nano':
             warnings.append(
-                'Nano boyutlu toz (< 1 µm): CLP 2021/2030 sayılı Tüzük TiO2 nano için özel '
-                'EUH212 gerektirir. Diğer nano malzemeler için: (1) bulk formdaki CLP '
-                'sınıflandırması başlangıç noktasıdır, (2) nano spesifik toksikoloji '
-                'verileri mevcutsa SDS Bölüm 11\'e eklenmeli, (3) REACH nano kayıt '
-                'yükümlülükleri kontrol edilmeli (ECHA Nanomaterials guidance, R.7c).'
-            )
+                'ℹ Nano boyutlu toz (< 1 µm): SEA ve KKDİK Ek-2\'de nanoformlara özel hüküm yoktur; maddenin '
+                'sınıflandırması uygulanır. Nano boyuta özgü toksikoloji verisi varsa Bölüm 11\'e eklenmelidir.')
 
         # Oksitleyici katı — CLP Ek-I §2.14 gereği TEST (O.1) zorunlu; toplama yöntemi yok.
         # Bypass: bileşen ≥%90 + Ek-6 harmonize + diğer bileşenlerde fiziksel H kodu yok

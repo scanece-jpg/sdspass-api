@@ -97,7 +97,7 @@ URUNLER = [
      'h': ['H272', 'H318', 'H302'], 'signal': 'Danger',
      'var': ['Oks. Kat. 2 H272', 'P220', 'UN 1479', 'Ambalaj grubu II', 'ihtiyatlı olarak sınıflandırılmıştır',
              'Buhar basıncı Uygulanamaz (katı)', 'tane boyutu: belirlenmemiştir (ölçülmemiştir)'],
-     'yok': _UYDURMA + ['P221', 'Ox. Sol. (ihtiyatlı)']},
+     'yok': _UYDURMA + ['P221', 'Ox. Sol. (ihtiyatlı)', 'ATEX', 'patlayabilen toz-hava', 'Toz-hava karışımı oluşumunu']},
     {'ad': 'Aerosol sprey (etanol, propan/bütan itici)', 'form': 'aerosol',
      'bil': [('64-17-5', 40), ('74-98-6', 30), ('106-97-8', 20), ('7732-18-5', 10)],
      'test_data': {'flammable_aerosol': 'not_tested'}, 'soru': ('PHYS_AEROSOL_UNTESTED', 'flammable_aerosol'),
@@ -298,6 +298,16 @@ def kural_testleri(c) -> int:
              [n['TR'] for n in phys_calc([C('1310-73-2', 5, ('Skin Corr. 1A', 'H314')), C('7732-18-5', 95)],
                                          form='liquid', mixture_ph=13.5,
                                          test_data={'metal_corrosive': 'not_tested_precautionary'})['classification_notes']])),
+        ('Form alt türleri: toz patlaması yalnız KDU kararıyla (yanmaz tozda GBF\'ye yazılmaz, AB ATEX atfı yok); '
+         'nano tozda EUH212 (TR SEA\'da yok) önerilmez; su bazlı üründe "parlama noktası uygulanamaz — N/A" önerisi '
+         'yok (alevlenir bileşenli sulu ürün H226 alabilir); polimerde Ek-2 9.1(d) madde adı korunur',
+         lambda: (lambda w, html, pdf: not any('ATEX' in x or 'EUH212' in x for x in w)
+                  and any('Toz patlaması riski var' in x for x in w)
+                  and 'Su bazlı ürünlerde parlama noktası genellikle uygulanamaz' not in html and 'EUH212' not in html and '2004/42' not in html
+                  and "'Erime noktası/donma noktası (polimer" in pdf and 'ATEX 2014/34' not in pdf)(
+             phys_calc([C('7631-86-9', 100, phys={})], form='powder', form_sub='powder_nano')['warnings'],
+             open('static/index.html', encoding='utf-8').read(),
+             open('app/services/pdf_sds_service.py', encoding='utf-8').read())),
         ('ADR ÖH 375 (UN 3082): not ambalaj miktarına (≤ 5 L) dayanır, viskozite şartı yok (ADR 2025 3.3.1)',
          lambda: (lambda n: '5 L' in n and 'viskozite' not in n.lower())(
              tr_classify(h_codes=['H411'], form='liquid', viscosity=5000)['road']['note'])),

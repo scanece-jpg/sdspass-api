@@ -1008,7 +1008,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
         <!-- VOC içeriği: sadece sıvı + boya/vernik alt kategorisi -->
         <div class="phys-fw" id="voc_field_wrap" data-forms="liquid" data-mandatory="" style="display:none">
           <div class="phys-fh">
-            <label>VOC İçeriği (g/L) <span style="font-size:9px;color:var(--text3)">2004/42/EC</span></label>
+            <label>VOC İçeriği (g/L)</label>
             <label class="na-check"><input type="checkbox" id="na_voc" onchange="toggleNA(this,'tf_voc','voc')"> N/A</label>
           </div>
           <input type="number" id="tf_voc" step="1" min="0" placeholder="Ör: 420">
@@ -3489,9 +3489,9 @@ function _applySubTypeBehavior(form, sub) {
     w.removeAttribute('data-sub-mandatory');
     const lbl = w.querySelector('label:first-child');
     if (lbl) lbl.style.fontWeight = '';
-    const note = w.querySelector('.sub-type-note');
-    if (note) note.remove();
   });
+  // Notlar, işaretlenmemiş alanlara da eklenebiliyor (ör. su bazlı üründe parlama noktası notu) — hepsi silinir
+  document.querySelectorAll('.sub-type-note').forEach(n => n.remove());
 
   if (form !== 'liquid' && form !== 'solid' && form !== 'powder') return;
 
@@ -3518,19 +3518,19 @@ function _applySubTypeBehavior(form, sub) {
   };
 
   if (sub === 'solvent') {
-    _markMandatory('tf_evap', '⚑ Çözücü karışımında buharlaşma hızı kritik (n-BuAc=1 referans)');
-    _markMandatory('tf_vp',   '⚑ Çözücüde buhar basıncı maruz kalım değerlendirmesi için gerekli');
+    _markMandatory('tf_evap', '⚑ Bölüm 9 (g) buharlaşma hızı — çözücüde verilmesi önerilir (n-BuAc = 1)');
+    _markMandatory('tf_vp',   '⚑ Bölüm 9 (ı) buhar basıncı — ölçüm yoksa en uçucu bileşenin verisi yazılır');
   }
 
   if (sub === 'acid' || sub === 'base') {
-    _markMandatory('tf_ph', '⚑ ' + (sub === 'acid' ? 'Asit' : 'Baz') + ' çözeltisinde pH zorunlu (H314/H318 eşiği)');
+    _markMandatory('tf_ph', '⚑ ' + (sub === 'acid' ? 'Asit' : 'Baz') + ' çözeltisinde pH sınıflandırmayı etkiler: başka bilgi yoksa pH ≤ 2 / ≥ 11,5 → Cilt Aşındırıcı 1 (SEA Ek-1 3.2.3.1.2)');
     // pH konsantrasyon satırını aç — seyreltik çözelti tespiti için
     const phConcRow = document.getElementById('ph_conc_row');
     if (phConcRow) phConcRow.style.display = 'flex';
   }
 
   if (sub === 'waterbased') {
-    _markMandatory('tf_ph', '⚑ Su bazlı üründe pH önemli');
+    _markMandatory('tf_ph', '⚑ Bölüm 9 (ç) pH — su bazlı üründe kolay ölçülür');
     // Parlama noktası için "Uygulanamaz" öner
     const fpInp = document.getElementById('tf_fp');
     const naFp  = document.getElementById('na_fp');
@@ -3540,7 +3540,10 @@ function _applySubTypeBehavior(form, sub) {
         const n = document.createElement('div');
         n.className = 'sub-type-note';
         n.style.cssText = 'font-size:9px;color:var(--text3);margin-top:3px';
-        n.textContent = 'ℹ Su bazlı ürünlerde parlama noktası genellikle uygulanamaz — N/A seçebilirsiniz';
+        // Önceki not "su bazlıda parlama noktası genellikle uygulanamaz — N/A seçin" diyordu; alevlenir bileşenli
+        // sulu ürün (ör. %10 etanol → H226) sınıflandırmadan çıkabiliyordu (2026-10-09)
+        n.textContent = 'ℹ Su bazlı ürün: alevlenir bileşen yoksa parlama noktası satırına gerekçe yazılabilir; '
+          + 'alevlenir bileşen (ör. etanol) varsa sulu ürün de alevlenir olabilir — ölçüm veya literatür değeri gerekir (SEA Ek-1 2.6.4)';
         fpInp.after(n);
       }
     }
@@ -3553,7 +3556,7 @@ function _applySubTypeBehavior(form, sub) {
       const n = document.createElement('div');
       n.className = 'sub-type-note';
       n.style.cssText = 'font-size:9px;color:var(--text3);margin-top:3px';
-      n.textContent = 'ℹ Emülsiyon yoğunluğu homojen karıştıktan sonra ölçülmeli (teorik değerden sapabilir)';
+      n.textContent = 'ℹ Emülsiyonda yoğunluk homojen karıştırılmış numunede ölçülür';
       densInp.after(n);
     }
   }
@@ -3574,34 +3577,31 @@ function _applySubTypeBehavior(form, sub) {
 
   if (form === 'solid' || form === 'powder') {
     if (sub === 'polymer') {
-      _markMandatory('tf_mp', '⚑ Polimerde erime/yumuşama noktası (Vicat) zorunlu');
-      _addNote('tf_mp', 'ℹ Amorf polimerlerde erime noktası yerine Vicat yumuşama sıcaklığı (ISO 306) girin');
+      _markMandatory('tf_mp', '⚑ Bölüm 9 (d): belirli erime noktası olmayan polimerde yumuşama noktası (Vicat, ISO 306) verilebilir');
       const _mpEl = document.getElementById('tf_mp');
       if (_mpEl) _mpEl.placeholder = 'Vicat yumuşama noktası (°C) — ISO 306 / ASTM D1525';
     }
 
     if (sub === 'powder_fine' || form === 'powder') {
-      _markMandatory('tf_mp', '⚑ Toz ürünlerde erime noktası gerekli');
-      _addNote('tf_lel', 'ℹ İnce toz: patlama riski için LEL/UEL yerine toz patlama testi (EN 14034) önerilir', 'var(--accent)');
+      _markMandatory('tf_mp', '⚑ Bölüm 9 (d) erime noktası');
+      _addNote('tf_lel', 'ℹ Katıda patlama sınırı uygulanmaz; yanıcı tozda toz patlaması özellikleri (ör. TS EN 14034) belirtilebilir', 'var(--accent)');
     }
 
     if (sub === 'powder_nano') {
-      _markMandatory('tf_mp', '⚑ Nano toz — erime noktası zorunlu');
+      _markMandatory('tf_mp', '⚑ Bölüm 9 (d) erime noktası');
       _addNote('tf_density', 'ℹ Nano toz: parçacık yoğunluğu ile dökme yoğunluğu farklıdır; ikisini de belirtin', 'var(--accent)');
-      _addNote('tf_lel', '⚠ Nano toz: EUH212 değerlendirmesi gerekebilir (toz bulutunda patlama riski)', 'var(--warn, #e67e00)');
     }
 
     if (sub === 'granule') {
-      _markMandatory('tf_mp', '⚑ Granül/Pelet — erime noktası gerekli');
-      _addNote('tf_lel', 'ℹ Granül formda toz patlama riski düşük; LEL/UEL uygulanmayabilir');
+      _markMandatory('tf_mp', '⚑ Bölüm 9 (d) erime noktası');
     }
 
     if (sub === 'flake') {
-      _markMandatory('tf_mp', '⚑ Pul/Flake — erime noktası gerekli');
+      _markMandatory('tf_mp', '⚑ Bölüm 9 (d) erime noktası');
     }
 
     if (sub === 'block') {
-      _markMandatory('tf_mp', '⚑ Briket/Blok — erime/yumuşama noktası gerekli');
+      _markMandatory('tf_mp', '⚑ Bölüm 9 (d) erime noktası');
       _addNote('tf_density', 'ℹ Briket/Blok: görünür yoğunluk (bulk density) ile gerçek yoğunluk arasındaki farkı belirtin');
     }
   }

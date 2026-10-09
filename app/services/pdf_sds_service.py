@@ -2013,12 +2013,14 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             'Avoid dust generation; keep containers closed.',
         ]
         _extra_storage = _solid_storage_TR if lang == 'TR' else _solid_storage_EN
-        # ATEX uyarısı — powder formu veya powder_fine/nano alt kategorisi
-        if _b7_form == 'powder' or _b7_form_sub in ('powder_fine', 'powder_nano'):
+        # Toz patlaması — yalnız KDU "toz patlaması riski var" dediyse (Bölüm 2.3 ile aynı karar; KKDİK Ek-2 7.1(i)
+        # patlayıcı atmosferler). Önceden her toz üründe (yanmaz inorganik tozda da) AB ATEX atfıyla yazılıyordu.
+        if phys.get('dust_explosion') in (True, 'true', '1', 1):
             _extra_storage.append(
-                'Toz-hava bulutu patlama riski: ATEX 2014/34/AB gerekliliklerini göz önünde bulundurun; antistatik ekipman kullanın.'
+                'Toz-hava karışımı oluşumunu ve tutuşturucu kaynakları önleyin; statik elektriğe karşı önlem alın.'
                 if lang == 'TR' else
-                'Risk of dust-air cloud explosion: consider ATEX 2014/34/EU requirements; use antistatic equipment.'
+                'Avoid formation of dust-air mixtures and ignition sources; take precautionary measures against '
+                'static discharge.'
             )
         _sec72_bullets = _extra_storage + _sec72_bullets
 
@@ -2484,7 +2486,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         _ph_lbl_row = phys_prop(lang, 'ph')
 
     # (d) Erime/donma noktası (polimerde yumuşama noktası)
-    _mp_lbl = (_L('Yumuşama noktası (Vicat/VST)', 'Softening point (Vicat/VST)') if _is_polymer
+    _mp_lbl = (_L('Erime noktası/donma noktası (polimer: yumuşama noktası, Vicat)',
+                  'Melting point/freezing point (polymer: softening point, Vicat)') if _is_polymer
                else _L('Erime noktası/donma noktası', 'Melting point/freezing point'))
 
     # (f) Parlama noktası
@@ -2625,7 +2628,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _other = []
     _voc_content = sds_data.get('voc_content')
     if _voc_content is not None:
-        _other.append([_L('VOC içeriği (2004/42/EC)', 'VOC content (2004/42/EC)'), f"{_voc_content} g/L"])
+        _other.append([_L('Uçucu organik bileşik (VOC) içeriği', 'VOC content'), f"{_voc_content} g/L"])
     _af = sds_data.get('aerosol_flam') or {}
     if _is_aerosol_form and _af.get('pct') is not None:
         _other.append([_L('Alevlenir bileşen oranı (kütlece)', 'Flammable components (by mass)'),

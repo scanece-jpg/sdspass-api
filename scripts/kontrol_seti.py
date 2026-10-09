@@ -458,8 +458,10 @@ def kural_testleri(c) -> int:
              lambda cas, cl: next((x['h'], x['h_class'], x['signal'], 'Md.11(3)' in x['cutoff_used'])
                                   for x in phys_calc([C(cas, 95, (cl, 'H272'), annex_vi=True), C('7732-18-5', 5)],
                                                      form='solid')['extra'] if 'oxidiz' in x['type']))),
-        ('ISO 10156 4.5.1: sıvıda üst patlama sınırı Le Chatelier ile hesaplanmaz (yalnız alt sınır)',
-         lambda: (lambda t: 'lel' in t and 'uel' not in t)(
+        ('KKDİK Ek-2 9 (ampirik bilgi): sıvı karışımda patlama sınırı / yoğunluk / buhar basıncı / viskozite / '
+         'çözünürlük bileşenlerden hesaplanmaz (kaynaksız iç tablolar kaldırıldı)',
+         lambda: (lambda t: not ({'lel', 'uel', 'density', 'vapor_pressure', 'viscosity', 'solubility',
+                                  'vapor_density', 'henry_constant'} & set(t)))(
              phys_calc([C('64-17-5', 50, ('Flam. Liq. 2', 'H225')), C('67-64-1', 50, ('Flam. Liq. 2', 'H225'))],
                        form='liquid')['theo_props'])),
         ('SEA Ek-1 2.16: bileşende H290 yok ama pH 13,5 → metal aşındırıcılık sorusu',

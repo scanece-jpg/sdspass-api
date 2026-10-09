@@ -1288,7 +1288,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
 <script src="js/modules/cas-lookup.js?v=20260617"></script>
 <script src="js/modules/component-manager.js?v=20261009a"></script>
 <script src="js/modules/conc-selector.js?v=20260617"></script>
-<script src="js/modules/calculator.js?v=20261009c"></script>
+<script src="js/modules/calculator.js?v=20261009d"></script>
 <script src="js/modules/results-renderer.js?v=20260930"></script>
 <script src="js/modules/pdf-exporter.js?v=20260617"></script>
 <script src="js/app.js?v=20260617"></script>
@@ -4442,8 +4442,24 @@ function renderAll(s) {
     const headerBadge = measuredCount > 0
       ? `<span style="font-size:9px;padding:2px 7px;border-radius:10px;background:rgba(104,211,145,.15);color:#68d391">${measuredCount} ölçülen değer</span>`
       : tp.coverage > 0
-      ? `<span style="font-size:9px;padding:2px 7px;border-radius:10px;background:rgba(99,179,237,.1);color:${coverageColor}">DB kapsama %${tp.coverage}</span>`
+      ? `<span style="font-size:9px;padding:2px 7px;border-radius:10px;background:rgba(99,179,237,.1);color:${coverageColor}">bileşen verisi %${tp.coverage}</span>`
       : '';
+    // GBF Bölüm 9'a yazılacak madde / bileşen verisi (karışım değerleri hesaplanmaz — KKDİK Ek-2 9 ampirik bilgi)
+    const _b9 = window._lastB9 || {};
+    const _B9_LBL = { flash_point: 'Parlama noktası', boiling_point: 'Kaynama noktası', melting_point: 'Erime noktası',
+                      vapor_pressure: 'Buhar basıncı', density: 'Yoğunluk', solubility: 'Suda çözünürlük',
+                      auto_ignition: 'Kendiliğinden tutuşma', viscosity: 'Viskozite' };
+    const _escB = t => String(t ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;');
+    const _b9Rows = Object.entries(_b9).map(([k, v]) =>
+      `<div style="padding:3px 0;border-top:1px solid var(--border)"><b>${_B9_LBL[k] || k}:</b> ${_escB(v.display)}
+        <div style="font-size:9px;color:var(--text3)">${_escB(v.note)}</div></div>`).join('');
+    const _b9Box = _b9Rows
+      ? `<div style="margin-top:8px;font-size:10.5px">
+           <div style="font-size:9.5px;color:var(--text3);margin-bottom:2px">${window._lastSubstanceMode
+             ? 'GBF Bölüm 9 — madde verisi:'
+             : 'GBF Bölüm 9 — karışım için ölçüm olmayan özelliklerde bileşen verisi (KKDİK Ek-2 9.1):'}</div>${_b9Rows}</div>`
+      : `<div style="margin-top:8px;font-size:10px;color:var(--text3)">Karışımın yoğunluk, buhar basıncı, viskozite gibi
+           değerleri bileşenlerden hesaplanmaz; ölçüm girilmezse GBF'de "belirlenmemiştir" yazar.</div>`;
 
     h += `<div class="r-title">🧮 Bölüm 9 — Fiziksel Özellikler</div>
     <div class="ecard info" style="padding:10px 12px">
@@ -4455,10 +4471,10 @@ function renderAll(s) {
         ${chip('Parlama Noktası', tp.flash_point, '°C')}
         ${chip('Kaynama Noktası', tp.boiling_point, '°C')}
         ${chip('Yoğunluk', tp.density, 'g/cm³')}
-        ${chip('LEL', tp.lel, '%v/v')}
-        ${chip('UEL', tp.uel, '%v/v')}
+        ${tp.lel ? chip('LEL', tp.lel, '%v/v') : ''}
         ${chip('pH', tp.ph)}
       </div>
+      ${_b9Box}
       <button onclick="openPhysModal()"
         style="width:100%;margin-top:6px;padding:7px;border-radius:6px;border:1px dashed var(--border2);background:none;color:var(--text3);font-size:10px;cursor:pointer;font-family:var(--mono)"
         onmouseover="this.style.borderColor='var(--accent)';this.style.color='var(--accent)'"

@@ -1204,6 +1204,7 @@ async def sds_calculate(body: dict = Body(...)):
             'ek6_supplements':   core.get('ek6_supplements', []),   # Ek-6 dışı (ECHA) sınıflar
             'ek6_daha_agir':     core.get('ek6_daha_agir', []),     # Ek-6 uygulandı; ECHA'da daha ağır kategori (bilgi)
             'substance_mode':    bool(core.get('substance_mode')),  # tek maddeli ürün (SEA Md.4)
+            'b9':                core.get('b9') or {},   # GBF Bölüm 9 madde / bileşen verisi (kaynaklı)
             # Test ihtiyacı listesi (SEA Md.10, KKDİK Ek-2 9.1) — yalnız panel; GBF'ye yazılmaz
             'test_ihtiyaci': _test_needs.build(
                 form, core['components'], phys_result, body.get('test_data') or {},

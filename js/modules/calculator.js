@@ -195,6 +195,9 @@ const CalculatorModule = (() => {
       window._lastEk17 = data.ek17 || [];
       // Test ihtiyacı listesi (SEA Md.10(2), KKDİK Ek-2 9.1) — sağ panelde gösterilir, GBF'ye yazılmaz
       window._lastTestNeeds = data.test_ihtiyaci || [];
+      // GBF Bölüm 9'a yazılacak madde / bileşen verisi (ECHA kayıt dosyası → PubChem) — panel kartında
+      window._lastB9 = data.b9 || {};
+      window._lastSubstanceMode = !!data.substance_mode;
       _lastPayload = payload;
       _lastSummary = data.summary || null;
       StateStore.setCalcResult(result);

@@ -670,7 +670,9 @@ async def classify(inp: dict) -> dict:
     # 2. Sucul — ecological_service tek yetkili kaynak
     if aq and aq.h_code:
         h400_also = aq.h_code != 'H400' and aqa is not None and getattr(aqa, 'h_code', None) == 'H400'
-        h_codes = [h for h in h_codes if h not in ECO_H_CODES] + [aq.h_code]
+        # Etiket: H410 varken H400 tekrar sayılır (SEA Md.29); H411/H412/H413 + H400 ayrı sınıflardır → ikisi de etikette
+        h_codes = [h for h in h_codes if h not in ECO_H_CODES] + [aq.h_code] + \
+            (['H400'] if h400_also and aq.h_code != 'H410' else [])
         all_h   = [h for h in all_h if h not in ECO_H_CODES] + [aq.h_code] + (['H400'] if h400_also else [])
         if h400_also and not any(e['h_code'] == 'H400' for e in cp):
             cp.append({'h_code': 'H400', 'h_class': 'Aquatic Acute 1',

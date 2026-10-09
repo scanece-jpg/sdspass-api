@@ -491,6 +491,19 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
                   mixture_ph=None) -> Dict:
     """UN numarası ve etiket belirle."""
     h_set = h_set or set()
+    # ADR Tablo A UN 3149: "HİDROJEN PEROKSİT VE PEROKSİASETİK ASİT KARIŞIMI, asit(ler), su içeren ve
+    # peroksiasetik asit oranı %5'ten fazla olmayan, STABİLİZE" — Sınıf 5.1 (OC1), PG II, etiket 5.1 + 8.
+    # Adlı giriş B.B.B. öncelik tablosundan önce gelir (ADR 3.1.2.8.1). Yalnız oksitleyici (H271/H272) sıvı;
+    # PAA > %5 organik peroksit (Sınıf 5.2) kuralına bırakılır.
+    if components and not is_solid and form not in ('gas', 'aerosol') and h_set & {'H271', 'H272'}:
+        _c = {c.cas: c.conc or 0 for c in components}
+        if _c.get('7722-84-1', 0) > 0 and 0 < _c.get('79-21-0', 0) <= 5:
+            return {'un': 'UN 3149', 'class': '5.1', 'pg': 'II', 'labels': ['5.1', '8'],
+                    'label': ('HİDROJEN PEROKSİT VE PEROKSİASETİK ASİT KARIŞIMI, asit(ler), su içeren ve '
+                              "peroksiasetik asit oranı %5'ten fazla olmayan, STABİLİZE"),
+                    'kemler': '58', 'tunnel': 'E',
+                    'note': ('ADR 2025 Tablo A UN 3149 (OC1, PG II, etiket 5.1 + 8): hidrojen peroksit + '
+                             "peroksiasetik asit (≤ %5) karışımı için adlı giriş — ADR 3.1.2.8.1.")}
     if cls == '1':
         return {
             'un': 'UN 0000*', 'label': 'Patlayıcı',
@@ -657,7 +670,9 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
         if components:
             _prod_state = 'solid' if is_solid else ('gas' if form == 'gas' else 'liquid')
             # Tetikleyici (H314 taşıyan) bileşenler arasında en yüksek konsantrasyona sahip olanı al
-            trigger8 = [c for c in components if 'H314' in c.h_codes]
+            # ADR 2.2.8.1.6.3.2: %1'in altındaki bileşenler aşındırıcılık hesabına girmez — adlı giriş
+            # (örn. UN1791 hipoklorit çözeltisi) için de yalnız ≥ %1 aşındırıcılar sayılır.
+            trigger8 = [c for c in components if 'H314' in c.h_codes and (c.conc or 0) >= 1.0]
             # Adlı giriş (örn. UN1824 sodyum hidroksit çözeltisi) yalnız tek aşındırıcı bileşen varsa;
             # başka aşındırıcı bileşen de varsa karışım B.B.B. girişine gider (ADR 2.1.3.3).
             if len(trigger8) == 1:
@@ -667,6 +682,13 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
                 if _det:
                     _seed_state = _det.get('physical_state')
                     if not _seed_state or _seed_state == _prod_state:
+                        # Tablo A girişi birden çok PG içeriyorsa (örn. UN1791, UN1824: II/III) PG sabit değil,
+                        # ADR 2.2.8.1.6.3 hesabından gelir.
+                        if pg and pg != _det.get('packing_group'):
+                            from app.services.transport_adr_service import get_adr_details as _gad
+                            _d2 = _gad(_det['un_no'], pg)
+                            if _d2.get('packing_group') == pg:
+                                _det = {**_det, **{k: _d2[k] for k in ('packing_group', 'kemler', 'tunnel_code')}}
                         return {
                             'un':     _det['un_no'],
                             'label':  _det.get('name_tr') or _det.get('name', ''),
@@ -891,6 +913,11 @@ def classify(h_codes: List[str], form: str = 'liquid',
     # ── Adım 4: UN ve etiket ──────────────────────────────────────────────────
     un_entry = _get_un_entry(primary['class'], primary['pg'], sub_class, is_solid, h_set, form,
                              components=_comps, mixture_ph=mixture_ph)
+    if un_entry.get('class') and un_entry['class'] != primary['class'] and un_entry.get('labels'):
+        # Adlı karışım girişi (örn. UN 3149) sınıfı ve yan tehlikeyi Tablo A'dan belirler
+        primary = {**primary, 'class': un_entry['class'], 'pg': un_entry.get('pg') or primary['pg']}
+        subs = [{'class': x, 'pg': None} for x in un_entry['labels'][1:]]
+        sub_class = subs[0]['class'] if subs else None
     if corr_note and '8' in (primary['class'], sub_class):
         un_entry['note'] = ((un_entry.get('note') or '') + ' ' + corr_note).strip()
 

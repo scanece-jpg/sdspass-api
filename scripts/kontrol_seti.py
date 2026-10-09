@@ -317,6 +317,20 @@ def kural_testleri(c) -> int:
         p.update(kw)
         return {x['ozellik']: x for x in c.post('/api/v1/sds/calculate', json=p).json().get('test_ihtiyaci') or []}
 
+    from app.services import audit_checks as A
+
+    def full(bil, **kw):
+        """/sds/calculate tam yanıtı (etiket H kodları, taşıma)"""
+        comps = []
+        for cas, conc in bil:
+            r = c.get('/api/v1/sds/substance/lookup', params={'cas': cas, 'form': 'liquid'}).json()
+            comps.append({'cas': cas, 'name': r.get('name') or cas, 'conc': conc, 'concMax': conc,
+                          'hazards': r.get('hazards', []), 'sclRaw': r.get('scl', []),
+                          'm_factors': r.get('m_factors') or {}, 'ate': None})
+        p = {'components': comps, 'form': 'liquid', 'usage': 'industrial', 'lang': 'TR'}
+        p.update(kw)
+        return c.post('/api/v1/sds/calculate', json=p).json()
+
     sens_scl = C('f', 0.5, ('Skin Sens. 1', 'H317'), sclRaw=[{'h_code': 'H317', 'c_min': 0.1}])
     aq4 = calculate_aquatic([C('c', 30, ('Aquatic Chronic 4', 'H413'))])
     testler = [
@@ -761,6 +775,29 @@ def kural_testleri(c) -> int:
          lambda: all(_raises(lambda r=r: build_tc(r)) for r in (
              [{'cas_no': '87-90-1', 'conc': 'GIZLI', 'h_codes': ['H272']}],
              [{'cas_no': '87-90-1', 'h_codes': ['H272']}]))),
+        ('Referans GBF 2026-10-09 (Diversey Chlorsan): NaOCl %14 + amin oksit %3 + NaOH %0,99 → H411 + H400; '
+         'SEA Md.29: H411 ile H400 tekrar değil — etikette ikisi de; ADR 2.2.8.1.6.3.2: %1 altı NaOH sayılmaz → UN 1791 PG II',
+         lambda: (lambda r: {'H400', 'H411'} <= set(r.get('h_codes') or []) and 'H410' not in (r.get('h_codes') or [])
+                  and (r['transport']['road']['un'].replace(' ', ''), r['transport']['road']['pg']) == ('UN1791', 'II'))(
+             full([('7681-52-9', 13.99), ('308062-28-4', 2.99), ('1310-73-2', 0.99)],
+                  test_data={'metal_corrosive': 'H290'}))),
+        ('Referans GBF 2026-10-09 (Ecolab Oxonia): H2O2 %30 + asetik asit %10 + PAA %5, oksitleyici → ADR Tablo A '
+         'adlı giriş UN 3149, Sınıf 5.1, PG II, yan tehlike 8 (B.B.B. UN 3093 değil)',
+         lambda: (lambda d: (d['un'], d['class'], d['pg'], d.get('sub_class')) == ('UN 3149', '5.1', 'II', '8'))(
+             full([('7722-84-1', 29.99), ('64-19-7', 9.99), ('79-21-0', 4.99)],
+                  test_data={'oxidizing_liquid': 'H272_cat2', 'metal_corrosive': 'not_corrosive'})['transport']['road'])),
+        ('Denetim 2.2-tutarlilik: 2.1 içinde H400 + H411 var, 2.2 içinde H400 yok → eksik (SEA Md.29)',
+         lambda: (lambda t: A.CHECKS['2.2-tutarlilik']({'pages': [t], 'text': t, 'secs': A.split_sections(t),
+                                                       'facts': set()})[0] == 'eksik')(
+             'BÖLÜM 1: Tanım\nBÖLÜM 2: Zararlılıkların tanımlanması\n2.1 Sınıflandırma Suk. Akut 1 H400 '
+             'Suk. Kron. 2 H411\n2.2 Etiket unsurları Uyarı kelimesi Dikkat H411\n2.3 Diğer zararlar Yok.\n'
+             'BÖLÜM 3: Bileşim\n')),
+        ('Denetim eldiven süresi: "Nüfuz etme süresi: ≥ 480 dak" ve "Dayanıklılık süresi: 1-4 saat" tanınır',
+         lambda: all(A.CHECKS['8.2.2-eldiven-sure']((lambda t: {'pages': [t], 'text': t, 'secs': A.split_sections(t),
+                                                               'facts': set()})(
+             'BÖLÜM 8: Maruz kalma kontrolleri\n8.2 Ellerin korunması: eldiven nitril kauçuk 0,4 mm, ' + x +
+             '\nBÖLÜM 9: Fiziksel\n'))[0] == 'uygun'
+             for x in ('Nüfuz etme süresi: ≥ 480 dak', 'Dayanıklılık süresi: 1 -4 saat'))),
     ]
     hata = 0
     for ad, f in testler:

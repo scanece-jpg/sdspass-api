@@ -39,7 +39,7 @@ LABEL_COMP_H = {'H300', 'H301', 'H302', 'H310', 'H311', 'H312', 'H330', 'H331', 
                 'H372', 'H373', 'H335', 'H336', 'H304'}
 # "Tehlike İfadeleri", "Tehlike Kodları" gibi başlıklar uyarı kelimesi sayılmaz
 _SIG_HEAD = re.compile(r'(?i)tehlike\s+(?:ifade|İfade|i̇fade)\w*|tehlike\s+kod\w*|tehlike\s+sınıf\w*|'
-                       r'tehlike\s+işaret\w*|tehlike\s+bilgi\w*')
+                       r'tehlike\s+işaret\w*|tehlike\s+bilgi\w*|tehlike\s+beyan\w*|tehlike\s+belirten\w*')
 
 
 def _signal_text(s22: str) -> str:
@@ -245,6 +245,10 @@ def c_22_tutarlilik(ctx):
     s22 = _signal_text(s22)
     if h22 - h21 and h21:
         notes.append(f'2.2\'de olup 2.1\'de olmayan H kodları: {sorted(h22 - h21)}')
+    # SEA Md.29: H410 varken H400 tekrar sayılır; H411/H412/H413 ile H400 ayrı sınıflar → etikette ikisi de olur
+    if 'H400' in h21 and h22 and 'H400' not in h22 and 'H410' not in h22:
+        notes.append('2.1\'de Sucul Akut 1 (H400) var ama etikette (2.2) H400 yok — yalnız H410 varken çıkarılabilir '
+                     '(SEA Md.29)')
     if (h21 | h22) & DANGER_H and not re.search(r'\bTehlike\b', s22):
         notes.append('"Tehlike" gerektiren sınıflandırma var ama 2.2\'de "Tehlike" yok')
     if not ((h21 | h22) & DANGER_H) and (h21 | h22) & WARNING_H and not re.search(r'\bDikkat\b', s22):
@@ -805,7 +809,7 @@ def c_eldiven_sure(ctx):
     seg = _glove_seg(ctx)
     if seg is None:
         return 'eksik', 'Bölüm 8\'de el koruması (eldiven) bilgisi bulunamadı.'
-    if _glove_not_needed(seg) or re.search(r'(?i)\d+\s*(?:dk|dakika|min)\b', seg):
+    if _glove_not_needed(seg) or re.search(r'(?i)\d+\s*(?:dk|dak|dakika|min|saat)\b', seg):
         return 'uygun', 'Eldivenin delinme (aşınma) süresi belirtilmiş.'
     if re.search(r'(?i)delinme süresi|breakthrough', seg) and re.search(r'(?i)üretici|manufacturer', seg):
         return 'kdu', ('Delinme süresi sayı olarak yok; üretici verisine göre seçim yazılmış — KDU eldiven üreticisinin '

@@ -850,7 +850,11 @@ def _dedupe_h_codes(result: dict) -> dict:
     ECHA C&L çoklu bildirim birleştirmesinden kaynaklanan çakışmaları önler.
     Kural seti: clp_service.DOMINANCE (tek kaynak — import ile).
     """
-    from app.services.clp_service import DOMINANCE as _DOM
+    from app.services.clp_service import DOMINANCE as _DOM0
+    # Akut sucul (H400) ve kronik sucul (H410) AYRI zararlılık sınıflarıdır; karışımda ayrı toplanır (SEA Ek-1
+    # Tablo 4.1.1 / 4.1.2). "H410 → H400 düşer" yalnız etiket kuralıdır — madde verisinden silinirse karışımın H400'ü
+    # kaybolur (ör. sodyum hipoklorit, M akut 10). 2026-10-09 referans GBF karşılaştırmasında bulundu.
+    _DOM = {k: [x for x in v if not (k == 'H410' and x == 'H400')] for k, v in _DOM0.items()}
     h_codes = result.get('h_codes', [])
     hazard_classes = result.get('hazard_classes', [])
     h_set = set(h_codes)
@@ -916,7 +920,10 @@ async def lookup_echa_api(cas: str, refresh: bool = False) -> dict | None:
 
     cas = cas.strip()
     cache = _load_cache()
-    if not refresh and cas in cache and not _is_stale(cache[cas]):
+    # Önceki ayıklama H410 varken H400'ü siliyordu — böyle kayıtlar bir kez yeniden okunur
+    _lost_h400 = (cas in cache and 'H410' in (cache[cas].get('h_codes') or [])
+                  and 'H400' not in (cache[cas].get('h_codes') or []) and not cache[cas].get('_dedupe_v2'))
+    if not refresh and cas in cache and not _is_stale(cache[cas]) and not _lost_h400:
         before = list(cache[cas].get('h_codes', []))
         result = _dedupe_h_codes(cache[cas])
         if list(result.get('h_codes', [])) != before:
@@ -931,6 +938,7 @@ async def lookup_echa_api(cas: str, refresh: bool = False) -> dict | None:
             result = await _fetch_echa_cl_direct(cas, client)
             if result:
                 result = _dedupe_h_codes(result)
+                result['_dedupe_v2'] = True
                 result['_cache_source'] = 'echa_cl'
                 result['fetched_at']    = datetime.now(timezone.utc).isoformat(timespec='seconds')
                 _record_change(cas, result)

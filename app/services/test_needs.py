@@ -142,11 +142,10 @@ def build(form: str, comps: List[Dict], phys_res: Dict, test_data: Dict = None,
                                  f'Aspirasyon zararlı (H304) bileşen toplamı %{asp_total:g} ≥ %10.',
                                  'SEA Ek-1 3.10.3.3.1', 'mm²/s, 40 °C (ör. ISO 3104)', 'tf_visc'))
             else:
-                _now = ('H304 uygulanıyor' if res_h.get('asp_tox') else
-                        'H304 şu an hesaplanmış viskoziteyle dışarıda bırakılıyor — bu bir ölçüm değildir')
                 rows.append(_row(
                     'siniflandirma', 'Viskozite (40 °C, kinematik)', 'eksik', 'ÖLÇÜLMELİ',
-                    (f'Aspirasyon zararlı (H304) bileşen toplamı %{asp_total:g} ≥ %10 ({_now}). Karar 40 °C\'de '
+                    (f'Aspirasyon zararlı (H304) bileşen toplamı %{asp_total:g} ≥ %10; ölçüm olmadığı için H304 '
+                     'uygulanıyor. Karar 40 °C\'de '
                      'ölçülmüş kinematik viskoziteye göre verilir: ≤ 20,5 mm²/s → H304. Oda sıcaklığında ölçülen '
                      'dinamik viskozite (mPa·s, Brookfield) bu karar için kullanılamaz.'),
                     'SEA Ek-1 3.10.3.3.1', 'mm²/s, 40 °C (ör. ISO 3104)', 'tf_visc'))

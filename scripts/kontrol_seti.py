@@ -270,6 +270,9 @@ def kural_testleri(c) -> int:
          lambda: _compute_sum_acute_m([C('d', 30, ('Aquatic Chronic 1', 'H410'))]) == 0),
         ('3.10.3.3.1 viskozite 50 mm²/s → H304 yok (toluen %15)',
          lambda: 'H304' not in calc([('108-88-3', 15), ('56-81-5', 85)], test_data={'viscosity': 50}, user_fp=40)),
+        ('3.10.3.3.1 "40 °C\'de ölçülmüş" viskozite: girilmemişse hesaplanmış viskoziteyle H304 kaldırılmaz '
+         '(toluen %15 + gliserin)',
+         lambda: 'H304' in calc([('108-88-3', 15), ('56-81-5', 85)], user_fp=40)),
         ('Tablo 2.6.1 ölçülen kaynama başlangıcı 60 °C, FP 0 °C → H225 (H224 değil)',
          lambda: (lambda h: 'H225' in h and 'H224' not in h)(
              calc([('60-29-7', 5), ('108-88-3', 95)], user_fp=0, test_data={'boiling_point': 60}))),

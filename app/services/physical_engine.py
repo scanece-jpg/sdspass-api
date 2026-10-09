@@ -2329,7 +2329,8 @@ def _calc_asp_tox(comps: List[Dict], test_data: Dict = None) -> Dict:
             total += conc
 
     if total >= 10:
-        visc_note = '' if kin_visc is not None else ' (viskozite girilmedi — doğrulayın)'
+        visc_note = ('' if kin_visc is not None else
+                     ' (40 °C kinematik viskozite ölçülmedi — SEA Ek-1 3.10.3.3.1; ölçüm > 20,5 mm²/s ise H304 kalkar)')
         src = ', '.join(f"{t['name']} (%{t['conc']})" for t in triggers) + visc_note
         return {'result': {'h':'H304','h_class':'Asp. Tox. 1','signal':'Danger'},
                 'source': src, 'total': total}
@@ -2404,14 +2405,9 @@ def calculate(comps: List[Dict], form: str = 'liquid',
                       'cutoff_used': 'CLP Ek-I §2.3 — tüm aerosollere uygulanır'})
 
     if form in ('liquid', 'paste'):
-        # Kullanıcı viskozite girmemişse hesaplanmış değeri kullan
-        _asp_test = dict(test_data)
-        if _asp_test.get('viscosity') is None:
-            _pre_props = calc_theo_props(comps) or {}
-            _calc_visc = (_pre_props.get('viscosity') or {}).get('value')
-            if _calc_visc is not None:
-                _asp_test['viscosity'] = _calc_visc
-        asp = _calc_asp_tox(comps, _asp_test)
+        # SEA Ek-1 3.10.3.3.1: karar "40 °C'de ölçülmüş kinematik viskozite"ye göre verilir. Hesaplanmış
+        # viskozite ölçüm değildir — H304'ü dışarıda bırakmak için kullanılmaz (2026-10-09; önceden kullanılıyordu).
+        asp = _calc_asp_tox(comps, test_data)
         if asp['result']:
             primary.append({'type': 'asp_tox', **asp['result'],
                             'source': asp['source'], 'total': asp['total'],

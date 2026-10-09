@@ -10,7 +10,7 @@ Ortam değişkenleri tanımlı değilse (yerel geliştirme) hiçbir şey yapmaz:
   SDSPASS_DATA_TOKEN   yalnızca o depoya "Contents: read & write" yetkili fine-grained token
   SDSPASS_DATA_BRANCH  varsayılan: main
 """
-import base64, hashlib, io, json, os, queue, tarfile, threading, time
+import base64, hashlib, io, json, os, queue, re, tarfile, threading, time
 from pathlib import Path
 from urllib.parse import quote
 
@@ -41,6 +41,24 @@ _pending: set = set()
 _shas: dict = {}
 _lock    = threading.Lock()
 _worker  = None
+# /health için durum — depo adı ve token gösterilmez
+_status: dict = {'indirilen': None, 'yuklenen': 0, 'son_hata': None, 'son_hata_zamani': None}
+
+
+def _err(msg: str) -> None:
+    print(msg)
+    # /health herkese açık — adres (depo adı) ve ek satırlar gösterilmez
+    _status['son_hata'] = re.sub(r"\s*for url '[^']*'", '', msg.replace('[data_store] ', '')).split('\n')[0][:200]
+    _status['son_hata_zamani'] = time.strftime('%Y-%m-%d %H:%M:%S')
+
+
+def status() -> dict:
+    """Kalıcılık durumu (tarayıcıdan /health ile kontrol için)."""
+    if not ENABLED:
+        return {'durum': 'KAPALI — SDSPASS_DATA_REPO / SDSPASS_DATA_TOKEN tanımlı değil; veriler her deploy\'da silinir'}
+    return {'durum': 'açık' if not _status['son_hata'] else 'açık — HATA VAR', 'baslangicta_indirilen_dosya':
+            _status['indirilen'], 'bu_oturumda_yuklenen': _status['yuklenen'], 'bekleyen': _q.unfinished_tasks,
+            'son_hata': _status['son_hata'], 'son_hata_zamani': _status['son_hata_zamani']}
 
 
 def _headers() -> dict:
@@ -107,6 +125,7 @@ def sync_down() -> None:
             r = c.get(f'{_API}/repos/{REPO}/tarball/{quote(BRANCH)}', headers=_headers())
             if r.status_code in (404, 409):
                 print(f'[data_store] {REPO}: depo boş ya da dal yok — ilk yazmada oluşturulacak')
+                _status['indirilen'] = 0
                 return
             r.raise_for_status()
 
@@ -134,8 +153,9 @@ def sync_down() -> None:
                               if x.get('type') == 'blob'})
 
         print(f'[data_store] {REPO}: {n} dosya indirildi')
+        _status['indirilen'] = n
     except Exception as e:
-        print(f'[data_store] indirme hatası — yerel dosyalarla devam: {type(e).__name__}: {e}')
+        _err(f'[data_store] indirme hatası — yerel dosyalarla devam: {type(e).__name__}: {e}')
 
 
 # ── Yükleme (çalışırken, arka planda) ─────────────────────────────────────────
@@ -173,7 +193,7 @@ def _run() -> None:
             try:
                 _upload(c, rel)
             except Exception as e:
-                print(f'[data_store] {rel} yükleme hatası: {type(e).__name__}: {e}')
+                _err(f'[data_store] {rel} yükleme hatası: {type(e).__name__}: {e}')
             finally:
                 _q.task_done()
 
@@ -194,6 +214,7 @@ def _upload(c: httpx.Client, rel: str) -> None:
         r = c.put(url, headers=_headers(), json=body)
         if r.status_code in (200, 201):
             _shas[rel] = r.json()['content']['sha']
+            _status['yuklenen'] += 1
             return
         if r.status_code in (409, 422):           # sha eski ya da eksik → depodaki güncel sha'yı al
             g = c.get(url, headers=_headers(), params={'ref': BRANCH})
@@ -203,7 +224,7 @@ def _upload(c: httpx.Client, rel: str) -> None:
                 _shas.pop(rel, None)
             continue
         r.raise_for_status()
-    print(f'[data_store] {rel}: 3 denemede yüklenemedi')
+    _err(f'[data_store] {rel}: 3 denemede yüklenemedi')
 
 
 def flush(timeout: float = 20.0) -> None:

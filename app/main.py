@@ -80,7 +80,8 @@ async def _shutdown_tasks():
 
 @app.get("/health")
 async def health():
-    return {"status": "ok", "service": "HazardDesk PDF API"}
+    from app.services import data_store
+    return {"status": "ok", "service": "HazardDesk PDF API", "veri_deposu": data_store.status()}
 
 
 # ─── SDS DENETIM ENDPOINT ─────────────────────────────────────────────────────

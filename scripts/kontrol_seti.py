@@ -422,9 +422,38 @@ def kural_testleri(c) -> int:
          lambda: 'PHYS_MET_CORR_UNTESTED' in [d['code'] for d in phys_calc(
              [C('1310-73-2', 5, ('Skin Corr. 1A', 'H314')), C('7732-18-5', 95)], form='liquid',
              mixture_ph=13.5)['pending_decisions']]),
-        ('Alevlenir sıvı bileşen tarama eşiğinin altında (%0,5 etanol), parlama noktası yok → bilgi uyarısı',
+        ('Alevlenir sıvı bileşen tarama eşiğinin altında (%0,4 etanol + %0,4 izopropanol), parlama noktası yok → '
+         'bilgi uyarısı (iki alevlenir bileşen — literatür tablosu uygulanmaz)',
          lambda: any('tarama eşiğinin' in w for w in phys_calc(
-             [C('64-17-5', 0.5, ('Flam. Liq. 2', 'H225')), C('7732-18-5', 99.5)], form='liquid')['warnings'])),
+             [C('64-17-5', 0.4, ('Flam. Liq. 2', 'H225')), C('67-63-0', 0.4, ('Flam. Liq. 2', 'H225')),
+              C('7732-18-5', 99.2)], form='liquid')['warnings'])),
+        ('SEA Ek-1 2.6.4.1 literatür parlama noktası (INERIS 2013, Abel kapalı kap): su + etanol %80 → H225, '
+         '%10 → H226 (~45 °C; önceden H225), %3 → sınıf yok; %10 + L.2 olumsuz → sınıf yok (2.6.4.5); '
+         'ikinci alevlenir bileşen varsa tablo uygulanmaz; sınıra ±3 °C yakınsa uygulanmaz',
+         lambda: (lambda F: F(80) == 'H225' and F(10) == 'H226' and F(3) is None and F(10, 'l2_negative') is None
+                  and F(40) == 'H225' and 'ölçülmelidir' in ' '.join(phys_calc(
+                      [C('64-17-5', 40, ('Flam. Liq. 2', 'H225')), C('7732-18-5', 60)], form='liquid')['warnings'])
+                  and [x['h'] for x in phys_calc([C('64-17-5', 10, ('Flam. Liq. 2', 'H225')),
+                                                  C('67-63-0', 5, ('Flam. Liq. 2', 'H225')), C('7732-18-5', 85)],
+                                                 form='liquid', fp_status='no_measurement')['results']] == ['H225'])(
+             lambda p, st='': next((x['h'] for x in phys_calc(
+                 [C('64-17-5', p, ('Flam. Liq. 2', 'H225')), C('7732-18-5', 100 - p)], form='liquid',
+                 fp_status=st)['results'] if x.get('type') == 'flam_liq'), None))),
+        ('GBF uçtan uca: %10 etanol / su → H226, Bölüm 9 parlama noktası "literatür değeri (ürün test '
+         'edilmemiştir) — INERIS ...; Abel kapalı kap", Bölüm 16 kaynak notu; H225 / "hesaplanmış" yok',
+         lambda: (lambda t: (lambda hdr: 'H226' in hdr and 'H225' not in hdr)(
+                      t[t.find('Tehlike Kodları:'):t.find('BÖLÜM 1')])
+                  and 'literatür değeri (ürün test edilmemiştir)' in t
+                  and 'INERIS' in t and 'Abel kapalı kap' in t and 'SEA Ek-1 2.6.4.1' in t)(
+             _pdf_text(c, [('64-17-5', 10), ('7732-18-5', 90)]))),
+        ('SEA Ek-1 2.6.4.5: ölçülen parlama noktası 45 °C + L.2 olumsuz → sınıf yok; 30 °C + L.2 seçimi → H226 '
+         '(35 °C altı L.2 kapsamı dışı)',
+         lambda: [x['h'] for x in phys_calc([C('64-17-5', 20, ('Flam. Liq. 2', 'H225')), C('100-51-6', 80)],
+                                            form='liquid', user_fp=45, fp_status='l2_negative')['results']
+                  if x.get('type') == 'flam_liq'] == []
+         and [x['h'] for x in phys_calc([C('64-17-5', 20, ('Flam. Liq. 2', 'H225')), C('100-51-6', 80)],
+                                        form='liquid', user_fp=30, fp_status='l2_negative')['results']
+              if x.get('type') == 'flam_liq'] == ['H226']),
         ('Ek-2 9.1: koku girilmemişse nedenli ifade; hesaplanan buhar basıncında referans sıcaklık',
          lambda: (lambda t: 'koku değerlendirmesi yapılmamıştır' in t and '20–25 °C' in t)(
              _pdf_text(c, [('67-64-1', 20), ('64-17-5', 20), ('7732-18-5', 60)]))),

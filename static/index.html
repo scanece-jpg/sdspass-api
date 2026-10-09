@@ -886,6 +886,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
             <option value="">— Ölçüm girilmedi: bir seçenek belirleyin —</option>
             <option value="not_flammable">Test edildi — parlama noktası &gt; 60 °C (yanıcı değil)</option>
             <option value="no_measurement">Ölçüm yok — en kötü durum uygulansın</option>
+            <option value="l2_negative">Parlama noktası 35–60 °C — UN L.2 sürekli yanma testi olumsuz (SEA Ek-1 2.6.4.5)</option>
           </select>
           <div id="fp_decision_note" style="display:none;font-size:9.5px;color:var(--text3);margin-top:3px"></div>
           <div id="warn_fp" class="thresh-warn"></div>
@@ -1288,7 +1289,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
 <script src="js/modules/cas-lookup.js?v=20260617"></script>
 <script src="js/modules/component-manager.js?v=20261009a"></script>
 <script src="js/modules/conc-selector.js?v=20260617"></script>
-<script src="js/modules/calculator.js?v=20261009a"></script>
+<script src="js/modules/calculator.js?v=20261009b"></script>
 <script src="js/modules/results-renderer.js?v=20260930"></script>
 <script src="js/modules/pdf-exporter.js?v=20260617"></script>
 <script src="js/app.js?v=20260617"></script>
@@ -3900,12 +3901,20 @@ function _updateFpDecisionUI(fd) {
   const sel  = document.getElementById('fp_status');
   const note = document.getElementById('fp_decision_note');
   if (!sel || !note) return;
-  if (!fd || !fd.required) {
+  if (!fd || (!fd.required && !fd.l2_possible)) {
     sel.style.display = 'none';
     note.style.display = 'none';
     return;
   }
   sel.style.display = '';
+  if (!fd.required) {
+    // Parlama noktası belli (ölçülen veya literatür) ve 35–60 °C: L.2 sürekli yanma testi olumsuzsa Kat.3 gerekmez
+    sel.style.borderColor = '';
+    note.textContent = `Parlama noktası ~${fd.estimate_fp} °C (35–60 °C)${fd.literature ? ' — literatür değeri' : ''}. `
+      + 'UN L.2 sürekli yanma testi olumsuzsa "L.2 olumsuz" seçeneğini seçin (SEA Ek-1 2.6.4.5); seçim yoksa H226.';
+    note.style.display = '';
+    return;
+  }
   sel.style.borderColor = sel.value ? '' : 'var(--warning, #e8a838)';
   const trig = (fd.triggers || []).join(', ');
   const est  = fd.estimate_fp != null ? ` Bileşenlere göre en kötü durum: ${fd.worst_h} (en düşük bileşen parlama noktası ~${fd.estimate_fp} °C).` : '';
@@ -5396,10 +5405,11 @@ function _showPhysSrcModal(callback) {
         <div class="psrc-row-label">veya</div>
         <div class="psrc-row-wrap">
           <select id="psrc_fp_status" class="psrc-row-input" style="width:100%"
-                  onchange="if(this.value){const i=document.querySelector('#physSrcBody input[data-psrc-field=&quot;tf_fp&quot;]'); if(i) i.value='';}">
+                  onchange="if(this.value && this.value!=='l2_negative'){const i=document.querySelector('#physSrcBody input[data-psrc-field=&quot;tf_fp&quot;]'); if(i) i.value='';}">
             <option value="">— seçin —</option>
             <option value="not_flammable" ${st==='not_flammable'?'selected':''}>Test edildi — parlama noktası &gt; 60 °C (yanıcı değil)</option>
             <option value="no_measurement" ${st==='no_measurement'?'selected':''}>Ölçüm yok — en kötü durum (${_esc(fd.worst_h || '')}) uygulansın</option>
+            <option value="l2_negative" ${st==='l2_negative'?'selected':''}>Parlama noktası 35–60 °C — UN L.2 sürekli yanma testi olumsuz (SEA Ek-1 2.6.4.5)</option>
           </select>
         </div>
         <div class="psrc-badge psrc-badge-empty"></div>
@@ -5500,7 +5510,7 @@ async function _physSrcConfirm() {
   // Parlama noktası: değer girildiyse N/A kaldırılır; seçim ana formdaki kutuya aktarılır
   if (fpSel || fpInp) {
     const mainSel = document.getElementById('fp_status');
-    const newSt   = fpInp?.value.trim() ? '' : (fpSel?.value || '');
+    const newSt   = fpInp?.value.trim() ? (fpSel?.value === 'l2_negative' ? 'l2_negative' : '') : (fpSel?.value || '');
     if (mainSel && mainSel.value !== newSt) { mainSel.value = newSt; changed = true; }
     const naFp = document.getElementById('na_fp');
     if (fpInp?.value.trim() && naFp?.checked) { naFp.checked = false; toggleNA(naFp, 'tf_fp', 'fp'); }
@@ -6173,7 +6183,8 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
       form_sub:    document.getElementById('pform_sub')?.value || null,
       // Parlama noktası kararı (ölçüm girilmediyse): not_flammable | no_measurement
       fp_status:   (document.getElementById('tf_fp')?.dataset.source === 'user' && document.getElementById('tf_fp')?.value?.trim())
-                     ? null : (document.getElementById('fp_status')?.value || null),
+                     ? (document.getElementById('fp_status')?.value === 'l2_negative' ? 'l2_negative' : null)
+                     : (document.getElementById('fp_status')?.value || null),
       // Sağ panelin kullandığı hesap girdisi — sunucu PDF'i birebir bununla sınıflandırır
       calc_input:  calcInput,
       voc_content: (() => { const v = parseFloat(document.getElementById('tf_voc')?.value); return isNaN(v) ? null : v; })(),

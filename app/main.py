@@ -353,12 +353,12 @@ async def generate_pdf(data: dict = Body(...)):
                     'na':      False,
                     'theo':    not _tp_measured,
                 }
-                _phys_methods[_bk] = {
+                _phys_methods[_bk] = ({'note_text': _tp['pdf_note']} if _tp.get('pdf_note') else {
                     'measured':  _tp_measured,
                     'standard':  _tp_std,
                     'method':    _tp_mth,
                     'error_pct': _tp_err,
-                }
+                })
             elif _tp_disp:
                 # Sayısal değer yok ama metin açıklama var
                 # (örn. çözünürlük: "Su ile tam karışır", buharlaşma hızı: "Yavaş")

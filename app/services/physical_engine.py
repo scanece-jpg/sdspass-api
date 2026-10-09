@@ -1948,6 +1948,69 @@ def _cls_flam_liq(fp: float, bp: Optional[float]) -> Optional[Dict]:
     return None
 
 
+_LIT_FP = None
+_LIT_MARGIN = 3.0   # literatür (interpolasyon) değeri sınıflandırma sınırına (23 / 60 °C) bu kadar yakınsa kullanılmaz
+
+
+def _lit_fp_data() -> dict:
+    global _LIT_FP
+    if _LIT_FP is None:
+        try:
+            import json as _json
+            from pathlib import Path as _Path
+            _LIT_FP = _json.loads((_Path(__file__).resolve().parents[2] / 'data' / 'literature_fp_aqueous.json')
+                                  .read_text(encoding='utf-8'))
+        except Exception as _e:
+            print(f'[FLAM LIT] veri okunamadı: {_e}')
+            _LIT_FP = {'maddeler': {}}
+    return _LIT_FP
+
+
+def _literature_fp(comps: List[Dict]) -> Optional[Dict]:
+    """SEA Ek-1 2.6.4.1: parlama noktası literatürden. Yalnız su + tablodaki TEK alevlenir sıvı (+ alevlenir sıvı
+    olmayan, uçucu olmayan bileşenler) içeren karışım. Derişim alevlenir sıvı / (alevlenir sıvı + su) oranından
+    hacimce % olarak hesaplanır — uçucu olmayan bileşenler hesaba girmez (parlama noktasını az miktarda yükseltirler,
+    SEA Ek-1 2.6.4.3 → temkinli). Ölçülmüş noktalar arasında doğrusal interpolasyon; ölçüm aralığı dışına çıkılmaz
+    (yalnız en düşük derişim noktası > 60 °C ise daha seyreltik çözelti de > 60 °C sayılır — seyrelme parlama noktasını
+    yükseltir). Döner: {fp|None, above60, vol, cas, ad, yontem, kaynak} veya None (uygulanamaz)."""
+    data = _lit_fp_data()
+    tbl = data.get('maddeler') or {}
+    act = [c for c in comps if float(c.get('concMax') or c.get('conc') or 0) > 0]
+    water = [c for c in act if (c.get('cas') or c.get('cas_no') or '').strip() == '7732-18-5']
+    hits = [c for c in act if (c.get('cas') or c.get('cas_no') or '').strip() in tbl]
+    if len(water) != 1 or len(hits) != 1:
+        return None
+    for c in act:
+        if c is water[0] or c is hits[0]:
+            continue
+        cas = (c.get('cas') or c.get('cas_no') or '').strip()
+        hs = {(h.get('h_code') or '').replace('*', '').strip()[:4] for h in (c.get('hazards') or [])}
+        _fp = FP_DB.get(cas)
+        if hs & {'H224', 'H225', 'H226'} or (_fp is not None and _fp < 93):
+            return None    # başka alevlenir / uçucu alevlenir bileşen var — tablo uygulanamaz
+    f = hits[0]
+    cas = (f.get('cas') or f.get('cas_no') or '').strip()
+    e = tbl[cas]
+    m_f = float(f.get('concMax') or f.get('conc') or 0)
+    m_w = float(water[0].get('concMax') or water[0].get('conc') or 0)
+    v_f, v_w = m_f / float(e['yogunluk']), m_w / 0.998
+    vol = 100.0 * v_f / (v_f + v_w)
+    pts = sorted(e['noktalar'])
+    base = {'vol': round(vol, 1), 'cas': cas, 'ad': e['ad'], 'yontem': e['yontem'],
+            'kaynak': data.get('kaynak_kisa') or data.get('kaynak', ''), 'kaynak_tam': data.get('kaynak', '')}
+    if vol < pts[0][0]:
+        if pts[0][1] > 60 + _LIT_MARGIN:
+            return {**base, 'fp': None, 'above60': True}
+        return None
+    for (c1, t1), (c2, t2) in zip(pts, pts[1:]):
+        if c1 <= vol <= c2:
+            fp = t1 + (t2 - t1) * (vol - c1) / (c2 - c1) if c2 > c1 else t1
+            return {**base, 'fp': round(fp, 1), 'above60': fp > 60}
+    if abs(vol - pts[-1][0]) < 1e-6:
+        return {**base, 'fp': pts[-1][1], 'above60': pts[-1][1] > 60}
+    return None
+
+
 def _calc_flam_liq(comps: List[Dict], user_fp=None, user_bp=None, form_sub: str = '',
                    fp_status: str = '') -> Dict:
     """Alevlenir sıvı sınıfı (CLP Ek-I §2.6).
@@ -1981,8 +2044,36 @@ def _calc_flam_liq(comps: List[Dict], user_fp=None, user_bp=None, form_sub: str 
         _bp_src = (f', kaynama başlangıcı {user_bp}°C ölçülen' if user_bp is not None else
                    (f', kaynama başlangıcı ≤ {theo_bp}°C (en düşük bileşen — tahmini)'
                     if theo_bp is not None and user_fp < 23 else ''))
+        if fp_status == 'l2_negative' and 35 < user_fp <= 60:
+            # SEA Ek-1 2.6.4.5: parlama noktası 35–60 °C ve UN L.2 sürekli yanma testi olumsuz → Kat.3 gerekmez
+            return {'result': None, 'source': f'Kullanıcı girişi ({user_fp}°C); UN L.2 sürekli yanma testi olumsuz '
+                                              '(SEA Ek-1 2.6.4.5)', 'fp': user_fp, 'l2': True}
         return {'result': _cls_flam_liq(user_fp, effective_bp),
                 'source': f'Kullanıcı girişi ({user_fp}°C{_bp_src})', 'fp': user_fp}
+
+    # SEA Ek-1 2.6.4.1: "Veriler testlerle elde edilebilir, literatürlerden bulunabilir veya hesaplanabilir." Su +
+    # tek alevlenir sıvı karışımında ölçülmüş literatür değeri (data/literature_fp_aqueous.json) — önceden %10 etanollü
+    # su bazlı ürüne etanolün kendi parlama noktasıyla (13 °C) H225 veriliyordu; ölçülmüş değer ~48 °C (H226).
+    _lit = _literature_fp(comps) if fp_status != 'not_flammable' else None
+    _lit_warn = None
+    if _lit:
+        _lfp = _lit['fp']
+        _src = (f"Literatür değeri: hacimce %{_lit['vol']:g} {_lit['ad']} (su içinde) için "
+                + (f"~{_lfp:g} °C" if _lfp is not None else '> 60 °C')
+                + f" — {_lit['kaynak']}, {_lit['yontem']}; ölçülmüş noktalar arası doğrusal interpolasyon "
+                  "(SEA Ek-1 2.6.4.1)")
+        if _lfp is not None and (abs(_lfp - 23) < _LIT_MARGIN or abs(_lfp - 60) < _LIT_MARGIN):
+            # Interpolasyon / derişim çevrimi belirsizliği sınıf sınırını değiştirebilir — ölçüm gerekir
+            _lit_warn = (f"ℹ Literatür değeri (~{_lfp:g} °C, hacimce %{_lit['vol']:g} {_lit['ad']}) sınıflandırma "
+                         f"sınırına ±{_LIT_MARGIN:g} °C'den yakın — parlama noktası kapalı kap yöntemiyle ölçülmelidir "
+                         "(SEA Ek-1 2.6.4.1).")
+        else:
+            _l2 = fp_status == 'l2_negative' and _lfp is not None and 35 < _lfp <= 60
+            _res = None if (_lfp is None or _l2) else _cls_flam_liq(_lfp, 100)   # su bazlı: kaynama > 35 °C
+            return {'result': _res, 'source': _src + ('; UN L.2 sürekli yanma testi olumsuz (SEA Ek-1 2.6.4.5)'
+                                                      if _l2 else ''),
+                    'fp': _lfp, 'lit': _lit, 'l2': _l2, 'screening': False, 'flam_components': False,
+                    'water_dilution_warning': None}
 
     # CLP §2.6.4.2 — su seyreltme etkisi:
     # Su (CAS 7732-18-5) >= %50 olan karışımlarda yanıcı bileşenin FP'si
@@ -2098,6 +2189,8 @@ def _calc_flam_liq(comps: List[Dict], user_fp=None, user_bp=None, form_sub: str 
         _warn = (f'⚠ Parlama noktası girilmedi — yanıcı sıvı bileşen var ({src}). '
                  f'Şimdilik en kötü durum uygulandı: {worst["h"]}. Ölçülen değeri girin, '
                  '"Test edildi — yanıcı değil" beyanını seçin veya "Ölçüm yok" deyin.' + _aq_note)
+    if _lit_warn:
+        _warn = _lit_warn + ' ' + _warn
     return {'result': worst, 'source': src, 'fp': min(fps) if fps else None,
             'screening': _screening, 'worst_case': True, 'flam_components': True,
             'needs_decision': fp_status != 'no_measurement', 'worst_h': worst['h'],
@@ -2284,7 +2377,8 @@ def calculate(comps: List[Dict], form: str = 'liquid',
         if fl['result']:
             # Ölçüm yoksa %1 / %10 bileşen toplamı programın tarama (en kötü durum) kuralıdır —
             # yönetmelikte yer almaz; kriter karışımın parlama noktasıdır (SEA Ek-1 Tablo 2.6.1).
-            _flam_cutoff = ('Ölçülen parlama noktası — SEA Ek-1 Tablo 2.6.1' if user_fp is not None else {
+            _flam_cutoff = ('Ölçülen parlama noktası — SEA Ek-1 Tablo 2.6.1' if user_fp is not None else
+                            'Literatür parlama noktası — SEA Ek-1 2.6.4.1 / Tablo 2.6.1' if fl.get('lit') else {
                 'H224': 'Ölçüm yok — tarama: ≥ %1 Kat.1 alevlenir sıvı bileşen (en kötü durum; SEA Ek-1 Tablo 2.6.1 ölçümle)',
                 'H225': 'Ölçüm yok — tarama: ≥ %1 Kat.1+2 alevlenir sıvı bileşen (en kötü durum; SEA Ek-1 Tablo 2.6.1 ölçümle)',
                 'H226': 'Ölçüm yok — tarama: ≥ %10 alevlenir sıvı bileşen (en kötü durum; SEA Ek-1 Tablo 2.6.1 ölçümle)',
@@ -2907,6 +3001,23 @@ def calculate(comps: List[Dict], form: str = 'liquid',
         'flammable_solid':  ('Alevlenir katı (H228)', 'Flammable solid (H228)', 'UN N.1'),
     }
     classification_notes = []
+    if fl.get('lit'):
+        _lt = fl['lit']
+        classification_notes.append({
+            'TR': (f"Alevlenir sıvı: parlama noktası ürün için ölçülmemiştir; SEA Ek-1 2.6.4.1 uyarınca literatür "
+                   f"değeri kullanılmıştır — {_lt['kaynak_tam']} ({_lt['yontem']}); hacimce %{_lt['vol']:g} "
+                   f"{_lt['ad']} için " + (f"~{fl['fp']:g} °C." if fl['fp'] is not None else '> 60 °C.')),
+            'EN': (f"Flammable liquid: the flash point was not measured on the product; a literature value was used "
+                   f"— {_lt['kaynak_tam']} ({_lt['yontem']})."),
+        })
+    if fl.get('l2'):
+        classification_notes.append({
+            'TR': (f"Alevlenir sıvı: parlama noktası {fl['fp']:g} °C (35–60 °C aralığında); UN Test ve Kriterler El "
+                   "Kitabı L.2 sürekli yanma testi olumsuz olduğundan SEA Ek-1 2.6.4.5 uyarınca Kategori 3 olarak "
+                   "sınıflandırılmamıştır (kullanıcı beyanı)."),
+            'EN': (f"Flammable liquid: flash point {fl['fp']:g} °C (35–60 °C); not classified in Category 3 as the "
+                   "UN L.2 sustained combustibility test was negative (user declaration)."),
+        })
     for field, (tr_n, en_n, test_n) in _NOTE_NAMES.items():
         val = (test_data.get(field) or '').strip()
         if val == 'not_tested_precautionary':
@@ -3048,6 +3159,15 @@ def calculate(comps: List[Dict], form: str = 'liquid',
             'value': user_fp, 'measured': True, 'method': 'Kullanıcı beyanı', 'standard': '',
             'note': f"Sınıflandırma: {fl['result']['h_class']} ({fl['result']['h']})" if fl.get('result') else '',
         }
+    elif fl.get('lit'):
+        _lt = fl['lit']
+        theo_props['flash_point'] = {
+            'value': fl['fp'], 'display': (f"~{fl['fp']:g} °C" if fl['fp'] is not None else '> 60 °C'),
+            'measured': False, 'method': 'Literatür değeri', 'standard': _lt['yontem'],
+            'pdf_note': (f"literatür değeri (ürün test edilmemiştir) — {_lt['kaynak']}; {_lt['yontem']}; "
+                         f"hacimce %{_lt['vol']:g} {_lt['ad']} için"),
+            'note': fl['source'],
+        }
     elif fl.get('declared_nonflam'):
         theo_props['flash_point'] = {
             'value': None, 'display': '> 60 °C', 'measured': True,
@@ -3085,6 +3205,10 @@ def calculate(comps: List[Dict], form: str = 'liquid',
         'estimate_fp': fl.get('fp'),
         'triggers':    [f"{t['name']} %{t['conc']:g}" for t in (fl.get('triggers') or [])],
         'needs_decision': bool(fl.get('needs_decision')),
+        # SEA Ek-1 2.6.4.5: parlama noktası 35–60 °C → "UN L.2 sürekli yanma testi olumsuz" kararı seçilebilir
+        'l2_possible': (fl.get('fp') is not None and 35 < float(fl['fp']) <= 60
+                        and (bool(fl.get('lit')) or user_fp is not None)),
+        'literature': bool(fl.get('lit')),
     }
 
     return {

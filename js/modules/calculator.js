@@ -54,7 +54,9 @@ const CalculatorModule = (() => {
     const _isTheo = id => document.getElementById(id)?.dataset?.source === 'theo';
     const fpRaw   = _isTheo('tf_fp') ? '' : (document.getElementById('tf_fp')?.value?.trim() || '');
     const userFP  = fpRaw ? parseFloat(fpRaw) : null;
-    const fpStatus = userFP == null ? (document.getElementById('fp_status')?.value || '') : '';
+    const _fpSel   = document.getElementById('fp_status')?.value || '';
+    // Ölçülen değer girildiyse yalnız "L.2 olumsuz" kararı taşınır (SEA Ek-1 2.6.4.5 — 35–60 °C)
+    const fpStatus = userFP == null ? _fpSel : (_fpSel === 'l2_negative' ? 'l2_negative' : '');
 
     // Kullanıcı girdiği test verileri
     const testData = {};

@@ -2461,6 +2461,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _ps = _ps.get('display') if isinstance(_ps, dict) else _ps
     if _is_solid_form and _have(_ps):
         _app = f"{_app}; {_L('tane boyutu', 'particle size')}: {_ps}"
+    elif _prod_form == 'powder':
+        # KKDİK Ek-2 9.1(a) tozda granülometri; bilgi yoksa nedeni belirtilir
+        _app = f"{_app}; {_L('tane boyutu: belirlenmemiştir (ölçülmemiştir)', 'particle size: not determined')}"
     # KKDİK Ek-2 9.1(a): katıda granülometri ve özgül yüzey alanı
     _ssa = phys.get('specific_surface')
     _ssa = _ssa.get('display') if isinstance(_ssa, dict) else _ssa
@@ -2606,7 +2609,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         [_L('ı) Buhar basıncı', 'k) Vapour pressure'), _or(_vp_val, solid=_NA_S)],
         # Katıda bileşen MW'sinden ideal gaz hesabı anlamsız → her durumda "Uygulanamaz (katı)"
         [_L('i) Buhar yoğunluğu', 'l) Vapour density'), _NA_S if _is_solid_form else _or(_vd_val)],
-        [_rd_lbl, _or(_rd_val)],
+        [_rd_lbl, _or(_rd_val, gas=_NA_G)],
         [_L('k) Çözünürlük', 'n) Solubility'), _or(_pv('solubility', 'mg/L'))],
         [_L('l) Dağılım katsayısı: n-oktanol/su', 'o) Partition coefficient: n-octanol/water'),
          _or(_pv('log_kow'), default=_kow_default)],
@@ -2623,6 +2626,14 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _voc_content = sds_data.get('voc_content')
     if _voc_content is not None:
         _other.append([_L('VOC içeriği (2004/42/EC)', 'VOC content (2004/42/EC)'), f"{_voc_content} g/L"])
+    _af = sds_data.get('aerosol_flam') or {}
+    if _is_aerosol_form and _af.get('pct') is not None:
+        _other.append([_L('Alevlenir bileşen oranı (kütlece)', 'Flammable components (by mass)'),
+                       f"%{_af['pct']:g} " + (_L('(beyan)', '(declared)') if _af.get('declared') else
+                                              _L('(ürün bileşiminden; SEA Ek-1 2.3)', '(from composition)'))])
+        if _af.get('hoc') is not None:
+            _other.append([_L('Kimyasal yanma ısısı', 'Chemical heat of combustion'),
+                           f"{_af['hoc']:g} kJ/g " + _L('(beyan)', '(declared)')])
     _hc = phys.get('henry_constant')
     if isinstance(_hc, dict) and _have(_hc.get('display')):
         _other.append([_L('Henry sabiti', "Henry's law constant"), _hc['display']])

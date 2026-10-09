@@ -1868,6 +1868,7 @@ def calculate(comps: List[Dict], form: str = 'liquid',
         test_data = {}
 
     primary, extra, warnings, pending_decisions = [], [], [], []
+    _aer_info = None   # aerosol alevlenir bileşen oranı / yanma ısısı (GBF Bölüm 9.2)
     _iso_gas = None   # ISO 10156 gaz karışımı hesabı sonucu (Bölüm 9 / 16 için)
     _iso_ox = None    # ISO 10156 5.3 oksitleme gücü hesabı sonucu (Bölüm 16 için)
     _aerosol_untested = False   # aerosol testi yapılmadan Kat.1 (Bölüm 16 notu için)
@@ -1903,6 +1904,11 @@ def calculate(comps: List[Dict], form: str = 'liquid',
         if fa.get('result'):
             primary.append({'type': 'flam_aerosol', **fa['result'], 'cutoff_used': fa['result']['source']})
         _aerosol_untested = bool(fa.get('pending') or fa.get('untested_cat1'))
+        _declared = test_data.get('aerosol_flam_pct') is not None
+        _aer_info = {'pct': (float(test_data['aerosol_flam_pct']) if _declared
+                             else _aerosol_flam_components(comps)['pct']),
+                     'declared': _declared,
+                     'hoc': float(test_data['aerosol_hoc']) if test_data.get('aerosol_hoc') is not None else None}
         extra.append({'type': 'aerosol_press', 'h': 'H229', 'h_class': 'Aerosol 3',
                       'signal': 'Warning', 'source': 'Aerosol ürün — basınçlı kap',
                       'cutoff_used': 'CLP Ek-I §2.3 — tüm aerosollere uygulanır'})
@@ -2737,6 +2743,7 @@ def calculate(comps: List[Dict], form: str = 'liquid',
         'warnings':            warnings,
         'theo_props':          theo_props,
         'pending_decisions':   pending_decisions,
+        'aerosol_flam':        _aer_info,
     }
 
 

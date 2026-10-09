@@ -623,6 +623,7 @@ async def generate_pdf(data: dict = Body(...)):
             'voc_content': data.get('voc_content'),
             # Test yerine verilen fiziksel tehlike kararlarının gerekçesi (Bölüm 16)
             'classification_notes': core.get('classification_notes', []),
+            'aerosol_flam': _phys_res.get('aerosol_flam'),
             # Etikette adı yazılması zorunlu bileşenler (SEA/CLP Md. 18(3)(b)) — Bölüm 2.2
             'label_components': [_alt_names.get(str(n).strip(), n) for n in core.get('label_components', [])],
             # SEA Ek-1 4.1.3.6.1 — "% x oranda sucul çevreye zararı bilinmeyen bileşenler içerir"

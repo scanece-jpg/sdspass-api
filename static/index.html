@@ -1289,7 +1289,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
 <script src="js/modules/cas-lookup.js?v=20260617"></script>
 <script src="js/modules/component-manager.js?v=20261009a"></script>
 <script src="js/modules/conc-selector.js?v=20260617"></script>
-<script src="js/modules/calculator.js?v=20261009b"></script>
+<script src="js/modules/calculator.js?v=20261009c"></script>
 <script src="js/modules/results-renderer.js?v=20260930"></script>
 <script src="js/modules/pdf-exporter.js?v=20260617"></script>
 <script src="js/app.js?v=20260617"></script>
@@ -4120,6 +4120,56 @@ function _physManualMode() {
 }
 
 // ── Hesaplama sonrası zorunlu fiziksel alan uyarı paneli ──────────────────────
+// ── Test ihtiyacı listesi (SEA Md.10, KKDİK Ek-2 9.1) — /sds/calculate 'test_ihtiyaci' ──────────────
+// siniflandirma: veri yoksa ölçüm/test gerekir · rutin: kolay ölçüm, Bölüm 9'a yazılır · gerekmez: "veri yok" + neden
+function _renderTestNeeds() {
+  const rows = window._lastTestNeeds || [];
+  if (!rows.length) return '';
+  const esc = t => String(t ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/"/g,'&quot;');
+  const C = { red:'#fc8181', orange:'#f6ad55', green:'#68d391', blue:'#63b3ed', grey:'var(--text3)' };
+  const badge = (txt, col) => `<span style="font-size:9px;padding:1px 6px;border-radius:8px;white-space:nowrap;border:1px solid ${col};color:${col}">${esc(txt)}</span>`;
+  // Rutin satırlarda durum formdaki alandan okunur (kullanıcı girdi / motor tahmini / boş / uygulanamaz)
+  const fieldState = id => {
+    const el = id && document.getElementById(id);
+    if (!el) return null;
+    if (el.dataset.na === 'true') return badge('Uygulanamaz işaretli', C.grey);
+    const v = (el.value || '').trim();
+    if (!v) return badge('Girilmedi — ölçün', C.orange);
+    if (el.dataset.source === 'theo') return badge('Hesaplanan değer — ölçüm değil', C.orange);
+    return badge('Girildi', C.green);
+  };
+  const stateOf = r => {
+    if (r.durum === 'eksik') return badge(r.durum_metni || 'Eksik', C.red);
+    if (r.durum === 'karar') return badge(r.durum_metni || 'Test yapılmadı', C.orange);
+    if (r.durum === 'istege_bagli') return badge(r.durum_metni || 'İsteğe bağlı', C.blue);
+    if (r.durum === 'tamam') return badge(r.durum_metni || 'Tamam', C.green);
+    if (r.durum === 'kontrol') return fieldState(r.alan) || '';
+    return r.durum_metni ? badge(r.durum_metni, C.grey) : '';
+  };
+  const line = r => `<div style="padding:5px 0;border-top:1px solid var(--border, rgba(128,128,128,.2))">
+      <div style="display:flex;justify-content:space-between;gap:8px;align-items:flex-start">
+        <b style="font-size:11px">${esc(r.ozellik)}</b>${stateOf(r)}
+      </div>
+      ${r.neden ? `<div style="font-size:10px;color:var(--text2);margin-top:2px">${esc(r.neden)}</div>` : ''}
+      <div style="font-size:9px;color:var(--text3);margin-top:2px">${esc(r.dayanak)}${r.yontem ? ' · Yöntem: ' + esc(r.yontem) : ''}</div>
+    </div>`;
+  const grp = g => rows.filter(r => r.grup === g);
+  const sin = grp('siniflandirma'), rut = grp('rutin'), ger = grp('gerekmez');
+  const nEksik = sin.filter(r => r.durum === 'eksik' || r.durum === 'karar').length;
+  const head = nEksik
+    ? `<span style="color:${C.red}">${nEksik} sınıflandırma verisi eksik</span>`
+    : `<span style="color:${C.green}">Sınıflandırma için eksik veri yok</span>`;
+  return `<div class="r-title">🧪 Test ihtiyacı — ${head}</div>
+    <div class="warn-box" style="margin-bottom:8px;font-size:11px">
+      <div style="font-size:10px;color:var(--text2);margin-bottom:6px">GBF Bölüm 9'daki her özellik yazılır, ama test
+      zorunluluğu yalnız sınıflandırmayı değiştiren fiziksel özelliklerde vardır (SEA Md.10(2)). Diğerlerinde veri yoksa
+      "veri yok" ve nedeni yazılır (KKDİK Ek-2 9.1). Bu liste GBF'ye yazılmaz.</div>
+      ${sin.length ? `<div style="font-weight:600;margin:4px 0 2px">Sınıflandırma için gerekli</div>${sin.map(line).join('')}` : ''}
+      ${rut.length ? `<details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">Rutin ölçümler — kolay, Bölüm 9 için (${rut.length})</summary>${rut.map(line).join('')}</details>` : ''}
+      ${ger.length ? `<details style="margin-top:6px"><summary style="cursor:pointer;font-weight:600">Test gerekmez — "veri yok" + neden yeterli (${ger.length})</summary>${ger.map(line).join('')}</details>` : ''}
+    </div>`;
+}
+
 function _renderPhysWarnPanel() {
   const panel = document.getElementById('physWarnPanel');
   if (!panel) return;
@@ -4455,6 +4505,9 @@ function renderAll(s) {
     h += `<div class="warn-box" style="margin-bottom:8px;opacity:.9">✓ Verilen kararlar: ${_given.map(([f, l]) =>
       `${_esc(l)} <a href="#" onclick="_setPhysDecision('${_esc(f)}', null);return false" style="color:var(--accent)">[değiştir]</a>`).join(' · ')}</div>`;
   }
+
+  // ── Test ihtiyacı listesi ───────────────────────────────────────────────
+  h += _renderTestNeeds();
 
   // ── Bölüm 9 — Fiziksel Özellikler (kompakt özet + modal) ────────────────
   const tp = phys.theoProps;

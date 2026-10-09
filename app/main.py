@@ -1096,6 +1096,7 @@ async def sds_calculate(body: dict = Body(...)):
         physical, stot, eco, theo_props, warnings
     """
     from app.services import sds_pipeline as _pipe
+    from app.services import test_needs as _test_needs
 
     def _num(v):
         try:
@@ -1159,6 +1160,12 @@ async def sds_calculate(body: dict = Body(...)):
             'ek6_supplements':   core.get('ek6_supplements', []),   # Ek-6 dışı (ECHA) sınıflar
             'ek6_daha_agir':     core.get('ek6_daha_agir', []),     # Ek-6 uygulandı; ECHA'da daha ağır kategori (bilgi)
             'substance_mode':    bool(core.get('substance_mode')),  # tek maddeli ürün (SEA Md.4)
+            # Test ihtiyacı listesi (SEA Md.10, KKDİK Ek-2 9.1) — yalnız panel; GBF'ye yazılmaz
+            'test_ihtiyaci': _test_needs.build(
+                form, core['components'], phys_result, body.get('test_data') or {},
+                user_fp=_num(body.get('user_fp') if body.get('user_fp') is not None else body.get('flash_point')),
+                user_bp=_num(body.get('user_bp') if body.get('user_bp') is not None else body.get('boiling_point')),
+                fp_status=body.get('fp_status') or '', mixture_ph=body.get('mixture_ph')),
             'summary':     _pipe.summary(core),   # PDF ile karşılaştırma (güvenlik ağı)
             'form_sub':    form_sub or None,
             'voc_content': body.get('voc_content'),

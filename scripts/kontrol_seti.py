@@ -245,6 +245,17 @@ def kural_testleri(c) -> int:
         p.update(kw)
         return set(c.post('/api/v1/sds/calculate', json=p).json().get('h_codes') or [])
 
+    def tn(bil, form='liquid', **kw):
+        """Test ihtiyacı listesi (SEA Md.10, KKDİK Ek-2 9.1) — {özellik: satır}"""
+        comps = []
+        for cas, conc in bil:
+            r = c.get('/api/v1/sds/substance/lookup', params={'cas': cas, 'form': form}).json()
+            comps.append({'cas': cas, 'name': r.get('name') or cas, 'conc': conc, 'concMax': conc,
+                          'hazards': r.get('hazards', []), 'sclRaw': r.get('scl', []), 'm_factors': {}, 'ate': None})
+        p = {'components': comps, 'form': form, 'usage': 'industrial', 'lang': 'TR'}
+        p.update(kw)
+        return {x['ozellik']: x for x in c.post('/api/v1/sds/calculate', json=p).json().get('test_ihtiyaci') or []}
+
     sens_scl = C('f', 0.5, ('Skin Sens. 1', 'H317'), sclRaw=[{'h_code': 'H317', 'c_min': 0.1}])
     aq4 = calculate_aquatic([C('c', 30, ('Aquatic Chronic 4', 'H413'))])
     testler = [
@@ -454,6 +465,23 @@ def kural_testleri(c) -> int:
          and [x['h'] for x in phys_calc([C('64-17-5', 20, ('Flam. Liq. 2', 'H225')), C('100-51-6', 80)],
                                         form='liquid', user_fp=30, fp_status='l2_negative')['results']
               if x.get('type') == 'flam_liq'] == ['H226']),
+        ('Test ihtiyacı listesi: toluen %15 + baz yağ → parlama noktası ve 40 °C kinematik viskozite ölçülmeli '
+         '(SEA Md.10(2), Ek-1 3.10.3.3.1); viskozite girilince tamam; %10 etanol/su → parlama noktası literatür, L.2 '
+         'isteğe bağlı; NaOH %5 → pH sınıflandırma verisi (Ek-1 3.2.3.1.2) + metal aşındırıcılık testi; N2/O2 gazı → '
+         'alevlenirlik testi gerekmez; sağlık/çevre testi gerekmez (Md.10(1))',
+         lambda: (lambda a, b, e, n, g: a['Parlama noktası']['durum'] == 'eksik'
+                  and a['Viskozite (40 °C, kinematik)']['durum'] == 'eksik'
+                  and b['Viskozite (40 °C, kinematik)']['durum'] == 'tamam'
+                  and e['Parlama noktası']['durum'] == 'tamam' and 'literatür' in e['Parlama noktası']['durum_metni'].lower()
+                  and e['Sürekli yanma testi (UN L.2)']['durum'] == 'istege_bagli'
+                  and n['pH']['grup'] == 'siniflandirma' and n['Metallere aşındırıcılık']['durum'] == 'eksik'
+                  and g['Alevlenirlik (gaz karışımı)']['grup'] == 'gerekmez'
+                  and a['Sağlık ve çevre zararları (Bölüm 11–12)']['grup'] == 'gerekmez')(
+             tn([('108-88-3', 15), ('64742-54-7', 85)]),
+             tn([('108-88-3', 15), ('64742-54-7', 85)], test_data={'viscosity': 30}),
+             tn([('64-17-5', 10), ('7732-18-5', 90)]),
+             tn([('1310-73-2', 5), ('7732-18-5', 95)]),
+             tn([('7727-37-9', 79), ('7782-44-7', 21)], form='gas'))),
         ('Ek-2 9.1: koku girilmemişse nedenli ifade; hesaplanan buhar basıncında referans sıcaklık',
          lambda: (lambda t: 'koku değerlendirmesi yapılmamıştır' in t and '20–25 °C' in t)(
              _pdf_text(c, [('67-64-1', 20), ('64-17-5', 20), ('7732-18-5', 60)]))),

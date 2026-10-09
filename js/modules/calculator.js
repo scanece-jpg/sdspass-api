@@ -193,6 +193,8 @@ const CalculatorModule = (() => {
       window._lastGlove = data.glove || {};
       // KKDİK Ek-17 kısıtlama eşleşmeleri — temizlik ürününde madde 46 (nonilfenol/etoksilatlar) uyarısı
       window._lastEk17 = data.ek17 || [];
+      // Test ihtiyacı listesi (SEA Md.10(2), KKDİK Ek-2 9.1) — sağ panelde gösterilir, GBF'ye yazılmaz
+      window._lastTestNeeds = data.test_ihtiyaci || [];
       _lastPayload = payload;
       _lastSummary = data.summary || null;
       StateStore.setCalcResult(result);

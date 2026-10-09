@@ -352,6 +352,25 @@ def kural_testleri(c) -> int:
          and (lambda t: 'DNEL/PNEC (KKDİK Ek-2 8.1.4)' in t and 'toluen İşçiler soluma, sistemik, uzun süreli 75,37 mg/m³' in t
               and 'toluen tatlı su 74 µg/L' in t and 'ECHA kayıt dosyası (01-2119471310-51-0000)' in t
               and 'TS EN 482' in t and 'Alev. Sıv. 2 H225 toluen' in t)(_pdf_text(c, [('108-88-3', 100)]))),
+        ('KKDİK Ek-2 8.2.2.2(b)(i) eldiven: malzeme / kalınlık / tipik delinme süresi önce kayıt yaptıranın önerisinden '
+         '(ECHA "Guidance on safe use"; "uygun olmayan" malzeme alınmaz); yoksa genel tablo + "doğrulayın" uyarısı; '
+         'borik asit (zayıf asit) ve amonyum persülfat (persülfat) EN 374 L / P sınıfına eşlenmez',
+         lambda: (lambda cp, gs: cp.parse_glove('Hand protection: - Impervious gloves - Suitable material: PVC, Neoprene '
+                                                '- Unsuitable material: Nitrile rubber')['malzemeler'] == ['neopren', 'pvc']
+                  and (lambda r: r['kaynak'] == 'kayit' and r['malzeme'] == 'butil' and r['kalinlik_mm'] == 0.5
+                       and 'malzeme: kayıt yaptıranın önerisi — ECHA kayıt dosyası' in r['text']
+                       and 'Tipik delinme süresi > 480 dk' in r['text'])(
+                      gs.select([{'cas': '67-64-1', 'conc': 100, 'name': 'aseton', 'hazards': [{'h_code': 'H319'}]}],
+                                ['H319']))
+                  and (lambda r: r['kaynak'] == 'genel' and any('resmî dayanağı yok' in w for w in r['uyarilar']))(
+                      gs.select([{'cas': '999-99-9', 'conc': 50, 'name': 'x', 'hazards': [{'h_code': 'H315'}]}],
+                                ['H315']))
+                  and (lambda r: r['kaynak'] == 'secim' and 'kayıt yaptıranın' not in r['text'])(
+                      gs.select([{'cas': '67-64-1', 'conc': 100, 'name': 'aseton', 'hazards': [{'h_code': 'H319'}]}],
+                                ['H319'], material='nitril'))
+                  and '10043-35-3' not in gs.CAS_CLASS and '7727-54-0' not in gs.CAS_CLASS)(
+             __import__('app.services.component_phys', fromlist=['x']),
+             __import__('app.services.glove_service', fromlist=['x']))),
         ('ADR ÖH 375 (UN 3082): not ambalaj miktarına (≤ 5 L) dayanır, viskozite şartı yok (ADR 2025 3.3.1)',
          lambda: (lambda n: '5 L' in n and 'viskozite' not in n.lower())(
              tr_classify(h_codes=['H411'], form='liquid', viscosity=5000)['road']['note'])),

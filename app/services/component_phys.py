@@ -34,7 +34,7 @@ _H = {'Accept': 'application/json', 'User-Agent': 'Mozilla/5.0 (SDSPass)'}
 _TTL_DAYS = 30          # kullanımda yenileme (ECHA verisi)
 _ERR_RETRY_DAYS = 1     # ağ hatasından sonra yeniden deneme
 _DELAY = 1.0            # ECHA istekleri arası bekleme (sn)
-_REC_V = 2              # 2026-10-09: kayıt dosyası DNEL / PNEC (Bölüm 8.1) eklendi — eski kayıtlar yenilenir
+_REC_V = 3              # 2026-10-09: v2 DNEL / PNEC (Bölüm 8.1); v3 güvenli kullanım rehberi eldiven önerisi (8.2.2.2)
 # Çevrim dışı (kontrol seti): ağa çıkılmaz, önbellek eskimiş olsa da kullanılır
 OFFLINE = os.environ.get('SDSPASS_PHYS_OFFLINE', '').strip() not in ('', '0')
 
@@ -273,6 +273,36 @@ def parse_pnec(page: str) -> List[Dict]:
     return out
 
 
+# Kayıt yaptıranın "11 Guidance on safe use" metninde el koruması (KKDİK Ek-2 8.2.2.2(b)(i)) — serbest metin;
+# malzeme / kalınlık / delinme süresi sezgisel ayrıştırılır, ham cümle KDU'nun doğrulaması için saklanır
+_GLOVE_MAT = (
+    ('butil', r'butyl'), ('nitril', r'nitrile|\bNBR\b'), ('neopren', r'neoprene|chloroprene'),
+    ('viton', r'viton|fluor\w*\s*(?:elastomer|rubber|caoutchouc)|\bFKM\b'),
+    ('laminat', r'laminate|\bPE/EV|EVOH|silver ?shield|\b4H\b'), ('pva', r'polyvinyl alcohol|\bPVA\b'),
+    ('pvc', r'polyvinyl chloride|\bPVC\b'), ('dogal_kaucuk', r'natural rubber|\blatex\b'),
+)
+
+
+def parse_glove(page: str) -> Optional[Dict]:
+    t = _plain(page)
+    m = re.search(r'(?i)hand protection|protective gloves|\bgloves?\b', t)
+    if not m:
+        return None
+    seg = t[max(0, m.start() - 40): m.start() + 600]
+    end = re.search(r'(?i)eye protection|body protection|skin and body|respiratory protection|hygiene|'
+                    r'unsuitable|not suitable|not recommended', seg[60:])
+    if end:
+        seg = seg[:60 + end.start()]
+    mats = [k for k, rx in _GLOVE_MAT if re.search(rx, seg, re.I)]
+    th = re.search(r'(\d+(?:[.,]\d+)?)\s*mm', seg)
+    bt = re.search(r'(?i)(?:>|≥|>=|more than|at least)\s*(\d+)\s*min', seg) or \
+        re.search(r'(?i)breakthrough time[^0-9]{0,20}(\d+)\s*min', seg)
+    if not mats and not th:
+        return None
+    return {'malzemeler': mats, 'kalinlik_mm': float(th.group(1).replace(',', '.')) if th else None,
+            'delinme_dk': int(bt.group(1)) if bt else None, 'metin': seg.strip()[:400]}
+
+
 def _summary_doc(idx: str, num: str) -> Optional[str]:
     m0 = re.search(r'das-nav-header">\s*' + re.escape(num) + r' ', idx)
     if not m0:
@@ -349,6 +379,18 @@ async def _fetch_echa(cas: str) -> Dict:
                     rec[key] = parser((await get(f'{base}/documents/{doc}.html')).text)
                 except Exception as e:
                     print(f'[component_phys] {cas} {key}: {e}')
+        # 11 Guidance on safe use — el koruması önerisi (KKDİK Ek-2 8.2.2.2(b)(i))
+        m11 = re.search(r'das-nav-header">\s*11 ', idx)
+        if m11:
+            j11 = idx.find('das-nav-topsection', m11.start() + 1)
+            h11 = re.search(r'href="([^"]+)"', idx[m11.start(): j11 if j11 > 0 else m11.start() + 30000])
+            if h11:
+                try:
+                    g = parse_glove((await get(f'{base}/documents/{h11.group(1)}.html')).text)
+                    if g:
+                        rec['eldiven'] = g
+                except Exception as e:
+                    print(f'[component_phys] {cas} eldiven: {e}')
         rec['status'] = 'ok'
         rec['_v'] = _REC_V
     return rec
@@ -454,6 +496,16 @@ def get(cas: str) -> Dict[str, Dict]:
                    'source': 'PubChem', 'ref': 'PubChem' + (f" — {srcs[k]}" if srcs.get(k) else '')}
             out[f] = ent
     return out
+
+
+def glove(cas: str) -> Dict:
+    """Kayıt yaptıranın el koruması önerisi {malzemeler, kalinlik_mm, delinme_dk, metin, ref} — yalnız önbellek."""
+    rec = _read((cas or '').strip()) or {}
+    if rec.get('status') != 'ok' or not rec.get('eldiven'):
+        return {}
+    dos = rec.get('dossier') or {}
+    return {**rec['eldiven'],
+            'ref': 'ECHA kayıt dosyası' + (f" ({dos['registration_number']})" if dos.get('registration_number') else '')}
 
 
 def dnel_pnec(cas: str) -> Dict:

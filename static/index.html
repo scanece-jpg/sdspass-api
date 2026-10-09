@@ -4633,8 +4633,10 @@ function _renderGloveCard(g) {
   const names = g.malzeme_adlari || {};
   const suggested = g.malzeme_secenekleri || [];
   const all = Object.keys(names);
+  const _isReg = g.kaynak === 'kayit' || g.kaynak === 'secim';   // seçenekler kayıt yaptıranın önerisinden
   const opt = m => `<option value="${m}" ${m === g.malzeme ? 'selected' : ''}>${names[m] || m}${
-    suggested.includes(m) ? (m === suggested[0] ? ' — önerilen' : '') : ' — sınıfa uygunluğu doğrulanmadı'}</option>`;
+    suggested.includes(m) ? (_isReg ? ' — kayıt yaptıranın önerisi' : (m === suggested[0] ? ' — önerilen' : ''))
+                          : ' — uygunluğu doğrulanmadı'}</option>`;
   const letters = (g.letters || []).map(x =>
     `<span style="background:rgba(56,189,248,.12);border-radius:4px;padding:1px 6px;font-size:10px;margin-right:3px">${x.letter} · ${x.sinif}</span>`).join('');
   let h = `<div class="ppe-category"><div class="ppe-cat-title">🧤 El — EN ISO 374-1</div>
@@ -4650,6 +4652,15 @@ function _renderGloveCard(g) {
              style="width:70px;font-size:11px;padding:2px 6px" onchange="_onGloveChange('thk')">
     </div>`;
   (g.uyarilar || []).forEach(w => { h += `<div class="warn-box" style="margin-top:4px">⚠ ${w}</div>`; });
+  // Kayıt yaptıranın el koruması önerisi (ECHA kayıt dosyası, 11 Guidance on safe use) — ham cümle, KDU doğrular
+  const _e = t => String(t ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;');
+  const _ko = g.kayit_onerileri || [];
+  if (_ko.length) {
+    h += `<details style="margin-top:4px;font-size:10px;color:var(--text3)"><summary style="cursor:pointer">
+      Kayıt yaptıranın önerisi (${_ko.length} bileşen) — kaynak metni</summary>`
+      + _ko.map(k => `<div style="margin:4px 0"><b>${_e(k.ad)}</b> — ${_e(k.ref)}<br>
+          <i>"${_e(k.metin)}"</i></div>`).join('') + `</details>`;
+  }
   return h + `</div>`;
 }
 

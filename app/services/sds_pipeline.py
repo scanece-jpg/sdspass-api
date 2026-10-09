@@ -604,13 +604,11 @@ async def classify(inp: dict) -> dict:
 
     # ── Taşıma ────────────────────────────────────────────────────────────────
     phys_h = [(r.get('h') or r.get('h_code') or '') for r in phys_res.get('results', [])]
-    visc = test_data.get('viscosity')
+    visc = test_data.get('viscosity')   # yalnız ölçülen değer (hesaplanmış viskozite taşımaya verilmez)
     try:
         visc = float(visc) if visc not in (None, '') else None
     except (TypeError, ValueError):
         visc = None
-    if visc is None:
-        visc = ((phys_res.get('theo_props') or {}).get('viscosity') or {}).get('value')
     eco_h_merge = []
     if aq and aq.h_code:
         eco_h_merge.append(aq.h_code)

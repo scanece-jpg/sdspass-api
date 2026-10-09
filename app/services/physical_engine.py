@@ -2030,20 +2030,38 @@ def _calc_flam_liq(comps: List[Dict], user_fp=None, user_bp=None, form_sub: str 
     if user_fp is not None:
         # Kullanıcı FP girmiş
         theo_bp = None
+        _bp_unknown = []   # kaynama noktası bilinmeyen alevlenir sıvı bileşenler
         for c in comps:
             cas = (c.get('cas') or c.get('cas_no') or '').strip()
             w   = float(c.get('concMax') or c.get('conc') or 0)
+            if w < 1:
+                continue
             bp  = BP_DB.get(cas, 'MISSING')
-            if bp != 'MISSING' and bp is not None and w >= 1:
+            _hs = {(h.get('h_code') or '').replace('*', '').strip()[:4] for h in (c.get('hazards') or [])}
+            if 'H224' in _hs:
+                bp = min(bp, 35) if isinstance(bp, (int, float)) else 35   # Kat.1 madde: kaynama ≤ 35 °C
+            if bp != 'MISSING' and bp is not None:
                 if theo_bp is None or bp < theo_bp:
                     theo_bp = bp
-        # SEA Ek-1 Tablo 2.6.1: Kat.1/Kat.2 ayrımı karışımın başlangıç kaynama noktasıyla yapılır —
-        # ölçülen değer varsa o kullanılır; yoksa en düşük bileşen kaynama noktası (temkinli tahmin).
-        # Önceden ölçülen değer bileşen tahmininin gerisinde kalıyordu (ölçüm 60 °C iken H224).
-        effective_bp = user_bp if user_bp is not None else (theo_bp if theo_bp is not None else (100 if user_fp < 23 else None))
-        _bp_src = (f', kaynama başlangıcı {user_bp}°C ölçülen' if user_bp is not None else
-                   (f', kaynama başlangıcı ≤ {theo_bp}°C (en düşük bileşen — tahmini)'
-                    if theo_bp is not None and user_fp < 23 else ''))
+            elif _hs & {'H225', 'H226'}:
+                _bp_unknown.append(c.get('name') or cas)
+        # SEA Ek-1 Tablo 2.6.1: Kat.1/Kat.2 ayrımı karışımın başlangıç kaynama noktasıyla yapılır — ölçülen değer
+        # varsa o kullanılır. Yoksa en düşük bileşen kaynama noktası temkinli tahmindir (karışımınki genellikle ondan düşük
+        # olmaz). Alevlenir bir bileşenin kaynama noktası bilinmiyorsa en kötü durum (≤ 35 °C → Kat.1).
+        # Önceden hiçbir bileşen kaynama noktası bilinmiyorsa 100 °C varsayılıp Kat.2 veriliyordu (2026-10-09).
+        if user_bp is not None:
+            effective_bp, _bp_src = user_bp, f', kaynama başlangıcı {user_bp}°C ölçülen'
+        elif user_fp >= 23:
+            effective_bp, _bp_src = None, ''
+        elif theo_bp is not None and (theo_bp <= 35 or not _bp_unknown):
+            effective_bp = theo_bp
+            _bp_src = f', kaynama başlangıcı ölçülmedi — en düşük bileşen kaynama noktası {theo_bp:g}°C'
+        else:
+            effective_bp = None
+            _bp_src = (', kaynama başlangıcı ölçülmedi ve '
+                       + (f"bileşen kaynama noktası bilinmiyor ({', '.join(_bp_unknown)})" if _bp_unknown
+                          else 'bileşen kaynama noktaları bilinmiyor')
+                       + ' — en kötü durum ≤ 35 °C (SEA Ek-1 Tablo 2.6.1)')
         if fp_status == 'l2_negative' and 35 < user_fp <= 60:
             # SEA Ek-1 2.6.4.5: parlama noktası 35–60 °C ve UN L.2 sürekli yanma testi olumsuz → Kat.3 gerekmez
             return {'result': None, 'source': f'Kullanıcı girişi ({user_fp}°C); UN L.2 sürekli yanma testi olumsuz '

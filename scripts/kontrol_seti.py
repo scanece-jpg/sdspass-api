@@ -273,6 +273,15 @@ def kural_testleri(c) -> int:
         ('3.10.3.3.1 "40 °C\'de ölçülmüş" viskozite: girilmemişse hesaplanmış viskoziteyle H304 kaldırılmaz '
          '(toluen %15 + gliserin)',
          lambda: 'H304' in calc([('108-88-3', 15), ('56-81-5', 85)], user_fp=40)),
+        ('Tablo 2.6.1 kaynama başlangıcı ölçülmedi: FP 10 °C + kaynama noktası bilinmeyen alevlenir bileşen → H224 '
+         '(en kötü durum; önceden 100 °C varsayılıp H225); bileşen kaynama noktası 56 °C (aseton) → H225',
+         lambda: [x['h'] for x in phys_calc([C('999-99-9', 40, ('Flam. Liq. 2', 'H225')), C('7732-18-5', 60)],
+                                            form='liquid', user_fp=10)['results']] == ['H224']
+         and [x['h'] for x in phys_calc([C('67-64-1', 30, ('Flam. Liq. 2', 'H225')), C('7732-18-5', 70)],
+                                        form='liquid', user_fp=10)['results']] == ['H225']),
+        ('ADR ÖH 375 (UN 3082): not ambalaj miktarına (≤ 5 L) dayanır, viskozite şartı yok (ADR 2025 3.3.1)',
+         lambda: (lambda n: '5 L' in n and 'viskozite' not in n.lower())(
+             tr_classify(h_codes=['H411'], form='liquid', viscosity=5000)['road']['note'])),
         ('Tablo 2.6.1 ölçülen kaynama başlangıcı 60 °C, FP 0 °C → H225 (H224 değil)',
          lambda: (lambda h: 'H225' in h and 'H224' not in h)(
              calc([('60-29-7', 5), ('108-88-3', 95)], user_fp=0, test_data={'boiling_point': 60}))),

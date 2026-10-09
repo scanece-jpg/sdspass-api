@@ -14,3 +14,5 @@ venv/
 app/services/echa_cache.json
 data/substances_unified.json.bak
 eski/
+
+data/echa_phys/

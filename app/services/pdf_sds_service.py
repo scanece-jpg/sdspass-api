@@ -2530,7 +2530,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                      for c in components if str(c.get('cas_no') or c.get('cas') or '').strip() == '7732-18-5')
     _flam_cls = bool((set(h_codes) | set(all_h_codes or [])) & {'H220', 'H221', 'H222', 'H223', 'H224', 'H225',
                                                                  'H226', 'H228'})
-    if (_lel_raw or _uel_raw) and _lel_calc and _water_pct > 50 and not _flam_cls:
+    if (_lel_calc or not (_lel_raw or _uel_raw)) and _is_liq_form and _water_pct > 50 and not _flam_cls:
         _ex_val = _L('Uygulanamaz — sulu, alevlenir olarak sınıflandırılmamış ürün',
                      'Not applicable — aqueous product not classified as flammable')
     elif _lel_raw or _uel_raw:

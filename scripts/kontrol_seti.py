@@ -14,6 +14,8 @@ Not: test sırasında data/substances_custom.json'a eklenen kayıtlar çalışma
 import asyncio
 import base64
 import os
+
+os.environ.setdefault('SDSPASS_PHYS_OFFLINE', '1')   # bileşen fiziksel verisi yalnız yerel önbellekten
 import re
 import sys
 import time
@@ -56,10 +58,10 @@ URUNLER = [
     {'ad': 'Toluen + %0,5 benzen (alevlenir, CMR)', 'bil': [('108-88-3', 99.5), ('71-43-2', 0.5)],
      'h': ['H225', 'H304', 'H315', 'H336', 'H340', 'H350', 'H361D', 'H373'], 'signal': 'Danger',
      'var': ['28730 sayılı Kanserojen', 'Ek-17 madde 48', 'Ek-17 madde 5', 'Alkole dayanıklı köpük',
-             'P5c (Alevlenir sıvılar', 'Alt: %1.1; üst: belirlenmemiştir', 'hesaplanmış – Le Chatelier (alt sınır)',
+             'P5c (Alevlenir sıvılar', 'En düşük parlama noktalı bileşen', 'karışımın parlama noktası değildir',
              'Aspirasyon zararı (H304): kusturmayın', 'Bu karışım için kimyasal güvenlik değerlendirmesi yapılmamıştır',
              'toluen, benzen: sayısal akut toksisite verisi'],
-     'yok': _UYDURMA},
+     'yok': _UYDURMA + ['hesaplanmış –', 'Le Chatelier']},
     {'ad': 'Benzil benzoat %20 (yalnız H412)', 'bil': [('120-51-4', 20), ('7732-18-5', 80)],
      'h': ['H412'], 'signal': '',
      'var': ['Uyarı Kelimesi Yok', 'Kirlenmiş giysiler', 'İlk yardım yapanlar', 'Bileşenlerden benzil benzoat (H302)',
@@ -116,9 +118,10 @@ URUNLER = [
      'h': ['H270', 'H280', 'H315', 'H319', 'H331', 'H335', 'H400'], 'signal': 'Danger',
      'var': ['Akut Toks. 3 (solunum) H331', 'Basınçlı Gaz (Sıvılaştırılmış gaz)', '2TOC', 'C/D', 'UN1017',
              '16 05 04*', 'Sızıntı noktasına ve kabın içine doğrudan su', 'Klorür bileşikleri',
-             '3.1 Maddeler', 'Madde sınıflandırması - SEA Ek-6', 'Maddenin sınıflandırılması', '-34.6 °C'],
+             '3.1 Maddeler', 'Madde sınıflandırması - SEA Ek-6', 'Maddenin sınıflandırılması', '-34 °C', 'ECHA kayıt dosyası'],
      'yok': _UYDURMA + ['H330:', 'Akut Toks. 2', 'Acute Tox', 'Karbon oksit', 'organik fragment', 'FFP2',
                         'cilt için sınıflandırılmamıştır', 'uzun süreli olumsuz', 'CO₂ KULLANMAYIN', '16 03 05',
+                        'mPa·s',
                         'kontrollü yakma', '3.2 Karışımlar', 'ATE Karışım Hesabı', 'Gaz karışımı',
                         'karışım için test yapılmamıştır', 'Bu karışım', 'kesme %']},
     {'ad': 'Azot içinde %1 karbon monoksit (ISO 10156 hesabı: alevlenir değil)', 'form': 'gas',
@@ -392,7 +395,9 @@ def kural_testleri(c) -> int:
                   and 'PHYS_AEROSOL_UNTESTED' in [d['code'] for d in r['pending_decisions']])(
              phys_calc([C('7732-18-5', 70), C('74-98-6', 30, ('Flam. Gas 1', 'H220'))], form='aerosol'))),
         ('SEA Ek-1 2.3: parlama noktası 78 °C (≤ 93 °C) sıvı alevlenir bileşen sayılır; ≤ %1 → yalnız H229',
-         lambda: 'H222' in [x['h'] for x in phys_calc([C('8042-47-5', 60), C('112-34-5', 30), C('124-38-9', 10)],
+         lambda: 'H222' in [x['h'] for x in phys_calc([C('8042-47-5', 60, phys={}),
+                                                       C('112-34-5', 30, phys={'flash_point': {'value': 78}}),
+                                                       C('124-38-9', 10, phys={})],
                                                      form='aerosol')['results']]
          and [x['h'] for x in phys_calc([C('7732-18-5', 98), C('7727-37-9', 2)], form='aerosol')['results']] == ['H229']),
         ('SEA Ek-1 2.7: H228 kayıtlı bileşen (%2 kükürt) tozda H228 otomatik verilmez, test (N.1) sorusu sorulur; '
@@ -494,9 +499,33 @@ def kural_testleri(c) -> int:
              tn([('64-17-5', 10), ('7732-18-5', 90)]),
              tn([('1310-73-2', 5), ('7732-18-5', 95)]),
              tn([('7727-37-9', 79), ('7782-44-7', 21)], form='gas'))),
-        ('Ek-2 9.1: koku girilmemişse nedenli ifade; hesaplanan buhar basıncında referans sıcaklık',
-         lambda: (lambda t: 'koku değerlendirmesi yapılmamıştır' in t and '20–25 °C' in t)(
+        ('Ek-2 9.1: koku girilmemişse nedenli ifade; karışımda hesaplanmış değer yok (Bölüm 9 "ampirik bilgi"), '
+         'bileşen verisi ilgili maddeye atfen (AB 2020/878 yöntemi: en uçucu / en düşük parlama noktalı bileşen), '
+         'Bölüm 16 kaynak notu',
+         lambda: (lambda t: 'koku değerlendirmesi yapılmamıştır' in t and 'hesaplanmış' not in t
+                  and 'En uçucu bileşen: aseton 240 hPa (20 °C)' in t
+                  and 'En düşük parlama noktalı bileşen: aseton' in t
+                  and 'ilgili bileşene atfen verilmiştir (KKDİK Ek-2 9.1)' in t
+                  and 'ECHA kayıt dosyaları (chem.echa.europa.eu)' in t)(
              _pdf_text(c, [('67-64-1', 20), ('64-17-5', 20), ('7732-18-5', 60)]))),
+        ('Bileşen fiziksel verisi: ECHA anahtar değeri birimleri (K → °C, Pa → hPa, bilimsel gösterim, "[Empty]" '
+         'yoğunluk alınmaz, ICSC biçimi); gazda viskozite / yoğunluk Bölüm 9\'a yazılmaz; parlama noktası Ek-6 sınıfıyla '
+         'çelişen bileşen (ksilen 18 °C / H226) Bölüm 9\'a yazılmaz',
+         lambda: (lambda cp: cp.parse_temp('286 K at the pressure of 101,325 Pa')['value'] == 12.9
+                  and cp.parse_pressure('5,726 Pa at the temperature of 292.8 K')['value'] == 57.26
+                  and cp.parse_pressure('5.83X10+3 mm Hg at 25 °C')['value'] == 7773.0
+                  and cp.parse_pressure('Vapour pressure, kPa at 20 °C: 24')['value'] == 240
+                  and cp.parse_density('Relative density (water = 1): 0.79')['value'] == 0.79
+                  and cp.parse_temp('55 °F (13 °C) (Closed cup)')['value'] == 13
+                  and 'viscosity' not in cp.section9(
+                      [{'cas': 'x', 'conc': 100, 'phys': {'viscosity': {'value': 13.3, 'unit': 'mPa·s', 'ref': 'r'},
+                                                          'boiling_point': {'value': -34, 'unit': '°C', 'ref': 'r'}}}],
+                      True, 'gas')
+                  and 'flash_point' not in cp.section9(
+                      [{'cas': '1330-20-7', 'name': 'ksilen', 'conc': 50, 'hazards': [{'h_code': 'H226'}],
+                        'phys': {'flash_point': {'value': 18, 'unit': '°C', 'ref': 'ECHA'}}},
+                       {'cas': '7732-18-5', 'conc': 50, 'phys': {}}], False, 'liquid'))(
+             __import__('app.services.component_phys', fromlist=['x']))),
         ('ISO 10156 / EIGA Doc 169 parametre tablosu 13 aydan eski değil (EIGA her Nisan yeni revizyon; '
          'data/iso10156_gas_data.json — kaynakları kontrol edip dogrulama_tarihi güncellenir)',
          lambda: (datetime.date.today() - datetime.date.fromisoformat(iso10156.data()['dogrulama_tarihi'])).days < 395),

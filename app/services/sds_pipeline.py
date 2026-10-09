@@ -482,6 +482,12 @@ async def classify(inp: dict) -> dict:
     _normalize_conc(comps)
     comps = await refresh_components(comps, form)
 
+    # Bileşen fiziksel verileri (ECHA kayıt dosyası → PubChem) — sınıflandırmada bileşen parlama / kaynama noktası,
+    # Bölüm 9'da madde / bileşen verisi. Önbellekte yoksa okunur; süre aşılırsa bilinmiyor sayılır (en kötü durum).
+    from app.services import component_phys as _cp
+    _phys_late = await _cp.ensure_many([c.get('cas') or c.get('cas_no') for c in comps if _conc_of(c) > 0])
+    _cp.attach(comps)
+
     # Tek maddeli ürün (SEA Md.4: madde — katkı ve safsızlıkları dahil; karışım = iki veya daha fazla madde).
     # Madde kendi sınıflandırmasıyla (Ek-6 / veri) sınıflandırılır; karışım hesap yöntemleri (ATEmix 3.1.3,
     # toplama, kesme değerleri) uygulanmaz. Önceden %100 klor karışım gibi hesaplanıp Kat.1 alıyordu (2026-10-09).
@@ -520,6 +526,16 @@ async def classify(inp: dict) -> dict:
                          test_data=test_data, form_sub=form_sub, fp_status=inp.get('fp_status') or '',
                          mixture_ph=mixture_ph,
                          mixture_skin_corr='H314' in {_h4(h) for h in (clp_res.get('h_codes') or [])})
+    if _phys_late:
+        phys_res.setdefault('warnings', []).append(
+            'ℹ Bileşen fiziksel verisi zamanında alınamadı (' + ', '.join(_phys_late) + ') — bu bileşenlerin parlama / '
+            'kaynama noktası bilinmiyor sayıldı. Birkaç dakika sonra yeniden hesaplayın.')
+    for _c in comps:
+        _w = _cp.fp_conflict(_c) if _conc_of(_c) > 0 else None
+        if _w:
+            phys_res.setdefault('warnings', []).append(_w)
+    # GBF Bölüm 9: tek maddede maddenin kendi değerleri, karışımda bileşen verisi (KKDİK Ek-2 9.1)
+    b9 = _cp.section9(comps, substance_mode, form)
     stot_res = stot_calc(comps)
     if substance_mode:
         # Madde: bileşen değeri maddenin kendi değeridir — "karışım için belirlenmemiştir" yazılmaz
@@ -813,6 +829,18 @@ async def classify(inp: dict) -> dict:
     ek6_agir = [{'cas': c.get('cas') or c.get('cas_no') or '', 'name': c.get('name_tr') or c.get('name') or '', **e}
                 for c in comps for e in (c.get('ek6_daha_agir') or [])]
     cls_notes = list(phys_res.get('classification_notes', []))
+    if b9:
+        _srcs = [k for k in ('ECHA', 'PubChem') if any(k in (v.get('note') or '') for v in b9.values())]
+        _src_tr = ' ve '.join(s for s in (('ECHA kayıt dosyaları (chem.echa.europa.eu)' if 'ECHA' in _srcs else ''),
+                                          ('PubChem (NIH)' if 'PubChem' in _srcs else '')) if s)
+        cls_notes.append({
+            'TR': (f'Bölüm 9: madde verilerinin kaynağı: {_src_tr}.' if substance_mode else
+                   'Bölüm 9: karışım için ölçülmemiş özelliklerde verilen değerler ilgili bileşene atfen verilmiştir '
+                   f'(KKDİK Ek-2 9.1); kaynak: {_src_tr}.'),
+            'EN': 'Section 9: ' + ('component data are attributed to the relevant substance; ' if not substance_mode
+                                   else 'substance data; ') + 'source: '
+                  + ' and '.join(s for s in (('ECHA registration dossiers' if 'ECHA' in _srcs else ''),
+                                             ('PubChem' if 'PubChem' in _srcs else '')) if s) + '.'})
     if ek6_supp:
         _used = [e for e in ek6_supp if not e['removed']]
         _rem = [e for e in ek6_supp if e['removed']]
@@ -877,6 +905,7 @@ async def classify(inp: dict) -> dict:
                         + clp_res.get('warnings', [])),
         'pending_decisions': phys_res.get('pending_decisions', []),
         'classification_notes': cls_notes,
+        'b9': b9,
         'label_components': label_components(comps, all_h),
     }
 

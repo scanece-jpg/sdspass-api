@@ -142,6 +142,115 @@ def _first_string(section) -> str | None:
     return None
 
 
+_CACHE_VERSION = 2   # 2026-10-09: tüm kayıtlar taranır, 20 °C'ye en yakın değer + kaynak adı
+
+
+def cached(cas: str) -> dict | None:
+    """Önbellekteki (yalnız güncel sürüm) veri — ağa çıkmaz."""
+    f = _BASE / f"{cas.replace('/', '_').replace(chr(92), '_')}.json"
+    if not f.exists():
+        return None
+    try:
+        d = json.loads(f.read_text(encoding='utf-8'))
+    except Exception:
+        return None
+    return d if d.get('_v') == _CACHE_VERSION else None
+
+
+def _candidates(sections, heading: str) -> list:
+    out = []
+    for sec in _find_section(sections, heading):
+        for info in sec.get('Information', []):
+            val = info.get('Value', {})
+            ref = info.get('ReferenceNumber')
+            for swm in val.get('StringWithMarkup', []):
+                t = (swm.get('String') or '').strip()
+                if t:
+                    out.append((t, ref))
+            nums = val.get('Number', [])
+            if nums:
+                out.append((f"{nums[0]} {val.get('Unit', '')}".strip(), ref))
+    return out
+
+
+def _parse_props(sections, refs: dict, props: dict, inorganic: bool = False) -> None:
+    """PubChem deneysel özellikleri — her özellik için bütün kayıtlar taranır (önceden yalnız ilk satır alınıyordu:
+    klor buhar basıncında "7600 mmHg at 86 °F" seçiliyordu). Sıcaklığa bağlı özelliklerde 20 °C'ye en yakın
+    (15–25 °C) değer; parlama noktasında kapalı kap tercih edilir. Kaynak adı (_src) saklanır."""
+    from app.services.component_phys import (parse_temp, parse_pressure, parse_density, parse_solubility)
+    src, temp, raw = {}, {}, {}
+
+    def put(key, value, text, ref, t=None):
+        props[key] = value
+        raw[key] = text[:120]
+        if refs.get(ref):
+            src[key] = refs[ref]
+        if t is not None:
+            temp[key] = t
+
+    def by_temp(cands, parser, lo=15.0, hi=25.0):
+        rows = [(parser(t), t, r) for t, r in cands]
+        rows = [x for x in rows if x[0] and (x[0].get('value') is not None or x[0].get('text'))]
+        inr = [x for x in rows if x[0].get('temp_c') is not None and lo <= x[0]['temp_c'] <= hi]
+        if inr:
+            return min(inr, key=lambda x: abs(x[0]['temp_c'] - 20))
+        notemp = [x for x in rows if x[0].get('temp_c') is None]
+        return notemp[0] if notemp else None
+
+    def first_temp(cands, prefer=None, avoid=None):
+        rows = [(parse_temp(t), t, r) for t, r in cands]
+        rows = [x for x in rows if x[0]]
+        if prefer:
+            p = [x for x in rows if re.search(prefer, x[1], re.I)]
+            if p:
+                return p[0]
+        if avoid:
+            rows = [x for x in rows if not re.search(avoid, x[1], re.I)] or rows
+        return rows[0] if rows else None
+
+    if not inorganic:
+        x = first_temp(_candidates(sections, 'Boiling Point'), avoid=r'decompos|sublim|mm ?hg|kpa|torr')
+        if x:
+            put('boiling_point', x[0]['value'], x[1], x[2])
+    fp_c = [(t, r) for t, r in _candidates(sections, 'Flash Point')
+            if not re.search(r'non-?flam|not flam|\bnone\b', t, re.I)]
+    x = first_temp(fp_c, prefer=r'closed cup|\bc\.?c\.?\b|\(cc\)', avoid=r'open cup|\bo\.?c\.?\b')
+    if x:
+        put('flash_point', x[0]['value'], x[1], x[2])
+    x = first_temp(_candidates(sections, 'Melting Point'))
+    if x:
+        put('melting_point', x[0]['value'], x[1], x[2])
+    x = first_temp(_candidates(sections, 'Autoignition Temperature'))
+    if x:
+        put('auto_ignition', x[0]['value'], x[1], x[2])
+    x = by_temp(_candidates(sections, 'Vapor Pressure'), parse_pressure)
+    if x:
+        put('vapor_pressure', x[0]['value'], x[1], x[2], x[0].get('temp_c'))
+    x = by_temp(_candidates(sections, 'Density'), parse_density)
+    if x and x[0]['value'] and 0.3 < x[0]['value'] < 6.0:
+        put('density', x[0]['value'], x[1], x[2], x[0].get('temp_c'))
+    sol = _candidates(sections, 'Solubility')
+    sol = [c for c in sol if re.search(r'water', c[0], re.I)] or sol
+    x = by_temp(sol, parse_solubility, 15.0, 30.0)
+    if x:
+        if x[0].get('value') is None:          # "miscible"
+            props['solubility'] = 1e6
+            props['solubility_text'] = 'Karışır'
+            raw['solubility'] = x[1][:120]
+            if refs.get(x[2]):
+                src['solubility'] = refs[x[2]]
+        else:
+            put('solubility', x[0]['value'], x[1], x[2], x[0].get('temp_c'))
+            props['solubility_text'] = x[1][:150]
+    for head, key in (('Lower Explosive Limit', 'lel'), ('Upper Explosive Limit', 'uel')):
+        for t, r in _candidates(sections, head):
+            m = re.search(r'(\d+(?:\.\d+)?)\s*%', t)
+            if m:
+                put(key, round(float(m.group(1)), 2), t, r)
+                break
+    props['_src'], props['_temp'], props['_raw'], props['_v'] = src, temp, raw, _CACHE_VERSION
+
+
 # ── Ana çekme fonksiyonu ──────────────────────────────────────────────────────
 # ── İnorganik/iyonik maddeler — BP verileri PubChem'den güvenilmez ─────────────
 # Bu maddeler için boiling_point PubChem çıktısından çıkarılır.
@@ -190,7 +299,9 @@ async def fetch_phys(cas: str) -> dict:
         try:
             _prev_cached = json.loads(cache_file.read_text(encoding='utf-8'))
             _cached_at_str = _prev_cached.get('_cached_at')
-            if _cached_at_str:
+            if _prev_cached.get('_v') != _CACHE_VERSION:
+                _ttl_expired = True   # eski çözümleme (ilk satır; 20 °C seçilmiyordu) — yeniden çekilir
+            elif _cached_at_str:
                 age_days = (datetime.now(timezone.utc)
                             - datetime.fromisoformat(_cached_at_str)).days
                 has_critical = any(f in _prev_cached for f in _CRITICAL_FIELDS)
@@ -202,9 +313,7 @@ async def fetch_phys(cas: str) -> dict:
                 else:
                     _ttl_expired = True   # TTL doldu → PubChem'den yenile
             else:
-                # Eski format — _cached_at yok → dokunma, yeni sorguları bekle
-                return {k: v for k, v in _prev_cached.items()
-                        if k not in _CACHE_META_KEYS}
+                _ttl_expired = True
         except Exception:
             pass
 
@@ -245,94 +354,11 @@ async def fetch_phys(cas: str) -> dict:
                 )
 
             if r3.status_code == 200:
-                sections = r3.json().get('Record', {}).get('Section', [])
-
-                # Kaynama Noktası — inorganik/iyonik maddeler için atla
-                if cas.strip() not in _INORGANIC_NO_BP:
-                    for sec in _find_section(sections, 'Boiling Point'):
-                        s = _first_string(sec)
-                        if s:
-                            v = _num(s)
-                            if v is not None:
-                                props['boiling_point'] = _to_celsius(v, s)
-                        break
-
-                # Parlama Noktası
-                for sec in _find_section(sections, 'Flash Point'):
-                    s = _first_string(sec)
-                    if s:
-                        sl = s.lower()
-                        if 'non-flam' in sl or 'not flam' in sl or 'none' in sl:
-                            props['flash_point'] = None
-                        else:
-                            v = _num(s)
-                            if v is not None:
-                                props['flash_point'] = _to_celsius(v, s)
-                    break
-
-                # Yoğunluk
-                for sec in _find_section(sections, 'Density'):
-                    s = _first_string(sec)
-                    if s:
-                        v = _num(s)
-                        if v is not None and 0.3 < v < 6.0 and _temp_ok(s):
-                            props['density'] = round(v, 4)
-                    break
-
-                # Buhar Basıncı
-                for sec in _find_section(sections, 'Vapor Pressure'):
-                    s = _first_string(sec)
-                    if s:
-                        v = _num(s)
-                        if v is not None and v >= 0 and _temp_ok(s):
-                            props['vapor_pressure'] = _to_hpa(v, s)
-                    break
-
-                # Çözünürlük
-                for sec in _find_section(sections, 'Solubility'):
-                    s = _first_string(sec)
-                    if s:
-                        props['solubility_text'] = s[:150]
-                        sl = s.lower()
-                        if any(w in sl for w in ('miscible', 'soluble in all', 'completely')):
-                            # Tam karışır — SOL_DB güncellemesi ve çapraz kontrol için 1e6 kullan.
-                            # physical_engine sol_val >= 900000 kontrolüyle bunu "Karışır" olarak
-                            # gösterir; PDF'de "~1.000.000 mg/L" yerine "Karışır" çıkar.
-                            # NOT: None kullanılırsa dosya sonundaki çapraz kontrol TypeError verir.
-                            props['solubility']      = 1e6
-                            props['solubility_text'] = 'Karışır'
-                        elif 'insoluble' in sl or 'immiscible' in sl:
-                            props['solubility'] = 0.1
-                        else:
-                            v = _num(s)
-                            if v is not None and v >= 0:
-                                props['solubility'] = _to_mg_l(v, s)
-                    break
-
-                # Erime/Donma Noktası
-                for sec in _find_section(sections, 'Melting Point'):
-                    s = _first_string(sec)
-                    if s:
-                        v = _num(s)
-                        if v is not None:
-                            props['melting_point'] = _to_celsius(v, s)
-                    break
-
-                # Alt/Üst Patlama Sınırı
-                for sec in _find_section(sections, 'Lower Explosive Limit'):
-                    s = _first_string(sec)
-                    if s:
-                        v = _num(s)
-                        if v is not None:
-                            props['lel'] = round(v, 2)
-                    break
-                for sec in _find_section(sections, 'Upper Explosive Limit'):
-                    s = _first_string(sec)
-                    if s:
-                        v = _num(s)
-                        if v is not None:
-                            props['uel'] = round(v, 2)
-                    break
+                _rec = r3.json().get('Record', {})
+                sections = _rec.get('Section', [])
+                _refs = {r.get('ReferenceNumber'): (r.get('SourceName') or '').strip()
+                         for r in _rec.get('Reference', []) or []}
+                _parse_props(sections, _refs, props, inorganic=cas.strip() in _INORGANIC_NO_BP)
 
     except Exception as e:
         print(f"[PubChemPhys] CAS {cas} hatası: {e}")
@@ -377,7 +403,7 @@ async def fetch_phys(cas: str) -> dict:
     if props:
         try:
             _to_cache = {k: v for k, v in props.items()
-                         if not k.startswith('_')}   # uyarı meta'larını kaydetme
+                         if not k.startswith('_') or k in ('_src', '_temp', '_raw', '_v')}
             _to_cache['_cached_at'] = datetime.now(timezone.utc).isoformat()
             _to_cache['_classification_h22x'] = _h22x_category(
                 props.get('flash_point'), props.get('boiling_point')

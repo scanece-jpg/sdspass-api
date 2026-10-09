@@ -299,6 +299,7 @@ async def generate_pdf(data: dict = Body(...)):
         # measured: True  → kullanıcı girdi (ölçülen/beyan değer)
         # measured: False → motor hesapladı (teorik, KKDİK Ek-2 §9 dipnotu)
         _theo = _phys_res.get('theo_props') or {}
+        _b9 = core.get('b9') or {}
         _phys_methods: dict = {}
         # _req_methods yukarıda (_user_fp öncesinde) tanımlandı
         _BACKFILL_FIELDS = (
@@ -307,9 +308,7 @@ async def generate_pdf(data: dict = Body(...)):
             'melting_point', 'auto_ignition', 'decomposition_temp', 'evap_rate',
         )
         for _bk in _BACKFILL_FIELDS:
-            _tp = _theo.get(_bk)
-            if not _tp:
-                continue
+            _tp = _theo.get(_bk) or {}
             _tp_val  = _tp.get('value')
             _tp_disp = _tp.get('display') or (str(_tp_val) if _tp_val is not None else None)
             _tp_std  = _tp.get('standard', '')
@@ -326,6 +325,42 @@ async def generate_pdf(data: dict = Body(...)):
                 _existing and not isinstance(_existing, dict)
                 and str(_existing).strip() not in ('', '0')
             )
+
+            _req_m0 = _req_methods.get(_bk)
+            _from_theo = isinstance(_req_m0, dict) and _req_m0.get('measured') is False
+            if _has_user_val and not isinstance(_req_m0, dict) and _tp and not _tp.get('measured'):
+                # Panel bazı alanları yöntem bilgisi olmadan motor değeriyle doldurur — değer motorunkiyle aynıysa
+                # kullanıcı ölçümü değildir
+                _ev = _existing.get('calc') if isinstance(_existing, dict) else _existing
+                _ed = _existing.get('display') if isinstance(_existing, dict) else _existing
+                try:
+                    _same = _tp_val is not None and abs(float(_ev) - float(_tp_val)) < 1e-6
+                except (TypeError, ValueError):
+                    _same = False
+                _from_theo = _same or (str(_ed or '').strip() != '' and str(_ed).strip() in
+                                       {str(_tp.get('text') or '').strip(), str(_tp_disp or '').strip()})
+            if _has_user_val and _from_theo:
+                # Panelde motorun doldurduğu hesaplanmış değer — GBF'ye yazılmaz. KKDİK Ek-2 Bölüm 9 "ampirik
+                # bilgi" ister; hesap ampirik değildir (2026-10-09). Yerine madde / bileşen verisi gelir.
+                _parsed_phys.pop(_bk, None)
+                _has_user_val = False
+            # Hesaplanmış teorik değer GBF'ye yazılmaz; yalnız ölçülen (test verisi), literatür (ölçülmüş) ve gaz
+            # karışımında ISO 10156 hesabı (SEA Ek-1 2.2 / 2.4 bu hesabı kabul eder) kalır.
+            if _tp and not (_tp.get('measured') or _tp.get('pdf_note') or _tp.get('estimate_only')
+                            or 'ISO 10156' in str(_tp.get('standard') or '')):
+                _tp = {}
+                _tp_val = _tp_disp = None
+            if not _has_user_val and _bk in _b9 and not (_tp.get('measured') or
+                                                         (_tp.get('pdf_note') and not _tp.get('estimate_only'))):
+                _note = _b9[_bk].get('note') or ''
+                if _tp.get('estimate_only') and _tp.get('pdf_note') and not core.get('substance_mode'):
+                    _note = f"{_tp['pdf_note']}; {_note}"
+                _parsed_phys[_bk] = {'display': _b9[_bk]['display'], 'calc': None, 'nd': False, 'na': False,
+                                     'theo': False}
+                _phys_methods[_bk] = {'note_text': _note}
+                continue
+            if not _tp and not _has_user_val:
+                continue
 
             if _has_user_val:
                 # Kullanıcı değer girmiş — JS'den gelen measured bayrağına güven
@@ -713,6 +748,14 @@ async def substance_lookup(cas: str, form: str = None):
     from app.services.reach_db import get_ec_no, exemption, is_registered
 
     oel = get_oel(cas)
+
+    # Madde fiziksel verisi (ECHA kayıt dosyası → PubChem) arka planda hazırlanır — hesaplama anında beklenmesin
+    try:
+        import asyncio as _aio
+        from app.services import component_phys as _cp
+        _aio.ensure_future(_cp.ensure(cas.strip()))
+    except Exception as _e:
+        print(f'[component_phys] arka plan başlatılamadı: {_e}')
 
     # SEA Ek-6 maddesinde Ek-6 dışı sınıfların ECHA takviyesi önce tamamlanır (ilk sorguda eksik kalmasın)
     try:

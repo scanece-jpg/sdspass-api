@@ -42,7 +42,8 @@ _shas: dict = {}
 _lock    = threading.Lock()
 _worker  = None
 # /health için durum — depo adı ve token gösterilmez
-_status: dict = {'indirilen': None, 'yuklenen': 0, 'son_hata': None, 'son_hata_zamani': None}
+_status: dict = {'indirilen': None, 'yuklenen': 0, 'son_hata': None, 'son_hata_zamani': None,
+                 'son_basari_zamani': None}
 
 
 def _err(msg: str) -> None:
@@ -56,9 +57,17 @@ def status() -> dict:
     """Kalıcılık durumu (tarayıcıdan /health ile kontrol için)."""
     if not ENABLED:
         return {'durum': 'KAPALI — SDSPASS_DATA_REPO / SDSPASS_DATA_TOKEN tanımlı değil; veriler her deploy\'da silinir'}
-    return {'durum': 'açık' if not _status['son_hata'] else 'açık — HATA VAR', 'baslangicta_indirilen_dosya':
-            _status['indirilen'], 'bu_oturumda_yuklenen': _status['yuklenen'], 'bekleyen': _q.unfinished_tasks,
-            'son_hata': _status['son_hata'], 'son_hata_zamani': _status['son_hata_zamani']}
+    # Hatadan sonra başarılı yükleme olduysa sorun giderilmiştir (zaman damgaları aynı biçimde → metin karşılaştırma)
+    _hata, _basari = _status['son_hata_zamani'], _status['son_basari_zamani']
+    if not _hata:
+        durum = 'açık'
+    elif _basari and _basari >= _hata:
+        durum = 'açık (önceki hata giderildi — sonraki yüklemeler başarılı)'
+    else:
+        durum = 'açık — HATA VAR'
+    return {'durum': durum, 'baslangicta_indirilen_dosya': _status['indirilen'],
+            'bu_oturumda_yuklenen': _status['yuklenen'], 'bekleyen': _q.unfinished_tasks,
+            'son_basarili_yukleme': _basari, 'son_hata': _status['son_hata'], 'son_hata_zamani': _hata}
 
 
 def _headers() -> dict:
@@ -215,6 +224,7 @@ def _upload(c: httpx.Client, rel: str) -> None:
         if r.status_code in (200, 201):
             _shas[rel] = r.json()['content']['sha']
             _status['yuklenen'] += 1
+            _status['son_basari_zamani'] = time.strftime('%Y-%m-%d %H:%M:%S')
             return
         if r.status_code in (409, 422):           # sha eski ya da eksik → depodaki güncel sha'yı al
             g = c.get(url, headers=_headers(), params={'ref': BRANCH})

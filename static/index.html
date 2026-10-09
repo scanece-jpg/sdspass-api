@@ -1286,9 +1286,9 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
 <script src="js/engines/hp_texts.js?v=20260425"></script>
 <!-- Modüller — Python API akışı (ISO 27001) -->
 <script src="js/modules/cas-lookup.js?v=20260617"></script>
-<script src="js/modules/component-manager.js?v=20260617"></script>
+<script src="js/modules/component-manager.js?v=20261009a"></script>
 <script src="js/modules/conc-selector.js?v=20260617"></script>
-<script src="js/modules/calculator.js?v=20261007c"></script>
+<script src="js/modules/calculator.js?v=20261009a"></script>
 <script src="js/modules/results-renderer.js?v=20260930"></script>
 <script src="js/modules/pdf-exporter.js?v=20260617"></script>
 <script src="js/app.js?v=20260617"></script>
@@ -4428,6 +4428,17 @@ function renderAll(s) {
         SEA Md.6(1)(c) gereği ECHA C&amp;L bildirimlerinin çoğunluğuna göre eklendi. Uygun değilse bileşen satırındaki
         <b>ECHA</b> işaretli etiketi × ile kaldırın.</div>
         ${_ek6s.map(e => `<div>• ${_esc(e.name || e.cas)} (${_esc(e.cas)}): <b>${_esc(e.h_code)}</b>${e.h_class ? ' — ' + _esc(e.h_class) : ''}${e.removed ? ' <span style="color:var(--text3)">(kullanıcı kaldırdı — hesaba katılmadı)</span>' : ''}</div>`).join('')}
+      </div>`;
+  }
+  // ── Ek-6 uygulandı, ECHA'da daha ağır kategori var (SEA Md.6(1)(c)) — hesaba katılmaz, KDU bilgisi ──
+  const _ek6a = window._lastEk6Agir || [];
+  if (_ek6a.length) {
+    h += `<div class="r-title">ⓘ Ek-6 sınıflandırması uygulandı — ECHA'da daha ağır kategori var</div>
+      <div class="warn-box" style="margin-bottom:8px;font-size:11px">
+        <div style="margin-bottom:4px">SEA Md.6(1)(c) gereği Ek-6'daki uyumlaştırılmış sınıf uygulandı; ECHA C&amp;L
+        bildirimlerindeki daha ağır kategori hesaba katılmadı. Ek-6 girişi asgari sınıflandırma (*) ise ve daha ağır
+        kategoriyi destekleyen veri (tedarikçi GBF'si, test) varsa KDU olarak bileşen satırından değiştirebilirsiniz.</div>
+        ${_ek6a.map(e => `<div>• ${_esc(e.name || e.cas)} (${_esc(e.cas)}): Ek-6 <b>${_esc(e.ek6_h_code)}</b>${e.ek6_h_class ? ' (' + _esc(e.ek6_h_class) + ')' : ''} — ECHA bildirimi <b>${_esc(e.h_code)}</b>${e.h_class ? ' (' + _esc(e.h_class) + ')' : ''}</div>`).join('')}
       </div>`;
   }
   const _given = Object.entries(window._physDecisionLabels || {});

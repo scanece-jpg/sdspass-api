@@ -655,7 +655,9 @@ H_SENTENCES: Dict[str, Dict[int, str]] = {
     },
     'H270': {
         4: 'OKSİTLEYİCİ GAZ: Gözle temas halinde bol suyla yıkayın. Doktora gidin.',
-        5: 'OKSİTLEYİCİ: Yangını şiddetlendirebilir. CO₂ KULLANMAYIN. Su spreyi.',
+        # H270 yalnız oksitleyici GAZ — söndürücü seçimi 5.1'de (extinguishing_media); önceki "CO₂ KULLANMAYIN. Su
+        # spreyi." 5.1 ile çelişiyordu (klor gibi gazlarda sızıntıya su verilmez).
+        5: 'OKSİTLEYİCİ GAZ: Yanmayı şiddetlendirir; yanıcı maddeleri gaz bulutundan uzak tutun.',
         6: 'Bölgeden uzaklaşın. Sızdıran tüpü dışarı çıkarın. Uzman ekip.',
         7: 'Yanıcı maddelerden uzakta, kilitli, havalandırılmış depoda saklayın.',
         8: 'Alev geciktirici giysi, SCBA ve yüz siperi zorunlu.',
@@ -669,11 +671,30 @@ H_SENTENCES: Dict[str, Dict[int, str]] = {
 # tek bir kural seçilir. Önceki H_TO_EXTINGUISHER tablosu yalnız "uygun"u veriyordu, alevlenir olmayan üründe
 # "Uygun yangın söndürücü kullanın" diye belirsiz kalıyordu ve hatalı ifadeler içeriyordu (oksitleyicide "su
 # kullanılmaz", H226'da "su kullanmayın").
-def extinguishing_media(h_codes, euh_codes=(), lang: str = 'TR') -> tuple:
+def extinguishing_media(h_codes, euh_codes=(), lang: str = 'TR', cas_set=None) -> tuple:
     """(uygun, uygun_olmayan) metinleri."""
     tr = lang == 'TR'
     hs = {str(h).split()[0][:4].upper() for h in (h_codes or [])}
     eu = {str(e).upper() for e in (euh_codes or [])}
+    # Basınçlı kaptaki oksitleyici gaz (H270 + H280/H281): ürün yanmaz, yanmayı şiddetlendirir — çevredeki yangına
+    # uygun söndürücü + kap soğutma. Klor/HCl/SO2/NH3 gibi gazlar su ile aşındırıcı çözelti oluşturur → sızıntı
+    # noktasına ve kabın içine su verilmez (önceden "bol su" yazılıyordu).
+    if 'H270' in hs and hs & {'H280', 'H281'}:
+        try:
+            from app.services.tr_mevzuat_service import WATER_SENSITIVE_GAS_CAS as _WSG
+        except Exception:
+            _WSG = set()
+        _ws = bool(set(cas_set or ()) & _WSG)
+        ok = ('Çevredeki yangına uygun söndürücüler kullanılabilir; ürün yanmaz ancak yanmayı şiddetlendirir. '
+              'Güvenliyse gaz akışını kesin; basınçlı kapları güvenli mesafeden su spreyi ile soğutun.' if tr else
+              'Use extinguishing media appropriate to the surrounding fire; the product is not flammable but '
+              'intensifies combustion. Stop the gas flow if safe; cool receptacles with water spray from a safe distance.')
+        no = (('Sızıntı noktasına ve kabın içine doğrudan su — gaz su ile aşındırıcı çözelti oluşturur, sızıntıyı '
+               'büyütebilir.' if tr else 'Water directly on the leak or into the receptacle — the gas forms a '
+               'corrosive solution with water and may enlarge the leak.') if _ws else
+              ('Oksijence zengin ortamda boğma etkili söndürücüler (CO₂, köpük) yetersiz kalabilir.' if tr else
+               'Smothering agents (CO₂, foam) may be ineffective in an oxygen-enriched atmosphere.'))
+        return ok, no
     if hs & {'H260', 'H261'} or 'EUH014' in eu:
         return (('Kuru kum, kuru kimyevi toz (metal yangınlarına uygun özel toz) veya CO₂.' if tr else
                  'Dry sand, dry chemical powder (special powder for metal fires) or CO₂.'),
@@ -789,6 +810,13 @@ _FORM_RULES = {
          'FFP2 dust mask (EN 149) or half-face mask with P2 particle filter (EN 143)'),
     ],
     'gas': [
+        # KKD — toz maskesi / organik buhar (A) filtresi gaza karşı koruma sağlamaz → gaza uygun filtre tipi
+        (r'Yarım yüz maskesi — A1 filtreli veya FFP2 toz maskesi \(EN 14387 / EN 149\)',
+         'Yarım yüz maskesi — gazın türüne uygun EN 14387 filtresi (B: inorganik gazlar, E: asit gazlar, '
+         'K: amonyak) veya ortam havasından bağımsız solunum cihazı'),
+        (r'Half-face mask with A1 filter or FFP2 dust mask \(EN 14387 / EN 149\)',
+         'Half-face mask with an EN 14387 filter suited to the gas (B: inorganic gases, E: acid gases, '
+         'K: ammonia) or self-contained breathing apparatus'),
         (r'Buhar/sis solunmasında', 'Gaz solunmasında'),
         (r'Buhar solunması halinde', 'Gaz solunması halinde'),
         (r'Buhar solunmasında', 'Gaz solunmasında'),

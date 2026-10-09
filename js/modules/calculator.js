@@ -185,6 +185,8 @@ const CalculatorModule = (() => {
 
       // Ek-6'daki maddelere ECHA bildirimlerinden eklenen (Ek-6 dışı) sınıflar — sağ panelde gösterilir
       window._lastEk6Supp = data.ek6_supplements || [];
+      // Ek-6 sınıfı uygulandı ama ECHA bildirimlerinde daha ağır kategori var — yalnız KDU bilgisi
+      window._lastEk6Agir = data.ek6_daha_agir || [];
       // Eldiven önerisi (EN ISO 374-1 harf/tip + malzeme seçenekleri + uyarılar) — KKD panelinde kart
       window._lastGlove = data.glove || {};
       // KKDİK Ek-17 kısıtlama eşleşmeleri — temizlik ürününde madde 46 (nonilfenol/etoksilatlar) uyarısı

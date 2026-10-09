@@ -1050,6 +1050,11 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     }
     _route_sfx = _ROUTE_SUFFIX_TR if lang == 'TR' else _ROUTE_SUFFIX_EN
 
+    def _with_route(cls_txt: str, hc4: str) -> str:
+        # Sınıf adında rota zaten varsa (ATE sonucu: "Akut Toks. 2 (solunum: gaz)") ikinci kez eklenmez
+        sfx = _route_sfx.get(hc4, '')
+        return cls_txt if sfx and sfx.strip()[:-1] in cls_txt else cls_txt + sfx
+
     def _mask_concs(text: str) -> str:
         """Metindeki "CAS %49.0" / "ad (%20.0" gibi kesin bileşen konsantrasyonlarını, Bölüm 3'te aralıkla
         verilen bileşenler için Bölüm 3'teki aynı metne çevirir (KKDİK Ek-2 A 3.2 — tutarlı gösterim)."""
@@ -1116,7 +1121,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             }
             fixed_hclass = _ACUTE_CODE_FALLBACK.get(raw_hcode[:4], '')
         clf_rows.append([
-            translate_hclass(fixed_hclass, lang) + _route_sfx.get(raw_hcode[:4], ''),
+            _with_route(translate_hclass(fixed_hclass, lang), raw_hcode[:4]),
             raw_hcode,
             conc_info,
         ])
@@ -1168,7 +1173,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             seen_clf.add('H229')
             continue
         seen_clf.add(hc)
-        hclass_fallback = translate_hclass(_h_to_class.get(hc, ''), lang) + _route_sfx.get(hc, '')
+        hclass_fallback = _with_route(translate_hclass(_h_to_class.get(hc, ''), lang), hc)
         clf_rows.append([hclass_fallback, hc_raw, dom_note])
         # fallback satır için de not bayrak kontrolü
         if hc in _comp_note_map and hc not in clf_notes:
@@ -1767,7 +1772,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     # KKDİK Ek-2 A 5.1: uygun ve uygun olmayan söndürücüler ayrı ayrı
     from app.services.sds_sentence_service import extinguishing_media as _ext_media
     _ext_ok, _ext_no = _ext_media(list(dict.fromkeys(list(all_h_codes or []) + list(h_codes or []))),
-                                  (euh or {}).get('euh_codes') or [], lang=lang if lang in ('TR', 'EN') else 'EN')
+                                  (euh or {}).get('euh_codes') or [], lang=lang if lang in ('TR', 'EN') else 'EN',
+                                  cas_set={str(c.get('cas_no') or c.get('cas') or '').strip() for c in components})
     # Unicode alt simge (₂) PDF yazı tipinde yok — ReportLab <sub> etiketi kullanılır
     _ext_ok, _ext_no = (x.replace('CO₂', 'CO<sub>2</sub>') for x in (_ext_ok, _ext_no))
     story.append(Paragraph(f"<b>{'Uygun söndürücüler' if lang == 'TR' else 'Suitable extinguishing media'}:</b> "
@@ -1779,7 +1785,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     # sırasında oluşan tehlikeli ürünler belirtilir)
     _cas_dec = {str(c.get('cas_no') or c.get('cas') or '').strip() for c in components}
     _CHLOR_CAS = {'75-09-2', '67-66-3', '71-55-6', '79-01-6', '127-18-4', '7647-01-0', '75-00-3',
-                  '79-00-5', '106-93-4'}
+                  '79-00-5', '106-93-4', '7782-50-5'}
     _dec = []
     # Karbon oksitler: alevlenir ürün veya organik bileşen (inorganik listesinde olmayan, su dışı) varsa
     from app.services.tr_mevzuat_service import _INORGANIC_CAS as _INORG_DEC
@@ -1805,9 +1811,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     # NH₃ yalnızca bileşende amonyak/amonyak çözeltisi varsa
     if _cas_dec & {'1336-21-6', '7664-41-7'}:
         _dec.append('NH₃' if lang == 'TR' else 'NH₃ (ammonia)')
-    if 'H400' in h_codes or 'H411' in h_codes:
-        _dec.append('Sucul ortama zararlı organik fragmentler' if lang == 'TR'
-                    else 'Harmful organic fragments to aquatic environment')
+    # (Önceden sucul sınıflı her üründe "Sucul ortama zararlı organik fragmentler" yazılıyordu — kaynağı olmayan
+    #  kalıp ifade; inorganik klorda bile basılıyordu. Kaldırıldı 2026-10-09.)
     if _dec:
         _decomp_str = '; '.join(_dec) + '.'
     elif _cas_dec and not _has_organic:
@@ -2198,6 +2203,16 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                                'For protective equipment during fire-fighting, see Section 5.3.', styles['small']))
     if _glove.get('note'):
         story.append(Paragraph(_glove['note'], styles['small']))
+    elif _glove.get('applies') and set(h_codes or []) & {'H310', 'H311', 'H312', 'H314', 'H315', 'H317'}:
+        # Ürün cilt için sınıflandırılmış ama bileşen EN ISO 374-1 test kimyasalı sınıfına eşlenemedi — önceden
+        # aşağıdaki "ürün cilt için sınıflandırılmamıştır" cümlesi H315'li üründe (klor) de basılıyordu.
+        story.append(Paragraph(
+            ('Seçilen eldivenin bu ürüne karşı delinme süresi, eldiven üreticisinin EN 16523-1 test verisiyle '
+             'doğrulanmalıdır (EN ISO 374-1 Tip A/B: işaretli test kimyasalları için ≥ 30 dk; Tip C: ≥ 10 dk). '
+             'Eldivenler hasar ve kirlenme durumunda değiştirilmelidir.') if lang == 'TR' else
+            ('The breakthrough time of the selected glove against this product must be confirmed with the glove '
+             "manufacturer's EN 16523-1 test data (EN ISO 374-1 Type A/B: ≥ 30 min for the marked test chemicals; "
+             'Type C: ≥ 10 min). Replace gloves when damaged or contaminated.'), styles['small']))
     else:
         # KKDİK Ek-2 A 8.2.2.2(b)(i): eldiven kartı uygulanmadığında (ürün cilt için sınıflandırılmamış) da
         # delinme süresi belirtilir — EN ISO 374-1 Tip C asgari performans (≥10 dk, EN 16523-1 seviye 1)

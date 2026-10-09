@@ -127,6 +127,8 @@ async def refresh_components(components: list, form: str) -> list:
                 # DB'de kayıt var — hazards boşsa "sınıflandırılmamış" (su, glikoz vb.)
                 c = dict(comp)
                 _mark(c, cas, fresh.get('source_priority'), fresh.get('sea_ek6'), fresh.get('annex_vi'))
+                if fresh.get('ek6_daha_agir'):
+                    c['ek6_daha_agir'] = fresh['ek6_daha_agir']
                 if fresh.get('hazards'):
                     raw = {'h_codes':        [h['h_code'] for h in fresh['hazards']],
                            'hazard_classes': [h['h_class'] for h in fresh['hazards']]}
@@ -743,6 +745,9 @@ async def classify(inp: dict) -> dict:
     ek6_supp = [{'cas': c.get('cas') or c.get('cas_no') or '',
                  'name': c.get('name_tr') or c.get('name') or '', **e}
                 for c in comps for e in (c.get('ek6_supplements') or [])]
+    # Ek-6 sınıfı uygulandı, ECHA bildirimlerinde daha ağır kategori var — yalnız panelde KDU bilgisi (GBF'ye basılmaz)
+    ek6_agir = [{'cas': c.get('cas') or c.get('cas_no') or '', 'name': c.get('name_tr') or c.get('name') or '', **e}
+                for c in comps for e in (c.get('ek6_daha_agir') or [])]
     cls_notes = list(phys_res.get('classification_notes', []))
     if ek6_supp:
         _used = [e for e in ek6_supp if not e['removed']]
@@ -785,6 +790,7 @@ async def classify(inp: dict) -> dict:
         'ek17':        ek17_hits,
         'aquatic_unknown': aq_unknown,
         'ek6_supplements': ek6_supp,
+        'ek6_daha_agir': ek6_agir,
         'h_codes':     h_codes,
         'all_h_codes': all_h,
         'signal':      signal,

@@ -978,11 +978,16 @@ async def _supplement_sea_with_echa(cas: str, sea_result: dict) -> dict:
     if not echa or not echa.get('h_codes'):
         return sea_result
 
-    sea_h_set = set(sea_result.get('h_codes', []))
-    extra_h = [h for h in echa.get('h_codes', []) if h not in sea_h_set]
+    # SEA Md.6(1)(c): sınıf karşılaştırması (ek6_family) — Ek-6'da bulunan sınıfın farklı kategorisi eklenmez
+    from app.services.ek6_family import split_echa
+    _sea_hz = [{'h_code': h, 'h_class': c} for h, c in zip(sea_result.get('h_codes', []),
+                                                         sea_result.get('hazard_classes', []) + [''] * 99)]
+    _echa_hz = [{'h_code': h, 'h_class': _H_TO_CLASS.get(h, '')} for h in echa.get('h_codes', [])]
+    _extra, _agir = split_echa(_sea_hz, _echa_hz)
+    extra_h = [h['h_code'] for h in _extra]
 
     if not extra_h:
-        return sea_result
+        return {**sea_result, 'ek6_daha_agir': _agir} if _agir else sea_result
 
     classification_sources = {h: 'SEA Ek-6' for h in sea_result.get('h_codes', [])}
     for h in extra_h:
@@ -1005,6 +1010,8 @@ async def _supplement_sea_with_echa(cas: str, sea_result: dict) -> dict:
     result['classification_sources'] = classification_sources
     result['echa_supplement']        = extra_h
     result['echa_supplement_source'] = echa.get('source', 'ECHA C&L')
+    if _agir:
+        result['ek6_daha_agir'] = _agir
 
     print(f'[sea_supplement] {cas}: ECHA\'dan {len(extra_h)} ek H-kodu: {extra_h}')
     return result

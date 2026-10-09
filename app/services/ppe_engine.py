@@ -81,8 +81,11 @@ RULES: Dict[str, List[Dict[str, Any]]] = {
             'level': 2,
         },
         {
-            # H332/H335: buhar veya toz olabilir → A1 filtreli VEYA FFP2
+            # H332/H335: buhar veya toz olabilir → A1 filtreli VEYA FFP2. H330/H331 (ABEK tam yüz) veya H314
+            # (A1B1E1P2) varsa daha üst koruma zaten seçili — ayrıca toz maskesi önerilmez (klor GBF'sinde ABEK'in
+            # yanında "FFP2" çıkıyordu, 2026-10-09).
             'h_codes': ['H332', 'H335'],
+            'suppress_if': ['H330', 'H331', 'H314'],
             'ppe': {
                 'TR': 'Yarım yüz maskesi — A1 filtreli veya FFP2 toz maskesi (EN 14387 / EN 149)',
                 'EN': 'Half-face mask with A1 filter or FFP2 dust mask (EN 14387 / EN 149)',

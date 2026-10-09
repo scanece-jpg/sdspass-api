@@ -109,6 +109,16 @@ URUNLER = [
      'var': ['Alev. Gaz 1 H220 ISO 10156:2017 4.3 hesabı', '= 27,33 > 1', 'Basınçlı Gaz (Sıvılaştırılmış gaz)', 'UN 1965',
              'HİDROKARBON GAZ KARIŞIMI, SIVILAŞTIRILMIŞ'],
      'yok': _UYDURMA + ['Alev. Gaz 1A', 'H232', 'UN 3163', 'bileşen varlığı']},
+    # 2026-10-09 klor GBF incelemesi: Ek-6 Akut Tok. 3 (ECHA'daki Kat.2 eklenmez), ADR 2TOC C/D, inorganik gaz
+    # metinleri (karbon oksit / organik fragment yok, 16 05 04*, sızıntıya su verilmez), Bölüm 8 çelişkileri
+    {'ad': 'Klor %100 (sıvılaştırılmış, oksitleyici + toksik gaz)', 'form': 'gas', 'bil': [('7782-50-5', 100)],
+     'test_data': {'gas_type': 'liquefied'}, 'phys': {'appearance': 'Gaz', 'color': 'açık sarı', 'odor': 'keskin'},
+     'h': ['H270', 'H280', 'H315', 'H319', 'H331', 'H335', 'H400'], 'signal': 'Danger',
+     'var': ['Akut Toks. 3 (solunum) H331', 'Basınçlı Gaz (Sıvılaştırılmış gaz)', '2TOC', 'C/D', 'UN1017',
+             '16 05 04*', 'Sızıntı noktasına ve kabın içine doğrudan su', 'Klorür bileşikleri'],
+     'yok': _UYDURMA + ['H330:', 'Akut Toks. 2', 'Acute Tox', 'Karbon oksit', 'organik fragment', 'FFP2',
+                        'cilt için sınıflandırılmamıştır', 'uzun süreli olumsuz', 'CO₂ KULLANMAYIN', '16 03 05',
+                        'kontrollü yakma']},
     {'ad': 'Azot içinde %1 karbon monoksit (ISO 10156 hesabı: alevlenir değil)', 'form': 'gas',
      'bil': [('630-08-0', 1), ('7727-37-9', 99)],
      'test_data': {'gas_type': 'compressed'},
@@ -425,6 +435,31 @@ def kural_testleri(c) -> int:
         ('SEA Ek-1 Bölüm 3 genel konsantrasyon sınırları — 35 sınır noktası (Tablo 3.2.3, 3.3.3, 3.4.5, 3.5.2, '
          '3.6.2, 3.7.2, 3.8.3, 3.8.3.4.5, 3.9.4, 3.10): eşikte sınıf var, hemen altında yok',
          lambda: _gcl_sinirlari(classify_mixture_clp, _stot, C) == []),
+        ('SEA Md.6(1)(c): Ek-6\'daki sınıfın ECHA\'daki farklı kategorisi eklenmez (klor Ek-6 H331 + ECHA H330 → '
+         'H330 yalnız bilgi); Ek-6\'da olmayan yol/etki eklenir (soluma yolu H332, BHOT narkotik H336, Repr. F)',
+         lambda: (lambda S, H: (lambda r: [h['h_code'] for h in r[0]] == [] and [a['h_code'] for a in r[1]] == ['H330'])(
+                     S([H('Acute Tox. 3', 'H331')], [H('Acute Tox. 2', 'H330')]))
+                  and [h['h_code'] for h in S([H('Acute Tox. 3', 'H301'), H('STOT SE 3', 'H335'), H('Repr. 1B', 'H360D')],
+                                              [H('Acute Tox. 4', 'H332'), H('STOT SE 3', 'H336'), H('Repr. 2', 'H361f'),
+                                               H('Acute Tox. 4', 'H302'), H('Repr. 2', 'H361')])[0]]
+                  == ['H332', 'H336', 'H361f'])(
+             __import__('app.services.ek6_family', fromlist=['x']).split_echa,
+             lambda c, h: {'h_class': c, 'h_code': h})),
+        ('SEA Ek-1 Tablo 3.1.2: dönüştürme değeri kategori sınırında — %100 Kat.2 gaz (100 ppmV) Kat.1 olmaz; '
+         'ölçülen ATE (4 mg/kg) Kat.1 kalır',
+         lambda: [x['cat_num'] for x in _ate_core([{'cas': 'x', 'name': 'x', 'conc': 100, 'source_priority': 1,
+                   'hazards': [{'h_class': 'Acute Tox. 2', 'h_code': 'H330'}], 'ate': {}}], form='gas')[0]] == [2]
+         and [x['cat_num'] for x in _ate_core([{'cas': 'x', 'name': 'x', 'conc': 100, 'source_priority': 1,
+                   'hazards': [{'h_class': 'Acute Tox. 2', 'h_code': 'H300'}], 'ate': {'oral': 4}}], form='liquid')[0]] == [1]),
+        ('ADR 2025 Tablo A (ECE/TRANS/352 Cilt I): UN1017 2TOC/C/D/265, UN1230 tünel D/E, UN1648 F1/33, '
+         'UN2014 OC1, UN1199 Sınıf 6.1',
+         lambda: (lambda A: A['UN1017']['classification_code'] == '2TOC'
+                  and A['UN1017']['packing_groups']['-']['tunnel'] == 'C/D' and A['UN1017']['kemler'] == '265'
+                  and A['UN1230']['packing_groups']['II']['tunnel'] == 'D/E'
+                  and A['UN1648']['classification_code'] == 'F1' and A['UN1648']['packing_groups']['II']['kemler'] == '33'
+                  and A['UN2014']['classification_code'] == 'OC1' and A['UN1199']['class'] == '6.1')(
+             __import__('json').load(open(os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+                                                       'data', 'adr_data.json'), encoding='utf-8')))),
         # ── tests/ klasöründen taşınanlar (2026-10-08; klasör silindi) ──────────────────────────────────
         ('SEA Ek-1 Tablo 3.9.4: STOT RE 2 toplanmaz — %8 + %8 → H373 yok; tek bileşen %10 → H373',
          lambda: _stot([C('110-54-3', 8, ('STOT RE 2', 'H373')), C('71-43-2', 8, ('STOT RE 2', 'H373')),

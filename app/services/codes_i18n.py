@@ -1244,7 +1244,10 @@ def translate_hclass(h_class: str, lang: str = 'TR') -> str:
         key = key[:-2].strip()
 
     # Akut toksisite yol son eki — "(oral)", "(dermal)", "(inhal.)"
-    _ROUTE_TR = {'(oral)': '(ağız)', '(dermal)': '(deri)', '(inhal.)': '(solunum)'}
+    # ATE motoru sınıf adına rota ekler ("Acute Tox. 2 (inhalasyon (gaz))") — TR GBF'de İngilizce kalıyordu
+    _ROUTE_TR = {'(inhalasyon (gaz))': '(solunum: gaz)', '(inhalasyon (buhar))': '(solunum: buhar)',
+                 '(inhalasyon (toz))': '(solunum: toz/sis)', '(inhalasyon)': '(solunum)',
+                 '(inhalation)': '(solunum)', '(oral)': '(ağız)', '(dermal)': '(deri)', '(inhal.)': '(solunum)'}
     route_part = ''
     for en_route, tr_route in _ROUTE_TR.items():
         if key.endswith(' ' + en_route):

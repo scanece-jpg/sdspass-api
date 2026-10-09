@@ -416,6 +416,12 @@ def c_t14(ctx):
     if h & {'H222', 'H223', 'H229'}:
         return (('uygun', 'Aerosol: UN 1950 14\'te var.') if re.search(r'(?i)\bUN\s*1950\b', s14) else
                 ('eksik', '2. bölümde aerosol sınıflandırması var; 14\'te UN 1950 bulunamadı.'))
+    # Zehirli gaz (ADR 2.2.2.1.3 T grubu) → etiket 2.3; oksitleyici ise + 5.1 (örn. klor 2TOC: 2.3+5.1+8).
+    # Önceden tanımsızdı; klor GBF'sinde Sınıf 9 aranıp yanlış KDU uyarısı çıkıyordu (2026-10-09).
+    if h & {'H280', 'H281'} and h & {'H330', 'H331'}:
+        exp.append('2.3')
+        if 'H270' in h:
+            exp.append('5.1')
     if h & {'H220', 'H221'}:
         exp.append('2.1')
     elif 'H270' in h and h & {'H280', 'H281'} and not h & {'H330', 'H331', 'H314'}:

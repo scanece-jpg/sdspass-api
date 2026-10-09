@@ -944,15 +944,21 @@ def _supplement_from_echa_cl(cas: str, sea_result: dict) -> dict:
             return sea_result
 
     echa_legacy = _cl_to_legacy(echa_entry, 3, 'ECHA C&L')
-    sea_h_set = {h['h_code'] for h in sea_result.get('hazards', []) if h.get('h_code')}
-    # SEA Md.6(1)(c): Ek-6'da listelenmeyen sınıflar — işaretlenir ki kullanıcı görsün/kaldırabilsin
-    extra_hazards = [{**h, '_echa_supplement': True} for h in echa_legacy.get('hazards', [])
-                     if h.get('h_code') and h['h_code'] not in sea_h_set]
+    # SEA Md.6(1)(c): yalnız Ek-6 girişinde bulunmayan sınıf/farklılaştırmalar eklenir (H kodu değil sınıf
+    # karşılaştırılır — ek6_family). İşaretlenir ki kullanıcı görsün/kaldırabilsin. Aynı sınıfta ECHA'daki
+    # daha ağır kategori eklenmez, KDU bilgisi olarak 'ek6_daha_agir'da döner.
+    from app.services.ek6_family import split_echa
+    _extra, _agir = split_echa(sea_result.get('hazards', []), echa_legacy.get('hazards', []))
+    extra_hazards = [{**h, '_echa_supplement': True} for h in _extra]
 
-    if not extra_hazards:
+    if not extra_hazards and not _agir:
         return sea_result
+    if not extra_hazards:
+        return {**sea_result, 'ek6_daha_agir': _agir}
 
     result = dict(sea_result)
+    if _agir:
+        result['ek6_daha_agir'] = _agir
     result['hazards'] = sea_result.get('hazards', []) + extra_hazards
 
     sea_pict = set(sea_result.get('pictograms', []))

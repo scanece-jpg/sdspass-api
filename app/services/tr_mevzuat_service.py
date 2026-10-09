@@ -161,7 +161,15 @@ _INORGANIC_CAS = {
     '7664-41-7', '1336-21-6', '1305-62-0', '1305-78-8', '584-08-7', '7758-98-7', '7646-85-7',
     '13463-67-7', '7631-86-9', '1332-58-7', '14808-60-7', '7775-27-1', '7722-88-5', '5329-14-6',
     '7664-39-3', '10043-35-3', '7783-20-2', '12125-02-9', '7447-40-7', '10043-52-4', '7786-30-3',
+    # İnorganik gazlar (2026-10-09 — klor organik sayılıyordu)
+    '7782-50-5', '7782-44-7', '7727-37-9', '7440-37-1', '7440-59-7', '7440-01-9', '7439-90-9', '7440-63-3',
+    '1333-74-0', '10024-97-2', '10102-43-9', '10102-44-0', '7446-09-5', '7783-06-4', '7782-41-4',
+    '2551-62-4', '7803-51-2', '7784-42-1', '7803-62-5', '19287-45-7', '7637-07-2', '7790-91-2',
+    '7783-54-2', '10049-04-4', '7782-65-2', '7783-82-6',
 }
+# Su ile aşındırıcı/zehirli çözelti oluşturan gazlar — sızıntıya doğrudan su verilmez (Bölüm 5.1)
+WATER_SENSITIVE_GAS_CAS = {'7782-50-5', '7647-01-0', '7664-39-3', '7446-09-5', '7664-41-7', '7790-91-2',
+                           '10049-04-4', '7637-07-2', '7783-82-6', '7782-41-4', '75-44-5'}
 _WATER = '7732-18-5'
 
 
@@ -207,6 +215,12 @@ def waste_assessment(components: list, mixture_h: list = None) -> dict:
     w_all = sum(_comp_conc(c) for c in comps
                 if (c.get('cas_no') or c.get('cas') or '').strip() not in ('', _WATER))
     inorganic = w_all > 0 and w_inorg / w_all > 0.5
+    # Basınçlı kaptaki gaz (H280/H281): Ek-4 16 05 04* / 16 05 05 — 16 03 (kullanılmamış ürün) değil
+    if mix & {'H280', 'H281'}:
+        code, desc = (('16 05 04*', 'Basınçlı tanklar içinde tehlikeli maddeler içeren gazlar (halonlar dahil)')
+                      if hazardous else ('16 05 05', '16 05 04 dışında basınçlı tanklar içindeki gazlar'))
+        return {'hazardous': hazardous, 'criteria': met, 'inorganic': inorganic, 'code': code, 'desc': desc,
+                'gas': True}
     if inorganic:
         code, desc = (('16 03 03*', 'Tehlikeli maddeler içeren anorganik atıklar') if hazardous
                       else ('16 03 04', '16 03 03 dışındaki anorganik atıklar'))
@@ -226,12 +240,14 @@ def _ewc_code_bullet(wa: dict, lang: str = 'TR') -> str:
                       if c0['total'] is not None else ''))
         else:
             why = 'Ek-3/B eşik konsantrasyonlarının hiçbiri aşılmıyor'
+        _grup = ('16 05 Basınçlı Tank İçindeki Gazlar ve Iskartaya Çıkmış Kimyasallar' if wa.get('gas')
+                 else '16 03 Standart Dışı Gruplar ve Kullanılmamış Ürünler')
         return (f"Kullanılmamış / standart dışı ürün için gösterge atık kodu: {wa['code']} — {wa['desc']} "
-                f"(Atık Yönetimi Yönetmeliği Ek-4, 16 03 Standart Dışı Gruplar ve Kullanılmamış Ürünler). Gerekçe: {why}. Kullanım sonrası oluşan atığın "
+                f"(Atık Yönetimi Yönetmeliği Ek-4, {_grup}). Gerekçe: {why}. Kullanım sonrası oluşan atığın "
                 f"kodunu, atığın kaynağına göre Ek-1 atık kodu belirleme hiyerarşisini uygulayarak atık sahibi "
                 f"belirler (Md.12).")
     return (f"Indicative waste code for unused / off-specification product: {wa['code']} "
-            f"(Turkish Waste Management Regulation Annex 4, 16 03). The waste holder determines the final code "
+            f"(Turkish Waste Management Regulation Annex 4, {'16 05' if wa.get('gas') else '16 03'}). The waste holder determines the final code "
             f"according to the source of the waste (Art. 12).")
 
 
@@ -298,8 +314,14 @@ def get_disposal_content(h_codes: list = None, lang: str = 'TR', components: lis
     # ── 3. Sucul tehlike → kanalizasyon yasağı ───────────────────────────────
     _aquatic_h = {'H400', 'H410', 'H411', 'H412', 'H413'}
     drain_note = None
-    if any(h in h_codes for h in _aquatic_h):
+    if any(h in h_codes for h in {'H410', 'H411', 'H412', 'H413'}):
         drain_note = S(lang, 'drain_prohibition')
+    elif 'H400' in h_codes:
+        # Yalnız akut sucul sınıf — "uzun süreli etki" yazılmaz (kronik sınıf yok)
+        drain_note = ('Ürünü kanalizasyona, zemin suyuna, yüzey suyuna veya toprağa boşaltmayın. Sucul ortamda çok '
+                      'toksiktir (Suk. Akut 1, H400).' if lang == 'TR' else
+                      'Do not dispose of into drains, groundwater, surface water or soil. Very toxic to aquatic '
+                      'life (Aquatic Acute 1, H400).')
 
     # ── 4. Yanıcı sıvılar → yakma yöntemi vurgusu ───────────────────────────
     _flam_h = {'H224', 'H225', 'H226'}
@@ -313,6 +335,14 @@ def get_disposal_content(h_codes: list = None, lang: str = 'TR', components: lis
             'Flammable liquid — dispose of by controlled incineration at a licensed '
             'hazardous waste facility. Keep away from ignition sources during disposal.'
         )
+
+    # ── 4b. Basınçlı kaptaki gaz: yakma/arıtma değil iade (gaz atmosfere boşaltılmaz) ──
+    if wa.get('gas'):
+        method_bullet = ('Basınçlı gaz kabı: gazı atmosfere boşaltmayın. Boş veya kısmen dolu kapları tedarikçiye / '
+                         'dolum tesisine iade edin; iade mümkün değilse lisanslı tehlikeli atık tesisine teslim edin.'
+                         if lang == 'TR' else
+                         'Gas under pressure: do not vent to atmosphere. Return empty or partly filled containers to '
+                         'the supplier / filling plant; otherwise hand over to a licensed hazardous waste facility.')
 
     # ── 5. EWC atık kodu (KKDİK Ek-2 §13.1 zorunlu unsur) ───────────────────
     ewc_bullet = _ewc_code_bullet(wa, lang)
@@ -336,7 +366,12 @@ def get_disposal_content(h_codes: list = None, lang: str = 'TR', components: lis
             )
 
     # ── 6. Kontamine ambalaj (her zaman — KKDİK Ek-2 §13.1 zorunlu) ────────
-    if wa['hazardous']:
+    if wa.get('gas'):
+        packaging_text = ('BASINÇLI KAP: Boşaltılmış kaplar basınç altında kalıntı içerebilir; delmeyin, kesmeyin, '
+                          'yakmayın. Vanayı kapatıp koruma başlığını takarak tedarikçiye iade edin.' if lang == 'TR'
+                          else 'PRESSURE RECEPTACLE: Empty receptacles may still contain residual pressure; do not '
+                          'puncture, cut or burn. Close the valve, fit the protective cap and return to the supplier.')
+    elif wa['hazardous']:
         packaging_text = S(lang, 'contaminated_packaging') + (
             ' Ürün kalıntısı içeren ambalaj: 15 01 10* — Tehlikeli maddelerin kalıntılarını içeren ya da '
             'tehlikeli maddelerle kontamine olmuş ambalajlar (Ek-4).' if lang == 'TR' else

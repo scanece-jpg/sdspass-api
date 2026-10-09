@@ -1155,6 +1155,7 @@ async def sds_calculate(body: dict = Body(...)):
             'pending_decisions': core['pending_decisions'],
             'label_components':  core['label_components'],   # etikette adı zorunlu bileşenler
             'ek6_supplements':   core.get('ek6_supplements', []),   # Ek-6 dışı (ECHA) sınıflar
+            'ek6_daha_agir':     core.get('ek6_daha_agir', []),     # Ek-6 uygulandı; ECHA'da daha ağır kategori (bilgi)
             'summary':     _pipe.summary(core),   # PDF ile karşılaştırma (güvenlik ağı)
             'form_sub':    form_sub or None,
             'voc_content': body.get('voc_content'),

@@ -43,7 +43,7 @@
     "packing_groups": {
       "I": {
         "kemler": "33",
-        "tunnel": "B/D",
+        "tunnel": "D/E",
         "label": "3"
       },
       "II": {
@@ -153,7 +153,7 @@
     "packing_groups": {
       "II": {
         "kemler": "336",
-        "tunnel": "C/D",
+        "tunnel": "D/E",
         "label": "3 (6.1)"
       }
     },
@@ -180,13 +180,13 @@
         "kemler": "60",
         "tunnel": "D/E",
         "label": "6.1",
-        "classification_code": "T2"
+        "classification_code": "T1"
       },
       "III": {
         "kemler": "60",
         "tunnel": "E",
         "label": "6.1",
-        "classification_code": "T4"
+        "classification_code": "T1"
       }
     },
     "special_provisions": [
@@ -205,15 +205,15 @@
     "packing_groups": {
       "I": {
         "kemler": "88",
-        "tunnel": "B/E",
+        "tunnel": "E",
         "label": "8",
-        "classification_code": "C1"
+        "classification_code": "C9"
       },
       "II": {
         "kemler": "80",
         "tunnel": "E",
         "label": "8",
-        "classification_code": "C3"
+        "classification_code": "C9"
       },
       "III": {
         "kemler": "80",
@@ -307,7 +307,7 @@
     "packing_groups": {
       "III": {
         "kemler": "90",
-        "tunnel": "(-)",
+        "tunnel": "-",
         "label": "9"
       }
     },
@@ -318,7 +318,7 @@
       "601"
     ],
     "kemler": "90",
-    "tunnel": "3 (-)"
+    "tunnel": "-"
   },
   "UN3082": {
     "name": "ENVIRONMENTALLY HAZARDOUS SUBSTANCE, LIQUID, N.O.S.",
@@ -328,7 +328,7 @@
     "packing_groups": {
       "III": {
         "kemler": "90",
-        "tunnel": "(-)",
+        "tunnel": "-",
         "label": "9",
         "classification_code": "M6"
       }
@@ -341,13 +341,13 @@
       "650"
     ],
     "kemler": "90",
-    "tunnel": "3 (-)"
+    "tunnel": "-"
   },
   "UN1325": {
     "name": "FLAMMABLE SOLID, ORGANIC, N.O.S.",
     "name_tr": "ALEVLENEBİLİR KATI, ORGANİK, B.B.B.",
     "class": "4.1",
-    "classification_code": "F3",
+    "classification_code": "F1",
     "packing_groups": {
       "II": {
         "kemler": "40",
@@ -375,7 +375,7 @@
     "packing_groups": {
       "I": {
         "kemler": "33",
-        "tunnel": "B/D",
+        "tunnel": "D/E",
         "label": "3"
       },
       "II": {
@@ -495,7 +495,7 @@
     "packing_groups": {
       "I": {
         "kemler": "33",
-        "tunnel": "B/D",
+        "tunnel": "D/E",
         "label": "3"
       },
       "II": {
@@ -563,7 +563,7 @@
     "packing_groups": {
       "I": {
         "kemler": "46",
-        "tunnel": "C/E",
+        "tunnel": "B/E",
         "label": "4.2+6.1"
       }
     },
@@ -577,8 +577,8 @@
   "UN1848": {
     "name": "PROPIONIC ACID",
     "name_tr": "PROPİYONİK ASİT",
-    "class": "3",
-    "classification_code": "F1",
+    "class": "8",
+    "classification_code": "C3",
     "packing_groups": {
       "III": {
         "kemler": "80",
@@ -620,11 +620,11 @@
     "name": "ACETONITRILE",
     "name_tr": "ASETONİTRİL",
     "class": "3",
-    "classification_code": "FT1",
+    "classification_code": "F1",
     "packing_groups": {
       "II": {
-        "kemler": "336",
-        "tunnel": "C/D",
+        "kemler": "33",
+        "tunnel": "D/E",
         "label": "3 (6.1)"
       }
     },
@@ -640,8 +640,8 @@
     "classification_code": "T1",
     "packing_groups": {
       "I": {
-        "kemler": "66",
-        "tunnel": "C/D",
+        "kemler": "60",
+        "tunnel": "D/E",
         "label": "6.1"
       },
       "II": {
@@ -671,7 +671,7 @@
         "kemler": "60",
         "tunnel": "D/E",
         "label": "6.1 (8)",
-        "classification_code": "TC2"
+        "classification_code": "TC1"
       }
     },
     "special_provisions": [
@@ -783,12 +783,12 @@
     "packing_groups": {
       "I": {
         "kemler": "856",
-        "tunnel": "B/E",
+        "tunnel": "E",
         "label": "8+05"
       },
       "II": {
         "kemler": "85",
-        "tunnel": "B/E",
+        "tunnel": "E",
         "label": "8+05"
       }
     },
@@ -835,11 +835,11 @@
     "name": "CHLORATES, INORGANIC, N.O.S.",
     "name_tr": "KLORATLAR, İNORGANİK, B.B.B.",
     "class": "5.1",
-    "classification_code": "O1",
+    "classification_code": "O2",
     "packing_groups": {
       "II": {
         "kemler": "50",
-        "tunnel": "D/E",
+        "tunnel": "E",
         "label": "5.1"
       },
       "III": {
@@ -864,12 +864,12 @@
     "packing_groups": {
       "I": {
         "kemler": "50",
-        "tunnel": "D/E",
+        "tunnel": "E",
         "label": "5.1"
       },
       "II": {
         "kemler": "50",
-        "tunnel": "D/E",
+        "tunnel": "E",
         "label": "5.1"
       },
       "III": {
@@ -909,11 +909,11 @@
     "name": "HYDROGEN PEROXIDE, CONCENTRATED",
     "name_tr": "HİDROJEN PEROKSİT, KONSANTRELENMİŞ",
     "class": "5.1",
-    "classification_code": "CO1",
+    "classification_code": "OC1",
     "packing_groups": {
       "I": {
-        "kemler": "558",
-        "tunnel": "B/D",
+        "kemler": "559",
+        "tunnel": "B/E",
         "label": "5.1 (8)"
       }
     },
@@ -928,11 +928,11 @@
     "name": "HYDROGEN PEROXIDE AQUEOUS SOLUTION",
     "name_tr": "HİDROJEN PEROKSİT SULU ÇÖZELTİ",
     "class": "5.1",
-    "classification_code": "CO1",
+    "classification_code": "OC1",
     "packing_groups": {
       "II": {
         "kemler": "58",
-        "tunnel": "B/D",
+        "tunnel": "E",
         "label": "5.1 (8)"
       }
     },
@@ -949,7 +949,7 @@
     "packing_groups": {
       "-": {
         "kemler": "20",
-        "tunnel": "—",
+        "tunnel": "C/E",
         "label": "2.2"
       }
     },
@@ -968,11 +968,11 @@
     "name": "CHLORINE",
     "name_tr": "KLOR",
     "class": "2",
-    "classification_code": "2TC",
+    "classification_code": "2TOC",
     "packing_groups": {
       "-": {
         "kemler": "265",
-        "tunnel": "B/D",
+        "tunnel": "C/D",
         "label": "2.3+5.1+8"
       }
     },
@@ -985,7 +985,7 @@
     "name": "OXYGEN, COMPRESSED",
     "name_tr": "OKSİJEN, SIKIŞTIRILMIŞ",
     "class": "2",
-    "classification_code": "3O",
+    "classification_code": "1O",
     "packing_groups": {
       "-": {
         "kemler": "25",
@@ -1094,7 +1094,7 @@
     "classification_code": "W2",
     "packing_groups": {
       "I": {
-        "kemler": "423",
+        "kemler": "X423",
         "tunnel": "B/E",
         "label": "4.3"
       }
@@ -1111,7 +1111,7 @@
     "classification_code": "W2",
     "packing_groups": {
       "I": {
-        "kemler": "423",
+        "kemler": "X423",
         "tunnel": "B/E",
         "label": "4.3"
       }
@@ -1125,7 +1125,7 @@
     "name": "ZIRCONIUM TETRACHLORIDE",
     "name_tr": "ZİRKONYUM TETRAKLORİT",
     "class": "8",
-    "classification_code": "C1",
+    "classification_code": "C2",
     "packing_groups": {
       "II": {
         "kemler": "80",
@@ -1142,18 +1142,18 @@
     "name": "CLINICAL WASTE, UNSPECIFIED",
     "name_tr": "KLİNİK ATIK, BELİRTİLMEMİŞ",
     "class": "6.2",
-    "classification_code": "I4",
+    "classification_code": "I3",
     "packing_groups": {
       "II": {
         "kemler": "606",
-        "tunnel": "E",
+        "tunnel": "-",
         "label": "6.2"
       }
     },
     "special_provisions": [
       "565"
     ],
-    "tunnel": "2 (-)"
+    "tunnel": "-"
   },
   "UN3480": {
     "name": "LITHIUM ION BATTERIES",
@@ -1163,7 +1163,7 @@
     "packing_groups": {
       "II": {
         "kemler": "90",
-        "tunnel": "—",
+        "tunnel": "E",
         "label": "9"
       }
     },
@@ -1189,7 +1189,7 @@
     "packing_groups": {
       "II": {
         "kemler": "90",
-        "tunnel": "—",
+        "tunnel": "E",
         "label": "9"
       }
     },
@@ -1340,11 +1340,11 @@
   "UN1199": {
     "name": "FURALDEHYDES",
     "name_tr": "FURFURAL",
-    "class": "3",
-    "classification_code": "FT1",
+    "class": "6.1",
+    "classification_code": "TF1",
     "packing_groups": {
       "III": {
-        "kemler": "60",
+        "kemler": "63",
         "tunnel_code": "D/E",
         "label": "6.1"
       }
@@ -1477,7 +1477,7 @@
     "classification_code": "F1",
     "packing_groups": {
       "I": {
-        "kemler": "339",
+        "kemler": "33",
         "tunnel_code": "B/D",
         "label": "3"
       }
@@ -1602,7 +1602,7 @@
     "classification_code": "TC1",
     "packing_groups": {
       "II": {
-        "kemler": "60",
+        "kemler": "68",
         "tunnel_code": "D/E",
         "label": "6.1 (8)"
       }
@@ -1818,7 +1818,7 @@
     "name": "BENZOYL CHLORIDE",
     "name_tr": "BENZOİL KLORÜR",
     "class": "8",
-    "classification_code": "CT1",
+    "classification_code": "C3",
     "packing_groups": {
       "II": {
         "kemler": "80",
@@ -1948,10 +1948,10 @@
     "name": "NAPHTHALENE, MOLTEN",
     "name_tr": "NAFTALEN, ERİMİŞ",
     "class": "4.1",
-    "classification_code": "F1",
+    "classification_code": "F2",
     "packing_groups": {
       "III": {
-        "kemler": "40",
+        "kemler": "44",
         "tunnel_code": "E",
         "label": "4.1"
       }
@@ -1993,7 +1993,7 @@
     "name": "CARBON MONOXIDE, COMPRESSED",
     "name_tr": "KARBONMONOKSİT, SIKIŞTIRILMIŞ",
     "class": "2",
-    "classification_code": "2TF",
+    "classification_code": "1TF",
     "packing_groups": {
       "-": {
         "kemler": "263",
@@ -2029,7 +2029,7 @@
     "name": "FLUORINE, COMPRESSED",
     "name_tr": "FLOR, SIKIŞTIRILMIŞ",
     "class": "2",
-    "classification_code": "2TOC",
+    "classification_code": "1TOC",
     "packing_groups": {
       "-": {
         "kemler": "265",
@@ -2087,7 +2087,7 @@
     "classification_code": "2TC",
     "packing_groups": {
       "-": {
-        "kemler": "265",
+        "kemler": "268",
         "tunnel_code": "B/D",
         "label": "2.3+8"
       }
@@ -2276,7 +2276,7 @@
     "name": "VEHICLE, FLAMMABLE GAS POWERED",
     "name_tr": "ARAÇ, ALEVLENEBİLİR GAZLA ÇALIŞAN",
     "class": "9",
-    "classification_code": "M3",
+    "classification_code": "M11",
     "packing_groups": {
       "-": {
         "kemler": "90",
@@ -2290,13 +2290,13 @@
       "667",
       "669"
     ],
-    "tunnel": "- (-)"
+    "tunnel": "-"
   },
   "UN3171": {
     "name": "BATTERY-POWERED VEHICLE",
     "name_tr": "BATARYALI ARAÇ",
     "class": "9",
-    "classification_code": "M3",
+    "classification_code": "M11",
     "packing_groups": {
       "-": {
         "kemler": "90",
@@ -2310,7 +2310,7 @@
       "667",
       "669"
     ],
-    "tunnel": "- (-)"
+    "tunnel": "-"
   },
   "UN3264": {
     "name": "CORROSIVE LIQUID, ACIDIC, INORGANIC, N.O.S.",
@@ -2320,7 +2320,7 @@
     "packing_groups": {
       "I": {
         "kemler": "88",
-        "tunnel": "B/E",
+        "tunnel": "E",
         "label": "8"
       },
       "II": {
@@ -2381,7 +2381,7 @@
     "packing_groups": {
       "I": {
         "kemler": "88",
-        "tunnel": "B/E",
+        "tunnel": "E",
         "label": "8"
       },
       "II": {
@@ -2483,7 +2483,7 @@
       "340",
       "671"
     ],
-    "tunnel": "See SP 671 (E)"
+    "tunnel": "E"
   },
   "UN3093": {
     "name": "CORROSIVE LIQUID, OXIDIZING, N.O.S.",
@@ -2501,7 +2501,7 @@
         "kemler": "85",
         "tunnel": "E",
         "label": "8 (5.1)",
-        "classification_code": "CO2"
+        "classification_code": "CO1"
       }
     },
     "special_provisions": [
@@ -2518,12 +2518,12 @@
     "classification_code": "CW1",
     "packing_groups": {
       "I": {
-        "kemler": "X88",
+        "kemler": "823",
         "tunnel": "B/E",
         "label": "8+4.3"
       },
       "II": {
-        "kemler": "X80",
+        "kemler": "823",
         "tunnel": "E",
         "label": "8+4.3"
       }
@@ -2563,7 +2563,7 @@
     "name": "TOXIC LIQUID, CORROSIVE, INORGANIC, N.O.S.",
     "name_tr": "ZEHİRLİ SIVI, AŞINDIRICI, İNORGANİK, B.B.B.",
     "class": "6.1",
-    "classification_code": "TC1",
+    "classification_code": "TC3",
     "packing_groups": {
       "I": {
         "kemler": "668",
@@ -2669,19 +2669,19 @@
         "kemler": "338",
         "tunnel": "B/D",
         "label": "3 (8)",
-        "classification_code": "CF1"
+        "classification_code": "FC"
       },
       "II": {
         "kemler": "338",
         "tunnel": "D/E",
         "label": "3 (8)",
-        "classification_code": "CF2"
+        "classification_code": "FC"
       },
       "III": {
         "kemler": "38",
         "tunnel": "E",
         "label": "3 (8)",
-        "classification_code": "CF2"
+        "classification_code": "FC"
       }
     },
     "special_provisions": [
@@ -2694,7 +2694,7 @@
   "UN1954": {
     "name": "COMPRESSED GAS, FLAMMABLE, N.O.S.",
     "name_tr": "SIKIŞTIRILMIŞ GAZ, ALEVLENEBİLİR, B.B.B.",
-    "class": "2.1",
+    "class": "2",
     "classification_code": "1F",
     "packing_groups": {
       "-": {
@@ -2715,12 +2715,12 @@
   "UN3156": {
     "name": "COMPRESSED GAS, OXIDIZING, N.O.S.",
     "name_tr": "SIKIŞTIRILMIŞ GAZ, YÜKSELTGEN, B.B.B.",
-    "class": "2.2",
+    "class": "2",
     "classification_code": "1O",
     "packing_groups": {
       "-": {
         "kemler": "25",
-        "tunnel": "B/E",
+        "tunnel": "E",
         "label": "2.2+5.1"
       }
     },
@@ -2737,10 +2737,10 @@
     "name": "PYROPHORIC LIQUID, ORGANIC, N.O.S.",
     "name_tr": "PİROFORİK SIVI, ORGANİK, B.B.B.",
     "class": "4.2",
-    "classification_code": "S2",
+    "classification_code": "S1",
     "packing_groups": {
       "I": {
-        "kemler": "X333",
+        "kemler": "333",
         "tunnel": "B/E",
         "label": "4.2"
       }
@@ -2809,11 +2809,11 @@
     "name": "ORGANIC PEROXIDE TYPE D, LIQUID",
     "name_tr": "ORGANİK PEROKSİT, TİP D, SIVI",
     "class": "5.2",
-    "classification_code": "P4",
+    "classification_code": "P1",
     "packing_groups": {
       "-": {
         "kemler": "539",
-        "tunnel": "B/E",
+        "tunnel": "D",
         "label": "5.2"
       }
     },
@@ -2828,11 +2828,11 @@
     "name": "ORGANIC PEROXIDE TYPE F, LIQUID",
     "name_tr": "ORGANİK PEROKSİT, TİP F, SIVI",
     "class": "5.2",
-    "classification_code": "P6",
+    "classification_code": "P1",
     "packing_groups": {
       "-": {
-        "kemler": "59",
-        "tunnel": "E",
+        "kemler": "539",
+        "tunnel": "D",
         "label": "5.2"
       }
     },
@@ -9240,7 +9240,7 @@
     ],
     "limited_qty": "",
     "kemler": "",
-    "tunnel": "- (E)",
+    "tunnel": "E",
     "transport_cat": "",
     "name_tr": "GÜBRE, AMONYAKLAŞTIRICI ÇÖZELTİ, serbest amonyak ile"
   },
@@ -29752,7 +29752,7 @@
     ],
     "limited_qty": "0",
     "kemler": "",
-    "tunnel": "4 (-)",
+    "tunnel": "-",
     "transport_cat": "",
     "name_tr": "RADYOAKTİF MALZEME, ADİ PAKET - BOŞ AMBALAJ"
   },
@@ -29767,7 +29767,7 @@
     ],
     "limited_qty": "0",
     "kemler": "",
-    "tunnel": "4 (-)",
+    "tunnel": "-",
     "transport_cat": "",
     "name_tr": "RADYOAKTİF MALZEME, ADİ PAKET - DOĞAL URANYUM veya FAKİRLEŞTİRİLMİŞ URANYUM veya DOĞAL TORYUMDAN YAPILMIŞ NESNELER"
   },
@@ -29783,7 +29783,7 @@
     ],
     "limited_qty": "0",
     "kemler": "",
-    "tunnel": "4 (-)",
+    "tunnel": "-",
     "transport_cat": "",
     "name_tr": "RADYOAKTİF MALZEME, ADİ PAKET - MALZEME MİKTARI SINIRLANDIRILMIŞ"
   },
@@ -29798,7 +29798,7 @@
     ],
     "limited_qty": "0",
     "kemler": "",
-    "tunnel": "4 (-)",
+    "tunnel": "-",
     "transport_cat": "",
     "name_tr": "RADYOAKTİF MALZEME, ADİ PAKET - ALETLER veya NESNELER"
   },
@@ -29895,7 +29895,7 @@
     ],
     "limited_qty": "0",
     "kemler": "70",
-    "tunnel": "0 (-)",
+    "tunnel": "-",
     "transport_cat": "",
     "name_tr": "RADYOAKTİF MALZEME, TİP B(U) AMBALAJ, bölünebilir olmayan veya istisnai bölünebilir"
   },
@@ -35402,7 +35402,7 @@
     ],
     "limited_qty": "0",
     "kemler": "70",
-    "tunnel": "0 (-)",
+    "tunnel": "-",
     "transport_cat": "",
     "name_tr": "RADYOAKTİF MALZEME, ÖZEL ANLAŞMA İLE TAŞINAN, BÖLÜNEBİLİR"
   },
@@ -35873,7 +35873,7 @@
     ],
     "limited_qty": "",
     "kemler": "",
-    "tunnel": "- (-)",
+    "tunnel": "-",
     "transport_cat": "",
     "name_tr": "FÜMİGE EDİLMİŞ KARGO TAŞIMA ÜNİTESİ"
   },
@@ -36093,7 +36093,7 @@
     ],
     "limited_qty": "0",
     "kemler": "606",
-    "tunnel": "- (-)",
+    "tunnel": "-",
     "transport_cat": "",
     "name_tr": "BİYOLOJİK MADDE, KATEGORİ B (yalnız hayvansal malzeme)"
   },
@@ -38578,7 +38578,7 @@
     ],
     "limited_qty": "0",
     "kemler": "",
-    "tunnel": "- (D)",
+    "tunnel": "D",
     "transport_cat": "",
     "name_tr": "MOTOR İÇTEN YANMALI, ALEVLENEBİLİR SIVIYLA ÇALIŞAN veya MOTOR, YAKIT PİLİ, ALEVLENEBİLİR SIVIYLA ÇALIŞAN veya MAKİNE, İÇTEN YANMALI, ALEVLENEBİLİR SIVIYLA ÇALIŞAN veya MAKİNE, YAKIT PİLİ, ALEVLENEBİLİR SIVIYLA ÇALIŞAN"
   },
@@ -38597,7 +38597,7 @@
     ],
     "limited_qty": "0",
     "kemler": "",
-    "tunnel": "- (B)",
+    "tunnel": "B",
     "transport_cat": "",
     "name_tr": "MOTOR İÇTEN YANMALI, ALEVLENEBİLİR GAZLA ÇALIŞAN veya MOTOR, YAKIT PİLİ, ALEVLENEBİLİR GAZLA ÇALIŞAN veya MAKİNE, İÇTEN YANMALI, ALEVLENEBİLİR GAZLA ÇALIŞAN veya MAKİNE, YAKIT PİLİ, ALEVLENEBİLİR GAZLA ÇALIŞAN"
   },
@@ -38616,7 +38616,7 @@
     ],
     "limited_qty": "0",
     "kemler": "",
-    "tunnel": "- (E)",
+    "tunnel": "E",
     "transport_cat": "",
     "name_tr": "MOTOR, İÇTEN YANMALI veya MAKİNE, İÇTEN YANMALI"
   },
@@ -38980,7 +38980,7 @@
     ],
     "limited_qty": "0",
     "kemler": "",
-    "tunnel": "0 (-)",
+    "tunnel": "-",
     "transport_cat": "",
     "name_tr": "TIBBİ ATIK, KATEGORİ A, İNSANLARI ETKİLEYEN,katı\"veya \"TIBBİ ATIK, KATEGORİ A, yalnızca HAYVANLARI ETKİLEYEN, katı"
   },
@@ -39120,7 +39120,7 @@
     ],
     "limited_qty": "0",
     "kemler": "",
-    "tunnel": "- (-)",
+    "tunnel": "-",
     "transport_cat": "",
     "name_tr": "ARAÇ, LİTYUM İYON BATARYA İLE ÇALIŞAN"
   },
@@ -39140,7 +39140,7 @@
     ],
     "limited_qty": "0",
     "kemler": "",
-    "tunnel": "- (-)",
+    "tunnel": "-",
     "transport_cat": "",
     "name_tr": "ARAÇ, LİTYUM METAL BATARYA İLE ÇALIŞAN"
   },
@@ -39161,7 +39161,7 @@
     ],
     "limited_qty": "0",
     "kemler": "",
-    "tunnel": "- (-)",
+    "tunnel": "-",
     "transport_cat": "",
     "name_tr": "ARAÇ, SODYUM İYON BATARYA İLE ÇALIŞAN"
   },

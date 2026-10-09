@@ -1187,6 +1187,7 @@ def _ate_core(items: list, form: str = '') -> tuple:
             else:
                 routes_to_process = [base_route]
 
+            _m_cat = _re.search(r'Tox\.\s*(\d)', hc)
             for route in routes_to_process:
                 ate_val = _get_ate_value(combined_ate, route, hc)
                 if ate_val and ate_val > 0:
@@ -1194,7 +1195,10 @@ def _ate_core(items: list, form: str = '') -> tuple:
                     contributed_routes.add(route)
                     _cn = item.get('name') or cas
                     if not any(x.get('name') == _cn for x in ate_comps[route]):
-                        ate_comps[route].append({'name': _cn, 'conc': conc, 'code': h_code_raw, 'ate': ate_val})
+                        # 'conv': değer Tablo 3.1.2 dönüştürme değeri (bileşene özgü ATE yok)
+                        _conv = ate_val == ATE_DEFAULTS.get(route, {}).get(hc)
+                        ate_comps[route].append({'name': _cn, 'conc': conc, 'code': h_code_raw, 'ate': ate_val,
+                                                 'cat': int(_m_cat.group(1)) if _m_cat else None, 'conv': _conv})
 
         # Gayri-resmi ve kayıtsız kaynaklar için: katkı vermediği rotalar = bilinmiyor
         # Resmi kaynak (≤2) veya REACH kayıtlı → katkısız rota = test edilmiş-negatif (bilinmiyor değil)
@@ -1233,8 +1237,18 @@ def _ate_core(items: list, form: str = '') -> tuple:
                    if _unk > 10.0 else 1.0 / total)
         mix_ate_cmp = round(mix_ate, 6)  # FP gürültüsünü gider
         thresholds = ATE_THRESHOLDS.get(route, {})
+        # Tablo 3.1.2 dönüştürme değerleri kategori üst sınırına denk gelebilir (örn. gaz Kat.2 → 100 ppmV =
+        # Kat.1 sınırı); %100 Kat.2 maddeden Kat.1 çıkıyordu. ATEmix = 100/Σ(Ci/ATEi) hiçbir zaman en düşük
+        # bileşen ATE'sinden küçük olamaz → yalnız dönüştürme değerleri kullanıldıysa karışım en ağır bileşen
+        # kategorisinden daha ağır sınıflandırılmaz (2026-10-09).
+        _cats = [x.get('cat') for x in ate_comps.get(route, [])]
+        _min_cat = (min(_cats) if _cats and all(_cats) and all(x.get('conv') for x in ate_comps[route])
+                    else None)
         for n in [1, 2, 3, 4]:
             if mix_ate_cmp <= thresholds.get(n, float('inf')):
+                _capped = _min_cat is not None and n < _min_cat
+                if _capped:
+                    n = _min_cat
                 hcode = ATE_HCODES[route][n]
                 if hcode not in seen_h:
                     seen_h.add(hcode)
@@ -1242,7 +1256,10 @@ def _ate_core(items: list, form: str = '') -> tuple:
                         'h_code':      hcode,
                         'h_class':     f'Acute Tox. {n} ({_route_labels.get(route, route)})',
                         'reason':      (
-                            f'Karışım ATE={mix_ate_cmp} ≤ {thresholds[n]} (CLP Tablo 3.1.1 Kat{n})'
+                            (f'Karışım ATE={mix_ate_cmp} — dönüştürme değeri kategori sınırında; en ağır '
+                             f'bileşen kategorisi Kat{n} (SEA Ek-1 Tablo 3.1.2; ATEmix ≥ en düşük bileşen ATE)'
+                             if _capped else
+                             f'Karışım ATE={mix_ate_cmp} ≤ {thresholds[n]} (CLP Tablo 3.1.1 Kat{n})')
                             + (f' [Revize: %{_unk:.1f} bilinmiyor]' if _unk > 10.0 else '')
                         ),
                         'cutoff_used': f'ATEmix={mix_ate_cmp}',

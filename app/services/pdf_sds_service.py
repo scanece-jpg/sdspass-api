@@ -933,12 +933,33 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         styles['header']
     ))
 
-    # Ürün bilgi tablosu
+    def _L1(tr, en):
+        return tr if lang == 'TR' else en
+
+    # Ürün bilgi tablosu — KKDİK Ek-2 0.2.5: ilk yayında hazırlanma tarihi; revizyonda "Revizyon: (tarih)",
+    # versiyon ve revizyon numarası ile hangi versiyonun yerine geçtiği (versiyonu ve tarihi) ilk sayfada
+    try:
+        _rev_int = int(str(rev_no).strip() or '1')
+    except ValueError:
+        _rev_int = 2
+    _prev = rev.get('previous') or {}
+    if _rev_int <= 1:
+        _rev_rows = [[_L1('Hazırlanma tarihi', 'Date of compilation'), rev_date],
+                     [term(lang, 'version'), f"{version} (Rev.{rev_no})"]]
+    else:
+        if _prev.get('no') or _prev.get('tarih'):
+            _sup = (f"{_L1('Versiyon', 'Version')} {_prev.get('versiyon') or '—'} (Rev.{_prev.get('no') or '—'})"
+                    f" — {_prev.get('tarih') or _L1('tarihi belirtilmemiştir', 'date not stated')}")
+        else:
+            _sup = (f"Rev.{_rev_int - 1} — " + _L1('önceki versiyonun tarihi belirtilmemiştir',
+                                                  'date of the previous version not stated'))
+        _rev_rows = [[_L1('Revizyon', 'Revision'), rev_date],
+                     [_L1('Versiyon / revizyon no', 'Version / revision no'), f"{version} / Rev.{rev_no}"],
+                     [_L1('Yerine geçtiği versiyon', 'Supersedes'), _sup]]
     story.append(data_table([
         [term(lang,'product_name'), Paragraph(f"<b>{product_name.upper()}</b>", styles['body'])],
         [term(lang,'product_code'), product.get('code','—')],
-        [term(lang,'revision_date'), rev_date],
-        [term(lang,'version'), version],
+        *_rev_rows,
         [term(lang,'regulation'), L.get('regulation','')],
     ], [45*mm, 135*mm], styles, header=False))
     story.append(Spacer(1, 8))
@@ -1568,6 +1589,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     # KKDİK Ek-2 A 3.2 (a)/(b): kütle veya hacme göre azalan sırada (önceden girildiği sırayla basılıyordu)
     _sec3_comps = sorted((c for c in components if _sec3_needed(c)), key=lambda c: -_c3max(c))
     sec3_rows = generate_section3(_sec3_comps, disclosure, lang=lang, conc_display=_sec3_disp)
+    sds_data['_sec3_rows'] = sec3_rows   # revizyon özeti (gbf_revision) — yalnız GBF'de basılı satırlar
     _sec3_names = {str(r.get('cas') or '').strip(): r.get('name') for r in (sec3_rows or [])}
     if not sec3_rows:
         story.append(Paragraph(
@@ -4252,8 +4274,16 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     # 'İ'.lower() Python'da 'i̇' (noktalı birleşik) verir — karşılaştırmadan önce düz 'i' yapılır
     if not _first_issue and _rev_notes_raw.replace('İ', 'i').lower() in ('ilk yayın', 'ilk yayin', 'first issue'):
         _rev_notes_raw = ''   # varsayılan not sonraki revizyonlarda kalmış — ilk yayın değildir
+    _auto = [x for x in (rev.get('auto_changes') or []) if x]
     if _rev_notes_raw.lower() not in _generic:
         rev_notes = _rev_notes_raw
+    elif not _first_issue and rev.get('auto_changes') is not None:
+        # Önceki versiyonun özetiyle karşılaştırma (gbf_revision.farklar) — KKDİK Ek-2 16(a)
+        rev_notes = (('Önceki versiyona göre değişiklikler: ' + ' '.join(_auto)) if _auto else
+                     'Önceki versiyona göre sınıflandırma, etiket, bileşim (Bölüm 3), fiziksel özellikler (Bölüm 9) '
+                     've taşımacılık (Bölüm 14) bilgilerinde değişiklik yoktur.') if lang == 'TR' else \
+                    (('Changes from the previous version: ' + ' '.join(_auto)) if _auto else
+                     'No changes in classification, labelling, composition, physical properties or transport.')
     elif _first_issue:
         rev_notes = 'İlk yayın.' if lang == 'TR' else 'First issue.'
     else:

@@ -595,7 +595,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
       <div class="v0-space">
         <div class="v0-field">
           <label class="v0-label">Ürün Adı</label>
-          <input class="v0-inp" type="text" id="productName" placeholder="Ürün / Formülasyon adı">
+          <input class="v0-inp" type="text" id="productName" placeholder="Ürün / Formülasyon adı" onchange="_loadRevision()">
         </div>
         <div class="v0-grid-2">
           <div class="v0-field">
@@ -669,9 +669,18 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
           <input class="v0-inp" type="text" id="revNotes" placeholder="İlk yayın" oninput="_saveRevision()">
         </div>
         <div id="rev_hint" style="display:none;grid-column:1/-1;font-size:10px;color:var(--warn,#b7791f)">
-          ⚠ Revizyon 1'den büyük ama değişiklik notu yok. KKDİK Ek-2 0.2.5: önceki sürüme göre değişen bölümleri
-          yazın (örn. "Bölüm 2, 3 ve 12 güncellendi"). Boş bırakılırsa GBF'ye "değişiklikler belirtilmemiştir" yazılır.
+          ⚠ Revizyon 1'den büyük ama değişiklik notu yok. Önceki versiyon biliniyorsa değişiklikler otomatik bulunup
+          Bölüm 16'ya yazılır (KKDİK Ek-2 16(a)); bilinmiyorsa "değişiklikler belirtilmemiştir" yazılır.
         </div>
+        <div style="grid-column:1/-1;display:flex;gap:8px;flex-wrap:wrap;align-items:center;font-size:11px">
+          <button type="button" onclick="_newRevision()"
+            style="padding:4px 10px;border-radius:6px;border:1px solid var(--border2);background:none;color:var(--text2);cursor:pointer;font-size:11px">
+            ＋ Yeni revizyon başlat</button>
+          <label style="padding:4px 10px;border-radius:6px;border:1px solid var(--border2);color:var(--text2);cursor:pointer;font-size:11px">
+            📄 Önceki GBF'yi yükle (PDF)
+            <input type="file" accept="application/pdf,.pdf" style="display:none" onchange="_uploadPrevGbf(this)"></label>
+        </div>
+        <div id="rev_prev_info" style="grid-column:1/-1;font-size:10px;color:var(--text3)"></div>
       </div>
     </div>
 
@@ -5166,21 +5175,59 @@ async function _loadATPMeta() {
 }
 
 // ── Revizyon yardımcıları ────────────────────────────────────────────────────
-const _REV_KEY = 'sdspass_revision';
+// KKDİK Ek-2 0.2.5 / 16(a). Revizyon bilgisi ÜRÜN başına saklanır (önceden tüm ürünler tek kayıttı — A ürününün
+// Rev.3'ü B ürününde de görünüyordu). Kayıt: {version, no, date, notes, prev_ozet, son_ozet}
+//   son_ozet : bu ürünün en son üretilen GBF'sinin özeti (sunucu yanıtı 'ozet')
+//   prev_ozet: yerine geçilecek versiyonun özeti — "Yeni revizyon başlat" (son_ozet'ten) veya önceki GBF yüklenerek
+const _REV_PREFIX = 'sdspass_rev::';
+function _revKey() {
+  const n = (document.getElementById('productName')?.value || '').trim().toLocaleLowerCase('tr-TR');
+  return _REV_PREFIX + (n || '_adsiz');
+}
+function _revRec() { try { return JSON.parse(localStorage.getItem(_revKey())) || {}; } catch { return {}; } }
+function _revPut(rec) { try { localStorage.setItem(_revKey(), JSON.stringify(rec)); } catch { /* depolama kapalı */ } }
+
+function _nextVersion(v) {
+  const parts = String(v || '1.0').split('.');
+  let major = parseInt(parts[0]) || 1, minor = parseInt(parts[1] ?? '0') || 0;
+  minor += 1; if (minor >= 10) { major += 1; minor = 0; }
+  return `${major}.${minor}`;
+}
+
+function _prevOzetFor(rec, no) {
+  if (rec.prev_ozet) return rec.prev_ozet;
+  const sn = parseInt(rec.son_ozet?.revizyon?.no || '0', 10);
+  return (rec.son_ozet && sn && sn < no) ? rec.son_ozet : null;
+}
+
+function _showPrevInfo() {
+  const el = document.getElementById('rev_prev_info');
+  if (!el) return;
+  const no = parseInt(document.getElementById('revNo')?.value || '1', 10) || 1;
+  const prev = _prevOzetFor(_revRec(), no);
+  if (no <= 1) { el.textContent = 'İlk yayın — GBF ilk sayfasına hazırlanma tarihi yazılır (KKDİK Ek-2 0.2.5).'; return; }
+  el.textContent = prev
+    ? `Yerine geçeceği versiyon: Versiyon ${prev.revizyon?.versiyon || '—'} (Rev.${prev.revizyon?.no || '—'}) — ${prev.revizyon?.tarih || 'tarih yok'}. Değişiklikler PDF oluşturulurken bu versiyonla karşılaştırılır.`
+    : '⚠ Önceki versiyon bilinmiyor — önceki GBF\'yi yükleyin; yoksa ilk sayfada "önceki versiyonun tarihi belirtilmemiştir" yazar.';
+}
 
 function _loadRevision() {
   const today = new Date().toLocaleDateString('tr-TR');
-  const saved = (() => { try { return JSON.parse(localStorage.getItem(_REV_KEY)); } catch { return null; } })();
-  document.getElementById('revVersion').value = saved?.version ?? '1.0';
-  document.getElementById('revNo').value      = saved?.no      ?? '1';
-  document.getElementById('revDate').value    = saved?.date    ?? today;
-  document.getElementById('revNotes').value   = saved?.notes   ?? 'İlk yayın';
+  const rec = _revRec();
+  document.getElementById('revVersion').value = rec.version ?? '1.0';
+  document.getElementById('revNo').value      = rec.no      ?? '1';
+  document.getElementById('revDate').value    = rec.date    ?? today;
+  document.getElementById('revNotes').value   = rec.notes   ?? 'İlk yayın';
   _checkRevisionHint();
+  _showPrevInfo();
 }
 
 function _saveRevision() {
-  localStorage.setItem(_REV_KEY, JSON.stringify(_getRevision()));
+  const rec = _revRec();
+  Object.assign(rec, _getRevisionFields());
+  _revPut(rec);
   _checkRevisionHint();
+  _showPrevInfo();
 }
 
 // Revizyon > 1 ve değişiklik notu boş/genel ise uyar (KKDİK Ek-2 0.2.5 — değişiklikler belirtilmeli)
@@ -5192,7 +5239,7 @@ function _checkRevisionHint() {
   if (el) el.style.display = (no > 1 && generic) ? '' : 'none';
 }
 
-function _getRevision() {
+function _getRevisionFields() {
   const today = new Date().toLocaleDateString('tr-TR');
   return {
     version: document.getElementById('revVersion')?.value?.trim() || '1.0',
@@ -5202,20 +5249,52 @@ function _getRevision() {
   };
 }
 
-function _bumpVersion() {
-  const verEl = document.getElementById('revVersion');
-  const noEl  = document.getElementById('revNo');
-  if (!verEl || !noEl) return;
-  // Minor versiyon artır: 1.0→1.1, 1.9→2.0
-  const parts = verEl.value.split('.');
-  let major = parseInt(parts[0]) || 1;
-  let minor = parseInt(parts[1] ?? '0');
-  minor += 1;
-  if (minor >= 10) { major += 1; minor = 0; }
-  verEl.value = `${major}.${minor}`;
-  noEl.value  = String(parseInt(noEl.value || '1') + 1);
-  document.getElementById('revDate').value = new Date().toLocaleDateString('tr-TR');
+function _getRevision() {
+  const f = _getRevisionFields();
+  const prev = _prevOzetFor(_revRec(), parseInt(f.no, 10) || 1);
+  return prev ? { ...f, previous_ozet: prev } : f;
+}
+
+// Yeni revizyon: bu ürünün son GBF'si yerine geçilecek versiyon olur; versiyon / revizyon no artar
+function _newRevision() {
+  const rec = _revRec();
+  const f = _getRevisionFields();
+  if (rec.son_ozet) rec.prev_ozet = rec.son_ozet;
+  document.getElementById('revVersion').value = _nextVersion(f.version);
+  document.getElementById('revNo').value      = String((parseInt(f.no, 10) || 1) + 1);
+  document.getElementById('revDate').value    = new Date().toLocaleDateString('tr-TR');
+  document.getElementById('revNotes').value   = '';
+  _revPut(rec);
   _saveRevision();
+}
+
+// Önceki GBF (PDF) — SDSPass'ın gömdüğü özet okunur; versiyon / tarih ve değişiklik karşılaştırması bundan yapılır
+async function _uploadPrevGbf(input) {
+  const file = input?.files?.[0];
+  if (!file) return;
+  const el = document.getElementById('rev_prev_info');
+  try {
+    const fd = new FormData();
+    fd.append('file', file);
+    const r = await fetch(API_BASE + '/sds/onceki-gbf', { method: 'POST', body: fd });
+    const j = await r.json();
+    if (!r.ok) throw new Error(j.detail || `HTTP ${r.status}`);
+    const oz = j.ozet;
+    const pn = document.getElementById('productName');
+    if (pn && !pn.value.trim() && oz.urun?.ad) pn.value = oz.urun.ad;   // ürün adı boşsa önceki GBF'den
+    const rec = _revRec();
+    rec.prev_ozet = oz;
+    _revPut(rec);
+    document.getElementById('revVersion').value = _nextVersion(oz.revizyon?.versiyon);
+    document.getElementById('revNo').value      = String((parseInt(oz.revizyon?.no || '1', 10) || 1) + 1);
+    document.getElementById('revDate').value    = new Date().toLocaleDateString('tr-TR');
+    document.getElementById('revNotes').value   = '';
+    _saveRevision();
+  } catch (e) {
+    if (el) el.textContent = '⚠ ' + e.message;
+  } finally {
+    if (input) input.value = '';
+  }
 }
 
 // ── H314 Nötralizasyon tespiti ───────────────────────────────────────────────
@@ -6199,7 +6278,21 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
       // Mevcut toast/header mantığını tetikle
       window.dispatchEvent(new CustomEvent('sds-validation', { detail: { summary: _valSummary, issues: _valIssues } }));
     }
-    _bumpVersion();
+    // Revizyon: bu GBF'nin özeti ürün kaydına yazılır (bir sonraki revizyonda "yerine geçtiği versiyon").
+    // Önceden her PDF'ten sonra revizyon no kendiliğinden artıyordu — revizyon artık "Yeni revizyon başlat" ile.
+    try {
+      const rec = _revRec();
+      if (resJson.ozet) rec.son_ozet = resJson.ozet;
+      const notesEl = document.getElementById('revNotes');
+      const _gen = ['', '-', 'güncelleme', 'güncellenmiştir', 'update', 'updated', 'ilk yayın', 'first issue'];
+      if (Array.isArray(resJson.revizyon_farki) && notesEl && _gen.includes(notesEl.value.trim().toLocaleLowerCase('tr-TR'))) {
+        notesEl.value = resJson.revizyon_farki.length
+          ? 'Önceki versiyona göre değişiklikler: ' + resJson.revizyon_farki.join(' ')
+          : 'Önceki versiyona göre değişiklik yoktur.';
+      }
+      _revPut(rec);
+      _saveRevision();
+    } catch (e) { console.warn('[revizyon]', e); }
 
   } catch (e) {
     alert('PDF oluşturma hatası: ' + e.message);

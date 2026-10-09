@@ -308,6 +308,28 @@ def kural_testleri(c) -> int:
              phys_calc([C('7631-86-9', 100, phys={})], form='powder', form_sub='powder_nano')['warnings'],
              open('static/index.html', encoding='utf-8').read(),
              open('app/services/pdf_sds_service.py', encoding='utf-8').read())),
+        ('KKDİK Ek-2 0.2.5 / 16(a) revizyon: ilk yayında ilk sayfada "Hazırlanma tarihi"; revizyonda "Revizyon", '
+         'versiyon / revizyon no ve "Yerine geçtiği versiyon" (önceki GBF\'nin gömülü özetinden); özet PDF\'e gömülür '
+         've geri okunur; değişiklikler bölüm bölüm bulunur (Bölüm 3\'te listelenmeyen bileşen özete girmez)',
+         lambda: (lambda rv, fitz: (lambda raw: (lambda oz, t1, t2: oz == {'surum': 1, 'x': 'ç'}
+                  and 'Hazırlanma tarihi 01.02.2026' in t1 and 'Versiyon / revizyon no 1.1 / Rev.2' in t2
+                  and 'Yerine geçtiği versiyon Versiyon 1.0 (Rev.1) — 01.02.2026' in t2
+                  and rv.farklar({'b2': {'siniflandirma': ['H226'], 'uyari': 'Warning'}, 'b3': [],
+                                  'b14': {'tehlikeli_degil': True}},
+                                 {'b2': {'siniflandirma': ['H225'], 'uyari': 'Danger'},
+                                  'b3': [{'cas': '67-63-0', 'ad': 'izopropanol; IPA', 'derisim': '≥ 10 - < 20%'}],
+                                  'b14': {'un': 'UN 1993'}})[:3] == [
+                      'Bölüm 2.1 sınıflandırma — eklendi: H225; çıkarıldı: H226.',
+                      'Bölüm 2.2 uyarı kelimesi: Dikkat → Tehlike.', 'Bölüm 3: izopropanol eklendi.'])(
+                  rv.oku(rv.gom(raw, {'surum': 1, 'x': 'ç'})),
+                  _pdf_text(c, [('64-17-5', 30), ('7732-18-5', 70)],
+                            revision={'no': '1', 'version': '1.0', 'date': '01.02.2026', 'notes': 'İlk yayın'}),
+                  _pdf_text(c, [('64-17-5', 30), ('7732-18-5', 70)],
+                            revision={'no': '2', 'version': '1.1', 'date': '09.10.2026', 'notes': 'Bölüm 9 güncellendi',
+                                      'previous_ozet': {'surum': 1, 'revizyon': {'versiyon': '1.0', 'no': '1',
+                                                                                 'tarih': '01.02.2026'}}})))(
+                  (lambda d: (d.new_page(), d.tobytes())[1])(fitz.open())))(
+             __import__('app.services.gbf_revision', fromlist=['x']), __import__('fitz'))),
         ('ADR ÖH 375 (UN 3082): not ambalaj miktarına (≤ 5 L) dayanır, viskozite şartı yok (ADR 2025 3.3.1)',
          lambda: (lambda n: '5 L' in n and 'viskozite' not in n.lower())(
              tr_classify(h_codes=['H411'], form='liquid', viscosity=5000)['road']['note'])),

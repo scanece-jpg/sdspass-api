@@ -3,7 +3,7 @@ HazardDesk PDF API — Minimal Deploy
 DB gerektirmez, sadece PDF üretimi + madde lookup
 """
 
-from fastapi import FastAPI, Body, Response, HTTPException, Request
+from fastapi import FastAPI, Body, Response, HTTPException, Request, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, StreamingResponse
 import asyncio
@@ -608,6 +608,9 @@ async def generate_pdf(data: dict = Body(...)):
                 'no':      revision_in.get('no', '1'),
                 'version': revision_in.get('version', '1.0'),
                 'notes':   revision_in.get('notes', 'İlk yayın'),
+                # KKDİK Ek-2 0.2.5 — yerine geçtiği versiyon (önceki GBF'nin gömülü özetinden veya tarayıcıdan)
+                'previous': ((revision_in.get('previous_ozet') or {}).get('revizyon')
+                             or revision_in.get('previous') or {}),
             },
             # ATEmix ve "bilinmeyen akut toksisite" ifadesi yalnız sınıflandırma hattından (tek kaynak);
             # önceden arayüzün eski hesabı birleştiriliyordu — verisi olan bileşenler "bilinmeyen" sayılıyordu
@@ -655,6 +658,22 @@ async def generate_pdf(data: dict = Body(...)):
 
         pdf_bytes = generate_sds_pdf(sds_data, lang=lang)
 
+        # Revizyon (KKDİK Ek-2 0.2.5 / 16(a)): önceki versiyonun özeti varsa değişiklikler bulunur; not girilmemişse
+        # Bölüm 16'ya yazılmak üzere PDF ikinci kez üretilir. Özet PDF'e gömülür (bir sonraki revizyon için).
+        from app.services import gbf_revision as _rv
+        _cur_ozet = _rv.ozet(sds_data)
+        _prev_ozet = revision_in.get('previous_ozet') if isinstance(revision_in.get('previous_ozet'), dict) else None
+        _changes = _rv.farklar(_prev_ozet, _cur_ozet) if _prev_ozet else None
+        _notes_generic = str(revision_in.get('notes') or '').strip().lower() in (
+            '', '-', 'güncelleme', 'güncellenmiştir', 'update', 'updated', 'ilk yayın', 'first issue')
+        if _changes is not None and _notes_generic:
+            sds_data['revision']['auto_changes'] = _changes
+            pdf_bytes = generate_sds_pdf(sds_data, lang=lang)
+        try:
+            pdf_bytes = _rv.gom(pdf_bytes, _cur_ozet)
+        except Exception as _ge:
+            print(f'[GBF revizyon] özet gömülemedi: {_ge}')
+
         _tr_map = str.maketrans('ıİğĞüÜşŞçÇöÖ', 'iIgGuUsScCoO')
         _name_ascii = product.get('name', 'SDS').translate(_tr_map)
         safe = ''.join(x if (x.isalnum() and x.isascii()) or x in '-_' else '_'
@@ -688,6 +707,9 @@ async def generate_pdf(data: dict = Body(...)):
             },
             # PDF'in kullandığı nihai sınıflandırma — ön yüz sağ panelle karşılaştırır
             'classification': _pipe.summary(core),
+            # Revizyon: bu GBF'nin özeti (tarayıcıda ürün başına saklanır) ve önceki versiyona göre değişiklikler
+            'ozet': _cur_ozet,
+            'revizyon_farki': _changes,
         })
 
     except HTTPException:
@@ -1120,6 +1142,20 @@ async def ecological_assess(body: dict):
 
 
 # ── ANA HESAP ENDPOİNT'İ — tek motor, tek kaynak ────────────────────────────
+@app.post("/api/v1/sds/onceki-gbf")
+async def onceki_gbf(file: UploadFile = File(...)):
+    """Revizyon için önceki GBF (PDF) — SDSPass'ın gömdüğü özeti okur (KKDİK Ek-2 0.2.5 / 16(a))."""
+    from app.services import gbf_revision as _rv
+    data = await file.read()
+    if len(data) > 20 * 1024 * 1024:
+        raise HTTPException(status_code=413, detail='Dosya 20 MB\'tan büyük.')
+    oz = _rv.oku(data)
+    if not oz:
+        raise HTTPException(status_code=422, detail='Bu PDF\'te SDSPass revizyon özeti yok (SDSPass dışında ya da '
+                                                    'bu özellikten önce üretilmiş). Önceki versiyon bilgisini elle girin.')
+    return {'ozet': oz}
+
+
 @app.post("/api/v1/sds/calculate")
 async def sds_calculate(body: dict = Body(...)):
     """

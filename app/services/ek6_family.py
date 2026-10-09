@@ -6,8 +6,8 @@ farklılaştırmaları (akut toksisitede maruziyet yolu, üreme toksisitesinde F
 tahrişi / narkotik etki) eklenir. Ek-6'da bulunan bir sınıfın ECHA'daki farklı kategorisi eklenmez: önceden H kodları
 karşılaştırıldığı için klor (Ek-6 Akut Tok. 3, H331) ECHA'dan Akut Tok. 2 (H330) alıyordu (2026-10-09).
 
-ECHA'daki kategori Ek-6'dakinden daha ağırsa hesaba katılmaz; yalnız KDU'ya bilgi olarak döner (Ek-6 girişi asgari
-sınıflandırma "*" ise ve daha ağır kategoriyi destekleyen veri varsa KDU uygular — SEA Ek-6 Bölüm 1.2.1).
+ECHA'daki kategori Ek-6'dakinden daha ağırsa hesaba katılmaz; yalnız KDU'ya bilgi olarak döner. TR Ek-6'da asgari
+sınıflandırma ("*") işareti yoktur → Ek-6 sınıfı bağlayıcıdır; yeni veri varsa yol SEA Md.38(6) teklifidir.
 """
 import re
 from typing import List, Optional, Tuple

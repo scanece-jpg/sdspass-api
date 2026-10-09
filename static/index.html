@@ -4435,9 +4435,9 @@ function renderAll(s) {
   if (_ek6a.length) {
     h += `<div class="r-title">ⓘ Ek-6 sınıflandırması uygulandı — ECHA'da daha ağır kategori var</div>
       <div class="warn-box" style="margin-bottom:8px;font-size:11px">
-        <div style="margin-bottom:4px">SEA Md.6(1)(c) gereği Ek-6'daki uyumlaştırılmış sınıf uygulandı; ECHA C&amp;L
-        bildirimlerindeki daha ağır kategori hesaba katılmadı. Ek-6 girişi asgari sınıflandırma (*) ise ve daha ağır
-        kategoriyi destekleyen veri (tedarikçi GBF'si, test) varsa KDU olarak bileşen satırından değiştirebilirsiniz.</div>
+        <div style="margin-bottom:4px">SEA Md.6(1)(c) gereği Ek-6'daki uyumlaştırılmış sınıflandırma bağlayıcıdır; ECHA
+        C&amp;L bildirimlerindeki daha ağır kategori uygulanmaz (TR Ek-6'da asgari sınıflandırma "*" işareti yoktur). Bu
+        kategoriyi destekleyen yeni veri varsa SEA Md.38(6) uyarınca Bakanlığa teklif sunulabilir.</div>
         ${_ek6a.map(e => `<div>• ${_esc(e.name || e.cas)} (${_esc(e.cas)}): Ek-6 <b>${_esc(e.ek6_h_code)}</b>${e.ek6_h_class ? ' (' + _esc(e.ek6_h_class) + ')' : ''} — ECHA bildirimi <b>${_esc(e.h_code)}</b>${e.h_class ? ' (' + _esc(e.h_class) + ')' : ''}</div>`).join('')}
       </div>`;
   }

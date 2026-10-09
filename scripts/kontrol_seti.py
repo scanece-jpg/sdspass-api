@@ -115,10 +115,12 @@ URUNLER = [
      'test_data': {'gas_type': 'liquefied'}, 'phys': {'appearance': 'Gaz', 'color': 'açık sarı', 'odor': 'keskin'},
      'h': ['H270', 'H280', 'H315', 'H319', 'H331', 'H335', 'H400'], 'signal': 'Danger',
      'var': ['Akut Toks. 3 (solunum) H331', 'Basınçlı Gaz (Sıvılaştırılmış gaz)', '2TOC', 'C/D', 'UN1017',
-             '16 05 04*', 'Sızıntı noktasına ve kabın içine doğrudan su', 'Klorür bileşikleri'],
+             '16 05 04*', 'Sızıntı noktasına ve kabın içine doğrudan su', 'Klorür bileşikleri',
+             '3.1 Maddeler', 'Madde sınıflandırması - SEA Ek-6', 'Maddenin sınıflandırılması', '-34.6 °C'],
      'yok': _UYDURMA + ['H330:', 'Akut Toks. 2', 'Acute Tox', 'Karbon oksit', 'organik fragment', 'FFP2',
                         'cilt için sınıflandırılmamıştır', 'uzun süreli olumsuz', 'CO₂ KULLANMAYIN', '16 03 05',
-                        'kontrollü yakma']},
+                        'kontrollü yakma', '3.2 Karışımlar', 'ATE Karışım Hesabı', 'Gaz karışımı',
+                        'karışım için test yapılmamıştır', 'Bu karışım', 'kesme %']},
     {'ad': 'Azot içinde %1 karbon monoksit (ISO 10156 hesabı: alevlenir değil)', 'form': 'gas',
      'bil': [('630-08-0', 1), ('7727-37-9', 99)],
      'test_data': {'gas_type': 'compressed'},
@@ -445,12 +447,15 @@ def kural_testleri(c) -> int:
                   == ['H332', 'H336', 'H361f'])(
              __import__('app.services.ek6_family', fromlist=['x']).split_echa,
              lambda c, h: {'h_class': c, 'h_code': h})),
-        ('SEA Ek-1 Tablo 3.1.2: dönüştürme değeri kategori sınırında — %100 Kat.2 gaz (100 ppmV) Kat.1 olmaz; '
-         'ölçülen ATE (4 mg/kg) Kat.1 kalır',
-         lambda: [x['cat_num'] for x in _ate_core([{'cas': 'x', 'name': 'x', 'conc': 100, 'source_priority': 1,
-                   'hazards': [{'h_class': 'Acute Tox. 2', 'h_code': 'H330'}], 'ate': {}}], form='gas')[0]] == [2]
-         and [x['cat_num'] for x in _ate_core([{'cas': 'x', 'name': 'x', 'conc': 100, 'source_priority': 1,
-                   'hazards': [{'h_class': 'Acute Tox. 2', 'h_code': 'H300'}], 'ate': {'oral': 4}}], form='liquid')[0]] == [1]),
+        ('SEA Md.4 / Ek-1 3.1.2: tek maddeli ürün maddenin kendi sınıfını alır (Kat.2 gaz → Kat.2, ATEmix yok); '
+         'karışımda Tablo 3.1.1 harfiyen (iki Kat.2 gaz %50+%50 → ATEmix 100 ppmV → Kat.1)',
+         lambda: (lambda sub, mix: [x['cat_num'] for x in sub] == [2] and [x['cat_num'] for x in mix] == [1])(
+             __import__('app.services.sds_pipeline', fromlist=['x'])._substance_acute(
+                 {'cas': 'x', 'conc': 100, 'sea_ek6': True,
+                  'hazards': [{'h_class': 'Acute Tox. 2', 'h_code': 'H330'}]}, 'gas'),
+             _ate_core([{'cas': c, 'name': c, 'conc': 50, 'source_priority': 1, 'ate': {},
+                         'hazards': [{'h_class': 'Acute Tox. 2', 'h_code': 'H330'}]} for c in ('a', 'b')],
+                       form='gas')[0])),
         ('ADR 2025 Tablo A (ECE/TRANS/352 Cilt I): UN1017 2TOC/C/D/265, UN1230 tünel D/E, UN1648 F1/33, '
          'UN2014 OC1, UN1199 Sınıf 6.1',
          lambda: (lambda A: A['UN1017']['classification_code'] == '2TOC'

@@ -413,6 +413,48 @@ def _normalize_conc(comps: list) -> None:
 
 
 # ── Ana hat ───────────────────────────────────────────────────────────────────
+def _conc_of(c: dict) -> float:
+    try:
+        return float(c.get('concMax') or c.get('conc') or c.get('concentration') or 0)
+    except (TypeError, ValueError):
+        return 0.0
+
+
+def _substance_source(c: dict, h: dict) -> str:
+    """Madde sınıflandırmasının kaynağı (GBF 2.1 gerekçesi)."""
+    if h.get('echa_supplement') or h.get('_echa_supplement'):
+        return 'ECHA C&L bildirimleri (Ek-6\'da yer almayan sınıf, SEA Md.6(1)(c))'
+    if c.get('sea_ek6') or int(c.get('source_priority') or 9) == 1:
+        return 'SEA Ek-6 uyumlaştırılmış sınıflandırma (SEA Md.6(1)(c))'
+    if c.get('annex_vi') or int(c.get('source_priority') or 9) == 2:
+        return 'AB CLP Ek-VI uyumlaştırılmış sınıflandırma'
+    return 'madde verisi / tedarikçi sınıflandırması'
+
+
+def _substance_acute(c: dict, form: str) -> list:
+    """Tek maddeli ürün: akut toksisite maddenin kendi sınıfından (SEA Ek-1 3.1.2) — ATEmix (3.1.3, karışımlar
+    için) uygulanmaz. Taşıma (6.1 PG / 2.3) için yol ve kategori de döner."""
+    import re as _r
+    out, seen = [], set()
+    _inh = ('inhalation_gas' if form == 'gas' else
+            'inhalation_dust' if form in ('solid', 'powder') else 'inhalation_vapour')
+    _lbl = {'oral': 'oral', 'dermal': 'dermal', 'inhalation_gas': 'inhalasyon (gaz)',
+            'inhalation_dust': 'inhalasyon (toz)', 'inhalation_vapour': 'inhalasyon (buhar)'}
+    for h in c.get('hazards') or []:
+        code = _h4(h.get('h_code'))
+        if code not in ACUTE_TOX_H or code in seen:
+            continue
+        seen.add(code)
+        route = 'oral' if code < 'H310' else ('dermal' if code < 'H330' else _inh)
+        m = _r.search(r'(?:Tox|Tok|Toks)\.?\s*(\d)', h.get('h_class') or '')
+        n = int(m.group(1)) if m else {'H300': 1, 'H310': 1, 'H330': 1, 'H301': 3, 'H311': 3, 'H331': 3,
+                                       'H302': 4, 'H312': 4, 'H332': 4}[code]
+        out.append({'h_code': code, 'h_class': f'Acute Tox. {n} ({_lbl[route]})', 'route': route, 'cat_num': n,
+                    'reason': f'Madde sınıflandırması — {_substance_source(c, h)} (SEA Ek-1 3.1.2)',
+                    'cutoff_used': '—'})
+    return out
+
+
 async def classify(inp: dict) -> dict:
     from app.services.clp_service import (
         classify_mixture_clp, calculate_ate_health_h_codes,
@@ -440,9 +482,18 @@ async def classify(inp: dict) -> dict:
     _normalize_conc(comps)
     comps = await refresh_components(comps, form)
 
+    # Tek maddeli ürün (SEA Md.4: madde — katkı ve safsızlıkları dahil; karışım = iki veya daha fazla madde).
+    # Madde kendi sınıflandırmasıyla (Ek-6 / veri) sınıflandırılır; karışım hesap yöntemleri (ATEmix 3.1.3,
+    # toplama, kesme değerleri) uygulanmaz. Önceden %100 klor karışım gibi hesaplanıp Kat.1 alıyordu (2026-10-09).
+    _active = [c for c in comps if _conc_of(c) > 0]
+    substance_mode = len(_active) == 1
+
     # ATE sağlık tehlikeleri (classify_mixture_clp Acute Tox. atlar)
     try:
-        ate_h, ate_details = calculate_ate_health_h_codes(comps, form=form)
+        if substance_mode:
+            ate_h, ate_details = _substance_acute(_active[0], form), {}
+        else:
+            ate_h, ate_details = calculate_ate_health_h_codes(comps, form=form)
     except Exception as e:
         print(f'[ATE ERROR] {e}')
         ate_h, ate_details = [], {}
@@ -470,6 +521,13 @@ async def classify(inp: dict) -> dict:
                          mixture_ph=mixture_ph,
                          mixture_skin_corr='H314' in {_h4(h) for h in (clp_res.get('h_codes') or [])})
     stot_res = stot_calc(comps)
+    if substance_mode:
+        # Madde: bileşen değeri maddenin kendi değeridir — "karışım için belirlenmemiştir" yazılmaz
+        _bp = (phys_res.get('theo_props') or {}).get('boiling_point')
+        if isinstance(_bp, dict) and _bp.get('estimate_only') and _bp.get('estimate') is not None:
+            phys_res['theo_props']['boiling_point'] = {
+                'value': _bp['estimate'], 'display': f"{_bp['estimate']:g} °C", 'measured': False,
+                'method': 'Madde verisi (literatür)', 'standard': ''}
 
     eco_comps = [{
         'cas': c.get('cas') or c.get('cas_no') or '', 'name': c.get('name', ''),
@@ -529,6 +587,14 @@ async def classify(inp: dict) -> dict:
         seen.add(aq.h_code)
         cp.append({'h_code': aq.h_code, 'h_class': aq.h_class,
                    'reason': aq.formula or 'Sucul ekoloji', 'cutoff_used': '—'})
+    if substance_mode:
+        # Sağlık/çevre satırlarında kesme değeri / toplama formülü yerine madde sınıflandırmasının kaynağı
+        _src = {}
+        for _h in _active[0].get('hazards') or []:
+            _src.setdefault(_h4(_h.get('h_code')), _substance_source(_active[0], _h))
+        for e in cp:
+            if e['h_code'] in _src and e['h_code'] not in MANUAL_PHYS_H and e['h_code'][:3] not in ('H22', 'H28'):
+                e['reason'], e['cutoff_used'] = f"Madde sınıflandırması — {_src[e['h_code']]}", '—'
     present = {e['h_code'] for e in cp}
     dominated = set()
     for dom, subs in DOMINANCE_MAP.items():
@@ -806,7 +872,9 @@ async def classify(inp: dict) -> dict:
         'clp_res':     clp_res,
         'eco_obj':     eco_obj if eco_obj is not None else {'sds_section_12': {}},
         'eco_panel':   eco_panel,
-        'ate_details': {**(clp_res.get('ate_mix_details') or {}), **(ate_details or {})},
+        'ate_details': ({} if substance_mode else
+                        {**(clp_res.get('ate_mix_details') or {}), **(ate_details or {})}),
+        'substance_mode': substance_mode,
         'warnings':    (phys_res.get('warnings', []) + stot_res.get('warnings', [])
                         + clp_res.get('warnings', [])),
         'pending_decisions': phys_res.get('pending_decisions', []),

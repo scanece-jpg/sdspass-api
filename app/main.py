@@ -578,6 +578,8 @@ async def generate_pdf(data: dict = Body(...)):
             # önceden arayüzün eski hesabı birleştiriliyordu — verisi olan bileşenler "bilinmeyen" sayılıyordu
             'ate_mix_details': dict(_be_ate_details or {}),
             'ate_from_pipeline': True,   # boş ATE ayrıntısı = bilinmeyen bileşen yok (yedek kontrol yapılmaz)
+            # Tek maddeli ürün (SEA Md.4) — GBF 3.1 Maddeler, madde sınıflandırması, "karışım" ifadeleri yok
+            'substance_mode': bool(core.get('substance_mode')),
             'h314_neutralization_removed': bool(data.get('h314_neutralization_removed', False)),
             'clp_note_overrides': data.get('clp_note_overrides', {}),
             'ppe': py_ppe,
@@ -1156,6 +1158,7 @@ async def sds_calculate(body: dict = Body(...)):
             'label_components':  core['label_components'],   # etikette adı zorunlu bileşenler
             'ek6_supplements':   core.get('ek6_supplements', []),   # Ek-6 dışı (ECHA) sınıflar
             'ek6_daha_agir':     core.get('ek6_daha_agir', []),     # Ek-6 uygulandı; ECHA'da daha ağır kategori (bilgi)
+            'substance_mode':    bool(core.get('substance_mode')),  # tek maddeli ürün (SEA Md.4)
             'summary':     _pipe.summary(core),   # PDF ile karşılaştırma (güvenlik ağı)
             'form_sub':    form_sub or None,
             'voc_content': body.get('voc_content'),

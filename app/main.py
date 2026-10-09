@@ -195,6 +195,7 @@ async def generate_pdf(data: dict = Body(...)):
             # Eldiven malzeme/kalınlık seçimi (KKDİK Ek-2 8.2.2.2(b)) — ürün kartından
             _inp['glove_material']  = product.get('glove_material') or _ci.get('glove_material')
             _inp['glove_thickness'] = product.get('glove_thickness') or _ci.get('glove_thickness')
+            _inp['glove_breakthrough'] = product.get('glove_breakthrough') or _ci.get('glove_breakthrough')
         else:
             _fp_req_m = _req_methods.get('flash_point', {}) if isinstance(_req_methods, dict) else {}
             _fp_is_user = _fp_req_m.get('measured', True) if isinstance(_fp_req_m, dict) else True
@@ -1204,6 +1205,7 @@ async def sds_calculate(body: dict = Body(...)):
             'h314_removed': bool(body.get('h314_neutralization_removed', False)),
             'glove_material':  body.get('glove_material'),
             'glove_thickness': body.get('glove_thickness'),
+            'glove_breakthrough': body.get('glove_breakthrough'),
         })
         phys_result = core['phys_res']
         return {

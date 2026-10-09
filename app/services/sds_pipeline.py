@@ -807,7 +807,8 @@ async def classify(inp: dict) -> dict:
     try:
         from app.services.glove_service import select as _glove_select
         glove = _glove_select(comps, list(all_h) + list(h_codes), lang=lang,
-                              material=inp.get('glove_material'), thickness=inp.get('glove_thickness'))
+                              material=inp.get('glove_material'), thickness=inp.get('glove_thickness'),
+                              breakthrough=inp.get('glove_breakthrough'))
         if glove.get('applies') and isinstance(ppe, dict):
             ppe['hands'] = [{'ppe': glove['text'], 'level': glove['level']}]
     except Exception as e:

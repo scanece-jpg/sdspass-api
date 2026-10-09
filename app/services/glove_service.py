@@ -135,7 +135,8 @@ def _conc(c: dict) -> float:
 
 
 def select(components: List[dict], h_codes: List[str], lang: str = 'TR',
-           material: Optional[str] = None, thickness: Optional[float] = None) -> dict:
+           material: Optional[str] = None, thickness: Optional[float] = None,
+           breakthrough: Optional[float] = None) -> dict:
     """Eldiven önerisi ve GBF metni.
     Döner: {applies, letters:[{letter, sinif, kimyasal}], tip, min_sure_dk, malzeme, kalinlik_mm,
             malzeme_secenekleri, level, text, note, uyarilar:[str]}"""
@@ -243,9 +244,15 @@ def select(components: List[dict], h_codes: List[str], lang: str = 'TR',
     # Tipik delinme süresi: kayıt yaptıranların verdiği değerlerin en küçüğü (saf madde için)
     _reg_bt = [g['delinme_dk'] for g in reg.values() if g.get('delinme_dk') and mat in g['malzemeler']]
     typ_bt = min(_reg_bt) if (kaynak == 'kayit' and _reg_bt and len(_reg_bt) == len(reg)) else None
+    # KDU'nun girdiği delinme süresi (eldiven üreticisinin EN 16523-1 verisi) her şeyin önünde gelir
+    try:
+        user_bt = float(breakthrough) if breakthrough not in (None, '') else None
+    except (TypeError, ValueError):
+        user_bt = None
     _src_tr = (' (malzeme: kayıt yaptıranın önerisi — ' + '; '.join(sorted({g['ref'] for g in reg.values()})) + ')'
                if kaynak == 'kayit' else '')
-    _bt_tr = (f' Tipik delinme süresi > {typ_bt} dk (kayıt yaptıranın verisi, saf madde için).' if typ_bt else '')
+    _bt_tr = (f' Delinme süresi ≥ {user_bt:g} dk (eldiven üreticisinin verisi, EN 16523-1).' if user_bt else
+              f' Tipik delinme süresi > {typ_bt} dk (kayıt yaptıranın verisi, saf madde için).' if typ_bt else '')
     _thk_tr = f', ≥ {t_txt} mm' if t_txt else ''
     _thk_en = f', ≥ {t_txt} mm' if t_txt else ''
 
@@ -270,6 +277,12 @@ def select(components: List[dict], h_codes: List[str], lang: str = 'TR',
                 'time may be shorter than the laboratory value under conditions of use (temperature, mechanical '
                 'stress).')
     else:
+        if not _bt_tr:
+            _bt_tr = (' Delinme süresi: ürün EN ISO 374-1 test kimyasallarına eşlenemediğinden standart bir en az süre '
+                      'verilemez; ürünle temas süresinden uzun delinme süresi olan eldiven, üreticinin EN 16523-1 '
+                      'geçirgenlik verisine göre seçilmelidir.')
+            warns.append('Delinme süresi belirlenemedi (EN 374 sınıfı ve kayıt yaptıran verisi yok) — eldiven '
+                         'üreticisinin delinme süresini girin (KKDİK Ek-2 8.2.2.2(b)(i)).')
         text = (f'Kimyasal koruyucu eldiven: {mat_tr}{_src_tr}{_thk_tr} (EN ISO 374-1 Tip {tip}).{_bt_tr}' if tr else
                 f'Chemical protective gloves: {mat_en}{_thk_en} (EN ISO 374-1 Type {tip_en}).')
         note = None
@@ -279,5 +292,5 @@ def select(components: List[dict], h_codes: List[str], lang: str = 'TR',
         'malzeme_adlari': {k: (v[0] if tr else v[1]) for k, v in MATERIAL.items()},
         'varsayilan_kalinlik': {k: v[2] for k, v in MATERIAL.items()},
         'level': 1 if severe else 2, 'text': text, 'note': note, 'uyarilar': warns,
-        'kaynak': kaynak, 'kayit_onerileri': kaynaklar,
+        'kaynak': kaynak, 'kayit_onerileri': kaynaklar, 'delinme_dk': user_bt,
     }

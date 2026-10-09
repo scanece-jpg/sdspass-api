@@ -122,10 +122,17 @@ def c_tarih(ctx):
 
 
 def c_surum(ctx):
+    """KKDİK Ek-2 0.2.5: revizyonda ilk sayfada sürüm / revizyon numarası VE hangi versiyonun değiştirildiği
+    (değiştirme tarihi veya yerine geçtiği versiyon)."""
     p1 = ctx['pages'][0] if ctx['pages'] else ''
-    return ('uygun', 'İlk sayfada sürüm/revizyon numarası var.') if re.search(
-        r'(?i)\b(rev(?:izyon)?\.?(?:\s*no)?|sürüm|versiyon|version|düzenleme)\s*[:.]?\s*\d', p1) else \
-           ('eksik', 'İlk sayfada sürüm/revizyon numarası bulunamadı.')
+    if not re.search(r'(?i)\b(rev(?:izyon)?\.?(?:\s*no)?|sürüm|versiyon|version|düzenleme)\s*[:.]?\s*\d', p1):
+        return 'eksik', 'İlk sayfada sürüm/revizyon numarası bulunamadı.'
+    sup = re.search(r'(?i)yerine geçtiği|yerine geçer|değiştirdiği|değiştirme tarihi|önceki (?:versiyon|sürüm)|'
+                    r'supersed|replaces|previous version', p1)
+    if sup or len(set(re.findall(r'\b\d{1,2}[./]\d{1,2}[./]\d{4}\b', p1))) >= 2:
+        return 'uygun', 'İlk sayfada sürüm/revizyon numarası ve değiştirilen versiyon bilgisi var.'
+    return 'eksik', ('İlk sayfada sürüm numarası var ama hangi versiyonun değiştirildiği (değiştirme tarihi / '
+                     'yerine geçtiği versiyon) yok (KKDİK Ek-2 0.2.5).')
 
 
 def c_sayfa(ctx):
@@ -732,6 +739,183 @@ def c_ek_unsur(ctx):
                    f'(kaynak verisi farklı olabilir; KDU doğrulasın).')
 
 
+
+# ── 2026-10-09: üretimdeki kural değişikliklerinin denetimi ──────────────────────────────────────────────
+def _line(sec: str, label_rx: str, n: int = 160) -> str:
+    m = re.search(label_rx, sec or '', re.I)
+    return (sec[m.end(): m.end() + n] if m else '')
+
+
+def c_16_revizyon(ctx):
+    """KKDİK Ek-2 16(a): revizyonda önceki versiyona göre değişiklikler."""
+    s16 = ctx['secs'].get('16', '')
+    if re.search(r'(?i)değişiklik(?:ler)?\s+belirtilmemiştir|changes[^.]{0,40}not (?:been )?specified', s16):
+        return 'eksik', 'Bölüm 16\'da önceki versiyona göre değişikliklerin "belirtilmediği" yazıyor (KKDİK Ek-2 16(a)).'
+    if re.search(r'(?i)değişiklik|güncellen|revize edil|eklendi|çıkarıldı|changes|revised|amended', s16):
+        return 'uygun', 'Bölüm 16\'da önceki versiyona göre değişiklikler belirtilmiş.'
+    return 'eksik', 'Revizyon olduğu halde Bölüm 16\'da değişiklik açıklaması bulunamadı (KKDİK Ek-2 16(a)).'
+
+
+def c_dnel(ctx):
+    """KKDİK Ek-2 8.1.4: DNEL/PNEC mevcutsa verilir; yoksa belirlenmediği / mevcut olmadığı belirtilir."""
+    s8 = ctx['secs'].get('8', '')
+    if not re.search(r'DNEL|PNEC|DMEL', s8):
+        return 'kdu', 'Bölüm 8\'de DNEL/PNEC bilgisi yok — madde için mevcutsa verilmeli (KKDİK Ek-2 8.1.4).'
+    if re.search(r'(?i)(?:DNEL|PNEC)[^.]{0,200}?\d[\d.,]*\s*(?:mg|µg|ug|g)/', s8):
+        return 'uygun', 'Bölüm 8\'de sayısal DNEL/PNEC değerleri var.'
+    if re.search(r'(?i)(?:DNEL|PNEC)[^.]{0,160}(belirlenmemiş|mevcut değil|bulunmamakta|bakınız|not (?:established|available))', s8):
+        return 'uygun', 'DNEL/PNEC\'in belirlenmediği / mevcut olmadığı belirtilmiş.'
+    return 'kdu', 'DNEL/PNEC geçiyor ama değer ya da "belirlenmemiştir" ifadesi bulunamadı.'
+
+
+_GLOVE_SEG = r'(?i)ellerin korunması|el koruma|eldiven|hand protection|gloves?'
+_GLOVE_MAT = (r'(?i)nitril|bütil|butil|butyl|neopren|polikloropren|chloroprene|viton|florokauçuk|fluoro|FKM|laminat|'
+              r'laminate|PVC|polivinil|PVA|lateks|latex|doğal kauçuk|natural rubber')
+
+
+def _glove_seg(ctx):
+    s8 = ctx['secs'].get('8', '')
+    m = re.search(_GLOVE_SEG, s8)
+    return s8[m.start(): m.start() + 700] if m else None
+
+
+def _glove_not_needed(seg):
+    return bool(re.search(r'(?i)eldiven gerekmez|gerekli değildir|özel (?:el )?koruma gerekmez|not required', seg or ''))
+
+
+def c_eldiven_malzeme(ctx):
+    seg = _glove_seg(ctx)
+    if seg is None:
+        return 'eksik', 'Bölüm 8\'de el koruması (eldiven) bilgisi bulunamadı.'
+    if _glove_not_needed(seg) or re.search(_GLOVE_MAT, seg):
+        return 'uygun', 'Eldiven malzemesi belirtilmiş.'
+    return 'eksik', 'Eldiven var ama malzemesi (nitril, bütil vb.) belirtilmemiş (KKDİK Ek-2 8.2.2.2(b)(i)).'
+
+
+def c_eldiven_kalinlik(ctx):
+    seg = _glove_seg(ctx)
+    if seg is None:
+        return 'eksik', 'Bölüm 8\'de el koruması (eldiven) bilgisi bulunamadı.'
+    if _glove_not_needed(seg) or re.search(r'\d+(?:[.,]\d+)?\s*mm\b', seg):
+        return 'uygun', 'Eldiven kalınlığı belirtilmiş.'
+    return 'eksik', 'Eldiven malzeme kalınlığı (mm) belirtilmemiş (KKDİK Ek-2 8.2.2.2(b)(i)).'
+
+
+def c_eldiven_sure(ctx):
+    seg = _glove_seg(ctx)
+    if seg is None:
+        return 'eksik', 'Bölüm 8\'de el koruması (eldiven) bilgisi bulunamadı.'
+    if _glove_not_needed(seg) or re.search(r'(?i)\d+\s*(?:dk|dakika|min)\b', seg):
+        return 'uygun', 'Eldivenin delinme (aşınma) süresi belirtilmiş.'
+    if re.search(r'(?i)delinme süresi|breakthrough', seg) and re.search(r'(?i)üretici|manufacturer', seg):
+        return 'kdu', ('Delinme süresi sayı olarak yok; üretici verisine göre seçim yazılmış — KDU eldiven üreticisinin '
+                       'süresini girmeli (KKDİK Ek-2 8.2.2.2(b)(i)).')
+    return 'eksik', 'Eldivenin tipik veya en az delinme süresi belirtilmemiş (KKDİK Ek-2 8.2.2.2(b)(i)).'
+
+
+def c_9_ampirik(ctx):
+    """KKDİK Ek-2 9: bölüm ampirik bilgi açıklar — hesaplanmış / tahmini değer (gaz karışımında ISO 10156 hariç)."""
+    s9 = ctx['secs'].get('9', '')
+    bad = []
+    for m in re.finditer(r'(?i)hesaplan\w*|tahmin\w*|teorik|calculated|estimated', s9):
+        ctx_s = s9[max(0, m.start() - 80): m.end() + 80]
+        if re.search(r'(?i)ISO 10156|hesapla belirlenemez|hesaplanmaz|not calculated|cannot be calculated', ctx_s):
+            continue
+        bad.append(re.sub(r'\s+', ' ', ctx_s).strip()[:120])
+    return ('uygun', 'Bölüm 9\'da hesaplanmış / tahmini değer yok.') if not bad else \
+           ('eksik', f'Bölüm 9\'da hesaplanmış / tahmini değer: "{bad[0]}" — KKDİK Ek-2 9 ampirik (ölçülmüş) bilgi '
+                     'ister; karışım değeri yoksa nedeni veya ilgili maddeye ait veri yazılır.')
+
+
+def c_9_neden(ctx):
+    """KKDİK Ek-2 9.1: bilgi mevcut değil / uygulanamaz denmişse nedeni belirtilir."""
+    s9 = ctx['secs'].get('9', '')
+    bare = re.findall(r'(?i)\b(belirlenmemiştir|veri (?:yok|mevcut değil)|bilgi (?:yok|mevcut değil)|mevcut değil|'
+                      r'uygulanamaz|not available|no data|not applicable|not determined)\b(?!\s*[(\-—:;,]|\s+\()', s9)
+    return ('uygun', 'Bölüm 9\'da "veri yok / uygulanamaz" ifadelerinin nedeni belirtilmiş.') if not bare else \
+           ('eksik', f'Bölüm 9\'da nedeni yazılmamış {len(bare)} "veri yok / uygulanamaz" ifadesi var '
+                     f'(ör. "{bare[0]}") — KKDİK Ek-2 9.1 nedenin belirtilmesini ister.')
+
+
+def c_9_fp_sinif(ctx):
+    """Ek-2 9: bölüm sınıflandırmayla tutarlıdır — parlama noktası ↔ alevlenir sıvı sınıfı (SEA Ek-1 Tablo 2.6.1)."""
+    s9, f = ctx['secs'].get('9', ''), ctx['facts']
+    line = _line(s9, r'parlama noktas[ıi]|flash point', 200)
+    if not line or re.search(r'(?i)bileşen|component|uygulanamaz|belirlenmemiş|not applicable|not determined', line[:120]):
+        return 'uygun', 'Karışım için ölçülmüş / literatür parlama noktası yok (karşılaştırma yapılmadı).'
+    m = re.search(r'(>|≥|<)?\s*~?\s*(-?\d+(?:[.,]\d+)?)\s*°\s*C', line)
+    if not m:
+        return 'uygun', 'Parlama noktası sayısal değil (karşılaştırma yapılmadı).'
+    fp = float(m.group(2).replace(',', '.'))
+    gt = m.group(1) in ('>', '≥')
+    cls = {h for h in ('H224', 'H225', 'H226') if h in f}
+    l2 = re.search(r'(?i)L\.2|sürekli yanma', ctx['text'])
+    if gt and fp >= 60:
+        exp = set()
+    elif fp < 23:
+        exp = {'H224', 'H225'}
+    elif fp <= 60:
+        exp = {'H226'}
+    else:
+        exp = set()
+    if (cls & exp) or (not exp and not cls) or (exp == {'H226'} and not cls and l2):
+        return 'uygun', f'Parlama noktası ({m.group(0).strip()}) ile alevlenir sıvı sınıfı tutarlı.'
+    if not exp and cls == {'H226'} and 55 <= fp <= 75:
+        return 'kdu', ('Parlama noktası 55–75 °C ve H226: gaz yağı / dizel / hafif ısıtma yağı özel hükmü olabilir '
+                       '(SEA Ek-1 Tablo 2.6.1 notu) — KDU doğrulasın.')
+    return 'eksik', (f'Bölüm 9 parlama noktası ({m.group(0).strip()}) ile Bölüm 2 sınıfı '
+                     f'({", ".join(sorted(cls)) or "alevlenir sıvı sınıfı yok"}) tutarsız (SEA Ek-1 Tablo 2.6.1; '
+                     'KKDİK Ek-2 9: bölüm sınıflandırmayla tutarlıdır).')
+
+
+def c_9_h304(ctx):
+    """SEA Ek-1 3.10.3.3.1: H304 kararı 40 °C'de ölçülmüş kinematik viskoziteye (≤ 20,5 mm²/s) göre."""
+    s9 = ctx['secs'].get('9', '')
+    line = _line(s9, r'akışkanlık|viskozite|viscosity', 160)
+    m = re.search(r'(-?\d+(?:[.,]\d+)?)\s*(mm²/s|mm2/s|cSt|mPa\s*[·.]?\s*s|cP)', line)
+    if not m:
+        return 'uygun', 'Bölüm 9\'da sayısal viskozite yok (karşılaştırma yapılmadı).'
+    v, unit = float(m.group(1).replace(',', '.')), m.group(2).lower()
+    if not (unit.startswith('mm') or unit == 'cst') or not re.search(r'40\s*°?\s*C', line):
+        return 'kdu', (f'H304 var; Bölüm 9 viskozitesi ({m.group(0)}) 40 °C kinematik değil — SEA Ek-1 3.10.3.3.1 '
+                       'kararı 40 °C\'de ölçülmüş kinematik viskoziteye göredir.')
+    if v > 20.5:
+        return 'eksik', (f'H304 var ama Bölüm 9 kinematik viskozitesi {v:g} mm²/s (40 °C) > 20,5 — SEA Ek-1 3.10.3.3.1 '
+                         'ile tutarsız.')
+    return 'uygun', f'H304 ve 40 °C kinematik viskozite ({v:g} mm²/s ≤ 20,5) tutarlı.'
+
+
+def c_toz_tutarlilik(ctx):
+    """KKDİK Ek-2 2.3 (toz patlaması ifadesi) ↔ Bölüm 7 (patlayıcı atmosfer önlemleri) tutarlılığı."""
+    s2, s7 = ctx['secs'].get('2', ''), ctx['secs'].get('7', '')
+    in2 = re.search(r'(?i)toz[- ]hava karışımı|toz patlama|dust[- ]air|dust explosion', s2)
+    in7 = re.search(r'(?i)toz[- ]hava|toz patlama|dust[- ]air|dust explosion', s7)
+    if bool(in2) == bool(in7):
+        return 'uygun', 'Toz patlaması bilgisi Bölüm 2.3 ve 7\'de tutarlı.'
+    return 'kdu', ('Toz patlaması ' + ('Bölüm 7\'de var ama 2.3\'te yok' if in7 else '2.3\'te var ama Bölüm 7\'de önlem yok')
+                   + ' — KKDİK Ek-2 2.3 / 7.1.')
+
+
+def c_oh375(ctx):
+    """ADR 3.3.1 ÖH 375: muafiyet ≤ 5 L / 5 kg ambalaja bağlıdır; viskozite şartı yoktur."""
+    s14 = ctx['secs'].get('14', '')
+    for m in re.finditer(r'(?:ÖH|SP|özel hüküm|special provision)\s*375', s14, re.I):
+        near = s14[max(0, m.start() - 150): m.end() + 250]
+        if re.search(r'(?i)viskozite|viscosity|mm²/s|mm2/s|2\s?500', near):
+            return 'eksik', 'Bölüm 14: ÖH 375 viskoziteye bağlanmış — ADR 3.3.1 ÖH 375 viskozite şartı içermez (≤ 5 L / 5 kg).'
+    return 'uygun', 'Bölüm 14\'te ÖH 375 için hatalı viskozite şartı yok.'
+
+
+def c_md10(ctx):
+    """SEA Md.10(2): ölçülmeden en kötü durum / ihtiyatlı sınıflandırma → test yapılır; Bölüm 16'da revizyon notu."""
+    t, s16 = ctx['text'], ctx['secs'].get('16', '')
+    if not re.search(r'(?i)en kötü durum|ihtiyatlı olarak sınıflandır|worst[- ]case|as a precaution', t):
+        return 'uygun', 'Ölçülmeden ihtiyatlı / en kötü durum sınıflandırması yok.'
+    if re.search(r'(?i)revize edil|test sonucuna göre|ölçülmeli|to be revised|test result', s16):
+        return 'uygun', 'İhtiyatlı sınıflandırma için Bölüm 16\'da test / revizyon notu var.'
+    return 'eksik', ('Ölçülmeden en kötü durum / ihtiyatlı sınıflandırma yapılmış ama Bölüm 16\'da test ve revizyon notu '
+                     'yok (SEA Md.10(2): yeterli bilgi yoksa test yapılır).')
+
 CHECKS: Dict[str, Callable] = {
     '3.2-sira': c_32_sira, '3.2-neden': c_32_neden, '3.2-kayit': c_32_kayit, '8.1-bld': c_bld,
     '15.1-izin-kisit': c_izin_kisit, '2.2-ek-unsur': c_ek_unsur, '8.1-oel-kanserojen': c_oel_kanserojen,
@@ -744,6 +928,10 @@ CHECKS: Dict[str, Callable] = {
     '11.1-ifade': c_111_ifade, '14.1-un': c_un, '14.3-sinif': c_sinif14, '14.4-pg': c_pg,
     '15.1-svhc': c_15_svhc, '15.1-deterjan': c_deterjan, '16-tam-metin': c_tam_metin, 'T-14-2': c_t14,
     'T-3-2': c_t32, 'T-hesap': c_hesap,
+    '16-revizyon': c_16_revizyon, '8.1-dnel': c_dnel, '8.2.2-eldiven-malzeme': c_eldiven_malzeme,
+    '8.2.2-eldiven-kalinlik': c_eldiven_kalinlik, '8.2.2-eldiven-sure': c_eldiven_sure,
+    '9-ampirik': c_9_ampirik, '9.1-neden': c_9_neden, '9-fp-sinif': c_9_fp_sinif, '9-h304-visk': c_9_h304,
+    '2.3-toz-tutarlilik': c_toz_tutarlilik, '14-oh375': c_oh375, '16-md10': c_md10,
 }
 
 

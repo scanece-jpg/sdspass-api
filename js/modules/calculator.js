@@ -126,6 +126,7 @@ const CalculatorModule = (() => {
       // Eldiven malzeme/kalınlık seçimi (KKD panelindeki eldiven kartı) — panel ve PDF aynı metni üretir
       glove_material:  (window._gloveSel && window._gloveSel.material)  || null,
       glove_thickness: (window._gloveSel && window._gloveSel.thickness) || null,
+      glove_breakthrough: (window._gloveSel && window._gloveSel.breakthrough) || null,
     };
     return payload;
   }

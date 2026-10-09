@@ -200,6 +200,62 @@ def _gcl_sinirlari(clp, stot, C) -> list:
     return hata
 
 
+
+# Denetim kontrollerinin kendisinin sınaması (2026-10-09): kasıtlı hatalı / doğru GBF metni
+_AUD_P1 = ('GÜVENLİK BİLGİ FORMU Ürün adı: X Revizyon tarihi: 09.10.2026 Sürüm: 2.0\n')
+_AUD_BAD = _AUD_P1 + """BÖLÜM 1: Madde/karışımın ve şirketin tanımlanması
+1.1 Ürün tanımlayıcısı X
+BÖLÜM 2: Zararlılıkların tanımlanması
+2.1 Sınıflandırma Alev. Sıv. 3 H226 Asp. Tok. 1 H304
+2.2 Etiket unsurları H226 H304
+2.3 Diğer zararlar Yok.
+BÖLÜM 3: Bileşim
+3.2 Karışımlar
+BÖLÜM 7: Elleçleme ve depolama
+7.1 Toz-hava karışımı oluşumunu önleyin.
+BÖLÜM 8: Maruz kalma kontrolleri
+8.1 Kontrol parametreleri
+8.2 Maruz kalma kontrolleri Ellerin korunması: koruyucu eldiven kullanın.
+BÖLÜM 9: Fiziksel ve kimyasal özellikler
+9.1 Parlama noktası 12 °C (hesaplanmış) Buhar basıncı Veri yok Akışkanlık 30 mm²/s (40 °C)
+BÖLÜM 14: Taşımacılık bilgisi
+14.1 UN 3082 ÖH 375: kinematik viskozite 2500 mm²/s üzerindeyse muafiyet uygulanır.
+BÖLÜM 16: Diğer bilgiler
+Sınıflandırma bileşenlere göre en kötü durum varsayımıyla yapılmıştır. Değişiklikler belirtilmemiştir.
+"""
+_AUD_GOOD = _AUD_P1.replace('Sürüm: 2.0', 'Sürüm: 2.0 Yerine geçtiği versiyon: 1.0 — 01.02.2025') + """BÖLÜM 1: Madde/karışımın ve şirketin tanımlanması
+1.1 Ürün tanımlayıcısı X
+BÖLÜM 2: Zararlılıkların tanımlanması
+2.1 Sınıflandırma Alev. Sıv. 3 H226 Asp. Tok. 1 H304
+2.3 Diğer zararlar Yok.
+BÖLÜM 3: Bileşim
+3.2 Karışımlar
+BÖLÜM 7: Elleçleme ve depolama
+7.1 Havalandırma sağlayın.
+BÖLÜM 8: Maruz kalma kontrolleri
+8.1 DNEL: işçiler soluma 75 mg/m³.
+8.2 Ellerin korunması: nitril kauçuk, ≥ 0,4 mm, delinme süresi ≥ 30 dk.
+BÖLÜM 9: Fiziksel ve kimyasal özellikler
+9.1 Parlama noktası 45 °C (kapalı kap) Buhar basıncı Belirlenmemiştir (karışım için ölçülmemiştir) Akışkanlık 12 mm²/s (40 °C)
+BÖLÜM 14: Taşımacılık bilgisi
+14.1 UN 1993 ÖH 375: 5 L ve altı ambalaj muafiyeti.
+BÖLÜM 16: Diğer bilgiler
+Sınıflandırma en kötü durum varsayımıyla yapılmıştır; test sonucuna göre revize edilecektir. Önceki versiyona göre değişiklikler: Bölüm 9 güncellendi.
+"""
+
+
+
+
+def _audit_new_checks(t: str) -> dict:
+    from app.services import audit_checks as A
+    from app.services.audit_jev import derive_facts
+    secs = A.split_sections(t)
+    ctx = {'pages': [t], 'text': t, 'secs': secs, 'facts': derive_facts(secs, t) | {'revizyon', 'form:sivi'}}
+    return {i: A.CHECKS[i](ctx)[0] for i in (
+        'G-surum', '16-revizyon', '8.1-dnel', '8.2.2-eldiven-malzeme', '8.2.2-eldiven-kalinlik', '8.2.2-eldiven-sure',
+        '9-ampirik', '9.1-neden', '9-fp-sinif', '9-h304-visk', '2.3-toz-tutarlilik', '14-oh375', '16-md10')}
+
+
 def kural_testleri(c) -> int:
     """SEA Ek-1 / Ek-2 kural testleri (2026-10-08 kural denetimi): her satır, resmî metinle satır satır
     karşılaştırılarak bulunan bir hatanın düzeltilmiş hâlini korur. Döner: hatalı test sayısı."""
@@ -371,6 +427,14 @@ def kural_testleri(c) -> int:
                   and '10043-35-3' not in gs.CAS_CLASS and '7727-54-0' not in gs.CAS_CLASS)(
              __import__('app.services.component_phys', fromlist=['x']),
              __import__('app.services.glove_service', fromlist=['x']))),
+        ('GBF denetimi (data/sds_audit_checklist.json + audit_checks): üretimdeki 2026-10-09 kuralları denetimde de var — '
+         'hatalı GBF metninde 0.2.5 sürüm, 16(a) değişiklik, eldiven malzeme/kalınlık/süre, Bölüm 9 hesaplanmış değer, '
+         'nedensiz "veri yok", parlama noktası ↔ sınıf, H304 ↔ viskozite, ÖH 375 viskozite, Md.10(2) notu "eksik"; '
+         'DNEL yok ve toz 2.3↔7 tutarsızlığı "kdu"; doğru metinde hepsi "uygun"',
+         lambda: (lambda b, g: all(v == 'uygun' for v in g.values())
+                  and all(b[k] == 'eksik' for k in b if k not in ('8.1-dnel', '2.3-toz-tutarlilik'))
+                  and b['8.1-dnel'] == 'kdu' and b['2.3-toz-tutarlilik'] == 'kdu')(
+             _audit_new_checks(_AUD_BAD), _audit_new_checks(_AUD_GOOD))),
         ('ADR ÖH 375 (UN 3082): not ambalaj miktarına (≤ 5 L) dayanır, viskozite şartı yok (ADR 2025 3.3.1)',
          lambda: (lambda n: '5 L' in n and 'viskozite' not in n.lower())(
              tr_classify(h_codes=['H411'], form='liquid', viscosity=5000)['road']['note'])),

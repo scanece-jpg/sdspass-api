@@ -1297,7 +1297,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
 <script src="js/modules/cas-lookup.js?v=20260617"></script>
 <script src="js/modules/component-manager.js?v=20261009a"></script>
 <script src="js/modules/conc-selector.js?v=20260617"></script>
-<script src="js/modules/calculator.js?v=20261009d"></script>
+<script src="js/modules/calculator.js?v=20261009e"></script>
 <script src="js/modules/results-renderer.js?v=20260930"></script>
 <script src="js/modules/pdf-exporter.js?v=20260617"></script>
 <script src="js/app.js?v=20260617"></script>
@@ -4648,8 +4648,11 @@ function _renderGloveCard(g) {
         ${suggested.map(opt).join('')}${all.filter(m => !suggested.includes(m)).map(opt).join('')}
       </select>
       <label for="glove_thk">Kalınlık (mm)</label>
-      <input id="glove_thk" class="v0-inp" type="number" min="0.02" step="0.01" value="${g.kalinlik_mm}"
+      <input id="glove_thk" class="v0-inp" type="number" min="0.02" step="0.01" value="${g.kalinlik_mm ?? ''}"
              style="width:70px;font-size:11px;padding:2px 6px" onchange="_onGloveChange('thk')">
+      <label for="glove_bt" title="Eldiven üreticisinin EN 16523-1 delinme süresi">Delinme (dk)</label>
+      <input id="glove_bt" class="v0-inp" type="number" min="1" step="1" value="${g.delinme_dk ?? ''}"
+             placeholder="üretici" style="width:70px;font-size:11px;padding:2px 6px" onchange="_onGloveChange('bt')">
     </div>`;
   (g.uyarilar || []).forEach(w => { h += `<div class="warn-box" style="margin-top:4px">⚠ ${w}</div>`; });
   // Kayıt yaptıranın el koruması önerisi (ECHA kayıt dosyası, 11 Guidance on safe use) — ham cümle, KDU doğrular
@@ -4670,7 +4673,8 @@ function _onGloveChange(what) {
   let thk = document.getElementById('glove_thk')?.value || '';
   // Malzeme değişince kalınlık o malzemenin tipik değerine geçer (kullanıcı sonra değiştirebilir)
   if (what === 'mat') thk = String((g.varsayilan_kalinlik || {})[mat] ?? thk);
-  window._gloveSel = { material: mat, thickness: thk ? parseFloat(thk) : null };
+  const bt = document.getElementById('glove_bt')?.value || '';
+  window._gloveSel = { material: mat, thickness: thk ? parseFloat(thk) : null, breakthrough: bt ? parseFloat(bt) : null };
   if (typeof doCalculate === 'function') doCalculate();   // panel ve PDF metni aynı kaynaktan yenilenir
 }
 

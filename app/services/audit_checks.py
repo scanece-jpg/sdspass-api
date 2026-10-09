@@ -920,6 +920,36 @@ def c_md10(ctx):
     return 'eksik', ('Ölçülmeden en kötü durum / ihtiyatlı sınıflandırma yapılmış ama Bölüm 16\'da test ve revizyon notu '
                      'yok (SEA Md.10(2): yeterli bilgi yoksa test yapılır).')
 
+
+def c_t_un(ctx):
+    """ADR 3.1.2.8.1 / 2.1.3: Bölüm 3 bileşimi ve 2.1 sınıflandırmasıyla UN numarası yeniden belirlenir (Tablo A adlı
+    girişler — örn. UN 1791 hipoklorit, UN 3149 H2O2 + PAA, UN 1796 nitrasyon asidi — ve B.B.B. seçimi), 14.1 ile karşılaştırılır."""
+    s14 = ctx['secs'].get('14', '')
+    uns = {a or b for a, b in re.findall(r'(?i)\bUN\s*(\d{4})\b|(?:UN|BM)[^\n\d]{0,12}numaras[ıi][^\d]{0,40}(\d{4})\b', s14)}
+    if not uns:
+        return 'uygun', '14\'te UN numarası yok — karşılaştırılacak taşıma girişi yok.'
+    facts = ctx['facts']
+    form = ('liquid' if 'form:sivi' in facts else 'solid' if 'form:kati' in facts else None)
+    if not form:
+        return 'kdu', 'Ürünün fiziksel hali (sıvı/katı) belirlenemedi — UN karşılaştırması yapılmadı.'
+    comps, unknown = _comps3(ctx)
+    if not comps:
+        return 'kdu', 'Bölüm 3 okunamadı — UN karşılaştırması yapılmadı.'
+    try:
+        from app.services.transport_engine import classify, build_transport_components
+        h = sorted(_h(_sub(ctx['secs'].get('2', ''), '2.1', '2.2')))
+        r = classify(h, form=form, components=build_transport_components(comps))
+    except Exception as e:
+        return 'kdu', f'UN yeniden hesaplanamadı: {e}'
+    exp = re.sub(r'\D', '', ((r or {}).get('road') or {}).get('un') or '')
+    if not exp or r.get('not_regulated'):
+        return 'kdu', f'Bölüm 3 ve 2.1\'den taşıma sınıfı çıkmadı; 14.1\'de UN {sorted(uns)} var — KDU kontrol etmeli.'
+    if exp in uns:
+        return 'uygun', f'UN {exp} Bölüm 3 bileşimi ve 2.1 sınıflandırmasıyla uyumlu (ADR Tablo A).'
+    note = f' (verisi okunamayan: {unknown})' if unknown else ''
+    return 'kdu', (f'Bölüm 3 bileşimi ve 2.1 sınıflandırmasıyla UN {exp} bekleniyor; 14.1\'de UN {sorted(uns)} var '
+                   f'(ADR 3.1.2.8.1: Tablo A\'da adlı giriş varsa B.B.B. yerine o kullanılır){note} — KDU kontrol etmeli.')
+
 CHECKS: Dict[str, Callable] = {
     '3.2-sira': c_32_sira, '3.2-neden': c_32_neden, '3.2-kayit': c_32_kayit, '8.1-bld': c_bld,
     '15.1-izin-kisit': c_izin_kisit, '2.2-ek-unsur': c_ek_unsur, '8.1-oel-kanserojen': c_oel_kanserojen,
@@ -931,7 +961,7 @@ CHECKS: Dict[str, Callable] = {
     '3.2-svhc': c_32_svhc, '8.1-oel': c_oel, '9.1-ozellikler': c_91, '11.1-siniflar': c_111_siniflar,
     '11.1-ifade': c_111_ifade, '14.1-un': c_un, '14.3-sinif': c_sinif14, '14.4-pg': c_pg,
     '15.1-svhc': c_15_svhc, '15.1-deterjan': c_deterjan, '16-tam-metin': c_tam_metin, 'T-14-2': c_t14,
-    'T-3-2': c_t32, 'T-hesap': c_hesap,
+    'T-3-2': c_t32, 'T-hesap': c_hesap, 'T-un': c_t_un,
     '16-revizyon': c_16_revizyon, '8.1-dnel': c_dnel, '8.2.2-eldiven-malzeme': c_eldiven_malzeme,
     '8.2.2-eldiven-kalinlik': c_eldiven_kalinlik, '8.2.2-eldiven-sure': c_eldiven_sure,
     '9-ampirik': c_9_ampirik, '9.1-neden': c_9_neden, '9-fp-sinif': c_9_fp_sinif, '9-h304-visk': c_9_h304,

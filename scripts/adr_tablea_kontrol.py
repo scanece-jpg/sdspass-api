@@ -89,6 +89,12 @@ for key, e in A.items():
         for pg, v in (e.get('packing_groups') or {}).items():
             if v.get('kemler') and v['kemler'] != k:
                 deg.append((key, f'PG{pg}.kemler', v['kemler'], k)); v['kemler'] = k
+# Ambalaj grubu listeleri (2026-10-09: 301 girişte eksik/fazla PG düzeltildi) — yalnız raporlanır
+for key, e in A.items():
+    _pdf = {x['pg'] for x in (L.get(key.replace('UN', '')) or []) if x['pg']}
+    _biz = set((e.get('packing_groups') or {}).keys()) or ({e['packing_group']} if e.get('packing_group') else set())
+    if _pdf and _pdf != _biz:
+        deg.append((key, 'PG listesi (elle düzeltin)', sorted(_biz), sorted(_pdf)))
 print(len(deg), 'değişiklik')
 for d in deg:
     print('  ', d)

@@ -668,6 +668,21 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
             }
         # Sınıf 8, yan tehlike yok — önce CAS bazlı spesifik arama yap
         if components:
+            # ADR Tablo A adlı karışım girişleri — aşındırıcı (≥ %1) bileşenler tam olarak bu ikiliyse:
+            # UN 1796 NİTRASYON ASİDİ KARIŞIMI (nitrik + sülfürik asit; > %50 nitrik → PG I, 8 + 5.1, ≤ %50 → PG II)
+            # UN 1786 HİDROFLORİK ASİT VE SÜLFÜRİK ASİT KARIŞIMI (PG I, 8 + 6.1)
+            _c8 = {c.cas: c.conc or 0 for c in components if 'H314' in c.h_codes and (c.conc or 0) >= 1.0}
+            if not is_solid and set(_c8) == {'7697-37-2', '7664-93-9'}:
+                _hi = _c8['7697-37-2'] > 50
+                return {'un': 'UN 1796', 'class': '8', 'pg': 'I' if _hi else 'II',
+                        'labels': ['8', '5.1'] if _hi else ['8'],
+                        'label': ('NİTRASYON ASİDİ KARIŞIMI, %50\'den fazla nitrik asit içeren' if _hi else
+                                  'NİTRASYON ASİDİ KARIŞIMI, %50\'den fazla olmayan nitrik asit içeren'),
+                        'note': 'ADR 2025 Tablo A UN 1796: nitrik asit + sülfürik asit karışımı için adlı giriş (3.1.2.8.1).'}
+            if not is_solid and set(_c8) == {'7664-39-3', '7664-93-9'}:
+                return {'un': 'UN 1786', 'class': '8', 'pg': 'I', 'labels': ['8', '6.1'],
+                        'label': 'HİDROFLORİK ASİT VE SÜLFÜRİK ASİT KARIŞIMI',
+                        'note': 'ADR 2025 Tablo A UN 1786: hidroflorik + sülfürik asit karışımı için adlı giriş (3.1.2.8.1).'}
             _prod_state = 'solid' if is_solid else ('gas' if form == 'gas' else 'liquid')
             # Tetikleyici (H314 taşıyan) bileşenler arasında en yüksek konsantrasyona sahip olanı al
             # ADR 2.2.8.1.6.3.2: %1'in altındaki bileşenler aşındırıcılık hesabına girmez — adlı giriş
@@ -678,13 +693,13 @@ def _get_un_entry(cls: str, pg: Optional[str], sub: Optional[str], is_solid: boo
             if len(trigger8) == 1:
                 dominant8 = max(trigger8, key=lambda c: c.conc)
                 _det = _lookup_by_cas(dominant8.cas, concentration=dominant8.conc,
-                                      physical_state=_prod_state)
+                                      physical_state=_prod_state, corrosive='H314' in h_set)
                 if _det:
                     _seed_state = _det.get('physical_state')
                     if not _seed_state or _seed_state == _prod_state:
                         # Tablo A girişi birden çok PG içeriyorsa (örn. UN1791, UN1824: II/III) PG sabit değil,
                         # ADR 2.2.8.1.6.3 hesabından gelir.
-                        if pg and pg != _det.get('packing_group'):
+                        if pg and pg != _det.get('packing_group') and not _det.get('pg_fixed'):
                             from app.services.transport_adr_service import get_adr_details as _gad
                             _d2 = _gad(_det['un_no'], pg)
                             if _d2.get('packing_group') == pg:
@@ -767,11 +782,19 @@ def classify(h_codes: List[str], form: str = 'liquid',
         triggering = [c for c in _comps if set(c.h_codes) & _TRANSPORT_TRIGGER_H]
         dominant   = max(_comps, key=lambda c: c.conc)
 
-        if len(triggering) == 1 and triggering[0] is dominant:
-            # §3.1.3.2: tek tetikleyici bileşen + o bileşen baskın → adlı giriş zorunlu
+        _prod_state = 'solid' if is_solid else ('gas' if form == 'gas' else 'liquid')
+        _details = None
+        if len(triggering) == 1:
             _t = triggering[0]
-            _prod_state = 'solid' if is_solid else ('gas' if form == 'gas' else 'liquid')
-            _details = _lookup_by_cas(_t.cas, concentration=_t.conc, physical_state=_prod_state)
+            _details = _lookup_by_cas(_t.cas, concentration=_t.conc, physical_state=_prod_state,
+                                      corrosive='H314' in set(h_codes or []))
+            if _details and _t is not dominant:
+                # ADR 2.1.3.3: adlı madde + ADR'ye tabi olmayan maddeler (örn. su) → adlı giriş; karışım o
+                # sınıfın ölçütünü hâlâ karşılamalı. Sınıf 8 çözeltileri aşağıdaki Sınıf 8 yolunda (PG hesabıyla) işlenir.
+                _mix_cls = {H_TO_ADR[h]['class'] for h in (h_codes or []) if h in H_TO_ADR}
+                if str(_details.get('class')) == '8' or str(_details.get('class')) not in _mix_cls:
+                    _details = None
+        if len(triggering) == 1:
             if _details:
                 # §3.1.3.2(c): spesifik girişin fiziksel hali ürünle uyuşmalı.
                 # Uyuşmazlık (ör. katı TCCA girişi ama sıvı ürün) → B.N.O.'ya düş.
@@ -913,7 +936,8 @@ def classify(h_codes: List[str], form: str = 'liquid',
     # ── Adım 4: UN ve etiket ──────────────────────────────────────────────────
     un_entry = _get_un_entry(primary['class'], primary['pg'], sub_class, is_solid, h_set, form,
                              components=_comps, mixture_ph=mixture_ph)
-    if un_entry.get('class') and un_entry['class'] != primary['class'] and un_entry.get('labels'):
+    if un_entry.get('class') and un_entry.get('labels') and (un_entry['class'] != primary['class']
+                                                         or un_entry['un'] in ('UN 1796', 'UN 1786')):
         # Adlı karışım girişi (örn. UN 3149) sınıfı ve yan tehlikeyi Tablo A'dan belirler
         primary = {**primary, 'class': un_entry['class'], 'pg': un_entry.get('pg') or primary['pg']}
         subs = [{'class': x, 'pg': None} for x in un_entry['labels'][1:]]

@@ -331,6 +331,65 @@ def kural_testleri(c) -> int:
         p.update(kw)
         return c.post('/api/v1/sds/calculate', json=p).json()
 
+    W = '7732-18-5'
+
+    def tr_road(bil, **kw):
+        """Uçtan uca taşıma: (UN rakamları, sınıf, PG)"""
+        rd = (full(bil, **kw).get('transport') or {}).get('road') or {}
+        return (rd.get('un') or '').replace(' ', ''), rd.get('class'), rd.get('pg')
+
+    def aq_sweep(n=25):
+        """SEA Ek-1 4.1.3.5 toplama formülleri + Md.29 etiket kuralı — rastgele (sabit tohum) karışımlarda program ile
+        bağımsız hesap karşılaştırılır. Uyuşmayan sayısını döndürür (0 beklenir)."""
+        import random
+        rnd = random.Random(20261009)
+        T = [('1', '1'), ('1', None), (None, '2'), (None, '3'), (None, '4'), ('1', '2')]
+        HC = {'A1': ('Aquatic Acute 1', 'H400'), 'C1': ('Aquatic Chronic 1', 'H410'), 'C2': ('Aquatic Chronic 2', 'H411'),
+              'C3': ('Aquatic Chronic 3', 'H412'), 'C4': ('Aquatic Chronic 4', 'H413')}
+        bad = 0
+        for i in range(n):
+            comps, left = [], 100.0
+            for j in range(rnd.randint(1, 3)):
+                a, ch = rnd.choice(T)
+                conc = min(rnd.choice([1, 2, 3, 5, 8, 12, 20, 26, 30, 45]), left - 1)
+                if conc < 1:
+                    break
+                left -= conc
+                comps.append({'a': a, 'c': ch, 'conc': conc, 'mA': rnd.choice([1, 10, 100]) if a else 1,
+                              'mC': rnd.choice([1, 10, 100]) if ch == '1' else 1})
+            body = [{'cas': f'9{i:04d}-{j}0-0', 'name': 't', 'conc': x['conc'], 'concMax': x['conc'],
+                     'hazards': ([{'h_class': HC['A1'][0], 'h_code': 'H400'}] if x['a'] else [])
+                     + ([{'h_class': HC['C' + x['c']][0], 'h_code': HC['C' + x['c']][1]}] if x['c'] else []),
+                     'sclRaw': [], 'm_factors': {'acute': x['mA'], 'chronic': x['mC']}, 'ate': None}
+                    for j, x in enumerate(comps)]
+            body.append({'cas': '7732-18-5', 'name': 'su', 'conc': left, 'concMax': left, 'hazards': [],
+                         'sclRaw': [], 'm_factors': {}, 'ate': None})
+            r = c.post('/api/v1/sds/calculate', json={'components': body, 'form': 'liquid', 'usage': 'industrial',
+                                                      'lang': 'TR', 'test_data': {'metal_corrosive': 'not_corrosive'}}).json()
+            a1 = sum(x['conc'] * x['mA'] for x in comps if x['a'])
+            c1 = sum(x['conc'] * x['mC'] for x in comps if x['c'] == '1')
+            c2, c3, c4 = (sum(x['conc'] for x in comps if x['c'] == k) for k in '234')
+            ch = ('H410' if c1 >= 25 else 'H411' if 10 * c1 + c2 >= 25 else 'H412' if 100 * c1 + 10 * c2 + c3 >= 25
+                  else 'H413' if sum(x['conc'] for x in comps if x['c'] == '1') + c2 + c3 + c4 >= 25 else None)
+            cls = {h for h in ('H400' if a1 >= 25 else None, ch) if h}
+            lab = cls - ({'H400'} if ch == 'H410' else set())
+            AQ = {'H400', 'H410', 'H411', 'H412', 'H413'}
+            if ({str(h)[:4] for h in r.get('all_h_codes') or []} & AQ) != cls or \
+               ({str(h)[:4] for h in r.get('h_codes') or []} & AQ) != lab:
+                bad += 1
+        return bad
+
+    def seed_ok():
+        """Her ADR adlı giriş satırı Tablo A'da var ve PG'si Tablo A'nın PG'lerinden"""
+        from app.services.transport_adr_service import _SEED_ENTRIES, get_adr_details
+        for e in _SEED_ENTRIES.values():
+            for r in (e if isinstance(e, list) else [e]):
+                for un in filter(None, [r.get('un'), r.get('un_corr')]):
+                    d = get_adr_details(un, r.get('pg') or 'II')
+                    if not d.get('found') or (r.get('pg') not in ('', None) and d['packing_group'] != r['pg']):
+                        return False
+        return True
+
     sens_scl = C('f', 0.5, ('Skin Sens. 1', 'H317'), sclRaw=[{'h_code': 'H317', 'c_min': 0.1}])
     aq4 = calculate_aquatic([C('c', 30, ('Aquatic Chronic 4', 'H413'))])
     testler = [
@@ -798,6 +857,29 @@ def kural_testleri(c) -> int:
              'BÖLÜM 8: Maruz kalma kontrolleri\n8.2 Ellerin korunması: eldiven nitril kauçuk 0,4 mm, ' + x +
              '\nBÖLÜM 9: Fiziksel\n'))[0] == 'uygun'
              for x in ('Nüfuz etme süresi: ≥ 480 dak', 'Dayanıklılık süresi: 1 -4 saat'))),
+        ('Sucul tarama (2026-10-09): 25 rastgele karışımda sınıflandırma SEA Ek-1 Tablo 4.1.1/4.1.2 toplama '
+         'formülleriyle, etiket Md.29 ile (H400 yalnız H410 varken çıkar) birebir', lambda: aq_sweep(25) == 0),
+        ('ADR adlı giriş satırları (seed) Tablo A\'da var ve PG\'leri Tablo A ile aynı', seed_ok),
+        ('ADR Tablo A asetik asit çözeltisi: %30 → UN2790 PG III, %60 → UN2790 PG II, %90 → UN2789 PG II '
+         '(ölçülmüş parlama noktası yokken en kötü durum H226 verilmesin diye FP 100 °C)',
+         lambda: tr_road([('64-19-7', 30), (W, 70)], user_fp=100) == ('UN2790', '8', 'III')
+         and tr_road([('64-19-7', 60), (W, 40)], user_fp=100) == ('UN2790', '8', 'II')
+         and tr_road([('64-19-7', 90), (W, 10)], user_fp=100)[:3] == ('UN2789', '8', 'II')),
+        ('ADR Tablo A adlı karışım: nitrik %30 + sülfürik %20 → UN1796 PG II (nitrasyon asidi karışımı)',
+         lambda: tr_road([('7697-37-2', 30), ('7664-93-9', 20), (W, 50)],
+                         test_data={'metal_corrosive': 'not_corrosive'}) == ('UN1796', '8', 'II')),
+        ('ADR 2.1.3.3: sodyum siyanür %30 sulu çözelti (su baskın) → adlı giriş UN3414 Sınıf 6.1',
+         lambda: tr_road([('143-33-9', 30), (W, 70)])[:2] == ('UN3414', '6.1')),
+        ('ADR Tablo A ferrik klorür %40 çözelti → UN2582 PG III',
+         lambda: tr_road([('7705-08-0', 40), (W, 60)], test_data={'metal_corrosive': 'not_corrosive'})
+         == ('UN2582', '8', 'III')),
+        ('Denetim T-un: Bölüm 3 bileşimiyle UN yeniden bulunur — H2O2 + PAA GBF\'sinde 14.1 UN 3093 → KDU uyarısı (UN 3149)',
+         lambda: (lambda t: A.CHECKS['T-un']({'pages': [t], 'text': t, 'secs': A.split_sections(t),
+                                               'facts': {'form:sivi'}})[0] == 'kdu')(
+             'BÖLÜM 1: Tanım\nBÖLÜM 2: Zararlılıklar\n2.1 Sınıflandırma Ox. Liq. 2 H272 Skin Corr. 1A H314\n'
+             '2.2 Etiket\n2.3 Diğer\nBÖLÜM 3: Bileşim\n3.2 Karışımlar\nHidrojen peroksit 7722-84-1 ≥ 25 - < 30 %\n'
+             'Asetik asit 64-19-7 ≥ 5 - < 10 %\nPerasetik asit 79-21-0 ≥ 1 - < 5 %\nBÖLÜM 4: İlk yardım\n'
+             'BÖLÜM 14: Taşımacılık\n14.1 UN 3093\nBÖLÜM 15: Mevzuat\n')),
     ]
     hata = 0
     for ad, f in testler:

@@ -64,8 +64,8 @@ _SEED_ENTRIES: dict = {
         {'min_conc': 0,   'max_conc': 51,  'un': 'UN2796', 'pg': 'II'},   # Tablo A: yalnız PG II
     ],
     '7697-37-2': [  # Nitrik asit — ADR Tablo A
-        {'min_conc': 65,  'max_conc': 100, 'un': 'UN2031', 'pg': 'I'},
-        {'min_conc': 0,   'max_conc': 65,  'un': 'UN2031', 'pg': 'II'},
+        {'min_conc': 65,  'max_conc': 100, 'un': 'UN2031', 'pg': 'I', 'pg_fixed': True},
+        {'min_conc': 0,   'max_conc': 65,  'un': 'UN2031', 'pg': 'II', 'pg_fixed': True},
     ],
     '7647-01-0': [  # Hidrojen klorür: gaz (susuz) / hidroklorik asit çözeltisi — ADR Tablo A
         {'min_conc': 0,   'max_conc': 100, 'un': 'UN1050', 'pg': '', 'physical_state': 'gas'},
@@ -78,7 +78,7 @@ _SEED_ENTRIES: dict = {
     ],
     '7664-38-2': {'un': 'UN1805', 'pg': 'III'},  # Fosforik asit
     '10035-10-6':{'un': 'UN1788', 'pg': 'II'},   # Hidrobromik asit
-    '7789-21-1': {'un': 'UN1777', 'pg': 'II'},   # Florosülfürik asit
+    '7789-21-1': {'un': 'UN1777', 'pg': 'I'},    # Florosülfürik asit (Tablo A: yalnız PG I)
 
     # ── Bazlar ────────────────────────────────────────────────────────────────
     '1310-73-2': [  # Sodyum hidroksit — ADR Tablo A: katı UN1823, çözelti UN1824
@@ -89,6 +89,51 @@ _SEED_ENTRIES: dict = {
         {'min_conc': 0,   'max_conc': 100, 'un': 'UN1814', 'pg': 'II', 'physical_state': 'liquid'},
         {'min_conc': 0,   'max_conc': 100, 'un': 'UN1813', 'pg': 'II', 'physical_state': 'solid'},
     ],
+    # ── Adlı çözelti girişleri (ADR 2025 Tablo A; ADR 2.1.3.3) — 2026-10-09 eklendi ───────────────
+    # PG: Tablo A derişimle sabitlediyse pg_fixed; birden çok PG varsa ADR 2.2.x hesabından gelir.
+    '64-19-7': [  # Asetik asit — UN2789 (>%80, 8+3), UN2790 (%50–80 PG II; >%10–<%50 PG III)
+        {'min_conc': 80, 'max_conc': 100, 'un': 'UN2789', 'pg': 'II',  'physical_state': 'liquid', 'min_exclusive': True, 'pg_fixed': True},
+        {'min_conc': 50, 'max_conc': 80,  'un': 'UN2790', 'pg': 'II',  'physical_state': 'liquid', 'pg_fixed': True},
+        {'min_conc': 10, 'max_conc': 50,  'un': 'UN2790', 'pg': 'III', 'physical_state': 'liquid', 'min_exclusive': True, 'pg_fixed': True},
+    ],
+    '141-43-5':  {'un': 'UN2491', 'pg': 'III', 'physical_state': 'liquid'},   # Etanolamin / çözeltisi
+    '7646-85-7': [{'min_conc': 0, 'max_conc': 100, 'un': 'UN1840', 'pg': 'III', 'physical_state': 'liquid'},   # Çinko klorür çözeltisi
+                  {'min_conc': 0, 'max_conc': 100, 'un': 'UN2331', 'pg': 'III', 'physical_state': 'solid'}],   # susuz
+    '7705-08-0': [{'min_conc': 0, 'max_conc': 100, 'un': 'UN2582', 'pg': 'III', 'physical_state': 'liquid'},   # Ferrik klorür çözeltisi
+                  {'min_conc': 0, 'max_conc': 100, 'un': 'UN1773', 'pg': 'III', 'physical_state': 'solid'}],
+    '7446-70-0': [{'min_conc': 0, 'max_conc': 100, 'un': 'UN2581', 'pg': 'III', 'physical_state': 'liquid'},   # Alüminyum klorür çözeltisi
+                  {'min_conc': 0, 'max_conc': 100, 'un': 'UN1726', 'pg': 'II',  'physical_state': 'solid'}],
+    '7758-19-2': [{'min_conc': 0, 'max_conc': 100, 'un': 'UN1908', 'pg': 'II',  'physical_state': 'liquid'},   # Klorit çözeltisi
+                  {'min_conc': 0, 'max_conc': 100, 'un': 'UN1496', 'pg': 'II',  'physical_state': 'solid'}],
+    '7775-09-9': [{'min_conc': 0, 'max_conc': 100, 'un': 'UN2428', 'pg': 'II',  'physical_state': 'liquid'},   # Sodyum klorat
+                  {'min_conc': 0, 'max_conc': 100, 'un': 'UN1495', 'pg': 'II',  'physical_state': 'solid'}],
+    '1302-42-7': {'un': 'UN1819', 'pg': 'II', 'physical_state': 'liquid'},    # Sodyum alüminat çözeltisi
+    '1310-65-2': [{'min_conc': 0, 'max_conc': 100, 'un': 'UN2679', 'pg': 'II',  'physical_state': 'liquid'},   # Lityum hidroksit
+                  {'min_conc': 0, 'max_conc': 100, 'un': 'UN2680', 'pg': 'II',  'physical_state': 'solid'}],
+    '124-09-4':  [{'min_conc': 0, 'max_conc': 100, 'un': 'UN1783', 'pg': 'II',  'physical_state': 'liquid'},   # Heksametilendiamin
+                  {'min_conc': 0, 'max_conc': 100, 'un': 'UN2280', 'pg': 'III', 'physical_state': 'solid'}],
+    '7681-38-1': {'un': 'UN2837', 'pg': 'II', 'physical_state': 'liquid'},    # Bisülfatlar, sulu çözelti
+    '76-03-9':   [{'min_conc': 0, 'max_conc': 100, 'un': 'UN2564', 'pg': 'II',  'physical_state': 'liquid'},   # Trikloroasetik asit
+                  {'min_conc': 0, 'max_conc': 100, 'un': 'UN1839', 'pg': 'II',  'physical_state': 'solid'}],
+    '79-11-8':   [{'min_conc': 0, 'max_conc': 100, 'un': 'UN1750', 'pg': 'II',  'physical_state': 'liquid'},   # Kloroasetik asit
+                  {'min_conc': 0, 'max_conc': 100, 'un': 'UN1751', 'pg': 'II',  'physical_state': 'solid'}],
+    '108-95-2':  [{'min_conc': 0, 'max_conc': 100, 'un': 'UN2821', 'pg': 'II',  'physical_state': 'liquid'},   # Fenol çözeltisi
+                  {'min_conc': 0, 'max_conc': 100, 'un': 'UN1671', 'pg': 'II',  'physical_state': 'solid'}],
+    '143-33-9':  [{'min_conc': 0, 'max_conc': 100, 'un': 'UN3414', 'pg': 'I',   'physical_state': 'liquid'},   # Sodyum siyanür
+                  {'min_conc': 0, 'max_conc': 100, 'un': 'UN1689', 'pg': 'I',   'physical_state': 'solid'}],
+    '151-50-8':  [{'min_conc': 0, 'max_conc': 100, 'un': 'UN3413', 'pg': 'I',   'physical_state': 'liquid'},   # Potasyum siyanür
+                  {'min_conc': 0, 'max_conc': 100, 'un': 'UN1680', 'pg': 'I',   'physical_state': 'solid'}],
+    '7681-49-4': [{'min_conc': 0, 'max_conc': 100, 'un': 'UN3415', 'pg': 'III', 'physical_state': 'liquid'},   # Sodyum florür
+                  {'min_conc': 0, 'max_conc': 100, 'un': 'UN1690', 'pg': 'III', 'physical_state': 'solid'}],
+    '7789-23-3': [{'min_conc': 0, 'max_conc': 100, 'un': 'UN3422', 'pg': 'III', 'physical_state': 'liquid'},   # Potasyum florür
+                  {'min_conc': 0, 'max_conc': 100, 'un': 'UN1812', 'pg': 'III', 'physical_state': 'solid'}],
+    '79-06-1':   [{'min_conc': 0, 'max_conc': 100, 'un': 'UN3426', 'pg': 'III', 'physical_state': 'liquid'},   # Akrilamid
+                  {'min_conc': 0, 'max_conc': 100, 'un': 'UN2074', 'pg': 'III', 'physical_state': 'solid'}],
+    '1341-49-7': [{'min_conc': 0, 'max_conc': 100, 'un': 'UN2817', 'pg': 'II',  'physical_state': 'liquid'},   # Amonyum bifl.
+                  {'min_conc': 0, 'max_conc': 100, 'un': 'UN1727', 'pg': 'II',  'physical_state': 'solid'}],
+    '7789-29-9': [{'min_conc': 0, 'max_conc': 100, 'un': 'UN3421', 'pg': 'II',  'physical_state': 'liquid'},   # Potasyum bifl.
+                  {'min_conc': 0, 'max_conc': 100, 'un': 'UN1811', 'pg': 'II',  'physical_state': 'solid'}],
+    '1333-82-0': {'un': 'UN1755', 'pg': 'II', 'physical_state': 'liquid'},    # Kromik asit çözeltisi
     # Kalsiyum oksit: Tablo A UN1910 "ADR'ye tabi değildir" — önceden Sınıf 8 PG III veriliyordu.
     '1305-78-8': {'un': None, 'pg': None, 'sp_note': "UN1910 — ADR'ye tabi değildir (Tablo A)"},
     '7664-41-7': [  # Amonyak — gaz veya çözelti
@@ -102,16 +147,18 @@ _SEED_ENTRIES: dict = {
 
     # ── Oksitleyiciler ────────────────────────────────────────────────────────
     '7722-84-1': [  # Hidrojen peroksit — ADR Tablo A
-        {'min_conc': 60,  'max_conc': 100, 'un': 'UN2015', 'pg': 'I'},
-        {'min_conc': 20,  'max_conc': 60,  'un': 'UN2014', 'pg': 'II'},
-        {'min_conc': 8,   'max_conc': 20,  'un': 'UN2984', 'pg': 'III'},   # Tablo A: %8–20 ayrı giriş
+        {'min_conc': 60,  'max_conc': 100, 'un': 'UN2015', 'pg': 'I', 'pg_fixed': True},
+        {'min_conc': 20,  'max_conc': 60,  'un': 'UN2014', 'pg': 'II', 'pg_fixed': True},
+        {'min_conc': 8,   'max_conc': 20,  'un': 'UN2984', 'pg': 'III', 'pg_fixed': True},   # Tablo A: %8–20 ayrı giriş
         # <8% taşıma yönetmeliği kapsamı dışı
     ],
     '7681-52-9': {'un': 'UN1791', 'pg': 'II', 'physical_state': 'liquid'},  # Sodyum hipoklorit çözelti
     '7778-54-3': [  # Kalsiyum hipoklorit — Tablo A: >%39 hazır klor UN1748 PG II; %10–39 karışım UN2208 PG III
         # (saf Ca(OCl)2'nin hazır kloru ≈ %99 → hazır klor ≈ madde yüzdesi)
-        {'min_conc': 39,  'max_conc': 100, 'un': 'UN1748', 'pg': 'II',  'physical_state': 'solid', 'min_exclusive': True},
-        {'min_conc': 10,  'max_conc': 39,  'un': 'UN2208', 'pg': 'III', 'physical_state': 'solid', 'min_exclusive': True},
+        {'min_conc': 39,  'max_conc': 100, 'un': 'UN1748', 'pg': 'II',  'physical_state': 'solid', 'min_exclusive': True,
+         'un_corr': 'UN3485', 'pg_fixed': True},
+        {'min_conc': 10,  'max_conc': 39,  'un': 'UN2208', 'pg': 'III', 'physical_state': 'solid', 'min_exclusive': True,
+         'un_corr': 'UN3486', 'pg_fixed': True},
     ],
     '87-90-1':   {'un': 'UN2468', 'pg': 'II', 'physical_state': 'solid'},  # TCCA (ADR: "TRİKLOROİZOSİYANÜRİK ASİT, KURU")
     '2893-78-9': {'un': 'UN2465', 'pg': 'II', 'physical_state': 'solid'},  # Sodyum dikloroizosiyanürat, kuru (önceden yanlışlıkla UN2468)
@@ -232,7 +279,7 @@ def _get_cas_map() -> dict:
 
 
 def lookup_by_cas(cas: str, concentration: Optional[float] = None,
-                  physical_state: Optional[str] = None) -> 'dict | None':
+                  physical_state: Optional[str] = None, corrosive: bool = False) -> 'dict | None':
     """
     CAS + konsantrasyon (+ fiziksel hal) → ADR Tablo A girişi.
 
@@ -267,14 +314,16 @@ def lookup_by_cas(cas: str, concentration: Optional[float] = None,
                 return None   # bu konsantrasyon için adlı giriş yok (örn. amonyak ≤ %10) → B.N.O.
         if matched is None:
             matched = cands[0]  # konsantrasyon bilinmiyor → en tehlikelisi
-        un_no = matched.get('un')
+        un_no = (matched.get('un_corr') if corrosive and matched.get('un_corr') else matched.get('un'))
         pg    = matched['pg'] if 'pg' in matched else 'II'   # gazlarda ambalaj grubu yok ('')
+        pg_fixed = bool(matched.get('pg_fixed'))
         seed_physical_state: 'str | None' = matched.get('physical_state')
         seed_note = matched.get('note')
     else:
         seed_note = entry.get('note')
         un_no = entry.get('un')
         pg    = entry['pg'] if 'pg' in entry and entry['pg'] is not None else 'II'
+        pg_fixed = bool(entry.get('pg_fixed'))
         seed_physical_state = entry.get('physical_state')
 
     if not un_no:
@@ -288,6 +337,7 @@ def lookup_by_cas(cas: str, concentration: Optional[float] = None,
         details['physical_state'] = seed_physical_state
     if seed_note:
         details['seed_note'] = seed_note
+    details['pg_fixed'] = pg_fixed
     return details
 
 

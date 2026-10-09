@@ -34,6 +34,7 @@ _H = {'Accept': 'application/json', 'User-Agent': 'Mozilla/5.0 (SDSPass)'}
 _TTL_DAYS = 30          # kullanımda yenileme (ECHA verisi)
 _ERR_RETRY_DAYS = 1     # ağ hatasından sonra yeniden deneme
 _DELAY = 1.0            # ECHA istekleri arası bekleme (sn)
+_REC_V = 2              # 2026-10-09: kayıt dosyası DNEL / PNEC (Bölüm 8.1) eklendi — eski kayıtlar yenilenir
 # Çevrim dışı (kontrol seti): ağa çıkılmaz, önbellek eskimiş olsa da kullanılır
 OFFLINE = os.environ.get('SDSPASS_PHYS_OFFLINE', '').strip() not in ('', '0')
 
@@ -208,6 +209,8 @@ def _fresh(rec: Optional[Dict]) -> bool:
         return False
     if OFFLINE:
         return True
+    if rec.get('status') == 'ok' and rec.get('_v') != _REC_V:
+        return False
     return _age_days(rec) < (_ERR_RETRY_DAYS if rec.get('status') == 'error' else _TTL_DAYS)
 
 
@@ -227,6 +230,49 @@ def _key_value_text(page: str, field: str) -> Optional[str]:
     return seg[:250] or None
 
 
+def _plain(page: str) -> str:
+    t = re.sub(r'\s+', ' ', html.unescape(re.sub(r'<[^>]+>', ' ', page)))
+    return t
+
+
+_POP = {'Workers': 'İşçiler', 'General Population': 'Genel nüfus'}
+_ROUTE = {'inhalation': 'soluma', 'dermal': 'deri', 'oral': 'ağız', 'eyes': 'göz'}
+
+
+def parse_dnel(page: str) -> List[Dict]:
+    """IUCLID 7 "Toxicological information" özeti — sayısal DNEL'ler (KKDİK Ek-2 8.1.4)."""
+    t = _plain(page)
+    out = []
+    heads = list(re.finditer(r'(Workers|General Population) - Hazard (?:via (inhalation|dermal|oral) route|for the (eyes))', t))
+    for k, h in enumerate(heads):
+        blk = t[h.end(): heads[k + 1].start() if k + 1 < len(heads) else len(t)]
+        for m in re.finditer(r'(Long term exposure|Acute/short term exposure) Hazard assessment conclusion '
+                             r'DNEL \(Derived No Effect Level\) Value ([\d.,]+) (.+?) '
+                             r'(?=Most sensitive endpoint|DNEL related information|Route of original study)', blk):
+            eff = blk.rfind('Local effects', 0, m.start()) > blk.rfind('Systemic effects', 0, m.start())
+            out.append({'nufus': _POP[h.group(1)], 'yol': _ROUTE[h.group(2) or h.group(3)],
+                        'etki': 'yerel' if eff else 'sistemik',
+                        'sure': 'uzun süreli' if m.group(1).startswith('Long') else 'kısa süreli',
+                        'deger': _f(m.group(2)), 'birim': m.group(3).strip()})
+    return out
+
+
+_PNEC = {'aqua (freshwater)': 'tatlı su', 'aqua (marine water)': 'deniz suyu', 'STP': 'atık su arıtma tesisi',
+         'sediment (freshwater)': 'tatlı su sedimenti', 'sediment (marine water)': 'deniz sedimenti',
+         'soil': 'toprak', 'oral': 'ikincil zehirlenme (besin)'}
+
+
+def parse_pnec(page: str) -> List[Dict]:
+    """IUCLID 6 "Ecotoxicological information" özeti — sayısal PNEC'ler (KKDİK Ek-2 8.1.4)."""
+    t = _plain(page)
+    out = []
+    for m in re.finditer(r'PNEC (aqua \(freshwater\)|aqua \(marine water\)|STP|sediment \(freshwater\)|'
+                         r'sediment \(marine water\)|soil|oral) PNEC value ([\d.,]+) '
+                         r'((?:mg|µg|g|ng)/(?:L|kg(?: sediment dw| soil dw| food)?))', t):
+        out.append({'ortam': _PNEC[m.group(1)], 'deger': _f(m.group(2)), 'birim': m.group(3)})
+    return out
+
+
 def _summary_doc(idx: str, num: str) -> Optional[str]:
     m0 = re.search(r'das-nav-header">\s*' + re.escape(num) + r' ', idx)
     if not m0:
@@ -235,7 +281,7 @@ def _summary_doc(idx: str, num: str) -> Optional[str]:
     blk = idx[m0.start(): j if j > 0 else m0.start() + 50000]
     for chunk in blk.split('<a class="das-leaf')[1:]:
         m = re.search(r'href="([^"]+)"', chunk)
-        if m and ('Endpoint summary' in chunk or '| Summary' in chunk):
+        if m and ('Endpoint summary' in chunk or re.search(r'S-\d+ \|[^"<]*Summary', chunk)):
             return m.group(1)
     return None
 
@@ -295,7 +341,16 @@ async def _fetch_echa(cas: str) -> Dict:
             val = _PARSERS[field](raw)
             if val:
                 rec['values'][field] = {**val, 'text': raw[:160]}
+        # DNEL (7 Toxicological information) ve PNEC (6 Ecotoxicological information) özetleri — Bölüm 8.1
+        for num, key, parser in (('7', 'dnel', parse_dnel), ('6', 'pnec', parse_pnec)):
+            doc = _summary_doc(idx, num)
+            if doc:
+                try:
+                    rec[key] = parser((await get(f'{base}/documents/{doc}.html')).text)
+                except Exception as e:
+                    print(f'[component_phys] {cas} {key}: {e}')
         rec['status'] = 'ok'
+        rec['_v'] = _REC_V
     return rec
 
 
@@ -399,6 +454,16 @@ def get(cas: str) -> Dict[str, Dict]:
                    'source': 'PubChem', 'ref': 'PubChem' + (f" — {srcs[k]}" if srcs.get(k) else '')}
             out[f] = ent
     return out
+
+
+def dnel_pnec(cas: str) -> Dict:
+    """{'dnel': [...], 'pnec': [...], 'ref': 'ECHA kayıt dosyası (no)'} — yalnız önbellek."""
+    rec = _read((cas or '').strip()) or {}
+    if rec.get('status') != 'ok':
+        return {}
+    dos = rec.get('dossier') or {}
+    return {'dnel': rec.get('dnel') or [], 'pnec': rec.get('pnec') or [],
+            'ref': 'ECHA kayıt dosyası' + (f" ({dos['registration_number']})" if dos.get('registration_number') else '')}
 
 
 def value(c: Dict, field: str) -> Optional[float]:

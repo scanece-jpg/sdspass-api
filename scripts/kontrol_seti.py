@@ -330,6 +330,28 @@ def kural_testleri(c) -> int:
                                                                                  'tarih': '01.02.2026'}}})))(
                   (lambda d: (d.new_page(), d.tobytes())[1])(fitz.open())))(
              __import__('app.services.gbf_revision', fromlist=['x']), __import__('fitz'))),
+        ('KKDİK Ek-2 8.1.4 DNEL / PNEC: ECHA kayıt dosyası özetlerinden çözümleme (işçi / genel nüfus, yol, etki, '
+         'süre; PNEC ortamları, µg/L); GBF 8.1\'de bileşen tablosu ve kaynak (kayıt numarası); 8.1.2 izleme TS EN 689 '
+         '+ TS EN 482; 2.1 gerekçesinde bileşen adı Türkçe',
+         lambda: (lambda cp: cp.parse_dnel(
+                     '<p>Workers - Hazard via inhalation route Systemic effects Long term exposure Hazard assessment '
+                     'conclusion DNEL (Derived No Effect Level) Value 1,210 mg/m³ Most sensitive endpoint x Local '
+                     'effects Long term exposure Hazard assessment conclusion low hazard (no threshold derived) '
+                     'General Population - Hazard via oral route Systemic effects Long term exposure Hazard assessment '
+                     'conclusion DNEL (Derived No Effect Level) Value 2.69 mg/kg bw/day Most sensitive endpoint</p>') == [
+                     {'nufus': 'İşçiler', 'yol': 'soluma', 'etki': 'sistemik', 'sure': 'uzun süreli', 'deger': 1210.0,
+                      'birim': 'mg/m³'},
+                     {'nufus': 'Genel nüfus', 'yol': 'ağız', 'etki': 'sistemik', 'sure': 'uzun süreli', 'deger': 2.69,
+                      'birim': 'mg/kg bw/day'}]
+                  and cp.parse_pnec('Freshwater Hazard assessment conclusion PNEC aqua (freshwater) PNEC value 74 µg/L '
+                                    'Assessment factor 10 Soil Hazard assessment conclusion PNEC soil PNEC value 0.313 '
+                                    'mg/kg soil dw Extrapolation') == [
+                      {'ortam': 'tatlı su', 'deger': 74.0, 'birim': 'µg/L'},
+                      {'ortam': 'toprak', 'deger': 0.313, 'birim': 'mg/kg soil dw'}])(
+             __import__('app.services.component_phys', fromlist=['x']))
+         and (lambda t: 'DNEL/PNEC (KKDİK Ek-2 8.1.4)' in t and 'toluen İşçiler soluma, sistemik, uzun süreli 75,37 mg/m³' in t
+              and 'toluen tatlı su 74 µg/L' in t and 'ECHA kayıt dosyası (01-2119471310-51-0000)' in t
+              and 'TS EN 482' in t and 'Alev. Sıv. 2 H225 toluen' in t)(_pdf_text(c, [('108-88-3', 100)]))),
         ('ADR ÖH 375 (UN 3082): not ambalaj miktarına (≤ 5 L) dayanır, viskozite şartı yok (ADR 2025 3.3.1)',
          lambda: (lambda n: '5 L' in n and 'viskozite' not in n.lower())(
              tr_classify(h_codes=['H411'], form='liquid', viscosity=5000)['road']['note'])),

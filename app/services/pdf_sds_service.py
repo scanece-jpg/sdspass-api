@@ -2116,7 +2116,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             story.append(Paragraph(
                 'İzleme: işyeri havasındaki konsantrasyon ölçümleri TS EN 689 (İşyeri maruziyeti — kimyasal '
                 'maddelerin solunum yoluyla maruziyetinin ölçülmesi — sınır değerlere uygunluğun test edilmesi '
-                'için strateji) esas alınarak yapılmalıdır.' if lang == 'TR' else
+                'için strateji) esas alınarak, TS EN 482 (kimyasal maddelerin konsantrasyonunun belirlenmesi '
+                'için prosedürler — temel performans gerekleri) koşullarını sağlayan yöntemlerle yapılmalıdır.'
+                if lang == 'TR' else
                 'Monitoring: workplace air measurements should follow EN 689 (Workplace exposure — measurement of '
                 'exposure by inhalation to chemical agents — strategy for testing compliance with occupational '
                 'exposure limit values).', styles['small']))
@@ -2125,8 +2127,41 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             'Ürünün bileşenleri için Türkiye mevzuatında (28733 sayılı Yönetmelik Ek-1; 28730 sayılı Yönetmelik '
             'Ek-2) mesleki maruziyet sınır değeri bulunmamaktadır.' if lang == 'TR' and components else
             S(lang, 'oel_reference'), styles['body']))
-    # KKDİK Ek-2 A 8.1.4: DNEL/PNEC — karışım için değer verilmiyorsa bu belirtilir
-    if lang in ('TR', 'EN') and len(sds_data.get('components') or []) > 1:
+    # KKDİK Ek-2 A 8.1.4: DNEL/PNEC — mevcut olduğunda madde için verilir. Bileşen (madde) değerleri ECHA kayıt
+    # dosyasının "Toxicological / Ecotoxicological information" özetlerinden (kayıt yaptıranın değerlendirmesi,
+    # component_phys.dnel_pnec); karışımın kendisi için DNEL/PNEC belirlenmez. SEA Md.26 gizli adlı bileşen yazılmaz.
+    from app.services.component_phys import dnel_pnec as _dp, _fmt_num as _fnum
+    _UNIT_TR = {'mg/kg bw/day': 'mg/kg vücut ağırlığı/gün', 'mg/kg sediment dw': 'mg/kg sediment (kuru)',
+                'mg/kg soil dw': 'mg/kg toprak (kuru)', 'mg/kg food': 'mg/kg besin'}
+    _dn_rows, _pn_rows, _dp_refs = [], [], []
+    for _c in [c for c in components if _sec3_needed(c)]:
+        _cas = str(_c.get('cas_no') or _c.get('cas') or '').strip()
+        if not _cas or _cas in _hidden_cas:
+            continue
+        _d = _dp(_cas)
+        if not (_d.get('dnel') or _d.get('pnec')):
+            continue
+        _nm = (_c.get('name_tr') or _c.get('name') or _cas).split(';')[0].strip()
+        for _r in _d.get('dnel') or []:
+            _dn_rows.append([_nm, _r['nufus'], f"{_r['yol']}, {_r['etki']}, {_r['sure']}",
+                             f"{_fnum(_r['deger'])} {_UNIT_TR.get(_r['birim'], _r['birim'])}"])
+        for _r in _d.get('pnec') or []:
+            _pn_rows.append([_nm, _r['ortam'], f"{_fnum(_r['deger'])} {_UNIT_TR.get(_r['birim'], _r['birim'])}"])
+        _dp_refs.append(f"{_nm}: {_d['ref']}")
+    _is_mix = len(sds_data.get('components') or []) > 1
+    if lang == 'TR' and (_dn_rows or _pn_rows):
+        story.append(Paragraph(
+            ('DNEL/PNEC: karışımın kendisi için belirlenmemiştir; bileşenlere ait değerler aşağıdadır (KKDİK Ek-2 8.1.4).'
+             if _is_mix else 'DNEL/PNEC (KKDİK Ek-2 8.1.4):'), styles['small']))
+        if _dn_rows:
+            story.append(data_table([['Madde', 'Nüfus', 'Maruz kalma yolu / etki / süre', 'DNEL']] + _dn_rows,
+                                    [40*mm, 25*mm, 70*mm, 45*mm], styles))
+        if _pn_rows:
+            story.append(Spacer(1, 3))
+            story.append(data_table([['Madde', 'Ortam', 'PNEC']] + _pn_rows, [55*mm, 70*mm, 55*mm], styles))
+        story.append(Paragraph('Kaynak: ' + '; '.join(_dp_refs) + ' — kayıt yaptıranın değerlendirmesi.',
+                               styles['small']))
+    elif lang in ('TR', 'EN') and _is_mix:
         story.append(Paragraph(
             'DNEL/PNEC: karışım için belirlenmemiştir; bileşenlere ait değerler için hammadde tedarikçisinin '
             'GBF\'sine bakınız.' if lang == 'TR' else

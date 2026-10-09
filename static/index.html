@@ -885,7 +885,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
           <select id="fp_status" style="display:none;margin-top:4px;font-size:11px" onchange="_onFpStatusChange()">
             <option value="">— Ölçüm girilmedi: bir seçenek belirleyin —</option>
             <option value="not_flammable">Test edildi — parlama noktası &gt; 60 °C (yanıcı değil)</option>
-            <option value="no_measurement">Ölçüm yok — en kötü durum uygulansın</option>
+            <option value="no_measurement">Ölçüm yok — şimdilik en kötü durum uygulansın (test gerekli: SEA Md.10(2))</option>
             <option value="l2_negative">Parlama noktası 35–60 °C — UN L.2 sürekli yanma testi olumsuz (SEA Ek-1 2.6.4.5)</option>
           </select>
           <div id="fp_decision_note" style="display:none;font-size:9.5px;color:var(--text3);margin-top:3px"></div>
@@ -3917,7 +3917,12 @@ function _updateFpDecisionUI(fd) {
   sel.style.borderColor = sel.value ? '' : 'var(--warning, #e8a838)';
   const trig = (fd.triggers || []).join(', ');
   const est  = fd.estimate_fp != null ? ` Bileşenlere göre en kötü durum: ${fd.worst_h} (en düşük bileşen parlama noktası ~${fd.estimate_fp} °C).` : '';
-  note.textContent = `Yanıcı sıvı bileşen: ${trig}.${est} Ölçüm yapılırsa sınıf hafifleyebilir.`;
+  note.textContent = `Yanıcı sıvı bileşen: ${trig}.${est} Ölçüm yapılırsa sınıf hafifleyebilir.`
+    + (sel.value === 'no_measurement'
+       ? ' "Ölçüm yok" geçici bir ihtiyat uygulamasıdır: SEA Md.10(2) uyarınca yeterli ve güvenilir bilgi yoksa'
+         + ' parlama noktası testi yapılır. GBF Bölüm 16\'ya "ölçülmemiştir — test sonucuna göre revize edilecektir"'
+         + ' notu düşülür.'
+       : '');
   note.style.display = '';
 }
 
@@ -5357,7 +5362,7 @@ function _showPhysSrcModal(callback) {
                   onchange="if(this.value && this.value!=='l2_negative'){const i=document.querySelector('#physSrcBody input[data-psrc-field=&quot;tf_fp&quot;]'); if(i) i.value='';}">
             <option value="">— seçin —</option>
             <option value="not_flammable" ${st==='not_flammable'?'selected':''}>Test edildi — parlama noktası &gt; 60 °C (yanıcı değil)</option>
-            <option value="no_measurement" ${st==='no_measurement'?'selected':''}>Ölçüm yok — en kötü durum (${_esc(fd.worst_h || '')}) uygulansın</option>
+            <option value="no_measurement" ${st==='no_measurement'?'selected':''}>Ölçüm yok — şimdilik en kötü durum (${_esc(fd.worst_h || '')}) uygulansın (test gerekli: SEA Md.10(2))</option>
             <option value="l2_negative" ${st==='l2_negative'?'selected':''}>Parlama noktası 35–60 °C — UN L.2 sürekli yanma testi olumsuz (SEA Ek-1 2.6.4.5)</option>
           </select>
         </div>

@@ -1531,6 +1531,7 @@ def _calc_flam_liq(comps: List[Dict], user_fp=None, user_bp=None, form_sub: str 
         # varsa o kullanılır. Yoksa en düşük bileşen kaynama noktası temkinli tahmindir (karışımınki genellikle ondan düşük
         # olmaz). Alevlenir bir bileşenin kaynama noktası bilinmiyorsa en kötü durum (≤ 35 °C → Kat.1).
         # Önceden hiçbir bileşen kaynama noktası bilinmiyorsa 100 °C varsayılıp Kat.2 veriliyordu (2026-10-09).
+        _bp_worst = False
         if user_bp is not None:
             effective_bp, _bp_src = user_bp, f', kaynama başlangıcı {user_bp}°C ölçülen'
         elif user_fp >= 23:
@@ -1540,6 +1541,7 @@ def _calc_flam_liq(comps: List[Dict], user_fp=None, user_bp=None, form_sub: str 
             _bp_src = f', kaynama başlangıcı ölçülmedi — en düşük bileşen kaynama noktası {theo_bp:g}°C'
         else:
             effective_bp = None
+            _bp_worst = True
             _bp_src = (', kaynama başlangıcı ölçülmedi ve '
                        + (f"bileşen kaynama noktası bilinmiyor ({', '.join(_bp_unknown)})" if _bp_unknown
                           else 'bileşen kaynama noktaları bilinmiyor')
@@ -1549,7 +1551,7 @@ def _calc_flam_liq(comps: List[Dict], user_fp=None, user_bp=None, form_sub: str 
             return {'result': None, 'source': f'Kullanıcı girişi ({user_fp}°C); UN L.2 sürekli yanma testi olumsuz '
                                               '(SEA Ek-1 2.6.4.5)', 'fp': user_fp, 'l2': True}
         return {'result': _cls_flam_liq(user_fp, effective_bp),
-                'source': f'Kullanıcı girişi ({user_fp}°C{_bp_src})', 'fp': user_fp}
+                'source': f'Kullanıcı girişi ({user_fp}°C{_bp_src})', 'fp': user_fp, 'bp_worst': _bp_worst}
 
     # SEA Ek-1 2.6.4.1: "Veriler testlerle elde edilebilir, literatürlerden bulunabilir veya hesaplanabilir." Su +
     # tek alevlenir sıvı karışımında ölçülmüş literatür değeri (data/literature_fp_aqueous.json) — önceden %10 etanollü
@@ -1683,7 +1685,9 @@ def _calc_flam_liq(comps: List[Dict], user_fp=None, user_bp=None, form_sub: str 
                 ' Ölçüm yapılırsa sınıf hafifleyebilir.')
     if fp_status == 'no_measurement':
         _warn = (f'ℹ Parlama noktası ölçülmedi — {worst["h"]} bileşenlere göre en kötü durum '
-                 f'varsayımıyla verildi ({src}).' + _aq_note)
+                 f'varsayımıyla verildi ({src}).' + _aq_note
+                 + ' Bu geçici bir ihtiyat uygulamasıdır: SEA Md.10(2) uyarınca yeterli ve güvenilir bilgi yoksa '
+                   'parlama noktası testi yapılır (kapalı kap, SEA Ek-1 Tablo 2.6.3); GBF Bölüm 16\'ya not düşülür.')
     else:
         _warn = (f'⚠ Parlama noktası girilmedi — yanıcı sıvı bileşen var ({src}). '
                  f'Şimdilik en kötü durum uygulandı: {worst["h"]}. Ölçülen değeri girin, '
@@ -2505,6 +2509,24 @@ def calculate(comps: List[Dict], form: str = 'liquid',
             'EN': (f"Flammable liquid: the flash point was not measured on the product; a literature value was used "
                    f"— {_lt['kaynak_tam']} ({_lt['yontem']})."),
         })
+    if fl.get('worst_case') and fl.get('result'):
+        classification_notes.append({
+            'TR': (f"Alevlenir sıvı ({fl['result']['h']}): ürünün parlama noktası ölçülmemiştir; sınıflandırma "
+                   "bileşenlerin sınıflarına göre en kötü durum varsayımıyla (ihtiyatlı) yapılmıştır. SEA Yönetmeliği Md.10(2) uyarınca fiziksel zararlılığın belirlenmesinde yeterli ve güvenilir bilgi yoksa test yapılır; "
+                   "parlama noktası kapalı kap yöntemiyle (SEA Ek-1 Tablo 2.6.3) ölçülmeli ve GBF test sonucuna göre "
+                   "revize edilmelidir."),
+            'EN': (f"Flammable liquid ({fl['result']['h']}): the flash point of the product has not been measured; "
+                   "classified on a worst-case basis from the components. The flash point is to be measured "
+                   "(closed cup) and the SDS revised accordingly."),
+        })
+    if fl.get('bp_worst') and fl.get('result'):
+        classification_notes.append({
+            'TR': ("Alevlenir sıvı: kaynama başlangıç noktası ölçülmemiş ve bileşen verisi yetersiz olduğundan "
+                   "Kategori 1 / Kategori 2 ayrımında en kötü durum (≤ 35 °C) varsayılmıştır (SEA Ek-1 Tablo 2.6.1). "
+                   "SEA Yönetmeliği Md.10(2) uyarınca fiziksel zararlılığın belirlenmesinde yeterli ve güvenilir bilgi yoksa test yapılır" + "; ölçüm sonucuna göre revize edilecektir."),
+            'EN': ("Flammable liquid: the initial boiling point has not been measured; worst case (≤ 35 °C) assumed "
+                   "for the Category 1 / 2 distinction. To be revised based on measurement."),
+        })
     if fl.get('l2'):
         classification_notes.append({
             'TR': (f"Alevlenir sıvı: parlama noktası {fl['fp']:g} °C (35–60 °C aralığında); UN Test ve Kriterler El "
@@ -2518,13 +2540,13 @@ def calculate(comps: List[Dict], form: str = 'liquid',
         if val == 'not_tested_precautionary':
             classification_notes.append({
                 'TR': f'{tr_n}: karışım test edilmemiştir ({test_n}); ihtiyatlı olarak sınıflandırılmıştır. '
-                      'Test sonucuna göre revize edilecektir.',
+                      'SEA Yönetmeliği Md.10(2) uyarınca fiziksel zararlılığın belirlenmesinde yeterli ve güvenilir bilgi yoksa test yapılır; test sonucuna göre revize edilecektir.',
                 'EN': f'{en_n}: the mixture has not been tested ({test_n}); classified as a precaution. '
                       'To be revised based on test results.'})
         elif val == 'not_tested_exclude':
             classification_notes.append({
                 'TR': f'{tr_n}: karışım test edilmemiştir ({test_n}); uzman değerlendirmesiyle '
-                      'sınıflandırılmamıştır.',
+                      'sınıflandırılmamıştır. SEA Yönetmeliği Md.10(2) uyarınca fiziksel zararlılığın belirlenmesinde yeterli ve güvenilir bilgi yoksa test yapılır.',
                 'EN': f'{en_n}: the mixture has not been tested ({test_n}); not classified based on '
                       'expert judgement.'})
         elif val == 'not_flammable':

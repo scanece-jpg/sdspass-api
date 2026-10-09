@@ -282,6 +282,20 @@ def kural_testleri(c) -> int:
                                             form='liquid', user_fp=10)['results']] == ['H224']
          and [x['h'] for x in phys_calc([C('67-64-1', 30, ('Flam. Liq. 2', 'H225')), C('7732-18-5', 70)],
                                         form='liquid', user_fp=10)['results']] == ['H225']),
+        ('SEA Md.10(2): "ölçüm yok" (parlama noktası) ve bilinmeyen kaynama başlangıcı en kötü durumu Bölüm 16\'ya '
+         '"test yapılır / revize edilecektir" notuyla yazılır; "test yapılmadı — ihtiyatlı" kararlarında da aynı atıf',
+         lambda: (lambda n1, n2, n3: any('Md.10(2)' in n and 'en kötü durum' in n for n in n1)
+                  and any('Md.10(2)' in n and 'kaynama başlangıç noktası ölçülmemiş' in n for n in n2)
+                  and any('Md.10(2)' in n and 'ihtiyatlı' in n for n in n3))(
+             [n['TR'] for n in phys_calc([C('64-17-5', 30, ('Flam. Liq. 2', 'H225')), C('67-63-0', 10, ('Flam. Liq. 2', 'H225')),
+                                          C('7732-18-5', 60)], form='liquid',
+                                         fp_status='no_measurement')['classification_notes']],
+             [n['TR'] for n in phys_calc([C('999-99-9', 40, ('Flam. Liq. 2', 'H225'), phys={}),
+                                          C('7732-18-5', 60, phys={})], form='liquid',
+                                         user_fp=10)['classification_notes']],
+             [n['TR'] for n in phys_calc([C('1310-73-2', 5, ('Skin Corr. 1A', 'H314')), C('7732-18-5', 95)],
+                                         form='liquid', mixture_ph=13.5,
+                                         test_data={'metal_corrosive': 'not_tested_precautionary'})['classification_notes']])),
         ('ADR ÖH 375 (UN 3082): not ambalaj miktarına (≤ 5 L) dayanır, viskozite şartı yok (ADR 2025 3.3.1)',
          lambda: (lambda n: '5 L' in n and 'viskozite' not in n.lower())(
              tr_classify(h_codes=['H411'], form='liquid', viscosity=5000)['road']['note'])),

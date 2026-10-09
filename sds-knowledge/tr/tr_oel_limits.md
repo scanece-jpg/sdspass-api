@@ -30,7 +30,6 @@ Kaynak: Kimyasal Maddelerle Çalışmalarda Sağlık ve Güvenlik Önlemleri Hak
 | 106-50-3 | p-Fenilen diamin | 0.1 | — | — | — |  |  |
 | 106-51-4 | p-Benzokinon, Kinon | 0.4 | 0.1 | — | — |  |  |
 | 106-92-3 | Alil Glisidil Eter (AGE) | 22.0 | 5.0 | 44.0 | 10.0 |  |  |
-| 106-97-8 | Bütan | 2350 | 1000 | — | — |  |  |
 | 107-02-8 | Akrolein; akrilaldehit; prop-2-enal | 0.05 | 0.02 | 0.12 | 0.05 |  |  |
 | 107-07-3 | Etilen klorohidrin | 16.0 | 5.0 | — | — |  |  |
 | 107-15-3 | Etilendiamin | 25.0 | 10.0 | — | — |  |  |
@@ -82,7 +81,6 @@ Kaynak: Kimyasal Maddelerle Çalışmalarda Sağlık ve Güvenlik Önlemleri Hak
 | 110-86-1 | Piridin | 15.0 | 5.0 | — | — |  |  |
 | 110-91-8 | Morpolin | 36.0 | 10.0 | 72.0 | 20.0 |  |  |
 | 111-15-9 | 2-Etoksietil asetat | 11.0 | 2.0 | — | — |  |  |
-| 111-30-8 | Glutaraldehit | 0.2 | 0.05 | — | — | Deri |  |
 | 111-65-9 | Oktan | 2350.0 | 500.0 | — | — |  |  |
 | 111-76-2 | 2-Bütoksietanol | 98.0 | 20.0 | 246.0 | 50.0 |  |  |
 | 111-77-3 | 2-(2-Metoksietoksi)etanol | 50.1 | 10.0 | — | — |  |  |
@@ -103,7 +101,6 @@ Kaynak: Kimyasal Maddelerle Çalışmalarda Sağlık ve Güvenlik Önlemleri Hak
 | 124-38-9 | Karbon dioksit | 9000.0 | 5000.0 | — | — |  |  |
 | 124-40-3 | Dimetilamin | 3.8 | 2.0 | 9.4 | 5.0 |  |  |
 | 126-73-8 | Tribütil fosfat | 2.5 | 0.2 | — | — |  |  |
-| 127-18-4 | Tetrakloroetilen (PERC) | 138 | 20 | 275 | 40 |  | K |
 | 1300-73-8 | Ksilidin | 25.0 | 5.0 | — | — |  |  |
 | 131-11-3 | Dimetil ftalat | 5.0 | — | — | — |  |  |
 | 1310-73-2 | Sodyum hidroksit | 2.0 | — | — | — |  |  |
@@ -111,11 +108,8 @@ Kaynak: Kimyasal Maddelerle Çalışmalarda Sağlık ve Güvenlik Önlemleri Hak
 | 1314-80-3 | Difosfor pentasülfit | 1.0 | — | — | — |  |  |
 | 1319-77-3 | Kresoller (tüm izomerler) | 22.0 | 5.0 | — | — |  |  |
 | 1330-20-7 | Ksilen, karışık izomerler, saf | 221.0 | 50.0 | 442.0 | 100.0 |  |  |
-| 1345-16-0 | Kobalt oksit | 0.02 | — | — | — | Deri | K |
-| 13463-67-7 | Titanyum dioksit (solunabilir toz) | 10 | — | — | — |  |  |
 | 137-26-8 | Tiram | 5.0 | — | — | — |  |  |
 | 13952-84-6 | n-Bütilamin, Bütilamin, tüm izomerler | — | — | — | — |  |  |
-| 140-88-5 | Etil akrilat | 21 | 5 | 61 | 15 |  | K |
 | 141-32-2 | n-Bütilakrilat | 11.0 | 2.0 | 53.0 | 10.0 |  |  |
 | 141-43-5 | 2-Aminoetanol | 2.5 | 1.0 | 7.6 | 3.0 |  |  |
 | 141-78-6 | Etil asetat | 734 | 200 | 1468 | 400 |  |  |
@@ -123,7 +117,6 @@ Kaynak: Kimyasal Maddelerle Çalışmalarda Sağlık ve Güvenlik Önlemleri Hak
 | 142-82-5 | n-Heptan | 2085 | 500 | — | — |  |  |
 | 143-33-9 | Sodyum siyanür | 1.0 | — | 5.0 | — |  |  |
 | 144-62-7 | Oksalik asit | 1.0 | — | — | — |  |  |
-| 14808-60-7 | Kristalize silika (kuvars - solunabilir) | 0.1 | — | — | — |  | K |
 | 151-50-8 | Potasyum siyanit (siyanit formunda) | 1.0 | — | 5.0 | — |  |  |
 | 1634-04-4 | Tersiyer-bütil-metil eter | 183.5 | 50.0 | 367.0 | 100.0 |  |  |
 | 17702-41-9 | Dekaboran | 0.3 | 0.05 | — | — |  |  |
@@ -136,7 +129,6 @@ Kaynak: Kimyasal Maddelerle Çalışmalarda Sağlık ve Güvenlik Önlemleri Hak
 | 2551-62-4 | Sülfür hekzaflorid | 6000.0 | 1000.0 | — | — |  |  |
 | 25639-42-3 | Metilsiklohekzanol | 470.0 | 100.0 | — | — |  |  |
 | 26628-22-8 | Sodyum azit | 0.1 | — | 0.3 | — |  |  |
-| 2682-20-4 | Metilizotiyazolinon (MIT) | 0.0002 | — | — | — | Deri |  |
 | 2699-79-8 | Sülfüril florür | 20.0 | 5.0 | 40.0 | 10.0 |  |  |
 | 299-84-3 | Fenklorfos | 15.0 | — | — | — |  |  |
 | 334-88-3 | Diazometan | 0.4 | 0.2 | — | — |  |  |
@@ -146,7 +138,6 @@ Kaynak: Kimyasal Maddelerle Çalışmalarda Sağlık ve Güvenlik Önlemleri Hak
 | 420-04-2 | Siyanamit | 1.0 | 0.58 | — | — |  |  |
 | 431-03-8 | Diasetil; Bütandion | 0.07 | 0.02 | 0.36 | 0.1 |  |  |
 | 463-82-1 | Neopentan | 3000.0 | 1000.0 | — | — |  |  |
-| 50-00-0 | Formaldehit | 0.37 | 0.3 | 0.74 | 0.6 | Deri | K |
 | 50-29-3 | Diklorodifeniltrikloroetan (DDT) | 1.0 | — | — | — |  |  |
 | 504-29-0 | 2-Aminopiridin | 2.0 | 0.5 | — | — |  |  |
 | 509-14-8 | Tetranitrometan | 8.0 | 1.0 | — | — |  |  |
@@ -164,11 +155,9 @@ Kaynak: Kimyasal Maddelerle Çalışmalarda Sağlık ve Güvenlik Önlemleri Hak
 | 56-23-5 | Karbon tetraklorür; Tetraklorometan | 6.4 | 1.0 | 32.0 | 5.0 |  |  |
 | 57-24-9 | Striknin | 0.15 | — | — | — |  |  |
 | 583-60-8 | o-Metilsiklohekzanon | 460.0 | 100.0 | — | — |  |  |
-| 584-84-9 | TDI (Toluen diizosiyant) | 0.04 | 0.005 | 0.14 | 0.02 | Deri | K |
 | 591-78-6 | Metil bütil keton; bkz. 2-Hekzanon | 21.0 | 5.0 | — | — |  |  |
 | 594-72-9 | 1,1-Dikloro-1-nitroetan | 10.0 | 2.0 | — | — |  |  |
 | 60-29-7 | Dietileter | 308.0 | 100.0 | 616.0 | 200.0 |  |  |
-| 60-35-5 | Asetamit | 30 | 10 | — | — |  | K |
 | 60-57-1 | Dieldrin | 0.25 | — | — | — |  |  |
 | 600-25-9 | 1-Kloro-1-nitropropan | 10.0 | 2.0 | — | — |  |  |
 | 61-82-5 | Amitrol | 0.2 | — | — | — |  |  |
@@ -183,7 +172,6 @@ Kaynak: Kimyasal Maddelerle Çalışmalarda Sağlık ve Güvenlik Önlemleri Hak
 | 628-63-7 | Pentilasetat | 270.0 | 50.0 | 540.0 | 100.0 |  |  |
 | 628-96-6 | Etilen glikol dinitrat | — | — | — | — |  |  |
 | 63-25-2 | Karbaril (Sevin) | 5.0 | — | — | — |  |  |
-| 630-08-0 | Karbonmonoksit (CO) | 23 | 20 | 117 | 100 |  |  |
 | 64-17-5 | Etil alkol (Etanol) | 1900.0 | 1000.0 | — | — |  |  |
 | 64-18-6 | Formik asit | 9.0 | 5.0 | — | — |  |  |
 | 64-19-7 | Asetik asit | 25.0 | 10.0 | 50.0 | 20.0 |  |  |
@@ -207,20 +195,16 @@ Kaynak: Kimyasal Maddelerle Çalışmalarda Sağlık ve Güvenlik Önlemleri Hak
 | 74-99-7 | Propin; bkz. Metilasetilen | 1650.0 | 1000.0 | — | — |  |  |
 | 7439-92-1 | İnorganik kurşun ve bileşikleri | 0.15 | — | — | — |  |  |
 | 7439-97-6 | Cıva (buhar) (Hg olarak) | 0.05 | — | — | — |  |  |
-| 7440-02-0 | Nikel ve bileşikleri (solunum fraksiyonu) | 0.01 | — | — | — | Deri | K |
 | 7440-06-4 | Platin (metalik) | 1.0 | — | — | — |  |  |
-| 7440-21-3 | Silisyum (kristalize, amorf) | 4 | — | — | — |  |  |
 | 7440-22-4 | Gümüş, metalik | 0.1 | — | — | — |  |  |
 | 7440-28-0 | Talyum, çözünür bileşikler (Tl olarak) | 0.1 | — | — | — |  |  |
 | 7440-31-5 | Kalay ve bileşikleri  (Sn olarak) | 2.0 | — | — | — |  |  |
 | 7440-36-0 | Antimon ve bileşikleri (Sb olarak) | 0.5 | — | — | — |  |  |
 | 7440-38-2 | Arsenik ve bileşikleri (As olarak) | 0.01 | — | — | — |  |  |
-| 7440-43-9 | Kadmiyum ve bileşikleri | 0.004 | — | — | — |  | K |
 | 7440-47-3 | Krom metal ve çözünmeyen tuzlar (Cr olarak) | 0.5 | — | — | — |  |  |
 | 7440-50-8 | Bakır metali dumanı (Cu olarak) | 0.1 | — | — | — |  |  |
 | 7440-58-6 | Hafniyum | 0.5 | — | — | — |  |  |
 | 7440-65-5 | İtriyum | 1.0 | — | — | — |  |  |
-| 7440-66-6 | Çinko oksit (duman) | 2 | — | 6 | — |  |  |
 | 7440-67-7 | Zirkonyum bileşikleri (Zr olarak) | 5.0 | — | — | — |  |  |
 | 7446-09-5 | Sülfür dioksit | 1.3 | 0.5 | 2.7 | 1.0 |  |  |
 | 75-00-3 | Kloroetan | 268.0 | 100.0 | — | — |  |  |
@@ -275,8 +259,6 @@ Kaynak: Kimyasal Maddelerle Çalışmalarda Sağlık ve Güvenlik Önlemleri Hak
 | 78-92-2 | sec-Bütil alkol | 450.0 | 150.0 | — | — |  |  |
 | 78-93-3 | 2-Bütanon | 600.0 | 200.0 | 900.0 | 300.0 |  |  |
 | 7803-51-2 | Fosfin | 0.14 | 0.1 | 0.28 | 0.2 |  |  |
-| 79-01-6 | Trikloroetilen | 54.7 | 10 | 164.1 | 30 | Deri | K |
-| 79-06-1 | Akrilamit | 0.1 | 0.03 | — | — | Deri | K |
 | 79-09-4 | Propiyonik asit | 31.0 | 10.0 | 62.0 | 20.0 |  |  |
 | 79-20-9 | Metil asetat | 610.0 | 200.0 | — | — |  |  |
 | 79-24-3 | Nitroetan | 62.0 | 20.0 | 312.0 | 100.0 |  |  |
@@ -290,7 +272,6 @@ Kaynak: Kimyasal Maddelerle Çalışmalarda Sağlık ve Güvenlik Önlemleri Hak
 | 8030-30-6 | Nafta (Kömür katranı) | 400.0 | 100.0 | — | — |  |  |
 | 8065-48-3 | Demeton (Sistoks) | 0.1 | — | — | — |  |  |
 | 81-81-2 | Varfarin | 0.1 | — | — | — |  |  |
-| 822-06-0 | Heksametilen diizosiyant (HDI) | 0.14 | 0.02 | — | — | Deri |  |
 | 83-79-4 | Rotenon | 5.0 | — | — | — |  |  |
 | 84-74-2 | Dibütil ftalat | 5.0 | — | — | — |  |  |
 | 85-44-9 | Ftalik anhidrit | 12.0 | 2.0 | — | — |  |  |
@@ -299,7 +280,6 @@ Kaynak: Kimyasal Maddelerle Çalışmalarda Sağlık ve Güvenlik Önlemleri Hak
 | 872-50-4 | n-Metil-2-pirolidon | 40.0 | 10.0 | 80.0 | 20.0 |  |  |
 | 88-72-2 | 2-Nitrotoluen | 30.0 | 5.0 | — | — |  |  |
 | 88-89-1 | Pikrik asit | 0.1 | — | — | — |  |  |
-| 9005-64-5 | Polisorbat 80 (Tween 80) | 5 | — | 10 | — |  |  |
 | 91-20-3 | Naftalin | 50.0 | 10.0 | — | — |  |  |
 | 92-52-4 | Difenil (Bifenil) | 1.0 | 0.2 | — | — |  |  |
 | 94-36-0 | Benzoil peroksit | 5.0 | — | — | — |  |  |
@@ -317,5 +297,3 @@ Kaynak: Kimyasal Maddelerle Çalışmalarda Sağlık ve Güvenlik Önlemleri Hak
 | 99-08-1 | 3-Nitrotoluen | 30.0 | 5.0 | — | — |  |  |
 | 99-65-0 | 1,3-Dinitrobenzen | 1.0 | — | — | — |  |  |
 | 99-99-0 | 4-Nitrotoluen | 30.0 | 5.0 | — | — |  |  |
-| INERT_DUST | İnert toz (solunabilir fraksiyonu) | 5 | — | — | — |  |  |
-| INERT_DUST_TOTAL | İnert toz (toplam) | 10 | — | — | — |  |  |

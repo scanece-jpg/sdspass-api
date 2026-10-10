@@ -693,9 +693,16 @@ def section9(comps: List[Dict], substance_mode: bool, form: str = 'liquid') -> D
             continue
         cands = []
         for c in act:
+            # %1'in altındaki eser bileşen (parfüm vb.) karışımı temsil etmez — "en düşük kaynama noktalı / en uçucu
+            # bileşen" olarak yazılmaz (DIPOL CL: %0,1 altı cineole, dodecanenitrile, sitral yazılıyordu)
+            if float(c.get('concMax') or c.get('conc') or 0) < 1:
+                continue
             ph = c.get('phys') if c.get('phys') is not None else get(c.get('cas') or '')
             ent = ph.get(f)
             if ent and ent.get('value') is not None and not (f == 'flash_point' and fp_conflict(c)):
+                # Buhar basıncı oda sıcaklığına yakın ölçülmüş olmalı (dodecanenitrile 13 hPa @ 140,5 °C yazılıyordu)
+                if f == 'vapour_pressure' and ent.get('temp_c') is not None and not (15 <= float(ent['temp_c']) <= 30):
+                    continue
                 cands.append((ent['value'], c, ent))
         if f == 'boiling_point':
             cands = [x for x in cands if (x[1].get('cas') or '').strip() != '7732-18-5'] or cands
@@ -707,7 +714,16 @@ def section9(comps: List[Dict], substance_mode: bool, form: str = 'liquid') -> D
                 ph = c.get('phys') if c.get('phys') is not None else get(c.get('cas') or '')
                 bp = (ph.get('boiling_point') or {}).get('value')
                 return isinstance(bp, (int, float)) and bp < 20
-            cands = [x for x in cands if not _gaz(x[1])]
+            # Oda sıcaklığında katı bileşen (erime noktası > 25 °C) sıvı üründe çözünmüştür — kaynama noktası /
+            # buhar basıncı ürünü temsil etmez (DIPOL CL: sodyum hidroksit 1 388 °C yazılıyordu)
+            def _kati(c):
+                ph = c.get('phys') if c.get('phys') is not None else get(c.get('cas') or '')
+                mp = (ph.get('melting_point') or {}).get('value')
+                return isinstance(mp, (int, float)) and mp > 25
+            cands = [x for x in cands if not _gaz(x[1]) and not _kati(x[1])]
+            # Buhar basıncı 0 olan bileşen "en uçucu" olarak yazılmaz
+            if f == 'vapour_pressure':
+                cands = [x for x in cands if isinstance(x[0], (int, float)) and x[0] > 0]
         if not cands:
             continue
         v, c, ent = pick(cands, key=lambda x: x[0])

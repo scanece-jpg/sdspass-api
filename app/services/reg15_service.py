@@ -176,8 +176,12 @@ def bekra(h_codes, passed=None, euh_codes=(), components=None, form: str = None)
                     b2.append(lbl)
                     break
         if cas == '7681-52-9':
-            b2.append('Sodyum hipoklorit karışımları (Ek-1 Bölüm 2 — %5\'ten az aktif klor ve yalnız Sucul Akut 1 '
-                      'koşuluyla)')
+            # Aktif klor ≈ NaOCl × 70,9 / 74,44 (Cl2 eşdeğeri); %5'ten az aktif klor ⇔ NaOCl < ~%5,25
+            _akl = _conc(c) * 70.9 / 74.44
+            _diger = [k for k, _ in b1 if k != 'E1']
+            if 'H400' in hs and not (hs & {'H410', 'H411'}) and not _diger and _akl < 5:
+                b2.append('Sodyum hipoklorit karışımları (Sucul Akut 1, %5\'ten az aktif klor; Ek-1 Bölüm 2)')
+                b1 = [x for x in b1 if x[0] != 'E1']
     return {'bolum1': b1, 'bolum2': list(dict.fromkeys(b2))}
 
 

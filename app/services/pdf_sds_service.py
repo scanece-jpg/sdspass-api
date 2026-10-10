@@ -529,6 +529,11 @@ def _nos_technical_names(un_no: str, components: list, lang: str = 'TR') -> str:
             primary = _ek6_own_name(c.get('cas_no') or c.get('cas') or '', raw) or \
                 raw.split('\n')[0].split(';')[0]
             primary = _re.sub(r'\s*\[\d+\]', '', primary).strip()
+            # Ek-6 adındaki derişim yer tutucuları ("… %", "aktif Cl .. çözeltisi") teknik ada girmez
+            # (DIPOL CL: "Sodyum hipoklorit, aktif Cl .. çözeltisi" yazılıyordu)
+            primary = _re.sub(r'(?i),?\s*aktif\s+cl\b.*$', '', primary)
+            primary = _re.sub(r'(?i),?\s*(?:çözeltisi|solution)?\s*\.{2,}\s*%?.*$', '', primary)
+            primary = _re.sub(r'\s*\.\.\.?\s*%\s*$', '', primary).strip(' ,;')
             name = primary
             if not name or name in seen:
                 continue
@@ -2546,7 +2551,9 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _ph_conc_raw = str(phys.get('ph_conc') or '').strip()
     _ph_val = _pv_ph()
     _ph_numeric = bool(_re.match(r'^\s*[<>≤≥~]?\s*\d', str(_ph_val or '')))
-    if _ph_conc_raw and _have(_ph_val) and _ph_numeric:
+    if _ph_conc_raw and _have(_ph_val) and _ph_numeric and _re.fullmatch(r'100(?:[.,]0+)?', _ph_conc_raw):
+        _ph_lbl_row = _L('pH (seyreltilmemiş ürün)', 'pH (undiluted product)')
+    elif _ph_conc_raw and _have(_ph_val) and _ph_numeric:
         _ph_lbl_row = _L(f'pH (%{_ph_conc_raw} sulu çözeltide)', f'pH ({_ph_conc_raw}% aqueous solution)')
     elif _is_solid_form and _have(_ph_val) and _ph_numeric:
         _ph_lbl_row = _L('pH (sulu çözeltide — konsantrasyon belirtilmemiştir)',
@@ -2821,6 +2828,17 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         incompat_set.add('asitler' if lang=='TR' else 'acids')
     if 'H314' in h_codes and not is_acid and not is_base:
         incompat_set.add('asitler ve bazlar' if lang=='TR' else 'acids and bases')
+    # Hipoklorit + amonyak / amonyum tuzları → kloraminler (10.3'te yazılıyor; 10.5 listesinde de olmalı)
+    if comp_cas_set & {'7681-52-9', '7778-54-3', '10022-70-5'}:
+        incompat_set.add('amonyak ve amonyum tuzları' if lang == 'TR' else 'ammonia and ammonium salts')
+    # Ürünün kendisiyle çelişen ögeler atılır: bazik ürün "bazlar"dan, asidik ürün "asitler"den uzak tutulmaz
+    # (DIPOL CL pH 13,5: "güçlü bazlar" yazılıyordu); "kuvvetli asitler", "asitler" varken tekrar sayılmaz
+    if is_base:
+        incompat_set = {i for i in incompat_set if i not in ('güçlü bazlar', 'bazlar', 'kuvvetli bazlar')}
+    if is_acid:
+        incompat_set = {i for i in incompat_set if i not in ('asitler', 'kuvvetli asitler', 'güçlü asitler')}
+    if 'asitler' in incompat_set:
+        incompat_set -= {'kuvvetli asitler', 'güçlü asitler'}
     if not incompat_set:
         incompat_set.add('güçlü oksitleyiciler, kuvvetli asitler ve bazlar' if lang=='TR'
                          else 'strong oxidising agents, strong acids and bases')
@@ -3374,7 +3392,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     _soil_detail = sds12.get('12.4_detail', {})
     _soil_comps  = _soil_detail.get('components', []) if isinstance(_soil_detail, dict) else []
     if _soil_comps:
-        _known = [c for c in _soil_comps if c.get('log_koc') is not None]
+        _known = [c for c in _soil_comps if c.get('log_koc') is not None
+                  or str(c.get('mobility') or '').startswith('Uygulanamaz')]
         if _known:
             _soil_txt = '; '.join(
                 f"{_pub((c.get('name_tr') or c['name']) if lang == 'TR' else c['name'])}: {c['mobility']}"

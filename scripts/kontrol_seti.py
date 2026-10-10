@@ -349,6 +349,52 @@ def _asit_testi(c) -> bool:
             and '-85 °C' not in t and 'Sıvılaştırılmış gaz' not in t)
 
 
+def _cl_testi(c) -> bool:
+    """DIPOL CL (çamaşır suyu) GBF bulguları, 2026-10-10."""
+    import fitz
+    bil = [('7681-52-9', 5.25), ('1310-73-2', 2), ('68955-55-5', 0.4), ('470-82-6', 0.003), ('2437-25-4', 0.0003),
+           ('101-84-8', 0.0075), ('5392-40-5', 0.003), ('7732-18-5', 92.34)]
+    comps = []
+    for cas, conc in bil:
+        r = c.get('/api/v1/sds/substance/lookup', params={'cas': cas, 'form': 'liquid'}).json()
+        comps.append({'cas': cas, 'name': r.get('name') or cas, 'name_tr': r.get('name_tr', ''), 'conc': conc,
+                      'concMax': conc, 'hazards': r.get('hazards', []), 'sclRaw': r.get('scl', []),
+                      'm_factors': {'acute': 10, 'chronic': 1} if cas == '7681-52-9' else {}})
+    calc = {'components': comps, 'form': 'liquid', 'usage': 'industrial', 'lang': 'TR', 'mixture_ph': '12.5-13.5',
+            'test_data': {'metal_corrosive': 'not_corrosive', 'euh071_inhalable': 'not_inhalable'}}
+    body = {'lang': 'TR', 'product': {'name': 'Kural testi CL', 'form': 'liquid', 'usage': 'industrial', 'is_detergent': True},
+            'supplier': {'name': 'Kontrol Seti A.Ş.', 'address': 'Örnek Mah. No:1 İstanbul', 'phone': '0212 000 00 00',
+                         'email': 'kontrol@ornek.com'}, 'kdu': KDU_TEST, 'components': comps, 'calc_input': calc,
+            'phys_props': {'color': 'sarı yeşil', 'ph': '12.5 - 13.5', 'ph_conc': '100'}, 'phys_methods': {},
+            'revision': {'no': '1', 'date': '10.10.2026', 'notes': ''}}
+    j = c.post('/api/v1/sds/pdf', json=body).json()
+    b64 = next(v for v in j.values() if isinstance(v, str) and len(v) > 5000)
+    t = _norm(chr(10).join(p.get_text() for p in fitz.open(stream=base64.b64decode(b64), filetype='pdf')))
+    def sec(a, b):
+        i = t.find(a)
+        return t[i:t.find(b, i + 1)] if i >= 0 else ''
+    s105, s124, s142, s9 = sec('10.5 Uyumsuz', '10.6'), sec('12.4 Toprakta', '12.5'), sec('14.2 UN', '14.3'), sec('9.1 Temel', '9.2')
+    return ('pH (seyreltilmemiş ürün)' in t and 'CLP §4.1.3.5.5' not in t
+            and 'amonyak ve amonyum tuzları' in s105.lower() and 'güçlü bazlar' not in s105.lower()
+            and 'kuvvetli asitler' not in s105.lower()
+            and 'Uygulanamaz (inorganik madde' in s124 and "log Kow'dan tahmini" not in s124
+            and 'aktif Cl' not in s142 and 'Sodyum hipoklorit' in s142
+            and 'Sodyum hipoklorit karışımları' not in t
+            and 'Cineole' not in s9 and 'Dodecanenitrile' not in s9 and '1 388' not in s9 and ' 0 hPa' not in s9)
+
+
+def _denetim_baslik_testi() -> bool:
+    """Denetim: "BÖLÜM n" yazılmayan ("1. MADDENİN …") GBF'ler bölümlere ayrılır; Romen rakamlı taşıma sınıfı okunur."""
+    from app.services.audit_jev import split_sections
+    from app.services.audit_checks import _s14_rakam
+    bas = ['MADDENİN/KARIŞIMIN VE ŞİRKETİN/DAĞITICININ KİMLİĞİ', 'ZARARLILIK TANIMLANMASI', 'BİLEŞİMİ/İÇİNDEKİLER HAKKINDA BİLGİ',
+           'İLKYARDIM ÖNLEMLERİ', 'YANGINLA MÜCADELE ÖNLEMLERİ', 'KAZA SONUCU YAYILMAYA KARŞI ÖNLEMLER', 'ELLEÇLEME VE DEPOLAMA',
+           'MARUZ KALMA KONTROLLERİ', 'FİZİKSEL KİMYASAL ÖZELLİKLER', 'KARARLILIK VE TEPKİME', 'TOKSİKOLOJİK BİLGİLER',
+           'EKOLOJİK BİLGİLER', 'BERTARAF ETME BİLGİLERİ', 'TAŞIMACILIK BİLGİSİ', 'MEVZUAT BİLGİSİ', 'DİĞER BİLGİLER']
+    metin = '\n'.join(f'{i}. {b}\n{i}.1. alt başlık\nmetin' for i, b in enumerate(bas, 1))
+    return len(split_sections(metin)) == 16 and 'Sınıfı: 8' in _s14_rakam('ADR Sınıfı: VIII')
+
+
 def _hesap_testi() -> bool:
     """Geçici klasörde; ağ ve gizli depo yok."""
     import base64, tempfile, pathlib
@@ -1158,6 +1204,12 @@ def kural_testleri(c) -> int:
          "ihtiyatlı H290 'test verisi' değil; asit ürün 'asitler ve bazlar'dan uzak tutulmaz; 'Veri yok' altında 'ölçülen' "
          "yok; ileri tarihli KDU belgesi reddedilir",
          lambda: _asit_testi(c)),
+        ("DIPOL CL GBF (2026-10-10): pH seyreltilmemiş; 10.5'te bazik üründe 'güçlü bazlar' yok, amonyak var; 12.4 "
+         "inorganikte Koc tahmini yok; 14.2 teknik adda Ek-6 yer tutucusu yok; BEKRA hipoklorit kaydı koşulsuz yazılmaz; "
+         "Bölüm 9'da eser / katı / 0 hPa bileşen değeri yok",
+         lambda: _cl_testi(c)),
+        ('Denetim: "1. BAŞLIK" biçimli GBF bölümlere ayrılır; Romen rakamlı taşıma sınıfı (VIII) okunur',
+         lambda: _denetim_baslik_testi()),
         ('Danışman hesabı: anahtarsız erişim yok, firma klasörü otomatik açılır, aynı ad engellenir, '
          'üretilen GBF kaydedilir / listelenir / geri okunur (accounts.py)',
          lambda: _hesap_testi()),

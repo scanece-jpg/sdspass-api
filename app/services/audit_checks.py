@@ -375,11 +375,20 @@ def c_un(ctx):
     return ('uygun', f'UN {m.group(1) or m.group(2)}') if m else ('eksik', '14.1\'de UN numarası bulunamadı.')
 
 
+# Taşıma sınıfı Romen rakamıyla yazılmış olabilir ("ADR Sınıfı: VIII") — karşılaştırmadan önce Arap rakamına çevrilir
+_ROMA_SINIF = {'IX': '9', 'VIII': '8', 'VII': '7', 'VI': '6', 'V': '5', 'IV': '4', 'III': '3', 'II': '2', 'I': '1'}
+
+
+def _s14_rakam(s14: str) -> str:
+    return re.sub(r'(?i)((?:sınıf\w*|class)\s*[:\-]?\s*)(IX|VIII|VII|VI|IV|V|III|II|I)\b',
+                  lambda m: m.group(1) + _ROMA_SINIF[m.group(2).upper()], s14 or '')
+
+
 def c_sinif14(ctx):
     if re.search(r'(?i)belirlenmemiştir|not determined', ctx['secs'].get('14', '')):
         return 'kdu', '14. bölümde taşımacılık sınıflandırması "belirlenmemiştir" — KDU kontrol etmeli (KKDİK Ek-2 Bölüm 14).'
-    s14 = ctx['secs'].get('14', '')
-    return ('uygun', 'Taşımacılık sınıfı var.') if re.search(r'(?i)(?:sınıf|class|zararlar[ıi])\s*[:\-]?\s*\d(?:\.\d)?', s14) \
+    s14 = _s14_rakam(ctx['secs'].get('14', ''))
+    return ('uygun', 'Taşımacılık sınıfı var.') if re.search(r'(?i)(?:sınıf\w*|class|zararlar[ıi])\s*[:\-]?\s*\d(?:\.\d)?', s14) \
         else ('eksik', '14.3\'te taşımacılık sınıfı bulunamadı.')
 
 
@@ -430,7 +439,7 @@ def c_t14(ctx):
     if re.search(r'(?i)belirlenmemiştir|not determined', ctx['secs'].get('14', '')):
         return 'kdu', '14. bölümde taşımacılık sınıflandırması "belirlenmemiştir" — KDU kontrol etmeli (KKDİK Ek-2 Bölüm 14).'
     h = _h(ctx['secs'].get('2', ''))
-    s14 = ctx['secs'].get('14', '')
+    s14 = _s14_rakam(ctx['secs'].get('14', ''))
     exp = []
     if h & {'H314', 'H290'}:
         exp.append('8')                           # H290 → ADR 2.2.8.1.5.3 (c)(ii) Sınıf 8 PG III
@@ -992,7 +1001,10 @@ def c_md6c(ctx):
 def c_16_kdu(ctx):
     """KKDİK Usul ve Esaslar (05.08.2025) Md.16(2): 16. bölümde KDU iletişim bilgisi + yeterlilik belgesi tarihi ve no."""
     s16 = ctx['secs'].get('16', '')
-    if not re.search(r'(?i)kimyasal\s+de[ğg]erlendirme\s+uzman|\bKDU\b', s16):
+    # Usul ve Esaslar Md.16(2) "KDU" kelimesini zorunlu tutmaz; hazırlayanın iletişim bilgisi ve yeterlilik belgesinin
+    # tarih / numarası yeterlidir ("Düzenleyen … Sertifika Numarası … Sertifika Tarihi" biçimi de kabul)
+    _hazirlayan = re.search(r'(?i)(düzenleyen|hazırlayan|hazırlayan kişi|prepared by)[\s\S]{0,200}?(sertifika|belge)', s16)
+    if not re.search(r'(?i)kimyasal\s+de[ğg]erlendirme\s+uzman|\bKDU\b', s16) and not _hazirlayan:
         return 'eksik', '16. bölümde GBF\'yi hazırlayan KDU belirtilmemiş (KKDİK Usul ve Esaslar Md.16(2)).'
     eksik = []
     if not re.search(r'[^@\s]+@[^@\s]+\.\w+|\+?\d[\d\s()-]{8,}\d', s16):

@@ -733,6 +733,16 @@ def assess_soil_mobility(
 
         log_koc = LOG_KOC_DB.get(cas)
         _est = False
+        # İnorganik (iyonik) maddede Koc–Kow korelasyonu (Karickhoff) geçersizdir — tahmin yapılmaz
+        # (DIPOL CL: sodyum hipoklorit için "log Koc=-2,65, log Kow'dan tahmini" yazılıyordu)
+        try:
+            from app.services.tr_mevzuat_service import _INORGANIC_CAS as _INORG
+        except Exception:
+            _INORG = set()
+        if cas in _INORG and not (td and getattr(td, 'log_koc', None) is not None):
+            results.append({'cas': cas, 'name': name, 'name_tr': name_tr, 'conc': conc, 'log_koc': None,
+                            'mobility': 'Uygulanamaz (inorganik madde; Koc–Kow korelasyonu uygulanmaz)'})
+            continue
         if td and hasattr(td, 'log_koc') and td.log_koc is not None:
             log_koc = td.log_koc
         elif log_koc is None:

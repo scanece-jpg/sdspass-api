@@ -5981,13 +5981,18 @@ function _showPhysSrcModal(callback) {
 
     // Değer yoksa: KKDİK Ek-2 9.1 — bilginin bulunmadığı / uygulanmadığı nedeniyle belirtilir (sayı kutusuna harf
     // yazılamadığı için seçimle; onaylanınca formda N/A + gerekçe işaretlenir)
+    // "Uygulanamaz" seçilince nedeni yazılır (KKDİK Ek-2 9.1: bilgi yoksa / uygulanmıyorsa nedeni belirtilir)
     const naSel = isMotor ? '' : `<select class="psrc-na" data-psrc-na="${f.formId}" title="Değer yoksa nedenini seçin"
-               onchange="const i=this.parentNode.querySelector('input[data-psrc-field]'); if(i){ i.disabled=!!this.value; if(this.value) i.value=''; }"
+               onchange="const w=this.parentNode, i=w.querySelector('input[data-psrc-field]'), n=w.querySelector('input[data-psrc-neden]');
+                         if(i){ i.disabled=!!this.value; if(this.value) i.value=''; }
+                         if(n){ n.style.display = this.value==='NA' ? '' : 'none'; if(this.value==='NA') n.focus(); }"
                style="margin-left:6px;font-size:10px;max-width:130px">
           <option value="">değer yok mu?</option>
           <option value="Veri yok — test yapılmamıştır">Veri yok — test yapılmamıştır</option>
-          <option value="Bu ürün için uygulanamaz">Uygulanamaz</option>
-        </select>`;
+          <option value="NA">Uygulanamaz (nedenini yazın)</option>
+        </select>
+        <input data-psrc-neden="${f.formId}" type="text" placeholder="neden — örn. su bazlı ürün, alevlenir bileşen içermez"
+               style="display:none;margin-left:6px;font-size:10px;flex:1;min-width:160px">`;
     return `<div class="psrc-row">
       <div class="psrc-row-label">${f.label}${labelStar}</div>
       <div class="psrc-row-wrap">
@@ -6099,7 +6104,8 @@ async function _physSrcConfirm() {
     // Çözünürlük: motor text değeri varsa zorunlu kontrolü geç
     const hasSolText = f.formId === 'tf_sol' && !!(tp2.solubility?.text);
     const naSec = document.querySelector(`#physSrcBody select[data-psrc-na="${f.formId}"]`)?.value;
-    if (!inp.value.trim() && !hasSolText && !naSec) {
+    const naNeden = document.querySelector(`#physSrcBody input[data-psrc-neden="${f.formId}"]`)?.value?.trim();
+    if (!inp.value.trim() && !hasSolText && (!naSec || (naSec === 'NA' && !naNeden))) {
       inp.style.borderColor = 'var(--danger)';
       inp.style.boxShadow   = '0 0 0 2px rgba(252,129,129,.35)';
       hasError = true;
@@ -6110,16 +6116,27 @@ async function _physSrcConfirm() {
   });
 
   if (hasError) {
-    if (errEl) { errEl.textContent = '⚠ Kırmızı alanlar bu form için zorunludur — değeri girin ya da satırın yanındaki listeden nedenini seçin ("Veri yok — test yapılmamıştır" / "Uygulanamaz").'; errEl.style.display = ''; }
+    if (errEl) { errEl.textContent = '⚠ Kırmızı alanlar bu form için zorunludur — değeri girin ya da satırın yanındaki listeden nedenini seçin ("Veri yok — test yapılmamıştır" / "Uygulanamaz" + neden).'; errEl.style.display = ''; }
     return; // Kapatma — kullanıcı doldurmalı
   }
   if (errEl) errEl.style.display = 'none';
 
   // ── "Veri yok / Uygulanamaz" seçimleri: onay, sonra formda N/A + gerekçe ─────────────
+  const _naMetin = x => x.value === 'NA'
+    ? (() => { const n = document.querySelector(`#physSrcBody input[data-psrc-neden="${x.dataset.psrcNa}"]`)?.value?.trim();
+               return n ? `Uygulanamaz — ${n}` : ''; })()
+    : x.value;
+  const _nedensiz = [...document.querySelectorAll('#physSrcBody select[data-psrc-na]')].filter(x => x.value === 'NA' && !_naMetin(x));
+  if (_nedensiz.length) {
+    _nedensiz.forEach(x => { const n = document.querySelector(`#physSrcBody input[data-psrc-neden="${x.dataset.psrcNa}"]`);
+                             if (n) { n.style.borderColor = 'var(--danger)'; n.style.display = ''; } });
+    if (errEl) { errEl.textContent = '⚠ "Uygulanamaz" seçilen alanlar için nedeni yazın (KKDİK Ek-2 9.1).'; errEl.style.display = ''; }
+    return;
+  }
   const naSecimler = [...document.querySelectorAll('#physSrcBody select[data-psrc-na]')].filter(x => x.value);
   if (naSecimler.length) {
     const _lbl = id => (_PSRC_FIELDS.find(f => f.formId === id) || {}).label || id;
-    const liste = naSecimler.map(x => `• ${_lbl(x.dataset.psrcNa)}: ${x.value}`).join('\n');
+    const liste = naSecimler.map(x => `• ${_lbl(x.dataset.psrcNa)}: ${_naMetin(x)}`).join('\n');
     if (!confirm(`Aşağıdaki alanlar GBF Bölüm 9'a değer yerine bu ifadeyle yazılacak (KKDİK Ek-2 9.1):\n\n${liste}\n\nOnaylıyor musunuz?`)) return;
     naSecimler.forEach(x => {
       const id = x.dataset.psrcNa;
@@ -6130,9 +6147,9 @@ async function _physSrcConfirm() {
       if (cb) {
         if (!cb.checked) { cb.checked = true; cb.dispatchEvent(new Event('change')); }   // toggleNA: kutu kapanır, gerekçe alanı açılır
         const r = target.parentNode.querySelector('input[id^="na_reason_"]');
-        if (r) r.value = x.value;
+        if (r) r.value = _naMetin(x);
       } else {
-        target.value = x.value;                       // metin alanı (görünüm / renk / koku): ifade doğrudan yazılır
+        target.value = _naMetin(x);                   // metin alanı (görünüm / renk / koku): ifade doğrudan yazılır
         target.dataset.source = 'user';
       }
     });

@@ -825,7 +825,7 @@ async def classify(inp: dict) -> dict:
         all_h   = [h for h in all_h if h not in ECO_H_CODES] + [aq.h_code] + (['H400'] if h400_also else [])
         if h400_also and not any(e['h_code'] == 'H400' for e in cp):
             cp.append({'h_code': 'H400', 'h_class': 'Aquatic Acute 1',
-                       'reason': 'CLP §4.1.3.5.5: H410 bileşeni Sucul Akut 1 (H400) de üretir',
+                       'reason': 'Toplama yöntemi (SEA Ek-1 4.1.3.5): Σ Sucul Akut 1 × M ≥ %25',
                        'cutoff_used': '—'})
     else:
         h_codes = [h for h in h_codes if h not in ECO_H_CODES]

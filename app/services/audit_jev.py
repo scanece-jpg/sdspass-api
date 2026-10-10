@@ -36,6 +36,12 @@ def load_checklist() -> dict:
 _SEC_RE = re.compile(r'(?im)^\s*(?:B[ÖO]L[ÜU]M|SECTION)\s*(\d{1,2})\s*[:.\-–]')
 
 
+# "BÖLÜM n" yazılmayan GBF'ler: "1. MADDENİN/KARIŞIMIN …", "8. MARUZ KALMA …" — numara + büyük harfli başlık
+# (alt başlıklar "1.1." ile ayrılır: numaradan sonra boşluk gelir). Önceden bu biçimde bölümler bulunamıyor,
+# e-posta / 114 / Bölüm 3 / KDU gibi var olan bilgiler "eksik" sayılıyordu (Hyper Hypo GBF, 2026-10-10).
+_SEC_RE_NUM = re.compile(r"(?m)^\s*(\d{1,2})\s*[.)]\s+(?=[A-ZÇĞİÖŞÜ][A-ZÇĞİÖŞÜ/,'’ \-]{6,})")
+
+
 def split_sections(text: str) -> Dict[str, str]:
     """Her bölüm numarasının ilk başlığından bir sonrakine kadar olan metin."""
     first = {}
@@ -43,6 +49,16 @@ def split_sections(text: str) -> Dict[str, str]:
         n = int(m.group(1))
         if 1 <= n <= 16 and n not in first:
             first[n] = m.start()
+    if len(first) < 8:
+        # Yedek: numaralı büyük harfli başlıklar — sıra korunarak (her bölüm bir öncekinden sonra gelmeli)
+        alt, son = {}, -1
+        for m in _SEC_RE_NUM.finditer(text or ''):
+            n = int(m.group(1))
+            if 1 <= n <= 16 and n not in alt and m.start() > son and all(k < n for k in alt):
+                alt[n] = m.start()
+                son = m.start()
+        if len(alt) > len(first):
+            first = alt
     order = sorted(first.items(), key=lambda x: x[1])
     return {str(n): text[pos:(order[i + 1][1] if i + 1 < len(order) else len(text))]
             for i, (n, pos) in enumerate(order)}

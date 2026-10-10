@@ -1063,6 +1063,12 @@ def kural_testleri(c) -> int:
                   and 'karışım test edilmemiştir' not in t and 'kesme %3.0' not in t
                   and 'kayıt yaptıranın sınıflandırması' in t)(
              _pdf_text(c, [('108-88-3', 100)]))),
+        ('Tedarikçi GBF Bölüm 11: mg/m³ → mg/l; kesin olmayan (>), aralık ve çözeltide ölçülmüş (%) değer ATE sayılmaz '
+         '(Akkim H2O2 "170 mg/m³ (%50 H2O2)" önceden 170 mg/l alınıyordu — 2026-10-10)',
+         lambda: (lambda f: f('5580 mg/kg (sıçan)', 'oral')[0] == 5580 and f('3200 mg/m3 4h', 'inhal')[0] == 3.2
+                  and f('170 mg/m³ (%50 H2O2)', 'inhal')[0] is None and f('> 20 mg/l', 'inhal')[0] is None
+                  and f('1193 - 1270 mg/kg', 'oral')[0] is None and f(300.0, 'oral')[0] is None)(
+             __import__('app.main', fromlist=['x'])._ate_from_text)),
         ('Danışman hesabı: anahtarsız erişim yok, firma klasörü otomatik açılır, aynı ad engellenir, '
          'üretilen GBF kaydedilir / listelenir / geri okunur (accounts.py)',
          lambda: _hesap_testi()),

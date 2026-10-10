@@ -496,7 +496,14 @@ async def ensure_many(cas_list: List[str], timeout: float = 90.0) -> List[str]:
     todo = [c for c in dict.fromkeys((x or '').strip() for x in cas_list) if c]
     if not todo or OFFLINE:
         return []
-    tasks = {c: asyncio.ensure_future(ensure(c)) for c in todo}
+    # ECHA'ya aynı anda en çok 2 madde sorgulanır (çok bileşenli üründe 20+ eşzamanlı istek gidiyordu — toplu çekim
+    # izlenimi vermesin, PubChem'deki gibi engellenmeyelim; madde başına istekler zaten _DELAY aralıklı)
+    _sem = asyncio.Semaphore(2)
+
+    async def _one(c):
+        async with _sem:
+            return await ensure(c)
+    tasks = {c: asyncio.ensure_future(_one(c)) for c in todo}
     done, pending = await asyncio.wait(tasks.values(), timeout=timeout)
     return [c for c, t in tasks.items() if t in pending]
 

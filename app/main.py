@@ -200,9 +200,15 @@ async def generate_pdf(data: dict = Body(...)):
                 return float(c.get('concMax') or c.get('conc') or c.get('concentration') or 0)
             except (TypeError, ValueError):
                 return 0.0
-        _cas_missing = [f"CAS numarası: {c.get('name') or '(adsız bileşen)'}"
+        # CAS ya da EC numarası (KKDİK Ek-2 3.2: CAS'ı olmayan UVCB'ler — örn. "Hidrokarbonlar, C6-C7…" — EC ile tanımlanır)
+        def _kimlik_var(c):
+            _cas = str(c.get('cas') or c.get('cas_no') or '').strip()
+            _ec = str(c.get('ec') or c.get('ec_no') or '').strip()
+            return bool(re.fullmatch(r'\d{2,7}-\d{2}-\d', _cas) or re.fullmatch(r'\d{3}-\d{3}-\d', _ec)
+                        or re.fullmatch(r'\d{3}-\d{3}-\d', _cas))
+        _cas_missing = [f"CAS / EC numarası: {c.get('name') or '(adsız bileşen)'}"
                         for c in ((data.get('calc_input') or {}).get('components') or data.get('components') or [])
-                        if _cf(c) > 0 and not re.fullmatch(r'\d{2,7}-\d{2}-\d', str(c.get('cas') or c.get('cas_no') or '').strip())]
+                        if _cf(c) > 0 and not _kimlik_var(c)]
         _kdu_missing += _cas_missing
         if _id_missing or _kdu_missing:
             raise HTTPException(status_code=422, detail={

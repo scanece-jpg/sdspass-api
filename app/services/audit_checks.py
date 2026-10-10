@@ -125,7 +125,7 @@ def c_surum(ctx):
     """KKDİK Ek-2 0.2.5: revizyonda ilk sayfada sürüm / revizyon numarası VE hangi versiyonun değiştirildiği
     (değiştirme tarihi veya yerine geçtiği versiyon)."""
     p1 = ctx['pages'][0] if ctx['pages'] else ''
-    if not re.search(r'(?i)\b(rev(?:izyon)?\.?(?:\s*no)?|sürüm|versiyon|version|düzenleme)\s*[:.]?\s*\d', p1):
+    if not re.search(r'(?i)\b(rev(?:izyon)?\.?(?:\s*no)?|sürüm|versiyon|version|düzenleme(?:\s+olduğu)?)\s*[:.]?\s*\d', p1):
         return 'eksik', 'İlk sayfada sürüm/revizyon numarası bulunamadı.'
     sup = re.search(r'(?i)yerine geçtiği|yerine geçer|değiştirdiği|değiştirme tarihi|önceki (?:versiyon|sürüm)|'
                     r'supersed|replaces|previous version', p1)
@@ -329,7 +329,7 @@ _PROPS = [('a) görünüm', r'görünüm|fiziksel (?:hal|durum)|görünüş'), (
           ('c) koku eşiği', r'koku eşi'), ('ç) pH', r'\bph\b'), ('d) erime/donma', r'erime|donma'),
           ('e) kaynama', r'kaynama'), ('f) parlama noktası', r'parlama'), ('g) buharlaşma hızı', r'buharlaşma'),
           ('ğ) alevlenirlik', r'alevlenirlik|tutuşabilirlik'),
-          ('h) patlama limitleri', r'patlay[ıi]c[ıi] limit|patlama limit|alevlenirlik limit|üst/alt|alt patlay|üst patlay'),
+          ('h) patlama limitleri', r'patlay[ıi]c[ıi] limit|patlama limit|alevlenirlik limit|üst/alt|alt patlay|üst patlay|infilak sınır'),
           ('ı) buhar basıncı', r'buhar bas'), ('i) buhar yoğunluğu', r'buhar yoğ|bağıl buhar|nispi buhar'),
           ('j) bağıl yoğunluk', r'bağıl yoğ|yoğunluk'), ('k) çözünürlük', r'çözünür'),
           ('l) dağılım katsayısı', r'dağılım katsay|oktanol'),
@@ -344,7 +344,7 @@ def c_91(ctx):
     return ('uygun', '9.1\'deki 20 özelliğin hepsi var.') if not miss else ('eksik', f'9.1\'de bulunamayan özellikler: {miss}')
 
 
-_CLASSES = [('a) akut toksisite', r'akut toksisite'), ('b) cilt aşınması/tahrişi', r'cilt aşın|deri korozyon|cilt tahriş|deri tahriş|ciltte aşın'),
+_CLASSES = [('a) akut toksisite', r'akut toksisite|akut toksik'), ('b) cilt aşınması/tahrişi', r'cilt aşın|deri korozyon|cilt tahriş|deri tahriş|ciltte aşın'),
             ('c) göz hasarı/tahrişi', r'göz hasar|göz tahriş'), ('ç) hassaslaşma', r'hassaslaş|duyarlılaş|hassasiyet'),
             ('d) mutajenite', r'mutajen|mütajen|mütagen|mutagen|eşey hücre|germ hücre'), ('e) kanserojenite', r'kanserojen'),
             ('f) üreme toksisitesi', r'üreme|reprodüktif'), ('g) BHOT tek', r'tek maruz|tek bir maruz'),
@@ -388,7 +388,7 @@ def c_sinif14(ctx):
     if re.search(r'(?i)belirlenmemiştir|not determined', ctx['secs'].get('14', '')):
         return 'kdu', '14. bölümde taşımacılık sınıflandırması "belirlenmemiştir" — KDU kontrol etmeli (KKDİK Ek-2 Bölüm 14).'
     s14 = _s14_rakam(ctx['secs'].get('14', ''))
-    return ('uygun', 'Taşımacılık sınıfı var.') if re.search(r'(?i)(?:sınıf\w*|class|zararlar[ıi])\s*[:\-]?\s*\d(?:\.\d)?', s14) \
+    return ('uygun', 'Taşımacılık sınıfı var.') if re.search(r'(?i)(?:sınıf[\w()]*|class|zararlar[ıi])\s*[:\-]?\s*\d(?:\.\d)?', s14) \
         else ('eksik', '14.3\'te taşımacılık sınıfı bulunamadı.')
 
 
@@ -396,7 +396,8 @@ def c_pg(ctx):
     if re.search(r'(?i)belirlenmemiştir|not determined', ctx['secs'].get('14', '')):
         return 'kdu', '14. bölümde taşımacılık sınıflandırması "belirlenmemiştir" — KDU kontrol etmeli (KKDİK Ek-2 Bölüm 14).'
     s14 = ctx['secs'].get('14', '')
-    return ('uygun', 'Ambalaj grubu var.') if re.search(r'(?i)ambalaj(?:lama)? grubu\s*[:\-]?\s*(?:I{1,3}\b|uygulanamaz|yok)', s14) \
+    return ('uygun', 'Ambalaj grubu var.') if re.search(r'(?i)ambalaj(?:lama)? grubu\s*[:\-]?\s*(?:I{1,3}\b|uygulanamaz|'
+                                                        r'uygulanabilir değil|yok|[-–](?=\s|$))', s14) \
         else ('eksik', '14.4\'te ambalaj grubu bulunamadı.')
 
 
@@ -501,7 +502,7 @@ _CONC_NEAR = re.compile(r'(?:[<>≤≥]=?\s*)?(\d+(?:[.,]\d+)?)\s*(?:%)?\s*(?:-|
                         r'|(?:[<>≤≥]=?\s*)?(\d+(?:[.,]\d+)?)\s*%|%\s*[<>≤≥]?\s*(\d+(?:[.,]\d+)?)')
 
 
-_RANGE_GE = re.compile(r'(?:[>≥]=?|&gt;=?)\s*(\d+(?:[.,]\d+)?)\s*%?\s*[-–]\s*([<≤]=?|&lt;=?)\s*(\d+(?:[.,]\d+)?)')
+_RANGE_GE = re.compile(r'(?:[>≥]=?|&gt;=?|(?<=Alan\s)|(?<=Alan:\s))\s*(\d+(?:[.,]\d+)?)\s*%?\s*[-–]\s*([<≤]=?|&lt;=?)\s*(\d+(?:[.,]\d+)?)')
 # Yalnız üst sınır: "< 0,1%" (alt sınırsız aralık)
 _RANGE_LT = re.compile(r'(?<![\d.,])(?:<|&lt;)\s*(\d+(?:[.,]\d+)?)\s*%')
 
@@ -512,6 +513,18 @@ def _segments3(ctx):
     pos = [(c, s3.find(c)) for c in cas]
     pos = sorted([p for p in pos if p[1] >= 0], key=lambda x: x[1])
     return [(c, s3[i:(pos[k + 1][1] if k + 1 < len(pos) else len(s3))]) for k, (c, i) in enumerate(pos)], s3
+
+
+def _ek6_not_suz(lk: dict, seg: str) -> list:
+    """Bileşenin veritabanı tehlikeleri; Ek-6 notlu (J/K/L/M/N/P) maddede GBF Bölüm 3 satırı kanserojen / mutajen kodu
+    içermiyorsa (firma notu uygulamış) o kodlar yeniden hesaba katılmaz."""
+    hz = list(lk.get('hazards') or [])
+    notlar = set(lk.get('notes') or []) & set('JKLMNP')
+    if not notlar or not lk.get('sea_ek6'):
+        return hz
+    kodlar = {'H350', 'H351'} | ({'H340', 'H341'} if notlar & set('JKP') else set())
+    yazili = {h[:4] for h in re.findall(r'H3[45]\d\w?', seg or '')}
+    return [h for h in hz if str(h.get('h_code') or '')[:4] not in kodlar or str(h.get('h_code') or '')[:4] in yazili]
 
 
 def _comps3(ctx):
@@ -545,7 +558,9 @@ def _comps3(ctx):
             unknown.append(c)
         comps.append({'cas_no': c, 'cas': c, 'name': lk.get('name') or c, 'name_tr': lk.get('name_tr') or '',
                       'concentration': conc, 'conc': conc,
-                      'hazards': lk.get('hazards') or [],
+                      # SEA Ek-6 Not J/K/L/M/N/P: koşul tedarikçi belgesiyle gösterilmişse kanserojen / mutajen sınıf
+                      # uygulanmaz — GBF Bölüm 3'te bileşene bu sınıf yazılmamışsa not uygulanmış sayılır
+                      'hazards': _ek6_not_suz(lk, seg),
                       'sclRaw': lk.get('scl') or [], 'euh_limits': lk.get('euh_limits') or [],
                       'm_factors': lk.get('m_factors') or {},
                       'suppl_hazards': lk.get('suppl_hazards') or [], 'segment': seg})
@@ -778,7 +793,7 @@ def c_16_revizyon(ctx):
     s16 = ctx['secs'].get('16', '')
     if re.search(r'(?i)değişiklik(?:ler)?\s+belirtilmemiştir|changes[^.]{0,40}not (?:been )?specified', s16):
         return 'eksik', 'Bölüm 16\'da önceki versiyona göre değişikliklerin "belirtilmediği" yazıyor (KKDİK Ek-2 16(a)).'
-    if re.search(r'(?i)değişiklik|güncellen|revize edil|eklendi|çıkarıldı|changes|revised|amended', s16):
+    if re.search(r'(?i)değişiklik|güncellen|revize edil|eklendi|çıkarıldı|düzeltilmiş bölüm|changes|revised|amended', s16):
         return 'uygun', 'Bölüm 16\'da önceki versiyona göre değişiklikler belirtilmiş.'
     return 'eksik', 'Revizyon olduğu halde Bölüm 16\'da değişiklik açıklaması bulunamadı (KKDİK Ek-2 16(a)).'
 

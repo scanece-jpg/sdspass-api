@@ -5649,9 +5649,11 @@ function _checkPDFMandatory() {
   }
   // Bileşen CAS numarası — sınıflandırma (SEA Ek-6), OEL, taşıma ve atık CAS'a bağlıdır; adla girilen bileşen
   // hesaba giremez (önceden adla girilen %32 HCl'de H335, Bölüm 3, OEL, tehlikeli atık ve UN1789 kayboluyordu)
-  getComps().filter(c => (parseFloat(c.concMax || c.conc) || 0) > 0 && !/^\d{2,7}-\d{2}-\d$/.test(c.cas || ''))
-    .forEach(c => missing.push({ hard: true, label: `Bileşen CAS numarası: ${c.name || '(adsız)'}`,
-      reason: 'CAS kutusuna maddenin adını yazıp listeden seçin ya da CAS numarasını girin (KKDİK Ek-2 3.2; SEA Md.6)' }));
+  // CAS'ı olmayan UVCB'ler (örn. hidrokarbon solventler) EC numarasıyla tanımlanır (KKDİK Ek-2 3.2)
+  getComps().filter(c => (parseFloat(c.concMax || c.conc) || 0) > 0 && !/^\d{2,7}-\d{2}-\d$/.test(c.cas || '')
+                         && !/^\d{3}-\d{3}-\d$/.test(c.ec || '') && !/^\d{3}-\d{3}-\d$/.test(c.cas || ''))
+    .forEach(c => missing.push({ hard: true, label: `Bileşen CAS / EC numarası: ${c.name || '(adsız)'}`,
+      reason: 'CAS kutusuna maddenin adını yazıp listeden seçin ya da CAS numarasını girin; CAS'ı olmayan madde için EC numarasını EC kutusuna yazın (KKDİK Ek-2 3.2)' }));
   // Forma göre zorunlu fiziksel alanlar (KKDİK Ek-2 9.1) — boşsa PDF oluşturulmaz
   _physReqMissing(form).forEach(m => missing.push({
     hard: true, label: m.label + ' (Bölüm 9)',

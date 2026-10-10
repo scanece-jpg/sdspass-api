@@ -1234,6 +1234,19 @@ def kural_testleri(c) -> int:
                  'form': 'liquid', 'usage': 'industrial',
                  'test_data': {'oxidizing_liquid': 'H272_cat2', 'metal_corrosive': 'not_corrosive',
                                'euh071_inhalable': 'not_inhalable', 'ate_inhal_form': 'vapour'}}).json().get('all_h_codes') or [])),
+        ("SEA Ek-6 Not L / P: baz yağ (64742-54-7, Not L) içeren motor yağında H350 için KDU'ya sorulur; 'koşul "
+         "gösteriliyor' seçilince H350 kalkar ve soru kapanır (Liqui Moly TR GBF, 2026-10-10)",
+         lambda: (lambda f: (lambda a, b: 'H350' in a[0] and 'EK6_NOT' in a[1] and 'H350' not in b[0]
+                             and not b[1])(
+                                 f({}), f({'ek6not_64742-54-7': 'uygulanir'})))(
+             lambda td: (lambda j: ([h for h in (j.get('all_h_codes') or [])],
+                                    [d['code'] for d in (j.get('pending_decisions') or []) if d.get('code') == 'EK6_NOT'],
+                                    j.get('euh_codes') or []))(
+                 c.post('/api/v1/sds/calculate', json={'components': [
+                     {'cas': '64742-54-7', 'name': 'baz yağ', 'conc': 74.9, 'concMax': 74.9,
+                      'hazards': c.get('/api/v1/sds/substance/lookup', params={'cas': '64742-54-7', 'form': 'liquid'}).json().get('hazards', []),
+                      'm_factors': {}}], 'form': 'liquid', 'usage': 'industrial',
+                     'test_data': {'viscosity': 70, **td}}).json()))),
         ('Danışman hesabı: anahtarsız erişim yok, firma klasörü otomatik açılır, aynı ad engellenir, '
          'üretilen GBF kaydedilir / listelenir / geri okunur (accounts.py)',
          lambda: _hesap_testi()),

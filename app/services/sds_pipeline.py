@@ -56,7 +56,7 @@ DOMINANCE_MAP = {
 def _pending_all(phys_res: dict, transport: dict, test_data: dict, comps: Optional[list] = None) -> list:
     """Panel kararları phys_res['pending_decisions'] üzerinden gösterir — ADR kararı da oraya eklenir (tekrarsız)."""
     lst = phys_res.setdefault('pending_decisions', [])
-    for d in _adr_undet_decision(transport, test_data) + _ted_decisions(comps or []):
+    for d in _adr_undet_decision(transport, test_data) + _ted_decisions(comps or []) + _ek6_not_decisions(comps or []):
         if d.get('field') not in {x.get('field') for x in lst}:
             lst.append(d)
     return lst
@@ -103,6 +103,58 @@ def _h4(h) -> str:
 
 
 # ── Bileşen verisini yetkili kaynaktan tazele ────────────────────────────────
+# SEA Ek-6 madde notları (Ek-6 Bölüm 1 notları — resmî metin sds-knowledge/tr/sea-ekleri.md): koşul "gösterilebilirse"
+# kanserojen (ve J/K/P'de mutajen) sınıflandırma gerekli değildir. Gösterim tedarikçi belgesine dayanır → KDU kararı.
+# Önceden notlara bakılmıyordu: baz yağ (64742-54-7, Not L) ve solventler (64742-48-9, Not P) içeren her motor yağı,
+# gres ve sprey H350/H340 alıyordu (Liqui Moly TR GBF'leri, 2026-10-10).
+_EK6_NOT = {
+    'J': ("benzen içeriği a/a %0,1'den az", ('H350', 'H351', 'H340', 'H341'), ()),
+    'K': ("1,3-bütadien içeriği a/a %0,1'den az", ('H350', 'H351', 'H340', 'H341'), ('P210', 'P403')),
+    'L': ("DMSO özütü %3'ten az (IP 346)", ('H350', 'H351'), ()),
+    'M': ("benzo[a]piren içeriği a/a %0,005'ten az", ('H350', 'H351'), ()),
+    'N': ('rafinaj geçmişi tam biliniyor ve üretildiği madde kanserojen değil', ('H350', 'H351'), ()),
+    'P': ("benzen içeriği a/a %0,1'den az", ('H350', 'H351', 'H340', 'H341'), ('P260', 'P262', 'P301+P310', 'P331')),
+}
+
+
+def _ek6_not_uygula(c: dict, notlar: list, td: dict) -> None:
+    """Ek-6 notu (J/K/L/M/N/P) taşıyan bileşen: KDU koşulun sağlandığını seçerse kanserojen / mutajen sınıf kalkar."""
+    cas = (c.get('cas') or c.get('cas_no') or '').strip()
+    notlar = [n for n in notlar if n in _EK6_NOT]
+    kodlar = {k for n in notlar for k in _EK6_NOT[n][1]}
+    etkilenen = [h for h in c.get('hazards', []) if _h4(h.get('h_code')).upper() in kodlar]
+    if not notlar or not etkilenen:
+        return
+    field = f'ek6not_{cas}'
+    karar = (td or {}).get(field)
+    c['ek6_not'] = {'notlar': notlar, 'field': field, 'karar': karar,
+                    'kodlar': sorted({_h4(h.get('h_code')).upper() for h in etkilenen})}
+    if karar == 'uygulanir':
+        c['hazards'] = [h for h in c['hazards'] if _h4(h.get('h_code')).upper() not in kodlar]
+        c['ek6_not']['p_asgari'] = [pc for n in notlar for pc in _EK6_NOT[n][2]]
+
+
+def _ek6_not_decisions(comps: list) -> list:
+    out = []
+    for c in comps:
+        e = c.get('ek6_not') or {}
+        if not e or e.get('karar') in ('uygulanir', 'uygulanmaz'):
+            continue
+        ad = c.get('name_tr') or c.get('name') or c.get('cas', '')
+        kosul = ' / '.join(f"Not {n}: {_EK6_NOT[n][0]}" for n in e['notlar'])
+        out.append({'code': 'EK6_NOT', 'field': e['field'],
+                    'question': (f"{ad} ({c.get('cas', '')}) SEA Ek-6'da {', '.join(e['kodlar'])} ile sınıflandırılmış; "
+                                 f"{kosul} gösterilebilirse bu sınıflandırma gerekli değildir. Tedarikçinin GBF'si / analiz "
+                                 "belgesi bu koşulu gösteriyor mu?"),
+                    'options': [
+                        {'value': 'uygulanir', 'label': f"Evet — koşul tedarikçi belgesiyle gösteriliyor ({', '.join(e['kodlar'])} uygulanmaz)",
+                         'effect': 'sınıf kalkar'},
+                        {'value': 'uygulanmaz', 'label': f"Hayır / bilinmiyor — {', '.join(e['kodlar'])} kalır", 'effect': 'sınıf kalır'},
+                    ],
+                    'legal_basis': f"SEA Ek-6 Not {', '.join(e['notlar'])}", 'components': [c.get('cas', '')]})
+    return out
+
+
 def _ted_kaynak(ted: dict) -> str:
     """Tedarikçi GBF'sinin kısa tanımı (karar sorusu ve GBF kaynak notu)."""
     t = ' — '.join(x for x in (ted.get('firma'), ted.get('urun')) if x) or 'tedarikçi GBF\'si'
@@ -282,6 +334,8 @@ async def refresh_components(components: list, form: str, test_data: Optional[di
                     _apply_m_ate(c, comp, fresh)
                 else:
                     c['hazards'] = []
+                if fresh.get('sea_ek6') and fresh.get('notes'):
+                    _ek6_not_uygula(c, list(fresh.get('notes') or []), test_data)
                 _ted_compare(c, comp, test_data, {_h4(k).upper(): v for k, v in
                                                    (fresh.get('classification_sources') or {}).items()})
                 if fresh.get('suppl_hazards'):
@@ -1012,6 +1066,18 @@ async def classify(inp: dict) -> dict:
             _d['text'] = _select_inhal(_d['text'], form, 'TR' if lang == 'TR' else 'EN')
     p_result['label'] = select_label_p_codes(p_result['p_codes'], 6, h_codes=h_codes, euh_codes=euh_codes,
                                              usage=usage, form=form)
+    # SEA Ek-6 Not K / P: madde kanserojen sınıflandırılmadığında "en azından" belirtilen önlem ifadeleri kullanılır
+    # (P102 parantez içinde — halka arz). Yalnız tek maddeli üründe (not maddenin etiketine ilişkindir).
+    if substance_mode:
+        _pa = list(dict.fromkeys(pc for c in _active for pc in ((c.get('ek6_not') or {}).get('p_asgari') or [])))
+        if _pa:
+            if usage == 'consumer':
+                _pa = ['P102'] + _pa
+            for _pc in _pa:
+                if _pc not in p_result['p_codes']:
+                    p_result['p_codes'].append(_pc)
+                if _pc not in p_result['label']['selected']:
+                    p_result['label']['selected'].append(_pc)
     p_result['sds'] = classify_sds_p_codes(p_result['p_codes'], usage=usage, h_codes=h_codes, form=form,
                                            label=p_result['label']['selected'])
     try:
@@ -1078,6 +1144,17 @@ async def classify(inp: dict) -> dict:
                   + (f' ({_fmt(_used)})' if _used else '') + '.'
                   + (f' Not applied by user decision: {_fmt(_rem)}.' if _rem else ''))
         cls_notes.append({'TR': tr_txt, 'EN': en_txt})
+    # SEA Ek-6 notu uygulanan bileşenler (kanserojen / mutajen sınıf kaldırıldı — tedarikçi belgesine dayanır)
+    _notlu = [c for c in comps if (c.get('ek6_not') or {}).get('karar') == 'uygulanir']
+    if _notlu:
+        cls_notes.append({
+            'TR': ('SEA Ek-6 notları: ' + '; '.join(
+                f"{c.get('name_tr') or c.get('name') or c.get('cas', '')} — Not {', '.join(c['ek6_not']['notlar'])} "
+                f"({' / '.join(_EK6_NOT[n][0] for n in c['ek6_not']['notlar'])}) tedarikçi belgesiyle gösterildiğinden "
+                f"{', '.join(c['ek6_not']['kodlar'])} sınıflandırması uygulanmamıştır" for c in _notlu) + '.'),
+            'EN': ('Annex VI notes: ' + '; '.join(
+                f"{c.get('name') or c.get('cas', '')} — Note {', '.join(c['ek6_not']['notlar'])} demonstrated by the supplier; "
+                f"{', '.join(c['ek6_not']['kodlar'])} not applied" for c in _notlu) + '.')})
     # Tedarikçi GBF'si ile farklarda KDU kararı (SEA Md.6(1)(c)) — hangi sınıfın hangi kaynağa göre alındığı
     _ted_k = [(c, f) for c in comps for f in (c.get('ted_farklar') or []) if f.get('karar') in ('sdspass', 'tedarikci')]
     if _ted_k:

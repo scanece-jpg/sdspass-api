@@ -245,6 +245,47 @@ _PT_ROWS: Dict[str, list] = {
 _PT_ORDER = ['3', '4.1', '4.2', '4.3', '5.1', '6.1', '8', '9']
 
 
+
+# ADR 2.1.3.4.1 / 2.1.3.4.2 — içeren karışım her zaman bu girişte (CAS → UN). Derişime bağlı HCN (1051/1613/1614/3294),
+# HF >%85 (1790) ve erimiş POBr3 (2576) satırları elle değerlendirilir.
+_ALWAYS_SAME_ENTRY = {
+    '75-55-8': '1921',      # propilenimin, stabilize
+    '151-56-4': '1185',     # etilenimin, stabilize
+    '13463-39-3': '1259',   # nikel karbonil
+    '13463-40-6': '1994',   # demir pentakarbonil
+    '624-83-9': '2480',     # metil izosiyanat
+    '109-90-0': '2481',     # etil izosiyanat
+    '7726-95-6': '1744',    # brom / brom çözeltisi
+    '1336-36-3': '2315',    # poliklorlu bifeniller, sıvı
+}
+
+# ADR 2.1.1.2 C türü kimyasal grup B.B.B. girişleri: (grup, birincil sınıf, yan tehlikeler, katı mı) → UN (Tablo A)
+_GROUP_NOS = {
+    ('alkol', '3', (), False): '1987', ('alkol', '3', ('6.1',), False): '1986',
+    ('keton', '3', (), False): '1224',
+    ('aldehit', '3', (), False): '1989', ('aldehit', '3', ('6.1',), False): '1988',
+    ('ester', '3', (), False): '3272', ('eter', '3', (), False): '3271',
+    ('hidrokarbon', '3', (), False): '3295',
+    ('amin', '3', ('8',), False): '2733', ('amin', '8', ('3',), False): '2734', ('amin', '8', (), False): '2735',
+    ('amin', '8', (), True): '3259',
+    ('kostik_alkali', '8', (), False): '1719',
+}
+_GROUP_MAP = None
+
+
+def _group_map() -> Dict[str, List[str]]:
+    """data/adr_group_map.json (scripts/adr_cas_map/6_gruplar.py) — CAS → kimyasal gruplar."""
+    global _GROUP_MAP
+    if _GROUP_MAP is None:
+        import json as _json
+        from pathlib import Path as _P
+        _p = _P(__file__).resolve().parents[2] / 'data' / 'adr_group_map.json'
+        try:
+            _GROUP_MAP = _json.load(open(_p, encoding='utf-8')).get('grup') or {}
+        except Exception:
+            _GROUP_MAP = {}
+    return _GROUP_MAP
+
 def _pg_num(pg: Optional[str]) -> int:
     """PG stringini sayıya çevirir. I=1 (en tehlikeli), III=3, None=4."""
     return {'I': 1, 'II': 2, 'III': 3}.get(pg, 4)
@@ -970,6 +1011,55 @@ def classify(h_codes: List[str], form: str = 'liquid',
                                  "— adlı giriş kullanılır." + (f" {_d['seed_note']}" if _d.get('seed_note') else '')),
                     }
                     primary = {**primary, 'pg': _pg}
+
+    # ADR 2.1.3.4.1 / 2.1.3.4.2 — bu maddeleri içeren çözelti ve karışımlar (2.1.3.5.3'teki öncelikli zararlar yoksa)
+    # her zaman maddenin girişinde sınıflandırılır. Derişime/suya bağlı HCN ve HF satırları burada yok (KDU kontrol eder).
+    if _comps and form not in ('aerosol', 'gas') and str(primary['class']) not in ('1', '2', '5.2', '6.2', '7'):
+        _always = [c for c in _comps if str(c.cas).strip() in _ALWAYS_SAME_ENTRY and (c.conc or 0) > 0]
+        if _always:
+            _au = _ALWAYS_SAME_ENTRY[str(_always[0].cas).strip()]
+            _others = [c for c in _comps if c is not _always[0] and set(c.h_codes) & _TRANSPORT_TRIGGER_H
+                       and (c.conc or 0) >= 1.0]
+            if not (_au in ('2315', '3432') and _others):      # PCB: başka tehlikeli bileşen yoksa (2.1.3.4.2, basitleştirilmiş)
+                from app.services.transport_adr_service import get_adr_details as _gad4
+                _d4 = _gad4('UN' + _au, primary['pg'] or 'I')
+                if _d4.get('found'):
+                    _labs4 = _d4.get('labels') or [str(_d4.get('class'))]
+                    primary = {**primary, 'class': str(_d4.get('class')), 'pg': _d4.get('packing_group') or primary['pg']}
+                    subs = [{'class': x, 'pg': None} for x in _labs4[1:]]
+                    sub_class = subs[0]['class'] if subs else None
+                    un_entry = {'un': 'UN' + _au, 'label': _d4.get('name_tr') or _d4.get('name', ''),
+                                'pg': primary['pg'], 'kemler': _d4.get('kemler'), 'tunnel': _d4.get('tunnel_code'),
+                                'note': (f"ADR 2.1.3.4: {_always[0].name or _always[0].cas} içeren çözelti ve karışımlar her zaman "
+                                         f"UN {_au} girişinde sınıflandırılır.")}
+
+    # ADR 2.1.3.6 — en özel toplu giriş: kimyasal grup B.B.B. (2.1.1.2 C türü, örn. UN 1987 ALKOLLER) genel B.B.B.'den
+    # (D türü, örn. UN 1993) önce gelir. Taşıma zararı veren bileşenlerin hepsi aynı gruptaysa ve karışımın sınıfı, yan
+    # tehlikeleri ve ambalaj grubu grup girişininkiyle aynıysa grup girişi kullanılır. Grup üyeliği: data/adr_group_map.json.
+    if (_comps and not un_entry.get('class') and 'B.B.B.' in str(un_entry.get('label') or '')
+            and form not in ('aerosol', 'gas')):
+        _a13 = {'H300', 'H301', 'H310', 'H311', 'H330', 'H331'}
+        _trg = [c for c in _comps if set(c.h_codes) & _TRANSPORT_TRIGGER_H
+                and (c.conc or 0) >= (0.1 if set(c.h_codes) & _a13 else 1.0)]
+        _gm = _group_map()
+        if _trg and all(_gm.get(str(c.cas).strip()) for c in _trg):
+            _common = set.intersection(*[set(_gm[str(c.cas).strip()]) for c in _trg])
+            _sb = tuple(sorted({str(x['class']) for x in subs if str(x['class']) != '9'}))
+            _cands = {un for (g, cl, sb, solid), un in _GROUP_NOS.items()
+                      if g in _common and cl == str(primary['class']) and sb == _sb and solid == is_solid}
+            if len(_cands) == 1:
+                from app.services.transport_adr_service import get_adr_details as _gad, _load as _adr_load
+                _gun = next(iter(_cands))
+                _ent = _adr_load().get('UN' + _gun, {})
+                _tpgs = set((_ent.get('packing_groups') or {}).keys()) or {_ent.get('packing_group')}
+                if primary['pg'] in _tpgs:
+                    _gd = _gad('UN' + _gun, primary['pg'])
+                    un_entry = {'un': 'UN ' + _gun, 'label': _gd.get('name_tr') or _gd.get('name', ''),
+                                'pg': primary['pg'], 'kemler': _gd.get('kemler'), 'tunnel': _gd.get('tunnel_code'),
+                                'note': (f"ADR 2.1.3.6: taşıma zararı veren bileşenlerin tümü aynı kimyasal grupta "
+                                         f"({', '.join(sorted(_common))}) — genel B.B.B. yerine en özel toplu giriş "
+                                         f"UN {_gun} kullanıldı (ADR 2.1.1.2 C).")}
+
 
     # UN 3082 — ADR 3.3.1 Özel Hüküm 375. Önceki not "kinematik viskozite ≥ 2500 mm²/s" şartı arıyordu (hesaplanmış
     # viskoziteyle); ADR 2025 ÖH 375 metninde viskozite şartı yoktur — muafiyet ambalaj miktarına bağlıdır (2026-10-09).

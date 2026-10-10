@@ -5,7 +5,7 @@
    {
     "un": "UN1173",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "79-09-4": [
@@ -62,7 +62,7 @@
     "un": "UN1072",
     "pg": "-",
     "physical_state": "gas",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "74-98-6": [
@@ -70,7 +70,7 @@
     "un": "UN1978",
     "pg": "-",
     "physical_state": "gas",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "74-86-2": [
@@ -98,7 +98,7 @@
    {
     "un": "UN1428",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "71-36-3": [
@@ -112,7 +112,7 @@
    {
     "un": "UN1145",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "60-29-7": [
@@ -140,21 +140,21 @@
    {
     "un": "UN1282",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "121-44-8": [
    {
     "un": "UN1296",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "127-18-4": [
    {
     "un": "UN1897",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "14998-27-7": [
@@ -169,7 +169,7 @@
    {
     "un": "UN1736",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "7429-90-5": [
@@ -190,7 +190,7 @@
    {
     "un": "UN1350",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "630-08-0": [
@@ -206,7 +206,7 @@
     "un": "UN1045",
     "pg": "-",
     "physical_state": "gas",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "7440-37-1": [
@@ -222,13 +222,13 @@
     "un": "UN1008",
     "pg": "",
     "physical_state": "gas",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    },
    {
     "un": "UN3519",
     "pg": "",
     "physical_state": "gas",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "106-97-8": [
@@ -252,7 +252,7 @@
     "un": "UN1027",
     "pg": "",
     "physical_state": "gas",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "115-10-6": [
@@ -260,7 +260,7 @@
     "un": "UN1033",
     "pg": "",
     "physical_state": "gas",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "74-84-0": [
@@ -268,7 +268,7 @@
     "un": "UN1035",
     "pg": "",
     "physical_state": "gas",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "75-04-7": [
@@ -279,13 +279,13 @@
     "min_conc": 50.0,
     "max_conc": 70.0,
     "pg_fixed": true,
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    },
    {
     "un": "UN1036",
     "pg": "",
     "physical_state": "gas",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "75-00-3": [
@@ -293,7 +293,7 @@
     "un": "UN1037",
     "pg": "",
     "physical_state": "gas",
-    "_kaynak": "ADR Tablo B eş anlamlısı × Ek-6 (sınıf uyumlu)"
+    "_kaynak": "ADR Tablo B dizini (resmî parça değil) × Ek-6 (sınıf uyumlu)"
    }
   ],
   "540-67-0": [
@@ -301,7 +301,7 @@
     "un": "UN1039",
     "pg": "",
     "physical_state": "gas",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "74-89-5": [
@@ -325,7 +325,7 @@
     "un": "UN1081",
     "pg": "",
     "physical_state": "gas",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "105-57-7": [
@@ -353,14 +353,14 @@
    {
     "un": "UN1093",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "107-18-6": [
    {
     "un": "UN1098",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "106-95-6": [
@@ -430,7 +430,7 @@
    {
     "un": "UN1129",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "75-15-0": [
@@ -444,7 +444,7 @@
    {
     "un": "UN1134",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "107-07-3": [
@@ -465,7 +465,7 @@
    {
     "un": "UN1146",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "30586-10-8": [
@@ -479,14 +479,14 @@
    {
     "un": "UN1153",
     "pg": "II",
-    "_kaynak": "ADR Tablo B eş anlamlısı × Ek-6 (sınıf uyumlu)"
+    "_kaynak": "ADR Tablo B dizini (resmî parça değil) × Ek-6 (sınıf uyumlu)"
    }
   ],
   "109-89-7": [
    {
     "un": "UN1154",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "96-22-0": [
@@ -500,21 +500,21 @@
    {
     "un": "UN1158",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "616-38-6": [
    {
     "un": "UN1161",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "75-78-5": [
    {
     "un": "UN1162",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "57-14-7": [
@@ -533,7 +533,7 @@
    {
     "un": "UN1175",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "10031-87-5": [
@@ -554,21 +554,21 @@
    {
     "un": "UN1181",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "541-41-3": [
    {
     "un": "UN1182",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "109-94-4": [
    {
     "un": "UN1190",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "109-95-5": [
@@ -576,14 +576,14 @@
     "un": "UN1194",
     "pg": "I",
     "physical_state": "liquid",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "105-37-3": [
    {
     "un": "UN1195",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "78-83-1": [
@@ -611,42 +611,42 @@
    {
     "un": "UN1231",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "79-22-1": [
    {
     "un": "UN1238",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "107-31-3": [
    {
     "un": "UN1243",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "60-34-4": [
    {
     "un": "UN1244",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "554-12-1": [
    {
     "un": "UN1248",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "75-52-5": [
    {
     "un": "UN1261",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "123-38-6": [
@@ -660,7 +660,7 @@
    {
     "un": "UN1295",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "507-70-0": [
@@ -687,14 +687,14 @@
    {
     "un": "UN1334",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "7723-14-0": [
    {
     "un": "UN1338",
     "pg": "III",
-    "_kaynak": "ADR Tablo B eş anlamlısı × Ek-6 (sınıf uyumlu)"
+    "_kaynak": "ADR Tablo B dizini (resmî parça değil) × Ek-6 (sınıf uyumlu)"
    }
   ],
   "1305-99-3": [
@@ -727,7 +727,7 @@
    {
     "un": "UN1397",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "7440-39-3": [
@@ -741,14 +741,14 @@
    {
     "un": "UN1401",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "75-20-7": [
    {
     "un": "UN1402",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "156-62-7": [
@@ -766,7 +766,7 @@
    {
     "un": "UN1404",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "7440-46-2": [
@@ -780,7 +780,7 @@
    {
     "un": "UN1427",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "13473-90-0": [
@@ -794,7 +794,7 @@
    {
     "un": "UN1439",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "7790-98-9": [
@@ -816,7 +816,7 @@
     "un": "UN1445",
     "pg": "II",
     "physical_state": "solid",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    },
    {
     "un": "UN3405",
@@ -837,13 +837,13 @@
     "un": "UN1447",
     "pg": "II",
     "physical_state": "solid",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    },
    {
     "un": "UN3406",
     "pg": "II",
     "physical_state": "liquid",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "7787-36-2": [
@@ -857,7 +857,7 @@
    {
     "un": "UN1449",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "7789-18-6": [
@@ -926,7 +926,7 @@
    {
     "un": "UN1484",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "3811-04-9": [
@@ -934,33 +934,33 @@
     "un": "UN2427",
     "pg": "II",
     "physical_state": "liquid",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    },
    {
     "un": "UN1485",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "7758-09-0": [
    {
     "un": "UN1488",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "7778-74-7": [
    {
     "un": "UN1489",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "7722-64-7": [
    {
     "un": "UN1490",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "7727-21-1": [
@@ -974,28 +974,28 @@
    {
     "un": "UN1493",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "7632-00-0": [
    {
     "un": "UN1500",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "7601-89-0": [
    {
     "un": "UN1502",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "1313-60-6": [
    {
     "un": "UN1504",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "75-86-5": [
@@ -1016,7 +1016,7 @@
    {
     "un": "UN1547",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "142-04-1": [
@@ -1115,7 +1115,7 @@
    {
     "un": "UN1575",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "76-06-2": [
@@ -1165,21 +1165,21 @@
    {
     "un": "UN1594",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "77-78-1": [
    {
     "un": "UN1595",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "105-36-2": [
    {
     "un": "UN1603",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "107-15-3": [
@@ -1214,14 +1214,14 @@
    {
     "un": "UN1662",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "76-01-7": [
    {
     "un": "UN1669",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "62-38-4": [
@@ -1250,14 +1250,14 @@
    {
     "un": "UN1702",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "108-24-7": [
    {
     "un": "UN1715",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "506-96-7": [
@@ -1271,7 +1271,7 @@
    {
     "un": "UN1717",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "12788-93-1": [
@@ -1335,13 +1335,13 @@
     "un": "UN1730",
     "pg": "II",
     "physical_state": "liquid",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    },
    {
     "un": "UN1731",
     "pg": "II",
     "physical_state": "liquid",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "7783-70-2": [
@@ -1355,7 +1355,7 @@
    {
     "un": "UN1733",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "100-44-7": [
@@ -1369,7 +1369,7 @@
    {
     "un": "UN1739",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "10294-34-5": [
@@ -1377,7 +1377,7 @@
     "un": "UN1741",
     "pg": "",
     "physical_state": "gas",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "7789-30-2": [
@@ -1413,7 +1413,7 @@
    {
     "un": "UN1752",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "7790-94-5": [
@@ -1464,14 +1464,14 @@
    {
     "un": "UN1764",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "79-36-7": [
    {
     "un": "UN1765",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "13779-41-4": [
@@ -1486,14 +1486,14 @@
    {
     "un": "UN1775",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "16961-83-4": [
    {
     "un": "UN1778",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "10034-85-2": [
@@ -1501,12 +1501,12 @@
     "un": "UN2197",
     "pg": "",
     "physical_state": "gas",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    },
    {
     "un": "UN1787",
     "pg": "II",
-    "_kaynak": "ADR Tablo B eş anlamlısı × Ek-6 (sınıf uyumlu)"
+    "_kaynak": "ADR Tablo B dizini (resmî parça değil) × Ek-6 (sınıf uyumlu)"
    }
   ],
   "7601-90-3": [
@@ -1539,35 +1539,35 @@
    {
     "un": "UN1807",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "7789-60-8": [
    {
     "un": "UN1808",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "7719-12-2": [
    {
     "un": "UN1809",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "79-03-8": [
    {
     "un": "UN1815",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "10026-04-7": [
    {
     "un": "UN1818",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "7646-78-8": [
@@ -1582,14 +1582,14 @@
    {
     "un": "UN1828",
     "pg": "I",
-    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "7791-25-5": [
    {
     "un": "UN1834",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "7719-09-7": [
@@ -1603,7 +1603,7 @@
    {
     "un": "UN1838",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "75-39-8": [
@@ -1688,7 +1688,7 @@
    {
     "un": "UN1915",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "140-88-5": [
@@ -1702,7 +1702,7 @@
    {
     "un": "UN1918",
     "pg": "III",
-    "_kaynak": "ADR Tablo B eş anlamlısı × Ek-6 (sınıf uyumlu)"
+    "_kaynak": "ADR Tablo B dizini (resmî parça değil) × Ek-6 (sınıf uyumlu)"
    }
   ],
   "15512-36-4": [
@@ -1717,20 +1717,20 @@
     "un": "UN1938",
     "pg": "II",
     "physical_state": "liquid",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    },
    {
     "un": "UN3425",
     "pg": "II",
     "physical_state": "solid",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "68-11-1": [
    {
     "un": "UN1940",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "7782-39-0": [
@@ -1746,7 +1746,7 @@
     "un": "UN1962",
     "pg": "",
     "physical_state": "gas",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "74-82-8": [
@@ -1754,14 +1754,14 @@
     "un": "UN1971",
     "pg": "",
     "physical_state": "gas",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "100-52-7": [
    {
     "un": "UN1990",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "126-99-8": [
@@ -1793,7 +1793,7 @@
     "min_conc": 0.0,
     "max_conc": 37.0,
     "pg_fixed": true,
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    },
    {
     "un": "UN3484",
@@ -1803,13 +1803,13 @@
     "max_conc": 100.0,
     "min_exclusive": true,
     "pg_fixed": true,
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    },
    {
     "un": "UN2029",
     "pg": "I",
     "physical_state": "solid",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "77-73-6": [
@@ -1830,14 +1830,14 @@
    {
     "un": "UN2054",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "109-99-9": [
    {
     "un": "UN2056",
     "pg": "II",
-    "_kaynak": "ADR Tablo B eş anlamlısı × Ek-6 (sınıf uyumlu)"
+    "_kaynak": "ADR Tablo B dizini (resmî parça değil) × Ek-6 (sınıf uyumlu)"
    }
   ],
   "75-87-6": [
@@ -1860,13 +1860,13 @@
     "un": "UN2188",
     "pg": "",
     "physical_state": "gas",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    },
    {
     "un": "UN3522",
     "pg": "",
     "physical_state": "gas",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "4109-96-0": [
@@ -1928,7 +1928,7 @@
    {
     "un": "UN2224",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "98-09-9": [
@@ -1949,14 +1949,14 @@
    {
     "un": "UN2227",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "107-20-0": [
    {
     "un": "UN2232",
     "pg": "I",
-    "_kaynak": "PubChem birebir ad + ADR Tablo B ile doğrulandı"
+    "_kaynak": "PubChem birebir ad + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "28479-22-3": [
@@ -2012,7 +2012,7 @@
    {
     "un": "UN2245",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "142-29-0": [
@@ -2026,7 +2026,7 @@
    {
     "un": "UN2248",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "542-88-1": [
@@ -2040,14 +2040,14 @@
    {
     "un": "UN2253",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "7440-09-7": [
    {
     "un": "UN2257",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "78-90-0": [
@@ -2068,7 +2068,7 @@
    {
     "un": "UN2262",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "56-18-8": [
@@ -2082,7 +2082,7 @@
    {
     "un": "UN2272",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "578-54-1": [
@@ -2103,49 +2103,49 @@
    {
     "un": "UN2277",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "822-06-0": [
    {
     "un": "UN2281",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "97-86-9": [
    {
     "un": "UN2283",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "107-70-0": [
    {
     "un": "UN2293",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "100-61-8": [
    {
     "un": "UN2294",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "96-34-4": [
    {
     "un": "UN2295",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "108-87-2": [
    {
     "un": "UN2296",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "104-90-5": [
@@ -2187,7 +2187,7 @@
    {
     "un": "UN2334",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "557-31-3": [
@@ -2271,7 +2271,7 @@
    {
     "un": "UN2353",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "3188-13-4": [
@@ -2285,7 +2285,7 @@
    {
     "un": "UN2357",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "629-20-9": [
@@ -2348,14 +2348,14 @@
    {
     "un": "UN2381",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "142-84-7": [
    {
     "un": "UN2383",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "766-09-6": [
@@ -2369,7 +2369,7 @@
    {
     "un": "UN2389",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "513-48-4": [
@@ -2383,7 +2383,7 @@
    {
     "un": "UN2395",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "563-80-4": [
@@ -2404,14 +2404,14 @@
    {
     "un": "UN2401",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "637-78-5": [
    {
     "un": "UN2409",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "109-74-0": [
@@ -2425,14 +2425,14 @@
    {
     "un": "UN2412",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "121-43-7": [
    {
     "un": "UN2416",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "353-50-4": [
@@ -2447,7 +2447,7 @@
    {
     "un": "UN2432",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "557-98-2": [
@@ -2496,14 +2496,14 @@
    {
     "un": "UN2477",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "624-83-9": [
    {
     "un": "UN2480",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "3173-53-3": [
@@ -2524,7 +2524,7 @@
    {
     "un": "UN2496",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "79-27-6": [
@@ -2538,7 +2538,7 @@
    {
     "un": "UN2505",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "7803-63-6": [
@@ -2560,14 +2560,14 @@
    {
     "un": "UN2509",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "598-78-7": [
    {
     "un": "UN2511",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "598-21-0": [
@@ -2581,7 +2581,7 @@
    {
     "un": "UN2514",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "75-25-2": [
@@ -2609,21 +2609,21 @@
    {
     "un": "UN2522",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "106-63-8": [
    {
     "un": "UN2527",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "79-31-2": [
    {
     "un": "UN2529",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "109-02-4": [
@@ -2659,7 +2659,7 @@
    {
     "un": "UN2565",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "131-52-2": [
@@ -2673,7 +2673,7 @@
    {
     "un": "UN2579",
     "pg": "III",
-    "_kaynak": "ADR Tablo B eş anlamlısı × Ek-6 (sınıf uyumlu)"
+    "_kaynak": "ADR Tablo B dizini (resmî parça değil) × Ek-6 (sınıf uyumlu)"
    }
   ],
   "106-51-4": [
@@ -2716,7 +2716,7 @@
    {
     "un": "UN2619",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "513-86-0": [
@@ -2741,14 +2741,14 @@
    {
     "un": "UN2629",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "144-49-0": [
    {
     "un": "UN2642",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "74-88-4": [
@@ -2762,21 +2762,21 @@
    {
     "un": "UN2646",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "109-77-3": [
    {
     "un": "UN2647",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "594-72-9": [
    {
     "un": "UN2650",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "620-05-3": [
@@ -2790,21 +2790,21 @@
    {
     "un": "UN2656",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "116-16-5": [
    {
     "un": "UN2661",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "74-95-3": [
    {
     "un": "UN2664",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "107-14-2": [
@@ -2867,7 +2867,7 @@
    {
     "un": "UN2687",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "109-70-6": [
@@ -2881,14 +2881,14 @@
    {
     "un": "UN2692",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "76-05-1": [
    {
     "un": "UN2699",
     "pg": "I",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "6153-05-5": [
@@ -2930,7 +2930,7 @@
    {
     "un": "UN2729",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "106-31-0": [
@@ -2972,7 +2972,7 @@
    {
     "un": "UN2809",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "12789-46-7": [
@@ -2986,7 +2986,7 @@
    {
     "un": "UN2820",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "109-09-1": [
@@ -3049,7 +3049,7 @@
    {
     "un": "UN2842",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "627-30-5": [
@@ -3092,7 +3092,7 @@
    {
     "un": "UN2872",
     "pg": "II",
-    "_kaynak": "ADR Tablo B eş anlamlısı × Ek-6 (sınıf uyumlu)"
+    "_kaynak": "ADR Tablo B dizini (resmî parça değil) × Ek-6 (sınıf uyumlu)"
    }
   ],
   "102-81-8": [
@@ -3106,7 +3106,7 @@
    {
     "un": "UN2874",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "13863-41-7": [
@@ -3128,7 +3128,7 @@
    {
     "un": "UN2947",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "98-16-8": [
@@ -3149,7 +3149,7 @@
    {
     "un": "UN3022",
     "pg": "II",
-    "_kaynak": "ADR Tablo B eş anlamlısı × Ek-6 (sınıf uyumlu)"
+    "_kaynak": "ADR Tablo B dizini (resmî parça değil) × Ek-6 (sınıf uyumlu)"
    }
   ],
   "763-20-2": [
@@ -3170,7 +3170,7 @@
    {
     "un": "UN3155",
     "pg": "II",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ],
   "6834-92-0": [
@@ -3199,7 +3199,7 @@
    {
     "un": "UN3495",
     "pg": "III",
-    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B ile doğrulandı"
+    "_kaynak": "Ek-6 tek ad eşleşmesi + ADR Tablo B dizini ile tutarlı"
    }
   ]
  }

@@ -904,8 +904,9 @@ def kural_testleri(c) -> int:
          lambda: tr_road([('64-17-5', 30), (W, 70)], user_fp=30) == ('UN1170', '3', 'III')
          and tr_road([('108-88-3', 100)], user_fp=4)[:2] == ('UN1294', '3')
          and tr_road([('67-63-0', 70), (W, 30)], user_fp=20) == ('UN1219', '3', 'II')),
-        ('ADR 2.1.3.3 (c): aseton %20 (FP 25 °C → PG III) — Tablo A UN1090 yalnız PG II → adlı giriş değil, UN1993',
-         lambda: tr_road([('67-64-1', 20), (W, 80)], user_fp=25)[:3] == ('UN1993', '3', 'III')),
+        ('ADR 2.1.3.3 (c) + 2.1.3.6: aseton %20 (FP 25 °C → PG III) — Tablo A UN1090 yalnız PG II → adlı giriş değil; '
+         'en özel toplu giriş UN1224 KETONLAR PG III',
+         lambda: tr_road([('67-64-1', 20), (W, 80)], user_fp=25)[:3] == ('UN1224', '3', 'III')),
         ('ADR Tablo A formik asit: %85 → UN3412 PG II (%10–85), %90 → UN1779',
          lambda: tr_road([('64-18-6', 85), (W, 15)], user_fp=69) == ('UN3412', '8', 'II')
          and tr_road([('64-18-6', 90), (W, 10)], user_fp=50)[0] == 'UN1779'),
@@ -941,6 +942,17 @@ def kural_testleri(c) -> int:
                                  'm_factors': {}}]}).json())),
         ('ADR Tablo A sodyum perkarbonat → UN3378 (genel UN1479 değil)',
          lambda: tr_road([('15630-89-4', 100)], form='powder', test_data={'oxidizing_solid': 'H272_cat2'})[0] == 'UN3378'),
+        ('ADR 2.1.3.6 en özel toplu giriş (2.1.1.2 C): etanol+IPA → UN1987, toluen+ksilen → UN3295, aseton+MEK → UN1224, '
+         'esterler → UN3272, NaOH+KOH → UN1719; karışık grup (etanol+aseton) → UN1993',
+         lambda: tr_road([('64-17-5', 30), ('67-63-0', 30), (W, 40)], user_fp=15, user_bp=80)[0] == 'UN1987'
+         and tr_road([('108-88-3', 50), ('1330-20-7', 50)], user_fp=5, user_bp=110)[0] == 'UN3295'
+         and tr_road([('67-64-1', 40), ('78-93-3', 40), (W, 20)], user_fp=-10, user_bp=60)[0] == 'UN1224'
+         and tr_road([('141-78-6', 50), ('123-86-4', 50)], user_fp=0, user_bp=80)[0] == 'UN3272'
+         and tr_road([('1310-73-2', 10), ('1310-58-3', 10), (W, 80)],
+                     test_data={'metal_corrosive': 'not_corrosive', 'euh071_inhalable': 'not_inhalable'})[0] == 'UN1719'
+         and tr_road([('64-17-5', 30), ('67-64-1', 30), (W, 40)], user_fp=-5, user_bp=60)[0] == 'UN1993'),
+        ('ADR 2.1.3.4.1: brom içeren karışım her zaman UN1744 (brom/brom çözeltisi) girişinde',
+         lambda: tr_road([('7726-95-6', 5), ('67-56-1', 20), (W, 75)], user_fp=30)[0] == 'UN1744'),
     ]
     hata = 0
     for ad, f in testler:

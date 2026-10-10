@@ -1,5 +1,6 @@
 """ADR Tablo B (3.2.2, alfabetik dizin; eş anlamlılar dahil) × SEA Ek-6 (substance_db: CAS + adlar) → CAS ↔ UN.
-Yalnız resmî kaynaklar. Çıktı: tb_cas.json (bu klasör; git dışı). Kullanım: python scripts/adr_cas_map/5_tablo_b.py"""
+Not: Tablo B BM sekretaryasının hazırladığı dizindir, ADR'nin resmî parçası DEĞİLDİR (ADR 2.1.2.5 dipnot 1) — yalnız
+doğrulama ve Ek-6 sınıfı uyumlu ekleme için kullanılır; bağlayıcı olan Tablo A'dır. Çıktı: tb_cas.json (bu klasör; git dışı). Kullanım: python scripts/adr_cas_map/5_tablo_b.py"""
 import sys, os, re, json, collections
 HERE = os.path.dirname(os.path.abspath(sys.argv[0]))
 ROOT = os.path.dirname(os.path.dirname(HERE))

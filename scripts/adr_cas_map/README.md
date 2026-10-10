@@ -11,4 +11,6 @@ Sırayla çalıştırın (ara dosyalar bu klasöre yazılır, git'e girmez):
 Kabul kuralları: Ek-6 tek ad eşleşmesi → kabul; PubChem birebir ad → Wikidata ile çelişmiyorsa kabul;
 yalnız Wikidata → Ek-6 sınıfı uyumluysa ya da PubChem aynı CAS'ı veriyorsa kabul; Ek-6'da olup taşıma zararı
 olmayan madde → ret. Elle eklenen girişler (transport_adr_service._SEED_ENTRIES) her zaman önceliklidir.
+Ek adımlar: `5_tablo_b.py` (ADR Tablo B dizini × Ek-6; Tablo B ADR'nin resmî parçası değildir — yalnız doğrulama/ek) 4'ten önce;
+`6_gruplar.py` → data/adr_group_map.json (ADR 2.1.3.6 kimyasal grup B.B.B.; IUPAC ad ekleri, KDU gözden geçirmeli).
 ADR 2027 çıkınca: önce scripts/adr_tablea_kontrol.py, sonra bu dört adım.

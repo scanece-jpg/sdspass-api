@@ -177,16 +177,20 @@ async def refresh_components(components: list, form: str) -> list:
                     # işaretlenir; kullanıcının kaldırdıkları (echa_removed) hesaba katılmaz.
                     # Ek-6'nın kendi sınıfları bağlayıcıdır — kaldırma listesi onlara uygulanmaz.
                     supp = {_h4(h['h_code']) for h in fresh['hazards'] if h.get('_echa_supplement')}
+                    # Kaynağı kayıt yaptıranın sınıflandırması olanlar (ECHA kayıt dosyası 2.1 GHS)
+                    reg = {_h4(h['h_code']) for h in fresh['hazards'] if h.get('_registrant')}
                     removed = {_h4(x) for x in (comp.get('echa_removed') or [])} & supp
                     c['hazards'] = []
                     c['ek6_supplements'] = []
                     for cls, code in zip(raw['hazard_classes'], raw['h_codes']):
                         if _h4(code) in supp:
                             c['ek6_supplements'].append({'h_code': _h4(code), 'h_class': cls,
-                                                         'removed': _h4(code) in removed})
+                                                         'removed': _h4(code) in removed,
+                                                         'registrant': _h4(code) in reg})
                             if _h4(code) in removed:
                                 continue
-                            c['hazards'].append({'h_class': cls, 'h_code': code, 'echa_supplement': True})
+                            c['hazards'].append({'h_class': cls, 'h_code': code, 'echa_supplement': True,
+                                                 **({'_registrant': True} if _h4(code) in reg else {})})
                         else:
                             c['hazards'].append({'h_class': cls, 'h_code': code})
                     _apply_m_ate(c, comp, fresh)
@@ -462,6 +466,8 @@ def _conc_of(c: dict) -> float:
 
 def _substance_source(c: dict, h: dict) -> str:
     """Madde sınıflandırmasının kaynağı (GBF 2.1 gerekçesi)."""
+    if h.get('_registrant'):
+        return 'ECHA kayıt dosyası — kayıt yaptıranın sınıflandırması (Ek-6\'da yer almayan sınıf, SEA Md.6(1)(c))'
     if h.get('echa_supplement') or h.get('_echa_supplement'):
         return 'ECHA C&L bildirimleri (Ek-6\'da yer almayan sınıf, SEA Md.6(1)(c))'
     if c.get('sea_ek6') or int(c.get('source_priority') or 9) == 1:
@@ -650,8 +656,10 @@ async def classify(inp: dict) -> dict:
         for _h in _active[0].get('hazards') or []:
             _src.setdefault(_h4(_h.get('h_code')), _substance_source(_active[0], _h))
         for e in cp:
-            if e['h_code'] in _src and e['h_code'] not in MANUAL_PHYS_H and e['h_code'][:3] not in ('H22', 'H28'):
-                e['reason'], e['cutoff_used'] = f"Madde sınıflandırması — {_src[e['h_code']]}", '—'
+            # H361d / H360FD gibi harf ekli kodlar dört karakterle eşlenir (önceden H361d kesme gerekçesiyle kalıyordu)
+            _k = e['h_code'] if e['h_code'] in _src else _h4(e['h_code'])
+            if _k in _src and e['h_code'] not in MANUAL_PHYS_H and e['h_code'][:3] not in ('H22', 'H28'):
+                e['reason'], e['cutoff_used'] = f"Madde sınıflandırması — {_src[_k]}", '—'
     present = {e['h_code'] for e in cp}
     dominated = set()
     for dom, subs in DOMINANCE_MAP.items():
@@ -930,12 +938,18 @@ async def classify(inp: dict) -> dict:
         _used = [e for e in ek6_supp if not e['removed']]
         _rem = [e for e in ek6_supp if e['removed']]
         _fmt = lambda lst: '; '.join(dict.fromkeys(f"{e['name'] or e['cas']} — {e['h_code']}" for e in lst))
+        _kayn_tr = ' ve '.join(x for x in (
+            'ECHA kayıt dosyalarındaki kayıt yaptıran sınıflandırmasına' if any(e.get('registrant') for e in _used) else '',
+            'ECHA C&L bildirimlerine' if any(not e.get('registrant') for e in _used) or not _used else '') if x)
+        _kayn_en = ' and '.join(x for x in (
+            "the registrant's classification in ECHA registration dossiers" if any(e.get('registrant') for e in _used) else '',
+            'ECHA C&L notifications' if any(not e.get('registrant') for e in _used) or not _used else '') if x)
         tr_txt = ('Ek-6 dışı sınıflar: SEA Ek-6’da yer alan maddelerin listede bulunmayan tehlike '
-                  'sınıfları SEA Md.6(1)(c) gereği ECHA C&L bildirimlerine göre değerlendirilmiştir'
+                  f'sınıfları SEA Md.6(1)(c) gereği {_kayn_tr} göre değerlendirilmiştir'
                   + (f' ({_fmt(_used)})' if _used else '') + '.'
                   + (f' Kullanıcı kararıyla dikkate alınmayanlar: {_fmt(_rem)}.' if _rem else ''))
         en_txt = ('Classes not listed in Annex VI: hazard classes not covered by the harmonised entry were '
-                  'assessed from ECHA C&L notifications (CLP Art. 4(3))'
+                  f'assessed from {_kayn_en} (CLP Art. 4(3))'
                   + (f' ({_fmt(_used)})' if _used else '') + '.'
                   + (f' Not applied by user decision: {_fmt(_rem)}.' if _rem else ''))
         cls_notes.append({'TR': tr_txt, 'EN': en_txt})

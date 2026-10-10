@@ -707,6 +707,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
           <button type="button" onclick="_firmaKaydet(false)" id="firmaGuncelBtn" style="padding:4px 10px;border-radius:6px;border:1px solid var(--border2);background:none;color:var(--text2);cursor:pointer;font-size:11px">💾 Seçili firmayı güncelle</button>
         </div>
         <div id="firmaMsg" style="font-size:10px;color:var(--text3);margin-top:4px"></div>
+        <div id="firmaGbf" style="margin-top:8px"></div>
       </div>
     </div>
 
@@ -1334,7 +1335,10 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
 
 <!-- ══ ENGINE SCRIPTS ═══════════════════════════════════════════════════════ -->
 <script>
-  window.HAZARDDESK_API_URL = 'https://sdspass-api-3.onrender.com/api/v1/sds/pdf';
+  // Panel hangi sunucudan açıldıysa API de o sunucu (yerel test canlı sunucuya gitmesin); dosyadan açılırsa canlı sunucu
+  window.HAZARDDESK_API_URL = /^https?:$/.test(location.protocol)
+    ? location.origin + '/api/v1/sds/pdf'
+    : 'https://sdspass-api-3.onrender.com/api/v1/sds/pdf';
 </script>
 <script src="js/event-bus.js?v=20250328"></script>
 <script src="js/state-store.js?v=20250328"></script>
@@ -1419,7 +1423,7 @@ async function _firmaSec(id) {
   window._firmaId = id || '';
   try { localStorage.setItem('sdspass_firma', window._firmaId); } catch (e) {}
   document.getElementById('firmaGuncelBtn').disabled = !id;
-  if (!id) { _firmaMsg(''); return; }
+  if (!id) { _firmaMsg(''); _firmaGbfListe(); return; }
   try {
     const f = await _hesapApi('/firmalar/' + encodeURIComponent(id));
     const set = (el, v) => { const x = document.getElementById(el); if (x) x.value = v || ''; };
@@ -1427,6 +1431,7 @@ async function _firmaSec(id) {
     set('suppEmail', f.email); set('suppContact', f.contact); set('supplierEmergencyTel', f.emergency_tel);
     const r = document.getElementById(f.emergency_hours === 'business' ? 'telBusiness' : 'tel24_7'); if (r) r.checked = true;
     _firmaMsg(`Bölüm 1.3 / 1.4 "${f.name}" kaydından dolduruldu.`);
+    _firmaGbfListe();
   } catch (e) { _firmaMsg('Firma okunamadı: ' + e.message, true); }
 }
 async function _firmaKaydet(yeni) {
@@ -1441,8 +1446,119 @@ async function _firmaKaydet(yeni) {
     window._firmaId = f.id;
     try { localStorage.setItem('sdspass_firma', f.id); } catch (e) {}
     await _hesapYukle();
+    await _firmaGbfListe();
     _firmaMsg(yeni ? `"${f.name}" kaydedildi.` : `"${f.name}" güncellendi.`);
   } catch (e) { _firmaMsg(e.message, true); }
+}
+// ── Üretilen GBF'ler — firma klasörüne kayıt ve geri açma ───────────────────────────
+// Form anlık görüntüsü: sol paneldeki tüm alanlar (bileşen satırları ve hesap kartı hariç) + bileşenler.
+// Geri açılınca bileşenler CAS ile yeniden sorgulanır — sınıflandırma güncel resmî veriden gelir.
+function _formSnapshot() {
+  const fields = {};
+  document.querySelectorAll('.left input[id], .left select[id], .left textarea[id]').forEach(el => {
+    if (el.closest('.cw') || el.closest('#hesapCard')) return;
+    if (['file', 'password', 'button', 'submit'].includes(el.type)) return;
+    fields[el.id] = (el.type === 'checkbox' || el.type === 'radio') ? { c: el.checked } : { v: el.value };
+  });
+  const comps = [...document.querySelectorAll('.cw')].map(w => {
+    const vals = {};
+    w.querySelectorAll('input[id], select[id], textarea[id]').forEach(el => {
+      if (['file', 'button'].includes(el.type)) return;
+      const k = el.id.replace(/\d+$/, '');
+      if (['ci', 'chipinput', 'hpsel'].includes(k)) return;
+      if (el.type === 'checkbox' || el.type === 'radio') vals[k] = { c: el.checked };
+      else if (el.value !== '') vals[k] = { v: el.value };
+    });
+    return { cas: w.querySelector('.ci')?.value?.trim() || '', vals, echa_removed: w.dataset.echaRemoved || '' };
+  });
+  return { fields, comps };
+}
+async function _formRestore(snap) {
+  const F = snap.fields || {};
+  const put = (id, f) => {
+    const el = document.getElementById(id); if (!el || !f) return;
+    if ('c' in f) el.checked = !!f.c; else el.value = f.v ?? '';
+    el.dispatchEvent(new Event('change', { bubbles: true }));
+  };
+  if (F.pform) put('pform', F.pform);            // fiziksel hal önce (alan görünürlüğü buna bağlı)
+  Object.entries(F).forEach(([id, f]) => { if (id !== 'pform') put(id, f); });
+  [...document.querySelectorAll('.cw')].forEach(cw => {
+    const id = parseInt((cw.id || '').replace('cw', '')); if (id) delComp(id); else cw.remove();
+  });
+  for (const c of (snap.comps || [])) {
+    addComp({ cas: c.cas });
+    const id = _compId;
+    if (c.cas) { try { await onCas(id); } catch (e) { console.warn('[geri aç] CAS', c.cas, e); } }
+    Object.entries(c.vals || {}).forEach(([k, f]) => {
+      const el = document.getElementById(k + id); if (!el) return;
+      if ('c' in f) el.checked = !!f.c; else el.value = f.v;
+    });
+    if (document.getElementById('cmanual' + id)?.value) onManualConc(id);
+    const w = document.getElementById('cw' + id);
+    if (w && c.echa_removed) {
+      w.dataset.echaRemoved = c.echa_removed;
+      const rm = c.echa_removed.split(',');
+      w.querySelectorAll('.hchip[data-echa]').forEach(ch => {
+        if (rm.includes((ch.dataset.code || '').replace(/[*\s]/g, '').substring(0, 4))) ch.remove();
+      });
+    }
+  }
+  updateConcTotal();
+}
+async function _gbfFirmayaKaydet(resJson, payload, productName) {
+  if (!window._firmaId || !_hesapKey()) return;
+  try {
+    const r = await _hesapApi('/firmalar/' + encodeURIComponent(window._firmaId) + '/gbf', { method: 'POST',
+      body: JSON.stringify({ urun: productName, revizyon: payload.revision || _getRevisionFields(),
+        dosya_adi: resJson.filename || '', pdf_b64: resJson.pdf || '', ozet: resJson.ozet || null,
+        form: _formSnapshot(), istek: { ...payload, revision: { ...(payload.revision || {}), previous_ozet: undefined } } }) });
+    _firmaMsg(`GBF firmaya kaydedildi: ${r.urun} — Rev. ${r.revizyon.no}`);
+    await _firmaGbfListe();
+    const f = _firmalar.find(x => x.id === window._firmaId); if (f) { f.uretilen_gbf = (_gbfListe || []).length; _firmaListeCiz(); }
+  } catch (e) { _firmaMsg('GBF firmaya kaydedilemedi: ' + e.message, true); }
+}
+let _gbfListe = [];
+async function _firmaGbfListe() {
+  const box = document.getElementById('firmaGbf'); if (!box) return;
+  if (!window._firmaId) { box.innerHTML = ''; return; }
+  try {
+    _gbfListe = (await _hesapApi('/firmalar/' + encodeURIComponent(window._firmaId) + '/gbf')).gbf || [];
+  } catch (e) { box.innerHTML = ''; return; }
+  const esc = t => String(t ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const btn = 'padding:2px 8px;border-radius:6px;border:1px solid var(--border2);background:none;color:var(--text2);cursor:pointer;font-size:10px';
+  box.innerHTML = !_gbfListe.length
+    ? '<div style="font-size:10px;color:var(--text3)">Bu firma için kayıtlı GBF yok. PDF oluşturduğunuzda otomatik kaydedilir.</div>'
+    : `<div style="font-size:10px;color:var(--text3);margin-bottom:4px">Firmanın GBF'leri (${_gbfListe.length})</div>` +
+      `<div style="max-height:180px;overflow:auto;display:flex;flex-direction:column;gap:3px">` +
+      _gbfListe.map(g => `<div style="display:flex;gap:6px;align-items:center;font-size:11px">
+        <span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${esc(g.urun)}">${esc(g.urun)}</span>
+        <span style="color:var(--text3);font-family:var(--mono);font-size:10px">Rev.${esc(g.revizyon?.no)} · ${esc(g.revizyon?.date)}</span>
+        <button type="button" style="${btn}" onclick="_gbfAc('${esc(g.id)}')">Aç</button>
+        ${g.pdf ? `<button type="button" style="${btn}" onclick="_gbfPdf('${esc(g.id)}')">PDF</button>` : ''}
+      </div>`).join('') + '</div>';
+}
+async function _gbfAc(gid) {
+  if (!confirm('Formdaki mevcut bilgiler bu GBF\'nin bilgileriyle değiştirilecek. Devam edilsin mi?')) return;
+  try {
+    _firmaMsg('GBF açılıyor…');
+    const r = await _hesapApi('/firmalar/' + encodeURIComponent(window._firmaId) + '/gbf/' + encodeURIComponent(gid));
+    await _formRestore(r.form || {});
+    // Revizyon kaydı: bu GBF'nin özeti "son GBF" olur → "Yeni revizyon başlat" bunun yerine geçen versiyonu hazırlar
+    try { const rec = _revRec(); if (r.ozet) rec.son_ozet = r.ozet; _revPut(rec); } catch (e) {}
+    _firmaMsg(`"${r.urun}" Rev. ${r.revizyon?.no} açıldı. Bileşen sınıflandırmaları güncel veriyle yeniden sorgulandı; revizyon için "Yeni revizyon başlat"a basın.`);
+    if (typeof doCalculate === 'function') doCalculate();
+  } catch (e) { _firmaMsg('GBF açılamadı: ' + e.message, true); }
+}
+async function _gbfPdf(gid) {
+  try {
+    const r = await fetch('/api/v1/hesap/firmalar/' + encodeURIComponent(window._firmaId) + '/gbf/' + encodeURIComponent(gid) + '/pdf',
+                          { headers: { 'Authorization': 'Bearer ' + _hesapKey() } });
+    if (!r.ok) throw new Error((await r.json().catch(() => ({}))).detail || ('HTTP ' + r.status));
+    const url = URL.createObjectURL(await r.blob());
+    const g = _gbfListe.find(x => x.id === gid);
+    const a = document.createElement('a'); a.href = url; a.download = g?.dosya_adi || gid + '.pdf'; a.click();
+    URL.revokeObjectURL(url);
+  } catch (e) { _firmaMsg('PDF indirilemedi: ' + e.message, true); }
 }
 document.addEventListener('DOMContentLoaded', () => { _hesapYukle(); });
 
@@ -6443,6 +6559,9 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
     a.download = resJson.filename || `${productName.replace(/\s+/g,'_')}_SDS.pdf`;
     a.click();
     URL.revokeObjectURL(url);
+
+    // Seçili firma varsa GBF firmanın klasörüne kaydedilir (PDF + girdiler + özet)
+    _gbfFirmayaKaydet(resJson, payload, productName);
 
     // Son oluşturulan GBF PDF'i — "GBF Denetimi" penceresi bunu denetleyebilir
     window._lastPdfB64  = resJson.pdf || null;

@@ -159,3 +159,94 @@ def firma_guncelle(fid: str, body: dict = Body(...), authorization: Optional[str
     f['_guncelleme'] = time.strftime('%Y-%m-%d %H:%M:%S')
     _write_json(d / 'firma.json', f)
     return {'id': fid, **f}
+
+
+# ── Üretilen GBF'ler: uretilen_gbf/<ürün>__rev<no>.json (+ .pdf) ─────────────────────────────
+# JSON: ürün / revizyon bilgisi, panel formu (yeniden açmak için), PDF isteği (girdiler) ve GBF özeti
+# (bir sonraki revizyonda "yerine geçtiği versiyon" karşılaştırması). Aynı ürün + revizyon no → üzerine yazılır.
+
+def _gbf_dir(hesap: str, fid: str) -> Path:
+    d = firma_dir(hesap, fid)
+    if _read_firma(d) is None:
+        raise HTTPException(status_code=404, detail='Firma bulunamadı.')
+    return d / 'uretilen_gbf'
+
+
+def _gid_ok(gid: str) -> str:
+    if not re.match(r'^[a-z0-9][a-z0-9-]{0,59}__rev[0-9]{1,4}$', gid or ''):
+        raise HTTPException(status_code=400, detail='Geçersiz GBF kimliği.')
+    return gid
+
+
+@router.post('/firmalar/{fid}/gbf')
+def gbf_kaydet(fid: str, body: dict = Body(...), authorization: Optional[str] = Header(None)):
+    import base64
+    h = hesap_of(authorization)
+    d = _gbf_dir(h, fid)
+    urun = str(body.get('urun') or '').strip()[:200]
+    if not urun:
+        raise HTTPException(status_code=422, detail='Ürün adı zorunludur.')
+    rev = (body.get('revizyon') or {})
+    no = re.sub(r'\D', '', str(rev.get('no') or '1'))[:4] or '1'
+    gid = _gid_ok(f'{slug(urun)}__rev{int(no)}')
+    pdf = None
+    if body.get('pdf_b64'):
+        try:
+            pdf = base64.b64decode(body['pdf_b64'], validate=True)
+        except Exception:
+            raise HTTPException(status_code=422, detail='PDF okunamadı.')
+        if not pdf.startswith(b'%PDF') or len(pdf) > 15_000_000:
+            raise HTTPException(status_code=422, detail='Geçersiz PDF.')
+    now = time.strftime('%Y-%m-%d %H:%M:%S')
+    rec = {'id': gid, 'urun': urun, 'revizyon': {k: str(rev.get(k) or '')[:500] for k in ('version', 'no', 'date', 'notes')},
+           'dosya_adi': str(body.get('dosya_adi') or f'{slug(urun)}_SDS.pdf')[:200], 'kayit': now,
+           'pdf': pdf is not None, 'form': body.get('form') or {}, 'istek': body.get('istek') or {},
+           'ozet': body.get('ozet') or None}
+    d.mkdir(parents=True, exist_ok=True)
+    if pdf is not None:
+        pp = d / f'{gid}.pdf'
+        pp.write_bytes(pdf)
+        persist(pp)
+    _write_json(d / f'{gid}.json', rec)
+    return {'id': gid, 'urun': urun, 'revizyon': rec['revizyon'], 'kayit': now}
+
+
+@router.get('/firmalar/{fid}/gbf')
+def gbf_listesi(fid: str, authorization: Optional[str] = Header(None)):
+    h = hesap_of(authorization)
+    d = _gbf_dir(h, fid)
+    out = []
+    for p in (d.glob('*.json') if d.is_dir() else []):
+        try:
+            r = json.loads(p.read_text(encoding='utf-8'))
+        except Exception:
+            continue
+        out.append({k: r.get(k) for k in ('id', 'urun', 'revizyon', 'kayit', 'dosya_adi', 'pdf')})
+    out.sort(key=lambda x: (x['urun'].translate(_TR).lower(), -int((x.get('revizyon') or {}).get('no') or 0)))
+    return {'gbf': out}
+
+
+@router.get('/firmalar/{fid}/gbf/{gid}')
+def gbf_getir(fid: str, gid: str, authorization: Optional[str] = Header(None)):
+    h = hesap_of(authorization)
+    p = _gbf_dir(h, fid) / f'{_gid_ok(gid)}.json'
+    if not p.exists():
+        raise HTTPException(status_code=404, detail='GBF bulunamadı.')
+    return json.loads(p.read_text(encoding='utf-8'))
+
+
+@router.get('/firmalar/{fid}/gbf/{gid}/pdf')
+def gbf_pdf(fid: str, gid: str, authorization: Optional[str] = Header(None)):
+    from fastapi.responses import Response
+    h = hesap_of(authorization)
+    d = _gbf_dir(h, fid)
+    p = d / f'{_gid_ok(gid)}.pdf'
+    if not p.exists():
+        raise HTTPException(status_code=404, detail='Bu GBF için PDF kaydı yok.')
+    try:
+        name = json.loads((d / f'{gid}.json').read_text(encoding='utf-8')).get('dosya_adi') or f'{gid}.pdf'
+    except Exception:
+        name = f'{gid}.pdf'
+    from urllib.parse import quote
+    return Response(p.read_bytes(), media_type='application/pdf',
+                    headers={'Content-Disposition': f"attachment; filename*=UTF-8''{quote(name)}"})

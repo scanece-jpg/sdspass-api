@@ -288,6 +288,41 @@ def _kayit_testi() -> bool:
             and 'kayıt yaptıranın' in (r.get('classification_sources') or {}).get('H412', ''))
 
 
+def _hesap_testi() -> bool:
+    """Geçici klasörde; ağ ve gizli depo yok."""
+    import base64, tempfile, pathlib
+    from fastapi.testclient import TestClient
+    from app.main import app
+    import app.services.accounts as A
+    k = 'k' * 32
+    eski = (A.BASE, A.persist, os.environ.get('SDSPASS_HESAP_ANAHTARLARI'))
+    A.BASE, A.persist = pathlib.Path(tempfile.mkdtemp()), (lambda p: None)
+    os.environ['SDSPASS_HESAP_ANAHTARLARI'] = 'test-hesap:' + k
+    try:
+        c, H = TestClient(app), {'Authorization': 'Bearer ' + k}
+        ok = c.get('/api/v1/hesap/firmalar').status_code == 401
+        ok &= c.get('/api/v1/hesap/firmalar', headers={'Authorization': 'Bearer ' + 'x' * 32}).status_code == 401
+        f = c.post('/api/v1/hesap/firmalar', json={'name': 'Örnek Şirket A.Ş.'}, headers=H).json()
+        ok &= f.get('id') == 'ornek-sirket-a-s'
+        ok &= c.post('/api/v1/hesap/firmalar', json={'name': 'ÖRNEK ŞİRKET A.Ş.'}, headers=H).status_code == 409
+        pdf = base64.b64encode(b'%PDF-1.4 test').decode()
+        g = c.post(f"/api/v1/hesap/firmalar/{f['id']}/gbf", headers=H,
+                   json={'urun': 'Deneme Tiner', 'revizyon': {'no': '2', 'date': '10.10.2026'}, 'pdf_b64': pdf,
+                         'form': {'fields': {'productName': {'v': 'Deneme Tiner'}}}}).json()
+        ok &= g.get('id') == 'deneme-tiner__rev2'
+        ok &= [x['id'] for x in c.get(f"/api/v1/hesap/firmalar/{f['id']}/gbf", headers=H).json()['gbf']] == [g['id']]
+        ok &= c.get(f"/api/v1/hesap/firmalar/{f['id']}/gbf/{g['id']}", headers=H).json()['form']['fields']['productName']['v'] == 'Deneme Tiner'
+        ok &= c.get(f"/api/v1/hesap/firmalar/{f['id']}/gbf/{g['id']}/pdf", headers=H).content.startswith(b'%PDF')
+        ok &= c.get(f"/api/v1/hesap/firmalar/{f['id']}/gbf/..%2Fx", headers=H).status_code in (400, 404)
+        return bool(ok)
+    finally:
+        A.BASE, A.persist = eski[0], eski[1]
+        if eski[2] is None:
+            os.environ.pop('SDSPASS_HESAP_ANAHTARLARI', None)
+        else:
+            os.environ['SDSPASS_HESAP_ANAHTARLARI'] = eski[2]
+
+
 def kural_testleri(c) -> int:
     """SEA Ek-1 / Ek-2 kural testleri (2026-10-08 kural denetimi): her satır, resmî metinle satır satır
     karşılaştırılarak bulunan bir hatanın düzeltilmiş hâlini korur. Döner: hatalı test sayısı."""
@@ -1011,6 +1046,15 @@ def kural_testleri(c) -> int:
          "öz-sınıflandırma kayıtlarının ortak sınıfı alınır, safsızlığa bağlı (H340) ve Ek-6'da olan sınıf eklenmez; "
          'toluen/benzen H412 (Petkim referans GBF 2026-10-10)',
          lambda: _kayit_testi()),
+        ("KKDİK Ek-2 16 (ç): tek maddede Bölüm 16 yöntem sütunu — önek tekrarı yok, H361d madde kaynağıyla, "
+         "fiziksel sınıfta 'karışım test edilmemiştir' yok; kayıt yaptıranın sınıfı kaynağıyla (2026-10-10)",
+         lambda: (lambda t: 'Madde sınıflandırması — Madde' not in t and 'Madde sınıflandırması - Madde' not in t
+                  and 'karışım test edilmemiştir' not in t and 'kesme %3.0' not in t
+                  and 'kayıt yaptıranın sınıflandırması' in t)(
+             _pdf_text(c, [('108-88-3', 100)]))),
+        ('Danışman hesabı: anahtarsız erişim yok, firma klasörü otomatik açılır, aynı ad engellenir, '
+         'üretilen GBF kaydedilir / listelenir / geri okunur (accounts.py)',
+         lambda: _hesap_testi()),
     ]
     hata = 0
     for ad, f in testler:

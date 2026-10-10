@@ -4256,12 +4256,19 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
             return ('Daha yüksek kategorideki sınıflandırma kapsamında değerlendirilmiştir'
                     if TR else 'Covered by the classification in a higher category')
         if _SUB and not h4.startswith('H2'):
-            return ('Madde sınıflandırması — ' + (r.replace('Madde sınıflandırması — ', '') or 'SEA Ek-6')
-                    if TR else 'Substance classification')
+            # Gerekçe metni metin temizliğinde "—" → "-" olabildiğinden önek iki biçimde de ayıklanır
+            _r = _re.sub(r'^\s*Madde sınıflandırması\s*[—–-]\s*', '', r).strip()
+            if not _r or _re.search(r'kesme|>=|≥|%\d', _r):   # karışım gerekçesi (kesme değeri) madde için kullanılmaz
+                _r = 'SEA Ek-6' if TR else ''
+            return ('Madde sınıflandırması — ' + _r if TR else 'Substance classification')
         if h4.startswith('H2'):
             if any(k in rl for k in ('kullanıcı', 'test', 'ölç', 'user', 'measured')):
-                return ('Karışımın test verisi / üretici beyanı (SEA Ek-1 Kısım 2)' if TR
-                        else 'Test data on the mixture / manufacturer statement (Annex I Part 2)')
+                return (('Test verisi / üretici beyanı (SEA Ek-1 Kısım 2)' if _SUB else
+                         'Karışımın test verisi / üretici beyanı (SEA Ek-1 Kısım 2)') if TR
+                        else 'Test data / manufacturer statement (Annex I Part 2)')
+            if _SUB:
+                return ('Maddenin fiziksel verilerine dayalı değerlendirme (SEA Ek-1 Kısım 2)' if TR
+                        else "Assessment based on the substance's physical data (Annex I Part 2)")
             return ('Bileşen verilerine dayalı değerlendirme; karışım test edilmemiştir (SEA Ek-1 Kısım 2)' if TR
                     else 'Assessment based on component data; mixture not tested (Annex I Part 2)')
         if h4 in ('H300', 'H301', 'H302', 'H310', 'H311', 'H312', 'H330', 'H331', 'H332'):

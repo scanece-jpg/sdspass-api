@@ -16,6 +16,8 @@ data/substances_unified.json.bak
 eski/
 
 data/echa_phys/
+# Danışman hesapları — müşteri firma verisi, ASLA açık depoya girmez (gizli sdspass-data'ya yedeklenir)
+data/hesaplar/
 
 # ADR Tablo A → CAS eşleme ara dosyaları
 scripts/adr_cas_map/*.json

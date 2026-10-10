@@ -23,7 +23,8 @@ BRANCH  = os.environ.get('SDSPASS_DATA_BRANCH', 'main').strip() or 'main'
 ENABLED = bool(REPO and TOKEN)
 
 # Kayıt başına bir dosya — depodaki sürüm kazanır
-_TREES = ('data/echa_cl/', 'data/pubchem_cl/', 'data/phys_cache/', 'data/echa_phys/')
+_TREES = ('data/echa_cl/', 'data/pubchem_cl/', 'data/phys_cache/', 'data/echa_phys/',
+          'data/hesaplar/')  # danışman hesapları: firma kayıtları, üretilen / tedarikçi GBF'leri (accounts.py)
 # Tek JSON sözlük — anahtar bazında birleştirilir.
 # 'remote': depodaki kazanır | 'local': ana git deposundaki (elle düzenlenmiş) kazanır
 _JSON_MERGE = {

@@ -684,6 +684,32 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
       </div>
     </div>
 
+    <!-- Danışman hesabı ve firma seçici (accounts.py) — firma bilgisi Bölüm 1.3 / 1.4'e dolar -->
+    <div class="v0-card cyan-top" id="hesapCard">
+      <div class="v0-sec-title"><span class="v0-dot secondary"></span>Danışman Hesabı — Firma</div>
+      <div id="hesapLogin" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <input class="v0-inp mono" type="password" id="hesapKey" placeholder="Hesap anahtarı" style="flex:1;min-width:200px" autocomplete="off">
+        <button type="button" onclick="_hesapBaglan()"
+          style="padding:6px 12px;border-radius:6px;border:1px solid var(--border2);background:none;color:var(--text2);cursor:pointer;font-size:12px">Bağlan</button>
+        <div style="width:100%;font-size:10px;color:var(--text3)">Anahtar bu tarayıcıda hatırlanır. Anahtarsız da GBF hazırlanabilir; firma kaydı yapılmaz.</div>
+      </div>
+      <div id="hesapPanel" style="display:none">
+        <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;font-size:11px;color:var(--text3);margin-bottom:6px">
+          <span id="hesapAd"></span>
+          <button type="button" onclick="_hesapCikis()" style="margin-left:auto;padding:2px 8px;border-radius:6px;border:1px solid var(--border2);background:none;color:var(--text3);cursor:pointer;font-size:10px">Çıkış</button>
+        </div>
+        <div class="v0-grid-2">
+          <input class="v0-inp" type="text" id="firmaAra" placeholder="Firma ara…" oninput="_firmaListeCiz()">
+          <select class="v0-inp" id="firmaSec" onchange="_firmaSec(this.value)"></select>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:6px">
+          <button type="button" onclick="_firmaKaydet(true)" style="padding:4px 10px;border-radius:6px;border:1px solid var(--border2);background:none;color:var(--text2);cursor:pointer;font-size:11px">＋ Aşağıdaki bilgilerle yeni firma</button>
+          <button type="button" onclick="_firmaKaydet(false)" id="firmaGuncelBtn" style="padding:4px 10px;border-radius:6px;border:1px solid var(--border2);background:none;color:var(--text2);cursor:pointer;font-size:11px">💾 Seçili firmayı güncelle</button>
+        </div>
+        <div id="firmaMsg" style="font-size:10px;color:var(--text3);margin-top:4px"></div>
+      </div>
+    </div>
+
     <!-- Tedarikçi -->
     <div class="v0-card cyan-top">
       <div class="v0-sec-title"><span class="v0-dot secondary"></span>Bölüm 1.3 — Tedarikçi Bilgileri</div>
@@ -1333,6 +1359,93 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
 
 const API_BASE = (window.HAZARDDESK_API_URL || '/api/v1/sds/pdf').replace('/sds/pdf','');
 // KDU bilgisi (Bölüm 16) — bu tarayıcıda hatırlanır
+// ── Danışman hesabı + firma klasörleri (/api/v1/hesap) ─────────────────────────
+let _firmalar = [];
+window._firmaId = '';
+function _hesapKey() { try { return localStorage.getItem('sdspass_hesap_key') || ''; } catch (e) { return ''; } }
+async function _hesapApi(path, opt = {}) {
+  const r = await fetch('/api/v1/hesap' + path, { ...opt, headers: { 'Content-Type': 'application/json',
+    'Authorization': 'Bearer ' + _hesapKey(), ...(opt.headers || {}) } });
+  const j = await r.json().catch(() => ({}));
+  if (!r.ok) throw Object.assign(new Error(j.detail || ('HTTP ' + r.status)), { status: r.status });
+  return j;
+}
+function _firmaMsg(t, err) {
+  const el = document.getElementById('firmaMsg');
+  if (el) { el.textContent = t; el.style.color = err ? 'var(--danger,#c53030)' : 'var(--text3)'; }
+}
+async function _hesapBaglan() {
+  const k = document.getElementById('hesapKey').value.trim();
+  if (k) try { localStorage.setItem('sdspass_hesap_key', k); } catch (e) {}
+  document.getElementById('hesapKey').value = '';
+  await _hesapYukle();
+}
+function _hesapCikis() {
+  try { localStorage.removeItem('sdspass_hesap_key'); localStorage.removeItem('sdspass_firma'); } catch (e) {}
+  window._firmaId = ''; _firmalar = [];
+  document.getElementById('hesapPanel').style.display = 'none';
+  document.getElementById('hesapLogin').style.display = 'flex';
+}
+async function _hesapYukle() {
+  if (!_hesapKey()) return;
+  try {
+    const j = await _hesapApi('/firmalar');
+    _firmalar = j.firmalar || [];
+    document.getElementById('hesapAd').textContent = `Hesap: ${j.hesap} · ${_firmalar.length} firma`;
+    document.getElementById('hesapLogin').style.display = 'none';
+    document.getElementById('hesapPanel').style.display = 'block';
+    _firmaListeCiz();
+    let son = ''; try { son = localStorage.getItem('sdspass_firma') || ''; } catch (e) {}
+    if (son && _firmalar.some(f => f.id === son) && son !== window._firmaId) {
+      document.getElementById('firmaSec').value = son; await _firmaSec(son);
+    }
+  } catch (e) {
+    if (e.status === 401) { _hesapCikis(); alert('Hesap anahtarı geçersiz.'); }
+    else _firmaMsg('Firma listesi alınamadı: ' + e.message, true);
+  }
+}
+function _firmaListeCiz() {
+  const q = (document.getElementById('firmaAra').value || '').toLocaleLowerCase('tr');
+  const sel = document.getElementById('firmaSec');
+  const cur = window._firmaId;
+  const esc = t => String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  sel.innerHTML = '<option value="">— Firma seçin —</option>' + _firmalar
+    .filter(f => !q || f.name.toLocaleLowerCase('tr').includes(q))
+    .map(f => `<option value="${esc(f.id)}"${f.id === cur ? ' selected' : ''}>${esc(f.name)}` +
+              ` (${f.uretilen_gbf} GBF, ${f.tedarikci_gbf} tedarikçi GBF)</option>`).join('');
+  document.getElementById('firmaGuncelBtn').disabled = !cur;
+}
+async function _firmaSec(id) {
+  window._firmaId = id || '';
+  try { localStorage.setItem('sdspass_firma', window._firmaId); } catch (e) {}
+  document.getElementById('firmaGuncelBtn').disabled = !id;
+  if (!id) { _firmaMsg(''); return; }
+  try {
+    const f = await _hesapApi('/firmalar/' + encodeURIComponent(id));
+    const set = (el, v) => { const x = document.getElementById(el); if (x) x.value = v || ''; };
+    set('suppName', f.name); set('suppAddress', f.address); set('suppPhone', f.phone);
+    set('suppEmail', f.email); set('suppContact', f.contact); set('supplierEmergencyTel', f.emergency_tel);
+    const r = document.getElementById(f.emergency_hours === 'business' ? 'telBusiness' : 'tel24_7'); if (r) r.checked = true;
+    _firmaMsg(`Bölüm 1.3 / 1.4 "${f.name}" kaydından dolduruldu.`);
+  } catch (e) { _firmaMsg('Firma okunamadı: ' + e.message, true); }
+}
+async function _firmaKaydet(yeni) {
+  const g = id => document.getElementById(id)?.value?.trim() || '';
+  const body = { name: g('suppName'), address: g('suppAddress'), phone: g('suppPhone'), email: g('suppEmail'),
+                 contact: g('suppContact'), emergency_tel: g('supplierEmergencyTel'),
+                 emergency_hours: document.querySelector('input[name="telHours"]:checked')?.value || '24_7' };
+  if (!body.name) { alert("Önce Bölüm 1.3'te firma adını girin."); return; }
+  try {
+    const f = yeni ? await _hesapApi('/firmalar', { method: 'POST', body: JSON.stringify(body) })
+                   : await _hesapApi('/firmalar/' + encodeURIComponent(window._firmaId), { method: 'PUT', body: JSON.stringify(body) });
+    window._firmaId = f.id;
+    try { localStorage.setItem('sdspass_firma', f.id); } catch (e) {}
+    await _hesapYukle();
+    _firmaMsg(yeni ? `"${f.name}" kaydedildi.` : `"${f.name}" güncellendi.`);
+  } catch (e) { _firmaMsg(e.message, true); }
+}
+document.addEventListener('DOMContentLoaded', () => { _hesapYukle(); });
+
 function _kduSave() {
   try {
     const g = id => document.getElementById(id)?.value?.trim() || '';

@@ -32,7 +32,7 @@ app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
     allow_credentials=False,
-    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_methods=["GET", "POST", "PUT", "OPTIONS"],
     allow_headers=["Content-Type", "Authorization"],
 )
 
@@ -87,6 +87,8 @@ async def health():
 # ─── SDS DENETIM ENDPOINT ─────────────────────────────────────────────────────
 from app.services.audit_endpoint import router as audit_router   # GBF denetimi (Ek-2 soru listesi)
 app.include_router(audit_router)
+from app.services.accounts import router as hesap_router  # danışman hesabı + firma klasörleri
+app.include_router(hesap_router)
 
 
 

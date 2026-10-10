@@ -1826,6 +1826,23 @@ async def generate_label_guide(data: dict = Body(...)):
 # ─────────────────────────────────────────────────────────────────────────────
 # Tedarikçi SDS Parse — PDF'den bileşen verisi çıkar
 # ─────────────────────────────────────────────────────────────────────────────
+def _sds_icin_metin(t: str, sinir: int = 150_000) -> str:
+    """Okuyucuya gönderilecek GBF metni. Önceden 30 000 karakterde kesiliyordu — 35–38 bin karakterlik firma
+    GBF'lerinde Bölüm 11 / 12 hiç okunmuyordu (2026-10-10). Sınırı aşan metinde yalnız okunan bölümler (1–3, 9, 11, 12)
+    gönderilir; bölümler bulunamazsa baştan sınır kadar."""
+    if len(t) <= sinir:
+        return t
+    try:
+        from app.services.audit_jev import split_sections
+        secs = split_sections(t)
+        sec = chr(10).join(secs[k] for k in ('1', '2', '3', '9', '11', '12') if k in secs)
+        if sec:
+            return sec[:sinir]
+    except Exception:
+        pass
+    return t[:sinir]
+
+
 def _ate_from_text(raw, route: str):
     """Tedarikçi GBF'sindeki LD50/LC50 metni → (değer, ham metin). Değer: oral/dermal mg/kg, solunum mg/l.
     Kesin olmayan (>, <, ≥, ≤, aralık), yüzde/çözelti notu taşıyan ya da birimi tanınmayan değer → None."""
@@ -1978,16 +1995,19 @@ async def parse_supplier_sds(request: Request):
 - Belirlenmemiş/uygulanamaz değerler için null yaz
 
 SDS METNİ:
-{sds_text[:30000]}
+{_sds_icin_metin(sds_text)}
 
 Sadece JSON:"""
 
         resp = client.messages.create(
             model="claude-haiku-4-5-20251001",
-            max_tokens=8192,   # KKDİK no + Bölüm 12 alanları eklendi (çok bileşenli GBF'de 4096 kesiliyordu riski)
+            max_tokens=16000,  # çok bileşenli GBF (17 bileşen × Bölüm 11/12 alanları) 8192'de kesilebiliyordu
             messages=[{"role": "user", "content": prompt}]
         )
 
+        if getattr(resp, 'stop_reason', '') == 'max_tokens':
+            raise HTTPException(status_code=422, detail='GBF çok uzun — okuyucunun cevabı sınırda kesildi; bileşenleri '
+                                                        'iki parça hâlinde yükleyin ya da elle girin.')
         raw = resp.content[0].text.strip()
         # JSON bloğunu temizle
         if raw.startswith("```"):

@@ -635,11 +635,41 @@ async def classify(inp: dict) -> dict:
     substance_mode = len(_active) == 1 and _conc_of(_active[0]) >= 80
 
     # ATE sağlık tehlikeleri (classify_mixture_clp Acute Tox. atlar)
+    _ate_karar = None   # soluma yolu buhar / sis kararı gerekiyorsa panel sorusu (aşağıda pending'e eklenir)
     try:
         if substance_mode:
             ate_h, ate_details = _substance_acute(_active[0], form), {}
         else:
             ate_h, ate_details = calculate_ate_health_h_codes(comps, form=form)
+            # Sıvı karışımda solunum ATEmix'i buhar (dönüşüm değeri Kat.4 11 mg/l) ya da sis (1,5 mg/l) kabulüyle
+            # hesaplanır (SEA Ek-1 Tablo 3.1.2); hangisinin geçerli olduğu ürünün kullanım koşuluna bağlıdır — KDU kararı.
+            # Önceden hep buhar kabul ediliyordu: %35 H2O2'de buharla sınıf yok, sisle H332 (Akkim GBF H332).
+            # İki kabul aynı sonucu veriyorsa soru sorulmaz.
+            if form in ('liquid', 'paste'):
+                _sis_h, _sis_det = calculate_ate_health_h_codes(comps, form='sivi_sis')
+                _kod = lambda lst: sorted({str(e.get('h_code'))[:4] for e in lst if str(e.get('h_code', '')).startswith('H33')})
+                _dec_inh = (test_data.get('ate_inhal_form') or '').strip()
+                if _dec_inh == 'mist':
+                    _kalan = [e for e in ate_h if not str(e.get('h_code', '')).startswith('H33')]
+                    ate_h = _kalan + [e for e in _sis_h if str(e.get('h_code', '')).startswith('H33')]
+                    if isinstance(_sis_det, dict) and _sis_det.get('inhal'):
+                        ate_details = {**(ate_details or {}), 'inhal': _sis_det['inhal']}
+                elif _dec_inh != 'vapour' and _kod(_sis_h) != _kod(ate_h):
+                    _ate_karar = {
+                        'code': 'ATE_INHAL_FORM', 'field': 'ate_inhal_form',
+                        'question': ('Soluma yoluyla akut toksisite hesabı ürünün buhar mı yoksa sis / aerosol olarak mı '
+                                     'solunduğuna bağlı (SEA Ek-1 Tablo 3.1.2 dönüşüm değerleri). Buhar kabulüyle: '
+                                     f"{', '.join(_kod(ate_h)) or 'sınıflandırma yok'}; sis kabulüyle: "
+                                     f"{', '.join(_kod(_sis_h)) or 'sınıflandırma yok'}. Ürününüz için seçin."),
+                        'options': [
+                            {'value': 'vapour', 'label': 'Buhar — ürün sprey / sis olarak kullanılmaz',
+                             'effect': f"{', '.join(_kod(ate_h)) or 'sınıf yok'}"},
+                            {'value': 'mist', 'label': 'Sis / aerosol oluşabilir (püskürtme, sisleme, köpürtme)',
+                             'effect': f"{', '.join(_kod(_sis_h)) or 'sınıf yok'}"},
+                        ],
+                        'legal_basis': 'SEA Ek-1 3.1.3.6 ve Tablo 3.1.2 (buhar / toz-sis dönüşüm değerleri)',
+                        'components': [],
+                    }
     except Exception as e:
         print(f'[ATE ERROR] {e}')
         ate_h, ate_details = [], {}
@@ -666,6 +696,8 @@ async def classify(inp: dict) -> dict:
                          test_data=test_data, form_sub=form_sub, fp_status=inp.get('fp_status') or '',
                          mixture_ph=mixture_ph,
                          mixture_skin_corr='H314' in {_h4(h) for h in (clp_res.get('h_codes') or [])})
+    if _ate_karar:
+        phys_res.setdefault('pending_decisions', []).append(_ate_karar)
     if _phys_late:
         phys_res.setdefault('warnings', []).append(
             'ℹ Bileşen fiziksel verisi zamanında alınamadı (' + ', '.join(_phys_late) + ') — bu bileşenlerin parlama / '

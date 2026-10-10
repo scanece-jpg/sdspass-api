@@ -1210,6 +1210,20 @@ def kural_testleri(c) -> int:
          lambda: _cl_testi(c)),
         ('Denetim: "1. BAŞLIK" biçimli GBF bölümlere ayrılır; Romen rakamlı taşıma sınıfı (VIII) okunur',
          lambda: _denetim_baslik_testi()),
+        ("SEA Ek-1 Tablo 3.1.2: sıvı karışımda soluma ATEmix buhar / sis kabulü farklı sonuç verirse KDU'ya sorulur "
+         "(H2O2 %35: buhar → yok, sis → H332 — Akkim GBF); aynı sonuçta soru yok (metanol)",
+         lambda: (lambda f: f([('7722-84-1', 35), (W, 65)], {})[1] == ['ATE_INHAL_FORM']
+                  and 'H332' not in f([('7722-84-1', 35), (W, 65)], {'ate_inhal_form': 'vapour'})[0]
+                  and 'H332' in f([('7722-84-1', 35), (W, 65)], {'ate_inhal_form': 'mist'})[0]
+                  and f([('67-56-1', 60), (W, 40)], {})[1] == [])(
+             lambda bil, td: (lambda j: ([h for h in (j.get('all_h_codes') or [])],
+                                         [d['code'] for d in (j.get('pending_decisions') or []) if d.get('code') == 'ATE_INHAL_FORM']))(
+                 c.post('/api/v1/sds/calculate', json={'components': [
+                     {'cas': cas, 'name': cas, 'conc': cn, 'concMax': cn,
+                      'hazards': c.get('/api/v1/sds/substance/lookup', params={'cas': cas, 'form': 'liquid'}).json().get('hazards', []),
+                      'm_factors': {}} for cas, cn in bil], 'form': 'liquid', 'usage': 'industrial',
+                     'test_data': {'oxidizing_liquid': 'H272_cat3', 'metal_corrosive': 'not_corrosive',
+                                   'euh071_inhalable': 'not_inhalable', **td}}).json()))),
         ('Danışman hesabı: anahtarsız erişim yok, firma klasörü otomatik açılır, aynı ad engellenir, '
          'üretilen GBF kaydedilir / listelenir / geri okunur (accounts.py)',
          lambda: _hesap_testi()),

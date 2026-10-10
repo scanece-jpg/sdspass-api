@@ -1185,10 +1185,19 @@ def _ate_core(items: list, form: str = '') -> tuple:
                 # SEA Ek-1 Tablo 3.1.1: gazlar ppmV, karışımda Ci hacimce (v/v %)
                 routes_to_process = ['inhalation_gas']
             elif base_route == 'inhalation':
+                # Bileşenin solunum ATE'si toz/sis için verilmişse (örn. perasetik asit 0,2 mg/l "dusts or mists")
+                # yalnız toz/sis eşikleriyle değerlendirilir — önceden buhar eşiğiyle karşılaştırılıp %5'te H331
+                # veriliyordu; toz/sis eşiğiyle H332 (SEA Ek-1 Tablo 3.1.1; Ecolab P3-Oxonia GBF)
+                _inh = combined_ate.get('inhalation')
+                _inh_f = str(_inh.get('form') or '').lower() if isinstance(_inh, dict) else ''
                 if combined_ate.get('inhalation_vapour'):
                     routes_to_process = ['inhalation_vapour', 'inhalation']
                 elif combined_ate.get('inhalation_dust'):
                     routes_to_process = ['inhalation_dust', 'inhalation']
+                elif any(k in _inh_f for k in ('dust', 'mist', 'toz', 'sis')):
+                    routes_to_process = ['inhalation_dust']
+                elif 'vapour' in _inh_f or 'vapor' in _inh_f or 'buhar' in _inh_f:
+                    routes_to_process = ['inhalation_vapour']
                 elif combined_ate.get('inhalation_mgl') or _is_liquid_form(form):
                     routes_to_process = ['inhalation_vapour', 'inhalation']
                 else:

@@ -1224,6 +1224,16 @@ def kural_testleri(c) -> int:
                       'm_factors': {}} for cas, cn in bil], 'form': 'liquid', 'usage': 'industrial',
                      'test_data': {'oxidizing_liquid': 'H272_cat3', 'metal_corrosive': 'not_corrosive',
                                    'euh071_inhalable': 'not_inhalable', **td}}).json()))),
+        ("SEA Ek-1 Tablo 3.1.1: toz/sis için verilmiş solunum ATE'si (perasetik asit 0,2 mg/l) buhar eşiğiyle "
+         "değerlendirilmez — %5'te H331 değil H332 (Ecolab P3-Oxonia GBF, 2026-10-10)",
+         lambda: (lambda h: 'H332' in h and 'H331' not in h)(
+             c.post('/api/v1/sds/calculate', json={'components': [
+                 {'cas': cas, 'name': cas, 'conc': cn, 'concMax': cn,
+                  'hazards': c.get('/api/v1/sds/substance/lookup', params={'cas': cas, 'form': 'liquid'}).json().get('hazards', []),
+                  'm_factors': {}} for cas, cn in (('79-21-0', 4.99), ('7722-84-1', 29.99), ('64-19-7', 9.99), (W, 55.03))],
+                 'form': 'liquid', 'usage': 'industrial',
+                 'test_data': {'oxidizing_liquid': 'H272_cat2', 'metal_corrosive': 'not_corrosive',
+                               'euh071_inhalable': 'not_inhalable', 'ate_inhal_form': 'vapour'}}).json().get('all_h_codes') or [])),
         ('Danışman hesabı: anahtarsız erişim yok, firma klasörü otomatik açılır, aynı ad engellenir, '
          'üretilen GBF kaydedilir / listelenir / geri okunur (accounts.py)',
          lambda: _hesap_testi()),

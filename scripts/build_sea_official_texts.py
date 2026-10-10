@@ -103,6 +103,10 @@ def main():
     for code in set(part1) | set(part2):
         src = part2.get(code) or part1.get(code)
         p[code] = _tidy(repair(max(src, key=len)))
+    # Resmî metindeki açık yazım hataları düzeltilir (anlam bozuluyor; kullanıcı kararı 2026-10-10):
+    # "depolayan" / "depolayanız" → "depolayın" / "depolayınız" (P403+P235, P402+P404, P403+P233)
+    for code in p:
+        p[code] = re.sub(r'depolayan', 'depolayın', re.sub(r'depolayanız', 'depolayınız', p[code]))
     euh = {k: _tidy(v) for k, v in euh.items()}
     # Birleşik ifadeler (H300+H310 …) alınmaz: kaynakta sayfa sonunda bölünmüş satırlar var (H312+H332 eksik).
     # Kaynak docx'te bazı satırlarda kelime aralığı kayıp ("Havailetemasettiğinde"): aynı ekin metin dönüşümündeki

@@ -1792,6 +1792,30 @@ async def generate_label_guide(data: dict = Body(...)):
 # ─────────────────────────────────────────────────────────────────────────────
 # Tedarikçi SDS Parse — PDF'den bileşen verisi çıkar
 # ─────────────────────────────────────────────────────────────────────────────
+def _ate_from_text(raw, route: str):
+    """Tedarikçi GBF'sindeki LD50/LC50 metni → (değer, ham metin). Değer: oral/dermal mg/kg, solunum mg/l.
+    Kesin olmayan (>, <, ≥, ≤, aralık), yüzde/çözelti notu taşıyan ya da birimi tanınmayan değer → None."""
+    if raw is None or raw == '':
+        return None, ''
+    if isinstance(raw, (int, float)):
+        return None, str(raw)            # birimsiz sayı — hangi birim olduğu bilinmiyor
+    t = str(raw).strip()
+    if not t or re.search(r'[<>≥≤]|%|\d\s*[-–]\s*\d', t):
+        return None, t
+    m = re.search(r'(\d+(?:[.,]\d+)?)\s*(mg\s*/\s*kg|mg\s*/\s*l\b|mg\s*/\s*m\s*[³3]|ppm)', t, re.I)
+    if not m:
+        return None, t
+    v = float(m.group(1).replace(',', '.'))
+    u = re.sub(r'\s', '', m.group(2).lower())
+    if route in ('oral', 'dermal'):
+        return (v if u == 'mg/kg' else None), t
+    if u == 'mg/l':
+        return v, t
+    if u in ('mg/m³', 'mg/m3'):
+        return v / 1000.0, t
+    return None, t                       # ppm: gaz/buhar ayrımı ve molar kütle gerekir — KDU
+
+
 @app.post("/api/v1/sds/parse-supplier")
 async def parse_supplier_sds(request: Request):
     """
@@ -1850,9 +1874,9 @@ async def parse_supplier_sds(request: Request):
                     "concMin": 15,
                     "concMax": 20,
                     "hCodes": ["H314", "H335"],
-                    "ld50_oral": 300.0,
+                    "ld50_oral": "300 mg/kg (sıçan)",
                     "ld50_dermal": None,
-                    "lc50_inhal": None,
+                    "lc50_inhal": "170 mg/m³ 4 saat (%50 çözelti)",
                     "kkdik_no": None,
                     "hClasses": ["Skin Corr. 1B", "STOT SE 3"],
                     "eco": {"lc50_fish": None, "ec50_daphnia": None, "erc50_algae": None,
@@ -1891,9 +1915,9 @@ async def parse_supplier_sds(request: Request):
 - Index No / KKDIK No: xxx-xxx-xx-x (belgede yoksa null)
 - concMin / concMax: sayısal yüzde değeri (örn. 15.0), belgede tek değer varsa ikisine de yaz, yoksa null
 - hCodes: belgede bu bileşen için listelenen H kodları (örn. ["H314","H335"])
-- ld50_oral: Bölüm 11'deki oral LD50 değeri mg/kg cinsinden sayısal (yoksa null)
-- ld50_dermal: Bölüm 11'deki dermal LD50 değeri mg/kg cinsinden sayısal (yoksa null)
-- lc50_inhal: Bölüm 11'deki inhalasyon LC50 değeri mg/L/4h cinsinden sayısal (yoksa null)
+- ld50_oral / ld50_dermal / lc50_inhal: Bölüm 11'deki değer, BELGEDE YAZDIĞI GİBİ METİN olarak — işaret (>, <, ≥),
+  sayı, birim (mg/kg, mg/l, mg/m³, ppm), süre ve belgede yazıyorsa test edilen madde/derişim (örn. "%50 H2O2")
+  dahil. Birim çevirme, sayıyı değiştirme. Yoksa null.
 - kkdik_no: bileşenin KKDİK kayıt numarası (Bölüm 3'te "KKDİK kayıt no / Kayıt numarası" — belgede yazdığı gibi;
   REACH kayıt numarası (01-...) KKDİK numarası değildir, ona null yaz)
 - supplier.kkdik_no: ürün tek maddeyse Bölüm 1.1 / 3'teki KKDİK kayıt numarası (yoksa null)
@@ -2001,16 +2025,23 @@ Sadece JSON:"""
                     else:
                         comp["hazards"] = [{"h_class": c, "h_code": c} for c in pdf_hcodes]
 
-            # ATE değerleri — Bölüm 11'den çekilen, veritabanında yoksa ATEmix hesabına girer
-            ate_oral   = comp.get("ld50_oral")
-            ate_dermal = comp.get("ld50_dermal")
-            ate_inhal  = comp.get("lc50_inhal")
-            if ate_oral or ate_dermal or ate_inhal:
-                comp["ate"] = {
-                    "oral":   float(ate_oral)   if ate_oral   else None,
-                    "dermal": float(ate_dermal) if ate_dermal else None,
-                    "inhal":  float(ate_inhal)  if ate_inhal  else None,
-                }
+            # ATE değerleri — Bölüm 11'den (belgedeki metin). Birim çevirisi burada yapılır (mg/m³ → mg/l);
+            # kesin olmayan değer (>, <) ya da bir çözeltide / başka derişimde ölçülmüş değer bileşenin ATE'si
+            # sayılmaz (ör. "170 mg/m³ (%50 H2O2)" — önceden 170 mg/l diye alınıyordu): ham metin saklanır, KDU'ya uyarı.
+            ate, ham = {}, {}
+            for _k, _f in (("oral", "ld50_oral"), ("dermal", "ld50_dermal"), ("inhal", "lc50_inhal")):
+                _v, _raw = _ate_from_text(comp.get(_f), _k)
+                if _raw:
+                    ham[_k] = _raw
+                if _v is not None:
+                    ate[_k] = _v
+                elif _raw:
+                    warnings.append(f"ℹ️ {comp.get('name','?')}: {_f} '{_raw}' — kesin değer / bileşenin kendisi için "
+                                    f"değil ya da birim tanınmadı; akut toksisite hesabına otomatik alınmadı (KDU değerlendirmeli)")
+            if ham:
+                comp["ate_ham"] = ham
+            if ate:
+                comp["ate"] = {"oral": ate.get("oral"), "dermal": ate.get("dermal"), "inhal": ate.get("inhal")}
 
             validated.append(comp)
 

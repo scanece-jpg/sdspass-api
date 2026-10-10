@@ -284,10 +284,30 @@ def biodegradability_line(lang: str = 'TR') -> str:
             'criteria of the Detergents Regulation (TR Official Gazette 30314; EU 648/2004).')
 
 
-def ek7a_lines(components: List[dict], usage: str = 'industrial', lang: str = 'TR') -> List[str]:
-    """GBF 15.1 satırları."""
-    d = ek7a_declaration(components)
+def ek7a_lines(components: List[dict], usage: str = 'industrial', lang: str = 'TR', liste: bool = False) -> List[str]:
+    """GBF 15.1 satırları.
+
+    liste=False (varsayılan, 2026-10-10 kullanıcı kararı): Ek-7 A içerik listesi GBF'ye basılmaz; ürünün yönetmelik
+    kapsamında olduğu ve bilginin nerede verildiği yazılır. Dayanak: Ek-7 A bir ambalaj etiketi kuralıdır; halka
+    sunulmayan endüstriyel / kurumsal üründe bilgi "teknik veri belgesi, malzeme güvenlik veri belgesi veya benzer
+    şekildeki belgeler" ile verilebilir (Ek-7 A son paragraf) — GBF zorunlu değildir. KKDİK Ek-2 15.1 yalnız tabi
+    olunan mevzuatın belirtilmesini ister. Önceki liste eksikti (bileşen sınıfı bilinmeyen yüzey aktif madde, sabun,
+    parfüm atlanıyordu) ve "bu GBF ile sağlanmaktadır" diye yanlış beyan ediyordu.
+    liste=True: bileşen sınıflarından eksiksiz liste (sınıf seçimi tamamlanınca — backlog)."""
     tr = lang == 'TR'
+    if not liste:
+        if usage == 'consumer':
+            return [('Ürün, Deterjanlar Hakkında Yönetmelik (RG: 27.01.2018, Sayı: 30314) kapsamında deterjandır; '
+                     'Ek-7 A içerik bilgisi ürün etiketinde verilir.') if tr else
+                    ('The product is a detergent under the Detergents Regulation (TR Official Gazette 30314; '
+                     'EU 648/2004); Annex VII A ingredient information is given on the product label.')]
+        return [('Ürün, Deterjanlar Hakkında Yönetmelik (RG: 27.01.2018, Sayı: 30314) kapsamında deterjandır. '
+                 'Endüstriyel/kurumsal kullanıma yöneliktir ve halka sunulmamaktadır; Ek-7 A içerik bilgisi ürün '
+                 'etiketinde veya teknik veri belgesinde verilir (Ek-7 A son paragraf).') if tr else
+                ('The product is a detergent under the Detergents Regulation (TR Official Gazette 30314; '
+                 'EU 648/2004), intended for industrial/institutional use and not made available to the general '
+                 'public; Annex VII A ingredient information is given on the label or in the technical data sheet.')]
+    d = ek7a_declaration(components)
     out = [('Deterjanlar Hakkında Yönetmelik (RG: 27.01.2018, Sayı: 30314) — Ek-7 A içerik beyanı:' if tr else
             'Detergents Regulation (TR Official Gazette 27.01.2018, No. 30314; EU 648/2004) — Annex VII A '
             'ingredients:')]

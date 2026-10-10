@@ -2102,9 +2102,9 @@
   {
    "id": "15.1-deterjan",
    "bolum": "15.1",
-   "dayanak": "Deterjanlar Hakkında Yönetmelik Ek-7 A",
-   "soru_tr": "Deterjan içerik beyanı (yüzey aktif madde aralıkları, alerjenler vb.) verilmiş mi?",
-   "soru_en": "The detergent ingredient declaration (e.g. surfactant ranges, fragrance allergens) is given.",
+   "dayanak": "Deterjanlar Hakkında Yönetmelik Ek-7 A (son paragraf); KKDİK Ek-2 15.1",
+   "soru_tr": "Deterjanlar Hakkında Yönetmelik kapsamı belirtilmiş mi; Ek-7 A içerik bilgisi GBF'de veriliyorsa eksiksiz mi (yüzey aktif madde aralıkları, parfüm, alerjenler), değilse etikette / teknik veri belgesinde verildiği belirtilmiş mi?",
+   "soru_en": "The Detergents Regulation status is stated; where Annex VII A ingredient information is given in the SDS it is complete, otherwise the SDS states that it is given on the label / technical data sheet.",
    "yontem": "kod",
    "kosul": "deterjan",
    "onem": "zorunlu"

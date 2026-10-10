@@ -404,6 +404,11 @@ def c_15_svhc(ctx):
 
 def c_deterjan(ctx):
     s15 = ctx['secs'].get('15', '')
+    # Ek-7 A son paragraf: endüstriyel üründe bilgi teknik veri belgesi / GBF / benzer belgeyle; tüketici ürününde
+    # etikette. GBF bilginin etikette / teknik veri belgesinde verildiğini belirtiyorsa KDU o belgeyi doğrular.
+    if re.search(r'(?i)ek-7\s*a içerik bilgisi[^.]{0,60}(etiket|teknik veri belgesi)', s15):
+        return 'kdu', ('15.1: Ek-7 A içerik bilgisinin etikette / teknik veri belgesinde verildiği belirtilmiş — '
+                       'KDU etiket veya belgede listenin eksiksiz olduğunu doğrulamalı (Deterjanlar Yön. Ek-7 A).')
     if re.search(r'(?i)sınıfı belirlenmemiş|class to be determined', s15):
         return 'eksik', 'Ek-7 A beyanında sınıfı belirlenmemiş (yüzey aktif madde olabilecek) bileşen var.'
     if re.search(r'(?i)beyan edilecek bileşen sınıfı bulunmamaktadır|no ingredient classes subject', s15):

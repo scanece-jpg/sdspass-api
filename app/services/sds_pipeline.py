@@ -56,10 +56,28 @@ DOMINANCE_MAP = {
 def _pending_all(phys_res: dict, transport: dict, test_data: dict, comps: Optional[list] = None) -> list:
     """Panel kararları phys_res['pending_decisions'] üzerinden gösterir — ADR kararı da oraya eklenir (tekrarsız)."""
     lst = phys_res.setdefault('pending_decisions', [])
-    for d in _adr_undet_decision(transport, test_data) + _ted_decisions(comps or []) + _ek6_not_decisions(comps or []):
+    for d in (_adr_undet_decision(transport, test_data) + _adr_dogalgaz_decision(transport)
+              + _ted_decisions(comps or []) + _ek6_not_decisions(comps or [])):
         if d.get('field') not in {x.get('field') for x in lst}:
             lst.append(d)
     return lst
+
+def _adr_dogalgaz_decision(transport: dict) -> list:
+    """Metanın baskın olduğu alevlenir gaz karışımı: ADR UN1971 / UN1972 "yüksek metan içeren doğal gaz" mı?
+    ADR sayısal sınır vermediği için KDU beyan eder."""
+    if not (transport or {}).get('dogalgaz_soru'):
+        return []
+    return [{
+        'code': 'ADR_DOGALGAZ', 'field': 'adr_dogalgaz',
+        'question': ("Ürün en çok metan içeren bir hidrokarbon gaz karışımı. ADR Tablo A'da \"yüksek metan içeren doğal gaz\" "
+                     "için adlı giriş var (UN1971 sıkıştırılmış / UN1972 soğutulmuş sıvı); ADR \"yüksek metan\" için sayısal "
+                     "sınır vermez. Ürün doğal gaz / LNG / CNG mi?"),
+        'options': [
+            {'value': 'evet', 'label': 'Evet — doğal gaz (yüksek metan içeren)', 'effect': 'UN1971 / UN1972'},
+            {'value': 'hayir', 'label': 'Hayır — başka bir gaz karışımı', 'effect': 'B.B.B. girişi (UN1954 / UN3312)'},
+        ],
+        'legal_basis': 'ADR 2025 Tablo A (UN1971, UN1972); ADR 2.1.3.3', 'components': ['74-82-8']}]
+
 
 def _adr_undet_decision(transport: dict, test_data: dict) -> list:
     """Belirsiz taşıma (tek tetikleyici bileşen Tablo A haritasında yok): KDU kararı. 'nos' → B.B.B. kullanılır;
@@ -893,7 +911,8 @@ async def classify(inp: dict) -> dict:
                                acute_tox=ate_h or [],
                                mixture_ph=mixture_ph,
                                gas_type=(test_data.get('gas_type')
-                                         or ('refrigerated' if test_data.get('cryo_gas') else None)))
+                                         or ('refrigerated' if test_data.get('cryo_gas') else None)),
+                               dogalgaz=test_data.get('adr_dogalgaz'))
 
     # ── Etiket (h_codes) ve Bölüm 2.1 (all_h_codes) ─────────────────────────
     h_codes = list(dict.fromkeys(norm_sub(h) for h in clp_res.get('h_codes', [])))

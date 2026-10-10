@@ -811,7 +811,8 @@ def classify(h_codes: List[str], form: str = 'liquid',
              acute_tox: Optional[List[Dict]] = None,
              mixture_ph=None,
              gas_type: Optional[str] = None,
-             ox_category: Optional[int] = None) -> Dict:
+             ox_category: Optional[int] = None,
+             dogalgaz: Optional[str] = None) -> Dict:
     """
     ADR/IMDG/IATA sınıflandırması.
 
@@ -1294,6 +1295,35 @@ def classify(h_codes: List[str], form: str = 'liquid',
                          f"hâli (ADR 2.2.2.1.2; adlı giriş B.B.B.'den önce gelir, ADR 2.1.3.3)."),
             }
 
+    # Bileşenleriyle girilmiş doğal gaz: ADR UN1971 / UN1972 "yüksek metan içeren doğal gaz" — ADR "yüksek metan"
+    # için sayısal sınır vermez → metanın en büyük bileşen olduğu hidrokarbon (+ azot / CO2) karışımında KDU'ya sorulur
+    # (İpragaz LNG GBF'si: metan %87–97, etan, propan, azot → UN1972; bizde UN3312 B.B.B. çıkıyordu).
+    _dg_soru = False
+    if form == 'gas' and _comps and primary['class'] == '2.1':
+        _akt2 = [c for c in _comps if c.conc > 0]
+        _dg_ok = (len(_akt2) > 1 and all(c.cas in _HC_GAS_CAS or c.cas in ('7727-37-9', '124-38-9') for c in _akt2)
+                  and max(_akt2, key=lambda c: c.conc).cas == '74-82-8')
+        if _dg_ok:
+            if dogalgaz == 'evet':
+                _gt5 = 'refrigerated' if 'H281' in h_set else 'compressed'
+                _un5 = _GAS_ADLI['8006-14-2'][_gt5]
+                try:
+                    from app.services.transport_adr_service import get_adr_details as _gad5
+                    _gd5 = _gad5(_un5, '') or {}
+                except Exception:
+                    _gd5 = {}
+                un_entry = {**un_entry, 'un': _un5[:2] + ' ' + _un5[2:],
+                            'label': _gd5.get('name_tr') or un_entry.get('label'),
+                            'name': _gd5.get('name') or un_entry.get('name'),
+                            'name_tr': _gd5.get('name_tr') or un_entry.get('name_tr'),
+                            'classification_code': _gd5.get('classification_code') or un_entry.get('classification_code'),
+                            'tunnel': _gd5.get('tunnel_code') or un_entry.get('tunnel'),
+                            'pg': '',
+                            'note': ('ADR Tablo A — yüksek metan içeren doğal gaz (KDU beyanı); adlı giriş B.B.B.\'den '
+                                     'önce gelir (ADR 2.1.3.3).')}
+            elif dogalgaz != 'hayir':
+                _dg_soru = True
+
     # ── Adım 5: Uyarılar ─────────────────────────────────────────────────────
     # (a) H22x çelişki kontrolü
     flam_present = [h for h in ['H224', 'H225', 'H226'] if h in h_set]
@@ -1407,4 +1437,5 @@ def classify(h_codes: List[str], form: str = 'liquid',
         'conflict_warning': conflict_warning,
         'adr_caution':      adr_caution,
         'undetermined':     _undet,
+        'dogalgaz_soru':    _dg_soru,
     }

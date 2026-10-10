@@ -400,6 +400,22 @@ def _gaz_testi(c) -> bool:
                                          g('7727-37-9', 'refrigerated'), g('8006-14-2', 'refrigerated'),
                                          g('124-38-9', 'refrigerated'), g('1333-74-0', 'compressed'),
                                          g('68476-85-7', 'liquefied'))
+    # İpragaz LNG (bileşenleriyle): metan baskın → KDU sorusu; "evet" → UN1972, "hayir" → UN3312 B.B.B.
+    def _lng_dg(karar):
+        comps = []
+        for cas, cn in (('74-82-8', 92), ('74-84-0', 6), ('74-98-6', 1), ('7727-37-9', 1)):
+            lk = c.get('/api/v1/sds/substance/lookup', params={'cas': cas, 'form': 'gas'}).json()
+            comps.append({'cas': cas, 'name': cas, 'conc': cn, 'concMax': cn, 'hazards': lk.get('hazards', []),
+                          'm_factors': {}})
+        td = {'gas_type': 'refrigerated', **({'adr_dogalgaz': karar} if karar else {})}
+        j = c.post('/api/v1/sds/calculate', json={'components': comps, 'form': 'gas', 'usage': 'industrial',
+                                                    'lang': 'TR', 'test_data': td}).json()
+        return (((j.get('transport') or {}).get('road') or {}).get('un', '').replace(' ', ''),
+                [d['code'] for d in j.get('pending_decisions') or []])
+    dg0, dg1, dg2 = _lng_dg(None), _lng_dg('evet'), _lng_dg('hayir')
+    if not ('ADR_DOGALGAZ' in dg0[1] and dg1[0] == 'UN1972' and 'ADR_DOGALGAZ' not in dg1[1]
+            and dg2[0] == 'UN3312' and 'ADR_DOGALGAZ' not in dg2[1]):
+        return False
     b18 = bekra(['H220', 'H280'], [{'h_class': 'Press. Gas (Liq.)', 'h_code': 'H280'}], [], [], form='gas')['bolum2']
     b18c = bekra(['H220', 'H280'], [{'h_class': 'Press. Gas (Comp.)', 'h_code': 'H280'}], [], [], form='gas')['bolum2']
     return (o2r[0] >= {'H270', 'H281'} and 'H280' not in o2r[0] and o2r[1] == 'UN1073' and o2c[1] == 'UN1072'

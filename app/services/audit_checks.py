@@ -242,19 +242,20 @@ def c_22_tutarlilik(ctx):
     s21, s22 = _sub(s2, '2.1', '2.2'), _sub(s2, '2.2', '2.3')
     notes = []
     h21, h22 = _h(s21), _h(s22)
-    s22 = _signal_text(s22)
+    # Büyük harfle "TEHLİKE" / "DİKKAT" (Türkçe İ) de okunur — İpragaz GBF'leri, 2026-10-10
+    s22 = _signal_text(s22).replace('İ', 'i')
     if h22 - h21 and h21:
         notes.append(f'2.2\'de olup 2.1\'de olmayan H kodları: {sorted(h22 - h21)}')
     # SEA Md.29: H410 varken H400 tekrar sayılır; H411/H412/H413 ile H400 ayrı sınıflar → etikette ikisi de olur
     if 'H400' in h21 and h22 and 'H400' not in h22 and 'H410' not in h22:
         notes.append('2.1\'de Sucul Akut 1 (H400) var ama etikette (2.2) H400 yok — yalnız H410 varken çıkarılabilir '
                      '(SEA Md.29)')
-    if (h21 | h22) & DANGER_H and not re.search(r'\bTehlike\b', s22):
+    if (h21 | h22) & DANGER_H and not re.search(r'(?i)\btehlike\b', s22):
         notes.append('"Tehlike" gerektiren sınıflandırma var ama 2.2\'de "Tehlike" yok')
-    if not ((h21 | h22) & DANGER_H) and (h21 | h22) & WARNING_H and not re.search(r'\bDikkat\b', s22):
+    if not ((h21 | h22) & DANGER_H) and (h21 | h22) & WARNING_H and not re.search(r'(?i)\bdikkat\b', s22):
         notes.append('"Dikkat" gerektiren sınıflandırma var ama 2.2\'de "Dikkat" yok')
     _all = {h[:4] for h in (h21 | h22)}
-    if _all and _all <= NO_SIGNAL_H and re.search(r'\b(?:Dikkat|Tehlike)\b', s22):
+    if _all and _all <= NO_SIGNAL_H and re.search(r'(?i)\b(?:dikkat|tehlike)\b', s22):
         notes.append(f'Yalnız {sorted(_all)} var — uyarı kelimesi kullanılmaz (SEA Ek-1 Tablo 4.1.4 / 3.7.3) '
                      f'ama 2.2\'de uyarı kelimesi basılmış')
     return ('uygun', 'Etiket unsurları 2.1 ile tutarlı.') if not notes else ('eksik', '; '.join(notes))
@@ -397,7 +398,7 @@ def c_pg(ctx):
         return 'kdu', '14. bölümde taşımacılık sınıflandırması "belirlenmemiştir" — KDU kontrol etmeli (KKDİK Ek-2 Bölüm 14).'
     s14 = ctx['secs'].get('14', '')
     return ('uygun', 'Ambalaj grubu var.') if re.search(r'(?i)ambalaj(?:lama)? grubu\s*[:\-]?\s*(?:I{1,3}\b|uygulanamaz|'
-                                                        r'uygulanabilir değil|yok|[-–](?=\s|$))', s14) \
+                                                        r'uygulanabilir değil|uygulanmaz|tanımlanmamış|yok|[-–](?=\s|$))', s14) \
         else ('eksik', '14.4\'te ambalaj grubu bulunamadı.')
 
 

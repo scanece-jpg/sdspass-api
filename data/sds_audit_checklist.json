@@ -2149,6 +2149,16 @@
    "soru_en": "Advice is given on actions the recipient should take as a result of the listed regulations."
   },
   {
+   "id": "15-bekra-hal",
+   "bolum": "15",
+   "dayanak": "BEKRA Yönetmeliği (RG 02.03.2019/30702) Ek-1 Bölüm 2",
+   "soru_tr": "Bölüm 15'te BEKRA Ek-1 Bölüm 2 adlandırılmış maddesi maddenin belirli bir hâlini (sıvılaştırılmış gaz, susuz) adlandırıyorsa ürün o hâlde mi?",
+   "soru_en": "Where a Seveso Annex I Part 2 named entry refers to a specific state (liquefied gas, anhydrous), the product is in that state.",
+   "yontem": "kod",
+   "kosul": "her",
+   "onem": "zorunlu"
+  },
+  {
    "id": "16-revizyon",
    "bolum": "16",
    "dayanak": "KKDİK Ek-2 A 16(a), 0.2.5",
@@ -2436,6 +2446,16 @@
    "soru_en": "With H304, the Section 9 viscosity is a kinematic value at 40 °C consistent with ≤ 20.5 mm²/s.",
    "yontem": "kod",
    "kosul": "h:H304",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "9-gaz-bilesen",
+   "bolum": "9",
+   "dayanak": "KKDİK Ek-2 9.1",
+   "soru_tr": "Sıvı karışımda bileşene atfen verilen kaynama noktası / buhar basıncı, oda sıcaklığında gaz olan (çözünmüş) bileşene ait değil mi?",
+   "soru_en": "For a liquid mixture, component-based boiling point / vapour pressure entries do not refer to a dissolved gas.",
+   "yontem": "kod",
+   "kosul": "form:sivi",
    "onem": "zorunlu"
   },
   {

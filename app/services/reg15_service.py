@@ -103,7 +103,12 @@ def ozone_kok(components: list) -> dict:
     return out
 
 
-def bekra(h_codes, passed=None, euh_codes=(), components=None) -> dict:
+# BEKRA Ek-1 Bölüm 2 kaydı maddenin belirli hâlini adlandırıyorsa ("Hidrojen klorür (Sıvılaştırılmış gaz)",
+# "Susuz amonyak") yalnız o hâlde uygulanır — sulu çözelti (hidroklorik asit, amonyak çözeltisi) kapsam dışıdır.
+_BEKRA2_HAL = re.compile(r'(?i)sıvılaştırılmış\s*gaz|susuz')
+
+
+def bekra(h_codes, passed=None, euh_codes=(), components=None, form: str = None) -> dict:
     """{'bolum1': [(kod, açıklama)], 'bolum2': [ad]}"""
     hs = {str(h).split()[0][:4].upper() for h in (h_codes or [])}
     eu = {str(e).upper() for e in (euh_codes or [])}
@@ -160,6 +165,8 @@ def bekra(h_codes, passed=None, euh_codes=(), components=None) -> dict:
         if cas == '50-00-0' and _conc(c) < 90:       # formaldehit yalnız ≥ %90
             continue
         if cas in db['bekra2']:
+            if _BEKRA2_HAL.search(db['bekra2'][cas]) and form and form != 'gas':
+                continue                                    # sulu çözelti / sıvı ürün — o hâl değil
             b2.append(db['bekra2'][cas])
         elif cas in _BEKRA2_EXTRA_CAS:
             b2.append(_BEKRA2_EXTRA_CAS[cas])
@@ -174,12 +181,12 @@ def bekra(h_codes, passed=None, euh_codes=(), components=None) -> dict:
     return {'bolum1': b1, 'bolum2': list(dict.fromkeys(b2))}
 
 
-def section15_lines(h_codes, passed, euh_codes, components, lang: str = 'TR') -> List[str]:
+def section15_lines(h_codes, passed, euh_codes, components, lang: str = 'TR', form: str = None) -> List[str]:
     if lang != 'TR':
         return []
     src = _db().get('kaynak', {})
     oz = ozone_kok(components)
-    bk = bekra(h_codes, passed, euh_codes, components)
+    bk = bekra(h_codes, passed, euh_codes, components, form=form)
     out = []
     # BEKRA
     b1 = '; '.join(f'{k} ({d})' for k, d in bk['bolum1'])

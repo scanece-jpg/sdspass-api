@@ -1037,6 +1037,37 @@ def c_16_celiski(ctx):
     return ('eksik', '; '.join(sorun) + '.') if sorun else ('uygun', '16. bölümde çelişki bulunmadı.')
 
 
+def c_15_bekra_hal(ctx):
+    """BEKRA Ek-1 Bölüm 2 kaydı maddenin belirli hâlini adlandırıyorsa ("Hidrojen klorür (Sıvılaştırılmış gaz)",
+    "Susuz amonyak") yalnız o hâldeki ürüne uygulanır; sulu çözelti / sıvı ürün kapsam dışıdır."""
+    s15 = ctx['secs'].get('15', '')
+    m = re.search(r'(?i)[^.;\n]*(?:\(sıvılaştırılmış gaz\)|susuz amonyak)[^.;\n]*', s15)
+    if not m:
+        return 'uygun', 'BEKRA hâl nitelikli adlandırılmış madde yok.'
+    if 'form:gaz' in ctx['facts']:
+        return 'uygun', f'Gaz ürün — {m.group(0).strip()[:80]}'
+    return 'eksik', (f"Bölüm 15 BEKRA: \"{m.group(0).strip()[:90]}\" — kayıt maddenin gaz / susuz hâlini adlandırır; "
+                     'ürün gaz değil (sulu çözelti / sıvı), Ek-1 Bölüm 2 bu kayıtla uygulanmaz.')
+
+
+def c_9_gaz_bilesen(ctx):
+    """Sıvı karışımın Bölüm 9'unda "en düşük kaynama noktalı / en uçucu bileşen" olarak çözünmüş gazın (kaynama
+    noktası < 20 °C) değeri verilmemeli — ürünün yanında yanıltıcıdır (örn. %32 HCl'de −85 °C, 46 200 hPa)."""
+    if 'form:sivi' not in ctx['facts']:
+        return 'uygun', 'Sıvı ürün değil.'
+    s9 = ctx['secs'].get('9', '')
+    m = re.search(r'(?i)en\s+düşük\s+kaynama\s+noktalı\s+bileşen:\s*([^\n(]*?)\s(-\d+(?:[.,]\d+)?|\d+(?:[.,]\d+)?)\s*°\s*C', s9)
+    if m:
+        try:
+            v = float(m.group(2).replace(',', '.'))
+        except ValueError:
+            v = None
+        if v is not None and v < 20:
+            return 'eksik', (f'Bölüm 9: sıvı karışımda "{m.group(1).strip()} {m.group(2)} °C" (oda sıcaklığında gaz) '
+                             'en düşük kaynama noktalı bileşen olarak verilmiş — çözünmüş gazın değeri ürünü yansıtmaz.')
+    return 'uygun', 'Bölüm 9\'da gaz hâlindeki bileşen değeri yok.'
+
+
 def c_t_madde(ctx):
     """GBF "tek madde" diyorsa Bölüm 3'teki bileşen derişimi ≥ %80 olmalı (ECHA Madde Tanımlama Rehberi —
     tek bileşenli madde). %32 HCl'yi "madde" sayan GBF bunu karşılamaz."""
@@ -1080,7 +1111,7 @@ CHECKS: Dict[str, Callable] = {
     '3.2-svhc': c_32_svhc, '8.1-oel': c_oel, '9.1-ozellikler': c_91, '11.1-siniflar': c_111_siniflar,
     '11.1-ifade': c_111_ifade, '14.1-un': c_un, '14.3-sinif': c_sinif14, '14.4-pg': c_pg,
     '15.1-svhc': c_15_svhc, '15.1-deterjan': c_deterjan, '16-tam-metin': c_tam_metin, 'T-14-2': c_t14,
-    'T-3-2': c_t32, 'T-hesap': c_hesap, 'T-un': c_t_un, 'T-md6c': c_md6c, '16-kdu': c_16_kdu, '16-celiski': c_16_celiski, 'T-madde': c_t_madde, '2.2-euh071': c_euh071,
+    'T-3-2': c_t32, 'T-hesap': c_hesap, 'T-un': c_t_un, 'T-md6c': c_md6c, '16-kdu': c_16_kdu, '16-celiski': c_16_celiski, 'T-madde': c_t_madde, '15-bekra-hal': c_15_bekra_hal, '9-gaz-bilesen': c_9_gaz_bilesen, '2.2-euh071': c_euh071,
     '16-revizyon': c_16_revizyon, '8.1-dnel': c_dnel, '8.2.2-eldiven-malzeme': c_eldiven_malzeme,
     '8.2.2-eldiven-kalinlik': c_eldiven_kalinlik, '8.2.2-eldiven-sure': c_eldiven_sure,
     '9-ampirik': c_9_ampirik, '9.1-neden': c_9_neden, '9-fp-sinif': c_9_fp_sinif, '9-h304-visk': c_9_h304,

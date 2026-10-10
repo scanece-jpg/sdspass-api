@@ -342,7 +342,9 @@ def _asit_testi(c) -> bool:
             and 'yasal geçerliliği bulunmamaktadır' not in t
             and 'Test verisi / üretici beyanı' not in t and 'İhtiyatlı sınıflandırma — test yapılmamıştır' in t
             and 'asitler ve bazlar' not in s105.lower() and 'bazlar' in s105.lower()
-            and 'test yapılmamıştır ölçülen' not in t and gelecek == 422 and eski == 422)
+            and 'test yapılmamıştır ölçülen' not in t and gelecek == 422 and eski == 422
+            # Bölüm 9: çözünmüş HCl gazının −85 °C / 46 200 hPa değeri yazılmaz; BEKRA "sıvılaştırılmış gaz" kaydı sıvıya uygulanmaz
+            and '-85 °C' not in t and 'Sıvılaştırılmış gaz' not in t)
 
 
 def _hesap_testi() -> bool:

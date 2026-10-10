@@ -4133,7 +4133,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         try:
             from app.services.reg15_service import section15_lines as _reg15_lines
             _r15 = _reg15_lines(list(dict.fromkeys(list(all_h_codes or []) + list(h_codes or []))),
-                                clp.get('passed') or [], (euh or {}).get('euh_codes') or [], components, lang=lang)
+                                clp.get('passed') or [], (euh or {}).get('euh_codes') or [], components, lang=lang,
+                                form=product.get('form') or 'liquid')
             if _r15:
                 story.append(Spacer(1, 4))
                 for line in _r15:

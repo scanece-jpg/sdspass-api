@@ -699,6 +699,15 @@ def section9(comps: List[Dict], substance_mode: bool, form: str = 'liquid') -> D
                 cands.append((ent['value'], c, ent))
         if f == 'boiling_point':
             cands = [x for x in cands if (x[1].get('cas') or '').strip() != '7732-18-5'] or cands
+        # Sıvı / pasta karışımda kaynama noktası 20 °C'nin altındaki bileşen çözünmüş gazdır (örn. %32 hidroklorik
+        # asitte HCl: ECHA kayıt dosyasındaki −85 °C ve 46 200 hPa gaz hâlinin değeri) — ürünün yanında yanıltıcıdır,
+        # "en düşük kaynama noktalı / en uçucu bileşen" olarak yazılmaz (Dipol Asit GBF, 2026-10-10)
+        if form in ('liquid', 'paste') and f in ('boiling_point', 'vapour_pressure'):
+            def _gaz(c):
+                ph = c.get('phys') if c.get('phys') is not None else get(c.get('cas') or '')
+                bp = (ph.get('boiling_point') or {}).get('value')
+                return isinstance(bp, (int, float)) and bp < 20
+            cands = [x for x in cands if not _gaz(x[1])]
         if not cands:
             continue
         v, c, ent = pick(cands, key=lambda x: x[0])

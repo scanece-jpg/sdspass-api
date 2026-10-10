@@ -2374,6 +2374,11 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         if (isinstance(_v, dict) and (_v.get('nd') or _v.get('na'))) or str(_vd).strip() in (
                 '', 'Belirlenmemiştir', 'Bilgi yok', 'Uygulanamaz', 'Not determined', 'No data'):
             return ''
+        # Değer yerine neden yazıldıysa ("Veri yok — test yapılmamıştır", "Bu ürün için uygulanamaz") "ölçülen" notu
+        # çelişir — yazılmaz
+        if _re.match(r'\s*(veri yok|bilgi yok|uygulanamaz|bu ürün için uygulanamaz|belirlenmemiştir|no data|not applicable)',
+                     str(_vd), _re.I):
+            return ''
         if pm.get('note_text'):
             return (f'<br/><font size="6" color="#888888">{pm["note_text"]}</font>'
                     if lang == 'TR' else '')
@@ -2745,6 +2750,15 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                         comp.get('cas_no', comp.get('cas','')) in
                         {'1310-73-2','1310-58-3','1336-21-6','7664-41-7'}
                         for comp in components)
+    # Ürün pH'ı ≤ 2 asit, ≥ 11,5 baz sayılır (SEA Ek-1 3.2.3.1.2 aşırı pH) — listede olmayan asit / bazlarda
+    # "asitler ve bazlar"dan uzak tutun gibi ürünün kendisiyle çelişen metin önlenir
+    try:
+        _phn = float(_re.search(r'-?\d+(?:[.,]\d+)?', str(_ph_val or '')).group(0).replace(',', '.'))
+    except Exception:
+        _phn = None
+    if _phn is not None and 'H314' in h_codes or _phn is not None and 'H290' in h_codes:
+        is_acid = is_acid or _phn <= 2
+        is_base = is_base or _phn >= 11.5
 
     # ── 10.4 Kaçınılması gereken koşullar — dinamik ──────────────────────────
     avoid_parts = []
@@ -4262,6 +4276,12 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 _r = 'SEA Ek-6' if TR else ''
             return ('Madde sınıflandırması — ' + _r if TR else 'Substance classification')
         if h4.startswith('H2'):
+            # "Test yapılmadı — ihtiyatlı (kullanıcı kararı)" test verisi DEĞİLDİR (önceden "test verisi / üretici
+            # beyanı" yazılıyor, 2.1 ile çelişiyordu)
+            if any(k in rl for k in ('test yapılmadı', 'test edilmemiş', 'ihtiyatlı', 'ölçüm yok', 'en kötü durum',
+                                     'not tested', 'precautionary', 'worst case')):
+                return ('İhtiyatlı sınıflandırma — test yapılmamıştır (SEA Md.10(2); test sonucuna göre revize edilir)' if TR
+                        else 'Precautionary classification — not tested (to be revised on test results)')
             if any(k in rl for k in ('kullanıcı', 'test', 'ölç', 'user', 'measured')):
                 return (('Test verisi / üretici beyanı (SEA Ek-1 Kısım 2)' if _SUB else
                          'Karışımın test verisi / üretici beyanı (SEA Ek-1 Kısım 2)') if TR
@@ -4544,14 +4564,19 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     ))
 
     # GBF Hazırlayıcı Sertifika Bilgisi (KKDİK zorunluluğu)
+    # KDU bilgisi Bölüm 16'nın başında verildiyse (KKDİK Usul ve Esaslar Md.16(2)) "henüz sertifikalı hazırlayıcı
+    # tarafından onaylanmamıştır — yasal geçerliliği yoktur" uyarısı basılmaz (önceden KDU dolu olsa da basılıyor,
+    # Bölüm 16 ile çelişiyordu — Dipol Asit GBF 2026-10-10)
     author_data = sds_data.get('author', {})
-    author_text = format_author_block(author_data, lang)
-    story.append(Spacer(1, 6))
-    story.append(HRFlowable(width='100%', thickness=0.5, color=C_BORDER))
-    story.append(Spacer(1, 3))
-    for line in author_text.split('\n'):
-        style = styles['small'] if not line.startswith('GBF Hazırlayan') and not line.startswith('Prepared') else styles['body_bold']
-        story.append(Paragraph(line, style))
+    _kdu_var = any(str((sds_data.get('kdu') or {}).get(k) or '').strip() for k in ('name', 'cert_no'))
+    if author_data or not _kdu_var:
+        author_text = format_author_block(author_data, lang)
+        story.append(Spacer(1, 6))
+        story.append(HRFlowable(width='100%', thickness=0.5, color=C_BORDER))
+        story.append(Spacer(1, 3))
+        for line in author_text.split('\n'):
+            style = styles['small'] if not line.startswith('GBF Hazırlayan') and not line.startswith('Prepared') else styles['body_bold']
+            story.append(Paragraph(line, style))
 
     # ── PDF oluştur ──────────────────────────────────────────────────────────
     doc.build(story, onFirstPage=_draw_page, onLaterPages=_draw_page, canvasmaker=_TotalPagesCanvas)

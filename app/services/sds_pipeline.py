@@ -630,7 +630,9 @@ async def classify(inp: dict) -> dict:
     # Madde kendi sınıflandırmasıyla (Ek-6 / veri) sınıflandırılır; karışım hesap yöntemleri (ATEmix 3.1.3,
     # toplama, kesme değerleri) uygulanmaz. Önceden %100 klor karışım gibi hesaplanıp Kat.1 alıyordu (2026-10-09).
     _active = [c for c in comps if _conc_of(c) > 0]
-    substance_mode = len(_active) == 1
+    # Tek bileşen ancak ≥ %80 ise madde (ECHA Madde Tanımlama Rehberi: tek bileşenli madde — ana bileşen ≥ %80).
+    # Önceden derişime bakılmıyordu: yalnız %32 HCl girilince (su yazılmadan) GBF "Ürün tek bir maddedir" diyordu.
+    substance_mode = len(_active) == 1 and _conc_of(_active[0]) >= 80
 
     # ATE sağlık tehlikeleri (classify_mixture_clp Acute Tox. atlar)
     try:
@@ -849,7 +851,7 @@ async def classify(inp: dict) -> dict:
             all_h.append('H318')
         if not any(e.get('h_code') == 'H318' for e in cp):
             cp.append({'h_code': 'H318', 'h_class': 'Eye Dam. 1',
-                       'reason': 'H314 varlığında otomatik (CLP §3.3.1.4)', 'cutoff_used': '—'})
+                       'reason': 'Cilt aşındırıcılık (H314) sınıflandırmasından türetilmiştir', 'cutoff_used': '—'})
         h_codes = [h for h in h_codes if h != 'H318']
 
     # 6. H304 — yalnızca sıvı/pasta; sıvı/pastada fiziksel motor yetkili (SEA Ek-1 3.10.3.3.1: toplam ≥ %10

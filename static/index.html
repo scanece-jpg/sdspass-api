@@ -5614,6 +5614,14 @@ function _checkPDFMandatory() {
   });
   if (!/^\d{1,2}[.\/-]\d{1,2}[.\/-]\d{4}$/.test(_v('kduCertDate'))) {
     missing.push({ hard: true, label: 'KDU Belge Tarihi', reason: 'Bölüm 16 — GG.AA.YYYY biçiminde (KKDİK Usul ve Esaslar Md.16(2))' });
+  } else {
+    const [_g, _a, _y] = _v('kduCertDate').split(/[.\/-]/).map(Number);
+    const _d = new Date(_y, _a - 1, _g);
+    if (_d.getDate() !== _g || _d.getMonth() !== _a - 1) {
+      missing.push({ hard: true, label: 'KDU Belge Tarihi', reason: 'Geçersiz tarih — GG.AA.YYYY' });
+    } else if (_d > new Date()) {
+      missing.push({ hard: true, label: 'KDU Belge Tarihi', reason: 'Yeterlilik belgesi tarihi ileri bir tarih olamaz — belgedeki tarihi girin' });
+    }
   }
   // Bileşen CAS numarası — sınıflandırma (SEA Ek-6), OEL, taşıma ve atık CAS'a bağlıdır; adla girilen bileşen
   // hesaba giremez (önceden adla girilen %32 HCl'de H335, Bölüm 3, OEL, tehlikeli atık ve UN1789 kayboluyordu)

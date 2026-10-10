@@ -314,6 +314,35 @@ def _ted_testi(c) -> bool:
             and 'Kullanıcı kararıyla dikkate alınmayanlar' in t)
 
 
+def _asit_testi(c) -> bool:
+    """Dipol Asit GBF'si (2026-10-10) bulguları: yalnız %32 HCl girilince madde sayılmaz (3.2 Karışımlar, H335);
+    KDU bilgisi varken "yasal geçerliliği bulunmamaktadır" uyarısı basılmaz; ihtiyatlı H290 Bölüm 16'da "test verisi"
+    diye yazılmaz; asit ürün "asitler ve bazlar"dan uzak tutulmaz; "Veri yok" altına "ölçülen" yazılmaz;
+    ileri tarihli KDU belgesi reddedilir."""
+    import fitz
+    r = c.get('/api/v1/sds/substance/lookup', params={'cas': '7647-01-0', 'form': 'liquid'}).json()
+    comps = [{'cas': '7647-01-0', 'name': r.get('name') or 'HCl', 'name_tr': r.get('name_tr', ''), 'conc': 32,
+              'concMax': 32, 'hazards': r.get('hazards', []), 'sclRaw': r.get('scl', []), 'm_factors': {}}]
+    calc = {'components': comps, 'form': 'liquid', 'usage': 'industrial', 'lang': 'TR', 'mixture_ph': '1',
+            'test_data': {'metal_corrosive': 'not_tested_precautionary', 'euh071_inhalable': 'not_inhalable'}}
+    body = {'lang': 'TR', 'product': {'name': 'Kural testi asit', 'form': 'liquid', 'usage': 'industrial'},
+            'supplier': {'name': 'Kontrol Seti A.Ş.', 'address': 'Örnek Mah. No:1 İstanbul', 'phone': '0212 000 00 00',
+                         'email': 'kontrol@ornek.com'}, 'kdu': KDU_TEST, 'components': comps, 'calc_input': calc,
+            'phys_props': {'color': 'renksiz', 'ph': '1', 'flash_point': 'Veri yok — test yapılmamıştır'},
+            'phys_methods': {'flash_point': {'measured': True, 'method': '', 'standard': ''}},
+            'revision': {'no': '1', 'date': '10.10.2026', 'notes': ''}}
+    j = c.post('/api/v1/sds/pdf', json=body).json()
+    b64 = next(v for v in j.values() if isinstance(v, str) and len(v) > 5000)
+    t = _norm(chr(10).join(p.get_text() for p in fitz.open(stream=base64.b64decode(b64), filetype='pdf')))
+    i10 = t.find('10.5 Uyumsuz'); s105 = t[i10:i10 + 200]
+    gelecek = c.post('/api/v1/sds/pdf', json={**body, 'kdu': {**KDU_TEST, 'cert_date': '12.01.2099'}}).status_code
+    return ('3.2 Karışımlar' in t and 'tek bir maddedir' not in t and 'H335' in t
+            and 'yasal geçerliliği bulunmamaktadır' not in t
+            and 'Test verisi / üretici beyanı' not in t and 'İhtiyatlı sınıflandırma — test yapılmamıştır' in t
+            and 'asitler ve bazlar' not in s105.lower() and 'bazlar' in s105.lower()
+            and 'test yapılmamıştır ölçülen' not in t and gelecek == 422)
+
+
 def _hesap_testi() -> bool:
     """Geçici klasörde; ağ ve gizli depo yok."""
     import base64, tempfile, pathlib
@@ -1119,6 +1148,10 @@ def kural_testleri(c) -> int:
                           for q, cas in (('hydrogen chloride', '7647-01-0'), ('etanol', '64-17-5'),
                                          ('sodyum hidroksit', '1310-73-2'), ('hidrojen peroksit', '7722-84-1'),
                                          ('HİDROJEN KLORÜR', '7647-01-0'), ('glycerol', '56-81-5'))))),
+        ("Dipol Asit GBF (2026-10-10): %32 HCl tek başına madde sayılmaz; KDU varken 'yasal geçerliliği yok' uyarısı yok; "
+         "ihtiyatlı H290 'test verisi' değil; asit ürün 'asitler ve bazlar'dan uzak tutulmaz; 'Veri yok' altında 'ölçülen' "
+         "yok; ileri tarihli KDU belgesi reddedilir",
+         lambda: _asit_testi(c)),
         ('Danışman hesabı: anahtarsız erişim yok, firma klasörü otomatik açılır, aynı ad engellenir, '
          'üretilen GBF kaydedilir / listelenir / geri okunur (accounts.py)',
          lambda: _hesap_testi()),

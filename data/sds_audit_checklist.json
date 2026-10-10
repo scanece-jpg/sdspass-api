@@ -2238,6 +2238,16 @@
    "not": "Kod kontrolü (2026-10-10): KDU ifadesi + iletişim + belge no + belge tarihi."
   },
   {
+   "id": "16-celiski",
+   "bolum": "16",
+   "dayanak": "KKDİK Ek-2 16; KKDİK Usul ve Esaslar Md.16(2)",
+   "soru_tr": "16. bölüm kendi içinde ve 2.1 ile çelişmiyor mu (KDU bilgisi varken \"onaylanmamıştır\" uyarısı; ihtiyatlı sınıf için \"test verisi\" yöntemi)?",
+   "soru_en": "Section 16 is consistent with itself and with 2.1 (no 'not validated' disclaimer next to the competent person's details; precautionary classes not described as test data).",
+   "yontem": "kod",
+   "kosul": "her",
+   "onem": "zorunlu"
+  },
+  {
    "id": "T-4-2",
    "bolum": "T",
    "dayanak": "KKDİK Ek-2 A 0.2.4, 4",
@@ -2365,6 +2375,16 @@
    "kosul": "karisim",
    "onem": "zorunlu",
    "not": "SDSPass sınıflandırma hattı ile; aralık verilen bileşenlerde üst değer."
+  },
+  {
+   "id": "T-madde",
+   "bolum": "T",
+   "dayanak": "SEA Md.4; KKDİK Ek-2 3.1 / 3.2; ECHA Madde Tanımlama Rehberi",
+   "soru_tr": "GBF ürünü tek madde olarak tanımlıyorsa ana bileşen derişimi ≥ %80 mi (aksi hâlde karışım)?",
+   "soru_en": "Where the SDS describes the product as a substance, the main constituent is ≥ 80 % (otherwise it is a mixture).",
+   "yontem": "kod",
+   "kosul": "her",
+   "onem": "zorunlu"
   },
   {
    "id": "T-md6c",

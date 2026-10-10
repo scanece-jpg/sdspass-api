@@ -996,8 +996,46 @@ def c_16_kdu(ctx):
         eksik.append('yeterlilik belgesi numarası')
     if not re.search(r'(?i)(belge|sertifika|yeterlilik)[\s\S]{0,80}?\d{1,2}[./-]\d{1,2}[./-]\d{4}|tarih[\s\S]{0,30}?\d{1,2}[./-]\d{1,2}[./-]\d{4}', s16):
         eksik.append('yeterlilik belgesi tarihi')
+    # Yeterlilik belgesi tarihi ileri bir tarih olamaz
+    from datetime import date as _date
+    for _m in re.finditer(r'(?i)(?:belge|sertifika|yeterlilik)[^\n]{0,40}tarih[^\d]{0,30}(\d{1,2})[./-](\d{1,2})[./-](\d{4})', s16):
+        try:
+            if _date(int(_m.group(3)), int(_m.group(2)), int(_m.group(1))) > _date.today():
+                eksik.append(f'yeterlilik belgesi tarihi ileri tarih ({_m.group(0)[-10:]})')
+        except ValueError:
+            eksik.append('yeterlilik belgesi tarihi geçersiz')
     return (('uygun', 'KDU iletişim bilgisi ile yeterlilik belgesi numarası ve tarihi 16. bölümde var.') if not eksik else
             ('eksik', '16. bölümde KDU var ama eksik: ' + ', '.join(eksik) + ' (KKDİK Usul ve Esaslar Md.16(2)).'))
+
+
+def c_16_celiski(ctx):
+    """16. bölüm kendi içinde ve 2.1 ile çelişmemeli: KDU bilgisi verilmişken "onaylanmamıştır / yasal geçerliliği
+    yoktur" uyarısı; 2.1'de "test yapılmadı / ihtiyatlı" denen sınıf için 16'da "test verisi" yöntemi."""
+    s16 = ctx['secs'].get('16', '')
+    s2 = ctx['secs'].get('2', '')
+    sorun = []
+    if re.search(r'(?i)kimyasal\s+de[ğg]erlendirme\s+uzman|\bKDU\b', s16) and \
+            re.search(r'(?i)yasal\s+geçerliliği\s+bulunmamaktadır|onaylanmamıştır', s16):
+        sorun.append('KDU bilgisi verilmişken "onaylanmamıştır / yasal geçerliliği bulunmamaktadır" uyarısı var')
+    if re.search(r'(?i)test\s+yapılmadı|ihtiyatlı', s2) and re.search(r'(?i)test\s+verisi\s*/\s*üretici\s+beyanı', s16):
+        sorun.append("2.1'de test yapılmadan (ihtiyatlı) sınıflandırılan sınıf için 16'da \"test verisi / üretici beyanı\" yazıyor")
+    return ('eksik', '; '.join(sorun) + '.') if sorun else ('uygun', '16. bölümde çelişki bulunmadı.')
+
+
+def c_t_madde(ctx):
+    """GBF "tek madde" diyorsa Bölüm 3'teki bileşen derişimi ≥ %80 olmalı (ECHA Madde Tanımlama Rehberi —
+    tek bileşenli madde). %32 HCl'yi "madde" sayan GBF bunu karşılamaz."""
+    t = '\n'.join(ctx['secs'].values())
+    if not re.search(r'(?i)ürün\s+tek\s+bir\s+maddedir', t):
+        return 'uygun', 'GBF ürünü tek madde olarak tanımlamıyor.'
+    comps, _u = _comps3(ctx)
+    if not comps:
+        return 'eksik', "GBF ürünü tek madde olarak tanımlıyor ama Bölüm 3'te madde kimliği yok (KKDİK Ek-2 3.1)."
+    ust = max(c['conc'] for c in comps)
+    if ust < 80:
+        return 'eksik', (f"GBF ürünü tek madde olarak tanımlıyor ama Bölüm 3'teki derişim üst sınırı %{ust:g} — "
+                         'ürün karışımdır (3.2 Karışımlar; karışım sınıflandırma yöntemleri uygulanmalı).')
+    return 'uygun', f'Tek madde; Bölüm 3 derişimi %{ust:g}.'
 
 
 def c_euh071(ctx):
@@ -1027,7 +1065,7 @@ CHECKS: Dict[str, Callable] = {
     '3.2-svhc': c_32_svhc, '8.1-oel': c_oel, '9.1-ozellikler': c_91, '11.1-siniflar': c_111_siniflar,
     '11.1-ifade': c_111_ifade, '14.1-un': c_un, '14.3-sinif': c_sinif14, '14.4-pg': c_pg,
     '15.1-svhc': c_15_svhc, '15.1-deterjan': c_deterjan, '16-tam-metin': c_tam_metin, 'T-14-2': c_t14,
-    'T-3-2': c_t32, 'T-hesap': c_hesap, 'T-un': c_t_un, 'T-md6c': c_md6c, '16-kdu': c_16_kdu, '2.2-euh071': c_euh071,
+    'T-3-2': c_t32, 'T-hesap': c_hesap, 'T-un': c_t_un, 'T-md6c': c_md6c, '16-kdu': c_16_kdu, '16-celiski': c_16_celiski, 'T-madde': c_t_madde, '2.2-euh071': c_euh071,
     '16-revizyon': c_16_revizyon, '8.1-dnel': c_dnel, '8.2.2-eldiven-malzeme': c_eldiven_malzeme,
     '8.2.2-eldiven-kalinlik': c_eldiven_kalinlik, '8.2.2-eldiven-sure': c_eldiven_sure,
     '9-ampirik': c_9_ampirik, '9.1-neden': c_9_neden, '9-fp-sinif': c_9_fp_sinif, '9-h304-visk': c_9_h304,

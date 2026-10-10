@@ -176,6 +176,15 @@ async def generate_pdf(data: dict = Body(...)):
             ('KDU yeterlilik belgesi no', bool((kdu_in.get('cert_no') or '').strip())),
             ('KDU belge tarihi',          bool(re.match(r'^\d{1,2}[./-]\d{1,2}[./-]\d{4}$', (kdu_in.get('cert_date') or '').strip()))),
         ) if not val]
+        # Yeterlilik belgesi tarihi ileri bir tarih olamaz (Dipol Asit GBF'sinde 12.01.2029 kabul edilmişti)
+        _m_kd = re.match(r'^(\d{1,2})[./-](\d{1,2})[./-](\d{4})$', (kdu_in.get('cert_date') or '').strip())
+        if _m_kd:
+            try:
+                from datetime import date as _date
+                if _date(int(_m_kd.group(3)), int(_m_kd.group(2)), int(_m_kd.group(1))) > _date.today():
+                    _kdu_missing.append('KDU belge tarihi (ileri tarih olamaz)')
+            except ValueError:
+                _kdu_missing.append('KDU belge tarihi (geçersiz tarih)')
         # Bileşen CAS numarası — sınıflandırma, OEL, taşıma ve atık CAS'a bağlı; adla girilen bileşen hesaba giremez
         def _cf(c):
             try:

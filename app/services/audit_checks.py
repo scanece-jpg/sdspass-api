@@ -368,17 +368,24 @@ def c_111_ifade(ctx):
 
 def c_un(ctx):
     s14 = ctx['secs'].get('14', '')
+    if re.search(r'(?i)belirlenmemiştir|not determined', s14):
+        return 'kdu', ('14.1\'de UN numarası "belirlenmemiştir" — KKDİK Ek-2 Bölüm 14 buna izin verir; gönderen '
+                       'sınıflandırmayı belirlemeli (ADR 1.4.2.1). KDU kontrol etmeli.')
     m = re.search(r'\bUN\s*(\d{4})\b|UN Numaras[ıi][^\d]{0,30}(\d{4})', s14, re.I)
     return ('uygun', f'UN {m.group(1) or m.group(2)}') if m else ('eksik', '14.1\'de UN numarası bulunamadı.')
 
 
 def c_sinif14(ctx):
+    if re.search(r'(?i)belirlenmemiştir|not determined', ctx['secs'].get('14', '')):
+        return 'kdu', '14. bölümde taşımacılık sınıflandırması "belirlenmemiştir" — KDU kontrol etmeli (KKDİK Ek-2 Bölüm 14).'
     s14 = ctx['secs'].get('14', '')
     return ('uygun', 'Taşımacılık sınıfı var.') if re.search(r'(?i)(?:sınıf|class|zararlar[ıi])\s*[:\-]?\s*\d(?:\.\d)?', s14) \
         else ('eksik', '14.3\'te taşımacılık sınıfı bulunamadı.')
 
 
 def c_pg(ctx):
+    if re.search(r'(?i)belirlenmemiştir|not determined', ctx['secs'].get('14', '')):
+        return 'kdu', '14. bölümde taşımacılık sınıflandırması "belirlenmemiştir" — KDU kontrol etmeli (KKDİK Ek-2 Bölüm 14).'
     s14 = ctx['secs'].get('14', '')
     return ('uygun', 'Ambalaj grubu var.') if re.search(r'(?i)ambalaj(?:lama)? grubu\s*[:\-]?\s*(?:I{1,3}\b|uygulanamaz|yok)', s14) \
         else ('eksik', '14.4\'te ambalaj grubu bulunamadı.')
@@ -415,6 +422,8 @@ def c_tam_metin(ctx):
 
 
 def c_t14(ctx):
+    if re.search(r'(?i)belirlenmemiştir|not determined', ctx['secs'].get('14', '')):
+        return 'kdu', '14. bölümde taşımacılık sınıflandırması "belirlenmemiştir" — KDU kontrol etmeli (KKDİK Ek-2 Bölüm 14).'
     h = _h(ctx['secs'].get('2', ''))
     s14 = ctx['secs'].get('14', '')
     exp = []

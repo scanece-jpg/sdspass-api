@@ -98,7 +98,7 @@ URUNLER = [
      'test_data': {'oxidizing_solid': 'not_tested_precautionary'}, 'soru': ('PHYS_OX_SOL_UNTESTED', 'oxidizing_solid'),
      'phys': {'appearance': 'Toz', 'color': 'beyaz', 'odor': 'kokusuz', 'ph': '10.5'},
      'h': ['H272', 'H318', 'H302'], 'signal': 'Danger',
-     'var': ['Oks. Kat. 2 H272', 'P220', 'UN 1479', 'Ambalaj grubu II', 'ihtiyatlı olarak sınıflandırılmıştır',
+     'var': ['Oks. Kat. 2 H272', 'P220', 'UN3378', 'Ambalaj grubu II', 'ihtiyatlı olarak sınıflandırılmıştır',
              'Buhar basıncı Uygulanamaz (katı)', 'tane boyutu: belirlenmemiştir (ölçülmemiştir)'],
      'yok': _UYDURMA + ['P221', 'Ox. Sol. (ihtiyatlı)', 'ATEX', 'patlayabilen toz-hava', 'Toz-hava karışımı oluşumunu']},
     {'ad': 'Aerosol sprey (etanol, propan/bütan itici)', 'form': 'aerosol',
@@ -925,6 +925,22 @@ def kural_testleri(c) -> int:
              full([('7681-52-9', 14), (W, 86)], test_data={'metal_corrosive': 'H290', 'euh071_inhalable': 'yes'}),
              full([('7681-52-9', 14), (W, 86)], test_data={'metal_corrosive': 'H290', 'euh071_inhalable': 'not_inhalable'}))
          and 'EUH071' not in (full([('111-30-8', 0.5), (W, 99.5)]).get('euh_codes') or [])),
+        ('KKDİK Ek-2 Bölüm 14 / ADR 3.1.2.8: tek tehlikeli bileşen Tablo A haritasında yoksa UN tahmin edilmez — karar '
+         'sorulur; "B.B.B. kullan" → UN verilir, "belirlenmemiş" → belirsiz kalır',
+         lambda: (lambda mk: (lambda r0, r1, r2: 'ADR_NAMED_UNKNOWN' in [d.get('code') for d in r0.get('pending_decisions') or []]
+                              and not (r1.get('transport') or {}).get('undetermined')
+                              and (r1['transport']['road']['un'] or '').startswith('UN')
+                              and (r2.get('transport') or {}).get('undetermined', {}).get('cas') == '99999-99-9'
+                              and 'ADR_NAMED_UNKNOWN' not in [d.get('code') for d in r2.get('pending_decisions') or []])(
+             mk({}), mk({'adr_named_check': 'nos'}), mk({'adr_named_check': 'undetermined'})))(
+             lambda td: c.post('/api/v1/sds/calculate', json={'form': 'liquid', 'usage': 'industrial', 'lang': 'TR',
+                 'test_data': {'metal_corrosive': 'not_corrosive', 'euh071_inhalable': 'not_inhalable', **td},
+                 'components': [{'cas': '99999-99-9', 'name': 'test aşındırıcı', 'conc': 30, 'concMax': 30,
+                                 'hazards': [{'h_class': 'Skin Corr. 1B', 'h_code': 'H314'}], 'sclRaw': [], 'm_factors': {}},
+                                {'cas': W, 'name': 'su', 'conc': 70, 'concMax': 70, 'hazards': [], 'sclRaw': [],
+                                 'm_factors': {}}]}).json())),
+        ('ADR Tablo A sodyum perkarbonat → UN3378 (genel UN1479 değil)',
+         lambda: tr_road([('15630-89-4', 100)], form='powder', test_data={'oxidizing_solid': 'H272_cat2'})[0] == 'UN3378'),
     ]
     hata = 0
     for ad, f in testler:

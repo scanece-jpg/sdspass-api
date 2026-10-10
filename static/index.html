@@ -4579,6 +4579,9 @@ function renderAll(s) {
   h += `<div class="r-title">🚛 Bölüm 14 — Taşımacılık</div>`;
   if (!transport) {
     h += `<div class="ecard info"><div class="ecard-source">Taşımacılık verisi hesaplanıyor…</div></div>`;
+  } else if (transport.undetermined) {
+    const u = transport.undetermined;
+    h += `<div class="warn-box">⚠ <b>Taşımacılık sınıflandırması belirlenmemiş</b> — ${u.name} (${u.cas}) Tablo A haritasında yok; adlı giriş olup olmadığı doğrulanmadı. Tablo A'da adlı giriş yoksa: ${u.nos_un} ${u.nos_label}. Karar kutusundan seçin.</div>`;
   } else if (transport.not_regulated) {
     h += `<div class="ecard info"><div class="ecard-head"><span class="ecard-code">Tehlikeli değil</span></div><div class="ecard-source">${transport.note||''}</div></div>`;
   } else {

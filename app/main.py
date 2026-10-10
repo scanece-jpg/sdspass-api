@@ -468,6 +468,10 @@ async def generate_pdf(data: dict = Body(...)):
             """
             road = t.get('road') or {}
             un_raw = road.get('un', '')
+            if t.get('undetermined'):
+                # Belirsiz (KDU "belirlenmemiş" seçti): UN tahmin edilmez — PDF 14.1–14.4 "belirlenmemiştir"
+                return {'undetermined': t['undetermined'], 'env_hazard': road.get('env_mark', False),
+                        'not_regulated': False}
             if not un_raw or t.get('not_regulated'):
                 return t  # PDF servisi kendi _auto_un'ını çalıştırsın
             return {

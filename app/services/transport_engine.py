@@ -1213,6 +1213,21 @@ def classify(h_codes: List[str], form: str = 'liquid',
         'tunnel':              un_entry.get('tunnel'),
     }
 
+    # KKDİK Ek-2 Bölüm 14: "Bilginin mevcut olmadığı ... durumlarda, bu durum belirtilir." B.B.B. girişi ancak Tablo A'da
+    # adlı giriş yoksa kullanılır (ADR 3.1.2.8 / 2.1.3.3). Taşıma zararını tek bir bileşen veriyor ve o bileşenin CAS'ı
+    # Tablo A haritasında hiç yoksa adlı giriş olup olmadığı bilinemez → belirsiz (karar panelde KDU'ya sorulur).
+    _undet = None
+    if (_comps and 'B.B.B.' in str(entry.get('label') or '') and form not in ('aerosol', 'gas')
+            and not str(primary['class']).startswith('2') and str(primary['class']) != '9'):
+        _acute13 = {'H300', 'H301', 'H310', 'H311', 'H330', 'H331'}
+        _tr1 = [c for c in _comps if set(c.h_codes) & _TRANSPORT_TRIGGER_H
+                and (c.conc or 0) >= (0.1 if set(c.h_codes) & _acute13 else 1.0)]
+        if len(_tr1) == 1:
+            from app.services.transport_adr_service import _get_cas_map
+            if str(_tr1[0].cas).strip() not in _get_cas_map():
+                _undet = {'cas': _tr1[0].cas, 'name': _tr1[0].name or _tr1[0].cas, 'nos_un': entry.get('un'),
+                          'nos_label': entry.get('label')}
+
     _road = {**entry, 'regulation': 'ADR 2025'}
     if _is_gas_cls:
         _road.update({'class': '2', 'sub_class': None,
@@ -1225,4 +1240,5 @@ def classify(h_codes: List[str], form: str = 'liquid',
         'env_mark':         env_mark,
         'conflict_warning': conflict_warning,
         'adr_caution':      adr_caution,
+        'undetermined':     _undet,
     }

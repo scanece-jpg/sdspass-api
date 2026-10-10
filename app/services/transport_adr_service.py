@@ -106,6 +106,7 @@ _SEED_ENTRIES: dict = {
         {'min_conc': 60, 'max_conc': 100, 'un': 'UN1790', 'pg': 'I',   'physical_state': 'liquid', 'min_exclusive': True, 'pg_fixed': True},
         {'min_conc': 0,  'max_conc': 60,  'un': 'UN1790', 'pg': 'II',  'physical_state': 'liquid', 'pg_fixed': True},
     ],
+    '15630-89-4': {'un': 'UN3378', 'pg': 'II', 'physical_state': 'solid'},   # Sodyum perkarbonat (Tablo A: PG II/III)
     '141-43-5':  {'un': 'UN2491', 'pg': 'III', 'physical_state': 'liquid'},   # Etanolamin / çözeltisi
     '7646-85-7': [{'min_conc': 0, 'max_conc': 100, 'un': 'UN1840', 'pg': 'III', 'physical_state': 'liquid'},   # Çinko klorür çözeltisi
                   {'min_conc': 0, 'max_conc': 100, 'un': 'UN2331', 'pg': 'III', 'physical_state': 'solid'}],   # susuz

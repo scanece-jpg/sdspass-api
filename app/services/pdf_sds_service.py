@@ -3753,7 +3753,8 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         if lang == 'TR' else
         'This product is not classified as dangerous goods under ADR/RID, IMDG or IATA-DGR.'
     )
-    auto_t = _auto_un(h_codes, state=_phys_state) if not transport.get('un_no') else None
+    _undet = transport.get('undetermined')
+    auto_t = _auto_un(h_codes, state=_phys_state) if not transport.get('un_no') and not _undet else None
     t_src = transport if transport.get('un_no') else (auto_t or {})
     un_no = t_src.get('un_no', '—')
     ship_name = t_src.get('shipping_name', na)
@@ -3890,7 +3891,32 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         'taşımacılık amaçlanmamıştır.' if lang == 'TR' else
         'Not applicable — the product is transported in packages; bulk transport according to '
         'MARPOL 73/78 Annex II and the IBC Code is not intended.'])
-    if _not_regulated:
+    if _undet:
+        # KKDİK Ek-2 Bölüm 14: bilgi mevcut değilse bu durum belirtilir — UN numarası tahmin edilmez
+        _nd = ('Belirlenmemiştir' if lang == 'TR' else 'Not determined')
+        story.append(Paragraph(
+            (f"Taşımacılık sınıflandırması bu karışım için belirlenmemiştir: taşıma zararını veren {_undet.get('name', '')} "
+             f"({_undet.get('cas', '')}) için ADR Tablo A'da adlı giriş olup olmadığı doğrulanmamıştır. Gönderen, "
+             "taşımacılık sınıflandırmasını ADR 2.1.3 ve 3.1.2.8 uyarınca belirlemelidir (ADR 1.4.2.1).")
+            if lang == 'TR' else
+            (f"Transport classification has not been determined for this mixture: it has not been verified whether "
+             f"{_undet.get('name', '')} ({_undet.get('cas', '')}) has a named entry in ADR Table A. The consignor shall "
+             "determine the classification in accordance with ADR 2.1.3 and 3.1.2.8 (ADR 1.4.2.1)."),
+            styles['body']))
+        story.append(Spacer(1, 3))
+        story.append(data_table([
+            ['14.1 ' + sub_title(lang, '14.1') + ' (UN No)', _nd],
+            ['14.2 ' + sub_title(lang, '14.2'), _nd],
+            ['14.3 ' + sub_title(lang, '14.3'), _nd],
+            ['14.4 ' + sub_title(lang, '14.4'), _nd],
+            ['14.5 ' + sub_title(lang, '14.5'),
+             ('Evet — çevre için zararlı madde' if transport.get('env_hazard') else 'Hayır') if lang == 'TR'
+             else ('Yes — environmentally hazardous' if transport.get('env_hazard') else 'No')],
+            ['14.6 ' + sub_title(lang, '14.6'), term(lang, 'not_applicable')],
+            transport_rows[-1],
+        ], [75*mm, 105*mm], styles, header=False))
+        story.append(Spacer(1, 4))
+    elif _not_regulated:
         # KKDİK Ek-2 B: 14.1–14.7 alt başlıkları tehlikeli madde olmayan üründe de bulunur
         # (önceden yalnız açıklama cümlesi basılıyordu; denetimde G-basliklar eksik çıkıyordu)
         story.append(Paragraph(_not_reg_text, styles['body']))
@@ -3909,7 +3935,7 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         story.append(Spacer(1, 4))
     else:
         story.append(data_table(transport_rows, [75*mm, 105*mm], styles, header=False))
-    if not _not_regulated and auto_t:
+    if not _not_regulated and not _undet and auto_t:
         story.append(Paragraph(
             '* Taşımacılık sınıflandırması CLP tehlike sınıfına göre otomatik belirlenmiştir. Sevkiyat öncesi yetkili taşımacılık uzmanına danışınız.' if lang=='TR'
             else '* Transport classification determined automatically from CLP hazard class. Consult a transport specialist before shipment.',

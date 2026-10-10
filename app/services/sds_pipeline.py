@@ -50,6 +50,34 @@ DOMINANCE_MAP = {
 }
 
 
+
+def _adr_undet_decision(transport: dict, test_data: dict) -> list:
+    """Belirsiz taşıma (tek tetikleyici bileşen Tablo A haritasında yok): KDU kararı. 'nos' → B.B.B. kullanılır;
+    'undetermined' → GBF'de 14.1–14.4 "belirlenmemiştir". Karar verilmemişse soru döner (transport yerinde güncellenir)."""
+    u = (transport or {}).get('undetermined')
+    if not u:
+        return []
+    dec = (test_data or {}).get('adr_named_check')
+    if dec == 'nos':
+        transport['undetermined'] = None
+        return []
+    if dec == 'undetermined':
+        return []
+    return [{
+        'code': 'ADR_NAMED_UNKNOWN', 'field': 'adr_named_check',
+        'question': (f"Taşıma zararını yalnız {u['name']} ({u['cas']}) veriyor ve bu madde programın Tablo A haritasında yok. "
+                     "ADR 3.1.2.8 / 2.1.3.3: madde Tablo A'da adıyla geçiyorsa o giriş kullanılır; geçmiyorsa B.B.B. "
+                     f"({u['nos_un']} {u['nos_label']}). ADR Tablo A / Tablo B'yi kontrol edip seçin."),
+        'options': [
+            {'value': 'nos', 'label': f"Kontrol ettim — Tablo A'da adlı giriş yok, {u['nos_un']} kullan",
+             'effect': f"Bölüm 14: {u['nos_un']}"},
+            {'value': 'undetermined', 'label': 'Belirlenmemiş olarak bırak (gönderen belirleyecek)',
+             'effect': 'Bölüm 14.1–14.4: "Belirlenmemiştir" (KKDİK Ek-2 Bölüm 14)'},
+        ],
+        'legal_basis': 'ADR 2025 3.1.2.8, 2.1.3.3; KKDİK Ek-2 Bölüm 14',
+        'components': [u['cas']],
+    }]
+
 def norm_sub(h) -> str:
     """H360x/H361x alt kodlarını SEA Ek-3 resmî yazımına çevirir (H361D → H361d; H360Df korunur).
     Önceden büyük harfe çevriliyordu — H360Df → H360FD anlam değiştiriyordu."""
@@ -940,7 +968,7 @@ async def classify(inp: dict) -> dict:
         'substance_mode': substance_mode,
         'warnings':    (phys_res.get('warnings', []) + stot_res.get('warnings', [])
                         + clp_res.get('warnings', [])),
-        'pending_decisions': phys_res.get('pending_decisions', []),
+        'pending_decisions': phys_res.get('pending_decisions', []) + _adr_undet_decision(transport, test_data),
         'classification_notes': cls_notes,
         'b9': b9,
         'label_components': label_components(comps, all_h),

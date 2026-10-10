@@ -2226,8 +2226,8 @@
   {
    "id": "16-kdu",
    "bolum": "16",
-   "dayanak": "KKDİK Usul ve Esaslar (05.08.2025) Md.16(2)",
-   "soru_tr": "GBF'yi hazırlayan KDU'nun iletişim bilgileri ile yeterlilik belgesinin tarihi ve numarası yazılmış mı?",
+   "dayanak": "KKDİK Usul ve Esaslar (05.08.2025) Md.16(2); KKDİK Ek-18",
+   "soru_tr": "GBF'yi hazırlayan KDU'nun iletişim bilgileri ile yeterlilik belgesinin tarihi ve numarası yazılmış mı? Belge tarihi belgenin veriliş tarihi mi ve belge GBF tarihinde geçerli mi (geçerlilik süresi beş yıl)?",
    "soru_en": "Section 16 names the person who prepared the SDS together with their contact details and the date and number of their certificate.",
    "yontem": "kod",
    "kosul": "her",

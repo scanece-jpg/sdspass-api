@@ -336,11 +336,13 @@ def _asit_testi(c) -> bool:
     t = _norm(chr(10).join(p.get_text() for p in fitz.open(stream=base64.b64decode(b64), filetype='pdf')))
     i10 = t.find('10.5 Uyumsuz'); s105 = t[i10:i10 + 200]
     gelecek = c.post('/api/v1/sds/pdf', json={**body, 'kdu': {**KDU_TEST, 'cert_date': '12.01.2099'}}).status_code
+    # KKDİK Ek-18: belge beş yıl geçerli — 2020 tarihli belgenin süresi dolmuş
+    eski = c.post('/api/v1/sds/pdf', json={**body, 'kdu': {**KDU_TEST, 'cert_date': '01.01.2020'}}).status_code
     return ('3.2 Karışımlar' in t and 'tek bir maddedir' not in t and 'H335' in t
             and 'yasal geçerliliği bulunmamaktadır' not in t
             and 'Test verisi / üretici beyanı' not in t and 'İhtiyatlı sınıflandırma — test yapılmamıştır' in t
             and 'asitler ve bazlar' not in s105.lower() and 'bazlar' in s105.lower()
-            and 'test yapılmamıştır ölçülen' not in t and gelecek == 422)
+            and 'test yapılmamıştır ölçülen' not in t and gelecek == 422 and eski == 422)
 
 
 def _hesap_testi() -> bool:

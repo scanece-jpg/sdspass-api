@@ -998,12 +998,27 @@ def c_16_kdu(ctx):
         eksik.append('yeterlilik belgesi tarihi')
     # Yeterlilik belgesi tarihi ileri bir tarih olamaz
     from datetime import date as _date
+    # GBF'nin tarihi (başlık / hazırlanma / revizyon tarihi) — belge bu tarihte geçerli olmalı (Ek-18: beş yıl)
+    _gm = re.search(r'(?i)(?:hazırlanma\s+tarihi|revizyon\s+tarihi|Rev\.\s*\d+\s*\|)\s*[:|]?\s*(\d{1,2})[./-](\d{1,2})[./-](\d{4})', ctx['text'])
+    try:
+        _gbf_t = _date(int(_gm.group(3)), int(_gm.group(2)), int(_gm.group(1))) if _gm else _date.today()
+    except ValueError:
+        _gbf_t = _date.today()
     for _m in re.finditer(r'(?i)(?:belge|sertifika|yeterlilik)[^\n]{0,40}tarih[^\d]{0,30}(\d{1,2})[./-](\d{1,2})[./-](\d{4})', s16):
         try:
-            if _date(int(_m.group(3)), int(_m.group(2)), int(_m.group(1))) > _date.today():
-                eksik.append(f'yeterlilik belgesi tarihi ileri tarih ({_m.group(0)[-10:]})')
+            _bt = _date(int(_m.group(3)), int(_m.group(2)), int(_m.group(1)))
         except ValueError:
             eksik.append('yeterlilik belgesi tarihi geçersiz')
+            continue
+        if _bt > _gbf_t:
+            eksik.append(f'yeterlilik belgesi tarihi GBF tarihinden ileri ({_m.group(0)[-10:]}) — belgenin veriliş tarihi yazılmalı')
+        else:
+            try:
+                _son = _bt.replace(year=_bt.year + 5)
+            except ValueError:
+                _son = _bt.replace(year=_bt.year + 5, day=28)
+            if _son < _gbf_t:
+                eksik.append(f"yeterlilik belgesinin süresi GBF tarihinde dolmuş ({_son.strftime('%d.%m.%Y')}; KKDİK Ek-18: beş yıl)")
     return (('uygun', 'KDU iletişim bilgisi ile yeterlilik belgesi numarası ve tarihi 16. bölümde var.') if not eksik else
             ('eksik', '16. bölümde KDU var ama eksik: ' + ', '.join(eksik) + ' (KKDİK Usul ve Esaslar Md.16(2)).'))
 

@@ -181,8 +181,17 @@ async def generate_pdf(data: dict = Body(...)):
         if _m_kd:
             try:
                 from datetime import date as _date
-                if _date(int(_m_kd.group(3)), int(_m_kd.group(2)), int(_m_kd.group(1))) > _date.today():
-                    _kdu_missing.append('KDU belge tarihi (ileri tarih olamaz)')
+                _kd = _date(int(_m_kd.group(3)), int(_m_kd.group(2)), int(_m_kd.group(1)))
+                if _kd > _date.today():
+                    _kdu_missing.append('KDU belge tarihi (ileri tarih olamaz — belgenin veriliş tarihi)')
+                else:
+                    # KKDİK Ek-18: yeterlilik belgesinin geçerlilik süresi beş yıl
+                    try:
+                        _son = _kd.replace(year=_kd.year + 5)
+                    except ValueError:           # 29 Şubat
+                        _son = _kd.replace(year=_kd.year + 5, day=28)
+                    if _son < _date.today():
+                        _kdu_missing.append(f"KDU yeterlilik belgesinin süresi dolmuş ({_son.strftime('%d.%m.%Y')}; KKDİK Ek-18: beş yıl)")
             except ValueError:
                 _kdu_missing.append('KDU belge tarihi (geçersiz tarih)')
         # Bileşen CAS numarası — sınıflandırma, OEL, taşıma ve atık CAS'a bağlı; adla girilen bileşen hesaba giremez

@@ -760,8 +760,9 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
         <div class="v0-grid-2">
           <div class="v0-field"><label class="v0-label">Yeterlilik Belgesi No</label>
             <input class="v0-inp mono" type="text" id="kduCertNo" placeholder="KDU-…" onchange="_kduSave()"></div>
-          <div class="v0-field"><label class="v0-label">Belge Tarihi</label>
-            <input class="v0-inp mono" type="text" id="kduCertDate" placeholder="GG.AA.YYYY" onchange="_kduSave()"></div>
+          <div class="v0-field"><label class="v0-label">Belge Veriliş Tarihi</label>
+            <input class="v0-inp mono" type="text" id="kduCertDate" placeholder="GG.AA.YYYY" onchange="_kduSave()" oninput="_kduGecerlilik()">
+            <div id="kduGecerlilik" style="font-size:10px;color:var(--text3);margin-top:3px"></div></div>
         </div>
       </div>
     </div>
@@ -1636,6 +1637,26 @@ async function _gbfPdf(gid) {
   } catch (e) { _firmaMsg('PDF indirilemedi: ' + e.message, true); }
 }
 document.addEventListener('DOMContentLoaded', () => { _hesapYukle(); });
+
+// KKDİK Ek-18: Kimyasal Değerlendirme Yeterlilik Belgesinin geçerlilik süresi beş yıldır. GBF'ye belgenin
+// (veriliş) tarihi yazılır (KKDİK Usul ve Esaslar Md.16(2)); son geçerlilik tarihi bundan hesaplanır.
+function _kduTarih(t) {
+  const m = String(t || '').trim().match(/^(\d{1,2})[.\/-](\d{1,2})[.\/-](\d{4})$/); if (!m) return null;
+  const d = new Date(+m[3], +m[2] - 1, +m[1]);
+  return (d.getDate() === +m[1] && d.getMonth() === +m[2] - 1) ? d : null;
+}
+function _kduSonGecerlilik(d) { const e = new Date(d); e.setFullYear(e.getFullYear() + 5); return e; }
+function _kduGecerlilik() {
+  const el = document.getElementById('kduGecerlilik'); if (!el) return;
+  const d = _kduTarih(document.getElementById('kduCertDate')?.value);
+  if (!d) { el.textContent = 'Belgenin veriliş tarihi (son geçerlilik tarihi değil)'; el.style.color = 'var(--text3)'; return; }
+  const e = _kduSonGecerlilik(d), now = new Date();
+  if (d > now) { el.textContent = '⚠ İleri tarih — belgenin veriliş tarihini girin (son geçerlilik tarihi değil)'; el.style.color = 'var(--danger,#c53030)'; return; }
+  el.textContent = e < now ? `⚠ Süresi ${e.toLocaleDateString('tr-TR')} tarihinde dolmuş (5 yıl, KKDİK Ek-18)`
+                            : `Geçerlilik: ${e.toLocaleDateString('tr-TR')} tarihine kadar (5 yıl, KKDİK Ek-18)`;
+  el.style.color = e < now ? 'var(--danger,#c53030)' : 'var(--text3)';
+}
+document.addEventListener('DOMContentLoaded', () => setTimeout(_kduGecerlilik, 300));
 
 function _kduSave() {
   try {
@@ -5620,7 +5641,10 @@ function _checkPDFMandatory() {
     if (_d.getDate() !== _g || _d.getMonth() !== _a - 1) {
       missing.push({ hard: true, label: 'KDU Belge Tarihi', reason: 'Geçersiz tarih — GG.AA.YYYY' });
     } else if (_d > new Date()) {
-      missing.push({ hard: true, label: 'KDU Belge Tarihi', reason: 'Yeterlilik belgesi tarihi ileri bir tarih olamaz — belgedeki tarihi girin' });
+      missing.push({ hard: true, label: 'KDU Belge Tarihi', reason: 'Yeterlilik belgesi tarihi ileri bir tarih olamaz — belgenin veriliş tarihini girin (son geçerlilik tarihi değil)' });
+    } else if (_kduSonGecerlilik(_d) < new Date()) {
+      missing.push({ hard: true, label: 'KDU Yeterlilik Belgesi',
+        reason: `Belgenin süresi ${_kduSonGecerlilik(_d).toLocaleDateString('tr-TR')} tarihinde dolmuş (KKDİK Ek-18: geçerlilik süresi beş yıl) — yenilenmiş belgenin tarih ve numarasını girin` });
     }
   }
   // Bileşen CAS numarası — sınıflandırma (SEA Ek-6), OEL, taşıma ve atık CAS'a bağlıdır; adla girilen bileşen

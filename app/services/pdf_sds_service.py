@@ -3811,6 +3811,10 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         haz_class = f"{haz_class} ({sub_class})"
     # ADR veritabanından label ile doğrula
     pack_grp = t_src.get('packing_group', '—')
+    # Ambalaj grubu atanmayan girişler (Sınıf 2 gazlar, aerosoller): ADR verisindeki "-" / "—" → "Uygulanamaz"
+    # (aynı GBF'de bir gaz "-" diğeri "Uygulanamaz" yazıyordu; denetim "-"yi boş alt bölüm sayar)
+    if str(pack_grp or '').strip() in ('-', '—', '–'):
+        pack_grp = ''
     # Çevre tehlikesi — H kodlarına göre otomatik tespit
     env_h_codes = {
         'H400','H401','H410','H411',  # Sucul — ADR 2.2.9.1.10: sadece Akut 1, Kron. 1, Kron. 2

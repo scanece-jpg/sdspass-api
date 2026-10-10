@@ -182,6 +182,11 @@ def bekra(h_codes, passed=None, euh_codes=(), components=None, form: str = None)
             if 'H400' in hs and not (hs & {'H410', 'H411'}) and not _diger and _akl < 5:
                 b2.append('Sodyum hipoklorit karışımları (Sucul Akut 1, %5\'ten az aktif klor; Ek-1 Bölüm 2)')
                 b1 = [x for x in b1 if x[0] != 'E1']
+    # Ek-1 Bölüm 2 girdi 18: "Sıvılaştırılmış alevlenir gazlar, Kategori 1 veya 2 (LPG dahil) ve doğalgaz" — ürünün
+    # kendisi sıvılaştırılmış (soğutulmuş dahil) alevlenir gazsa adından bağımsız uygulanır (önceden yalnız ad eşleşmesi
+    # vardı; "Petrol gazları, sıvılaştırılmış" adlı LPG ve propan / bütan kayıt dışı kalıyordu — Tüpraş LPG GBF'si).
+    if form == 'gas' and hs & {'H220', 'H221'} and ('H281' in hs or re.search(r'\(Liq\.|\(Ref\. Liq\.|Sıvılaştırılmış', cls)):
+        b2.append('Sıvılaştırılmış alevlenir gazlar / doğalgaz (Ek-1 Bölüm 2, Not 19)')
     return {'bolum1': b1, 'bolum2': list(dict.fromkeys(b2))}
 
 

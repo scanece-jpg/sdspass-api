@@ -23,6 +23,21 @@ def lookup(cas: str) -> List[dict]:
     return db().get((cas or '').strip(), [])
 
 
+# Ek-17 madde 28 / 29 / 30 (Ek-I…Ek-VI listeleri) yalnız madde o CMR sınıfıyla sınıflandırılmışsa uygulanır — SEA Ek-6
+# Not J/K/L/M/N/P koşulu gösterilip sınıf kalktığında (örn. LPG Not K) kısıtlama da kalkar (Tüpraş LPG GBF'si, 2026-10-10)
+_CMR_GIRIS = {'Giriş 28': 'H350', 'Giriş 29': 'H340', 'Giriş 30': 'H360'}
+
+
+def uygulanir(rec: dict, comp: dict) -> bool:
+    """Bileşenin güncel tehlike listesi varsa CMR girişi yalnız ilgili H koduyla birlikte uygulanır."""
+    if 'hazards' not in (comp or {}):
+        return True
+    kod = next((h for g, h in _CMR_GIRIS.items() if g in str(rec.get('kaynak') or '')), None)
+    if not kod:
+        return True
+    return any(str(h.get('h_code') or '').replace('*', '').strip()[:4] == kod for h in comp.get('hazards') or [])
+
+
 def section15_lines(components: list, lang: str = 'TR') -> List[str]:
     """15.1 için Ek-17 kapsamındaki bileşenlerin satırları; kapsamda bileşen yoksa boş liste."""
     tr = lang == 'TR'
@@ -32,7 +47,7 @@ def section15_lines(components: list, lang: str = 'TR') -> List[str]:
         if not cas or cas in seen:
             continue
         seen.add(cas)
-        recs = lookup(cas)
+        recs = [r for r in lookup(cas) if uygulanir(r, c)]
         if not recs:
             continue
         name = (c.get('name_tr') if tr else '') or c.get('name') or cas

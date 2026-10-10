@@ -389,6 +389,26 @@
    "not": "Karışımda EUH066 için derişim sınırı yoktur; bileşenden aktarım KDU değerlendirmesine dayanır."
   },
   {
+   "id": "2.1-gaz-grup",
+   "bolum": "2",
+   "dayanak": "SEA Ek-1 2.5; Ek-6 Not U; ADR 2.2.2.1.2",
+   "soru_tr": "Basınç altındaki gaz tek grupta mı (H280 ile H281 birlikte değil) ve soğutulmuş sıvıda taşıma girişi soğutulmuş sıvı girişi mi?",
+   "soru_en": "Gas under pressure is in a single group (not H280 with H281) and a refrigerated liquefied gas uses the refrigerated-liquid UN entry.",
+   "yontem": "kod",
+   "kosul": "her",
+   "onem": "zorunlu"
+  },
+  {
+   "id": "2.2-p-bilesik",
+   "bolum": "2",
+   "dayanak": "SEA Ek-4 (birleşik önlem ifadeleri)",
+   "soru_tr": "Bir önlem ifadesi hem tek başına hem de birleşik ifade içinde tekrarlanmamış mı (örn. P403 ile P410+P403)?",
+   "soru_en": "No precautionary statement is repeated both alone and within a combined statement (e.g. P403 with P410+P403).",
+   "yontem": "kod",
+   "kosul": "her",
+   "onem": "zorunlu"
+  },
+  {
    "id": "2.3-pbt",
    "bolum": "2.3",
    "dayanak": "KKDİK Ek-2 A 2.3",

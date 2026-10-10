@@ -509,6 +509,25 @@ _GAS_NOS = {
     'O': {'compressed': 'UN3156', 'liquefied': 'UN3157', 'refrigerated': 'UN3311'},
 }
 _GAS_NOS_ALL = {u for g in _GAS_NOS.values() for u in g.values()}
+# ADR Tablo A — fiziksel duruma göre ayrı adlı girişi olan tek madde gazlar (adlar data/adr_data.json ile doğrulandı).
+# Önceden CAS haritasında azot, helyum, hidrojen, CO2, doğal gaz, N2O yoktu (B.B.B. veriliyordu) ve soğutulmuş sıvı
+# hâli seçilmiyordu (Habaş sıvı oksijen GBF'si UN1073 — bizde UN1072; LNG UN1972 — bizde UN3312).
+_GAS_ADLI = {
+    '7782-44-7':  {'compressed': 'UN1072', 'refrigerated': 'UN1073'},   # oksijen
+    '7727-37-9':  {'compressed': 'UN1066', 'refrigerated': 'UN1977'},   # azot
+    '7440-37-1':  {'compressed': 'UN1006', 'refrigerated': 'UN1951'},   # argon
+    '7440-59-7':  {'compressed': 'UN1046', 'refrigerated': 'UN1963'},   # helyum
+    '1333-74-0':  {'compressed': 'UN1049', 'refrigerated': 'UN1966'},   # hidrojen
+    '74-82-8':    {'compressed': 'UN1971', 'refrigerated': 'UN1972'},   # metan
+    '8006-14-2':  {'compressed': 'UN1971', 'refrigerated': 'UN1972'},   # doğal gaz (yüksek metan içeren)
+    '7440-01-9':  {'compressed': 'UN1065', 'refrigerated': 'UN1913'},   # neon
+    '7439-90-9':  {'compressed': 'UN1056', 'refrigerated': 'UN1970'},   # kripton
+    '7440-63-3':  {'liquefied': 'UN2036', 'refrigerated': 'UN2591'},    # ksenon
+    '124-38-9':   {'liquefied': 'UN1013', 'refrigerated': 'UN2187'},    # karbondioksit
+    '10024-97-2': {'liquefied': 'UN1070', 'refrigerated': 'UN2201'},    # diazot monoksit
+    '74-85-1':    {'liquefied': 'UN1962', 'refrigerated': 'UN1038'},    # etilen
+    '74-84-0':    {'liquefied': 'UN1035', 'refrigerated': 'UN1961'},    # etan
+}
 # UN1965 "HİDROKARBON GAZ KARIŞIMI, SIVILAŞTIRILMIŞ" — C1–C4 hidrokarbon gazları
 _HC_GAS_CAS = {
     '74-82-8',   # metan
@@ -837,6 +856,16 @@ def classify(h_codes: List[str], form: str = 'liquid',
                 _d51 = _gad51(_details['un_no'], _pg51e)
                 if _d51.get('packing_group') == _pg51e:
                     _details = {**_details, **{k: _d51[k] for k in ('packing_group', 'kemler', 'tunnel_code')}}
+            # Gaz: ADR Tablo A'da fiziksel duruma göre ayrı adlı giriş (örn. oksijen UN1072 / soğutulmuş sıvı UN1073)
+            if _details and form == 'gas' and _t.cas in _GAS_ADLI:
+                _gt4 = ('refrigerated' if any(str(h).startswith('H281') for h in (h_codes or []))
+                        else (gas_type or ''))
+                _un4 = _GAS_ADLI[_t.cas].get(_gt4)
+                if _un4 and _un4 != str(_details.get('un_no') or '').replace(' ', ''):
+                    from app.services.transport_adr_service import get_adr_details as _gad4
+                    _d4 = _gad4(_un4, '') or {}
+                    if _d4.get('name'):
+                        _details = {**_details, **{k: v for k, v in _d4.items() if v not in (None, '', [])}}
             if _details:
                 # §3.1.3.2(c): spesifik girişin fiziksel hali ürünle uyuşmalı.
                 # Uyuşmazlık (ör. katı TCCA girişi ama sıvı ürün) → B.N.O.'ya düş.
@@ -1236,6 +1265,33 @@ def classify(h_codes: List[str], form: str = 'liquid',
                 'pg': '',
                 'note': (_gnote + 'Maddeye özgü UN numarası önceliklidir (örn. UN1978 propan, '
                          'UN1075 LPG, UN1066 azot).'),
+            }
+
+    # Tek madde gaz (≥ %80) ADR Tablo A'da fiziksel duruma göre adlı girişle yer alıyorsa o giriş kullanılır
+    # (ADR 2.1.3.3 / 3.1.2.8: adlı giriş B.B.B.'den önce gelir); durum gaz türü seçiminden ya da H281'den.
+    if form == 'gas' and _comps:
+        _akt = [c for c in _comps if c.conc > 0]
+        _ga = _GAS_ADLI.get(_akt[0].cas) if len(_akt) == 1 and _akt[0].conc >= 80 else None
+        if _ga:
+            _gt3 = 'refrigerated' if 'H281' in h_set else (gas_type or '')
+            _un_a = _ga.get(_gt3) or _ga.get('compressed') or _ga.get('liquefied')
+            try:
+                from app.services.transport_adr_service import get_adr_details as _gad3
+                _gd3 = _gad3(_un_a, '') or {}
+            except Exception:
+                _gd3 = {}
+            un_entry = {
+                **un_entry,
+                'un': _un_a[:2] + ' ' + _un_a[2:],
+                'label': _gd3.get('name_tr') or un_entry.get('label'),
+                'name': _gd3.get('name') or un_entry.get('name'),
+                'name_tr': _gd3.get('name_tr') or un_entry.get('name_tr'),
+                'classification_code': _gd3.get('classification_code') or un_entry.get('classification_code'),
+                'tunnel': _gd3.get('tunnel_code') or un_entry.get('tunnel'),
+                'labels': _gd3.get('labels') or un_entry.get('labels'),
+                'pg': '',
+                'note': (f"ADR Tablo A adlı giriş — {'soğutulmuş sıvılaştırılmış' if _gt3 == 'refrigerated' else 'gaz'} "
+                         f"hâli (ADR 2.2.2.1.2; adlı giriş B.B.B.'den önce gelir, ADR 2.1.3.3)."),
             }
 
     # ── Adım 5: Uyarılar ─────────────────────────────────────────────────────

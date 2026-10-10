@@ -536,6 +536,9 @@ def _comps3(ctx):
     comps, unknown = [], []
     for c, seg in segs:
         i = s3.find(c)
+        # Ek-6 UVCB adlarındaki köşeli parantezli tanım ("[... C3 ila C7 ... -40°C ila 80°C ...]") atlanır — uzun tanım
+        # konsantrasyon sütununu okuma penceresinin dışına itiyordu (LPG 68476-85-7)
+        seg = re.sub(r'\[[^\]]*\]', ' ', seg)
         # Önce "≥ x - < y" aralığı (konsantrasyon sütunu; % işareti olmayabilir). Bazı GBF'ler satırda önce
         # özel konsantrasyon sınırlarını "20 - 100 %" biçiminde yazar — onlar konsantrasyon değildir.
         # KKDİK Ek-2 A 3.2: aralıkta zararlar en yüksek konsantrasyona göre tanımlanır → hesap üst uçta;
@@ -741,6 +744,12 @@ def c_izin_kisit(ctx):
     cas, _ = _rows3(ctx)
     db = _ek17()
     hits = {c: db[c] for c in cas if c in db}
+    # Ek-17 madde 28/29/30 (CMR listeleri) yalnız sınıf GBF'de varsa — Ek-6 Not K/P ile kalkan sınıfta uygulanmaz
+    _h23 = {h[:4] for h in _h(ctx['secs'].get('2', '') + ' ' + ctx['secs'].get('3', ''))}
+    _cmr = {'Giriş 28': 'H350', 'Giriş 29': 'H340', 'Giriş 30': 'H360'}
+    hits = {c: [r for r in v if all(g not in str(r.get('kaynak') or '') or h in _h23 for g, h in _cmr.items())]
+            for c, v in hits.items()}
+    hits = {c: v for c, v in hits.items() if v}
     if not hits:
         return 'uygun', 'Bölüm 3\'te KKDİK Ek-17 kapsamında madde yok (TR Ek-14 listesi henüz yayımlanmadı).'
     det = '; '.join(f'{c}: ' + ', '.join(r['kaynak'] for r in v[:2]) for c, v in hits.items())
@@ -1132,6 +1141,44 @@ def c_euh071(ctx):
                        'gerekir (SEA Ek-2 madde 105) — KDU ürünün solunabilirliğini değerlendirmeli.')
     return 'uygun', 'EUH071 kullanımı SEA Ek-2 madde 105 ile tutarlı.'
 
+# ADR Tablo A — sıkıştırılmış / sıvılaştırılmış hâlin adlı girişi → soğutulmuş sıvı hâlinin girişi
+_GAZ_SOGUTULMUS = {'1072': '1073', '1066': '1977', '1006': '1951', '1046': '1963', '1049': '1966', '1971': '1972',
+                   '1065': '1913', '1056': '1970', '2036': '2591', '1013': '2187', '1070': '2201', '1962': '1038',
+                   '1035': '1961', '1002': '1003'}
+
+
+def c_gaz_grup(ctx):
+    """SEA Ek-1 2.5 / Ek-6 Not U: basınç altındaki gaz tek gruptadır — H280 ile H281 birlikte olmaz. Soğutulmuş
+    sıvılaştırılmış gazda (H281) taşıma, maddenin soğutulmuş sıvı adlı girişiyle yapılır (örn. oksijen UN1073, UN1072
+    değil; ADR 2.2.2.1.2)."""
+    s2 = ctx['secs'].get('2', '')
+    h = {x[:4] for x in _h(s2)}
+    if not h & {'H280', 'H281'}:
+        return 'uygun', 'Basınç altındaki gaz sınıfı yok.'
+    if {'H280', 'H281'} <= h:
+        return 'eksik', ('2. bölümde H280 ve H281 birlikte — basınç altındaki gaz tek gruptadır (sıkıştırılmış / '
+                         'sıvılaştırılmış / soğutulmuş sıvılaştırılmış / çözünmüş; SEA Ek-1 2.5, Ek-6 Not U).')
+    m = re.search(r'UN\s*(\d{4})', ctx['secs'].get('14', ''))
+    if 'H281' in h and m and m.group(1) in _GAZ_SOGUTULMUS:
+        return 'eksik', (f"Ürün soğutulmuş sıvılaştırılmış gaz (H281) ama 14.1 UN{m.group(1)} sıkıştırılmış / "
+                         f"sıvılaştırılmış hâlin girişi — soğutulmuş sıvı girişi UN{_GAZ_SOGUTULMUS[m.group(1)]} "
+                         '(ADR Tablo A, 2.2.2.1.2).')
+    return 'uygun', 'Basınç altındaki gaz grubu ve taşıma girişi tutarlı.'
+
+
+def c_p_bilesik(ctx):
+    """Birleşik önlem ifadesi tek ifadeyi kapsar — aynı listede hem P410+P403 hem P403 yazılmaz."""
+    s2 = _sub(ctx['secs'].get('2', ''), '2.2', '2.3')
+    ps = set(re.findall(r'P\d{3}(?:\s*\+\s*P\d{3})*', s2))
+    ps = {re.sub(r'\s+', '', p) for p in ps}
+    tek = {p for p in ps if '+' not in p}
+    ic = {x for p in ps if '+' in p for x in p.split('+')}
+    cift = sorted(tek & ic)
+    if cift:
+        return 'eksik', f"2.2'de {', '.join(cift)} hem tek başına hem birleşik ifade içinde yazılmış."
+    return 'uygun', 'Önlem ifadelerinde tekrar yok.'
+
+
 def c_euh066(ctx):
     """SEA Ek-2 madde 103: EUH066 yalnız cilt tahrişi (Ek-1 3.2) kriterlerini karşılamayan ürün için — 2.1'de H315 / H314
     varken EUH066 kullanılmaz."""
@@ -1156,7 +1203,7 @@ CHECKS: Dict[str, Callable] = {
     '3.2-svhc': c_32_svhc, '8.1-oel': c_oel, '9.1-ozellikler': c_91, '11.1-siniflar': c_111_siniflar,
     '11.1-ifade': c_111_ifade, '14.1-un': c_un, '14.3-sinif': c_sinif14, '14.4-pg': c_pg,
     '15.1-svhc': c_15_svhc, '15.1-deterjan': c_deterjan, '16-tam-metin': c_tam_metin, 'T-14-2': c_t14,
-    'T-3-2': c_t32, 'T-hesap': c_hesap, 'T-un': c_t_un, 'T-md6c': c_md6c, '16-kdu': c_16_kdu, '16-celiski': c_16_celiski, 'T-madde': c_t_madde, '15-bekra-hal': c_15_bekra_hal, '9-gaz-bilesen': c_9_gaz_bilesen, '2.2-euh071': c_euh071, '2.2-euh066': c_euh066,
+    'T-3-2': c_t32, 'T-hesap': c_hesap, 'T-un': c_t_un, 'T-md6c': c_md6c, '16-kdu': c_16_kdu, '16-celiski': c_16_celiski, 'T-madde': c_t_madde, '15-bekra-hal': c_15_bekra_hal, '9-gaz-bilesen': c_9_gaz_bilesen, '2.2-euh071': c_euh071, '2.2-euh066': c_euh066, '2.1-gaz-grup': c_gaz_grup, '2.2-p-bilesik': c_p_bilesik,
     '16-revizyon': c_16_revizyon, '8.1-dnel': c_dnel, '8.2.2-eldiven-malzeme': c_eldiven_malzeme,
     '8.2.2-eldiven-kalinlik': c_eldiven_kalinlik, '8.2.2-eldiven-sure': c_eldiven_sure,
     '9-ampirik': c_9_ampirik, '9.1-neden': c_9_neden, '9-fp-sinif': c_9_fp_sinif, '9-h304-visk': c_9_h304,

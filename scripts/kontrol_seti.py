@@ -385,6 +385,35 @@ def _ozel_sinir_testi(c) -> bool:
             and ek6 == [] and len(ek6_disi) == 1 and ek6_disi[0]['kaynak'] == 'kayit' and farkli == [])
 
 
+def _gaz_testi(c) -> bool:
+    from app.services.reg15_service import bekra
+
+    def g(cas, gt):
+        lk = c.get('/api/v1/sds/substance/lookup', params={'cas': cas, 'form': 'gas'}).json()
+        j = c.post('/api/v1/sds/calculate', json={'components': [
+            {'cas': cas, 'name': cas, 'conc': 100, 'concMax': 100, 'hazards': lk.get('hazards', []), 'm_factors': {}}],
+            'form': 'gas', 'usage': 'industrial', 'lang': 'TR',
+            'test_data': {'gas_type': gt, f'ek6not_{cas}': 'uygulanir'}}).json()
+        return (set(j.get('h_codes') or []), ((j.get('transport') or {}).get('road') or {}).get('un', '').replace(' ', ''),
+                (j.get('p_codes') or {}).get('p_codes') or [])
+    o2r, o2c, n2r, lng, co2r, h2, lpg = (g('7782-44-7', 'refrigerated'), g('7782-44-7', 'compressed'),
+                                         g('7727-37-9', 'refrigerated'), g('8006-14-2', 'refrigerated'),
+                                         g('124-38-9', 'refrigerated'), g('1333-74-0', 'compressed'),
+                                         g('68476-85-7', 'liquefied'))
+    b18 = bekra(['H220', 'H280'], [{'h_class': 'Press. Gas (Liq.)', 'h_code': 'H280'}], [], [], form='gas')['bolum2']
+    b18c = bekra(['H220', 'H280'], [{'h_class': 'Press. Gas (Comp.)', 'h_code': 'H280'}], [], [], form='gas')['bolum2']
+    return (o2r[0] >= {'H270', 'H281'} and 'H280' not in o2r[0] and o2r[1] == 'UN1073' and o2c[1] == 'UN1072'
+            and 'H280' in o2c[0] and 'H281' not in o2c[0] and n2r[1] == 'UN1977' and lng[1] == 'UN1972'
+            and co2r[1] == 'UN2187' and h2[1] == 'UN1049' and lpg[1] == 'UN1965'
+            and 'P403' not in lpg[2] and 'P410+P403' in lpg[2]
+            and any('Sıvılaştırılmış alevlenir' in x for x in b18) and not b18c
+            # Ek-17 madde 28/29 yalnız CMR sınıfı varken (LPG Not K uygulanınca yok)
+            and __import__('app.services.ek17_service', fromlist=['x']).section15_lines(
+                [{'cas': '68476-85-7', 'name': 'LPG', 'hazards': [{'h_code': 'H220'}, {'h_code': 'H280'}]}]) == []
+            and __import__('app.services.ek17_service', fromlist=['x']).section15_lines(
+                [{'cas': '68476-85-7', 'name': 'LPG', 'hazards': [{'h_code': 'H350'}, {'h_code': 'H340'}]}]) != [])
+
+
 def _cl_testi(c) -> bool:
     """DIPOL CL (çamaşır suyu) GBF bulguları, 2026-10-10."""
     import fitz
@@ -1269,6 +1298,10 @@ def kural_testleri(c) -> int:
                       {'cas': '', 'ec': '921-024-6', 'name': 'C6-C7', 'conc': 30, 'concMax': 30, 'hazards': []},
                       {'cas': '7732-18-5', 'name': 'su', 'conc': 70, 'concMax': 70, 'hazards': []}],
                       'form': 'liquid', 'usage': 'industrial', 'lang': 'TR', 'test_data': {}}).json().get('all_h_codes') or []))),
+        ("Gaz (Habaş sıvı oksijen / LNG, Tüpraş LPG — 2026-10-10): soğutulmuş sıvıda yalnız H281; ADR adlı giriş fiziksel "
+         "duruma göre (O2 1072/1073, N2 1066/1977, LNG 1972, CO2 1013/2187, H2 1049); BEKRA girdi 18 sıvılaştırılmış "
+         "alevlenir gazda (LPG); P403 birleşik P410+P403 ile tekrarlanmaz",
+         lambda: _gaz_testi(c)),
         ('Denetim: "1. BAŞLIK" biçimli GBF bölümlere ayrılır; Romen rakamlı taşıma sınıfı (VIII) okunur',
          lambda: _denetim_baslik_testi()),
         ("SEA Ek-1 Tablo 3.1.2: sıvı karışımda soluma ATEmix buhar / sis kabulü farklı sonuç verirse KDU'ya sorulur "

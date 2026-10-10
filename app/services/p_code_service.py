@@ -419,6 +419,10 @@ def assign_p_codes(
             suppressed.update(weaks)
 
     final = set(p_to_sources.keys()) - suppressed
+    # Birleşik ifade tek ifadeyi kapsar — ikisi birlikte yazılmaz (H280 basınçlı gazda P410+P403 ile ayrıca P403
+    # basılıyordu; SEA Ek-4 birleşik ifadeler). Tek ifade, listede onu içeren birleşik bir ifade varsa düşer.
+    _bilesik = {x for p in final if '+' in p for x in p.split('+')}
+    final = {p for p in final if '+' in p or p not in _bilesik}
 
     # SEA Etiketleme Rehberi 7.3: P403+P233 yalnızca tehlikeli atmosfer oluşturabilecek uçucu ürün
     # içindir — katı/toz üründe koşul sağlanmaz (etiket, Bölüm 7.2 ve Bölüm 16 listesine girmez)

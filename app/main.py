@@ -289,9 +289,11 @@ async def generate_pdf(data: dict = Body(...)):
             )
 
         # Bölüm 3 bileşenleri: ön yüz alanları (konsantrasyon metni, EC no…) + tazelenmiş tehlike verisi
-        _fresh_by_cas = {(c.get('cas') or c.get('cas_no') or '').strip(): c for c in core['components']}
+        # Anahtar CAS; CAS'ı olmayan bileşende EC (boş anahtarlar birbirine karışmasın)
+        _k = lambda c: (c.get('cas') or c.get('cas_no') or c.get('ec') or c.get('ec_no') or '').strip()
+        _fresh_by_cas = {_k(c): c for c in core['components'] if _k(c)}
         def _overlay(c: dict) -> dict:
-            f = _fresh_by_cas.get((c.get('cas') or c.get('cas_no') or '').strip())
+            f = _fresh_by_cas.get(_k(c))
             if not f:
                 return c
             c = dict(c)

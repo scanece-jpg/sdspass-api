@@ -996,6 +996,16 @@ async def classify(inp: dict) -> dict:
     h_codes = list(dict.fromkeys(h for h in h_codes if h))
     all_h   = list(dict.fromkeys(h for h in all_h if h))
 
+    # SEA Ek-1 2.5: basınç altındaki gaz tek gruptadır; Ek-6 Not U — grup piyasaya arz edilen fiziksel hâle göre seçilir.
+    # Bileşenin Ek-6 kodu (H280) soğutulmuş sıvıda H281 ile yan yana kalıyordu (Habaş sıvı oksijen / LNG GBF'leri:
+    # yalnız H281). Gaz türü seçilmişse diğer grup kodu atılır.
+    _gt_ps = (test_data or {}).get('gas_type') or ('refrigerated' if (test_data or {}).get('cryo_gas') else '')
+    if form == 'gas' and _gt_ps:
+        _ps_at = 'H280' if _gt_ps == 'refrigerated' else 'H281'
+        h_codes = [h for h in h_codes if _h4(h) != _ps_at]
+        all_h   = [h for h in all_h if _h4(h) != _ps_at]
+        cp      = [e for e in cp if _h4(e.get('h_code')) != _ps_at]
+
     # Taşıma / eko tutarlılığı
     inv_eco = {h for h in all_h if h in {'H400', 'H410', 'H411'}}
     if inv_eco and transport and transport.get('not_regulated'):
@@ -1115,6 +1125,9 @@ async def classify(inp: dict) -> dict:
             if usage == 'consumer':
                 _pa = ['P102'] + _pa
             for _pc in _pa:
+                # Birleşik ifadede zaten varsa (P410+P403 ⊃ P403) ayrıca eklenmez
+                if any(_pc in x.split('+') for x in p_result['p_codes'] if '+' in x):
+                    continue
                 if _pc not in p_result['p_codes']:
                     p_result['p_codes'].append(_pc)
                 if _pc not in p_result['label']['selected']:
@@ -1218,10 +1231,10 @@ async def classify(inp: dict) -> dict:
     # ürünlerinde ≥%0,1 piyasaya arz edilemez). GBF 15.1 satırları ek17_service ile ayrıca basılır.
     ek17_hits = []
     try:
-        from app.services.ek17_service import lookup as _ek17_lookup
+        from app.services.ek17_service import lookup as _ek17_lookup, uygulanir as _ek17_uyg
         for _c in comps:
             _cas = str(_c.get('cas_no') or _c.get('cas') or '').strip()
-            for _r in _ek17_lookup(_cas):
+            for _r in [r for r in _ek17_lookup(_cas) if _ek17_uyg(r, _c)]:
                 ek17_hits.append({'cas': _cas, 'name': _c.get('name_tr') or _c.get('name') or _cas,
                                   'conc': float(_c.get('concMax') or _c.get('conc') or _c.get('concentration') or 0),
                                   'giris': _r.get('giris'), 'kaynak': _r.get('kaynak')})

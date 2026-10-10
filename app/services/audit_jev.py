@@ -33,7 +33,8 @@ def load_checklist() -> dict:
 
 
 # ── 1. Bölümlere ayırma ─────────────────────────────────────────────────────────
-_SEC_RE = re.compile(r'(?im)^\s*(?:B[ÖO]L[ÜU]M|SECTION)\s*(\d{1,2})\s*[:.\-–]')
+# "BÖLÜM 3:" / "SECTION 3:" ya da numara önde "3. BÖLÜM:" (Habaş gaz GBF'leri, 2026-10-10)
+_SEC_RE = re.compile(r'(?im)^\s*(?:(?:B[ÖO]L[ÜU]M|SECTION)\s*(\d{1,2})\s*[:.\-–]|(\d{1,2})\s*\.\s*B[ÖO]L[ÜU]M\s*:)')
 
 
 # "BÖLÜM n" yazılmayan GBF'ler: "1. MADDENİN/KARIŞIMIN …", "8. MARUZ KALMA …" — numara + büyük harfli başlık
@@ -46,7 +47,7 @@ def split_sections(text: str) -> Dict[str, str]:
     """Her bölüm numarasının ilk başlığından bir sonrakine kadar olan metin."""
     first = {}
     for m in _SEC_RE.finditer(text or ''):
-        n = int(m.group(1))
+        n = int(m.group(1) or m.group(2))
         if 1 <= n <= 16 and n not in first:
             first[n] = m.start()
     if len(first) < 8:

@@ -347,7 +347,9 @@ def _calc_flam_liq(comps: List[Dict], user_fp=None, user_bp=None, form_sub: str 
         # Kayıttan gelen sınıf için konan temsilî değer gerçek parlama noktası değildir → tahmine katılmaz
         if not estimated and (cat_fp[cat] is None or fp < cat_fp[cat]):
             cat_fp[cat] = fp
-        cat_triggers[cat].append({'cas': cas, 'name': (c.get('name_tr') or c.get('name') or cas).split(';')[0].strip(),
+        _hm = ((c.get('phys') or {}).get('flash_point') or {}).get('hammadde') if not estimated else None
+        cat_triggers[cat].append({'cas': cas, 'name': (f"{_hm} (hammadde, tedarikçi GBF'si)" if _hm else
+                                                       (c.get('name_tr') or c.get('name') or cas).split(';')[0].strip()),
                                    'conc': conc, 'fp': fp, 'estimated': estimated, 'h': cls['h']})
 
     def trig_src(t):

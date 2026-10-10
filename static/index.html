@@ -2889,7 +2889,10 @@ function applySupplierComps() {
                      m_factors: c.m_factors || {},
                      // Tedarikçinin kendi sınıflandırması — sunucu SDSPass / ECHA ile karşılaştırır (KDU kararı)
                      ted: { firma: sp.company || '', urun: sp.product_name || '', rev_date: sp.rev_date || '',
-                            kkdik_no: c.kkdik_no || sp.kkdik_no || '', h_codes: c.hCodes || [] } });
+                            kkdik_no: c.kkdik_no || sp.kkdik_no || '', h_codes: c.hCodes || [],
+                            // Hammaddenin (tedarikçi ürününün) parlama / kaynama noktası — sınıflandırma taraması
+                            fp: r.phys_props?.flash_point ?? null, bp: r.phys_props?.boiling_point ?? null,
+                            tek_madde: (r.components || []).filter(x => x.cas).length === 1 } });
         if (key) casMap.set(key, idx);
       }
     });
@@ -2939,14 +2942,83 @@ function applySupplierComps() {
   });
 
 
+  // Ürün tek bir hammaddeden oluşuyorsa (kullanım ≥ %95) tedarikçinin Bölüm 9 değerleri önerilir — KDU onaylar.
+  // Birden çok hammaddede önerilmez: Bölüm 9 karışımın kendi özelliğidir (KKDİK Ek-2 9.1).
+  window._tedB9 = null;
+  if (results.length === 1 && results[0].phys_props) {
+    const _u = parseFloat(document.getElementById('pdfUsage0')?.value);
+    const _sp = results[0].supplier || {};
+    if (!isNaN(_u) && _u >= 95) window._tedB9 = { props: results[0].phys_props, usage: _u,
+      kaynak: [_sp.company, _sp.product_name, _sp.rev_date].filter(Boolean).join(' — ') || results[0].label };
+  }
+
   status.style.background = allWarnings.length ? '#7c5a00' : '#155724';
   status.style.color = '#fff';
   let html = `<div style="font-weight:600;margin-bottom:${allWarnings.length?'6':'0'}px">✅ ${toAdd.length} bileşen aktarıldı.</div>`;
+  if (window._tedB9) {
+    html += `<div style="margin-top:6px;padding:6px;background:rgba(0,0,0,.25);border-radius:4px;font-size:11px;line-height:1.4">
+      Ürün tek hammaddeden oluşuyor (%${window._tedB9.usage}). Tedarikçi GBF'sinin Bölüm 9 değerleri forma aktarılabilir —
+      değerlerin ürününüz için geçerli olduğunu KDU olarak onaylıyorsanız aktarın (yalnız boş alanlar doldurulur).
+      <button type="button" onclick="_tedB9Aktar()" style="margin-top:4px;display:block;padding:4px 10px;border-radius:6px;border:1px solid #fff;background:none;color:#fff;cursor:pointer;font-size:11px">
+      Bölüm 9 değerlerini aktar</button></div>`;
+  }
   if (allWarnings.length) {
     html += allWarnings.map(w => `<div style="margin-top:4px;padding:4px 6px;background:rgba(0,0,0,.2);border-radius:4px;font-size:11px;line-height:1.4">${w}</div>`).join('');
   }
   status.innerHTML = html;
   window._supplierParseResults = [];
+}
+
+// Tedarikçi Bölüm 9 → form (yalnız boş alanlar). Kaynak "tedarikçi GBF'si" olarak işaretlenir (PDF yöntem notu).
+function _tedB9Aktar() {
+  const t = window._tedB9; if (!t) return;
+  const map = { appearance: 'tf_appearance', color: 'tf_color', odor: 'tf_odor', ph: 'tf_ph', melting_point: 'tf_mp',
+                boiling_point: 'tf_bp', flash_point: 'tf_fp', vapor_pressure: 'tf_vp', density: 'tf_density',
+                solubility: 'tf_sol', viscosity: 'tf_visc', auto_ignition: 'tf_ait', decomp_temp: 'tf_decomp',
+                log_kow: 'tf_logkow' };
+  // Sayı beklenen alanlara yalnız düz sayı aktarılır ("< 21", "573-587" gibi değerler aktarılmaz). Alanın birimi /
+  // sıcaklığı sabit olanlar çevrilir ya da aktarılmaz: buhar basıncı hPa @20 °C (Pa, kPa, mmHg çevrilir; başka
+  // sıcaklıkta ölçülmüşse aktarılmaz), viskozite mm²/s @40 °C (dinamik mPa·s ya da başka sıcaklık aktarılmaz).
+  const sayi = new Set(['tf_mp', 'tf_bp', 'tf_fp', 'tf_density', 'tf_ait', 'tf_decomp', 'tf_logkow']);
+  const _num = x => parseFloat(String(x).replace(',', '.'));
+  const _temp = sv => { const m = sv.match(/(-?\d+(?:[.,]\d+)?)\s*°\s*C/); return m ? _num(m[1]) : null; };
+  const birimli = {
+    tf_vp: sv => {
+      if (/[<>≥≤]/.test(sv)) return null;
+      const m = sv.match(/^(\d+(?:[.,]\d+)?)\s*(hPa|kPa|Pa|mm\s*Hg|mbar|bar)\b/i); if (!m) return null;
+      const T = _temp(sv); if (T != null && Math.abs(T - 20) > 0.5) return null;
+      const f = { hpa: 1, mbar: 1, kpa: 10, pa: 0.01, mmhg: 1.33322, bar: 1000 }[m[2].toLowerCase().replace(/\s/g, '')];
+      return f ? Math.round(_num(m[1]) * f * 1000) / 1000 : null;
+    },
+    tf_visc: sv => {
+      const m = sv.match(/^(\d+(?:[.,]\d+)?)\s*(mm²\/s|mm2\/s|cSt)\b/i); if (!m) return null;
+      const T = _temp(sv); if (T == null || Math.abs(T - 40) > 0.5) return null;
+      return _num(m[1]);
+    },
+  };
+  const yapilan = [], atlanan = [];
+  Object.entries(map).forEach(([k, id]) => {
+    const v = t.props[k]; const el = document.getElementById(id);
+    if (v == null || v === '' || !el) return;
+    if (el.value.trim() && el.dataset.source !== 'theo') { atlanan.push(id); return; }   // motor tahmini yerine geçer
+    const sv = String(v).trim();
+    let val = sv;
+    if (birimli[id]) { val = birimli[id](sv); if (val == null) { atlanan.push(id); return; } }
+    else if (sayi.has(id)) { if (!/^-?\d+(?:[.,]\d+)?$/.test(sv)) { atlanan.push(id); return; } val = sv.replace(',', '.'); }
+    el.value = String(val);
+    el.dataset.source = 'supplier'; el.dataset.tedRef = t.kaynak;
+    yapilan.push(id);
+  });
+  const st = document.getElementById('supplierParseStatus');
+  const _ad = { tf_appearance: 'görünüm', tf_color: 'renk', tf_odor: 'koku', tf_ph: 'pH', tf_mp: 'erime noktası',
+                tf_bp: 'kaynama noktası', tf_fp: 'parlama noktası', tf_vp: 'buhar basıncı (hPa @20 °C değil)',
+                tf_density: 'yoğunluk', tf_sol: 'çözünürlük', tf_visc: 'viskozite (mm²/s @40 °C değil)',
+                tf_ait: 'kendiliğinden tutuşma', tf_decomp: 'bozunma', tf_logkow: 'log Kow' };
+  if (st) st.insertAdjacentHTML('beforeend', `<div style="margin-top:4px;font-size:11px">Bölüm 9: ${yapilan.length} değer aktarıldı` +
+    (atlanan.length ? `. Aktarılmayan (alan dolu ya da birim / sıcaklık / sayı uygun değil — elle değerlendirin): ` +
+      atlanan.map(i => _ad[i] || i).join(', ') : '') + '.</div>');
+  window._tedB9 = null;
+  if (typeof doCalculate === 'function') doCalculate();
 }
 
 function completeToHundred() {
@@ -4229,7 +4301,7 @@ function _autofillPhysFields(tp) {
   for (const { id, key, val } of FIELDS) {
     const el = document.getElementById(id);
     if (!el) continue;
-    if (el.dataset.source === 'user') continue; // kullanıcı girdiyse dokunma
+    if (el.dataset.source === 'user' || el.dataset.source === 'supplier') continue; // kullanıcı / tedarikçi değeri — dokunma
     if (el.dataset.na === 'true') continue;      // Uygulanamaz işaretlenmişse dokunma
     if (el.dataset.autoHidden === 'true') continue; // Bu form için gizliyse dokunma
     if (val != null && !isNaN(val)) {
@@ -6361,6 +6433,11 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
       if (!tprop || typeof tprop !== 'object') return;
       const formEl   = _formSrcMap[k] ? document.getElementById(_formSrcMap[k]) : null;
       const userEntered = formEl?.dataset?.source === 'user'; // kullanıcı bizzat girdiyse true
+      if (formEl?.dataset?.source === 'supplier') {   // tek hammaddeli ürün — KDU onayıyla tedarikçi GBF'si
+        physMethods[k] = { measured: true, method: "Tedarikçi GBF'si" + (formEl.dataset.tedRef ? ' (' + formEl.dataset.tedRef + ')' : ''),
+                           standard: '', error_pct: null };
+        return;
+      }
       // Kullanıcının girdiği değer için motorun varsayılan standardı yazılmaz (ölçüm yöntemi bilinmiyor)
       physMethods[k] = userEntered
         ? { measured: true, method: 'Kullanıcı beyanı', standard: '', error_pct: null }

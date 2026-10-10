@@ -574,9 +574,40 @@ def value(c: Dict, field: str) -> Optional[float]:
     return float(v) if isinstance(v, (int, float)) else None
 
 
+def _ted_num(t) -> Optional[float]:
+    """Tedarikçi GBF'sindeki sıcaklık metni → °C. İşaretli (<, >), aralık ya da metinli değer → None."""
+    if t is None or t == '':
+        return None
+    if isinstance(t, (int, float)):
+        return float(t)
+    s = str(t).strip()
+    if re.search(r'[<>≥≤]|\d\s*[-–]\s*\d', s):
+        return None
+    m = re.fullmatch(r'(-?\d+(?:[.,]\d+)?)\s*(?:°\s*C|C)?(?:\s*\(.*\))?', s)
+    return float(m.group(1).replace(',', '.')) if m else None
+
+
 def attach(comps: List[Dict]) -> None:
+    """Bileşen fiziksel verisi (ECHA → PubChem). Bileşen bir tedarikçi GBF'sinden geldiyse (c['tedarikci']) o hammaddenin
+    parlama / kaynama noktası da kullanılır — sınıflandırmadaki en kötü durum taraması ve Bölüm 9 "en düşük parlama
+    noktalı bileşen" satırı için (KKDİK Ek-2 9.1: karışımın değeri DEĞİLDİR; ürünün Bölüm 9'una yazılmaz):
+      • hammadde tek madde ise tedarikçinin değeri o maddenin değeri olur (ECHA değerinin yerine);
+      • hammadde karışımsa değer hammaddenin kendisine aittir — kendi verisi olmayan bileşenlerine verilir
+        (hammaddenin bileşenleri birlikte o hammaddeyi oluşturur); kendi verisi olan bileşen kendi değerini korur."""
     for c in comps:
         c['phys'] = get(c.get('cas') or c.get('cas_no') or '')
+        ted = c.get('tedarikci') or {}
+        if not ted:
+            continue
+        tek = bool(ted.get('tek_madde'))
+        ref = "tedarikçi GBF'si (" + ' — '.join(x for x in (ted.get('firma'), ted.get('urun'), ted.get('rev_date')) if x) + ')'
+        for f, k in (('flash_point', 'fp'), ('boiling_point', 'bp')):
+            v = _ted_num(ted.get(k))
+            if v is None or (not tek and (c['phys'].get(f) or {}).get('value') is not None):
+                continue
+            c['phys'] = {**c['phys'], f: {'value': v, 'unit': '°C', 'qual': '', 'text': str(ted.get(k)),
+                                          'source': 'Tedarikçi', 'ref': ref,
+                                          **({} if tek else {'hammadde': ted.get('urun') or 'hammadde'})}}
 
 
 # ── GBF Bölüm 9 metni ───────────────────────────────────────────────────────
@@ -671,7 +702,8 @@ def section9(comps: List[Dict], substance_mode: bool, form: str = 'liquid') -> D
         if not cands:
             continue
         v, c, ent = pick(cands, key=lambda x: x[0])
+        _ad = f"{ent['hammadde']} (hammadde)" if ent.get('hammadde') else _name(c)
         out[b9_key[f]] = {
-            'display': f"Karışım için ölçülmemiştir. {lead}: {_name(c)} {fmt(ent, f)} ({caveat})",
+            'display': f"Karışım için ölçülmemiştir. {lead}: {_ad} {fmt(ent, f)} ({caveat})",
             'note': f"bileşen verisi — {ent['ref']} (KKDİK Ek-2 9.1)"}
     return out

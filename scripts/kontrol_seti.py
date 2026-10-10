@@ -1098,6 +1098,17 @@ def kural_testleri(c) -> int:
         ("SEA Md.6(1)(c): tedarikçi GBF'si ile Ek-6 dışı sınıf farkı KDU'ya sorulur (Ek-6 sınıfı sorulmaz); "
          "'tedarikçi' seçilince sınıf çıkar ve Bölüm 16'ya gerekçe yazılır (2026-10-10)",
          lambda: _ted_testi(c)),
+        ("KKDİK Ek-2 9.1 / SEA Ek-1 2.6: hammaddenin tedarikçi parlama noktası sınıflandırma taramasında hammadde adıyla "
+         "kullanılır (kendi verisi olmayan bileşenine); işaretli / aralıklı değer kullanılmaz (2026-10-10)",
+         lambda: (lambda T: (lambda f: f([{'cas': '7732-18-5', 'name': 'su', 'conc': 20, 'concMax': 20, 'hazards': [],
+                                            'tedarikci': T}, {'cas': '56-81-5', 'name': 'gliserin', 'conc': 80,
+                                            'concMax': 80, 'hazards': []}]) == ['H225']
+                                 and f([{'cas': '7732-18-5', 'name': 'su', 'conc': 20, 'concMax': 20, 'hazards': [],
+                                         'tedarikci': {**T, 'fp': '< 21'}}, {'cas': '56-81-5', 'name': 'gliserin',
+                                         'conc': 80, 'concMax': 80, 'hazards': []}]) == [])(
+             lambda cs: sorted(h for h in (c.post('/api/v1/sds/calculate', json={'components': cs, 'form': 'liquid',
+                               'usage': 'industrial'}).json().get('all_h_codes') or []) if h.startswith('H22'))))(
+             {'firma': 'Örnek', 'urun': 'Deneme Tiner', 'h_codes': [], 'fp': '12', 'tek_madde': False})),
         ('Danışman hesabı: anahtarsız erişim yok, firma klasörü otomatik açılır, aynı ad engellenir, '
          'üretilen GBF kaydedilir / listelenir / geri okunur (accounts.py)',
          lambda: _hesap_testi()),

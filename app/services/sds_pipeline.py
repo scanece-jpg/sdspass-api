@@ -769,6 +769,40 @@ async def classify(inp: dict) -> dict:
         _drop_euh('EUH066')
     if 'H317' in {_h4(h) for h in all_h}:   # SEA Ek-2 2.3: EUH203 yalnız H317 taşımayan çimentoda
         _drop_euh('EUH203')
+    # SEA Ek-2 madde 105 — EUH071 "Solunum yolunda aşınmaya yol açar": (1) soluma toksisitesi sınıflandırmasına ek olarak
+    # mekanizmanın aşındırma olduğunu gösteren veri varsa; (2) cilt aşındırıcılığı (H314) sınıflandırmasına ek olarak akut
+    # soluma test verisi yoksa ve ürün solunabiliyorsa. Bileşenden gelen EUH071, karışım bu sınıfları taşımıyorsa düşer.
+    _h4all = {_h4(h) for h in all_h}
+    if 'EUH071' in euh.get('euh_codes', []) and not (_h4all & {'H314', 'H330', 'H331', 'H332'}):
+        _drop_euh('EUH071')
+    if 'H314' in _h4all and 'EUH071' not in euh.get('euh_codes', []):
+        _dec71 = (test_data or {}).get('euh071_inhalable')
+        if _dec71 == 'yes' or (form == 'aerosol' and _dec71 not in ('tested', 'not_inhalable')):
+            from app.services.codes_i18n import get_euh as _get_euh71
+            euh.setdefault('euh_codes', []).append('EUH071')
+            euh.setdefault('euh_details', []).append({
+                'code': 'EUH071', 'text': _get_euh71('TR', 'EUH071'), 'source_cas': '', 'source_name': '',
+                'note': ('SEA Ek-2 madde 105: cilt aşındırıcı (H314), akut soluma test verisi yok ve ürün solunabilir'
+                         + (' (aerosol)' if form == 'aerosol' else ' (kullanıcı beyanı)'))})
+            euh['euh_codes'] = sorted(euh['euh_codes'])
+            euh['euh_details'] = sorted(euh['euh_details'], key=lambda x: x['code'])
+        elif _dec71 not in ('tested', 'not_inhalable') and form != 'aerosol':
+            phys_res.setdefault('pending_decisions', []).append({
+                'code': 'EUH071_INHALABLE', 'field': 'euh071_inhalable',
+                'question': ('Karışım cilt aşındırıcı (H314). SEA Ek-2 madde 105\'e göre akut soluma test verisi yoksa ve '
+                             'ürün solunabiliyorsa (sprey/buğu, buhar ya da toz oluşuyorsa) etikete EUH071 "Solunum yolunda '
+                             'aşınmaya yol açar" eklenir. Ürününüz için seçin.'),
+                'options': [
+                    {'value': 'yes', 'label': 'Solunabilir (sprey/buhar/toz oluşur), akut soluma test verisi yok',
+                     'effect': 'EUH071 eklenir'},
+                    {'value': 'not_inhalable', 'label': 'Solunabilir değil (sprey, buhar, toz oluşmaz)',
+                     'effect': 'EUH071 eklenmez'},
+                    {'value': 'tested', 'label': 'Akut soluma test verisi var (sınıflandırma test sonucuna göre)',
+                     'effect': 'Madde 105 ikinci paragraf uygulanmaz'},
+                ],
+                'legal_basis': 'SEA Ek-2 madde 105 (CLP Ek-II 1.2.6); SEA Ek-1 3.1.2.3.3',
+                'components': [],
+            })
     # SEA Ek-2 2.10 — EUH210: zararlı olarak sınıflandırılmayan, halkın kullanımı için tasarlanmamış karışım
     if not all_h and usage != 'consumer':
         from app.services.euh_service import euh210_triggers

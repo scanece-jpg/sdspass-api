@@ -44,7 +44,8 @@ _UYDURMA = ['Uygun yangın söndürücü kullanın.', 'Sınıflandırma ve etike
 URUNLER = [
     {'ad': 'Nitrik asit %15 (aşındırıcı, ADR; metal aşındırıcılık kararı: ihtiyatlı)',
      'bil': [('7697-37-2', 15), ('7732-18-5', 85)],
-     'test_data': {'metal_corrosive': 'not_tested_precautionary'}, 'soru': ('PHYS_MET_CORR_UNTESTED', 'metal_corrosive'),
+     'test_data': {'metal_corrosive': 'not_tested_precautionary', 'euh071_inhalable': 'not_inhalable'},
+     'soru': ('PHYS_MET_CORR_UNTESTED', 'metal_corrosive'),
      'h': ['H290', 'H314'], 'signal': 'Danger',
      'var': ['UN2031', '14.1 UN Numarası', 'Uygun olmayan söndürücüler', 'Doğrudan su jeti',
              "nitrik asit: sayısal akut toksisite verisi (LD50, LC50 veya ATE) bu GBF'de bulunmamaktadır"],
@@ -916,6 +917,14 @@ def kural_testleri(c) -> int:
                  'supplier': {'name': 'A', 'address': 'B', 'phone': '1'}, 'kdu': KDU_TEST,
                  'components': [], 'calc_input': {'components': [], 'form': 'liquid'}}).status_code == 422
          and 'Yeterlilik belgesi no KDU-TEST-001' in _pdf_text(c, [('7732-18-5', 100)])),
+        ('SEA Ek-2 madde 105 (EUH071): H314 karışımda karar sorulur; "solunabilir, soluma testi yok" → EUH071; '
+         '"solunabilir değil" → yok; bileşenden gelen EUH071 karışım H314/soluma toksik değilse düşer',
+         lambda: (lambda r0, r1, r2: 'EUH071_INHALABLE' in [d.get('code') for d in r0.get('pending_decisions') or []]
+                  and 'EUH071' in (r1.get('euh_codes') or []) and 'EUH071' not in (r2.get('euh_codes') or []))(
+             full([('7681-52-9', 14), (W, 86)], test_data={'metal_corrosive': 'H290'}),
+             full([('7681-52-9', 14), (W, 86)], test_data={'metal_corrosive': 'H290', 'euh071_inhalable': 'yes'}),
+             full([('7681-52-9', 14), (W, 86)], test_data={'metal_corrosive': 'H290', 'euh071_inhalable': 'not_inhalable'}))
+         and 'EUH071' not in (full([('111-30-8', 0.5), (W, 99.5)]).get('euh_codes') or [])),
     ]
     hata = 0
     for ad, f in testler:

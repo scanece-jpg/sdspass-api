@@ -367,6 +367,17 @@
    "onem": "zorunlu"
   },
   {
+   "id": "2.2-euh071",
+   "bolum": "2",
+   "dayanak": "SEA Ek-2 madde 105; SEA Ek-1 3.1.2.3.3",
+   "soru_tr": "EUH071 yalnız gerektiği yerde mi kullanılmış (H314 + soluma testi yok + solunabilir ürün ya da aşındırma mekanizmalı soluma toksisitesi)?",
+   "soru_en": "EUH071 is used only where required (skin corrosive, no inhalation test data and inhalable, or inhalation toxicity by corrosivity).",
+   "yontem": "kod",
+   "kosul": "karisim,siniflandirilmis",
+   "onem": "kosullu",
+   "not": "2026-10-10 eklendi. H314 olup EUH071 yoksa KDU solunabilirliği değerlendirir."
+  },
+  {
    "id": "2.3-pbt",
    "bolum": "2.3",
    "dayanak": "KKDİK Ek-2 A 2.3",

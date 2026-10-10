@@ -958,6 +958,26 @@ def kural_testleri(c) -> int:
          lambda: (lambda t: 'Depolama: Isıdan, sıcak yüzeylerden, kıvılcımdan, açık alevden ve diğer tutuşturucu kaynaklardan' in t
                   and 'Depolama alanında: Patlamaya dayanıklı (elektrikli' in t)(
              _pdf_text(c, [('108-88-3', 100)]))),
+        ('SEA Md.12 + Ek-1 Tablo 3.2.3/3.3.3: ÖKS toplamaya ağırlıklı girer — H2O2 (Ek-6 ÖKS) %4 yok, %6 H319, %10 H318, '
+         '%35 H315+H318, %50 H314 (önceden %35\'e H314 veriliyordu — Akkim referans GBF 2026-10-10)',
+         lambda: (lambda f: f(4) == [] and f(6) == ['H319'] and f(10) == ['H318'] and f(35) == ['H315', 'H318']
+                  and 'H314' in f(50))(
+             lambda x: sorted(h for h in (full([('7722-84-1', x), (W, 100 - x)],
+                                               test_data={'oxidizing_liquid': 'not_oxidizing',
+                                                          'metal_corrosive': 'not_corrosive',
+                                                          'euh071_inhalable': 'not_inhalable'}).get('all_h_codes') or [])
+                              if h[:3] == 'H31'))),
+        ('SEA Md.17(1)(f): endüstriyel H302 (Rehber: tümü opsiyonel) — etikette önlem ifadesi boş kalmaz',
+         lambda: bool((__import__('app.services.p_code_service', fromlist=['x']).select_label_p_codes(
+             ['P264', 'P270', 'P301+P312', 'P330', 'P501'], 6, h_codes=['H302'], usage='industrial'))['selected'])),
+        ('ADR 2.2.51: oksitleyici Kat.3 → PG III, Kat.2 → PG II (sodyum perkarbonat UN3378); '
+         'ADR 2.1.3.3 (a): H2O2 %35 Tablo A\'da adıyla (UN2014, 5.1+8, PG II)',
+         lambda: tr_road([('15630-89-4', 86), ('497-19-8', 14)], form='powder',
+                         test_data={'oxidizing_solid': 'H272_cat3'})[:3] == ('UN3378', '5.1', 'III')
+         and tr_road([('15630-89-4', 86), ('497-19-8', 14)], form='powder',
+                     test_data={'oxidizing_solid': 'H272_cat2'})[2] == 'II'
+         and tr_road([('7722-84-1', 35), (W, 65)], test_data={'oxidizing_liquid': 'H272_cat3',
+                     'metal_corrosive': 'not_corrosive', 'euh071_inhalable': 'not_inhalable'})[:3] == ('UN2014', '5.1', 'II')),
     ]
     hata = 0
     for ad, f in testler:

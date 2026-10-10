@@ -11,6 +11,7 @@ Girdi (normalize):
        euh, p_codes, transport, ppe, phys_res, stot_res, eco_obj, eco_panel,
        components (tazelenmiş), ate_details, warnings, pending_decisions
 """
+import re
 import asyncio
 
 from app.services.clp_service import signal_word_for
@@ -677,7 +678,14 @@ async def classify(inp: dict) -> dict:
         # Akut toksisite (ATEmix) — classify_mixture_clp akut toksisiteyi atladığından taşıma
         # motoru zehirli karışımları görmüyordu (Sınıf 6.1 / gazda 2.3 verilemiyordu)
         + [e['h_code'] for e in (ate_h or [])]))
-    transport = transport_calc(h_codes=final_cls_h, form=form, phys_h_codes=phys_h,
+    # Oksitleyici kategori (UN O.1–O.3 / L.1–L.2 test kararı) — ADR 5.1 PG'si kategoriden belirlenir
+    _oxc = None
+    for _r in phys_res.get('results', []):
+        if _h4(_r.get('h') or _r.get('h_code')) in ('H271', 'H272'):
+            _m = re.search(r'Ox\.?\s*(?:Liq|Sol)\.?\s*([123])', str(_r.get('h_class') or _r.get('class') or ''))
+            if _m:
+                _oxc = int(_m.group(1)) if _oxc is None else min(_oxc, int(_m.group(1)))
+    transport = transport_calc(h_codes=final_cls_h, form=form, phys_h_codes=phys_h, ox_category=_oxc,
                                viscosity=float(visc) if visc is not None else None,
                                components=tr_components,
                                acute_tox=ate_h or [],

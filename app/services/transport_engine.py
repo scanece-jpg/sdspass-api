@@ -791,7 +791,8 @@ def classify(h_codes: List[str], form: str = 'liquid',
              components: 'Optional[List[Component]]' = None,
              acute_tox: Optional[List[Dict]] = None,
              mixture_ph=None,
-             gas_type: Optional[str] = None) -> Dict:
+             gas_type: Optional[str] = None,
+             ox_category: Optional[int] = None) -> Dict:
     """
     ADR/IMDG/IATA sınıflandırması.
 
@@ -829,6 +830,13 @@ def classify(h_codes: List[str], form: str = 'liquid',
             _prod_state = 'solid' if is_solid else ('gas' if form == 'gas' else 'liquid')
             _details = _lookup_by_cas(_t.cas, concentration=_t.conc, physical_state=_prod_state,
                                       corrosive='H314' in set(h_codes or []))
+            if _details and str(_details.get('class')) == '5.1' and ox_category in (2, 3) \
+                    and not _details.get('pg_fixed'):
+                from app.services.transport_adr_service import get_adr_details as _gad51
+                _pg51e = 'II' if ox_category == 2 else 'III'
+                _d51 = _gad51(_details['un_no'], _pg51e)
+                if _d51.get('packing_group') == _pg51e:
+                    _details = {**_details, **{k: _d51[k] for k in ('packing_group', 'kemler', 'tunnel_code')}}
             if _details:
                 # §3.1.3.2(c): spesifik girişin fiziksel hali ürünle uyuşmalı.
                 # Uyuşmazlık (ör. katı TCCA girişi ama sıvı ürün) → B.N.O.'ya düş.
@@ -901,6 +909,12 @@ def classify(h_codes: List[str], form: str = 'liquid',
         new_num = _pg_num(adr['pg'])
         if not existing or new_num < existing['pg_num']:
             class_map[cls] = {'pg': adr['pg'], 'pg_num': new_num}
+
+    # Sınıf 5.1 PG — test kategorisinden (ADR 2.2.51.1.6 / 2.2.51.2: Kat.1 → PG I, Kat.2 → PG II, Kat.3 → PG III).
+    # H272 hem Kat.2 hem Kat.3'te kullanıldığından H kodu tek başına PG'yi belirlemez.
+    if '5.1' in class_map and ox_category in (2, 3) and 'H271' not in h_set:
+        _pg51 = 'II' if ox_category == 2 else 'III'
+        class_map['5.1'] = {'pg': _pg51, 'pg_num': _pg_num(_pg51)}
 
     # Sınıf 8 PG — ADR 2.2.8.1.6.3 hesaplama yöntemi (karışım testi yoksa). Bileşen alt
     # kategorisi bilinmiyorsa (bileşen listesi yok) H314 → PG I en kötü durum kalır.
@@ -1001,7 +1015,13 @@ def classify(h_codes: List[str], form: str = 'liquid',
                 _labs = [x.strip() for x in (_d.get('labels') or [str(_d.get('class'))]) if x]
                 _want = [str(primary['class'])] + [str(x['class']) for x in subs if str(x['class']) != '9']
                 _pg = _d['packing_group'] if _d.get('pg_fixed') else primary['pg']
-                if sorted(set(_labs)) == sorted(set(_want)) and _pg in _tpgs:
+                # 2.1.3.3 (a): Tablo A çözeltiyi derişim aralığıyla adıyla tanımlıyorsa (pg_fixed satır, örn. H2O2 %20–60
+                # UN2014) giriş doğrudan uygulanır — sınıf/yan tehlike Tablo A'dan alınır
+                _named_sol = bool(_d.get('pg_fixed'))
+                if (sorted(set(_labs)) == sorted(set(_want)) and _pg in _tpgs) or _named_sol:
+                    if _named_sol:
+                        subs = [{'class': x, 'pg': None} for x in _labs[1:]]
+                        sub_class = subs[0]['class'] if subs else None
                     _dd = _d if _pg == _d.get('packing_group') else {**_d, **_gad(_d['un_no'], _pg)}
                     un_entry = {
                         'un': _dd['un_no'], 'label': _dd.get('name_tr') or _dd.get('name', ''),

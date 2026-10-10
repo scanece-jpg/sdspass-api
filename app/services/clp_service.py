@@ -441,34 +441,37 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
 
     components = [_maybe_override_comp(c) for c in components]
 
-    # İkincil Skin/Eye kuralı — toplamsal (CLP Tablo 3.2.3)
-    # CLP Tablo 3.2.3: Skin Corr. 1A/1B/1C bileşenlerinin toplam konsantrasyonu ≥%5 → H314
-    # SCL tanımlı bileşen: SCL eşiği katkı sınırı olarak değil, bireysel tetik olarak kullanılır;
-    # toplamsal hesapta SCL eşiğinin altındaki bileşenler de toplanır (ECHA rehberi C&L §3.2.3)
-    sum_corr1 = 0.0
-    for comp in components:
-        conc = float(comp.get("concentration", comp.get("conc", 0)) or 0)
-        for h in comp.get("hazards", []):
-            if h.get("h_class","") not in ("Skin Corr. 1","Skin Corr. 1A","Skin Corr. 1B","Skin Corr. 1C"):
-                continue
-            sum_corr1 += conc
-            break  # bileşen başına bir kez say
-
-    # CLP §3.3.1.4: Skin Corr. 1 (H314) maddeler Eye Dam. 1 anlamına gelir.
-    # Bileşen listesinde yalnızca H314 olsa bile göz toplamına dahil edilmeli.
+    # İkincil Skin/Eye kuralı — toplamsal (SEA Ek-1 Tablo 3.2.3 / 3.3.3)
+    # SEA Md.12 ve Ek-1 1.1.2.2: Ek-6'da özel konsantrasyon sınırı (ÖKS) varsa genel sınırın (GKS) yerine o kullanılır.
+    # Toplamada ÖKS'li bileşenin katkısı GKS eşdeğerine çevrilir: katkı = C × GKS / ÖKS  (Σ Ci/ÖKSi ≥ 1 ile aynı;
+    # ECHA CLP Rehberi 3.2.3.3 / 3.3.3.3). Önceden ham derişim toplanıyordu — ÖKS'si GKS'den yüksek maddede
+    # (örn. H2O2: Cilt Aşnd. 1B ≥ %50) %35'lik çözeltiye H314 veriliyordu (2026-10-10, Akkim referans GBF).
+    _CORR = ("Skin Corr. 1", "Skin Corr. 1A", "Skin Corr. 1B", "Skin Corr. 1C")
     _EYE_DAM1_CLASSES = {"Eye Dam. 1", "Skin Corr. 1", "Skin Corr. 1A", "Skin Corr. 1B", "Skin Corr. 1C"}
-    sum_eye_dam1 = 0.0
+
+    def _scl_w(comp, h_code4, gcl, conc):
+        _s = _get_scl_cutoff(comp, "", h_code4)
+        return conc * gcl / _s if _s else None
+
+    sum_corr1 = 0.0            # Σ Cilt Aşnd. 1 (GKS %5 eşdeğeri)
+    _skin_w_corr = 0.0         # aşındırıcı bileşenlerin tahriş katkısı (GKS: 10 × C)
+    sum_eye_dam1 = 0.0         # Σ Göz Hasarı 1 (GKS %3 eşdeğeri)
+    _eye_w_dam = 0.0           # göz hasarı bileşenlerinin tahriş katkısı (GKS: 10 × C)
     for comp in components:
         conc = float(comp.get("concentration", comp.get("conc", 0)) or 0)
-        for h in comp.get("hazards", []):
-            if h.get("h_class","") not in _EYE_DAM1_CLASSES:
-                continue
-            sum_eye_dam1 += conc
-            break  # bileşen başına bir kez say
+        _cls = {h.get("h_class", "") for h in comp.get("hazards", [])}
+        if _cls & set(_CORR):
+            _c = _scl_w(comp, "H314", 5.0, conc)
+            sum_corr1 += conc if _c is None else _c
+            _i = _scl_w(comp, "H315", 10.0, conc)
+            _skin_w_corr += (10.0 * (conc if _c is None else _c)) if _i is None else _i
+        if _cls & _EYE_DAM1_CLASSES:
+            _d = _scl_w(comp, "H318", 3.0, conc)
+            sum_eye_dam1 += conc if _d is None else _d
+            _i = _scl_w(comp, "H319", 10.0, conc)
+            _eye_w_dam += (10.0 * (conc if _d is None else _d)) if _i is None else _i
 
-    # Eye Irrit. 2 toplamı: Eye Dam. 1 veya Skin Corr. 1 içeren bileşenler hariç.
-    # Aynı bileşende H318/H314 + H319 birlikte bulunuyorsa sum_eye_dam1'e zaten katkı yaptı;
-    # H319'a da eklemek çift sayıma yol açar (ECHA C&L çakışan bildirimlerde olabilir).
+    # Eye Irrit. 2 toplamı: Eye Dam. 1 veya Skin Corr. 1 içeren bileşenler hariç (onların katkısı _eye_w_dam'da).
     sum_eye_irrit2 = 0.0
     for _comp_ei in components:
         if any(_hh.get("h_class", "") in _EYE_DAM1_CLASSES
@@ -476,7 +479,9 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
             continue
         for _hh in _comp_ei.get("hazards", []):
             if _hh.get("h_class", "") == "Eye Irrit. 2":
-                sum_eye_irrit2 += float(_comp_ei.get("concentration", _comp_ei.get("conc", 0)) or 0)
+                _cc = float(_comp_ei.get("concentration", _comp_ei.get("conc", 0)) or 0)
+                _w = _scl_w(_comp_ei, "H319", 10.0, _cc)
+                sum_eye_irrit2 += _cc if _w is None else _w
                 break
 
     # CLP Annex I §2.3 Not 2: Aerosol form olduğunda bileşenlerin Flam.Gas / Press.Gas /
@@ -630,7 +635,8 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
                                 "cutoff_source": "SKS",
                                 "cutoff_value":  _c315,
                             })
-                        elif conc >= _H315_GCL:
+                        elif conc >= _H315_GCL and not any(str(_x.get('h_code', ''))[:4] == 'H315' for _x in scl_list):
+                            # SEA Md.12: Ek-6'da H315 ÖKS bandı varsa (örn. H2O2 %35–50) bandın altında GKS kullanılmaz
                             seen_h.add('H315')
                             passed.append({
                                 "h_class":       "Skin Irrit. 2",
@@ -659,7 +665,8 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
                                 "cutoff_source": "SKS",
                                 "cutoff_value":  _c319,
                             })
-                        elif conc >= _H319_GCL:
+                        elif conc >= _H319_GCL and not any(str(_x.get('h_code', ''))[:4] in ('H319', 'H318') for _x in scl_list):
+                            # SEA Md.12: Ek-6'da göz ÖKS bandı varsa bandın dışında GKS kullanılmaz
                             seen_h.add('H319')
                             passed.append({
                                 "h_class":       "Eye Irrit. 2",
@@ -824,29 +831,31 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
             warnings.append(f"pH değeri okunamadı: {mixture_ph!r} — pH kontrolü atlandı")
 
     # ── Skin Toplamsal Sınıflandırma — CLP Tablo 3.2.3 ──────────────────────────
-    sum_skin_irrit2 = sum(
-        float(comp.get("concentration", comp.get("conc", 0)) or 0)
-        for comp in components
-        for h in comp.get("hazards", [])
-        if h.get("h_class","") == "Skin Irrit. 2"
-    )
+    # Cilt tahrişi 2 toplamı: aşındırıcı bileşenler hariç (katkıları _skin_w_corr'da); ÖKS varsa GKS eşdeğeri
+    sum_skin_irrit2 = 0.0
+    for comp in components:
+        _cls = {h.get("h_class", "") for h in comp.get("hazards", [])}
+        if "Skin Irrit. 2" in _cls and not (_cls & set(_CORR)):
+            _cc = float(comp.get("concentration", comp.get("conc", 0)) or 0)
+            _w = _scl_w(comp, "H315", 10.0, _cc)
+            sum_skin_irrit2 += _cc if _w is None else _w
 
     # Kural 1: ΣSkin Corr.1 ≥ %5 → H314 (toplamsal — birden fazla bileşen)
     # Tek bileşen <%1 cutoff altında kalsa bile Σ≥%5 → karışım Skin Corr. 1
     if "H314" not in seen_h and sum_corr1 >= 5.0:
         seen_h.add("H314")
         passed.append({"h_class":"Skin Corr. 1","h_code":"H314","conc":sum_corr1,
-                       "reason":f"Toplama: Σ Cilt Aş.1=%{sum_corr1:.1f} ≥ %5 (CLP Tablo 3.2.3 toplamsal kural)"})
+                       "reason":f"Toplama: Σ Cilt Aş.1 (ÖKS ağırlıklı)=%{sum_corr1:.1f} ≥ %5 (SEA Ek-1 Tablo 3.2.3; Md.12 ÖKS)"})
 
     # Kural 2: 10×ΣSkin Corr.1 + ΣSkin Irrit.2 ≥ %10 → H315 (H314 yoksa)
     # Bu ağırlıklı formül hem ΣKat2≥%10 hem de %1≤ΣKat1<%5 geçiş durumunu kapsar
     if "H314" not in seen_h and "H315" not in seen_h:
-        weighted_skin = 10.0 * sum_corr1 + sum_skin_irrit2
+        weighted_skin = _skin_w_corr + sum_skin_irrit2
         if weighted_skin >= 10.0:
             seen_h.add("H315")
             passed.append({"h_class":"Skin Irrit. 2","h_code":"H315","conc":weighted_skin,
                            "reason":(
-                               f"Ağırlıklı: 10×{sum_corr1:.1f}+{sum_skin_irrit2:.1f}"
+                               f"Ağırlıklı (ÖKS dahil): {_skin_w_corr:.1f}+{sum_skin_irrit2:.1f}"
                                f"={weighted_skin:.1f} ≥ %10 (CLP Tablo 3.2.3)"
                            )})
 
@@ -855,16 +864,16 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
     if "H318" not in seen_h and sum_eye_dam1 >= 3.0:
         seen_h.add("H318")
         passed.append({"h_class":"Eye Dam. 1","h_code":"H318","conc":sum_eye_dam1,
-                       "reason":f"Toplama: Σ Göz Hasar.1=%{sum_eye_dam1:.1f} ≥ %3 (CLP Tablo 3.3.3 toplamsal kural)"})
+                       "reason":f"Toplama: Σ Göz Hasar.1 (ÖKS ağırlıklı)=%{sum_eye_dam1:.1f} ≥ %3 (SEA Ek-1 Tablo 3.3.3; Md.12 ÖKS)"})
 
     # Kural 2: 10×ΣEye Dam.1 + ΣEye Irrit.2 ≥ %10 → H319 (H318 yoksa)
     if "H318" not in seen_h and "H319" not in seen_h:
-        weighted_eye = 10.0 * sum_eye_dam1 + sum_eye_irrit2
+        weighted_eye = _eye_w_dam + sum_eye_irrit2
         if weighted_eye >= 10.0:
             seen_h.add("H319")
             passed.append({"h_class":"Eye Irrit. 2","h_code":"H319","conc":weighted_eye,
                            "reason":(
-                               f"Ağırlıklı: 10×{sum_eye_dam1:.1f}+{sum_eye_irrit2:.1f}"
+                               f"Ağırlıklı (ÖKS dahil): {_eye_w_dam:.1f}+{sum_eye_irrit2:.1f}"
                                f"={weighted_eye:.1f} ≥ %10 (CLP Tablo 3.3.3)"
                            )})
 

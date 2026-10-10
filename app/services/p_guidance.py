@@ -217,9 +217,20 @@ def select_label(all_p: List[str], h_codes: List[str], usage: str, form: str,
             continue
         chosen.append(p)
         dropped.update(REDUNDANT.get(_canon(p), []))
+    # SEA Md.17(1)(f): etikette ilgili önlem ifadeleri bulunur — Rehber'de bu kullanım için kesinlikle önerilen/önerilen
+    # ifade yoksa (örn. endüstriyel H302: hepsi opsiyonel) etiket boş kalmaz; opsiyonel olanlar öncelik sırasıyla alınır.
+    _opt_used = False
+    if not chosen:
+        for p in by_prio([p for p, l in cand.items() if l == 'X']):
+            if p in dropped or p in chosen or len(chosen) >= max_codes:
+                continue
+            chosen.append(p)
+            dropped.update(REDUNDANT.get(_canon(p), []))
+            _opt_used = True
     n_must = len([p for p in chosen if cand[p] == 'K'])
     note = (f'SEA Md. 24/30 + SEA Etiketleme Rehberi Bölüm 7.3: {n_must} kesinlikle önerilen'
-            + (f', {len(chosen) - n_must} önerilen' if len(chosen) > n_must else '')
+            + (' (kesinlikle önerilen/önerilen ifade olmadığı için opsiyonel ifadeler — SEA Md.17(1)(f))' if _opt_used else '')
+            + (f', {len(chosen) - n_must} ' + ('opsiyonel' if _opt_used else 'önerilen') if len(chosen) > n_must else '')
             + f' ({"halka arz" if usage == "consumer" else "endüstriyel/profesyonel"}).')
     if len(chosen) > max_codes:
         note += ' Kesinlikle önerilenler altıyı aştığı için hepsi etikette (Md. 30(3) istisnası).'

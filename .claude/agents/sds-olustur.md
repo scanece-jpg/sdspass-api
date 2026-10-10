@@ -39,6 +39,13 @@ Kullanıcı mesajı `[TEDARİKÇİ_SDS]` ile başlıyorsa, tedarikçi PDF'i otom
 
 ⛔ Tedarikçi SDS'inden gelen H kodlarını FILL_FORM'a yazma — backend zaten lookup_substance ile doğruluyor.
 
+⛔ Mesajdaki "Hammadde (tedarikçi ürünü)", "Tedarikçi", revizyon no ve tarihi HAMMADDEYİ tanımlar — kullanıcının
+ürününün bilgisi DEĞİLDİR. FILL_FORM'da `product_name`, `firm_name`, `firm_address`, `firm_phone`, `firm_email`,
+`revision_no`, `revision_date` alanlarına tedarikçinin bilgilerini YAZMA. Kullanıcının ürün adını ve firma bilgisini
+Adım 1'de kullanıcıya sor (ürün tek hammaddeden oluşsa bile ürün adını kullanıcı onaylamalı). Revizyon yeni GBF için
+kullanıcının kendi revizyonudur (ilk GBF: 1).
+- Bileşen satırında `[KKDİK no: …]` varsa FILL_FORM `components` öğesine `kkdik_no` olarak aynen ekle.
+
 ---
 
 ## Adım 1 — Ürün ve Firma Bilgileri

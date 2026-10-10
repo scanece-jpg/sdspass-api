@@ -1729,11 +1729,17 @@ async function agentAttachSds(input) {
       const conc = c.concMin != null && c.concMax != null
         ? `%${c.concMin}–${c.concMax}`
         : c.concMin != null ? `%${c.concMin}` : '';
-      return `- ${c.name || ''}${c.cas ? ` (CAS ${c.cas})` : ''}${conc ? ': ' + conc : ''}`;
+      return `- ${c.name || ''}${c.cas ? ` (CAS ${c.cas})` : ''}${conc ? ': ' + conc : ''}` +
+             `${c.kkdik_no ? ` [KKDİK no: ${c.kkdik_no}]` : ''}`;
     }).join('\n');
 
-    const productName = data.product_name || file.name.replace('.pdf','');
-    const msg = `[TEDARİKÇİ_SDS]\nÜrün: ${productName}\nBileşenler:\n${compLines}`;
+    // Tedarikçinin firma / ürün / revizyon bilgisi HAMMADDEYİ tanımlar — kullanıcının ürün adı, firması ya da
+    // revizyonu değildir (agent bunları FILL_FORM'a yazmaz; kullanıcıya sorar)
+    const sup = data.supplier || {};
+    const hammadde = sup.product_name || file.name.replace(/\.pdf$/i, '');
+    const msg = `[TEDARİKÇİ_SDS]\nHammadde (tedarikçi ürünü): ${hammadde}\n` +
+                `Tedarikçi: ${sup.company || 'belirtilmemiş'}${sup.rev_no ? ' — Rev. ' + sup.rev_no : ''}${sup.rev_date ? ' — ' + sup.rev_date : ''}\n` +
+                `Bileşenler:\n${compLines}`;
 
     _agentMessages.push({ role: 'user', content: msg });
     _agentCall();
@@ -1801,6 +1807,7 @@ function _agentFillForm(p) {
       // M-faktörü ayarla
       if (c.m_factor != null) { const mfEl = document.getElementById('mf' + lastId); if (mfEl) mfEl.value = c.m_factor; }
       if (c.m_factor_chronic != null) { const mfcEl = document.getElementById('mfc' + lastId); if (mfcEl) mfcEl.value = c.m_factor_chronic; }
+      if (c.kkdik_no) { const kkEl = document.getElementById('kkdik' + lastId); if (kkEl && !kkEl.value.trim()) kkEl.value = c.kkdik_no; }
     });
   }
   // Fiziksel özellikler
@@ -2889,7 +2896,8 @@ function applySupplierComps() {
                      m_factors: c.m_factors || {},
                      // Tedarikçinin kendi sınıflandırması — sunucu SDSPass / ECHA ile karşılaştırır (KDU kararı)
                      ted: { firma: sp.company || '', urun: sp.product_name || '', rev_date: sp.rev_date || '',
-                            kkdik_no: c.kkdik_no || sp.kkdik_no || '', h_codes: c.hCodes || [],
+                            kkdik_no: c.kkdik_no || ((r.components || []).filter(x => x.cas).length === 1 ? (sp.kkdik_no || '') : ''),
+                            h_codes: c.hCodes || [],
                             // Hammaddenin (tedarikçi ürününün) parlama / kaynama noktası — sınıflandırma taraması
                             fp: r.phys_props?.flash_point ?? null, bp: r.phys_props?.boiling_point ?? null,
                             tek_madde: (r.components || []).filter(x => x.cas).length === 1 } });
@@ -2925,6 +2933,8 @@ function applySupplierComps() {
           if (maxEl) maxEl.value = newMax || newMin;
           if (manEl) manEl.value = newMax ? `${newMin}-${newMax}` : String(newMin);
           if (c.ted && !cw.dataset.ted) cw.dataset.ted = JSON.stringify(c.ted);
+          const _kk = document.getElementById('kkdik' + compId);
+          if (_kk && c.ted?.kkdik_no && !_kk.value.trim()) _kk.value = c.ted.kkdik_no;
           merged = true;
         }
       });
@@ -2933,6 +2943,9 @@ function applySupplierComps() {
       const newId = addComp(c);
       const _w = document.getElementById('cw' + newId);
       if (_w && c.ted) _w.dataset.ted = JSON.stringify(c.ted);
+      // Bölüm 3: bileşenin KKDİK kayıt numarası tedarikçi GBF'sinden (KKDİK Ek-2 3.2)
+      const _kk = document.getElementById('kkdik' + newId);
+      if (_kk && c.ted?.kkdik_no && !_kk.value.trim()) _kk.value = c.ted.kkdik_no;
       if (c.ate && newId) {
         if (c.ate.oral)   { const el = document.getElementById('ate_oral'   + newId); if (el) el.value = c.ate.oral; }
         if (c.ate.dermal) { const el = document.getElementById('ate_dermal' + newId); if (el) el.value = c.ate.dermal; }

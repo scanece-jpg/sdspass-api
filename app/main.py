@@ -176,13 +176,24 @@ async def generate_pdf(data: dict = Body(...)):
             ('KDU yeterlilik belgesi no', bool((kdu_in.get('cert_no') or '').strip())),
             ('KDU belge tarihi',          bool(re.match(r'^\d{1,2}[./-]\d{1,2}[./-]\d{4}$', (kdu_in.get('cert_date') or '').strip()))),
         ) if not val]
+        # Bileşen CAS numarası — sınıflandırma, OEL, taşıma ve atık CAS'a bağlı; adla girilen bileşen hesaba giremez
+        def _cf(c):
+            try:
+                return float(c.get('concMax') or c.get('conc') or c.get('concentration') or 0)
+            except (TypeError, ValueError):
+                return 0.0
+        _cas_missing = [f"CAS numarası: {c.get('name') or '(adsız bileşen)'}"
+                        for c in ((data.get('calc_input') or {}).get('components') or data.get('components') or [])
+                        if _cf(c) > 0 and not re.fullmatch(r'\d{2,7}-\d{2}-\d', str(c.get('cas') or c.get('cas_no') or '').strip())]
+        _kdu_missing += _cas_missing
         if _id_missing or _kdu_missing:
             raise HTTPException(status_code=422, detail={
                 'error': 'missing_identity',
                 'message': ('GBF üretilemiyor — zorunlu alanlar eksik: '
                             + ', '.join(_id_missing + _kdu_missing)
                             + (' (KKDİK Ek-2 Bölüm 1)' if _id_missing else '')
-                            + (' (KKDİK Usul ve Esaslar Md.16(2) — Bölüm 16)' if _kdu_missing else '')),
+                            + (' (KKDİK Usul ve Esaslar Md.16(2) — Bölüm 16)' if len(_kdu_missing) > len(_cas_missing) else '')
+                            + (' (KKDİK Ek-2 3.2 — bileşen adı yazılıp listeden seçilmeli)' if _cas_missing else '')),
                 'missing': _id_missing + _kdu_missing,
             })
 
@@ -921,8 +932,13 @@ async def substance_lookup(cas: str, form: str = None):
 @app.get("/api/v1/sds/substance/search")
 async def substance_search(q: str, limit: int = 20):
     """İsim veya CAS'a göre madde arama."""
-    from app.services.substance_lookup import search_substances
+    from app.services.substance_lookup import search_substances, echa_name_search
     results = search_substances(q, limit=min(limit, 50))
+    # Yerelde tam / başlangıç eşleşmesi yoksa ECHA'da ad araması (tek istek) — örn. "citric acid", "glycerol"
+    if not any(r.get('_mscore', 9) <= 1 for r in results):
+        _have = {r.get('cas') for r in results}
+        _ext = await asyncio.to_thread(echa_name_search, q)
+        results = [r for r in _ext if r['cas'] not in _have] + results
     return {"count": len(results), "results": results}
 
 

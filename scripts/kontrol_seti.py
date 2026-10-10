@@ -1109,6 +1109,16 @@ def kural_testleri(c) -> int:
              lambda cs: sorted(h for h in (c.post('/api/v1/sds/calculate', json={'components': cs, 'form': 'liquid',
                                'usage': 'industrial'}).json().get('all_h_codes') or []) if h.startswith('H22'))))(
              {'firma': 'Örnek', 'urun': 'Deneme Tiner', 'h_codes': [], 'fp': '12', 'tek_madde': False})),
+        ("KKDİK Ek-2 3.2: CAS'sız bileşenle GBF üretilmez (adla girilen %32 HCl'de H335, Bölüm 3, OEL, tehlikeli atık ve "
+         "UN1789 kayboluyordu — 2026-10-10); ad araması doğru maddeyi ilk sırada verir",
+         lambda: (c.post('/api/v1/sds/pdf', json={'lang': 'TR', 'product': {'name': 'X', 'form': 'liquid'},
+                  'supplier': {'name': 'A', 'address': 'B', 'phone': '1', 'email': 'a@b.co'}, 'kdu': KDU_TEST,
+                  'components': [{'cas': '', 'name': 'hydrogen chloride', 'conc': 32, 'concMax': 32, 'hazards': []}],
+                  'revision': {'no': '1', 'date': '10.10.2026'}}).status_code == 422
+                  and all(c.get('/api/v1/sds/substance/search', params={'q': q}).json()['results'][0]['cas'] == cas
+                          for q, cas in (('hydrogen chloride', '7647-01-0'), ('etanol', '64-17-5'),
+                                         ('sodyum hidroksit', '1310-73-2'), ('hidrojen peroksit', '7722-84-1'),
+                                         ('HİDROJEN KLORÜR', '7647-01-0'), ('glycerol', '56-81-5'))))),
         ('Danışman hesabı: anahtarsız erişim yok, firma klasörü otomatik açılır, aynı ad engellenir, '
          'üretilen GBF kaydedilir / listelenir / geri okunur (accounts.py)',
          lambda: _hesap_testi()),

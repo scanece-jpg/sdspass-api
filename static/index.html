@@ -548,6 +548,11 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
 .wz-sum-val.ok{color:var(--safe)}
 .wz-sum-val.warn{color:var(--warn)}
 .wz-sum-val.empty{color:var(--text3);font-style:italic;font-weight:400}
+.mad-sug{position:absolute;left:0;right:0;top:100%;z-index:50;background:var(--bg2,#1a202c);border:1px solid var(--border2);border-radius:6px;margin-top:2px;max-height:240px;overflow:auto;box-shadow:0 6px 18px rgba(0,0,0,.35)}
+.mad-sug-i{padding:6px 8px;cursor:pointer;font-size:11px;display:flex;flex-direction:column;gap:1px;border-bottom:1px solid var(--border2)}
+.mad-sug-i:hover{background:var(--bg3,rgba(255,255,255,.06))}
+.mad-sug-i span{font-size:10px;color:var(--text3);font-family:var(--mono)}
+.mad-sug-bos{padding:6px 8px;font-size:11px;color:var(--text3)}
 </style>
 </head>
 <body>
@@ -2365,13 +2370,17 @@ function addComp(pf = {}) {
     <button class="cdel" onclick="delComp(${id})" title="Kaldır">×</button>
     <div class="cw-row">
       <div>
-        <label>CAS No</label>
-        <input type="text" class="ci" id="ci${id}" placeholder="7664-93-9"
-               value="${pf.cas||''}" oninput="debounceCas(${id})" onblur="onCas(${id})">
+        <label>CAS No <span style="font-size:9px;color:var(--text3)">— ya da madde adı yazıp listeden seçin</span></label>
+        <div style="position:relative">
+        <input type="text" class="ci" id="ci${id}" placeholder="7664-93-9 veya sülfürik asit" autocomplete="off"
+               value="${pf.cas||''}" oninput="debounceCas(${id})" onblur="onCas(${id}); _sugGizle(${id})">
+        <div id="sug${id}" class="mad-sug" style="display:none"></div>
+        </div>
       </div>
       <div>
         <label>Madde Adı</label>
-        <input type="text" class="ni" id="ni${id}" placeholder="Madde adı" value="${pf.name||''}">
+        <input type="text" class="ni" id="ni${id}" placeholder="Madde adı" value="${pf.name||''}" autocomplete="off"
+               oninput="_adAra(${id})" onblur="_sugGizle(${id})">
         <input type="hidden" class="ni-tr" id="nitr${id}" value="${pf.name_tr||''}">
       </div>
     </div>
@@ -3224,20 +3233,75 @@ function debounceCas(id) {
   const val = document.getElementById('ci'+id)?.value?.trim() || '';
   // CAS formatı tamamlandıysa (ör: 7664-93-9) hemen sorgula
   if (/^\d{1,7}-\d{2}-\d$/.test(val)) {
+    _sugGizle(id, 0);
     _casTimers[id] = setTimeout(() => onCas(id), 300);
+  } else if (/[A-Za-zÇĞİÖŞÜçğıöşü]/.test(val) && val.length >= 3) {
+    _casTimers[id] = setTimeout(() => _maddeAra(id, val, 'ci'), 350);   // ad yazıldı — öneri listesi
+  } else {
+    _sugGizle(id, 0);
   }
+}
+
+// ── Madde adı ile arama (CAS bilinmiyorsa) ────────────────────────────────────────
+// Yerel veritabanı (SEA Ek-6, ECHA, ad sözlüğü) + bulunamazsa ECHA ad araması. Seçilen maddenin CAS'ı yazılır ve
+// madde CAS ile sorgulanır — sınıflandırma, OEL, taşıma, atık CAS'a bağlıdır (adla girilen bileşen hesaba giremez).
+const _adTimers = {};
+function _adAra(id) {
+  clearTimeout(_adTimers[id]);
+  const cas = document.getElementById('ci' + id)?.value?.trim() || '';
+  const val = document.getElementById('ni' + id)?.value?.trim() || '';
+  if (/^\d{1,7}-\d{2}-\d$/.test(cas) || val.length < 3) { _sugGizle(id, 0); return; }
+  _adTimers[id] = setTimeout(() => _maddeAra(id, val, 'ni'), 400);
+}
+function _sugGizle(id, gecikme = 200) {
+  setTimeout(() => { const b = document.getElementById('sug' + id); if (b) b.style.display = 'none'; }, gecikme);
+}
+async function _maddeAra(id, q, kaynak) {
+  const box = document.getElementById('sug' + id); if (!box) return;
+  const esc = t => String(t ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  box.style.display = 'block';
+  box.innerHTML = '<div class="mad-sug-bos">Aranıyor…</div>';
+  try {
+    const r = await fetch(`${API_BASE}/sds/substance/search?q=${encodeURIComponent(q)}&limit=12`);
+    const j = await r.json();
+    // Yalnız gerçek CAS numarası olanlar (Ek-6 indeks no'lu grup kayıtları seçilemez); "-AQ" sulu çözelti kaydı → CAS
+    const seen = new Set();
+    const list = (j.results || []).map(x => ({ ...x, _cas: (String(x.cas || '').match(/^\d{2,7}-\d{2}-\d/) || [''])[0] }))
+      .filter(x => x._cas && !seen.has(x._cas) && seen.add(x._cas)).slice(0, 8);
+    if ((document.getElementById(kaynak + id)?.value?.trim() || '') !== q) return;   // kullanıcı yazmaya devam etti
+    box.innerHTML = list.length
+      ? list.map(x => `<div class="mad-sug-i" onmousedown="event.preventDefault(); _maddeSec(${id}, '${esc(x._cas)}', '${esc(_kisaAd(x.name).replace(/'/g, '’'))}')">
+          <b title="${esc(x.name || '')}">${esc(_kisaAd(x.name) || x._cas)}</b><span>${esc(x._cas)} · ${esc(x.source || '')}</span></div>`).join('')
+      : '<div class="mad-sug-bos">Bulunamadı — İngilizce adını (örn. "citric acid") ya da CAS numarasını deneyin.</div>';
+  } catch (e) { box.innerHTML = '<div class="mad-sug-bos">Arama yapılamadı.</div>'; }
+}
+// Uzun Ek-6 adları: köşeli parantezli açıklama atılır, ilk iki eş anlamlı, en çok 90 karakter
+function _kisaAd(n) {
+  const t = String(n || '').replace(/\[[^\]]*\]/g, '').split(';').map(x => x.trim()).filter(Boolean).slice(0, 2).join('; ');
+  return t.length > 90 ? t.slice(0, 88) + '…' : t;
+}
+async function _maddeSec(id, cas, ad) {
+  const ci = document.getElementById('ci' + id), ni = document.getElementById('ni' + id);
+  if (ci) ci.value = cas;
+  if (ni && ad) ni.value = ad;
+  _sugGizle(id, 0);
+  await onCas(id);
 }
 
 async function onCas(id) {
   const casEl = document.getElementById('ci'+id);
   const cas = casEl?.value?.trim();
   if (!cas || cas.length < 5) return;
+  if (/[A-Za-zÇĞİÖŞÜçğıöşü]/.test(cas)) return;   // ad yazılmış — öneri listesinden seçilecek (CAS sorgusu yapılmaz)
 
   // Loading göstergesi
   if (casEl) { casEl.style.borderColor = '#63b3ed'; casEl.title = 'Sorgulanıyor…'; }
 
   try {
-    const r = await fetch(`${API_BASE}/sds/substance/lookup?cas=${encodeURIComponent(cas)}`);
+    // Ürünün fiziksel hali gönderilir — aynı CAS'ın gaz / sulu çözelti kaydı farklıdır (HCl: gaz H280/H331, hidroklorik
+    // asit H314/H335); hesap sunucuda zaten forma göre yapılıyordu, satırdaki etiketler de aynı kaydı göstersin
+    const _pf = document.getElementById('pform')?.value || '';
+    const r = await fetch(`${API_BASE}/sds/substance/lookup?cas=${encodeURIComponent(cas)}${_pf ? '&form=' + encodeURIComponent(_pf) : ''}`);
     if (!r.ok) {
       if (casEl) { casEl.style.borderColor = 'var(--danger)'; casEl.title = `API hatası: ${r.status}`; }
       return;
@@ -5551,6 +5615,11 @@ function _checkPDFMandatory() {
   if (!/^\d{1,2}[.\/-]\d{1,2}[.\/-]\d{4}$/.test(_v('kduCertDate'))) {
     missing.push({ hard: true, label: 'KDU Belge Tarihi', reason: 'Bölüm 16 — GG.AA.YYYY biçiminde (KKDİK Usul ve Esaslar Md.16(2))' });
   }
+  // Bileşen CAS numarası — sınıflandırma (SEA Ek-6), OEL, taşıma ve atık CAS'a bağlıdır; adla girilen bileşen
+  // hesaba giremez (önceden adla girilen %32 HCl'de H335, Bölüm 3, OEL, tehlikeli atık ve UN1789 kayboluyordu)
+  getComps().filter(c => (parseFloat(c.concMax || c.conc) || 0) > 0 && !/^\d{2,7}-\d{2}-\d$/.test(c.cas || ''))
+    .forEach(c => missing.push({ hard: true, label: `Bileşen CAS numarası: ${c.name || '(adsız)'}`,
+      reason: 'CAS kutusuna maddenin adını yazıp listeden seçin ya da CAS numarasını girin (KKDİK Ek-2 3.2; SEA Md.6)' }));
   // Forma göre zorunlu fiziksel alanlar (KKDİK Ek-2 9.1) — boşsa PDF oluşturulmaz
   _physReqMissing(form).forEach(m => missing.push({
     hard: true, label: m.label + ' (Bölüm 9)',

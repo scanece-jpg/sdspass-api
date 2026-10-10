@@ -805,7 +805,37 @@ def search_substances(query: str, limit: int = 20) -> list:
     cl/ klasöründeki dosyaları tarar — sadece dosya adları (CAS) kontrol edilir,
     isim araması için CAS eşleşmesi + açık dosya okuma yapılır.
     """
-    q = query.strip().lower()
+    def _n(t: str) -> str:
+        # Türkçe büyük/küçük harf: "İ".lower() → "i̇" (birleşik nokta) — nokta atılır; "I" → "ı"
+        return re.sub(r'\s+', ' ', (t or '').replace('I', 'ı').replace('İ', 'i').lower().replace('\u0307', '')).strip()
+
+    def _score(q: str, cas: str, names: list) -> int:
+        """Düşük = iyi. 0 CAS ya da ana ad tam; 1 eş anlamlı tam / ana ad bununla başlıyor; 2 eş anlamlı bununla
+        başlıyor; 3 tam kelime; 4 alt dize; 9 eşleşme yok. Ana ad: ilk adın ';' öncesi (Ek-6 adları eş anlamlıları
+        ';' ile verir — "sodyum hidroksit; kostik soda"); tepkime kütlelerinin içinde geçen ad ana ad sayılmaz."""
+        segs = [_n(x) for n in names for x in str(n).split(';') if _n(x)]
+        if not segs:
+            return 0 if q == cas.lower() else 9
+        ana, diger = segs[0], segs[1:]
+        if q == cas.lower() or q == ana:
+            return 0
+        if q in diger or ana.startswith(q) or cas.lower().startswith(q):
+            return 1
+        if any(x.startswith(q) for x in diger):
+            return 2
+        if any(re.search(r'(^|[\s,(\-])' + re.escape(q) + r'($|[\s,)\-])', x) for x in segs):
+            return 3
+        if q in cas.lower() or any(q in x for x in segs):
+            return 4
+        # Boşluk farkı (Ek-6: "hidrojenperoksit çözeltisi" ↔ "hidrojen peroksit")
+        qs = q.replace(' ', '')
+        if ana.replace(' ', '').startswith(qs):
+            return 1
+        if any(qs in x.replace(' ', '') for x in segs):
+            return 4
+        return 9
+
+    q = _n(query)
     if len(q) < 2:
         return []
 
@@ -821,20 +851,18 @@ def search_substances(query: str, limit: int = 20) -> list:
         for cas, entry in db_dict.items():
             if '_alias' in entry:
                 continue
-            names = entry.get('names', [])
-            names_clean = [n.lower().rstrip('; ').strip() for n in names]
-            cas_l = cas.lower()
-            if q in cas_l or q in ' '.join(names).lower():
+            names = list(entry.get('names', [])) + [entry.get('name_en', '')] + list(entry.get('synonyms') or [])
+            sc = _score(q, cas, [n for n in names if n])
+            if sc < 9:
                 r = _build_search_result(cas, entry, priority, src)
-                # Tam eşleşme = 0, CAS eşleşmesi = 0, alt dize = 1
-                exact = (q == cas_l) or any(q == nc for nc in names_clean)
-                r['_mscore'] = 0 if exact else 1
+                r['_mscore'] = sc
                 results.append(r)
 
     # Custom'a da bak
     for cas, data in _load_custom().items():
         name = (data.get('name') or '').lower()
-        if q in cas.lower() or q in name:
+        sc = _score(q, cas, [data.get('name') or '', data.get('name_tr') or ''])
+        if sc < 9:
             r = {
                 'cas': cas, 'name': data.get('name', ''),
                 'ec_no': data.get('ec_no', ''),
@@ -844,11 +872,74 @@ def search_substances(query: str, limit: int = 20) -> list:
                 'hazard_count': len(data.get('hazards', [])),
                 'h_codes': [h['h_code'] for h in data.get('hazards', []) if h.get('h_code')],
             }
-            r['_mscore'] = 0 if q == name.rstrip('; ').strip() else 1
+            r['_mscore'] = sc
             results.append(r)
 
-    results.sort(key=lambda x: (x.get('_mscore', 1), x['source_priority'], x['name'].lower()))
+    # Çok dilli ad sözlüğü (TR / EN) — Ek-6 / veritabanı kaydında olmayan adlar için
+    try:
+        _names = json.load(open(_NAMES_PATH, encoding='utf-8'))
+    except Exception:
+        _names = {}
+    _have = {r['cas'] for r in results}
+    for cas, nm in _names.items():
+        if cas in _have or not isinstance(nm, dict):
+            continue
+        sc = _score(q, cas, [nm.get('tr') or '', nm.get('en') or ''])
+        if sc < 9:
+            results.append({'cas': cas, 'name': nm.get('tr') or nm.get('en') or '', 'ec_no': '',
+                            'sea_ek6': False, 'annex_vi': False, 'source': 'Ad sözlüğü', 'source_priority': 3,
+                            'hazard_count': None, 'h_codes': [], '_mscore': sc})
+
+    # Aynı CAS bir kez (öncelikli kaynak); kısa ad (genel madde) uzun addan (türev / karışım) önce
+    results.sort(key=lambda x: (x.get('_mscore', 9), x['source_priority'], len(x.get('name') or ''), (x.get('name') or '').lower()))
+    _seen, _out = set(), []
+    for r in results:
+        if r['cas'] in _seen:
+            continue
+        _seen.add(r['cas'])
+        _out.append(r)
+    results = _out
     return results[:limit]
+
+
+_ECHA_NAME_CACHE: Dict[str, list] = {}
+
+
+def echa_name_search(query: str, limit: int = 6) -> list:
+    """Yerel veritabanında bulunamayan ad için ECHA madde araması (tek istek, kullanıcının yazdığı ad — toplu çekim
+    değil). Yalnız tek CAS numarası taşıyan kayıtlar döner (çok CAS'lı genel kayıtta hangi CAS'ın doğru olduğu belli
+    değildir). İngilizce / IUPAC adlarıyla çalışır. Sonuç bellekte tutulur."""
+    q = (query or '').strip()
+    if len(q) < 4 or not re.search(r'[A-Za-zÇĞİÖŞÜçğıöşü]', q):
+        return []
+    key = q.lower()
+    if key in _ECHA_NAME_CACHE:
+        return _ECHA_NAME_CACHE[key]
+    out = []
+    try:
+        import httpx
+        r = httpx.get('https://chem.echa.europa.eu/api-substance/v1/substance',
+                      params={'pageIndex': 1, 'pageSize': 15, 'searchText': q},
+                      headers={'Accept': 'application/json', 'User-Agent': 'Mozilla/5.0 (SDSPass)'}, timeout=8)
+        seen = set()
+        for it in (r.json().get('items') or []):
+            si = it.get('substanceIndex') or {}
+            cas = [c for c in (si.get('casNumber') or []) if re.fullmatch(r'\d{2,7}-\d{2}-\d', c or '')]
+            if len(cas) != 1 or cas[0] in seen:
+                continue
+            seen.add(cas[0])
+            name = si.get('rmlName') or ''
+            out.append({'cas': cas[0], 'name': name, 'ec_no': (si.get('ecNumber') or [''])[0] if isinstance(si.get('ecNumber'), list) else (si.get('ecNumber') or ''),
+                        'sea_ek6': False, 'annex_vi': False, 'source': 'ECHA (ad araması)', 'source_priority': 5,
+                        'hazard_count': None, 'h_codes': [],
+                        '_mscore': 0 if name.lower() == key else 1 if name.lower().startswith(key) else 3})
+        out.sort(key=lambda x: (x['_mscore'], len(x['name'])))
+        out = out[:limit]
+    except Exception as e:
+        print(f'[ECHA ad araması] {q}: {e}')
+        return []
+    _ECHA_NAME_CACHE[key] = out
+    return out
 
 
 def _build_search_result(cas: str, entry: dict, priority: int, src: str) -> dict:

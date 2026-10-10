@@ -5179,7 +5179,7 @@ function _checkPDFMandatory() {
   }
   // 2. Renk
   if (!_reqIds.has('tf_color') && !document.getElementById('tf_color')?.value?.trim()) {
-    missing.push({ label: 'Renk', reason: "Bölüm 9(a)'da renk belirtilmeyecek — bilinen rengi yazmanız önerilir" });
+    missing.push({ hard: true, label: 'Renk', reason: "Bölüm 9(a) — KKDİK Ek-2 9.1(a): fiziksel hal ve renk belirtilir (zorunlu)" });
   }
   // 3. Koku
   if (!_reqIds.has('tf_odor') && !document.getElementById('tf_odor')?.value?.trim()) {

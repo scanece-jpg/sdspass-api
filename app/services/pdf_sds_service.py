@@ -2003,6 +2003,13 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
                 'Serin ve iyi havalandırılan bir yerde, doğrudan güneş ışığından ve ısı kaynaklarından uzakta '
                 'saklayın.' if lang == 'TR' else
                 'Store in a cool, well-ventilated place away from direct sunlight and sources of heat.']
+        # KKDİK Ek-2 A 7.2(a)(i)(iii)(vi): alevlenir üründe patlayıcı atmosfer, alevlenirlik ve tutuşturucu kaynaklar
+        # (elektrikli ekipman dâhil) — SEA Ek-4 P210 ve P241 resmî metinleri
+        if _h72 & {'H220', 'H221', 'H222', 'H223', 'H224', 'H225', 'H226', 'H228'}:
+            from app.services.codes_i18n import get_p as _get_p72
+            _sec72_bullets = list(_sec72_bullets) + [
+                ('Depolama: ' if lang == 'TR' else 'Storage: ') + _get_p72(lang, 'P210'),
+                ('Depolama alanında: ' if lang == 'TR' else 'In the storage area: ') + _get_p72(lang, 'P241')]
         # KKDİK Ek-2 A 7.2(d)(i)(ii): havalandırma ve depo tasarımı (tutma)
         if _h72 and _sec_form not in ('solid', 'powder', 'gas'):
             _sec72_bullets = list(_sec72_bullets) + [

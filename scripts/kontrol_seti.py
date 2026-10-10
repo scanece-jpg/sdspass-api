@@ -953,6 +953,11 @@ def kural_testleri(c) -> int:
          and tr_road([('64-17-5', 30), ('67-64-1', 30), (W, 40)], user_fp=-5, user_bp=60)[0] == 'UN1993'),
         ('ADR 2.1.3.4.1: brom içeren karışım her zaman UN1744 (brom/brom çözeltisi) girişinde',
          lambda: tr_road([('7726-95-6', 5), ('67-56-1', 20), (W, 75)], user_fp=30)[0] == 'UN1744'),
+        ('KKDİK Ek-2 7.2(a)(iii)(vi): alevlenir üründe 7.2 depolamada tutuşturucu kaynaklar ve elektrikli ekipman '
+         '(SEA Ek-4 P210, P241 resmî metni)',
+         lambda: (lambda t: 'Depolama: Isıdan, sıcak yüzeylerden, kıvılcımdan, açık alevden ve diğer tutuşturucu kaynaklardan' in t
+                  and 'Depolama alanında: Patlamaya dayanıklı (elektrikli' in t)(
+             _pdf_text(c, [('108-88-3', 100)]))),
     ]
     hata = 0
     for ad, f in testler:

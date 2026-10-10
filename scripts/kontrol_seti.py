@@ -314,6 +314,17 @@ def _hesap_testi() -> bool:
         ok &= c.get(f"/api/v1/hesap/firmalar/{f['id']}/gbf/{g['id']}", headers=H).json()['form']['fields']['productName']['v'] == 'Deneme Tiner'
         ok &= c.get(f"/api/v1/hesap/firmalar/{f['id']}/gbf/{g['id']}/pdf", headers=H).content.startswith(b'%PDF')
         ok &= c.get(f"/api/v1/hesap/firmalar/{f['id']}/gbf/..%2Fx", headers=H).status_code in (400, 404)
+        # Tedarikçi GBF'si: boş okuma kaydedilmez; tedarikçinin kendi H kodları ve KKDİK no saklanır
+        T = f"/api/v1/hesap/firmalar/{f['id']}/tedarikci"
+        ok &= c.post(T, headers=H, json={'dosya_adi': 'x.pdf', 'pdf_b64': pdf, 'veri': {}}).status_code == 422
+        t = c.post(T, headers=H, json={'dosya_adi': 'TOLUEN.pdf', 'pdf_b64': pdf, 'veri': {
+            'supplier': {'company': 'Örnek Tedarikçi', 'product_name': 'Toluen', 'kkdik_no': 'K-1'},
+            'components': [{'cas': '108-88-3', 'hCodes': ['H225', 'H412'], 'kkdik_no': 'K-1'}]}}).json()
+        ok &= t.get('id') == 'ornek-tedarikci__toluen'
+        ok &= c.get(T, headers=H).json()['tedarikci'][0]['kkdik'] is True
+        ok &= c.get(f"{T}/{t['id']}", headers=H).json()['components'][0]['hCodes'] == ['H225', 'H412']
+        ok &= c.get(f"{T}/{t['id']}/pdf", headers=H).content.startswith(b'%PDF')
+        ok &= c.get(T).status_code == 401
         return bool(ok)
     finally:
         A.BASE, A.persist = eski[0], eski[1]

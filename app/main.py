@@ -1838,7 +1838,8 @@ async def parse_supplier_sds(request: Request):
                 "company": "Firma Adı",
                 "product_name": "Ürün Adı",
                 "rev_no": "3",
-                "rev_date": "2024-05-01"
+                "rev_date": "2024-05-01",
+                "kkdik_no": None
             },
             "components": [
                 {
@@ -1851,7 +1852,11 @@ async def parse_supplier_sds(request: Request):
                     "hCodes": ["H314", "H335"],
                     "ld50_oral": 300.0,
                     "ld50_dermal": None,
-                    "lc50_inhal": None
+                    "lc50_inhal": None,
+                    "kkdik_no": None,
+                    "hClasses": ["Skin Corr. 1B", "STOT SE 3"],
+                    "eco": {"lc50_fish": None, "ec50_daphnia": None, "erc50_algae": None,
+                            "noec_fish": None, "noec_daphnia": None, "biodegradable": None}
                 }
             ],
             "phys_props": {
@@ -1889,6 +1894,13 @@ async def parse_supplier_sds(request: Request):
 - ld50_oral: Bölüm 11'deki oral LD50 değeri mg/kg cinsinden sayısal (yoksa null)
 - ld50_dermal: Bölüm 11'deki dermal LD50 değeri mg/kg cinsinden sayısal (yoksa null)
 - lc50_inhal: Bölüm 11'deki inhalasyon LC50 değeri mg/L/4h cinsinden sayısal (yoksa null)
+- kkdik_no: bileşenin KKDİK kayıt numarası (Bölüm 3'te "KKDİK kayıt no / Kayıt numarası" — belgede yazdığı gibi;
+  REACH kayıt numarası (01-...) KKDİK numarası değildir, ona null yaz)
+- supplier.kkdik_no: ürün tek maddeyse Bölüm 1.1 / 3'teki KKDİK kayıt numarası (yoksa null)
+- hClasses: hCodes ile aynı sırada, belgedeki zararlılık sınıfı ve kategorisi (örn. "Aquatic Chronic 3"; yoksa null)
+- eco: Bölüm 12'deki bu bileşene ait değerler, mg/L sayısal (yoksa null): lc50_fish (balık 96 saat LC50),
+  ec50_daphnia (daphnia 48 saat EC50), erc50_algae (alg 72 saat ErC50/EC50), noec_fish / noec_daphnia (kronik NOEC),
+  biodegradable (true: kolayca biyobozunur, false: kolayca biyobozunur değil, null: belirtilmemiş)
 - phys_props: Bölüm 9'daki fiziksel ve kimyasal özellikler (yoksa null):
   - appearance: görünüm/form (renk + fiziksel hal, örn. "beyaz katı toz")
   - color: renk
@@ -1914,7 +1926,7 @@ Sadece JSON:"""
 
         resp = client.messages.create(
             model="claude-haiku-4-5-20251001",
-            max_tokens=4096,
+            max_tokens=8192,   # KKDİK no + Bölüm 12 alanları eklendi (çok bileşenli GBF'de 4096 kesiliyordu riski)
             messages=[{"role": "user", "content": prompt}]
         )
 

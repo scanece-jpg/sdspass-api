@@ -250,3 +250,98 @@ def gbf_pdf(fid: str, gid: str, authorization: Optional[str] = Header(None)):
     from urllib.parse import quote
     return Response(p.read_bytes(), media_type='application/pdf',
                     headers={'Content-Disposition': f"attachment; filename*=UTF-8''{quote(name)}"})
+
+
+# ── Tedarikçi GBF'leri: tedarikci_gbf/<firma>__<ürün>.json (+ .pdf) ─────────────────────────────
+# Panel PDF'i /sds/parse-supplier ile okur; okunan veri (tedarikçinin kendi H kodları, KKDİK no, Bölüm 9/11/12)
+# ve PDF burada saklanır. Aynı tedarikçi + ürün yeniden yüklenirse üzerine yazılır (güncel GBF geçerli).
+
+def _ted_dir(hesap: str, fid: str) -> Path:
+    d = firma_dir(hesap, fid)
+    if _read_firma(d) is None:
+        raise HTTPException(status_code=404, detail='Firma bulunamadı.')
+    return d / 'tedarikci_gbf'
+
+
+def _tid_ok(tid: str) -> str:
+    if not re.match(r'^[a-z0-9][a-z0-9-]{0,59}__[a-z0-9][a-z0-9-]{0,59}$', tid or ''):
+        raise HTTPException(status_code=400, detail='Geçersiz tedarikçi GBF kimliği.')
+    return tid
+
+
+@router.post('/firmalar/{fid}/tedarikci')
+def tedarikci_kaydet(fid: str, body: dict = Body(...), authorization: Optional[str] = Header(None)):
+    import base64
+    h = hesap_of(authorization)
+    d = _ted_dir(h, fid)
+    veri = body.get('veri') or {}
+    sup = veri.get('supplier') or {}
+    if not (veri.get('components') or sup.get('company') or sup.get('product_name')):
+        raise HTTPException(status_code=422, detail='GBF okunamadı (bileşen / tedarikçi bilgisi yok) — kaydedilmedi.')
+    dosya = str(body.get('dosya_adi') or 'tedarikci.pdf')[:200]
+    tid = _tid_ok(f"{slug(sup.get('company') or 'tedarikci')}__{slug(sup.get('product_name') or dosya.rsplit('.', 1)[0])}")
+    pdf = None
+    if body.get('pdf_b64'):
+        try:
+            pdf = base64.b64decode(body['pdf_b64'], validate=True)
+        except Exception:
+            raise HTTPException(status_code=422, detail='PDF okunamadı.')
+        if not pdf.startswith(b'%PDF') or len(pdf) > 15_000_000:
+            raise HTTPException(status_code=422, detail='Geçersiz PDF.')
+    now = time.strftime('%Y-%m-%d %H:%M:%S')
+    rec = {'id': tid, 'dosya_adi': dosya, 'kayit': now, 'pdf': pdf is not None,
+           'supplier': sup, 'components': veri.get('components') or [], 'phys_props': veri.get('phys_props'),
+           'phys_props_applicable': bool(veri.get('phys_props_applicable')), 'warnings': veri.get('warnings') or []}
+    d.mkdir(parents=True, exist_ok=True)
+    if pdf is not None:
+        pp = d / f'{tid}.pdf'
+        pp.write_bytes(pdf)
+        persist(pp)
+    _write_json(d / f'{tid}.json', rec)
+    return {'id': tid, 'supplier': sup, 'kayit': now}
+
+
+@router.get('/firmalar/{fid}/tedarikci')
+def tedarikci_listesi(fid: str, authorization: Optional[str] = Header(None)):
+    h = hesap_of(authorization)
+    d = _ted_dir(h, fid)
+    out = []
+    for p in (d.glob('*.json') if d.is_dir() else []):
+        try:
+            r = json.loads(p.read_text(encoding='utf-8'))
+        except Exception:
+            continue
+        sup = r.get('supplier') or {}
+        comps = r.get('components') or []
+        out.append({'id': r.get('id'), 'firma': sup.get('company') or '', 'urun': sup.get('product_name') or '',
+                    'rev_no': sup.get('rev_no') or '', 'rev_date': sup.get('rev_date') or '', 'kayit': r.get('kayit'),
+                    'pdf': r.get('pdf'), 'bilesen': len(comps),
+                    'kkdik': bool(sup.get('kkdik_no') or any(c.get('kkdik_no') for c in comps))})
+    out.sort(key=lambda x: (x['firma'].translate(_TR).lower(), x['urun'].translate(_TR).lower()))
+    return {'tedarikci': out}
+
+
+@router.get('/firmalar/{fid}/tedarikci/{tid}')
+def tedarikci_getir(fid: str, tid: str, authorization: Optional[str] = Header(None)):
+    h = hesap_of(authorization)
+    p = _ted_dir(h, fid) / f'{_tid_ok(tid)}.json'
+    if not p.exists():
+        raise HTTPException(status_code=404, detail='Tedarikçi GBF\'si bulunamadı.')
+    return json.loads(p.read_text(encoding='utf-8'))
+
+
+@router.get('/firmalar/{fid}/tedarikci/{tid}/pdf')
+def tedarikci_pdf(fid: str, tid: str, authorization: Optional[str] = Header(None)):
+    from fastapi.responses import Response
+    from urllib.parse import quote
+    h = hesap_of(authorization)
+    d = _ted_dir(h, fid)
+    p = d / f'{_tid_ok(tid)}.pdf'
+    if not p.exists():
+        raise HTTPException(status_code=404, detail='Bu kayıt için PDF yok.')
+    try:
+        name = json.loads((d / f'{tid}.json').read_text(encoding='utf-8')).get('dosya_adi') or f'{tid}.pdf'
+    except Exception:
+        name = f'{tid}.pdf'
+    return Response(p.read_bytes(), media_type='application/pdf',
+                    headers={'Content-Disposition': f"attachment; filename*=UTF-8''{quote(name)}"})

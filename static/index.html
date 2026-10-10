@@ -708,6 +708,7 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
         </div>
         <div id="firmaMsg" style="font-size:10px;color:var(--text3);margin-top:4px"></div>
         <div id="firmaGbf" style="margin-top:8px"></div>
+        <div id="firmaTed" style="margin-top:8px"></div>
       </div>
     </div>
 
@@ -1423,7 +1424,7 @@ async function _firmaSec(id) {
   window._firmaId = id || '';
   try { localStorage.setItem('sdspass_firma', window._firmaId); } catch (e) {}
   document.getElementById('firmaGuncelBtn').disabled = !id;
-  if (!id) { _firmaMsg(''); _firmaGbfListe(); return; }
+  if (!id) { _firmaMsg(''); _firmaGbfListe(); _firmaTedListe(); return; }
   try {
     const f = await _hesapApi('/firmalar/' + encodeURIComponent(id));
     const set = (el, v) => { const x = document.getElementById(el); if (x) x.value = v || ''; };
@@ -1431,7 +1432,7 @@ async function _firmaSec(id) {
     set('suppEmail', f.email); set('suppContact', f.contact); set('supplierEmergencyTel', f.emergency_tel);
     const r = document.getElementById(f.emergency_hours === 'business' ? 'telBusiness' : 'tel24_7'); if (r) r.checked = true;
     _firmaMsg(`Bölüm 1.3 / 1.4 "${f.name}" kaydından dolduruldu.`);
-    _firmaGbfListe();
+    _firmaGbfListe(); _firmaTedListe();
   } catch (e) { _firmaMsg('Firma okunamadı: ' + e.message, true); }
 }
 async function _firmaKaydet(yeni) {
@@ -1446,7 +1447,7 @@ async function _firmaKaydet(yeni) {
     window._firmaId = f.id;
     try { localStorage.setItem('sdspass_firma', f.id); } catch (e) {}
     await _hesapYukle();
-    await _firmaGbfListe();
+    await _firmaGbfListe(); await _firmaTedListe();
     _firmaMsg(yeni ? `"${f.name}" kaydedildi.` : `"${f.name}" güncellendi.`);
   } catch (e) { _firmaMsg(e.message, true); }
 }
@@ -1516,6 +1517,67 @@ async function _gbfFirmayaKaydet(resJson, payload, productName) {
     await _firmaGbfListe();
     const f = _firmalar.find(x => x.id === window._firmaId); if (f) { f.uretilen_gbf = (_gbfListe || []).length; _firmaListeCiz(); }
   } catch (e) { _firmaMsg('GBF firmaya kaydedilemedi: ' + e.message, true); }
+}
+// ── Tedarikçi GBF'leri — firma klasörüne kayıt, listeden formüle ekleme ───────────────
+function _fileB64(file) {
+  return new Promise((res, rej) => { const r = new FileReader();
+    r.onload = () => res(String(r.result).split(',')[1] || ''); r.onerror = rej; r.readAsDataURL(file); });
+}
+async function _tedFirmayaKaydet(file, data) {
+  if (!window._firmaId || !_hesapKey()) return;
+  try {
+    const r = await _hesapApi('/firmalar/' + encodeURIComponent(window._firmaId) + '/tedarikci', { method: 'POST',
+      body: JSON.stringify({ dosya_adi: file.name, pdf_b64: await _fileB64(file), veri: data }) });
+    _firmaMsg(`Tedarikçi GBF'si firmaya kaydedildi: ${[r.supplier?.company, r.supplier?.product_name].filter(Boolean).join(' — ') || file.name}`);
+    await _firmaTedListe();
+    const f = _firmalar.find(x => x.id === window._firmaId); if (f) { f.tedarikci_gbf = (_tedListe || []).length; _firmaListeCiz(); }
+  } catch (e) { _firmaMsg('Tedarikçi GBF\'si kaydedilemedi: ' + e.message, true); }
+}
+let _tedListe = [];
+async function _firmaTedListe() {
+  const box = document.getElementById('firmaTed'); if (!box) return;
+  if (!window._firmaId) { box.innerHTML = ''; return; }
+  try {
+    _tedListe = (await _hesapApi('/firmalar/' + encodeURIComponent(window._firmaId) + '/tedarikci')).tedarikci || [];
+  } catch (e) { box.innerHTML = ''; return; }
+  const esc = t => String(t ?? '').replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+  const btn = 'padding:2px 8px;border-radius:6px;border:1px solid var(--border2);background:none;color:var(--text2);cursor:pointer;font-size:10px';
+  box.innerHTML = !_tedListe.length
+    ? '<div style="font-size:10px;color:var(--text3)">Kayıtlı tedarikçi GBF\'si yok. Bileşenler bölümünden tedarikçi GBF\'si yüklediğinizde otomatik kaydedilir.</div>'
+    : `<div style="font-size:10px;color:var(--text3);margin-bottom:4px">Tedarikçi GBF'leri (${_tedListe.length})</div>` +
+      `<div style="max-height:180px;overflow:auto;display:flex;flex-direction:column;gap:3px">` +
+      _tedListe.map(t => `<div style="display:flex;gap:6px;align-items:center;font-size:11px">
+        <span style="flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${esc(t.firma)} — ${esc(t.urun)}">${esc(t.urun || '—')} <span style="color:var(--text3)">· ${esc(t.firma)}</span></span>
+        ${t.kkdik ? '<span title="KKDİK kayıt numarası belirtilmiş" style="font-size:9px;padding:1px 5px;border-radius:4px;border:1px solid var(--border2);color:var(--text3)">KKDİK</span>' : ''}
+        <span style="color:var(--text3);font-family:var(--mono);font-size:10px">${esc(t.rev_date)}</span>
+        <button type="button" style="${btn}" onclick="_tedFormule('${esc(t.id)}')">Formüle ekle</button>
+        ${t.pdf ? `<button type="button" style="${btn}" onclick="_tedPdf('${esc(t.id)}')">PDF</button>` : ''}
+      </div>`).join('') + '</div>';
+}
+async function _tedFormule(tid) {
+  try {
+    const r = await _hesapApi('/firmalar/' + encodeURIComponent(window._firmaId) + '/tedarikci/' + encodeURIComponent(tid));
+    const sup = r.supplier || {};
+    const label = [sup.company, sup.product_name, sup.rev_no ? 'Rev.' + sup.rev_no : null, sup.rev_date].filter(Boolean).join(' — ') || r.dosya_adi;
+    window._supplierParseResults = window._supplierParseResults || [];
+    window._supplierParseResults.push({ fileName: r.dosya_adi, label, components: r.components || [], warnings: r.warnings || [],
+      phys_props: r.phys_props || null, phys_props_applicable: !!r.phys_props_applicable });
+    const status = document.getElementById('supplierParseStatus');
+    status.style.display = 'block';
+    _renderSupplierForm(status);
+    status.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    _firmaMsg(`"${label}" formül listesine alındı — kullanım yüzdesini girip Uygula'ya basın.`);
+  } catch (e) { _firmaMsg('Tedarikçi GBF\'si okunamadı: ' + e.message, true); }
+}
+async function _tedPdf(tid) {
+  try {
+    const r = await fetch('/api/v1/hesap/firmalar/' + encodeURIComponent(window._firmaId) + '/tedarikci/' + encodeURIComponent(tid) + '/pdf',
+                          { headers: { 'Authorization': 'Bearer ' + _hesapKey() } });
+    if (!r.ok) throw new Error((await r.json().catch(() => ({}))).detail || ('HTTP ' + r.status));
+    const url = URL.createObjectURL(await r.blob());
+    const a = document.createElement('a'); a.href = url; a.download = tid + '.pdf'; a.click();
+    URL.revokeObjectURL(url);
+  } catch (e) { _firmaMsg('PDF indirilemedi: ' + e.message, true); }
 }
 let _gbfListe = [];
 async function _firmaGbfListe() {
@@ -2717,6 +2779,7 @@ async function parseSupplerSds(input) {
       if (!res.ok) throw new Error(`${file.name}: ${data.detail || 'Sunucu hatası'}`);
       const sup = data.supplier || {};
       const label = [sup.company, sup.product_name, sup.rev_no ? 'Rev.'+sup.rev_no : null, sup.rev_date].filter(Boolean).join(' — ') || file.name;
+      _tedFirmayaKaydet(file, data);
       return { fileName: file.name, label, components: data.components || [], warnings: data.warnings || [],
                phys_props: data.phys_props || null, phys_props_applicable: data.phys_props_applicable || false };
     }));

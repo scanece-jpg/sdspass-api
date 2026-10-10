@@ -16,3 +16,7 @@ data/substances_unified.json.bak
 eski/
 
 data/echa_phys/
+
+# ADR Tablo A → CAS eşleme ara dosyaları
+scripts/adr_cas_map/*.json
+scripts/adr_cas_map/*.txt

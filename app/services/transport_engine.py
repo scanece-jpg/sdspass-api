@@ -782,19 +782,12 @@ def classify(h_codes: List[str], form: str = 'liquid',
         triggering = [c for c in _comps if set(c.h_codes) & _TRANSPORT_TRIGGER_H]
         dominant   = max(_comps, key=lambda c: c.conc)
 
-        _prod_state = 'solid' if is_solid else ('gas' if form == 'gas' else 'liquid')
-        _details = None
-        if len(triggering) == 1:
+        if len(triggering) == 1 and triggering[0] is dominant:
+            # §3.1.3.2: tek tetikleyici bileşen + o bileşen baskın → adlı giriş zorunlu
             _t = triggering[0]
+            _prod_state = 'solid' if is_solid else ('gas' if form == 'gas' else 'liquid')
             _details = _lookup_by_cas(_t.cas, concentration=_t.conc, physical_state=_prod_state,
                                       corrosive='H314' in set(h_codes or []))
-            if _details and _t is not dominant:
-                # ADR 2.1.3.3: adlı madde + ADR'ye tabi olmayan maddeler (örn. su) → adlı giriş; karışım o
-                # sınıfın ölçütünü hâlâ karşılamalı. Sınıf 8 çözeltileri aşağıdaki Sınıf 8 yolunda (PG hesabıyla) işlenir.
-                _mix_cls = {H_TO_ADR[h]['class'] for h in (h_codes or []) if h in H_TO_ADR}
-                if str(_details.get('class')) == '8' or str(_details.get('class')) not in _mix_cls:
-                    _details = None
-        if len(triggering) == 1:
             if _details:
                 # §3.1.3.2(c): spesifik girişin fiziksel hali ürünle uyuşmalı.
                 # Uyuşmazlık (ör. katı TCCA girişi ama sıvı ürün) → B.N.O.'ya düş.
@@ -944,6 +937,39 @@ def classify(h_codes: List[str], form: str = 'liquid',
         sub_class = subs[0]['class'] if subs else None
     if corr_note and '8' in (primary['class'], sub_class):
         un_entry['note'] = ((un_entry.get('note') or '') + ' ' + corr_note).strip()
+
+    # ADR 2.1.3.3 — Tablo A'da adıyla geçen tek bir madde + ADR'ye tabi olmayan maddeler (örn. su): adlı giriş
+    # kullanılır; ANCAK karışımın sınıfı, yan tehlikeleri (sınıflandırma kodu) ve ambalaj grubu Tablo A'daki girişle
+    # aynı olmalıdır (2.1.3.3 (c)) — değilse B.B.B. kalır. Sınıf 8 adlı girişleri yukarıdaki Sınıf 8 yolunda,
+    # adlı karışım girişleri (UN 3149/1796/1786) _get_un_entry'de işlenir. "İz" eşiği: SEA Ek-1 1.1.2.2.1 ilgili
+    # bileşen sınırı (akut toksisite Kat.1–3 için %0,1, diğerleri %1).
+    if (_comps and not un_entry.get('class') and str(primary['class']) not in ('8', '9')
+            and not str(primary['class']).startswith('2') and form not in ('aerosol', 'gas')):
+        _acute13 = {'H300', 'H301', 'H310', 'H311', 'H330', 'H331'}
+        _trig = [c for c in _comps if set(c.h_codes) & _TRANSPORT_TRIGGER_H
+                 and (c.conc or 0) >= (0.1 if set(c.h_codes) & _acute13 else 1.0)]
+        if len(_trig) == 1:
+            _ps = 'solid' if is_solid else 'liquid'
+            _d = _lookup_by_cas(_trig[0].cas, concentration=_trig[0].conc, physical_state=_ps,
+                                corrosive='H314' in h_set)
+            if _d and (not _d.get('physical_state') or _d['physical_state'] == _ps) \
+                    and str(_d.get('class')) == str(primary['class']):
+                from app.services.transport_adr_service import _load as _adr_load, get_adr_details as _gad
+                _ent = _adr_load().get(_d['un_no'].replace(' ', ''), {})
+                _tpgs = set((_ent.get('packing_groups') or {}).keys()) or {_ent.get('packing_group')}
+                _labs = [x.strip() for x in (_d.get('labels') or [str(_d.get('class'))]) if x]
+                _want = [str(primary['class'])] + [str(x['class']) for x in subs if str(x['class']) != '9']
+                _pg = _d['packing_group'] if _d.get('pg_fixed') else primary['pg']
+                if sorted(set(_labs)) == sorted(set(_want)) and _pg in _tpgs:
+                    _dd = _d if _pg == _d.get('packing_group') else {**_d, **_gad(_d['un_no'], _pg)}
+                    un_entry = {
+                        'un': _dd['un_no'], 'label': _dd.get('name_tr') or _dd.get('name', ''),
+                        'pg': _pg, 'kemler': _dd.get('kemler'), 'tunnel': _dd.get('tunnel_code'),
+                        'note': (f"ADR 2.1.3.3: {_trig[0].cas} Tablo A'da adıyla geçiyor ({_dd['un_no']}); karışımın "
+                                 f"sınıfı ({primary['class']}), yan tehlikeleri ve ambalaj grubu ({_pg}) Tablo A girişiyle aynı "
+                                 "— adlı giriş kullanılır." + (f" {_d['seed_note']}" if _d.get('seed_note') else '')),
+                    }
+                    primary = {**primary, 'pg': _pg}
 
     # UN 3082 — ADR 3.3.1 Özel Hüküm 375. Önceki not "kinematik viskozite ≥ 2500 mm²/s" şartı arıyordu (hesaplanmış
     # viskoziteyle); ADR 2025 ÖH 375 metninde viskozite şartı yoktur — muafiyet ambalaj miktarına bağlıdır (2026-10-09).

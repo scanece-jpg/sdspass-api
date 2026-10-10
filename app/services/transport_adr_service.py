@@ -96,6 +96,16 @@ _SEED_ENTRIES: dict = {
         {'min_conc': 50, 'max_conc': 80,  'un': 'UN2790', 'pg': 'II',  'physical_state': 'liquid', 'pg_fixed': True},
         {'min_conc': 10, 'max_conc': 50,  'un': 'UN2790', 'pg': 'III', 'physical_state': 'liquid', 'min_exclusive': True, 'pg_fixed': True},
     ],
+    '64-18-6': [  # Formik asit — Tablo A: UN1779 >%85 (8+3); UN3412 %10–85 PG II, %5–<10 PG III
+        {'min_conc': 85, 'max_conc': 100, 'un': 'UN1779', 'pg': 'II',  'physical_state': 'liquid', 'min_exclusive': True, 'pg_fixed': True},
+        {'min_conc': 10, 'max_conc': 85,  'un': 'UN3412', 'pg': 'II',  'physical_state': 'liquid', 'pg_fixed': True},
+        {'min_conc': 5,  'max_conc': 10,  'un': 'UN3412', 'pg': 'III', 'physical_state': 'liquid', 'pg_fixed': True},
+    ],
+    '7664-39-3': [  # Hidrojen florür — susuz UN1052 (gaz); hidroflorik asit UN1790: >%60 PG I, ≤%60 PG II (8+6.1)
+        {'min_conc': 0,  'max_conc': 100, 'un': 'UN1052', 'pg': '',    'physical_state': 'gas'},
+        {'min_conc': 60, 'max_conc': 100, 'un': 'UN1790', 'pg': 'I',   'physical_state': 'liquid', 'min_exclusive': True, 'pg_fixed': True},
+        {'min_conc': 0,  'max_conc': 60,  'un': 'UN1790', 'pg': 'II',  'physical_state': 'liquid', 'pg_fixed': True},
+    ],
     '141-43-5':  {'un': 'UN2491', 'pg': 'III', 'physical_state': 'liquid'},   # Etanolamin / çözeltisi
     '7646-85-7': [{'min_conc': 0, 'max_conc': 100, 'un': 'UN1840', 'pg': 'III', 'physical_state': 'liquid'},   # Çinko klorür çözeltisi
                   {'min_conc': 0, 'max_conc': 100, 'un': 'UN2331', 'pg': 'III', 'physical_state': 'solid'}],   # susuz
@@ -213,6 +223,15 @@ def _build_cas_map() -> dict:
     Dosyaya yazılmaz.
     """
     mapping: dict = dict(_SEED_ENTRIES)
+
+    # Tablo A tek madde girişlerinin CAS eşlemesi (data/adr_cas_map.json, 2026-10-10) — seed'ler önceliklidir
+    _gen = _DATA_DIR / 'adr_cas_map.json'
+    if _gen.exists():
+        with open(_gen, encoding='utf-8') as f:
+            for cas, rows in (json.load(f).get('harita') or {}).items():
+                if cas not in mapping:
+                    rows = [{k: v for k, v in r.items() if not k.startswith('_')} for r in rows]
+                    mapping[cas] = rows if len(rows) > 1 or 'min_conc' in rows[0] else rows[0]
 
     sub_path = _DATA_DIR / 'substance_db.json'
     if not sub_path.exists():
@@ -344,7 +363,7 @@ def lookup_by_cas(cas: str, concentration: Optional[float] = None,
 def class8_pg_for_cas(cas: str) -> Optional[str]:
     """Tablo A'da adıyla yer alan maddenin Sınıf 8 ambalaj grubu (birden çok giriş varsa en ağırı).
     ADR 2.2.8.1.6.3 hesabında bileşenin "atanmış" PG'si olarak kullanılır. Yoksa None."""
-    entry = _SEED_ENTRIES.get(str(cas).strip())
+    entry = _get_cas_map().get(str(cas).strip())   # seed + Tablo A CAS eşlemesi
     if not entry:
         return None
     best = None

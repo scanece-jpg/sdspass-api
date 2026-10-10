@@ -1,0 +1,3144 @@
+{
+ "kaynak": "ADR 2025 Tablo A (ECE/TRANS/352) adları; CAS: substance_db (SEA Ek-6) veya PubChem eş anlamlıları. scripts dışı üretim 2026-10-10; elle eklenen seed girişleri (transport_adr_service._SEED_ENTRIES) önceliklidir.",
+ "harita": {
+  "141-78-6": [
+   {
+    "un": "UN1173",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "79-09-4": [
+   {
+    "un": "UN3463",
+    "pg": "II",
+    "min_conc": 90.0,
+    "max_conc": 100.0,
+    "pg_fixed": true,
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   },
+   {
+    "un": "UN1848",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "110-83-8": [
+   {
+    "un": "UN2256",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "6484-52-2": [
+   {
+    "un": "UN2426",
+    "pg": "",
+    "physical_state": "liquid",
+    "_kaynak": "PubChem birebir ad"
+   },
+   {
+    "un": "UN1942",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "124-38-9": [
+   {
+    "un": "UN1013",
+    "pg": "-",
+    "physical_state": "gas",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   },
+   {
+    "un": "UN1845",
+    "pg": "III",
+    "physical_state": "solid",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   }
+  ],
+  "7782-44-7": [
+   {
+    "un": "UN1072",
+    "pg": "-",
+    "physical_state": "gas",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "74-98-6": [
+   {
+    "un": "UN1978",
+    "pg": "-",
+    "physical_state": "gas",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "74-86-2": [
+   {
+    "un": "UN1001",
+    "pg": "-",
+    "physical_state": "gas",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   },
+   {
+    "un": "UN3374",
+    "pg": "",
+    "physical_state": "gas",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "7439-93-2": [
+   {
+    "un": "UN1415",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "7440-23-5": [
+   {
+    "un": "UN1428",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "71-36-3": [
+   {
+    "un": "UN1120",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "110-82-7": [
+   {
+    "un": "UN1145",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "60-29-7": [
+   {
+    "un": "UN1155",
+    "pg": "I",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "13463-39-3": [
+   {
+    "un": "UN1259",
+    "pg": "I",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "71-23-8": [
+   {
+    "un": "UN1274",
+    "pg": "II",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "110-86-1": [
+   {
+    "un": "UN1282",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "121-44-8": [
+   {
+    "un": "UN1296",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "127-18-4": [
+   {
+    "un": "UN1897",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "14998-27-7": [
+   {
+    "un": "UN1908",
+    "pg": "II",
+    "physical_state": "liquid",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "98-88-4": [
+   {
+    "un": "UN1736",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "7429-90-5": [
+   {
+    "un": "UN1309",
+    "pg": "II",
+    "physical_state": "solid",
+    "_kaynak": "PubChem birebir ad"
+   },
+   {
+    "un": "UN1396",
+    "pg": "II",
+    "physical_state": "solid",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "7704-34-9": [
+   {
+    "un": "UN1350",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "630-08-0": [
+   {
+    "un": "UN1016",
+    "pg": "-",
+    "physical_state": "gas",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "7782-41-4": [
+   {
+    "un": "UN1045",
+    "pg": "-",
+    "physical_state": "gas",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "7440-37-1": [
+   {
+    "un": "UN1006",
+    "pg": "",
+    "physical_state": "gas",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "7637-07-2": [
+   {
+    "un": "UN1008",
+    "pg": "",
+    "physical_state": "gas",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   },
+   {
+    "un": "UN3519",
+    "pg": "",
+    "physical_state": "gas",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "106-97-8": [
+   {
+    "un": "UN1011",
+    "pg": "",
+    "physical_state": "gas",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "460-19-5": [
+   {
+    "un": "UN1026",
+    "pg": "",
+    "physical_state": "gas",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "75-19-4": [
+   {
+    "un": "UN1027",
+    "pg": "",
+    "physical_state": "gas",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "115-10-6": [
+   {
+    "un": "UN1033",
+    "pg": "",
+    "physical_state": "gas",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "74-84-0": [
+   {
+    "un": "UN1035",
+    "pg": "",
+    "physical_state": "gas",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "75-04-7": [
+   {
+    "un": "UN2270",
+    "pg": "II",
+    "physical_state": "liquid",
+    "min_conc": 50.0,
+    "max_conc": 70.0,
+    "pg_fixed": true,
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   },
+   {
+    "un": "UN1036",
+    "pg": "",
+    "physical_state": "gas",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "540-67-0": [
+   {
+    "un": "UN1039",
+    "pg": "",
+    "physical_state": "gas",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "74-89-5": [
+   {
+    "un": "UN1061",
+    "pg": "",
+    "physical_state": "gas",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "115-07-1": [
+   {
+    "un": "UN1077",
+    "pg": "",
+    "physical_state": "gas",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "116-14-3": [
+   {
+    "un": "UN1081",
+    "pg": "",
+    "physical_state": "gas",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "105-57-7": [
+   {
+    "un": "UN1088",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "75-07-0": [
+   {
+    "un": "UN1089",
+    "pg": "I",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "107-02-8": [
+   {
+    "un": "UN1092",
+    "pg": "I",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "107-13-1": [
+   {
+    "un": "UN1093",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "107-18-6": [
+   {
+    "un": "UN1098",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "106-95-6": [
+   {
+    "un": "UN1099",
+    "pg": "I",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "107-05-1": [
+   {
+    "un": "UN1100",
+    "pg": "I",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "628-63-7": [
+   {
+    "un": "UN1104",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "110-58-7": [
+   {
+    "un": "UN1106",
+    "pg": "II",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   }
+  ],
+  "543-59-9": [
+   {
+    "un": "UN1107",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "109-67-1": [
+   {
+    "un": "UN1108",
+    "pg": "I",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "1002-16-0": [
+   {
+    "un": "UN1112",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "105-46-4": [
+   {
+    "un": "UN1123",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "109-65-9": [
+   {
+    "un": "UN1126",
+    "pg": "II",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   }
+  ],
+  "123-72-8": [
+   {
+    "un": "UN1129",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "75-15-0": [
+   {
+    "un": "UN1131",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "108-90-7": [
+   {
+    "un": "UN1134",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "107-07-3": [
+   {
+    "un": "UN1135",
+    "pg": "I",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "503-17-3": [
+   {
+    "un": "UN1144",
+    "pg": "I",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "287-92-3": [
+   {
+    "un": "UN1146",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "30586-10-8": [
+   {
+    "un": "UN1152",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "109-89-7": [
+   {
+    "un": "UN1154",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "96-22-0": [
+   {
+    "un": "UN1156",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "108-18-9": [
+   {
+    "un": "UN1158",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "616-38-6": [
+   {
+    "un": "UN1161",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "75-78-5": [
+   {
+    "un": "UN1162",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "57-14-7": [
+   {
+    "un": "UN1163",
+    "pg": "I",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   },
+   {
+    "un": "UN2382",
+    "pg": "I",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "100-41-4": [
+   {
+    "un": "UN1175",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "10031-87-5": [
+   {
+    "un": "UN1177",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "97-96-1": [
+   {
+    "un": "UN1178",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "105-39-5": [
+   {
+    "un": "UN1181",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "541-41-3": [
+   {
+    "un": "UN1182",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "109-94-4": [
+   {
+    "un": "UN1190",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "109-95-5": [
+   {
+    "un": "UN1194",
+    "pg": "I",
+    "physical_state": "liquid",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "105-37-3": [
+   {
+    "un": "UN1195",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "78-83-1": [
+   {
+    "un": "UN1212",
+    "pg": "III",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "78-79-5": [
+   {
+    "un": "UN1218",
+    "pg": "I",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "75-31-0": [
+   {
+    "un": "UN1221",
+    "pg": "I",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "79-20-9": [
+   {
+    "un": "UN1231",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "79-22-1": [
+   {
+    "un": "UN1238",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "107-31-3": [
+   {
+    "un": "UN1243",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "60-34-4": [
+   {
+    "un": "UN1244",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "554-12-1": [
+   {
+    "un": "UN1248",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "75-52-5": [
+   {
+    "un": "UN1261",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "123-38-6": [
+   {
+    "un": "UN1275",
+    "pg": "II",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "10025-78-2": [
+   {
+    "un": "UN1295",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "507-70-0": [
+   {
+    "un": "UN1312",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "7440-45-1": [
+   {
+    "un": "UN3078",
+    "pg": "II",
+    "physical_state": "solid",
+    "_kaynak": "PubChem birebir ad"
+   },
+   {
+    "un": "UN1333",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "91-20-3": [
+   {
+    "un": "UN1334",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "1305-99-3": [
+   {
+    "un": "UN1360",
+    "pg": "I",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "101239-80-9": [
+   {
+    "un": "UN1361",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   },
+   {
+    "un": "UN1362",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "7775-14-6": [
+   {
+    "un": "UN1384",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "20859-73-8": [
+   {
+    "un": "UN1397",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "7440-39-3": [
+   {
+    "un": "UN1400",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "7440-70-2": [
+   {
+    "un": "UN1401",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "75-20-7": [
+   {
+    "un": "UN1402",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "156-62-7": [
+   {
+    "un": "UN1403",
+    "pg": "III",
+    "min_conc": 0.1,
+    "max_conc": 100.0,
+    "min_exclusive": true,
+    "pg_fixed": true,
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "7789-78-8": [
+   {
+    "un": "UN1404",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "7440-46-2": [
+   {
+    "un": "UN1407",
+    "pg": "I",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "7646-69-7": [
+   {
+    "un": "UN1427",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "13473-90-0": [
+   {
+    "un": "UN1438",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "7789-09-5": [
+   {
+    "un": "UN1439",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "7790-98-9": [
+   {
+    "un": "UN1442",
+    "pg": "II",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "7727-54-0": [
+   {
+    "un": "UN1444",
+    "pg": "III",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "13477-00-4": [
+   {
+    "un": "UN1445",
+    "pg": "II",
+    "physical_state": "solid",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   },
+   {
+    "un": "UN3405",
+    "pg": "II",
+    "physical_state": "liquid",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "10022-31-8": [
+   {
+    "un": "UN1446",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "13465-95-7": [
+   {
+    "un": "UN1447",
+    "pg": "II",
+    "physical_state": "solid",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   },
+   {
+    "un": "UN3406",
+    "pg": "II",
+    "physical_state": "liquid",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "7787-36-2": [
+   {
+    "un": "UN1448",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "1304-29-6": [
+   {
+    "un": "UN1449",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "7789-18-6": [
+   {
+    "un": "UN1451",
+    "pg": "III",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   }
+  ],
+  "10137-74-3": [
+   {
+    "un": "UN2429",
+    "pg": "II",
+    "physical_state": "liquid",
+    "_kaynak": "PubChem birebir ad"
+   },
+   {
+    "un": "UN1452",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "14674-72-7": [
+   {
+    "un": "UN1453",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "10124-37-5": [
+   {
+    "un": "UN1454",
+    "pg": "III",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   }
+  ],
+  "13477-36-6": [
+   {
+    "un": "UN1455",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "10118-76-0": [
+   {
+    "un": "UN1456",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "1305-79-9": [
+   {
+    "un": "UN1457",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "10361-80-5": [
+   {
+    "un": "UN1465",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "7758-01-2": [
+   {
+    "un": "UN1484",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "3811-04-9": [
+   {
+    "un": "UN2427",
+    "pg": "II",
+    "physical_state": "liquid",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   },
+   {
+    "un": "UN1485",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "7758-09-0": [
+   {
+    "un": "UN1488",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "7778-74-7": [
+   {
+    "un": "UN1489",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "7722-64-7": [
+   {
+    "un": "UN1490",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "7727-21-1": [
+   {
+    "un": "UN1492",
+    "pg": "III",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "7761-88-8": [
+   {
+    "un": "UN1493",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "7632-00-0": [
+   {
+    "un": "UN1500",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "7601-89-0": [
+   {
+    "un": "UN1502",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "1313-60-6": [
+   {
+    "un": "UN1504",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "75-86-5": [
+   {
+    "un": "UN1541",
+    "pg": "I",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "57-06-7": [
+   {
+    "un": "UN1545",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "62-53-3": [
+   {
+    "un": "UN1547",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "142-04-1": [
+   {
+    "un": "UN1548",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "58164-88-8": [
+   {
+    "un": "UN1550",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "28300-74-5": [
+   {
+    "un": "UN1551",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "7778-39-4": [
+   {
+    "un": "UN1553",
+    "pg": "I",
+    "physical_state": "liquid",
+    "_kaynak": "PubChem birebir ad"
+   },
+   {
+    "un": "UN1554",
+    "pg": "II",
+    "physical_state": "solid",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "7784-33-0": [
+   {
+    "un": "UN1555",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "7440-38-2": [
+   {
+    "un": "UN1558",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "1303-28-2": [
+   {
+    "un": "UN1559",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "1327-53-3": [
+   {
+    "un": "UN1561",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "7440-41-7": [
+   {
+    "un": "UN1567",
+    "pg": "II",
+    "physical_state": "solid",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "598-31-2": [
+   {
+    "un": "UN1569",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "357-57-3": [
+   {
+    "un": "UN1570",
+    "pg": "I",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "75-60-5": [
+   {
+    "un": "UN1572",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "592-01-8": [
+   {
+    "un": "UN1575",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "76-06-2": [
+   {
+    "un": "UN1580",
+    "pg": "I",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "12002-03-8": [
+   {
+    "un": "UN1585",
+    "pg": "II",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   }
+  ],
+  "544-92-3": [
+   {
+    "un": "UN1587",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "506-77-4": [
+   {
+    "un": "UN1589",
+    "pg": "",
+    "physical_state": "gas",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   }
+  ],
+  "608-27-5": [
+   {
+    "un": "UN1590",
+    "pg": "II",
+    "physical_state": "liquid",
+    "_kaynak": "PubChem birebir ad"
+   },
+   {
+    "un": "UN3442",
+    "pg": "II",
+    "physical_state": "solid",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "64-67-5": [
+   {
+    "un": "UN1594",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "77-78-1": [
+   {
+    "un": "UN1595",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "105-36-2": [
+   {
+    "un": "UN1603",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "107-15-3": [
+   {
+    "un": "UN1604",
+    "pg": "II",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "106-93-4": [
+   {
+    "un": "UN1605",
+    "pg": "I",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "7487-94-7": [
+   {
+    "un": "UN1624",
+    "pg": "II",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "86-88-4": [
+   {
+    "un": "UN1651",
+    "pg": "II",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "98-95-3": [
+   {
+    "un": "UN1662",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "76-01-7": [
+   {
+    "un": "UN1669",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "62-38-4": [
+   {
+    "un": "UN1674",
+    "pg": "II",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "78-95-5": [
+   {
+    "un": "UN1695",
+    "pg": "I",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "532-27-4": [
+   {
+    "un": "UN1697",
+    "pg": "II",
+    "physical_state": "solid",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "79-34-5": [
+   {
+    "un": "UN1702",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "108-24-7": [
+   {
+    "un": "UN1715",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "506-96-7": [
+   {
+    "un": "UN1716",
+    "pg": "II",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   }
+  ],
+  "75-36-5": [
+   {
+    "un": "UN1717",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "12788-93-1": [
+   {
+    "un": "UN1718",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "2937-50-0": [
+   {
+    "un": "UN1722",
+    "pg": "I",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "556-56-9": [
+   {
+    "un": "UN1723",
+    "pg": "II",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "107-37-9": [
+   {
+    "un": "UN1724",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "7727-15-3": [
+   {
+    "un": "UN1725",
+    "pg": "II",
+    "physical_state": "solid",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   },
+   {
+    "un": "UN2580",
+    "pg": "III",
+    "physical_state": "liquid",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   }
+  ],
+  "107-72-2": [
+   {
+    "un": "UN1728",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "100-07-2": [
+   {
+    "un": "UN1729",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "7647-18-9": [
+   {
+    "un": "UN1730",
+    "pg": "II",
+    "physical_state": "liquid",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   },
+   {
+    "un": "UN1731",
+    "pg": "II",
+    "physical_state": "liquid",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "7783-70-2": [
+   {
+    "un": "UN1732",
+    "pg": "II",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   }
+  ],
+  "10025-91-9": [
+   {
+    "un": "UN1733",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "100-44-7": [
+   {
+    "un": "UN1738",
+    "pg": "II",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "501-53-1": [
+   {
+    "un": "UN1739",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "10294-34-5": [
+   {
+    "un": "UN1741",
+    "pg": "",
+    "physical_state": "gas",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "7789-30-2": [
+   {
+    "un": "UN1745",
+    "pg": "I",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "7787-71-5": [
+   {
+    "un": "UN1746",
+    "pg": "I",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "7521-80-4": [
+   {
+    "un": "UN1747",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "7790-91-2": [
+   {
+    "un": "UN1749",
+    "pg": "",
+    "physical_state": "gas",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   }
+  ],
+  "79-04-9": [
+   {
+    "un": "UN1752",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "7790-94-5": [
+   {
+    "un": "UN1754",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "7738-94-5": [
+   {
+    "un": "UN1755",
+    "pg": "II",
+    "physical_state": "liquid",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "7788-97-8": [
+   {
+    "un": "UN1756",
+    "pg": "II",
+    "physical_state": "solid",
+    "_kaynak": "PubChem birebir ad"
+   },
+   {
+    "un": "UN1757",
+    "pg": "II",
+    "physical_state": "liquid",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "14977-61-8": [
+   {
+    "un": "UN1758",
+    "pg": "I",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "13426-91-0": [
+   {
+    "un": "UN1761",
+    "pg": "II",
+    "physical_state": "liquid",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "79-43-6": [
+   {
+    "un": "UN1764",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "79-36-7": [
+   {
+    "un": "UN1765",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "13779-41-4": [
+   {
+    "un": "UN1768",
+    "pg": "II",
+    "physical_state": "solid",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   }
+  ],
+  "16872-11-0": [
+   {
+    "un": "UN1775",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "16961-83-4": [
+   {
+    "un": "UN1778",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "7601-90-3": [
+   {
+    "un": "UN1802",
+    "pg": "II",
+    "min_conc": 0.0,
+    "max_conc": 50.0,
+    "pg_fixed": true,
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   },
+   {
+    "un": "UN1873",
+    "pg": "I",
+    "min_conc": 50.0,
+    "max_conc": 72.0,
+    "min_exclusive": true,
+    "pg_fixed": true,
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "10026-13-8": [
+   {
+    "un": "UN1806",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "1314-56-3": [
+   {
+    "un": "UN1807",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "7789-60-8": [
+   {
+    "un": "UN1808",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "7719-12-2": [
+   {
+    "un": "UN1809",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "79-03-8": [
+   {
+    "un": "UN1815",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "10026-04-7": [
+   {
+    "un": "UN1818",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "7646-78-8": [
+   {
+    "un": "UN1827",
+    "pg": "II",
+    "physical_state": "solid",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "10545-99-0": [
+   {
+    "un": "UN1828",
+    "pg": "I",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "7791-25-5": [
+   {
+    "un": "UN1834",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "7719-09-7": [
+   {
+    "un": "UN1836",
+    "pg": "I",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "7550-45-0": [
+   {
+    "un": "UN1838",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "75-39-8": [
+   {
+    "un": "UN1841",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "56-23-5": [
+   {
+    "un": "UN1846",
+    "pg": "II",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "1304-28-5": [
+   {
+    "un": "UN1884",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "92-87-5": [
+   {
+    "un": "UN1885",
+    "pg": "II",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   }
+  ],
+  "98-87-3": [
+   {
+    "un": "UN1886",
+    "pg": "II",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "74-97-5": [
+   {
+    "un": "UN1887",
+    "pg": "III",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   }
+  ],
+  "506-68-3": [
+   {
+    "un": "UN1889",
+    "pg": "I",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   }
+  ],
+  "74-96-4": [
+   {
+    "un": "UN1891",
+    "pg": "II",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "507-02-8": [
+   {
+    "un": "UN1898",
+    "pg": "II",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   }
+  ],
+  "19287-45-7": [
+   {
+    "un": "UN1911",
+    "pg": "",
+    "physical_state": "gas",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "590-01-2": [
+   {
+    "un": "UN1914",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "108-94-1": [
+   {
+    "un": "UN1915",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "140-88-5": [
+   {
+    "un": "UN1917",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "15512-36-4": [
+   {
+    "un": "UN1923",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "79-08-3": [
+   {
+    "un": "UN1938",
+    "pg": "II",
+    "physical_state": "liquid",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   },
+   {
+    "un": "UN3425",
+    "pg": "II",
+    "physical_state": "solid",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "68-11-1": [
+   {
+    "un": "UN1940",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "7782-39-0": [
+   {
+    "un": "UN1957",
+    "pg": "",
+    "physical_state": "gas",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "74-85-1": [
+   {
+    "un": "UN1962",
+    "pg": "",
+    "physical_state": "gas",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "74-82-8": [
+   {
+    "un": "UN1971",
+    "pg": "",
+    "physical_state": "gas",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "100-52-7": [
+   {
+    "un": "UN1990",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "126-99-8": [
+   {
+    "un": "UN1991",
+    "pg": "I",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "58-90-2": [
+   {
+    "un": "UN2020",
+    "pg": "III",
+    "physical_state": "solid",
+    "_kaynak": "PubChem birebir ad"
+   },
+   {
+    "un": "UN2021",
+    "pg": "III",
+    "physical_state": "liquid",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "302-01-2": [
+   {
+    "un": "UN3293",
+    "pg": "III",
+    "physical_state": "liquid",
+    "min_conc": 0.0,
+    "max_conc": 37.0,
+    "pg_fixed": true,
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   },
+   {
+    "un": "UN3484",
+    "pg": "I",
+    "physical_state": "liquid",
+    "min_conc": 37.0,
+    "max_conc": 100.0,
+    "min_exclusive": true,
+    "pg_fixed": true,
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   },
+   {
+    "un": "UN2029",
+    "pg": "I",
+    "physical_state": "solid",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "77-73-6": [
+   {
+    "un": "UN2048",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "108-01-0": [
+   {
+    "un": "UN2051",
+    "pg": "II",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "110-91-8": [
+   {
+    "un": "UN2054",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "75-87-6": [
+   {
+    "un": "UN2075",
+    "pg": "II",
+    "physical_state": "solid",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "111-40-0": [
+   {
+    "un": "UN2079",
+    "pg": "II",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "7784-42-1": [
+   {
+    "un": "UN2188",
+    "pg": "",
+    "physical_state": "gas",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   },
+   {
+    "un": "UN3522",
+    "pg": "",
+    "physical_state": "gas",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "4109-96-0": [
+   {
+    "un": "UN2189",
+    "pg": "",
+    "physical_state": "gas",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   }
+  ],
+  "10034-85-2": [
+   {
+    "un": "UN2197",
+    "pg": "",
+    "physical_state": "gas",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "463-58-1": [
+   {
+    "un": "UN2204",
+    "pg": "",
+    "physical_state": "gas",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "111-69-3": [
+   {
+    "un": "UN2205",
+    "pg": "III",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   }
+  ],
+  "85-44-9": [
+   {
+    "un": "UN2214",
+    "pg": "III",
+    "min_conc": 0.05,
+    "max_conc": 100.0,
+    "min_exclusive": true,
+    "pg_fixed": true,
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "79-10-7": [
+   {
+    "un": "UN2218",
+    "pg": "II",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "106-92-3": [
+   {
+    "un": "UN2219",
+    "pg": "III",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "100-66-3": [
+   {
+    "un": "UN2222",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "100-47-0": [
+   {
+    "un": "UN2224",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "98-09-9": [
+   {
+    "un": "UN2225",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "98-07-7": [
+   {
+    "un": "UN2226",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "97-88-1": [
+   {
+    "un": "UN2227",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "107-20-0": [
+   {
+    "un": "UN2232",
+    "pg": "I",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "28479-22-3": [
+   {
+    "un": "UN2236",
+    "pg": "II",
+    "physical_state": "liquid",
+    "_kaynak": "PubChem birebir ad"
+   },
+   {
+    "un": "UN3428",
+    "pg": "II",
+    "physical_state": "solid",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "41587-36-4": [
+   {
+    "un": "UN2237",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "291-64-5": [
+   {
+    "un": "UN2241",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "628-92-2": [
+   {
+    "un": "UN2242",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "622-45-7": [
+   {
+    "un": "UN2243",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "96-41-3": [
+   {
+    "un": "UN2244",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "120-92-3": [
+   {
+    "un": "UN2245",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "142-29-0": [
+   {
+    "un": "UN2246",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "111-92-2": [
+   {
+    "un": "UN2248",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "542-88-1": [
+   {
+    "un": "UN2249",
+    "pg": "CARRIAGE PROHIBITED",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "121-69-7": [
+   {
+    "un": "UN2253",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "7440-09-7": [
+   {
+    "un": "UN2257",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "78-90-0": [
+   {
+    "un": "UN2258",
+    "pg": "II",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "112-24-3": [
+   {
+    "un": "UN2259",
+    "pg": "II",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "79-44-7": [
+   {
+    "un": "UN2262",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "56-18-8": [
+   {
+    "un": "UN2269",
+    "pg": "III",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "103-69-5": [
+   {
+    "un": "UN2272",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "578-54-1": [
+   {
+    "un": "UN2273",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "104-75-6": [
+   {
+    "un": "UN2276",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "97-63-2": [
+   {
+    "un": "UN2277",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "822-06-0": [
+   {
+    "un": "UN2281",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "97-86-9": [
+   {
+    "un": "UN2283",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "107-70-0": [
+   {
+    "un": "UN2293",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "100-61-8": [
+   {
+    "un": "UN2294",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "96-34-4": [
+   {
+    "un": "UN2295",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "108-87-2": [
+   {
+    "un": "UN2296",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "104-90-5": [
+   {
+    "un": "UN2300",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "534-22-5": [
+   {
+    "un": "UN2301",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "110-12-3": [
+   {
+    "un": "UN2302",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "107-29-9": [
+   {
+    "un": "UN2332",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "591-87-7": [
+   {
+    "un": "UN2333",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "107-11-9": [
+   {
+    "un": "UN2334",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "557-31-3": [
+   {
+    "un": "UN2335",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "1838-59-1": [
+   {
+    "un": "UN2336",
+    "pg": "I",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "98-08-8": [
+   {
+    "un": "UN2338",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "78-76-2": [
+   {
+    "un": "UN2339",
+    "pg": "II",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   }
+  ],
+  "592-55-2": [
+   {
+    "un": "UN2340",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "107-82-4": [
+   {
+    "un": "UN2341",
+    "pg": "III",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   }
+  ],
+  "107-81-3": [
+   {
+    "un": "UN2343",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "106-96-7": [
+   {
+    "un": "UN2345",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "431-03-8": [
+   {
+    "un": "UN2346",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "628-28-4": [
+   {
+    "un": "UN2350",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "111-34-2": [
+   {
+    "un": "UN2352",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "141-75-3": [
+   {
+    "un": "UN2353",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "3188-13-4": [
+   {
+    "un": "UN2354",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "108-91-8": [
+   {
+    "un": "UN2357",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "629-20-9": [
+   {
+    "un": "UN2358",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "124-02-7": [
+   {
+    "un": "UN2359",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "557-40-4": [
+   {
+    "un": "UN2360",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "75-34-3": [
+   {
+    "un": "UN2362",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "105-58-8": [
+   {
+    "un": "UN2366",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "592-41-6": [
+   {
+    "un": "UN2370",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "462-95-3": [
+   {
+    "un": "UN2373",
+    "pg": "II",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   }
+  ],
+  "352-93-2": [
+   {
+    "un": "UN2375",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "624-92-0": [
+   {
+    "un": "UN2381",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "142-84-7": [
+   {
+    "un": "UN2383",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "766-09-6": [
+   {
+    "un": "UN2386",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "110-00-9": [
+   {
+    "un": "UN2389",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "513-48-4": [
+   {
+    "un": "UN2390",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "79-30-1": [
+   {
+    "un": "UN2395",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "563-80-4": [
+   {
+    "un": "UN2397",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "626-67-5": [
+   {
+    "un": "UN2399",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "110-89-4": [
+   {
+    "un": "UN2401",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "637-78-5": [
+   {
+    "un": "UN2409",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "109-74-0": [
+   {
+    "un": "UN2411",
+    "pg": "II",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "110-01-0": [
+   {
+    "un": "UN2412",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "121-43-7": [
+   {
+    "un": "UN2416",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "353-50-4": [
+   {
+    "un": "UN2417",
+    "pg": "",
+    "physical_state": "gas",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   }
+  ],
+  "91-66-7": [
+   {
+    "un": "UN2432",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "557-98-2": [
+   {
+    "un": "UN2456",
+    "pg": "I",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "563-46-2": [
+   {
+    "un": "UN2459",
+    "pg": "I",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "513-35-9": [
+   {
+    "un": "UN2460",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "7784-21-6": [
+   {
+    "un": "UN2463",
+    "pg": "I",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "13597-99-4": [
+   {
+    "un": "UN2464",
+    "pg": "II",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   }
+  ],
+  "20816-12-0": [
+   {
+    "un": "UN2471",
+    "pg": "I",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "556-61-6": [
+   {
+    "un": "UN2477",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "624-83-9": [
+   {
+    "un": "UN2480",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "3173-53-3": [
+   {
+    "un": "UN2488",
+    "pg": "I",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "39638-32-9": [
+   {
+    "un": "UN2490",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "123-62-6": [
+   {
+    "un": "UN2496",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "79-27-6": [
+   {
+    "un": "UN2504",
+    "pg": "III",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "12125-01-8": [
+   {
+    "un": "UN2505",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "7803-63-6": [
+   {
+    "un": "UN2506",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "16941-12-1": [
+   {
+    "un": "UN2507",
+    "pg": "III",
+    "physical_state": "solid",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "7646-93-7": [
+   {
+    "un": "UN2509",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "598-78-7": [
+   {
+    "un": "UN2511",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "598-21-0": [
+   {
+    "un": "UN2513",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "108-86-1": [
+   {
+    "un": "UN2514",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "75-25-2": [
+   {
+    "un": "UN2515",
+    "pg": "III",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "558-13-4": [
+   {
+    "un": "UN2516",
+    "pg": "III",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   }
+  ],
+  "1700-10-3": [
+   {
+    "un": "UN2520",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "2867-47-2": [
+   {
+    "un": "UN2522",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "106-63-8": [
+   {
+    "un": "UN2527",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "79-31-2": [
+   {
+    "un": "UN2529",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "109-02-4": [
+   {
+    "un": "UN2535",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "13637-63-3": [
+   {
+    "un": "UN2548",
+    "pg": "",
+    "physical_state": "gas",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "590-36-3": [
+   {
+    "un": "UN2560",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "563-45-1": [
+   {
+    "un": "UN2561",
+    "pg": "I",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "101-83-7": [
+   {
+    "un": "UN2565",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "131-52-2": [
+   {
+    "un": "UN2567",
+    "pg": "II",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "106-51-4": [
+   {
+    "un": "UN2587",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "287-23-0": [
+   {
+    "un": "UN2601",
+    "pg": "",
+    "physical_state": "gas",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "544-25-2": [
+   {
+    "un": "UN2603",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "174674-80-7": [
+   {
+    "un": "UN2604",
+    "pg": "I",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "100-73-2": [
+   {
+    "un": "UN2607",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "103-83-3": [
+   {
+    "un": "UN2619",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "513-86-0": [
+   {
+    "un": "UN2621",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "7790-93-4": [
+   {
+    "un": "UN2626",
+    "pg": "II",
+    "physical_state": "liquid",
+    "min_conc": 0.0,
+    "max_conc": 10.0,
+    "pg_fixed": true,
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "62-74-8": [
+   {
+    "un": "UN2629",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "144-49-0": [
+   {
+    "un": "UN2642",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "74-88-4": [
+   {
+    "un": "UN2644",
+    "pg": "I",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "77-47-4": [
+   {
+    "un": "UN2646",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "109-77-3": [
+   {
+    "un": "UN2647",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "594-72-9": [
+   {
+    "un": "UN2650",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "620-05-3": [
+   {
+    "un": "UN2653",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "91-22-5": [
+   {
+    "un": "UN2656",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "116-16-5": [
+   {
+    "un": "UN2661",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "74-95-3": [
+   {
+    "un": "UN2664",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "107-14-2": [
+   {
+    "un": "UN2668",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "108-77-0": [
+   {
+    "un": "UN2670",
+    "pg": "II",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "95-85-2": [
+   {
+    "un": "UN2673",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "16893-85-9": [
+   {
+    "un": "UN2674",
+    "pg": "III",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "21351-79-1": [
+   {
+    "un": "UN2681",
+    "pg": "II",
+    "physical_state": "liquid",
+    "_kaynak": "PubChem birebir ad"
+   },
+   {
+    "un": "UN2682",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "12135-76-1": [
+   {
+    "un": "UN2683",
+    "pg": "II",
+    "physical_state": "liquid",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "100-37-8": [
+   {
+    "un": "UN2686",
+    "pg": "II",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "3129-91-7": [
+   {
+    "un": "UN2687",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "109-70-6": [
+   {
+    "un": "UN2688",
+    "pg": "III",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   }
+  ],
+  "10294-33-4": [
+   {
+    "un": "UN2692",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "76-05-1": [
+   {
+    "un": "UN2699",
+    "pg": "I",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "6153-05-5": [
+   {
+    "un": "UN2705",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "260-94-6": [
+   {
+    "un": "UN2713",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "76-22-2": [
+   {
+    "un": "UN2717",
+    "pg": "III",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   }
+  ],
+  "13967-90-3": [
+   {
+    "un": "UN2719",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "14721-21-2": [
+   {
+    "un": "UN2721",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "118-74-1": [
+   {
+    "un": "UN2729",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "106-31-0": [
+   {
+    "un": "UN2739",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "81228-87-7": [
+   {
+    "un": "UN2744",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "22128-62-7": [
+   {
+    "un": "UN2745",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "24468-13-1": [
+   {
+    "un": "UN2748",
+    "pg": "II",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   }
+  ],
+  "3268-49-3": [
+   {
+    "un": "UN2785",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "7439-97-6": [
+   {
+    "un": "UN2809",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "12789-46-7": [
+   {
+    "un": "UN2819",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "107-92-6": [
+   {
+    "un": "UN2820",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "109-09-1": [
+   {
+    "un": "UN2822",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "3724-65-0": [
+   {
+    "un": "UN2823",
+    "pg": "III",
+    "physical_state": "solid",
+    "_kaynak": "PubChem birebir ad"
+   },
+   {
+    "un": "UN3472",
+    "pg": "III",
+    "physical_state": "liquid",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "142-62-1": [
+   {
+    "un": "UN2829",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "13598-36-2": [
+   {
+    "un": "UN2834",
+    "pg": "III",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "107-89-1": [
+   {
+    "un": "UN2839",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "110-69-0": [
+   {
+    "un": "UN2840",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "2050-92-2": [
+   {
+    "un": "UN2841",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "79-24-3": [
+   {
+    "un": "UN2842",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "627-30-5": [
+   {
+    "un": "UN2849",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "13319-75-0": [
+   {
+    "un": "UN2851",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "7803-55-6": [
+   {
+    "un": "UN2859",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "1314-62-1": [
+   {
+    "un": "UN2862",
+    "pg": "III",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "7440-36-0": [
+   {
+    "un": "UN2871",
+    "pg": "III",
+    "physical_state": "solid",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   }
+  ],
+  "102-81-8": [
+   {
+    "un": "UN2873",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "98-00-0": [
+   {
+    "un": "UN2874",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "13863-41-7": [
+   {
+    "un": "UN2901",
+    "pg": "",
+    "physical_state": "gas",
+    "_kaynak": "Wikidata + PubChem aynı CAS"
+   }
+  ],
+  "88-17-5": [
+   {
+    "un": "UN2942",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "105-48-6": [
+   {
+    "un": "UN2947",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "98-16-8": [
+   {
+    "un": "UN2948",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "353-42-4": [
+   {
+    "un": "UN2965",
+    "pg": "I",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "763-20-2": [
+   {
+    "un": "UN3023",
+    "pg": "I",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "107-98-2": [
+   {
+    "un": "UN3092",
+    "pg": "III",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "87-86-5": [
+   {
+    "un": "UN3155",
+    "pg": "II",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ],
+  "6834-92-0": [
+   {
+    "un": "UN3253",
+    "pg": "III",
+    "_kaynak": "Wikidata + Ek-6 sınıfı uyumlu"
+   }
+  ],
+  "2439-35-2": [
+   {
+    "un": "UN3302",
+    "pg": "II",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "602-02-8": [
+   {
+    "un": "UN3441",
+    "pg": "II",
+    "physical_state": "solid",
+    "_kaynak": "PubChem birebir ad"
+   }
+  ],
+  "7553-56-2": [
+   {
+    "un": "UN3495",
+    "pg": "III",
+    "_kaynak": "Ek-6 tek ad eşleşmesi"
+   }
+  ]
+ }
+}

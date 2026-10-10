@@ -379,6 +379,20 @@ def kural_testleri(c) -> int:
                 bad += 1
         return bad
 
+    def map_ok():
+        """data/adr_cas_map.json: her satır Tablo A'da var, PG Tablo A'nın PG'lerinden; bilinen yanlış eşleşme yok"""
+        import json as _j
+        from app.services.transport_adr_service import get_adr_details
+        m = _j.load(open('data/adr_cas_map.json', encoding='utf-8'))['harita']
+        if '77-92-9' in m:        # sitrik asit ↔ UN1789 (Wikidata hatası) — reddedilmiş olmalı
+            return False
+        for rows in m.values():
+            for r in rows:
+                d = get_adr_details(r['un'], r.get('pg') or 'II')
+                if not d.get('found') or (r.get('pg') and d['packing_group'] != r['pg']):
+                    return False
+        return True
+
     def seed_ok():
         """Her ADR adlı giriş satırı Tablo A'da var ve PG'si Tablo A'nın PG'lerinden"""
         from app.services.transport_adr_service import _SEED_ENTRIES, get_adr_details
@@ -880,6 +894,18 @@ def kural_testleri(c) -> int:
              '2.2 Etiket\n2.3 Diğer\nBÖLÜM 3: Bileşim\n3.2 Karışımlar\nHidrojen peroksit 7722-84-1 ≥ 25 - < 30 %\n'
              'Asetik asit 64-19-7 ≥ 5 - < 10 %\nPerasetik asit 79-21-0 ≥ 1 - < 5 %\nBÖLÜM 4: İlk yardım\n'
              'BÖLÜM 14: Taşımacılık\n14.1 UN 3093\nBÖLÜM 15: Mevzuat\n')),
+        ('ADR Tablo A → CAS haritası (data/adr_cas_map.json) Tablo A ile tutarlı; sitrik asit ↔ UN1789 gibi '
+         'kaynak hatası reddedilmiş', map_ok),
+        ('ADR 2.1.3.3 adlı madde çözeltisi: etanol %30 (FP 30 °C) → UN1170 PG III; toluen %100 → UN1294; '
+         'izopropanol %70 (FP 20) → UN1219',
+         lambda: tr_road([('64-17-5', 30), (W, 70)], user_fp=30) == ('UN1170', '3', 'III')
+         and tr_road([('108-88-3', 100)], user_fp=4)[:2] == ('UN1294', '3')
+         and tr_road([('67-63-0', 70), (W, 30)], user_fp=20) == ('UN1219', '3', 'II')),
+        ('ADR 2.1.3.3 (c): aseton %20 (FP 25 °C → PG III) — Tablo A UN1090 yalnız PG II → adlı giriş değil, UN1993',
+         lambda: tr_road([('67-64-1', 20), (W, 80)], user_fp=25)[:3] == ('UN1993', '3', 'III')),
+        ('ADR Tablo A formik asit: %85 → UN3412 PG II (%10–85), %90 → UN1779',
+         lambda: tr_road([('64-18-6', 85), (W, 15)], user_fp=69) == ('UN3412', '8', 'II')
+         and tr_road([('64-18-6', 90), (W, 10)], user_fp=50)[0] == 'UN1779'),
     ]
     hata = 0
     for ad, f in testler:

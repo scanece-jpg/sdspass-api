@@ -391,8 +391,11 @@ async def _fetch_echa(cas: str) -> Dict:
                        params={'pageIndex': 1, 'pageSize': 10, 'searchText': cas})).json()
         # Aynı CAS birden çok kayıtta geçebilir (ör. ksilen 1330-20-7: izomer karışımı 905-215-1 kayıtsız, "Xylene"
         # 215-535-7 kayıtlı) — CAS'ı içeren ilk üç kayıttan aktif kayıt dosyası olan seçilir
+        # Anahtar CAS ya da (CAS'sız maddede) EC numarasıdır
         subs = [i['substanceIndex'] for i in s.get('items', [])
-                if cas in (i.get('substanceIndex', {}).get('casNumber') or [])][:3]
+                if (cas in (i.get('substanceIndex', {}).get('casNumber') or [])
+                      or cas == (i.get('substanceIndex', {}).get('rmlEc') or '')
+                      or cas in (lambda e: e if isinstance(e, list) else [e])(i.get('substanceIndex', {}).get('ecNumber') or []))][:3]
         if not subs:
             rec['status'] = 'not_found'
             return rec
@@ -650,7 +653,8 @@ def attach(comps: List[Dict]) -> None:
       • hammadde karışımsa değer hammaddenin kendisine aittir — kendi verisi olmayan bileşenlerine verilir
         (hammaddenin bileşenleri birlikte o hammaddeyi oluşturur); kendi verisi olan bileşen kendi değerini korur."""
     for c in comps:
-        c['phys'] = get(c.get('cas') or c.get('cas_no') or '')
+        _ec = str(c.get('ec') or c.get('ec_no') or '').strip()
+        c['phys'] = get(c.get('cas') or c.get('cas_no') or (_ec if re.fullmatch(r'\d{3}-\d{3}-\d', _ec) else ''))
         ted = c.get('tedarikci') or {}
         if not ted:
             continue

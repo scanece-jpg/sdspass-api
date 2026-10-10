@@ -425,8 +425,11 @@ async def _fetch_echa_cl_direct(cas: str, client: httpx.AsyncClient) -> dict | N
     try:
         search = await _get('/api-substance/v1/substance',
                             {'pageIndex': 1, 'pageSize': 10, 'searchText': cas})
+        # Anahtar CAS ya da (CAS'sız maddede) EC numarasıdır
         subst = next((i['substanceIndex'] for i in search.get('items', [])
-                      if cas in (i.get('substanceIndex', {}).get('casNumber') or [])), None)
+                      if (cas in (i.get('substanceIndex', {}).get('casNumber') or [])
+                      or cas == (i.get('substanceIndex', {}).get('rmlEc') or '')
+                      or cas in (lambda e: e if isinstance(e, list) else [e])(i.get('substanceIndex', {}).get('ecNumber') or []))), None)
         if not subst:
             print(f'[ECHA CHEM] {cas}: madde bulunamadı')
             return None

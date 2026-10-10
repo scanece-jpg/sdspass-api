@@ -240,6 +240,15 @@ def _ted_decisions(comps: list) -> list:
     return out
 
 
+def _anahtar(c: dict) -> str:
+    """Bileşenin veri anahtarı: CAS; CAS'ı olmayan maddede (UVCB vb.) EC numarası (KKDİK Ek-2 3.2)."""
+    cas = (c.get('cas_no') or c.get('cas') or '').strip()
+    if cas:
+        return cas
+    ec = str(c.get('ec') or c.get('ec_no') or '').strip()
+    return ec if re.fullmatch(r'\d{3}-\d{3}-\d', ec) else ''
+
+
 async def refresh_components(components: list, form: str, test_data: Optional[dict] = None) -> list:
     """Bileşen tehlike verisini yerel DB'den (SEA Ek-6 / Annex VI / custom) yeniden al;
     DB'de yoksa ECHA. Ön yüzde kalmış eski/elle değiştirilmiş kodlar sınıflandırmaya girmez."""
@@ -293,7 +302,7 @@ async def refresh_components(components: list, form: str, test_data: Optional[di
             c['ate_source'] = (src.get('source') or '') if c['ate'] else ''
 
     async def _one(comp: dict) -> dict:
-        cas = (comp.get('cas_no') or comp.get('cas') or '').strip()
+        cas = _anahtar(comp)
         if not cas:
             return comp
         try:
@@ -681,7 +690,7 @@ async def classify(inp: dict) -> dict:
     # Kayıt dosyası, bileşen sınıflandırması tazelenmeden ÖNCE okunur: Ek-6'da olmayan sınıflar (kayıt yaptıranın
     # GHS sınıflandırması — SEA Md.6(1)(c)) ilk hesapta kullanılsın.
     from app.services import component_phys as _cp
-    _phys_late = await _cp.ensure_many([c.get('cas') or c.get('cas_no') for c in comps if _conc_of(c) > 0])
+    _phys_late = await _cp.ensure_many([_anahtar(c) for c in comps if _conc_of(c) > 0])
     comps = await refresh_components(comps, form, test_data)
     _cp.attach(comps)
 
@@ -1009,6 +1018,33 @@ async def classify(inp: dict) -> dict:
         _drop_euh('EUH066')
     if 'H317' in {_h4(h) for h in all_h}:   # SEA Ek-2 2.3: EUH203 yalnız H317 taşımayan çimentoda
         _drop_euh('EUH203')
+    # SEA Ek-2 madde 103 (EUH066): karışım için derişim sınırı yoktur — ciltte kuruluk / çatlak "uygulamalı gözlemlere
+    # veya öngörülen etkilerine dair ilgili kanıtlara" dayanır. Önceden EUH066'lı bileşen hangi oranda olursa olsun
+    # karışıma aktarılıyordu (Liqui Moly Seilfett: %9,9 pentan → EUH066; firma GBF'sinde yok). Karışımda KDU kararı;
+    # karar verilene kadar ihtiyatlı olarak kalır. Tek maddede Ek-6 / kayıt ifadesi doğrudan geçerlidir.
+    if 'EUH066' in euh.get('euh_codes', []) and not substance_mode:
+        _k066 = (test_data or {}).get('euh066_karisim')
+        _b066 = [c for c in comps if any((s.get('code') if isinstance(s, dict) else str(s)).strip() == 'EUH066'
+                                         for s in (c.get('suppl_hazards') or c.get('suppl_h') or []))]
+        _ad066 = ', '.join(f"{c.get('name_tr') or c.get('name') or c.get('cas', '')} %{_conc_of(c):g}" for c in _b066)
+        if _k066 == 'eklenmez':
+            _drop_euh('EUH066')
+            phys_res.setdefault('classification_notes', []).append({
+                'TR': (f"EUH066: bileşende ({_ad066}) bulunmasına karşın karışımda ciltte kuruluk / çatlak etkisi "
+                       "beklenmediği KDU değerlendirmesiyle EUH066 kullanılmamıştır (SEA Ek-2 madde 103)."),
+                'EN': f"EUH066 not assigned to the mixture by expert judgement although present in ({_ad066})."})
+        elif _k066 != 'eklenir':
+            phys_res.setdefault('pending_decisions', []).append({
+                'code': 'EUH066_KARISIM', 'field': 'euh066_karisim',
+                'question': (f"EUH066 (tekrarlı maruziyette ciltte kuruluk / çatlak) bileşenden geliyor: {_ad066}. SEA Ek-2 "
+                             "madde 103 karışım için derişim sınırı vermez; etki uygulamalı gözleme ya da kanıta dayanır. "
+                             "Bu oranlarla karışımda etki bekleniyor mu?"),
+                'options': [
+                    {'value': 'eklenir', 'label': 'Evet — EUH066 karışımda kullanılsın', 'effect': 'EUH066 eklenir'},
+                    {'value': 'eklenmez', 'label': 'Hayır — bu oranda etki beklenmiyor', 'effect': 'EUH066 eklenmez'},
+                ],
+                'legal_basis': 'SEA Ek-2 madde 103 (EUH066)',
+                'components': [c.get('cas', '') for c in _b066]})
     # SEA Ek-2 madde 105 — EUH071 "Solunum yolunda aşınmaya yol açar": (1) soluma toksisitesi sınıflandırmasına ek olarak
     # mekanizmanın aşındırma olduğunu gösteren veri varsa; (2) cilt aşındırıcılığı (H314) sınıflandırmasına ek olarak akut
     # soluma test verisi yoksa ve ürün solunabiliyorsa. Bileşenden gelen EUH071, karışım bu sınıfları taşımıyorsa düşer.

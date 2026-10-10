@@ -1247,6 +1247,28 @@ def kural_testleri(c) -> int:
         ("Özel konsantrasyon sınırları (Liqui Moly, 2026-10-10): Ek-6 göz ÖKS bandı altında GKS yok; <%1 bileşen "
          "cilt/göz toplamasına girmez; Ek-6 dışı maddede kayıt yaptıranın ÖKS'si (SEA Md.12), Ek-6 sınıfında değil (12(3))",
          lambda: _ozel_sinir_testi(c)),
+        ("SEA Ek-2 madde 103: EUH066 karışıma bileşenden kendiliğinden geçmez — KDU kararı (Liqui Moly Seilfett, "
+         "%9,9 pentan); karar yokken soru, 'eklenmez'de kalkar, 'eklenir'de kalır",
+         lambda: (lambda f: f({})[1] == ['EUH066_KARISIM'] and 'EUH066' in f({})[0]
+                  and 'EUH066' not in f({'euh066_karisim': 'eklenmez'})[0] and f({'euh066_karisim': 'eklenmez'})[1] == []
+                  and 'EUH066' in f({'euh066_karisim': 'eklenir'})[0])(
+             lambda td: (lambda j: (j.get('euh_codes') or [],
+                                    [d['code'] for d in (j.get('pending_decisions') or []) if d.get('code') == 'EUH066_KARISIM']))(
+                 c.post('/api/v1/sds/calculate', json={'components': [
+                     {**(lambda r: {'cas': '109-66-0', 'name': 'pentan', 'hazards': r.get('hazards', []),
+                                    'suppl_hazards': r.get('suppl_hazards', [])})(
+                         c.get('/api/v1/sds/substance/lookup', params={'cas': '109-66-0', 'form': 'liquid'}).json()),
+                      'conc': 9.9, 'concMax': 9.9},
+                     {'cas': '7732-18-5', 'name': 'su', 'conc': 90.1, 'concMax': 90.1, 'hazards': []}],
+                     'form': 'liquid', 'usage': 'industrial', 'lang': 'TR', 'test_data': td}).json()))),
+        ("EC numarasıyla madde arama (KKDİK Ek-2 3.2): 215-185-5 → NaOH, 265-150-3 → 64742-48-9; CAS'ı olmayan UVCB "
+         "(921-024-6) EC anahtarıyla sınıflandırılır",
+         lambda: (c.get('/api/v1/sds/substance/search', params={'q': '215-185-5'}).json()['results'][0]['cas'] == '1310-73-2'
+                  and c.get('/api/v1/sds/substance/search', params={'q': '265-150-3'}).json()['results'][0]['cas'] == '64742-48-9'
+                  and {'H225', 'H304'} <= set(c.post('/api/v1/sds/calculate', json={'components': [
+                      {'cas': '', 'ec': '921-024-6', 'name': 'C6-C7', 'conc': 30, 'concMax': 30, 'hazards': []},
+                      {'cas': '7732-18-5', 'name': 'su', 'conc': 70, 'concMax': 70, 'hazards': []}],
+                      'form': 'liquid', 'usage': 'industrial', 'lang': 'TR', 'test_data': {}}).json().get('all_h_codes') or []))),
         ('Denetim: "1. BAŞLIK" biçimli GBF bölümlere ayrılır; Romen rakamlı taşıma sınıfı (VIII) okunur',
          lambda: _denetim_baslik_testi()),
         ("SEA Ek-1 Tablo 3.1.2: sıvı karışımda soluma ATEmix buhar / sis kabulü farklı sonuç verirse KDU'ya sorulur "
@@ -1312,7 +1334,8 @@ def _pdf_text(c, bil, **extra) -> str:
         r = c.get('/api/v1/sds/substance/lookup', params={'cas': cas, 'form': 'liquid'}).json()
         comps.append({'cas': cas, 'name': r.get('name') or cas, 'name_tr': r.get('name_tr', ''), 'conc': conc,
                       'concMax': conc, 'hazards': r.get('hazards', []), 'sclRaw': r.get('scl', []), 'm_factors': {}})
-    calc = {'components': comps, 'form': 'liquid', 'usage': 'industrial', 'lang': 'TR'}
+    calc = {'components': comps, 'form': 'liquid', 'usage': 'industrial', 'lang': 'TR',
+            'test_data': {'euh066_karisim': 'eklenir'}}   # SEA Ek-2 madde 103 KDU kararı (aseton EUH066)
     body = {'lang': 'TR', 'product': {'name': 'Kural testi', 'form': 'liquid', 'usage': 'industrial'},
             'supplier': {'name': 'Kontrol Seti A.Ş.', 'address': 'Örnek Mah. No:1 İstanbul', 'phone': '0212 000 00 00',
                          'email': 'kontrol@ornek.com'}, 'kdu': KDU_TEST,

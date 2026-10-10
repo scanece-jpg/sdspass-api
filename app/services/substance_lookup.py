@@ -722,6 +722,9 @@ def _is_liquid(form: str) -> bool:
     return any(kw in f for kw in _LIQUID_FORM_KEYWORDS)
 
 
+_EC_RE = re.compile(r'\d{3}-\d{3}-\d')
+
+
 def lookup_substance(cas: str, form: str = '',
                      ec_no: str = '', index_no: str = '') -> Optional[Dict]:
     """
@@ -735,6 +738,9 @@ def lookup_substance(cas: str, form: str = '',
     Not B maddeleri: sıvı formda CAS+'-AQ' kaydı tercih edilir.
     """
     cas = cas.strip()
+    # CAS'ı olmayan madde (UVCB vb.) EC numarasıyla aranır — anahtar EC olur (KKDİK Ek-2 3.2: CAS ya da EC)
+    if _EC_RE.fullmatch(cas) and not ec_no:
+        ec_no = cas
 
     # Not B: sıvı form + bilinen çift-giriş CAS → AQ kaydına yönlendir
     if cas in _NOTE_B_CAS and _is_liquid(form):
@@ -847,6 +853,34 @@ def search_substances(query: str, limit: int = 20) -> list:
 
     results = []
 
+    # EC numarasıyla arama — CAS'ı olmayan maddeler (UVCB) için de; sonuçta CAS yoksa 'cas' boş, 'ec_no' dolu döner
+    if _EC_RE.fullmatch(q):
+        for db_dict, priority, src in [(_load_sea_ek6(), 1, 'SEA Ek-6'), (_load_substance_db(), 2, 'ECHA ATP22')]:
+            for key, entry in db_dict.items():
+                if '_alias' in entry:
+                    continue
+                ecs = {entry.get('ec_no') or ''} | set(entry.get('ec_no_list') or [])
+                if q in ecs:
+                    r = _build_search_result(key, entry, priority, src)
+                    _c = entry.get('cas') or key
+                    r['cas'] = _c if re.fullmatch(r'\d{2,7}-\d{2}-\d', _c or '') else ''
+                    r['ec_no'] = q
+                    r['_mscore'] = 0
+                    results.append(r)
+        for key, data in _load_custom().items():
+            if (data.get('ec_no') or '') == q:
+                results.append({'cas': key if re.fullmatch(r'\d{2,7}-\d{2}-\d', key) else '', 'name': data.get('name', ''),
+                                'ec_no': q, 'sea_ek6': False, 'annex_vi': False, 'source': 'Tedarikçi/Kullanıcı Girişi',
+                                'source_priority': 4, 'hazard_count': len(data.get('hazards', [])),
+                                'h_codes': [h['h_code'] for h in data.get('hazards', []) if h.get('h_code')], '_mscore': 0})
+        _seen, _out = set(), []
+        for r in sorted(results, key=lambda x: x['source_priority']):
+            k = r['cas'] or r['ec_no']
+            if k not in _seen:
+                _seen.add(k)
+                _out.append(r)
+        return _out[:limit]
+
     # sea_ek6_tr ve substance_db'yi tara
     sea_db = _load_sea_ek6()
     sub_db = _load_substance_db()
@@ -916,7 +950,8 @@ def echa_name_search(query: str, limit: int = 6) -> list:
     değil). Yalnız tek CAS numarası taşıyan kayıtlar döner (çok CAS'lı genel kayıtta hangi CAS'ın doğru olduğu belli
     değildir). İngilizce / IUPAC adlarıyla çalışır. Sonuç bellekte tutulur."""
     q = (query or '').strip()
-    if len(q) < 4 or not re.search(r'[A-Za-zÇĞİÖŞÜçğıöşü]', q):
+    _ec = bool(_EC_RE.fullmatch(q))
+    if not _ec and (len(q) < 4 or not re.search(r'[A-Za-zÇĞİÖŞÜçğıöşü]', q)):
         return []
     key = q.lower()
     if key in _ECHA_NAME_CACHE:
@@ -931,6 +966,17 @@ def echa_name_search(query: str, limit: int = 6) -> list:
         for it in (r.json().get('items') or []):
             si = it.get('substanceIndex') or {}
             cas = [c for c in (si.get('casNumber') or []) if re.fullmatch(r'\d{2,7}-\d{2}-\d', c or '')]
+            if _ec:
+                # EC araması: yalnız EC'si tam eşleşen kayıt; CAS'ı yoksa (UVCB) EC ile seçilir
+                _ecs = si.get('ecNumber') or []
+                _ecs = (_ecs if isinstance(_ecs, list) else [_ecs]) + [si.get('rmlEc') or '']
+                if q not in _ecs or q in seen:
+                    continue
+                seen.add(q)
+                out.append({'cas': cas[0] if len(cas) == 1 else '', 'name': si.get('rmlName') or '', 'ec_no': q,
+                            'sea_ek6': False, 'annex_vi': False, 'source': 'ECHA (EC araması)', 'source_priority': 5,
+                            'hazard_count': None, 'h_codes': [], '_mscore': 0})
+                continue
             if len(cas) != 1 or cas[0] in seen:
                 continue
             seen.add(cas[0])

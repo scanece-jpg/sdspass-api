@@ -378,6 +378,17 @@
    "not": "2026-10-10 eklendi. H314 olup EUH071 yoksa KDU solunabilirliği değerlendirir."
   },
   {
+   "id": "2.2-euh066",
+   "bolum": "2",
+   "dayanak": "SEA Ek-2 madde 103",
+   "soru_tr": "EUH066 kullanılmışsa ürün cilt tahrişi / aşınması (H315 / H314) ile sınıflandırılmamış mı?",
+   "soru_en": "Where EUH066 is used, the product is not classified for skin irritation / corrosion (H315 / H314).",
+   "yontem": "kod",
+   "kosul": "her",
+   "onem": "zorunlu",
+   "not": "Karışımda EUH066 için derişim sınırı yoktur; bileşenden aktarım KDU değerlendirmesine dayanır."
+  },
+  {
    "id": "2.3-pbt",
    "bolum": "2.3",
    "dayanak": "KKDİK Ek-2 A 2.3",

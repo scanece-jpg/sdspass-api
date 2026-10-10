@@ -3256,8 +3256,9 @@ function debounceCas(id) {
   if (/^\d{1,7}-\d{2}-\d$/.test(val)) {
     _sugGizle(id, 0);
     _casTimers[id] = setTimeout(() => onCas(id), 300);
-  } else if (/[A-Za-zÇĞİÖŞÜçğıöşü]/.test(val) && val.length >= 3) {
-    _casTimers[id] = setTimeout(() => _maddeAra(id, val, 'ci'), 350);   // ad yazıldı — öneri listesi
+  } else if (/^\d{3}-\d{3}-\d$/.test(val) || (/[A-Za-zÇĞİÖŞÜçğıöşü]/.test(val) && val.length >= 3)) {
+    // ad ya da EC numarası (231-791-2) yazıldı — öneri listesi; CAS'ı olmayan madde (UVCB) EC ile seçilir
+    _casTimers[id] = setTimeout(() => _maddeAra(id, val, 'ci'), 350);
   } else {
     _sugGizle(id, 0);
   }
@@ -3285,15 +3286,17 @@ async function _maddeAra(id, q, kaynak) {
   try {
     const r = await fetch(`${API_BASE}/sds/substance/search?q=${encodeURIComponent(q)}&limit=12`);
     const j = await r.json();
-    // Yalnız gerçek CAS numarası olanlar (Ek-6 indeks no'lu grup kayıtları seçilemez); "-AQ" sulu çözelti kaydı → CAS
+    // Gerçek CAS numarası olanlar; CAS'ı yoksa EC numarası olanlar (UVCB) — Ek-6 indeks no'lu grup kayıtları seçilemez.
+    // "-AQ" sulu çözelti kaydı → CAS
     const seen = new Set();
-    const list = (j.results || []).map(x => ({ ...x, _cas: (String(x.cas || '').match(/^\d{2,7}-\d{2}-\d/) || [''])[0] }))
-      .filter(x => x._cas && !seen.has(x._cas) && seen.add(x._cas)).slice(0, 8);
+    const list = (j.results || []).map(x => ({ ...x, _cas: (String(x.cas || '').match(/^\d{2,7}-\d{2}-\d/) || [''])[0],
+                                               _ec: (String(x.ec_no || '').match(/^\d{3}-\d{3}-\d$/) || [''])[0] }))
+      .filter(x => (x._cas || x._ec) && !seen.has(x._cas || x._ec) && seen.add(x._cas || x._ec)).slice(0, 8);
     if ((document.getElementById(kaynak + id)?.value?.trim() || '') !== q) return;   // kullanıcı yazmaya devam etti
     box.innerHTML = list.length
-      ? list.map(x => `<div class="mad-sug-i" onmousedown="event.preventDefault(); _maddeSec(${id}, '${esc(x._cas)}', '${esc(_kisaAd(x.name).replace(/'/g, '’'))}')">
-          <b title="${esc(x.name || '')}">${esc(_kisaAd(x.name) || x._cas)}</b><span>${esc(x._cas)} · ${esc(x.source || '')}</span></div>`).join('')
-      : '<div class="mad-sug-bos">Bulunamadı — İngilizce adını (örn. "citric acid") ya da CAS numarasını deneyin.</div>';
+      ? list.map(x => `<div class="mad-sug-i" onmousedown="event.preventDefault(); _maddeSec(${id}, '${esc(x._cas)}', '${esc(_kisaAd(x.name).replace(/'/g, '’'))}', '${esc(x._ec)}')">
+          <b title="${esc(x.name || '')}">${esc(_kisaAd(x.name) || x._cas || x._ec)}</b><span>${x._cas ? esc(x._cas) : 'CAS yok · EC ' + esc(x._ec)} · ${esc(x.source || '')}</span></div>`).join('')
+      : '<div class="mad-sug-bos">Bulunamadı — İngilizce adını (örn. "citric acid"), CAS ya da EC numarasını deneyin.</div>';
   } catch (e) { box.innerHTML = '<div class="mad-sug-bos">Arama yapılamadı.</div>'; }
 }
 // Uzun Ek-6 adları: köşeli parantezli açıklama atılır, ilk iki eş anlamlı, en çok 90 karakter
@@ -3301,9 +3304,12 @@ function _kisaAd(n) {
   const t = String(n || '').replace(/\[[^\]]*\]/g, '').split(';').map(x => x.trim()).filter(Boolean).slice(0, 2).join('; ');
   return t.length > 90 ? t.slice(0, 88) + '…' : t;
 }
-async function _maddeSec(id, cas, ad) {
+async function _maddeSec(id, cas, ad, ec) {
   const ci = document.getElementById('ci' + id), ni = document.getElementById('ni' + id);
   if (ci) ci.value = cas;
+  // CAS'ı olmayan madde: EC numarası EC alanına yazılır, sorgu EC ile yapılır (KKDİK Ek-2 3.2)
+  const ecEl = document.getElementById('ec' + id);
+  if (ecEl && ec) ecEl.value = ec;
   if (ni && ad) ni.value = ad;
   _sugGizle(id, 0);
   await onCas(id);
@@ -3311,7 +3317,13 @@ async function _maddeSec(id, cas, ad) {
 
 async function onCas(id) {
   const casEl = document.getElementById('ci'+id);
-  const cas = casEl?.value?.trim();
+  let cas = casEl?.value?.trim();
+  // CAS alanı boşsa ve EC alanında EC numarası varsa madde EC ile sorgulanır (CAS'ı olmayan UVCB)
+  if (!cas) {
+    const _ecv = document.getElementById('ec'+id)?.value?.trim() || '';
+    if (/^\d{3}-\d{3}-\d$/.test(_ecv)) cas = _ecv;
+  }
+  if (/^\d{3}-\d{3}-\d$/.test(cas || '') && casEl?.value?.trim() === cas) return;   // EC CAS alanına yazılmış — listeden seçilir
   if (!cas || cas.length < 5) return;
   if (/[A-Za-zÇĞİÖŞÜçğıöşü]/.test(cas)) return;   // ad yazılmış — öneri listesinden seçilecek (CAS sorgusu yapılmaz)
 

@@ -1224,9 +1224,9 @@ def kural_testleri(c) -> int:
                       'm_factors': {}} for cas, cn in bil], 'form': 'liquid', 'usage': 'industrial',
                      'test_data': {'oxidizing_liquid': 'H272_cat3', 'metal_corrosive': 'not_corrosive',
                                    'euh071_inhalable': 'not_inhalable', **td}}).json()))),
-        ("SEA Ek-1 Tablo 3.1.1: toz/sis için verilmiş solunum ATE'si (perasetik asit 0,2 mg/l) buhar eşiğiyle "
-         "değerlendirilmez — %5'te H331 değil H332 (Ecolab P3-Oxonia GBF, 2026-10-10)",
-         lambda: (lambda h: 'H332' in h and 'H331' not in h)(
+        ("SEA Md.6(1)(c) + Ek-1 3.1: TR Ek-6 maddesinde (perasetik asit Akut Tox. 4*) AB ATP'nin daha ağır ATE'si "
+         "kullanılmaz — Oxonia bileşiminde H331 / H312 yok (kullanıcı kararı 2026-10-10; Ecolab P3-Oxonia GBF)",
+         lambda: (lambda h: 'H331' not in h and 'H312' not in h and 'H302' in h)(
              c.post('/api/v1/sds/calculate', json={'components': [
                  {'cas': cas, 'name': cas, 'conc': cn, 'concMax': cn,
                   'hazards': c.get('/api/v1/sds/substance/lookup', params={'cas': cas, 'form': 'liquid'}).json().get('hazards', []),

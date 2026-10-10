@@ -747,12 +747,15 @@ def lookup_substance(cas: str, form: str = '',
     if tr_entry:
         result = _sea_ek6_to_legacy(tr_entry)
         _ek6_member(result, tr_entry, cas)
-        # Sınıflandırma karışmaz; sadece boş ATE ve asterisk Katman 2'den tamamlanır
+        # Sınıflandırma karışmaz; sadece boş ATE Katman 2'den (AB Ek-VI ATP) tamamlanır — yalnız TR Ek-6
+        # kategorisiyle uyumlu değerler (kullanıcı kararı 2026-10-10: "yalnız TR Ek-6")
         if not result.get('ate'):
             db_entry = _db_lookup(cas=result.get('cas',''), ec_no=result.get('ec_no',''),
                                   index_no=result.get('index_no',''))
             if db_entry and db_entry.get('ate'):
-                result['ate'] = db_entry['ate']
+                _ate = _ate_ek6_uyumlu(db_entry['ate'], result.get('hazards') or [])
+                if _ate:
+                    result['ate'] = _ate
         # ECHA C&L öz-sınıflandırmasından ek H-kodları (harmonize edilmemiş tehlikeler)
         try:
             result = _supplement_from_echa_cl(cas, result)
@@ -1014,6 +1017,55 @@ def _save_api_result(directory: str, cas: str, api_result: dict, source_label: s
     except Exception as e:
         print(f'[CL CACHE] {cas} kayıt hatası ({file_path}): {e}')
         return False
+
+
+# SEA Ek-1 Tablo 3.1.1 kategori aralıkları (alt sınır hariç, üst sınır dahil) — ATE'nin Ek-6 kategorisine uyumu için
+_ATE_ARALIK = {
+    'oral':   {1: (0, 5), 2: (5, 50), 3: (50, 300), 4: (300, 2000)},
+    'dermal': {1: (0, 50), 2: (50, 200), 3: (200, 1000), 4: (1000, 2000)},
+    'vapour': {1: (0, 0.5), 2: (0.5, 2), 3: (2, 10), 4: (10, 20)},
+    'dust':   {1: (0, 0.05), 2: (0.05, 0.5), 3: (0.5, 1), 4: (1, 5)},
+    'gas':    {1: (0, 100), 2: (100, 500), 3: (500, 2500), 4: (2500, 20000)},
+}
+_ATE_YOL = {'H300': 'oral', 'H301': 'oral', 'H302': 'oral', 'H310': 'dermal', 'H311': 'dermal', 'H312': 'dermal',
+            'H330': 'inhalation', 'H331': 'inhalation', 'H332': 'inhalation'}
+
+
+def _ate_ek6_uyumlu(ate: dict, hazards: list) -> dict:
+    """TR Ek-6'daki maddeye AB Ek-VI (ATP) kaynaklı sayısal ATE: yalnız Ek-6'daki akut toksisite kategorisinin
+    aralığına düşen yol değerleri tutulur. Aralık dışı (Ek-6 sınıfından daha ağır) değer atılır — ATEmix'te Ek-6
+    kategorisinin dönüşüm değeri (SEA Ek-1 Tablo 3.1.2) kullanılır. SEA Md.6(1)(c): Türkiye'de bağlayıcı olan TR Ek-6;
+    yıldızlı (*) asgari sınıf yerine AB'nin daha ağır ATE'si uygulanmaz (örn. perasetik asit TR Ek-6 Akut Tox. 4*,
+    AB ATP deri 60 mg/kg → %5'te H312 veriliyordu; Ecolab P3-Oxonia GBF). Kullanıcı kararı 2026-10-10."""
+    if not isinstance(ate, dict):
+        return {}
+    kat = {}
+    for h in hazards or []:
+        code = str(h.get('h_code') or '').replace('*', '').strip()[:4]
+        m = re.search(r'(\d)', str(h.get('h_class') or ''))
+        yol = _ATE_YOL.get(code)
+        if yol and m and 'Acute' in str(h.get('h_class') or '') or (yol and m and 'Akut' in str(h.get('h_class') or '')):
+            kat[yol] = int(m.group(1))
+    out = {}
+    for k, v in ate.items():
+        val = v.get('value') if isinstance(v, dict) else v
+        try:
+            val = float(val)
+        except (TypeError, ValueError):
+            continue
+        yol = 'inhalation' if k.startswith('inhal') else k
+        if yol not in kat:
+            continue
+        if yol == 'inhalation':
+            f = str((v.get('form') if isinstance(v, dict) else '') or '').lower()
+            unit = str((v.get('unit') if isinstance(v, dict) else '') or '').lower()
+            alt = 'gas' if ('gas' in f or 'ppm' in unit) else 'dust' if any(x in f for x in ('dust', 'mist')) else 'vapour'
+        else:
+            alt = yol
+        lo, hi = _ATE_ARALIK[alt][kat[yol]]
+        if lo < val <= hi:
+            out[k] = v
+    return out
 
 
 def _supplement_from_echa_cl(cas: str, sea_result: dict) -> dict:

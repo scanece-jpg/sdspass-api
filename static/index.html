@@ -4417,6 +4417,7 @@ function renderAll(s) {
       h += `<div class="warn-box" style="margin-bottom:8px">
         <div style="margin-bottom:6px">${_esc(d.question)}</div>
         ${d.test_guidance ? `<details style="font-size:10px;margin-bottom:6px;color:var(--text2)"><summary style="cursor:pointer">Test hakkında</summary>${_esc(d.test_guidance)}</details>` : ''}
+        ${d.help_url ? `<div style="font-size:10px;margin-bottom:6px"><a href="${_esc(d.help_url)}" target="_blank" rel="noopener">🔎 ${_esc(d.help_text || d.help_url)}</a></div>` : ''}
         <select style="width:100%;font-size:11px" onchange="_setPhysDecision('${_esc(d.field)}', this)">
           <option value="">— seçin —</option>
           ${(d.options || []).map(o => `<option value="${_esc(o.value)}">${_esc(o.label)}</option>`).join('')}

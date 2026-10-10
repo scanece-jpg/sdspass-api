@@ -55,9 +55,15 @@ def classes_of(cas):
     return out
 
 
+# ADR Tablo B (resmî eş anlamlılar) × Ek-6 — 5_tablo_b.py çıktısı: UN → [CAS]
+_tbp = os.path.join(HERE, 'tb_cas.json')
+TB = json.load(open(_tbp, encoding='utf-8')) if os.path.exists(_tbp) else {}
 rows, review = {}, []
 for x in CAND:
     m = CASM.get(x['base'])
+    tb = TB.get(x['un']) or []
+    if not m and len(tb) == 1 and 'N.O.S' not in x['name']:
+        m = {'cas': tb[0], 'kaynak': 'tablo_b', 'tum': {}}
     if not m:
         review.append((x['un'], 'CAS bulunamadı', x['name'][:80])); continue
     cas = m['cas']
@@ -81,7 +87,10 @@ for x in CAND:
     t = m.get('tum') or {}
     k = m['kaynak']
     uyum = cls is not None and (x['cls'] in cls or (x['cls'].startswith('2') and any(c.startswith('2') for c in cls)))
-    if k == 'substance_db':
+    if k == 'tablo_b':
+        # Tablo B satırı PDF'ten okunur (satır kayması olabilir) → yalnız Ek-6 sınıfı Tablo A sınıfıyla uyumluysa
+        kabul, neden = uyum, 'ADR Tablo B eş anlamlısı × Ek-6 (sınıf uyumlu)'
+    elif k == 'substance_db':
         kabul, neden = True, 'Ek-6 tek ad eşleşmesi'
     elif k == 'pubchem':
         kabul, neden = (not t.get('wd') or cas in t['wd']), 'PubChem birebir ad'
@@ -93,6 +102,8 @@ for x in CAND:
     if not kabul:
         review.append((x['un'], f'kaynak doğrulanamadı ({k}, Ek-6 sınıfları {sorted(cls) if cls is not None else "yok"}, {cas})',
                        x['name'][:70])); continue
+    if k != 'tablo_b' and cas in tb:
+        neden += ' + ADR Tablo B ile doğrulandı'
     r['_kaynak'] = neden
     rows.setdefault(cas, []).append(r)
 # Aynı CAS: koşullu satırlar önce, hal belirtilmiş satırlar önce
@@ -105,6 +116,8 @@ io.open('data/adr_cas_map.json', 'w', encoding='utf-8', newline='').write(json.d
 io.open(os.path.join(HERE, 'ta_inceleme.txt'), 'w', encoding='utf-8').write('\n'.join(' | '.join(r) for r in review))
 nr = sum(len(v) for v in rows.values())
 nd = sum(1 for v in rows.values() for r in v if r['_kaynak'] == 'PubChem birebir ad')
-print(f'{len(rows)} CAS, {nr} satır yazıldı ({nd} satır yalnız PubChem ad eşleşmesiyle); inceleme listesi: {len(review)}')
+nt = sum(1 for v in rows.values() for r in v if 'Tablo B' in r['_kaynak'])
+print(f'{len(rows)} CAS, {nr} satır yazıldı ({nd} satır yalnız PubChem ad eşleşmesiyle; {nt} satır Tablo B ile); '
+      f'inceleme listesi: {len(review)}')
 from collections import Counter
 print(Counter(r[1].split(':')[0] for r in review))

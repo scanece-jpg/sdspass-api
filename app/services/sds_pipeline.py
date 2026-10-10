@@ -51,6 +51,14 @@ DOMINANCE_MAP = {
 
 
 
+def _pending_all(phys_res: dict, transport: dict, test_data: dict) -> list:
+    """Panel kararları phys_res['pending_decisions'] üzerinden gösterir — ADR kararı da oraya eklenir (tekrarsız)."""
+    lst = phys_res.setdefault('pending_decisions', [])
+    for d in _adr_undet_decision(transport, test_data):
+        if d['code'] not in {x.get('code') for x in lst}:
+            lst.append(d)
+    return lst
+
 def _adr_undet_decision(transport: dict, test_data: dict) -> list:
     """Belirsiz taşıma (tek tetikleyici bileşen Tablo A haritasında yok): KDU kararı. 'nos' → B.B.B. kullanılır;
     'undetermined' → GBF'de 14.1–14.4 "belirlenmemiştir". Karar verilmemişse soru döner (transport yerinde güncellenir)."""
@@ -76,6 +84,9 @@ def _adr_undet_decision(transport: dict, test_data: dict) -> list:
         ],
         'legal_basis': 'ADR 2025 3.1.2.8, 2.1.3.3; KKDİK Ek-2 Bölüm 14',
         'components': [u['cas']],
+        # Elle kontrol için: GESTIS (IFA/DGUV) — veri programa alınmaz (kullanım koşulları), yalnız bağlantı
+        'help_url': 'https://gestis.dguv.de/search',
+        'help_text': f"GESTIS madde veri tabanında arayın: \"Nummer\" alanına {u['cas']} yazın, Transportvorschriften bölümüne bakın.",
     }]
 
 def norm_sub(h) -> str:
@@ -968,7 +979,7 @@ async def classify(inp: dict) -> dict:
         'substance_mode': substance_mode,
         'warnings':    (phys_res.get('warnings', []) + stot_res.get('warnings', [])
                         + clp_res.get('warnings', [])),
-        'pending_decisions': phys_res.get('pending_decisions', []) + _adr_undet_decision(transport, test_data),
+        'pending_decisions': _pending_all(phys_res, transport, test_data),
         'classification_notes': cls_notes,
         'b9': b9,
         'label_components': label_components(comps, all_h),

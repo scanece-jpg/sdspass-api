@@ -121,10 +121,36 @@ def is_registered(cas: str) -> bool:
     return bool(regs) and str(regs[0]).startswith('01-')
 
 
+_EK4: set | None = None
+
+
+def ek4(cas: str) -> bool:
+    """KKDİK Ek-4 (2(5)(a) — asgari risk taşıdığı yeterince bilindiği için kayıttan muaf maddeler; resmî metin
+    sds-knowledge/tr/kkdik-ekleri/kkdik-ek-04.md). Örn. nişasta 9005-25-8, glikoz, CO2."""
+    global _EK4
+    if _EK4 is None:
+        _EK4 = set()
+        try:
+            import re
+            from pathlib import Path
+            t = (Path(__file__).resolve().parents[2] / 'sds-knowledge' / 'tr' / 'kkdik-ekleri' / 'kkdik-ek-04.md') \
+                .read_text(encoding='utf-8')
+            for row in t.splitlines():
+                if row.startswith('|'):
+                    cells = [x.strip() for x in row.strip('|').split('|')]
+                    if len(cells) >= 3:
+                        _EK4.update(re.findall(r'\d{2,7}-\d{2}-\d', cells[-1]))
+        except Exception as e:
+            print(f'[REACH_DB] KKDİK Ek-4 okunamadı: {e}')
+    return (cas or '').strip() in _EK4
+
+
 def exemption(cas: str) -> str:
-    """Kayıttan muafiyet: 'exempt' (KKDİK Ek-4/5, örn. su) | 'polymer' | ''."""
+    """Kayıttan muafiyet: 'exempt' (KKDİK Ek-4/5, örn. su; Ek-4 listesi resmî metinden) | 'polymer' | ''."""
     regs = (REACH_DB.get(cas.strip()) or {}).get('reg') or []
-    return regs[0] if regs and regs[0] in ('exempt', 'polymer') else ''
+    if regs and regs[0] in ('exempt', 'polymer'):
+        return regs[0]
+    return 'exempt' if ek4(cas) else ''
 
 
 _EK6_EC: dict | None = None

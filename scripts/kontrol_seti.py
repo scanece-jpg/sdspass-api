@@ -1331,6 +1331,15 @@ def kural_testleri(c) -> int:
          "duruma göre (O2 1072/1073, N2 1066/1977, LNG 1972, CO2 1013/2187, H2 1049); BEKRA girdi 18 sıvılaştırılmış "
          "alevlenir gazda (LPG); P403 birleşik P410+P403 ile tekrarlanmaz",
          lambda: _gaz_testi(c)),
+        ("KKDİK Ek-4 (asgari risk, kayıttan muaf) maddesi 'bilinmeyen' sayılmaz ve Bölüm 3'te 'Muaf' yazılır: nişasta "
+         "9005-25-8 (panelin toz dolgu listesi)",
+         lambda: __import__('app.services.reach_db', fromlist=['x']).exemption('9005-25-8') == 'exempt'
+                 and not __import__('app.services.reach_db', fromlist=['x']).ek4('1332-58-7')
+                 and all(float((v or {}).get('unknownPct') or 0) == 0 for v in (c.post('/api/v1/sds/calculate', json={
+                     'components': [{'cas': '9005-25-8', 'name': 'nişasta', 'conc': 50, 'concMax': 50, 'hazards': [],
+                                     'm_factors': {}},
+                                    {'cas': '7732-18-5', 'name': 'su', 'conc': 50, 'concMax': 50, 'hazards': []}],
+                     'form': 'liquid', 'usage': 'industrial', 'lang': 'TR', 'test_data': {}}).json().get('ate_details') or {}).values())),
         ("SEA Ek-1 3.1.3.6.2.2: REACH kayıtlı, akut toksisite sınıfı olmayan bileşen 'bilinmeyen' sayılmaz (magnezyum "
          "klorür %50 → bilinmeyen %0; Baystar toz deterjan: sodyum sülfat dolgu %75 'bilinmeyen' yazılıyordu)",
          lambda: all(float((v or {}).get('unknownPct') or 0) == 0 for v in (c.post('/api/v1/sds/calculate', json={

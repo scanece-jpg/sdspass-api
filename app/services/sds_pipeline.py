@@ -293,7 +293,9 @@ async def refresh_components(components: list, form: str, test_data: Optional[di
             # maddelik liste vardı; sınıflandırılmamış kayıtlı dolgu (sodyum sülfat) "bilinmeyen akut toksisite / sucul
             # zarar" sayılıyor, 2.2'ye "%75 bilinmeyen" yazılıyordu (Baystar toz deterjan, 2026-10-10)
             from app.services.component_phys import kayitli as _ech_kayitli
-            if _registered(cas) or _ech_kayitli(cas):
+            from app.services.reach_db import ek4 as _ek4
+            # KKDİK Ek-4: asgari risk taşıdığı yeterince bilinen madde (nişasta, glikoz…) — "bilinmeyen" sayılmaz
+            if _registered(cas) or _ech_kayitli(cas) or _ek4(cas):
                 c['_kayitli'] = True   # yalnız "veri var" işareti — numara GBF'ye basılmaz
         except Exception:
             pass

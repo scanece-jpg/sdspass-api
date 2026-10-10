@@ -5875,6 +5875,15 @@ function _showPhysSrcModal(callback) {
     const labelStar = _psrcReq(f) ? ' <span style="color:#fc8181;font-size:9px">*</span>' : '';
     const ph        = est != null ? `ölçülen değer (tahmini ~${est})` : (f.type === 'text' ? '—' : '');
 
+    // Değer yoksa: KKDİK Ek-2 9.1 — bilginin bulunmadığı / uygulanmadığı nedeniyle belirtilir (sayı kutusuna harf
+    // yazılamadığı için seçimle; onaylanınca formda N/A + gerekçe işaretlenir)
+    const naSel = isMotor ? '' : `<select class="psrc-na" data-psrc-na="${f.formId}" title="Değer yoksa nedenini seçin"
+               onchange="const i=this.parentNode.querySelector('input[data-psrc-field]'); if(i){ i.disabled=!!this.value; if(this.value) i.value=''; }"
+               style="margin-left:6px;font-size:10px;max-width:130px">
+          <option value="">değer yok mu?</option>
+          <option value="Veri yok — test yapılmamıştır">Veri yok — test yapılmamıştır</option>
+          <option value="Bu ürün için uygulanamaz">Uygulanamaz</option>
+        </select>`;
     return `<div class="psrc-row">
       <div class="psrc-row-label">${f.label}${labelStar}</div>
       <div class="psrc-row-wrap">
@@ -5883,7 +5892,7 @@ function _showPhysSrcModal(callback) {
                ${solText !== null && fillVal === solText ? `data-motortext="${_esc(solText)}"` : ''}
                value="${_esc(fillVal)}" placeholder="${_esc(ph)}"
                title="Değeri değiştirmek için bu alana tıklayın">
-        ${unitSpan}
+        ${unitSpan}${naSel}
       </div>
       <div class="psrc-badge ${badgeCls}">${badgeTxt}</div>
     </div>`;
@@ -5980,9 +5989,13 @@ async function _physSrcConfirm() {
   mandFields.forEach(f => {
     const inp = document.querySelector(`#physSrcBody input[data-psrc-field="${f.formId}"]`);
     if (!inp) return; // Modal'da gösterilmiyorsa (kullanıcı zaten doldurmuş) atla
+    // Parlama noktası karar satırında seçim yapıldıysa (ölçüm yok / > 60 °C / L.2) değer kutusu boş kalabilir —
+    // önceden seçim yapılsa da kutu kırmızı kalıyor, PDF'e geçilemiyordu (2026-10-10)
+    if (f.formId === 'tf_fp' && fpSel?.value) { inp.style.borderColor = ''; inp.style.boxShadow = ''; return; }
     // Çözünürlük: motor text değeri varsa zorunlu kontrolü geç
     const hasSolText = f.formId === 'tf_sol' && !!(tp2.solubility?.text);
-    if (!inp.value.trim() && !hasSolText) {
+    const naSec = document.querySelector(`#physSrcBody select[data-psrc-na="${f.formId}"]`)?.value;
+    if (!inp.value.trim() && !hasSolText && !naSec) {
       inp.style.borderColor = 'var(--danger)';
       inp.style.boxShadow   = '0 0 0 2px rgba(252,129,129,.35)';
       hasError = true;
@@ -5993,16 +6006,39 @@ async function _physSrcConfirm() {
   });
 
   if (hasError) {
-    if (errEl) { errEl.textContent = '⚠ Kırmızı alanlar bu form için zorunludur — doldurun. Değer yoksa pencereyi kapatıp formda "N/A" işaretleyin ve nedenini yazın (ör. "Veri yok — test yapılmamıştır").'; errEl.style.display = ''; }
+    if (errEl) { errEl.textContent = '⚠ Kırmızı alanlar bu form için zorunludur — değeri girin ya da satırın yanındaki listeden nedenini seçin ("Veri yok — test yapılmamıştır" / "Uygulanamaz").'; errEl.style.display = ''; }
     return; // Kapatma — kullanıcı doldurmalı
   }
   if (errEl) errEl.style.display = 'none';
+
+  // ── "Veri yok / Uygulanamaz" seçimleri: onay, sonra formda N/A + gerekçe ─────────────
+  const naSecimler = [...document.querySelectorAll('#physSrcBody select[data-psrc-na]')].filter(x => x.value);
+  if (naSecimler.length) {
+    const _lbl = id => (_PSRC_FIELDS.find(f => f.formId === id) || {}).label || id;
+    const liste = naSecimler.map(x => `• ${_lbl(x.dataset.psrcNa)}: ${x.value}`).join('\n');
+    if (!confirm(`Aşağıdaki alanlar GBF Bölüm 9'a değer yerine bu ifadeyle yazılacak (KKDİK Ek-2 9.1):\n\n${liste}\n\nOnaylıyor musunuz?`)) return;
+    naSecimler.forEach(x => {
+      const id = x.dataset.psrcNa;
+      const f = _PSRC_FIELDS.find(ff => ff.formId === id) || {};
+      const target = document.getElementById(id);
+      if (!target) return;
+      const cb = f.naId ? document.getElementById(f.naId) : null;
+      if (cb) {
+        if (!cb.checked) { cb.checked = true; cb.dispatchEvent(new Event('change')); }   // toggleNA: kutu kapanır, gerekçe alanı açılır
+        const r = target.parentNode.querySelector('input[id^="na_reason_"]');
+        if (r) r.value = x.value;
+      } else {
+        target.value = x.value;                       // metin alanı (görünüm / renk / koku): ifade doğrudan yazılır
+        target.dataset.source = 'user';
+      }
+    });
+  }
 
   // ── Form alanlarına aktar ─────────────────────────────────────────────────
   let changed = false;
   document.querySelectorAll('#physSrcBody input[data-psrc-field]').forEach(inp => {
     const target = document.getElementById(inp.dataset.psrcField);
-    if (!target) return;
+    if (!target || inp.disabled) return;          // "veri yok / uygulanamaz" seçildi — yukarıda işlendi
     const v = inp.value;
     // Motorun çözünürlük metni değiştirilmediyse sayı kutusuna yazılmaz (PDF metni motordan alır)
     if (inp.dataset.motortext !== undefined && v === inp.dataset.motortext) return;

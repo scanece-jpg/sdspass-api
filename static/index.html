@@ -2776,7 +2776,8 @@ const _SOLID_FILLERS = [
   { label: 'Sodyum Klorür (Tuz)', cas: '7647-14-5' },
   { label: 'Kalsiyum Karbonat',   cas: '471-34-1'  },
   { label: 'Silika (SiO₂)',       cas: '7631-86-9' },
-  { label: 'Kaolin',              cas: '1332-58-7' },
+  // KKDİK Ek-5 madde 7 (doğal mineral) — kayıt dosyası yok; LD50 girilmezse "bilinmeyen akut toksisite" sayılır
+  { label: 'Kaolin',              cas: '1332-58-7', not: 'Kayıt dosyası yok — tedarikçi GBF’sindeki LD50 değerini bileşen satırına girin; girilmezse "bilinmeyen akut toksisite" sayılır.' },
   { label: 'Sodyum Sülfat',       cas: '7757-82-6' },
   { label: 'Talk',                cas: '14807-96-6' },
   { label: 'Mısır Nişastası',     cas: '9005-25-8' },
@@ -3101,6 +3102,7 @@ function _showFillerPicker(remaining, fillers) {
         <button onclick="_addFillerComp('${f.cas}',${remaining});document.getElementById('fillerPickerModal').remove()"
           style="text-align:left;background:var(--bg3);border:1px solid var(--border);border-radius:6px;padding:8px 12px;cursor:pointer;font-size:12px;color:var(--text)">
           <b>${f.label}</b> <span style="color:var(--text3);font-size:11px">CAS ${f.cas}</span>
+          ${f.not ? `<div style="font-size:10px;color:var(--warn,#c98a00);margin-top:3px">${f.not}</div>` : ''}
         </button>`).join('')}
       <div style="margin-top:4px;border-top:1px solid var(--border);padding-top:10px">
         <div style="font-size:11px;color:var(--text2);margin-bottom:6px">Diğer — CAS numarası girin:</div>
@@ -5669,7 +5671,7 @@ function _checkPDFMandatory() {
   getComps().filter(c => (parseFloat(c.concMax || c.conc) || 0) > 0 && !/^\d{2,7}-\d{2}-\d$/.test(c.cas || '')
                          && !/^\d{3}-\d{3}-\d$/.test(c.ec || '') && !/^\d{3}-\d{3}-\d$/.test(c.cas || ''))
     .forEach(c => missing.push({ hard: true, label: `Bileşen CAS / EC numarası: ${c.name || '(adsız)'}`,
-      reason: 'CAS kutusuna maddenin adını yazıp listeden seçin ya da CAS numarasını girin; CAS'ı olmayan madde için EC numarasını EC kutusuna yazın (KKDİK Ek-2 3.2)' }));
+      reason: 'CAS kutusuna maddenin adını yazıp listeden seçin ya da CAS numarasını girin; CAS’ı olmayan madde için EC numarasını EC kutusuna yazın (KKDİK Ek-2 3.2)' }));
   // Forma göre zorunlu fiziksel alanlar (KKDİK Ek-2 9.1) — boşsa PDF oluşturulmaz
   _physReqMissing(form).forEach(m => missing.push({
     hard: true, label: m.label + ' (Bölüm 9)',

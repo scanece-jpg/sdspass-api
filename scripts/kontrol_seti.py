@@ -430,6 +430,25 @@ def _gaz_testi(c) -> bool:
                 [{'cas': '68476-85-7', 'name': 'LPG', 'hazards': [{'h_code': 'H350'}, {'h_code': 'H340'}]}]) != [])
 
 
+def _panel_js_testi() -> bool:
+    """Panelin (static/index.html) satır içi script blokları sözdizimi hatasız mı — node ile. Tek bir kaçışsız tırnak
+    (örn. 'CAS'ı …') bütün bloğu çalışmaz hâle getiriyordu (c631f88a → 2026-10-10'da bulundu)."""
+    import subprocess, shutil
+    node = shutil.which('node')
+    if not node:
+        print('   (node yok — panel sözdizimi denetlenemedi)')
+        return False
+    js = (r"const fs=require('fs');const h=fs.readFileSync(process.argv[1],'utf8');"
+          r"const ms=[...h.matchAll(/<script(?![^>]*src)[^>]*>([\s\S]*?)<\/script>/g)];let bad=0;"
+          r"ms.forEach((m,i)=>{try{new Function(m[1])}catch(e){bad++;console.log('blok '+i+': '+e.message)}});"
+          r"process.exit(bad?1:0)")
+    r = subprocess.run([node, '-e', js, os.path.join('static', 'index.html')], capture_output=True, text=True,
+                       encoding='utf-8')
+    if r.returncode:
+        print('   ' + (r.stdout or r.stderr).strip()[:300])
+    return r.returncode == 0
+
+
 def _cl_testi(c) -> bool:
     """DIPOL CL (çamaşır suyu) GBF bulguları, 2026-10-10."""
     import fitz
@@ -1348,6 +1367,8 @@ def kural_testleri(c) -> int:
                              'm_factors': {}},
                             {'cas': '7732-18-5', 'name': 'su', 'conc': 50, 'concMax': 50, 'hazards': []}],
              'form': 'liquid', 'usage': 'industrial', 'lang': 'TR', 'test_data': {}}).json().get('ate_details') or {}).values())),
+        ('Panel (static/index.html) script blokları sözdizimi hatasız (kaçışsız tırnak bütün bloğu durdurur)',
+         lambda: _panel_js_testi()),
         ('Denetim: "1. BAŞLIK", "1.BAŞLIK" ve "1. BÖLÜM:" biçimli GBF bölümlere ayrılır; Romen rakamlı taşıma sınıfı '
          '(VIII) okunur; Bölüm 3\'te EC numarası derişim sanılmaz, "% 10-20" / "< %5" okunur',
          lambda: _denetim_baslik_testi()),

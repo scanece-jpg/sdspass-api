@@ -3407,8 +3407,12 @@ async function onCas(id) {
         const badge = document.createElement('span');
         badge.style.cssText = 'font-size:9px;color:var(--safe);border:1px solid rgba(0,229,176,.3);border-radius:3px;padding:1px 5px;margin-left:4px';
         const sclDict = _sclMap[id] || {};
-        badge.title = 'Maddeye ozgu SCL degerleri: ' + Object.entries(sclDict).map(([k,v])=>`${k}=%${v}`).join(', ');
-        badge.textContent = '⚖ SCL';
+        // Kayıt yaptıranın ÖKS'si (ECHA kayıt dosyası, SEA Md.12) Ek-6 sınırından ayrı gösterilir
+        const _kayit = sclRaw.some(s => s.kaynak === 'kayit');
+        badge.title = (_kayit ? "Kayıt yaptıranın özel konsantrasyon sınırları (ECHA kayıt dosyası, SEA Md.12): "
+                              : 'Maddeye özgü SCL değerleri: ')
+          + sclRaw.map(s => `${s.h_class || s.h_code} ≥%${s.c_min}${s.c_max != null ? ' <%' + s.c_max : ''}`).join(', ');
+        badge.textContent = _kayit ? '⚖ ÖKS (kayıt yaptıran)' : '⚖ SCL';
         chips.appendChild(badge);
       }
     }

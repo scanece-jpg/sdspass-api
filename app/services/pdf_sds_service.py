@@ -4329,7 +4329,11 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
         if 'σ' in rl or 'toplam' in rl:
             return ('Toplama yöntemi (SEA Ek-1 3.2.3.3 / 3.3.3.3)' if TR
                     else 'Additivity (summation) method (Annex I 3.2.3.3 / 3.3.3.3)')
-        if str(src or '').upper() == 'SCL':
+        if 'kayıt yaptıran' in rl and ('öks' in rl or 'sks' in rl):
+            return ("Hesaplama yöntemi — özel konsantrasyon sınırı (kayıt yaptıranın sınıflandırması, ECHA kayıt "
+                    "dosyası; SEA Md.12)" if TR else
+                    "Calculation method — specific concentration limit (registrant's classification, ECHA dossier)")
+        if str(src or '').upper() in ('SCL', 'SKS'):
             return ('Hesaplama yöntemi — özel konsantrasyon sınırı (SEA Ek-6)' if TR
                     else 'Calculation method — specific concentration limit (Annex VI)')
         return ('Hesaplama yöntemi — genel konsantrasyon sınırı (SEA Ek-1)' if TR

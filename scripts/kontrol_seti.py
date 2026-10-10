@@ -349,6 +349,42 @@ def _asit_testi(c) -> bool:
             and '-85 °C' not in t and 'Sıvılaştırılmış gaz' not in t)
 
 
+def _ozel_sinir_testi(c) -> bool:
+    """Liqui Moly TR GBF karşılaştırması (2026-10-10): (1) Ek-6 göz ÖKS bandı varsa bandın altında GKS %10 kullanılmaz
+    (143-22-6 %12 → H319 yok, DOT 4); (2) cilt/göz toplamasına %1 altı bileşen girmez (Ek-1 3.3.3.3.1; %0,99 + %0,99
+    Göz Hasarı 1 → H319 yok); (3) Ek-6 dışı maddede kayıt yaptıranın ÖKS'si (SEA Md.12) — SLES %8 → H319, %12 → H318;
+    (4) Ek-6'da uyumlaştırılmış sınıfa kayıt yaptıranın ÖKS'si uygulanmaz (Md.12(3))."""
+    from app.services import substance_lookup as sl, component_phys as cpx
+
+    def hesap(bil):
+        comps = []
+        for cas, cn in bil:
+            r = c.get('/api/v1/sds/substance/lookup', params={'cas': cas, 'form': 'liquid'}).json()
+            comps.append({'cas': cas, 'name': cas, 'conc': cn, 'concMax': cn, 'hazards': r.get('hazards', []),
+                          'sclRaw': r.get('scl', []), 'm_factors': {}})
+        j = c.post('/api/v1/sds/calculate', json={'components': comps, 'form': 'liquid', 'usage': 'industrial',
+                                                    'lang': 'TR', 'test_data': {}}).json()
+        return set(j.get('all_h_codes') or []), ' '.join(str(x.get('reason')) for x in j.get('clp_passed') or [])
+    dot4, _ = hesap([('143-22-6', 12), ('1559-34-8', 2), ('7732-18-5', 86)])
+    kucuk, _ = hesap([('68439-50-9', 0.99), ('137-16-6', 0.99), ('7732-18-5', 98.02)])
+    s8, r8 = hesap([('68891-38-3', 8), ('7732-18-5', 92)])
+    s12, _ = hesap([('68891-38-3', 12), ('7732-18-5', 88)])
+    _eski = cpx._read
+    cpx._read = lambda cas: {'ghs_self': {'hazards': [{'h_class': 'Eye Dam. 1', 'h_code': 'H318'}],
+                                          'scl': [{'h_class': 'Eye Dam. 1', 'h_code': 'H318', 'c_min': 10.0, 'c_max': None}]}}
+    try:
+        res = {'hazards': [{'h_class': 'Eye Dam. 1', 'h_code': 'H318'}], 'scl': []}
+        ek6 = sl._registrant_scl('x', res, {'H318'}).get('scl')
+        ek6_disi = sl._registrant_scl('x', res).get('scl')
+        res19 = {'hazards': [{'h_class': 'Eye Irrit. 2', 'h_code': 'H319'}], 'scl': []}
+        farkli = sl._registrant_scl('x', res19).get('scl')
+    finally:
+        cpx._read = _eski
+    return ('H319' not in dot4 and 'H319' not in kucuk and 'H318' not in kucuk
+            and 'H319' in s8 and 'H318' not in s8 and "Kayıt yaptıranın ÖKS'si" in r8 and 'H318' in s12
+            and ek6 == [] and len(ek6_disi) == 1 and ek6_disi[0]['kaynak'] == 'kayit' and farkli == [])
+
+
 def _cl_testi(c) -> bool:
     """DIPOL CL (çamaşır suyu) GBF bulguları, 2026-10-10."""
     import fitz
@@ -1208,6 +1244,9 @@ def kural_testleri(c) -> int:
          "inorganikte Koc tahmini yok; 14.2 teknik adda Ek-6 yer tutucusu yok; BEKRA hipoklorit kaydı koşulsuz yazılmaz; "
          "Bölüm 9'da eser / katı / 0 hPa bileşen değeri yok",
          lambda: _cl_testi(c)),
+        ("Özel konsantrasyon sınırları (Liqui Moly, 2026-10-10): Ek-6 göz ÖKS bandı altında GKS yok; <%1 bileşen "
+         "cilt/göz toplamasına girmez; Ek-6 dışı maddede kayıt yaptıranın ÖKS'si (SEA Md.12), Ek-6 sınıfında değil (12(3))",
+         lambda: _ozel_sinir_testi(c)),
         ('Denetim: "1. BAŞLIK" biçimli GBF bölümlere ayrılır; Romen rakamlı taşıma sınıfı (VIII) okunur',
          lambda: _denetim_baslik_testi()),
         ("SEA Ek-1 Tablo 3.1.2: sıvı karışımda soluma ATEmix buhar / sis kabulü farklı sonuç verirse KDU'ya sorulur "

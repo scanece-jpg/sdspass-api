@@ -758,7 +758,10 @@ def lookup_substance(cas: str, form: str = '',
                     result['ate'] = _ate
         # ECHA C&L öz-sınıflandırmasından ek H-kodları (harmonize edilmemiş tehlikeler)
         try:
+            _ek6_kod = {str(h.get('h_code') or '').replace('*', '').strip()[:4].upper() for h in result.get('hazards') or []}
             result = _supplement_from_echa_cl(cas, result)
+            # Ek-6 maddesi: kayıt yaptıranın özel sınırı yalnız Ek-6'da olmayan (takviye) sınıflar için (SEA Md.12(3))
+            result = _registrant_scl(cas, result, _ek6_kod)
         except Exception as _e:
             print(f'[sea_supplement] {cas}: hata (atlandı) — {_e}')
         return result
@@ -774,7 +777,7 @@ def lookup_substance(cas: str, form: str = '',
         if _is_stale(echa_entry):
             _fetch_echa_background(cas, refresh=True)
         from app.services.echa_service import ECHA_ATTRIBUTION
-        return _fill_tr_name(_cl_to_legacy(echa_entry, 3, f'ECHA C&L — {ECHA_ATTRIBUTION}'))
+        return _registrant_scl(cas, _fill_tr_name(_cl_to_legacy(echa_entry, 3, f'ECHA C&L — {ECHA_ATTRIBUTION}')))
 
     # ── Katman 3b: PubChem önbelleği ─────────────────────────────────────────
     # PubChem tehlike verisi harmonize değil (C&L bildirimi). Sadece fiziksel
@@ -1065,6 +1068,55 @@ def _ate_ek6_uyumlu(ate: dict, hazards: list) -> dict:
         lo, hi = _ATE_ARALIK[alt][kat[yol]]
         if lo < val <= hi:
             out[k] = v
+    return out
+
+
+_SCL_AILE = {'H314': 'deri', 'H315': 'deri', 'H318': 'goz', 'H319': 'goz'}
+
+
+def _aile_ust(codes: set, aile: str):
+    """Zararlılık ailesindeki en ağır kod (deri: H314 > H315; göz: H318 > H319, H314 göz hasarını da kapsar)."""
+    if aile == 'deri':
+        return 'H314' if 'H314' in codes else 'H315' if 'H315' in codes else None
+    if aile == 'goz':
+        return 'H318' if codes & {'H318', 'H314'} else 'H319' if 'H319' in codes else None
+    return aile if aile in codes else None
+
+
+def _registrant_scl(cas: str, result: dict, ek6_kodlar: set = frozenset()) -> dict:
+    """Kayıt yaptıranın ECHA kayıt dosyasındaki (2.1 GHS) özel konsantrasyon sınırları — SEA Md.12(1), 12(5).
+    Yalnız: (a) ürünün sınıfıyla aynı ailede ve aynı en ağır kategoride sınıflandırılmışsa (kayıt yaptıran H318 deyip
+    sonuç H319 ise sınır alınmaz), (b) o ailede Ek-6 / Ek-VI özel sınırı yoksa, (c) Ek-6'da uyumlaştırılmış sınıf için
+    değilse (SEA Md.12(3): uyumlaştırılmış sınıflar için özel sınır belirlenmez). Kullanıcı kararı 2026-10-10."""
+    try:
+        from app.services import component_phys as _cpx
+        gs = (_cpx._read(cas) or {}).get('ghs_self') or {}
+    except Exception:
+        return result
+    scl = gs.get('scl') or []
+    if not scl:
+        return result
+    _c4 = lambda x: str(x or '').replace('*', '').strip()[:4].upper()
+    res_kod = {_c4(h.get('h_code')) for h in result.get('hazards') or []}
+    reg_kod = {_c4(h.get('h_code')) for h in gs.get('hazards') or []}
+    mevcut = {_SCL_AILE.get(_c4(e.get('h_code')), _c4(e.get('h_code'))) for e in result.get('scl') or []}
+    ek6_aile = {_SCL_AILE.get(k, k) for k in ek6_kodlar} | ({'goz'} if 'H314' in ek6_kodlar else set())
+    ekle = []
+    for e in scl:
+        kod = _c4(e.get('h_code'))
+        aile = _SCL_AILE.get(kod, kod)
+        if aile in mevcut or aile in ek6_aile:
+            continue
+        ust = _aile_ust(res_kod, aile)
+        if not ust or ust != _aile_ust(reg_kod, aile):
+            continue
+        ekle.append({'h_code': kod, 'h_class': e.get('h_class'), 'c_min': e.get('c_min'), 'c_max': e.get('c_max'),
+                     'kaynak': 'kayit'})
+    if not ekle:
+        return result
+    out = dict(result)
+    out['scl'] = list(result.get('scl') or []) + ekle
+    out['registrant_scl'] = ekle
     return out
 
 

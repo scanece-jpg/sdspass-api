@@ -34,7 +34,7 @@ _H = {'Accept': 'application/json', 'User-Agent': 'Mozilla/5.0 (SDSPass)'}
 _TTL_DAYS = 30          # kullanımda yenileme (ECHA verisi)
 _ERR_RETRY_DAYS = 1     # ağ hatasından sonra yeniden deneme
 _DELAY = 1.0            # ECHA istekleri arası bekleme (sn)
-_REC_V = 4              # v4 (2026-10-10) kayıt yaptıranın GHS öz-sınıflandırması (2.1 GHS); 2026-10-09: v2 DNEL / PNEC (Bölüm 8.1); v3 güvenli kullanım rehberi eldiven önerisi (8.2.2.2)
+_REC_V = 5              # v5 (2026-10-10) kayıt yaptıranın özel konsantrasyon sınırları (2.1 GHS); v4 (2026-10-10) kayıt yaptıranın GHS öz-sınıflandırması (2.1 GHS); 2026-10-09: v2 DNEL / PNEC (Bölüm 8.1); v3 güvenli kullanım rehberi eldiven önerisi (8.2.2.2)
 # Çevrim dışı (kontrol seti): ağa çıkılmaz, önbellek eskimiş olsa da kullanılır
 OFFLINE = os.environ.get('SDSPASS_PHYS_OFFLINE', '').strip() not in ('', '0')
 
@@ -304,6 +304,48 @@ def parse_ghs(page: str) -> List[Dict]:
     return out
 
 
+# Özel konsantrasyon sınırı satırı: "#1 Concentration range (%) >= 5 Hazard categories Skin Corr. 1A"
+_SCL_ROW = re.compile(r'#\d+ Concentration range \(%\)\s*(.*?)\s*Hazard categories\s*(.*?)(?=\s*#\d+ Concentration range|'
+                      r'\s*Acute Toxicity Estimates|\s*Environmental hazards|$)')
+_SCL_CLS = re.compile(r'Skin Corr\. 1[ABC]?|Skin Irrit\. 2|Eye Dam\. 1|Eye Irrit\. 2|Skin Sens\. 1[AB]?|Resp\. Sens\. 1[AB]?|'
+                      r'STOT (?:SE|Single Exp\.) [123]|STOT (?:RE|Rep\. Exp\.) [12]|Carc\. (?:1[AB]|2)|Muta\. (?:1[AB]|2)|'
+                      r'Repr\. (?:1[AB]|2)')
+_SCL_H = (('Skin Corr.', 'H314'), ('Skin Irrit.', 'H315'), ('Eye Dam.', 'H318'), ('Eye Irrit.', 'H319'),
+          ('Skin Sens.', 'H317'), ('Resp. Sens.', 'H334'), ('STOT SE 1', 'H370'), ('STOT SE 2', 'H371'),
+          ('STOT RE 1', 'H372'), ('STOT RE 2', 'H373'), ('Carc. 2', 'H351'), ('Carc.', 'H350'),
+          ('Muta. 2', 'H341'), ('Muta.', 'H340'), ('Repr. 2', 'H361'), ('Repr.', 'H360'))
+
+
+def parse_scl(page: str, hazards: List[Dict]) -> List[Dict]:
+    """IUCLID 2.1 GHS kaydı "Specific concentration limits" → [{'h_class','h_code','c_min','c_max'}].
+    STOT SE 3'ün H kodu (H335 / H336) aynı kayıttaki sınıflandırmadan alınır; belirsizse satır alınmaz."""
+    t = _plain(page)
+    i = t.find('Specific concentration limits')
+    if i < 0:
+        return []
+    out = []
+    for m in _SCL_ROW.finditer(t[i: i + 4000]):
+        rng = m.group(1)
+        lo = re.search(r'(?:>=|≥|>)\s*(\d+(?:[.,]\d+)?)', rng)
+        hi = re.search(r'(?:<=|≤|<)\s*(\d+(?:[.,]\d+)?)', rng)
+        c_min = float(lo.group(1).replace(',', '.')) if lo else None
+        c_max = float(hi.group(1).replace(',', '.')) if hi else None
+        for cm in _SCL_CLS.finditer(m.group(2)):
+            cls = cm.group(0)
+            for a, b in _IUCLID_CLS:
+                cls = cls.replace(a, b)
+            if cls == 'STOT SE 3':
+                kod = {h['h_code'][:4] for h in hazards if h.get('h_class') == 'STOT SE 3'}
+                code = kod.pop() if len(kod) == 1 else None
+            else:
+                code = next((h for k, h in _SCL_H if cls.startswith(k)), None)
+            if code and c_min is not None:
+                e = {'h_class': cls, 'h_code': code, 'c_min': c_min, 'c_max': c_max}
+                if e not in out:
+                    out.append(e)
+    return out
+
+
 def parse_glove(page: str) -> Optional[Dict]:
     t = _plain(page)
     m = re.search(r'(?i)hand protection|protective gloves|\bgloves?\b', t)
@@ -413,17 +455,23 @@ async def _fetch_echa(cas: str) -> Dict:
             # (benzen: "001 | Benzene" başlıksız uyumlaştırılmış kayıt, "002 | … (self-classification)")
             selfs = ([r for r in recs if 'self' in r[1].lower()]
                      or [r for r in recs if 'harmonised' not in r[1].lower()])
-            sets, titles = [], []
+            sets, titles, scls = [], [], []
             for d, t in selfs[:4]:
                 try:
-                    hz = parse_ghs((await get(f'{base}/documents/{d}.html')).text)
+                    _pg = (await get(f'{base}/documents/{d}.html')).text
+                    hz = parse_ghs(_pg)
                     sets.append({(h['h_class'], h['h_code']) for h in hz}); titles.append(t)
+                    scls.append({(e['h_class'], e['h_code'], e['c_min'], e['c_max']) for e in parse_scl(_pg, hz)})
                 except Exception as e:
                     print(f'[component_phys] {cas} GHS: {e}')
             if sets:
                 common = set.intersection(*sets)
+                # Özel konsantrasyon sınırları (SEA Md.12(1)): yine yalnız tüm öz-sınıflandırma kayıtlarında ortak olanlar
+                _scl = set.intersection(*scls) if scls else set()
                 rec['ghs_self'] = {'kayitlar': titles,
-                                   'hazards': [{'h_class': c, 'h_code': h} for c, h in sorted(common)]}
+                                   'hazards': [{'h_class': c, 'h_code': h} for c, h in sorted(common)],
+                                   'scl': [{'h_class': c, 'h_code': h, 'c_min': lo, 'c_max': hi}
+                                           for c, h, lo, hi in sorted(_scl, key=lambda x: (x[1], -x[2]))]}
             else:
                 rec['ghs_self'] = {'kayitlar': [], 'hazards': []}
         # 11 Guidance on safe use — el koruması önerisi (KKDİK Ek-2 8.2.2.2(b)(i))

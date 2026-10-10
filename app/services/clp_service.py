@@ -329,7 +329,9 @@ def _cascade_reason(cas: str, conc: float, scl_list: list,
             f"(%{triggered_c_min:.0f}≤C<%{triggered_cutoff:.0f}): "
             f"%{conc:.1f} bu aralıkta → TETİKLENDİ"
         )
-    return f"{cas} %{conc:.1f} — CLP Ek-VI SKS: " + " | ".join(steps)
+    _src = ("Kayıt yaptıranın ÖKS'si (ECHA kayıt dosyası; SEA Md.12)"
+            if any(s.get("kaynak") == "kayit" for s in scl_list) else "CLP Ek-VI SKS")
+    return f"{cas} %{conc:.1f} — {_src}: " + " | ".join(steps)
 
 
 def _get_scl_entry_for_conc(scl_list: list, h_code4: str, conc: float) -> dict | None:
@@ -453,12 +455,27 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
         _s = _get_scl_cutoff(comp, "", h_code4)
         return conc * gcl / _s if _s else None
 
+    # SEA Ek-1 3.2.3.3.1 / 3.3.3.3.1: toplamada "ilgili bileşen" %1 ve üzeridir — %1 altı ancak ilgili olma
+    # ihtimali varsa sayılır (metindeki örnek: cilt aşındırıcı bileşen) ya da ÖKS'si %1'in altındaysa (Tablo 1.1).
+    # Önceden <%1 göz hasarı bileşenleri de 10 × C ile toplanıyordu: %0,99 + %0,99 Göz Hasarı 1 → %19,8 → H319
+    # (Liqui Moly Reifenglanzschaum TR GBF, 2026-10-10).
+    def _ilgili(comp, conc):
+        if conc >= 1.0:
+            return True
+        if {h.get("h_class", "") for h in comp.get("hazards", [])} & set(_CORR):
+            return True
+        return any(e.get("c_min") is not None and float(e["c_min"]) < 1.0
+                   for e in _normalize_scl_list(comp.get("sclRaw") or comp.get("scl", []))
+                   if str(e.get("h_code", "")).replace("*", "").strip()[:4] in ("H314", "H315", "H318", "H319"))
+
     sum_corr1 = 0.0            # Σ Cilt Aşnd. 1 (GKS %5 eşdeğeri)
     _skin_w_corr = 0.0         # aşındırıcı bileşenlerin tahriş katkısı (GKS: 10 × C)
     sum_eye_dam1 = 0.0         # Σ Göz Hasarı 1 (GKS %3 eşdeğeri)
     _eye_w_dam = 0.0           # göz hasarı bileşenlerinin tahriş katkısı (GKS: 10 × C)
     for comp in components:
         conc = float(comp.get("concentration", comp.get("conc", 0)) or 0)
+        if not _ilgili(comp, conc):
+            continue
         _cls = {h.get("h_class", "") for h in comp.get("hazards", [])}
         if _cls & set(_CORR):
             _c = _scl_w(comp, "H314", 5.0, conc)
@@ -480,6 +497,8 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
         for _hh in _comp_ei.get("hazards", []):
             if _hh.get("h_class", "") == "Eye Irrit. 2":
                 _cc = float(_comp_ei.get("concentration", _comp_ei.get("conc", 0)) or 0)
+                if not _ilgili(_comp_ei, _cc):
+                    break
                 _w = _scl_w(_comp_ei, "H319", 10.0, _cc)
                 sum_eye_irrit2 += _cc if _w is None else _w
                 break
@@ -701,7 +720,9 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
                             "cutoff_source": "SKS",
                             "cutoff_value":  _c319,
                         })
-                    elif conc >= _H319_GCL:
+                    elif conc >= _H319_GCL and not any(str(_x.get('h_code', ''))[:4] in ('H319', 'H318') for _x in scl_list):
+                        # SEA Md.12: Ek-6'da göz ÖKS bandı varsa bandın dışında GKS kullanılmaz (örn. 143-22-6:
+                        # Göz Hasarı 1 ≥ %30, Göz Tahriş 2 %20–30 → %12'de sınıf yok; önceden GKS %10 ile H319 çıkıyordu)
                         seen_h.add('H319')
                         passed.append({
                             "h_class":       "Eye Irrit. 2",
@@ -750,6 +771,9 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
                 else:
                     _cutoff_str = f'%{conc:.1f} ≥ kesme %{cutoff}'
                 _scl_used = bool(_scl_matched_mins)
+                if _scl_used and any(s.get("kaynak") == "kayit" and (s.get("h_class", "") == h_class or
+                                     str(s.get("h_code", "")).replace("*", "").strip()[:4] == h[:4]) for s in scl_list):
+                    _cutoff_str += " (kayıt yaptıranın ÖKS'si — ECHA kayıt dosyası; SEA Md.12)"
                 if _na_used and not _scl_used:
                     _cutoff_str += (' (SEA Ek-1 Tablo 3.2.4' if h in ('H314', 'H315') else ' (SEA Ek-1 Tablo 3.3.4') +                                    ' — toplama yöntemi uygulanamaz, KDU kararı)'
                 _cutoff_display = float(scl_entry_conc["c_min"]) if scl_entry_conc and scl_entry_conc.get("c_min") is not None else cutoff
@@ -837,6 +861,8 @@ def classify_mixture_clp(components: list, mixture_ph: float = None,
         _cls = {h.get("h_class", "") for h in comp.get("hazards", [])}
         if "Skin Irrit. 2" in _cls and not (_cls & set(_CORR)):
             _cc = float(comp.get("concentration", comp.get("conc", 0)) or 0)
+            if not _ilgili(comp, _cc):
+                continue
             _w = _scl_w(comp, "H315", 10.0, _cc)
             sum_skin_irrit2 += _cc if _w is None else _w
 

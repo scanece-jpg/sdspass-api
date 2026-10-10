@@ -334,6 +334,11 @@ async def refresh_components(components: list, form: str, test_data: Optional[di
                     _apply_m_ate(c, comp, fresh)
                 else:
                     c['hazards'] = []
+                # Kayıt yaptıranın ÖKS'leri (SEA Md.12) panelden gelmemişse güncel kayıttan eklenir
+                if fresh.get('registrant_scl'):
+                    _ss = list(c.get('sclRaw') or []) if isinstance(c.get('sclRaw'), list) else []
+                    _ss += [e for e in fresh['registrant_scl'] if e not in _ss]
+                    c['sclRaw'] = _ss
                 if fresh.get('sea_ek6') and fresh.get('notes'):
                     _ek6_not_uygula(c, list(fresh.get('notes') or []), test_data)
                 _ted_compare(c, comp, test_data, {_h4(k).upper(): v for k, v in

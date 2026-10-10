@@ -4120,6 +4120,22 @@ def generate_sds_pdf(sds_data: Dict, lang: str = 'TR') -> bytes:
     # ─────────────────────────────────────────────────────────────────────────
     story += section_block(section_title(lang, 16), styles)
 
+    # KKDİK Usul ve Esaslar (05.08.2025) Md.16(2): GBF'yi hazırlayan KDU — iletişim + yeterlilik belgesi tarih/no
+    _kdu = sds_data.get('kdu') or {}
+    if any(_kdu.values()):
+        story.append(Paragraph('<b>' + ('Güvenlik Bilgi Formunu Hazırlayan Kimyasal Değerlendirme Uzmanı (KDU)'
+                                        if lang == 'TR' else 'Safety Data Sheet prepared by (Chemical Assessment Expert)')
+                               + '</b>', styles['body_bold']))
+        story.append(data_table([
+            [Paragraph('Adı Soyadı' if lang == 'TR' else 'Name', styles['small']), Paragraph(_kdu.get('name', ''), styles['small'])],
+            [Paragraph('İletişim' if lang == 'TR' else 'Contact', styles['small']), Paragraph(_kdu.get('contact', ''), styles['small'])],
+            [Paragraph('Yeterlilik belgesi no' if lang == 'TR' else 'Certificate no.', styles['small']),
+             Paragraph(_kdu.get('cert_no', ''), styles['small'])],
+            [Paragraph('Yeterlilik belgesi tarihi' if lang == 'TR' else 'Certificate date', styles['small']),
+             Paragraph(_kdu.get('cert_date', ''), styles['small'])],
+        ], [55*mm, 125*mm], styles, header=False))
+        story.append(Spacer(1, 4))
+
     # Validation uyarıları (varsa)
     _errors   = [i for i in _validation_issues if i['level']=='error']
     _warnings = [i for i in _validation_issues if i['level']=='warning']

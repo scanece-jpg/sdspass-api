@@ -713,6 +713,26 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
       </div>
     </div>
 
+    <!-- KDU — KKDİK Usul ve Esaslar Md.16(2) -->
+    <div class="v0-card cyan-top">
+      <div class="v0-sec-title"><span class="v0-dot secondary"></span>Bölüm 16 — GBF'yi Hazırlayan KDU</div>
+      <div style="font-size:10px;color:var(--text3);margin:-4px 0 6px">KKDİK Usul ve Esaslar Md.16(2): KDU'nun iletişim bilgileri ile yeterlilik belgesinin tarihi ve numarası zorunludur. Bu tarayıcıda hatırlanır.</div>
+      <div class="v0-space">
+        <div class="v0-grid-2">
+          <div class="v0-field"><label class="v0-label">KDU Adı Soyadı</label>
+            <input class="v0-inp" type="text" id="kduName" placeholder="Ad Soyad" onchange="_kduSave()"></div>
+          <div class="v0-field"><label class="v0-label">İletişim (e-posta / telefon)</label>
+            <input class="v0-inp" type="text" id="kduContact" placeholder="kdu@firma.com · +90 …" onchange="_kduSave()"></div>
+        </div>
+        <div class="v0-grid-2">
+          <div class="v0-field"><label class="v0-label">Yeterlilik Belgesi No</label>
+            <input class="v0-inp mono" type="text" id="kduCertNo" placeholder="KDU-…" onchange="_kduSave()"></div>
+          <div class="v0-field"><label class="v0-label">Belge Tarihi</label>
+            <input class="v0-inp mono" type="text" id="kduCertDate" placeholder="GG.AA.YYYY" onchange="_kduSave()"></div>
+        </div>
+      </div>
+    </div>
+
     <!-- Acil Telefon -->
     <div class="v0-card danger-top">
       <div class="v0-sec-title"><span class="v0-dot danger"></span>Bölüm 1.4 — Acil Durum Telefonu</div>
@@ -1312,6 +1332,21 @@ select.v0-inp{cursor:pointer;-webkit-appearance:none;
 // ══════════════════════════════════════════════════════════════════════════════
 
 const API_BASE = (window.HAZARDDESK_API_URL || '/api/v1/sds/pdf').replace('/sds/pdf','');
+// KDU bilgisi (Bölüm 16) — bu tarayıcıda hatırlanır
+function _kduSave() {
+  try {
+    const g = id => document.getElementById(id)?.value?.trim() || '';
+    localStorage.setItem('sdspass_kdu', JSON.stringify({ name: g('kduName'), contact: g('kduContact'),
+                                                         cert_no: g('kduCertNo'), cert_date: g('kduCertDate') }));
+  } catch (e) {}
+}
+document.addEventListener('DOMContentLoaded', () => {
+  try {
+    const k = JSON.parse(localStorage.getItem('sdspass_kdu') || '{}');
+    [['kduName', 'name'], ['kduContact', 'contact'], ['kduCertNo', 'cert_no'], ['kduCertDate', 'cert_date']]
+      .forEach(([id, f]) => { const el = document.getElementById(id); if (el && k[f] && !el.value) el.value = k[f]; });
+  } catch (e) {}
+});
 
 // ══════════════════════════════════════════════════════════════════════════════
 //  SDS Agent Chat
@@ -5110,6 +5145,15 @@ function _checkPDFMandatory() {
   if (!_v('suppPhone')) {
     missing.push({ hard: true, label: 'Telefon', reason: 'Bölüm 1.3 — tedarikçinin telefon numarası zorunludur (KKDİK Ek-2 1.3)' });
   }
+  if (!/[^@\s]+@[^@\s]+\.[^@\s]+/.test(_v('suppEmail'))) {
+    missing.push({ hard: true, label: 'E-posta', reason: 'Bölüm 1.3 — GBF\'den sorumlu kişinin e-posta adresi zorunludur (KKDİK Ek-2 1.3)' });
+  }
+  [['kduName', 'KDU Adı Soyadı'], ['kduContact', 'KDU İletişim'], ['kduCertNo', 'KDU Yeterlilik Belgesi No']].forEach(([id, lb]) => {
+    if (!_v(id)) missing.push({ hard: true, label: lb, reason: 'Bölüm 16 — KKDİK Usul ve Esaslar Md.16(2) zorunlu' });
+  });
+  if (!/^\d{1,2}[.\/-]\d{1,2}[.\/-]\d{4}$/.test(_v('kduCertDate'))) {
+    missing.push({ hard: true, label: 'KDU Belge Tarihi', reason: 'Bölüm 16 — GG.AA.YYYY biçiminde (KKDİK Usul ve Esaslar Md.16(2))' });
+  }
   // Forma göre zorunlu fiziksel alanlar (KKDİK Ek-2 9.1) — boşsa PDF oluşturulmaz
   _physReqMissing(form).forEach(m => missing.push({
     hard: true, label: m.label + ' (Bölüm 9)',
@@ -6194,6 +6238,9 @@ async function _doPdfGenerate({ h314KeepOverride = true } = {}) {
           emergency_tel: fmt ? `${fmt} — ${hoursLabel}` : '',
         };
       })(),
+      // KKDİK Usul ve Esaslar Md.16(2) — Bölüm 16 KDU bilgisi
+      kdu: (() => { const g = id => document.getElementById(id)?.value?.trim() || '';
+                    return { name: g('kduName'), contact: g('kduContact'), cert_no: g('kduCertNo'), cert_date: g('kduCertDate') }; })(),
       components: comps.map(c => ({
         cas:         c.cas,
         name:        c.name,

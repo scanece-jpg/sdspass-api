@@ -8,7 +8,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse, StreamingResponse
 import asyncio
 from fastapi.staticfiles import StaticFiles
-import sys, os, json
+import sys, os, json, re
 from pathlib import Path
 from dotenv import load_dotenv
 load_dotenv(Path(__file__).parent.parent / ".env")
@@ -162,12 +162,26 @@ async def generate_pdf(data: dict = Body(...)):
             ('Firma adı',  bool((supplier_in.get('name') or '').strip())),
             ('Adres',      bool((supplier_in.get('address') or '').strip())),
             ('Telefon',    bool((supplier_in.get('phone') or '').strip())),
+            # KKDİK Ek-2 1.3: "Güvenlik Bilgi Formundan sorumlu olan yetkili kişi için e-posta adresi verilir"
+            ('E-posta',    bool(re.search(r'[^@\s]+@[^@\s]+\.[^@\s]+', supplier_in.get('email') or ''))),
         ) if not val]
-        if _id_missing:
+        # KKDİK Usul ve Esaslar (05.08.2025) Md.16(2): GBF'nin 16. başlığında hazırlayan KDU'nun iletişim bilgileri ile
+        # yeterlilik belgesinin tarihi ve numarası yazılır
+        kdu_in = data.get('kdu') or {}
+        _kdu_missing = [lbl for lbl, val in (
+            ('KDU adı soyadı',            bool((kdu_in.get('name') or '').strip())),
+            ('KDU iletişim (e-posta/telefon)', bool((kdu_in.get('contact') or '').strip())),
+            ('KDU yeterlilik belgesi no', bool((kdu_in.get('cert_no') or '').strip())),
+            ('KDU belge tarihi',          bool(re.match(r'^\d{1,2}[./-]\d{1,2}[./-]\d{4}$', (kdu_in.get('cert_date') or '').strip()))),
+        ) if not val]
+        if _id_missing or _kdu_missing:
             raise HTTPException(status_code=422, detail={
                 'error': 'missing_identity',
-                'message': 'GBF üretilemiyor — zorunlu alanlar eksik (KKDİK Ek-2 Bölüm 1): ' + ', '.join(_id_missing),
-                'missing': _id_missing,
+                'message': ('GBF üretilemiyor — zorunlu alanlar eksik: '
+                            + ', '.join(_id_missing + _kdu_missing)
+                            + (' (KKDİK Ek-2 Bölüm 1)' if _id_missing else '')
+                            + (' (KKDİK Usul ve Esaslar Md.16(2) — Bölüm 16)' if _kdu_missing else '')),
+                'missing': _id_missing + _kdu_missing,
             })
 
         def _num(v):
@@ -574,6 +588,7 @@ async def generate_pdf(data: dict = Body(...)):
                 'email':         supplier_in.get('email', ''),
                 'emergency_tel': supplier_in.get('emergency_tel', ''),
             },
+            'kdu': {k: _safe(str(kdu_in.get(k) or '').strip()) for k in ('name', 'contact', 'cert_no', 'cert_date')},
             'clp': {
                 'h_codes':     h_codes,      # etiket için (dominance uygulanmış)
                 'all_h_codes': all_h_codes,  # SDS Bölüm 2.1 için (tam sınıflandırma)

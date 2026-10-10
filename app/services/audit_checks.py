@@ -950,6 +950,22 @@ def c_t_un(ctx):
     return 'kdu', (f'Bölüm 3 bileşimi ve 2.1 sınıflandırmasıyla UN {exp} bekleniyor; 14.1\'de UN {sorted(uns)} var '
                    f'(ADR 3.1.2.8.1: Tablo A\'da adlı giriş varsa B.B.B. yerine o kullanılır){note} — KDU kontrol etmeli.')
 
+
+def c_16_kdu(ctx):
+    """KKDİK Usul ve Esaslar (05.08.2025) Md.16(2): 16. bölümde KDU iletişim bilgisi + yeterlilik belgesi tarihi ve no."""
+    s16 = ctx['secs'].get('16', '')
+    if not re.search(r'(?i)kimyasal\s+de[ğg]erlendirme\s+uzman|\bKDU\b', s16):
+        return 'eksik', '16. bölümde GBF\'yi hazırlayan KDU belirtilmemiş (KKDİK Usul ve Esaslar Md.16(2)).'
+    eksik = []
+    if not re.search(r'[^@\s]+@[^@\s]+\.\w+|\+?\d[\d\s()-]{8,}\d', s16):
+        eksik.append('iletişim bilgisi (e-posta/telefon)')
+    if not re.search(r'(?i)(belge|sertifika|yeterlilik)[^\n]{0,40}(no|numaras)', s16):
+        eksik.append('yeterlilik belgesi numarası')
+    if not re.search(r'(?i)(belge|sertifika|yeterlilik)[\s\S]{0,80}?\d{1,2}[./-]\d{1,2}[./-]\d{4}|tarih[\s\S]{0,30}?\d{1,2}[./-]\d{1,2}[./-]\d{4}', s16):
+        eksik.append('yeterlilik belgesi tarihi')
+    return (('uygun', 'KDU iletişim bilgisi ile yeterlilik belgesi numarası ve tarihi 16. bölümde var.') if not eksik else
+            ('eksik', '16. bölümde KDU var ama eksik: ' + ', '.join(eksik) + ' (KKDİK Usul ve Esaslar Md.16(2)).'))
+
 CHECKS: Dict[str, Callable] = {
     '3.2-sira': c_32_sira, '3.2-neden': c_32_neden, '3.2-kayit': c_32_kayit, '8.1-bld': c_bld,
     '15.1-izin-kisit': c_izin_kisit, '2.2-ek-unsur': c_ek_unsur, '8.1-oel-kanserojen': c_oel_kanserojen,
@@ -961,7 +977,7 @@ CHECKS: Dict[str, Callable] = {
     '3.2-svhc': c_32_svhc, '8.1-oel': c_oel, '9.1-ozellikler': c_91, '11.1-siniflar': c_111_siniflar,
     '11.1-ifade': c_111_ifade, '14.1-un': c_un, '14.3-sinif': c_sinif14, '14.4-pg': c_pg,
     '15.1-svhc': c_15_svhc, '15.1-deterjan': c_deterjan, '16-tam-metin': c_tam_metin, 'T-14-2': c_t14,
-    'T-3-2': c_t32, 'T-hesap': c_hesap, 'T-un': c_t_un,
+    'T-3-2': c_t32, 'T-hesap': c_hesap, 'T-un': c_t_un, '16-kdu': c_16_kdu,
     '16-revizyon': c_16_revizyon, '8.1-dnel': c_dnel, '8.2.2-eldiven-malzeme': c_eldiven_malzeme,
     '8.2.2-eldiven-kalinlik': c_eldiven_kalinlik, '8.2.2-eldiven-sure': c_eldiven_sure,
     '9-ampirik': c_9_ampirik, '9.1-neden': c_9_neden, '9-fp-sinif': c_9_fp_sinif, '9-h304-visk': c_9_h304,

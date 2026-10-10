@@ -26,6 +26,8 @@ os.chdir(ROOT)
 sys.stdout.reconfigure(encoding='utf-8')
 
 CUSTOM = os.path.join(ROOT, 'data', 'substances_custom.json')
+# Bölüm 16 KDU (KKDİK Usul ve Esaslar Md.16(2)) — test değeri
+KDU_TEST = {'name': 'Test KDU', 'contact': 'kdu@ornek.com', 'cert_no': 'KDU-TEST-001', 'cert_date': '01.01.2025'}
 
 # ── Referans ürünler ─────────────────────────────────────────────────────────
 # h: beklenen H kodları (sıra önemsiz); signal: 'Danger' / 'Warning' / '' (uyarı kelimesi yok)
@@ -906,6 +908,14 @@ def kural_testleri(c) -> int:
         ('ADR Tablo A formik asit: %85 → UN3412 PG II (%10–85), %90 → UN1779',
          lambda: tr_road([('64-18-6', 85), (W, 15)], user_fp=69) == ('UN3412', '8', 'II')
          and tr_road([('64-18-6', 90), (W, 10)], user_fp=50)[0] == 'UN1779'),
+        ('Usul ve Esaslar Md.16(2) + Ek-2 1.3: KDU bilgisi ya da e-posta yoksa GBF üretilmez (422); varsa Bölüm 16\'da basılır',
+         lambda: c.post('/api/v1/sds/pdf', json={'lang': 'TR', 'product': {'name': 'X', 'form': 'liquid'},
+                 'supplier': {'name': 'A', 'address': 'B', 'phone': '1', 'email': 'a@b.com'},
+                 'components': [], 'calc_input': {'components': [], 'form': 'liquid'}}).status_code == 422
+         and c.post('/api/v1/sds/pdf', json={'lang': 'TR', 'product': {'name': 'X', 'form': 'liquid'},
+                 'supplier': {'name': 'A', 'address': 'B', 'phone': '1'}, 'kdu': KDU_TEST,
+                 'components': [], 'calc_input': {'components': [], 'form': 'liquid'}}).status_code == 422
+         and 'Yeterlilik belgesi no KDU-TEST-001' in _pdf_text(c, [('7732-18-5', 100)])),
     ]
     hata = 0
     for ad, f in testler:
@@ -932,7 +942,7 @@ def _pdf_text(c, bil, **extra) -> str:
     calc = {'components': comps, 'form': 'liquid', 'usage': 'industrial', 'lang': 'TR'}
     body = {'lang': 'TR', 'product': {'name': 'Kural testi', 'form': 'liquid', 'usage': 'industrial'},
             'supplier': {'name': 'Kontrol Seti A.Ş.', 'address': 'Örnek Mah. No:1 İstanbul', 'phone': '0212 000 00 00',
-                         'email': 'kontrol@ornek.com'},
+                         'email': 'kontrol@ornek.com'}, 'kdu': KDU_TEST,
             'components': comps, 'calc_input': calc, 'phys_props': {}, 'phys_methods': {},
             'revision': {'no': '1', 'date': '08.10.2026', 'notes': ''}, **extra}
     j = c.post('/api/v1/sds/pdf', json=body).json()
@@ -982,7 +992,7 @@ def main(run_jev: bool) -> int:
         body = {'lang': 'TR', 'product': {'name': u['ad'][:40], 'form': form, 'usage': 'industrial',
                                           'is_detergent': bool(u.get('det')), 'usage_desc': u.get('kullanim', '')},
                 'supplier': {'name': 'Kontrol Seti A.Ş.', 'address': 'Örnek Mah. No:1 İstanbul', 'phone': '0212 000 00 00',
-                             'email': 'kontrol@ornek.com'},
+                             'email': 'kontrol@ornek.com'}, 'kdu': KDU_TEST,
                 'components': comps, 'calc_input': calc, 'phys_props': dict(u.get('phys') or {}), 'phys_methods': {},
                 'revision': {'no': '1', 'date': '07.10.2026', 'notes': ''}}
         j = c.post('/api/v1/sds/pdf', json=body).json()

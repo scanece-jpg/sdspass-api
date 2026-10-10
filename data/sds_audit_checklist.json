@@ -2218,13 +2218,13 @@
    "dayanak": "KKDİK Usul ve Esaslar (05.08.2025) Md.16(2)",
    "soru_tr": "GBF'yi hazırlayan KDU'nun iletişim bilgileri ile yeterlilik belgesinin tarihi ve numarası yazılmış mı?",
    "soru_en": "Section 16 names the person who prepared the SDS together with their contact details and the date and number of their certificate.",
-   "yontem": "jev",
+   "yontem": "kod",
    "kosul": "her",
    "bolumler": [
     "16"
    ],
    "onem": "zorunlu",
-   "not": "Pilot: Lime-A-Way (var) / Rev281 (yok) doğru ayırt edildi."
+   "not": "Kod kontrolü (2026-10-10): KDU ifadesi + iletişim + belge no + belge tarihi."
   },
   {
    "id": "T-4-2",

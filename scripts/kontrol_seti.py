@@ -288,6 +288,32 @@ def _kayit_testi() -> bool:
             and 'kayıt yaptıranın' in (r.get('classification_sources') or {}).get('H412', ''))
 
 
+def _ted_testi(c) -> bool:
+    """Tedarikçi GBF farkı: soru çıkar; KDU 'tedarikçi' seçerse sınıf çıkar ve Bölüm 16'ya not düşer; Ek-6 sınıfı sorulmaz."""
+    import fitz
+    r = c.get('/api/v1/sds/substance/lookup', params={'cas': '108-88-3', 'form': 'liquid'}).json()
+    ted = {'firma': 'Örnek Tedarikçi', 'urun': 'Toluen', 'rev_date': '2025-03-01', 'kkdik_no': '',
+           'h_codes': ['H225', 'H304', 'H336', 'H361d', 'H373']}          # H412 yok; Ek-6 H315 de yok (sorulmamalı)
+    comp = {'cas': '108-88-3', 'name': 'toluen', 'conc': 100, 'concMax': 100, 'hazards': r.get('hazards', []),
+            'm_factors': {}, 'tedarikci': ted}
+    calc = {'components': [comp], 'form': 'liquid', 'usage': 'industrial', 'lang': 'TR', 'user_fp': 4}
+    j = c.post('/api/v1/sds/calculate', json=calc).json()
+    alanlar = [d['field'] for d in (j.get('pending_decisions') or []) if d.get('code') == 'TEDARIKCI_FARK']
+    if alanlar != ['ted_108-88-3_H412'] or 'H412' not in (j.get('all_h_codes') or []):
+        return False
+    calc['test_data'] = {'ted_108-88-3_H412': 'tedarikci'}
+    body = {'lang': 'TR', 'product': {'name': 'Kural testi', 'form': 'liquid', 'usage': 'industrial'},
+            'supplier': {'name': 'Kontrol Seti A.Ş.', 'address': 'Örnek Mah. No:1 İstanbul', 'phone': '0212 000 00 00',
+                         'email': 'kontrol@ornek.com'}, 'kdu': KDU_TEST, 'components': [comp], 'calc_input': calc,
+            'phys_props': {}, 'phys_methods': {}, 'revision': {'no': '1', 'date': '10.10.2026', 'notes': ''}}
+    pj = c.post('/api/v1/sds/pdf', json=body).json()
+    b64 = next(v for v in pj.values() if isinstance(v, str) and len(v) > 5000)
+    t = _norm(chr(10).join(p.get_text() for p in fitz.open(stream=base64.b64decode(b64), filetype='pdf')))
+    return ('H412' not in (pj.get('classification') or {}).get('h_codes', ['H412'])
+            and "Tedarikçi GBF'si ile farklı sınıflandırmalar" in t and 'H412 uygulanmadı' in t
+            and 'Kullanıcı kararıyla dikkate alınmayanlar' in t)
+
+
 def _hesap_testi() -> bool:
     """Geçici klasörde; ağ ve gizli depo yok."""
     import base64, tempfile, pathlib
@@ -1069,6 +1095,9 @@ def kural_testleri(c) -> int:
                   and f('170 mg/m³ (%50 H2O2)', 'inhal')[0] is None and f('> 20 mg/l', 'inhal')[0] is None
                   and f('1193 - 1270 mg/kg', 'oral')[0] is None and f(300.0, 'oral')[0] is None)(
              __import__('app.main', fromlist=['x'])._ate_from_text)),
+        ("SEA Md.6(1)(c): tedarikçi GBF'si ile Ek-6 dışı sınıf farkı KDU'ya sorulur (Ek-6 sınıfı sorulmaz); "
+         "'tedarikçi' seçilince sınıf çıkar ve Bölüm 16'ya gerekçe yazılır (2026-10-10)",
+         lambda: _ted_testi(c)),
         ('Danışman hesabı: anahtarsız erişim yok, firma klasörü otomatik açılır, aynı ad engellenir, '
          'üretilen GBF kaydedilir / listelenir / geri okunur (accounts.py)',
          lambda: _hesap_testi()),

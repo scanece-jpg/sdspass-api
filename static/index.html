@@ -1470,9 +1470,10 @@ function _formSnapshot() {
       if (el.type === 'checkbox' || el.type === 'radio') vals[k] = { c: el.checked };
       else if (el.value !== '') vals[k] = { v: el.value };
     });
-    return { cas: w.querySelector('.ci')?.value?.trim() || '', vals, echa_removed: w.dataset.echaRemoved || '' };
+    return { cas: w.querySelector('.ci')?.value?.trim() || '', vals, echa_removed: w.dataset.echaRemoved || '',
+             ted: w.dataset.ted || '' };
   });
-  return { fields, comps };
+  return { fields, comps, kararlar: { ...(window._physDecisions || {}) }, karar_etiket: { ...(window._physDecisionLabels || {}) } };
 }
 async function _formRestore(snap) {
   const F = snap.fields || {};
@@ -1496,6 +1497,7 @@ async function _formRestore(snap) {
     });
     if (document.getElementById('cmanual' + id)?.value) onManualConc(id);
     const w = document.getElementById('cw' + id);
+    if (w && c.ted) w.dataset.ted = c.ted;
     if (w && c.echa_removed) {
       w.dataset.echaRemoved = c.echa_removed;
       const rm = c.echa_removed.split(',');
@@ -1505,6 +1507,12 @@ async function _formRestore(snap) {
     }
   }
   updateConcTotal();
+  // Karar kutusu yanıtları (tedarikçi farkı, oksitleyici vb.) — bileşen anahtarıyla birlikte geri yüklenir
+  if (snap.kararlar) {
+    window._physDecisions = { ...snap.kararlar };
+    window._physDecisionLabels = { ...(snap.karar_etiket || {}) };
+    window._physDecisionsKey = getComps().map(c => (c.cas || '').trim()).sort().join('|');
+  }
 }
 async function _gbfFirmayaKaydet(resJson, payload, productName) {
   if (!window._firmaId || !_hesapKey()) return;
@@ -1560,7 +1568,7 @@ async function _tedFormule(tid) {
     const sup = r.supplier || {};
     const label = [sup.company, sup.product_name, sup.rev_no ? 'Rev.' + sup.rev_no : null, sup.rev_date].filter(Boolean).join(' — ') || r.dosya_adi;
     window._supplierParseResults = window._supplierParseResults || [];
-    window._supplierParseResults.push({ fileName: r.dosya_adi, label, components: r.components || [], warnings: r.warnings || [],
+    window._supplierParseResults.push({ fileName: r.dosya_adi, label, supplier: sup, components: r.components || [], warnings: r.warnings || [],
       phys_props: r.phys_props || null, phys_props_applicable: !!r.phys_props_applicable });
     const status = document.getElementById('supplierParseStatus');
     status.style.display = 'block';
@@ -2780,7 +2788,7 @@ async function parseSupplerSds(input) {
       const sup = data.supplier || {};
       const label = [sup.company, sup.product_name, sup.rev_no ? 'Rev.'+sup.rev_no : null, sup.rev_date].filter(Boolean).join(' — ') || file.name;
       _tedFirmayaKaydet(file, data);
-      return { fileName: file.name, label, components: data.components || [], warnings: data.warnings || [],
+      return { fileName: file.name, label, supplier: sup, components: data.components || [], warnings: data.warnings || [],
                phys_props: data.phys_props || null, phys_props_applicable: data.phys_props_applicable || false };
     }));
 
@@ -2875,9 +2883,13 @@ function applySupplierComps() {
         allWarnings.push(`ℹ️ ${c.name || key} (CAS ${key}) birden fazla üründe — konsantrasyonlar toplandı`);
       } else {
         const idx = toAdd.length;
+        const sp = r.supplier || {};
         toAdd.push({ cas: c.cas || '', name: c.name || '', concMin, concMax,
                      hazards: c.hazards || (c.hCodes || []).map(h => ({ h_class: h, h_code: h })),
-                     m_factors: c.m_factors || {} });
+                     m_factors: c.m_factors || {},
+                     // Tedarikçinin kendi sınıflandırması — sunucu SDSPass / ECHA ile karşılaştırır (KDU kararı)
+                     ted: { firma: sp.company || '', urun: sp.product_name || '', rev_date: sp.rev_date || '',
+                            kkdik_no: c.kkdik_no || sp.kkdik_no || '', h_codes: c.hCodes || [] } });
         if (key) casMap.set(key, idx);
       }
     });
@@ -2909,12 +2921,15 @@ function applySupplierComps() {
           if (minEl) minEl.value = newMin;
           if (maxEl) maxEl.value = newMax || newMin;
           if (manEl) manEl.value = newMax ? `${newMin}-${newMax}` : String(newMin);
+          if (c.ted && !cw.dataset.ted) cw.dataset.ted = JSON.stringify(c.ted);
           merged = true;
         }
       });
     }
     if (!merged) {
       const newId = addComp(c);
+      const _w = document.getElementById('cw' + newId);
+      if (_w && c.ted) _w.dataset.ted = JSON.stringify(c.ted);
       if (c.ate && newId) {
         if (c.ate.oral)   { const el = document.getElementById('ate_oral'   + newId); if (el) el.value = c.ate.oral; }
         if (c.ate.dermal) { const el = document.getElementById('ate_dermal' + newId); if (el) el.value = c.ate.dermal; }
@@ -3724,6 +3739,7 @@ function getComps() {
     }));
     // Kullanıcının kaldırdığı Ek-6 dışı (ECHA) sınıflar — sunucu bunları hesaba katmaz
     const echa_removed = (w.dataset.echaRemoved || '').split(',').filter(Boolean);
+    let tedarikci = null; try { tedarikci = w.dataset.ted ? JSON.parse(w.dataset.ted) : null; } catch (e) {}
     const ec    = w.querySelector('.ec-input')?.value?.trim() || '';
     const kkdik = w.querySelector('.kkdik-input')?.value?.trim() || '';
     const mf    = parseFloat(w.querySelector('.mf-input')?.value) || 1;
@@ -3753,7 +3769,7 @@ function getComps() {
     const ec50_fish    = parseFloat(document.getElementById('ec50_fish'    + cwId)?.value) || null;
     const ec50_daphnia = parseFloat(document.getElementById('ec50_daphnia' + cwId)?.value) || null;
     const ec50_noec    = parseFloat(document.getElementById('ec50_noec'    + cwId)?.value) || null;
-    return { cas, name, name_tr, conc, concMin, concMax, concStr, hazards, ec, kkdik, m_factors:{ acute: mf, chronic: mfc }, scl, sclRaw, annex_vi: annexVi, ate_unknown, ate, comp_type, ec50_algae, ec50_fish, ec50_daphnia, ec50_noec, echa_removed, det_class, alt_name, alt_name_approval };
+    return { cas, name, name_tr, conc, concMin, concMax, concStr, hazards, ec, kkdik, m_factors:{ acute: mf, chronic: mfc }, scl, sclRaw, annex_vi: annexVi, ate_unknown, ate, comp_type, ec50_algae, ec50_fish, ec50_daphnia, ec50_noec, echa_removed, tedarikci, det_class, alt_name, alt_name_approval };
   }).filter(c => c.cas || c.name);
 }
 
@@ -4723,7 +4739,7 @@ function renderAll(s) {
     h += `<div class="r-title">ⓘ Ek-6 dışı sınıflar — ECHA (kayıt yaptıranın sınıflandırması / C&L bildirimleri) ile eklendi</div>
       <div class="warn-box" style="margin-bottom:8px;font-size:11px">
         <div style="margin-bottom:4px">Bu maddeler SEA Ek-6'da yer alır; aşağıdaki sınıflar Ek-6 listesinde olmadığı için
-        SEA Md.6(1)(c) gereği ECHA C&amp;L bildirimlerinin çoğunluğuna göre eklendi. Uygun değilse bileşen satırındaki
+        SEA Md.6(1)(c) gereği ECHA kayıt dosyasındaki kayıt yaptıranın sınıflandırmasına ya da C&amp;L bildirimlerine göre eklendi. Uygun değilse bileşen satırındaki
         <b>ECHA</b> işaretli etiketi × ile kaldırın.</div>
         ${_ek6s.map(e => `<div>• ${_esc(e.name || e.cas)} (${_esc(e.cas)}): <b>${_esc(e.h_code)}</b>${e.h_class ? ' — ' + _esc(e.h_class) : ''}${e.removed ? ' <span style="color:var(--text3)">(kullanıcı kaldırdı — hesaba katılmadı)</span>' : ''}</div>`).join('')}
       </div>`;

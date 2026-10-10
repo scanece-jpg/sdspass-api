@@ -12,6 +12,7 @@ Girdi (normalize):
        components (tazelenmiş), ate_details, warnings, pending_decisions
 """
 import re
+from typing import Optional
 import asyncio
 
 from app.services.clp_service import signal_word_for
@@ -52,11 +53,11 @@ DOMINANCE_MAP = {
 
 
 
-def _pending_all(phys_res: dict, transport: dict, test_data: dict) -> list:
+def _pending_all(phys_res: dict, transport: dict, test_data: dict, comps: Optional[list] = None) -> list:
     """Panel kararları phys_res['pending_decisions'] üzerinden gösterir — ADR kararı da oraya eklenir (tekrarsız)."""
     lst = phys_res.setdefault('pending_decisions', [])
-    for d in _adr_undet_decision(transport, test_data):
-        if d['code'] not in {x.get('code') for x in lst}:
+    for d in _adr_undet_decision(transport, test_data) + _ted_decisions(comps or []):
+        if d.get('field') not in {x.get('field') for x in lst}:
             lst.append(d)
     return lst
 
@@ -102,7 +103,92 @@ def _h4(h) -> str:
 
 
 # ── Bileşen verisini yetkili kaynaktan tazele ────────────────────────────────
-async def refresh_components(components: list, form: str) -> list:
+def _ted_kaynak(ted: dict) -> str:
+    """Tedarikçi GBF'sinin kısa tanımı (karar sorusu ve GBF kaynak notu)."""
+    t = ' — '.join(x for x in (ted.get('firma'), ted.get('urun')) if x) or 'tedarikçi GBF\'si'
+    if ted.get('rev_date'):
+        t += f", {ted['rev_date']}"
+    return t + (f"; KKDİK kayıt no: {ted['kkdik_no']}" if ted.get('kkdik_no') else '; KKDİK kayıt numarası belirtilmemiş')
+
+
+def _ted_compare(c: dict, comp: dict, td: dict, fresh_src: dict) -> None:
+    """Tedarikçi GBF'sindeki sınıflandırma (bileşen satırında 'tedarikci') ile SDSPass sınıflandırması
+    karşılaştırılır. Ek-6 sınıfları bağlayıcıdır (SEA Md.6(1)(c)) — yalnız Ek-6'da olmayan sınıflardaki fark
+    KDU kararına sorulur: test_data['ted_<cas>_<H>'] = 'sdspass' | 'tedarikci'. Karar verilmemişse SDSPass
+    sınıflandırması kalır ve soru 'ted_farklar'da döner (PDF karar verilince oluşturulur)."""
+    ted = comp.get('tedarikci') or {}
+    tcodes = {_h4(x).upper() for x in (ted.get('h_codes') or []) if _h4(x)}
+    if not ted or not (tcodes or ted.get('urun') or ted.get('firma')):
+        return
+    from app.services.echa_service import _H_TO_CLASS
+    from app.services.codes_i18n import H_CODE_TO_CANONICAL_CLASS
+    from app.services.ek6_family import split_echa
+    cas = (c.get('cas') or c.get('cas_no') or '').strip()
+    ek6 = ([h for h in c.get('hazards', []) if not h.get('echa_supplement')]
+           if c.get('sea_ek6') or c.get('annex_vi') else [])
+    ours = {_h4(h.get('h_code')).upper(): h for h in c.get('hazards', [])}
+    farklar = []
+    for code in sorted(tcodes - set(ours)):
+        cls = _H_TO_CLASS.get(code) or H_CODE_TO_CANONICAL_CLASS.get(code) or ''
+        if not cls:
+            continue
+        if ek6 and not split_echa(ek6, [{'h_code': code, 'h_class': cls}])[0]:
+            continue                       # Ek-6'da aynı sınıf var — Ek-6 bağlayıcı
+        farklar.append({'h_code': code, 'h_class': cls, 'yon': 'ekle',
+                        'sdspass_kaynak': 'SDSPass kaynaklarında (Ek-6 / ECHA) bu sınıf yok'})
+    for code, h in ours.items():
+        if code in tcodes or (ek6 and not h.get('echa_supplement')):
+            continue                       # tedarikçide de var / Ek-6 sınıfı (bağlayıcı)
+        if not tcodes:
+            continue                       # tedarikçi GBF'sinde bileşen H kodu okunamadı — karşılaştırılmaz
+        farklar.append({'h_code': code, 'h_class': h.get('h_class', ''), 'yon': 'cikar',
+                        'sdspass_kaynak': (fresh_src or {}).get(code) or (
+                            'ECHA kayıt dosyası — kayıt yaptıranın sınıflandırması' if h.get('_registrant')
+                            else 'ECHA C&L bildirimleri' if h.get('echa_supplement') else 'SDSPass veritabanı')})
+    for f in farklar:
+        f['field'] = f"ted_{cas}_{f['h_code']}"
+        f['karar'] = (td or {}).get(f['field'])
+        if f['karar'] == 'tedarikci':
+            if f['yon'] == 'ekle':
+                c['hazards'].append({'h_class': f['h_class'], 'h_code': f['h_code'], '_tedarikci': True})
+            else:
+                c['hazards'] = [x for x in c['hazards'] if _h4(x.get('h_code')).upper() != f['h_code']]
+                # Ek-6 dışı sınıf listesinde de "dikkate alınmadı" olarak görünsün (panel kutusu / Bölüm 16 notu)
+                for e in c.get('ek6_supplements') or []:
+                    if _h4(e.get('h_code')).upper() == f['h_code']:
+                        e['removed'] = True
+    c['ted_farklar'] = farklar
+    c['ted_kaynak'] = _ted_kaynak(ted)
+
+
+def _ted_decisions(comps: list) -> list:
+    """Yanıtlanmamış tedarikçi farkları → panel karar kutusu."""
+    from app.services.codes_i18n import translate_hclass
+    out = []
+    for c in comps:
+        for f in c.get('ted_farklar') or []:
+            if f.get('karar') in ('sdspass', 'tedarikci'):
+                continue
+            ad = c.get('name_tr') or c.get('name') or c.get('cas', '')
+            sinif = f"{f['h_code']} ({translate_hclass(f['h_class'], 'TR') or f['h_class']})"
+            if f['yon'] == 'cikar':
+                soru = (f"{ad} ({c.get('cas', '')}) — {sinif}: SDSPass sınıflandırmasında VAR, tedarikçi GBF'sinde YOK. "
+                        f"SDSPass kaynağı: {f['sdspass_kaynak']}. Tedarikçi: {c.get('ted_kaynak', '')}. "
+                        "Sınıf Ek-6'da yer almıyor (SEA Md.6(1)(c)); hangisinin kullanılacağını seçin.")
+                opts = [{'value': 'sdspass', 'label': f"SDSPass / ECHA — {f['h_code']} kalır", 'effect': 'sınıf kalır'},
+                        {'value': 'tedarikci', 'label': f"Tedarikçi GBF'si — {f['h_code']} çıkarılır", 'effect': 'sınıf çıkarılır'}]
+            else:
+                soru = (f"{ad} ({c.get('cas', '')}) — {sinif}: tedarikçi GBF'sinde VAR, SDSPass sınıflandırmasında YOK "
+                        f"({f['sdspass_kaynak']}). Tedarikçi: {c.get('ted_kaynak', '')}. Hangisinin kullanılacağını seçin.")
+                opts = [{'value': 'sdspass', 'label': f"SDSPass / ECHA — {f['h_code']} eklenmez", 'effect': 'sınıf eklenmez'},
+                        {'value': 'tedarikci', 'label': f"Tedarikçi GBF'si — {f['h_code']} eklenir", 'effect': 'sınıf eklenir'}]
+            out.append({'code': 'TEDARIKCI_FARK', 'field': f['field'], 'question': soru, 'options': opts,
+                        'legal_basis': 'SEA Md.6(1)(c) (Ek-6\'da yer almayan sınıflar); KKDİK Ek-2 Bölüm 3 / 9',
+                        'components': [c.get('cas', '')]})
+    return out
+
+
+async def refresh_components(components: list, form: str, test_data: Optional[dict] = None) -> list:
     """Bileşen tehlike verisini yerel DB'den (SEA Ek-6 / Annex VI / custom) yeniden al;
     DB'de yoksa ECHA. Ön yüzde kalmış eski/elle değiştirilmiş kodlar sınıflandırmaya girmez."""
     from app.services.substance_lookup import (
@@ -196,6 +282,8 @@ async def refresh_components(components: list, form: str) -> list:
                     _apply_m_ate(c, comp, fresh)
                 else:
                     c['hazards'] = []
+                _ted_compare(c, comp, test_data, {_h4(k).upper(): v for k, v in
+                                                   (fresh.get('classification_sources') or {}).items()})
                 if fresh.get('suppl_hazards'):
                     c['suppl_hazards'] = fresh['suppl_hazards']
                     c['euh_limits'] = fresh.get('euh_limits', [])
@@ -218,6 +306,7 @@ async def refresh_components(components: list, form: str) -> list:
                                 zip(echa.get('hazard_classes', []), echa.get('h_codes', []))]
                 _mark(c, cas, 5)
                 _apply_m_ate(c, comp, echa)
+                _ted_compare(c, comp, test_data, {})
                 return c
         except Exception:
             pass
@@ -466,6 +555,8 @@ def _conc_of(c: dict) -> float:
 
 def _substance_source(c: dict, h: dict) -> str:
     """Madde sınıflandırmasının kaynağı (GBF 2.1 gerekçesi)."""
+    if h.get('_tedarikci'):
+        return f"tedarikçi GBF'si ({c.get('ted_kaynak', '')}) — KDU kararı (Ek-6'da yer almayan sınıf, SEA Md.6(1)(c))"
     if h.get('_registrant'):
         return 'ECHA kayıt dosyası — kayıt yaptıranın sınıflandırması (Ek-6\'da yer almayan sınıf, SEA Md.6(1)(c))'
     if h.get('echa_supplement') or h.get('_echa_supplement'):
@@ -532,7 +623,7 @@ async def classify(inp: dict) -> dict:
     # GHS sınıflandırması — SEA Md.6(1)(c)) ilk hesapta kullanılsın.
     from app.services import component_phys as _cp
     _phys_late = await _cp.ensure_many([c.get('cas') or c.get('cas_no') for c in comps if _conc_of(c) > 0])
-    comps = await refresh_components(comps, form)
+    comps = await refresh_components(comps, form, test_data)
     _cp.attach(comps)
 
     # Tek maddeli ürün (SEA Md.4: madde — katkı ve safsızlıkları dahil; karışım = iki veya daha fazla madde).
@@ -953,6 +1044,23 @@ async def classify(inp: dict) -> dict:
                   + (f' ({_fmt(_used)})' if _used else '') + '.'
                   + (f' Not applied by user decision: {_fmt(_rem)}.' if _rem else ''))
         cls_notes.append({'TR': tr_txt, 'EN': en_txt})
+    # Tedarikçi GBF'si ile farklarda KDU kararı (SEA Md.6(1)(c)) — hangi sınıfın hangi kaynağa göre alındığı
+    _ted_k = [(c, f) for c in comps for f in (c.get('ted_farklar') or []) if f.get('karar') in ('sdspass', 'tedarikci')]
+    if _ted_k:
+        def _tk(c, f, tr=True):
+            ad = c.get('name_tr') or c.get('name') or c.get('cas', '')
+            if f['karar'] == 'tedarikci':
+                ne = ('eklendi' if f['yon'] == 'ekle' else 'uygulanmadı') if tr else ('added' if f['yon'] == 'ekle' else 'not applied')
+                kay = c.get('ted_kaynak', '') if tr else 'supplier SDS'
+            else:
+                ne = ('uygulandı' if f['yon'] == 'cikar' else 'eklenmedi') if tr else ('applied' if f['yon'] == 'cikar' else 'not added')
+                kay = f.get('sdspass_kaynak', '') if tr else f.get('sdspass_kaynak', '')
+            return f"{ad} — {f['h_code']} {ne} ({kay})"
+        cls_notes.append({
+            'TR': ('Tedarikçi GBF\'si ile farklı sınıflandırmalar (Ek-6\'da yer almayan sınıflar, SEA Md.6(1)(c)) '
+                   'KDU tarafından değerlendirilmiştir: ' + '; '.join(_tk(c, f) for c, f in _ted_k) + '.'),
+            'EN': ('Classification differences with the supplier SDS (classes not in Annex VI) were assessed by the '
+                   'competent person: ' + '; '.join(_tk(c, f, False) for c, f in _ted_k) + '.')})
 
     # KKDİK Ek-17 kısıtlamaları — panelde KDU uyarısı için (örn. madde 46: nonilfenol/etoksilatlar temizlik
     # ürünlerinde ≥%0,1 piyasaya arz edilemez). GBF 15.1 satırları ek17_service ile ayrıca basılır.
@@ -1002,7 +1110,7 @@ async def classify(inp: dict) -> dict:
         'substance_mode': substance_mode,
         'warnings':    (phys_res.get('warnings', []) + stot_res.get('warnings', [])
                         + clp_res.get('warnings', [])),
-        'pending_decisions': _pending_all(phys_res, transport, test_data),
+        'pending_decisions': _pending_all(phys_res, transport, test_data, comps),
         'classification_notes': cls_notes,
         'b9': b9,
         'label_components': label_components(comps, all_h),

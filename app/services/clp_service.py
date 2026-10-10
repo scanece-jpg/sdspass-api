@@ -1387,6 +1387,9 @@ def calculate_ate_health_h_codes(components: list, form: str = '') -> tuple:
             'ate':             combined_ate,
             'source_priority': c.get('source_priority', 4),
             'reach_no':        c.get('reach_no') or c.get('reach') or '',
+            # Kayıtlı madde işareti (sds_pipeline._mark) — önceden aktarılmıyordu; sınıfsız kayıtlı bileşen (sodyum
+            # sülfat dolgu) "bilinmeyen akut toksisite" sayılıyordu (Baystar toz deterjan, 2026-10-10)
+            '_kayitli':        bool(c.get('_kayitli')),
             'ate_unknown':     bool(c.get('ate_unknown', False)),
             'name':            c.get('name_tr', '') or c.get('name', '') or str(c.get('cas', '')),
         })

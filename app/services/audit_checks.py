@@ -499,13 +499,16 @@ def c_t32(ctx):
            ('kdu', f'2.2\'deki adlar 3. bölümde birebir bulunamadı (farklı adlandırma olabilir): {miss}')
 
 
-_CONC_NEAR = re.compile(r'(?:[<>≤≥]=?\s*)?(\d+(?:[.,]\d+)?)\s*(?:%)?\s*(?:-|–)\s*(?:[<>≤≥]=?\s*)?(\d+(?:[.,]\d+)?)\s*%'
+# "% 10-20" (yüzde işareti önde, aralık) da okunur — Baystar GBF'si, 2026-10-10
+_CONC_NEAR = re.compile(r'%\s*(\d+(?:[.,]\d+)?)\s*[-–]\s*(\d+(?:[.,]\d+)?)(?![\d-])'
+                        r'|(?:[<>≤≥]=?\s*)?(\d+(?:[.,]\d+)?)\s*(?:%)?\s*(?:-|–)\s*(?:[<>≤≥]=?\s*)?(\d+(?:[.,]\d+)?)\s*%'
                         r'|(?:[<>≤≥]=?\s*)?(\d+(?:[.,]\d+)?)\s*%|%\s*[<>≤≥]?\s*(\d+(?:[.,]\d+)?)')
 
 
 _RANGE_GE = re.compile(r'(?:[>≥]=?|&gt;=?|(?<=Alan\s)|(?<=Alan:\s))\s*(\d+(?:[.,]\d+)?)\s*%?\s*[-–]\s*([<≤]=?|&lt;=?)\s*(\d+(?:[.,]\d+)?)')
 # Yalnız üst sınır: "< 0,1%" (alt sınırsız aralık)
-_RANGE_LT = re.compile(r'(?<![\d.,])(?:<|&lt;)\s*(\d+(?:[.,]\d+)?)\s*%')
+# "< 5 %" ya da "< %5" (yüzde işareti önde)
+_RANGE_LT = re.compile(r'(?<![\d.,])(?:<|&lt;)\s*(?:%\s*(\d+(?:[.,]\d+)?)|(\d+(?:[.,]\d+)?)\s*%)')
 
 
 def _segments3(ctx):
@@ -540,6 +543,8 @@ def _comps3(ctx):
         # Ek-6 UVCB adlarındaki köşeli parantezli tanım ("[... C3 ila C7 ... -40°C ila 80°C ...]") atlanır — uzun tanım
         # konsantrasyon sütununu okuma penceresinin dışına itiyordu (LPG 68476-85-7)
         seg = re.sub(r'\[[^\]]*\]', ' ', seg)
+        # CAS / EC numaraları derişim aralığı sanılmasın ("207-838-8 % 10-20" → %838 okunuyordu — Baystar GBF'si)
+        seg = re.sub(r'(?<![\d.,])\d{2,7}-\d{2,3}-\d(?![\d.,])', ' ', seg)
         # Önce "≥ x - < y" aralığı (konsantrasyon sütunu; % işareti olmayabilir). Bazı GBF'ler satırda önce
         # özel konsantrasyon sınırlarını "20 - 100 %" biçiminde yazar — onlar konsantrasyon değildir.
         # KKDİK Ek-2 A 3.2: aralıkta zararlar en yüksek konsantrasyona göre tanımlanır → hesap üst uçta;
@@ -551,7 +556,7 @@ def _comps3(ctx):
             if r.group(2) in ('<', '&lt;'):
                 conc *= (1 - 1e-6)
         elif lt:
-            conc = float(lt.group(1).replace(',', '.')) * (1 - 1e-6)
+            conc = float((lt.group(1) or lt.group(2)).replace(',', '.')) * (1 - 1e-6)
         else:
             m = _CONC_NEAR.search(seg[:260]) or _CONC_NEAR.search(s3[max(0, i - 120):i])
             if not m:

@@ -289,7 +289,11 @@ async def refresh_components(components: list, form: str, test_data: Optional[di
         c['sea_ek6'] = bool(sea_ek6)
         c['annex_vi'] = bool(annex_vi)
         try:
-            if _registered(cas):
+            # Kayıtlı madde: elle tutulan liste ya da ECHA kayıt dosyası (component_phys önbelleği). Önceden yalnız 35
+            # maddelik liste vardı; sınıflandırılmamış kayıtlı dolgu (sodyum sülfat) "bilinmeyen akut toksisite / sucul
+            # zarar" sayılıyor, 2.2'ye "%75 bilinmeyen" yazılıyordu (Baystar toz deterjan, 2026-10-10)
+            from app.services.component_phys import kayitli as _ech_kayitli
+            if _registered(cas) or _ech_kayitli(cas):
                 c['_kayitli'] = True   # yalnız "veri var" işareti — numara GBF'ye basılmaz
         except Exception:
             pass

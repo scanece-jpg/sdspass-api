@@ -209,7 +209,9 @@ def _fresh(rec: Optional[Dict]) -> bool:
         return False
     if OFFLINE:
         return True
-    if rec.get('status') == 'ok' and rec.get('_v') != _REC_V:
+    # Eski sürümle yazılmış kayıt yeniden çekilir — "kayıtsız / bulunamadı" sonuçları da (önceden yalnız 'ok' kayıtlar
+    # yenileniyordu; birden çok aday taramasından önce yazılan sodyum sülfat 231-820-9 "kayıtsız" kalmıştı)
+    if rec.get('status') != 'error' and rec.get('_v') != _REC_V:
         return False
     return _age_days(rec) < (_ERR_RETRY_DAYS if rec.get('status') == 'error' else _TTL_DAYS)
 
@@ -507,6 +509,7 @@ async def _refresh(cas: str) -> Dict:
                 return prev    # ağ hatası — eski geçerli veri korunur, sonraki kullanımda yeniden denenir
             rec = {'cas': cas, 'values': {}, 'status': 'error',
                    '_fetched': datetime.now(timezone.utc).isoformat()}
+        rec.setdefault('_v', _REC_V)
         _DIR.mkdir(parents=True, exist_ok=True)
         _path(cas).write_text(json.dumps(rec, ensure_ascii=False, indent=1), encoding='utf-8')
         try:
@@ -571,6 +574,13 @@ def _pubchem_cached(cas: str) -> bool:
 _PUBCHEM_MAP = {'flash_point': 'flash_point', 'boiling_point': 'boiling_point', 'melting_point': 'melting_point',
                 'vapour_pressure': 'vapor_pressure', 'density': 'density', 'water_solubility': 'solubility',
                 'auto_ignition': 'auto_ignition'}
+
+
+def kayitli(cas: str) -> bool:
+    """ECHA'da aktif REACH kayıt dosyası olan madde (önbellekten). Kayıtlı maddede akut toksisite ve sucul toksisite
+    verisi zorunludur (REACH Ek-VII) — "bilinmeyen akut toksisite / sucul zarar" sayılmaz."""
+    rec = _read((cas or '').strip()) or {}
+    return rec.get('status') == 'ok' and bool((rec.get('dossier') or {}).get('registration_number'))
 
 
 def get(cas: str) -> Dict[str, Dict]:

@@ -40,7 +40,8 @@ _SEC_RE = re.compile(r'(?im)^\s*(?:(?:B[ÖO]L[ÜU]M|SECTION)\s*(\d{1,2})\s*[:.\-
 # "BÖLÜM n" yazılmayan GBF'ler: "1. MADDENİN/KARIŞIMIN …", "8. MARUZ KALMA …" — numara + büyük harfli başlık
 # (alt başlıklar "1.1." ile ayrılır: numaradan sonra boşluk gelir). Önceden bu biçimde bölümler bulunamıyor,
 # e-posta / 114 / Bölüm 3 / KDU gibi var olan bilgiler "eksik" sayılıyordu (Hyper Hypo GBF, 2026-10-10).
-_SEC_RE_NUM = re.compile(r"(?m)^\s*(\d{1,2})\s*[.)]\s+(?=[A-ZÇĞİÖŞÜ][A-ZÇĞİÖŞÜ/,'’ \-]{6,})")
+# Nokta ile başlık arasında boşluk olmayabilir ("1.MADDENİN/KARIŞIMIN…" — Baystar GBF'si, 2026-10-10)
+_SEC_RE_NUM = re.compile(r"(?m)^\s*(\d{1,2})\s*[.)]\s*(?=[A-ZÇĞİÖŞÜ][A-ZÇĞİÖŞÜ/,'’ \-]{6,})")
 
 
 def split_sections(text: str) -> Dict[str, str]:

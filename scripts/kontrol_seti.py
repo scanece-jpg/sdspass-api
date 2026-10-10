@@ -473,7 +473,20 @@ def _denetim_baslik_testi() -> bool:
            'MARUZ KALMA KONTROLLERİ', 'FİZİKSEL KİMYASAL ÖZELLİKLER', 'KARARLILIK VE TEPKİME', 'TOKSİKOLOJİK BİLGİLER',
            'EKOLOJİK BİLGİLER', 'BERTARAF ETME BİLGİLERİ', 'TAŞIMACILIK BİLGİSİ', 'MEVZUAT BİLGİSİ', 'DİĞER BİLGİLER']
     metin = '\n'.join(f'{i}. {b}\n{i}.1. alt başlık\nmetin' for i, b in enumerate(bas, 1))
-    return len(split_sections(metin)) == 16 and 'Sınıfı: 8' in _s14_rakam('ADR Sınıfı: VIII')
+    # Boşluksuz "1.MADDENİN…" ve "3. BÖLÜM:" biçimleri (Baystar / Habaş GBF'leri, 2026-10-10)
+    bitisik = '\n'.join(f'{i}.{b}\n{i}.1. alt başlık\nmetin' for i, b in enumerate(bas, 1))
+    once = '\n'.join(f'{i}. BÖLÜM: {b}\n{i}.1. alt başlık\nmetin' for i, b in enumerate(bas, 1))
+    # Bölüm 3 derişimi: EC numarası aralık sanılmaz; "% 10-20" ve "< %5" okunur
+    from app.services.audit_checks import _comps3
+    s3 = ('3.2 Karışımlar Sodyum Karbonat 497-19-8 207-838-8 % 10-20 Göz Tah. 2 H319 '
+          'LABSA 85536-14-7 287-494-3 < %5 Göz Tah. 2 H319')
+    ctx = {'secs': {'3': s3}, 'facts': set(), 'pages': [s3], 'text': s3}
+    import io, contextlib
+    with contextlib.redirect_stdout(io.StringIO()):
+        dg = {c['cas']: c['conc'] for c in _comps3(ctx)[0]}
+    return (len(split_sections(metin)) == 16 and len(split_sections(bitisik)) == 16
+            and len(split_sections(once)) == 16 and 'Sınıfı: 8' in _s14_rakam('ADR Sınıfı: VIII')
+            and dg.get('497-19-8') == 20 and 4.99 < dg.get('85536-14-7', 0) < 5)
 
 
 def _hesap_testi() -> bool:
@@ -1318,7 +1331,16 @@ def kural_testleri(c) -> int:
          "duruma göre (O2 1072/1073, N2 1066/1977, LNG 1972, CO2 1013/2187, H2 1049); BEKRA girdi 18 sıvılaştırılmış "
          "alevlenir gazda (LPG); P403 birleşik P410+P403 ile tekrarlanmaz",
          lambda: _gaz_testi(c)),
-        ('Denetim: "1. BAŞLIK" biçimli GBF bölümlere ayrılır; Romen rakamlı taşıma sınıfı (VIII) okunur',
+        ("SEA Ek-1 3.1.3.6.2.2: REACH kayıtlı, akut toksisite sınıfı olmayan bileşen 'bilinmeyen' sayılmaz (magnezyum "
+         "klorür %50 → bilinmeyen %0; Baystar toz deterjan: sodyum sülfat dolgu %75 'bilinmeyen' yazılıyordu)",
+         lambda: all(float((v or {}).get('unknownPct') or 0) == 0 for v in (c.post('/api/v1/sds/calculate', json={
+             'components': [{'cas': '7786-30-3', 'name': 'MgCl2', 'conc': 50, 'concMax': 50,
+                             'hazards': c.get('/api/v1/sds/substance/lookup', params={'cas': '7786-30-3'}).json().get('hazards', []),
+                             'm_factors': {}},
+                            {'cas': '7732-18-5', 'name': 'su', 'conc': 50, 'concMax': 50, 'hazards': []}],
+             'form': 'liquid', 'usage': 'industrial', 'lang': 'TR', 'test_data': {}}).json().get('ate_details') or {}).values())),
+        ('Denetim: "1. BAŞLIK", "1.BAŞLIK" ve "1. BÖLÜM:" biçimli GBF bölümlere ayrılır; Romen rakamlı taşıma sınıfı '
+         '(VIII) okunur; Bölüm 3\'te EC numarası derişim sanılmaz, "% 10-20" / "< %5" okunur',
          lambda: _denetim_baslik_testi()),
         ("SEA Ek-1 Tablo 3.1.2: sıvı karışımda soluma ATEmix buhar / sis kabulü farklı sonuç verirse KDU'ya sorulur "
          "(H2O2 %35: buhar → yok, sis → H332 — Akkim GBF); aynı sonuçta soru yok (metanol)",

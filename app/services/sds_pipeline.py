@@ -520,12 +520,13 @@ async def classify(inp: dict) -> dict:
 
     comps = [dict(c) for c in (inp.get('components') or [])]
     _normalize_conc(comps)
-    comps = await refresh_components(comps, form)
-
     # Bileşen fiziksel verileri (ECHA kayıt dosyası → PubChem) — sınıflandırmada bileşen parlama / kaynama noktası,
     # Bölüm 9'da madde / bileşen verisi. Önbellekte yoksa okunur; süre aşılırsa bilinmiyor sayılır (en kötü durum).
+    # Kayıt dosyası, bileşen sınıflandırması tazelenmeden ÖNCE okunur: Ek-6'da olmayan sınıflar (kayıt yaptıranın
+    # GHS sınıflandırması — SEA Md.6(1)(c)) ilk hesapta kullanılsın.
     from app.services import component_phys as _cp
     _phys_late = await _cp.ensure_many([c.get('cas') or c.get('cas_no') for c in comps if _conc_of(c) > 0])
+    comps = await refresh_components(comps, form)
     _cp.attach(comps)
 
     # Tek maddeli ürün (SEA Md.4: madde — katkı ve safsızlıkları dahil; karışım = iki veya daha fazla madde).

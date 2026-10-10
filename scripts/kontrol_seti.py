@@ -59,7 +59,8 @@ URUNLER = [
              'Tip C (delinme süresi ≥ 10 dk', 'ABEK-P2', 'Atık işlemeyi etkileyen özellikler'],
      'yok': _UYDURMA + ['Tavsiye: İyi havalandırma'], 's3_yok': ['7732-18-5']},
     {'ad': 'Toluen + %0,5 benzen (alevlenir, CMR)', 'bil': [('108-88-3', 99.5), ('71-43-2', 0.5)],
-     'h': ['H225', 'H304', 'H315', 'H336', 'H340', 'H350', 'H361D', 'H373'], 'signal': 'Danger',
+     # H412: toluen kayıt yaptıranın sınıflandırması (Aquatic Chronic 3; Ek-6'da yok — SEA Md.6(1)(c), 2026-10-10)
+     'h': ['H225', 'H304', 'H315', 'H336', 'H340', 'H350', 'H361D', 'H373', 'H412'], 'signal': 'Danger',
      'var': ['28730 sayılı Kanserojen', 'Ek-17 madde 48', 'Ek-17 madde 5', 'Alkole dayanıklı köpük',
              'P5c (Alevlenir sıvılar', 'En düşük parlama noktalı bileşen', 'karışımın parlama noktası değildir',
              'Aspirasyon zararı (H304): kusturmayın', 'Bu karışım için kimyasal güvenlik değerlendirmesi yapılmamıştır',
@@ -257,6 +258,34 @@ def _audit_new_checks(t: str) -> dict:
     return {i: A.CHECKS[i](ctx)[0] for i in (
         'G-surum', '16-revizyon', '8.1-dnel', '8.2.2-eldiven-malzeme', '8.2.2-eldiven-kalinlik', '8.2.2-eldiven-sure',
         '9-ampirik', '9.1-neden', '9-fp-sinif', '9-h304-visk', '2.3-toz-tutarlilik', '14-oh375', '16-md10')}
+
+
+def _kayit_testi() -> bool:
+    """Kayıt yaptıranın GHS kaydı: ayrıştırma + Ek-6 tamamlama (önbellek taklidi; ağ yok)."""
+    from app.services import component_phys as cp
+    from app.services import substance_lookup as sl
+    k1 = ('Hazard category Flam. Liquid 2 Hazard statement H225: Highly flammable liquid and vapour. '
+          'Hazard category [Empty] Hazard statement [Empty] '
+          'Hazard category Aquatic Chronic 3 Hazard statement H412: Harmful to aquatic life.')
+    k2 = k1 + ' Hazard category Muta. 1B Hazard statement H340: May cause genetic defects.'
+    a, b = cp.parse_ghs(k1), cp.parse_ghs(k2)
+    if [h['h_class'] for h in a] != ['Flam. Liq. 2', 'Aquatic Chronic 3']:
+        return False
+    ortak = {(h['h_class'], h['h_code']) for h in a} & {(h['h_class'], h['h_code']) for h in b}
+    sahte = {'ghs_self': {'hazards': [{'h_class': x, 'h_code': y} for x, y in sorted(ortak)]},
+             'dossier': {'registration_number': '01-TEST'}}
+    eski_read, eski_cl = cp._read, sl._read_cl_file
+    cp._read = lambda cas: sahte
+    sl._read_cl_file = lambda d, cas: None
+    eski_bg = sl._fetch_echa_background
+    sl._fetch_echa_background = lambda *x, **k: None
+    try:
+        r = sl._supplement_from_echa_cl('108-88-3', sl._sea_ek6_to_legacy(sl._sea_ek6_lookup('108-88-3')))
+    finally:
+        cp._read, sl._read_cl_file, sl._fetch_echa_background = eski_read, eski_cl, eski_bg
+    kod = [h['h_code'] for h in r.get('hazards', [])]
+    return ('H412' in kod and 'H340' not in kod and kod.count('H225') == 1 and r.get('echa_supplement') == ['H412']
+            and 'kayıt yaptıranın' in (r.get('classification_sources') or {}).get('H412', ''))
 
 
 def kural_testleri(c) -> int:
@@ -978,6 +1007,10 @@ def kural_testleri(c) -> int:
                      test_data={'oxidizing_solid': 'H272_cat2'})[2] == 'II'
          and tr_road([('7722-84-1', 35), (W, 65)], test_data={'oxidizing_liquid': 'H272_cat3',
                      'metal_corrosive': 'not_corrosive', 'euh071_inhalable': 'not_inhalable'})[:3] == ('UN2014', '5.1', 'II')),
+        ("SEA Md.6(1)(c): Ek-6'da olmayan sınıf kayıt yaptıranın sınıflandırmasından (ECHA kayıt dosyası 2.1 GHS) — "
+         "öz-sınıflandırma kayıtlarının ortak sınıfı alınır, safsızlığa bağlı (H340) ve Ek-6'da olan sınıf eklenmez; "
+         'toluen/benzen H412 (Petkim referans GBF 2026-10-10)',
+         lambda: _kayit_testi()),
     ]
     hata = 0
     for ad, f in testler:

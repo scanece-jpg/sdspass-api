@@ -940,10 +940,23 @@ def _supplement_from_echa_cl(cas: str, sea_result: dict) -> dict:
         _fetch_echa_background(cas)
         # ECHA verisi gelene kadar PubChem'in kaydettiği GHS verisini fallback olarak kullan
         echa_entry = _read_cl_file(_PUBCHEM_DIR, cas)
-        if not echa_entry:
-            return sea_result
+    # Kayıt yaptıranın GHS öz-sınıflandırması (ECHA kayıt dosyası 2.1 GHS; component_phys) — C&L API yalnız
+    # uyumlaştırılmış sınıflandırmayı verdiği için Ek-6'da olmayan sınıflar (örn. toluen H412) buradan gelir.
+    _reg = []
+    try:
+        from app.services import component_phys as _cpx
+        _rec = _cpx._read(cas) or {}
+        _reg = [dict(h, _registrant=True) for h in ((_rec.get('ghs_self') or {}).get('hazards') or [])]
+        _reg_no = ((_rec.get('dossier') or {}).get('registration_number') or '')
+    except Exception:
+        _reg_no = ''
+    if not echa_entry and not _reg:
+        return sea_result
 
-    echa_legacy = _cl_to_legacy(echa_entry, 3, 'ECHA C&L')
+    echa_legacy = _cl_to_legacy(echa_entry, 3, 'ECHA C&L') if echa_entry else {'hazards': [], 'pictograms': []}
+    _seen = {(h.get('h_class'), h.get('h_code')) for h in echa_legacy.get('hazards', [])}
+    echa_legacy = {**echa_legacy, 'hazards': list(echa_legacy.get('hazards', []))
+                   + [h for h in _reg if (h['h_class'], h['h_code']) not in _seen]}
     # SEA Md.6(1)(c): yalnız Ek-6 girişinde bulunmayan sınıf/farklılaştırmalar eklenir (H kodu değil sınıf
     # karşılaştırılır — ek6_family). İşaretlenir ki kullanıcı görsün/kaldırabilsin. Aynı sınıfta ECHA'daki
     # daha ağır kategori eklenmez, KDU bilgisi olarak 'ek6_daha_agir'da döner.
@@ -974,7 +987,9 @@ def _supplement_from_echa_cl(cas: str, sea_result: dict) -> dict:
         for h in sea_result.get('hazards', []) if h.get('h_code')
     }
     for h in extra_hazards:
-        result['classification_sources'][h['h_code']] = 'ECHA C&L öz-sınıflandırma'
+        result['classification_sources'][h['h_code']] = (
+            f"ECHA kayıt dosyası — kayıt yaptıranın sınıflandırması{(' (' + _reg_no + ')') if _reg_no else ''}"
+            if h.get('_registrant') else 'ECHA C&L öz-sınıflandırma')
 
     print(f'[sea_supplement] {cas}: ECHA dosyasından {len(extra_hazards)} ek H-kodu: '
           f'{[h["h_code"] for h in extra_hazards]}')

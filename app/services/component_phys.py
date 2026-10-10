@@ -34,7 +34,7 @@ _H = {'Accept': 'application/json', 'User-Agent': 'Mozilla/5.0 (SDSPass)'}
 _TTL_DAYS = 30          # kullanımda yenileme (ECHA verisi)
 _ERR_RETRY_DAYS = 1     # ağ hatasından sonra yeniden deneme
 _DELAY = 1.0            # ECHA istekleri arası bekleme (sn)
-_REC_V = 3              # 2026-10-09: v2 DNEL / PNEC (Bölüm 8.1); v3 güvenli kullanım rehberi eldiven önerisi (8.2.2.2)
+_REC_V = 4              # v4 (2026-10-10) kayıt yaptıranın GHS öz-sınıflandırması (2.1 GHS); 2026-10-09: v2 DNEL / PNEC (Bölüm 8.1); v3 güvenli kullanım rehberi eldiven önerisi (8.2.2.2)
 # Çevrim dışı (kontrol seti): ağa çıkılmaz, önbellek eskimiş olsa da kullanılır
 OFFLINE = os.environ.get('SDSPASS_PHYS_OFFLINE', '').strip() not in ('', '0')
 
@@ -283,6 +283,27 @@ _GLOVE_MAT = (
 )
 
 
+_GHS_PAIR = re.compile(r'Hazard category (?!\[Empty\])(.+?) Hazard statement (H\d{3}[A-Za-z]{0,2})')
+
+
+# IUCLID seçim listesi adları → SEA / Ek-6 kısaltmaları
+_IUCLID_CLS = (('Flam. Liquid', 'Flam. Liq.'), ('Flam. Solid', 'Flam. Sol.'), ('Ox. Liquid', 'Ox. Liq.'),
+               ('Ox. Solid', 'Ox. Sol.'), ('STOT Single Exp.', 'STOT SE'), ('STOT Rep. Exp.', 'STOT RE'))
+
+
+def parse_ghs(page: str) -> List[Dict]:
+    """IUCLID 2.1 GHS kaydı → [{'h_class','h_code'}] (yalnız dolu "Hazard category … Hazard statement H…" satırları)."""
+    t = _plain(page)
+    out = []
+    for m in _GHS_PAIR.finditer(t):
+        cls = re.sub(r'\s+', ' ', m.group(1)).strip()
+        for a, b in _IUCLID_CLS:
+            cls = cls.replace(a, b)
+        if len(cls) <= 40 and (cls, m.group(2)) not in {(o['h_class'], o['h_code']) for o in out}:
+            out.append({'h_class': cls, 'h_code': m.group(2)})
+    return out
+
+
 def parse_glove(page: str) -> Optional[Dict]:
     t = _plain(page)
     m = re.search(r'(?i)hand protection|protective gloves|\bgloves?\b', t)
@@ -379,6 +400,32 @@ async def _fetch_echa(cas: str) -> Dict:
                     rec[key] = parser((await get(f'{base}/documents/{doc}.html')).text)
                 except Exception as e:
                     print(f'[component_phys] {cas} {key}: {e}')
+        # 2.1 GHS — kayıt yaptıranın öz-sınıflandırması ("harmonised" kaydı hariç). Birden çok öz-sınıflandırma kaydı varsa
+        # (örn. toluen "high grade" / "commercial grade ≥ %0,1 benzen") yalnız HEPSİNDE ortak sınıflar alınır — safsızlığa
+        # bağlı sınıflar (H340/H350) dışarıda kalır. SEA Md.6(1)(c): Ek-6'da olmayan sınıflar için kullanılır (substance_lookup).
+        m21 = re.search(r'id="id_21_GHS"', idx)
+        if m21:
+            j21 = idx.find('das-nav-topsection', m21.end())
+            seg = idx[m21.end(): j21 if j21 > 0 else m21.end() + 30000]
+            recs = re.findall(r'href="([0-9a-f\-_]+)".*?<span data-dastttxt="([^"]+)"', seg, re.S)
+            recs = [(d, html.unescape(t)) for d, t in recs]
+            # Başlığında "self" geçen kayıtlar öz-sınıflandırmadır; yoksa "harmonised" olmayanlar alınır
+            # (benzen: "001 | Benzene" başlıksız uyumlaştırılmış kayıt, "002 | … (self-classification)")
+            selfs = ([r for r in recs if 'self' in r[1].lower()]
+                     or [r for r in recs if 'harmonised' not in r[1].lower()])
+            sets, titles = [], []
+            for d, t in selfs[:4]:
+                try:
+                    hz = parse_ghs((await get(f'{base}/documents/{d}.html')).text)
+                    sets.append({(h['h_class'], h['h_code']) for h in hz}); titles.append(t)
+                except Exception as e:
+                    print(f'[component_phys] {cas} GHS: {e}')
+            if sets:
+                common = set.intersection(*sets)
+                rec['ghs_self'] = {'kayitlar': titles,
+                                   'hazards': [{'h_class': c, 'h_code': h} for c, h in sorted(common)]}
+            else:
+                rec['ghs_self'] = {'kayitlar': [], 'hazards': []}
         # 11 Guidance on safe use — el koruması önerisi (KKDİK Ek-2 8.2.2.2(b)(i))
         m11 = re.search(r'das-nav-header">\s*11 ', idx)
         if m11:

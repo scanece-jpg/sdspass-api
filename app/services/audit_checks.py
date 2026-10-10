@@ -960,6 +960,30 @@ def c_t_un(ctx):
                    f'(ADR 3.1.2.8.1: Tablo A\'da adlı giriş varsa B.B.B. yerine o kullanılır){note} — KDU kontrol etmeli.')
 
 
+def c_md6c(ctx):
+    """SEA Md.6(1)(c): Ek-6'da olan maddede Ek-6'da bulunmayan sınıflar da değerlendirilir. Kayıt yaptıranın
+    sınıflandırmasında (ECHA kayıt dosyası 2.1 GHS) olup Ek-6'da olmayan sınıf 2.1'de yoksa KDU'ya bildirilir."""
+    from app.services.substance_lookup import lookup_substance
+    comps, _u = _comps3(ctx)
+    if not comps:
+        return 'kdu', 'Bölüm 3 okunamadı.'
+    ana = max(comps, key=lambda c: c['conc'])
+    try:
+        lk = lookup_substance(ana['cas'], 'liquid' if 'form:sivi' in ctx['facts'] else '')
+    except Exception:
+        lk = {}
+    src = lk.get('classification_sources') or {}
+    reg = sorted({h for h, v in src.items() if 'kayıt yaptıranın' in str(v)})
+    if not reg:
+        return 'uygun', f"{ana['cas']}: kayıt yaptıranın Ek-6 dışı sınıfı yok (veya kayıt dosyası verisi önbellekte yok)."
+    given = _h(_sub(ctx['secs'].get('2', ''), '2.1', '2.2'))
+    yok = [h for h in reg if h not in given and h[:4] not in {g[:4] for g in given}]
+    if not yok:
+        return 'uygun', f"{ana['cas']}: kayıt yaptıranın Ek-6 dışı sınıfları ({', '.join(reg)}) 2.1'de var."
+    return 'kdu', (f"{ana['cas']}: kayıt yaptıranın sınıflandırmasında Ek-6'da olmayan {', '.join(yok)} var "
+                   f"({src[yok[0]]}); 2.1'de yok — SEA Md.6(1)(c) gereği değerlendirilmeli.")
+
+
 def c_16_kdu(ctx):
     """KKDİK Usul ve Esaslar (05.08.2025) Md.16(2): 16. bölümde KDU iletişim bilgisi + yeterlilik belgesi tarihi ve no."""
     s16 = ctx['secs'].get('16', '')
@@ -1003,7 +1027,7 @@ CHECKS: Dict[str, Callable] = {
     '3.2-svhc': c_32_svhc, '8.1-oel': c_oel, '9.1-ozellikler': c_91, '11.1-siniflar': c_111_siniflar,
     '11.1-ifade': c_111_ifade, '14.1-un': c_un, '14.3-sinif': c_sinif14, '14.4-pg': c_pg,
     '15.1-svhc': c_15_svhc, '15.1-deterjan': c_deterjan, '16-tam-metin': c_tam_metin, 'T-14-2': c_t14,
-    'T-3-2': c_t32, 'T-hesap': c_hesap, 'T-un': c_t_un, '16-kdu': c_16_kdu, '2.2-euh071': c_euh071,
+    'T-3-2': c_t32, 'T-hesap': c_hesap, 'T-un': c_t_un, 'T-md6c': c_md6c, '16-kdu': c_16_kdu, '2.2-euh071': c_euh071,
     '16-revizyon': c_16_revizyon, '8.1-dnel': c_dnel, '8.2.2-eldiven-malzeme': c_eldiven_malzeme,
     '8.2.2-eldiven-kalinlik': c_eldiven_kalinlik, '8.2.2-eldiven-sure': c_eldiven_sure,
     '9-ampirik': c_9_ampirik, '9.1-neden': c_9_neden, '9-fp-sinif': c_9_fp_sinif, '9-h304-visk': c_9_h304,
